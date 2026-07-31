@@ -159,6 +159,15 @@ a harray and fails the declared codeblock slot. Registered functions and governe
 over a colliding parameter name. Explicit `{|params| ...}` values and arbitrary bound codeblock calls remain a
 separate later Lua milestone.
 
+Rust carries the same final-only `parameter_kinds` through the spec-owned function shell, staged body payload/job,
+typed AST, compiled function, version-3 descriptor, and emitted compiled state. Its compiler-facing ActionIR parse
+records direct attached/parenthesized block provenance first; after the complete builtin and user-function
+registry exists, one `linkedspec_core::callable_contract` pass admits only a declared final codeblock, restores an
+ordinary parenthesized block to eager `block_value`, and rejects an unknown attached callee. The established
+public block parser remains eager and attached `if`/`switch`/`while` use their dedicated control path. Accepted
+contextual arguments execute through the same dynamic codeblock evaluator as explicit `{|...|...}` values, so
+native, reconstructed, generated-plan, and emitted-source paths have no separate callback implementation.
+
 The general future registry extends that proven subset. Resolution checks already-known
 import aliases and composed spec identities, then paths relative to the declaring spec,
 then configured search roots and registry providers in declared order. The scheduler

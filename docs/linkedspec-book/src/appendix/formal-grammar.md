@@ -161,9 +161,11 @@ for metadata-declared helper, user-function, and receiver forms. Rust `.11.4.1` 
 signature, body, source, Unicode-coordinate spans, compiled/serialized state, generated source, and semantic
 codeblock shape without executing it. Rust `.11.4.2` executes bound-variable calls with the same once-only
 arguments, dynamic caller stores, copied/restored fixed/rest bindings, local result, static precedence, structured
-failures, and direct/mutual recursion rejection across native/reconstructed/generated/emitted roles. Generic Rust
-contextual equivalence remains `.11.4.3`, and Dart/Julia/Lua explicit literals remain future, so complete
-invocation behavior is not yet universally portable.
+failures, and direct/mutual recursion rejection across native/reconstructed/generated/emitted roles. Rust
+`.11.4.3` also normalizes attached and parenthesized helper, typed-user-function, and receiver final blocks through
+one metadata registry to the same zero-positional `codeblock_argument`, while preserving eager blocks and attached
+controls. Dart/Julia parity and Lua explicit literals remain future, so complete invocation behavior is not yet
+universally portable.
 
 Arguments evaluate once from left to right before any parameter is bound. Nested arrays/harrays, booleans,
 `undef`, and codeblocks remain individual rest-array values rather than being flattened or coerced.

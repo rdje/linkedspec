@@ -3,6 +3,8 @@
 //! These types are the contract between the compiler (in linkedspec-core) and the
 //! runtime engine (in linkedspec-runtime). They are idiomatic Rust — no Perl mimicry.
 
+use std::collections::BTreeMap;
+
 use serde::{Deserialize, Deserializer, Serialize, Serializer, de::Error as _};
 
 use crate::expr::{CallableCodeblock, Expr};
@@ -393,6 +395,8 @@ pub struct CompiledUserFunction {
     pub name: String,
     pub params: Vec<String>,
     pub arity: usize,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub parameter_kinds: BTreeMap<String, String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub signature: Option<crate::ast::CallableSignature>,
     pub body: crate::expr::CodeBlock,

@@ -439,7 +439,7 @@ fn execute(compiled: &CompiledParser, job: &StagedParseJob) -> Result<Value, Str
             "compiled parser identity is unsupported".to_string(),
         ));
     }
-    let block = CodeBlock::parse(&job.text).map_err(|err| {
+    let block = CodeBlock::parse_with_callable_candidates(&job.text).map_err(|err| {
         dispatch_error(
             "execute",
             job,

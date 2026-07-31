@@ -322,6 +322,13 @@ shape literals on every current native backend. Ordinary assignment does not def
 `callback = { return("later") }` stores `"later"`. Contextual trailing blocks and explicit
 `{|params| ...}` callable values are separate codeblock paths.
 
+On Perl and Rust, callable metadata may declare one final codeblock parameter. At those governed call sites,
+`call(args) { statements }` and `call(args, { statements })` defer the immediate block as the same
+zero-positional `codeblock_argument`; the body reads the current dynamic context when invoked. In every ordinary
+argument position, `{ statements }` remains an eager block value. An explicit `{|params| statements }` always
+keeps its authored signature, and a keyed `{ key : value }` always remains an harray rather than being promoted by
+position. A typed final slot rejects a non-codeblock value as `final_argument_not_codeblock`.
+
 ```text
 return({ set(name, "ok"); name })          # "ok"
 set(out, { set(name, "ok"); return(name) })

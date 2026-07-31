@@ -1047,7 +1047,9 @@ fn infer_expr_shape(
         Expr::NumberLiteral { .. } => value_shape("number"),
         Expr::BooleanLiteral { .. } => value_shape("boolean"),
         Expr::Undef => value_shape("null"),
-        Expr::CodeblockLiteral(literal) => codeblock_shape(&literal.signature),
+        Expr::CodeblockArgument(literal) | Expr::CodeblockLiteral(literal) => {
+            codeblock_shape(&literal.signature)
+        }
         Expr::Variable { name } => variables
             .get(name)
             .cloned()
@@ -1088,14 +1090,24 @@ fn function_signature(function: &CompiledUserFunction) -> Value {
     let parameters = function
         .params
         .iter()
-        .map(|name| json!({"name": name, "kind": "value", "required": true}))
+        .map(|name| {
+            let kind = function
+                .parameter_kinds
+                .get(name)
+                .map(String::as_str)
+                .unwrap_or("value");
+            json!({"name": name, "kind": kind, "required": true})
+        })
         .collect::<Vec<_>>();
     json!({
         "parameters": parameters,
         "arity_min": function.arity,
         "arity_max": function.arity,
         "rest_parameter": null,
-        "final_codeblock": false,
+        "final_codeblock": function
+            .params
+            .last()
+            .is_some_and(|name| function.parameter_kinds.get(name).map(String::as_str) == Some("codeblock")),
     })
 }
 

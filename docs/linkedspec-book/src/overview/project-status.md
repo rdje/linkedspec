@@ -814,8 +814,10 @@ Three backbone items tracked major structural modernization — all done:
   a host closure or body execution. Rust `.11.4.2` now executes dynamic `cb(args)` with static precedence,
   once-only left-to-right arguments, copied/restored fixed/rest bindings, caller-visible nonparameter stores,
   local results/chaining/discard, exact typed failures/ordered recursion, and identical native, reconstructed,
-  generated-plan, and emitted-source behavior. Contextual final-block equivalence remains `.11.4.3`, and
-  Dart/Julia/Lua explicit-literal parity remains future.
+  generated-plan, and emitted-source behavior. Rust `.11.4.3` now adds one metadata-owned normalization pass for
+  equivalent attached/parenthesized helper, typed-user-function, and receiver final blocks, exact descriptor-v3
+  kinds, preserved eager/control blocks, typed non-codeblock rejection, and identical native/reconstructed/
+  generated/emitted execution. Dart/Julia parity and Lua explicit-literal parity remain future.
 - **Dart backend parity** - `DART-BACKEND-PARITY` is complete only for the scoped interpreter-first Dart milestone. Its strategy is
   interpreter-first over typed `.spec` and helper/action AST plus compiled-spec state, with generated Dart source
   deferred to a future split source-emitter lane rather than required for the current conformance claim. The repo now has a `dart/` backend package with a Dart-specific CLI,

@@ -233,15 +233,14 @@ scoped block parameter in this MVP; mutations to other variable names persist af
 `with { ... }`, explicit receiver `.with(value) { ... }`, and delayed callback semantics are not current portable
 surfaces.
 
-Across all backends this shipped surface is still narrower than the intended language abstraction. LinkedSpec's four object/value kinds are
+Across all backends this shipped surface is still narrower than the complete five-backend language abstraction. LinkedSpec's four object/value kinds are
 scalar, array, harray (called `hash` by the current authoring helpers), and codeblock. For a callable whose
 signature accepts a final codeblock, the intended contract is that `call(args) { ... }` and
 `call(args, { ... })` are equivalent spellings of the same call; the same rule applies to helper functions, user
-functions, and receiver methods. Perl implements that equivalence for metadata-declared `with`, typed user
-functions, and receiver `with`/tree-traversal surfaces. Lua implements it for built-in helper/receiver `with`,
-including copied aggregate scope, exact restoration after errors, and result chaining; Lua tree callback behavior,
-general user functions, and explicit callable values remain separately owned. Other backends do not yet provide
-the generic contract, so the parenthesized final-codeblock form is not portable. ADR 0031 and completed
+functions, and receiver methods. Perl and Rust implement that equivalence for metadata-declared `with`, typed user
+functions, and receiver `with`/tree-traversal surfaces. Lua's implemented contextual subsets are documented in its
+backend handoff; explicit callable values remain separately owned there. Dart and Julia do not yet provide the
+generic contract, so the complete five-backend surface is not yet portable. ADR 0031 and completed
 `FUTURE-PARITY-BACKLOG.11.1` select an explicit literal:
 
 ```text
@@ -279,7 +278,7 @@ generated plans, emitted source, and semantic `codeblock` descriptors. Construct
 or executes the body. Dynamic execution uses that same reconstructed runtime state; it is not a generated-source
 special case.
 
-On Perl, `apply("x") { return(value) }` and `apply("x", { return(value) })` normalize to the same contextual
+On Perl and Rust, `apply("x") { return(value) }` and `apply("x", { return(value) })` normalize to the same contextual
 zero-positional codeblock when `apply` declares a final `callback: codeblock`. The same metadata rule governs the
 supported helper and receiver forms. `{|item| ...}` remains an explicit one-positional codeblock value, while
 `{ "item" : value }` remains an harray and is rejected if supplied to a typed codeblock slot.
@@ -305,8 +304,8 @@ count = collector("p", "a", "b")["items"].length()
 Perl and Rust report exact arity, keyword-call, bound-non-codeblock, unknown-body-helper, and active-recursion
 failures as typed runtime details. A governed helper/control or registered user function still wins over a
 same-named variable. Explicit `{|...|...}` plus `cb(...)` is current on those two backends. Generic contextual
-final-block spellings are complete on Perl but remain Rust `.11.4.3` work; Dart, Julia, and Lua explicit literal
-and dynamic-call parity remains future.
+final-block spellings are complete on both; Dart and Julia parity plus Lua explicit-literal/dynamic-call parity
+remain future.
 
 Hash receiver trailing blocks also support deterministic tree traversal. A hash tree has a hash root. Nested hash
 values are interior nodes; all non-hash values, including arrays, are leaves. `walk_leaves() { ... }` visits each

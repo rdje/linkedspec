@@ -1,5 +1,41 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-30 (`FUTURE-PARITY-BACKLOG.11.4.3` — contextual syntax is provenance until metadata grants meaning):
+  A parser cannot decide whether `{ ... }` is a deferred final argument from spelling alone. Rust therefore has
+  two deliberate block-parse modes: the established public mode preserves immediate blocks and historical
+  diagnostics, while compiler/staged mode records attached or direct-parenthesized candidates with source/body
+  spans. One post-compile registry combines builtin helper/receiver contracts with typed user-function metadata,
+  admits only the governed final position, restores ordinary parenthesized blocks, and rejects unknown attached
+  callees. This keeps syntax generic without moving semantic authority into parser name allowlists.
+
+  Controls must claim their block before generic candidates. Dedicated `if`/`when`, `switch`, and `while` heads
+  parse as controls, inherit candidate mode inside their bodies, and preserve the established malformed-bare-head
+  diagnostic by falling back as a variable when `(` is absent. This distinction was not cosmetic: the full Rust
+  gate caught punctuation-light diagnostic drift that the new focused contract could not see.
+
+  Normalizing a compiled function body must not replace its staged public envelope. The first broad run showed
+  that serializing the normalized `CodeBlock` directly erased `kind: action_block` and per-statement staging data.
+  The correct operation replaces semantic fields while merging opaque staged metadata at the block and statement
+  levels, with exact statement-count/object invariants. The existing descriptor integration test now guards that
+  boundary, while the callable suite proves the normalized expressions survive every execution authority.
+
+  Runtime callback paths share one executor. Contextual helper/receiver blocks receive dynamic `value` with no
+  positional parameters; explicit first-class values retain authored signature binding; typed user functions
+  validate the final runtime kind before execution; and tree traversal supplies `value`, key/index, path, depth,
+  and accumulator scope through the same mechanism. Compatibility `Engine::execute` returns the accumulator,
+  whereas contract-v2 emitted `execute` returns the selected rule value directly; tests compare each authority
+  to its established result envelope rather than manufacturing false byte identity.
+
+  Focused proof is neutral 7/11/9/7/4/8, Perl 10/10, Rust callable 18/18, descriptor 4/4, punctuation-light 5/5,
+  core 195/195, and production-library clippy. The repaired complete Rust gate passes the 148.33-second corpus
+  oracle, 192.45-second generated classifier, 197 integrations, all later semantic/MCP/emitted suites, build,
+  195-package/17-owner project-data proof, and CLI 66x2.
+
+  Final signoff regenerates/checks the Knowledge Map at 761/6,175, renders the mdBook at 79 files / 13,880 KiB,
+  removes that exact generated output, passes all seven doctrines, and passes canonical CI through Phase 0
+  1,031/1,031 in 639 seconds. The canonical tail did not retain its pre-Phase-0 RAM line, so this leaf records only
+  evidence actually captured from the run. Rust parent `.11.4` closes without capability or other-backend movement.
+
 - 2026-07-30 (`FUTURE-PARITY-BACKLOG.11.4.2` — dynamic codeblocks belong in the existing call/store engine):
   Rust already had the right seams: static call arms precede the generic unknown fallback, runtime values clone
   recursively, scoped bindings snapshot every uniform storage kind, block evaluation owns local final/return

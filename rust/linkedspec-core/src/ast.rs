@@ -3,6 +3,8 @@
 //! These represent the structure of a LinkedSpec grammar file:
 //! a sequence of rule paragraphs, each with a header and body elements.
 
+use std::collections::BTreeMap;
+
 use serde::{Deserialize, Serialize};
 
 /// A complete `.spec` file AST.
@@ -22,6 +24,10 @@ pub struct FunctionDefinition {
     pub params: Vec<String>,
     /// Normalized minimum arity. For fixed definitions this is exact.
     pub arity: usize,
+    /// Declared non-default value kinds keyed by parameter name. Version 1
+    /// currently permits only one final `codeblock` parameter.
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub parameter_kinds: BTreeMap<String, String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub signature: Option<CallableSignature>,
     pub body_source: String,

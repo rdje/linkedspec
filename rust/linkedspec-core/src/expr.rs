@@ -19,7 +19,7 @@
 //! expr        → primary ('.' method_call)*
 //! primary     → call | nested_access | indexed_var | literal | block | grouped | variable
 //! call        → name '(' args? ')' trailing_block? | symbol '(' args? ')'
-//! trailing_block → '{' stmts '}'          (helper-form `with(...)`, receiver `.with()`, and tree traversal receiver methods)
+//! trailing_block → '{' stmts '}'          (recognized structurally; callable metadata grants semantics)
 //! method_call → name '(' args? ')' trailing_block? | final_name
 //! args        → arg (',' arg)*
 //! arg         → expr | name ':' expr       (keyword argument only for keyword-aware callees)
@@ -75,6 +75,25 @@ pub struct CallableCodeblock {
     pub source_text: String,
     pub source_span: ExpressionSpan,
     pub body_span: ExpressionSpan,
+}
+
+/// Source spelling of a structurally recognized immediate block argument.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum ContextualBlockSyntax {
+    /// `call(args) { body }` or `receiver.method(args) { body }`.
+    Attached,
+    /// `call(args, { body })` or `receiver.method({ body })`.
+    Parenthesized,
+}
+
+/// Pre-normalization block candidate. Parsing records syntax and provenance;
+/// callable-contract metadata later decides whether this becomes a deferred
+/// codeblock argument or remains an ordinary eager block value.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct ContextualCodeblockCandidate {
+    pub syntax: ContextualBlockSyntax,
+    pub codeblock: CallableCodeblock,
 }
 
 /// A single statement within a lifecycle block.
@@ -156,6 +175,12 @@ pub enum Expr {
     /// A value-returning block expression: `{ set(x, "a"); x }`
     #[serde(rename = "block_value")]
     BlockValue { block: CodeBlock },
+    /// A direct block argument awaiting callable-contract normalization.
+    #[serde(rename = "contextual_codeblock_candidate")]
+    ContextualCodeblockCandidate(ContextualCodeblockCandidate),
+    /// A metadata-admitted contextual final codeblock argument.
+    #[serde(rename = "codeblock_argument")]
+    CodeblockArgument(CallableCodeblock),
     /// A deferred first-class codeblock literal: `{|value| return(value) }`.
     #[serde(rename = "codeblock_literal")]
     CodeblockLiteral(CallableCodeblock),
@@ -204,6 +229,14 @@ impl Arg {
     pub fn value(&self) -> &Expr {
         match self {
             Arg::Positional(e) => e,
+            Arg::Keyword { value, .. } => value,
+        }
+    }
+
+    /// Mutable value expression regardless of positional/keyword spelling.
+    pub fn value_mut(&mut self) -> &mut Expr {
+        match self {
+            Arg::Positional(value) => value,
             Arg::Keyword { value, .. } => value,
         }
     }
@@ -282,7 +315,13 @@ impl Expr {
                     .or_else(|| entry.value.find_removed_aggregate_selector())
             }),
             Expr::BlockValue { block } => block.find_removed_aggregate_selector(),
-            Expr::CodeblockLiteral(literal) => literal
+            Expr::ContextualCodeblockCandidate(candidate) => candidate
+                .codeblock
+                .body_ast
+                .statements
+                .iter()
+                .find_map(|statement| statement.expr.find_removed_aggregate_selector()),
+            Expr::CodeblockArgument(literal) | Expr::CodeblockLiteral(literal) => literal
                 .body_ast
                 .statements
                 .iter()
@@ -302,10 +341,12 @@ impl Expr {
 
 // ── Display for debugging ──
 
-fn fluent_call_prints_trailing_block(call: &FluentCall) -> bool {
+fn expression_prints_as_trailing_block(expr: &Expr) -> bool {
     matches!(
-        call.method.as_str(),
-        "with" | "walk_leaves" | "map_leaves" | "reduce_leaves"
+        expr,
+        Expr::BlockValue { .. }
+            | Expr::ContextualCodeblockCandidate(_)
+            | Expr::CodeblockArgument(_)
     )
 }
 
@@ -394,6 +435,10 @@ impl std::fmt::Display for Expr {
                 }
                 write!(f, "}}")
             }
+            Expr::ContextualCodeblockCandidate(candidate) => {
+                f.write_str(&candidate.codeblock.source_text)
+            }
+            Expr::CodeblockArgument(argument) => f.write_str(&argument.source_text),
             Expr::CodeblockLiteral(literal) => f.write_str(&literal.source_text),
             Expr::StringLiteral { value } => write!(f, "\"{value}\""),
             Expr::NumberLiteral { value } => write!(f, "{value}"),
@@ -403,11 +448,9 @@ impl std::fmt::Display for Expr {
             Expr::FluentChain { receiver, calls } => {
                 write!(f, "{receiver}")?;
                 for call in calls {
-                    if fluent_call_prints_trailing_block(call)
-                        && matches!(
-                            call.args.last(),
-                            Some(Arg::Positional(Expr::BlockValue { .. }))
-                        )
+                    if call.args.last().is_some_and(|argument| {
+                        matches!(argument, Arg::Positional(value) if expression_prints_as_trailing_block(value))
+                    })
                     {
                         write!(f, ".{}(", call.method)?;
                         for (i, arg) in call.args[..call.args.len() - 1].iter().enumerate() {
@@ -443,11 +486,21 @@ impl std::fmt::Display for Expr {
 impl CodeBlock {
     /// Parse a lifecycle code string into a CodeBlock of statements.
     pub fn parse(source: &str) -> Result<Self, String> {
-        Self::parse_with_character_base(source, 0)
+        Self::parse_with_mode(source, 0, BlockParseMode::Established)
     }
 
-    fn parse_with_character_base(source: &str, character_base: usize) -> Result<Self, String> {
-        let mut parser = Parser::with_character_base(source, character_base);
+    /// Parse while retaining direct block-argument provenance for later
+    /// callable-contract normalization against a complete compiled spec.
+    pub fn parse_with_callable_candidates(source: &str) -> Result<Self, String> {
+        Self::parse_with_mode(source, 0, BlockParseMode::CallableCandidates)
+    }
+
+    fn parse_with_mode(
+        source: &str,
+        character_base: usize,
+        mode: BlockParseMode,
+    ) -> Result<Self, String> {
+        let mut parser = Parser::with_character_base_and_mode(source, character_base, mode);
         parser.parse_block()
     }
 
@@ -509,6 +562,17 @@ fn parse_callable_signature(source: &str) -> Result<CallableSignature, String> {
     })
 }
 
+fn zero_argument_callable_signature() -> CallableSignature {
+    CallableSignature {
+        kind: "callable_signature".to_string(),
+        version: 1,
+        positional_params: Vec::new(),
+        rest_param: None,
+        min_arity: 0,
+        max_arity: Some(0),
+    }
+}
+
 fn validate_callable_parameter_name(name: &str, fixed: &[String]) -> Result<(), String> {
     if fixed.iter().any(|parameter| parameter == name) {
         return Err(format!(
@@ -561,23 +625,35 @@ fn is_reserved_callable_parameter(name: &str) -> bool {
 
 // ── Recursive-descent parser ──
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum BlockParseMode {
+    Established,
+    CallableCandidates,
+}
+
 struct Parser<'a> {
     src: &'a str,
     pos: usize,
     character_base: usize,
+    mode: BlockParseMode,
 }
 
 impl<'a> Parser<'a> {
-    fn new(src: &'a str) -> Self {
-        Self::with_character_base(src, 0)
-    }
-
-    fn with_character_base(src: &'a str, character_base: usize) -> Self {
+    fn with_character_base_and_mode(
+        src: &'a str,
+        character_base: usize,
+        mode: BlockParseMode,
+    ) -> Self {
         Self {
             src,
             pos: 0,
             character_base,
+            mode,
         }
+    }
+
+    fn parse_nested_block(&self, source: &str, character_base: usize) -> Result<CodeBlock, String> {
+        CodeBlock::parse_with_mode(source, character_base, self.mode)
     }
 
     fn remaining(&self) -> &'a str {
@@ -777,7 +853,7 @@ impl<'a> Parser<'a> {
             return Ok(None);
         }
 
-        let expr = self.parse_var_or_call()?;
+        let expr = self.parse_attached_control_call()?;
         let Expr::Call { name, args } = &expr else {
             self.pos = start;
             return Ok(None);
@@ -806,7 +882,7 @@ impl<'a> Parser<'a> {
             return Ok(None);
         }
 
-        let expr = self.parse_var_or_call()?;
+        let expr = self.parse_attached_control_call()?;
         let Expr::Call { name, mut args } = expr else {
             self.pos = start;
             return Ok(None);
@@ -833,7 +909,11 @@ impl<'a> Parser<'a> {
         let start = self.pos;
         let (payload_start, payload_end, after_close) = self.scan_brace_payload_bounds()?;
         let payload = &self.src[payload_start..payload_end];
-        let mut branch_parser = Parser::new(payload);
+        let mut branch_parser = Parser::with_character_base_and_mode(
+            payload,
+            self.character_offset(payload_start),
+            self.mode,
+        );
         let statements = branch_parser.parse_attached_switch_body().map_err(|e| {
             format!("invalid attached switch block starting at position {start}: {e}")
         })?;
@@ -873,7 +953,7 @@ impl<'a> Parser<'a> {
             return Ok(None);
         }
 
-        let expr = self.parse_var_or_call()?;
+        let expr = self.parse_attached_control_call()?;
         let Expr::Call { name, args } = &expr else {
             self.pos = start;
             return Ok(None);
@@ -903,7 +983,7 @@ impl<'a> Parser<'a> {
         self.skip_whitespace();
         if self.peek() == Some('(') {
             self.pos = start;
-            let expr = self.parse_var_or_call()?;
+            let expr = self.parse_attached_control_call()?;
             let Expr::Call { name, args } = &expr else {
                 self.pos = start;
                 return Ok(None);
@@ -933,7 +1013,7 @@ impl<'a> Parser<'a> {
             return Ok(None);
         }
 
-        let mut expr = self.parse_var_or_call()?;
+        let mut expr = self.parse_attached_control_call()?;
         let Expr::Call { name, args } = &mut expr else {
             self.pos = start;
             return Ok(None);
@@ -980,11 +1060,121 @@ impl<'a> Parser<'a> {
         let start = self.pos;
         let (payload_start, payload_end, after_close) = self.scan_brace_payload_bounds()?;
         let payload = &self.src[payload_start..payload_end];
-        let block = CodeBlock::parse(payload).map_err(|e| {
-            format!("invalid attached {label} branch block starting at position {start}: {e}")
-        })?;
+        let block = self
+            .parse_nested_block(payload, self.character_offset(payload_start))
+            .map_err(|e| {
+                format!("invalid attached {label} branch block starting at position {start}: {e}")
+            })?;
         self.pos = after_close;
         Ok(block)
+    }
+
+    fn parse_attached_control_call(&mut self) -> Result<Expr, String> {
+        let name = self.parse_name();
+        self.skip_whitespace();
+        if self.peek() != Some('(') {
+            return Ok(Expr::Variable { name });
+        }
+        self.advance(1);
+        let args = if self.peek() == Some(')') {
+            Vec::new()
+        } else {
+            self.parse_args_for_callee(&name)?
+        };
+        if self.peek() != Some(')') {
+            return Err(format!(
+                "expected ')' after args in attached control '{}'",
+                name
+            ));
+        }
+        self.advance(1);
+        Ok(Expr::Call { name, args })
+    }
+
+    fn parse_contextual_codeblock_candidate(
+        &mut self,
+        syntax: ContextualBlockSyntax,
+        label: &str,
+    ) -> Result<Expr, String> {
+        let start = self.pos;
+        let (body_start, body_end, after_close) = self.scan_brace_payload_bounds()?;
+        let body_source = &self.src[body_start..body_end];
+        let body = self
+            .parse_nested_block(body_source, self.character_offset(body_start))
+            .map_err(|error| {
+                format!("invalid contextual {label} block starting at position {start}: {error}")
+            })?;
+        self.pos = after_close;
+        Ok(Expr::ContextualCodeblockCandidate(
+            ContextualCodeblockCandidate {
+                syntax,
+                codeblock: CallableCodeblock {
+                    version: 1,
+                    signature: zero_argument_callable_signature(),
+                    body_source: body_source.to_string(),
+                    body_ast: CodeblockBodyAst {
+                        kind: "action_block".to_string(),
+                        source: body_source.to_string(),
+                        statements: body.statements,
+                    },
+                    source_text: self.src[start..after_close].to_string(),
+                    source_span: ExpressionSpan {
+                        start: self.character_offset(start),
+                        end: self.character_offset(after_close),
+                    },
+                    body_span: ExpressionSpan {
+                        start: self.character_offset(body_start),
+                        end: self.character_offset(body_end),
+                    },
+                },
+            },
+        ))
+    }
+
+    fn parenthesized_block_candidate(&self, start: usize, value: Expr) -> Expr {
+        if self.mode == BlockParseMode::Established {
+            return value;
+        }
+        let Expr::BlockValue { block } = value else {
+            return value;
+        };
+        let Ok((body_start, body_end, after_close)) = (Self {
+            src: self.src,
+            pos: start,
+            character_base: self.character_base,
+            mode: self.mode,
+        })
+        .scan_brace_payload_bounds() else {
+            return Expr::BlockValue { block };
+        };
+        let body_source = &self.src[body_start..body_end];
+        let Ok(parsed_block) =
+            self.parse_nested_block(body_source, self.character_offset(body_start))
+        else {
+            return Expr::BlockValue { block };
+        };
+        Expr::ContextualCodeblockCandidate(ContextualCodeblockCandidate {
+            syntax: ContextualBlockSyntax::Parenthesized,
+            codeblock: CallableCodeblock {
+                version: 1,
+                signature: zero_argument_callable_signature(),
+                body_source: body_source.to_string(),
+                body_ast: CodeblockBodyAst {
+                    kind: "action_block".to_string(),
+                    source: body_source.to_string(),
+                    statements: parsed_block.statements,
+                },
+                source_text: self.src[start..after_close].to_string(),
+                source_span: ExpressionSpan {
+                    start: self.character_offset(start),
+                    end: self.character_offset(after_close),
+                },
+                body_span: ExpressionSpan {
+                    start: self.character_offset(body_start),
+                    end: self.character_offset(body_end),
+                },
+            },
+        })
     }
 
     fn starts_with_keyword(&self, keyword: &str) -> bool {
@@ -1508,12 +1698,14 @@ impl<'a> Parser<'a> {
             return self.parse_hash_literal();
         }
 
-        let block = CodeBlock::parse(payload).map_err(|e| {
-            format!(
-                "invalid expression-valued block starting at position {}: {}",
-                start, e
-            )
-        })?;
+        let block = self
+            .parse_nested_block(payload, self.character_offset(payload_start))
+            .map_err(|e| {
+                format!(
+                    "invalid expression-valued block starting at position {}: {}",
+                    start, e
+                )
+            })?;
         if block.statements.is_empty() {
             self.pos = start;
             return self.parse_hash_literal();
@@ -1538,11 +1730,11 @@ impl<'a> Parser<'a> {
         let signature = parse_callable_signature(&self.src[signature_start..signature_closer])?;
         let body_start = signature_closer + 1;
         let body_source = &self.src[body_start..close];
-        let body =
-            CodeBlock::parse_with_character_base(body_source, self.character_offset(body_start))
-                .map_err(|error| {
-                    format!("invalid_codeblock_body: codeblock at position {start}: {error}")
-                })?;
+        let body = self
+            .parse_nested_block(body_source, self.character_offset(body_start))
+            .map_err(|error| {
+                format!("invalid_codeblock_body: codeblock at position {start}: {error}")
+            })?;
         let literal = CallableCodeblock {
             version: 1,
             signature,
@@ -1780,7 +1972,7 @@ impl<'a> Parser<'a> {
         name: String,
         mut args: Vec<Arg>,
     ) -> Result<Expr, String> {
-        if name != "with" {
+        if self.mode == BlockParseMode::Established && name != "with" {
             return Ok(Expr::Call { name, args });
         }
 
@@ -1791,8 +1983,14 @@ impl<'a> Parser<'a> {
             return Ok(Expr::Call { name, args });
         }
 
-        let block = self.parse_attached_branch_block("with")?;
-        args.push(Arg::Positional(Expr::BlockValue { block }));
+        if self.mode == BlockParseMode::Established {
+            let block = self.parse_attached_branch_block("with")?;
+            args.push(Arg::Positional(Expr::BlockValue { block }));
+        } else {
+            let candidate =
+                self.parse_contextual_codeblock_candidate(ContextualBlockSyntax::Attached, &name)?;
+            args.push(Arg::Positional(candidate));
+        }
         Ok(Expr::Call { name, args })
     }
 
@@ -1888,7 +2086,9 @@ impl<'a> Parser<'a> {
         method: &str,
         mut args: Vec<Arg>,
     ) -> Result<Vec<Arg>, String> {
-        if !Self::method_allows_fluent_trailing_block(method) {
+        if self.mode == BlockParseMode::Established
+            && !Self::method_allows_established_fluent_trailing_block(method)
+        {
             return Ok(args);
         }
 
@@ -1898,32 +2098,37 @@ impl<'a> Parser<'a> {
             self.pos = before_whitespace;
             return Ok(args);
         }
-        match method {
-            "with" | "walk_leaves" | "map_leaves" => {
-                if !args.is_empty() {
-                    return Err(format!(
-                        "receiver .{method}() trailing block expects no parenthesized arguments at position {}",
-                        before_whitespace
-                    ));
+        if self.mode == BlockParseMode::Established {
+            match method {
+                "with" | "walk_leaves" | "map_leaves" => {
+                    if !args.is_empty() {
+                        return Err(format!(
+                            "receiver .{method}() trailing block expects no parenthesized arguments at position {}",
+                            before_whitespace
+                        ));
+                    }
                 }
-            }
-            "reduce_leaves" => {
-                if args.len() != 1 {
-                    return Err(format!(
-                        "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:reduce_leaves: receiver .reduce_leaves(initial) trailing block expects exactly one parenthesized accumulator argument at position {}",
-                        before_whitespace
-                    ));
+                "reduce_leaves" => {
+                    if args.len() != 1 {
+                        return Err(format!(
+                            "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:reduce_leaves: receiver .reduce_leaves(initial) trailing block expects exactly one parenthesized accumulator argument at position {}",
+                            before_whitespace
+                        ));
+                    }
                 }
+                _ => unreachable!("established fluent trailing-block method was checked"),
             }
-            _ => unreachable!("method_allows_fluent_trailing_block checked"),
+            let block = self.parse_attached_branch_block(method)?;
+            args.push(Arg::Positional(Expr::BlockValue { block }));
+        } else {
+            let candidate =
+                self.parse_contextual_codeblock_candidate(ContextualBlockSyntax::Attached, method)?;
+            args.push(Arg::Positional(candidate));
         }
-
-        let block = self.parse_attached_branch_block(method)?;
-        args.push(Arg::Positional(Expr::BlockValue { block }));
         Ok(args)
     }
 
-    fn method_allows_fluent_trailing_block(method: &str) -> bool {
+    fn method_allows_established_fluent_trailing_block(method: &str) -> bool {
         matches!(
             method,
             "with" | "walk_leaves" | "map_leaves" | "reduce_leaves"
@@ -1941,7 +2146,9 @@ impl<'a> Parser<'a> {
             if let Some(keyword) = self.try_parse_keyword_arg()? {
                 args.push(keyword);
             } else {
+                let value_start = self.pos;
                 let value = self.parse_expr()?;
+                let value = self.parenthesized_block_candidate(value_start, value);
                 args.push(Arg::Positional(value));
             }
 

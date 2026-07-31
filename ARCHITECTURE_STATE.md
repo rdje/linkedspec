@@ -5,6 +5,19 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-30`
+- `2026-07-30 Rust generic final-codeblock closeout`: `FUTURE-PARITY-BACKLOG.11.4.3` separates structural
+  block-argument recognition from semantic admission. Compiler/staged parsing retains attached or direct
+  parenthesized provenance until the complete builtin/user-function registry exists; one core callable-contract
+  owner then admits helper `with`, receiver `with`/tree methods, or an exact final `parameter_kinds = codeblock`
+  user slot and emits the same zero-positional `codeblock_argument`. The established public block parser keeps
+  eager values and builtin diagnostics, while attached `if`/`switch`/`while` stay on dedicated control paths.
+  Ordinary parenthesized blocks restore to eager values; unknown attached callees and non-codeblock final values
+  fail explicitly. Runtime invokes accepted arguments through the existing dynamic evaluator. Native, compiled-
+  JSON, generated-plan, and independently compiled emitted Rust agree without closure capture, a second evaluator,
+  harray promotion, capability/MCP movement, or other-backend change.
+  Complete Rust operational proof passes all packages, long classifiers, 197 integrations, build/storage, and CLI
+  66x2. Knowledge Map 761/6,175, mdBook 79 files / 13,880 KiB before cleanup, seven doctrines, and canonical Phase
+  0 1,031/1,031 in 639 seconds close the leaf and Rust parent `.11.4`.
 - `2026-07-30 Rust callable-codeblock dynamic invocation`: `FUTURE-PARITY-BACKLOG.11.4.2` executes governed
   bound `codeblock_literal` values after controls, helpers, and registered functions. Arguments evaluate once
   left-to-right; fixed values and a fresh rest array are recursively copied into temporary bindings; prior
@@ -15,8 +28,8 @@ This document is the current high-level technical reading of the project shape. 
   reconstruction, generated plans, and independently compiled emitted Rust execute the same fixture and failures.
   Full Rust operational proof and canonical CI are green; canonical closure includes CLI 66x2, RAM 44%, and
   Phase 0 1,031/1,031 in 763 seconds, with Knowledge Map 760/6,165 and exact generated-output cleanup.
-  Generic attached/parenthesized final-block equivalence remains `.11.4.3`; lexical capture and capability
-  promotion remain excluded.
+  Generic attached/parenthesized final-block equivalence is current through `.11.4.3`; lexical capture and
+  capability promotion remain excluded.
 - `2026-07-30 Rust callable-codeblock construction`: `FUTURE-PARITY-BACKLOG.11.4.1` adds one inert Rust
   `codeblock_literal` value before any dynamic invocation. Exact `{|` wins before harray/eager-block braces; the
   record preserves the neutral eight fields, fixed/final-rest signature, typed ActionIR body, exact source, and
@@ -24,7 +37,7 @@ This document is the current high-level technical reading of the project shape. 
   `CompiledSpec` JSON, user-function transport, generated-plan reconstruction, emitted Rust, and semantic
   `codeblock` shapes carry the same pure data without a closure or captured environment. Retained body calls and
   `retv` reads are not eager action-edge dependencies. Rust `cb(args)` is current through `.11.4.2`; generic
-  contextual final-block equivalence remains `.11.4.3`; the generic capability stays excluded.
+  contextual final-block equivalence is current through `.11.4.3`; the five-backend capability stays excluded.
 - `2026-07-30 semantic-introspection public closeout`: `FUTURE-PARITY-BACKLOG.10.10` makes the implemented native
   semantic APIs and thin MCP projection one governed current story. The neutral contract remains the sole semantic
   owner at six fixture groups and 20 digest-locked responses; its independent checker now rejects 128 omission-sensitive mutations and closes rollout at 9/9 with native admission 6/6. The public contract requires the Perl guide,

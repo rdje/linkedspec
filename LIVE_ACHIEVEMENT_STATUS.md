@@ -1,5 +1,22 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-30 — Rust generic final-codeblock equivalence signoff-complete
+
+Leaf `.11.4.3` now gives Rust one metadata-governed contextual block model across helper, typed user-function,
+receiver, and tree traversal calls. Attached and parenthesized syntax normalize to the same typed final argument;
+ordinary eager blocks, harrays, controls, explicit callable values, dynamic caller context, and static precedence
+remain distinct. Staged parameter kinds, descriptor v3, semantic projection, compiled JSON, generated plans, and
+emitted Rust preserve the same closure-free contract and share one runtime executor.
+
+Neutral 7/11/9/7/4/8, Perl 10/10, Rust callable 18/18, descriptor 4/4, punctuation-light 5/5, core 195/195, clippy,
+and formatting/whitespace pass. Two complete-gate findings are repaired and regression-covered: staged
+`action_block` metadata survives semantic normalization, and malformed bare controls retain the established
+diagnostic. The final full Rust gate passes all packages, the corpus and generated-source long classifiers, 197
+integrations, semantic/MCP/emitted recurrences, build/storage, and CLI 66x2. Book/retrieval/doctrine/canonical
+proof also passes: Knowledge Map 761/6,175, mdBook 79 files / 13,880 KiB before exact cleanup, all seven doctrines,
+and canonical Phase 0 1,031/1,031 in 639 seconds. Rust parent `.11.4` is closed; only the clean commit/brief-clear
+boundary remains before durable direction routing and then Dart `.11.5.1`.
+
 ## 2026-07-30 — Rust callable-codeblock dynamic invocation signoff-complete
 
 Leaf `.11.4.2` now executes bound Rust callable-codeblock values after controls, helpers, and registered user

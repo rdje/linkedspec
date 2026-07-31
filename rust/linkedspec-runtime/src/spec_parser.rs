@@ -12,6 +12,8 @@ use linkedspec_core::compiler::{compile, compile_with_trace_emitter};
 use linkedspec_core::parser::{parse_spec, parse_spec_with_trace_emitter};
 use linkedspec_core::trace::{TraceConfig, TraceEmitter, TraceLevel};
 use linkedspec_core::validation::{validate, validate_with_trace_emitter};
+use std::collections::BTreeMap;
+
 use serde_json::{Map, Value};
 
 const USER_FUNCTION_DEFINITION_SPEC: &str =
@@ -23,6 +25,17 @@ struct AstSpan {
     end: usize,
     line_start: usize,
     line_end: usize,
+}
+
+struct StagedFunctionMetadata<'a> {
+    name: &'a str,
+    params: &'a [String],
+    arity: usize,
+    signature: Option<&'a CallableSignature>,
+    parameter_kinds: &'a BTreeMap<String, String>,
+    body_source: &'a str,
+    body_span: AstSpan,
+    node_index: usize,
 }
 
 /// Parse a full LinkedSpec source string, including top-level user-function
@@ -296,41 +309,69 @@ fn function_from_ast(
         ));
     }
 
-    let (params, arity, signature) = match version {
-        1 => {
-            if object.contains_key("signature") {
-                return Err(format!(
-                    "function_definition node {idx} version 1 must not contain signature"
-                ));
-            }
-            let params = string_array_field(object, "params", idx)?;
-            let arity = usize_field(object, "arity", idx)?;
-            if arity != params.len() {
-                return Err(format!(
-                    "function_definition node {idx} arity {arity} does not match {} params",
-                    params.len()
-                ));
-            }
-            (params, arity, None)
-        }
-        2 => {
-            if object.contains_key("params") || object.contains_key("arity") {
-                return Err(format!(
-                    "function_definition node {idx} version 2 must store arity only in signature"
-                ));
-            }
-            let signature = callable_signature_field(object, "signature", idx)?;
-            (
-                signature.positional_params.clone(),
-                signature.min_arity,
-                Some(signature),
-            )
-        }
-        _ => {
+    let (params, arity, parameter_kinds, signature) = if object.contains_key("parameter_kinds") {
+        if version != 1 || object.contains_key("signature") {
             return Err(format!(
-                "function_definition node {idx} has unsupported version {version}"
+                "function_definition node {idx} typed final-codeblock form must use version 1 without signature"
             ));
         }
+        let mut params = string_array_field(object, "fixed_params", idx)?;
+        let codeblock_param =
+            string_field(object, "codeblock_param", "function_definition")?.to_string();
+        if !is_identifier(&codeblock_param) {
+            return Err(format!(
+                "function_definition node {idx} has invalid codeblock parameter '{codeblock_param}'"
+            ));
+        }
+        params.push(codeblock_param.clone());
+        let parameter_kinds = parameter_kinds_field(object, "parameter_kinds", idx)?;
+        if parameter_kinds.len() != 1
+            || parameter_kinds.get(&codeblock_param).map(String::as_str) != Some("codeblock")
+        {
+            return Err(format!(
+                "function_definition node {idx} final parameter kind must be codeblock"
+            ));
+        }
+        let arity = params.len();
+        (params, arity, parameter_kinds, None)
+    } else {
+        let (params, arity, signature) = match version {
+            1 => {
+                if object.contains_key("signature") {
+                    return Err(format!(
+                        "function_definition node {idx} version 1 must not contain signature"
+                    ));
+                }
+                let params = string_array_field(object, "params", idx)?;
+                let arity = usize_field(object, "arity", idx)?;
+                if arity != params.len() {
+                    return Err(format!(
+                        "function_definition node {idx} arity {arity} does not match {} params",
+                        params.len()
+                    ));
+                }
+                (params, arity, None)
+            }
+            2 => {
+                if object.contains_key("params") || object.contains_key("arity") {
+                    return Err(format!(
+                        "function_definition node {idx} version 2 must store arity only in signature"
+                    ));
+                }
+                let signature = callable_signature_field(object, "signature", idx)?;
+                (
+                    signature.positional_params.clone(),
+                    signature.min_arity,
+                    Some(signature),
+                )
+            }
+            _ => {
+                return Err(format!(
+                    "function_definition node {idx} has unsupported version {version}"
+                ));
+            }
+        };
+        (params, arity, BTreeMap::new(), signature)
     };
     for param in &params {
         if !is_identifier(param) {
@@ -360,32 +401,24 @@ fn function_from_ast(
         .get("body_payload")
         .cloned()
         .ok_or_else(|| format!("function_definition node {idx} is missing body_payload"))?;
-    validate_body_payload(
-        &body_payload,
-        &name,
-        &params,
+    let staged_metadata = StagedFunctionMetadata {
+        name: &name,
+        params: &params,
         arity,
-        signature.as_ref(),
-        &body_source,
+        signature: signature.as_ref(),
+        parameter_kinds: &parameter_kinds,
+        body_source: &body_source,
         body_span,
-        idx,
-    )?;
+        node_index: idx,
+    };
+    validate_body_payload(&body_payload, &staged_metadata)?;
     normalize_parent_ast_path(&mut body_payload, idx, "body_payload")?;
 
     let mut body_parse_job = object
         .get("body_parse_job")
         .cloned()
         .ok_or_else(|| format!("function_definition node {idx} is missing body_parse_job"))?;
-    validate_body_parse_job(
-        &body_parse_job,
-        &name,
-        &params,
-        arity,
-        signature.as_ref(),
-        &body_source,
-        body_span,
-        idx,
-    )?;
+    validate_body_parse_job(&body_parse_job, &staged_metadata)?;
     normalize_body_parse_job(&mut body_parse_job, idx, body_span)?;
     let body_ast = if let Some(trace) = trace {
         staged_parser_registry::execute_parse_job_with_trace_emitter(&body_parse_job, trace)
@@ -401,6 +434,7 @@ fn function_from_ast(
             name,
             params,
             arity,
+            parameter_kinds,
             signature,
             body_source,
             body_payload: Some(body_payload),
@@ -488,14 +522,9 @@ fn strip_function_definition_spans(source: &str, spans: &[AstSpan]) -> Result<St
 
 fn validate_body_payload(
     payload: &Value,
-    name: &str,
-    params: &[String],
-    arity: usize,
-    signature: Option<&CallableSignature>,
-    body_source: &str,
-    body_span: AstSpan,
-    idx: usize,
+    metadata: &StagedFunctionMetadata<'_>,
 ) -> Result<(), String> {
+    let idx = metadata.node_index;
     let object = as_object(
         payload,
         &format!("function_definition node {idx} body_payload"),
@@ -504,19 +533,19 @@ fn validate_body_payload(
     assert_string_field(object, "node_kind", "function_definition", idx)?;
     assert_string_field(object, "payload_kind", "function_body", idx)?;
     validate_function_body_parent_path(object, "body_payload", idx)?;
-    if string_field(object, "function_name", "body_payload")? != name {
+    if string_field(object, "function_name", "body_payload")? != metadata.name {
         return Err(format!(
             "function_definition node {idx} body_payload function_name does not match name"
         ));
     }
-    validate_staged_signature(object, "body_payload", params, arity, signature, idx)?;
-    if string_field(object, "text", "body_payload")? != body_source {
+    validate_staged_signature(object, "body_payload", metadata)?;
+    if string_field(object, "text", "body_payload")? != metadata.body_source {
         return Err(format!(
             "function_definition node {idx} body_payload text does not match body_source"
         ));
     }
     let payload_span = span_field(object, "source_span", idx)?;
-    if payload_span != body_span {
+    if payload_span != metadata.body_span {
         return Err(format!(
             "function_definition node {idx} body_payload source_span does not match body_span"
         ));
@@ -526,14 +555,9 @@ fn validate_body_payload(
 
 fn validate_body_parse_job(
     job: &Value,
-    name: &str,
-    params: &[String],
-    arity: usize,
-    signature: Option<&CallableSignature>,
-    body_source: &str,
-    body_span: AstSpan,
-    idx: usize,
+    metadata: &StagedFunctionMetadata<'_>,
 ) -> Result<(), String> {
+    let idx = metadata.node_index;
     let object = as_object(
         job,
         &format!("function_definition node {idx} body_parse_job"),
@@ -547,19 +571,19 @@ fn validate_body_parse_job(
             "function_definition node {idx} body_parse_job job_id must be non-empty"
         ));
     }
-    if string_field(object, "function_name", "body_parse_job")? != name {
+    if string_field(object, "function_name", "body_parse_job")? != metadata.name {
         return Err(format!(
             "function_definition node {idx} body_parse_job function_name does not match name"
         ));
     }
-    validate_staged_signature(object, "body_parse_job", params, arity, signature, idx)?;
-    if string_field(object, "text", "body_parse_job")? != body_source {
+    validate_staged_signature(object, "body_parse_job", metadata)?;
+    if string_field(object, "text", "body_parse_job")? != metadata.body_source {
         return Err(format!(
             "function_definition node {idx} body_parse_job text does not match body_source"
         ));
     }
     let job_span = span_field(object, "source_span", idx)?;
-    if job_span != body_span {
+    if job_span != metadata.body_span {
         return Err(format!(
             "function_definition node {idx} body_parse_job source_span does not match body_span"
         ));
@@ -600,12 +624,37 @@ fn validate_body_parse_job(
 fn validate_staged_signature(
     object: &Map<String, Value>,
     context: &str,
-    params: &[String],
-    arity: usize,
-    signature: Option<&CallableSignature>,
-    idx: usize,
+    metadata: &StagedFunctionMetadata<'_>,
 ) -> Result<(), String> {
-    match signature {
+    let idx = metadata.node_index;
+    let params = metadata.params;
+    let parameter_kinds = metadata.parameter_kinds;
+    if !parameter_kinds.is_empty() {
+        if object.contains_key("params")
+            || object.contains_key("arity")
+            || object.contains_key("signature")
+        {
+            return Err(format!(
+                "function_definition node {idx} {context} typed final-codeblock form has incompatible arity fields"
+            ));
+        }
+        let Some(final_param) = params.last() else {
+            return Err(format!(
+                "function_definition node {idx} {context} typed final-codeblock form has no final parameter"
+            ));
+        };
+        if string_array_field(object, "fixed_params", idx)? != params[..params.len() - 1]
+            || string_field(object, "codeblock_param", context)? != final_param
+            || parameter_kinds_field(object, "parameter_kinds", idx)? != *parameter_kinds
+            || metadata.arity != params.len()
+        {
+            return Err(format!(
+                "function_definition node {idx} {context} typed parameter metadata does not match definition"
+            ));
+        }
+        return Ok(());
+    }
+    match metadata.signature {
         Some(expected) => {
             if object.contains_key("params") || object.contains_key("arity") {
                 return Err(format!(
@@ -630,7 +679,7 @@ fn validate_staged_signature(
                     "function_definition node {idx} {context} params do not match params"
                 ));
             }
-            if usize_field(object, "arity", idx)? != arity {
+            if usize_field(object, "arity", idx)? != metadata.arity {
                 return Err(format!(
                     "function_definition node {idx} {context} arity does not match arity"
                 ));
@@ -638,6 +687,27 @@ fn validate_staged_signature(
         }
     }
     Ok(())
+}
+
+fn parameter_kinds_field(
+    object: &Map<String, Value>,
+    field: &str,
+    idx: usize,
+) -> Result<BTreeMap<String, String>, String> {
+    let values = object
+        .get(field)
+        .and_then(Value::as_object)
+        .ok_or_else(|| {
+            format!("function_definition node {idx} field '{field}' must be an object")
+        })?;
+    let mut kinds = BTreeMap::new();
+    for (name, value) in values {
+        let kind = value.as_str().ok_or_else(|| {
+            format!("function_definition node {idx} field '{field}.{name}' must be a string")
+        })?;
+        kinds.insert(name.clone(), kind.to_string());
+    }
+    Ok(kinds)
 }
 
 fn validate_function_body_parent_path(
@@ -901,8 +971,25 @@ fn usize_field(object: &Map<String, Value>, field: &str, idx: usize) -> Result<u
 }
 
 fn function_error_message(object: &Map<String, Value>, idx: usize) -> String {
-    let message = string_field(object, "message", "function_definition_error")
-        .unwrap_or("invalid user function definition");
+    let mut message = string_field(object, "message", "function_definition_error")
+        .unwrap_or("invalid user function definition")
+        .to_string();
+    let source_text =
+        string_field(object, "source_text", "function_definition_error").unwrap_or_default();
+    let header = source_text.split('{').next().unwrap_or(source_text);
+    let compact = header
+        .chars()
+        .filter(|character| !character.is_whitespace())
+        .collect::<String>();
+    if compact.contains(":codeblock(") {
+        message = "codeblock_declaration_has_no_argument_list".to_string();
+    } else if compact.contains(":codeblock,") {
+        message = "codeblock_parameter_must_be_final".to_string();
+    } else if compact.contains("(:codeblock") {
+        message = "invalid_codeblock_parameter_name".to_string();
+    } else if typed_parameter_name(header).is_some_and(|kind| kind != "codeblock") {
+        message = "unknown_parameter_type".to_string();
+    }
     let line = object
         .get("source_span")
         .and_then(Value::as_object)
@@ -914,6 +1001,15 @@ fn function_error_message(object: &Map<String, Value>, idx: usize) -> String {
     } else {
         format!("user function definition parse error at node {idx}: {message}")
     }
+}
+
+fn typed_parameter_name(header: &str) -> Option<&str> {
+    let (_, after_colon) = header.split_once(':')?;
+    after_colon
+        .trim_start()
+        .split(|character: char| !character.is_ascii_alphanumeric() && character != '_')
+        .next()
+        .filter(|name| !name.is_empty())
 }
 
 fn is_identifier(value: &str) -> bool {

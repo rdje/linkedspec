@@ -1,5 +1,34 @@
 # CHANGES
 
+## 2026-07-30 — FUTURE-PARITY-BACKLOG.11.4.3 — close Rust generic final-codeblock equivalence
+
+Rust now normalizes attached `call(args) { body }` and direct parenthesized `call(args, { body })` through one
+callable-metadata registry after the complete compiled function set exists. Builtin helper/receiver contracts and
+typed user functions with exactly one final `parameter_kinds` value of `codeblock` admit the contextual candidate;
+ordinary parenthesized blocks remain eager values, unknown attached callees are rejected, and harrays never become
+callbacks. The established public block parser retains its existing eager-block/control/diagnostic behavior while
+compiler and staged-body parsing use a provenance-preserving candidate mode.
+
+Typed final-codeblock declarations now flow from `specs/user_function_definition.spec` through Rust staged
+payload/job validation, compiled state, descriptor version 3, semantic projection, serialized/generated plans,
+and emitted source. Helper `with`, receiver `with`, tree traversal callbacks, and typed user functions invoke the
+same dynamic codeblock executor added by `.11.4.2`; no closure, captured environment, backend dialect, or second
+evaluator is introduced. Explicit callable literals preserve their authored signatures, and non-codeblock final
+values fail with exact `final_argument_not_codeblock` kind data.
+
+Focused proof passes the neutral 7/11/9/7/4/8 contract, Perl oracle 10/10, Rust callable 18/18, descriptor 4/4,
+punctuation-light 5/5, core 195/195, formatting/whitespace, and production-library clippy. Complete-gate review
+caught and repaired two compatibility seams before signoff: normalized staged bodies now preserve their
+`action_block`/statement envelope metadata, and malformed bare controls retain the established punctuation-light
+diagnostic while valid attached controls remain dedicated. The final Rust operational gate exits zero across all
+packages, the 148.33-second corpus oracle, 192.45-second generated-source classifier, 197 integrations, semantic/
+MCP recurrences, emitted-source suites, build, 195-package/17-owner storage proof, and CLI 66/66 twice.
+
+Knowledge Map generation/checking passes at 761 facts / 6,175 question keys, the mdBook renders 79 files / 13,880
+KiB before exact output cleanup, all seven doctrines pass, and canonical CI closes at Phase 0 1,031/1,031 in 639
+seconds with `[ci] local CI gate passed`. Rust parent `.11.4` is closed; Dart construction remains the next backend
+leaf after the clean commit, with no capability, MCP, other-backend, lexical-capture, or push movement here.
+
 ## 2026-07-30 — FUTURE-PARITY-BACKLOG.11.4.2 — execute Rust callable codeblocks
 
 Rust now invokes a bound callable-codeblock value after static controls, helpers, and registered user functions.

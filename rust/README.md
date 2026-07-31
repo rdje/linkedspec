@@ -134,11 +134,30 @@ count = collector("local", "a", "b")["items"].length()
 # count == 2; outer == "kept"
 ```
 
+A callable may also declare one final contextual codeblock value. Attached and direct parenthesized eager-block
+spellings normalize through callable metadata to the same zero-positional codeblock argument:
+
+```text
+fn apply(value, callback: codeblock) { return(callback()) }
+
+attached = apply("ready") { return(cat(value, "!")) }
+parenthesized = apply("ready", { return(cat(value, "!")) })
+# both values are "ready!"
+```
+
+The same metadata owner governs helper `with`, receiver `.with`, and tree receiver callbacks. An explicit
+`{|item| ...}` argument keeps its own signature; an harray such as `{ "item" : value }` remains an harray and a
+typed final slot rejects it as `final_argument_not_codeblock`. The compiler preserves contextual source
+provenance until the complete builtin/user-function registry is known, then emits one typed `codeblock_argument`.
+Ordinary non-codeblock `{ statements }` arguments remain eager block values, and attached `if`/`switch`/`while`
+forms retain their control semantics. Native, reconstructed, generated-plan, and emitted-source execution all
+reuse the same runtime evaluator without a Rust closure or captured environment.
+
 Runtime failures use the existing structured diagnostic envelope with exact neutral codes:
 `codeblock_arity_mismatch`, `codeblock_keyword_arguments_unsupported`, `value_not_callable`, `unknown_helper`,
 and `codeblock_recursion_unsupported`. They retain callable name, expected/got counts, runtime value kind, unknown
-name, or ordered cycle as applicable. Generic attached/parenthesized final-block equivalence remains separately
-owned by `.11.4.3`.
+name, or ordered cycle as applicable. Generic attached/parenthesized final-block equivalence is current through
+`.11.4.3`.
 
 Rust execution, descriptor projection, generated-source v2, and public option/CLI removal are current through
 `.9.1.4.6`. The parser retains complete-line and header-rest bare edges as

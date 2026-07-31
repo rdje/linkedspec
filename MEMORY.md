@@ -5,20 +5,22 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `91958022` — `FUTURE-PARITY-BACKLOG.11.4.1 - construct Rust callable codeblocks` (105/300;
-  no push); brief-cleared/residue-free/clean with exact inert Rust construction and full Rust/canonical proof.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.11.4.1`; parent `.11.4` remains active.
-- active_leaf: `FUTURE-PARITY-BACKLOG.11.4.2` — Rust dynamic codeblock-variable invocation, task-tree-first from
-  clean `91958022`.
-- active_scope: exact static-before-bound resolution, caller-context reads/mutations, recursively copied temporary
-  fixed/rest bindings with restoration, invocation-local return, chaining/discard, typed arity/keyword/noncallable/
-  recursion failures, and native/compiled/generated identity against all 11 valid + 7 invalid call cases.
-- active_progress: signoff-complete and ready to commit: callable suite 13/13, variadic 7/7, semantic query 5/5,
-  generic unknown-helper preservation 1/1, native/serialized/generated/emitted identity, complete Rust operational
-  gate, and canonical CI all pass. Task/live/book/Knowledge Map are synchronized; exact cleanup is complete.
-- active_exclusions: generic attached/parenthesized final-block equivalence (`.11.4.3`), lexical capture, capability
-  promotion, MCP changes, other backends, or push in `.11.4.2`.
-- next_after_clean_commit: activate Rust generic final-block closeout `.11.4.3`; no push before cadence 300.
+- latest_commit: `ebb8301c` — `FUTURE-PARITY-BACKLOG.11.4.2 - execute Rust callable codeblocks` (106/300;
+  no push); brief-cleared/residue-free/clean before `.11.4.3` activation.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.11.4.2`; this commit closes `.11.4.3` and parent `.11.4`.
+- active_leaf: `FUTURE-PARITY-BACKLOG.11.4.3` — signoff-complete Rust generic final-block equivalence and parent
+  closeout from clean `ebb8301c`; no behavior remains in flight inside the leaf.
+- active_scope: Rust generic final-codeblock equivalence is complete across helper, typed user-function, receiver,
+  and tree surfaces plus native/compiled/generated/emitted roles; this commit is the durable closeout boundary.
+- active_progress: one metadata registry normalizes attached/direct-parenthesized candidates after complete
+  builtin/user metadata; typed staged kinds, descriptor v3, semantic state, generated plans, and emitted Rust share
+  the existing dynamic executor. Neutral 7/11/9/7/4/8, Perl 10/10, Rust 18/18, core 195, descriptor 4, punctuation
+  5, clippy, complete Rust packages/classifiers/197 integrations/build/storage/CLI 66x2, KM 761/6,175, mdBook,
+  seven doctrines, and canonical Phase 0 1,031/1,031 in 639 seconds pass with exact cleanup.
+- active_exclusions: lexical capture, capability promotion, MCP changes, Dart/Julia/Lua behavior, unrelated helper
+  expansion, or push in `.11.4.3`.
+- next_after_clean_commit: durably route the approved self-contained-language and EBNF-profile directions, commit
+  that task-tree-owned record cleanly, then activate Dart callable construction `.11.5.1`; no push.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -44,12 +46,13 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - latest_bootstrap_read: 2026-07-30 — required resume pointers, active task/ADR/KM/Toolbox, contract/binding/server/
   consumer/driver/ledger/storage/canonical owners refreshed; roadmap/codebase/all 46 mdBook pages remain read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
-- push_policy: hard lock at 300 new local commits; counter 105/300 after `91958022`; no push.
+- push_policy: hard lock at 300 new local commits; counter 106/300 after `ebb8301c`; no push.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; canonical needs nested macOS sandbox permission and up to 30m.
-- canonical_state: `.11.4.2` canonical passes all 7 doctrines, exact semantic/MCP/callable contracts and admissions,
-  containment/moved-root, CLI 66x2, RAM 44%, and Phase 0 1,031/1,031 in 763s. Full Rust gate separately passes
-  all packages, long classifiers, primary build, storage, and CLI 66x2. Book builds; KM 760/6,165.
-- blockers: none; commit `.11.4.2`, clear brief/prove clean, then activate `.11.4.3` from that clean boundary.
+- canonical_state: `.11.4.3` canonical passes all 7 doctrines, exact contract/admission, containment/moved-root,
+  CLI 66x2, and Phase 0 1,031/1,031 in 639s; its bounded tail did not retain the RAM line. Full Rust separately
+  passes all packages, long classifiers, primary build, storage, and CLI 66x2. Book 79/13,880; KM 761/6,175.
+- blockers: none; commit/brief-clear/clean `.11.4.3`, then route the director's self-contained-language/EBNF-profile
+  directions durably before activating `.11.5.1` without push.

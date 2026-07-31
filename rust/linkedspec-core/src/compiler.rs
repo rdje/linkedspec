@@ -51,6 +51,8 @@ pub fn compile(spec: &SpecFile) -> Result<CompiledSpec> {
         rules.push(compile_rule(rule)?);
     }
     let mut compiled = CompiledSpec { functions, rules };
+    crate::callable_contract::normalize_compiled_spec(&mut compiled)
+        .map_err(LinkedSpecError::Compile)?;
     validate_no_removed_aggregate_selectors(&compiled)?;
     build_dependency_regex_map(&mut compiled)?;
     validate_compiled_regex_slot_identities(&compiled)?;
@@ -157,6 +159,8 @@ fn compile_with_events(spec: &SpecFile, trace: &mut TraceEmitter) -> Result<Comp
     }
 
     let mut compiled = CompiledSpec { functions, rules };
+    crate::callable_contract::normalize_compiled_spec(&mut compiled)
+        .map_err(LinkedSpecError::Compile)?;
     validate_no_removed_aggregate_selectors(&compiled)?;
     let edge_only_entries = compiled
         .rules
@@ -349,7 +353,7 @@ fn compile_function(function: &crate::ast::FunctionDefinition) -> Result<Compile
             ))
         })?
     } else {
-        CodeBlock::parse(&function.body_source).map_err(|e| {
+        CodeBlock::parse_with_callable_candidates(&function.body_source).map_err(|e| {
             LinkedSpecError::Compile(format!(
                 "function '{}': failed to parse body code: {e}",
                 function.name
@@ -361,6 +365,7 @@ fn compile_function(function: &crate::ast::FunctionDefinition) -> Result<Compile
         name: function.name.clone(),
         params: function.params.clone(),
         arity: function.arity,
+        parameter_kinds: function.parameter_kinds.clone(),
         signature: function.signature.clone(),
         body,
         body_source: function.body_source.clone(),
@@ -378,7 +383,7 @@ fn parse_rule_code_block(
     code_kind: &str,
     code: &str,
 ) -> Result<Option<CodeBlock>> {
-    match CodeBlock::parse(code) {
+    match CodeBlock::parse_with_callable_candidates(code) {
         Ok(block) => Ok(Some(block)),
         Err(err) if is_unsupported_actionir_helper_error(&err) => Err(LinkedSpecError::Compile(
             format!("rule '{rule_label}': failed to parse {code_kind} code: {err}"),
@@ -750,6 +755,7 @@ mod tests {
             name: name.to_string(),
             params: params.iter().map(|param| param.to_string()).collect(),
             arity: params.len(),
+            parameter_kinds: Default::default(),
             signature: None,
             body_source: body_source.to_string(),
             body_payload: None,

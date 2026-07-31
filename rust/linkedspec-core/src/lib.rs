@@ -11,6 +11,7 @@
 //! The Rust implementation is idiomatic Rust — it does NOT mimic Perl internals.
 
 pub mod ast;
+pub mod callable_contract;
 pub mod compiler;
 pub mod descriptor;
 pub mod entry_rule;

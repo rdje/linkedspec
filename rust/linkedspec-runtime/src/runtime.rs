@@ -175,6 +175,10 @@ pub(crate) enum CallableCodeblockFailure {
         callable_name: String,
         value_kind: &'static str,
     },
+    FinalArgumentNotCodeblock {
+        callable_name: String,
+        value_kind: &'static str,
+    },
     Recursion {
         callable_name: String,
         cycle: Vec<String>,
@@ -409,6 +413,18 @@ impl RuntimeContext {
                     value_kind,
                 } => (
                     "value_not_callable",
+                    Some(callable_name),
+                    None,
+                    None,
+                    Some(value_kind),
+                    None,
+                    None,
+                ),
+                CallableCodeblockFailure::FinalArgumentNotCodeblock {
+                    callable_name,
+                    value_kind,
+                } => (
+                    "final_argument_not_codeblock",
                     Some(callable_name),
                     None,
                     None,

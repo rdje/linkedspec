@@ -104,6 +104,8 @@ pub struct CompiledFunctionDescriptor {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub arity: Option<usize>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub parameter_kinds: Option<std::collections::BTreeMap<String, String>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub signature: Option<crate::ast::CallableSignature>,
     pub source_text: String,
     pub source_span: SourceSpan,
@@ -164,13 +166,21 @@ impl CompiledSpec {
                     CompiledFunctionDescriptor {
                         index,
                         kind: "user_function_definition".to_string(),
-                        version: if function.signature.is_some() { 2 } else { 1 },
+                        version: if !function.parameter_kinds.is_empty() {
+                            3
+                        } else if function.signature.is_some() {
+                            2
+                        } else {
+                            1
+                        },
                         name: function.name.clone(),
                         params: function
                             .signature
                             .is_none()
                             .then(|| function.params.clone()),
                         arity: function.signature.is_none().then_some(function.arity),
+                        parameter_kinds: (!function.parameter_kinds.is_empty())
+                            .then(|| function.parameter_kinds.clone()),
                         signature: function.signature.clone(),
                         source_text: function.source.clone(),
                         source_span: function.source_span.clone(),

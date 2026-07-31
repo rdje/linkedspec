@@ -632,6 +632,284 @@ Done:
     assert_eq!(actual[0]["cb"]["kind"], "codeblock_literal");
 }
 
+fn final_codeblock_equivalence_source() -> &'static str {
+    r#"fn apply(value, callback: codeblock) { return(callback()) }
+fn invoke(value, callback: codeblock) { return(callback(value)) }
+
+Top::
+ /x/
+ E {
+   return([
+     with("x") { return(cat(value, "!")) },
+     with("x", { return(cat(value, "!")) }),
+     with("x", {|item| return(cat(item, "!")) }),
+     "x".with() { return(cat(value, "!")) },
+     "x".with({ return(cat(value, "!")) }),
+     "x".with({|item| return(cat(item, "!")) }),
+     apply("a") { return(cat(value, "!")) },
+     apply("b", { return(cat(value, "?")) }),
+     invoke("c", {|item| return(cat(item, ".")) }),
+     { "b" : 2, "a" : 1 }.map_leaves() { return(cat(value, "!")) },
+     { "b" : 2, "a" : 1 }.map_leaves({ return(cat(value, "!")) })
+   ])
+ }
+"#
+}
+
+fn final_codeblock_direct_expected() -> Value {
+    json!(["x!", "x!", "x!", "x!", "x!", "x!", "a!", "b?", "c.", {
+        "a": "1!", "b": "2!"
+    }, {
+        "a": "1!", "b": "2!"
+    }])
+}
+
+fn final_codeblock_accumulator_expected() -> Value {
+    json!([final_codeblock_direct_expected()])
+}
+
+#[test]
+fn typed_definition_and_contextual_ast_are_metadata_owned() {
+    let compiled = compile_source(final_codeblock_equivalence_source());
+    let descriptor = serde_json::to_value(compiled.descriptor_state()).unwrap();
+    let apply = &descriptor["functions"]["apply"];
+    assert_eq!(apply["version"], 3);
+    assert_eq!(apply["params"], json!(["value", "callback"]));
+    assert_eq!(apply["arity"], 2);
+    assert_eq!(apply["parameter_kinds"], json!({"callback": "codeblock"}));
+    assert_eq!(
+        apply["body_payload"]["parameter_kinds"],
+        json!({"callback": "codeblock"})
+    );
+    assert_eq!(
+        apply["body_parse_job"]["parameter_kinds"],
+        json!({"callback": "codeblock"})
+    );
+
+    let block = compiled.rules[0].ecode.as_ref().unwrap();
+    let Expr::Call { name, args } = &block.statements[0].expr else {
+        panic!("expected return call");
+    };
+    assert_eq!(name, "return");
+    let Expr::ArrayLiteral { items } = args[0].value() else {
+        panic!("expected returned array");
+    };
+    for (attached_index, parenthesized_index) in [(0, 1), (3, 4), (9, 10)] {
+        let attached = serde_json::to_value(&items[attached_index]).unwrap();
+        let parenthesized = serde_json::to_value(&items[parenthesized_index]).unwrap();
+        let attached_argument = final_argument(&attached);
+        let parenthesized_argument = final_argument(&parenthesized);
+        for field in ["kind", "version", "signature", "body_source", "body_ast"] {
+            assert_eq!(
+                attached_argument[field], parenthesized_argument[field],
+                "field {field} for pair {attached_index}/{parenthesized_index}"
+            );
+        }
+        assert_eq!(attached_argument["kind"], "codeblock_argument");
+        assert_eq!(
+            attached_argument["signature"]["positional_params"],
+            json!([])
+        );
+        assert_eq!(attached_argument["signature"]["max_arity"], 0);
+    }
+    let user_attached_value = serde_json::to_value(&items[6]).unwrap();
+    let user_parenthesized_value = serde_json::to_value(&items[7]).unwrap();
+    let user_attached = final_argument(&user_attached_value);
+    let user_parenthesized = final_argument(&user_parenthesized_value);
+    assert_eq!(user_attached["kind"], "codeblock_argument");
+    assert_eq!(user_parenthesized["kind"], "codeblock_argument");
+    assert_eq!(
+        final_argument(&serde_json::to_value(&items[2]).unwrap())["kind"],
+        "codeblock_literal"
+    );
+    assert!(
+        !serde_json::to_string(&compiled)
+            .unwrap()
+            .contains("contextual_codeblock_candidate")
+    );
+
+    let index = SemanticIndex::from_utf8(
+        final_codeblock_equivalence_source().as_bytes(),
+        SemanticIndexOptions::new("final-codeblock.spec", SemanticSourceDetail::None),
+    )
+    .unwrap();
+    let response = index.query_neutral(&json!({
+        "contract": "linkedspec-semantic-query-v1",
+        "operation": "list",
+        "subjects": [],
+        "record_kinds": ["function"],
+        "relation_kinds": [],
+        "direction": "outgoing",
+        "page": {"after_id": null, "limit": 100},
+        "budget": {"max_records": 1000, "max_relations": 2000, "max_depth": 4},
+        "source": {"detail": "none", "include_content_digest": false}
+    }));
+    assert!(response.ok, "{:?}", response.diagnostics);
+    let function = response
+        .records
+        .iter()
+        .find(|record| record.name.as_deref() == Some("apply"))
+        .unwrap();
+    assert_eq!(
+        function.facts["parameter_kinds"],
+        json!(["value", "codeblock"])
+    );
+    assert_eq!(function.facts["signature"]["final_codeblock"], true);
+}
+
+fn final_argument(expression: &Value) -> &Value {
+    if expression["kind"] == "call" {
+        return expression["args"].as_array().unwrap().last().unwrap();
+    }
+    expression["calls"][0]["args"]
+        .as_array()
+        .unwrap()
+        .last()
+        .unwrap()
+}
+
+#[test]
+fn contextual_forms_execute_in_native_reconstructed_and_generated_paths() {
+    let compiled = compile_source(final_codeblock_equivalence_source());
+    let expected = final_codeblock_accumulator_expected();
+    assert_eq!(
+        Engine::new(compiled.clone()).execute("x").unwrap(),
+        expected
+    );
+    let encoded = serde_json::to_string(&compiled).unwrap();
+    let reconstructed: CompiledSpec = serde_json::from_str(&encoded).unwrap();
+    assert_eq!(Engine::new(reconstructed).execute("x").unwrap(), expected);
+    assert_eq!(
+        execute_generated_parser(&encoded, &generated_plan(&compiled), "x").unwrap(),
+        expected
+    );
+}
+
+#[test]
+fn metadata_normalization_preserves_ordinary_eager_blocks() {
+    let source = r#"fn choose(first, second) { return(first) }
+
+Top::
+ /x/
+ E { return(choose({ value = "eager"; return(value) }, "ignored")) }
+"#;
+    let compiled = compile_source(source);
+    let encoded = serde_json::to_string(&compiled).unwrap();
+    assert!(!encoded.contains("contextual_codeblock_candidate"));
+    assert!(encoded.contains("block_value"));
+    assert_eq!(
+        Engine::new(compiled).execute("x").unwrap(),
+        json!(["eager"])
+    );
+
+    let unknown_attached = r#"Top::
+ /x/
+ E { return(custom("x") { return(value) }) }
+"#;
+    let parsed = parse_spec_with_user_functions(unknown_attached).unwrap();
+    validate(&parsed).unwrap();
+    let error = compile(&parsed).unwrap_err().to_string();
+    assert!(error.contains("callable_contract_rejected"), "{error}");
+    assert!(error.contains("custom"), "{error}");
+}
+
+#[test]
+fn invalid_typed_declarations_and_final_values_keep_neutral_codes() {
+    for case in contract()["final_codeblock_parameter_declaration"]["invalid"]
+        .as_array()
+        .unwrap()
+    {
+        let source = format!(
+            "Top::\n /x/\n\nfn invalid({}) {{ return(undef) }}\n",
+            case["source"].as_str().unwrap()
+        );
+        let error = parse_spec_with_user_functions(&source).unwrap_err();
+        assert!(
+            error.contains(case["expected_code"].as_str().unwrap()),
+            "{}: {error}",
+            case["id"]
+        );
+    }
+
+    for (name, expression) in [
+        ("typed_function", "apply(\"x\", { \"value\" : value })"),
+        ("helper", "with(\"x\", { \"value\" : value })"),
+        ("receiver", "\"x\".with({ \"value\" : value })"),
+    ] {
+        let source = format!(
+            "fn apply(value, callback: codeblock) {{ return(callback()) }}\n\nTop::\n /x/\n E {{ return({expression}) }}\n"
+        );
+        let error = Engine::new(compile_source(&source))
+            .execute_with_diagnostics("x")
+            .unwrap_err();
+        assert_eq!(
+            error.diagnostic().code.as_deref(),
+            Some("final_argument_not_codeblock"),
+            "{name}"
+        );
+        assert_eq!(
+            error.diagnostic().value_kind.as_deref(),
+            Some("harray"),
+            "{name}"
+        );
+    }
+}
+
+#[test]
+fn standalone_emitted_source_executes_contextual_equivalence() {
+    let compiled = compile_source(final_codeblock_equivalence_source());
+    let emitted = emit_rust_source_v2(&compiled, "callable-codeblock/final-equivalence.spec")
+        .expect("emit final-codeblock equivalence");
+    let expected_literal = format!(
+        "{:?}",
+        serde_json::to_string(&final_codeblock_direct_expected()).unwrap()
+    );
+    let module = format!(
+        r#"{emitted}
+
+#[cfg(test)]
+mod emitted_final_codeblock_tests {{
+    #[test]
+    fn contextual_equivalence_is_exact() {{
+        let expected: serde_json::Value = serde_json::from_str({expected_literal}).unwrap();
+        assert_eq!(super::execute("x").unwrap(), expected);
+    }}
+}}
+"#
+    );
+    let project = GeneratedTestProject::new();
+    fs::write(
+        project.root.join("Cargo.toml"),
+        r#"[package]
+name = "linkedspec_final_codeblock_emitted"
+version = "0.0.0"
+edition = "2024"
+
+[dependencies]
+linkedspec-runtime = { path = "../../../linkedspec-runtime" }
+serde_json = "1"
+
+[workspace]
+"#,
+    )
+    .unwrap();
+    fs::write(project.root.join("src/lib.rs"), module).unwrap();
+    let output = Command::new("cargo")
+        .arg("test")
+        .arg("--offline")
+        .arg("--quiet")
+        .env("CARGO_TARGET_DIR", project.root.join("target"))
+        .current_dir(&project.root)
+        .output()
+        .unwrap();
+    assert!(
+        output.status.success(),
+        "standalone final-codeblock test failed\nstdout:\n{}\nstderr:\n{}",
+        String::from_utf8_lossy(&output.stdout),
+        String::from_utf8_lossy(&output.stderr)
+    );
+}
+
 #[test]
 fn semantic_binding_descriptor_retains_the_callable_signature() {
     let source = b"fn make() { cb = {|left, ...items| return(left) }; return(cb) }\n\nTop::\n /x/ E { return(make()) }\n";

@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-30` (public semantic/MCP no-drift `.10.10` is active task-tree-first from clean MCP
-  parent closeout commit `b41e047e`)
+- Last updated: `2026-07-30` (Rust generic callable final-block closeout `.11.4.3` is active task-tree-first from
+  clean dynamic-invocation commit `ebb8301c`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -15286,7 +15286,7 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.11.3.4 - close Perl callable codeblocks`
 
 - ID: `FUTURE-PARITY-BACKLOG.11.4`
-  Status: `active`
+  Status: `done`
   Goal: Implement the unchanged callable-codeblock contract on Rust native and generated execution.
   Children: `.11.4.1`, `.11.4.2`, `.11.4.3`
   Dependencies: `.11.3`
@@ -15318,7 +15318,7 @@ before implementation.
   Commit: `FUTURE-PARITY-BACKLOG.11.4.2 - execute Rust callable codeblocks`
 
 - ID: `FUTURE-PARITY-BACKLOG.11.4.3`
-  Status: `pending`
+  Status: `done`
   Goal: Close Rust generic final-block equivalence, generated execution, oracle, docs, and full gates.
   Acceptance: Signature-governed attached/contextual forms and retained `with` pass native/generated/oracle paths.
 
@@ -15449,6 +15449,67 @@ calls, all seven invalid calls, native state, compiled-JSON reconstruction, gene
 compiled emitted Rust; it also proves standalone discard, static precedence, recursive copy, failure cleanup, and
 colon-keyword user-function policy. Variadic 7/7, semantic query 5/5, and the existing generic unknown-helper unit
 regression pass. Generic attached/parenthesized final-block normalization remains untouched for `.11.4.3`.
+
+### `FUTURE-PARITY-BACKLOG.11.4.3` Acceptance Checklist
+
+- [x] **CLEAN ACTIVATION / DURABLE HANDOFF** — Activate only from clean `.11.4.2` commit `ebb8301c`, with the
+  brief at zero bytes and generated residue absent; update the task-tree frontier and bounded resume pointer before
+  touching parser/runtime behavior.
+- [x] **KNOWLEDGE / TOOL-LED BASELINE** — Retrieve ADRs `0031`/`0032`, neutral callable contracts/fixture, Perl
+  generic-final-block facts, Rust construction/invocation facts, and current trailing-block parser/runtime owners;
+  use the neutral checker and LinkedSpec probes to classify exact helper, user-function, receiver, and `with`
+  behavior before editing.
+- [x] **SIGNATURE-GOVERNED EQUIVALENCE** — Normalize `call(args) { block }` and `call(args, { block })` to the
+  same typed final codeblock argument only where callable metadata accepts it; preserve ordinary eager blocks,
+  harrays, retained immediate `with`, static-name precedence, and explicit codeblock-variable calls.
+- [x] **NATIVE / GENERATED / ORACLE CLOSURE** — Prove every governed contextual form and rejection through native,
+  compiled-JSON reconstruction, generated-plan, independently compiled emitted Rust, and neutral oracle identity;
+  add no host closure, captured environment, backend dialect, or duplicated evaluator.
+- [x] **NO-DRIFT REGRESSION** — Preserve all `.11.4.1-.2` literals, spans, dynamic caller stores, copy/restore,
+  results/chaining/discard, failures/recursion, variadic functions, semantic projection, and generic unknown-helper
+  behavior while completing the Rust contract surface.
+- [x] **SIGNOFF / DOCS / COMMIT / CLEAN HANDOFF** — Pass focused and complete Rust gates plus warranted canonical
+  proof; synchronize task/roadmap/live/Knowledge Map/mdBook/Rust docs; remove exact generated output; commit with
+  `.11.4.3`, clear the brief, prove clean, close parent `.11.4`, and only then activate Dart `.11.5.1`; do not push
+  before cadence 300.
+
+Activation 2026-07-30: clean dynamic-invocation commit `ebb8301c` closes `.11.4.2` at 106/300 with an empty brief,
+empty status, and no mdBook/emitted-source residue. `.11.4.3` owns only generic signature-governed final-block
+equivalence and Rust closeout.
+
+Baseline 2026-07-30: ADRs `0031`/`0032`, the six callable-codeblock/normalization fact cards, the exact neutral
+contract, Perl callable registry/runtime/lowering owners, and the Rust parser/compiler/runtime/emitter owners are
+retrieved. The neutral checker passes 7 literals / 11 calls / 9 invalid literals / 7 invalid calls / 4 invalid
+declarations / 8 contextual forms; the unchanged Rust callable suite passes 13/13. Tool-led inspection establishes
+the exact gap: Rust still name-gates attached blocks to helper `with` and four receiver methods, stores immediate
+callbacks as eager `BlockValue`, exposes no final `parameter_kinds`, cannot consume the staged typed-function AST,
+and its `with`/tree runtime accepts only eager blocks. The correct repair is one core callable-contract registry,
+generic structural candidates with source provenance, compiler normalization using builtin or typed-user metadata,
+one typed `codeblock_argument`, and the existing dynamic codeblock executor—not parser allowlists, another evaluator,
+or harray promotion. Invalid typed declarations must preserve the four neutral diagnostic codes, and typed final
+values must reject non-codeblocks as `final_argument_not_codeblock` before function execution.
+
+Implementation proof 2026-07-30: `linkedspec-core::callable_contract` is the single registry/normalization owner.
+The compiler parse mode records attached and direct parenthesized candidates with exact character-coordinate
+provenance, then complete builtin/user metadata admits only a declared final codeblock; the established public
+`CodeBlock::parse` mode retains eager blocks and legacy diagnostics. Typed declarations flow from the staged
+`user_function_definition.spec` AST through exact `parameter_kinds`, compiled state, descriptor v3, semantic
+projection, generated plans, and emitted source. Helper `with`, receiver `with`, tree callbacks, and typed user
+functions all enter the existing dynamic codeblock executor; explicit callable values retain authored signatures,
+and non-codeblock final values fail as `final_argument_not_codeblock`.
+
+Focused proof passes neutral 7 literals / 11 calls / 9 invalid literals / 7 invalid calls / 4 invalid declarations /
+8 contextual forms, Perl oracle 10/10, Rust callable 18/18, descriptor integration 4/4, punctuation-light 5/5,
+core 195/195, and production-library clippy under the repository warning policy. The first complete Rust run
+exposed staged `action_block` envelope loss; normalization now merges semantic statements while preserving opaque
+staged metadata. The second run exposed malformed bare-control diagnostic drift; the dedicated control parser now
+retains the established statement-separator boundary without weakening valid controls. The final complete Rust
+gate exits zero across every package, corpus oracle in 148.33 seconds, generated-source classifier in 192.45
+seconds, 197 main integrations, semantic/MCP recurrences, emitted-source suites, build, the 195-package/17-owner
+storage proof, and CLI 66/66 in both option environments. Knowledge Map generation/checking passes at 761 facts /
+6,175 question keys, the mdBook renders 79 files / 13,880 KiB before exact output cleanup, and all seven doctrines
+pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] local CI gate passed`. This closes
+`.11.4.3` and Rust parent `.11.4`; Dart `.11.5.1` remains next only after commit, brief-clear, and clean proof.
 
 ### `FUTURE-PARITY-BACKLOG.11.1` Acceptance Checklist
 

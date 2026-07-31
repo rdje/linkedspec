@@ -438,7 +438,15 @@ resolution only after controls, helpers, and registered functions. `RuntimeConte
 snapshots and the ordered active-codeblock stack; the engine deep-copies fixed/rest values, evaluates the retained
 typed body in the same caller context, restores parameters/active identity on every exit, and maps exact portable
 failure fields into the existing structured diagnostic envelope. Native, reconstructed, generated-plan, and
-emitted-source execution all reuse this owner; generic final-block normalization remains `.11.4.3`.
+emitted-source execution all reuse this owner.
+
+`linkedspec_core::callable_contract` owns Rust contextual final-codeblock admission. The compiler-facing
+`CodeBlock::parse_with_callable_candidates` records attached/parenthesized provenance without granting semantics;
+the completed builtin/user-function registry then normalizes only an accepted final candidate to
+`codeblock_argument`. Public `CodeBlock::parse` retains established eager blocks and builtin syntax, and dedicated
+attached-control parsing keeps `if`/`switch`/`while` outside the generic candidate path. The same normalization
+restores ordinary parenthesized blocks, rejects unknown attached callees, projects version-3 final
+`parameter_kinds`, and routes execution through the dynamic evaluator above rather than a second block runtime.
 
 `LinkedSpec::CallableContract` is the Perl metadata owner for contextual final-codeblock acceptance. It declares
 the final `codeblock` slot and pre-codeblock arity for governed helpers and receiver methods, projects the same

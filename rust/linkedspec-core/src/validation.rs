@@ -954,6 +954,7 @@ mod tests {
             name: name.to_string(),
             params: params.iter().map(|param| param.to_string()).collect(),
             arity: params.len(),
+            parameter_kinds: Default::default(),
             signature: None,
             body_source: "return(value)".to_string(),
             body_payload: None,

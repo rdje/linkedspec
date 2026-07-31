@@ -33,7 +33,7 @@ The older helper spellings `declare(...)`, declaration aliases, `assign(...)`, `
 `s(...)` / `a(...)` / `h(...)` are retired from current `.spec` authoring. The Perl reference and Rust backend now
 diagnose the remaining retired helper calls instead of executing them successfully.
 
-The Perl reference also supports explicit deferred codeblock values:
+The Perl reference and Rust backend support explicit deferred codeblock values:
 
 ```text
 decorate = {|value| return(cat(value, "!")) }
@@ -45,7 +45,7 @@ arguments left-to-right, temporarily binds copied fixed parameters and an option
 against the caller's current nonparameter working variables, restores parameter names, and returns the block-local
 result. Standalone calls discard the result but retain other mutations. Governed helpers and registered user
 functions keep precedence over same-named variables. This explicit literal/invocation surface is current only on
-Perl. Perl also accepts a final contextual codeblock only where callable metadata declares it:
+Perl and Rust. Both also accept a final contextual codeblock only where callable metadata declares it:
 
 ```text
 fn apply(value, callback: codeblock) { return(callback()) }
@@ -56,7 +56,8 @@ same = apply("ready", { return(cat(value, "!")) })
 The declaration is only `callback: codeblock`; it does not repeat the callback's argument list. Both contextual
 forms create a zero-positional codeblock that reads dynamic context. An explicit `{|value| ...}` keeps and enforces
 its own signature, and `{ "key" : value }` remains an harray rather than being promoted by position. This generic
-final-block behavior is current only on Perl; Rust/Dart/Julia/Lua rollout remains task-tree-owned future work.
+final-block behavior is current on Perl and Rust. Dart and Julia rollout, plus the remaining separately documented
+Lua callable-value work, remain task-tree-owned future work.
 
 The LinkedSpec Book under `docs/linkedspec-book/src/` is the current user-facing surface for new examples. The
 repo-root `USER_GUIDE_ActionIR_*.md` files are still useful implementation and migration references, but many of

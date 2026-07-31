@@ -49,12 +49,20 @@ use linkedspec_core::entry_rule::{
 use linkedspec_core::expr::{AccessSegment, Arg, CodeBlock, Expr};
 use linkedspec_core::trace::{TraceConfig, TraceEmitter, TraceLevel};
 use linkedspec_core::types::{
-    BcodeEntry, CompiledRule, CompiledSpec, CompiledUserFunction, ParseMode, RuntimeValue,
+    BcodeEntry, CodeblockValue, CompiledRule, CompiledSpec, CompiledUserFunction, ParseMode,
+    RuntimeValue,
 };
 use serde_json::Value;
 use std::fmt;
 
 const LINKEDSPEC_WHILE_ITERATION_LIMIT: usize = 10_000;
+
+#[derive(Debug, Clone)]
+struct TreeCodeblockCallback {
+    name: String,
+    value: CodeblockValue,
+    pass_leaf_value: bool,
+}
 
 /// Internal invariant failure raised when ordered matching reports an identity
 /// other than the structural slot the sequence already required.
@@ -3277,7 +3285,12 @@ impl Engine {
             Expr::BlockValue { block } => Self::block_calls_rule(block, rule_label),
             // Construction is inert. A call inside the retained body is not an
             // eager dependency of the expression that creates the codeblock.
-            Expr::CodeblockLiteral(_) => false,
+            Expr::ContextualCodeblockCandidate(_) | Expr::CodeblockLiteral(_) => false,
+            Expr::CodeblockArgument(argument) => argument
+                .body_ast
+                .statements
+                .iter()
+                .any(|statement| Self::expr_calls_rule(&statement.expr, rule_label)),
             Expr::FluentChain { receiver, calls } => {
                 Self::expr_calls_rule(receiver, rule_label)
                     || calls.iter().any(|call| {
@@ -3345,7 +3358,12 @@ impl Engine {
             Expr::BlockValue { block } => Self::block_reads_retv(block),
             // Construction is inert. A retv read inside the retained body does
             // not make the creating expression depend on an action-edge child.
-            Expr::CodeblockLiteral(_) => false,
+            Expr::ContextualCodeblockCandidate(_) | Expr::CodeblockLiteral(_) => false,
+            Expr::CodeblockArgument(argument) => argument
+                .body_ast
+                .statements
+                .iter()
+                .any(|statement| Self::expr_reads_retv(&statement.expr)),
             Expr::FluentChain { receiver, calls } => {
                 Self::expr_reads_retv(receiver)
                     || calls
@@ -3446,8 +3464,6 @@ impl Engine {
         method: &str,
         args: &str,
     ) -> Result<Vec<linkedspec_core::expr::Arg>, String> {
-        use linkedspec_core::expr::Expr;
-
         let code = if args.trim().is_empty() {
             format!("{method}()")
         } else {
@@ -4627,6 +4643,20 @@ impl Engine {
                         .iter()
                         .map(|a| self.eval_expr(a.value(), ctx, rule_label))
                         .collect::<Result<Vec<_>, _>>()?;
+                    if let Some(final_name) = function.params.last()
+                        && function.parameter_kinds.get(final_name).map(String::as_str)
+                            == Some("codeblock")
+                    {
+                        let final_value = evaluated.last().expect(
+                            "typed final-codeblock function arity was validated before evaluation",
+                        );
+                        self.require_final_codeblock_value(
+                            &function.name,
+                            final_value,
+                            ctx,
+                            rule_label,
+                        )?;
+                    }
                     return self.execute_user_function(function, &evaluated, ctx);
                 }
                 // Normal eager evaluation for all other helpers
@@ -4693,9 +4723,14 @@ impl Engine {
                 Ok(RuntimeValue::Hash(values))
             }
             Expr::BlockValue { block } => self.eval_block_value(block, ctx, rule_label),
-            Expr::CodeblockLiteral(literal) => Ok(RuntimeValue::Codeblock(
-                linkedspec_core::types::CodeblockValue::new(literal.clone()),
+            Expr::ContextualCodeblockCandidate(_) => Err(format!(
+                "unnormalized contextual codeblock candidate reached runtime in rule '{rule_label}'"
             )),
+            Expr::CodeblockArgument(literal) | Expr::CodeblockLiteral(literal) => {
+                Ok(RuntimeValue::Codeblock(
+                    linkedspec_core::types::CodeblockValue::new(literal.clone()),
+                ))
+            }
             Expr::StringLiteral { value } => Ok(RuntimeValue::Scalar(value.clone())),
             Expr::NumberLiteral { value } => Ok(RuntimeValue::Number(*value)),
             Expr::BooleanLiteral { value } => Ok(RuntimeValue::Bool(*value)),
@@ -4830,6 +4865,29 @@ impl Engine {
         result.map_err(|err| format!("user function '{}': {}", function.name, err))
     }
 
+    fn require_final_codeblock_value(
+        &self,
+        callable_name: &str,
+        value: &RuntimeValue,
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<CodeblockValue, String> {
+        let RuntimeValue::Codeblock(codeblock) = value else {
+            let value_kind = RuntimeContext::binding_value_kind(value);
+            ctx.capture_callable_codeblock_failure(
+                rule_label,
+                CallableCodeblockFailure::FinalArgumentNotCodeblock {
+                    callable_name: callable_name.to_string(),
+                    value_kind,
+                },
+            );
+            return Err(format!(
+                "final_argument_not_codeblock callable_name={callable_name:?} value_kind={value_kind:?} rule_label={rule_label:?}"
+            ));
+        };
+        Ok(codeblock.clone())
+    }
+
     fn execute_bound_codeblock_call(
         &self,
         name: &str,
@@ -4874,6 +4932,17 @@ impl Engine {
             )));
         }
 
+        Some(self.execute_codeblock_value(name, &codeblock, args, ctx, rule_label))
+    }
+
+    fn execute_codeblock_value(
+        &self,
+        name: &str,
+        codeblock: &CodeblockValue,
+        args: &[RuntimeValue],
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
         let literal = codeblock.literal();
         let signature = &literal.signature;
         let arity_matches = args.len() >= signature.min_arity
@@ -4895,10 +4964,10 @@ impl Engine {
                     got: args.len(),
                 },
             );
-            return Some(Err(format!(
+            return Err(format!(
                 "codeblock_arity_mismatch callable_name={name:?} expected={expected:?} got={} rule_label={rule_label:?}",
                 args.len()
-            )));
+            ));
         }
 
         if let Err(cycle) = ctx.enter_codeblock(name) {
@@ -4909,9 +4978,9 @@ impl Engine {
                     cycle: cycle.clone(),
                 },
             );
-            return Some(Err(format!(
+            return Err(format!(
                 "codeblock_recursion_unsupported callable_name={name:?} cycle={cycle:?} rule_label={rule_label:?}"
-            )));
+            ));
         }
 
         let mut bindings = Vec::with_capacity(
@@ -4934,7 +5003,7 @@ impl Engine {
             ctx.exit_scoped_variable_binding(binding);
         }
         ctx.exit_codeblock(name);
-        Some(result.map_err(|error| format!("codeblock '{name}': {error}")))
+        result.map_err(|error| format!("codeblock '{name}': {error}"))
     }
 
     fn is_statement_only_array_end_mutation_method(method: &str) -> bool {
@@ -5235,13 +5304,7 @@ impl Engine {
     }
 
     fn is_receiver_with_trailing_block_call(call: &linkedspec_core::expr::FluentCall) -> bool {
-        use linkedspec_core::expr::{Arg, Expr};
-
-        call.method == "with"
-            && matches!(
-                call.args.last(),
-                Some(Arg::Positional(Expr::BlockValue { .. }))
-            )
+        call.method == "with" && call.args.len() == 1
     }
 
     fn is_tree_traversal_receiver_method(method: &str) -> bool {
@@ -5295,8 +5358,6 @@ impl Engine {
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<RuntimeValue, String> {
-        use linkedspec_core::expr::Expr;
-
         if Self::is_tree_traversal_receiver_method(&call.method) {
             return self.eval_tree_receiver_trailing_block_call(current, call, ctx, rule_label);
         }
@@ -5306,14 +5367,23 @@ impl Engine {
                 "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:with: receiver `.with() {{ ... }}` expects no parenthesized arguments in rule '{rule_label}'"
             ));
         }
-        let Expr::BlockValue { block } = call.args[0].value() else {
-            return Err(format!(
-                "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:with: receiver `.with()` requires a trailing block argument in rule '{rule_label}'"
-            ));
-        };
-
-        let binding = ctx.enter_scoped_scalar_binding("value", current);
-        let result = self.eval_block_value(block, ctx, rule_label);
+        let callback_expr = call.args[0].value();
+        let pass_receiver = !matches!(
+            callback_expr,
+            linkedspec_core::expr::Expr::CodeblockArgument(_)
+        );
+        let binding = ctx.enter_scoped_scalar_binding("value", current.clone());
+        let result = (|| {
+            let callback = self.eval_expr(callback_expr, ctx, rule_label)?;
+            let callback =
+                self.require_final_codeblock_value("with", &callback, ctx, rule_label)?;
+            let args = if pass_receiver {
+                vec![current]
+            } else {
+                Vec::new()
+            };
+            self.execute_codeblock_value("with", &callback, &args, ctx, rule_label)
+        })();
         ctx.exit_scoped_variable_binding(binding);
         result
     }
@@ -5325,13 +5395,8 @@ impl Engine {
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<RuntimeValue, String> {
-        use linkedspec_core::expr::Expr;
-
         let method = call.method.as_str();
         let Some(block_arg) = call.args.last() else {
-            return Err(Self::tree_receiver_malformed_message(method, rule_label));
-        };
-        let Expr::BlockValue { block } = block_arg.value() else {
             return Err(Self::tree_receiver_malformed_message(method, rule_label));
         };
 
@@ -5346,24 +5411,43 @@ impl Engine {
             _ => return Ok(RuntimeValue::Undef),
         }
 
+        let initial_acc = if method == "reduce_leaves" {
+            Some(self.eval_expr(call.args[0].value(), ctx, rule_label)?)
+        } else {
+            None
+        };
+
+        let pass_leaf_value = !matches!(
+            block_arg.value(),
+            linkedspec_core::expr::Expr::CodeblockArgument(_)
+        );
+        let callback = self.eval_expr(block_arg.value(), ctx, rule_label)?;
+        let callback = TreeCodeblockCallback {
+            name: method.to_string(),
+            value: self.require_final_codeblock_value(method, &callback, ctx, rule_label)?,
+            pass_leaf_value,
+        };
+
         match current {
             RuntimeValue::Hash(entries) => match method {
                 "walk_leaves" => {
                     let mut path = Vec::new();
-                    self.walk_hash_tree_entries(&entries, &mut path, block, ctx, rule_label)?;
+                    self.walk_hash_tree_entries(&entries, &mut path, &callback, ctx, rule_label)?;
                     Ok(RuntimeValue::Hash(entries))
                 }
                 "map_leaves" => {
                     let mut path = Vec::new();
-                    let mapped =
-                        self.map_hash_tree_entries(&entries, &mut path, block, ctx, rule_label)?;
+                    let mapped = self
+                        .map_hash_tree_entries(&entries, &mut path, &callback, ctx, rule_label)?;
                     Ok(RuntimeValue::Hash(mapped))
                 }
                 "reduce_leaves" => {
-                    let mut acc = self.eval_expr(call.args[0].value(), ctx, rule_label)?;
+                    let mut acc = initial_acc
+                        .clone()
+                        .expect("reduce_leaves arity was checked before evaluation");
                     let mut path = Vec::new();
                     self.reduce_hash_tree_entries(
-                        &entries, &mut path, block, &mut acc, ctx, rule_label,
+                        &entries, &mut path, &callback, &mut acc, ctx, rule_label,
                     )?;
                     Ok(acc)
                 }
@@ -5372,20 +5456,21 @@ impl Engine {
             RuntimeValue::Array(items) => match method {
                 "walk_leaves" => {
                     let mut path = Vec::new();
-                    self.walk_array_tree_items(&items, &mut path, block, ctx, rule_label)?;
+                    self.walk_array_tree_items(&items, &mut path, &callback, ctx, rule_label)?;
                     Ok(RuntimeValue::Array(items))
                 }
                 "map_leaves" => {
                     let mut path = Vec::new();
                     let mapped =
-                        self.map_array_tree_items(&items, &mut path, block, ctx, rule_label)?;
+                        self.map_array_tree_items(&items, &mut path, &callback, ctx, rule_label)?;
                     Ok(RuntimeValue::Array(mapped))
                 }
                 "reduce_leaves" => {
-                    let mut acc = self.eval_expr(call.args[0].value(), ctx, rule_label)?;
+                    let mut acc =
+                        initial_acc.expect("reduce_leaves arity was checked before evaluation");
                     let mut path = Vec::new();
                     self.reduce_array_tree_items(
-                        &items, &mut path, block, &mut acc, ctx, rule_label,
+                        &items, &mut path, &callback, &mut acc, ctx, rule_label,
                     )?;
                     Ok(acc)
                 }
@@ -5417,7 +5502,7 @@ impl Engine {
         &self,
         entries: &[(String, RuntimeValue)],
         path: &mut Vec<String>,
-        block: &CodeBlock,
+        callback: &TreeCodeblockCallback,
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<(), String> {
@@ -5425,10 +5510,10 @@ impl Engine {
             path.push(key.clone());
             let result = match value {
                 RuntimeValue::Hash(child_entries) => {
-                    self.walk_hash_tree_entries(&child_entries, path, block, ctx, rule_label)
+                    self.walk_hash_tree_entries(&child_entries, path, callback, ctx, rule_label)
                 }
                 leaf => self
-                    .eval_hash_tree_leaf_block(block, leaf, &key, path, None, ctx, rule_label)
+                    .eval_hash_tree_leaf_block(callback, leaf, &key, path, None, ctx, rule_label)
                     .map(|_| ()),
             };
             path.pop();
@@ -5441,7 +5526,7 @@ impl Engine {
         &self,
         entries: &[(String, RuntimeValue)],
         path: &mut Vec<String>,
-        block: &CodeBlock,
+        callback: &TreeCodeblockCallback,
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<Vec<(String, RuntimeValue)>, String> {
@@ -5450,11 +5535,10 @@ impl Engine {
             path.push(key.clone());
             let next_value = match value {
                 RuntimeValue::Hash(child_entries) => self
-                    .map_hash_tree_entries(&child_entries, path, block, ctx, rule_label)
+                    .map_hash_tree_entries(&child_entries, path, callback, ctx, rule_label)
                     .map(RuntimeValue::Hash),
-                leaf => {
-                    self.eval_hash_tree_leaf_block(block, leaf, &key, path, None, ctx, rule_label)
-                }
+                leaf => self
+                    .eval_hash_tree_leaf_block(callback, leaf, &key, path, None, ctx, rule_label),
             };
             path.pop();
             mapped.push((key, next_value?));
@@ -5466,7 +5550,7 @@ impl Engine {
         &self,
         entries: &[(String, RuntimeValue)],
         path: &mut Vec<String>,
-        block: &CodeBlock,
+        callback: &TreeCodeblockCallback,
         acc: &mut RuntimeValue,
         ctx: &mut RuntimeContext,
         rule_label: &str,
@@ -5474,12 +5558,17 @@ impl Engine {
         for (key, value) in Self::sorted_hash_tree_entries(entries) {
             path.push(key.clone());
             let result = match value {
-                RuntimeValue::Hash(child_entries) => {
-                    self.reduce_hash_tree_entries(&child_entries, path, block, acc, ctx, rule_label)
-                }
+                RuntimeValue::Hash(child_entries) => self.reduce_hash_tree_entries(
+                    &child_entries,
+                    path,
+                    callback,
+                    acc,
+                    ctx,
+                    rule_label,
+                ),
                 leaf => {
                     *acc = self.eval_hash_tree_leaf_block(
-                        block,
+                        callback,
                         leaf,
                         &key,
                         path,
@@ -5498,7 +5587,7 @@ impl Engine {
 
     fn eval_hash_tree_leaf_block(
         &self,
-        block: &CodeBlock,
+        callback: &TreeCodeblockCallback,
         value: RuntimeValue,
         key: &str,
         path: &[String],
@@ -5510,7 +5599,7 @@ impl Engine {
         if let Some(acc_value) = acc {
             bindings.push(ctx.enter_scoped_scalar_binding("acc", acc_value));
         }
-        bindings.push(ctx.enter_scoped_scalar_binding("value", value));
+        bindings.push(ctx.enter_scoped_scalar_binding("value", value.clone()));
         bindings
             .push(ctx.enter_scoped_scalar_binding("key", RuntimeValue::Scalar(key.to_string())));
         bindings.push(
@@ -5527,7 +5616,13 @@ impl Engine {
             ctx.enter_scoped_scalar_binding("depth", RuntimeValue::Number(path.len() as f64)),
         );
 
-        let result = self.eval_block_value(block, ctx, rule_label);
+        let args = if callback.pass_leaf_value {
+            vec![value]
+        } else {
+            Vec::new()
+        };
+        let result =
+            self.execute_codeblock_value(&callback.name, &callback.value, &args, ctx, rule_label);
         while let Some(binding) = bindings.pop() {
             ctx.exit_scoped_variable_binding(binding);
         }
@@ -5538,7 +5633,7 @@ impl Engine {
         &self,
         items: &[RuntimeValue],
         path: &mut Vec<usize>,
-        block: &CodeBlock,
+        callback: &TreeCodeblockCallback,
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<(), String> {
@@ -5546,11 +5641,11 @@ impl Engine {
             path.push(index);
             let result = match value {
                 RuntimeValue::Array(child_items) => {
-                    self.walk_array_tree_items(child_items, path, block, ctx, rule_label)
+                    self.walk_array_tree_items(child_items, path, callback, ctx, rule_label)
                 }
                 leaf => self
                     .eval_array_tree_leaf_block(
-                        block,
+                        callback,
                         leaf.clone(),
                         index,
                         path,
@@ -5570,7 +5665,7 @@ impl Engine {
         &self,
         items: &[RuntimeValue],
         path: &mut Vec<usize>,
-        block: &CodeBlock,
+        callback: &TreeCodeblockCallback,
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<Vec<RuntimeValue>, String> {
@@ -5579,10 +5674,10 @@ impl Engine {
             path.push(index);
             let next_value = match value {
                 RuntimeValue::Array(child_items) => self
-                    .map_array_tree_items(child_items, path, block, ctx, rule_label)
+                    .map_array_tree_items(child_items, path, callback, ctx, rule_label)
                     .map(RuntimeValue::Array),
                 leaf => self.eval_array_tree_leaf_block(
-                    block,
+                    callback,
                     leaf.clone(),
                     index,
                     path,
@@ -5601,7 +5696,7 @@ impl Engine {
         &self,
         items: &[RuntimeValue],
         path: &mut Vec<usize>,
-        block: &CodeBlock,
+        callback: &TreeCodeblockCallback,
         acc: &mut RuntimeValue,
         ctx: &mut RuntimeContext,
         rule_label: &str,
@@ -5610,11 +5705,11 @@ impl Engine {
             path.push(index);
             let result = match value {
                 RuntimeValue::Array(child_items) => {
-                    self.reduce_array_tree_items(child_items, path, block, acc, ctx, rule_label)
+                    self.reduce_array_tree_items(child_items, path, callback, acc, ctx, rule_label)
                 }
                 leaf => {
                     *acc = self.eval_array_tree_leaf_block(
-                        block,
+                        callback,
                         leaf.clone(),
                         index,
                         path,
@@ -5633,7 +5728,7 @@ impl Engine {
 
     fn eval_array_tree_leaf_block(
         &self,
-        block: &CodeBlock,
+        callback: &TreeCodeblockCallback,
         value: RuntimeValue,
         index: usize,
         path: &[usize],
@@ -5645,7 +5740,7 @@ impl Engine {
         if let Some(acc_value) = acc {
             bindings.push(ctx.enter_scoped_scalar_binding("acc", acc_value));
         }
-        bindings.push(ctx.enter_scoped_scalar_binding("value", value));
+        bindings.push(ctx.enter_scoped_scalar_binding("value", value.clone()));
         bindings.push(ctx.enter_scoped_scalar_binding("index", RuntimeValue::Number(index as f64)));
         bindings.push(
             ctx.enter_scoped_scalar_binding(
@@ -5661,7 +5756,13 @@ impl Engine {
             ctx.enter_scoped_scalar_binding("depth", RuntimeValue::Number(path.len() as f64)),
         );
 
-        let result = self.eval_block_value(block, ctx, rule_label);
+        let args = if callback.pass_leaf_value {
+            vec![value]
+        } else {
+            Vec::new()
+        };
+        let result =
+            self.execute_codeblock_value(&callback.name, &callback.value, &args, ctx, rule_label);
         while let Some(binding) = bindings.pop() {
             ctx.exit_scoped_variable_binding(binding);
         }
@@ -6432,8 +6533,6 @@ impl Engine {
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<RuntimeValue, String> {
-        use linkedspec_core::expr::Expr;
-
         if raw_args.is_empty() || raw_args.len() > 2 {
             return Err(format!(
                 "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:with: helper `with(...) {{ ... }}` expects zero or one value argument plus a trailing block in rule '{rule_label}'"
@@ -6443,19 +6542,27 @@ impl Engine {
         let Some(block_arg) = raw_args.last() else {
             unreachable!("raw_args.is_empty() was checked above");
         };
-        let Expr::BlockValue { block } = block_arg.value() else {
-            return Err(format!(
-                "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:with: helper `with(...)` requires a trailing block argument in rule '{rule_label}'"
-            ));
-        };
-
         let scoped_value = if raw_args.len() == 2 {
             self.eval_expr(raw_args[0].value(), ctx, rule_label)?
         } else {
             RuntimeValue::Undef
         };
-        let binding = ctx.enter_scoped_scalar_binding("value", scoped_value);
-        let result = self.eval_block_value(block, ctx, rule_label);
+        let pass_scoped_value = !matches!(
+            block_arg.value(),
+            linkedspec_core::expr::Expr::CodeblockArgument(_)
+        );
+        let binding = ctx.enter_scoped_scalar_binding("value", scoped_value.clone());
+        let result = (|| {
+            let callback = self.eval_expr(block_arg.value(), ctx, rule_label)?;
+            let callback =
+                self.require_final_codeblock_value("with", &callback, ctx, rule_label)?;
+            let args = if pass_scoped_value {
+                vec![scoped_value]
+            } else {
+                Vec::new()
+            };
+            self.execute_codeblock_value("with", &callback, &args, ctx, rule_label)
+        })();
         ctx.exit_scoped_variable_binding(binding);
         result
     }
