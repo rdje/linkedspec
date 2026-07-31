@@ -10,6 +10,12 @@ Backends must parse that language into typed AST/IR before lowering or execution
 textual helper rewrites directly into host-language source are legacy implementation
 debt, not part of the contract.
 
+An optional EBNF-like authoring profile is an accepted future direction under ADR 0064, not current syntax. It
+will be a lossless frontend to this same canonical semantic model, not a separate grammar runtime or a claim that
+LinkedSpec cursor/capture/state/action semantics are standard EBNF. Its contract must publish those differences and
+explicit extensions, preserve original-source spans and diagnostics, and prove canonical/runtime equivalence on
+all backends before the profile can be described here as implemented.
+
 ## 1. File and Paragraph Model
 
 A `.spec` file is a sequence of top-level **function definitions** and **rule paragraphs**,

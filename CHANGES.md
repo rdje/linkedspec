@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-30 — SPEC-LANGUAGE-SELF-CONTAINMENT.0 — route expressive closure and EBNF-like authoring
+
+ADR `0064` and a new detailed task tree now make the director-approved language direction durable without changing
+parser/runtime behavior. `.spec` self-containment is defined as portable expressive closure for grammar, natural
+recursion, cursor/source-location control, capture, scoped typed state, callables, composition, branching,
+iteration, transformation, and result construction—not unrestricted computation or implicit outside-world access.
+Filesystem, process, network, environment, clock, randomness, package loading, and host FFI remain outside the
+default language boundary.
+
+An optional EBNF-like authoring profile is accepted in principle only as a lossless frontend to the same versioned
+canonical AST/HandlerIR, validation, runtime, generated state, semantic introspection, MCP projection, diagnostics,
+and resource policy as ordinary syntax. A semantic-difference table must expose LinkedSpec ordered matching,
+seek/consume, cursor, capture/state/action, progress, and result semantics through explicit extensions. Exact
+authored-source spans and diagnostic remapping are mandatory; literal EBNF identity, hidden magic, a second
+evaluator, backend dialects, and routine host escape hatches are rejected.
+
+The task tree orders capability inventory, neutral contract/mutations, evidence-backed core-gap closure, canonical
+model/source maps, realistic profile trials, Perl/Rust/Dart/Julia/Lua frontend parity, and final no-drift. `.1+`
+remains intentionally unscheduled while current callable-codeblock backend parity continues after this clean
+behavior-free routing commit.
+
+Signoff regenerates and checks the Knowledge Map at 762 facts / 6,186 question keys, renders the mdBook at 79 files
+/ 13,884 KiB, removes that exact output, passes all seven doctrines, and passes canonical CI through both CLI
+environments and Phase 0 1,031/1,031 in 641 seconds. The canonical tail did not retain its RAM line, so no RAM
+value is attributed to this leaf.
+
 ## 2026-07-30 — FUTURE-PARITY-BACKLOG.11.4.3 — close Rust generic final-codeblock equivalence
 
 Rust now normalizes attached `call(args) { body }` and direct parenthesized `call(args, { body })` through one

@@ -5,6 +5,12 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-07-30`
+- `2026-07-30 expressive self-containment / EBNF-like profile direction`: ADR `0064` and
+  `SPEC-LANGUAGE-SELF-CONTAINMENT` define `.spec` closure inside LinkedSpec's grammar, recursion, cursor/capture,
+  scoped state, callable/control, transformation, and result domain without granting ambient filesystem/process/
+  network/host authority. An optional EBNF-like form is a lossless frontend only: familiar notation where meaning
+  agrees, visible extensions where LinkedSpec differs, one canonical AST/HandlerIR/validator/runtime/generated/
+  semantic/MCP path, exact authored source maps, and five-backend parity. No syntax or behavior is current yet.
 - `2026-07-30 Rust generic final-codeblock closeout`: `FUTURE-PARITY-BACKLOG.11.4.3` separates structural
   block-argument recognition from semantic admission. Compiler/staged parsing retains attached or direct
   parenthesized provenance until the complete builtin/user-function registry exists; one core callable-contract

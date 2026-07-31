@@ -1,5 +1,21 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-30 — Expressive self-containment and EBNF-like profile direction routed
+
+Behavior-free leaf `SPEC-LANGUAGE-SELF-CONTAINMENT.0` makes the director-approved direction durable under ADR
+`0064`. `.spec` aims for expressive closure within grammar/recursion/cursor/capture/state/callable/control/
+transformation/result objectives, with no default filesystem/process/network/environment/host-FFI authority. An
+optional EBNF-like form is accepted only as an honest, lossless frontend into the same canonical AST/HandlerIR and
+runtime as ordinary syntax, with explicit LinkedSpec extensions, semantic-difference documentation, exact source
+maps, author-facing diagnostics, and five-backend lockstep.
+
+The detailed tree owns capability/gap inventory, neutral mutation-sensitive objectives, evidence-backed core-gap
+closure, canonical provenance, realistic profile trials, Perl/Rust/Dart/Julia/Lua frontend parity, and no-drift.
+No syntax, runtime, descriptor, generated, semantic/MCP, capability, or backend status changes here. After this
+leaf's clean commit, callable-codeblock Dart construction `.11.5.1` remains next unless explicitly reprioritized.
+Knowledge Map 762/6,186, mdBook 79 files / 13,884 KiB before exact cleanup, all seven doctrines, and canonical
+Phase 0 1,031/1,031 in 641 seconds pass.
+
 ## 2026-07-30 — Rust generic final-codeblock equivalence signoff-complete
 
 Leaf `.11.4.3` now gives Rust one metadata-governed contextual block model across helper, typed user-function,

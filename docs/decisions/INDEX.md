@@ -74,6 +74,7 @@ changed* lives in git (layer D), not here.
 | [0061](0061-lua-native-mcp-server-seams.md) | Lua MCP uses one literal contract binding and one dual-ABI in-process server | 2026-07-29 | accepted; plan, implementation, dual-ABI admission, and parent closeout complete | architecture, mcp, lua, luajit, embedding, handles, authorization, json, stdio, security, portability |
 | [0062](0062-recurring-mcp-six-runtime-composition.md) | Recurring MCP proof composes six runtimes and all twenty semantic responses | 2026-07-29 | accepted/implemented; repair, all-twenty proof, promotion, recurring closeout, and MCP-parent closeout complete | architecture, mcp, semantic-api, conformance, recurring-gate, backends, storage, parity |
 | [0063](0063-bounded-readme-landing-page.md) | README is a bounded stable landing page | 2026-07-29 | accepted; content/enforcement implemented by `.1`; adoption closed by `.2` | documentation, readme, doctrine, maintenance, navigation, local-ci |
+| [0064](0064-expressive-self-containment-and-ebnf-profile.md) | Expressive self-containment and EBNF-like authoring use one semantic core | 2026-07-30 | accepted direction; contract and implementation pending | architecture, dsl, expressiveness, self-containment, ebnf, frontend, lowering, source-map, portability, parity |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

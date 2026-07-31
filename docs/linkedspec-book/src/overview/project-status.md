@@ -8,6 +8,13 @@ LinkedSpec is an actively evolving system. The current direction is not “freez
 
 LinkedSpec is also a multi-backend system. The `.spec` language is the one universal contract; each backend is an execution platform that runs the same `.spec` files with identical semantics. The Perl implementation is the **reference backend** (the canonical behavioral oracle), and a Rust backend is the second execution platform. ADR 0021 schedules future full-parity backend work as Dart first, Julia second, and Lua third. ADR 0022 makes native in-memory host-language embedding the primary backend product surface; variant CLIs are thin adapters. ADR 0023 defines complete parity as identical user-observable capabilities/behavior and gives distinct backend executable names one exact primary CLI interface. Status below therefore distinguishes scoped milestones from complete parity.
 
+ADR 0064 accepts a future expressive-self-containment program and optional EBNF-like authoring profile. The goal is
+portable closure for LinkedSpec grammar, recursion, cursor/capture/state, callable/control, transformation, and
+result objectives without routine host-language escape hatches or default outside-world authority. The profile is
+not implemented and is not a second runtime: it must lower losslessly into the same canonical AST/HandlerIR as
+ordinary syntax, state every EBNF/LinkedSpec semantic difference visibly, preserve authored spans/diagnostics, and
+reach Perl, Rust, Dart, Julia, and Lua together. `SPEC-LANGUAGE-SELF-CONTAINMENT.1-.6` remain future work.
+
 The root README is a stable 105-line / 5,072-byte landing page governed by `README_POLICY.md`, ADR `0063`,
 and the registered `README-STABILITY` doctrine. Hard ceilings are 128 lines and 6,144 bytes; changing status,
 history, inventories, and deep examples route to their canonical owners. Adoption signoff passes all seven

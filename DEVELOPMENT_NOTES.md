@@ -1,5 +1,28 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-30 (`SPEC-LANGUAGE-SELF-CONTAINMENT.0` — problem-domain closure, not a second language/runtime): The
+  director's “Turing complete” analogy identified an authoring constraint, not a request for arbitrary effects.
+  The durable boundary is that ordinary LinkedSpec parsing, extraction, cursor/capture/state control, recursive
+  composition, transformation, and result construction should not require backend-host escape hatches. The host
+  remains the caller-owned source/result substrate. Environmental effects would need a separate capability and
+  security contract rather than arriving as an expressiveness workaround.
+
+  The EBNF-like idea is viable precisely because it is a profile. Familiar notation is reused only where semantic
+  meaning agrees; an explicit difference table and visible LinkedSpec extensions carry ordered search,
+  seek/consume, cursor movement, captures, state/actions, progress, and results. Both syntaxes lower losslessly to
+  one canonical AST/HandlerIR and share every validation/runtime/generated/semantic/MCP owner. Original source,
+  Unicode-coordinate spans, node correspondence, and remapped diagnostics prevent the lowering seam from becoming
+  opaque compiler magic.
+
+  ADR `0064` composes rather than replaces ADRs `0006`, `0007`, `0035`, and `0056`. The detailed tree insists on
+  current-capability evidence and realistic recursive/progressive trials before syntax implementation, then one
+  Perl-reference plus Rust/Dart/Julia/Lua rollout. This leaf changes governance/docs only; `.1+` stays scheduled
+  behind the active callable-codeblock backend-parity sequence unless the director reprioritizes from a clean tree.
+
+  Direction signoff is Knowledge Map 762/6,186, mdBook 79 files / 13,884 KiB before exact cleanup, all seven
+  doctrines, and canonical CI through both CLI environments plus Phase 0 1,031/1,031 in 641 seconds. The bounded
+  tail did not retain the RAM guard line, so the durable evidence deliberately omits a RAM percentage.
+
 - 2026-07-30 (`FUTURE-PARITY-BACKLOG.11.4.3` — contextual syntax is provenance until metadata grants meaning):
   A parser cannot decide whether `{ ... }` is a deferred final argument from spelling alone. Rust therefore has
   two deliberate block-parse modes: the established public mode preserves immediate blocks and historical
