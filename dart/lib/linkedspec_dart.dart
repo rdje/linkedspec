@@ -40,6 +40,7 @@ export 'src/action/action_ast.dart'
         ActionStatement,
         ActionStringLiteralExpr,
         ActionUndefExpr,
+        ActionValueAccessExpr,
         ActionVariableExpr,
         findRemovedAggregateSelectorInBlock,
         findRemovedAggregateSelectorInExpr;

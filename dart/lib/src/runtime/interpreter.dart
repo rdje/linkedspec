@@ -26,6 +26,12 @@ final class RuntimeDiagnostic {
     this.helperName,
     this.actualArity,
     this.expectedArity,
+    this.callableName,
+    this.expected,
+    this.got,
+    this.valueKind,
+    this.name,
+    this.cycle,
     this.ownerStage,
     this.specName,
     this.specPath,
@@ -48,6 +54,12 @@ final class RuntimeDiagnostic {
   final String? helperName;
   final int? actualArity;
   final String? expectedArity;
+  final String? callableName;
+  final String? expected;
+  final int? got;
+  final String? valueKind;
+  final String? name;
+  final List<String>? cycle;
   final String? specName;
   final String? specPath;
   final String? topRule;
@@ -69,6 +81,12 @@ final class RuntimeDiagnostic {
     if (helperName != null) 'helper_name': helperName,
     if (actualArity != null) 'actual_arity': actualArity,
     if (expectedArity != null) 'expected_arity': expectedArity,
+    if (callableName != null) 'callable_name': callableName,
+    if (expected != null) 'expected': expected,
+    if (got != null) 'got': got,
+    if (valueKind != null) 'value_kind': valueKind,
+    if (name != null) 'name': name,
+    if (cycle != null) 'cycle': cycle,
     if (specName != null) 'spec_name': specName,
     if (specPath != null) 'spec_path': specPath,
     if (topRule != null) 'top_rule': topRule,
@@ -206,6 +224,7 @@ final class LinkedSpecRuntimeEngine {
   final String? specName;
   final String? specPath;
   final Map<int, ActionBlock> _userFunctionBodyCache = <int, ActionBlock>{};
+  final Map<String, ActionBlock> _codeblockBodyCache = <String, ActionBlock>{};
 
   RuntimeParseResult parse(
     String input, {
@@ -626,6 +645,12 @@ final class LinkedSpecRuntimeEngine {
     String? helperName,
     int? actualArity,
     String? expectedArity,
+    String? callableName,
+    String? expected,
+    int? got,
+    String? valueKind,
+    String? name,
+    List<String>? cycle,
     String? topRule,
     String? entryRule,
     String? ruleLabel,
@@ -646,6 +671,12 @@ final class LinkedSpecRuntimeEngine {
       helperName: helperName,
       actualArity: actualArity,
       expectedArity: expectedArity,
+      callableName: callableName,
+      expected: expected,
+      got: got,
+      valueKind: valueKind,
+      name: name,
+      cycle: cycle,
       specName: specName,
       specPath: specPath,
       topRule: topRule,
@@ -3060,7 +3091,8 @@ final class LinkedSpecRuntimeEngine {
               ),
             ),
         };
-      case ActionCodeblockLiteralExpr():
+      case ActionCodeblockLiteralExpr(:final source, :final bodyAst):
+        _codeblockBodyCache[source] = bodyAst;
         return _copyValue(expr.toJson());
       case ActionCodeblockLiteralErrorExpr(:final code):
         throw RuntimeInterpreterException(
@@ -3129,6 +3161,14 @@ final class LinkedSpecRuntimeEngine {
             : (context.variables[base] ??
                   context.arrays[base] ??
                   context.hashes[base]);
+        return _readNested(root, segments, context, ruleLabel, currentEdge);
+      case ActionValueAccessExpr(:final receiver, :final segments):
+        final root = _evaluateExpression(
+          receiver,
+          context,
+          ruleLabel,
+          currentEdge: currentEdge,
+        );
         return _readNested(root, segments, context, ruleLabel, currentEdge);
       case ActionControlIfExpr():
       case ActionControlWhileExpr():
@@ -3272,9 +3312,23 @@ final class LinkedSpecRuntimeEngine {
     }
     if (compiledSpec.functionRegistry.hasName(call.name) &&
         call.args.any((arg) => arg is ActionKeywordArgument)) {
+      final keywordCount = call.args.whereType<ActionKeywordArgument>().length;
+      final detail =
+          "user function '${call.name}' accepts positional arguments only in "
+          'rule $ruleLabel';
       throw RuntimeInterpreterException(
-        "user function '${call.name}' accepts positional arguments only in "
-        'rule $ruleLabel',
+        detail,
+        diagnostic: context.diagnostic(
+          stage: 'user_function_call',
+          summary: 'Dart user function keyword arguments failed',
+          detail: detail,
+          code: 'user_function_keyword_arguments_unsupported',
+          callableName: call.name,
+          expected: 'positional arguments',
+          got: keywordCount,
+          ruleLabel: ruleLabel,
+          handlerSourceLabel: 'dart_runtime:function:${call.name}',
+        ),
       );
     }
     final functionResolution = compiledSpec.functionRegistry.resolveCall(
@@ -3747,9 +3801,185 @@ final class LinkedSpecRuntimeEngine {
             ),
           );
         }
+        if (_hasRuntimeBinding(context, call.name)) {
+          final value = _runtimeBindingValue(context, call.name);
+          final codeblock = _decodeRuntimeCodeblock(value);
+          if (codeblock == null) {
+            final valueKind = _runtimeCallableValueKind(value);
+            final detail =
+                'value_not_callable callable_name="${call.name}" '
+                'value_kind="$valueKind" rule_label="$ruleLabel"';
+            throw RuntimeInterpreterException(
+              detail,
+              diagnostic: context.diagnostic(
+                stage: 'callable_codeblock_invocation',
+                summary: 'Dart callable codeblock invocation failed',
+                detail: detail,
+                code: 'value_not_callable',
+                callableName: call.name,
+                valueKind: valueKind,
+                ruleLabel: ruleLabel,
+                handlerSourceLabel: 'dart_runtime:codeblock:${call.name}',
+              ),
+            );
+          }
+          final keywordCount = call.args
+              .whereType<ActionKeywordArgument>()
+              .length;
+          if (keywordCount > 0) {
+            const expected = 'positional arguments';
+            final detail =
+                'codeblock_keyword_arguments_unsupported '
+                'callable_name="${call.name}" expected="$expected" '
+                'got=$keywordCount rule_label="$ruleLabel"';
+            throw RuntimeInterpreterException(
+              detail,
+              diagnostic: context.diagnostic(
+                stage: 'callable_codeblock_invocation',
+                summary: 'Dart callable codeblock invocation failed',
+                detail: detail,
+                code: 'codeblock_keyword_arguments_unsupported',
+                callableName: call.name,
+                expected: expected,
+                got: keywordCount,
+                ruleLabel: ruleLabel,
+                handlerSourceLabel: 'dart_runtime:codeblock:${call.name}',
+              ),
+            );
+          }
+          return _executeCodeblockValue(
+            call.name,
+            codeblock,
+            positionalArgs,
+            context,
+            ruleLabel,
+            currentEdge,
+          );
+        }
+        final detail =
+            'unknown_helper name="${call.name}" rule_label="$ruleLabel"';
         throw RuntimeInterpreterException(
-          "unsupported runtime helper '${call.name}' in rule $ruleLabel",
+          detail,
+          diagnostic: context.diagnostic(
+            stage: 'callable_codeblock_invocation',
+            summary: 'Dart callable codeblock invocation failed',
+            detail: detail,
+            code: 'unknown_helper',
+            name: call.name,
+            ruleLabel: ruleLabel,
+          ),
         );
+    }
+  }
+
+  Object? _executeCodeblockValue(
+    String name,
+    _RuntimeCodeblockValue codeblock,
+    List<ActionExpr> argExprs,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+    _CurrentActionEdge? currentEdge,
+  ) {
+    final values = [
+      for (final arg in argExprs)
+        _copyValue(
+          _evaluateExpression(
+            arg,
+            context,
+            ruleLabel,
+            currentEdge: currentEdge,
+          ),
+        ),
+    ];
+    final arityMatches =
+        values.length >= codeblock.minArity &&
+        (codeblock.maxArity == null || values.length <= codeblock.maxArity!);
+    if (!arityMatches) {
+      final expected = codeblock.maxArity == codeblock.minArity
+          ? 'exactly ${codeblock.minArity}'
+          : 'at least ${codeblock.minArity}';
+      final detail =
+          'codeblock_arity_mismatch callable_name="$name" '
+          'expected="$expected" got=${values.length} '
+          'rule_label="$ruleLabel"';
+      throw RuntimeInterpreterException(
+        detail,
+        diagnostic: context.diagnostic(
+          stage: 'callable_codeblock_invocation',
+          summary: 'Dart callable codeblock invocation failed',
+          detail: detail,
+          code: 'codeblock_arity_mismatch',
+          callableName: name,
+          expected: expected,
+          got: values.length,
+          ruleLabel: ruleLabel,
+          handlerSourceLabel: 'dart_runtime:codeblock:$name',
+        ),
+      );
+    }
+
+    final activeIndex = context.activeCodeblocks.indexOf(name);
+    if (activeIndex >= 0) {
+      final cycle = [...context.activeCodeblocks.sublist(activeIndex), name];
+      final detail =
+          'codeblock_recursion_unsupported callable_name="$name" '
+          'cycle=$cycle rule_label="$ruleLabel"';
+      throw RuntimeInterpreterException(
+        detail,
+        diagnostic: context.diagnostic(
+          stage: 'callable_codeblock_invocation',
+          summary: 'Dart callable codeblock invocation failed',
+          detail: detail,
+          code: 'codeblock_recursion_unsupported',
+          callableName: name,
+          cycle: cycle,
+          ruleLabel: ruleLabel,
+          handlerSourceLabel: 'dart_runtime:codeblock:$name',
+        ),
+      );
+    }
+
+    final body = _codeblockBodyCache.putIfAbsent(
+      codeblock.sourceText,
+      () => parseActionBlock(codeblock.bodySource),
+    );
+    final bindings = <_ScopedVariableBinding>[];
+    context.activeCodeblocks.add(name);
+    try {
+      for (
+        var index = 0;
+        index < codeblock.positionalParams.length;
+        index += 1
+      ) {
+        bindings.add(
+          context.enterScopedScalar(
+            codeblock.positionalParams[index],
+            values[index],
+          ),
+        );
+      }
+      final restParam = codeblock.restParam;
+      if (restParam != null) {
+        bindings.add(
+          context.enterScopedScalar(
+            restParam,
+            values.sublist(codeblock.minArity),
+          ),
+        );
+      }
+      final flow = _executeValueBlockStatements(
+        body,
+        context,
+        ruleLabel,
+        currentEdge,
+        finalExpressionYields: true,
+      );
+      return flow.returned ? _copyValue(flow.value) : null;
+    } finally {
+      for (final binding in bindings.reversed) {
+        context.exitScopedVariable(binding);
+      }
+      context.activeCodeblocks.removeLast();
     }
   }
 
@@ -6642,6 +6872,7 @@ final class _RuntimeExecutionContext {
       <String, Map<String, int>>{};
   final Set<String> activeRuleEntries = <String>{};
   final List<String> activeUserFunctions = <String>[];
+  final List<String> activeCodeblocks = <String>[];
   final List<RuntimeLifecycleEvent> lifecycleEvents = <RuntimeLifecycleEvent>[];
   final List<int> cursorStack = <int>[];
   final List<String> _ruleStack = <String>[];
@@ -6749,6 +6980,12 @@ final class _RuntimeExecutionContext {
     String? helperName,
     int? actualArity,
     String? expectedArity,
+    String? callableName,
+    String? expected,
+    int? got,
+    String? valueKind,
+    String? name,
+    List<String>? cycle,
     String? ruleLabel,
     String? handlerSourceLabel,
     String? targetRule,
@@ -6765,6 +7002,12 @@ final class _RuntimeExecutionContext {
       helperName: helperName,
       actualArity: actualArity,
       expectedArity: expectedArity,
+      callableName: callableName,
+      expected: expected,
+      got: got,
+      valueKind: valueKind,
+      name: name,
+      cycle: cycle,
       topRule: topRule,
       ruleLabel: effectiveRule,
       handlerSourceLabel: handlerSourceLabel,
@@ -7741,6 +7984,91 @@ String _captureName(
       currentEdge: currentEdge,
     ),
   );
+}
+
+bool _hasRuntimeBinding(_RuntimeExecutionContext context, String name) {
+  return context.variables.containsKey(name) ||
+      context.arrays.containsKey(name) ||
+      context.hashes.containsKey(name);
+}
+
+Object? _runtimeBindingValue(_RuntimeExecutionContext context, String name) {
+  if (context.variables.containsKey(name)) {
+    return _copyValue(context.variables[name]);
+  }
+  if (context.arrays.containsKey(name)) {
+    return _copyValue(context.arrays[name]);
+  }
+  return _copyValue(context.hashes[name]);
+}
+
+String _runtimeCallableValueKind(Object? value) {
+  return switch (value) {
+    List() => 'array',
+    Map() => 'harray',
+    _ => 'scalar',
+  };
+}
+
+_RuntimeCodeblockValue? _decodeRuntimeCodeblock(Object? value) {
+  if (value is! Map ||
+      value['kind'] != 'codeblock_literal' ||
+      value['version'] != 1 ||
+      value['source_text'] is! String ||
+      value['body_source'] is! String ||
+      value['body_ast'] is! Map ||
+      (value['body_ast'] as Map)['kind'] != 'action_block') {
+    return null;
+  }
+  final signature = value['signature'];
+  if (signature is! Map ||
+      signature['kind'] != 'callable_signature' ||
+      signature['version'] != 1 ||
+      signature['positional_params'] is! List ||
+      signature['min_arity'] is! int) {
+    return null;
+  }
+  final rawParams = signature['positional_params'] as List;
+  if (rawParams.any((param) => param is! String)) {
+    return null;
+  }
+  final positionalParams = rawParams.cast<String>();
+  final restParam = signature['rest_param'];
+  final maxArity = signature['max_arity'];
+  final minArity = signature['min_arity'] as int;
+  if ((restParam != null && restParam is! String) ||
+      (maxArity != null && maxArity is! int) ||
+      minArity != positionalParams.length ||
+      (restParam == null && maxArity != minArity) ||
+      (restParam != null && maxArity != null)) {
+    return null;
+  }
+  return _RuntimeCodeblockValue(
+    positionalParams: List.unmodifiable(positionalParams),
+    restParam: restParam as String?,
+    minArity: minArity,
+    maxArity: maxArity as int?,
+    sourceText: value['source_text'] as String,
+    bodySource: value['body_source'] as String,
+  );
+}
+
+final class _RuntimeCodeblockValue {
+  const _RuntimeCodeblockValue({
+    required this.positionalParams,
+    required this.restParam,
+    required this.minArity,
+    required this.maxArity,
+    required this.sourceText,
+    required this.bodySource,
+  });
+
+  final List<String> positionalParams;
+  final String? restParam;
+  final int minArity;
+  final int? maxArity;
+  final String sourceText;
+  final String bodySource;
 }
 
 Object? _copyValue(Object? value) {

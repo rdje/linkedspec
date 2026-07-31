@@ -1,5 +1,23 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-30 — Dart callable-codeblock dynamic invocation signoff-complete
+
+Leaf `FUTURE-PARITY-BACKLOG.11.5.2` now executes bound Dart callable-codeblock values only after controls,
+helpers, and registered user functions. Arguments evaluate once left-to-right; recursively copied fixed/rest
+bindings restore prior same-name scalar/array/harray state on every exit, while nonparameter reads and mutations
+remain in the caller's live stores. Invocation-local `return`, final-expression results, key/index access, receiver
+chains, and standalone result discard all reuse the one existing ActionIR runtime. The neutral record stays plain
+serialized data with no Dart closure, host fallback, or second emitted executor.
+
+Exact portable diagnostics cover arity, colon-keyword calls, bound non-codeblocks, unknown calls, and ordered
+direct/mutual recursion. Focused proof passes callable 15/15 plus parser/variadic 13/13 across native, normalized
+reconstruction, generated plans, and independently compiled emitted Dart. The complete operational gate passes
+format 94/0, strict analysis, Dart 369/369, storage 19 owners / 47 packages, CLI 66x2, and corpus 105/105.
+Knowledge Map 765/6,213, final mdBook 79 files / 13,924 KiB, all seven doctrines, canonical semantic/MCP
+admissions, containment/moved-root proof, RAM 56%, and Phase 0 1,031/1,031 in 650 seconds pass. Exact cleanup is
+complete; `.11.5.3` generic contextual final blocks remain the next clean activation, with no capability/MCP,
+other-backend, root-README, or push movement.
+
 ## 2026-07-30 — Dart callable-codeblock construction signoff-complete
 
 Leaf `FUTURE-PARITY-BACKLOG.11.5.1` gives Dart exact inert `{|params| body }` / `{|| body }` construction before

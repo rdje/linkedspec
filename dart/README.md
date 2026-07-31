@@ -203,7 +203,7 @@ contract fails before payload reconstruction with expected/actual contract ids
 and guidance to regenerate from the original `.spec`. The recurring admission
 test also reads and passes the contract's exact eight-case subset.
 
-## Callable codeblock construction
+## Callable codeblock construction and invocation
 
 Dart recognizes the exact deferred-value syntax before ordinary brace classification:
 
@@ -220,10 +220,16 @@ The record is plain copied data: its body does not run, no Dart closure or envir
 body calls are excluded from eager action-contract/dependency traversal.
 
 Assignment, recursive copying, user-function arguments/results, compiled JSON, generated plans, normalized
-emitted-source reconstruction, and semantic `codeblock` shapes preserve the same value. Bound-variable invocation
-such as `joiner("a", "b")` is not current in this construction slice and remains owned by
-`FUTURE-PARITY-BACKLOG.11.5.2`; generic contextual final-block equivalence remains `.11.5.3`. Verify the current
-boundary from the repository root:
+emitted-source reconstruction, and semantic `codeblock` shapes preserve the same value. A bound call such as
+`joiner("a", "b")` resolves only after existing controls, helpers, and registered user functions. Positional
+arguments evaluate once left-to-right; copied fixed/rest bindings are temporary and restore prior same-name state,
+while other reads and writes use the caller's current stores. `return(...)` is invocation-local, final expressions
+yield, call results can enter key/index and receiver chains, and standalone calls discard only their results.
+
+Typed runtime failures cover arity, colon-keyword arguments, bound non-codeblocks, unbound calls, and ordered
+direct/mutual recursion. Native execution, normalized reconstruction, generated-plan execution, and independently
+compiled emitted Dart share this behavior. Generic contextual final-block equivalence remains `.11.5.3`; explicit
+dynamic invocation does not promote that pending surface. Verify the current boundary from the repository root:
 
 ```sh
 bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py

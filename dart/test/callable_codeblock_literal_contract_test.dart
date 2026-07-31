@@ -1,4 +1,4 @@
-// FUTURE-PARITY-BACKLOG.11.5.1 — Dart callable-codeblock construction/state.
+// FUTURE-PARITY-BACKLOG.11.5.1-.2 — Dart callable-codeblock state/invocation.
 
 import 'dart:convert';
 import 'dart:io';
@@ -44,6 +44,72 @@ String _constructionSource(String literal) =>
 Done::
  /x/
 ''';
+
+String _invalidCallBody(String id) => switch (id) {
+  'fixed_missing' =>
+    r'''cb = {|left, right| return(cat(left, right)) }; return(cb("a"))''',
+  'fixed_extra' =>
+    r'''cb = {|left, right| return(cat(left, right)) }; return(cb("a", "b", "c"))''',
+  'rest_missing_fixed' =>
+    r'''cb = {|prefix, ...items| return(items) }; return(cb())''',
+  'keyword_argument' =>
+    r'''cb = {|value| return(value) }; return(cb(value: "x"))''',
+  'bound_non_codeblock' => r'''text = "not callable"; return(text())''',
+  'unknown_call' => r'''cb = {|| return(missing()) }; return(cb())''',
+  'direct_recursion' =>
+    r'''reader = {|| return(reader()) }; return(reader())''',
+  _ => throw StateError('unowned invalid callable-codeblock case $id'),
+};
+
+String _invalidCallSource(String id) =>
+    '''Top::
+ /x/
+ E { ${_invalidCallBody(id)} }
+''';
+
+RuntimeInterpreterException _runtimeFailure(CompiledSpec compiled) {
+  try {
+    LinkedSpecRuntimeEngine(compiled).parse('x');
+  } on RuntimeInterpreterException catch (error) {
+    return error;
+  }
+  throw StateError('callable-codeblock execution unexpectedly succeeded');
+}
+
+CompiledSpec _reconstructFromEmittedPayload(
+  CompiledSpec compiled,
+  String identity,
+) {
+  final emitted = emitDartSourceV2(compiled, identity);
+  final encoded = RegExp(
+    "const _compiledSpecJsonBase64 = '([^']+)';",
+  ).firstMatch(emitted)![1]!;
+  final normalized = (jsonDecode(utf8.decode(base64Decode(encoded))) as Map)
+      .cast<String, Object?>();
+  return compileSpec(SpecFile.fromJson(normalized));
+}
+
+ProcessResult _expectDartSuccess(
+  Directory workingDirectory,
+  Map<String, String> environment,
+  List<String> arguments,
+) {
+  final result = Process.runSync(
+    Platform.resolvedExecutable,
+    arguments,
+    workingDirectory: workingDirectory.path,
+    environment: environment,
+  );
+  expect(
+    result.exitCode,
+    0,
+    reason:
+        'dart ${arguments.join(' ')} failed\n'
+        'stdout:\n${result.stdout}\n'
+        'stderr:\n${result.stderr}',
+  );
+  return result;
+}
 
 void main() {
   test('all neutral brace classes and literal records are exact', () {
@@ -342,4 +408,320 @@ Done::
       'members': <Object?>[],
     });
   });
+
+  test('call-result access and colon keywords retain typed ActionIR', () {
+    final chain =
+        parseActionExpression(r'''collector("p", "a", "b")["items"].length()''')
+            as ActionFluentChainExpr;
+    expect(chain.receiver, isA<ActionValueAccessExpr>());
+    final access = chain.receiver as ActionValueAccessExpr;
+    expect(access.receiver, isA<ActionCallExpr>());
+    expect((access.receiver as ActionCallExpr).name, 'collector');
+    expect(access.segments, hasLength(1));
+    expect(access.segments.single, isA<ActionKeyAccessSegment>());
+    expect(access.toJson()['kind'], 'value_access');
+
+    final keyword =
+        parseActionExpression(r'''cb(value: "x")''') as ActionCallExpr;
+    expect(keyword.args.single, isA<ActionKeywordArgument>());
+    expect((keyword.args.single as ActionKeywordArgument).name, 'value');
+
+    final assignment =
+        parseActionExpression(r'''cb(value = "x")''') as ActionCallExpr;
+    expect(assignment.args.single, isA<ActionPositionalArgument>());
+    expect(assignment.args.single.value, isA<ActionAssignScalarExpr>());
+  });
+
+  test(
+    'the exact neutral fixture executes through every in-memory authority',
+    () {
+      final contract = _contract();
+      final fixture = _record(contract['fixture']);
+      final expected = _record(fixture['expected']);
+      final compiled = _compileSource(fixture['spec_source']! as String);
+
+      expect(
+        (contract['call_cases']! as List)
+            .map(_record)
+            .map((row) => row['id'])
+            .toSet(),
+        {
+          'construction_is_deferred',
+          'fixed_exact',
+          'dynamic_read_uses_call_time_state',
+          'nonparameter_mutation_persists',
+          'parameter_binding_restores',
+          'rest_empty',
+          'rest_mixed',
+          'rest_result_receiver_chain',
+          'block_local_return',
+          'standalone_discard_keeps_effects',
+          'static_name_precedence',
+        },
+      );
+      expect(
+        LinkedSpecRuntimeEngine(
+          compiled,
+        ).parse(fixture['input']! as String).value,
+        expected,
+      );
+
+      expect(jsonDecode(jsonEncode(compiled.toJson())), compiled.toJson());
+      final reconstructed = _reconstructFromEmittedPayload(
+        compiled,
+        'callable-codeblock-fixture.spec',
+      );
+      expect(
+        LinkedSpecRuntimeEngine(
+          reconstructed,
+        ).parse(fixture['input']! as String).value,
+        expected,
+      );
+      expect(
+        executeGeneratedParserV2(
+          compiled,
+          buildGeneratedRulePlan(compiled),
+          fixture['input']! as String,
+          'callable-codeblock-fixture.spec',
+        ),
+        expected,
+      );
+
+      expect(
+        LinkedSpecRuntimeEngine(
+          _reconstructFromEmittedPayload(
+            compiled,
+            'callable-codeblock-fixture.spec',
+          ),
+        ).parse(fixture['input']! as String).value,
+        expected,
+      );
+    },
+  );
+
+  test(
+    'remaining valid calls preserve precedence, order, copies, and effects',
+    () {
+      final compiled = _compileSource(r'''fn choose() { return("static") }
+
+Top::
+ /x/
+ E {
+   state = "";
+   append_state = {|value| state = cat(state, value); return(state) };
+   append_state("x");
+   cat = {|left, right| return("shadow") };
+   choose = {|| return("shadow") };
+   order = "";
+   tick = {|value| order = cat(order, value); return(value) };
+   joiner = {|left, right| return(cat(left, right)) };
+   original = { "nested" : [{ "value" : "outer" }] };
+   mutate_copy = {|copy| copy["nested"][0]["value"] = "inner"; return(copy) };
+   mutated = mutate_copy(original);
+   return({
+     "discard_state" : state,
+     "helper_precedence" : cat("a", "b"),
+     "function_precedence" : choose(),
+     "ordered_result" : joiner(tick("a"), tick("b")),
+     "ordered_effect" : order,
+     "original" : original,
+     "mutated" : mutated
+   })
+ }
+''');
+      expect(LinkedSpecRuntimeEngine(compiled).parse('x').value, {
+        'discard_state': 'x',
+        'helper_precedence': 'ab',
+        'function_precedence': 'static',
+        'ordered_result': 'ab',
+        'ordered_effect': 'ab',
+        'original': {
+          'nested': [
+            {'value': 'outer'},
+          ],
+        },
+        'mutated': {
+          'nested': [
+            {'value': 'inner'},
+          ],
+        },
+      });
+    },
+  );
+
+  test('all seven neutral call failures are typed across authorities', () {
+    for (final rawCase in _contract()['invalid_call_cases']! as List) {
+      final row = _record(rawCase);
+      final id = row['id']! as String;
+      final expected = _record(row['expected_error']);
+      final compiled = _compileSource(_invalidCallSource(id));
+
+      final direct = _runtimeFailure(compiled);
+      final diagnostic = direct.diagnostic!.toJson();
+      for (final entry in expected.entries) {
+        expect(diagnostic[entry.key], entry.value, reason: '$id ${entry.key}');
+      }
+
+      final reconstructed = _runtimeFailure(
+        _reconstructFromEmittedPayload(compiled, 'callable-codeblock-$id.spec'),
+      );
+      expect(reconstructed.diagnostic!.toJson(), diagnostic, reason: id);
+
+      expect(
+        () => executeGeneratedParserV2(
+          compiled,
+          buildGeneratedRulePlan(compiled),
+          'x',
+          'callable-codeblock-$id.spec',
+        ),
+        throwsA(
+          isA<GeneratedSourceException>().having(
+            (error) => error.detail,
+            'detail',
+            contains(expected['code']),
+          ),
+        ),
+        reason: id,
+      );
+    }
+  });
+
+  test('mutual recursion reports the exact ordered callable cycle', () {
+    final error = _runtimeFailure(
+      _compileSource(r'''Top::
+ /x/
+ E {
+   left = {|| return(right()) };
+   right = {|| return(left()) };
+   return(left())
+ }
+'''),
+    );
+    expect(error.diagnostic!.code, 'codeblock_recursion_unsupported');
+    expect(error.diagnostic!.callableName, 'left');
+    expect(error.diagnostic!.cycle, ['left', 'right', 'left']);
+  });
+
+  test('colon keywords cannot bypass registered user-function policy', () {
+    final error = _runtimeFailure(
+      _compileSource(r'''fn identity(value) { return(value) }
+
+Top::
+ /x/
+ E { return(identity(value: "x")) }
+'''),
+    );
+    expect(
+      error.diagnostic!.code,
+      'user_function_keyword_arguments_unsupported',
+    );
+    expect(error.diagnostic!.callableName, 'identity');
+    expect(error.diagnostic!.got, 1);
+  });
+
+  test(
+    'standalone emitted Dart executes the fixture and all invalid calls',
+    () {
+      final contract = _contract();
+      final fixture = _record(contract['fixture']);
+      final fixtureCompiled = _compileSource(fixture['spec_source']! as String);
+      final invalidRows = (contract['invalid_call_cases']! as List)
+          .map(_record)
+          .toList(growable: false);
+      final packageRoot = Directory.current.absolute;
+      final scratch = Directory.systemTemp.createTempSync(
+        'linkedspec-dart-callable-codeblock-emitted-',
+      );
+      final pubCache = Directory('${scratch.path}/pub-cache')..createSync();
+      try {
+        Directory('${scratch.path}/lib').createSync();
+        Directory('${scratch.path}/bin').createSync();
+        File('${scratch.path}/pubspec.yaml').writeAsStringSync('''
+name: linkedspec_callable_codeblock_emitted_probe
+publish_to: none
+environment:
+  sdk: ">=3.9.0 <4.0.0"
+dependencies:
+  linkedspec_dart:
+    path: ${jsonEncode(packageRoot.path)}
+''');
+        File('${scratch.path}/lib/fixture.dart').writeAsStringSync(
+          emitDartSourceV2(
+            fixtureCompiled,
+            'callable-codeblock/neutral-fixture.spec',
+          ),
+        );
+        for (final row in invalidRows) {
+          final id = row['id']! as String;
+          File('${scratch.path}/lib/$id.dart').writeAsStringSync(
+            emitDartSourceV2(
+              _compileSource(_invalidCallSource(id)),
+              'callable-codeblock/$id.spec',
+            ),
+          );
+        }
+
+        final main = StringBuffer()
+          ..writeln("import 'dart:convert';")
+          ..writeln(
+            "import 'package:linkedspec_callable_codeblock_emitted_probe/fixture.dart' as fixture;",
+          );
+        for (final row in invalidRows) {
+          final id = row['id']! as String;
+          main.writeln(
+            "import 'package:linkedspec_callable_codeblock_emitted_probe/$id.dart' as $id;",
+          );
+        }
+        main
+          ..writeln('void main() {')
+          ..writeln('  final errors = <String, String>{};');
+        for (final row in invalidRows) {
+          final id = row['id']! as String;
+          main
+            ..writeln('  try {')
+            ..writeln("    $id.execute('x');")
+            ..writeln('  } catch (error) {')
+            ..writeln("    errors['$id'] = '\$error';")
+            ..writeln('  }');
+        }
+        main
+          ..writeln('  print(jsonEncode({')
+          ..writeln(
+            "    'fixture': fixture.execute(${jsonEncode(fixture['input'])}),",
+          )
+          ..writeln("    'errors': errors,")
+          ..writeln('  }));')
+          ..writeln('}');
+        File(
+          '${scratch.path}/bin/main.dart',
+        ).writeAsStringSync(main.toString());
+
+        final environment = {
+          ...Platform.environment,
+          'PUB_CACHE': pubCache.path,
+        };
+        _expectDartSuccess(scratch, environment, const [
+          'pub',
+          'get',
+          '--offline',
+        ]);
+        final run = _expectDartSuccess(scratch, environment, const [
+          'run',
+          'bin/main.dart',
+        ]);
+        final result = _record(jsonDecode((run.stdout as String).trim()));
+        expect(result['fixture'], fixture['expected']);
+        final errors = _record(result['errors']);
+        for (final row in invalidRows) {
+          final id = row['id']! as String;
+          final expected = _record(row['expected_error']);
+          expect(errors[id], contains(expected['code']), reason: id);
+        }
+      } finally {
+        scratch.deleteSync(recursive: true);
+      }
+      expect(scratch.existsSync(), isFalse);
+    },
+    timeout: const Timeout(Duration(minutes: 2)),
+  );
 }

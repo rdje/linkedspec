@@ -15,7 +15,7 @@ answers:
 date: 2026-07-30
 status: current
 tags: [dart, actionir, codeblock, callable, generated-source, semantic-introspection, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.11.5.1 adds exact {| recognition, the neutral eight-field literal/fixed-rest signature record, containing Unicode-character-coordinate literal/body spans, inert plain-data runtime state, compiled JSON and generated-source preservation, and semantic codeblock shapes. Eight focused tests cover the neutral literal inventory, nine diagnostics, non-execution, user-function transport, the reconstructed variadic-user-function non-null-rest invariant, eager-dependency isolation, and descriptors; dynamic invocation remains .11.5.2."
+evidence: "FUTURE-PARITY-BACKLOG.11.5.1 adds exact {| recognition, the neutral eight-field literal/fixed-rest signature record, containing Unicode-character-coordinate literal/body spans, inert plain-data runtime state, compiled JSON and generated-source preservation, and semantic codeblock shapes. Eight focused tests cover the neutral literal inventory, nine diagnostics, non-execution, user-function transport, the reconstructed variadic-user-function non-null-rest invariant, eager-dependency isolation, and descriptors; dynamic invocation is implemented separately by .11.5.2."
 reverify: "bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && (cd dart && bash ../tools/run_dart_project_data.sh test test/callable_codeblock_literal_contract_test.dart) && bash tools/run_dart_local.sh"
 ---
 
@@ -41,8 +41,9 @@ as ordinary data. Generated-plan execution reuses the compiled object, while emi
 closure, callback object, or second evaluator is introduced. Semantic binding projection reports
 `kind = codeblock` plus the exact fixed/rest callable signature.
 
-Construction/state is intentionally inert. Bound-variable dispatch such as `cb(args)` remains
+Construction/state remains intentionally inert. Bound-variable dispatch such as `cb(args)` is now implemented by
 `FUTURE-PARITY-BACKLOG.11.5.2`; generic attached/parenthesized final blocks remain `.11.5.3`.
 
 Related facts: [[callable-codeblock-literal-contract]], [[dart-variadic-user-functions]],
-[[rust-callable-codeblock-literal-state]], [[perl-callable-codeblock-literal-record]].
+[[dart-callable-codeblock-dynamic-invocation]], [[rust-callable-codeblock-literal-state]],
+[[perl-callable-codeblock-literal-record]].

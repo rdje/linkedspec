@@ -5,18 +5,20 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `0274d47f` — clean continuity-closeout HEAD from which Dart `.11.5.1` activated
-  task-tree-first (112/300 after landing; no push); Git derives current landing identity.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.11.5.1` via planned subject
-  `FUTURE-PARITY-BACKLOG.11.5.1 - construct Dart callable codeblocks`.
-- active_leaf: none after this landing; Dart construction/state is closed.
-- active_scope: clean handoff to Dart dynamic callable invocation `.11.5.2`.
-- active_progress: exact inert literal/signature/body/source/Unicode spans and reconstructed user-signature guard
-  pass native, compiled, generated, emitted, user-function, semantic, full Dart, documentation, and canonical proof.
-- active_exclusions: bound-variable invocation `.11.5.2`, generic contextual final blocks `.11.5.3`, capability/
+- activation_commit: `5e80be32` — clean Dart construction HEAD from which `.11.5.2` activated task-tree-first
+  (112/300; no push); Git derives current landing identity.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.11.5.2` via subject
+  `FUTURE-PARITY-BACKLOG.11.5.2 - execute Dart callable codeblocks`; Git derives its landing identity.
+- active_leaf: none after this landing; `FUTURE-PARITY-BACKLOG.11.5.3` awaits clean task-tree-first activation.
+- active_scope: none until `.11.5.3` activates; `.11.5.2` owns the completed Dart bound-variable invocation slice.
+- active_progress: dynamic invocation is signoff-complete; focused callable 15/15 and parser/variadic 13/13 pass;
+  operational format 94/0, analyzer, Dart 369/369, storage 19/47, CLI 66x2, and corpus 105/105 are green across
+  native/reconstructed/generated/emitted roles; KM 765/6,213, book 79/13,924, all 7 doctrines, canonical semantic/
+  MCP admissions, containment/moved-root, CLI 66x2, RAM 56%, and Phase 0 1,031/1,031 in 650s pass.
+- active_exclusions: generic contextual final blocks `.11.5.3`, capability/
   MCP movement, lexical capture, other backends, root README, history rewriting, and push.
-- in_flight_uncommitted: none after this landing.
-- next_after_clean_commit: activate dynamic Dart callable invocation `.11.5.2` task-tree-first; no push.
+- in_flight_uncommitted: none after the `.11.5.2` landing commit and brief clear.
+- next_after_clean_commit: activate generic Dart final blocks `.11.5.3` task-tree-first; no push.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -24,7 +26,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   signals group-wide, rechecks before deletion, and retains live/reused/invalid/indeterminate authority.
 - current_storage_routing: 41 hook/doctrine/KM/canonical/backend/book/matrix/storage/path boundaries self-root and
   enter one managed run; Cargo/Dart/Julia/Lua/Python use supported root-relative wrappers.
-- current_storage_backends: Perl 24, Rust 17, Dart 18, Julia 17, and Lua 16 owner proofs route project data to the
+- current_storage_backends: Perl 24, Rust 17, Dart 19, Julia 17, and Lua 16 owner proofs route project data to the
   repository volume; only documented read-only toolchain/OS resources remain external.
 - current_storage_tools: tool oracle freezes 3 Python temp / 14 shell allocator / 25 tool owners; bytecode/map/
   book/CLI/TAP/oracle output is same-device, and external/symlink output is pre-rejected.
@@ -47,6 +49,6 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; canonical needs nested macOS sandbox permission and up to 30m.
-- canonical_state: `.11.5.1` passes KM 764/6,204, book 79/13,908, all 7 doctrines, containment/moved-root, CLI
-  66x2, RAM 56%, and Phase 0 1,031/1,031 in 645 seconds; exact output/run cleanup passes.
-- blockers: none; activate Dart dynamic callable invocation `.11.5.2` task-tree-first; no push.
+- canonical_state: `.11.5.2` passes KM 765/6,213, book 79/13,924, all 7 doctrines, semantic/MCP admissions,
+  containment/moved-root, CLI 66x2, RAM 56%, and Phase 0 1,031/1,031 in 650 seconds; exact cleanup passes.
+- blockers: none; activate `.11.5.3` task-tree-first from the clean `.11.5.2` commit; no push.

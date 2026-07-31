@@ -1,5 +1,34 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-30 (`FUTURE-PARITY-BACKLOG.11.5.2` — reuse caller stores, do not build a closure runtime): Dart's
+  static call dispatcher already owned controls, helpers, and registered user functions; its default arm alone
+  lacked a bound-name fallback. The existing `_VariableSnapshot`/scoped-binding mechanism already copies and
+  restores one scalar/array/harray name without isolating the entire store. Reusing those two seams keeps static
+  precedence intact and gives codeblocks dynamic caller context, unlike user functions whose whole-store snapshot
+  intentionally creates an isolated function frame.
+
+  Runtime codeblock values remain the exact plain serializable eight-field map. Construction registers the already
+  parsed typed body in an engine cache keyed by exact literal source; invocation validates the map/signature and
+  executes that retained ActionIR, with source parsing only as a defensive reconstruction fallback. Arguments are
+  evaluated and recursively copied before binding. Fixed and fresh-rest parameter snapshots unwind in reverse
+  order in `finally`, the result is copied before restoration, and unrelated caller mutations remain live. A
+  separate active-codeblock list reports ordered direct/mutual cycles without conflating user-function recursion.
+
+  Two narrow parser additions close the portable fixture rather than widening the language generally: colon
+  keyword arguments become typed `ActionKeywordArgument` values for governed rejection, while `name = value`
+  remains an ordinary assignment expression; and `ActionValueAccessExpr` lets an evaluated call result feed the
+  existing key/index reader before normal fluent methods continue. Public diagnostics add only the neutral
+  callable fields and preserve all previous optional fields.
+
+  Fifteen callable tests cover every neutral valid/invalid call and independently compile emitted Dart, while the
+  existing runtime unknown-helper test now locks the portable code/name envelope. The operational gate passes
+  format over 94 files with zero changes, strict analysis, all 369 tests, 19 storage owners / 47 locked packages,
+  primary CLI 66x2, and corpus 105/105. Knowledge Map 765/6,213, final mdBook 79 files / 13,924 KiB, and all seven
+  doctrines pass. Canonical signoff also passes all semantic/MCP admissions, repository containment and moved-root
+  anchors, CLI 66x2, RAM 56%, and Phase 0 1,031/1,031 in 650 seconds; exact output/run cleanup passes. Generic
+  contextual final-block normalization, capability/MCP movement, lexical capture, other backends, and root README
+  changes remain excluded.
+
 - 2026-07-30 (`FUTURE-PARITY-BACKLOG.11.5.1` — typed deferred data, not a Dart callback): The measured Dart gap
   had three connected seams. `ActionExpr` represented ordinary eager `block_value` only; `_parseBraceExpr` sent
   every non-harray brace through that evaluator; and the existing shared `CallableSignature` required a rest name,

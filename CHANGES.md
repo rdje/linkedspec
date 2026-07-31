@@ -1,5 +1,29 @@
 # CHANGES
 
+## 2026-07-30 — FUTURE-PARITY-BACKLOG.11.5.2 — execute Dart callable codeblocks
+
+Dart now executes `cb(args)` when `cb` is bound to the neutral eight-field callable-codeblock record. Existing
+controls, helpers, and registered user functions keep precedence. Positional arguments evaluate once from left to
+right; deep-copied fixed values and a fresh rest array use exception-safe temporary bindings, while nonparameter
+reads and writes stay in the caller's live stores. `return(...)` remains invocation-local, final expressions yield,
+standalone calls discard only their result, and typed call-result access can continue through key/index lookup and
+receiver chains.
+
+The runtime diagnostic envelope now carries the neutral callable/name/expected/got/value-kind/cycle fields for
+exact arity, colon-keyword, bound-non-codeblock, unknown-call, and direct/mutual-recursion failures. Narrow colon
+keyword parsing also preserves registered user-function rejection without changing assignment expressions. The
+runtime caches each retained typed body by exact literal source and introduces no Dart callback, closure capture,
+host fallback, or second generated executor.
+
+Fifteen contract-driven tests consume all eleven valid calls, seven invalid calls, the exact neutral fixture,
+static precedence, once-only argument order, recursive-copy isolation, native execution, normalized emitted-payload
+reconstruction, generated plans, and independently compiled emitted Dart. The operational Dart gate passes format
+over 94 files with zero changes, strict analysis, 369 tests, 19 storage owners / 47 locked packages, primary CLI
+66x2, and corpus 105/105. Knowledge Map 765/6,213, final mdBook 79 files / 13,924 KiB, and all seven doctrines pass;
+canonical signoff also passes all semantic/MCP admissions, repository containment and moved-root anchors, CLI
+66x2, RAM 56%, and Phase 0 1,031/1,031 in 650 seconds. Exact output/run cleanup passes. Generic contextual final
+blocks remain `.11.5.3`; capability, MCP, other backends, and the root README do not move.
+
 ## 2026-07-30 — FUTURE-PARITY-BACKLOG.11.5.1 — construct Dart callable codeblocks
 
 Dart now recognizes exact `{|params| body }` and `{|| body }` before its existing harray/eager-block brace

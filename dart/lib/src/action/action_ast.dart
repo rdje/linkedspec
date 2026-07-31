@@ -235,6 +235,28 @@ final class ActionNestedAccessExpr extends ActionExpr {
   }
 }
 
+/// A mixed access path whose receiver is an evaluated expression result.
+final class ActionValueAccessExpr extends ActionExpr {
+  const ActionValueAccessExpr({
+    required super.source,
+    required super.sourceSpan,
+    required this.receiver,
+    required this.segments,
+  }) : super(kind: 'value_access');
+
+  final ActionExpr receiver;
+  final List<ActionAccessSegment> segments;
+
+  @override
+  ActionJsonObject toJson() {
+    return {
+      ...baseJson(),
+      'receiver': receiver.toJson(),
+      'segments': [for (final segment in segments) segment.toJson()],
+    };
+  }
+}
+
 final class ActionArrayLiteralExpr extends ActionExpr {
   const ActionArrayLiteralExpr({
     required super.source,
@@ -891,6 +913,9 @@ RemovedAggregateSelector? findRemovedAggregateSelectorInExpr(ActionExpr expr) {
       return findRemovedAggregateSelectorInExpr(index);
     case ActionNestedAccessExpr(:final segments):
       return inSegments(segments);
+    case ActionValueAccessExpr(:final receiver, :final segments):
+      return findRemovedAggregateSelectorInExpr(receiver) ??
+          inSegments(segments);
     case ActionArrayLiteralExpr(:final items):
       for (final item in items) {
         final selector = findRemovedAggregateSelectorInExpr(item);

@@ -104,6 +104,11 @@ final class _ActionParser {
       return control;
     }
 
+    final valueAccess = _parseCallResultAccess(text, start);
+    if (valueAccess != null) {
+      return valueAccess;
+    }
+
     final call = _parseCall(text, start);
     if (call != null) {
       return call;
@@ -597,6 +602,39 @@ final class _ActionParser {
     );
   }
 
+  ActionValueAccessExpr? _parseCallResultAccess(String text, int start) {
+    final open = _findTopLevelOpenParen(text);
+    if (open == null) {
+      return null;
+    }
+    final close = _findMatchingDelimiter(text, open, '(', ')');
+    if (close == null) {
+      return null;
+    }
+    var accessStart = close + 1;
+    while (accessStart < text.length && text[accessStart].trim().isEmpty) {
+      accessStart += 1;
+    }
+    if (accessStart == text.length || text[accessStart] != '[') {
+      return null;
+    }
+    final receiverSource = text.substring(0, close + 1);
+    final receiver = _parseCall(receiverSource, start);
+    if (receiver == null) {
+      return null;
+    }
+    final segments = _parseAccessSegments(text, accessStart, start);
+    if (segments == null || segments.isEmpty) {
+      return null;
+    }
+    return ActionValueAccessExpr(
+      source: text,
+      sourceSpan: _span(start, start + text.length),
+      receiver: receiver,
+      segments: segments,
+    );
+  }
+
   ActionExpr? _parseVariableOrAccess(String text, int start) {
     final match = RegExp(r'^\$?([A-Za-z_]\w*)').firstMatch(text);
     if (match == null) {
@@ -888,6 +926,23 @@ final class _ActionParser {
     for (final part in _splitTopLevelCsv(payload, start)) {
       if (part.text.trim().isEmpty) {
         continue;
+      }
+      final separator = _findTopLevelHashPairSeparator(part.text);
+      if (separator != null && separator.token == ':') {
+        final name = part.text.substring(0, separator.index).trim();
+        if (_isIdentifier(name)) {
+          final value = _trimWithOffsets(
+            part.text.substring(separator.index + separator.length),
+            part.start + separator.index + separator.length,
+          );
+          args.add(
+            ActionKeywordArgument(
+              name: name,
+              value: _child(value.text, value.start).parseExpression(),
+            ),
+          );
+          continue;
+        }
       }
       final expression = _child(part.text, part.start).parseExpression();
       final keywordIndex = _findTopLevelAssignmentEquals(part.text);

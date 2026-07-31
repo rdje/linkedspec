@@ -266,7 +266,7 @@ is deferred; invocation uses the caller's current nonparameter stores, temporari
 eager `{ statements }` block expressions. `with` remains an ordinary helper. The executable neutral
 `linkedspec-callable-codeblock-v1` contract locks this design and its fixture. Perl, Rust, and Dart now parse these
 literals and preserve their signature/body/source/span record through assignment, user functions, serialization,
-and generated source. Perl and Rust additionally execute a bound value through `cb(args)`. Arguments evaluate once
+and generated source. Perl, Rust, and Dart execute a bound value through `cb(args)`. Arguments evaluate once
 from left to right before temporary copied fixed/rest parameters bind. Prior parameter values restore even when the body fails;
 nonparameter reads and writes use the caller's current working slots. `return(...)` exits only the codeblock, a
 final expression is the implicit result, compatible receiver chains may continue, and a standalone call discards
@@ -278,12 +278,18 @@ generated plans, emitted source, and semantic `codeblock` descriptors. Construct
 or executes the body. Dynamic execution uses that same reconstructed runtime state; it is not a generated-source
 special case.
 
-Dart now has the same inert construction boundary. Its ActionIR parser carries one root source while recursively
+Dart has the same inert construction boundary. Its ActionIR parser carries one root source while recursively
 parsing nested expressions, so literal and body spans remain half-open Unicode-character coordinates even though
 the host indexes strings in UTF-16 code units. Runtime construction returns recursively copied plain map data;
 contract/dependency traversal does not enter the retained typed body. Compiled ActionIR JSON, user functions,
 generated-plan execution, normalized emitted `SpecFile` reconstruction, and semantic binding shapes preserve that
-same record without a Dart closure. Dart bound-variable invocation remains the next `.11.5.2` slice.
+same record without a Dart closure. Bound-variable fallback runs only after static callables. Dart reuses its
+existing scoped-variable snapshots for copied fixed/rest parameters while leaving all nonparameter stores live;
+an ordered active-name stack rejects direct and mutual recursion. One typed `value_access` ActionIR node lets a
+call result feed existing key/index lookup and then an ordinary receiver chain. Exact callable diagnostics expose
+arity, keyword count, non-callable kind, unknown name, and cycle fields. Native, reconstructed, generated-plan,
+and independently compiled emitted-source execution consume every neutral valid and invalid call. Generic
+contextual final-block normalization remains `.11.5.3`.
 
 On Perl and Rust, `apply("x") { return(value) }` and `apply("x", { return(value) })` normalize to the same contextual
 zero-positional codeblock when `apply` declares a final `callback: codeblock`. The same metadata rule governs the
@@ -308,11 +314,11 @@ count = collector("p", "a", "b")["items"].length()
 # count == 2
 ```
 
-Perl and Rust report exact arity, keyword-call, bound-non-codeblock, unknown-body-helper, and active-recursion
+Perl, Rust, and Dart report exact arity, keyword-call, bound-non-codeblock, unknown-body-helper, and active-recursion
 failures as typed runtime details. A governed helper/control or registered user function still wins over a
-same-named variable. Explicit construction is current on Perl, Rust, and Dart; `cb(...)` invocation is current on
-Perl and Rust. Generic contextual final-block spellings are complete on Perl and Rust; Dart invocation/contextual
-parity, Julia parity, and Lua explicit-literal/dynamic-call parity remain future.
+same-named variable. Explicit construction and `cb(...)` invocation are current on Perl, Rust, and Dart. Generic
+contextual final-block spellings are complete on Perl and Rust; Dart contextual parity, Julia parity, and Lua
+explicit-literal/dynamic-call parity remain future.
 
 Hash receiver trailing blocks also support deterministic tree traversal. A hash tree has a hash root. Nested hash
 values are interior nodes; all non-hash values, including arrays, are leaves. `walk_leaves() { ... }` visits each

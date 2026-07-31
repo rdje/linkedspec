@@ -59,6 +59,7 @@ case "$(cd -P -- "$TMPDIR" && pwd -P)/" in
 esac
 
 expected_temp_owners=(
+ dart/test/callable_codeblock_literal_contract_test.dart
  dart/test/corpus_manifest_test.dart
  dart/test/duplicate_regex_slot_identity_contract_test.dart
  dart/test/logical_helper_contract_test.dart
@@ -122,5 +123,5 @@ if find "$TMPDIR" -mindepth 1 -type d -name 'linkedspec-dart-*' -print -quit | g
  fail 'a completed focused Dart workspace remained in managed temporary storage'
 fi
 
-printf '[dart-project-data-test] PASS: 18 Dart owners, %s locked packages, generated workspaces, and traces stay on repository storage\n' \
- "$locked_hosted_count"
+printf '[dart-project-data-test] PASS: %s Dart owners, %s locked packages, generated workspaces, and traces stay on repository storage\n' \
+ "${#expected_temp_owners[@]}" "$locked_hosted_count"

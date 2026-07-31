@@ -809,6 +809,9 @@ final class _ActionContractResolver {
         visitExpr(index);
       case ActionNestedAccessExpr(:final segments):
         _visitAccessSegments(segments);
+      case ActionValueAccessExpr(:final receiver, :final segments):
+        visitExpr(receiver);
+        _visitAccessSegments(segments);
       case ActionControlIfExpr(
         :final canonicalKeyword,
         :final keyword,

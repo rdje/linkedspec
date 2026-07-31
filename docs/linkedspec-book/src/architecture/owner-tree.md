@@ -446,7 +446,13 @@ final-rest arity, and recursive child parsers retain the containing ActionIR sou
 and body spans. Runtime construction converts the typed node to recursively copied plain map data. Action-contract
 and removed-selector traversals treat its body as deferred. Ordinary compiled ActionIR JSON, normalized `SpecFile`
 emission/reconstruction, generated-plan execution, user functions, and semantic projection carry the same record;
-there is no Dart closure or separate callback evaluator. Dynamic bound-variable dispatch remains `.11.5.2`.
+there is no Dart closure or separate callback evaluator. `LinkedSpecRuntimeEngine` owns bound-name fallback only
+after static callables and caches the retained typed body by exact literal source. `_VariableSnapshot` and scoped
+bindings own copied fixed/rest parameter restoration while unrelated caller stores remain live; a separate ordered
+active-codeblock list owns recursion rejection. `ActionValueAccessExpr` feeds evaluated results into the existing
+key/index reader, and the ordinary fluent evaluator continues any receiver chain. Native, normalized reconstructed,
+generated-plan, and independently compiled emitted-source execution reuse these owners. Generic contextual
+final-block normalization remains `.11.5.3`.
 
 `linkedspec_core::callable_contract` owns Rust contextual final-codeblock admission. The compiler-facing
 `CodeBlock::parse_with_callable_candidates` records attached/parenthesized provenance without granting semantics;

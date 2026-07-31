@@ -824,16 +824,21 @@ Three backbone items tracked major structural modernization — all done:
   generated-plan, and emitted-source behavior. Rust `.11.4.3` now adds one metadata-owned normalization pass for
   equivalent attached/parenthesized helper, typed-user-function, and receiver final blocks, exact descriptor-v3
   kinds, preserved eager/control blocks, typed non-codeblock rejection, and identical native/reconstructed/
-  generated/emitted execution. Dart construction is current through `.11.5.1`, while Dart invocation/contextual
-  parity, Julia parity, and Lua explicit-literal parity remain future.
-- **Dart callable-codeblock construction** - `FUTURE-PARITY-BACKLOG.11.5.1` now recognizes exact `{|params| body }`
+  generated/emitted execution. Dart construction and explicit dynamic invocation are current through `.11.5.2`,
+  while Dart contextual parity, Julia parity, and Lua explicit-literal parity remain future.
+- **Dart callable-codeblock construction and invocation** - `FUTURE-PARITY-BACKLOG.11.5.1` recognizes exact `{|params| body }`
   before Dart's harray/eager-block classifier and preserves the neutral eight-field record as inert plain data.
   Fixed and final-rest signatures, exact body/source, containing Unicode-character literal/body spans (including
   nested literals), typed ActionIR, copies, user-function transport, compiled JSON, generated plans, normalized
   emitted-source reconstruction, and semantic `codeblock` shapes agree. Construction neither executes the body
-  nor captures a Dart closure/environment, and eager contract/dependency traversal does not enter it. Bound
-  `cb(args)` invocation remains `.11.5.2`; generic final-block equivalence remains `.11.5.3`, so this does not yet
-  make Dart callable-codeblock behavior complete.
+  nor captures a Dart closure/environment, and eager contract/dependency traversal does not enter it. Completed
+  `.11.5.2` executes `cb(args)` after static callable precedence with once-only ordered arguments,
+  copied/restored fixed/rest bindings, caller-visible nonparameter state, local result access/chaining/discard,
+  exact arity/keyword/not-callable/unknown/ordered-recursion diagnostics, and identical native, reconstructed,
+  generated-plan, and independently compiled emitted-Dart behavior. Its signoff passes focused callable 15/15,
+  complete Dart 369/369, canonical semantic/MCP admissions, containment/moved-root proof, CLI 66x2, and Phase 0
+  1,031/1,031 in 650 seconds. Generic final-block equivalence remains `.11.5.3`, so Dart callable-codeblock
+  behavior is not yet complete.
 - **Dart backend parity** - `DART-BACKEND-PARITY` is complete only for the scoped interpreter-first Dart milestone. Its strategy is
   interpreter-first over typed `.spec` and helper/action AST plus compiled-spec state, with generated Dart source
   deferred to a future split source-emitter lane rather than required for the current conformance claim. The repo now has a `dart/` backend package with a Dart-specific CLI,

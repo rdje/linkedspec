@@ -172,9 +172,11 @@ failures, and direct/mutual recursion rejection across native/reconstructed/gene
 one metadata registry to the same zero-positional `codeblock_argument`, while preserving eager blocks and attached
 controls. Dart `.11.5.1` preserves the same inert eight-field literal, fixed/rest signature, typed body, containing
 Unicode-character spans, compiled/generated/emitted state, user-function transport, and semantic codeblock shape
-without executing or capturing the body. Dart dynamic invocation and contextual normalization remain `.11.5.2-.3`;
-Julia parity and Lua explicit literals remain future, so complete invocation behavior is not yet universally
-portable.
+without executing or capturing the body. Dart `.11.5.2` executes bound calls with the same once-only arguments,
+dynamic caller stores, copied/restored fixed/rest bindings, local result access/chaining, static precedence,
+structured failures, and ordered direct/mutual recursion rejection across native/reconstructed/generated/emitted
+roles. Dart contextual normalization remains `.11.5.3`; Julia parity and Lua explicit literals remain future, so
+complete invocation behavior is not yet universally portable.
 
 Arguments evaluate once from left to right before any parameter is bound. Nested arrays/harrays, booleans,
 `undef`, and codeblocks remain individual rest-array values rather than being flattened or coerced.

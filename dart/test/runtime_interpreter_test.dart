@@ -1587,19 +1587,24 @@ Child:
 
     try {
       engine.parse('x');
-      fail('unsupported runtime helper should throw');
+      fail('unknown helper should throw');
     } on RuntimeInterpreterException catch (error) {
       expect(
         error.message,
-        "unsupported runtime helper 'unknown_helper' in rule Child",
+        'unknown_helper name="unknown_helper" rule_label="Child"',
       );
       final diagnostic = error.diagnostic;
       expect(diagnostic, isNotNull);
-      expect(diagnostic!.toJson(), containsPair('stage', 'runtime_execution'));
+      expect(
+        diagnostic!.toJson(),
+        containsPair('stage', 'callable_codeblock_invocation'),
+      );
       expect(
         diagnostic.toJson(),
-        containsPair('summary', 'Dart runtime interpreter failed'),
+        containsPair('summary', 'Dart callable codeblock invocation failed'),
       );
+      expect(diagnostic.toJson(), containsPair('code', 'unknown_helper'));
+      expect(diagnostic.toJson(), containsPair('name', 'unknown_helper'));
       expect(diagnostic.toJson(), containsPair('top_rule', 'Top'));
       expect(diagnostic.toJson(), containsPair('rule_label', 'Child'));
       expect(

@@ -13,7 +13,7 @@ answers:
 date: 2026-07-12
 status: current-partial-rollout
 tags: [codeblock, callable, literal, dynamic-scope, harray, actionir, FUTURE-PARITY-BACKLOG]
-evidence: "Director agreement on 2026-07-12 selects {|args| ...} and dynamic caller context; ADR 0031 defines literals/invocation, ADR 0032 defines final-only name: codeblock, .11.2 adopts linkedspec-callable-codeblock-v1, Perl .11.3 and Rust .11.4 consume the full behavior, and Dart .11.5.1 consumes exact inert construction/state while Dart invocation/contextual behavior and remaining backend parity stay future."
+evidence: "Director agreement on 2026-07-12 selects {|args| ...} and dynamic caller context; ADR 0031 defines literals/invocation, ADR 0032 defines final-only name: codeblock, .11.2 adopts linkedspec-callable-codeblock-v1, Perl .11.3 and Rust .11.4 consume the full behavior, and Dart .11.5.1-.2 consume exact inert construction plus dynamic invocation while Dart contextual behavior and remaining backend parity stay future."
 reverify: "bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && rg -n '0031|0032|name: codeblock|dynamic caller|FUTURE-PARITY-BACKLOG\\.11\\.[1-7]' docs/decisions/0031-callable-codeblock-literal-and-dynamic-context.md docs/decisions/0032-final-codeblock-parameter-declaration.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -55,12 +55,13 @@ construction/preservation, `.11.3.2` executes `cb(args)` with the neutral dynami
 the same inert literal/signature/body/source/span record through compiled JSON, user functions, semantic
 descriptors, generated plans, and emitted source. Rust `.11.4.2` executes dynamic calls with the same ordered
 arguments, copied/restored bindings, caller stores, local results, static precedence, typed failures, and
-native/generated identity. Rust contextual equivalence is current through `.11.4.3`. Dart `.11.5.1` now
-preserves the same inert literal record through native, compiled, generated, emitted, user-function, and semantic
-state, while Dart invocation/contextual behavior and Julia/Lua explicit values remain future, so the complete
-feature is not yet portable.
+native/generated identity. Rust contextual equivalence is current through `.11.4.3`. Dart `.11.5.1-.2` now
+preserve the inert literal record and execute dynamic calls with the same ordered arguments, caller stores,
+copied/restored bindings, local results, typed failures/recursion, and native/reconstructed/generated/emitted
+identity. Dart contextual behavior and Julia/Lua explicit values remain future, so the complete feature is not yet
+portable.
 
 Related facts: [[generic-trailing-codeblock-argument-correction]], [[variadic-user-function-contract]],
 [[terse-expression-valued-blocks-ground-truth]], [[hash-literal-dynamic-key-contract]],
 [[perl-generic-final-codeblock-normalization]], [[rust-callable-codeblock-dynamic-invocation]],
-[[dart-callable-codeblock-literal-state]].
+[[dart-callable-codeblock-literal-state]], [[dart-callable-codeblock-dynamic-invocation]].
