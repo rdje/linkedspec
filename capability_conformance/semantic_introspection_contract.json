@@ -528,7 +528,7 @@
     {"capability": "julia_parity", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.6"},
     {"capability": "lua_dual_abi", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.7"},
     {"capability": "recurring_six_runtime", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.8"},
-    {"capability": "thin_mcp_transport", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.9"},
+    {"capability": "thin_mcp_transport", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.10.9.7.1"},
     {"capability": "public_no_drift", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.10.10"}
   ],
   "canonical_ci": {
@@ -544,10 +544,17 @@
       "dart/test/semantic_introspection_dart_admission_test.dart",
       "julia/test/semantic_introspection_julia_admission_test.jl",
       "lua/test/semantic_introspection_lua_admission_test.lua",
-      "tools/check_semantic_introspection_six_runtime.sh"
+      "tools/check_semantic_introspection_six_runtime.sh",
+      "capability_conformance/mcp_implementation_admission.json",
+      "tools/check_mcp_implementation_admission.py",
+      "tools/check_mcp_six_runtime.sh"
     ],
-    "backend_consumers": "not_admitted_before_owned_rollout_leaf",
-    "mcp_direct_identity": "pending_FUTURE-PARITY-BACKLOG.10.9"
+    "backend_consumers": "six_runtime_native_consumers_complete",
+    "mcp_direct_identity": {
+      "status": "complete",
+      "owner": "FUTURE-PARITY-BACKLOG.10.9.7.1",
+      "driver": "tools/check_mcp_six_runtime.sh"
+    }
   },
   "mutations": [
     "remove_record_kind", "rename_record_kind", "reorder_record_kinds", "remove_staged_fact", "rename_fact",
@@ -578,9 +585,11 @@
     "unpromote_lua_rollout", "omit_lua_canonical_registration",
     "omit_recurring_runtime", "alter_recurring_command", "omit_recurring_primary_case",
     "omit_recurring_support_check", "alter_recurring_ci_switch", "alter_recurring_driver",
-    "unpromote_recurring_rollout", "advance_mcp_early",
+    "unpromote_recurring_rollout", "unpromote_mcp_rollout", "alter_mcp_rollout_owner",
     "omit_runtime", "omit_luajit",
     "omit_mcp_rollout", "move_semantics_into_mcp",
-    "remove_fixture_group", "alter_fixture_bytes", "alter_expected_hash", "omit_canonical_registration"
+    "remove_fixture_group", "alter_fixture_bytes", "alter_expected_hash", "omit_canonical_registration",
+    "omit_mcp_canonical_registration", "unadmit_mcp_direct_identity", "alter_mcp_direct_identity_owner",
+    "alter_mcp_direct_identity_driver"
   ]
 }

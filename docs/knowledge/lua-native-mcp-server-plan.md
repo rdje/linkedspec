@@ -24,7 +24,7 @@ evidence_update_2026_07_29_decoded: "FUTURE-PARITY-BACKLOG.10.9.6.1 implements t
 evidence_update_2026_07_29_stdio: "FUTURE-PARITY-BACKLOG.10.9.6.2 implements private iterative mcp_wire.lua plus public server:serve_stdio over caller-owned streams. JSON-pointer token metadata preserves integer-only schema outcomes across LuaJIT collapse; bounded framing, canonical LF, cancellation-through-flush, EOF/I/O release, and fixed diagnostics pass 247 assertions per ABI. Governance rejects 98 mutations while formal status remains 4/5 + 4/6 pending exact admission."
 evidence_update_2026_07_29_admission: "FUTURE-PARITY-BACKLOG.10.9.6.3 runs one unchanged 202-assertion twelve-role consumer independently on PUC Lua and LuaJIT. The ledger reaches 5/5 implementations + 6/6 runtimes, rollout pending, with 114 rejected mutations; canonical CI passes Phase 0 1,031/1,031 in 659 seconds and the complete dual-ABI Lua opt-in."
 evidence_update_2026_07_29_closeout: "FUTURE-PARITY-BACKLOG.10.9.6.4 recomposes the committed neutral, five implementation, and six runtime owners unchanged. Canonical CI passes Phase 0 1,031/1,031 in 652 seconds plus the complete dual-ABI Lua gate; the ledger remains 5/5 + 6/6 pending/114 and parent .10.9.6 closes without production, fixture, contract, or topology movement."
-last_verified: 2026-07-29
+last_verified: 2026-07-30
 reverify:
   - "bash tools/run_lua_local.sh"
   - "bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py"
@@ -67,7 +67,8 @@ SHA-256 digest, uses fixed-work comparison and 43-character base64url handles, a
 Implementation order is generated/runtime/decoded/native-system `.1`, strict stdio `.2`, identical dual-ABI
 admission `.3`, and unchanged closeout `.4`; all are complete. The closeout recomposes the committed authorities
 without another oracle or implementation and closes parent `.10.9.6`. Formal MCP status remains 5/5
-implementations plus 6/6 runtimes. Recurring rollout remains pending and separately owned by `.10.9.7`.
+implementations plus 6/6 runtimes. Recurring `.10.9.7.1.1.3` subsequently completes shared rollout through the
+rooted all-twenty six-runtime gate; public no-drift remains separately owned by `.10.10`.
 
 Related facts: [[mcp-native-server-topology]], [[mcp-implementation-admission-ledger]],
 [[mcp-2026-07-28-stdio-contract]], [[lua-mcp-implementation-admission]], [[lua-semantic-introspection-admission]],

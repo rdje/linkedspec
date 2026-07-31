@@ -71,9 +71,14 @@ Julia `.10.9.5.1-.3` then adds its generated binding, decoded server, strict num
 one ordered twelve-role external admission consumer. No-change `.10.9.5.4` reruns that exact committed chain,
 closes parent `.10.9.5`, and adds no replacement implementation, fixture, or umbrella oracle. Shared Lua
 `.10.9.6.1-.3` now adds one common implementation plus one 202-assertion consumer run independently on both ABIs;
-the current ledger is 5/5 implementations + 6/6 runtimes with recurring rollout pending and 114 rejected
-implementation/admission mutations. Its canonical signoff passes all six doctrines, the exact cross-runtime MCP
-chain, Phase 0 1,031/1,031 in 659 seconds, and the complete PUC Lua/LuaJIT package gate.
+the current ledger is 5/5 implementations + 6/6 runtimes with recurring rollout complete and 141 rejected
+implementation/admission/recurring mutations. `tools/check_mcp_six_runtime.sh` is required and syntax-checked
+unconditionally; `LINKEDSPEC_RUN_MCP_MATRIX=1` opts into its neutral → transport/bindings → six consumers →
+ledger → primary-no-drift composition. Its canonical signoff passes all seven current doctrines, the exact cross-
+runtime MCP chain, Rust semantic in 81.29 seconds, Julia semantic 416/416 in 28.9 seconds,
+containment/moved-root execution, primary CLI 66x2, RAM 54%, and Phase 0 1,031/1,031 in 643 seconds. The optional
+leg independently repeats Perl 13, Rust 1/1 in 15.77 seconds, Dart 1/1, Julia 257/257 in 6.9 seconds, Lua 281/281
+per ABI, the complete/141 ledger, and primary 30/30.
 No-change `.10.9.6.4` reruns that exact committed sequence, passes Phase 0 1,031/1,031 in 652 seconds plus the
 same complete dual-ABI gate, preserves pending/114, and closes the shared Lua parent without a replacement test,
 fixture, consumer, implementation, or umbrella oracle.

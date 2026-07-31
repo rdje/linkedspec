@@ -1,15 +1,14 @@
 # ADR 0062: Recurring MCP proof composes six runtimes and all twenty semantic responses
 
 - Date: 2026-07-29
-- Status: accepted and director-authorized; atomic transport repair `.10.9.7.1.1.1` and all-twenty six-runtime
-  consumer proof `.10.9.7.1.1.2` implemented; routed governance and rollout remain pending
+- Status: accepted, implemented, and signoff-complete through routed governance `.10.9.7.1.1.3`
 - Tags: architecture, mcp, semantic-api, conformance, recurring-gate, backends, storage, parity
 
 ## Context
 
 ADRs `0049`, `0054`, and `0055` establish one neutral semantic model, one modern MCP transport contract, five
 native server implementations, and six runtime admissions. The implementation ledger is complete at 5/5 source
-implementations and 6/6 runtimes, while shared `thin_mcp_transport` rollout remains pending. The final MCP parent
+implementations and 6/6 runtimes, while shared `thin_mcp_transport` rollout is now complete. The final MCP parent
 therefore needs recurring composition rather than another implementation.
 
 The audit found an important proof boundary. Every native semantic admission consumer already derived and
@@ -17,8 +16,8 @@ digest-checked all twenty cases in `semantic_introspection_contract.json`. Befor
 admission consumer executed the twelve exact transport roles but its direct-native identity roles covered only
 capabilities and one representative graph query. Running those consumers together proved the full 35-frame,
 ten-raw-input, ten-lifecycle, four-handle, four-policy, privacy, authority, and primary-CLI boundaries, but not
-that all twenty semantic responses survived MCP byte-for-byte. The consumers now carry that missing evidence;
-recurring promotion still waits for routed omission-sensitive governance rather than inferring completion.
+that all twenty semantic responses survived MCP byte-for-byte. The consumers now carry that missing evidence,
+and rooted omission-sensitive governance earns the coordinated promotion rather than inferring completion.
 
 Adding a central response generator would create a second semantic oracle. Embedding every language runtime in
 one process would violate the native-server topology. Treating the six existing consumers as sufficient would
@@ -93,6 +92,22 @@ semantic 1/1 in 81.63 seconds, Dart 1/1, Julia 416/416 in 29.5 seconds, reposito
 and 35/10/10/76. Formal state intentionally remains 5/5 implementations + 6/6 runtimes, rollout pending, with
 114 governance mutations; `.10.9.7.1.1.3` must still add the rooted recurring composition and earn promotion.
 
+## Routed promotion and canonical evidence — 2026-07-30
+
+Leaf `.10.9.7.1.1.3` adds the exact rooted driver and promotes the two ledgers together under owner
+`FUTURE-PARITY-BACKLOG.10.9.7.1`. Focused execution passes semantic 6/20/110, MCP 35/10/10/76, all five
+byte-fresh bindings, the Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT all-twenty consumers, the complete 5/5 + 6/6/141
+ledger, and the selected primary projection at 30/30. The first composed run exposed Julia's established
+`Main.REPO_ROOT` include-wrapper dependency; the first canonical attempt exposed exact lexicographic ordering in
+the shell-owner registry. Both integration seams are corrected and omission-checked.
+
+The complete canonical rerun with `LINKEDSPEC_RUN_MCP_MATRIX=1` exits zero after all seven doctrines, Rust
+semantic 1/1 in 81.29 seconds, Dart 1/1, Julia semantic 416/416 in 28.9 seconds, repository containment,
+moved-root execution, primary CLI 66x2, RAM 54%, and Phase 0 1,031/1,031 in 643 seconds. Its optional recurring
+leg independently repeats Perl 13, Rust 1/1 in 15.77 seconds, Dart 1/1, Julia 257/257 in 6.9 seconds, Lua 281/281
+per ABI, the complete/141 ledger, and primary 30/30 before the canonical PASS. This evidence earns the
+coordinated rollout transition without adding another response oracle or server authority.
+
 ## Director authorization and implementation boundary — 2026-07-30
 
 The director authorized the recommended exact all-twenty correction and rejected no part of the proposed
@@ -114,7 +129,7 @@ Implementation child `.10.9.7.1.1.0` keeps the repair atomic where repository co
    This proof is now implemented and canonical-green without production, contract, binding, fixture, role, or
    formal-status movement.
 3. `.3` adds the rooted same-volume recurring driver, independent omission governance, coordinated ledger state,
-   canonical opt-in, and atomic thin-transport promotion.
+   canonical opt-in, and atomic thin-transport promotion. This is now implemented.
 4. `.4` recomposes every committed owner unchanged and closes `.1.1` plus parent `.1` before MCP closeout `.2`.
 
 Contract/schema/policy/server movement belongs to one commit because splitting those authorities would leave an
@@ -203,8 +218,8 @@ later route only and cannot become part of this proof.
 
 - Shared rollout is earned by direct evidence for all twenty native/MCP payload identities rather than inferred
   from one representative query.
-- That direct evidence is now present on all six runtimes; formal rollout still waits for the separately governed
-  recurring driver and coordinated ledger transition.
+- That direct evidence is present on all six runtimes; the separately governed recurring driver and coordinated
+  ledger transition now mark formal rollout complete.
 - Expected semantic bytes still have one owner; the recurring layer contains orchestration and test adapters,
   not another semantic implementation.
 - Runtime-specific construction remains inside the native consumer that already owns that runtime's admission.
@@ -218,5 +233,6 @@ later route only and cannot become part of this proof.
 - Native server topology: ADR `0054`
 - Modern stdio transport: ADR `0055`
 - Project-data locality: ADR `0053`
-- Task owner: `docs/tasks/FUTURE-PARITY-BACKLOG.md` (`FUTURE-PARITY-BACKLOG.10.9.7.0-.2`)
+- Task owner: `docs/tasks/FUTURE-PARITY-BACKLOG.md` (`FUTURE-PARITY-BACKLOG.10.9.7.0-.2`, implementation leaf
+  `.10.9.7.1.1.3`)
 - Prior recurring-gate precedent: `tools/check_semantic_introspection_six_runtime.sh`

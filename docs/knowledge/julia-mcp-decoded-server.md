@@ -11,7 +11,7 @@ answers:
   - "is Julia MCP stdio implemented yet"
   - "is the Julia MCP implementation admitted yet"
 date: 2026-07-29
-status: decoded server and strict stdio implemented; formal admission pending
+status: decoded server and strict stdio implemented, exactly admitted, and parent-closed
 tags: [julia, mcp, semantic-introspection, embedding, handles, security, generated-data]
 evidence: julia/src/mcp/McpContract.jl; julia/src/mcp/McpContractRuntime.jl; julia/src/mcp/McpServer.jl; julia/src/mcp/McpWire.jl; julia/src/LinkedSpecJulia.jl; julia/test/mcp_contract_julia_binding_test.jl; julia/test/mcp_server_julia_dispatch_test.jl; julia/test/mcp_server_julia_stdio_test.jl; tools/generate_julia_mcp_contract.py; capability_conformance/mcp_implementation_admission.json
 reverify: "bash tools/run_python_project_data.sh tools/generate_julia_mcp_contract.py && bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include(\"julia/test/mcp_contract_julia_binding_test.jl\"); include(\"julia/test/mcp_server_julia_dispatch_test.jl\"); include(\"julia/test/mcp_server_julia_stdio_test.jl\")' && bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py"
@@ -44,8 +44,8 @@ decoded classifications, native payload identity, lower-only policy, authorizati
 capacity, entropy/clock/collision failure, cancellation, sanitation, shutdown, opacity, and production authority
 fences at 48 + 139 assertions. Strict byte/token/framing behavior and public `serve_mcp_stdio!` are now implemented
 by `.10.9.5.2` at 170 further assertions. Exact twelve-role admission `.3` alone may move Julia to 4/5
-implementations and 4/6 runtimes; the
-formal ledger remains 3/5 + 3/6 with shared rollout pending.
+implementations and 4/6 runtimes; that admission and unchanged parent closeout are now complete. Shared Lua and
+recurring leaves subsequently complete the formal 5/5 implementation + 6/6 runtime rollout.
 
 Related facts: [[julia-native-mcp-server-plan]], [[julia-mcp-strict-stdio]], [[julia-semantic-query-public-api]],
 [[mcp-2026-07-28-stdio-contract]], [[mcp-native-server-topology]], and

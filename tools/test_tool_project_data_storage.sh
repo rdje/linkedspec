@@ -85,6 +85,7 @@ expected_shell_temp_owners=(
  tools/check_duplicate_regex_slot_identity_five_backend.sh
  tools/check_julia_primary_cli.sh
  tools/check_logical_helper_five_backend.sh
+ tools/check_mcp_six_runtime.sh
  tools/check_repeated_action_result_five_backend.sh
  tools/check_root_rule_selection_five_backend.sh
  tools/check_rule_local_cursor_five_backend.sh

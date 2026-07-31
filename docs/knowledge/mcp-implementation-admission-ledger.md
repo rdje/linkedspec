@@ -1,7 +1,7 @@
 ---
 id: mcp-implementation-admission-ledger
 title: MCP implementation and runtime admission ledger
-status: current; all five implementations and all six runtimes admitted; shared rollout pending
+status: current; all five implementations, all six runtimes, and shared rollout complete
 date: 2026-07-29
 answers:
   - Where are MCP implementation and runtime admission statuses recorded?
@@ -34,6 +34,7 @@ reverify:
   - bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include("julia/test/mcp_server_julia_admission_test.jl")'
   - bash tools/run_lua_project_data.sh puc lua/test/mcp_server_lua_admission_test.lua
   - bash tools/run_lua_project_data.sh luajit lua/test/mcp_server_lua_admission_test.lua
+  - bash tools/check_mcp_six_runtime.sh
 ---
 
 # MCP implementation and runtime admission ledger
@@ -46,8 +47,8 @@ and the exact 35 canonical, ten raw-input, ten lifecycle, four handle-state, and
 Topology is five native implementations—Perl, Rust, Dart, Julia, and one Lua-5.1-compatible source—but six runtime
 admissions because the Lua source must qualify unchanged on both PUC Lua and LuaJIT. Current formal state is all
 five implementations and all six runtimes complete. Each ordered consumer composes its generated/frozen/decoded/
-strict-stdio production owners without changing them. Shared `thin_mcp_transport` rollout remains pending under
-`FUTURE-PARITY-BACKLOG.10.9.7` until the recurring six-runtime composition is separately admitted.
+strict-stdio production owners without changing them. Shared `thin_mcp_transport` rollout is complete under
+`FUTURE-PARITY-BACKLOG.10.9.7.1` after recurring six-runtime composition.
 
 Each admitted consumer declares exactly twelve omission-sensitive roles: contract inventory, canonical
 static dispatch, native capabilities identity, native query identity, raw outcomes, lifecycle outcomes, handle
@@ -63,7 +64,13 @@ runtime/decoded owners, 68 after requiring Julia's strict wire plus stdio proof,
 and 93 after locking Lua's still-unadmitted generated/runtime/native-system/decoded owners and dual-ABI focused
 proof. Exact shared Lua admission raises the boundary to 114 mutations: one identical 202-assertion consumer runs
 all twelve roles independently on PUC Lua and LuaJIT, the Lua implementation and both runtime rows are complete,
-and shared rollout remains pending. Static fences prohibit production MCP owners from
+and shared rollout remains pending at that historical boundary. Routed `.10.9.7.1.1.3` raises the current
+boundary to 141 mutations, composes the all-twenty consumers once per runtime through
+`tools/check_mcp_six_runtime.sh`, cross-locks matching semantic/MCP owner and status, and promotes shared rollout.
+Canonical opt-in signoff exits zero after all seven doctrines, semantic 6/20/110, MCP 35/10/10/76, primary CLI
+66x2, Phase 0 1,031/1,031 in 643 seconds, and an independent optional recurrence of Perl 13, Rust 1/1, Dart 1/1,
+Julia 257/257, Lua 281/281 per ABI, the complete/141 ledger, and primary 30/30.
+Static fences prohibit production MCP owners from
 parser construction, descriptors, substitution handlers, parser-source dumps, trace, shell/process/network
 execution, and arbitrary reads; the sole documented Perl production `sysopen` is fail-closed `/dev/urandom` for
 opaque handles, Rust uses locked OS entropy without filesystem authority, and Dart uses core `Random.secure()`;

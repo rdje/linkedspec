@@ -1,5 +1,34 @@
 # CHANGES
 
+## 2026-07-30 — FUTURE-PARITY-BACKLOG.10.9.7.1.1.3 — promote recurring MCP proof
+
+Added executable, repository-routed `tools/check_mcp_six_runtime.sh` as a fail-fast orchestrator, not a new MCP
+server or response oracle. Its exact order is neutral semantic validation; MCP materialization and independent
+validation; Perl/Rust/Dart/Julia/Lua binding checks; Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT all-twenty consumers;
+the implementation/admission ledger; then three existing primary no-drift cases across five commands and two
+environments. Disposable Rust target and Julia writable-depot roots live under managed repository-volume scratch
+and exact cleanup removes only the task root.
+
+Promoted `thin_mcp_transport` atomically in the MCP and semantic ledgers under common owner
+`FUTURE-PARITY-BACKLOG.10.9.7.1`, retained all five implementation and six runtime rows, and pointed semantic
+canonical identity to the recurring driver. Canonical CI requires and syntax-checks the driver unconditionally;
+`LINKEDSPEC_RUN_MCP_MATRIX=1` opts into execution. Independent governance now rejects 141 MCP mutations and 110
+neutral-semantic mutations, including partial promotion, owner disagreement, topology/order/command omissions,
+representative-only identity, routing/storage/executable drift, and missing canonical registration.
+
+Focused recurring proof passes semantic 6/20/110 at rollout 8/9 + admission 6/6, MCP 35/10/10/76, all five byte-
+fresh bindings, Perl 13, Rust 1/1, Dart 1/1, Julia 257/257, Lua 281/281 per ABI, the complete/141 admission ledger,
+and all 30 selected primary legs. The first end-to-end run correctly exposed that Julia's include-style admission
+needs the established wrapper to define `REPO_ROOT`; the rooted driver now uses that canonical command. Full
+canonical execution first rejected an out-of-order shell-owner registry entry; moving the new driver to its exact
+lexicographic position made the focused storage oracle green. The complete rerun with
+`LINKEDSPEC_RUN_MCP_MATRIX=1` then passes all seven doctrines, Rust semantic 1/1 in 81.29 seconds, Dart 1/1,
+Julia semantic 416/416 in 28.9 seconds, containment and moved-root proof, primary CLI 66x2, RAM 54%, and Phase 0
+1,031/1,031 in 643 seconds. Its optional recurring leg independently repeats Perl 13, Rust 1/1 in 15.77 seconds,
+Dart 1/1, Julia 257/257 in 6.9 seconds, Lua 281/281 per ABI, the complete/141 ledger, and primary 30/30 before
+`[ci] local CI gate passed` and exit 0. Knowledge Map remains exact at 757 facts / 6,137 question keys, and the
+rendered mdBook passes at 13,764 KiB / 79 files before exact generated-output cleanup.
+
 ## 2026-07-30 — FUTURE-PARITY-BACKLOG.10.9.7.1.1.2 — prove all MCP response identities
 
 Strengthened the five existing MCP admission consumers without adding a production or test-only response oracle.

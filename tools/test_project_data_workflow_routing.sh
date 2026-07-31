@@ -65,6 +65,7 @@ routed_entrypoints=(
  tools/check_rule_local_cursor_five_backend.sh
  tools/check_scalar_numeric_six_runtime.sh
  tools/check_semantic_introspection_six_runtime.sh
+ tools/check_mcp_six_runtime.sh
 )
 
 for relative in "${routed_entrypoints[@]}"; do
@@ -207,6 +208,8 @@ run_routed_case cursor-five failure "$REPO_ROOT/tools/check_rule_local_cursor_fi
 run_routed_case scalar-six failure "$REPO_ROOT/tools/check_scalar_numeric_six_runtime.sh" \
  LINKEDSPEC_JULIA_CMD=linkedspec-routing-test-missing-julia
 run_routed_case semantic-six failure "$REPO_ROOT/tools/check_semantic_introspection_six_runtime.sh" \
+ LINKEDSPEC_JULIA_CMD=linkedspec-routing-test-missing-julia
+run_routed_case mcp-six failure "$REPO_ROOT/tools/check_mcp_six_runtime.sh" \
  LINKEDSPEC_JULIA_CMD=linkedspec-routing-test-missing-julia
 run_routed_case rust failure "$REPO_ROOT/tools/run_rust_local.sh" \
  LINKEDSPEC_CARGO_CMD=linkedspec-routing-test-missing-cargo

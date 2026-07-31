@@ -13,9 +13,9 @@ answers:
   - what may promote thin MCP transport
   - does recurring MCP proof add a primary CLI surface
 date: 2026-07-29
-status: accepted and director-authorized; atomic repair and all-twenty consumer proof implemented; routed rollout pending
+status: implemented and signoff-complete through routed six-runtime governance and coordinated thin-transport promotion
 tags: [mcp, semantic-introspection, recurring-gate, perl, rust, dart, julia, lua, luajit, conformance]
-evidence: "FUTURE-PARITY-BACKLOG.10.9.7.0 and ADR 0062 audit the neutral contract, six native/MCP consumers, ledgers, canonical CI, recurring precedent, and storage routing. Probe .10.9.7.1.0 found three shared blockers; atomic repair .10.9.7.1.1.1 admits the exact 72 fact keys, bounded future contract strings, and explicit-component-only pre-dispatch policy in all five servers. Leaf .10.9.7.1.1.2 strengthens the unchanged twelve-role consumers to prove capabilities plus nineteen governed queries across direct native object/canonical JSON, MCP structured/text/decoded payload, and existing response digest on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Focused proof passes Perl 13, Rust 1, Dart 1 plus analysis, Julia 257, and Lua 281x2; canonical repeats all six admissions and passes Rust semantic 81.63s, Julia 416/416 in 29.5s, CLI 66x2, and Phase 0 1,031/661s. Neutral state remains semantic 6/20/105 and MCP 35/10/10/76; formal rollout remains pending/114 until the rooted recurring driver and coordinated promotion."
+evidence: "FUTURE-PARITY-BACKLOG.10.9.7.0 and ADR 0062 audit the neutral contract, six native/MCP consumers, ledgers, canonical CI, recurring precedent, and storage routing. Probe .10.9.7.1.0 found three shared blockers; atomic repair .10.9.7.1.1.1 admits the exact 72 fact keys, bounded future contract strings, and explicit-component-only pre-dispatch policy in all five servers. Leaf .10.9.7.1.1.2 strengthens the unchanged twelve-role consumers to prove capabilities plus nineteen governed queries across direct native object/canonical JSON, MCP structured/text/decoded payload, and existing response digest on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Leaf .10.9.7.1.1.3 adds executable repository-routed tools/check_mcp_six_runtime.sh, exact six-runtime order, managed Rust/Julia scratch, canonical LINKEDSPEC_RUN_MCP_MATRIX opt-in, and atomic matching rollout owner/status in both ledgers. Governance rejects 141 MCP and 110 neutral-semantic mutations; formal state is 5/5 implementations, 6/6 runtimes, thin transport complete, semantic rollout 8/9. Focused proof passes all six consumers and primary 30/30. Canonical LINKEDSPEC_RUN_MCP_MATRIX=1 exits zero after seven doctrines, Rust semantic 81.29s, Julia semantic 416/416 in 28.9s, containment/moved-root, CLI 66x2, RAM 54%, Phase 0 1,031/1,031 in 643s, and an independent optional MCP repeat at Perl 13, Rust 1/15.77s, Dart 1, Julia 257/6.9s, Lua 281x2, ledger 141, and primary 30/30."
 last_verified: 2026-07-30
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
@@ -26,7 +26,7 @@ reverify:
 # Recurring MCP six-runtime plan
 
 The admitted topology is one neutral contract, five native server implementations, and six runtime rows because
-one Lua source runs unchanged on PUC Lua and LuaJIT. Shared `thin_mcp_transport` rollout remains pending until one
+one Lua source runs unchanged on PUC Lua and LuaJIT. Shared `thin_mcp_transport` rollout is complete after one
 repository-routed recurring gate proves the complete topology.
 
 The planning audit found that the six native semantic admission consumers already derive and digest-check all
@@ -50,13 +50,19 @@ blocker card. The repair moved atomically: exact schema/policy bytes, independen
 bindings, and all five servers changed together. Consumer proof `.10.9.7.1.1.2` is now complete: those same five
 consumers, with shared Lua run under both ABIs, construct the governed native snapshots and compare all twenty
 responses across direct native/canonical JSON, MCP structured/text/decoded content, and the existing digest.
-Promotion and unchanged closeout remain separate commits.
+Promotion is now implemented; unchanged closeout remains a separate commit.
 
-The planned `tools/check_mcp_six_runtime.sh` runs the neutral semantic checker, MCP materializer/validator, five
+`tools/check_mcp_six_runtime.sh` runs the neutral semantic checker, MCP materializer/validator, five
 binding generators, Perl/Rust/Dart/Julia/PUC Lua/LuaJIT consumers, MCP ledger checker, and three existing primary
 no-drift cases in exact order. It uses repository-derived managed scratch plus disposable Rust and Julia child
-roots. Canonical CI will require and syntax-check it, with expensive execution opt-in through
+roots. Canonical CI requires and syntax-checks it, with expensive execution opt-in through
 `LINKEDSPEC_RUN_MCP_MATRIX=1`.
+
+Canonical signoff is complete. The full opt-in gate passes all seven doctrines, Rust semantic admission in 81.29
+seconds, Julia semantic admission 416/416 in 28.9 seconds, repository containment and moved-root execution,
+primary CLI 66x2, RAM 54%, and Phase 0 1,031/1,031 in 643 seconds. The optional driver repeats all six MCP
+consumers, the complete/141 ledger, and primary 30/30 before the local gate exits zero. Unchanged recomposition
+`.10.9.7.1.1.4` is the next clean-boundary owner.
 
 Only the coordinated `.1` transition may mark `thin_mcp_transport` complete in both the MCP and semantic ledgers,
 with the same leaf owner. Implementations and runtime rows remain complete. Governance must reject partial or

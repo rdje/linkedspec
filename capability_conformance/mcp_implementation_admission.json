@@ -2,7 +2,7 @@
   "format": 1,
   "contract_id": "linkedspec-mcp-implementation-admission-v1",
   "task_owner": "FUTURE-PARITY-BACKLOG.10.9.2.3",
-  "decisions": ["0054", "0055", "0057", "0058", "0059", "0060", "0061"],
+  "decisions": ["0054", "0055", "0057", "0058", "0059", "0060", "0061", "0062"],
   "transport_contract": {
     "contract_id": "linkedspec-mcp-transport-v1",
     "path": "capability_conformance/mcp_semantic_transport_contract.json",
@@ -143,10 +143,83 @@
       "consumer_path": "lua/test/mcp_server_lua_admission_test.lua"
     }
   ],
+  "recurring_gate": {
+    "driver": "tools/check_mcp_six_runtime.sh",
+    "preflight_commands": [
+      "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py",
+      "bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py",
+      "bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py",
+      "bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py",
+      "bash tools/run_python_project_data.sh tools/generate_rust_mcp_contract.py",
+      "bash tools/run_python_project_data.sh tools/generate_dart_mcp_contract.py",
+      "bash tools/run_python_project_data.sh tools/generate_julia_mcp_contract.py",
+      "bash tools/run_python_project_data.sh tools/generate_lua_mcp_contract.py"
+    ],
+    "consumer_schema": {
+      "fields": ["backend", "runtime", "consumer_path", "command"],
+      "role_policy": "each admitted all-twenty direct/MCP identity consumer runs once; the shared Lua source runs once per ABI"
+    },
+    "consumers": [
+      {
+        "backend": "perl",
+        "runtime": "perl",
+        "consumer_path": "t/mcp_server_perl_admission.t",
+        "command": "PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t"
+      },
+      {
+        "backend": "rust",
+        "runtime": "rust",
+        "consumer_path": "rust/linkedspec-runtime/tests/mcp_server_rust_admission.rs",
+        "command": "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_admission"
+      },
+      {
+        "backend": "dart",
+        "runtime": "dart",
+        "consumer_path": "dart/test/mcp_server_dart_admission_test.dart",
+        "command": "cd dart && bash ../tools/run_dart_project_data.sh test test/mcp_server_dart_admission_test.dart"
+      },
+      {
+        "backend": "julia",
+        "runtime": "julia",
+        "consumer_path": "julia/test/mcp_server_julia_admission_test.jl",
+        "command": "bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include(\"julia/test/mcp_server_julia_admission_test.jl\")'"
+      },
+      {
+        "backend": "lua",
+        "runtime": "puc_lua",
+        "consumer_path": "lua/test/mcp_server_lua_admission_test.lua",
+        "command": "bash tools/run_lua_project_data.sh puc lua/test/mcp_server_lua_admission_test.lua"
+      },
+      {
+        "backend": "lua",
+        "runtime": "luajit",
+        "consumer_path": "lua/test/mcp_server_lua_admission_test.lua",
+        "command": "bash tools/run_lua_project_data.sh luajit lua/test/mcp_server_lua_admission_test.lua"
+      }
+    ],
+    "postflight_commands": [
+      "bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py"
+    ],
+    "primary_cli": {
+      "matrix_driver": "tools/run_primary_cli_matrix.sh",
+      "case_ids": [
+        "success_named_source_literal_input",
+        "failure_compile_precedes_input_load",
+        "trace_failure_invoke_route_low"
+      ],
+      "backend_count": 5,
+      "environments": ["default", "posix"],
+      "policy": "thin MCP transport adds no primary CLI surface; success, compile failure, and traced invocation failure stay exact"
+    },
+    "local_ci": {
+      "driver": "tools/run_ci_local.sh",
+      "switch": "LINKEDSPEC_RUN_MCP_MATRIX"
+    }
+  },
   "rollout": {
     "semantic_capability": "thin_mcp_transport",
-    "status": "pending",
-    "owner": "FUTURE-PARITY-BACKLOG.10.9.7",
+    "status": "complete",
+    "owner": "FUTURE-PARITY-BACKLOG.10.9.7.1",
     "requires_runtime_admissions": ["perl", "rust", "dart", "julia", "puc_lua", "luajit"]
   },
   "canonical_ci": {

@@ -90,6 +90,12 @@ check_no_untracked_ci_inputs() {
   found=1
  fi
 
+ status_line=$(git status --short --untracked-files=all -- tools/check_mcp_six_runtime.sh)
+ if [[ "$status_line" == '?? '* ]]; then
+  printf '[ci] ERROR: untracked CI input: %s\n' "${status_line#?? }" >&2
+  found=1
+ fi
+
  (( found == 0 )) || exit 1
 }
 
@@ -213,6 +219,7 @@ require_tracked_file tools/check_rule_local_cursor_contract.py
 require_tracked_file tools/check_rule_local_cursor_five_backend.sh
 require_tracked_file tools/check_semantic_introspection_contract.py
 require_tracked_file tools/check_semantic_introspection_six_runtime.sh
+require_tracked_file tools/check_mcp_six_runtime.sh
 require_tracked_file tools/check_uniform_binding_contract.py
 require_tracked_file tools/check_uniform_binding_mutation_result_surface.py
 require_tracked_file tools/check_capability_conformance.pl
@@ -426,6 +433,9 @@ audit_no_machine_specific_absolute_paths
 semantic_driver_matches=$(grep -nE '/(Users|home)/[^[:space:]]*|[[:alpha:]]:\\\\' tools/check_semantic_introspection_six_runtime.sh || true)
 [[ -z "$semantic_driver_matches" ]] || fail "machine-specific absolute path(s) in semantic recurring driver:
 $semantic_driver_matches"
+mcp_driver_matches=$(grep -nE '/(Users|home)/[^[:space:]]*|[[:alpha:]]:\\\\' tools/check_mcp_six_runtime.sh || true)
+[[ -z "$mcp_driver_matches" ]] || fail "machine-specific absolute path(s) in MCP recurring driver:
+$mcp_driver_matches"
 
 log "running syntax checks"
 bash -n tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh \
@@ -442,6 +452,7 @@ bash -n tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh \
  tools/check_root_rule_selection_five_backend.sh \
  tools/check_rule_local_cursor_five_backend.sh \
  tools/check_semantic_introspection_six_runtime.sh \
+ tools/check_mcp_six_runtime.sh \
  scripts/check_readme_stability.sh \
  tools/check_punctuation_light_five_backend.sh tools/check_scalar_numeric_six_runtime.sh
 perl -c perl/LinkedSpec.pm
@@ -795,6 +806,14 @@ if [[ "${LINKEDSPEC_RUN_SEMANTIC_MATRIX:-0}" == "1" ]]; then
  bash "$REPO_ROOT/tools/check_semantic_introspection_six_runtime.sh"
 else
  log "skipping optional six-runtime semantic-introspection matrix (set LINKEDSPEC_RUN_SEMANTIC_MATRIX=1 when all backend toolchains are available)"
+fi
+
+if [[ "${LINKEDSPEC_RUN_MCP_MATRIX:-0}" == "1" ]]; then
+ log "running optional six-runtime MCP composition matrix (LINKEDSPEC_RUN_MCP_MATRIX=1)"
+ require_tracked_file tools/check_mcp_six_runtime.sh
+ bash "$REPO_ROOT/tools/check_mcp_six_runtime.sh"
+else
+ log "skipping optional six-runtime MCP composition matrix (set LINKEDSPEC_RUN_MCP_MATRIX=1 when all backend toolchains are available)"
 fi
 
 if [[ "${LINKEDSPEC_RUN_DIAGNOSTIC_MATRIX:-0}" == "1" ]]; then

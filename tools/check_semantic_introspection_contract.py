@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = ROOT / "capability_conformance" / "semantic_introspection_contract.json"
 MODEL_PATH = ROOT / "capability_conformance" / "semantic_introspection_model.json"
 TOOLBOX_PATH = ROOT / "TOOLBOX.md"
+MCP_ADMISSION_PATH = ROOT / "capability_conformance" / "mcp_implementation_admission.json"
 CONTRACT_ID = "linkedspec-semantic-introspection-contract-v1"
 MODEL_ID = "linkedspec-semantic-model-v1"
 QUERY_ID = "linkedspec-semantic-query-v1"
@@ -124,7 +125,7 @@ ROLLOUT = [
     ("julia_parity", "complete", "FUTURE-PARITY-BACKLOG.10.6"),
     ("lua_dual_abi", "complete", "FUTURE-PARITY-BACKLOG.10.7"),
     ("recurring_six_runtime", "complete", "FUTURE-PARITY-BACKLOG.10.8"),
-    ("thin_mcp_transport", "pending", "FUTURE-PARITY-BACKLOG.10.9"),
+    ("thin_mcp_transport", "complete", "FUTURE-PARITY-BACKLOG.10.9.7.1"),
     ("public_no_drift", "pending", "FUTURE-PARITY-BACKLOG.10.10"),
 ]
 ADMISSIONS = [
@@ -238,8 +239,13 @@ RECURRING_GATE = {
         "switch": "LINKEDSPEC_RUN_SEMANTIC_MATRIX",
     },
 }
+MCP_DIRECT_IDENTITY = {
+    "status": "complete",
+    "owner": "FUTURE-PARITY-BACKLOG.10.9.7.1",
+    "driver": "tools/check_mcp_six_runtime.sh",
+}
 TOOLBOX_REQUIRED_CLAIMS = [
-    "semantic introspection contract: 6 fixture groups, 20 exact queries, 105 rejected mutations, rollout 7 complete / 2 pending, admission 6 complete / 0 pending",
+    "semantic introspection contract: 6 fixture groups, 20 exact queries, 110 rejected mutations, rollout 8 complete / 1 pending, admission 6 complete / 0 pending",
     "t/semantic_index_perl_runtime_observation.t",
     "Its 106 assertions match the twentieth response digest across eight execution roles",
     "t/semantic_introspection_perl_admission.t",
@@ -257,6 +263,7 @@ TOOLBOX_REQUIRED_CLAIMS = [
     "LINKEDSPEC_RUN_SEMANTIC_MATRIX=1",
 ]
 TOOLBOX_FORBIDDEN_CLAIMS = [
+    "105 rejected mutations, rollout 7 complete / 2 pending",
     "98 rejected mutations, rollout 6 complete / 3 pending",
     "89 rejected mutations",
     "rollout 5 complete / 4 pending",
@@ -315,7 +322,7 @@ def validate_toolbox_guard_probes(text: str) -> None:
     """Prove that both an omitted claim and a wrong current value are rejected."""
     omitted = text.replace(TOOLBOX_REQUIRED_CLAIMS[-1], "", 1)
     require(toolbox_claim_errors(omitted), "semantic toolbox omission guard is ineffective")
-    wrong = text.replace("105 rejected mutations", "104 rejected mutations", 1)
+    wrong = text.replace("110 rejected mutations", "109 rejected mutations", 1)
     require(toolbox_claim_errors(wrong), "semantic toolbox wrong-value guard is ineffective")
 
 
@@ -588,8 +595,8 @@ def validate_contract(contract: dict[str, Any]) -> None:
     rollout = [(row["capability"], row["status"], row["owner"]) for row in contract["rollout"]]
     require(rollout == ROLLOUT, "rollout inventory drifted")
     ci = require_fields(contract["canonical_ci"], {"driver", "neutral_checker", "required_tracked_files", "backend_consumers", "mcp_direct_identity"}, "canonical CI")
-    require(ci == {"driver": "tools/run_ci_local.sh", "neutral_checker": "unconditional", "required_tracked_files": ["capability_conformance/semantic_introspection_contract.json", "capability_conformance/semantic_introspection_model.json", "capability_conformance/rule_local_cursor_contract.json", "tools/check_semantic_introspection_contract.py", "t/semantic_introspection_perl_admission.t", "rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs", "dart/test/semantic_introspection_dart_admission_test.dart", "julia/test/semantic_introspection_julia_admission_test.jl", "lua/test/semantic_introspection_lua_admission_test.lua", "tools/check_semantic_introspection_six_runtime.sh"], "backend_consumers": "not_admitted_before_owned_rollout_leaf", "mcp_direct_identity": "pending_FUTURE-PARITY-BACKLOG.10.9"}, "canonical CI topology drifted")
-    require(len(contract["mutations"]) == 105 and len(set(contract["mutations"])) == 105, "mutation inventory drifted")
+    require(ci == {"driver": "tools/run_ci_local.sh", "neutral_checker": "unconditional", "required_tracked_files": ["capability_conformance/semantic_introspection_contract.json", "capability_conformance/semantic_introspection_model.json", "capability_conformance/rule_local_cursor_contract.json", "tools/check_semantic_introspection_contract.py", "t/semantic_introspection_perl_admission.t", "rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs", "dart/test/semantic_introspection_dart_admission_test.dart", "julia/test/semantic_introspection_julia_admission_test.jl", "lua/test/semantic_introspection_lua_admission_test.lua", "tools/check_semantic_introspection_six_runtime.sh", "capability_conformance/mcp_implementation_admission.json", "tools/check_mcp_implementation_admission.py", "tools/check_mcp_six_runtime.sh"], "backend_consumers": "six_runtime_native_consumers_complete", "mcp_direct_identity": MCP_DIRECT_IDENTITY}, "canonical CI topology drifted")
+    require(len(contract["mutations"]) == 110 and len(set(contract["mutations"])) == 110, "mutation inventory drifted")
 
 
 def neutral_repetition_from_header(header: str) -> tuple[bool, int | None, int | None]:
@@ -1092,6 +1099,21 @@ def validate_filesystem(contract: dict[str, Any]) -> None:
     for path in contract["canonical_ci"]["required_tracked_files"]:
         require(f"require_tracked_file {path}" in ci_text, f"canonical CI does not require {path}")
     require("bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py" in ci_text, "canonical CI does not run semantic introspection checker")
+    mcp_admission = load_json(MCP_ADMISSION_PATH)
+    mcp_rollout = require_fields(
+        mcp_admission["rollout"],
+        {"semantic_capability", "status", "owner", "requires_runtime_admissions"},
+        "MCP admission rollout",
+    )
+    require(
+        (mcp_rollout["semantic_capability"], mcp_rollout["status"], mcp_rollout["owner"])
+        == ("thin_mcp_transport", MCP_DIRECT_IDENTITY["status"], MCP_DIRECT_IDENTITY["owner"]),
+        "semantic and MCP admission rollout status/owner are not atomic",
+    )
+    require(
+        mcp_admission["recurring_gate"]["driver"] == MCP_DIRECT_IDENTITY["driver"],
+        "semantic and MCP admission recurring drivers diverged",
+    )
     perl_consumer = contract["target_admissions"][0]["consumer"]
     perl_consumer_path = ROOT / perl_consumer["path"]
     require(perl_consumer_path.is_file(), "Perl semantic admission consumer is missing")
@@ -1199,16 +1221,16 @@ def validate_filesystem(contract: dict[str, Any]) -> None:
     readme = (ROOT / "capability_conformance/README.md").read_text(encoding="utf-8")
     require(
         CONTRACT_ID in readme
-        and "105 rejected mutations" in readme
-        and "7 complete / 2 pending" in readme
+        and "110 rejected mutations" in readme
+        and "8 complete / 1 pending" in readme
         and "6 complete / 0 pending" in readme,
         "capability-conformance guide is not synchronized",
     )
     book = (ROOT / "docs/linkedspec-book/src/public-api/semantic-introspection.md").read_text(encoding="utf-8")
     require(
         MODEL_ID in book
-        and "105 rejected mutations" in book
-        and "7 complete / 2 pending" in book
+        and "110 rejected mutations" in book
+        and "8 complete / 1 pending" in book
         and "6 complete / 0 pending" in book
         and "t/semantic_introspection_perl_admission.t" in book
         and "semantic_introspection_rust_admission" in book
@@ -1359,7 +1381,8 @@ def mutation_functions() -> dict[str, Callable[[dict[str, Any], dict[str, Any]],
     mutations["alter_recurring_ci_switch"] = lambda c, m: c["recurring_gate"]["local_ci"].update({"switch": "LINKEDSPEC_RUN_WRONG_MATRIX"})
     mutations["alter_recurring_driver"] = lambda c, m: c["recurring_gate"].update({"driver": "tools/missing_semantic_driver.sh"})
     mutations["unpromote_recurring_rollout"] = lambda c, m: c["rollout"][6].update({"status": "pending"})
-    mutations["advance_mcp_early"] = lambda c, m: c["rollout"][7].update({"status": "complete"})
+    mutations["unpromote_mcp_rollout"] = lambda c, m: c["rollout"][7].update({"status": "pending"})
+    mutations["alter_mcp_rollout_owner"] = lambda c, m: c["rollout"][7].update({"owner": "FUTURE-PARITY-BACKLOG.10.9"})
     mutations["omit_runtime"] = lambda c, m: c["target_admissions"].pop(0)
     mutations["omit_luajit"] = lambda c, m: c["target_admissions"].pop()
     mutations["omit_mcp_rollout"] = lambda c, m: c["rollout"].pop(7)
@@ -1368,6 +1391,10 @@ def mutation_functions() -> dict[str, Callable[[dict[str, Any], dict[str, Any]],
     mutations["alter_fixture_bytes"] = lambda c, m: c["source_fixtures"][0].update({"bytes": 127})
     mutations["alter_expected_hash"] = lambda c, m: c["query_cases"][0]["expected"].update({"response_sha256": "f" * 64})
     mutations["omit_canonical_registration"] = lambda c, m: c["canonical_ci"]["required_tracked_files"].pop(0)
+    mutations["omit_mcp_canonical_registration"] = lambda c, m: c["canonical_ci"]["required_tracked_files"].remove("tools/check_mcp_six_runtime.sh")
+    mutations["unadmit_mcp_direct_identity"] = lambda c, m: c["canonical_ci"]["mcp_direct_identity"].update({"status": "pending"})
+    mutations["alter_mcp_direct_identity_owner"] = lambda c, m: c["canonical_ci"]["mcp_direct_identity"].update({"owner": "FUTURE-PARITY-BACKLOG.10.9"})
+    mutations["alter_mcp_direct_identity_driver"] = lambda c, m: c["canonical_ci"]["mcp_direct_identity"].update({"driver": "tools/missing_mcp_driver.sh"})
     return mutations
 
 

@@ -497,7 +497,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **WHEN:** changing semantic-index vocabulary, ids/order, calls/shapes, staged/generated provenance, explanations,
   source policy, pages/budgets, backend rollout metadata, or future native/MCP consumers.
 - **HOW:** `bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py`.
-- **OUTPUT:** `semantic introspection contract: 6 fixture groups, 20 exact queries, 105 rejected mutations, rollout 7 complete / 2 pending, admission 6 complete / 0 pending`.
+- **OUTPUT:** `semantic introspection contract: 6 fixture groups, 20 exact queries, 110 rejected mutations, rollout 8 complete / 1 pending, admission 6 complete / 0 pending`.
 - **PERL AUTHORITY MAP:** `.10.3.0` proves the first adapter must compose strict decoded source/canonical UTF-8
   bytes, `return_descriptor`, typed ActionIR, staged function records, `runtime_ctx_ref` failures, and generated-v2
   plan metadata. Decode byte input before probing Unicode labels; do not treat generated metadata or text trace as
@@ -975,13 +975,13 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   treating plain `decode` as conformance. Production handles require exact OS entropy and monotonic time; no weak
   fallback or runtime contract-file read is allowed. Behavior starts only in `.10.9.2.1`.
 - **CURRENT ADMISSION:** retrieve [[mcp-implementation-admission-ledger]]. All five implementations and all six
-  runtimes are complete; shared rollout remains pending with 114 rejected mutations. Verify the exact ledger with
+  runtimes and shared rollout are complete with 141 rejected mutations. Verify the exact ledger with
   `bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py`.
-- **RECURRING PREFLIGHT:** retrieve [[mcp-recurring-six-runtime-plan]] and ADR `0062` before changing recurring MCP
-  proof. Current native semantic consumers cover all twenty cases, but current MCP direct-identity roles cover
-  capabilities plus one representative query. `.10.9.7.1` must extend those same consumers to the twenty neutral
-  requests/digests before the planned routed `LINKEDSPEC_RUN_MCP_MATRIX=1` gate may promote thin transport. Do not
-  add a central expected-response model, embed runtimes, or infer missing MCP comparisons from orchestration.
+- **RECURRING MCP GATE:** retrieve [[mcp-recurring-six-runtime-plan]] and ADR `0062` before changing recurring MCP
+  proof. Run `bash tools/check_mcp_six_runtime.sh` for the exact neutral-contract → transport → five-bindings →
+  Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT consumers → admission-ledger → primary-no-drift composition. Canonical CI
+  requires and syntax-checks it; `LINKEDSPEC_RUN_MCP_MATRIX=1` opts into execution. Do not add a central expected-
+  response model, embed runtimes, or infer missing MCP comparisons from orchestration.
 
 ---
 

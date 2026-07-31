@@ -1,5 +1,32 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-30 (`FUTURE-PARITY-BACKLOG.10.9.7.1.1.3` — recurring proof should orchestrate admitted owners and
+  cross-lock promotion): A rollout gate needs an executable topology, not a larger semantic oracle. The new
+  driver contains only ordered commands and storage lifecycle: neutral checker, independently validated MCP
+  bytes, five generators, six existing consumers, ledger, and primary no-drift. All expected response bodies
+  remain in the neutral contract and all actual answers remain in native indexes.
+
+  Promotion is one cross-ledger fact. Both checkers now require the exact complete status, common `.10.9.7.1`
+  owner, and recurring-driver identity; mutations roll back or mismatch each side independently. The MCP checker
+  additionally freezes command order, exact-once runtime legs, executable/rooted/scratch wiring, CI syntax and
+  opt-in registration, and one all-nineteen coverage assertion per native consumer. This raises governance from
+  114 to 141 mutations while neutral semantic governance advances from 105 to 110.
+
+  The first composed run caught a genuine wrapper seam: Julia's MCP admission is an include-style test that reads
+  `Main.REPO_ROOT`; direct file execution therefore failed before tests. The correct recurring command is the
+  already admitted `run_julia_project_data.sh ... -e` wrapper that defines `REPO_ROOT` before inclusion. After
+  that correction, the exact recurring chain passes Perl 13, Rust 1, Dart 1, Julia 257, Lua 281x2, and all 30
+  primary legs without new production, package, network, aggregator, legacy, or CLI authority.
+
+  Canonical integration also treats routed-owner arrays as exact ordered contracts. The first canonical attempt
+  rejected the otherwise valid new shell owner because it had been inserted beside similar prose rather than in
+  lexicographic path order. Moving `tools/check_mcp_six_runtime.sh` between the logical-helper and repeated-action
+  drivers made the focused storage oracle pass. The complete staged-snapshot rerun then passes all seven
+  doctrines, semantic 6/20/110, MCP 35/10/10/76, Rust semantic in 81.29 seconds, Julia semantic 416/416 in 28.9
+  seconds, containment/moved-root, CLI 66x2, RAM 54%, Phase 0 1,031/1,031 in 643 seconds, and the optional MCP
+  composition at Perl 13, Rust 1/1 in 15.77 seconds, Dart 1/1, Julia 257/257 in 6.9 seconds, Lua 281x2, ledger
+  5/5 + 6/6 complete/141, and primary 30/30.
+
 - 2026-07-30 (`FUTURE-PARITY-BACKLOG.10.9.7.1.1.2` — consumer proof should compose native authorities, not
   duplicate their answers): Exhaustive transport identity needs more setup than a representative query, but it
   does not need a second response oracle. Each existing consumer now uses public native construction/query APIs

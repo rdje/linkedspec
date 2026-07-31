@@ -12,7 +12,7 @@ answers:
   - is a unified MCP aggregator part of FUTURE-PARITY-BACKLOG.10.9
   - what task implements LinkedSpec MCP transport
 date: 2026-07-29
-status: exact neutral contract canonical; all five implementations and all six runtimes admitted; recurring rollout pending
+status: exact neutral contract canonical; all five implementations, all six runtimes, and recurring rollout complete
 tags: [mcp, semantic-api, backends, transport, embedding, parity, FUTURE-PARITY-BACKLOG]
 evidence: "Director approved ADR 0054 and FUTURE-PARITY-BACKLOG.10.9.0: one exact contract, native Perl/Rust/Dart/Julia/Lua implementations, shared Lua source on PUC Lua and LuaJIT, and recurring six-runtime conformance."
 evidence_update_2026_07_29_protocol: "ADR 0055 selects stable modern MCP 2026-07-28 over stdio, with server/discover, per-request metadata, two tools, no legacy initialize/session/ping, and any later compatibility separately owned."
@@ -35,6 +35,7 @@ evidence_update_2026_07_29_lua_decoded: "Lua .10.9.6.1 implements its one common
 evidence_update_2026_07_29_lua_stdio: "Lua .10.9.6.2 implements one common private iterative wire and public caller-owned serve_stdio method at 247 assertions per runtime and 98 governance mutations. Exact admission .3 remains pending, so the formal ledger intentionally stays 4/5 implementations + 4/6 runtimes."
 evidence_update_2026_07_29_lua_admission: "Lua .10.9.6.3 runs one exact 202-assertion twelve-role consumer source unchanged and independently on PUC Lua and LuaJIT. The ledger reaches 5/5 implementations + 6/6 runtimes with shared rollout pending, and 114 mutations reject owner/ABI/order/omission/authority drift."
 evidence_update_2026_07_29_recurring_plan: "Behavior-free .10.9.7.0 and ADR 0062 preserve the five-implementation/six-runtime topology and freeze one routed recurring gate. The audit found current MCP consumers compare capabilities plus one representative query; .1 must extend their existing identity roles to all 20 neutral semantic cases before coordinated rollout promotion."
+evidence_update_2026_07_30_recurring_admission: "FUTURE-PARITY-BACKLOG.10.9.7.1.1.1-.3 repair the exact shared schema/policy boundary, prove all twenty response identities on Perl/Rust/Dart/Julia/PUC Lua/LuaJIT, and compose them through rooted tools/check_mcp_six_runtime.sh. Both ledgers promote thin transport under one owner; formal MCP state is 5/5 implementations + 6/6 runtimes with rollout complete and 141 rejected mutations. Canonical opt-in passes Phase 0 1,031/1,031 in 643 seconds and the independent six-runtime recurrence."
 reverify: "bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && rg -n 'one exact MCP contract|five native server implementations|six runtime admissions|aggregator' docs/decisions/0054-one-mcp-contract-native-per-backend-servers.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src/public-api/semantic-introspection.md"
 ---
 

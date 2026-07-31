@@ -57,8 +57,8 @@ discovery/list/call/cancel dispatch, bounded strict JSON stdio, and ordered twel
 `.10.9.5.1-.3` add the fourth generated binding, digest-verified frozen runtime, secure public decoded server,
 strict synchronous stdio, and one ordered twelve-role admission consumer. No-change `.10.9.5.4` recomposes those
 owners and closes the Julia parent without status movement. Shared Lua `.10.9.6.1-.3` then implement one source
-graph and qualify it independently on both ABIs. The ledger is now 5/5 native implementations and 6/6 runtime
-admissions; shared recurring rollout remains pending.
+graph and qualify it independently on both ABIs. The ledger has 5/5 native implementations and 6/6 runtime
+admissions.
 
 Signoff-complete behavior-free recurring audit `.10.9.7.0` and ADR `0062` made the remaining evidence boundary
 explicit. Every native semantic admission consumer already derived and digest-checked the twenty ordered query
@@ -101,9 +101,19 @@ sha256(direct native canonical JSON)
 That proof passes Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT without a production helper or second semantic
 oracle. Julia advances from its historical 178-assertion admission boundary to 257 current consumer assertions;
 the shared Lua consumer advances from 202 to 281 assertions on each ABI. The twelve role names and all transport,
-security, privacy, lifecycle, and authority fences remain unchanged. Only routed governance `.3` may promote
-`thin_mcp_transport`, so formal state correctly remains pending/114. The weaker seventeen-plus-three claim is
-not selected. Canonical repeats the six changed admissions and passes Rust semantic in 81.63 seconds, Dart 1/1,
+security, privacy, lifecycle, and authority fences remain unchanged. Routed governance `.10.9.7.1.1.3` now earns
+the promotion. Executable `tools/check_mcp_six_runtime.sh` validates the neutral semantic contract, materializes
+and independently validates MCP, checks all five generated bindings, runs the six all-twenty consumers once in
+Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT order, validates the admission ledger, and runs the existing three-case
+primary no-drift matrix. It uses repository-derived managed scratch, disposable Rust target and Julia writable-
+depot roots, and exact cleanup. Canonical CI requires and syntax-checks the driver and opts into it through
+`LINKEDSPEC_RUN_MCP_MATRIX=1`. Both ledgers record `thin_mcp_transport` complete under the same `.10.9.7.1`
+owner; semantic canonical identity points to the recurring driver. Governance rejects 141 MCP mutations and 110
+neutral semantic mutations, including partial promotion, owner mismatch, runtime/command/order omission,
+unrouted or non-executable execution, missing CI registration, and representative-only identity. Formal state
+is 5/5 implementations, 6/6 runtimes, rollout complete; semantic rollout is 8 complete / 1 pending with admission
+6 complete / 0 pending. The weaker seventeen-plus-three claim is not selected. The preceding consumer canonical
+proof passed Rust semantic in 81.63 seconds, Dart 1/1,
 Julia 416/416 in 29.5 seconds, repository containment/moved-root, CLI 66x2, RAM 59%, and Phase 0 1,031/1,031 in
 661 seconds. Primary CLI behavior, legacy support, aggregator work, and semantic-model ownership remain outside
 the repair.
@@ -2981,8 +2991,10 @@ Generated-source, capability, and language-coverage ledgers complete the proof. 
 syntax-checks the driver on every run, while `LINKEDSPEC_RUN_SEMANTIC_MATRIX=1` opts into the expensive
 all-toolchain execution. Seven recurring mutations lock runtime presence, exact command, primary and support
 inventories, CI switch, driver, and rollout. Only `recurring_six_runtime` advances; MCP and public no-drift
-remain separate. The neutral gate reports 6 groups / 20 responses / 105 rejected mutations, rollout
-7 complete / 2 pending, and admission 6 complete / 0 pending.
+remain separate. At that `.10.8` boundary the neutral gate reported 6 groups / 20 responses / 105 rejected
+mutations, rollout 7 complete / 2 pending, and admission 6 complete / 0 pending. After recurring MCP promotion,
+the current neutral gate reports 6 groups / 20 responses / 110 rejected mutations, rollout 8 complete / 1
+pending, and admission 6 complete / 0 pending.
 
 The direct recurring run passes Perl 18, Rust 1/1 in 79.67 seconds, Dart 1/1, Julia 416/416 in 29.0 seconds, and
 the shared Lua consumer at 408 assertions on each ABI. The three primary cases pass all 30 command/environment
@@ -3557,7 +3569,7 @@ The dependency order is:
 | `.10.9.7.1.1.0` | freeze the director-authorized implementation boundary | complete behavior-free plan; atomic repair → six-runtime proof → promotion → closeout |
 | `.10.9.7.1.1.1` | repair contract, bindings, and five server policy seams atomically | signoff-complete at 35/10/10/76; rollout unchanged pending/114 |
 | `.10.9.7.1.1.2` | prove all twenty identities on six runtimes | complete; unchanged twelve-role consumers prove capabilities + 19 queries across native/canonical/MCP structured/text/decoded/digest identity on Perl, Rust, Dart, Julia 257, and Lua 281x2; rollout remains pending/114 |
-| `.10.9.7.1.1.3` | add routed governance and promote thin transport | pending after all-twenty proof |
+| `.10.9.7.1.1.3` | add routed governance and promote thin transport | implemented; rooted recurring six-runtime driver, canonical opt-in, atomic cross-ledger owner/status, rollout complete, MCP 141 mutations and semantic 110 mutations |
 | `.10.9.7.1.1.4` | recompose unchanged and close implementation parents | pending after promotion |
 | `.10.9.7.2` | recurring MCP committed-owner closeout | pending after `.1.1` |
 | `.10.10` | public no-drift and closure | pending |
@@ -3582,10 +3594,16 @@ Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT callers can use their admitted nati
 runtime query surfaces now. MCP machine artifacts and independent validation are complete. All five native
 implementations expose decoded in-process dispatch plus strict stdio and exact twelve-role admission; one Lua
 source qualifies independently on PUC Lua and LuaJIT. The shared status/proof ledger is therefore 5/5
-implementations and 6/6 runtimes, with recurring rollout pending. Atomic repair `.10.9.7.1.1.1` updated the
+implementations and 6/6 runtimes, with recurring rollout complete. Atomic repair `.10.9.7.1.1.1` updated the
 normative transport digest and all five generated bindings together; all-twenty consumer proof `.10.9.7.1.1.2`
-now supplies exact six-runtime identity evidence. Neither leaf promotes rollout; routed governance `.3` owns that
-transition.
+supplies exact six-runtime identity evidence. Neither earlier leaf promotes rollout; routed governance `.3`
+composes those authorities and owns the coordinated transition.
+
+The promotion leaf's canonical opt-in signoff exits zero after all seven doctrines, Rust semantic admission in
+81.29 seconds, Julia semantic admission 416/416 in 28.9 seconds, repository containment and moved-root proof,
+primary CLI 66x2, RAM 54%, and Phase 0 1,031/1,031 in 643 seconds. The optional driver independently repeats the
+six MCP consumers, complete/141 ledger, and primary 30/30. No production semantic or transport authority is
+added by that composition.
 
 Rust now exposes both decoded in-process and strict borrowed-stream forms of that API.
 `linkedspec-runtime::McpServer` retains a caller-created

@@ -17,6 +17,7 @@ TRANSPORT_PATH = ROOT / "capability_conformance" / "mcp_semantic_transport_contr
 SEMANTIC_PATH = ROOT / "capability_conformance" / "semantic_introspection_contract.json"
 SEMANTIC_CHECKER_PATH = ROOT / "tools" / "check_semantic_introspection_contract.py"
 CI_PATH = ROOT / "tools" / "run_ci_local.sh"
+RECURRING_PATH = ROOT / "tools" / "check_mcp_six_runtime.sh"
 CONTRACT_ID = "linkedspec-mcp-implementation-admission-v1"
 TRANSPORT_ID = "linkedspec-mcp-transport-v1"
 TASK_OWNER = "FUTURE-PARITY-BACKLOG.10.9.2.3"
@@ -210,6 +211,81 @@ ORDERED_COMMANDS = [
     "PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t",
 ]
 
+ROLLOUT_OWNER = "FUTURE-PARITY-BACKLOG.10.9.7.1"
+RECURRING_GATE = {
+    "driver": "tools/check_mcp_six_runtime.sh",
+    "preflight_commands": [
+        "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py",
+        "bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py",
+        "bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py",
+        "bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py",
+        "bash tools/run_python_project_data.sh tools/generate_rust_mcp_contract.py",
+        "bash tools/run_python_project_data.sh tools/generate_dart_mcp_contract.py",
+        "bash tools/run_python_project_data.sh tools/generate_julia_mcp_contract.py",
+        LUA_GENERATOR_COMMAND,
+    ],
+    "consumer_schema": {
+        "fields": ["backend", "runtime", "consumer_path", "command"],
+        "role_policy": "each admitted all-twenty direct/MCP identity consumer runs once; the shared Lua source runs once per ABI",
+    },
+    "consumers": [
+        {
+            "backend": "perl",
+            "runtime": "perl",
+            "consumer_path": RUNTIME_ADMISSIONS[0]["consumer_path"],
+            "command": "PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t",
+        },
+        {
+            "backend": "rust",
+            "runtime": "rust",
+            "consumer_path": RUNTIME_ADMISSIONS[1]["consumer_path"],
+            "command": "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test mcp_server_rust_admission",
+        },
+        {
+            "backend": "dart",
+            "runtime": "dart",
+            "consumer_path": RUNTIME_ADMISSIONS[2]["consumer_path"],
+            "command": "cd dart && bash ../tools/run_dart_project_data.sh test test/mcp_server_dart_admission_test.dart",
+        },
+        {
+            "backend": "julia",
+            "runtime": "julia",
+            "consumer_path": RUNTIME_ADMISSIONS[3]["consumer_path"],
+            "command": "bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include(\"julia/test/mcp_server_julia_admission_test.jl\")'",
+        },
+        {
+            "backend": "lua",
+            "runtime": "puc_lua",
+            "consumer_path": RUNTIME_ADMISSIONS[4]["consumer_path"],
+            "command": "bash tools/run_lua_project_data.sh puc lua/test/mcp_server_lua_admission_test.lua",
+        },
+        {
+            "backend": "lua",
+            "runtime": "luajit",
+            "consumer_path": RUNTIME_ADMISSIONS[5]["consumer_path"],
+            "command": "bash tools/run_lua_project_data.sh luajit lua/test/mcp_server_lua_admission_test.lua",
+        },
+    ],
+    "postflight_commands": [
+        "bash tools/run_python_project_data.sh tools/check_mcp_implementation_admission.py",
+    ],
+    "primary_cli": {
+        "matrix_driver": "tools/run_primary_cli_matrix.sh",
+        "case_ids": [
+            "success_named_source_literal_input",
+            "failure_compile_precedes_input_load",
+            "trace_failure_invoke_route_low",
+        ],
+        "backend_count": 5,
+        "environments": ["default", "posix"],
+        "policy": "thin MCP transport adds no primary CLI surface; success, compile failure, and traced invocation failure stay exact",
+    },
+    "local_ci": {
+        "driver": "tools/run_ci_local.sh",
+        "switch": "LINKEDSPEC_RUN_MCP_MATRIX",
+    },
+}
+
 
 class CheckError(RuntimeError):
     """One status-ledger invariant failed."""
@@ -295,6 +371,111 @@ def validate_ci_source(source: str, ordered_commands: list[str]) -> None:
             fail(f"canonical tracked/syntax registration drifted: {line}")
 
 
+def validate_recurring_gate_source(gate: dict[str, Any], source: str, ci_source: str) -> None:
+    if gate != RECURRING_GATE:
+        fail("recurring MCP six-runtime topology drifted")
+    if (
+        'source "$REPO_ROOT/tools/project_data_env.sh"' not in source
+        or 'linkedspec_project_data_enter_run "$REPO_ROOT/tools/check_mcp_six_runtime.sh" "$@"'
+        not in source
+    ):
+        fail("recurring MCP driver is not repository-routed")
+    for marker in [
+        'TASK_ARTIFACT_ROOT=$(mktemp -d "${TMPDIR:',
+        'export CARGO_TARGET_DIR="$RUST_TARGET_ROOT"',
+        'export JULIA_DEPOT_PATH="$JULIA_WRITE_DEPOT:$JULIA_READ_DEPOTS"',
+        "trap cleanup EXIT",
+    ]:
+        if source.count(marker) != 1:
+            fail(f"recurring MCP scratch isolation drifted: {marker}")
+
+    markers = gate["preflight_commands"] + [
+        "PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t",
+        "--test mcp_server_rust_admission",
+        "bash ../tools/run_dart_project_data.sh test test/mcp_server_dart_admission_test.dart",
+        RECURRING_GATE["consumers"][3]["command"],
+        "puc lua/test/mcp_server_lua_admission_test.lua",
+        "luajit lua/test/mcp_server_lua_admission_test.lua",
+    ] + gate["postflight_commands"] + ["bash tools/run_primary_cli_matrix.sh"]
+    positions: list[int] = []
+    for marker in markers:
+        if source.count(marker) != 1:
+            fail(f"recurring MCP command count drifted: {marker}")
+        positions.append(source.index(marker))
+    if positions != sorted(positions):
+        fail("recurring MCP commands are out of order")
+    for case_id in gate["primary_cli"]["case_ids"]:
+        if source.count(f"--case {case_id}") != 1:
+            fail(f"recurring MCP primary case drifted: {case_id}")
+
+    expected_path_counts = {
+        RUNTIME_ADMISSIONS[0]["consumer_path"]: 1,
+        RUNTIME_ADMISSIONS[3]["consumer_path"]: 1,
+        RUNTIME_ADMISSIONS[4]["consumer_path"]: 2,
+    }
+    for path, count in expected_path_counts.items():
+        if source.count(path) != count:
+            fail(f"recurring MCP consumer path count drifted: {path}")
+
+    driver = gate["driver"]
+    if ci_source.count(f"require_tracked_file {driver}") != 2:
+        fail("canonical CI does not require the recurring MCP driver at inventory and execution")
+    syntax_block = ci_source[
+        ci_source.index('log "running syntax checks"') : ci_source.index("perl -c perl/LinkedSpec.pm")
+    ]
+    if syntax_block.count(driver) != 1:
+        fail("canonical CI does not syntax-check the recurring MCP driver")
+    switch = gate["local_ci"]["switch"]
+    if ci_source.count(f'if [[ "${{{switch}:-0}}" == "1" ]]; then') != 1:
+        fail("canonical CI recurring MCP switch drifted")
+    if ci_source.count(f'bash "$REPO_ROOT/{driver}"') != 1:
+        fail("canonical CI recurring MCP execution drifted")
+
+
+def validate_cross_ledger(
+    ledger: dict[str, Any], semantic: dict[str, Any], semantic_checker: str
+) -> None:
+    semantic_rows = [
+        row
+        for row in semantic.get("rollout", [])
+        if row.get("capability") == "thin_mcp_transport"
+    ]
+    expected_rollout = {
+        "capability": "thin_mcp_transport",
+        "status": "complete",
+        "owner": ROLLOUT_OWNER,
+    }
+    if semantic_rows != [expected_rollout]:
+        fail("neutral semantic thin_mcp_transport rollout diverged from MCP promotion")
+    rollout = ledger["rollout"]
+    if (rollout["status"], rollout["owner"]) != (
+        expected_rollout["status"],
+        expected_rollout["owner"],
+    ):
+        fail("MCP and semantic rollout status/owner are not atomic")
+    expected_identity = {
+        "status": "complete",
+        "owner": ROLLOUT_OWNER,
+        "driver": RECURRING_GATE["driver"],
+    }
+    if semantic.get("canonical_ci", {}).get("mcp_direct_identity") != expected_identity:
+        fail("neutral semantic MCP recurring identity drifted")
+    lock = f'("thin_mcp_transport", "complete", "{ROLLOUT_OWNER}")'
+    if semantic_checker.count(lock) != 1:
+        fail("semantic checker no longer locks the coordinated MCP rollout")
+
+
+def require_consumer_role_markers(
+    source: str, start: str, end: str, markers: list[str], runtime: str
+) -> None:
+    if source.count(start) != 1 or source.count(end) != 1:
+        fail(f"{runtime} native-query role boundary drifted")
+    body = source[source.index(start) : source.index(end)]
+    for marker in markers:
+        if body.count(marker) != 1:
+            fail(f"{runtime} all-twenty identity marker drifted: {marker}")
+
+
 def validate_perl_consumer_source(source: str) -> None:
     declaration = re.search(r"my @ROLE_ORDER = qw\(\n(.*?)\n\);", source, re.DOTALL)
     if declaration is None:
@@ -307,6 +488,19 @@ def validate_perl_consumer_source(source: str) -> None:
         fail("Perl admission roles are not invoked exactly once in order")
     if source.count("done_testing;") != 1:
         fail("Perl admission does not have one explicit test completion")
+    require_consumer_role_markers(
+        source,
+        "admission_role(\n 'native_query_identity',",
+        "admission_role(\n 'raw_input_outcomes',",
+        [
+            "is(scalar(@query_cases), 19",
+            "is_deeply($response->{result}{structuredContent}, $native",
+            "is($response->{result}{content}[0]{text}, canonical($native)",
+            "is_deeply($PLAIN_JSON->decode($response->{result}{content}[0]{text}), $native",
+            "is(response_digest($native), $query_case->{expected}{response_sha256}",
+        ],
+        "Perl",
+    )
 
 
 def validate_rust_consumer_source(source: str) -> None:
@@ -336,6 +530,19 @@ def validate_rust_consumer_source(source: str) -> None:
         or source.count("assert_eq!(roles_seen, ROLE_ORDER);") != 1
     ):
         fail("Rust admission completion/order assertion drifted")
+    require_consumer_role_markers(
+        source,
+        'admission_role(&mut roles_seen, "native_query_identity", || {',
+        'admission_role(&mut roles_seen, "raw_input_outcomes", || {',
+        [
+            'assert_eq!(cases.len(), 19, "all governed MCP query responses")',
+            'actual["result"]["structuredContent"], native',
+            'assert_eq!(text, canonical(&native), "{id} canonical text identity")',
+            'serde_json::from_str::<Value>(text).expect("MCP query text decodes")',
+            'case["expected"]["response_sha256"]',
+        ],
+        "Rust",
+    )
 
 
 def validate_dart_consumer_source(source: str) -> None:
@@ -359,6 +566,19 @@ def validate_dart_consumer_source(source: str) -> None:
         r"\n\s*},\s*skip\s*:", source
     ):
         fail("Dart admission completion/order assertion drifted")
+    require_consumer_role_markers(
+        source,
+        "await _admissionRole(rolesSeen, 'native_query_identity', () async {",
+        "await _admissionRole(rolesSeen, 'raw_input_outcomes', () async {",
+        [
+            "expect(queryCases, hasLength(19));",
+            "expect(result['structuredContent'], native, reason: '$id structured');",
+            "expect(text, _canonicalJson(native), reason: '$id canonical text');",
+            "expect(jsonDecode(text), native, reason: '$id decoded text');",
+            "_object(queryCase['expected'])['response_sha256']",
+        ],
+        "Dart",
+    )
 
 
 def validate_julia_consumer_source(source: str) -> None:
@@ -384,6 +604,19 @@ def validate_julia_consumer_source(source: str) -> None:
         or "@test_skip" in source
     ):
         fail("Julia admission completion/order assertion drifted")
+    require_consumer_role_markers(
+        source,
+        '_mcp_admission_role!(roles_seen, "native_query_identity") do',
+        '_mcp_admission_role!(roles_seen, "raw_input_outcomes") do',
+        [
+            "@test length(query_cases) == 19",
+            '@test actual["result"]["structuredContent"] == native',
+            "@test text == LinkedSpecJulia._mcp_canonical_json(native)",
+            "@test JSON3.read(text, Dict{String,Any}) == native",
+            'query_case["expected"]["response_sha256"]',
+        ],
+        "Julia",
+    )
 
 
 def validate_lua_consumer_source(source: str) -> None:
@@ -411,6 +644,19 @@ def validate_lua_consumer_source(source: str) -> None:
         or "os.exit(0)" in source
     ):
         fail("Lua admission completion/order assertion drifted")
+    require_consumer_role_markers(
+        source,
+        'admission_role(roles_seen, "native_query_identity", function()',
+        'admission_role(roles_seen, "raw_input_outcomes", function()',
+        [
+            'check_equal(#query_cases, 19, "all governed MCP query responses")',
+            "check_same_json(actual.result.structuredContent, native,",
+            "check_equal(actual.result.content[1].text, runtime.canonical_json(native),",
+            "check_same_json(json.decode(actual.result.content[1].text), native,",
+            "check_equal(semantic_response_digest(native), governed.expected.response_sha256,",
+        ],
+        "Lua",
+    )
 
 
 def validate_authority_sources() -> None:
@@ -728,6 +974,7 @@ def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
             "admission_contract",
             "implementations",
             "runtime_admissions",
+            "recurring_gate",
             "rollout",
             "canonical_ci",
         },
@@ -735,7 +982,7 @@ def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
     )
     if ledger["format"] != 1 or ledger["contract_id"] != CONTRACT_ID or ledger["task_owner"] != TASK_OWNER:
         fail("ledger identity drifted")
-    if ledger["decisions"] != ["0054", "0055", "0057", "0058", "0059", "0060", "0061"]:
+    if ledger["decisions"] != ["0054", "0055", "0057", "0058", "0059", "0060", "0061", "0062"]:
         fail("ledger decision provenance drifted")
 
     transport_ref = ledger["transport_contract"]
@@ -773,6 +1020,9 @@ def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
     if sum(row["status"] == "complete" for row in ledger["runtime_admissions"]) != 6:
         fail("runtime admission completion count is not exactly six")
 
+    if ledger["recurring_gate"] != RECURRING_GATE:
+        fail("recurring MCP six-runtime topology drifted")
+
     rollout = ledger["rollout"]
     exact_fields(
         rollout,
@@ -781,11 +1031,11 @@ def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
     )
     if rollout != {
         "semantic_capability": "thin_mcp_transport",
-        "status": "pending",
-        "owner": "FUTURE-PARITY-BACKLOG.10.9.7",
+        "status": "complete",
+        "owner": ROLLOUT_OWNER,
         "requires_runtime_admissions": ["perl", "rust", "dart", "julia", "puc_lua", "luajit"],
     }:
-        fail("thin MCP rollout was promoted or its six-runtime condition drifted")
+        fail("thin MCP rollout completion or its six-runtime condition drifted")
 
     canonical = ledger["canonical_ci"]
     exact_fields(canonical, {"driver", "ordered_commands"}, "canonical CI")
@@ -809,16 +1059,8 @@ def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
         fail("ledger identities do not derive from the normative transport contract")
 
     semantic = load_json(SEMANTIC_PATH)
-    semantic_rows = [row for row in semantic.get("rollout", []) if row.get("capability") == "thin_mcp_transport"]
-    if semantic_rows != [{
-        "capability": "thin_mcp_transport",
-        "status": "pending",
-        "owner": "FUTURE-PARITY-BACKLOG.10.9",
-    }]:
-        fail("neutral semantic thin_mcp_transport rollout was promoted prematurely")
     semantic_checker = SEMANTIC_CHECKER_PATH.read_text(encoding="utf-8")
-    if semantic_checker.count('(\"thin_mcp_transport\", \"pending\", \"FUTURE-PARITY-BACKLOG.10.9\")') != 1:
-        fail("semantic checker no longer locks the pending MCP rollout")
+    validate_cross_ledger(ledger, semantic, semantic_checker)
 
     if inspect_files:
         validate_julia_owners()
@@ -847,6 +1089,15 @@ def validate_ledger(ledger: dict[str, Any], inspect_files: bool = True) -> None:
             else:
                 fail(f"complete runtime has no consumer validator: {row['runtime']}")
         validate_ci_source(CI_PATH.read_text(encoding="utf-8"), canonical["ordered_commands"])
+        if not RECURRING_PATH.is_file():
+            fail("recurring MCP six-runtime driver is missing")
+        if RECURRING_PATH.stat().st_mode & 0o111 == 0:
+            fail("recurring MCP six-runtime driver is not executable")
+        validate_recurring_gate_source(
+            ledger["recurring_gate"],
+            RECURRING_PATH.read_text(encoding="utf-8"),
+            CI_PATH.read_text(encoding="utf-8"),
+        )
         validate_authority_sources()
         validate_lua_authority_sources()
 
@@ -857,6 +1108,7 @@ def coordinated_promotion(ledger: dict[str, Any]) -> None:
     for row in ledger["runtime_admissions"]:
         row["status"] = "complete"
     ledger["rollout"]["status"] = "complete"
+    ledger["rollout"]["owner"] = "FUTURE-PARITY-BACKLOG.10.9.7"
 
 
 LEDGER_MUTATIONS: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
@@ -894,9 +1146,17 @@ LEDGER_MUTATIONS: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
     ("Julia consumer path", lambda value: value["runtime_admissions"][3].__setitem__("consumer_path", "wrong")),
     ("PUC Lua consumer path", lambda value: value["runtime_admissions"][4].__setitem__("consumer_path", "wrong")),
     ("LuaJIT consumer path", lambda value: value["runtime_admissions"][5].__setitem__("consumer_path", "wrong")),
-    ("premature rollout", lambda value: value["rollout"].__setitem__("status", "complete")),
+    ("rollout regression", lambda value: value["rollout"].__setitem__("status", "pending")),
+    ("rollout owner", lambda value: value["rollout"].__setitem__("owner", "FUTURE-PARITY-BACKLOG.10.9.7")),
     ("rollout requirement", lambda value: value["rollout"]["requires_runtime_admissions"].pop()),
-    ("coordinated premature promotion", coordinated_promotion),
+    ("coordinated owner mismatch", coordinated_promotion),
+    ("recurring gate omission", lambda value: value.pop("recurring_gate")),
+    ("recurring runtime omission", lambda value: value["recurring_gate"]["consumers"].pop()),
+    ("recurring runtime reorder", lambda value: value["recurring_gate"]["consumers"].reverse()),
+    ("recurring preflight omission", lambda value: value["recurring_gate"]["preflight_commands"].pop()),
+    ("recurring ledger check omission", lambda value: value["recurring_gate"]["postflight_commands"].pop()),
+    ("recurring primary case omission", lambda value: value["recurring_gate"]["primary_cli"]["case_ids"].pop()),
+    ("recurring switch drift", lambda value: value["recurring_gate"]["local_ci"].__setitem__("switch", "WRONG")),
     ("canonical omission", lambda value: value["canonical_ci"]["ordered_commands"].pop()),
     ("canonical reorder", lambda value: value["canonical_ci"]["ordered_commands"].reverse()),
 ]
@@ -909,6 +1169,49 @@ def run_mutations(ledger: dict[str, Any]) -> int:
         mutate(candidate)
         try:
             validate_ledger(candidate, inspect_files=False)
+        except CheckError:
+            rejected += 1
+            continue
+        fail(f"mutation was accepted: {name}")
+
+    semantic = load_json(SEMANTIC_PATH)
+    semantic_checker = SEMANTIC_CHECKER_PATH.read_text(encoding="utf-8")
+    semantic_mutations: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
+        (
+            "semantic rollout regression",
+            lambda value: next(
+                row for row in value["rollout"] if row["capability"] == "thin_mcp_transport"
+            ).__setitem__("status", "pending"),
+        ),
+        (
+            "semantic rollout owner mismatch",
+            lambda value: next(
+                row for row in value["rollout"] if row["capability"] == "thin_mcp_transport"
+            ).__setitem__("owner", "FUTURE-PARITY-BACKLOG.10.9"),
+        ),
+        (
+            "semantic rollout omission",
+            lambda value: value["rollout"].__setitem__(
+                slice(None),
+                [row for row in value["rollout"] if row["capability"] != "thin_mcp_transport"],
+            ),
+        ),
+        (
+            "semantic recurring identity omission",
+            lambda value: value["canonical_ci"].pop("mcp_direct_identity"),
+        ),
+        (
+            "semantic recurring identity owner mismatch",
+            lambda value: value["canonical_ci"]["mcp_direct_identity"].__setitem__(
+                "owner", "FUTURE-PARITY-BACKLOG.10.9"
+            ),
+        ),
+    ]
+    for name, mutate in semantic_mutations:
+        candidate = copy.deepcopy(semantic)
+        mutate(candidate)
+        try:
+            validate_cross_ledger(ledger, candidate, semantic_checker)
         except CheckError:
             rejected += 1
             continue
@@ -1167,6 +1470,68 @@ def run_mutations(ledger: dict[str, Any]) -> int:
             continue
         fail(f"mutation was accepted: {name}")
 
+    recurring_source = RECURRING_PATH.read_text(encoding="utf-8")
+    recurring_mutations = [
+        (
+            "recurring route omission",
+            recurring_source.replace('source "$REPO_ROOT/tools/project_data_env.sh"\n', "", 1),
+            ci_source,
+        ),
+        (
+            "recurring scratch isolation omission",
+            recurring_source.replace('export CARGO_TARGET_DIR="$RUST_TARGET_ROOT"\n', "", 1),
+            ci_source,
+        ),
+        (
+            "recurring neutral preflight omission",
+            recurring_source.replace(RECURRING_GATE["preflight_commands"][0] + "\n", "", 1),
+            ci_source,
+        ),
+        (
+            "recurring Rust consumer omission",
+            recurring_source.replace(" --test mcp_server_rust_admission\n", "", 1),
+            ci_source,
+        ),
+        (
+            "recurring LuaJIT consumer omission",
+            recurring_source.replace(
+                " luajit lua/test/mcp_server_lua_admission_test.lua\n", "", 1
+            ),
+            ci_source,
+        ),
+        (
+            "recurring ledger omission",
+            recurring_source.replace(RECURRING_GATE["postflight_commands"][0] + "\n", "", 1),
+            ci_source,
+        ),
+        (
+            "recurring primary case omission",
+            recurring_source.replace(
+                " --case trace_failure_invoke_route_low\n", "", 1
+            ),
+            ci_source,
+        ),
+        (
+            "recurring CI inventory omission",
+            recurring_source,
+            ci_source.replace(
+                f"require_tracked_file {RECURRING_GATE['driver']}\n", "", 1
+            ),
+        ),
+        (
+            "recurring CI switch drift",
+            recurring_source,
+            ci_source.replace("LINKEDSPEC_RUN_MCP_MATRIX", "LINKEDSPEC_RUN_WRONG_MCP_MATRIX"),
+        ),
+    ]
+    for name, source_mutant, ci_mutant in recurring_mutations:
+        try:
+            validate_recurring_gate_source(RECURRING_GATE, source_mutant, ci_mutant)
+        except CheckError:
+            rejected += 1
+            continue
+        fail(f"mutation was accepted: {name}")
+
     julia_tests_source = (ROOT / "julia" / "test" / "runtests.jl").read_text(
         encoding="utf-8"
     )
@@ -1320,8 +1685,18 @@ def run_mutations(ledger: dict[str, Any]) -> int:
     consumer_mutations = [
         ("Perl role omission", perl_source.replace(" contract_inventory\n", "", 1), validate_perl_consumer_source),
         (
+            "Perl all-twenty coverage omission",
+            perl_source.replace("  is(scalar(@query_cases), 19,", "  is(scalar(@query_cases), 18,", 1),
+            validate_perl_consumer_source,
+        ),
+        (
             "Rust role omission",
             rust_source.replace('    "contract_inventory",\n', "", 1),
+            validate_rust_consumer_source,
+        ),
+        (
+            "Rust all-twenty coverage omission",
+            rust_source.replace("assert_eq!(cases.len(), 19,", "assert_eq!(cases.len(), 18,", 1),
             validate_rust_consumer_source,
         ),
         (
@@ -1353,6 +1728,11 @@ def run_mutations(ledger: dict[str, Any]) -> int:
             validate_dart_consumer_source,
         ),
         (
+            "Dart all-twenty coverage omission",
+            dart_source.replace("expect(queryCases, hasLength(19));", "expect(queryCases, hasLength(18));", 1),
+            validate_dart_consumer_source,
+        ),
+        (
             "Dart role invocation omission",
             dart_source.replace(
                 "await _admissionRole(rolesSeen, 'contract_inventory', () async {",
@@ -1378,6 +1758,11 @@ def run_mutations(ledger: dict[str, Any]) -> int:
         (
             "Julia role omission",
             julia_source.replace('    "contract_inventory",\n', "", 1),
+            validate_julia_consumer_source,
+        ),
+        (
+            "Julia all-twenty coverage omission",
+            julia_source.replace("@test length(query_cases) == 19", "@test length(query_cases) == 18", 1),
             validate_julia_consumer_source,
         ),
         (
@@ -1408,6 +1793,15 @@ def run_mutations(ledger: dict[str, Any]) -> int:
         (
             "Lua role omission",
             lua_source.replace('  "contract_inventory",\n', "", 1),
+            validate_lua_consumer_source,
+        ),
+        (
+            "Lua all-twenty coverage omission",
+            lua_source.replace(
+                'check_equal(#query_cases, 19, "all governed MCP query responses")',
+                'check_equal(#query_cases, 18, "all governed MCP query responses")',
+                1,
+            ),
             validate_lua_consumer_source,
         ),
         (
@@ -1458,7 +1852,7 @@ def main() -> int:
         return 1
     print(
         "MCP implementation/admission: "
-        f"5/5 implementations, 6/6 runtimes, rollout pending, {rejected} rejected mutations"
+        f"5/5 implementations, 6/6 runtimes, rollout complete, {rejected} rejected mutations"
     )
     return 0
 

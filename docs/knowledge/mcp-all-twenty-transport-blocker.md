@@ -11,9 +11,9 @@ answers:
   - "does MCP currently preserve all twenty semantic responses"
   - "what must change before thin_mcp_transport promotion"
 date: 2026-07-29
-status: verified blocker repaired under .10.9.7.1.1.1; all-twenty consumer proof complete; routed rollout pending
+status: verified blocker repaired; all-twenty six-runtime proof and routed rollout complete
 tags: [mcp, semantic-introspection, schema, policy, conformance, blocker]
-evidence: "FUTURE-PARITY-BACKLOG.10.9.7.1.0 proved capabilities plus 16/19 query identities and root-caused missing effects/return_shape output keys, const query-contract input, and default-policy preemption. Authorized leaf .10.9.7.1.1.1 derives the exact 72-key semantic fact union, admits nonempty query-contract strings through 128 characters/128 UTF-8 bytes, and keys pre-dispatch denial to explicit component presence in all five servers. Leaf .10.9.7.1.1.2 proves capabilities plus all nineteen queries preserve direct-native/MCP structured/text/decoded/digest identity on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; complete canonical CI is green. Neutral MCP remains 35/10/10/76 with byte-fresh bindings 83,411/83,225/83,214/120,030/83,166. Formal state remains 5/5 implementations + 6/6 runtimes, rollout pending/114 until routed governance promotes thin transport."
+evidence: "FUTURE-PARITY-BACKLOG.10.9.7.1.0 proved capabilities plus 16/19 query identities and root-caused missing effects/return_shape output keys, const query-contract input, and default-policy preemption. Authorized leaf .10.9.7.1.1.1 derives the exact 72-key semantic fact union, admits nonempty query-contract strings through 128 characters/128 UTF-8 bytes, and keys pre-dispatch denial to explicit component presence in all five servers. Leaf .10.9.7.1.1.2 proves capabilities plus all nineteen queries preserve direct-native/MCP structured/text/decoded/digest identity on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Leaf .10.9.7.1.1.3 composes those consumers through the rooted recurring driver and promotes both ledgers atomically. Neutral MCP remains 35/10/10/76 with byte-fresh bindings 83,411/83,225/83,214/120,030/83,166; formal state is 5/5 implementations + 6/6 runtimes with rollout complete/141."
 last_verified: 2026-07-30
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py"
@@ -44,5 +44,6 @@ Unrelated partial overlays do not acquire authority over omitted components.
 
 The non-selected alternative was to weaken the claim to seventeen direct/MCP identities plus three distinct
 transport outcomes. The transport blocker is repaired and `.1.1.2` now proves all twenty identities on all six
-runtimes. `thin_mcp_transport` remains pending until `.1.1.3` composes that evidence through the rooted recurring
-gate, adds omission-sensitive governance, and performs the coordinated promotion.
+runtimes. `.1.1.3` composes that evidence through the rooted recurring gate, adds omission-sensitive governance,
+and promotes `thin_mcp_transport` in both ledgers under the same owner. The blocker is closed; public no-drift
+remains separately owned by `.10.10`.

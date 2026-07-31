@@ -13,7 +13,7 @@ answers:
   - "what does Julia MCP log on IO failure"
   - "does generic Julia readbytes support all false"
 date: 2026-07-29
-status: strict stdio implemented; exact formal admission pending
+status: strict stdio implemented, exactly admitted, and parent-closed
 tags: [julia, mcp, stdio, json, utf8, cancellation, io, security]
 evidence: julia/src/mcp/McpWire.jl; julia/src/mcp/McpServer.jl; julia/src/LinkedSpecJulia.jl; julia/test/mcp_server_julia_stdio_test.jl; docs/decisions/0060-julia-native-mcp-server-seams.md; FUTURE-PARITY-BACKLOG.10.9.5.2
 reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, Test; const REPO_ROOT=pwd(); include(\"julia/test/mcp_contract_julia_binding_test.jl\"); include(\"julia/test/mcp_server_julia_dispatch_test.jl\"); include(\"julia/test/mcp_server_julia_stdio_test.jl\")'"
@@ -43,7 +43,8 @@ pre-emission seam suppresses the response; a successful write and flush marks it
 cannot retract it. Read/write/flush failure performs the same release, optionally writes only the fixed line
 `linkedspec_mcp_io_failure`, and throws sanitized `McpServerError` code `linkedspec_mcp_io_failure`; log failure
 cannot replace that error. Focused proof is 170 assertions in addition to the existing 48 binding/runtime and 139
-decoded-server assertions. Formal ledger promotion remains exclusively owned by `.10.9.5.3`.
+decoded-server assertions. Formal Julia admission remains exclusively owned by `.10.9.5.3`; that leaf and
+unchanged closeout `.10.9.5.4` are complete.
 
 Related facts: [[julia-native-mcp-server-plan]], [[julia-mcp-decoded-server]],
 [[mcp-2026-07-28-stdio-contract]], [[mcp-native-server-topology]], and

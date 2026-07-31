@@ -1,5 +1,28 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-30 — Routed recurring MCP promotion signoff-complete
+
+Leaf `.10.9.7.1.1.3` starts from clean all-twenty commit `22578b99` and adds one executable,
+repository-routed `tools/check_mcp_six_runtime.sh`. It composes the neutral semantic checker, MCP
+materializer/independent validator, five byte-fresh bindings, Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT all-twenty
+consumers, the implementation/admission ledger, and three existing primary cases across five commands and two
+option environments. Disposable Rust and Julia state stays under exact managed repository-volume scratch.
+
+Both semantic and MCP ledgers now record `thin_mcp_transport` complete under common owner
+`FUTURE-PARITY-BACKLOG.10.9.7.1`. Independent governance rejects 110 semantic and 141 MCP mutations, including
+partial promotion, owner/driver disagreement, runtime/command/order omission, representative-only proof,
+missing native/text/structured/decoded/digest identity, and routing/storage/CI drift. Formal MCP state is 5/5
+implementations + 6/6 runtimes with rollout complete; semantic state is 6/20/110 at rollout 8/9 and admission
+6/6. Focused recurring proof passes Perl 13, Rust 1, Dart 1, Julia 257, Lua 281x2, ledger 141, and primary 30/30.
+
+The first composed run exposed Julia's established `Main.REPO_ROOT` wrapper seam; the first canonical attempt
+exposed exact lexicographic shell-owner registration. Both are corrected. The complete canonical opt-in rerun
+passes all seven doctrines, Rust semantic in 81.29 seconds, Julia semantic 416/416 in 28.9 seconds,
+containment/moved-root, CLI 66x2, RAM 54%, Phase 0 1,031/1,031 in 643 seconds, and an independent optional MCP
+repeat at Perl 13, Rust 1/15.77 seconds, Dart 1, Julia 257/6.9 seconds, Lua 281x2, ledger 141, and primary 30/30.
+Knowledge Map is 757/6,137 and mdBook is 13,764 KiB/79 files. Clean commit/brief-clear precedes unchanged
+recomposition `.10.9.7.1.1.4`; no push occurs before 300.
+
 ## 2026-07-30 — All-twenty MCP consumer proof signoff-complete
 
 Leaf `.10.9.7.1.1.2` starts from clean repair commit `8352d535` and strengthens only the five existing admission

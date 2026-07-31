@@ -14740,7 +14740,8 @@ before implementation.
       - ID: `FUTURE-PARITY-BACKLOG.10.9.7.1.1`
         Status: `active` (2026-07-30; director authorized the recommended exact all-twenty repair; bounded
           implementation-plan child `.1.1.0` and atomic repair child `.1.1.1` are committed; all-twenty consumer
-          child `.1.1.2` is signoff-complete before its clean commit)
+          child `.1.1.2` is committed at `22578b99`; routed promotion child `.1.1.3` is signoff-complete before
+          its clean commit)
         Goal: Resolve the approved transport boundary, implement exact all-twenty six-runtime identity, compose
           the routed gate, and promote only thin transport.
         Depends on: `.10.9.7.1.0`
@@ -14897,7 +14898,8 @@ before implementation.
           Planned commit: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.2 - prove all MCP response identities`
 
         - ID: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.3`
-          Status: `pending`
+          Status: `done` (2026-07-30; implementation and canonical opt-in signoff from clean `22578b99`; clean
+            commit is the remaining handoff action)
           Goal: Add the routed recurring MCP composition and atomically promote only thin transport.
           Depends on: `.10.9.7.1.1.2`
           Acceptance: Add the root-derived same-volume six-runtime driver, independent omission-sensitive
@@ -14905,6 +14907,60 @@ before implementation.
             and exact primary no-drift order. Promote only `thin_mcp_transport` in both coordinated ledgers with
             owner `.10.9.7.1`; reject every partial/omitted/reordered/weakened/authority-expanding mutation; pass
             focused and canonical opt-in signoff; commit cleanly.
+
+          #### Acceptance Checklist
+
+          - [x] **REPRODUCE / ISSUE** — `rg -n` plus the ADR-0062 audit showed no rooted recurring MCP driver,
+            `thin_mcp_transport` pending in both ledgers, and no canonical `LINKEDSPEC_RUN_MCP_MATRIX` execution.
+          - [x] **ROOT CAUSE (WHY + WHERE)** — The all-twenty evidence lived in six independent consumers, but
+            `capability_conformance/mcp_implementation_admission.json` had no recurring topology and
+            `tools/run_ci_local.sh` had no routed composition owner; orchestration could not earn rollout.
+          - [x] **FIX** — Add rooted `tools/check_mcp_six_runtime.sh`, exact ledger topology, cross-ledger owner/
+            status locks, canonical opt-in, project-data routing/storage registration, and public/durable records.
+          - [x] **ADDRESSED (verified)** — `bash tools/run_python_project_data.sh
+            tools/check_mcp_implementation_admission.py` passes at 5/5 + 6/6 complete with 141 rejected mutations;
+            the neutral checker passes at 6/20/110 and rollout 8/9.
+          - [x] **NO REGRESSION** — `bash -n` passes for the driver, CI, and storage/routing owners; both independent
+            contract checkers pass, while full six-runtime and canonical proof remain the broader signoff below.
+          - [x] **LOCKSTEP** — `rg -n` confirms the same `.10.9.7.1` owner and driver across both ledgers/checkers,
+            ADR `0062`, TOOLBOX.md, Knowledge Map cards, capability guide, mdBook, and task-tree owners.
+
+          - [x] **CLEAN OWNERSHIP / EXACT INPUTS** — Start from clean `22578b99`, zero-byte brief, absent rendered
+            book/managed-run residue, and active `.1.1.3`; change only the recurring driver, independent governance,
+            coordinated ledgers, canonical/storage/tracked/public registries, and lockstep durable records.
+          - [x] **ROOTED SIX-RUNTIME DRIVER** — Add executable `tools/check_mcp_six_runtime.sh` in the ADR-0062
+            contract/materialization/binding/Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT/ledger/primary order, using the
+            project-data initializer, repository-derived scratch, disposable Rust/Julia child roots, established
+            Dart/Lua/Python wrappers, fail-fast propagation, and exact success/failure cleanup.
+          - [x] **INDEPENDENT OMISSION GOVERNANCE** — Add a separately implemented checker and mutations that
+            reject missing/reordered runtime legs, wrong commands, skipped/representative-only response proof,
+            missing native/text/structured/decoded/digest checks, absent canonical opt-in/syntax/storage/tracked/
+            documentation owners, authority expansion, and any aggregator/legacy/primary-surface drift.
+          - [x] **ATOMIC THIN-TRANSPORT PROMOTION** — Move only `thin_mcp_transport` from pending to complete in
+            the MCP implementation ledger and semantic canonical-CI ledger under common owner `.10.9.7.1`; keep
+            every implementation/runtime row, semantic feature, contract/binding digest, and other rollout status
+            exact, and reject partial owner/status promotion independently.
+          - [x] **ROUTED SIGNOFF / HANDOFF** — Pass the new driver and mutations, neutral contracts/bindings,
+            six consumers, both ledgers, primary no-drift, storage/path/doctrines, Knowledge Map/mdBook/live docs,
+            canonical opt-in plus full canonical CI, inspect the complete diff, clean exact artifacts, commit/clear/
+            prove clean, then activate unchanged recomposition `.1.1.4` without pushing before cadence 300.
+
+          Verification: **PASS 2026-07-30.** The rooted driver passes semantic 6 groups / 20 responses / 110
+            mutations at rollout 8/9 and admission 6/6; MCP 35 canonical frames / 10 raw inputs / 10 lifecycle
+            cases / 76 mutations; byte-fresh Perl/Rust/Dart/Julia/Lua bindings; Perl 13, Rust 1/1, Dart 1/1,
+            Julia 257/257, and Lua 281/281 on both ABIs; the complete 5/5 implementation + 6/6 runtime ledger with
+            rollout complete and 141 rejected mutations; and all 30 selected primary legs. The first composed run
+            exposed Julia's required `Main.REPO_ROOT` wrapper seam; the first canonical attempt exposed exact
+            lexicographic shell-owner registration. Both are corrected, and focused routing/storage proof passes.
+            The complete host-authorized canonical rerun with `LINKEDSPEC_RUN_MCP_MATRIX=1` passes all seven
+            doctrines, Rust semantic 1/1 in 81.29 seconds, Dart 1/1, Julia semantic 416/416 in 28.9 seconds,
+            process containment, moved-root execution, primary CLI 66x2, RAM 54%, and Phase 0 1,031/1,031 in 643
+            seconds. Its optional leg independently repeats the six consumers, complete/141 ledger, and 30/30
+            primary projection before `[ci] local CI gate passed` and exit 0. No production server, semantic
+            model, fixture, contract/binding byte, CLI, aggregator, legacy adapter, package, SDK, service, network,
+            or unrelated rollout authority moves. Knowledge Map is 757 facts / 6,137 keys; the mdBook renders at
+            13,764 KiB / 79 files and its exact ignored output is removed. The clean commit finishes handoff.
+          Planned commit: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.3 - promote recurring MCP proof`
 
         - ID: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.4`
           Status: `pending`

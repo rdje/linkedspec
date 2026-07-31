@@ -11,7 +11,7 @@ answers:
   - what task owns semantic introspection and MCP design
   - what did FUTURE-PARITY-BACKLOG.10.0 capture
 date: 2026-07-20
-status: native six-runtime rollout admitted; MCP canonical, Perl/Rust/Dart/Julia at 4/5 + 4/6, rollout pending
+status: native six-runtime and MCP rollout admitted; MCP 5/5 implementations + 6/6 runtimes complete
 tags: [introspection, semantic-api, mcp, backends, provenance, explainability, FUTURE-PARITY-BACKLOG]
 evidence: "Director proposed deep semantic introspection through a clean API and MCP; FUTURE-PARITY-BACKLOG.10.0 captures the direction and .10.1 owns design before implementation."
 evidence_update_2026_07_20: "FUTURE-PARITY-BACKLOG.10.1 and ADR 0049 accept the exact linkedspec-semantic-model-v1 / linkedspec-semantic-query-v1 direction, native SemanticIndex ownership, immutable compilation/runtime snapshots, stable snapshot-local ids, normalized records/relations/shapes/evidence, deterministic pages/cost, structural source privacy, exact fixtures, and two-tool handle-only MCP projection. Implementation remains pending under .10.2-.10.10."
@@ -39,6 +39,7 @@ evidence_update_2026_07_29_julia_mcp_decoded: "FUTURE-PARITY-BACKLOG.10.9.5.1 im
 evidence_update_2026_07_29_julia_mcp_stdio: "FUTURE-PARITY-BACKLOG.10.9.5.2 implements Julia's strict bounded duplicate-safe number-kind-preserving stdio, canonical LF, cancellation through flush, and EOF/I/O release without adding semantic ownership, admission, or status movement."
 evidence_update_2026_07_29_julia_mcp_admission: "FUTURE-PARITY-BACKLOG.10.9.5.3 composes one ordered twelve-role Julia consumer with 178 assertions, advances only Julia to 4/5 implementations + 4/6 runtimes, leaves shared rollout pending, and rejects 79 implementation/admission mutations without changing production behavior or the transport digest."
 evidence_update_2026_07_29_julia_mcp_closeout: "FUTURE-PARITY-BACKLOG.10.9.5.4 recomposes the committed neutral, Perl, Rust, Dart, and Julia owners unchanged, preserves 4/5 implementations + 4/6 runtimes and all 79 mutations, closes the Julia parent, and hands off shared Lua planning .10.9.6.0. Lockstep review also corrects one stale duplicate mdBook paragraph that escaped the current ledger inventory."
+evidence_update_2026_07_30_mcp_recurring_admission: "Shared Lua .10.9.6 closes the fifth implementation and sixth runtime. FUTURE-PARITY-BACKLOG.10.9.7.1.1.1-.3 then repair the three shared transport blockers, prove all twenty direct-native/MCP/digest identities on six runtimes, and route exact recurring composition. Semantic governance is 6 groups / 20 responses / 110 mutations at rollout 8/9 and admission 6/6; MCP is 5/5 implementations + 6/6 runtimes with rollout complete/141. Public no-drift remains .10.10."
 reverify: "bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py && bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && rg -n 'linkedspec-semantic-model-v1|FUTURE-PARITY-BACKLOG.10.[2-9]|linkedspec_semantic_query' docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -79,21 +80,20 @@ semantic payload bytes remain direct/MCP identical.
 
 Machine leaves `.10.9.1.1-.2` encode and independently validate those rules once in the neutral
 `linkedspec-mcp-transport-v1` artifact bundle, and `.10.9.1.3` closes its canonical composition. Perl `.10.9.2`,
-Rust `.10.9.3`, Dart `.10.9.4`, and Julia `.10.9.5` are closed. Julia `.1-.3` implement decoded transport,
-strict stdio, and exact admission; no-change `.4` recomposes those owners without status movement. Shared Lua
-`.10.9.6` and recurring six-runtime admission `.10.9.7` remain dependency-ordered.
+Rust `.10.9.3`, Dart `.10.9.4`, Julia `.10.9.5`, and shared Lua `.10.9.6` are closed. Recurring
+`.10.9.7.1.1.1-.3` repair the exact shared boundary, prove all twenty identities on six runtimes, and promote
+thin transport through one rooted recurring gate. Unchanged MCP closeout and public no-drift remain ordered.
 
 ADR `0050` amends the v1 vocabulary so staged payloads, parse jobs, and stitched results are
 explicit `staged_artifact` records related by `consumes`, `produces`, `staged_by`, and `lowered_from`. They are not
 misclassified as generated artifacts.
 
 The neutral contract is executable through six fixture groups and 20 exact response digests; its independent
-checker rejects 105 schema, identity, ordering, topology, privacy, budget, consumer, rollout, MCP-ownership, and
+checker rejects 110 schema, identity, ordering, topology, privacy, budget, consumer, rollout, MCP-ownership, and
 coordinated static-rule/generated-plan/model-hash mutations. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT are all
-admitted, and the recurring six-runtime proof is complete. The MCP machine contract plus Perl, Rust, Dart, and
-Julia servers are parent-closed; Julia is exactly admitted at the 4/5 implementation + 4/6 runtime boundary
-through one ordered twelve-role external consumer. Lua implementation, recurring transport admission, and public
-no-drift remain dependency-ordered.
+admitted, and both native and MCP recurring six-runtime proofs are complete. The MCP machine contract and all
+five native servers are parent-closed; transport governance is 5/5 implementations + 6/6 runtimes with rollout
+complete and 141 rejected mutations. Public no-drift remains dependency-ordered under `.10.10`.
 
 Related facts: [[native-in-memory-backend-contract]],
 [[user-observable-backend-cli-parity-contract]],

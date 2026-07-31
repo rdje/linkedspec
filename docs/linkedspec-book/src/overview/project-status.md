@@ -51,10 +51,16 @@ Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT server proofs, and the complete canonical lo
 consumer leaf `.10.9.7.1.1.2` now strengthens the same twelve-role consumers, not production oracles: capabilities
 plus all nineteen queries preserve direct native object/canonical JSON, MCP structured/text/decoded content, and
 the governed response digest on all six runtimes. Focused proof passes Perl 13, Rust 1, Dart 1 with clean analysis,
-Julia 257, and one Lua source at 281 assertions per ABI. Formal status deliberately remains 5/5 implementations +
-6/6 runtimes with rollout pending/114. Canonical repeats all six changed admissions and passes Rust semantic in
+Julia 257, and one Lua source at 281 assertions per ABI. Routed governance `.10.9.7.1.1.3` now composes those
+authorities through rooted `tools/check_mcp_six_runtime.sh`, registers `LINKEDSPEC_RUN_MCP_MATRIX=1`, and
+atomically promotes both ledgers under owner `.10.9.7.1`. Formal status is 5/5 implementations + 6/6 runtimes
+with rollout complete/141; neutral semantics is 6/20/110 at rollout 8/9 and admission 6/6. The preceding consumer
+canonical proof repeated all six changed admissions and passed Rust semantic in
 81.63 seconds, Dart 1/1, Julia 416/416 in 29.5 seconds, repository containment/moved-root, CLI 66x2, RAM 59%, and
-Phase 0 1,031/1,031 in 661 seconds. Only the next rooted recurring-governance leaf may promote thin transport.
+Phase 0 1,031/1,031 in 661 seconds. The recurring leaf's own canonical opt-in gate now passes all seven doctrines,
+Rust semantic in 81.29 seconds, Julia 416/416 in 28.9 seconds, containment/moved-root, CLI 66x2, RAM 54%, and
+Phase 0 1,031/1,031 in 643 seconds; its optional leg independently repeats all six MCP consumers, complete/141
+governance, and primary 30/30. Unchanged recomposition `.10.9.7.1.1.4` follows the clean promotion commit.
 The weaker 17-identity plus three-outcome claim is not selected.
 
 Lua semantic introspection now has a composition-closed public static surface on both PUC Lua and LuaJIT. Opaque
