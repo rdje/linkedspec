@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-07-30` (MCP atomic transport repair `.10.9.7.1.1.1` signoff-complete from clean planning
-  commit `c3273219`; all-twenty consumer proof `.10.9.7.1.1.2` follows after the clean repair commit)
+- Last updated: `2026-07-30` (recurring MCP implementation parents `.10.9.7.1.1` and `.10.9.7.1` close through
+  no-change recomposition `.10.9.7.1.1.4`; MCP-parent closeout `.10.9.7.2` follows its clean commit)
 - Owner: repo-local workflow
 
 ## Goal
@@ -14584,8 +14584,8 @@ before implementation.
       Commit: `FUTURE-PARITY-BACKLOG.10.9.6.4 - close Lua MCP implementation`
 
   - ID: `FUTURE-PARITY-BACKLOG.10.9.7`
-    Status: `active` (2026-07-29; behavior-free recurring-composition audit `.0` is signoff-complete and
-      implementation/promotion `.1` is the next dependency-ordered leaf after the clean plan commit)
+    Status: `active` (2026-07-30; implementation/promotion parent `.1` is signoff-complete through unchanged
+      recomposition `.1.1.4`; MCP-parent closeout `.2` follows the clean closeout commit)
     Goal: Compose recurring six-runtime MCP conformance and close the thin-transport parent.
     Depends on: `.10.9.6`
     Children: `.10.9.7.0`, `.10.9.7.1`, `.10.9.7.2`
@@ -14671,8 +14671,8 @@ before implementation.
       Planned commit: `FUTURE-PARITY-BACKLOG.10.9.7.0 - plan recurring MCP composition`
 
     - ID: `FUTURE-PARITY-BACKLOG.10.9.7.1`
-      Status: `active` (2026-07-29; parent; verified transport contradiction `.1.0` requires director decision
-        before implementation/promotion `.1.1`)
+      Status: `done` (2026-07-30; authorized repair, all-twenty proof, routed promotion, and unchanged
+        recomposition are signoff-complete; clean `.1.1.4` commit finishes handoff)
       Goal: Implement and admit the recurring six-runtime MCP composition and promote only thin transport.
       Depends on: `.10.9.7.0`
       Children: `.10.9.7.1.0`, `.10.9.7.1.1`
@@ -14738,10 +14738,8 @@ before implementation.
         Planned commit: `FUTURE-PARITY-BACKLOG.10.9.7.1.0 - expose MCP all-twenty blocker`
 
       - ID: `FUTURE-PARITY-BACKLOG.10.9.7.1.1`
-        Status: `active` (2026-07-30; director authorized the recommended exact all-twenty repair; bounded
-          implementation-plan child `.1.1.0` and atomic repair child `.1.1.1` are committed; all-twenty consumer
-          child `.1.1.2` is committed at `22578b99`; routed promotion child `.1.1.3` is signoff-complete before
-          its clean commit)
+        Status: `done` (2026-07-30; authorized repair, all-twenty proof, and routed promotion are committed;
+          unchanged recomposition `.1.1.4` is signoff-complete and its clean commit finishes handoff)
         Goal: Resolve the approved transport boundary, implement exact all-twenty six-runtime identity, compose
           the routed gate, and promote only thin transport.
         Depends on: `.10.9.7.1.0`
@@ -14765,10 +14763,10 @@ before implementation.
           six runtime invocations compare the exact twenty neutral requests, direct-native canonical bytes, MCP
           text/structured content, and governed response digests without copying expected bodies or changing a
           production semantic/MCP owner.
-        - [ ] **ROUTED SIX-RUNTIME COMPOSITION** — Add executable `tools/check_mcp_six_runtime.sh` with the exact
+        - [x] **ROUTED SIX-RUNTIME COMPOSITION** — Add executable `tools/check_mcp_six_runtime.sh` with the exact
           ADR-0062 contract/binding/consumer/ledger/primary order, repository-derived managed scratch, disposable
           Rust/Julia child roots, established Dart/Lua/Python wrappers, fail-fast propagation, and exact cleanup.
-        - [ ] **ATOMIC PROMOTION / OMISSION GOVERNANCE** — Add the recurring topology and independently rejected
+        - [x] **ATOMIC PROMOTION / OMISSION GOVERNANCE** — Add the recurring topology and independently rejected
           mutations; promote only `thin_mcp_transport` in both neutral ledgers with owner `.10.9.7.1`; register the
           exact canonical opt-in/syntax and tracked/storage/documentation owners; reject partial owner/status,
           runtime/order/command/skip/representative-only/digest/authority/primary-surface drift.
@@ -14776,7 +14774,7 @@ before implementation.
           admissions, shared Lua source identity, caller-created index authority, exact transport digest and all
           lifecycle/security/privacy boundaries; add no aggregator, legacy adapter, server filesystem/process/
           network/compile/execute/cache authority, package/SDK dependency, or primary CLI behavior.
-        - [ ] **LOCKSTEP / SIGNOFF / HANDOFF** — Synchronize task/index, both roadmaps, ADR/Knowledge Map, mdBook,
+        - [x] **LOCKSTEP / SIGNOFF / HANDOFF** — Synchronize task/index, both roadmaps, ADR/Knowledge Map, mdBook,
           changes/notes/live/memory, pass focused consumers/contracts/mutations/storage/primary proof plus canonical
           opt-in CI, inspect the complete diff, clean exact artifacts, commit/clear/prove clean, then activate
           unchanged closeout `.10.9.7.2` without pushing before cadence 300.
@@ -14898,8 +14896,7 @@ before implementation.
           Planned commit: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.2 - prove all MCP response identities`
 
         - ID: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.3`
-          Status: `done` (2026-07-30; implementation and canonical opt-in signoff from clean `22578b99`; clean
-            commit is the remaining handoff action)
+          Status: `done` (2026-07-30; implementation and canonical opt-in signoff committed at `de46b26a`)
           Goal: Add the routed recurring MCP composition and atomically promote only thin transport.
           Depends on: `.10.9.7.1.1.2`
           Acceptance: Add the root-derived same-volume six-runtime driver, independent omission-sensitive
@@ -14963,13 +14960,48 @@ before implementation.
           Planned commit: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.3 - promote recurring MCP proof`
 
         - ID: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.4`
-          Status: `pending`
+          Status: `done` (2026-07-30; no-change recomposition and canonical opt-in signoff complete from clean
+            routed-promotion commit `de46b26a`; clean commit finishes handoff)
           Goal: Recompose the approved repair and recurring promotion unchanged, then close `.1.1` and `.1`.
           Depends on: `.10.9.7.1.1.3`
           Acceptance: From the clean promotion commit, rerun every committed contract/binding/server/consumer/
             driver/ledger/security/storage/primary/canonical owner without replacement behavior; synchronize all
             durable/public projections; perform exact artifact cleanup; close `.1.1` and parent `.1`; commit/clear/
             prove clean before activating MCP-parent closeout `.10.9.7.2`.
+
+          #### Acceptance Checklist
+
+          - [x] **CLEAN OWNERSHIP / RETRIEVAL** — Start task-tree-first from clean promotion commit `de46b26a`,
+            zero-byte brief, and absent rendered-book/managed-run residue; retrieve ADR `0062`, both ledgers and
+            checkers, the rooted driver, routing/storage/canonical owners, current MCP fact cards, and mdBook.
+          - [x] **UNCHANGED COMPOSITION** — Rerun semantic 6/20/110, MCP 35/10/10/76, all five byte-fresh bindings,
+            Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT all-twenty consumers, complete/141 governance, and primary 30/30
+            through the committed rooted driver without changing a production, fixture, contract, or oracle.
+          - [x] **STATUS / AUTHORITY NO-DRIFT** — Prove only `thin_mcp_transport` remains complete under common
+            `.10.9.7.1` ownership, implementation/runtime rows remain 5/5 + 6/6, semantic remains rollout 8/9 +
+            admission 6/6, and no CLI/aggregator/legacy/path/process/network/semantic authority appears.
+          - [x] **FULL SIGNOFF / CLEANUP** — Pass canonical opt-in, seven doctrines, memory/task/KM/diff/syntax/
+            storage/path checks, render the mdBook, inspect the complete no-behavior diff, and remove exact ignored
+            output plus empty managed-run residue.
+          - [x] **CLOSE / COMMIT / HANDOFF** — Mark `.1.1.4`, `.1.1`, and `.1` done; synchronize task index,
+            roadmaps, live docs, Knowledge Map, and mdBook; commit with the leaf id, clear the brief, prove clean,
+            and only then activate `.10.9.7.2` without pushing before cadence 300.
+
+          Verification: **PASS 2026-07-30.** Focused `tools/check_mcp_six_runtime.sh` passes semantic 6/20/110,
+            MCP 35/10/10/76, byte-fresh bindings at Perl 83,411 / Rust 83,225 / Dart 83,214 / Julia 120,030 /
+            Lua 83,166 bytes, Perl 13, Rust 1/1 in 15.90 seconds, Dart 1/1, Julia 257/257 in 6.8 seconds, Lua
+            281/281 per ABI, complete/141 governance, and primary 30/30. The independent host-authorized canonical
+            `LINKEDSPEC_RUN_MCP_MATRIX=1 bash tools/run_ci_local.sh` exits zero after all seven doctrines, Rust
+            semantic 1/1, Dart 1/1, Julia semantic 416/416 in 29.3 seconds, repository containment/moved-root,
+            primary CLI 66x2, RAM 54%, and Phase 0 1,031/1,031 in 655 seconds. Its optional leg independently
+            repeats Perl 13, Rust 1/1 in 15.88 seconds, Dart 1/1, Julia 257/257 in 6.8 seconds, Lua 281/281 per
+            ABI, complete/141 governance, and primary 30/30. No production, fixture, contract, binding, consumer,
+            oracle, ledger/status, semantic, CLI, aggregator, legacy, package, SDK, service, network, or authority
+            behavior changes; `.1.1` and `.1` close by recomposition rather than a replacement proof. Knowledge
+            Map remains exact at 757 facts / 6,137 keys; the mdBook renders 79 files at 13,776 KiB before exact
+            ignored-output and empty managed-run cleanup.
+
+          Planned commit: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.4 - close recurring implementation parents`
 
     - ID: `FUTURE-PARITY-BACKLOG.10.9.7.2`
       Status: `pending`

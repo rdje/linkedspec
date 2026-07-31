@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-07-30 — FUTURE-PARITY-BACKLOG.10.9.7.1.1.4 — close recurring implementation parents
+
+Recomposed the approved MCP repair and recurring promotion from clean `de46b26a` without changing production,
+fixtures, contracts, bindings, consumers, oracles, ledgers, status, semantic behavior, primary CLI behavior, or
+server authority. The committed rooted driver again passes semantic 6/20/110, MCP 35/10/10/76, all five byte-
+fresh bindings, Perl 13, Rust 1/1, Dart 1/1, Julia 257/257, Lua 281/281 on both ABIs, complete/141 governance,
+and primary 30/30. This conjunction closes implementation parents `.10.9.7.1.1` and `.10.9.7.1`; it does not add
+an umbrella proof or another runtime/server.
+
+The independent host-authorized canonical opt-in gate exits zero after all seven doctrines, Rust semantic 1/1,
+Dart 1/1, Julia semantic 416/416 in 29.3 seconds, repository containment and moved-root execution, primary CLI
+66x2, RAM 54%, and Phase 0 1,031/1,031 in 655 seconds. Its optional leg independently repeats Perl 13, Rust 1/1
+in 15.88 seconds, Dart 1/1, Julia 257/257 in 6.8 seconds, Lua 281/281 per ABI, the complete/141 ledger, and
+primary 30/30 before `[ci] local CI gate passed`. The next clean-boundary owner is MCP-parent no-change closeout
+`.10.9.7.2`. Knowledge Map remains exact at 757 facts / 6,137 keys, and the mdBook renders 79 files at 13,776
+KiB before exact generated-output cleanup. No push occurs before commit cadence 300.
+
 ## 2026-07-30 — FUTURE-PARITY-BACKLOG.10.9.7.1.1.3 — promote recurring MCP proof
 
 Added executable, repository-routed `tools/check_mcp_six_runtime.sh` as a fail-fast orchestrator, not a new MCP

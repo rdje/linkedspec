@@ -70,6 +70,11 @@ boundary to 141 mutations, composes the all-twenty consumers once per runtime th
 Canonical opt-in signoff exits zero after all seven doctrines, semantic 6/20/110, MCP 35/10/10/76, primary CLI
 66x2, Phase 0 1,031/1,031 in 643 seconds, and an independent optional recurrence of Perl 13, Rust 1/1, Dart 1/1,
 Julia 257/257, Lua 281/281 per ABI, the complete/141 ledger, and primary 30/30.
+No-change `.10.9.7.1.1.4` independently recomposes the same authorities and closes implementation parents
+`.10.9.7.1.1` plus `.10.9.7.1`. Its canonical opt-in run exits zero with semantic 6/20/110, MCP 35/10/10/76,
+Julia semantic 416/416 in 29.3 seconds, CLI 66x2, RAM 54%, Phase 0 1,031/1,031 in 655 seconds, optional Rust
+MCP 1/1 in 15.88 seconds, Julia MCP 257/257 in 6.8 seconds, Lua 281/281 per ABI, complete/141 governance, and
+primary 30/30. The ledger, statuses, owners, digests, and server authority remain unchanged.
 Static fences prohibit production MCP owners from
 parser construction, descriptors, substitution handlers, parser-source dumps, trace, shell/process/network
 execution, and arbitrary reads; the sole documented Perl production `sysopen` is fail-closed `/dev/urandom` for

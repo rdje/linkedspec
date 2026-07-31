@@ -1,5 +1,20 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-30 — Recurring MCP implementation parents signoff-complete
+
+Leaf `.10.9.7.1.1.4` starts from clean routed-promotion commit `de46b26a` and reruns the committed MCP repair,
+bindings, five servers, six runtime consumers, rooted driver, ledgers, storage/security fences, and primary
+projection unchanged. Focused proof is semantic 6/20/110, MCP 35/10/10/76, Perl 13, Rust 1, Dart 1, Julia 257,
+Lua 281x2, complete/141 governance, and primary 30/30. Formal status remains 5/5 implementations + 6/6 runtimes
+with thin transport complete; semantic status remains rollout 8/9 plus admission 6/6.
+
+The independent canonical opt-in run passes all seven doctrines, Rust semantic 1/1, Dart 1/1, Julia 416/416 in
+29.3 seconds, repository containment/moved-root, CLI 66x2, RAM 54%, Phase 0 1,031/1,031 in 655 seconds, and an
+optional MCP repeat at Perl 13, Rust 1/15.88 seconds, Dart 1, Julia 257/6.8 seconds, Lua 281x2, ledger 141, and
+primary 30/30. No behavior or authority moves. Parents `.10.9.7.1.1` and `.10.9.7.1` are closed; after the clean
+commit/brief-clear, `.10.9.7.2` owns MCP-parent closeout. Knowledge Map is 757/6,137 and mdBook is 13,776 KiB/79
+files before exact ignored-output cleanup. No push occurs before 300.
+
 ## 2026-07-30 — Routed recurring MCP promotion signoff-complete
 
 Leaf `.10.9.7.1.1.3` starts from clean all-twenty commit `22578b99` and adds one executable,

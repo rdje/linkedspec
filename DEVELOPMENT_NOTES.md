@@ -1,5 +1,18 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-30 (`FUTURE-PARITY-BACKLOG.10.9.7.1.1.4` — parent closure is recomposition, not a new oracle): Once
+  contract bytes, native implementations, six admission consumers, routed order, and cross-ledger status are
+  each committed and independently guarded, an implementation parent should close by rerunning their conjunction
+  unchanged. A new umbrella fixture would weaken ownership by creating one more place to encode expected answers.
+  This leaf therefore changes only status and durable projections.
+
+  The focused rooted driver and a separate canonical opt-in run agree on semantic 6/20/110, MCP 35/10/10/76,
+  five byte-fresh bindings, six all-twenty runtime admissions, complete/141 governance, and primary 30/30. The
+  canonical run additionally proves all seven doctrines, containment/moved-root, CLI 66x2, RAM 54%, and Phase 0
+  1,031/1,031 in 655 seconds; its independently rebuilt MCP leg reports Rust 15.88 seconds and Julia 6.8 seconds.
+  Because no production or evidence owner moved, closing `.1.1` and `.1` is an honest metadata transition and
+  `.10.9.7.2` can now perform the broader MCP-parent no-change closeout from the clean commit.
+
 - 2026-07-30 (`FUTURE-PARITY-BACKLOG.10.9.7.1.1.3` — recurring proof should orchestrate admitted owners and
   cross-lock promotion): A rollout gate needs an executable topology, not a larger semantic oracle. The new
   driver contains only ordered commands and storage lifecycle: neutral checker, independently validated MCP

@@ -12,9 +12,9 @@ Completed README-sustainability lane: `README-STABILITY-POLICY` and ADR `0063` m
 bounded landing page. A full 1,615-line / 159,437-byte audit routes all changing/deep detail before a reviewed
 105-line / 5,072-byte trim; hard maxima are 128 lines / 6,144 bytes. `.0` is committed at `adcc89fe`; `.1` has
 adopted `README_POLICY.md`, the exact trim, and registered enforcement at `ca846e7a`; `.2` recomposes those owners
-unchanged under a second canonical gate and closes the adoption critical path. Recurring MCP `.10.9.7.1.1.3`
-now has rooted promotion implemented and canonical-signoff complete; unchanged `.1.1.4` follows its clean
-promotion commit. The
+unchanged under a second canonical gate and closes the adoption critical path. Recurring MCP `.10.9.7.1.1.4`
+now recomposes the committed rooted promotion unchanged under an independent canonical opt-in gate and closes
+implementation parents `.1.1` and `.1`; MCP-parent closeout `.10.9.7.2` follows its clean commit. The
 absence of a project-level license is stated truthfully and tracked
 separately in proposed `.3`; nested/vendor terms are not authority to choose one.
 
@@ -773,7 +773,8 @@ and all-twenty consumers `.2` are complete. Routed `.3` now adds rooted `tools/c
 neutral/bindings/six-consumer/ledger/primary order, same-volume scratch, canonical
 `LINKEDSPEC_RUN_MCP_MATRIX=1`, and matching cross-ledger `.10.9.7.1` promotion. Focused proof passes; current
 state is semantic 6/20/110 at rollout 8/9 + admission 6/6 and MCP 5/5 + 6/6 complete with 141 mutations.
-Unchanged `.4` and MCP-parent no-change `.10.9.7.2` follow the clean promotion commit.
+No-change `.4` repeats that chain plus canonical Phase 0 1,031/1,031 in 655 seconds, closes `.1.1` and `.1`
+without behavior or authority movement, and hands the clean boundary to MCP-parent closeout `.10.9.7.2`.
 
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |

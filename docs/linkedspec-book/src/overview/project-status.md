@@ -38,7 +38,7 @@ containment, moved-root execution, CLI 66x2, Phase 0 1,031/1,031, and the comple
 runtimes. Canonical signoff passes all six doctrines, the unchanged neutral and five-implementation MCP chain,
 Phase 0 1,031/1,031 in 659 seconds, and the complete dual-ABI Lua opt-in. No-change `.10.9.6.4` recomposes the
 committed owners unchanged, passes Phase 0 1,031/1,031 in 652 seconds plus the same dual-ABI gate, and closes
-parent `.10.9.6`. Shared recurring rollout remains pending under `.10.9.7`.
+parent `.10.9.6`. At that historical boundary, shared recurring rollout remained pending under `.10.9.7`.
 
 Recurring implementation audit `.10.9.7.1.0` proved a shared all-twenty MCP blocker without retaining
 exploratory code. Capabilities plus 16/19 query responses cross the public MCP API unchanged; the calls response
@@ -60,7 +60,10 @@ canonical proof repeated all six changed admissions and passed Rust semantic in
 Phase 0 1,031/1,031 in 661 seconds. The recurring leaf's own canonical opt-in gate now passes all seven doctrines,
 Rust semantic in 81.29 seconds, Julia 416/416 in 28.9 seconds, containment/moved-root, CLI 66x2, RAM 54%, and
 Phase 0 1,031/1,031 in 643 seconds; its optional leg independently repeats all six MCP consumers, complete/141
-governance, and primary 30/30. Unchanged recomposition `.10.9.7.1.1.4` follows the clean promotion commit.
+governance, and primary 30/30. No-change `.10.9.7.1.1.4` independently repeats those committed owners and passes
+canonical Phase 0 1,031/1,031 in 655 seconds plus the complete optional MCP chain. It changes no behavior or
+authority and closes implementation parents `.10.9.7.1.1` and `.10.9.7.1`; MCP-parent closeout `.10.9.7.2`
+follows the clean commit.
 The weaker 17-identity plus three-outcome claim is not selected.
 
 Lua semantic introspection now has a composition-closed public static surface on both PUC Lua and LuaJIT. Opaque

@@ -115,8 +115,12 @@ is 5/5 implementations, 6/6 runtimes, rollout complete; semantic rollout is 8 co
 6 complete / 0 pending. The weaker seventeen-plus-three claim is not selected. The preceding consumer canonical
 proof passed Rust semantic in 81.63 seconds, Dart 1/1,
 Julia 416/416 in 29.5 seconds, repository containment/moved-root, CLI 66x2, RAM 59%, and Phase 0 1,031/1,031 in
-661 seconds. Primary CLI behavior, legacy support, aggregator work, and semantic-model ownership remain outside
-the repair.
+661 seconds. No-change `.10.9.7.1.1.4` then reruns the rooted chain and an independent canonical opt-in gate:
+semantic 6/20/110, MCP 35/10/10/76, six runtime consumers, complete/141 governance, primary 30/30, Julia
+semantic 416/416 in 29.3 seconds, CLI 66x2, RAM 54%, and Phase 0 1,031/1,031 in 655 seconds all pass. It closes
+implementation parents `.10.9.7.1.1` and `.10.9.7.1` without changing a server, contract, consumer, ledger,
+status, or authority. Primary CLI behavior, legacy support, aggregator work, and semantic-model ownership remain
+outside the repair.
 
 ## Accepted modern MCP transport (all implementations and runtimes admitted)
 
@@ -3570,8 +3574,8 @@ The dependency order is:
 | `.10.9.7.1.1.1` | repair contract, bindings, and five server policy seams atomically | signoff-complete at 35/10/10/76; rollout unchanged pending/114 |
 | `.10.9.7.1.1.2` | prove all twenty identities on six runtimes | complete; unchanged twelve-role consumers prove capabilities + 19 queries across native/canonical/MCP structured/text/decoded/digest identity on Perl, Rust, Dart, Julia 257, and Lua 281x2; rollout remains pending/114 |
 | `.10.9.7.1.1.3` | add routed governance and promote thin transport | implemented; rooted recurring six-runtime driver, canonical opt-in, atomic cross-ledger owner/status, rollout complete, MCP 141 mutations and semantic 110 mutations |
-| `.10.9.7.1.1.4` | recompose unchanged and close implementation parents | pending after promotion |
-| `.10.9.7.2` | recurring MCP committed-owner closeout | pending after `.1.1` |
+| `.10.9.7.1.1.4` | recompose unchanged and close implementation parents | complete; focused six-runtime and independent canonical opt-in recomposition unchanged; `.1.1` and `.1` closed |
+| `.10.9.7.2` | recurring MCP committed-owner closeout | pending after the clean `.1.1.4` commit |
 | `.10.10` | public no-drift and closure | pending |
 
 ADRs `0054`/`0055` define one exact modern MCP `2026-07-28` stdio contract rather than one cross-runtime
@@ -3604,6 +3608,12 @@ The promotion leaf's canonical opt-in signoff exits zero after all seven doctrin
 primary CLI 66x2, RAM 54%, and Phase 0 1,031/1,031 in 643 seconds. The optional driver independently repeats the
 six MCP consumers, complete/141 ledger, and primary 30/30. No production semantic or transport authority is
 added by that composition.
+
+The implementation-parent closeout is a separate no-change proof. From clean promotion commit `de46b26a`, leaf
+`.10.9.7.1.1.4` reruns the same contract, binding, server, consumer, driver, ledger, storage, and primary owners.
+Its canonical opt-in pass reaches Phase 0 1,031/1,031 in 655 seconds and independently repeats the optional six-
+runtime MCP chain, so `.10.9.7.1.1` and `.10.9.7.1` close without another semantic oracle. `.10.9.7.2` remains
+the broader MCP-parent closeout.
 
 Rust now exposes both decoded in-process and strict borrowed-stream forms of that API.
 `linkedspec-runtime::McpServer` retains a caller-created

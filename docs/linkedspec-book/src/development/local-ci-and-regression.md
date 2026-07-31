@@ -37,15 +37,15 @@ PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t
 ```
 
 The first step catches stale generated frames/digests; the second independently checks schemas, provenance, raw
-and lifecycle/handle/policy outcomes, and 68 mutations. Only then may the third verify the byte-exact generated
+and lifecycle/handle/policy outcomes, and 76 mutations. Only then may the third verify the byte-exact generated
 backend modules, after which focused binding, decoded-server, and adversarial stdio proofs run for every formally
 admitted backend. The stdio suites lock
 all ten raw and ten lifecycle cases, exact frame/depth/id limits, duplicate/unicode/number mutants, canonical
 emission, cancellation through flush, continuation after rejected frames, EOF release, I/O failures, and sanitized
 logging. The admission checker then verifies a separate five-implementation/six-runtime status ledger, unchanged
-transport digest, one exact twelve-role consumer per admitted runtime, production authority fences, and shared
-rollout still pending. The Perl and Rust consumers each prove direct-native/MCP identity and every neutral outcome
-class. The recurring tool-
+transport digest, one exact twelve-role consumer per admitted runtime, production authority fences, and complete
+shared rollout. All six runtime consumers prove direct-native/MCP identity for capabilities plus all nineteen
+neutral queries. The recurring tool-
 governance test rejects missing owners and invalid ordering. This keeps a backend-derived module from blessing or
 hiding stale normative bytes and keeps a premature status promotion from masquerading as conformance. The focused
 suites use only caller-owned in-memory handles; they read no source path and change no native semantic/primary-CLI
@@ -53,7 +53,8 @@ contract.
 
 Perl parent closeout `.10.9.2.4` deliberately reruns this committed chain unchanged. It adds no umbrella test or
 replacement oracle: parent completion is the conjunction of the neutral, derived-binding, server, ledger, and
-admission owners already shown above. Shared rollout remains pending while the other runtime rows qualify.
+admission owners already shown above. At that historical Perl-only boundary, shared rollout remained pending
+while the other runtime rows qualified.
 
 Completed Rust preflight `.10.9.3.0` froze the dependency order. Decoded-server leaf `.10.9.3.1` adds the shared
 verified-bundle consumer and byte-fresh Rust binding after neutral materialization, independent validation, and
@@ -83,19 +84,27 @@ No-change `.10.9.6.4` reruns that exact committed sequence, passes Phase 0 1,031
 same complete dual-ABI gate, preserves pending/114, and closes the shared Lua parent without a replacement test,
 fixture, consumer, implementation, or umbrella oracle.
 
-Signoff-complete behavior-free recurring audit `.10.9.7.0` and ADR `0062` freeze the next gate before code. The audit distinguishes
-two facts that must not be conflated: the six native semantic consumers prove all twenty ordered responses, while
-the six current MCP consumer invocations prove complete transport/security/lifecycle coverage but direct/MCP
-identity for capabilities plus one representative graph query. Leaf `.1` must extend those existing identity
-roles to all twenty neutral requests/digests, without copying response bodies or adding production helpers.
+Signoff-complete behavior-free recurring audit `.10.9.7.0` and ADR `0062` froze the final evidence seam before
+code. The audit distinguished two facts that could not be conflated: the six native semantic consumers already
+proved all twenty ordered responses, while the MCP consumers then proved complete transport/security/lifecycle
+coverage but direct/MCP identity for only capabilities plus one representative graph query. Implemented `.1`
+has since extended those existing identity roles to all twenty neutral requests/digests without copying response
+bodies or adding production helpers.
 
-The planned `tools/check_mcp_six_runtime.sh` will be repository-routed and fail-fast. In order it validates the
-neutral semantic contract, materializes and independently validates the MCP contract, checks all five generated
-bindings, runs Perl/Rust/Dart/Julia/PUC Lua/LuaJIT MCP consumers exactly once, checks the admission/recurring
-ledger, and runs the existing three-case primary no-drift projection. Rust target and Julia writable-depot state
-will live under its exact managed artifact root. Canonical CI will require and syntax-check the driver, while
-`LINKEDSPEC_RUN_MCP_MATRIX=1` opts into the expensive composition. Only the coordinated `.1` transition may mark
-thin transport complete in both ledgers; `.2` remains the unchanged committed-owner closeout.
+Implemented `tools/check_mcp_six_runtime.sh` is repository-routed and fail-fast. In order it validates the neutral
+semantic contract, materializes and independently validates the MCP contract, checks all five generated bindings,
+runs Perl/Rust/Dart/Julia/PUC Lua/LuaJIT MCP consumers exactly once, checks the admission/recurring ledger, and
+runs the existing three-case primary no-drift projection. Rust target and Julia writable-depot state live under
+its exact managed artifact root. Canonical CI requires and syntax-checks the driver, while
+`LINKEDSPEC_RUN_MCP_MATRIX=1` opts into the expensive composition. The coordinated `.1` transition has marked
+thin transport complete in both ledgers; no-change `.10.9.7.2` owns the remaining MCP-parent closeout.
+
+No-change implementation closeout `.10.9.7.1.1.4` reruns that same chain independently. Its canonical opt-in
+gate passes all seven doctrines, Rust semantic 1/1, Julia semantic 416/416 in 29.3 seconds, containment/moved-root,
+primary CLI 66x2, RAM 54%, and Phase 0 1,031/1,031 in 655 seconds. The optional leg repeats Perl 13, Rust 1/1 in
+15.88 seconds, Dart 1/1, Julia 257/257 in 6.8 seconds, Lua 281/281 per ABI, complete/141 governance, and primary
+30/30. Implementation parents `.10.9.7.1.1` and `.10.9.7.1` are closed without a replacement proof or status
+movement; MCP-parent closeout `.10.9.7.2` is next.
 
 The planning leaf's host-authorized canonical signoff passes LinkedSpec's macOS-sandbox containment and moved-root
 proof, semantic 6/20/105, MCP 35/10/10/68, the current six runtime admissions, primary CLI 66x2, RAM 60%, Phase 0

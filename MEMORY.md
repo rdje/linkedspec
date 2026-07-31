@@ -5,21 +5,19 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- latest_commit: `22578b99` — `FUTURE-PARITY-BACKLOG.10.9.7.1.1.2 - prove all MCP response identities` (100/300;
+- latest_commit: `de46b26a` — `FUTURE-PARITY-BACKLOG.10.9.7.1.1.3 - promote recurring MCP proof` (101/300;
   no push); commit is brief-cleared/residue-free/clean.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.2`; all-twenty six-runtime consumer proof is durable.
-- active_leaf: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.3` — routed recurring governance and atomic thin-transport
-  promotion task-tree-first from clean `22578b99`.
-- active_scope: add the root-derived six-runtime driver, independent omission mutations, canonical/storage/
-  tracked/public owners, and coordinated `thin_mcp_transport` promotion in both neutral ledgers; synchronize docs.
-- active_progress: rooted recurring driver, exact CI/storage routing, and atomic cross-ledger promotion are
-  implemented. Focused recurring proof passes semantic 6/20/110 at rollout 8/9 + admission 6/6, MCP 35/10/10/76,
-  Perl 13, Rust 1, Dart 1, Julia 257, Lua 281x2, MCP rollout-complete 5/5 + 6/6/141, and primary 30/30. Full
-  canonical execution with `LINKEDSPEC_RUN_MCP_MATRIX=1` passes exit 0; durable signoff/commit is next.
-- active_exclusions: no production server/contract/binding/fixture/semantic behavior, primary CLI surface,
-  aggregator, legacy adapter, package/SDK/service/network authority, unrelated rollout, or push in `.3`.
-- next_after_clean_commit: activate `.10.9.7.1.1.4`, recompose every committed owner unchanged, and close `.1.1`
-  plus `.1`; no push before 300.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.3`; routed recurring promotion is durable.
+- active_leaf: `FUTURE-PARITY-BACKLOG.10.9.7.1.1.4` — unchanged implementation-parent recomposition
+  task-tree-first from clean `de46b26a`.
+- active_scope: rerun every committed contract/binding/server/consumer/driver/ledger/security/storage/primary/
+  canonical owner unchanged; close `.1.1` plus `.1` and synchronize durable/public projections.
+- active_progress: focused and host-authorized canonical opt-in recomposition, all durable projections, seven
+  doctrines, routing/storage checks, Knowledge Map, mdBook render, diff review, and exact cleanup pass; only the
+  clean leaf commit, brief-clear, and clean proof remain.
+- active_exclusions: no production/test/fixture/contract/binding/ledger/status/semantic/CLI/aggregator/legacy/
+  package/SDK/service/network behavior, unrelated rollout, or push in `.4`.
+- next_after_clean_commit: activate MCP-parent no-change closeout `.10.9.7.2`; no push before 300.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -45,14 +43,13 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - latest_bootstrap_read: 2026-07-30 — required resume pointers, active task/ADR/KM/Toolbox, contract/binding/server/
   consumer/driver/ledger/storage/canonical owners refreshed; roadmap/codebase/all 46 mdBook pages remain read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
-- push_policy: hard lock at 300 new local commits; counter 99/300 after `8352d535`; no push.
+- push_policy: hard lock at 300 new local commits; counter 101/300 after `de46b26a`; no push.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; canonical needs nested macOS sandbox permission and up to 30m.
-- canonical_state: current `.3` canonical with MCP opt-in passes all 7 doctrines, Rust semantic 81.29s, Dart,
-  Julia 416/416/28.9s, containment/moved-root, CLI 66x2, RAM 54%, Phase 0 1,031/1,031 in 643s, and optional MCP
-  Perl 13 / Rust 1 in 15.77s / Dart 1 / Julia 257 in 6.9s / Lua 281x2 / ledger 141 / primary 30/30.
-- blockers: none; Julia wrapper and sorted shell-owner integration defects are corrected and proven by the full
-  canonical rerun. KM 757/6,137 and mdBook 13,764 KiB/79 pass with exact cleanup; commit, brief-clear, and clean
-  proof remain.
+- canonical_state: current `.4` canonical with MCP opt-in passes all 7 doctrines, Rust semantic 1/1, Dart 1/1,
+  Julia 416/416/29.3s, containment/moved-root, CLI 66x2, RAM 54%, Phase 0 1,031/1,031 in 655s, and optional MCP
+  Perl 13 / Rust 1 in 15.88s / Dart 1 / Julia 257 in 6.8s / Lua 281x2 / ledger 141 / primary 30/30.
+- blockers: none; `.4` signoff and cleanup are green; only commit, brief-clear, and clean proof remain before
+  `.10.9.7.2` activation.
