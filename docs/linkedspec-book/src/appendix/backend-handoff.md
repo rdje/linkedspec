@@ -1568,9 +1568,11 @@ equivalence across native, serialized, generated-plan, and emitted-source execut
 same inert explicit-literal construction/state plus dynamic invocation, copied/restored caller-context bindings,
 typed result access, portable failures/recursion, and native/reconstructed/generated/emitted identity. Dart
 `.11.5.3` adds exact final-only staged/descriptor metadata and generic contextual equivalence for typed functions,
-helpers, receiver `with`, and tree traversal through the same evaluator. Julia and Lua still lack explicit literal
-values. Semantic introspection and thin MCP are separately complete. No backend is called complete while a current
-matrix state remains partial or gap.
+helpers, receiver `with`, and tree traversal through the same evaluator. Julia `.11.6.1` now admits the same inert
+explicit-literal construction/state, generated reconstruction, and semantic shape, but dynamic invocation and
+generic contextual equivalence remain `.11.6.2-.3`; Lua still lacks explicit literal values. Semantic
+introspection and thin MCP are separately complete. No backend is called complete while a current matrix state
+remains partial or gap.
 
 During the historical rollout, `FUTURE-PARITY-BACKLOG.1.6.6` closed the non-codegen census without claiming
 complete backend parity. Its 57/1/2 boundary first advanced to 58/0/2 through strict recurring Rust generated-

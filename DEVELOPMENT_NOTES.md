@@ -1,5 +1,30 @@
 # DEVELOPMENT NOTES
 
+- 2026-07-30 (`FUTURE-PARITY-BACKLOG.11.6.1` — typed deferred data, not a Julia closure): Julia's brace parser
+  previously had only harray and eager `block_value` outcomes, while its shared `CallableSignature` required a
+  string rest name. The smallest coherent repair adds exact `{|`-first literal/error nodes, makes only the shared
+  rest field nullable, and keeps the established variadic user-function validator explicitly non-null. The parser
+  already works in Unicode-character offsets through `collect`, so nested body parsing can preserve containing
+  half-open positions without a second source map.
+
+  The runtime serializes and deep-copies the literal node instead of evaluating `body_ast`. Contract resolution
+  and removed-selector traversal stop at the literal boundary; otherwise a deferred `missing()`, `call(Done)`, or
+  `retv` read would become an eager dependency. Both semantic expression-shape owners reuse one exact codeblock
+  signature projection. Generated-v2 Julia already embeds normalized `SpecFile` JSON and recompiles through the
+  ordinary parser/runtime, so adding a closure cache, host callback, or codeblock-only emitted executor would have
+  created a competing authority.
+
+  The focused 239-assertion suite proves exact typed classes/fields, every neutral valid and malformed form,
+  Unicode and nested spans, inert construction, user-function transport, nullable-signature isolation, semantic
+  binding, generated-plan/reconstruction identity, and a freshly loaded emitted module. The first complete gate
+  then did useful integration work: it rejected the newly introduced `mktempdir()` file until the sorted Julia
+  storage-owner manifest and current durable docs advanced from 17 to 18. The corrected focused storage proof and
+  an uninterrupted full Julia gate pass with a byte-fresh 120,030-byte MCP binding, the complete package suite,
+  five locked package trees, primary CLI, and corpus 105/105. Final Knowledge Map 768/6,235, mdBook 79 files / 13,964 KiB,
+  memory/task/whitespace, and all seven doctrines pass; canonical CI also passes semantic/MCP admissions,
+  containment/moved-root, CLI 66x2, RAM 57%, and Phase 0 1,031/1,031 in 646 seconds. Dynamic invocation, generic
+  final blocks, capability/MCP promotion, other backends, root README growth, and push remain excluded.
+
 - 2026-07-30 (`FUTURE-PARITY-BACKLOG.11.5.3` — contextual syntax is provisional until metadata accepts it):
   Dart action parsing necessarily precedes the complete user-function registry. The parser therefore records
   attached and parenthesized plain blocks as provenance-bearing candidates and parses receiver attachment

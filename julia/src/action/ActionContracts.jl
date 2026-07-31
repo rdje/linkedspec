@@ -754,6 +754,19 @@ function _visit_expr!(resolver::_ActionContractResolver, expr::ActionExpr)
         _visit_expr!(resolver, expr.value)
     elseif expr isa ActionBlockValueExpr
         _visit_block!(resolver, expr.block)
+    elseif expr isa ActionCodeblockLiteralExpr
+        # A callable body is deferred state and has no eager dependencies.
+        nothing
+    elseif expr isa ActionCodeblockLiteralErrorExpr
+        push!(
+            resolver.diagnostics,
+            ActionContractDiagnostic(
+                code = expr.code,
+                message = "invalid callable-codeblock literal: $(expr.code)",
+                source = expr.source,
+                source_span = expr.source_span,
+            ),
+        )
     elseif expr isa ActionArrayLiteralExpr
         for item in expr.items
             _visit_expr!(resolver, item)

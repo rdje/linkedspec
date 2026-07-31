@@ -20,7 +20,7 @@ answers:
 date: 2026-07-26
 status: current
 tags: [julia, depot, storage, filesystem, ssd, cache, temporary-data, generated-source, trace, portability, PROJECT-DATA-SSD-ROOTING]
-evidence: "PROJECT-DATA-SSD-ROOTING.2.4 adds tools/run_julia_project_data.sh and tools/test_julia_project_data_storage.sh. The oracle locks 17 tracked mktempdir/tempdir owners, verifies managed temp and the writable depot share the repository device, rejects an explicit developer-home depot, requires all five external Manifest package trees plus the General registry, and exercises generated v2 source and trace paths. The five package trees contain 146 files / 710,665 bytes with canonical hash 6840ce825c96acd208d308fc58baac1306dcfd64afe1dc4b365f1eccfe906af1. The complete package/primary/corpus gate passes offline with 105/105 corpus fixtures. Two old exact depots were copied, count/byte/hash verified, used through the canonical cache, and deleted; the one exact former-checkout shared usage-log stanza was deleted while ambiguous shared data remained untouched. Eighty-eight existing current Julia reverify cards and eight directly invocable Julia-consuming cross-backend checkers now use self-rooted managed boundaries."
+evidence: "PROJECT-DATA-SSD-ROOTING.2.4 adds tools/run_julia_project_data.sh and tools/test_julia_project_data_storage.sh. The oracle now locks 18 tracked mktempdir/tempdir owners after FUTURE-PARITY-BACKLOG.11.6.1 adds the independently loaded emitted-codeblock module test; it verifies managed temp and the writable depot share the repository device, rejects an explicit developer-home depot, requires all five external Manifest package trees plus the General registry, and exercises generated v2 source and trace paths. The five package trees contain 146 files / 710,665 bytes with canonical hash 6840ce825c96acd208d308fc58baac1306dcfd64afe1dc4b365f1eccfe906af1. The complete package/primary/corpus gate passes offline with 105/105 corpus fixtures. Two old exact depots were copied, count/byte/hash verified, used through the canonical cache, and deleted; the one exact former-checkout shared usage-log stanza was deleted while ambiguous shared data remained untouched. Eighty-eight existing current Julia reverify cards and eight directly invocable Julia-consuming cross-backend checkers now use self-rooted managed boundaries."
 reverify: "bash tools/test_julia_project_data_storage.sh && bash tools/run_julia_local.sh && test ! -e .linkedspec-data/cache/julia-depot/logs/manifest_usage.toml"
 ---
 
@@ -38,7 +38,7 @@ so package tests and loading resolve offline without the shared developer depot.
 adds only its externally managed system depots. Those interpreter resources are strictly required, read-only
 runtime dependencies rather than project storage.
 
-`tools/test_julia_project_data_storage.sh` freezes all 17 tracked `mktempdir()`/`tempdir()` owners, checks actual
+`tools/test_julia_project_data_storage.sh` freezes all 18 tracked `mktempdir()`/`tempdir()` owners, checks actual
 filesystem device identity for managed scratch, the writable depot, and every package file, rejects package
 symlinks and explicit external depot entries, and proves JSON3 resolves from the first depot. Its runtime probe
 requires Julia's `tempdir()` to equal routed `TMPDIR`, creates generated v2 source and a trace under `mktempdir()`,

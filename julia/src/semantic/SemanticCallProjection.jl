@@ -1122,7 +1122,8 @@ function _semantic_call_function_variables(entry::UserFunctionEntry)
     variables = Dict{String,Dict{String,Any}}(
         name => _semantic_static_value_shape("unknown") for name in names
     )
-    if signature !== nothing && !isempty(signature.rest_param)
+    if signature !== nothing && signature.rest_param !== nothing &&
+       !isempty(signature.rest_param)
         variables[signature.rest_param] = _semantic_static_array_shape(
             _semantic_static_value_shape("unknown"),
         )
@@ -1143,6 +1144,8 @@ function _semantic_call_expression_shape(
         return _semantic_static_value_shape("boolean")
     elseif expression isa ActionUndefExpr
         return _semantic_static_value_shape("null")
+    elseif expression isa ActionCodeblockLiteralExpr
+        return _semantic_static_codeblock_shape(expression.signature)
     elseif expression isa ActionVariableExpr
         return get(variables, expression.name, _semantic_static_value_shape("unknown"))
     elseif expression isa ActionAssignScalarExpr
@@ -1223,7 +1226,8 @@ function _semantic_call_signature_names(definition::FunctionDefinition)
     signature = definition.signature
     signature === nothing && return definition.params
     names = String[signature.positional_params...]
-    isempty(signature.rest_param) || push!(names, "...$(signature.rest_param)")
+    signature.rest_param === nothing || isempty(signature.rest_param) ||
+        push!(names, "...$(signature.rest_param)")
     return names
 end
 

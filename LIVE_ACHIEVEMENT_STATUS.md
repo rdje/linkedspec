@@ -1,5 +1,35 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-07-30 — Julia callable-codeblock construction signoff-complete
+
+Leaf `FUTURE-PARITY-BACKLOG.11.6.1` now gives Julia exact inert `{|params| body }` / `{|| body }` construction
+before harray/eager-block classification. The neutral eight-field record retains fixed/final-rest signature,
+typed ActionIR body, exact source, and containing Unicode-character spans. Contract/dependency and removed-selector
+scans treat the body as deferred; runtime construction returns recursively copied plain state with no execution,
+closure, or captured environment. User functions, compiled JSON, generated plans, normalized reconstruction, a
+freshly loaded emitted module, and semantic `codeblock` shapes preserve the record. Dynamic `cb(args)` remains
+`.11.6.2`; generic final blocks remain `.11.6.3`.
+
+The focused suite passes 239/239 and the complete package suite is green. The first operational gate exposed the
+new emitted-module test as the legitimate 18th Julia temporary owner; the governed storage manifest and current
+storage docs were updated, after which the focused oracle and one uninterrupted complete Julia gate passed:
+byte-fresh 120,030-byte MCP binding, package suite, 18 owners / five locked package trees, primary CLI, and corpus
+105/105. Neutral 7/11/9/7/4/8, Knowledge Map 768/6,235, mdBook 79 files / 13,964 KiB, memory/task/whitespace, and all seven
+doctrines pass. Canonical semantic/MCP admissions, containment/moved-root, CLI 66x2, RAM 57%, and Phase 0
+1,031/1,031 in 646 seconds pass. The workflow commit carries the completed leaf; `.11.6.2` remains pending until
+the brief, post-commit pointer, clean status, and exact output/run cleanup are proved. No capability/MCP status,
+other backend, root README, or push moves.
+
+## 2026-07-30 — Julia callable-codeblock construction activated
+
+Leaf `FUTURE-PARITY-BACKLOG.11.6.1` is active task-tree-first from clean Dart closeout commit `bdae816a`
+(114/300). Existing Julia authorities already provide the spec-driven function shell, v1/v2 typed signatures,
+immutable staged sidecars and registry, generated-v2 normalized-state reconstruction, and semantic projection.
+This leaf is bounded to exact inert `{|params| body }` / `{|| body }` construction, harray/eager-block
+disambiguation, Unicode-character source spans, native/serialized/generated/emitted identity, and focused/full
+proof. Dynamic `cb(args)` remains `.11.6.2`; generic final blocks remain `.11.6.3`; capability/MCP status, root
+README, and push do not move. No Julia behavior changed at activation.
+
 ## 2026-07-30 — Dart generic final-codeblock equivalence signoff-complete
 
 Leaf `FUTURE-PARITY-BACKLOG.11.5.3` carries exact final `name: codeblock` metadata through definition, staged

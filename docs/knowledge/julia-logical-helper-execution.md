@@ -28,8 +28,9 @@ typed policy used by those helpers and by lazy conditions:
 - nonzero numbers, every nonempty string, and nonempty aggregates are true;
 - an inert typed codeblock is true without invocation.
 
-The codeblock row is proven with a parsed `ActionBlock` at the runtime boundary. It does not activate the explicit
-callable-codeblock literal syntax owned by `FUTURE-PARITY-BACKLOG.11`.
+The original codeblock truthiness row was proven with a parsed `ActionBlock` at the runtime boundary. Julia now
+also constructs exact inert callable-codeblock literals under `FUTURE-PARITY-BACKLOG.11.6.1`; construction does
+not imply dynamic invocation, which remains `.11.6.2`.
 
 Direct call dispatch preserves static precedence by resolving registered user functions first. For built-in
 logical calls it then validates one-plus positional `and`/`or` and exact-one positional `not` before evaluating
@@ -50,4 +51,4 @@ trace probes isolated Perl's compile-once Regex flag `o`, which a later dedicate
 
 Related facts: [[logical-helper-neutral-contract]], [[logical-helper-five-backend-audit]],
 [[cross-backend-condition-truthiness-drift]], [[julia-generated-source-scaffold]],
-[[julia-helper-regex-flag-normalization]].
+[[julia-helper-regex-flag-normalization]], [[julia-callable-codeblock-literal-state]].

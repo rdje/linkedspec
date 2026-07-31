@@ -355,7 +355,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 ### 4.3.5 Julia targeted commands and SSD-local storage oracle
 
 - **WHAT:** `tools/run_julia_project_data.sh` executes one Julia command with repository-derived managed temp and
-  retained depot storage; `tools/test_julia_project_data_storage.sh` locks all 17 tracked temporary owners, the
+  retained depot storage; `tools/test_julia_project_data_storage.sh` locks all 18 tracked temporary owners, the
   five external Manifest package trees, actual filesystem devices, offline source resolution, generated v2 source,
   trace output, cleanup, and absence of disposable machine-path usage metadata.
 - **WHEN:** use the targeted wrapper for every Julia command that bypasses `tools/run_julia_local.sh`; run the oracle

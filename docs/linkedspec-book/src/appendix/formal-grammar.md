@@ -140,7 +140,7 @@ collect("head")               # prefix = "head", items = []
 collect("head", "a", "b")   # prefix = "head", items = ["a", "b"]
 ```
 
-### Callable-codeblock literal and dynamic call (construction on Perl, Rust, and Dart)
+### Callable-codeblock literal and dynamic call (construction on Perl, Rust, Dart, and Julia)
 
 ADR 0031 adopts callable literals; ADR 0032 adds a final contextual-codeblock parameter declaration:
 
@@ -178,8 +178,11 @@ structured failures, and ordered direct/mutual recursion rejection across native
 roles. Dart `.11.5.3` now preserves exact final-only declaration/staged/registry/descriptor metadata and
 normalizes attached/parenthesized helper, typed-user-function, receiver `with`, and tree-traversal blocks through
 one metadata owner to the same zero-positional `codeblock_argument`. Ordinary eager blocks, controls, explicit
-literal signatures, and harrays remain distinct. Julia parity and Lua explicit literals remain future, so complete
-invocation behavior is not yet universally portable.
+literal signatures, and harrays remain distinct. Julia `.11.6.1` now preserves the same inert eight-field literal,
+fixed/final-rest signature, typed body, containing Unicode-character spans, user-function transport,
+compiled/generated/emitted state, and semantic codeblock shape. Julia dynamic calls and generic final blocks
+remain `.11.6.2-.3`; Lua explicit literals remain future, so complete invocation behavior is not yet universally
+portable.
 
 Arguments evaluate once from left to right before any parameter is bound. Nested arrays/harrays, booleans,
 `undef`, and codeblocks remain individual rest-array values rather than being flattened or coerced.

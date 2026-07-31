@@ -186,6 +186,56 @@ function ActionBlockValueExpr(; source, source_span, block)
     return ActionBlockValueExpr("block_value", String(source), source_span, block)
 end
 
+"""An inert, serializable callable-codeblock value with a deferred typed body."""
+struct ActionCodeblockLiteralExpr <: ActionExpr
+    kind::String
+    version::Int
+    signature::CallableSignature
+    body_source::String
+    body_ast::ActionBlock
+    source::String
+    source_span::ActionSourceSpan
+    body_span::ActionSourceSpan
+end
+
+function ActionCodeblockLiteralExpr(;
+    version = 1,
+    signature,
+    body_source,
+    body_ast,
+    source,
+    source_span,
+    body_span,
+)
+    return ActionCodeblockLiteralExpr(
+        "codeblock_literal",
+        version,
+        signature,
+        String(body_source),
+        body_ast,
+        String(source),
+        source_span,
+        body_span,
+    )
+end
+
+"""Stable parser result for a malformed callable-codeblock literal."""
+struct ActionCodeblockLiteralErrorExpr <: ActionExpr
+    kind::String
+    source::String
+    source_span::ActionSourceSpan
+    code::String
+end
+
+function ActionCodeblockLiteralErrorExpr(; source, source_span, code)
+    return ActionCodeblockLiteralErrorExpr(
+        "codeblock_literal_error",
+        String(source),
+        source_span,
+        String(code),
+    )
+end
+
 struct ActionStringLiteralExpr <: ActionExpr
     kind::String
     source::String
@@ -696,6 +746,8 @@ function find_removed_aggregate_selector(expr::ActionExpr)
         return nothing
     elseif expr isa ActionBlockValueExpr
         return find_removed_aggregate_selector(expr.block)
+    elseif expr isa ActionCodeblockLiteralExpr || expr isa ActionCodeblockLiteralErrorExpr
+        return nothing
     elseif expr isa ActionControlIfExpr
         selector = find_removed_aggregate_selector(expr.condition)
         selector === nothing && (selector = _find_removed_aggregate_selector_in_args(expr.args))
@@ -830,6 +882,25 @@ end
 function to_json(expr::ActionBlockValueExpr)
     result = _action_base_json(expr)
     result["block"] = to_json(expr.block)
+    return result
+end
+
+function to_json(expr::ActionCodeblockLiteralExpr)
+    return Dict{String,Any}(
+        "kind" => expr.kind,
+        "version" => expr.version,
+        "signature" => to_json(expr.signature),
+        "body_source" => expr.body_source,
+        "body_ast" => to_json(expr.body_ast),
+        "source_text" => expr.source,
+        "source_span" => to_json(expr.source_span),
+        "body_span" => to_json(expr.body_span),
+    )
+end
+
+function to_json(expr::ActionCodeblockLiteralErrorExpr)
+    result = _action_base_json(expr)
+    result["code"] = expr.code
     return result
 end
 

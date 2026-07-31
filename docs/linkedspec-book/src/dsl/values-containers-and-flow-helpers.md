@@ -239,8 +239,9 @@ signature accepts a final codeblock, the intended contract is that `call(args) {
 `call(args, { ... })` are equivalent spellings of the same call; the same rule applies to helper functions, user
 functions, and receiver methods. Perl, Rust, and Dart implement that equivalence for metadata-declared `with`,
 typed user functions, and receiver `with`/tree-traversal surfaces. Lua's implemented contextual subsets are
-documented in its backend handoff; explicit callable values remain separately owned there. Julia does not yet
-provide the generic contract, so the complete five-backend surface is not yet portable. ADR 0031 and completed
+documented in its backend handoff; explicit callable values remain separately owned there. Julia now constructs
+explicit callable values but does not yet provide dynamic invocation or the generic contextual contract, so the
+complete five-backend surface is not yet portable. ADR 0031 and completed
 `FUTURE-PARITY-BACKLOG.11.1` select an explicit literal:
 
 ```text
@@ -264,7 +265,7 @@ parameters, is invoked with zero arguments, and reads the callable's current dyn
 is deferred; invocation uses the caller's current nonparameter stores, temporarily binds copied parameters, keeps
 `return(...)` block-local, and captures no lexical environment. `{|` is distinct from harray literals and current
 eager `{ statements }` block expressions. `with` remains an ordinary helper. The executable neutral
-`linkedspec-callable-codeblock-v1` contract locks this design and its fixture. Perl, Rust, and Dart now parse these
+`linkedspec-callable-codeblock-v1` contract locks this design and its fixture. Perl, Rust, Dart, and Julia parse these
 literals and preserve their signature/body/source/span record through assignment, user functions, serialization,
 and generated source. Perl, Rust, and Dart execute a bound value through `cb(args)`. Arguments evaluate once
 from left to right before temporary copied fixed/rest parameters bind. Prior parameter values restore even when the body fails;
@@ -295,6 +296,15 @@ post-registry pass admits only metadata-declared final blocks, restores ordinary
 values, and rejects unknown attached callees. Accepted contextual blocks become the same zero-positional
 `codeblock_argument` and reuse the dynamic evaluator above.
 
+Julia now has the same inert construction boundary. Exact `{|` recognition precedes harray/eager-block routing;
+the neutral eight-field record retains fixed/final-rest signature, typed body, exact source, and containing
+Unicode-character spans. Contract and removed-selector scans treat the body as a deferred leaf. Runtime state is
+a recursively copied plain dictionary, and normalized emitted `SpecFile` reconstruction runs through the ordinary
+compiler in a freshly loaded Julia module. User functions transport the record without executing it, nullable
+fixed signatures do not weaken the non-null variadic user-function invariant, and semantic bindings expose the
+exact `codeblock` signature. Dynamic `cb(args)` and contextual final-block normalization remain the next two Julia
+leaves.
+
 On Perl, Rust, and Dart, `apply("x") { return(value) }` and `apply("x", { return(value) })` normalize to the same contextual
 zero-positional codeblock when `apply` declares a final `callback: codeblock`. The same metadata rule governs the
 supported helper and receiver forms. `{|item| ...}` remains an explicit one-positional codeblock value, while
@@ -320,9 +330,9 @@ count = collector("p", "a", "b")["items"].length()
 
 Perl, Rust, and Dart report exact arity, keyword-call, bound-non-codeblock, unknown-body-helper, and active-recursion
 failures as typed runtime details. A governed helper/control or registered user function still wins over a
-same-named variable. Explicit construction and `cb(...)` invocation are current on Perl, Rust, and Dart. Generic
-contextual final-block spellings are complete on those three backends; Julia parity and Lua explicit-literal/
-dynamic-call parity remain future.
+same-named variable. Explicit construction is current on Perl, Rust, Dart, and Julia; `cb(...)` invocation is
+current on Perl, Rust, and Dart. Generic contextual final-block spellings are complete on those three backends;
+Julia dynamic/generic parity and Lua explicit-literal/dynamic-call parity remain future.
 
 Hash receiver trailing blocks also support deterministic tree traversal. A hash tree has a hash root. Nested hash
 values are interior nodes; all non-hash values, including arrays, are leaves. `walk_leaves() { ... }` visits each

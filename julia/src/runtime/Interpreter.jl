@@ -2426,6 +2426,12 @@ function _evaluate_runtime_action_expr!(
             rule_label,
             current_edge,
         )
+    elseif expr isa ActionCodeblockLiteralExpr
+        return _runtime_copy(to_json(expr))
+    elseif expr isa ActionCodeblockLiteralErrorExpr
+        throw(RuntimeInterpreterException(
+            "invalid callable-codeblock literal in rule $rule_label: $(expr.code)",
+        ))
     elseif expr isa ActionRawExpr
         throw(RuntimeInterpreterException(
             "unsupported raw action expression in rule $rule_label: $(expr.source)",
@@ -2964,6 +2970,9 @@ function _execute_runtime_user_function!(
         if definition.signature !== nothing
             rest_values = Any[_runtime_copy(value) for value in values[(definition.arity + 1):end]]
             rest_name = definition.signature.rest_param
+            rest_name === nothing && throw(RuntimeInterpreterException(
+                "user function '$(definition.name)' has no variadic rest parameter",
+            ))
             context.variables[rest_name] = _runtime_copy(rest_values)
             context.arrays[rest_name] = _runtime_as_array(rest_values)
         end

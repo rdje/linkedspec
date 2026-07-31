@@ -282,6 +282,7 @@ function _check_function_registry(spec::SpecFile)
         end
 
         signature = function_definition.signature
+        validated_rest_param = nothing
         if signature !== nothing
             if signature.kind != "callable_signature" || signature.version != 1
                 throw(SpecValidationException("user function '$name' has unsupported callable signature"))
@@ -290,9 +291,13 @@ function _check_function_registry(spec::SpecFile)
                     signature.min_arity != function_definition.arity || signature.max_arity !== nothing
                 throw(SpecValidationException("user function '$name' has inconsistent callable signature"))
             end
-            if !_is_identifier(signature.rest_param)
-                throw(SpecValidationException("user function '$name' has invalid rest parameter '$(signature.rest_param)'"))
+            rest_param = signature.rest_param
+            if rest_param === nothing || !_is_identifier(rest_param)
+                throw(SpecValidationException(
+                    "user function '$name' has invalid rest parameter '$rest_param'",
+                ))
             end
+            validated_rest_param = rest_param
         end
 
         seen_params = Set{String}()
@@ -308,8 +313,8 @@ function _check_function_registry(spec::SpecFile)
                 throw(SpecValidationException("user function '$name' parameter '$param' is reserved"))
             end
         end
-        if signature !== nothing
-            rest_param = signature.rest_param
+        if validated_rest_param !== nothing
+            rest_param = validated_rest_param
             if rest_param in seen_params
                 throw(SpecValidationException("duplicate parameter '$rest_param' in function '$name'"))
             end

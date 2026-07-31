@@ -528,8 +528,8 @@ from left to right, so use `if`, `switch`, or `while` when later side effects mu
 
 Logical helpers and lazy controls share one `_runtime_truthy` typed policy: `nothing`, false, numeric zero, the empty string,
 and empty vectors/dictionaries are false; nonzero numbers, every nonempty string (including `"0"` and `"false"`),
-and nonempty aggregates are true. A typed codeblock value is true without invocation; this runtime rule does not
-activate the separately future explicit callable-literal syntax.
+and nonempty aggregates are true. A typed codeblock value is true without invocation. Exact explicit
+callable-literal construction is now current; dynamic bound-variable invocation remains a separate future step.
 
 ```text
 Top::
@@ -548,6 +548,32 @@ emitted-module, and primary-command paths share these semantics. Direct/traced g
 effect order, failure attribution, and trace-result identity. The primary command keeps its stable generic
 `linkedspec: parser invocation failed` process projection for invalid calls; native callers can inspect
 `to_json(error.diagnostic)` for the structured fields.
+
+## Callable-Codeblock Construction
+
+Julia recognizes an exact brace-pipe literal before ordinary harray and eager-block classification:
+
+```text
+fixed = {|left, right| return(cat(left, right)) }
+zero = {|| return("later") }
+rest = {|prefix, ...items| return({ "prefix" : prefix, "items" : items }) }
+```
+
+Construction is inert. It returns plain serializable data with the exact eight fields `kind`, `version`,
+`signature`, `body_source`, `body_ast`, `source_text`, `source_span`, and `body_span`; it does not execute the
+typed ActionIR body or capture a Julia environment. Fixed signatures carry `rest_param = null` and exact maximum
+arity, while a final `...rest` carries its name and an unbounded maximum. Literal and body spans are half-open
+Unicode character offsets in the containing ActionIR source, including for nested literals.
+
+Assignment/copying, user-function arguments and results, compiled JSON, generated plans, normalized emitted-source
+reconstruction, and semantic `codeblock` shapes preserve the same record. Emitted Julia reconstructs through the
+ordinary compiler/runtime path rather than creating a Julia closure or a second executor. Malformed literals use
+the nine portable neutral diagnostic codes. `{}` and keyed braces remain harrays; nonempty ordinary braces remain
+eager block values.
+
+This construction slice deliberately does not make `fixed("a", "b")` callable yet. Bound-variable `cb(args)`
+execution and its dynamic caller context are owned by `FUTURE-PARITY-BACKLOG.11.6.2`; metadata-governed attached
+and parenthesized final blocks are owned by `.11.6.3`.
 
 Run `bash tools/check_logical_helper_five_backend.sh` from the repository root for the full recurring neutral,
 six-runtime, selected-primary, and support-ledger proof. Canonical local CI exposes the same all-toolchain leg as

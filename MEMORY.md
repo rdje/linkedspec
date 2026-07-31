@@ -5,18 +5,19 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `74725ff0` — clean Dart dynamic-invocation HEAD from which `.11.5.3` activated task-tree-first
-  (113/300; no push); Git derives the landing identity.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.11.5.3` via this landing commit; Dart parent `.11.5` is closed.
-- active_leaf: none at the intended clean landing boundary; Julia construction `.11.6.1` is the next activation.
-- active_scope: completed exact Dart final-only metadata, one signature-governed helper/user/receiver/tree
-  contextual normalizer, native/reconstructed/generated/emitted identity, public no-drift, and parent closeout.
-- active_progress: complete/signoff-green — neutral 7/11/9/7/4/8, callable 21, package 375, format 95/0, strict
-  analysis, storage 19/47, CLI 66x2, corpus 105/105, Knowledge Map 766/6,218, mdBook 79/13,944, and canonical.
-- active_exclusions: new codeblock signatures/closures/callback runtimes, capability/
-  MCP movement, lexical capture, other backends, root README, history rewriting, and push.
-- in_flight_uncommitted: none in the intended post-landing state; activate `.11.6.1` task-tree-first only when clean.
-- next_after_clean_commit: activate Julia callable-codeblock construction `.11.6.1`; no push.
+- activation_commit: `bdae816a` — clean Dart final-codeblock closeout HEAD from which Julia `.11.6.1` activated
+  task-tree-first (114/300; no push); Git derives the landing identity.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.11.6.1` — Julia callable-codeblock construction/inert state;
+  workflow commit is 115/300 and Git derives its identity. Parent `.11.6` remains open.
+- active_leaf: none after landing; Julia dynamic callable-codeblock invocation `.11.6.2` is next but not activated.
+- completed_scope: exact Julia `{|params| body }` parsing, eight-field typed literal/signature/body/source/span
+  state, brace disambiguation, native/serialized/generated/emitted/semantic identity, tests, docs, and gates.
+- completed_proof: callable 239/239; complete Julia package/storage 18/5/CLI/corpus 105/105; neutral 7/11/9/7/4/8;
+  KM 768/6,235; book 79/13,964; seven doctrines; canonical CLI 66x2/RAM 57%/Phase 0 1,031 in 646 seconds.
+- active_exclusions: dynamic codeblock invocation, generic contextual final blocks, closures/callback runtimes,
+  capability/MCP movement, lexical capture, other backends, root README, history rewriting, and push.
+- in_flight_uncommitted: none after the workflow commit; generated output/run residue is absent and brief is empty.
+- next_action: prove the `.11.6.1` post-commit boundary and clean status, then activate `.11.6.2`; no push.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -24,7 +25,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   signals group-wide, rechecks before deletion, and retains live/reused/invalid/indeterminate authority.
 - current_storage_routing: 41 hook/doctrine/KM/canonical/backend/book/matrix/storage/path boundaries self-root and
   enter one managed run; Cargo/Dart/Julia/Lua/Python use supported root-relative wrappers.
-- current_storage_backends: Perl 24, Rust 17, Dart 19, Julia 17, and Lua 16 owner proofs route project data to the
+- current_storage_backends: Perl 24, Rust 17, Dart 19, Julia 18, and Lua 16 owner proofs route project data to the
   repository volume; only documented read-only toolchain/OS resources remain external.
 - current_storage_tools: tool oracle freezes 3 Python temp / 14 shell allocator / 25 tool owners; bytecode/map/
   book/CLI/TAP/oracle output is same-device, and external/symlink output is pre-rejected.
@@ -38,15 +39,15 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   moves the repeated-action checker's immutable handoff to a stable governed home.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54.
 - current_future_direction: ADR `0064`/`SPEC-LANGUAGE-SELF-CONTAINMENT` owns expressive closure/EBNF profiles;
-  callable parity advances next through Julia `.11.6.1`; ADR `0056` remains pending under `.14.1-.8`.
+  callable parity next activates Julia dynamic invocation `.11.6.2`; ADR `0056` remains pending under `.14.1-.8`.
 - latest_bootstrap_read: 2026-07-30 — required resume pointers, active task/ADR/KM/Toolbox, contract/binding/server/
   consumer/driver/ledger/storage/canonical owners refreshed; roadmap/codebase/all 46 mdBook pages remain read.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
-- push_policy: hard lock at 300 new local commits; counter 114/300 after this `.11.5.3` landing; no push.
+- push_policy: hard lock at 300 new local commits; counter 114/300 after `.11.5.3`; no push.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; canonical needs nested macOS sandbox permission and up to 30m.
-- canonical_state: `.11.5.3` passes KM 766/6,218, book 79/13,944, all 7 doctrines, semantic/MCP admissions,
-  containment/moved-root, CLI 66x2, RAM 58%, and Phase 0 1,031/1,031 in 646 seconds; exact cleanup passes.
-- blockers: none; land `.11.5.3`, prove the clean boundary, then activate Julia `.11.6.1`; no push.
+- canonical_state: `.11.6.1` passes KM 768/6,235, book 79/13,964, all 7 doctrines, semantic/MCP admissions,
+  containment/moved-root, CLI 66x2, RAM 57%, and Phase 0 1,031/1,031 in 646 seconds; exact cleanup passes.
+- blockers: none; prove the `.11.6.1` workflow/clean boundary, then activate `.11.6.2`; no push.

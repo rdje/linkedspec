@@ -20,7 +20,7 @@ struct CallableSignature
     kind::String
     version::Int
     positional_params::Vector{String}
-    rest_param::String
+    rest_param::Union{Nothing,String}
     min_arity::Int
     max_arity::Union{Nothing,Int}
 end
@@ -37,7 +37,7 @@ function CallableSignature(;
         String(kind),
         version,
         String[positional_params...],
-        String(rest_param),
+        rest_param === nothing ? nothing : String(rest_param),
         min_arity,
         max_arity,
     )
@@ -506,7 +506,7 @@ function from_json(::Type{CallableSignature}, json)
         kind = _ast_string(object, "kind"),
         version = _ast_int(object, "version"),
         positional_params = _ast_string_list(object, "positional_params"),
-        rest_param = _ast_string(object, "rest_param"),
+        rest_param = _ast_optional_string(object, "rest_param"),
         min_arity = _ast_int(object, "min_arity"),
         max_arity = _ast_optional_int(object, "max_arity"),
     )

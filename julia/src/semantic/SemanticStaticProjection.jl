@@ -1201,6 +1201,8 @@ function _semantic_static_expression_shape(expression::ActionExpr)
         return _semantic_static_value_shape("boolean")
     elseif expression isa ActionUndefExpr
         return _semantic_static_value_shape("null")
+    elseif expression isa ActionCodeblockLiteralExpr
+        return _semantic_static_codeblock_shape(expression.signature)
     elseif expression isa ActionArrayLiteralExpr
         return _semantic_static_array_shape(_semantic_static_common_shape(
             [_semantic_static_expression_shape(item) for item in expression.items],
@@ -1253,6 +1255,24 @@ function _semantic_static_harray_shape(
     shape = _semantic_static_value_shape("harray")
     shape["key"] = key
     shape["value"] = value
+    return shape
+end
+
+function _semantic_static_codeblock_shape(signature::CallableSignature)
+    shape = _semantic_static_value_shape("codeblock")
+    shape["signature"] = Dict{String,Any}(
+        "parameters" => Any[
+            Dict{String,Any}(
+                "name" => name,
+                "kind" => "value",
+                "required" => true,
+            ) for name in signature.positional_params
+        ],
+        "arity_min" => signature.min_arity,
+        "arity_max" => signature.max_arity,
+        "rest_parameter" => signature.rest_param,
+        "final_codeblock" => false,
+    )
     return shape
 end
 

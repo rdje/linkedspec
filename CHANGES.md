@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-07-30 — FUTURE-PARITY-BACKLOG.11.6.1 — construct Julia callable codeblocks
+
+Julia now recognizes exact `{|params| body }` and `{|| body }` before its existing harray/eager-block brace
+classifier. `ActionCodeblockLiteralExpr` retains the neutral eight fields: version, one fixed/final-rest
+`CallableSignature`, exact body source, typed ActionIR body, exact literal source, and half-open containing-source
+Unicode-character literal/body spans. A dedicated error node preserves all nine malformed-literal codes. The
+shared signature record now permits null rest for fixed literal signatures, while reconstructed variadic user
+functions still fail validation unless their rest name is present and valid.
+
+Construction is deliberately inert. The runtime returns recursively copied plain dictionary state; no Julia
+closure, callback object, or environment is captured. Action-contract and removed-selector traversal treat the
+retained body as a deferred leaf, so body helpers, rule calls, mutations, and `retv` reads have no construction-time
+effect. Assignment/copying, user-function arguments/results, compiled JSON, generated plans, normalized emitted
+`SpecFile` reconstruction, a freshly loaded emitted module, and semantic binding shapes all carry the same record
+and exact signature. Dynamic `cb(args)` remains `.11.6.2`; generic contextual final blocks remain `.11.6.3`.
+
+The mutation-sensitive focused suite passes 239/239 across all seven neutral literals, nine invalid forms,
+harray/eager disambiguation, nested delimiters, Unicode-coordinate spans, non-execution, user-function transport,
+nullable-signature isolation, generated/reconstructed/emitted identity, and semantic projection. The complete
+Julia operational gate passes the byte-fresh 120,030-byte MCP binding, package suite, primary CLI, and corpus
+105/105. Its storage oracle now registers the emitted-module test as the exact 18th Julia temporary owner and
+passes five locked package trees plus generated/trace cleanup on repository storage. Knowledge Map 768/6,235,
+mdBook 79 files / 13,964 KiB, memory/task/whitespace, and all seven doctrines pass. Canonical semantic/MCP admissions,
+containment/moved-root, CLI 66x2, RAM 57%, and Phase 0 1,031/1,031 in 646 seconds also pass. Capability/MCP
+status, other backends, root `README.md`, and push cadence remain unchanged.
+
 ## 2026-07-30 — FUTURE-PARITY-BACKLOG.11.5.3 — close Dart generic final-codeblock equivalence
 
 Dart now preserves an exact final `name: codeblock` declaration from the shared function shell through definition,

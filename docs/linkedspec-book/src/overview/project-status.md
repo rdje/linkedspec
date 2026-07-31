@@ -825,8 +825,10 @@ Three backbone items tracked major structural modernization — all done:
   equivalent attached/parenthesized helper, typed-user-function, and receiver final blocks, exact descriptor-v3
   kinds, preserved eager/control blocks, typed non-codeblock rejection, and identical native/reconstructed/
   generated/emitted execution. Dart `.11.5.1-.3` now provide the same construction, explicit dynamic invocation,
-  exact final-codeblock metadata, and metadata-governed generic contextual equivalence. Julia parity and Lua
-  explicit-literal parity remain future.
+  exact final-codeblock metadata, and metadata-governed generic contextual equivalence. Julia `.11.6.1` now
+  provides exact inert literal/signature/body/source/Unicode-span state across native, serialized, generated,
+  emitted, user-function, and semantic authorities; its dynamic invocation and generic normalization remain
+  `.11.6.2-.3`. Lua explicit-literal parity remains future.
 - **Dart callable-codeblock construction and invocation** - `FUTURE-PARITY-BACKLOG.11.5.1` recognizes exact `{|params| body }`
   before Dart's harray/eager-block classifier and preserves the neutral eight-field record as inert plain data.
   Fixed and final-rest signatures, exact body/source, containing Unicode-character literal/body spans (including
@@ -844,6 +846,14 @@ Three backbone items tracked major structural modernization — all done:
   through the existing evaluator across native, reconstructed, generated-plan, and independently compiled emitted
   Dart. Eager blocks, controls, explicit literal signatures, harrays, static precedence, and portable failures
   remain distinct; parent `.11.5` is closed.
+- **Julia callable-codeblock construction** - `FUTURE-PARITY-BACKLOG.11.6.1` recognizes exact `{|params| body }`
+  and `{|| body }` before Julia's harray/eager-block classifier and preserves the neutral eight-field record as
+  inert recursively copied data. Fixed/final-rest signatures, typed ActionIR, exact source, containing
+  Unicode-character literal/body spans, nested literals, all nine malformed codes, user-function transport,
+  compiled JSON, generated plans, normalized reconstruction, a freshly loaded emitted module, and semantic
+  `codeblock` shapes agree. Deferred bodies are excluded from eager contract and removed-selector scans; no Julia
+  closure or environment capture exists. Focused proof passes 239/239 and the complete package suite is green.
+  Dynamic `cb(args)` remains `.11.6.2`; generic contextual final blocks remain `.11.6.3`.
 - **Dart backend parity** - `DART-BACKEND-PARITY` is complete only for the scoped interpreter-first Dart milestone. Its strategy is
   interpreter-first over typed `.spec` and helper/action AST plus compiled-spec state, with generated Dart source
   deferred to a future split source-emitter lane rather than required for the current conformance claim. The repo now has a `dart/` backend package with a Dart-specific CLI,

@@ -233,7 +233,13 @@ function _action_parse_brace_expr(text::String, start::Int)
     if !_action_outer_delimiter_is_balanced(text, '{', '}')
         return nothing
     end
+    if startswith(text, "{|")
+        return _action_parse_codeblock_literal(text, start)
+    end
     payload = _action_slice(text, 1, _action_len(text) - 1)
+    if occursin(r"^\s+\|", payload)
+        return _action_codeblock_literal_error(text, start, "invalid_codeblock_opener")
+    end
     if isempty(strip(payload)) || _action_has_top_level_hash_pair_separator(payload)
         return _action_parse_hash_literal(text, payload, start)
     end
@@ -241,6 +247,126 @@ function _action_parse_brace_expr(text::String, start::Int)
         source = text,
         source_span = ActionSourceSpan(start, start + _action_len(text)),
         block = _action_parse_block(payload, start + 1),
+    )
+end
+
+function _action_parse_codeblock_literal(text::String, start::Int)
+    signature_end = nothing
+    chars = collect(text)
+    for index in 2:(length(chars) - 2)
+        if chars[index + 1] == '|'
+            signature_end = index
+            break
+        end
+    end
+    if signature_end === nothing
+        return _action_codeblock_literal_error(
+            text,
+            start,
+            "missing_codeblock_signature_closer",
+        )
+    end
+
+    parsed = _action_parse_codeblock_signature(_action_slice(text, 2, signature_end))
+    if parsed.signature === nothing
+        return _action_codeblock_literal_error(text, start, parsed.error_code)
+    end
+
+    body_start = start + signature_end + 1
+    body_stop = start + _action_len(text) - 1
+    body_source = _action_slice(text, signature_end + 1, _action_len(text) - 1)
+    return ActionCodeblockLiteralExpr(
+        source = text,
+        source_span = ActionSourceSpan(start, start + _action_len(text)),
+        signature = parsed.signature,
+        body_source = body_source,
+        body_ast = _action_parse_block(body_source, body_start),
+        body_span = ActionSourceSpan(body_start, body_stop),
+    )
+end
+
+function _action_codeblock_literal_error(source::String, start::Int, code::String)
+    return ActionCodeblockLiteralErrorExpr(
+        source = source,
+        source_span = ActionSourceSpan(start, start + _action_len(source)),
+        code = code,
+    )
+end
+
+const _ACTION_CODEBLOCK_RESERVED_PARAMETERS = Set{String}([
+    "fn",
+    "return",
+    "I",
+    "LS",
+    "LE",
+    "E",
+    "EX",
+    "IT",
+    "LX",
+    "STRING",
+    "descr",
+    "minfo",
+    "LSPOS",
+    "LEPOS",
+    "LMATCH",
+    "LSMATCH",
+    "IMATCH",
+    "IMATCH_LIST",
+    "LMATCH_LIST",
+    "IMATCH_HASH",
+    "LMATCH_HASH",
+    "SELF",
+    "this",
+    "ctx",
+    "runtime_ctx",
+])
+
+function _action_parse_codeblock_signature(source::String)
+    parts = isempty(source) ?
+            String[] :
+            String[strip(part) for part in split(source, ','; keepempty = true)]
+    if any(isempty, parts)
+        return (signature = nothing, error_code = "invalid_parameter")
+    end
+
+    positional = String[]
+    rest_param = nothing
+    seen = Set{String}()
+    for (index, part) in enumerate(parts)
+        name = part
+        if startswith(part, "...")
+            if index != length(parts)
+                return (signature = nothing, error_code = "rest_parameter_must_be_final")
+            end
+            matched = match(r"^\.\.\.([A-Za-z_][A-Za-z0-9_]*)$", part)
+            if matched === nothing
+                return (signature = nothing, error_code = "invalid_rest_parameter")
+            end
+            name = matched.captures[1]
+            rest_param = name
+        else
+            if !_action_is_identifier(part)
+                return (signature = nothing, error_code = "invalid_parameter")
+            end
+            push!(positional, name)
+        end
+        if name in seen
+            return (signature = nothing, error_code = "duplicate_parameter")
+        end
+        push!(seen, name)
+        if name in _ACTION_CODEBLOCK_RESERVED_PARAMETERS
+            return (signature = nothing, error_code = "reserved_parameter")
+        end
+    end
+
+    return (
+        signature = CallableSignature(
+            positional_params = positional,
+            rest_param = rest_param,
+            min_arity = length(positional),
+            max_arity = rest_param === nothing ? length(positional) : nothing,
+        ),
+        error_code = nothing,
     )
 end
 
