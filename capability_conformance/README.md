@@ -179,8 +179,21 @@ Statuses mean:
 
 Every capability lists canonical contract sources and backend-specific evidence paths. The checker rejects unknown
 fields/statuses/backends, duplicate ids, missing evidence paths, unowned partial/gap states, missing task-tree owner
-ids, absolute paths, and future/excluded surfaces without an owner. Current language behavior belongs in
-`capabilities`; deprecated or genuinely not-yet-adopted directions belong in `excluded_or_future`.
+ids, absolute paths, and stale or unowned exclusions. Current language behavior belongs in `capabilities`;
+deprecated or genuinely not-yet-adopted directions belong in `excluded_or_future`.
+
+The manifest's exclusion ledger is schema v2 and currently contains exactly two ordered records. Deprecated
+Perl-only plugin machinery is explicit `legacy` under pending `FUTURE-PARITY-BACKLOG.6`; general provider search
+and recursive staged queues remain `future` under active structural/progressive/staged parent
+`FUTURE-PARITY-BACKLOG.14`. Both carry an explicit null `retention_authority`: future records never use one, and
+an open legacy owner does not need one. A legacy record whose owner is completed is legal only when a tracked,
+repository-relative durable authority explicitly retains it.
+
+The checker derives unique task ids and leading status enums from tracked task sources, requires future owners to
+be proposed/pending/active, locks the exact two records and order, and rejects schema/classification/retention/
+status/content/resurrection drift through 24 in-memory mutations. Completed semantic-introspection/MCP and
+rule-local cursor work are deliberately absent rather than preserved as stale future narratives. This exclusion
+correction does not change the 16 capability rows or their 80/0/0 backend-state census.
 
 `outward_descriptor_contract.json` is the executable shared schema for the public compiled-descriptor projection.
 Its `required_meta_keys` remains the explicitly named `legacy_global_v0` default for unmigrated backends, while

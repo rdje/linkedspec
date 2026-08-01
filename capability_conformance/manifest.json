@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "contract": "docs/decisions/0023-user-observable-backend-and-cli-parity.md",
   "task_owner": "FUTURE-PARITY-BACKLOG.1.6",
   "backends": ["perl", "rust", "dart", "julia", "lua"],
@@ -215,9 +215,19 @@
     }
   ],
   "excluded_or_future": [
-    {"id": "legacy.perl_plugin_registry", "reason": "Deprecated Perl-only compatibility surface, explicitly outside the backend-neutral product contract.", "owner": "FUTURE-PARITY-BACKLOG.6"},
-    {"id": "future.general_parse_job_authoring", "reason": "General provider search and recursive staged queues are a future language/API extension.", "owner": "FUTURE-PARITY-BACKLOG.2"},
-    {"id": "future.semantic_introspection_mcp", "reason": "Versioned deep semantic API and thin MCP projection are parked design work.", "owner": "FUTURE-PARITY-BACKLOG.10.1"},
-    {"id": "future.rule_local_cursor_and_bare_edges", "reason": "ADR 0044 and linkedspec-rule-local-cursor-v1 remain in dependency-ordered rollout at 5 complete / 3 pending. Perl, Rust, Dart, and Julia are composed-admitted; Lua, recurring five-backend admission, and public no-drift remain.", "owner": "FUTURE-PARITY-BACKLOG.9.1.2"}
+    {
+      "id": "legacy.perl_plugin_registry",
+      "reason": "Deprecated Perl-only compatibility surface, explicitly outside the backend-neutral product contract.",
+      "owner": "FUTURE-PARITY-BACKLOG.6",
+      "disposition": "legacy",
+      "retention_authority": null
+    },
+    {
+      "id": "future.general_parse_job_authoring",
+      "reason": "General provider search and recursive staged queues are a future language/API extension.",
+      "owner": "FUTURE-PARITY-BACKLOG.14",
+      "disposition": "future",
+      "retention_authority": null
+    }
   ]
 }

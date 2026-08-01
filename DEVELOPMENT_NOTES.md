@@ -1,5 +1,23 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`FUTURE-PARITY-BACKLOG.24.1` — enforce exclusion status freshness): capability rows and exclusions
+  remain deliberately separate ledgers. The manifest moves to schema v2 without touching any of its 16×5 pass
+  states. Its exact ordered exclusions are now plugin `legacy` under pending `.6` and general parse-job `future`
+  under active `.14`, each with an explicit null `retention_authority`; completed semantic/MCP and cursor work is
+  absent rather than described as pending.
+
+  Task parsing now derives unique ids and leading status enums from the two tracked owner sources. Validation is
+  strict only for referenced owners, so historical unreferenced status suffixes remain readable without becoming
+  authority. Future owners must be proposed/pending/active and never use retention authority. Open legacy owners
+  use none; completed legacy owners require an existing repository-relative durable retention authority.
+
+  The frozen mutation enumeration had a bookkeeping omission: its prose named 23 classes while asserting 24.
+  Because schema v2 requires `retention_authority` even when null, missing that field is the precise omitted 24th
+  class. Checker-first RED is `schema_version must be 2`; GREEN is schema v2 / 16 capabilities / 80-0-0 / two
+  exclusions / 24 mutations. Knowledge Map is 783/6,346 and rendered book proof is 79/14,068 KiB. All seven
+  doctrines and canonical semantic/MCP, containment/moved-root/outside-CWD, CLI 66x2, RAM 52%, and Phase 0
+  1,031/1,031 in 660 seconds pass before `local CI gate passed`; no capability/runtime behavior moves.
+
 - 2026-08-01 (`MDBOOK-RENDERED-READABILITY.0` — queue rendered prose audit): source-level Markdown review is not
   sufficient for the director-observed defect because the painful density is visible in rendered HTML. The future
   audit therefore records source path, rendered route, section, viewport, and exact symptom for every confirmed

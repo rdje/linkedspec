@@ -1,5 +1,20 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-01 — Capability exclusions are schema-v2 and status-fresh
+
+`FUTURE-PARITY-BACKLOG.24.1` is signoff-complete from clean `f1cd59d3` (intended 130/300; no push). The manifest keeps
+exactly two ordered exclusions: Perl plugin legacy under pending `.6` and general parse-job future work under
+active `.14`, both with explicit null retention authority. Satisfied semantic/MCP and rule-local cursor narratives
+are gone; all 16 capability rows remain exactly 80/0/0.
+
+The checker now derives unique owner ids/statuses, enforces schema/disposition/retention/status policy, and locks
+exact record content/order through 24 in-memory mutations. Root-cause review found the frozen prose had named 23
+classes: required-but-missing `retention_authority` is the omitted 24th. Focused checker, Knowledge Map 783/6,346,
+and the complete sole-facing mdBook at 79 files / 14,068 KiB with rendered inspection pass. All seven doctrines
+and definitive canonical semantic/MCP admissions, containment/moved-root/outside-CWD execution, CLI 66x2, RAM
+52%, and Phase 0 1,031/1,031 in 660 seconds pass before `local CI gate passed`. Only commit, brief clearing, and
+clean proof remain before `.24.2`.
+
 ## 2026-08-01 — Sole-facing callable public count is repaired and guarded
 
 `FUTURE-PARITY-BACKLOG.24.0.2` is signoff-complete from clean commit `094ed840` (intended 128/300; no push).

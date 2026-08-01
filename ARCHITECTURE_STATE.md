@@ -1,5 +1,14 @@
 # ARCHITECTURE STATE
 
+- `2026-08-01 status-fresh capability exclusions`: `FUTURE-PARITY-BACKLOG.24.1` advances only exclusion governance
+  to schema v2. Exact ordered current state is plugin `legacy` under pending `.6` plus general parse-job `future`
+  under active `.14`, both with explicit null retention authority; satisfied semantic/MCP and cursor narratives
+  are absent. The checker derives unique task ids/leading statuses, validates referenced owner state, and rejects
+  24 schema/classification/retention/status/content/resurrection mutations. Missing `retention_authority` is the
+  previously unlabeled 24th class in the frozen plan. Capability rows stay 80/0/0 and no runtime behavior moves.
+  Signoff passes Knowledge Map 783/6,346, sole-facing mdBook 79/14,068 KiB, all doctrines, canonical CLI 66x2,
+  RAM 52%, and Phase 0 1,031/1,031 in 660 seconds before the explicit local-CI pass.
+
 - `2026-08-01 sole-facing callable count integrity`: `FUTURE-PARITY-BACKLOG.24.0.2` repairs project status from
   stale 24 to the governed 25 callable public documents. The independent callable contract now requires the exact
   current marker on that page, denies the stale value there, and appends one count-drift mutation after preserving

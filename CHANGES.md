@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-08-01 — FUTURE-PARITY-BACKLOG.24.1 — enforce exclusion status freshness
+
+Capability exclusion governance is now schema v2. Exactly two ordered records remain: deprecated Perl plugin
+machinery is explicit `legacy` under pending `.6`, and general provider search/recursive staged queues are
+`future` under active structural/progressive/staged parent `.14`. Both carry explicit null
+`retention_authority`. Satisfied semantic/MCP and rule-local cursor narratives are removed.
+
+The checker derives unique task ids and leading status enums from tracked task sources, removes three redundant
+hard-coded owner insertions, enforces disposition/retention/status policy, locks exact record content/order, and
+rejects 24 in-memory mutations. The frozen plan's old prose named only 23 classes; required-but-missing
+`retention_authority` is the omitted exact 24th mutation, so the ratified total remains correct.
+
+Focused proof passes schema v2, 16 capabilities, 80/0/0 backend states, two exclusions, all 24 mutations, Knowledge
+Map 783/6,346, and the complete sole-facing mdBook at 79 files / 14,068 KiB with rendered inspection. No capability
+row, parser/compiler/runtime/emitter/MCP, or root README behavior changes. All seven doctrines and the definitive
+canonical gate pass semantic/MCP admissions, containment/moved-root/outside-CWD execution, CLI 66x2, RAM 52%,
+and Phase 0 1,031/1,031 in 660 seconds before `local CI gate passed`.
+
 ## 2026-08-01 — MDBOOK-RENDERED-READABILITY.0 — queue rendered prose audit
 
 The director's non-urgent observation that some rendered mdBook sections can collapse into painful wall-of-text

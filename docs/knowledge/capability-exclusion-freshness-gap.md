@@ -1,6 +1,6 @@
 ---
 id: capability-exclusion-freshness-gap
-title: Capability exclusions validate owner existence but not current status freshness
+title: Capability exclusion freshness gap and schema-v2 repair
 answers:
   - "can a stale future exclusion pass the capability checker"
   - "why does the capability manifest still call semantic MCP parked"
@@ -8,27 +8,25 @@ answers:
   - "which task owns capability exclusion freshness"
   - "does the 80 0 0 capability census prove exclusion prose is current"
 date: 2026-08-01
-status: current governance gap; exact model frozen under signoff-complete FUTURE-PARITY-BACKLOG.24.0
+status: repaired with signoff-complete schema-v2/status governance under FUTURE-PARITY-BACKLOG.24.1
 tags: [capability, governance, exclusions, status-drift, task-tree, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.11.7.1 corrects future.generic_final_codeblock, then compares the remaining excluded_or_future records with committed rollout authorities. future.semantic_introspection_mcp still says parked under completed .10.1, and future.rule_local_cursor_and_bare_edges still says 5 complete / 3 pending under completed .9.1.2. tools/check_capability_conformance.pl validates exact fields, unique ids, nonempty strings, and tracked owner existence only; perl tools/check_capability_conformance.pl therefore passes 80/0/0 despite the stale narratives. FUTURE-PARITY-BACKLOG.24.0 further proves broad parse-job owner .2 was superseded by active .14/.14.6-.7 and freezes schema-v2 disposition/retention/status governance plus 24 mutations. .24.0.1-.2 repair two independently discovered metadata/public defects before .24.1-.2 implement and close without changing capability rows."
-reverify: "perl tools/check_capability_conformance.pl && rg -n 'future.semantic_introspection_mcp|future.rule_local_cursor_and_bare_edges' capability_conformance/manifest.json && sed -n '115,145p' tools/check_capability_conformance.pl && rg -n 'FUTURE-PARITY-BACKLOG.24' docs/tasks/FUTURE-PARITY-BACKLOG.md"
+evidence: "FUTURE-PARITY-BACKLOG.11.7.1 first exposes that future.semantic_introspection_mcp and future.rule_local_cursor_and_bare_edges can stay stale while capability rows pass 80/0/0. FUTURE-PARITY-BACKLOG.24.0 freezes the exact correction, and .24.1 implements it: manifest schema v2 retains only plugin legacy under pending .6 and parse-job future work under active .14, removes both satisfied narratives, derives owner status from tracked tasks, locks exact order/content, and rejects 24 in-memory mutations while rows remain 80/0/0."
+reverify: "perl tools/check_capability_conformance.pl && ! rg -n 'future.semantic_introspection_mcp|future.rule_local_cursor_and_bare_edges' capability_conformance/manifest.json && rg -n 'legacy.perl_plugin_registry|future.general_parse_job_authoring|disposition|retention_authority' capability_conformance/manifest.json"
 ---
 
-The capability census and the exclusion narrative are separate data surfaces. Current governance strongly
-validates every capability row and requires each exclusion to have exactly `id`, `reason`, and `owner`, but it
-only proves that the owner is a tracked task id. It does not compare owner status or prose against the completed
+The capability census and the exclusion narrative are separate data surfaces. Before `.24.1`, governance strongly
+validated every capability row and required each exclusion to have exactly `id`, `reason`, and `owner`, but it
+proved only that the owner was a tracked task id. It did not compare owner status or prose against completed
 rollout authority.
 
-That gap is observable today. Semantic introspection plus MCP and rule-local cursor rollout are complete, yet two
-future records still describe their earlier pending states. This does not make the 80/0/0 capability-row count
-false, but it does make the same manifest internally misleading to readers and future agents.
+That gap was observable while semantic introspection plus MCP and rule-local cursor rollout were complete but two
+future records still described their earlier pending states. It did not make the 80/0/0 capability-row count
+false, but it made the same manifest internally misleading to readers and future agents.
 
-`FUTURE-PARITY-BACKLOG.24` owns the correction after the callable public closeout. Planning `.24.0` classifies
-retained legacy records separately from true future work, identifies the superseded `.2` owner, and avoids a
-simplistic rule that rejects every completed legacy owner. Schema v2 instead carries explicit disposition and a
-durable retention authority when a completed owner intentionally preserves legacy. The implementation makes the
-exact record/order and owner/status relationships mutation-sensitive and corrects only audit-proven records. No
-runtime or capability row moves.
+`FUTURE-PARITY-BACKLOG.24.1` repairs the gap after planning `.24.0` classifies retained legacy separately from true
+future work and identifies superseded `.2`. Schema v2 carries explicit disposition and a nullable durable
+retention authority, exact record/order and owner/status relationships are mutation-sensitive, and only the two
+audit-proven stale records disappear. No runtime or capability row moves.
 
 Related facts: [[capability-exclusion-freshness-model]], [[pending-staged-owner-metadata-corruption]],
 [[callable-mdbook-public-count-drift]], [[semantic-introspection-public-no-drift]], and

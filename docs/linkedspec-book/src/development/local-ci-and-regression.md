@@ -463,16 +463,19 @@ perl tools/check_capability_conformance.pl
 ```
 
 `capability_conformance/manifest.json` currently contains 16 capabilities and 80 backend states: all 80 pass.
-Every evidence path must exist, and legacy/future exclusions remain explicit and task-owned. That row census is
-separate from exclusion-narrative freshness: behavior-free audit `FUTURE-PARITY-BACKLOG.24.0` proves the current
-checker validates exclusion owner existence but not owner status or supersession. The frozen follow-up retains
-Perl plugin legacy, re-owners genuinely future general parse-job work to active `.14`, removes two satisfied
-semantic/cursor narratives, and adds explicit disposition/retention plus mutation-sensitive status governance.
-No capability row or runtime behavior changes in the audit. Audit signoff passes the 80/0/0 census, the complete
-79-file book, all seven doctrines, repository containment/moved-root execution, CLI 66x2, RAM 52%, and Phase 0
-1,031/1,031 in 651 seconds. The canonical local
-gate runs this check before focused suites. The 60/0/0 generated-source milestone is historical; punctuation-light
-admission `.16.7` added four states, and Lua `.8.4` adds 16 all-pass states in one final admission.
+Every evidence path must exist. The separate exclusion ledger is now schema v2 with exactly two ordered records:
+deprecated Perl plugin machinery is `legacy` under pending `.6`, and general provider search/recursive staged
+queues remain `future` under active structural/progressive/staged parent `.14`. Each record explicitly carries
+nullable `retention_authority`; future and open-legacy records require null, while completed legacy ownership
+requires an existing repository-relative durable retention authority.
+
+The checker derives unique task ids and leading status enums from tracked task sources, admits only
+proposed/pending/active future owners, locks exact exclusion content/order, and rejects 24 in-memory schema,
+classification, retention, task-status, content, and satisfied-record mutations. Completed semantic/MCP and
+rule-local cursor narratives are absent rather than mislabeled as future. The 16 capability rows remain 80/0/0,
+so this governance correction changes no runtime behavior. The canonical local gate runs this check before
+focused suites. The 60/0/0 generated-source milestone is historical; punctuation-light admission `.16.7` added
+four states, and Lua `.8.4` adds 16 all-pass states in one final admission.
 
 The file-oriented native API has a separate executable resolution/loading contract:
 

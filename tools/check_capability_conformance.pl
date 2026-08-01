@@ -5,7 +5,7 @@ use warnings;
 use Cwd qw(abs_path);
 use File::Basename qw(dirname);
 use File::Spec;
-use JSON::PP qw(decode_json);
+use JSON::PP qw(decode_json encode_json);
 
 my $repo_root = abs_path(File::Spec->catdir(dirname(__FILE__), '..'));
 my $manifest_path = File::Spec->catfile($repo_root, 'capability_conformance', 'manifest.json');
@@ -53,87 +53,301 @@ sub require_repo_path {
  fail("$where does not exist: $path") unless -e File::Spec->catfile($repo_root, split m{/}, $path);
 }
 
+my @expected_backends = qw(perl rust dart julia lua);
+my @expected_exclusions = (
+ {
+  id                  => 'legacy.perl_plugin_registry',
+  reason              => 'Deprecated Perl-only compatibility surface, explicitly outside the backend-neutral product contract.',
+  owner               => 'FUTURE-PARITY-BACKLOG.6',
+  disposition         => 'legacy',
+  retention_authority => undef,
+ },
+ {
+  id                  => 'future.general_parse_job_authoring',
+  reason              => 'General provider search and recursive staged queues are a future language/API extension.',
+  owner               => 'FUTURE-PARITY-BACKLOG.14',
+  disposition         => 'future',
+  retention_authority => undef,
+ },
+);
+my %satisfied_exclusion_ids = map { $_ => 1 } qw(
+ future.semantic_introspection_mcp
+ future.rule_local_cursor_and_bare_edges
+);
+my %task_status_values = map { $_ => 1 } qw(
+ proposed active pending in_progress blocked done deferred superseded
+);
+my %open_legacy_owner_status = map { $_ => 1 } qw(
+ proposed active pending in_progress blocked
+);
+my %future_owner_status = map { $_ => 1 } qw(proposed active pending);
+
+sub clone_value {
+ my ($value) = @_;
+ return decode_json(encode_json($value));
+}
+
+sub task_sources {
+ return [map { +{path => $_, text => read_text($_)} } @task_paths];
+}
+
+sub parse_task_statuses {
+ my ($sources) = @_;
+ my %task_status;
+ for my $source (@$sources) {
+  my @lines = split /\n/, $source->{text}, -1;
+  for my $index (0 .. $#lines) {
+   next unless $lines[$index] =~ /^(\s*)- ID: `([^`]+)`\s*$/;
+   my ($indent, $id) = ($1, $2);
+   fail("duplicate task id '$id'") if exists $task_status{$id};
+   my $status_line = $lines[$index + 1] // '';
+   fail("task '$id' is missing a leading Status field")
+    unless $status_line =~ /^\Q$indent\E  Status: `([a-z_]+)[^`]*`/;
+   $task_status{$id} = $1;
+  }
+ }
+ return \%task_status;
+}
+
+sub validate_manifest {
+ my ($manifest, $task_status) = @_;
+ require_hash_keys(
+  'manifest', $manifest,
+  qw(schema_version contract task_owner backends status_values capabilities excluded_or_future)
+ );
+ fail('schema_version must be 2') unless $manifest->{schema_version} == 2;
+ require_repo_path('manifest.contract', $manifest->{contract});
+ require_string('manifest.task_owner', $manifest->{task_owner});
+ fail("task_owner '$manifest->{task_owner}' is not a tracked task id")
+  unless exists $task_status->{$manifest->{task_owner}};
+ fail("task_owner '$manifest->{task_owner}' has invalid status '$task_status->{$manifest->{task_owner}}'")
+  unless $task_status_values{$task_status->{$manifest->{task_owner}}};
+
+ fail('manifest.backends must be [perl, rust, dart, julia, lua]')
+  unless ref($manifest->{backends}) eq 'ARRAY'
+  && join("\0", @{$manifest->{backends}}) eq join("\0", @expected_backends);
+ my %status = map { $_ => 1 } qw(pass partial gap);
+ fail('manifest.status_values must be [pass, partial, gap]')
+  unless ref($manifest->{status_values}) eq 'ARRAY'
+  && join("\0", @{$manifest->{status_values}}) eq join("\0", qw(pass partial gap));
+
+ fail('manifest.capabilities must be a non-empty array')
+  unless ref($manifest->{capabilities}) eq 'ARRAY' && @{$manifest->{capabilities}};
+ my %seen_ids;
+ my %counts = map { $_ => 0 } keys %status;
+ for my $index (0 .. $#{$manifest->{capabilities}}) {
+  my $capability = $manifest->{capabilities}[$index];
+  my $where = "capabilities[$index]";
+  require_hash_keys($where, $capability, qw(id category contract sources backends gap_owner));
+  require_string("$where.id", $capability->{id});
+  fail("duplicate capability id '$capability->{id}'") if $seen_ids{$capability->{id}}++;
+  require_string("$where.category", $capability->{category});
+  require_string("$where.contract", $capability->{contract});
+  fail("$where.sources must be a non-empty array")
+   unless ref($capability->{sources}) eq 'ARRAY' && @{$capability->{sources}};
+  require_repo_path("$where.sources", $_) for @{$capability->{sources}};
+  fail("$where.backends must be an object") unless ref($capability->{backends}) eq 'HASH';
+  fail("$where.backends has the wrong backend set")
+   unless join("\0", sort keys %{$capability->{backends}}) eq join("\0", sort @expected_backends);
+
+  my $needs_owner = 0;
+  for my $backend (@expected_backends) {
+   my $entry = $capability->{backends}{$backend};
+   my $entry_where = "$where.backends.$backend";
+   require_hash_keys($entry_where, $entry, qw(status references note));
+   fail("$entry_where.status is unknown: $entry->{status}") unless $status{$entry->{status}};
+   $counts{$entry->{status}}++;
+   $needs_owner = 1 unless $entry->{status} eq 'pass';
+   fail("$entry_where.references must be a non-empty array")
+    unless ref($entry->{references}) eq 'ARRAY' && @{$entry->{references}};
+   require_repo_path("$entry_where.references", $_) for @{$entry->{references}};
+   require_string("$entry_where.note", $entry->{note}) if exists $entry->{note};
+  }
+  if ($needs_owner) {
+   require_string("$where.gap_owner", $capability->{gap_owner});
+   fail("$where.gap_owner '$capability->{gap_owner}' is not a tracked task id")
+    unless exists $task_status->{$capability->{gap_owner}};
+   fail("$where.gap_owner '$capability->{gap_owner}' has invalid status '$task_status->{$capability->{gap_owner}}'")
+    unless $task_status_values{$task_status->{$capability->{gap_owner}}};
+  } elsif (exists $capability->{gap_owner}) {
+   fail("$where.gap_owner is only allowed when a backend is partial or gap");
+  }
+ }
+
+ fail('manifest.excluded_or_future must be an array') unless ref($manifest->{excluded_or_future}) eq 'ARRAY';
+ for my $index (0 .. $#{$manifest->{excluded_or_future}}) {
+  my $entry = $manifest->{excluded_or_future}[$index];
+  my $where = "excluded_or_future[$index]";
+  require_hash_keys($where, $entry, qw(id reason owner disposition retention_authority));
+  require_string("$where.id", $entry->{id});
+  fail("satisfied exclusion '$entry->{id}' must not be present") if $satisfied_exclusion_ids{$entry->{id}};
+  fail("duplicate capability/exclusion id '$entry->{id}'") if $seen_ids{$entry->{id}}++;
+  require_string("$where.reason", $entry->{reason});
+  require_string("$where.owner", $entry->{owner});
+  require_string("$where.disposition", $entry->{disposition});
+  fail("$where.disposition is unknown: $entry->{disposition}")
+   unless $entry->{disposition} eq 'legacy' || $entry->{disposition} eq 'future';
+  fail("$where.id must use the $entry->{disposition}. prefix")
+   unless $entry->{id} =~ /^\Q$entry->{disposition}\E\./;
+  fail("$where.owner '$entry->{owner}' is not a tracked task id")
+   unless exists $task_status->{$entry->{owner}};
+  fail("$where.owner '$entry->{owner}' has invalid status '$task_status->{$entry->{owner}}'")
+   unless $task_status_values{$task_status->{$entry->{owner}}};
+  require_repo_path("$where.retention_authority", $entry->{retention_authority})
+   if defined $entry->{retention_authority};
+
+  my $owner_status = $task_status->{$entry->{owner}};
+  if ($entry->{disposition} eq 'future') {
+   fail("$where future owner '$entry->{owner}' has disallowed status '$owner_status'")
+    unless $future_owner_status{$owner_status};
+   fail("$where future exclusion must not use retention_authority")
+    if defined $entry->{retention_authority};
+  } elsif ($open_legacy_owner_status{$owner_status}) {
+   fail("$where open legacy exclusion must not use retention_authority")
+    if defined $entry->{retention_authority};
+  } else {
+   fail("$where completed legacy exclusion requires retention_authority")
+    unless defined $entry->{retention_authority};
+  }
+ }
+
+ fail('manifest.excluded_or_future must contain exactly the two governed records')
+  unless @{$manifest->{excluded_or_future}} == @expected_exclusions;
+ for my $index (0 .. $#expected_exclusions) {
+  my $actual = $manifest->{excluded_or_future}[$index];
+  my $expected = $expected_exclusions[$index];
+  for my $key (qw(id reason owner disposition)) {
+   fail("excluded_or_future[$index].$key drifted from the governed value")
+    unless $actual->{$key} eq $expected->{$key};
+  }
+  fail("excluded_or_future[$index].retention_authority drifted from the governed value")
+   if defined($actual->{retention_authority}) != defined($expected->{retention_authority});
+ }
+
+ return \%counts;
+}
+
+sub validate_candidate {
+ my ($manifest, $sources) = @_;
+ return validate_manifest($manifest, parse_task_statuses($sources));
+}
+
+sub expect_mutation_failure {
+ my ($name, $check) = @_;
+ my $passed = eval {
+  $check->();
+  1;
+ };
+ fail("governance mutation '$name' unexpectedly passed") if $passed;
+ die $@ unless $@ =~ /^capability-conformance: ERROR:/;
+}
+
+sub mutate_task_status_line {
+ my ($sources, $id, $replacement) = @_;
+ my $candidate = clone_value($sources);
+ my $changed = 0;
+ for my $source (@$candidate) {
+  $changed += ($source->{text} =~ s{^(- ID: `\Q$id\E`\n)  Status: `[^\n]+\n}{$1$replacement}m);
+ }
+ die "mutation setup could not find task '$id' exactly once\n" unless $changed == 1;
+ return $candidate;
+}
+
+sub governance_mutation_checks {
+ my ($manifest, $sources) = @_;
+ my @mutations;
+ my $add_manifest_mutation = sub {
+  my ($name, $mutate) = @_;
+  push @mutations, [$name, sub {
+   my $candidate = clone_value($manifest);
+   $mutate->($candidate);
+   validate_candidate($candidate, $sources);
+  }];
+ };
+
+ $add_manifest_mutation->('schema_version_downgrade', sub { $_[0]{schema_version} = 1 });
+ $add_manifest_mutation->('missing_disposition', sub { delete $_[0]{excluded_or_future}[0]{disposition} });
+ $add_manifest_mutation->('unknown_disposition', sub { $_[0]{excluded_or_future}[0]{disposition} = 'parked' });
+ $add_manifest_mutation->('legacy_id_future_disposition', sub { $_[0]{excluded_or_future}[0]{disposition} = 'future' });
+ $add_manifest_mutation->('future_id_legacy_disposition', sub { $_[0]{excluded_or_future}[1]{disposition} = 'legacy' });
+ $add_manifest_mutation->('future_retention_authority', sub {
+  $_[0]{excluded_or_future}[1]{retention_authority} = 'docs/decisions/0056-typed-source-location-and-cursor-algebra.md';
+ });
+ $add_manifest_mutation->('open_legacy_retention_authority', sub {
+  $_[0]{excluded_or_future}[0]{retention_authority} = 'docs/knowledge/pplugin-pluginbridge-transition-machinery.md';
+ });
+ $add_manifest_mutation->('completed_legacy_without_retention', sub {
+  $_[0]{excluded_or_future}[0]{owner} = 'FUTURE-PARITY-BACKLOG.1.6';
+ });
+ $add_manifest_mutation->('completed_future_even_with_retention', sub {
+  $_[0]{excluded_or_future}[1]{owner} = 'FUTURE-PARITY-BACKLOG.1.6';
+  $_[0]{excluded_or_future}[1]{retention_authority} = 'docs/decisions/0056-typed-source-location-and-cursor-algebra.md';
+ });
+ $add_manifest_mutation->('missing_owner_task', sub {
+  $_[0]{excluded_or_future}[0]{owner} = 'FUTURE-PARITY-BACKLOG.missing';
+ });
+ push @mutations, ['missing_owner_status', sub {
+  my $candidate_sources = mutate_task_status_line($sources, 'FUTURE-PARITY-BACKLOG.6', '');
+  validate_candidate($manifest, $candidate_sources);
+ }];
+ push @mutations, ['duplicate_owner_id', sub {
+  my $candidate_sources = clone_value($sources);
+  $candidate_sources->[0]{text} .= "\n- ID: `FUTURE-PARITY-BACKLOG.6`\n  Status: `pending`\n";
+  validate_candidate($manifest, $candidate_sources);
+ }];
+ push @mutations, ['invalid_owner_status', sub {
+  my $candidate_sources = mutate_task_status_line(
+   $sources,
+   'FUTURE-PARITY-BACKLOG.6',
+   "  Status: `invalid`\n",
+  );
+  validate_candidate($manifest, $candidate_sources);
+ }];
+ $add_manifest_mutation->('missing_retention_authority', sub {
+  delete $_[0]{excluded_or_future}[0]{retention_authority};
+ });
+ $add_manifest_mutation->('extra_exclusion', sub {
+  push @{$_[0]{excluded_or_future}}, {
+   id                  => 'future.extra',
+   reason              => 'Unexpected extra exclusion.',
+   owner               => 'FUTURE-PARITY-BACKLOG.14',
+   disposition         => 'future',
+   retention_authority => undef,
+  };
+ });
+ $add_manifest_mutation->('omitted_exclusion', sub { pop @{$_[0]{excluded_or_future}} });
+ $add_manifest_mutation->('duplicated_exclusion', sub {
+  push @{$_[0]{excluded_or_future}}, clone_value($_[0]{excluded_or_future}[0]);
+ });
+ $add_manifest_mutation->('reordered_exclusions', sub {
+  $_[0]{excluded_or_future} = [reverse @{$_[0]{excluded_or_future}}];
+ });
+ $add_manifest_mutation->('legacy_reason_drift', sub { $_[0]{excluded_or_future}[0]{reason} .= ' drift' });
+ $add_manifest_mutation->('future_reason_drift', sub { $_[0]{excluded_or_future}[1]{reason} .= ' drift' });
+ $add_manifest_mutation->('legacy_owner_drift', sub { $_[0]{excluded_or_future}[0]{owner} = 'FUTURE-PARITY-BACKLOG.14' });
+ $add_manifest_mutation->('future_owner_drift', sub { $_[0]{excluded_or_future}[1]{owner} = 'FUTURE-PARITY-BACKLOG.6' });
+ for my $id (qw(future.semantic_introspection_mcp future.rule_local_cursor_and_bare_edges)) {
+  $add_manifest_mutation->("satisfied_${id}_resurrection", sub {
+   push @{$_[0]{excluded_or_future}}, {
+    id                  => $id,
+    reason              => 'Satisfied exclusion must stay absent.',
+    owner               => 'FUTURE-PARITY-BACKLOG.14',
+    disposition         => 'future',
+    retention_authority => undef,
+   };
+  });
+ }
+
+ expect_mutation_failure(@$_) for @mutations;
+ return scalar @mutations;
+}
+
 my $manifest = eval { decode_json(read_text($manifest_path)) };
 fail("invalid JSON in capability_conformance/manifest.json: $@") if $@;
-require_hash_keys(
- 'manifest', $manifest,
- qw(schema_version contract task_owner backends status_values capabilities excluded_or_future)
-);
-fail('schema_version must be 1') unless $manifest->{schema_version} == 1;
-require_repo_path('manifest.contract', $manifest->{contract});
-require_string('manifest.task_owner', $manifest->{task_owner});
+my $sources = task_sources();
+my $counts = validate_candidate($manifest, $sources);
+my $mutation_count = governance_mutation_checks($manifest, $sources);
 
-my @expected_backends = qw(perl rust dart julia lua);
-fail('manifest.backends must be [perl, rust, dart, julia, lua]')
- unless ref($manifest->{backends}) eq 'ARRAY'
- && join("\0", @{$manifest->{backends}}) eq join("\0", @expected_backends);
-my %status = map { $_ => 1 } qw(pass partial gap);
-fail('manifest.status_values must be [pass, partial, gap]')
- unless ref($manifest->{status_values}) eq 'ARRAY'
- && join("\0", @{$manifest->{status_values}}) eq join("\0", qw(pass partial gap));
-
-my %owner_ids;
-for my $task_path (@task_paths) {
- my $task_text = read_text($task_path);
- $owner_ids{$_} = 1 for $task_text =~ /^- ID: `([^`]+)`/mg;
-}
-$owner_ids{'FUTURE-PARITY-BACKLOG.2'} = 1;
-$owner_ids{'FUTURE-PARITY-BACKLOG.3'} = 1;
-$owner_ids{'FUTURE-PARITY-BACKLOG.6'} = 1;
-fail("task_owner '$manifest->{task_owner}' is not in FUTURE-PARITY-BACKLOG") unless $owner_ids{$manifest->{task_owner}};
-
-fail('manifest.capabilities must be a non-empty array')
- unless ref($manifest->{capabilities}) eq 'ARRAY' && @{$manifest->{capabilities}};
-my %seen_ids;
-my %counts = map { $_ => 0 } keys %status;
-for my $index (0 .. $#{$manifest->{capabilities}}) {
- my $capability = $manifest->{capabilities}[$index];
- my $where = "capabilities[$index]";
- require_hash_keys($where, $capability, qw(id category contract sources backends gap_owner));
- require_string("$where.id", $capability->{id});
- fail("duplicate capability id '$capability->{id}'") if $seen_ids{$capability->{id}}++;
- require_string("$where.category", $capability->{category});
- require_string("$where.contract", $capability->{contract});
- fail("$where.sources must be a non-empty array")
-  unless ref($capability->{sources}) eq 'ARRAY' && @{$capability->{sources}};
- require_repo_path("$where.sources", $_) for @{$capability->{sources}};
- fail("$where.backends must be an object") unless ref($capability->{backends}) eq 'HASH';
- fail("$where.backends has the wrong backend set")
-  unless join("\0", sort keys %{$capability->{backends}}) eq join("\0", sort @expected_backends);
-
- my $needs_owner = 0;
- for my $backend (@expected_backends) {
-  my $entry = $capability->{backends}{$backend};
-  my $entry_where = "$where.backends.$backend";
-  require_hash_keys($entry_where, $entry, qw(status references note));
-  fail("$entry_where.status is unknown: $entry->{status}") unless $status{$entry->{status}};
-  $counts{$entry->{status}}++;
-  $needs_owner = 1 unless $entry->{status} eq 'pass';
-  fail("$entry_where.references must be a non-empty array")
-   unless ref($entry->{references}) eq 'ARRAY' && @{$entry->{references}};
-  require_repo_path("$entry_where.references", $_) for @{$entry->{references}};
-  require_string("$entry_where.note", $entry->{note}) if exists $entry->{note};
- }
- if ($needs_owner) {
-  require_string("$where.gap_owner", $capability->{gap_owner});
-  fail("$where.gap_owner '$capability->{gap_owner}' is not a tracked task id")
-   unless $owner_ids{$capability->{gap_owner}};
- } elsif (exists $capability->{gap_owner}) {
-  fail("$where.gap_owner is only allowed when a backend is partial or gap");
- }
-}
-
-fail('manifest.excluded_or_future must be an array') unless ref($manifest->{excluded_or_future}) eq 'ARRAY';
-for my $index (0 .. $#{$manifest->{excluded_or_future}}) {
- my $entry = $manifest->{excluded_or_future}[$index];
- my $where = "excluded_or_future[$index]";
- require_hash_keys($where, $entry, qw(id reason owner));
- require_string("$where.id", $entry->{id});
- fail("duplicate capability/exclusion id '$entry->{id}'") if $seen_ids{$entry->{id}}++;
- require_string("$where.reason", $entry->{reason});
- require_string("$where.owner", $entry->{owner});
- fail("$where.owner '$entry->{owner}' is not a tracked task id") unless $owner_ids{$entry->{owner}};
-}
-
-printf "capability-conformance: OK (%d capabilities; backend states pass=%d partial=%d gap=%d)\n",
- scalar(@{$manifest->{capabilities}}), @counts{qw(pass partial gap)};
+printf "capability-conformance: OK (schema v2; %d capabilities; backend states pass=%d partial=%d gap=%d; %d exclusions; %d governance mutations)\n",
+ scalar(@{$manifest->{capabilities}}), @{$counts}{qw(pass partial gap)}, scalar(@{$manifest->{excluded_or_future}}),
+ $mutation_count;

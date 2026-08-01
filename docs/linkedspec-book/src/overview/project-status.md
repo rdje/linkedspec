@@ -6,6 +6,13 @@ checker locks exact roles, paths, order, route multiplicity, canonical registrat
 and 25 public documents through 23 governance mutations. The existing 16-capability census remains 80/0/0,
 lexical capture remains outside v1, and callable parents `.11.8`/`.11` close with signoff.
 
+Capability conformance remains 16 capabilities and 80/0/0 backend states. Its separate exclusion ledger is now
+schema v2 with exactly two status-fresh records: deprecated Perl plugin machinery remains explicit legacy under
+pending `.6`, and general provider search/recursive staged queues remain future under active parent `.14`.
+Completed semantic/MCP and rule-local cursor work are no longer mislabeled as future. The checker derives owner
+status, locks exact content/order, and rejects 24 schema/classification/retention/status mutations without changing
+language or runtime behavior.
+
 Lua emitted-identity leaf `FUTURE-PARITY-BACKLOG.11.8.3` is signoff-complete on PUC Lua and LuaJIT. Exact
 `{|params| body }` / `{|| body }` remains one inert neutral eight-field value through copy, ordinary user
 functions, canonical effective-`SpecFile` reconstruction, generated-plan execution, independently loaded emitted
