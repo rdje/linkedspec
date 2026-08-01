@@ -1,5 +1,34 @@
 # CHANGES
 
+## 2026-08-01 — FUTURE-PARITY-BACKLOG.11.7.1 — compose four-backend callable proof
+
+One repository-routed recurring gate now composes the unchanged callable-codeblock contract across every current
+backend. `tools/check_callable_codeblock_four_backend.sh` preflights all toolchains, enters managed project-data
+storage, and runs the neutral checker followed by exact Perl, Rust, Dart, and Julia focused consumers through the
+supported wrappers. Direct proof passes neutral 7/11/9/7/4/8, Perl 10, Rust 18, Dart 21, and Julia dynamic 125 +
+contextual 118 + construction 239.
+
+The existing checker now owns ten exact roles per backend, consumer paths and order, project-data routes, one
+canonical execution branch, and the generic final-codeblock exclusion. Seventeen mutations reject backend/role
+omission or reordering, stale paths, routing bypass, absent/duplicated canonical execution, switch loss, and
+premature Lua/five-backend claims. Canonical CI always requires and syntax-checks the driver and runs it only when
+`LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1`; the neutral checker and Perl consumer remain unconditional.
+
+The mixed exclusion now states that Perl, Rust, Dart, and Julia construction/invocation/contextual/native/
+reconstructed/generated/emitted behavior is current and routes only Lua explicit literals/general bound calls to
+`.11.8`. Capability rows remain 80 pass / 0 partial / 0 gap. The driver becomes governed workflow-routing
+entrypoint 42 without adding a temporary allocator. No parser, compiler, runtime, descriptor, generated-source,
+fixture, capability-row, MCP, root README, or push behavior changes.
+
+The same audit found two unrelated stale exclusion narratives for completed semantic/MCP and cursor rollouts.
+They are durably queued under `FUTURE-PARITY-BACKLOG.24.0-.2`; this leaf does not alter them.
+
+Final governance passes Knowledge Map 774 facts / 6,274 question keys, mdBook 79 files / 13,992 KiB, memory/task/
+README/whitespace checks, and all seven doctrines. The complete authorized canonical wrapper passes semantic/MCP
+admissions, nested process containment, moved-root anchors, primary CLI 66x2, RAM 54%, and Phase 0 1,031/1,031 in
+825 seconds, then executes the callable matrix at neutral+17 mutations, Perl 10, Rust 18, Dart 21, and Julia
+125+118+239 before reporting `local CI gate passed`.
+
 ## 2026-08-01 — FUTURE-PARITY-BACKLOG.11.7.0 — split callable no-drift and Lua routing
 
 This behavior-free audit separates two different kinds of remaining callable-codeblock work. Perl, Rust, Dart,

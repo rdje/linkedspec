@@ -1,5 +1,31 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`FUTURE-PARITY-BACKLOG.11.7.1` — compose authorities rather than invent another conformance model):
+  all four focused suites already cover the same ten semantic/route roles, so the recurring layer is deliberately
+  a fail-fast shell orchestrator plus topology checks in the existing neutral checker. The driver self-roots,
+  enters one managed run, preflights every toolchain, then delegates to the supported Python/Cargo/Dart/Julia
+  wrappers and managed Perl. It does not reinterpret fixture results or add a second ledger.
+
+  Canonical registration follows the established expensive-matrix pattern. The driver is always tracked and
+  syntax-checked, while `LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1` opts into its one execution line. This keeps
+  the ordinary neutral/Perl checks fast and unconditional without making Rust/Dart/Julia proof undiscoverable.
+  The checker treats order, role sets, paths, wrappers, switch, execution cardinality, and exclusion record as one
+  boundary; 17 mutations prove omission, duplication, bypass, stale status, and premature Lua admission fail.
+
+  The capability census remains 80/0/0 because `excluded_or_future` is narrative governance, not an extra
+  capability row. Updating it exposed a broader freshness hole: the general capability checker requires a tracked
+  owner but does not compare that owner's status or the prose with closed rollout authority. Two unrelated stale
+  records survive today. Rather than widening the callable leaf, `.24.0-.2` now own classification, enforcement,
+  correction, and public closeout with retained legacy exclusions handled separately.
+
+  Direct recurring proof passes neutral 7/11/9/7/4/8, Perl 10, Rust 18, Dart 21, and Julia 125+118+239. Workflow
+  routing and tool-storage proof pass at 42 entrypoints with no new temporary allocator.
+
+  Final lockstep proof passes Knowledge Map 774/6,274, mdBook 79 files / 13,992 KiB, memory/task/README/whitespace,
+  and all seven doctrines. The authorized canonical wrapper passes semantic/MCP admission, nested containment,
+  moved-root anchors, CLI 66x2, RAM 54%, and Phase 0 1,031/1,031 in 825 seconds, then executes this exact optional
+  callable matrix and emits the explicit local-CI pass marker.
+
 - 2026-08-01 (`FUTURE-PARITY-BACKLOG.11.7.0` — separate governance drift from missing Lua behavior): four
   focused backend consumers are already exact, but there is no single recurring driver that composes them, and
   the mixed capability exclusion still describes completed Rust/Dart/Julia work as future. Those are governance

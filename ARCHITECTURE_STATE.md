@@ -5,6 +5,14 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-08-01`
+- `2026-08-01 callable recurring-governance boundary`: `FUTURE-PARITY-BACKLOG.11.7.1` adds one routed driver that
+  composes the unchanged neutral, Perl, Rust, Dart, and Julia callable authorities in exact order. The neutral
+  checker now locks ten roles per backend, paths, project-data routes, canonical switch/execution cardinality, and
+  the Lua-only future exclusion through 17 rejected mutations. Canonical CI tracks/syntax-checks the driver and
+  opts into execution with `LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1`; capability stays 80/0/0. This is workflow
+  governance only—no parser/runtime/descriptor/generated/fixture/MCP behavior moves. The driver is routed
+  entrypoint 42 and has no allocator. Canonical proof passes Phase 0 1,031/1,031 in 825 seconds and the exact
+  neutral/Perl/Rust/Dart/Julia matrix. A separate discovered exclusion-freshness defect is queued as `.24.0-.2`.
 - `2026-08-01 four-backend callable no-drift / Lua dependency split`: behavior-free
   `FUTURE-PARITY-BACKLOG.11.7.0` proves the unchanged neutral 7/11/9/7/4/8 contract plus focused Perl, Rust,
   Dart, and Julia callable consumers. It also identifies two governance gaps: canonical CI has no exact composed

@@ -1,5 +1,24 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-01 — Recurring four-backend callable governance is signoff-complete
+
+Leaf `FUTURE-PARITY-BACKLOG.11.7.1` is active task-tree-first from clean planning commit `2a9c6f15` (118/300).
+It owns one repository-contained neutral/Perl/Rust/Dart/Julia callable driver, omission-sensitive role/path/order/
+registration/project-data governance, exactly one canonical registration, and correction of the stale mixed
+future exclusion. Lua explicit literals, general bound calls, generated identity, and admission remain `.11.8`;
+four-backend public closeout remains `.11.7.2`. No runtime, fixture, capability-row, MCP, root README, lexical-
+capture, or push work is authorized.
+
+The routed driver and 17-mutation checker are implemented. Direct and canonical composition pass neutral 7/11/9/7/4/8,
+Perl 10, Rust 18, Dart 21, and Julia dynamic 125 + contextual 118 + construction 239. Capability remains 80/0/0;
+the mixed exclusion now points only to Lua `.11.8`. Workflow routing and tool storage pass at 42 entrypoints with
+no new temporary allocator. Knowledge Map passes 774/6,274; mdBook renders 79 files / 13,992 KiB; all seven
+doctrines pass. Definitive canonical CI passes semantic/MCP admission, nested containment/moved-root proof, CLI
+66x2, RAM 54%, Phase 0 1,031/1,031 in 825 seconds, and the exact callable matrix before reporting
+`local CI gate passed`. Only workflow commit and clean handoff remain before `.11.7.2` activates. The same audit
+found two unrelated stale completed-rollout exclusion narratives; queued `.24.0-.2` own their audit/enforcement/
+correction without widening this callable leaf.
+
 ## 2026-08-01 — Callable four-backend/Lua ownership audit is signoff-complete
 
 Behavior-free leaf `FUTURE-PARITY-BACKLOG.11.7.0` proves the unchanged callable contract and focused Perl, Rust,

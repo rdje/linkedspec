@@ -709,6 +709,21 @@ independent mechanism. `.6.2.4.6` now permanently runs that full window and lock
 failures, and exact outputs. Julia has since closed the routed top-level function fixtures under `.6.2.5` and the
 complete 99/99 manifest gate under `.6.3`; `.6.4` has since added the focused gate and optional shared-CI wiring.
 
+### Callable-codeblock four-backend recurring proof
+
+`tools/check_callable_codeblock_four_backend.sh` composes the established callable-codeblock authorities without
+adding another semantic implementation. It runs the neutral contract checker, then the exact Perl, Rust, Dart,
+and Julia focused consumers in that order. Those consumers cover inert construction, dynamic caller context,
+static callable precedence, contextual final blocks, portable failures, and native/reconstructed/generated/
+emitted identity. The driver enters one managed repository-data run and delegates through the supported Python,
+Cargo, Dart, and Julia wrappers; Perl runs inside that managed boundary with ambient `PERL5LIB` cleared.
+
+Canonical local CI always requires and syntax-checks the driver. Set
+`LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1` to execute the all-toolchain composition. The checker rejects 17
+topology and status mutations, including missing/reordered roles, stale paths, project-data bypass, missing or
+duplicated canonical execution, and premature Lua/five-backend claims. Perl, Rust, Dart, and Julia are current;
+Lua contextual forms are current, while Lua explicit literal/general bound-call parity remains `.11.8`.
+
 ## Hosted GitHub Actions status
 
 Hosted GitHub Actions CI is currently disabled for cost-control reasons.
@@ -743,6 +758,8 @@ To re-enable hosted CI later, restore the `push` and `pull_request` triggers in 
 - optionally runs `tools/run_dart_local.sh` when `LINKEDSPEC_RUN_DART=1` is set,
 - optionally runs `tools/run_julia_local.sh` when `LINKEDSPEC_RUN_JULIA=1` is set,
 - optionally runs the dual-ABI `tools/run_lua_local.sh` when `LINKEDSPEC_RUN_LUA=1` is set,
+- optionally runs the recurring Perl/Rust/Dart/Julia callable-codeblock composition when
+  `LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1` is set,
 - optionally runs the complete warmed five-backend primary CLI matrix when `LINKEDSPEC_RUN_CLI_MATRIX=1` is set.
 
 The command sequence includes:
@@ -822,8 +839,8 @@ wins rather than merely proving that some named spec resolved. Removing the move
 exit 1 and exact compile-failure output. The same self-rooted oracle repeats Perl, Dart, Julia, and Lua named
 `Lispish` execution from a same-SSD cwd outside the checkout and requires exact `["hello",["world"]]` output.
 All generated state and native Lua modules remain below its managed repository-storage run. Canonical local CI
-invokes this composed boundary once; the path tree is complete at 40 routed entrypoints after the recurring
-six-runtime semantic-introspection gate joined the governed boundary.
+invokes this composed boundary once; later semantic, MCP, and callable recurring drivers bring the current path
+tree to 42 routed entrypoints.
 
 Canonical backend flags decide which optional legs the orchestrator schedules; a skipped optional leg does not
 mean that backend cannot be built locally. Relocation closeout directly reran the complete Rust, Dart, Julia, PUC

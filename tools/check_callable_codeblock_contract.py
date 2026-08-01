@@ -7,7 +7,7 @@ import copy
 import json
 import re
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 from check_callable_signature_contract import ContractError, fail, parse_signature_source
 
@@ -33,6 +33,74 @@ BEHAVIORS = {
     "collect_rest",
     "early_return",
     "shadow_static",
+}
+CALLABLE_ROLES = [
+    "neutral_contract",
+    "inert_construction",
+    "dynamic_caller_context",
+    "static_callable_precedence",
+    "contextual_final_blocks",
+    "portable_failures",
+    "native_execution",
+    "reconstructed_execution",
+    "generated_execution",
+    "emitted_execution",
+]
+RECURRING_TOPOLOGY = {
+    "driver": "tools/check_callable_codeblock_four_backend.sh",
+    "neutral_checker": {
+        "path": "tools/check_callable_codeblock_contract.py",
+        "project_data_route": "tools/run_python_project_data.sh",
+    },
+    "consumers": [
+        {
+            "backend": "perl",
+            "runtime": "perl",
+            "test_path": "t/callable_codeblock_literal_contract.t",
+            "driver_marker": "t/callable_codeblock_literal_contract.t",
+            "project_data_route": "managed_driver",
+            "roles": CALLABLE_ROLES.copy(),
+        },
+        {
+            "backend": "rust",
+            "runtime": "rust",
+            "test_path": "rust/linkedspec-runtime/tests/callable_codeblock_literal_contract.rs",
+            "driver_marker": "--test callable_codeblock_literal_contract",
+            "project_data_route": "tools/run_cargo_local.sh",
+            "roles": CALLABLE_ROLES.copy(),
+        },
+        {
+            "backend": "dart",
+            "runtime": "dart",
+            "test_path": "dart/test/callable_codeblock_literal_contract_test.dart",
+            "driver_marker": "test/callable_codeblock_literal_contract_test.dart",
+            "project_data_route": "tools/run_dart_project_data.sh",
+            "roles": CALLABLE_ROLES.copy(),
+        },
+        {
+            "backend": "julia",
+            "runtime": "julia",
+            "test_path": "julia/test/callable_codeblock_literal_contract_test.jl",
+            "driver_marker": "julia/test/callable_codeblock_literal_contract_test.jl",
+            "project_data_route": "tools/run_julia_project_data.sh",
+            "roles": CALLABLE_ROLES.copy(),
+        },
+    ],
+    "local_ci": {
+        "driver": "tools/run_ci_local.sh",
+        "switch": "LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX",
+    },
+}
+EXPECTED_FUTURE_EXCLUSION = {
+    "id": "future.generic_final_codeblock",
+    "reason": (
+        "ADR 0031 plus ADR 0032 and linkedspec-callable-codeblock-v1 are adopted; Perl, Rust, Dart, and Julia "
+        "construction, arbitrary dynamic invocation, contextual final-block normalization, and native/"
+        "reconstructed/generated/emitted identity are current. Lua's declared contextual helper/user-function/"
+        "receiver forms are current; Lua explicit callable values and general bound-codeblock invocation remain "
+        "future under FUTURE-PARITY-BACKLOG.11.8."
+    ),
+    "owner": "FUTURE-PARITY-BACKLOG.11.8",
 }
 
 
@@ -261,6 +329,233 @@ def fixture_expected(literals: dict[str, dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def require(condition: bool, code: str, detail: str) -> None:
+    if not condition:
+        fail(code, detail)
+
+
+def validate_driver_text(text: str, topology: dict[str, Any]) -> None:
+    driver = topology["driver"]
+    require(
+        text.count("tools/project_data_env.sh") == 1
+        and text.count("linkedspec_project_data_enter_run") == 1
+        and text.count(driver) == 1,
+        "recurring_driver_drift",
+        "recurring driver must enter one repository-rooted managed run",
+    )
+    ordered_markers = [topology["neutral_checker"]["path"]]
+    ordered_markers.extend(consumer["driver_marker"] for consumer in topology["consumers"])
+    positions: list[int] = []
+    for marker in ordered_markers:
+        require(
+            text.count(marker) == 1,
+            "recurring_consumer_drift",
+            f"recurring driver omits or duplicates {marker}",
+        )
+        positions.append(text.index(marker))
+    require(
+        positions == sorted(positions),
+        "recurring_order_drift",
+        "neutral, Perl, Rust, Dart, and Julia consumers must stay ordered",
+    )
+    expected_routes = [
+        topology["neutral_checker"]["project_data_route"],
+        *[
+            consumer["project_data_route"]
+            for consumer in topology["consumers"]
+            if consumer["project_data_route"] != "managed_driver"
+        ],
+    ]
+    for route in expected_routes:
+        require(
+            text.count(route) == 1,
+            "project_data_route_drift",
+            f"recurring driver omits or duplicates project-data route {route}",
+        )
+    require(
+        text.count("PERL5LIB= prove -Iperl") == 1,
+        "project_data_route_drift",
+        "Perl consumer must execute inside the managed driver with an empty ambient PERL5LIB",
+    )
+    forbidden = ["run_lua", "lua/test", "LuaJIT", "puc_lua", "five_backend"]
+    require(
+        not any(marker in text for marker in forbidden),
+        "premature_lua_admission",
+        "four-backend recurring driver must not admit Lua or a five-backend role",
+    )
+
+
+def validate_canonical_text(text: str, topology: dict[str, Any]) -> None:
+    driver = topology["driver"]
+    switch = topology["local_ci"]["switch"]
+    execution = f'bash "$REPO_ROOT/{driver}"'
+    branch = f'if [[ "${{{switch}:-0}}" == "1" ]]; then'
+    require(
+        text.count(execution) == 1,
+        "canonical_registration_drift",
+        "canonical CI must execute the recurring callable driver exactly once",
+    )
+    require(
+        text.count(branch) == 1,
+        "canonical_registration_drift",
+        "canonical CI must expose exactly one callable matrix switch branch",
+    )
+    require(
+        f"require_tracked_file {driver}" in text,
+        "canonical_registration_drift",
+        "canonical CI must require the recurring callable driver as tracked input",
+    )
+
+
+def validate_recurring_topology(topology: dict[str, Any], *, check_filesystem: bool) -> None:
+    require(
+        topology == RECURRING_TOPOLOGY,
+        "recurring_topology_drift",
+        "four-backend recurring topology or roles drifted",
+    )
+    consumers = topology["consumers"]
+    require(
+        [(row["backend"], row["runtime"]) for row in consumers]
+        == [("perl", "perl"), ("rust", "rust"), ("dart", "dart"), ("julia", "julia")],
+        "recurring_topology_drift",
+        "recurring topology must contain exactly the four admitted backends in order",
+    )
+    if not check_filesystem:
+        return
+    for path in [topology["neutral_checker"]["path"], *[row["test_path"] for row in consumers]]:
+        require((ROOT / path).is_file(), "recurring_path_drift", f"recurring input is missing: {path}")
+    driver_path = ROOT / topology["driver"]
+    require(driver_path.is_file(), "recurring_path_drift", "recurring callable driver is missing")
+    require(
+        bool(driver_path.stat().st_mode & 0o111),
+        "recurring_path_drift",
+        "recurring callable driver is not executable",
+    )
+    validate_driver_text(driver_path.read_text(encoding="utf-8"), topology)
+    ci_path = ROOT / topology["local_ci"]["driver"]
+    require(ci_path.is_file(), "canonical_registration_drift", "canonical CI driver is missing")
+    validate_canonical_text(ci_path.read_text(encoding="utf-8"), topology)
+
+
+def validate_future_exclusion(record: dict[str, Any]) -> None:
+    require(
+        record == EXPECTED_FUTURE_EXCLUSION,
+        "callable_status_drift",
+        "generic final-codeblock exclusion must name only the measured Lua gap and .11.8 owner",
+    )
+
+
+def expect_mutation_failure(name: str, check: Callable[[], None]) -> None:
+    try:
+        check()
+    except ContractError:
+        return
+    fail("mutation_survived", name)
+
+
+def governance_mutation_checks(driver_text: str, ci_text: str, future_record: dict[str, Any]) -> int:
+    mutations: list[tuple[str, Callable[[], None]]] = []
+
+    def topology_mutation(name: str, mutate: Callable[[dict[str, Any]], None]) -> None:
+        def check() -> None:
+            candidate = copy.deepcopy(RECURRING_TOPOLOGY)
+            mutate(candidate)
+            validate_recurring_topology(candidate, check_filesystem=False)
+
+        mutations.append((name, check))
+
+    topology_mutation("backend_omission", lambda value: value["consumers"].pop())
+    topology_mutation("backend_reordering", lambda value: value["consumers"].reverse())
+    topology_mutation("role_omission", lambda value: value["consumers"][1]["roles"].pop())
+    topology_mutation("stale_consumer_path", lambda value: value["consumers"][2].__setitem__("test_path", "missing"))
+    topology_mutation("project_data_bypass", lambda value: value["consumers"][1].__setitem__("project_data_route", "cargo"))
+    topology_mutation("premature_lua_consumer", lambda value: value["consumers"].append({"backend": "lua"}))
+    topology_mutation("canonical_switch_drift", lambda value: value["local_ci"].__setitem__("switch", "wrong"))
+
+    rust_marker = RECURRING_TOPOLOGY["consumers"][1]["driver_marker"]
+    dart_marker = RECURRING_TOPOLOGY["consumers"][2]["driver_marker"]
+    reordered_driver = driver_text.replace(rust_marker, "__RUST__", 1).replace(
+        dart_marker, rust_marker, 1
+    ).replace("__RUST__", dart_marker, 1)
+    mutations.extend(
+        [
+            (
+                "driver_consumer_omission",
+                lambda: validate_driver_text(
+                    driver_text.replace(RECURRING_TOPOLOGY["consumers"][3]["driver_marker"], "", 1),
+                    RECURRING_TOPOLOGY,
+                ),
+            ),
+            ("driver_order_drift", lambda: validate_driver_text(reordered_driver, RECURRING_TOPOLOGY)),
+            (
+                "driver_project_data_bypass",
+                lambda: validate_driver_text(
+                    driver_text.replace("tools/run_cargo_local.sh", "cargo", 1), RECURRING_TOPOLOGY
+                ),
+            ),
+            (
+                "driver_premature_lua_admission",
+                lambda: validate_driver_text(driver_text + "\nbash tools/run_lua_local.sh\n", RECURRING_TOPOLOGY),
+            ),
+        ]
+    )
+
+    execution = f'bash "$REPO_ROOT/{RECURRING_TOPOLOGY["driver"]}"'
+    switch = RECURRING_TOPOLOGY["local_ci"]["switch"]
+    mutations.extend(
+        [
+            (
+                "canonical_execution_omission",
+                lambda: validate_canonical_text(ci_text.replace(execution, "", 1), RECURRING_TOPOLOGY),
+            ),
+            (
+                "canonical_execution_duplication",
+                lambda: validate_canonical_text(ci_text + f"\n{execution}\n", RECURRING_TOPOLOGY),
+            ),
+            (
+                "canonical_switch_loss",
+                lambda: validate_canonical_text(ci_text.replace(switch, "WRONG_SWITCH"), RECURRING_TOPOLOGY),
+            ),
+        ]
+    )
+
+    for name, field, value in [
+        ("future_owner_drift", "owner", "FUTURE-PARITY-BACKLOG.11.7"),
+        ("stale_completed_backend_claim", "reason", "Rust and Julia remain future."),
+        ("premature_five_backend_claim", "reason", "All five backends are current."),
+    ]:
+        def check(field: str = field, value: str = value) -> None:
+            candidate = copy.deepcopy(future_record)
+            candidate[field] = value
+            validate_future_exclusion(candidate)
+
+        mutations.append((name, check))
+
+    for name, check in mutations:
+        expect_mutation_failure(name, check)
+    return len(mutations)
+
+
+def validate_governance() -> int:
+    validate_recurring_topology(RECURRING_TOPOLOGY, check_filesystem=True)
+    manifest = json.loads((ROOT / "capability_conformance" / "manifest.json").read_text(encoding="utf-8"))
+    records = [
+        record
+        for record in manifest["excluded_or_future"]
+        if record.get("id") == EXPECTED_FUTURE_EXCLUSION["id"]
+    ]
+    require(
+        len(records) == 1,
+        "callable_status_drift",
+        "generic final-codeblock exclusion must occur exactly once",
+    )
+    future_record = records[0]
+    validate_future_exclusion(future_record)
+    driver_text = (ROOT / RECURRING_TOPOLOGY["driver"]).read_text(encoding="utf-8")
+    ci_text = (ROOT / RECURRING_TOPOLOGY["local_ci"]["driver"]).read_text(encoding="utf-8")
+    return governance_mutation_checks(driver_text, ci_text, future_record)
+
+
 def main() -> None:
     contract = json.loads(CONTRACT_PATH.read_text(encoding="utf-8"))
     signature_contract = json.loads(SIGNATURE_PATH.read_text(encoding="utf-8"))
@@ -411,13 +706,15 @@ def main() -> None:
     if set(fixture["result_case_ids"]) != set(calls) - {"static_name_precedence", "standalone_discard_keeps_effects"}:
         fail("fixture_mismatch", "fixture call coverage drifted")
 
+    governance_mutations = validate_governance()
     print(
         "callable-codeblock-contract: OK "
         f"({len(literals)} literals; {len(calls)} calls; "
         f"{len(contract['invalid_literal_cases'])} invalid literals; "
         f"{len(contract['invalid_call_cases'])} invalid calls; "
         f"{len(contract['final_codeblock_parameter_declaration']['invalid'])} invalid declarations; "
-        f"{len(contract['contextual_final_block_cases'])} contextual forms)"
+        f"{len(contract['contextual_final_block_cases'])} contextual forms; "
+        f"{governance_mutations} governance mutations)"
     )
 
 

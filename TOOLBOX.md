@@ -820,6 +820,16 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   Direct proof passes Perl 18, Rust 1/1, Dart 1/1, Julia 416, Lua 408 per ABI, all 30 primary legs, and all three
   support ledgers. Retrieve [[semantic-introspection-recurring-gate]] before changing the topology.
 
+- **RECURRING FOUR-BACKEND CALLABLE ADMISSION:** `.11.7.1` adds
+  `tools/check_callable_codeblock_four_backend.sh`, one repository-routed fail-fast driver that runs the unchanged
+  neutral 7/11/9/7/4/8 model followed by the exact Perl 10, Rust 18, Dart 21, and Julia 125+118+239 focused
+  consumers. Run it directly with `bash tools/check_callable_codeblock_four_backend.sh`; canonical all-toolchain
+  execution is opt-in through `LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1`, while ordinary CI requires and
+  syntax-checks the driver. The checker rejects 17 missing/reordered role, stale-path, project-data-route,
+  canonical-registration, and premature Lua/five-backend mutations. Capability remains 80/0/0; Lua explicit
+  literals/general bound calls stay `.11.8`. Retrieve [[callable-codeblock-four-backend-recurring-gate]] before
+  changing this topology.
+
 - **LUA SOURCE FOUNDATION:** `.10.7.2.1` owns strict copied source/options, portable arithmetic SHA-256, exact
   private zero-based byte/scalar boundaries, one-based scalar line/columns, four source ceilings, and opaque
   detached source/error values. Importing `linkedspec.semantic_index` remains parser-free; constructing an index

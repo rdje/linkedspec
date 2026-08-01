@@ -422,8 +422,11 @@ Ordinary `{ statements }` remains an eager block value, while empty and top-leve
 literals. The contract also fixes diagnostics, exact final-only `name: codeblock`, eight contextual helper/
 user-function/receiver forms, and a deterministic future `.spec` fixture. Validate the schema, parser/classifier
 model, neutral invocation model, and fixture offline with
-`bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py`. Full backend admission remains
-future until the owned rollout leaves supply generic final-block and cross-backend evidence. Perl consumes the
+`bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py`. That checker also locks the
+four-backend recurring topology and mixed future-exclusion status through 17 rejected governance mutations. Run
+`bash tools/check_callable_codeblock_four_backend.sh` for the ordered neutral, Perl, Rust, Dart, and Julia
+composition; canonical CI exposes the same all-toolchain leg through
+`LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1`. Perl consumes the
 literal and invocation subset
 through `prove -Iperl t/callable_codeblock_literal_contract.t`: exact AST/spans, inert canonical generated data,
 assignment/copying, user-function preservation, dynamic caller execution, temporary fixed/rest restoration,
@@ -440,7 +443,8 @@ and generic final-block equivalence. Julia `.11.6.1-.3` now complete constructio
 generic final-block equivalence through one signature-governed normalizer and the existing evaluator. Lua's
 declared contextual helper/user-function/receiver forms are current, but its explicit callable values and arbitrary
 dynamic calls remain future. The overall generic capability therefore stays excluded until Lua explicit/dynamic
-parity and the governed cross-backend closeout land.
+parity and the governed cross-backend closeout land. The corrected exclusion points only to Lua parent `.11.8`;
+the capability census remains 80 pass / 0 partial / 0 gap because no capability row moves in this governance leaf.
 
 `complete_named_mark_contract.json` fixes the seven documented current named-mark helpers that were absent from
 every governed backend inventory: entry/local start/end writers, line/column readers, and explicit clear. The
