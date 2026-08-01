@@ -1,5 +1,20 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`FUTURE-PARITY-BACKLOG.24.0.2` — guard callable book count): the governed callable public inventory
+  already contained 25 documents, but the project-status entry had only a generic five-backend marker. Commit
+  `47b40c7a` authored its new status paragraph as 24, so the listed page could contradict the inventory while all
+  22 existing mutations still passed.
+
+  The contract now requires `25 public documents` specifically in project status and denies its stale 24 claim.
+  The checker appends one isolated count-drift mutation after the unchanged 22 targets; this keeps historical
+  mutation meaning stable while proving the sole-facing count cannot regress. RED was the exact missing-marker
+  diagnostic; changing only the current book line to 25 documents / 23 mutations made the same route green.
+
+  Neutral proof passes 7/11/9/7/4/8+23 and the rooted callable driver passes Perl 10, Rust 18, Dart 21, Julia
+  125+118+239, and Lua 449x2. Capability stays 80/0/0. Knowledge Map 783/6,345, sole-facing mdBook 79/14,060 KiB
+  with rendered review, all seven doctrines, canonical CLI 66x2, RAM 61%, and Phase 0 1,031/1,031 in 646 seconds
+  pass before the local-CI marker. No callable/backend/runtime/capability/MCP behavior moves.
+
 - 2026-08-01 (`FUTURE-PARITY-BACKLOG.24.0.1` — repair staged-owner metadata): original commit `59cbf0be`
   created `.2` as pending with both evidence fields pending. Broad-context patches `e96d389e` and `7dd70a2d`
   later selected those first matching fields while landing unrelated `.9.1.7.4` and `.9.1.7.6` work. A complete

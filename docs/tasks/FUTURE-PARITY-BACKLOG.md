@@ -18128,7 +18128,7 @@ CWD execution, CLI 66x2, RAM 50%, and Phase 0 1,031/1,031 in 640 seconds before 
   changes/development/live state, and sole-facing book must agree before commit and clean `.24.0.2` handoff.
 
 - ID: `FUTURE-PARITY-BACKLOG.24.0.2`
-  Status: `pending`
+  Status: `done`
   Goal: Repair and guard the sole-facing mdBook callable public-document count.
   Dependencies: `.24.0.1`
   Acceptance: Correct project status from 24 to the actual governed 25 public documents; make the callable
@@ -18138,6 +18138,73 @@ CWD execution, CLI 66x2, RAM 50%, and Phase 0 1,031/1,031 in 640 seconds before 
   Finding: `.11.8.4` added the helper catalog as document 25 and guarded the capability README count, but its new
     opening mdBook project-status paragraph was authored as 24. The page was inventoried without an exact count
     marker, so both the checker and rendered build passed while the user's sole-facing surface drifted.
+  Verification: Exact neutral 7/11/9/7/4/8 plus all 23 mutations; five-backend/six-runtime callable driver;
+    capability 80/0/0; Knowledge Map 783/6,345; sole-facing mdBook 79 files / 14,060 KiB with rendered exact-line
+    inspection; memory/task/whitespace and all seven doctrines; canonical CLI 66x2, RAM 61%, Phase 0
+    1,031/1,031 in 646 seconds, and `local CI gate passed`.
+  Commit: `FUTURE-PARITY-BACKLOG.24.0.2 - guard callable book count`
+
+### `FUTURE-PARITY-BACKLOG.24.0.2` Acceptance Checklist
+
+- [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Activate task-tree-first from clean pending-owner repair commit
+  `094ed840` (127/300), with zero-byte brief and no rendered-book, untracked, or background-process residue.
+- [x] **RETRIEVE / REVERIFY EXACT PUBLIC INVENTORY** — Use the Knowledge Map and callable contract before source
+  inspection; reverify the governed 25-document inventory, existing 22 mutations, the sole-facing 24 claim, and
+  every current count projection without changing production behavior.
+- [x] **RED-GUARD THE SOLE-FACING COUNT** — First prove the current checker accepts the stale book count, then add
+  the smallest exact marker plus one mutation that rejects 24 or any non-25 current claim while preserving all 22
+  existing topology/route/status/public mutations.
+- [x] **REPAIR / RENDER / REVIEW THE COMPLETE BOOK** — Correct the sole-facing project-status count from 24 to 25,
+  rebuild all 79 rendered files, inspect the affected output and surrounding current callable guidance, and remove
+  generated output after measurement.
+- [x] **LOCKSTEP / NO BEHAVIOR / COMMIT / CLEAN HANDOFF** — Synchronize task/index, Knowledge Map, roadmaps, live
+  continuity, changes/development/architecture, and the mdBook; preserve callable/runtime/emitter/MCP/capability
+  behavior and rows 80/0/0, root README, and `.24.1`; pass focused/doctrine/book/warranted canonical gates, commit,
+  clear the brief, and prove clean before `.24.1`.
+
+Activation evidence 2026-08-01: `.24.0.1` landed at `094ed840` after its pre/post activation-pointer checks and all
+seven doctrines passed. Exact post-commit proof found empty status plus staged/unstaged diffs, a zero-byte brief,
+no rendered book, synchronized Knowledge Map 783/6,345, and no background result. This leaf owns only the exact
+sole-facing callable count, its narrow checker mutation, and lockstep projections. Callable implementation/routes,
+the existing 22 mutations, capability rows/manifest semantics, parser/compiler/runtime/emitter/MCP behavior, root
+README, `.24.1`, push, and unrelated artifact cleanup are excluded.
+
+Reproduction/root-cause evidence 2026-08-01: Knowledge Map retrieval led directly to the callable-count drift and
+five-backend admission cards. The contract contains exactly 25 documents and 12 stale-claim denials, while the
+unchanged checker passes 7/11/9/7/4/8 plus all 22 governance mutations even though sole-facing project status says
+24. `git blame` proves commit `47b40c7a` authored the stale paragraph and added only the generic five-backend marker
+to the pre-existing project-status inventory entry; exact numeric text was never required or denied. The existing
+22 mutation targets remain fixed. This leaf adds one project-status `25 public documents` marker, one path-scoped
+stale-24 denial, and one explicit count-drift mutation, then repairs the book only after the checker is RED.
+
+RED/GREEN evidence 2026-08-01: after the checker and JSON contract required project status to contain `25 public
+documents`, denied path-scoped `24 public documents`, and appended `project_status_public_count_drift` after the
+unchanged 22 mutations, the routed checker exited 1 with exact `callable_public_marker_missing` on the sole-facing
+page. Changing only that page's current line to 25 documents and 23 total mutations made the same checker pass
+7/11/9/7/4/8 plus all 23 governance mutations. The complete book then builds 79 files / 14,060 KiB; rendered
+project status contains the exact corrected line, rendered local-CI guidance says 23 mutations and 25 documents,
+and rendered project status contains no `24 public documents`. Exact generated output is removed after review.
+
+Signoff evidence 2026-08-01: the rooted callable driver passes neutral 7/11/9/7/4/8+23, Perl 10, Rust 18, Dart
+21, Julia 125+118+239, and the same Lua consumer at 449 assertions on PUC Lua and LuaJIT. Capability remains
+80/0/0; Knowledge Map is 783/6,345; memory/task/whitespace and all seven doctrines pass. The definitive authorized
+canonical gate proves semantic/MCP admissions, callable 25 documents/23 mutations, repository containment,
+moved-root/outside-CWD execution, CLI 66x2, RAM 61%, and Phase 0 1,031/1,031 in 646 seconds before
+`local CI gate passed`. No callable implementation, backend route, capability, parser/runtime/emitter/MCP, root
+README, or push movement occurs.
+
+### `FUTURE-PARITY-BACKLOG.24.0.2` TOOLBOX Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Show the governed inventory says 25 while the sole-facing book says 24 and the
+  current checker still passes.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Identify the exact closeout patch and checker inventory/count boundary that
+  allowed a listed public document's own numeric status claim to escape validation.
+- [x] **FIX** — Make the book say 25 and make callable governance require that exact current marker.
+- [x] **ADDRESSED (verified)** — Prove the corrected marker passes and the isolated stale-24 mutation fails.
+- [x] **NO REGRESSION** — Preserve all existing 22 mutations, backend/runtime routes, capability 80/0/0, complete
+  rendered book, all seven doctrines, and warranted canonical proof.
+- [x] **LOCKSTEP** — Task/index, Knowledge Map, roadmaps, live docs, checker, capability guidance, and sole-facing
+  book agree before commit and clean `.24.1` handoff.
 
 - ID: `FUTURE-PARITY-BACKLOG.24.1`
   Status: `pending`
@@ -18854,12 +18921,12 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-01):** pending-owner provenance/supersession repair `.24.0.1` is signoff-complete
-from clean exclusion-model commit `7a5d0af3` (intended 127/300; no push). Exact commits `e96d389e`/`7dd70a2d`
-root-cause the two misplaced fields; `.2`, its frontier, the closed staged tree, and two current architecture cards
-now agree on no-implementation supersession by parent `.14` plus progressive `.14.6` and staged `.14.7`. One
-narrow doctrine rejects pending activation and foreign same-tree commit claims. Focused and canonical proof pass;
-only commit, brief clearing, and exact clean proof remain before sole-facing callable count repair `.24.0.2`.
+**Authoritative frontier (2026-08-01):** sole-facing callable-count repair `.24.0.2` is signoff-complete from clean
+pending-owner repair commit `094ed840` (intended 128/300; no push). Exact current governance now requires 25 public
+documents and rejects the stale 24 claim through mutation 23 while preserving the original 22 targets. Complete
+rendered review, five-backend/six-runtime callable proof, capability 80/0/0, all seven doctrines, and canonical
+RAM 61% plus Phase 0 1,031/1,031 in 646 seconds pass. Exclusion schema-v2/status implementation `.24.1` is next
+only after commit, brief clearing, and exact clean proof.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private
@@ -20261,6 +20328,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-08-01` | `FUTURE-PARITY-BACKLOG.24.0.2` | Clean base `094ed840`; Knowledge Map-first 25-document/22-mutation authority retrieval; stale sole-facing 24 claim accepted before guard; exact RED `callable_public_marker_missing`; 25-required/24-forbidden project-status markers plus one count-drift mutation; neutral 7/11/9/7/4/8+23; rooted callable Perl 10, Rust 18, Dart 21, Julia 125+118+239, Lua 449x2; capability 80/0/0; Knowledge Map 783/6,345; sole-facing mdBook 79 files / 14,060 KiB with rendered inspection; memory/task/whitespace/seven doctrines; definitive canonical semantic/MCP admissions, containment/moved-root/outside-CWD execution, CLI 66x2, RAM 61%, Phase 0 1,031/1,031 in 646 seconds, and explicit local-CI pass. | PASS. The sole-facing book and its independent governance agree on 25 current documents through 23 mutations, preserving all original routes/targets and behavior; `.24.1` follows only after the clean commit. |
 | `2026-08-01` | `FUTURE-PARITY-BACKLOG.24.0.1` | Clean base `7a5d0af3`; Git provenance commits `59cbf0be`/`e96d389e`/`7dd70a2d`; exact RED pending-activation and foreign-same-tree-commit diagnostics; `.2` plus four current node/frontier/authority projections repaired to `.14`/`.14.6-.7`; four in-memory checker fixtures; zero stale-current scans; capability 80/0/0; Knowledge Map 783/6,345; sole-facing mdBook 79 files / 14,060 KiB; memory/task/whitespace/seven doctrines; definitive canonical semantic/MCP admissions, 25-document callable governance, containment/moved-root/outside-CWD execution, CLI 66x2, RAM 50%, Phase 0 1,031/1,031 in 640 seconds, and explicit local-CI pass. | PASS. Pending `.2` truthfully records supersession without implementation, current ownership is reconciled, and future task-metadata contamination is narrowly denied without manifest/capability/runtime/MCP/public-language movement. `.24.0.2` follows only after the clean commit. |
 | `2026-08-01` | `FUTURE-PARITY-BACKLOG.24.0` | Clean base `47b40c7a`; complete four-exclusion authority audit; exact legacy/future/satisfied classifications; schema-v2 disposition/retention/task-status model; 24 in-memory RED mutations; Git-root-caused `.2` metadata corruption and mdBook 24→25 count drift routed to `.24.0.1-.2`; capability 80/0/0; Knowledge Map 783/6,343; sole-facing mdBook 79 files / 14,056 KiB; memory/task/whitespace/seven doctrines; definitive canonical semantic/MCP admissions, 25-document callable governance, containment/moved-root/outside-CWD execution, CLI 66x2, RAM 52%, Phase 0 1,031/1,031 in 651 seconds, and explicit local-CI pass. | PASS. The exclusion-freshness implementation model and dependency-ordered repairs are exact without manifest/checker/runtime/capability/MCP/public behavior movement. `.24.0.1` follows only after the clean commit. |
 | `2026-08-01` | `FUTURE-PARITY-BACKLOG.11.8.0` | Clean base `e232609b`; ADR/KM/Toolbox-first owner retrieval; identical PUC Lua/LuaJIT typed RED and preserved-surface probes; dependency-complete `.11.8.1-.4` plan and one focused dual-ABI consumer; neutral 7/11/9/7/4/8 plus 20 governance mutations; complete Lua 177/177 per ABI, CLI 66x2, corpus 105/105, 16 storage owners; Knowledge Map 776/6,291; sole-facing mdBook 79 files / 14,008 KiB; memory/task/README/whitespace/seven doctrines; definitive canonical semantic/MCP admissions, containment/moved-root, CLI 66x2, RAM 61%, Phase 0 1,031/1,031 in 653 seconds, optional callable matrix at Perl 10 / Rust 18 / Dart 21 / Julia 125+118+239, and explicit local-CI pass; exact cleanup. | PASS. The smallest Lua construction/invocation/route/admission sequence is frozen without production, fixture, capability-row/MCP, root README, lexical-capture, closure, second-codec/executor, or push movement. `.11.8.1` follows only after the clean commit. |
@@ -20592,6 +20660,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.24.0.2` | `FUTURE-PARITY-BACKLOG.24.0.2 - guard callable book count` | Sole-facing 24→25 correction, exact current-count marker/denial, mutation 23, rendered review, and complete signoff without behavior movement. |
 | `FUTURE-PARITY-BACKLOG.24.0.1` | `FUTURE-PARITY-BACKLOG.24.0.1 - repair staged owner metadata` | Exact `.2` provenance/supersession repair, four current owner projections, and narrow pending-node evidence guard with complete signoff. |
 | `FUTURE-PARITY-BACKLOG.24.0` | `FUTURE-PARITY-BACKLOG.24.0 - freeze exclusion freshness model` | Behavior-free four-record audit, schema-v2 status/retention model, 24 mutations, three durable findings, dependency-ordered repairs, and complete signoff. |
 | `FUTURE-PARITY-BACKLOG.11.8.4` | `FUTURE-PARITY-BACKLOG.11.8.4 - admit five-backend callable codeblocks` | One rooted five-backend/six-runtime driver, 22 governance mutations, 25 public documents, satisfied-exclusion removal, parent closeout, and complete signoff. |
@@ -20905,6 +20974,13 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-08-01`: Sole-facing callable count repair `.24.0.2` is signoff-complete. Project status now says the
+  governed 25 public documents, while the independent checker requires that marker, denies stale 24, and adds one
+  exact count-drift mutation after preserving all original 22 targets. Neutral passes 7/11/9/7/4/8+23; the rooted
+  five-backend/six-runtime callable driver passes Perl 10, Rust 18, Dart 21, Julia 125+118+239, and Lua 449x2;
+  capability stays 80/0/0. Knowledge Map 783/6,345, sole-facing mdBook 79/14,060 KiB with rendered inspection,
+  all doctrines, canonical CLI 66x2, RAM 61%, and Phase 0 1,031/1,031 in 646 seconds pass. No production,
+  backend-route, capability, parser/runtime/emitter/MCP, root README, or push movement; clean `.24.1` handoff follows.
 - `2026-08-01`: Pending-owner repair `.24.0.1` root-causes commits `e96d389e` and `7dd70a2d`, restores `.2` as
   superseded without implementation, and aligns its frontier plus three current owner authorities to parent `.14`,
   progressive `.14.6`, and staged `.14.7`. The task-metadata doctrine now narrowly rejects a pending node that

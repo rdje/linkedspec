@@ -1,5 +1,14 @@
 # ARCHITECTURE STATE
 
+- `2026-08-01 sole-facing callable count integrity`: `FUTURE-PARITY-BACKLOG.24.0.2` repairs project status from
+  stale 24 to the governed 25 callable public documents. The independent callable contract now requires the exact
+  current marker on that page, denies the stale value there, and appends one count-drift mutation after preserving
+  the original 22 targets; current governance therefore passes 23 mutations. No callable implementation, backend
+  route, capability, parser/compiler/runtime/emitter/MCP, or root README behavior moves. Signoff passes the rooted
+  five-backend/six-runtime callable driver, capability 80/0/0, Knowledge Map 783/6,345, sole-facing mdBook
+  79/14,060 KiB with rendered inspection, all doctrines, canonical CLI 66x2, RAM 61%, and Phase 0 1,031/1,031 in
+  646 seconds.
+
 - `2026-08-01 staged-owner metadata integrity`: `FUTURE-PARITY-BACKLOG.24.0.1` repairs broad pending owner `.2`
   after Git proves unrelated commits `e96d389e`/`7dd70a2d` overwrote its evidence fields. `.2` was never
   implemented or activated; its node/frontier, closed staged tree, and two current architecture cards now agree on

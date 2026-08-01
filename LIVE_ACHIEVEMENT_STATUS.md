@@ -1,5 +1,21 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-01 — Sole-facing callable public count is repaired and guarded
+
+`FUTURE-PARITY-BACKLOG.24.0.2` is signoff-complete from clean commit `094ed840` (intended 128/300; no push).
+The mdBook project status now says the governed 25 callable public documents. Independent governance requires
+that exact marker, denies stale 24 on that page, and adds one count-drift mutation after preserving every original
+topology/route/status/public mutation; the current total is 23.
+
+Neutral proof passes 7/11/9/7/4/8+23. The rooted five-backend/six-runtime driver passes Perl 10, Rust 18, Dart 21,
+Julia 125+118+239, and Lua 449 on PUC Lua and LuaJIT. Capability remains 80/0/0, and no callable implementation,
+backend route, parser/runtime/emitter/MCP, or root README behavior changes.
+
+Knowledge Map passes 783/6,345; the sole-facing mdBook builds 79 files / 14,060 KiB and its affected rendered
+pages were inspected; all seven doctrines pass. The definitive canonical gate proves semantic/MCP admissions,
+containment/moved-root/outside-CWD execution, CLI 66x2, RAM 61%, and Phase 0 1,031/1,031 in 646 seconds before
+`local CI gate passed`. Only commit, brief clearing, and exact clean proof remain before `.24.1`.
+
 ## 2026-08-01 — Staged-owner metadata repair is signoff-complete
 
 `FUTURE-PARITY-BACKLOG.24.0.1` is signoff-complete from clean commit `7a5d0af3` (intended 127/300; no push).

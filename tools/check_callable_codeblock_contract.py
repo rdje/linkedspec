@@ -199,6 +199,7 @@ EXPECTED_PUBLIC_CONTRACT = {
         ]},
         {"path": "docs/linkedspec-book/src/overview/project-status.md", "required_markers": [
             "**Callable codeblock design**",
+            "25 public documents",
             FIVE_BACKEND_PUBLIC_MARKER,
         ]},
         {"path": "docs/linkedspec-book/src/public-api/descriptor-introspection.md", "required_markers": [
@@ -241,6 +242,7 @@ EXPECTED_PUBLIC_CONTRACT = {
         {"path": "docs/linkedspec-book/src/appendix/helper-contract-catalog.md", "text": "final recurring five-backend/public admission remains `.11.8.4`"},
         {"path": "docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md", "text": "Four-backend recurring/public no-drift remains complete under `.11.7`"},
         {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "while admission remains `.11.8.4`"},
+        {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "24 public documents"},
         {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "Four-backend recurring/public no-drift is complete under `.11.7`"},
     ],
 }
@@ -742,6 +744,19 @@ def governance_mutation_checks(
             validate_public_contract(candidate, check_filesystem=False)
 
         mutations.append((name, check))
+
+    def drift_project_status_public_count() -> None:
+        candidate = copy.deepcopy(public_contract)
+        project_status = next(
+            document
+            for document in candidate["documents"]
+            if document["path"] == "docs/linkedspec-book/src/overview/project-status.md"
+        )
+        marker_index = project_status["required_markers"].index("25 public documents")
+        project_status["required_markers"][marker_index] = "24 public documents"
+        validate_public_contract(candidate, check_filesystem=False)
+
+    mutations.append(("project_status_public_count_drift", drift_project_status_public_count))
 
     for name, check in mutations:
         expect_mutation_failure(name, check)

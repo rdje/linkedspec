@@ -725,11 +725,11 @@ enters one managed repository-data run and delegates through the supported Pytho
 wrappers; Perl runs inside that boundary with ambient `PERL5LIB` cleared.
 
 Canonical local CI always requires and syntax-checks the driver. Set
-`LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1` to execute the all-toolchain composition. The checker rejects 22
+`LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1` to execute the all-toolchain composition. The checker rejects 23
 topology, route, status, and public-governance mutations: missing/reordered roles, collapsed or divergent Lua
 runtime rows, stale paths, project-data bypass, stale four-backend identity, canonical omission/duplication,
-satisfied-exclusion resurrection, and public document/marker/denylist omission. Public no-drift covers 24
-current-facing documents.
+satisfied-exclusion resurrection, public document/marker/denylist omission, and sole-facing project-status count
+drift. Public no-drift covers 25 current-facing documents and explicitly denies the stale 24 claim.
 
 Lua's focused construction/invocation consumer is already part of the complete Lua gate on both ABIs:
 

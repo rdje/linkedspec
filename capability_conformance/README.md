@@ -423,8 +423,10 @@ literals. The contract also fixes diagnostics, exact final-only `name: codeblock
 user-function/receiver forms, and a deterministic future `.spec` fixture. Validate the schema, parser/classifier
 model, neutral invocation model, and fixture offline with
 `bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py`. That checker also locks the
-five-backend/two-Lua-runtime recurring topology, satisfied-exclusion absence, and 25 public documents through 22
-rejected governance mutations. Run `bash tools/check_callable_codeblock_five_backend.sh` for the ordered neutral,
+five-backend/two-Lua-runtime recurring topology, satisfied-exclusion absence, and 25 public documents through 23
+rejected governance mutations. The original 22 topology/route/status/public mutations remain exact; mutation 23
+requires sole-facing project status to say 25 and rejects its stale 24 claim. Run
+`bash tools/check_callable_codeblock_five_backend.sh` for the ordered neutral,
 Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT composition; canonical CI exposes the same all-toolchain leg through
 `LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1`. Perl consumes the
 literal and invocation subset

@@ -1,5 +1,20 @@
 # CHANGES
 
+## 2026-08-01 — FUTURE-PARITY-BACKLOG.24.0.2 — guard callable book count
+
+The sole-facing mdBook now reports the governed 25 callable public documents instead of stale 24. The independent
+callable checker requires the exact current project-status marker, rejects the path-scoped stale claim, and adds
+one `project_status_public_count_drift` mutation after preserving the original 22 topology, route, status, and
+public-surface mutation targets.
+
+No callable implementation, backend route, capability, parser/compiler/runtime/emitter/MCP, or root README
+behavior changes. Neutral proof passes 7/11/9/7/4/8 plus 23 mutations; the rooted five-backend/six-runtime driver
+passes Perl 10, Rust 18, Dart 21, Julia 125+118+239, and Lua 449 on both ABIs. Capability remains 80/0/0.
+
+Signoff passes Knowledge Map 783/6,345, the complete sole-facing mdBook at 79 files / 14,060 KiB with rendered
+inspection, whitespace, all seven doctrines, repository containment/moved-root/outside-CWD execution, CLI 66x2,
+RAM 61%, and Phase 0 1,031/1,031 in 646 seconds before `local CI gate passed`.
+
 ## 2026-08-01 — FUTURE-PARITY-BACKLOG.24.0.1 — repair staged owner metadata
 
 Git history proves that pending staged-composition owner `.2` was contaminated by two unrelated Lua cursor

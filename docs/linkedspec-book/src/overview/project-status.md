@@ -3,7 +3,7 @@
 Five-backend callable recurring/public admission is complete under `FUTURE-PARITY-BACKLOG.11.8.4`. One rooted
 driver composes neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; both Lua rows execute one focused file. The
 checker locks exact roles, paths, order, route multiplicity, canonical registration, satisfied-exclusion absence,
-and 24 public documents through 22 governance mutations. The existing 16-capability census remains 80/0/0,
+and 25 public documents through 23 governance mutations. The existing 16-capability census remains 80/0/0,
 lexical capture remains outside v1, and callable parents `.11.8`/`.11` close with signoff.
 
 Lua emitted-identity leaf `FUTURE-PARITY-BACKLOG.11.8.3` is signoff-complete on PUC Lua and LuaJIT. Exact

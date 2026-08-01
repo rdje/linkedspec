@@ -11,7 +11,7 @@ answers:
 date: 2026-08-01
 status: current
 tags: [callable, codeblock, conformance, recurring-gate, public-docs, perl, rust, dart, julia, lua, luajit]
-evidence: "FUTURE-PARITY-BACKLOG.11.8.4 replaces the four-backend driver with tools/check_callable_codeblock_five_backend.sh. One repository-routed run composes the unchanged neutral checker, Perl, Rust, Dart, Julia, and one focused file on both PUC Lua and LuaJIT in exact order. The duplicate-independent checker locks roles, paths, order, two distinct Lua runtime rows over the same consumer, project-data routes, canonical registration, satisfied-exclusion removal, and 25 public documents through 22 governance mutations. The final no-drift sweep adds the canonical mdBook helper catalog and three stale-projection denials. The separately excluded callable feature is now current, so future.generic_final_codeblock is removed. The established 16-capability five-backend census remains 80 pass / 0 partial / 0 gap; no unrelated seventeenth row is invented."
+evidence: "FUTURE-PARITY-BACKLOG.11.8.4 replaces the four-backend driver with tools/check_callable_codeblock_five_backend.sh. One repository-routed run composes the unchanged neutral checker, Perl, Rust, Dart, Julia, and one focused file on both PUC Lua and LuaJIT in exact order. The duplicate-independent checker locks roles, paths, order, two distinct Lua runtime rows over the same consumer, project-data routes, canonical registration, satisfied-exclusion removal, and 25 public documents through 22 governance mutations. FUTURE-PARITY-BACKLOG.24.0.2 preserves those 22 and adds one sole-facing project-status count-drift mutation, making the current total 23 while requiring 25 documents and denying stale 24. The separately excluded callable feature is current, so future.generic_final_codeblock is removed. The established 16-capability five-backend census remains 80 pass / 0 partial / 0 gap; no unrelated seventeenth row is invented."
 reverify: "bash tools/check_callable_codeblock_five_backend.sh && bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && bash tools/test_project_data_workflow_routing.sh && perl tools/check_capability_conformance.pl"
 ---
 
@@ -30,6 +30,11 @@ consumer paths and order, wrapper multiplicity, one canonical switch branch, rem
 exclusion, and omission-sensitive public inventory. Mutations reject a missing/reordered runtime, collapsed Lua
 ABI identity, divergent Lua test, route bypass, stale four-backend driver identity, canonical omission/duplication,
 exclusion resurrection, and public document/marker/denylist omission.
+
+The sole-facing count repair under `FUTURE-PARITY-BACKLOG.24.0.2` adds one mutation without changing any of those
+22 targets. Project status must contain `25 public documents`; the same path explicitly denies `24 public
+documents`. Current governance therefore rejects 23 mutations while backend/runtime routes and 80/0/0 remain
+unchanged.
 
 Removing `future.generic_final_codeblock` completes a separately governed language feature. It does not change
 the established backend census schema: 16 capabilities across Perl, Rust, Dart, Julia, and Lua still produce

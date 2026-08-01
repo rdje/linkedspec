@@ -191,7 +191,7 @@
       {"path": "docs/linkedspec-book/src/compiler/pipeline-overview.md", "required_markers": ["same dynamic codeblock evaluator as explicit", "existing Julia dynamic codeblock", "Five-backend callable recurring/public admission is complete"]},
       {"path": "docs/linkedspec-book/src/development/local-ci-and-regression.md", "required_markers": ["### Callable-codeblock five-backend recurring proof", "`LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1`", "Five-backend callable recurring/public admission is complete"]},
       {"path": "docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md", "required_markers": ["current on all five backends", "Five-backend callable recurring/public admission is complete"]},
-      {"path": "docs/linkedspec-book/src/overview/project-status.md", "required_markers": ["**Callable codeblock design**", "Five-backend callable recurring/public admission is complete"]},
+      {"path": "docs/linkedspec-book/src/overview/project-status.md", "required_markers": ["**Callable codeblock design**", "25 public documents", "Five-backend callable recurring/public admission is complete"]},
       {"path": "docs/linkedspec-book/src/public-api/descriptor-introspection.md", "required_markers": ["Perl, Rust, Dart, Julia, and Lua currently expose this exact record", "Five-backend callable recurring/public admission is complete"]},
       {"path": "docs/knowledge/callable-codeblock-literal-contract.md", "required_markers": ["Perl .11.3, Rust .11.4, Dart .11.5, and Julia .11.6", "Five-backend callable recurring/public admission is complete"]},
       {"path": "docs/knowledge/callable-codeblock-four-backend-recurring-gate.md", "required_markers": ["Seventeen mutations", "Public no-drift closes parent `.11.7`", "Five-backend callable recurring/public admission is complete"]},
@@ -211,6 +211,7 @@
       {"path": "docs/linkedspec-book/src/appendix/helper-contract-catalog.md", "text": "final recurring five-backend/public admission remains `.11.8.4`"},
       {"path": "docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md", "text": "Four-backend recurring/public no-drift remains complete under `.11.7`"},
       {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "while admission remains `.11.8.4`"},
+      {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "24 public documents"},
       {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "Four-backend recurring/public no-drift is complete under `.11.7`"}
     ]
   },
