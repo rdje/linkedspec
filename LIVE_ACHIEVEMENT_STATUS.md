@@ -1,5 +1,24 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-01 — Lua callable-codeblock dynamic invocation is signoff-complete
+
+`FUTURE-PARITY-BACKLOG.11.8.2` now gives PUC Lua and LuaJIT the neutral `cb(args)` dynamic caller-context model.
+Colon keywords are typed for exact rejection while `name = value` remains positional; evaluated call results feed
+key/index access and ordinary receiver chains. Static controls/helpers/functions retain precedence. Copied fixed/
+rest parameters use the existing cleanup-safe three-store scoped binder, nonparameter caller state stays live,
+and one interpreter owns explicit/declared-final execution, local return, final values, and discard.
+
+All neutral failures expose exact structured fields, including ordered direct/mutual recursion cycles. The focused
+consumer passes 232 assertions per ABI. Complete Lua passes 177 TAP groups on both ABIs, CLI 66x2, corpus 105/105,
+and 16 storage owners. `.11.8.3` still owns byte-fresh emitted execution identity; `.11.8.4` alone owns recurring
+five-backend/public/capability admission, so no status row moves early.
+
+Neutral+20, callable signatures 3/9/7, capability conformance 80/0/0, Knowledge Map 778/6,311, the sole-facing
+mdBook at 79 files / 14,028 KiB, and all seven doctrines pass. The outer Codex sandbox denied the first canonical
+attempt's nested containment probe; the identical authorized rerun passes repository containment/moved-root,
+primary CLI 66x2, RAM 51%, Phase 0 1,031/1,031 in 801 seconds, and Perl 10 / Rust 18 / Dart 21 / Julia
+125+118+239 before `local CI gate passed`. Only commit, brief cleanup, and clean proof remain before `.11.8.3`.
+
 ## 2026-08-01 — Lua callable-codeblock inert construction is signoff-complete
 
 Leaf `FUTURE-PARITY-BACKLOG.11.8.1` is active from clean audit commit `7e02ecee` (121/300). Lua now recognizes

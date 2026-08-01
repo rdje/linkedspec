@@ -33,7 +33,7 @@ The older helper spellings `declare(...)`, declaration aliases, `assign(...)`, `
 `s(...)` / `a(...)` / `h(...)` are retired from current `.spec` authoring. The Perl reference and Rust backend now
 diagnose the remaining retired helper calls instead of executing them successfully.
 
-Perl, Rust, Dart, and Julia support explicit deferred codeblock values:
+Perl, Rust, Dart, Julia, and Lua support explicit deferred codeblock values:
 
 ```text
 decorate = {|value| return(cat(value, "!")) }
@@ -44,10 +44,10 @@ result = decorate("ready")
 arguments left-to-right, temporarily binds copied fixed parameters and an optional final `...rest` array, executes
 against the caller's current nonparameter working variables, restores parameter names, and returns the block-local
 result. Standalone calls discard the result but retain other mutations. Governed helpers and registered user
-functions keep precedence over same-named variables. This explicit literal/invocation surface is current on Perl,
-Rust, Dart, and Julia. Lua now constructs and transports the same inert eight-field value on PUC Lua and LuaJIT,
-including exact Unicode-character spans and semantic signature state, but does not yet invoke an ordinarily bound
-value. All four complete implementations also accept a final contextual codeblock only where callable metadata
+functions keep precedence over same-named variables. This explicit literal/invocation surface is current on all
+five backends, including both PUC Lua and LuaJIT. Lua preserves the same inert eight-field value, Unicode-character
+spans, semantic signature state, dynamic caller context, typed result access, and portable failures. All five
+implementations also accept a final contextual codeblock only where callable metadata
 declares it:
 
 ```text
@@ -59,9 +59,9 @@ same = apply("ready", { return(cat(value, "!")) })
 The declaration is only `callback: codeblock`; it does not repeat the callback's argument list. Both contextual
 forms create a zero-positional codeblock that reads dynamic context. An explicit `{|value| ...}` keeps and enforces
 its own signature, and `{ "key" : value }` remains an harray rather than being promoted by position. This generic
-final-block behavior is current on Perl, Rust, Dart, and Julia. Lua construction is current under `.11.8.1`;
-bound invocation, route proof, and five-backend admission stay under `.11.8.2-.4`. Four-backend recurring/public
-no-drift remains complete under `.11.7` until that final admission.
+final-block behavior is current on Perl, Rust, Dart, Julia, and Lua. Lua construction and bound invocation are
+current under `.11.8.1-.2`; independently loaded emitted-route proof and five-backend admission remain
+`.11.8.3-.4`. Four-backend recurring/public no-drift remains complete under `.11.7` until final admission.
 
 The LinkedSpec Book under `docs/linkedspec-book/src/` is the current user-facing surface for new examples. The
 repo-root `USER_GUIDE_ActionIR_*.md` files are still useful implementation and migration references, but many of

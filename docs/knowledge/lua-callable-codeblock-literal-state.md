@@ -16,6 +16,7 @@ date: 2026-08-01
 status: current
 tags: [lua, luajit, actionir, codeblock, callable, generated-source, semantic-introspection, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.11.8.1 adds exact {| recognition, the neutral eight-field literal/fixed-rest signature record, containing Unicode-character-coordinate literal/body spans, nine malformed codes, inert runtime and user-function copies, compiled/generated/emitted-effective-state preservation, and semantic codeblock shapes. One focused consumer passes 168 assertions on PUC Lua and LuaJIT; complete Lua, neutral+20, KM 777/6,301, mdBook, all seven doctrines, canonical Phase 0 1,031/1,031, and the four-backend callable matrix pass."
+evidence_update_2026_08_01_invocation: "FUTURE-PARITY-BACKLOG.11.8.2 now invokes this retained state through one post-static dynamic caller-frame executor on PUC Lua and LuaJIT; construction remains inert and unchanged."
 reverify: "bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && bash tools/run_lua_project_data.sh puc lua/test/callable_codeblock_literal_contract_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/callable_codeblock_literal_contract_test.lua && bash tools/run_lua_local.sh"
 ---
 
@@ -42,11 +43,13 @@ payload goes back through `spec_ast.from_json`, the ordinary compiler, and the s
 projection reports `kind = codeblock` plus exact fixed/rest signature data. No Lua closure, captured environment,
 route-specific codec, or second executor exists.
 
-Construction is current on both PUC Lua and LuaJIT. General bound invocation such as `cb(args)`, call-result
-access, portable call failures, and explicit-codeblock recursion remain `FUTURE-PARITY-BACKLOG.11.8.2`;
-independently loaded emitted execution remains `.11.8.3`; recurring/public admission remains `.11.8.4`.
+Construction and general bound invocation such as `cb(args)` are current on both PUC Lua and LuaJIT. Call-result
+access, portable call failures, and ordered recursion use the same interpreter and are documented in
+[[lua-callable-codeblock-dynamic-invocation]]. Independently loaded emitted execution remains `.11.8.3`;
+recurring/public admission remains `.11.8.4`.
 
 Related facts: [[callable-codeblock-literal-contract]], [[lua-callable-codeblock-typed-audit]],
-[[lua-explicit-callable-codeblock-gap]], [[lua-contextual-user-function-codeblock-runtime]],
+[[lua-explicit-callable-codeblock-gap]], [[lua-callable-codeblock-dynamic-invocation]],
+[[lua-contextual-user-function-codeblock-runtime]],
 [[julia-callable-codeblock-literal-state]], [[dart-callable-codeblock-literal-state]],
 [[rust-callable-codeblock-literal-state]].

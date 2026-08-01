@@ -140,7 +140,7 @@ collect("head")               # prefix = "head", items = []
 collect("head", "a", "b")   # prefix = "head", items = ["a", "b"]
 ```
 
-### Callable-codeblock literal and dynamic call (five-backend construction; four-backend invocation)
+### Callable-codeblock literal and dynamic call (five-backend construction and invocation)
 
 ADR 0031 adopts callable literals; ADR 0032 adds a final contextual-codeblock parameter declaration:
 
@@ -189,8 +189,10 @@ zero-positional record executes through the same evaluator in native/reconstruct
 eager blocks, controls, explicit signatures, and harrays remain distinct. Four-backend recurring/public closeout
 is complete through `.11.7.1-.2`. Lua `.11.8.1` now preserves the same exact literal, nullable fixed/final-rest
 signature, typed deferred body, source text, containing Unicode-character spans, inert runtime/function copies,
-compiled/generated/emitted effective state, and semantic codeblock shape on PUC Lua and LuaJIT. Lua general bound
-calls remain `.11.8.2`, so complete invocation behavior is not yet universally portable.
+compiled/generated/emitted effective state, and semantic codeblock shape on PUC Lua and LuaJIT. Lua `.11.8.2`
+adds the same ordered dynamic caller-frame invocation, copied/restored fixed/rest bindings, live nonparameters,
+typed result access, static precedence, exact failures, and ordered recursion rejection through the shared
+interpreter. Independently loaded emitted-route proof and five-backend admission remain `.11.8.3-.4`.
 
 Arguments evaluate once from left to right before any parameter is bound. Nested arrays/harrays, booleans,
 `undef`, and codeblocks remain individual rest-array values rather than being flattened or coerced.

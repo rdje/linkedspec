@@ -526,6 +526,9 @@ local function resolver(function_registry)
       visit_expr(expr.index)
     elseif kind == "nested_access" then
       visit_access_segments(expr.segments)
+    elseif kind == "value_access" then
+      visit_expr(expr.receiver)
+      visit_access_segments(expr.segments)
     elseif kind == "control_switch" then
       visit_control(expr)
       if #expr.cases > 0 or expr.default then

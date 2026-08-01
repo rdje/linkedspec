@@ -721,11 +721,12 @@ Cargo, Dart, and Julia wrappers; Perl runs inside that managed boundary with amb
 Canonical local CI always requires and syntax-checks the driver. Set
 `LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1` to execute the all-toolchain composition. The checker rejects 17
 topology and status mutations, including missing/reordered roles, stale paths, project-data bypass, missing or
-duplicated canonical execution, and premature Lua/five-backend claims, plus three public inventory/marker/denylist
-omissions. Perl, Rust, Dart, and Julia are current; Lua contextual forms are current, while Lua explicit literal/
-general bound-call parity remains `.11.8`. Four-backend public no-drift covers 23 current-facing documents.
+duplicated canonical execution, and premature Lua/five-backend admission claims, plus three public inventory/
+marker/denylist omissions. Perl, Rust, Dart, and Julia are admitted; Lua construction and invocation are now
+focused-current under `.11.8.1-.2` but intentionally remain outside this recurring driver until `.11.8.4`.
+Four-backend public no-drift covers 23 current-facing documents.
 
-Lua's focused construction consumer is already part of the complete Lua gate on both ABIs:
+Lua's focused construction/invocation consumer is already part of the complete Lua gate on both ABIs:
 
 ```bash
 bash tools/run_lua_project_data.sh puc lua/test/callable_codeblock_literal_contract_test.lua
@@ -733,10 +734,10 @@ bash tools/run_lua_project_data.sh luajit lua/test/callable_codeblock_literal_co
 bash tools/run_lua_local.sh
 ```
 
-It passes 168 assertions per ABI for exact literal/signature/body/span records, nine malformed codes, inert copy,
-function/compiled/generated/emitted-effective-state transport, deferred scans, and semantic signatures. This does
-not add Lua to the recurring driver: `.11.8.2-.3` still own invocation and byte-fresh emitted execution, and
-`.11.8.4` alone owns five-backend recurring/public admission.
+It passes 232 assertions per ABI for exact literal/signature/body/span records, inert copy/transport, dynamic caller
+context, static precedence, declared-final equivalence, ordered copied fixed/rest values, result access/chaining,
+and every neutral failure/recursion field. This does not add Lua to the recurring driver: `.11.8.3` still owns
+byte-fresh emitted execution, and `.11.8.4` alone owns five-backend recurring/public admission.
 
 ## Hosted GitHub Actions status
 

@@ -477,21 +477,21 @@ local function parser(root_source)
   local function parse_arguments(payload, payload_start)
     local args = {}
     for _, part in ipairs(split_top_level(payload, payload_start, { [","] = true })) do
-      local expression = parse_expression(part.text, part.start)
-      local equals = find_assignment_equals(part.text)
-      if equals and expression.kind ~= "assign_scalar" then
-        local name = part.text:sub(1, equals - 1):match("^%s*([A-Za-z_][A-Za-z0-9_]*)%s*$")
+      local colon = find_top_level_token(part.text, ":")
+      local keyword_added = false
+      if colon then
+        local name = part.text:sub(1, colon - 1):match("^%s*([A-Za-z_][A-Za-z0-9_]*)%s*$")
         if name then
           local value_text, value_start = trim_offsets(
-            part.text:sub(equals + 1),
-            part.start + equals
+            part.text:sub(colon + 1),
+            part.start + colon
           )
           args[#args + 1] = action_ast.keyword_argument(name, parse_expression(value_text, value_start))
-        else
-          args[#args + 1] = action_ast.positional_argument(expression)
+          keyword_added = true
         end
-      else
-        args[#args + 1] = action_ast.positional_argument(expression)
+      end
+      if not keyword_added then
+        args[#args + 1] = action_ast.positional_argument(parse_expression(part.text, part.start))
       end
     end
     return args
@@ -517,25 +517,12 @@ local function parser(root_source)
     }
   end
 
-  local function parse_access(text, start_byte)
-    local prefix, name = text:match("^(%$?)([A-Za-z_][A-Za-z0-9_]*)")
-    if not name then
-      return nil
-    end
-    local position = #prefix + #name + 1
-    position = skip_space(text, position)
-    if position > #text then
-      return action_ast.expr("variable", text, span(start_byte, start_byte + #text), { name = name })
-    end
+  local function parse_access_segments(text, position, start_byte)
     local segments = {}
     while position <= #text do
-      if text:sub(position, position) ~= "[" then
-        return nil
-      end
+      if text:sub(position, position) ~= "[" then return nil end
       local close_position = find_matching(text, position, "[", "]")
-      if not close_position then
-        return nil
-      end
+      if not close_position then return nil end
       local payload, payload_start = trim_offsets(
         text:sub(position + 1, close_position - 1),
         start_byte + position
@@ -559,6 +546,18 @@ local function parser(root_source)
       end
       position = skip_space(text, close_position + 1)
     end
+    return segments
+  end
+
+  local function parse_access(text, start_byte)
+    local prefix, name = text:match("^(%$?)([A-Za-z_][A-Za-z0-9_]*)")
+    if not name then return nil end
+    local position = skip_space(text, #prefix + #name + 1)
+    if position > #text then
+      return action_ast.expr("variable", text, span(start_byte, start_byte + #text), { name = name })
+    end
+    local segments = parse_access_segments(text, position, start_byte)
+    if segments == nil then return nil end
     if #segments == 1 and segments[1].kind == "index" then
       return action_ast.expr("indexed_var", text, span(start_byte, start_byte + #text), {
         name = name,
@@ -793,6 +792,24 @@ local function parser(root_source)
     return action_ast.expr("call", text, span(start_byte, start_byte + #text), fields)
   end
 
+  local function parse_value_access(text, start_byte)
+    local open_position = text:find("(", 1, true)
+    if open_position == nil then return nil end
+    local close_position = find_matching(text, open_position, "(", ")")
+    if close_position == nil or close_position == #text then return nil end
+    local position = skip_space(text, close_position + 1)
+    if text:sub(position, position) ~= "[" then return nil end
+
+    local receiver = parse_call(text:sub(1, close_position), start_byte)
+    if receiver == nil then return nil end
+    local segments = parse_access_segments(text, position, start_byte)
+    if segments == nil then return nil end
+    return action_ast.expr("value_access", text, span(start_byte, start_byte + #text), {
+      receiver = receiver,
+      segments = segments,
+    })
+  end
+
   parse_expression = function(source, absolute_start)
     local text, start_byte = trim_offsets(source, absolute_start)
     if text == "" then return raw_expr(text, start_byte, "empty_expression") end
@@ -867,6 +884,8 @@ local function parser(root_source)
     end
     local control = parse_control(text, start_byte)
     if control then return control end
+    local value_access = parse_value_access(text, start_byte)
+    if value_access then return value_access end
     local call = parse_call(text, start_byte)
     if call then return call end
     local access = parse_access(text, start_byte)

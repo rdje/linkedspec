@@ -548,7 +548,7 @@ Cross-backend output routing/formatting is complete under `FUTURE-PARITY-BACKLOG
 arity, generated/primary projection, recurring admission, and public no-drift are complete on all five backends
 under `FUTURE-PARITY-BACKLOG.5.2`.
 
-## Explicit callable-codeblock construction
+## Explicit callable-codeblock construction and invocation
 
 Lua now recognizes exact `{|params| body }` and `{|| body }` expressions as deferred typed values on both PUC
 Lua and LuaJIT:
@@ -573,16 +573,37 @@ the emitted effective-`SpecFile` payload, and semantic binding projection preser
 the original containing spans. Deferred bodies are not scanned as eager helper dependencies or removed aggregate
 selectors. No Lua closure, captured environment, route-specific codec, or second executor is created.
 
-General bound invocation such as `callback("x")`, call-result key/index access, callable keyword/arity failures,
-and explicit-codeblock recursion remain `FUTURE-PARITY-BACKLOG.11.8.2-.3`; final recurring/public admission remains
-`.11.8.4`. The focused construction command is:
+An ordinary bound value is callable with `callback(args)` after governed controls/helpers and registered user
+functions have had precedence:
+
+```text
+state = ""
+append_state = {|value| state = cat(state, value); return(state) }
+append_state("a")
+second = append_state("b")
+
+collector = {|prefix, ...items| return({ "prefix" : prefix, "items" : items }) }
+count = collector("p", "a", "b")["items"].length()
+```
+
+Arguments evaluate once from left to right. Copied fixed/rest parameters temporarily replace every same-name
+scalar/array/harray store and restore in reverse order on success or failure; nonparameter caller state stays live,
+so `state` above becomes `"ab"`. `return(...)` is invocation-local, a final expression supplies the result, and a
+standalone call discards only its result. Explicit literals and declared final-codeblock values use the same
+interpreter and ordered recursion stack.
+
+Only `callback(value: "x")` creates typed keyword data, which callable codeblocks reject. `callback(value = "x")`
+remains a positional assignment expression. Arity, keyword, bound-non-codeblock, unknown-body-helper, and direct/
+mutual recursion failures expose the neutral `callable_name`, `expected`, `got`, `value_kind`, `name`, and `cycle`
+fields. Independently loaded emitted execution remains `FUTURE-PARITY-BACKLOG.11.8.3`; final recurring/public
+admission remains `.11.8.4`. The focused command is:
 
 ```bash
 bash tools/run_lua_project_data.sh puc lua/test/callable_codeblock_literal_contract_test.lua
 bash tools/run_lua_project_data.sh luajit lua/test/callable_codeblock_literal_contract_test.lua
 ```
 
-The same file runs under both ABIs in `bash tools/run_lua_local.sh` and currently passes 168 assertions per ABI.
+The same file runs under both ABIs in `bash tools/run_lua_local.sh` and currently passes 232 assertions per ABI.
 
 ## Native and Generated logical helpers
 
@@ -630,8 +651,8 @@ Fixed-v1 registered-function execution `.5.1.2` raises it to 133/133.
 Exact variadic-v2 signature-state preservation `.5.1.3.1` raises it to 136/136.
 Fresh typed variadic-v2 execution `.5.1.3.2` raises it to 139/139.
 Final contextual-codeblock metadata `.5.1.4.1` raises it to 142/142; dynamic contextual execution `.5.1.4.2`
-raises it to 146/146. Explicit callable codeblock construction is current under
-`FUTURE-PARITY-BACKLOG.11.8.1`, while general bound invocation and final admission remain `.11.8.2-.4`;
+raises it to 146/146. Explicit callable codeblock construction and invocation are current under
+`FUTURE-PARITY-BACKLOG.11.8.1-.2`, while emitted-route proof and final admission remain `.11.8.3-.4`;
 four-backend recurring/public no-drift is complete under `.11.7`. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,
 and implicit child-push expression-result drift remain explicitly owned by `FUTURE-PARITY-BACKLOG.5` rather than
@@ -643,7 +664,7 @@ Ordinary assignment is eager: `callback = { return("later") }` stores the scalar
 codeblock. A trailing block remains structural until its signature-governed callable consumes it. For example,
 `with("x") { return(value) }` and `with("x", { return(value) })` are the same built-in call, as are
 `"x".with() { return(value) }` and `"x".with({ return(value) })`. Explicit first-class construction uses
-`{|params| ...}`; calling the resulting ordinary variable remains the next Lua implementation leaf.
+`{|params| ...}`; calling the resulting ordinary variable now uses the shared dynamic caller-frame executor.
 
 A user function declares the same contextual intent explicitly:
 
@@ -661,7 +682,8 @@ dynamic frame, so `value` above is the copied function parameter. Writes to othe
 later statements in that function invocation; all function-frame stores restore when it returns. A keyed brace
 value remains a harray and fails the declared slot rather than being promoted. Registered functions and governed
 helpers retain static precedence over a colliding callback-parameter name. Explicit `{|params| ...}` values and
-general bound codeblock calls are not part of this Lua milestone.
+general bound codeblock calls now share the same executor; the contextual spelling remains zero-positional unless
+an explicit literal supplies its own signature.
 Typed current-rule accumulators and otherwise-absent compiled-rule arrays share the bare binding seam. Action-edge
 `.push`/`.push(target)` and block `push(Child[, target][, index])` reuse the cached child result, select zero-based
 items when requested, and retain neutral wrong-kind diagnostics.

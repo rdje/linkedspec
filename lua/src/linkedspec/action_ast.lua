@@ -199,6 +199,8 @@ find_removed_aggregate_selector = function(value)
     return find_removed_aggregate_selector(value.index)
   elseif kind == "nested_access" then
     return find_in_segments(value.segments)
+  elseif kind == "value_access" then
+    return find_removed_aggregate_selector(value.receiver) or find_in_segments(value.segments)
   elseif kind == "array_literal" then
     for _, item in ipairs(value.items or {}) do
       local selector = find_removed_aggregate_selector(item)

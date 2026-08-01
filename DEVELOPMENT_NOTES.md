@@ -1,5 +1,37 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`FUTURE-PARITY-BACKLOG.11.8.2` — unify Lua explicit/contextual dynamic execution): the parser's
+  shared access-segment owner now accepts a call expression as `value_access.receiver`, and only a top-level colon
+  in a call argument constructs `ActionArgument(argument_kind = "keyword")`. Removing the older unreachable
+  equals-keyword branch makes the accepted distinction structural: `cb(value = "x")` parses the assignment first
+  and remains positional.
+
+  Bound dispatch is deliberately last. Every governed helper/control and registered function resolves before an
+  unknown authored name may consult the three explicit stores. A bound scalar/array/harray receives
+  `value_not_callable`; an absent name inside an active codeblock receives `unknown_helper`; ordinary unknown calls
+  retain the existing backend failure. This prevents dynamic values from shadowing the static language surface.
+
+  The new executor is a namespace table rather than several chunk-local functions because the first PUC run
+  crossed Lua's 200-local compilation limit. That representation keeps one interpreter and works unchanged on
+  LuaJIT. It validates keywords, evaluates/copies positionals once in order, checks fixed/rest arity, rejects an
+  ordered repeated active name, builds fixed/rest bindings, and calls `runtime_scoped_binding.run_frame`. That
+  existing owner clears and restores all three parameter stores in reverse order on both success and failure;
+  nonparameter stores remain the caller's live tables. The retained `body_ast` runs through `evaluate_block_value`,
+  so local return, final expression, discard, declared-final values, and explicit literals share one mechanism.
+
+  Focused RED first stopped at the absent call-result receiver. Final focused proof is 232 assertions per ABI.
+  Complete Lua initially exposed two contextual-era message/string-cycle expectations; updating those regression
+  assertions to the neutral structured fields leaves behavior exact and makes all 177 TAP groups green on both
+  ABIs, with CLI 66x2, corpus 105/105, and 16 storage owners. `.11.8.3` retains byte-fresh emitted-route identity;
+  `.11.8.4` retains recurring/public/capability admission.
+
+  Signoff is green at neutral 7/11/9/7/4/8+20, callable signatures 3/9/7, capability conformance 80/0/0,
+  Knowledge Map 778/6,311, mdBook 79/14,028 KiB, and all seven doctrines. The first canonical run's status 71 was
+  traced to the outer Codex sandbox denying the repository's nested `sandbox-exec`, not a project containment
+  failure. The identical authorized rerun passes the relocated six-family process driver, moved-root/outside-CWD
+  proof, CLI 66x2, RAM 51%, Phase 0 1,031/1,031 in 801 seconds, and the exact four-backend callable matrix before
+  the local-CI marker.
+
 - 2026-08-01 (`FUTURE-PARITY-BACKLOG.11.8.1` — preserve inert data through existing Lua authorities): exact `{|`
   recognition belongs before the existing brace classifier, not in runtime dispatch. `action_ast` now owns one
   nullable fixed/final-rest `ActionCallableSignature` constructor and one explicit literal projection whose JSON

@@ -34,15 +34,16 @@
 > v2. The repeated-action recurring gate is `tools/check_repeated_action_result_five_backend.sh`; its public
 > rollout is closed at 8 complete / 0 pending.
 
-> **Active Lua callable-codeblock handoff:** signoff-complete `FUTURE-PARITY-BACKLOG.11.8.1` now preserves exact
+> **Active Lua callable-codeblock handoff:** `FUTURE-PARITY-BACKLOG.11.8.1-.2` now preserve and invoke exact
 > `{|params| body }` / `{|| body }` as the neutral inert eight-field value on PUC Lua and LuaJIT. Exact signature,
 > typed deferred body, source/body text and containing Unicode-character spans survive copies, ordinary user
 > functions, compiled/generated/emitted effective state, and semantic projection without execution or capture.
-> Lua must next add post-static bound invocation through its existing scoped-binding/interpreter seams,
-> then prove the unchanged value through effective-`SpecFile` reconstruction and byte-fresh emitted modules on PUC
-> Lua and LuaJIT. Only the final recurring/public leaf may admit Lua. Exact colon keywords are typed only for
-> governed rejection; `name = value` remains a positional assignment expression. No closure, captured environment,
-> second codec, or second executor is part of the handoff.
+> Post-static bound invocation now reuses the existing scoped binder/interpreter for ordered copied arguments,
+> live caller nonparameters, local results/access/chaining, exact failures, and ordered recursion. Lua must next
+> prove the unchanged value/executor through effective-`SpecFile` reconstruction and byte-fresh emitted modules on
+> both ABIs. Only the final recurring/public leaf may admit Lua. Colon keywords are typed only for governed
+> rejection; `name = value` remains positional. No closure, captured environment, second codec, or second executor
+> is part of the handoff.
 
 This chapter is the **single entry point** for anyone building a LinkedSpec backend
 in a new language (Rust, Dart, Julia, Lua, etc.). It links every specification, contract,
@@ -1005,8 +1006,8 @@ harray mutation are implemented and public-result guarded. Codeblock/control/tre
 now split: `.1` eager expression blocks, `.2` inline controls, `.3` statement controls, `.4` current built-in
 contextual blocks/`with`, `.5` deterministic callbacks, and `.6` closeout. General user-function final blocks are
 complete through `.5.1`; four-backend recurring/public closeout is complete under `.11.7`.
-Lua inert explicit callable-codeblock construction is current under `FUTURE-PARITY-BACKLOG.11.8.1`; general
-bound invocation, emitted execution identity, and final admission remain `.11.8.2-.4`.
+Lua explicit callable-codeblock construction and general bound invocation are current under
+`FUTURE-PARITY-BACKLOG.11.8.1-.2`; emitted execution identity and final admission remain `.11.8.3-.4`.
 Eager blocks plus lazy inline controls pass 105/105: ordinary no-pair braces yield their last/local-return
 value, non-final statement mutation is preserved, harray braces retain precedence, and yielded values enter
 receiver dispatch. Inline `if`/`switch` evaluates only selected payloads, keeps false/null, evaluates switch

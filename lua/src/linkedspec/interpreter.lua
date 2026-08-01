@@ -210,6 +210,12 @@ runtime_diagnostic = function(engine, fields)
     "entry_rule",
     "option_name",
     "helper_name",
+    "callable_name",
+    "expected",
+    "got",
+    "value_kind",
+    "name",
+    "cycle",
     "actual_arity",
     "expected_arity",
     "target_rule",
@@ -279,8 +285,7 @@ local function context(
     arrays = {},
     harrays = {},
     active_user_functions = {},
-    user_function_parameter_kinds = nil,
-    active_contextual_codeblocks = {},
+    active_codeblocks = {},
     mark_buckets = {},
     active = {},
     lifecycle_events = {},
@@ -322,7 +327,7 @@ local evaluate_block_value
 local execute_block
 local invalid_helper_arity
 local execute_user_function
-local execute_contextual_codeblock
+local callable_codeblock = {}
 
 local function argument_expr(arg) return arg.value end
 
@@ -340,6 +345,13 @@ local function lookup_binding(ctx, name)
   if frame and frame.label == name then return frame.values, "implicit_accumulator" end
   if ctx.compiled_rules[name] then return json.array(), "implicit_rule_accumulator" end
   return json.null, nil
+end
+
+function callable_codeblock.lookup_binding(ctx, name)
+  if ctx.variables[name] ~= nil then return ctx.variables[name], true end
+  if ctx.arrays[name] ~= nil then return ctx.arrays[name], true end
+  if ctx.harrays[name] ~= nil then return ctx.harrays[name], true end
+  return json.null, false
 end
 
 local function bind_scalar(ctx, name, value)
@@ -2326,6 +2338,165 @@ local function evaluate_cursor_control(name, expr, ctx)
   return json.null
 end
 
+function callable_codeblock.raise_failure(engine, ctx, name, detail, fields)
+  fields = fields or {}
+  local rule_label = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule
+  fields.stage = "callable_codeblock_invocation"
+  fields.helper_name = fields.helper_name or name
+  fields.rule_label = rule_label
+  fields.handler_source_label = fields.handler_source_label or "lua_runtime:codeblock:" .. name
+
+  local diagnostic_fields = {
+    stage = fields.stage,
+    summary = "Lua callable codeblock invocation failed",
+    detail = detail,
+    top_rule = ctx.top_rule,
+    rule_label = rule_label,
+    handler_source_label = fields.handler_source_label,
+  }
+  for _, field_name in ipairs({
+    "code",
+    "helper_name",
+    "callable_name",
+    "expected",
+    "got",
+    "value_kind",
+    "name",
+    "cycle",
+  }) do
+    if fields[field_name] ~= nil then diagnostic_fields[field_name] = fields[field_name] end
+  end
+  fields.diagnostic = runtime_diagnostic(engine, diagnostic_fields)
+  fail(detail, fields)
+end
+
+function callable_codeblock.signature(value)
+  if action_ast.node_type(value) ~= "ActionExpr" then return nil end
+  if value.kind == "codeblock_literal" or value.kind == "codeblock_argument" then
+    return value.signature
+  elseif value.kind == "block_value" then
+    return action_ast.contextual_callable_signature()
+  end
+  return nil
+end
+
+function callable_codeblock.body(value)
+  if value.kind == "block_value" then return value.block end
+  return value.body_ast or value.block
+end
+
+function callable_codeblock.execute(engine, expr, value, ctx, accumulator, edge_state)
+  local name = expr.name
+  local signature = callable_codeblock.signature(value)
+  if signature == nil then
+    local value_kind = M.runtime_value_kind(value)
+    local detail = "value_not_callable callable_name=" .. json.encode(name) ..
+      " value_kind=" .. json.encode(value_kind) ..
+      " rule_label=" .. json.encode(ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule)
+    callable_codeblock.raise_failure(engine, ctx, name, detail, {
+      code = "value_not_callable",
+      callable_name = name,
+      value_kind = value_kind,
+    })
+  end
+
+  local keyword_count = 0
+  for _, argument in ipairs(expr.args) do
+    if argument.argument_kind == "keyword" then keyword_count = keyword_count + 1 end
+  end
+  if keyword_count > 0 then
+    local expected = "positional arguments"
+    local detail = "codeblock_keyword_arguments_unsupported callable_name=" .. json.encode(name) ..
+      " expected=" .. json.encode(expected) .. " got=" .. keyword_count ..
+      " rule_label=" .. json.encode(ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule)
+    callable_codeblock.raise_failure(engine, ctx, name, detail, {
+      code = "codeblock_keyword_arguments_unsupported",
+      callable_name = name,
+      expected = expected,
+      got = keyword_count,
+    })
+  end
+
+  local values = {}
+  for _, argument in ipairs(expr.args) do
+    values[#values + 1] = copy_value(evaluate_expr(
+      engine,
+      argument_expr(argument),
+      ctx,
+      accumulator,
+      edge_state
+    ))
+  end
+
+  local minimum = signature.min_arity
+  local maximum = signature.max_arity
+  local arity_matches = #values >= minimum and (maximum == json.null or #values <= maximum)
+  if not arity_matches then
+    local expected = maximum == minimum and
+      ("exactly " .. minimum) or ("at least " .. minimum)
+    local detail = "codeblock_arity_mismatch callable_name=" .. json.encode(name) ..
+      " expected=" .. json.encode(expected) .. " got=" .. #values ..
+      " rule_label=" .. json.encode(ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule)
+    callable_codeblock.raise_failure(engine, ctx, name, detail, {
+      code = "codeblock_arity_mismatch",
+      callable_name = name,
+      expected = expected,
+      got = #values,
+    })
+  end
+
+  local active_index
+  for index, active_name in ipairs(ctx.active_codeblocks) do
+    if active_name == name then
+      active_index = index
+      break
+    end
+  end
+  if active_index ~= nil then
+    local cycle = json.array()
+    for index = active_index, #ctx.active_codeblocks do
+      cycle[#cycle + 1] = ctx.active_codeblocks[index]
+    end
+    cycle[#cycle + 1] = name
+    local detail = "codeblock_recursion_unsupported callable_name=" .. json.encode(name) ..
+      " cycle=" .. json.encode(cycle) ..
+      " rule_label=" .. json.encode(ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule)
+    callable_codeblock.raise_failure(engine, ctx, name, detail, {
+      code = "codeblock_recursion_unsupported",
+      callable_name = name,
+      cycle = cycle,
+    })
+  end
+
+  local bindings = {}
+  for index, parameter in ipairs(signature.positional_params) do
+    bindings[#bindings + 1] = { name = parameter, value = values[index] }
+  end
+  if signature.rest_param ~= json.null then
+    local rest = json.array()
+    for index = minimum + 1, #values do rest[#rest + 1] = values[index] end
+    bindings[#bindings + 1] = { name = signature.rest_param, value = rest }
+  end
+
+  local body = callable_codeblock.body(value)
+  if action_ast.node_type(body) ~= "ActionBlock" then
+    fail("runtime callable codeblock does not retain a typed body", {
+      code = "codeblock_body_ast_missing",
+      helper_name = name,
+    })
+  end
+
+  ctx.active_codeblocks[#ctx.active_codeblocks + 1] = name
+  local executed, result = pcall(function()
+    return runtime_scoped_binding.run_frame(ctx, bindings, copy_value, function()
+      return evaluate_block_value(engine, body, ctx, json.array(), nil)
+    end)
+  end)
+  ctx.active_codeblocks[#ctx.active_codeblocks] = nil
+  if not executed then error(result, 0) end
+  return copy_value(result)
+end
+
 local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
   if engine.compiled_spec.function_registry:has_name(expr.name) then
     return execute_user_function(engine, expr, ctx, accumulator, edge_state)
@@ -2510,9 +2681,20 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
     local value = evaluate_match_helper(engine, name, expr, ctx, accumulator, edge_state)
     if value ~= nil then return value end
   end
-  if ctx.user_function_parameter_kinds ~= nil and
-      ctx.user_function_parameter_kinds[expr.name] == "codeblock" then
-    return execute_contextual_codeblock(engine, expr, ctx)
+  if not action_contracts.is_known_action_ir_call_name(expr.name) then
+    local bound_value, present = callable_codeblock.lookup_binding(ctx, expr.name)
+    if present then
+      return callable_codeblock.execute(engine, expr, bound_value, ctx, accumulator, edge_state)
+    end
+    if #ctx.active_codeblocks > 0 then
+      local detail = "unknown_helper name=" .. json.encode(expr.name) ..
+        " rule_label=" .. json.encode(ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule)
+      callable_codeblock.raise_failure(engine, ctx, expr.name, detail, {
+        code = "unknown_helper",
+        name = expr.name,
+        handler_source_label = "lua_runtime",
+      })
+    end
   end
   fail("unsupported runtime helper '" .. tostring(name) .. "'", { helper_name = name })
 end
@@ -2565,6 +2747,23 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
   end
   if kind == "nested_access" then
     local value = lookup_binding(ctx, expr.base)
+    for _, segment in ipairs(expr.segments) do
+      local key
+      if segment.kind == "key" then
+        key = segment.value
+      else
+        key = runtime_access_index(evaluate_expr(engine, segment.expr, ctx, accumulator, edge_state))
+      end
+      if access_segment_matches(value, segment) then
+        value = read_index(value, key)
+      else
+        value = json.null
+      end
+    end
+    return copy_value(value)
+  end
+  if kind == "value_access" then
+    local value = evaluate_expr(engine, expr.receiver, ctx, accumulator, edge_state)
     for _, segment in ipairs(expr.segments) do
       local key
       if segment.kind == "key" then
@@ -3369,66 +3568,6 @@ local function staged_user_function_body(engine, entry, ctx)
   return block_or_error
 end
 
-execute_contextual_codeblock = function(engine, expr, ctx)
-  local keyword_count = 0
-  for _, argument in ipairs(expr.args) do
-    if argument.argument_kind == "keyword" then keyword_count = keyword_count + 1 end
-  end
-  if keyword_count > 0 or #expr.args ~= 0 then
-    fail(
-      "contextual codeblock '" .. expr.name .. "' expects exactly 0 positional arguments, got " .. #expr.args,
-      {
-        code = "codeblock_arity_mismatch",
-        stage = "user_function_body",
-        expected = "exactly 0",
-        got = #expr.args,
-        helper_name = expr.name,
-      }
-    )
-  end
-
-  local value = ctx.variables[expr.name]
-  if action_ast.node_type(value) ~= "ActionExpr" or
-      (value.kind ~= "codeblock_argument" and value.kind ~= "block_value") then
-    fail(
-      "contextual codeblock parameter '" .. expr.name .. "' is not a codeblock",
-      {
-        code = "final_argument_not_codeblock",
-        stage = "user_function_body",
-        helper_name = expr.name,
-        value_kind = value == nil and "missing" or M.runtime_value_kind(value),
-      }
-    )
-  end
-  for _, active_name in ipairs(ctx.active_contextual_codeblocks) do
-    if active_name == expr.name then
-      local cycle = expr.name .. " -> " .. expr.name
-      fail(
-        "contextual codeblock recursion is not supported: " .. cycle,
-        {
-          code = "codeblock_recursion_unsupported",
-          stage = "user_function_body",
-          helper_name = expr.name,
-          cycle = cycle,
-        }
-      )
-    end
-  end
-
-  ctx.active_contextual_codeblocks[#ctx.active_contextual_codeblocks + 1] = expr.name
-  local executed, result = pcall(
-    evaluate_block_value,
-    engine,
-    value.block,
-    ctx,
-    json.array(),
-    nil
-  )
-  ctx.active_contextual_codeblocks[#ctx.active_contextual_codeblocks] = nil
-  if not executed then error(result, 0) end
-  return copy_value(result)
-end
-
 execute_user_function = function(engine, expr, ctx, accumulator, edge_state)
   expr = select(1, action_contracts.normalize_contextual_codeblock_call(
     "function",
@@ -3490,14 +3629,10 @@ execute_user_function = function(engine, expr, ctx, accumulator, edge_state)
   local saved_arrays = ctx.arrays
   local saved_harrays = ctx.harrays
   local saved_active_user_functions = ctx.active_user_functions
-  local saved_parameter_kinds = ctx.user_function_parameter_kinds
-  local saved_active_contextual_codeblocks = ctx.active_contextual_codeblocks
   ctx.variables = frame_or_error.variables
   ctx.arrays = frame_or_error.arrays
   ctx.harrays = frame_or_error.harrays
   ctx.active_user_functions = frame_or_error.active_path
-  ctx.user_function_parameter_kinds = frame_or_error.parameter_kinds
-  ctx.active_contextual_codeblocks = {}
 
   local executed, value_or_error = pcall(
     evaluate_block_value,
@@ -3511,8 +3646,6 @@ execute_user_function = function(engine, expr, ctx, accumulator, edge_state)
   ctx.arrays = saved_arrays
   ctx.harrays = saved_harrays
   ctx.active_user_functions = saved_active_user_functions
-  ctx.user_function_parameter_kinds = saved_parameter_kinds
-  ctx.active_contextual_codeblocks = saved_active_contextual_codeblocks
 
   if not executed then
     if getmetatable(value_or_error) == ERROR_MT then
@@ -4287,6 +4420,12 @@ function M.to_json(value)
       "entry_rule",
       "option_name",
       "helper_name",
+      "callable_name",
+      "expected",
+      "got",
+      "value_kind",
+      "name",
+      "cycle",
       "actual_arity",
       "expected_arity",
       "target_rule",

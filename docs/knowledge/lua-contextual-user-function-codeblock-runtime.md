@@ -13,6 +13,7 @@ date: 2026-07-15
 status: current
 tags: [lua, functions, codeblock, dynamic-scope, diagnostics, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.5.1.4.2 passes 146/146 on PUC Lua and LuaJIT. Focused tests prove both contextual spellings, current-frame reads/writes, outer restoration, result chaining, static helper/function precedence, and typed missing/harray/arity/recursion failures."
+evidence_update_2026_08_01_explicit_invocation: "FUTURE-PARITY-BACKLOG.11.8.1-.2 add explicit {|params| ...} construction and general post-static bound invocation, then route contextual and explicit records through one scoped executor on PUC Lua and LuaJIT."
 reverify: "bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py"
 ---
 
@@ -28,10 +29,11 @@ failure. Callback results are ordinary copied LinkedSpec values and may feed com
 
 Registered functions and governed helpers resolve before a colliding declared slot. A missing or harray final
 value reports `final_argument_not_codeblock`; a contextual call with arguments reports `codeblock_arity_mismatch`;
-active self-invocation reports `codeblock_recursion_unsupported` with a cycle. This is a narrow
-metadata-governed contextual path. Explicit `{|params| ...}` literals and general bound dynamic calls remain
-`FUTURE-PARITY-BACKLOG.11.8`; exact outward descriptor v3 and the accepted generated subset are already complete
-and provide reusable state/emission authorities.
+active self-invocation reports `codeblock_recursion_unsupported` with a cycle. Metadata still governs which
+callables accept contextual final-block syntax, but the stored zero-positional record now executes through the
+same scoped evaluator as explicit `{|params| ...}` values and general bound dynamic calls. Those explicit forms
+are current under `FUTURE-PARITY-BACKLOG.11.8.1-.2`; independently loaded emitted identity and final recurring/
+public admission remain `.11.8.3-.4`.
 
 Related facts: [[lua-final-codeblock-metadata]], [[perl-generic-final-codeblock-normalization]],
 [[callable-codeblock-literal-contract]], [[lua-fixed-v1-user-function-runtime]].

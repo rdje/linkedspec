@@ -96,17 +96,17 @@ EXPECTED_FUTURE_EXCLUSION = {
     "reason": (
         "ADR 0031 plus ADR 0032 and linkedspec-callable-codeblock-v1 are adopted; Perl, Rust, Dart, and Julia "
         "construction, arbitrary dynamic invocation, contextual final-block normalization, and native/"
-        "reconstructed/generated/emitted identity are current. Lua's declared contextual helper/user-function/"
-        "receiver forms are current; Lua explicit callable values and general bound-codeblock invocation remain "
-        "future under FUTURE-PARITY-BACKLOG.11.8."
+        "reconstructed/generated/emitted identity are current. Lua construction, arbitrary dynamic invocation, "
+        "and contextual final-block normalization are current on PUC Lua and LuaJIT; independently loaded emitted "
+        "identity and five-backend recurring/public admission remain future under FUTURE-PARITY-BACKLOG.11.8.3-.4."
     ),
     "owner": "FUTURE-PARITY-BACKLOG.11.8",
 }
 EXPECTED_PUBLIC_CONTRACT = {
     "documents": [
         {"path": "USER_GUIDE.md", "required_markers": [
-            "Perl, Rust, Dart, and Julia support explicit deferred codeblock values",
-            "Lua construction is current under `.11.8.1`",
+            "Perl, Rust, Dart, Julia, and Lua support explicit deferred codeblock values",
+            "including both PUC Lua and LuaJIT",
         ]},
         {"path": "rust/README.md", "required_markers": [
             "### Callable codeblock values and invocation",
@@ -124,7 +124,7 @@ EXPECTED_PUBLIC_CONTRACT = {
             "No Julia closure, lexical capture",
         ]},
         {"path": "lua/README.md", "required_markers": [
-            "Explicit callable codeblock construction is current under",
+            "Explicit callable codeblock construction and invocation are current under",
             "no-drift is complete under `.11.7`",
         ]},
         {"path": "capability_conformance/README.md", "required_markers": [
@@ -149,15 +149,15 @@ EXPECTED_PUBLIC_CONTRACT = {
             "parent `.11.7` is closed",
         ]},
         {"path": "docs/TASK_TREE.md", "required_markers": [
-            "Callable-codeblock parent `.11.7` is closed at four current backends",
+            "Callable-codeblock parent `.11.7` is closed at four admitted backends",
         ]},
         {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "required_markers": [
             "four-backend recurring/public closeout is complete under `.11.7`",
-            "Lua inert explicit callable-codeblock construction is current under `FUTURE-PARITY-BACKLOG.11.8.1`",
+            "Lua explicit callable-codeblock construction and general bound invocation are current under",
         ]},
         {"path": "docs/linkedspec-book/src/appendix/formal-grammar.md", "required_markers": [
-            "### Callable-codeblock literal and dynamic call (five-backend construction; four-backend invocation)",
-            "complete invocation behavior is not yet universally portable",
+            "### Callable-codeblock literal and dynamic call (five-backend construction and invocation)",
+            "Independently loaded emitted-route proof and five-backend admission remain `.11.8.3-.4`",
         ]},
         {"path": "docs/linkedspec-book/src/architecture/owner-tree.md", "required_markers": [
             "`LinkedSpec::CodeblockRuntime`",
@@ -170,11 +170,11 @@ EXPECTED_PUBLIC_CONTRACT = {
         {"path": "docs/linkedspec-book/src/development/local-ci-and-regression.md", "required_markers": [
             "### Callable-codeblock four-backend recurring proof",
             "`LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1`",
-            "general bound-call parity remains `.11.8`",
+            "intentionally remain outside this recurring driver until `.11.8.4`",
         ]},
         {"path": "docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md", "required_markers": [
-            "Explicit construction and `cb(...)` invocation are current on Perl, Rust, Dart, and Julia",
-            "public no-drift are complete under `.11.7`",
+            "current on all five backends",
+            "Four-backend recurring/public no-drift remains complete under `.11.7`",
         ]},
         {"path": "docs/linkedspec-book/src/overview/project-status.md", "required_markers": [
             "**Callable codeblock design**",
@@ -197,7 +197,7 @@ EXPECTED_PUBLIC_CONTRACT = {
             "user-facing specification surface",
         ]},
         {"path": "docs/knowledge/lua-explicit-callable-codeblock-gap.md", "required_markers": [
-            "Lua's completed contextual surface",
+            "Lua's contextual and explicit authoring surfaces remain syntactically distinct",
             "`FUTURE-PARITY-BACKLOG.11.8`",
         ]},
     ],

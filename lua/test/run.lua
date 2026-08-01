@@ -3682,7 +3682,7 @@ test("runtime contextual final codeblocks reject missing wrong-kind and nonzero 
       'Top::\n /x/ E { return(invoke_nonzero({ return("unused") })) }\n'
     ),
     "codeblock_arity_mismatch",
-    "expects exactly 0 positional arguments, got 1",
+    'expected="exactly 0" got=1',
     "contextual callback arity"
   )
   assert_equal(arity.expected, "exactly 0", "contextual callback expected arity")
@@ -3705,10 +3705,14 @@ test("runtime contextual final codeblocks reject active self invocation", functi
       'Top::\n /x/ E { return(invoke_recursive({ return(callback()) })) }\n'
     ),
     "codeblock_recursion_unsupported",
-    "callback -> callback",
+    'cycle=["callback","callback"]',
     "contextual callback recursion"
   )
-  assert_equal(runtime_error.cycle, "callback -> callback", "contextual callback recursion cycle")
+  assert_equal(
+    json.encode(runtime_error.cycle),
+    json.encode(json.array({ "callback", "callback" })),
+    "contextual callback recursion cycle"
+  )
 end)
 
 test("runtime governed helpers and registered functions precede contextual parameters", function()

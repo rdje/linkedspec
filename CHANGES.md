@@ -1,5 +1,34 @@
 # CHANGES
 
+## 2026-08-01 — FUTURE-PARITY-BACKLOG.11.8.2 — invoke Lua callable codeblocks
+
+PUC Lua and LuaJIT now invoke an ordinary bound callable-codeblock with `cb(args)` after governed static callables.
+Only top-level colon syntax creates typed keyword data for portable rejection; `name = value` remains a positional
+assignment expression. One `value_access` ActionIR node lets an evaluated call result feed key/index access and
+existing receiver chains. Traversal owners cover the new receiver without entering deferred codeblock bodies.
+
+One shared executor handles explicit literals and declared final-codeblock values. Arguments evaluate exactly once
+left-to-right and are recursively copied; fixed/final-rest bindings reuse `runtime_scoped_binding.run_frame` for
+cleanup-safe reverse restoration across scalar/array/harray stores. Nonparameter caller stores stay live,
+`return(...)` is invocation-local, final expressions yield results, and standalone calls discard only results.
+Governed helpers/controls and registered functions retain precedence. No Lua closure, lexical capture, second
+codec, executor, or route-specific behavior was added.
+
+Arity, keyword, bound-non-codeblock, unknown-body-helper, and direct/mutual recursion failures now expose the exact
+neutral `callable_name`, `expected`, `got`, `value_kind`, `name`, and ordered array-`cycle` fields. The former
+contextual-only executor/stack is replaced by the common path and one cleanup-safe `active_codeblocks` stack. The
+focused consumer passes 232 assertions unchanged on PUC Lua and LuaJIT. The complete Lua gate passes all 177
+legacy TAP groups per ABI, primary CLI 66x2, corpus 105/105, and all 16 repository-storage owners.
+
+Independently loaded emitted-module identity remains `.11.8.3`; recurring five-backend/public/capability admission
+remains `.11.8.4`. The capability census and four-backend recurring topology do not move in this slice.
+
+Signoff passes neutral callable governance at 7/11/9/7/4/8 plus 20 mutations, callable signatures 3/9/7,
+capability conformance 80/0/0, Knowledge Map 778/6,311, the sole-facing mdBook at 79 files / 14,028 KiB, and all
+seven doctrines. After an outer-sandbox-only status-71 denial at the nested containment probe, the identical
+authorized canonical rerun passes repository containment/moved-root, primary CLI 66x2, RAM 51%, Phase 0
+1,031/1,031 in 801 seconds, and Perl 10 / Rust 18 / Dart 21 / Julia 125+118+239 before `local CI gate passed`.
+
 ## 2026-08-01 — FUTURE-PARITY-BACKLOG.11.8.1 — construct inert Lua callable codeblocks
 
 PUC Lua and LuaJIT now recognize exact `{|params| body }` and `{|| body }` expressions before existing harray and

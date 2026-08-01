@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-01` (Lua inert callable-codeblock construction `.11.8.1` is signoff-complete from clean
-  audit commit `7e02ecee`; clean landing is the only boundary before dynamic invocation `.11.8.2`)
+- Last updated: `2026-08-01` (Lua dynamic callable-codeblock invocation `.11.8.2` is active task-tree-first from
+  clean inert-construction commit `86498cc7`; caller-context execution and exact failures are the only scope)
 - Owner: repo-local workflow
 
 ## Goal
@@ -16087,7 +16087,7 @@ local-CI marker. Dynamic bound invocation, call-result access, colon-keyword dia
 `.11.8.2`.
 
 - ID: `FUTURE-PARITY-BACKLOG.11.8.2`
-  Status: `pending`
+  Status: `done`
   Goal: Execute Lua bound callable-codeblock calls with dynamic caller context and portable failures.
   Dependencies: `.11.8.1`
   Acceptance: Add only colon-keyword call data and an evaluated-value access receiver; `name = value` remains a
@@ -16098,6 +16098,75 @@ local-CI marker. Dynamic bound invocation, call-result access, colon-keyword dia
     and declared-final-block execution, invocation-local return, access/chaining/discard, and an ordered active
     codeblock stack. Keyword, arity, non-callable, unknown-body-helper, and direct/mutual recursion diagnostics use
     exact neutral fields on PUC Lua and LuaJIT without lexical capture or raw fallback.
+
+### `FUTURE-PARITY-BACKLOG.11.8.2` Acceptance Checklist
+
+- [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Activate task-tree-first from clean inert-construction commit
+  `86498cc7` (122/300), with zero-byte brief and no rendered-book, bytecode, or managed-run residue before any
+  parser, interpreter, focused-test, gate, or documentation edit.
+- [x] **AUTHORITY RETRIEVAL / INVOCATION RED** — Re-read ADR `0031`, the neutral calls/failures/fixture rows,
+  admitted backend precedents, Lua construction/audit/scoped-binding/interpreter facts, and current static-call/
+  contextual behavior; extend the existing focused consumer to exact dynamic RED on both ABIs before production.
+- [x] **NARROW TYPED CALL DATA / STATIC PRECEDENCE** — Add only colon-keyword argument records and access rooted at
+  an evaluated value; preserve `name = value` as a positional assignment expression and keep controls, helpers,
+  and registered user functions ahead of bound-variable dispatch without broad raw fallback.
+- [x] **ONE INTERPRETER / DYNAMIC CALLER FRAME** — Reuse the existing interpreter and
+  `runtime_scoped_binding.run_frame` for once-only left-to-right arguments, recursively copied fixed/rest values,
+  reverse restoration across all parameter stores, live nonparameter caller state, local return, discard, access,
+  chaining, and declared-final-block equivalence; add no closure, capture, codec, or executor.
+- [x] **PORTABLE FAILURES / ACTIVE STACK** — Produce the exact neutral keyword, arity, non-callable, unknown-name,
+  unknown-body-helper, and ordered direct/mutual recursion diagnostics on PUC Lua and LuaJIT through one active
+  codeblock stack, with no host exception fallback or route-specific behavior.
+- [x] **DUAL-ABI / REGRESSION / LOCKSTEP** — Grow the same focused consumer unchanged on both ABIs; preserve eager,
+  control, harray, contextual, registered-function, compiled/generated, CLI/corpus, and storage behavior; sync the
+  sole-facing mdBook and live/KM/task/roadmap/memory surfaces; pass focused, complete Lua, neutral/governance,
+  rendered-book, doctrines, and warranted canonical gates; commit/clear/prove clean before `.11.8.3`; do not push.
+
+Activation evidence 2026-08-01: inert construction `.11.8.1` lands at clean commit `86498cc7` as 122/300 after
+pre/post memory-boundary checks and all seven doctrines pass. Git status is empty, `git_message_brief.txt` is zero
+bytes, and rendered-book, Python-bytecode, and managed-run residue are absent. This leaf may extend the existing
+focused Lua consumer and the narrow parser/interpreter/scoped-binding authorities only for dynamic invocation,
+result access, declared-final-block equivalence, exact failures, and recursion on both ABIs. It may not add
+byte-fresh emitted execution/project-data ownership (`.11.8.3`), five-backend/capability/public/MCP admission
+(`.11.8.4`), lexical capture, host closures/functions, a second codec/executor, root README edits, push, or pivot.
+
+RED evidence 2026-08-01: Knowledge Map-first retrieval re-read ADR `0031`, all neutral call/failure/fixture rows,
+the completed Perl/Rust/Dart/Julia precedents, and the Lua typed-audit, construction, contextual-final-block, scoped-
+binding, parser, interpreter, diagnostic, semantic, and generated-route owners. The focused consumer now owns colon
+keyword versus positional `name = value`, evaluated call-result access, all eleven call-case IDs, the exact neutral
+fixture, static helper/function precedence, once-only ordering, copied nested parameters, declared-final explicit
+literals, invocation-local nested return, all seven neutral failures, ordered mutual recursion, and registered-
+function keyword policy. Its first production-free PUC run stops exactly at the absent evaluated receiver:
+`collector("p")["items"].length()` parses as a fluent chain whose `receiver` has no typed receiver child. This is
+the planned `.11.8.2` boundary; only the task-tree and RED consumer differ from clean activation.
+
+Implementation evidence 2026-08-01: the parser now recognizes only top-level `name: value` call arguments as
+typed keywords, retains `name = value` as a positional assignment, and shares one segment parser between named and
+evaluated-value access. Removed-selector traversal, action-contract traversal, semantic call discovery, and the
+runtime all consume the new `value_access` node. After all static helpers/controls and registered functions, one
+bound-name path distinguishes codeblocks from other bound values, evaluates positional expressions once in order,
+and passes copied fixed/final-rest values to the existing cleanup-safe `runtime_scoped_binding.run_frame`; the
+typed retained body executes in the existing interpreter against live caller nonparameter stores. The former
+contextual-only executor and stack are gone: explicit literals and declared final-block values share one local-
+return path and one ordered `active_codeblocks` stack. Runtime diagnostics now project the neutral
+`callable_name`/`expected`/`got`/`value_kind`/`name`/array-`cycle` fields. The first implementation run crossed Lua's
+200-local chunk ceiling; grouping the new seams behind one local namespace restored PUC/LuaJIT compatibility
+without splitting or duplicating the interpreter. Focused proof passes 232 assertions on each ABI. The complete
+Lua gate initially caught two contextual-era wording/string-cycle expectations; moving those assertions to the
+neutral structured form makes the uninterrupted rerun green: all 177 legacy TAP groups on both ABIs, CLI 66x2,
+corpus 105/105, and all 16 repository-storage owners pass.
+
+Signoff evidence 2026-08-01: neutral callable governance passes 7/11/9/7/4/8 plus 20 mutations, the callable-
+signature checker passes 3/9/7, and capability conformance stays 80 pass / 0 partial / 0 missing without advancing
+Lua's recurring/public admission. Knowledge Map generation/check passes 778 facts / 6,311 keys; the sole-facing
+mdBook renders 79 files / 14,028 KiB; whitespace, memory/task metadata, and all seven doctrines pass. The first
+canonical attempt reached the nested project-data-process containment check but the outer Codex sandbox denied
+its inner `sandbox-exec` with status 71. The identical authorized rerun proves the relocated six-family process
+driver, moved-root and outside-CWD behavior, both primary CLI environments at 66/66, RAM 51%, Phase 0 at
+1,031/1,031 in 801 seconds, and the exact neutral+20 / Perl 10 / Rust 18 / Dart 21 / Julia 125+118+239 callable
+matrix before `local CI gate passed`. Commit/brief cleanup and exact clean proof are the only remaining workflow
+operations before task-tree-first `.11.8.3`; no push.
+  Commit: `FUTURE-PARITY-BACKLOG.11.8.2 - invoke Lua callable codeblocks`
 
 - ID: `FUTURE-PARITY-BACKLOG.11.8.3`
   Status: `pending`
@@ -20481,6 +20550,14 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-08-01`: Lua dynamic invocation `.11.8.2` is signoff-complete and ready for its clean landing. Exact colon-
+  keyword rejection, positional `name = value`, evaluated call-result access, post-static bound dispatch, copied
+  fixed/rest frames, live caller state, local results, declared-final equivalence, portable failures, and ordered
+  recursion pass 232 assertions on each ABI; complete Lua passes 177 TAP groups per ABI, CLI 66x2, corpus 105/105,
+  and 16 storage owners. Neutral+20, signatures, capability 80/0/0, Knowledge Map 778/6,311, mdBook 79/14,028
+  KiB, all seven doctrines, canonical RAM 51%, Phase 0 1,031/1,031, and the exact four-backend callable matrix
+  pass. The first canonical run's nested-sandbox denial was environmental; the identical authorized rerun ends at
+  `local CI gate passed`. Emitted identity stays `.11.8.3`; admission stays `.11.8.4`; no push.
 - `2026-08-01`: Lua inert construction `.11.8.1` is signoff-complete and ready for its clean landing.
   Exact typed literal/signature/body/Unicode-span records, nine malformed codes, deferred scans, offset-preserving
   copies, function/compiled/generated/emitted-effective-state transport, and semantic signatures pass 168

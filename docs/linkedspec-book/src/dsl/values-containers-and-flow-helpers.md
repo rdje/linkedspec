@@ -314,14 +314,18 @@ typed-user-function, receiver, and tree blocks to the same zero-positional `code
 alone grants no semantics. Attached and parenthesized forms then reuse the dynamic evaluator across native,
 reconstructed, generated-plan, and freshly loaded emitted-source execution.
 
-Lua now has the construction half of the same contract. Exact brace-pipe forms create the neutral eight-field
+Lua now has the same construction and dynamic-invocation semantics. Exact brace-pipe forms create the neutral eight-field
 record with fixed/final-rest signatures, typed deferred bodies, and half-open containing Unicode-character spans.
 Copies retain those spans; ordinary user functions, compiled ActionIR JSON, generated-plan execution, emitted
 effective-`SpecFile` reconstruction, and semantic binding shapes preserve the value without running its body.
 Malformed forms retain all nine neutral codes, and deferred scans do not treat body calls or selectors as eager.
-There is no Lua closure or second codec/executor. Calling an ordinary bound Lua value remains `.11.8.2`.
+After static callables, one executor invokes an ordinary bound codeblock with once-only left-to-right arguments,
+copied fixed/rest bindings, live caller nonparameters, local return/final result, and ordered recursion rejection.
+Typed `value_access` lets call results feed key/index lookup and receiver chains. Colon keyword calls are typed only
+for rejection; `name = value` stays positional. Exact arity/keyword/non-callable/unknown/cycle diagnostics agree on
+PUC Lua and LuaJIT. There is no Lua closure or second codec/executor.
 
-On Perl, Rust, Dart, and Julia, `apply("x") { return(value) }` and `apply("x", { return(value) })` normalize to the same contextual
+On Perl, Rust, Dart, Julia, and Lua, `apply("x") { return(value) }` and `apply("x", { return(value) })` normalize to the same contextual
 zero-positional codeblock when `apply` declares a final `callback: codeblock`. The same metadata rule governs the
 supported helper and receiver forms. `{|item| ...}` remains an explicit one-positional codeblock value, while
 `{ "item" : value }` remains an harray and is rejected if supplied to a typed codeblock slot.
@@ -344,12 +348,12 @@ count = collector("p", "a", "b")["items"].length()
 # count == 2
 ```
 
-Perl, Rust, Dart, and Julia report exact arity, keyword-call, bound-non-codeblock, unknown-body-helper, and active-recursion
+Perl, Rust, Dart, Julia, and Lua report exact arity, keyword-call, bound-non-codeblock, unknown-body-helper, and active-recursion
 failures as typed runtime details. A governed helper/control or registered user function still wins over a
-same-named variable. Explicit construction and `cb(...)` invocation are current on Perl, Rust, Dart, and Julia.
-Generic contextual final-block spellings are complete on Perl, Rust, Dart, and Julia. Four-backend recurring and
-public no-drift are complete under `.11.7`; Lua construction is current under `.11.8.1`, while dynamic-call and
-five-backend admission remain `.11.8.2-.4`.
+same-named variable. Explicit construction, `cb(...)` invocation, and generic contextual final-block spellings are
+current on all five backends. Four-backend recurring/public no-drift remains complete under `.11.7`; Lua
+construction/invocation are current under `.11.8.1-.2`, while emitted-route proof and five-backend admission remain
+`.11.8.3-.4`.
 
 Hash receiver trailing blocks also support deterministic tree traversal. A hash tree has a hash root. Nested hash
 values are interior nodes; all non-hash values, including arrays, are leaves. `walk_leaves() { ... }` visits each

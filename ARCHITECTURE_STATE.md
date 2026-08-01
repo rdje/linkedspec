@@ -1,5 +1,16 @@
 # ARCHITECTURE STATE
 
+- `2026-08-01 Lua callable-codeblock dynamic invocation`: `FUTURE-PARITY-BACKLOG.11.8.2` adds only colon-keyword
+  call data and evaluated-value access, preserving positional `name = value`. After static callables, one bound-
+  name executor evaluates/copies arguments once in order and reuses `runtime_scoped_binding.run_frame` for fixed/
+  rest bindings plus reverse three-store restoration. The retained typed body runs in the existing interpreter
+  against live caller nonparameters; explicit and declared-final values share local return/result/access/discard.
+  One ordered `active_codeblocks` stack and neutral diagnostic projection cover keyword, arity, non-callable,
+  unknown-body-helper, and direct/mutual recursion failures. No closure, capture, codec, or executor is added.
+  Focused proof passes 232 assertions on each Lua ABI; complete Lua passes 177 TAP groups per ABI, CLI 66x2,
+  corpus 105/105, and 16 storage owners. Signoff also passes neutral+20, Knowledge Map 778/6,311, the sole-facing
+  mdBook at 79/14,028 KiB, all seven doctrines, canonical RAM 51%, Phase 0 1,031/1,031, and the exact four-backend
+  callable matrix. Emitted-route identity remains `.11.8.3`; admission remains `.11.8.4`.
 - `2026-08-01 Lua callable-codeblock inert construction`: `FUTURE-PARITY-BACKLOG.11.8.1` makes exact `{|`
   classification an ActionIR concern before existing harray/eager-block routing. One neutral eight-field
   `codeblock_literal` owns fixed/final-rest `ActionCallableSignature`, typed deferred body, exact source, and

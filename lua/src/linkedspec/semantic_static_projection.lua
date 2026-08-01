@@ -1402,6 +1402,11 @@ call_visit_children = function(builder, expression, owner_id, cursor, local_orde
     for _, segment in ipairs(expression.segments or {}) do
       if segment.kind == "index" then visit(segment.expr) end
     end
+  elseif kind == "value_access" then
+    visit(expression.receiver)
+    for _, segment in ipairs(expression.segments or {}) do
+      if segment.kind == "index" then visit(segment.expr) end
+    end
   elseif kind == "control_switch" then
     visit(expression.source_expr)
     visit_args(expression.args)

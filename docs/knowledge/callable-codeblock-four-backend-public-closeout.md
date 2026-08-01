@@ -10,9 +10,10 @@ answers:
   - "what closes callable-codeblock parent .11.7"
   - "does callable public closeout change capability rows"
 date: 2026-08-01
-status: current; four-backend public closeout complete, Lua invocation and admission pending
+status: current; four-backend public closeout complete, Lua route proof and admission pending
 tags: [callable, codeblock, public-docs, mdbook, no-drift, perl, rust, dart, julia, lua]
 evidence: "FUTURE-PARITY-BACKLOG.11.7.2 adds the exact public_contract inventory to capability_conformance/callable_codeblock_contract.json and its duplicate-independent checker expectation. Twenty-three current-facing documents must retain required markers; nine stale or premature claims are forbidden; three public omission mutations compose with 17 recurring topology/status mutations for a total of 20. FUTURE-PARITY-BACKLOG.11.8.1 later makes Lua inert construction current while general invocation/emitted execution/admission remain .11.8.2-.4; capability rows stay 80/0/0."
+evidence_update_2026_08_01_lua_invocation: "FUTURE-PARITY-BACKLOG.11.8.2 subsequently makes Lua general invocation focused-current on both ABIs. The four-backend public governance and 80/0/0 census remain unchanged until emitted-route proof and admission .11.8.3-.4."
 reverify: "bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && perl tools/check_capability_conformance.pl"
 ---
 
@@ -28,9 +29,9 @@ capability-row behavior.
 
 The current public projection is explicit: Perl, Rust, Dart, and Julia own callable literal construction, dynamic
 caller-context invocation, contextual final blocks, and supported native/reconstructed/generated/emitted routes.
-Lua contextual forms and inert explicit literal construction are current, while general bound calls, independently
-emitted execution identity, and five-backend admission remain dependency-ordered under
-`FUTURE-PARITY-BACKLOG.11.8.2-.4`. Lexical capture remains deferred.
+Lua contextual forms, inert explicit literal construction, and general bound calls are focused-current, while
+independently emitted execution identity and five-backend admission remain dependency-ordered under
+`FUTURE-PARITY-BACKLOG.11.8.3-.4`. Lexical capture remains deferred.
 
 The mdBook entries in this inventory are not secondary release notes. They are part of LinkedSpec's sole
 user-facing specification surface and must land in the same slice as the status they describe, with a rendered

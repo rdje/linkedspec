@@ -1,4 +1,4 @@
--- FUTURE-PARITY-BACKLOG.11.8.1 -- inert callable-codeblock construction.
+-- FUTURE-PARITY-BACKLOG.11.8.1-.2 -- callable-codeblock construction and invocation.
 
 local linkedspec = require("linkedspec")
 local json = linkedspec.json
@@ -81,6 +81,29 @@ local function execute_native(compiled)
   return portable_runtime_value(
     linkedspec.runtime_execute(linkedspec.runtime_engine(compiled), "xx").value
   )
+end
+
+local function runtime_failure(compiled)
+  local ok, failure = capture(function()
+    return linkedspec.runtime_execute(linkedspec.runtime_engine(compiled), "x")
+  end)
+  check_equal(ok, false, "runtime failure expected")
+  check_equal(linkedspec.is_runtime_interpreter_error(failure), true, "typed runtime failure")
+  return failure
+end
+
+local function invalid_call_source(id)
+  local bodies = {
+    fixed_missing = 'cb = {|left, right| return(cat(left, right)) }; return(cb("a"))',
+    fixed_extra = 'cb = {|left, right| return(cat(left, right)) }; return(cb("a", "b", "c"))',
+    rest_missing_fixed = 'cb = {|prefix, ...items| return(items) }; return(cb())',
+    keyword_argument = 'cb = {|value| return(value) }; return(cb(value: "x"))',
+    bound_non_codeblock = 'text = "not callable"; return(text())',
+    unknown_call = 'cb = {|| return(missing()) }; return(cb())',
+    direct_recursion = 'reader = {|| return(reader()) }; return(reader())',
+  }
+  local body = assert(bodies[id], "unowned invalid callable-codeblock case " .. tostring(id))
+  return "Top::\n /x/\n E { " .. body .. " }\n"
 end
 
 local function decode_hex(value)
@@ -256,7 +279,138 @@ local eager_unknown = linkedspec.resolve_action_expression_contracts(
   linkedspec.parse_action_expression("cb()")
 )
 check_equal(eager_unknown.diagnostics[1] and eager_unknown.diagnostics[1].code,
-  "unknown_helper", "bound invocation remains future work")
+  "unknown_helper", "unbound call remains statically unknown")
+
+-- Dynamic invocation adds only the two narrow ActionIR seams required by the neutral contract.
+local keyword_call = linkedspec.parse_action_expression('cb(value: "x")')
+check_equal(keyword_call.kind, "call", "colon keyword call remains typed")
+check_equal(#keyword_call.args, 1, "colon keyword count")
+check_equal(linkedspec.action_ast.node_type(keyword_call.args[1]),
+  "ActionArgument", "colon keyword argument node")
+check_equal(keyword_call.args[1].argument_kind, "keyword", "colon keyword argument kind")
+check_equal(keyword_call.args[1].name, "value", "colon keyword argument name")
+
+local assignment_call = linkedspec.parse_action_expression('cb(value = "x")')
+check_equal(assignment_call.kind, "call", "assignment argument call remains typed")
+check_equal(assignment_call.args[1].argument_kind, "positional", "assignment remains positional")
+check_equal(assignment_call.args[1].value.kind, "assign_scalar", "assignment retains expression kind")
+
+local result_chain = linkedspec.parse_action_expression('collector("p")["items"].length()')
+check_equal(result_chain.kind, "fluent_chain", "call-result access may receive a fluent chain")
+check_equal(result_chain.receiver.kind, "value_access", "call-result access uses a typed receiver")
+check_equal(result_chain.receiver.receiver.kind, "call", "value access retains evaluated receiver")
+check_equal(result_chain.receiver.segments[1].kind, "key", "value access retains key segment")
+check_equal(result_chain.receiver.segments[1].value, "items", "value access retains key")
+
+-- The exact neutral fixture proves caller-state reads and mutation, copied parameters/rest,
+-- result access, block-local return, and inert construction in one execution.
+local expected_call_ids = json.harray()
+for _, id in ipairs({
+  "construction_is_deferred",
+  "fixed_exact",
+  "dynamic_read_uses_call_time_state",
+  "nonparameter_mutation_persists",
+  "parameter_binding_restores",
+  "rest_empty",
+  "rest_mixed",
+  "rest_result_receiver_chain",
+  "block_local_return",
+  "standalone_discard_keeps_effects",
+  "static_name_precedence",
+}) do expected_call_ids[id] = true end
+local actual_call_ids = json.harray()
+for _, row in ipairs(contract.call_cases) do actual_call_ids[row.id] = true end
+check_same_json(actual_call_ids, expected_call_ids, "all neutral call cases are owned")
+check_same_json(
+  execute_native(compile_source(contract.fixture.spec_source)),
+  contract.fixture.expected,
+  "exact neutral dynamic invocation fixture"
+)
+
+local invocation_source = [[fn choose() { return("static") }
+fn invoke(value, callback: codeblock) { return(callback(value)) }
+
+Top::
+ /x/
+ E {
+   state = "";
+   append_state = {|value| state = cat(state, value); return(state) };
+   append_state("x");
+   cat = {|left, right| return("shadow") };
+   choose = {|| return("shadow") };
+   order = "";
+   tick = {|value| order = cat(order, value); return(value) };
+   joiner = {|left, right| return(cat(left, right)) };
+   original = { "nested" : [{ "value" : "outer" }] };
+   mutate_copy = {|copy| copy["nested"][0]["value"] = "inner"; return(copy) };
+   mutated = mutate_copy(original);
+   nested_return = {|| copy(return("done")); return("wrong") };
+   return({
+     "discard_state" : state,
+     "helper_precedence" : cat("a", "b"),
+     "function_precedence" : choose(),
+     "ordered_result" : joiner(tick("a"), tick("b")),
+     "ordered_effect" : order,
+     "original" : original,
+     "mutated" : mutated,
+     "declared_final_literal" : invoke("c", {|item| return(cat(item, ".")) }),
+     "nested_return" : nested_return()
+   })
+ }
+]]
+check_same_json(execute_native(compile_source(invocation_source)), json.harray({
+  discard_state = "x",
+  helper_precedence = "ab",
+  function_precedence = "static",
+  ordered_result = "ab",
+  ordered_effect = "ab",
+  original = json.harray({ nested = json.array({ json.harray({ value = "outer" }) }) }),
+  mutated = json.harray({ nested = json.array({ json.harray({ value = "inner" }) }) }),
+  declared_final_literal = "c.",
+  nested_return = "done",
+}), "dynamic invocation precedence order copies and local return")
+
+-- Every neutral invalid call projects the exact governed diagnostic fields.
+for _, row in ipairs(contract.invalid_call_cases) do
+  local failure = runtime_failure(compile_source(invalid_call_source(row.id)))
+  if linkedspec.is_runtime_interpreter_error(failure) then
+    check_equal(linkedspec.is_runtime_diagnostic(failure.diagnostic), true,
+      row.id .. " typed runtime diagnostic")
+    local diagnostic = failure.diagnostic and linkedspec.interpreter.to_json(failure.diagnostic) or {}
+    for key, expected in pairs(row.expected_error) do
+      check_same_json(diagnostic[key], expected, row.id .. " diagnostic " .. key)
+    end
+  end
+end
+
+local mutual_failure = runtime_failure(compile_source([[Top::
+ /x/
+ E {
+   left = {|| return(right()) };
+   right = {|| return(left()) };
+   return(left())
+ }
+]]))
+if linkedspec.is_runtime_interpreter_error(mutual_failure) then
+  local diagnostic = mutual_failure.diagnostic and
+    linkedspec.interpreter.to_json(mutual_failure.diagnostic) or {}
+  check_equal(diagnostic.code, "codeblock_recursion_unsupported", "mutual recursion code")
+  check_equal(diagnostic.callable_name, "left", "mutual recursion callable")
+  check_same_json(diagnostic.cycle, json.array({ "left", "right", "left" }),
+    "mutual recursion ordered cycle")
+end
+
+local keyword_user_failure = runtime_failure(compile_source([[fn identity(value) { return(value) }
+
+Top::
+ /x/
+ E { return(identity(value: "x")) }
+]]))
+if linkedspec.is_runtime_interpreter_error(keyword_user_failure) then
+  check_equal(keyword_user_failure.code, "user_function_keyword_arguments_unsupported",
+    "colon keyword cannot bypass user-function policy")
+  check_equal(keyword_user_failure.got, 1, "user-function keyword count")
+end
 
 -- Static semantic bindings expose the exact callable signature.
 local semantic_source = [[fn identity(value) { return(value) }
