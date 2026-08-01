@@ -23,7 +23,8 @@ evidence_update_2026_07_13_array_callbacks: "LUA-BACKEND-PARITY.4.3.6.5.2 genera
 evidence_update_2026_07_13_closeout: "LUA-BACKEND-PARITY.4.3.6.6 closes the parent after tools/run_lua_local.sh passes 114/114 on PUC Lua and LuaJIT, the callable-codeblock and punctuation-light checkers pass, capability census remains 64/0/0, and every public surface agrees. Destination acceptance now explicitly makes LUA-BACKEND-PARITY.5.1 own final callback: codeblock user-function metadata plus attached/parenthesized contextual execution; FUTURE-PARITY-BACKLOG.11.7 retains explicit literals and dynamic calls."
 evidence_update_2026_07_15_user_function_callbacks: "LUA-BACKEND-PARITY.5.1.4.1/.2 preserve final callback metadata, normalize both contextual spellings, and execute current-frame zero-positional blocks at 146/146 on both Lua ABIs; explicit literals and general dynamic calls remain .11.7."
 evidence_update_2026_07_15_staged_function_closeout: "LUA-BACKEND-PARITY.5.1.5 closes staged-function no-drift at the same 146/146 boundary and activates native loading .5.2."
-reverify: "bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && bash tools/run_python_project_data.sh tools/check_punctuation_light_zero_arg_contract.py && perl tools/check_capability_conformance.pl && rg -n 'LUA-BACKEND-PARITY.4.3.6.6|callback: codeblock|FUTURE-PARITY-BACKLOG.11.7' docs/tasks/LUA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
+evidence_update_2026_08_01_callable_routing: "FUTURE-PARITY-BACKLOG.11.7.0 retains current eager/control/contextual behavior and routes explicit literal/general bound-call construction, execution, generation, and admission to .11.8."
+reverify: "bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && bash tools/run_python_project_data.sh tools/check_punctuation_light_zero_arg_contract.py && perl tools/check_capability_conformance.pl && rg -n 'LUA-BACKEND-PARITY.4.3.6.6|callback: codeblock|FUTURE-PARITY-BACKLOG.11.8' docs/tasks/LUA-BACKEND-PARITY.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
 ## Fact
@@ -53,7 +54,7 @@ General user functions consume their final `callback: codeblock` parameter throu
 the declaration and connect attached/parenthesized contextual execution to current function-frame dispatch.
 Explicit `{|params| ...}` literals and
 dynamic codeblock-variable calls remain the later Lua obligation routed by
-`FUTURE-PARITY-BACKLOG.11.7`.
+`FUTURE-PARITY-BACKLOG.11.8`.
 
 Related facts: [[lua-actionir-ast-parser]], [[lua-runtime-helper-family-split]],
 [[generic-trailing-codeblock-argument-correction]],

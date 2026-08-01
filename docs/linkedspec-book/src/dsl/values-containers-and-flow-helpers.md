@@ -338,8 +338,8 @@ count = collector("p", "a", "b")["items"].length()
 Perl, Rust, Dart, and Julia report exact arity, keyword-call, bound-non-codeblock, unknown-body-helper, and active-recursion
 failures as typed runtime details. A governed helper/control or registered user function still wins over a
 same-named variable. Explicit construction and `cb(...)` invocation are current on Perl, Rust, Dart, and Julia.
-Generic contextual final-block spellings are complete on Perl, Rust, Dart, and Julia; Lua explicit-literal/
-dynamic-call parity and the cross-backend closeout remain future.
+Generic contextual final-block spellings are complete on Perl, Rust, Dart, and Julia. Four-backend recurring and
+public no-drift close under `.11.7.1-.2`; Lua explicit-literal/dynamic-call parity remains `.11.8`.
 
 Hash receiver trailing blocks also support deterministic tree traversal. A hash tree has a hash root. Nested hash
 values are interior nodes; all non-hash values, including arrays, are leaves. `walk_leaves() { ... }` visits each

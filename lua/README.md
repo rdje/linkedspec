@@ -595,7 +595,8 @@ Exact variadic-v2 signature-state preservation `.5.1.3.1` raises it to 136/136.
 Fresh typed variadic-v2 execution `.5.1.3.2` raises it to 139/139.
 Final contextual-codeblock metadata `.5.1.4.1` raises it to 142/142; dynamic contextual execution `.5.1.4.2`
 raises it to 146/146, while
-explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.7`. Zero/variadic
+explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.8`; four-backend governance closes
+separately under `.11.7`. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,
 and implicit child-push expression-result drift remain explicitly owned by `FUTURE-PARITY-BACKLOG.5` rather than
 hidden as settled parity.

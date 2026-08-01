@@ -993,8 +993,9 @@ All 13 ordinary harray names close at 103/103 through `.4.3.5.5`: bare merge ope
 set/rename/drop/pick values, deep source isolation, harray/array-view receiver chains, and named `set_key`/direct
 harray mutation are implemented and public-result guarded. Codeblock/control/tree-callback parent `.4.3.6` is
 now split: `.1` eager expression blocks, `.2` inline controls, `.3` statement controls, `.4` current built-in
-contextual blocks/`with`, `.5` deterministic callbacks, and `.6` closeout. General user-function final blocks
-remain `.5.1`; explicit callable codeblock values remain future `.11.7`.
+contextual blocks/`with`, `.5` deterministic callbacks, and `.6` closeout. General user-function final blocks are
+complete through `.5.1`; explicit callable codeblock values are routed to `.11.8` after four-backend closeout
+`.11.7`.
 Eager blocks plus lazy inline controls pass 105/105: ordinary no-pair braces yield their last/local-return
 value, non-final statement mutation is preserved, harray braces retain precedence, and yielded values enter
 receiver dispatch. Inline `if`/`switch` evaluates only selected payloads, keeps false/null, evaluates switch
@@ -1141,7 +1142,7 @@ at endpoint 1/1 and raises both suites to 161/161. Governed `.6.1.4` permanently
 `2,1,2,1,5,5`, raises both suites to 162/162, closes `.6.1`, and activates `.6.2`; capability remains 64/0/0.
 Explicit
 `{|params| ...}` literals and
-dynamic codeblock-variable calls remain `.11.7`.
+dynamic codeblock-variable calls remain `.11.8`.
 ADR `0033` and
 `FUTURE-PARITY-BACKLOG.16` separately close narrow zero-argument aliases. Neutral
 contract `.16.1`, all five backend implementations through Lua `.16.6`, and public/capability admission `.16.7`

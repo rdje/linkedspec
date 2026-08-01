@@ -4,7 +4,18 @@ Live architecture snapshot for LinkedSpec.
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.
 
 ## Status
-- Last refreshed: `2026-07-30`
+- Last refreshed: `2026-08-01`
+- `2026-08-01 four-backend callable no-drift / Lua dependency split`: behavior-free
+  `FUTURE-PARITY-BACKLOG.11.7.0` proves the unchanged neutral 7/11/9/7/4/8 contract plus focused Perl, Rust,
+  Dart, and Julia callable consumers. It also identifies two governance gaps: canonical CI has no exact composed
+  four-backend callable driver, and the mixed capability exclusion still names already-complete Rust/Dart/Julia
+  behavior as future. Exact Lua ActionIR/runtime probes establish the remaining product gap: brace-pipe literals
+  fall through eager-block/raw parsing, no explicit eight-field value survives AST/copy/registry state, colon
+  keywords and evaluated-call access lack typed nodes, and dispatch has only the narrow declared zero-argument
+  contextual-slot path. Existing scoped bindings, recursive copy, and effective-`SpecFile` emission are reusable.
+  Therefore `.11.7.1-.2` own only recurring four-backend governance/public closeout; new `.11.8.0-.4` own detailed
+  Lua planning, inert construction, dynamic invocation, existing-emitter dual-ABI identity, and final five-backend
+  admission. No runtime, descriptor, generated-source, capability, MCP, or root README behavior changes here.
 - `2026-07-30 Julia callable-codeblock dynamic invocation`: `FUTURE-PARITY-BACKLOG.11.6.2` resolves a bound
   `codeblock_literal` only after controls, helpers, and registered user functions. Positional arguments evaluate
   exactly once left-to-right; recursively copied fixed/rest values use exception-safe scoped bindings that
@@ -815,9 +826,9 @@ This document is the current high-level technical reading of the project shape. 
   16-capability census. Every Lua row is `pass` with direct implementation and recurring proof references, so the
   census is 80 pass / 0 partial / 0 gap; generated-source state is independently `pass`. Satisfied Lua-backend and
   variadic-function exclusions are removed, while the mixed generic callable-codeblock exclusion was then narrowed
-  to explicit callable values, arbitrary dynamic calls, and remaining Rust/Dart/Julia parity. Subsequent Rust and
-  Dart closeout plus Julia construction/invocation leave Julia contextual equivalence and Lua explicit/dynamic
-  parity as the current residual work. PUC Lua 5.4 remains the
+  to explicit callable values, arbitrary dynamic calls, and remaining Rust/Dart/Julia parity. Subsequent Rust,
+  Dart, and Julia closeout leave only Lua explicit/dynamic parity as current product work; `.11.7.0` separately
+  identifies the stale exclusion text and missing recurring four-backend composition. PUC Lua 5.4 remains the
   conformance runtime and LuaJIT the behavior-identical compatibility leg. Focused proof is 177/177 on both ABIs,
   primary 61x2, corpus 105/105, and the shared matrix 5x2x61. Canonical local CI passes reference CLI 61x2 and
   Phase 0 `1..1031` in 625 seconds. The Lua parity tree is closed; post-parity work is eligible only after this
@@ -983,7 +994,7 @@ This document is the current high-level technical reading of the project shape. 
   request kinds. Loaded top-level functions and runtime diagnostic identity pass 153/153 on PUC Lua and LuaJIT;
   status is `native-spec-pipeline-v1` and capability remains 64/0/0. No-drift `.5.2.4` closes parent `.5.2`
   without behavior change; descriptors/full-pipeline trace `.5.3` is active, while generated source `.8` and
-  explicit/general dynamic codeblocks `.11.7` retain separate owners.
+  explicit/general dynamic codeblocks `.11.8` retain separate owners.
 - `2026-07-15` documentation architecture: ADR `0040` keeps `docs/linkedspec-book/` as the sole normative,
   backend-neutral owner of `.spec` semantics and portable behavior, and adopts one optional implementation
   companion each for Perl, Rust, Dart, Julia, and Lua. Companions will explain host APIs, embedding, toolchains,
@@ -1029,7 +1040,7 @@ This document is the current high-level technical reading of the project shape. 
   records, generic trailing-block AST, and built-in contextual block execution—but not body-job dispatch or
   registered-call runtime. `.5.1.1` now owns the minimal deterministic action-body provider/stitch path; `.2` fixed
   execution; `.3.1/.2` variadic typed state/runtime; `.4.1/.2` final-codeblock metadata/contextual runtime; `.5`
-  no-drift. Descriptors/full trace stay `.5.3`, generated source `.8`, explicit callable literals/bound calls `.11.7`.
+  no-drift. Descriptors/full trace stay `.5.3`, generated source `.8`, explicit callable literals/bound calls `.11.8`.
 - `2026-07-15` refresh: Lua diagnostics/trace no-drift is closed at the precise native runtime boundary. The public
   API exports all ordered levels, immutable controls, environment mapping, structured events/scopes, log/dump
   primitives, stdout/route/mirror sinks, reset/append behavior, and direct/config-wrapper runtime entrypoints.
@@ -1201,7 +1212,7 @@ This document is the current high-level technical reading of the project shape. 
   and punctuation-light contracts pass; capability census remains 64/0/0; and the preceding mandatory full local
   gate passes CLI 61/61 twice plus phase0 `1..1031`. Current built-in final blocks remain metadata-governed by one
   final `callback: codeblock` slot. General user-function declarations and contextual execution are explicitly
-  handed to `.5.1`, `{|params| ...}` literals/dynamic calls stay `.11.7`, generated preservation stays `.8.1-.8.4`,
+  handed to `.5.1`, `{|params| ...}` literals/dynamic calls stay `.11.8`, generated preservation stays `.8.1-.8.4`,
   and capture-slice/mark/input/cursor helpers `.4.3.7` become the next dependency-ready runtime family; its first
   input/cursor leaf subsequently closes at 115/115.
 - `2026-07-13` refresh: Lua array-root `walk_leaves`/`map_leaves`/`reduce_leaves` now reuse the harray callback
@@ -1257,12 +1268,12 @@ This document is the current high-level technical reading of the project shape. 
   statements reuse dropped-statement mutation; final expressions yield values; local return catches only the
   block's return flow; empty/keyed braces remain harrays; yielded values continue through receivers. This corrects
   the earlier Lua-only `callback = { return(...) }` inert-storage scaffold expectation. Contextual trailing blocks
-  remain structural, explicit callable values remain future `.11.7`, and lazy inline controls `.4.3.6.2` are done.
+  remain structural, explicit callable values remain future `.11.8`, and lazy inline controls `.4.3.6.2` are done.
 - `2026-07-13` refresh: Lua's ActionIR parser/resolver already preserves eager blocks, generic final block
   arguments, and structured controls, but the interpreter currently returns inert block copies and has no
   control/callback executor. `.4.3.6.0` splits eager values, inline controls, statement controls, current built-in
   contextual blocks/`with`, callbacks, and no-drift. General user-function final blocks remain `.5.1`; explicit
-  callable codeblock values remain future `.11.7`; the next refresh records eager block completion.
+  callable codeblock values remain future `.11.8`; the next refresh records eager block completion.
 - `2026-07-13` refresh: Lua's ordinary harray family is closed at 103/103. All 13 names route through typed
   constructor/generic paths, the copied harray dispatcher, or uniform named/direct mutation; public guards lock
   updated direct snapshots and pure receiver set-key. `walk_leaves`/`map_leaves`/`reduce_leaves` remain the three

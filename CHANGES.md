@@ -1,5 +1,35 @@
 # CHANGES
 
+## 2026-08-01 — FUTURE-PARITY-BACKLOG.11.7.0 — split callable no-drift and Lua routing
+
+This behavior-free audit separates two different kinds of remaining callable-codeblock work. Perl, Rust, Dart,
+and Julia already implement inert typed construction, dynamic caller-context invocation, generic contextual final
+blocks, and native/reconstructed/generated/emitted identity. The unchanged neutral checker passes
+7/11/9/7/4/8, while focused consumers pass Perl 10 subtests, Rust 18 tests, Dart 21 tests, and Julia 125 dynamic +
+118 contextual + 239 construction assertions. Canonical CI currently composes only the neutral checker and Perl
+consumer, and the mixed capability exclusion still names completed Rust/Dart/Julia behavior as future. New leaves
+`.11.7.1-.2` now own recurring four-backend proof/status correction and public no-drift closeout.
+
+Exact Lua ActionIR probes establish the separate product gap. `{|left, ...rest| return(left) }` enters eager
+`block_value` parsing and retains unsupported raw body syntax; no explicit eight-field literal crosses AST/copy/
+registry state. Colon keyword calls and access on an evaluated call result lack typed nodes. Runtime dispatch has
+only the narrow declared zero-argument contextual-slot path, not a post-static general bound-codeblock fallback or
+active explicit-codeblock recursion stack. Existing `runtime_scoped_binding`, recursive copy, and effective-
+`SpecFile` source emission are the reusable authorities, so no closure, second executor, or new codec is needed.
+
+New parent `.11.8` orders Lua work as detailed RED planning `.0`, inert construction/state `.1`, dynamic
+invocation/failures `.2`, serialized/generated/emitted dual-ABI identity `.3`, and five-backend recurring/public/
+capability admission `.4`. Current eager blocks, controls, contextual helper/receiver/user-function blocks, staged
+functions, generated subset, descriptors, semantic/MCP surfaces, and 80/0/0 capability state do not move. The
+complete Lua gate remains green at 177/177 on PUC Lua and LuaJIT, primary CLI 66x2, and corpus 105/105 with exact
+repository-storage proof. Root `README.md` and push cadence remain unchanged.
+
+Final governance passes Knowledge Map 772 facts / 6,262 question keys, mdBook 79 files / 13,984 KiB, memory/task/
+README/whitespace checks, and all seven doctrines. The complete authorized canonical wrapper passes semantic/MCP
+admissions, nested process containment, moved-root anchors, primary CLI 66x2, RAM 52%, and Phase 0 1,031/1,031 in
+653 seconds before reporting `local CI gate passed`. The first outer-sandboxed attempt could not invoke nested
+macOS `sandbox-exec`; the complete authorized rerun exercises that boundary and passes.
+
 ## 2026-07-30 — FUTURE-PARITY-BACKLOG.11.6.3 — normalize Julia final codeblocks
 
 Julia now preserves an exact final-only `name: codeblock` declaration through the shared function-definition

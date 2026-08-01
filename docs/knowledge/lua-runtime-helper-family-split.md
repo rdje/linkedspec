@@ -23,6 +23,7 @@ evidence_update_2026_07_15_diagnostic_output: "Complete named-mark admission rai
 evidence_update_2026_07_15_exhaustive_split: "LUA-BACKEND-PARITY.4.3.9.0 probes all 246 names through Lua parse/compile/runtime: 230 reach an owner, thirteen unsupported function forms are intentionally structural or named-receiver-only, and eager and/or/not are the exact missing family. .4.3.9.1 owns logical execution; .4.3.9.2 owns recurring exact admission, direct call(rule), inventory cleanup, status, and parent closure. Perl logical keyword lowering plus five-backend truthiness/arity is routed to FUTURE-PARITY-BACKLOG.5.2."
 evidence_update_2026_07_15_logical: "LUA-BACKEND-PARITY.4.3.9.1 closes eager and/or/not execution over existing Lua truthiness at 123/123 on PUC Lua and LuaJIT. .4.3.9.2 is active for recurring exact 246-name ownership, direct call(rule), inventory cleanup, status, and .4.3 parent closure."
 evidence_update_2026_07_15_closeout: "LUA-BACKEND-PARITY.4.3.9.2 closes exhaustive native helper/value/control no-drift. A permanent sorted 246-name probe reports 233 function-form owners and exactly thirteen documented structural/receiver-only forms; direct call(rule) and public runtime-helper-value-control status are focused. PUC Lua and LuaJIT pass 125/125; .4.3 closes and diagnostics/trace .4.4 activates."
+evidence_update_2026_08_01_callable_routing: "FUTURE-PARITY-BACKLOG.11.7.0 leaves the closed helper/control surface unchanged and routes explicit Lua callable values/general bound calls to .11.8."
 reverify: "bash scripts/check_task_tree_metadata.sh && bash scripts/check_doctrines.sh"
 ---
 
@@ -52,7 +53,7 @@ public no-drift. This keeps PCRE2 policy, value typing, scalar mutation, and agg
 The array and harray families are closed. Codeblock/control parent `.4.3.6` is split into `.0` audit, `.1` eager
 block execution, `.2` inline value controls, `.3` statement controls, `.4` built-in contextual blocks/`with`, `.5`
 tree callbacks, and `.6` no-drift. General user-function contextual blocks remain `.5.1`; explicit callable
-codeblock values remain `FUTURE-PARITY-BACKLOG.11.7`.
+codeblock values remain `FUTURE-PARITY-BACKLOG.11.8`.
 
 Capture/cursor parent `.4.3.7` was split into `.0` audit, `.1` input/cursor reads and explicit controls, `.2`
 anonymous boundaries, `.3` governed named marks/bridges, `.4` placement-sensitive marker members, `.5` earliest-

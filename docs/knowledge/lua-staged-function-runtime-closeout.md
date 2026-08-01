@@ -12,6 +12,7 @@ status: current
 tags: [lua, staged-parsing, functions, variadic, codeblock, closeout, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.5.1.5 audits source, exports, tests, public docs, task state, and Knowledge Map. .5.1.1-.5 close at 146/146 on PUC Lua and LuaJIT with status runtime-user-functions-contextual-codeblock-v1; .5.2 activates."
 evidence_update_2026_07_15_descriptor_trace: "Later .5.3.1/.2 admit exact outward descriptors and propagate one caller emitter through this staged runtime, reaching 155/155 with status native-full-pipeline-trace-v1."
+evidence_update_2026_08_01_callable_routing: "FUTURE-PARITY-BACKLOG.11.7.0 confirms staged/contextual/generated Lua authorities are reusable and routes the remaining explicit literal/general bound-call behavior to .11.8."
 reverify: "bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_callable_signature_contract.py && bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py"
 ---
 
@@ -34,7 +35,7 @@ closes parent `.5.2`. Outward descriptors and full-pipeline trace close through 
 closes parents `.5.3`/`.5` before corpus `.6.1`.
 Generated preservation and final admission later close under `.8` at five-backend 80/0/0. The historical corpus
 and parser-CLI frontiers are also closed; explicit `{|params| ...}` literals and general bound dynamic calls remain
-`.11.7`.
+`.11.8`.
 
 Related facts: [[lua-staged-function-execution-split]], [[lua-staged-function-body-registry]],
 [[lua-fixed-v1-user-function-runtime]], [[lua-variadic-v2-runtime]],

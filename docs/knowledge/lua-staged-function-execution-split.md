@@ -13,6 +13,7 @@ date: 2026-07-15
 status: current
 tags: [lua, staged-parsing, user-functions, variadic, codeblock, task-tree, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.5.1.0 splits staged dispatch, fixed execution, variadic metadata/runtime, contextual-codeblock metadata/runtime, and no-drift. .5.1.1-.5.1.4.2 land in order at 130/133/136/139/142/146 dual-ABI tests; .5.1.5 closes the parent and activates native loading .5.2."
+evidence_update_2026_08_01_callable_routing: "FUTURE-PARITY-BACKLOG.11.7.0 confirms this contextual runtime is intentionally narrower than explicit values and routes Lua literal/general bound-call implementation to .11.8."
 reverify: "rg -n 'LUA-BACKEND-PARITY\\.5\\.1(\\.|`)|staged action-body|fixed-v1|variadic-v2|contextual-codeblock|callable literals' docs/tasks/LUA-BACKEND-PARITY.md docs/TASK_TREE.md README.md ROADMAP.md ROADMAP_V2.md lua/README.md docs/linkedspec-book/src docs/knowledge"
 ---
 
@@ -41,7 +42,7 @@ The implementation order is therefore:
 
 Outward descriptors and full-pipeline trace stay `.5.3`; generated
 preservation/execution stays `.8`. Explicit `{|params| ...}` literals and bound
-codeblock-variable invocation remain `FUTURE-PARITY-BACKLOG.11.7` because they
+codeblock-variable invocation remain `FUTURE-PARITY-BACKLOG.11.8` because they
 need a general dynamic callable runtime, not merely a contextual final argument.
 
 Related facts: [[lua-user-function-registry]],

@@ -147,8 +147,9 @@ dispatch rule.
 > metadata-owned normalizer to helper, typed-user-function, receiver `with`, and tree-traversal contextual forms.
 > Lua `.4.3.6.4` consumes the declaration for built-in helper/receiver `with`, with cleanup-safe copied
 > scope; `.4.3.6.6` closes current Lua built-in/callback no-drift. Lua general user-function `callback: codeblock`
-> execution remains `.5.1`, and explicit literals/dynamic calls remain `.11.7`. Cross-backend parity remains
-> future, so do not treat the parenthesized form as universally portable yet.
+> execution is current through `.5.1`, while explicit literals/dynamic calls remain `.11.8` after four-backend
+> governance `.11.7`. Cross-backend parity remains future, so do not treat explicit values as universally
+> portable yet.
 
 ## 1. Working Variables and Setup
 

@@ -14,6 +14,7 @@ date: 2026-07-13
 status: current
 tags: [lua, runtime, codeblock, with, scope, metadata, callbacks, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.4.3.6.4 adds copied built-in final-codeblock contracts, runtime_scoped_binding.lua, interpreter dispatch, and focused helper/receiver/scope/error coverage. PUC Lua and LuaJIT pass 112/112; Perl lowering/execution probes agree."
+evidence_update_2026_08_01_callable_routing: "FUTURE-PARITY-BACKLOG.11.7.0 preserves this contextual path and routes explicit Lua {|params| ...} values plus general bound calls to dependency-complete parent .11.8."
 reverify: "bash tools/run_lua_local.sh && PERL5LIB=perl perl -MLinkedSpec -e 'for my $s (q{return(with(\"x\") { return(value) })}, q{return(with(\"x\", { return(value) }))}, q{return(\"x\".with() { return(value) })}, q{return(\"x\".with({ return(value) }))}) { print LinkedSpec::call_spec_handler_subst(q{Top},$s), qq{\\n}; }'"
 ---
 
@@ -50,7 +51,7 @@ consumes the same registry and an extended atomic frame through `LUA-BACKEND-PAR
 traversal shares the receiver-root-kind dispatcher through `.4.3.6.5.2`, with cross-kind aggregates staying
 leaves. General user-function dispatch, final `callback: codeblock` declaration, and attached/parenthesized
 contextual execution have since closed through `.5.1`, while explicit first-class
-`{|params| ...}` values remain `FUTURE-PARITY-BACKLOG.11.7`.
+`{|params| ...}` values remain `FUTURE-PARITY-BACKLOG.11.8`.
 
 Related facts: [[lua-runtime-block-control-callback-split]], [[lua-runtime-eager-block-values]],
 [[generic-trailing-codeblock-argument-correction]], [[final-codeblock-parameter-declaration]],

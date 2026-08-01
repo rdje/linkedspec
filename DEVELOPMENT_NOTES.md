@@ -1,5 +1,33 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`FUTURE-PARITY-BACKLOG.11.7.0` — separate governance drift from missing Lua behavior): four
+  focused backend consumers are already exact, but there is no single recurring driver that composes them, and
+  the mixed capability exclusion still describes completed Rust/Dart/Julia work as future. Those are governance
+  defects, not reasons to reopen backend runtimes. They remain in `.11.7.1-.2` with omission-sensitive topology
+  and public-status proof.
+
+  Lua's remaining gap is structural and was measured through typed ActionIR probes. Its brace parser recognizes
+  harray versus eager `block_value` only, copy/registry state knows `block_value` and contextual
+  `codeblock_argument`, and general call dispatch ends after static controls/helpers/functions except for the
+  narrow declared contextual slot. Colon keyword syntax and evaluated-call access also fall to raw nodes. This is
+  why inserting only a runtime fallback would be unsafe: no inert typed value could reach it, and the exact
+  neutral failures/result continuation could not be represented.
+
+  The implementation should compose existing owners. `runtime_scoped_binding` provides protected temporary
+  bindings; recursive copy owns isolation; current caller stores already provide dynamic context; and emitted Lua
+  serializes/reconstructs one effective `SpecFile`. The dependency order is therefore typed construction/state,
+  then general invocation, then multi-route/dual-ABI proof, then capability/public admission. That sequence is new
+  `.11.8.0-.4`; it explicitly denies closures, lexical capture, a second interpreter, and a second generated codec.
+
+  Neutral 7/11/9/7/4/8 plus focused Perl 10, Rust 18, Dart 21, and Julia 125+118+239 all pass unchanged. The
+  complete Lua gate also passes 177/177 per ABI, generated fresh-host paths, primary CLI 66x2, corpus 105/105, and
+  repository-local project-data proof. No production or capability/MCP behavior changes in this audit.
+
+  Final no-drift proof passes Knowledge Map 772/6,262, mdBook 79/13,984 KiB, all seven doctrines, canonical
+  semantic/MCP admissions, nested process containment, moved-root anchors, CLI 66x2, RAM 52%, and Phase 0
+  1,031/1,031 in 653 seconds with the explicit local-CI pass marker. The initial outer sandbox could not nest the
+  required macOS containment sandbox; a complete authorized rerun exercised that kernel boundary successfully.
+
 - 2026-07-30 (`FUTURE-PARITY-BACKLOG.11.6.3` — one registry-complete contract pass, not parser-owned semantics):
   the shared function-definition parser already emitted `fixed_params`, `codeblock_param`, and final-only
   `parameter_kinds`; Julia discarded that shape before staged/registry/descriptor state. Attached helper calls

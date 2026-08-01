@@ -13,8 +13,8 @@ answers:
 date: 2026-07-12
 status: current-partial-rollout
 tags: [codeblock, callable, literal, dynamic-scope, harray, actionir, FUTURE-PARITY-BACKLOG]
-evidence: "Director agreement on 2026-07-12 selects {|args| ...} and dynamic caller context; ADR 0031 defines literals/invocation, ADR 0032 defines final-only name: codeblock, and .11.2 adopts linkedspec-callable-codeblock-v1. Perl .11.3 and Rust .11.4 consume full behavior; Dart .11.5 consumes construction, invocation, and contextual equivalence; Julia .11.6.1-.2 consume inert construction plus dynamic invocation while Julia contextual behavior and Lua explicit parity stay future."
-reverify: "bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && rg -n '0031|0032|name: codeblock|dynamic caller|FUTURE-PARITY-BACKLOG\\.11\\.[1-7]' docs/decisions/0031-callable-codeblock-literal-and-dynamic-context.md docs/decisions/0032-final-codeblock-parameter-declaration.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
+evidence: "Director agreement on 2026-07-12 selects {|args| ...} and dynamic caller context; ADR 0031 defines literals/invocation, ADR 0032 defines final-only name: codeblock, and .11.2 adopts linkedspec-callable-codeblock-v1. Perl .11.3, Rust .11.4, Dart .11.5, and Julia .11.6 consume construction, invocation, and contextual equivalence. Lua contextual blocks are current, while explicit literals/general bound calls remain dependency-owned by .11.8."
+reverify: "bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && rg -n '0031|0032|name: codeblock|dynamic caller|FUTURE-PARITY-BACKLOG\\.11\\.[1-8]' docs/decisions/0031-callable-codeblock-literal-and-dynamic-context.md docs/decisions/0032-final-codeblock-parameter-declaration.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
 The accepted callable codeblock literal is:
@@ -61,7 +61,8 @@ copied/restored bindings, local results, typed failures/recursion, and native/re
 identity. Dart contextual behavior is current through `.11.5.3`. Julia `.11.6.1-.2` now preserves the same inert
 record and executes bound calls with ordered arguments, copied/restored bindings, live caller stores, local
 results/access, exact failures/recursion, and native/reconstructed/generated/emitted identity. Julia contextual
-behavior and Lua explicit values remain future, so the complete feature is not yet portable.
+behavior is current through `.11.6.3`. Lua contextual final blocks are current, but Lua explicit values and
+general bound calls remain future under `.11.8`, so the complete feature is not yet portable.
 
 Related facts: [[generic-trailing-codeblock-argument-correction]], [[variadic-user-function-contract]],
 [[terse-expression-valued-blocks-ground-truth]], [[hash-literal-dynamic-key-contract]],

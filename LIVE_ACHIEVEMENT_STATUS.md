@@ -1,5 +1,22 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-01 — Callable four-backend/Lua ownership audit is signoff-complete
+
+Behavior-free leaf `FUTURE-PARITY-BACKLOG.11.7.0` proves the unchanged callable contract and focused Perl, Rust,
+Dart, and Julia consumers green, while measuring the exact remaining Lua parser/AST/call gap. The current Lua
+contextual path is preserved: eager blocks, controls, built-in/tree callbacks, final user-function blocks,
+descriptor v3, staged functions, generated accepted subset, and both ABIs remain complete. The complete Lua gate
+passes 177/177 per ABI, primary CLI 66x2, corpus 105/105, and repository-storage proof.
+
+The task tree now keeps recurring four-backend driver/status correction and public no-drift under `.11.7.1-.2`.
+New `.11.8.0-.4` separately own detailed Lua RED planning, inert eight-field literal/state, dynamic caller-context
+invocation, existing-emitter generated identity on both ABIs, and final five-backend admission. Existing scoped
+bindings, recursive copy, and effective-`SpecFile` serialization are named reuse boundaries; closures, lexical
+capture, new codecs/executors, capability/MCP movement, root README edits, and push are excluded. Governance,
+Knowledge Map 772/6,262, mdBook 79 files / 13,984 KiB, all seven doctrines, and definitive canonical semantic/
+MCP, containment/moved-root, CLI 66x2, RAM 52%, and Phase 0 1,031/1,031 in 653 seconds pass. The canonical wrapper
+reports `local CI gate passed`; only workflow commit and clean handoff remain before `.11.7.1` activates.
+
 ## 2026-07-30 — Julia generic final-codeblock equivalence is signoff-complete
 
 Leaf `FUTURE-PARITY-BACKLOG.11.6.3` now preserves exact final-only definition/staged/registry/descriptor-v3/

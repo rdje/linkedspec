@@ -12,6 +12,7 @@ date: 2026-07-15
 status: current
 tags: [lua, functions, codeblock, parameter-kinds, actionir, staged-parsing, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.5.1.4.1 passes metadata preservation at 142/142; .5.1.4.2 executes callbacks at 146/146; .5.3.1 emits exact outward final-codeblock-v3 records while the complete Lua suite remains 153/153 on both ABIs."
+evidence_update_2026_08_01_callable_routing: "FUTURE-PARITY-BACKLOG.11.7.0 preserves this zero-positional contextual contract and routes explicit literal signatures plus general bound calls to .11.8."
 reverify: "bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py"
 ---
 
@@ -31,7 +32,7 @@ This leaf is deliberately metadata-only, but its direct successor is complete. `
 invokes user-function contextual blocks in the current isolated function frame with copied/restored stores,
 chainable return behavior, static callable precedence, and typed wrong-kind/missing/arity/recursion diagnostics.
 Outward descriptor v3 is complete in `.5.3.1`; generated preservation and execution remain `.8`, and explicit
-`{|params| ...}` values plus bound dynamic calls remain `.11.7`.
+`{|params| ...}` values plus bound dynamic calls remain `.11.8`.
 
 Related facts: [[final-codeblock-parameter-declaration]], [[perl-generic-final-codeblock-normalization]],
 [[lua-staged-function-execution-split]], [[lua-variadic-v2-runtime]].

@@ -5,20 +5,22 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `bc85c0fa` — clean Julia dynamic-invocation HEAD from which contextual equivalence `.11.6.3`
-  activated task-tree-first (116/300; no push); Git derives the landing identity.
-- latest_completed_leaf: intended landing `FUTURE-PARITY-BACKLOG.11.6.3 - normalize Julia final codeblocks`; parent
-  `.11.6` is closed; Git derives the landing identity after commit.
-- active_leaf: none at the intended clean landing; `.11.7` is the next task-tree-first activation.
-- active_scope: completed Julia final-only metadata, one governed contextual normalization, shared executor reuse,
-  native/reconstructed/generated/emitted identity, docs, gates, and parent closeout.
-- active_progress: focused 125 dynamic + 118 contextual + 239 construction, complete package, Julia-local,
-  governance, mdBook, and canonical signoff are green; no implementation or verification remains in flight.
-- active_exclusions: closures/callback runtimes, syntax-owned semantics, implicit positional callback parameters,
-  capability/MCP movement, lexical capture, other backends, root README, history rewriting, and push.
+- activation_commit: `3767b8c3` — clean Julia callable closeout HEAD from which behavior-free audit `.11.7.0`
+  activated task-tree-first (117/300; no push); Git derives the landing identity.
+- latest_completed_leaf: intended landing `FUTURE-PARITY-BACKLOG.11.7.0 - split callable no-drift and Lua routing`;
+  Git derives the landing identity after commit.
+- active_leaf: none at the intended clean `.11.7.0` landing; `.11.7.1` is the next task-tree-first activation.
+- active_scope: exact four-backend callable baseline, Lua causal gap map, task split, durable/public routing, and
+  unchanged-behavior proof only.
+- active_progress: neutral 7/11/9/7/4/8 and focused Perl 10, Rust 18, Dart 21, Julia 125+118+239 pass; complete Lua
+  local gate passes 177/177 per ABI, byte-fresh binding, semantic/MCP, primary 66x2, corpus 105/105, and storage.
+  KM 772/6,262, mdBook 79/13,984 KiB, doctrines, and canonical Phase 0 1,031/1,031 in 653s pass. `.11.7.1-.2`
+  own four-backend recurrence/public closeout; `.11.8.0-.4` own Lua construction through admission.
+- active_exclusions: parser/compiler/runtime/descriptor/generated-source changes, capability/MCP movement, lexical
+  capture, closures, host callbacks, second executors/codecs, root README, history rewriting, push, and task pivot.
 - in_flight_uncommitted: none in the intended post-landing state; clear the brief and prove the activation pointer,
-  output census, and Git status before any pivot or session reset.
-- next_after_clean_commit: activate four-backend callable no-drift and Lua routing `.11.7`; no push.
+  output census, and Git status before activating `.11.7.1`.
+- next_after_clean_commit: activate recurring four-backend callable governance `.11.7.1`; no push.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -39,16 +41,16 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - closed_contract_handoff_guard: retain historical next owner `FUTURE-PARITY-BACKLOG.10.1` until tracked `.22`
   moves the repeated-action checker's immutable handoff to a stable governed home.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54.
-- current_future_direction: ADR `0064`/`SPEC-LANGUAGE-SELF-CONTAINMENT` owns expressive closure/EBNF profiles;
-  callable parity next advances through four-backend no-drift/Lua routing `.11.7`; ADR `0056` stays `.14.1-.8`.
-- latest_bootstrap_read: 2026-07-30 — required resume pointers, active task/ADR/KM/Toolbox, contract/binding/server/
-  consumer/driver/ledger/storage/canonical owners refreshed; roadmap/codebase/all 46 mdBook pages remain read.
+- current_future_direction: callable four-backend governance advances through `.11.7.1-.2`; Lua explicit parity
+  advances through `.11.8.0-.4`; ADR `0064`/self-containment remains unscheduled and ADR `0056` stays `.14.1-.8`.
+- latest_bootstrap_read: 2026-08-01 — README, memory architecture, resume/task/decision/KM/Toolbox owners, full
+  roadmap, codebase, and all 45 tracked mdBook pages are read/understood; current callable/Lua authorities refreshed.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
-- push_policy: hard lock at 300 new local commits; counter 117/300 after intended `.11.6.3` landing; no push.
+- push_policy: hard lock at 300 new local commits; counter 118/300 after intended `.11.7.0` landing; no push.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; canonical needs nested macOS sandbox permission and up to 30m.
-- canonical_state: `.11.6.3` passes KM 771/6,256, book 79/13,980, all 7 doctrines, semantic/MCP admissions,
-  containment/moved-root, CLI 66x2, RAM 61%, and Phase 0 1,031/1,031 in 966 seconds; exact cleanup passes.
-- blockers: none; land `.11.6.3`, prove clean, then begin `.11.7` in a fresh session; no push.
+- canonical_state: `.11.7.0` complete authorized local CI is green through semantic/MCP admission, containment,
+  moved-root proof, CLI 66x2, RAM 52%, Phase 0 1,031/1,031 in 653s, and explicit `local CI gate passed`.
+- blockers: none; after `.11.7.0` lands clean, activate `.11.7.1`; no push.

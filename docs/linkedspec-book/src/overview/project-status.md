@@ -520,7 +520,8 @@ Three backbone items tracked major structural modernization — all done:
   This remains alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument
   `capture_until_boundary()` decisions. General user-function final `callback: codeblock` declaration/execution
-  and outward descriptor v3 are current in Lua; first-class callable block values remain `.11.7`;
+  and outward descriptor v3 are current in Lua; first-class callable block values remain `.11.8` after
+  four-backend governance `.11.7`;
   generated Lua accepted-subset proof closes under `.8.3`, and five-backend census/handoff `.8.4` is complete.
 - **Lua staged-function frontier** - Planning `.5.1.0` separates minimal action-body dispatch `.5.1.1`, fixed-v1
   runtime `.5.1.2`, variadic-v2 metadata/runtime `.5.1.3`, contextual final-codeblock metadata/runtime `.5.1.4`,
@@ -540,7 +541,7 @@ Three backbone items tracked major structural modernization — all done:
   both suites to 161/161. Governed capability/no-drift `.6.1.4` locks the remaining owned 6/6 window, raises both
   suites to 162/162, closes `.6.1`, and activates `.6.2`.
   Generated Lua remains `.8`, and explicit callable literals/bound
-  calls remain `.11.7`.
+  calls remain `.11.8`.
 - **Post-parity structured-text program** - ADRs `0034`, `0037`, and `0038` plus `STRUCTURED-TEXT-FORMAT-PROGRAM` map all 91 eligible rows in the Unicode structured-text catalog. Each format's composed `.spec` graph is the sole parser source and is dynamically compiled for immediate use on every backend; host source/caches are derivative only. The catalog becomes requirements evidence for reusable neutral `.spec` evolution: a format-discovered mechanism must reach exact Perl/Rust/Dart/Julia/Lua parity before that format continues. JSON/XML/YAML/HTML/Markdown/RDF foundations are reused; conditional formats use named profiles; text-to-AST stays distinct from evaluation/domain semantics; HTML owns a full WHATWG tokenizer/tree-builder lane; accuracy, Unicode, diagnostics, conformance, separate cold-construction/warm-reuse/parse measurements, and correlated compile/runtime trace with exact emission-only rule filters are required. A separate non-blocking `NATIVE-PARSER-ACCELERATOR` horizon may later derive measured backend-native artifacts, but the dynamic parser remains primary, oracle, and fallback and Perl acceleration is not required. Lua `.8.4` satisfies the full-backend parity prerequisite; readiness leaf `.1` remains pending explicit activation and no format implementation has started.
 - **Planned Rust mutation testing** - ADR `0039` and `RUST-MUTATION-TESTING` adopt `cargo-mutants` as an explicit test-strength campaign, never a per-commit/pre-commit/ordinary-local-CI gate. The list-only baseline is 3,333 candidates across 19 files; no mutant has executed and no score is claimed. A safe manual surface and targeted pilot must precede any resource-guarded milestone/release sharding. Every survivor receives a durable disposition and true gaps gain behavior-focused tests; the generated Unicode table is the initial provenance-backed exclusion.
 - **Planned backend implementation companions** - ADR `0040` and `BACKEND-COMPANION-BOOKS` retain this book as
@@ -828,7 +829,9 @@ Three backbone items tracked major structural modernization — all done:
   exact final-codeblock metadata, and metadata-governed generic contextual equivalence. Julia `.11.6.1-.3` now
   provide exact inert literal/signature/body/source/Unicode-span state, dynamic bound-variable invocation, exact
   final-only staged/descriptor metadata, and one governed contextual normalizer across native, serialized,
-  generated, emitted, user-function, and semantic authorities. Lua explicit-literal parity remains future.
+  generated, emitted, user-function, and semantic authorities. Audit `.11.7.0` proves those four implementations
+  focused-green and routes their recurring/public closeout to `.11.7.1-.2`; Lua explicit-literal/general-call
+  parity is separately dependency-owned by `.11.8`.
 - **Dart callable-codeblock construction and invocation** - `FUTURE-PARITY-BACKLOG.11.5.1` recognizes exact `{|params| body }`
   before Dart's harray/eager-block classifier and preserves the neutral eight-field record as inert plain data.
   Fixed and final-rest signatures, exact body/source, containing Unicode-character literal/body spans (including
