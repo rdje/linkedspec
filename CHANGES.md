@@ -1,5 +1,27 @@
 # CHANGES
 
+## 2026-08-01 — FUTURE-PARITY-BACKLOG.24.0.1 — repair staged owner metadata
+
+Git history proves that pending staged-composition owner `.2` was contaminated by two unrelated Lua cursor
+closeout patches: `e96d389e` wrote `.9.1.7.4` into its commit field, and `7dd70a2d` replaced its verification with
+`.9.1.7.6` activation/admission text. The original goal, acceptance, and pending status never moved, and no `.2`
+implementation or activation landed.
+
+`.2` now truthfully records supersession without implementation by structural parent `.14`, progressive owner
+`.14.6`, and staged owner `.14.7`. Its stale frontier row, the closed staged-parsing tree, and two current
+architecture Knowledge cards use the same ownership. Dated 2026-07-12 reports remain unchanged as historical
+evidence; capability-manifest re-ownership remains exclusively `.24.1`.
+
+The `TASK-TREE-METADATA` doctrine keeps its completed-tree frontier rule and adds only the two contradictions
+proven here: a pending node cannot claim task-tree-first activation or name a different node from its own tree as
+its commit. Four in-memory fixtures prove ordinary pending and explicit supersession still pass while each exact
+contamination fails. No manifest, capability row, parser/compiler/runtime/emitter/MCP, or public-language behavior
+changes.
+
+Signoff preserves capability 80/0/0 and passes Knowledge Map 783/6,345, the sole-facing mdBook at 79 files /
+14,060 KiB, whitespace, all seven doctrines, repository containment/moved-root/outside-CWD execution, CLI 66x2,
+RAM 50%, and Phase 0 1,031/1,031 in 640 seconds before `local CI gate passed`.
+
 ## 2026-08-01 — FUTURE-PARITY-BACKLOG.24.0 — freeze exclusion freshness model
 
 The complete `excluded_or_future` audit now distinguishes capability rows from exclusion narrative governance.

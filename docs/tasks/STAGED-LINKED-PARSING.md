@@ -498,7 +498,8 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
   multiple payload parser families, recursive staged queues, and cycle
   diagnostics remain future work. The director's 2026-07-12 clarification adds
   arbitrary in-parse progressive composition and the simple-regex/linked-rule
-  authoring doctrine; `FUTURE-PARITY-BACKLOG.14.1-.14.4` now owns those leaves.
+  authoring doctrine; parent `FUTURE-PARITY-BACKLOG.14` now owns the program, with progressive in-parse
+  composition under `.14.6` and staged AST enrichment under `.14.7`.
 
 ## Blockers
 

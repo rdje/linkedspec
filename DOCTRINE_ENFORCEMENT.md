@@ -235,7 +235,7 @@ Enforced by [`scripts/check_doctrines.sh`](scripts/check_doctrines.sh) via
 |---|---|---|---|
 | `MEMORY-ARCH` | structural | `scripts/check_memory_architecture.sh` | the durable 4-layer memory architecture invariants (`MEMORY_ARCHITECTURE.md` §9) |
 | `KNOWLEDGE-MAP` | structural | `knowledge-map/scripts/check_knowledge_map.sh` | the derived Knowledge Map is in sync with its fact sources |
-| `TASK-TREE-METADATA` | structural | `scripts/check_task_tree_metadata.sh` | completed task trees do not advertise live `Current Frontier` rows |
+| `TASK-TREE-METADATA` | structural | `scripts/check_task_tree_metadata.sh` | completed task trees do not advertise live `Current Frontier` rows, and pending nodes claim neither task-tree-first activation nor another same-tree node as their own commit |
 | `TASK-ACCEPTANCE` | evidence | `scripts/check_diagnosis_evidence.sh` | staged governed code/spec/test/tooling changes carry a task-tree acceptance checklist with LinkedSpec-tool evidence signatures |
 | `REPO-ROOT-PATHS` | structural | `scripts/check_repo_root_path_portability.sh` | tracked parent-repository text contains no checkout/developer/private-session identity, Rust primary discovery is runtime-rooted, and all five primary commands retain their dynamic anchors |
 | `PROJECT-DATA-STORAGE` | structural | `scripts/check_project_data_storage_locality.sh` | tracked project-storage defaults and current documented output commands stay repository-filesystem rooted while explicit caller/inert/tool/system paths remain legal |

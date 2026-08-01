@@ -1,5 +1,22 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`FUTURE-PARITY-BACKLOG.24.0.1` — repair staged-owner metadata): original commit `59cbf0be`
+  created `.2` as pending with both evidence fields pending. Broad-context patches `e96d389e` and `7dd70a2d`
+  later selected those first matching fields while landing unrelated `.9.1.7.4` and `.9.1.7.6` work. A complete
+  pending-node census found seven legacy files with non-pending evidence, but only `.2` claimed task-tree-first
+  activation and only `.2` named a foreign same-tree commit; those are therefore the safe low-noise guard boundary.
+
+  The checker first failed with exactly those two `.2` diagnostics, then passed after `.2` became `superseded`
+  without implementation. Its node/frontier projection, the closed staged tree, and two current Knowledge cards
+  now name structural parent `.14`, progressive `.14.6`, and staged `.14.7`. Current-card census also found the
+  `staged-linked-parsing-architecture` projection introduced by `96179766`, while frontier census found the stale
+  row retained from `7083eb61`; both discoveries are durably owned here rather than silently absorbed.
+
+  Four in-memory task-metadata fixtures lock ordinary pending, pending activation rejection, foreign same-tree
+  commit rejection, and explicit supersession. Capability semantics remain 80/0/0 and the manifest stays untouched
+  for `.24.1`. Knowledge Map 783/6,345, sole-facing mdBook 79/14,060 KiB, all seven doctrines, canonical CLI 66x2,
+  RAM 50%, and Phase 0 1,031/1,031 in 640 seconds pass before the local-CI marker.
+
 - 2026-08-01 (`FUTURE-PARITY-BACKLOG.24.0` — capability exclusion freshness model): capability rows and
   exclusions are intentionally separate ledgers. A green 80/0/0 row census does not prove that prose under
   `excluded_or_future` is current. The existing checker validates record shape, uniqueness, evidence paths, and

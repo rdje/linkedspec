@@ -77,4 +77,5 @@ spec parser over that text. Staged parsing selects extracted fields from a retur
 level and refines them through later spec parsers. ADR 0012's parse graph remains the
 neutral umbrella, but the current implementation proves only the narrow function-body
 `body_parse_job` family; arbitrary in-parse composition, multiple public parser families,
-and recursive queues remain future work under `FUTURE-PARITY-BACKLOG.14.2-.14.4`.
+and recursive queues remain future work under parent `FUTURE-PARITY-BACKLOG.14`, specifically
+progressive in-parse composition `.14.6` and staged AST enrichment `.14.7`.

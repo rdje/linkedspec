@@ -777,6 +777,9 @@ To re-enable hosted CI later, restore the `push` and `pull_request` triggers in 
 - runs the main phase0 regression suite,
 - runs `scripts/check_memory_architecture.sh` to verify memory architecture invariants (layer integrity, pointer freshness, bounded-layer consistency),
 - runs `knowledge-map/scripts/check_knowledge_map.sh` to verify Knowledge Map integrity (derived map matches source cards, no stale entries),
+- runs `scripts/check_task_tree_metadata.sh` through the doctrine driver; completed trees cannot advertise live
+  frontier rows, while a pending node cannot claim task-tree-first activation or name another node from its tree as
+  its own commit; four in-memory fixtures lock the exact low-noise boundary,
 - runs `scripts/check_diagnosis_evidence.sh` through the doctrine driver; in a pre-commit context this requires
   staged code/spec/test/tooling changes to carry a task-tree acceptance checklist with LinkedSpec-tool evidence
   signatures,
@@ -1436,6 +1439,15 @@ fix is to unstage unrelated governed files, stage/update the owning task-tree ch
 a smaller leaf. The check is intentionally narrow: it does not audit historical task files and does not re-run
 commands copied into Markdown. The actual proof remains the focused validation recorded in the task leaf plus
 the local CI gate.
+
+The separate `TASK-TREE-METADATA` doctrine is also deliberately narrow. It rejects a completed tree with a live
+frontier and two status/evidence contradictions proven by repository history: a pending node cannot say it was
+activated task-tree-first, and its `Commit:` field cannot name a different node in the same tree. It does not turn
+legacy prose or missing historical commit backfills into unrelated cleanup work. Run it directly with:
+
+```bash
+bash scripts/check_task_tree_metadata.sh
+```
 
 The task-tree workflow (`docs/TASK_TREE.md`) and per-phase tree files (`docs/tasks/<TREE>.md`) are the authoritative record of what leaf owns what work.
 

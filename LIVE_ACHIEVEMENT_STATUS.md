@@ -1,5 +1,21 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-01 — Staged-owner metadata repair is signoff-complete
+
+`FUTURE-PARITY-BACKLOG.24.0.1` is signoff-complete from clean commit `7a5d0af3` (intended 127/300; no push).
+Git history proves unrelated commits `e96d389e` and `7dd70a2d` contaminated pending `.2`; the node now truthfully
+records no-implementation supersession by parent `.14`, progressive `.14.6`, and staged `.14.7`. Its frontier,
+the closed staged tree, and both current architecture cards agree. Historical dated reports remain intact.
+
+The task-metadata doctrine now rejects exactly the two proven pending-node contradictions—task-tree-first
+activation and a foreign same-tree commit—while four fixtures preserve ordinary pending and explicit supersession.
+Manifest/capability semantics, rows 80/0/0, parser/runtime/MCP, and public-language behavior do not move.
+
+Knowledge Map passes 783/6,345; the sole-facing mdBook builds 79 files / 14,060 KiB; all seven doctrines pass. The
+definitive canonical gate proves semantic/MCP admissions, 25-document callable governance, containment/moved-root/
+outside-CWD execution, CLI 66x2, RAM 50%, and Phase 0 1,031/1,031 in 640 seconds before `local CI gate passed`.
+Only commit, brief clearing, and exact clean proof remain before sole-facing callable-count repair `.24.0.2`.
+
 ## 2026-08-01 — Exclusion-freshness model is frozen behavior-free
 
 `FUTURE-PARITY-BACKLOG.24.0` is signoff-complete from clean commit `47b40c7a` (intended 126/300; no push). The exact four-record

@@ -1,5 +1,14 @@
 # ARCHITECTURE STATE
 
+- `2026-08-01 staged-owner metadata integrity`: `FUTURE-PARITY-BACKLOG.24.0.1` repairs broad pending owner `.2`
+  after Git proves unrelated commits `e96d389e`/`7dd70a2d` overwrote its evidence fields. `.2` was never
+  implemented or activated; its node/frontier, closed staged tree, and two current architecture cards now agree on
+  supersession by structural parent `.14`, progressive `.14.6`, and staged `.14.7`. `TASK-TREE-METADATA` adds only
+  two mutation-sensitive pending contradictions—activation claim and foreign same-tree commit—plus four fixtures;
+  it deliberately does not reinterpret legacy prose. Manifest/capability rows and runtime/public semantics do not
+  move. Signoff passes capability 80/0/0, Knowledge Map 783/6,345, sole-facing mdBook 79/14,060 KiB, all doctrines,
+  canonical RAM 50%, and Phase 0 1,031/1,031 in 640 seconds.
+
 - `2026-08-01 capability exclusion freshness`: behavior-free `FUTURE-PARITY-BACKLOG.24.0` proves the 80/0/0
   capability-row census does not validate the separate exclusion narratives. Exact audit retains deprecated Perl
   plugins under pending `.6`; valid future general parse-job work is now owned by active `.14`/`.14.6-.7`, not

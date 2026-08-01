@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-01` (exclusion-freshness planning `.24.0` is signoff-complete from clean
-  five-backend callable-admission commit `47b40c7a`; landing 126/300 and clean proof precede `.24.0.1`)
+- Last updated: `2026-08-01` (`.24.0` landed clean at `7a5d0af3`; pending-owner provenance/supersession repair
+  `.24.0.1` is active task-tree-first from that exact 126/300 boundary with no push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -1426,19 +1426,17 @@ before implementation.
   from still-open generated-source parity and later Lua; no complete-parity claim is made early.
 
 - ID: `FUTURE-PARITY-BACKLOG.2`
-  Status: `pending`
+  Status: `superseded`
   Goal: Generalize staged linked parsing beyond the current function-body prototype.
   Acceptance: Public `parse_job(...)` authoring, import/provider search roots, multiple payload
     parser families, recursive staged queues, cycle diagnostics, docs, and corpus fixtures are
     split before implementation and kept implementation-language neutral.
-  Verification: `activated task-tree-first on 2026-07-19 only after option-removal commit e96d389e landed cleanly
-    at ahead 239 with a zero-byte brief and no generated artifacts. Knowledge Map retrieval covers ADR 0044, the
-    neutral contract/checker, Perl 14-role plus Rust/Dart/Julia 15-role precedents, all committed Lua .1-.5 owner
-    tests/facts, the complete dual-ABI driver, canonical optional-driver seams, rollout, inventory, and mutations.
-    No semantic repair is indicated: the exact bounded change is one Lua 15-role consumer run on each ABI,
-    backend/canonical topology registration, inventory 68 -> 69, rollout 5+3 -> 6+2, and five omission mutations
-    44 -> 49. Root admission .9.1.1.2.5.3 remains untouched.`
-  Commit: `d472c136` — `FUTURE-PARITY-BACKLOG.9.1.7.4 - emit Lua generated-source v2`
+  Superseded by: `FUTURE-PARITY-BACKLOG.14`, with progressive in-parse composition under `.14.6` and staged AST
+    enrichment under `.14.7`.
+  Verification: **SUPERSEDED 2026-08-01.** No implementation or activation landed under `.2`. Git history proves
+    commits `e96d389e` and `7dd70a2d` misplaced unrelated `.9.1.7.4`/`.9.1.7.6` commit and verification text here;
+    `.24.0.1` removes those insertions and records the later `.14`/`.14.6-.7` ownership transfer truthfully.
+  Commit: `none — superseded without implementation`
 
 - ID: `FUTURE-PARITY-BACKLOG.3`
   Status: `done`
@@ -18043,18 +18041,91 @@ changes no manifest/checker behavior, capability row, parser/compiler/runtime/em
 or public language contract. Commit and exact clean-boundary proof are the only remaining workflow actions.
 
 - ID: `FUTURE-PARITY-BACKLOG.24.0.1`
-  Status: `pending`
+  Status: `done`
   Goal: Repair the broad `.2` owner's cross-slice provenance corruption and reconcile its supersession by `.14`.
   Dependencies: `.24.0`
   Acceptance: Use Git blame/diffs to preserve the exact two introducing commits; replace `.2`'s unrelated
-    verification/commit fields with truthful supersession by `.14`/`.14.6-.7`; reconcile the stale `.14.1-.4` and
-    `.14.2-.4` owner references in the closed staged tree and current Knowledge card; add the narrowest durable
+    verification/commit fields with truthful supersession by `.14`/`.14.6-.7`; reconcile the stale `.14.1-.4`
+    closed-tree reference, both current Knowledge-card `.14.2-.4` references, and `.2`'s stale pending frontier
+    row; add the narrowest durable
     metadata guard that rejects the proven pending-node contamination without invalidating legitimate parent/
     historical records; synchronize task/KM/live evidence; change no manifest, capability, parser/runtime, MCP,
     or public language behavior.
   Finding: Commit `e96d389e` accidentally wrote the completed `.9.1.7.4` commit identity into pending `.2`, and
     commit `7dd70a2d` accidentally wrote `.9.1.7.6` activation/admission detail into `.2` verification. Git history
     proves both were patch-context placement errors; `.2` goal/acceptance/status remained pending throughout.
+  Finding: The exact current-reference census after RED proof found a third stale owner projection in current card
+    `staged-linked-parsing-architecture`, introduced with structural clarification commit `96179766`; it joins the
+    closed staged tree and current `structural-progressive-staged-authoring-doctrine` card in this repair. Dated
+    2026-07-12 roadmap/live/change/development prose remains truthful history and is not rewritten.
+  Finding: The same census found `.2`'s current-frontier row still pending from original commit `7083eb61`, despite
+    the superseded node repair. It is the fourth current projection and must become superseded with the same exact
+    replacement; broad active-tree frontier/body correspondence remains outside this leaf's low-noise guard.
+  Verification: **PASS 2026-08-01.** Exact Git provenance, RED-before-repair metadata diagnostics, four repaired
+    current projections, four checker fixtures, capability 80/0/0, Knowledge Map 783/6,345, sole-facing mdBook
+    79/14,060 KiB, all seven doctrines, CLI 66x2, RAM 50%, and Phase 0 1,031/1,031 in 640 seconds pass.
+  Commit: `FUTURE-PARITY-BACKLOG.24.0.1 - repair staged owner metadata`
+
+### `FUTURE-PARITY-BACKLOG.24.0.1` Acceptance Checklist
+
+- [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Activate task-tree-first from clean exclusion-model commit
+  `7a5d0af3` (126/300), with zero-byte brief and no rendered-book, untracked, or in-flight process residue.
+- [x] **RETRIEVE / REVERIFY EXACT PROVENANCE** — Use the Knowledge Map before Git blame/show and current task/
+  decision authorities; preserve exact introducing commits, original `.2` metadata, current status enums, and the
+  `.14`/`.14.6-.7` supersession chain before editing the corrupted node or a checker.
+- [x] **RED-GUARD THE PROVEN CONTAMINATION CLASS** — Add the narrowest mutation-sensitive task-metadata denial
+  that catches unrelated descendant commit/verification text in an open node without rejecting legitimate parent,
+  historical, planned, or superseded records; prove RED before changing `.2`.
+- [x] **REPAIR `.2` / RECONCILE SUPERSESSION** — Replace only the two cross-slice insertions with truthful
+  no-implementation supersession evidence, use an allowed status, and update the two stale `.14.1-.4` /
+  `.14.2-.4` forms plus the stale pending frontier row across all four current references to parent `.14` plus
+  progressive `.14.6` and staged `.14.7` ownership; preserve dated historical claims.
+- [x] **LOCKSTEP / NO BEHAVIOR / COMMIT / CLEAN HANDOFF** — Synchronize task-tree, Knowledge Map, roadmaps, live
+  continuity, and sole-facing mdBook only where current architectural truth changes; preserve manifest/checker
+  capability meaning, rows 80/0/0, parser/runtime/MCP/public language behavior, and root README; pass focused,
+  doctrine, book, and warranted canonical gates, commit `.24.0.1`, clear the brief, and prove clean before `.24.0.2`.
+
+Activation evidence 2026-08-01: `.24.0` landed at `7a5d0af3` with pre/post memory-boundary checks and all seven
+doctrines green. Git status and both diffs were empty, `git_message_brief.txt` was zero bytes, rendered-book output
+was absent, and no background result remained to consume. Existing `.linkedspec-data` Python bytecode and migrated
+trace caches plus tracked PGEN issue logs are retained project-local authorities/caches, not disposable residue.
+This leaf owns only exact task metadata, four stale current owner references, one narrow metadata guard, and their durable
+projections. Manifest/exclusion implementation, capability rows, parser/compiler/runtime/emitter/MCP behavior,
+root README, callable count repair `.24.0.2`, `.24.1`, push, and unrelated artifact deletion are excluded.
+
+Provenance/RED evidence 2026-08-01: Knowledge Map retrieval led to the existing narrow doctrine boundary before
+Git archaeology. Original commit `59cbf0be` created pending `.2` with both evidence fields `pending`; `e96d389e`
+misplaced completed `.9.1.7.4` identity into its `Commit`, and `7dd70a2d` replaced its `Verification` with unrelated
+`.9.1.7.6` activation/admission prose. Status vocabulary explicitly allows `superseded` with a named replacement.
+A complete pending-node census showed seven legacy files with non-pending evidence but exactly one node claiming
+task-tree-first activation and exactly one naming a foreign same-tree commit: `.2` in both cases. The first run of
+the expanded checker therefore exited 1 with exactly those two diagnostics before any `.2` repair.
+
+Repair/guard evidence 2026-08-01: `.2` now says `superseded`, names parent `.14` plus progressive `.14.6` and staged
+`.14.7`, states no implementation/activation landed, and has no completion commit. Its current-frontier row, closed
+staged-tree authority, and both current architecture cards agree; dated 2026-07-12 history remains unchanged. The
+checker retains its completed-tree frontier rule and adds only pending activation/foreign-same-tree-commit denials.
+Four in-memory fixtures prove ordinary pending and explicit supersession pass while each exact corruption fails.
+Focused `bash -n`, checker/census/old-owner scans, capability 80/0/0, Knowledge Map 783/6,345, sole-facing mdBook
+79/14,060 KiB, whitespace, and all seven doctrines pass; rendered output is removed. The definitive authorized
+canonical gate passes all seven doctrines, semantic/MCP admissions, repository containment and moved-root/outside-
+CWD execution, CLI 66x2, RAM 50%, and Phase 0 1,031/1,031 in 640 seconds before `local CI gate passed`.
+
+### `FUTURE-PARITY-BACKLOG.24.0.1` TOOLBOX Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `git show`/`git blame` and `rg -n` prove two unrelated cursor insertions, four stale
+  current node/frontier/authority projections, and the unchanged manifest owner reserved for `.24.1`.
+- [x] **ROOT CAUSE (WHY + WHERE)** — WHY: broad patch context selected `.2`'s first evidence fields; WHERE:
+  `docs/tasks/FUTURE-PARITY-BACKLOG.md:1428` plus introducing commits `e96d389e` and `7dd70a2d`; later ADR `0056`
+  refined ownership without reconciling three other current projections.
+- [x] **FIX** — Mark `.2` superseded without implementation, align four current projections to `.14`/`.14.6-.7`,
+  and extend `scripts/check_task_tree_metadata.sh` with two narrow contradictions plus four in-memory fixtures.
+- [x] **ADDRESSED (verified)** — Exact pre-repair checker exit 1 names both `.2` violations; post-repair checker,
+  zero-result current stale-owner/census scans, Knowledge Map 783/6,345, and mdBook build 79/14,060 KiB pass.
+- [x] **NO REGRESSION** — Focused capability 80/0/0, memory, all seven doctrines, book, and whitespace pass;
+  canonical `bash tools/run_ci_local.sh` passes CLI 66x2, RAM 50%, and Phase 0 1,031/1,031 in 640 seconds.
+- [x] **LOCKSTEP** — Task/index, doctrine registry/mirror/card, staged-architecture cards/tree, continuity, roadmaps,
+  changes/development/live state, and sole-facing book must agree before commit and clean `.24.0.2` handoff.
 
 - ID: `FUTURE-PARITY-BACKLOG.24.0.2`
   Status: `pending`
@@ -18783,14 +18854,12 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-01):** exclusion-freshness planning `.24.0` is signoff-complete from clean
-callable-admission commit `47b40c7a` (intended landing 126/300; no push). Exact audit retains plugin legacy,
-re-owners valid future parse-job work from superseded/corrupt `.2` to active `.14`, and classifies satisfied
-semantic/cursor narratives for removal. Schema-v2 disposition/retention/task-status governance and 24 in-memory
-mutations are frozen without manifest/checker/row/runtime/MCP behavior change. Focused governance, Knowledge Map
-783/6,343, sole-facing mdBook 79/14,056 KiB, all doctrines, and canonical RAM 52% plus Phase 0 1,031/1,031 in 651
-seconds pass. Commit and prove clean, then activate `.24.0.1` for `.2` provenance/supersession repair; `.24.0.2`,
-`.24.1`, and `.24.2` remain dependency-ordered behind it.
+**Authoritative frontier (2026-08-01):** pending-owner provenance/supersession repair `.24.0.1` is signoff-complete
+from clean exclusion-model commit `7a5d0af3` (intended 127/300; no push). Exact commits `e96d389e`/`7dd70a2d`
+root-cause the two misplaced fields; `.2`, its frontier, the closed staged tree, and two current architecture cards
+now agree on no-implementation supersession by parent `.14` plus progressive `.14.6` and staged `.14.7`. One
+narrow doctrine rejects pending activation and foreign same-tree commit claims. Focused and canonical proof pass;
+only commit, brief clearing, and exact clean proof remain before sole-facing callable count repair `.24.0.2`.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private
@@ -19099,7 +19168,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 79 | `FUTURE-PARITY-BACKLOG.3.5` | `done` | Four focused/complete backend proofs and 60/0/0 close generated-source parity. |
 | 80 | `FUTURE-PARITY-BACKLOG.1.3` | `done` | Dedicated complete Lua parity plan exists; no implementation code changed. |
 | 81 | `LUA-BACKEND-PARITY.1.1` | `active` | Lock Lua runtime/tooling/package/test/cache choices before code. |
-| 65 | `FUTURE-PARITY-BACKLOG.2` | `pending` | Staged parsing generalization follows unless the director explicitly pivots. |
+| 65 | `FUTURE-PARITY-BACKLOG.2` | `superseded` | Parent `.14` now owns the direction; progressive `.14.6` and staged `.14.7` are the exact implementation leaves. |
 | 66 | `FUTURE-PARITY-BACKLOG.4.0` | `done` | Exact arity owners and existing open-bound helpers are audited; rollout is split by neutral/backend mechanism. |
 | 67 | `FUTURE-PARITY-BACKLOG.4.1` | `done` | ADR 0030 and a gated neutral contract adopt final `...rest`, typed-array binding, and versioned records. |
 | 68 | `FUTURE-PARITY-BACKLOG.4.2.1` | `done` | Perl preserves v1 fixed records and executes v2 fixed-prefix/rest signatures through generated source. |
@@ -20192,6 +20261,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-08-01` | `FUTURE-PARITY-BACKLOG.24.0.1` | Clean base `7a5d0af3`; Git provenance commits `59cbf0be`/`e96d389e`/`7dd70a2d`; exact RED pending-activation and foreign-same-tree-commit diagnostics; `.2` plus four current node/frontier/authority projections repaired to `.14`/`.14.6-.7`; four in-memory checker fixtures; zero stale-current scans; capability 80/0/0; Knowledge Map 783/6,345; sole-facing mdBook 79 files / 14,060 KiB; memory/task/whitespace/seven doctrines; definitive canonical semantic/MCP admissions, 25-document callable governance, containment/moved-root/outside-CWD execution, CLI 66x2, RAM 50%, Phase 0 1,031/1,031 in 640 seconds, and explicit local-CI pass. | PASS. Pending `.2` truthfully records supersession without implementation, current ownership is reconciled, and future task-metadata contamination is narrowly denied without manifest/capability/runtime/MCP/public-language movement. `.24.0.2` follows only after the clean commit. |
 | `2026-08-01` | `FUTURE-PARITY-BACKLOG.24.0` | Clean base `47b40c7a`; complete four-exclusion authority audit; exact legacy/future/satisfied classifications; schema-v2 disposition/retention/task-status model; 24 in-memory RED mutations; Git-root-caused `.2` metadata corruption and mdBook 24→25 count drift routed to `.24.0.1-.2`; capability 80/0/0; Knowledge Map 783/6,343; sole-facing mdBook 79 files / 14,056 KiB; memory/task/whitespace/seven doctrines; definitive canonical semantic/MCP admissions, 25-document callable governance, containment/moved-root/outside-CWD execution, CLI 66x2, RAM 52%, Phase 0 1,031/1,031 in 651 seconds, and explicit local-CI pass. | PASS. The exclusion-freshness implementation model and dependency-ordered repairs are exact without manifest/checker/runtime/capability/MCP/public behavior movement. `.24.0.1` follows only after the clean commit. |
 | `2026-08-01` | `FUTURE-PARITY-BACKLOG.11.8.0` | Clean base `e232609b`; ADR/KM/Toolbox-first owner retrieval; identical PUC Lua/LuaJIT typed RED and preserved-surface probes; dependency-complete `.11.8.1-.4` plan and one focused dual-ABI consumer; neutral 7/11/9/7/4/8 plus 20 governance mutations; complete Lua 177/177 per ABI, CLI 66x2, corpus 105/105, 16 storage owners; Knowledge Map 776/6,291; sole-facing mdBook 79 files / 14,008 KiB; memory/task/README/whitespace/seven doctrines; definitive canonical semantic/MCP admissions, containment/moved-root, CLI 66x2, RAM 61%, Phase 0 1,031/1,031 in 653 seconds, optional callable matrix at Perl 10 / Rust 18 / Dart 21 / Julia 125+118+239, and explicit local-CI pass; exact cleanup. | PASS. The smallest Lua construction/invocation/route/admission sequence is frozen without production, fixture, capability-row/MCP, root README, lexical-capture, closure, second-codec/executor, or push movement. `.11.8.1` follows only after the clean commit. |
 | `2026-08-01` | `FUTURE-PARITY-BACKLOG.11.7.2` | Clean base `c86f32fa`; exact 23-document public inventory; nine forbidden stale/premature claims; neutral 7/11/9/7/4/8 plus 20 governance mutations; recurring Perl 10, Rust 18, Dart 21, Julia dynamic 125 + contextual 118 + construction 239; capability 80/0/0; workflow routing/tool storage 42; Knowledge Map 775/6,283; sole-facing mdBook 79 files / 13,996 KiB; memory/task/README/whitespace/seven doctrines; definitive canonical semantic/MCP admissions, nested containment/moved-root, CLI 66x2, RAM 62%, Phase 0 1,031/1,031 in 659 seconds, optional four-backend callable matrix, and explicit local-CI pass; exact generated-book cleanup. | PASS. All governed public surfaces agree on four current backends and Lua-only `.11.8` work, parent `.11.7` closes without behavior or capability movement, and `.11.8.0` follows only after the clean landing. |
@@ -20522,6 +20592,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.24.0.1` | `FUTURE-PARITY-BACKLOG.24.0.1 - repair staged owner metadata` | Exact `.2` provenance/supersession repair, four current owner projections, and narrow pending-node evidence guard with complete signoff. |
 | `FUTURE-PARITY-BACKLOG.24.0` | `FUTURE-PARITY-BACKLOG.24.0 - freeze exclusion freshness model` | Behavior-free four-record audit, schema-v2 status/retention model, 24 mutations, three durable findings, dependency-ordered repairs, and complete signoff. |
 | `FUTURE-PARITY-BACKLOG.11.8.4` | `FUTURE-PARITY-BACKLOG.11.8.4 - admit five-backend callable codeblocks` | One rooted five-backend/six-runtime driver, 22 governance mutations, 25 public documents, satisfied-exclusion removal, parent closeout, and complete signoff. |
 | `FUTURE-PARITY-BACKLOG.11.8.3` | `FUTURE-PARITY-BACKLOG.11.8.3 - prove Lua emitted callable identity` | One typed state/interpreter across native, reconstructed, generated-plan, and fresh emitted execution on both Lua ABIs, with exact allocator/cleanup and complete signoff. |
@@ -20834,6 +20905,13 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-08-01`: Pending-owner repair `.24.0.1` root-causes commits `e96d389e` and `7dd70a2d`, restores `.2` as
+  superseded without implementation, and aligns its frontier plus three current owner authorities to parent `.14`,
+  progressive `.14.6`, and staged `.14.7`. The task-metadata doctrine now narrowly rejects a pending node that
+  claims task-tree-first activation or names a foreign same-tree commit; ordinary pending and explicit supersession
+  remain legal through four fixtures. Capability stays 80/0/0; Knowledge Map 783/6,345, sole-facing mdBook
+  79/14,060 KiB, all doctrines, canonical CLI 66x2, RAM 50%, and Phase 0 1,031/1,031 in 640 seconds pass. No
+  manifest, capability, parser/runtime/MCP, or public-language behavior changes; clean `.24.0.2` handoff follows.
 - `2026-08-01`: Exclusion-freshness plan `.24.0` audits all four records and freezes schema-v2 disposition,
   retention-authority, derived task-status, exact two-record/order, and 24 in-memory mutation governance. Plugin
   legacy remains under `.6`; valid future parse-job work moves from superseded `.2` to active `.14`; completed
