@@ -34,6 +34,15 @@
 > v2. The repeated-action recurring gate is `tools/check_repeated_action_result_five_backend.sh`; its public
 > rollout is closed at 8 complete / 0 pending.
 
+> **Active Lua callable-codeblock handoff:** completed planning leaf `FUTURE-PARITY-BACKLOG.11.8.0` freezes the
+> implementation order without changing behavior; inert-construction leaf `.11.8.1` is next. Lua must first
+> preserve exact `{|params| body }` / `{|| body }` as the neutral inert
+> eight-field value, then add post-static bound invocation through its existing scoped-binding/interpreter seams,
+> then prove the unchanged value through effective-`SpecFile` reconstruction and byte-fresh emitted modules on PUC
+> Lua and LuaJIT. Only the final recurring/public leaf may admit Lua. Exact colon keywords are typed only for
+> governed rejection; `name = value` remains a positional assignment expression. No closure, captured environment,
+> second codec, or second executor is part of the handoff.
+
 This chapter is the **single entry point** for anyone building a LinkedSpec backend
 in a new language (Rust, Dart, Julia, Lua, etc.). It links every specification, contract,
 and test artifact you need — in reading order.

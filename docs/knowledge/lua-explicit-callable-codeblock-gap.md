@@ -12,6 +12,7 @@ date: 2026-08-01
 status: current-gap
 tags: [lua, callable, codeblock, actionir, dynamic-scope, generated-source, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.11.7.0 probes exact Lua ActionIR/runtime owners after four-backend completion. Brace-pipe syntax falls through eager block parsing to unsupported raw body syntax; the AST/copy/registry has contextual codeblock_argument only; the interpreter has only zero-argument declared-slot execution and no post-static bound-value dispatch. Existing runtime_scoped_binding and effective-SpecFile emission are reusable, so FUTURE-PARITY-BACKLOG.11.8 owns construction, invocation, generated identity, and admission without a new closure, executor, or codec."
+evidence_update_2026_08_01_typed_audit: "FUTURE-PARITY-BACKLOG.11.8.0 confirms identical PUC Lua/LuaJIT gaps, distinguishes colon keyword data from positional name-equals assignment, freezes one focused Lua consumer, and records exact .11.8.1-.4 construction/invocation/route/admission owners in lua-callable-codeblock-typed-audit."
 reverify: "bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && rg -n 'block_value|codeblock_argument|execute_contextual_codeblock|runtime_scoped_binding|spec_ast\\.to_json|spec_ast\\.from_json' lua/src/linkedspec/action_ast.lua lua/src/linkedspec/action_parser.lua lua/src/linkedspec/interpreter.lua lua/src/linkedspec/runtime_scoped_binding.lua lua/src/linkedspec/source_emitter.lua && bash tools/run_lua_local.sh"
 ---
 
@@ -44,6 +45,6 @@ implementation is `FUTURE-PARITY-BACKLOG.11.8`: `.1` inert construction/state, `
 serialized/generated/emitted dual-ABI identity, and `.4` five-backend admission/public closeout after `.0` freezes
 the detailed RED plan. Lexical capture remains outside the accepted contract and requires a new decision/task.
 
-Related facts: [[callable-codeblock-literal-contract]], [[lua-contextual-user-function-codeblock-runtime]],
+Related facts: [[lua-callable-codeblock-typed-audit]], [[callable-codeblock-literal-contract]], [[lua-contextual-user-function-codeblock-runtime]],
 [[lua-runtime-eager-block-values]], [[lua-staged-function-execution-split]],
 [[lua-five-backend-capability-admission]].

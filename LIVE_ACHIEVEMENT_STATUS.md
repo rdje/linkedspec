@@ -1,5 +1,23 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-01 — Lua callable authority and RED audit is signoff-complete
+
+Behavior-free leaf `FUTURE-PARITY-BACKLOG.11.8.0` is signoff-complete from clean four-backend public-closeout
+commit `e232609b` (120/300). Its landing hooks passed the activation-boundary rule and all seven doctrines; the
+brief was zero bytes, Git was clean, and rendered-book, bytecode, and managed-run residue were absent. Retrieval
+and identical typed PUC Lua/LuaJIT probes are complete. They prove missing exact/malformed brace-pipe ActionIR,
+colon keyword data, evaluated-call access, and post-static bound dispatch while preserving eager/contextual/static
+surfaces. One focused Lua consumer and exact `.11.8.1-.4` construction/invocation/route/admission boundaries are
+now durable in the task tree and Knowledge Map.
+
+No parser/compiler/runtime/descriptor/generated/fixture/capability-row/MCP behavior, root README, lexical capture,
+broad raw fallback, second codec/executor, or push moved. The mdBook remains the sole user-facing specification
+and is synchronized at 79 files / 14,008 KiB; Knowledge Map is 776/6,291. Focused Lua is green at 177/177 per ABI,
+CLI 66x2, corpus 105/105, and 16 storage owners. All seven doctrines and definitive canonical CI pass, including
+RAM 61%, Phase 0 1,031/1,031 in 653 seconds, and the exact neutral+20 / Perl 10 / Rust 18 / Dart 21 / Julia
+125+118+239 callable matrix before `local CI gate passed`. Only workflow landing and clean proof remain before
+task-tree-first `.11.8.1` activation.
+
 ## 2026-08-01 — Four-backend callable public no-drift is signoff-complete
 
 Leaf `FUTURE-PARITY-BACKLOG.11.7.2` closes the public projection from clean recurring-governance commit `c86f32fa`

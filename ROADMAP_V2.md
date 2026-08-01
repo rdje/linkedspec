@@ -28,7 +28,9 @@ dependency-complete Lua construction/invocation/generation/admission. `.11.7.1` 
 driver, 17 topology/status mutations, optional canonical registration, and a Lua-only future exclusion while
 capability remains 80/0/0. Public no-drift `.11.7.2` inventories 23 documents, adds three public omission
 mutations; four-backend callable parent `.11.7` is closed, while Lua implementation/admission `.11.8.0-.4` remains
-next. Separate exclusion-freshness `.24.0-.2` is queued.
+active. Completed behavior-free `.11.8.0` freezes one focused dual-ABI Lua consumer and dependency-orders inert ActionIR
+state `.1`, dynamic call/access/diagnostics `.2`, existing-emitter route identity `.3`, then five-backend admission
+`.4`. Separate exclusion-freshness `.24.0-.2` is queued.
 
 Completed README-sustainability lane: `README-STABILITY-POLICY` and ADR `0063` make root `README.md` a stable,
 bounded landing page. A full 1,615-line / 159,437-byte audit routes all changing/deep detail before a reviewed

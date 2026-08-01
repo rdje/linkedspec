@@ -1,5 +1,32 @@
 # CHANGES
 
+## 2026-08-01 — FUTURE-PARITY-BACKLOG.11.8.0 — freeze Lua callable implementation plan
+
+The behavior-free Lua callable audit is now dependency-complete. Identical typed probes on PUC Lua and LuaJIT
+confirm that exact and malformed brace-pipe forms currently collapse to eager `block_value`/`raw_perl`, colon
+keyword calls and access on evaluated call results lack typed ActionIR, and ordinary bindings have no post-static
+callable dispatch. The same probes lock the current surfaces that must not move: eager blocks, harrays, controls,
+declared contextual callbacks, registered-function precedence, fluent call receivers, and both ABI results.
+
+One focused `lua/test/callable_codeblock_literal_contract_test.lua` consumer is frozen for incremental ownership:
+`.11.8.1` adds inert eight-field literal/signature/state and semantic preservation; `.11.8.2` adds narrow colon
+keyword/value access plus dynamic caller-context invocation and portable diagnostics through existing scoped
+bindings; `.11.8.3` proves normalized/generated/independently loaded emitted identity on both ABIs; `.11.8.4`
+replaces the four-backend recurring composition with exact five-backend/dual-ABI proof before capability and
+public admission. Existing `effective SpecFile` emission and the one interpreter remain authoritative. No parser,
+runtime, fixture, capability, MCP, root README, or push behavior changes in this planning leaf.
+
+The sole-facing mdBook, roadmaps, architecture/live state, task tree, Knowledge Map, changes/notes, and bounded
+memory now carry the same plan. Lexical capture, host closures, broad raw fallback, and second codecs/executors
+remain excluded.
+
+Focused signoff passes the neutral 7/11/9/7/4/8 contract plus all 20 governance mutations and the unchanged Lua
+gate at 177/177 per ABI, CLI 66x2, corpus 105/105, and 16 storage owners. Knowledge Map passes 776/6,291 and the
+sole-facing mdBook renders 79 files / 14,008 KiB before exact removal. All seven doctrines pass. Definitive
+canonical CI passes semantic/MCP admissions, containment/moved-root proof, CLI 66x2, RAM 61%, and Phase 0
+1,031/1,031 in 653 seconds, then runs the exact callable matrix at Perl 10, Rust 18, Dart 21, and Julia
+125+118+239 before reporting `local CI gate passed`.
+
 ## 2026-08-01 — FUTURE-PARITY-BACKLOG.11.7.2 — close callable public no-drift
 
 Callable-codeblock public status is now one executable contract instead of a prose-only convention. The neutral

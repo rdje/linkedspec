@@ -1,5 +1,34 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`FUTURE-PARITY-BACKLOG.11.8.0` — reuse Lua authorities in dependency order): identical PUC Lua and
+  LuaJIT probes reduce the explicit callable gap to typed construction, two narrow expression forms, and bound
+  dispatch. Exact `{|` syntax currently enters the ordinary brace branch and becomes an eager `block_value` with
+  raw body nodes; malformed forms cannot retain the neutral nine codes. `cb(value: "x")` is raw, while
+  `cb(value = "x")` already remains a positional assignment expression and must not be repurposed. A named call
+  can already be a fluent receiver, but a key/index access rooted at an evaluated call cannot yet be typed.
+
+  Existing seams are sufficient. `action_ast.ActionCallableSignature` can represent nullable fixed signatures
+  without weakening the function-definition invariant in `spec_ast.CallableSignature`. `runtime_scoped_binding`
+  already copies and restores parameter names across variables/arrays/harrays while leaving unrelated caller
+  stores live. The runtime already evaluates one typed block AST, and the source emitter already serializes one
+  effective `SpecFile` and reconstructs it through `spec_ast.from_json`. Construction therefore stops deferred
+  bodies at action-contract and removed-selector traversal, while invocation reuses that interpreter and scoped
+  frame instead of creating a closure, callback object, second codec, or generated executor.
+
+  One focused Lua contract consumer grows across the implementation leaves. `.1` owns exact eight-field inert
+  state, spans, malformed diagnostics, copies, user-function transport, deferred scans, semantic signature, and
+  complete-gate registration on both ABIs. `.2` owns colon-keyword data, evaluated-value access, post-static bound
+  dispatch, once-only arguments, restoration, caller mutations, local return/results, recursion, and neutral
+  diagnostic fields. `.3` owns native/reconstructed/generated/byte-fresh emitted route identity and the exact new
+  project-data allocator. `.4` alone may replace recurring four-backend topology with five-backend plus dual-ABI
+  Lua proof and then remove the Lua future exclusion/promote public state. The unchanged neutral contract remains
+  the oracle; no production behavior changes in this audit.
+
+  Signoff confirms the plan did not perturb any authority: Lua remains 177/177 per ABI with CLI 66x2 and corpus
+  105/105; neutral governance remains 7/11/9/7/4/8+20; Knowledge Map is 776/6,291; and the sole-facing mdBook is
+  79 files / 14,008 KiB. Canonical CI passes RAM at 61%, Phase 0 1,031/1,031 in 653 seconds, and the exact
+  Perl/Rust/Dart/Julia callable matrix before the explicit local-CI marker.
+
 - 2026-08-01 (`FUTURE-PARITY-BACKLOG.11.7.2` — make public lockstep an executable boundary): the public closeout
   extends the existing neutral callable contract/checker because that pair already owns syntax, diagnostics,
   fixtures, and recurring topology. A second documentation ledger would introduce a new drift seam. The data file

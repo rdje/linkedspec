@@ -34,7 +34,9 @@ Lua implementation/admission parent `.11.8.0-.4` without changing behavior. `.11
 four-backend driver, 17-mutation topology/status governance, optional canonical registration, and Lua-only
 exclusion correction while retaining capability 80/0/0. Public no-drift `.11.7.2` inventories 23 documents,
 rejects public omission/stale-claim drift; four-backend callable parent `.11.7` is closed, while Lua implementation/
-admission parent `.11.8.0-.4` remains next. Manifest audit also queues unrelated exclusion-freshness governance
+admission parent `.11.8.0-.4` is active. Behavior-free `.11.8.0` is complete and freezes one focused dual-ABI Lua consumer and
+the exact sequence: inert ActionIR/state `.1`, dynamic call/access/diagnostics `.2`, existing-emitter route identity
+`.3`, then five-backend admission `.4`. Manifest audit also queues unrelated exclusion-freshness governance
 `.24.0-.2` without widening the callable lane.
 
 README sustainability is a completed repository-architecture lane under `README-STABILITY-POLICY`. ADR `0063`
@@ -778,7 +780,11 @@ admission `.9.1.1.2.5.3` task-tree-first.
      composed recurring driver and stale mixed future exclusion, and measures Lua's exact parser/AST/call-dispatch
      gap. Four-backend recurring/public governance is split as `.11.7.1-.2`; Lua typed construction, dynamic
      invocation, existing-emitter dual-ABI identity, and final admission are dependency-owned by `.11.8.0-.4`.
-     No behavior or capability status changes in the planning slice.
+     Completed behavior-free `.11.8.0` freezes one `lua/test/callable_codeblock_literal_contract_test.lua` consumer and exact
+     seams: `ActionCallableSignature`/eight-field inert state `.1`; colon keyword plus evaluated-value access and
+     post-static scoped bound dispatch `.2`; native/reconstructed/generated/byte-fresh emitted identity `.3`; and
+     replacement five-backend/dual-ABI recurring/public admission `.4`. No behavior or capability status changes
+     in the planning slice.
      Uniform-binding selector retirement `.12.1` is complete. It removes spec-facing `array(name)` / `hash(name)`
      selector and mutation semantics before Rust codeblock parity or resumed Lua work. Corrected inventory `.12.1.0` counts 600 exact forms in 82 tracked specs and
      splits neutral contract `.1`, five backend enablement leaves, source migration, hard rejection, and no-drift.

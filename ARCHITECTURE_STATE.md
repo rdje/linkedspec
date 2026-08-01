@@ -1,4 +1,14 @@
 # ARCHITECTURE STATE
+
+- `2026-08-01 Lua callable typed audit / frozen implementation map`: completed behavior-free
+  `FUTURE-PARITY-BACKLOG.11.8.0` proves identical PUC Lua/LuaJIT gaps and locks four existing authorities instead
+  of introducing new ones. `action_parser`/`action_ast` own exact literal, signature, colon-keyword, and evaluated-
+  value-access data; `runtime_scoped_binding` plus the interpreter own dynamic caller frames and execution;
+  semantic projection owns codeblock signatures; compiled/effective-`SpecFile` serialization and source emission
+  own reconstructed/generated/emitted identity. One focused Lua consumer grows across `.11.8.1-.3`; `.11.8.4`
+  replaces the four-backend composition with five-backend/dual-ABI proof before status movement. Eager blocks,
+  contextual callbacks, static call precedence, 80/0/0 capability, MCP, and lexical-capture exclusion do not move;
+  exact canonical signoff passes Phase 0 1,031/1,031 in 653 seconds plus the four-backend callable matrix.
 Live architecture snapshot for LinkedSpec.
 
 This document is the current high-level technical reading of the project shape. It is meant to steer implementation, record important architectural judgments, and give future sessions a fast way to re-enter the codebase with the right mental model.

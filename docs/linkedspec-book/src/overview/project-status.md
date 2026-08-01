@@ -1,5 +1,21 @@
 # Project Status
 
+Lua planning leaf `FUTURE-PARITY-BACKLOG.11.8.0` is complete; inert construction `.11.8.1` is the next callable-
+codeblock frontier. The audit changed no language behavior: explicit deferred `{|params| body }` values and
+general bound `cb(args)` calls are still current only on Perl, Rust, Dart, and Julia. Lua's existing attached/
+parenthesized contextual blocks remain current on PUC Lua and LuaJIT.
+
+The Lua plan is now exact. One focused neutral-contract consumer will grow through inert typed construction
+`.11.8.1`, dynamic caller-context invocation and portable failures `.11.8.2`, and native/reconstructed/generated/
+independently loaded emitted identity `.11.8.3`, always using the same Lua interpreter and effective-`SpecFile`
+transport. Final `.11.8.4` alone may replace four-backend recurrence with five-backend proof, run that Lua consumer
+on both ABIs, and update capability/public status. Host closures, lexical capture, broad raw fallback, and separate
+codeblock codecs or executors are outside this version-1 plan.
+
+The frozen plan is fully verified against both Lua ABIs and the current public authorities. Lua remains 177/177
+per ABI with primary CLI 66x2 and corpus 105/105; the neutral contract remains 7/11/9/7/4/8 plus 20 governance
+mutations. Canonical Phase 0 passes 1,031/1,031 and the exact current Perl/Rust/Dart/Julia callable matrix passes.
+
 Semantic introspection is complete and publicly governed: semantic public rollout is 9/9, native admission is
 6/6, and the independent contract derives 20 exact responses while rejecting 128 mutations. MCP implementation/runtime state is 5/5 + 6/6 with shared rollout complete/141. The neutral mdBook owns nine worked
 query patterns; backend companion books remain accepted but unscaffolded under their separate task tree.
