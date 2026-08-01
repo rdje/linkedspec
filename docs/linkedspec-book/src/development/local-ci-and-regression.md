@@ -463,7 +463,14 @@ perl tools/check_capability_conformance.pl
 ```
 
 `capability_conformance/manifest.json` currently contains 16 capabilities and 80 backend states: all 80 pass.
-Every evidence path must exist, and legacy/future exclusions remain explicit and task-owned. The canonical local
+Every evidence path must exist, and legacy/future exclusions remain explicit and task-owned. That row census is
+separate from exclusion-narrative freshness: behavior-free audit `FUTURE-PARITY-BACKLOG.24.0` proves the current
+checker validates exclusion owner existence but not owner status or supersession. The frozen follow-up retains
+Perl plugin legacy, re-owners genuinely future general parse-job work to active `.14`, removes two satisfied
+semantic/cursor narratives, and adds explicit disposition/retention plus mutation-sensitive status governance.
+No capability row or runtime behavior changes in the audit. Audit signoff passes the 80/0/0 census, the complete
+79-file book, all seven doctrines, repository containment/moved-root execution, CLI 66x2, RAM 52%, and Phase 0
+1,031/1,031 in 651 seconds. The canonical local
 gate runs this check before focused suites. The 60/0/0 generated-source milestone is historical; punctuation-light
 admission `.16.7` added four states, and Lua `.8.4` adds 16 all-pass states in one final admission.
 

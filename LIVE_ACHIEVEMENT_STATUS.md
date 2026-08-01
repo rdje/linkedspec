@@ -1,5 +1,24 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-01 — Exclusion-freshness model is frozen behavior-free
+
+`FUTURE-PARITY-BACKLOG.24.0` is signoff-complete from clean commit `47b40c7a` (intended 126/300; no push). The exact four-record
+audit retains Perl plugin legacy under `.6`, re-owners valid future general parse-job work from superseded `.2` to
+active `.14`, and classifies completed semantic/MCP plus rule-local cursor records for removal. Capability rows
+remain unchanged at 80/0/0.
+
+Implementation `.24.1` is frozen as manifest schema v2 with explicit legacy/future disposition, nullable durable
+retention authority, derived unique task status, exact two-record/order governance, and 24 in-memory RED
+mutations. Prior-closeout defects found during the audit are separately owned: `.24.0.1` repairs `.2` provenance
+and `.14.6-.7` supersession references; `.24.0.2` repairs/guards the sole-facing mdBook's stale 24-versus-25
+callable document count. No manifest/checker/runtime/capability/MCP/public language behavior moves in `.24.0`.
+
+Focused capability proof remains 80/0/0. Knowledge Map passes 783/6,343; the sole-facing mdBook builds 79 files /
+14,056 KiB; memory/task/whitespace and all seven doctrines pass. The definitive canonical gate proves semantic/MCP
+admissions, 25-document callable governance, containment/moved-root/outside-CWD execution, CLI 66x2, RAM 52%,
+and Phase 0 1,031/1,031 in 651 seconds before `local CI gate passed`. Only commit, brief clearing, and exact clean
+proof remain before `.24.0.1` activation.
+
 ## 2026-08-01 — Five-backend callable recurring/public admission is signoff-complete
 
 Five-backend callable recurring/public admission is complete under `FUTURE-PARITY-BACKLOG.11.8.4`. The renamed
@@ -114,7 +133,7 @@ KiB. All seven doctrines pass. Definitive canonical CI passes semantic/MCP admis
 CLI 66x2, RAM 62%, Phase 0 1,031/1,031 in 659 seconds, and the exact callable matrix before reporting
 `local CI gate passed`. Only workflow landing and clean proof remain before `.11.8.0` activation. This closeout
 does not authorize production, fixture, capability-row, MCP, Lua behavior, root README, lexical-capture, or push
-movement. Unrelated exclusion freshness remains queued under `.24.0-.2`.
+movement. Unrelated exclusion freshness was queued under `.24` at that boundary and is now active under `.24.0`.
 
 ## 2026-08-01 — Recurring four-backend callable governance is signoff-complete
 
@@ -132,8 +151,8 @@ no new temporary allocator. Knowledge Map passes 774/6,274; mdBook renders 79 fi
 doctrines pass. Definitive canonical CI passes semantic/MCP admission, nested containment/moved-root proof, CLI
 66x2, RAM 54%, Phase 0 1,031/1,031 in 825 seconds, and the exact callable matrix before reporting
 `local CI gate passed`. Only workflow commit and clean handoff remain before `.11.7.2` activates. The same audit
-found two unrelated stale completed-rollout exclusion narratives; queued `.24.0-.2` own their audit/enforcement/
-correction without widening this callable leaf.
+found two unrelated stale completed-rollout exclusion narratives; `.24` owned their later audit/enforcement/
+correction without widening this callable leaf, and `.24.0` is now the active exact planning leaf.
 
 ## 2026-08-01 — Callable four-backend/Lua ownership audit is signoff-complete
 

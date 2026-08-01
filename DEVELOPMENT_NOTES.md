@@ -1,5 +1,33 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`FUTURE-PARITY-BACKLOG.24.0` — capability exclusion freshness model): capability rows and
+  exclusions are intentionally separate ledgers. A green 80/0/0 row census does not prove that prose under
+  `excluded_or_future` is current. The existing checker validates record shape, uniqueness, evidence paths, and
+  owner existence, but not owner status, supersession, classification, or exact exclusion membership.
+
+  The four-record authority audit retains deprecated Perl plugins under pending `.6`. General parse-job authoring
+  remains future, but closed `STAGED-LINKED-PARSING` transferred broad ownership from `.2` to `.14`, and ADR `0056`
+  refines execution under progressive `.14.6` and staged `.14.7`; the manifest will use active parent `.14`.
+  Semantic/MCP is complete at public 9/9, native 6/6, and MCP 5/5 implementations + 6/6 runtimes. Rule-local
+  cursor is complete at 8/0 with a six-runtime recurring gate. Their future records are satisfied and must vanish.
+
+  Schema v2 makes `disposition` and nullable `retention_authority` explicit. Future owners must be proposed,
+  pending, or active. Legacy with an open owner needs no retention authority; legacy under a completed owner is
+  allowed only when an existing repository-relative durable authority explicitly retains it. This avoids both
+  extremes: silently accepting any completed owner and incorrectly deleting intentional compatibility history.
+  The planned checker parses unique task ids/status enums, locks the exact two current objects/order, and executes
+  24 in-memory RED mutations without temporary storage.
+
+  Git history also proves two independent broad-context patch errors in pending `.2`: `e96d389e` inserted the
+  unrelated `.9.1.7.4` commit field and `7dd70a2d` inserted `.9.1.7.6` verification. A separate book audit proves
+  project status says 24 callable documents although the checker inventory and capability guide say 25. Dedicated
+  `.24.0.1-.2` leaves own those repairs and guards before `.24.1`; no behavior is changed by this planning leaf.
+
+  Focused signoff holds capability conformance at 80/0/0. Knowledge Map 783/6,343, sole-facing mdBook
+  79/14,056 KiB, memory/task/whitespace, and all seven doctrines pass. Definitive canonical CI passes semantic/MCP
+  admission, 25-document callable governance, containment/moved-root/outside-CWD execution, CLI 66x2, RAM 52%,
+  and Phase 0 1,031/1,031 in 651 seconds before the local-CI pass marker.
+
 - 2026-08-01 (`FUTURE-PARITY-BACKLOG.11.8.4` — admit Lua into recurring callable conformance): admission is a
   governance/topology change, not a new callable implementation. The four-backend driver was renamed in place and
   extended after its Julia leg with two calls to `tools/run_lua_project_data.sh`; both calls consume
@@ -182,8 +210,9 @@
   The capability census remains 80/0/0 because `excluded_or_future` is narrative governance, not an extra
   capability row. Updating it exposed a broader freshness hole: the general capability checker requires a tracked
   owner but does not compare that owner's status or the prose with closed rollout authority. Two unrelated stale
-  records survive today. Rather than widening the callable leaf, `.24.0-.2` now own classification, enforcement,
-  correction, and public closeout with retained legacy exclusions handled separately.
+  records survived at that boundary. Rather than widening the callable leaf, `.24` owns classification,
+  enforcement, correction, and public closeout with retained legacy exclusions handled separately; exact `.24.0`
+  planning is now active and has added dependency-correct `.24.0.1-.2` repair leaves.
 
   Direct recurring proof passes neutral 7/11/9/7/4/8, Perl 10, Rust 18, Dart 21, and Julia 125+118+239. Workflow
   routing and tool-storage proof pass at 42 entrypoints with no new temporary allocator.

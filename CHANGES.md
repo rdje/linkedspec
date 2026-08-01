@@ -1,5 +1,30 @@
 # CHANGES
 
+## 2026-08-01 — FUTURE-PARITY-BACKLOG.24.0 — freeze exclusion freshness model
+
+The complete `excluded_or_future` audit now distinguishes capability rows from exclusion narrative governance.
+The 16 capability rows remain exactly 80 pass / 0 partial / 0 gap. Of the four current exclusions, deprecated
+Perl plugin machinery remains legitimate legacy under pending `.6`; general parse-job work remains future but its
+broad `.2` owner has been superseded by active structural/progressive/staged parent `.14`; semantic/MCP and
+rule-local cursor records are satisfied stale narratives and must be removed.
+
+The behavior-free plan adopts manifest schema v2 for `.24.1`: each exclusion carries explicit `legacy`/`future`
+disposition plus nullable durable retention authority, the checker derives unique owner status from task-tree
+sources, exact current objects/order are governed, and 24 in-memory mutations reject schema, classification,
+retention, task-status, omission/duplication/order, reason/owner, and satisfied-record drift. No manifest/checker,
+capability, parser/compiler/runtime/emitter/MCP, or public language behavior changes in this leaf.
+
+The audit also root-caused three prior-closeout defects instead of absorbing them silently: commits `e96d389e`
+and `7dd70a2d` misplaced unrelated Lua cursor commit/verification text into `.2`; later `.14.6-.7` refinement was
+not reconciled into two older owner references; and the sole-facing mdBook says 24 callable public documents while
+the governed inventory is 25. Repair leaves `.24.0.1-.2` now precede governance implementation `.24.1` and public
+closeout `.24.2`.
+
+Signoff preserves the capability census at 80/0/0 and passes Knowledge Map 783/6,343, the sole-facing mdBook at
+79 files / 14,056 KiB, memory/task/whitespace checks, and all seven doctrines. The definitive canonical gate
+passes semantic/MCP admissions, 25-document callable governance, repository containment and moved-root/outside-
+CWD execution, CLI 66x2, RAM 52%, and Phase 0 1,031/1,031 in 651 seconds before `local CI gate passed`.
+
 ## 2026-08-01 — FUTURE-PARITY-BACKLOG.11.8.4 — admit five-backend callable codeblocks
 
 Callable-codeblock conformance now has one recurring five-backend/six-runtime entrypoint. The renamed rooted

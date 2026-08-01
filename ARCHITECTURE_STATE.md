@@ -1,5 +1,16 @@
 # ARCHITECTURE STATE
 
+- `2026-08-01 capability exclusion freshness`: behavior-free `FUTURE-PARITY-BACKLOG.24.0` proves the 80/0/0
+  capability-row census does not validate the separate exclusion narratives. Exact audit retains deprecated Perl
+  plugins under pending `.6`; valid future general parse-job work is now owned by active `.14`/`.14.6-.7`, not
+  broad superseded `.2`; completed semantic/MCP and rule-local cursor records are satisfied and removable.
+  Planned schema v2 adds explicit legacy/future disposition plus nullable durable retention authority, task-status
+  derivation, exact two-record/order governance, and 24 in-memory mutations. Git-root-caused `.2` metadata repair
+  and the sole-facing callable 24→25 count correction are separate `.24.0.1-.2` leaves before `.24.1-.2` closure.
+  No manifest, checker, capability row, parser/compiler/runtime/emitter/MCP, or public language behavior moves.
+  Signoff passes capability 80/0/0, Knowledge Map 783/6,343, sole-facing mdBook 79/14,056 KiB, all doctrines,
+  canonical RAM 52%, and Phase 0 1,031/1,031 in 651 seconds.
+
 - `2026-08-01 five-backend callable recurring/public admission`: Five-backend callable recurring/public admission is complete
   under `FUTURE-PARITY-BACKLOG.11.8.4`. One rooted driver composes neutral, Perl, Rust, Dart, Julia, PUC Lua, and
   LuaJIT; the two Lua runtime rows execute one focused file through the same project-data wrapper. The independent
@@ -76,7 +87,8 @@ This document is the current high-level technical reading of the project shape. 
   opts into execution with `LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1`; capability stays 80/0/0. This is workflow
   governance only—no parser/runtime/descriptor/generated/fixture/MCP behavior moves. The driver is routed
   entrypoint 42 and has no allocator. Canonical proof passes Phase 0 1,031/1,031 in 825 seconds and the exact
-  neutral/Perl/Rust/Dart/Julia matrix. A separate discovered exclusion-freshness defect is queued as `.24.0-.2`.
+  neutral/Perl/Rust/Dart/Julia matrix. The separately discovered exclusion-freshness defect was queued at that
+  boundary and is now active under exact `.24.0` planning plus `.24.0.1-.2` repair and `.24.1-.2` closure.
 - `2026-08-01 four-backend callable no-drift / Lua dependency split`: behavior-free
   `FUTURE-PARITY-BACKLOG.11.7.0` proves the unchanged neutral 7/11/9/7/4/8 contract plus focused Perl, Rust,
   Dart, and Julia callable consumers. It also identifies two governance gaps: canonical CI has no exact composed
