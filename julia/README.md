@@ -552,6 +552,9 @@ effect order, failure attribution, and trace-result identity. The primary comman
 
 ## Callable-Codeblock Values and Dynamic Invocation
 
+Five-backend callable recurring/public admission is complete; this Julia consumer remains one unchanged leg of
+the neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT composition.
+
 Julia recognizes an exact brace-pipe literal before ordinary harray and eager-block classification:
 
 ```text

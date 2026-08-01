@@ -24,7 +24,8 @@ evidence_update_2026_07_15_exhaustive_split: "LUA-BACKEND-PARITY.4.3.9.0 probes 
 evidence_update_2026_07_15_logical: "LUA-BACKEND-PARITY.4.3.9.1 closes eager and/or/not execution over existing Lua truthiness at 123/123 on PUC Lua and LuaJIT. .4.3.9.2 is active for recurring exact 246-name ownership, direct call(rule), inventory cleanup, status, and .4.3 parent closure."
 evidence_update_2026_07_15_closeout: "LUA-BACKEND-PARITY.4.3.9.2 closes exhaustive native helper/value/control no-drift. A permanent sorted 246-name probe reports 233 function-form owners and exactly thirteen documented structural/receiver-only forms; direct call(rule) and public runtime-helper-value-control status are focused. PUC Lua and LuaJIT pass 125/125; .4.3 closes and diagnostics/trace .4.4 activates."
 evidence_update_2026_08_01_callable_routing: "FUTURE-PARITY-BACKLOG.11.7.0 leaves the closed helper/control surface unchanged and routes explicit Lua callable values/general bound calls to .11.8."
-evidence_update_2026_08_01_callable_completion: "FUTURE-PARITY-BACKLOG.11.8.1-.3 make explicit values, general bound calls, and built-in final callback execution current through native/reconstructed/generated/fresh-emitted routes on both Lua ABIs; final recurring admission remains .11.8.4."
+evidence_update_2026_08_01_callable_completion: "FUTURE-PARITY-BACKLOG.11.8.1-.3 make explicit values, general bound calls, and built-in final callback execution current through native/reconstructed/generated/fresh-emitted routes on both Lua ABIs; at that boundary final recurring admission was still owned by .11.8.4."
+evidence_update_2026_08_01_callable_admission: "FUTURE-PARITY-BACKLOG.11.8.4 completes recurring five-backend/public admission on PUC Lua and LuaJIT."
 reverify: "bash scripts/check_task_tree_metadata.sh && bash scripts/check_doctrines.sh"
 ---
 

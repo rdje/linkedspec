@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-01` (Lua emitted callable identity `.11.8.3` is signoff-complete from clean dynamic-
-  invocation commit `3f220f6c`; its clean landing precedes five-backend admission `.11.8.4`)
+- Last updated: `2026-08-01` (five-backend callable admission `.11.8.4` is active task-tree-first from clean
+  emitted-identity commit `917038e7`; exact governance/route retrieval is complete before topology changes)
 - Owner: repo-local workflow
 
 ## Goal
@@ -15106,7 +15106,7 @@ before implementation.
     exact generated-output cleanup; memory, task metadata, all doctrines, syntax, and diff checks pass.
 
 - ID: `FUTURE-PARITY-BACKLOG.11`
-  Status: `active`
+  Status: `done`
   Goal: Make codeblock a first-class callable value and correct trailing blocks to the generic final-codeblock model.
   Children: `.11.0`, `.11.1`, `.11.2`, `.11.3`, `.11.4`, `.11.5`, `.11.6`, `.11.7`, `.11.8`
   Acceptance: The director's four-kind model—scalar, array, harray, and codeblock—is durable; a callable signature,
@@ -15994,7 +15994,7 @@ Julia 125+118+239 and reports `local CI gate passed`. Parent `.11.7` is closed; 
 clearing, and clean proof remain before task-tree-first `.11.8.0` activation.
 
 - ID: `FUTURE-PARITY-BACKLOG.11.8`
-  Status: `active`
+  Status: `done`
   Goal: Complete explicit callable-codeblock values and general dynamic invocation on Lua and LuaJIT.
   Children: `.11.8.0`, `.11.8.1`, `.11.8.2`, `.11.8.3`, `.11.8.4`
   Dependencies: `.11.7`
@@ -16217,7 +16217,8 @@ capability 80/0/0, Knowledge Map 778/6,311, mdBook 79/14,028 KiB, all seven doct
 1,031/1,031, and the exact four-backend callable matrix pass. Git status is empty, `git_message_brief.txt` is zero
 bytes, rendered-book/Python-bytecode/run-leaf residue is absent, and the empty checkout run namespace is its
 documented stable allocator parent. This leaf owns only route identity and the exact next Lua project-data owner;
-five-backend recurring/public/capability/MCP admission remains `.11.8.4`, while lexical capture, host closures,
+five-backend recurring/public/capability/MCP admission was deliberately deferred to `.11.8.4` at this boundary,
+while lexical capture, host closures,
 second codecs/executors, root README edits, push, and unrelated memory-architecture work remain excluded.
 
 RED/root-cause evidence 2026-08-01: Knowledge Map retrieval re-read the Lua callable audit/construction/invocation,
@@ -16270,7 +16271,7 @@ Only the workflow landing, zero-byte brief, and exact clean proof remain before 
   Commit: `FUTURE-PARITY-BACKLOG.11.8.3 - prove Lua emitted callable identity`
 
 - ID: `FUTURE-PARITY-BACKLOG.11.8.4`
-  Status: `pending`
+  Status: `done`
   Goal: Admit Lua into recurring five-backend callable conformance and close public no-drift.
   Dependencies: `.11.8.3`
   Acceptance: Replace the four-backend composition with one rooted, omission-sensitive five-backend driver that
@@ -16280,6 +16281,106 @@ Only the workflow landing, zero-byte brief, and exact clean proof remain before 
     only after exact proof. Public backend/API docs, Lua docs, sole-facing mdBook, roadmaps, ADR/KM/live status, and
     exclusion records agree; focused/complete/canonical gates pass; parent `.11.8` and callable parent `.11` close
     with lexical capture still explicitly excluded from version 1.
+
+### `FUTURE-PARITY-BACKLOG.11.8.4` Acceptance Checklist
+
+- [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Activate task-tree-first from clean emitted-identity commit
+  `917038e7` (124/300), with zero-byte brief and no rendered-book or managed-run leaf residue before any driver,
+  checker, capability, exclusion, public, or canonical edit.
+- [x] **KNOWLEDGE / GOVERNANCE / ROUTE RETRIEVAL** — Re-read the recurring/public/Lua-admission Knowledge cards,
+  neutral contract/checker, existing four-backend driver, canonical registration, workflow/storage owners,
+  capability/exclusion authorities, and exact Lua dual-ABI consumer before changing topology.
+- [x] **ONE FIVE-BACKEND RECURRING DRIVER** — Replace the four-backend composition with one rooted driver that
+  runs neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT in exact order through supported project-data routes;
+  keep one semantic consumer per backend and no duplicate Lua oracle.
+- [x] **OMISSION-SENSITIVE GOVERNANCE / ADMISSION** — Update exact path/role/order/dual-ABI/canonical/storage/public
+  mutations, remove only the satisfied generic-final-codeblock future exclusion, and advance only the governed
+  callable recurring/public/capability state warranted by the five-backend proof.
+- [x] **MUTATION-SENSITIVE REGRESSION** — Prove missing/reordered/duplicated backend or ABI legs, stale four-
+  backend paths/claims, route bypass, exclusion residue, premature closure, and lexical-capture claims fail while
+  focused consumers, complete backend gates, CLI/corpus, generated source, and capability census remain exact.
+- [x] **LOCKSTEP / SIGNOFF / COMMIT / CLEAN HANDOFF** — Synchronize backend/API, Knowledge Map, task/index/roadmap/
+  live/memory, and sole-facing mdBook surfaces; pass focused, five-backend, governance, storage, rendered-book,
+  doctrines, and canonical gates; close `.11.8` and parent `.11`, commit `.11.8.4`, clear the brief, prove clean,
+  then choose the next roadmap-aligned activity; do not push.
+
+Activation evidence 2026-08-01: `.11.8.3` lands clean at `917038e7` as 124/300 after focused 449x2, complete Lua
+177x2, CLI 66x2, corpus 105/105, 17 storage owners, neutral+20, signatures 3/9/7, capability 80/0/0, Knowledge Map
+779/6,322, sole-facing mdBook 79/14,048 KiB, all seven doctrines, canonical RAM 51%, Phase 0 1,031/1,031 in 809
+seconds, and the exact four-backend callable matrix. Pre/post memory-boundary hooks pass, Git status is empty,
+`git_message_brief.txt` is zero bytes, rendered-book residue is absent, and the documented checkout allocator
+parent is empty. This leaf alone owns five-backend recurring/public/capability admission and closure; it excludes
+parser/compiler/runtime semantics, emitter format, lexical capture, MCP, root README, unrelated memory-
+architecture work, history rewriting, and push.
+
+Retrieval evidence 2026-08-01: before topology changes, Knowledge Map pointers re-opened the four-backend
+recurring/public closeout, Lua emitted-route identity, Lua five-backend capability admission, neutral callable
+contract/checker, ADR `0041`, the existing rooted driver, canonical optional branch, workflow-routing inventory,
+capability manifest/exclusion, and the unchanged Lua consumer. The exact replacement boundary is one renamed
+driver, the checker-owned topology with two ordered Lua runtime rows over one test file, one canonical/storage
+registration, removal of only `future.generic_final_codeblock`, and omission-sensitive public-current markers.
+The existing 16-capability five-backend census remains 80/0/0; this leaf completes the separately excluded
+callable feature rather than inventing an unrelated seventeenth census row.
+
+Implementation and composed-proof evidence 2026-08-01: the recurring driver is renamed exactly once to
+`tools/check_callable_codeblock_five_backend.sh` and remains repository-rooted. It runs the unchanged neutral
+checker, Perl, Rust, Dart, and Julia consumers in dependency order, then executes the same focused Lua consumer
+through `tools/run_lua_project_data.sh` on PUC Lua and LuaJIT. The neutral checker owns the exact six-runtime/five-
+backend topology, shared-Lua-path and dual-ABI identities, canonical registration, stale-driver denial, public
+surface, and satisfied-exclusion absence with 22 mutation sentinels. Only `future.generic_final_codeblock` is
+removed from the manifest; the existing 16-capability five-backend census is not expanded. The fresh composed run
+passes neutral 7/11/9/7/4/8 plus 22 mutations, Perl 10, Rust 18, Dart 21, Julia 125+118+239, PUC Lua 449, and LuaJIT
+449 before reporting that all five-backend callable contract and authority routes pass.
+
+### `FUTURE-PARITY-BACKLOG.11.8.4` TOOLBOX.md Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `rg -n` over the old driver, canonical registration, manifest, and public contract
+  showed a four-backend topology, no Lua consumer legs, and the still-present callable future exclusion; the first
+  renamed-driver neutral run rejected the missing governed path before topology and public markers were updated.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Tool-backed inspection located an admission/governance seam, not a parser or
+  runtime defect: `tools/check_callable_codeblock_contract.py` owned the exact topology and mutations,
+  `tools/run_ci_local.sh` owned canonical registration, and `capability_conformance/manifest.json` owned the stale
+  satisfied exclusion. The already-green Lua focused consumer was the implementation oracle for both ABIs.
+- [x] **FIX** — Renamed one rooted composition driver, added ordered PUC Lua and LuaJIT project-data legs over the
+  same consumer, expanded duplicate-independent governance to 22 mutations and 25 public documents, registered
+  the new path exactly once, and removed only `future.generic_final_codeblock`.
+- [x] **ADDRESSED (verified)** — `bash tools/check_callable_codeblock_five_backend.sh` passes neutral
+  7/11/9/7/4/8 + 22 mutations, Perl 10, Rust 18, Dart 21, Julia 125+118+239, and Lua 449 on each ABI; workflow
+  routing reports `PASS` from outside the repository CWD.
+- [x] **NO REGRESSION** — `bash tools/run_lua_local.sh` reaches 177 TAP groups on each ABI, CLI 66x2, corpus
+  105/105, 17 project-data owners, and `Lua local gate passed`; capability and generated-source checks remain
+  exactly 80/0/0 with no new capability row.
+- [x] **LOCKSTEP** — Backend/API/roadmap/live/task/Knowledge and sole-facing mdBook sources carry the same current
+  five-backend boundary; the public checker passes all 22 mutations across 25 documents and Knowledge Map
+  generation reports 780 facts / 6,328 question keys. Final render, all doctrines, and the corrected canonical
+  gate pass; commit, brief clearing, and clean proof remain in the leaf workflow.
+
+Focused integration evidence 2026-08-01: project-data workflow routing passes from outside the repository CWD and
+reaches the renamed final LuaJIT branch through its expected missing-command probe. Capability conformance remains
+16 capabilities / 80 pass / 0 partial / 0 gap, and the generated-source contract retains ten families plus the
+strict 105/105 Rust census. The complete Lua gate passes 177 TAP groups per ABI, focused callable 449 per ABI, CLI
+66x2, corpus 105/105, all 17 storage owners, generated/trace cleanup, and both native-module builds. A current-
+surface no-drift scan finds no stale four-backend or pending-five-backend claim outside intentionally historical
+superseded fact evidence and the checker's own denial sentinels; the new driver remains executable.
+
+Final no-drift correction evidence 2026-08-01: a whole current-surface scan caught three stale projections in
+`lua/README.md`, mdBook project status, and the canonical mdBook helper catalog. The helper catalog was also absent
+from the duplicate-independent public inventory. The same leaf corrects the prose, raises governance 24→25
+documents, adds path-scoped denials for all three stale claims, reconciles current Knowledge cards, regenerates
+the map, and re-proves the composed five-backend driver. The final scan returns no current pending-`.11.8.4`
+claim outside the checker's literal denial sentinels or explicitly dated/superseded history.
+
+Signoff evidence 2026-08-01: Knowledge Map generation/checking passes 780 facts / 6,328 question keys, the
+sole-facing mdBook renders 79 files / 14,052 KiB, shell syntax and whitespace are clean, and all seven doctrines
+pass against the staged governed slice. An earlier pre-correction canonical attempt reached the representative
+relocated-process oracle after every preceding check passed, then the outer Codex sandbox denied its nested
+`sandbox-exec` with status 71. After the final no-drift correction, the definitive authorized rerun proves the
+25-document contract, relocated six-family driver, all five moved/outside-CWD runtime anchors, CLI 66x2, RAM 54%,
+and complete Phase 0 at 1,031/1,031. Its optional callable branch passes
+neutral+22, Perl 10, Rust 18, Dart 21, Julia 125+118+239, PUC Lua 449, and LuaJIT 449 before `local CI gate passed`.
+Parents `.11.8` and `.11` are closed with lexical capture still outside v1. Only workflow landing as 125/300,
+brief clearing, rendered-book cleanup, and exact clean proof remain before task-tree-first `.24.0`; no push.
+  Commit: `FUTURE-PARITY-BACKLOG.11.8.4 - admit five-backend callable codeblocks`
 
 ### `FUTURE-PARITY-BACKLOG.11.8.0` Acceptance Checklist
 
@@ -18593,14 +18694,14 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-01):** Lua emitted callable identity `.11.8.3` is signoff-complete from clean
-dynamic-invocation commit `3f220f6c` (123/300). One focused consumer proves native, reconstructed, generated-plan,
-and fresh emitted identity at 449 assertions on each ABI through one typed state/interpreter; complete Lua passes
-177 TAP groups per ABI, CLI 66x2, corpus 105/105, and 17 storage owners. Knowledge Map 779/6,322, sole-facing
-mdBook 79/14,048 KiB, all seven doctrines, canonical containment/moved-root proof, RAM 51%, Phase 0 1,031/1,031 in
-809 seconds, and the exact four-backend callable matrix pass. Its clean landing must precede task-tree-first
-five-backend recurring/public/capability admission `.11.8.4`. No closure, lexical capture, second codec/executor,
-MCP/root-README/push movement is authorized.
+**Authoritative frontier (2026-08-01):** five-backend callable admission `.11.8.4` is signoff-complete from clean
+activation commit `917038e7` (intended landing 125/300). One rooted driver proves neutral, Perl, Rust, Dart,
+Julia, PUC Lua, and LuaJIT, with two Lua runtime rows over one focused consumer. Governance rejects 22 mutations,
+locks 25 public documents, removes only the satisfied callable exclusion, and retains the established 80/0/0
+census. Complete Lua, sole-facing mdBook, Knowledge Map, all doctrines, containment/moved-root, CLI 66x2,
+Phase 0 1,031/1,031, and the exact five-backend matrix pass; parents `.11.8`/`.11` close while lexical capture
+remains outside v1. Land, clear the brief, prove clean, then activate queued exclusion-freshness audit `.24.0`
+task-tree-first; no push.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private
@@ -20331,6 +20432,7 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.11.8.4` | `FUTURE-PARITY-BACKLOG.11.8.4 - admit five-backend callable codeblocks` | One rooted five-backend/six-runtime driver, 22 governance mutations, 25 public documents, satisfied-exclusion removal, parent closeout, and complete signoff. |
 | `FUTURE-PARITY-BACKLOG.11.8.3` | `FUTURE-PARITY-BACKLOG.11.8.3 - prove Lua emitted callable identity` | One typed state/interpreter across native, reconstructed, generated-plan, and fresh emitted execution on both Lua ABIs, with exact allocator/cleanup and complete signoff. |
 | `FUTURE-PARITY-BACKLOG.11.8.2` | `FUTURE-PARITY-BACKLOG.11.8.2 - invoke Lua callable codeblocks` | Post-static bound invocation, caller-context frames, result access, exact failures/recursion, and declared-final execution on both Lua ABIs. |
 | `FUTURE-PARITY-BACKLOG.11.8.1` | `FUTURE-PARITY-BACKLOG.11.8.1 - construct Lua callable codeblocks` | Exact inert typed literal/signature/span state across Lua copy, function, compiled, generated, emitted, and semantic authorities. |
@@ -20641,6 +20743,14 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-08-01`: Five-backend callable recurring/public admission `.11.8.4` is signoff-complete and ready for its
+  clean landing. The renamed rooted driver composes neutral+22, Perl 10, Rust 18, Dart 21, Julia 125+118+239, and
+  one Lua focused consumer at 449 assertions on each ABI. Complete Lua passes 177x2, CLI 66x2, corpus 105/105,
+  and 17 storage owners; capability/generated-source status remains 80/0/0. Governance locks 25 public documents
+  and removes only the satisfied callable exclusion. Knowledge Map 780/6,328, sole-facing mdBook 79/14,052 KiB,
+  all seven doctrines, canonical containment/moved-root proof, RAM 54%, Phase 0 1,031/1,031, and the exact new
+  matrix pass before `local CI gate passed`. Callable parents `.11.8`/`.11` close; lexical capture remains outside
+  v1; queued exclusion-freshness audit `.24.0` follows only after clean landing; no push.
 - `2026-08-01`: Lua emitted identity `.11.8.3` is signoff-complete and ready for its clean landing. Native,
   reconstructed, generated-plan, and independently loaded emitted routes share one typed state/interpreter at
   focused 449x2; complete Lua passes 177x2, CLI 66x2, corpus 105/105, and 17 storage owners. Neutral+20,

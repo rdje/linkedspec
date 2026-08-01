@@ -9,13 +9,14 @@ answers:
   - "which Lua owner implements explicit callable codeblocks"
   - "which Lua scoped-binding seam should callable codeblocks reuse"
 date: 2026-08-01
-status: historical-gap-current-admission-residual
+status: historical-gap-closed
 tags: [lua, callable, codeblock, actionir, dynamic-scope, generated-source, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.11.8.1 closes exact inert literal construction/state after the .11.7.0 gap audit, and .11.8.2 closes the post-static ordinary bound-value path, call-result access, portable failures, and ordered recursion on both ABIs. Only independently emitted execution and final admission remain .11.8.3-.4."
 evidence_update_2026_08_01_typed_audit: "FUTURE-PARITY-BACKLOG.11.8.0 confirms identical PUC Lua/LuaJIT gaps, distinguishes colon keyword data from positional name-equals assignment, freezes one focused Lua consumer, and records exact .11.8.1-.4 construction/invocation/route/admission owners in lua-callable-codeblock-typed-audit."
 evidence_update_2026_08_01_construction: "FUTURE-PARITY-BACKLOG.11.8.1 closes exact literal construction/state on PUC Lua and LuaJIT. The remaining gap is general bound invocation, call-result access, portable callable failures/recursion, byte-fresh emitted execution, and final admission under .11.8.2-.4."
 evidence_update_2026_08_01_invocation: "FUTURE-PARITY-BACKLOG.11.8.2 closes general bound invocation through one shared explicit/contextual executor. Focused 232x2 and complete dual-ABI Lua proof pass; .11.8.3-.4 retain only byte-fresh route identity and five-backend admission."
 evidence_update_2026_08_01_emitted_identity: "FUTURE-PARITY-BACKLOG.11.8.3 closes native/reconstructed/generated/fresh-emitted identity through the existing effective-SpecFile transport and one interpreter at 449 assertions per ABI. Only five-backend admission .11.8.4 remains."
+evidence_update_2026_08_01_five_backend_admission: "FUTURE-PARITY-BACKLOG.11.8.4 closes the final admission residual with one five-backend/two-Lua-runtime recurring driver, 24-document public governance, satisfied-exclusion removal, and unchanged census 80/0/0."
 reverify: "bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && rg -n 'block_value|codeblock_argument|active_codeblocks|callable_codeblock\\.execute|runtime_scoped_binding|spec_ast\\.to_json|spec_ast\\.from_json' lua/src/linkedspec/action_ast.lua lua/src/linkedspec/action_parser.lua lua/src/linkedspec/interpreter.lua lua/src/linkedspec/runtime_scoped_binding.lua lua/src/linkedspec/source_emitter.lua && bash tools/run_lua_local.sh"
 ---
 
@@ -23,6 +24,9 @@ Lua's contextual and explicit authoring surfaces remain syntactically distinct. 
 `callback: codeblock` accepts attached or parenthesized zero-positional block syntax, stores a
 `codeblock_argument`; explicit `{|params| ...}` owns its signature. Both now invoke through the same post-static
 bound-value executor inside the current caller frame.
+
+Five-backend callable recurring/public admission is complete. This former gap is closed; lexical capture remains
+an explicit version-1 exclusion rather than an implementation omission.
 
 The behavior-free probes originally established four missing mechanisms. `.11.8.1` closed construction and copy/
 state preservation. `.11.8.2` then closed the two invocation mechanisms:
@@ -40,9 +44,10 @@ Parser/AST/schema support now exists and uses that transport. `.11.8.3` proves i
 execution through it; a second codec or executor would create drift.
 
 Four-backend governance and status correction remain `FUTURE-PARITY-BACKLOG.11.7`. The dependency-complete Lua
-implementation is `FUTURE-PARITY-BACKLOG.11.8`: `.1` inert construction/state and `.2` dynamic invocation are complete, `.3`
-serialized/generated/emitted dual-ABI identity is complete, and `.4` retains five-backend admission/public closeout after `.0` freezes
-the detailed RED plan. Lexical capture remains outside the accepted contract and requires a new decision/task.
+implementation is `FUTURE-PARITY-BACKLOG.11.8`: `.1` inert construction/state, `.2` dynamic invocation, `.3`
+serialized/generated/emitted dual-ABI identity, and `.4` five-backend admission/public closeout are complete after
+`.0` freezes the detailed RED plan. Lexical capture remains outside the accepted contract and requires a new
+decision/task.
 
 Related facts: [[lua-callable-codeblock-literal-state]], [[lua-callable-codeblock-typed-audit]],
 [[lua-callable-codeblock-dynamic-invocation]], [[callable-codeblock-literal-contract]],

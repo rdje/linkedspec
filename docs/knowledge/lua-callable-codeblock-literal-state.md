@@ -45,8 +45,8 @@ route-specific codec, or second executor exists.
 
 Construction and general bound invocation such as `cb(args)` are current on both PUC Lua and LuaJIT. Call-result
 access, portable call failures, and ordered recursion use the same interpreter and are documented in
-[[lua-callable-codeblock-dynamic-invocation]]. Independently loaded emitted execution remains `.11.8.3`;
-recurring/public admission remains `.11.8.4`.
+[[lua-callable-codeblock-dynamic-invocation]]. Independently loaded emitted execution is current under `.11.8.3`;
+recurring/public admission is current under `.11.8.4`.
 
 Related facts: [[callable-codeblock-literal-contract]], [[lua-callable-codeblock-typed-audit]],
 [[lua-explicit-callable-codeblock-gap]], [[lua-callable-codeblock-dynamic-invocation]],

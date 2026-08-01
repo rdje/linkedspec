@@ -494,6 +494,8 @@ JSON/ASCII-hex payload preserve the same record without a Lua closure or callabl
 `callable_codeblock.execute_values` is the common body executor for ordinary bound calls and governed final
 helper/receiver/tree callbacks. Final callback expressions resolve before scoped `value`; anonymous callbacks do
 not claim the helper name in `active_codeblocks`, while a callback passed by variable retains that binding name.
+Five-backend callable recurring/public admission is complete; one rooted driver proves these owners unchanged on
+Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT.
 Thus nested built-ins do not create false recursion and helper-mediated bound recursion remains detectable. Native, canonical
 reconstruction, generated-plan, and independently loaded emitted modules all enter these same owners on PUC Lua
 and LuaJIT.

@@ -820,15 +820,14 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   Direct proof passes Perl 18, Rust 1/1, Dart 1/1, Julia 416, Lua 408 per ABI, all 30 primary legs, and all three
   support ledgers. Retrieve [[semantic-introspection-recurring-gate]] before changing the topology.
 
-- **RECURRING FOUR-BACKEND CALLABLE ADMISSION:** `.11.7.1` adds
-  `tools/check_callable_codeblock_four_backend.sh`, one repository-routed fail-fast driver that runs the unchanged
-  neutral 7/11/9/7/4/8 model followed by the exact Perl 10, Rust 18, Dart 21, and Julia 125+118+239 focused
-  consumers. Run it directly with `bash tools/check_callable_codeblock_four_backend.sh`; canonical all-toolchain
+- **RECURRING FIVE-BACKEND CALLABLE ADMISSION:** `.11.8.4` replaces the historical `.11.7.1` driver with
+  `tools/check_callable_codeblock_five_backend.sh`, one repository-routed fail-fast driver that runs the unchanged
+  neutral model followed by exact Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT focused consumers. The two Lua rows
+  execute one file. Run it directly with `bash tools/check_callable_codeblock_five_backend.sh`; canonical all-toolchain
   execution is opt-in through `LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1`, while ordinary CI requires and
-  syntax-checks the driver. The checker rejects 17 missing/reordered role, stale-path, project-data-route,
-  canonical-registration, and premature Lua/five-backend mutations. Capability remains 80/0/0; Lua explicit
-  literals/general bound calls stay `.11.8`. Retrieve [[callable-codeblock-four-backend-recurring-gate]] before
-  changing this topology.
+  syntax-checks the driver. The checker rejects 22 role/path/order/dual-ABI/route/canonical/exclusion/public
+  mutations and removes only the satisfied callable exclusion. Capability remains 80/0/0. Retrieve
+  [[callable-codeblock-five-backend-admission]] before changing this topology.
 
 - **LUA SOURCE FOUNDATION:** `.10.7.2.1` owns strict copied source/options, portable arithmetic SHA-256, exact
   private zero-based byte/scalar boundaries, one-based scalar line/columns, four source ceilings, and opaque

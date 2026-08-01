@@ -205,6 +205,9 @@ test also reads and passes the contract's exact eight-case subset.
 
 ## Callable codeblock construction and invocation
 
+Five-backend callable recurring/public admission is complete; this Dart consumer remains one unchanged leg of
+the neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT composition.
+
 Dart recognizes the exact deferred-value syntax before ordinary brace classification:
 
 ```text

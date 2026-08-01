@@ -93,6 +93,9 @@ leg now passes all 63 cases in both environments.
 
 ### Callable codeblock values and invocation
 
+Five-backend callable recurring/public admission is complete; this Rust consumer remains one unchanged leg of
+the neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT composition.
+
 Rust recognizes exact brace-pipe forms `{|params| body }` and `{|| body }` as inert callable-codeblock data, then
 executes a bound value through `cb(args)`:
 

@@ -140,7 +140,8 @@ dispatch rule.
 > retained `with`; ADR 0032 defines the metadata-owned final slot. Perl, Rust, Dart, Julia, and Lua construct and
 > invoke explicit values and normalize governed contextual forms through their ordinary codeblock executors.
 > Lua's native, reconstructed, generated-plan, and fresh emitted-module paths are implementation-current on PUC
-> Lua and LuaJIT under `.11.8.1-.3`; final recurring five-backend/public admission remains `.11.8.4`.
+> Lua and LuaJIT under `.11.8.1-.3`; `.11.8.4` admits both ABIs into the recurring five-backend/public proof.
+> Five-backend callable recurring/public admission is complete.
 
 ## 1. Working Variables and Setup
 

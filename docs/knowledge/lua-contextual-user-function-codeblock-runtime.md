@@ -34,7 +34,7 @@ active self-invocation reports `codeblock_recursion_unsupported` with a cycle. M
 callables accept contextual final-block syntax, but the stored zero-positional record now executes through the
 same scoped evaluator as explicit `{|params| ...}` values and general bound dynamic calls. Those explicit forms
 are current under `FUTURE-PARITY-BACKLOG.11.8.1-.2`; independently loaded emitted identity is current under
-`.11.8.3`, and final recurring/public admission remains `.11.8.4`.
+`.11.8.3`, and final recurring/public admission is current under `.11.8.4`.
 
 Related facts: [[lua-final-codeblock-metadata]], [[perl-generic-final-codeblock-normalization]],
 [[callable-codeblock-literal-contract]], [[lua-callable-codeblock-emitted-route-identity]],

@@ -239,8 +239,8 @@ signature accepts a final codeblock, the contract is that `call(args) { ... }` a
 `call(args, { ... })` are equivalent spellings of the same call; the same rule applies to helper functions, user
 functions, and receiver methods. Perl, Rust, Dart, Julia, and Lua implement that equivalence for metadata-declared
 `with`, typed user functions, and receiver `with`/tree-traversal surfaces. Lua implementation is current on both
-ABIs; final recurring five-backend admission remains separately owned, so implementation and admitted governance
-are not conflated. ADR 0031 and completed
+ABIs. Five-backend callable recurring/public admission is complete; the same Lua file runs on PUC Lua and LuaJIT,
+so implementation and admitted governance now agree. ADR 0031 and completed
 `FUTURE-PARITY-BACKLOG.11.1` select an explicit literal:
 
 ```text
@@ -370,9 +370,8 @@ count = collector("p", "a", "b")["items"].length()
 Perl, Rust, Dart, Julia, and Lua report exact arity, keyword-call, bound-non-codeblock, unknown-body-helper, and active-recursion
 failures as typed runtime details. A governed helper/control or registered user function still wins over a
 same-named variable. Explicit construction, `cb(...)` invocation, and generic contextual final-block spellings are
-current on all five backends. Four-backend recurring/public no-drift remains complete under `.11.7`; Lua
-construction/invocation/emitted identity are signoff-complete under `.11.8.1-.3`, while five-backend admission
-remains `.11.8.4`.
+current on all five backends. Five-backend callable recurring/public admission is complete under `.11.8.4`;
+Lua construction/invocation/emitted identity remain owned by `.11.8.1-.3`, and lexical capture remains outside v1.
 
 Hash receiver trailing blocks also support deterministic tree traversal. A hash tree has a hash root. Nested hash
 values are interior nodes; all non-hash values, including arrays, are leaves. `walk_leaves() { ... }` visits each

@@ -188,6 +188,9 @@ effective state, and semantic signature retain and correlate the same metadata. 
 functions, and hash/array tree traversal decode the normalized value through the existing Julia dynamic codeblock
 executor. Generated plans and emitted Julia reconstruct and compile through that same owner.
 
+Five-backend callable recurring/public admission is complete. The recurring matrix proves each backend's ordinary
+compiler/runtime path, including the same Lua consumer on PUC Lua and LuaJIT; it adds no route-specific compiler.
+
 The general future registry extends that proven subset. Resolution checks already-known
 import aliases and composed spec identities, then paths relative to the declaring spec,
 then configured search roots and registry providers in declared order. The scheduler

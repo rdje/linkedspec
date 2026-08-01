@@ -1,5 +1,15 @@
 # ARCHITECTURE STATE
 
+- `2026-08-01 five-backend callable recurring/public admission`: Five-backend callable recurring/public admission is complete
+  under `FUTURE-PARITY-BACKLOG.11.8.4`. One rooted driver composes neutral, Perl, Rust, Dart, Julia, PUC Lua, and
+  LuaJIT; the two Lua runtime rows execute one focused file through the same project-data wrapper. The independent
+  checker locks ten roles per row, exact paths/order/routes, one canonical registration, satisfied-exclusion
+  absence, and 25 public documents through 22 mutations. The final no-drift sweep added the canonical mdBook
+  helper catalog and corrected three stale projections. The established 16-capability census remains 80/0/0;
+  lexical capture remains outside v1, `future.generic_final_codeblock` is removed, and parents `.11.8`/`.11`
+  close. Complete Lua 177x2, CLI 66x2, corpus 105/105, storage 17, Knowledge Map 780/6,328, sole-facing mdBook
+  79/14,052 KiB, all seven doctrines, canonical containment/moved-root proof, RAM 54%, Phase 0 1,031/1,031, and
+  the exact five-backend matrix pass.
 - `2026-08-01 Lua callable-codeblock emitted route identity`: `FUTURE-PARITY-BACKLOG.11.8.3` carries the same
   typed effective `SpecFile` through native compilation, canonical JSON reconstruction, generated-plan execution,
   and independently loaded emitted modules on PUC Lua and LuaJIT. Final helper/receiver/tree callbacks now resolve
@@ -22,7 +32,8 @@
   Focused proof passes 232 assertions on each Lua ABI; complete Lua passes 177 TAP groups per ABI, CLI 66x2,
   corpus 105/105, and 16 storage owners. Signoff also passes neutral+20, Knowledge Map 778/6,311, the sole-facing
   mdBook at 79/14,028 KiB, all seven doctrines, canonical RAM 51%, Phase 0 1,031/1,031, and the exact four-backend
-  callable matrix. Emitted-route identity remains `.11.8.3`; admission remains `.11.8.4`.
+  callable matrix. At that leaf boundary, emitted-route identity was still owned by `.11.8.3` and admission by
+  `.11.8.4`.
 - `2026-08-01 Lua callable-codeblock inert construction`: `FUTURE-PARITY-BACKLOG.11.8.1` makes exact `{|`
   classification an ActionIR concern before existing harray/eager-block routing. One neutral eight-field
   `codeblock_literal` owns fixed/final-rest `ActionCallableSignature`, typed deferred body, exact source, and
@@ -34,8 +45,8 @@
   complete Lua gate remains green at 177 legacy tests per ABI, CLI 66x2, corpus 105/105, and 16 storage owners.
   Signoff also passes neutral+20, Knowledge Map 777/6,301, the sole-facing mdBook at 79/14,028 KiB, all seven
   doctrines, canonical RAM 58%, Phase 0 1,031/1,031, and the exact four-backend callable matrix.
-  Bound invocation/access/failures remain `.11.8.2`; byte-fresh emitted execution remains `.11.8.3`; recurring/
-  public/capability admission remains `.11.8.4`.
+  At that leaf boundary, bound invocation/access/failures were still owned by `.11.8.2`, byte-fresh emitted
+  execution by `.11.8.3`, and recurring/public/capability admission by `.11.8.4`.
 - `2026-08-01 Lua callable typed audit / frozen implementation map`: completed behavior-free
   `FUTURE-PARITY-BACKLOG.11.8.0` proves identical PUC Lua/LuaJIT gaps and locks four existing authorities instead
   of introducing new ones. `action_parser`/`action_ast` own exact literal, signature, colon-keyword, and evaluated-

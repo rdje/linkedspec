@@ -218,7 +218,6 @@
     {"id": "legacy.perl_plugin_registry", "reason": "Deprecated Perl-only compatibility surface, explicitly outside the backend-neutral product contract.", "owner": "FUTURE-PARITY-BACKLOG.6"},
     {"id": "future.general_parse_job_authoring", "reason": "General provider search and recursive staged queues are a future language/API extension.", "owner": "FUTURE-PARITY-BACKLOG.2"},
     {"id": "future.semantic_introspection_mcp", "reason": "Versioned deep semantic API and thin MCP projection are parked design work.", "owner": "FUTURE-PARITY-BACKLOG.10.1"},
-    {"id": "future.generic_final_codeblock", "reason": "ADR 0031 plus ADR 0032 and linkedspec-callable-codeblock-v1 are adopted; Perl, Rust, Dart, and Julia construction, arbitrary dynamic invocation, contextual final-block normalization, and native/reconstructed/generated/emitted identity are current. Lua construction, arbitrary dynamic invocation, contextual final-block normalization, and native/reconstructed/generated/emitted identity are current on PUC Lua and LuaJIT; five-backend recurring/public admission remains future under FUTURE-PARITY-BACKLOG.11.8.4.", "owner": "FUTURE-PARITY-BACKLOG.11.8"},
     {"id": "future.rule_local_cursor_and_bare_edges", "reason": "ADR 0044 and linkedspec-rule-local-cursor-v1 remain in dependency-ordered rollout at 5 complete / 3 pending. Perl, Rust, Dart, and Julia are composed-admitted; Lua, recurring five-backend admission, and public no-drift remain.", "owner": "FUTURE-PARITY-BACKLOG.9.1.2"}
   ]
 }

@@ -5,18 +5,19 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `3f220f6c` — clean Lua callable-invocation HEAD from which emitted-route identity `.11.8.3`
-  activated task-tree-first (123/300; no push); Git derives the landing identity.
-- latest_completed_leaf: `.11.8.3` is signoff-complete from activation boundary `3f220f6c`; intended landing is
-  `FUTURE-PARITY-BACKLOG.11.8.3 - prove Lua emitted callable identity` (124/300; no push).
-- active_leaf: none — the clean `.11.8.3` landing must precede task-tree-first `.11.8.4` activation.
-- active_scope: no implementation is in flight; five-backend admission remains exclusively `.11.8.4`.
-- active_progress: native/reconstructed/generated/fresh-emitted proof passes 449x2; complete Lua 177x2, CLI 66x2,
-  corpus 105/105, storage 17, neutral+20, signatures, capability 80/0/0, KM 779/6,322, book 79/14,048 KiB,
-  doctrines, containment/moved-root, RAM 51%, Phase 0 1,031/1,031 in 809 seconds, and callable matrix pass.
-- active_exclusions: lexical capture, host closures, second codec/executor, MCP/root README/history/push movement.
-- in_flight_uncommitted: none after the workflow landing; no background job or verification result remains.
-- next_after_clean_commit: activate five-backend recurring/public/capability admission `.11.8.4` task-tree-first.
+- activation_commit: `917038e7` — clean emitted-identity HEAD from which five-backend callable admission `.11.8.4`
+  activated task-tree-first (124/300; no push); Git derives the landing identity.
+- latest_completed_leaf: `.11.8.4` is signoff-complete from `917038e7`; intended landing 125/300 is
+  `FUTURE-PARITY-BACKLOG.11.8.4 - admit five-backend callable codeblocks`.
+- active_leaf: `.11.8.4` — signoff-complete; finalize evidence, land, clear the brief, and prove clean.
+- active_scope: five-backend recurring/public callable admission and parent `.11.8`/`.11` clean closeout only.
+- active_progress: rooted neutral/Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT proof passes neutral+22, 10, 18, 21,
+  125+118+239, and 449x2; complete Lua 177x2, CLI 66x2, corpus 105/105, storage 17, capability 80/0/0,
+  25 public documents, KM 780/6,328, and sole-facing book 79/14,052 KiB pass. The final no-drift sweep added the
+  canonical helper catalog plus three stale-claim denials; all doctrines and the corrected canonical pass too.
+- active_exclusions: parser/runtime/emitter changes, lexical capture, MCP/root README/history/push/memory movement.
+- in_flight_uncommitted: complete staged `.11.8.4` slice; finalize evidence, commit, clear brief, and prove clean.
+- next_after_clean_commit: activate queued exclusion-freshness audit `.24.0` task-tree-first; no push.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -37,17 +38,19 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - closed_contract_handoff_guard: retain historical next owner `FUTURE-PARITY-BACKLOG.10.1` until tracked `.22`
   moves the repeated-action checker's immutable handoff to a stable governed home.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54.
-- current_future_direction: Lua construction/invocation/emitted identity `.11.8.1-.3` are signoff-complete;
-  admission `.11.8.4` follows; exclusion freshness is queued `.24.0-.2`; ADR `0064` remains unscheduled and ADR `0056`
-  stays `.14.1-.8`.
+- current_future_direction: callable parent `.11` is complete through five-backend admission `.11.8.4`; lexical
+  capture stays outside v1. Exclusion freshness is queued `.24.0-.2`; ADR `0064` remains unscheduled and ADR
+  `0056` stays `.14.1-.8`.
 - latest_bootstrap_read: 2026-08-01 — README, memory architecture, resume/task/decision/KM/Toolbox owners, full
   roadmap, codebase, and all 45 tracked mdBook pages are read/understood; current callable/Lua authorities refreshed.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
-- push_policy: hard lock at 300 new local commits; `.11.8.3` landing is 124/300; no push.
+- push_policy: hard lock at 300 new local commits; `.11.8.4` intended landing is 125/300; no push.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; canonical needs nested macOS sandbox permission and up to 30m.
-- canonical_state: `.11.8.3` definitive gate passes containment/moved-root, CLI 66x2, RAM 51%, Phase 0
-  1,031/1,031 in 809 seconds, the exact four-backend callable matrix, and `local CI gate passed`.
-- blockers: none; land clean, clear the brief, then activate `.11.8.4` task-tree-first; no push.
+- canonical_state: the corrected definitive authorized gate passes all seven doctrines, 25-document callable
+  governance, containment/moved-root, CLI 66x2, RAM 54%, Phase 0 1,031/1,031, the exact five-backend/six-runtime
+  matrix, and `local CI gate passed`. An earlier pre-correction attempt stopped only where the outer sandbox
+  denied nested `sandbox-exec` with status 71.
+- blockers: none; finish `.11.8.4` workflow landing only; no pivot or push before exact clean proof.

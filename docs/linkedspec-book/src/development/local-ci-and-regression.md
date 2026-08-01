@@ -709,22 +709,20 @@ independent mechanism. `.6.2.4.6` now permanently runs that full window and lock
 failures, and exact outputs. Julia has since closed the routed top-level function fixtures under `.6.2.5` and the
 complete 99/99 manifest gate under `.6.3`; `.6.4` has since added the focused gate and optional shared-CI wiring.
 
-### Callable-codeblock four-backend recurring proof
+### Callable-codeblock five-backend recurring proof
 
-`tools/check_callable_codeblock_four_backend.sh` composes the established callable-codeblock authorities without
-adding another semantic implementation. It runs the neutral contract checker, then the exact Perl, Rust, Dart,
-and Julia focused consumers in that order. Those consumers cover inert construction, dynamic caller context,
-static callable precedence, contextual final blocks, portable failures, and native/reconstructed/generated/
-emitted identity. The driver enters one managed repository-data run and delegates through the supported Python,
-Cargo, Dart, and Julia wrappers; Perl runs inside that managed boundary with ambient `PERL5LIB` cleared.
+Five-backend callable recurring/public admission is complete. `tools/check_callable_codeblock_five_backend.sh`
+composes the established authorities without adding another semantic implementation. It runs neutral, Perl, Rust,
+Dart, Julia, PUC Lua, and LuaJIT in exact order; the two Lua runtime rows execute one focused file. The driver
+enters one managed repository-data run and delegates through the supported Python, Cargo, Dart, Julia, and Lua
+wrappers; Perl runs inside that boundary with ambient `PERL5LIB` cleared.
 
 Canonical local CI always requires and syntax-checks the driver. Set
-`LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1` to execute the all-toolchain composition. The checker rejects 17
-topology and status mutations, including missing/reordered roles, stale paths, project-data bypass, missing or
-duplicated canonical execution, and premature Lua/five-backend admission claims, plus three public inventory/
-marker/denylist omissions. Perl, Rust, Dart, and Julia are admitted; Lua construction, invocation, and emitted
-identity are signoff-complete under `.11.8.1-.3` but intentionally remain outside this recurring driver until `.11.8.4`.
-Four-backend public no-drift covers 23 current-facing documents.
+`LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1` to execute the all-toolchain composition. The checker rejects 22
+topology, route, status, and public-governance mutations: missing/reordered roles, collapsed or divergent Lua
+runtime rows, stale paths, project-data bypass, stale four-backend identity, canonical omission/duplication,
+satisfied-exclusion resurrection, and public document/marker/denylist omission. Public no-drift covers 24
+current-facing documents.
 
 Lua's focused construction/invocation consumer is already part of the complete Lua gate on both ABIs:
 
@@ -737,8 +735,8 @@ bash tools/run_lua_local.sh
 It passes 449 assertions per ABI for exact literal/signature/body/span records, inert copy/transport, dynamic caller
 context, static precedence, declared-final equivalence, ordered copied fixed/rest values, result access/chaining,
 every neutral failure/recursion field, canonical reconstruction, generated execution, and byte-fresh emitted
-modules with corrupt-payload and cleanup proof. This does not add Lua to the recurring driver: `.11.8.4` alone owns
-five-backend recurring/public admission.
+modules with corrupt-payload and cleanup proof. `.11.8.4` runs that unchanged file once per Lua ABI and removes
+only the satisfied `future.generic_final_codeblock` exclusion. The 16-capability census remains 80/0/0.
 
 The `.11.8.3` signoff preserves that boundary while passing complete Lua 177x2, CLI 66x2, corpus 105/105, exact
 storage owner 17, neutral callable governance plus 20 mutations, signatures 3/9/7, and capability 80/0/0. The

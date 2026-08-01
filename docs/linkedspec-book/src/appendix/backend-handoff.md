@@ -1005,10 +1005,10 @@ set/rename/drop/pick values, deep source isolation, harray/array-view receiver c
 harray mutation are implemented and public-result guarded. Codeblock/control/tree-callback parent `.4.3.6` is
 now split: `.1` eager expression blocks, `.2` inline controls, `.3` statement controls, `.4` current built-in
 contextual blocks/`with`, `.5` deterministic callbacks, and `.6` closeout. General user-function final blocks are
-complete through `.5.1`; four-backend recurring/public closeout is complete under `.11.7`.
+complete through `.5.1`. Five-backend callable recurring/public admission is complete under `.11.8.4`.
 Lua explicit callable-codeblock construction and general bound invocation are current under
-`FUTURE-PARITY-BACKLOG.11.8.1-.2`; emitted execution identity is current under `.11.8.3`, and final admission
-remains `.11.8.4`.
+`FUTURE-PARITY-BACKLOG.11.8.1-.2`; emitted execution identity is current under `.11.8.3`, and the same consumer
+is recurring on PUC Lua and LuaJIT under `.11.8.4`.
 Eager blocks plus lazy inline controls pass 105/105: ordinary no-pair braces yield their last/local-return
 value, non-final statement mutation is preserved, harray braces retain precedence, and yielded values enter
 receiver dispatch. Inline `if`/`switch` evaluates only selected payloads, keeps false/null, evaluates switch

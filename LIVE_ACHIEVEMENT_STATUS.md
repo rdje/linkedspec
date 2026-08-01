@@ -1,5 +1,24 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-01 — Five-backend callable recurring/public admission is signoff-complete
+
+Five-backend callable recurring/public admission is complete under `FUTURE-PARITY-BACKLOG.11.8.4`. The renamed
+rooted driver runs neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT in exact order; both Lua runtime rows use
+`lua/test/callable_codeblock_literal_contract_test.lua` through the supported project-data wrapper. The checker
+locks exact roles, paths, order, route multiplicity, canonical registration, removal of the satisfied
+`future.generic_final_codeblock` exclusion, and 25 public documents through 22 governance mutations. The final
+no-drift sweep added the canonical mdBook helper catalog and corrected three stale user-facing projections.
+
+This closes the separately governed callable feature without adding a seventeenth backend-census row: the
+established five-backend 16-capability census remains 80/0/0. Lexical capture remains outside callable v1.
+Focused proof passes neutral+22, Perl 10, Rust 18, Dart 21, Julia 125+118+239, and Lua 449 on each ABI. Complete
+Lua passes 177x2, CLI 66x2, corpus 105/105, and 17 storage owners. Knowledge Map passes 780/6,328, the sole-facing
+mdBook renders 79 files / 14,052 KiB, and all seven doctrines pass. The definitive authorized canonical gate
+proves the corrected 25-document contract, containment/moved-root execution, CLI 66x2, RAM 54%, Phase 0
+1,031/1,031, and the exact five-backend matrix before `local CI gate passed`. An earlier pre-correction attempt
+stopped only where the outer sandbox denied nested `sandbox-exec`. Parents `.11.8`/`.11` are closed; only commit,
+brief clearing, and clean proof remain.
+
 ## 2026-08-01 — Lua callable-codeblock emitted identity is signoff-complete
 
 `FUTURE-PARITY-BACKLOG.11.8.3` now proves one typed callable record and interpreter across native compilation,
@@ -55,8 +74,9 @@ The focused consumer now passes 168 assertions unchanged on PUC Lua and LuaJIT. 
 passes every prior suite, all 177 legacy tests per ABI, primary CLI 66x2, corpus 105/105, and 16 storage owners.
 Neutral+20, Knowledge Map 777/6,301, the sole-facing mdBook at 79/14,028 KiB, all seven doctrines, and definitive
 canonical CI pass, including RAM 58%, Phase 0 1,031/1,031, and the Perl/Rust/Dart/Julia callable matrix before the
-exact local-CI marker. Bound invocation/access/diagnostics remain `.11.8.2`, byte-fresh emitted execution remains `.11.8.3`,
-and five-backend recurring/public/capability admission remains `.11.8.4`; no MCP/root-README/push movement occurs.
+exact local-CI marker. At that leaf boundary, bound invocation/access/diagnostics were still owned by `.11.8.2`,
+byte-fresh emitted execution by `.11.8.3`, and five-backend recurring/public/capability admission by `.11.8.4`;
+no MCP/root-README/push movement occurred.
 
 ## 2026-08-01 — Lua callable authority and RED audit is signoff-complete
 

@@ -459,7 +459,8 @@ variadic `signature`. The same `parameter_kinds` value is preserved in `body_pay
 Perl, Rust, Dart, Julia, and Lua currently expose this exact record because all five implement contextual
 final-codeblock user functions. Rust, Dart, and Julia preserve it through staged body AST intake, compiled JSON,
 generated plans, and emitted source.
-This descriptor fact does not by itself promote the still-incomplete five-backend callable-codeblock capability.
+Five-backend callable recurring/public admission is complete. Descriptor v3 remains one supporting authority;
+the recurring proof also requires literal construction, invocation, contextual, failure, and route identity.
 
 ## `meta`
 

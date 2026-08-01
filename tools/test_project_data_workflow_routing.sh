@@ -56,7 +56,7 @@ routed_entrypoints=(
  tools/test_repo_root_process_portability.sh
  tools/build_lua_native.sh
  tools/check_julia_primary_cli.sh
- tools/check_callable_codeblock_four_backend.sh
+ tools/check_callable_codeblock_five_backend.sh
  tools/check_diagnostic_output_five_backend.sh
  tools/check_duplicate_regex_slot_identity_five_backend.sh
  tools/check_logical_helper_five_backend.sh
@@ -192,8 +192,8 @@ run_routed_case lua-project-data failure "$REPO_ROOT/tools/run_lua_project_data.
  LINKEDSPEC_LUA_CMD=linkedspec-routing-test-missing-lua
 run_routed_case julia-primary failure "$REPO_ROOT/tools/check_julia_primary_cli.sh" \
  LINKEDSPEC_JULIA_CMD=linkedspec-routing-test-missing-julia
-run_routed_case callable-four failure "$REPO_ROOT/tools/check_callable_codeblock_four_backend.sh" \
- LINKEDSPEC_JULIA_CMD=linkedspec-routing-test-missing-julia
+run_routed_case callable-five failure "$REPO_ROOT/tools/check_callable_codeblock_five_backend.sh" \
+ LINKEDSPEC_LUAJIT_CMD=linkedspec-routing-test-missing-luajit
 run_routed_case diagnostic-five failure "$REPO_ROOT/tools/check_diagnostic_output_five_backend.sh" \
  LINKEDSPEC_JULIA_CMD=linkedspec-routing-test-missing-julia
 run_routed_case duplicate-five failure "$REPO_ROOT/tools/check_duplicate_regex_slot_identity_five_backend.sh" \

@@ -47,7 +47,7 @@ CALLABLE_ROLES = [
     "emitted_execution",
 ]
 RECURRING_TOPOLOGY = {
-    "driver": "tools/check_callable_codeblock_four_backend.sh",
+    "driver": "tools/check_callable_codeblock_five_backend.sh",
     "neutral_checker": {
         "path": "tools/check_callable_codeblock_contract.py",
         "project_data_route": "tools/run_python_project_data.sh",
@@ -85,133 +85,163 @@ RECURRING_TOPOLOGY = {
             "project_data_route": "tools/run_julia_project_data.sh",
             "roles": CALLABLE_ROLES.copy(),
         },
+        {
+            "backend": "lua",
+            "runtime": "puc_lua",
+            "test_path": "lua/test/callable_codeblock_literal_contract_test.lua",
+            "driver_marker": "puc lua/test/callable_codeblock_literal_contract_test.lua",
+            "project_data_route": "tools/run_lua_project_data.sh",
+            "roles": CALLABLE_ROLES.copy(),
+        },
+        {
+            "backend": "lua",
+            "runtime": "luajit",
+            "test_path": "lua/test/callable_codeblock_literal_contract_test.lua",
+            "driver_marker": "luajit lua/test/callable_codeblock_literal_contract_test.lua",
+            "project_data_route": "tools/run_lua_project_data.sh",
+            "roles": CALLABLE_ROLES.copy(),
+        },
     ],
     "local_ci": {
         "driver": "tools/run_ci_local.sh",
         "switch": "LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX",
     },
 }
-EXPECTED_FUTURE_EXCLUSION = {
-    "id": "future.generic_final_codeblock",
-    "reason": (
-        "ADR 0031 plus ADR 0032 and linkedspec-callable-codeblock-v1 are adopted; Perl, Rust, Dart, and Julia "
-        "construction, arbitrary dynamic invocation, contextual final-block normalization, and native/"
-        "reconstructed/generated/emitted identity are current. Lua construction, arbitrary dynamic invocation, "
-        "contextual final-block normalization, and native/reconstructed/generated/emitted identity are current "
-        "on PUC Lua and LuaJIT; five-backend recurring/public admission remains future under "
-        "FUTURE-PARITY-BACKLOG.11.8.4."
-    ),
-    "owner": "FUTURE-PARITY-BACKLOG.11.8",
-}
+SATISFIED_FUTURE_EXCLUSION_ID = "future.generic_final_codeblock"
+FIVE_BACKEND_PUBLIC_MARKER = "Five-backend callable recurring/public admission is complete"
 EXPECTED_PUBLIC_CONTRACT = {
     "documents": [
         {"path": "USER_GUIDE.md", "required_markers": [
             "Perl, Rust, Dart, Julia, and Lua support explicit deferred codeblock values",
             "including both PUC Lua and LuaJIT",
+            FIVE_BACKEND_PUBLIC_MARKER,
         ]},
         {"path": "rust/README.md", "required_markers": [
             "### Callable codeblock values and invocation",
             "Rust recognizes exact brace-pipe forms",
             "no Rust closure or captured environment is encoded",
+            FIVE_BACKEND_PUBLIC_MARKER,
         ]},
         {"path": "dart/README.md", "required_markers": [
             "## Callable codeblock construction and invocation",
             "neutral eight-field `codeblock_literal` record",
             "independently compiled emitted Dart",
+            FIVE_BACKEND_PUBLIC_MARKER,
         ]},
         {"path": "julia/README.md", "required_markers": [
             "## Callable-Codeblock Values and Dynamic Invocation",
             "Bound-variable `cb(args)` execution is now implemented",
             "No Julia closure, lexical capture",
+            FIVE_BACKEND_PUBLIC_MARKER,
         ]},
         {"path": "lua/README.md", "required_markers": [
             "Explicit callable codeblock construction and invocation are current under",
-            "no-drift is complete under `.11.7`",
+            FIVE_BACKEND_PUBLIC_MARKER,
         ]},
         {"path": "capability_conformance/README.md", "required_markers": [
             "`callable_codeblock_contract.json` defines",
-            "23 public documents",
-            "Four-backend recurring/public no-drift is complete",
+            "25 public documents",
+            FIVE_BACKEND_PUBLIC_MARKER,
         ]},
         {"path": "ROADMAP.md", "required_markers": [
-            "four-backend callable parent `.11.7` is closed",
+            FIVE_BACKEND_PUBLIC_MARKER,
             "Lua implementation/admission parent `.11.8.0-.4`",
         ]},
         {"path": "ROADMAP_V2.md", "required_markers": [
-            "four-backend callable parent `.11.7` is closed",
+            FIVE_BACKEND_PUBLIC_MARKER,
             "Lua implementation/admission `.11.8.0-.4`",
         ]},
         {"path": "ARCHITECTURE_STATE.md", "required_markers": [
             "callable public no-drift / parent closeout",
             "parent `.11.7` is closed",
+            FIVE_BACKEND_PUBLIC_MARKER,
         ]},
         {"path": "LIVE_ACHIEVEMENT_STATUS.md", "required_markers": [
             "Four-backend callable public no-drift is signoff-complete",
             "parent `.11.7` is closed",
+            FIVE_BACKEND_PUBLIC_MARKER,
         ]},
         {"path": "docs/TASK_TREE.md", "required_markers": [
             "Callable-codeblock parent `.11.7` is closed at four admitted backends",
+            FIVE_BACKEND_PUBLIC_MARKER,
         ]},
         {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "required_markers": [
-            "four-backend recurring/public closeout is complete under `.11.7`",
+            FIVE_BACKEND_PUBLIC_MARKER,
             "Lua explicit callable-codeblock construction and general bound invocation are current under",
         ]},
         {"path": "docs/linkedspec-book/src/appendix/formal-grammar.md", "required_markers": [
             "### Callable-codeblock literal and dynamic call (five-backend construction and invocation)",
             "Lua `.11.8.3` proves canonical reconstruction, generated-plan, and independently loaded emitted-route",
+            FIVE_BACKEND_PUBLIC_MARKER,
+        ]},
+        {"path": "docs/linkedspec-book/src/appendix/helper-contract-catalog.md", "required_markers": [
+            "# Helper Contract Catalog",
+            FIVE_BACKEND_PUBLIC_MARKER,
         ]},
         {"path": "docs/linkedspec-book/src/architecture/owner-tree.md", "required_markers": [
             "`LinkedSpec::CodeblockRuntime`",
             "`RuntimeContext` owns temporary uniform-binding",
+            FIVE_BACKEND_PUBLIC_MARKER,
         ]},
         {"path": "docs/linkedspec-book/src/compiler/pipeline-overview.md", "required_markers": [
             "same dynamic codeblock evaluator as explicit",
             "existing Julia dynamic codeblock",
+            FIVE_BACKEND_PUBLIC_MARKER,
         ]},
         {"path": "docs/linkedspec-book/src/development/local-ci-and-regression.md", "required_markers": [
-            "### Callable-codeblock four-backend recurring proof",
+            "### Callable-codeblock five-backend recurring proof",
             "`LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1`",
-            "intentionally remain outside this recurring driver until `.11.8.4`",
+            FIVE_BACKEND_PUBLIC_MARKER,
         ]},
         {"path": "docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md", "required_markers": [
             "current on all five backends",
-            "Four-backend recurring/public no-drift remains complete under `.11.7`",
+            FIVE_BACKEND_PUBLIC_MARKER,
         ]},
         {"path": "docs/linkedspec-book/src/overview/project-status.md", "required_markers": [
             "**Callable codeblock design**",
-            "Four-backend recurring/public no-drift is complete under `.11.7`",
+            FIVE_BACKEND_PUBLIC_MARKER,
         ]},
         {"path": "docs/linkedspec-book/src/public-api/descriptor-introspection.md", "required_markers": [
             "Perl, Rust, Dart, Julia, and Lua currently expose this exact record",
-            "still-incomplete five-backend callable-codeblock capability",
+            FIVE_BACKEND_PUBLIC_MARKER,
         ]},
         {"path": "docs/knowledge/callable-codeblock-literal-contract.md", "required_markers": [
             "Perl .11.3, Rust .11.4, Dart .11.5, and Julia .11.6",
-            "public no-drift closes parent `.11.7`",
+            FIVE_BACKEND_PUBLIC_MARKER,
         ]},
         {"path": "docs/knowledge/callable-codeblock-four-backend-recurring-gate.md", "required_markers": [
             "Seventeen mutations",
             "Public no-drift closes parent `.11.7`",
+            FIVE_BACKEND_PUBLIC_MARKER,
         ]},
         {"path": "docs/knowledge/callable-codeblock-four-backend-public-closeout.md", "required_markers": [
             "Four-backend callable public state is omission-locked",
             "user-facing specification surface",
+            FIVE_BACKEND_PUBLIC_MARKER,
         ]},
         {"path": "docs/knowledge/lua-explicit-callable-codeblock-gap.md", "required_markers": [
             "Lua's contextual and explicit authoring surfaces remain syntactically distinct",
             "`FUTURE-PARITY-BACKLOG.11.8`",
+            FIVE_BACKEND_PUBLIC_MARKER,
+        ]},
+        {"path": "docs/knowledge/callable-codeblock-five-backend-admission.md", "required_markers": [
+            FIVE_BACKEND_PUBLIC_MARKER,
+            "one focused file on both PUC Lua and LuaJIT",
         ]},
     ],
     "forbidden_current_claims": [
-        {"path": "USER_GUIDE.md", "text": "cross-backend closeout remain task-tree-owned future work"},
-        {"path": "lua/README.md", "text": "four-backend governance closes"},
-        {"path": "capability_conformance/README.md", "text": "adopts the future first-class callable-codeblock boundary without claiming"},
-        {"path": "ROADMAP.md", "text": "public closeout remains `.11.7.2`"},
-        {"path": "ROADMAP_V2.md", "text": "recurring/public governance `.11.7.1-.2`"},
-        {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "text": "after four-backend closeout"},
-        {"path": "docs/linkedspec-book/src/appendix/formal-grammar.md", "text": "routes four-backend recurring/public closeout through `.11.7.1-.2`"},
-        {"path": "docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md", "text": "public no-drift close under `.11.7.1-.2`"},
-        {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "routes their recurring/public closeout to `.11.7.1-.2`"},
+        {"path": "USER_GUIDE.md", "text": "Four-backend recurring/public no-drift remains complete under `.11.7`"},
+        {"path": "lua/README.md", "text": "four-backend recurring/public no-drift is complete under `.11.7`"},
+        {"path": "lua/README.md", "text": "Final recurring/public admission remains `.11.8.4`"},
+        {"path": "capability_conformance/README.md", "text": "Four-backend recurring/public no-drift is complete"},
+        {"path": "ROADMAP.md", "text": "four-backend callable parent `.11.7` is closed"},
+        {"path": "ROADMAP_V2.md", "text": "four-backend callable parent `.11.7` is closed"},
+        {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "text": "four-backend recurring/public closeout is complete under `.11.7`"},
+        {"path": "docs/linkedspec-book/src/appendix/formal-grammar.md", "text": "five-backend admission remains `.11.8.4`"},
+        {"path": "docs/linkedspec-book/src/appendix/helper-contract-catalog.md", "text": "final recurring five-backend/public admission remains `.11.8.4`"},
+        {"path": "docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md", "text": "Four-backend recurring/public no-drift remains complete under `.11.7`"},
+        {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "while admission remains `.11.8.4`"},
+        {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "Four-backend recurring/public no-drift is complete under `.11.7`"},
     ],
 }
 
@@ -478,22 +508,23 @@ def validate_driver_text(text: str, topology: dict[str, Any]) -> None:
             if consumer["project_data_route"] != "managed_driver"
         ],
     ]
-    for route in expected_routes:
+    for route in set(expected_routes):
+        expected_count = expected_routes.count(route)
         require(
-            text.count(route) == 1,
+            text.count(route) == expected_count,
             "project_data_route_drift",
-            f"recurring driver omits or duplicates project-data route {route}",
+            f"recurring driver needs project-data route {route} exactly {expected_count} time(s)",
         )
     require(
         text.count("PERL5LIB= prove -Iperl") == 1,
         "project_data_route_drift",
         "Perl consumer must execute inside the managed driver with an empty ambient PERL5LIB",
     )
-    forbidden = ["run_lua", "lua/test", "LuaJIT", "puc_lua", "five_backend"]
     require(
-        not any(marker in text for marker in forbidden),
-        "premature_lua_admission",
-        "four-backend recurring driver must not admit Lua or a five-backend role",
+        "check_callable_codeblock_four_backend.sh" not in text
+        and "callable-codeblock-four" not in text,
+        "stale_four_backend_driver",
+        "five-backend recurring driver must not retain the superseded four-backend identity",
     )
 
 
@@ -523,14 +554,21 @@ def validate_recurring_topology(topology: dict[str, Any], *, check_filesystem: b
     require(
         topology == RECURRING_TOPOLOGY,
         "recurring_topology_drift",
-        "four-backend recurring topology or roles drifted",
+        "five-backend recurring topology or roles drifted",
     )
     consumers = topology["consumers"]
     require(
         [(row["backend"], row["runtime"]) for row in consumers]
-        == [("perl", "perl"), ("rust", "rust"), ("dart", "dart"), ("julia", "julia")],
+        == [
+            ("perl", "perl"),
+            ("rust", "rust"),
+            ("dart", "dart"),
+            ("julia", "julia"),
+            ("lua", "puc_lua"),
+            ("lua", "luajit"),
+        ],
         "recurring_topology_drift",
-        "recurring topology must contain exactly the four admitted backends in order",
+        "recurring topology must contain exactly five admitted backends and both Lua runtimes in order",
     )
     if not check_filesystem:
         return
@@ -549,11 +587,11 @@ def validate_recurring_topology(topology: dict[str, Any], *, check_filesystem: b
     validate_canonical_text(ci_path.read_text(encoding="utf-8"), topology)
 
 
-def validate_future_exclusion(record: dict[str, Any]) -> None:
+def validate_satisfied_exclusion_absent(records: list[dict[str, Any]]) -> None:
     require(
-        record == EXPECTED_FUTURE_EXCLUSION,
+        not any(record.get("id") == SATISFIED_FUTURE_EXCLUSION_ID for record in records),
         "callable_status_drift",
-        "generic final-codeblock exclusion must name only the measured Lua gap and .11.8 owner",
+        "satisfied generic final-codeblock exclusion must be absent after five-backend admission",
     )
 
 
@@ -599,7 +637,7 @@ def expect_mutation_failure(name: str, check: Callable[[], None]) -> None:
 def governance_mutation_checks(
     driver_text: str,
     ci_text: str,
-    future_record: dict[str, Any],
+    future_records: list[dict[str, Any]],
     public_contract: dict[str, Any],
 ) -> int:
     mutations: list[tuple[str, Callable[[], None]]] = []
@@ -617,20 +655,25 @@ def governance_mutation_checks(
     topology_mutation("role_omission", lambda value: value["consumers"][1]["roles"].pop())
     topology_mutation("stale_consumer_path", lambda value: value["consumers"][2].__setitem__("test_path", "missing"))
     topology_mutation("project_data_bypass", lambda value: value["consumers"][1].__setitem__("project_data_route", "cargo"))
-    topology_mutation("premature_lua_consumer", lambda value: value["consumers"].append({"backend": "lua"}))
+    topology_mutation("lua_runtime_identity_drift", lambda value: value["consumers"][5].__setitem__("runtime", "puc_lua"))
+    topology_mutation("lua_backend_identity_drift", lambda value: value["consumers"][5].__setitem__("backend", "luajit"))
+    topology_mutation("lua_consumer_divergence", lambda value: value["consumers"][5].__setitem__("test_path", "missing"))
+    topology_mutation("lua_project_data_bypass", lambda value: value["consumers"][5].__setitem__("project_data_route", "luajit"))
     topology_mutation("canonical_switch_drift", lambda value: value["local_ci"].__setitem__("switch", "wrong"))
 
     rust_marker = RECURRING_TOPOLOGY["consumers"][1]["driver_marker"]
     dart_marker = RECURRING_TOPOLOGY["consumers"][2]["driver_marker"]
-    reordered_driver = driver_text.replace(rust_marker, "__RUST__", 1).replace(
-        dart_marker, rust_marker, 1
-    ).replace("__RUST__", dart_marker, 1)
+    puc_marker = RECURRING_TOPOLOGY["consumers"][4]["driver_marker"]
+    luajit_marker = RECURRING_TOPOLOGY["consumers"][5]["driver_marker"]
+    reordered_driver = driver_text.replace(puc_marker, "__PUC_LUA__", 1).replace(
+        luajit_marker, puc_marker, 1
+    ).replace("__PUC_LUA__", luajit_marker, 1)
     mutations.extend(
         [
             (
                 "driver_consumer_omission",
                 lambda: validate_driver_text(
-                    driver_text.replace(RECURRING_TOPOLOGY["consumers"][3]["driver_marker"], "", 1),
+                    driver_text.replace(luajit_marker, "", 1),
                     RECURRING_TOPOLOGY,
                 ),
             ),
@@ -642,8 +685,18 @@ def governance_mutation_checks(
                 ),
             ),
             (
-                "driver_premature_lua_admission",
-                lambda: validate_driver_text(driver_text + "\nbash tools/run_lua_local.sh\n", RECURRING_TOPOLOGY),
+                "driver_lua_project_data_bypass",
+                lambda: validate_driver_text(
+                    driver_text.replace("bash tools/run_lua_project_data.sh", "luajit", 1),
+                    RECURRING_TOPOLOGY,
+                ),
+            ),
+            (
+                "driver_stale_four_backend_identity",
+                lambda: validate_driver_text(
+                    driver_text + "\n# tools/check_callable_codeblock_four_backend.sh\n",
+                    RECURRING_TOPOLOGY,
+                ),
             ),
         ]
     )
@@ -667,17 +720,16 @@ def governance_mutation_checks(
         ]
     )
 
-    for name, field, value in [
-        ("future_owner_drift", "owner", "FUTURE-PARITY-BACKLOG.11.7"),
-        ("stale_completed_backend_claim", "reason", "Rust and Julia remain future."),
-        ("premature_five_backend_claim", "reason", "All five backends are current."),
-    ]:
-        def check(field: str = field, value: str = value) -> None:
-            candidate = copy.deepcopy(future_record)
-            candidate[field] = value
-            validate_future_exclusion(candidate)
+    def resurrect_satisfied_exclusion() -> None:
+        candidate = copy.deepcopy(future_records)
+        candidate.append({
+            "id": SATISFIED_FUTURE_EXCLUSION_ID,
+            "reason": "stale satisfied exclusion",
+            "owner": "FUTURE-PARITY-BACKLOG.11.8",
+        })
+        validate_satisfied_exclusion_absent(candidate)
 
-        mutations.append((name, check))
+    mutations.append(("satisfied_exclusion_resurrection", resurrect_satisfied_exclusion))
 
     for name, mutate in [
         ("public_document_omission", lambda value: value["documents"].pop()),
@@ -699,22 +751,12 @@ def governance_mutation_checks(
 def validate_governance(public_contract: dict[str, Any]) -> int:
     validate_recurring_topology(RECURRING_TOPOLOGY, check_filesystem=True)
     manifest = json.loads((ROOT / "capability_conformance" / "manifest.json").read_text(encoding="utf-8"))
-    records = [
-        record
-        for record in manifest["excluded_or_future"]
-        if record.get("id") == EXPECTED_FUTURE_EXCLUSION["id"]
-    ]
-    require(
-        len(records) == 1,
-        "callable_status_drift",
-        "generic final-codeblock exclusion must occur exactly once",
-    )
-    future_record = records[0]
-    validate_future_exclusion(future_record)
+    future_records = manifest["excluded_or_future"]
+    validate_satisfied_exclusion_absent(future_records)
     validate_public_contract(public_contract, check_filesystem=True)
     driver_text = (ROOT / RECURRING_TOPOLOGY["driver"]).read_text(encoding="utf-8")
     ci_text = (ROOT / RECURRING_TOPOLOGY["local_ci"]["driver"]).read_text(encoding="utf-8")
-    return governance_mutation_checks(driver_text, ci_text, future_record, public_contract)
+    return governance_mutation_checks(driver_text, ci_text, future_records, public_contract)
 
 
 def main() -> None:

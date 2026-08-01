@@ -186,14 +186,14 @@ static precedence, typed failures, and ordered recursion rejection across native
 roles. Julia `.11.6.3` preserves exact final-only typed metadata and applies one post-registry contract pass to
 equivalent attached/parenthesized helper, typed-user-function, receiver, and tree blocks. The normalized
 zero-positional record executes through the same evaluator in native/reconstructed/generated/emitted roles while
-eager blocks, controls, explicit signatures, and harrays remain distinct. Four-backend recurring/public closeout
-is complete through `.11.7.1-.2`. Lua `.11.8.1` now preserves the same exact literal, nullable fixed/final-rest
+eager blocks, controls, explicit signatures, and harrays remain distinct. Lua `.11.8.1` preserves the same exact literal, nullable fixed/final-rest
 signature, typed deferred body, source text, containing Unicode-character spans, inert runtime/function copies,
 compiled/generated/emitted effective state, and semantic codeblock shape on PUC Lua and LuaJIT. Lua `.11.8.2`
 adds the same ordered dynamic caller-frame invocation, copied/restored fixed/rest bindings, live nonparameters,
 typed result access, static precedence, exact failures, and ordered recursion rejection through the shared
 interpreter. Lua `.11.8.3` proves canonical reconstruction, generated-plan, and independently loaded emitted-route
-identity through that same record/executor; five-backend admission remains `.11.8.4`.
+identity through that same record/executor. Five-backend callable recurring/public admission is complete under
+`.11.8.4`; both Lua ABIs execute the same consumer and lexical capture remains outside version 1.
 
 Arguments evaluate once from left to right before any parameter is bound. Nested arrays/harrays, booleans,
 `undef`, and codeblocks remain individual rest-array values rather than being flattened or coerced.

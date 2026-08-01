@@ -423,10 +423,9 @@ literals. The contract also fixes diagnostics, exact final-only `name: codeblock
 user-function/receiver forms, and a deterministic future `.spec` fixture. Validate the schema, parser/classifier
 model, neutral invocation model, and fixture offline with
 `bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py`. That checker also locks the
-four-backend recurring topology, mixed future-exclusion status, and 23 public documents through 20 rejected
-governance mutations: 17 topology/status cases plus public document, marker, and stale-claim omission. Run
-`bash tools/check_callable_codeblock_four_backend.sh` for the ordered neutral, Perl, Rust, Dart, and Julia
-composition; canonical CI exposes the same all-toolchain leg through
+five-backend/two-Lua-runtime recurring topology, satisfied-exclusion absence, and 25 public documents through 22
+rejected governance mutations. Run `bash tools/check_callable_codeblock_five_backend.sh` for the ordered neutral,
+Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT composition; canonical CI exposes the same all-toolchain leg through
 `LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1`. Perl consumes the
 literal and invocation subset
 through `prove -Iperl t/callable_codeblock_literal_contract.t`: exact AST/spans, inert canonical generated data,
@@ -444,10 +443,10 @@ and generic final-block equivalence. Julia `.11.6.1-.3` now complete constructio
 generic final-block equivalence through one signature-governed normalizer and the existing evaluator. Lua's
 declared contextual forms, inert explicit literal construction, and ordinary bound-value invocation are current
 through `.11.8.1-.2` on both ABIs, including exact failures and ordered recursion. Independently emitted execution
-identity is current under `.11.8.3`. Four-backend recurring/public no-drift is complete under `.11.7`; the overall
-generic capability stays excluded until final five-backend admission lands under `.11.8.4`.
-The corrected exclusion points only to Lua parent `.11.8`; the capability census remains 80 pass / 0 partial /
-0 gap because no capability row moves in this governance leaf.
+identity is current under `.11.8.3`. Five-backend callable recurring/public admission is complete under
+`.11.8.4`; `future.generic_final_codeblock` is removed because no callable route or admission gap remains.
+The established 16-capability census remains 80 pass / 0 partial / 0 gap because this admission completes the
+separately excluded callable feature rather than inventing an unrelated seventeenth backend-census row.
 
 `complete_named_mark_contract.json` fixes the seven documented current named-mark helpers that were absent from
 every governed backend inventory: entry/local start/end writers, line/column readers, and explicit clear. The

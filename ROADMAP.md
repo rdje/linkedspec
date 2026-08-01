@@ -32,9 +32,9 @@ clean callable-codeblock frontier. Behavior-free `.11.7.0` now proves all four c
 isolates stale mixed-exclusion/recurring-driver governance, and splits `.11.7.1-.2` four-backend closeout from new
 Lua implementation/admission parent `.11.8.0-.4` without changing behavior. `.11.7.1` now adds the one routed
 four-backend driver, 17-mutation topology/status governance, optional canonical registration, and Lua-only
-exclusion correction while retaining capability 80/0/0. Public no-drift `.11.7.2` inventories 23 documents,
-rejects public omission/stale-claim drift; four-backend callable parent `.11.7` is closed, while Lua implementation/
-admission parent `.11.8.0-.4` is active. Behavior-free `.11.8.0` is complete and freezes one focused dual-ABI Lua consumer and
+exclusion correction while retaining capability 80/0/0. Public no-drift `.11.7.2` historically inventories 23
+documents and closes the four-implementation boundary; Lua implementation/admission parent `.11.8.0-.4` then
+completes the remaining runtime. Behavior-free `.11.8.0` freezes one focused dual-ABI Lua consumer and
 the exact sequence: inert ActionIR/state `.1`, dynamic call/access/diagnostics `.2`, existing-emitter route identity
 `.3`, then five-backend admission `.4`. Inert construction `.11.8.1` is now signoff-complete: exact literals/
 signatures/spans/nine malformed codes, deferred bodies, offset-preserving copies, function/compiled/generated/
@@ -46,7 +46,14 @@ frames, live caller nonparameters, local results, exact failures, and ordered re
 the complete dual-ABI Lua gate. Emitted identity `.11.8.3` is signoff-complete: native, reconstructed, generated-
 plan, and fresh emitted modules share one typed state/interpreter at focused 449x2, complete Lua 177x2, CLI 66x2,
 corpus 105/105, and 17 storage owners; KM 779/6,322, sole-facing mdBook 79/14,048 KiB, all doctrines, canonical
-Phase 0 1,031/1,031 in 809 seconds, and the callable matrix pass. Admission stays `.11.8.4`.
+Phase 0 1,031/1,031 in 809 seconds, and the callable matrix pass.
+Five-backend callable recurring/public admission is complete under `.11.8.4`: one rooted driver composes neutral,
+Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; 22
+governance mutations lock two Lua rows over one consumer, exact routes/order/canonical registration, satisfied-
+exclusion removal, and 25 public documents including the canonical mdBook helper catalog. The 16-capability census remains 80/0/0, lexical capture remains
+excluded from v1, and parents `.11.8`/`.11` close. Signoff passes complete Lua 177x2, CLI 66x2, corpus 105/105,
+17 storage owners, Knowledge Map 780/6,328, sole-facing mdBook 79/14,052 KiB, all seven doctrines, canonical
+containment/moved-root proof, RAM 54%, Phase 0 1,031/1,031, and the exact five-backend callable matrix.
 Manifest audit also queues unrelated exclusion-freshness governance
 `.24.0-.2` without widening the callable lane.
 
@@ -789,7 +796,7 @@ admission `.9.1.1.2.5.3` task-tree-first.
      and Phase 0 1,031/1,031 in 966 seconds complete signoff. Parent `.11.6` is closed. Behavior-free `.11.7.0`
      proves the unchanged neutral contract plus focused Perl/Rust/Dart/Julia consumers, identifies the missing
      composed recurring driver and stale mixed future exclusion, and measures Lua's exact parser/AST/call-dispatch
-     gap. Four-backend recurring/public governance is split as `.11.7.1-.2`; Lua typed construction, dynamic
+     gap. Historical four-implementation recurring/public governance is split as `.11.7.1-.2`; Lua typed construction, dynamic
      invocation, existing-emitter dual-ABI identity, and final admission are dependency-owned by `.11.8.0-.4`.
      Completed behavior-free `.11.8.0` freezes one `lua/test/callable_codeblock_literal_contract_test.lua` consumer and exact
      seams: `ActionCallableSignature`/eight-field inert state `.1`; colon keyword plus evaluated-value access and
@@ -804,7 +811,10 @@ admission `.9.1.1.2.5.3` task-tree-first.
      effective-`SpecFile` reconstruction, generated-plan, and independently loaded emitted-module identity through
      the same executor at focused 449x2 and registers exact Lua storage owner 17. Complete Lua, governance,
      Knowledge Map 779/6,322, sole-facing mdBook 79/14,048 KiB, all doctrines, and canonical Phase 0 1,031/1,031
-     in 809 seconds plus the callable matrix complete signoff; admission stays `.4`.
+     in 809 seconds plus the callable matrix complete signoff.
+     Five-backend callable recurring/public admission is complete under `.11.8.4`: the same consumer runs on PUC
+     Lua and LuaJIT, only the satisfied callable
+     exclusion is removed, census 80/0/0 is preserved, and `.11.8`/`.11` close.
      Uniform-binding selector retirement `.12.1` is complete. It removes spec-facing `array(name)` / `hash(name)`
      selector and mutation semantics before Rust codeblock parity or resumed Lua work. Corrected inventory `.12.1.0` counts 600 exact forms in 82 tracked specs and
      splits neutral contract `.1`, five backend enablement leaves, source migration, hard rejection, and no-drift.
@@ -1888,7 +1898,7 @@ pending explicit activation, and no scaffold or content move exists yet.
 | Area | Status | What it covers | Remaining focus |
 | --- | --- | --- | --- |
 | Overall roadmap | `done` | Whole-project delivery across parser core, semantics, runtime, docs, self-hosting, multi-backend handoff, and the Rust variant. | All numbered phases (0-9) done. All Backbone items done. Plugin modernization done. Method-like DSL migration done. Phase 7 self-hosting complete. Phase 8 multi-backend handoff surface specified; Phase 9 Rust variant operational (Cargo workspace at `rust/`, interpreted mode, v0.1). mdBook reframed variant-agnostic (`.spec` = universal contract; Perl = reference backend; Rust = implemented lockstep variant; Dart/Julia/Lua = scheduled future full-parity variants). Remaining: ongoing documentation/book sync and explicitly owned deferred feature lanes. |
-| Future parity backlog | `in progress` | Deferred/future parity lanes after the closed language-reference and terse-format trees: staged parsing, function extensions, helper caveats, plugin fate, richer oracle candidates, spec-derived parser/stimuli validation, AND/OR edge-default design, deep semantic introspection with MCP projection, generic first-class codeblocks, compatibility retirement, toolbox reliability, structural/progressive/staged authoring closure, Unicode structured text, Rust mutation testing, and backend companion books. | Five-backend capability parity is 80/0/0. Semantic introspection is exact at six fixture groups / 20 responses / 128 mutations, rollout 9/9, and native admission 6/6. MCP state is 5/5 implementations + 6/6 runtimes with rollout complete/141; parent `.10` is closed. Callable Perl/Rust/Dart/Julia are admitted-current under `.11.7`; Lua construction/invocation/emitted identity are signoff-complete through `.11.8.3`, and `.11.8.4` retains five-backend admission. Exclusion-freshness audit/enforcement `.24.0-.2` is queued after the manifest exposed two unrelated stale completed-rollout narratives. ADR `0062` retains the MCP repair history. Typed source-location `.14.0.1` is complete and `.14.1-.8` remain pending. `.22`, `.23`, format/inter-match work, manual mutation execution, inspector `.13.1`, and `.15` remain separately owned. |
+| Future parity backlog | `in progress` | Deferred/future parity lanes after the closed language-reference and terse-format trees: staged parsing, function extensions, helper caveats, plugin fate, richer oracle candidates, spec-derived parser/stimuli validation, AND/OR edge-default design, deep semantic introspection with MCP projection, generic first-class codeblocks, compatibility retirement, toolbox reliability, structural/progressive/staged authoring closure, Unicode structured text, Rust mutation testing, and backend companion books. | Five-backend capability parity is 80/0/0. Semantic introspection is exact at six fixture groups / 20 responses / 128 mutations, rollout 9/9, and native admission 6/6. MCP state is 5/5 implementations + 6/6 runtimes with rollout complete/141; parent `.10` is closed. Callable construction/invocation/contextual/generated/emitted identity and recurring/public admission are complete on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT through `.11.8.4`; callable parents `.11.8`/`.11` are closed. Exclusion-freshness audit/enforcement `.24.0-.2` is queued after the manifest exposed two unrelated stale completed-rollout narratives. ADR `0062` retains the MCP repair history. Typed source-location `.14.0.1` is complete and `.14.1-.8` remain pending. `.22`, `.23`, format/inter-match work, manual mutation execution, inspector `.13.1`, and `.15` remain separately owned. |
 | Expressive `.spec` self-containment | `direction ratified; implementation unscheduled` | Problem-domain language closure plus an optional EBNF-like authoring frontend over one canonical semantic core. | ADR `0064` and `SPEC-LANGUAGE-SELF-CONTAINMENT.0` accept no-host-escape expressive objectives, one AST/HandlerIR/runtime, honest EBNF semantic differences/extensions, lossless source maps, realistic proof, and five-backend rollout. `.1-.6` remain pending behind current callable parity; no syntax or behavior is current. |
 | Root-rule selection precedence | `done; 7 complete / 0 pending` | Explicit `--top-rule NAME` may select any declared rule and has priority over authored entry markers; otherwise the first authored `Rule::` is the default; when no marker exists, the first ordinary `Rule:` is the default. | All five backends and both Lua ABIs are admitted. Final recurring/public no-drift `.6` locks 25 current documents, 19 stale-current denials, both roadmap projections, 54 mutations, the six runtime consumers, and the exact selected 5x2x6 primary matrix. Authored selection fixtures use lifecycle `I`; fixed request-trace bytes retain `E`. |
 | Inter-match gap capture | `direction ratified; awaiting explicit activation` | Recover historical “super split” as automatic source-gap access between repeated OR/default action-edge matches, with target rules retaining their regex slots and lifecycle code. ADR `0045` accepts `@capture_gaps` as the future neutral name, accepts spacing-insensitive `name=/regex/` plus `Rule[name]` for stable slots, and rejects the later blind-call/adjacency interpretation. | Decision leaf `INTER-MATCH-GAP-CAPTURE.0` changes documentation only and records current marker drift: Perl anonymous scope is rule-level, Lua is preceding-slot-local, and Rust/Dart/Julia do not execute marker members natively. Cursor rollout dependency is satisfied at 8/0. Executable prefix/interstitial/tail, empty-span, failure, recursion, typed-span, diagnostics, compatibility, lifecycle-slot access, and five-backend contracts remain `.1-.7` pending explicit activation. |

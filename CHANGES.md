@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-08-01 — FUTURE-PARITY-BACKLOG.11.8.4 — admit five-backend callable codeblocks
+
+Callable-codeblock conformance now has one recurring five-backend/six-runtime entrypoint. The renamed rooted
+driver runs the unchanged neutral model, Perl, Rust, Dart, and Julia, then executes the same focused Lua consumer
+through the supported project-data wrapper on PUC Lua and LuaJIT. Canonical CI requires and syntax-checks the new
+path and runs it exactly once when `LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1` is enabled.
+
+The independent checker now freezes the exact backend/runtime order, roles, paths, shared Lua consumer, distinct
+Lua ABIs, repository-storage routes, canonical registration, stale-driver rejection, and public state through 22
+governance mutations. The public contract expands from 23 to 25 current documents, including the canonical
+mdBook helper catalog found by the final no-drift sweep. Only the satisfied
+`future.generic_final_codeblock` exclusion is removed; the established 16-capability census remains 80 pass / 0
+partial / 0 gap, and no parser, compiler, runtime, emitter, MCP, or lexical-capture behavior changes.
+
+The composed driver passes neutral 7/11/9/7/4/8+22, Perl 10, Rust 18, Dart 21, Julia 125+118+239, and Lua 449 on
+each ABI. Complete Lua passes 177 TAP groups per ABI, CLI 66x2, corpus 105/105, and 17 storage owners. Knowledge
+Map passes 780/6,328, the sole-facing mdBook renders 79 files / 14,052 KiB, and all seven doctrines pass. The
+corrected definitive canonical gate proves repository containment, moved-root/outside-CWD execution, CLI 66x2, RAM 54%,
+Phase 0 1,031/1,031, and the new matrix before `local CI gate passed`. Callable parents `.11.8` and `.11` close;
+lexical capture remains outside v1.
+
 ## 2026-08-01 — FUTURE-PARITY-BACKLOG.11.8.3 — prove Lua emitted callable identity
 
 PUC Lua and LuaJIT now execute the exact callable fixture, dynamic/contextual forms, and portable failures through

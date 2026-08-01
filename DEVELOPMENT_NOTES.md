@@ -1,5 +1,30 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`FUTURE-PARITY-BACKLOG.11.8.4` — admit Lua into recurring callable conformance): admission is a
+  governance/topology change, not a new callable implementation. The four-backend driver was renamed in place and
+  extended after its Julia leg with two calls to `tools/run_lua_project_data.sh`; both calls consume
+  `lua/test/callable_codeblock_literal_contract_test.lua`, but one selects PUC Lua and one selects LuaJIT.
+
+  `tools/check_callable_codeblock_contract.py` now owns six ordered runtime rows representing five backends. Its
+  route-count check deliberately permits the shared Lua wrapper exactly twice while still rejecting omissions,
+  duplicates, reorderings, runtime/backend identity drift, consumer divergence, route bypass, stale four-backend
+  identity, canonical duplication, public omissions, and resurrection of the satisfied exclusion. This raises the
+  governance total from 20 to 22. The duplicate-independent public inventory grows to 25 documents; the final
+  no-drift sweep added the canonical mdBook helper catalog and denial markers for the three stale projections it
+  exposed.
+
+  `future.generic_final_codeblock` is removed because construction, invocation, contextual equivalence,
+  reconstructed/generated/emitted identity, and recurring/public proof are all current on both Lua ABIs. It is
+  not converted into a seventeenth capability row: the established manifest already measures 16 capabilities
+  across five backends, so the census correctly remains 80/0/0. Lexical capture remains an explicit v1 exclusion.
+
+  Focused proof passes neutral+22, Perl 10, Rust 18, Dart 21, Julia 125+118+239, and Lua 449x2. Complete Lua passes
+  177x2, CLI 66x2, corpus 105/105, and 17 storage owners. Knowledge Map is 780/6,328; the sole-facing mdBook is
+  79/14,052 KiB; all seven doctrines pass. The first canonical attempt was green until the outer Codex sandbox
+  denied the repository's nested `sandbox-exec` with status 71. After the final no-drift correction, the
+  definitive authorized rerun passes the 25-document contract, containment, moved-root/outside-CWD anchors, CLI
+  66x2, RAM 54%, Phase 0 1,031/1,031, and the exact new callable matrix before the local-CI marker.
+
 - 2026-08-01 (`FUTURE-PARITY-BACKLOG.11.8.3` — preserve Lua callable identity through emitted execution): the
   existing emitter already serializes one effective typed `SpecFile` as canonical strict-UTF-8 JSON and lowercase
   ASCII hex, then reconstructs it through public AST/compiler owners. The focused consumer therefore extends that

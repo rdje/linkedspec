@@ -604,7 +604,8 @@ Only `callback(value: "x")` creates typed keyword data, which callable codeblock
 remains a positional assignment expression. Arity, keyword, bound-non-codeblock, unknown-body-helper, and direct/
 mutual recursion failures expose the neutral `callable_name`, `expected`, `got`, `value_kind`, `name`, and `cycle`
 fields. Generated and emitted routes retain their established typed `generated_execution_failed` wrapper plus the
-exact underlying interpreter detail. Final recurring/public admission remains `.11.8.4`. The focused command is:
+exact underlying interpreter detail. Five-backend callable recurring/public admission is complete under
+`.11.8.4`. The focused command is:
 
 ```bash
 bash tools/run_lua_project_data.sh puc lua/test/callable_codeblock_literal_contract_test.lua
@@ -664,8 +665,8 @@ Fresh typed variadic-v2 execution `.5.1.3.2` raises it to 139/139.
 Final contextual-codeblock metadata `.5.1.4.1` raises it to 142/142; dynamic contextual execution `.5.1.4.2`
 raises it to 146/146. Explicit callable codeblock construction and invocation are current under
 `FUTURE-PARITY-BACKLOG.11.8.1-.2`; emitted-route identity is current under `.11.8.3`, while final admission
-remains `.11.8.4`;
-four-backend recurring/public no-drift is complete under `.11.7`. Zero/variadic
+is complete under `.11.8.4`. Five-backend callable recurring/public admission is complete; one recurring driver
+runs this same focused file on PUC Lua and LuaJIT after the neutral, Perl, Rust, Dart, and Julia legs. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,
 and implicit child-push expression-result drift remain explicitly owned by `FUTURE-PARITY-BACKLOG.5` rather than
 hidden as settled parity.
