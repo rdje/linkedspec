@@ -266,7 +266,9 @@ is deferred; invocation uses the caller's current nonparameter stores, temporari
 eager `{ statements }` block expressions. `with` remains an ordinary helper. The executable neutral
 `linkedspec-callable-codeblock-v1` contract locks this design and its fixture. Perl, Rust, Dart, and Julia parse these
 literals and preserve their signature/body/source/span record through assignment, user functions, serialization,
-and generated source. Perl, Rust, Dart, and Julia execute a bound value through `cb(args)`. Arguments evaluate once
+and generated source. Lua now preserves the same inert record through those construction/state paths on both ABIs,
+but does not yet execute an ordinarily bound value. Perl, Rust, Dart, and Julia execute a bound value through
+`cb(args)`. Arguments evaluate once
 from left to right before temporary copied fixed/rest parameters bind. Prior parameter values restore even when the body fails;
 nonparameter reads and writes use the caller's current working slots. `return(...)` exits only the codeblock, a
 final expression is the implicit result, compatible receiver chains may continue, and a standalone call discards
@@ -312,6 +314,13 @@ typed-user-function, receiver, and tree blocks to the same zero-positional `code
 alone grants no semantics. Attached and parenthesized forms then reuse the dynamic evaluator across native,
 reconstructed, generated-plan, and freshly loaded emitted-source execution.
 
+Lua now has the construction half of the same contract. Exact brace-pipe forms create the neutral eight-field
+record with fixed/final-rest signatures, typed deferred bodies, and half-open containing Unicode-character spans.
+Copies retain those spans; ordinary user functions, compiled ActionIR JSON, generated-plan execution, emitted
+effective-`SpecFile` reconstruction, and semantic binding shapes preserve the value without running its body.
+Malformed forms retain all nine neutral codes, and deferred scans do not treat body calls or selectors as eager.
+There is no Lua closure or second codec/executor. Calling an ordinary bound Lua value remains `.11.8.2`.
+
 On Perl, Rust, Dart, and Julia, `apply("x") { return(value) }` and `apply("x", { return(value) })` normalize to the same contextual
 zero-positional codeblock when `apply` declares a final `callback: codeblock`. The same metadata rule governs the
 supported helper and receiver forms. `{|item| ...}` remains an explicit one-positional codeblock value, while
@@ -339,7 +348,8 @@ Perl, Rust, Dart, and Julia report exact arity, keyword-call, bound-non-codebloc
 failures as typed runtime details. A governed helper/control or registered user function still wins over a
 same-named variable. Explicit construction and `cb(...)` invocation are current on Perl, Rust, Dart, and Julia.
 Generic contextual final-block spellings are complete on Perl, Rust, Dart, and Julia. Four-backend recurring and
-public no-drift are complete under `.11.7`; Lua explicit-literal/dynamic-call parity remains `.11.8`.
+public no-drift are complete under `.11.7`; Lua construction is current under `.11.8.1`, while dynamic-call and
+five-backend admission remain `.11.8.2-.4`.
 
 Hash receiver trailing blocks also support deterministic tree traversal. A hash tree has a hash root. Nested hash
 values are interior nodes; all non-hash values, including arrays, are leaves. `walk_leaves() { ... }` visits each

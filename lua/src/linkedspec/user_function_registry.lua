@@ -74,8 +74,17 @@ local function clone_runtime_value(value, active)
     return value
   end
   if action_ast.node_type(value) == "ActionExpr" and
-      (value.kind == "block_value" or value.kind == "codeblock_argument") then
-    local copied = action_parser.parse_action_expression(value.source)
+      (value.kind == "block_value" or value.kind == "codeblock_argument" or
+        value.kind == "codeblock_literal") then
+    local copied = value.kind == "codeblock_literal" and
+      action_parser.parse_action_expression_at(value.source, value.source_span.start) or
+      action_parser.parse_action_expression(value.source)
+    if value.kind == "codeblock_literal" then
+      if copied.kind ~= "codeblock_literal" then
+        fail("evaluated callable-codeblock literals must retain parseable literal source")
+      end
+      return copied
+    end
     if copied.kind ~= "block_value" then
       fail("evaluated codeblock arguments must carry parseable block_value source")
     end
@@ -111,7 +120,8 @@ end
 
 local function runtime_value_kind(value)
   if action_ast.node_type(value) == "ActionExpr" and
-      (value.kind == "block_value" or value.kind == "codeblock_argument") then
+      (value.kind == "block_value" or value.kind == "codeblock_argument" or
+        value.kind == "codeblock_literal") then
     return "codeblock"
   end
   local kind = json.kind(value)

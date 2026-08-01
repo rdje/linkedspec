@@ -442,9 +442,10 @@ precedence, and exact typed failures/ordered recursion pass without a host closu
 equivalence is complete through `.11.4.3`. Dart `.11.5.1-.3` likewise complete construction, dynamic invocation,
 and generic final-block equivalence. Julia `.11.6.1-.3` now complete construction, bound-variable invocation, and
 generic final-block equivalence through one signature-governed normalizer and the existing evaluator. Lua's
-declared contextual helper/user-function/receiver forms are current, but its explicit callable values and arbitrary
-dynamic calls remain future. Four-backend recurring/public no-drift is complete under `.11.7`; the overall generic
-capability stays excluded until Lua explicit/dynamic parity and final five-backend admission land under `.11.8`.
+declared contextual helper/user-function/receiver forms and inert explicit literal construction are current, but
+ordinary bound-value invocation and independently emitted execution remain future.
+Four-backend recurring/public no-drift is complete under `.11.7`; the overall generic capability stays excluded until Lua dynamic parity and
+final five-backend admission land under `.11.8.2-.4`.
 The corrected exclusion points only to Lua parent `.11.8`; the capability census remains 80 pass / 0 partial /
 0 gap because no capability row moves in this governance leaf.
 

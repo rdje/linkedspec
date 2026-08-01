@@ -133,6 +133,34 @@ local SYMBOL_CALLEES = {
   ["<="] = true,
 }
 
+local CODEBLOCK_RESERVED_PARAMETERS = {
+  fn = true,
+  ["return"] = true,
+  I = true,
+  LS = true,
+  LE = true,
+  E = true,
+  EX = true,
+  IT = true,
+  LX = true,
+  STRING = true,
+  descr = true,
+  minfo = true,
+  LSPOS = true,
+  LEPOS = true,
+  LMATCH = true,
+  LSMATCH = true,
+  IMATCH = true,
+  IMATCH_LIST = true,
+  LMATCH_LIST = true,
+  IMATCH_HASH = true,
+  LMATCH_HASH = true,
+  SELF = true,
+  this = true,
+  ctx = true,
+  runtime_ctx = true,
+}
+
 local function starts_with_keyword(text, keywords)
   local keyword = text:match("^([A-Za-z_][A-Za-z0-9_]*)")
   return keyword ~= nil and keywords[keyword] == true
@@ -339,6 +367,69 @@ local function parser(root_source)
 
   local function raw_expr(text, start_byte, reason)
     return action_ast.expr("raw_perl", text, span(start_byte, start_byte + #text), { reason = reason })
+  end
+
+  local function parse_codeblock_signature(source)
+    if source == "" then return action_ast.callable_signature({}, nil), nil end
+    local parts = {}
+    local segment_start = 1
+    for position = 1, #source + 1 do
+      if position > #source or source:sub(position, position) == "," then
+        parts[#parts + 1] = source:sub(segment_start, position - 1):match("^%s*(.-)%s*$")
+        segment_start = position + 1
+      end
+    end
+    local positional = {}
+    local rest_param
+    local seen = {}
+    for index, part in ipairs(parts) do
+      if part == "" then return nil, "invalid_parameter" end
+      local name
+      if part:sub(1, 3) == "..." then
+        if index ~= #parts then return nil, "rest_parameter_must_be_final" end
+        name = part:match("^%.%.%.([A-Za-z_][A-Za-z0-9_]*)$")
+        if name == nil then return nil, "invalid_rest_parameter" end
+        rest_param = name
+      else
+        name = part:match("^([A-Za-z_][A-Za-z0-9_]*)$")
+        if name == nil then return nil, "invalid_parameter" end
+        positional[#positional + 1] = name
+      end
+      if CODEBLOCK_RESERVED_PARAMETERS[name] then return nil, "reserved_parameter" end
+      if seen[name] then return nil, "duplicate_parameter" end
+      seen[name] = true
+    end
+    return action_ast.callable_signature(positional, rest_param), nil
+  end
+
+  local function parse_codeblock_literal(text, start_byte)
+    local signature_end = text:find("|", 3, true)
+    if signature_end == nil then
+      return action_ast.codeblock_literal_error(
+        text,
+        span(start_byte, start_byte + #text),
+        "missing_codeblock_signature_closer"
+      )
+    end
+    local signature, error_code = parse_codeblock_signature(text:sub(3, signature_end - 1))
+    if signature == nil then
+      return action_ast.codeblock_literal_error(
+        text,
+        span(start_byte, start_byte + #text),
+        error_code
+      )
+    end
+    local body_source = text:sub(signature_end + 1, -2)
+    local body_start = start_byte + signature_end
+    local body_end = start_byte + #text - 1
+    return action_ast.codeblock_literal(
+      text,
+      span(start_byte, start_byte + #text),
+      signature,
+      body_source,
+      parse_block(body_source, body_start),
+      span(body_start, body_end)
+    )
   end
 
   local function parse_literal(text, start_byte)
@@ -740,6 +831,14 @@ local function parser(root_source)
     end
     if outer_balanced(text, "{", "}") then
       local payload = text:sub(2, -2)
+      if text:sub(1, 2) == "{|" then return parse_codeblock_literal(text, start_byte) end
+      if payload:match("^%s+|") then
+        return action_ast.codeblock_literal_error(
+          text,
+          span(start_byte, start_byte + #text),
+          "invalid_codeblock_opener"
+        )
+      end
       local entries = {}
       local has_separator = false
       for _, part in ipairs(split_top_level(payload, start_byte + 1, { [","] = true })) do
@@ -810,6 +909,19 @@ end
 function M.parse_action_expression(source)
   if type(source) ~= "string" then error("ActionParseException: source must be a string", 0) end
   return parser(source).parse_expression(source)
+end
+
+function M.parse_action_expression_at(source, start_position)
+  if type(source) ~= "string" then error("ActionParseException: source must be a string", 0) end
+  if type(start_position) ~= "number" or start_position % 1 ~= 0 or start_position < 0 then
+    error("ActionParseException: start position must be a nonnegative integer", 0)
+  end
+  local padded = string.rep(" ", start_position) .. source
+  local block = parser(padded).parse_block(padded)
+  if #block.statements ~= 1 then
+    error("ActionParseException: offset expression must remain one statement", 0)
+  end
+  return block.statements[1].expr
 end
 
 function M.parse_action_statement(source)

@@ -1,5 +1,22 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-01 — Lua callable-codeblock inert construction is signoff-complete
+
+Leaf `FUTURE-PARITY-BACKLOG.11.8.1` is active from clean audit commit `7e02ecee` (121/300). Lua now recognizes
+exact `{|params| body }` and `{|| body }` before harray/eager-block classification and preserves the neutral
+eight-field value, fixed/final-rest signature, typed deferred body, exact text, and containing Unicode-character
+spans. All nine malformed literal forms retain their neutral codes. Runtime and user-function copies preserve
+the original spans; compiled ActionIR, generated-plan execution, emitted effective state, and semantic binding
+signatures retain inert data without executing the body or creating a closure, codec, or executor.
+
+The first production GREEN exposed and fixed an offset-zero copy bug through a stronger containing-span assertion.
+The focused consumer now passes 168 assertions unchanged on PUC Lua and LuaJIT. The registered complete Lua gate
+passes every prior suite, all 177 legacy tests per ABI, primary CLI 66x2, corpus 105/105, and 16 storage owners.
+Neutral+20, Knowledge Map 777/6,301, the sole-facing mdBook at 79/14,028 KiB, all seven doctrines, and definitive
+canonical CI pass, including RAM 58%, Phase 0 1,031/1,031, and the Perl/Rust/Dart/Julia callable matrix before the
+exact local-CI marker. Bound invocation/access/diagnostics remain `.11.8.2`, byte-fresh emitted execution remains `.11.8.3`,
+and five-backend recurring/public/capability admission remains `.11.8.4`; no MCP/root-README/push movement occurs.
+
 ## 2026-08-01 — Lua callable authority and RED audit is signoff-complete
 
 Behavior-free leaf `FUTURE-PARITY-BACKLOG.11.8.0` is signoff-complete from clean four-backend public-closeout

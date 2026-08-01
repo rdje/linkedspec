@@ -725,6 +725,19 @@ duplicated canonical execution, and premature Lua/five-backend claims, plus thre
 omissions. Perl, Rust, Dart, and Julia are current; Lua contextual forms are current, while Lua explicit literal/
 general bound-call parity remains `.11.8`. Four-backend public no-drift covers 23 current-facing documents.
 
+Lua's focused construction consumer is already part of the complete Lua gate on both ABIs:
+
+```bash
+bash tools/run_lua_project_data.sh puc lua/test/callable_codeblock_literal_contract_test.lua
+bash tools/run_lua_project_data.sh luajit lua/test/callable_codeblock_literal_contract_test.lua
+bash tools/run_lua_local.sh
+```
+
+It passes 168 assertions per ABI for exact literal/signature/body/span records, nine malformed codes, inert copy,
+function/compiled/generated/emitted-effective-state transport, deferred scans, and semantic signatures. This does
+not add Lua to the recurring driver: `.11.8.2-.3` still own invocation and byte-fresh emitted execution, and
+`.11.8.4` alone owns five-backend recurring/public admission.
+
 ## Hosted GitHub Actions status
 
 Hosted GitHub Actions CI is currently disabled for cost-control reasons.

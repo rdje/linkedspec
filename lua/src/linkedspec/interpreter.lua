@@ -70,8 +70,17 @@ end
 local function copy_value(value, active)
   if value == nil or value == json.null or type(value) ~= "table" then return value end
   if action_ast.node_type(value) == "ActionExpr" and
-      (value.kind == "block_value" or value.kind == "codeblock_argument") then
-    local copied = action_parser.parse_action_expression(value.source)
+      (value.kind == "block_value" or value.kind == "codeblock_argument" or
+        value.kind == "codeblock_literal") then
+    local copied = value.kind == "codeblock_literal" and
+      action_parser.parse_action_expression_at(value.source, value.source_span.start) or
+      action_parser.parse_action_expression(value.source)
+    if value.kind == "codeblock_literal" then
+      if copied.kind ~= "codeblock_literal" then
+        fail("runtime callable-codeblock source no longer parses as a literal")
+      end
+      return copied
+    end
     if copied.kind ~= "block_value" then fail("runtime codeblock source no longer parses as a codeblock") end
     return value.kind == "codeblock_argument" and action_ast.contextual_codeblock_argument(copied) or copied
   end
@@ -88,7 +97,8 @@ end
 
 function M.runtime_value_kind(value)
   if action_ast.node_type(value) == "ActionExpr" and
-      (value.kind == "block_value" or value.kind == "codeblock_argument") then
+      (value.kind == "block_value" or value.kind == "codeblock_argument" or
+        value.kind == "codeblock_literal") then
     return "codeblock"
   end
   local kind = json.kind(value)
@@ -599,7 +609,8 @@ end
 local function scalar_string(value, null_as_empty)
   if value == json.null then return null_as_empty and "" or nil end
   if action_ast.node_type(value) == "ActionExpr" and
-      (value.kind == "block_value" or value.kind == "codeblock_argument") then return nil end
+      (value.kind == "block_value" or value.kind == "codeblock_argument" or
+        value.kind == "codeblock_literal") then return nil end
   local kind = json.kind(value)
   if kind == "array" or kind == "harray" or type(value) == "table" then
     return null_as_empty and "" or nil
@@ -964,7 +975,8 @@ local function validate_positional_arguments(name, args)
 end
 
 local function authored_value_kind(expr)
-  if expr.kind == "block_value" or expr.kind == "codeblock_argument" then return "codeblock" end
+  if expr.kind == "block_value" or expr.kind == "codeblock_argument" or
+      expr.kind == "codeblock_literal" then return "codeblock" end
   if expr.kind == "array_literal" then return "array" end
   if expr.kind == "hash_literal" then return "harray" end
   if expr.kind == "string" or expr.kind == "number" or expr.kind == "boolean" or expr.kind == "undef" then
@@ -1104,7 +1116,8 @@ local function switch_scalar_text(value)
   local kind = json.kind(value)
   if kind == "array" or kind == "harray" or
       (action_ast.node_type(value) == "ActionExpr" and
-        (value.kind == "block_value" or value.kind == "codeblock_argument")) then
+        (value.kind == "block_value" or value.kind == "codeblock_argument" or
+          value.kind == "codeblock_literal")) then
     return nil
   end
   return scalar_string(value, true)
@@ -2520,7 +2533,7 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
   if kind == "block_value" then
     return evaluate_block_value(engine, expr.block, ctx, accumulator, edge_state)
   end
-  if kind == "codeblock_argument" then return copy_value(expr) end
+  if kind == "codeblock_argument" or kind == "codeblock_literal" then return copy_value(expr) end
   if kind == "array_literal" then
     local result = json.array()
     for _, item in ipairs(expr.items) do

@@ -34,10 +34,11 @@
 > v2. The repeated-action recurring gate is `tools/check_repeated_action_result_five_backend.sh`; its public
 > rollout is closed at 8 complete / 0 pending.
 
-> **Active Lua callable-codeblock handoff:** completed planning leaf `FUTURE-PARITY-BACKLOG.11.8.0` freezes the
-> implementation order without changing behavior; inert-construction leaf `.11.8.1` is next. Lua must first
-> preserve exact `{|params| body }` / `{|| body }` as the neutral inert
-> eight-field value, then add post-static bound invocation through its existing scoped-binding/interpreter seams,
+> **Active Lua callable-codeblock handoff:** signoff-complete `FUTURE-PARITY-BACKLOG.11.8.1` now preserves exact
+> `{|params| body }` / `{|| body }` as the neutral inert eight-field value on PUC Lua and LuaJIT. Exact signature,
+> typed deferred body, source/body text and containing Unicode-character spans survive copies, ordinary user
+> functions, compiled/generated/emitted effective state, and semantic projection without execution or capture.
+> Lua must next add post-static bound invocation through its existing scoped-binding/interpreter seams,
 > then prove the unchanged value through effective-`SpecFile` reconstruction and byte-fresh emitted modules on PUC
 > Lua and LuaJIT. Only the final recurring/public leaf may admit Lua. Exact colon keywords are typed only for
 > governed rejection; `name = value` remains a positional assignment expression. No closure, captured environment,
@@ -1004,7 +1005,8 @@ harray mutation are implemented and public-result guarded. Codeblock/control/tre
 now split: `.1` eager expression blocks, `.2` inline controls, `.3` statement controls, `.4` current built-in
 contextual blocks/`with`, `.5` deterministic callbacks, and `.6` closeout. General user-function final blocks are
 complete through `.5.1`; four-backend recurring/public closeout is complete under `.11.7`.
-Explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.8`.
+Lua inert explicit callable-codeblock construction is current under `FUTURE-PARITY-BACKLOG.11.8.1`; general
+bound invocation, emitted execution identity, and final admission remain `.11.8.2-.4`.
 Eager blocks plus lazy inline controls pass 105/105: ordinary no-pair braces yield their last/local-return
 value, non-final statement mutation is preserved, harray braces retain precedence, and yielded values enter
 receiver dispatch. Inline `if`/`switch` evaluates only selected payloads, keeps false/null, evaluates switch

@@ -14,6 +14,7 @@ date: 2026-08-01
 status: current-plan
 tags: [lua, luajit, callable, codeblock, actionir, diagnostics, generated-source, semantic-introspection, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.11.8.0 runs identical typed ActionIR/runtime probes on PUC Lua and LuaJIT, retrieves the neutral contract and four completed backend consumers, maps every Lua owner, and freezes one focused consumer plus .11.8.1-.4 construction/invocation/route/admission boundaries without production behavior changes."
+evidence_update_2026_08_01_construction: "FUTURE-PARITY-BACKLOG.11.8.1 implements the first planned seam exactly: the focused consumer passes 168 assertions on both Lua ABIs and the complete Lua gate remains green; dynamic invocation and route/admission owners are unchanged."
 reverify: "bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && bash tools/run_lua_local.sh && rg -n 'codeblock_literal|codeblock_argument|runtime_scoped_binding|value_access|keyword_argument|execute_contextual_codeblock' lua/src/linkedspec lua/test tools"
 ---
 
@@ -54,6 +55,9 @@ Implementation is dependency-ordered:
    invokes the same Lua consumer on PUC Lua and LuaJIT from repository-managed storage, removes the Lua-only future
    exclusion only after proof, advances public/capability state, and closes parent `.11.8` and callable parent
    `.11`. Lexical capture remains excluded from version 1.
+
+Current progress: step 1 is complete. Exact inert construction/state is documented in
+[[lua-callable-codeblock-literal-state]]. Steps 2-4 remain dependency-ordered and unchanged.
 
 One focused file, `lua/test/callable_codeblock_literal_contract_test.lua`, grows across `.1-.3`. It consumes the
 unchanged neutral JSON and owns the same ten roles as each admitted backend: neutral contract, inert construction,

@@ -1,5 +1,18 @@
 # ARCHITECTURE STATE
 
+- `2026-08-01 Lua callable-codeblock inert construction`: `FUTURE-PARITY-BACKLOG.11.8.1` makes exact `{|`
+  classification an ActionIR concern before existing harray/eager-block routing. One neutral eight-field
+  `codeblock_literal` owns fixed/final-rest `ActionCallableSignature`, typed deferred body, exact source, and
+  containing Unicode-character literal/body spans; all nine malformed shapes retain typed neutral codes.
+  Contract and removed-selector scans stop at the deferred literal. Runtime and user-function copies reparse at
+  the original character offset, preserving spans while producing fresh state. Compiled ActionIR JSON, generated-
+  plan execution, emitted effective-`SpecFile` reconstruction, and semantic bindings preserve the same inert data
+  without a closure, second codec, or executor. One consumer passes 168 assertions on PUC Lua and LuaJIT; the
+  complete Lua gate remains green at 177 legacy tests per ABI, CLI 66x2, corpus 105/105, and 16 storage owners.
+  Signoff also passes neutral+20, Knowledge Map 777/6,301, the sole-facing mdBook at 79/14,028 KiB, all seven
+  doctrines, canonical RAM 58%, Phase 0 1,031/1,031, and the exact four-backend callable matrix.
+  Bound invocation/access/failures remain `.11.8.2`; byte-fresh emitted execution remains `.11.8.3`; recurring/
+  public/capability admission remains `.11.8.4`.
 - `2026-08-01 Lua callable typed audit / frozen implementation map`: completed behavior-free
   `FUTURE-PARITY-BACKLOG.11.8.0` proves identical PUC Lua/LuaJIT gaps and locks four existing authorities instead
   of introducing new ones. `action_parser`/`action_ast` own exact literal, signature, colon-keyword, and evaluated-

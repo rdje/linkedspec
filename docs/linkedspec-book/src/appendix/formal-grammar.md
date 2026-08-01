@@ -140,7 +140,7 @@ collect("head")               # prefix = "head", items = []
 collect("head", "a", "b")   # prefix = "head", items = ["a", "b"]
 ```
 
-### Callable-codeblock literal and dynamic call (Perl, Rust, Dart, and Julia)
+### Callable-codeblock literal and dynamic call (five-backend construction; four-backend invocation)
 
 ADR 0031 adopts callable literals; ADR 0032 adds a final contextual-codeblock parameter declaration:
 
@@ -187,8 +187,10 @@ roles. Julia `.11.6.3` preserves exact final-only typed metadata and applies one
 equivalent attached/parenthesized helper, typed-user-function, receiver, and tree blocks. The normalized
 zero-positional record executes through the same evaluator in native/reconstructed/generated/emitted roles while
 eager blocks, controls, explicit signatures, and harrays remain distinct. Four-backend recurring/public closeout
-is complete through `.11.7.1-.2`; Lua explicit literals/general bound calls remain `.11.8`. Complete invocation
-behavior is therefore not yet universally portable.
+is complete through `.11.7.1-.2`. Lua `.11.8.1` now preserves the same exact literal, nullable fixed/final-rest
+signature, typed deferred body, source text, containing Unicode-character spans, inert runtime/function copies,
+compiled/generated/emitted effective state, and semantic codeblock shape on PUC Lua and LuaJIT. Lua general bound
+calls remain `.11.8.2`, so complete invocation behavior is not yet universally portable.
 
 Arguments evaluate once from left to right before any parameter is bound. Nested arrays/harrays, booleans,
 `undef`, and codeblocks remain individual rest-array values rather than being flattened or coerced.

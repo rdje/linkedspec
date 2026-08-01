@@ -45,7 +45,10 @@ arguments left-to-right, temporarily binds copied fixed parameters and an option
 against the caller's current nonparameter working variables, restores parameter names, and returns the block-local
 result. Standalone calls discard the result but retain other mutations. Governed helpers and registered user
 functions keep precedence over same-named variables. This explicit literal/invocation surface is current on Perl,
-Rust, Dart, and Julia. All four also accept a final contextual codeblock only where callable metadata declares it:
+Rust, Dart, and Julia. Lua now constructs and transports the same inert eight-field value on PUC Lua and LuaJIT,
+including exact Unicode-character spans and semantic signature state, but does not yet invoke an ordinarily bound
+value. All four complete implementations also accept a final contextual codeblock only where callable metadata
+declares it:
 
 ```text
 fn apply(value, callback: codeblock) { return(callback()) }
@@ -56,8 +59,9 @@ same = apply("ready", { return(cat(value, "!")) })
 The declaration is only `callback: codeblock`; it does not repeat the callback's argument list. Both contextual
 forms create a zero-positional codeblock that reads dynamic context. An explicit `{|value| ...}` keeps and enforces
 its own signature, and `{ "key" : value }` remains an harray rather than being promoted by position. This generic
-final-block behavior is current on Perl, Rust, Dart, and Julia. The remaining separately documented Lua explicit
-callable-value work stays under `.11.8`; four-backend recurring/public no-drift is complete under `.11.7`.
+final-block behavior is current on Perl, Rust, Dart, and Julia. Lua construction is current under `.11.8.1`;
+bound invocation, route proof, and five-backend admission stay under `.11.8.2-.4`. Four-backend recurring/public
+no-drift remains complete under `.11.7` until that final admission.
 
 The LinkedSpec Book under `docs/linkedspec-book/src/` is the current user-facing surface for new examples. The
 repo-root `USER_GUIDE_ActionIR_*.md` files are still useful implementation and migration references, but many of

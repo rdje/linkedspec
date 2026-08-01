@@ -6,9 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-01` (Lua callable authority/RED audit `.11.8.0` is signoff-complete with the
-  dependency-complete `.11.8.1-.4` plan frozen from clean four-backend public closeout `e232609b`; inert Lua
-  construction `.11.8.1` is the next clean-boundary leaf)
+- Last updated: `2026-08-01` (Lua inert callable-codeblock construction `.11.8.1` is signoff-complete from clean
+  audit commit `7e02ecee`; clean landing is the only boundary before dynamic invocation `.11.8.2`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -16017,7 +16016,7 @@ clearing, and clean proof remain before task-tree-first `.11.8.0` activation.
   Commit: `FUTURE-PARITY-BACKLOG.11.8.0 - freeze Lua callable plan`
 
 - ID: `FUTURE-PARITY-BACKLOG.11.8.1`
-  Status: `pending`
+  Status: `done`
   Goal: Add inert typed callable-codeblock literal construction and state preservation on Lua.
   Dependencies: `.11.8.0`
   Acceptance: `action_parser.lua` recognizes exact `{|params| body }` / `{|| body }` before harray/eager-block
@@ -16027,6 +16026,65 @@ clearing, and clean proof remain before task-tree-first `.11.8.0` activation.
     semantic binding shape, generated plan, and emitted effective state preserve inert plain data without executing
     its body or creating a host closure. Begin one contract-driven focused Lua consumer and register its green
     construction leg unchanged on both ABIs in the complete Lua gate.
+  Verification: **PASS 2026-08-01.** The focused consumer passes 168 assertions unchanged on PUC Lua and LuaJIT;
+    the complete Lua gate preserves 177 legacy tests per ABI, primary CLI 66x2, corpus 105/105, and 16 storage
+    owners. Neutral callable governance passes 7/11/9/7/4/8 plus 20 mutations; selector retirement passes with
+    zero positive current examples; Knowledge Map is 777/6,301; the sole-facing mdBook renders 79 files /
+    14,028 KiB; and all seven doctrines pass. Definitive canonical CI passes both primary environments at 66/66,
+    RAM 58%, Phase 0 1,031/1,031, and the exact Perl 10 / Rust 18 / Dart 21 / Julia 125+118+239 callable matrix
+    before `local CI gate passed`.
+  Commit: `FUTURE-PARITY-BACKLOG.11.8.1 - construct inert Lua codeblocks`
+
+### `FUTURE-PARITY-BACKLOG.11.8.1` Acceptance Checklist
+
+- [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Activate task-tree-first from clean behavior-free audit commit
+  `7e02ecee` (121/300), with zero-byte brief and no rendered-book, bytecode, or managed-run residue before any
+  parser, ActionIR, test, gate, or documentation edit.
+- [x] **AUTHORITY RETRIEVAL / RED CONSUMER FIRST** — Reverify the frozen audit fact and exact Lua parser, AST,
+  signature, copy/registry/runtime-kind, deferred traversal, semantic, compiled/generated/emitted, user-function,
+  complete-gate, storage, and neutral-fixture owners; create the one contract-driven Lua consumer with RED proof
+  on both ABIs before production behavior changes.
+- [x] **EXACT TYPED LITERAL / PORTABLE FAILURES** — Recognize fixed, zero-parameter, and final-rest brace-pipe
+  literals before harray/eager blocks; preserve the neutral eight fields, source, containing Unicode-character
+  span, nullable signature, typed body, and all nine malformed-literal diagnostic codes without raw fallback.
+- [x] **INERT STATE / DEFERRED TRAVERSAL / FUNCTION TRANSPORT** — Preserve recursively copied plain literal data
+  through ActionIR copy/registry/runtime-kind, compiled JSON, generated plan, emitted effective state, semantic
+  binding signature, and user-function argument/result transport. Deferred bodies must not execute or create
+  eager action dependencies/removed-selector failures; no host closure or bound-call dispatch is authorized.
+- [x] **DUAL-ABI FOCUSED / COMPLETE REGRESSION** — Make the same focused construction consumer green unchanged
+  on PUC Lua and LuaJIT; register it in the complete Lua gate; preserve eager/control/harray/contextual/static-call
+  behavior, CLI/corpus/storage boundaries, and reject ABI or route drift.
+- [x] **LOCKSTEP DOCS / GATES / COMMIT / CLEAN HANDOFF** — Synchronize Lua API docs, Knowledge Map, task/index/
+  roadmap/architecture/live/memory, and sole-facing mdBook with exact inert behavior and examples; pass focused,
+  complete Lua, neutral/governance, rendered-book, doctrine, and warranted canonical gates; commit `.11.8.1`, clear
+  the brief, prove exact cleanup/clean status, then activate `.11.8.2`; do not push.
+
+Activation evidence 2026-08-01: behavior-free audit `.11.8.0` lands at `7e02ecee` as commit 121/300 with its
+pre/post activation-boundary checks and all seven doctrines green. Git status is empty, `git_message_brief.txt` is
+zero bytes, and rendered-book, Python-bytecode, and managed-run residue are absent. This leaf owns the one focused
+Lua construction consumer plus exact inert parser/ActionIR/state/semantic preservation and complete-gate dual-ABI
+registration. It authorizes no bound-name execution, colon-keyword/value-access work, portable call failures,
+recursion stack, new generated/emitted route, capability-row/MCP/public admission, lexical capture, closure,
+second codec/executor, root README edit, push, or task pivot.
+
+Implementation evidence 2026-08-01: the first valid cross-ABI RED run reached the missing production boundary as
+an absent typed `body_ast`; no production file had changed. Exact `{|` classification now precedes existing harray
+and eager-block routing, and one `ActionCallableSignature`/`codeblock_literal` owner projects only the neutral
+eight fields. Fixed, zero-parameter, and final-rest signatures, containing Unicode-character spans, nested
+delimiters/literals, and all nine malformed codes are exact. Contract and removed-selector traversal stop at the
+deferred literal while preserving eager/contextual behavior. Runtime copy, user-function transport, runtime kind,
+compiled ActionIR JSON, generated-plan execution, emitted effective-`SpecFile` reconstruction, and semantic
+bindings preserve inert typed data without a closure, codec, or executor. A strengthened copy-span assertion then
+found and corrected a real offset-zero reparse bug by adding one parser-owned offset-preserving reparse seam.
+The single focused consumer passes 168 assertions unchanged on PUC Lua and LuaJIT; the complete registered Lua
+gate passes all 177 legacy tests per ABI, primary CLI 66x2, corpus 105/105, and 16-owner repository-storage proof.
+The first canonical run then found one public no-drift violation in the new inert-body fixture: its deliberately
+deferred body still spelled a retired aggregate selector, which the repository-wide executable-source scanner
+correctly rejects even when unreachable. Removing that obsolete positive spelling preserves the deferred-body
+contract proof without weakening the final selector-retirement invariant. The corrected uninterrupted canonical
+run passes RAM 58%, Phase 0 1,031/1,031, neutral+20, and the Perl/Rust/Dart/Julia callable matrix before the exact
+local-CI marker. Dynamic bound invocation, call-result access, colon-keyword diagnostics, and recursion remain
+`.11.8.2`.
 
 - ID: `FUTURE-PARITY-BACKLOG.11.8.2`
   Status: `pending`
@@ -18376,14 +18434,16 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-01):** Lua callable authority/RED audit `.11.8.0` is signoff-complete from clean
-four-backend public-closeout commit `e232609b` (120/300). One focused consumer and exact `.11.8.1` inert state,
-`.11.8.2` dynamic invocation, `.11.8.3` route identity, and `.11.8.4` five-backend admission boundaries are frozen.
-Neutral+20, Lua 177/177 per ABI, Knowledge Map 776/6,291, sole-facing mdBook 79/14,008 KiB, all seven doctrines,
-and canonical Phase 0 1,031/1,031 in 653 seconds plus the four-backend callable matrix pass. Only workflow landing,
-brief clearing, clean proof, and task-tree-first `.11.8.1` activation remain. No behavior, capability-row/MCP,
-root README, push, closure, lexical-capture, broad raw fallback, second codec, or second executor movement occurs;
-exclusion freshness stays separately queued `.24.0-.2`.
+**Authoritative frontier (2026-08-01):** Lua inert callable-codeblock construction `.11.8.1` is implementation-
+complete and focused/complete-gate green from clean audit commit `7e02ecee` (121/300). One focused consumer passes
+168 assertions unchanged on PUC Lua and LuaJIT; the complete Lua gate preserves all 177 legacy tests per ABI,
+CLI 66x2, corpus 105/105, and 16 storage owners. Exact typed brace-pipe literal/signature/body/source/Unicode-span
+state, nine malformed codes, offset-preserving copies, deferred traversal, compiled/generated/emitted effective-
+state transport, function transport, and semantic signatures are current and inert. Lockstep docs, Knowledge Map,
+governance, rendered-book, doctrines, and warranted canonical signoff remain before commit. Dynamic bound
+invocation/failures remain `.11.8.2`; route-execution identity remains `.11.8.3`; five-backend/public/capability
+admission remains `.11.8.4`. No closure, lexical capture, second codec/executor, MCP/root-README/push movement is
+authorized.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private
@@ -19778,8 +19838,8 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Lua callable audit `.11.8.0` is signoff-complete from clean `e232609b`; land it, clear the brief, and prove
-  clean before task-tree-first `.11.8.1` activation. MCP rollout does not move here.
+- None. Lua inert callable-codeblock construction `.11.8.1` is active from clean `7e02ecee`; implement only its
+  exact typed/inert dual-ABI boundary. MCP rollout does not move here.
 
 ## Verification Log
 
@@ -20421,6 +20481,19 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-08-01`: Lua inert construction `.11.8.1` is signoff-complete and ready for its clean landing.
+  Exact typed literal/signature/body/Unicode-span records, nine malformed codes, deferred scans, offset-preserving
+  copies, function/compiled/generated/emitted-effective-state transport, and semantic signatures pass 168
+  assertions on each ABI. The complete Lua gate preserves 177 legacy tests per ABI, CLI 66x2, corpus 105/105,
+  and 16 storage owners. Knowledge Map 777/6,301, mdBook 79/14,028 KiB, all seven doctrines, canonical RAM 58%,
+  Phase 0 1,031/1,031, and the exact four-backend callable matrix pass. The first canonical attempt exposed and
+  removed one obsolete positive selector spelling from the inert test body; the corrected source scanner is zero.
+  Invocation stays `.11.8.2`; no capability-row/MCP/root-README/push movement occurs.
+- `2026-08-01`: Lua inert-construction leaf `.11.8.1` activates task-tree-first from clean audit commit
+  `7e02ecee` (121/300). It owns one focused RED-to-green dual-ABI consumer, exact typed literal/signature/body/
+  source/span/diagnostic state, inert copies and route transport, semantic shape, user-function transport, and
+  complete Lua registration. Invocation, call diagnostics/recursion, new route execution, public/capability/MCP,
+  closures, lexical capture, root README, and push remain excluded.
 - `2026-08-01`: Behavior-free Lua audit `.11.8.0` maps the exact remaining parser/ActionIR/runtime/route gaps on
   both ABIs and freezes one focused consumer across inert construction `.1`, dynamic caller-context invocation
   `.2`, reconstructed/generated/emitted identity `.3`, and five-backend admission `.4`. Existing scoped bindings,

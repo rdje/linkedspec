@@ -184,6 +184,22 @@ local function harray_shape(key, value)
   return result
 end
 
+local function codeblock_shape(signature)
+  local result = value_shape("codeblock")
+  local parameters = json.array()
+  for index, name in ipairs(signature.positional_params or {}) do
+    parameters[index] = json.harray({ name = name, kind = "value", required = true })
+  end
+  result.signature = json.harray({
+    parameters = parameters,
+    arity_min = signature.min_arity,
+    arity_max = signature.max_arity,
+    rest_parameter = signature.rest_param,
+    final_codeblock = false,
+  })
+  return result
+end
+
 local function common_shape(shapes)
   if #shapes == 0 then return value_shape("unknown") end
   local expected = json.encode(shapes[1])
@@ -228,6 +244,8 @@ expression_shape = function(expression)
     return value_shape("boolean")
   elseif expression.kind == "undef" then
     return value_shape("null")
+  elseif expression.kind == "codeblock_literal" then
+    return codeblock_shape(expression.signature)
   elseif expression.kind == "array_literal" then
     local shapes = {}
     for index, item in ipairs(expression.items or {}) do shapes[index] = expression_shape(item) end
@@ -971,6 +989,8 @@ call_expression_shape = function(expression, variables, function_shapes)
     return value_shape("boolean")
   elseif kind == "undef" then
     return value_shape("null")
+  elseif kind == "codeblock_literal" then
+    return codeblock_shape(expression.signature)
   elseif kind == "variable" then
     return variables[expression.name] or value_shape("unknown")
   elseif kind == "assign_scalar" then

@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-08-01 — FUTURE-PARITY-BACKLOG.11.8.1 — construct inert Lua callable codeblocks
+
+PUC Lua and LuaJIT now recognize exact `{|params| body }` and `{|| body }` expressions before existing harray and
+eager-block classification. The new `codeblock_literal` projects exactly the neutral eight fields: version 1,
+fixed/final-rest callable signature, exact body source, typed deferred body, exact source text, and half-open
+literal/body spans in containing Unicode-character coordinates. Nested delimiters and nested literals retain the
+root coordinate space. All nine malformed literal forms retain their neutral typed codes.
+
+Construction is inert. Action-contract and removed-selector traversal stop at the retained body; runtime and
+user-function copies preserve typed data and its original containing spans; ordinary function arguments/results,
+compiled ActionIR JSON, generated-plan execution, emitted effective-`SpecFile` reconstruction, and semantic
+bindings preserve the value without executing it. A strengthened test found the initial offset-zero copy defect;
+one parser-owned offset reparse seam now preserves exact spans. No host closure, lexical capture, new codec, or
+second executor was added.
+
+The single focused consumer is registered unchanged on both ABIs and passes 168 assertions each. The complete
+Lua gate passes all prior suites and 177 legacy tests per ABI, primary CLI 66x2, corpus 105/105, and 16-owner
+repository-storage proof. Bound invocation, call-result access, callable failures/recursion, and byte-fresh emitted
+execution remain `.11.8.2-.3`; recurring/public/capability admission remains `.11.8.4`.
+
+Signoff passes neutral callable governance at 7/11/9/7/4/8 plus 20 mutations, Knowledge Map 777/6,301, the
+sole-facing mdBook at 79 files / 14,028 KiB, all seven doctrines, canonical RAM 58%, both primary environments at
+66/66, Phase 0 1,031/1,031, and the exact Perl 10 / Rust 18 / Dart 21 / Julia 125+118+239 callable matrix. The
+first canonical attempt correctly rejected one retired selector spelling inside the new inert test body; the
+corrected uninterrupted run proves zero positive current selector examples and ends with `local CI gate passed`.
+
 ## 2026-08-01 — FUTURE-PARITY-BACKLOG.11.8.0 — freeze Lua callable implementation plan
 
 The behavior-free Lua callable audit is now dependency-complete. Identical typed probes on PUC Lua and LuaJIT

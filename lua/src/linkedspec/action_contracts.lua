@@ -504,6 +504,15 @@ local function resolver(function_registry)
       record_structural(expr, "nested_access=", "nested_access_assignment", "assignment", "assignment", 2)
       visit_access_segments(expr.segments)
       visit_expr(expr.value)
+    elseif kind == "codeblock_literal" then
+      return
+    elseif kind == "codeblock_literal_error" then
+      diagnostics[#diagnostics + 1] = diagnostic({
+        code = expr.code,
+        message = "invalid callable-codeblock literal: " .. expr.code,
+        source = expr.source,
+        source_span = expr.source_span,
+      })
     elseif kind == "block_value" or kind == "codeblock_argument" then
       visit_block(expr.block)
     elseif kind == "array_literal" then

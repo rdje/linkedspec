@@ -1,5 +1,36 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`FUTURE-PARITY-BACKLOG.11.8.1` — preserve inert data through existing Lua authorities): exact `{|`
+  recognition belongs before the existing brace classifier, not in runtime dispatch. `action_ast` now owns one
+  nullable fixed/final-rest `ActionCallableSignature` constructor and one explicit literal projection whose JSON
+  contains only the neutral eight fields. The parser retains its root UTF-8 boundary map while parsing deferred
+  bodies, so nested expressions use containing Unicode-character coordinates. Malformed literal-like braces become
+  a typed `codeblock_literal_error`; the action-contract owner turns that node into exactly one neutral diagnostic.
+
+  Literal bodies are deliberately opaque to eager contract and removed-selector scans. The runtime and ordinary
+  user-function registry treat the value as a codeblock kind and recursively copy it without invoking it. The first
+  implementation reparsed copies at offset zero; a focused invariant caught the resulting source/body span drift.
+  The corrected `parse_action_expression_at` seam pads only the parser root to the original character offset, then
+  returns one freshly parsed typed expression with exact containing spans. This keeps copy semantics fresh without
+  adding a general AST clone or weakening existing contextual-block behavior.
+
+  Existing serialization remains authoritative. Compiled payloads already project ActionIR; generated plans use
+  compiled state; emitted Lua already embeds one effective `SpecFile` JSON payload and reconstructs it through the
+  ordinary compiler. The focused test decodes and reconstructs that payload in memory in this leaf; independently
+  loading and executing emitted bytes remains `.11.8.3`. Semantic projection adds only the exact codeblock
+  signature shape. No closure, lexical capture, second codec, executor, capability row, or MCP route moved.
+
+  RED first reached the absent `body_ast` on both ABIs. Final focused proof is 168 assertions each on PUC Lua and
+  LuaJIT. Canonical registration in `tools/run_lua_local.sh` preserves all prior suites, 177 legacy tests per ABI,
+  CLI 66x2, corpus 105/105, and 16-owner repository-storage proof. `.11.8.2` remains the sole owner for colon
+  keywords, evaluated-call access, post-static bound dispatch, scoped parameters, results, failures, and recursion.
+
+  Signoff is green at neutral 7/11/9/7/4/8+20, Knowledge Map 777/6,301, mdBook 79/14,028 KiB, all seven doctrines,
+  canonical RAM 58%, CLI 66x2, Phase 0 1,031/1,031, and Perl 10 / Rust 18 / Dart 21 / Julia 125+118+239 callable
+  proof. The first canonical pass exposed a deliberately unreachable retired selector spelling in the focused
+  body fixture. Removing that positive source—not exempting it from the scanner—preserves both deferred-body proof
+  and repository-wide selector retirement; the corrected uninterrupted canonical run reports the local-CI marker.
+
 - 2026-08-01 (`FUTURE-PARITY-BACKLOG.11.8.0` — reuse Lua authorities in dependency order): identical PUC Lua and
   LuaJIT probes reduce the explicit callable gap to typed construction, two narrow expression forms, and bound
   dispatch. Exact `{|` syntax currently enters the ordinary brace branch and becomes an eager `block_value` with

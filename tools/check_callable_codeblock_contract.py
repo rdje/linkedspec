@@ -106,7 +106,7 @@ EXPECTED_PUBLIC_CONTRACT = {
     "documents": [
         {"path": "USER_GUIDE.md", "required_markers": [
             "Perl, Rust, Dart, and Julia support explicit deferred codeblock values",
-            "callable-value work stays under `.11.8`",
+            "Lua construction is current under `.11.8.1`",
         ]},
         {"path": "rust/README.md", "required_markers": [
             "### Callable codeblock values and invocation",
@@ -124,7 +124,7 @@ EXPECTED_PUBLIC_CONTRACT = {
             "No Julia closure, lexical capture",
         ]},
         {"path": "lua/README.md", "required_markers": [
-            "explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.8`",
+            "Explicit callable codeblock construction is current under",
             "no-drift is complete under `.11.7`",
         ]},
         {"path": "capability_conformance/README.md", "required_markers": [
@@ -153,11 +153,11 @@ EXPECTED_PUBLIC_CONTRACT = {
         ]},
         {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "required_markers": [
             "four-backend recurring/public closeout is complete under `.11.7`",
-            "Explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.8`",
+            "Lua inert explicit callable-codeblock construction is current under `FUTURE-PARITY-BACKLOG.11.8.1`",
         ]},
         {"path": "docs/linkedspec-book/src/appendix/formal-grammar.md", "required_markers": [
-            "### Callable-codeblock literal and dynamic call (Perl, Rust, Dart, and Julia)",
-            "behavior is therefore not yet universally portable",
+            "### Callable-codeblock literal and dynamic call (five-backend construction; four-backend invocation)",
+            "complete invocation behavior is not yet universally portable",
         ]},
         {"path": "docs/linkedspec-book/src/architecture/owner-tree.md", "required_markers": [
             "`LinkedSpec::CodeblockRuntime`",

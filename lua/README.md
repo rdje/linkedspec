@@ -548,6 +548,42 @@ Cross-backend output routing/formatting is complete under `FUTURE-PARITY-BACKLOG
 arity, generated/primary projection, recurring admission, and public no-drift are complete on all five backends
 under `FUTURE-PARITY-BACKLOG.5.2`.
 
+## Explicit callable-codeblock construction
+
+Lua now recognizes exact `{|params| body }` and `{|| body }` expressions as deferred typed values on both PUC
+Lua and LuaJIT:
+
+```text
+Top::
+ /x/ {
+   state = "before"
+   callback = {|value, ...items| return({ "value" : value, "items" : items }) }
+   return({ "state" : state, "callback" : callback })
+ }
+```
+
+Constructing `callback` does not execute its body or capture an environment. The value is an eight-field
+`codeblock_literal` containing version 1, the fixed/final-rest signature, exact body source, typed deferred body,
+exact source text, and half-open literal/body spans in Unicode-character coordinates. `{}` and keyed braces stay
+harrays; ordinary `{ statements }` remains eager. All nine malformed literal forms retain their neutral typed
+diagnostic codes instead of falling through to raw ActionIR.
+
+Assignment, `copy`, ordinary user-function arguments/results, compiled ActionIR JSON, generated-plan execution,
+the emitted effective-`SpecFile` payload, and semantic binding projection preserve this inert data. Copies retain
+the original containing spans. Deferred bodies are not scanned as eager helper dependencies or removed aggregate
+selectors. No Lua closure, captured environment, route-specific codec, or second executor is created.
+
+General bound invocation such as `callback("x")`, call-result key/index access, callable keyword/arity failures,
+and explicit-codeblock recursion remain `FUTURE-PARITY-BACKLOG.11.8.2-.3`; final recurring/public admission remains
+`.11.8.4`. The focused construction command is:
+
+```bash
+bash tools/run_lua_project_data.sh puc lua/test/callable_codeblock_literal_contract_test.lua
+bash tools/run_lua_project_data.sh luajit lua/test/callable_codeblock_literal_contract_test.lua
+```
+
+The same file runs under both ABIs in `bash tools/run_lua_local.sh` and currently passes 168 assertions per ABI.
+
 ## Native and Generated logical helpers
 
 Lua executes `and`, `or`, and `not` as eager boolean value helpers on both PUC Lua and LuaJIT. `and` and `or`
@@ -594,9 +630,9 @@ Fixed-v1 registered-function execution `.5.1.2` raises it to 133/133.
 Exact variadic-v2 signature-state preservation `.5.1.3.1` raises it to 136/136.
 Fresh typed variadic-v2 execution `.5.1.3.2` raises it to 139/139.
 Final contextual-codeblock metadata `.5.1.4.1` raises it to 142/142; dynamic contextual execution `.5.1.4.2`
-raises it to 146/146, while
-explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.8`; four-backend recurring/public
-no-drift is complete under `.11.7`. Zero/variadic
+raises it to 146/146. Explicit callable codeblock construction is current under
+`FUTURE-PARITY-BACKLOG.11.8.1`, while general bound invocation and final admission remain `.11.8.2-.4`;
+four-backend recurring/public no-drift is complete under `.11.7`. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,
 and implicit child-push expression-result drift remain explicitly owned by `FUTURE-PARITY-BACKLOG.5` rather than
 hidden as settled parity.
@@ -606,8 +642,8 @@ recurring admission, and public no-drift are complete at 8/0 rollout.
 Ordinary assignment is eager: `callback = { return("later") }` stores the scalar `"later"`, not an inert
 codeblock. A trailing block remains structural until its signature-governed callable consumes it. For example,
 `with("x") { return(value) }` and `with("x", { return(value) })` are the same built-in call, as are
-`"x".with() { return(value) }` and `"x".with({ return(value) })`. Future explicit first-class codeblocks use
-`{|params| ...}`.
+`"x".with() { return(value) }` and `"x".with({ return(value) })`. Explicit first-class construction uses
+`{|params| ...}`; calling the resulting ordinary variable remains the next Lua implementation leaf.
 
 A user function declares the same contextual intent explicitly:
 

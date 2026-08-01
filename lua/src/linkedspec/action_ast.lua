@@ -76,15 +76,37 @@ function M.hash_entry(key, value)
   return node("ActionHashEntry", { key = key, value = value })
 end
 
-function M.contextual_callable_signature()
+function M.callable_signature(positional_params, rest_param)
+  local positional = json.array()
+  for index, name in ipairs(positional_params or {}) do positional[index] = name end
+  local rest = rest_param or json.null
   return node("ActionCallableSignature", {
     kind = "callable_signature",
     version = 1,
-    positional_params = {},
-    rest_param = json.null,
-    min_arity = 0,
-    max_arity = 0,
+    positional_params = positional,
+    rest_param = rest,
+    min_arity = #positional,
+    max_arity = rest == json.null and #positional or json.null,
   })
+end
+
+function M.contextual_callable_signature()
+  return M.callable_signature({}, nil)
+end
+
+function M.codeblock_literal(source, source_span, signature, body_source, body_ast, body_span)
+  return M.expr("codeblock_literal", source, source_span, {
+    version = 1,
+    signature = signature,
+    body_source = body_source,
+    body_ast = body_ast,
+    source_text = source,
+    body_span = body_span,
+  })
+end
+
+function M.codeblock_literal_error(source, source_span, code)
+  return M.expr("codeblock_literal_error", source, source_span, { code = code })
 end
 
 function M.contextual_codeblock_argument(block_value)
@@ -190,6 +212,8 @@ find_removed_aggregate_selector = function(value)
       if selector then return selector end
     end
     return nil
+  elseif kind == "codeblock_literal" or kind == "codeblock_literal_error" then
+    return nil
   elseif kind == "block_value" or kind == "codeblock_argument" then
     return find_in_block(value.block)
   elseif kind == "control_if" or kind == "control_while" then
@@ -240,6 +264,18 @@ project = function(value)
   end
   if node_type == "ActionArgument" and value.argument_kind == "positional" then
     return project(value.value)
+  end
+  if node_type == "ActionExpr" and value.kind == "codeblock_literal" then
+    return json.harray({
+      kind = value.kind,
+      version = value.version,
+      signature = project(value.signature),
+      body_source = value.body_source,
+      body_ast = project(value.body_ast),
+      source_text = value.source_text,
+      source_span = project(value.source_span),
+      body_span = project(value.body_span),
+    })
   end
 
   local result = json.harray()
