@@ -1,5 +1,15 @@
 # CHANGES
 
+## 2026-08-01 — MDBOOK-RENDERED-READABILITY.0 — queue rendered prose audit
+
+The director's non-urgent observation that some rendered mdBook sections can collapse into painful wall-of-text
+paragraph blobs now has a durable owner. Future `.1` will inspect the complete rendered HTML at representative
+reading widths and inventory exact offenders before any edit; `.2` will repair only confirmed cases and add a
+regression guard only if the audit proves a reliable low-noise signal.
+
+This intake does not reprioritize the roadmap: exclusion-governance `.24.1` remains next. It changes no mdBook
+source or theme, technical content, checker, production behavior, capability state, root README, or push state.
+
 ## 2026-08-01 — FUTURE-PARITY-BACKLOG.24.0.2 — guard callable book count
 
 The sole-facing mdBook now reports the governed 25 callable public documents instead of stale 24. The independent

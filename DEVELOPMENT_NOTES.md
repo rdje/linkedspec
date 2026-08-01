@@ -1,5 +1,14 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`MDBOOK-RENDERED-READABILITY.0` — queue rendered prose audit): source-level Markdown review is not
+  sufficient for the director-observed defect because the painful density is visible in rendered HTML. The future
+  audit therefore records source path, rendered route, section, viewport, and exact symptom for every confirmed
+  offender while distinguishing intentional code, tables, lists, and compact reference material.
+
+  Audit `.1` is evidence-only; repair `.2` preserves technical meaning, examples, anchors, links, searchability,
+  and governed current claims. A mechanical guard is optional and must first prove a reliable low-noise signal.
+  This is a non-urgent queued quality lane, so `.24.1` remains next and no book source/theme or behavior moves.
+
 - 2026-08-01 (`FUTURE-PARITY-BACKLOG.24.0.2` — guard callable book count): the governed callable public inventory
   already contained 25 documents, but the project-status entry had only a generic five-backend marker. Commit
   `47b40c7a` authored its new status paragraph as 24, so the listed page could contradict the inventory while all
