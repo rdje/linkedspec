@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-01` (Lua dynamic callable-codeblock invocation `.11.8.2` is active task-tree-first from
-  clean inert-construction commit `86498cc7`; caller-context execution and exact failures are the only scope)
+- Last updated: `2026-08-01` (Lua emitted callable identity `.11.8.3` is signoff-complete from clean dynamic-
+  invocation commit `3f220f6c`; its clean landing precedes five-backend admission `.11.8.4`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -16168,8 +16168,16 @@ matrix before `local CI gate passed`. Commit/brief cleanup and exact clean proof
 operations before task-tree-first `.11.8.3`; no push.
   Commit: `FUTURE-PARITY-BACKLOG.11.8.2 - invoke Lua callable codeblocks`
 
+Later route-audit correction 2026-08-01 (`.11.8.3`): `.11.8.2` correctly closed ordinary bound invocation and
+declared-final user-function execution, but its contextual-current narrative was one neutral form too broad. Exact
+per-form PUC Lua probes show helper/receiver/user-function attached and parenthesized blocks plus explicit user-
+function literals pass, while explicit literals passed to built-in `with` still reach the older `block_value`-
+only final-helper executor and fail `final_argument_not_codeblock`. `.11.8.3` owns the narrow prerequisite repair
+because honest emitted-route identity cannot preserve a native route that is not yet neutral-complete; the shared
+callable executor, neutral syntax, and `.11.8.4` admission boundary remain unchanged.
+
 - ID: `FUTURE-PARITY-BACKLOG.11.8.3`
-  Status: `pending`
+  Status: `done`
   Goal: Prove Lua serialized, reconstructed, generated, and independently emitted callable execution identity.
   Dependencies: `.11.8.2`
   Acceptance: Extend the same focused Lua consumer, not a second oracle. The existing effective-`SpecFile`
@@ -16178,6 +16186,88 @@ operations before task-tree-first `.11.8.3`; no push.
     byte-fresh independently loaded emitted module on both ABIs. Register the emitted-module allocator as the exact
     next Lua project-data owner. Mutation-sensitive proof denies closure capture, host function storage,
     route-specific codecs/executors, contextual/eager/control regressions, cleanup residue, and ABI drift.
+
+### `FUTURE-PARITY-BACKLOG.11.8.3` Acceptance Checklist
+
+- [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Activate task-tree-first from clean dynamic-invocation commit
+  `3f220f6c` (123/300), with zero-byte brief and no rendered-book, bytecode, or managed-run leaf residue before any
+  emitted-route test, allocator, production, gate, or documentation edit.
+- [x] **KNOWLEDGE / EMITTER / ROUTE RED RETRIEVAL** — Re-read the callable neutral fixture/failures, Lua typed-
+  audit/construction/invocation facts, generated-source emitter/scaffold/fresh-process owners, existing focused
+  consumer, and Lua project-data oracle; extend only the same consumer to an exact independently loaded emitted-
+  route RED on both ABIs before production or allocator changes.
+- [x] **ONE TYPED STATE / ONE INTERPRETER IDENTITY** — Prove native compiled execution, normalized `SpecFile`
+  reconstruction, generated plan, and byte-fresh emitted module preserve every callable valid/invalid/dynamic/
+  contextual case through existing `spec_ast.to_json`/`from_json`, compiler, and interpreter authorities. Add no
+  closure, host function, route-specific codec/executor, payload rewrite, or generated-only semantic path.
+- [x] **REPOSITORY-CONTAINED EMITTED ALLOCATOR** — Add the exact emitted-module temporary owner to the Lua project-
+  data manifest/oracle, derive every path from repository-rooted managed storage, execute both PUC Lua and LuaJIT
+  against fresh bytes, and prove cleanup plus rejection of off-volume/symlink or stale-artifact escape as warranted.
+- [x] **MUTATION-SENSITIVE DUAL-ABI REGRESSION** — Keep one unchanged focused consumer on both ABIs; deny missing/
+  stale emitted payloads, closure/function storage, second codecs/executors, route omission, ABI drift, ordinary
+  eager/control/contextual regressions, and residue. Preserve complete Lua, CLI/corpus, and storage-owner gates.
+- [x] **LOCKSTEP / SIGNOFF / COMMIT / CLEAN HANDOFF** — Synchronize Lua/API, Knowledge Map, task/index/roadmap/live/
+  memory, and sole-facing mdBook surfaces; pass focused, complete Lua, neutral/governance, storage, rendered-book,
+  doctrines, and warranted canonical gates; commit `.11.8.3`, clear the brief, prove clean, then activate only
+  `.11.8.4`; do not push.
+
+Activation evidence 2026-08-01: `.11.8.2` lands at clean commit `3f220f6c` as 123/300 after focused 232x2,
+complete Lua 177 TAP groups per ABI, CLI 66x2, corpus 105/105, 16 storage owners, neutral+20, signatures,
+capability 80/0/0, Knowledge Map 778/6,311, mdBook 79/14,028 KiB, all seven doctrines, canonical RAM 51%, Phase 0
+1,031/1,031, and the exact four-backend callable matrix pass. Git status is empty, `git_message_brief.txt` is zero
+bytes, rendered-book/Python-bytecode/run-leaf residue is absent, and the empty checkout run namespace is its
+documented stable allocator parent. This leaf owns only route identity and the exact next Lua project-data owner;
+five-backend recurring/public/capability/MCP admission remains `.11.8.4`, while lexical capture, host closures,
+second codecs/executors, root README edits, push, and unrelated memory-architecture work remain excluded.
+
+RED/root-cause evidence 2026-08-01: Knowledge Map retrieval re-read the Lua callable audit/construction/invocation,
+generated emitter/scaffold/fresh-host, and project-data owners before extending the same focused consumer. The
+first production-free PUC run stops at `helper 'with' final argument must be a codeblock`. A LinkedSpec-owned exact
+per-form compile/runtime probe reduces the failure to neutral `with("x", {|value| ...})` and receiver `.with`
+explicit literals; attached/parenthesized helper/receiver/user-function blocks and explicit user-function literals
+pass. `action_contracts` correctly leaves already typed literals unnormalized, and the general bound executor can
+run them. The stale seam is `interpreter.final_codeblock_argument` plus `evaluate_with_block`, which accept only
+`block_value` and execute `.block` directly. The smallest dependency repair is to evaluate/validate any final
+codeblock value before installing the scoped `value`, then reuse the one callable executor with zero arguments for
+contextual blocks and the scoped value for explicit/bound literals. The same rule applies to tree callbacks; no
+new executor, codec, syntax, or generated route is authorized.
+
+Implementation and focused GREEN evidence 2026-08-01: one `evaluate_final_codeblock` seam now resolves a final
+callback before installing helper/tree scoped `value`, preserves authored contextual blocks as callable data, and
+validates explicit or bound codeblock values. Built-in helper/receiver/tree callbacks and ordinary bound calls
+share `callable_codeblock.execute_values`; distinct anonymous nested built-in callbacks have no recursive identity,
+while a callback passed by variable retains that variable name through helper dispatch. The focused consumer proves the exact
+neutral fixture/failures, invocation and contextual forms through native execution, canonical effective-`SpecFile`
+reconstruction, generated-plan execution, and fresh emitted modules on PUC Lua and LuaJIT. It deliberately stores
+a callback in the caller variable named `value`, nests `with`, rejects corrupt payload, compares exact emitted
+bytes and generated wrapper/runtime details, denies plaintext host closure bodies, and proves cleanup on success
+and injected failure. Both ABIs pass 449 assertions.
+
+Storage and regression evidence 2026-08-01: the production-free storage RED reported the expected owner drift
+from 16 to 17. The oracle now registers only the focused callable consumer and passes exact repository-device,
+native-module/generated/trace, cleanup, and escape checks. The first complete Lua run exposed false recursion
+`["with","with"]` when the shared executor tracked a built-in helper name as a bound callable identity. Omitting
+helper-name tracking for anonymous final-block dispatch preserves dynamic direct/mutual recursion and restores
+nested callbacks. A subsequent signoff audit added variable-bound helper recursion identity and its exact
+`["callback","callback"]` cycle. Focused 449x2, core 177x2, and the uninterrupted complete gate now pass with CLI 66x2,
+corpus 105/105, 17 owners, and `Lua local gate passed`. Admission is still exclusively `.11.8.4`.
+
+Lockstep governance evidence 2026-08-01: after the book correctly moved emitted identity from future to current,
+the callable public checker rejected its own stale formal-grammar marker. The contract and duplicate-independent
+expectation now require the current `.11.8.3` marker, while `future.generic_final_codeblock` remains present and is
+narrowed only from route-plus-admission to admission-only `.11.8.4`. The callable checker again passes all neutral
+rows plus 20 mutations; capability remains exactly 80/0/0 and generated-source admission remains unchanged.
+
+Signoff evidence 2026-08-01: focused proof passes 449 assertions on each ABI; complete Lua passes 177 TAP groups
+per ABI, CLI 66x2, corpus 105/105, and 17 storage owners. Neutral callable governance passes 7 literals / 11 calls /
+9 invalid literals / 7 invalid calls / 4 invalid declarations / 8 contextual forms plus 20 mutations; callable
+signatures pass 3/9/7; capability and generated-source state remain unchanged at 80/0/0. Knowledge Map generation
+and checking pass 779 facts / 6,322 question keys, the sole-facing mdBook renders 79 files / 14,048 KiB, whitespace,
+memory/task metadata, and all seven doctrines pass. The definitive authorized canonical gate proves repository
+containment and moved-root/outside-CWD execution, CLI 66x2, RAM 51%, Phase 0 1,031/1,031 in 809 seconds, and the
+exact neutral+20 / Perl 10 / Rust 18 / Dart 21 / Julia 125+118+239 callable matrix before `local CI gate passed`.
+Only the workflow landing, zero-byte brief, and exact clean proof remain before task-tree-first `.11.8.4`; no push.
+  Commit: `FUTURE-PARITY-BACKLOG.11.8.3 - prove Lua emitted callable identity`
 
 - ID: `FUTURE-PARITY-BACKLOG.11.8.4`
   Status: `pending`
@@ -18503,16 +18593,14 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-01):** Lua inert callable-codeblock construction `.11.8.1` is implementation-
-complete and focused/complete-gate green from clean audit commit `7e02ecee` (121/300). One focused consumer passes
-168 assertions unchanged on PUC Lua and LuaJIT; the complete Lua gate preserves all 177 legacy tests per ABI,
-CLI 66x2, corpus 105/105, and 16 storage owners. Exact typed brace-pipe literal/signature/body/source/Unicode-span
-state, nine malformed codes, offset-preserving copies, deferred traversal, compiled/generated/emitted effective-
-state transport, function transport, and semantic signatures are current and inert. Lockstep docs, Knowledge Map,
-governance, rendered-book, doctrines, and warranted canonical signoff remain before commit. Dynamic bound
-invocation/failures remain `.11.8.2`; route-execution identity remains `.11.8.3`; five-backend/public/capability
-admission remains `.11.8.4`. No closure, lexical capture, second codec/executor, MCP/root-README/push movement is
-authorized.
+**Authoritative frontier (2026-08-01):** Lua emitted callable identity `.11.8.3` is signoff-complete from clean
+dynamic-invocation commit `3f220f6c` (123/300). One focused consumer proves native, reconstructed, generated-plan,
+and fresh emitted identity at 449 assertions on each ABI through one typed state/interpreter; complete Lua passes
+177 TAP groups per ABI, CLI 66x2, corpus 105/105, and 17 storage owners. Knowledge Map 779/6,322, sole-facing
+mdBook 79/14,048 KiB, all seven doctrines, canonical containment/moved-root proof, RAM 51%, Phase 0 1,031/1,031 in
+809 seconds, and the exact four-backend callable matrix pass. Its clean landing must precede task-tree-first
+five-backend recurring/public/capability admission `.11.8.4`. No closure, lexical capture, second codec/executor,
+MCP/root-README/push movement is authorized.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private
@@ -20243,6 +20331,9 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.11.8.3` | `FUTURE-PARITY-BACKLOG.11.8.3 - prove Lua emitted callable identity` | One typed state/interpreter across native, reconstructed, generated-plan, and fresh emitted execution on both Lua ABIs, with exact allocator/cleanup and complete signoff. |
+| `FUTURE-PARITY-BACKLOG.11.8.2` | `FUTURE-PARITY-BACKLOG.11.8.2 - invoke Lua callable codeblocks` | Post-static bound invocation, caller-context frames, result access, exact failures/recursion, and declared-final execution on both Lua ABIs. |
+| `FUTURE-PARITY-BACKLOG.11.8.1` | `FUTURE-PARITY-BACKLOG.11.8.1 - construct Lua callable codeblocks` | Exact inert typed literal/signature/span state across Lua copy, function, compiled, generated, emitted, and semantic authorities. |
 | `FUTURE-PARITY-BACKLOG.11.8.0` | `FUTURE-PARITY-BACKLOG.11.8.0 - freeze Lua callable plan` | Behavior-free typed Lua audit, one focused dual-ABI consumer, and exact `.11.8.1-.4` construction/invocation/route/admission boundaries. |
 | `FUTURE-PARITY-BACKLOG.11.7.2` | `FUTURE-PARITY-BACKLOG.11.7.2 - close callable public no-drift` | Exact 23-document/nine-forbidden-claim/20-mutation public lockstep, sole-facing mdBook alignment, parent `.11.7` closeout, and clean Lua handoff without behavior movement. |
 | `FUTURE-PARITY-BACKLOG.11.7.1` | `FUTURE-PARITY-BACKLOG.11.7.1 - compose four-backend callable proof` | One routed neutral/Perl/Rust/Dart/Julia recurring driver, 17 topology/status mutations, exact canonical composition, and Lua-only future exclusion. |
@@ -20550,6 +20641,13 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-08-01`: Lua emitted identity `.11.8.3` is signoff-complete and ready for its clean landing. Native,
+  reconstructed, generated-plan, and independently loaded emitted routes share one typed state/interpreter at
+  focused 449x2; complete Lua passes 177x2, CLI 66x2, corpus 105/105, and 17 storage owners. Neutral+20,
+  signatures 3/9/7, capability 80/0/0, Knowledge Map 779/6,322, sole-facing mdBook 79/14,048 KiB, all seven
+  doctrines, canonical containment/moved-root proof, RAM 51%, Phase 0 1,031/1,031 in 809 seconds, and the exact
+  four-backend callable matrix pass. Anonymous built-in callbacks avoid false helper-name cycles while callbacks
+  passed by variable retain exact recursion identity. Admission stays `.11.8.4`; no push.
 - `2026-08-01`: Lua dynamic invocation `.11.8.2` is signoff-complete and ready for its clean landing. Exact colon-
   keyword rejection, positional `name = value`, evaluated call-result access, post-static bound dispatch, copied
   fixed/rest frames, live caller state, local results, declared-final equivalence, portable failures, and ordered

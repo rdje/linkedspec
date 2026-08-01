@@ -444,8 +444,8 @@ and generic final-block equivalence. Julia `.11.6.1-.3` now complete constructio
 generic final-block equivalence through one signature-governed normalizer and the existing evaluator. Lua's
 declared contextual forms, inert explicit literal construction, and ordinary bound-value invocation are current
 through `.11.8.1-.2` on both ABIs, including exact failures and ordered recursion. Independently emitted execution
-remains future. Four-backend recurring/public no-drift is complete under `.11.7`; the overall generic capability
-stays excluded until Lua route identity and final five-backend admission land under `.11.8.3-.4`.
+identity is current under `.11.8.3`. Four-backend recurring/public no-drift is complete under `.11.7`; the overall
+generic capability stays excluded until final five-backend admission lands under `.11.8.4`.
 The corrected exclusion points only to Lua parent `.11.8`; the capability census remains 80 pass / 0 partial /
 0 gap because no capability row moves in this governance leaf.
 

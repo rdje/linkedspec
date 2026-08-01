@@ -1,5 +1,31 @@
 # CHANGES
 
+## 2026-08-01 — FUTURE-PARITY-BACKLOG.11.8.3 — prove Lua emitted callable identity
+
+PUC Lua and LuaJIT now execute the exact callable fixture, dynamic/contextual forms, and portable failures through
+native compilation, canonical effective-`SpecFile` reconstruction, generated-plan execution, and independently
+loaded emitted modules. Generated source keeps its existing canonical strict-UTF-8 JSON/ASCII-hex payload and
+ordinary compiler/interpreter path; no closure, host function, callable codec, or generated-only executor exists.
+
+The route audit exposed one prerequisite gap: built-in helper/receiver/tree final callbacks accepted only authored
+contextual `block_value` syntax even though the general executor already accepted explicit values. Final callbacks
+now resolve before scoped `value` installation and enter `callable_codeblock.execute_values` as contextual,
+explicit, or bound values. Built-in dispatch does not add its helper name to the bound-call recursion stack;
+nested anonymous callbacks remain legal, while callbacks passed by variable retain that variable's identity and
+dynamic direct, mutual, or helper-mediated recursion remains exact.
+
+The focused consumer stores a callback in the caller binding named `value`, nests `with`, covers helper/receiver/
+tree forms, compares native and reconstructed values/diagnostics, projects generated wrapper plus exact runtime
+detail, writes and reloads exact emitted bytes in fresh hosts, rejects a corrupt payload, denies plaintext host
+closure bodies, and proves cleanup on success and injected failure. It passes 449 assertions per ABI. Complete Lua
+passes all 177 TAP groups per ABI, primary CLI 66x2, corpus 105/105, and exact repository-storage owner 17.
+
+Five-backend recurring/public/capability admission remains `.11.8.4`; no capability row, MCP surface, root README,
+emitter format, or lexical-capture policy moves in this slice. Signoff passes neutral+20, callable signatures
+3/9/7, capability 80/0/0, Knowledge Map 779/6,322, the sole-facing mdBook at 79 files / 14,048 KiB, all seven
+doctrines, canonical containment/moved-root proof, CLI 66x2, RAM 51%, Phase 0 1,031/1,031 in 809 seconds, and the
+exact four-backend callable matrix before `local CI gate passed`.
+
 ## 2026-08-01 — FUTURE-PARITY-BACKLOG.11.8.2 — invoke Lua callable codeblocks
 
 PUC Lua and LuaJIT now invoke an ordinary bound callable-codeblock with `cb(args)` after governed static callables.

@@ -1,5 +1,34 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`FUTURE-PARITY-BACKLOG.11.8.3` — preserve Lua callable identity through emitted execution): the
+  existing emitter already serializes one effective typed `SpecFile` as canonical strict-UTF-8 JSON and lowercase
+  ASCII hex, then reconstructs it through public AST/compiler owners. The focused consumer therefore extends that
+  path directly instead of introducing callable-specific emitted state or a second executor.
+
+  The first PUC RED exposed a narrower native prerequisite: `final_codeblock_argument` admitted only authored
+  `block_value`, and `evaluate_with_block` plus tree traversal executed `.block` directly. Explicit `{|item| ...}`
+  values consequently worked for typed user functions but failed for built-in `with`. `evaluate_final_codeblock`
+  now preserves contextual syntax as a callable value, evaluates explicit/bound expressions before scoped `value`
+  exists, validates one callable signature, and routes helper/receiver/tree bodies through
+  `callable_codeblock.execute_values`. This also permits a callback stored in the caller binding named `value`.
+
+  The first complete Lua gate then caught false `codeblock_recursion_unsupported` for nested `with`: the shared
+  executor had recorded helper name `with` as though it were a bound callable identity. Anonymous built-in final
+  callbacks now omit recursion identity, while a callback expression that is a variable retains that binding name
+  through helper dispatch. Ordinary `cb(args)` therefore preserves exact direct, mutual, and helper-mediated cycles.
+  Focused nested-`with` and helper-bound-recursion cases keep that distinction mutation-sensitive.
+
+  Native, reconstructed, generated-plan, and fresh emitted-module values/failures now agree on both ABIs. The
+  child-host proof checks exact bytes, metadata/identity, generated wrapper and underlying runtime detail, corrupt
+  payload rejection, absence of plaintext literal/closure bodies, and success/failure cleanup below managed
+  repository `TMPDIR`. Focused proof passes 449 assertions per ABI; complete Lua passes 177 TAP groups per ABI,
+  CLI 66x2, corpus 105/105, and the storage oracle's planned 16-to-17 owner transition. Admission stays `.11.8.4`.
+
+  Signoff passes neutral+20, callable signatures 3/9/7, capability 80/0/0, Knowledge Map 779/6,322, sole-facing
+  mdBook 79/14,048 KiB, and all seven doctrines. The definitive canonical gate proves containment/moved-root,
+  CLI 66x2, RAM 51%, Phase 0 1,031/1,031 in 809 seconds, and the exact four-backend callable matrix before the
+  local-CI marker.
+
 - 2026-08-01 (`FUTURE-PARITY-BACKLOG.11.8.2` — unify Lua explicit/contextual dynamic execution): the parser's
   shared access-segment owner now accepts a call expression as `value_access.receiver`, and only a top-level colon
   in a call argument constructs `ActionArgument(argument_kind = "keyword")`. Removing the older unreachable

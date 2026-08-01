@@ -569,9 +569,11 @@ harrays; ordinary `{ statements }` remains eager. All nine malformed literal for
 diagnostic codes instead of falling through to raw ActionIR.
 
 Assignment, `copy`, ordinary user-function arguments/results, compiled ActionIR JSON, generated-plan execution,
-the emitted effective-`SpecFile` payload, and semantic binding projection preserve this inert data. Copies retain
-the original containing spans. Deferred bodies are not scanned as eager helper dependencies or removed aggregate
-selectors. No Lua closure, captured environment, route-specific codec, or second executor is created.
+the emitted effective-`SpecFile` payload, and semantic binding projection preserve this inert data. Native,
+canonical effective-`SpecFile` reconstruction, generated-plan, and independently loaded emitted-module execution
+all compile and run that same record through the ordinary interpreter. Copies retain the original containing
+spans. Deferred bodies are not scanned as eager helper dependencies or removed aggregate selectors. No Lua
+closure, captured environment, route-specific codec, or second executor is created.
 
 An ordinary bound value is callable with `callback(args)` after governed controls/helpers and registered user
 functions have had precedence:
@@ -592,18 +594,27 @@ so `state` above becomes `"ab"`. `return(...)` is invocation-local, a final expr
 standalone call discards only its result. Explicit literals and declared final-codeblock values use the same
 interpreter and ordered recursion stack.
 
+Built-in helper/receiver/tree final-block slots accept contextual `{ ... }`, explicit `{|item| ...}`, or a bound
+codeblock value. The callback expression resolves before scoped `value` is installed, so a callback may itself be
+stored in the caller binding named `value`; the prior binding restores afterward. Nested anonymous `with`
+callbacks are distinct callbacks, not recursive calls. Only ordinary bound names enter the ordered recursion
+stack, including a callback variable passed through a built-in final-block slot.
+
 Only `callback(value: "x")` creates typed keyword data, which callable codeblocks reject. `callback(value = "x")`
 remains a positional assignment expression. Arity, keyword, bound-non-codeblock, unknown-body-helper, and direct/
 mutual recursion failures expose the neutral `callable_name`, `expected`, `got`, `value_kind`, `name`, and `cycle`
-fields. Independently loaded emitted execution remains `FUTURE-PARITY-BACKLOG.11.8.3`; final recurring/public
-admission remains `.11.8.4`. The focused command is:
+fields. Generated and emitted routes retain their established typed `generated_execution_failed` wrapper plus the
+exact underlying interpreter detail. Final recurring/public admission remains `.11.8.4`. The focused command is:
 
 ```bash
 bash tools/run_lua_project_data.sh puc lua/test/callable_codeblock_literal_contract_test.lua
 bash tools/run_lua_project_data.sh luajit lua/test/callable_codeblock_literal_contract_test.lua
 ```
 
-The same file runs under both ABIs in `bash tools/run_lua_local.sh` and currently passes 232 assertions per ABI.
+The consumer writes exact emitted bytes only below repository-derived managed `TMPDIR`, loads them in a fresh
+host process, rejects a corrupt payload, and proves cleanup after success and injected failure. The storage oracle
+registers it as Lua temporary owner 17. The same file runs under both ABIs in `bash tools/run_lua_local.sh` and
+currently passes 449 assertions per ABI.
 
 ## Native and Generated logical helpers
 
@@ -652,7 +663,8 @@ Exact variadic-v2 signature-state preservation `.5.1.3.1` raises it to 136/136.
 Fresh typed variadic-v2 execution `.5.1.3.2` raises it to 139/139.
 Final contextual-codeblock metadata `.5.1.4.1` raises it to 142/142; dynamic contextual execution `.5.1.4.2`
 raises it to 146/146. Explicit callable codeblock construction and invocation are current under
-`FUTURE-PARITY-BACKLOG.11.8.1-.2`, while emitted-route proof and final admission remain `.11.8.3-.4`;
+`FUTURE-PARITY-BACKLOG.11.8.1-.2`; emitted-route identity is current under `.11.8.3`, while final admission
+remains `.11.8.4`;
 four-backend recurring/public no-drift is complete under `.11.7`. Zero/variadic
 flatten calls, negative selection counts, newer-backend dropped-transform omissions, invalid-join differences,
 and implicit child-push expression-result drift remain explicitly owned by `FUTURE-PARITY-BACKLOG.5` rather than

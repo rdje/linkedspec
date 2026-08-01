@@ -16,6 +16,7 @@ date: 2026-08-01
 status: current
 tags: [lua, luajit, actionir, callable, codeblock, dynamic-scope, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.11.8.2 adds colon-keyword and evaluated-value-access ActionIR, post-static bound-name dispatch, one scoped dynamic executor, exact neutral failures, and an ordered active-codeblock stack. The same focused consumer passes 232 assertions on PUC Lua and LuaJIT; the complete Lua gate passes 177 legacy TAP groups per ABI, CLI 66x2, corpus 105/105, and 16 storage owners."
+evidence_update_2026_08_01_emitted_identity: "FUTURE-PARITY-BACKLOG.11.8.3 closes the older built-in final-helper syntax seam: contextual, explicit, and bound final callbacks now enter the same executor. Anonymous callbacks omit helper-name recursion tracking, while callbacks passed by variable retain that binding identity through helper dispatch. Native/reconstructed/generated/fresh-emitted proof passes 449 assertions per ABI; final five-backend admission remains separate .11.8.4 ownership."
 reverify: "bash tools/run_lua_project_data.sh puc lua/test/callable_codeblock_literal_contract_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/callable_codeblock_literal_contract_test.lua && bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py"
 ---
 
@@ -35,14 +36,16 @@ time state and mutations persist. This is dynamic caller context, not lexical ca
 The retained typed body executes through the existing Lua interpreter. `return(...)` is invocation-local; the
 final expression is the implicit result; standalone calls discard only the result. One `value_access` node lets
 an evaluated call result feed key/index lookup and then existing receiver chains. Explicit literals and declared
-final-codeblock values use this same executor.
+final-codeblock values use this same executor. Built-in final helpers first resolve their callback before installing
+scoped `value`; they do not treat repeated helper names as bound-callable recursion identities.
 
 Diagnostics project neutral `callable_name`, `expected`, `got`, `value_kind`, `name`, and array-valued `cycle`
 fields. Fixed/rest arity, keyword arguments, non-callable values, unknown body helpers, and ordered direct/mutual
 recursion are typed identically on PUC Lua and LuaJIT. One ordered `active_codeblocks` stack is cleaned on every
-exit. Lexical capture remains excluded. Independently loaded emitted-module proof remains `.11.8.3`, and recurring
-five-backend/public/capability admission remains `.11.8.4`.
+exit. Lexical capture remains excluded. Independently loaded emitted-module proof is current under `.11.8.3`;
+recurring five-backend/public/capability admission remains `.11.8.4`.
 
 Related facts: [[lua-callable-codeblock-literal-state]], [[lua-callable-codeblock-typed-audit]],
 [[callable-codeblock-literal-contract]], [[lua-contextual-user-function-codeblock-runtime]],
-[[lua-runtime-eager-block-values]], [[lua-five-backend-capability-admission]].
+[[lua-runtime-eager-block-values]], [[lua-callable-codeblock-emitted-route-identity]],
+[[lua-five-backend-capability-admission]].

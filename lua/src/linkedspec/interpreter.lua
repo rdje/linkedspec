@@ -986,17 +986,6 @@ local function validate_positional_arguments(name, args)
   end
 end
 
-local function authored_value_kind(expr)
-  if expr.kind == "block_value" or expr.kind == "codeblock_argument" or
-      expr.kind == "codeblock_literal" then return "codeblock" end
-  if expr.kind == "array_literal" then return "array" end
-  if expr.kind == "hash_literal" then return "harray" end
-  if expr.kind == "string" or expr.kind == "number" or expr.kind == "boolean" or expr.kind == "undef" then
-    return "scalar"
-  end
-  return "unknown"
-end
-
 local function final_codeblock_argument(name, surface, args)
   validate_positional_arguments(name, args)
   local contract = action_contracts.builtin_final_codeblock_contract(surface, name)
@@ -1009,13 +998,6 @@ local function final_codeblock_argument(name, surface, args)
     })
   end
   local block_expr = argument_expr(args[#args])
-  if action_ast.node_type(block_expr) ~= "ActionExpr" or block_expr.kind ~= "block_value" then
-    fail("helper '" .. name .. "' final argument must be a codeblock", {
-      code = "final_argument_not_codeblock",
-      helper_name = name,
-      value_kind = authored_value_kind(block_expr),
-    })
-  end
   local before_count = #args - 1
   if not action_contracts.accepts_final_codeblock_argument_count(contract, before_count) then
     local minimum = contract.min_before_codeblock
@@ -1028,9 +1010,55 @@ local function final_codeblock_argument(name, surface, args)
   return block_expr, before_count
 end
 
+local function evaluate_final_codeblock(
+  engine,
+  name,
+  block_expr,
+  ctx,
+  accumulator,
+  edge_state
+)
+  local value
+  if block_expr.kind == "block_value" or block_expr.kind == "codeblock_argument" then
+    value = copy_value(block_expr)
+  else
+    value = evaluate_expr(engine, block_expr, ctx, accumulator, edge_state)
+  end
+  local signature = callable_codeblock.signature(value)
+  if signature == nil then
+    fail("helper '" .. name .. "' final argument must be a codeblock", {
+      code = "final_argument_not_codeblock",
+      helper_name = name,
+      value_kind = M.runtime_value_kind(value),
+    })
+  end
+  local contextual = value.kind == "block_value" or value.kind == "codeblock_argument"
+  local recursion_identity = block_expr.kind == "variable" and block_expr.name or false
+  return value, signature, contextual, recursion_identity
+end
+
 local function evaluate_with_block(engine, block_expr, scoped_value, ctx, accumulator, edge_state)
+  local codeblock, signature, contextual, recursion_identity = evaluate_final_codeblock(
+    engine,
+    "with",
+    block_expr,
+    ctx,
+    accumulator,
+    edge_state
+  )
   return runtime_scoped_binding.run(ctx, "value", scoped_value, copy_value, function()
-    return evaluate_block_value(engine, block_expr.block, ctx, accumulator, edge_state)
+    local values = contextual and {} or { copy_value(scoped_value) }
+    return callable_codeblock.execute_values(
+      engine,
+      "with",
+      codeblock,
+      values,
+      ctx,
+      accumulator,
+      edge_state,
+      signature,
+      recursion_identity
+    )
   end)
 end
 
@@ -1709,7 +1737,11 @@ end
 
 local function evaluate_tree_leaf_block(
   engine,
-  block_expr,
+  name,
+  codeblock,
+  signature,
+  contextual,
+  recursion_identity,
   value,
   selector_name,
   selector,
@@ -1727,7 +1759,18 @@ local function evaluate_tree_leaf_block(
   bindings[#bindings + 1] = { name = "path", value = path }
   bindings[#bindings + 1] = { name = "depth", value = #path }
   return runtime_scoped_binding.run_frame(ctx, bindings, copy_value, function()
-    return evaluate_block_value(engine, block_expr.block, ctx, accumulator, edge_state)
+    local values = contextual and {} or { copy_value(value) }
+    return callable_codeblock.execute_values(
+      engine,
+      name,
+      codeblock,
+      values,
+      ctx,
+      accumulator,
+      edge_state,
+      signature,
+      recursion_identity
+    )
   end)
 end
 
@@ -1744,6 +1787,14 @@ local function evaluate_tree_receiver_block(
   local tree_kind = json.kind(receiver)
   if tree_kind ~= "harray" and tree_kind ~= "array" then return json.null end
   local selector_name = tree_kind == "harray" and "key" or "index"
+  local codeblock, signature, contextual, recursion_identity = evaluate_final_codeblock(
+    engine,
+    name,
+    block_expr,
+    ctx,
+    accumulator,
+    edge_state
+  )
 
   if name == "walk_leaves" then
     local walk
@@ -1755,7 +1806,11 @@ local function evaluate_tree_receiver_block(
         else
           evaluate_tree_leaf_block(
             engine,
-            block_expr,
+            name,
+            codeblock,
+            signature,
+            contextual,
+            recursion_identity,
             value,
             selector_name,
             selector,
@@ -1785,7 +1840,11 @@ local function evaluate_tree_receiver_block(
         else
           mapped = evaluate_tree_leaf_block(
             engine,
-            block_expr,
+            name,
+            codeblock,
+            signature,
+            contextual,
+            recursion_identity,
             value,
             selector_name,
             selector,
@@ -1821,7 +1880,11 @@ local function evaluate_tree_receiver_block(
         else
           reduced = evaluate_tree_leaf_block(
             engine,
-            block_expr,
+            name,
+            codeblock,
+            signature,
+            contextual,
+            recursion_identity,
             value,
             selector_name,
             selector,
@@ -2385,9 +2448,18 @@ function callable_codeblock.body(value)
   return value.body_ast or value.block
 end
 
-function callable_codeblock.execute(engine, expr, value, ctx, accumulator, edge_state)
-  local name = expr.name
-  local signature = callable_codeblock.signature(value)
+function callable_codeblock.execute_values(
+  engine,
+  name,
+  value,
+  values,
+  ctx,
+  accumulator,
+  edge_state,
+  known_signature,
+  recursion_identity
+)
+  local signature = known_signature or callable_codeblock.signature(value)
   if signature == nil then
     local value_kind = M.runtime_value_kind(value)
     local detail = "value_not_callable callable_name=" .. json.encode(name) ..
@@ -2398,6 +2470,94 @@ function callable_codeblock.execute(engine, expr, value, ctx, accumulator, edge_
       callable_name = name,
       value_kind = value_kind,
     })
+  end
+
+  local minimum = signature.min_arity
+  local maximum = signature.max_arity
+  local arity_matches = #values >= minimum and (maximum == json.null or #values <= maximum)
+  if not arity_matches then
+    local expected = maximum == minimum and
+      ("exactly " .. minimum) or ("at least " .. minimum)
+    local detail = "codeblock_arity_mismatch callable_name=" .. json.encode(name) ..
+      " expected=" .. json.encode(expected) .. " got=" .. #values ..
+      " rule_label=" .. json.encode(ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule)
+    callable_codeblock.raise_failure(engine, ctx, name, detail, {
+      code = "codeblock_arity_mismatch",
+      callable_name = name,
+      expected = expected,
+      got = #values,
+    })
+  end
+
+  local active_name
+  if recursion_identity ~= false then active_name = recursion_identity or name end
+  local active_index
+  if active_name ~= nil then
+    for index, candidate in ipairs(ctx.active_codeblocks) do
+      if candidate == active_name then
+        active_index = index
+        break
+      end
+    end
+  end
+  if active_index ~= nil then
+    local cycle = json.array()
+    for index = active_index, #ctx.active_codeblocks do
+      cycle[#cycle + 1] = ctx.active_codeblocks[index]
+    end
+    cycle[#cycle + 1] = active_name
+    local detail = "codeblock_recursion_unsupported callable_name=" .. json.encode(active_name) ..
+      " cycle=" .. json.encode(cycle) ..
+      " rule_label=" .. json.encode(ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule)
+    callable_codeblock.raise_failure(engine, ctx, name, detail, {
+      code = "codeblock_recursion_unsupported",
+      callable_name = active_name,
+      cycle = cycle,
+    })
+  end
+
+  local bindings = {}
+  for index, parameter in ipairs(signature.positional_params) do
+    bindings[#bindings + 1] = { name = parameter, value = values[index] }
+  end
+  if signature.rest_param ~= json.null then
+    local rest = json.array()
+    for index = minimum + 1, #values do rest[#rest + 1] = values[index] end
+    bindings[#bindings + 1] = { name = signature.rest_param, value = rest }
+  end
+
+  local body = callable_codeblock.body(value)
+  if action_ast.node_type(body) ~= "ActionBlock" then
+    fail("runtime callable codeblock does not retain a typed body", {
+      code = "codeblock_body_ast_missing",
+      helper_name = name,
+    })
+  end
+
+  if active_name ~= nil then ctx.active_codeblocks[#ctx.active_codeblocks + 1] = active_name end
+  local executed, result = pcall(function()
+    return runtime_scoped_binding.run_frame(ctx, bindings, copy_value, function()
+      return evaluate_block_value(engine, body, ctx, json.array(), nil)
+    end)
+  end)
+  if active_name ~= nil then ctx.active_codeblocks[#ctx.active_codeblocks] = nil end
+  if not executed then error(result, 0) end
+  return copy_value(result)
+end
+
+function callable_codeblock.execute(engine, expr, value, ctx, accumulator, edge_state)
+  local name = expr.name
+  local signature = callable_codeblock.signature(value)
+  if signature == nil then
+    return callable_codeblock.execute_values(
+      engine,
+      name,
+      value,
+      {},
+      ctx,
+      accumulator,
+      edge_state
+    )
   end
 
   local keyword_count = 0
@@ -2427,74 +2587,16 @@ function callable_codeblock.execute(engine, expr, value, ctx, accumulator, edge_
       edge_state
     ))
   end
-
-  local minimum = signature.min_arity
-  local maximum = signature.max_arity
-  local arity_matches = #values >= minimum and (maximum == json.null or #values <= maximum)
-  if not arity_matches then
-    local expected = maximum == minimum and
-      ("exactly " .. minimum) or ("at least " .. minimum)
-    local detail = "codeblock_arity_mismatch callable_name=" .. json.encode(name) ..
-      " expected=" .. json.encode(expected) .. " got=" .. #values ..
-      " rule_label=" .. json.encode(ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule)
-    callable_codeblock.raise_failure(engine, ctx, name, detail, {
-      code = "codeblock_arity_mismatch",
-      callable_name = name,
-      expected = expected,
-      got = #values,
-    })
-  end
-
-  local active_index
-  for index, active_name in ipairs(ctx.active_codeblocks) do
-    if active_name == name then
-      active_index = index
-      break
-    end
-  end
-  if active_index ~= nil then
-    local cycle = json.array()
-    for index = active_index, #ctx.active_codeblocks do
-      cycle[#cycle + 1] = ctx.active_codeblocks[index]
-    end
-    cycle[#cycle + 1] = name
-    local detail = "codeblock_recursion_unsupported callable_name=" .. json.encode(name) ..
-      " cycle=" .. json.encode(cycle) ..
-      " rule_label=" .. json.encode(ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule)
-    callable_codeblock.raise_failure(engine, ctx, name, detail, {
-      code = "codeblock_recursion_unsupported",
-      callable_name = name,
-      cycle = cycle,
-    })
-  end
-
-  local bindings = {}
-  for index, parameter in ipairs(signature.positional_params) do
-    bindings[#bindings + 1] = { name = parameter, value = values[index] }
-  end
-  if signature.rest_param ~= json.null then
-    local rest = json.array()
-    for index = minimum + 1, #values do rest[#rest + 1] = values[index] end
-    bindings[#bindings + 1] = { name = signature.rest_param, value = rest }
-  end
-
-  local body = callable_codeblock.body(value)
-  if action_ast.node_type(body) ~= "ActionBlock" then
-    fail("runtime callable codeblock does not retain a typed body", {
-      code = "codeblock_body_ast_missing",
-      helper_name = name,
-    })
-  end
-
-  ctx.active_codeblocks[#ctx.active_codeblocks + 1] = name
-  local executed, result = pcall(function()
-    return runtime_scoped_binding.run_frame(ctx, bindings, copy_value, function()
-      return evaluate_block_value(engine, body, ctx, json.array(), nil)
-    end)
-  end)
-  ctx.active_codeblocks[#ctx.active_codeblocks] = nil
-  if not executed then error(result, 0) end
-  return copy_value(result)
+  return callable_codeblock.execute_values(
+    engine,
+    name,
+    value,
+    values,
+    ctx,
+    accumulator,
+    edge_state,
+    signature
+  )
 end
 
 local function evaluate_call(engine, expr, ctx, accumulator, edge_state)

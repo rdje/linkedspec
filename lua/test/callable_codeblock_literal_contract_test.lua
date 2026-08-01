@@ -1,4 +1,4 @@
--- FUTURE-PARITY-BACKLOG.11.8.1-.2 -- callable-codeblock construction and invocation.
+-- FUTURE-PARITY-BACKLOG.11.8.1-.3 -- callable construction, invocation, and emitted identity.
 
 local linkedspec = require("linkedspec")
 local json = linkedspec.json
@@ -28,9 +28,41 @@ local function read_file(path)
   return value
 end
 
+local function write_file(path, value)
+  local handle = assert(io.open(path, "wb"))
+  assert(handle:write(value))
+  assert(handle:close())
+end
+
 local function capture(operation)
   local ok, value = pcall(operation)
   return ok, value
+end
+
+local function shell_quote(value)
+  return "'" .. value:gsub("'", "'\\''") .. "'"
+end
+
+local function command_succeeded(command)
+  local first, _, third = os.execute(command)
+  if type(first) == "number" then return first == 0 end
+  return first == true and (third == nil or third == 0)
+end
+
+local function with_temp_directory(operation)
+  local temp_root = assert(os.getenv("TMPDIR"), "TMPDIR is required")
+  assert(temp_root ~= "", "TMPDIR must not be empty")
+  local template = temp_root:gsub("/+$", "") ..
+    "/linkedspec-lua-callable-codeblock-emitted.XXXXXX"
+  local handle = assert(io.popen("mktemp -d " .. shell_quote(template), "r"))
+  local root = assert(handle:read("*l"))
+  assert(handle:close())
+
+  local ok, value = pcall(operation, root)
+  local cleaned = command_succeeded("rm -rf -- " .. shell_quote(root))
+  if not cleaned then error("unable to clean callable-codeblock emitted workspace", 0) end
+  if not ok then error(value, 0) end
+  return value, root
 end
 
 local function table_key_set(value)
@@ -77,6 +109,48 @@ local function compile_source(source)
   )
 end
 
+local decode_hex
+
+local function reconstruct_emitted(compiled, identity)
+  local source = linkedspec.emit_lua_source_v2(compiled, identity)
+  local payload = assert(source:match(
+    'local _EFFECTIVE_SPEC_JSON_HEX = "([0-9a-f]+)"'
+  ))
+  return linkedspec.compile_spec(linkedspec.spec_ast.from_json(
+    "SpecFile",
+    json.decode(decode_hex(payload))
+  ))
+end
+
+local function execute_generated(compiled, input, identity)
+  return portable_runtime_value(linkedspec.execute_generated_parser_v2(
+    compiled,
+    linkedspec.build_generated_rule_plan(compiled),
+    input,
+    identity
+  ))
+end
+
+local function generated_failure(compiled, identity)
+  local ok, failure = capture(function()
+    return linkedspec.execute_generated_parser_v2(
+      compiled,
+      linkedspec.build_generated_rule_plan(compiled),
+      "x",
+      identity
+    )
+  end)
+  check_equal(ok, false, identity .. " generated failure expected")
+  check_equal(linkedspec.is_generated_source_error(failure), true,
+    identity .. " generated failure type")
+  if linkedspec.is_generated_source_error(failure) then
+    check_equal(failure.stage, "execute_generated", identity .. " generated failure stage")
+    check_equal(failure.code, "generated_execution_failed", identity .. " generated failure code")
+    check_equal(failure.source_identity, identity, identity .. " generated failure identity")
+  end
+  return failure
+end
+
 local function execute_native(compiled)
   return portable_runtime_value(
     linkedspec.runtime_execute(linkedspec.runtime_engine(compiled), "xx").value
@@ -106,13 +180,74 @@ local function invalid_call_source(id)
   return "Top::\n /x/\n E { " .. body .. " }\n"
 end
 
-local function decode_hex(value)
+decode_hex = function(value)
   local bytes = {}
   for index = 1, #value, 2 do
     bytes[#bytes + 1] = string.char(tonumber(value:sub(index, index + 1), 16))
   end
   return table.concat(bytes)
 end
+
+local contextual_source = [[fn apply(value, callback: codeblock) { return(callback()) }
+fn invoke(value, callback: codeblock) { return(callback(value)) }
+
+Top::
+ /x/
+ E {
+   value = {|item| return(cat(item, "!")) };
+   return([
+     with("x") { return(cat(value, "!")) },
+     with("x", { return(cat(value, "!")) }),
+     with("x", {|item| return(cat(item, "!")) }),
+     with("x", value),
+     with("outer") { return(with("inner") { return(cat(value, "!")) }) },
+     "x".with() { return(cat(value, "!")) },
+     "x".with({ return(cat(value, "!")) }),
+     "x".with({|item| return(cat(item, "!")) }),
+     "x".with(value),
+     apply("a") { return(cat(value, "!")) },
+     apply("b", { return(cat(value, "?")) }),
+     invoke("c", {|item| return(cat(item, ".")) }),
+     { "b" : 2, "a" : 1 }.map_leaves() { return(cat(value, "!")) },
+     { "b" : 2, "a" : 1 }.map_leaves({ return(cat(value, "!")) }),
+     { "b" : 2, "a" : 1 }.map_leaves(value)
+   ])
+ }
+]]
+local contextual_expected = json.array({
+  "x!", "x!", "x!", "x!", "inner!", "x!", "x!", "x!", "x!",
+  "a!", "b?", "c.",
+  json.harray({ a = "1!", b = "2!" }),
+  json.harray({ a = "1!", b = "2!" }),
+  json.harray({ a = "1!", b = "2!" }),
+})
+local contextual_invalid_source = [[fn apply(value, callback: codeblock) { return(callback()) }
+
+Top::
+ /x/
+ E { return(apply("x", { "value" : value })) }
+]]
+local mutual_recursion_source = [[Top::
+ /x/
+ E {
+   left = {|| return(right()) };
+   right = {|| return(left()) };
+   return(left())
+ }
+]]
+local helper_recursion_source = [[Top::
+ /x/
+ E {
+   callback = {|item| return(with(item, callback)) };
+   return(callback("x"))
+ }
+]]
+local keyword_user_source = [[fn identity(value) { return(value) }
+
+Top::
+ /x/
+ E { return(identity(value: "x")) }
+]]
 
 local contract = json.decode(read_file("capability_conformance/callable_codeblock_contract.json"))
 
@@ -321,10 +456,28 @@ for _, id in ipairs({
 local actual_call_ids = json.harray()
 for _, row in ipairs(contract.call_cases) do actual_call_ids[row.id] = true end
 check_same_json(actual_call_ids, expected_call_ids, "all neutral call cases are owned")
+local fixture_compiled = compile_source(contract.fixture.spec_source)
 check_same_json(
-  execute_native(compile_source(contract.fixture.spec_source)),
+  execute_native(fixture_compiled),
   contract.fixture.expected,
-  "exact neutral dynamic invocation fixture"
+  "exact neutral dynamic invocation fixture native"
+)
+check_same_json(
+  execute_native(reconstruct_emitted(
+    fixture_compiled,
+    "callable-codeblock/neutral-fixture-reconstructed.spec"
+  )),
+  contract.fixture.expected,
+  "exact neutral dynamic invocation fixture reconstructed"
+)
+check_same_json(
+  execute_generated(
+    fixture_compiled,
+    contract.fixture.input,
+    "callable-codeblock/neutral-fixture-generated.spec"
+  ),
+  contract.fixture.expected,
+  "exact neutral dynamic invocation fixture generated"
 )
 
 local invocation_source = [[fn choose() { return("static") }
@@ -358,7 +511,8 @@ Top::
    })
  }
 ]]
-check_same_json(execute_native(compile_source(invocation_source)), json.harray({
+local invocation_compiled = compile_source(invocation_source)
+local invocation_expected = json.harray({
   discard_state = "x",
   helper_precedence = "ab",
   function_precedence = "static",
@@ -368,11 +522,38 @@ check_same_json(execute_native(compile_source(invocation_source)), json.harray({
   mutated = json.harray({ nested = json.array({ json.harray({ value = "inner" }) }) }),
   declared_final_literal = "c.",
   nested_return = "done",
-}), "dynamic invocation precedence order copies and local return")
+})
+check_same_json(execute_native(invocation_compiled), invocation_expected,
+  "dynamic invocation precedence order copies and local return native")
+check_same_json(execute_native(reconstruct_emitted(
+  invocation_compiled,
+  "callable-codeblock/invocation-reconstructed.spec"
+)), invocation_expected, "dynamic invocation reconstructed identity")
+check_same_json(execute_generated(
+  invocation_compiled,
+  "x",
+  "callable-codeblock/invocation-generated.spec"
+), invocation_expected, "dynamic invocation generated identity")
+
+local contextual_compiled = compile_source(contextual_source)
+check_same_json(execute_native(contextual_compiled), contextual_expected,
+  "contextual forms native identity")
+check_same_json(execute_native(reconstruct_emitted(
+  contextual_compiled,
+  "callable-codeblock/contextual-reconstructed.spec"
+)), contextual_expected, "contextual forms reconstructed identity")
+check_same_json(execute_generated(
+  contextual_compiled,
+  "x",
+  "callable-codeblock/contextual-generated.spec"
+), contextual_expected, "contextual forms generated identity")
 
 -- Every neutral invalid call projects the exact governed diagnostic fields.
+local expected_runtime_details = json.harray()
 for _, row in ipairs(contract.invalid_call_cases) do
-  local failure = runtime_failure(compile_source(invalid_call_source(row.id)))
+  local compiled = compile_source(invalid_call_source(row.id))
+  local failure = runtime_failure(compiled)
+  expected_runtime_details[row.id] = tostring(failure)
   if linkedspec.is_runtime_interpreter_error(failure) then
     check_equal(linkedspec.is_runtime_diagnostic(failure.diagnostic), true,
       row.id .. " typed runtime diagnostic")
@@ -381,16 +562,30 @@ for _, row in ipairs(contract.invalid_call_cases) do
       check_same_json(diagnostic[key], expected, row.id .. " diagnostic " .. key)
     end
   end
+  local reconstructed = runtime_failure(reconstruct_emitted(
+    compiled,
+    "callable-codeblock/" .. row.id .. "-reconstructed.spec"
+  ))
+  if linkedspec.is_runtime_interpreter_error(reconstructed) then
+    local diagnostic = reconstructed.diagnostic and
+      linkedspec.interpreter.to_json(reconstructed.diagnostic) or {}
+    for key, expected in pairs(row.expected_error) do
+      check_same_json(diagnostic[key], expected, row.id .. " reconstructed diagnostic " .. key)
+    end
+  end
+  local generated = generated_failure(
+    compiled,
+    "callable-codeblock/" .. row.id .. "-generated.spec"
+  )
+  if linkedspec.is_generated_source_error(generated) then
+    check_equal(generated.detail, tostring(failure),
+      row.id .. " generated runtime detail identity")
+  end
 end
 
-local mutual_failure = runtime_failure(compile_source([[Top::
- /x/
- E {
-   left = {|| return(right()) };
-   right = {|| return(left()) };
-   return(left())
- }
-]]))
+local mutual_compiled = compile_source(mutual_recursion_source)
+local mutual_failure = runtime_failure(mutual_compiled)
+expected_runtime_details.mutual_recursion = tostring(mutual_failure)
 if linkedspec.is_runtime_interpreter_error(mutual_failure) then
   local diagnostic = mutual_failure.diagnostic and
     linkedspec.interpreter.to_json(mutual_failure.diagnostic) or {}
@@ -399,18 +594,314 @@ if linkedspec.is_runtime_interpreter_error(mutual_failure) then
   check_same_json(diagnostic.cycle, json.array({ "left", "right", "left" }),
     "mutual recursion ordered cycle")
 end
+local mutual_reconstructed = runtime_failure(reconstruct_emitted(
+  mutual_compiled,
+  "callable-codeblock/mutual-reconstructed.spec"
+))
+if linkedspec.is_runtime_interpreter_error(mutual_reconstructed) then
+  local diagnostic = mutual_reconstructed.diagnostic and
+    linkedspec.interpreter.to_json(mutual_reconstructed.diagnostic) or {}
+  check_equal(diagnostic.code, "codeblock_recursion_unsupported", "mutual reconstructed code")
+  check_same_json(diagnostic.cycle, json.array({ "left", "right", "left" }),
+    "mutual reconstructed ordered cycle")
+end
+local mutual_generated = generated_failure(
+  mutual_compiled,
+  "callable-codeblock/mutual-generated.spec"
+)
+if linkedspec.is_generated_source_error(mutual_generated) then
+  check_equal(mutual_generated.detail, tostring(mutual_failure),
+    "mutual generated runtime detail identity")
+end
 
-local keyword_user_failure = runtime_failure(compile_source([[fn identity(value) { return(value) }
+local helper_recursion_compiled = compile_source(helper_recursion_source)
+local helper_recursion_failure = runtime_failure(helper_recursion_compiled)
+expected_runtime_details.helper_bound_recursion = tostring(helper_recursion_failure)
+if linkedspec.is_runtime_interpreter_error(helper_recursion_failure) then
+  local diagnostic = helper_recursion_failure.diagnostic and
+    linkedspec.interpreter.to_json(helper_recursion_failure.diagnostic) or {}
+  check_equal(diagnostic.code, "codeblock_recursion_unsupported", "helper-bound recursion code")
+  check_equal(diagnostic.callable_name, "callback", "helper-bound recursion callable")
+  check_same_json(diagnostic.cycle, json.array({ "callback", "callback" }),
+    "helper-bound recursion ordered cycle")
+end
+local helper_recursion_reconstructed = runtime_failure(reconstruct_emitted(
+  helper_recursion_compiled,
+  "callable-codeblock/helper-bound-recursion-reconstructed.spec"
+))
+if linkedspec.is_runtime_interpreter_error(helper_recursion_reconstructed) then
+  local diagnostic = helper_recursion_reconstructed.diagnostic and
+    linkedspec.interpreter.to_json(helper_recursion_reconstructed.diagnostic) or {}
+  check_equal(diagnostic.code, "codeblock_recursion_unsupported",
+    "helper-bound reconstructed recursion code")
+  check_same_json(diagnostic.cycle, json.array({ "callback", "callback" }),
+    "helper-bound reconstructed ordered cycle")
+end
+local helper_recursion_generated = generated_failure(
+  helper_recursion_compiled,
+  "callable-codeblock/helper-bound-recursion-generated.spec"
+)
+if linkedspec.is_generated_source_error(helper_recursion_generated) then
+  check_equal(helper_recursion_generated.detail, tostring(helper_recursion_failure),
+    "helper-bound generated runtime detail identity")
+end
 
-Top::
- /x/
- E { return(identity(value: "x")) }
-]]))
+local keyword_user_compiled = compile_source(keyword_user_source)
+local keyword_user_failure = runtime_failure(keyword_user_compiled)
+expected_runtime_details.user_function_keyword = tostring(keyword_user_failure)
 if linkedspec.is_runtime_interpreter_error(keyword_user_failure) then
   check_equal(keyword_user_failure.code, "user_function_keyword_arguments_unsupported",
     "colon keyword cannot bypass user-function policy")
   check_equal(keyword_user_failure.got, 1, "user-function keyword count")
 end
+local keyword_user_reconstructed = runtime_failure(reconstruct_emitted(
+  keyword_user_compiled,
+  "callable-codeblock/user-keyword-reconstructed.spec"
+))
+if linkedspec.is_runtime_interpreter_error(keyword_user_reconstructed) then
+  check_equal(keyword_user_reconstructed.code, "user_function_keyword_arguments_unsupported",
+    "reconstructed colon keyword retains user-function policy")
+end
+local keyword_user_generated = generated_failure(
+  keyword_user_compiled,
+  "callable-codeblock/user-keyword-generated.spec"
+)
+if linkedspec.is_generated_source_error(keyword_user_generated) then
+  check_equal(keyword_user_generated.detail, tostring(keyword_user_failure),
+    "generated colon keyword retains user-function policy")
+end
+
+local contextual_invalid_compiled = compile_source(contextual_invalid_source)
+local contextual_invalid = runtime_failure(contextual_invalid_compiled)
+expected_runtime_details.contextual_harray = tostring(contextual_invalid)
+if linkedspec.is_runtime_interpreter_error(contextual_invalid) then
+  check_equal(contextual_invalid.code, "final_argument_not_codeblock",
+    "contextual harray native rejection")
+  check_equal(contextual_invalid.value_kind, "harray", "contextual harray native kind")
+end
+local contextual_invalid_reconstructed = runtime_failure(reconstruct_emitted(
+  contextual_invalid_compiled,
+  "callable-codeblock/contextual-invalid-reconstructed.spec"
+))
+if linkedspec.is_runtime_interpreter_error(contextual_invalid_reconstructed) then
+  check_equal(contextual_invalid_reconstructed.code, "final_argument_not_codeblock",
+    "contextual harray reconstructed rejection")
+  check_equal(contextual_invalid_reconstructed.value_kind, "harray",
+    "contextual harray reconstructed kind")
+end
+local contextual_invalid_generated = generated_failure(
+  contextual_invalid_compiled,
+  "callable-codeblock/contextual-invalid-generated.spec"
+)
+if linkedspec.is_generated_source_error(contextual_invalid_generated) then
+  check_equal(contextual_invalid_generated.detail, tostring(contextual_invalid),
+    "contextual harray generated rejection")
+end
+
+-- Byte-fresh emitted modules reuse the same effective SpecFile, compiler, generated plan,
+-- and interpreter in an independently launched host process.
+local emitted_cases = json.array({
+  json.harray({
+    id = "fixture",
+    compiled = fixture_compiled,
+    identity = "callable-codeblock/emitted-fixture.spec",
+    input = contract.fixture.input,
+    outcome = "value",
+  }),
+  json.harray({
+    id = "contextual",
+    compiled = contextual_compiled,
+    identity = "callable-codeblock/emitted-contextual.spec",
+    input = "x",
+    outcome = "value",
+  }),
+  json.harray({
+    id = "invocation",
+    compiled = invocation_compiled,
+    identity = "callable-codeblock/emitted-invocation.spec",
+    input = "x",
+    outcome = "value",
+  }),
+})
+for _, row in ipairs(contract.invalid_call_cases) do
+  emitted_cases[#emitted_cases + 1] = json.harray({
+    id = row.id,
+    compiled = compile_source(invalid_call_source(row.id)),
+    identity = "callable-codeblock/emitted-" .. row.id .. ".spec",
+    input = "x",
+    outcome = "error",
+    expected_detail = expected_runtime_details[row.id],
+  })
+end
+for _, row in ipairs({
+  {
+    id = "mutual_recursion",
+    compiled = mutual_compiled,
+  },
+  {
+    id = "helper_bound_recursion",
+    compiled = helper_recursion_compiled,
+  },
+  {
+    id = "user_function_keyword",
+    compiled = keyword_user_compiled,
+  },
+  {
+    id = "contextual_harray",
+    compiled = contextual_invalid_compiled,
+  },
+}) do
+  emitted_cases[#emitted_cases + 1] = json.harray({
+    id = row.id,
+    compiled = row.compiled,
+    identity = "callable-codeblock/emitted-" .. row.id .. ".spec",
+    input = "x",
+    outcome = "error",
+    expected_detail = expected_runtime_details[row.id],
+  })
+end
+
+local emitted_observation, emitted_root = with_temp_directory(function(root)
+  local manifest = json.array()
+  for _, case in ipairs(emitted_cases) do
+    local source = linkedspec.emit_lua_source_v2(case.compiled, case.identity)
+    check(source:find("codeblock_literal", 1, true) == nil,
+      case.id .. " emitted state is not a host-language record")
+    check(source:find("{|", 1, true) == nil,
+      case.id .. " emitted state is not a host-language closure body")
+    local module_path = root .. "/" .. case.id .. ".lua"
+    write_file(module_path, source)
+    check_equal(read_file(module_path), source, case.id .. " exact emitted bytes")
+    manifest[#manifest + 1] = json.harray({
+      id = case.id,
+      path = module_path,
+      input = case.input,
+      outcome = case.outcome,
+    })
+  end
+
+  local corrupt_source = linkedspec.emit_lua_source_v2(
+    fixture_compiled,
+    "callable-codeblock/emitted-corrupt.spec"
+  )
+  local replacements
+  corrupt_source, replacements = corrupt_source:gsub(
+    'local _EFFECTIVE_SPEC_JSON_HEX = "[0-9a-f]+"',
+    'local _EFFECTIVE_SPEC_JSON_HEX = "00"',
+    1
+  )
+  check_equal(replacements, 1, "corrupt emitted payload replacement")
+  local corrupt_path = root .. "/corrupt_payload.lua"
+  write_file(corrupt_path, corrupt_source)
+  manifest[#manifest + 1] = json.harray({
+    id = "corrupt_payload",
+    path = corrupt_path,
+    input = "x",
+    outcome = "load_error",
+  })
+
+  local manifest_path = root .. "/manifest.json"
+  local runner_path = root .. "/runner.lua"
+  local stdout_path = root .. "/stdout.json"
+  local stderr_path = root .. "/stderr.txt"
+  write_file(manifest_path, json.encode(manifest))
+  write_file(runner_path, [[
+local linkedspec = require("linkedspec")
+local json = linkedspec.json
+
+local manifest_file = assert(io.open(assert(arg[1]), "rb"))
+local manifest = json.decode(assert(manifest_file:read("*a")))
+assert(manifest_file:close())
+local result = json.harray({
+  values = json.harray(),
+  errors = json.harray(),
+  metadata = json.harray(),
+})
+for _, row in ipairs(manifest) do
+  local loaded, module_or_error = pcall(function()
+    local chunk, failure = loadfile(row.path)
+    if chunk == nil then error(failure, 0) end
+    return chunk()
+  end)
+  if row.outcome == "load_error" then
+    assert(not loaded, row.id .. " unexpectedly loaded")
+    result.errors[row.id] = linkedspec.is_generated_source_error(module_or_error) and
+      linkedspec.generated_source_error_to_json(module_or_error) or
+      json.harray({ detail = tostring(module_or_error) })
+  else
+    assert(loaded, module_or_error)
+    local generated = module_or_error
+    local executed, value_or_error = pcall(generated.execute, row.input)
+    if row.outcome == "value" then
+      assert(executed, value_or_error)
+      result.values[row.id] = value_or_error
+      result.metadata[row.id] = linkedspec.generated_source_metadata_to_json(generated.metadata())
+    else
+      assert(not executed, row.id .. " unexpectedly executed")
+      result.errors[row.id] = linkedspec.is_generated_source_error(value_or_error) and
+        linkedspec.generated_source_error_to_json(value_or_error) or
+        json.harray({ detail = tostring(value_or_error) })
+    end
+  end
+end
+io.write(json.encode(result), "\n")
+]])
+
+  local runtime = os.getenv("LINKEDSPEC_LUA_TEST_RUNTIME") or
+    (type(jit) == "table" and "luajit" or "lua")
+  local command = table.concat({
+    "env",
+    shell_quote("LUA_PATH=" .. (os.getenv("LUA_PATH") or package.path)),
+    shell_quote("LUA_CPATH=" .. (os.getenv("LUA_CPATH") or package.cpath)),
+    shell_quote(runtime),
+    shell_quote(runner_path),
+    shell_quote(manifest_path),
+    ">" .. shell_quote(stdout_path),
+    "2>" .. shell_quote(stderr_path),
+  }, " ")
+  check_equal(command_succeeded(command), true, "fresh emitted callable host status")
+  check_equal(read_file(stderr_path), "", "fresh emitted callable host stderr")
+  return json.decode(read_file(stdout_path))
+end)
+check_equal(command_succeeded("test ! -e " .. shell_quote(emitted_root)), true,
+  "fresh emitted callable workspace cleanup")
+check_same_json(emitted_observation.values.fixture, contract.fixture.expected,
+  "fresh emitted neutral fixture")
+check_same_json(emitted_observation.values.contextual, contextual_expected,
+  "fresh emitted contextual equivalence")
+check_same_json(emitted_observation.values.invocation, invocation_expected,
+  "fresh emitted dynamic invocation equivalence")
+check_equal(emitted_observation.metadata.fixture.contract_id,
+  "linkedspec-generated-source-v2", "fresh emitted fixture contract")
+check_equal(emitted_observation.metadata.fixture.source_identity,
+  "callable-codeblock/emitted-fixture.spec", "fresh emitted fixture identity")
+for _, case in ipairs(emitted_cases) do
+  if case.outcome == "error" then
+    local emitted_error = emitted_observation.errors[case.id] or {}
+    check_equal(emitted_error.code, "generated_execution_failed",
+      case.id .. " fresh emitted wrapper code")
+    check_equal(emitted_error.source_identity, case.identity,
+      case.id .. " fresh emitted error identity")
+    check_equal(emitted_error.detail, case.expected_detail,
+      case.id .. " fresh emitted runtime detail identity")
+  end
+end
+check_equal(emitted_observation.errors.corrupt_payload.code,
+  "generated_source_compile_failed", "fresh emitted corrupt payload rejection")
+
+local failed_cleanup_root
+local cleanup_ok, cleanup_error = capture(function()
+  with_temp_directory(function(root)
+    failed_cleanup_root = root
+    write_file(root .. "/owned.lua", "return true\n")
+    error("intentional callable emitted cleanup probe", 0)
+  end)
+end)
+check_equal(cleanup_ok, false, "emitted cleanup failure path propagates")
+check(tostring(cleanup_error):find("intentional callable emitted cleanup probe", 1, true) ~= nil,
+  "emitted cleanup failure identity")
+check_equal(command_succeeded("test ! -e " .. shell_quote(failed_cleanup_root)), true,
+  "emitted workspace cleans after injected failure")
 
 -- Static semantic bindings expose the exact callable signature.
 local semantic_source = [[fn identity(value) { return(value) }

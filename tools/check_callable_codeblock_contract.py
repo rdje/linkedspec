@@ -97,8 +97,9 @@ EXPECTED_FUTURE_EXCLUSION = {
         "ADR 0031 plus ADR 0032 and linkedspec-callable-codeblock-v1 are adopted; Perl, Rust, Dart, and Julia "
         "construction, arbitrary dynamic invocation, contextual final-block normalization, and native/"
         "reconstructed/generated/emitted identity are current. Lua construction, arbitrary dynamic invocation, "
-        "and contextual final-block normalization are current on PUC Lua and LuaJIT; independently loaded emitted "
-        "identity and five-backend recurring/public admission remain future under FUTURE-PARITY-BACKLOG.11.8.3-.4."
+        "contextual final-block normalization, and native/reconstructed/generated/emitted identity are current "
+        "on PUC Lua and LuaJIT; five-backend recurring/public admission remains future under "
+        "FUTURE-PARITY-BACKLOG.11.8.4."
     ),
     "owner": "FUTURE-PARITY-BACKLOG.11.8",
 }
@@ -157,7 +158,7 @@ EXPECTED_PUBLIC_CONTRACT = {
         ]},
         {"path": "docs/linkedspec-book/src/appendix/formal-grammar.md", "required_markers": [
             "### Callable-codeblock literal and dynamic call (five-backend construction and invocation)",
-            "Independently loaded emitted-route proof and five-backend admission remain `.11.8.3-.4`",
+            "Lua `.11.8.3` proves canonical reconstruction, generated-plan, and independently loaded emitted-route",
         ]},
         {"path": "docs/linkedspec-book/src/architecture/owner-tree.md", "required_markers": [
             "`LinkedSpec::CodeblockRuntime`",

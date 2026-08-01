@@ -59,6 +59,7 @@ case "$(cd -P -- "$TMPDIR" && pwd -P)/" in
 esac
 
 expected_temp_owners=(
+ lua/test/callable_codeblock_literal_contract_test.lua
  lua/test/duplicate_regex_slot_identity_contract_test.lua
  lua/test/repeated_action_result_contract_test.lua
  lua/test/root_rule_selection_admission_test.lua
@@ -190,4 +191,4 @@ if [[ -n "$owned_native_root" ]]; then rm -rf -- "$owned_native_root"; fi
 [[ ! -e "$probe_root" ]] || fail 'Lua storage probe remained after cleanup'
 [[ -z "$owned_native_root" || ! -e "$owned_native_root" ]] || fail 'Lua native build remained after cleanup'
 
-printf '[lua-project-data-test] PASS: 16 owners, three dual-ABI native modules, generated output, and traces stay on repository storage\n'
+printf '[lua-project-data-test] PASS: 17 owners, three dual-ABI native modules, generated output, and traces stay on repository storage\n'

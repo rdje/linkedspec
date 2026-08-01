@@ -192,7 +192,8 @@ signature, typed deferred body, source text, containing Unicode-character spans,
 compiled/generated/emitted effective state, and semantic codeblock shape on PUC Lua and LuaJIT. Lua `.11.8.2`
 adds the same ordered dynamic caller-frame invocation, copied/restored fixed/rest bindings, live nonparameters,
 typed result access, static precedence, exact failures, and ordered recursion rejection through the shared
-interpreter. Independently loaded emitted-route proof and five-backend admission remain `.11.8.3-.4`.
+interpreter. Lua `.11.8.3` proves canonical reconstruction, generated-plan, and independently loaded emitted-route
+identity through that same record/executor; five-backend admission remains `.11.8.4`.
 
 Arguments evaluate once from left to right before any parameter is bound. Nested arrays/harrays, booleans,
 `undef`, and codeblocks remain individual rest-array values rather than being flattened or coerced.

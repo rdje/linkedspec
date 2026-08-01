@@ -1,5 +1,17 @@
 # ARCHITECTURE STATE
 
+- `2026-08-01 Lua callable-codeblock emitted route identity`: `FUTURE-PARITY-BACKLOG.11.8.3` carries the same
+  typed effective `SpecFile` through native compilation, canonical JSON reconstruction, generated-plan execution,
+  and independently loaded emitted modules on PUC Lua and LuaJIT. Final helper/receiver/tree callbacks now resolve
+  before scoped `value` installation and enter `callable_codeblock.execute_values` whether contextual, explicit,
+  or bound. Anonymous built-in callbacks do not create false helper-name cycles, while callbacks passed by
+  variable retain that binding's recursion identity. No emitter format, closure, host function, codec, or second
+  executor is added. The focused consumer passes 449 assertions per ABI, rejects corrupt payload, compares exact bytes and
+  runtime details, and cleans success/failure workspaces. Complete Lua passes 177 TAP groups per ABI, CLI 66x2,
+  corpus 105/105, and exact storage owner 17. Signoff also passes neutral+20, signatures 3/9/7, capability
+  80/0/0, Knowledge Map 779/6,322, sole-facing mdBook 79/14,048 KiB, all seven doctrines, canonical containment/
+  moved-root proof, RAM 51%, Phase 0 1,031/1,031 in 809 seconds, and the exact four-backend callable matrix.
+  Five-backend admission stays `.11.8.4`.
 - `2026-08-01 Lua callable-codeblock dynamic invocation`: `FUTURE-PARITY-BACKLOG.11.8.2` adds only colon-keyword
   call data and evaluated-value access, preserving positional `name = value`. After static callables, one bound-
   name executor evaluates/copies arguments once in order and reuses `runtime_scoped_binding.run_frame` for fixed/

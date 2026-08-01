@@ -366,7 +366,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 ### 4.3.6 Lua targeted commands and SSD-local storage oracle
 
 - **WHAT:** `tools/run_lua_project_data.sh` builds disposable native modules and runs one PUC Lua or LuaJIT command
-  under repository-derived managed scratch; `tools/test_lua_project_data_storage.sh` locks all 14 Lua-family
+  under repository-derived managed scratch; `tools/test_lua_project_data_storage.sh` locks all 17 Lua-family
   allocation owners, both ABI module pairs, actual device identity, generated v2 source, trace output, hostile
   other-filesystem builder rejection, quoted-path handling, and cleanup.
 - **WHEN:** use the targeted wrapper for a Lua command that bypasses `tools/run_lua_local.sh`; run the oracle when

@@ -1,23 +1,25 @@
 # Project Status
 
-Lua dynamic-invocation leaf `FUTURE-PARITY-BACKLOG.11.8.2` is implementation-complete on both PUC Lua and LuaJIT.
-Exact `{|params| body }` / `{|| body }` remains an inert neutral eight-field value through copy, ordinary user
-functions, compiled/generated/emitted effective state, and semantic signatures. Lua now also invokes an ordinary
-bound `cb(args)` after static callables with once-only arguments, copied/restored fixed/rest bindings, live caller
-nonparameters, local results/access/chaining, exact typed failures, and ordered recursion rejection. Declared
-final-block values reuse the same executor; construction still neither executes nor captures the body.
+Lua emitted-identity leaf `FUTURE-PARITY-BACKLOG.11.8.3` is signoff-complete on PUC Lua and LuaJIT. Exact
+`{|params| body }` / `{|| body }` remains one inert neutral eight-field value through copy, ordinary user
+functions, canonical effective-`SpecFile` reconstruction, generated-plan execution, independently loaded emitted
+modules, and semantic signatures. Every route compiles and runs the same typed record through the ordinary
+interpreter; emitted source adds no host closure, callable codec, or route-specific executor.
 
-The first two Lua implementation steps are now exact. One focused neutral-contract consumer passes 232 assertions
-per ABI across construction, dynamic caller context, static precedence, declared-final equivalence, result access,
-copy/restoration, exact failures, and direct/mutual recursion. Native/reconstructed/generated/independently loaded
-emitted identity remains `.11.8.3`, always using the same Lua interpreter and effective-`SpecFile` transport. Final
+An ordinary bound `cb(args)` still runs after static callables with once-only arguments, copied/restored fixed/rest
+bindings, live caller nonparameters, local results/access/chaining, exact typed failures, and ordered recursion.
+Built-in helper/receiver/tree final slots now accept contextual, explicit, or bound callbacks through the same
+executor. Callback lookup happens before scoped `value` is installed, and distinct nested anonymous callbacks do
+not become a false helper-name recursion cycle. Only ordinary bound names participate in recursion tracking.
+
+The focused consumer passes 449 assertions per ABI across construction, invocation, contextual equivalence,
+native/reconstructed/generated/fresh-emitted identity, exact generated wrapper/runtime detail, corrupt-payload
+rejection, and cleanup. Complete Lua passes all 177 legacy tests per ABI with primary CLI 66x2, corpus 105/105,
+and 17 storage owners. The neutral contract remains 7/11/9/7/4/8 plus 20 governance mutations. Knowledge Map
+779/6,322, the book's own 79-file / 14,048-KiB render, all seven doctrines, canonical containment/moved-root proof,
+RAM 51%, Phase 0 1,031/1,031 in 809 seconds, and the exact four-backend callable matrix complete signoff. Final
 `.11.8.4` alone may replace four-backend recurrence with five-backend proof and update capability/public status.
-Host closures, lexical capture, broad raw fallback, and separate codeblock codecs or executors remain outside v1.
-
-Construction and dynamic invocation are verified against both Lua ABIs. The complete Lua gate preserves all 177
-legacy tests per ABI with primary CLI 66x2, corpus 105/105, and 16 storage owners; the focused consumer passes 232
-per ABI. The neutral contract remains 7/11/9/7/4/8 plus 20 governance mutations. Final five-backend admission still
-waits for byte-fresh emitted execution under `.11.8.3` and the recurring/public closeout under `.11.8.4`.
+Lexical capture and broad raw fallback remain outside v1.
 
 Semantic introspection is complete and publicly governed: semantic public rollout is 9/9, native admission is
 6/6, and the independent contract derives 20 exact responses while rejecting 128 mutations. MCP implementation/runtime state is 5/5 + 6/6 with shared rollout complete/141. The neutral mdBook owns nine worked
@@ -539,8 +541,9 @@ Three backbone items tracked major structural modernization — all done:
   This remains alongside `.5`'s
   switch/range, alias, loop/`next`, constructor/transform, `start_capture_slice()` result, and zero-argument
   `capture_until_boundary()` decisions. General user-function final `callback: codeblock` declaration/execution
-  and outward descriptor v3 are current in Lua; first-class callable construction/invocation are current through
-  `.11.8.1-.2`, with emitted-route proof/admission remaining `.11.8.3-.4` after four-backend governance `.11.7`;
+  and outward descriptor v3 are current in Lua; first-class callable construction/invocation/emitted identity are
+  current through `.11.8.1-.3` pending `.3` signoff, with admission remaining `.11.8.4` after four-backend
+  governance `.11.7`;
   generated Lua accepted-subset proof closes under `.8.3`, and five-backend census/handoff `.8.4` is complete.
 - **Lua staged-function frontier** - Planning `.5.1.0` separates minimal action-body dispatch `.5.1.1`, fixed-v1
   runtime `.5.1.2`, variadic-v2 metadata/runtime `.5.1.3`, contextual final-codeblock metadata/runtime `.5.1.4`,
@@ -559,8 +562,8 @@ Three backbone items tracked major structural modernization — all done:
   proof passes 160/160 on both ABIs; ordered core admission `.6.1.3` then locks 40/40 at endpoint 1/1 and raises
   both suites to 161/161. Governed capability/no-drift `.6.1.4` locks the remaining owned 6/6 window, raises both
   suites to 162/162, closes `.6.1`, and activates `.6.2`.
-  Generated Lua remains `.8`; explicit callable literals and bound calls are current through `.11.8.1-.2`, while
-  byte-fresh route proof and admission remain `.11.8.3-.4`.
+  Generated Lua remains `.8`; explicit callable literals, bound calls, and byte-fresh route identity are current
+  through `.11.8.1-.3` pending `.3` signoff, while admission remains `.11.8.4`.
 - **Post-parity structured-text program** - ADRs `0034`, `0037`, and `0038` plus `STRUCTURED-TEXT-FORMAT-PROGRAM` map all 91 eligible rows in the Unicode structured-text catalog. Each format's composed `.spec` graph is the sole parser source and is dynamically compiled for immediate use on every backend; host source/caches are derivative only. The catalog becomes requirements evidence for reusable neutral `.spec` evolution: a format-discovered mechanism must reach exact Perl/Rust/Dart/Julia/Lua parity before that format continues. JSON/XML/YAML/HTML/Markdown/RDF foundations are reused; conditional formats use named profiles; text-to-AST stays distinct from evaluation/domain semantics; HTML owns a full WHATWG tokenizer/tree-builder lane; accuracy, Unicode, diagnostics, conformance, separate cold-construction/warm-reuse/parse measurements, and correlated compile/runtime trace with exact emission-only rule filters are required. A separate non-blocking `NATIVE-PARSER-ACCELERATOR` horizon may later derive measured backend-native artifacts, but the dynamic parser remains primary, oracle, and fallback and Perl acceleration is not required. Lua `.8.4` satisfies the full-backend parity prerequisite; readiness leaf `.1` remains pending explicit activation and no format implementation has started.
 - **Planned Rust mutation testing** - ADR `0039` and `RUST-MUTATION-TESTING` adopt `cargo-mutants` as an explicit test-strength campaign, never a per-commit/pre-commit/ordinary-local-CI gate. The list-only baseline is 3,333 candidates across 19 files; no mutant has executed and no score is claimed. A safe manual surface and targeted pilot must precede any resource-guarded milestone/release sharding. Every survivor receives a durable disposition and true gaps gain behavior-focused tests; the generated Unicode table is the initial provenance-backed exclusion.
 - **Planned backend implementation companions** - ADR `0040` and `BACKEND-COMPANION-BOOKS` retain this book as
@@ -850,8 +853,8 @@ Three backbone items tracked major structural modernization — all done:
   final-only staged/descriptor metadata, and one governed contextual normalizer across native, serialized,
   generated, emitted, user-function, and semantic authorities. Audit `.11.7.0` proves those four implementations
   focused-green, recurring gate `.11.7.1` composes them, and public no-drift `.11.7.2` omission-locks the current
-  projection. Four-backend recurring/public no-drift is complete under `.11.7`; Lua explicit-literal/general-call
-  parity is separately dependency-owned by `.11.8`.
+  projection. Four-backend recurring/public no-drift is complete under `.11.7`; Lua explicit-literal/general-call/
+  emitted-route parity is current through `.11.8.1-.3`, while five-backend admission remains `.11.8.4`.
 - **Dart callable-codeblock construction and invocation** - `FUTURE-PARITY-BACKLOG.11.5.1` recognizes exact `{|params| body }`
   before Dart's harray/eager-block classifier and preserves the neutral eight-field record as inert plain data.
   Fixed and final-rest signatures, exact body/source, containing Unicode-character literal/body spans (including

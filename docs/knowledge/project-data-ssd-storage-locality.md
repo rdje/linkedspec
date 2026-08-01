@@ -47,6 +47,7 @@ evidence: "PROJECT-DATA-SSD-ROOTING.0 proves the repository and current OS tempo
 evidence_update_2026_07_28_lua_observation: "FUTURE-PARITY-BACKLOG.10.7.6.1 adds one routed Lua native-observation route test, advancing the live Lua allocation-owner manifest from 13 to 14 and the current tracked unique total from 101 to 102. The updated storage oracle passes both ABI module/generated/trace probes and exact cleanup."
 evidence_update_2026_07_30_dart_callable_emission: "FUTURE-PARITY-BACKLOG.11.5.2 adds one routed independently compiled emitted-Dart callable-codeblock workspace, advancing the live Dart allocation-owner manifest from 18 to 19 and the current tracked unique total from 102 to 103. The updated oracle registers that exact owner and retains repository-device cache/workspace/trace plus cleanup proof."
 evidence_update_2026_07_30_lua_mcp_and_julia_callable: "Subsequent Lua MCP generated-route work advances its live owner manifest from 14 to 16. FUTURE-PARITY-BACKLOG.11.6.1 adds one routed freshly loaded emitted-Julia callable-codeblock workspace, advancing Julia from 17 to 18 and the current tracked unique total to 106. Both exact storage manifests retain repository-device workspace/cache/trace and cleanup proof."
+evidence_update_2026_08_01_lua_callable_emission: "FUTURE-PARITY-BACKLOG.11.8.3 registers the existing focused Lua callable consumer when it begins writing and independently loading emitted modules. This advances Lua from 16 to 17 temporary owners and the tracked cross-family unique total from 106 to 107; the same consumer proves cleanup after success and injected failure on PUC Lua and LuaJIT."
 reverify: "bash scripts/check_project_data_storage_locality.sh && bash scripts/check_doctrines.sh && bash tools/project_data_run.sh --list"
 ---
 
@@ -67,8 +68,8 @@ Tracked allocation is broader. The planning scan reported 100 files, including R
 one imported `env::temp_dir()` spelling that the original fully-qualified pattern missed. The corrected initial
 unique total was 101 and the Rust count is 17. `FUTURE-PARITY-BACKLOG.10.7.6.1` later adds one routed Lua test,
 and `FUTURE-PARITY-BACKLOG.11.5.2` later adds one emitted-Dart workspace owner. Subsequent Lua MCP routes add two
-owners and Julia callable construction adds one emitted-module owner, so the current unique total is 106 and
-family counts are Perl 24, Dart 19, Julia 18, Lua 16,
+owners, Julia callable construction adds one emitted-module owner, and Lua callable emitted-route proof adds one
+owner, so the current unique total is 107 and family counts are Perl 24, Dart 19, Julia 18, Lua 17,
 Python three, and shell 12; multi-language harnesses overlap. Twenty-four
 executable files contain explicit off-repository storage defaults. The initial audit found 97 fact cards with 107
 durable old temporary/home-depot command lines; `.2.4` migrates all 88 existing current Julia cards onto supported managed
@@ -116,7 +117,7 @@ Julia-managed system depots remain as strictly required external read-only runti
 
 Lua now has equivalent ongoing protection. `tools/run_lua_project_data.sh` builds an isolated two-module native
 set for the selected PUC Lua or LuaJIT ABI below managed scratch. `tools/test_lua_project_data_storage.sh` locks all
-14 allocation owners, actual module/generated/trace devices, non-symlink identity, quoting through a path with a
+17 allocation owners, actual module/generated/trace devices, non-symlink identity, quoting through a path with a
 space, native parsing, and pre-create rejection of an other-filesystem builder destination. Both exact old-root
 `linkedspec-lua-*` censuses are zero, so no old Lua payload existed to copy or delete. Required interpreters,
 compiler, headers, and libraries remain strictly necessary read-only external inputs.

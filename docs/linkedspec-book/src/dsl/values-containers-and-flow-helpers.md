@@ -230,17 +230,17 @@ finishes. The block is not a closure, assignable value, returnable value, or del
 caller's current action/runtime context: captures, `retv`, cursor state, helper/function visibility, and ordinary
 working-variable side effects are the same as the call site. Only the working binding `value` is portable as the
 scoped block parameter in this MVP; mutations to other variable names persist after `with` returns. Bare
-`with { ... }`, explicit receiver `.with(value) { ... }`, and delayed callback semantics are not current portable
-surfaces.
+`with { ... }`, explicit receiver `.with(value) { ... }`, and treating an ordinary `{ statements }` value as a
+general delayed callback are not current portable surfaces; explicit delayed callbacks use `{|params| ...}`.
 
 Across all backends this shipped surface is still narrower than the complete five-backend language abstraction. LinkedSpec's four object/value kinds are
 scalar, array, harray (called `hash` by the current authoring helpers), and codeblock. For a callable whose
 signature accepts a final codeblock, the contract is that `call(args) { ... }` and
 `call(args, { ... })` are equivalent spellings of the same call; the same rule applies to helper functions, user
-functions, and receiver methods. Perl, Rust, Dart, and Julia implement that equivalence for metadata-declared
-`with`, typed user functions, and receiver `with`/tree-traversal surfaces. Lua's implemented contextual subsets are
-documented in its backend handoff; explicit callable values remain separately owned there, so the complete
-five-backend surface is not yet portable. ADR 0031 and completed
+functions, and receiver methods. Perl, Rust, Dart, Julia, and Lua implement that equivalence for metadata-declared
+`with`, typed user functions, and receiver `with`/tree-traversal surfaces. Lua implementation is current on both
+ABIs; final recurring five-backend admission remains separately owned, so implementation and admitted governance
+are not conflated. ADR 0031 and completed
 `FUTURE-PARITY-BACKLOG.11.1` select an explicit literal:
 
 ```text
@@ -264,11 +264,9 @@ parameters, is invoked with zero arguments, and reads the callable's current dyn
 is deferred; invocation uses the caller's current nonparameter stores, temporarily binds copied parameters, keeps
 `return(...)` block-local, and captures no lexical environment. `{|` is distinct from harray literals and current
 eager `{ statements }` block expressions. `with` remains an ordinary helper. The executable neutral
-`linkedspec-callable-codeblock-v1` contract locks this design and its fixture. Perl, Rust, Dart, and Julia parse these
+`linkedspec-callable-codeblock-v1` contract locks this design and its fixture. Perl, Rust, Dart, Julia, and Lua parse these
 literals and preserve their signature/body/source/span record through assignment, user functions, serialization,
-and generated source. Lua now preserves the same inert record through those construction/state paths on both ABIs,
-but does not yet execute an ordinarily bound value. Perl, Rust, Dart, and Julia execute a bound value through
-`cb(args)`. Arguments evaluate once
+and generated source. All five execute a bound value through `cb(args)`. Arguments evaluate once
 from left to right before temporary copied fixed/rest parameters bind. Prior parameter values restore even when the body fails;
 nonparameter reads and writes use the caller's current working slots. `return(...)` exits only the codeblock, a
 final expression is the implicit result, compatible receiver chains may continue, and a standalone call discards
@@ -323,7 +321,28 @@ After static callables, one executor invokes an ordinary bound codeblock with on
 copied fixed/rest bindings, live caller nonparameters, local return/final result, and ordered recursion rejection.
 Typed `value_access` lets call results feed key/index lookup and receiver chains. Colon keyword calls are typed only
 for rejection; `name = value` stays positional. Exact arity/keyword/non-callable/unknown/cycle diagnostics agree on
-PUC Lua and LuaJIT. There is no Lua closure or second codec/executor.
+PUC Lua and LuaJIT. Native, canonical reconstruction, generated-plan, and fresh emitted-module execution compile
+and run the same record. Built-in final callbacks resolve before scoped `value`, so contextual, explicit, and
+bound helper/receiver/tree callbacks share that executor; nested anonymous helpers are not bound-name recursion,
+while a callback passed by variable retains that variable's recursion identity through helper dispatch.
+There is no Lua closure or second codec/executor.
+
+For example, callback lookup occurs before `with` installs its scoped binding, even when the callback itself is
+stored under the name `value`:
+
+```text
+value = {|item| return(cat(item, "!")) }
+result = with("ready", value)  # "ready!"
+
+nested = with("outer") {
+  return(with("inner") { return(value) })
+}
+# nested == "inner"; two anonymous with-blocks are not recursion
+
+callback = {|item| return(with(item, callback)) }
+callback("x")
+# RuntimeInterpreterException: cycle ["callback", "callback"]
+```
 
 On Perl, Rust, Dart, Julia, and Lua, `apply("x") { return(value) }` and `apply("x", { return(value) })` normalize to the same contextual
 zero-positional codeblock when `apply` declares a final `callback: codeblock`. The same metadata rule governs the
@@ -352,8 +371,8 @@ Perl, Rust, Dart, Julia, and Lua report exact arity, keyword-call, bound-non-cod
 failures as typed runtime details. A governed helper/control or registered user function still wins over a
 same-named variable. Explicit construction, `cb(...)` invocation, and generic contextual final-block spellings are
 current on all five backends. Four-backend recurring/public no-drift remains complete under `.11.7`; Lua
-construction/invocation are current under `.11.8.1-.2`, while emitted-route proof and five-backend admission remain
-`.11.8.3-.4`.
+construction/invocation/emitted identity are signoff-complete under `.11.8.1-.3`, while five-backend admission
+remains `.11.8.4`.
 
 Hash receiver trailing blocks also support deterministic tree traversal. A hash tree has a hash root. Nested hash
 values are interior nodes; all non-hash values, including arrays, are leaves. `walk_leaves() { ... }` visits each

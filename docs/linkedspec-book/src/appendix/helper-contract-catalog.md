@@ -107,10 +107,10 @@ dispatch rule.
 
 - **Signature**: `with(value?: expr) { block }`; receiver form `receiver.with() { block }`
 - **Returns**: the immediate block result.
-- **Backend status**: Perl, Rust, Dart, Julia, and Lua support the attached helper and receiver forms. Perl, Rust,
-  Dart, and Lua additionally normalize `with(value, { ... })` and `.with({ ... })` through declared
-  final-codeblock metadata. Bare `with { ... }` and explicit receiver `.with(value) { ... }` are not current
-  surfaces; the parenthesized contextual spellings are not portable until Julia adopts the same metadata contract.
+- **Backend status**: Perl, Rust, Dart, Julia, and Lua support attached and parenthesized contextual helper/receiver
+  forms through declared final-codeblock metadata. They also accept an explicit `{|item| ...}` or bound codeblock
+  value in that final slot. Bare `with { ... }` and explicit receiver `.with(value) { ... }` are not current
+  surfaces.
 - **Behavior**: Helper form evaluates the optional value argument, binds scoped working value `value` while the trailing
   block executes, restores any surrounding `value` binding afterward, and yields the block result. `with() { ... }`
   binds `value` to `undef`. Receiver form evaluates the receiver first, binds that receiver value as scoped
@@ -135,21 +135,12 @@ dispatch rule.
 
 > **Current portability boundary:** The language model has scalar, array, harray/hash, and codeblock values. A
 > block-taking callable declares an exact final-only `name: codeblock` parameter, with no callback argument list;
-> attached/contextual final-block forms then normalize to the same call on helper,
-> user-function, and receiver-method surfaces. ADR 0031 selects future explicit literals as `{|args| body }`,
-> dynamic caller context without lexical capture, and retained `with`. Neutral contract `.11.2` is adopted and
-> checked. Perl now preserves and invokes explicit literal records through `cb(args)` with copied/restored params,
-> caller-visible nonparameter mutation, result chaining/discard, and typed failures. Generic contextual final-block
-> declaration is adopted by ADR 0032, and Perl normalization `.11.3.3.2` now applies it to helper, typed user-
-> function, and receiver surfaces. Rust `.11.4.1-.2` now preserves the same typed literal and invokes `cb(args)`
-> with once-only arguments, dynamic caller stores, copied/restored fixed/rest bindings, local results, exact typed
-> failures, and native/serialized/generated/emitted identity. Rust `.11.4.3` and Dart `.11.5.3` apply one
-> metadata-owned normalizer to helper, typed-user-function, receiver `with`, and tree-traversal contextual forms.
-> Lua `.4.3.6.4` consumes the declaration for built-in helper/receiver `with`, with cleanup-safe copied
-> scope; `.4.3.6.6` closes current Lua built-in/callback no-drift. Lua general user-function `callback: codeblock`
-> execution is current through `.5.1`, while explicit literals/dynamic calls remain `.11.8` after four-backend
-> governance `.11.7`. Cross-backend parity remains future, so do not treat explicit values as universally
-> portable yet.
+> attached/contextual final-block forms normalize to the same call on helper, user-function, receiver, and tree
+> surfaces. ADR 0031 defines explicit `{|args| body }` values, dynamic caller context without lexical capture, and
+> retained `with`; ADR 0032 defines the metadata-owned final slot. Perl, Rust, Dart, Julia, and Lua construct and
+> invoke explicit values and normalize governed contextual forms through their ordinary codeblock executors.
+> Lua's native, reconstructed, generated-plan, and fresh emitted-module paths are implementation-current on PUC
+> Lua and LuaJIT under `.11.8.1-.3`; final recurring five-backend/public admission remains `.11.8.4`.
 
 ## 1. Working Variables and Setup
 

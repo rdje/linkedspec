@@ -185,7 +185,7 @@
       {"path": "LIVE_ACHIEVEMENT_STATUS.md", "required_markers": ["Four-backend callable public no-drift is signoff-complete", "parent `.11.7` is closed"]},
       {"path": "docs/TASK_TREE.md", "required_markers": ["Callable-codeblock parent `.11.7` is closed at four admitted backends"]},
       {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "required_markers": ["four-backend recurring/public closeout is complete under `.11.7`", "Lua explicit callable-codeblock construction and general bound invocation are current under"]},
-      {"path": "docs/linkedspec-book/src/appendix/formal-grammar.md", "required_markers": ["### Callable-codeblock literal and dynamic call (five-backend construction and invocation)", "Independently loaded emitted-route proof and five-backend admission remain `.11.8.3-.4`"]},
+      {"path": "docs/linkedspec-book/src/appendix/formal-grammar.md", "required_markers": ["### Callable-codeblock literal and dynamic call (five-backend construction and invocation)", "Lua `.11.8.3` proves canonical reconstruction, generated-plan, and independently loaded emitted-route"]},
       {"path": "docs/linkedspec-book/src/architecture/owner-tree.md", "required_markers": ["`LinkedSpec::CodeblockRuntime`", "`RuntimeContext` owns temporary uniform-binding"]},
       {"path": "docs/linkedspec-book/src/compiler/pipeline-overview.md", "required_markers": ["same dynamic codeblock evaluator as explicit", "existing Julia dynamic codeblock"]},
       {"path": "docs/linkedspec-book/src/development/local-ci-and-regression.md", "required_markers": ["### Callable-codeblock four-backend recurring proof", "`LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1`", "intentionally remain outside this recurring driver until `.11.8.4`"]},

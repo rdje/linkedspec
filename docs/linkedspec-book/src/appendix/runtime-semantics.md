@@ -330,7 +330,13 @@ nonparameter caller stores, local return/results, typed failures, and ordered re
 preserves exact final-only callable metadata and normalizes only signature-governed attached/parenthesized final
 blocks through the same executor.
 
-On Perl, Rust, Dart, and Julia, callable metadata may declare one final codeblock parameter. At those governed call sites,
+Lua follows the same rule on PUC Lua and LuaJIT. One typed record crosses native compilation, canonical effective-
+`SpecFile` reconstruction, generated-plan execution, and independently loaded emitted modules. Built-in final
+callbacks resolve before scoped `value` and enter the ordinary dynamic executor as contextual, explicit, or bound
+values. Only ordinary bound names participate in recursion tracking, so nested anonymous built-in callbacks are
+not a helper-name cycle.
+
+On Perl, Rust, Dart, Julia, and Lua, callable metadata may declare one final codeblock parameter. At those governed call sites,
 `call(args) { statements }` and `call(args, { statements })` defer the immediate block as the same
 zero-positional `codeblock_argument`; the body reads the current dynamic context when invoked. In every ordinary
 argument position, `{ statements }` remains an eager block value. An explicit `{|params| statements }` always

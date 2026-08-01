@@ -14,6 +14,7 @@ status: current
 tags: [lua, functions, codeblock, dynamic-scope, diagnostics, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.5.1.4.2 passes 146/146 on PUC Lua and LuaJIT. Focused tests prove both contextual spellings, current-frame reads/writes, outer restoration, result chaining, static helper/function precedence, and typed missing/harray/arity/recursion failures."
 evidence_update_2026_08_01_explicit_invocation: "FUTURE-PARITY-BACKLOG.11.8.1-.2 add explicit {|params| ...} construction and general post-static bound invocation, then route contextual and explicit records through one scoped executor on PUC Lua and LuaJIT."
+evidence_update_2026_08_01_emitted_identity: "FUTURE-PARITY-BACKLOG.11.8.3 routes built-in contextual, explicit, and bound final callbacks through the same executor and proves native/reconstructed/generated/fresh-emitted identity at 449 assertions per ABI."
 reverify: "bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py"
 ---
 
@@ -32,8 +33,9 @@ value reports `final_argument_not_codeblock`; a contextual call with arguments r
 active self-invocation reports `codeblock_recursion_unsupported` with a cycle. Metadata still governs which
 callables accept contextual final-block syntax, but the stored zero-positional record now executes through the
 same scoped evaluator as explicit `{|params| ...}` values and general bound dynamic calls. Those explicit forms
-are current under `FUTURE-PARITY-BACKLOG.11.8.1-.2`; independently loaded emitted identity and final recurring/
-public admission remain `.11.8.3-.4`.
+are current under `FUTURE-PARITY-BACKLOG.11.8.1-.2`; independently loaded emitted identity is current under
+`.11.8.3`, and final recurring/public admission remains `.11.8.4`.
 
 Related facts: [[lua-final-codeblock-metadata]], [[perl-generic-final-codeblock-normalization]],
-[[callable-codeblock-literal-contract]], [[lua-fixed-v1-user-function-runtime]].
+[[callable-codeblock-literal-contract]], [[lua-callable-codeblock-emitted-route-identity]],
+[[lua-fixed-v1-user-function-runtime]].

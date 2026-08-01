@@ -1,5 +1,27 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-01 — Lua callable-codeblock emitted identity is signoff-complete
+
+`FUTURE-PARITY-BACKLOG.11.8.3` now proves one typed callable record and interpreter across native compilation,
+canonical effective-`SpecFile` reconstruction, generated-plan execution, and independently loaded emitted modules
+on PUC Lua and LuaJIT. The emitter continues to embed canonical strict-UTF-8 JSON as lowercase ASCII hex; it adds
+no callable codec, closure, host function, or generated-only executor.
+
+Built-in final helper/receiver/tree slots now evaluate and validate contextual, explicit, or bound callbacks before
+installing scoped `value`, then enter the same executor as ordinary dynamic calls. Bound names retain exact ordered
+direct/mutual recursion detection; anonymous nested built-in callbacks do not claim the helper name as callable
+identity, while callbacks passed by variable retain that variable's identity through helper dispatch. The focused
+consumer locks callback lookup from a caller binding named `value`, nested `with`, all neutral
+valid/invalid routes, exact emitted bytes and wrapper/runtime detail, corrupt payload rejection, and cleanup after
+normal and injected-failure paths.
+
+Focused proof passes 449 assertions per ABI. Complete Lua passes all 177 TAP groups on both ABIs, CLI 66x2, corpus
+105/105, and the storage census at exact owner 17. Neutral+20, signatures 3/9/7, capability 80/0/0, Knowledge Map
+779/6,322, the sole-facing mdBook at 79 files / 14,048 KiB, and all seven doctrines pass. The definitive canonical
+gate proves containment/moved-root execution, CLI 66x2, RAM 51%, Phase 0 1,031/1,031 in 809 seconds, and the exact
+four-backend callable matrix before `local CI gate passed`. `.11.8.4` alone owns recurring five-backend/public/
+capability admission, so the 80/0/0 census and four-backend callable topology remain unchanged.
+
 ## 2026-08-01 — Lua callable-codeblock dynamic invocation is signoff-complete
 
 `FUTURE-PARITY-BACKLOG.11.8.2` now gives PUC Lua and LuaJIT the neutral `cb(args)` dynamic caller-context model.

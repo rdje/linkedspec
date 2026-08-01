@@ -34,14 +34,14 @@
 > v2. The repeated-action recurring gate is `tools/check_repeated_action_result_five_backend.sh`; its public
 > rollout is closed at 8 complete / 0 pending.
 
-> **Active Lua callable-codeblock handoff:** `FUTURE-PARITY-BACKLOG.11.8.1-.2` now preserve and invoke exact
+> **Active Lua callable-codeblock handoff:** `FUTURE-PARITY-BACKLOG.11.8.1-.3` now preserve and invoke exact
 > `{|params| body }` / `{|| body }` as the neutral inert eight-field value on PUC Lua and LuaJIT. Exact signature,
 > typed deferred body, source/body text and containing Unicode-character spans survive copies, ordinary user
 > functions, compiled/generated/emitted effective state, and semantic projection without execution or capture.
 > Post-static bound invocation now reuses the existing scoped binder/interpreter for ordered copied arguments,
-> live caller nonparameters, local results/access/chaining, exact failures, and ordered recursion. Lua must next
-> prove the unchanged value/executor through effective-`SpecFile` reconstruction and byte-fresh emitted modules on
-> both ABIs. Only the final recurring/public leaf may admit Lua. Colon keywords are typed only for governed
+> live caller nonparameters, local results/access/chaining, exact failures, and ordered recursion. Canonical
+> effective-`SpecFile` reconstruction, generated-plan execution, and byte-fresh emitted modules now reuse that
+> exact state and executor on both ABIs. Only the final recurring/public leaf may admit Lua. Colon keywords are typed only for governed
 > rejection; `name = value` remains positional. No closure, captured environment, second codec, or second executor
 > is part of the handoff.
 
@@ -1007,7 +1007,8 @@ now split: `.1` eager expression blocks, `.2` inline controls, `.3` statement co
 contextual blocks/`with`, `.5` deterministic callbacks, and `.6` closeout. General user-function final blocks are
 complete through `.5.1`; four-backend recurring/public closeout is complete under `.11.7`.
 Lua explicit callable-codeblock construction and general bound invocation are current under
-`FUTURE-PARITY-BACKLOG.11.8.1-.2`; emitted execution identity and final admission remain `.11.8.3-.4`.
+`FUTURE-PARITY-BACKLOG.11.8.1-.2`; emitted execution identity is current under `.11.8.3`, and final admission
+remains `.11.8.4`.
 Eager blocks plus lazy inline controls pass 105/105: ordinary no-pair braces yield their last/local-return
 value, non-final statement mutation is preserved, harray braces retain precedence, and yielded values enter
 receiver dispatch. Inline `if`/`switch` evaluates only selected payloads, keeps false/null, evaluates switch
@@ -1584,7 +1585,8 @@ typed result access, portable failures/recursion, and native/reconstructed/gener
 helpers, receiver `with`, and tree traversal through the same evaluator. Julia `.11.6.1-.3` now admit the same
 inert explicit-literal construction/state, dynamic invocation, generated reconstruction, semantic shape, exact
 final-only staged/descriptor metadata, and generic contextual equivalence through one post-registry contract owner
-and the existing evaluator. Lua still lacks explicit literal values. Semantic
+and the existing evaluator. Lua `.11.8.1-.3` now implements the same literal, dynamic/contextual, and native/
+reconstructed/generated/fresh-emitted behavior on both ABIs; `.11.8.4` still owns recurring admission. Semantic
 introspection and thin MCP are separately complete. No backend is called complete while a current matrix state
 remains partial or gap.
 

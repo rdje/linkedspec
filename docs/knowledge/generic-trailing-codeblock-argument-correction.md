@@ -13,6 +13,7 @@ date: 2026-07-10
 status: current
 tags: [spec-format-terse, codeblock, trailing-block, values, parity, future-parity-backlog]
 evidence: "Director clarification 2026-07-10; FUTURE-PARITY-BACKLOG.11/.11.0/.11.1; docs/tasks/SPEC-FORMAT-TERSE.md .14; LinkedSpec::call_spec_handler_subst probes; perl/LinkedSpec/ActionIR/AST/Parser.pm; perl/LinkedSpec/ActionIR/MethodLowering.pm; rust/linkedspec-core/src/expr.rs; dart/lib/src/action/action_parser.dart; dart/lib/src/runtime/interpreter.dart; julia/src/action/ActionParser.jl; julia/src/runtime/Interpreter.jl; current focused tests and mdBook helper contract"
+evidence_update_2026_08_01_five_implementations: "Perl .11.3, Rust .11.4, Dart .11.5, Julia .11.6, and Lua .11.8.1-.3 now implement explicit literals, dynamic calls, and metadata-governed contextual helper/user-function/receiver/tree equivalence through their ordinary evaluators. Lua five-backend recurring admission remains .11.8.4."
 reverify: "perl -Iperl -MLinkedSpec -e 'for my $s (q{return(with(\"x\") { return(value) })}, q{return(with(\"x\", { return(value) }))}, q{return(unknown(\"x\") { return(value) })}) { print LinkedSpec::call_spec_handler_subst(\"Top\", $s), qq{\\n}; }' && rg -n 'parse_optional_trailing_block_arg|name != \"with\"|parse_non_with_helper_does_not_accept|trailingBlockArg|trailing_block_arg|FUTURE-PARITY-BACKLOG\\.11' rust/linkedspec-core/src/expr.rs dart/lib/src julia/src docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -32,33 +33,22 @@ non-final codeblocks, receiver behavior, execution context, block-local return,
 and hash-literal disambiguation remain contract-validation concerns shared by
 every backend.
 
-The pre-correction implementation was narrower: Perl, Rust, Dart, and Julia implemented named `with` and selected
-tree-traversal block forms, while Lua was absent. Lua now executes metadata-governed helper/receiver `with` in
-both attached and parenthesized form; its tree callbacks, user functions, and explicit callable values remain
-separately owned. The closed `SPEC-FORMAT-TERSE.14` contract explicitly excluded
-the parenthesized final-block form and arbitrary block-taking callables. Its Perl probe accepted attached `with`
-but rejected the parenthesized equivalent. Perl has since replaced that limitation with metadata-governed
-helper/user-function/receiver normalization and generic structural receiver parsing. Rust remains explicitly
-name-gated; Dart and Julia parse generic trailing-block nodes but runtime dispatch still accepts only named
-supported surfaces; Lua's complete generic callable parity remains planned beyond its current built-in `with`.
+The pre-correction implementation was narrower: named `with` and selected tree forms were special cases, the
+closed `SPEC-FORMAT-TERSE.14` contract excluded parenthesized final blocks and arbitrary block-taking callables,
+and Lua was absent. ADRs 0031/0032 and neutral contract `.11.2` replaced that model with explicit
+`{|params| body }` values plus final-only `name: codeblock` metadata. The parser records structure; the completed
+registry/signature decides whether contextual braces are deferred.
 
-Historically, generic equivalence could not be confirmed for any variant. Full all-callable/all-variant support
-still cannot be claimed; Lua's current `with` slice does not include tree callback execution, general user
-functions, or first-class callable values. `FUTURE-PARITY-BACKLOG.11.1` and ADR 0031
-close the corrective design: explicit callable literals use `{|params| body }`, execute later through `cb(args)`,
-and use dynamic caller context without lexical capture. Attached/contextual final blocks remain signature-governed
-sugar over the same canonical codeblock-argument node. `with` remains an ordinary block-taking helper rather than
-a parser exception. Neutral contract `.11.2` precedes the split backend rollout as an adopted executable
-schema/fixture. Perl `.11.3.1` preserves typed literal records and `.11.3.2` invokes them dynamically. Audit
-`.11.3.3.0` proves the parser payload shape is compatible but the declaration was missing. ADR 0032 and
-`.11.3.3.1` now adopt final-only `name: codeblock`; it has no nested argument list because explicit codeblock
-values own their `{|params| ...}` signatures. Perl behavior `.11.3.3.2` now normalizes metadata-declared helper,
-typed user-function, and receiver contextual forms. Perl no-drift closeout `.11.3.4` is complete; other backends
-remain future.
+Perl `.11.3`, Rust `.11.4`, Dart `.11.5`, Julia `.11.6`, and Lua `.11.8.1-.3` now implement that correction.
+Metadata-governed helper, typed-user-function, receiver, and tree forms normalize to zero-positional contextual
+codeblocks, while explicit literals retain their authored signatures. All enter each backend's ordinary dynamic
+codeblock evaluator across its native/reconstructed/generated/emitted routes. `with` remains an ordinary helper,
+not parser authority. The existing recurring public gate still admits four backends; Lua replacement admission is
+separately owned by `.11.8.4`.
 
 Related facts: [[terse-trailing-block-argument-mvp]],
 [[dart-runtime-value-control-tree-helpers]],
 [[julia-runtime-value-control-tree-helpers]], [[perl-final-codeblock-signature-declaration-gap]],
 [[perl-generic-final-codeblock-normalization]],
 [[cross-variant-output-parity]],
-[[callable-codeblock-literal-contract]].
+[[callable-codeblock-literal-contract]], [[lua-callable-codeblock-emitted-route-identity]].

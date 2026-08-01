@@ -18,6 +18,7 @@ evidence_update_2026_08_01_recurring_gate: "FUTURE-PARITY-BACKLOG.11.7.1 compose
 evidence_update_2026_08_01_public_closeout: "FUTURE-PARITY-BACKLOG.11.7.2 omission-locks 23 public documents and nine stale-claim denials through three additional governance mutations; public no-drift closes parent `.11.7` while Lua explicit values/general calls remain `.11.8`."
 evidence_update_2026_08_01_lua_construction: "FUTURE-PARITY-BACKLOG.11.8.1 implements the same inert eight-field literal/signature/body/span state on PUC Lua and LuaJIT while leaving general invocation and final admission pending."
 evidence_update_2026_08_01_lua_invocation: "FUTURE-PARITY-BACKLOG.11.8.2 implements the same post-static dynamic caller-frame invocation, result access, exact failures, and ordered recursion on PUC Lua and LuaJIT; recurring admission remains pending."
+evidence_update_2026_08_01_lua_emitted_identity: "FUTURE-PARITY-BACKLOG.11.8.3 proves the same typed state and executor across native, canonical effective-SpecFile reconstruction, generated-plan, and fresh emitted modules on both Lua ABIs; only recurring five-backend admission remains .11.8.4."
 reverify: "bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && rg -n '0031|0032|name: codeblock|dynamic caller|FUTURE-PARITY-BACKLOG\\.11\\.[1-8]' docs/decisions/0031-callable-codeblock-literal-and-dynamic-context.md docs/decisions/0032-final-codeblock-parameter-declaration.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -66,8 +67,8 @@ identity. Dart contextual behavior is current through `.11.5.3`. Julia `.11.6.1-
 record and executes bound calls with ordered arguments, copied/restored bindings, live caller stores, local
 results/access, exact failures/recursion, and native/reconstructed/generated/emitted identity. Julia contextual
 behavior is current through `.11.6.3`. Lua contextual final blocks, inert explicit construction, and general bound
-calls are current through `.11.8.2`. Independently loaded emitted-route proof and five-backend admission remain
-`.11.8.3-.4`, so recurring complete-portability status has not moved yet.
+calls are current through `.11.8.2`; independently loaded emitted-route identity is current under `.11.8.3`.
+Five-backend admission remains `.11.8.4`, so recurring complete-portability status has not moved yet.
 
 Related facts: [[generic-trailing-codeblock-argument-correction]], [[variadic-user-function-contract]],
 [[terse-expression-valued-blocks-ground-truth]], [[hash-literal-dynamic-key-contract]],
@@ -75,4 +76,4 @@ Related facts: [[generic-trailing-codeblock-argument-correction]], [[variadic-us
 [[dart-callable-codeblock-literal-state]], [[dart-callable-codeblock-dynamic-invocation]],
 [[julia-callable-codeblock-literal-state]], [[julia-callable-codeblock-dynamic-invocation]], and
 [[lua-callable-codeblock-literal-state]], [[lua-callable-codeblock-dynamic-invocation]], and
-[[callable-codeblock-four-backend-recurring-gate]].
+[[lua-callable-codeblock-emitted-route-identity]], [[callable-codeblock-four-backend-recurring-gate]].

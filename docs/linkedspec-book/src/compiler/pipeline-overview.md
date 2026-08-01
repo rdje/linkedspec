@@ -156,8 +156,10 @@ On Lua, both calls return `"HELLO"`. The contextual block is always zero-positio
 function frame; it is not a lexical closure. Writes to other names are visible to later statements in that
 function invocation, while the outer caller is restored when the function returns. A keyed brace literal remains
 a harray and fails the declared codeblock slot. Registered functions and governed helpers keep static precedence
-over a colliding parameter name. Explicit `{|params| ...}` values and arbitrary bound codeblock calls remain a
-separate later Lua milestone.
+over a colliding parameter name. Explicit `{|params| ...}` values and ordinary bound `cb(args)` calls are now
+current too. Built-in final slots resolve contextual, explicit, or bound callbacks before scoped `value`, then
+reuse the same executor. Canonical effective-`SpecFile` reconstruction, generated plans, and fresh emitted modules
+all compile and execute that same typed state on PUC Lua and LuaJIT.
 
 Rust carries the same final-only `parameter_kinds` through the spec-owned function shell, staged body payload/job,
 typed AST, compiled function, version-3 descriptor, and emitted compiled state. Its compiler-facing ActionIR parse

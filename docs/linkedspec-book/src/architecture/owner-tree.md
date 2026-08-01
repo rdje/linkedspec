@@ -484,6 +484,20 @@ attached-control parsing keeps `if`/`switch`/`while` outside the generic candida
 restores ordinary parenthesized blocks, rejects unknown attached callees, projects version-3 final
 `parameter_kinds`, and routes execution through the dynamic evaluator above rather than a second block runtime.
 
+Lua construction is owned by `linkedspec.action_ast` and `linkedspec.action_parser`. Exact `{|` recognition runs
+before harray/eager-block classification; `ActionCallableSignature` and `codeblock_literal` retain the neutral
+fixed/final-rest signature, typed body, exact source, and containing Unicode-character spans. Copies reparse that
+typed source at its original offset. Compiled ActionIR JSON and the source emitter's canonical effective-`SpecFile`
+JSON/ASCII-hex payload preserve the same record without a Lua closure or callable-specific decoder.
+`linkedspec.interpreter` resolves a bound name only after controls, helpers, and registered functions, while
+`runtime_scoped_binding` owns copied fixed/rest restoration and caller nonparameter stores remain live.
+`callable_codeblock.execute_values` is the common body executor for ordinary bound calls and governed final
+helper/receiver/tree callbacks. Final callback expressions resolve before scoped `value`; anonymous callbacks do
+not claim the helper name in `active_codeblocks`, while a callback passed by variable retains that binding name.
+Thus nested built-ins do not create false recursion and helper-mediated bound recursion remains detectable. Native, canonical
+reconstruction, generated-plan, and independently loaded emitted modules all enter these same owners on PUC Lua
+and LuaJIT.
+
 `LinkedSpec::CallableContract` is the Perl metadata owner for contextual final-codeblock acceptance. It declares
 the final `codeblock` slot and pre-codeblock arity for governed helpers and receiver methods, projects the same
 contract from typed user-function descriptors, and converts contextual `block_value` nodes into one

@@ -60,8 +60,9 @@ The declaration is only `callback: codeblock`; it does not repeat the callback's
 forms create a zero-positional codeblock that reads dynamic context. An explicit `{|value| ...}` keeps and enforces
 its own signature, and `{ "key" : value }` remains an harray rather than being promoted by position. This generic
 final-block behavior is current on Perl, Rust, Dart, Julia, and Lua. Lua construction and bound invocation are
-current under `.11.8.1-.2`; independently loaded emitted-route proof and five-backend admission remain
-`.11.8.3-.4`. Four-backend recurring/public no-drift remains complete under `.11.7` until final admission.
+current under `.11.8.1-.2`; independently loaded emitted-route identity is current under `.11.8.3`, while five-
+backend admission remains `.11.8.4`. Four-backend recurring/public no-drift remains complete under `.11.7` until
+final admission.
 
 The LinkedSpec Book under `docs/linkedspec-book/src/` is the current user-facing surface for new examples. The
 repo-root `USER_GUIDE_ActionIR_*.md` files are still useful implementation and migration references, but many of

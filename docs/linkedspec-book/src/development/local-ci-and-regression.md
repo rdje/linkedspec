@@ -722,8 +722,8 @@ Canonical local CI always requires and syntax-checks the driver. Set
 `LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1` to execute the all-toolchain composition. The checker rejects 17
 topology and status mutations, including missing/reordered roles, stale paths, project-data bypass, missing or
 duplicated canonical execution, and premature Lua/five-backend admission claims, plus three public inventory/
-marker/denylist omissions. Perl, Rust, Dart, and Julia are admitted; Lua construction and invocation are now
-focused-current under `.11.8.1-.2` but intentionally remain outside this recurring driver until `.11.8.4`.
+marker/denylist omissions. Perl, Rust, Dart, and Julia are admitted; Lua construction, invocation, and emitted
+identity are signoff-complete under `.11.8.1-.3` but intentionally remain outside this recurring driver until `.11.8.4`.
 Four-backend public no-drift covers 23 current-facing documents.
 
 Lua's focused construction/invocation consumer is already part of the complete Lua gate on both ABIs:
@@ -734,10 +734,17 @@ bash tools/run_lua_project_data.sh luajit lua/test/callable_codeblock_literal_co
 bash tools/run_lua_local.sh
 ```
 
-It passes 232 assertions per ABI for exact literal/signature/body/span records, inert copy/transport, dynamic caller
+It passes 449 assertions per ABI for exact literal/signature/body/span records, inert copy/transport, dynamic caller
 context, static precedence, declared-final equivalence, ordered copied fixed/rest values, result access/chaining,
-and every neutral failure/recursion field. This does not add Lua to the recurring driver: `.11.8.3` still owns
-byte-fresh emitted execution, and `.11.8.4` alone owns five-backend recurring/public admission.
+every neutral failure/recursion field, canonical reconstruction, generated execution, and byte-fresh emitted
+modules with corrupt-payload and cleanup proof. This does not add Lua to the recurring driver: `.11.8.4` alone owns
+five-backend recurring/public admission.
+
+The `.11.8.3` signoff preserves that boundary while passing complete Lua 177x2, CLI 66x2, corpus 105/105, exact
+storage owner 17, neutral callable governance plus 20 mutations, signatures 3/9/7, and capability 80/0/0. The
+Knowledge Map is 779 facts / 6,322 question keys and this book renders 79 files / 14,048 KiB. All seven doctrines
+and the canonical gate pass, including containment/moved-root proof, RAM 51%, Phase 0 1,031/1,031 in 809 seconds,
+and the exact four-backend callable matrix.
 
 ## Hosted GitHub Actions status
 
@@ -1171,7 +1178,7 @@ The recurring process oracle is:
 $ bash tools/test_lua_project_data_storage.sh
 ```
 
-It freezes the exact 16 Lua-family allocation owners, requires every Lua owner to read routed `TMPDIR`, rejects
+It freezes the exact 17 Lua-family allocation owners, requires every Lua owner to read routed `TMPDIR`, rejects
 hard-coded operating-system temporary templates and anonymous `io.tmpfile()`, and builds both three-module ABI sets
 below a managed path containing a space. It checks actual filesystem identity and non-symlink module files, runs a
 real native parse, writes generated-source v2 and trace output, rejects an other-filesystem builder destination,
