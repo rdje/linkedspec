@@ -830,7 +830,8 @@ Three backbone items tracked major structural modernization — all done:
   provide exact inert literal/signature/body/source/Unicode-span state, dynamic bound-variable invocation, exact
   final-only staged/descriptor metadata, and one governed contextual normalizer across native, serialized,
   generated, emitted, user-function, and semantic authorities. Audit `.11.7.0` proves those four implementations
-  focused-green and routes their recurring/public closeout to `.11.7.1-.2`; Lua explicit-literal/general-call
+  focused-green, recurring gate `.11.7.1` composes them, and public no-drift `.11.7.2` omission-locks the current
+  projection. Four-backend recurring/public no-drift is complete under `.11.7`; Lua explicit-literal/general-call
   parity is separately dependency-owned by `.11.8`.
 - **Dart callable-codeblock construction and invocation** - `FUTURE-PARITY-BACKLOG.11.5.1` recognizes exact `{|params| body }`
   before Dart's harray/eager-block classifier and preserves the neutral eight-field record as inert plain data.

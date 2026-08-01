@@ -57,7 +57,7 @@ The declaration is only `callback: codeblock`; it does not repeat the callback's
 forms create a zero-positional codeblock that reads dynamic context. An explicit `{|value| ...}` keeps and enforces
 its own signature, and `{ "key" : value }` remains an harray rather than being promoted by position. This generic
 final-block behavior is current on Perl, Rust, Dart, and Julia. The remaining separately documented Lua explicit
-callable-value work and the cross-backend closeout remain task-tree-owned future work.
+callable-value work stays under `.11.8`; four-backend recurring/public no-drift is complete under `.11.7`.
 
 The LinkedSpec Book under `docs/linkedspec-book/src/` is the current user-facing surface for new examples. The
 repo-root `USER_GUIDE_ActionIR_*.md` files are still useful implementation and migration references, but many of

@@ -102,6 +102,117 @@ EXPECTED_FUTURE_EXCLUSION = {
     ),
     "owner": "FUTURE-PARITY-BACKLOG.11.8",
 }
+EXPECTED_PUBLIC_CONTRACT = {
+    "documents": [
+        {"path": "USER_GUIDE.md", "required_markers": [
+            "Perl, Rust, Dart, and Julia support explicit deferred codeblock values",
+            "callable-value work stays under `.11.8`",
+        ]},
+        {"path": "rust/README.md", "required_markers": [
+            "### Callable codeblock values and invocation",
+            "Rust recognizes exact brace-pipe forms",
+            "no Rust closure or captured environment is encoded",
+        ]},
+        {"path": "dart/README.md", "required_markers": [
+            "## Callable codeblock construction and invocation",
+            "neutral eight-field `codeblock_literal` record",
+            "independently compiled emitted Dart",
+        ]},
+        {"path": "julia/README.md", "required_markers": [
+            "## Callable-Codeblock Values and Dynamic Invocation",
+            "Bound-variable `cb(args)` execution is now implemented",
+            "No Julia closure, lexical capture",
+        ]},
+        {"path": "lua/README.md", "required_markers": [
+            "explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.8`",
+            "no-drift is complete under `.11.7`",
+        ]},
+        {"path": "capability_conformance/README.md", "required_markers": [
+            "`callable_codeblock_contract.json` defines",
+            "23 public documents",
+            "Four-backend recurring/public no-drift is complete",
+        ]},
+        {"path": "ROADMAP.md", "required_markers": [
+            "four-backend callable parent `.11.7` is closed",
+            "Lua implementation/admission parent `.11.8.0-.4`",
+        ]},
+        {"path": "ROADMAP_V2.md", "required_markers": [
+            "four-backend callable parent `.11.7` is closed",
+            "Lua implementation/admission `.11.8.0-.4`",
+        ]},
+        {"path": "ARCHITECTURE_STATE.md", "required_markers": [
+            "callable public no-drift / parent closeout",
+            "parent `.11.7` is closed",
+        ]},
+        {"path": "LIVE_ACHIEVEMENT_STATUS.md", "required_markers": [
+            "Four-backend callable public no-drift is signoff-complete",
+            "parent `.11.7` is closed",
+        ]},
+        {"path": "docs/TASK_TREE.md", "required_markers": [
+            "Callable-codeblock parent `.11.7` is closed at four current backends",
+        ]},
+        {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "required_markers": [
+            "four-backend recurring/public closeout is complete under `.11.7`",
+            "Explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.8`",
+        ]},
+        {"path": "docs/linkedspec-book/src/appendix/formal-grammar.md", "required_markers": [
+            "### Callable-codeblock literal and dynamic call (Perl, Rust, Dart, and Julia)",
+            "behavior is therefore not yet universally portable",
+        ]},
+        {"path": "docs/linkedspec-book/src/architecture/owner-tree.md", "required_markers": [
+            "`LinkedSpec::CodeblockRuntime`",
+            "`RuntimeContext` owns temporary uniform-binding",
+        ]},
+        {"path": "docs/linkedspec-book/src/compiler/pipeline-overview.md", "required_markers": [
+            "same dynamic codeblock evaluator as explicit",
+            "existing Julia dynamic codeblock",
+        ]},
+        {"path": "docs/linkedspec-book/src/development/local-ci-and-regression.md", "required_markers": [
+            "### Callable-codeblock four-backend recurring proof",
+            "`LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1`",
+            "general bound-call parity remains `.11.8`",
+        ]},
+        {"path": "docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md", "required_markers": [
+            "Explicit construction and `cb(...)` invocation are current on Perl, Rust, Dart, and Julia",
+            "public no-drift are complete under `.11.7`",
+        ]},
+        {"path": "docs/linkedspec-book/src/overview/project-status.md", "required_markers": [
+            "**Callable codeblock design**",
+            "Four-backend recurring/public no-drift is complete under `.11.7`",
+        ]},
+        {"path": "docs/linkedspec-book/src/public-api/descriptor-introspection.md", "required_markers": [
+            "Perl, Rust, Dart, Julia, and Lua currently expose this exact record",
+            "still-incomplete five-backend callable-codeblock capability",
+        ]},
+        {"path": "docs/knowledge/callable-codeblock-literal-contract.md", "required_markers": [
+            "Perl .11.3, Rust .11.4, Dart .11.5, and Julia .11.6",
+            "public no-drift closes parent `.11.7`",
+        ]},
+        {"path": "docs/knowledge/callable-codeblock-four-backend-recurring-gate.md", "required_markers": [
+            "Seventeen mutations",
+            "Public no-drift closes parent `.11.7`",
+        ]},
+        {"path": "docs/knowledge/callable-codeblock-four-backend-public-closeout.md", "required_markers": [
+            "Four-backend callable public state is omission-locked",
+            "user-facing specification surface",
+        ]},
+        {"path": "docs/knowledge/lua-explicit-callable-codeblock-gap.md", "required_markers": [
+            "Lua's completed contextual surface",
+            "`FUTURE-PARITY-BACKLOG.11.8`",
+        ]},
+    ],
+    "forbidden_current_claims": [
+        {"path": "USER_GUIDE.md", "text": "cross-backend closeout remain task-tree-owned future work"},
+        {"path": "lua/README.md", "text": "four-backend governance closes"},
+        {"path": "capability_conformance/README.md", "text": "adopts the future first-class callable-codeblock boundary without claiming"},
+        {"path": "ROADMAP.md", "text": "public closeout remains `.11.7.2`"},
+        {"path": "ROADMAP_V2.md", "text": "recurring/public governance `.11.7.1-.2`"},
+        {"path": "docs/linkedspec-book/src/appendix/backend-handoff.md", "text": "after four-backend closeout"},
+        {"path": "docs/linkedspec-book/src/appendix/formal-grammar.md", "text": "routes four-backend recurring/public closeout through `.11.7.1-.2`"},
+        {"path": "docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md", "text": "public no-drift close under `.11.7.1-.2`"},
+        {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "routes their recurring/public closeout to `.11.7.1-.2`"},
+    ],
+}
 
 
 def classify_braces(source: str) -> str:
@@ -445,6 +556,37 @@ def validate_future_exclusion(record: dict[str, Any]) -> None:
     )
 
 
+def validate_public_contract(public: dict[str, Any], *, check_filesystem: bool) -> None:
+    require(
+        public == EXPECTED_PUBLIC_CONTRACT,
+        "callable_public_contract_drift",
+        "callable public document inventory or stale-claim denylist drifted",
+    )
+    if not check_filesystem:
+        return
+    for document in public["documents"]:
+        path = ROOT / document["path"]
+        require(
+            path.is_file(),
+            "callable_public_document_missing",
+            f"callable public document is missing: {document['path']}",
+        )
+        text = path.read_text(encoding="utf-8")
+        for marker in document["required_markers"]:
+            require(
+                marker in text,
+                "callable_public_marker_missing",
+                f"callable public marker is missing from {document['path']}: {marker}",
+            )
+    for forbidden in public["forbidden_current_claims"]:
+        text = (ROOT / forbidden["path"]).read_text(encoding="utf-8")
+        require(
+            forbidden["text"] not in text,
+            "callable_stale_public_claim",
+            f"stale callable claim remains in {forbidden['path']}: {forbidden['text']}",
+        )
+
+
 def expect_mutation_failure(name: str, check: Callable[[], None]) -> None:
     try:
         check()
@@ -453,7 +595,12 @@ def expect_mutation_failure(name: str, check: Callable[[], None]) -> None:
     fail("mutation_survived", name)
 
 
-def governance_mutation_checks(driver_text: str, ci_text: str, future_record: dict[str, Any]) -> int:
+def governance_mutation_checks(
+    driver_text: str,
+    ci_text: str,
+    future_record: dict[str, Any],
+    public_contract: dict[str, Any],
+) -> int:
     mutations: list[tuple[str, Callable[[], None]]] = []
 
     def topology_mutation(name: str, mutate: Callable[[dict[str, Any]], None]) -> None:
@@ -531,12 +678,24 @@ def governance_mutation_checks(driver_text: str, ci_text: str, future_record: di
 
         mutations.append((name, check))
 
+    for name, mutate in [
+        ("public_document_omission", lambda value: value["documents"].pop()),
+        ("public_marker_omission", lambda value: value["documents"][0]["required_markers"].pop()),
+        ("stale_public_claim_omission", lambda value: value["forbidden_current_claims"].pop()),
+    ]:
+        def check(mutate: Callable[[dict[str, Any]], None] = mutate) -> None:
+            candidate = copy.deepcopy(public_contract)
+            mutate(candidate)
+            validate_public_contract(candidate, check_filesystem=False)
+
+        mutations.append((name, check))
+
     for name, check in mutations:
         expect_mutation_failure(name, check)
     return len(mutations)
 
 
-def validate_governance() -> int:
+def validate_governance(public_contract: dict[str, Any]) -> int:
     validate_recurring_topology(RECURRING_TOPOLOGY, check_filesystem=True)
     manifest = json.loads((ROOT / "capability_conformance" / "manifest.json").read_text(encoding="utf-8"))
     records = [
@@ -551,9 +710,10 @@ def validate_governance() -> int:
     )
     future_record = records[0]
     validate_future_exclusion(future_record)
+    validate_public_contract(public_contract, check_filesystem=True)
     driver_text = (ROOT / RECURRING_TOPOLOGY["driver"]).read_text(encoding="utf-8")
     ci_text = (ROOT / RECURRING_TOPOLOGY["local_ci"]["driver"]).read_text(encoding="utf-8")
-    return governance_mutation_checks(driver_text, ci_text, future_record)
+    return governance_mutation_checks(driver_text, ci_text, future_record, public_contract)
 
 
 def main() -> None:
@@ -563,7 +723,7 @@ def main() -> None:
         "format", "contract_id", "policy", "syntax", "brace_classification", "ast_schema",
         "resolution_precedence", "literals", "call_cases", "invalid_literal_cases",
         "invalid_call_cases", "final_codeblock_parameter_declaration",
-        "contextual_final_block_cases", "fixture",
+        "contextual_final_block_cases", "public_contract", "fixture",
     }
     if set(contract) != expected_top or contract["format"] != 1 or contract["contract_id"] != "linkedspec-callable-codeblock-v1":
         fail("invalid_contract", "top-level fields, format, or id drifted")
@@ -706,7 +866,7 @@ def main() -> None:
     if set(fixture["result_case_ids"]) != set(calls) - {"static_name_precedence", "standalone_discard_keeps_effects"}:
         fail("fixture_mismatch", "fixture call coverage drifted")
 
-    governance_mutations = validate_governance()
+    governance_mutations = validate_governance(contract["public_contract"])
     print(
         "callable-codeblock-contract: OK "
         f"({len(literals)} literals; {len(calls)} calls; "

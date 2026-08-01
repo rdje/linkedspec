@@ -32,8 +32,10 @@ clean callable-codeblock frontier. Behavior-free `.11.7.0` now proves all four c
 isolates stale mixed-exclusion/recurring-driver governance, and splits `.11.7.1-.2` four-backend closeout from new
 Lua implementation/admission parent `.11.8.0-.4` without changing behavior. `.11.7.1` now adds the one routed
 four-backend driver, 17-mutation topology/status governance, optional canonical registration, and Lua-only
-exclusion correction while retaining capability 80/0/0; public closeout remains `.11.7.2`. Manifest audit also
-queues unrelated exclusion-freshness governance `.24.0-.2` without widening the callable lane.
+exclusion correction while retaining capability 80/0/0. Public no-drift `.11.7.2` inventories 23 documents,
+rejects public omission/stale-claim drift; four-backend callable parent `.11.7` is closed, while Lua implementation/
+admission parent `.11.8.0-.4` remains next. Manifest audit also queues unrelated exclusion-freshness governance
+`.24.0-.2` without widening the callable lane.
 
 README sustainability is a completed repository-architecture lane under `README-STABILITY-POLICY`. ADR `0063`
 defines the root README as a stable landing page rather than a status ledger: purpose/audience, one verified first

@@ -415,15 +415,16 @@ source/result/record contract through native and generated execution. Lua's exac
 descriptor variants close under `.5.1/.5.3.1`, while emitted variadic execution closes under `.8.2` and final
 five-backend admission under `.8.4`.
 
-`callable_codeblock_contract.json` adopts the future first-class callable-codeblock boundary without claiming
-backend support early. Exact `{|fixed, ...rest| body }` syntax constructs deferred typed codeblock data; `cb(args)`
+`callable_codeblock_contract.json` defines the portable first-class callable-codeblock boundary and its exact
+current/future public projection. Exact `{|fixed, ...rest| body }` syntax constructs deferred typed codeblock data; `cb(args)`
 uses caller-time stores, temporary copied parameter bindings, block-local return, and static callable precedence.
 Ordinary `{ statements }` remains an eager block value, while empty and top-level-colon brace forms remain harray
 literals. The contract also fixes diagnostics, exact final-only `name: codeblock`, eight contextual helper/
 user-function/receiver forms, and a deterministic future `.spec` fixture. Validate the schema, parser/classifier
 model, neutral invocation model, and fixture offline with
 `bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py`. That checker also locks the
-four-backend recurring topology and mixed future-exclusion status through 17 rejected governance mutations. Run
+four-backend recurring topology, mixed future-exclusion status, and 23 public documents through 20 rejected
+governance mutations: 17 topology/status cases plus public document, marker, and stale-claim omission. Run
 `bash tools/check_callable_codeblock_four_backend.sh` for the ordered neutral, Perl, Rust, Dart, and Julia
 composition; canonical CI exposes the same all-toolchain leg through
 `LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1`. Perl consumes the
@@ -442,9 +443,10 @@ equivalence is complete through `.11.4.3`. Dart `.11.5.1-.3` likewise complete c
 and generic final-block equivalence. Julia `.11.6.1-.3` now complete construction, bound-variable invocation, and
 generic final-block equivalence through one signature-governed normalizer and the existing evaluator. Lua's
 declared contextual helper/user-function/receiver forms are current, but its explicit callable values and arbitrary
-dynamic calls remain future. The overall generic capability therefore stays excluded until Lua explicit/dynamic
-parity and the governed cross-backend closeout land. The corrected exclusion points only to Lua parent `.11.8`;
-the capability census remains 80 pass / 0 partial / 0 gap because no capability row moves in this governance leaf.
+dynamic calls remain future. Four-backend recurring/public no-drift is complete under `.11.7`; the overall generic
+capability stays excluded until Lua explicit/dynamic parity and final five-backend admission land under `.11.8`.
+The corrected exclusion points only to Lua parent `.11.8`; the capability census remains 80 pass / 0 partial /
+0 gap because no capability row moves in this governance leaf.
 
 `complete_named_mark_contract.json` fixes the seven documented current named-mark helpers that were absent from
 every governed backend inventory: entry/local start/end writers, line/column readers, and explicit clear. The

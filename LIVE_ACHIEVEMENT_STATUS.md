@@ -1,5 +1,25 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-01 — Four-backend callable public no-drift is signoff-complete
+
+Leaf `FUTURE-PARITY-BACKLOG.11.7.2` closes the public projection from clean recurring-governance commit `c86f32fa`
+(119/300); after landing, its `activation_commit` resolves to that new commit's parent. The activation boundary
+was clean with a zero-byte brief and no rendered-book, bytecode, or managed-run residue. This leaf owns public inventory, omission/status
+mutations, Perl/Rust/Dart/Julia-current versus Lua-`.11.8`-future synchronization, stable closed-capability
+marking, parent `.11.7` closeout, and the clean `.11.8.0` handoff. The contract now checks 23 current-facing
+documents and nine forbidden stale claims; three public omission mutations raise total governance to 20. Perl,
+Rust, Dart, and Julia explicit/dynamic/contextual/native/reconstructed/generated/emitted routes are current; Lua
+contextual forms are current while explicit values/general bound calls remain `.11.8`. Public parent `.11.7` is closed;
+capability remains 80/0/0 and no runtime/MCP behavior moves.
+
+Focused proof is complete: neutral 7/11/9/7/4/8 plus 20 mutations, Perl 10, Rust 18, Dart 21, Julia 125+118+239,
+capability 80/0/0, workflow routing 42, Knowledge Map 775/6,283, and the sole-facing mdBook at 79 files / 13,996
+KiB. All seven doctrines pass. Definitive canonical CI passes semantic/MCP admissions, containment/moved-root,
+CLI 66x2, RAM 62%, Phase 0 1,031/1,031 in 659 seconds, and the exact callable matrix before reporting
+`local CI gate passed`. Only workflow landing and clean proof remain before `.11.8.0` activation. This closeout
+does not authorize production, fixture, capability-row, MCP, Lua behavior, root README, lexical-capture, or push
+movement. Unrelated exclusion freshness remains queued under `.24.0-.2`.
+
 ## 2026-08-01 — Recurring four-backend callable governance is signoff-complete
 
 Leaf `FUTURE-PARITY-BACKLOG.11.7.1` is active task-tree-first from clean planning commit `2a9c6f15` (118/300).

@@ -994,8 +994,8 @@ set/rename/drop/pick values, deep source isolation, harray/array-view receiver c
 harray mutation are implemented and public-result guarded. Codeblock/control/tree-callback parent `.4.3.6` is
 now split: `.1` eager expression blocks, `.2` inline controls, `.3` statement controls, `.4` current built-in
 contextual blocks/`with`, `.5` deterministic callbacks, and `.6` closeout. General user-function final blocks are
-complete through `.5.1`; explicit callable codeblock values are routed to `.11.8` after four-backend closeout
-`.11.7`.
+complete through `.5.1`; four-backend recurring/public closeout is complete under `.11.7`.
+Explicit callable codeblock values remain future `FUTURE-PARITY-BACKLOG.11.8`.
 Eager blocks plus lazy inline controls pass 105/105: ordinary no-pair braces yield their last/local-return
 value, non-final statement mutation is preserved, harray braces retain precedence, and yielded values enter
 receiver dispatch. Inline `if`/`switch` evaluates only selected payloads, keeps false/null, evaluates switch

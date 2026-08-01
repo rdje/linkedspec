@@ -1,5 +1,29 @@
 # CHANGES
 
+## 2026-08-01 — FUTURE-PARITY-BACKLOG.11.7.2 — close callable public no-drift
+
+Callable-codeblock public status is now one executable contract instead of a prose-only convention. The neutral
+contract names an exact, duplicate-independent inventory of 23 backend/API guides, capability and roadmap
+authorities, task/live surfaces, mdBook chapters, and Knowledge cards; it requires a current/future marker in each
+and rejects nine stale or premature claims. Three RED mutations cover missing documents, missing markers, and
+missing forbidden-claim rules, bringing recurring callable governance from 17 to 20 mutations. The first exact
+run correctly exposed the absent `USER_GUIDE.md` marker before the synchronized projection passed.
+
+Every governed surface now says the same thing: Perl, Rust, Dart, and Julia support callable-codeblock
+construction, dynamic invocation, contextual final blocks, and native/reconstructed/generated/emitted routes.
+Lua contextual forms remain current, while explicit values, general bound calls, generated identity, and final
+admission remain dependency-ordered under `.11.8`; lexical capture remains deferred. Capability stays 80 pass /
+0 partial / 0 gap. Parent `.11.7` closes and detailed Lua RED audit `.11.8.0` becomes the next clean-boundary leaf.
+No parser, compiler, runtime, fixture, capability-row, MCP, Lua, root README, or push behavior changes.
+
+The durable language-agnostic fact now records the director's lockstep doctrine: the mdBook is LinkedSpec's sole
+user-facing specification, so no known code, behavior, capability, roadmap, or backend-status drift may cross a
+commit boundary. The updated book renders in the same slice at 79 files / 13,996 KiB and is removed afterward.
+Knowledge Map generation/check passes 775 facts / 6,283 question keys; workflow routing/tool storage pass at 42;
+all seven doctrines pass. Definitive canonical CI passes semantic/MCP admissions, nested containment,
+moved-root anchors, CLI 66x2, RAM 62%, Phase 0 1,031/1,031 in 659 seconds, and the optional callable matrix at
+neutral 7/11/9/7/4/8+20, Perl 10, Rust 18, Dart 21, and Julia 125+118+239 before `local CI gate passed`.
+
 ## 2026-08-01 — FUTURE-PARITY-BACKLOG.11.7.1 — compose four-backend callable proof
 
 One repository-routed recurring gate now composes the unchanged callable-codeblock contract across every current

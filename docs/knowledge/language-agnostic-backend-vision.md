@@ -11,11 +11,14 @@ answers:
   - how does HandlerIR help portability
   - what is the backend roadmap for LinkedSpec
   - is Lua an accepted LinkedSpec backend
+  - is the mdBook the sole user-facing LinkedSpec surface
+  - how closely must the mdBook track the codebase
 date: 2026-06-12
 status: accepted
 tags: [architecture, portability, backends, roadmap, vision]
 evidence: "ADR 0006 formalized lockstep backends, ADR 0021 fixed Dart/Julia/Lua order, and ADR 0022 made native embedding primary. ADR 0023 now makes complete parity exact user-observable capability/behavior identity plus one identical primary CLI; current Dart/Julia milestones remain scoped and global FUTURE-PARITY-BACKLOG.1.5/.1.6/.3 own convergence."
 evidence_update_2026_07_11: "Exact primary CLI parity is closed at 61x2 on Perl/Rust/Dart/Julia, all four expose native inline plus named/file roles, and Dart full-pipeline trace is admitted. Generated-source breadth remains the only current capability family preventing complete parity."
+evidence_update_2026_08_01_book_surface: "The director reaffirmed that the canonical neutral mdBook is LinkedSpec's sole user-facing specification surface. No completed slice may land with known behavior, capability, roadmap, or backend-status drift between the codebase and the relevant book chapters; source synchronization and a rendered build are same-slice signoff requirements."
 reverify: "rg -n 'Rust|Julia|Dart|Lua|backend|primary CLI|complete parity' ROADMAP_V2.md docs/decisions/0006-multi-backend-vision.md docs/decisions/0021-future-backend-rollout-order.md docs/decisions/0022-native-in-memory-backend-embedding.md docs/decisions/0023-user-observable-backend-and-cli-parity.md docs/linkedspec-book/src/appendix/backend-handoff.md docs/tasks/FUTURE-PARITY-BACKLOG.md | head -100"
 ---
 
@@ -58,7 +61,8 @@ capabilities/behavior and the same primary CLI interface.
 
 ## Consequences
 
-- mdBook must be kept in lockstep with the codebase at all times — it is the spec.
+- mdBook must be kept in lockstep with the codebase at all times — it is the sole user-facing specification
+  surface. No commit boundary may retain known behavior, capability, roadmap, or backend-status drift.
 - Every feature must be documented language-neutrally (describe behavior, not Perl
   implementation details).
 - Knowledge Map cards should document contracts (what the system does) rather than

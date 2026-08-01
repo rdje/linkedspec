@@ -5,6 +5,13 @@ This document is the current high-level technical reading of the project shape. 
 
 ## Status
 - Last refreshed: `2026-08-01`
+- `2026-08-01 callable public no-drift / parent closeout`: `FUTURE-PARITY-BACKLOG.11.7.2` makes 23 public
+  backend/API/book/roadmap/task/Knowledge authorities part of the neutral contract and denies nine stale current
+  claims. Three new omission mutations join the 17 recurring topology/status mutations. Perl, Rust, Dart, and
+  Julia explicit/dynamic/contextual/native/reconstructed/generated/emitted routes are current; Lua contextual
+  forms are current while explicit values/general bound calls remain `.11.8`. A stable task-index marker records
+  that parent `.11.7` is closed. This is public governance only; production, fixture, capability-row, MCP, Lua,
+  root README, and lexical-capture behavior do not move.
 - `2026-08-01 callable recurring-governance boundary`: `FUTURE-PARITY-BACKLOG.11.7.1` adds one routed driver that
   composes the unchanged neutral, Perl, Rust, Dart, and Julia callable authorities in exact order. The neutral
   checker now locks ten roles per backend, paths, project-data routes, canonical switch/execution cardinality, and

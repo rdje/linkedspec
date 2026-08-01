@@ -1,5 +1,26 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`FUTURE-PARITY-BACKLOG.11.7.2` — make public lockstep an executable boundary): the public closeout
+  extends the existing neutral callable contract/checker because that pair already owns syntax, diagnostics,
+  fixtures, and recurring topology. A second documentation ledger would introduce a new drift seam. The data file
+  lists 23 exact documents and nine forbidden claims, while a duplicate-independent constant in the checker makes
+  removal from the data itself fail closed. Required per-document markers handle omission; the denylist handles
+  stale completed-backend and premature Lua/five-backend narratives. Three self-mutations prove all three failure
+  classes and raise the composed governance total from 17 to 20.
+
+  The inventory increased from 22 to 23 when the new public-closeout Knowledge card was added. Governing that card
+  in the same contract prevents the evidence explaining the mechanism from becoming an unguarded public island.
+  This is intentionally behavior-free: it changes no parser/compiler/runtime/fixture/capability row/MCP route and
+  preserves the 80/0/0 capability census.
+
+  The director's book boundary is stronger than eventual documentation cleanup: the mdBook is LinkedSpec's sole
+  user-facing specification, so every behavior/status-affecting slice must synchronize and render it before the
+  commit boundary. This leaf records that doctrine in the language-agnostic Knowledge card and validates the
+  rendered output in-slice at 79 files / 13,996 KiB. Knowledge Map is 775/6,283; recurring proof passes neutral
+  7/11/9/7/4/8+20, Perl 10, Rust 18, Dart 21, Julia 125+118+239; all doctrines pass. Definitive canonical CI
+  passes semantic/MCP, containment/moved-root, CLI 66x2, RAM 62%, Phase 0 1,031/1,031 in 659 seconds, and the
+  optional callable matrix before emitting the explicit local-CI marker.
+
 - 2026-08-01 (`FUTURE-PARITY-BACKLOG.11.7.1` — compose authorities rather than invent another conformance model):
   all four focused suites already cover the same ten semantic/route roles, so the recurring layer is deliberately
   a fail-fast shell orchestrator plus topology checks in the existing neutral checker. The driver self-roots,

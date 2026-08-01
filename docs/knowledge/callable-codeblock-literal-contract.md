@@ -15,6 +15,7 @@ status: current-partial-rollout
 tags: [codeblock, callable, literal, dynamic-scope, harray, actionir, FUTURE-PARITY-BACKLOG]
 evidence: "Director agreement on 2026-07-12 selects {|args| ...} and dynamic caller context; ADR 0031 defines literals/invocation, ADR 0032 defines final-only name: codeblock, and .11.2 adopts linkedspec-callable-codeblock-v1. Perl .11.3, Rust .11.4, Dart .11.5, and Julia .11.6 consume construction, invocation, and contextual equivalence. Lua contextual blocks are current, while explicit literals/general bound calls remain dependency-owned by .11.8."
 evidence_update_2026_08_01_recurring_gate: "FUTURE-PARITY-BACKLOG.11.7.1 composes the four current backend consumers through one routed optional canonical matrix, rejects 17 topology/status mutations, corrects the mixed future exclusion to Lua-only .11.8 ownership, and leaves capability 80/0/0 unchanged."
+evidence_update_2026_08_01_public_closeout: "FUTURE-PARITY-BACKLOG.11.7.2 omission-locks 23 public documents and nine stale-claim denials through three additional governance mutations; public no-drift closes parent `.11.7` while Lua explicit values/general calls remain `.11.8`."
 reverify: "bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && rg -n '0031|0032|name: codeblock|dynamic caller|FUTURE-PARITY-BACKLOG\\.11\\.[1-8]' docs/decisions/0031-callable-codeblock-literal-and-dynamic-context.md docs/decisions/0032-final-codeblock-parameter-declaration.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 

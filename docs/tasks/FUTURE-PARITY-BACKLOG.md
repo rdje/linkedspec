@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-01` (recurring four-backend callable governance `.11.7.1` is active from clean planning
-  closeout `2a9c6f15`; Lua behavior/admission remains separately dependency-owned by `.11.8`)
+- Last updated: `2026-08-01` (four-backend callable public no-drift `.11.7.2` is signoff-complete from clean
+  recurring-governance commit `c86f32fa`; Lua behavior/admission remains dependency-owned by `.11.8`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -15784,7 +15784,7 @@ before `.11.7` activation. Parent `.11.6` is closed without capability/MCP promo
 push, closure capture, host callbacks, or a second executor.
 
 - ID: `FUTURE-PARITY-BACKLOG.11.7`
-  Status: `active`
+  Status: `done`
   Goal: Close four-backend callable-codeblock no-drift and route Lua to dependency-complete owners.
   Children: `.11.7.0`, `.11.7.1`, `.11.7.2`
   Dependencies: `.11.3`, `.11.4`, `.11.5`, `.11.6`
@@ -15928,13 +15928,70 @@ fixture, capability-row, MCP, Lua, root README, lexical-capture, or push behavio
 brief clearing, clean-status proof, and subsequent task-tree-first activation of `.11.7.2` remain.
 
 - ID: `FUTURE-PARITY-BACKLOG.11.7.2`
-  Status: `pending`
+  Status: `done`
   Goal: Close four-backend callable-codeblock public no-drift and hand off to Lua without behavior changes.
   Dependencies: `.11.7.1`
   Acceptance: Public backend/API docs, Lua routing, mdBook, roadmaps, ADR/KM/live status, recurring proof, and exact
     omission/status mutations agree that Perl/Rust/Dart/Julia are current while Lua explicit literals and general
     dynamic calls remain pending under `.11.8`; lexical capture remains deferred. Focused/canonical gates pass,
-    parent `.11.7` closes, and `.11.8.0` activates only after a clean committed handoff.
+    parent `.11.7` closes, and `.11.8.0` activates only after a clean committed handoff. The mdBook is the sole
+    user-facing specification surface: no known code, behavior, capability, roadmap, or backend-status drift may
+    cross this leaf's commit boundary, and a rendered build is mandatory.
+  Verification: PASS — 23 exact public documents, nine forbidden stale/premature claims, and three public
+    omission mutations extend recurring governance to 20; neutral 7/11/9/7/4/8, Perl 10, Rust 18, Dart 21,
+    Julia 125 + 118 + 239, capability 80/0/0, Knowledge Map 775/6,283, mdBook 79 files / 13,996 KiB, all seven
+    doctrines, and canonical Phase 0 1,031/1,031 in 659 seconds plus the optional callable matrix pass.
+  Commit: `FUTURE-PARITY-BACKLOG.11.7.2 - close callable public no-drift`
+
+### `FUTURE-PARITY-BACKLOG.11.7.2` Acceptance Checklist
+
+- [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Activate task-tree-first from clean recurring-governance commit
+  `c86f32fa` (119/300), with zero-byte brief and no rendered-book, bytecode, or managed-run residue.
+- [x] **AUTHORITY RETRIEVAL BEFORE AUDIT** — Retrieve ADRs `0031`/`0032`/`0041`, the literal and recurring-gate
+  Knowledge cards, executable checker/manifest, public projections, and established closed-capability marker
+  doctrine before classifying any public statement.
+- [x] **EXACT PUBLIC INVENTORY / DRIFT PROOF** — Inventory every backend/API guide, capability narrative, roadmap,
+  task/index, live architecture, mdBook, Knowledge, and checker-owned current/future claim; prove omissions and
+  stale completed-backend or premature Lua/five-backend claims fail closed.
+- [x] **FOUR-BACKEND CURRENT / LUA-ONLY FUTURE LOCKSTEP** — Synchronize public authorities so Perl, Rust, Dart,
+  and Julia explicit construction/dynamic/contextual/native/reconstructed/generated/emitted routes are current,
+  while Lua explicit literals/general bound calls/generated identity/admission remain `.11.8`; keep lexical
+  capture deferred and do not change production, fixture, capability-row, or MCP behavior.
+- [x] **PARENT CLOSEOUT / LUA HANDOFF** — Close parent `.11.7`, preserve one stable public marker outside the
+  mutable frontier, and make detailed Lua RED audit `.11.8.0` the single next action only after clean landing.
+- [x] **FOCUSED / DOCS / CANONICAL / COMMIT / CLEAN HANDOFF** — Pass checker mutations, recurring driver,
+  public/governance/book checks plus a rendered mdBook build, canonical CI, and exact cleanup; commit `.11.7.2`,
+  clear the brief, and prove clean before activating `.11.8.0`. Treat the mdBook as the sole user-facing
+  specification and allow no known code/status drift across the commit boundary.
+
+Activation evidence 2026-08-01: recurring-governance leaf `.11.7.1` lands as `c86f32fa` (119/300) with its
+post-commit pointer resolving to parent `2a9c6f15`. Git status is empty, `git_message_brief.txt` is zero bytes,
+and rendered-book, Python-bytecode, and managed-run residue are absent. This leaf owns public inventory,
+omission-sensitive no-drift, parent closeout, and the clean Lua handoff only. No parser/compiler/runtime/
+descriptor/generated-source/fixture/capability-row/MCP, root README, lexical-capture, push, or Lua behavior change
+is authorized.
+
+Implementation evidence 2026-08-01: the neutral callable contract now owns an exact, duplicate-independent
+23-document public inventory, one required current/future marker per document, and nine forbidden stale or
+premature claims. The checker validates both the data file and its own expected projection, so deleting a
+document from only the contract cannot make that document invisible. Three RED mutations prove document omission,
+required-marker omission, and forbidden-claim omission fail; together with the 17 recurring topology/status
+mutations, governance is 20. The first exact inventory run correctly failed on a missing `USER_GUIDE.md` marker;
+after synchronizing the governed surfaces it passes. Public prose now states Perl/Rust/Dart/Julia current across
+construction, invocation, contextual, native, reconstructed, generated, and emitted paths, while Lua contextual
+forms remain current and explicit values/general bound calls/generated identity/admission remain `.11.8`.
+Capability stays 80/0/0. No production, fixture, capability-row, MCP, Lua, or root README behavior changes.
+
+Signoff evidence 2026-08-01: the neutral checker passes 7 literals / 11 calls / 9 invalid literals / 7 invalid
+calls / 4 invalid declarations / 8 contextual forms plus all 20 governance mutations. The recurring driver passes
+Perl 10, Rust 18, Dart 21, and Julia dynamic 125 + contextual 118 + construction 239; capability remains 80/0/0,
+workflow routing/tool storage pass at 42 entrypoints, Knowledge Map generation/check passes 775 facts / 6,283
+question keys, and the sole-facing mdBook renders 79 files / 13,996 KiB before exact removal. Memory, task,
+README, whitespace, and all seven doctrines pass. The definitive authorized canonical wrapper passes exact
+semantic/MCP admissions, nested process containment, moved-root anchors, CLI 66x2, RAM 62%, and Phase 0
+1,031/1,031 in 659 seconds, then passes the optional callable matrix at neutral+20, Perl 10, Rust 18, Dart 21,
+Julia 125+118+239 and reports `local CI gate passed`. Parent `.11.7` is closed; only workflow landing, brief
+clearing, and clean proof remain before task-tree-first `.11.8.0` activation.
 
 - ID: `FUTURE-PARITY-BACKLOG.11.8`
   Status: `pending`
@@ -18231,14 +18288,14 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-01):** Recurring four-backend callable governance `.11.7.1` is signoff-complete
-from clean planning closeout `2a9c6f15` (intended landing 119/300). Its routed neutral/Perl/Rust/Dart/Julia driver,
-17-mutation omission governance, canonical registration, Lua-only `.11.8` exclusion, capability 80/0/0, workflow
-routing 42, Knowledge Map 774/6,274, mdBook 79/13,992 KiB, seven doctrines, CLI 66x2, RAM 54%, canonical Phase 0
-1,031/1,031 in 825 seconds, and optional callable matrix all pass with the explicit local-CI marker. The workflow
-commit/clean boundary remains before public no-drift `.11.7.2` activates. Lua work stays `.11.8.0-.4`; unrelated
-exclusion freshness stays queued `.24.0-.2`. No parser/compiler/runtime/descriptor/generated behavior,
-capability-row/MCP movement, root README edit, push, closure, or lexical-capture change is authorized.
+**Authoritative frontier (2026-08-01):** Four-backend callable public no-drift `.11.7.2` is signoff-complete from
+clean recurring-governance commit `c86f32fa` (119/300), awaiting only workflow landing. The exact contract governs
+23 public documents, nine forbidden claims, and 20 total mutations; focused proof passes neutral 7/11/9/7/4/8,
+Perl 10, Rust 18, Dart 21, Julia 125/118/239, capability 80/0/0, routing 42, Knowledge Map 775/6,283, and mdBook
+79 files / 13,996 KiB. Canonical CI passes CLI 66x2, RAM 62%, Phase 0 1,031/1,031 in 659 seconds, the optional
+callable matrix, and its explicit marker. Parent `.11.7` is closed; `.11.8.0` is the single next action after the
+clean commit. Unrelated exclusion freshness stays `.24.0-.2`. No behavior, root README, push, closure, or lexical-
+capture movement is authorized.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private
@@ -19626,14 +19683,14 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Blockers
 
-- None. Recurring four-backend governance `.11.7.1` is fully signed off from clean `2a9c6f15`; only its workflow
-  commit, brief clearing, and clean-status proof remain before `.11.7.2`. MCP rollout is already complete and does
-  not move in this callable lane.
+- None. Public no-drift `.11.7.2` is signoff-complete from clean `c86f32fa`; land it, clear the brief, and prove
+  clean before activating `.11.8.0`. MCP rollout is already complete and does not move in this callable lane.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-08-01` | `FUTURE-PARITY-BACKLOG.11.7.2` | Clean base `c86f32fa`; exact 23-document public inventory; nine forbidden stale/premature claims; neutral 7/11/9/7/4/8 plus 20 governance mutations; recurring Perl 10, Rust 18, Dart 21, Julia dynamic 125 + contextual 118 + construction 239; capability 80/0/0; workflow routing/tool storage 42; Knowledge Map 775/6,283; sole-facing mdBook 79 files / 13,996 KiB; memory/task/README/whitespace/seven doctrines; definitive canonical semantic/MCP admissions, nested containment/moved-root, CLI 66x2, RAM 62%, Phase 0 1,031/1,031 in 659 seconds, optional four-backend callable matrix, and explicit local-CI pass; exact generated-book cleanup. | PASS. All governed public surfaces agree on four current backends and Lua-only `.11.8` work, parent `.11.7` closes without behavior or capability movement, and `.11.8.0` follows only after the clean landing. |
 | `2026-08-01` | `FUTURE-PARITY-BACKLOG.11.7.1` | Clean base `2a9c6f15`; one routed neutral/Perl/Rust/Dart/Julia driver; neutral 7/11/9/7/4/8 plus 17 topology/status mutations; exact focused Perl 10, Rust 18, Dart 21, Julia dynamic 125 + contextual 118 + construction 239; canonical registration exactly once; Lua-only `.11.8` exclusion; capability 80/0/0; workflow routing/tool storage 42; Knowledge Map 774/6,274; mdBook 79 files / 13,992 KiB; memory/task/README/whitespace/seven doctrines; definitive canonical semantic/MCP admissions, nested containment/moved-root, CLI 66x2, RAM 54%, Phase 0 1,031/1,031 in 825 seconds, optional four-backend callable matrix, and explicit local-CI pass; exact cleanup pending workflow boundary. | PASS. Four completed backends now have one omission-sensitive recurring canonical proof, and only Lua explicit construction/general bound invocation remains future under `.11.8`, without production, fixture, capability-row/MCP, root README, lexical-capture, or push movement. `.11.7.2` follows only after the clean commit. |
 | `2026-08-01` | `FUTURE-PARITY-BACKLOG.11.7.0` | Clean base `3767b8c3`; neutral 7/11/9/7/4/8; focused Perl 10, Rust 18, Dart 21, Julia dynamic 125 + contextual 118 + construction 239; exact four-backend recurrence/status drift; Toolbox-led Lua parser/AST/call gap and scoped-binding/effective-spec reuse map; complete Lua 177/177 per ABI, byte-fresh MCP, semantic/MCP, CLI 66x2, corpus 105/105, storage; dependency-complete `.11.7.1-.2` / `.11.8.0-.4` split; Knowledge Map 772/6,262; mdBook 79 files / 13,984 KiB; memory/task/README/whitespace/seven doctrines; definitive canonical semantic/MCP admissions, nested containment/moved-root, CLI 66x2, RAM 52%, Phase 0 1,031/1,031 in 653 seconds and explicit local-CI pass; exact cleanup pending workflow boundary. | PASS. Four completed backends stay closed, and Lua explicit construction/invocation/generated/admission work has exact ordered owners without production, fixture, contract, capability/MCP, root README, or push movement. `.11.7.1` follows only after the clean commit. |
 | `2026-07-30` | `FUTURE-PARITY-BACKLOG.11.6.3` | Clean base `bc85c0fa`; neutral 7/11/9/7/4/8; Julia dynamic 125/125 + contextual 118/118 + construction 239/239; exact definition/staged/registry/descriptor-v3/semantic metadata; one post-registry helper/user/receiver/tree normalization; portable failures and eager/control/harray/explicit-literal preservation; native/reconstructed/generated/emitted identity; complete package and Julia gate with byte-fresh 120,030-byte MCP binding, 18 storage owners/five package trees, CLI, corpus 105/105; capability/MCP unchanged; Knowledge Map 771/6,256; mdBook 79 files / 13,980 KiB; memory/task/whitespace/README/seven doctrines; definitive canonical semantic/MCP admissions, nested containment/moved-root, CLI 66x2, RAM 61%, Phase 0 1,031/1,031 in 966 seconds and explicit local-CI pass; exact cleanup. | PASS. Julia generic final-block equivalence and parent `.11.6` close through one metadata-governed normalizer and existing executor, without closure capture, host callbacks, a second executor, syntax-owned semantics, capability/MCP movement, other-backend change, root README growth, or push. `.11.7` follows only after the clean commit. |
@@ -19961,6 +20018,9 @@ Read-only evidence recorded on 2026-07-10:
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `FUTURE-PARITY-BACKLOG.11.7.2` | `FUTURE-PARITY-BACKLOG.11.7.2 - close callable public no-drift` | Exact 23-document/nine-forbidden-claim/20-mutation public lockstep, sole-facing mdBook alignment, parent `.11.7` closeout, and clean Lua handoff without behavior movement. |
+| `FUTURE-PARITY-BACKLOG.11.7.1` | `FUTURE-PARITY-BACKLOG.11.7.1 - compose four-backend callable proof` | One routed neutral/Perl/Rust/Dart/Julia recurring driver, 17 topology/status mutations, exact canonical composition, and Lua-only future exclusion. |
+| `FUTURE-PARITY-BACKLOG.11.7.0` | `FUTURE-PARITY-BACKLOG.11.7.0 - split callable no-drift and Lua routing` | Behavior-free four-backend audit, Toolbox-led Lua gap proof, and dependency-complete `.11.7.1-.2` / `.11.8.0-.4` split. |
 | `FUTURE-PARITY-BACKLOG.11.6.3` | `FUTURE-PARITY-BACKLOG.11.6.3 - normalize Julia final codeblocks` | Exact final-only metadata and one signature-governed contextual normalization across Julia native/reconstructed/generated/emitted roles; closes parent `.11.6`. |
 | `FUTURE-PARITY-BACKLOG.11.6.2` | `FUTURE-PARITY-BACKLOG.11.6.2 - execute Julia callable codeblocks` | Static-precedence bound invocation, dynamic caller context, exact portable failures/recursion, typed result access, and native/reconstructed/generated/emitted identity; generic final blocks remain `.11.6.3`. |
 | `FUTURE-PARITY-BACKLOG.11.6.1` | `FUTURE-PARITY-BACKLOG.11.6.1 - construct Julia callable codeblocks` | Exact inert typed literal/signature/body/source/Unicode-span state across Julia native, compiled, generated, emitted, user-function, and semantic authorities; dynamic invocation remains `.11.6.2`. |
@@ -20264,6 +20324,14 @@ Read-only evidence recorded on 2026-07-10:
 
 ## Changelog
 
+- `2026-08-01`: Public no-drift closeout `.11.7.2` makes the callable projection executable: an exact
+  duplicate-independent inventory governs 23 public documents, required markers, nine forbidden stale/premature
+  claims, and three omission mutations, bringing recurring governance to 20. Perl/Rust/Dart/Julia are current;
+  Lua explicit values/general bound calls/generated identity/admission remain `.11.8`, lexical capture remains
+  deferred, and capability stays 80/0/0. The mdBook is recorded as LinkedSpec's sole-facing specification and
+  renders in the same slice at 79 files / 13,996 KiB. Focused and canonical proof pass through Phase 0
+  1,031/1,031 in 659 seconds plus the callable matrix. Parent `.11.7` closes without behavior/MCP/root-README/push
+  movement; `.11.8.0` is next only after the clean landing.
 - `2026-07-30`: All-twenty consumer leaf `.10.9.7.1.1.2` strengthens the five existing twelve-role admission
   consumers without adding a response oracle. Six governed native indexes built through public APIs let Perl,
   Rust, Dart, Julia, PUC Lua, and LuaJIT prove capabilities plus every one of nineteen queries across direct

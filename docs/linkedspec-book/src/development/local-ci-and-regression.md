@@ -721,8 +721,9 @@ Cargo, Dart, and Julia wrappers; Perl runs inside that managed boundary with amb
 Canonical local CI always requires and syntax-checks the driver. Set
 `LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1` to execute the all-toolchain composition. The checker rejects 17
 topology and status mutations, including missing/reordered roles, stale paths, project-data bypass, missing or
-duplicated canonical execution, and premature Lua/five-backend claims. Perl, Rust, Dart, and Julia are current;
-Lua contextual forms are current, while Lua explicit literal/general bound-call parity remains `.11.8`.
+duplicated canonical execution, and premature Lua/five-backend claims, plus three public inventory/marker/denylist
+omissions. Perl, Rust, Dart, and Julia are current; Lua contextual forms are current, while Lua explicit literal/
+general bound-call parity remains `.11.8`. Four-backend public no-drift covers 23 current-facing documents.
 
 ## Hosted GitHub Actions status
 

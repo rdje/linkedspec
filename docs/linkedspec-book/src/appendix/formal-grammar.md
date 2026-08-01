@@ -186,9 +186,9 @@ static precedence, typed failures, and ordered recursion rejection across native
 roles. Julia `.11.6.3` preserves exact final-only typed metadata and applies one post-registry contract pass to
 equivalent attached/parenthesized helper, typed-user-function, receiver, and tree blocks. The normalized
 zero-positional record executes through the same evaluator in native/reconstructed/generated/emitted roles while
-eager blocks, controls, explicit signatures, and harrays remain distinct. Behavior-free audit `.11.7.0` routes
-four-backend recurring/public closeout through `.11.7.1-.2` and Lua explicit literals/general bound calls through
-`.11.8`; complete invocation behavior is therefore not yet universally portable.
+eager blocks, controls, explicit signatures, and harrays remain distinct. Four-backend recurring/public closeout
+is complete through `.11.7.1-.2`; Lua explicit literals/general bound calls remain `.11.8`. Complete invocation
+behavior is therefore not yet universally portable.
 
 Arguments evaluate once from left to right before any parameter is bound. Nested arrays/harrays, booleans,
 `undef`, and codeblocks remain individual rest-array values rather than being flattened or coerced.

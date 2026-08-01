@@ -23,10 +23,12 @@ closes construction at `5e80be32`, `.11.5.2` closes dynamic invocation at `74725
 contextual normalization and closes Dart parent `.11.5` at `bdae816a`. Julia construction `.11.6.1` is
 committed clean at `3a38338d`; dynamic invocation `.11.6.2` lands clean at `bc85c0fa`; generic contextual
 final-block equivalence `.11.6.3` is signoff-complete from that boundary and closes Julia parent `.11.6`;
-behavior-free `.11.7.0` now proves the four current backends focused-green and splits recurring/public governance
-`.11.7.1-.2` from dependency-complete Lua construction/invocation/generation/admission `.11.8.0-.4`. `.11.7.1`
-now composes one routed four-backend driver, 17 topology/status mutations, optional canonical registration, and a
-Lua-only future exclusion while capability remains 80/0/0. Separate exclusion-freshness `.24.0-.2` is queued.
+behavior-free `.11.7.0` proves the four current backends focused-green and splits recurring/public governance from
+dependency-complete Lua construction/invocation/generation/admission. `.11.7.1` composes one routed four-backend
+driver, 17 topology/status mutations, optional canonical registration, and a Lua-only future exclusion while
+capability remains 80/0/0. Public no-drift `.11.7.2` inventories 23 documents, adds three public omission
+mutations; four-backend callable parent `.11.7` is closed, while Lua implementation/admission `.11.8.0-.4` remains
+next. Separate exclusion-freshness `.24.0-.2` is queued.
 
 Completed README-sustainability lane: `README-STABILITY-POLICY` and ADR `0063` make root `README.md` a stable,
 bounded landing page. A full 1,615-line / 159,437-byte audit routes all changing/deep detail before a reviewed

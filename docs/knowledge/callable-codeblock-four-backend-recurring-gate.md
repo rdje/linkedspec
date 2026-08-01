@@ -12,7 +12,7 @@ answers:
 date: 2026-08-01
 status: current; four-backend recurring proof complete, Lua explicit parity pending
 tags: [callable, codeblock, recurring-gate, perl, rust, dart, julia, lua, conformance, local-ci]
-evidence: "FUTURE-PARITY-BACKLOG.11.7.1 adds tools/check_callable_codeblock_four_backend.sh. One repository-routed invocation runs the unchanged neutral 7/11/9/7/4/8 model followed by the exact Perl 10, Rust 18, Dart 21, and Julia 125+118+239 consumers. The existing checker now locks ten roles per backend, exact paths/order/project-data routes, one canonical LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX branch, and the future.generic_final_codeblock record through 17 rejected mutations. The capability census remains 80/0/0; Lua contextual forms are current while explicit literals/general bound calls stay FUTURE-PARITY-BACKLOG.11.8. The driver is the 42nd governed project-data workflow entrypoint and adds no temporary allocator."
+evidence: "FUTURE-PARITY-BACKLOG.11.7.1 adds tools/check_callable_codeblock_four_backend.sh. One repository-routed invocation runs the unchanged neutral 7/11/9/7/4/8 model followed by the exact Perl 10, Rust 18, Dart 21, and Julia 125+118+239 consumers. The checker locks ten roles per backend, exact paths/order/project-data routes, one canonical LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX branch, and the future.generic_final_codeblock record through 17 recurring mutations. Public closeout .11.7.2 adds 23 documents, nine stale-claim denials, and three omission mutations. The capability census remains 80/0/0; Lua contextual forms are current while explicit literals/general bound calls stay FUTURE-PARITY-BACKLOG.11.8. The driver is the 42nd governed project-data workflow entrypoint and adds no temporary allocator."
 reverify: "bash tools/check_callable_codeblock_four_backend.sh && bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && bash tools/test_project_data_workflow_routing.sh && perl tools/check_capability_conformance.pl"
 ---
 
@@ -34,6 +34,10 @@ duplicated canonical execution, lost switch registration, and premature Lua/five
 census remains 80 pass / 0 partial / 0 gap because this leaf corrects an exclusion narrative rather than adding a
 capability row. Lua explicit construction, general bound calls, generated/emitted identity, and final admission
 remain dependency-ordered under `FUTURE-PARITY-BACKLOG.11.8`.
+
+Public no-drift closes parent `.11.7` by checking 23 backend/API/book/roadmap/task/Knowledge documents and nine
+forbidden stale claims. Three independent omissions for a document, required marker, or denylist entry raise the
+complete governance total to 20 without broadening the recurring runtime driver.
 
 Related facts: [[callable-codeblock-literal-contract]], [[lua-explicit-callable-codeblock-gap]],
 [[project-data-ssd-storage-locality]], and [[repository-root-relocation-process-proof]].
