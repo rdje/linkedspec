@@ -1,5 +1,16 @@
 # CHANGES
 
+## 2026-08-01 — FUTURE-PARITY-BACKLOG.14.1.3 — close typed source-location contract
+
+- Re-composed the committed neutral typed source-location contract/checker and sole-facing linked-rule teaching
+  unchanged, then closed parent `.14.1`. No parser, runtime, schema, helper, fixture, root README, or book source
+  changed; `.14.2` is the next clean implementation frontier.
+- Re-proved exact contract counts, capability 80/0/0, the 79-file / 14,120-KiB book and rendered link/structure,
+  Knowledge Map 784/6,363, and all seven doctrines. Definitive canonical CI passes containment, moved-root/outside-
+  CWD execution, CLI 66x2, RAM 53%, and Phase 0 1,031/1,031 in 639 seconds.
+- Kept `MDBOOK-RENDERED-READABILITY` independently queued and non-blocking; this closeout does not reprioritize or
+  partially implement that broader audit.
+
 ## 2026-08-01 — FUTURE-PARITY-BACKLOG.14.1.2 — teach linked-rule structure
 
 - Added practical sole-facing guidance for zero-regex coordinators, one-regex leaves, two-regex start/end nodes,

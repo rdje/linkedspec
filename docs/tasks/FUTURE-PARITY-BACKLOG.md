@@ -17196,7 +17196,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   Commit: `FUTURE-PARITY-BACKLOG.14.0.1 - adopt typed source location algebra`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.1`
-  Status: `active` (2026-08-01; split task-tree-first from clean `24770ade`)
+  Status: `done` / composition-closed (2026-08-01; `.14.1.0-.3` complete)
   Goal: Ratify the exact typed source-location algebra and neutral conformance fixtures while teaching simple-regex
     linked-rule structure, including zero/one/two-regex roles and graph-owned recursion.
   Children: `.14.1.0`, `.14.1.1`, `.14.1.2`, `.14.1.3`
@@ -17470,7 +17470,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   Commit: `FUTURE-PARITY-BACKLOG.14.1.2 - teach linked rule structure`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.1.3`
-  Status: `pending`
+  Status: `done` (2026-08-01; signoff-complete from clean `336781d6`, intended 135/300, no push)
   Goal: Recompose the committed neutral contract, fixtures, mutations, CI route, and public teaching unchanged;
     close `.14.1` and hand the clean boundary to `.14.2` backend value/helper projection implementation.
   Depends on: `.14.1.2`
@@ -17478,6 +17478,48 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
     canonical local CI from the clean `.14.1.2` commit; prove exact contract/count/public markers and zero stale
     praise without changing contract, checker, runtime, schema, helper, public teaching, or root README content;
     close parent `.14.1` and point one clean next action to `.14.2`.
+
+  ### `FUTURE-PARITY-BACKLOG.14.1.3` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove `.14.1.2` landed cleanly at `336781d6` as 134/300 with no
+    push, empty status/diffs, zero-byte brief, synchronized Knowledge Map, absent generated book/non-cache
+    bytecode, and no unconsumed background result before activating this leaf task-tree-first.
+  - [x] **RECOMPOSE NEUTRAL CONTRACT UNCHANGED** — Re-run the independent typed source-location checker and prove
+    its exact fixtures, transitions, recursive/structural cases, projections, callable identities, diagnostics,
+    rollout, and mutation counts without changing contract or checker content.
+  - [x] **RECOMPOSE PUBLIC TEACHING UNCHANGED** — Rebuild/link-check the complete mdBook, verify the governed linked-
+    rule claims and five compatibility passages, prove zero stale praise, and confirm rendered readability without
+    changing public teaching content.
+  - [x] **RECOMPOSE GOVERNANCE UNCHANGED** — Re-run Knowledge Map, task/roadmap/live alignment, all doctrines, and
+    exact public/capability markers without changing runtime, schema, helper, root README, or unrelated content.
+  - [x] **DEFINITIVE CANONICAL SIGNOFF** — Run the repository-routed canonical local CI from the committed
+    `.14.1.2` state and record exact containment, moved-root, CLI, memory, and Phase 0 results.
+  - [x] **CLOSE / COMMIT / CLEAN** — Close parent `.14.1`, point the single next action to `.14.2`, update bounded
+    continuity only, commit per `COMMIT.md`, clear the brief, and prove the clean boundary before pivoting.
+
+  Activation evidence 2026-08-01: `.14.1.2` landed at `336781d6` as commit 134/300 with no push. Exact post-commit
+  proof found empty status and staged/unstaged diffs, zero-byte `git_message_brief.txt`, activation pointer
+  `e8f6198b` resolving to `HEAD^1`, synchronized Knowledge Map 784/6,363, no generated book or non-cache Python
+  bytecode, and no unconsumed background result. At activation, `.14.1.3` became the sole active frontier and owned
+  no-change recomposition plus its eventual task/continuity closeout; no contract, checker, implementation, or
+  book-content change was authorized.
+
+  Focused recomposition evidence 2026-08-01: the committed contract/checker and all six public teaching pages plus
+  root `README.md` are unchanged from `336781d6`. The independent checker passes exact 3/7/6/3 fixture counts, 8+8
+  transitions, six recursive observations, four structural cases, 92 projections plus seven aliases and two
+  internal ids, 31 diagnostics, 1/13 rollout, and 36 rejected mutations. Capability remains schema v2 / 80-0-0 / two
+  exclusions / 24+6 mutations / 12 public projections. The book rebuilds at 79 files / 14,120 KiB; its only new
+  cross-page link resolves to the generated `choose-rule-shapes-by-responsibility` id, retired praise strings are
+  absent, and direct HTML shows separate `h2`, `ul`, `pre`, and sibling `p` elements. Knowledge Map 784/6,363,
+  memory/task metadata, whitespace, and all seven doctrines pass with only this task-tree leaf dirty.
+
+  Definitive signoff evidence 2026-08-01: repository-routed canonical CI passes all seven doctrines, every neutral
+  contract and focused Perl consumer, semantic and MCP admissions, project-data containment, moved-root and outside-
+  CWD execution, CLI 66/66 in both default and POSIX environments, RAM 53%, and Phase 0 1,031/1,031 in 639 seconds
+  before `local CI gate passed`. Contract, checker, runtime/schema/helper sources, root README, and all public book
+  sources remain unchanged from `336781d6`. Parent `.14.1` is composition-closed; generated-book cleanup, commit,
+  brief clearing, and exact clean proof precede `.14.2` activation.
+  Commit: `FUTURE-PARITY-BACKLOG.14.1.3 - close typed source location contract`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2`
   Status: `pending`
@@ -19320,14 +19362,12 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-01):** public linked-rule teaching `.14.1.2` is signoff-complete from clean neutral-
-artifact commit `e8f6198b` (intended 134/300; no push). The sole-facing rule/regex guides now teach executable
-zero/one/two-regex responsibilities, regex-bearing entries, action-edge OR/default, blind-call `:AND`, and consume-
-before-recurse. Three portmap, one EBNF, and one reading-order passage preserve their shipped complex/recursive-
-regex implementations as compatibility facts, not recommendations. The neutral v1 contract remains exact and no
-runtime/schema/example behavior moves. Knowledge Map 784/6,363, book 79/14,120 KiB with separate DOM structures,
-all seven doctrines, definitive CLI 66x2, RAM 48%, and Phase 0 1,031/1,031 in 640 seconds pass. No-change
-recomposition `.14.1.3` follows only after `.14.1.2` commit/brief/clean proof.
+**Authoritative frontier (2026-08-01):** no-change recomposition `.14.1.3` is signoff-complete from clean public-
+teaching commit `336781d6` (intended 135/300; no push), closing parent `.14.1`. The committed neutral v1 contract/
+checker, root README, runtime/schema/helper sources, and sole-facing zero/one/two-regex teaching remain unchanged.
+Focused exact counts, book 79/14,120 KiB and rendered structure, Knowledge Map 784/6,363, all seven doctrines,
+containment/moved-root proof, CLI 66x2, RAM 53%, and Phase 0 1,031/1,031 in 639 seconds pass. Commit, brief clearing,
+generated-book cleanup, and exact clean proof precede immutable typed-value/helper implementation `.14.2`.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private
@@ -19670,11 +19710,11 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 96 | `FUTURE-PARITY-BACKLOG.14` | `active` | Extend structural/progressive/staged authoring through one typed source-location/cursor algebra and exact six-runtime/public proof. |
 | 97 | `FUTURE-PARITY-BACKLOG.14.0` | `done` | Director doctrine, existing ADR/prototype, present implementation gaps, and contradictory walkthrough evidence are durably split. |
 | 98 | `FUTURE-PARITY-BACKLOG.14.0.1` | `done` | ADR `0056`, exact invariants, existing-owner reconciliation, and `.14.1-.8` dependency split are complete without behavior. |
-| 99 | `FUTURE-PARITY-BACKLOG.14.1` | `active` | Audit/plan `.14.1.0` and neutral artifact `.14.1.1` are done; public teaching and no-change recomposition follow in `.2-.3`. |
+| 99 | `FUTURE-PARITY-BACKLOG.14.1` | `done` | Audit/plan, neutral artifact, public teaching, and no-change recomposition `.14.1.0-.3` are composition-closed. |
 | 99.0 | `FUTURE-PARITY-BACKLOG.14.1.0` | `done` | TOOLBOX-led audit freezes the exact neutral/public plan without behavior; focused, book, doctrine, and canonical proof pass. |
 | 99.1 | `FUTURE-PARITY-BACKLOG.14.1.1` | `done` | The v1 neutral contract/checker, fixtures/mutations, tracked canonical route, truthful status docs, and complete canonical signoff pass. |
 | 99.2 | `FUTURE-PARITY-BACKLOG.14.1.2` | `done` | Sole-facing 0/1/2-regex linked teaching and five accurate compatibility reframings pass complete signoff. |
-| 99.3 | `FUTURE-PARITY-BACKLOG.14.1.3` | `pending` | Recompose committed contract and public teaching unchanged, close `.14.1`, and hand off cleanly to `.14.2`. |
+| 99.3 | `FUTURE-PARITY-BACKLOG.14.1.3` | `done` | Committed contract/public teaching recompose unchanged under complete canonical signoff; `.14.1` closes. |
 | 100 | `FUTURE-PARITY-BACKLOG.14.2` | `pending` | Implement immutable values/helper projections and admit all six runtimes. |
 | 101 | `FUTURE-PARITY-BACKLOG.14.3` | `pending` | Implement bounded cursor transactions plus progress and safety diagnostics. |
 | 102 | `FUTURE-PARITY-BACKLOG.14.4` | `pending` | Expose recursive entry/match/exit boundaries and bounded provenance read-only. |

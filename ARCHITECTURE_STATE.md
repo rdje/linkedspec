@@ -1,5 +1,14 @@
 # ARCHITECTURE STATE
 
+- `2026-08-01 typed source-location contract composition closure`: `FUTURE-PARITY-BACKLOG.14.1.3` independently
+  recomposes the committed neutral v1 contract/checker and linked-rule public teaching unchanged, closing parent
+  `.14.1`. Exact 3/7/6/3 fixtures, 8+8 transitions, six recursive/four structural cases, 92+7+2 identities, 31
+  diagnostics, 1/13 rollout, and 36 mutations pass. The sole-facing book remains byte-identical, rebuilds at 79
+  files / 14,120 KiB, resolves its linked-rule cross-page anchor, contains none of the retired praise strings, and
+  retains separate rendered structures. Capability is 80/0/0; Knowledge Map is 784/6,363; all seven doctrines,
+  containment/moved-root proof, CLI 66x2, RAM 53%, and Phase 0 1,031/1,031 in 639 seconds pass. No contract,
+  checker, implementation, schema, helper, root README, or book source changes; `.14.2` is the next clean frontier.
+
 - `2026-08-01 linked-rule public teaching`: `FUTURE-PARITY-BACKLOG.14.1.2` aligns the sole-facing mdBook with
   current executable structure. The rule-paragraph and regex guides teach zero-regex coordinators, one-regex
   leaves, two-regex entry/exit nodes, ordinary regex-bearing entries, action-edge OR/default branching, explicit
@@ -17,10 +26,11 @@
   contract fixes 3/7/6/3 source-position-span-text fixtures, 8+8 invocation/transaction transitions, six
   recursive/four structural cases, 92 canonical helper projections, seven callable aliases, two internal ids, 31
   diagnostics, 36 mutations, and 14 rollout legs. At that landing, only neutral-contract leg 1 was complete;
-  syntax, public typed values, backend execution, and public structural teaching remained future. Canonical registration requires both
-  artifacts tracked and executes the checker through project-local Python storage. Three book pages state this
-  boundary in separate rendered paragraphs. Focused and seven-doctrine proof pass; definitive canonical proof
-  passes containment, moved-root/outside-CWD execution, CLI 66x2, RAM 46%, and Phase 0 1,031/1,031 in 644 seconds.
+  syntax, public typed values, backend execution, and public structural teaching remained future. Canonical
+  registration requires both artifacts tracked and executes the checker through project-local Python storage.
+  Three book pages state this boundary in separate rendered paragraphs. Focused and seven-doctrine proof pass;
+  definitive canonical proof passes containment, moved-root/outside-CWD execution, CLI 66x2, RAM 46%, and Phase 0
+  1,031/1,031 in 644 seconds.
   No parser/compiler/runtime/capability/semantic/MCP behavior moves.
 
 - `2026-08-01 typed source-location neutral-contract plan`: behavior-free

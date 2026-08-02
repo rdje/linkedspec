@@ -1,5 +1,14 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`FUTURE-PARITY-BACKLOG.14.1.3` — no-change typed source-location recomposition): clean activation
+  from `336781d6` re-ran the independent v1 checker at exact 3/7/6/3, 8+8, 6/4, 92+7+2, 31, 1/13, and 36 counts.
+  The contract, checker, all six public teaching pages, runtime/schema/helper sources, and root README stayed
+  byte-identical. The book rebuilt at 79 files / 14,120 KiB; its new cross-page link resolves, retired praise is
+  absent, and generated HTML retains separate heading/list/code/paragraph siblings. Capability remains 80/0/0,
+  Knowledge Map 784/6,363 and all seven doctrines pass, and canonical closes with containment/moved-root,
+  CLI 66x2, RAM 53%, and Phase 0 1,031/1,031 in 639 seconds. Parent `.14.1` is composition-closed; `.14.2` owns the
+  first immutable typed-value/helper implementation. The broader rendered-readability audit stays queued.
+
 - 2026-08-01 (`FUTURE-PARITY-BACKLOG.14.1.2` — linked-rule public teaching): the engine already had the intended
   structure; the documentation needed to distinguish support from recommendation. Fresh `LinkedSpec::Get` results
   are `["foo","foo"]` for a zero-regex coordinator plus one-regex leaf, `"foo"` for an ordinary regex-bearing

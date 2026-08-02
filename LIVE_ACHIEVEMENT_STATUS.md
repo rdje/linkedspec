@@ -1,5 +1,17 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-01 — Typed source-location neutral contract is composition-closed
+
+`FUTURE-PARITY-BACKLOG.14.1.3` is signoff-complete from clean `336781d6` (intended 135/300; no push), closing
+parent `.14.1`. The v1 neutral contract/checker, runtime/schema/helper sources, root README, and the sole-facing
+zero/one/two-regex teaching remain byte-for-byte unchanged. This is independent recomposition, not new behavior.
+
+The exact checker, capability 80/0/0, 79-file / 14,120-KiB book with resolved anchor and separate rendered
+structures, Knowledge Map 784/6,363, and all seven doctrines pass. Definitive canonical CI passes containment,
+moved-root/outside-CWD execution, CLI 66x2, RAM 53%, and Phase 0 1,031/1,031 in 639 seconds before
+`local CI gate passed`. Commit, brief clearing, generated-book cleanup, and exact clean proof remain before `.14.2`.
+The nonurgent `MDBOOK-RENDERED-READABILITY` audit remains independently queued.
+
 ## 2026-08-01 — Linked-rule public teaching is aligned
 
 `FUTURE-PARITY-BACKLOG.14.1.2` is signoff-complete from clean `e8f6198b` (intended 134/300; no push). The sole-facing rule-paragraph

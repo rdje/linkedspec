@@ -5,21 +5,19 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `e8f6198b` — clean neutral typed source-location artifact HEAD from which public teaching
-  `.14.1.2` activated task-tree-first (133/300; no push); Git derives the landing identity.
-- latest_completed_leaf: `.14.1.2` is signoff-complete for intended landing 134/300 as
-  `FUTURE-PARITY-BACKLOG.14.1.2 - teach linked rule structure`; Git derives the landing identity.
-- active_leaf: `.14.1.2` — sole-facing linked-rule teaching complete in the intended clean handoff.
-- active_scope: rule-paragraph, regex, portmap, EBNF, shipped-corpus, project-status, and continuity/KM alignment;
-  no grammar, parser/compiler/runtime/emitter, fixture, neutral-contract, or typed-value behavior.
-- active_progress: toolbox proves values `["foo","foo"]`, `"foo"`, and `[["a",["b"],"c"]]` with exact
-  0/1/1/2 regex counts and zero-regex `AND_BCODE`; five compatibility passages are reframed. The complete book
-  builds 79 files / 14,120 KiB with separate DOM structures; KM 784/6,363, doctrines, definitive CLI 66x2, RAM
-  48%, and Phase 0 1,031/1,031 in 640 seconds pass.
-- active_exclusions: implementation/backend admission, syntax or helper changes, capability/semantic/MCP, root
-  README, comprehensive queued book-readability audit, push, and unrelated cleanup.
-- in_flight_uncommitted: none in intended clean handoff; `.14.1.2` is fully verified and committed before pivot.
-- next_after_clean_commit: activate no-change recomposition `.14.1.3` task-tree-first.
+- activation_commit: `336781d6` — clean public linked-rule teaching HEAD from which no-change recomposition
+  `.14.1.3` activated task-tree-first (134/300; no push); Git derives the landing identity.
+- latest_completed_leaf: `.14.1.3` is signoff-complete for intended landing 135/300 as
+  `FUTURE-PARITY-BACKLOG.14.1.3 - close typed source location contract`; Git derives the landing identity.
+- active_leaf: `.14.1.3` — no-change recomposition complete; parent `.14.1` composition-closed in intended handoff.
+- active_scope: task/roadmap/live/bounded-memory closeout only; contract/checker, runtime/schema/helpers, root README,
+  Knowledge facts, and all sole-facing book sources remain unchanged.
+- active_progress: exact v1 checker counts, capability 80/0/0, book 79/14,120 KiB with resolved link/separate DOM,
+  KM 784/6,363, all doctrines, containment/moved-root, CLI 66x2, RAM 53%, and Phase 0 1,031/1,031 in 639 seconds pass.
+- active_exclusions: implementation/backend admission, syntax/helper/public-teaching changes, new Knowledge facts,
+  comprehensive queued book-readability audit, push, and unrelated cleanup.
+- in_flight_uncommitted: none in intended clean handoff; `.14.1.3` is fully verified and committed before pivot.
+- next_after_clean_commit: activate immutable typed source-location values/helper projections `.14.2` task-tree-first.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -40,17 +38,17 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - closed_contract_handoff_guard: retain historical next owner `FUTURE-PARITY-BACKLOG.10.1` until tracked `.22`
   moves the repeated-action checker's immutable handoff to a stable governed home.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54.
-- current_future_direction: callable parent `.11` and exclusion parent `.24` are public-closed; source-location
-  public teaching `.14.1.2` is active and no-change `.14.1.3` follows clean signoff. Rendered-readability `.1-.2`
-  remains durably queued/non-blocking; ADR `0064` is unscheduled; ADR `0056` stays `.14.1-.8`.
+- current_future_direction: callable `.11`, typed-source contract `.14.1`, and exclusion `.24` are closed; immutable
+  values/helper projection `.14.2` is next. Rendered-readability `.1-.2` remains queued/non-blocking; ADR `0064`
+  is unscheduled; ADR `0056` implementation continues through `.14.2-.8`.
 - latest_bootstrap_read: 2026-08-01 — README, memory architecture, resume/task/decision/KM/Toolbox owners, full
   roadmap, codebase, and all 45 tracked mdBook pages are read/understood; current callable/Lua authorities refreshed.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
-- push_policy: hard lock at 300 new local commits; `.14.1.2` intended landing is 134/300; no push.
+- push_policy: hard lock at 300 new local commits; `.14.1.3` intended landing is 135/300; no push.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; canonical needs nested macOS sandbox permission and up to 30m.
-- canonical_state: `.14.1.2` definitive canonical passes containment, moved-root/outside-CWD, CLI 66x2, RAM 48%,
-  and Phase 0 1,031/1,031 in 640 seconds before `local CI gate passed`.
-- blockers: none; activate `.14.1.3` task-tree-first after the clean `.14.1.2` landing; no push.
+- canonical_state: `.14.1.3` definitive canonical passes containment, moved-root/outside-CWD, CLI 66x2, RAM 53%,
+  and Phase 0 1,031/1,031 in 639 seconds before `local CI gate passed`.
+- blockers: none; activate `.14.2` task-tree-first after the clean `.14.1.3` landing; no push.
