@@ -1,5 +1,20 @@
 # CHANGES
 
+## 2026-08-01 — MDBOOK-DESTINATION-ROOT-ALIGNMENT.1 — align mdBook destination root
+
+- Replaced the wrapper's repository-root launch with `mdbook build .` from the already authoritative book root.
+  Relative custom destinations now execute as the exact paths validated before launch; default, environment,
+  absolute, caller-CWD, symlink, and external behavior remain governed.
+- Replaced the output-ignoring fake mdBook with an argument-aware oracle that asserts CWD/book operand, parses and
+  writes through split `--dest-dir X`, equals `--dest-dir=X`, compact `-dX`, environment, and absolute destinations,
+  and leaves an execution marker so hostile pre-launch rejection is real. The pre-fix wrapper failed exactly at
+  repository-root CWD; the repair passes.
+- Real default and relative builds each produced 79 files / 14,120 KiB in the intended repository locations; both
+  exact rebuildable outputs were removed after verification. Focused storage and outside-CWD workflow routing pass.
+  The canonical storage fact and continuity surfaces are synchronized; no sole-facing book source or runtime moves.
+- Complete signoff passes Knowledge Map 785/6,377, memory 54/60, all seven doctrines, canonical CLI 66x2, RAM 46%,
+  and Phase 0 1,031/1,031 in 659 seconds before the explicit local-CI pass marker. Final residue census is clean.
+
 ## 2026-08-01 — MDBOOK-DESTINATION-ROOT-ALIGNMENT.0 — own mdBook destination root mismatch
 
 - Created a dedicated project-data safety tree from clean `bd777ee8` after rendered verification proved that a

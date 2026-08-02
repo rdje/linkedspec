@@ -1,5 +1,29 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`MDBOOK-DESTINATION-ROOT-ALIGNMENT.1` — one-base mdBook execution): the old storage fake accepted any
+  command and wrote to a separate test-only output variable, so it could not prove the wrapper's CWD, book operand,
+  argument parsing, or actual output path. The replacement fake first asserts `BOOK_ROOT`, requires `build .`,
+  parses split/equals/compact CLI destination forms with environment/default fallback, and creates `index.html`
+  through the selected destination. A separate marker proves rejected symlink/external cases never launch it.
+
+  Before the wrapper changed, the first relative split case exited 1 with the exact message that repository-root
+  CWD was not the expected book root. The production repair changes only the final `cd` and mdBook book operand;
+  validation, argument forwarding, command selection, output existence, and post-build validation remain unchanged.
+  The expanded storage oracle passes, as does outside-CWD workflow routing. One intermediate routing run usefully
+  rejected a `${...:-book}` string in the generated fake as an apparent unrooted storage fallback; expressing that
+  fallback as an explicit conditional keeps the production doctrine strict without exempting test fixtures.
+
+  Real default and formerly failing relative builds each produced the same 79 files / 14,120 KiB on the repository
+  volume. Both exact generated trees were removed after inspection and are recoverable by rerunning the wrapper.
+  The storage Knowledge fact's stale inventory text was also corrected from 12/19 to the governed current 14 shell
+  allocator owners / 28 Python entrypoints. No user-facing book page documents this internal build-wrapper seam,
+  so adding public prose would create noise; book source stays unchanged while rendered build proof remains exact.
+
+  Complete signoff passes Knowledge Map 785/6,377, memory 54/60, task metadata, all seven doctrines, exact CLI
+  66x2, RAM 46%, and Phase 0 1,031/1,031 in 659 seconds before `local CI gate passed`. Canonical containment,
+  relocated six-family IO, Rust moved-root execution, four outside-CWD anchors, tool storage, and the repaired
+  mdBook argument-aware oracle all pass. No generated book or non-cache bytecode remains after the gate.
+
 - 2026-08-01 (`MDBOOK-DESTINATION-ROOT-ALIGNMENT.0` — destination-base safety intake): rendered verification used
   `--dest-dir ../../.linkedspec-data/scratch/mdbook-14-2-0-1`. The wrapper validated that relative argument as
   `docs/linkedspec-book/../../.linkedspec-data/...` on the repository volume, then changed to the repository root.

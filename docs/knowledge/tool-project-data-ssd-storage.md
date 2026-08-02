@@ -20,7 +20,7 @@ answers:
 date: 2026-07-26
 status: current
 tags: [storage, ssd, python, bytecode, knowledge-map, mdbook, tap, oracle, temporary-data, portability]
-evidence: "PROJECT-DATA-SSD-ROOTING.2.6 adds tools/run_python_project_data.sh and tools/test_tool_project_data_storage.sh; exports retained PYTHONPYCACHEPREFIX from tools/project_data_env.sh; gives both Unicode generators explicit validated scratch; configures generic KM_OUTPUT_VALIDATOR in .knowledge_map.conf; validates Knowledge Map output before/after generation and mdBook output before/after build; routes canonical/current checker commands; and deletes the exact unreferenced 88-line /private/tmp/linkedspec-julia-reverify-cards.txt after classification. MDBOOK-DESTINATION-ROOT-ALIGNMENT.0 records that a relative CLI destination passes validation from BOOK_ROOT but is currently interpreted by mdBook from REPO_ROOT; repair and an argument-aware regression are pending .1."
+evidence: "PROJECT-DATA-SSD-ROOTING.2.6 adds tools/run_python_project_data.sh and tools/test_tool_project_data_storage.sh; exports retained PYTHONPYCACHEPREFIX from tools/project_data_env.sh; gives both Unicode generators explicit validated scratch; configures generic KM_OUTPUT_VALIDATOR in .knowledge_map.conf; validates Knowledge Map output before/after generation and mdBook output before/after build; routes canonical/current checker commands; and deletes the exact unreferenced 88-line /private/tmp/linkedspec-julia-reverify-cards.txt after classification. MDBOOK-DESTINATION-ROOT-ALIGNMENT.1 runs mdBook from BOOK_ROOT as build ., and its argument-aware fake proves split, equals, compact, environment, and absolute destinations plus pre-launch hostile/symlink rejection. Real default and relative builds each produce 79 files / 14,120 KiB on the repository volume."
 reverify: "bash tools/test_tool_project_data_storage.sh; bash knowledge-map/scripts/check_knowledge_map.sh; bash tools/run_mdbook_local.sh"
 ---
 
@@ -33,13 +33,13 @@ select an explicit same-device temporary root, including when invoked directly.
 
 LinkedSpec configures the portable Knowledge Map bundle's optional `KM_OUTPUT_VALIDATOR` through the repo-relative
 environment initializer. Generation validates before creating output and after writing it; checking validates the
-configured committed map before use. The mdBook wrapper safely validates default and absolute destinations, rejects
-another-filesystem or symlink output before launch, and verifies created output. A relative CLI destination is
-currently the tracked exception: validation resolves it from the book root, but mdBook executes from the repository
-root and can interpret it as a different path. `MDBOOK-DESTINATION-ROOT-ALIGNMENT.1` owns the repair and regression.
+configured committed map before use. The mdBook wrapper validates default, environment, and CLI destinations from
+the book root, rejects another-filesystem or symlink output before launch, then executes `mdbook build .` from that
+same root and verifies created output. Relative split, equals, and compact CLI forms therefore execute the exact
+path that validation approved, independently of the caller's current working directory.
 
-`tools/test_tool_project_data_storage.sh` freezes three Python temporary owners, 12 actual shell allocator owners,
-and 19 Python checker entrypoints. It proves real bytecode, map, HTML, CLI workspace, TAP, and oracle capture paths
+`tools/test_tool_project_data_storage.sh` freezes three Python temporary owners, 14 actual shell allocator owners,
+and 28 Python checker entrypoints. It proves real bytecode, map, HTML, CLI workspace, TAP, and oracle capture paths
 use the repository device and hostile external destinations remain absent. Its deliberate cross-volume reads are
 limited to device and exact-path absence checks required for that rejection proof.
 

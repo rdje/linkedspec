@@ -44,8 +44,8 @@ command -v "$MDBOOK_CMD" >/dev/null 2>&1 || {
  fail "required command not found: $MDBOOK_CMD"
 }
 
-cd "$REPO_ROOT"
+cd "$BOOK_ROOT"
 printf '%s\n' '[mdbook] building LinkedSpec book with repo-local project data'
-"$MDBOOK_CMD" build docs/linkedspec-book "$@"
+"$MDBOOK_CMD" build . "$@"
 [[ -d "$OUTPUT_PATH" && ! -L "$OUTPUT_PATH" ]] || fail "mdBook did not create a real output directory: $OUTPUT_PATH"
 linkedspec_project_data_validate_output_path "$OUTPUT_PATH" 'mdBook output'

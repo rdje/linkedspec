@@ -246,19 +246,72 @@ fake_mdbook="$case_root/bin/mdbook"
 mkdir -p -- "$(dirname -- "$fake_mdbook")"
 {
  printf '%s\n' '#!/bin/sh'
- printf '%s\n' 'mkdir -p -- "$LINKEDSPEC_MDBOOK_TEST_OUTPUT"'
- printf '%s\n' 'printf "%s\n" rendered >"$LINKEDSPEC_MDBOOK_TEST_OUTPUT/index.html"'
+ printf '%s\n' 'fail() { printf "[fake-mdbook] ERROR: %s\n" "$*" >&2; exit 1; }'
+ printf '%s\n' 'actual_cwd=$(pwd -P)'
+ printf '%s\n' '[ -n "${LINKEDSPEC_MDBOOK_TEST_BOOK_ROOT:-}" ] || fail "expected book root is missing"'
+ printf '%s\n' '[ "$actual_cwd" = "$LINKEDSPEC_MDBOOK_TEST_BOOK_ROOT" ] || fail "cwd $actual_cwd is not book root $LINKEDSPEC_MDBOOK_TEST_BOOK_ROOT"'
+ printf '%s\n' '[ -z "${LINKEDSPEC_MDBOOK_TEST_MARKER:-}" ] || printf "%s\n" invoked >"$LINKEDSPEC_MDBOOK_TEST_MARKER"'
+ printf '%s\n' '[ "${1:-}" = build ] || fail "expected build command"'
+ printf '%s\n' 'shift'
+ printf '%s\n' '[ "${1:-}" = . ] || fail "expected book operand ., got ${1:-<missing>}"'
+ printf '%s\n' 'shift'
+ printf '%s\n' 'destination=${MDBOOK_BUILD__BUILD_DIR:-}'
+ printf '%s\n' '[ -n "$destination" ] || destination=book'
+ printf '%s\n' 'while [ "$#" -gt 0 ]; do'
+ printf '%s\n' ' case "$1" in'
+ printf '%s\n' '  -d|--dest-dir) shift; [ "$#" -gt 0 ] || fail "$1 requires a destination"; destination=$1 ;;'
+ printf '%s\n' '  --dest-dir=*) destination=${1#*=} ;;'
+ printf '%s\n' '  -d?*) destination=${1#-d} ;;'
+ printf '%s\n' ' esac'
+ printf '%s\n' ' shift'
+ printf '%s\n' 'done'
+ printf '%s\n' '[ -n "$destination" ] || fail "destination must not be empty"'
+ printf '%s\n' 'case "$destination" in /*) output=$destination ;; *) output=$actual_cwd/$destination ;; esac'
+ printf '%s\n' 'mkdir -p -- "$output"'
+ printf '%s\n' 'printf "%s\n" rendered >"$output/index.html"'
 } >"$fake_mdbook"
 chmod +x "$fake_mdbook"
 
+book_root="$REPO_ROOT/docs/linkedspec-book"
+case_root_relative=${case_root#"$REPO_ROOT/"}
+[[ "$case_root_relative" != "$case_root" ]] || fail 'managed mdBook case root is not beneath the repository'
+relative_book_base="../../$case_root_relative"
+
+relative_split_book="$case_root/mdbook-relative-split"
+LINKEDSPEC_MDBOOK_CMD="$fake_mdbook" LINKEDSPEC_MDBOOK_TEST_BOOK_ROOT="$book_root" \
+ bash "$REPO_ROOT/tools/run_mdbook_local.sh" --dest-dir "$relative_book_base/mdbook-relative-split" >/dev/null
+assert_local_real_path "$relative_split_book"
+assert_local_real_path "$relative_split_book/index.html"
+
+relative_equals_book="$case_root/mdbook-relative-equals"
+LINKEDSPEC_MDBOOK_CMD="$fake_mdbook" LINKEDSPEC_MDBOOK_TEST_BOOK_ROOT="$book_root" \
+ bash "$REPO_ROOT/tools/run_mdbook_local.sh" \
+ "--dest-dir=$relative_book_base/mdbook-relative-equals" >/dev/null
+assert_local_real_path "$relative_equals_book"
+assert_local_real_path "$relative_equals_book/index.html"
+
+relative_compact_book="$case_root/mdbook-relative-compact"
+LINKEDSPEC_MDBOOK_CMD="$fake_mdbook" LINKEDSPEC_MDBOOK_TEST_BOOK_ROOT="$book_root" \
+ bash "$REPO_ROOT/tools/run_mdbook_local.sh" "-d$relative_book_base/mdbook-relative-compact" >/dev/null
+assert_local_real_path "$relative_compact_book"
+assert_local_real_path "$relative_compact_book/index.html"
+
+relative_env_book="$case_root/mdbook-relative-env"
+MDBOOK_BUILD__BUILD_DIR="$relative_book_base/mdbook-relative-env" \
+ LINKEDSPEC_MDBOOK_CMD="$fake_mdbook" LINKEDSPEC_MDBOOK_TEST_BOOK_ROOT="$book_root" \
+ bash "$REPO_ROOT/tools/run_mdbook_local.sh" >/dev/null
+assert_local_real_path "$relative_env_book"
+assert_local_real_path "$relative_env_book/index.html"
+
 valid_book="$case_root/book"
-LINKEDSPEC_MDBOOK_CMD="$fake_mdbook" LINKEDSPEC_MDBOOK_TEST_OUTPUT="$valid_book" \
+LINKEDSPEC_MDBOOK_CMD="$fake_mdbook" LINKEDSPEC_MDBOOK_TEST_BOOK_ROOT="$book_root" \
  bash "$REPO_ROOT/tools/run_mdbook_local.sh" --dest-dir "$valid_book" >/dev/null
 assert_local_real_path "$valid_book"
 assert_local_real_path "$valid_book/index.html"
 
 set +e
-LINKEDSPEC_MDBOOK_CMD="$fake_mdbook" LINKEDSPEC_MDBOOK_TEST_OUTPUT="$case_root/should-not-run" \
+LINKEDSPEC_MDBOOK_CMD="$fake_mdbook" LINKEDSPEC_MDBOOK_TEST_BOOK_ROOT="$book_root" \
+ LINKEDSPEC_MDBOOK_TEST_MARKER="$case_root/should-not-run" \
  bash "$REPO_ROOT/tools/run_mdbook_local.sh" --dest-dir "$case_root/output-link/book" \
  >/dev/null 2>"$case_root/mdbook-symlink.err"
 symlink_status=$?
@@ -270,7 +323,8 @@ rg -q 'must not contain a symlink' "$case_root/mdbook-symlink.err" ||
 
 set +e
 MDBOOK_BUILD__BUILD_DIR="$external_probe/book" LINKEDSPEC_MDBOOK_CMD="$fake_mdbook" \
- LINKEDSPEC_MDBOOK_TEST_OUTPUT="$case_root/should-not-run" \
+ LINKEDSPEC_MDBOOK_TEST_BOOK_ROOT="$book_root" \
+ LINKEDSPEC_MDBOOK_TEST_MARKER="$case_root/should-not-run" \
  bash "$REPO_ROOT/tools/run_mdbook_local.sh" >/dev/null 2>"$case_root/mdbook-hostile.err"
 hostile_status=$?
 set -e

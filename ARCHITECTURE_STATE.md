@@ -1,5 +1,14 @@
 # ARCHITECTURE STATE
 
+- `2026-08-01 mdBook destination-root alignment`: `MDBOOK-DESTINATION-ROOT-ALIGNMENT.1` makes validation and
+  execution share `BOOK_ROOT`. The wrapper now invokes `mdbook build .` there while retaining argument forwarding,
+  command selection, pre/post output validation, and caller-CWD independence. An argument-aware fake asserts the
+  same CWD/operand, writes through split/equals/compact relative, environment, and absolute destinations, and marks
+  invocation so hostile symlink/external cases prove pre-launch rejection. Its exact pre-fix RED and post-fix GREEN,
+  outside-CWD routing, and real default/relative 79-file / 14,120-KiB builds pass. Knowledge Map 785/6,377, all
+  doctrines, canonical CLI 66x2, RAM 46%, and Phase 0 1,031/1,031 in 659 seconds pass. No book source, theme,
+  language, parser/compiler/runtime, or typed-source behavior changes; the safety tree is closed.
+
 - `2026-08-01 mdBook destination-root safety intake`: `MDBOOK-DESTINATION-ROOT-ALIGNMENT.0` owns one reproduced
   project-data seam without changing behavior. Relative custom output is validated from `BOOK_ROOT`, but the
   wrapper then invokes mdBook from `REPO_ROOT`; real mdBook therefore can execute a different path than the one

@@ -1,5 +1,22 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-01 — mdBook destinations validate and execute from one root
+
+`MDBOOK-DESTINATION-ROOT-ALIGNMENT.1` is signoff-complete from clean `33b0fb2c` (intended 139/300; no push). The wrapper now
+runs `mdbook build .` from `BOOK_ROOT`, making relative destination execution identical to pre-launch validation
+without changing original argument forwarding, default/environment/absolute behavior, or caller-CWD independence.
+
+The storage oracle's fake mdBook now asserts CWD and book operand, parses and writes through split, equals, compact,
+environment, and absolute destinations, and records invocation for hostile rejection cases. It failed against the
+old wrapper at the exact repository-root/book-root mismatch and passes after the two-line repair. Expanded tool
+storage and outside-CWD workflow routing are green. Real default and formerly failing relative builds each produced
+79 files / 14,120 KiB on the repository volume; both exact rebuildable outputs were removed.
+
+The canonical storage Knowledge fact and current architecture/task/roadmap records are synchronized. No sole-facing
+book page describes this internal wrapper, so no public book source changes. Knowledge Map 785/6,377, memory 54/60,
+all seven doctrines, canonical CLI 66x2, RAM 46%, and Phase 0 1,031/1,031 in 659 seconds pass before the explicit
+local-CI marker. Commit, brief clearing, and clean proof remain before typed-source Perl `.14.2.1.0` resumes.
+
 ## 2026-08-01 — mdBook destination-base safety repair is exactly owned
 
 `MDBOOK-DESTINATION-ROOT-ALIGNMENT.0` is signoff-complete from clean `bd777ee8` (intended 138/300; no push).
