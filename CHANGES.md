@@ -1,5 +1,17 @@
 # CHANGES
 
+## 2026-08-01 — MDBOOK-DESTINATION-ROOT-ALIGNMENT.0 — own mdBook destination root mismatch
+
+- Created a dedicated project-data safety tree from clean `bd777ee8` after rendered verification proved that a
+  relative custom destination validates from the book root but is interpreted by mdBook from the repository root.
+  This intake preserves the exact denied off-repository attempt; it changes no wrapper, test, book, or runtime.
+- Froze the smallest repair: execute `mdbook build .` from the book root so actual CLI-relative resolution matches
+  validation while default, absolute, and environment behavior remain stable. `.1` first adds a real argument-aware
+  RED oracle covering split, equals, and compact destination forms, then applies the wrapper change.
+- Corrected the canonical storage Knowledge card's blanket safety claim and synchronized task/roadmap/live
+  continuity. The nonurgent rendered-readability audit remains separate, and typed-source Perl work resumes only
+  after the safety repair closes cleanly.
+
 ## 2026-08-01 — FUTURE-PARITY-BACKLOG.14.2.0.1 — correct typed source rollout truth
 
 - Promoted only the completed `public_structure` and `neutral_public_recomposition` rollout rows and re-owned the

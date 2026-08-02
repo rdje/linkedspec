@@ -9,6 +9,8 @@ answers:
   - how does Knowledge Map validate generated output
   - can mdBook output be written to another volume
   - how are mdBook destination overrides validated
+  - do relative mdBook destination overrides validate and execute from the same base
+  - why can a validated relative mdBook destination resolve outside the repository
   - which oracle proves tool project data stays on the SSD
   - how many Python temporary allocation owners exist
   - how many shell temporary allocation owners exist
@@ -18,7 +20,7 @@ answers:
 date: 2026-07-26
 status: current
 tags: [storage, ssd, python, bytecode, knowledge-map, mdbook, tap, oracle, temporary-data, portability]
-evidence: "PROJECT-DATA-SSD-ROOTING.2.6 adds tools/run_python_project_data.sh and tools/test_tool_project_data_storage.sh; exports retained PYTHONPYCACHEPREFIX from tools/project_data_env.sh; gives both Unicode generators explicit validated scratch; configures generic KM_OUTPUT_VALIDATOR in .knowledge_map.conf; validates Knowledge Map output before/after generation and mdBook output before/after build; routes canonical/current checker commands; and deletes the exact unreferenced 88-line /private/tmp/linkedspec-julia-reverify-cards.txt after classification."
+evidence: "PROJECT-DATA-SSD-ROOTING.2.6 adds tools/run_python_project_data.sh and tools/test_tool_project_data_storage.sh; exports retained PYTHONPYCACHEPREFIX from tools/project_data_env.sh; gives both Unicode generators explicit validated scratch; configures generic KM_OUTPUT_VALIDATOR in .knowledge_map.conf; validates Knowledge Map output before/after generation and mdBook output before/after build; routes canonical/current checker commands; and deletes the exact unreferenced 88-line /private/tmp/linkedspec-julia-reverify-cards.txt after classification. MDBOOK-DESTINATION-ROOT-ALIGNMENT.0 records that a relative CLI destination passes validation from BOOK_ROOT but is currently interpreted by mdBook from REPO_ROOT; repair and an argument-aware regression are pending .1."
 reverify: "bash tools/test_tool_project_data_storage.sh; bash knowledge-map/scripts/check_knowledge_map.sh; bash tools/run_mdbook_local.sh"
 ---
 
@@ -31,8 +33,10 @@ select an explicit same-device temporary root, including when invoked directly.
 
 LinkedSpec configures the portable Knowledge Map bundle's optional `KM_OUTPUT_VALIDATOR` through the repo-relative
 environment initializer. Generation validates before creating output and after writing it; checking validates the
-configured committed map before use. The mdBook wrapper resolves default, environment, and CLI destinations using
-the current checkout, rejects another-filesystem or symlink output before launch, and verifies the created output.
+configured committed map before use. The mdBook wrapper safely validates default and absolute destinations, rejects
+another-filesystem or symlink output before launch, and verifies created output. A relative CLI destination is
+currently the tracked exception: validation resolves it from the book root, but mdBook executes from the repository
+root and can interpret it as a different path. `MDBOOK-DESTINATION-ROOT-ALIGNMENT.1` owns the repair and regression.
 
 `tools/test_tool_project_data_storage.sh` freezes three Python temporary owners, 12 actual shell allocator owners,
 and 19 Python checker entrypoints. It proves real bytecode, map, HTML, CLI workspace, TAP, and oracle capture paths

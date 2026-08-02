@@ -1,5 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`MDBOOK-DESTINATION-ROOT-ALIGNMENT.0` — destination-base safety intake): rendered verification used
+  `--dest-dir ../../.linkedspec-data/scratch/mdbook-14-2-0-1`. The wrapper validated that relative argument as
+  `docs/linkedspec-book/../../.linkedspec-data/...` on the repository volume, then changed to the repository root.
+  Real mdBook resolved the unchanged argument from that different directory and attempted an off-repository path;
+  the sandbox denied it with `Operation not permitted`. A runtime-derived absolute repository-scratch destination
+  then built successfully, isolating the defect to relative custom CLI output rather than book content.
+
+  Source inspection confirms one exact seam: validation deliberately uses `BOOK_ROOT`, while execution uses
+  `REPO_ROOT` and `mdbook build docs/linkedspec-book`. Default output is not forwarded as a CLI override, and
+  absolute overrides have no relative base, so the smallest repair is to run from `BOOK_ROOT` with `mdbook build .`.
+  This preserves caller-CWD independence and the existing book-root-relative contract.
+
+  `.1` must first make the current wrapper fail an argument-aware fake-mdBook oracle that asserts book-root CWD,
+  parses the actual relative destination, and writes the exact expected output inside the existing repository-local
+  case root. It then applies the two-line execution repair and proves split `--dest-dir X`, equals
+  `--dest-dir=X`, compact `-dX`, default/environment/absolute behavior, and hostile external/symlink rejection.
+  This `.0` intake changes only task, roadmap, Knowledge, and live records; the rendered-readability audit remains
+  queued and typed-source Perl work does not activate until `.1` closes cleanly.
+
 - 2026-08-01 (`FUTURE-PARITY-BACKLOG.14.2.0.1` — typed-source live-ledger correction): Knowledge retrieval and an
   exact current-claim census found one executable contradiction plus six current-facing projections: the JSON and
   checker still held completed public owners `.14.1.2-.3` pending; the capability guide, three mdBook pages, and

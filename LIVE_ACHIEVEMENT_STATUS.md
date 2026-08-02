@@ -1,5 +1,23 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-01 — mdBook destination-base safety repair is exactly owned
+
+`MDBOOK-DESTINATION-ROOT-ALIGNMENT.0` is signoff-complete from clean `bd777ee8` (intended 138/300; no push).
+Rendered verification proved that the wrapper validates relative custom output from `BOOK_ROOT`, then invokes real
+mdBook from `REPO_ROOT`, allowing the same argument to execute as a different path. The reproduced repository-local
+argument was denied only after mdBook attempted an off-repository destination; an absolute repository-scratch
+destination succeeded. No wrapper, test, book, or runtime behavior changes in this intake.
+
+The next leaf first adds an argument-aware fake-mdBook RED oracle that asserts book-root CWD, parses the actual
+relative destination, and creates the exact expected repository-local output. It then changes execution to
+`mdbook build .` from `BOOK_ROOT` and proves split, equals, and compact CLI forms while preserving default,
+environment, absolute, external, and symlink behavior. The canonical storage Knowledge card now states the exact
+current exception instead of a blanket safety claim.
+
+Knowledge Map 785/6,377, memory 55/60, task metadata, whitespace, and all seven doctrines pass. The nonurgent
+rendered-readability audit remains independent. Commit, brief clearing, and exact clean proof precede `.1`; typed-
+source Perl authority/RED work resumes only after the safety repair closes cleanly.
+
 ## 2026-08-01 — Typed source public rollout truth is corrected
 
 `FUTURE-PARITY-BACKLOG.14.2.0.1` is signoff-complete from clean planning commit `5a294f39` (intended 137/300; no push). The

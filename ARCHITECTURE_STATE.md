@@ -1,5 +1,13 @@
 # ARCHITECTURE STATE
 
+- `2026-08-01 mdBook destination-root safety intake`: `MDBOOK-DESTINATION-ROOT-ALIGNMENT.0` owns one reproduced
+  project-data seam without changing behavior. Relative custom output is validated from `BOOK_ROOT`, but the
+  wrapper then invokes mdBook from `REPO_ROOT`; real mdBook therefore can execute a different path than the one
+  approved. Default and absolute paths are unaffected. The frozen `.1` repair executes `mdbook build .` from
+  `BOOK_ROOT` and adds an argument-aware RED/current-working-directory/output regression for split, equals, and
+  compact CLI forms while retaining environment/absolute and hostile-destination proofs. The nonurgent rendered-
+  readability tree remains separate; typed-source Perl begins only after this safety tree closes cleanly.
+
 - `2026-08-01 typed source-location live-ledger correction`: behavior-free
   `FUTURE-PARITY-BACKLOG.14.2.0.1` promotes completed public structure `.14.1.2` and unchanged recomposition
   `.14.1.3`, advancing the executable ledger to 3 complete / 11 pending. Five backend rows remain pending under
