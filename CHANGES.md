@@ -1,5 +1,19 @@
 # CHANGES
 
+## 2026-08-01 — FUTURE-PARITY-BACKLOG.24.2 — close exclusion public no-drift
+
+Capability exclusion freshness is public-closed under `FUTURE-PARITY-BACKLOG.24`. A complete 59-file public
+Markdown audit found six current user-facing exclusion projections and no unclassified stale semantic/MCP,
+cursor, or superseded-owner claim. Six task/live/retrieval projections complete the exact governed set of 12.
+
+RED temporarily changed the sole-facing project-status marker from schema v2/two records to schema v1/four stale
+records; the old checker still passed. Its existing owner now binds the 12 projections, ten path-scoped stale-
+current denials, and six in-memory public mutations. The original schema-v2/two-exclusion/24-mutation manifest
+proof and capability rows 80/0/0 are unchanged. Focused proof passes Knowledge Map 783/6,348 and the complete
+mdBook at 79 files / 14,072 KiB; both new rendered closeouts are isolated paragraphs. All seven doctrines and the
+definitive canonical gate pass semantic/MCP admissions, containment/moved-root/outside-CWD execution, CLI 66x2,
+RAM 52%, and Phase 0 1,031/1,031 in 651 seconds before `local CI gate passed`.
+
 ## 2026-08-01 — FUTURE-PARITY-BACKLOG.24.1 — enforce exclusion status freshness
 
 Capability exclusion governance is now schema v2. Exactly two ordered records remain: deprecated Perl plugin

@@ -81,6 +81,92 @@ my %open_legacy_owner_status = map { $_ => 1 } qw(
  proposed active pending in_progress blocked
 );
 my %future_owner_status = map { $_ => 1 } qw(proposed active pending);
+my $public_close_marker = 'Capability exclusion freshness is public-closed under `FUTURE-PARITY-BACKLOG.24`';
+my @expected_public_projections = (
+ {
+  path => 'capability_conformance/README.md',
+  required_markers => [
+   "The manifest's exclusion ledger is schema v2 and currently contains exactly two ordered records.",
+   $public_close_marker,
+  ],
+ },
+ {
+  path => 'ROADMAP.md',
+  required_markers => ['Exclusion governance `.24.1` is signoff-complete', $public_close_marker],
+ },
+ {
+  path => 'ROADMAP_V2.md',
+  required_markers => ['Exclusion implementation `.24.1` is signoff-complete', $public_close_marker],
+ },
+ {
+  path => 'ARCHITECTURE_STATE.md',
+  required_markers => ['`2026-08-01 status-fresh capability exclusions`', $public_close_marker],
+ },
+ {
+  path => 'docs/linkedspec-book/src/development/local-ci-and-regression.md',
+  required_markers => [
+   'The separate exclusion ledger is now schema v2 with exactly two ordered records:',
+   $public_close_marker,
+  ],
+ },
+ {
+  path => 'docs/linkedspec-book/src/overview/project-status.md',
+  required_markers => ['schema v2 with exactly two status-fresh records:', $public_close_marker],
+ },
+ {
+  path => 'LIVE_ACHIEVEMENT_STATUS.md',
+  required_markers => ['Capability exclusion public no-drift is closed', $public_close_marker],
+ },
+ {
+  path => 'docs/TASK_TREE.md',
+  required_markers => ['exclusion public closeout `.24.2`', $public_close_marker],
+ },
+ {
+  path => 'docs/tasks/FUTURE-PARITY-BACKLOG.md',
+  required_markers => [
+   "- ID: `FUTURE-PARITY-BACKLOG.24`\n  Status: `done`",
+   "- ID: `FUTURE-PARITY-BACKLOG.24.2`\n  Status: `done`",
+   $public_close_marker,
+  ],
+ },
+ {
+  path => 'docs/knowledge/capability-exclusion-freshness-model.md',
+  required_markers => ['status: public-closed under FUTURE-PARITY-BACKLOG.24', $public_close_marker],
+ },
+ {
+  path => 'docs/knowledge/capability-exclusion-freshness-gap.md',
+  required_markers => ['status: public-closed under FUTURE-PARITY-BACKLOG.24', $public_close_marker],
+ },
+ {
+  path => 'KNOWLEDGE_MAP.md',
+  required_markers => [
+   '### capability-exclusion-freshness-gap',
+   '### capability-exclusion-freshness-model',
+   'public-closed under FUTURE-PARITY-BACKLOG.24',
+  ],
+ },
+);
+my @expected_forbidden_current_claims = (
+ {path => 'capability_conformance/README.md', text => 'schema v1 with four stale records'},
+ {path => 'ROADMAP.md', text => 'Clean `.24.2` public closeout follows.'},
+ {path => 'ROADMAP.md', text => 'Final public no-drift/parent closeout `.24.2` remains.'},
+ {path => 'ROADMAP_V2.md', text => 'public closeout `.24.2` remain.'},
+ {path => 'ROADMAP_V2.md', text => 'Final public no-drift/parent closure `.24.2` remains.'},
+ {path => 'docs/linkedspec-book/src/overview/project-status.md', text => 'schema v1 with four stale records'},
+ {path => 'docs/TASK_TREE.md', text => 'exclusion public closeout `.24.2` active'},
+ {
+  path => 'docs/tasks/FUTURE-PARITY-BACKLOG.md',
+  text => "- ID: `FUTURE-PARITY-BACKLOG.24`\n  Status: `active`",
+ },
+ {
+  path => 'docs/tasks/FUTURE-PARITY-BACKLOG.md',
+  text => "- ID: `FUTURE-PARITY-BACKLOG.24.2`\n  Status: `active`",
+ },
+ {
+  path => 'docs/knowledge/capability-exclusion-freshness-model.md',
+  text => 'final public closeout pending',
+ },
+);
 
 sub clone_value {
  my ($value) = @_;
@@ -89,6 +175,70 @@ sub clone_value {
 
 sub task_sources {
  return [map { +{path => $_, text => read_text($_)} } @task_paths];
+}
+
+sub expected_public_contract {
+ return {
+  projections              => clone_value(\@expected_public_projections),
+  forbidden_current_claims => clone_value(\@expected_forbidden_current_claims),
+ };
+}
+
+sub public_projection_sources {
+ my %paths = map { $_->{path} => 1 } (@expected_public_projections, @expected_forbidden_current_claims);
+ return {
+  map {
+   my $relative = $_;
+   $relative => read_text(File::Spec->catfile($repo_root, split m{/}, $relative));
+  } sort keys %paths
+ };
+}
+
+sub normalize_space {
+ my ($text) = @_;
+ $text =~ s/\s+/ /g;
+ $text =~ s/^ | $//g;
+ return $text;
+}
+
+sub validate_public_contract {
+ my ($contract, $sources) = @_;
+ require_hash_keys('public_contract', $contract, qw(projections forbidden_current_claims));
+ fail('public_contract.projections must be an array') unless ref($contract->{projections}) eq 'ARRAY';
+ fail('public_contract.forbidden_current_claims must be an array')
+  unless ref($contract->{forbidden_current_claims}) eq 'ARRAY';
+ fail('public_contract projection count drifted')
+  unless @{$contract->{projections}} == @expected_public_projections;
+ fail('public_contract forbidden-current-claim count drifted')
+  unless @{$contract->{forbidden_current_claims}} == @expected_forbidden_current_claims;
+
+ for my $index (0 .. $#expected_public_projections) {
+  my $actual = $contract->{projections}[$index];
+  my $expected = $expected_public_projections[$index];
+  require_hash_keys("public_contract.projections[$index]", $actual, qw(path required_markers));
+  fail("public_contract.projections[$index].path drifted") unless $actual->{path} eq $expected->{path};
+  fail("public_contract.projections[$index].required_markers must be an array")
+   unless ref($actual->{required_markers}) eq 'ARRAY';
+  fail("public_contract.projections[$index].required_markers drifted")
+   unless join("\0", @{$actual->{required_markers}}) eq join("\0", @{$expected->{required_markers}});
+  fail("public projection source is missing: $actual->{path}") unless exists $sources->{$actual->{path}};
+  my $normalized_source = normalize_space($sources->{$actual->{path}});
+  for my $marker (@{$actual->{required_markers}}) {
+   fail("$actual->{path} is missing public marker: $marker")
+    unless index($normalized_source, normalize_space($marker)) >= 0;
+  }
+ }
+
+ for my $index (0 .. $#expected_forbidden_current_claims) {
+  my $actual = $contract->{forbidden_current_claims}[$index];
+  my $expected = $expected_forbidden_current_claims[$index];
+  require_hash_keys("public_contract.forbidden_current_claims[$index]", $actual, qw(path text));
+  fail("public_contract.forbidden_current_claims[$index] drifted")
+   unless $actual->{path} eq $expected->{path} && $actual->{text} eq $expected->{text};
+  fail("public projection source is missing: $actual->{path}") unless exists $sources->{$actual->{path}};
+  fail("$actual->{path} retains forbidden current claim: $actual->{text}")
+   if index(normalize_space($sources->{$actual->{path}}), normalize_space($actual->{text})) >= 0;
+ }
 }
 
 sub parse_task_statuses {
@@ -342,12 +492,61 @@ sub governance_mutation_checks {
  return scalar @mutations;
 }
 
+sub public_projection_mutation_checks {
+ my ($contract, $sources) = @_;
+ my @mutations;
+
+ push @mutations, ['public_projection_omission', sub {
+  my $candidate = clone_value($contract);
+  pop @{$candidate->{projections}};
+  validate_public_contract($candidate, $sources);
+ }];
+ push @mutations, ['public_marker_omission', sub {
+  my $candidate = clone_value($contract);
+  pop @{$candidate->{projections}[0]{required_markers}};
+  validate_public_contract($candidate, $sources);
+ }];
+ push @mutations, ['forbidden_current_claim_omission', sub {
+  my $candidate = clone_value($contract);
+  pop @{$candidate->{forbidden_current_claims}};
+  validate_public_contract($candidate, $sources);
+ }];
+ push @mutations, ['public_marker_contract_drift', sub {
+  my $candidate = clone_value($contract);
+  $candidate->{projections}[0]{required_markers}[0] .= ' drift';
+ validate_public_contract($candidate, $sources);
+ }];
+ push @mutations, ['rendered_book_marker_drift', sub {
+  my $candidate_sources = clone_value($sources);
+  my $path = 'docs/linkedspec-book/src/overview/project-status.md';
+  my $marker = 'schema v2 with exactly two status-fresh records:';
+  my $position = index($candidate_sources->{$path}, $marker);
+  die "mutation setup could not find rendered-book marker exactly once\n"
+   unless $position >= 0 && index($candidate_sources->{$path}, $marker, $position + 1) < 0;
+  substr($candidate_sources->{$path}, $position, length($marker), 'schema v1 with four stale records:');
+  validate_public_contract($contract, $candidate_sources);
+ }];
+ push @mutations, ['forbidden_current_claim_injection', sub {
+  my $candidate_sources = clone_value($sources);
+  my $entry = $expected_forbidden_current_claims[0];
+  $candidate_sources->{$entry->{path}} .= "\n$entry->{text}\n";
+  validate_public_contract($contract, $candidate_sources);
+ }];
+
+ expect_mutation_failure(@$_) for @mutations;
+ return scalar @mutations;
+}
+
 my $manifest = eval { decode_json(read_text($manifest_path)) };
 fail("invalid JSON in capability_conformance/manifest.json: $@") if $@;
 my $sources = task_sources();
 my $counts = validate_candidate($manifest, $sources);
 my $mutation_count = governance_mutation_checks($manifest, $sources);
+my $public_contract = expected_public_contract();
+my $public_sources = public_projection_sources();
+validate_public_contract($public_contract, $public_sources);
+my $public_mutation_count = public_projection_mutation_checks($public_contract, $public_sources);
 
-printf "capability-conformance: OK (schema v2; %d capabilities; backend states pass=%d partial=%d gap=%d; %d exclusions; %d governance mutations)\n",
+printf "capability-conformance: OK (schema v2; %d capabilities; backend states pass=%d partial=%d gap=%d; %d exclusions; %d governance mutations; %d governed projections; %d public mutations)\n",
  scalar(@{$manifest->{capabilities}}), @{$counts}{qw(pass partial gap)}, scalar(@{$manifest->{excluded_or_future}}),
- $mutation_count;
+ $mutation_count, scalar(@expected_public_projections), $public_mutation_count;

@@ -1,6 +1,6 @@
 ---
 id: capability-exclusion-freshness-model
-title: Capability exclusion freshness has an exact four-record audit and schema-v2 governance plan
+title: Capability exclusion freshness is schema-v2 governed and public-closed
 answers:
   - "which capability exclusions should remain after the freshness audit"
   - "which capability exclusions are stale and must be removed"
@@ -9,15 +9,20 @@ answers:
   - "may a legacy capability exclusion have a completed owner"
   - "what mutations must capability exclusion freshness reject"
   - "why does the capability exclusion plan say 24 mutations when its old list names 23"
+  - "is capability exclusion public no drift closed"
 date: 2026-08-01
-status: schema-v2 governance is signoff-complete under FUTURE-PARITY-BACKLOG.24.1; final public closeout pending
+status: public-closed under FUTURE-PARITY-BACKLOG.24
 tags: [capability, exclusions, governance, status-freshness, supersession, task-tree, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.24.0 audits all four manifest excluded_or_future records against task status, ADRs, recurring gates, public no-drift cards, Git history, and the sole-facing mdBook. FUTURE-PARITY-BACKLOG.24.1 implements schema v2 with exactly two ordered records: legacy.perl_plugin_registry remains under pending .6 with legacy disposition/null retention; future.general_parse_job_authoring moves from superseded .2 to active .14 with future disposition/null retention. Satisfied semantic/MCP and rule-local cursor records are absent. The checker derives unique task ids/leading statuses, preserves 16 capabilities at 80/0/0, and rejects 24 in-memory mutations. The frozen prose's old enumeration named only 23 classes; schema v2 requires retention_authority to exist even when null, so missing_retention_authority is the omitted exact 24th class."
+evidence: "FUTURE-PARITY-BACKLOG.24.0 audits all four manifest excluded_or_future records against task status, ADRs, recurring gates, public no-drift cards, Git history, and the sole-facing mdBook. FUTURE-PARITY-BACKLOG.24.1 implements schema v2 with exactly two ordered records: legacy.perl_plugin_registry remains under pending .6 with legacy disposition/null retention; future.general_parse_job_authoring moves from superseded .2 to active .14 with future disposition/null retention. Satisfied semantic/MCP and rule-local cursor records are absent. The checker derives unique task ids/leading statuses, preserves 16 capabilities at 80/0/0, and rejects 24 in-memory manifest mutations. FUTURE-PARITY-BACKLOG.24.2 adds 12 governed projections, ten stale-current denials, and six public mutations after reproducing an accepted rendered-book contradiction, then closes parent .24 without manifest or runtime movement. Final canonical proof passes CLI 66x2, RAM 52%, and Phase 0 1,031/1,031 in 651 seconds."
 reverify: "perl tools/check_capability_conformance.pl && rg -n 'legacy.perl_plugin_registry|future.general_parse_job_authoring|disposition|retention_authority' capability_conformance/manifest.json && ! rg -n 'future.semantic_introspection_mcp|future.rule_local_cursor_and_bare_edges' capability_conformance/manifest.json && rg -n -A4 'FUTURE-PARITY-BACKLOG\\.(2|6|9|10|14)`' docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
 The capability-row census and the exclusion narrative are different ledgers. The 16 rows remain exactly
 80 pass / 0 partial / 0 gap while the exclusion list is corrected.
+
+Capability exclusion freshness is public-closed under `FUTURE-PARITY-BACKLOG.24`. Twelve governed projections
+now carry the same current truth, and six public mutations protect their inventory, markers, denials, and rendered-
+book status independently of the 24 manifest-semantic mutations.
 
 | Audited record | Classification | Current authority | Implemented state |
 | --- | --- | --- | --- |

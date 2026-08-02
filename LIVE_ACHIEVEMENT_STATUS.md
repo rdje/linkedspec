@@ -1,5 +1,22 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-01 — Capability exclusion public no-drift is closed
+
+`FUTURE-PARITY-BACKLOG.24.2` is signoff-complete from clean `b576c646` (intended 131/300; no push). Capability
+exclusion freshness is public-closed under `FUTURE-PARITY-BACKLOG.24`. The existing checker now binds 12 exact
+governed projections and ten path-scoped stale-current denials through six public mutations, including the
+reproduced rendered-book schema-v1/four-record contradiction. Its original schema-v2/two-exclusion/24-mutation
+authority and all 16 capability rows at 80/0/0 are unchanged.
+
+Capability guidance, both roadmaps, architecture, two readable mdBook paragraphs, live status, task index/tree,
+two Knowledge cards, and the derived map agree. Knowledge Map passes 783/6,348; the complete mdBook builds 79
+files / 14,072 KiB, and direct rendered HTML proves both closeouts are isolated paragraph elements. Browser
+viewport control is unavailable, so no visual claim is made.
+
+All seven doctrines and the definitive canonical gate pass semantic/MCP admissions, containment/moved-root/
+outside-CWD execution, CLI 66x2, RAM 52%, and Phase 0 1,031/1,031 in 651 seconds before `local CI gate passed`.
+Only commit, brief clearing, and exact clean proof remain before `.14.1`.
+
 ## 2026-08-01 — Capability exclusions are schema-v2 and status-fresh
 
 `FUTURE-PARITY-BACKLOG.24.1` is signoff-complete from clean `f1cd59d3` (intended 130/300; no push). The manifest keeps

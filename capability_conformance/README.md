@@ -195,6 +195,10 @@ status/content/resurrection drift through 24 in-memory mutations. Completed sema
 rule-local cursor work are deliberately absent rather than preserved as stale future narratives. This exclusion
 correction does not change the 16 capability rows or their 80/0/0 backend-state census.
 
+Capability exclusion freshness is public-closed under `FUTURE-PARITY-BACKLOG.24`. The same checker binds 12
+governed public/continuity/retrieval projections plus ten path-scoped stale-current denials and rejects six public
+mutations without duplicating the manifest's 24 semantic mutations.
+
 `outward_descriptor_contract.json` is the executable shared schema for the public compiled-descriptor projection.
 Its `required_meta_keys` remains the explicitly named `legacy_global_v0` default for unmigrated backends, while
 `meta_contract_variants.rule_local_cursor_v1` requires `cursor_contract`, forbids `parse_mode`, and fixes the v1

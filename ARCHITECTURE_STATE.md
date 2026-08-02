@@ -1,5 +1,15 @@
 # ARCHITECTURE STATE
 
+- `2026-08-01 capability-exclusion public no-drift`: `FUTURE-PARITY-BACKLOG.24.2` closes parent `.24` with one
+  extension of the existing capability checker: 12 exact governed projections, ten path-scoped stale-current
+  denials, and six public mutations now bind manifest truth to capability guidance, both roadmaps, architecture,
+  two mdBook pages, live status, task index/tree, two Knowledge cards, and the derived map. Capability exclusion
+  freshness is public-closed under `FUTURE-PARITY-BACKLOG.24`. Schema v2, two exclusions, the original 24 manifest
+  mutations, and capability 80/0/0 remain unchanged; no runtime or root README behavior moves. Focused proof is
+  green at Knowledge Map 783/6,348 and mdBook 79/14,072 KiB; rendered HTML keeps both new closeouts in isolated
+  paragraph elements. All seven doctrines and the definitive canonical gate pass CLI 66x2, RAM 52%, Phase 0
+  1,031/1,031 in 651 seconds, and the explicit local-CI marker.
+
 - `2026-08-01 status-fresh capability exclusions`: `FUTURE-PARITY-BACKLOG.24.1` advances only exclusion governance
   to schema v2. Exact ordered current state is plugin `legacy` under pending `.6` plus general parse-job `future`
   under active `.14`, both with explicit null retention authority; satisfied semantic/MCP and cursor narratives

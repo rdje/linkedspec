@@ -1,5 +1,20 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`FUTURE-PARITY-BACKLOG.24.2` — close exclusion public no-drift): the 59-file standard public
+  Markdown census contains six current exclusion projections; task index/tree, live status, two Knowledge cards,
+  and the derived map bring the exact governed set to 12. Historical mentions remain historical, root README has
+  no exclusion detail, and no current stale semantic/cursor/`.2`-owner narrative was found.
+
+  A transient sole-facing project-status contradiction proved the prior checker could pass schema-v2 manifest
+  truth while the book claimed schema v1/four stale records. The same Perl owner now requires exact projection
+  order/markers, ten path-scoped stale-current denials, and six mutations for projection/marker/denial omission,
+  contract drift, rendered-book contradiction, and forbidden-claim injection. Manifest governance remains exactly
+  24 mutations, two exclusions, and 80/0/0. Focused proof passes Knowledge Map 783/6,348 and mdBook 79/14,072 KiB.
+  Static rendered HTML proves both closeouts are separate paragraph elements; browser viewport control is not
+  exposed in this session, so no visual claim is made. All seven doctrines and the definitive canonical gate pass
+  semantic/MCP admissions, containment/moved-root/outside-CWD execution, CLI 66x2, RAM 52%, and Phase 0
+  1,031/1,031 in 651 seconds before `local CI gate passed`.
+
 - 2026-08-01 (`FUTURE-PARITY-BACKLOG.24.1` — enforce exclusion status freshness): capability rows and exclusions
   remain deliberately separate ledgers. The manifest moves to schema v2 without touching any of its 16×5 pass
   states. Its exact ordered exclusions are now plugin `legacy` under pending `.6` and general parse-job `future`

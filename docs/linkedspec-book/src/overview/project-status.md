@@ -13,6 +13,10 @@ Completed semantic/MCP and rule-local cursor work are no longer mislabeled as fu
 status, locks exact content/order, and rejects 24 schema/classification/retention/status mutations without changing
 language or runtime behavior.
 
+Capability exclusion freshness is public-closed under `FUTURE-PARITY-BACKLOG.24`. Twelve governed projections
+and ten path-scoped stale-current denials now reject six public mutations, including a rendered-book schema/record-
+count contradiction, while the manifest remains the semantic authority.
+
 Lua emitted-identity leaf `FUTURE-PARITY-BACKLOG.11.8.3` is signoff-complete on PUC Lua and LuaJIT. Exact
 `{|params| body }` / `{|| body }` remains one inert neutral eight-field value through copy, ordinary user
 functions, canonical effective-`SpecFile` reconstruction, generated-plan execution, independently loaded emitted

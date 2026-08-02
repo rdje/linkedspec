@@ -477,6 +477,10 @@ so this governance correction changes no runtime behavior. The canonical local g
 focused suites. The 60/0/0 generated-source milestone is historical; punctuation-light admission `.16.7` added
 four states, and Lua `.8.4` adds 16 all-pass states in one final admission.
 
+Capability exclusion freshness is public-closed under `FUTURE-PARITY-BACKLOG.24`. The same checker requires 12
+governed projections and ten path-scoped stale-current denials, then rejects six public mutations independently
+of the unchanged 24 manifest mutations. This keeps the book tied to executable capability truth.
+
 The file-oriented native API has a separate executable resolution/loading contract:
 
 ```bash
