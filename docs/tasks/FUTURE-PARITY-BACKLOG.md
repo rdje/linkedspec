@@ -17732,7 +17732,8 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   Commit: `FUTURE-PARITY-BACKLOG.14.2.0.1 - correct typed source rollout truth`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.1`
-  Status: `active` parent (2026-08-01; Perl authority/RED child `.0` active after clean mdBook safety closeout)
+  Status: `active` parent (2026-08-01; Perl authority/RED child `.0` and immutable-core child `.1` are
+    signoff-complete; projection child `.2` is next after the clean `.1` commit)
   Goal: Implement and admit the immutable typed source-location algebra in the Perl reference while preserving
     existing helper compatibility through explicit projections.
   Children: `.14.2.1.0` authority/RED audit; `.14.2.1.1` immutable value/conversion core; `.14.2.1.2` helper
@@ -17832,6 +17833,76 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   architecture, changes, development, live status, memory, and the typed-source Knowledge fact are synchronized;
   sole-facing mdBook source and root README remain unchanged because public runtime admission is still owned by
   `.14.2.1.3`. Commit, brief clearing, and exact clean proof precede activation of immutable core `.14.2.1.1`.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.1.1`
+  Status: `done; signoff-complete` (2026-08-01; task-tree-first from clean `c912120b`, intended 141/300, no push)
+  Goal: Implement the immutable Perl decoded-source authority and typed position/span/derived-text value core,
+    making only the value RED consumer green while preserving the projection RED boundary for `.14.2.1.2`.
+  Depends on: `.14.2.1.0`
+  Acceptance: Retrieve the typed-source runtime-rollout Knowledge card and frozen value consumer before source
+    work. Add only `perl/LinkedSpec/SourceLocation.pm` with one snapshot-owning decoded-source authority, immutable
+    `Position`, `Span`, `DerivedText`, and structured `Error` values, detached `as_record` projections, exact
+    scalar/UTF-8/UTF-16/line-column conversions, direct/derived materialization, and the four frozen diagnostic
+    codes/contexts/privacy rules. Keep `typed_source_projection_rows` absent so the separate projection consumer
+    remains RED for exactly its assigned seam. Add no helper routing, runtime registration, schema/DSL/facade,
+    canonical invocation, public support claim, or unrelated cleanup. Pass the value consumer, preserve the exact
+    projection RED, run focused existing baselines plus doctrines/canonical CI, synchronize durable/live records,
+    commit, clear the brief, and prove clean before `.14.2.1.2`.
+  Verification: immutable value GREEN, exact projection RED, focused compatibility, all doctrines, and canonical
+    CI pass; continuity is synchronized for commit/clean handoff
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.1.1 - add immutable Perl typed source core`
+
+  ### `FUTURE-PARITY-BACKLOG.14.2.1.1` Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — Prove `.14.2.1.0` landed at clean `c912120b` as 140/300 with empty status/diffs,
+    zero-byte brief, activation parent `5d1f287d`, absent generated book/non-cache bytecode, and no background gate;
+    activate this leaf as the sole task-tree diff before production changes.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Re-retrieve the canonical Knowledge/ADR/fixture authority, enumerate every
+    constructor, record, conversion, materialization, snapshot, immutability, error, and privacy assertion, and bind
+    the smallest Perl module design without re-deriving already logged runtime projection facts.
+  - [x] **FIX** — Implement only the decoded-source authority and immutable value/error core in
+    `perl/LinkedSpec/SourceLocation.pm`; keep ActionIR projections and all runtime routes absent.
+  - [x] **ADDRESSED (verified)** — Make all value-contract assertions green, including hostile bounds/source/
+    provenance cases, while the projection consumer still fails only for absent `typed_source_projection_rows`.
+  - [x] **NO REGRESSION** — Pass syntax, neutral typed-source, existing mark/cursor/generated baselines, capability,
+    storage, memory, Knowledge, task metadata, all doctrines, and canonical CI.
+  - [x] **LOCKSTEP** — Synchronize task/index/roadmap/architecture/change/development/live/memory and durable
+    Knowledge without changing sole-facing mdBook support truth before admission `.14.2.1.3`.
+
+  Activation evidence 2026-08-01: RED leaf `.14.2.1.0` landed at `c912120b` as 140/300 with no push. Its post-commit
+  hook proves activation commit `5d1f287d` is `HEAD^1`; independent proof finds empty status and staged/unstaged
+  diffs, zero-byte `git_message_brief.txt`, no generated book or non-cache Python bytecode, and no unconsumed local
+  gate process. This task-tree file is the sole activation diff; no module, test, contract, checker, Knowledge,
+  roadmap, book, root README, or runtime behavior changed first.
+
+  Implementation evidence 2026-08-01: canonical Knowledge, ADR `0056` section 9, all 3/7/6/3 value fixtures, four
+  diagnostic rows, and the committed RED consumer were re-retrieved before code. New
+  `perl/LinkedSpec/SourceLocation.pm` follows the established private-state source-map pattern: the authority owns a
+  caller-detached decoded-text snapshot and precomputed scalar-boundary line/column/UTF-8-byte tables. Opaque token
+  values resolve through module-private state keyed by object address and a monotonic authority id; position/span/
+  derived records contain only frozen neutral fields, derived values clone ordered span records, and every
+  `as_record` is detached. The authority alone checks bounds/source/order/provenance and materializes text. Locked
+  `LinkedSpec::SourceLocation::Error` hashes copy only the two authorized role fields plus exact diagnostic context,
+  preventing decoded text, paths, parser/match state, or host references from crossing the error boundary.
+
+  Focused evidence 2026-08-01: module syntax passes and the formerly RED value consumer passes all seven top-level
+  groups, including seven coordinate conversions, six direct spans, three derived texts, 76 exact diagnostic/
+  privacy assertions, and caller snapshot isolation. A lifecycle smoke additionally proves empty materialization,
+  deep derived-record detachment, semantic immunity to token mutation, and locked errors. The projection consumer
+  remains exact RED with one failed assertion of three naming only absent `typed_source_projection_rows`; its
+  future body remains skipped. Neutral 3/11/37, complete marks, cursor 288/31/85, and all six generated-source
+  subtests remain green. No ActionIR, runtime route, schema, registration, book, or root README changes.
+
+  Signoff evidence 2026-08-01: the exact module/value/projection boundary, lifecycle smoke, neutral 3/11/37,
+  complete named marks, cursor 288/31/85, generated source, capability schema v2 at 80/0/0 with two exclusions,
+  24 governance mutations and 12+6 projections, memory, Knowledge Map 785/6,385, task metadata, and all seven
+  doctrines pass. Definitive canonical CI additionally passes containment, moved-root/outside-CWD execution,
+  every composed semantic and MCP admission, both primary CLI environments at 66/66, RAM at 47% against the 88%
+  ceiling, and Phase 0 at 1,031/1,031 in 633 seconds before the exact `local CI gate passed` marker. The optional
+  backend matrices remain intentionally outside the default canonical invocation; their owned admission suites
+  passed earlier in the same gate. Sole-facing mdBook source and root README remain unchanged because internal
+  projection and Perl runtime admission are still owned by `.14.2.1.2-.3`. Commit, brief clearing, and exact clean
+  proof precede task-tree-first activation of projection leaf `.14.2.1.2`.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.2`
   Status: `pending` parent

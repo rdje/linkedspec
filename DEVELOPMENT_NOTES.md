@@ -1,5 +1,30 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`FUTURE-PARITY-BACKLOG.14.2.1.1` — immutable Perl typed-source core):
+  `LinkedSpec::SourceLocation` follows the established private-state pattern used by `SemanticSourceMap`, but keeps
+  one authority over a map of opaque input identities. Construction copies and upgrades each decoded scalar string,
+  then precomputes line, column, and UTF-8 byte evidence at every Unicode-scalar boundary. This makes coordinates
+  deterministic and keeps slicing in Perl's already-proven scalar indexing unit.
+
+  Authority, position, span, and derived-text objects are opaque scalar tokens. Their state is keyed privately by
+  object address; a monotonic authority id validates ownership without retaining a live authority object inside a
+  value. Derived text clones ordered span records instead of retaining caller arrays or span references, and every
+  `as_record` returns a fresh deep projection. Decoded text exists only in authority state. Structured errors are
+  locked hashes because current consumers inspect their fields directly; construction whitelists and scalarizes
+  only `rule_role` and `invocation_role` before adding exact diagnostic fields.
+
+  The value consumer now passes all neutral cases and diagnostic/privacy assertions. A separate lifecycle smoke
+  proves empty materialization, deep detachment, semantic immunity to token mutation, and error locking. The
+  projection consumer deliberately still fails once at absent `typed_source_projection_rows`, so no ActionIR
+  helper, cursor/mark register, generated route, or admission claim has moved. Current book prose remains accurate:
+  implementation exists internally, but sole-facing support stays pending until `.14.2.1.3`.
+
+  Complete signoff passes capability 80/0/0, neutral typed source 3/11/37, existing mark/cursor/generated
+  compatibility, Knowledge Map 785/6,385, memory/task metadata, and all seven doctrines. Definitive canonical CI
+  passes every composed semantic/MCP admission and repository containment route, CLI 66/66 under both default and
+  POSIX option environments, RAM 47% against the 88% ceiling, and Phase 0 1,031/1,031 in 633 seconds before
+  `local CI gate passed`. No sole-facing book source changes because projection and admission remain pending.
+
 - 2026-08-01 (`FUTURE-PARITY-BACKLOG.14.2.1.0` — Perl typed-source RED): canonical retrieval preceded source
   inspection. Live lowering still maps helper values directly to decoded Perl scalar registers: `$IPOS`, `$LSPOS`,
   `pos $$STRING`, `length`, `substr`, rule-label mark buckets, and a scalar cursor stack. The handler preamble owns

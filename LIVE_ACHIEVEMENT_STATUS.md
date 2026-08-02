@@ -1,5 +1,21 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-01 — Immutable Perl typed source-location values are implemented
+
+`FUTURE-PARITY-BACKLOG.14.2.1.1` is signoff-complete from clean `c912120b` (intended 141/300; no push). New internal module
+`LinkedSpec::SourceLocation` owns copied decoded text and scalar-boundary coordinate tables. Opaque position, direct-
+span, and derived-text values expose detached neutral records only; monotonic authority identities enforce source
+ownership without embedding text, parser state, or live host authority. The authority alone validates coordinates
+and materializes text, and exact structured errors are locked and privacy-filtered.
+
+The former value RED now passes every fixture and diagnostic assertion. Empty/deep-detachment/error-locking smoke,
+neutral 3/11/37, complete marks, cursor 288/31/85, and generated-source baselines are green. The independent
+projection consumer remains one-failure RED at absent `typed_source_projection_rows`, preserving `.14.2.1.2`.
+No runtime helper route, registration, schema, DSL/facade, root README, or sole-facing mdBook support claim changes;
+projection `.14.2.1.2` remains the next clean frontier. Knowledge Map 785/6,385, all seven doctrines, and
+definitive canonical CI pass, including CLI 66/66 in both environments, RAM 47%, and Phase 0 1,031/1,031 in 633
+seconds before the explicit local-CI pass marker.
+
 ## 2026-08-01 — Perl typed source-location RED is frozen
 
 `FUTURE-PARITY-BACKLOG.14.2.1.0` is signoff-complete from clean `5d1f287d` (intended 140/300; no push). Two

@@ -5,21 +5,21 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `5d1f287d` — clean mdBook safety-repair HEAD from which Perl typed-source RED `.14.2.1.0`
-  activated task-tree-first (139/300; no push); Git derives the landing identity.
-- latest_completed_leaf: `.14.2.1.0` is signoff-complete for intended landing 140/300 under
-  `FUTURE-PARITY-BACKLOG.14.2.1.0 - lock Perl typed source RED`; Git derives the landing identity.
-- active_leaf: `FUTURE-PARITY-BACKLOG.14.2.1.0` — exact missing-core and missing-projection consumers, audit,
-  baselines, Knowledge, and continuity are complete; commit/brief/clean proof remains.
-- active_scope: two unregistered tests freeze the internal `LinkedSpec::SourceLocation` value API and detached
-  92-row ActionIR projection catalog without implementation, registration, schema, facade, or public support.
-- active_progress: value RED exits only for missing module; projection RED has one failure only for missing catalog;
-  neutral 3/11/37, complete marks, cursor 288/31/85, generated source, and focused governance pass.
-- active_exclusions: production core/projections/admission, neutral/schema/semantic/generated format, DSL/facade,
-  mdBook support prose/readability, push, and unrelated cleanup.
-- in_flight_uncommitted: none in the intended clean `.14.2.1.0` handoff.
-- next_after_clean_commit: activate immutable Perl core `FUTURE-PARITY-BACKLOG.14.2.1.1` task-tree-first; make only
-  `t/typed_source_location_values.t` green while the projection consumer remains RED for `.14.2.1.2`.
+- activation_commit: `c912120b` — clean Perl typed-source RED HEAD from which immutable-core `.14.2.1.1` activated
+  task-tree-first (140/300; no push); Git derives the landing identity.
+- latest_completed_leaf: `.14.2.1.1` is signoff-complete for intended landing 141/300 under
+  `FUTURE-PARITY-BACKLOG.14.2.1.1 - add immutable Perl typed source core` (no push).
+- active_leaf: `FUTURE-PARITY-BACKLOG.14.2.1.1` — signoff-complete immutable Perl typed-source value core.
+- active_scope: closed implementation boundary: one private decoded-source authority, opaque Position/Span/
+  DerivedText values, detached records, coordinate/materialization operations, and four locked structured errors.
+- active_progress: value consumer and lifecycle are green; projection remains exact one-failure RED; neutral
+  3/11/37, complete marks, cursor 288/31/85, generated source, canonical CI, and continuity are synchronized.
+- active_exclusions: ActionIR projection/routing, runtime admission/registration, schema/semantic/generated format,
+  DSL/facade, mdBook support prose/readability, root README, push, and unrelated cleanup.
+- in_flight_uncommitted: none intended after the `.14.2.1.1` commit; commit/brief clearing and exact clean proof are
+  the remaining landing mechanics before activation of `.14.2.1.2`.
+- next_after_clean_commit: activate `FUTURE-PARITY-BACKLOG.14.2.1.2` task-tree-first and route the exact 92 helper
+  rows plus seven aliases through the core while preserving all current external results.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -41,17 +41,17 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   moves the repeated-action checker's immutable handoff to a stable governed home.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54.
 - current_typed_source: neutral/public composition plus rollout planning/correction are closed at 3/11 and 37
-  mutations. Perl `.14.2.1.0` freezes core/projection RED; `.1` core, `.2` routes, and `.3` admission remain.
+  mutations. Perl RED `.0` is closed; `.1` core is focused-green; `.2` routes and `.3` admission remain.
 - current_future_direction: callable `.11`, typed-source `.14.1`, exclusion `.24`, and mdBook safety are closed;
   rendered readability stays queued/nonurgent; ADR `0064` is unscheduled; ADR `0056` continues through `.14.2-.8`.
 - latest_bootstrap_read: 2026-08-01 — README, memory architecture, resume/task/decision/KM/Toolbox owners, full
   roadmap, codebase, and all 45 tracked mdBook pages are read/understood; current callable/Lua authorities refreshed.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
-- push_policy: hard lock at 300 new local commits; Perl RED `.14.2.1.0` intended landing is 140/300; no push.
+- push_policy: hard lock at 300 new local commits; Perl core `.14.2.1.1` intended landing is 141/300; no push.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; canonical needs nested macOS sandbox permission and up to 30m.
-- canonical_state: definitive `.14.2.1.0` canonical CI passes all required admissions, CLI 66/66 in both default
-  and POSIX environments, RAM 46%, and Phase 0 1,031/1,031 in 658 seconds before `local CI gate passed`.
-- blockers: none; commit/clean `.14.2.1.0`, then activate `.14.2.1.1`; no push.
+- canonical_state: `.14.2.1.1` definitive canonical CI passes CLI 66/66 in both environments, RAM 47%, and Phase 0
+  1,031/1,031 in 633 seconds before `local CI gate passed`.
+- blockers: none; commit/clean `.14.2.1.1`, then activate `.14.2.1.2`; no push.

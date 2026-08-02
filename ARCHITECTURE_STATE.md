@@ -1,5 +1,16 @@
 # ARCHITECTURE STATE
 
+- `2026-08-01 immutable Perl typed source-location core`: `FUTURE-PARITY-BACKLOG.14.2.1.1` adds
+  `LinkedSpec::SourceLocation` without routing it into ActionIR. One private authority snapshots decoded text and
+  precomputes line/column/UTF-8-byte evidence at every Perl Unicode-scalar boundary. Opaque `Position`, `Span`, and
+  `DerivedText` tokens resolve to private neutral records guarded by monotonic authority ids; derived values clone
+  ordered span records, and detached projections retain no decoded text or host authority. The authority alone
+  validates and materializes. Exactly four locked structured value errors carry privacy-filtered context. The value
+  consumer is green; the 92-row projection consumer remains exact RED for `.14.2.1.2`. No helper/runtime route,
+  registration, descriptor/schema, semantic/MCP, generated identity, DSL/facade, root README, or sole-facing book
+  support changes before admission `.14.2.1.3`. Complete signoff passes Knowledge Map 785/6,385, all seven
+  doctrines, CLI 66x2, RAM 47%, and Phase 0 1,031/1,031 in 633 seconds before `local CI gate passed`.
+
 - `2026-08-01 Perl typed source-location RED boundary`: `FUTURE-PARITY-BACKLOG.14.2.1.0` adds two unregistered
   consumers and no implementation. `t/typed_source_location_values.t` consumes every 3/7/6/3 neutral value fixture,
   authority-owned coordinates/materialization, detached immutable records, source snapshot isolation, and the four

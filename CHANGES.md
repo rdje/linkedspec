@@ -1,5 +1,19 @@
 # CHANGES
 
+## 2026-08-01 — FUTURE-PARITY-BACKLOG.14.2.1.1 — add immutable Perl typed source core
+
+- Added `perl/LinkedSpec/SourceLocation.pm` as the single decoded-source authority. It snapshots caller text,
+  precomputes Unicode-scalar boundary coordinates, and alone validates or materializes typed values.
+- Added opaque immutable `Position`, `Span`, and `DerivedText` values backed by private module state and monotonic
+  authority identities. Detached records contain only neutral identity/offset/provenance fields; no text, path,
+  parser/match state, or host reference is retained.
+- Added locked structured errors for exactly the four value diagnostics with privacy-filtered role context. The
+  value consumer is fully green while the separate 92-row ActionIR projection consumer remains exact RED for `.2`.
+- Neutral 3/11/37, complete named marks, cursor 288/31/85, generated source, and focused lifecycle/immutability
+  proofs remain green. No helper route, runtime registration, schema/DSL/facade, root README, or mdBook support
+  claim changes. All seven doctrines and definitive canonical CI pass: CLI 66/66 in both environments, RAM 47%,
+  and Phase 0 1,031/1,031 in 633 seconds before the explicit local-CI pass marker.
+
 ## 2026-08-01 — FUTURE-PARITY-BACKLOG.14.2.1.0 — lock Perl typed source RED
 
 - Added two exact unregistered Perl consumers without production implementation. The value consumer freezes the
