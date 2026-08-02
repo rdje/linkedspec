@@ -1,5 +1,30 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`FUTURE-PARITY-BACKLOG.14.2.1.3` — Perl typed-source runtime admission): admission is deliberately
+  compositional. The already green value and projection consumers are now tracked as canonical requirements,
+  syntax-checked separately, and executed together immediately after the neutral checker. Their combined 10-test
+  run covers every immutable value fixture, all 92 helper rows and seven aliases, representative live routes, and
+  independently emitted/loaded generated execution without adding a second implementation path.
+
+  The executable ledger promotes only `perl_runtime`. Its independent checker now derives 4 complete / 10 pending
+  and 38 mutations; the new mutation reverts the completed Perl row to pending and must fail for the rollout-specific
+  reason. Exact registration markers are multiplicity-checked, so removing, duplicating, or separating either
+  required/syntax/execution route makes the checker fail before the canonical gate can claim admission.
+
+  The sole-facing book uses the narrowest truthful boundary: internal Perl authority, position/span values, and
+  helper projections are admitted, while helper return shapes and scalar mark/cursor behavior remain unchanged.
+  Public authored typed values, transactions, recursive observations, span-native dispatch, and Rust/Dart/Julia/
+  PUC-Lua/LuaJIT admission remain future. The repository-local mdBook build passes; inspection of the four exact
+  generated HTML pages confirms separate paragraph blocks around current rollout, admitted internals, future work,
+  and the canonical consumer command. The broader rendered-readability audit remains independently queued.
+
+  The first canonical attempt correctly rejected the task index after its frontier rewrite removed the exact
+  historical capability-closeout marker `exclusion public closeout .24.2`. Restoring that still-current phrase
+  returned the capability checker to schema v2 / 80-0-0 / 24+6 without changing capability state. The definitive
+  rerun passes all seven doctrines, typed-source 4/10/38 and the 10-test admission, every composed semantic/MCP
+  consumer, repository containment and moved-root/outside-CWD execution, CLI 66/66 in default and POSIX option
+  environments, RAM 53%, and Phase 0 1,031/1,031 in 650 seconds before `[ci] local CI gate passed`.
+
 - 2026-08-01 (`FUTURE-PARITY-BACKLOG.14.2.1.2` — Perl typed-source projections): handler construction is the
   runtime authority seam. `SpecEntry::_build_handler_preamble` normalizes match info, loads the source module,
   creates/reuses one `input` authority, and validates the initial capture boundary. `LinkedRE::_build_match_info`

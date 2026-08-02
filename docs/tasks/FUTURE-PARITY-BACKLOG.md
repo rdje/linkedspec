@@ -17732,8 +17732,8 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   Commit: `FUTURE-PARITY-BACKLOG.14.2.0.1 - correct typed source rollout truth`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.1`
-  Status: `active` parent (2026-08-01; Perl authority/RED child `.0` and immutable-core child `.1` are
-    signoff-complete; projection child `.2` is next after the clean `.1` commit)
+  Status: `active` parent (2026-08-01; Perl authority/RED `.0`, immutable core `.1`, projection `.2`, and exact
+    admission/promotion `.3` are signoff-complete; Rust authority/RED `.14.2.2.0` is next after clean `.3`)
   Goal: Implement and admit the immutable typed source-location algebra in the Perl reference while preserving
     existing helper compatibility through explicit projections.
   Children: `.14.2.1.0` authority/RED audit; `.14.2.1.1` immutable value/conversion core; `.14.2.1.2` helper
@@ -17995,6 +17995,81 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   1,031/1,031 in 651 seconds before `local CI gate passed`. Root README, sole-facing mdBook, rollout 3/11,
   registration, schema, DSL/facade, and public support remain unchanged. Commit, brief clearing, and exact clean
   proof precede task-tree-first admission `.14.2.1.3`; no push.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.1.3`
+  Status: `done; signoff-complete` (2026-08-01; task-tree-first from clean `98765354`, intended 143/300, no push)
+  Goal: Admit the already implemented Perl typed source-location value/projection routes compositionally, promote
+    only the `perl_runtime` rollout leg, and publish the exact sole-facing support truth without changing helper
+    results or introducing authored typed-value syntax.
+  Depends on: `.14.2.1.2`
+  Acceptance: Retrieve the runtime-rollout Knowledge card, ADR `0056` section 9, neutral contract/checker, both
+    committed Perl consumers, current canonical registration, and every sole-facing typed-source status passage
+    before implementation. Register `t/typed_source_location_values.t` and
+    `t/typed_source_location_perl_contract.t` as required, syntax-checked, unconditionally executed canonical Perl
+    consumers. Promote only `perl_runtime` from pending to complete in the neutral artifact and independent checker,
+    add one exact completed-to-pending Perl regression, and advance the locked mutation count and rollout summary
+    from 3/11/37 to 4/10/38. Update the mdBook's capture/source-location mental model, project status, and canonical
+    CI explanation so users can distinguish admitted internal Perl values/projections from absent public
+    `Position`/`Span` objects, transaction syntax/behavior, other backend admissions, and later `.14.3-.8` work.
+    Preserve all production runtime/helper code, external results, descriptor/generated schemas and identities,
+    semantic/MCP and capability state, DSL/facade spellings, root README, and the independent nonurgent rendered-
+    readability tree. Pass exact focused admission, neutral mutation proof, book build/rendered paragraph checks,
+    doctrines/canonical CI, synchronize all durable/live records, commit, clear the brief, and prove clean before
+    task-tree-first Rust `.14.2.2.0`.
+  Verification: exact Perl composed admission passes 10 tests; rollout 4/10/38, mdBook build/rendered paragraphs,
+    capability 80/0/0, all seven doctrines, repository containment/relocation, CLI 66x2, RAM 53%, and canonical
+    Phase 0 1,031/1,031 in 650 seconds pass
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.1.3 - admit Perl typed source runtime`
+
+  ### `FUTURE-PARITY-BACKLOG.14.2.1.3` Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — Prove projection `.14.2.1.2` landed cleanly at `98765354` as 142/300 with empty
+    status/diffs, zero-byte ignored brief, activation parent `2dceb96e`, no generated book/non-cache bytecode, and
+    no background gate; activate this leaf as the sole task-tree diff before contract/checker/CI/book changes.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Retrieve canonical Knowledge/ADR/contract/checker/consumer/CI/book authority,
+    prove current runtime code and both consumers are green while registration and `perl_runtime` promotion alone
+    remain absent, and inventory every sole-facing 3/11/future-Perl claim without archaeology.
+  - [x] **FIX** — Register both consumers, promote only the Perl rollout row, add its independent regression and
+    38-mutation lock, and update exact mdBook support/status/CI prose without production or public API behavior.
+  - [x] **ADDRESSED (verified)** — Prove canonical registration is exact and unconditional, both consumers execute
+    live/generated Unicode routes, neutral truth is 4 complete / 10 pending with 38 mutations, and rendered book
+    paragraphs clearly separate admitted Perl internals from future authored values/backends/transaction work.
+  - [x] **NO REGRESSION** — Pass consumer/checker syntax and focused execution, book validation/build, capability,
+    storage, memory, Knowledge, task metadata, all doctrines, and definitive canonical CI with runtime code unchanged.
+  - [x] **LOCKSTEP** — Synchronize contract/checker/CI/book/task/index/roadmaps/architecture/change/development/live/
+    memory and durable Knowledge at 4/10/38; keep root README and unrelated future/readability trees unchanged.
+
+  Activation evidence 2026-08-01: projection `.14.2.1.2` landed at `98765354` as 142/300 with no push. Its commit
+  hook regenerated Knowledge Map 785/6,389, passed all seven doctrines, and proved activation `2dceb96e` as both
+  pre-commit HEAD and post-commit `HEAD^1`. Post-commit proof finds empty status and staged/unstaged diffs, a
+  zero-byte ignored `git_message_brief.txt`, exact parent `2dceb96e`, no generated book or non-cache Python
+  bytecode, and no canonical/Phase-0/typed-source/mdBook process. This task-tree file is the sole activation diff;
+  no contract, checker, canonical driver, consumer, book, Knowledge, roadmap, root README, or runtime behavior
+  changed first.
+
+  Root-cause evidence 2026-08-01: the runtime-rollout Knowledge card, ADR `0056` section 9, exact neutral JSON/
+  checker rollout and mutation code, both committed consumers, canonical driver registration/syntax/execution
+  sections, and all mdBook typed-source matches were retrieved before implementation. Both consumers already pass
+  together at 10 top-level tests in 11 seconds and the neutral checker passes exact 3/7/6/3, 8+8, 6/4,
+  92+7+2, 31 diagnostics, rollout 3/11, and 37 mutations. Exact CI scan proves neither consumer is required,
+  syntax-checked, or executed. The sole-facing capture chapter, project-status opening and later roadmap list,
+  local-CI chapter, and backend-handoff introduction still classify every runtime admission as future. Therefore
+  admission needs only contract/checker truth, exact canonical registration, and those four book pages; no
+  production source, helper result, test semantics, descriptor/schema, generated identity, or root README change
+  is required.
+
+  Signoff evidence 2026-08-01: both consumers are required, syntax-checked, and executed exactly once together by
+  the canonical driver; their 10 tests pass in 11 seconds. The independent neutral checker reports exact 3/7/6/3,
+  8+8, 6/4, 92+7+2, 31 diagnostics, rollout 4/10, and 38 mutations including the Perl completed-to-pending
+  regression. A repository-local mdBook build succeeds and generated HTML inspection proves distinct paragraphs
+  around rollout status, admitted Perl internals, remaining future work, and the canonical consumer command. The
+  first definitive gate stopped only because a current task-index rewrite dropped the capability checker's exact
+  historical `.24.2` marker; restoring that still-true phrase returned capability governance to schema v2,
+  80/0/0, 24+6. The complete rerun passes all seven doctrines, typed admission, composed semantic/MCP consumers,
+  repository containment and moved-root/outside-CWD proof, CLI 66/66 in both environments, RAM 53%, and Phase 0
+  1,031/1,031 in 650 seconds before exact `[ci] local CI gate passed`. No production runtime/helper, result shape,
+  scalar mark/cursor storage, schema/identity, DSL/facade, semantic/MCP, root README, or broad readability work
+  changed. Commit, brief clearing, and exact clean proof precede task-tree-first Rust `.14.2.2.0`; no push.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.2`
   Status: `pending` parent

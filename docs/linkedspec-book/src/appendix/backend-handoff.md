@@ -19,14 +19,17 @@
 > selected 5x2x5 gate and current public surfaces are admitted at 74 migration
 > files, 8 complete / 0 pending, and 60 rejected mutations.
 >
-> **Accepted future source-location/cursor architecture:** ADR `0056` requires one backend-neutral immutable model
+> **Accepted source-location/cursor architecture:** ADR `0056` requires one backend-neutral immutable model
 > for caller-authorized source identity, Unicode-scalar positions, same-source half-open spans, and ordered derived
-> provenance. Existing source-boundary helpers will project that model. Any cursor transaction is one explicit
+> provenance. Perl's existing source-boundary helpers now project that model; the other backends will do so as
+> their runtime leaves are admitted. Any cursor transaction is one explicit
 > recognition attempt over invocation-local cursor/boundary/marks only; it adds no search tree and cannot undo
 > actions, AST/user state, output/diagnostics, registry work, or host effects. Recursive boundaries remain read-only,
 > progress is portable, span-native parser dispatch grants no implicit authority, and ADR `0045` retains gap syntax/
-> lifecycle ownership. This is not current backend behavior: exact contract and six-runtime admission remain
-> `FUTURE-PARITY-BACKLOG.14.1-.14.8`.
+> lifecycle ownership. The neutral contract and Perl's internal value/projection runtime are now admitted; Perl's
+> existing helpers retain their public results and scalar mark/cursor behavior. Rust, Dart, Julia, PUC Lua, and
+> LuaJIT admission plus public authored values, transactions, observation, and dispatch remain owned by
+> `FUTURE-PARITY-BACKLOG.14.2.2-.14.8`.
 >
 > **Repeated-action handoff:** Every backend must consume
 > `linkedspec-explicit-repetition-action-result-v1`: bare `OR` is minimum-one repetition, explicit action returns

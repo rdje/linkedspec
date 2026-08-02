@@ -6,10 +6,10 @@ This chapter explains the mental model before the exhaustive method list.
 
 For the method-by-method public reference, read [Source Boundary Helper Reference](source-boundary-helper-reference.md) after this chapter.
 
-## Accepted future model: one typed source-location algebra
+## Accepted model: one typed source-location algebra
 
-ADR `0056` adopts one future conceptual core beneath these helper families. This is an architecture direction, not
-yet a shipped value type or new `.spec` syntax:
+ADR `0056` adopts one conceptual core beneath these helper families. The Perl reference now admits that core as an
+internal runtime value/projection layer. It is not a new public value type or new `.spec` syntax:
 
 - a source identity names caller-authorized decoded input, not a path;
 - a position is a zero-based Unicode-scalar offset in that source;
@@ -20,9 +20,10 @@ Line/column and UTF-8 byte locations are derived evidence. Backends may use byte
 portable position identity remains Unicode-scalar based. Text can be materialized from a span when needed; the span
 does not need to copy the text or retain a regex, parser, stack frame, or backend object.
 
-The current families below remain useful. Their future relationship is straightforward: `cursor_*`, `entry_*`,
-`match_*`, `mark_*`, `capture_*`, and `input_*` project positions, spans, text, or measurements from the same core
-instead of defining unrelated coordinate systems.
+The current families below remain useful. On Perl, `cursor_*`, `entry_*`, `match_*`, `mark_*`, `capture_*`, and
+`input_*` now project positions, spans, text, or measurements from the same internal core instead of defining
+unrelated coordinate systems. Their authored results and mutation behavior have not changed. The other backends
+will adopt the same boundary in their separately admitted runtime leaves.
 
 ### Bounded cursor transactions do not mean general backtracking
 
@@ -65,13 +66,20 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 ```
 
 The checker covers 3 decoded sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation
-and 8 transaction transitions, 6 recursive observations, 4 structural cases, 31 diagnostics, and 37 mutations.
+and 8 transaction transitions, 6 recursive observations, 4 structural cases, 31 diagnostics, and 38 mutations.
 It also proves that all 92 current source-boundary helpers project onto the algebra.
 
-This is contract status, not shipped value status. Three of 14 rollout legs are complete: the neutral contract,
-public linked-rule structure, and unchanged neutral/public recomposition. The other 11 remain pending. No public
-`Position` or `Span` value, checkpoint syntax, transaction behavior, recursive observation API, or backend
-admission exists yet.
+This is rollout status, not authored-value status. Four of 14 rollout legs are complete: the neutral contract,
+public linked-rule structure, unchanged neutral/public recomposition, and Perl runtime admission. The other 10
+remain pending.
+
+Perl now uses an internal decoded-source authority plus immutable position/span values beneath every governed
+helper projection. Exact Unicode execution is admitted on live and independently emitted/loaded generated routes.
+Helpers still return their documented text, numbers, collections, booleans, absence values, and statement results;
+mark and cursor storage remains scalar-compatible.
+
+There is still no public `Position` or `Span` authored value, checkpoint syntax, transaction behavior, recursive
+observation API, or non-Perl runtime admission. Those remain owned by later leaves.
 
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions,
 typed spans, or cursor transactions are available as authored values.

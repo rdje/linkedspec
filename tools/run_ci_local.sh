@@ -386,6 +386,8 @@ require_tracked_file t/diagnostic_output_perl_contract.t
 require_tracked_file t/scalar_numeric_contract.t
 require_tracked_file t/punctuation_light_zero_arg_contract.t
 require_tracked_file t/complete_named_mark_contract.t
+require_tracked_file t/typed_source_location_values.t
+require_tracked_file t/typed_source_location_perl_contract.t
 require_tracked_file t/variadic_user_function_contract.t
 require_tracked_file t/callable_codeblock_literal_contract.t
 require_tracked_file t/uniform_binding_contract.t
@@ -485,6 +487,8 @@ perl -c -Iperl t/scalar_text_contract.t
 perl -c -Iperl t/scalar_numeric_contract.t
 perl -c -Iperl t/punctuation_light_zero_arg_contract.t
 perl -c -Iperl t/complete_named_mark_contract.t
+perl -c -Iperl t/typed_source_location_values.t
+perl -c -Iperl t/typed_source_location_perl_contract.t
 perl -c -Iperl t/rule_local_cursor_perl_contract.t
 perl -c -Iperl t/duplicate_regex_slot_identity_perl_contract.t
 perl -c -Iperl t/sparse_and_action_slots_perl_regression.t
@@ -541,6 +545,9 @@ bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py
 
 log "checking backend-neutral typed source-location algebra contract"
 bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py
+
+log "running exact Perl typed source-location value and projection admission consumers"
+PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t
 
 log "checking backend-neutral root-rule selection contract"
 bash tools/run_python_project_data.sh tools/check_root_rule_selection_contract.py

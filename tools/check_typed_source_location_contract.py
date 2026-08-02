@@ -19,6 +19,8 @@ PERL_LEGACY_SCANNER_PATH = (
     ROOT / "perl" / "LinkedSpec" / "ActionIR" / "Scanner" / "LegacyRules.pm"
 )
 CI_PATH = ROOT / "tools" / "run_ci_local.sh"
+PERL_VALUE_CONSUMER_PATH = ROOT / "t" / "typed_source_location_values.t"
+PERL_PROJECTION_CONSUMER_PATH = ROOT / "t" / "typed_source_location_perl_contract.t"
 
 EXPECTED_COUNTS = {
     "sources": 3,
@@ -34,7 +36,7 @@ EXPECTED_COUNTS = {
     "internal_contract_ids": 2,
     "diagnostics": 31,
     "rollout_legs": 14,
-    "mutations": 37,
+    "mutations": 38,
 }
 
 POLICY = {
@@ -348,7 +350,7 @@ ROLLOUT = [
     ("neutral_contract", "complete", "FUTURE-PARITY-BACKLOG.14.1.1", []),
     ("public_structure", "complete", "FUTURE-PARITY-BACKLOG.14.1.2", []),
     ("neutral_public_recomposition", "complete", "FUTURE-PARITY-BACKLOG.14.1.3", []),
-    ("perl_runtime", "pending", "FUTURE-PARITY-BACKLOG.14.2.1.3", ["perl"]),
+    ("perl_runtime", "complete", "FUTURE-PARITY-BACKLOG.14.2.1.3", ["perl"]),
     ("rust_runtime", "pending", "FUTURE-PARITY-BACKLOG.14.2.2.3", ["rust"]),
     ("dart_runtime", "pending", "FUTURE-PARITY-BACKLOG.14.2.3.3", ["dart"]),
     ("julia_runtime", "pending", "FUTURE-PARITY-BACKLOG.14.2.4.3", ["julia"]),
@@ -1117,7 +1119,14 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         fail("derived contract counts drifted")
 
     if check_registration:
-        for path in (CONTRACT_PATH, CHECKER_PATH, ROOT / CANONICAL_EXECUTION["project_data_runner"], CI_PATH):
+        for path in (
+            CONTRACT_PATH,
+            CHECKER_PATH,
+            ROOT / CANONICAL_EXECUTION["project_data_runner"],
+            CI_PATH,
+            PERL_VALUE_CONSUMER_PATH,
+            PERL_PROJECTION_CONSUMER_PATH,
+        ):
             if not path.is_file():
                 fail(f"canonical contract/checker/runner input is missing: {path.relative_to(ROOT)}")
         ci_text = CI_PATH.read_text(encoding="utf-8")
@@ -1125,6 +1134,11 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             f"require_tracked_file {CANONICAL_EXECUTION['contract_path']}",
             f"require_tracked_file {CANONICAL_EXECUTION['checker_path']}",
             CANONICAL_EXECUTION["invocation"],
+            "require_tracked_file t/typed_source_location_values.t",
+            "require_tracked_file t/typed_source_location_perl_contract.t",
+            "perl -c -Iperl t/typed_source_location_values.t",
+            "perl -c -Iperl t/typed_source_location_perl_contract.t",
+            "PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t",
         ]
         for marker in required_markers:
             if ci_text.count(marker) != 1:
@@ -1190,7 +1204,7 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("diagnostic context", lambda c: c["diagnostics"][19]["required_context"].pop()),
         ("rollout removed", lambda c: c["rollout"].pop()),
         ("canonical checker", lambda c: c["canonical_execution"].__setitem__("checker_path", "tools/wrong.py")),
-        ("mutation count", lambda c: c["expected_counts"].__setitem__("mutations", 36)),
+        ("mutation count", lambda c: c["expected_counts"].__setitem__("mutations", 37)),
     ]
     rollout_regressions = [
         (
@@ -1200,6 +1214,10 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         (
             "neutral public recomposition regressed to pending",
             lambda c: c["rollout"][2].__setitem__("status", "pending"),
+        ),
+        (
+            "Perl runtime admission regressed to pending",
+            lambda c: c["rollout"][3].__setitem__("status", "pending"),
         ),
     ]
     if len(mutations) + len(rollout_regressions) != EXPECTED_COUNTS["mutations"]:

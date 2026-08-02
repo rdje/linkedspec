@@ -17,7 +17,7 @@
     "internal_contract_ids": 2,
     "diagnostics": 31,
     "rollout_legs": 14,
-    "mutations": 37
+    "mutations": 38
   },
   "policy": {
     "source_identity": "caller-authorized decoded input identity; never a path, backend object, or implicit read authority",
@@ -184,7 +184,7 @@
     {"leg": "neutral_contract", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.1.1", "runtimes": []},
     {"leg": "public_structure", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.1.2", "runtimes": []},
     {"leg": "neutral_public_recomposition", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.1.3", "runtimes": []},
-    {"leg": "perl_runtime", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.2.1.3", "runtimes": ["perl"]},
+    {"leg": "perl_runtime", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.2.1.3", "runtimes": ["perl"]},
     {"leg": "rust_runtime", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.2.2.3", "runtimes": ["rust"]},
     {"leg": "dart_runtime", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.2.3.3", "runtimes": ["dart"]},
     {"leg": "julia_runtime", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.2.4.3", "runtimes": ["julia"]},

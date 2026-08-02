@@ -17,11 +17,15 @@ general style. This documentation-only slice changes no parser or runtime behavi
 The backend-neutral typed source-location contract is complete under `FUTURE-PARITY-BACKLOG.14.1.1`. Its
 independent checker passes 3 sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation
 and 8 transaction transitions, 6 recursive observations, 4 structural cases, 92 current helper projections,
-31 diagnostics, and 37 rejected mutations.
+31 diagnostics, and 38 rejected mutations.
 
-Three of 14 rollout legs are complete and 11 remain pending. The neutral contract, public linked-rule structure,
-and unchanged neutral/public recomposition are complete. Public typed values, transaction spelling and behavior,
-recursive observation, span-native progressive/staged dispatch, and all six runtime admissions remain future work.
+Four of 14 rollout legs are complete and 10 remain pending. The neutral contract, public linked-rule structure,
+unchanged neutral/public recomposition, and Perl runtime admission are complete. Perl's internal authority and all
+92 helper projections plus 7 aliases are admitted across live and independently emitted/loaded generated routes
+without changing their public results or scalar mark/cursor behavior.
+
+Public typed values, transaction spelling and behavior, recursive observation, span-native progressive/staged
+dispatch, and the Rust, Dart, Julia, PUC Lua, and LuaJIT runtime admissions remain future work.
 
 The helper audit distinguishes 7 callable compatibility aliases from 2 internal Perl contract/scanner ids.
 `capture_take_slice` and `capture_take_slice_len` are internal ids, not accepted helper spellings; authored code
@@ -665,8 +669,9 @@ Three backbone items tracked major structural modernization — all done:
   `0056` adopts one future immutable source-location algebra across cursor, capture, recursion, segmentation, and
   composition: Unicode-scalar positions, half-open spans, ordered provenance, bounded recognition-only cursor
   transactions, recursive entry/match/exit observations, progress checks, and span-native parser dispatch. The
-  neutral contract is complete under `FUTURE-PARITY-BACKLOG.14.1.1`, and public rule-shape teaching is current
-  under `.14.1.2`; implementation and six-runtime admission remain future work under `.14.2-.14.8`. ADR `0045`
+  neutral contract is complete under `FUTURE-PARITY-BACKLOG.14.1.1`, public rule-shape teaching is current under
+  `.14.1.2`, and the Perl internal runtime is admitted under `.14.2.1.3`; the other five runtime admissions and
+  broader transaction/observation/dispatch work remain future under `.14.2.2-.14.8`. ADR `0045`
   separately retains gap syntax and lifecycle ownership. The EBNF recursive-regex and portmap complex-regex
   walkthroughs now preserve those shipped facts as compatibility descriptions, not the target general authoring
   idiom.

@@ -1,5 +1,18 @@
 # ARCHITECTURE STATE
 
+- `2026-08-01 Perl typed source-location runtime admission`: `FUTURE-PARITY-BACKLOG.14.2.1.3` makes the already
+  implemented internal Perl value/projection boundary canonical without changing production runtime code. The
+  local gate now requires, syntax-checks, and unconditionally executes `t/typed_source_location_values.t` plus
+  `t/typed_source_location_perl_contract.t`; together they prove 10 top-level value, helper, live, and independently
+  emitted/loaded generated-route tests. The neutral artifact/checker promotes only `perl_runtime`, advances the
+  live ledger to 4 complete / 10 pending, and rejects 38 mutations including an independent Perl complete-to-
+  pending regression. Public helper results and scalar mark/cursor storage, authored syntax and values, descriptor/
+  generated schemas and identities, semantic/MCP state, and every non-Perl backend remain unchanged. Sole-facing
+  capture, status, CI, and backend-handoff pages now distinguish admitted Perl internals from the later public and
+  five-runtime work; the real HTML build emits separate paragraphs around those boundaries. Complete canonical
+  signoff passes all seven doctrines, repository containment/relocation, CLI 66x2, RAM 53%, and Phase 0
+  1,031/1,031 in 650 seconds.
+
 - `2026-08-01 Perl typed source-location projection routing`: `FUTURE-PARITY-BACKLOG.14.2.1.2` routes the frozen
   four-family 92-helper catalog and seven aliases through `LinkedSpec::SourceLocation::Runtime` without changing
   any external result. `SpecEntry` establishes one decoded `input` authority per handler invocation and `LinkedRE`

@@ -31,11 +31,18 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 
 The check is unconditional. It independently derives Unicode-scalar, line/column, and UTF-8 coordinates;
 materializes direct and derived spans; executes invocation and bounded-transaction state transitions; validates
-recursive and zero/one/two-regex structural cases; and rejects all 37 registered mutations.
+recursive and zero/one/two-regex structural cases; and rejects all 38 registered mutations.
 
-Its current rollout result is 3 complete / 11 pending. Passing this gate proves the neutral contract plus the
-completed public-structure and neutral/public-recomposition ledger rows; it does not claim a backend value type,
-authored transaction syntax, or runtime admission.
+The gate then unconditionally runs the admitted Perl value and projection consumers:
+
+```bash
+PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t
+```
+
+Its current rollout result is 4 complete / 10 pending with 38 registered mutations. Passing this gate proves the
+neutral contract, both completed public-structure rows, and the internal Perl runtime across exact value, helper,
+live, and independently emitted/loaded generated routes. It does not claim public authored `Position`/`Span`
+values, transaction syntax or behavior, or admission of another backend.
 
 The gate unconditionally verifies the neutral MCP transport before checking all five derived bindings. It requires
 every contract artifact and runs the generators in this exact order before the admitted implementation proofs:

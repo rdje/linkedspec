@@ -1,5 +1,21 @@
 # CHANGES
 
+## 2026-08-01 — FUTURE-PARITY-BACKLOG.14.2.1.3 — admit Perl typed source runtime
+
+- Registered both committed Perl typed-source consumers as required, syntax-checked, unconditional canonical
+  inputs. Their composed run passes 10 tests across immutable values, all 92 helpers plus seven aliases, live
+  execution, and independently emitted/loaded generated source.
+- Promoted only `perl_runtime` in the neutral artifact/checker. Current truth is 4 complete / 10 pending with 38
+  mutations, including an independent regression that rejects a completed Perl row reverting to pending.
+- Updated the sole-facing capture/source-location, project-status, local-CI, and backend-handoff pages. The book
+  now separates admitted internal Perl values/projections from absent authored `Position`/`Span` values,
+  transactions, and the five pending runtimes; a real build confirms distinct generated HTML paragraphs.
+- Changed no production runtime/helper code, external result, scalar mark/cursor storage, schema or generated
+  identity, semantic/MCP state, DSL/facade surface, root README, or unrelated rendered-readability work.
+- Passed capability schema v2 / 80-0-0 / 24+6, Knowledge Map 785/6,392, all seven doctrines, repository
+  containment and relocation, every composed semantic/MCP admission, CLI 66/66 twice, RAM 53%, and Phase 0
+  1,031/1,031 in 650 seconds before the exact local-CI pass marker.
+
 ## 2026-08-01 — FUTURE-PARITY-BACKLOG.14.2.1.2 — route Perl typed source projections
 
 - Added the exact detached four-family, 92-row `typed_source_projection_rows` catalog and routed all rows plus

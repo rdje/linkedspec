@@ -1,5 +1,24 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-01 — Perl typed source runtime admission is signoff-complete
+
+`FUTURE-PARITY-BACKLOG.14.2.1.3` admits the implemented Perl typed source-location core/projections from clean
+activation `98765354` (intended 143/300; no push). Canonical CI now requires and syntax-checks both committed Perl
+consumers, then executes them together immediately after the neutral checker. Their 10 tests pass across exact
+immutable values, all 92 helper rows plus seven aliases, live execution, and independently emitted/loaded source.
+
+Only `perl_runtime` is promoted: executable truth is 4 complete / 10 pending with 38 mutations, including an
+independent Perl completed-to-pending regression. The sole-facing capture, status, local-CI, and backend-handoff
+pages distinguish admitted internal Perl values/projections from absent public authored values, transactions, and
+Rust/Dart/Julia/PUC-Lua/LuaJIT admission. A real repository-local build passes and the changed generated HTML uses
+distinct paragraph blocks; the separate broad readability audit remains queued.
+
+No production runtime/helper code, external result, scalar mark/cursor storage, schema/identity, semantic/MCP,
+DSL/facade, root README, or unrelated work changes. Knowledge Map 785/6,392, capability schema v2 / 80-0-0 / 24+6,
+all seven doctrines, repository containment/relocation, every composed semantic/MCP admission, CLI 66/66 twice,
+RAM 53%, and Phase 0 1,031/1,031 in 650 seconds pass before `[ci] local CI gate passed`. Commit, brief clearing,
+and exact clean proof precede task-tree-first Rust authority/RED `.14.2.2.0`.
+
 ## 2026-08-01 — Perl typed source projections are signoff-complete
 
 `FUTURE-PARITY-BACKLOG.14.2.1.2` routes every frozen Perl source-boundary helper through the immutable core from
