@@ -1,5 +1,20 @@
 # Project Status
 
+## Typed source-location contract
+
+The backend-neutral typed source-location contract is complete under `FUTURE-PARITY-BACKLOG.14.1.1`. Its
+independent checker passes 3 sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation
+and 8 transaction transitions, 6 recursive observations, 4 structural cases, 92 current helper projections,
+31 diagnostics, and 36 rejected mutations.
+
+This advances only the neutral rollout leg: 1 of 14 legs is complete and 13 remain pending. Public typed values,
+transaction spelling and behavior, recursive observation, span-native progressive/staged dispatch, and all six
+runtime admissions remain future work.
+
+The helper audit distinguishes 7 callable compatibility aliases from 2 internal Perl contract/scanner ids.
+`capture_take_slice` and `capture_take_slice_len` are internal ids, not accepted helper spellings; authored code
+continues to use `capture_take()` and `capture_take_len()`.
+
 Five-backend callable recurring/public admission is complete under `FUTURE-PARITY-BACKLOG.11.8.4`. One rooted
 driver composes neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; both Lua rows execute one focused file. The
 checker locks exact roles, paths, order, route multiplicity, canonical registration, satisfied-exclusion absence,

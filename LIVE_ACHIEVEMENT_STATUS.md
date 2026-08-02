@@ -1,5 +1,25 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-01 — Neutral typed source-location contract is executable
+
+`FUTURE-PARITY-BACKLOG.14.1.1` is active from clean `c2d9eadf` (132/300; no push). The exact v1 neutral artifact
+and independent repository-routed checker now cover 3/7/6/3 source-position-span-text fixtures, 8+8 cursor
+transitions, six recursive/four structural cases, 92 canonical helper projections, seven callable aliases plus
+two internal ids, 31 diagnostics, 36 mutations, and 14 rollout legs. The executable source check corrected the
+preliminary nine-alias classification without changing runtime behavior.
+
+Both new files are mandatory tracked canonical inputs, and the checker runs through project-local Python storage;
+the tool oracle now covers 28 Python entrypoints. The capability guide and three sole-facing book pages state that
+only neutral contract leg 1/14 is complete. Syntax, typed public values, backend behavior, and public graph-shape
+teaching remain future. The book builds, and direct rendered HTML keeps each addition in a separate paragraph,
+heading, or code block; no screenshot-level visual claim is made.
+
+Focused checker, mutation, path/storage, book, Knowledge Map 784/6,363, task, and all seven doctrine checks pass.
+The definitive canonical gate passes semantic/MCP admissions, containment, moved-root/outside-CWD execution, CLI
+66x2, RAM 46%, and Phase 0 1,031/1,031 in 644 seconds before `local CI gate passed`. Generated book output is
+removed; the landing, brief clearing, and exact clean proof hand the intended next action to public teaching
+`.14.1.2`.
+
 ## 2026-08-01 — Typed source-location contract implementation is dependency-frozen
 
 `FUTURE-PARITY-BACKLOG.14.1.0` is signoff-complete from clean `24770ade` (intended 132/300; no push). Authority was
@@ -10,8 +30,9 @@ is claimed.
 
 The next neutral artifact is exact: `linkedspec-typed-source-location-v1`, one JSON contract and one independent
 repository-routed Python checker, 3/7/6/3 source/position/span/derived fixtures, 8+8 state transitions, six
-recursive/four structural cases, 92 canonical helper projections, nine aliases, 31 diagnostic negatives, 36
-mutations, and 14 rollout legs. The later public slice owns five accurately identified complex/recursive-regex
+recursive/four structural cases, 92 canonical helper projections, seven callable aliases plus two internal
+contract ids (correcting the preliminary nine-alias classification), 31 diagnostic negatives, 36 mutations, and
+14 rollout legs. The later public slice owns five accurately identified complex/recursive-regex
 praise passages and must teach readable zero/one/two-regex graph structure in separate rendered paragraphs.
 
 Knowledge Map passes at 784 facts / 6,362 questions. The unchanged sole-facing book builds 79 files / 14,072 KiB;

@@ -96,6 +96,12 @@ check_no_untracked_ci_inputs() {
   found=1
  fi
 
+ status_line=$(git status --short --untracked-files=all -- tools/check_typed_source_location_contract.py)
+ if [[ "$status_line" == '?? '* ]]; then
+  printf '[ci] ERROR: untracked CI input: %s\n' "${status_line#?? }" >&2
+  found=1
+ fi
+
  (( found == 0 )) || exit 1
 }
 
@@ -218,6 +224,7 @@ require_tracked_file tools/check_root_rule_selection_contract.py
 require_tracked_file tools/check_root_rule_selection_five_backend.sh
 require_tracked_file tools/check_rule_local_cursor_contract.py
 require_tracked_file tools/check_rule_local_cursor_five_backend.sh
+require_tracked_file tools/check_typed_source_location_contract.py
 require_tracked_file tools/check_semantic_introspection_contract.py
 require_tracked_file tools/check_semantic_introspection_six_runtime.sh
 require_tracked_file tools/check_mcp_six_runtime.sh
@@ -342,6 +349,7 @@ require_tracked_file capability_conformance/repeated_action_result/explicit_or_d
 require_tracked_file capability_conformance/repeated_action_result/explicit_or_distinct.expected.json
 require_tracked_file capability_conformance/root_rule_selection_contract.json
 require_tracked_file capability_conformance/rule_local_cursor_contract.json
+require_tracked_file capability_conformance/typed_source_location_contract.json
 require_tracked_file capability_conformance/semantic_introspection_contract.json
 require_tracked_file capability_conformance/semantic_introspection_model.json
 require_tracked_file capability_conformance/uniform_binding_contract.json
@@ -530,6 +538,9 @@ bash tools/run_python_project_data.sh tools/check_logical_helper_contract.py
 
 log "checking backend-neutral rule-local cursor and bare-edge contract"
 bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py
+
+log "checking backend-neutral typed source-location algebra contract"
+bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py
 
 log "checking backend-neutral root-rule selection contract"
 bash tools/run_python_project_data.sh tools/check_root_rule_selection_contract.py

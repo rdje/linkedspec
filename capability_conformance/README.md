@@ -243,6 +243,29 @@ capability ledger remains the semantic convergence baseline while current Perl, 
 emitters use v2. Lua's dedicated dual-ABI generated-v2 proof passes 106 assertions per ABI under `.9.1.7.4`;
 its composed admission now passes 119 assertions per ABI under `.9.1.7.6`.
 
+`typed_source_location_contract.json` (`linkedspec-typed-source-location-v1`) makes ADR `0056` executable before
+syntax or backend values are admitted. Run:
+
+```bash
+bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py
+```
+
+The neutral artifact fixes three decoded sources, seven Unicode-scalar/line/column/UTF-8 conversions, six direct
+spans, three derived-text provenance cases, eight invocation transitions, eight transaction transitions, six
+recursive observations, and four zero/one/two-regex structural cases.
+
+It also maps the exact 92 current source-boundary helpers onto one algebra. The current Perl inventory contains
+seven callable compatibility aliases. Two similarly named values—`capture_take_slice` and
+`capture_take_slice_len`—are internal contract/scanner ids whose recognized spellings remain canonical
+`capture_take()` and `capture_take_len()`; they are not extra callable aliases.
+
+The checker derives coordinates and text independently, executes both state machines, cross-checks current Lua
+helper authority and the Perl alias/internal-id seams, locks 31 diagnostics, verifies canonical tracked execution,
+and rejects 36 mutations. Rollout is 1 complete / 13 pending across 14 legs: only the neutral contract is complete.
+
+No public `Position`/`Span` value, transaction spelling, backend implementation, parser behavior, descriptor or
+generated schema, semantic/MCP projection, or source-authority elevation is claimed by this artifact.
+
 `root_rule_selection_contract.json` (`linkedspec-root-rule-selection-v1`) makes ADR `0046` executable without
 claiming markerless execution before the
 backends admit it. Run `bash tools/run_python_project_data.sh tools/check_root_rule_selection_contract.py` to validate explicit selector > first

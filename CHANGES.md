@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-08-01 — FUTURE-PARITY-BACKLOG.14.1.1 — add neutral typed source-location contract
+
+- Added `linkedspec-typed-source-location-v1` as a backend-neutral JSON contract with three decoded sources, seven
+  coordinate conversions, six direct spans, three derived texts, 8+8 cursor state-machine transitions, six
+  recursive observations, four structural cases, 92 current helper projections, 31 diagnostic fixtures, and 14
+  ordered rollout legs. Only the neutral-contract leg is complete; no DSL spelling or runtime value is selected.
+- Added an independent Python checker that derives coordinates/text, executes both state machines, cross-checks
+  current Perl/Lua helper authority, and rejects 36 drift mutations. Source proof corrected the preliminary helper
+  classification to seven callable compatibility aliases plus two internal scanner/contract ids.
+- Registered both files as tracked canonical inputs and routed the checker through the project-local Python
+  wrapper. Tool-storage governance now covers 28 Python entrypoints; no driver, cache, dependency, workflow, or
+  off-volume scratch location was added.
+- Updated the capability guide and three sole-facing book pages with explicit neutral-versus-runtime boundaries.
+  The complete book builds and direct rendered HTML preserves the additions as separate paragraphs/headings;
+  screenshot-level viewport review remains unavailable and the broader non-urgent readability audit stays queued.
+- Focused contract/storage/path/book checks, Knowledge Map 784/6,363, all seven doctrines, and the definitive
+  canonical gate pass. Canonical proves repository containment, moved-root/outside-CWD execution, CLI 66x2, RAM
+  46%, and Phase 0 1,031/1,031 in 644 seconds before `local CI gate passed`.
+
 ## 2026-08-01 — FUTURE-PARITY-BACKLOG.14.1.0 — freeze typed source-location contract plan
 
 - Activated the behavior-free audit leaf from clean `24770ade` and split parent `.14.1` into neutral artifact,
@@ -10,7 +29,9 @@
   currently cuts to `undef` with trace evidence rather than the future structured diagnostic.
 - Froze `linkedspec-typed-source-location-v1` at the exact future contract/checker paths, 3/7/6/3 source-position-
   span-derived fixtures, 8+8 invocation/transaction transitions, six recursive and four structural cases, 92
-  canonical current-helper projections, nine aliases, 31 diagnostic negatives, 36 mutations, and 14 rollout legs.
+  canonical current-helper projections, seven callable aliases plus two internal record ids (corrected by
+  executable `.14.1.1` proof from the preliminary nine-alias classification), 31 diagnostic negatives, 36
+  mutations, and 14 rollout legs.
 - Inventoried three portmap, one EBNF, and one shipped-spec reading-order passage that accurately describe current
   complex/recursive regex code but should not praise it as the general idiom. The later public slice must teach
   readable zero/one/two-regex linked structure in separate rendered paragraphs; the non-blocking whole-book

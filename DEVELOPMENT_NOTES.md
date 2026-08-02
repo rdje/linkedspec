@@ -1,5 +1,17 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`FUTURE-PARITY-BACKLOG.14.1.1` — neutral typed source-location contract): the exact neutral schema
+  is executable at `capability_conformance/typed_source_location_contract.json`; its independent checker derives
+  fixture results rather than trusting stored expectations and runs 36 isolated mutations. Exact content is
+  3 sources / 7 positions / 6 spans / 3 derived texts, 8 invocation + 8 transaction transitions, 6 recursive / 4
+  structural cases, 92 canonical helpers, 7 callable aliases + 2 internal ids, 31 diagnostics, and 14 rollout legs.
+  `tools/run_ci_local.sh` requires both files tracked and invokes the checker only through project-local Python;
+  the storage oracle advances to 28 Python entrypoints. The new sole-facing prose is split into distinct rendered
+  paragraph/heading elements and states that 13 rollout legs, syntax, typed runtime values, and backend admission
+  remain future. Focused checks and all doctrines pass; definitive canonical proof passes containment, moved-root/
+  outside-CWD execution, CLI 66x2, RAM 46%, and Phase 0 1,031/1,031 in 644 seconds. No parser/compiler/runtime/
+  schema/capability behavior changes.
+
 - 2026-08-01 (`FUTURE-PARITY-BACKLOG.14.1.0` — typed source-location audit/plan): clean `24770ade` owns a
   behavior-free pre-artifact audit. `LinkedSpec::Get` and `return_descriptor` verify zero-regex coordinator,
   one-regex leaf, ordinary regex-bearing entry, two-regex recursive node, exact nested output, family/cursor policy,
@@ -9,14 +21,17 @@
   operations. The `(rule, position)` guard cuts direct and mutual no-progress recursion to `undef` and logs a trace
   decision, with no structured `last_error`; portable diagnostics are therefore future contract rows.
 - The modern current-helper basis is exact at 47 capture/mark + 30 entry/match + 11 input/cursor + four explicit
-  cursor controls = 92 canonical names. Nine compatibility aliases remain separate from that ordered basis, and
-  legacy capture macros remain separate again. Existing semantic-introspection byte spans are adjacent versioned
-  evidence, not the runtime typed-value schema.
+  cursor controls = 92 canonical names. Executable `.14.1.1` source proof supersedes the preliminary nine-alias
+  classification: seven callable aliases remain, while `capture_take_slice{,_len}` are internal scanner/contract
+  ids that recognize only canonical `capture_take{,_len}()`. Legacy capture macros remain separate again. Existing
+  semantic-introspection byte spans are adjacent versioned evidence, not the runtime typed-value schema.
 - `.14.1.1` is frozen to create `capability_conformance/typed_source_location_contract.json` plus
   `tools/check_typed_source_location_contract.py`, run only through `tools/run_python_project_data.sh` and ordinary
   tracked `tools/run_ci_local.sh` registration. Exact contents are three sources, seven positions, six spans, three
   derived texts, eight invocation and eight transaction transitions, six recursive observations, four structural
-  authoring cases, 92 projections, nine aliases, 31 diagnostic negatives, 36 mutations, and 14 rollout legs. No
+  authoring cases, 92 projections, seven callable aliases plus two internal contract ids, 31 diagnostic negatives,
+  36 mutations, and 14 rollout legs. Executable `.14.1.1` proof corrects the preliminary nine-alias classification:
+  `capture_take_slice{,_len}` are internal ids recognizing canonical `capture_take{,_len}()` only. No
   new driver, allocator, cache, temp root, source spelling, or backend admission is allowed in the neutral slice.
 - `.14.1.2` owns public structure: rule-paragraph and regex guidance plus accurate reframing of three portmap, one
   EBNF, and one shipped-reading-order passage. Current shipped code and examples remain truthful. Added prose must

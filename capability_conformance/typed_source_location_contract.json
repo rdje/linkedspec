@@ -1,0 +1,199 @@
+{
+  "format": 1,
+  "contract_id": "linkedspec-typed-source-location-v1",
+  "task_owner": "FUTURE-PARITY-BACKLOG.14.1.1",
+  "status": "neutral_contract_only",
+  "expected_counts": {
+    "sources": 3,
+    "position_conversions": 7,
+    "direct_spans": 6,
+    "derived_text_cases": 3,
+    "invocation_transitions": 8,
+    "transaction_transitions": 8,
+    "recursive_observations": 6,
+    "structural_authoring_cases": 4,
+    "helper_projections": 92,
+    "compatibility_aliases": 7,
+    "internal_contract_ids": 2,
+    "diagnostics": 31,
+    "rollout_legs": 14,
+    "mutations": 36
+  },
+  "policy": {
+    "source_identity": "caller-authorized decoded input identity; never a path, backend object, or implicit read authority",
+    "position": "immutable source identity plus a zero-based Unicode-scalar offset in the closed input interval",
+    "span": "immutable same-source half-open interval with start not greater than end; empty spans are valid",
+    "coordinates": "Unicode-scalar offset is authoritative; one-based line and column plus UTF-8 byte offset are derived evidence",
+    "direct_text": "materialize text on demand from one direct span; a span never embeds copied text or host state",
+    "derived_text": "concatenate an ordered provenance sequence explicitly; never pretend derived text is one contiguous interval",
+    "invocation_state": "cursor, anonymous boundary, and marks are mutable only inside one invocation; public projections are immutable",
+    "transactions": "one bounded recognition-only attempt snapshots cursor, boundary, and marks; commit or rollback invalidates its token",
+    "transaction_effects": "rollback never restores user variables, AST mutation, diagnostics, output, external calls, registry effects, or host state",
+    "recursion": "entry, selected-match, and accepted-exit observations are read-only; absence is explicit and parent links are bounded",
+    "progress": "repetition, recursion, and staged queues must advance the cursor or prove a well-founded decreasing measure",
+    "dispatch_authority": "a span conveys data and provenance only; source, registry, capability, and policy authority remain independently required",
+    "source_spelling": "not selected; Position, Span, checkpoint, try, commit, and rollback are architectural names only",
+    "implementation_boundary": "no backend runtime value, helper spelling, descriptor/schema version, semantic/MCP projection, or parser behavior is admitted by this contract"
+  },
+  "canonical_execution": {
+    "contract_path": "capability_conformance/typed_source_location_contract.json",
+    "checker_path": "tools/check_typed_source_location_contract.py",
+    "project_data_runner": "tools/run_python_project_data.sh",
+    "canonical_driver": "tools/run_ci_local.sh",
+    "invocation": "bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py",
+    "tracked_required": true
+  },
+  "sources": [
+    {"id": "unicode", "decoded_text": "é\n🙂x", "unicode_scalar_length": 4, "utf8_byte_length": 8},
+    {"id": "ascii", "decoded_text": "abc", "unicode_scalar_length": 3, "utf8_byte_length": 3},
+    {"id": "parts", "decoded_text": "Aβ\nC", "unicode_scalar_length": 4, "utf8_byte_length": 5}
+  ],
+  "position_conversions": [
+    {"id": "unicode_start", "source_id": "unicode", "offset": 0, "line": 1, "column": 1, "utf8_byte_offset": 0},
+    {"id": "unicode_after_e_acute", "source_id": "unicode", "offset": 1, "line": 1, "column": 2, "utf8_byte_offset": 2},
+    {"id": "unicode_line_two", "source_id": "unicode", "offset": 2, "line": 2, "column": 1, "utf8_byte_offset": 3},
+    {"id": "unicode_after_emoji", "source_id": "unicode", "offset": 3, "line": 2, "column": 2, "utf8_byte_offset": 7},
+    {"id": "unicode_end", "source_id": "unicode", "offset": 4, "line": 2, "column": 3, "utf8_byte_offset": 8},
+    {"id": "ascii_middle", "source_id": "ascii", "offset": 2, "line": 1, "column": 3, "utf8_byte_offset": 2},
+    {"id": "parts_line_two", "source_id": "parts", "offset": 3, "line": 2, "column": 1, "utf8_byte_offset": 4}
+  ],
+  "direct_spans": [
+    {"id": "unicode_empty", "source_id": "unicode", "start": 0, "end": 0, "provenance": "input", "expected_text": ""},
+    {"id": "unicode_prefix", "source_id": "unicode", "start": 0, "end": 1, "provenance": "entry", "expected_text": "é"},
+    {"id": "unicode_newline", "source_id": "unicode", "start": 1, "end": 2, "provenance": "match", "expected_text": "\n"},
+    {"id": "unicode_emoji_tail", "source_id": "unicode", "start": 2, "end": 4, "provenance": "capture", "expected_text": "🙂x"},
+    {"id": "ascii_tail", "source_id": "ascii", "start": 1, "end": 3, "provenance": "mark", "expected_text": "bc"},
+    {"id": "parts_beta_newline", "source_id": "parts", "start": 1, "end": 3, "provenance": "gap", "expected_text": "β\n"}
+  ],
+  "derived_text_cases": [
+    {"id": "same_source_noncontiguous", "policy": "concatenate_in_order", "span_ids": ["unicode_prefix", "unicode_emoji_tail"], "contiguous_source_interval": null, "expected_text": "é🙂x"},
+    {"id": "multi_source", "policy": "concatenate_in_order", "span_ids": ["ascii_tail", "unicode_prefix"], "contiguous_source_interval": null, "expected_text": "bcé"},
+    {"id": "empty_then_gap", "policy": "concatenate_in_order", "span_ids": ["unicode_empty", "parts_beta_newline"], "contiguous_source_interval": null, "expected_text": "β\n"}
+  ],
+  "invocation_state_machine": {
+    "initial": {"stack": [], "completed_count": 0},
+    "transitions": [
+      {"id": "enter_root", "operation": "enter", "args": {"invocation_id": "root", "rule_label": "Top", "source_id": "unicode", "parent_invocation_id": null, "cursor": 0}, "expected": {"active_invocation_id": "root", "cursor": 0, "anonymous_boundary": 0, "mark_names": [], "stack_depth": 1, "completed_count": 0}},
+      {"id": "seek_root", "operation": "set_cursor", "args": {"invocation_id": "root", "offset": 2}, "expected": {"active_invocation_id": "root", "cursor": 2, "anonymous_boundary": 0, "mark_names": [], "stack_depth": 1, "completed_count": 0}},
+      {"id": "set_root_boundary", "operation": "set_boundary", "args": {"invocation_id": "root", "offset": 2}, "expected": {"active_invocation_id": "root", "cursor": 2, "anonymous_boundary": 2, "mark_names": [], "stack_depth": 1, "completed_count": 0}},
+      {"id": "write_root_mark", "operation": "set_mark", "args": {"invocation_id": "root", "name": "shared", "offset": 2, "generation": 1}, "expected": {"active_invocation_id": "root", "cursor": 2, "anonymous_boundary": 2, "mark_names": ["shared"], "stack_depth": 1, "completed_count": 0}},
+      {"id": "enter_child", "operation": "enter", "args": {"invocation_id": "child", "rule_label": "Leaf", "source_id": "unicode", "parent_invocation_id": "root", "cursor": 2}, "expected": {"active_invocation_id": "child", "cursor": 2, "anonymous_boundary": 2, "mark_names": [], "stack_depth": 2, "completed_count": 0}},
+      {"id": "advance_child", "operation": "set_cursor", "args": {"invocation_id": "child", "offset": 4}, "expected": {"active_invocation_id": "child", "cursor": 4, "anonymous_boundary": 2, "mark_names": [], "stack_depth": 2, "completed_count": 0}},
+      {"id": "accept_child", "operation": "accept", "args": {"invocation_id": "child"}, "expected": {"active_invocation_id": "root", "cursor": 4, "anonymous_boundary": 2, "mark_names": ["shared"], "stack_depth": 1, "completed_count": 1}},
+      {"id": "accept_root", "operation": "accept", "args": {"invocation_id": "root"}, "expected": {"active_invocation_id": null, "cursor": null, "anonymous_boundary": null, "mark_names": [], "stack_depth": 0, "completed_count": 2}}
+    ]
+  },
+  "transaction_state_machine": {
+    "initial": {"invocation_id": "root", "rule_label": "Top", "source_id": "unicode", "cursor": 1, "anonymous_boundary": 1, "marks": [["m", 1]]},
+    "transitions": [
+      {"id": "checkpoint_commit_path", "operation": "checkpoint", "args": {"token": "t1"}, "expected": {"cursor": 1, "anonymous_boundary": 1, "marks": [["m", 1]], "token": "t1", "token_state": "active"}},
+      {"id": "try_advance_commit_path", "operation": "try_cursor", "args": {"token": "t1", "offset": 3}, "expected": {"cursor": 3, "anonymous_boundary": 1, "marks": [["m", 1]], "token": "t1", "token_state": "active"}},
+      {"id": "try_boundary_commit_path", "operation": "try_boundary", "args": {"token": "t1", "offset": 2}, "expected": {"cursor": 3, "anonymous_boundary": 2, "marks": [["m", 1]], "token": "t1", "token_state": "active"}},
+      {"id": "try_mark_commit_path", "operation": "try_mark", "args": {"token": "t1", "name": "n", "offset": 3}, "expected": {"cursor": 3, "anonymous_boundary": 2, "marks": [["m", 1], ["n", 3]], "token": "t1", "token_state": "active"}},
+      {"id": "commit_path", "operation": "commit", "args": {"token": "t1"}, "expected": {"cursor": 3, "anonymous_boundary": 2, "marks": [["m", 1], ["n", 3]], "token": "t1", "token_state": "invalidated"}},
+      {"id": "checkpoint_rollback_path", "operation": "checkpoint", "args": {"token": "t2"}, "expected": {"cursor": 3, "anonymous_boundary": 2, "marks": [["m", 1], ["n", 3]], "token": "t2", "token_state": "active"}},
+      {"id": "try_mutate_rollback_path", "operation": "try_state", "args": {"token": "t2", "cursor": 4, "anonymous_boundary": 4, "marks": [["m", 4]]}, "expected": {"cursor": 4, "anonymous_boundary": 4, "marks": [["m", 4]], "token": "t2", "token_state": "active"}},
+      {"id": "rollback_path", "operation": "rollback", "args": {"token": "t2"}, "expected": {"cursor": 3, "anonymous_boundary": 2, "marks": [["m", 1], ["n", 3]], "token": "t2", "token_state": "invalidated"}}
+    ]
+  },
+  "recursive_observations": [
+    {"id": "ordinary_leaf", "invocation_id": "leaf-1", "parent_invocation_id": "root-1", "source_id": "unicode", "entry_offset": 2, "selected_match_span_id": "unicode_emoji_tail", "accepted_exit_offset": 4, "outcome": "accepted", "diagnostic": null},
+    {"id": "zero_regex_coordinator", "invocation_id": "root-2", "parent_invocation_id": null, "source_id": "unicode", "entry_offset": 0, "selected_match_span_id": null, "accepted_exit_offset": 4, "outcome": "accepted", "diagnostic": null},
+    {"id": "failed_selection", "invocation_id": "leaf-2", "parent_invocation_id": "root-3", "source_id": "unicode", "entry_offset": 0, "selected_match_span_id": null, "accepted_exit_offset": null, "outcome": "failed", "diagnostic": null},
+    {"id": "abnormal_exit", "invocation_id": "leaf-3", "parent_invocation_id": "root-4", "source_id": "unicode", "entry_offset": 2, "selected_match_span_id": "unicode_emoji_tail", "accepted_exit_offset": null, "outcome": "aborted", "diagnostic": null},
+    {"id": "direct_nonprogress", "invocation_id": "recursive-1", "parent_invocation_id": "recursive-1", "source_id": "unicode", "entry_offset": 1, "selected_match_span_id": null, "accepted_exit_offset": null, "outcome": "rejected", "diagnostic": "source_location_nonprogress_direct_recursion"},
+    {"id": "mutual_nonprogress", "invocation_id": "recursive-a", "parent_invocation_id": "recursive-b", "source_id": "unicode", "entry_offset": 1, "selected_match_span_id": null, "accepted_exit_offset": null, "outcome": "rejected", "diagnostic": "source_location_nonprogress_mutual_recursion"}
+  ],
+  "structural_authoring_cases": [
+    {"id": "zero_regex_coordinator", "regex_count": 0, "role": "coordinator", "entry_rule_valid": true, "recursion_owner": "linked_rule_graph", "guidance": "coordinate child rules without embedding a boundary regex"},
+    {"id": "one_regex_leaf", "regex_count": 1, "role": "leaf", "entry_rule_valid": true, "recursion_owner": "linked_rule_graph", "guidance": "recognize one small boundary or token"},
+    {"id": "two_regex_recursive_node", "regex_count": 2, "role": "start_end_node", "entry_rule_valid": true, "recursion_owner": "linked_rule_graph", "guidance": "recognize start and end boundaries while recursion stays in graph edges"},
+    {"id": "regex_bearing_entry", "regex_count": 1, "role": "selected_entry", "entry_rule_valid": true, "recursion_owner": "linked_rule_graph", "guidance": "a selected top rule may itself own an ordinary regex"}
+  ],
+  "helper_projection_schema": {
+    "row": ["name", "projection"],
+    "families": ["capture_mark", "entry_match", "input_cursor", "cursor_control"],
+    "projection_vocabulary": ["capture_boundary_write_position", "capture_group_exists", "capture_group_list", "capture_group_map", "capture_group_text", "cursor_checkpoint_compatibility", "cursor_position", "cursor_state_write_compatibility", "mark_delete", "mark_exists", "mark_read_column", "mark_read_line", "mark_read_offset", "mark_write_position", "position_column", "position_line", "position_offset", "source_length", "source_slice_text", "source_text", "span_length", "span_start_column", "span_start_line", "span_start_offset", "span_text"]
+  },
+  "helper_projections": {
+    "capture_mark": [
+      ["capture_between", "span_text"], ["capture_from", "span_text"], ["capture_len_between", "span_length"], ["capture_len_from", "span_length"], ["capture_rest", "span_text"], ["capture_rest_from", "span_text"], ["capture_rest_len", "span_length"], ["capture_rest_len_from", "span_length"], ["capture_slice", "span_text"], ["capture_slice_col", "span_start_column"], ["capture_slice_len", "span_length"], ["capture_slice_line", "span_start_line"], ["capture_slice_pos", "span_start_offset"], ["capture_slice_until_cursor", "span_text"], ["capture_slice_until_cursor_len", "span_length"], ["capture_until_boundary", "span_text"], ["capture_take", "span_text"], ["capture_take_between", "span_text"], ["capture_take_between_len", "span_length"], ["capture_take_len", "span_length"], ["capture_take_len_from", "span_length"], ["capture_take_rest", "span_text"], ["capture_take_rest_from", "span_text"], ["capture_take_rest_len", "span_length"], ["capture_take_rest_len_from", "span_length"], ["capture_take_until_cursor", "span_text"], ["capture_take_until_cursor_from", "span_text"], ["capture_take_until_cursor_len", "span_length"], ["capture_take_until_cursor_len_from", "span_length"], ["capture_until_cursor_from", "span_text"], ["capture_until_cursor_len_from", "span_length"], ["mark_capture_slice", "capture_boundary_write_position"], ["mark_copy", "mark_write_position"], ["mark_exists", "mark_exists"], ["mark_here", "mark_write_position"], ["mark_input_end", "mark_write_position"], ["mark_input_start", "mark_write_position"], ["mark_pos", "mark_read_offset"], ["start_capture_slice", "capture_boundary_write_position"], ["start_capture_slice_from", "capture_boundary_write_position"], ["clear_mark", "mark_delete"], ["mark_col", "mark_read_column"], ["mark_entry_end", "mark_write_position"], ["mark_entry_start", "mark_write_position"], ["mark_line", "mark_read_line"], ["mark_match_end", "mark_write_position"], ["mark_match_start", "mark_write_position"]
+    ],
+    "entry_match": [
+      ["entry_col", "span_start_column"], ["entry_end_col", "position_column"], ["entry_end_line", "position_line"], ["entry_end_pos", "position_offset"], ["entry_group", "capture_group_text"], ["entry_groups", "capture_group_list"], ["entry_has", "capture_group_exists"], ["entry_len", "span_length"], ["entry_line", "span_start_line"], ["entry_map", "capture_group_map"], ["entry_named", "capture_group_text"], ["entry_start_col", "span_start_column"], ["entry_start_line", "span_start_line"], ["entry_start_pos", "span_start_offset"], ["entry_text", "span_text"], ["match_col", "span_start_column"], ["match_end_col", "position_column"], ["match_end_line", "position_line"], ["match_end_pos", "position_offset"], ["match_group", "capture_group_text"], ["match_groups", "capture_group_list"], ["match_has", "capture_group_exists"], ["match_len", "span_length"], ["match_line", "span_start_line"], ["match_map", "capture_group_map"], ["match_named", "capture_group_text"], ["match_start_col", "span_start_column"], ["match_start_line", "span_start_line"], ["match_start_pos", "span_start_offset"], ["match_text", "span_text"]
+    ],
+    "input_cursor": [
+      ["cursor_col", "position_column"], ["cursor_line", "position_line"], ["cursor_pos", "cursor_position"], ["cursor_rest", "span_text"], ["cursor_rest_len", "span_length"], ["input_end_col", "position_column"], ["input_end_line", "position_line"], ["input_end_pos", "position_offset"], ["input_len", "source_length"], ["input_slice", "source_slice_text"], ["input_text", "source_text"]
+    ],
+    "cursor_control": [
+      ["restore_cursor", "cursor_state_write_compatibility"], ["rewind_entry_start", "cursor_state_write_compatibility"], ["rewind_match_start", "cursor_state_write_compatibility"], ["save_cursor", "cursor_checkpoint_compatibility"]
+    ]
+  },
+  "compatibility_aliases": [
+    ["capture_from_rule_start", "capture_from"],
+    ["capture_len_from_rule_start", "capture_len_from"],
+    ["capture_rest_length", "capture_rest_len"],
+    ["capture_slice_here", "start_capture_slice"],
+    ["capture_slice_length", "capture_slice_len"],
+    ["entry_named_map", "entry_map"],
+    ["match_named_map", "match_map"]
+  ],
+  "internal_contract_ids": [
+    ["capture_take_slice", "capture_take"],
+    ["capture_take_slice_len", "capture_take_len"]
+  ],
+  "diagnostic_schema": {
+    "fields": ["id", "code", "phase", "detection", "required_context"],
+    "detection_values": ["static", "runtime", "static_or_runtime"],
+    "privacy": "carry identities and relevant coordinates without leaking source text above the active source-detail ceiling"
+  },
+  "diagnostics": [
+    {"id": "source_mismatch", "code": "source_location_source_mismatch", "phase": "validate_value", "detection": "runtime", "required_context": ["rule_role", "invocation_role", "source_id", "other_source_id"]},
+    {"id": "position_out_of_range", "code": "source_location_position_out_of_range", "phase": "validate_value", "detection": "runtime", "required_context": ["rule_role", "invocation_role", "source_id", "position_offset", "source_length"]},
+    {"id": "reversed_span", "code": "source_location_reversed_span", "phase": "validate_value", "detection": "runtime", "required_context": ["rule_role", "invocation_role", "source_id", "start_offset", "end_offset"]},
+    {"id": "invalid_derived_provenance", "code": "source_location_invalid_derived_provenance", "phase": "validate_value", "detection": "runtime", "required_context": ["rule_role", "invocation_role", "provenance_index", "source_id"]},
+    {"id": "unknown_mark", "code": "source_location_unknown_mark", "phase": "read_mark", "detection": "runtime", "required_context": ["rule_role", "invocation_role", "source_id", "mark_name"]},
+    {"id": "stale_mark", "code": "source_location_stale_mark", "phase": "read_mark", "detection": "runtime", "required_context": ["rule_role", "invocation_role", "source_id", "mark_name", "mark_generation"]},
+    {"id": "cross_invocation_mark", "code": "source_location_cross_invocation_mark", "phase": "read_mark", "detection": "runtime", "required_context": ["rule_role", "invocation_role", "source_id", "mark_name", "owner_invocation_id"]},
+    {"id": "invalidated_mark", "code": "source_location_invalidated_mark", "phase": "read_mark", "detection": "runtime", "required_context": ["rule_role", "invocation_role", "source_id", "mark_name", "mark_generation"]},
+    {"id": "unknown_transaction_token", "code": "source_location_unknown_transaction_token", "phase": "transaction", "detection": "runtime", "required_context": ["rule_role", "invocation_role", "source_id", "transaction_token"]},
+    {"id": "stale_transaction_token", "code": "source_location_stale_transaction_token", "phase": "transaction", "detection": "runtime", "required_context": ["rule_role", "invocation_role", "source_id", "transaction_token", "transaction_generation"]},
+    {"id": "cross_invocation_transaction_token", "code": "source_location_cross_invocation_transaction_token", "phase": "transaction", "detection": "runtime", "required_context": ["rule_role", "invocation_role", "source_id", "transaction_token", "owner_invocation_id"]},
+    {"id": "invalidated_transaction_token", "code": "source_location_invalidated_transaction_token", "phase": "transaction", "detection": "runtime", "required_context": ["rule_role", "invocation_role", "source_id", "transaction_token", "transaction_generation"]},
+    {"id": "transaction_nesting", "code": "source_location_transaction_nesting", "phase": "transaction", "detection": "static_or_runtime", "required_context": ["rule_role", "invocation_role", "source_id", "transaction_token"]},
+    {"id": "transaction_escape", "code": "source_location_transaction_escape", "phase": "transaction", "detection": "static_or_runtime", "required_context": ["rule_role", "invocation_role", "source_id", "transaction_token", "originating_edge_or_job"]},
+    {"id": "transaction_double_commit", "code": "source_location_transaction_double_commit", "phase": "commit", "detection": "runtime", "required_context": ["rule_role", "invocation_role", "source_id", "transaction_token"]},
+    {"id": "transaction_double_rollback", "code": "source_location_transaction_double_rollback", "phase": "rollback", "detection": "runtime", "required_context": ["rule_role", "invocation_role", "source_id", "transaction_token"]},
+    {"id": "effect_before_commit", "code": "source_location_effect_before_commit", "phase": "try", "detection": "static_or_runtime", "required_context": ["rule_role", "invocation_role", "source_id", "transaction_token", "effect_family"]},
+    {"id": "cross_rule_restore", "code": "source_location_cross_rule_restore", "phase": "rollback", "detection": "runtime", "required_context": ["rule_role", "invocation_role", "source_id", "transaction_token", "owner_rule_role"]},
+    {"id": "cross_source_restore", "code": "source_location_cross_source_restore", "phase": "rollback", "detection": "runtime", "required_context": ["rule_role", "invocation_role", "source_id", "transaction_token", "owner_source_id"]},
+    {"id": "cursor_regression", "code": "source_location_cursor_regression", "phase": "advance", "detection": "static_or_runtime", "required_context": ["rule_role", "invocation_role", "source_id", "start_offset", "end_offset", "originating_edge_or_job"]},
+    {"id": "nullable_repetition", "code": "source_location_nullable_repetition", "phase": "progress", "detection": "static_or_runtime", "required_context": ["rule_role", "invocation_role", "source_id", "start_offset", "end_offset", "originating_edge_or_job"]},
+    {"id": "nonprogress_direct_recursion", "code": "source_location_nonprogress_direct_recursion", "phase": "progress", "detection": "static_or_runtime", "required_context": ["rule_role", "invocation_role", "source_id", "start_offset", "end_offset", "originating_edge_or_job"]},
+    {"id": "nonprogress_mutual_recursion", "code": "source_location_nonprogress_mutual_recursion", "phase": "progress", "detection": "static_or_runtime", "required_context": ["rule_role", "invocation_role", "source_id", "start_offset", "end_offset", "originating_edge_or_job"]},
+    {"id": "staged_dispatch_cycle", "code": "source_location_staged_dispatch_cycle", "phase": "progress", "detection": "static_or_runtime", "required_context": ["rule_role", "invocation_role", "source_id", "start_offset", "end_offset", "originating_edge_or_job"]},
+    {"id": "recursive_boundary_unavailable", "code": "source_location_recursive_boundary_unavailable", "phase": "observe_recursion", "detection": "runtime", "required_context": ["rule_role", "invocation_role", "source_id", "boundary_role", "originating_edge_or_job"]},
+    {"id": "ambiguous_regex_slot", "code": "source_location_ambiguous_regex_slot", "phase": "resolve_slot", "detection": "static", "required_context": ["rule_role", "source_id", "slot_reference", "originating_edge_or_job"]},
+    {"id": "stale_regex_slot", "code": "source_location_stale_regex_slot", "phase": "resolve_slot", "detection": "static", "required_context": ["rule_role", "source_id", "slot_reference", "originating_edge_or_job"]},
+    {"id": "span_dispatch_source_denied", "code": "source_location_span_dispatch_source_denied", "phase": "dispatch", "detection": "runtime", "required_context": ["rule_role", "invocation_role", "source_id", "span_start", "span_end", "originating_edge_or_job"]},
+    {"id": "span_dispatch_registry_denied", "code": "source_location_span_dispatch_registry_denied", "phase": "dispatch", "detection": "runtime", "required_context": ["rule_role", "invocation_role", "source_id", "parser_identity", "originating_edge_or_job"]},
+    {"id": "span_dispatch_capability_denied", "code": "source_location_span_dispatch_capability_denied", "phase": "dispatch", "detection": "runtime", "required_context": ["rule_role", "invocation_role", "source_id", "parser_identity", "capability", "originating_edge_or_job"]},
+    {"id": "span_dispatch_policy_denied", "code": "source_location_span_dispatch_policy_denied", "phase": "dispatch", "detection": "runtime", "required_context": ["rule_role", "invocation_role", "source_id", "parser_identity", "policy", "originating_edge_or_job"]}
+  ],
+  "rollout": [
+    {"leg": "neutral_contract", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.1.1", "runtimes": []},
+    {"leg": "public_structure", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.1.2", "runtimes": []},
+    {"leg": "neutral_public_recomposition", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.1.3", "runtimes": []},
+    {"leg": "perl_runtime", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.2", "runtimes": ["perl"]},
+    {"leg": "rust_runtime", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.2", "runtimes": ["rust"]},
+    {"leg": "dart_runtime", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.2", "runtimes": ["dart"]},
+    {"leg": "julia_runtime", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.2", "runtimes": ["julia"]},
+    {"leg": "lua_dual_abi", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.2", "runtimes": ["puc_lua", "luajit"]},
+    {"leg": "transaction_safety", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.3", "runtimes": []},
+    {"leg": "recursive_observation", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.4", "runtimes": []},
+    {"leg": "lossless_gap_composition", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.5", "runtimes": []},
+    {"leg": "progressive_span_dispatch", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.6", "runtimes": []},
+    {"leg": "staged_span_dispatch", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.7", "runtimes": []},
+    {"leg": "recurring_public_no_drift", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.8", "runtimes": ["perl", "rust", "dart", "julia", "puc_lua", "luajit"]}
+  ]
+}

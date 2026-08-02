@@ -71,8 +71,8 @@ expected_python_temp_owners=(
 mapfile -t python_tool_entrypoints < <(
  rg -l '^#!/usr/bin/env python3$' "$REPO_ROOT"/tools/*.py | sed "s|^$REPO_ROOT/||" | sort
 )
-(( ${#python_tool_entrypoints[@]} == 27 )) ||
- fail "Python tool entrypoint inventory drifted from 27 to ${#python_tool_entrypoints[@]}"
+(( ${#python_tool_entrypoints[@]} == 28 )) ||
+ fail "Python tool entrypoint inventory drifted from 28 to ${#python_tool_entrypoints[@]}"
 
 allocator_name='mk''temp'
 mapfile -t shell_temp_owners < <(

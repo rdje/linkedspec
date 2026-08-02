@@ -1,10 +1,22 @@
 # ARCHITECTURE STATE
 
+- `2026-08-01 executable neutral typed source locations`: `FUTURE-PARITY-BACKLOG.14.1.1` implements
+  `linkedspec-typed-source-location-v1` as one backend-neutral JSON authority plus an independent checker. The
+  contract fixes 3/7/6/3 source-position-span-text fixtures, 8+8 invocation/transaction transitions, six
+  recursive/four structural cases, 92 canonical helper projections, seven callable aliases, two internal ids, 31
+  diagnostics, 36 mutations, and 14 rollout legs. Only neutral-contract leg 1 is complete; syntax, public typed
+  values, backend execution, and public structural teaching remain future. Canonical registration requires both
+  artifacts tracked and executes the checker through project-local Python storage. Three book pages state this
+  boundary in separate rendered paragraphs. Focused and seven-doctrine proof pass; definitive canonical proof
+  passes containment, moved-root/outside-CWD execution, CLI 66x2, RAM 46%, and Phase 0 1,031/1,031 in 644 seconds.
+  No parser/compiler/runtime/capability/semantic/MCP behavior moves.
+
 - `2026-08-01 typed source-location neutral-contract plan`: behavior-free
   `FUTURE-PARITY-BACKLOG.14.1.0` freezes the executable plan before artifacts. Live TOOLBOX proof establishes
   Unicode-scalar current offsets, zero/one/two-regex linked roles, ordinary regex-bearing entry rules, nested graph
   recursion, and the existing trace-only non-progress cutoff. The modern helper basis is exactly 92 projections
-  (47 capture/mark, 30 entry/match, 11 input/cursor, four cursor controls) plus nine compatibility aliases; current
+  (47 capture/mark, 30 entry/match, 11 input/cursor, four cursor controls) plus seven callable compatibility aliases
+  and two internal contract ids (the preliminary nine-alias label is corrected by `.14.1.1` source proof); current
   Perl lowering remains untyped host cursor/string operations. Future `linkedspec-typed-source-location-v1` is
   fixed at one contract/checker, 3/7/6/3 value fixtures, 8+8 state transitions, six recursive/four structural cases,
   31 diagnostic negatives, 36 mutations, and 14 rollout legs with repository-routed Python/canonical execution.

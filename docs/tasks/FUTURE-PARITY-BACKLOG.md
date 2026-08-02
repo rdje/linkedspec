@@ -17256,13 +17256,17 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   recursion terminate at the existing `(rule, position)` guard with `undef` and a trace decision, but no structured
   `last_error`; the future portable non-progress diagnostics therefore remain target contract, not current claims.
 
-  Helper and documentation audit 2026-08-01: the aligned modern projection inventory is exactly 92 canonical
-  calls: 47 capture/mark, 30 entry/match, 11 input/cursor, and four explicit cursor-control calls. Perl additionally
-  retains nine compatibility aliases (`capture_from_rule_start`, `capture_len_from_rule_start`,
-  `capture_rest_length`, `capture_slice_here`, `capture_slice_length`, `capture_take_slice`,
-  `capture_take_slice_len`, `entry_named_map`, `match_named_map`) plus separate legacy capture forms; those are not
-  a second algebra. Current semantic-introspection byte spans remain an adjacent versioned projection and are not
-  silently changed into runtime typed values. The sole-facing book already marks typed positions/spans as future
+  Helper and documentation audit 2026-08-01, corrected by executable `.14.1.1` source proof: the aligned modern
+  projection inventory is exactly 92 canonical calls: 47 capture/mark, 30 entry/match, 11 input/cursor, and four
+  explicit cursor-control calls. Perl retains seven callable compatibility aliases (`capture_from_rule_start`,
+  `capture_len_from_rule_start`, `capture_rest_length`, `capture_slice_here`, `capture_slice_length`,
+  `entry_named_map`, `match_named_map`) plus separate legacy capture forms. `capture_take_slice` and
+  `capture_take_slice_len` are two internal contract/scanner record ids whose recognized public spellings are the
+  canonical `capture_take()` and `capture_take_len()`; live `call_spec_handler_subst` leaves the two internal names
+  unresolved. The original nine-alias label conflated internal ids with callable spellings and is superseded by
+  this exact seven-plus-two classification. Current semantic-introspection byte spans remain an adjacent versioned
+  projection and are not silently changed into runtime typed values. The sole-facing book already marks typed
+  positions/spans as future
   and accurately demonstrates recursive linked rules, but three places still praise a complex/recursive-regex
   style: `portmap-spec-walkthrough.md` (three passages), `ebnf-spec-walkthrough.md` (one passage), and
   `shipped-specs-and-corpora.md` (one reading-order description). They are current shipped-code descriptions, not
@@ -17274,8 +17278,9 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   `tools/check_typed_source_location_contract.py`. The exact neutral envelope contains three decoded-source
   fixtures, seven position conversions, six direct spans, three derived-text/provenance cases, eight invocation
   state transitions, eight checkpoint/try/commit/rollback transitions, six recursive-observation cases, four
-  structural authoring cases, 92 ordered canonical helper projections, nine ordered compatibility aliases, and 31
-  ordered diagnostic/negative cases. The diagnostic inventory covers the ADR's four value/provenance failures;
+  structural authoring cases, 92 ordered canonical helper projections, seven ordered callable compatibility
+  aliases, two ordered internal contract ids, and 31 ordered diagnostic/negative cases. The diagnostic inventory
+  covers the ADR's four value/provenance failures;
   four mark and four transaction-token validity failures; seven transaction lifecycle/authority failures; cursor
   regression, nullable repetition, direct/mutual recursion, and staged cycles; unavailable recursive boundaries;
   ambiguous/stale regex-slot identity; and four source/registry/capability/policy span-dispatch denials. No source
@@ -17311,7 +17316,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   Commit: `FUTURE-PARITY-BACKLOG.14.1.0 - freeze typed source location plan`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.1.1`
-  Status: `pending`
+  Status: `done` (2026-08-01; signoff-complete from clean `c2d9eadf`, intended 133/300, no push)
   Goal: Implement the versioned neutral typed source-location contract, positive/negative fixtures, independent
     checker/mutations, and repository-routed canonical registration frozen by `.14.1.0`.
   Depends on: `.14.1.0`
@@ -17321,6 +17326,67 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
     tracked canonical inputs and run the checker only through `tools/run_python_project_data.sh`; document the
     neutral artifact in `capability_conformance/README.md` and the capture/status/local-CI book pages without
     claiming typed runtime values, selecting syntax, changing another schema/version, or adding a driver.
+
+  ### `FUTURE-PARITY-BACKLOG.14.1.1` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove `.14.1.0` landed at `c2d9eadf` as 132/300 with no push,
+    empty status/diffs, zero-byte brief, synchronized Knowledge Map, absent generated book/bytecode residue, and
+    activate this leaf task-tree-first before artifact or documentation changes.
+  - [x] **EXACT VERSIONED CONTRACT** — Create only the frozen v1 JSON artifact with exact identity, ordered
+    fixtures/projections/aliases/diagnostics/rollout, count invariants, and no selected source spelling or backend
+    implementation claim.
+  - [x] **INDEPENDENT VALIDATOR / MUTATIONS** — Create the standalone Python checker with exact schema, semantic,
+    cross-reference, ordering, count, negative-diagnostic, tracked-input, canonical-registration, and 36-mutation
+    proof; reject each mutation independently.
+  - [x] **REPOSITORY-ROUTED CANONICAL REGISTRATION** — Require both artifacts as tracked inputs and execute the
+    checker only through `tools/run_python_project_data.sh` in `tools/run_ci_local.sh`; add no driver, cache,
+    workflow, temp root, dependency, or off-volume output.
+  - [x] **SOLE-FACING NEUTRAL STATUS** — Document the neutral artifact in `capability_conformance/README.md` and
+    only the frozen capture/status/local-CI book pages, with readable separate paragraphs and explicit future
+    runtime/syntax/backend boundaries.
+  - [x] **VERIFY / COMMIT / CLEAN** — Pass direct checker, mutation count, storage/path guards, book build/link
+    checks, all doctrines, and canonical CI; update continuity/KM, commit this leaf, clear the brief, and prove the
+    clean boundary before public teaching `.14.1.2`.
+
+  Activation evidence 2026-08-01: `.14.1.0` landed at `c2d9eadf` as commit 132/300 with no push. Exact post-commit
+  proof found empty status and staged/unstaged diffs, zero-byte `git_message_brief.txt`, activation pointer
+  `24770ade` resolving to `HEAD^1`, synchronized Knowledge Map 784/6,362, and no generated book or non-cache Python
+  bytecode. `.14.1.1` is now the sole active frontier and owns the frozen neutral artifacts, canonical route, and
+  truthful neutral-status documentation only.
+
+  Audit correction 2026-08-01: the first executable checker correctly rejected the frozen nine-alias assumption.
+  Source and live lowering proof show seven callable compatibility aliases plus two internal record ids:
+  `capture_take_slice` and `capture_take_slice_len` name contract/scanner records, but those records recognize only
+  canonical `capture_take()` and `capture_take_len()`; the internal names remain unresolved when authored. This
+  leaf owns the correction across the neutral artifact, prior audit annotation, Knowledge card, continuity status,
+  and later sole-facing neutral-status prose. No runtime behavior changed.
+
+  Implementation evidence 2026-08-01: `linkedspec-typed-source-location-v1` now exists at the frozen JSON path.
+  Its independent checker validates three decoded sources, seven conversions, six direct spans, three derived
+  texts, eight invocation and eight transaction transitions, six recursive observations, four structural cases,
+  92 helper projections, seven callable aliases, two internal ids, 31 diagnostics, 14 rollout legs, and 36
+  independently rejected mutations. `tools/run_ci_local.sh` requires both new files as tracked inputs and invokes
+  the checker unconditionally through `tools/run_python_project_data.sh`; the tool-storage inventory advances from
+  27 to 28 routed Python entrypoints without a new driver or storage root.
+
+  Sole-facing evidence 2026-08-01: the capture, project-status, and local-CI pages state that the neutral contract
+  exists while syntax, public typed values, backend behavior, and the remaining 13 rollout legs are future. The
+  complete book builds, and direct rendered-HTML inspection confirms each new prose unit is emitted as a distinct
+  paragraph, heading, or preformatted block rather than a stitched blob. Browser viewport control is unavailable
+  in this session, so no screenshot-level visual claim is made; the broader readability audit remains queued.
+
+  Verification: **PASS 2026-08-01.** The direct routed checker passes all exact counts and independently rejects
+  36 mutations, including coherent out-of-range transaction state. JSON/shell syntax, root-path portability,
+  project-data locality over 1,793 governed files / 413,600 lines / 28 cases, tool storage over 28 Python
+  entrypoints, Knowledge Map 784/6,363, task metadata, whitespace, complete mdBook build, and all seven doctrines
+  pass. Direct rendered HTML confirms the three additions are separate structural elements. The definitive staged
+  canonical gate passes every semantic/MCP, focused Perl, containment, moved-root/outside-CWD, and storage layer;
+  both CLI matrices pass 66/66, RAM is 46%, and Phase 0 passes 1,031/1,031 in 644 seconds before
+  `local CI gate passed`. The initial canonical attempt correctly rejected a missing governed `.24.2` public
+  marker; restoring the exact marker made capability schema v2 / 80-0-0 / 24+6 mutations green before the complete
+  rerun. Generated book output is removed; the landing commit, brief clearing, and exact clean proof precede
+  `.14.1.2` activation in the intended handoff.
+  Commit: `FUTURE-PARITY-BACKLOG.14.1.1 - add typed source location contract`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.1.2`
   Status: `pending`
@@ -19186,14 +19252,14 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-01):** typed source-location audit/plan `.14.1.0` is signoff-complete from clean
-exclusion public closeout commit `24770ade` (intended 132/300; no push). Current Unicode offsets, 0/1/2-regex rule
-roles, graph/non-progress recursion, 92 canonical projections plus nine aliases, adjacent diagnostics/provenance,
-CI/storage routing, and five book idiom passages are inventoried. Exact v1 paths, 3/7/6/3 fixtures, 8+8 state
-transitions, six recursive/four structural cases, 31 diagnostics, 36 mutations, 14 rollout legs, and readable book
-boundaries are frozen without behavior/schema/public/mdBook/root-README movement. Knowledge Map 784/6,362,
-unchanged book 79/14,072 KiB, focused guards, all doctrines, CLI 66x2, and Phase 0 1,031/1,031 pass. Commit, brief
-clearing, and exact clean proof remain; then activate neutral artifact `.14.1.1` task-tree-first.
+**Authoritative frontier (2026-08-01):** neutral typed source-location artifact `.14.1.1` is signoff-complete from
+clean audit-plan commit `c2d9eadf` (intended 133/300; no push). The v1 JSON contract and independent repository-routed checker
+implement exact 3/7/6/3 fixtures, 8+8 transitions, six recursive/four structural cases, 92 canonical projections,
+seven callable aliases plus two internal ids, 31 diagnostics, 36 mutations, and 14 rollout legs. Canonical CI now
+requires both tracked files and routes the checker through project-local Python storage. Three sole-facing pages
+truthfully describe the neutral artifact and future runtime boundary in separately rendered paragraphs. Focused,
+book, doctrine, and definitive canonical proof pass through Phase 0 1,031/1,031. Commit, brief clearing, generated-
+book cleanup, and exact clean proof complete the intended handoff before public teaching `.14.1.2` activates.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private
@@ -19536,9 +19602,9 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 96 | `FUTURE-PARITY-BACKLOG.14` | `active` | Extend structural/progressive/staged authoring through one typed source-location/cursor algebra and exact six-runtime/public proof. |
 | 97 | `FUTURE-PARITY-BACKLOG.14.0` | `done` | Director doctrine, existing ADR/prototype, present implementation gaps, and contradictory walkthrough evidence are durably split. |
 | 98 | `FUTURE-PARITY-BACKLOG.14.0.1` | `done` | ADR `0056`, exact invariants, existing-owner reconciliation, and `.14.1-.8` dependency split are complete without behavior. |
-| 99 | `FUTURE-PARITY-BACKLOG.14.1` | `active` | Audit/plan `.14.1.0` is active; neutral artifact, public teaching, and no-change recomposition follow in `.1-.3`. |
+| 99 | `FUTURE-PARITY-BACKLOG.14.1` | `active` | Audit/plan `.14.1.0` and neutral artifact `.14.1.1` are done; public teaching and no-change recomposition follow in `.2-.3`. |
 | 99.0 | `FUTURE-PARITY-BACKLOG.14.1.0` | `done` | TOOLBOX-led audit freezes the exact neutral/public plan without behavior; focused, book, doctrine, and canonical proof pass. |
-| 99.1 | `FUTURE-PARITY-BACKLOG.14.1.1` | `pending` | Create the v1 neutral contract/checker, fixtures/mutations, tracked canonical route, and truthful contract-status docs. |
+| 99.1 | `FUTURE-PARITY-BACKLOG.14.1.1` | `done` | The v1 neutral contract/checker, fixtures/mutations, tracked canonical route, truthful status docs, and complete canonical signoff pass. |
 | 99.2 | `FUTURE-PARITY-BACKLOG.14.1.2` | `pending` | Teach readable 0/1/2-regex linked structure and reframe five complex/recursive-regex praise passages accurately. |
 | 99.3 | `FUTURE-PARITY-BACKLOG.14.1.3` | `pending` | Recompose committed contract and public teaching unchanged, close `.14.1`, and hand off cleanly to `.14.2`. |
 | 100 | `FUTURE-PARITY-BACKLOG.14.2` | `pending` | Implement immutable values/helper projections and admit all six runtimes. |

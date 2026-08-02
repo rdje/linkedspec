@@ -54,9 +54,26 @@ read, parser lookup, compilation, execution, or policy elevation. Lossless `@cap
 same span representation, but ADR `0045` and the separate inter-match-gap task remain the sole owners of its syntax,
 prefix/tail policy, lifecycle behavior, and compatibility migration.
 
-Executable schemas, fixtures, diagnostics, backend admissions, and final spelling remain future work under
-`FUTURE-PARITY-BACKLOG.14.1-.14.8`. Until those leaves land, use the current helpers documented in this chapter and
-do not assume positions/spans or cursor transactions are available as authored values.
+The first executable neutral artifact now exists as
+`capability_conformance/typed_source_location_contract.json`. It fixes the coordinate, span, provenance,
+invocation, bounded-transaction, recursive-observation, structural, diagnostic, and rollout model described above.
+
+Validate it from the repository root with:
+
+```bash
+bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py
+```
+
+The checker covers 3 decoded sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation
+and 8 transaction transitions, 6 recursive observations, 4 structural cases, 31 diagnostics, and 36 mutations.
+It also proves that all 92 current source-boundary helpers project onto the algebra.
+
+This is contract status, not shipped value status. Only 1 of 14 rollout legs is complete; the other 13 remain
+pending. No public `Position` or `Span` value, checkpoint syntax, transaction behavior, recursive observation API,
+or backend admission exists yet.
+
+Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions,
+typed spans, or cursor transactions are available as authored values.
 
 ## Five anchor families
 
