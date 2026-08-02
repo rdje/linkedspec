@@ -89,6 +89,39 @@ On input `name = value` (parse mode `consume`) this returns
 `Pair[0]` and `Pair[1]` targets select them explicitly. Their code blocks are not attached by textual
 adjacency. The separator `\s*=\s*` belongs in the first declared slot because that slot consumes it.
 
+## Choose rule shapes by responsibility
+
+A readable `.spec` is usually a graph of small rules. In that graph, zero, one, and two
+regexes are useful **roles**, not a grammar limit:
+
+- A **zero-regex coordinator** connects other rules. It recognizes no text itself.
+- A **one-regex leaf** recognizes one unstructured piece, such as a name or number.
+- A **two-regex structural node** recognizes a start and an end boundary around linked
+  child structure.
+
+The entry rule may use any of those shapes. In particular, a selected `Rule::` may own a
+regex directly; a no-regex entry wrapper is an authoring idiom, not a validity requirement.
+
+For branching, an OR/default coordinator commonly uses action edges (`->`). The
+coordinator chooses among regexes owned by its target rules and owns the attached action.
+
+For ordered composition, a zero-regex `:AND` coordinator can use blind-call edges (`=>`):
+
+```text
+Record:AND
+ => Name
+ => Separator
+ => Value
+```
+
+Here the child rules own their matches and actions. `=>` does not itself mean AND—the
+`Record:AND` label supplies the ordering. Do not mix `->` and `=>` in one rule body; split
+the two execution models into separate rules.
+
+The recursive S-expression example below combines all three roles: `top` coordinates,
+`atom` is a one-regex leaf, and `sexpr` owns the `(` / `)` boundary pair. Its nested
+structure lives in the links between rules rather than inside a recursive regex.
+
 ### Recursion and termination (consume before you recurse)
 
 Recursion is just an edge or a `call(...)` that re-enters a rule. The one requirement is

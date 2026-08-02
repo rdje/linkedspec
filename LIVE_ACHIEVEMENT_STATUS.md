@@ -1,5 +1,31 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-01 — Linked-rule public teaching is aligned
+
+`FUTURE-PARITY-BACKLOG.14.1.2` is signoff-complete from clean `e8f6198b` (intended 134/300; no push). The sole-facing rule-paragraph
+and regex guides now teach zero-regex coordination, one-regex leaves, two-regex boundaries, regex-bearing entry
+validity, action-edge OR/default branching, blind-call `:AND` composition, and consume-before-recurse as readable
+authoring responsibilities rather than a syntactic ceiling.
+
+Three portmap passages, one EBNF passage, and one shipped reading-order entry preserve their current complex or
+recursive regex implementations as compatibility facts without recommending those shapes for new structural
+parsers. No `.spec`, example output, parser/compiler/runtime/emitter, fixture, neutral contract, capability,
+semantic/MCP, root README, or future typed-value behavior changes.
+
+Fresh toolbox outputs and descriptors prove the exact 0/1/2-regex, selected-entry, nested-recursion, and
+zero-regex blind-call `:AND` claims. The independent typed contract checker remains exact. The complete book builds
+79 files / 14,120 KiB; direct generated-DOM inspection finds separate headings, lists, code blocks, and paragraph
+siblings. Browser viewport control is unavailable, so no screenshot claim is made. The comprehensive non-urgent
+`MDBOOK-RENDERED-READABILITY` audit remains queued; definitive doctrine/canonical signoff is in progress before
+the intended 134/300 landing and no-change `.14.1.3`.
+
+Signoff is now complete. The first canonical attempt correctly rejected displaced exact `.24.2` projections in
+the refreshed task index; restoring both governed markers made focused capability schema v2 / 80-0-0 / 24+6
+mutations green. Knowledge Map 784/6,363 and all seven doctrines pass. The definitive rerun passes every focused
+contract and backend admission, containment, moved-root/outside-CWD, CLI 66x2, RAM 48%, and Phase 0 1,031/1,031
+in 640 seconds before `local CI gate passed`. Commit, brief clearing, generated-book cleanup, and exact clean proof
+remain before `.14.1.3`.
+
 ## 2026-08-01 — Neutral typed source-location contract is executable
 
 `FUTURE-PARITY-BACKLOG.14.1.1` is active from clean `c2d9eadf` (132/300; no push). The exact v1 neutral artifact
@@ -10,8 +36,8 @@ preliminary nine-alias classification without changing runtime behavior.
 
 Both new files are mandatory tracked canonical inputs, and the checker runs through project-local Python storage;
 the tool oracle now covers 28 Python entrypoints. The capability guide and three sole-facing book pages state that
-only neutral contract leg 1/14 is complete. Syntax, typed public values, backend behavior, and public graph-shape
-teaching remain future. The book builds, and direct rendered HTML keeps each addition in a separate paragraph,
+only neutral contract leg 1/14 was complete at that landing. Syntax, typed public values, backend behavior, and
+public graph-shape teaching remained future. The book builds, and direct rendered HTML keeps each addition in a separate paragraph,
 heading, or code block; no screenshot-level visual claim is made.
 
 Focused checker, mutation, path/storage, book, Knowledge Map 784/6,363, task, and all seven doctrine checks pass.

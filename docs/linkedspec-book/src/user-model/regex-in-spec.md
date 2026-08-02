@@ -1,9 +1,9 @@
 # Regex in `.spec`
 
-Every LinkedSpec rule ultimately matches input with **regular expressions**. A `.spec`
-file is *regex-anchored*: rules recognize input by anchoring on regex literals, then
-transfer to child rules and run actions. Understanding regex is therefore central to
-understanding `.spec`.
+LinkedSpec input recognition is anchored by rules that carry **regular expressions**.
+Coordinator rules may carry no regex at all: they connect regex-bearing child rules and
+run actions. Understanding regex is therefore central to understanding `.spec`, but a
+single rule does not need to do all of the recognition work.
 
 This chapter is the mental model. For the exact grammar of a regex literal, see
 [Formal `.spec` Grammar §3.1](../appendix/formal-grammar.md). For the capture-reading
@@ -44,6 +44,29 @@ Keyword:
 ```
 
 On input `foo`, this returns `["foo"]`.
+
+## Keep regexes at readable boundaries
+
+Prefer a linked graph of small regex responsibilities:
+
+- Use a zero-regex rule to coordinate child rules.
+- Use a one-regex leaf for an unstructured token or field.
+- Use two regexes when a structural node owns readable start and end boundaries.
+
+These are common shapes, not a syntactic maximum. A rule may contain more regex slots
+when the input genuinely calls for them, and an entry rule may itself carry a regex.
+
+Put nested structure and deep recursion in rule connections where possible. Action-edge
+OR/default rules (`->`) are a natural fit for choosing a child by its boundary. Blind-call
+AND rules (`=>` under an explicit `:AND` label) are a natural fit for ordered composition.
+Every recursive cycle must consume input before it re-enters the graph.
+
+This guidance keeps each regex local enough to read and test. LinkedSpec still supports
+elaborate host-engine regex features, and some shipped compatibility specs use them; that
+support does not make a recursive or multi-purpose regex the preferred general design.
+
+For worked zero/one/two-regex structure and the consume-before-recurse rule, see
+[`.spec` Files and Rule Paragraphs](spec-files-and-rule-paragraphs.md#choose-rule-shapes-by-responsibility).
 
 ## Regex slots: more than one pattern per rule
 

@@ -1,5 +1,21 @@
 # CHANGES
 
+## 2026-08-01 — FUTURE-PARITY-BACKLOG.14.1.2 — teach linked-rule structure
+
+- Added practical sole-facing guidance for zero-regex coordinators, one-regex leaves, two-regex start/end nodes,
+  regex-bearing entry rules, action-edge OR/default branching, blind-call `:AND` composition, and
+  consume-before-recurse. The guidance is an authoring model, not a syntactic maximum.
+- Reframed the three portmap praise passages, EBNF recursive-payload passage, and shipped reading-order entry as
+  compatibility descriptions while preserving every current implementation fact, example, and output.
+- Updated public project status, both roadmaps, architecture/task/live continuity, and the canonical structural
+  Knowledge card. The broader `MDBOOK-RENDERED-READABILITY` audit remains independently queued and non-blocking.
+- Fresh toolbox proof returns `["foo","foo"]`, `"foo"`, and `[["a",["b"],"c"]]` for the documented structural
+  shapes; descriptors report exact 0/1/1/2 regex counts. The 79-file / 14,120-KiB book builds, and direct rendered
+  DOM inspection proves distinct headings, lists, code blocks, and paragraphs. Browser viewport control is not
+  exposed, so no screenshot-level claim is made. Knowledge Map 784/6,363, all seven doctrines, containment/moved-
+  root proof, CLI 66x2, RAM 48%, and Phase 0 1,031/1,031 in 640 seconds pass. No parser, runtime, schema, fixture,
+  or typed-value behavior moves.
+
 ## 2026-08-01 — FUTURE-PARITY-BACKLOG.14.1.1 — add neutral typed source-location contract
 
 - Added `linkedspec-typed-source-location-v1` as a backend-neutral JSON contract with three decoded sources, seven

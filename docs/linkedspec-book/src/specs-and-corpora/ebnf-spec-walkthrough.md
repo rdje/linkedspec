@@ -523,12 +523,18 @@ Those become:
 ['return_object', '{name: $1, tail: $2}']
 ```
 
-The array and object readers use recursive regex definitions so nested bracket/brace content can be kept together as one payload.
+The current shipped array and object readers use recursive regex definitions so nested
+bracket/brace content can be kept together as one payload. This is a compatibility
+implementation fact, not the preferred general authoring shape for new structural parsers.
 
 That is an important limitation and strength at the same time:
 
 - the parser does not deeply parse the return expression in this spec,
 - it does keep the whole balanced return payload together so a later stage can parse it.
+
+A future refactor can move those nested boundaries into linked rules while preserving the
+same payload contract. General staged parsing remains future work; this walkthrough does
+not claim that later-stage dispatch is implemented today.
 
 ## Include directives
 

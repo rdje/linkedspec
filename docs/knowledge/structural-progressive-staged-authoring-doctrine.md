@@ -14,10 +14,10 @@ answers:
   - "can a spec invoke other specs during parsing"
   - "can returned AST fields be parsed again"
   - "what owns the structural progressive staged authoring clarification"
-date: 2026-07-12
+date: 2026-08-01
 status: current
 tags: [architecture, authoring, rules, regex, recursion, progressive-parsing, staged-parsing, parser-composition]
-evidence: "Director clarification on 2026-07-12 establishes the authoring doctrine and extends ADR 0012 without replacing it. Typical .spec rules use zero, one, or two small readable regexes: one-regex leaf rules recognize unstructured parts; two-regex node/dispatch rules use a first entry/start boundary and an optional second exit/end boundary around linked child structure; zero-regex rules coordinate structure, including blind-call paths. Deep recursion belongs in the rule graph through action-edge OR dispatch and blind-call AND composition, not recursive regexes. Progressive parsing means an active parser captures text relative to reliable cursor anchors and invokes any required loaded spec parser over that extracted text. Staged parsing means an AST level may return bounded raw fields that later spec parsers refine into richer AST levels. Existing ADRs specify neutral parse jobs and deterministic dispatch, and the current function-body prototype proves one narrow family; general public parse_job authoring, multiple payload parser families, arbitrary in-parse composition, and recursive queues remain future work under parent FUTURE-PARITY-BACKLOG.14, specifically progressive .14.6 and staged .14.7. Current mdBook walkthroughs that praise a complex portmap regex or recursive EBNF payload regexes are migration/audit evidence, not the target general authoring idiom."
+evidence: "Director clarification on 2026-07-12 establishes the authoring doctrine and extends ADR 0012 without replacing it. Typical .spec rules use zero, one, or two small readable regexes: one-regex leaf rules recognize unstructured parts; two-regex node/dispatch rules use a first entry/start boundary and an optional second exit/end boundary around linked child structure; zero-regex rules coordinate structure, including blind-call paths. Deep recursion belongs in the rule graph through action-edge OR dispatch and blind-call AND composition, not recursive regexes. Progressive parsing means an active parser captures text relative to reliable cursor anchors and invokes any required loaded spec parser over that extracted text. Staged parsing means an AST level may return bounded raw fields that later spec parsers refine into richer AST levels. Existing ADRs specify neutral parse jobs and deterministic dispatch, and the current function-body prototype proves one narrow family; general public parse_job authoring, multiple payload parser families, arbitrary in-parse composition, and recursive queues remain future work under parent FUTURE-PARITY-BACKLOG.14, specifically progressive .14.6 and staged .14.7. FUTURE-PARITY-BACKLOG.14.1.2 aligns the sole-facing mdBook on 2026-08-01: the rule/regex guides teach the current executable shapes, and the unchanged portmap/EBNF complex-regex implementations are framed as compatibility facts rather than the preferred general idiom."
 reverify: "rg -n 'FUTURE-PARITY-BACKLOG\\.14|recursive regex|complex regex|linked opener/closer|General public.*parse_job|multiple payload parser families|recursive staged queues' docs/tasks/FUTURE-PARITY-BACKLOG.md docs/tasks/STAGED-LINKED-PARSING.md docs/decisions/0012-staged-linked-parsing-architecture.md docs/linkedspec-book/src"
 ---
 
@@ -47,3 +47,14 @@ It does not claim the full intended surface is already implemented. The current 
 has a narrow end-to-end function-body `body_parse_job` path; general author-authored
 `parse_job(...)`, multiple parser families, arbitrary in-parse dynamic composition, and
 recursive staged queues remain explicitly owned future work.
+
+## Public teaching status
+
+`FUTURE-PARITY-BACKLOG.14.1.2` aligns the sole-facing rule-paragraph, regex, walkthrough,
+shipped-corpus, and project-status pages with this doctrine. The current engine facts are
+unchanged: zero/one/two-regex shapes and regex-bearing entries execute, while elaborate
+host regexes remain supported.
+
+The portmap five-capture classifier and EBNF recursive payload regexes still exist and
+remain documented accurately. They are compatibility descriptions, not recommendations
+for new structural parsers. General progressive and staged dispatch remains future.

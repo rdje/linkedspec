@@ -1,5 +1,23 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`FUTURE-PARITY-BACKLOG.14.1.2` — linked-rule public teaching): the engine already had the intended
+  structure; the documentation needed to distinguish support from recommendation. Fresh `LinkedSpec::Get` results
+  are `["foo","foo"]` for a zero-regex coordinator plus one-regex leaf, `"foo"` for an ordinary regex-bearing
+  selected entry, and `[["a",["b"],"c"]]` for the linked recursive S-expression. `return_descriptor` reports
+  exact `Top=0`, `Word=1`, `Entry=1`, and `sexpr=2` regex counts. The book's zero-regex `Record:AND` example also
+  compiles as `AND_BCODE` / `and_call_loop`, confirming that the label supplies ordering and `=>` alone does not.
+
+  The user model now assigns one readable responsibility per typical rule shape and keeps deep recursion in the
+  graph. The shipped portmap five-capture classifier and EBNF recursive payload regexes remain untouched and
+  accurately documented, but no longer serve as general recommendations. Public typed source-location values,
+  general progressive composition, and staged dispatch remain future. The complete mdBook builds 79 files /
+  14,120 KiB; generated HTML has separate `h2`, `ul`, `pre`, and sibling `p` elements for the additions. Browser
+  viewport control is unavailable, so this is DOM proof rather than visual/screenshot proof. The broad
+  `MDBOOK-RENDERED-READABILITY` audit stays queued and was not reprioritized. The first canonical attempt correctly
+  rejected a displaced governed `.24.2` task-index marker; restoring both exact exclusion projections made focused
+  capability schema v2 / 80-0-0 / 24+6 mutations green. Knowledge Map 784/6,363, all seven doctrines, containment,
+  moved-root/outside-CWD, CLI 66x2, RAM 48%, and Phase 0 1,031/1,031 in 640 seconds then pass definitively.
+
 - 2026-08-01 (`FUTURE-PARITY-BACKLOG.14.1.1` — neutral typed source-location contract): the exact neutral schema
   is executable at `capability_conformance/typed_source_location_contract.json`; its independent checker derives
   fixture results rather than trusting stored expectations and runs 36 isolated mutations. Exact content is

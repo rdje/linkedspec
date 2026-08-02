@@ -1,5 +1,17 @@
 # Project Status
 
+## Linked-rule authoring guidance
+
+The sole-facing user model now teaches the current executable zero/one/two-regex rule
+shapes: zero-regex coordination, one-regex leaves, and two-regex start/end nodes. These
+are authoring roles, not a syntactic maximum, and regex-bearing entry rules remain valid.
+
+The guidance places branching in action-edge OR/default graphs, ordered composition in
+explicit blind-call `:AND` graphs, and recursion in consume-before-re-enter rule links.
+The shipped portmap and EBNF walkthroughs still describe their real complex/recursive
+regex implementations, but present them as compatibility facts rather than the preferred
+general style. This documentation-only slice changes no parser or runtime behavior.
+
 ## Typed source-location contract
 
 The backend-neutral typed source-location contract is complete under `FUTURE-PARITY-BACKLOG.14.1.1`. Its
@@ -650,13 +662,14 @@ Three backbone items tracked major structural modernization — all done:
   action-edge OR and blind-call AND structure rather than recursive regexes. Progressive parsing means invoking
   loaded specs over cursor-relative extracted text during a parse; staged parsing means refining selected fields
   after an AST level returns. ADR `0012` and the function-body `body_parse_job` prototype are the current base. ADR
-  `0056` now adopts one future immutable source-location algebra across cursor, capture, recursion, segmentation,
-  and composition: Unicode-scalar positions, half-open spans, ordered provenance, bounded recognition-only cursor
-  transactions, recursive entry/match/exit observations, progress checks, and span-native parser dispatch. It adds
-  no current syntax or behavior. General contract/implementation/six-runtime admission remains future work under
-  `FUTURE-PARITY-BACKLOG.14.1-.14.8`; ADR `0045` separately retains gap syntax/lifecycle ownership. The EBNF
-  recursive-regex and portmap complex-regex walkthrough wording is tracked audit/migration evidence, not the target
-  general authoring idiom.
+  `0056` adopts one future immutable source-location algebra across cursor, capture, recursion, segmentation, and
+  composition: Unicode-scalar positions, half-open spans, ordered provenance, bounded recognition-only cursor
+  transactions, recursive entry/match/exit observations, progress checks, and span-native parser dispatch. The
+  neutral contract is complete under `FUTURE-PARITY-BACKLOG.14.1.1`, and public rule-shape teaching is current
+  under `.14.1.2`; implementation and six-runtime admission remain future work under `.14.2-.14.8`. ADR `0045`
+  separately retains gap syntax and lifecycle ownership. The EBNF recursive-regex and portmap complex-regex
+  walkthroughs now preserve those shipped facts as compatibility descriptions, not the target general authoring
+  idiom.
 - **Semantic introspection / MCP direction** - ADRs `0049`/`0050` and completed neutral leaf `.10.2` make
   `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` executable before backend behavior. Six fixture
   groups and 20 digest-locked queries cover normalized graph/call/shape/staged/generated/diagnostic/explanation/

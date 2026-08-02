@@ -313,7 +313,7 @@ Use this reading order:
 1. Start with [`Lispish.spec` Walkthrough](lispish-spec-walkthrough.md) for a compact recursive AST parser.
 2. Read [`ebnf.spec` Walkthrough](ebnf-spec-walkthrough.md) to see grammar parsing, annotations, return payloads, and the `ebnf/*.ebnf` corpus path.
 3. Read [`tablegrep.spec` Walkthrough](tablegrep-spec-walkthrough.md) for a boolean expression parser with recursive grouping and operator detection.
-4. Read [`portmap.spec` Walkthrough](portmap-spec-walkthrough.md) for a VHDL/Verilog port-map parser with single-regex multi-classification.
+4. Read [`portmap.spec` Walkthrough](portmap-spec-walkthrough.md) for a VHDL/Verilog port-map parser whose current compatibility implementation uses single-regex multi-classification; compare it with the preferred small linked-rule guidance.
 5. Read [`pplugin.spec` Walkthrough](pplugin-spec-walkthrough.md) for recursive bracket-matching with string-literal awareness (note: `.plg` is legacy transition material).
 6. Read `vhdl.spec` to see a larger real-domain grammar with many nested rule families.
 7. Read `t/phase0_regression.t` when you want to understand what behavior is locked.

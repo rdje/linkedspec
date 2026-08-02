@@ -17389,7 +17389,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   Commit: `FUTURE-PARITY-BACKLOG.14.1.1 - add typed source location contract`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.1.2`
-  Status: `pending`
+  Status: `done` (2026-08-01; signoff-complete from clean `e8f6198b`, intended 134/300, no push)
   Goal: Align sole-facing guidance for simple zero/one/two-regex linked-rule structure and graph-owned recursion
     with the executable neutral contract, clearly separating current authoring truth from future typed values.
   Depends on: `.14.1.1`
@@ -17400,6 +17400,74 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
     coordination, one-regex leaves, two-regex start/end nodes, regex-bearing entry validity, action-edge OR,
     blind-call AND, and consume-before-recurse as guidance rather than a syntactic maximum. Use short separate
     rendered paragraphs and lists, with no stitched wall-of-text section.
+
+  ### `FUTURE-PARITY-BACKLOG.14.1.2` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove `.14.1.1` landed cleanly at `e8f6198b` as 133/300 with no
+    push, empty status/diffs, zero-byte brief, synchronized Knowledge Map, absent generated book/bytecode, and no
+    background result before activating this leaf task-tree-first.
+  - [x] **RETRIEVE / REVERIFY PUBLIC AUTHORITY** — Retrieve the typed source-location Knowledge card and v1
+    checker, then reverify the exact zero/one/two-regex, entry-rule, action-edge, blind-call, recursion, and five
+    compatibility-passage claims through current toolbox/source evidence before editing the book.
+  - [x] **TEACH SMALL LINKED RULE SHAPES** — Add practical, separately rendered guidance for zero-regex
+    coordinators, one-regex leaves, two-regex start/end nodes, valid regex-bearing entries, action-edge OR,
+    blind-call AND, and consume-before-recurse without inventing a syntactic maximum or future typed values.
+  - [x] **REFRAME COMPATIBILITY MATERIAL** — Preserve every shipped portmap/EBNF/spec-corpus fact and example while
+    reframing the exact five complex/recursive-regex praise passages as compatibility description, not preferred
+    general authoring style.
+  - [x] **SOLE-FACING READABILITY / STATUS** — Update project status, use short paragraphs/lists, build the complete
+    book, and inspect exact rendered structure so no new section becomes a stitched prose blob; keep the broader
+    non-urgent `MDBOOK-RENDERED-READABILITY` audit independently queued.
+  - [x] **VERIFY / COMMIT / CLEAN** — Pass toolbox/public-marker checks, book build/link/rendered inspection,
+    Knowledge/task/roadmap/live alignment, all doctrines, and canonical CI; commit, clear the brief, and prove the
+    clean boundary before no-change recomposition `.14.1.3`.
+
+  Activation evidence 2026-08-01: `.14.1.1` landed at `e8f6198b` as commit 133/300 with no push. Exact post-commit
+  proof found empty status and staged/unstaged diffs, zero-byte `git_message_brief.txt`, activation pointer
+  `c2d9eadf` resolving to `HEAD^1`, synchronized Knowledge Map 784/6,363, no rendered book or non-cache Python
+  bytecode, and no background result. `.14.1.2` is now the sole active frontier and owns only the frozen public
+  teaching/status pages plus their continuity alignment; no contract, checker, grammar, or runtime behavior.
+
+  Retrieval/reverification evidence 2026-08-01: the typed source-location plan, structural authoring doctrine,
+  action-edge contract, blind-call label contract, and `TOOLBOX.md` were read before public edits. The independent
+  v1 checker remains exact at 3 sources, 7 positions, 6 direct spans, 3 derived texts, 8+8 state transitions, 6
+  recursive observations, 4 structural cases, 92 helper projections, 7 callable aliases, 2 internal ids, 31
+  diagnostics, 1 complete / 13 pending rollout, and 36 rejected mutations. Fresh `LinkedSpec::Get` execution
+  returns `["foo","foo"]` for the zero-regex coordinator/one-regex leaf graph, `"foo"` for an ordinary selected
+  regex-bearing `Entry::`, and `[["a",["b"],"c"]]` for the recursive two-regex `sexpr` graph. Fresh descriptors
+  report exact regex counts `Top=0`, `Word=1`, `Entry=1`, and `sexpr=2`; existing blind-call descriptor locks prove
+  zero-regex `:AND` sequencing remains `AND_BCODE` / `and_call_loop`, label-driven rather than implied by `=>`.
+  Source inspection confirms the five teaching contradictions are three praise passages around the shipped five-
+  capture `portmap` classifier, one factual recursive-regex passage for EBNF return payloads, and one reading-order
+  description. The shipped implementations and examples remain current compatibility facts; only their use as
+  preferred general guidance is stale.
+
+  Public-teaching evidence 2026-08-01: the rule-paragraph guide adds one responsibility-led section with a rendered
+  list for zero/one/two-regex roles, short separate paragraphs for regex-bearing entries and action-edge OR/default
+  branching, a compiled zero-regex `Record:AND` blind-call example, and a direct bridge into the existing
+  consume-before-recurse S-expression example. The regex guide now says recognition is regex-anchored while
+  coordinators may contain none, teaches small boundary ownership, and preserves multiple-slot/host-regex support.
+  All three portmap praise passages, the EBNF recursive-payload paragraph, and shipped reading-order entry now call
+  their unchanged implementations compatibility facts rather than general recommendations. Project status records
+  the documentation-only boundary and leaves typed runtime behavior future. The complete mdBook builds at 79 files
+  / 14,120 KiB; generated HTML contains distinct `h2`, `ul`, `pre`, and sibling `p` elements for the additions.
+  Browser viewport control is not exposed in this session, so this is a direct rendered-DOM claim, not a screenshot
+  claim; the broader non-urgent `MDBOOK-RENDERED-READABILITY` audit remains queued.
+
+  First canonical attempt 2026-08-01: the gate correctly stopped at capability conformance because the task-index
+  refresh had displaced the governed exact markers `exclusion public closeout .24.2` and `Capability exclusion
+  freshness is public-closed under FUTURE-PARITY-BACKLOG.24`. The active-frontier update now retains both closed-
+  parent projections alongside `.14.1.2`; rerun the focused capability checker before the definitive full gate.
+
+  Signoff evidence 2026-08-01: the repaired focused capability checker passes schema v2, 16 capabilities, 80/0/0
+  backend states, two exclusions, 24 governance mutations, 12 governed projections, and six public mutations.
+  Knowledge Map is synchronized at 784 facts / 6,363 questions; the complete 79-file / 14,120-KiB book builds and
+  its affected DOM structure is inspected. All seven doctrines pass. The definitive canonical rerun passes the
+  typed contract, semantic/MCP admissions, every focused Perl contract, project-data containment, moved-root and
+  outside-CWD execution, CLI 66/66 in default and POSIX environments, RAM 48%, and Phase 0 1,031/1,031 in 640
+  seconds before `local CI gate passed`. Generated book cleanup, commit, brief clearing, and exact clean proof
+  precede `.14.1.3` activation.
+  Commit: `FUTURE-PARITY-BACKLOG.14.1.2 - teach linked rule structure`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.1.3`
   Status: `pending`
@@ -19252,14 +19320,14 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-01):** neutral typed source-location artifact `.14.1.1` is signoff-complete from
-clean audit-plan commit `c2d9eadf` (intended 133/300; no push). The v1 JSON contract and independent repository-routed checker
-implement exact 3/7/6/3 fixtures, 8+8 transitions, six recursive/four structural cases, 92 canonical projections,
-seven callable aliases plus two internal ids, 31 diagnostics, 36 mutations, and 14 rollout legs. Canonical CI now
-requires both tracked files and routes the checker through project-local Python storage. Three sole-facing pages
-truthfully describe the neutral artifact and future runtime boundary in separately rendered paragraphs. Focused,
-book, doctrine, and definitive canonical proof pass through Phase 0 1,031/1,031. Commit, brief clearing, generated-
-book cleanup, and exact clean proof complete the intended handoff before public teaching `.14.1.2` activates.
+**Authoritative frontier (2026-08-01):** public linked-rule teaching `.14.1.2` is signoff-complete from clean neutral-
+artifact commit `e8f6198b` (intended 134/300; no push). The sole-facing rule/regex guides now teach executable
+zero/one/two-regex responsibilities, regex-bearing entries, action-edge OR/default, blind-call `:AND`, and consume-
+before-recurse. Three portmap, one EBNF, and one reading-order passage preserve their shipped complex/recursive-
+regex implementations as compatibility facts, not recommendations. The neutral v1 contract remains exact and no
+runtime/schema/example behavior moves. Knowledge Map 784/6,363, book 79/14,120 KiB with separate DOM structures,
+all seven doctrines, definitive CLI 66x2, RAM 48%, and Phase 0 1,031/1,031 in 640 seconds pass. No-change
+recomposition `.14.1.3` follows only after `.14.1.2` commit/brief/clean proof.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private
@@ -19605,7 +19673,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 99 | `FUTURE-PARITY-BACKLOG.14.1` | `active` | Audit/plan `.14.1.0` and neutral artifact `.14.1.1` are done; public teaching and no-change recomposition follow in `.2-.3`. |
 | 99.0 | `FUTURE-PARITY-BACKLOG.14.1.0` | `done` | TOOLBOX-led audit freezes the exact neutral/public plan without behavior; focused, book, doctrine, and canonical proof pass. |
 | 99.1 | `FUTURE-PARITY-BACKLOG.14.1.1` | `done` | The v1 neutral contract/checker, fixtures/mutations, tracked canonical route, truthful status docs, and complete canonical signoff pass. |
-| 99.2 | `FUTURE-PARITY-BACKLOG.14.1.2` | `pending` | Teach readable 0/1/2-regex linked structure and reframe five complex/recursive-regex praise passages accurately. |
+| 99.2 | `FUTURE-PARITY-BACKLOG.14.1.2` | `done` | Sole-facing 0/1/2-regex linked teaching and five accurate compatibility reframings pass complete signoff. |
 | 99.3 | `FUTURE-PARITY-BACKLOG.14.1.3` | `pending` | Recompose committed contract and public teaching unchanged, close `.14.1`, and hand off cleanly to `.14.2`. |
 | 100 | `FUTURE-PARITY-BACKLOG.14.2` | `pending` | Implement immutable values/helper projections and admit all six runtimes. |
 | 101 | `FUTURE-PARITY-BACKLOG.14.3` | `pending` | Implement bounded cursor transactions plus progress and safety diagnostics. |

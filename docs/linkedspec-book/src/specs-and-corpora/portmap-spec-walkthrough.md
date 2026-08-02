@@ -5,7 +5,7 @@
 It demonstrates:
 
 - bounded-delimiter rules (`/{/` and `/}/` for concatenation),
-- complex regex with multiple capture groups and alternatives,
+- a compatibility-era five-capture regex with multiple alternatives,
 - multi-branch `if/elseif/else` classification logic,
 - fluent continuation (`.push` on action edges),
 - flat-array construction for AST output.
@@ -86,13 +86,18 @@ The `concatenation` rule does the same with `?concatenation:` tagging on its clo
 
 ## Key design points
 
-**Single regex, multiple classifications.** The `bare_bit_slice` rule uses one complex regex that captures all possible forms:
+**Current compatibility shape.** The shipped `bare_bit_slice` rule uses one five-capture
+regex to recognize all of its current forms:
 
 ```text
 /([[:alpha:]]\w*)(?:\[(?:(\d+)(?::(\d+))?|(\?[[:alpha:]]\w+))\])?|(?i)(0x[0-9a-f]+|0b[01]+|\d+\'\d+)/
 ```
 
 The `if/elseif/else` chain in its `I` block then classifies the match: if the entry text contains `:`, it's a slice; if entry group 1 is non-empty/zero, it's a bit; if entry group 0 starts with a digit, it's a constant; otherwise it's a bare signal.
+
+That compact implementation is a fact about this shipped compatibility spec, not the
+preferred shape for a new parser. New work should usually give distinct forms their own
+small leaf rules and keep concatenation recursion in the linked rule graph.
 
 **Tags as AST discriminators.** The `?prefix:` tag convention makes AST nodes self-describing without requiring the caller to know the regex structure. Each tag tells downstream code what shape to expect in the remaining array elements.
 
@@ -104,4 +109,10 @@ The `portmap.spec` compiles with `language_agnostic_ready_ratio == 1.0000` — z
 
 ## Why this spec is interesting
 
-Portmap shows LinkedSpec handling a real hardware-description task: parsing VHDL/Verilog port connections. The spec is only 33 lines but handles nested concatenations, multiple signal forms, and produces structured output. It's a good example of how a single well-crafted regex with classification logic can replace what would otherwise require multiple grammar rules in a traditional parser-generator.
+Portmap shows LinkedSpec handling a real hardware-description task: parsing VHDL/Verilog
+port connections. The current spec is only 33 lines, handles nested concatenations and
+multiple signal forms, and produces structured output.
+
+Read its single-regex classifier as compact compatibility history. For new authoring,
+prefer the book's zero/one/two-regex linked-rule guidance: small recognizable boundaries,
+separate leaf responsibilities, and graph-owned recursion.

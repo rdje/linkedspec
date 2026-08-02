@@ -1,11 +1,23 @@
 # ARCHITECTURE STATE
 
+- `2026-08-01 linked-rule public teaching`: `FUTURE-PARITY-BACKLOG.14.1.2` aligns the sole-facing mdBook with
+  current executable structure. The rule-paragraph and regex guides teach zero-regex coordinators, one-regex
+  leaves, two-regex entry/exit nodes, ordinary regex-bearing entries, action-edge OR/default branching, explicit
+  blind-call `:AND` sequencing, and consume-before-recurse. These are authoring responsibilities rather than a
+  syntactic maximum. Three portmap praise passages, the EBNF recursive-return-payload passage, and the shipped
+  reading-order entry preserve their actual complex/recursive-regex implementations as compatibility facts, not
+  the target idiom. No `.spec`, parser/compiler/runtime/emitter, fixture, neutral contract, capability, semantic,
+  MCP, root README, or future typed-value behavior changes. The complete 79-file book builds at 14,120 KiB, and
+  generated HTML proves distinct heading/list/code/paragraph structure; viewport screenshots are unavailable.
+  Knowledge Map 784/6,363, all seven doctrines, definitive containment and moved-root proof, CLI 66x2, RAM 48%,
+  and Phase 0 1,031/1,031 in 640 seconds pass.
+
 - `2026-08-01 executable neutral typed source locations`: `FUTURE-PARITY-BACKLOG.14.1.1` implements
   `linkedspec-typed-source-location-v1` as one backend-neutral JSON authority plus an independent checker. The
   contract fixes 3/7/6/3 source-position-span-text fixtures, 8+8 invocation/transaction transitions, six
   recursive/four structural cases, 92 canonical helper projections, seven callable aliases, two internal ids, 31
-  diagnostics, 36 mutations, and 14 rollout legs. Only neutral-contract leg 1 is complete; syntax, public typed
-  values, backend execution, and public structural teaching remain future. Canonical registration requires both
+  diagnostics, 36 mutations, and 14 rollout legs. At that landing, only neutral-contract leg 1 was complete;
+  syntax, public typed values, backend execution, and public structural teaching remained future. Canonical registration requires both
   artifacts tracked and executes the checker through project-local Python storage. Three book pages state this
   boundary in separate rendered paragraphs. Focused and seven-doctrine proof pass; definitive canonical proof
   passes containment, moved-root/outside-CWD execution, CLI 66x2, RAM 46%, and Phase 0 1,031/1,031 in 644 seconds.
