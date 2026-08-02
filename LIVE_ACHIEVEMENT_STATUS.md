@@ -1,5 +1,22 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-01 — Perl typed source-location RED is frozen
+
+`FUTURE-PARITY-BACKLOG.14.2.1.0` is signoff-complete from clean `5d1f287d` (intended 140/300; no push). Two
+unregistered tests now separate the missing immutable core from the missing helper projection route. The value
+consumer covers all 3 sources, 7 conversions, 6 spans, 3 derived texts, snapshot ownership, and four exact errors;
+it exits only at the absent `LinkedSpec::SourceLocation` module. The projection consumer parses and reports one
+failure naming only absent `typed_source_projection_rows`; it will bind all 92 helpers, seven aliases, and unchanged
+live/generated complete named-mark results.
+
+Current Perl decoded scalar offsets, rule-local marks, cursor stack, ActionIR lowering, generated execution,
+runtime diagnostics, and generated-spec identity were re-proved through Knowledge-first TOOLBOX/source anchors.
+Neutral 3/11/37, complete-mark, cursor contract/descriptor/execution 288/31/85, and generated-source baselines stay
+green. No runtime, schema, neutral contract/checker, registration, DSL/facade, or public support moves. The sole-
+facing book therefore remains unchanged until Perl admission `.14.2.1.3`; immutable core `.14.2.1.1` is next.
+All seven doctrines and definitive canonical CI pass, including both CLI environments at 66/66, RAM 46%, and
+Phase 0 1,031/1,031 in 658 seconds before the explicit local-CI pass marker.
+
 ## 2026-08-01 — mdBook destinations validate and execute from one root
 
 `MDBOOK-DESTINATION-ROOT-ALIGNMENT.1` is signoff-complete from clean `33b0fb2c` (intended 139/300; no push). The wrapper now

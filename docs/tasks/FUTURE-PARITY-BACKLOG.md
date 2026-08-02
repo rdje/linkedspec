@@ -17732,7 +17732,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   Commit: `FUTURE-PARITY-BACKLOG.14.2.0.1 - correct typed source rollout truth`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.1`
-  Status: `pending` parent
+  Status: `active` parent (2026-08-01; Perl authority/RED child `.0` active after clean mdBook safety closeout)
   Goal: Implement and admit the immutable typed source-location algebra in the Perl reference while preserving
     existing helper compatibility through explicit projections.
   Children: `.14.2.1.0` authority/RED audit; `.14.2.1.1` immutable value/conversion core; `.14.2.1.2` helper
@@ -17742,6 +17742,96 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
     projection construction through `ActionIR/Contracts.pm`, `RuleIR.pm`, `SpecEntry.pm`, and `perl/LinkedRE.pm`
     without changing results; `.3` proves live/generated Unicode execution, registers the exact consumer, promotes
     only `perl_runtime`, and updates sole-facing support truth.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.1.0`
+  Status: `done; signoff-complete` (2026-08-01; task-tree-first from clean `5d1f287d`,
+    intended 140/300, no push)
+  Goal: Reconfirm the Perl decoded-input/cursor/helper authorities and freeze executable RED consumers for the
+    immutable value core and compatibility projection before production code.
+  Depends on: `.14.2.0.1`; closed `MDBOOK-DESTINATION-ROOT-ALIGNMENT`
+  Acceptance: Retrieve the typed-source runtime-rollout and neutral-contract Knowledge cards, ADR `0056`, contract/
+    checker, and TOOLBOX before source archaeology. Use LinkedSpec probes plus exact source/test anchors to bind the
+    current Perl scalar offset, decoded text, capture/mark/cursor-stack, helper-lowering, generated-route, diagnostic,
+    and project-data seams. Add exact unregistered RED consumers `t/typed_source_location_values.t` and
+    `t/typed_source_location_perl_contract.t` that consume the neutral fixture, fail only because the frozen module/
+    projection interfaces do not exist yet, and introduce no implementation or canonical registration. Record the
+    expected failures, mutation-resistant assertions, next `.1-.3` ownership, public/book boundary, and complete
+    focused non-behavior signoff before commit/clean.
+  Verification: exact RED and focused nonbehavior baselines, all doctrines, and canonical CI pass; continuity is
+    synchronized for commit/clean handoff
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.1.0 - lock Perl typed source RED`
+
+  ### `FUTURE-PARITY-BACKLOG.14.2.1.0` Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — Prove mdBook safety `.1` landed cleanly at `5d1f287d` as 139/300 with empty
+    status/diffs, zero-byte brief, correct `HEAD^1` activation pointer, absent generated book/non-cache bytecode,
+    and no background result; activate this leaf as the sole task-tree diff before source/test changes.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Retrieve canonical Knowledge/ADR/contract/TOOLBOX authority first, then use
+    LinkedSpec probes and exact source/test anchors to bind current decoded-source identity, scalar positions,
+    capture/mark/cursor state, helper lowering, generated routes, and the precise missing typed seams.
+  - [x] **FIX** — Add only two exact unregistered RED consumers, with shared neutral-fixture loading and explicit
+    future module/projection interfaces; do not add production implementation, canonical registration, or a schema.
+  - [x] **ADDRESSED (verified)** — Run each consumer and prove its nonzero status and diagnostic identify only the
+    intended missing module/projection seam; prove current complete-named-mark/helper/generated baselines remain green.
+  - [x] **NO REGRESSION** — Pass shell/Perl syntax where applicable, neutral contract/checker, capability, storage,
+    memory, Knowledge, task metadata, all doctrines, and canonical CI while keeping the RED consumers unregistered.
+  - [x] **LOCKSTEP** — Record exact RED/authority evidence, task/index/roadmap/architecture/change/development/live/
+    memory continuity, and why sole-facing support truth remains unchanged until admission `.14.2.1.3`; update
+    Knowledge for any durable causal fact established by the audit.
+
+  Activation evidence 2026-08-01: `MDBOOK-DESTINATION-ROOT-ALIGNMENT.1` landed at `5d1f287d` as 139/300 with no
+  push. Post-commit proof found empty status and staged/unstaged diffs, zero-byte `git_message_brief.txt`, activation
+  pointer `33b0fb2c` resolving to `HEAD^1`, no generated book or non-cache Python bytecode, and no background
+  result. This task-tree file is the sole activation diff; no Perl source, test, contract, checker, book, Knowledge,
+  capability, root README, or runtime behavior changed first.
+
+  Authority/root-cause evidence 2026-08-01: the runtime-rollout and neutral-contract Knowledge cards, ADR `0056`
+  section 9, the complete neutral JSON/checker value/projection/diagnostic invariants, and `TOOLBOX.md` facade/
+  lowering/descriptor/generated-source probes were retrieved before source inspection. Live
+  `call_spec_handler_subst` still lowers position helpers directly to `$IPOS`, `$LSPOS`, `pos $$STRING`, and
+  `length($$STRING)`; marks are rule-label buckets of scalar offsets and the cursor stack is a scalar-offset array.
+  `return_descriptor` reports the expected canonical helper nodes with zero fallback, and generated handler source
+  comes from the same lowering records. `SpecEntry::_build_handler_preamble` captures decoded Perl scalar position
+  in `$IPOS`; `RuleIR::_collect_rule_ir` writes `@mark` offsets; `LinkedRE::_build_match_info` shares only the mark
+  authority with child calls; and `SpecEntry::_build_runtime_handler` converts thrown handler errors to the current
+  generic runtime-handler context. Generated-source identity remains spec-artifact identity, not input identity.
+  Therefore the two exact missing seams are the absent `LinkedSpec::SourceLocation` decoded-source/value authority
+  and absent `LinkedSpec::ActionIR::Contracts::typed_source_projection_rows` plus typed lowering routes. These
+  consumers read tracked JSON only and allocate no cache, temporary workspace, or output.
+
+  Frozen RED interface 2026-08-01: `t/typed_source_location_values.t` fixes
+  `LinkedSpec::SourceLocation->new(sources => \%decoded_text)`, immutable `position`, `direct_span`, and
+  `derived_text` constructors, detached `as_record` projections, authority-owned `coordinates`/`materialize`, and
+  structured `LinkedSpec::SourceLocation::Error` values. It consumes all 3 sources, 7 conversions, 6 direct spans,
+  3 derived cases including empty/multi-source provenance, caller-snapshot isolation, and exactly the four `.14.2`
+  diagnostic codes/contexts/privacy rules. `t/typed_source_location_perl_contract.t` freezes the internal
+  `typed_source_projection_rows` catalog as a detached exact 92-row snapshot, typed routes for all four helper
+  families plus seven aliases, and unchanged live/generated complete-named-mark results. No facade/DSL spelling,
+  descriptor schema, neutral contract, runtime implementation, or canonical registration is introduced.
+
+  Exact RED/focused evidence 2026-08-01: the 302-line value consumer exits 2 before TAP with only
+  `Can't locate LinkedSpec/SourceLocation.pm`; an in-memory constructor sentinel proves the whole file parses and
+  reaches that future seam. The 168-line projection consumer parses cleanly and exits 1 with exactly one failed
+  assertion of three, naming absent `typed_source_projection_rows`; its remaining future subtest is skipped. An
+  exact repository census finds neither consumer registered outside this owning tree. The unchanged neutral
+  checker passes 3/7/6/3, 8+8, 6/4, 92+7+2, 31 diagnostics, rollout 3/11, and 37 mutations. Existing complete named
+  marks pass; rule-local cursor contract/descriptor/execution pass 288/31/85 tests; standalone generated source
+  passes all six subtests. The first canonical attempt correctly stops at its tracked-input audit because new files
+  under `t/` were still untracked. Canonically *unregistered* means tracked but absent from driver invocation, not
+  absent from Git; staging the exact leaf preserves the intended RED exclusion and is required before the rerun.
+  The staged rerun then passed doctrines, tracked-input, syntax, and memory-pointer proof before the capability
+  checker rejected the refreshed task-index row for omitting its exact governed historical marker
+  `exclusion public closeout .24.2`. Restoring that literal preserves both the prior `.24.2` public closeout and the
+  current Perl frontier; focused capability proof passed before the definitive canonical rerun.
+
+  Signoff evidence 2026-08-01: the definitive canonical rerun passes all seven doctrines, tracked-input and syntax
+  audits, memory activation, capability 80/0/0, typed-source 3/11/37, storage/relocation, every composed semantic
+  and MCP admission, both primary CLI environments at 66/66, RAM at 46% against the 88% ceiling, and Phase 0 at
+  1,031/1,031 in 658 seconds before the exact `local CI gate passed` marker. The two RED consumers remain tracked
+  but absent from canonical invocation, and no generated book or non-cache Python bytecode remains. Task, roadmap,
+  architecture, changes, development, live status, memory, and the typed-source Knowledge fact are synchronized;
+  sole-facing mdBook source and root README remain unchanged because public runtime admission is still owned by
+  `.14.2.1.3`. Commit, brief clearing, and exact clean proof precede activation of immutable core `.14.2.1.1`.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.2`
   Status: `pending` parent

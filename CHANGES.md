@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-08-01 — FUTURE-PARITY-BACKLOG.14.2.1.0 — lock Perl typed source RED
+
+- Added two exact unregistered Perl consumers without production implementation. The value consumer freezes the
+  decoded-source authority, immutable position/direct-span/derived-text API, all 3/7/6/3 neutral cases, snapshot
+  isolation, coordinate/materialization behavior, and the four exact value errors. It currently exits only because
+  `LinkedSpec::SourceLocation` does not exist.
+- Added a separate projection consumer that fails only at the absent detached 92-row
+  `ActionIR::Contracts::typed_source_projection_rows` interface, then will require all four helper families, seven
+  aliases, and unchanged live/standalone-generated complete named-mark results to route through the typed core.
+- Toolbox-led audit reconfirmed current Perl decoded scalar offsets, rule-local scalar mark buckets, cursor stack,
+  direct helper lowering, shared live/generated routes, generic runtime-error capture, and separate generated-spec
+  identity. No runtime, neutral contract, checker, schema, facade/DSL, canonical registration, or public support
+  changes.
+- Exact RED diagnostics and current neutral/mark/cursor/generated baselines pass as intended. Sole-facing mdBook
+  source remains unchanged because runtime admission is still pending under `.14.2.1.3`; `.14.2.1.1` owns the core.
+- Signoff passes all seven doctrines and definitive canonical CI: CLI 66/66 in both environments, RAM 46%, and
+  Phase 0 1,031/1,031 in 658 seconds before the explicit local-CI pass marker.
+
 ## 2026-08-01 — MDBOOK-DESTINATION-ROOT-ALIGNMENT.1 — align mdBook destination root
 
 - Replaced the wrapper's repository-root launch with `mdbook build .` from the already authoritative book root.

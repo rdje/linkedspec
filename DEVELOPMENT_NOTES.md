@@ -1,5 +1,33 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`FUTURE-PARITY-BACKLOG.14.2.1.0` — Perl typed-source RED): canonical retrieval preceded source
+  inspection. Live lowering still maps helper values directly to decoded Perl scalar registers: `$IPOS`, `$LSPOS`,
+  `pos $$STRING`, `length`, `substr`, rule-label mark buckets, and a scalar cursor stack. The handler preamble owns
+  `$IPOS`, RuleIR writes `@mark` positions, LinkedRE shares the mark hash with children, and the same contract
+  lowering emits standalone source. Runtime handler exceptions currently become generic structured context;
+  generated source identity still names the spec artifact, not the decoded input.
+
+  The RED boundary deliberately separates core from projection. `t/typed_source_location_values.t` imports the
+  absent `LinkedSpec::SourceLocation` package and fixes one authority API: `new(sources => ...)`, immutable
+  `position`, `direct_span`, and `derived_text`, detached `as_record`, and authority-owned `coordinates` and
+  `materialize`. The consumer covers every neutral source/coordinate/span/derived case, proves authority snapshot
+  isolation, and requires blessed structured errors with exact code/phase/context and no text/path/host leaks.
+  Its current exit 2 is solely the missing module; an in-memory constructor sentinel proves the remaining file
+  parses to the intended future call.
+
+  `t/typed_source_location_perl_contract.t` stays loadable against today's runtime and independently requires
+  `ActionIR::Contracts::typed_source_projection_rows`. The current run has one failed assertion of three naming
+  that absent interface; the future subtest is skipped. Once present, it must match the exact 92-row neutral map,
+  return a detached snapshot, route representative helpers and all seven aliases through
+  `LinkedSpec::SourceLocation`, and preserve complete named-mark live/generated results. Both consumers remain
+  unregistered until `.14.2.1.3`, so canonical current-behavior proof remains green while `.1` and `.2` consume
+  their respective RED files in dependency order. No public book prose is warranted before admission.
+
+  Complete signoff passes all seven doctrines and canonical tracked-input/syntax/memory/capability/storage/
+  relocation/semantic/MCP gates. Both CLI environments pass 66/66, RAM is 46% against the 88% ceiling, and Phase 0
+  passes 1,031/1,031 in 658 seconds before `local CI gate passed`. The tests remain tracked but unregistered, and
+  no generated book or non-cache Python bytecode remains.
+
 - 2026-08-01 (`MDBOOK-DESTINATION-ROOT-ALIGNMENT.1` — one-base mdBook execution): the old storage fake accepted any
   command and wrote to a separate test-only output variable, so it could not prove the wrapper's CWD, book operand,
   argument parsing, or actual output path. The replacement fake first asserts `BOOK_ROOT`, requires `build .`,

@@ -1,5 +1,18 @@
 # ARCHITECTURE STATE
 
+- `2026-08-01 Perl typed source-location RED boundary`: `FUTURE-PARITY-BACKLOG.14.2.1.0` adds two unregistered
+  consumers and no implementation. `t/typed_source_location_values.t` consumes every 3/7/6/3 neutral value fixture,
+  authority-owned coordinates/materialization, detached immutable records, source snapshot isolation, and the four
+  exact value diagnostics; today it exits only because `LinkedSpec::SourceLocation` is absent. The future internal
+  authority API constructs `Position`, `Span`, and `DerivedText` values whose records contain no decoded text or
+  host authority. `t/typed_source_location_perl_contract.t` fails independently at the absent
+  `ActionIR::Contracts::typed_source_projection_rows` catalog, which must bind all 92 rows before existing helper
+  lowerings and seven aliases route through the typed core. Current Perl scalar cursor/mark/cursor-stack registers,
+  helper result shapes, generated plan/schema, descriptor/semantic/MCP surfaces, and live rollout 3/11 remain
+  unchanged. Sole-facing book support therefore remains unchanged until exact admission `.14.2.1.3`; immutable
+  core `.14.2.1.1` is next. Definitive signoff passes all seven doctrines, CLI 66x2, RAM 46%, and Phase 0
+  1,031/1,031 in 658 seconds before the explicit local-CI pass marker.
+
 - `2026-08-01 mdBook destination-root alignment`: `MDBOOK-DESTINATION-ROOT-ALIGNMENT.1` makes validation and
   execution share `BOOK_ROOT`. The wrapper now invokes `mdbook build .` there while retaining argument forwarding,
   command selection, pre/post output validation, and caller-CWD independence. An argument-aware fake asserts the
