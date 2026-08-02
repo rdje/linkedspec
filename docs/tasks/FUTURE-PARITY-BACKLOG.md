@@ -17667,7 +17667,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   Commit: `FUTURE-PARITY-BACKLOG.14.2.0 - freeze typed value rollout plan`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.0.1`
-  Status: `pending`
+  Status: `done` (2026-08-01; signoff-complete from clean `5a294f39`; intended 137/300, no push)
   Goal: Apply the audited rollout/Knowledge truth correction with independent stale-status mutations and no runtime
     behavior, then hand the exact implementation boundary to Perl.
   Depends on: `.14.2.0`
@@ -17676,6 +17676,60 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
     regression-proof by completed-to-pending mutations. Update the existing typed-source Knowledge card, capability
     guide, live/roadmap/task truth, and every stale sole-facing rollout claim. Preserve all neutral fixtures,
     runtime/helper behavior, grammar, descriptor/schema, semantic/MCP, generated source, and root README.
+
+  ### `FUTURE-PARITY-BACKLOG.14.2.0.1` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / EXACT INVENTORY** — Prove `.14.2.0` landed cleanly at `5a294f39`, retrieve the new
+    rollout-plan and existing typed-source Knowledge cards, and inventory every current exact 1/13, public-pending,
+    runtime-owner, and 36-mutation projection before edits.
+  - [x] **CORRECT LIVE ROLLOUT TRUTH** — Promote only `public_structure` and `neutral_public_recomposition`, re-owner
+    only the five pending backend rows to exact `.14.2.1.3-.14.2.5.3` admission leaves, and preserve all fixtures,
+    roles, order, commands, and runtime behavior.
+  - [x] **LOCK INDEPENDENT REGRESSIONS** — Replace the obsolete pending-to-complete rollout mutation with two
+    completed-to-pending public-row mutations, bind 3/11 plus 37 mutations independently, and prove each mutation
+    fails for the intended stale-state reason.
+  - [x] **SYNCHRONIZE SOLE-FACING TRUTH** — Correct the capability guide, existing Knowledge fact, exact live/
+    roadmap/task projections, and every stale mdBook statement while preserving root README and all behavior.
+  - [x] **VERIFY / COMMIT / CLEAN** — Run focused contract/mutations, public marker census, mdBook build/rendered
+    structure/link checks, Knowledge Map, all doctrines, canonical CI, commit per `COMMIT.md`, clear the brief, and
+    prove clean before activating Perl RED `.14.2.1.0`.
+
+  Activation evidence 2026-08-01: planning leaf `.14.2.0` landed at `5a294f39` as 136/300 with no push. Post-commit
+  proof found empty status and staged/unstaged diffs, zero-byte `git_message_brief.txt`, activation pointer
+  `0d1b7378` resolving to `HEAD^1`, synchronized Knowledge Map 785/6,375, no generated book or non-cache Python
+  bytecode, and no unconsumed background result. This task-tree file is the sole activation diff from that clean
+  boundary; no contract, checker, Knowledge fact, public document, runtime, or root README changed first.
+
+  Implementation evidence 2026-08-01: Knowledge retrieval identified the neutral-contract and runtime-rollout
+  cards before the exact current-claim census. Current stale projections were one capability-guide paragraph,
+  three mdBook passages, and the neutral Knowledge status/prose; explicitly dated `.14.1.1-.3` landing evidence
+  remains historical. The JSON and checker now promote only `public_structure` and
+  `neutral_public_recomposition`, leave all 11 future rows pending, and re-owner the five backend rows to exact
+  `.14.2.1.3-.14.2.5.3` admission leaves. Two separate completed-to-pending mutations each require the exact
+  rollout mismatch diagnostic; the independent checker passes unchanged neutral counts at 3/7/6/3, 8+8, 6/4,
+  92+7+2, and 31 diagnostics with current rollout 3/11 and 37 mutations. Capability, both Knowledge cards, and all
+  three sole-facing pages now distinguish completed structural teaching from future typed values/runtime admission.
+  Root README and every runtime/helper/schema/semantic/generated artifact remain unchanged.
+
+  Verification tooling finding 2026-08-01: the first rendered-book build used a repository-relative custom
+  `--dest-dir`. `tools/run_mdbook_local.sh` validated that relative path against `docs/linkedspec-book`, but it
+  launches mdBook from the repository root, where mdBook resolved the same argument against a different base and
+  attempted an off-repository path before the sandbox denied it. A runtime-derived absolute repository-scratch
+  destination builds correctly. This validation/execution base mismatch is unrelated to typed-source truth and is
+  not repaired while this tree is dirty; create a dedicated tracked task at the next clean boundary before other
+  feature work.
+
+  Signoff evidence 2026-08-01: the direct checker passes exact unchanged neutral 3/7/6/3, 8+8, 6/4, 92+7+2,
+  and 31 diagnostics with current rollout 3 complete / 11 pending and 37 rejected mutations. Capability remains
+  schema v2 / 80-0-0 / two exclusions / 24+6 mutations. Knowledge Map is 785/6,375, memory is 56/60, and all seven
+  doctrines pass. The complete mdBook builds 79 files / 14,120 KiB; direct generated HTML proves each corrected
+  statement is a separate paragraph. The in-app browser control surface was unavailable, so no viewport/screenshot
+  claim is made. Definitive canonical CI passes containment, moved-root/outside-CWD execution, semantic/MCP
+  admissions, CLI 66/66 in both default and POSIX environments, RAM 46%, and Phase 0 1,031/1,031 in 645 seconds
+  before `local CI gate passed`. Root README and all runtime/helper/schema/semantic/generated behavior remain
+  unchanged. Commit, brief clearing, generated-book cleanup, and exact clean proof precede creation of dedicated
+  `MDBOOK-DESTINATION-ROOT-ALIGNMENT` tracking and then Perl `.14.2.1.0`.
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.0.1 - correct typed source rollout truth`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.1`
   Status: `pending` parent
@@ -19575,12 +19629,12 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-01):** behavior-free typed-value implementation audit `.14.2.0` is signoff-
-complete from clean `.14.1` closure commit `0d1b7378` (intended 136/300; no push). It root-causes the stale public
-rollout rows and freezes exact immutable value/helper compatibility plus six-runtime admissions without changing
-the contract, checker, runtime, book, or root README. Commit and clean proof must precede task-first activation of
-correction `.14.2.0.1`; Perl parent `.14.2.1`, Rust `.2`, Dart `.3`, Julia `.4`, Lua dual-ABI `.5`, recurring `.6`,
-and closeout `.7` follow cleanly.
+**Authoritative frontier (2026-08-01):** behavior-free rollout/public-truth correction `.14.2.0.1` is signoff-
+complete from clean planning commit `5a294f39` (intended 137/300; no push). The executable ledger is 3 complete /
+11 pending with 37 mutations, exact backend admission owners, and synchronized Knowledge/mdBook truth without
+runtime or root README behavior. Commit and clean proof precede dedicated tracking of the surfaced mdBook custom-
+destination base mismatch; Perl parent `.14.2.1`, Rust `.2`, Dart `.3`, Julia `.4`, Lua dual-ABI `.5`, recurring
+`.6`, and closeout `.7` then follow cleanly.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private
@@ -19930,7 +19984,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 99.3 | `FUTURE-PARITY-BACKLOG.14.1.3` | `done` | Committed contract/public teaching recompose unchanged under complete canonical signoff; `.14.1` closes. |
 | 100 | `FUTURE-PARITY-BACKLOG.14.2` | `active` | Implement immutable values/helper projections and admit all six runtimes through audited children `.0-.7`. |
 | 100.0 | `FUTURE-PARITY-BACKLOG.14.2.0` | `done` | Stale public rollout truth is root-caused and the exact value/projection/admission plan is signoff-complete before behavior. |
-| 100.0.1 | `FUTURE-PARITY-BACKLOG.14.2.0.1` | `pending` | Correct audited rollout/Knowledge truth with independent stale-status guards; no runtime behavior. |
+| 100.0.1 | `FUTURE-PARITY-BACKLOG.14.2.0.1` | `done` | Live rollout is 3/11 with 37 mutations, exact backend owners, and synchronized Knowledge/book truth; no runtime behavior. |
 | 100.1 | `FUTURE-PARITY-BACKLOG.14.2.1` | `pending` | Audit, implement, project, and admit the Perl reference through `.0-.3`. |
 | 100.2 | `FUTURE-PARITY-BACKLOG.14.2.2` | `pending` | Audit, implement, route, and admit Rust through `.0-.3`. |
 | 100.3 | `FUTURE-PARITY-BACKLOG.14.2.3` | `pending` | Audit, implement, route, and admit Dart through `.0-.3`. |

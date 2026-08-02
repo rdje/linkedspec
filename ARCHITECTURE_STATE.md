@@ -1,5 +1,15 @@
 # ARCHITECTURE STATE
 
+- `2026-08-01 typed source-location live-ledger correction`: behavior-free
+  `FUTURE-PARITY-BACKLOG.14.2.0.1` promotes completed public structure `.14.1.2` and unchanged recomposition
+  `.14.1.3`, advancing the executable ledger to 3 complete / 11 pending. Five backend rows remain pending under
+  their exact `.14.2.1.3-.14.2.5.3` admission owners. Two independent completed-to-pending public-row regressions
+  replace the obsolete early-completion mutation, bringing the checker to 37 mutations without changing any
+  neutral fixture. Capability, Knowledge, and the three sole-facing book projections now agree; runtimes, helpers,
+  grammar, schemas, semantic/MCP, generated identity, root README, and the queued readability audit do not move.
+  Signoff passes book 79/14,120 KiB with separate corrected paragraphs, Knowledge Map 785/6,375, all seven
+  doctrines, CLI 66x2, RAM 46%, and Phase 0 1,031/1,031 in 645 seconds.
+
 - `2026-08-01 typed source-location runtime rollout plan`: behavior-free
   `FUTURE-PARITY-BACKLOG.14.2.0` freezes the implementation seam before backend code. One source authority owns
   opaque input identity to decoded text; immutable positions carry identity+scalar offset, direct spans add
@@ -12,9 +22,9 @@
 
   The same audit proves rollout is live admission state and root-causes stale public rows: `.14.1.2` explicitly
   excluded contract edits and `.14.1.3` required the artifact unchanged, so completed `public_structure` and
-  `neutral_public_recomposition` remained pending with no promotion owner. `.14.2.0.1` now owns exact 3/11 truth,
-  independent regressions for both rows, status/Knowledge/book alignment, and runtime row re-ownership to precise
-  admission leaves. Perl, Rust, Dart, Julia, and shared dual-ABI Lua then each run RED/core/projection/admission
+  `neutral_public_recomposition` remained pending with no promotion owner. `.14.2.0.1` has now corrected exact
+  3/11 truth, added independent regressions for both rows, aligned status/Knowledge/book, and re-owned runtime rows
+  to precise admission leaves. Perl, Rust, Dart, Julia, and shared dual-ABI Lua then each run RED/core/projection/admission
   commits before one rooted six-runtime recurrence. This plan changes no executable artifact or sole-facing book;
   the nonurgent comprehensive readability audit remains queued. Signoff passes Knowledge Map 785/6,375, all seven
   doctrines, six-runtime focused baselines, CLI 66x2, RAM 56%, and Phase 0 1,031/1,031 in 657 seconds.

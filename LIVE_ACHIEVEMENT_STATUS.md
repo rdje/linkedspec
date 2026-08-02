@@ -1,5 +1,24 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-01 — Typed source public rollout truth is corrected
+
+`FUTURE-PARITY-BACKLOG.14.2.0.1` is signoff-complete from clean planning commit `5a294f39` (intended 137/300; no push). The
+live contract/checker now classify the neutral contract, public linked-rule structure, and unchanged public
+recomposition as complete: 3 complete / 11 pending. Five backend rows remain pending under exact admission leaves
+`.14.2.1.3-.14.2.5.3`.
+
+Two separate completed-to-pending mutations protect the public rows and are reason-checked against the rollout
+mismatch path. The full checker passes 37 mutations without changing any neutral fixture. Capability guidance,
+both typed-source Knowledge cards, and the three current mdBook claims now agree that public structure is complete
+while typed values and all six runtime admissions remain future.
+
+No runtime/helper behavior, grammar, descriptor/generated schema, semantic/MCP surface, root README, or broader
+book-readability work changes. The book builds 79 files / 14,120 KiB and direct HTML keeps each corrected statement
+in a separate paragraph; no browser viewport claim is made. Knowledge Map 785/6,375 and all seven doctrines pass.
+Definitive canonical CI passes containment/moved-root, semantic/MCP admissions, CLI 66x2, RAM 46%, and Phase 0
+1,031/1,031 in 645 seconds before `local CI gate passed`. The surfaced mdBook destination-base mismatch is next
+for dedicated task-tree intake from the clean commit, before Perl RED.
+
 ## 2026-08-01 — Typed source value and projection rollout is implementation-frozen
 
 `FUTURE-PARITY-BACKLOG.14.2.0` is signoff-complete from clean `0d1b7378` (intended 136/300; no push). Exact toolbox,

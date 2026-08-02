@@ -1,5 +1,20 @@
 # CHANGES
 
+## 2026-08-01 — FUTURE-PARITY-BACKLOG.14.2.0.1 — correct typed source rollout truth
+
+- Promoted only the completed `public_structure` and `neutral_public_recomposition` rollout rows and re-owned the
+  five pending backend rows to exact admission leaves `.14.2.1.3-.14.2.5.3`. Current truth is 3 complete / 11
+  pending; no runtime, helper, grammar, descriptor/schema, semantic/MCP, generated-source, or root README behavior
+  changed.
+- Replaced the obsolete pending-to-complete rollout mutation with two independently reason-checked completed-to-
+  pending regressions. The checker now rejects 37 mutations while preserving every neutral fixture and count.
+- Synchronized the capability guide, both typed-source Knowledge cards, and all three current sole-facing mdBook
+  claims. The book now distinguishes completed structural teaching from still-future typed values and six-runtime
+  admissions without expanding the separately queued rendered-readability audit.
+- Passed the 79-file / 14,120-KiB book build with separate generated paragraphs, Knowledge Map 785/6,375, all seven
+  doctrines, and canonical CLI 66x2 / RAM 46% / Phase 0 1,031/1,031 in 645 seconds. The custom-destination wrapper
+  mismatch found during rendering is recorded for a dedicated next-clean task; it is not hidden in this slice.
+
 ## 2026-08-01 — FUTURE-PARITY-BACKLOG.14.2.0 — freeze typed value rollout plan
 
 - Root-caused a live-ledger contradiction before implementation: completed public owners `.14.1.2-.3` remained

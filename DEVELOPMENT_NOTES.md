@@ -1,5 +1,36 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`FUTURE-PARITY-BACKLOG.14.2.0.1` — typed-source live-ledger correction): Knowledge retrieval and an
+  exact current-claim census found one executable contradiction plus six current-facing projections: the JSON and
+  checker still held completed public owners `.14.1.2-.3` pending; the capability guide, three mdBook pages, and
+  neutral Knowledge card repeated 1/13 or public-pending truth. Historical records explicitly scoped to their
+  earlier landing remain historical and were not rewritten.
+
+  The contract and checker now mark only `neutral_contract`, `public_structure`, and
+  `neutral_public_recomposition` complete. The five backend rows remain pending but name their exact admission
+  leaves `.14.2.1.3-.14.2.5.3`. The obsolete row-1 pending-to-complete mutation would become a no-op after
+  promotion, so it is replaced by one completed-to-pending mutation per public row. Each must fail specifically
+  through the rollout membership/order/status/owner/runtime mismatch, not through an unrelated count check. The
+  exact result is 3 complete / 11 pending and 37 mutations; every 3/7/6/3, 8+8, 6/4, 92+7+2, and 31 neutral row is
+  unchanged.
+
+  The capability guide and three book pages now distinguish completed neutral/public structural work from future
+  public typed values, transaction behavior, recursion/progress, span dispatch, and six-runtime admissions. Both
+  typed-source Knowledge cards carry the corrected live state. Root README, runtimes, helpers, grammar, descriptor/
+  generated schemas, semantic/MCP surfaces, and the nonurgent rendered-readability tree remain unchanged.
+
+  Render verification also exposed an unrelated project-data safety seam: `run_mdbook_local.sh` validates a
+  relative custom destination from the book root but executes mdBook from the repository root, so validation and
+  actual resolution can disagree. The first build was denied only after mdBook attempted the differently resolved
+  off-repository path; a runtime-derived absolute repository-scratch destination succeeded. The current dirty tree
+  records but does not repair this finding; a dedicated task must be created from the next clean boundary.
+
+  Complete signoff passes typed source 3/11/37, capability schema v2 / 80-0-0 / 24+6, Knowledge Map 785/6,375,
+  memory 56/60, and all seven doctrines. The complete book is 79 files / 14,120 KiB; generated HTML keeps each
+  corrected statement in its own paragraph, while the unavailable in-app browser control surface prevents a
+  viewport claim. Definitive canonical CI passes containment/moved-root, semantic/MCP, CLI 66x2, RAM 46%, and
+  Phase 0 1,031/1,031 in 645 seconds before the local gate passes.
+
 - 2026-08-01 (`FUTURE-PARITY-BACKLOG.14.2.0` — typed-value rollout audit/plan): the executable rollout is a live
   admission ledger. Its JSON rows, checker-side `ROLLOUT`, reported complete/pending totals, and adjacent governed
   contracts all promote completed owners. Public `.14.1.2` intentionally excluded the contract and no-change

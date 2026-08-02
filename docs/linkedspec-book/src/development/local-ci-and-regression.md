@@ -31,10 +31,11 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 
 The check is unconditional. It independently derives Unicode-scalar, line/column, and UTF-8 coordinates;
 materializes direct and derived spans; executes invocation and bounded-transaction state transitions; validates
-recursive and zero/one/two-regex structural cases; and rejects all 36 registered mutations.
+recursive and zero/one/two-regex structural cases; and rejects all 37 registered mutations.
 
-Its current rollout result is 1 complete / 13 pending. Passing this gate proves the neutral contract and canonical
-registration only; it does not claim a backend value type, authored transaction syntax, or runtime admission.
+Its current rollout result is 3 complete / 11 pending. Passing this gate proves the neutral contract plus the
+completed public-structure and neutral/public-recomposition ledger rows; it does not claim a backend value type,
+authored transaction syntax, or runtime admission.
 
 The gate unconditionally verifies the neutral MCP transport before checking all five derived bindings. It requires
 every contract artifact and runs the generators in this exact order before the admitted implementation proofs:

@@ -34,7 +34,7 @@ EXPECTED_COUNTS = {
     "internal_contract_ids": 2,
     "diagnostics": 31,
     "rollout_legs": 14,
-    "mutations": 36,
+    "mutations": 37,
 }
 
 POLICY = {
@@ -346,13 +346,13 @@ DIAGNOSTICS = [
 
 ROLLOUT = [
     ("neutral_contract", "complete", "FUTURE-PARITY-BACKLOG.14.1.1", []),
-    ("public_structure", "pending", "FUTURE-PARITY-BACKLOG.14.1.2", []),
-    ("neutral_public_recomposition", "pending", "FUTURE-PARITY-BACKLOG.14.1.3", []),
-    ("perl_runtime", "pending", "FUTURE-PARITY-BACKLOG.14.2", ["perl"]),
-    ("rust_runtime", "pending", "FUTURE-PARITY-BACKLOG.14.2", ["rust"]),
-    ("dart_runtime", "pending", "FUTURE-PARITY-BACKLOG.14.2", ["dart"]),
-    ("julia_runtime", "pending", "FUTURE-PARITY-BACKLOG.14.2", ["julia"]),
-    ("lua_dual_abi", "pending", "FUTURE-PARITY-BACKLOG.14.2", ["puc_lua", "luajit"]),
+    ("public_structure", "complete", "FUTURE-PARITY-BACKLOG.14.1.2", []),
+    ("neutral_public_recomposition", "complete", "FUTURE-PARITY-BACKLOG.14.1.3", []),
+    ("perl_runtime", "pending", "FUTURE-PARITY-BACKLOG.14.2.1.3", ["perl"]),
+    ("rust_runtime", "pending", "FUTURE-PARITY-BACKLOG.14.2.2.3", ["rust"]),
+    ("dart_runtime", "pending", "FUTURE-PARITY-BACKLOG.14.2.3.3", ["dart"]),
+    ("julia_runtime", "pending", "FUTURE-PARITY-BACKLOG.14.2.4.3", ["julia"]),
+    ("lua_dual_abi", "pending", "FUTURE-PARITY-BACKLOG.14.2.5.3", ["puc_lua", "luajit"]),
     ("transaction_safety", "pending", "FUTURE-PARITY-BACKLOG.14.3", []),
     ("recursive_observation", "pending", "FUTURE-PARITY-BACKLOG.14.4", []),
     ("lossless_gap_composition", "pending", "FUTURE-PARITY-BACKLOG.14.5", []),
@@ -1189,15 +1189,34 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("diagnostic code", lambda c: c["diagnostics"][0].__setitem__("code", "wrong")),
         ("diagnostic context", lambda c: c["diagnostics"][19]["required_context"].pop()),
         ("rollout removed", lambda c: c["rollout"].pop()),
-        ("rollout status", lambda c: c["rollout"][1].__setitem__("status", "complete")),
         ("canonical checker", lambda c: c["canonical_execution"].__setitem__("checker_path", "tools/wrong.py")),
-        ("mutation count", lambda c: c["expected_counts"].__setitem__("mutations", 35)),
+        ("mutation count", lambda c: c["expected_counts"].__setitem__("mutations", 36)),
     ]
-    if len(mutations) != EXPECTED_COUNTS["mutations"]:
+    rollout_regressions = [
+        (
+            "public structure regressed to pending",
+            lambda c: c["rollout"][1].__setitem__("status", "pending"),
+        ),
+        (
+            "neutral public recomposition regressed to pending",
+            lambda c: c["rollout"][2].__setitem__("status", "pending"),
+        ),
+    ]
+    if len(mutations) + len(rollout_regressions) != EXPECTED_COUNTS["mutations"]:
         fail("checker mutation inventory count drifted")
     for name, mutate in mutations:
         expect_mutation_failure(contract, name, mutate)
-    return len(mutations)
+    for name, mutate in rollout_regressions:
+        candidate = copy.deepcopy(contract)
+        mutate(candidate)
+        try:
+            validate_contract(candidate, check_registration=False)
+        except ContractError as error:
+            if "rollout membership, order, status, owner, or runtime coverage drifted" not in str(error):
+                fail(f"mutation {name!r} failed for the wrong reason: {error}")
+        else:
+            fail(f"mutation {name!r} was not rejected")
+    return len(mutations) + len(rollout_regressions)
 
 
 def main() -> int:

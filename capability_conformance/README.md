@@ -261,7 +261,9 @@ seven callable compatibility aliases. Two similarly named values—`capture_take
 
 The checker derives coordinates and text independently, executes both state machines, cross-checks current Lua
 helper authority and the Perl alias/internal-id seams, locks 31 diagnostics, verifies canonical tracked execution,
-and rejects 36 mutations. Rollout is 1 complete / 13 pending across 14 legs: only the neutral contract is complete.
+and rejects 37 mutations. Rollout is 3 complete / 11 pending across 14 legs: the neutral contract, public structure,
+and unchanged neutral/public recomposition are complete. All backend value admissions remain pending under their
+exact `.14.2.1.3-.14.2.5.3` owners.
 
 No public `Position`/`Span` value, transaction spelling, backend implementation, parser behavior, descriptor or
 generated schema, semantic/MCP projection, or source-authority elevation is claimed by this artifact.

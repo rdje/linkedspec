@@ -17,11 +17,11 @@ general style. This documentation-only slice changes no parser or runtime behavi
 The backend-neutral typed source-location contract is complete under `FUTURE-PARITY-BACKLOG.14.1.1`. Its
 independent checker passes 3 sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation
 and 8 transaction transitions, 6 recursive observations, 4 structural cases, 92 current helper projections,
-31 diagnostics, and 36 rejected mutations.
+31 diagnostics, and 37 rejected mutations.
 
-This advances only the neutral rollout leg: 1 of 14 legs is complete and 13 remain pending. Public typed values,
-transaction spelling and behavior, recursive observation, span-native progressive/staged dispatch, and all six
-runtime admissions remain future work.
+Three of 14 rollout legs are complete and 11 remain pending. The neutral contract, public linked-rule structure,
+and unchanged neutral/public recomposition are complete. Public typed values, transaction spelling and behavior,
+recursive observation, span-native progressive/staged dispatch, and all six runtime admissions remain future work.
 
 The helper audit distinguishes 7 callable compatibility aliases from 2 internal Perl contract/scanner ids.
 `capture_take_slice` and `capture_take_slice_len` are internal ids, not accepted helper spellings; authored code

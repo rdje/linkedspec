@@ -65,12 +65,13 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 ```
 
 The checker covers 3 decoded sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation
-and 8 transaction transitions, 6 recursive observations, 4 structural cases, 31 diagnostics, and 36 mutations.
+and 8 transaction transitions, 6 recursive observations, 4 structural cases, 31 diagnostics, and 37 mutations.
 It also proves that all 92 current source-boundary helpers project onto the algebra.
 
-This is contract status, not shipped value status. Only 1 of 14 rollout legs is complete; the other 13 remain
-pending. No public `Position` or `Span` value, checkpoint syntax, transaction behavior, recursive observation API,
-or backend admission exists yet.
+This is contract status, not shipped value status. Three of 14 rollout legs are complete: the neutral contract,
+public linked-rule structure, and unchanged neutral/public recomposition. The other 11 remain pending. No public
+`Position` or `Span` value, checkpoint syntax, transaction behavior, recursive observation API, or backend
+admission exists yet.
 
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions,
 typed spans, or cursor transactions are available as authored values.
