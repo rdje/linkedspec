@@ -162,19 +162,113 @@ sub _build_mark_trace_call {
 }
 
 #------------------------------------------------------------------------------
-# Function: _build_column_read_expr
-# Purpose : Build one shared 1-based column-read expression from a position
-#           expression over the current input string.
-# Args    : (%args)
-# Returns : emitted Perl expression string
+# Function: typed_source_projection_rows
+# Purpose : Return the detached neutral catalog for every Perl source-boundary
+#           compatibility helper.
 #------------------------------------------------------------------------------
-sub _build_column_read_expr {
- my (%args) = @_;
- my $pos_expr = $args{pos_expr};
- my $undef_to_zero = $args{undef_to_zero} ? 1 : 0;
- return 'do { my $__ls_col_pos = '.$pos_expr.'; '
-  .($undef_to_zero ? '$__ls_col_pos = 0 unless defined($__ls_col_pos); ' : '')
-  .'if (defined($__ls_col_pos)) { my $__ls_col_prefix = substr($$STRING, 0, $__ls_col_pos); my $__ls_col_last_newline = rindex($__ls_col_prefix, "\n"); ($__ls_col_last_newline >= 0) ? ($__ls_col_pos - $__ls_col_last_newline) : ($__ls_col_pos + 1) } else { undef } }'
+sub typed_source_projection_rows {
+ return {
+  capture_mark => [
+   [capture_between => 'span_text'],
+   [capture_from => 'span_text'],
+   [capture_len_between => 'span_length'],
+   [capture_len_from => 'span_length'],
+   [capture_rest => 'span_text'],
+   [capture_rest_from => 'span_text'],
+   [capture_rest_len => 'span_length'],
+   [capture_rest_len_from => 'span_length'],
+   [capture_slice => 'span_text'],
+   [capture_slice_col => 'span_start_column'],
+   [capture_slice_len => 'span_length'],
+   [capture_slice_line => 'span_start_line'],
+   [capture_slice_pos => 'span_start_offset'],
+   [capture_slice_until_cursor => 'span_text'],
+   [capture_slice_until_cursor_len => 'span_length'],
+   [capture_until_boundary => 'span_text'],
+   [capture_take => 'span_text'],
+   [capture_take_between => 'span_text'],
+   [capture_take_between_len => 'span_length'],
+   [capture_take_len => 'span_length'],
+   [capture_take_len_from => 'span_length'],
+   [capture_take_rest => 'span_text'],
+   [capture_take_rest_from => 'span_text'],
+   [capture_take_rest_len => 'span_length'],
+   [capture_take_rest_len_from => 'span_length'],
+   [capture_take_until_cursor => 'span_text'],
+   [capture_take_until_cursor_from => 'span_text'],
+   [capture_take_until_cursor_len => 'span_length'],
+   [capture_take_until_cursor_len_from => 'span_length'],
+   [capture_until_cursor_from => 'span_text'],
+   [capture_until_cursor_len_from => 'span_length'],
+   [mark_capture_slice => 'capture_boundary_write_position'],
+   [mark_copy => 'mark_write_position'],
+   [mark_exists => 'mark_exists'],
+   [mark_here => 'mark_write_position'],
+   [mark_input_end => 'mark_write_position'],
+   [mark_input_start => 'mark_write_position'],
+   [mark_pos => 'mark_read_offset'],
+   [start_capture_slice => 'capture_boundary_write_position'],
+   [start_capture_slice_from => 'capture_boundary_write_position'],
+   [clear_mark => 'mark_delete'],
+   [mark_col => 'mark_read_column'],
+   [mark_entry_end => 'mark_write_position'],
+   [mark_entry_start => 'mark_write_position'],
+   [mark_line => 'mark_read_line'],
+   [mark_match_end => 'mark_write_position'],
+   [mark_match_start => 'mark_write_position'],
+  ],
+  entry_match => [
+   [entry_col => 'span_start_column'],
+   [entry_end_col => 'position_column'],
+   [entry_end_line => 'position_line'],
+   [entry_end_pos => 'position_offset'],
+   [entry_group => 'capture_group_text'],
+   [entry_groups => 'capture_group_list'],
+   [entry_has => 'capture_group_exists'],
+   [entry_len => 'span_length'],
+   [entry_line => 'span_start_line'],
+   [entry_map => 'capture_group_map'],
+   [entry_named => 'capture_group_text'],
+   [entry_start_col => 'span_start_column'],
+   [entry_start_line => 'span_start_line'],
+   [entry_start_pos => 'span_start_offset'],
+   [entry_text => 'span_text'],
+   [match_col => 'span_start_column'],
+   [match_end_col => 'position_column'],
+   [match_end_line => 'position_line'],
+   [match_end_pos => 'position_offset'],
+   [match_group => 'capture_group_text'],
+   [match_groups => 'capture_group_list'],
+   [match_has => 'capture_group_exists'],
+   [match_len => 'span_length'],
+   [match_line => 'span_start_line'],
+   [match_map => 'capture_group_map'],
+   [match_named => 'capture_group_text'],
+   [match_start_col => 'span_start_column'],
+   [match_start_line => 'span_start_line'],
+   [match_start_pos => 'span_start_offset'],
+   [match_text => 'span_text'],
+  ],
+  input_cursor => [
+   [cursor_col => 'position_column'],
+   [cursor_line => 'position_line'],
+   [cursor_pos => 'cursor_position'],
+   [cursor_rest => 'span_text'],
+   [cursor_rest_len => 'span_length'],
+   [input_end_col => 'position_column'],
+   [input_end_line => 'position_line'],
+   [input_end_pos => 'position_offset'],
+   [input_len => 'source_length'],
+   [input_slice => 'source_slice_text'],
+   [input_text => 'source_text'],
+  ],
+  cursor_control => [
+   [restore_cursor => 'cursor_state_write_compatibility'],
+   [rewind_entry_start => 'cursor_state_write_compatibility'],
+   [rewind_match_start => 'cursor_state_write_compatibility'],
+   [save_cursor => 'cursor_checkpoint_compatibility'],
+  ],
+ }
 }
 
 #------------------------------------------------------------------------------
@@ -441,7 +535,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_slice\s*\(\s*\)
     }{
-     'do { substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH) }'
+     'do { LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS, $LSPOS - length($LMATCH), "capture_slice") }'
     }gex;
     return $code
    },
@@ -456,7 +550,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_slice_len\s*\(\s*\)
     }{
-     'do { ($LSPOS - $IPOS - length $LMATCH) }'
+     'do { LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, $LSPOS - length($LMATCH), "capture_slice_len") }'
     }gex;
     return $code
    },
@@ -471,7 +565,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_slice_until_cursor\s*\(\s*\)
     }{
-     'do { my $__ls_cursor = pos $$STRING; (defined($__ls_cursor) && defined($IPOS) && $__ls_cursor >= $IPOS) ? substr($$STRING, $IPOS, $__ls_cursor - $IPOS) : undef }'
+     'do { my $__ls_cursor = pos $$STRING; (defined($__ls_cursor) && defined($IPOS) && $__ls_cursor >= $IPOS) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS, $__ls_cursor, "capture_slice_until_cursor") : undef }'
     }gex;
     return $code
    },
@@ -486,7 +580,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_slice_until_cursor_len\s*\(\s*\)
     }{
-     'do { my $__ls_cursor = pos $$STRING; (defined($__ls_cursor) && defined($IPOS) && $__ls_cursor >= $IPOS) ? ($__ls_cursor - $IPOS) : undef }'
+     'do { my $__ls_cursor = pos $$STRING; (defined($__ls_cursor) && defined($IPOS) && $__ls_cursor >= $IPOS) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, $__ls_cursor, "capture_slice_until_cursor_len") : undef }'
     }gex;
     return $code
    },
@@ -512,7 +606,7 @@ sub _build_capture_and_cursor_contracts {
       push @boundary_labels, "'$boundary'" if length($boundary);
      }
      my $labels = join(', ', @boundary_labels);
-     'do { my @__ls_boundary_labels = ('.$labels.'); my $__ls_saved_cursor = pos $$STRING; my $__ls_capture_start = defined($__ls_saved_cursor) ? $__ls_saved_cursor : 0; my $__ls_boundary_start; my $__ls_boundary_valid = 0; for my $__ls_boundary_label (@__ls_boundary_labels) { pos($$STRING) = $__ls_saved_cursor if defined($__ls_saved_cursor); my $__ls_boundary_rule = (ref($$descr{spec}) eq "HASH") ? $$descr{spec}{$__ls_boundary_label} : undef; next unless ref($__ls_boundary_rule) eq "HASH" && ref($__ls_boundary_rule->{re}) eq "ARRAY" && @{$__ls_boundary_rule->{re}}; my $__ls_boundary_re = LinkedRE::oredRE(@{$__ls_boundary_rule->{re}}); $__ls_boundary_valid = 1; my $__ls_boundary_info = LinkedRE::or($STRING, $__ls_boundary_re, $info); next unless defined($__ls_boundary_info); my $__ls_candidate_start = (pos $$STRING) - length($__ls_boundary_info->{match}); $__ls_boundary_start = $__ls_candidate_start if !defined($__ls_boundary_start) || $__ls_candidate_start < $__ls_boundary_start; } $__ls_boundary_start = length($$STRING) if $__ls_boundary_valid && !defined($__ls_boundary_start); if ($__ls_boundary_valid && $__ls_boundary_start >= $__ls_capture_start) { pos($$STRING) = $__ls_boundary_start; substr($$STRING, $__ls_capture_start, $__ls_boundary_start - $__ls_capture_start) } else { pos($$STRING) = $__ls_saved_cursor if defined($__ls_saved_cursor); undef } }'
+     'do { my @__ls_boundary_labels = ('.$labels.'); my $__ls_saved_cursor = pos $$STRING; my $__ls_capture_start = defined($__ls_saved_cursor) ? $__ls_saved_cursor : 0; my $__ls_boundary_start; my $__ls_boundary_valid = 0; for my $__ls_boundary_label (@__ls_boundary_labels) { LinkedSpec::SourceLocation::Runtime::cursor_state_write_compatibility($info, $STRING, $__ls_saved_cursor, "capture_until_boundary_probe") if defined($__ls_saved_cursor); my $__ls_boundary_rule = (ref($$descr{spec}) eq "HASH") ? $$descr{spec}{$__ls_boundary_label} : undef; next unless ref($__ls_boundary_rule) eq "HASH" && ref($__ls_boundary_rule->{re}) eq "ARRAY" && @{$__ls_boundary_rule->{re}}; my $__ls_boundary_re = LinkedRE::oredRE(@{$__ls_boundary_rule->{re}}); $__ls_boundary_valid = 1; my $__ls_boundary_info = LinkedRE::or($STRING, $__ls_boundary_re, $info); next unless defined($__ls_boundary_info); my $__ls_candidate_start = (pos $$STRING) - length($__ls_boundary_info->{match}); $__ls_boundary_start = $__ls_candidate_start if !defined($__ls_boundary_start) || $__ls_candidate_start < $__ls_boundary_start; } $__ls_boundary_start = LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "capture_until_boundary") if $__ls_boundary_valid && !defined($__ls_boundary_start); if ($__ls_boundary_valid && $__ls_boundary_start >= $__ls_capture_start) { LinkedSpec::SourceLocation::Runtime::cursor_state_write_compatibility($info, $STRING, $__ls_boundary_start, "capture_until_boundary"); LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_capture_start, $__ls_boundary_start, "capture_until_boundary") } else { LinkedSpec::SourceLocation::Runtime::cursor_state_write_compatibility($info, $STRING, $__ls_saved_cursor, "capture_until_boundary_restore") if defined($__ls_saved_cursor); undef } }'
     }gex;
     return $code
    },
@@ -527,7 +621,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_take_until_cursor\s*\(\s*\)
     }{
-     'do { my $__ls_cursor = pos $$STRING; if (defined($__ls_cursor) && defined($IPOS) && $__ls_cursor >= $IPOS) { my $__ls_capture = substr($$STRING, $IPOS, $__ls_cursor - $IPOS); $IPOS = $__ls_cursor; $__ls_capture } else { undef } }'
+     'do { my $__ls_cursor = pos $$STRING; if (defined($__ls_cursor) && defined($IPOS) && $__ls_cursor >= $IPOS) { my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS, $__ls_cursor, "capture_take_until_cursor"); $IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, $__ls_cursor, "capture_take_until_cursor"); $__ls_capture } else { undef } }'
     }gex;
     return $code
    },
@@ -542,7 +636,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_take_until_cursor_len\s*\(\s*\)
     }{
-     'do { my $__ls_cursor = pos $$STRING; if (defined($__ls_cursor) && defined($IPOS) && $__ls_cursor >= $IPOS) { my $__ls_capture_len = ($__ls_cursor - $IPOS); $IPOS = $__ls_cursor; $__ls_capture_len } else { undef } }'
+     'do { my $__ls_cursor = pos $$STRING; if (defined($__ls_cursor) && defined($IPOS) && $__ls_cursor >= $IPOS) { my $__ls_capture_len = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, $__ls_cursor, "capture_take_until_cursor_len"); $IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, $__ls_cursor, "capture_take_until_cursor_len"); $__ls_capture_len } else { undef } }'
     }gex;
     return $code
    },
@@ -554,7 +648,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bcapture_slice_line\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bcapture_slice_line\s*\(\s*\)/do { my \$__ls_capture_pos = defined(\$IPOS) ? \$IPOS : 0; 1 + (() = substr(\$\$STRING, 0, \$__ls_capture_pos) =~ \/\\n\/g) }/g;
+    $code =~ s/\bcapture_slice_line\s*\(\s*\)/do { my \$__ls_capture_pos = defined(\$IPOS) ? \$IPOS : 0; LinkedSpec::SourceLocation::Runtime::span_start_line(\$info, \$STRING, \$__ls_capture_pos, \$__ls_capture_pos, "capture_slice_line") }/g;
     return $code
    },
   },
@@ -565,7 +659,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bcapture_slice_col\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bcapture_slice_col\s*\(\s*\)/_build_column_read_expr(pos_expr => '$IPOS', undef_to_zero => 1)/gex;
+    $code =~ s/\bcapture_slice_col\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_column(\$info, \$STRING, defined(\$IPOS) ? \$IPOS : 0, defined(\$IPOS) ? \$IPOS : 0, "capture_slice_col") }/g;
     return $code
    },
   },
@@ -576,7 +670,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bcapture_slice_pos\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bcapture_slice_pos\s*\(\s*\)/do { \$IPOS }/g;
+    $code =~ s/\bcapture_slice_pos\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_offset(\$info, \$STRING, \$IPOS, \$IPOS, "capture_slice_pos") }/g;
     return $code
    },
   },
@@ -591,7 +685,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_slice_length\s*\(\s*\)
     }{
-     'do { ($LSPOS - $IPOS - length $LMATCH) }'
+     'do { LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, $LSPOS - length($LMATCH), "capture_slice_length") }'
     }gex;
     return $code
    },
@@ -606,7 +700,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bstart_capture_slice\s*\(\s*\)
     }{
-     'do { $IPOS = pos $$STRING }'
+     'do { $IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, pos $$STRING, "start_capture_slice") }'
     }gex;
     return $code
    },
@@ -621,7 +715,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bstart_capture_slice_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; defined($__ls_mark) ? ($IPOS = $__ls_mark) : undef }'
+     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "start_capture_slice_from"); defined($__ls_mark) ? ($IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, $__ls_mark, "start_capture_slice_from")) : undef }'
     }gex;
     return $code
    },
@@ -637,7 +731,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_slice_here\s*\(\s*\)
     }{
-     'do { $IPOS = pos $$STRING }'
+     'do { $IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, pos $$STRING, "capture_slice_here") }'
     }gex;
     return $code
    },
@@ -652,7 +746,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_rest\s*\(\s*\)
     }{
-     'do { substr($$STRING, $IPOS, length($$STRING) - $IPOS) }'
+     'do { LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS, LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "capture_rest"), "capture_rest") }'
     }gex;
     return $code
    },
@@ -667,7 +761,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_rest_len\s*\(\s*\)
     }{
-     'do { (length($$STRING) - $IPOS) }'
+     'do { LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "capture_rest_len"), "capture_rest_len") }'
     }gex;
     return $code
    },
@@ -683,7 +777,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_rest_length\s*\(\s*\)
     }{
-     'do { (length($$STRING) - $IPOS) }'
+     'do { LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "capture_rest_length"), "capture_rest_length") }'
     }gex;
     return $code
    },
@@ -698,7 +792,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_take_rest\s*\(\s*\)
     }{
-     'do { my $__ls_end = length($$STRING); if (defined($IPOS) && $__ls_end >= $IPOS) { my $__ls_capture = substr($$STRING, $IPOS, $__ls_end - $IPOS); $IPOS = $__ls_end; $__ls_capture } else { undef } }'
+     'do { my $__ls_end = LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "capture_take_rest"); if (defined($IPOS) && $__ls_end >= $IPOS) { my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS, $__ls_end, "capture_take_rest"); $IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, $__ls_end, "capture_take_rest"); $__ls_capture } else { undef } }'
     }gex;
     return $code
    },
@@ -713,7 +807,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_take_rest_len\s*\(\s*\)
     }{
-     'do { my $__ls_end = length($$STRING); if (defined($IPOS) && $__ls_end >= $IPOS) { my $__ls_capture_len = ($__ls_end - $IPOS); $IPOS = $__ls_end; $__ls_capture_len } else { undef } }'
+     'do { my $__ls_end = LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "capture_take_rest_len"); if (defined($IPOS) && $__ls_end >= $IPOS) { my $__ls_capture_len = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, $__ls_end, "capture_take_rest_len"); $IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, $__ls_end, "capture_take_rest_len"); $__ls_capture_len } else { undef } }'
     }gex;
     return $code
    },
@@ -728,7 +822,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_take\s*\(\s*\)
     }{
-     'do { my $__ls_capture = substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH); $IPOS = pos $$STRING; $__ls_capture }'
+     'do { my $__ls_end = $LSPOS - length($LMATCH); my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS, $__ls_end, "capture_take"); $IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, pos $$STRING, "capture_take"); $__ls_capture }'
     }gex;
     return $code
    },
@@ -743,7 +837,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_take_len\s*\(\s*\)
     }{
-     'do { my $__ls_capture_len = ($LSPOS - $IPOS - length $LMATCH); $IPOS = pos $$STRING; $__ls_capture_len }'
+     'do { my $__ls_end = $LSPOS - length($LMATCH); my $__ls_capture_len = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, $__ls_end, "capture_take_len"); $IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, pos $$STRING, "capture_take_len"); $__ls_capture_len }'
     }gex;
     return $code
    },
@@ -759,7 +853,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_from_rule_start\s*\(\s*\)
     }{
-     'do { substr($$STRING, $IPOS, $LSPOS - $IPOS - length $LMATCH) }'
+     'do { LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS, $LSPOS - length($LMATCH), "capture_from_rule_start") }'
     }gex;
     return $code
    },
@@ -775,7 +869,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_len_from_rule_start\s*\(\s*\)
     }{
-     'do { ($LSPOS - $IPOS - length $LMATCH) }'
+     'do { LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, $LSPOS - length($LMATCH), "capture_len_from_rule_start") }'
     }gex;
     return $code
    },
@@ -790,7 +884,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; defined($__ls_mark) ? substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH) : undef }'
+     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "capture_from"); defined($__ls_mark) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_mark, $LSPOS - length($LMATCH), "capture_from") : undef }'
     }gex;
     return $code
    },
@@ -805,7 +899,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_len_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; defined($__ls_mark) ? ($LSPOS - $__ls_mark - length $LMATCH) : undef }'
+     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "capture_len_from"); defined($__ls_mark) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_mark, $LSPOS - length($LMATCH), "capture_len_from") : undef }'
     }gex;
     return $code
    },
@@ -820,7 +914,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_take\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; if (defined($__ls_mark)) { my $__ls_capture = substr($$STRING, $__ls_mark, $LSPOS - $__ls_mark - length $LMATCH); $__ls_mark_bucket->{\''.$+{mark}.'\'} = pos $$STRING; '. _build_mark_trace_call(operation => 'capture_take', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark_bucket->{\''.$+{mark}.'\'}') .'; $__ls_capture } else { undef } }'
+     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "capture_take"); if (defined($__ls_mark)) { my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_mark, $LSPOS - length($LMATCH), "capture_take"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', pos $$STRING, "capture_take"); '. _build_mark_trace_call(operation => 'capture_take', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_new_mark') .'; $__ls_capture } else { undef } }'
     }gex;
     return $code
    },
@@ -835,7 +929,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_take_len_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; if (defined($__ls_mark)) { my $__ls_capture_len = ($LSPOS - $__ls_mark - length $LMATCH); $__ls_mark_bucket->{\''.$+{mark}.'\'} = pos $$STRING; '. _build_mark_trace_call(operation => 'capture_take_len_from', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark_bucket->{\''.$+{mark}.'\'}') .'; $__ls_capture_len } else { undef } }'
+     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "capture_take_len_from"); if (defined($__ls_mark)) { my $__ls_capture_len = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_mark, $LSPOS - length($LMATCH), "capture_take_len_from"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', pos $$STRING, "capture_take_len_from"); '. _build_mark_trace_call(operation => 'capture_take_len_from', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_new_mark') .'; $__ls_capture_len } else { undef } }'
     }gex;
     return $code
    },
@@ -850,7 +944,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_rest_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; defined($__ls_mark) ? substr($$STRING, $__ls_mark, length($$STRING) - $__ls_mark) : undef }'
+     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "capture_rest_from"); defined($__ls_mark) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_mark, LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "capture_rest_from"), "capture_rest_from") : undef }'
     }gex;
     return $code
    },
@@ -865,7 +959,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_rest_len_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; defined($__ls_mark) ? (length($$STRING) - $__ls_mark) : undef }'
+     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "capture_rest_len_from"); defined($__ls_mark) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_mark, LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "capture_rest_len_from"), "capture_rest_len_from") : undef }'
     }gex;
     return $code
    },
@@ -880,7 +974,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_take_rest_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; my $__ls_end = length($$STRING); if (defined($__ls_mark) && $__ls_end >= $__ls_mark) { my $__ls_capture = substr($$STRING, $__ls_mark, $__ls_end - $__ls_mark); $__ls_mark_bucket->{\''.$+{mark}.'\'} = $__ls_end; '. _build_mark_trace_call(operation => 'capture_take_rest_from', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark_bucket->{\''.$+{mark}.'\'}') .'; $__ls_capture } else { undef } }'
+     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "capture_take_rest_from"); my $__ls_end = LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "capture_take_rest_from"); if (defined($__ls_mark) && $__ls_end >= $__ls_mark) { my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_mark, $__ls_end, "capture_take_rest_from"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', $__ls_end, "capture_take_rest_from"); '. _build_mark_trace_call(operation => 'capture_take_rest_from', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_new_mark') .'; $__ls_capture } else { undef } }'
     }gex;
     return $code
    },
@@ -895,7 +989,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_take_rest_len_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; my $__ls_end = length($$STRING); if (defined($__ls_mark) && $__ls_end >= $__ls_mark) { my $__ls_capture_len = ($__ls_end - $__ls_mark); $__ls_mark_bucket->{\''.$+{mark}.'\'} = $__ls_end; '. _build_mark_trace_call(operation => 'capture_take_rest_len_from', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark_bucket->{\''.$+{mark}.'\'}') .'; $__ls_capture_len } else { undef } }'
+     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "capture_take_rest_len_from"); my $__ls_end = LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "capture_take_rest_len_from"); if (defined($__ls_mark) && $__ls_end >= $__ls_mark) { my $__ls_capture_len = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_mark, $__ls_end, "capture_take_rest_len_from"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', $__ls_end, "capture_take_rest_len_from"); '. _build_mark_trace_call(operation => 'capture_take_rest_len_from', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_new_mark') .'; $__ls_capture_len } else { undef } }'
     }gex;
     return $code
    },
@@ -910,7 +1004,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_until_cursor_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; my $__ls_cursor = pos $$STRING; (defined($__ls_mark) && defined($__ls_cursor) && $__ls_cursor >= $__ls_mark) ? substr($$STRING, $__ls_mark, $__ls_cursor - $__ls_mark) : undef }'
+     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "capture_until_cursor_from"); my $__ls_cursor = pos $$STRING; (defined($__ls_mark) && defined($__ls_cursor) && $__ls_cursor >= $__ls_mark) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_mark, $__ls_cursor, "capture_until_cursor_from") : undef }'
     }gex;
     return $code
    },
@@ -925,7 +1019,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_until_cursor_len_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; my $__ls_cursor = pos $$STRING; (defined($__ls_mark) && defined($__ls_cursor) && $__ls_cursor >= $__ls_mark) ? ($__ls_cursor - $__ls_mark) : undef }'
+     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "capture_until_cursor_len_from"); my $__ls_cursor = pos $$STRING; (defined($__ls_mark) && defined($__ls_cursor) && $__ls_cursor >= $__ls_mark) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_mark, $__ls_cursor, "capture_until_cursor_len_from") : undef }'
     }gex;
     return $code
    },
@@ -940,7 +1034,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_take_until_cursor_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; my $__ls_cursor = pos $$STRING; if (defined($__ls_mark) && defined($__ls_cursor) && $__ls_cursor >= $__ls_mark) { my $__ls_capture = substr($$STRING, $__ls_mark, $__ls_cursor - $__ls_mark); $__ls_mark_bucket->{\''.$+{mark}.'\'} = $__ls_cursor; '. _build_mark_trace_call(operation => 'capture_take_until_cursor', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark_bucket->{\''.$+{mark}.'\'}') .'; $__ls_capture } else { undef } }'
+     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "capture_take_until_cursor_from"); my $__ls_cursor = pos $$STRING; if (defined($__ls_mark) && defined($__ls_cursor) && $__ls_cursor >= $__ls_mark) { my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_mark, $__ls_cursor, "capture_take_until_cursor_from"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', $__ls_cursor, "capture_take_until_cursor_from"); '. _build_mark_trace_call(operation => 'capture_take_until_cursor', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_new_mark') .'; $__ls_capture } else { undef } }'
     }gex;
     return $code
    },
@@ -955,7 +1049,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_take_until_cursor_len_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; my $__ls_cursor = pos $$STRING; if (defined($__ls_mark) && defined($__ls_cursor) && $__ls_cursor >= $__ls_mark) { my $__ls_capture_len = ($__ls_cursor - $__ls_mark); $__ls_mark_bucket->{\''.$+{mark}.'\'} = $__ls_cursor; '. _build_mark_trace_call(operation => 'capture_take_until_cursor_len', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark_bucket->{\''.$+{mark}.'\'}') .'; $__ls_capture_len } else { undef } }'
+     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "capture_take_until_cursor_len_from"); my $__ls_cursor = pos $$STRING; if (defined($__ls_mark) && defined($__ls_cursor) && $__ls_cursor >= $__ls_mark) { my $__ls_capture_len = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_mark, $__ls_cursor, "capture_take_until_cursor_len_from"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', $__ls_cursor, "capture_take_until_cursor_len_from"); '. _build_mark_trace_call(operation => 'capture_take_until_cursor_len', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_new_mark') .'; $__ls_capture_len } else { undef } }'
     }gex;
     return $code
    },
@@ -970,7 +1064,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_between\s*\(\s*(?<start>\w+)\s*,\s*(?<end>\w+)\s*\)
     }{
-     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_start = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{start}.'\'} : undef; my $__ls_end = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{end}.'\'} : undef; (defined($__ls_start) && defined($__ls_end) && $__ls_end >= $__ls_start) ? substr($$STRING, $__ls_start, $__ls_end - $__ls_start) : undef }'
+     'do { my $__ls_start = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{start}.'\', "capture_between"); my $__ls_end = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{end}.'\', "capture_between"); (defined($__ls_start) && defined($__ls_end) && $__ls_end >= $__ls_start) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_start, $__ls_end, "capture_between") : undef }'
     }gex;
     return $code
    },
@@ -985,7 +1079,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_len_between\s*\(\s*(?<start>\w+)\s*,\s*(?<end>\w+)\s*\)
     }{
-     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_start = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{start}.'\'} : undef; my $__ls_end = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{end}.'\'} : undef; (defined($__ls_start) && defined($__ls_end) && $__ls_end >= $__ls_start) ? ($__ls_end - $__ls_start) : undef }'
+     'do { my $__ls_start = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{start}.'\', "capture_len_between"); my $__ls_end = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{end}.'\', "capture_len_between"); (defined($__ls_start) && defined($__ls_end) && $__ls_end >= $__ls_start) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_start, $__ls_end, "capture_len_between") : undef }'
     }gex;
     return $code
    },
@@ -1000,7 +1094,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_take_between\s*\(\s*(?<start>\w+)\s*,\s*(?<end>\w+)\s*\)
     }{
-     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_start = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{start}.'\'} : undef; my $__ls_end = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{end}.'\'} : undef; if (defined($__ls_start) && defined($__ls_end) && $__ls_end >= $__ls_start) { my $__ls_capture = substr($$STRING, $__ls_start, $__ls_end - $__ls_start); $__ls_mark_bucket->{\''.$+{start}.'\'} = $__ls_end; '. _build_mark_trace_call(operation => 'capture_take_between', label => $label, mark_name => $+{start}, mark_pos_expr => '$__ls_mark_bucket->{\''.$+{start}.'\'}') .'; $__ls_capture } else { undef } }'
+     'do { my $__ls_start = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{start}.'\', "capture_take_between"); my $__ls_end = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{end}.'\', "capture_take_between"); if (defined($__ls_start) && defined($__ls_end) && $__ls_end >= $__ls_start) { my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_start, $__ls_end, "capture_take_between"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{start}.'\', $__ls_end, "capture_take_between"); '. _build_mark_trace_call(operation => 'capture_take_between', label => $label, mark_name => $+{start}, mark_pos_expr => '$__ls_new_mark') .'; $__ls_capture } else { undef } }'
     }gex;
     return $code
    },
@@ -1015,7 +1109,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_take_between_len\s*\(\s*(?<start>\w+)\s*,\s*(?<end>\w+)\s*\)
     }{
-     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_start = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{start}.'\'} : undef; my $__ls_end = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{end}.'\'} : undef; if (defined($__ls_start) && defined($__ls_end) && $__ls_end >= $__ls_start) { my $__ls_capture_len = ($__ls_end - $__ls_start); $__ls_mark_bucket->{\''.$+{start}.'\'} = $__ls_end; '. _build_mark_trace_call(operation => 'capture_take_between_len', label => $label, mark_name => $+{start}, mark_pos_expr => '$__ls_mark_bucket->{\''.$+{start}.'\'}') .'; $__ls_capture_len } else { undef } }'
+     'do { my $__ls_start = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{start}.'\', "capture_take_between_len"); my $__ls_end = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{end}.'\', "capture_take_between_len"); if (defined($__ls_start) && defined($__ls_end) && $__ls_end >= $__ls_start) { my $__ls_capture_len = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_start, $__ls_end, "capture_take_between_len"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{start}.'\', $__ls_end, "capture_take_between_len"); '. _build_mark_trace_call(operation => 'capture_take_between_len', label => $label, mark_name => $+{start}, mark_pos_expr => '$__ls_new_mark') .'; $__ls_capture_len } else { undef } }'
     }gex;
     return $code
    },
@@ -1030,7 +1124,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_input_start\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { $$info{marks}{\''.$label.'\'} = {} unless ref($$info{marks}{\''.$label.'\'}) eq \'HASH\'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} = 0; '. _build_mark_trace_call(operation => 'mark_input_start', label => $label, mark_name => $+{mark}, mark_pos_expr => '$$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'}') .'; 1 }'
+     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', 0, "mark_input_start"); '. _build_mark_trace_call(operation => 'mark_input_start', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark') .'; 1 }'
     }gex;
     return $code
    },
@@ -1045,7 +1139,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_input_end\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { $$info{marks}{\''.$label.'\'} = {} unless ref($$info{marks}{\''.$label.'\'}) eq \'HASH\'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} = length($$STRING); '. _build_mark_trace_call(operation => 'mark_input_end', label => $label, mark_name => $+{mark}, mark_pos_expr => '$$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'}') .'; 1 }'
+     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "mark_input_end"), "mark_input_end"); '. _build_mark_trace_call(operation => 'mark_input_end', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark') .'; 1 }'
     }gex;
     return $code
    },
@@ -1060,7 +1154,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_here\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { $$info{marks}{\''.$label.'\'} = {} unless ref($$info{marks}{\''.$label.'\'}) eq \'HASH\'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} = pos $$STRING; '. _build_mark_trace_call(operation => 'mark_here', label => $label, mark_name => $+{mark}, mark_pos_expr => '$$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'}') .'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} }'
+     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', pos $$STRING, "mark_here"); '. _build_mark_trace_call(operation => 'mark_here', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark') .'; $__ls_mark }'
     }gex;
     return $code
    },
@@ -1075,7 +1169,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_entry_start\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { $$info{marks}{\''.$label.'\'} = {} unless ref($$info{marks}{\''.$label.'\'}) eq \'HASH\'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} = $IPOS - length $IMATCH; '. _build_mark_trace_call(operation => 'mark_entry_start', label => $label, mark_name => $+{mark}, mark_pos_expr => '$$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'}') .'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} }'
+     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', $IPOS - length($IMATCH), "mark_entry_start"); '. _build_mark_trace_call(operation => 'mark_entry_start', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark') .'; $__ls_mark }'
     }gex;
     return $code
    },
@@ -1090,7 +1184,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_entry_end\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { $$info{marks}{\''.$label.'\'} = {} unless ref($$info{marks}{\''.$label.'\'}) eq \'HASH\'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} = $IPOS; '. _build_mark_trace_call(operation => 'mark_entry_end', label => $label, mark_name => $+{mark}, mark_pos_expr => '$$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'}') .'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} }'
+     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', $IPOS, "mark_entry_end"); '. _build_mark_trace_call(operation => 'mark_entry_end', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark') .'; $__ls_mark }'
     }gex;
     return $code
    },
@@ -1105,7 +1199,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_match_start\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { $$info{marks}{\''.$label.'\'} = {} unless ref($$info{marks}{\''.$label.'\'}) eq \'HASH\'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} = $LSPOS - length $LMATCH; '. _build_mark_trace_call(operation => 'mark_match_start', label => $label, mark_name => $+{mark}, mark_pos_expr => '$$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'}') .'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} }'
+     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', $LSPOS - length($LMATCH), "mark_match_start"); '. _build_mark_trace_call(operation => 'mark_match_start', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark') .'; $__ls_mark }'
     }gex;
     return $code
    },
@@ -1120,7 +1214,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_match_end\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { $$info{marks}{\''.$label.'\'} = {} unless ref($$info{marks}{\''.$label.'\'}) eq \'HASH\'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} = $LSPOS; '. _build_mark_trace_call(operation => 'mark_match_end', label => $label, mark_name => $+{mark}, mark_pos_expr => '$$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'}') .'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} }'
+     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', $LSPOS, "mark_match_end"); '. _build_mark_trace_call(operation => 'mark_match_end', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark') .'; $__ls_mark }'
     }gex;
     return $code
    },
@@ -1135,7 +1229,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_copy\s*\(\s*(?<target>\w+)\s*,\s*(?<source>\w+)\s*\)
     }{
-     'do { $$info{marks}{\''.$label.'\'} = {} unless ref($$info{marks}{\''.$label.'\'}) eq \'HASH\'; my $__ls_mark_bucket = $$info{marks}{\''.$label.'\'}; if (exists $__ls_mark_bucket->{\''.$+{source}.'\'}) { $__ls_mark_bucket->{\''.$+{target}.'\'} = $__ls_mark_bucket->{\''.$+{source}.'\'}; '. _build_mark_trace_call(operation => 'mark_copy', label => $label, mark_name => $+{target}, mark_pos_expr => '$__ls_mark_bucket->{\''.$+{target}.'\'}') .'; $__ls_mark_bucket->{\''.$+{target}.'\'} } else { delete $__ls_mark_bucket->{\''.$+{target}.'\'}; undef } }'
+     'do { my $__ls_source = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{source}.'\', "mark_copy"); if (defined($__ls_source)) { my $__ls_target = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{target}.'\', $__ls_source, "mark_copy"); '. _build_mark_trace_call(operation => 'mark_copy', label => $label, mark_name => $+{target}, mark_pos_expr => '$__ls_target') .'; $__ls_target } else { LinkedSpec::SourceLocation::Runtime::mark_delete($info, \''.$label.'\', \''.$+{target}.'\'); undef } }'
     }gex;
     return $code
    },
@@ -1150,7 +1244,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_capture_slice\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { $$info{marks}{\''.$label.'\'} = {} unless ref($$info{marks}{\''.$label.'\'}) eq \'HASH\'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} = $IPOS; '. _build_mark_trace_call(operation => 'mark_capture_slice', label => $label, mark_name => $+{mark}, mark_pos_expr => '$$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'}') .'; $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'} }'
+     'do { my $__ls_capture_boundary = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, $IPOS, "mark_capture_slice"); my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', $__ls_capture_boundary, "mark_capture_slice"); '. _build_mark_trace_call(operation => 'mark_capture_slice', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark') .'; $__ls_mark }'
     }gex;
     return $code
    },
@@ -1165,7 +1259,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bclear_mark\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { if (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') { delete $$info{marks}{\''.$label.'\'}{\''.$+{mark}.'\'}; } undef }'
+     'do { LinkedSpec::SourceLocation::Runtime::mark_delete($info, \''.$label.'\', \''.$+{mark}.'\') }'
     }gex;
     return $code
    },
@@ -1180,7 +1274,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_exists\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; (ref($__ls_mark_bucket) eq \'HASH\' && exists $__ls_mark_bucket->{\''.$+{mark}.'\'}) ? 1 : 0 }'
+     'do { LinkedSpec::SourceLocation::Runtime::mark_exists($info, \''.$label.'\', \''.$+{mark}.'\') }'
     }gex;
     return $code
    },
@@ -1195,7 +1289,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_pos\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; (ref($__ls_mark_bucket) eq \'HASH\' && exists $__ls_mark_bucket->{\''.$+{mark}.'\'}) ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef }'
+     'do { LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "mark_pos") }'
     }gex;
     return $code
    },
@@ -1210,7 +1304,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_line\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; defined($__ls_mark) ? (1 + (() = substr($$STRING, 0, $__ls_mark) =~ /\\n/g)) : undef }'
+     'do { LinkedSpec::SourceLocation::Runtime::mark_read_line($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "mark_line") }'
     }gex;
     return $code
    },
@@ -1225,7 +1319,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_col\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark_bucket = (ref($$info{marks}) eq \'HASH\' && ref($$info{marks}{\''.$label.'\'}) eq \'HASH\') ? $$info{marks}{\''.$label.'\'} : undef; my $__ls_mark = (ref($__ls_mark_bucket) eq \'HASH\') ? $__ls_mark_bucket->{\''.$+{mark}.'\'} : undef; '. _build_column_read_expr(pos_expr => '$__ls_mark') .' }'
+     'do { LinkedSpec::SourceLocation::Runtime::mark_read_column($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "mark_col") }'
     }gex;
     return $code
    },
@@ -1237,7 +1331,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bcursor_pos\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bcursor_pos\s*\(\s*\)/do { pos \$\$STRING }/g;
+    $code =~ s/\bcursor_pos\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::cursor_position(\$info, \$STRING, pos \$\$STRING, "cursor_pos") }/g;
     return $code
    },
   },
@@ -1248,7 +1342,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bcursor_line\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bcursor_line\s*\(\s*\)/do { my \$__ls_cursor_pos = pos \$\$STRING; 1 + (() = substr(\$\$STRING, 0, defined(\$__ls_cursor_pos) ? \$__ls_cursor_pos : 0) =~ \/\\n\/g) }/g;
+    $code =~ s/\bcursor_line\s*\(\s*\)/do { my \$__ls_cursor_pos = pos \$\$STRING; LinkedSpec::SourceLocation::Runtime::position_line(\$info, \$STRING, defined(\$__ls_cursor_pos) ? \$__ls_cursor_pos : 0, "cursor_line") }/g;
     return $code
    },
   },
@@ -1259,7 +1353,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bcursor_col\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bcursor_col\s*\(\s*\)/_build_column_read_expr(pos_expr => 'pos $$STRING', undef_to_zero => 1)/gex;
+    $code =~ s/\bcursor_col\s*\(\s*\)/do { my \$__ls_cursor_pos = pos \$\$STRING; LinkedSpec::SourceLocation::Runtime::position_column(\$info, \$STRING, defined(\$__ls_cursor_pos) ? \$__ls_cursor_pos : 0, "cursor_col") }/g;
     return $code
    },
   },
@@ -1273,7 +1367,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcursor_rest\s*\(\s*\)
     }{
-     'do { my $__ls_cursor = pos $$STRING; defined($__ls_cursor) ? substr($$STRING, $__ls_cursor, length($$STRING) - $__ls_cursor) : undef }'
+     'do { my $__ls_cursor = pos $$STRING; defined($__ls_cursor) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_cursor, LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "cursor_rest"), "cursor_rest") : undef }'
     }gex;
     return $code
    },
@@ -1288,7 +1382,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcursor_rest_len\s*\(\s*\)
     }{
-     'do { my $__ls_cursor = pos $$STRING; defined($__ls_cursor) ? (length($$STRING) - $__ls_cursor) : undef }'
+     'do { my $__ls_cursor = pos $$STRING; defined($__ls_cursor) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_cursor, LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "cursor_rest_len"), "cursor_rest_len") : undef }'
     }gex;
     return $code
    },
@@ -1313,7 +1407,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\binput_text\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\binput_text\s*\(\s*\)/do { \$\$STRING }/g;
+    $code =~ s/\binput_text\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::source_text(\$info, \$STRING, "input_text") }/g;
     return $code
    },
   },
@@ -1324,7 +1418,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\binput_len\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\binput_len\s*\(\s*\)/do { length\(\$\$STRING\) }/g;
+    $code =~ s/\binput_len\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::source_length(\$info, \$STRING, "input_len") }/g;
     return $code
    },
   },
@@ -1335,7 +1429,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\binput_end_pos\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\binput_end_pos\s*\(\s*\)/do { length\(\$\$STRING\) }/g;
+    $code =~ s/\binput_end_pos\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::position_offset(\$info, \$STRING, length(\$\$STRING), "input_end_pos") }/g;
     return $code
    },
   },
@@ -1346,7 +1440,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\binput_end_line\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\binput_end_line\s*\(\s*\)/do { 1 + (() = substr(\$\$STRING, 0, length(\$\$STRING)) =~ \/\\n\/g) }/g;
+    $code =~ s/\binput_end_line\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::position_line(\$info, \$STRING, length(\$\$STRING), "input_end_line") }/g;
     return $code
    },
   },
@@ -1357,7 +1451,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\binput_end_col\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\binput_end_col\s*\(\s*\)/_build_column_read_expr(pos_expr => 'length($$STRING)', undef_to_zero => 1)/gex;
+    $code =~ s/\binput_end_col\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::position_column(\$info, \$STRING, length(\$\$STRING), "input_end_col") }/g;
     return $code
    },
   },
@@ -1368,7 +1462,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_text\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_text\s*\(\s*\)/do { \$IMATCH }/g;
+    $code =~ s/\bentry_text\s*\(\s*\)/do { defined(\$IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text(\$info, \$STRING, \$IPOS - length(\$IMATCH), \$IPOS, "entry_text") : undef }/g;
     return $code
    },
   },
@@ -1382,7 +1476,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bentry_group\s*\(\s*(?<index>\d+)\s*\)
     }{
-     'do { scalar(@IMATCH_LIST) > '.$+{index}.' ? $IMATCH_LIST['.$+{index}.'] : undef }'
+     'do { LinkedSpec::SourceLocation::Runtime::capture_group_text(scalar(@IMATCH_LIST) > '.$+{index}.' ? $IMATCH_LIST['.$+{index}.'] : undef) }'
     }gex;
     return $code
    },
@@ -1394,7 +1488,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_groups\s*\(\s*\)/o,
   lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_groups\s*\(\s*\)/do { [\@IMATCH_LIST] }/g;
+    $code =~ s/\bentry_groups\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::capture_group_list([\@IMATCH_LIST]) }/g;
     return $code
    },
   },
@@ -1408,7 +1502,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bentry_named\s*\(\s*(?<name>\w+)\s*\)
     }{
-     'do { exists $IMATCH_HASH{\''.$+{name}.'\'} ? $IMATCH_HASH{\''.$+{name}.'\'} : undef }'
+     'do { LinkedSpec::SourceLocation::Runtime::capture_group_text(exists $IMATCH_HASH{\''.$+{name}.'\'} ? $IMATCH_HASH{\''.$+{name}.'\'} : undef) }'
     }gex;
     return $code
    },
@@ -1423,7 +1517,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bentry_has\s*\(\s*(?<name>\w+)\s*\)
     }{
-     'do { exists $IMATCH_HASH{\''.$+{name}.'\'} ? 1 : 0 }'
+     'do { LinkedSpec::SourceLocation::Runtime::capture_group_exists(exists $IMATCH_HASH{\''.$+{name}.'\'}) }'
     }gex;
     return $code
    },
@@ -1435,7 +1529,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_map\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_map\s*\(\s*\)/do { +{\%IMATCH_HASH} }/g;
+    $code =~ s/\bentry_map\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::capture_group_map(+{\%IMATCH_HASH}) }/g;
     return $code
    },
   },
@@ -1446,7 +1540,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_named_map\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_named_map\s*\(\s*\)/do { +{\%IMATCH_HASH} }/g;
+    $code =~ s/\bentry_named_map\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::capture_group_map(+{\%IMATCH_HASH}) }/g;
     return $code
    },
   },
@@ -1457,7 +1551,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_line\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_line\s*\(\s*\)/do { 1 + (() = substr(\$\$STRING, 0, \$IPOS - length \$IMATCH) =~ \/\\n\/g) }/g;
+    $code =~ s/\bentry_line\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_line(\$info, \$STRING, \$IPOS - length(\$IMATCH), \$IPOS, "entry_line") }/g;
     return $code
    },
   },
@@ -1468,7 +1562,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_start_line\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_start_line\s*\(\s*\)/do { 1 + (() = substr(\$\$STRING, 0, \$IPOS - length \$IMATCH) =~ \/\\n\/g) }/g;
+    $code =~ s/\bentry_start_line\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_line(\$info, \$STRING, \$IPOS - length(\$IMATCH), \$IPOS, "entry_start_line") }/g;
     return $code
    },
   },
@@ -1479,7 +1573,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_col\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_col\s*\(\s*\)/_build_column_read_expr(pos_expr => '$IPOS - length $IMATCH')/gex;
+    $code =~ s/\bentry_col\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_column(\$info, \$STRING, \$IPOS - length(\$IMATCH), \$IPOS, "entry_col") }/g;
     return $code
    },
   },
@@ -1490,7 +1584,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_start_col\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_start_col\s*\(\s*\)/_build_column_read_expr(pos_expr => '$IPOS - length $IMATCH')/gex;
+    $code =~ s/\bentry_start_col\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_column(\$info, \$STRING, \$IPOS - length(\$IMATCH), \$IPOS, "entry_start_col") }/g;
     return $code
    },
   },
@@ -1501,7 +1595,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_len\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_len\s*\(\s*\)/do { length \$IMATCH }/g;
+    $code =~ s/\bentry_len\s*\(\s*\)/do { defined(\$IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_length(\$info, \$STRING, \$IPOS - length(\$IMATCH), \$IPOS, "entry_len") : length(\$IMATCH) }/g;
     return $code
    },
   },
@@ -1512,7 +1606,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_start_pos\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_start_pos\s*\(\s*\)/do { \$IPOS - length \$IMATCH }/g;
+    $code =~ s/\bentry_start_pos\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_offset(\$info, \$STRING, \$IPOS - length(\$IMATCH), \$IPOS, "entry_start_pos") }/g;
     return $code
    },
   },
@@ -1523,7 +1617,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_end_pos\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_end_pos\s*\(\s*\)/do { \$IPOS }/g;
+    $code =~ s/\bentry_end_pos\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::position_offset(\$info, \$STRING, \$IPOS, "entry_end_pos") }/g;
     return $code
    },
   },
@@ -1534,7 +1628,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_end_line\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_end_line\s*\(\s*\)/do { 1 + (() = substr(\$\$STRING, 0, \$IPOS) =~ \/\\n\/g) }/g;
+    $code =~ s/\bentry_end_line\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::position_line(\$info, \$STRING, \$IPOS, "entry_end_line") }/g;
     return $code
    },
   },
@@ -1545,7 +1639,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_end_col\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_end_col\s*\(\s*\)/_build_column_read_expr(pos_expr => '$IPOS', undef_to_zero => 1)/gex;
+    $code =~ s/\bentry_end_col\s*\(\s*\)/do { my \$__ls_entry_end_col = LinkedSpec::SourceLocation::Runtime::position_column(\$info, \$STRING, \$IPOS, "entry_end_col"); defined(\$__ls_entry_end_col) ? \$__ls_entry_end_col : 0 }/g;
     return $code
    },
   },
@@ -1556,7 +1650,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bmatch_start_pos\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bmatch_start_pos\s*\(\s*\)/do { \$LSPOS - length \$LMATCH }/g;
+    $code =~ s/\bmatch_start_pos\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_offset(\$info, \$STRING, \$LSPOS - length(\$LMATCH), \$LSPOS, "match_start_pos") }/g;
     return $code
    },
   },
@@ -1567,7 +1661,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bmatch_text\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bmatch_text\s*\(\s*\)/do { \$LMATCH }/g;
+    $code =~ s/\bmatch_text\s*\(\s*\)/do { defined(\$LMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text(\$info, \$STRING, \$LSPOS - length(\$LMATCH), \$LSPOS, "match_text") : undef }/g;
     return $code
    },
   },
@@ -1581,7 +1675,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmatch_group\s*\(\s*(?<index>\d+)\s*\)
     }{
-     'do { scalar(@LMATCH_LIST) > '.$+{index}.' ? $LMATCH_LIST['.$+{index}.'] : undef }'
+     'do { LinkedSpec::SourceLocation::Runtime::capture_group_text(scalar(@LMATCH_LIST) > '.$+{index}.' ? $LMATCH_LIST['.$+{index}.'] : undef) }'
     }gex;
     return $code
    },
@@ -1593,7 +1687,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bmatch_groups\s*\(\s*\)/o,
   lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bmatch_groups\s*\(\s*\)/do { [\@LMATCH_LIST] }/g;
+    $code =~ s/\bmatch_groups\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::capture_group_list([\@LMATCH_LIST]) }/g;
     return $code
    },
   },
@@ -1607,7 +1701,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmatch_named\s*\(\s*(?<name>\w+)\s*\)
     }{
-     'do { exists $LMATCH_HASH{\''.$+{name}.'\'} ? $LMATCH_HASH{\''.$+{name}.'\'} : undef }'
+     'do { LinkedSpec::SourceLocation::Runtime::capture_group_text(exists $LMATCH_HASH{\''.$+{name}.'\'} ? $LMATCH_HASH{\''.$+{name}.'\'} : undef) }'
     }gex;
     return $code
    },
@@ -1622,7 +1716,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmatch_has\s*\(\s*(?<name>\w+)\s*\)
     }{
-     'do { exists $LMATCH_HASH{\''.$+{name}.'\'} ? 1 : 0 }'
+     'do { LinkedSpec::SourceLocation::Runtime::capture_group_exists(exists $LMATCH_HASH{\''.$+{name}.'\'}) }'
     }gex;
     return $code
    },
@@ -1634,7 +1728,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bmatch_map\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bmatch_map\s*\(\s*\)/do { +{\%LMATCH_HASH} }/g;
+    $code =~ s/\bmatch_map\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::capture_group_map(+{\%LMATCH_HASH}) }/g;
     return $code
    },
   },
@@ -1645,7 +1739,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bmatch_named_map\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bmatch_named_map\s*\(\s*\)/do { +{\%LMATCH_HASH} }/g;
+    $code =~ s/\bmatch_named_map\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::capture_group_map(+{\%LMATCH_HASH}) }/g;
     return $code
    },
   },
@@ -1656,7 +1750,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bmatch_len\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bmatch_len\s*\(\s*\)/do { length \$LMATCH }/g;
+    $code =~ s/\bmatch_len\s*\(\s*\)/do { defined(\$LMATCH) ? LinkedSpec::SourceLocation::Runtime::span_length(\$info, \$STRING, \$LSPOS - length(\$LMATCH), \$LSPOS, "match_len") : length(\$LMATCH) }/g;
     return $code
    },
   },
@@ -1667,7 +1761,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bmatch_end_pos\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bmatch_end_pos\s*\(\s*\)/do { \$LSPOS }/g;
+    $code =~ s/\bmatch_end_pos\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::position_offset(\$info, \$STRING, \$LSPOS, "match_end_pos") }/g;
     return $code
    },
   },
@@ -1678,7 +1772,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bmatch_end_line\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bmatch_end_line\s*\(\s*\)/do { 1 + (() = substr(\$\$STRING, 0, \$LSPOS) =~ \/\\n\/g) }/g;
+    $code =~ s/\bmatch_end_line\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::position_line(\$info, \$STRING, \$LSPOS, "match_end_line") }/g;
     return $code
    },
   },
@@ -1689,7 +1783,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bmatch_end_col\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bmatch_end_col\s*\(\s*\)/_build_column_read_expr(pos_expr => '$LSPOS', undef_to_zero => 1)/gex;
+    $code =~ s/\bmatch_end_col\s*\(\s*\)/do { my \$__ls_match_end_col = LinkedSpec::SourceLocation::Runtime::position_column(\$info, \$STRING, \$LSPOS, "match_end_col"); defined(\$__ls_match_end_col) ? \$__ls_match_end_col : 0 }/g;
     return $code
    },
   },
@@ -1700,7 +1794,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bmatch_start_line\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bmatch_start_line\s*\(\s*\)/do { 1 + (() = substr(\$\$STRING, 0, \$LSPOS - length \$LMATCH) =~ \/\\n\/g) }/g;
+    $code =~ s/\bmatch_start_line\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_line(\$info, \$STRING, \$LSPOS - length(\$LMATCH), \$LSPOS, "match_start_line") }/g;
     return $code
    },
   },
@@ -1711,7 +1805,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bmatch_line\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bmatch_line\s*\(\s*\)/do { 1 + (() = substr(\$\$STRING, 0, \$LSPOS - length \$LMATCH) =~ \/\\n\/g) }/g;
+    $code =~ s/\bmatch_line\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_line(\$info, \$STRING, \$LSPOS - length(\$LMATCH), \$LSPOS, "match_line") }/g;
     return $code
    },
   },
@@ -1722,7 +1816,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bmatch_start_col\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bmatch_start_col\s*\(\s*\)/_build_column_read_expr(pos_expr => '$LSPOS - length $LMATCH')/gex;
+    $code =~ s/\bmatch_start_col\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_column(\$info, \$STRING, \$LSPOS - length(\$LMATCH), \$LSPOS, "match_start_col") }/g;
     return $code
    },
   },
@@ -1733,7 +1827,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bmatch_col\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bmatch_col\s*\(\s*\)/_build_column_read_expr(pos_expr => '$LSPOS - length $LMATCH')/gex;
+    $code =~ s/\bmatch_col\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_column(\$info, \$STRING, \$LSPOS - length(\$LMATCH), \$LSPOS, "match_col") }/g;
     return $code
    },
   },
@@ -1744,7 +1838,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bsave_cursor\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bsave_cursor\s*\(\s*\)/do { \$\$info{cursor_stack} = [] unless ref\(\$\$info{cursor_stack}\) eq 'ARRAY'; push \@{\$\$info{cursor_stack}}, pos \$\$STRING; undef }/g;
+    $code =~ s/\bsave_cursor\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::cursor_checkpoint_compatibility(\$info, \$STRING, pos(\$\$STRING), "save_cursor") }/g;
     return $code
    },
   },
@@ -1755,7 +1849,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\brestore_cursor\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\brestore_cursor\s*\(\s*\)/do { my \$__ls_cursor_stack = \(ref\(\$\$info{cursor_stack}\) eq 'ARRAY'\) ? \$\$info{cursor_stack} : undef; if \(\$__ls_cursor_stack && \@{\$__ls_cursor_stack}\) { my \$__ls_saved_cursor = pop \@{\$__ls_cursor_stack}; pos\(\$\$STRING\) = \$__ls_saved_cursor if defined\(\$__ls_saved_cursor\); } undef }/g;
+    $code =~ s/\brestore_cursor\s*\(\s*\)/do { my \$__ls_cursor_stack = ref(\$\$info{cursor_stack}) eq 'ARRAY' ? \$\$info{cursor_stack} : undef; if (\$__ls_cursor_stack && \@{\$__ls_cursor_stack}) { my \$__ls_saved_cursor = pop \@{\$__ls_cursor_stack}; LinkedSpec::SourceLocation::Runtime::cursor_state_write_compatibility(\$info, \$STRING, \$__ls_saved_cursor, "restore_cursor") if defined(\$__ls_saved_cursor); } undef }/g;
     return $code
    },
   },
@@ -1766,7 +1860,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\brewind_entry_start\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\brewind_entry_start\s*\(\s*\)/pos\(\$\$STRING\) = \$IPOS  - length \$IMATCH/g;
+    $code =~ s/\brewind_entry_start\s*\(\s*\)/LinkedSpec::SourceLocation::Runtime::cursor_state_write_compatibility(\$info, \$STRING, \$IPOS - length(\$IMATCH), "rewind_entry_start")/g;
     return $code
    },
   },
@@ -1777,7 +1871,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\brewind_match_start\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\brewind_match_start\s*\(\s*\)/pos\(\$\$STRING\)  = \$LSPOS - length \$LMATCH/g;
+    $code =~ s/\brewind_match_start\s*\(\s*\)/LinkedSpec::SourceLocation::Runtime::cursor_state_write_compatibility(\$info, \$STRING, \$LSPOS - length(\$LMATCH), "rewind_match_start")/g;
     return $code
    },
   },

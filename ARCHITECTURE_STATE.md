@@ -1,5 +1,19 @@
 # ARCHITECTURE STATE
 
+- `2026-08-01 Perl typed source-location projection routing`: `FUTURE-PARITY-BACKLOG.14.2.1.2` routes the frozen
+  four-family 92-helper catalog and seven aliases through `LinkedSpec::SourceLocation::Runtime` without changing
+  any external result. `SpecEntry` establishes one decoded `input` authority per handler invocation and `LinkedRE`
+  propagates it with child match state. ActionIR, nested method lowering, RuleIR mark/capture-boundary writes, both
+  handler IMATCH bridges, source slices, and cursor operations construct and consume typed positions/spans at that
+  boundary. Existing `$IPOS`/`$LSPOS`, mark buckets, cursor stack, regex capture snapshots, and return values remain
+  compatible scalars/collections; writes are validated before storage. The projection catalog is caller-detached,
+  and live plus independently emitted/loaded source share the same route. Focused projections pass 3 top-level /202
+  nested assertions and source/mark/cursor/generated baselines pass 423/423. Definitive canonical CI passes
+  repository containment, moved-root/outside-CWD execution, every composed semantic/MCP admission, CLI 66/66 in
+  both option environments, RAM 53%, and Phase 0 1,031/1,031 in 651 seconds before `local CI gate passed`.
+  Registration, rollout 3/11, schemas, semantic/MCP, DSL/facade, generated-plan identity, root README, and
+  sole-facing book support remain unchanged for admission `.14.2.1.3`.
+
 - `2026-08-01 immutable Perl typed source-location core`: `FUTURE-PARITY-BACKLOG.14.2.1.1` adds
   `LinkedSpec::SourceLocation` without routing it into ActionIR. One private authority snapshots decoded text and
   precomputes line/column/UTF-8-byte evidence at every Perl Unicode-scalar boundary. Opaque `Position`, `Span`, and

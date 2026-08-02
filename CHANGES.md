@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-08-01 — FUTURE-PARITY-BACKLOG.14.2.1.2 — route Perl typed source projections
+
+- Added the exact detached four-family, 92-row `typed_source_projection_rows` catalog and routed all rows plus
+  seven callable aliases through `LinkedSpec::SourceLocation::Runtime`.
+- Established one decoded `input` authority at handler entry and propagated it through child match state. ActionIR,
+  nested method lowering, RuleIR mark/capture-boundary writes, handler IMATCH bridges, live execution, and emitted/
+  loaded generated source now share typed position/span validation and materialization.
+- Preserved every external string/number/list/map/boolean/absence result plus scalar capture-boundary, mark, and
+  cursor-stack compatibility. Ordinary `input_slice` bounds use typed spans; legacy unusual Perl `substr` bounds
+  retain an explicit compatibility fallback.
+- Strengthened the formerly RED consumer to inspect all 92 projection functions and seven aliases. It passes three
+  top-level/202 nested assertions and the seven focused suites pass 423/423. Definitive canonical CI passes
+  containment, moved-root/outside-CWD execution, every composed semantic/MCP admission, CLI 66/66 in both option
+  environments, RAM 53%, and Phase 0 1,031/1,031 in 651 seconds before `local CI gate passed`.
+- Kept the projection consumer canonically unregistered. Admission/registration, rollout 3/11, schema, DSL/facade,
+  root README, and sole-facing mdBook support remain unchanged until `.14.2.1.3`.
+
 ## 2026-08-01 — FUTURE-PARITY-BACKLOG.14.2.1.1 — add immutable Perl typed source core
 
 - Added `perl/LinkedSpec/SourceLocation.pm` as the single decoded-source authority. It snapshots caller text,

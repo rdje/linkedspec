@@ -1,5 +1,21 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-01 — Perl typed source projections are signoff-complete
+
+`FUTURE-PARITY-BACKLOG.14.2.1.2` routes every frozen Perl source-boundary helper through the immutable core from
+clean activation `2dceb96e` (intended 142/300; no push). The exact detached catalog contains all 92 rows in four
+families and seven aliases. Handler entry owns authority creation; child rules inherit it; ActionIR, nested method
+expressions, RuleIR marks/capture boundaries, handler bridges, live execution, and emitted/loaded source share the
+same typed validation/materialization path.
+
+All external helper values and scalar mark/cursor behavior remain unchanged. The projection consumer passes all
+three top-level and 202 nested assertions, and the seven-suite focused group passes 423/423. Definitive canonical
+CI passes repository containment, moved-root/outside-CWD execution, every composed semantic/MCP admission, CLI
+66/66 twice, RAM 53%, and Phase 0 1,031/1,031 in 651 seconds before `local CI gate passed`. The consumer remains
+unregistered and rollout stays 3/11: exact admission/promotion is owned by `.14.2.1.3`. Therefore the root README
+and sole-facing mdBook correctly remain unchanged—no user-facing support claim has moved yet. Commit, brief
+clearing, and exact clean proof precede `.3` activation.
+
 ## 2026-08-01 — Immutable Perl typed source-location values are implemented
 
 `FUTURE-PARITY-BACKLOG.14.2.1.1` is signoff-complete from clean `c912120b` (intended 141/300; no push). New internal module

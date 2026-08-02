@@ -76,20 +76,35 @@ SKIP: {
    $typed_contract->{helper_projections},
    'the projection catalog returns a detached immutable snapshot',
   );
+  $projection_rows = $projection_interface->();
 
-  my @representatives = (
-   ['capture_slice()',       'capture_mark'],
-   ['mark_here(probe)',      'capture_mark'],
-   ['mark_pos(probe)',       'capture_mark'],
-   ['entry_start_pos()',     'entry_match'],
-   ['match_start_pos()',     'entry_match'],
-   ['input_end_pos()',       'input_cursor'],
-   ['cursor_pos()',          'input_cursor'],
-   ['save_cursor()',         'cursor_control'],
-   ['restore_cursor()',      'cursor_control'],
+  my %two_mark_args = map { ($_ => 1) } qw(
+   capture_between capture_len_between capture_take_between
+   capture_take_between_len mark_copy
   );
-  for my $row (@representatives) {
-   my ($expression, $family) = @$row;
+  my %one_mark_arg = map { ($_ => 1) } qw(
+   capture_from capture_len_from capture_rest_from capture_rest_len_from
+   capture_take_len_from capture_take_rest_from capture_take_rest_len_from
+   capture_take_until_cursor_from capture_take_until_cursor_len_from
+   capture_until_cursor_from capture_until_cursor_len_from mark_capture_slice
+   mark_exists mark_here mark_input_end mark_input_start mark_pos
+   start_capture_slice_from clear_mark mark_col mark_entry_end
+   mark_entry_start mark_line mark_match_end mark_match_start
+  );
+  my %indexed_arg = map { ($_ => 1) } qw(entry_group match_group);
+  my %named_arg = map { ($_ => 1) } qw(entry_has entry_named match_has match_named);
+  my %projection_by_name;
+  for my $family (@{$typed_contract->{helper_projection_schema}{families}}) {
+   for my $row (@{$projection_rows->{$family}}) {
+    my ($name, $projection) = @$row;
+    $projection_by_name{$name} = $projection;
+    my $expression = $two_mark_args{$name} ? "$name(left, right)"
+     : $one_mark_arg{$name} ? "$name(probe)"
+     : $indexed_arg{$name} ? "$name(0)"
+     : $named_arg{$name} ? "$name(named)"
+     : $name eq 'capture_until_boundary' ? "$name(Boundary)"
+     : $name eq 'input_slice' ? "$name(0, 1)"
+     : "$name()";
    my $lowered = LinkedSpec::call_spec_handler_subst('Child', $expression);
    unlike(
     $lowered,
@@ -98,19 +113,20 @@ SKIP: {
    );
    like(
     $lowered,
-    qr/LinkedSpec::SourceLocation::/,
-    "$expression routes through the typed source-location core",
+    qr/LinkedSpec::SourceLocation::Runtime::\Q$projection\E\b/,
+    "$expression routes through its frozen $projection projection",
    );
+   }
   }
 
   for my $alias (@{$typed_contract->{compatibility_aliases}}) {
-   my ($name) = @$alias;
+   my ($name, $target) = @$alias;
    my $expression = "$name()";
    my $lowered = LinkedSpec::call_spec_handler_subst('Child', $expression);
    like(
     $lowered,
-    qr/LinkedSpec::SourceLocation::/,
-    "$expression retains its scalar/text compatibility result through the typed core",
+    qr/LinkedSpec::SourceLocation::Runtime::\Q$projection_by_name{$target}\E\b/,
+    "$expression retains its result through the canonical $target projection",
    );
   }
 

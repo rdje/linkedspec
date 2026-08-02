@@ -1,5 +1,33 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`FUTURE-PARITY-BACKLOG.14.2.1.2` — Perl typed-source projections): handler construction is the
+  runtime authority seam. `SpecEntry::_build_handler_preamble` normalizes match info, loads the source module,
+  creates/reuses one `input` authority, and validates the initial capture boundary. `LinkedRE::_build_match_info`
+  then propagates the authority and source id alongside the already shared mark hash, so recursive/child rules and
+  standalone generated handlers see the same immutable decoded snapshot.
+
+  `LinkedSpec::SourceLocation::Runtime` is deliberately a compatibility projection boundary, not a new public
+  value API. It constructs typed positions/direct spans for source text/length/slices, coordinates, capture
+  boundaries, mark reads/writes, and cursor checkpoints/restores, then projects the established Perl return shape.
+  `$IPOS`, `$LSPOS`, `pos`, mark buckets, and cursor stacks remain efficient scalar registers; typed validation
+  occurs before their stored values move. Regex capture groups remain copied regex snapshots and pass through
+  detached list/map wrappers. Normal nonnegative in-range `input_slice` calls materialize a typed span, while
+  negative/overrun legacy cases intentionally preserve raw Perl `substr` compatibility.
+
+  The exact catalog is a fresh literal structure on every `typed_source_projection_rows` call, preventing caller
+  mutation from altering authority. The consumer now enumerates every one of the 92 helper/projection pairs and all
+  seven aliases, as well as live and independently emitted/loaded complete named-mark execution. Its three top-level
+  and 202 nested assertions pass; all seven focused suites pass 423/423. Phase 0 initially exposed only migrated
+  emitted-text expectations (88, then one nested `entry_text` snapshot); after exact updates the standalone rerun
+  passed 1,031/1,031 in 662 seconds. The first canonical attempt then found one remaining stale exact
+  `capture_slice` expectation in the focused ActionIR suite; updating it to the typed `span_text` route restored
+  23/23. A sandboxed canonical rerun reached the process-locality oracle and was denied only because Codex's outer
+  sandbox cannot launch nested macOS `sandbox-exec`. The identical permission-authorized run passed that kernel
+  containment proof, moved-root/outside-CWD execution, every composed semantic/MCP admission, CLI 66/66 twice, RAM
+  53%, and Phase 0 1,031/1,031 in 651 seconds before `local CI gate passed`. The consumer remains unregistered and
+  the sole-facing book remains unchanged because admission, rollout promotion, and public support truth belong
+  only to `.14.2.1.3`.
+
 - 2026-08-01 (`FUTURE-PARITY-BACKLOG.14.2.1.1` — immutable Perl typed-source core):
   `LinkedSpec::SourceLocation` follows the established private-state pattern used by `SemanticSourceMap`, but keeps
   one authority over a map of opaque input identities. Construction copies and upgrades each decoded scalar string,

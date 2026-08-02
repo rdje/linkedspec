@@ -17904,6 +17904,98 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   projection and Perl runtime admission are still owned by `.14.2.1.2-.3`. Commit, brief clearing, and exact clean
   proof precede task-tree-first activation of projection leaf `.14.2.1.2`.
 
+- ID: `FUTURE-PARITY-BACKLOG.14.2.1.2`
+  Status: `signoff-complete` (2026-08-01; task-tree-first from clean `2dceb96e`, intended 142/300, no push)
+  Goal: Route every existing Perl source-boundary helper and callable alias through the immutable typed source core
+    while preserving its exact external result, absence value, mutation behavior, and live/generated identity.
+  Depends on: `.14.2.1.1`
+  Acceptance: Retrieve the runtime-rollout Knowledge card, ADR `0056`, frozen projection consumer, neutral fixture,
+    and TOOLBOX before source work. Add a detached exact 92-row
+    `LinkedSpec::ActionIR::Contracts::typed_source_projection_rows` catalog and bind the four frozen helper families
+    plus seven aliases to `LinkedSpec::SourceLocation` through the owned `ActionIR/Contracts.pm`, `RuleIR.pm`,
+    `SpecEntry.pm`, and `perl/LinkedRE.pm` seams. Preserve decoded Perl scalar registers and all current helper
+    results/absence/mutations, live versus standalone-generated execution, mark/cursor lifetimes, parser output,
+    diagnostic behavior, and generated/descriptor schemas. Make the projection consumer fully green but leave it
+    canonically unregistered until admission `.14.2.1.3`. Add no DSL/facade/public claim, schema change, semantic/
+    MCP projection, root README or mdBook support prose, runtime rollout promotion, or unrelated cleanup. Pass exact
+    focused consumers, existing source-boundary baselines, doctrines/canonical CI, synchronize durable/live records,
+    commit, clear the brief, and prove clean before `.14.2.1.3`.
+  Verification: exact 92-row/seven-alias projection consumer 3/3 and focused source/mark/cursor/generated baselines
+    423/423 pass; definitive canonical CI passes CLI 66/66 twice, RAM 53%, and Phase 0 1,031/1,031 in 651 seconds.
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.1.2 - route Perl typed source projections`
+
+  ### `FUTURE-PARITY-BACKLOG.14.2.1.2` Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — Prove immutable core `.14.2.1.1` landed cleanly at `2dceb96e` as 141/300 with
+    empty status/diffs, zero-byte brief, activation parent `c912120b`, absent generated book/non-cache bytecode,
+    and no background gate; activate this leaf as the sole task-tree diff before production work.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Retrieve canonical Knowledge/ADR/fixture/TOOLBOX authority, run the exact
+    projection RED, and map each current ActionIR lowering, handler preamble, rule mark/cursor state, child-call
+    sharing seam, and live/generated execution route without re-deriving facts already logged.
+  - [x] **FIX** — Add the exact detached 92-row catalog and the smallest typed construction/projection plumbing for
+    all four helper families and seven aliases; preserve scalar runtime registers and every external value.
+  - [x] **ADDRESSED (verified)** — Make all three projection-consumer assertions green, prove every row/alias routes
+    through the typed authority, and preserve exact live plus standalone-generated complete named-mark results.
+  - [x] **NO REGRESSION** — Pass module/test syntax, value and projection consumers, neutral typed-source,
+    mark/cursor/generated/helper baselines, capability, storage, memory, Knowledge, task metadata, all doctrines,
+    and canonical CI while leaving the consumer unregistered.
+  - [x] **LOCKSTEP** — Synchronize task/index/roadmap/architecture/change/development/live/memory and durable
+    Knowledge without changing the sole-facing mdBook or rollout 3/11 truth before admission `.14.2.1.3`.
+
+  Activation evidence 2026-08-01: immutable-core leaf `.14.2.1.1` landed at `2dceb96e` as 141/300 with no push.
+  Post-commit proof finds parent `c912120b`, empty status and staged/unstaged diffs, zero-byte
+  `git_message_brief.txt`, activation commit `c912120b` resolving to `HEAD^1`, no generated book or non-cache Python
+  bytecode, and no unconsumed canonical/doctrine/typed-source process. This task-tree file is the sole activation
+  diff; no ActionIR, RuleIR, SpecEntry, LinkedRE, test, Knowledge, roadmap, book, root README, or runtime behavior
+  changed first.
+
+  Reproduction/root-cause evidence 2026-08-01: the runtime-rollout Knowledge card, ADR `0056` section 9, complete
+  92+7 projection JSON, committed RED consumer, and TOOLBOX lowering/descriptor/generated-source commands were
+  retrieved before production inspection. The consumer exits 1 with exactly one failed assertion of three naming
+  absent `typed_source_projection_rows`. Nine representative `call_spec_handler_subst` probes lower directly to
+  `substr`, scalar arithmetic, raw mark buckets, `pos`, and the scalar cursor stack, with no typed route. A
+  descriptor probe retains canonical `MATCH_TEXT_READ`, while independently emitted source contains no
+  `LinkedSpec::SourceLocation` call. Exact source mapping finds the authority must initialize in
+  `SpecEntry::_build_handler_preamble`, propagate with match state in `LinkedRE::_build_match_info`, wrap ActionIR
+  compatibility projections in `ActionIR/Contracts.pm`, and round-trip rule-level `@mark`/anonymous-boundary writes
+  in `RuleIR.pm`/the handler emitter. Existing raw scalar registers remain the external/mutation authority;
+  capture-group text/list/map values remain owned by regex snapshots as frozen by `.14.2.0`.
+
+  Implementation evidence 2026-08-01: `SpecEntry` now creates or reuses one `input` source authority before the
+  handler initializes `$IPOS`; `LinkedRE` propagates that authority, source id, and the existing shared mark hash to
+  child matches. The source module's internal `Runtime` boundary constructs typed positions/spans for text,
+  length, offset, coordinate, capture-boundary, mark, cursor, and source projections while returning the exact
+  legacy scalar/string/list/map/boolean/absence shapes. Mark and cursor stacks intentionally remain scalar storage,
+  but every write/read crosses typed range validation. RuleIR `MOVE_POS`/`@mark`, both handler IMATCH bridges,
+  nested MethodLowering entry/match/input expressions, and all contract helper lowerings use that boundary. Normal
+  `input_slice` bounds materialize through a typed span; legacy negative/overrun Perl `substr` behavior stays an
+  explicit compatibility fallback. The exact four-family 92-row catalog is rebuilt on every call, so caller
+  mutation cannot alter canonical routing. No schema, generated-plan format, DSL/facade, registration, or public
+  support claim changed.
+
+  Focused evidence 2026-08-01: the strengthened projection consumer checks all 92 emitted projection functions,
+  all seven aliases, catalog detachment, live complete named-mark output, and independently emitted/loaded source;
+  all three top-level assertions and 202 nested assertions pass. The seven-suite source/value/mark/cursor/generated
+  group passes 423/423 in 72 seconds. The first full Phase 0 migration run exposed only 88 stale emitted-text
+  expectations; after exact baseline migration, a second run isolated one nested `entry_text` expectation, its
+  direct one-case proof passed, and the authoritative rerun passes all 1,031 top-level tests in 662 seconds. All
+  touched module/test syntax and `git diff --check` pass. The projection consumer remains intentionally outside
+  canonical registration until `.14.2.1.3`.
+
+  Signoff evidence 2026-08-01: neutral typed-source governance passes exact 3/7/6/3 value fixtures, 8+8 state
+  transitions, six recursive/four structural cases, 92+7+2 identities, 31 diagnostics, rollout 3/11, and 37
+  mutations. Capability remains schema v2 at 80/0/0 with two exclusions, 24 governance mutations, 12 governed
+  projections, and six public mutations. Knowledge Map is 785/6,389; memory, task metadata, storage, whitespace,
+  and all seven doctrines pass. The first canonical attempt exposed one stale exact `capture_slice` emitted-text
+  expectation in the focused ActionIR suite; updating it to the typed `span_text` route restored 23/23. The next
+  sandboxed run reached process-locality proof and failed only because Codex's enclosing sandbox denied nested
+  macOS `sandbox-exec` with status 71. The identical permission-authorized canonical run passes the relocated
+  six-family containment oracle, moved-root/outside-CWD execution, every composed semantic/MCP admission, CLI
+  66/66 under both default and POSIX option environments, RAM 53% against the 88% ceiling, and Phase 0
+  1,031/1,031 in 651 seconds before `local CI gate passed`. Root README, sole-facing mdBook, rollout 3/11,
+  registration, schema, DSL/facade, and public support remain unchanged. Commit, brief clearing, and exact clean
+  proof precede task-tree-first admission `.14.2.1.3`; no push.
+
 - ID: `FUTURE-PARITY-BACKLOG.14.2.2`
   Status: `pending` parent
   Goal: Implement and independently admit the same neutral typed source-location algebra in Rust.

@@ -1339,8 +1339,8 @@ subtest 'return-payload lowering consumes AST nodes before raw fallback' => sub 
     my $raw_fallback = LinkedSpec::call_spec_handler_subst('Top', q{return(\(my $capt = capture_slice()))});
     like(
         $raw_fallback,
-        qr/return \\\(my \$capt = do \{ substr\(\$\$STRING, \$IPOS, \$LSPOS - \$IPOS - length \$LMATCH\) \}\)/,
-        'raw compatibility return payloads keep the narrow helper fallback',
+        qr/return \\\(my \$capt = do \{ LinkedSpec::SourceLocation::Runtime::span_text\(\$info, \$STRING, \$IPOS, \$LSPOS - length\(\$LMATCH\), "capture_slice"\) \}\)/,
+        'raw compatibility return payloads keep the narrow typed helper fallback',
     );
     ok($parse_calls >= 2, 'return payloads entered through the AST parser');
 };

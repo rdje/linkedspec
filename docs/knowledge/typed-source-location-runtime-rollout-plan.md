@@ -22,14 +22,19 @@ answers:
   - "how does Perl keep decoded text out of typed source values"
   - "how does Perl enforce typed source value immutability"
   - "does the Perl typed source value core route ActionIR helpers yet"
+  - "where is the Perl runtime typed source authority initialized and propagated"
+  - "do Perl typed source projections replace scalar mark and cursor storage"
+  - "are all 92 Perl typed source helper projections implemented"
+  - "does Perl generated source use the same typed source projection route"
 date: 2026-08-01
-status: Perl immutable value core implemented; helper projection and runtime admission remain pending
+status: Perl immutable value core and helper projections implemented; runtime admission remains pending
 tags: [architecture, source-location, spans, cursor, helpers, perl, rust, dart, julia, lua, rollout]
 evidence: "FUTURE-PARITY-BACKLOG.14.2.0 retrieved ADR 0056, the neutral contract/checker, adjacent live-ledger contracts, TOOLBOX.md, and exact runtime source/test authorities. Perl uses decoded-string scalar offsets; Rust and Lua use UTF-8 bytes; Dart and Julia use code units. Complete named-mark consumers pass on all six runtimes. The exact contract/checker still encode completed public owners .14.1.2-.3 as pending because both leaves explicitly excluded contract changes, leaving no promotion owner. ADR 0056 section 9 and the owning task freeze the correction and implementation order."
 evidence_update_2026_08_01_public_rollout: "Correction .14.2.0.1 promotes completed public owners .14.1.2-.3, re-owners runtime admissions to .14.2.1.3-.14.2.5.3, advances current truth to 3 complete / 11 pending, and locks 37 mutations including two independent completed-to-pending regressions."
 evidence_update_2026_08_01_perl_red: "Perl authority/RED .14.2.1.0 freezes two unregistered consumers without implementation. typed_source_location_values.t requires LinkedSpec::SourceLocation authority plus immutable Position/Span/DerivedText values, coordinates/materialization, detached records, and the four value errors across all 3/7/6/3 fixtures. typed_source_location_perl_contract.t requires ActionIR::Contracts::typed_source_projection_rows, exact 92-row routing, seven aliases, and unchanged live/generated named-mark results. The first exits only for the missing module; the second has one failure naming only the missing catalog."
 evidence_update_2026_08_01_perl_core: "Perl core .14.2.1.1 adds SourceLocation.pm. Module-private authority state snapshots decoded text and precomputes scalar-boundary line/column/UTF-8-byte evidence; monotonic authority ids plus module-private value state keep Position, Span, and DerivedText records immutable and free of text/host references. The authority alone validates, derives coordinates, and materializes direct or ordered derived text. All value fixtures and four locked structured errors pass; the projection consumer still has exactly one failure for absent typed_source_projection_rows. Definitive canonical CI passes CLI 66/66 twice, RAM 47%, and Phase 0 1,031/1,031 in 633 seconds."
-reverify: "perl -Iperl -c perl/LinkedSpec/SourceLocation.pm && prove -lv t/typed_source_location_values.t && bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py && rg -n 'typed_source_projection_rows' t/typed_source_location_perl_contract.t"
+evidence_update_2026_08_01_perl_projections: "Perl projection .14.2.1.2 initializes one input authority in every SpecEntry handler, propagates it through LinkedRE child match info, and routes the exact detached 92-row/four-family catalog plus seven aliases through SourceLocation::Runtime. Typed positions/spans validate and materialize source text, coordinates, mark reads/writes, capture boundaries, and cursor operations while external scalar/string/list/map/boolean/absence results and scalar mark/cursor storage remain unchanged. RuleIR, both handler IMATCH bridges, nested MethodLowering expressions, live execution, and independently emitted/loaded source share the route. The unregistered projection consumer passes all 3 top-level and 202 nested assertions; focused baselines pass 423/423. Definitive canonical CI passes repository containment, moved-root/outside-CWD execution, composed semantic/MCP admissions, CLI 66/66 twice, RAM 53%, and Phase 0 1,031/1,031 in 651 seconds before the explicit pass marker. Admission and public support remain pending under .14.2.1.3."
+reverify: "perl -Iperl -c perl/LinkedSpec/SourceLocation.pm && perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm && prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t t/complete_named_mark_contract.t t/rule_local_cursor_perl_execution.t t/generated_source_contract.t && bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py"
 ---
 
 The canonical design remains ADR `0056`; the exact implementation plan and rollout correction live under
@@ -65,9 +70,17 @@ neither decoded text nor a live authority/parser reference. Detached `as_record`
 records. The authority alone validates, derives `coordinates`, and `materialize`s direct or ordered derived text;
 the four exact structured value errors are locked and privacy-filtered.
 
-The separate `ActionIR::Contracts::typed_source_projection_rows` interface remains absent under `.14.2.1.2`; all
-92 neutral helper rows and seven aliases therefore still await routing through the value core. Both consumers stay
-outside canonical registration until Perl admission `.14.2.1.3`, and no public support claim is current yet.
+Perl projection `.14.2.1.2` now supplies the exact detached
+`ActionIR::Contracts::typed_source_projection_rows` interface and routes all 92 neutral helper rows plus seven
+aliases through `LinkedSpec::SourceLocation::Runtime`. Every handler establishes one `input` authority before
+capture-boundary initialization; child calls reuse it through `LinkedRE` match-info propagation. Typed positions
+and spans validate/materialize source operations at the ActionIR, RuleIR, handler-bridge, nested-method, mark, and
+cursor seams, while compatibility storage and results remain the existing Perl scalars, strings, lists, maps,
+booleans, and absence values. Independently emitted/loaded source uses the same route.
+
+Both Perl consumers remain outside canonical registration until exact admission `.14.2.1.3`. The implementation
+therefore changes internal routing but still makes no public support, descriptor/schema, semantic/MCP, DSL/facade,
+or generated-plan-format claim.
 
 ## Links
 

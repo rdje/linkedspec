@@ -112,11 +112,16 @@ sub _build_handler_preamble {
  my ($label, $actual_icode) = @_;
  return
 'my ($descr, $STRING, $info) = @_;
+$info = {} unless ref($info) eq "HASH";
+require LinkedSpec::SourceLocation;
+LinkedSpec::SourceLocation::Runtime::ensure_authority($info, $STRING);
 my $IMATCH      = $$info{match};
 my @IMATCH_LIST = @{$$info{match_list} // []};
 my %IMATCH_HASH = %{$$info{match_hash} // {}};
 my $IINDEX      = $$info{index};
-my $IPOS        = pos $$STRING;
+my $IPOS        = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position(
+ $info, $STRING, pos $$STRING, "handler_entry"
+);
 $$info{marks} = {} unless ref($$info{marks}) eq "HASH";
 
 my @'.$label.';

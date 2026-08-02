@@ -452,7 +452,9 @@ sub _collect_rule_ir {
    );
   }
   elsif ($entry_type eq 'MOVE_POS') {
-   push @{$rule_ir->{code_blocks}{LECODE}}, '$IPOS = pos $$STRING';
+   push @{$rule_ir->{code_blocks}{LECODE}},
+    '$IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position('.
+    '$info, $STRING, pos $$STRING, "rule_move_pos")';
    _trace_rule_ir_decision(
     phase => 'collect',
     label => $rule_ir->{label},
@@ -471,8 +473,8 @@ sub _collect_rule_ir {
    $mark_reidx = 0 if $mark_reidx < 0;
    push @{$rule_ir->{code_blocks}{LECODE}},
     'if ($$minfo{index} == '.$mark_reidx.') { '.
-    '$$info{marks}{\''.$rule_label.'\'} = {} unless ref($$info{marks}{\''.$rule_label.'\'}) eq "HASH"; '.
-    '$$info{marks}{\''.$rule_label.'\'}{\''.$mark_name.'\'} = pos $$STRING; '.
+    'LinkedSpec::SourceLocation::Runtime::mark_write_position('.
+    '$info, $STRING, \''.$rule_label.'\', \''.$mark_name.'\', pos $$STRING, "rule_mark"); '.
     _build_mark_trace_stmt(
      operation => '@mark',
      rule_label => $rule_label,

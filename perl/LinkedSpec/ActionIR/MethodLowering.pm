@@ -4766,7 +4766,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
   $width_expr = $trim_action_ir_value->($input_slice_args->[1]) unless defined($width_expr) && length($width_expr);
   return undef unless defined($width_expr) && length($width_expr);
 
-  return 'do { my $__ls_input_slice_start = '.$start_expr.'; my $__ls_input_slice_width = '.$width_expr.'; (defined($__ls_input_slice_start) && defined($__ls_input_slice_width)) ? substr($$STRING, $__ls_input_slice_start, $__ls_input_slice_width) : undef }';
+  return 'do { my $__ls_input_slice_start = '.$start_expr.'; my $__ls_input_slice_width = '.$width_expr.'; LinkedSpec::SourceLocation::Runtime::source_slice_text($info, $STRING, $__ls_input_slice_start, $__ls_input_slice_width, "input_slice") }';
  }
  if ($method_call && $method_call->{method} eq 'entry_text') {
   my $entry_text_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 0, 0);
@@ -4774,24 +4774,24 @@ my $lower_numeric_array_reducer_source_expr = sub {
   return $trimmed
    if ref($deps->{__user_function_call_stack}) eq 'ARRAY'
    && @{$deps->{__user_function_call_stack}};
-  return 'do { $IMATCH }';
+  return 'do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef }';
  }
  if ($method_call && $method_call->{method} eq 'entry_group') {
   my $entry_group_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
   return undef unless $entry_group_args;
   my $index = $trim_action_ir_value->($entry_group_args->[0]);
   return undef unless defined($index) && $index =~ /^\d+$/o;
-  return 'do { scalar(@IMATCH_LIST) > '.$index.' ? $IMATCH_LIST['.$index.'] : undef }';
+  return 'do { LinkedSpec::SourceLocation::Runtime::capture_group_text(scalar(@IMATCH_LIST) > '.$index.' ? $IMATCH_LIST['.$index.'] : undef) }';
  }
  if ($method_call && $method_call->{method} eq 'entry_groups') {
   my $entry_groups_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 0, 0);
   return undef unless $entry_groups_args;
-  return 'do { [@IMATCH_LIST] }';
+  return 'do { LinkedSpec::SourceLocation::Runtime::capture_group_list([@IMATCH_LIST]) }';
  }
  if ($method_call && ($method_call->{method} eq 'entry_map' || $method_call->{method} eq 'entry_named_map')) {
   my $entry_map_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 0, 0);
   return undef unless $entry_map_args;
-  return 'do { +{%IMATCH_HASH} }';
+  return 'do { LinkedSpec::SourceLocation::Runtime::capture_group_map(+{%IMATCH_HASH}) }';
  }
  if ($method_call && $method_call->{method} eq 'match_text') {
   my $match_text_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 0, 0);
@@ -4799,24 +4799,24 @@ my $lower_numeric_array_reducer_source_expr = sub {
   return $trimmed
    if ref($deps->{__user_function_call_stack}) eq 'ARRAY'
    && @{$deps->{__user_function_call_stack}};
-  return 'do { $LMATCH }';
+  return 'do { defined($LMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $LSPOS - length($LMATCH), $LSPOS, "match_text") : undef }';
  }
  if ($method_call && $method_call->{method} eq 'match_group') {
   my $match_group_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
   return undef unless $match_group_args;
   my $index = $trim_action_ir_value->($match_group_args->[0]);
   return undef unless defined($index) && $index =~ /^\d+$/o;
-  return 'do { scalar(@LMATCH_LIST) > '.$index.' ? $LMATCH_LIST['.$index.'] : undef }';
+  return 'do { LinkedSpec::SourceLocation::Runtime::capture_group_text(scalar(@LMATCH_LIST) > '.$index.' ? $LMATCH_LIST['.$index.'] : undef) }';
  }
  if ($method_call && $method_call->{method} eq 'match_groups') {
   my $match_groups_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 0, 0);
   return undef unless $match_groups_args;
-  return 'do { [@LMATCH_LIST] }';
+  return 'do { LinkedSpec::SourceLocation::Runtime::capture_group_list([@LMATCH_LIST]) }';
  }
  if ($method_call && ($method_call->{method} eq 'match_map' || $method_call->{method} eq 'match_named_map')) {
   my $match_map_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 0, 0);
   return undef unless $match_map_args;
-  return 'do { +{%LMATCH_HASH} }';
+  return 'do { LinkedSpec::SourceLocation::Runtime::capture_group_map(+{%LMATCH_HASH}) }';
  }
  if ($method_call && $method_call->{method} eq 'trim') {
   my $trim_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);

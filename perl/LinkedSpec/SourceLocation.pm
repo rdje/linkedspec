@@ -405,6 +405,262 @@ sub DESTROY {
 }
 
 #------------------------------------------------------------------------------
+# Package: LinkedSpec::SourceLocation::Runtime
+# Purpose: Project existing Perl helper results through immutable typed source
+#          values while retaining the reference runtime's scalar registers.
+#------------------------------------------------------------------------------
+package LinkedSpec::SourceLocation::Runtime;
+
+use 5.010;
+use strict;
+use warnings;
+
+my $INPUT_SOURCE_ID = 'input';
+
+sub ensure_authority {
+ my ($info, $string_ref) = @_;
+ _runtime_error('runtime match info must be a hash reference') unless ref($info) eq 'HASH';
+ _runtime_error('runtime input must be a scalar reference') unless ref($string_ref) eq 'SCALAR';
+
+ my $authority = $info->{source_location};
+ unless (
+  Scalar::Util::blessed($authority)
+  && $authority->isa('LinkedSpec::SourceLocation')
+ ) {
+  $authority = LinkedSpec::SourceLocation->new(
+   sources => {$INPUT_SOURCE_ID => $$string_ref},
+  );
+  $info->{source_location} = $authority;
+  $info->{source_location_source_id} = $INPUT_SOURCE_ID;
+ }
+ return $authority
+}
+
+sub _authority_and_source_id {
+ my ($info, $string_ref) = @_;
+ my $authority = ensure_authority($info, $string_ref);
+ my $source_id = $info->{source_location_source_id};
+ $source_id = $INPUT_SOURCE_ID
+  unless defined($source_id) && !ref($source_id) && length($source_id);
+ return ($authority, "$source_id")
+}
+
+sub _position {
+ my ($info, $string_ref, $offset, $provenance) = @_;
+ my ($authority, $source_id) = _authority_and_source_id($info, $string_ref);
+ return $authority->position(
+  source_id => $source_id,
+  offset    => $offset,
+  context   => {
+   rule_role       => defined($provenance) ? $provenance : '',
+   invocation_role => 'compatibility_projection',
+  },
+ )
+}
+
+sub _span {
+ my ($info, $string_ref, $start, $end, $provenance) = @_;
+ my ($authority) = _authority_and_source_id($info, $string_ref);
+ return (
+  $authority,
+  $authority->direct_span(
+   start      => _position($info, $string_ref, $start, $provenance),
+   end        => _position($info, $string_ref, $end, $provenance),
+   provenance => defined($provenance) && length($provenance)
+    ? $provenance
+    : 'compatibility_projection',
+   context => {
+    rule_role       => defined($provenance) ? $provenance : '',
+    invocation_role => 'compatibility_projection',
+   },
+  ),
+ )
+}
+
+sub position_offset {
+ my ($info, $string_ref, $offset, $provenance) = @_;
+ return undef unless defined($offset);
+ return _position($info, $string_ref, $offset, $provenance)->as_record->{offset}
+}
+
+sub position_line {
+ my ($info, $string_ref, $offset, $provenance) = @_;
+ return undef unless defined($offset);
+ my ($authority) = _authority_and_source_id($info, $string_ref);
+ return $authority->coordinates(
+  _position($info, $string_ref, $offset, $provenance),
+ )->{line}
+}
+
+sub position_column {
+ my ($info, $string_ref, $offset, $provenance) = @_;
+ return undef unless defined($offset);
+ my ($authority) = _authority_and_source_id($info, $string_ref);
+ return $authority->coordinates(
+  _position($info, $string_ref, $offset, $provenance),
+ )->{column}
+}
+
+sub span_text {
+ my ($info, $string_ref, $start, $end, $provenance) = @_;
+ my ($authority, $span) = _span($info, $string_ref, $start, $end, $provenance);
+ return $authority->materialize($span)
+}
+
+sub span_length {
+ my ($info, $string_ref, $start, $end, $provenance) = @_;
+ my (undef, $span) = _span($info, $string_ref, $start, $end, $provenance);
+ my $record = $span->as_record;
+ return $record->{end} - $record->{start}
+}
+
+sub span_start_offset {
+ my ($info, $string_ref, $start, $end, $provenance) = @_;
+ my (undef, $span) = _span($info, $string_ref, $start, $end, $provenance);
+ return $span->as_record->{start}
+}
+
+sub span_start_line {
+ my ($info, $string_ref, $start, $end, $provenance) = @_;
+ my (undef, $span) = _span($info, $string_ref, $start, $end, $provenance);
+ return position_line($info, $string_ref, $span->as_record->{start}, $provenance)
+}
+
+sub span_start_column {
+ my ($info, $string_ref, $start, $end, $provenance) = @_;
+ my (undef, $span) = _span($info, $string_ref, $start, $end, $provenance);
+ return position_column($info, $string_ref, $span->as_record->{start}, $provenance)
+}
+
+sub source_text {
+ my ($info, $string_ref, $provenance) = @_;
+ return span_text($info, $string_ref, 0, length($$string_ref), $provenance)
+}
+
+sub source_length {
+ my ($info, $string_ref, $provenance) = @_;
+ return position_offset($info, $string_ref, length($$string_ref), $provenance)
+}
+
+sub source_slice_text {
+ my ($info, $string_ref, $start, $width, $provenance) = @_;
+ return undef unless defined($start) && defined($width);
+ my $source_length = length($$string_ref);
+ if (
+  !ref($start) && !ref($width)
+  && $start =~ /\A(?:0|[1-9][0-9]*)\z/
+  && $width =~ /\A(?:0|[1-9][0-9]*)\z/
+  && $start <= $source_length
+  && $width <= $source_length - $start
+ ) {
+  return span_text($info, $string_ref, $start, $start + $width, $provenance)
+ }
+ return substr($$string_ref, $start, $width)
+}
+
+sub capture_group_text {
+ my ($value) = @_;
+ return $value
+}
+
+sub capture_group_list {
+ my ($values) = @_;
+ return ref($values) eq 'ARRAY' ? [@$values] : []
+}
+
+sub capture_group_map {
+ my ($values) = @_;
+ return ref($values) eq 'HASH' ? {%$values} : {}
+}
+
+sub capture_group_exists {
+ my ($exists) = @_;
+ return $exists ? 1 : 0
+}
+
+sub capture_boundary_write_position {
+ my ($info, $string_ref, $offset, $provenance) = @_;
+ return position_offset($info, $string_ref, $offset, $provenance)
+}
+
+sub mark_write_position {
+ my ($info, $string_ref, $rule_label, $mark_name, $offset, $provenance) = @_;
+ my $validated = position_offset($info, $string_ref, $offset, $provenance);
+ $info->{marks} = {} unless ref($info->{marks}) eq 'HASH';
+ $info->{marks}{$rule_label} = {} unless ref($info->{marks}{$rule_label}) eq 'HASH';
+ $info->{marks}{$rule_label}{$mark_name} = $validated;
+ return $validated
+}
+
+sub mark_delete {
+ my ($info, $rule_label, $mark_name) = @_;
+ delete $info->{marks}{$rule_label}{$mark_name}
+  if ref($info) eq 'HASH'
+   && ref($info->{marks}) eq 'HASH'
+   && ref($info->{marks}{$rule_label}) eq 'HASH';
+ return undef
+}
+
+sub mark_exists {
+ my ($info, $rule_label, $mark_name) = @_;
+ return 0 unless ref($info) eq 'HASH'
+  && ref($info->{marks}) eq 'HASH'
+  && ref($info->{marks}{$rule_label}) eq 'HASH';
+ return exists($info->{marks}{$rule_label}{$mark_name}) ? 1 : 0
+}
+
+sub mark_read_offset {
+ my ($info, $string_ref, $rule_label, $mark_name, $provenance) = @_;
+ return undef unless mark_exists($info, $rule_label, $mark_name);
+ return position_offset(
+  $info,
+  $string_ref,
+  $info->{marks}{$rule_label}{$mark_name},
+  $provenance,
+ )
+}
+
+sub mark_read_line {
+ my ($info, $string_ref, $rule_label, $mark_name, $provenance) = @_;
+ my $offset = mark_read_offset($info, $string_ref, $rule_label, $mark_name, $provenance);
+ return undef unless defined($offset);
+ return position_line($info, $string_ref, $offset, $provenance)
+}
+
+sub mark_read_column {
+ my ($info, $string_ref, $rule_label, $mark_name, $provenance) = @_;
+ my $offset = mark_read_offset($info, $string_ref, $rule_label, $mark_name, $provenance);
+ return undef unless defined($offset);
+ return position_column($info, $string_ref, $offset, $provenance)
+}
+
+sub cursor_position {
+ my ($info, $string_ref, $offset, $provenance) = @_;
+ return position_offset($info, $string_ref, $offset, $provenance)
+}
+
+sub cursor_checkpoint_compatibility {
+ my ($info, $string_ref, $offset, $provenance) = @_;
+ my $validated = position_offset($info, $string_ref, $offset, $provenance);
+ $info->{cursor_stack} = [] unless ref($info->{cursor_stack}) eq 'ARRAY';
+ push @{$info->{cursor_stack}}, $validated;
+ return undef
+}
+
+sub cursor_state_write_compatibility {
+ my ($info, $string_ref, $offset, $provenance) = @_;
+ return undef unless defined($offset);
+ my $validated = position_offset($info, $string_ref, $offset, $provenance);
+ pos($$string_ref) = $validated;
+ return $validated
+}
+
+sub _runtime_error {
+ my ($detail) = @_;
+ die "(LinkedSpec::SourceLocation::Runtime) -E- $detail\n"
+}
+
+#------------------------------------------------------------------------------
 # Package: LinkedSpec::SourceLocation::Error
 # Purpose: Structured privacy-preserving immutable-value validation failure.
 #------------------------------------------------------------------------------

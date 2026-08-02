@@ -22,8 +22,13 @@ sub _build_match_info {
      match_list => [grep {defined} map {eval "\$$_"} 1 .. scalar @+],
      match_hash => {%+},
     };
- if (ref($parent_info) eq 'HASH' && ref($parent_info->{marks}) eq 'HASH') {
-  $info->{marks} = $parent_info->{marks};
+ if (ref($parent_info) eq 'HASH') {
+  $info->{marks} = $parent_info->{marks} if ref($parent_info->{marks}) eq 'HASH';
+  $info->{source_location} = $parent_info->{source_location}
+   if ref($parent_info->{source_location});
+  $info->{source_location_source_id} = $parent_info->{source_location_source_id}
+   if defined($parent_info->{source_location_source_id})
+    && !ref($parent_info->{source_location_source_id});
  }
  return $info
 }

@@ -815,7 +815,9 @@ sub _emit_and_bcode_handler {
    @IMATCH_LIST = @LMATCH_LIST;
    %IMATCH_HASH = %LMATCH_HASH;
    $IINDEX      = $LINDEX;
-   $IPOS        = $LSPOS;
+   $IPOS        = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position(
+    $info, $STRING, $LSPOS, "and_imatch_bridge"
+   );
 
    ' . $transformed . ';
 
@@ -930,7 +932,9 @@ sub _emit_and_single_acode_handler {
    @IMATCH_LIST = @LMATCH_LIST;
    %IMATCH_HASH = %LMATCH_HASH;
    $IINDEX      = $LINDEX;
-   $IPOS        = $LSPOS;
+   $IPOS        = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position(
+    $info, $STRING, $LSPOS, "and_imatch_bridge"
+   );
 
    ' . $transformed . ';
 
