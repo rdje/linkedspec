@@ -1,5 +1,45 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`FUTURE-PARITY-BACKLOG.14.2.0` — typed-value rollout audit/plan): the executable rollout is a live
+  admission ledger. Its JSON rows, checker-side `ROLLOUT`, reported complete/pending totals, and adjacent governed
+  contracts all promote completed owners. Public `.14.1.2` intentionally excluded the contract and no-change
+  `.14.1.3` required it unchanged, so both could close while `public_structure` and
+  `neutral_public_recomposition` stayed pending. The only rollout mutation tested pending-to-complete drift, not
+  completed-to-pending regression. Behavior-free correction `.14.2.0.1` therefore owns both promotions, two
+  independent stale-status mutations, 37 total mutations, 3/11 status, the stale Knowledge/status projections,
+  and exact runtime owners `.14.2.1.3-.14.2.5.3`.
+
+  Runtime source authority is heterogeneous but already exact. Perl's decoded strings use scalar offsets in
+  `$IPOS`, `pos $$STRING`, match registers, rule-local mark buckets, and cursor stack. Rust and Lua use UTF-8 byte
+  registers. Dart and Julia use host code-unit registers. The latter four already convert user-visible offsets and
+  locations to Unicode scalars. Generated/emitted source identity in those engines identifies a spec artifact, not
+  the caller's decoded input. Focused complete-named-mark consumers pass on Perl, Rust, Dart, Julia, PUC Lua, and
+  LuaJIT; Lua's complete package passes 177/177 on each ABI.
+
+  The implementation keeps those host registers and creates one separate per-input source authority mapping an
+  opaque `source_id` to decoded immutable text. Position is identity+scalar offset; direct span is identity+
+  scalar start/end+provenance; derived text is an ordered immutable span list with explicit
+  `concatenate_in_order`. Only the authority validates, converts, slices, and materializes. Values embed no text,
+  path, regex/parser state, or host reference. Existing 92+7 helper calls construct/project these values internally
+  while retaining output shapes, absence, scope, mutation timing, capture groups, and save/restore compatibility.
+
+  `.14.2` owns only source mismatch, out-of-range position, reversed span, and invalid derived provenance. Mark
+  lifetime, transactions, recursion/progress, gaps, and span dispatch remain `.14.3-.7`. No DSL spelling, facade,
+  descriptor/schema, semantic/MCP response, parse-result shape, generated-family identity, or span dispatch is
+  selected. Backend parents each run RED, immutable core, compatibility projection, and exact admission commits;
+  native and unchanged loaded generated/serialized/emitted plans must share the same interpreter route. The exact
+  files, tests, runtime ordering, storage routing, and final recurring owner are frozen in the task tree and ADR
+  `0056` section 9. The nonurgent mdBook readability tree remains queued without a pivot.
+
+  Focused signoff preserves typed-source counts 3/7/6/3, 8+8, 6/4, 92+7+2, 31 diagnostics, 1/13 rollout, and 36
+  mutations; complete-named-mark consumers pass on all six runtimes and shared Lua passes 177/177 on each ABI.
+  Knowledge Map 785/6,375 and all seven doctrines pass. The first canonical attempt exposed an accidental removal
+  of exact `.24.2` task-index projections; restoring them returned capability schema v2 / 80-0-0 / 24+6 to green.
+  The sandboxed rerun then reached relocated execution and failed solely at the environment's nested macOS
+  `sandbox-exec` denial (status 71). Its definitive permission-authorized rerun passes containment, moved-root/
+  outside-CWD, semantic/MCP admission, CLI 66x2, RAM 56%, and Phase 0 1,031/1,031 in 657 seconds before the local
+  gate passes. No contract/checker, runtime, schema/helper, root README, or book source changed.
+
 - 2026-08-01 (`FUTURE-PARITY-BACKLOG.14.1.3` — no-change typed source-location recomposition): clean activation
   from `336781d6` re-ran the independent v1 checker at exact 3/7/6/3, 8+8, 6/4, 92+7+2, 31, 1/13, and 36 counts.
   The contract, checker, all six public teaching pages, runtime/schema/helper sources, and root README stayed

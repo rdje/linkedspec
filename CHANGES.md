@@ -1,5 +1,21 @@
 # CHANGES
 
+## 2026-08-01 — FUTURE-PARITY-BACKLOG.14.2.0 — freeze typed value rollout plan
+
+- Root-caused a live-ledger contradiction before implementation: completed public owners `.14.1.2-.3` remained
+  `pending` because each leaf explicitly excluded contract changes, while the checker treated rollout status as
+  exact live admission state. Correction `.14.2.0.1` now owns 3/11 truth, two independent stale-status guards, and
+  exact runtime admission owners; this planning slice changes neither the ledger nor behavior.
+- Froze one separate decoded-source authority plus immutable position, direct-span, and derived-text values.
+  Backends retain efficient scalar/byte/code-unit registers and convert at the typed boundary. All 92 canonical
+  helpers and seven aliases preserve current strings, numbers, collections, absence values, and mutation timing.
+- Froze RED/core/projection/admission children for Perl, Rust, Dart, Julia, and shared dual-ABI Lua, exact module/
+  consumer paths, four value diagnostics, generated-identity/schema exclusions, repository-local recurrence, and
+  sole-facing support synchronization. Added the durable ADR amendment and question-keyed Knowledge card.
+- Kept `MDBOOK-RENDERED-READABILITY` durably queued and nonurgent; no book source is changed by this plan.
+- Passed focused six-runtime proof, Knowledge Map 785/6,375, all seven doctrines, and definitive canonical CI:
+  CLI 66x2, RAM 56%, and Phase 0 1,031/1,031 in 657 seconds. No executable or sole-facing book artifact changed.
+
 ## 2026-08-01 — FUTURE-PARITY-BACKLOG.14.1.3 — close typed source-location contract
 
 - Re-composed the committed neutral typed source-location contract/checker and sole-facing linked-rule teaching

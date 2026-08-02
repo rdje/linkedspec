@@ -1,5 +1,29 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-01 — Typed source value and projection rollout is implementation-frozen
+
+`FUTURE-PARITY-BACKLOG.14.2.0` is signoff-complete from clean `0d1b7378` (intended 136/300; no push). Exact toolbox,
+source, and focused runtime consumers establish the current Perl scalar, Rust/Lua byte, and Dart/Julia code-unit
+authorities plus unchanged text/number/null helper results. One separate decoded-source authority and immutable
+position/direct-span/derived-text value graph now govern all backend children without replacing efficient host
+registers, selecting DSL syntax, or changing descriptor/semantic/generated identities.
+
+The audit root-caused stale executable rollout truth: `.14.1.2-.3` completed under explicit no-contract rules, so
+their public rows remained pending even though rollout is live admission state. Correction `.14.2.0.1` owns 3/11
+truth, two independent stale-status guards, exact runtime admission owners, and all status/Knowledge/public
+projections before Perl RED. Five backend parents each own audit/RED, core, projection, and admission commits;
+shared Lua runs unchanged on both ABIs, then one rooted recurring driver composes six runtimes.
+
+This leaf changes planning/decision/retrieval/continuity surfaces only. Contract/checker, runtimes, schemas,
+helpers, root README, and sole-facing book remain unchanged. The comprehensive `MDBOOK-RENDERED-READABILITY`
+audit stays durably queued, nonurgent, and independent.
+
+Focused proof preserves the executable contract at exact 3/7/6/3, 8+8, 6/4, 92+7+2, 31 diagnostics, 1/13
+rollout, and 36 mutations; all six complete-named-mark consumers and Lua 177/177x2 pass. Knowledge Map 785/6,375
+and all seven doctrines pass. The definitive canonical rerun passes containment, moved-root/outside-CWD,
+semantic/MCP admissions, CLI 66x2, RAM 56%, and Phase 0 1,031/1,031 in 657 seconds before `local CI gate passed`.
+Commit, brief clearing, and exact clean proof precede task-first activation of correction `.14.2.0.1`.
+
 ## 2026-08-01 — Typed source-location neutral contract is composition-closed
 
 `FUTURE-PARITY-BACKLOG.14.1.3` is signoff-complete from clean `336781d6` (intended 135/300; no push), closing

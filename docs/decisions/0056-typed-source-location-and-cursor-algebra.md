@@ -1,7 +1,8 @@
 # ADR 0056: Typed source-location algebra governs cursor, spans, and parser composition
 
 - Date: 2026-07-29
-- Status: accepted direction; executable contract and implementation pending under `FUTURE-PARITY-BACKLOG.14.1-.8`
+- Status: accepted; neutral/public contract complete, six-runtime value/projection plan frozen, implementation
+  pending under `FUTURE-PARITY-BACKLOG.14.2-.8`
 - Tags: architecture, cursor, source-location, spans, capture, recursion, parser-composition, diagnostics, portability
 
 ## Context
@@ -142,6 +143,53 @@ Later leaves implement and admit Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT in
 and public no-drift proof. Generated/emitted/reconstructed/descriptor/trace/semantic projections change only in
 explicitly owned descendant leaves if the neutral contract proves they need a new version.
 
+### 9. Freeze the runtime value and compatibility-projection boundary
+
+`FUTURE-PARITY-BACKLOG.14.2.0` fixes the implementation boundary before any backend behavior moves.
+
+Each runtime has one source authority that owns the mapping from an opaque, caller-authorized source identity to
+the immutable decoded input. The value graph does not own that text:
+
+- a position is only source identity plus a zero-based Unicode-scalar offset;
+- a direct span is only source identity, scalar start/end offsets, and one provenance label; and
+- derived text is policy `concatenate_in_order` plus an immutable ordered sequence of direct spans.
+
+The source authority is the sole owner of bounds/source/order validation, one-based line/column and UTF-8 byte
+derivation, direct slicing, and explicit derived-text materialization. Positions and spans never embed copied
+text, paths, match objects, mutable parser state, or host-language references. This separation prevents a value
+from becoming ambient read authority and lets several immutable values share one decoded source safely.
+
+Backends retain their proven internal indexing units: Perl decoded-string registers use scalar offsets; Rust and
+Lua use UTF-8 byte offsets; Dart and Julia use host code-unit offsets. Exact conversion occurs at the typed-value
+boundary. Replacing every live cursor register with scalar offsets would add churn without improving the portable
+contract; exposing those host units would violate it.
+
+The current 92 canonical source-boundary helpers and seven callable aliases project through this algebra but keep
+their existing external values and mutation behavior. Text helpers still return text, length/offset helpers return
+numbers, location helpers return one-based line/column, capture-group helpers retain their current collection and
+absence shapes, and cursor controls retain their statement/compatibility results. Anonymous-boundary and mark
+writes create positions internally without changing rule-local scope or update timing. `save_cursor` and
+`restore_cursor` remain compatibility controls; they do not pre-admit the transaction state machine in section 3.
+
+Only four diagnostics are owned by the immutable-value slice: `source_location_source_mismatch`,
+`source_location_position_out_of_range`, `source_location_reversed_span`, and
+`source_location_invalid_derived_provenance`. Mark lifetime, transaction, recursion/progress, gap, and span-dispatch
+diagnostics remain owned by `.14.3-.7`; implementation must not claim them early.
+
+The native value modules are backend runtime-support surfaces used by engine code and exact conformance tests.
+They do not select authored DSL spellings or promise top-level facade methods named `Position` or `Span`. Input
+source identity is also distinct from the existing generated-spec artifact identity used by generated/emitted
+trace families. Descriptor schemas, generated-family identity, semantic/MCP responses, parse-result shapes, and
+span-native parser dispatch remain unchanged in `.14.2` unless a separately owned descendant first proves that a
+version change is required.
+
+Implementation is ordered Perl, Rust, Dart, Julia, then shared Lua on PUC Lua and LuaJIT. Every backend first lands
+an exact failing neutral consumer, then its immutable core, then compatibility projections, and only then a
+composed admission that binds the consumer and promotes that backend's live rollout row. Native and unchanged
+loaded generated/serialized/emitted plans converge on the same interpreter routes; admission is not inferred from
+one execution carrier. A final repository-routed recurring driver composes all six runtimes before `.14.2`
+closeout, while `.14.8` retains final program-wide examples, tooling, and no-drift ownership.
+
 ## Consequences
 
 - Cursor control, capture, recursion, segmentation, and parser composition share one precise model instead of
@@ -155,6 +203,8 @@ explicitly owned descendant leaves if the neutral contract proves they need a ne
 - Lossless gap capture gains the common typed representation it anticipated while retaining its separate owner.
 - This decision changes no grammar, helper, parser/compiler/runtime, descriptor, generated format, semantic/MCP
   response, primary CLI, rollout, admission, or current public feature-completeness claim.
+- The `.14.2.0` planning amendment changes no behavior itself; its exact backend module/test seams and rollout
+  correction are durable in the owning task-tree and Knowledge card.
 
 ## Links
 

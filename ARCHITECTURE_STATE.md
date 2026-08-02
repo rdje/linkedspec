@@ -1,5 +1,24 @@
 # ARCHITECTURE STATE
 
+- `2026-08-01 typed source-location runtime rollout plan`: behavior-free
+  `FUTURE-PARITY-BACKLOG.14.2.0` freezes the implementation seam before backend code. One source authority owns
+  opaque input identity to decoded text; immutable positions carry identity+scalar offset, direct spans add
+  scalar end+provenance, and derived text owns ordered spans plus explicit concatenation policy. Values contain no
+  text, path, match/parser state, or host reference. Perl retains scalar registers, Rust/Lua retain UTF-8 bytes,
+  and Dart/Julia retain code units; conversion occurs only at the typed boundary. The current 92 helpers plus seven
+  aliases keep their value/absence/mutation contracts while projecting through this core. Only four value
+  diagnostics belong to `.14.2`; syntax, transactions, recursion/progress, gaps, span dispatch, descriptor/schema,
+  generated identity, semantic/MCP, and parse results remain excluded.
+
+  The same audit proves rollout is live admission state and root-causes stale public rows: `.14.1.2` explicitly
+  excluded contract edits and `.14.1.3` required the artifact unchanged, so completed `public_structure` and
+  `neutral_public_recomposition` remained pending with no promotion owner. `.14.2.0.1` now owns exact 3/11 truth,
+  independent regressions for both rows, status/Knowledge/book alignment, and runtime row re-ownership to precise
+  admission leaves. Perl, Rust, Dart, Julia, and shared dual-ABI Lua then each run RED/core/projection/admission
+  commits before one rooted six-runtime recurrence. This plan changes no executable artifact or sole-facing book;
+  the nonurgent comprehensive readability audit remains queued. Signoff passes Knowledge Map 785/6,375, all seven
+  doctrines, six-runtime focused baselines, CLI 66x2, RAM 56%, and Phase 0 1,031/1,031 in 657 seconds.
+
 - `2026-08-01 typed source-location contract composition closure`: `FUTURE-PARITY-BACKLOG.14.1.3` independently
   recomposes the committed neutral v1 contract/checker and linked-rule public teaching unchanged, closing parent
   `.14.1`. Exact 3/7/6/3 fixtures, 8+8 transitions, six recursive/four structural cases, 92+7+2 identities, 31

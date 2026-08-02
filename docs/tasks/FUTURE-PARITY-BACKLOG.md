@@ -17522,9 +17522,222 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   Commit: `FUTURE-PARITY-BACKLOG.14.1.3 - close typed source location contract`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2`
-  Status: `pending`
+  Status: `active` (2026-08-01; split task-tree-first from clean `0d1b7378`, 135/300, no push)
   Goal: Implement immutable position/span/provenance values and current-helper projections in the Perl reference,
     then admit the same neutral contract independently in Rust, Dart, Julia, PUC Lua, and LuaJIT.
+  Children: `.14.2.0`, `.14.2.0.1`, `.14.2.1-.14.2.7`; backend parents `.14.2.1-.5` each own audit, core,
+    projection/route, and admission children.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.0`
+  Status: `done` (2026-08-01; signoff-complete from clean `0d1b7378`; intended 136/300, no push)
+  Goal: Resolve the typed-source rollout-ledger contradiction and freeze the dependency-complete six-runtime
+    immutable-value/helper-projection implementation plan before behavior code.
+  Depends on: `.14.1.3`
+  Acceptance: Retrieve ADR `0056`, the typed-source Knowledge card, contract/checker, and adjacent live-ledger
+    precedents before re-derivation. Root-cause why completed owners `.14.1.2-.3` remain `pending` in the executable
+    rollout and why the Knowledge card still says public teaching is pending; decide and evidence whether rollout is
+    immutable planning data or live admission state. Use LinkedSpec toolbox and exact backend source/test probes to
+    freeze immutable position/span/provenance representation, current-helper projection compatibility, public/API
+    boundary, generated/descriptor/semantic exclusions, diagnostics, per-backend admissions, recurring topology,
+    RED-first tests, storage, and child dependencies. Change no runtime, contract/checker, public book, or root README.
+
+  ### `FUTURE-PARITY-BACKLOG.14.2.0` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove `.14.1.3` landed cleanly at `0d1b7378` as 135/300 with no
+    push, empty status/diffs, zero-byte brief, synchronized Knowledge Map, absent generated book/non-cache
+    bytecode, and no unconsumed background result before activating this task-tree-first audit.
+  - [x] **ROOT-CAUSE ROLLOUT TRUTH** — Compare the contract/checker and `.14.1` history with adjacent live-ledger
+    precedents, reproduce the stale public-leg acceptance, and freeze the correction owner without guessing.
+  - [x] **TOOLBOX-LED RUNTIME AUTHORITY AUDIT** — Establish each backend's current source/cursor/capture value
+    representation and helper result shape through documented probes plus source/test anchors before design.
+  - [x] **FREEZE VALUE / PROJECTION CONTRACT** — Specify immutable source/position/span/provenance runtime shapes,
+    validation/slicing/conversion ownership, helper compatibility rules, diagnostics, and exclusions without
+    selecting uncontracted DSL syntax or breaking existing scalar/text results silently.
+  - [x] **FREEZE SIX-RUNTIME ADMISSION PLAN** — Specify exact RED fixtures, backend children, composed consumers,
+    rollout promotions, recurring driver, canonical opt-in, public/live synchronization, and project-local storage.
+  - [x] **VERIFY / COMMIT / CLEAN** — Update only task/decision/Knowledge/status planning surfaces warranted by the
+    audit, run complete non-behavior gates, commit, clear the brief, and prove clean before `.14.2.0.1` correction.
+
+  Activation finding 2026-08-01: clean `.14.1.3` commit `0d1b7378` composition-closes public owners `.14.1.2-.3`,
+  yet `typed_source_location_contract.json` and its checker still require those two rollout legs as `pending`, the
+  checker reports only 1 complete / 13 pending, `capability_conformance/README.md` repeats that claim, and the
+  canonical Knowledge card still says public teaching is pending. The discrepancy is non-routine and potentially
+  foundational because adjacent neutral contracts treat rollout as live admission state. This leaf owns root-cause
+  and an evidence-bound correction plan before any `.14.2` runtime implementation.
+
+  Activation evidence 2026-08-01: `.14.1.3` landed at `0d1b7378` as 135/300 with no push. Its post-commit handoff
+  had empty status and staged/unstaged diffs, a zero-byte untracked brief, synchronized Knowledge Map 784/6,363,
+  no generated book or non-cache Python bytecode, and no background result. This audit was then activated by the
+  sole task-tree diff from that clean boundary; no runtime, contract, checker, README, or book file moved first.
+
+  Rollout root cause 2026-08-01: rollout is live admission state, not immutable planning metadata. The contract
+  serializes exact status/owner/runtime rows, the checker compares those rows byte-semantically through `ROLLOUT`,
+  reports current complete/pending totals, and adjacent governed contracts promote the same kind of rows as their
+  owners land. `.14.1.2` deliberately excluded the contract while completing `public_structure`; `.14.1.3`
+  deliberately required the contract unchanged while completing `neutral_public_recomposition`. Those two local
+  no-contract rules left no owner for the mandatory promotions, and the sole rollout mutation only proved that a
+  pending row could not become complete early. The checker therefore accepted stale pending state after both
+  owners actually closed. Correction `.14.2.0.1` must promote those two rows independently, report 3 complete / 11
+  pending, replace the one early-completion mutation with two independent completed-to-pending regressions (37
+  total), update every exact 1/13 status projection and the existing Knowledge card, and re-owner the five pending
+  runtime legs to their exact admission leaves `.14.2.1.3-.14.2.5.3`. Runtime behavior remains unchanged.
+
+  Runtime authority evidence 2026-08-01: `TOOLBOX.md` was read in full before exact source and focused consumer
+  probes. Perl uses decoded-string scalar offsets in `$IPOS`, `pos $$STRING`, match registers, rule-local mark
+  buckets, and a shared cursor stack; `ActionIR/Contracts.pm` currently lowers helpers to `substr`, `length`, and
+  line/column expressions. `LinkedRE::_build_match_info` propagates the mark authority to child calls. Rust and
+  shared Lua keep cursor, match, capture, mark, and cursor-stack offsets as UTF-8 bytes. Dart and Julia keep those
+  registers as host code-unit offsets. All four non-Perl interpreters already convert public offsets/line/column to
+  Unicode-scalar coordinates and return ordinary text/number/null values. Their `generated_source_identity` or
+  `source_identity` fields identify generated spec artifacts and are not input-source identities. The exact
+  complete-named-mark consumer passes on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; the complete Lua package is
+  177/177 on both ABIs. This proves the current compatibility baseline and the conversion seams without inferring
+  behavior from `.spec` text.
+
+  Frozen value/projection boundary 2026-08-01: each backend gets one runtime-internal source authority that owns
+  the mapping from an opaque caller-authorized `source_id` to immutable decoded text. A position contains only
+  `source_id` plus zero-based Unicode-scalar offset. A direct span contains only `source_id`, scalar start/end, and
+  one frozen provenance label; derived text contains policy `concatenate_in_order` plus an immutable ordered span
+  sequence. Values never contain copied text, paths, regex/match objects, mutable parser state, or host references.
+  The authority alone validates source membership/bounds/order, derives one-based line/column and UTF-8 byte
+  coordinates, slices text on demand, and materializes derived text explicitly. Backend cursors and registers stay
+  in their efficient proven host units—Perl/scalar, Rust+Lua/byte, Dart+Julia/code unit—and convert only at this
+  boundary. The four `.14.2` diagnostics are `source_location_source_mismatch`,
+  `source_location_position_out_of_range`, `source_location_reversed_span`, and
+  `source_location_invalid_derived_provenance`, with the contract's exact context and no source-text leak. Mark
+  lifetime, transaction, recursion, progress, gap, and span-dispatch diagnostics remain exclusively `.14.3-.7`.
+
+  Current helper names and result shapes are compatibility projections, not typed-value returns: 92 canonical
+  calls plus seven callable aliases must still return the same string, scalar offset/length, one-based line/column,
+  collection, boolean, null/undef, or cursor-control statement result. Capture-group list/map/text projections keep
+  their existing regex-group authority. Mark writes and anonymous-boundary writes create positions internally but
+  preserve existing mutation timing and scope; `save_cursor`/`restore_cursor` remain compatibility operations, not
+  the future transaction API. No new DSL spelling or top-level facade is introduced. The native value modules are
+  backend runtime support surfaces for engine code and exact tests; they are not a promise that `Position` or
+  `Span` becomes an authored helper. Generated spec identity stays separate. Descriptor schemas, generated-family
+  identity, semantic/MCP responses, parse results, and span-native dispatch do not change in `.14.2`.
+
+  Frozen six-runtime implementation/admission plan 2026-08-01:
+
+  1. `.14.2.0.1` corrects only the audited live ledger, checker mutations, status docs/book, Knowledge card, and
+     exact runtime admission owners. It leaves the neutral fixtures and runtime behavior unchanged.
+  2. Each backend parent runs four commits in order: `.0` writes a failing exact consumer before implementation;
+     `.1` adds the immutable source/value/conversion core; `.2` routes the 92 current helper projections through
+     that core while preserving all result and mutation behavior; `.3` consumes the unchanged neutral fixture in
+     native plus existing generated/serialized/emitted paths, binds its command/path/roles in the checker, promotes
+     only its rollout row, updates truthful sole-facing support status, and passes complete backend/canonical gates.
+  3. Core consumers must exercise all 3 sources, 7 conversions, 6 direct spans, 3 derived texts, empty and
+     multi-source cases, and all four owned diagnostics. Projection consumers must cover the exact 92-row map and
+     seven aliases, Unicode host-unit conversion, parent/child mark isolation, absent values, capture mutation,
+     and save/restore no-drift. Perl uses `perl/LinkedSpec/SourceLocation.pm`, `ActionIR/Contracts.pm`, `RuleIR.pm`,
+     `SpecEntry.pm`, `perl/LinkedRE.pm`, `t/typed_source_location_values.t`, and
+     `t/typed_source_location_perl_contract.t`. Rust uses
+     `rust/linkedspec-runtime/src/source_location.rs`, `runtime.rs`, `engine.rs`, `lib.rs`, and
+     `rust/linkedspec-runtime/tests/typed_source_location_contract.rs`. Dart uses
+     `dart/lib/src/runtime/source_location.dart`, `matching.dart`, `interpreter.dart`, and
+     `dart/test/typed_source_location_contract_test.dart`. Julia uses `julia/src/runtime/SourceLocation.jl`,
+     `Matching.jl`, `Interpreter.jl`, `julia/src/LinkedSpecJulia.jl`, and
+     `julia/test/typed_source_location_contract_test.jl`. Shared Lua uses
+     `lua/src/linkedspec/source_location.lua`, `matching.lua`, `interpreter.lua`,
+     `lua/test/typed_source_location_contract_test.lua`, and `lua/test/run.lua`, with the same source executed on
+     PUC Lua and LuaJIT.
+  4. No descriptor schema change is planned: native and loaded generated/serialized/emitted plans converge on the
+     same interpreter/helper routes. Any proof that a schema/version change is actually required stops that leaf,
+     records the finding, and creates a separately owned descendant before changing it.
+  5. `.14.2.6` adds one repository-rooted driver that runs neutral checker, Perl, Rust, Dart, Julia, PUC Lua, and
+     LuaJIT in that exact order through project-data wrappers; the checker binds the six runtime roles, five
+     consumer paths, exact commands, route multiplicity, and canonical opt-in. `.14.2.7` recomposes unchanged and
+     closes this value/helper slice. `.14.8` retains final program-wide examples/tooling/no-drift ownership.
+
+  All RED fixtures, caches, outputs, package stores, and recurring commands use existing repository-derived
+  project-data routing. No `/tmp`, user-home cache, new external dependency, hosted workflow, or push is planned.
+
+  Signoff evidence 2026-08-01: focused proof passes the unchanged typed-source checker at exact 3/7/6/3 sources/
+  positions/spans/derived texts, 8+8 transitions, six recursive/four structural cases, 92+7+2 helper identities,
+  31 diagnostics, 1/13 rollout, and 36 mutations. Exact complete-named-mark consumers pass on Perl, Rust, Dart,
+  Julia, PUC Lua, and LuaJIT; the complete shared Lua package passes 177/177 on each ABI. Knowledge Map is
+  785/6,375, memory and Knowledge architecture checks pass, and all seven doctrines pass. The first canonical
+  attempt correctly rejected removal of the checker-owned `.24.2` task-index projections; restoring both exact
+  markers made capability schema v2 / 80-0-0 / two exclusions / 24+6 mutations green. A sandboxed rerun then
+  reached relocated execution and failed only because nested macOS `sandbox-exec` was denied with status 71. The
+  definitive permission-authorized repository-routed rerun passes containment, moved-root/outside-CWD execution,
+  semantic/MCP admissions, CLI 66/66 in both default and POSIX environments, RAM 56%, and Phase 0 1,031/1,031 in
+  657 seconds before `local CI gate passed`. No contract, checker, runtime, schema/helper, root README, or mdBook
+  source changed. Commit, brief clearing, and exact clean proof precede `.14.2.0.1` activation.
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.0 - freeze typed value rollout plan`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.0.1`
+  Status: `pending`
+  Goal: Apply the audited rollout/Knowledge truth correction with independent stale-status mutations and no runtime
+    behavior, then hand the exact implementation boundary to Perl.
+  Depends on: `.14.2.0`
+  Acceptance: Promote `public_structure` and `neutral_public_recomposition` to complete, re-owner pending runtime
+    legs to `.14.2.1.3-.14.2.5.3`, advance exact status to 3/11, and make both public legs independently
+    regression-proof by completed-to-pending mutations. Update the existing typed-source Knowledge card, capability
+    guide, live/roadmap/task truth, and every stale sole-facing rollout claim. Preserve all neutral fixtures,
+    runtime/helper behavior, grammar, descriptor/schema, semantic/MCP, generated source, and root README.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.1`
+  Status: `pending` parent
+  Goal: Implement and admit the immutable typed source-location algebra in the Perl reference while preserving
+    existing helper compatibility through explicit projections.
+  Children: `.14.2.1.0` authority/RED audit; `.14.2.1.1` immutable value/conversion core; `.14.2.1.2` helper
+    projections and owned runtime routes; `.14.2.1.3` exact composed Perl admission and rollout promotion.
+  Acceptance: `.0` consumes the frozen fixture through failing `t/typed_source_location_values.t` and
+    `t/typed_source_location_perl_contract.t`; `.1` adds `perl/LinkedSpec/SourceLocation.pm`; `.2` routes exact
+    projection construction through `ActionIR/Contracts.pm`, `RuleIR.pm`, `SpecEntry.pm`, and `perl/LinkedRE.pm`
+    without changing results; `.3` proves live/generated Unicode execution, registers the exact consumer, promotes
+    only `perl_runtime`, and updates sole-facing support truth.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.2`
+  Status: `pending` parent
+  Goal: Implement and independently admit the same neutral typed source-location algebra in Rust.
+  Children: `.14.2.2.0` authority/RED audit; `.14.2.2.1` immutable value/conversion core; `.14.2.2.2` helper/
+    unchanged loaded-generated-plan interpreter routes; `.14.2.2.3` exact admission/promotion.
+  Acceptance: Use `source_location.rs`, `runtime.rs`, `engine.rs`, `lib.rs`, and
+    `tests/typed_source_location_contract.rs`; retain byte registers, convert at the typed boundary, prove native/
+    serialized/emitted/generated execution without schema change, bind the consumer, and promote only `rust_runtime`.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.3`
+  Status: `pending` parent
+  Goal: Implement and independently admit the same neutral typed source-location algebra in Dart.
+  Children: `.14.2.3.0` authority/RED audit; `.14.2.3.1` immutable value/conversion core; `.14.2.3.2` helper/
+    unchanged loaded-generated-plan interpreter routes; `.14.2.3.3` exact admission/promotion.
+  Acceptance: Use `source_location.dart`, `matching.dart`, `interpreter.dart`, and
+    `typed_source_location_contract_test.dart`; retain code-unit registers, convert at the typed boundary, prove
+    native/serialized/generated execution without schema change, bind the consumer, and promote only `dart_runtime`.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.4`
+  Status: `pending` parent
+  Goal: Implement and independently admit the same neutral typed source-location algebra in Julia.
+  Children: `.14.2.4.0` authority/RED audit; `.14.2.4.1` immutable value/conversion core; `.14.2.4.2` helper/
+    unchanged loaded-emitted-plan interpreter routes; `.14.2.4.3` exact admission/promotion.
+  Acceptance: Use `SourceLocation.jl`, `Matching.jl`, `Interpreter.jl`, `LinkedSpecJulia.jl`, and
+    `typed_source_location_contract_test.jl`; retain code-unit registers, convert at the typed boundary, prove
+    native/serialized/emitted execution without schema change, bind the consumer, and promote only `julia_runtime`.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.5`
+  Status: `pending` parent
+  Goal: Implement one shared Lua typed source-location algebra and admit it independently on PUC Lua and LuaJIT.
+  Children: `.14.2.5.0` dual-ABI authority/RED audit; `.14.2.5.1` immutable shared core; `.14.2.5.2` helper/
+    unchanged loaded-emitted-plan interpreter routes; `.14.2.5.3` exact dual-ABI admission/promotion.
+  Acceptance: Use `source_location.lua`, `matching.lua`, `interpreter.lua`,
+    `typed_source_location_contract_test.lua`, and `run.lua`; retain byte registers, convert at the typed boundary,
+    prove native/serialized/emitted execution from the same shared source on both ABIs, bind both routes, and
+    promote only `lua_dual_abi`.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.6`
+  Status: `pending`
+  Goal: Compose the six admitted runtime consumers, exact helper/value cases, support ledgers, and canonical opt-in
+    behind one repository-routed recurring driver without duplicating final program-wide public no-drift `.14.8`.
+  Acceptance: Run neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT in that exact order; bind six runtime roles,
+    five consumer sources, exact supported commands, route multiplicity, tracked registration, and canonical opt-in
+    through independent omissions. Add no new storage root or hosted workflow.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.7`
+  Status: `pending`
+  Goal: Recompose the committed rollout correction, five backend implementations, six runtime admissions, and
+    recurring driver unchanged; close `.14.2` and hand one clean next action to transaction safety `.14.3`.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3`
   Status: `pending`
@@ -19362,12 +19575,12 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-01):** no-change recomposition `.14.1.3` is signoff-complete from clean public-
-teaching commit `336781d6` (intended 135/300; no push), closing parent `.14.1`. The committed neutral v1 contract/
-checker, root README, runtime/schema/helper sources, and sole-facing zero/one/two-regex teaching remain unchanged.
-Focused exact counts, book 79/14,120 KiB and rendered structure, Knowledge Map 784/6,363, all seven doctrines,
-containment/moved-root proof, CLI 66x2, RAM 53%, and Phase 0 1,031/1,031 in 639 seconds pass. Commit, brief clearing,
-generated-book cleanup, and exact clean proof precede immutable typed-value/helper implementation `.14.2`.
+**Authoritative frontier (2026-08-01):** behavior-free typed-value implementation audit `.14.2.0` is signoff-
+complete from clean `.14.1` closure commit `0d1b7378` (intended 136/300; no push). It root-causes the stale public
+rollout rows and freezes exact immutable value/helper compatibility plus six-runtime admissions without changing
+the contract, checker, runtime, book, or root README. Commit and clean proof must precede task-first activation of
+correction `.14.2.0.1`; Perl parent `.14.2.1`, Rust `.2`, Dart `.3`, Julia `.4`, Lua dual-ABI `.5`, recurring `.6`,
+and closeout `.7` follow cleanly.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private
@@ -19715,7 +19928,16 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 99.1 | `FUTURE-PARITY-BACKLOG.14.1.1` | `done` | The v1 neutral contract/checker, fixtures/mutations, tracked canonical route, truthful status docs, and complete canonical signoff pass. |
 | 99.2 | `FUTURE-PARITY-BACKLOG.14.1.2` | `done` | Sole-facing 0/1/2-regex linked teaching and five accurate compatibility reframings pass complete signoff. |
 | 99.3 | `FUTURE-PARITY-BACKLOG.14.1.3` | `done` | Committed contract/public teaching recompose unchanged under complete canonical signoff; `.14.1` closes. |
-| 100 | `FUTURE-PARITY-BACKLOG.14.2` | `pending` | Implement immutable values/helper projections and admit all six runtimes. |
+| 100 | `FUTURE-PARITY-BACKLOG.14.2` | `active` | Implement immutable values/helper projections and admit all six runtimes through audited children `.0-.7`. |
+| 100.0 | `FUTURE-PARITY-BACKLOG.14.2.0` | `done` | Stale public rollout truth is root-caused and the exact value/projection/admission plan is signoff-complete before behavior. |
+| 100.0.1 | `FUTURE-PARITY-BACKLOG.14.2.0.1` | `pending` | Correct audited rollout/Knowledge truth with independent stale-status guards; no runtime behavior. |
+| 100.1 | `FUTURE-PARITY-BACKLOG.14.2.1` | `pending` | Audit, implement, project, and admit the Perl reference through `.0-.3`. |
+| 100.2 | `FUTURE-PARITY-BACKLOG.14.2.2` | `pending` | Audit, implement, route, and admit Rust through `.0-.3`. |
+| 100.3 | `FUTURE-PARITY-BACKLOG.14.2.3` | `pending` | Audit, implement, route, and admit Dart through `.0-.3`. |
+| 100.4 | `FUTURE-PARITY-BACKLOG.14.2.4` | `pending` | Audit, implement, route, and admit Julia through `.0-.3`. |
+| 100.5 | `FUTURE-PARITY-BACKLOG.14.2.5` | `pending` | Audit, implement, route, and admit shared Lua independently on both ABIs through `.0-.3`. |
+| 100.6 | `FUTURE-PARITY-BACKLOG.14.2.6` | `pending` | Add exact repository-routed six-runtime recurrence without consuming final public `.14.8`. |
+| 100.7 | `FUTURE-PARITY-BACKLOG.14.2.7` | `pending` | Recompose unchanged, close `.14.2`, and hand off cleanly to `.14.3`. |
 | 101 | `FUTURE-PARITY-BACKLOG.14.3` | `pending` | Implement bounded cursor transactions plus progress and safety diagnostics. |
 | 102 | `FUTURE-PARITY-BACKLOG.14.4` | `pending` | Expose recursive entry/match/exit boundaries and bounded provenance read-only. |
 | 103 | `FUTURE-PARITY-BACKLOG.14.5` | `pending` | Compose stable slots and separately owned inter-match gap spans without owner duplication. |
