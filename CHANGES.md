@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-08-01 — FUTURE-PARITY-BACKLOG.14.1.0 — freeze typed source-location contract plan
+
+- Activated the behavior-free audit leaf from clean `24770ade` and split parent `.14.1` into neutral artifact,
+  public teaching, and unchanged recomposition slices before any grammar/runtime/schema or book claim moves.
+- Retrieved ADR `0056`, canonical Knowledge authority, adjacent cursor/provenance/neutral-contract owners, and the
+  documented toolbox before probing. Live decoded `é\n🙂x` proves four Unicode-scalar positions over eight UTF-8
+  bytes; zero/one/two-regex linked roles and nested graph recursion execute; same-position direct/mutual recursion
+  currently cuts to `undef` with trace evidence rather than the future structured diagnostic.
+- Froze `linkedspec-typed-source-location-v1` at the exact future contract/checker paths, 3/7/6/3 source-position-
+  span-derived fixtures, 8+8 invocation/transaction transitions, six recursive and four structural cases, 92
+  canonical current-helper projections, nine aliases, 31 diagnostic negatives, 36 mutations, and 14 rollout legs.
+- Inventoried three portmap, one EBNF, and one shipped-spec reading-order passage that accurately describe current
+  complex/recursive regex code but should not praise it as the general idiom. The later public slice must teach
+  readable zero/one/two-regex linked structure in separate rendered paragraphs; the non-blocking whole-book
+  readability tree remains queued and was not reprioritized.
+- Added a canonical Knowledge card and aligned the task/index/roadmap/live pointer. This slice changes no `.spec`,
+  parser/compiler/runtime/emitter, fixture, capability/semantic/MCP schema, root README, or mdBook source.
+
 ## 2026-08-01 — FUTURE-PARITY-BACKLOG.24.2 — close exclusion public no-drift
 
 Capability exclusion freshness is public-closed under `FUTURE-PARITY-BACKLOG.24`. A complete 59-file public

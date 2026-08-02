@@ -5,20 +5,21 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `b576c646` — clean schema-v2 HEAD from which exclusion public closeout `.24.2` activated
-  task-tree-first (130/300; no push); Git derives the landing identity.
-- latest_completed_leaf: `.24.2` is signoff-complete for intended landing 131/300 as
-  `FUTURE-PARITY-BACKLOG.24.2 - close exclusion public no-drift`; Git derives the landing identity.
-- active_leaf: `.24.2` — public no-drift/parent `.24` signoff-complete; commit workflow remains.
-- active_scope: committed schema-v2/two-record/24-mutation recomposition, complete governed public inventory,
-  evidence-backed public marker/denial repair, readable rendered projection, and parent closeout.
-- active_progress: exact 59-public-file census, transient book contradiction RED, 12-projection/ten-denial/six-
-  mutation guard, parent closure, Knowledge Map 783/6,348, rendered book 79/14,072 KiB, all doctrines, canonical
-  CLI 66x2, RAM 52%, and Phase 0 1,031/1,031 in 651 seconds pass.
-- active_exclusions: manifest semantics/capability rows and production behavior, parser/compiler/runtime/emitter/
-  MCP, root README, rendered-readability audit, push, and unrelated artifact cleanup.
-- in_flight_uncommitted: `.24.2` is fully verified and awaiting commit, brief clearing, and exact clean proof.
-- next_after_clean_commit: activate structural source-location contract `.14.1` task-tree-first.
+- activation_commit: `24770ade` — clean exclusion-public-closeout HEAD from which typed source-location audit/plan
+  `.14.1.0` activated task-tree-first (131/300; no push); Git derives the landing identity.
+- latest_completed_leaf: `.14.1.0` is signoff-complete for intended landing 132/300 as
+  `FUTURE-PARITY-BACKLOG.14.1.0 - freeze typed source location plan`; Git derives the landing identity.
+- active_leaf: `.14.1.0` — behavior-free executable/public plan signoff-complete; commit workflow remains.
+- active_scope: current Unicode/helper/rule-shape/recursion/diagnostic/public audit plus exact neutral contract,
+  fixture, mutation, CI/storage, rollout, and readable public-teaching boundaries before artifacts.
+- active_progress: exact 3/7/6/3 fixtures, 8+8 state transitions, six recursive/four structural cases, 92 current
+  projections/nine aliases, 31 diagnostics, 36 mutations, and 14 rollout legs frozen; Knowledge Map 784/6,362,
+  unchanged book 79/14,072 KiB, focused guards, seven doctrines, CLI 66x2, and Phase 0 1,031/1,031 pass.
+- active_exclusions: grammar/parser/compiler/runtime/emitter, tests/fixtures/executable contracts, current typed
+  values/diagnostics, capability/semantic/MCP schemas, root README, mdBook source, queued whole-book readability,
+  push, and unrelated cleanup.
+- in_flight_uncommitted: none in intended clean handoff; `.14.1.0` is fully verified and committed before pivot.
+- next_after_clean_commit: activate neutral typed source-location artifact `.14.1.1` task-tree-first.
 - current_storage_contract: ADR `0053` makes the current repository filesystem authoritative for project-owned
   output, caches/depots, logs/traces, runtime fixtures, and scratch. Durable paths are root-relative and absolute
   runtime roots derive from the current checkout. Cross-volume reads require explicit/documented authority.
@@ -39,20 +40,19 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - closed_contract_handoff_guard: retain historical next owner `FUTURE-PARITY-BACKLOG.10.1` until tracked `.22`
   moves the repeated-action checker's immutable handoff to a stable governed home.
 - current_closed_semantics: cursor 8+0/60; root 7+0/54; duplicate slots 7+0/59; repeated action 8+0/54.
-- current_future_direction: callable parent `.11` and exclusion-freshness parent `.24` are public-closed;
-  structural source-location contract `.14.1` is next. Rendered-readability audit/repair
-  `.1-.2` is durably queued but non-blocking.
-  ADR `0064` is unscheduled; ADR `0056` stays `.14.1-.8`.
+- current_future_direction: callable parent `.11` and exclusion parent `.24` are public-closed; source-location
+  plan `.14.1.0` is complete and exact neutral artifact `.14.1.1` is next. Rendered-readability `.1-.2` remains
+  durably queued/non-blocking; ADR `0064` is unscheduled; ADR `0056` stays `.14.1-.8`.
 - latest_bootstrap_read: 2026-08-01 — README, memory architecture, resume/task/decision/KM/Toolbox owners, full
   roadmap, codebase, and all 45 tracked mdBook pages are read/understood; current callable/Lua authorities refreshed.
 - pivot_guard: never pivot while dirty; finish, verify, document, commit, clear brief, and prove clean first.
-- push_policy: hard lock at 300 new local commits; `.24.2` intended landing is 131/300; no push.
+- push_policy: hard lock at 300 new local commits; `.14.1.0` intended landing is 132/300; no push.
 - storage: repository is on the 4-TB SSD. Retain reusable SSD caches. Do not use OS temp/home cache for project
   state; never delete ambiguous data; use copy/verify/use/delete for exact owned migrations.
 - environment: routed commands self-initialize; source `tools/project_data_env.sh` before lower-level commands;
   use `perl -Iperl`; clear `PERL5LIB` for phase0; canonical needs nested macOS sandbox permission and up to 30m.
-- canonical_state: the definitive authorized `.24.2` gate passes all seven doctrines, capability schema v2 at
-  80/0/0 with two exclusions/24 manifest mutations/12 projections/six public mutations, callable 23 mutations,
-  semantic/MCP admissions, containment/moved-root/outside-CWD execution, CLI 66x2, RAM 52%, Phase 0 1,031/1,031
-  in 651 seconds, and `local CI gate passed`.
-- blockers: none; commit `.24.2`, clear the brief, prove clean, then activate `.14.1`; no push.
+- canonical_state: the `.14.1.0` canonical sequence passes compositionally. The in-workspace driver passed through
+  semantic/MCP and tool-storage proof, then the enclosing sandbox denied nested macOS `sandbox-exec` (status 71);
+  the exact containment proof passed with required host permission, and the moved-root/outside-CWD, CLI 66x2, and
+  Phase 0 1,031/1,031 tail passed independently. No project check failed.
+- blockers: none; commit `.14.1.0`, clear brief, prove clean, then activate `.14.1.1`; no push.

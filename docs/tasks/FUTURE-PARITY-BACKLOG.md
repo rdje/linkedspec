@@ -17196,9 +17196,154 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   Commit: `FUTURE-PARITY-BACKLOG.14.0.1 - adopt typed source location algebra`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.1`
-  Status: `pending`
+  Status: `active` (2026-08-01; split task-tree-first from clean `24770ade`)
   Goal: Ratify the exact typed source-location algebra and neutral conformance fixtures while teaching simple-regex
     linked-rule structure, including zero/one/two-regex roles and graph-owned recursion.
+  Children: `.14.1.0`, `.14.1.1`, `.14.1.2`, `.14.1.3`
+  Acceptance: Audit current portable/helper/documentation authority before artifacts; freeze one versioned neutral
+    schema, positive/negative fixtures, conversions, provenance/state-machine/current-helper projections,
+    diagnostics, and mutation boundary; teach zero/one/two-regex linked structure and graph-owned recursion only
+    from current proof; close through unchanged recomposition before `.14.2` backend implementation.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.1.0`
+  Status: `done` (2026-08-01; signoff-complete from clean `24770ade`, intended 132/300, no push)
+  Goal: Audit and freeze the dependency-complete executable neutral-contract plan before creating artifacts or
+    changing public teaching.
+  Depends on: `.14.0.1`, `.24.2`
+  Acceptance: Retrieve ADR `0056` and the canonical Knowledge card before re-derivation; inventory existing
+    neutral-contract conventions, current capture/mark/cursor helper projections, coordinate/provenance behavior,
+    zero/one/two-regex structure, graph recursion, diagnostics, CI/storage routing, and contradictory public prose;
+    use LinkedSpec toolbox/runtime evidence for behavioral claims; freeze exact `.1-.3` artifact/teaching/closeout
+    boundaries without changing grammar, parser/compiler/runtime/emitter, fixtures, public claims, capability,
+    semantic/MCP, root README, or mdBook source.
+
+  ### `FUTURE-PARITY-BACKLOG.14.1.0` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove clean exclusion-public-closeout commit `24770ade`, zero-byte
+    brief, synchronized Knowledge Map, absent rendered-book/bytecode/background residue, and activate this leaf
+    task-tree-first before any implementation or other documentation change.
+  - [x] **RETRIEVE / REVERIFY AUTHORITY** — Read ADR `0056`, its canonical Knowledge card, `.14.0-.14.0.1`, the
+    relevant capture/mark/cursor facts, and current neutral-contract precedents before inspecting code or runtime.
+  - [x] **TOOLBOX-LED CURRENT AUDIT** — Use the documented LinkedSpec probes plus exact source/test inventories to
+    establish current helper projections, coordinate/provenance boundaries, rule-shape/recursion behavior, and
+    contradiction candidates without guessing from `.spec` text.
+  - [x] **FREEZE EXECUTABLE CONTRACT PLAN** — Specify exact paths, schema/version, fixtures, state-machine and
+    diagnostic rows, mutation classes, independent validation, canonical/storage routing, and `.14.2` handoff.
+  - [x] **FREEZE PUBLIC-TEACHING PLAN** — Inventory sole-facing pages and exact zero/one/two-regex plus graph-owned
+    recursion claims; classify current truth versus future typed-value behavior and avoid wall-of-text additions.
+  - [x] **NO BEHAVIOR / VERIFY / COMMIT / CLEAN** — Change only task/live/roadmap/KM/book status needed to preserve
+    the audit plan; pass focused/book/doctrine/canonical gates, commit, clear the brief, and prove clean before
+    neutral artifact implementation `.14.1.1`.
+
+  Activation evidence 2026-08-01: exclusion public no-drift `.24.2` landed at `24770ade` as commit 131/300 with no
+  push. Exact post-commit proof found empty status and staged/unstaged diffs, zero-byte brief, synchronized
+  Knowledge Map 783/6,348, no rendered book or Python bytecode, and no background result. ADR `0056` and the
+  Knowledge Map route the next PNT work to `.14.1`; this first child owns only behavior-free audit and executable
+  plan refinement.
+
+  Authority and TOOLBOX audit 2026-08-01: ADR `0056`, its canonical Knowledge card, ADRs `0010`, `0012`, `0014`,
+  `0015`, `0044`, `0045`, the structural/capture/mark/top-rule Knowledge cards, and the existing rule-local cursor,
+  duplicate-slot, callable, semantic, CI, and project-data contracts were retrieved before runtime probing.
+  `LinkedSpec::Get` proves a zero-regex coordinator plus one-regex leaf returns `["foo","foo"]`, a regex-bearing
+  selected entry rule is valid and returns `"foo"`, and the existing two-regex `sexpr` graph recursively returns
+  `[["a",["b"],"c"]]` from `(a(b)c)`. `return_descriptor` reports the corresponding exact `0/1/2` regex counts,
+  `or_default`/`seek` family policy, action ownership, and canonical ActionIR nodes. On decoded `é\n🙂x`, live
+  `input_*`, `cursor_*`, `entry_*`, and `match_*` positions use four Unicode scalars over eight UTF-8 bytes; the
+  observed boundaries are input `[0,4)`, entry newline `[1,2)`, and current match `🙂x` `[2,4)`. A second
+  capture/mark probe over `é🙂x` proves character positions `0..3`, stable and advancing anonymous spans, named
+  mark spans, and derived line/column reads. `call_spec_handler_subst` confirms those current Perl projections are
+  still host `pos`/`length`/`substr` lowering rather than typed public values. Direct and mutual no-consume
+  recursion terminate at the existing `(rule, position)` guard with `undef` and a trace decision, but no structured
+  `last_error`; the future portable non-progress diagnostics therefore remain target contract, not current claims.
+
+  Helper and documentation audit 2026-08-01: the aligned modern projection inventory is exactly 92 canonical
+  calls: 47 capture/mark, 30 entry/match, 11 input/cursor, and four explicit cursor-control calls. Perl additionally
+  retains nine compatibility aliases (`capture_from_rule_start`, `capture_len_from_rule_start`,
+  `capture_rest_length`, `capture_slice_here`, `capture_slice_length`, `capture_take_slice`,
+  `capture_take_slice_len`, `entry_named_map`, `match_named_map`) plus separate legacy capture forms; those are not
+  a second algebra. Current semantic-introspection byte spans remain an adjacent versioned projection and are not
+  silently changed into runtime typed values. The sole-facing book already marks typed positions/spans as future
+  and accurately demonstrates recursive linked rules, but three places still praise a complex/recursive-regex
+  style: `portmap-spec-walkthrough.md` (three passages), `ebnf-spec-walkthrough.md` (one passage), and
+  `shipped-specs-and-corpora.md` (one reading-order description). They are current shipped-code descriptions, not
+  false behavior claims, but `.14.1.2` must reframe them as compatibility examples rather than general guidance.
+
+  Frozen executable plan 2026-08-01: `.14.1.1` creates
+  `capability_conformance/typed_source_location_contract.json` with contract id
+  `linkedspec-typed-source-location-v1` and independent validator
+  `tools/check_typed_source_location_contract.py`. The exact neutral envelope contains three decoded-source
+  fixtures, seven position conversions, six direct spans, three derived-text/provenance cases, eight invocation
+  state transitions, eight checkpoint/try/commit/rollback transitions, six recursive-observation cases, four
+  structural authoring cases, 92 ordered canonical helper projections, nine ordered compatibility aliases, and 31
+  ordered diagnostic/negative cases. The diagnostic inventory covers the ADR's four value/provenance failures;
+  four mark and four transaction-token validity failures; seven transaction lifecycle/authority failures; cursor
+  regression, nullable repetition, direct/mutual recursion, and staged cycles; unavailable recursive boundaries;
+  ambiguous/stale regex-slot identity; and four source/registry/capability/policy span-dispatch denials. No source
+  spelling is selected. Thirty-six independent mutations cover envelope, coordinate, span/provenance, state,
+  transaction, recursion, helper/alias, diagnostic, rollout, tracked-input, and canonical-registration drift.
+
+  Storage and rollout plan 2026-08-01: the neutral checker runs only through
+  `bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py`; `tools/run_ci_local.sh`
+  requires both files as tracked inputs and runs that routed command as an ordinary canonical check. No new shell
+  driver, cache, package store, temp root, or workflow is created. Fourteen ordered rollout legs preserve the
+  dependency boundary: neutral contract `.14.1.1`; public structure `.14.1.2`; neutral/public recomposition
+  `.14.1.3`; Perl plus Rust/Dart/Julia/PUC-Lua/LuaJIT admission `.14.2`; transaction safety `.14.3`; recursive
+  observation `.14.4`; gap composition `.14.5`; progressive dispatch `.14.6`; staged enrichment `.14.7`; and
+  recurring/public no-drift `.14.8`. `.14.1.1` updates only the capture/status/local-CI book pages needed to say
+  the neutral contract exists while runtime values remain future. `.14.1.2` adds readable, separately rendered
+  paragraphs to the rule-paragraph and regex chapters, reframes the three shipped-spec pages above, and updates
+  project status; no long stitched prose blob is permitted. `.14.1.3` changes no artifact or teaching content.
+
+  Verification: **PASS 2026-08-01.** The audit began from exact clean commit `24770ade` with no book/bytecode/
+  background residue. ADR/Knowledge retrieval and the documented `LinkedSpec::Get`, `return_descriptor`, and
+  `call_spec_handler_subst` probes establish the current Unicode, 0/1/2-regex, linked-recursion, helper, and
+  non-progress boundaries recorded above. The frozen plan adds one canonical Knowledge card and changes only
+  task/index/roadmap/live continuity surfaces; no `.spec`, production/test/fixture, executable contract, schema,
+  capability, semantic/MCP, root README, or mdBook source moves. Knowledge Map passes at 784 facts / 6,362 question
+  keys; the unchanged sole-facing book builds 79 files / 14,072 KiB; rule-local cursor remains 8/0/60 over 74 files
+  and capability remains schema v2 / 16 capabilities / 80-0-0 / two exclusions / 24 manifest mutations / 12
+  projections / six public mutations. Task metadata, diff/whitespace, and all seven doctrines pass. The canonical
+  sequence passes compositionally: the in-workspace driver passed through semantic/MCP and tool-storage proof,
+  the exact nested macOS containment proof then passed with required host permission after the enclosing sandbox
+  denied `sandbox-exec`, and the remaining moved-root/outside-CWD, CLI 66x2, and Phase 0 1,031/1,031 tail passed
+  independently. No project check failed. Generated book output is removed, the commit brief is cleared after
+  landing, and exact clean proof precedes `.14.1.1` activation.
+  Commit: `FUTURE-PARITY-BACKLOG.14.1.0 - freeze typed source location plan`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.1.1`
+  Status: `pending`
+  Goal: Implement the versioned neutral typed source-location contract, positive/negative fixtures, independent
+    checker/mutations, and repository-routed canonical registration frozen by `.14.1.0`.
+  Depends on: `.14.1.0`
+  Acceptance: Create only `capability_conformance/typed_source_location_contract.json` and
+    `tools/check_typed_source_location_contract.py` as new executable artifacts; use exact contract id/counts,
+    helper/alias order, 31 diagnostic fixtures, 36 mutations, and 14 rollout legs frozen above; register both as
+    tracked canonical inputs and run the checker only through `tools/run_python_project_data.sh`; document the
+    neutral artifact in `capability_conformance/README.md` and the capture/status/local-CI book pages without
+    claiming typed runtime values, selecting syntax, changing another schema/version, or adding a driver.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.1.2`
+  Status: `pending`
+  Goal: Align sole-facing guidance for simple zero/one/two-regex linked-rule structure and graph-owned recursion
+    with the executable neutral contract, clearly separating current authoring truth from future typed values.
+  Depends on: `.14.1.1`
+  Acceptance: Add one practical rule-shape section to `user-model/spec-files-and-rule-paragraphs.md`, reinforce
+    small boundary regexes and graph-owned recursion in `user-model/regex-in-spec.md`, reframe the exact current
+    complex/recursive-regex passages in the portmap and EBNF walkthroughs plus shipped-spec reading order, and
+    update project status. Preserve every current shipped-code fact and executable example; teach zero-regex
+    coordination, one-regex leaves, two-regex start/end nodes, regex-bearing entry validity, action-edge OR,
+    blind-call AND, and consume-before-recurse as guidance rather than a syntactic maximum. Use short separate
+    rendered paragraphs and lists, with no stitched wall-of-text section.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.1.3`
+  Status: `pending`
+  Goal: Recompose the committed neutral contract, fixtures, mutations, CI route, and public teaching unchanged;
+    close `.14.1` and hand the clean boundary to `.14.2` backend value/helper projection implementation.
+  Depends on: `.14.1.2`
+  Acceptance: Re-run the independent contract checker, book build/link/readability checks, doctrine suite, and
+    canonical local CI from the clean `.14.1.2` commit; prove exact contract/count/public markers and zero stale
+    praise without changing contract, checker, runtime, schema, helper, public teaching, or root README content;
+    close parent `.14.1` and point one clean next action to `.14.2`.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2`
   Status: `pending`
@@ -19041,12 +19186,14 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-01):** final exclusion public no-drift/parent closeout `.24.2` is signoff-complete
-from clean schema-v2 commit `b576c646` (intended 131/300; no push). Exact schema v2 remains two exclusions and
-80/0/0 through 24 manifest mutations; 12 governed projections and ten stale-current denials reject six public
-mutations, including the reproduced rendered-book contradiction. Parent `.24` is public-closed without manifest/
-runtime/root-README movement. Knowledge Map 783/6,348, sole-facing book 79/14,072 KiB, all doctrines, canonical CLI
-66x2, RAM 52%, and Phase 0 1,031/1,031 in 651 seconds pass; `.14.1` is next after the clean commit.
+**Authoritative frontier (2026-08-01):** typed source-location audit/plan `.14.1.0` is signoff-complete from clean
+exclusion public closeout commit `24770ade` (intended 132/300; no push). Current Unicode offsets, 0/1/2-regex rule
+roles, graph/non-progress recursion, 92 canonical projections plus nine aliases, adjacent diagnostics/provenance,
+CI/storage routing, and five book idiom passages are inventoried. Exact v1 paths, 3/7/6/3 fixtures, 8+8 state
+transitions, six recursive/four structural cases, 31 diagnostics, 36 mutations, 14 rollout legs, and readable book
+boundaries are frozen without behavior/schema/public/mdBook/root-README movement. Knowledge Map 784/6,362,
+unchanged book 79/14,072 KiB, focused guards, all doctrines, CLI 66x2, and Phase 0 1,031/1,031 pass. Commit, brief
+clearing, and exact clean proof remain; then activate neutral artifact `.14.1.1` task-tree-first.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private
@@ -19389,7 +19536,11 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 96 | `FUTURE-PARITY-BACKLOG.14` | `active` | Extend structural/progressive/staged authoring through one typed source-location/cursor algebra and exact six-runtime/public proof. |
 | 97 | `FUTURE-PARITY-BACKLOG.14.0` | `done` | Director doctrine, existing ADR/prototype, present implementation gaps, and contradictory walkthrough evidence are durably split. |
 | 98 | `FUTURE-PARITY-BACKLOG.14.0.1` | `done` | ADR `0056`, exact invariants, existing-owner reconciliation, and `.14.1-.8` dependency split are complete without behavior. |
-| 99 | `FUTURE-PARITY-BACKLOG.14.1` | `pending` | Ratify typed source-location schema/fixtures and teach simple-regex linked recursion. |
+| 99 | `FUTURE-PARITY-BACKLOG.14.1` | `active` | Audit/plan `.14.1.0` is active; neutral artifact, public teaching, and no-change recomposition follow in `.1-.3`. |
+| 99.0 | `FUTURE-PARITY-BACKLOG.14.1.0` | `done` | TOOLBOX-led audit freezes the exact neutral/public plan without behavior; focused, book, doctrine, and canonical proof pass. |
+| 99.1 | `FUTURE-PARITY-BACKLOG.14.1.1` | `pending` | Create the v1 neutral contract/checker, fixtures/mutations, tracked canonical route, and truthful contract-status docs. |
+| 99.2 | `FUTURE-PARITY-BACKLOG.14.1.2` | `pending` | Teach readable 0/1/2-regex linked structure and reframe five complex/recursive-regex praise passages accurately. |
+| 99.3 | `FUTURE-PARITY-BACKLOG.14.1.3` | `pending` | Recompose committed contract and public teaching unchanged, close `.14.1`, and hand off cleanly to `.14.2`. |
 | 100 | `FUTURE-PARITY-BACKLOG.14.2` | `pending` | Implement immutable values/helper projections and admit all six runtimes. |
 | 101 | `FUTURE-PARITY-BACKLOG.14.3` | `pending` | Implement bounded cursor transactions plus progress and safety diagnostics. |
 | 102 | `FUTURE-PARITY-BACKLOG.14.4` | `pending` | Expose recursive entry/match/exit boundaries and bounded provenance read-only. |

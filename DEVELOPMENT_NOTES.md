@@ -1,5 +1,29 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-01 (`FUTURE-PARITY-BACKLOG.14.1.0` — typed source-location audit/plan): clean `24770ade` owns a
+  behavior-free pre-artifact audit. `LinkedSpec::Get` and `return_descriptor` verify zero-regex coordinator,
+  one-regex leaf, ordinary regex-bearing entry, two-regex recursive node, exact nested output, family/cursor policy,
+  and ActionIR metadata. Decoded `é\n🙂x` is four scalar offsets/eight bytes with input `[0,4)`, entry newline
+  `[1,2)`, and local `🙂x` `[2,4)`; a separate capture/mark probe verifies scalar named/anonymous endpoints and
+  line/column projections. `call_spec_handler_subst` confirms Perl still lowers these through host string/cursor
+  operations. The `(rule, position)` guard cuts direct and mutual no-progress recursion to `undef` and logs a trace
+  decision, with no structured `last_error`; portable diagnostics are therefore future contract rows.
+- The modern current-helper basis is exact at 47 capture/mark + 30 entry/match + 11 input/cursor + four explicit
+  cursor controls = 92 canonical names. Nine compatibility aliases remain separate from that ordered basis, and
+  legacy capture macros remain separate again. Existing semantic-introspection byte spans are adjacent versioned
+  evidence, not the runtime typed-value schema.
+- `.14.1.1` is frozen to create `capability_conformance/typed_source_location_contract.json` plus
+  `tools/check_typed_source_location_contract.py`, run only through `tools/run_python_project_data.sh` and ordinary
+  tracked `tools/run_ci_local.sh` registration. Exact contents are three sources, seven positions, six spans, three
+  derived texts, eight invocation and eight transaction transitions, six recursive observations, four structural
+  authoring cases, 92 projections, nine aliases, 31 diagnostic negatives, 36 mutations, and 14 rollout legs. No
+  new driver, allocator, cache, temp root, source spelling, or backend admission is allowed in the neutral slice.
+- `.14.1.2` owns public structure: rule-paragraph and regex guidance plus accurate reframing of three portmap, one
+  EBNF, and one shipped-reading-order passage. Current shipped code and examples remain truthful. Added prose must
+  render as separate short paragraphs/lists rather than a dense blob; the broader `MDBOOK-RENDERED-READABILITY`
+  audit remains non-blocking. `.14.1.0` itself changes no mdBook source because the book already says typed values
+  and transactions are future and no executable/public behavior moved.
+
 - 2026-08-01 (`FUTURE-PARITY-BACKLOG.24.2` — close exclusion public no-drift): the 59-file standard public
   Markdown census contains six current exclusion projections; task index/tree, live status, two Knowledge cards,
   and the derived map bring the exact governed set to 12. Historical mentions remain historical, root README has

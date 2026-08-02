@@ -1,5 +1,18 @@
 # ARCHITECTURE STATE
 
+- `2026-08-01 typed source-location neutral-contract plan`: behavior-free
+  `FUTURE-PARITY-BACKLOG.14.1.0` freezes the executable plan before artifacts. Live TOOLBOX proof establishes
+  Unicode-scalar current offsets, zero/one/two-regex linked roles, ordinary regex-bearing entry rules, nested graph
+  recursion, and the existing trace-only non-progress cutoff. The modern helper basis is exactly 92 projections
+  (47 capture/mark, 30 entry/match, 11 input/cursor, four cursor controls) plus nine compatibility aliases; current
+  Perl lowering remains untyped host cursor/string operations. Future `linkedspec-typed-source-location-v1` is
+  fixed at one contract/checker, 3/7/6/3 value fixtures, 8+8 state transitions, six recursive/four structural cases,
+  31 diagnostic negatives, 36 mutations, and 14 rollout legs with repository-routed Python/canonical execution.
+  No spelling, runtime, schema, semantic/MCP, root README, or mdBook source changes. Public follow-up must reframe
+  five current complex/recursive-regex praise passages and add zero/one/two-regex teaching in separately rendered
+  paragraphs. Knowledge Map 784/6,362, unchanged book 79/14,072 KiB, all seven doctrines, and canonical Phase 0
+  1,031/1,031 pass from clean `24770ade`; `.14.1.1` follows only after commit/brief/clean proof.
+
 - `2026-08-01 capability-exclusion public no-drift`: `FUTURE-PARITY-BACKLOG.24.2` closes parent `.24` with one
   extension of the existing capability checker: 12 exact governed projections, ten path-scoped stale-current
   denials, and six public mutations now bind manifest truth to capability guidance, both roadmaps, architecture,

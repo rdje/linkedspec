@@ -1,5 +1,27 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-01 — Typed source-location contract implementation is dependency-frozen
+
+`FUTURE-PARITY-BACKLOG.14.1.0` is signoff-complete from clean `24770ade` (intended 132/300; no push). Authority was
+retrieved before `LinkedSpec::Get`, `return_descriptor`, and `call_spec_handler_subst` established decoded Unicode
+coordinates, zero/one/two-regex linked roles, ordinary regex-bearing entry validity, recursive output, current
+helper lowering, and trace-only non-progress cutoffs. No current typed runtime value or structured recursion error
+is claimed.
+
+The next neutral artifact is exact: `linkedspec-typed-source-location-v1`, one JSON contract and one independent
+repository-routed Python checker, 3/7/6/3 source/position/span/derived fixtures, 8+8 state transitions, six
+recursive/four structural cases, 92 canonical helper projections, nine aliases, 31 diagnostic negatives, 36
+mutations, and 14 rollout legs. The later public slice owns five accurately identified complex/recursive-regex
+praise passages and must teach readable zero/one/two-regex graph structure in separate rendered paragraphs.
+
+Knowledge Map passes at 784 facts / 6,362 questions. The unchanged sole-facing book builds 79 files / 14,072 KiB;
+rule-local cursor remains 8/0/60 over 74 files; capability remains schema v2, 16 capabilities, 80/0/0, two
+exclusions, 24 manifest mutations, 12 public projections, and six public mutations. Focused guards and all seven
+doctrines pass. The canonical sequence also passes compositionally: its in-workspace prefix reached the nested
+macOS containment proof, that proof passed with required host permission, and the remaining moved-root/outside-CWD,
+CLI 66x2, and Phase 0 1,031/1,031 tail passed independently. Only commit, brief clearing, generated-book cleanup,
+and exact clean proof remain before `.14.1.1` activation.
+
 ## 2026-08-01 — Capability exclusion public no-drift is closed
 
 `FUTURE-PARITY-BACKLOG.24.2` is signoff-complete from clean `b576c646` (intended 131/300; no push). Capability
