@@ -1,5 +1,20 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-07 — Neutral rule-start alias targets are corrected
+
+`FUTURE-PARITY-BACKLOG.14.2.2.0.1` activates from clean `69179553` as intended 145/300 with no push. The neutral
+artifact and checker now map `capture_from_rule_start()` to anonymous `capture_slice()` and
+`capture_len_from_rule_start()` to `capture_slice_len()`. They no longer point at the one-argument named-mark
+helpers merely because the names look similar.
+
+The checker requires exact Perl compatibility, diagnostic, IR, and ordered typed-runtime-lowering identity for
+the five non-scanner aliases and explicitly rejects the old `capture_from` target. Inventory stays 92+7+2,
+rollout stays 4/10, and mutation count stays 38. No backend runtime, schema, test, root README, or sole-facing
+mdBook source changes; the book already teaches these two mappings correctly. Neutral and 33-test Perl focused
+proof pass. Knowledge Map 786/6,400, capability 80/0/0, all seven doctrines, every composed semantic/MCP consumer,
+repository containment/relocation, CLI 66/66 twice, RAM 50%, and Phase 0 1,031/1,031 pass before
+`[ci] local CI gate passed`. Commit/clean proof now precedes Rust implementation `.0.2`.
+
 ## 2026-08-07 — Rust typed-source prerequisites are split before implementation
 
 `FUTURE-PARITY-BACKLOG.14.2.2.0` audits the Rust typed-source boundary from clean `82be51f0` (intended 144/300;

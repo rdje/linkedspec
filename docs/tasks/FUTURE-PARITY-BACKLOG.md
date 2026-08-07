@@ -18174,7 +18174,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   No executable contract, runtime, test, schema, mdBook, or root README behavior changed in this audit.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.2.0.1`
-  Status: `pending` (intended 145/300 after clean `.0`, no push)
+  Status: `signoff-complete` (2026-08-07; verified from clean `69179553`, intended 145/300, no push)
   Goal: Correct the two mislabeled neutral compatibility-alias targets before any Rust implementation consumes them.
   Depends on: `.14.2.2.0`
   Acceptance: Change only `capture_from_rule_start` from `capture_from` to `capture_slice` and
@@ -18183,8 +18183,41 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
     already-correct mdBook semantics unchanged. Add exact mutation/Perl-lowering proof if required to prevent another
     semantically plausible but arity-wrong target. Synchronize durable/live records, pass neutral/doctrine/canonical
     signoff, commit, clear the brief, and prove clean before `.0.2`.
-  Verification: pending
+  Verification: neutral 3/7/6/3 + 92+7+2 + 31 diagnostics + 4/10 rollout + 38 mutations; Perl focused 33/33;
+    Knowledge Map 786/6,400; capability 80/0/0; all seven doctrines; composed semantic/MCP and containment/
+    relocation proof; CLI 66/66 twice; RAM 50%; Phase 0 1,031/1,031; `[ci] local CI gate passed`
   Commit: `FUTURE-PARITY-BACKLOG.14.2.2.0.1 - correct neutral capture alias targets`
+
+  ### `FUTURE-PARITY-BACKLOG.14.2.2.0.1` Acceptance Checklist
+
+  - [x] **REPRODUCE / AUTHORITY** — Reconfirm the neutral artifact/checker mismatch against exact Perl ActionIR
+    records/lowering and the sole-facing zero-argument helper catalog before editing either authority.
+  - [x] **CORRECT EXACTLY TWO TARGETS** — Map `capture_from_rule_start` to `capture_slice` and
+    `capture_len_from_rule_start` to `capture_slice_len`; preserve all other aliases, rows, counts, and rollout.
+  - [x] **LOCK SEMANTIC IDENTITY** — Make the checker verify exact compatibility-record diagnostic/lowering identity
+    and reject regression to the arity-wrong named-mark targets without weakening any existing mutation.
+  - [x] **NO RUNTIME / BOOK CHANGE** — Keep Perl/Rust/Dart/Julia/Lua execution, schemas, tests, rollout 4/10,
+    38-mutation total, root README, and already-correct sole-facing mdBook semantics unchanged.
+  - [x] **LOCKSTEP / SIGNOFF** — Synchronize task/index/roadmaps/architecture/change/development/live/memory and
+    Knowledge, pass focused neutral/Perl/governance/canonical checks, commit, clear the brief, and prove clean.
+
+  Activation evidence 2026-08-07: prerequisite audit `.14.2.2.0` committed at `69179553` as 144/300 with no push.
+  Its post-commit status and both diffs are empty, `git_message_brief.txt` is zero bytes, and no background result
+  remains. This task-tree file is the sole activation diff before neutral artifact/checker or runtime changes.
+
+  Implementation evidence 2026-08-07: the neutral JSON and checker now map only the two rule-start compatibility
+  names to `capture_slice` and `capture_slice_len`. For each of the five non-scanner aliases, the checker extracts
+  exact Perl records and requires the compatibility flag, canonical `diag_name`, identical `ir_node`, and identical
+  ordered `SourceLocation::Runtime` call sequence; its alias-target mutation regresses the first row specifically
+  to the old arity-wrong `capture_from`. The focused checker remains 3/7/6/3, 92+7+2, 31 diagnostics, rollout 4/10,
+  and 38 rejected mutations. Perl contract syntax and the typed-value/projection plus ActionIR suites pass 33/33.
+  No backend runtime, test, schema, root README, or already-correct mdBook source changed.
+
+  Signoff evidence 2026-08-07: Knowledge Map remains 786/6,400, capability remains schema v2 / 80-0-0 / 24+6,
+  all seven doctrines pass, and the historical capability/repeated-action closeout markers remain exact. The
+  permission-authorized canonical restart passes the corrected neutral checker, both Perl typed-source consumers,
+  every composed semantic/MCP consumer, repository containment and five-anchor relocation, CLI 66/66 in default
+  and POSIX option environments, RAM 50%, and Phase 0 1,031/1,031 before `[ci] local CI gate passed`.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.2.0.2`
   Status: `pending` (intended 146/300 after clean `.0.1`, no push)

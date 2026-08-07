@@ -1,5 +1,17 @@
 # CHANGES
 
+## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.2.0.1 — correct neutral capture alias targets
+
+- Corrected `capture_from_rule_start` to target `capture_slice` and `capture_len_from_rule_start` to target
+  `capture_slice_len` in the neutral artifact and checker. Both are zero-argument anonymous-boundary aliases.
+- Strengthened the checker to require each non-scanner alias's exact Perl compatibility flag, canonical diagnostic
+  name, IR node, and ordered typed-runtime lowering calls. The old one-mark `capture_from` target is now the exact
+  alias regression mutation.
+- Preserved seven aliases, 38 mutations, rollout 4/10, all backend runtime/test/schema behavior, root README, and
+  the already-correct sole-facing mdBook. Focused neutral proof and 33 Perl tests pass.
+- Passed Knowledge Map 786/6,400, capability 80/0/0, all seven doctrines, containment/relocation, CLI 66/66 twice,
+  RAM 50%, and Phase 0 1,031/1,031 before the exact local-CI pass marker.
+
 ## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.2.0 — split Rust typed-source prerequisites
 
 - Audited Rust source boundaries through the Knowledge Map, neutral contract/checker, Perl lowering, existing Rust

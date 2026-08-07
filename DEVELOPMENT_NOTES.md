@@ -1,5 +1,21 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.2.0.1` — neutral alias target correction): target identity must follow
+  callable arity and lowering, not lexical similarity. `capture_from_rule_start()` takes no mark name and reads the
+  anonymous boundary, so its canonical helper is `capture_slice()`; its length sibling is `capture_slice_len()`.
+  The named-mark `capture_from(name)` family is a different operation despite the shared words.
+
+  The checker now makes this structural. It extracts the exact Perl ActionIR record for every non-scanner alias and
+  canonical target, then compares compatibility designation, `diag_name`, `ir_node`, and the ordered
+  `SourceLocation::Runtime` function calls. This catches a semantically plausible target typo even when both helper
+  names exist elsewhere in the source. Scanner-owned map aliases retain their separate exact scanner recognition
+  proof. No mutation count or backend implementation changes in this correction.
+
+  The first canonical attempt caught only the task index rewrite dropping the historical capability-closeout
+  marker. Restoring `exclusion public closeout .24.2` and the current public-closure statement returns capability
+  proof to schema v2 / 80-0-0 / 24+6. The complete restart passes the corrected neutral and admitted Perl consumers,
+  every composed semantic/MCP route, containment/relocation, CLI 66/66 twice, RAM 50%, and Phase 0 1,031/1,031.
+
 - 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.2.0` — Rust typed-source prerequisite split): Rust's helper dispatcher
   contains every one of the 92 neutral canonical source-boundary names, but only `entry_named_map` and
   `match_named_map` among the seven compatibility aliases. Primary executable probes are decisive: the other five

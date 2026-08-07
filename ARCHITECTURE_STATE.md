@@ -1,5 +1,14 @@
 # ARCHITECTURE STATE
 
+- `2026-08-07 neutral source-boundary alias target correction`: `FUTURE-PARITY-BACKLOG.14.2.2.0.1` fixes two
+  contract/checker labels without changing runtime behavior. Zero-argument `capture_from_rule_start` and
+  `capture_len_from_rule_start` now target anonymous `capture_slice` and `capture_slice_len`, not one-argument
+  named-mark helpers. The checker extracts exact Perl records and compares compatibility flag, diagnostic name,
+  IR node, and ordered typed runtime calls against each non-scanner canonical helper; the old `capture_from` target
+  is a rejected mutation. Inventory/rollout remain 92 canonical + 7 aliases + 2 internal ids, 4/10, and 38
+  mutations. Signoff passes all seven doctrines, containment/relocation, CLI 66/66 twice, RAM 50%, and Phase 0
+  1,031/1,031 before `local CI gate passed`. Backend implementation remains owned by Rust parity `.0.2`.
+
 - `2026-08-07 Rust typed-source prerequisite audit`: `FUTURE-PARITY-BACKLOG.14.2.2.0` proves the current Rust
   compatibility baseline is not the one assumed by the typed-source plan. `engine.rs` contains all 92 canonical
   source-boundary helper names but only two of seven aliases; five other documented zero-argument aliases compile

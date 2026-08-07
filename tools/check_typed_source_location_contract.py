@@ -101,14 +101,36 @@ PROJECTION_VOCABULARY = [
 ]
 
 ALIASES = [
-    ("capture_from_rule_start", "capture_from"),
-    ("capture_len_from_rule_start", "capture_len_from"),
+    ("capture_from_rule_start", "capture_slice"),
+    ("capture_len_from_rule_start", "capture_slice_len"),
     ("capture_rest_length", "capture_rest_len"),
     ("capture_slice_here", "start_capture_slice"),
     ("capture_slice_length", "capture_slice_len"),
     ("entry_named_map", "entry_map"),
     ("match_named_map", "match_map"),
 ]
+
+
+def extract_perl_contract_record(source: str, helper: str) -> str:
+    record = re.search(
+        rf"\n  \{{\n\s*id\s*=>\s*'{re.escape(helper)}',(?P<body>.*?)\n  \}},",
+        source,
+        re.DOTALL,
+    )
+    if record is None:
+        fail(f"Perl contract authority is missing helper record {helper!r}")
+    return record.group(0)
+
+
+def extract_perl_record_field(record: str, helper: str, field: str) -> str:
+    value = re.search(rf"\b{re.escape(field)}\s*=>\s*'([^']+)'", record)
+    if value is None:
+        fail(f"Perl helper record {helper!r} is missing field {field!r}")
+    return value.group(1)
+
+
+def extract_perl_runtime_calls(record: str) -> list[str]:
+    return re.findall(r"LinkedSpec::SourceLocation::Runtime::([a-z_]+)\s*\(", record)
 
 INTERNAL_CONTRACT_IDS = [
     ("capture_take_slice", "capture_take"),
@@ -1012,22 +1034,25 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
     legacy_scanner_source = PERL_LEGACY_SCANNER_PATH.read_text(encoding="utf-8")
     scanner_owned_aliases = {"entry_named_map", "match_named_map"}
     for alias, canonical in ALIASES:
-        if re.search(rf"id\s*=>\s*'{re.escape(alias)}'", perl_source) is None:
-            fail(f"Perl contract authority is missing alias record {alias!r}")
+        alias_record = extract_perl_contract_record(perl_source, alias)
         if alias in scanner_owned_aliases:
             scanner_pattern = f"\\b{alias}\\s*\\(\\s*\\)"
             if scanner_pattern not in legacy_scanner_source:
                 fail(f"Perl legacy scanner authority is missing alias {alias!r}")
         else:
-            block = re.search(
-                rf"id\s*=>\s*'{re.escape(alias)}'.{{0,600}}?compatibility_surface\s*=>\s*1",
-                perl_source,
-                re.DOTALL,
-            )
-            if block is None:
+            canonical_record = extract_perl_contract_record(perl_source, canonical)
+            if re.search(r"\bcompatibility_surface\s*=>\s*1", alias_record) is None:
                 fail(f"Perl compatibility flag is missing for alias {alias!r}")
-        if canonical not in perl_source:
-            fail(f"canonical alias target is absent from Perl authority: {canonical!r}")
+            if extract_perl_record_field(alias_record, alias, "diag_name") != canonical:
+                fail(f"Perl alias diagnostic identity drifted for {alias!r}")
+            if extract_perl_record_field(alias_record, alias, "ir_node") != extract_perl_record_field(
+                canonical_record,
+                canonical,
+                "ir_node",
+            ):
+                fail(f"Perl alias IR identity drifted for {alias!r}")
+            if extract_perl_runtime_calls(alias_record) != extract_perl_runtime_calls(canonical_record):
+                fail(f"Perl alias runtime lowering drifted for {alias!r}")
 
     internal_ids = require_list(
         contract["internal_contract_ids"],
@@ -1197,7 +1222,7 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("helper projection removed", lambda c: c["helper_projections"]["capture_mark"].pop()),
         ("helper projection semantic", lambda c: c["helper_projections"]["entry_match"][0].__setitem__(1, "span_text")),
         ("alias removed", lambda c: c["compatibility_aliases"].pop()),
-        ("alias target", lambda c: c["compatibility_aliases"][0].__setitem__(1, "capture_len_from")),
+        ("alias anonymous/named target", lambda c: c["compatibility_aliases"][0].__setitem__(1, "capture_from")),
         ("internal contract id", lambda c: c["internal_contract_ids"][0].__setitem__(1, "capture_take_len")),
         ("diagnostic removed", lambda c: c["diagnostics"].pop()),
         ("diagnostic code", lambda c: c["diagnostics"][0].__setitem__("code", "wrong")),
