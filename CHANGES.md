@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.2.0 — split Rust typed-source prerequisites
+
+- Audited Rust source boundaries through the Knowledge Map, neutral contract/checker, Perl lowering, existing Rust
+  tests, primary execution, generated-source routes, structured diagnostics, and complete/canonical driver topology.
+- Proved all 92 canonical helpers exist in Rust, but five of seven documented compatibility aliases compile to the
+  unknown-helper fallback and return JSON null while Perl executes their real semantics. The director requires
+  Perl-equivalent Rust behavior.
+- Proved two neutral alias targets are mislabeled: `capture_from_rule_start()` and
+  `capture_len_from_rule_start()` are anonymous `capture_slice()` / `capture_slice_len()` aliases, not named-mark
+  `capture_from(name)` / `capture_len_from(name)` calls.
+- Split clean prerequisite owners `.0.1` neutral correction, `.0.2` five-alias Rust parity, and `.0.3` typed RED.
+  This audit changes no contract, checker, runtime, test, schema, semantic/MCP/capability state, root README, or
+  sole-facing mdBook behavior.
+- Preserved the checker-owned historical repeated-action next-owner marker after the first canonical run exposed
+  its omission from bounded memory. Focused 8/10/54 proof and the complete restart pass Knowledge Map 786/6,400,
+  all seven doctrines, containment/relocation, CLI 66/66 twice, RAM 43%, and Phase 0 1,031/1,031 in 681 seconds.
+
 ## 2026-08-01 — FUTURE-PARITY-BACKLOG.14.2.1.3 — admit Perl typed source runtime
 
 - Registered both committed Perl typed-source consumers as required, syntax-checked, unconditional canonical

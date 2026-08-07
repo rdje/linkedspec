@@ -1,5 +1,16 @@
 # ARCHITECTURE STATE
 
+- `2026-08-07 Rust typed-source prerequisite audit`: `FUTURE-PARITY-BACKLOG.14.2.2.0` proves the current Rust
+  compatibility baseline is not the one assumed by the typed-source plan. `engine.rs` contains all 92 canonical
+  source-boundary helper names but only two of seven aliases; five other documented zero-argument aliases compile
+  through the generic call path and return null. Perl executes them. Two neutral target rows also confuse
+  anonymous capture-boundary helpers with named marks: rule-start aliases belong to `capture_slice` and
+  `capture_slice_len`. The director requires Perl-equivalent Rust semantics. Neutral correction `.0.1`, Rust parity
+  `.0.2`, and dormant typed RED `.0.3` now form the dependency boundary before Rust typed values `.1-.3`. The audit
+  itself changes no runtime, contract, schema, semantic/MCP/capability state, or public book behavior. Signoff
+  passes Knowledge Map 786/6,400, all seven doctrines, repository containment/relocation, CLI 66/66 twice, RAM 43%,
+  and Phase 0 1,031/1,031 in 681 seconds before `local CI gate passed`.
+
 - `2026-08-01 Perl typed source-location runtime admission`: `FUTURE-PARITY-BACKLOG.14.2.1.3` makes the already
   implemented internal Perl value/projection boundary canonical without changing production runtime code. The
   local gate now requires, syntax-checks, and unconditionally executes `t/typed_source_location_values.t` plus

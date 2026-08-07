@@ -1,5 +1,24 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-07 — Rust typed-source prerequisites are split before implementation
+
+`FUTURE-PARITY-BACKLOG.14.2.2.0` audits the Rust typed-source boundary from clean `82be51f0` (intended 144/300;
+no push). All 92 canonical helper names exist, but five documented compatibility aliases compile and return null
+instead of Perl-equivalent results. Exact Perl/mdBook authorities also show two neutral alias targets are wrong:
+the zero-argument rule-start aliases target anonymous `capture_slice` / `capture_slice_len`, not one-mark
+`capture_from` / `capture_len_from`.
+
+The director requires Rust to match Perl. The clean dependency order is now `.0.1` neutral target correction,
+`.0.2` five-alias Rust parity, and `.0.3` typed-source RED before core/projection/admission `.1-.3`. This audit
+changes no executable contract, runtime, schema, public behavior, or sole-facing book content; it preserves the
+4/10/38 rollout until the owned children land.
+
+The audit is signoff-complete. Knowledge Map 786/6,400, all seven doctrines, capability 80/0/0, every composed
+semantic/MCP consumer, repository containment/relocation, CLI 66/66 twice, RAM 43%, and Phase 0 1,031/1,031 in
+681 seconds pass. The first canonical attempt caught one omitted historical repeated-action handoff marker;
+restoring `FUTURE-PARITY-BACKLOG.10.1` made focused 8/10/54 proof and the full restart pass. Commit/clean proof
+now precedes task-tree-first `.0.1` activation.
+
 ## 2026-08-01 — Perl typed source runtime admission is signoff-complete
 
 `FUTURE-PARITY-BACKLOG.14.2.1.3` admits the implemented Perl typed source-location core/projections from clean

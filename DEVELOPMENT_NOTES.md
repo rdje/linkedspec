@@ -1,5 +1,29 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.2.0` — Rust typed-source prerequisite split): Rust's helper dispatcher
+  contains every one of the 92 neutral canonical source-boundary names, but only `entry_named_map` and
+  `match_named_map` among the seven compatibility aliases. Primary executable probes are decisive: the other five
+  spellings compile, reach the unknown-helper fallback, and return JSON null. Perl TOOLBOX lowering routes those
+  calls through real span/boundary projections, so adding them is a genuine parity repair, not a no-result internal
+  rewrite. The director explicitly requires the Rust counterpart to match Perl.
+
+  Similar names hid a second defect. The neutral artifact maps `capture_from_rule_start` to `capture_from` and its
+  length sibling to `capture_len_from`, but the former are zero-argument anonymous-boundary compatibility calls;
+  the latter are one-argument named-mark helpers. Exact Perl contract nodes, IR names, lowering, public guides, and
+  the sole-facing mdBook agree that the correct targets are `capture_slice` and `capture_slice_len`. Correcting the
+  contract therefore precedes Rust implementation. Only after both prerequisites are clean may the typed-source
+  RED freeze its seven-alias expectations.
+
+  Cargo's default integration-test discovery is another ordering constraint: a committed `tests/*.rs` file is
+  automatically part of complete package tests. The future typed RED stays dormant behind a test-local custom cfg
+  until admission removes that boundary. This audit commits only the durable findings and task split.
+
+  The first canonical signoff correctly rejected a bounded-memory rewrite that dropped the still-enforced
+  repeated-action closure handoff `FUTURE-PARITY-BACKLOG.10.1`. The task-tree copy was intact; restoring the exact
+  memory marker returned focused proof to 8 mode cases / 10 special cases / 54 mutations. The definitive restart
+  then passes every doctrine, composed admission, containment/relocation route, both 66-case CLI environments,
+  RAM 43%, and Phase 0 1,031/1,031 in 681 seconds. This is continuity restoration, not alias behavior change.
+
 - 2026-08-01 (`FUTURE-PARITY-BACKLOG.14.2.1.3` — Perl typed-source runtime admission): admission is deliberately
   compositional. The already green value and projection consumers are now tracked as canonical requirements,
   syntax-checked separately, and executed together immediately after the neutral checker. Their combined 10-test

@@ -18072,13 +18072,148 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   changed. Commit, brief clearing, and exact clean proof precede task-tree-first Rust `.14.2.2.0`; no push.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.2`
-  Status: `pending` parent
+  Status: `active` parent (2026-08-07; Rust authority split `.0` active from clean Perl admission `82be51f0`)
   Goal: Implement and independently admit the same neutral typed source-location algebra in Rust.
-  Children: `.14.2.2.0` authority/RED audit; `.14.2.2.1` immutable value/conversion core; `.14.2.2.2` helper/
-    unchanged loaded-generated-plan interpreter routes; `.14.2.2.3` exact admission/promotion.
+  Children: `.14.2.2.0` authority/split audit; `.14.2.2.0.1` neutral alias-target correction;
+    `.14.2.2.0.2` five-alias Rust parity; `.14.2.2.0.3` exact typed-source RED; `.14.2.2.1` immutable
+    value/conversion core; `.14.2.2.2` helper/unchanged loaded-generated-plan interpreter routes; `.14.2.2.3`
+    exact admission/promotion.
   Acceptance: Use `source_location.rs`, `runtime.rs`, `engine.rs`, `lib.rs`, and
     `tests/typed_source_location_contract.rs`; retain byte registers, convert at the typed boundary, prove native/
     serialized/emitted/generated execution without schema change, bind the consumer, and promote only `rust_runtime`.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.2.0`
+  Status: `signoff-complete` (2026-08-07; authority audit/split verified from clean `82be51f0`, intended 144/300,
+    no push)
+  Goal: Map the exact Rust byte-offset, source-text, helper, native/loaded/reconstructed/generated, and diagnostic
+    authorities; stop before freezing the RED when the supposedly unchanged helper baseline is false, make every
+    discovered contradiction durable, and split exact prerequisite owners before any Rust behavior change.
+  Depends on: `.14.2.1.3`, `.14.2.0`
+  Acceptance: Retrieve the typed-source runtime-rollout Knowledge card, ADR `0056` section 9, neutral artifact and
+    checker, admitted Perl consumer precedent, Rust runtime/source/generated/diagnostic Knowledge owners, Toolbox,
+    exact Rust source and existing tests, complete Rust driver, and canonical registration before implementation.
+    Prove current byte registers, caller-authorized decoded input owner, Unicode scalar/line/column/UTF-8 conversion
+    seams, all 92 helper and seven alias routes, mark/cursor behavior, native plus loaded/reconstructed/emitted/
+    generated convergence, exact structured-error boundary, Cargo test discovery, and every alias through executable
+    probes rather than `.spec` inspection. If the seven-alias premise or neutral target identity is false, add no
+    RED or implementation; record the exact Perl/Rust outputs, freeze dependency-ordered correction/parity/RED
+    children, and preserve runtime, neutral contract/checker, schema/identity, public DSL/facade, semantic/MCP,
+    capability, root README, and sole-facing mdBook behavior until those children activate from clean commits. Pass
+    unchanged focused Rust/neutral baselines, storage/governance/canonical signoff, synchronize durable/live records,
+    commit, clear the brief, and prove clean before `.14.2.2.0.1`.
+  Verification: authority/executable probes, neutral 4/10/38, focused repeated-action 8/10/54 after exact durable
+    handoff restoration, Knowledge Map 786/6,400, all seven doctrines, capability 80/0/0, composed semantic/MCP,
+    repository containment/relocation, CLI 66/66 twice, RAM 43%, and Phase 0 1,031/1,031 in 681 seconds pass before
+    `[ci] local CI gate passed`
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.2.0 - split Rust typed source prerequisites`
+
+  ### `FUTURE-PARITY-BACKLOG.14.2.2.0` Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — Prove Perl admission `.14.2.1.3` landed cleanly at `82be51f0` as 143/300 with empty
+    status/diffs, zero-byte ignored brief, activation parent `98765354`, no generated book/non-cache bytecode, and
+    no background gate; activate this leaf as the sole task-tree diff before Rust consumer/source changes.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Retrieve canonical neutral/ADR/Perl/Rust authorities and use Toolbox-first
+    probes to map exact byte registers, decoded input ownership, conversion/helper/mark/cursor routes, composed
+    execution variants, diagnostics, and current test/gate topology without archaeology.
+  - [x] **SAFE SPLIT BEFORE RED** — Prove the supposedly unchanged seven-alias baseline is false, identify the two
+    wrong neutral target names, and freeze `.0.1-.0.3` correction/parity/RED owners without adding a consumer or
+    changing contract/runtime behavior first.
+  - [x] **NO REGRESSION** — Preserve current Rust package/primary/generated/corpus behavior and all neutral,
+    capability, storage, semantic/MCP, doctrine, and canonical results while the new consumer remains unregistered.
+  - [x] **LOCKSTEP** — Synchronize task/index/roadmaps/architecture/change/development/live/memory and durable
+    Knowledge; keep root README and sole-facing mdBook unchanged because no runtime admission exists.
+
+  Activation evidence 2026-08-01: Perl admission `.14.2.1.3` landed at `82be51f0` as 143/300 with no push. Both
+  activation-pointer hook phases pass against `98765354`, Knowledge Map is 785/6,392, and all seven doctrines pass.
+  Post-commit proof finds empty status and staged/unstaged diffs, a zero-byte ignored `git_message_brief.txt`, exact
+  parent `98765354`, no generated book or non-cache Python bytecode, and no canonical/Phase-0/typed-source/mdBook
+  process. This task-tree file is the sole activation diff; no Rust consumer/source, contract/checker, book,
+  Knowledge, roadmap, root README, or runtime behavior changed first.
+
+  Rust RED-topology finding 2026-08-01: unlike the explicitly listed Perl `prove` inputs, Cargo automatically
+  discovers every `rust/linkedspec-runtime/tests/*.rs` target because the package retains its default
+  `autotests = true` behavior. Therefore the frozen path and the requirement to keep the RED outside the complete
+  Rust/canonical gate cannot coexist as an ordinary active integration test. This leaf will put the entire new
+  test crate behind a test-local `linkedspec_typed_source_red` custom `cfg` (with its lint allowance): ordinary
+  package execution discovers a zero-test dormant target, while the exact focused RED command supplies
+  `RUSTFLAGS='--cfg linkedspec_typed_source_red'` and classifies the missing core API. Core/projection leaves keep
+  using that explicit command; admission `.14.2.2.3` removes the dormant boundary so ordinary Cargo discovery
+  becomes the canonical binding. No Cargo manifest, feature, driver, production source, or existing test topology
+  changes to manufacture the pre-admission boundary.
+
+  Blocking alias finding 2026-08-01: the exact neutral inventory has 92 canonical helpers plus seven callable
+  aliases. Source census finds all 92 canonical names in `engine.rs`, but Rust contains only `entry_named_map` and
+  `match_named_map` among the aliases. Executable primary probes compile each of `capture_from_rule_start()`,
+  `capture_len_from_rule_start()`, `capture_rest_length()`, `capture_slice_here()`, and `capture_slice_length()`
+  yet return JSON null through the unknown-helper fallback. Toolbox `call_spec_handler_subst` proves Perl routes
+  those same calls through `span_text`, `span_length`, or `capture_boundary_write_position`; `LinkedSpec::Get`
+  returns numeric zero for the same minimal whole-input match. Thus Rust cannot both gain the contract's canonical
+  five alias routes and preserve its current user-visible results, while `.14.2.0` explicitly requires both and
+  excludes new DSL behavior. The fact is durable at [[rust-typed-source-compatibility-alias-gap]]. Freeze no RED
+  alias expectation and change no Rust runtime until the director decides whether `.14.2.2.2` may absorb this
+  five-alias parity repair or whether a separate prerequisite owner must close it first.
+
+  Director decision and neutral-target root cause 2026-08-07: the director confirms Rust must implement the same
+  five compatibility aliases with Perl-equivalent behavior; there is no intentional Rust-specific semantic. Exact
+  Perl contracts and the sole-facing helper reference additionally prove the neutral artifact/checker's first two
+  mappings are mislabeled: zero-argument `capture_from_rule_start()` aliases anonymous `capture_slice()`, not
+  one-mark `capture_from(name)`, and `capture_len_from_rule_start()` aliases `capture_slice_len()`, not
+  `capture_len_from(name)`. The other five neutral mappings are correct. This audit therefore closes by splitting
+  `.0.1` to correct only those two neutral identities, `.0.2` to implement all five Rust aliases against exact Perl
+  results across native/reconstructed/generated execution, and `.0.3` to freeze the originally planned typed-source
+  RED after both prerequisites land cleanly. No contract or runtime change belongs in this audit commit.
+
+  Signoff evidence 2026-08-07: the focused neutral checker remains exact at 4 complete / 10 pending / 38
+  mutations, Knowledge Map regeneration/check passes at 786 facts / 6,400 question keys, capability remains
+  schema v2 / 80-0-0 / 24+6, and all seven doctrines pass. The first canonical run correctly caught that the
+  bounded `MEMORY.md` rewrite had omitted the still-enforced historical repeated-action next owner
+  `FUTURE-PARITY-BACKLOG.10.1`; restoring that one durable marker returns its focused checker to 8 mode cases,
+  10 special cases, 8 complete / 0 pending, and 54 rejected mutations. The complete permission-authorized restart
+  then passes that checkpoint, every composed semantic/MCP and containment/relocation consumer, CLI 66/66 in both
+  option environments, RAM 43%, and Phase 0 1,031/1,031 in 681 seconds before `[ci] local CI gate passed`.
+  No executable contract, runtime, test, schema, mdBook, or root README behavior changed in this audit.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.2.0.1`
+  Status: `pending` (intended 145/300 after clean `.0`, no push)
+  Goal: Correct the two mislabeled neutral compatibility-alias targets before any Rust implementation consumes them.
+  Depends on: `.14.2.2.0`
+  Acceptance: Change only `capture_from_rule_start` from `capture_from` to `capture_slice` and
+    `capture_len_from_rule_start` from `capture_len_from` to `capture_slice_len` in the neutral JSON and checker
+    authority; keep seven aliases, every other fixture/count/rollout row, 38 mutations, runtime behavior, and the
+    already-correct mdBook semantics unchanged. Add exact mutation/Perl-lowering proof if required to prevent another
+    semantically plausible but arity-wrong target. Synchronize durable/live records, pass neutral/doctrine/canonical
+    signoff, commit, clear the brief, and prove clean before `.0.2`.
+  Verification: pending
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.2.0.1 - correct neutral capture alias targets`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.2.0.2`
+  Status: `pending` (intended 146/300 after clean `.0.1`, no push)
+  Goal: Implement the five missing Rust source-boundary compatibility aliases with exact Perl-equivalent behavior.
+  Depends on: `.14.2.2.0.1`
+  Acceptance: Add exact RED-first native tests for all five aliases, Unicode widths, anonymous-boundary mutation,
+    absence/reversed-span behavior, and canonical equivalence; then route `capture_from_rule_start` to
+    `capture_slice`, `capture_len_from_rule_start` and `capture_slice_length` to `capture_slice_len`,
+    `capture_rest_length` to `capture_rest_len`, and `capture_slice_here` to `start_capture_slice`. Prove native,
+    ordinary serialized/reconstructed, generated-plan, and independently emitted-source results without changing
+    preferred helper semantics, artifact/schema identity, semantic/MCP/capability contracts, or other backends.
+    Update the sole-facing mdBook with truthful Rust parity and examples where needed, pass complete Rust/corpus/
+    primary plus doctrine/canonical signoff, commit, clear the brief, and prove clean before `.0.3`.
+  Verification: pending
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.2.0.2 - add Rust capture compatibility aliases`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.2.0.3`
+  Status: `pending` (intended 147/300 after clean `.0.2`, no push)
+  Goal: Freeze the exact dormant Rust typed-source RED consumer against the corrected seven-alias baseline.
+  Depends on: `.14.2.2.0.2`
+  Acceptance: Add only `rust/linkedspec-runtime/tests/typed_source_location_contract.rs` behind the audited
+    pre-admission custom-cfg boundary. Require the 3/7/6/3 neutral value fixtures, empty/multi-source cases, four
+    exact diagnostics, detached immutability/privacy, exact 92-helper/seven-alias inventory, Unicode byte-to-scalar
+    conversion, parent/child mark isolation, absence/capture mutation/save-restore compatibility, and current native/
+    reconstructed/generated result shapes. Classify the missing core `.1` before projection `.2`, keep ordinary
+    Cargo/canonical discovery dormant until admission `.3`, change no production/neutral/public behavior, pass
+    unchanged baselines and canonical signoff, commit, clear the brief, and prove clean before `.14.2.2.1`.
+  Verification: pending
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.2.0.3 - lock Rust typed source RED`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.3`
   Status: `pending` parent
