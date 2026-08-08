@@ -101,6 +101,7 @@ expected_temp_owners=(
  julia/test/semantic_index_runtime_observation_routes_test.jl
  julia/test/semantic_index_runtime_observation_test.jl
  julia/test/semantic_introspection_julia_admission_test.jl
+ julia/test/source_boundary_compatibility_aliases_test.jl
  julia/test/source_emitter_test.jl
  julia/test/spec_loader_test.jl
  julia/test/unicode_rule_label_identity_routes_test.jl
@@ -208,4 +209,4 @@ if find "$TMPDIR" -mindepth 1 -type d -name 'jl_*' -print -quit | grep -q .; the
  fail 'a completed focused Julia workspace remained in managed temporary storage'
 fi
 
-printf '[julia-project-data-test] PASS: 18 Julia owners, 5 locked package trees, generated output, and traces stay on repository storage\n'
+printf '[julia-project-data-test] PASS: 19 Julia owners, 5 locked package trees, generated output, and traces stay on repository storage\n'

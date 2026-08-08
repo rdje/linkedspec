@@ -136,7 +136,11 @@ end
 
 function canonical_action_helper_name(name::AbstractString)
     value = String(name)
-    return get(_NUMERIC_ALIAS_CANONICAL_NAMES, value, get(_CURRENT_ALIAS_CANONICAL_NAMES, value, value))
+    return get(
+        _SOURCE_BOUNDARY_COMPATIBILITY_ALIAS_CANONICAL_NAMES,
+        value,
+        get(_NUMERIC_ALIAS_CANONICAL_NAMES, value, get(_CURRENT_ALIAS_CANONICAL_NAMES, value, value)),
+    )
 end
 
 is_known_action_ir_call_name(name::AbstractString) = String(name) in _KNOWN_ACTION_IR_CALL_NAMES
@@ -406,11 +410,22 @@ const _CURRENT_ALIAS_ACTION_IR_CALL_NAMES = Set{String}([
     "when",
 ])
 
+const _SOURCE_BOUNDARY_COMPATIBILITY_ALIAS_CANONICAL_NAMES = Dict{String,String}(
+    "capture_from_rule_start" => "capture_slice",
+    "capture_len_from_rule_start" => "capture_slice_len",
+    "capture_rest_length" => "capture_rest_len",
+    "capture_slice_here" => "start_capture_slice",
+    "capture_slice_length" => "capture_slice_len",
+    "entry_named_map" => "entry_map",
+    "match_named_map" => "match_map",
+)
+
 const _KNOWN_ACTION_IR_CALL_NAMES = union(
     _SUPPORTED_ACTION_IR_CALL_NAMES,
     COMPLETE_NAMED_MARK_ACTION_IR_CALL_NAMES,
     _NUMERIC_ALIAS_ACTION_IR_CALL_NAMES,
     _CURRENT_ALIAS_ACTION_IR_CALL_NAMES,
+    Set(keys(_SOURCE_BOUNDARY_COMPATIBILITY_ALIAS_CANONICAL_NAMES)),
 )
 
 const _NUMERIC_ALIAS_CANONICAL_NAMES = Dict{String,String}(

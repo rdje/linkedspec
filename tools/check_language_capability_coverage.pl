@@ -75,6 +75,18 @@ sub julia_names {
  return sort @names;
 }
 
+sub julia_source_boundary_compatibility_aliases {
+ my $text = read_text('julia/src/action/ActionContracts.jl');
+ $text =~ /const _SOURCE_BOUNDARY_COMPATIBILITY_ALIAS_CANONICAL_NAMES = Dict\{String,String\}\((.*?)\n\)/s
+  or fail('cannot locate Julia source-boundary compatibility alias canonical-name map');
+ my %canonical_names = $1 =~ /"([^"]+)"\s*=>\s*"([^"]+)"/g;
+ $text =~ /function canonical_action_helper_name\(name::AbstractString\).*?get\(\s*_SOURCE_BOUNDARY_COMPATIBILITY_ALIAS_CANONICAL_NAMES,/s
+  or fail('Julia canonical helper resolver does not consume the source-boundary compatibility alias map');
+ $text =~ /const _KNOWN_ACTION_IR_CALL_NAMES = union\(.*?Set\(keys\(_SOURCE_BOUNDARY_COMPATIBILITY_ALIAS_CANONICAL_NAMES\)\),.*?\n\)/s
+  or fail('Julia known-name inventory does not consume the source-boundary compatibility alias map');
+ return map { [$_, $canonical_names{$_}] } sort keys %canonical_names;
+}
+
 sub lua_names {
  my $text = read_text('lua/src/linkedspec/action_call_names.lua');
  $text =~ /local CURRENT_CALL_NAMES = \{(.*?)\n\}/s
@@ -101,11 +113,15 @@ my @neutral_source_boundary_aliases = map {
  [@{$_}];
 } @{$typed_source_contract->{compatibility_aliases}};
 my @dart_source_boundary_aliases = dart_source_boundary_compatibility_aliases();
+my @julia_source_boundary_aliases = julia_source_boundary_compatibility_aliases();
 my $serialize_aliases = sub {
  return join("\n", map { join("\0", @{$_}) } sort { $a->[0] cmp $b->[0] } @_);
 };
 fail('Dart source-boundary compatibility aliases differ from the neutral typed-source contract')
  unless $serialize_aliases->(@dart_source_boundary_aliases)
+  eq $serialize_aliases->(@neutral_source_boundary_aliases);
+fail('Julia source-boundary compatibility aliases differ from the neutral typed-source contract')
+ unless $serialize_aliases->(@julia_source_boundary_aliases)
   eq $serialize_aliases->(@neutral_source_boundary_aliases);
 
 my %seen;

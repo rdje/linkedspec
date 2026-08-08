@@ -1,5 +1,26 @@
 # ARCHITECTURE STATE
 
+- `2026-08-07 Julia source-boundary compatibility-alias parity`: `FUTURE-PARITY-BACKLOG.14.2.4.0.1` adds one
+  private seven-row canonical-name map to `ActionContracts.jl`, consults it before the existing numeric/current
+  alias maps, and unions only its keys into Julia's known-name set. Each source spelling therefore reaches the
+  existing `capture_slice`, `capture_slice_len`, `capture_rest_len`, `start_capture_slice`, `entry_map`, or
+  `match_map` interpreter branch. There is no alias-specific runtime path or common 246-name inventory widening.
+
+  Exact RED was 0/7 known, 0/7 canonicalized, and 7/7 structured unsupported-helper failures. The ordinary
+  141-assertion consumer proves canonical equivalence, Unicode scalar widths, capture-boundary mutation, reversed-
+  span absence, named maps, unrelated failure, and native/loaded/reconstructed/generated/emitted carriers. Language
+  coverage separately extracts both Dart and Julia aliases and locks their name/target pairs to neutral while
+  remaining 246/105+1/122. Julia's zero-based UTF-8 code-unit registers, external results, schemas, identities,
+  typed-source pending state, neutral 6/8/40, and other backends remain unchanged.
+
+  The storage census adds the consumer as exact temporary owner 19 and retains five locked package trees. The sole-
+  facing book now teaches callable Julia alias parity separately from future Julia typed-source values/projections;
+  its 79-file/14,168-KiB HTML keeps the changed paragraphs and example distinct and is removed after inspection.
+  Knowledge Map remains 787/6,450; all seven doctrines and definitive canonical CI pass capability 80/0/0, typed
+  6/8/40 plus Perl 10 and Rust/Dart 4/4, composed semantic/MCP, containment/relocation, CLI 66x2, RAM 66%, and Phase
+  0 1,031/1,031 in 700 seconds before the exact pass marker. Atomic commit 158/300 remains before dormant RED
+  `.14.2.4.0.2`.
+
 - `2026-08-07 Julia typed source-location authority/prerequisite boundary`: `FUTURE-PARITY-BACKLOG.14.2.4.0`
   changes no production or test behavior. Julia's `_RuntimeExecutionContext` copies decoded input once and retains
   cursor, local-match, mark, anonymous-boundary, and stack positions as zero-based UTF-8 code-unit offsets.

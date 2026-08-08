@@ -1,5 +1,25 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-07 — Julia executes all seven source-boundary compatibility aliases
+
+`FUTURE-PARITY-BACKLOG.14.2.4.0.1` activates task-tree-first from clean authority-audit commit `57c62ce4` as
+intended 158/300 with no push. One exact seven-row adapter at Julia's existing contract seam makes every neutral
+compatibility spelling known and canonicalizes it to the preferred helper. Shared interpreter dispatch, the common
+246-name inventory, runtime registers, schemas, identities, other backends, and neutral rollout are unchanged.
+
+The RED census was 0/7 known, 0/7 canonicalized, and 7/7 exact unsupported-helper failures. The ordinary consumer
+is now 141/141 across resolver arity, Unicode widths, boundary mutation and reversed-span absence, named maps,
+unrelated structured diagnostics, and native, loaded/reconstructed, generated-plan, plus independently emitted
+execution. Language coverage remains 246/105+1/122 and independently binds Julia's exact seven pairs to neutral.
+
+The strict storage gate classifies the consumer as repository-local temporary owner 19 and passes five locked
+package trees. The sole-facing book now includes Julia in the seven-alias behavior and migration example while
+keeping Julia typed-source values/projections pending at neutral 6/8/40; its 79-file/14,168-KiB generated HTML has
+separate paragraphs and code blocks, and the artifact is removed. Knowledge Map remains 787/6,450 and all seven
+doctrines pass. Definitive canonical CI passes capability 80/0/0, typed Perl 10 plus Rust/Dart 4/4, composed
+semantic/MCP, containment/relocation, CLI 66x2, RAM 66%, and Phase 0 1,031/1,031 in 700 seconds before its exact
+marker. Atomic commit and clean proof remain before dormant Julia typed-source RED `.14.2.4.0.2`.
+
 ## 2026-08-07 — Julia typed-source boundary is mapped; alias parity is the next prerequisite
 
 `FUTURE-PARITY-BACKLOG.14.2.4.0` activates task-tree-first from clean Dart-admission commit `c2a88218` as intended

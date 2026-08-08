@@ -102,13 +102,15 @@ Compatibility aliases:
 | `capture_from_rule_start()` | `capture_slice()` |
 | `capture_len_from_rule_start()` | `capture_slice_len()` |
 
-Perl, Rust, and Dart execute all five rows identically to their preferred helpers. Together with
-`entry_named_map()` and `match_named_map()`, this gives all three backends all seven callable compatibility
+Perl, Rust, Dart, and Julia execute all five rows identically to their preferred helpers. Together with
+`entry_named_map()` and `match_named_map()`, this gives all four backends all seven callable compatibility
 aliases. The aliases do not select a legacy coordinate model: text endpoints, Unicode-scalar widths, `undef` for
-reversed spans, boundary mutation, and generated-parser behavior are the same as the preferred spelling. Julia
-and Lua rollout remains separately tracked, so portable new code should still use the preferred names.
+reversed spans, boundary mutation, named-map shapes, and generated-parser behavior are the same as the preferred
+spelling. Julia's typed source-location values and projections remain pending independently of this spelling-only
+parity; Lua alias rollout is also pending. Portable new code should therefore still use the preferred names.
 
-For example, this migration-only fixture returns `["é🙂  ", 4, 4, 6]` for input `é🙂  ab` on Perl, Rust, and Dart:
+For example, this migration-only fixture returns `["é🙂  ", 4, 4, 6]` for input `é🙂  ab` on Perl, Rust, Dart,
+and Julia:
 
 ```text
 Top::OR{1,1}

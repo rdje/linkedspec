@@ -1,5 +1,31 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.4.0.1` — Julia source-boundary compatibility aliases): the audited gap
+  belongs entirely to `ActionContracts.jl`. One private seven-row dictionary maps `capture_from_rule_start` to
+  `capture_slice`, `capture_len_from_rule_start` and `capture_slice_length` to `capture_slice_len`,
+  `capture_rest_length` to `capture_rest_len`, `capture_slice_here` to `start_capture_slice`, `entry_named_map` to
+  `entry_map`, and `match_named_map` to `match_map`. `canonical_action_helper_name` consults that table, and the
+  existing known-name union includes its keys. The shared interpreter remains unchanged.
+
+  RED was exact: 0/7 known, 0/7 canonicalized, and 7/7 compiled invocations threw the existing structured
+  unsupported-helper diagnostic. GREEN is 141/141 across contract resolution with zero and one arguments,
+  unrelated-name failure, Unicode input `é🙂  ab`, normal and reversed anonymous boundaries, named maps, native,
+  path-loaded, normalized/reconstructed, generated-plan, and independently loaded emitted execution. External
+  results and zero-based UTF-8 code-unit cursor/match/mark/capture/stack registers retain their existing behavior.
+
+  The common Dart/Julia/Lua public-name basis intentionally stays at 246: source-boundary migration aliases are a
+  separate backend adapter. Language coverage now extracts Julia's private dictionary and requires its seven exact
+  pairs, as it already did for Dart, to equal the neutral typed-source contract. Neutral rollout stays 6/8/40 and
+  Julia values/projections remain pending for `.14.2.4.1-.3` after dormant RED `.14.2.4.0.2`.
+
+  The first complete Julia run passed the package and then exposed a strict storage-census mismatch: the new test's
+  repository-routed `mktempdir` made it owner 19. Exact registration and pass-count correction make focused storage
+  green at 19 owners / five locked package trees. The sole-facing book now reports callable Julia alias parity while
+  preserving typed-source pending truth; its 79-file/14,168-KiB HTML uses separate paragraphs and code blocks.
+  Knowledge Map remains 787/6,450 and all seven doctrines pass. Definitive canonical CI passes capability 80/0/0,
+  typed 6/8/40 plus Perl 10 and Rust/Dart 4/4, every composed semantic/MCP admission, containment/relocation, CLI
+  66x2, RAM 66%, and Phase 0 1,031/1,031 in 700 seconds before the exact pass marker.
+
 - 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.4.0` — Julia typed-source authority/prerequisite audit): Julia's
   `_RuntimeExecutionContext` owns one copied decoded `String` and zero-based UTF-8 code-unit cursor, rule-local
   mark, anonymous-boundary, and save-stack state; `RuntimeMatchRegisters` owns entry/local matches against the same

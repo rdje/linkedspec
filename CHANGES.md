@@ -1,5 +1,27 @@
 # CHANGES
 
+## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.4.0.1 — add Julia source aliases
+
+- Added the neutral contract's exact seven source-boundary compatibility spellings to Julia's existing known-name
+  and canonicalization seam. Each spelling resolves to its preferred helper before shared interpreter dispatch;
+  no alias-specific runtime branch or common 246-name inventory change was added.
+- Added one ordinary 141-assertion consumer covering the exact mapping, resolver arity, unrelated-helper structured
+  diagnostics, Unicode widths, anonymous capture-boundary mutation, reversed-span absence, named-map shapes, and
+  alias/canonical equality across native, loaded/reconstructed, generated-plan, and independently emitted routes.
+- Extended language coverage to bind Julia's seven name/target pairs independently to the neutral typed-source
+  contract. Coverage remains 246 current names / 105 corpus fixtures plus one named-mark fixture / 122 independently
+  covered Perl contracts; neutral typed-source truth remains 6 complete / 8 pending / 40 mutations.
+- Registered the new carrier consumer as Julia temporary owner 19 after the complete package passed and the strict
+  project-storage census exposed the missing enumeration. The focused 19-owner / five-package storage gate passes;
+  no storage root or locality policy changed.
+- Updated the sole-facing source-boundary reference, local-CI guide, and backend handoff so Julia's callable alias
+  parity is current without claiming Julia typed-source value/projection admission. The 79-file/14,168-KiB build
+  keeps the status paragraph, example, and surrounding guidance in distinct rendered blocks; its artifact is removed.
+- Updated the canonical Julia alias and rollout Knowledge cards; the derived map remains 787 facts / 6,450 question
+  keys. All seven doctrines and definitive canonical CI pass capability 80/0/0, typed 6/8/40 plus Perl 10 and
+  Rust/Dart 4/4, composed semantic/MCP, containment/relocation, CLI 66x2, RAM 66%, and Phase 0 1,031/1,031 in
+  700 seconds before the exact pass marker. Atomic commit 158/300 remains.
+
 ## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.4.0 — map Julia typed source boundary
 
 - Audited Julia's decoded-input authority, native offset units, 92+7 helper surface, runtime carriers, structured
