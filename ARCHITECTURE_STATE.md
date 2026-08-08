@@ -1,5 +1,18 @@
 # ARCHITECTURE STATE
 
+- `2026-08-07 Dart source-boundary compatibility alias routing`: `FUTURE-PARITY-BACKLOG.14.2.3.0.1` adds the
+  neutral contract's seven aliases to Dart's known-name/canonicalization adapter and routes them through the
+  existing canonical helper implementation. A separate private alias inventory prevents the backend-specific
+  compatibility rollout from widening the shared 246-name Dart/Julia/Lua capability inventory; the independent
+  checker requires its exact canonical targets to match the neutral typed-source contract. Runtime state remains
+  UTF-16 code-unit based and all scalar projection, mutation, absence, map, native/reconstructed/generated-plan,
+  and emitted behavior comes from the canonical routes. Alias 4/4, focused 91, complete Dart format 96/0,
+  analysis, package 379, storage 20/47, CLI 66x2, corpus 105/105, language coverage 246/105/122, and neutral
+  5/9/39 pass. Repository-routed mdBook 79/14,152 KiB with rendered paragraph inspection, Knowledge Map
+  786/6,419, all seven doctrines, and canonical capability 80/0/0, composed semantic/MCP consumers, containment/
+  relocation, CLI 66x2, RAM 52%, and Phase 0 1,031/1,031 in 681 seconds pass. This compatibility seam does not
+  admit `dart_runtime` typed values or change schemas/identities.
+
 - `2026-08-07 Dart typed source-location prerequisite audit`: `FUTURE-PARITY-BACKLOG.14.2.3.0` proves Dart's
   implementation baseline has all 92 canonical source-boundary helpers but none of the seven neutral aliases.
   Each alias stays uncanonicalized and ordinary compiled invocation produces structured `unknown_helper` at

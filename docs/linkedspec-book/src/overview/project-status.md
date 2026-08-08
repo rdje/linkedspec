@@ -35,11 +35,11 @@ helper result; rollout is 5 complete / 9 pending.
 
 The helper audit distinguishes 7 callable compatibility aliases from 2 internal Perl contract/scanner ids.
 `capture_take_slice` and `capture_take_slice_len` are internal ids, not accepted helper spellings; authored code
-continues to use `capture_take()` and `capture_take_len()`. Rust now executes all 7 callable aliases through the
-same canonical dispatch arms as their preferred helpers, including Unicode-scalar widths, reversed-span `undef`,
-anonymous-boundary mutation, reconstructed compiled specs, generated plans, and independently compiled emitted
-source. This compatibility-spelling support is now included in Rust's internal typed source-location admission,
-but it does not claim a public value, transaction, recursive-observation, or span-native dispatch surface.
+continues to use `capture_take()` and `capture_take_len()`. Rust and Dart now execute all 7 callable aliases through
+the same canonical dispatch routes as their preferred helpers, including Unicode-scalar widths, reversed-span
+absence, anonymous-boundary mutation, reconstructed compiled specs, generated plans, and independently compiled
+emitted source. Dart's compatibility-spelling parity does not promote the separately pending `dart_runtime` typed-
+source admission or claim a public value, transaction, recursive-observation, or span-native dispatch surface.
 
 Five-backend callable recurring/public admission is complete under `FUTURE-PARITY-BACKLOG.11.8.4`. One rooted
 driver composes neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; both Lua rows execute one focused file. The

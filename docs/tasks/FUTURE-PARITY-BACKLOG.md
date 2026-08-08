@@ -18607,8 +18607,8 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   clearing, and clean proof precede Dart authority/RED `.14.2.3.0`; no push.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.3`
-  Status: `active` parent (2026-08-07; Dart authority/split audit `.0` signoff-complete and commit-pending from
-    clean Rust admission commit `666751ae`; alias parity `.0.1` is next after clean landing)
+  Status: `active` parent (2026-08-07; Dart authority/split audit `.0` landed clean at `d3efe221`; alias parity
+    `.0.1` is active task-tree-first from that boundary)
   Goal: Implement and independently admit the same neutral typed source-location algebra in Dart.
   Children: `.14.2.3.0` authority/split audit; `.14.2.3.0.1` seven-alias Dart parity; `.14.2.3.0.2` exact
     typed-source RED; `.14.2.3.1` immutable value/conversion core; `.14.2.3.2` helper/unchanged loaded-generated-
@@ -18618,8 +18618,8 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
     native/serialized/generated execution without schema change, bind the consumer, and promote only `dart_runtime`.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.3.0`
-  Status: `signoff-complete` / commit pending (2026-08-07; task-tree-first from clean `666751ae`, intended
-    151/300, no push)
+  Status: `done; signoff-complete` (2026-08-07; landed clean at `d3efe221` from `666751ae` as intended 151/300,
+    no push)
   Goal: Map Dart's exact source text, code-unit cursor/mark/match registers, source-boundary helpers, loaded/
     reconstructed/generated-plan carriers, and diagnostic seams; stop before freezing the RED because the
     supposedly unchanged seven-alias baseline is false, and split exact prerequisite owners without changing
@@ -18706,7 +18706,8 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   atomic commit, ignored-brief clearing, and clean proof precede alias parity `.14.2.3.0.1`; no push.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.3.0.1`
-  Status: `pending`
+  Status: `signoff-complete / commit pending` (2026-08-07; task-tree-first from clean audit commit `d3efe221`,
+    intended 152/300, no push)
   Goal: Route Dart's seven neutral source-boundary compatibility aliases through the existing canonical helper
     names and runtime paths without adding a second semantic implementation.
   Depends on: `.14.2.3.0`, `.14.2.2.0.1`
@@ -18715,6 +18716,69 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
     named-capture maps, native/reconstructed/generated-plan/emitted execution, helper-catalog governance, and
     canonical equality. Preserve the 92 canonical routes, code-unit registers, schemas/identities, neutral 5/9/39,
     typed-source admission state, and sole-facing preferred-spelling guidance.
+  Verification: checker-first RED/GREEN; alias 4/4; focused 91; complete Dart format 96/0, fatal analysis, package
+    379, storage 20/47, CLI 66x2, corpus 105/105; language coverage 246/105/122; neutral 5/9/39; Knowledge Map
+    786/6,419; mdBook 79/14,152 KiB plus rendered paragraph inspection; all seven doctrines; canonical capability
+    80/0/0, typed 5/9/39, semantic/MCP consumers, containment/relocation, CLI 66x2, RAM 52%, Phase 0 1,031/1,031
+    in 681 seconds, and exact local-CI pass marker. Atomic commit, brief-clear, and clean-handoff proof follow.
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.3.0.1 - add Dart source alias parity`
+
+  ### `FUTURE-PARITY-BACKLOG.14.2.3.0.1` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove audit `.0` landed at `d3efe221` as 151/300 with parent
+    `666751ae`, empty status/diffs, zero-byte brief, valid memory pointer, and no background verification; make
+    this task-tree file the sole activation diff before Dart source/test/book changes.
+  - [x] **CHECKER-FIRST RED** — Freeze the exact seven alias spellings, canonical targets, known-name state,
+    diagnostics, representative Unicode/mutation/map values, and carrier matrix; prove failure against unchanged
+    Dart production for only the missing alias mappings.
+  - [x] **ONE ROUTE / EXACT BEHAVIOR** — Add only the seven mappings at the existing canonicalization/known-name
+    seam, with no alias-specific runtime implementation or different typed semantics.
+  - [x] **CARRIER / REGRESSION PROOF** — Prove canonical equality across native, reconstructed, generated-plan,
+    emitted execution and exact arity/structured failures; pass complete Dart and neutral 5/9/39 unchanged.
+  - [x] **BOOK / LOCKSTEP / SIGNOFF** — Keep preferred canonical spellings and runtime availability exact in the
+    sole-facing book; synchronize live/durable records, pass doctrines/canonical CI, commit as 152/300, clear the
+    brief, and prove clean before dormant typed RED `.14.2.3.0.2`.
+
+  Activation evidence 2026-08-07: behavior-free audit `.14.2.3.0` landed at `d3efe221` as intended 151/300 with
+  first parent `666751ae` and no push. The hook regenerated Knowledge Map at 786 facts/6,417 question keys, passed
+  all seven doctrines, and proved the activation pointer against pre-commit HEAD and post-commit `HEAD^1`.
+  Post-commit status and staged/unstaged diffs are empty, the ignored brief is zero bytes, memory architecture
+  passes, and no canonical, Phase-0, Dart, typed-source, or mdBook verification process remains. This task-tree
+  file is the sole activation diff before any production, test, neutral, Knowledge, roadmap, or book change.
+
+  RED/GREEN evidence 2026-08-07: one new four-test consumer freezes all seven exact alias/target pairs, known-name
+  and resolver contracts including preserved authored arity, unrelated structured `unknown_helper` diagnostics,
+  Unicode text and scalar lengths, anonymous-boundary mutation, reversed-span absence, named entry/match maps, and
+  native/reconstructed/generated-plan plus independently compiled emitted-package equality. Against unchanged
+  production, the inventory test fails first at unknown `capture_from_rule_start`; the two carrier tests fail only
+  at structured `unknown_helper` for `capture_slice_here`; and the unrelated-diagnostic test already passes.
+  GREEN adds the seven names at the existing known/canonicalization seam and maps them to `capture_slice`,
+  `capture_slice_len`, `capture_rest_len`, `start_capture_slice`, `capture_slice_len`, `entry_map`, and `match_map`.
+  No interpreter branch or alias-specific semantic implementation was added.
+
+  Governance/carrier evidence 2026-08-07: the language-capability checker still proves the intentionally shared
+  Dart/Julia/Lua inventory at 246 names, while a separate Dart compatibility inventory and canonical map must now
+  equal the neutral typed-source contract's seven pairs exactly. This keeps backend-specific compatibility names
+  from inflating the shared inventory. The new consumer passes 4/4; the focused action/matching/interpreter/named-
+  mark/emitter/loader/alias selection passes 91 tests; storage governance passes at 20 owners/47 locked packages;
+  and the full Dart gate passes format 96/0, fatal analysis, 379 package tests, CLI 66x2, and corpus 105/105. The
+  neutral typed-source checker remains 5 complete / 9 pending / 39 mutations. One accidental bare `dart test`
+  command re-rooted the ignored package configuration into the user-global Pub cache; the managed wrapper then
+  waited before discovery because its repository-local `PUB_CACHE` disagreed with that graph. An offline wrapped
+  `pub get` restored all roots to the canonical repository cache; the exact user-cache active-root residue is zero;
+  the storage oracle re-verifies the 20 owners/47 packages; and wrapped alias 4/4 completes in five seconds. All
+  diagnostic processes/directories and the automatically emitted off-volume sample were removed exactly.
+
+  Signoff evidence 2026-08-07: the sole-facing source-boundary reference, project status, local-CI guide, and
+  backend handoff state that Perl, Rust, and Dart execute the seven compatibility names, preserve canonical
+  spellings as preferred guidance, and keep Dart typed-value admission pending. Repository-routed mdBook build
+  passes at 79 files/14,152 KiB; generated HTML inspection proves each changed passage remains a separate paragraph
+  and the source example remains isolated from following prose. Knowledge Map regenerates at 786 facts/6,419
+  question keys, memory architecture and all seven doctrines pass, and definitive canonical CI preserves
+  capability 80/0/0 plus typed-source 5/9/39, executes all composed semantic/MCP consumers, proves repository
+  containment and moved-root execution, passes CLI 66/66 twice, reports RAM 52%, and passes Phase 0 1,031/1,031
+  in 681 seconds before `[ci] local CI gate passed`. No verification process remains; commit/brief/clean proof is
+  the only remaining handoff step.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.3.0.2`
   Status: `pending`

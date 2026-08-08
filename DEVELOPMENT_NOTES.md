@@ -1,5 +1,31 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.3.0.1` — Dart source-boundary alias parity): compatibility names are
+  adapter metadata, not new runtime operations. `knownActionIrCallNames` now includes one private exact seven-name
+  set, and `canonicalActionHelperName` maps those names to the established source-boundary helpers before the
+  ordinary resolver/interpreter route. The interpreter therefore has no alias-specific switch branch and retains
+  its UTF-16 code-unit registers, scalar projection edges, results, mutations, and structured failure behavior.
+
+  The shared language-capability inventory must remain the 246 names common to Dart, Julia, and Lua; placing the
+  seven Dart-only rollout names in `currentAliasActionIrCallNames` would incorrectly widen that cross-backend
+  contract. The independent coverage checker now reads the dedicated Dart set plus canonical map and requires its
+  exact name/target pairs to equal `typed_source_location_contract.json`, while continuing to prove 246 shared
+  names, 105 corpus fixtures plus the exact named-mark fixture, and 122 public Perl contracts.
+
+  Checker-first evidence is exact: unchanged production failed known-name resolution at
+  `capture_from_rule_start`, and carrier cases failed only with structured `unknown_helper` for
+  `capture_slice_here`; an invented-name diagnostic already passed. GREEN passes all four new tests and the
+  91-test action/matching/interpreter/named-mark/emitter/loader selection, including Unicode widths, boundary
+  mutation, reversed-span absence, named maps, reconstruction, generated plans, and independently emitted source.
+  Complete Dart passes format 96/0, fatal analysis, 379 tests, storage 20/47, CLI 66x2, and corpus 105/105; neutral
+  typed-source truth remains 5/9/39 because alias parity is not `dart_runtime` typed-value admission.
+
+  Sole-facing signoff passes the repository-routed mdBook at 79 files/14,152 KiB, with each changed rendered
+  passage retaining its own paragraph and the helper example separated from following prose. Knowledge Map is
+  786/6,419; all seven doctrines pass. Definitive canonical CI preserves capability 80/0/0 and typed source
+  5/9/39, executes composed semantic/MCP consumers, proves containment and moved-root execution, passes CLI 66x2,
+  reports RAM 52%, and completes Phase 0 1,031/1,031 in 681 seconds before the exact local-CI pass marker.
+
 - 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.3.0` — Dart typed-source prerequisite audit): Dart's live source
   boundary already has the intended adapter shape but not the assumed compatibility baseline. One
   `_RuntimeExecutionContext` owns immutable decoded input; `RuntimeMatchRegisters`, rule-local mark buckets,

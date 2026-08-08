@@ -15,11 +15,13 @@ answers:
   - do Dart generated source workspaces and traces stay on the SSD
   - where does Dart telemetry configuration live during LinkedSpec workflows
   - does supported Dart execution read the developer home
+  - why can a bare dart test make the repository wrapper wait before test discovery
 date: 2026-07-27
 status: current
 tags: [dart, pub, storage, filesystem, ssd, cache, temporary-data, generated-source, trace, PROJECT-DATA-SSD-ROOTING]
 evidence: "PROJECT-DATA-SSD-ROOTING.2.3 adds tools/test_dart_project_data_storage.sh and invokes it from tools/run_dart_local.sh. The oracle locks 18 tracked Directory.systemTemp owners, verifies TMPDIR/PUB_CACHE and the managed run share the repository device, resolves all 47 hosted pubspec.lock packages and hashes offline, and exercises trace/generated-source paths. The canonical cache contains 5,903 payload files / 63,744,165 bytes with hash 039c5fd8728ea44f23b028ee9400846c353e71a071d46da355b8e1e0d857f29e; 47 package-index JSON files match the shared cache after removing only _fetchedAt, normalized hash 21e59ae7c96ad7a94b77f7e854a685d4729c22623486a1acea4ab444777f067b. Full proof passes 337 package tests, primary 66x2, corpus 105/105. After use, the two exact current/former shared active-root records are deleted and residue is zero; ambiguous shared package payload remains untouched and unused. Process proof .4.2 exposes Dartdev's pre-command HOME telemetry read and adds tools/run_dart_project_data.sh plus LINKEDSPEC_DART_HOME, so every maintained Dart command uses the repository-local Dart home without changing CLI behavior."
 evidence_update_2026_07_30_callable_codeblock_emission: "FUTURE-PARITY-BACKLOG.11.5.2 adds one independently compiled emitted-Dart callable-codeblock workspace, advancing the live tracked Directory.systemTemp manifest from 18 to 19. The oracle registers that exact owner and reports its manifest size dynamically; the complete gate passes 369 tests before the storage leg."
+evidence_update_2026_08_07_bare_test_recovery: "During FUTURE-PARITY-BACKLOG.14.2.3.0.1, an accidental bare dart test regenerated ignored dart/.dart_tool/package_config.json with file roots under the user-global Pub cache. The maintained wrapper then waited before discovery because its repository-local PUB_CACHE disagreed with that graph. bash tools/run_dart_project_data.sh pub get -C dart --offline restored every root to /.linkedspec-data/cache/dart-pub; shared active-root residue for this checkout was already zero; the 20-owner/47-package oracle and wrapped alias test pass. This confirms the existing rule: never run a bare maintained Dart command."
 reverify: "bash tools/test_dart_project_data_storage.sh && bash tools/run_dart_local.sh && bash tools/run_dart_project_data.sh pub get -C dart --offline"
 ---
 
@@ -35,10 +37,10 @@ The canonical cache covers all 47 hosted packages and hashes in `dart/pubspec.lo
 shared cache only in `_fetchedAt`; after removing that volatile field their canonical JSON hash is
 `21e59ae7c96ad7a94b77f7e854a685d4729c22623486a1acea4ab444777f067b`.
 
-The storage oracle locks exactly 19 tracked Dart `Directory.systemTemp` owners. A native pipeline test directly
+The storage oracle locks exactly 20 tracked Dart `Directory.systemTemp` owners. A native pipeline test directly
 requires `Directory.systemTemp` to resolve to routed `TMPDIR`; the shell boundary independently checks filesystem
 device identity, package configuration, offline resolution, generated caller packages, traces, and cleanup. The
-complete gate passes formatting, strict analysis, 369 package tests, primary 66/66 in both environments, and the
+complete gate passes formatting, strict analysis, 379 package tests, primary 66/66 in both environments, and the
 105-fixture corpus.
 
 Migration moved the warmed SSD cache atomically from its noncanonical target-era location into the canonical
@@ -52,6 +54,12 @@ configuration beneath `HOME/.dart-tool` before several subcommands honor the pac
 that implicit developer-home read. All maintained gates, multi-backend matrices, documentation commands, and
 Knowledge Map Dart reverification commands use this wrapper; the storage doctrine rejects a bare maintained Dart
 `pub`, formatter, analyzer, test, or run command while preserving the CLI's established user-facing usage label.
+
+A bare `dart test` may also regenerate the ignored root `package_config.json` against the developer Pub cache.
+Running a later wrapped test with the repository-local `PUB_CACHE` can then wait before discovery because the two
+authorities disagree. Recovery is non-destructive: run wrapped offline `pub get` from the Dart package, verify all
+package roots point below `/.linkedspec-data/cache/dart-pub/`, confirm no checkout-owned shared active-root residue,
+then rerun the storage oracle. Never delete the ambiguous shared package payload.
 
 Related facts: [[project-data-ssd-storage-locality]], [[project-data-workflow-routing]],
 [[project-data-env-initializer]], [[project-data-process-locality-proof]], [[dart-local-verification-gate]].

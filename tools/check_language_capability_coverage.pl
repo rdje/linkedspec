@@ -47,6 +47,23 @@ sub dart_names {
  return sort @names;
 }
 
+sub dart_source_boundary_compatibility_aliases {
+ my $text = read_text('dart/lib/src/action/action_contracts.dart');
+ $text =~ /const _sourceBoundaryCompatibilityAliasActionIrCallNames = <String>\{(.*?)\n\};/s
+  or fail('cannot locate Dart source-boundary compatibility alias inventory');
+ my @names = $1 =~ /'([^']+)'/g;
+ $text =~ /const _currentAliasCanonicalNames = <String, String>\{(.*?)\n\};/s
+  or fail('cannot locate Dart current alias canonical-name map');
+ my %canonical_names = $1 =~ /'([^']+)'\s*:\s*'([^']+)'/g;
+ my @aliases;
+ for my $name (sort @names) {
+  fail("Dart source-boundary compatibility alias '$name' has no canonical target")
+   unless exists $canonical_names{$name};
+  push @aliases, [$name, $canonical_names{$name}];
+ }
+ return @aliases;
+}
+
 sub julia_names {
  my $text = read_text('julia/src/action/ActionContracts.jl');
  my @names;
@@ -72,6 +89,24 @@ fail('Dart and Julia current ActionIR call-name inventories differ')
  unless join("\0", @dart) eq join("\0", @julia);
 fail('Dart and Lua current ActionIR call-name inventories differ')
  unless join("\0", @dart) eq join("\0", @lua);
+
+my $typed_source_contract = decode_json(
+ read_text('capability_conformance/typed_source_location_contract.json')
+);
+fail('typed-source compatibility aliases must be an array')
+ unless ref($typed_source_contract->{compatibility_aliases}) eq 'ARRAY';
+my @neutral_source_boundary_aliases = map {
+ fail('typed-source compatibility alias must be a name/target pair')
+  unless ref($_) eq 'ARRAY' && @{$_} == 2 && !grep { !defined($_) || ref($_) } @{$_};
+ [@{$_}];
+} @{$typed_source_contract->{compatibility_aliases}};
+my @dart_source_boundary_aliases = dart_source_boundary_compatibility_aliases();
+my $serialize_aliases = sub {
+ return join("\n", map { join("\0", @{$_}) } sort { $a->[0] cmp $b->[0] } @_);
+};
+fail('Dart source-boundary compatibility aliases differ from the neutral typed-source contract')
+ unless $serialize_aliases->(@dart_source_boundary_aliases)
+  eq $serialize_aliases->(@neutral_source_boundary_aliases);
 
 my %seen;
 for my $name (@dart) {

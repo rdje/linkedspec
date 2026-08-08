@@ -1,5 +1,30 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-07 — Dart executes all seven source-boundary compatibility aliases
+
+`FUTURE-PARITY-BACKLOG.14.2.3.0.1` activates task-tree-first from clean audit commit `d3efe221` as intended
+152/300 with no push. Dart now recognizes the seven neutral source-boundary compatibility spellings and
+canonicalizes them to the same existing helper routes used by Perl and Rust. No alias-specific interpreter path,
+schema, identity, public typed value, or new result shape was added.
+
+One four-test consumer proves the exact pairs and authored arity, structured unknown-name diagnostics, Unicode
+text and scalar lengths, anonymous-boundary mutation, reversed-span absence, named maps, and equality across
+native, reconstructed, generated-plan, and independently compiled emitted packages. It first failed only at the
+missing alias boundary and now passes 4/4; the focused carrier suite passes 91 tests.
+
+The shared Dart/Julia/Lua inventory remains 246 names. Language coverage separately locks Dart's seven alias/
+target pairs to the neutral typed-source contract and reports 246 current names, 105 corpus fixtures plus one
+named-mark fixture, and 122 independently covered public Perl contracts. Complete Dart passes format 96/0, fatal
+analysis, 379 package tests, storage 20/47, CLI 66x2, and corpus 105/105. The sole-facing book now reports alias
+availability on Perl, Rust, and Dart, prefers canonical spellings, and keeps Dart typed-source admission explicitly
+pending at neutral 5 complete / 9 pending / 39 mutations.
+
+Repository-routed mdBook signoff passes at 79 files/14,152 KiB with isolated rendered paragraphs. Knowledge Map
+regenerates at 786 facts/6,419 question keys; all seven doctrines pass. Definitive canonical CI preserves
+capability 80/0/0 and typed source 5/9/39, executes composed semantic/MCP consumers, proves containment and
+moved-root execution, passes CLI 66x2, reports RAM 52%, and completes Phase 0 1,031/1,031 in 681 seconds before
+the exact local-CI pass marker.
+
 ## 2026-08-07 — Dart typed-source prerequisites are split on executable evidence
 
 `FUTURE-PARITY-BACKLOG.14.2.3.0` activates task-tree-first from clean Rust admission `666751ae` as intended

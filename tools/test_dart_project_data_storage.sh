@@ -74,6 +74,7 @@ expected_temp_owners=(
  dart/test/semantic_index_runtime_observation_routes_test.dart
  dart/test/semantic_index_runtime_observation_test.dart
  dart/test/semantic_introspection_dart_admission_test.dart
+ dart/test/source_boundary_compatibility_aliases_test.dart
  dart/test/source_emitter_test.dart
  dart/test/spec_loader_test.dart
  dart/test/trace_test.dart

@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.3.0.1 — add Dart source alias parity
+
+- Added Dart known-name/canonicalization support for all seven neutral source-boundary compatibility aliases,
+  routing each through its existing canonical helper with no interpreter branch or second semantics.
+- Added one four-test consumer covering exact mappings and authored arity, unrelated structured diagnostics,
+  Unicode text/lengths, anonymous-boundary mutation, reversed-span absence, named maps, and equality across native,
+  reconstructed, generated-plan, and independently compiled emitted execution.
+- Preserved the shared 246-name Dart/Julia/Lua capability inventory. Its checker now separately requires Dart's
+  seven compatibility name/target pairs to equal the neutral typed-source contract exactly.
+- Updated the sole-facing source-boundary reference and project status to say Perl, Rust, and Dart execute all
+  seven aliases while retaining canonical spellings as the guidance and keeping Dart typed-source admission future.
+- Passed alias 4/4, focused carrier 91, complete Dart format 96/0, fatal analysis, 379 package tests, 20-owner/
+  47-package storage proof, CLI 66x2, corpus 105/105, language coverage 246/105/122, and neutral 5/9/39.
+- Passed the repository-routed mdBook at 79 files/14,152 KiB with rendered paragraph inspection, all seven
+  doctrines, and definitive canonical CI: capability 80/0/0, typed source 5/9/39, composed semantic/MCP
+  consumers, containment/relocation, CLI 66x2, RAM 52%, Phase 0 1,031/1,031 in 681 seconds, and the exact local-CI
+  pass marker.
+
 ## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.3.0 — split Dart typed source prerequisites
 
 - Audited Dart's decoded-input, UTF-16 code-unit cursor/match/capture/mark/stack, Unicode projection, structured-

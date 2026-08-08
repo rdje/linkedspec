@@ -8,10 +8,12 @@ answers:
   - why does action call coverage use 105 corpus fixtures plus one exact fixture
   - which Perl contracts are deliberately excluded from the public current inventory
   - what mutation proves the symmetric omission guard works
+  - how are Dart source boundary compatibility aliases governed without changing the shared inventory
 date: 2026-07-15
 status: current
 tags: [actionir, inventory, coverage, parity, marks, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.17.5 admits the exact seven complete named-mark helpers into equal 246-name Dart/Julia/Lua inventories. tools/check_language_capability_coverage.pl combines 105 corpus sources with complete_named_mark_contract.json, independently derives 131 identifier-shaped Perl contracts, subtracts nine classified compatibility/legacy/internal contracts, and requires the remaining 122 in every inventory. A simultaneous clear_mark deletion from all three inventories is reported by the exact-family and independent-public checks."
+evidence_update_2026_08_07_dart_source_aliases: "FUTURE-PARITY-BACKLOG.14.2.3.0.1 keeps Dart's seven source-boundary compatibility spellings in a separate private inventory instead of widening the 246 names shared with Julia/Lua. The same checker derives their canonical targets from Dart and requires the exact seven name/target pairs to equal typed_source_location_contract.json."
 reverify: "perl tools/check_language_capability_coverage.pl --report && bash tools/run_python_project_data.sh tools/check_complete_named_mark_contract.py"
 ---
 
@@ -28,6 +30,11 @@ The current coverage gate keeps three independent obligations:
    fixture.
 3. The Perl lowering contracts independently produce 122 public identifier-shaped names, all of which must occur
    in the backend inventories.
+
+Dart's seven source-boundary compatibility spellings are a separately governed backend rollout, not additions to
+the 246-name shared Dart/Julia/Lua inventory. The checker derives their exact Dart canonical targets and requires
+all seven name/target pairs to equal the neutral typed-source contract, so compatibility parity cannot drift while
+the common vocabulary remains honest.
 
 The independent Perl set starts with 131 identifier-shaped contracts and excludes exactly nine names:
 `entry_named_map` and `match_named_map` are compatibility aliases; `capture` and `capture_macro` are legacy; and

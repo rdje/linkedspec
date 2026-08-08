@@ -128,6 +128,7 @@ const knownActionIrCallNames = <String>{
   ...supportedActionIrCallNames,
   ...numericAliasActionIrCallNames,
   ...currentAliasActionIrCallNames,
+  ..._sourceBoundaryCompatibilityAliasActionIrCallNames,
 };
 
 const completeNamedMarkActionIrCallNames = <String>{
@@ -395,6 +396,16 @@ const currentAliasActionIrCallNames = <String>{
   'when',
 };
 
+const _sourceBoundaryCompatibilityAliasActionIrCallNames = <String>{
+  'capture_from_rule_start',
+  'capture_len_from_rule_start',
+  'capture_rest_length',
+  'capture_slice_here',
+  'capture_slice_length',
+  'entry_named_map',
+  'match_named_map',
+};
+
 const _numericAliasCanonicalNames = <String, String>{
   '+': 'num_add',
   '-': 'num_sub',
@@ -433,8 +444,15 @@ const _numericAliasCanonicalNames = <String, String>{
 
 const _currentAliasCanonicalNames = <String, String>{
   '=': 'set',
+  'capture_from_rule_start': 'capture_slice',
+  'capture_len_from_rule_start': 'capture_slice_len',
+  'capture_rest_length': 'capture_rest_len',
+  'capture_slice_here': 'start_capture_slice',
+  'capture_slice_length': 'capture_slice_len',
   'elif': 'elseif',
+  'entry_named_map': 'entry_map',
   'i': 'if',
+  'match_named_map': 'match_map',
   'otherwise': 'else',
   'when': 'if',
 };
