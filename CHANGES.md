@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.4.0.2 — freeze Julia typed source RED
+
+- Added one dormant Julia typed-source consumer at its final test path while deliberately omitting it from the
+  ordinary `julia/test/runtests.jl` include list and canonical registration.
+- Froze a private `LinkedSpecJulia.SourceLocation` namespace so neutral Position/Span terminology cannot collide
+  with Julia's existing exported parser `SourceSpan` and does not create authored DSL or facade methods.
+- Added explicit nested core/projection selections. Both current commands parse the whole consumer and exit only
+  for absent `LinkedSpecJulia.SourceLocation`; after the core lands, projection lookup advances to the separately
+  owned `typed_source_projection_rows` and `typed_source_compatibility_aliases` seams.
+- Locked all 3/7/6/3 immutable value fixtures, four private diagnostics, detached exact 92+7 catalogs, named-mark
+  scope/absence, anonymous-boundary mutation, cursor restoration, and native/reconstructed/generated-plan results.
+- Repaired the task graph by instantiating the already-declared `.14.2.4.1-.3` core, projection, and admission nodes;
+  no order, scope, production behavior, schema, neutral rollout, or sole-facing support claim changed.
+- Passed syntax parsing, exact core/projection RED diagnostics, alias 141/141, complete Julia package/storage 19/5/
+  CLI/corpus 105/105, neutral 6/8/40, language 246/105+1/122, and the source-unchanged mdBook at 79 files/
+  14,168 KiB with separate generated HTML blocks. Knowledge Map 787/6,455 and all seven doctrines pass.
+- Definitive canonical CI preserves capability 80/0/0, typed Perl 10 plus Rust/Dart 4/4, composed semantic/MCP,
+  containment/relocation, moved/outside-CWD execution, CLI 66x2, RAM 62%, and Phase 0 1,031/1,031 in 705 wallclock
+  seconds before the exact local-CI pass marker. This leaf is intended atomic commit 159/300 with no push.
+
 ## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.4.0.1 — add Julia source aliases
 
 - Added the neutral contract's exact seven source-boundary compatibility spellings to Julia's existing known-name

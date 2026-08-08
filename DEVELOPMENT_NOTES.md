@@ -1,5 +1,31 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.4.0.2` — dormant Julia typed-source RED): Julia's ordinary package
+  discovery is the explicit include list in `julia/test/runtests.jl`, so the final-path consumer
+  `julia/test/typed_source_location_contract_test.jl` can remain dormant without a second directory, analyzer
+  exclusion, manifest change, or canonical registration. `LINKEDSPEC_JULIA_TYPED_SOURCE_RED_MODE=core|projection`
+  selects the immutable values alone or the values plus projections; lookup order makes projection strictly depend
+  on the core while preserving one exact current missing-namespace failure.
+- The typed values live under future private namespace `LinkedSpecJulia.SourceLocation`. This is a necessary Julia-
+  specific collision fence: `LinkedSpecJulia.SourceSpan` already names a public parser-AST line span. The nested
+  namespace retains neutral `Position`, `Span`, `DerivedTextPolicy`, `SourceAuthority`, `SourceLocationContext`, and
+  `SourceLocationException` names without overloading the parser type or promising public authored helpers.
+- The dormant consumer contains no temporary directory. It freezes copied source ownership, detached records, all
+  neutral 3/7/6/3 fixtures and four diagnostics, then exact fresh 47/30/11/4 projection families plus seven aliases
+  across native, reconstructed AST, and generated-v2-plan carriers. Complete Julia therefore keeps the strict
+  project-data census at 19 owners / five locked package trees.
+- Retrieval found that the parent, roadmaps, ADR `0056`, and Knowledge owner all referred to `.14.2.4.1-.3`, but
+  the detailed task nodes had never been instantiated. The active RED leaf restores those already-adopted nodes
+  before its consumer points to them; this is continuity repair, not a new direction or behavior change.
+
+  Both explicit modes parse completely and currently exit 1 only because `LinkedSpecJulia.SourceLocation` is
+  absent. Ordinary alias proof stays 141/141; complete Julia passes its byte-fresh MCP binding, package, storage
+  19/5, primary CLI, corpus 105/105, and exact marker. Neutral 6/8/40 and language 246/105+1/122 remain unchanged.
+  The source-unchanged sole-facing book builds 79 files/14,168 KiB with the audited content in separate HTML blocks;
+  Knowledge Map 787/6,455 and all seven doctrines pass. Definitive canonical CI passes capability 80/0/0,
+  composed semantic/MCP, containment/relocation, CLI 66x2, RAM 62%, and Phase 0 1,031/1,031 in 705 wallclock seconds
+  before the exact marker. Immutable Julia core `.14.2.4.1` remains inactive until this 159/300 landing is clean.
+
 - 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.4.0.1` — Julia source-boundary compatibility aliases): the audited gap
   belongs entirely to `ActionContracts.jl`. One private seven-row dictionary maps `capture_from_rule_start` to
   `capture_slice`, `capture_len_from_rule_start` and `capture_slice_length` to `capture_slice_len`,

@@ -19174,8 +19174,8 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   task-tree-first.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.4`
-  Status: `active` parent (2026-08-07; authority/prerequisite-split audit `.0` landed at `57c62ce4`; exact seven-
-    alias parity `.0.1` active task-tree-first from that clean boundary)
+  Status: `active` parent (2026-08-07; alias parity `.0.1` landed at `3a848631`; exact dormant typed-source RED
+    `.0.2` is signoff-complete as intended 159/300; immutable core `.1` follows only after its clean landing)
   Goal: Implement and independently admit the same neutral typed source-location algebra in Julia.
   Children: `.14.2.4.0` authority/prerequisite-split audit; `.14.2.4.0.1` seven-alias Julia parity;
     `.14.2.4.0.2` exact typed-source RED; `.14.2.4.1` immutable value/conversion core; `.14.2.4.2` helper/
@@ -19385,7 +19385,8 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   proof remain before task-tree-first `.14.2.4.0.2`; no push.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.4.0.2`
-  Status: `pending` behind Julia alias parity `.14.2.4.0.1`
+  Status: `completed` (2026-08-07; signoff-complete from clean Julia alias-parity commit `3a848631`, intended
+    atomic commit 159/300, no push)
   Goal: Freeze one dormant Julia consumer for the neutral immutable source values, four owned diagnostics, exact
     92 canonical projections plus seven now-callable aliases, and unchanged runtime carriers before production core
     implementation.
@@ -19401,6 +19402,130 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   Verification: ordinary Julia remains green; explicit core/projection modes fail only on owned absent future APIs;
     neutral remains 6/8/40 and Julia remains pending
   Commit: `FUTURE-PARITY-BACKLOG.14.2.4.0.2 - freeze Julia typed source RED`
+
+  ### `FUTURE-PARITY-BACKLOG.14.2.4.0.2` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove alias parity `.14.2.4.0.1` landed at `3a848631` as 158/300
+    with parent `57c62ce4`, empty status/diffs, zero-byte brief, valid post-commit memory pointer, absent generated
+    book, and empty project-data registry; make this task-tree file the sole activation diff.
+  - [x] **DECLARED-CHILD GRAPH REPAIR** — Instantiate the parent-declared but missing `.14.2.4.1-.3` task nodes
+    for immutable core, projection routing, and exact admission before the RED consumer points at those next owners.
+    Change no implementation ordering, rollout state, production behavior, or roadmap direction.
+  - [x] **RETRIEVE / CURRENT BASELINE** — Retrieve the rollout/Julia Knowledge owners, neutral 3/7/6/3 values,
+    four diagnostics, 92+7 catalogs, admitted Perl/Rust/Dart RED precedents, Julia source/runtime/carrier owners,
+    Toolbox, ordinary/canonical discovery, storage census, and sole-facing pending claims before writing the consumer.
+  - [x] **DORMANT CORE RED** — Add exactly one test-local consumer outside ordinary `runtests.jl` discovery whose
+    base mode freezes immutable source authority/value semantics and fails only for absent future `SourceLocation.jl`
+    APIs. Preserve ordinary package, production, neutral, analyzer/compiler, schema, and book behavior.
+  - [x] **NESTED PROJECTION RED** — Independently nest projection mode behind core mode; require fresh detached
+    exact 92+7 catalogs and current native/reconstructed/generated-plan results, and prove its first failure names
+    only the absent projection API after the core exists. Add no canonical registration or production implementation.
+  - [x] **NO REGRESSION / LOCKSTEP / CLEAN** — Preserve Julia alias parity, zero-based UTF-8 code-unit registers,
+    neutral 6/8/40, pending Julia admission, sole-facing truth, README, semantic/MCP/capability, DSL, and other
+    backends; pass ordinary complete Julia/storage/corpus/CLI, explicit RED diagnostics, language/neutral, book,
+    Knowledge, doctrine, and definitive canonical gates; synchronize records, commit as 159/300, clear the brief,
+    and prove clean before `.14.2.4.1`.
+
+  Activation evidence 2026-08-07: alias parity `.14.2.4.0.1` lands atomically at `3a848631` as intended 158/300
+  with first parent `57c62ce4` and no push. Its hooks regenerate Knowledge Map at 787 facts / 6,450 question keys,
+  pass all seven doctrines, and validate the activation pointer in pre-commit and post-commit Git phases. Status plus
+  staged/unstaged diffs are empty, `git_message_brief.txt` is zero bytes, post-commit memory architecture passes,
+  the generated book is absent, and the exact empty managed-run parent recreated by final verification is removed.
+  This task-tree file is the sole activation diff before any dormant Julia consumer, source, driver, storage census,
+  neutral artifact/checker, book, Knowledge, roadmap, live-doc, or other change.
+
+  Retrieval graph finding 2026-08-07: parent `.14.2.4`, both roadmap projections, ADR `0056`, and the runtime-
+  rollout Knowledge owner already prescribe `.14.2.4.1` immutable core, `.2` projection routing, and `.3` admission,
+  but no detailed nodes for those three declared children existed in this task-tree file. This was an incomplete
+  task representation rather than ambiguous direction. The exact nodes below restore the already-adopted order and
+  boundaries before the dormant consumer is written; no new scope, behavior, or rollout claim is introduced.
+
+  Retrieval/design evidence 2026-08-07: the canonical rollout and Julia Knowledge owners, ADR `0056` section 9,
+  neutral 3/7/6/3 values and four private diagnostics, exact 47/30/11/4 projection families plus seven aliases,
+  Perl/Rust/Dart RED consumers, Julia package/include/runtime/carrier authorities, Toolbox, storage census, and all
+  sole-facing pending claims agree. Ordinary Julia discovery is only the explicit include list in
+  `julia/test/runtests.jl`; native, reconstructed, and generated-v2-plan carriers converge on
+  `LinkedSpecRuntimeEngine`. Julia already exports the parser-AST `SourceSpan`, so the future value vocabulary is
+  frozen inside private `LinkedSpecJulia.SourceLocation`: this avoids a type collision and adds no public facade or
+  authored spelling. Detailed `.14.2.4.1-.3` nodes now preserve that boundary and the already-declared rollout.
+
+  Dormant-consumer evidence 2026-08-07: `julia/test/typed_source_location_contract_test.jl` is committed at its
+  final test path but is absent from ordinary `runtests.jl` and canonical registration. Its explicit `core` mode
+  freezes copied authority ownership; detached Position/Span/DerivedText/coordinate records; all 3/7/6/3 fixtures;
+  and exactly the four owned, source-private diagnostics. Its independently selected `projection` mode is ordered
+  strictly after the same core namespace and additionally freezes fresh detached exact 92+7 catalogs, complete
+  named-mark scope/absence, anonymous-boundary mutation, cursor save/restore, aliases, and unchanged native,
+  reconstructed, and generated-plan results. Neither mode uses temporary storage or changes production code.
+
+  Exact RED/baseline evidence 2026-08-07: parsing the complete dormant file succeeds. Repository-routed `core` and
+  `projection` commands each exit 1 with the sole current failure `UndefVarError: SourceLocation not defined in
+  LinkedSpecJulia`; an invalid mode is rejected before contract evaluation. Projection API lookup occurs only after
+  core lookup, so `.14.2.4.1` can make core green and expose the separately owned missing
+  `typed_source_projection_rows` seam without rewriting the consumer. Ordinary alias proof remains 141/141; the
+  neutral checker remains exactly 6 complete / 8 pending / 40 mutations; language coverage remains
+  246 current / 105 corpus plus one named-mark fixture / 122 independent Perl contracts. The uninterrupted complete
+  Julia gate passes the byte-fresh 120,030-byte MCP binding, all package tests with the dormant file omitted,
+  storage 19 owners / five locked package trees, primary CLI, corpus 105/105, and exact
+  `[julia-ci] Julia local gate passed`.
+
+  Governance/signoff evidence 2026-08-07: the source-unchanged sole-facing mdBook builds 79 files / 14,168 KiB;
+  generated HTML keeps its table, status paragraph, example paragraph, code block, replacement guidance, and
+  following delimiter paragraph in distinct blocks while accurately leaving Julia values/projections pending. The
+  Knowledge Map regenerates at 787 facts / 6,455 question keys, all seven doctrines pass, and whitespace is clean.
+  Definitive canonical CI preserves capability 80/0/0, typed source 6/8/40 plus Perl 10 and Rust/Dart 4/4, every
+  composed semantic/MCP admission, six-family project-data containment, repository relocation, moved-root Rust,
+  and all four outside-CWD runtime anchors. Primary CLI passes 66/66 in both default and POSIX option environments,
+  RAM is 62% against the 88% ceiling, and Phase 0 passes 1,031/1,031 in 705 wallclock seconds before exact
+  `[ci] local CI gate passed`. Atomic commit 159/300, brief clearing, post-commit validation, and clean proof remain
+  before task-tree-first immutable core `.14.2.4.1`; no push.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.4.1`
+  Status: `pending` behind exact dormant Julia RED `.14.2.4.0.2`
+  Goal: Implement one immutable Julia decoded-source authority plus Position, Span, DerivedText, context, policy,
+    coordinate, validation, and materialization values for the neutral 3/7/6/3 fixtures and four private errors.
+  Depends on: `.14.2.4.0.2`
+  Acceptance: Add `julia/src/runtime/SourceLocation.jl`, include and expose only the internal API frozen by the
+    dormant consumer, copy decoded sources into one opaque authority, retain scalar offsets in detached immutable
+    values, precompute exact scalar/code-unit/line-column/UTF-8 boundary evidence, and keep decoded text plus host
+    references private. Make only the dormant core selection pass; the nested projection selection must then fail
+    solely for absent projection catalogs/routes. Preserve every runtime helper path, zero-based UTF-8 code-unit
+    register, external result, schema/identity, neutral 6/8/40, ordinary discovery, and public book claim. Pass
+    focused/complete Julia plus doctrine/canonical signoff, commit, clear the brief, and prove clean before `.2`.
+  Verification: dormant core values/diagnostics green; nested projection mode has one exact owned missing-API failure;
+    ordinary Julia and neutral rollout unchanged
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.4.1 - implement Julia source location core`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.4.2`
+  Status: `pending` behind immutable Julia core `.14.2.4.1`
+  Goal: Route all 92 canonical Julia source-boundary helpers plus seven aliases through the immutable authority at
+    the compatibility boundary while preserving established public results and live code-unit registers.
+  Depends on: `.14.2.4.1`
+  Acceptance: Give each `_RuntimeExecutionContext` one copied authority, add fresh detached exact 47/30/11/4
+    projection catalogs plus seven aliases, and route source slicing/positions/coordinates, entry/local matches,
+    anonymous capture boundaries, rule-local named marks, and cursor controls through typed validation and
+    materialization. Preserve strings, numbers, collections, booleans, absence, mutation timing, trace behavior,
+    native zero-based UTF-8 code-unit cursor/match/mark/capture/stack state, compiled/generated schemas, and source
+    identity. Make the complete dormant consumer pass across native, reconstructed, and generated-plan carriers
+    without ordinary/canonical registration or `julia_runtime` promotion; pass full signoff and clean before `.3`.
+  Verification: dormant core/projection consumer green with exact 92+7 detached catalogs and unchanged carriers;
+    neutral remains 6/8/40 and Julia remains pending
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.4.2 - route Julia typed source projections`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.4.3`
+  Status: `pending` behind Julia projection routing `.14.2.4.2`
+  Goal: Admit the unchanged Julia typed-source consumer into ordinary and canonical discovery and promote only the
+    neutral `julia_runtime` rollout row.
+  Depends on: `.14.2.4.2`
+  Acceptance: Move/include the assertion-identical consumer under `julia/test/runtests.jl`, require its tracked
+    path and exact repository-routed command in canonical governance, remove dormant-only mode scaffolding, and
+    promote only `julia_runtime` with an independent completed-to-pending mutation. Update the sole-facing book to
+    admit Julia's internal values/projections without claiming authored Position/Span values, transactions, schema
+    changes, or Lua support. Preserve production implementation, code-unit registers, helper results, carriers,
+    semantic/MCP/capability state, DSL, README, and other backends; pass focused/complete/recurring/doctrine/
+    canonical signoff, commit, clear the brief, and prove clean before Lua `.14.2.5.0`.
+  Verification: ordinary/canonical Julia consumer green; only `julia_runtime` advances; public book and neutral
+    counts/mutations match the exact admitted boundary
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.4.3 - admit Julia typed source runtime`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.5`
   Status: `pending` parent

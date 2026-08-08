@@ -1,5 +1,26 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-07 — Julia typed source-location behavior is frozen before implementation
+
+`FUTURE-PARITY-BACKLOG.14.2.4.0.2` activates task-tree-first from clean alias-parity commit `3a848631` as intended
+159/300 with no push. One final-path consumer remains outside Julia's explicit ordinary include list and canonical
+registration. It freezes a private `LinkedSpecJulia.SourceLocation` namespace, all neutral 3/7/6/3 values, four
+private diagnostics, exact detached 92+7 catalogs, and native/reconstructed/generated-plan carrier behavior.
+
+The private namespace avoids collision with Julia's existing exported parser `SourceSpan` and creates no authored
+DSL or facade surface. Explicit `core` and `projection` modes both parse the complete consumer and currently exit
+1 only for absent `LinkedSpecJulia.SourceLocation`; projection API lookup is strictly nested after core. The task
+graph now contains the already-declared `.14.2.4.1` immutable core, `.2` routing, and `.3` admission nodes.
+
+Ordinary alias proof stays 141/141. Complete Julia passes its byte-fresh MCP binding, all package tests with the
+dormant consumer omitted, storage 19/5, primary CLI, corpus 105/105, and the exact marker. Neutral rollout remains
+6/8/40 and language coverage remains 246/105+1/122. The source-unchanged sole-facing book builds 79 files/
+14,168 KiB and its pending-Julia passages remain separate rendered blocks. Knowledge Map 787/6,455 and all seven
+doctrines pass. Definitive canonical CI preserves capability 80/0/0, typed Perl 10 plus Rust/Dart 4/4, every
+composed semantic/MCP admission, containment/relocation, CLI 66x2, RAM 62%, and Phase 0 1,031/1,031 in 705
+wallclock seconds before the exact marker. Atomic commit 159/300 and clean proof remain before implementation
+`.14.2.4.1` activates; no push.
+
 ## 2026-08-07 — Julia executes all seven source-boundary compatibility aliases
 
 `FUTURE-PARITY-BACKLOG.14.2.4.0.1` activates task-tree-first from clean authority-audit commit `57c62ce4` as
