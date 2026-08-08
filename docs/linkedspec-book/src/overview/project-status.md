@@ -29,7 +29,11 @@ dispatch, and the Rust, Dart, Julia, PUC Lua, and LuaJIT runtime admissions rema
 
 The helper audit distinguishes 7 callable compatibility aliases from 2 internal Perl contract/scanner ids.
 `capture_take_slice` and `capture_take_slice_len` are internal ids, not accepted helper spellings; authored code
-continues to use `capture_take()` and `capture_take_len()`.
+continues to use `capture_take()` and `capture_take_len()`. Rust now executes all 7 callable aliases through the
+same canonical dispatch arms as their preferred helpers, including Unicode-scalar widths, reversed-span `undef`,
+anonymous-boundary mutation, reconstructed compiled specs, generated plans, and independently compiled emitted
+source. This closes the compatibility-spelling gap only; it does not claim the still-pending Rust typed
+source-location value, transaction, recursive-observation, or span-native dispatch admission.
 
 Five-backend callable recurring/public admission is complete under `FUTURE-PARITY-BACKLOG.11.8.4`. One rooted
 driver composes neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; both Lua rows execute one focused file. The

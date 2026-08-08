@@ -1,5 +1,29 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.2.0.2` — Rust capture compatibility aliases): the compatibility names
+  belong in the canonical dispatch patterns, not wrapper calls or duplicated bodies. `capture_slice_here` shares
+  `start_capture_slice`; `capture_from_rule_start` shares `capture_slice`; both length aliases share
+  `capture_slice_len`; and `capture_rest_length` shares `capture_rest_len`. Adding the same names to
+  `is_mark_capture_helper` preserves capture/mark trace classification without inventing alias-specific events.
+
+  The RED/GREEN consumer uses `rep_acode` because the fixture has one repeated action edge. It compares every alias
+  fixture with its canonical twin over `é🙂  ab`: normal execution yields
+  `[null,"é🙂  ",4,4,6]`, while starting the boundary after the match yields
+  `[null,null,null,null,0]`. The first null proves the mutator remains statement-like; the middle nulls prove
+  reversed-span absence; the final zero proves rest length from the new boundary. The same compiled fixture runs
+  natively, after JSON reconstruction, through the generated-plan executor, and as separately compiled emitted
+  Rust source in a repository-local test workspace that cleans itself.
+
+  Before the dispatch repair, all five aliases reached the unknown-helper fallback and the first native assertion
+  received five nulls. After the shared-arm repair, the focused consumer and existing capture tests pass, followed
+  by the complete Rust suite, 105-spec corpus, project-storage proof, and both 66-case CLI environments. The book
+  states the repaired spelling support but does not promote typed Rust values: rollout remains 4/10/38 until the
+  later core, projection, and admission leaves.
+
+  Definitive signoff then passes all seven doctrines, the exact neutral/Perl typed-source consumers, every composed
+  semantic/MCP route, project containment and moved/outside-CWD execution, CLI 66/66 in both environments, RAM
+  50%, and Phase 0 1,031/1,031 in 653 seconds before `[ci] local CI gate passed`.
+
 - 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.2.0.1` — neutral alias target correction): target identity must follow
   callable arity and lowering, not lexical similarity. `capture_from_rule_start()` takes no mark name and reads the
   anonymous boundary, so its canonical helper is `capture_slice()`; its length sibling is `capture_slice_len()`.

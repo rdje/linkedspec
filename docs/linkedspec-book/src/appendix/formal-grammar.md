@@ -1230,7 +1230,9 @@ tracking but not recommended for new `.spec` authoring:
 - `drop_last(...)` — use `drop_back(...)`
 - `capture_slice_here()` — use `start_capture_slice()`
 - `capture_from_rule_start()` — use `capture_slice()`
+- `capture_len_from_rule_start()` — use `capture_slice_len()`
 - `capture_slice_length()` — use `capture_slice_len()`
+- `capture_rest_length()` — use `capture_rest_len()`
 - Bare `return`, bare `exit` — use `return_undef()`, `exit_now(1)`
 
 All 21 shipped `.spec` files compile with zero compatibility-surface rules.

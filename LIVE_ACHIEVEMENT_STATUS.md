@@ -1,5 +1,29 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-07 — Rust executes all seven source-boundary compatibility aliases
+
+`FUTURE-PARITY-BACKLOG.14.2.2.0.2` activates from clean `767abfac` as intended 146/300 with no push. Rust now
+routes the five formerly missing capture aliases through the same implementation arms as
+`start_capture_slice()`, `capture_slice()`, `capture_slice_len()`, and `capture_rest_len()`. Together with the two
+existing named-map aliases, all seven neutral callable aliases execute; no separate alias semantics were added.
+
+The exact RED returned five nulls and unknown-helper warnings. GREEN proves canonical-equivalent Unicode text and
+lengths, anonymous-boundary mutation/`undef`, reversed-span absence, native and reconstructed compiled specs,
+generated plans, and independently compiled emitted source. The complete Rust gate passes all unit/integration
+suites, the 105-spec corpus, project-storage locality, and CLI 66/66 under both default and POSIX option
+environments.
+
+The sole-facing helper reference, project status, exhaustive catalog, and formal grammar now state this exact
+Perl/Rust support, retain canonical spelling guidance, and distinguish compatibility parity from still-pending
+Rust typed values. The real book build passes and the changed HTML uses separate paragraphs; the broader
+readability audit remains queued. Typed-source state stays 4/10/38, and no schema, artifact identity,
+capability/semantic/MCP state, other backend, or root README changes.
+
+Signoff passes Knowledge Map 786/6,400, capability 80/0/0, all seven doctrines, every composed semantic/MCP
+consumer, repository containment/relocation, canonical CLI 66/66 twice, RAM 50%, and Phase 0 1,031/1,031 in
+653 seconds before `[ci] local CI gate passed`. Commit, brief clearing, and exact clean proof remain before
+task-tree-first Rust typed-source RED `.0.3`.
+
 ## 2026-08-07 — Neutral rule-start alias targets are corrected
 
 `FUTURE-PARITY-BACKLOG.14.2.2.0.1` activates from clean `69179553` as intended 145/300 with no push. The neutral

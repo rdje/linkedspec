@@ -1,5 +1,18 @@
 # ARCHITECTURE STATE
 
+- `2026-08-07 Rust source-boundary compatibility-alias parity`: `FUTURE-PARITY-BACKLOG.14.2.2.0.2` adds
+  `capture_slice_here`, `capture_from_rule_start`, `capture_len_from_rule_start`, `capture_slice_length`, and
+  `capture_rest_length` only as alternative patterns on the existing canonical Rust helper arms and trace
+  classifier. One RED/GREEN integration consumer proves canonical-equivalent Unicode text/widths, anonymous
+  boundary mutation with `undef`, reversed-span absence, native execution, serialized/reconstructed specs,
+  generated plans, and independently compiled emitted source. Rust therefore executes all seven neutral callable
+  aliases without a second semantic path. The sole-facing helper/status/catalog/grammar pages state that exact
+  support while keeping preferred spellings and the still-pending Rust typed-value rollout distinct. Complete Rust
+  tests, the 105-spec corpus, project-storage locality, and CLI 66/66 in both option environments pass. Neutral
+  typed-source state remains 4/10 with 38 mutations; capability/semantic/MCP state and other backends do not move.
+  Canonical signoff passes every composed consumer and containment/relocation route, CLI 66/66 twice, RAM 50%, and
+  Phase 0 1,031/1,031 in 653 seconds before `local CI gate passed`.
+
 - `2026-08-07 neutral source-boundary alias target correction`: `FUTURE-PARITY-BACKLOG.14.2.2.0.1` fixes two
   contract/checker labels without changing runtime behavior. Zero-argument `capture_from_rule_start` and
   `capture_len_from_rule_start` now target anonymous `capture_slice` and `capture_slice_len`, not one-argument

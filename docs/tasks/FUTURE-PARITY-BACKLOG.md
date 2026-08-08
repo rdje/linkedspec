@@ -18220,7 +18220,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   and POSIX option environments, RAM 50%, and Phase 0 1,031/1,031 before `[ci] local CI gate passed`.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.2.0.2`
-  Status: `pending` (intended 146/300 after clean `.0.1`, no push)
+  Status: `signoff-complete` (2026-08-07; verified from clean `767abfac`, intended 146/300, no push)
   Goal: Implement the five missing Rust source-boundary compatibility aliases with exact Perl-equivalent behavior.
   Depends on: `.14.2.2.0.1`
   Acceptance: Add exact RED-first native tests for all five aliases, Unicode widths, anonymous-boundary mutation,
@@ -18231,8 +18231,71 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
     preferred helper semantics, artifact/schema identity, semantic/MCP/capability contracts, or other backends.
     Update the sole-facing mdBook with truthful Rust parity and examples where needed, pass complete Rust/corpus/
     primary plus doctrine/canonical signoff, commit, clear the brief, and prove clean before `.0.3`.
-  Verification: pending
+  Verification: alias carrier 1/1; Rust complete/corpus/storage/CLI 66x2; neutral 4/10/38; Perl 10; mdBook;
+    Knowledge Map 786/6,400; capability 80/0/0; all seven doctrines; composed semantic/MCP and containment/
+    relocation proof; canonical CLI 66/66 twice; RAM 50%; Phase 0 1,031/1,031 in 653 seconds;
+    `[ci] local CI gate passed`
   Commit: `FUTURE-PARITY-BACKLOG.14.2.2.0.2 - add Rust capture compatibility aliases`
+
+  ### `FUTURE-PARITY-BACKLOG.14.2.2.0.2` Acceptance Checklist
+
+  - [x] **RED / PERL ORACLE** — Add an exact Rust consumer for all five aliases and prove the current implementation
+    returns null or otherwise diverges while the corresponding Perl/canonical helpers establish expected values.
+  - [x] **ONE DISPATCH SEMANTIC** — Route every alias through the existing canonical Rust helper arm so arity,
+    Unicode-scalar length, absence/reversed-span handling, mutation, diagnostics, and trace behavior cannot fork.
+  - [x] **ALL RUST CARRIERS** — Prove native `Engine`, serialized/reconstructed `CompiledSpec`, generated plan, and
+    independently compiled emitted source return the same alias/canonical values without schema or identity change.
+  - [x] **SOLE-FACING BOOK LOCKSTEP** — Update only the needed mdBook Rust-support statements/examples, build the
+    real book, and inspect changed HTML paragraph separation while retaining the broader readability audit.
+  - [x] **NO UNRELATED PROMOTION** — Preserve preferred helper semantics, typed-source rollout 4/10/38,
+    capability/semantic/MCP state, other backends, root README, and every unrelated public surface.
+  - [x] **SIGNOFF / CLEAN HANDOFF** — Synchronize live/durable records, pass focused/complete Rust, primary/corpus,
+    neutral/doctrine/canonical gates, commit, clear the brief, and prove clean before `.0.3`.
+
+  Activation evidence 2026-08-07: neutral correction `.14.2.2.0.1` committed at `767abfac` as 145/300 with no
+  push. Post-commit status and both diffs are empty, `git_message_brief.txt` is zero bytes, and no background result
+  remains. This task-tree file is the sole activation diff before Rust consumer, runtime, or mdBook changes.
+
+  RED evidence 2026-08-07: new integration consumer
+  `rust/linkedspec-runtime/tests/source_boundary_compatibility_aliases.rs` freezes all five aliases against their
+  canonical helpers over Unicode input `é🙂  ab`, including `capture_slice_here` mutation/undef result, scalar
+  lengths, and reversed-span undef. It covers native, reconstructed, generated-plan, and independently compiled
+  emitted-source carriers. Before runtime changes, its focused Cargo run fails at the first native alias carrier:
+  Rust reports all five helpers unknown and returns `[null,null,null,null,null]` instead of canonical
+  `[null,"é🙂  ",4,4,6]` (one test failed, exit 101). The corrected neutral contract and Perl `Contracts.pm`
+  canonical-event records establish the exact five alias targets; the consumer therefore exposes the audited Rust
+  dispatch omission rather than inventing new semantics.
+
+  Implementation/focused evidence 2026-08-07: `engine.rs` adds the five spellings only as alternative patterns
+  on the existing `start_capture_slice`, `capture_slice`, `capture_slice_len`, and `capture_rest_len` arms; the
+  same names enter the existing mark/capture trace classification. The exact consumer passes one test across
+  native, reconstructed, generated-plan, and independently compiled emitted-source carriers. Existing anonymous
+  capture `.5.5.4` tests remain green. The neutral checker remains 3/7/6/3, 92+7+2, 31 diagnostics, 4/10 rollout,
+  and 38 mutations; both admitted Perl consumers pass 10 tests.
+
+  Sole-facing evidence 2026-08-07: the source-boundary reference states exact Perl/Rust seven-alias support and
+  includes the Unicode migration fixture; project status explicitly distinguishes this spelling repair from
+  still-pending Rust typed values; formal grammar and the exhaustive helper catalog now list all five mappings.
+  `tools/run_mdbook_local.sh` builds successfully. Generated HTML shows separate `<p>` blocks before the example,
+  after the code block, and before the following delimiter guidance; the broader nonurgent rendered-readability
+  task remains unchanged.
+
+  Complete Rust evidence 2026-08-07: `tools/run_rust_local.sh` passes formatting, core/runtime unit and integration
+  suites, the exact new all-carrier test, all 105 corpus specs, generated-source full-manifest classification,
+  project-storage locality for 17 Rust owners, and the primary CLI at 66/66 under both default and POSIX option
+  environments before `[rust-ci] Rust local gate passed`.
+
+  Governance evidence 2026-08-07: the neutral checker remains 3/7/6/3, 92+7+2, 31 diagnostics, rollout 4/10,
+  and 38 mutations; both admitted Perl consumers pass 10 tests; capability remains schema v2 / 80-0-0 / 24+6;
+  Knowledge Map remains 786/6,400; all seven doctrines and the memory pointer pass. The diff contains no neutral
+  contract, schema, capability, semantic/MCP, other-backend, root-README, or generated-book change.
+
+  Signoff evidence 2026-08-07: the permission-authorized definitive gate passes all seven doctrines, both admitted
+  Perl typed-source consumers, every composed semantic/MCP admission, project-data containment, relocated
+  six-family IO, Rust moved-root execution, and four outside-CWD anchors. Canonical CLI passes 66/66 in both
+  default and POSIX option environments, RAM is 50% against the 88% ceiling, and Phase 0 passes 1,031/1,031 in
+  653 seconds before `[ci] local CI gate passed`. Commit, brief clearing, and exact clean proof remain before
+  task-tree-first `.0.3` activation.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.2.0.3`
   Status: `pending` (intended 147/300 after clean `.0.2`, no push)

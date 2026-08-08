@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.2.0.2 — add Rust capture compatibility aliases
+
+- Added `capture_slice_here`, `capture_from_rule_start`, `capture_len_from_rule_start`, `capture_slice_length`, and
+  `capture_rest_length` as alternative spellings on the existing canonical Rust dispatch arms and capture/mark
+  trace classification. No alias owns a copied or divergent implementation.
+- Added one exact RED/GREEN integration consumer covering Unicode-scalar widths, anonymous-boundary mutation and
+  `undef`, reversed-span absence, canonical equivalence, native and reconstructed execution, generated plans, and
+  independently compiled emitted Rust source.
+- Updated the sole-facing source-boundary reference, project status, exhaustive helper catalog, and formal grammar
+  to state all seven Perl/Rust aliases and prefer the canonical spellings. The real book build passes and changed
+  HTML retains separate paragraphs; the broader nonurgent readability audit remains queued.
+- Preserved typed-source rollout 4/10/38, preferred helper semantics, schema/artifact identity, capability/semantic/
+  MCP state, other backends, and the root README. The complete Rust gate passes the 105-spec corpus, storage
+  locality, and CLI 66/66 in both default and POSIX option environments.
+- Passed Knowledge Map 786/6,400, capability 80/0/0, all seven doctrines, every composed semantic/MCP consumer,
+  repository containment/relocation, canonical CLI 66/66 twice, RAM 50%, and Phase 0 1,031/1,031 in 653 seconds
+  before the exact local-CI pass marker.
+
 ## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.2.0.1 — correct neutral capture alias targets
 
 - Corrected `capture_from_rule_start` to target `capture_slice` and `capture_len_from_rule_start` to target

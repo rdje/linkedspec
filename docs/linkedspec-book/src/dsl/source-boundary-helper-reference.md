@@ -102,10 +102,34 @@ Compatibility aliases:
 | `capture_from_rule_start()` | `capture_slice()` |
 | `capture_len_from_rule_start()` | `capture_slice_len()` |
 
-Prefer the explicit names in new public examples.
+Perl and Rust execute all five rows identically to their preferred helpers. Together with `entry_named_map()` and
+`match_named_map()`, this gives both backends all seven callable compatibility aliases. The aliases do not select
+a legacy coordinate model: text endpoints, Unicode-scalar widths, `undef` for reversed spans, boundary mutation,
+and generated-parser behavior are the same as the preferred spelling. Other backend rollout remains separately
+tracked, so portable new code should still use the preferred names.
 
-The delimiter-body examples below use seek-mode matching. In consume mode, model the
-intervening body tokens explicitly so the closer is reached contiguously.
+For example, this migration-only fixture returns `["é🙂  ", 4, 4, 6]` for input `é🙂  ab` on Perl and Rust:
+
+```text
+Top::OR{1,1}
+ /ab/
+ I { capture_slice_here() }
+ E {
+   return(array(
+     capture_from_rule_start(),
+     capture_len_from_rule_start(),
+     capture_slice_length(),
+     capture_rest_length()
+   ))
+ }
+```
+
+Replacing those five compatibility calls with `start_capture_slice()`, `capture_slice()`, two
+`capture_slice_len()` calls, and `capture_rest_len()` produces the same value. Prefer that explicit form in new
+public examples.
+
+The delimiter-body examples below use seek-mode matching. In consume mode, model the intervening body tokens
+explicitly so the closer is reached contiguously.
 
 ### Example: split a comma-separated body
 

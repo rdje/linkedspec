@@ -1486,7 +1486,7 @@ new start for `right`, and the closing-bracket action records the final right ed
 - **Signature**: `capture_slice_len()`
 - **Returns**: int
 - **Behavior**: Character length of `capture_slice()`. Preferred over raw position arithmetic.
-- **Compatibility**: `capture_slice_length()` is a retired alias.
+- **Compatibility**: `capture_slice_length()` and `capture_len_from_rule_start()` are retired aliases.
 
 ### `capture_slice_until_cursor()`
 - **Signature**: `capture_slice_until_cursor()`

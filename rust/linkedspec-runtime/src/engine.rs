@@ -5227,9 +5227,13 @@ impl Engine {
         matches!(
             name,
             "start_capture_slice"
+                | "capture_slice_here"
                 | "start_capture_slice_from"
                 | "capture_slice"
+                | "capture_from_rule_start"
                 | "capture_slice_len"
+                | "capture_slice_length"
+                | "capture_len_from_rule_start"
                 | "capture_slice_line"
                 | "capture_slice_pos"
                 | "capture_slice_col"
@@ -5242,6 +5246,7 @@ impl Engine {
                 | "capture_take_len"
                 | "capture_rest"
                 | "capture_rest_len"
+                | "capture_rest_length"
                 | "capture_take_rest"
                 | "capture_take_rest_len"
                 | "mark_here"
@@ -7282,7 +7287,7 @@ impl Engine {
                 let col = ctx.input[last_nl..].chars().count() + 1;
                 Ok(RuntimeValue::Number(col as f64))
             }
-            "start_capture_slice" => {
+            "start_capture_slice" | "capture_slice_here" => {
                 ctx.capture_start = Some(ctx.pos);
                 Ok(RuntimeValue::Undef)
             }
@@ -7293,7 +7298,7 @@ impl Engine {
                 }
                 Ok(RuntimeValue::Undef)
             }
-            "capture_slice" => {
+            "capture_slice" | "capture_from_rule_start" => {
                 // RUST-PARITY.5.5.4: ends at the START of the current local match
                 // (`ctx.match_start_byte`, Perl `$LSPOS - length $LMATCH`), not the
                 // cursor as before this leaf — `capture_slice` is the anonymous
@@ -7304,7 +7309,7 @@ impl Engine {
                     .map(RuntimeValue::Scalar)
                     .unwrap_or(RuntimeValue::Undef))
             }
-            "capture_slice_len" => {
+            "capture_slice_len" | "capture_slice_length" | "capture_len_from_rule_start" => {
                 let start = ctx.capture_start.unwrap_or(0);
                 Ok(span_char_len(&ctx.input, start, ctx.match_start_byte)
                     .map(|n| RuntimeValue::Number(n as f64))
@@ -7440,7 +7445,7 @@ impl Engine {
                     .map(RuntimeValue::Scalar)
                     .unwrap_or(RuntimeValue::Undef))
             }
-            "capture_rest_len" => {
+            "capture_rest_len" | "capture_rest_length" => {
                 let start = ctx.capture_start.unwrap_or(0);
                 Ok(span_char_len(&ctx.input, start, ctx.input.len())
                     .map(|n| RuntimeValue::Number(n as f64))
