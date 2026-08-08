@@ -31,8 +31,11 @@ answers:
   - "where is the dormant Rust typed source location RED consumer"
   - "why does the Rust typed source location test run zero tests ordinarily"
   - "what is the first Rust typed source location compile failure"
+  - "is the immutable Rust typed source location value core implemented"
+  - "does the Rust typed source value core route helpers or admit runtime support"
+  - "where does Rust store decoded text for typed positions and spans"
 date: 2026-08-01
-status: Perl immutable value core, projections, and canonical runtime admission complete; other runtimes pending
+status: Perl runtime admitted; Rust immutable value core staged without projections or admission; other runtimes pending
 tags: [architecture, source-location, spans, cursor, helpers, perl, rust, dart, julia, lua, rollout]
 evidence: "FUTURE-PARITY-BACKLOG.14.2.0 retrieved ADR 0056, the neutral contract/checker, adjacent live-ledger contracts, TOOLBOX.md, and exact runtime source/test authorities. Perl uses decoded-string scalar offsets; Rust and Lua use UTF-8 bytes; Dart and Julia use code units. Complete named-mark consumers pass on all six runtimes. The exact contract/checker still encode completed public owners .14.1.2-.3 as pending because both leaves explicitly excluded contract changes, leaving no promotion owner. ADR 0056 section 9 and the owning task freeze the correction and implementation order."
 evidence_update_2026_08_01_public_rollout: "Correction .14.2.0.1 promotes completed public owners .14.1.2-.3, re-owners runtime admissions to .14.2.1.3-.14.2.5.3, advances current truth to 3 complete / 11 pending, and locks 37 mutations including two independent completed-to-pending regressions."
@@ -44,7 +47,8 @@ evidence_update_2026_08_07_rust_prerequisites: "Rust authority audit .14.2.2.0 f
 evidence_update_2026_08_07_neutral_alias_correction: "Neutral prerequisite .14.2.2.0.1 corrects exactly those two compatibility mappings to capture_slice and capture_slice_len. The executable checker now proves canonical Perl diag_name, IR-node, and ordered runtime-call equivalence for non-scanner aliases and rejects the old named-mark target as one of the unchanged 38 mutations. Rollout remains 4 complete / 10 pending; no backend runtime or mdBook behavior changes."
 evidence_update_2026_08_07_rust_alias_parity: "Rust prerequisite .14.2.2.0.2 routes the five missing compatibility spellings through the existing canonical Engine arms and trace classifier. One RED/GREEN consumer proves Unicode widths, boundary mutation, reversed-span undef, and alias/canonical equality across native, reconstructed, generated-plan, and independently compiled emitted source. Rust now executes all seven aliases, but typed-source rollout intentionally remains 4 complete / 10 pending until Rust admission .14.2.2.3."
 evidence_update_2026_08_07_rust_red: "Rust RED .14.2.2.0.3 adds tests/typed_source_location_contract.rs behind test-local linkedspec_typed_source_red, with projections independently nested behind linkedspec_typed_source_projection_red. Ordinary Cargo runs zero tests. The core cfg exits 101 with one E0432 solely for absent linkedspec_runtime::source_location. The consumer freezes 3/7/6/3 values, four private errors, exact 92+7 projections, Unicode byte-to-scalar conversion, mark isolation/absence, capture mutation, cursor restore, and native/reconstructed/generated shapes without production, manifest, neutral, rollout, schema, or mdBook behavior change. Complete Rust proof passes all tests, 105 corpus, generated-source, 17-owner storage, and CLI 66x2. Definitive CI passes all seven doctrines, semantic/MCP and containment/relocation proof, CLI 66x2, RAM 49%, and Phase 0 1,031/1,031 in 653 seconds."
-reverify: "perl -Iperl -c perl/LinkedSpec/SourceLocation.pm && perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm && prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t t/complete_named_mark_contract.t t/rule_local_cursor_perl_execution.t t/generated_source_contract.t && bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py"
+evidence_update_2026_08_07_rust_core: "Rust core .14.2.2.1 adds linkedspec-runtime/src/source_location.rs. One non-cloneable authority owns copied decoded sources and scalar-boundary line/column/UTF-8-byte tables behind a monotonic opaque id. Private Position, Span, and DerivedText fields carry only identity, scalar offsets, provenance, and policy; detached JSON projections carry no text or host reference. The authority alone validates, derives coordinates, and materializes direct or concatenate-in-order text. Base cfg passes 2/2 over exact 3/7/6/3 fixtures and four errors; ordinary discovery stays zero-test; nested projection cfg has one E0432 naming only absent typed_source_compatibility_aliases and typed_source_projection_rows. No helper route or Rust runtime admission moves, so rollout remains 4/10/38 and the sole-facing book remains exact that Rust admission is pending. Complete Rust/corpus/generated/storage/CLI 66x2 proof passes. Definitive canonical CI passes all seven doctrines, process containment and relocated execution, CLI 66x2, RAM 53%, and Phase 0 1,031/1,031 in 653 seconds."
+reverify: "source tools/project_data_env.sh && RUSTFLAGS='-Awarnings --cfg linkedspec_typed_source_red' cargo test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract && perl -Iperl -c perl/LinkedSpec/SourceLocation.pm && perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm && prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t t/complete_named_mark_contract.t t/rule_local_cursor_perl_execution.t t/generated_source_contract.t && bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py"
 ---
 
 The canonical design remains ADR `0056`; the exact implementation plan and rollout correction live under
@@ -93,6 +97,12 @@ Both Perl consumers are now required, syntax-checked, and unconditionally execut
 admission `.14.2.1.3`. This admits the internal Perl runtime and its preserved helper projections; it makes no
 public authored-value/transaction, descriptor/schema, semantic/MCP, DSL/facade, generated-plan-format, or other-
 backend claim.
+
+Rust core `.14.2.2.1` now implements the same immutable authority/value algebra in
+`rust/linkedspec-runtime/src/source_location.rs`. One authority snapshots caller-supplied decoded sources and owns
+the scalar-boundary conversion tables. Its opaque values retain no text or live authority/parser reference; only
+detached records cross the API. This is deliberately not a runtime admission: no helper route uses the values yet,
+the projection catalog remains owned by `.14.2.2.2`, and rollout remains 4 complete / 10 pending / 38 mutations.
 
 ## Links
 

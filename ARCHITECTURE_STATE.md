@@ -1,5 +1,18 @@
 # ARCHITECTURE STATE
 
+- `2026-08-07 immutable Rust typed source-location core`: `FUTURE-PARITY-BACKLOG.14.2.2.1` adds
+  `rust/linkedspec-runtime/src/source_location.rs`. One non-cloneable authority snapshots caller-authorized decoded
+  sources, assigns an opaque monotonic identity, and precomputes Unicode-scalar boundary line/column/UTF-8-byte
+  evidence. Opaque `Position`, direct `Span`, and ordered `DerivedText` values contain no text, path, parser/match
+  state, live authority reference, or host object; detached JSON projections are mutation-isolated. Only the
+  authority validates, derives coordinates, and materializes direct or `concatenate_in_order` text, using exactly
+  the four neutral private diagnostics. The base dormant cfg passes 2/2 over 3/7/6/3 fixtures; ordinary discovery
+  stays zero-test; the nested projection cfg stops at one `E0432` naming only the two `.2` APIs. Complete Rust,
+  corpus, generated-source, 17-owner storage, and CLI 66x2 pass. Canonical signoff passes all seven doctrines,
+  process containment and relocated execution, CLI 66x2, RAM 53%, and Phase 0 1,031/1,031 in 653 seconds. No
+  helper route or admission moves, so rollout remains 4/10/38 and the sole-facing book's pending-Rust claim
+  remains exact.
+
 - `2026-08-07 dormant Rust typed source-location RED boundary`: `FUTURE-PARITY-BACKLOG.14.2.2.0.3` adds one
   test-local custom-cfg integration consumer without production or Cargo-manifest changes. Its base freezes the
   immutable source authority/value contract and fails only with `E0432` for absent `source_location`; a second cfg

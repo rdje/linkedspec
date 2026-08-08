@@ -22,6 +22,7 @@ pub mod runtime;
 pub mod semantic_index;
 pub mod semantic_observation;
 pub mod source_emitter;
+pub mod source_location;
 pub mod spec_loader;
 pub mod spec_parser;
 pub mod staged_parser_registry;

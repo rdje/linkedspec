@@ -1,5 +1,27 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.2.1` — immutable Rust typed-source core): source text belongs to the
+  authority, never to a position or span. `DecodedSource` copies caller-authorized text once and precomputes one
+  table entry per Unicode-scalar boundary, including the terminal boundary. Coordinate lookup and slicing are then
+  checked boundary-index operations, while values contain only the opaque authority id, source id, scalar offsets,
+  direct provenance, or ordered derived policy. Keeping `SourceAuthority` non-`Clone` prevents accidental identity
+  duplication; omitting `Debug` prevents an easy decoded-text disclosure path.
+
+  Rust's type boundary makes immutability structural. Value fields are private, projections allocate fresh JSON,
+  and the materialization trait is sealed to `Span` and `DerivedText`. A caller can clone values but cannot mint or
+  mutate their internals. Cross-authority direct spans report source mismatch; invalid positions, reversed order,
+  and foreign/invalid derived provenance use the other three exact private errors. No parser, regex, cursor, mark,
+  path, or host reference is stored.
+
+  Layering the dormant consumer paid off: after adding only the core, the base cfg moves from one compile error to
+  2/2 GREEN over all 3/7/6/3 neutral fixtures and four diagnostics. Ordinary Cargo still executes zero tests.
+  Adding the projection cfg produces exactly one `E0432` for `typed_source_compatibility_aliases` and
+  `typed_source_projection_rows`, proving `.14.2.2.2` remains the sole routing/catalog owner. Complete Rust proof
+  passes the corpus, generated classifier, storage census, and CLI 66x2 without changing rollout 4/10/38 or the
+  sole-facing book's still-pending Rust-admission claim. Canonical signoff then passes all seven doctrines,
+  process containment/relocation, CLI 66x2, RAM 53%, and Phase 0 1,031/1,031 in 653 seconds; only the clean commit
+  boundary remains.
+
 - 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.2.0.3` — dormant Rust typed-source RED): Cargo automatically discovers
   every integration test, so a pre-admission failing consumer cannot be an ordinary active target. A crate-level
   `linkedspec_typed_source_red` cfg makes ordinary discovery compile an empty target, while the explicit focused

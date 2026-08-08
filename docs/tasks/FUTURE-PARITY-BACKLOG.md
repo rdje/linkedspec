@@ -18358,6 +18358,73 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   `[ci] local CI gate passed`. No production, neutral, schema, rollout, root-README, mdBook, or other-backend
   behavior moved. Commit, brief clearing, and exact clean proof remain as the workflow boundary before `.1`.
 
+- ID: `FUTURE-PARITY-BACKLOG.14.2.2.1`
+  Status: `active` / signoff-complete / commit-pending (2026-08-07; activated task-tree-first from clean
+    `7b4956e8`, intended 148/300, no push)
+  Goal: Implement the immutable Rust source authority and typed `Position`/`Span`/derived-text value core so the
+    base dormant consumer turns GREEN without routing any helper projection or admitting Rust runtime support.
+  Depends on: `.14.2.2.0.3`
+  Acceptance: Add `rust/linkedspec-runtime/src/source_location.rs` and export only that internal runtime-support
+    module from `lib.rs`. Snapshot caller-authorized decoded sources into one authority; keep opaque values free of
+    copied text, paths, parser/match state, and host references; detach every record projection; validate authority,
+    source, bounds, order, and derived provenance; derive zero-based scalar offsets into one-based line/column and
+    UTF-8 byte offsets; materialize direct and ordered multi-source text; emit only the four neutral private errors
+    with exact required context. Turn the base custom-cfg consumer GREEN, prove the projection cfg still stops at
+    the exact `.2`-owned missing catalog boundary, keep ordinary Cargo/canonical discovery green, and change no
+    engine/helper route, cursor/mark register, external result, neutral/schema/rollout row, root README, mdBook
+    claim, or other backend. Pass focused and complete Rust plus doctrine/canonical signoff, synchronize durable
+    records, commit, clear the brief, and prove clean before `.14.2.2.2`.
+  Verification: focused core 2/2 GREEN; ordinary target 0 tests; nested projection boundary exact one-error
+    `E0432`; formatting, complete Rust/corpus/storage/CLI 66x2, sole-facing mdBook, all seven doctrines, canonical
+    containment/relocation/CLI 66x2/RAM 53%/Phase 0 1,031 in 653 seconds pass; commit/clean pending
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.2.1 - implement Rust source location core`
+
+  ### `FUTURE-PARITY-BACKLOG.14.2.2.1` Acceptance Checklist
+
+  - [x] **ACTIVATE / RETRIEVE** — Prove `.0.3` landed cleanly, activate only this leaf, and retrieve ADR `0056`,
+    the typed-source Knowledge owner, neutral fixtures, dormant consumer, and exact Rust error/value precedents.
+  - [x] **IMMUTABLE AUTHORITY / VALUES** — Add the owned decoded-source authority plus opaque detached `Position`,
+    direct `Span`, and ordered derived-text values without ambient source or parser authority.
+  - [x] **CONVERSION / MATERIALIZATION / ERRORS** — Pass all 3/7/6/3 fixtures, Unicode scalar/line/column/UTF-8
+    conversions, empty/multi-source text, authority ownership, and four exact private diagnostics.
+  - [x] **LAYER BOUNDARY** — Make only the core cfg GREEN; prove the nested projection cfg still identifies the
+    absent 92-row/seven-alias `.2` interface without helper routing or admission.
+  - [x] **LOCKSTEP / SIGNOFF / CLEAN HANDOFF** — Preserve ordinary/public/mdBook truth and rollout 4/10/38; pass
+    Rust, doctrine, canonical, storage, and root-relative gates; commit/clear/prove clean before `.2`.
+
+  Activation evidence 2026-08-07: dormant Rust RED `.14.2.2.0.3` committed at clean `7b4956e8` as 147/300 with
+  no push. Post-commit status and both diffs are empty, `git_message_brief.txt` is zero bytes, the post-commit
+  activation pointer resolves to `1a83a8df`, and no background result remains. This task-tree record is the sole
+  activation diff before the immutable Rust module or export is added.
+
+  Implementation evidence 2026-08-07: `source_location.rs` snapshots the caller's `BTreeMap` of decoded sources
+  behind one monotonic opaque authority id. Each source precomputes scalar-boundary line, column, and UTF-8-byte
+  tables. `Position`, direct `Span`, and ordered `DerivedText` expose only cloned detached JSON records; their
+  private state contains ids, scalar offsets, provenance, and policy but no decoded text, path, parser/match state,
+  authority reference, or host object. The authority is intentionally neither cloneable nor debug-printable. It
+  alone validates values, derives coordinates, and materializes direct or ordered multi-source text. The only
+  errors are the four neutral private records with exact phase, roles, and required context.
+
+  Focused evidence 2026-08-07: the current source passes the base custom-cfg target 2/2 across all exact 3/7/6/3
+  fixtures and four diagnostics. Ordinary Cargo discovery remains a zero-test target. Enabling the nested
+  projection cfg exits 101 with exactly one `E0432`, naming only absent
+  `typed_source_compatibility_aliases` and `typed_source_projection_rows` in `runtime`; no core name is missing.
+  Formatting passes. No engine/helper route, mark/cursor register, external value, neutral/schema/rollout row,
+  root README, sole-facing mdBook claim, or other backend changed.
+
+  Broad Rust evidence 2026-08-07: `tools/run_rust_local.sh` passes core/runtime/integration and every focused
+  suite, the 105-spec corpus, full-manifest generated-source classification, 17-owner storage locality, both
+  66/66 primary CLI environments, and its exact terminal marker. The dedicated five-alias carrier contract also
+  remains green.
+
+  Lockstep/signoff evidence 2026-08-07: the unchanged 79-file sole-facing mdBook builds successfully and remains
+  exact that Rust runtime admission is pending. All seven doctrine checks pass, including neutral 4/10/38 and
+  Knowledge Map 786/6,406. Definitive canonical CI passes process containment, relocated/outside-CWD execution,
+  composed semantic and MCP admission, CLI 66/66 in both option environments, RAM 53%, and Phase 0 1,031/1,031
+  in 653 seconds before `[ci] local CI gate passed`. The first harnessed run reached containment but its nested
+  `sandbox-exec` was denied by the outer sandbox; the authorized rerun proves that exact stage and every later
+  stage green. Commit, brief clearing, and exact clean proof remain.
+
 - ID: `FUTURE-PARITY-BACKLOG.14.2.3`
   Status: `pending` parent
   Goal: Implement and independently admit the same neutral typed source-location algebra in Dart.

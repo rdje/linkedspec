@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.2.1 — implement Rust source location core
+
+- Added one owned decoded-source authority with opaque monotonic identity and precomputed scalar-boundary
+  line/column/UTF-8-byte evidence.
+- Added opaque immutable Rust `Position`, direct `Span`, and ordered `DerivedText` values. Their detached records
+  retain no decoded text, path, parser/match state, live authority reference, or host object.
+- Added authority-only validation, coordinate derivation, direct and ordered multi-source materialization, and the
+  exact four private neutral value errors. The focused base contract passes 2/2 over all 3/7/6/3 fixtures.
+- Preserved the staged boundary: ordinary discovery runs zero tests, while the nested projection cfg exits 101
+  with one `E0432` naming only the two `.2` interfaces. No helper route, mark/cursor storage, external result,
+  neutral/schema/rollout row, root README, sole-facing mdBook claim, or other backend changed; rollout stays
+  4/10/38.
+- Passed formatting and the complete Rust gate, including all focused/integration suites, 105 corpus specs,
+  full-manifest generated-source classification, 17-owner storage locality, and CLI 66/66 under both option
+  environments. Definitive canonical signoff passes all seven doctrines, process containment and relocated
+  execution, CLI 66/66 twice, RAM 53%, Phase 0 1,031/1,031 in 653 seconds, and the exact local-CI marker.
+
 ## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.2.0.3 — lock Rust typed source RED
 
 - Added one integration consumer behind test-local `linkedspec_typed_source_red`, with the later projection half

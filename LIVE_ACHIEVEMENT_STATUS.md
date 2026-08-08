@@ -1,5 +1,25 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-07 — Immutable Rust typed source-location values are implemented
+
+`FUTURE-PARITY-BACKLOG.14.2.2.1` activates task-tree-first from clean `7b4956e8` as intended 148/300 with no push.
+One new Rust module owns copied decoded sources behind an opaque monotonic authority id and precomputes exact
+Unicode-scalar boundary coordinates. Opaque `Position`, direct `Span`, and ordered derived-text values contain no
+decoded text, path, parser/match state, live authority reference, or host object; every record projection is
+detached.
+
+The authority alone validates values, derives one-based line/column plus UTF-8 byte evidence, materializes direct
+and ordered multi-source text, and emits the four exact private errors. The base dormant consumer passes 2/2 over
+all 3/7/6/3 neutral fixtures. Ordinary Cargo still runs zero tests; enabling the later projection layer stops at
+one `E0432` naming only its two missing `.2` interfaces.
+
+The complete Rust gate passes every unit/integration contract, the 105-spec corpus, full generated-source
+classification, 17-owner storage locality, and CLI 66/66 in default and POSIX environments. No helper route,
+cursor/mark storage, external result, neutral/schema/rollout row, root README, sole-facing mdBook claim, or other
+backend changes. Definitive canonical signoff passes all seven doctrines, repository process containment and
+relocated execution, CLI 66/66 twice, RAM 53%, and Phase 0 1,031/1,031 in 653 seconds. Rollout therefore remains
+4/10/38; only the commit/clean handoff remains before projection `.14.2.2.2`.
+
 ## 2026-08-07 — Dormant Rust typed source-location RED is exact
 
 `FUTURE-PARITY-BACKLOG.14.2.2.0.3` activates from clean `1a83a8df` as intended 147/300 with no push. One new Rust
