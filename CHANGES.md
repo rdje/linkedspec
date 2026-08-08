@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.3.0.2 — freeze dormant Dart typed source RED
+
+- Added one conventional four-test consumer under `dart/test_dormant/`, outside ordinary Dart test discovery,
+  plus one exact analyzer exclusion for its unresolved future module.
+- Froze the neutral 3/7/6/3 immutable authority/value fixtures, four privacy-filtered diagnostics, detached 92+7
+  projection catalogs, and complete named-mark, capture-boundary, cursor, native, reconstructed, and generated-plan
+  expectations without adding production code or a public typed-value surface.
+- Proved the explicit repository-routed test exits 1 only for absent `source_location.dart` and its expected future
+  types, while fatal analysis and all 379 ordinary tests remain green.
+- Corrected the canonical neutral-plan Knowledge card from its stale Perl-only 4-of-14/38-mutation summary to the
+  already committed Perl+Rust 5-of-14/39-mutation truth; no neutral artifact or rollout row changed.
+- Passed complete Dart format 97/0, fatal analysis, package 379, storage 20/47, CLI 66x2, corpus 105/105, neutral
+  5/9/39, and language coverage 246/105/122.
+- Kept the sole-facing mdBook source unchanged because shipped behavior is unchanged; its repository-routed build
+  remains 79 files/14,152 KiB and generated HTML retains distinct paragraph, list, table, and example blocks.
+- Passed Knowledge Map 786/6,423, all seven doctrines, and definitive canonical CI: capability 80/0/0, typed
+  source 5/9/39, composed semantic/MCP consumers, repository containment and moved-root execution, CLI 66x2,
+  RAM 39%, Phase 0 1,031/1,031 in 704 seconds, and the exact local-CI pass marker.
+
 ## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.3.0.1 — add Dart source alias parity
 
 - Added Dart known-name/canonicalization support for all seven neutral source-boundary compatibility aliases,

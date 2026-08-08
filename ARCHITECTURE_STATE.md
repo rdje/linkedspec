@@ -1,5 +1,19 @@
 # ARCHITECTURE STATE
 
+- `2026-08-07 dormant Dart typed source-location RED boundary`: `FUTURE-PARITY-BACKLOG.14.2.3.0.2` adds one
+  four-test consumer under `dart/test_dormant/`, outside ordinary package discovery, and excludes exactly that
+  unresolved future import from fatal analysis. The consumer reads the neutral contract and freezes all 3/7/6/3
+  value fixtures, four private diagnostics, detached 92+7 catalogs, and complete mark/capture/cursor behavior
+  across native, reconstructed, and generated-plan carriers. Its explicit repository-routed command exits 1 only
+  for absent `source_location.dart` and the expected future types; ordinary analysis and all 379 tests remain
+  green. Complete Dart passes format 97/0, storage 20/47, CLI 66x2, and corpus 105/105. Neutral rollout remains
+  5/9/39, production and public behavior do not move, and the sole-facing book stays source-unchanged and exact.
+  Mandatory retrieval also corrects one stale Knowledge card from Perl-only 4/14/38 to committed Perl+Rust
+  5/14/39 truth; the derived map is 786 facts / 6,423 question keys. The unchanged mdBook builds at 79 files /
+  14,152 KiB with distinct generated-HTML blocks. All seven doctrines and canonical capability 80/0/0,
+  containment/relocation, CLI 66x2, RAM 39%, and Phase 0 1,031/1,031 in 704 seconds pass. Immutable Dart core
+  `.14.2.3.1` is next.
+
 - `2026-08-07 Dart source-boundary compatibility alias routing`: `FUTURE-PARITY-BACKLOG.14.2.3.0.1` adds the
   neutral contract's seven aliases to Dart's known-name/canonicalization adapter and routes them through the
   existing canonical helper implementation. A separate private alias inventory prevents the backend-specific

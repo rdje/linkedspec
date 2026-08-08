@@ -1,5 +1,28 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-07 — Dormant Dart typed source-location contract is frozen
+
+`FUTURE-PARITY-BACKLOG.14.2.3.0.2` activates task-tree-first from clean alias-parity commit `7b76af71` as intended
+153/300 with no push. One four-test consumer now freezes Dart's future immutable typed source-location boundary
+without changing production code, public results, schemas, authored syntax, or neutral rollout state.
+
+The consumer lives under `dart/test_dormant/`, outside ordinary discovery, and only its unresolved future import
+is excluded from analysis. It consumes the exact neutral 3-source/7-position/6-span/3-derived fixtures, four
+private diagnostics, detached 92-helper/seven-alias catalogs, and mark/capture/cursor behavior across native,
+reconstructed, and generated-plan engines. Its explicit wrapped route fails only for absent `source_location.dart`
+and the expected future API; fatal analysis and all 379 ordinary tests pass.
+
+Complete Dart passes format 97/0, storage 20/47, CLI 66/66 under default and POSIX environments, and corpus
+105/105. Neutral typed-source truth remains 5 complete / 9 pending / 39 mutations. Mandatory retrieval corrected
+one stale Knowledge card to that already committed Perl+Rust truth; the derived map is 786/6,423.
+
+The sole-facing mdBook remains source-unchanged because no user-visible behavior moved. Its repository-routed
+79-file/14,152-KiB build succeeds, and the generated HTML retains separate paragraph, list, table, and code-example
+elements around the relevant current claims. All seven doctrines and definitive canonical CI pass: capability
+80/0/0, typed source 5/9/39, composed semantic/MCP consumers, repository containment and moved-root execution,
+CLI 66x2, RAM 39%, and Phase 0 1,031/1,031 in 704 seconds before the exact local-CI pass marker. Immutable Dart
+core `.14.2.3.1` is next after clean commit.
+
 ## 2026-08-07 — Dart executes all seven source-boundary compatibility aliases
 
 `FUTURE-PARITY-BACKLOG.14.2.3.0.1` activates task-tree-first from clean audit commit `d3efe221` as intended

@@ -1,5 +1,34 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.3.0.2` — dormant Dart typed-source RED): Dart does not provide a
+  general custom compile-condition mechanism suitable for a Rust-style test-local cfg. The truthful dormant seam
+  is therefore a conventional test file in `test_dormant/`, which ordinary `dart test` does not discover, plus an
+  exact analyzer exclusion while the imported future module is absent. There is no `skip`, conditional body,
+  generated proxy, manifest admission, or production stub. Core `.1` removes the analyzer exclusion; admission
+  `.3` later moves the passing consumer into ordinary discovery.
+
+  The consumer reads the neutral JSON and freezes its three sources, seven positions, six direct spans, three
+  derived values, four private errors, 92 helper rows in four families, and seven aliases. Position construction
+  is deliberately cached by source/offset rather than limited to the seven coordinate fixtures because direct-span
+  endpoints include additional valid boundaries. Detached JSON is mutation-tested. Dynamic calls to the future
+  projection catalogs let the same file progress from core RED to projection RED without changing the contract.
+  Complete named-mark, anonymous-boundary alias, and cursor save/rewind/restore cases run through native,
+  reconstructed AST, and generated-plan engines without selecting any public `Position`/`Span` syntax.
+
+  The explicit wrapped command exits during loading with only the absent future module and six expected undefined
+  API types. Fatal analysis and ordinary discovery stay green at 379 tests. The full Dart gate passes format 97/0,
+  storage 20/47, CLI 66x2, and corpus 105/105; neutral truth stays 5/9/39. Mandatory Knowledge retrieval exposed
+  and corrected stale Perl-only 4/14/38 prose after committed Rust admission; the regenerated map is 786/6,423.
+  The unchanged 79-file/14,152-KiB book build retains separate rendered paragraph/list/table/example elements, so
+  a public source edit would have overstated behavior rather than improved lockstep.
+
+  All seven doctrines pass. A first sandboxed canonical attempt reaches the process-containment oracle after all
+  preceding checks pass, then fails only because macOS denies nested `sandbox-exec` with status 71. The required
+  approved rerun passes the relocated six-family process probe and all five moved/outside-CWD primary anchors,
+  capability 80/0/0, typed source 5/9/39 plus Rust 4/4, every composed semantic/MCP consumer, CLI 66x2, RAM 39%,
+  and Phase 0 1,031/1,031 in 704 seconds before the exact local-CI pass marker. This is environment authorization
+  evidence, not a product failure or a reason to weaken containment.
+
 - 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.3.0.1` — Dart source-boundary alias parity): compatibility names are
   adapter metadata, not new runtime operations. `knownActionIrCallNames` now includes one private exact seven-name
   set, and `canonicalActionHelperName` maps those names to the established source-boundary helpers before the
