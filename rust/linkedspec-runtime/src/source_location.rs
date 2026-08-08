@@ -58,6 +58,11 @@ pub struct Position {
 }
 
 impl Position {
+    /// Return the zero-based Unicode-scalar offset.
+    pub fn offset(&self) -> u64 {
+        self.offset
+    }
+
     /// Return a detached neutral record.
     pub fn as_record(&self) -> Value {
         json!({
@@ -78,6 +83,26 @@ pub struct Span {
 }
 
 impl Span {
+    /// Return the zero-based Unicode-scalar start offset.
+    pub fn start(&self) -> u64 {
+        self.start
+    }
+
+    /// Return the zero-based Unicode-scalar end offset.
+    pub fn end(&self) -> u64 {
+        self.end
+    }
+
+    /// Return the Unicode-scalar width of this validated span.
+    pub fn scalar_len(&self) -> u64 {
+        self.end - self.start
+    }
+
+    /// Report whether this validated span is empty.
+    pub fn is_empty(&self) -> bool {
+        self.start == self.end
+    }
+
     /// Return a detached neutral record.
     pub fn as_record(&self) -> Value {
         span_record(self)
@@ -113,6 +138,16 @@ pub struct SourceCoordinates {
 }
 
 impl SourceCoordinates {
+    /// Return the one-based line number.
+    pub fn line(&self) -> u64 {
+        self.line
+    }
+
+    /// Return the one-based column number.
+    pub fn column(&self) -> u64 {
+        self.column
+    }
+
     /// Return a detached neutral record.
     pub fn as_record(&self) -> Value {
         json!({
@@ -226,6 +261,11 @@ impl DecodedSource {
         (index < self.byte_at_offset.len()).then_some(index)
     }
 
+    fn scalar_offset_at_utf8_byte(&self, byte_offset: u64) -> Option<u64> {
+        let index = self.byte_at_offset.binary_search(&byte_offset).ok()?;
+        u64::try_from(index).ok()
+    }
+
     fn slice(&self, start: u64, end: u64) -> Option<&str> {
         let start_index = self.boundary_index(start)?;
         let end_index = self.boundary_index(end)?;
@@ -288,6 +328,37 @@ impl SourceAuthority {
             source_id: source_id.to_owned().into_boxed_str(),
             offset,
         })
+    }
+
+    pub(crate) fn position_from_utf8_byte(
+        &self,
+        source_id: &str,
+        byte_offset: u64,
+        context: &SourceLocationContext,
+    ) -> Result<Position, SourceLocationError> {
+        let source = self.sources.get(source_id);
+        let scalar_offset = source.and_then(|entry| entry.scalar_offset_at_utf8_byte(byte_offset));
+        let Some(scalar_offset) = scalar_offset else {
+            return Err(SourceLocationError::new(
+                POSITION_OUT_OF_RANGE_CODE,
+                context,
+                [
+                    ("source_id", json!(source_id)),
+                    ("position_offset", json!(byte_offset)),
+                    (
+                        "source_length",
+                        json!(source.map_or(0, DecodedSource::scalar_length)),
+                    ),
+                ],
+            ));
+        };
+        self.position(source_id, scalar_offset, context)
+    }
+
+    pub(crate) fn source_scalar_length(&self, source_id: &str) -> Option<u64> {
+        self.sources
+            .get(source_id)
+            .map(DecodedSource::scalar_length)
     }
 
     /// Construct and validate one direct half-open span.

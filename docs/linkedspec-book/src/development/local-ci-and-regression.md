@@ -44,6 +44,11 @@ neutral contract, both completed public-structure rows, and the internal Perl ru
 live, and independently emitted/loaded generated routes. It does not claim public authored `Position`/`Span`
 values, transaction syntax or behavior, or admission of another backend.
 
+Rust's immutable value core and all 92 helper projections plus 7 aliases are implemented and pass a dormant
+custom-cfg consumer across native, reconstructed, and generated-plan execution. The default gate does not yet run
+that consumer unconditionally and the neutral `rust_runtime` row remains pending. Exact registration and promotion
+belong to `FUTURE-PARITY-BACKLOG.14.2.2.3`; until then, a normal canonical pass is not Rust admission evidence.
+
 The gate unconditionally verifies the neutral MCP transport before checking all five derived bindings. It requires
 every contract artifact and runs the generators in this exact order before the admitted implementation proofs:
 

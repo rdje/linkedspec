@@ -1,5 +1,25 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-07 — Rust typed source-location projections are implemented, admission pending
+
+`FUTURE-PARITY-BACKLOG.14.2.2.2` activates task-tree-first from clean `2d9401e2` as intended 149/300 with no push.
+Each Rust execution input now has one immutable decoded-source authority; cloned contexts share its opaque identity.
+All 92 canonical source-boundary helpers plus seven aliases project through typed scalar positions/spans or exact
+detached compatibility adapters while retaining UTF-8-byte runtime registers and existing public results.
+
+Native, JSON-reconstructed, generated-plan, and emitted Rust routes still converge on the same engine. The nested
+projection consumer passes 4/4 over exact catalogs and Unicode mark/capture/cursor behavior; the core-only cfg
+remains 2/2, ordinary discovery remains zero tests, and the dedicated five-alias all-carrier contract passes 1/1.
+The complete Rust gate passes unit/integration suites, the 105-spec corpus, full generated-source classification,
+17-owner storage locality, and CLI 66/66 under default and POSIX option environments.
+
+This leaf does not register the dormant consumer or promote the neutral `rust_runtime` row. Rollout remains
+4 complete / 10 pending / 38 mutations until exact admission `.14.2.2.3`. The sole-facing book now states this
+implemented-but-unadmitted boundary explicitly; public authored typed values, transactions, recursive observation,
+and span-native dispatch remain future work. Definitive canonical CI passes all seven doctrines, repository
+containment and relocated five-anchor execution, CLI 66/66 in both option environments, RAM 51%, and Phase 0
+1,031/1,031 in 654 seconds before the exact local-CI pass marker. Only commit/clean handoff remains.
+
 ## 2026-08-07 — Immutable Rust typed source-location values are implemented
 
 `FUTURE-PARITY-BACKLOG.14.2.2.1` activates task-tree-first from clean `7b4956e8` as intended 148/300 with no push.

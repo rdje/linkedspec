@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.2.2 — route Rust typed source projections
+
+- Added fresh exact Rust catalogs for all 92 canonical source-boundary projections in four families and all seven
+  compatibility aliases.
+- Added one immutable source authority per runtime input. Existing UTF-8-byte cursor, match, mark, anonymous-
+  boundary, and save-stack registers remain unchanged; helper boundaries construct validated scalar positions and
+  spans before deriving coordinates, lengths, text, and compatibility mutations.
+- Routed input/cursor, entry/match, capture/mark, group, and cursor-control helpers through the shared boundary.
+  Native, JSON-reconstructed, generated-plan, and emitted Rust paths still converge on the same interpreter and
+  retain exact external values, absence behavior, schemas, identities, and trace classification.
+- Passed nested projection 4/4, core-only 2/2, ordinary zero-test discovery, dedicated alias carrier 1/1,
+  formatting, and the complete Rust gate: unit/integration contracts, 105 corpus specs, full generated-source
+  classification, 17-owner storage locality, and CLI 66/66 in default and POSIX environments.
+- Kept canonical consumer registration, `rust_runtime` rollout promotion, and the 4/10/38 neutral update solely
+  under `.14.2.2.3`. The sole-facing book now distinguishes implemented-but-unadmitted Rust projections from
+  admitted Perl and future public authored values/transactions.
+- Passed definitive canonical CI: all seven doctrines, repository process containment, moved-root/outside-CWD
+  execution across the five primary runtime anchors, CLI 66/66 in default and POSIX environments, RAM 51%, and
+  Phase 0 1,031/1,031 in 654 seconds before the exact local-CI pass marker.
+
 ## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.2.1 — implement Rust source location core
 
 - Added one owned decoded-source authority with opaque monotonic identity and precomputed scalar-boundary

@@ -1,5 +1,32 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.2.2` — Rust typed-source projections): the compatibility boundary is
+  deliberately an adapter, not a register rewrite. `RuntimeContext` still owns UTF-8-byte cursor/match/mark state;
+  a private authority snapshot owns decoded input and conversion tables. Every source operation converts a byte
+  boundary into an immutable scalar position/span, validates it, then projects the old string/number/collection or
+  mutation result. Cloned contexts share the same authority identity through a private `Arc`, so cloning execution
+  state cannot mint a second authority for the same input.
+
+  The exact 92-row catalog has four natural adapter families: 47 capture/mark, 30 entry/match, 11 input/cursor, and
+  4 cursor controls. Capture-group string/list/map/boolean projections intentionally remain detached pass-through
+  values, matching Perl's typed runtime adapter; they are not source spans because the existing regex state stores
+  captured values rather than group offsets. Mark existence/deletion likewise preserve compatibility storage,
+  while all mark values read or written are typed-boundary validated. `input_slice` preserves truncating behavior
+  by clamping start/end to source length before materializing a typed span, avoiding a second untyped slice path.
+
+  The dormant consumer now passes 4/4 under both custom cfgs: core values/errors, exact detached catalogs, and
+  Unicode mark/capture/cursor behavior across native, reconstructed, and generated-plan execution. Core-only stays
+  2/2 and ordinary discovery stays zero tests. The dedicated all-carrier alias contract remains 1/1. Complete Rust
+  proof passes 166 runtime unit tests, 197 main integration tests, the 105-spec corpus, full generated-source
+  classification, 17 storage owners, and CLI 66x2. This is implementation evidence, not admission: `.14.2.2.3`
+  must make the consumer unconditional and promote only `rust_runtime`.
+
+  Definitive canonical CI passes all seven doctrines and every composed admission, the relocated six-family
+  project-data process proof, moved-root/outside-CWD execution for all five primary runtime anchors, CLI 66/66
+  under both option environments, RAM 51%, and Phase 0 1,031/1,031 in 654 seconds. The first managed-sandbox run
+  could not nest macOS `sandbox-exec`; the authorized rerun proves that exact containment stage and all later
+  stages before `[ci] local CI gate passed`.
+
 - 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.2.1` — immutable Rust typed-source core): source text belongs to the
   authority, never to a position or span. `DecodedSource` copies caller-authorized text once and precomputes one
   table entry per Unicode-scalar boundary, including the terminal boundary. Coordinate lookup and slicing are then

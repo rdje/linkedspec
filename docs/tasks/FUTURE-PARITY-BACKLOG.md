@@ -18359,7 +18359,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   behavior moved. Commit, brief clearing, and exact clean proof remain as the workflow boundary before `.1`.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.2.1`
-  Status: `active` / signoff-complete / commit-pending (2026-08-07; activated task-tree-first from clean
+  Status: `signoff-complete` (2026-08-07; activated task-tree-first from clean
     `7b4956e8`, intended 148/300, no push)
   Goal: Implement the immutable Rust source authority and typed `Position`/`Span`/derived-text value core so the
     base dormant consumer turns GREEN without routing any helper projection or admitting Rust runtime support.
@@ -18376,7 +18376,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
     records, commit, clear the brief, and prove clean before `.14.2.2.2`.
   Verification: focused core 2/2 GREEN; ordinary target 0 tests; nested projection boundary exact one-error
     `E0432`; formatting, complete Rust/corpus/storage/CLI 66x2, sole-facing mdBook, all seven doctrines, canonical
-    containment/relocation/CLI 66x2/RAM 53%/Phase 0 1,031 in 653 seconds pass; commit/clean pending
+    containment/relocation/CLI 66x2/RAM 53%/Phase 0 1,031 in 653 seconds pass; committed clean at `2d9401e2`
   Commit: `FUTURE-PARITY-BACKLOG.14.2.2.1 - implement Rust source location core`
 
   ### `FUTURE-PARITY-BACKLOG.14.2.2.1` Acceptance Checklist
@@ -18423,7 +18423,95 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   composed semantic and MCP admission, CLI 66/66 in both option environments, RAM 53%, and Phase 0 1,031/1,031
   in 653 seconds before `[ci] local CI gate passed`. The first harnessed run reached containment but its nested
   `sandbox-exec` was denied by the outer sandbox; the authorized rerun proves that exact stage and every later
-  stage green. Commit, brief clearing, and exact clean proof remain.
+  stage green. The commit, brief clearing, and exact clean proof then landed as recorded below.
+
+  Clean handoff evidence 2026-08-07: the leaf committed as intended 148/300 at `2d9401e2` with the exact subject.
+  Both activation-pointer hook phases and all seven pre-commit doctrines pass. Post-commit status and staged/
+  unstaged diffs are empty, `git_message_brief.txt` is zero bytes, and no background result remains. Projection
+  `.14.2.2.2` may therefore activate task-tree-first from this exact boundary; no push occurred.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.2.2`
+  Status: `signoff-complete` / `commit-pending` (2026-08-07; activated task-tree-first from clean
+    `2d9401e2`, intended 149/300, no push)
+  Goal: Project the immutable Rust source authority/values through every exact source-boundary helper route while
+    preserving all existing external JSON results, byte-register behavior, serialized/generated identities, and
+    the still-pending Rust admission boundary.
+  Depends on: `.14.2.2.1`
+  Acceptance: Use LinkedSpec's Toolbox and the dormant projection consumer to map the current input-text owner,
+    byte-to-Unicode-scalar conversion seam, all 92 canonical helpers, seven compatibility aliases, named mark/
+    capture/cursor state, and native/reconstructed/generated-plan execution. Add exact detached
+    `typed_source_projection_rows()` and `typed_source_compatibility_aliases()` catalogs. Initialize one immutable
+    authority per execution input and route helper boundary construction, coordinate validation, and source-text
+    materialization through typed positions/spans/derived values without changing scalar byte registers, mark/
+    cursor storage, public helper names/arities, success values, absence behavior, diagnostics, compiled or
+    generated schemas/identities, neutral rollout 4/10/38, root README, sole-facing mdBook admission claims, or any
+    other backend. Turn the nested cfg consumer GREEN across exact 92+7 catalog and Unicode mark/capture/cursor
+    behavior on native, serialized/reconstructed, and generated-plan carriers; keep ordinary discovery at zero
+    tests and leave canonical registration plus `rust_runtime` promotion exclusively to `.14.2.2.3`. Pass focused
+    and complete Rust, storage/path, doctrine, mdBook, and canonical signoff; synchronize durable records; commit,
+    clear the brief, and prove clean before `.14.2.2.3`.
+  Verification: Toolbox route census complete; nested projection cfg 4/4 GREEN; base cfg 2/2; ordinary target
+    zero-test; dedicated alias carrier 1/1; complete Rust/corpus/generated/storage/CLI 66x2 GREEN; sole-facing
+    mdBook/HTML, neutral checker, Knowledge Map 786/6,409, and all seven doctrines GREEN; canonical CI GREEN with
+    repository containment/relocation, CLI 66/66 twice, RAM 51%, and Phase 0 1,031/1,031 in 654 seconds; commit,
+    brief clearing, and clean handoff pending
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.2.2 - route Rust typed source projections`
+
+  ### `FUTURE-PARITY-BACKLOG.14.2.2.2` Acceptance Checklist
+
+  - [x] **ACTIVATE / RETRIEVE** — Prove `.1` landed cleanly at `2d9401e2` as 148/300 with empty status/diffs,
+    zero-byte ignored brief, valid activation parent `7b4956e8`, no background gate, and activate only this leaf.
+  - [x] **TOOLBOX ROUTE CENSUS** — Probe the exact input/source owner, byte/scalar conversion, 92+7 dispatch,
+    mark/capture/cursor registers, and native/reconstructed/generated-plan convergence before implementation.
+  - [x] **CATALOG / TYPED ROUTES** — Add detached exact catalogs and make every owned helper projection construct,
+    validate, and materialize through one per-input immutable authority without changing external behavior.
+  - [x] **UNCHANGED CARRIERS / ADMISSION BOUNDARY** — Pass the nested consumer on all required carriers, retain
+    ordinary zero-test discovery, and leave registration plus rollout promotion exclusively to `.3`.
+  - [x] **LOCKSTEP / SIGNOFF / CLEAN HANDOFF** — Preserve neutral/schema/book/backend truth, pass focused/full/
+    canonical and locality gates, synchronize durable records, commit, clear the brief, and prove clean.
+
+  Activation evidence 2026-08-07: immutable core `.14.2.2.1` landed cleanly at `2d9401e2` as intended 148/300
+  with no push. Its pre/post activation-pointer checks and all seven doctrines pass; status plus both diffs are
+  empty; the ignored brief is zero bytes; the committed activation parent is `7b4956e8`; and no background result
+  remains. This task-tree file is the sole activation diff before any runtime, test, catalog, Knowledge, roadmap,
+  mdBook, neutral artifact, or other project file changes.
+
+  Toolbox census evidence 2026-08-07: one `RuntimeContext` is created per execution input and owns the decoded
+  `input` plus UTF-8-byte cursor, entry/match spans, rule-scoped mark buckets, anonymous capture boundary, and
+  cursor stack. Native execution, JSON reconstruction, generated-plan execution, and emitted Rust modules all
+  converge on the same `Engine`/`RuntimeContext` helper dispatcher. The frozen neutral inventory is exactly 92
+  canonical rows: 47 capture/mark, 30 entry/match, 11 input/cursor, and 4 cursor-control projections, plus seven
+  callable aliases. No parallel generated-state or descriptor projection seam is required.
+
+  Implementation evidence 2026-08-07: `RuntimeContext::new` snapshots `input` once into an opaque
+  `SourceAuthority`; context clones share that exact authority identity through a private `Arc` wrapper. Existing
+  registers remain UTF-8 byte offsets. Boundary methods convert those bytes to immutable scalar `Position` and
+  `Span` values, then derive coordinates, lengths, and materialized text only through the authority. Mark writes,
+  reads, anonymous capture mutation, input slicing (including compatibility truncation), and save/restore/rewind
+  validate through the same boundary without altering storage or update timing. Capture-group projections retain
+  their detached string/list/map/boolean behavior, matching the Perl runtime boundary. The two catalog functions
+  return fresh exact 92-row and seven-alias JSON values; aliases still share canonical dispatch arms.
+
+  Focused/broad evidence 2026-08-07: nested core+projection cfg passes 4/4, including exact catalog detachment and
+  unchanged Unicode mark/capture/cursor results across native, reconstructed, and generated-plan carriers. Core-
+  only cfg remains 2/2; ordinary discovery remains zero tests; the dedicated five-alias all-carrier contract passes
+  1/1. Formatting passes. `tools/run_rust_local.sh` passes all unit/integration contracts, including 166 runtime
+  unit tests and 197 main integration tests, the 105-spec corpus, full-manifest generated-source classification,
+  17-owner storage locality, and CLI 66/66 under both default and POSIX option environments before its exact
+  `[rust-ci] Rust local gate passed` marker. No neutral/schema/rollout row or canonical consumer registration moved;
+  exact Rust admission remains `.14.2.2.3`.
+
+  Lockstep/signoff evidence 2026-08-07: the neutral checker remains exact at 3/7/6/3, 92+7+2, 4/10 rollout,
+  and 38 mutations. The sole-facing mdBook now distinguishes implemented-but-dormant Rust projections from admitted
+  Perl and from future public values/transactions; a real repository-local build passes. Generated HTML places
+  each changed status/capture/CI paragraph in a distinct `<p>`, and splits the backend-handoff callout into three
+  paragraphs rather than one dense blob. Knowledge Map regenerates at 786 facts/6,409 questions. All seven
+  doctrines pass. Definitive canonical CI passes composed semantic/MCP admissions, the relocated six-family
+  project-data process proof, moved-root/outside-CWD execution across all five primary runtime anchors, CLI 66/66
+  in both default and POSIX option environments, RAM 51% against the 88% threshold, and Phase 0 1,031/1,031 in
+  654 seconds before `[ci] local CI gate passed`. The first managed-sandbox run reached the process proof but could
+  not nest macOS `sandbox-exec`; the authorized rerun proves that exact stage and every later stage green. Only the
+  durable commit, brief clearing, and clean proof remain.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.3`
   Status: `pending` parent

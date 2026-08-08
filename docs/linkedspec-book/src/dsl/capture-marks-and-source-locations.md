@@ -21,9 +21,13 @@ portable position identity remains Unicode-scalar based. Text can be materialize
 does not need to copy the text or retain a regex, parser, stack frame, or backend object.
 
 The current families below remain useful. On Perl, `cursor_*`, `entry_*`, `match_*`, `mark_*`, `capture_*`, and
-`input_*` now project positions, spans, text, or measurements from the same internal core instead of defining
-unrelated coordinate systems. Their authored results and mutation behavior have not changed. The other backends
-will adopt the same boundary in their separately admitted runtime leaves.
+`input_*` project positions, spans, text, or measurements from the same internal core instead of defining unrelated
+coordinate systems. Their authored results and mutation behavior have not changed.
+
+Rust now implements the same internal projection boundary while retaining its UTF-8-byte runtime registers. Its
+dormant all-carrier consumer passes, but canonical admission remains pending; therefore the portable rollout does
+not yet claim Rust support. Dart, Julia, PUC Lua, and LuaJIT will adopt and admit the boundary in their separate
+runtime leaves.
 
 ### Bounded cursor transactions do not mean general backtracking
 

@@ -1,5 +1,18 @@
 # ARCHITECTURE STATE
 
+- `2026-08-07 Rust typed source-location projection routing`: `FUTURE-PARITY-BACKLOG.14.2.2.2` gives each
+  `RuntimeContext` one immutable `input` authority shared across context clones. The existing UTF-8-byte cursor,
+  entry/match spans, rule-scoped marks, anonymous capture boundary, and cursor stack remain the live registers;
+  exact conversion to scalar `Position`/`Span` values occurs only at the helper boundary. All 92 canonical helper
+  rows plus seven aliases now route through detached catalog/projection methods, typed validation, coordinate
+  derivation, and authority-only materialization while retaining existing strings, numbers, collections, absence,
+  mutation timing, schema, and generated identity. Native, reconstructed, generated-plan, and emitted paths
+  converge on the same `Engine`. Nested projection 4/4, core 2/2, ordinary zero-test, alias carrier 1/1, and the
+  complete Rust/corpus/generated/storage/CLI 66x2 gate pass. Canonical CI also passes all seven doctrines,
+  repository containment and relocated five-anchor execution, CLI 66x2, RAM 51%, and Phase 0 1,031/1,031 in
+  654 seconds. Canonical admission and `rust_runtime` promotion remain pending under `.14.2.2.3`, so neutral
+  rollout remains 4/10/38.
+
 - `2026-08-07 immutable Rust typed source-location core`: `FUTURE-PARITY-BACKLOG.14.2.2.1` adds
   `rust/linkedspec-runtime/src/source_location.rs`. One non-cloneable authority snapshots caller-authorized decoded
   sources, assigns an opaque monotonic identity, and precomputes Unicode-scalar boundary line/column/UTF-8-byte

@@ -6,9 +6,150 @@
 use crate::{
     RuntimeDiagnosticOutputEvent, RuntimeDiagnosticOutputSink, RuntimeDiagnosticOutputSinkFailure,
     RuntimeSemanticObservationEvent, RuntimeSemanticObservationSink,
+    source_location::{Position, SourceAuthority, SourceLocationContext, Span},
 };
 use linkedspec_core::trace::{TraceEmitter, TraceEventKind, TraceLevel, TraceResult, TraceScope};
 use linkedspec_core::types::RuntimeValue;
+use serde_json::{Value, json};
+use std::sync::Arc;
+
+const INPUT_SOURCE_ID: &str = "input";
+
+/// Return the detached neutral catalog for every Rust source-boundary helper.
+pub fn typed_source_projection_rows() -> Value {
+    json!({
+        "capture_mark": [
+            ["capture_between", "span_text"],
+            ["capture_from", "span_text"],
+            ["capture_len_between", "span_length"],
+            ["capture_len_from", "span_length"],
+            ["capture_rest", "span_text"],
+            ["capture_rest_from", "span_text"],
+            ["capture_rest_len", "span_length"],
+            ["capture_rest_len_from", "span_length"],
+            ["capture_slice", "span_text"],
+            ["capture_slice_col", "span_start_column"],
+            ["capture_slice_len", "span_length"],
+            ["capture_slice_line", "span_start_line"],
+            ["capture_slice_pos", "span_start_offset"],
+            ["capture_slice_until_cursor", "span_text"],
+            ["capture_slice_until_cursor_len", "span_length"],
+            ["capture_until_boundary", "span_text"],
+            ["capture_take", "span_text"],
+            ["capture_take_between", "span_text"],
+            ["capture_take_between_len", "span_length"],
+            ["capture_take_len", "span_length"],
+            ["capture_take_len_from", "span_length"],
+            ["capture_take_rest", "span_text"],
+            ["capture_take_rest_from", "span_text"],
+            ["capture_take_rest_len", "span_length"],
+            ["capture_take_rest_len_from", "span_length"],
+            ["capture_take_until_cursor", "span_text"],
+            ["capture_take_until_cursor_from", "span_text"],
+            ["capture_take_until_cursor_len", "span_length"],
+            ["capture_take_until_cursor_len_from", "span_length"],
+            ["capture_until_cursor_from", "span_text"],
+            ["capture_until_cursor_len_from", "span_length"],
+            ["mark_capture_slice", "capture_boundary_write_position"],
+            ["mark_copy", "mark_write_position"],
+            ["mark_exists", "mark_exists"],
+            ["mark_here", "mark_write_position"],
+            ["mark_input_end", "mark_write_position"],
+            ["mark_input_start", "mark_write_position"],
+            ["mark_pos", "mark_read_offset"],
+            ["start_capture_slice", "capture_boundary_write_position"],
+            ["start_capture_slice_from", "capture_boundary_write_position"],
+            ["clear_mark", "mark_delete"],
+            ["mark_col", "mark_read_column"],
+            ["mark_entry_end", "mark_write_position"],
+            ["mark_entry_start", "mark_write_position"],
+            ["mark_line", "mark_read_line"],
+            ["mark_match_end", "mark_write_position"],
+            ["mark_match_start", "mark_write_position"]
+        ],
+        "entry_match": [
+            ["entry_col", "span_start_column"],
+            ["entry_end_col", "position_column"],
+            ["entry_end_line", "position_line"],
+            ["entry_end_pos", "position_offset"],
+            ["entry_group", "capture_group_text"],
+            ["entry_groups", "capture_group_list"],
+            ["entry_has", "capture_group_exists"],
+            ["entry_len", "span_length"],
+            ["entry_line", "span_start_line"],
+            ["entry_map", "capture_group_map"],
+            ["entry_named", "capture_group_text"],
+            ["entry_start_col", "span_start_column"],
+            ["entry_start_line", "span_start_line"],
+            ["entry_start_pos", "span_start_offset"],
+            ["entry_text", "span_text"],
+            ["match_col", "span_start_column"],
+            ["match_end_col", "position_column"],
+            ["match_end_line", "position_line"],
+            ["match_end_pos", "position_offset"],
+            ["match_group", "capture_group_text"],
+            ["match_groups", "capture_group_list"],
+            ["match_has", "capture_group_exists"],
+            ["match_len", "span_length"],
+            ["match_line", "span_start_line"],
+            ["match_map", "capture_group_map"],
+            ["match_named", "capture_group_text"],
+            ["match_start_col", "span_start_column"],
+            ["match_start_line", "span_start_line"],
+            ["match_start_pos", "span_start_offset"],
+            ["match_text", "span_text"]
+        ],
+        "input_cursor": [
+            ["cursor_col", "position_column"],
+            ["cursor_line", "position_line"],
+            ["cursor_pos", "cursor_position"],
+            ["cursor_rest", "span_text"],
+            ["cursor_rest_len", "span_length"],
+            ["input_end_col", "position_column"],
+            ["input_end_line", "position_line"],
+            ["input_end_pos", "position_offset"],
+            ["input_len", "source_length"],
+            ["input_slice", "source_slice_text"],
+            ["input_text", "source_text"]
+        ],
+        "cursor_control": [
+            ["restore_cursor", "cursor_state_write_compatibility"],
+            ["rewind_entry_start", "cursor_state_write_compatibility"],
+            ["rewind_match_start", "cursor_state_write_compatibility"],
+            ["save_cursor", "cursor_checkpoint_compatibility"]
+        ]
+    })
+}
+
+/// Return the detached neutral alias-to-canonical helper catalog.
+pub fn typed_source_compatibility_aliases() -> Value {
+    json!([
+        ["capture_from_rule_start", "capture_slice"],
+        ["capture_len_from_rule_start", "capture_slice_len"],
+        ["capture_rest_length", "capture_rest_len"],
+        ["capture_slice_here", "start_capture_slice"],
+        ["capture_slice_length", "capture_slice_len"],
+        ["entry_named_map", "entry_map"],
+        ["match_named_map", "match_map"]
+    ])
+}
+
+#[derive(Clone)]
+struct RuntimeSourceAuthority(Arc<SourceAuthority>);
+
+impl RuntimeSourceAuthority {
+    fn new(input: &str) -> Self {
+        let sources =
+            std::collections::BTreeMap::from([(INPUT_SOURCE_ID.to_owned(), input.to_owned())]);
+        Self(Arc::new(SourceAuthority::new(&sources)))
+    }
+}
+
+impl std::fmt::Debug for RuntimeSourceAuthority {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str("RuntimeSourceAuthority(<opaque>)")
+    }
+}
 
 #[derive(Debug, Clone, Copy, Eq, PartialEq)]
 pub enum RuntimeVarKind {
@@ -22,6 +163,8 @@ pub enum RuntimeVarKind {
 pub struct RuntimeContext {
     /// The full input text being parsed.
     pub input: String,
+    /// Opaque per-execution authority for immutable typed source projections.
+    source_authority: RuntimeSourceAuthority,
     /// Current match position in the input.
     pub pos: usize,
     /// Declared scalar variables.
@@ -214,6 +357,7 @@ impl RuntimeContext {
     pub fn new(input: &str) -> Self {
         Self {
             input: input.to_string(),
+            source_authority: RuntimeSourceAuthority::new(input),
             pos: 0,
             scalars: std::collections::HashMap::new(),
             arrays: std::collections::HashMap::new(),
@@ -276,6 +420,92 @@ impl RuntimeContext {
         self.marks
             .get(rule_label)
             .is_some_and(|bucket| bucket.contains_key(name))
+    }
+
+    pub(crate) fn typed_mark_set(
+        &mut self,
+        rule_label: &str,
+        name: String,
+        byte_offset: usize,
+        projection: &str,
+    ) -> bool {
+        if !self.typed_position_is_valid_byte(byte_offset, rule_label, projection) {
+            return false;
+        }
+        self.mark_set(rule_label, name, byte_offset);
+        true
+    }
+
+    pub(crate) fn typed_mark_byte(
+        &self,
+        rule_label: &str,
+        name: &str,
+        projection: &str,
+    ) -> Option<usize> {
+        let byte_offset = self.mark_get(rule_label, name)?;
+        self.typed_position_is_valid_byte(byte_offset, rule_label, projection)
+            .then_some(byte_offset)
+    }
+
+    pub(crate) fn typed_mark_offset(
+        &self,
+        rule_label: &str,
+        name: &str,
+        projection: &str,
+    ) -> Option<usize> {
+        self.typed_position_offset_from_byte(
+            self.mark_get(rule_label, name)?,
+            rule_label,
+            projection,
+        )
+    }
+
+    pub(crate) fn typed_mark_line(
+        &self,
+        rule_label: &str,
+        name: &str,
+        projection: &str,
+    ) -> Option<usize> {
+        self.typed_position_line_from_byte(self.mark_get(rule_label, name)?, rule_label, projection)
+    }
+
+    pub(crate) fn typed_mark_column(
+        &self,
+        rule_label: &str,
+        name: &str,
+        projection: &str,
+    ) -> Option<usize> {
+        self.typed_position_column_from_byte(
+            self.mark_get(rule_label, name)?,
+            rule_label,
+            projection,
+        )
+    }
+
+    pub(crate) fn project_capture_group_text(value: Option<&String>) -> RuntimeValue {
+        value
+            .cloned()
+            .map(RuntimeValue::Scalar)
+            .unwrap_or(RuntimeValue::Undef)
+    }
+
+    pub(crate) fn project_capture_group_list(values: &[String]) -> RuntimeValue {
+        RuntimeValue::Array(values.iter().cloned().map(RuntimeValue::Scalar).collect())
+    }
+
+    pub(crate) fn project_capture_group_map(
+        values: &std::collections::HashMap<String, String>,
+    ) -> RuntimeValue {
+        let mut entries = values
+            .iter()
+            .map(|(key, value)| (key.clone(), RuntimeValue::Scalar(value.clone())))
+            .collect::<Vec<_>>();
+        entries.sort_by(|(left, _), (right, _)| left.cmp(right));
+        RuntimeValue::Hash(entries)
+    }
+
+    pub(crate) fn project_capture_group_exists(exists: bool) -> RuntimeValue {
+        RuntimeValue::Number(if exists { 1.0 } else { 0.0 })
     }
 
     pub(crate) fn set_diagnostic_top_rule(&mut self, label: impl Into<String>) {
@@ -710,6 +940,336 @@ impl RuntimeContext {
     }
 
     // ── Position ──
+
+    fn typed_source_context(rule_label: &str, projection: &str) -> SourceLocationContext {
+        SourceLocationContext::new(
+            format!("{rule_label}:{projection}"),
+            "compatibility_projection",
+        )
+    }
+
+    fn typed_position_from_byte(
+        &self,
+        byte_offset: usize,
+        rule_label: &str,
+        projection: &str,
+    ) -> Option<Position> {
+        self.source_authority
+            .0
+            .position_from_utf8_byte(
+                INPUT_SOURCE_ID,
+                u64::try_from(byte_offset).ok()?,
+                &Self::typed_source_context(rule_label, projection),
+            )
+            .ok()
+    }
+
+    fn typed_position_from_scalar(
+        &self,
+        scalar_offset: usize,
+        rule_label: &str,
+        projection: &str,
+    ) -> Option<Position> {
+        self.source_authority
+            .0
+            .position(
+                INPUT_SOURCE_ID,
+                u64::try_from(scalar_offset).ok()?,
+                &Self::typed_source_context(rule_label, projection),
+            )
+            .ok()
+    }
+
+    fn typed_span_from_bytes(
+        &self,
+        start_byte: usize,
+        end_byte: usize,
+        rule_label: &str,
+        projection: &str,
+    ) -> Option<Span> {
+        let context = Self::typed_source_context(rule_label, projection);
+        let start = self.typed_position_from_byte(start_byte, rule_label, projection)?;
+        let end = self.typed_position_from_byte(end_byte, rule_label, projection)?;
+        self.source_authority
+            .0
+            .direct_span(&start, &end, projection, &context)
+            .ok()
+    }
+
+    fn typed_span_from_scalars(
+        &self,
+        start: usize,
+        end: usize,
+        rule_label: &str,
+        projection: &str,
+    ) -> Option<Span> {
+        let context = Self::typed_source_context(rule_label, projection);
+        let start = self.typed_position_from_scalar(start, rule_label, projection)?;
+        let end = self.typed_position_from_scalar(end, rule_label, projection)?;
+        self.source_authority
+            .0
+            .direct_span(&start, &end, projection, &context)
+            .ok()
+    }
+
+    pub(crate) fn typed_position_is_valid_byte(
+        &self,
+        byte_offset: usize,
+        rule_label: &str,
+        projection: &str,
+    ) -> bool {
+        self.typed_position_from_byte(byte_offset, rule_label, projection)
+            .is_some()
+    }
+
+    pub(crate) fn typed_position_offset_from_byte(
+        &self,
+        byte_offset: usize,
+        rule_label: &str,
+        projection: &str,
+    ) -> Option<usize> {
+        usize::try_from(
+            self.typed_position_from_byte(byte_offset, rule_label, projection)?
+                .offset(),
+        )
+        .ok()
+    }
+
+    pub(crate) fn typed_position_line_from_byte(
+        &self,
+        byte_offset: usize,
+        rule_label: &str,
+        projection: &str,
+    ) -> Option<usize> {
+        let position = self.typed_position_from_byte(byte_offset, rule_label, projection)?;
+        usize::try_from(
+            self.source_authority
+                .0
+                .coordinates(
+                    &position,
+                    &Self::typed_source_context(rule_label, projection),
+                )
+                .ok()?
+                .line(),
+        )
+        .ok()
+    }
+
+    pub(crate) fn typed_position_column_from_byte(
+        &self,
+        byte_offset: usize,
+        rule_label: &str,
+        projection: &str,
+    ) -> Option<usize> {
+        let position = self.typed_position_from_byte(byte_offset, rule_label, projection)?;
+        usize::try_from(
+            self.source_authority
+                .0
+                .coordinates(
+                    &position,
+                    &Self::typed_source_context(rule_label, projection),
+                )
+                .ok()?
+                .column(),
+        )
+        .ok()
+    }
+
+    pub(crate) fn typed_position_line_from_scalar_clamped(
+        &self,
+        scalar_offset: usize,
+        rule_label: &str,
+        projection: &str,
+    ) -> Option<usize> {
+        let source_length = usize::try_from(
+            self.source_authority
+                .0
+                .source_scalar_length(INPUT_SOURCE_ID)?,
+        )
+        .ok()?;
+        let position = self.typed_position_from_scalar(
+            scalar_offset.min(source_length),
+            rule_label,
+            projection,
+        )?;
+        usize::try_from(
+            self.source_authority
+                .0
+                .coordinates(
+                    &position,
+                    &Self::typed_source_context(rule_label, projection),
+                )
+                .ok()?
+                .line(),
+        )
+        .ok()
+    }
+
+    pub(crate) fn typed_position_column_from_scalar_clamped(
+        &self,
+        scalar_offset: usize,
+        rule_label: &str,
+        projection: &str,
+    ) -> Option<usize> {
+        let source_length = usize::try_from(
+            self.source_authority
+                .0
+                .source_scalar_length(INPUT_SOURCE_ID)?,
+        )
+        .ok()?;
+        let position = self.typed_position_from_scalar(
+            scalar_offset.min(source_length),
+            rule_label,
+            projection,
+        )?;
+        usize::try_from(
+            self.source_authority
+                .0
+                .coordinates(
+                    &position,
+                    &Self::typed_source_context(rule_label, projection),
+                )
+                .ok()?
+                .column(),
+        )
+        .ok()
+    }
+
+    pub(crate) fn typed_position_line_from_optional_scalar(
+        &self,
+        scalar_offset: Option<usize>,
+        default_byte_offset: usize,
+        rule_label: &str,
+        projection: &str,
+    ) -> Option<usize> {
+        match scalar_offset {
+            Some(offset) => {
+                self.typed_position_line_from_scalar_clamped(offset, rule_label, projection)
+            }
+            None => self.typed_position_line_from_byte(default_byte_offset, rule_label, projection),
+        }
+    }
+
+    pub(crate) fn typed_position_column_from_optional_scalar(
+        &self,
+        scalar_offset: Option<usize>,
+        default_byte_offset: usize,
+        rule_label: &str,
+        projection: &str,
+    ) -> Option<usize> {
+        match scalar_offset {
+            Some(offset) => {
+                self.typed_position_column_from_scalar_clamped(offset, rule_label, projection)
+            }
+            None => {
+                self.typed_position_column_from_byte(default_byte_offset, rule_label, projection)
+            }
+        }
+    }
+
+    pub(crate) fn typed_span_text_from_bytes(
+        &self,
+        start_byte: usize,
+        end_byte: usize,
+        rule_label: &str,
+        projection: &str,
+    ) -> Option<String> {
+        let span = self.typed_span_from_bytes(start_byte, end_byte, rule_label, projection)?;
+        self.source_authority
+            .0
+            .materialize(&span, &Self::typed_source_context(rule_label, projection))
+            .ok()
+    }
+
+    pub(crate) fn typed_span_length_from_bytes(
+        &self,
+        start_byte: usize,
+        end_byte: usize,
+        rule_label: &str,
+        projection: &str,
+    ) -> Option<usize> {
+        usize::try_from(
+            self.typed_span_from_bytes(start_byte, end_byte, rule_label, projection)?
+                .scalar_len(),
+        )
+        .ok()
+    }
+
+    pub(crate) fn typed_span_start_offset_from_bytes(
+        &self,
+        start_byte: usize,
+        end_byte: usize,
+        rule_label: &str,
+        projection: &str,
+    ) -> Option<usize> {
+        usize::try_from(
+            self.typed_span_from_bytes(start_byte, end_byte, rule_label, projection)?
+                .start(),
+        )
+        .ok()
+    }
+
+    pub(crate) fn typed_span_start_line_from_bytes(
+        &self,
+        start_byte: usize,
+        end_byte: usize,
+        rule_label: &str,
+        projection: &str,
+    ) -> Option<usize> {
+        self.typed_span_from_bytes(start_byte, end_byte, rule_label, projection)?;
+        self.typed_position_line_from_byte(start_byte, rule_label, projection)
+    }
+
+    pub(crate) fn typed_span_start_column_from_bytes(
+        &self,
+        start_byte: usize,
+        end_byte: usize,
+        rule_label: &str,
+        projection: &str,
+    ) -> Option<usize> {
+        self.typed_span_from_bytes(start_byte, end_byte, rule_label, projection)?;
+        self.typed_position_column_from_byte(start_byte, rule_label, projection)
+    }
+
+    pub(crate) fn typed_source_text(&self, rule_label: &str, projection: &str) -> Option<String> {
+        let end = usize::try_from(
+            self.source_authority
+                .0
+                .source_scalar_length(INPUT_SOURCE_ID)?,
+        )
+        .ok()?;
+        let span = self.typed_span_from_scalars(0, end, rule_label, projection)?;
+        self.source_authority
+            .0
+            .materialize(&span, &Self::typed_source_context(rule_label, projection))
+            .ok()
+    }
+
+    pub(crate) fn typed_source_length(&self) -> Option<usize> {
+        usize::try_from(
+            self.source_authority
+                .0
+                .source_scalar_length(INPUT_SOURCE_ID)?,
+        )
+        .ok()
+    }
+
+    pub(crate) fn typed_source_slice(
+        &self,
+        start: usize,
+        width: usize,
+        rule_label: &str,
+        projection: &str,
+    ) -> Option<String> {
+        let source_length = self.typed_source_length()?;
+        let start = start.min(source_length);
+        let end = start.saturating_add(width).min(source_length);
+        let span = self.typed_span_from_scalars(start, end, rule_label, projection)?;
+        self.source_authority
+            .0
+            .materialize(&span, &Self::typed_source_context(rule_label, projection))
+            .ok()
+    }
 
     pub fn pos(&self) -> usize {
         self.pos
@@ -1356,6 +1916,42 @@ impl RuntimeContext {
     /// Rewind the live cursor to the entry/initial-match start for this context.
     pub fn rewind_entry_start(&mut self) {
         self.pos = self.entry_start_byte;
+    }
+
+    pub(crate) fn typed_save_cursor(&mut self, rule_label: &str, projection: &str) -> bool {
+        if !self.typed_position_is_valid_byte(self.pos, rule_label, projection) {
+            return false;
+        }
+        self.save_cursor();
+        true
+    }
+
+    pub(crate) fn typed_restore_cursor(&mut self, rule_label: &str, projection: &str) -> bool {
+        let Some(saved) = self.cursor_stack.last().copied() else {
+            return false;
+        };
+        if !self.typed_position_is_valid_byte(saved, rule_label, projection) {
+            return false;
+        }
+        self.cursor_stack.pop();
+        self.pos = saved;
+        true
+    }
+
+    pub(crate) fn typed_rewind_match_start(&mut self, rule_label: &str, projection: &str) -> bool {
+        if !self.typed_position_is_valid_byte(self.match_start_byte, rule_label, projection) {
+            return false;
+        }
+        self.rewind_match_start();
+        true
+    }
+
+    pub(crate) fn typed_rewind_entry_start(&mut self, rule_label: &str, projection: &str) -> bool {
+        if !self.typed_position_is_valid_byte(self.entry_start_byte, rule_label, projection) {
+            return false;
+        }
+        self.rewind_entry_start();
+        true
     }
 
     // ── Accumulator ──

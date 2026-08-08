@@ -395,35 +395,6 @@ fn byte_to_char_offset(input: &str, byte_off: usize) -> usize {
     input[..clamped].chars().count()
 }
 
-fn line_col_at_char_offset(input: &str, char_off: usize) -> (usize, usize) {
-    let mut line = 1;
-    let mut col = 1;
-    for ch in input.chars().take(char_off.min(input.chars().count())) {
-        if ch == '\n' {
-            line += 1;
-            col = 1;
-        } else {
-            col += 1;
-        }
-    }
-    (line, col)
-}
-
-fn line_col_at_byte_offset(input: &str, byte_off: usize) -> (usize, usize) {
-    line_col_at_char_offset(input, byte_to_char_offset(input, byte_off))
-}
-
-fn line_col_from_optional_char_arg(
-    input: &str,
-    args: &[RuntimeValue],
-    default_byte_off: usize,
-) -> (usize, usize) {
-    match args.first().and_then(RuntimeValue::as_number) {
-        Some(pos) => line_col_at_char_offset(input, pos.max(0.0) as usize),
-        None => line_col_at_byte_offset(input, default_byte_off),
-    }
-}
-
 /// `len` characters of `s` starting at character index `start` (Perl `substr`
 /// semantics — char-based, never panics on a multibyte boundary).
 fn char_substr(s: &str, start: usize, len: usize) -> String {
@@ -433,30 +404,6 @@ fn char_substr(s: &str, start: usize, len: usize) -> String {
 /// The suffix of `s` from character index `start` (`substr($s, $start)`).
 fn char_substr_from(s: &str, start: usize) -> String {
     s.chars().skip(start).collect()
-}
-
-/// Owned text of the byte span `input[start..end]`, used by the mark-based
-/// capture family (`capture_*_from`, `capture_between`). `start`/`end` are
-/// **byte** offsets at char boundaries (marks, match spans, the cursor). A
-/// reversed or out-of-range span yields `None` (→ DSL `undef`) instead of
-/// panicking — the Perl reference guards these readers with a `defined`/`>=`
-/// check (RUST-PARITY.5.5.3, parity with `Contracts.pm` ~690–928).
-fn span_text(input: &str, start: usize, end: usize) -> Option<String> {
-    if start <= end && end <= input.len() {
-        Some(input[start..end].to_string())
-    } else {
-        None
-    }
-}
-
-/// Char-length of the byte span `input[start..end]` — DSL lengths are
-/// char-based (RUST-PARITY.5.3), guarded exactly like [`span_text`].
-fn span_char_len(input: &str, start: usize, end: usize) -> Option<usize> {
-    if start <= end && end <= input.len() {
-        Some(input[start..end].chars().count())
-    } else {
-        None
-    }
 }
 
 fn next_char_boundary_after(input: &str, byte_off: usize) -> usize {
@@ -617,19 +564,6 @@ fn split_string_for_arg(
     } else {
         Ok(split_string_literal(input, &delimiter.to_str()))
     }
-}
-
-/// Materialize a named-capture map (`entry_named`/`match_named`) into a
-/// `RuntimeValue::Hash` for the `entry_map`/`match_map` helpers (Helper Contract
-/// Catalog §8). Keys are sorted so the projection is deterministic — independent
-/// of host `HashMap` iteration order — matching `sorted_keys`/`sorted_values`.
-fn named_map_to_hash(named: &std::collections::HashMap<String, String>) -> RuntimeValue {
-    let mut entries: Vec<(String, RuntimeValue)> = named
-        .iter()
-        .map(|(k, v)| (k.clone(), RuntimeValue::Scalar(v.clone())))
-        .collect();
-    entries.sort_by(|(a, _), (b, _)| a.cmp(b));
-    RuntimeValue::Hash(entries)
 }
 
 fn trace_write_failed(err: impl std::fmt::Display) -> String {
@@ -6985,56 +6919,54 @@ impl Engine {
             }
             // ── Entry/match ──
             "entry_text" => Ok(RuntimeValue::Scalar(
-                span_text(&ctx.input, ctx.entry_start_byte, ctx.entry_end_byte).unwrap_or_default(),
+                ctx.typed_span_text_from_bytes(
+                    ctx.entry_start_byte,
+                    ctx.entry_end_byte,
+                    rule_label,
+                    name,
+                )
+                .unwrap_or_default(),
             )),
             "entry_group" => {
                 if let Some(arg) = args.first() {
                     let idx = arg.as_number().unwrap_or(0.0) as usize;
-                    Ok(ctx
-                        .entry_groups
-                        .get(idx)
-                        .cloned()
-                        .map(RuntimeValue::Scalar)
-                        .unwrap_or(RuntimeValue::Undef))
+                    Ok(RuntimeContext::project_capture_group_text(
+                        ctx.entry_groups.get(idx),
+                    ))
                 } else {
                     Ok(RuntimeValue::Undef)
                 }
             }
-            "entry_groups" => {
-                let arr: Vec<RuntimeValue> = ctx
-                    .entry_groups
-                    .iter()
-                    .map(|g| RuntimeValue::Scalar(g.clone()))
-                    .collect();
-                Ok(RuntimeValue::Array(arr))
-            }
+            "entry_groups" => Ok(RuntimeContext::project_capture_group_list(
+                &ctx.entry_groups,
+            )),
             // Named-capture readers for the ENTRY match — the regex capture that
             // triggered this rule's code (Helper Contract Catalog §8). They read
             // the populated `ctx.entry_named` map. `entry_named_map` is a retired
             // alias of `entry_map`: identical behavior, accepted for legacy specs.
             "entry_named" => Ok(match Self::resolve_named_capture_key(raw_args, args) {
-                Some(name) => ctx
-                    .entry_named
-                    .get(&name)
-                    .map(|v| RuntimeValue::Scalar(v.clone()))
-                    .unwrap_or(RuntimeValue::Undef),
+                Some(name) => {
+                    RuntimeContext::project_capture_group_text(ctx.entry_named.get(&name))
+                }
                 None => RuntimeValue::Undef,
             }),
-            "entry_has" => Ok(RuntimeValue::Number(
-                if Self::resolve_named_capture_key(raw_args, args)
+            "entry_has" => Ok(RuntimeContext::project_capture_group_exists(
+                Self::resolve_named_capture_key(raw_args, args)
                     .map(|name| ctx.entry_named.contains_key(&name))
-                    .unwrap_or(false)
-                {
-                    1.0
-                } else {
-                    0.0
-                },
+                    .unwrap_or(false),
             )),
-            "entry_map" | "entry_named_map" => Ok(named_map_to_hash(&ctx.entry_named)),
+            "entry_map" | "entry_named_map" => {
+                Ok(RuntimeContext::project_capture_group_map(&ctx.entry_named))
+            }
             "match_text" => Ok(if ctx.match_present {
                 RuntimeValue::Scalar(
-                    span_text(&ctx.input, ctx.match_start_byte, ctx.match_end_byte)
-                        .unwrap_or_default(),
+                    ctx.typed_span_text_from_bytes(
+                        ctx.match_start_byte,
+                        ctx.match_end_byte,
+                        rule_label,
+                        name,
+                    )
+                    .unwrap_or_default(),
                 )
             } else {
                 RuntimeValue::Undef
@@ -7247,53 +7179,76 @@ impl Engine {
                 Ok(RuntimeValue::Undef)
             }
             // ── Position/cursor ── (DSL-facing positions/lengths are char-based)
-            "cursor_pos" => Ok(RuntimeValue::Number(
-                byte_to_char_offset(&ctx.input, ctx.pos) as f64,
-            )),
-            "cursor_line" => {
-                let (line, _) = line_col_at_byte_offset(&ctx.input, ctx.pos);
-                Ok(RuntimeValue::Number(line as f64))
-            }
-            "cursor_col" => {
-                let (_, col) = line_col_at_byte_offset(&ctx.input, ctx.pos);
-                Ok(RuntimeValue::Number(col as f64))
-            }
-            "cursor_rest" => Ok(RuntimeValue::Scalar(ctx.remaining().to_string())),
-            "cursor_rest_len" => Ok(RuntimeValue::Number(ctx.remaining().chars().count() as f64)),
-            "input_text" => Ok(RuntimeValue::Scalar(ctx.input.clone())),
-            "input_len" => Ok(RuntimeValue::Number(ctx.input.chars().count() as f64)),
+            "cursor_pos" => Ok(ctx
+                .typed_position_offset_from_byte(ctx.pos, rule_label, name)
+                .map(|offset| RuntimeValue::Number(offset as f64))
+                .unwrap_or(RuntimeValue::Undef)),
+            "cursor_line" => Ok(ctx
+                .typed_position_line_from_byte(ctx.pos, rule_label, name)
+                .map(|line| RuntimeValue::Number(line as f64))
+                .unwrap_or(RuntimeValue::Undef)),
+            "cursor_col" => Ok(ctx
+                .typed_position_column_from_byte(ctx.pos, rule_label, name)
+                .map(|column| RuntimeValue::Number(column as f64))
+                .unwrap_or(RuntimeValue::Undef)),
+            "cursor_rest" => Ok(ctx
+                .typed_span_text_from_bytes(ctx.pos, ctx.input.len(), rule_label, name)
+                .map(RuntimeValue::Scalar)
+                .unwrap_or(RuntimeValue::Undef)),
+            "cursor_rest_len" => Ok(ctx
+                .typed_span_length_from_bytes(ctx.pos, ctx.input.len(), rule_label, name)
+                .map(|length| RuntimeValue::Number(length as f64))
+                .unwrap_or(RuntimeValue::Undef)),
+            "input_text" => Ok(ctx
+                .typed_source_text(rule_label, name)
+                .map(RuntimeValue::Scalar)
+                .unwrap_or(RuntimeValue::Undef)),
+            "input_len" => Ok(ctx
+                .typed_source_length()
+                .map(|length| RuntimeValue::Number(length as f64))
+                .unwrap_or(RuntimeValue::Undef)),
             "input_slice" => {
                 // start/width are char offsets (Perl parity); char-slice, no panic.
                 if args.len() >= 2 {
                     let start = args[0].as_number().unwrap_or(0.0) as usize;
                     let width = args[1].as_number().unwrap_or(0.0) as usize;
-                    Ok(RuntimeValue::Scalar(char_substr(&ctx.input, start, width)))
+                    Ok(ctx
+                        .typed_source_slice(start, width, rule_label, name)
+                        .map(RuntimeValue::Scalar)
+                        .unwrap_or(RuntimeValue::Undef))
                 } else {
                     Ok(RuntimeValue::Undef)
                 }
             }
-            "input_end_pos" => Ok(RuntimeValue::Number(ctx.input.chars().count() as f64)),
+            "input_end_pos" => Ok(ctx
+                .typed_position_offset_from_byte(ctx.input.len(), rule_label, name)
+                .map(|offset| RuntimeValue::Number(offset as f64))
+                .unwrap_or(RuntimeValue::Undef)),
             // RUST-PARITY.5.5.2 — whole-input right-edge location, char-based, no stored mark.
             // Perl reference: `input_end_line()` lowers to `1 + (newline count over the whole
             // input)` (Contracts.pm INPUT_END_LINE_READ); `input_end_col()` lowers to the column
             // at `length($$STRING)` via `_build_column_read_expr` — char distance past the last
             // newline, or `length + 1` when the input has none. Newline counts are byte/char
             // identical, so line uses a plain `'\n'` count; the column is char-based.
-            "input_end_line" => Ok(RuntimeValue::Number(
-                (ctx.input.chars().filter(|&c| c == '\n').count() + 1) as f64,
-            )),
-            "input_end_col" => {
-                let last_nl = ctx.input.rfind('\n').map(|i| i + 1).unwrap_or(0);
-                let col = ctx.input[last_nl..].chars().count() + 1;
-                Ok(RuntimeValue::Number(col as f64))
-            }
+            "input_end_line" => Ok(ctx
+                .typed_position_line_from_byte(ctx.input.len(), rule_label, name)
+                .map(|line| RuntimeValue::Number(line as f64))
+                .unwrap_or(RuntimeValue::Undef)),
+            "input_end_col" => Ok(ctx
+                .typed_position_column_from_byte(ctx.input.len(), rule_label, name)
+                .map(|column| RuntimeValue::Number(column as f64))
+                .unwrap_or(RuntimeValue::Undef)),
             "start_capture_slice" | "capture_slice_here" => {
-                ctx.capture_start = Some(ctx.pos);
+                if ctx.typed_position_is_valid_byte(ctx.pos, rule_label, name) {
+                    ctx.capture_start = Some(ctx.pos);
+                }
                 Ok(RuntimeValue::Undef)
             }
             "start_capture_slice_from" => {
                 let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
-                if let Some(mark) = ctx.mark_get(rule_label, &name) {
+                if let Some(mark) =
+                    ctx.typed_mark_byte(rule_label, &name, "start_capture_slice_from")
+                {
                     ctx.capture_start = Some(mark);
                 }
                 Ok(RuntimeValue::Undef)
@@ -7305,29 +7260,38 @@ impl Engine {
                 // counterpart of the mark-based `capture_from` (.5.5.3), so the
                 // captured text is everything between `capture_start` and the match.
                 let start = ctx.capture_start.unwrap_or(0);
-                Ok(span_text(&ctx.input, start, ctx.match_start_byte)
+                Ok(ctx
+                    .typed_span_text_from_bytes(start, ctx.match_start_byte, rule_label, name)
                     .map(RuntimeValue::Scalar)
                     .unwrap_or(RuntimeValue::Undef))
             }
             "capture_slice_len" | "capture_slice_length" | "capture_len_from_rule_start" => {
                 let start = ctx.capture_start.unwrap_or(0);
-                Ok(span_char_len(&ctx.input, start, ctx.match_start_byte)
+                Ok(ctx
+                    .typed_span_length_from_bytes(start, ctx.match_start_byte, rule_label, name)
                     .map(|n| RuntimeValue::Number(n as f64))
                     .unwrap_or(RuntimeValue::Undef))
             }
             "capture_slice_line" => {
                 let start = ctx.capture_start.unwrap_or(0);
-                let line = ctx.input[..start].chars().filter(|&c| c == '\n').count() + 1;
-                Ok(RuntimeValue::Number(line as f64))
+                Ok(ctx
+                    .typed_span_start_line_from_bytes(start, start, rule_label, name)
+                    .map(|line| RuntimeValue::Number(line as f64))
+                    .unwrap_or(RuntimeValue::Undef))
             }
-            "capture_slice_pos" => Ok(RuntimeValue::Number(byte_to_char_offset(
-                &ctx.input,
-                ctx.capture_start.unwrap_or(0),
-            ) as f64)),
+            "capture_slice_pos" => {
+                let start = ctx.capture_start.unwrap_or(0);
+                Ok(ctx
+                    .typed_span_start_offset_from_bytes(start, start, rule_label, name)
+                    .map(|offset| RuntimeValue::Number(offset as f64))
+                    .unwrap_or(RuntimeValue::Undef))
+            }
             "capture_slice_col" => {
                 let start = ctx.capture_start.unwrap_or(0);
-                let (_, col) = line_col_at_byte_offset(&ctx.input, start);
-                Ok(RuntimeValue::Number(col as f64))
+                Ok(ctx
+                    .typed_span_start_column_from_bytes(start, start, rule_label, name)
+                    .map(|column| RuntimeValue::Number(column as f64))
+                    .unwrap_or(RuntimeValue::Undef))
             }
             // ── RUST-PARITY.5.5.4: anonymous capture-slice family ──
             // These read the anonymous capture start `ctx.capture_start` (Perl
@@ -7342,19 +7306,21 @@ impl Engine {
             // end-of-input for `_take_rest` (`$IPOS = length $$STRING`). Text is
             // the raw byte slice (correct chars); `_len` results are char counts
             // (.5.3). A degenerate (reversed / out-of-range) span yields `undef`
-            // via span_text/span_char_len — panic-safe; the `_until_cursor`/`_rest`
+            // through the typed projection boundary; the `_until_cursor`/`_rest`
             // Perl readers carry the same `defined`/`>=` guard, and `_take_*`
             // mutate only on a valid span (identical to Perl on every realistic
             // `capture_start ≤ match-start ≤ cursor ≤ end` input).
             "capture_slice_until_cursor" => {
                 let start = ctx.capture_start.unwrap_or(0);
-                Ok(span_text(&ctx.input, start, ctx.pos)
+                Ok(ctx
+                    .typed_span_text_from_bytes(start, ctx.pos, rule_label, name)
                     .map(RuntimeValue::Scalar)
                     .unwrap_or(RuntimeValue::Undef))
             }
             "capture_slice_until_cursor_len" => {
                 let start = ctx.capture_start.unwrap_or(0);
-                Ok(span_char_len(&ctx.input, start, ctx.pos)
+                Ok(ctx
+                    .typed_span_length_from_bytes(start, ctx.pos, rule_label, name)
                     .map(|n| RuntimeValue::Number(n as f64))
                     .unwrap_or(RuntimeValue::Undef))
             }
@@ -7385,7 +7351,7 @@ impl Engine {
                 }
                 let boundary_start = boundary_start.unwrap_or(ctx.input.len());
                 let start = ctx.pos;
-                match span_text(&ctx.input, start, boundary_start) {
+                match ctx.typed_span_text_from_bytes(start, boundary_start, rule_label, name) {
                     Some(text) => {
                         ctx.set_pos(boundary_start);
                         Ok(RuntimeValue::Scalar(text))
@@ -7396,7 +7362,7 @@ impl Engine {
             "capture_take_until_cursor" => {
                 let start = ctx.capture_start.unwrap_or(0);
                 let cursor = ctx.pos;
-                match span_text(&ctx.input, start, cursor) {
+                match ctx.typed_span_text_from_bytes(start, cursor, rule_label, name) {
                     Some(text) => {
                         ctx.capture_start = Some(cursor);
                         Ok(RuntimeValue::Scalar(text))
@@ -7407,7 +7373,7 @@ impl Engine {
             "capture_take_until_cursor_len" => {
                 let start = ctx.capture_start.unwrap_or(0);
                 let cursor = ctx.pos;
-                match span_char_len(&ctx.input, start, cursor) {
+                match ctx.typed_span_length_from_bytes(start, cursor, rule_label, name) {
                     Some(n) => {
                         ctx.capture_start = Some(cursor);
                         Ok(RuntimeValue::Number(n as f64))
@@ -7419,7 +7385,8 @@ impl Engine {
                 // text capture_start→match-START; advance capture_start to the
                 // cursor (Contracts.pm CAPTURE_SLICE_TAKE, `$IPOS = pos $$STRING`).
                 let start = ctx.capture_start.unwrap_or(0);
-                match span_text(&ctx.input, start, ctx.match_start_byte) {
+                match ctx.typed_span_text_from_bytes(start, ctx.match_start_byte, rule_label, name)
+                {
                     Some(text) => {
                         ctx.capture_start = Some(ctx.pos);
                         Ok(RuntimeValue::Scalar(text))
@@ -7431,7 +7398,12 @@ impl Engine {
                 // length capture_start→match-START; advance capture_start to the
                 // cursor (Contracts.pm CAPTURE_SLICE_TAKE_LEN).
                 let start = ctx.capture_start.unwrap_or(0);
-                match span_char_len(&ctx.input, start, ctx.match_start_byte) {
+                match ctx.typed_span_length_from_bytes(
+                    start,
+                    ctx.match_start_byte,
+                    rule_label,
+                    name,
+                ) {
                     Some(n) => {
                         ctx.capture_start = Some(ctx.pos);
                         Ok(RuntimeValue::Number(n as f64))
@@ -7441,20 +7413,22 @@ impl Engine {
             }
             "capture_rest" => {
                 let start = ctx.capture_start.unwrap_or(0);
-                Ok(span_text(&ctx.input, start, ctx.input.len())
+                Ok(ctx
+                    .typed_span_text_from_bytes(start, ctx.input.len(), rule_label, name)
                     .map(RuntimeValue::Scalar)
                     .unwrap_or(RuntimeValue::Undef))
             }
             "capture_rest_len" | "capture_rest_length" => {
                 let start = ctx.capture_start.unwrap_or(0);
-                Ok(span_char_len(&ctx.input, start, ctx.input.len())
+                Ok(ctx
+                    .typed_span_length_from_bytes(start, ctx.input.len(), rule_label, name)
                     .map(|n| RuntimeValue::Number(n as f64))
                     .unwrap_or(RuntimeValue::Undef))
             }
             "capture_take_rest" => {
                 let start = ctx.capture_start.unwrap_or(0);
                 let end = ctx.input.len();
-                match span_text(&ctx.input, start, end) {
+                match ctx.typed_span_text_from_bytes(start, end, rule_label, name) {
                     Some(text) => {
                         ctx.capture_start = Some(end);
                         Ok(RuntimeValue::Scalar(text))
@@ -7465,7 +7439,7 @@ impl Engine {
             "capture_take_rest_len" => {
                 let start = ctx.capture_start.unwrap_or(0);
                 let end = ctx.input.len();
-                match span_char_len(&ctx.input, start, end) {
+                match ctx.typed_span_length_from_bytes(start, end, rule_label, name) {
                     Some(n) => {
                         ctx.capture_start = Some(end);
                         Ok(RuntimeValue::Number(n as f64))
@@ -7475,19 +7449,17 @@ impl Engine {
             }
             "mark_here" => {
                 if !args.is_empty() {
-                    let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
-                    ctx.mark_set(rule_label, name, ctx.pos);
+                    let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                    ctx.typed_mark_set(rule_label, mark_name, ctx.pos, name);
                 }
                 Ok(RuntimeValue::Undef)
             }
             "mark_pos" => {
-                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
-                Ok(match ctx.mark_get(rule_label, &name) {
-                    Some(byte) => {
-                        RuntimeValue::Number(byte_to_char_offset(&ctx.input, byte) as f64)
-                    }
-                    None => RuntimeValue::Undef,
-                })
+                let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                Ok(ctx
+                    .typed_mark_offset(rule_label, &mark_name, name)
+                    .map(|offset| RuntimeValue::Number(offset as f64))
+                    .unwrap_or(RuntimeValue::Undef))
             }
             "mark_exists" => {
                 let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
@@ -7515,45 +7487,45 @@ impl Engine {
             "mark_input_start" => {
                 // Store the absolute start-of-input position (0) under the mark.
                 if !args.is_empty() {
-                    let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
-                    ctx.mark_set(rule_label, name, 0);
+                    let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                    ctx.typed_mark_set(rule_label, mark_name, 0, name);
                 }
                 Ok(RuntimeValue::Undef)
             }
             "mark_input_end" => {
                 // Store the absolute end-of-input position (byte length) under the mark.
                 if !args.is_empty() {
-                    let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                    let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                     let end = ctx.input.len();
-                    ctx.mark_set(rule_label, name, end);
+                    ctx.typed_mark_set(rule_label, mark_name, end, name);
                 }
                 Ok(RuntimeValue::Undef)
             }
             "mark_entry_start" => {
                 if !args.is_empty() {
-                    let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
-                    ctx.mark_set(rule_label, name, ctx.entry_start_byte);
+                    let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                    ctx.typed_mark_set(rule_label, mark_name, ctx.entry_start_byte, name);
                 }
                 Ok(RuntimeValue::Undef)
             }
             "mark_entry_end" => {
                 if !args.is_empty() {
-                    let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
-                    ctx.mark_set(rule_label, name, ctx.entry_end_byte);
+                    let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                    ctx.typed_mark_set(rule_label, mark_name, ctx.entry_end_byte, name);
                 }
                 Ok(RuntimeValue::Undef)
             }
             "mark_match_start" => {
                 if !args.is_empty() {
-                    let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
-                    ctx.mark_set(rule_label, name, ctx.match_start_byte);
+                    let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                    ctx.typed_mark_set(rule_label, mark_name, ctx.match_start_byte, name);
                 }
                 Ok(RuntimeValue::Undef)
             }
             "mark_match_end" => {
                 if !args.is_empty() {
-                    let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
-                    ctx.mark_set(rule_label, name, ctx.match_end_byte);
+                    let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                    ctx.typed_mark_set(rule_label, mark_name, ctx.match_end_byte, name);
                 }
                 Ok(RuntimeValue::Undef)
             }
@@ -7564,9 +7536,9 @@ impl Engine {
                 // corrected in .5.5.3.
                 let target = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let source = self.resolve_bare_identifier_at(raw_args, args.get(1), 1);
-                match ctx.mark_get(rule_label, &source) {
+                match ctx.typed_mark_byte(rule_label, &source, name) {
                     Some(pos) => {
-                        ctx.mark_set(rule_label, target, pos);
+                        ctx.typed_mark_set(rule_label, target, pos, name);
                     }
                     None => {
                         ctx.mark_remove(rule_label, &target);
@@ -7576,8 +7548,8 @@ impl Engine {
             }
             "mark_capture_slice" => {
                 if !args.is_empty() {
-                    let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
-                    ctx.mark_set(rule_label, name, ctx.capture_start.unwrap_or(0));
+                    let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                    ctx.typed_mark_set(rule_label, mark_name, ctx.capture_start.unwrap_or(0), name);
                 }
                 Ok(RuntimeValue::Undef)
             }
@@ -7587,137 +7559,144 @@ impl Engine {
                 Ok(RuntimeValue::Undef)
             }
             "mark_line" => {
-                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
-                Ok(match ctx.mark_get(rule_label, &name) {
-                    Some(byte) => {
-                        let (line, _) = line_col_at_byte_offset(&ctx.input, byte);
-                        RuntimeValue::Number(line as f64)
-                    }
-                    None => RuntimeValue::Undef,
-                })
+                let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                Ok(ctx
+                    .typed_mark_line(rule_label, &mark_name, name)
+                    .map(|line| RuntimeValue::Number(line as f64))
+                    .unwrap_or(RuntimeValue::Undef))
             }
             "mark_col" => {
-                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
-                Ok(match ctx.mark_get(rule_label, &name) {
-                    Some(byte) => {
-                        let (_, column) = line_col_at_byte_offset(&ctx.input, byte);
-                        RuntimeValue::Number(column as f64)
-                    }
-                    None => RuntimeValue::Undef,
-                })
+                let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                Ok(ctx
+                    .typed_mark_column(rule_label, &mark_name, name)
+                    .map(|column| RuntimeValue::Number(column as f64))
+                    .unwrap_or(RuntimeValue::Undef))
             }
             "capture_from" => {
                 // mark → match-START (was match-END before .5.5.3; fixed for Perl
                 // parity — `capture_from` is a non-cursor reader).
-                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
-                Ok(match ctx.mark_get(rule_label, &name) {
-                    Some(mark) => span_text(&ctx.input, mark, ctx.match_start_byte)
+                let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                Ok(match ctx.typed_mark_byte(rule_label, &mark_name, name) {
+                    Some(mark) => ctx
+                        .typed_span_text_from_bytes(mark, ctx.match_start_byte, rule_label, name)
                         .map(RuntimeValue::Scalar)
                         .unwrap_or(RuntimeValue::Undef),
                     None => RuntimeValue::Undef,
                 })
             }
             "capture_len_from" => {
-                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
-                Ok(match ctx.mark_get(rule_label, &name) {
-                    Some(mark) => span_char_len(&ctx.input, mark, ctx.match_start_byte)
+                let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                Ok(match ctx.typed_mark_byte(rule_label, &mark_name, name) {
+                    Some(mark) => ctx
+                        .typed_span_length_from_bytes(mark, ctx.match_start_byte, rule_label, name)
                         .map(|n| RuntimeValue::Number(n as f64))
                         .unwrap_or(RuntimeValue::Undef),
                     None => RuntimeValue::Undef,
                 })
             }
             "capture_until_cursor_from" => {
-                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let cursor = ctx.pos;
-                Ok(match ctx.mark_get(rule_label, &name) {
-                    Some(mark) => span_text(&ctx.input, mark, cursor)
+                Ok(match ctx.typed_mark_byte(rule_label, &mark_name, name) {
+                    Some(mark) => ctx
+                        .typed_span_text_from_bytes(mark, cursor, rule_label, name)
                         .map(RuntimeValue::Scalar)
                         .unwrap_or(RuntimeValue::Undef),
                     None => RuntimeValue::Undef,
                 })
             }
             "capture_until_cursor_len_from" => {
-                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let cursor = ctx.pos;
-                Ok(match ctx.mark_get(rule_label, &name) {
-                    Some(mark) => span_char_len(&ctx.input, mark, cursor)
+                Ok(match ctx.typed_mark_byte(rule_label, &mark_name, name) {
+                    Some(mark) => ctx
+                        .typed_span_length_from_bytes(mark, cursor, rule_label, name)
                         .map(|n| RuntimeValue::Number(n as f64))
                         .unwrap_or(RuntimeValue::Undef),
                     None => RuntimeValue::Undef,
                 })
             }
             "capture_take_until_cursor_from" => {
-                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let cursor = ctx.pos;
-                match ctx.mark_get(rule_label, &name) {
-                    Some(mark) => match span_text(&ctx.input, mark, cursor) {
-                        Some(text) => {
-                            ctx.mark_set(rule_label, name, cursor);
-                            Ok(RuntimeValue::Scalar(text))
+                match ctx.typed_mark_byte(rule_label, &mark_name, name) {
+                    Some(mark) => {
+                        match ctx.typed_span_text_from_bytes(mark, cursor, rule_label, name) {
+                            Some(text) => {
+                                ctx.typed_mark_set(rule_label, mark_name, cursor, name);
+                                Ok(RuntimeValue::Scalar(text))
+                            }
+                            None => Ok(RuntimeValue::Undef),
                         }
-                        None => Ok(RuntimeValue::Undef),
-                    },
+                    }
                     None => Ok(RuntimeValue::Undef),
                 }
             }
             "capture_take_until_cursor_len_from" => {
-                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let cursor = ctx.pos;
-                match ctx.mark_get(rule_label, &name) {
-                    Some(mark) => match span_char_len(&ctx.input, mark, cursor) {
-                        Some(n) => {
-                            ctx.mark_set(rule_label, name, cursor);
-                            Ok(RuntimeValue::Number(n as f64))
+                match ctx.typed_mark_byte(rule_label, &mark_name, name) {
+                    Some(mark) => {
+                        match ctx.typed_span_length_from_bytes(mark, cursor, rule_label, name) {
+                            Some(n) => {
+                                ctx.typed_mark_set(rule_label, mark_name, cursor, name);
+                                Ok(RuntimeValue::Number(n as f64))
+                            }
+                            None => Ok(RuntimeValue::Undef),
                         }
-                        None => Ok(RuntimeValue::Undef),
-                    },
+                    }
                     None => Ok(RuntimeValue::Undef),
                 }
             }
             "capture_take_len_from" => {
                 // length mark→match-START; advances the mark to the cursor
                 // (Contracts.pm CAPTURE_TAKE_LEN_FROM_MARK).
-                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let cursor = ctx.pos;
                 let end = ctx.match_start_byte;
-                match ctx.mark_get(rule_label, &name) {
-                    Some(mark) => match span_char_len(&ctx.input, mark, end) {
-                        Some(n) => {
-                            ctx.mark_set(rule_label, name, cursor);
-                            Ok(RuntimeValue::Number(n as f64))
+                match ctx.typed_mark_byte(rule_label, &mark_name, name) {
+                    Some(mark) => {
+                        match ctx.typed_span_length_from_bytes(mark, end, rule_label, name) {
+                            Some(n) => {
+                                ctx.typed_mark_set(rule_label, mark_name, cursor, name);
+                                Ok(RuntimeValue::Number(n as f64))
+                            }
+                            None => Ok(RuntimeValue::Undef),
                         }
-                        None => Ok(RuntimeValue::Undef),
-                    },
+                    }
                     None => Ok(RuntimeValue::Undef),
                 }
             }
             "capture_rest_from" => {
-                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let end = ctx.input.len();
-                Ok(match ctx.mark_get(rule_label, &name) {
-                    Some(mark) => span_text(&ctx.input, mark, end)
+                Ok(match ctx.typed_mark_byte(rule_label, &mark_name, name) {
+                    Some(mark) => ctx
+                        .typed_span_text_from_bytes(mark, end, rule_label, name)
                         .map(RuntimeValue::Scalar)
                         .unwrap_or(RuntimeValue::Undef),
                     None => RuntimeValue::Undef,
                 })
             }
             "capture_rest_len_from" => {
-                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let end = ctx.input.len();
-                Ok(match ctx.mark_get(rule_label, &name) {
-                    Some(mark) => span_char_len(&ctx.input, mark, end)
+                Ok(match ctx.typed_mark_byte(rule_label, &mark_name, name) {
+                    Some(mark) => ctx
+                        .typed_span_length_from_bytes(mark, end, rule_label, name)
                         .map(|n| RuntimeValue::Number(n as f64))
                         .unwrap_or(RuntimeValue::Undef),
                     None => RuntimeValue::Undef,
                 })
             }
             "capture_take_rest_from" => {
-                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let end = ctx.input.len();
-                match ctx.mark_get(rule_label, &name) {
-                    Some(mark) => match span_text(&ctx.input, mark, end) {
+                match ctx.typed_mark_byte(rule_label, &mark_name, name) {
+                    Some(mark) => match ctx.typed_span_text_from_bytes(mark, end, rule_label, name)
+                    {
                         Some(text) => {
-                            ctx.mark_set(rule_label, name, end);
+                            ctx.typed_mark_set(rule_label, mark_name, end, name);
                             Ok(RuntimeValue::Scalar(text))
                         }
                         None => Ok(RuntimeValue::Undef),
@@ -7726,26 +7705,29 @@ impl Engine {
                 }
             }
             "capture_take_rest_len_from" => {
-                let name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let end = ctx.input.len();
-                match ctx.mark_get(rule_label, &name) {
-                    Some(mark) => match span_char_len(&ctx.input, mark, end) {
-                        Some(n) => {
-                            ctx.mark_set(rule_label, name, end);
-                            Ok(RuntimeValue::Number(n as f64))
+                match ctx.typed_mark_byte(rule_label, &mark_name, name) {
+                    Some(mark) => {
+                        match ctx.typed_span_length_from_bytes(mark, end, rule_label, name) {
+                            Some(n) => {
+                                ctx.typed_mark_set(rule_label, mark_name, end, name);
+                                Ok(RuntimeValue::Number(n as f64))
+                            }
+                            None => Ok(RuntimeValue::Undef),
                         }
-                        None => Ok(RuntimeValue::Undef),
-                    },
+                    }
                     None => Ok(RuntimeValue::Undef),
                 }
             }
             "capture_between" => {
                 let a = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let b = self.resolve_bare_identifier_at(raw_args, args.get(1), 1);
-                let start = ctx.mark_get(rule_label, &a);
-                let end = ctx.mark_get(rule_label, &b);
+                let start = ctx.typed_mark_byte(rule_label, &a, name);
+                let end = ctx.typed_mark_byte(rule_label, &b, name);
                 Ok(match (start, end) {
-                    (Some(s), Some(e)) => span_text(&ctx.input, s, e)
+                    (Some(s), Some(e)) => ctx
+                        .typed_span_text_from_bytes(s, e, rule_label, name)
                         .map(RuntimeValue::Scalar)
                         .unwrap_or(RuntimeValue::Undef),
                     _ => RuntimeValue::Undef,
@@ -7754,10 +7736,11 @@ impl Engine {
             "capture_len_between" => {
                 let a = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let b = self.resolve_bare_identifier_at(raw_args, args.get(1), 1);
-                let start = ctx.mark_get(rule_label, &a);
-                let end = ctx.mark_get(rule_label, &b);
+                let start = ctx.typed_mark_byte(rule_label, &a, name);
+                let end = ctx.typed_mark_byte(rule_label, &b, name);
                 Ok(match (start, end) {
-                    (Some(s), Some(e)) => span_char_len(&ctx.input, s, e)
+                    (Some(s), Some(e)) => ctx
+                        .typed_span_length_from_bytes(s, e, rule_label, name)
                         .map(|n| RuntimeValue::Number(n as f64))
                         .unwrap_or(RuntimeValue::Undef),
                     _ => RuntimeValue::Undef,
@@ -7766,102 +7749,210 @@ impl Engine {
             "capture_take_between" => {
                 let a = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let b = self.resolve_bare_identifier_at(raw_args, args.get(1), 1);
-                let start = ctx.mark_get(rule_label, &a);
-                let end = ctx.mark_get(rule_label, &b);
+                let start = ctx.typed_mark_byte(rule_label, &a, name);
+                let end = ctx.typed_mark_byte(rule_label, &b, name);
                 match (start, end) {
-                    (Some(s), Some(e)) => match span_text(&ctx.input, s, e) {
-                        Some(text) => {
-                            ctx.mark_set(rule_label, a, e);
-                            Ok(RuntimeValue::Scalar(text))
+                    (Some(s), Some(e)) => {
+                        match ctx.typed_span_text_from_bytes(s, e, rule_label, name) {
+                            Some(text) => {
+                                ctx.typed_mark_set(rule_label, a, e, name);
+                                Ok(RuntimeValue::Scalar(text))
+                            }
+                            None => Ok(RuntimeValue::Undef),
                         }
-                        None => Ok(RuntimeValue::Undef),
-                    },
+                    }
                     _ => Ok(RuntimeValue::Undef),
                 }
             }
             "capture_take_between_len" => {
                 let a = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
                 let b = self.resolve_bare_identifier_at(raw_args, args.get(1), 1);
-                let start = ctx.mark_get(rule_label, &a);
-                let end = ctx.mark_get(rule_label, &b);
+                let start = ctx.typed_mark_byte(rule_label, &a, name);
+                let end = ctx.typed_mark_byte(rule_label, &b, name);
                 match (start, end) {
-                    (Some(s), Some(e)) => match span_char_len(&ctx.input, s, e) {
-                        Some(n) => {
-                            ctx.mark_set(rule_label, a, e);
-                            Ok(RuntimeValue::Number(n as f64))
+                    (Some(s), Some(e)) => {
+                        match ctx.typed_span_length_from_bytes(s, e, rule_label, name) {
+                            Some(n) => {
+                                ctx.typed_mark_set(rule_label, a, e, name);
+                                Ok(RuntimeValue::Number(n as f64))
+                            }
+                            None => Ok(RuntimeValue::Undef),
                         }
-                        None => Ok(RuntimeValue::Undef),
-                    },
+                    }
                     _ => Ok(RuntimeValue::Undef),
                 }
             }
             // ── Entry/match detail ──
             "entry_line" | "entry_start_line" => {
-                let (line, _) =
-                    line_col_from_optional_char_arg(&ctx.input, args, ctx.entry_start_byte);
-                Ok(RuntimeValue::Number(line as f64))
+                let offset = args
+                    .first()
+                    .and_then(RuntimeValue::as_number)
+                    .map(|value| value.max(0.0) as usize);
+                Ok(ctx
+                    .typed_position_line_from_optional_scalar(
+                        offset,
+                        ctx.entry_start_byte,
+                        rule_label,
+                        name,
+                    )
+                    .map(|line| RuntimeValue::Number(line as f64))
+                    .unwrap_or(RuntimeValue::Undef))
             }
             "entry_col" | "entry_start_col" => {
-                let (_, col) =
-                    line_col_from_optional_char_arg(&ctx.input, args, ctx.entry_start_byte);
-                Ok(RuntimeValue::Number(col as f64))
+                let offset = args
+                    .first()
+                    .and_then(RuntimeValue::as_number)
+                    .map(|value| value.max(0.0) as usize);
+                Ok(ctx
+                    .typed_position_column_from_optional_scalar(
+                        offset,
+                        ctx.entry_start_byte,
+                        rule_label,
+                        name,
+                    )
+                    .map(|column| RuntimeValue::Number(column as f64))
+                    .unwrap_or(RuntimeValue::Undef))
             }
             "entry_end_line" => {
-                let (line, _) =
-                    line_col_from_optional_char_arg(&ctx.input, args, ctx.entry_end_byte);
-                Ok(RuntimeValue::Number(line as f64))
+                let offset = args
+                    .first()
+                    .and_then(RuntimeValue::as_number)
+                    .map(|value| value.max(0.0) as usize);
+                Ok(ctx
+                    .typed_position_line_from_optional_scalar(
+                        offset,
+                        ctx.entry_end_byte,
+                        rule_label,
+                        name,
+                    )
+                    .map(|line| RuntimeValue::Number(line as f64))
+                    .unwrap_or(RuntimeValue::Undef))
             }
             "entry_end_col" => {
-                let (_, col) =
-                    line_col_from_optional_char_arg(&ctx.input, args, ctx.entry_end_byte);
-                Ok(RuntimeValue::Number(col as f64))
+                let offset = args
+                    .first()
+                    .and_then(RuntimeValue::as_number)
+                    .map(|value| value.max(0.0) as usize);
+                Ok(ctx
+                    .typed_position_column_from_optional_scalar(
+                        offset,
+                        ctx.entry_end_byte,
+                        rule_label,
+                        name,
+                    )
+                    .map(|column| RuntimeValue::Number(column as f64))
+                    .unwrap_or(RuntimeValue::Undef))
             }
-            "entry_len" => Ok(RuntimeValue::Number(
-                span_char_len(&ctx.input, ctx.entry_start_byte, ctx.entry_end_byte).unwrap_or(0)
-                    as f64,
-            )),
-            "entry_start_pos" => Ok(RuntimeValue::Number(byte_to_char_offset(
-                &ctx.input,
-                ctx.entry_start_byte,
-            ) as f64)),
-            "entry_end_pos" => Ok(RuntimeValue::Number(byte_to_char_offset(
-                &ctx.input,
-                ctx.entry_end_byte,
-            ) as f64)),
+            "entry_len" => Ok(ctx
+                .typed_span_length_from_bytes(
+                    ctx.entry_start_byte,
+                    ctx.entry_end_byte,
+                    rule_label,
+                    name,
+                )
+                .map(|length| RuntimeValue::Number(length as f64))
+                .unwrap_or(RuntimeValue::Number(0.0))),
+            "entry_start_pos" => Ok(ctx
+                .typed_span_start_offset_from_bytes(
+                    ctx.entry_start_byte,
+                    ctx.entry_end_byte,
+                    rule_label,
+                    name,
+                )
+                .map(|offset| RuntimeValue::Number(offset as f64))
+                .unwrap_or(RuntimeValue::Undef)),
+            "entry_end_pos" => Ok(ctx
+                .typed_position_offset_from_byte(ctx.entry_end_byte, rule_label, name)
+                .map(|offset| RuntimeValue::Number(offset as f64))
+                .unwrap_or(RuntimeValue::Undef)),
             "match_line" | "match_start_line" => {
-                let (line, _) =
-                    line_col_from_optional_char_arg(&ctx.input, args, ctx.match_start_byte);
-                Ok(RuntimeValue::Number(line as f64))
+                let offset = args
+                    .first()
+                    .and_then(RuntimeValue::as_number)
+                    .map(|value| value.max(0.0) as usize);
+                Ok(ctx
+                    .typed_position_line_from_optional_scalar(
+                        offset,
+                        ctx.match_start_byte,
+                        rule_label,
+                        name,
+                    )
+                    .map(|line| RuntimeValue::Number(line as f64))
+                    .unwrap_or(RuntimeValue::Undef))
             }
             "match_col" | "match_start_col" => {
-                let (_, col) =
-                    line_col_from_optional_char_arg(&ctx.input, args, ctx.match_start_byte);
-                Ok(RuntimeValue::Number(col as f64))
+                let offset = args
+                    .first()
+                    .and_then(RuntimeValue::as_number)
+                    .map(|value| value.max(0.0) as usize);
+                Ok(ctx
+                    .typed_position_column_from_optional_scalar(
+                        offset,
+                        ctx.match_start_byte,
+                        rule_label,
+                        name,
+                    )
+                    .map(|column| RuntimeValue::Number(column as f64))
+                    .unwrap_or(RuntimeValue::Undef))
             }
             "match_end_line" => {
-                let (line, _) =
-                    line_col_from_optional_char_arg(&ctx.input, args, ctx.match_end_byte);
-                Ok(RuntimeValue::Number(line as f64))
+                let offset = args
+                    .first()
+                    .and_then(RuntimeValue::as_number)
+                    .map(|value| value.max(0.0) as usize);
+                Ok(ctx
+                    .typed_position_line_from_optional_scalar(
+                        offset,
+                        ctx.match_end_byte,
+                        rule_label,
+                        name,
+                    )
+                    .map(|line| RuntimeValue::Number(line as f64))
+                    .unwrap_or(RuntimeValue::Undef))
             }
             "match_end_col" => {
-                let (_, col) =
-                    line_col_from_optional_char_arg(&ctx.input, args, ctx.match_end_byte);
-                Ok(RuntimeValue::Number(col as f64))
+                let offset = args
+                    .first()
+                    .and_then(RuntimeValue::as_number)
+                    .map(|value| value.max(0.0) as usize);
+                Ok(ctx
+                    .typed_position_column_from_optional_scalar(
+                        offset,
+                        ctx.match_end_byte,
+                        rule_label,
+                        name,
+                    )
+                    .map(|column| RuntimeValue::Number(column as f64))
+                    .unwrap_or(RuntimeValue::Undef))
             }
             "match_len" => Ok(if ctx.match_present {
-                span_char_len(&ctx.input, ctx.match_start_byte, ctx.match_end_byte)
-                    .map(|length| RuntimeValue::Number(length as f64))
-                    .unwrap_or(RuntimeValue::Undef)
+                ctx.typed_span_length_from_bytes(
+                    ctx.match_start_byte,
+                    ctx.match_end_byte,
+                    rule_label,
+                    name,
+                )
+                .map(|length| RuntimeValue::Number(length as f64))
+                .unwrap_or(RuntimeValue::Undef)
             } else {
                 RuntimeValue::Undef
             }),
             "match_start_pos" => Ok(if ctx.match_present {
-                RuntimeValue::Number(byte_to_char_offset(&ctx.input, ctx.match_start_byte) as f64)
+                ctx.typed_span_start_offset_from_bytes(
+                    ctx.match_start_byte,
+                    ctx.match_end_byte,
+                    rule_label,
+                    name,
+                )
+                .map(|offset| RuntimeValue::Number(offset as f64))
+                .unwrap_or(RuntimeValue::Undef)
             } else {
                 RuntimeValue::Undef
             }),
             "match_end_pos" => Ok(if ctx.match_present {
-                RuntimeValue::Number(byte_to_char_offset(&ctx.input, ctx.match_end_byte) as f64)
+                ctx.typed_position_offset_from_byte(ctx.match_end_byte, rule_label, name)
+                    .map(|offset| RuntimeValue::Number(offset as f64))
+                    .unwrap_or(RuntimeValue::Undef)
             } else {
                 RuntimeValue::Undef
             }),
@@ -7870,21 +7961,15 @@ impl Engine {
                     Ok(RuntimeValue::Undef)
                 } else if let Some(arg) = args.first() {
                     let idx = arg.as_number().unwrap_or(0.0) as usize;
-                    Ok(ctx
-                        .match_groups
-                        .get(idx)
-                        .cloned()
-                        .map(RuntimeValue::Scalar)
-                        .unwrap_or(RuntimeValue::Undef))
+                    Ok(RuntimeContext::project_capture_group_text(
+                        ctx.match_groups.get(idx),
+                    ))
                 } else {
                     Ok(RuntimeValue::Undef)
                 }
             }
-            "match_groups" => Ok(RuntimeValue::Array(
-                ctx.match_groups
-                    .iter()
-                    .map(|g| RuntimeValue::Scalar(g.clone()))
-                    .collect(),
+            "match_groups" => Ok(RuntimeContext::project_capture_group_list(
+                &ctx.match_groups,
             )),
             // Named-capture readers for the LOCAL match — the immediate regex
             // match inside this code block, which can diverge from the entry match
@@ -7892,24 +7977,19 @@ impl Engine {
             // the populated `ctx.match_named` map. `match_named_map` is a retired
             // alias of `match_map`.
             "match_named" => Ok(match Self::resolve_named_capture_key(raw_args, args) {
-                Some(name) => ctx
-                    .match_named
-                    .get(&name)
-                    .map(|v| RuntimeValue::Scalar(v.clone()))
-                    .unwrap_or(RuntimeValue::Undef),
+                Some(name) => {
+                    RuntimeContext::project_capture_group_text(ctx.match_named.get(&name))
+                }
                 None => RuntimeValue::Undef,
             }),
-            "match_has" => Ok(RuntimeValue::Number(
-                if Self::resolve_named_capture_key(raw_args, args)
+            "match_has" => Ok(RuntimeContext::project_capture_group_exists(
+                Self::resolve_named_capture_key(raw_args, args)
                     .map(|name| ctx.match_named.contains_key(&name))
-                    .unwrap_or(false)
-                {
-                    1.0
-                } else {
-                    0.0
-                },
+                    .unwrap_or(false),
             )),
-            "match_map" | "match_named_map" => Ok(named_map_to_hash(&ctx.match_named)),
+            "match_map" | "match_named_map" => {
+                Ok(RuntimeContext::project_capture_group_map(&ctx.match_named))
+            }
             // ── Scalar transforms ──
             "length" => {
                 if let Some(arg) = args.first() {
@@ -8584,19 +8664,19 @@ impl Engine {
             }
             // ── Explicit cursor controls ──
             "save_cursor" => {
-                ctx.save_cursor();
+                ctx.typed_save_cursor(rule_label, name);
                 Ok(RuntimeValue::Undef)
             }
             "restore_cursor" => {
-                ctx.restore_cursor();
+                ctx.typed_restore_cursor(rule_label, name);
                 Ok(RuntimeValue::Undef)
             }
             "rewind_match_start" => {
-                ctx.rewind_match_start();
+                ctx.typed_rewind_match_start(rule_label, name);
                 Ok(RuntimeValue::Undef)
             }
             "rewind_entry_start" => {
-                ctx.rewind_entry_start();
+                ctx.typed_rewind_entry_start(rule_label, name);
                 Ok(RuntimeValue::Undef)
             }
             // ── Conditional flow: if/elseif/else/endif ──
