@@ -5,21 +5,17 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `3a848631` — clean Julia alias-parity HEAD from which dormant typed-source RED
-  `.14.2.4.0.2` activated task-tree-first (158/300; no push).
-- latest_completed_leaf: `.14.2.4.0.2` is intended to land as 159/300 with subject
-  `FUTURE-PARITY-BACKLOG.14.2.4.0.2 - freeze Julia typed source RED`.
-- active_work_unit: none at intended clean dormant-RED handoff; immutable Julia core `.14.2.4.1` is next but inactive.
-- next_action: prove the `.14.2.4.0.2` landing clean, then activate immutable Julia source-location core
-  `.14.2.4.1` task-tree-first before any Julia production, test expectation, book, neutral, or live-state change.
-- in_flight_uncommitted: none at intended handoff; no background result remains after exact RED, complete Julia,
-  storage, mdBook, Knowledge, doctrines, definitive canonical CI, and final focused gates.
-- blockers: none. Dormant core/projection selections parse completely and exit 1 only for absent private
-  `LinkedSpecJulia.SourceLocation`; projection API lookup remains nested after core. Alias 141/141, complete Julia
-  byte-fresh MCP/package/storage 19/5/CLI/corpus 105/105, neutral 6/8/40, language 246/105+1/122, capability
-  80/0/0, and mdBook 79 files / 14,168 KiB with separate rendered blocks pass. Knowledge Map is 787/6,455 and all
-  seven doctrines pass. Definitive canonical passes containment/relocation, CLI 66x2, RAM 62%, Phase 0
-  1,031/1,031 in 705 wallclock seconds, and exact `[ci] local CI gate passed`.
+- activation_commit: `6d293ac0` — clean dormant Julia RED HEAD from which immutable core `.14.2.4.1` activated
+  task-tree-first (159/300; no push).
+- latest_completed_leaf: `.14.2.4.1` is signoff-complete for intended atomic commit 160/300 with subject
+  `FUTURE-PARITY-BACKLOG.14.2.4.1 - implement Julia source location core`.
+- active_work_unit: none at intended clean handoff; `.14.2.4.2` remains inactive until `.1` lands clean.
+- next_action: land `.14.2.4.1`, clear the brief, prove the exact clean handoff, then activate `.14.2.4.2`
+  task-tree-first for Julia typed projection catalogs/routes.
+- in_flight_uncommitted: signoff-complete `.14.2.4.1` commit set only; no background job remains.
+- blockers: none. Core 112/112, projection exact missing API, complete Julia, storage 19/5, corpus 105/105,
+  mdBook 79/14,168 with separate blocks, KM 787/6,459, all doctrines, CLI 66x2, RAM 57%, and canonical Phase 0
+  1,031/1,031 in 689 seconds pass. Neutral 6/8/40 and sole-facing pending-Julia truth remain unchanged.
 - current_typed_source: neutral/public composition plus Perl, Rust, and Dart internal runtimes are admitted at
   6 complete / 8 pending with 40 mutations; Julia's seven aliases execute but its typed values/projections and
   PUC-Lua/LuaJIT remain pending.
@@ -28,9 +24,9 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   exact ordinary four-test consumer is canonically registered and `rust_runtime` is complete.
 - dart_audit_fact: one immutable authority/value core and all 92+7 projections pass the admitted ordinary/canonical
   4/4 consumer across native/reconstructed/generated/emitted carriers while retaining UTF-16 registers and results.
-- julia_audit_fact: one copied decoded String owns zero-based UTF-8 code-unit cursor/match/mark/capture/stack state;
-  all 92 canonical helpers plus seven aliases share existing routes. One dormant final-path private-namespace
-  consumer freezes exact values/projections/carriers; immutable core `.14.2.4.1` is the next implementation owner.
+- julia_audit_fact: private non-exported `SourceLocation` now owns copied text and immutable scalar/code-unit/
+  coordinate tables plus detached values and four errors; helpers still use unchanged code-unit routes, and `.2`
+  alone owns projection catalogs/routing before `.3` admission.
 - current_storage_contract: ADR `0053` keeps project outputs, caches, logs, fixtures, and scratch on the repository
   filesystem; use repository-routed wrappers and never default project data to OS temp/home caches.
 - current_path_contract: ADR `0052` and `REPO-ROOT-PATHS` require durable root-relative paths and runtime-derived
@@ -42,7 +38,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   and nonurgent; no pivot while dirty.
 - latest_bootstrap_read: 2026-08-07 — README, memory architecture, resume/commit/bootstrap owners, roadmap/task,
   ADR `0056`, typed-source/Julia authority Knowledge cards, Toolbox, exact Julia authorities, and book claims refreshed.
-- pivot_guard: prove `.14.2.4.0.2` committed and clean before activating immutable Julia core `.14.2.4.1` task-tree-first.
-- push_policy: hard lock at 300 new local commits; dormant Julia RED `.14.2.4.0.2` is intended 159/300; no push.
+- pivot_guard: land/clear/prove `.14.2.4.1` clean before activating projection routing `.14.2.4.2` task-tree-first.
+- push_policy: hard lock at 300 new local commits; immutable Julia core `.14.2.4.1` is intended 160/300; no push.
 - environment: use project-data wrappers; `perl -Iperl`; canonical nested macOS containment may require approved
   execution and up to 30 minutes.

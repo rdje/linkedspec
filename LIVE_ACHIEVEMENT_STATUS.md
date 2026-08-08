@@ -1,5 +1,28 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-07 — Julia immutable source-location values are implemented but not routed or admitted
+
+`FUTURE-PARITY-BACKLOG.14.2.4.1` activates task-tree-first from clean dormant-RED commit `6d293ac0` as intended
+160/300 with no push. One private non-exported `LinkedSpecJulia.SourceLocation` module now owns copied decoded text,
+a monotonic authority identity, and immutable scalar/code-unit/line/column/UTF-8 boundary tables without colliding
+with Julia's exported parser `SourceSpan`.
+
+Immutable Position, Span, DerivedText, SourceCoordinates, context, policy, and exception values retain only identity,
+scalar offsets, provenance/policy, and immutable spans. Fresh detached JSON cannot mutate them. The authority alone
+validates coordinates, slicing, and ordered materialization with the exact four private diagnostics. Core mode is
+112/112; projection mode advances only to missing `typed_source_projection_rows`, owned by `.14.2.4.2`.
+
+Complete Julia passes byte-fresh MCP, all ordinary package tests with the dormant consumer still omitted, storage
+19/5, primary CLI, corpus 105/105, and its exact marker. Alias 141/141, neutral 6/8/40, language 246/105+1/122,
+capability 80/0/0, schemas, registers, and public behavior remain unchanged. The sole-facing book accurately keeps
+Julia values/projections pending because no helper route or admission has occurred. Its source-unchanged 79-file/
+14,168-KiB build keeps the audited prose, example, commands, and following guidance in separate rendered blocks.
+
+Knowledge Map 787/6,459 and all seven doctrines pass. Definitive canonical CI preserves composed semantic/MCP
+admissions, project-data containment, moved/outside-CWD execution, CLI 66x2, RAM 57%, and Phase 0 1,031/1,031 in
+689 seconds before its exact pass marker. The leaf is signoff-complete for intended atomic commit 160/300; clean
+landing proof remains the sole prerequisite before projection routing `.14.2.4.2`.
+
 ## 2026-08-07 — Julia typed source-location behavior is frozen before implementation
 
 `FUTURE-PARITY-BACKLOG.14.2.4.0.2` activates task-tree-first from clean alias-parity commit `3a848631` as intended

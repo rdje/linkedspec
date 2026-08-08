@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.4.1 — implement Julia source location core
+
+- Added private non-exported `LinkedSpecJulia.SourceLocation` before matching/runtime code without colliding with
+  the existing exported parser `SourceSpan` or adding authored DSL/facade methods.
+- Added one monotonic thread-safe authority identity and immutable copied decoded-source records with exact
+  Unicode-scalar-to-UTF-8-code-unit, one-based line/column, and UTF-8-byte boundary tables.
+- Added immutable context, Position, Span, DerivedText, SourceCoordinates, policy, and exception values. Typed
+  values retain no decoded text, path, parser/match state, or authority reference; derived spans are immutable tuples
+  and every JSON projection is freshly detached.
+- Kept bounds/source/order validation, coordinates, slicing, and explicit `concatenate_in_order` materialization in
+  the authority with only the four neutral private `validate_value` diagnostics.
+- Explicit dormant core proof passes 112/112. Projection mode now reaches only the separately owned missing
+  `typed_source_projection_rows` API; no catalog, engine/helper route, schema, registration, or admission moved.
+- Complete Julia passes byte-fresh MCP, every ordinary package test with the dormant consumer omitted, storage
+  19/5, primary CLI, corpus 105/105, and its exact marker. Alias 141/141, neutral 6/8/40, language
+  246/105+1/122, capability 80/0/0, and sole-facing pending-Julia truth remain unchanged.
+- The source-unchanged mdBook builds 79 files/14,168 KiB and its audited pending-Julia prose, example, commands,
+  and following guidance remain separate rendered blocks. Knowledge Map 787/6,459, all seven doctrines, canonical
+  containment/relocation and composed admissions, CLI 66x2, RAM 57%, and Phase 0 1,031/1,031 in 689 seconds pass
+  before the exact local-CI marker. Atomic commit 160/300 is next; no push.
+
 ## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.4.0.2 — freeze Julia typed source RED
 
 - Added one dormant Julia typed-source consumer at its final test path while deliberately omitting it from the

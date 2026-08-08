@@ -1,5 +1,33 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.4.1` — immutable Julia source-location core): Julia's existing public
+  `SourceSpan` is parser-AST line metadata, so the neutral value vocabulary lives in the non-exported nested
+  `LinkedSpecJulia.SourceLocation` module. Only one include is added before `runtime/Matching.jl`; no parent export,
+  helper catalog, interpreter branch, engine field, or facade method is introduced.
+- `SourceAuthority` owns a monotonic atomic identity and a sorted immutable tuple of copied decoded-source records.
+  Each record owns its immutable `String` plus scalar-boundary tuples for zero-based UTF-8 code units, one-based
+  scalar line/column, and UTF-8 bytes. In Julia, native code units and UTF-8 bytes share the same width, but both
+  boundary roles remain explicit so later runtime projection can preserve the portable contract without replacing
+  current code-unit registers.
+- Position and Span carry only authority/source identities, scalar offsets, and provenance. DerivedText carries an
+  enum policy and an immutable tuple of Spans; SourceCoordinates and exceptions are immutable too. Fresh `to_json`
+  dictionaries are the only detached record surface. The authority alone validates and materializes, emitting only
+  source mismatch, position out of range, reversed span, and invalid derived provenance at `validate_value`.
+
+  Explicit core mode passes 112/112 across 3/7/6/3 fixtures, copied ownership, detachment, coordinates,
+  materialization, and diagnostics. Projection mode advances exactly to absent `typed_source_projection_rows`, so
+  routing leaf `.14.2.4.2` has one honest RED and no consumer rewrite. Complete Julia passes byte-fresh MCP, package,
+  storage 19/5, primary CLI, corpus 105/105, and the exact marker. Neutral 6/8/40, language 246/105+1/122,
+  capability 80/0/0, and the sole-facing pending-Julia claim remain unchanged.
+
+  The source-unchanged mdBook builds 79 files/14,168 KiB. Generated HTML retains separate paragraph/code blocks
+  for the pending-Julia status, migration example, commands, and subsequent guidance, so this private core creates
+  no public documentation drift or stitched prose blob. Knowledge Map regenerates at 787/6,459 and all seven
+  doctrines pass. Definitive canonical CI preserves every composed semantic/MCP admission, six-family containment,
+  moved/outside-CWD execution, CLI 66x2, RAM 57%, and Phase 0 1,031/1,031 in 689 seconds before its exact pass
+  marker. This makes `.14.2.4.1` signoff-complete for intended atomic commit 160/300; `.14.2.4.2` cannot activate
+  before the landing is proved clean.
+
 - 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.4.0.2` — dormant Julia typed-source RED): Julia's ordinary package
   discovery is the explicit include list in `julia/test/runtests.jl`, so the final-path consumer
   `julia/test/typed_source_location_contract_test.jl` can remain dormant without a second directory, analyzer
