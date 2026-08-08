@@ -176,6 +176,13 @@ struct LinkedSpecRuntimeEngine
     spec_path::Union{Nothing,String}
 end
 
+"""Return a fresh detached catalog for all 92 source-boundary projections."""
+typed_source_projection_rows(::LinkedSpecRuntimeEngine) = SourceLocation.projection_rows()
+
+"""Return a fresh detached catalog for all seven compatibility aliases."""
+typed_source_compatibility_aliases(::LinkedSpecRuntimeEngine) =
+    SourceLocation.compatibility_aliases()
+
 const _PARSE_MODE_OVERRIDE_REMOVED_DETAIL =
     "cursor policy is derived from each rule (OR/default=seek, AND=consume)"
 
@@ -266,6 +273,7 @@ end
 
 mutable struct _RuntimeExecutionContext
     input::String
+    source_authority::SourceLocation.SourceAuthority
     cursor_codeunit::Int
     registers::RuntimeMatchRegisters
     retv::Any
@@ -304,6 +312,7 @@ function _RuntimeExecutionContext(
     input_text = String(input)
     return _RuntimeExecutionContext(
         input_text,
+        SourceLocation.SourceAuthority(sources = Dict{String,String}("input" => input_text)),
         0,
         RuntimeMatchRegisters(input_text),
         nothing,
@@ -329,6 +338,346 @@ function _RuntimeExecutionContext(
         generated_source_identity === nothing ?
             nothing : String(generated_source_identity),
     )
+end
+
+function _typed_source_context(rule_label::AbstractString, projection::AbstractString)
+    return SourceLocation.SourceLocationContext(
+        rule_role = "$(String(rule_label)):$(String(projection))",
+        invocation_role = "compatibility_projection",
+    )
+end
+
+function _typed_position_from_codeunit(
+    context::_RuntimeExecutionContext,
+    codeunit_offset::Int,
+    rule_label::AbstractString,
+    projection::AbstractString,
+)
+    try
+        return SourceLocation.position_from_codeunit(
+            context.source_authority;
+            source_id = "input",
+            codeunit_offset,
+            context = _typed_source_context(rule_label, projection),
+        )
+    catch error
+        error isa SourceLocation.SourceLocationException || rethrow()
+        return nothing
+    end
+end
+
+function _typed_position_from_scalar(
+    context::_RuntimeExecutionContext,
+    scalar_offset::Int,
+    rule_label::AbstractString,
+    projection::AbstractString,
+)
+    try
+        return SourceLocation.position(
+            context.source_authority;
+            source_id = "input",
+            offset = scalar_offset,
+            context = _typed_source_context(rule_label, projection),
+        )
+    catch error
+        error isa SourceLocation.SourceLocationException || rethrow()
+        return nothing
+    end
+end
+
+function _typed_span_from_codeunits(
+    context::_RuntimeExecutionContext,
+    start_codeunit::Int,
+    stop_codeunit::Int,
+    rule_label::AbstractString,
+    projection::AbstractString,
+)
+    start = _typed_position_from_codeunit(
+        context,
+        start_codeunit,
+        rule_label,
+        projection,
+    )
+    stop = _typed_position_from_codeunit(
+        context,
+        stop_codeunit,
+        rule_label,
+        projection,
+    )
+    (start === nothing || stop === nothing) && return nothing
+    try
+        return SourceLocation.direct_span(
+            context.source_authority;
+            start,
+            stop,
+            provenance = String(projection),
+            context = _typed_source_context(rule_label, projection),
+        )
+    catch error
+        error isa SourceLocation.SourceLocationException || rethrow()
+        return nothing
+    end
+end
+
+function _typed_span_from_scalars(
+    context::_RuntimeExecutionContext,
+    start_offset::Int,
+    stop_offset::Int,
+    rule_label::AbstractString,
+    projection::AbstractString,
+)
+    start = _typed_position_from_scalar(
+        context,
+        start_offset,
+        rule_label,
+        projection,
+    )
+    stop = _typed_position_from_scalar(
+        context,
+        stop_offset,
+        rule_label,
+        projection,
+    )
+    (start === nothing || stop === nothing) && return nothing
+    try
+        return SourceLocation.direct_span(
+            context.source_authority;
+            start,
+            stop,
+            provenance = String(projection),
+            context = _typed_source_context(rule_label, projection),
+        )
+    catch error
+        error isa SourceLocation.SourceLocationException || rethrow()
+        return nothing
+    end
+end
+
+function _typed_span_text_from_codeunits(
+    context::_RuntimeExecutionContext,
+    start_codeunit::Int,
+    stop_codeunit::Int,
+    rule_label::AbstractString,
+    projection::AbstractString,
+)
+    span = _typed_span_from_codeunits(
+        context,
+        start_codeunit,
+        stop_codeunit,
+        rule_label,
+        projection,
+    )
+    span === nothing && return nothing
+    try
+        return SourceLocation.materialize(
+            context.source_authority,
+            span;
+            context = _typed_source_context(rule_label, projection),
+        )
+    catch error
+        error isa SourceLocation.SourceLocationException || rethrow()
+        return nothing
+    end
+end
+
+function _typed_span_length_from_codeunits(
+    context::_RuntimeExecutionContext,
+    start_codeunit::Int,
+    stop_codeunit::Int,
+    rule_label::AbstractString,
+    projection::AbstractString,
+)
+    span = _typed_span_from_codeunits(
+        context,
+        start_codeunit,
+        stop_codeunit,
+        rule_label,
+        projection,
+    )
+    return span === nothing ? nothing : SourceLocation.span_scalar_length(span)
+end
+
+function _typed_span_start_offset_from_codeunits(
+    context::_RuntimeExecutionContext,
+    start_codeunit::Int,
+    stop_codeunit::Int,
+    rule_label::AbstractString,
+    projection::AbstractString,
+)
+    span = _typed_span_from_codeunits(
+        context,
+        start_codeunit,
+        stop_codeunit,
+        rule_label,
+        projection,
+    )
+    return span === nothing ? nothing : SourceLocation.span_start_offset(span)
+end
+
+function _typed_position_offset_from_codeunit(
+    context::_RuntimeExecutionContext,
+    codeunit_offset::Int,
+    rule_label::AbstractString,
+    projection::AbstractString,
+)
+    position = _typed_position_from_codeunit(
+        context,
+        codeunit_offset,
+        rule_label,
+        projection,
+    )
+    return position === nothing ? nothing : SourceLocation.position_offset(position)
+end
+
+function _typed_coordinates_from_codeunit(
+    context::_RuntimeExecutionContext,
+    codeunit_offset::Int,
+    rule_label::AbstractString,
+    projection::AbstractString,
+)
+    position = _typed_position_from_codeunit(
+        context,
+        codeunit_offset,
+        rule_label,
+        projection,
+    )
+    position === nothing && return nothing
+    try
+        return SourceLocation.coordinates(
+            context.source_authority,
+            position;
+            context = _typed_source_context(rule_label, projection),
+        )
+    catch error
+        error isa SourceLocation.SourceLocationException || rethrow()
+        return nothing
+    end
+end
+
+function _typed_position_line_from_codeunit(
+    context::_RuntimeExecutionContext,
+    codeunit_offset::Int,
+    rule_label::AbstractString,
+    projection::AbstractString,
+)
+    coordinates = _typed_coordinates_from_codeunit(
+        context,
+        codeunit_offset,
+        rule_label,
+        projection,
+    )
+    return coordinates === nothing ? nothing : SourceLocation.coordinate_line(coordinates)
+end
+
+function _typed_position_column_from_codeunit(
+    context::_RuntimeExecutionContext,
+    codeunit_offset::Int,
+    rule_label::AbstractString,
+    projection::AbstractString,
+)
+    coordinates = _typed_coordinates_from_codeunit(
+        context,
+        codeunit_offset,
+        rule_label,
+        projection,
+    )
+    return coordinates === nothing ? nothing : SourceLocation.coordinate_column(coordinates)
+end
+
+_typed_source_length(context::_RuntimeExecutionContext) =
+    SourceLocation.source_scalar_length(context.source_authority, "input")
+
+function _typed_source_text(
+    context::_RuntimeExecutionContext,
+    rule_label::AbstractString,
+    projection::AbstractString,
+)
+    source_length = _typed_source_length(context)
+    source_length === nothing && return nothing
+    span = _typed_span_from_scalars(
+        context,
+        0,
+        source_length,
+        rule_label,
+        projection,
+    )
+    span === nothing && return nothing
+    try
+        return SourceLocation.materialize(
+            context.source_authority,
+            span;
+            context = _typed_source_context(rule_label, projection),
+        )
+    catch error
+        error isa SourceLocation.SourceLocationException || rethrow()
+        return nothing
+    end
+end
+
+function _typed_source_slice(
+    context::_RuntimeExecutionContext,
+    start_offset::Int,
+    width::Int,
+    rule_label::AbstractString,
+    projection::AbstractString,
+)
+    source_length = _typed_source_length(context)
+    source_length === nothing && return nothing
+    bounded_start = clamp(start_offset, 0, source_length)
+    bounded_stop = bounded_start + min(max(width, 0), source_length - bounded_start)
+    span = _typed_span_from_scalars(
+        context,
+        bounded_start,
+        bounded_stop,
+        rule_label,
+        projection,
+    )
+    span === nothing && return nothing
+    try
+        return SourceLocation.materialize(
+            context.source_authority,
+            span;
+            context = _typed_source_context(rule_label, projection),
+        )
+    catch error
+        error isa SourceLocation.SourceLocationException || rethrow()
+        return nothing
+    end
+end
+
+function _typed_mark_set!(
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+    name::String,
+    codeunit_offset::Int,
+    projection::String,
+)
+    _typed_position_from_codeunit(
+        context,
+        codeunit_offset,
+        rule_label,
+        projection,
+    ) === nothing && return false
+    marks = get!(context.mark_buckets, rule_label, Dict{String,Int}())
+    marks[name] = codeunit_offset
+    return true
+end
+
+function _typed_mark_codeunit(
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+    name::String,
+    projection::String,
+)
+    marks = get!(context.mark_buckets, rule_label, Dict{String,Int}())
+    offset = get(marks, name, nothing)
+    offset === nothing && return nothing
+    return _typed_position_from_codeunit(
+        context,
+        offset,
+        rule_label,
+        projection,
+    ) === nothing ? nothing : offset
 end
 
 struct _RuntimeEvaluatedAccessSegment
@@ -2700,9 +3049,23 @@ function _evaluate_runtime_call!(
             current_edge,
         )
     elseif helper_name == "entry_text"
-        return context.registers.entry_match === nothing ? nothing : match_text(context.registers.entry_match)
+        one_match = context.registers.entry_match
+        return one_match === nothing ? nothing : _typed_span_text_from_codeunits(
+            context,
+            one_match.codeunit_start,
+            one_match.codeunit_end,
+            rule_label,
+            helper_name,
+        )
     elseif helper_name == "match_text"
-        return context.registers.local_match === nothing ? nothing : match_text(context.registers.local_match)
+        one_match = context.registers.local_match
+        return one_match === nothing ? nothing : _typed_span_text_from_codeunits(
+            context,
+            one_match.codeunit_start,
+            one_match.codeunit_end,
+            rule_label,
+            helper_name,
+        )
     elseif helper_name == "entry_group"
         return _runtime_capture_at(engine, context.registers.entry_match, args, context, rule_label, current_edge)
     elseif helper_name == "match_group"
@@ -2742,55 +3105,162 @@ function _evaluate_runtime_call!(
             Dict{String,Any}() :
             Dict{String,Any}(context.registers.local_match.named)
     elseif helper_name == "entry_len"
-        return _runtime_match_length(context.registers.entry_match)
+        one_match = context.registers.entry_match
+        return one_match === nothing ? nothing : _typed_span_length_from_codeunits(
+            context,
+            one_match.codeunit_start,
+            one_match.codeunit_end,
+            rule_label,
+            helper_name,
+        )
     elseif helper_name == "match_len"
-        return _runtime_match_length(context.registers.local_match)
+        one_match = context.registers.local_match
+        return one_match === nothing ? nothing : _typed_span_length_from_codeunits(
+            context,
+            one_match.codeunit_start,
+            one_match.codeunit_end,
+            rule_label,
+            helper_name,
+        )
     elseif helper_name == "entry_line" || helper_name == "entry_start_line"
-        return _runtime_match_line(context.registers.entry_match, false)
+        offset = context.registers.entry_match === nothing ? nothing :
+            context.registers.entry_match.codeunit_start
+        return offset === nothing ? 1 : something(
+            _typed_position_line_from_codeunit(context, offset, rule_label, helper_name),
+            1,
+        )
     elseif helper_name == "entry_col" || helper_name == "entry_start_col"
-        return _runtime_match_column(context.registers.entry_match, false)
+        offset = context.registers.entry_match === nothing ? nothing :
+            context.registers.entry_match.codeunit_start
+        return offset === nothing ? 1 : something(
+            _typed_position_column_from_codeunit(context, offset, rule_label, helper_name),
+            1,
+        )
     elseif helper_name == "entry_end_line"
-        return _runtime_match_line(context.registers.entry_match, true)
+        offset = context.registers.entry_match === nothing ? nothing :
+            context.registers.entry_match.codeunit_end
+        return offset === nothing ? 1 : something(
+            _typed_position_line_from_codeunit(context, offset, rule_label, helper_name),
+            1,
+        )
     elseif helper_name == "entry_end_col"
-        return _runtime_match_column(context.registers.entry_match, true)
+        offset = context.registers.entry_match === nothing ? nothing :
+            context.registers.entry_match.codeunit_end
+        return offset === nothing ? 1 : something(
+            _typed_position_column_from_codeunit(context, offset, rule_label, helper_name),
+            1,
+        )
     elseif helper_name == "match_line" || helper_name == "match_start_line"
-        return _runtime_match_line(context.registers.local_match, false)
+        offset = context.registers.local_match === nothing ? nothing :
+            context.registers.local_match.codeunit_start
+        return offset === nothing ? 1 : something(
+            _typed_position_line_from_codeunit(context, offset, rule_label, helper_name),
+            1,
+        )
     elseif helper_name == "match_col" || helper_name == "match_start_col"
-        return _runtime_match_column(context.registers.local_match, false)
+        offset = context.registers.local_match === nothing ? nothing :
+            context.registers.local_match.codeunit_start
+        return offset === nothing ? 1 : something(
+            _typed_position_column_from_codeunit(context, offset, rule_label, helper_name),
+            1,
+        )
     elseif helper_name == "match_end_line"
-        return _runtime_match_line(context.registers.local_match, true)
+        offset = context.registers.local_match === nothing ? nothing :
+            context.registers.local_match.codeunit_end
+        return offset === nothing ? 1 : something(
+            _typed_position_line_from_codeunit(context, offset, rule_label, helper_name),
+            1,
+        )
     elseif helper_name == "match_end_col"
-        return _runtime_match_column(context.registers.local_match, true)
+        offset = context.registers.local_match === nothing ? nothing :
+            context.registers.local_match.codeunit_end
+        return offset === nothing ? 1 : something(
+            _typed_position_column_from_codeunit(context, offset, rule_label, helper_name),
+            1,
+        )
     elseif helper_name == "entry_start_pos"
-        return context.registers.entry_match === nothing ? nothing : char_start(context.registers.entry_match)
+        one_match = context.registers.entry_match
+        return one_match === nothing ? nothing : _typed_span_start_offset_from_codeunits(
+            context,
+            one_match.codeunit_start,
+            one_match.codeunit_end,
+            rule_label,
+            helper_name,
+        )
     elseif helper_name == "entry_end_pos"
-        return context.registers.entry_match === nothing ? nothing : char_end(context.registers.entry_match)
+        offset = context.registers.entry_match === nothing ? nothing :
+            context.registers.entry_match.codeunit_end
+        return offset === nothing ? nothing : _typed_position_offset_from_codeunit(
+            context,
+            offset,
+            rule_label,
+            helper_name,
+        )
     elseif helper_name == "match_start_pos"
-        return context.registers.local_match === nothing ? nothing : char_start(context.registers.local_match)
+        one_match = context.registers.local_match
+        return one_match === nothing ? nothing : _typed_span_start_offset_from_codeunits(
+            context,
+            one_match.codeunit_start,
+            one_match.codeunit_end,
+            rule_label,
+            helper_name,
+        )
     elseif helper_name == "match_end_pos"
-        return context.registers.local_match === nothing ? nothing : char_end(context.registers.local_match)
+        offset = context.registers.local_match === nothing ? nothing :
+            context.registers.local_match.codeunit_end
+        return offset === nothing ? nothing : _typed_position_offset_from_codeunit(
+            context,
+            offset,
+            rule_label,
+            helper_name,
+        )
     elseif helper_name == "cursor_pos"
-        return codeunit_offset_to_char_offset(context.input, context.cursor_codeunit)
+        return _typed_position_offset_from_codeunit(
+            context,
+            context.cursor_codeunit,
+            rule_label,
+            helper_name,
+        )
     elseif helper_name == "cursor_line"
-        return line_column_at_codeunit_offset(context.input, context.cursor_codeunit).line
+        return _typed_position_line_from_codeunit(
+            context,
+            context.cursor_codeunit,
+            rule_label,
+            helper_name,
+        )
     elseif helper_name == "cursor_col"
-        return line_column_at_codeunit_offset(context.input, context.cursor_codeunit).column
+        return _typed_position_column_from_codeunit(
+            context,
+            context.cursor_codeunit,
+            rule_label,
+            helper_name,
+        )
     elseif helper_name == "cursor_rest"
-        return _runtime_codeunit_slice(
-            context.input,
+        return _typed_span_text_from_codeunits(
+            context,
             context.cursor_codeunit,
             ncodeunits(context.input),
+            rule_label,
+            helper_name,
         )
     elseif helper_name == "cursor_rest_len"
-        return length(_runtime_codeunit_slice(
-            context.input,
+        return _typed_span_length_from_codeunits(
+            context,
             context.cursor_codeunit,
             ncodeunits(context.input),
-        ))
+            rule_label,
+            helper_name,
+        )
     elseif helper_name == "input_text"
-        return context.input
+        return _typed_source_text(context, rule_label, helper_name)
     elseif helper_name == "input_len" || helper_name == "input_end_pos"
-        return length(context.input)
+        return helper_name == "input_len" ? _typed_source_length(context) :
+            _typed_position_offset_from_codeunit(
+                context,
+                ncodeunits(context.input),
+                rule_label,
+                helper_name,
+            )
     elseif helper_name == "input_slice"
         return _call_runtime_input_slice!(
             engine,
@@ -2800,11 +3270,25 @@ function _evaluate_runtime_call!(
             current_edge,
         )
     elseif helper_name == "input_end_line"
-        return line_column_at_codeunit_offset(context.input, ncodeunits(context.input)).line
+        return _typed_position_line_from_codeunit(
+            context,
+            ncodeunits(context.input),
+            rule_label,
+            helper_name,
+        )
     elseif helper_name == "input_end_col"
-        return line_column_at_codeunit_offset(context.input, ncodeunits(context.input)).column
+        return _typed_position_column_from_codeunit(
+            context,
+            ncodeunits(context.input),
+            rule_label,
+            helper_name,
+        )
     elseif helper_name in _RUNTIME_ANONYMOUS_CAPTURE_HELPER_NAMES
-        return _call_runtime_anonymous_capture_helper!(helper_name, context)
+        return _call_runtime_anonymous_capture_helper!(
+            helper_name,
+            context,
+            rule_label,
+        )
     elseif helper_name in _RUNTIME_NAMED_CAPTURE_HELPER_NAMES
         return _call_runtime_named_capture_helper!(
             engine,
@@ -2838,7 +3322,14 @@ function _evaluate_runtime_call!(
     elseif helper_name == "save_cursor"
         cursor_before = context.cursor_codeunit
         stack_before = length(context.cursor_stack)
-        push!(context.cursor_stack, context.cursor_codeunit)
+        if _typed_position_from_codeunit(
+                context,
+                context.cursor_codeunit,
+                rule_label,
+                helper_name,
+            ) !== nothing
+            push!(context.cursor_stack, context.cursor_codeunit)
+        end
         _trace_runtime_cursor_control!(
             context,
             rule_label,
@@ -2851,7 +3342,15 @@ function _evaluate_runtime_call!(
         cursor_before = context.cursor_codeunit
         stack_before = length(context.cursor_stack)
         if !isempty(context.cursor_stack)
-            _set_runtime_cursor!(context, pop!(context.cursor_stack))
+            target = pop!(context.cursor_stack)
+            if _typed_position_from_codeunit(
+                    context,
+                    target,
+                    rule_label,
+                    helper_name,
+                ) !== nothing
+                _set_runtime_cursor!(context, target)
+            end
         end
         _trace_runtime_cursor_control!(
             context,
@@ -2865,7 +3364,15 @@ function _evaluate_runtime_call!(
         cursor_before = context.cursor_codeunit
         stack_before = length(context.cursor_stack)
         if context.registers.local_match !== nothing
-            _set_runtime_cursor!(context, context.registers.local_match.codeunit_start)
+            target = context.registers.local_match.codeunit_start
+            if _typed_position_from_codeunit(
+                    context,
+                    target,
+                    rule_label,
+                    helper_name,
+                ) !== nothing
+                _set_runtime_cursor!(context, target)
+            end
         end
         _trace_runtime_cursor_control!(
             context,
@@ -2879,7 +3386,15 @@ function _evaluate_runtime_call!(
         cursor_before = context.cursor_codeunit
         stack_before = length(context.cursor_stack)
         if context.registers.entry_match !== nothing
-            _set_runtime_cursor!(context, context.registers.entry_match.codeunit_start)
+            target = context.registers.entry_match.codeunit_start
+            if _typed_position_from_codeunit(
+                    context,
+                    target,
+                    rule_label,
+                    helper_name,
+                ) !== nothing
+                _set_runtime_cursor!(context, target)
+            end
         end
         _trace_runtime_cursor_control!(
             context,
@@ -5655,9 +6170,17 @@ end
 function _call_runtime_anonymous_capture_helper!(
     helper_name::String,
     context::_RuntimeExecutionContext,
+    rule_label::String,
 )
     if helper_name == "start_capture_slice"
-        _set_runtime_capture_start!(context, context.cursor_codeunit)
+        if _typed_position_from_codeunit(
+                context,
+                context.cursor_codeunit,
+                rule_label,
+                helper_name,
+            ) !== nothing
+            _set_runtime_capture_start!(context, context.cursor_codeunit)
+        end
         return nothing
     end
 
@@ -5665,11 +6188,26 @@ function _call_runtime_anonymous_capture_helper!(
     if capture_start === nothing
         return nothing
     elseif helper_name == "capture_slice_pos"
-        return codeunit_offset_to_char_offset(context.input, capture_start)
+        return _typed_position_offset_from_codeunit(
+            context,
+            capture_start,
+            rule_label,
+            helper_name,
+        )
     elseif helper_name == "capture_slice_line"
-        return line_column_at_codeunit_offset(context.input, capture_start).line
+        return _typed_position_line_from_codeunit(
+            context,
+            capture_start,
+            rule_label,
+            helper_name,
+        )
     elseif helper_name == "capture_slice_col"
-        return line_column_at_codeunit_offset(context.input, capture_start).column
+        return _typed_position_column_from_codeunit(
+            context,
+            capture_start,
+            rule_label,
+            helper_name,
+        )
     end
 
     endpoint = if helper_name in (
@@ -5693,17 +6231,46 @@ function _call_runtime_anonymous_capture_helper!(
         return nothing
     end
 
-    captured = _runtime_codeunit_slice(context.input, capture_start, endpoint)
-    result = endswith(helper_name, "_len") ? length(captured) : captured
+    result = endswith(helper_name, "_len") ?
+        _typed_span_length_from_codeunits(
+            context,
+            capture_start,
+            endpoint,
+            rule_label,
+            helper_name,
+        ) :
+        _typed_span_text_from_codeunits(
+            context,
+            capture_start,
+            endpoint,
+            rule_label,
+            helper_name,
+        )
+    result === nothing && return nothing
     if helper_name in (
             "capture_take",
             "capture_take_len",
             "capture_take_until_cursor",
             "capture_take_until_cursor_len",
         )
-        _set_runtime_capture_start!(context, context.cursor_codeunit)
+        if _typed_position_from_codeunit(
+                context,
+                context.cursor_codeunit,
+                rule_label,
+                helper_name,
+            ) !== nothing
+            _set_runtime_capture_start!(context, context.cursor_codeunit)
+        end
     elseif helper_name in ("capture_take_rest", "capture_take_rest_len")
-        _set_runtime_capture_start!(context, ncodeunits(context.input))
+        input_end = ncodeunits(context.input)
+        if _typed_position_from_codeunit(
+                context,
+                input_end,
+                rule_label,
+                helper_name,
+            ) !== nothing
+            _set_runtime_capture_start!(context, input_end)
+        end
     end
     return result
 end
@@ -5720,11 +6287,22 @@ function _call_runtime_named_capture_helper!(
         _runtime_capture_name(engine, args[index], context, rule_label, current_edge) : nothing
     span_text(start, endpoint) =
         start < 0 || endpoint < start || endpoint > ncodeunits(context.input) ? nothing :
-        _runtime_codeunit_slice(context.input, start, endpoint)
-    span_length(start, endpoint) = begin
-        text = span_text(start, endpoint)
-        text === nothing ? nothing : length(text)
-    end
+        _typed_span_text_from_codeunits(
+            context,
+            start,
+            endpoint,
+            rule_label,
+            helper_name,
+        )
+    span_length(start, endpoint) =
+        start < 0 || endpoint < start || endpoint > ncodeunits(context.input) ? nothing :
+        _typed_span_length_from_codeunits(
+            context,
+            start,
+            endpoint,
+            rule_label,
+            helper_name,
+        )
 
     marks = get!(context.mark_buckets, rule_label, Dict{String,Int}())
     capture_start = context.registers.capture_start_codeunit
@@ -5735,7 +6313,8 @@ function _call_runtime_named_capture_helper!(
 
     if helper_name == "start_capture_slice_from"
         name = mark_name(1)
-        offset = name === nothing ? nothing : get(marks, name, nothing)
+        offset = name === nothing ? nothing :
+            _typed_mark_codeunit(context, rule_label, name, helper_name)
         if offset !== nothing
             _set_runtime_capture_start!(context, offset)
         end
@@ -5743,65 +6322,90 @@ function _call_runtime_named_capture_helper!(
     elseif helper_name == "mark_here"
         name = mark_name(1)
         if name !== nothing
-            marks[name] = cursor
+            _typed_mark_set!(context, rule_label, name, cursor, helper_name)
         end
         return nothing
     elseif helper_name == "mark_input_start"
         name = mark_name(1)
         if name !== nothing
-            marks[name] = 0
+            _typed_mark_set!(context, rule_label, name, 0, helper_name)
         end
         return nothing
     elseif helper_name == "mark_input_end"
         name = mark_name(1)
         if name !== nothing
-            marks[name] = input_end
+            _typed_mark_set!(context, rule_label, name, input_end, helper_name)
         end
         return nothing
     elseif helper_name == "mark_entry_start"
         name = mark_name(1)
         one_match = context.registers.entry_match
         if name !== nothing && one_match !== nothing
-            marks[name] = one_match.codeunit_start
+            _typed_mark_set!(
+                context,
+                rule_label,
+                name,
+                one_match.codeunit_start,
+                helper_name,
+            )
         end
         return nothing
     elseif helper_name == "mark_entry_end"
         name = mark_name(1)
         one_match = context.registers.entry_match
         if name !== nothing && one_match !== nothing
-            marks[name] = one_match.codeunit_end
+            _typed_mark_set!(
+                context,
+                rule_label,
+                name,
+                one_match.codeunit_end,
+                helper_name,
+            )
         end
         return nothing
     elseif helper_name == "mark_match_start"
         name = mark_name(1)
         one_match = context.registers.local_match
         if name !== nothing && one_match !== nothing
-            marks[name] = one_match.codeunit_start
+            _typed_mark_set!(
+                context,
+                rule_label,
+                name,
+                one_match.codeunit_start,
+                helper_name,
+            )
         end
         return nothing
     elseif helper_name == "mark_match_end"
         name = mark_name(1)
         one_match = context.registers.local_match
         if name !== nothing && one_match !== nothing
-            marks[name] = one_match.codeunit_end
+            _typed_mark_set!(
+                context,
+                rule_label,
+                name,
+                one_match.codeunit_end,
+                helper_name,
+            )
         end
         return nothing
     elseif helper_name == "mark_copy"
         target = mark_name(1)
         source = mark_name(2)
         if target !== nothing
-            offset = source === nothing ? nothing : get(marks, source, nothing)
+            offset = source === nothing ? nothing :
+                _typed_mark_codeunit(context, rule_label, source, helper_name)
             if offset === nothing
                 delete!(marks, target)
             else
-                marks[target] = offset
+                _typed_mark_set!(context, rule_label, target, offset, helper_name)
             end
         end
         return nothing
     elseif helper_name == "mark_capture_slice"
         name = mark_name(1)
         if name !== nothing && capture_start !== nothing
-            marks[name] = capture_start
+            _typed_mark_set!(context, rule_label, name, capture_start, helper_name)
         end
         return nothing
     elseif helper_name == "mark_exists"
@@ -5809,19 +6413,37 @@ function _call_runtime_named_capture_helper!(
         return name !== nothing && haskey(marks, name) ? 1 : 0
     elseif helper_name == "mark_pos"
         name = mark_name(1)
-        offset = name === nothing ? nothing : get(marks, name, nothing)
+        offset = name === nothing ? nothing :
+            _typed_mark_codeunit(context, rule_label, name, helper_name)
         return offset === nothing ? nothing :
-            codeunit_offset_to_char_offset(context.input, offset)
+            _typed_position_offset_from_codeunit(
+                context,
+                offset,
+                rule_label,
+                helper_name,
+            )
     elseif helper_name == "mark_line"
         name = mark_name(1)
-        offset = name === nothing ? nothing : get(marks, name, nothing)
+        offset = name === nothing ? nothing :
+            _typed_mark_codeunit(context, rule_label, name, helper_name)
         return offset === nothing ? nothing :
-            line_column_at_codeunit_offset(context.input, offset).line
+            _typed_position_line_from_codeunit(
+                context,
+                offset,
+                rule_label,
+                helper_name,
+            )
     elseif helper_name == "mark_col"
         name = mark_name(1)
-        offset = name === nothing ? nothing : get(marks, name, nothing)
+        offset = name === nothing ? nothing :
+            _typed_mark_codeunit(context, rule_label, name, helper_name)
         return offset === nothing ? nothing :
-            line_column_at_codeunit_offset(context.input, offset).column
+            _typed_position_column_from_codeunit(
+                context,
+                offset,
+                rule_label,
+                helper_name,
+            )
     elseif helper_name == "clear_mark"
         name = mark_name(1)
         if name !== nothing
@@ -5842,7 +6464,8 @@ function _call_runtime_named_capture_helper!(
             "capture_take_rest_len_from",
         )
         name = mark_name(1)
-        start = name === nothing ? nothing : get(marks, name, nothing)
+        start = name === nothing ? nothing :
+            _typed_mark_codeunit(context, rule_label, name, helper_name)
         if name === nothing || start === nothing
             return nothing
         end
@@ -5868,7 +6491,13 @@ function _call_runtime_named_capture_helper!(
         length_result = occursin("_len_", helper_name) || helper_name == "capture_len_from"
         result = length_result ? span_length(start, endpoint) : span_text(start, endpoint)
         if result !== nothing && startswith(helper_name, "capture_take_")
-            marks[name] = occursin("_rest_", helper_name) ? input_end : cursor
+            _typed_mark_set!(
+                context,
+                rule_label,
+                name,
+                occursin("_rest_", helper_name) ? input_end : cursor,
+                helper_name,
+            )
         end
         return result
     elseif helper_name in (
@@ -5879,15 +6508,23 @@ function _call_runtime_named_capture_helper!(
         )
         start_name = mark_name(1)
         end_name = mark_name(2)
-        start = start_name === nothing ? nothing : get(marks, start_name, nothing)
-        endpoint = end_name === nothing ? nothing : get(marks, end_name, nothing)
+        start = start_name === nothing ? nothing :
+            _typed_mark_codeunit(context, rule_label, start_name, helper_name)
+        endpoint = end_name === nothing ? nothing :
+            _typed_mark_codeunit(context, rule_label, end_name, helper_name)
         if start_name === nothing || start === nothing || endpoint === nothing
             return nothing
         end
         result = occursin("len", helper_name) ?
             span_length(start, endpoint) : span_text(start, endpoint)
         if result !== nothing && startswith(helper_name, "capture_take_")
-            marks[start_name] = endpoint
+            _typed_mark_set!(
+                context,
+                rule_label,
+                start_name,
+                endpoint,
+                helper_name,
+            )
         end
         return result
     end
@@ -5997,7 +6634,7 @@ end
 
 function _call_runtime_input_slice!(engine, args, context, rule_label, current_edge)
     if isempty(args)
-        return context.input
+        return _typed_source_text(context, rule_label, "input_slice")
     end
     start_value = _evaluate_runtime_action_expr!(
         engine,
@@ -6007,7 +6644,8 @@ function _call_runtime_input_slice!(engine, args, context, rule_label, current_e
         current_edge,
     )
     start_char = something(_runtime_nonnegative_int(start_value), 0)
-    input_length = length(context.input)
+    input_length = _typed_source_length(context)
+    input_length === nothing && return nothing
     width = if length(args) >= 2
         width_value = _evaluate_runtime_action_expr!(
             engine,
@@ -6020,13 +6658,13 @@ function _call_runtime_input_slice!(engine, args, context, rule_label, current_e
     else
         input_length - start_char
     end
-    bounded_start = min(start_char, input_length)
-    if bounded_start == input_length || width == 0
-        return ""
-    end
-    bounded_end = bounded_start + min(width, input_length - bounded_start)
-    chars = collect(context.input)
-    return String(chars[bounded_start + 1:bounded_end])
+    return _typed_source_slice(
+        context,
+        start_char,
+        width,
+        rule_label,
+        "input_slice",
+    )
 end
 
 function _call_runtime_capture_until_boundary!(engine, args, context, rule_label, current_edge)
@@ -6079,7 +6717,14 @@ function _call_runtime_capture_until_boundary!(engine, args, context, rule_label
     end
     capture_start = context.cursor_codeunit
     capture_end = boundary_start === nothing ? ncodeunits(context.input) : boundary_start
-    captured = _runtime_codeunit_slice(context.input, capture_start, capture_end)
+    captured = _typed_span_text_from_codeunits(
+        context,
+        capture_start,
+        capture_end,
+        rule_label,
+        "capture_until_boundary",
+    )
+    captured === nothing && return nothing
     _set_runtime_cursor!(context, capture_end)
     _emit_runtime_trace_event!(
         context,

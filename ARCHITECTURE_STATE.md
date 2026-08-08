@@ -1,5 +1,25 @@
 # ARCHITECTURE STATE
 
+- `2026-08-07 Julia typed source-location projections`: `FUTURE-PARITY-BACKLOG.14.2.4.2` adds one copied input
+  `SourceLocation.SourceAuthority` to every `_RuntimeExecutionContext` and private exact code-unit/scalar adapters.
+  All 92 canonical source-boundary helpers plus seven aliases now construct, validate, derive, or materialize
+  through immutable positions/spans for source slicing, entry/local matches, anonymous capture state, rule-local
+  marks, and cursor controls. Existing zero-based UTF-8 code-unit cursor/match/boundary/mark/stack registers and
+  all external values, mutation timing, trace data, schemas, generated plans, and source identities remain intact.
+
+  Fresh non-exported catalogs expose the exact 47/30/11/4 families plus seven aliases. Dormant core remains 112/112
+  and projection mode passes 127/127 across native, reconstructed, and generated-plan carriers; alias 141/141,
+  named marks 13/13, cursor execution 104/104, neutral 6/8/40, and language 246/105+1/122 pass. Complete Julia
+  passes byte-fresh MCP, package, storage 19/5, primary CLI, corpus 105/105, and its exact marker.
+
+  Julia admission remains exclusively `.14.2.4.3`. The sole-facing book now distinguishes implemented internal
+  projections from absent admission/public authored values in four surfaces. Its repository-routed 79-file/
+  14,176-KiB HTML retains separate status paragraphs, command, and limitation blocks and is removed after review.
+  Knowledge Map 787/6,463 and all seven doctrines pass. Definitive canonical CI preserves capability 80/0/0,
+  typed-source 6/8/40, composed semantic/MCP admissions, repository containment/relocation, CLI 66x2, RAM 64%,
+  and Phase 0 1,031/1,031 in 680 seconds before the exact pass marker. Atomic landing 161/300 and clean proof are
+  the only remaining boundary before admission activates.
+
 - `2026-08-07 Julia source-boundary compatibility-alias parity`: `FUTURE-PARITY-BACKLOG.14.2.4.0.1` adds one
   private seven-row canonical-name map to `ActionContracts.jl`, consults it before the existing numeric/current
   alias maps, and unions only its keys into Julia's known-name set. Each source spelling therefore reaches the

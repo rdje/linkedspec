@@ -1,5 +1,25 @@
 # CHANGES
 
+## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.4.2 — route Julia typed source projections
+
+- Added one copied input `SourceAuthority` to every Julia runtime execution context without replacing the existing
+  zero-based UTF-8 code-unit cursor, match, anonymous-boundary, mark, or cursor-stack registers.
+- Added private code-unit/scalar Position and Span adapters and routed source text/slicing, lengths, positions,
+  coordinates, entry/local matches, anonymous capture boundaries, rule-local marks, and cursor controls through
+  typed validation and authority-owned materialization while preserving every external result and mutation shape.
+- Added fresh detached exact 47/30/11/4 projection catalogs plus seven compatibility-alias rows. The APIs are not
+  exported, and no schema, compiled/generated plan, source identity, ordinary registration, or neutral row moved.
+- The dormant consumer remains outside ordinary discovery and now passes core 112/112 plus full projection 127/127
+  across native, reconstructed, and generated-plan carriers. Alias 141/141, named marks 13/13, cursor execution
+  104/104, neutral 6/8/40, and language 246/105+1/122 pass.
+- Complete Julia passes byte-fresh MCP, every ordinary package suite, storage 19/5, primary CLI, corpus 105/105,
+  and its exact marker. The mdBook now explains implemented-but-unadmitted Julia projections in four public
+  surfaces; its 79-file/14,176-KiB HTML keeps status, command, and limitation blocks separate and is removed.
+- Knowledge Map 787/6,463 and all seven doctrines pass. Definitive canonical CI preserves capability 80/0/0,
+  typed-source 6/8/40, all composed semantic/MCP admissions, repository containment and relocation, CLI 66x2,
+  RAM 64% under the 88% threshold, and Phase 0 1,031/1,031 in 680 seconds before its exact pass marker. The slice
+  is signoff-complete for atomic commit 161/300; Julia admission remains `.14.2.4.3`.
+
 ## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.4.1 — implement Julia source location core
 
 - Added private non-exported `LinkedSpecJulia.SourceLocation` before matching/runtime code without colliding with

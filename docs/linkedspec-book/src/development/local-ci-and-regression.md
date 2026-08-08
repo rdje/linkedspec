@@ -64,6 +64,19 @@ reconstructed, generated-plan, and freshly emitted execution. The independent ro
 ordinary path and canonical command exactly once, rejects retained dormancy, and rejects any regression of the
 completed `dart_runtime` row.
 
+Julia's internal value core and all 92+7 helper projections are implemented and pass the explicit pre-admission
+consumer across native, reconstructed, and generated-plan execution:
+
+```bash
+LINKEDSPEC_JULIA_TYPED_SOURCE_RED_MODE=projection \
+  bash tools/run_julia_project_data.sh --project=julia \
+    --startup-file=no --history-file=no -e \
+    'using LinkedSpecJulia, JSON3, Test; include("julia/test/typed_source_location_contract_test.jl")'
+```
+
+That consumer remains outside ordinary Julia discovery and is not registered in the canonical gate. The
+independent rollout checker therefore correctly keeps `julia_runtime` pending until its admission leaf.
+
 The gate unconditionally verifies the neutral MCP transport before checking all five derived bindings. It requires
 every contract artifact and runs the generators in this exact order before the admitted implementation proofs:
 

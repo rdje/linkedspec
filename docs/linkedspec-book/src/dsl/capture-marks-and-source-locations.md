@@ -9,7 +9,9 @@ For the method-by-method public reference, read [Source Boundary Helper Referenc
 ## Accepted model: one typed source-location algebra
 
 ADR `0056` adopts one conceptual core beneath these helper families. Perl, Rust, and Dart admit that core as an
-internal runtime value/projection layer. This is not a new public value type or new `.spec` syntax:
+internal runtime value/projection layer. Julia implements the same layer, but its exact consumer remains outside
+ordinary test discovery until the separate admission leaf. This is not a new public value type or new `.spec`
+syntax:
 
 - a source identity names caller-authorized decoded input, not a path;
 - a position is a zero-based Unicode-scalar offset in that source;
@@ -31,7 +33,11 @@ reconstructed, and generated-plan execution.
 Dart retains UTF-16 code-unit runtime registers while all 92 helpers and seven compatibility aliases now construct,
 validate, derive, and materialize through one immutable input authority. The explicit four-test consumer proves
 native, reconstructed, generated-plan, and freshly emitted execution under ordinary discovery and canonical CI.
-Julia, PUC Lua, and LuaJIT still need their own implementation and admission leaves.
+
+Julia retains zero-based UTF-8 code-unit runtime registers while its same 92 helpers and seven aliases now use one
+immutable input authority at the typed boundary. Its explicit consumer passes immutable values plus native,
+reconstructed, and generated-plan helper execution, but remains dormant and unregistered. PUC Lua and LuaJIT
+still need their own implementation and admission leaves.
 
 ### Bounded cursor transactions do not mean general backtracking
 
@@ -92,6 +98,10 @@ absence values, statement results, and UTF-8-byte mark/cursor registers remain u
 Dart implements the same internal projection boundary while preserving strings, numbers, collections, booleans,
 absence values, statement results, mutation timing, and UTF-16 code-unit mark/cursor registers. Its four-test
 consumer is admitted under ordinary discovery and canonical CI, so the neutral rollout is 6 complete / 8 pending.
+
+Julia implements that boundary while preserving the same external result kinds, mutation timing, and its native
+zero-based UTF-8 code-unit registers. Its exact consumer and 92+7 detached catalogs remain pre-admission, so the
+neutral rollout correctly stays 6 complete / 8 pending.
 
 There is still no public `Position` or `Span` authored value, checkpoint syntax, transaction behavior, recursive
 observation API, or Julia/PUC-Lua/LuaJIT runtime admission. Those remain owned by later leaves.

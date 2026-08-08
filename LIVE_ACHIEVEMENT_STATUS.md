@@ -1,5 +1,28 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-07 — Julia typed source projections are implemented but not admitted
+
+`FUTURE-PARITY-BACKLOG.14.2.4.2` activates task-tree-first from clean immutable-core commit `4d394752` as intended
+161/300 with no push. Every Julia runtime execution context now owns one copied input authority while all live
+cursor, match, anonymous-boundary, rule-local mark, and save-stack registers remain zero-based UTF-8 code units.
+
+All 92 canonical helper projections plus seven aliases now cross the private immutable boundary for source text,
+slicing, scalar lengths/positions, coordinates, entry/local matches, capture boundaries, marks, and cursor control.
+Fresh 47/30/11/4 plus seven catalogs are detached on every call. Public strings, numbers, collections, booleans,
+absence, mutation timing, trace data, schemas, compiled/generated plans, and source identities remain unchanged.
+
+The dormant consumer remains excluded from ordinary and canonical discovery while passing core 112/112 and full
+projection 127/127 across native, reconstructed, and generated-plan execution. Alias 141/141, named marks 13/13,
+cursor execution 104/104, neutral 6/8/40, language 246/105+1/122, complete Julia, storage 19/5, primary CLI, and
+corpus 105/105 pass. The sole-facing 79-file/14,176-KiB book render explains this implemented-but-unadmitted state
+in four surfaces and keeps its changed prose, command, and limitations in separate HTML blocks.
+
+Knowledge Map 787/6,463 and all seven doctrines pass. Definitive canonical CI preserves capability 80/0/0,
+typed-source 6/8/40, all composed semantic/MCP admissions, six-family containment and relocation, CLI 66x2,
+RAM 64% against the 88% ceiling, and Phase 0 1,031/1,031 in 680 seconds before the exact pass marker. The leaf is
+signoff-complete for intended atomic commit 161/300; admission `.14.2.4.3` remains inactive until clean landing
+proof.
+
 ## 2026-08-07 — Julia immutable source-location values are implemented but not routed or admitted
 
 `FUTURE-PARITY-BACKLOG.14.2.4.1` activates task-tree-first from clean dormant-RED commit `6d293ac0` as intended

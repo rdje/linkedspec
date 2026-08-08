@@ -225,6 +225,23 @@ function _boundary_index(source::_DecodedSource, offset::Int)
     return offset + 1
 end
 
+function _scalar_offset_at_codeunit(source::_DecodedSource, codeunit_offset::Int)
+    low = 1
+    high = length(source.codeunit_at_scalar)
+    while low <= high
+        middle = low + ((high - low) ÷ 2)
+        candidate = source.codeunit_at_scalar[middle]
+        if candidate == codeunit_offset
+            return middle - 1
+        elseif candidate < codeunit_offset
+            low = middle + 1
+        else
+            high = middle - 1
+        end
+    end
+    return nothing
+end
+
 function _throw_value_error(
     code::AbstractString,
     context::SourceLocationContext,
@@ -267,6 +284,46 @@ function position(
         offset,
     )
 end
+
+"""Construct a position from an exact zero-based Julia UTF-8 code-unit boundary."""
+function position_from_codeunit(
+    authority::SourceAuthority;
+    source_id::AbstractString,
+    codeunit_offset::Int,
+    context::SourceLocationContext,
+)
+    source_id_string = String(source_id)
+    source = _source(authority, source_id_string)
+    scalar_offset = source === nothing ? nothing :
+        _scalar_offset_at_codeunit(source, codeunit_offset)
+    if scalar_offset === nothing
+        _throw_value_error(
+            _POSITION_OUT_OF_RANGE_CODE,
+            context,
+            "source_id" => source_id_string,
+            "position_offset" => codeunit_offset,
+            "source_length" => (source === nothing ? 0 : _scalar_length(source)),
+        )
+    end
+    return Position(
+        Val(:internal),
+        authority._authority_id,
+        source_id_string,
+        scalar_offset,
+    )
+end
+
+"""Return the Unicode-scalar length of one authority-owned source."""
+function source_scalar_length(authority::SourceAuthority, source_id::AbstractString)
+    source = _source(authority, source_id)
+    return source === nothing ? nothing : _scalar_length(source)
+end
+
+position_offset(value::Position) = value._offset
+span_start_offset(value::Span) = value._start
+span_scalar_length(value::Span) = value._stop - value._start
+coordinate_line(value::SourceCoordinates) = value._line
+coordinate_column(value::SourceCoordinates) = value._column
 
 """Construct and validate one direct half-open span."""
 function direct_span(
@@ -461,5 +518,129 @@ end
 function to_json(error::SourceLocationException)
     return Dict{String,Any}(field.first => field.second for field in error._record)
 end
+
+const _PROJECTION_ROWS = (
+    capture_mark = (
+        ("capture_between", "span_text"),
+        ("capture_from", "span_text"),
+        ("capture_len_between", "span_length"),
+        ("capture_len_from", "span_length"),
+        ("capture_rest", "span_text"),
+        ("capture_rest_from", "span_text"),
+        ("capture_rest_len", "span_length"),
+        ("capture_rest_len_from", "span_length"),
+        ("capture_slice", "span_text"),
+        ("capture_slice_col", "span_start_column"),
+        ("capture_slice_len", "span_length"),
+        ("capture_slice_line", "span_start_line"),
+        ("capture_slice_pos", "span_start_offset"),
+        ("capture_slice_until_cursor", "span_text"),
+        ("capture_slice_until_cursor_len", "span_length"),
+        ("capture_until_boundary", "span_text"),
+        ("capture_take", "span_text"),
+        ("capture_take_between", "span_text"),
+        ("capture_take_between_len", "span_length"),
+        ("capture_take_len", "span_length"),
+        ("capture_take_len_from", "span_length"),
+        ("capture_take_rest", "span_text"),
+        ("capture_take_rest_from", "span_text"),
+        ("capture_take_rest_len", "span_length"),
+        ("capture_take_rest_len_from", "span_length"),
+        ("capture_take_until_cursor", "span_text"),
+        ("capture_take_until_cursor_from", "span_text"),
+        ("capture_take_until_cursor_len", "span_length"),
+        ("capture_take_until_cursor_len_from", "span_length"),
+        ("capture_until_cursor_from", "span_text"),
+        ("capture_until_cursor_len_from", "span_length"),
+        ("mark_capture_slice", "capture_boundary_write_position"),
+        ("mark_copy", "mark_write_position"),
+        ("mark_exists", "mark_exists"),
+        ("mark_here", "mark_write_position"),
+        ("mark_input_end", "mark_write_position"),
+        ("mark_input_start", "mark_write_position"),
+        ("mark_pos", "mark_read_offset"),
+        ("start_capture_slice", "capture_boundary_write_position"),
+        ("start_capture_slice_from", "capture_boundary_write_position"),
+        ("clear_mark", "mark_delete"),
+        ("mark_col", "mark_read_column"),
+        ("mark_entry_end", "mark_write_position"),
+        ("mark_entry_start", "mark_write_position"),
+        ("mark_line", "mark_read_line"),
+        ("mark_match_end", "mark_write_position"),
+        ("mark_match_start", "mark_write_position"),
+    ),
+    entry_match = (
+        ("entry_col", "span_start_column"),
+        ("entry_end_col", "position_column"),
+        ("entry_end_line", "position_line"),
+        ("entry_end_pos", "position_offset"),
+        ("entry_group", "capture_group_text"),
+        ("entry_groups", "capture_group_list"),
+        ("entry_has", "capture_group_exists"),
+        ("entry_len", "span_length"),
+        ("entry_line", "span_start_line"),
+        ("entry_map", "capture_group_map"),
+        ("entry_named", "capture_group_text"),
+        ("entry_start_col", "span_start_column"),
+        ("entry_start_line", "span_start_line"),
+        ("entry_start_pos", "span_start_offset"),
+        ("entry_text", "span_text"),
+        ("match_col", "span_start_column"),
+        ("match_end_col", "position_column"),
+        ("match_end_line", "position_line"),
+        ("match_end_pos", "position_offset"),
+        ("match_group", "capture_group_text"),
+        ("match_groups", "capture_group_list"),
+        ("match_has", "capture_group_exists"),
+        ("match_len", "span_length"),
+        ("match_line", "span_start_line"),
+        ("match_map", "capture_group_map"),
+        ("match_named", "capture_group_text"),
+        ("match_start_col", "span_start_column"),
+        ("match_start_line", "span_start_line"),
+        ("match_start_pos", "span_start_offset"),
+        ("match_text", "span_text"),
+    ),
+    input_cursor = (
+        ("cursor_col", "position_column"),
+        ("cursor_line", "position_line"),
+        ("cursor_pos", "cursor_position"),
+        ("cursor_rest", "span_text"),
+        ("cursor_rest_len", "span_length"),
+        ("input_end_col", "position_column"),
+        ("input_end_line", "position_line"),
+        ("input_end_pos", "position_offset"),
+        ("input_len", "source_length"),
+        ("input_slice", "source_slice_text"),
+        ("input_text", "source_text"),
+    ),
+    cursor_control = (
+        ("restore_cursor", "cursor_state_write_compatibility"),
+        ("rewind_entry_start", "cursor_state_write_compatibility"),
+        ("rewind_match_start", "cursor_state_write_compatibility"),
+        ("save_cursor", "cursor_checkpoint_compatibility"),
+    ),
+)
+
+const _COMPATIBILITY_ALIASES = (
+    ("capture_from_rule_start", "capture_slice"),
+    ("capture_len_from_rule_start", "capture_slice_len"),
+    ("capture_rest_length", "capture_rest_len"),
+    ("capture_slice_here", "start_capture_slice"),
+    ("capture_slice_length", "capture_slice_len"),
+    ("entry_named_map", "entry_map"),
+    ("match_named_map", "match_map"),
+)
+
+"""Return a fresh detached copy of all source-boundary projection rows."""
+function projection_rows()
+    return Dict{String,Any}(
+        String(family) => Any[Any[row...] for row in rows]
+        for (family, rows) in pairs(_PROJECTION_ROWS)
+    )
+end
+
+"""Return a fresh detached copy of all compatibility alias rows."""
+compatibility_aliases() = Any[Any[row...] for row in _COMPATIBILITY_ALIASES]
 
 end

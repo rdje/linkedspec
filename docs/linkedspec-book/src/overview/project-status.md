@@ -33,18 +33,23 @@ Its explicit four-test consumer passes native, reconstructed, generated-plan, an
 preserving existing result shapes, mutation timing, and UTF-16 code-unit registers. Ordinary Dart discovery and
 canonical CI now require that consumer, and the neutral checker rejects any regression of completed `dart_runtime`.
 
+The Julia runtime now implements the same immutable value/projection boundary beneath all 92 helpers and 7 aliases.
+Its explicit consumer passes native, reconstructed, and generated-plan routes while preserving established result
+shapes, mutation timing, and zero-based UTF-8 code-unit registers. That consumer remains outside ordinary Julia
+discovery and canonical CI, so `julia_runtime` remains pending and the neutral count stays 6/8/40.
+
 Public typed values, transaction spelling and behavior, recursive observation, span-native progressive/staged
-dispatch, and the Julia, PUC Lua, and LuaJIT runtime implementations/admissions remain future work. The internal
-Perl/Rust/Dart admissions do not add an authored `Position` or `Span` value, transaction operation, schema version,
-or new helper result; rollout is 6 complete / 8 pending.
+dispatch, Julia admission, and the PUC Lua and LuaJIT runtime implementations/admissions remain future work. The
+internal Perl/Rust/Dart admissions and unadmitted Julia implementation do not add an authored `Position` or `Span`
+value, transaction operation, schema version, or new helper result; rollout is 6 complete / 8 pending.
 
 The helper audit distinguishes 7 callable compatibility aliases from 2 internal Perl contract/scanner ids.
 `capture_take_slice` and `capture_take_slice_len` are internal ids, not accepted helper spellings; authored code
-continues to use `capture_take()` and `capture_take_len()`. Rust and Dart now execute all 7 callable aliases through
-the same canonical dispatch routes as their preferred helpers, including Unicode-scalar widths, reversed-span
-absence, anonymous-boundary mutation, reconstructed compiled specs, generated plans, and independently compiled
-emitted source. Dart's compatibility-spelling parity and separately proved typed-source admission do not claim a
-public value, transaction, recursive-observation, or span-native dispatch surface.
+continues to use `capture_take()` and `capture_take_len()`. Rust, Dart, and Julia execute all 7 callable aliases
+through the same canonical dispatch routes as their preferred helpers, including Unicode-scalar widths, reversed-
+span absence, anonymous-boundary mutation, reconstructed compiled specs, generated plans, and independently
+compiled emitted source. Alias parity and the separately staged typed-source rollout do not claim a public value,
+transaction, recursive-observation, or span-native dispatch surface.
 
 Five-backend callable recurring/public admission is complete under `FUTURE-PARITY-BACKLOG.11.8.4`. One rooted
 driver composes neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; both Lua rows execute one focused file. The

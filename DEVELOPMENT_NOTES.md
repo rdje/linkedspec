@@ -1,5 +1,36 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.4.2` — Julia typed source projections): one
+  `SourceLocation.SourceAuthority` now snapshots `input` in every `_RuntimeExecutionContext`. The context retains
+  its established zero-based UTF-8 code-unit registers; private adapters construct scalar Position/Span values only
+  at source-boundary helper reads and writes, catch the four value errors as compatibility absence, and return the
+  existing strings, scalar lengths/offsets, one-based line/columns, booleans, collections, and statement results.
+- Entry/local match text, lengths, positions, and coordinates use typed spans or positions. Anonymous capture text,
+  length, boundary mutation, named-mark reads/writes/copies, source slicing, and save/restore/rewind controls do the
+  same. Capture-group list/map/existence/delete operations remain detached pass-through adapters because the neutral
+  catalog classifies their existing collection/absence shapes rather than inventing source objects.
+- Exact catalogs are immutable tuples inside the private SourceLocation namespace. Parent-module
+  `typed_source_projection_rows(engine)` and `typed_source_compatibility_aliases(engine)` allocate fresh nested
+  arrays/dictionaries for 47/30/11/4 plus seven rows on every call; neither function is exported or registered.
+
+  Dormant core remains 112/112 and projection mode passes 127/127 across exact detachment and native,
+  reconstructed, and generated-plan results. Alias carrier proof remains 141/141 including independently emitted
+  execution; named marks pass 13/13 and cursor execution 104/104. Complete Julia passes its 120,030-byte MCP
+  freshness check, all ordinary package suites, storage 19/5, primary CLI, corpus 105/105, and exact pass marker.
+  Neutral rollout remains 6/8/40 and language coverage 246/105+1/122 because `.14.2.4.3` alone owns admission.
+
+  The sole-facing book now states that Julia projections are implemented but unadmitted in its mental model,
+  project status, canonical-CI explanation, and backend handoff. The repository-routed render is 79 files/
+  14,176 KiB; changed status paragraphs, the runnable command, and following limitations are separate `<p>` and
+  `<pre>` elements, avoiding a stitched prose blob. The generated artifact is removed after inspection.
+
+  Knowledge Map regenerates at 787/6,463 and all seven doctrines pass. Definitive canonical CI preserves
+  capability 80/0/0, neutral typed-source 6/8/40, typed Perl 10 plus Rust/Dart 4/4, byte-fresh MCP bindings, every
+  composed semantic/MCP admission, six-family repository containment, and relocated/moved/outside-CWD execution.
+  Primary CLI passes 66/66 in both default and POSIX environments; RAM is 64% against 88%; Phase 0 passes
+  1,031/1,031 in 680 seconds before the exact local-CI marker. `.14.2.4.2` is signoff-complete for atomic commit
+  161/300; `.14.2.4.3` remains inactive until the landing, brief clearing, and clean proof.
+
 - 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.4.1` — immutable Julia source-location core): Julia's existing public
   `SourceSpan` is parser-AST line metadata, so the neutral value vocabulary lives in the non-exported nested
   `LinkedSpecJulia.SourceLocation` module. Only one include is added before `runtime/Matching.jl`; no parent export,
