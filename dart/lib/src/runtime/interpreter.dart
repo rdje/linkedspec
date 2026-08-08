@@ -12,6 +12,7 @@ import '../validation/spec_validator.dart';
 import 'generated_plan.dart';
 import 'matching.dart';
 import 'semantic_observation.dart';
+import 'source_location.dart';
 import 'unicode_case_mapping.dart';
 
 final _leadingBlankLine = RegExp(r'[ \t]*\n');
@@ -226,6 +227,13 @@ final class LinkedSpecRuntimeEngine {
   final String? specPath;
   final Map<int, ActionBlock> _userFunctionBodyCache = <int, ActionBlock>{};
   final Map<String, ActionBlock> _codeblockBodyCache = <String, ActionBlock>{};
+
+  /// Returns a fresh detached catalog for all 92 source-boundary projections.
+  JsonObject typedSourceProjectionRows() => sourceLocationProjectionRows();
+
+  /// Returns a fresh detached catalog for all seven compatibility aliases.
+  List<Object?> typedSourceCompatibilityAliases() =>
+      sourceLocationCompatibilityAliases();
 
   RuntimeParseResult parse(
     String input, {
@@ -3484,9 +3492,25 @@ final class LinkedSpecRuntimeEngine {
           currentEdge,
         );
       case 'entry_text':
-        return context.registers.entryMatch?.text;
+        final match = context.registers.entryMatch;
+        return match == null
+            ? null
+            : context.typedSpanTextFromCodeUnits(
+                match.codeUnitStart,
+                match.codeUnitEnd,
+                ruleLabel,
+                helperName,
+              );
       case 'match_text':
-        return context.registers.localMatch?.text;
+        final match = context.registers.localMatch;
+        return match == null
+            ? null
+            : context.typedSpanTextFromCodeUnits(
+                match.codeUnitStart,
+                match.codeUnitEnd,
+                ruleLabel,
+                helperName,
+              );
       case 'entry_group':
         return _captureAt(
           context.registers.entryMatch,
@@ -3552,91 +3576,252 @@ final class LinkedSpecRuntimeEngine {
           context.registers.localMatch?.named ?? const <String, String>{},
         );
       case 'entry_len':
-        return context.registers.entryMatch?.charLength;
+        final match = context.registers.entryMatch;
+        return match == null
+            ? null
+            : context.typedSpanLengthFromCodeUnits(
+                match.codeUnitStart,
+                match.codeUnitEnd,
+                ruleLabel,
+                helperName,
+              );
       case 'match_len':
-        return context.registers.localMatch?.charLength;
+        final match = context.registers.localMatch;
+        return match == null
+            ? null
+            : context.typedSpanLengthFromCodeUnits(
+                match.codeUnitStart,
+                match.codeUnitEnd,
+                ruleLabel,
+                helperName,
+              );
       case 'entry_line':
       case 'entry_start_line':
-        return _matchStartLine(context.input, context.registers.entryMatch);
+        final start = context.registers.entryMatch?.codeUnitStart;
+        return start == null
+            ? 1
+            : context.typedPositionLineFromCodeUnit(
+                    start,
+                    ruleLabel,
+                    helperName,
+                  ) ??
+                  1;
       case 'entry_col':
       case 'entry_start_col':
-        return _matchStartColumn(context.input, context.registers.entryMatch);
+        final start = context.registers.entryMatch?.codeUnitStart;
+        return start == null
+            ? 1
+            : context.typedPositionColumnFromCodeUnit(
+                    start,
+                    ruleLabel,
+                    helperName,
+                  ) ??
+                  1;
       case 'entry_end_line':
-        return _matchEndLine(context.input, context.registers.entryMatch);
+        final end = context.registers.entryMatch?.codeUnitEnd;
+        return end == null
+            ? 1
+            : context.typedPositionLineFromCodeUnit(
+                    end,
+                    ruleLabel,
+                    helperName,
+                  ) ??
+                  1;
       case 'entry_end_col':
-        return _matchEndColumn(context.input, context.registers.entryMatch);
+        final end = context.registers.entryMatch?.codeUnitEnd;
+        return end == null
+            ? 1
+            : context.typedPositionColumnFromCodeUnit(
+                    end,
+                    ruleLabel,
+                    helperName,
+                  ) ??
+                  1;
       case 'match_line':
       case 'match_start_line':
-        return _matchStartLine(context.input, context.registers.localMatch);
+        final start = context.registers.localMatch?.codeUnitStart;
+        return start == null
+            ? 1
+            : context.typedPositionLineFromCodeUnit(
+                    start,
+                    ruleLabel,
+                    helperName,
+                  ) ??
+                  1;
       case 'match_col':
       case 'match_start_col':
-        return _matchStartColumn(context.input, context.registers.localMatch);
+        final start = context.registers.localMatch?.codeUnitStart;
+        return start == null
+            ? 1
+            : context.typedPositionColumnFromCodeUnit(
+                    start,
+                    ruleLabel,
+                    helperName,
+                  ) ??
+                  1;
       case 'match_end_line':
-        return _matchEndLine(context.input, context.registers.localMatch);
+        final end = context.registers.localMatch?.codeUnitEnd;
+        return end == null
+            ? 1
+            : context.typedPositionLineFromCodeUnit(
+                    end,
+                    ruleLabel,
+                    helperName,
+                  ) ??
+                  1;
       case 'match_end_col':
-        return _matchEndColumn(context.input, context.registers.localMatch);
+        final end = context.registers.localMatch?.codeUnitEnd;
+        return end == null
+            ? 1
+            : context.typedPositionColumnFromCodeUnit(
+                    end,
+                    ruleLabel,
+                    helperName,
+                  ) ??
+                  1;
       case 'entry_start_pos':
-        return context.registers.entryMatch?.charStart;
+        final match = context.registers.entryMatch;
+        return match == null
+            ? null
+            : context.typedSpanStartOffsetFromCodeUnits(
+                match.codeUnitStart,
+                match.codeUnitEnd,
+                ruleLabel,
+                helperName,
+              );
       case 'entry_end_pos':
-        return context.registers.entryMatch?.charEnd;
+        final end = context.registers.entryMatch?.codeUnitEnd;
+        return end == null
+            ? null
+            : context.typedPositionOffsetFromCodeUnit(
+                end,
+                ruleLabel,
+                helperName,
+              );
       case 'match_start_pos':
-        return context.registers.localMatch?.charStart;
+        final match = context.registers.localMatch;
+        return match == null
+            ? null
+            : context.typedSpanStartOffsetFromCodeUnits(
+                match.codeUnitStart,
+                match.codeUnitEnd,
+                ruleLabel,
+                helperName,
+              );
       case 'match_end_pos':
-        return context.registers.localMatch?.charEnd;
+        final end = context.registers.localMatch?.codeUnitEnd;
+        return end == null
+            ? null
+            : context.typedPositionOffsetFromCodeUnit(
+                end,
+                ruleLabel,
+                helperName,
+              );
       case 'cursor_pos':
-        return context.cursorCharOffset;
+        return context.typedPositionOffsetFromCodeUnit(
+          context.cursorCodeUnit,
+          ruleLabel,
+          helperName,
+        );
       case 'cursor_line':
-        return context.cursorLineColumn.line;
+        return context.typedPositionLineFromCodeUnit(
+          context.cursorCodeUnit,
+          ruleLabel,
+          helperName,
+        );
       case 'cursor_col':
-        return context.cursorLineColumn.column;
+        return context.typedPositionColumnFromCodeUnit(
+          context.cursorCodeUnit,
+          ruleLabel,
+          helperName,
+        );
       case 'cursor_rest':
-        return context.input.substring(context.cursorCodeUnit);
+        return context.typedSpanTextFromCodeUnits(
+          context.cursorCodeUnit,
+          context.input.length,
+          ruleLabel,
+          helperName,
+        );
       case 'cursor_rest_len':
-        return context.input.substring(context.cursorCodeUnit).runes.length;
+        return context.typedSpanLengthFromCodeUnits(
+          context.cursorCodeUnit,
+          context.input.length,
+          ruleLabel,
+          helperName,
+        );
       case 'input_text':
-        return context.input;
+        return context.typedSourceText(ruleLabel, helperName);
       case 'input_len':
-        return context.input.runes.length;
+        return context.typedSourceLength();
       case 'input_slice':
         return _callInputSlice(positionalArgs, context, ruleLabel, currentEdge);
       case 'input_end_pos':
-        return context.input.runes.length;
+        return context.typedPositionOffsetFromCodeUnit(
+          context.input.length,
+          ruleLabel,
+          helperName,
+        );
       case 'input_end_line':
-        return lineColumnAtCodeUnitOffset(
-          context.input,
+        return context.typedPositionLineFromCodeUnit(
           context.input.length,
-        ).line;
+          ruleLabel,
+          helperName,
+        );
       case 'input_end_col':
-        return lineColumnAtCodeUnitOffset(
-          context.input,
+        return context.typedPositionColumnFromCodeUnit(
           context.input.length,
-        ).column;
+          ruleLabel,
+          helperName,
+        );
       case 'start_capture_slice':
-        context.startCaptureSlice();
+        context.startCaptureSlice(ruleLabel, helperName);
         return null;
       case 'capture_slice':
-        return _captureSliceText(context, untilCursor: false);
+        return _captureSliceText(
+          context,
+          untilCursor: false,
+          ruleLabel: ruleLabel,
+          projection: helperName,
+        );
       case 'capture_slice_len':
-        return _captureSliceLength(context, untilCursor: false);
+        return _captureSliceLength(
+          context,
+          untilCursor: false,
+          ruleLabel: ruleLabel,
+          projection: helperName,
+        );
       case 'capture_slice_until_cursor':
-        return _captureSliceText(context, untilCursor: true);
+        return _captureSliceText(
+          context,
+          untilCursor: true,
+          ruleLabel: ruleLabel,
+          projection: helperName,
+        );
       case 'capture_slice_until_cursor_len':
-        return _captureSliceLength(context, untilCursor: true);
+        return _captureSliceLength(
+          context,
+          untilCursor: true,
+          ruleLabel: ruleLabel,
+          projection: helperName,
+        );
       case 'capture_slice_pos':
-        return codeUnitOffsetToCharOffset(
-          context.input,
+        return context.typedPositionOffsetFromCodeUnit(
           _captureStartCodeUnit(context),
+          ruleLabel,
+          helperName,
         );
       case 'capture_slice_line':
-        return lineColumnAtCodeUnitOffset(
-          context.input,
+        return context.typedPositionLineFromCodeUnit(
           _captureStartCodeUnit(context),
-        ).line;
+          ruleLabel,
+          helperName,
+        );
       case 'capture_slice_col':
-        return lineColumnAtCodeUnitOffset(
-          context.input,
+        return context.typedPositionColumnFromCodeUnit(
           _captureStartCodeUnit(context),
-        ).column;
+          ruleLabel,
+          helperName,
+        );
       case 'start_capture_slice_from':
       case 'capture_rest':
       case 'capture_rest_len':
@@ -3692,7 +3877,7 @@ final class LinkedSpecRuntimeEngine {
       case 'save_cursor':
         final before = context.cursorCodeUnit;
         final stackBefore = context.cursorStack.length;
-        context.saveCursor();
+        context.saveCursor(ruleLabel, helperName);
         _traceCursorControl(
           context,
           ruleLabel,
@@ -3704,7 +3889,7 @@ final class LinkedSpecRuntimeEngine {
       case 'restore_cursor':
         final before = context.cursorCodeUnit;
         final stackBefore = context.cursorStack.length;
-        context.restoreCursor();
+        context.restoreCursor(ruleLabel, helperName);
         _traceCursorControl(
           context,
           ruleLabel,
@@ -3716,7 +3901,7 @@ final class LinkedSpecRuntimeEngine {
       case 'rewind_match_start':
         final before = context.cursorCodeUnit;
         final stackBefore = context.cursorStack.length;
-        context.rewindToLocalMatchStart();
+        context.rewindToLocalMatchStart(ruleLabel, helperName);
         _traceCursorControl(
           context,
           ruleLabel,
@@ -3728,7 +3913,7 @@ final class LinkedSpecRuntimeEngine {
       case 'rewind_entry_start':
         final before = context.cursorCodeUnit;
         final stackBefore = context.cursorStack.length;
-        context.rewindToEntryMatchStart();
+        context.rewindToEntryMatchStart(ruleLabel, helperName);
         _traceCursorControl(
           context,
           ruleLabel,
@@ -4483,7 +4668,7 @@ final class LinkedSpecRuntimeEngine {
     _CurrentActionEdge? currentEdge,
   ) {
     if (args.isEmpty) {
-      return context.input;
+      return context.typedSourceText(ruleLabel, 'input_slice');
     }
     final start = _nonNegativeInt(
       _evaluateExpression(
@@ -4505,10 +4690,7 @@ final class LinkedSpecRuntimeEngine {
             context.input.runes.length,
           )
         : context.input.runes.length - start;
-    final end = math.min(context.input.runes.length, start + width);
-    final startCodeUnit = charOffsetToCodeUnitOffset(context.input, start);
-    final endCodeUnit = charOffsetToCodeUnitOffset(context.input, end);
-    return context.input.substring(startCodeUnit, endCodeUnit);
+    return context.typedSourceSlice(start, width, ruleLabel, 'input_slice');
   }
 
   List<Object?> _evaluateValues(
@@ -5244,21 +5426,33 @@ final class LinkedSpecRuntimeEngine {
   String? _captureSliceText(
     _RuntimeExecutionContext context, {
     required bool untilCursor,
+    required String ruleLabel,
+    required String projection,
   }) {
     final start = _captureStartCodeUnit(context);
     final end = _captureEndCodeUnit(context, untilCursor: untilCursor);
-    if (end < start) {
-      return null;
-    }
-    return context.input.substring(start, end);
+    return context.typedSpanTextFromCodeUnits(
+      start,
+      end,
+      ruleLabel,
+      projection,
+    );
   }
 
   int? _captureSliceLength(
     _RuntimeExecutionContext context, {
     required bool untilCursor,
+    required String ruleLabel,
+    required String projection,
   }) {
-    final text = _captureSliceText(context, untilCursor: untilCursor);
-    return text?.runes.length;
+    final start = _captureStartCodeUnit(context);
+    final end = _captureEndCodeUnit(context, untilCursor: untilCursor);
+    return context.typedSpanLengthFromCodeUnits(
+      start,
+      end,
+      ruleLabel,
+      projection,
+    );
   }
 
   int _captureStartCodeUnit(_RuntimeExecutionContext context) {
@@ -5293,13 +5487,16 @@ final class LinkedSpecRuntimeEngine {
     }
 
     String? spanText(int start, int end) {
-      if (start < 0 || end < start || end > context.input.length) {
-        return null;
-      }
-      return context.input.substring(start, end);
+      return context.typedSpanTextFromCodeUnits(
+        start,
+        end,
+        ruleLabel,
+        helperName,
+      );
     }
 
-    int? spanLength(int start, int end) => spanText(start, end)?.runes.length;
+    int? spanLength(int start, int end) =>
+        context.typedSpanLengthFromCodeUnits(start, end, ruleLabel, helperName);
 
     final captureStart = _captureStartCodeUnit(context);
     final matchStart = _captureEndCodeUnit(context, untilCursor: false);
@@ -5310,9 +5507,11 @@ final class LinkedSpecRuntimeEngine {
     switch (helperName) {
       case 'start_capture_slice_from':
         final name = markName(0);
-        final offset = name == null ? null : marks[name];
+        final offset = name == null
+            ? null
+            : context.typedMarkCodeUnit(ruleLabel, name, helperName);
         if (offset != null) {
-          context.startCaptureSliceAt(offset);
+          context.startCaptureSliceAt(offset, ruleLabel, helperName);
         }
         return null;
       case 'capture_rest':
@@ -5322,101 +5521,103 @@ final class LinkedSpecRuntimeEngine {
       case 'capture_take':
         final value = spanText(captureStart, matchStart);
         if (value != null) {
-          context.startCaptureSliceAt(cursor);
+          context.startCaptureSliceAt(cursor, ruleLabel, helperName);
         }
         return value;
       case 'capture_take_len':
         final value = spanLength(captureStart, matchStart);
         if (value != null) {
-          context.startCaptureSliceAt(cursor);
+          context.startCaptureSliceAt(cursor, ruleLabel, helperName);
         }
         return value;
       case 'capture_take_until_cursor':
         final value = spanText(captureStart, cursor);
         if (value != null) {
-          context.startCaptureSliceAt(cursor);
+          context.startCaptureSliceAt(cursor, ruleLabel, helperName);
         }
         return value;
       case 'capture_take_until_cursor_len':
         final value = spanLength(captureStart, cursor);
         if (value != null) {
-          context.startCaptureSliceAt(cursor);
+          context.startCaptureSliceAt(cursor, ruleLabel, helperName);
         }
         return value;
       case 'capture_take_rest':
         final value = spanText(captureStart, inputEnd);
         if (value != null) {
-          context.startCaptureSliceAt(inputEnd);
+          context.startCaptureSliceAt(inputEnd, ruleLabel, helperName);
         }
         return value;
       case 'capture_take_rest_len':
         final value = spanLength(captureStart, inputEnd);
         if (value != null) {
-          context.startCaptureSliceAt(inputEnd);
+          context.startCaptureSliceAt(inputEnd, ruleLabel, helperName);
         }
         return value;
       case 'mark_here':
         final name = markName(0);
         if (name != null) {
-          marks[name] = cursor;
+          context.typedMarkSet(ruleLabel, name, cursor, helperName);
         }
         return null;
       case 'mark_input_start':
         final name = markName(0);
         if (name != null) {
-          marks[name] = 0;
+          context.typedMarkSet(ruleLabel, name, 0, helperName);
         }
         return null;
       case 'mark_input_end':
         final name = markName(0);
         if (name != null) {
-          marks[name] = inputEnd;
+          context.typedMarkSet(ruleLabel, name, inputEnd, helperName);
         }
         return null;
       case 'mark_entry_start':
         final name = markName(0);
         final offset = context.registers.entryMatch?.codeUnitStart;
         if (name != null && offset != null) {
-          marks[name] = offset;
+          context.typedMarkSet(ruleLabel, name, offset, helperName);
         }
         return null;
       case 'mark_entry_end':
         final name = markName(0);
         final offset = context.registers.entryMatch?.codeUnitEnd;
         if (name != null && offset != null) {
-          marks[name] = offset;
+          context.typedMarkSet(ruleLabel, name, offset, helperName);
         }
         return null;
       case 'mark_match_start':
         final name = markName(0);
         final offset = context.registers.localMatch?.codeUnitStart;
         if (name != null && offset != null) {
-          marks[name] = offset;
+          context.typedMarkSet(ruleLabel, name, offset, helperName);
         }
         return null;
       case 'mark_match_end':
         final name = markName(0);
         final offset = context.registers.localMatch?.codeUnitEnd;
         if (name != null && offset != null) {
-          marks[name] = offset;
+          context.typedMarkSet(ruleLabel, name, offset, helperName);
         }
         return null;
       case 'mark_copy':
         final target = markName(0);
         final source = markName(1);
         if (target != null) {
-          final offset = source == null ? null : marks[source];
+          final offset = source == null
+              ? null
+              : context.typedMarkCodeUnit(ruleLabel, source, helperName);
           if (offset == null) {
             marks.remove(target);
           } else {
-            marks[target] = offset;
+            context.typedMarkSet(ruleLabel, target, offset, helperName);
           }
         }
         return null;
       case 'mark_capture_slice':
         final name = markName(0);
         if (name != null) {
-          marks[name] = captureStart;
+          context.typedMarkSet(ruleLabel, name, captureStart, helperName);
         }
         return null;
       case 'mark_exists':
@@ -5424,22 +5625,40 @@ final class LinkedSpecRuntimeEngine {
         return name != null && marks.containsKey(name) ? 1 : 0;
       case 'mark_pos':
         final name = markName(0);
-        final offset = name == null ? null : marks[name];
+        final offset = name == null
+            ? null
+            : context.typedMarkCodeUnit(ruleLabel, name, helperName);
         return offset == null
             ? null
-            : codeUnitOffsetToCharOffset(context.input, offset);
+            : context.typedPositionOffsetFromCodeUnit(
+                offset,
+                ruleLabel,
+                helperName,
+              );
       case 'mark_line':
         final name = markName(0);
-        final offset = name == null ? null : marks[name];
+        final offset = name == null
+            ? null
+            : context.typedMarkCodeUnit(ruleLabel, name, helperName);
         return offset == null
             ? null
-            : lineColumnAtCodeUnitOffset(context.input, offset).line;
+            : context.typedPositionLineFromCodeUnit(
+                offset,
+                ruleLabel,
+                helperName,
+              );
       case 'mark_col':
         final name = markName(0);
-        final offset = name == null ? null : marks[name];
+        final offset = name == null
+            ? null
+            : context.typedMarkCodeUnit(ruleLabel, name, helperName);
         return offset == null
             ? null
-            : lineColumnAtCodeUnitOffset(context.input, offset).column;
+            : context.typedPositionColumnFromCodeUnit(
+                offset,
+                ruleLabel,
+                helperName,
+              );
       case 'clear_mark':
         final name = markName(0);
         if (name != null) {
@@ -5458,7 +5677,9 @@ final class LinkedSpecRuntimeEngine {
       case 'capture_take_rest_from':
       case 'capture_take_rest_len_from':
         final name = markName(0);
-        final start = name == null ? null : marks[name];
+        final start = name == null
+            ? null
+            : context.typedMarkCodeUnit(ruleLabel, name, helperName);
         if (name == null || start == null) {
           return null;
         }
@@ -5478,7 +5699,12 @@ final class LinkedSpecRuntimeEngine {
             ? spanLength(start, end)
             : spanText(start, end);
         if (value != null && helperName.startsWith('capture_take_')) {
-          marks[name] = helperName.contains('_rest_') ? inputEnd : cursor;
+          context.typedMarkSet(
+            ruleLabel,
+            name,
+            helperName.contains('_rest_') ? inputEnd : cursor,
+            helperName,
+          );
         }
         return value;
       case 'capture_between':
@@ -5487,8 +5713,12 @@ final class LinkedSpecRuntimeEngine {
       case 'capture_take_between_len':
         final startName = markName(0);
         final endName = markName(1);
-        final start = startName == null ? null : marks[startName];
-        final end = endName == null ? null : marks[endName];
+        final start = startName == null
+            ? null
+            : context.typedMarkCodeUnit(ruleLabel, startName, helperName);
+        final end = endName == null
+            ? null
+            : context.typedMarkCodeUnit(ruleLabel, endName, helperName);
         if (startName == null || start == null || end == null) {
           return null;
         }
@@ -5496,7 +5726,7 @@ final class LinkedSpecRuntimeEngine {
             ? spanLength(start, end)
             : spanText(start, end);
         if (value != null && helperName.startsWith('capture_take_')) {
-          marks[startName] = end;
+          context.typedMarkSet(ruleLabel, startName, end, helperName);
         }
         return value;
       default:
@@ -5545,7 +5775,13 @@ final class LinkedSpecRuntimeEngine {
     }
     boundaryStart ??= context.input.length;
     final captureStart = context.cursorCodeUnit;
-    if (boundaryStart < captureStart) {
+    final captured = context.typedSpanTextFromCodeUnits(
+      captureStart,
+      boundaryStart,
+      ruleLabel,
+      'capture_until_boundary',
+    );
+    if (captured == null) {
       context.trace?.traceDecision(
         'dart_runtime:source_boundary',
         false,
@@ -5556,7 +5792,6 @@ final class LinkedSpecRuntimeEngine {
       return null;
     }
     context._setCursorCodeUnit(boundaryStart);
-    final captured = context.input.substring(captureStart, boundaryStart);
     context.trace?.emitEvent(
       LinkedSpecTraceEventKind.mark,
       'dart_runtime:source_boundary',
@@ -6836,38 +7071,6 @@ String _expandRegexReplacement(String replacement, Match match) {
   });
 }
 
-int _matchStartLine(String input, RuntimeRegexMatch? match) {
-  final codeUnitStart = match?.codeUnitStart;
-  if (codeUnitStart == null) {
-    return 1;
-  }
-  return lineColumnAtCodeUnitOffset(input, codeUnitStart).line;
-}
-
-int _matchStartColumn(String input, RuntimeRegexMatch? match) {
-  final codeUnitStart = match?.codeUnitStart;
-  if (codeUnitStart == null) {
-    return 1;
-  }
-  return lineColumnAtCodeUnitOffset(input, codeUnitStart).column;
-}
-
-int _matchEndLine(String input, RuntimeRegexMatch? match) {
-  final codeUnitEnd = match?.codeUnitEnd;
-  if (codeUnitEnd == null) {
-    return 1;
-  }
-  return lineColumnAtCodeUnitOffset(input, codeUnitEnd).line;
-}
-
-int _matchEndColumn(String input, RuntimeRegexMatch? match) {
-  final codeUnitEnd = match?.codeUnitEnd;
-  if (codeUnitEnd == null) {
-    return 1;
-  }
-  return lineColumnAtCodeUnitOffset(input, codeUnitEnd).column;
-}
-
 String? _scalarString(Object? value, {bool nullAsEmpty = false}) {
   if (value == null) {
     return nullAsEmpty ? '' : null;
@@ -6942,7 +7145,8 @@ final class _RuntimeExecutionContext {
     required this.semanticObservationSink,
     this.generatedPlan,
     this.generatedSourceIdentity,
-  }) : registers = RuntimeMatchRegisters.empty(input);
+  }) : registers = RuntimeMatchRegisters.empty(input),
+       sourceAuthority = SourceAuthority(sources: {'input': input});
 
   final LinkedSpecRuntimeEngine engine;
   final String input;
@@ -6953,6 +7157,7 @@ final class _RuntimeExecutionContext {
   final RuntimeSemanticObservationSink? semanticObservationSink;
   final Map<String, GeneratedRuleFamily>? generatedPlan;
   final String? generatedSourceIdentity;
+  final SourceAuthority sourceAuthority;
   final Map<String, Object?> variables = <String, Object?>{};
   final Map<String, List<Object?>> arrays = <String, List<Object?>>{};
   final Map<String, Map<String, Object?>> hashes =
@@ -6995,6 +7200,246 @@ final class _RuntimeExecutionContext {
 
   Map<String, int> marksFor(String ruleLabel) {
     return markBuckets.putIfAbsent(ruleLabel, () => <String, int>{});
+  }
+
+  SourceLocationContext _typedSourceContext(
+    String ruleLabel,
+    String projection,
+  ) => SourceLocationContext(
+    ruleRole: '$ruleLabel:$projection',
+    invocationRole: 'compatibility_projection',
+  );
+
+  Position? typedPositionFromCodeUnit(
+    int codeUnitOffset,
+    String ruleLabel,
+    String projection,
+  ) {
+    try {
+      return sourceAuthority.positionFromCodeUnit(
+        sourceId: 'input',
+        codeUnitOffset: codeUnitOffset,
+        context: _typedSourceContext(ruleLabel, projection),
+      );
+    } on SourceLocationException {
+      return null;
+    }
+  }
+
+  Position? typedPositionFromScalar(
+    int scalarOffset,
+    String ruleLabel,
+    String projection,
+  ) {
+    try {
+      return sourceAuthority.position(
+        sourceId: 'input',
+        offset: scalarOffset,
+        context: _typedSourceContext(ruleLabel, projection),
+      );
+    } on SourceLocationException {
+      return null;
+    }
+  }
+
+  Span? typedSpanFromCodeUnits(
+    int startCodeUnit,
+    int endCodeUnit,
+    String ruleLabel,
+    String projection,
+  ) {
+    final start = typedPositionFromCodeUnit(
+      startCodeUnit,
+      ruleLabel,
+      projection,
+    );
+    final end = typedPositionFromCodeUnit(endCodeUnit, ruleLabel, projection);
+    if (start == null || end == null) {
+      return null;
+    }
+    try {
+      return sourceAuthority.directSpan(
+        start: start,
+        end: end,
+        provenance: projection,
+        context: _typedSourceContext(ruleLabel, projection),
+      );
+    } on SourceLocationException {
+      return null;
+    }
+  }
+
+  Span? typedSpanFromScalars(
+    int start,
+    int end,
+    String ruleLabel,
+    String projection,
+  ) {
+    final startPosition = typedPositionFromScalar(start, ruleLabel, projection);
+    final endPosition = typedPositionFromScalar(end, ruleLabel, projection);
+    if (startPosition == null || endPosition == null) {
+      return null;
+    }
+    try {
+      return sourceAuthority.directSpan(
+        start: startPosition,
+        end: endPosition,
+        provenance: projection,
+        context: _typedSourceContext(ruleLabel, projection),
+      );
+    } on SourceLocationException {
+      return null;
+    }
+  }
+
+  String? typedSpanTextFromCodeUnits(
+    int start,
+    int end,
+    String ruleLabel,
+    String projection,
+  ) {
+    final span = typedSpanFromCodeUnits(start, end, ruleLabel, projection);
+    if (span == null) {
+      return null;
+    }
+    try {
+      return sourceAuthority.materialize(
+        span,
+        context: _typedSourceContext(ruleLabel, projection),
+      );
+    } on SourceLocationException {
+      return null;
+    }
+  }
+
+  int? typedSpanLengthFromCodeUnits(
+    int start,
+    int end,
+    String ruleLabel,
+    String projection,
+  ) => typedSpanFromCodeUnits(start, end, ruleLabel, projection)?.scalarLength;
+
+  int? typedSpanStartOffsetFromCodeUnits(
+    int start,
+    int end,
+    String ruleLabel,
+    String projection,
+  ) => typedSpanFromCodeUnits(start, end, ruleLabel, projection)?.start;
+
+  int? typedPositionOffsetFromCodeUnit(
+    int codeUnitOffset,
+    String ruleLabel,
+    String projection,
+  ) => typedPositionFromCodeUnit(codeUnitOffset, ruleLabel, projection)?.offset;
+
+  SourceCoordinates? typedCoordinatesFromCodeUnit(
+    int codeUnitOffset,
+    String ruleLabel,
+    String projection,
+  ) {
+    final position = typedPositionFromCodeUnit(
+      codeUnitOffset,
+      ruleLabel,
+      projection,
+    );
+    if (position == null) {
+      return null;
+    }
+    try {
+      return sourceAuthority.coordinates(
+        position,
+        context: _typedSourceContext(ruleLabel, projection),
+      );
+    } on SourceLocationException {
+      return null;
+    }
+  }
+
+  int? typedPositionLineFromCodeUnit(
+    int codeUnitOffset,
+    String ruleLabel,
+    String projection,
+  ) =>
+      typedCoordinatesFromCodeUnit(codeUnitOffset, ruleLabel, projection)?.line;
+
+  int? typedPositionColumnFromCodeUnit(
+    int codeUnitOffset,
+    String ruleLabel,
+    String projection,
+  ) => typedCoordinatesFromCodeUnit(
+    codeUnitOffset,
+    ruleLabel,
+    projection,
+  )?.column;
+
+  int? typedSourceLength() => sourceAuthority.sourceScalarLength('input');
+
+  String? typedSourceText(String ruleLabel, String projection) {
+    final length = typedSourceLength();
+    if (length == null) {
+      return null;
+    }
+    final span = typedSpanFromScalars(0, length, ruleLabel, projection);
+    if (span == null) {
+      return null;
+    }
+    try {
+      return sourceAuthority.materialize(
+        span,
+        context: _typedSourceContext(ruleLabel, projection),
+      );
+    } on SourceLocationException {
+      return null;
+    }
+  }
+
+  String? typedSourceSlice(
+    int start,
+    int width,
+    String ruleLabel,
+    String projection,
+  ) {
+    final length = typedSourceLength();
+    if (length == null) {
+      return null;
+    }
+    final clampedStart = start.clamp(0, length);
+    final end = math.min(length, clampedStart + width);
+    final span = typedSpanFromScalars(clampedStart, end, ruleLabel, projection);
+    if (span == null) {
+      return null;
+    }
+    try {
+      return sourceAuthority.materialize(
+        span,
+        context: _typedSourceContext(ruleLabel, projection),
+      );
+    } on SourceLocationException {
+      return null;
+    }
+  }
+
+  bool typedMarkSet(
+    String ruleLabel,
+    String name,
+    int codeUnitOffset,
+    String projection,
+  ) {
+    if (typedPositionFromCodeUnit(codeUnitOffset, ruleLabel, projection) ==
+        null) {
+      return false;
+    }
+    marksFor(ruleLabel)[name] = codeUnitOffset;
+    return true;
+  }
+
+  int? typedMarkCodeUnit(String ruleLabel, String name, String projection) {
+    final offset = marksFor(ruleLabel)[name];
+    if (offset == null ||
+        typedPositionFromCodeUnit(offset, ruleLabel, projection) == null) {
+      return null;
+    }
+    return offset;
   }
 
   void clearStores() {
@@ -7122,28 +7567,36 @@ final class _RuntimeExecutionContext {
     binding.snapshot.restore(this, binding.name);
   }
 
-  void saveCursor() {
-    cursorStack.add(cursorCodeUnit);
+  void saveCursor(String ruleLabel, String projection) {
+    if (typedPositionFromCodeUnit(cursorCodeUnit, ruleLabel, projection) !=
+        null) {
+      cursorStack.add(cursorCodeUnit);
+    }
   }
 
-  void restoreCursor() {
+  void restoreCursor(String ruleLabel, String projection) {
     if (cursorStack.isEmpty) {
       return;
     }
-    _setCursorCodeUnit(cursorStack.removeLast());
+    final target = cursorStack.removeLast();
+    if (typedPositionFromCodeUnit(target, ruleLabel, projection) != null) {
+      _setCursorCodeUnit(target);
+    }
   }
 
-  void rewindToLocalMatchStart() {
+  void rewindToLocalMatchStart(String ruleLabel, String projection) {
     final target = registers.localMatch?.codeUnitStart;
-    if (target == null) {
+    if (target == null ||
+        typedPositionFromCodeUnit(target, ruleLabel, projection) == null) {
       return;
     }
     _setCursorCodeUnit(target);
   }
 
-  void rewindToEntryMatchStart() {
+  void rewindToEntryMatchStart(String ruleLabel, String projection) {
     final target = registers.entryMatch?.codeUnitStart;
-    if (target == null) {
+    if (target == null ||
+        typedPositionFromCodeUnit(target, ruleLabel, projection) == null) {
       return;
     }
     _setCursorCodeUnit(target);
@@ -7154,12 +7607,19 @@ final class _RuntimeExecutionContext {
     registers = registers.withCursorCodeUnit(cursorCodeUnit);
   }
 
-  void startCaptureSlice() {
-    registers = registers.withCaptureStartCodeUnit(cursorCodeUnit);
+  void startCaptureSlice(String ruleLabel, String projection) {
+    startCaptureSliceAt(cursorCodeUnit, ruleLabel, projection);
   }
 
-  void startCaptureSliceAt(int codeUnitOffset) {
-    registers = registers.withCaptureStartCodeUnit(codeUnitOffset);
+  void startCaptureSliceAt(
+    int codeUnitOffset,
+    String ruleLabel,
+    String projection,
+  ) {
+    if (typedPositionFromCodeUnit(codeUnitOffset, ruleLabel, projection) !=
+        null) {
+      registers = registers.withCaptureStartCodeUnit(codeUnitOffset);
+    }
   }
 }
 

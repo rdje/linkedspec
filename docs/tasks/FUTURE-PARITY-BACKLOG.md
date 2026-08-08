@@ -18608,8 +18608,8 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.3`
   Status: `active` parent (2026-08-07; Dart authority/split audit `.0` landed at `d3efe221`, alias parity `.0.1`
-    landed at `7b76af71`, dormant typed RED `.0.2` landed at `58f4bb85`, and immutable core `.1` is signoff-
-    complete / commit pending from that clean boundary)
+    landed at `7b76af71`, dormant typed RED `.0.2` landed at `58f4bb85`, immutable core `.1` landed at
+    `f1b91426`, and projection `.2` is signoff-complete with its atomic commit pending)
   Goal: Implement and independently admit the same neutral typed source-location algebra in Dart.
   Children: `.14.2.3.0` authority/split audit; `.14.2.3.0.1` seven-alias Dart parity; `.14.2.3.0.2` exact
     typed-source RED; `.14.2.3.1` immutable value/conversion core; `.14.2.3.2` helper/unchanged loaded-generated-
@@ -18885,8 +18885,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   and the process census finds no canonical/background result left to consume.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.3.1`
-  Status: `signoff-complete / commit pending` (2026-08-07; task-tree-first from clean dormant-RED commit
-    `58f4bb85`, intended 154/300, no push)
+  Status: `completed` (`f1b91426`, 2026-08-07, 154/300, no push)
   Goal: Implement the immutable Dart source authority and typed `Position`/`Span`/derived-text value core so the
     first two frozen dormant tests turn GREEN without routing any helper projection or admitting Dart support.
   Depends on: `.14.2.3.0.2`
@@ -18965,6 +18964,118 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   RAM is 61% against the 88% threshold; Phase 0 passes 1,031/1,031 in 686 seconds before the exact
   `[ci] local CI gate passed` marker and exit 0. The atomic commit, ignored-brief clearing, and clean handoff proof
   remain before task-tree-first projection `.14.2.3.2`; no push.
+
+  Commit/handoff evidence 2026-08-07: atomic commit `f1b91426` lands with first parent `58f4bb85`; the hook
+  regenerates Knowledge Map at 786/6,427, passes all seven doctrines, and validates the memory activation pointer
+  against both pre-commit `HEAD` and post-commit `HEAD^1`. Status plus staged/unstaged diffs are empty, the ignored
+  brief is zero bytes, memory architecture passes from the landed boundary, the rendered book artifact is absent,
+  and the project-data run registry is empty. Projection `.14.2.3.2` may therefore activate task-tree-first.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.3.2`
+  Status: `signoff-complete` (2026-08-07; task-tree-first from clean immutable-core commit `f1b91426`, intended
+    155/300, no push; atomic commit pending)
+  Goal: Project the immutable Dart source authority/values through every exact source-boundary helper route while
+    preserving all external values, UTF-16 code-unit registers, reconstructed/generated identities, and the
+    still-pending Dart admission boundary.
+  Depends on: `.14.2.3.1`
+  Acceptance: Retrieve the typed-source Knowledge owner, ADR `0056`, neutral artifact/checker, dormant consumer,
+    Dart engine/matching/carrier Knowledge owners, Toolbox probes, and admitted Perl/Rust projection precedents.
+    Census the exact decoded-input owner, UTF-16-to-scalar boundary, 92 canonical helpers, seven aliases, rule-local
+    marks, entry/match and anonymous capture boundaries, cursor stack, diagnostics, and native/reconstructed/
+    generated-plan/emitted convergence before implementation. Add fresh detached
+    `typedSourceProjectionRows()` and `typedSourceCompatibilityAliases()` catalogs. Initialize one immutable input
+    authority per execution and route helper-boundary construction, validation, coordinates, source slicing, mark/
+    capture/cursor operations, and derived materialization through typed values without changing live code-unit
+    storage, names/arities, strings/numbers/maps/lists/booleans/absence values, mutation timing, diagnostics,
+    schemas/identities, neutral rollout 5/9/39, root README, public DSL, sole-facing admission claims, or another
+    backend. Turn the complete dormant consumer GREEN across exact 92+7 catalogs and all carriers; retain ordinary
+    discovery at 379 and leave consumer registration plus `dart_runtime` promotion exclusively to `.14.2.3.3`.
+    Pass focused and complete Dart, locality/path, mdBook/readability, Knowledge, doctrine, and canonical gates;
+    synchronize durable records; commit, clear the brief, and prove clean before `.14.2.3.3`.
+  Verification: task-tree-only activation; Toolbox route census; dormant projection 4/4 GREEN; core selection 2/2;
+    ordinary 379; alias carrier 4/4; complete Dart/storage/corpus/CLI 66x2; neutral 5/9/39; language coverage;
+    sole-facing mdBook and generated-block inspection; Knowledge Map; all seven doctrines; definitive canonical
+    containment/relocation/CLI/Phase-0 signoff; atomic commit 155/300, brief clearing, and clean handoff
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.3.2 - route Dart typed source projections`
+
+  ### `FUTURE-PARITY-BACKLOG.14.2.3.2` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove core `.1` landed at `f1b91426` as 154/300 with parent
+    `58f4bb85`, empty status/diffs, zero-byte ignored brief, valid post-commit memory pointer, absent generated
+    book, and empty project-data run registry; make this task-tree file the sole activation diff.
+  - [x] **RETRIEVE / TOOLBOX ROUTE CENSUS** — Follow Knowledge/ADR/neutral/consumer/Perl/Rust authorities and use
+    LinkedSpec probes to map input ownership, code-unit/scalar conversion, all 92+7 routes, state, diagnostics, and
+    carrier convergence before implementation.
+  - [x] **CATALOG / ONE TYPED ROUTE** — Add detached exact catalogs and make every owned helper projection construct,
+    validate, derive, and materialize through one per-input authority without a parallel semantics.
+  - [x] **UNCHANGED RESULTS / CARRIERS / ADMISSION** — Pass the complete dormant consumer on native, reconstructed,
+    generated-plan, and emitted paths; retain ordinary 379 and leave registration/rollout promotion only to `.3`.
+  - [x] **LOCKSTEP / SIGNOFF / CLEAN HANDOFF** — Preserve schema/public/book/backend truth, update the sole-facing
+    book only if current user understanding changes, pass focused/full/canonical/locality gates, synchronize all
+    durable records, commit, clear the brief, and prove clean before `.3`.
+
+  Activation evidence 2026-08-07: immutable Dart core `.14.2.3.1` landed atomically at `f1b91426` as intended
+  154/300 with first parent `58f4bb85` and no push. Its hook regenerated Knowledge Map at 786/6,427, passed all
+  seven doctrines, and proved the activation pointer in both Git phases. Post-commit status plus staged/unstaged
+  diffs are empty, the ignored brief is zero bytes, memory architecture passes, the generated book is absent, and
+  the project-data run registry reports zero retained runs. This task-tree file is the sole activation diff before
+  any Dart runtime, test, Knowledge, roadmap, live-doc, neutral, mdBook, or other project change.
+
+  Retrieval/census evidence 2026-08-07: Knowledge Map routes the settled authority, host-unit, alias, carrier,
+  matching, trace, generated-v2, root-selection, and independent-inventory questions to their canonical cards.
+  ADR `0056` section 9, the 92-row/four-family neutral catalog, frozen Dart consumer, and admitted Perl/Rust
+  projection precedents agree on one input authority and compatibility-only external projections. Dart creates one
+  `_RuntimeExecutionContext` inside `LinkedSpecRuntimeEngine._parse`; it owns decoded `input`, UTF-16 code-unit
+  cursor/registers, rule-local mark buckets, anonymous capture boundary, and cursor stack. All helper evaluation
+  converges on the one `_evaluateCall` switch. Native and reconstructed state instantiate the same engine;
+  generated v2 validates its unchanged label/family plan and calls `executeGeneratedWithPlan`, which re-enters
+  `_parse`; freshly emitted source calls the same `executeGeneratedParserV2` adapter. No descriptor, plan, loader,
+  emitter, or second interpreter seam is needed.
+
+  Executable pre-change proof 2026-08-07: the frozen carrier-only test passes 1/1 across complete named marks,
+  cursor save/rewind/restore, aliases, native, reconstructed, and generated-plan routes. The dedicated alias suite
+  passes 4/4 including a freshly compiled emitted package. Focused current capture/mark proof passes 5/5, including
+  rule-local isolation and Unicode-scalar results over code-unit registers. Exact projection work therefore belongs
+  in `source_location.dart` plus the existing engine/context/helper switch. The catalog is 47 capture/mark, 30
+  entry/match, 11 input/cursor, and 4 cursor-control rows; capture-group collection/existence adapters remain
+  detached pass-through shapes as in Rust, while source spans/positions, mark writes/reads, and cursor controls use
+  the typed boundary. Retrieval also finds the dormant file's opening comment still describes the now-removed
+  analyzer exclusion; this leaf owns correcting that test-local comment without changing the frozen assertions.
+
+  Implementation/focused evidence 2026-08-07: `source_location.dart` now returns fresh detached copies of the
+  exact 92-row catalog in 47/30/11/4 families plus all seven alias pairs. Every `_RuntimeExecutionContext` snapshots
+  decoded `input` into one `SourceAuthority`. Typed adapter methods convert existing UTF-16 code-unit boundaries
+  into scalar `Position`/`Span` values and route source text/slices, entry/local-match text and coordinates,
+  anonymous capture spans, named-mark reads/writes, and cursor save/rewind/restore through authority validation and
+  materialization. Capture-group collections/existence/deletion retain their detached pass-through shapes. The
+  live cursor, entry/local match registers, rule-local mark buckets, anonymous boundary, and cursor stack still
+  store code-unit offsets; no loader, generated-plan, emitter, descriptor, schema, or second interpreter changes.
+  The test-local stale analyzer-exclusion comment is corrected without changing any assertion.
+
+  Focused/broad evidence 2026-08-07: fatal analysis reports no issues. The complete dormant consumer passes 4/4,
+  including exact core values/errors, detached 92+7 catalogs, complete named marks, cursor controls, native,
+  reconstructed, and generated-plan behavior. The post-change matching/interpreter/named-mark/alias/emitter/loader
+  selection passes 86/86, including freshly emitted alias execution. Ordinary discovery remains exactly 379/379.
+  Complete Dart then passes format over 98 files with zero changes, fatal analysis, all 379 tests, 20 storage
+  owners / 47 locked packages, CLI 66/66 in default and POSIX environments, all 105 corpus fixtures, and the exact
+  Dart-gate verdict. The independent typed-source checker remains 5 complete / 9 pending / 39 mutations and
+  language coverage remains 246 names / 105 corpus plus one named-mark fixture / 122 Perl contracts.
+
+  Sole-facing lockstep evidence 2026-08-07: the capture/source-location mental model, project status, local-CI
+  explanation, and backend handoff now distinguish implemented-but-dormant Dart values/projections from admitted
+  Perl/Rust runtimes and still-pending Dart admission. The repository-routed mdBook builds 79 files / 14,164 KiB.
+  Direct generated-HTML inspection proves each changed passage is a separate paragraph and examples remain
+  separate code blocks; the generated book artifact is removed. No authored `Position`/`Span`, transaction,
+  recursive-observation, schema, helper result, neutral rollout row, root README, or other backend claim moves.
+
+  Signoff evidence 2026-08-07: Knowledge Map regenerates at 786 facts / 6,431 question keys; memory architecture
+  and all seven registered doctrines pass. Definitive canonical CI preserves capability 80/0/0 and typed-source
+  5/9/39, executes the admitted Rust typed-source consumer 4/4, byte-fresh MCP bindings, every composed semantic/
+  MCP admission, all shared contracts, six-family project-data containment, and moved/outside-CWD execution across
+  all five primary anchors. Primary CLI passes 66/66 under default and POSIX option environments; RAM is 68%
+  against the 88% threshold. Phase 0 passes 1,031/1,031 in 677 seconds before exact `[ci] local CI gate passed`
+  and exit 0. No generated book or background result remains. The atomic 155/300 commit, ignored-brief clearing,
+  and clean proof precede task-tree-first admission `.14.2.3.3`; no push.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.4`
   Status: `pending` parent

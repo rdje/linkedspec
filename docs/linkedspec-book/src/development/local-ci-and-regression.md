@@ -51,6 +51,12 @@ value/helper carriers. Rust retains UTF-8-byte registers while converting at the
 does not claim public authored `Position`/`Span` values, transaction syntax or behavior, or admission of Dart,
 Julia, PUC Lua, or LuaJIT.
 
+Dart's internal value core and all 92+7 helper projections are implemented and pass the explicit four-test
+pre-admission consumer across native, reconstructed, generated-plan, and freshly emitted execution. That consumer
+still lives outside ordinary package discovery and is not registered in this canonical gate. The independent
+rollout checker therefore correctly keeps `dart_runtime` pending until the admission leaf moves the consumer and
+promotes that one row.
+
 The gate unconditionally verifies the neutral MCP transport before checking all five derived bindings. It requires
 every contract artifact and runs the generators in this exact order before the admitted implementation proofs:
 

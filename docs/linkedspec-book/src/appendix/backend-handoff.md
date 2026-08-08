@@ -23,8 +23,11 @@
 > for caller-authorized source identity, Unicode-scalar positions, same-source half-open spans, and ordered derived
 > provenance. Perl's existing source-boundary helpers project that model and are admitted. Rust now admits the
 > same internal projections across native, reconstructed, and generated-plan execution while retaining byte
-> registers; its ordinary four-test consumer is required by canonical CI. The remaining backends will implement
-> and admit the boundary in their own runtime leaves.
+> registers; its ordinary four-test consumer is required by canonical CI. Dart now implements the same internal
+> values and all 92+7 projections while retaining UTF-16 code-unit registers. Its explicit four-test consumer
+> passes native, reconstructed, generated-plan, and freshly emitted execution, but remains outside ordinary
+> discovery and canonical CI until the separate admission leaf. Julia and both Lua ABIs still need implementation
+> and admission in their own runtime leaves.
 >
 > Any cursor transaction is one explicit
 > recognition attempt over invocation-local cursor/boundary/marks only; it adds no search tree and cannot undo
@@ -33,8 +36,8 @@
 > lifecycle ownership. The neutral contract and Perl's internal value/projection runtime are now admitted; Perl's
 > existing helpers retain their public results and scalar mark/cursor behavior.
 >
-> Dart, Julia, PUC Lua, and LuaJIT implementation/admission; and public authored values,
-> transactions, observation, and dispatch remain owned by
+> Dart admission; Julia, PUC Lua, and LuaJIT implementation/admission; and public authored values, transactions,
+> observation, and dispatch remain owned by
 > `FUTURE-PARITY-BACKLOG.14.2.3-.14.8`.
 >
 > **Repeated-action handoff:** Every backend must consume

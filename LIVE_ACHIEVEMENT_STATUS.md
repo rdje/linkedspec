@@ -1,5 +1,32 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-07 — Dart typed source-location projections are implemented but unadmitted
+
+`FUTURE-PARITY-BACKLOG.14.2.3.2` activates task-tree-first from clean immutable-core commit `f1b91426` as
+intended 155/300 with no push. Every Dart execution context now owns one copied decoded-input authority, and fresh
+detached catalogs expose all 92 canonical helper projections in 47/30/11/4 families plus seven compatibility
+aliases.
+
+Source text and slicing, scalar position/span construction, coordinates, entry/local-match observations,
+anonymous captures, named-mark reads/writes, and cursor controls route through the immutable authority. Existing
+UTF-16 code-unit cursor, match, mark, anonymous-boundary, and cursor-stack registers remain unchanged, as do all
+strings, numbers, collections, booleans, absence values, mutation timing, traces, schemas, and identities. Native,
+reconstructed, generated-plan, and freshly emitted execution still converge on the same engine.
+
+The complete dormant consumer passes 4/4; focused runtime/carrier proof passes 86/86; ordinary discovery remains
+379/379. Complete Dart passes format and fatal analysis, 20 storage owners/47 packages, CLI 66/66 under default
+and POSIX environments, and all 105 corpus fixtures. Neutral truth remains 5 complete / 9 pending / 39 mutations
+and language coverage remains 246/105+1/122 because admission `.14.2.3.3` alone owns consumer registration and
+the `dart_runtime` promotion.
+
+The sole-facing capture/source-location, project-status, local-CI, and backend-handoff pages now distinguish the
+implemented-but-dormant Dart boundary from admitted Perl/Rust and future public typed values. The repository-
+routed book builds 79 files/14,164 KiB and generated HTML retains separate paragraph/code elements; the artifact
+is removed. Knowledge Map is 786/6,431 and all seven doctrines pass. Definitive canonical CI preserves capability
+80/0/0 and typed source 5/9/39 plus Rust 4/4, executes every composed semantic/MCP admission, proves containment/
+relocation, passes CLI 66x2, reports RAM 68%, and completes Phase 0 1,031/1,031 in 677 seconds before the exact
+local-CI pass marker. The atomic commit, brief clearing, and clean handoff remain before admission `.3`.
+
 ## 2026-08-07 — Dart immutable typed source-location core is implemented but unadmitted
 
 `FUTURE-PARITY-BACKLOG.14.2.3.1` activates task-tree-first from clean dormant-RED commit `58f4bb85` as intended

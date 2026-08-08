@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.3.2 — route Dart typed source projections
+
+- Added fresh detached exact Dart catalogs for all 92 canonical source-boundary projections in 47/30/11/4
+  families plus all seven compatibility aliases.
+- Added one copied immutable input authority per runtime execution. Existing UTF-16 code-unit cursor, entry/local-
+  match, mark, anonymous-boundary, and cursor-stack registers remain unchanged.
+- Routed source text/slicing, typed span/position construction, coordinates, entry/match observations, anonymous
+  capture spans, named-mark reads/writes, and cursor controls through the authority. Existing strings, numbers,
+  lists, maps, booleans, absence values, mutation timing, traces, schemas, and identities remain unchanged.
+- Kept native, reconstructed compiled state, generated plans, and freshly emitted packages on the same runtime
+  engine. The dormant typed-source consumer passes 4/4; focused runtime/carrier proof passes 86/86; ordinary Dart
+  discovery remains 379/379.
+- Passed complete Dart formatting and fatal analysis, 20-owner/47-package storage proof, primary CLI 66x2, and all
+  105 corpus fixtures. Neutral rollout stays 5/9/39 and language coverage stays 246/105+1/122; admission and the
+  `dart_runtime` promotion remain owned exclusively by `.14.2.3.3`.
+- Updated the sole-facing capture/source-location, project-status, local-CI, and backend-handoff pages to explain
+  implemented-but-dormant Dart projections without claiming public typed values or runtime admission. The 79-file/
+  14,164-KiB build retains separate generated-HTML paragraphs and code blocks; its artifact was removed.
+- Passed Knowledge Map 786/6,431, all seven doctrines, and definitive canonical CI: capability 80/0/0, typed
+  source 5/9/39 plus Rust 4/4, all composed semantic/MCP admissions, containment and relocated execution, CLI
+  66x2, RAM 68%, Phase 0 1,031/1,031 in 677 seconds, and the exact local-CI pass marker. Atomic commit,
+  brief-clear, and clean-handoff proof remain.
+
 ## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.3.1 — implement Dart source location core
 
 - Added `dart/lib/src/runtime/source_location.dart`: one copied decoded-source authority with an opaque monotonic

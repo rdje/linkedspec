@@ -1,5 +1,31 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.3.2` — Dart typed-source projections): the compatibility boundary is an
+  adapter over the immutable core, not a register rewrite. Each `_RuntimeExecutionContext` snapshots `input` into
+  one `SourceAuthority`; cursor, entry/local match, named-mark, anonymous capture, and save-stack state continue to
+  store UTF-16 code-unit offsets. Adapter methods convert only valid code-unit boundaries into scalar `Position`
+  and `Span` values, then use the authority for coordinates, lengths, text, whole-source slicing, mark validation,
+  capture-boundary writes, and cursor-control validation.
+
+  Capture-group strings/lists/maps and existence/deletion operations deliberately remain detached pass-through
+  compatibility shapes because current Dart regex registers retain captured values rather than group spans. The
+  exact catalog still classifies every governed operation: 47 capture/mark, 30 entry/match, 11 input/cursor, and
+  four cursor controls. Catalog and seven-alias accessors allocate fresh outer and nested collections on each call.
+
+  Native and reconstructed state instantiate the same engine. Generated v2 validates its unchanged family plan
+  before re-entering `_parse`, and freshly emitted packages call the same generated-v2 adapter. No loader, emitter,
+  plan, descriptor, serialization, trace classifier, or second interpreter changes. The dormant four-test contract
+  is fully green, the post-change focused runtime/carrier selection passes 86, and ordinary discovery remains 379.
+
+  Complete Dart passes formatting over 98 files, fatal analysis, 379 ordinary tests, storage 20/47, CLI 66x2, and
+  corpus 105/105. Neutral 5/9/39 and language coverage 246/105+1/122 remain exact because consumer registration and
+  `dart_runtime` promotion belong only to `.14.2.3.3`. The sole-facing book now says the Dart internal layer is
+  implemented but unadmitted; its 79-file/14,164-KiB generated HTML keeps each changed passage in a separate
+  paragraph and the build artifact is removed. Knowledge Map regenerates at 786/6,431 and all seven doctrines
+  pass. Definitive canonical CI preserves capability 80/0/0 and typed source 5/9/39, executes all composed
+  semantic/MCP admissions, proves containment/relocation, passes CLI 66x2, reports RAM 68%, and completes Phase 0
+  1,031/1,031 in 677 seconds before the exact pass marker. Only the atomic commit/clean handoff remains.
+
 - 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.3.1` — immutable Dart typed-source core): the runtime-support module is
   deliberately separate from `LinkedSpecRuntimeEngine`. `SourceAuthority` snapshots the caller's source map and
   owns four aligned boundary tables per decoded source: UTF-16 code-unit indexes for Dart slicing, one-based line

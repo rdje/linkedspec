@@ -1,5 +1,22 @@
 # ARCHITECTURE STATE
 
+- `2026-08-07 Dart typed source-location projections`: `FUTURE-PARITY-BACKLOG.14.2.3.2` gives every
+  `_RuntimeExecutionContext` one copied decoded-input authority and exposes fresh detached exact catalogs for all
+  92 canonical projections in 47/30/11/4 families plus seven aliases. Source text/slicing, entry/local-match spans
+  and coordinates, anonymous capture spans, named-mark reads/writes, and cursor controls now construct and validate
+  immutable scalar positions/spans at their compatibility boundary. Live cursor/match/mark/capture/stack storage
+  remains UTF-16 code-unit based, and group/list/map/existence/delete projections retain their detached established
+  shapes. Native, reconstructed, generated-plan, and freshly emitted routes converge on the same engine.
+
+  The explicit dormant consumer passes 4/4; focused runtime/carrier proof passes 86/86; ordinary discovery remains
+  379/379; complete Dart passes format/analyzer, storage 20/47, CLI 66x2, and corpus 105/105. Neutral truth remains
+  5/9/39 and language coverage 246/105+1/122 because admission `.14.2.3.3` alone may move the consumer into ordinary
+  and canonical discovery and promote `dart_runtime`. The sole-facing book describes this implemented-but-
+  unadmitted boundary with separate rendered paragraphs. Knowledge Map is 786/6,431 and all seven doctrines pass.
+  Definitive canonical CI preserves capability 80/0/0 and typed source 5/9/39, executes all composed semantic/MCP
+  admissions, proves containment/relocation, passes CLI 66x2, reports RAM 68%, and completes Phase 0 1,031/1,031
+  in 677 seconds before the exact pass marker. Atomic commit and clean-handoff proof remain before admission.
+
 - `2026-08-07 immutable Dart typed source-location core`: `FUTURE-PARITY-BACKLOG.14.2.3.1` adds
   `dart/lib/src/runtime/source_location.dart`. One authority snapshots caller-supplied decoded sources behind an
   opaque monotonic identity and owns scalar-boundary UTF-16, line/column, and UTF-8-byte tables. Final

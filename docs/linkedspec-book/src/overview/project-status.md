@@ -28,10 +28,15 @@ Rust's exact four-test consumer now runs under ordinary Cargo discovery and as a
 proves the immutable value core and projection boundary across native, reconstructed, and generated-plan execution;
 the neutral checker independently rejects any regression of the completed `rust_runtime` row.
 
+The Dart runtime now has one immutable decoded-input authority beneath all 92 helpers and 7 compatibility aliases.
+Its explicit four-test consumer passes native, reconstructed, generated-plan, and freshly emitted routes while
+preserving existing result shapes, mutation timing, and UTF-16 code-unit registers. The consumer remains outside
+ordinary Dart discovery and canonical CI, so `dart_runtime` is still pending and the neutral count stays 5/9/39.
+
 Public typed values, transaction spelling and behavior, recursive observation, span-native progressive/staged
-dispatch, and the Dart, Julia, PUC Lua, and LuaJIT runtime implementations/admissions remain future work. Internal
-Rust admission does not add an authored `Position` or `Span` value, transaction operation, schema version, or new
-helper result; rollout is 5 complete / 9 pending.
+dispatch, Dart admission, and the Julia, PUC Lua, and LuaJIT runtime implementations/admissions remain future work.
+The internal Rust admission and unadmitted Dart implementation do not add an authored `Position` or `Span` value,
+transaction operation, schema version, or new helper result; rollout is 5 complete / 9 pending.
 
 The helper audit distinguishes 7 callable compatibility aliases from 2 internal Perl contract/scanner ids.
 `capture_take_slice` and `capture_take_slice_len` are internal ids, not accepted helper spellings; authored code

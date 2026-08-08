@@ -49,6 +49,9 @@ final class Position {
   final String _sourceId;
   final int _offset;
 
+  /// The portable zero-based Unicode-scalar offset.
+  int get offset => _offset;
+
   /// Returns a detached neutral record.
   Map<String, Object?> toJson() => <String, Object?>{
     'source_id': _sourceId,
@@ -75,6 +78,12 @@ final class Span {
   final int _start;
   final int _end;
   final String _provenance;
+
+  /// The portable zero-based Unicode-scalar start offset.
+  int get start => _start;
+
+  /// The portable number of Unicode scalars in this span.
+  int get scalarLength => _end - _start;
 
   /// Returns a detached neutral record.
   Map<String, Object?> toJson() => _spanRecord(this);
@@ -120,6 +129,15 @@ final class SourceCoordinates {
   final int _line;
   final int _column;
   final int _utf8ByteOffset;
+
+  /// The one-based line containing this position.
+  int get line => _line;
+
+  /// The one-based Unicode-scalar column containing this position.
+  int get column => _column;
+
+  /// The zero-based UTF-8 byte offset derived from decoded text.
+  int get utf8ByteOffset => _utf8ByteOffset;
 
   /// Returns a detached neutral record.
   Map<String, Object?> toJson() => <String, Object?>{
@@ -453,3 +471,129 @@ Map<String, Object?> _spanRecord(Span span) => <String, Object?>{
   'end': span._end,
   'provenance': span._provenance,
 };
+
+/// Returns a fresh detached copy of the exact source-boundary projection map.
+Map<String, Object?> sourceLocationProjectionRows() => <String, Object?>{
+  for (final entry in _sourceLocationProjectionRows.entries)
+    entry.key: <Object?>[
+      for (final row in entry.value) <Object?>[...row],
+    ],
+};
+
+/// Returns a fresh detached copy of the exact compatibility alias catalog.
+List<Object?> sourceLocationCompatibilityAliases() => <Object?>[
+  for (final row in _sourceLocationCompatibilityAliases) <Object?>[...row],
+];
+
+const _sourceLocationProjectionRows = <String, List<List<String>>>{
+  'capture_mark': <List<String>>[
+    ['capture_between', 'span_text'],
+    ['capture_from', 'span_text'],
+    ['capture_len_between', 'span_length'],
+    ['capture_len_from', 'span_length'],
+    ['capture_rest', 'span_text'],
+    ['capture_rest_from', 'span_text'],
+    ['capture_rest_len', 'span_length'],
+    ['capture_rest_len_from', 'span_length'],
+    ['capture_slice', 'span_text'],
+    ['capture_slice_col', 'span_start_column'],
+    ['capture_slice_len', 'span_length'],
+    ['capture_slice_line', 'span_start_line'],
+    ['capture_slice_pos', 'span_start_offset'],
+    ['capture_slice_until_cursor', 'span_text'],
+    ['capture_slice_until_cursor_len', 'span_length'],
+    ['capture_until_boundary', 'span_text'],
+    ['capture_take', 'span_text'],
+    ['capture_take_between', 'span_text'],
+    ['capture_take_between_len', 'span_length'],
+    ['capture_take_len', 'span_length'],
+    ['capture_take_len_from', 'span_length'],
+    ['capture_take_rest', 'span_text'],
+    ['capture_take_rest_from', 'span_text'],
+    ['capture_take_rest_len', 'span_length'],
+    ['capture_take_rest_len_from', 'span_length'],
+    ['capture_take_until_cursor', 'span_text'],
+    ['capture_take_until_cursor_from', 'span_text'],
+    ['capture_take_until_cursor_len', 'span_length'],
+    ['capture_take_until_cursor_len_from', 'span_length'],
+    ['capture_until_cursor_from', 'span_text'],
+    ['capture_until_cursor_len_from', 'span_length'],
+    ['mark_capture_slice', 'capture_boundary_write_position'],
+    ['mark_copy', 'mark_write_position'],
+    ['mark_exists', 'mark_exists'],
+    ['mark_here', 'mark_write_position'],
+    ['mark_input_end', 'mark_write_position'],
+    ['mark_input_start', 'mark_write_position'],
+    ['mark_pos', 'mark_read_offset'],
+    ['start_capture_slice', 'capture_boundary_write_position'],
+    ['start_capture_slice_from', 'capture_boundary_write_position'],
+    ['clear_mark', 'mark_delete'],
+    ['mark_col', 'mark_read_column'],
+    ['mark_entry_end', 'mark_write_position'],
+    ['mark_entry_start', 'mark_write_position'],
+    ['mark_line', 'mark_read_line'],
+    ['mark_match_end', 'mark_write_position'],
+    ['mark_match_start', 'mark_write_position'],
+  ],
+  'entry_match': <List<String>>[
+    ['entry_col', 'span_start_column'],
+    ['entry_end_col', 'position_column'],
+    ['entry_end_line', 'position_line'],
+    ['entry_end_pos', 'position_offset'],
+    ['entry_group', 'capture_group_text'],
+    ['entry_groups', 'capture_group_list'],
+    ['entry_has', 'capture_group_exists'],
+    ['entry_len', 'span_length'],
+    ['entry_line', 'span_start_line'],
+    ['entry_map', 'capture_group_map'],
+    ['entry_named', 'capture_group_text'],
+    ['entry_start_col', 'span_start_column'],
+    ['entry_start_line', 'span_start_line'],
+    ['entry_start_pos', 'span_start_offset'],
+    ['entry_text', 'span_text'],
+    ['match_col', 'span_start_column'],
+    ['match_end_col', 'position_column'],
+    ['match_end_line', 'position_line'],
+    ['match_end_pos', 'position_offset'],
+    ['match_group', 'capture_group_text'],
+    ['match_groups', 'capture_group_list'],
+    ['match_has', 'capture_group_exists'],
+    ['match_len', 'span_length'],
+    ['match_line', 'span_start_line'],
+    ['match_map', 'capture_group_map'],
+    ['match_named', 'capture_group_text'],
+    ['match_start_col', 'span_start_column'],
+    ['match_start_line', 'span_start_line'],
+    ['match_start_pos', 'span_start_offset'],
+    ['match_text', 'span_text'],
+  ],
+  'input_cursor': <List<String>>[
+    ['cursor_col', 'position_column'],
+    ['cursor_line', 'position_line'],
+    ['cursor_pos', 'cursor_position'],
+    ['cursor_rest', 'span_text'],
+    ['cursor_rest_len', 'span_length'],
+    ['input_end_col', 'position_column'],
+    ['input_end_line', 'position_line'],
+    ['input_end_pos', 'position_offset'],
+    ['input_len', 'source_length'],
+    ['input_slice', 'source_slice_text'],
+    ['input_text', 'source_text'],
+  ],
+  'cursor_control': <List<String>>[
+    ['restore_cursor', 'cursor_state_write_compatibility'],
+    ['rewind_entry_start', 'cursor_state_write_compatibility'],
+    ['rewind_match_start', 'cursor_state_write_compatibility'],
+    ['save_cursor', 'cursor_checkpoint_compatibility'],
+  ],
+};
+
+const _sourceLocationCompatibilityAliases = <List<String>>[
+  ['capture_from_rule_start', 'capture_slice'],
+  ['capture_len_from_rule_start', 'capture_slice_len'],
+  ['capture_rest_length', 'capture_rest_len'],
+  ['capture_slice_here', 'start_capture_slice'],
+  ['capture_slice_length', 'capture_slice_len'],
+  ['entry_named_map', 'entry_map'],
+  ['match_named_map', 'match_map'],
+];

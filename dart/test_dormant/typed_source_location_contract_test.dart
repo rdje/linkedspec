@@ -1,15 +1,14 @@
 // FUTURE-PARITY-BACKLOG.14.2.3.0.2 — dormant Dart typed source-location RED.
 //
-// Ordinary `dart test` does not discover this pre-admission directory, and
-// `analysis_options.yaml` excludes this exact file while its future import is
-// absent. Run the deliberate RED through repository-local project data:
+// Ordinary `dart test` does not discover this pre-admission directory. Run the
+// explicit contract through repository-local project data:
 //
 //   cd dart
 //   bash ../tools/run_dart_project_data.sh test \
 //     test_dormant/typed_source_location_contract_test.dart
 //
-// Core implementation removes the analyzer exclusion. Admission moves this
-// consumer under ordinary discovery only after all four tests pass.
+// The immutable core is present and analyzed. Admission moves this consumer
+// under ordinary discovery only after all four tests pass.
 
 import 'dart:convert';
 import 'dart:io';
