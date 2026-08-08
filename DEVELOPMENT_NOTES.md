@@ -1,5 +1,32 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.4.0` — Julia typed-source authority/prerequisite audit): Julia's
+  `_RuntimeExecutionContext` owns one copied decoded `String` and zero-based UTF-8 code-unit cursor, rule-local
+  mark, anonymous-boundary, and save-stack state; `RuntimeMatchRegisters` owns entry/local matches against the same
+  copied text. `Matching.jl` accepts only valid code-unit boundaries and converts at helper boundaries to Unicode-
+  scalar offsets and one-based line/column. Loaded, normalized/reconstructed, generated-v2-plan, and freshly
+  emitted routes all compile into and re-enter `LinkedSpecRuntimeEngine`; structured failures leave through
+  `RuntimeInterpreterException.diagnostic`, and ordinary package discovery is the explicit include list in
+  `julia/test/runtests.jl`.
+
+  The executable neutral census contradicts the assumed 92+7 baseline. All 92 canonical names are unique and
+  known, but Julia knows and canonicalizes none of `capture_from_rule_start`, `capture_len_from_rule_start`,
+  `capture_rest_length`, `capture_slice_here`, `capture_slice_length`, `entry_named_map`, or `match_named_map`.
+  Each retains its authored spelling and throws `RuntimeInterpreterException` at `runtime_execution` with exact
+  `unsupported runtime helper '<name>' in rule Top`. Source and tests contain no occurrence of those aliases.
+  Consequently `.14.2.4.0.1` owns seven mappings at the existing known-name/canonicalization seam, and only its
+  clean commit may unlock dormant typed RED `.14.2.4.0.2`. This audit changes no production, neutral rollout,
+  schema/identity, semantic/MCP/capability, DSL, README, book claim, or other backend.
+
+  Unchanged focused proof passes loader 82/82, generated source 65/65, rule-local cursor 104/104, and complete named
+  marks 13/13. The complete Julia gate passes all package suites, storage 18 owners/5 locked package trees, primary
+  CLI 66x2, and corpus 105/105; neutral remains 6/8/40 and language coverage remains 246/105+1/122. The sole-facing
+  book already states Julia is pending and limits the seven executable aliases to Perl/Rust/Dart; its 79-file/
+  14,164-KiB build retains separate paragraph elements, needs no source edit, and is removed after inspection.
+  Knowledge Map is 787/6,450 and all seven doctrines pass. Definitive canonical CI exits 0 after capability
+  80/0/0, typed Perl 10 plus Rust/Dart 4/4, composed semantic/MCP, six-family containment, moved/outside-CWD
+  execution, CLI 66x2, RAM 79%, Phase 0 1,031/1,031, and the exact local-CI pass marker.
+
 - 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.3.3` — Dart typed-source admission): admission is deliberately a
   discovery/governance transition over the already committed implementation. The checker moved first: it expects
   40 mutations, completed `dart_runtime`, the ordinary consumer path, and the exact repository-wrapped canonical

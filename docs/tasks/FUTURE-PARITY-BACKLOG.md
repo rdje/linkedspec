@@ -18607,9 +18607,9 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   clearing, and clean proof precede Dart authority/RED `.14.2.3.0`; no push.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.3`
-  Status: `signoff-complete; admission commit pending` parent (2026-08-07; Dart authority/split audit `.0` landed at `d3efe221`, alias parity `.0.1`
+  Status: `completed` parent (2026-08-07; Dart authority/split audit `.0` landed at `d3efe221`, alias parity `.0.1`
     landed at `7b76af71`, dormant typed RED `.0.2` landed at `58f4bb85`, immutable core `.1` landed at
-    `f1b91426`, projection `.2` landed at `3513508a`, and admission `.3` is fully verified from that clean boundary)
+    `f1b91426`, projection `.2` landed at `3513508a`, and admission `.3` landed at `c2a88218`)
   Goal: Implement and independently admit the same neutral typed source-location algebra in Dart.
   Children: `.14.2.3.0` authority/split audit; `.14.2.3.0.1` seven-alias Dart parity; `.14.2.3.0.2` exact
     typed-source RED; `.14.2.3.1` immutable value/conversion core; `.14.2.3.2` helper/unchanged loaded-generated-
@@ -19083,8 +19083,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   and the project-data run registry is empty. Admission `.14.2.3.3` may therefore activate task-tree-first.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.3.3`
-  Status: `signoff-complete; atomic commit pending` (2026-08-07; task-tree-first from clean Dart-projection commit
-    `3513508a`, intended 156/300, no push)
+  Status: `completed` (`c2a88218`, 2026-08-07, 156/300, no push)
   Goal: Admit the committed Dart immutable source-location values and exact 92+7 projection routes once through
     ordinary discovery, canonical CI, the neutral rollout ledger, and the sole-facing book without changing
     production runtime behavior.
@@ -19167,14 +19166,159 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   `[ci] local CI gate passed` and exit 0. Atomic commit 156/300, ignored-brief clearing, and clean handoff proof
   remain before task-tree-first Julia `.14.2.4.0`; no push.
 
+  Commit/handoff evidence 2026-08-07: atomic commit `c2a88218` lands with first parent `3513508a`; the hook
+  regenerates Knowledge Map at 786/6,432, passes all seven doctrines, and validates the memory activation pointer
+  against both pre-commit HEAD and post-commit `HEAD^1`. Status plus staged/unstaged diffs are empty, the ignored
+  brief is zero bytes, memory architecture passes from the landed boundary, the rendered book artifact is absent,
+  and the project-data run registry is empty. Julia authority/RED audit `.14.2.4.0` may therefore activate
+  task-tree-first.
+
 - ID: `FUTURE-PARITY-BACKLOG.14.2.4`
-  Status: `pending` parent
+  Status: `active` parent (2026-08-07; authority/prerequisite-split audit `.0` signoff-complete, atomic commit
+    pending before alias parity `.0.1`)
   Goal: Implement and independently admit the same neutral typed source-location algebra in Julia.
-  Children: `.14.2.4.0` authority/RED audit; `.14.2.4.1` immutable value/conversion core; `.14.2.4.2` helper/
+  Children: `.14.2.4.0` authority/prerequisite-split audit; `.14.2.4.0.1` seven-alias Julia parity;
+    `.14.2.4.0.2` exact typed-source RED; `.14.2.4.1` immutable value/conversion core; `.14.2.4.2` helper/
     unchanged loaded-emitted-plan interpreter routes; `.14.2.4.3` exact admission/promotion.
   Acceptance: Use `SourceLocation.jl`, `Matching.jl`, `Interpreter.jl`, `LinkedSpecJulia.jl`, and
     `typed_source_location_contract_test.jl`; retain code-unit registers, convert at the typed boundary, prove
     native/serialized/emitted execution without schema change, bind the consumer, and promote only `julia_runtime`.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.4.0`
+  Status: `signoff-complete; atomic commit pending` (2026-08-07; task-tree-first from clean Dart-admission commit
+    `c2a88218`, intended 157/300, no push)
+  Goal: Map Julia's exact decoded-source authority, native string-index cursor/mark/match registers, all 92+7
+    source-boundary routes, loaded/reconstructed/generated/emitted carriers, diagnostic seams, and test discovery;
+    freeze one exact dormant typed-source RED only if the measured compatibility baseline is sound, otherwise split
+    prerequisite correction leaves without changing current behavior or neutral rollout 6/8/40.
+  Depends on: `.14.2.3.3`, `.14.2.0`
+  Acceptance: Retrieve the typed-source runtime-rollout Knowledge card, ADR `0056` section 9, neutral artifact/
+    checker, admitted Perl/Rust/Dart consumers, Julia runtime/matching/generated/diagnostic Knowledge owners,
+    Toolbox, exact Julia source and current tests, complete Julia driver, canonical registration, and every sole-
+    facing typed-source passage before implementation. Prove the decoded-input owner; native index unit and exact
+    scalar/line/column/UTF-8 conversion seams; all 92 canonical helpers plus seven aliases; cursor, mark, entry/local-
+    match, anonymous-boundary, and save-stack state; native, normalized, loaded, reconstructed, generated-plan, and
+    emitted convergence; structured-error boundary; ordinary package discovery; and current behavior with
+    repository-routed executable probes. If every prerequisite holds, add one test-local dormant consumer outside
+    ordinary discovery whose core/projection failures name only the absent future Julia typed API. If a premise is
+    false, add no misleading RED or production code: record the exact contradiction and split narrowly owned
+    prerequisites first. Preserve current production behavior, helper results/mutations, native registers, schemas/
+    identities, semantic/MCP/capability state, DSL/facade, neutral 6/8/40, root README, sole-facing book truth, and
+    all other backends. Pass focused unchanged helper/carrier proof, complete Julia/storage/corpus/CLI, language/
+    neutral, book/readability, Knowledge, doctrine, and definitive canonical gates; synchronize durable/live
+    records; commit as 157/300; clear the brief; and prove clean before the next exact Julia leaf.
+  Verification: task-tree-only activation; Knowledge/Toolbox authority and 92+7 executable census; exact native-
+    unit/conversion/state/carrier/root-cause proof; dormant RED or prerequisite split with ordinary discovery
+    unchanged; focused and complete Julia/storage/corpus/CLI; neutral 6/8/40 and language coverage; sole-facing
+    mdBook plus generated-block inspection; Knowledge Map; all seven doctrines; definitive canonical containment/
+    relocation/CLI/Phase-0 signoff; atomic commit 157/300, brief clearing, and clean handoff
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.4.0 - map Julia typed source boundary`
+
+  ### `FUTURE-PARITY-BACKLOG.14.2.4.0` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove Dart admission `.14.2.3.3` landed at `c2a88218` as 156/300
+    with parent `3513508a`, empty status/diffs, zero-byte brief, valid post-commit memory pointer, absent generated
+    book, and empty project-data registry; make this task-tree file the sole activation diff.
+  - [x] **RETRIEVE / INVENTORY** — Use Knowledge Map, ADR, neutral/checker, admitted precedents, Toolbox, Julia
+    source/tests/drivers, canonical registration, and book to map every authority, unit, route, carrier, diagnostic,
+    and current claim before deriving or changing behavior.
+  - [x] **EXECUTABLE BASELINE / ROOT CAUSE** — Probe all 92+7 spellings plus representative Unicode/state/carrier
+    behavior and ordinary discovery; prove the exact missing typed seams and any contradictory prerequisite.
+  - [x] **FREEZE RED OR SPLIT** — If premises hold, add one isolated dormant Julia core/projection RED with exact
+    first failure and ordinary-green discovery; otherwise freeze narrowly owned prerequisites without behavior code.
+  - [x] **NO REGRESSION / LOCKSTEP / CLEAN** — Preserve production/public/schema/DSL/semantic/MCP/capability/
+    neutral/book/backend truth; pass focused/full/doctrine/canonical gates, synchronize records, commit as 157/300,
+    clear the brief, and prove clean before the next Julia leaf.
+
+  Activation evidence 2026-08-07: Dart admission `.14.2.3.3` landed atomically at `c2a88218` as intended 156/300
+  with first parent `3513508a` and no push. Its hook regenerated Knowledge Map at 786 facts / 6,432 question keys,
+  passed all seven doctrines, and proved the activation pointer in both Git phases. Post-commit status plus staged/
+  unstaged diffs are empty, the ignored brief is zero bytes, memory architecture passes, the generated book is
+  absent, and the project-data registry reports zero retained runs. This task-tree file is the sole activation
+  diff before any Julia source, test, neutral artifact/checker, book, Knowledge, roadmap, live-doc, or other change.
+
+  Retrieval/authority evidence 2026-08-07: the Knowledge Map routes the typed-source rollout to
+  `typed-source-location-runtime-rollout-plan` and Julia matching, cursor-boundary, rule-interpreter, generated-v2,
+  and structured-diagnostic questions to their current Julia cards. ADR `0056` section 9, neutral artifact/checker,
+  admitted Perl/Rust/Dart consumers, Toolbox, exact Julia source/tests/drivers, canonical registration, and all
+  sole-facing typed-source passages agree on the boundary. `_RuntimeExecutionContext` copies the decoded `String`
+  once and owns zero-based UTF-8 code-unit cursor, rule-local mark buckets, anonymous capture boundary, and cursor
+  stack; `RuntimeMatchRegisters` owns entry/local matches over the same copied text. Matching converts only valid
+  code-unit boundaries to Unicode-scalar offsets and one-based line/column. `SpecLoader`, normalized `SpecFile`
+  reconstruction, generated-v2 plans, and emitted modules all compile into and re-enter `LinkedSpecRuntimeEngine`;
+  `RuntimeInterpreterException.diagnostic` is the structured failure seam. Ordinary `Pkg.test()` discovery is the
+  explicit include list in `julia/test/runtests.jl`. No `SourceLocation.jl`, typed-source consumer, source authority,
+  Position/Span/DerivedText runtime core, typed projection catalog, Julia canonical typed-source registration, or
+  Julia rollout promotion exists. The book accurately claims only Perl/Rust/Dart admission at 6/8/40 and explicitly
+  leaves Julia pending.
+
+  Executable contradiction evidence 2026-08-07: one repository-routed Julia probe reads the neutral artifact and
+  proves all 92 canonical rows are unique and known. It then checks and executes every alias. Julia knows and
+  canonicalizes zero of seven: `capture_from_rule_start`, `capture_len_from_rule_start`, `capture_rest_length`,
+  `capture_slice_here`, `capture_slice_length`, `entry_named_map`, and `match_named_map` are absent from Julia source
+  and tests; each preserves its own spelling instead of resolving to the frozen target and throws
+  `RuntimeInterpreterException` at `runtime_execution` with exact `unsupported runtime helper '<name>' in rule Top`.
+  The unchanged loaded/generated/carrier baseline passes loader 82/82, generated source 65/65, rule-local cursor
+  104/104, and complete named marks 13/13. The project-data registry returns zero retained runs afterward. Because
+  the supposedly unchanged 92+7 compatibility baseline is false, this leaf adds no misleading typed RED and no
+  production behavior. Alias parity `.14.2.4.0.1` must land before exact dormant RED `.14.2.4.0.2`.
+
+  Signoff evidence 2026-08-07: the complete unchanged Julia gate passes every package suite, proves 18 project-
+  data owners and five locked package trees, passes primary CLI 66/66 under default and POSIX environments, and
+  passes corpus 105/105. The neutral checker remains exact at 6 complete / 8 pending / 40 mutations; language
+  coverage remains 246 current call names / 105 corpus plus one exact named-mark fixture / 122 independently
+  covered Perl contracts. The sole-facing book already says Julia is pending and limits admitted values/projections
+  and all seven executable aliases to Perl/Rust/Dart; its repository-routed build produces 79 files / 14,164 KiB,
+  generated HTML retains separate paragraph elements at the audited passages, and the artifact is removed. The
+  new alias-gap fact plus synchronized rollout fact regenerate Knowledge Map at 787 facts / 6,450 question keys;
+  all seven doctrines pass.
+
+  Definitive unrestricted canonical CI exits 0 after capability 80/0/0, typed source 6/8/40 with Perl 10 plus
+  Rust/Dart 4/4, all composed semantic/MCP admissions, relocated six-family process containment, moved-root Rust
+  plus four outside-CWD runtime anchors, primary CLI 66x2, RAM 79% against the 88% ceiling, Phase 0 1,031/1,031,
+  and exact `[ci] local CI gate passed`. The first otherwise-green run stopped only because the session's outer
+  sandbox denied the gate's own nested `sandbox-exec`; the exact unrestricted rerun proves the repository-owned
+  containment path. Atomic commit 157/300, ignored-brief clearing, post-commit memory validation, and clean proof
+  remain before task-tree-first alias parity `.14.2.4.0.1`; no push.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.4.0.1`
+  Status: `pending` prerequisite split by authority audit `.14.2.4.0`
+  Goal: Add exactly the seven neutral source-boundary compatibility spellings at Julia's existing known-name and
+    canonicalization seam so every alias executes its preferred helper semantics without duplicating interpreter
+    branches or admitting typed source values.
+  Depends on: `.14.2.4.0`
+  Acceptance: Retrieve the Julia alias-gap Knowledge owner, neutral alias rows/checker, exact Perl/Rust/Dart alias
+    precedents, `ActionContracts.jl`, `Interpreter.jl`, generated-v2 carriers, complete named-mark/cursor tests,
+    language coverage, canonical registration, and sole-facing book before implementation. Add exactly seven
+    source-name-to-canonical mappings and make them known without widening the common 246-name inventory or adding
+    a parallel runtime branch. Prove canonical contract resolution, exact unrelated-helper diagnostics, Unicode
+    text/scalar widths, anonymous-boundary mutation and reversed-span absence, named-map shapes, and alias/canonical
+    equality across native, loaded/reconstructed, generated-plan, and independently loaded emitted source. Preserve
+    all canonical helper behavior, native code-unit registers, schemas/identities, neutral 6/8/40, Julia typed-source
+    pending status, root README, other backends, and public typed/transaction claims. Pass focused/complete Julia,
+    storage/corpus/CLI, language/neutral, book/readability, Knowledge, doctrine, and definitive canonical gates;
+    commit, clear the brief, and prove clean before `.14.2.4.0.2`.
+  Verification: exact seven-alias RED/GREEN consumer; 92+7 inventory and carrier equality; complete Julia and
+    canonical no-drift; unchanged neutral 6/8/40 and public book truth
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.4.0.1 - add Julia source aliases`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.4.0.2`
+  Status: `pending` behind Julia alias parity `.14.2.4.0.1`
+  Goal: Freeze one dormant Julia consumer for the neutral immutable source values, four owned diagnostics, exact
+    92 canonical projections plus seven now-callable aliases, and unchanged runtime carriers before production core
+    implementation.
+  Depends on: `.14.2.4.0.1`
+  Acceptance: Start from clean alias parity. Add one test-local consumer outside `julia/test/runtests.jl` ordinary
+    discovery. Its core mode must fail only for the absent future `SourceLocation.jl` API; its projection mode must
+    remain independently nested behind the core and require exact 92+7 catalogs plus native/reconstructed/generated-
+    plan behavior. Lock 3/7/6/3 value fixtures, four private errors, detached values, native host-unit conversion,
+    rule-local marks, anonymous boundary, cursor stack, and unchanged external results without production, neutral,
+    schema, canonical registration, or book-admission change. Pass ordinary complete Julia with the dormant file
+    excluded, explicit RED diagnostics, storage/corpus/CLI, language/neutral, book/readability, Knowledge, doctrine,
+    and definitive canonical gates; commit, clear the brief, and prove clean before `.14.2.4.1`.
+  Verification: ordinary Julia remains green; explicit core/projection modes fail only on owned absent future APIs;
+    neutral remains 6/8/40 and Julia remains pending
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.4.0.2 - freeze Julia typed source RED`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.5`
   Status: `pending` parent

@@ -1,5 +1,25 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-07 — Julia typed-source boundary is mapped; alias parity is the next prerequisite
+
+`FUTURE-PARITY-BACKLOG.14.2.4.0` activates task-tree-first from clean Dart-admission commit `c2a88218` as intended
+157/300 with no push. Julia already has one copied decoded-input owner, zero-based UTF-8 code-unit runtime state,
+valid-boundary scalar/coordinate conversion, structured runtime diagnostics, and one interpreter shared by native,
+loaded/reconstructed, generated-plan, and freshly emitted routes. All 92 canonical source-boundary helpers are
+unique, known, and executable.
+
+The audit found a precise prerequisite gap: Julia recognizes and canonicalizes none of the seven neutral aliases,
+and every authored alias fails as an unsupported runtime helper. No production behavior or misleading dormant RED
+was added. Exact alias parity is now owned by `.14.2.4.0.1`; dormant typed-source RED `.14.2.4.0.2` follows only
+after that clean commit. Neutral truth stays 6 complete / 8 pending / 40 mutations, with Julia still pending.
+
+Unchanged focused proof is loader 82/82, generated source 65/65, cursor 104/104, and named marks 13/13. Complete
+Julia, storage 18/5, primary CLI 66x2, corpus 105/105, and language coverage 246/105+1/122 pass. The sole-facing
+book already states the exact current boundary and renders 79 files/14,164 KiB with separate paragraphs, so no
+book source changed. Knowledge Map is 787/6,450 and all seven doctrines pass. Definitive canonical CI passes
+capability 80/0/0, typed Perl 10 plus Rust/Dart 4/4, composed semantic/MCP, containment/relocation, CLI 66x2, RAM
+79%, Phase 0 1,031/1,031, and the exact local-CI pass marker. Atomic commit and clean proof remain before `.0.1`.
+
 ## 2026-08-07 — Dart typed source-location runtime is admitted
 
 `FUTURE-PARITY-BACKLOG.14.2.3.3` activates task-tree-first from clean projection commit `3513508a` as intended

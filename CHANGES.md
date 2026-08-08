@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.4.0 — map Julia typed source boundary
+
+- Audited Julia's decoded-input authority, native offset units, 92+7 helper surface, runtime carriers, structured
+  diagnostics, test discovery, canonical registration, and sole-facing typed-source documentation without changing
+  production behavior.
+- Proved all 92 canonical helper names are unique, known, and executable, but all seven neutral compatibility
+  aliases are absent from Julia's known-name/canonicalization seam and fail as unsupported runtime helpers.
+- Split the false prerequisite into `.14.2.4.0.1` for exact seven-alias parity, followed by `.14.2.4.0.2` for the
+  honest dormant typed-source RED; this audit adds neither production code nor a misleading test.
+- Passed unchanged loader 82/82, generated source 65/65, rule-local cursor 104/104, named marks 13/13, complete
+  Julia, storage 18/5, CLI 66x2, corpus 105/105, neutral 6/8/40, and language coverage 246/105+1/122.
+- Confirmed the sole-facing mdBook already limits admitted internal typed-source support to Perl/Rust/Dart and
+  leaves Julia pending. Its repository-routed 79-file/14,164-KiB render keeps the audited passages in separate
+  paragraph elements; no book source change was needed and the generated artifact is removed.
+- Added the canonical Julia alias-gap Knowledge card, regenerated the map at 787 facts / 6,450 question keys, and
+  passed all seven doctrines plus definitive canonical CI: capability 80/0/0, typed Perl 10 and Rust/Dart 4/4,
+  composed semantic/MCP, containment/relocation, CLI 66x2, RAM 79%, Phase 0 1,031/1,031, and the exact pass marker.
+
 ## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.3.3 — admit Dart typed source runtime
 
 - Moved the unchanged four-test typed-source consumer from `dart/test_dormant/` into ordinary package discovery

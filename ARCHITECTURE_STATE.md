@@ -1,5 +1,22 @@
 # ARCHITECTURE STATE
 
+- `2026-08-07 Julia typed source-location authority/prerequisite boundary`: `FUTURE-PARITY-BACKLOG.14.2.4.0`
+  changes no production or test behavior. Julia's `_RuntimeExecutionContext` copies decoded input once and retains
+  cursor, local-match, mark, anonymous-boundary, and stack positions as zero-based UTF-8 code-unit offsets.
+  `Matching.jl` converts valid boundaries to Unicode-scalar offsets and one-based line/column only at helper seams.
+  Native, loaded/reconstructed, generated-v2-plan, and emitted modules converge on `LinkedSpecRuntimeEngine`, with
+  structured failures exposed through `RuntimeInterpreterException.diagnostic`.
+
+  All 92 canonical source-boundary helpers are unique and known. The seven neutral aliases are not: Julia's
+  known-name/canonicalization seam preserves each authored alias, and shared execution raises exact unsupported-
+  helper diagnostics. Alias-only parity `.14.2.4.0.1` must therefore precede dormant typed RED `.14.2.4.0.2`;
+  neither typed values nor Julia admission move in this audit. Focused 82/65/104/13, complete Julia, storage 18/5,
+  CLI 66x2, corpus 105/105, neutral 6/8/40, and language 246/105+1/122 pass. The sole-facing book already limits
+  admitted internal support to Perl/Rust/Dart and leaves Julia pending; its 79-file/14,164-KiB render uses separate
+  paragraphs and needs no source change. Knowledge Map is 787/6,450; all seven doctrines and definitive canonical
+  CI pass capability 80/0/0, typed Perl 10 plus Rust/Dart 4/4, composed semantic/MCP, containment/relocation, CLI
+  66x2, RAM 79%, Phase 0 1,031/1,031, and the exact pass marker.
+
 - `2026-08-07 Dart typed source-location runtime admission`: `FUTURE-PARITY-BACKLOG.14.2.3.3` changes no
   production Dart source. It moves the unchanged four-test contract from `dart/test_dormant/` into ordinary
   discovery, requires that tracked path and exact repository-wrapped target once in canonical CI, and promotes
