@@ -1,5 +1,29 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-07 — Dart immutable typed source-location core is implemented but unadmitted
+
+`FUTURE-PARITY-BACKLOG.14.2.3.1` activates task-tree-first from clean dormant-RED commit `58f4bb85` as intended
+154/300 with no push. Dart now has one internal decoded-source authority with opaque identity and scalar-boundary
+UTF-16, line/column, and UTF-8-byte evidence. Final positions, direct spans, and ordered derived text retain no
+source text or engine reference; detached JSON cannot mutate their private state.
+
+The authority alone validates ownership, bounds, source/order, and derived provenance, converts valid code-unit
+boundaries, derives coordinates, and materializes direct or `concatenate_in_order` text. Its exact two dormant
+core tests pass across all 3/7/6/3 neutral fixtures and four private diagnostics. The temporary analyzer exclusion
+is gone, fatal analysis is clean, and all 379 ordinary tests pass. The full dormant file passes 3/4 and fails only
+at absent `LinkedSpecRuntimeEngine.typedSourceProjectionRows()`, leaving projection `.14.2.3.2` precisely isolated.
+
+Complete Dart passes format 98/0, 20 storage owners/47 locked packages, CLI 66/66 under default and POSIX option
+environments, and corpus 105/105. Neutral truth remains 5 complete / 9 pending / 39 mutations; no current helper,
+register, public result, schema/identity, semantic/MCP/capability surface, authored DSL, or other backend changes.
+
+The sole-facing mdBook remains source-unchanged because the core is not yet routed or admitted. Its repository-
+routed 79-file/14,152-KiB build succeeds, and generated HTML retains distinct paragraphs and examples around the
+pending-Dart claims. Knowledge Map remains 786/6,427. All seven doctrines and definitive canonical CI pass
+capability 80/0/0, typed source 5/9/39 plus Rust 4/4, every composed semantic/MCP admission, project-data
+containment and relocated execution, CLI 66x2, RAM 61%, and Phase 0 1,031/1,031 in 686 seconds before the exact
+local-CI pass marker. The atomic commit, brief clearing, and clean handoff proof remain before projection `.2`.
+
 ## 2026-08-07 — Dormant Dart typed source-location contract is frozen
 
 `FUTURE-PARITY-BACKLOG.14.2.3.0.2` activates task-tree-first from clean alias-parity commit `7b76af71` as intended

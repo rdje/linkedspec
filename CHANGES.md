@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.3.1 — implement Dart source location core
+
+- Added `dart/lib/src/runtime/source_location.dart`: one copied decoded-source authority with an opaque monotonic
+  identity and precomputed Unicode-scalar-to-UTF-16, line/column, and UTF-8-byte boundary tables.
+- Added final opaque `Position`, direct `Span`, and ordered `DerivedText` values with detached JSON records, no
+  decoded text or engine reference, and authority-only validation/materialization.
+- Implemented the exact four private neutral value diagnostics plus direct and ordered multi-source text. The
+  frozen core selection passes 2/2 across all 3/7/6/3 fixtures, ownership, detachment, and error cases.
+- Removed the temporary analyzer exclusion. The complete dormant consumer now passes three tests and fails only
+  at the `.2`-owned absent `LinkedSpecRuntimeEngine.typedSourceProjectionRows()` API; ordinary discovery remains
+  379/379 and fatal analysis reports no issues.
+- Preserved every engine/helper route, UTF-16 code-unit register, 92+7 external result, schema/identity,
+  semantic/MCP/capability surface, neutral rollout 5/9/39, authored DSL, root README, and other backend.
+- Passed complete Dart format 98/0, fatal analysis, package 379, storage 20/47, CLI 66x2, corpus 105/105, neutral
+  5/9/39, and language coverage 246/105/122.
+- Kept the sole-facing mdBook source unchanged because user-visible behavior and admission are unchanged; its
+  repository-routed build remains 79 files/14,152 KiB with separate rendered status paragraphs and examples.
+- Passed Knowledge Map 786/6,427, all seven doctrines, and definitive canonical CI: capability 80/0/0, typed
+  source 5/9/39 plus Rust 4/4, all composed semantic/MCP admissions, project-data containment and relocated
+  execution, CLI 66x2, RAM 61%, Phase 0 1,031/1,031 in 686 seconds, and the exact local-CI pass marker.
+
 ## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.3.0.2 — freeze dormant Dart typed source RED
 
 - Added one conventional four-test consumer under `dart/test_dormant/`, outside ordinary Dart test discovery,

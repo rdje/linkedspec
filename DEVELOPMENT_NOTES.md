@@ -1,5 +1,34 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.3.1` — immutable Dart typed-source core): the runtime-support module is
+  deliberately separate from `LinkedSpecRuntimeEngine`. `SourceAuthority` snapshots the caller's source map and
+  owns four aligned boundary tables per decoded source: UTF-16 code-unit indexes for Dart slicing, one-based line
+  and column, and UTF-8 byte offsets indexed by zero-based Unicode-scalar positions. A binary-search conversion
+  accepts only valid UTF-16 scalar boundaries, so later helper projection can retain existing code-unit registers
+  without exposing host units in typed values.
+
+  `Position`, `Span`, `DerivedText`, `SourceCoordinates`, and `SourceLocationException` are final values with
+  private state. Values retain only opaque authority identity, source identity, scalar offsets, provenance, and
+  explicit `concatenate_in_order` policy; source text stays solely in the authority. Constructor inputs and span
+  lists are copied/unmodifiable, while every `toJson()` call returns a detached record. The authority alone emits
+  the four neutral `validate_value` diagnostics, derives coordinates, and slices or concatenates owned text.
+
+  Exact name-selected dormant proof passes the two immutable tests over all 3 sources, 7 coordinate cases, 6
+  direct spans, 3 derived texts, copied authority ownership, detached records, and four privacy-filtered errors.
+  The complete dormant file reaches 3/4 and fails only with `NoSuchMethodError` for
+  `LinkedSpecRuntimeEngine.typedSourceProjectionRows()`, proving projection `.2` remains an exact boundary.
+  Removing the single analyzer exclusion leaves fatal analysis clean and ordinary discovery unchanged at 379.
+
+  The complete Dart gate passes format 98/0, analysis, 379 tests, 20 storage owners/47 locked packages, primary
+  CLI 66x2, and corpus 105/105. Neutral truth remains 5/9/39 and language coverage 246/105/122. The sole-facing
+  book remains source-unchanged because the internal core is neither routed nor admitted; its 79-file/
+  14,152-KiB build retains separate rendered paragraphs and examples around the pending-Dart claims.
+
+  Final signoff passes memory architecture, Knowledge Map 786/6,427, and all seven doctrines. Definitive
+  canonical CI preserves capability 80/0/0 and typed source 5/9/39, executes Rust typed source 4/4 and every
+  composed semantic/MCP admission, proves six-family project-data containment plus relocated/outside-CWD execution,
+  passes CLI 66x2, reports RAM 61%, and passes Phase 0 1,031/1,031 in 686 seconds before the exact local-CI marker.
+
 - 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.3.0.2` — dormant Dart typed-source RED): Dart does not provide a
   general custom compile-condition mechanism suitable for a Rust-style test-local cfg. The truthful dormant seam
   is therefore a conventional test file in `test_dormant/`, which ordinary `dart test` does not discover, plus an

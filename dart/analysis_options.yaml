@@ -6,5 +6,3 @@ analyzer:
   exclude:
     - .dart_tool/**
     - build/**
-    # FUTURE-PARITY-BACKLOG.14.2.3.0.2: remove at typed-source admission.
-    - test_dormant/typed_source_location_contract_test.dart

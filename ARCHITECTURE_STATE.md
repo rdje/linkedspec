@@ -1,5 +1,20 @@
 # ARCHITECTURE STATE
 
+- `2026-08-07 immutable Dart typed source-location core`: `FUTURE-PARITY-BACKLOG.14.2.3.1` adds
+  `dart/lib/src/runtime/source_location.dart`. One authority snapshots caller-supplied decoded sources behind an
+  opaque monotonic identity and owns scalar-boundary UTF-16, line/column, and UTF-8-byte tables. Final
+  `Position`, direct `Span`, and ordered `DerivedText` values retain only identity, scalar offsets, provenance,
+  and policy; detached records carry no text or engine reference. Authority-only validation, coordinate
+  derivation, direct/ordered materialization, and the four private neutral diagnostics pass the frozen core 2/2
+  across exact 3/7/6/3 fixtures. The analyzer exclusion is removed; fatal analysis and ordinary 379 remain green;
+  the full dormant consumer passes 3/4 and stops only at absent `.2` projection API
+  `typedSourceProjectionRows`. Complete Dart passes format 98/0, storage 20/47, CLI 66x2, and corpus 105/105.
+  No engine/helper route, UTF-16 register, external result, schema/identity, semantic/MCP/capability state, DSL,
+  neutral 5/9/39 admission, or other backend moves. The sole-facing book remains source-unchanged and exact,
+  building at 79 files / 14,152 KiB with separate rendered blocks. All seven doctrines and definitive canonical
+  CI pass capability 80/0/0, composed semantic/MCP admissions, project-data containment and relocated execution,
+  CLI 66x2, RAM 61%, and Phase 0 1,031/1,031 in 686 seconds before the exact local-CI pass marker.
+
 - `2026-08-07 dormant Dart typed source-location RED boundary`: `FUTURE-PARITY-BACKLOG.14.2.3.0.2` adds one
   four-test consumer under `dart/test_dormant/`, outside ordinary package discovery, and excludes exactly that
   unresolved future import from fatal analysis. The consumer reads the neutral contract and freezes all 3/7/6/3
