@@ -1,5 +1,13 @@
 # ARCHITECTURE STATE
 
+- `2026-08-07 dormant Rust typed source-location RED boundary`: `FUTURE-PARITY-BACKLOG.14.2.2.0.3` adds one
+  test-local custom-cfg integration consumer without production or Cargo-manifest changes. Its base freezes the
+  immutable source authority/value contract and fails only with `E0432` for absent `source_location`; a second cfg
+  independently freezes the later exact 92-row/seven-alias projections and current all-carrier behavior. Ordinary
+  discovery runs zero tests until admission. Complete Rust and canonical proof pass, including CLI 66/66 twice,
+  RAM 49%, and Phase 0 1,031/1,031 in 653 seconds. Rust core `.1`, projection `.2`, and admission `.3` remain
+  distinct.
+
 - `2026-08-07 Rust source-boundary compatibility-alias parity`: `FUTURE-PARITY-BACKLOG.14.2.2.0.2` adds
   `capture_slice_here`, `capture_from_rule_start`, `capture_len_from_rule_start`, `capture_slice_length`, and
   `capture_rest_length` only as alternative patterns on the existing canonical Rust helper arms and trace

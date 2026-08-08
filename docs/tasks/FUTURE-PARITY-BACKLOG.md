@@ -18298,7 +18298,8 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   task-tree-first `.0.3` activation.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.2.0.3`
-  Status: `pending` (intended 147/300 after clean `.0.2`, no push)
+  Status: `signoff-complete` (2026-08-07; activated task-tree-first from clean `1a83a8df`, intended 147/300,
+    no push; commit/clean boundary in progress)
   Goal: Freeze the exact dormant Rust typed-source RED consumer against the corrected seven-alias baseline.
   Depends on: `.14.2.2.0.2`
   Acceptance: Add only `rust/linkedspec-runtime/tests/typed_source_location_contract.rs` behind the audited
@@ -18308,8 +18309,54 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
     reconstructed/generated result shapes. Classify the missing core `.1` before projection `.2`, keep ordinary
     Cargo/canonical discovery dormant until admission `.3`, change no production/neutral/public behavior, pass
     unchanged baselines and canonical signoff, commit, clear the brief, and prove clean before `.14.2.2.1`.
-  Verification: pending
+  Verification: ordinary Cargo zero-test discovery; explicit core cfg exact one-error `E0432` RED; formatting and
+    whitespace; neutral 3/7/6/3 + 92+7+2 + 4/10/38; both admitted Perl consumers; complete Rust core/runtime/
+    integration + 105 corpus + generated-source + 17-owner storage + CLI 66x2; mdBook; Knowledge Map 786/6,403;
+    all seven doctrines; canonical CLI 66x2, RAM 49%/88%, Phase 0 1,031/1,031 in 653 seconds, exact local-CI pass
   Commit: `FUTURE-PARITY-BACKLOG.14.2.2.0.3 - lock Rust typed source RED`
+
+  ### `FUTURE-PARITY-BACKLOG.14.2.2.0.3` Acceptance Checklist
+
+  - [x] **RETRIEVE / FREEZE EXACT AUTHORITY** — Reuse ADR `0056`, the neutral 3/7/6/3 fixtures, 92+7 alias
+    inventory, four diagnostics, corrected alias parity, current Rust carrier behavior, and existing Knowledge/
+    TOOLBOX evidence without re-deriving settled facts.
+  - [x] **DORMANT CORE RED** — Add only the audited Rust typed-source consumer behind the pre-admission custom-cfg
+    boundary and make its first failure name the absent immutable source authority/value core owned by `.1`.
+  - [x] **DORMANT PROJECTION CONTRACT** — Freeze exact future helper projection, Unicode byte-to-scalar conversion,
+    mark/cursor mutation, recursion/isolation, native/reconstructed/generated compatibility, privacy, and four-error
+    expectations without implementing them or weakening current behavior.
+  - [x] **NO PREMATURE ADMISSION** — Prove ordinary Cargo discovery and canonical CI remain green with the consumer
+    dormant; preserve rollout 4/10/38, all seven current aliases, schemas, public/mdBook behavior, and other backends.
+  - [x] **LOCKSTEP / SIGNOFF / CLEAN HANDOFF** — Synchronize durable/live records, pass focused RED-shape and current
+    baselines plus doctrine/canonical signoff, commit, clear the brief, and prove clean before `.14.2.2.1`.
+
+  Activation evidence 2026-08-07: Rust alias parity `.14.2.2.0.2` committed at `1a83a8df` as 146/300 with no push.
+  Its post-commit status and both diffs are empty, `git_message_brief.txt` is zero bytes, and no background result
+  remains. This task-tree file is the sole activation diff before adding or inspecting the dormant Rust consumer.
+
+  Contract evidence 2026-08-07: the new integration target is entirely gated by test-local
+  `linkedspec_typed_source_red`; its value half reads the unchanged neutral authority and freezes all 3 sources,
+  7 scalar/line/column/UTF-8-byte conversions, 6 direct spans including empty text, 3 ordered derived cases
+  including multiple sources, detached records, owned decoded text, and the exact four private errors. A nested
+  `linkedspec_typed_source_projection_red` module separately freezes the detached exact 92-row/four-family catalog,
+  seven corrected aliases, and unchanged Unicode parent/child mark, absence/clear, capture-boundary mutation, and
+  cursor save/restore results across native, reconstructed, and generated-plan carriers. It adds no manifest,
+  feature, production source, fixture, neutral artifact, or ordinary test registration.
+
+  RED-shape evidence 2026-08-07: ordinary focused Cargo discovery passes with zero tests, proving the committed
+  target remains dormant before admission. Supplying only `--cfg linkedspec_typed_source_red` exits 101 with one
+  compiler error: `E0432` at the test import because `linkedspec_runtime::source_location` does not exist. The
+  projection cfg is not active, so no `.2` failure obscures the missing immutable authority/value core owned by
+  `.14.2.2.1`. Formatting and whitespace checks pass.
+
+  Complete/canonical evidence 2026-08-07: `tools/run_rust_local.sh` passes all core/runtime/integration suites,
+  the complete 105-spec corpus, full-manifest generated-source classification, project-storage locality for 17
+  Rust owners, and primary CLI 66/66 under both default and POSIX option environments. The definitive
+  `tools/run_ci_local.sh` then passes all seven doctrines, unchanged typed-source 3/7/6/3 + 92+7+2 + 4/10/38,
+  both admitted Perl consumers, every semantic/MCP admission, repository containment/relocation, canonical CLI
+  66/66 twice, RAM 49% against the 88% ceiling, and Phase 0 1,031/1,031 in 653 seconds before
+  `[ci] local CI gate passed`. No production, neutral, schema, rollout, root-README, mdBook, or other-backend
+  behavior moved. Commit, brief clearing, and exact clean proof remain as the workflow boundary before `.1`.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.3`
   Status: `pending` parent

@@ -1,5 +1,30 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.2.0.3` — dormant Rust typed-source RED): Cargo automatically discovers
+  every integration test, so a pre-admission failing consumer cannot be an ordinary active target. A crate-level
+  `linkedspec_typed_source_red` cfg makes ordinary discovery compile an empty target, while the explicit focused
+  command exposes the future core contract. The cfg is test-local: no Cargo feature, manifest registration, or
+  production conditional is introduced. Admission `.14.2.2.3` will remove this temporary boundary.
+
+  The consumer is deliberately layered. Its base imports only the absent `source_location` module and freezes the
+  authority, immutable `Position`/`Span`/derived-text values, all 3/7/6/3 neutral fixtures, exact coordinates and
+  UTF-8 byte offsets, ordered materialization, detached records, source ownership, and four private diagnostics.
+  Enabling only that cfg therefore fails once with `E0432` and assigns `.14.2.2.1` one unambiguous implementation
+  job. The nested `linkedspec_typed_source_projection_red` module freezes `.14.2.2.2` independently, so its absent
+  92-row catalog cannot obscure the core RED.
+
+  The projection half compares fresh catalog snapshots to all 92 canonical rows and seven corrected aliases, then
+  reuses existing exact complete-mark and cursor fixtures plus the Unicode alias fixture across native,
+  reconstructed, and generated-plan execution. This locks byte-to-scalar conversion, parent/child mark isolation,
+  absent/cleared values, anonymous capture-boundary mutation, and save/restore behavior without changing any
+  current helper route. The full ordinary Rust gate sees the new target as zero tests and remains green through
+  the 105-spec corpus, generated-source classifier, 17-owner storage proof, and both 66-case CLI environments.
+
+  Definitive signoff passes all seven doctrines, unchanged typed-source 3/7/6/3 + 92+7+2 + 4/10/38, both
+  admitted Perl consumers, every semantic/MCP admission, repository containment and relocation, CLI 66/66 under
+  both option environments, RAM 49%, and Phase 0 1,031/1,031 in 653 seconds before the exact local-CI pass marker.
+  Thus the dormant target freezes the next Rust jobs without claiming their values or projections are current.
+
 - 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.2.0.2` — Rust capture compatibility aliases): the compatibility names
   belong in the canonical dispatch patterns, not wrapper calls or duplicated bodies. `capture_slice_here` shares
   `start_capture_slice`; `capture_from_rule_start` shares `capture_slice`; both length aliases share

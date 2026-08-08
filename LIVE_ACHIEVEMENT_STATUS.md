@@ -1,5 +1,28 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-07 — Dormant Rust typed source-location RED is exact
+
+`FUTURE-PARITY-BACKLOG.14.2.2.0.3` activates from clean `1a83a8df` as intended 147/300 with no push. One new Rust
+integration target freezes the neutral immutable-value and compatibility-projection contract without changing
+production code or admitting unfinished behavior. Ordinary Cargo sees a zero-test target; explicit core cfg
+compilation exits 101 with exactly one `E0432` naming the absent `linkedspec_runtime::source_location` module.
+
+The base contract covers all 3 sources, 7 coordinate conversions, 6 direct spans, and 3 derived texts, including
+empty/multi-source materialization, Unicode scalar-to-UTF-8 evidence, detached records, owned decoded text, and the
+four exact private diagnostics. A separately gated projection module freezes all 92 helper rows, seven aliases,
+Unicode parent/child mark isolation and absence, capture mutation, cursor save/restore, and unchanged native,
+reconstructed, and generated-plan shapes for the later `.2` leaf.
+
+The neutral checker remains 4/10/38. The complete Rust gate passes core/runtime/integration tests, all 105 corpus
+specs, full-manifest generated-source classification, 17-owner storage locality, and primary CLI 66/66 under both
+default and POSIX environments. No runtime, schema, neutral artifact, rollout, other backend, root README, or
+sole-facing mdBook behavior changes; the book remains exact that Rust typed values are pending.
+
+Definitive signoff passes all seven doctrines, both admitted Perl typed-source consumers, every semantic/MCP
+admission, repository containment/relocation, canonical CLI 66/66 twice, RAM 49%, and Phase 0 1,031/1,031 in 653
+seconds before `[ci] local CI gate passed`. Commit/clean is the only remaining boundary before task-tree-first
+immutable Rust core `.14.2.2.1`.
+
 ## 2026-08-07 — Rust executes all seven source-boundary compatibility aliases
 
 `FUTURE-PARITY-BACKLOG.14.2.2.0.2` activates from clean `767abfac` as intended 146/300 with no push. Rust now

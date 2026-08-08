@@ -1,5 +1,24 @@
 # CHANGES
 
+## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.2.0.3 — lock Rust typed source RED
+
+- Added one integration consumer behind test-local `linkedspec_typed_source_red`, with the later projection half
+  separately gated by `linkedspec_typed_source_projection_red`. Ordinary Cargo discovery runs zero tests until
+  Rust admission removes the dormant boundary.
+- Froze all neutral 3/7/6/3 immutable value fixtures, Unicode-scalar/UTF-8-byte coordinates, empty and multi-source
+  materialization, detached privacy, authority ownership, and the exact four value diagnostics. The first explicit
+  RED exits 101 with only `E0432` for the absent `linkedspec_runtime::source_location` core.
+- Froze the later detached 92-row/four-family projection catalog, seven corrected aliases, and unchanged Unicode
+  mark isolation/absence, capture mutation, cursor save/restore, native, reconstructed, and generated-plan results
+  without implementing or registering them early.
+- Preserved every production source, neutral artifact, schema, rollout row, helper result, other backend, root
+  README, and sole-facing mdBook claim. Typed-source truth remains 4 complete / 10 pending / 38 mutations.
+- Passed formatting, ordinary zero-test discovery, the exact one-error RED classifier, the neutral checker, and
+  the complete Rust gate including 105 corpus specs, generated-source classification, 17-owner storage locality,
+  and CLI 66/66 in both option environments. Definitive canonical signoff passes all seven doctrines, every
+  semantic/MCP admission and containment/relocation proof, CLI 66/66 twice, RAM 49%, and Phase 0 1,031/1,031 in
+  653 seconds before the exact local-CI pass marker.
+
 ## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.2.0.2 — add Rust capture compatibility aliases
 
 - Added `capture_slice_here`, `capture_from_rule_start`, `capture_len_from_rule_start`, `capture_slice_length`, and
