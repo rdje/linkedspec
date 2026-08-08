@@ -1,5 +1,18 @@
 # ARCHITECTURE STATE
 
+- `2026-08-07 Dart typed source-location prerequisite audit`: `FUTURE-PARITY-BACKLOG.14.2.3.0` proves Dart's
+  implementation baseline has all 92 canonical source-boundary helpers but none of the seven neutral aliases.
+  Each alias stays uncanonicalized and ordinary compiled invocation produces structured `unknown_helper` at
+  `callable_codeblock_invocation`; canonical `capture_slice()` succeeds on the same route. Dart retains decoded
+  input plus cursor, match, capture-boundary, rule-local mark, and cursor-stack state in UTF-16 code units, with
+  scalar positions/lengths and one-based line/column projected at helper boundaries. Native, loaded/reconstructed,
+  generated-plan, and emitted adapters converge on `LinkedSpecRuntimeEngine`. Alias parity `.14.2.3.0.1` must land
+  before typed RED `.14.2.3.0.2`; the audit changes no production, neutral 5/9/39, schema/identity, semantic/MCP/
+  capability, DSL, root README, or sole-facing book behavior. Focused 87 plus complete Dart format 95/0, analysis,
+  package 375, 19-owner/47-package storage, CLI 66x2, corpus 105/105, and neutral proof pass. All seven doctrines
+  and definitive canonical CI also pass capability 80/0/0, Rust typed 4/4, composed consumers, containment/
+  relocation, CLI 66x2, RAM 39%, and Phase 0 1,031/1,031 in 666 seconds.
+
 - `2026-08-07 Rust typed source-location admission`: `FUTURE-PARITY-BACKLOG.14.2.2.3` removes the two
   test-local custom-cfg guards from the committed four-test consumer, so ordinary Cargo discovery now proves the
   immutable Rust value core and all 92 canonical helpers plus seven aliases together. Canonical CI requires the

@@ -1,5 +1,31 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.3.0` — Dart typed-source prerequisite audit): Dart's live source
+  boundary already has the intended adapter shape but not the assumed compatibility baseline. One
+  `_RuntimeExecutionContext` owns immutable decoded input; `RuntimeMatchRegisters`, rule-local mark buckets,
+  anonymous capture boundary, cursor stack, entry/local matches, and live cursor retain UTF-16 code-unit offsets.
+  Existing helpers convert to Unicode-scalar positions/lengths and one-based line/column only at their result edge.
+  Loaded source, reconstructed AST state, generated-family plans, and emitted packages all instantiate the same
+  `LinkedSpecRuntimeEngine`, so future typed projection needs no second interpreter or schema.
+
+  The neutral inventory divides exactly into 47 capture/mark, 30 entry/match, 11 input/cursor, and four cursor-
+  control names. A public-API/runtime probe found all 92 canonical names known. None of the seven neutral aliases
+  appears in Dart's known-name or canonicalization surface; all remain unchanged as their own names and each
+  returns structured `unknown_helper` at `callable_codeblock_invocation` under `dart_runtime`. Canonical
+  `capture_slice()` succeeds on the same primary path. The temporary probe was deleted immediately after capture.
+  Therefore alias parity `.0.1` must map those spellings to existing canonical routes before `.0.2` can freeze a
+  truthful 92+7 typed RED. This is compatibility parity, not a reason for different Dart typed-value semantics.
+
+  Focused authority/carrier proof passes 87 tests; the complete Dart gate passes format 95/0, fatal analysis, 375
+  package tests, 19 storage owners/47 locked packages, CLI 66x2, and corpus 105/105. The neutral checker remains
+  5/9/39. Production, schema/identity, semantic/MCP/capability, DSL/facade, and book source are unchanged; the book
+  already says only Perl/Rust execute all seven aliases and other backend rollout remains pending.
+
+  Definitive canonical CI preserves capability 80/0/0 and typed-source 5/9/39, executes the admitted Rust target
+  4/4, and passes every composed semantic/MCP consumer, repository containment, moved/outside-CWD execution, CLI
+  66/66 twice, RAM 39%, and Phase 0 1,031/1,031 in 666 seconds. This confirms the split is purely behavior-free;
+  `.0.1` may add the seven Dart mappings only after this leaf lands cleanly.
+
 - 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.2.3` — Rust typed-source admission): admission was a test/gate state
   transition, not a second helper implementation. The production authority, projection catalogs, and Engine
   routes were already complete under `.1-.2`. Two crate-level custom cfgs were the only reason Cargo discovered a

@@ -18607,13 +18607,124 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   clearing, and clean proof precede Dart authority/RED `.14.2.3.0`; no push.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.3`
-  Status: `pending` parent
+  Status: `active` parent (2026-08-07; Dart authority/split audit `.0` signoff-complete and commit-pending from
+    clean Rust admission commit `666751ae`; alias parity `.0.1` is next after clean landing)
   Goal: Implement and independently admit the same neutral typed source-location algebra in Dart.
-  Children: `.14.2.3.0` authority/RED audit; `.14.2.3.1` immutable value/conversion core; `.14.2.3.2` helper/
-    unchanged loaded-generated-plan interpreter routes; `.14.2.3.3` exact admission/promotion.
+  Children: `.14.2.3.0` authority/split audit; `.14.2.3.0.1` seven-alias Dart parity; `.14.2.3.0.2` exact
+    typed-source RED; `.14.2.3.1` immutable value/conversion core; `.14.2.3.2` helper/unchanged loaded-generated-
+    plan interpreter routes; `.14.2.3.3` exact admission/promotion.
   Acceptance: Use `source_location.dart`, `matching.dart`, `interpreter.dart`, and
     `typed_source_location_contract_test.dart`; retain code-unit registers, convert at the typed boundary, prove
     native/serialized/generated execution without schema change, bind the consumer, and promote only `dart_runtime`.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.3.0`
+  Status: `signoff-complete` / commit pending (2026-08-07; task-tree-first from clean `666751ae`, intended
+    151/300, no push)
+  Goal: Map Dart's exact source text, code-unit cursor/mark/match registers, source-boundary helpers, loaded/
+    reconstructed/generated-plan carriers, and diagnostic seams; stop before freezing the RED because the
+    supposedly unchanged seven-alias baseline is false, and split exact prerequisite owners without changing
+    production behavior or the 5/9/39 neutral rollout.
+  Depends on: `.14.2.2.3`, `.14.2.0`
+  Acceptance: Retrieve the typed-source runtime-rollout Knowledge card, ADR `0056` section 9, neutral artifact/
+    checker, admitted Perl/Rust consumer precedents, Dart runtime/generated/diagnostic Knowledge owners, Toolbox,
+    exact Dart source and existing tests, complete Dart driver, canonical registration, and sole-facing book before
+    implementation. Prove the decoded-input owner, code-unit/scalar/line/column/UTF-8 conversion seams, all 92
+    canonical helper and seven alias routes, cursor/mark/match/anonymous-boundary state, native plus loaded/
+    reconstructed/generated convergence, structured-error boundary, package-test discovery, and current behavior
+    through executable probes. The measured baseline is false: add no RED or production code; record the exact
+    seven `unknown_helper` results and split `.0.1` Dart alias parity before `.0.2` typed RED. Preserve production
+    code, public results, schema/identity, DSL/facade, semantic/MCP/capability state, neutral 5/9/39, root README,
+    and sole-facing book behavior. Pass focused unchanged canonical-helper/complete Dart/storage/governance/
+    canonical signoff, synchronize durable/live records, commit, clear the brief, and prove clean before `.0.1`.
+  Verification: exact 92-known/7-unknown executable baseline; focused authority/carrier 87; complete Dart format
+    95/0 + fatal analysis + package 375 + storage 19/47 + CLI 66x2 + corpus 105/105; neutral 5/9/39; Knowledge
+    Map 786/6,417; unchanged repository-local mdBook build; all seven doctrines; definitive canonical capability
+    80/0/0, typed 5/9/39 plus Rust 4/4, composed consumers, containment/relocation, CLI 66x2, RAM 39%, and Phase 0
+    1,031/1,031 in 666 seconds pass; commit, brief-clear, and clean-handoff proof pending
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.3.0 - split Dart typed source prerequisites`
+
+  ### `FUTURE-PARITY-BACKLOG.14.2.3.0` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove Rust admission `.14.2.2.3` landed at `666751ae` as 150/300
+    with empty status/diffs, zero-byte ignored brief, activation parent `3e28fc87`, valid memory pointer, and no
+    background verification; make this task-tree file the sole activation diff before Dart tests or records.
+  - [x] **RETRIEVE / INVENTORY** — Use Knowledge Map, ADR, neutral contract/checker, Perl/Rust precedents, Toolbox,
+    Dart source/tests/drivers, canonical registration, and book to map every authority, route, diagnostic, and claim.
+  - [x] **EXECUTABLE BASELINE / ROOT CAUSE** — Probe all 92+7 spellings and relevant state/carrier behavior; prove
+    exact code-unit and Unicode conversion facts, test discovery, missing typed seams, and any contradiction.
+  - [x] **FREEZE RED OR SPLIT** — If premises hold, add one test-local dormant core/projection RED with exact
+    failure and ordinary-green discovery; otherwise freeze prerequisite correction leaves without behavior code.
+  - [x] **NO REGRESSION** — Keep production/public/schema/identity/DSL/semantic/MCP/capability/book/neutral state
+    unchanged and pass focused, complete Dart, storage, doctrine, and definitive canonical gates.
+  - [x] **LOCKSTEP / COMMIT / CLEAN** — Synchronize task/index/roadmaps/architecture/change/development/live/memory/
+    Knowledge without overstating support; commit as 151/300, clear the brief, and prove clean before `.14.2.3.0.1`.
+
+  Activation evidence 2026-08-07: Rust admission `.14.2.2.3` landed at `666751ae` as intended 150/300 with no push.
+  Its commit hook regenerated Knowledge Map at 786 facts/6,411 question keys, passed all seven doctrines, and proved
+  activation `3e28fc87` as both pre-commit HEAD and post-commit `HEAD^1`. Post-commit status and staged/unstaged
+  diffs are empty; the ignored brief is zero bytes; memory architecture passes; and the process census finds no
+  canonical, Phase-0, typed-source, Rust, or mdBook verification job. This task-tree file is the sole activation
+  diff before any Dart consumer, production, neutral contract/checker, book, Knowledge, roadmap, or runtime change.
+
+  Executable contradiction evidence 2026-08-07: one repository-local public-API probe read the neutral artifact,
+  compared `isKnownActionIrCallName` plus `canonicalActionHelperName`, then invoked every alias through an ordinary
+  compiled zero-regex rule. All 92 canonical names are known. All seven aliases — `capture_from_rule_start`,
+  `capture_len_from_rule_start`, `capture_rest_length`, `capture_slice_here`, `capture_slice_length`,
+  `entry_named_map`, and `match_named_map` — are unknown, canonicalize only to themselves, and fail at runtime with
+  structured code `unknown_helper`, stage `callable_codeblock_invocation`, owner `dart_runtime`, and exact authored
+  name. Canonical `capture_slice()` succeeds on the same primary route. The temporary probe was removed and status
+  returned to the sole task-tree diff. Therefore `.0` adds no typed RED or production change: alias parity `.0.1`
+  must establish canonical-equivalent behavior first, and exact dormant typed RED `.0.2` follows only after its
+  clean commit.
+
+  Authority/carrier evidence 2026-08-07: `_RuntimeExecutionContext` owns one decoded immutable `input`; its live
+  cursor and cursor stack, `RuntimeMatchRegisters` entry/local matches and anonymous capture boundary, and rule-
+  local mark buckets all store UTF-16 code-unit offsets. Existing helper edges convert to Unicode-scalar positions
+  and lengths through the matching utilities and to one-based scalar line/column; `input_slice` converts authored
+  scalar offsets back to code-unit boundaries before slicing. A separate private semantic-index source map already
+  proves strict scalar/code-unit/UTF-8 boundaries, but it owns semantic-source identity and is not the runtime typed-
+  source authority. The future exact runtime seam is absent `dart/lib/src/runtime/source_location.dart`; the exact
+  consumer seam `dart/test/typed_source_location_contract_test.dart` is absent too. Loaded source creates the same
+  engine from compiled state; normalized JSON reconstructs the typed AST before compilation; generated v2 direct/
+  traced execution validates its minimal family plan then calls `executeGeneratedWithPlan`; emitted packages call
+  those same APIs. No descriptor, generated format, or second interpreter is needed.
+
+  Focused/complete evidence 2026-08-07: the exact action-contract, matching, interpreter, complete-named-mark,
+  source-emitter, and spec-loader selection passes 87 tests, including generated state and isolated emitted-package
+  execution. The neutral checker remains exact 3/7/6/3 + 92+7+2 + 31 at rollout 5/9/39. Complete Dart passes format
+  95/0, fatal analysis, 375 package tests, the 19-owner/47-locked-package storage oracle, CLI 66/66 under both option
+  environments, and all 105 corpus fixtures. Knowledge Map regenerates at 786 facts/6,417 question keys, and the
+  repository-routed mdBook build passes without a source edit. The existing sole-facing reference is already exact:
+  it assigns all seven aliases only to Perl/Rust and says other backend rollout remains separately tracked.
+
+  Signoff evidence 2026-08-07: all seven doctrines pass and definitive canonical CI preserves capability 80/0/0,
+  typed-source rollout 5/9/39, and the admitted Rust consumer at 4/4. Every composed semantic/MCP consumer,
+  six-family repository containment, relocated and outside-CWD execution across all five primary anchors, and CLI
+  66/66 in both option environments pass; RAM is 39% against the 88% threshold. Phase 0 passes 1,031/1,031 in
+  666 seconds before `[ci] local CI gate passed`. No Dart production/test/book source, runtime result, neutral
+  artifact, schema/identity, semantic/MCP/capability state, DSL, root README, or generated format changed. The
+  atomic commit, ignored-brief clearing, and clean proof precede alias parity `.14.2.3.0.1`; no push.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.3.0.1`
+  Status: `pending`
+  Goal: Route Dart's seven neutral source-boundary compatibility aliases through the existing canonical helper
+    names and runtime paths without adding a second semantic implementation.
+  Depends on: `.14.2.3.0`, `.14.2.2.0.1`
+  Acceptance: Add the exact seven alias-to-canonical mappings to Dart's typed ActionIR resolver/known-name surface;
+    prove arity, structured diagnostics, Unicode values, anonymous-boundary mutation, reversed-span absence,
+    named-capture maps, native/reconstructed/generated-plan/emitted execution, helper-catalog governance, and
+    canonical equality. Preserve the 92 canonical routes, code-unit registers, schemas/identities, neutral 5/9/39,
+    typed-source admission state, and sole-facing preferred-spelling guidance.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.3.0.2`
+  Status: `pending`
+  Goal: Freeze one test-local dormant Dart typed source-location consumer after all 92 canonical helpers and seven
+    aliases are an exact unchanged baseline.
+  Depends on: `.14.2.3.0.1`
+  Acceptance: Require the future immutable authority/value API, exact 3/7/6/3 fixtures, four private diagnostics,
+    detached 92+7 catalogs, code-unit-to-scalar conversion, mark/capture/cursor behavior, and native/reconstructed/
+    generated-plan carriers. Ordinary Dart discovery stays green; the explicit RED route fails only for the absent
+    source-location core/projection seams. Add no production, neutral, rollout, schema, or public-book behavior.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.4`
   Status: `pending` parent

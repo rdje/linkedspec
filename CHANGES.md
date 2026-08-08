@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.3.0 — split Dart typed source prerequisites
+
+- Audited Dart's decoded-input, UTF-16 code-unit cursor/match/capture/mark/stack, Unicode projection, structured-
+  diagnostic, loaded/reconstructed, generated-plan, and emitted execution authorities without production changes.
+- Proved through a temporary repository-local public-API/runtime probe that all 92 canonical source-boundary names
+  are known, while all seven neutral aliases remain unknown, do not canonicalize, and return exact structured
+  `unknown_helper` failures at `callable_codeblock_invocation`. The probe was removed after evidence capture.
+- Split seven-alias parity `.14.2.3.0.1` ahead of exact dormant typed RED `.14.2.3.0.2`; no typed consumer was
+  frozen against a false baseline and neutral rollout remains 5/9/39.
+- Kept the sole-facing book unchanged because it already states that only Perl and Rust execute all seven aliases
+  and that Dart typed-source implementation/admission remains future.
+- Passed the 87-test focused authority/carrier suite, complete Dart format 95/0, fatal analysis, 375 package tests,
+  19-owner/47-package storage proof, CLI 66x2, corpus 105/105, and the neutral 5/9/39 checker.
+- Passed all seven doctrines and definitive canonical CI, including capability 80/0/0, the Rust typed consumer
+  4/4, composed semantic/MCP consumers, containment/relocation, CLI 66x2, RAM 39%, and Phase 0 1,031/1,031 in
+  666 seconds before the exact local-CI pass marker.
+
 ## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.2.3 — admit Rust typed source runtime
 
 - Removed only the Rust typed-source consumer's two test-local custom-cfg guards. Ordinary Cargo now runs all four

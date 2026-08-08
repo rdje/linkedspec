@@ -39,6 +39,12 @@ answers:
   - "does Rust typed source projection run on reconstructed and generated plans"
   - "is the Rust typed source location runtime canonically admitted"
   - "what canonical command runs the Rust typed source location consumer"
+  - "are all 92 Dart source boundary helpers implemented"
+  - "does Dart execute the seven typed source compatibility aliases"
+  - "what error do Dart source boundary compatibility aliases return"
+  - "why must Dart alias parity precede the typed source RED"
+  - "where does Dart store source cursor mark and match offsets"
+  - "do Dart generated and emitted parsers use the same helper interpreter"
 date: 2026-08-01
 status: Perl and Rust runtimes admitted; Dart, Julia, PUC Lua, and LuaJIT pending
 tags: [architecture, source-location, spans, cursor, helpers, perl, rust, dart, julia, lua, rollout]
@@ -55,6 +61,8 @@ evidence_update_2026_08_07_rust_red: "Rust RED .14.2.2.0.3 adds tests/typed_sour
 evidence_update_2026_08_07_rust_core: "Rust core .14.2.2.1 adds linkedspec-runtime/src/source_location.rs. One non-cloneable authority owns copied decoded sources and scalar-boundary line/column/UTF-8-byte tables behind a monotonic opaque id. Private Position, Span, and DerivedText fields carry only identity, scalar offsets, provenance, and policy; detached JSON projections carry no text or host reference. The authority alone validates, derives coordinates, and materializes direct or concatenate-in-order text. Base cfg passes 2/2 over exact 3/7/6/3 fixtures and four errors; ordinary discovery stays zero-test; nested projection cfg has one E0432 naming only absent typed_source_compatibility_aliases and typed_source_projection_rows. No helper route or Rust runtime admission moves, so rollout remains 4/10/38 and the sole-facing book remains exact that Rust admission is pending. Complete Rust/corpus/generated/storage/CLI 66x2 proof passes. Definitive canonical CI passes all seven doctrines, process containment and relocated execution, CLI 66x2, RAM 53%, and Phase 0 1,031/1,031 in 653 seconds."
 evidence_update_2026_08_07_rust_projections: "Rust projection .14.2.2.2 initializes one immutable input authority in RuntimeContext and shares it across context clones. Existing UTF-8-byte cursor, entry/match, mark, anonymous-boundary, and cursor-stack registers remain unchanged. Exact boundary methods convert bytes to scalar Position/Span values, validate and materialize text/coordinates/lengths, and preserve compatibility mutations; capture-group and existence/delete adapters retain the same detached pass-through shapes as Perl. Fresh catalogs expose all 92 rows in 47/30/11/4 families plus seven aliases. Nested cfg passes 4/4 across native, reconstructed, and generated-plan Unicode mark/capture/cursor behavior; core-only remains 2/2, ordinary discovery zero tests, dedicated alias carrier 1/1, and the complete Rust/corpus/generated/storage/CLI 66x2 gate passes. Definitive canonical CI passes all seven doctrines, process containment, relocated five-anchor execution, CLI 66x2, RAM 51%, and Phase 0 1,031/1,031 in 654 seconds. Registration and rust_runtime rollout promotion remain exclusively .14.2.2.3, so current truth stays 4/10/38."
 evidence_update_2026_08_07_rust_admission: "Rust admission .14.2.2.3 removes only the two test-local custom-cfg guards, requires the committed consumer, and executes its exact ordinary Cargo target in canonical CI. All four tests cover immutable values plus the 92 canonical helpers and seven aliases across native, reconstructed, and generated-plan carriers. The neutral artifact/checker promotes only rust_runtime, advances truth to 5 complete / 9 pending, and rejects 39 mutations including an independent Rust complete-to-pending regression. Production helper behavior, UTF-8-byte registers, results, schemas, semantic/MCP surfaces, and public DSL remain unchanged."
+evidence_update_2026_08_07_dart_prerequisites: "Dart authority audit .14.2.3.0 proves all 92 canonical source-boundary names are known, but all seven neutral aliases are absent from isKnownActionIrCallName and canonicalActionHelperName. Ordinary compiled invocation of each alias fails with structured unknown_helper at callable_codeblock_invocation under dart_runtime, while canonical capture_slice succeeds. Dart retains decoded input plus cursor/match/capture/mark/stack state as UTF-16 code-unit offsets and projects scalar positions, lengths, and one-based line/column at helper boundaries. Loaded, reconstructed, generated-plan, and emitted adapters converge on LinkedSpecRuntimeEngine. Alias parity .0.1 must precede dormant typed RED .0.2; the audit changes no production, neutral rollout, or book behavior."
+evidence_update_2026_08_07_dart_prerequisites_signoff: "The behavior-free Dart audit passes focused 87, complete Dart format 95/0, fatal analysis, package 375, storage 19/47, CLI 66x2, corpus 105/105, Knowledge Map 786/6417, unchanged mdBook build, all seven doctrines, and definitive canonical capability 80/0/0, typed 5/9/39 plus Rust 4/4, containment/relocation, CLI 66x2, RAM 39%, and Phase 0 1031/1031 in 666 seconds."
 reverify: "source tools/project_data_env.sh && cargo test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract && perl -Iperl -c perl/LinkedSpec/SourceLocation.pm && perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm && prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t t/complete_named_mark_contract.t t/rule_local_cursor_perl_execution.t t/generated_source_contract.t && bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py"
 ---
 
@@ -115,6 +123,15 @@ aliases through typed boundary methods. Existing UTF-8-byte registers and public
 reconstructed, generated-plan, and emitted paths use the same engine. Admission `.14.2.2.3` removes the test-local
 dormancy, requires the exact ordinary consumer in canonical CI, and promotes only `rust_runtime`; rollout is now
 5 complete / 9 pending / 39 mutations.
+
+Dart's current production baseline has all 92 canonical helpers but not the seven compatibility aliases. Its public
+ActionIR known-name/canonicalization seam leaves every alias unchanged and unknown; ordinary runtime invocation
+returns structured `unknown_helper` at `callable_codeblock_invocation`. This is a prerequisite parity gap, not a
+typed-value difference. Dart continues to store the decoded input and all cursor, match, anonymous-boundary, mark,
+and cursor-stack positions as UTF-16 code-unit offsets, converting to Unicode-scalar positions/lengths and one-based
+line/column at helper boundaries. Loaded, reconstructed, generated-plan, and emitted paths all instantiate the same
+`LinkedSpecRuntimeEngine`. Therefore `.14.2.3.0.1` adds canonical-equivalent alias routing before `.14.2.3.0.2`
+freezes the dormant 92+7 typed RED; neither audit nor split changes rollout 5/9/39 or the sole-facing book.
 
 ## Links
 

@@ -1,5 +1,25 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-07 — Dart typed-source prerequisites are split on executable evidence
+
+`FUTURE-PARITY-BACKLOG.14.2.3.0` activates task-tree-first from clean Rust admission `666751ae` as intended
+151/300 with no push. Dart already exposes all 92 canonical source-boundary names and one shared interpreter across
+native, loaded/reconstructed, generated-plan, and emitted routes. Its decoded input and cursor/match/capture/mark/
+stack state remain UTF-16 code-unit based; helper boundaries project Unicode-scalar positions/lengths and one-based
+line/column.
+
+The assumed seven-alias baseline is false. A removed-after-use public-API/runtime probe proves every neutral alias
+is unknown, remains uncanonicalized, and fails with structured `unknown_helper` at
+`callable_codeblock_invocation`; canonical `capture_slice()` succeeds. This behavior-free audit therefore splits
+exact Dart alias parity `.14.2.3.0.1` before dormant typed RED `.14.2.3.0.2`. Neutral typed-source truth remains
+5 complete / 9 pending / 39 mutations.
+
+Focused authority/carrier proof passes 87 tests. The complete Dart gate passes format 95/0, fatal analysis, 375
+package tests, 19 storage owners/47 locked packages, CLI 66/66 under both environments, and corpus 105/105. The
+sole-facing book remains unchanged and exact: Perl/Rust own all seven aliases; Dart typed-source work is future.
+All seven doctrines and definitive canonical CI pass, including capability 80/0/0, typed 5/9/39, Rust 4/4,
+composed consumers, containment/relocation, CLI 66x2, RAM 39%, and Phase 0 1,031/1,031 in 666 seconds.
+
 ## 2026-08-07 — Rust typed source-location runtime is admitted
 
 `FUTURE-PARITY-BACKLOG.14.2.2.3` activates task-tree-first from clean `3e28fc87` as intended 150/300 with no push.
