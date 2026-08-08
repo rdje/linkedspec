@@ -21,10 +21,10 @@
 >
 > **Accepted source-location/cursor architecture:** ADR `0056` requires one backend-neutral immutable model
 > for caller-authorized source identity, Unicode-scalar positions, same-source half-open spans, and ordered derived
-> provenance. Perl's existing source-boundary helpers project that model and are admitted. Rust now implements the
+> provenance. Perl's existing source-boundary helpers project that model and are admitted. Rust now admits the
 > same internal projections across native, reconstructed, and generated-plan execution while retaining byte
-> registers, but its consumer remains dormant and its runtime row remains pending until `.14.2.2.3`. The remaining
-> backends will implement and admit the boundary in their own runtime leaves.
+> registers; its ordinary four-test consumer is required by canonical CI. The remaining backends will implement
+> and admit the boundary in their own runtime leaves.
 >
 > Any cursor transaction is one explicit
 > recognition attempt over invocation-local cursor/boundary/marks only; it adds no search tree and cannot undo
@@ -33,9 +33,9 @@
 > lifecycle ownership. The neutral contract and Perl's internal value/projection runtime are now admitted; Perl's
 > existing helpers retain their public results and scalar mark/cursor behavior.
 >
-> Rust admission; Dart, Julia, PUC Lua, and LuaJIT implementation/admission; and public authored values,
+> Dart, Julia, PUC Lua, and LuaJIT implementation/admission; and public authored values,
 > transactions, observation, and dispatch remain owned by
-> `FUTURE-PARITY-BACKLOG.14.2.2-.14.8`.
+> `FUTURE-PARITY-BACKLOG.14.2.3-.14.8`.
 >
 > **Repeated-action handoff:** Every backend must consume
 > `linkedspec-explicit-repetition-action-result-v1`: bare `OR` is minimum-one repetition, explicit action returns

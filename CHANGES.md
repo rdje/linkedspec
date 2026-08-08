@@ -1,5 +1,21 @@
 # CHANGES
 
+## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.2.3 — admit Rust typed source runtime
+
+- Removed only the Rust typed-source consumer's two test-local custom-cfg guards. Ordinary Cargo now runs all four
+  immutable-value and projection tests without flags.
+- Required that tracked consumer in canonical CI and added one exact unconditional Cargo target invocation.
+- Promoted only `rust_runtime` in the neutral artifact/checker, advancing live truth from 4/10/38 to 5/9/39. The
+  39th mutation independently rejects a Rust completed-to-pending regression.
+- Updated the sole-facing capture/source-location, project-status, local-CI, and backend-handoff pages to state
+  that Perl and Rust internal values/projections are admitted while public authored values, transactions, and the
+  Dart/Julia/PUC-Lua/LuaJIT runtime admissions remain future work.
+- Preserved production runtime/helper code, UTF-8-byte registers, external results, schemas and identities,
+  semantic/MCP and capability state, DSL/facade spellings, root README, and unrelated rendered-readability work.
+- Passed the complete Rust gate, repository-local mdBook plus generated-HTML paragraph inspection, all seven
+  doctrines, canonical containment/relocation, CLI 66/66 in both environments, RAM 36%, and Phase 0 1,031/1,031
+  in 669 seconds before the exact local-CI pass marker.
+
 ## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.2.2 — route Rust typed source projections
 
 - Added fresh exact Rust catalogs for all 92 canonical source-boundary projections in four families and all seven

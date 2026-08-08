@@ -21,6 +21,9 @@ PERL_LEGACY_SCANNER_PATH = (
 CI_PATH = ROOT / "tools" / "run_ci_local.sh"
 PERL_VALUE_CONSUMER_PATH = ROOT / "t" / "typed_source_location_values.t"
 PERL_PROJECTION_CONSUMER_PATH = ROOT / "t" / "typed_source_location_perl_contract.t"
+RUST_CONSUMER_PATH = (
+    ROOT / "rust" / "linkedspec-runtime" / "tests" / "typed_source_location_contract.rs"
+)
 
 EXPECTED_COUNTS = {
     "sources": 3,
@@ -36,7 +39,7 @@ EXPECTED_COUNTS = {
     "internal_contract_ids": 2,
     "diagnostics": 31,
     "rollout_legs": 14,
-    "mutations": 38,
+    "mutations": 39,
 }
 
 POLICY = {
@@ -373,7 +376,7 @@ ROLLOUT = [
     ("public_structure", "complete", "FUTURE-PARITY-BACKLOG.14.1.2", []),
     ("neutral_public_recomposition", "complete", "FUTURE-PARITY-BACKLOG.14.1.3", []),
     ("perl_runtime", "complete", "FUTURE-PARITY-BACKLOG.14.2.1.3", ["perl"]),
-    ("rust_runtime", "pending", "FUTURE-PARITY-BACKLOG.14.2.2.3", ["rust"]),
+    ("rust_runtime", "complete", "FUTURE-PARITY-BACKLOG.14.2.2.3", ["rust"]),
     ("dart_runtime", "pending", "FUTURE-PARITY-BACKLOG.14.2.3.3", ["dart"]),
     ("julia_runtime", "pending", "FUTURE-PARITY-BACKLOG.14.2.4.3", ["julia"]),
     ("lua_dual_abi", "pending", "FUTURE-PARITY-BACKLOG.14.2.5.3", ["puc_lua", "luajit"]),
@@ -1151,6 +1154,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             CI_PATH,
             PERL_VALUE_CONSUMER_PATH,
             PERL_PROJECTION_CONSUMER_PATH,
+            RUST_CONSUMER_PATH,
         ):
             if not path.is_file():
                 fail(f"canonical contract/checker/runner input is missing: {path.relative_to(ROOT)}")
@@ -1164,12 +1168,21 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             "perl -c -Iperl t/typed_source_location_values.t",
             "perl -c -Iperl t/typed_source_location_perl_contract.t",
             "PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t",
+            "require_tracked_file rust/linkedspec-runtime/tests/typed_source_location_contract.rs",
+            "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract",
         ]
         for marker in required_markers:
             if ci_text.count(marker) != 1:
                 fail(f"canonical registration marker must appear exactly once: {marker}")
         if CI_PATH.name != Path(CANONICAL_EXECUTION["canonical_driver"]).name:
             fail("canonical driver identity drifted")
+        rust_consumer_text = RUST_CONSUMER_PATH.read_text(encoding="utf-8")
+        for dormant_marker in (
+            "linkedspec_typed_source_red",
+            "linkedspec_typed_source_projection_red",
+        ):
+            if dormant_marker in rust_consumer_text:
+                fail(f"Rust consumer remains dormant behind {dormant_marker}")
 
 
 def expect_mutation_failure(
@@ -1243,6 +1256,10 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         (
             "Perl runtime admission regressed to pending",
             lambda c: c["rollout"][3].__setitem__("status", "pending"),
+        ),
+        (
+            "Rust runtime admission regressed to pending",
+            lambda c: c["rollout"][4].__setitem__("status", "pending"),
         ),
     ]
     if len(mutations) + len(rollout_regressions) != EXPECTED_COUNTS["mutations"]:

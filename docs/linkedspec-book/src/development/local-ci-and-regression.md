@@ -31,7 +31,7 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 
 The check is unconditional. It independently derives Unicode-scalar, line/column, and UTF-8 coordinates;
 materializes direct and derived spans; executes invocation and bounded-transaction state transitions; validates
-recursive and zero/one/two-regex structural cases; and rejects all 38 registered mutations.
+recursive and zero/one/two-regex structural cases; and rejects all 39 registered mutations.
 
 The gate then unconditionally runs the admitted Perl value and projection consumers:
 
@@ -39,15 +39,17 @@ The gate then unconditionally runs the admitted Perl value and projection consum
 PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t
 ```
 
-Its current rollout result is 4 complete / 10 pending with 38 registered mutations. Passing this gate proves the
-neutral contract, both completed public-structure rows, and the internal Perl runtime across exact value, helper,
-live, and independently emitted/loaded generated routes. It does not claim public authored `Position`/`Span`
-values, transaction syntax or behavior, or admission of another backend.
+The gate also requires and ordinarily executes Rust's exact value and projection consumer:
 
-Rust's immutable value core and all 92 helper projections plus 7 aliases are implemented and pass a dormant
-custom-cfg consumer across native, reconstructed, and generated-plan execution. The default gate does not yet run
-that consumer unconditionally and the neutral `rust_runtime` row remains pending. Exact registration and promotion
-belong to `FUTURE-PARITY-BACKLOG.14.2.2.3`; until then, a normal canonical pass is not Rust admission evidence.
+```bash
+cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract
+```
+
+Its current rollout result is 5 complete / 9 pending with 39 registered mutations. Passing this gate proves the
+neutral contract, both completed public-structure rows, and the internal Perl and Rust runtimes across their exact
+value/helper carriers. Rust retains UTF-8-byte registers while converting at the immutable typed boundary. This
+does not claim public authored `Position`/`Span` values, transaction syntax or behavior, or admission of Dart,
+Julia, PUC Lua, or LuaJIT.
 
 The gate unconditionally verifies the neutral MCP transport before checking all five derived bindings. It requires
 every contract artifact and runs the generators in this exact order before the admitted implementation proofs:

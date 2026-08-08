@@ -8,7 +8,7 @@ For the method-by-method public reference, read [Source Boundary Helper Referenc
 
 ## Accepted model: one typed source-location algebra
 
-ADR `0056` adopts one conceptual core beneath these helper families. The Perl reference now admits that core as an
+ADR `0056` adopts one conceptual core beneath these helper families. Perl and Rust now admit that core as an
 internal runtime value/projection layer. It is not a new public value type or new `.spec` syntax:
 
 - a source identity names caller-authorized decoded input, not a path;
@@ -24,10 +24,10 @@ The current families below remain useful. On Perl, `cursor_*`, `entry_*`, `match
 `input_*` project positions, spans, text, or measurements from the same internal core instead of defining unrelated
 coordinate systems. Their authored results and mutation behavior have not changed.
 
-Rust now implements the same internal projection boundary while retaining its UTF-8-byte runtime registers. Its
-dormant all-carrier consumer passes, but canonical admission remains pending; therefore the portable rollout does
-not yet claim Rust support. Dart, Julia, PUC Lua, and LuaJIT will adopt and admit the boundary in their separate
-runtime leaves.
+Rust retains its UTF-8-byte runtime registers and converts only at the internal typed boundary. Its ordinary and
+canonical four-test consumer proves the same immutable values and all 92+7 projections across native,
+reconstructed, and generated-plan execution. Dart, Julia, PUC Lua, and LuaJIT will adopt and admit the boundary in
+their separate runtime leaves.
 
 ### Bounded cursor transactions do not mean general backtracking
 
@@ -70,20 +70,23 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 ```
 
 The checker covers 3 decoded sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation
-and 8 transaction transitions, 6 recursive observations, 4 structural cases, 31 diagnostics, and 38 mutations.
+and 8 transaction transitions, 6 recursive observations, 4 structural cases, 31 diagnostics, and 39 mutations.
 It also proves that all 92 current source-boundary helpers project onto the algebra.
 
-This is rollout status, not authored-value status. Four of 14 rollout legs are complete: the neutral contract,
-public linked-rule structure, unchanged neutral/public recomposition, and Perl runtime admission. The other 10
-remain pending.
+This is rollout status, not authored-value status. Five of 14 rollout legs are complete: the neutral contract,
+public linked-rule structure, unchanged neutral/public recomposition, and the Perl and Rust runtime admissions.
+The other 9 remain pending.
 
 Perl now uses an internal decoded-source authority plus immutable position/span values beneath every governed
 helper projection. Exact Unicode execution is admitted on live and independently emitted/loaded generated routes.
 Helpers still return their documented text, numbers, collections, booleans, absence values, and statement results;
 mark and cursor storage remains scalar-compatible.
 
+Rust admits the same internal algebra beneath its governed helpers. Existing strings, numbers, collections,
+absence values, statement results, and UTF-8-byte mark/cursor registers remain unchanged.
+
 There is still no public `Position` or `Span` authored value, checkpoint syntax, transaction behavior, recursive
-observation API, or non-Perl runtime admission. Those remain owned by later leaves.
+observation API, or Dart/Julia/PUC-Lua/LuaJIT runtime admission. Those remain owned by later leaves.
 
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions,
 typed spans, or cursor transactions are available as authored values.

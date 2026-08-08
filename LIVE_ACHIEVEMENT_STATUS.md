@@ -1,5 +1,26 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-07 — Rust typed source-location runtime is admitted
+
+`FUTURE-PARITY-BACKLOG.14.2.2.3` activates task-tree-first from clean `3e28fc87` as intended 150/300 with no push.
+The exact Rust typed-source consumer no longer has test-local custom-cfg dormancy: ordinary Cargo runs all four
+immutable-value and 92+7 projection tests across native, reconstructed, and generated-plan carriers.
+
+Canonical CI now requires the tracked consumer and executes its exact target unconditionally. The neutral
+artifact/checker promotes only `rust_runtime`, reports 5 complete / 9 pending, and rejects 39 mutations including
+an independent Rust completed-to-pending regression. Production Rust code, UTF-8-byte registers, public helper
+results, schema and identity surfaces, semantic/MCP state, and authored DSL remain unchanged.
+
+The sole-facing book now presents Perl and Rust as admitted internal typed-source runtimes while keeping public
+`Position`/`Span` values, transactions, recursive observation, span-native dispatch, and Dart/Julia/PUC-Lua/LuaJIT
+runtime admissions explicitly future.
+
+Focused admission passes 4/4; the complete Rust gate passes 195 core, 166 runtime unit, 197 integration, 105
+corpus specs, generated-source classification, 17 storage owners, and CLI 66x2. The repository-local mdBook and
+generated HTML retain distinct paragraph/code-block boundaries. All seven doctrines and definitive canonical CI
+pass, including capability 80/0/0, repository containment/relocation, CLI 66x2, RAM 36%, and Phase 0 1,031/1,031
+in 669 seconds before the exact local-CI pass marker. Only the atomic commit and clean-handoff proof remain.
+
 ## 2026-08-07 — Rust typed source-location projections are implemented, admission pending
 
 `FUTURE-PARITY-BACKLOG.14.2.2.2` activates task-tree-first from clean `2d9401e2` as intended 149/300 with no push.

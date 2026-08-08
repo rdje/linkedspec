@@ -17,30 +17,29 @@ general style. This documentation-only slice changes no parser or runtime behavi
 The backend-neutral typed source-location contract is complete under `FUTURE-PARITY-BACKLOG.14.1.1`. Its
 independent checker passes 3 sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation
 and 8 transaction transitions, 6 recursive observations, 4 structural cases, 92 current helper projections,
-31 diagnostics, and 38 rejected mutations.
+31 diagnostics, and 39 rejected mutations.
 
-Four of 14 rollout legs are complete and 10 remain pending. The neutral contract, public linked-rule structure,
-unchanged neutral/public recomposition, and Perl runtime admission are complete. Perl's internal authority and all
-92 helper projections plus 7 aliases are admitted across live and independently emitted/loaded generated routes
-without changing their public results or scalar mark/cursor behavior.
+Five of 14 rollout legs are complete and 9 remain pending. The neutral contract, public linked-rule structure,
+unchanged neutral/public recomposition, and the Perl and Rust runtime admissions are complete. Both runtimes'
+internal authorities and all 92 helper projections plus 7 aliases are admitted without changing public results or
+their established scalar/byte mark and cursor behavior.
 
-Rust's corresponding immutable authority and all 92 helper projections plus 7 aliases are implemented internally.
-The same typed boundary preserves UTF-8-byte registers and existing results across native, reconstructed, and
-generated-plan execution. Its exact consumer remains deliberately dormant, however, so this is implementation
-progress rather than canonical Rust admission.
+Rust's exact four-test consumer now runs under ordinary Cargo discovery and as a required canonical-CI leg. It
+proves the immutable value core and projection boundary across native, reconstructed, and generated-plan execution;
+the neutral checker independently rejects any regression of the completed `rust_runtime` row.
 
 Public typed values, transaction spelling and behavior, recursive observation, span-native progressive/staged
-dispatch, canonical Rust admission, and the Dart, Julia, PUC Lua, and LuaJIT runtime implementations/admissions
-remain future work. Rust admission is owned by `FUTURE-PARITY-BACKLOG.14.2.2.3`; until that leaf registers the
-consumer and promotes `rust_runtime`, the rollout remains 4 complete / 10 pending.
+dispatch, and the Dart, Julia, PUC Lua, and LuaJIT runtime implementations/admissions remain future work. Internal
+Rust admission does not add an authored `Position` or `Span` value, transaction operation, schema version, or new
+helper result; rollout is 5 complete / 9 pending.
 
 The helper audit distinguishes 7 callable compatibility aliases from 2 internal Perl contract/scanner ids.
 `capture_take_slice` and `capture_take_slice_len` are internal ids, not accepted helper spellings; authored code
 continues to use `capture_take()` and `capture_take_len()`. Rust now executes all 7 callable aliases through the
 same canonical dispatch arms as their preferred helpers, including Unicode-scalar widths, reversed-span `undef`,
 anonymous-boundary mutation, reconstructed compiled specs, generated plans, and independently compiled emitted
-source. This closes the compatibility-spelling gap only; it does not claim the still-pending Rust typed
-source-location runtime admission, public value, transaction, recursive-observation, or span-native dispatch.
+source. This compatibility-spelling support is now included in Rust's internal typed source-location admission,
+but it does not claim a public value, transaction, recursive-observation, or span-native dispatch surface.
 
 Five-backend callable recurring/public admission is complete under `FUTURE-PARITY-BACKLOG.11.8.4`. One rooted
 driver composes neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; both Lua rows execute one focused file. The

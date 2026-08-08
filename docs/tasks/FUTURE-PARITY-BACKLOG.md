@@ -18072,7 +18072,8 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   changed. Commit, brief clearing, and exact clean proof precede task-tree-first Rust `.14.2.2.0`; no push.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.2`
-  Status: `active` parent (2026-08-07; Rust authority split `.0` active from clean Perl admission `82be51f0`)
+  Status: `signoff-complete` parent (2026-08-07; all audit, correction, parity, RED, core, projection, and exact
+    admission children verified; atomic commit pending)
   Goal: Implement and independently admit the same neutral typed source-location algebra in Rust.
   Children: `.14.2.2.0` authority/split audit; `.14.2.2.0.1` neutral alias-target correction;
     `.14.2.2.0.2` five-alias Rust parity; `.14.2.2.0.3` exact typed-source RED; `.14.2.2.1` immutable
@@ -18431,7 +18432,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   `.14.2.2.2` may therefore activate task-tree-first from this exact boundary; no push occurred.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.2.2`
-  Status: `signoff-complete` / `commit-pending` (2026-08-07; activated task-tree-first from clean
+  Status: `done; signoff-complete` (2026-08-07; activated task-tree-first from clean
     `2d9401e2`, intended 149/300, no push)
   Goal: Project the immutable Rust source authority/values through every exact source-boundary helper route while
     preserving all existing external JSON results, byte-register behavior, serialized/generated identities, and
@@ -18454,7 +18455,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
     zero-test; dedicated alias carrier 1/1; complete Rust/corpus/generated/storage/CLI 66x2 GREEN; sole-facing
     mdBook/HTML, neutral checker, Knowledge Map 786/6,409, and all seven doctrines GREEN; canonical CI GREEN with
     repository containment/relocation, CLI 66/66 twice, RAM 51%, and Phase 0 1,031/1,031 in 654 seconds; commit,
-    brief clearing, and clean handoff pending
+    brief clearing, and clean handoff complete
   Commit: `FUTURE-PARITY-BACKLOG.14.2.2.2 - route Rust typed source projections`
 
   ### `FUTURE-PARITY-BACKLOG.14.2.2.2` Acceptance Checklist
@@ -18512,6 +18513,98 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   654 seconds before `[ci] local CI gate passed`. The first managed-sandbox run reached the process proof but could
   not nest macOS `sandbox-exec`; the authorized rerun proves that exact stage and every later stage green. Only the
   durable commit, brief clearing, and clean proof remain.
+
+  Clean handoff evidence 2026-08-07: the leaf landed as intended 149/300 at `3e28fc87` with the exact subject.
+  The commit hook regenerated Knowledge Map at 786/6,409 and passed all seven doctrines; activation-pointer checks
+  prove `2d9401e2` as both pre-commit HEAD and post-commit `HEAD^1`. Post-commit status plus staged/unstaged diffs
+  are empty, `git_message_brief.txt` is zero bytes, the memory architecture check passes, and no background result
+  remains. Exact admission `.14.2.2.3` therefore activates task-tree-first from this clean boundary; no push.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.2.3`
+  Status: `signoff-complete` (2026-08-07; task-tree-first from clean `3e28fc87`, intended 150/300, no push;
+    atomic commit pending)
+  Goal: Admit the committed Rust typed source-location value/projection routes compositionally, promote only the
+    `rust_runtime` rollout leg, and publish exact sole-facing support truth without changing helper results or
+    introducing authored typed-value syntax.
+  Depends on: `.14.2.2.2`
+  Acceptance: Retrieve the runtime-rollout Knowledge card, ADR `0056` section 9, neutral artifact/checker, committed
+    Rust consumer, current canonical registration, complete Rust gate, and every sole-facing typed-source status
+    passage before implementation. Remove only the consumer's pre-admission custom-cfg dormancy so ordinary Cargo
+    discovery executes its exact immutable-value and 92+7 projection proof, and register that consumer as a
+    required unconditional canonical Rust admission leg. Promote only `rust_runtime` from pending to complete in
+    the neutral artifact and independent checker, add one exact completed-to-pending Rust regression, and advance
+    the locked rollout summary/mutation count from 4/10/38 to 5/9/39. Update the mdBook's capture/source-location
+    mental model, project status, and canonical-CI explanation so users can distinguish admitted internal Perl and
+    Rust values/projections from absent public `Position`/`Span` objects, transaction syntax/behavior, and the four
+    pending Dart/Julia/PUC-Lua/LuaJIT runtimes. Preserve production runtime/helper code, UTF-8-byte registers,
+    external results, descriptor/generated schemas and identities, semantic/MCP and capability state, DSL/facade
+    spellings, root README, and the independent nonurgent rendered-readability tree. Pass exact ordinary/focused
+    Rust admission, neutral mutation proof, complete Rust gate, book build/rendered paragraph checks, doctrines/
+    canonical CI, synchronize durable/live records, commit, clear the brief, and prove clean before task-tree-first
+    Dart authority/RED audit `.14.2.3.0`.
+  Verification: exact ordinary and canonical Rust consumer 4/4, neutral 5/9/39, complete Rust 195 core + 166
+    runtime unit + 197 integration + 105 corpus + generated-source + 17 storage owners + CLI 66x2, repository-
+    local mdBook and distinct generated-HTML paragraph boundaries, Knowledge Map 786/6,411, all seven doctrines,
+    capability 80/0/0, repository containment/relocation, canonical CLI 66x2, RAM 36%, and Phase 0 1,031/1,031 in
+    669 seconds pass before `[ci] local CI gate passed`; commit, brief-clear, and clean-handoff proof remain
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.2.3 - admit Rust typed source runtime`
+
+  ### `FUTURE-PARITY-BACKLOG.14.2.2.3` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove projection `.2` landed cleanly at `3e28fc87` as 149/300 with
+    empty status/diffs, zero-byte ignored brief, valid activation parent `2d9401e2`, and no background gate; make
+    this task-tree file the sole activation diff before consumer/contract/checker/CI/book changes.
+  - [x] **RETRIEVE / ROOT CAUSE** — Use the Knowledge Map, ADR, neutral contract/checker, committed Rust consumer,
+    Cargo discovery, complete Rust driver, canonical driver, and sole-facing book to prove registration and the
+    `rust_runtime` row are the only remaining admission gaps.
+  - [x] **REGISTER / PROMOTE EXACTLY ONCE** — Remove only test-local dormancy, execute the consumer ordinarily and
+    once in canonical CI, promote only Rust, and lock rollout 5/9 with an independent 39th mutation.
+  - [x] **ADDRESSED / USER TRUTH** — Prove immutable values and all 92+7 projections across native/reconstructed/
+    generated carriers under ordinary and canonical execution, and teach admitted internal Rust support clearly.
+  - [x] **NO REGRESSION** — Keep production source, byte registers, external behavior, schema/identity, capability,
+    semantic/MCP, DSL/facade, root README, other backends, and unrelated readability work unchanged; pass focused,
+    complete Rust, book, storage, doctrine, and definitive canonical gates.
+  - [x] **LOCKSTEP / COMMIT / CLEAN** — Synchronize artifact/checker/CI/book/task/index/roadmaps/architecture/change/
+    development/live/memory/Knowledge at 5/9/39; commit as 150/300, clear the brief, and prove clean before Dart.
+
+  Activation evidence 2026-08-07: projection `.14.2.2.2` landed at `3e28fc87` as intended 149/300 with no push.
+  Its commit hook regenerated Knowledge Map at 786 facts/6,409 questions, passed all seven doctrines, and proved
+  activation `2d9401e2` as both pre-commit HEAD and post-commit `HEAD^1`. Post-commit status and staged/unstaged
+  diffs are empty; the ignored brief is zero bytes; memory architecture passes; and no canonical, Phase 0, Rust,
+  typed-source, or mdBook process remains. This task-tree file is the sole activation diff before any consumer,
+  contract/checker, canonical driver, book, Knowledge, roadmap, root README, or runtime behavior change.
+
+  Retrieval/root-cause evidence 2026-08-07: the Knowledge Map card, ADR `0056` section 9, neutral artifact/checker,
+  complete Rust driver, canonical driver, exact Rust consumer, and all four sole-facing book passages agree on the
+  boundary. The production Rust authority and 92+7 helper projection routes are already committed and preserve
+  UTF-8-byte registers plus existing external results across native, reconstructed, and generated-plan carriers.
+  Only two test-local custom-cfg guards suppress the consumer's four tests during ordinary Cargo discovery; the
+  canonical driver requires and executes only the Perl consumers; and the neutral artifact/checker therefore keep
+  only `rust_runtime` pending at 4 complete / 10 pending / 38 mutations. Admission needs no distinct Rust helper
+  behavior and no production runtime change: remove those guards, bind the exact consumer once in canonical CI,
+  promote that single row, add its completed-to-pending regression, and publish 5/9/39 truth.
+
+  Checker-first RED/GREEN evidence 2026-08-07: the strengthened independent checker first expected 39 mutations,
+  a completed Rust row, tracked/command registration, absent dormancy markers, and one Rust completed-to-pending
+  regression. Against the unchanged artifact it exited 1 solely at `expected counts drifted`. GREEN changes only
+  the artifact's mutation count and `rust_runtime` status, removes the two test-local cfg guards, and adds the
+  consumer's exact required canonical command. The checker then passes exact 3/7/6/3 + 92+7+2 + 31 at 5/9/39,
+  while ordinary offline Cargo passes all four immutable-value/projection tests. The four sole-facing book pages
+  now distinguish admitted internal Perl/Rust support from absent public values/transactions and four pending
+  backend runtimes, with explicit paragraph boundaries retained.
+
+  Signoff evidence 2026-08-07: the complete Rust gate passes formatting, 195 core tests, 166 runtime unit tests,
+  197 main integration tests, the exact ordinary four-test admission target, all 105 corpus specs, full-manifest
+  generated-source classification, 17 storage owners, and CLI 66/66 in both option environments. A repository-
+  local mdBook build succeeds; deterministic inspection of the generated HTML proves separate paragraph and code
+  block elements around every changed passage, with no stitched prose blob. Knowledge Map is 786 facts/6,411
+  question keys, and all seven doctrines pass. Definitive canonical CI then passes neutral 5/9/39 and the exact
+  Rust 4/4 target, capability 80/0/0, every composed consumer, six-family repository containment, relocated and
+  outside-CWD execution across all five primary runtime anchors, CLI 66/66 under both environments, RAM 36%
+  against the 88% threshold, and Phase 0 1,031/1,031 in 669 seconds before `[ci] local CI gate passed`. No
+  production source, external result, byte register, schema/identity, semantic/MCP/capability surface, authored
+  DSL, root README, other backend, or unrelated readability implementation changed. The atomic commit, brief
+  clearing, and clean proof precede Dart authority/RED `.14.2.3.0`; no push.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.3`
   Status: `pending` parent

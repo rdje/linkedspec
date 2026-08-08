@@ -1,5 +1,25 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.2.3` — Rust typed-source admission): admission was a test/gate state
+  transition, not a second helper implementation. The production authority, projection catalogs, and Engine
+  routes were already complete under `.1-.2`. Two crate-level custom cfgs were the only reason Cargo discovered a
+  zero-test target; canonical CI required and executed only the admitted Perl consumers; and the neutral ledger
+  correctly kept `rust_runtime` pending.
+
+  The independent checker moved first and produced exact RED at `expected counts drifted`. GREEN removes only the
+  two test-local cfg guards, requires the tracked Rust consumer, executes its exact Cargo target unconditionally,
+  promotes only the Rust row, and adds one completed-to-pending regression. Focused proof is 4/4 and the checker is
+  3/7/6/3 + 92+7+2 at 5 complete / 9 pending / 39 mutations. Existing UTF-8-byte cursor/mark registers and all
+  strings, numbers, collections, absence values, statement results, schemas, identities, and public spellings are
+  unchanged.
+
+  Complete Rust signoff passes 195 core, 166 runtime unit, 197 main integration, exact ordinary admission 4/4,
+  corpus 105, generated-source classification, 17 storage owners, and CLI 66x2. The repository-local mdBook build
+  and generated-HTML structure prove separate paragraph/code-block elements around every changed passage.
+  Definitive canonical CI passes all seven doctrines, exact admission, capability 80/0/0, every composed
+  consumer, repository containment/relocation, CLI 66x2, RAM 36%, and Phase 0 1,031/1,031 in 669 seconds before
+  `[ci] local CI gate passed`.
+
 - 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.2.2` — Rust typed-source projections): the compatibility boundary is
   deliberately an adapter, not a register rewrite. `RuntimeContext` still owns UTF-8-byte cursor/match/mark state;
   a private authority snapshot owns decoded input and conversion tables. Every source operation converts a byte

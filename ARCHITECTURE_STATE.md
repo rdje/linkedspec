@@ -1,5 +1,16 @@
 # ARCHITECTURE STATE
 
+- `2026-08-07 Rust typed source-location admission`: `FUTURE-PARITY-BACKLOG.14.2.2.3` removes the two
+  test-local custom-cfg guards from the committed four-test consumer, so ordinary Cargo discovery now proves the
+  immutable Rust value core and all 92 canonical helpers plus seven aliases together. Canonical CI requires the
+  consumer path and executes its exact test target unconditionally. The neutral artifact/checker promotes only
+  `rust_runtime`, derives 5 complete / 9 pending, and rejects 39 mutations including a Rust completed-to-pending
+  regression. Production Rust source, UTF-8-byte registers, external helper results, schemas/identities,
+  semantic/MCP surfaces, and the authored DSL remain unchanged; public typed values and the four remaining
+  backend runtimes are still future work. Complete Rust, repository-local mdBook/generated-HTML structure, all
+  seven doctrines, canonical containment/relocation, CLI 66x2, RAM 36%, and Phase 0 1,031/1,031 in 669 seconds
+  pass before `[ci] local CI gate passed`.
+
 - `2026-08-07 Rust typed source-location projection routing`: `FUTURE-PARITY-BACKLOG.14.2.2.2` gives each
   `RuntimeContext` one immutable `input` authority shared across context clones. The existing UTF-8-byte cursor,
   entry/match spans, rule-scoped marks, anonymous capture boundary, and cursor stack remain the live registers;

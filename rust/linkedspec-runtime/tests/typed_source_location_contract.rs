@@ -1,14 +1,7 @@
-#![allow(unexpected_cfgs)]
-#![cfg(linkedspec_typed_source_red)]
-
-//! FUTURE-PARITY-BACKLOG.14.2.2.0.3 — dormant Rust typed source-location contract.
+//! FUTURE-PARITY-BACKLOG.14.2.2.3 — admitted Rust typed source-location contract.
 //!
-//! Before admission, run the immutable-value contract with:
-//!
-//! `source tools/project_data_env.sh`, then run
-//! `RUSTFLAGS='--cfg linkedspec_typed_source_red' cargo test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract`.
-//!
-//! The projection leaf additionally supplies `--cfg linkedspec_typed_source_projection_red`.
+//! Ordinary Cargo discovery executes the immutable-value and projection proof together:
+//! `cargo test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract`.
 
 use linkedspec_runtime::source_location::{
     DerivedTextPolicy, Position, SourceAuthority, SourceLocationContext, SourceLocationError, Span,
@@ -352,7 +345,6 @@ fn immutable_authority_owns_text_and_reports_four_exact_private_errors() {
     );
 }
 
-#[cfg(linkedspec_typed_source_projection_red)]
 mod projections {
     use super::{CONTRACT_JSON, contract};
     use linkedspec_core::compiler::compile;

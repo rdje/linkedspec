@@ -388,6 +388,7 @@ require_tracked_file t/punctuation_light_zero_arg_contract.t
 require_tracked_file t/complete_named_mark_contract.t
 require_tracked_file t/typed_source_location_values.t
 require_tracked_file t/typed_source_location_perl_contract.t
+require_tracked_file rust/linkedspec-runtime/tests/typed_source_location_contract.rs
 require_tracked_file t/variadic_user_function_contract.t
 require_tracked_file t/callable_codeblock_literal_contract.t
 require_tracked_file t/uniform_binding_contract.t
@@ -548,6 +549,9 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 
 log "running exact Perl typed source-location value and projection admission consumers"
 PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t
+
+log "running exact Rust typed source-location value and projection admission consumer"
+cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract
 
 log "checking backend-neutral root-rule selection contract"
 bash tools/run_python_project_data.sh tools/check_root_rule_selection_contract.py
