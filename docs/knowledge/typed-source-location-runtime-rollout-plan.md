@@ -45,8 +45,8 @@ answers:
   - "why must Dart alias parity precede the typed source RED"
   - "where does Dart store source cursor mark and match offsets"
   - "do Dart generated and emitted parsers use the same helper interpreter"
-  - "where is the dormant Dart typed source location RED consumer"
-  - "why does the Dart typed source location consumer stay outside ordinary test discovery"
+  - "where is the admitted Dart typed source location consumer"
+  - "does ordinary Dart test discovery run the typed source location consumer"
   - "what is the first Dart typed source location load failure"
   - "is the immutable Dart typed source location value core implemented"
   - "does the Dart typed source value core route helpers or admit runtime support"
@@ -57,7 +57,7 @@ answers:
   - "does Dart typed source projection run on reconstructed generated and emitted parsers"
   - "is the Dart typed source location runtime canonically admitted"
 date: 2026-08-01
-status: Perl and Rust runtimes admitted; Dart core and projections implemented but unadmitted; Julia, PUC Lua, and LuaJIT pending
+status: Perl, Rust, and Dart runtimes admitted; Julia, PUC Lua, and LuaJIT pending
 tags: [architecture, source-location, spans, cursor, helpers, perl, rust, dart, julia, lua, rollout]
 evidence: "FUTURE-PARITY-BACKLOG.14.2.0 retrieved ADR 0056, the neutral contract/checker, adjacent live-ledger contracts, TOOLBOX.md, and exact runtime source/test authorities. Perl uses decoded-string scalar offsets; Rust and Lua use UTF-8 bytes; Dart and Julia use code units. Complete named-mark consumers pass on all six runtimes. The exact contract/checker still encode completed public owners .14.1.2-.3 as pending because both leaves explicitly excluded contract changes, leaving no promotion owner. ADR 0056 section 9 and the owning task freeze the correction and implementation order."
 evidence_update_2026_08_01_public_rollout: "Correction .14.2.0.1 promotes completed public owners .14.1.2-.3, re-owners runtime admissions to .14.2.1.3-.14.2.5.3, advances current truth to 3 complete / 11 pending, and locks 37 mutations including two independent completed-to-pending regressions."
@@ -81,7 +81,9 @@ evidence_update_2026_08_07_dart_core: "Dart core .14.2.3.1 adds lib/src/runtime/
 evidence_update_2026_08_07_dart_core_signoff: "Dart core signoff passes complete Dart format 98/0, fatal analysis, ordinary 379, storage 20/47, CLI 66x2, corpus 105/105, language coverage 246/105/122, neutral typed source 5/9/39, source-unchanged mdBook 79 files/14152 KiB with separate rendered blocks, Knowledge Map 786/6427, and all seven doctrines. Definitive canonical CI preserves capability 80/0/0, executes Rust typed source 4/4 and every composed semantic/MCP admission, proves six-family project-data containment and relocated/outside-CWD execution, passes CLI 66x2, reports RAM 61%, and passes Phase 0 1031/1031 in 686 seconds before the exact local-CI pass marker."
 evidence_update_2026_08_07_dart_projections: "Dart projection .14.2.3.2 initializes one copied input authority in every _RuntimeExecutionContext and routes exact source spans, positions, coordinates, materialization, source slicing, mark reads/writes, capture boundaries, and cursor controls through typed values. Existing UTF-16 code-unit cursor, match, mark, anonymous-boundary, and stack registers remain unchanged; capture-group collection/existence/delete adapters retain their detached compatibility shapes. Fresh catalogs expose all 92 rows in 47/30/11/4 families plus seven aliases. The dormant consumer passes 4/4 across immutable values, native/reconstructed/generated-plan state, and carrier behavior; the dedicated alias suite includes freshly emitted execution. Focused runtime selection passes 86, ordinary discovery remains 379, complete Dart passes format/analyzer/storage, CLI 66x2, and corpus 105/105, while neutral truth remains 5/9/39 and language coverage 246/105+1/122. Registration and dart_runtime promotion remain exclusively .14.2.3.3."
 evidence_update_2026_08_07_dart_projections_signoff: "The sole-facing book documents implemented-but-unadmitted Dart projections in four current surfaces; repository-routed mdBook build produces 79 files/14164 KiB and generated HTML keeps separate paragraph/code elements. Knowledge Map is 786/6431 and all seven doctrines pass. Definitive canonical CI preserves capability 80/0/0 and typed source 5/9/39 plus Rust 4/4, executes all composed semantic/MCP admissions, proves six-family containment and moved/outside-CWD execution, passes CLI 66x2, reports RAM 68%, and passes Phase 0 1031/1031 in 677 seconds before the exact local-CI pass marker."
-reverify: "source tools/project_data_env.sh && cargo test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract && perl -Iperl -c perl/LinkedSpec/SourceLocation.pm && perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm && prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t t/complete_named_mark_contract.t t/rule_local_cursor_perl_execution.t t/generated_source_contract.t && bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py && perl tools/check_language_capability_coverage.pl && (cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/source_boundary_compatibility_aliases_test.dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test_dormant/typed_source_location_contract_test.dart) && test -f dart/test_dormant/typed_source_location_contract_test.dart && ! rg -n 'test_dormant/typed_source_location_contract_test.dart' dart/analysis_options.yaml"
+evidence_update_2026_08_07_dart_admission: "Dart admission .14.2.3.3 moves the unchanged four-test consumer into ordinary package discovery, requires it once in canonical CI through repository-managed Dart storage, and promotes only dart_runtime. The independently strengthened checker requires the ordinary path and exact command, rejects retained dormancy, and adds Dart's completed-to-pending regression. Current truth is 6 complete / 8 pending / 40 mutations. Focused admission passes 4/4; the complete Dart gate passes format 98/0, fatal analysis, ordinary 383, storage 20/47, CLI 66x2, and corpus 105/105. No production runtime, helper result, UTF-16 register, carrier, schema, semantic/MCP/capability surface, DSL, README, or other backend changes."
+evidence_update_2026_08_07_dart_admission_signoff: "Sole-facing mdBook build is 79 files/14164 KiB with separate generated paragraph and command blocks. Knowledge Map is 786/6432 and all seven doctrines pass. Definitive canonical CI proves capability 80/0/0, typed source 6/8/40 with Perl 10 plus Rust/Dart 4/4, byte-fresh MCP bindings, all composed semantic/MCP admissions, six-family containment, moved/outside-CWD execution, CLI 66x2, RAM 73%, and Phase 0 1031/1031 in 685 seconds before the exact local-CI pass marker."
+reverify: "source tools/project_data_env.sh && cargo test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract && perl -Iperl -c perl/LinkedSpec/SourceLocation.pm && perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm && prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t t/complete_named_mark_contract.t t/rule_local_cursor_perl_execution.t t/generated_source_contract.t && bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py && perl tools/check_language_capability_coverage.pl && (cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/source_boundary_compatibility_aliases_test.dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/typed_source_location_contract_test.dart) && test -f dart/test/typed_source_location_contract_test.dart && test ! -e dart/test_dormant/typed_source_location_contract_test.dart"
 ---
 
 The canonical design remains ADR `0056`; the exact implementation plan and rollout correction live under
@@ -107,9 +109,9 @@ derived provenance. Later leaves retain mark-lifetime, transaction, recursion/pr
 The rollout ledger is live admission state. It became stale because public owner `.14.1.2` explicitly excluded the
 contract and no-change recomposition `.14.1.3` required it unchanged. Correction `.14.2.0.1` has promoted those
 two completed public rows and re-owned the five runtime rows to exact admission leaves
-`.14.2.1.3-.14.2.5.3`. Perl admission `.14.2.1.3` and Rust admission `.14.2.2.3` have promoted only their own
-runtime rows; current truth is 5 complete / 9 pending, protected by 39 mutations including one completed-to-pending
-regression per completed public/runtime row.
+`.14.2.1.3-.14.2.5.3`. Perl admission `.14.2.1.3`, Rust admission `.14.2.2.3`, and Dart admission `.14.2.3.3`
+have promoted only their own runtime rows; current truth is 6 complete / 8 pending, protected by 40 mutations
+including one completed-to-pending regression per completed public/runtime row.
 
 Perl core `.14.2.1.1` now implements `LinkedSpec::SourceLocation`. Module-private authority state snapshots decoded
 text and precomputes scalar-boundary line, column, and UTF-8 byte evidence. Positions, direct spans, and derived
@@ -139,8 +141,8 @@ detached records cross the API.
 Rust projection `.14.2.2.2` gives each execution input one authority and routes all 92 canonical helpers plus seven
 aliases through typed boundary methods. Existing UTF-8-byte registers and public results remain unchanged; native,
 reconstructed, generated-plan, and emitted paths use the same engine. Admission `.14.2.2.3` removes the test-local
-dormancy, requires the exact ordinary consumer in canonical CI, and promotes only `rust_runtime`; rollout is now
-5 complete / 9 pending / 39 mutations.
+dormancy, requires the exact ordinary consumer in canonical CI, and promotes only `rust_runtime`; at that admission
+boundary the rollout advanced to 5 complete / 9 pending / 39 mutations.
 
 Dart has all 92 canonical helpers and now executes the seven compatibility aliases through its existing ActionIR
 known-name/canonicalization adapter. The aliases select no separate interpreter behavior: they resolve to the same
@@ -149,9 +151,9 @@ canonical routes, while unrelated invented names retain structured `unknown_help
 mark, and cursor-stack positions as UTF-16 code-unit offsets, converting to Unicode-scalar positions/lengths and
 one-based line/column at helper boundaries. Loaded, reconstructed, generated-plan, and emitted paths all instantiate
 the same `LinkedSpecRuntimeEngine`. The seven spellings live in a dedicated compatibility inventory so the shared
-246-name Dart/Julia/Lua capability contract remains exact. Alias parity does not admit typed Dart values: rollout
-stays 5/9/39. Dormant boundary `.14.2.3.0.2` now freezes one four-test 3/7/6/3 + 92+7 consumer outside ordinary
-discovery; its explicit repository-routed command fails only for the absent immutable core/projection API while
+246-name Dart/Julia/Lua capability contract remains exact. Dormant boundary `.14.2.3.0.2` froze one four-test
+3/7/6/3 + 92+7 consumer outside ordinary discovery; its explicit repository-routed command failed only for the
+absent immutable core/projection API while
 all current Dart tests stay green. Immutable core `.14.2.3.1` now adds one copied decoded-source authority with
 scalar-to-UTF-16, line/column, and UTF-8-byte boundary tables plus opaque immutable positions, direct spans, and
 ordered derived text. The authority alone validates, converts, and materializes; detached records carry no source
@@ -159,9 +161,9 @@ text or engine reference. Projection `.14.2.3.2` now gives each execution contex
 all 92 canonical helpers plus seven aliases through typed construction, validation, coordinates, slicing,
 materialization, mark/capture state, and cursor-control boundaries. Existing UTF-16 code-unit registers and every
 external result or mutation shape remain unchanged; native, reconstructed, generated-plan, and freshly emitted
-execution converge on the same engine. The full dormant consumer passes 4/4, but remains outside ordinary and
-canonical discovery. Admission `.14.2.3.3` alone may register it and promote `dart_runtime`, so rollout remains
-pending at 5/9/39.
+execution converge on the same engine. Admission `.14.2.3.3` moves that unchanged 4/4 consumer into ordinary
+discovery, requires its exact target once in canonical CI, and promotes only `dart_runtime`. The checker rejects
+retained dormancy and completed-to-pending regression; rollout is now 6/8/40.
 
 ## Links
 

@@ -1,5 +1,25 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-07 — Dart typed source-location runtime is admitted
+
+`FUTURE-PARITY-BACKLOG.14.2.3.3` activates task-tree-first from clean projection commit `3513508a` as intended
+156/300 with no push. The unchanged four-test consumer now lives under ordinary Dart discovery and is required
+once by canonical CI through the exact repository-managed command. The independent checker locks that path and
+command, rejects retained dormancy, and adds the Dart completed-to-pending regression.
+
+Only `dart_runtime` advances. Neutral truth is 6 complete / 8 pending / 40 mutations, and focused admission passes
+4/4. Complete Dart passes format 98/0, fatal analysis, ordinary 383, storage 20/47, CLI 66/66 under default and
+POSIX environments, and corpus 105/105. Production source, UTF-16 registers, external values/mutations, carriers,
+schemas, semantic/MCP/capability state, DSL, README, and other backends remain unchanged.
+
+The sole-facing capture/source-location, project-status, local-CI, and backend-handoff pages now distinguish
+admitted internal Perl/Rust/Dart values/projections from future public typed values, transactions, recursive
+observation, and Julia/Lua admissions. The repository-routed book builds 79 files/14,164 KiB with separate rendered
+paragraphs and command block; its artifact is removed. Knowledge Map is 786/6,432 and all seven doctrines pass.
+Definitive canonical CI passes capability 80/0/0, typed Perl 10 plus Rust/Dart 4/4, composed semantic/MCP,
+containment/relocation, CLI 66x2, RAM 73%, and Phase 0 1,031/1,031 in 685 seconds before the exact pass marker.
+Atomic commit, brief clearing, and clean proof remain before task-tree-first Julia `.14.2.4.0`.
+
 ## 2026-08-07 — Dart typed source-location projections are implemented but unadmitted
 
 `FUTURE-PARITY-BACKLOG.14.2.3.2` activates task-tree-first from clean immutable-core commit `f1b91426` as

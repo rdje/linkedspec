@@ -1,5 +1,22 @@
 # ARCHITECTURE STATE
 
+- `2026-08-07 Dart typed source-location runtime admission`: `FUTURE-PARITY-BACKLOG.14.2.3.3` changes no
+  production Dart source. It moves the unchanged four-test contract from `dart/test_dormant/` into ordinary
+  discovery, requires that tracked path and exact repository-wrapped target once in canonical CI, and promotes
+  only `dart_runtime`. The independent checker requires the admitted path/command, rejects retained dormancy, and
+  rejects Dart complete-to-pending regression as mutation 40; live rollout is 6 complete / 8 pending.
+
+  Focused admission passes 4/4. Complete Dart passes format 98/0, fatal analysis, ordinary 383, project-data
+  storage 20/47, primary CLI 66x2, and corpus 105/105. Existing UTF-16 code-unit registers, external helper values
+  and mutations, immutable value/projection implementation, carriers, schemas, semantic/MCP/capability surfaces,
+  DSL, README, and other backends are unchanged. The sole-facing book reports admitted internal Perl/Rust/Dart
+  values/projections while public typed values, transactions, recursive observation, and Julia/Lua admissions
+  remain future. Its 79-file/14,164-KiB generated HTML keeps separate paragraphs and the Dart command in a separate
+  code block; the artifact is removed. Knowledge Map is 786/6,432 and all seven doctrines pass. Definitive
+  canonical CI passes capability 80/0/0, typed Perl 10 plus Rust/Dart 4/4, composed semantic/MCP, containment/
+  relocation, CLI 66x2, RAM 73%, and Phase 0 1,031/1,031 in 685 seconds. Only atomic commit and clean proof remain
+  before Julia `.14.2.4.0`.
+
 - `2026-08-07 Dart typed source-location projections`: `FUTURE-PARITY-BACKLOG.14.2.3.2` gives every
   `_RuntimeExecutionContext` one copied decoded-input authority and exposes fresh detached exact catalogs for all
   92 canonical projections in 47/30/11/4 families plus seven aliases. Source text/slicing, entry/local-match spans

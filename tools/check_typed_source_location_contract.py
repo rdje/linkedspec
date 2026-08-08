@@ -24,6 +24,12 @@ PERL_PROJECTION_CONSUMER_PATH = ROOT / "t" / "typed_source_location_perl_contrac
 RUST_CONSUMER_PATH = (
     ROOT / "rust" / "linkedspec-runtime" / "tests" / "typed_source_location_contract.rs"
 )
+DART_CONSUMER_PATH = (
+    ROOT / "dart" / "test" / "typed_source_location_contract_test.dart"
+)
+DART_DORMANT_CONSUMER_PATH = (
+    ROOT / "dart" / "test_dormant" / "typed_source_location_contract_test.dart"
+)
 
 EXPECTED_COUNTS = {
     "sources": 3,
@@ -39,7 +45,7 @@ EXPECTED_COUNTS = {
     "internal_contract_ids": 2,
     "diagnostics": 31,
     "rollout_legs": 14,
-    "mutations": 39,
+    "mutations": 40,
 }
 
 POLICY = {
@@ -377,7 +383,7 @@ ROLLOUT = [
     ("neutral_public_recomposition", "complete", "FUTURE-PARITY-BACKLOG.14.1.3", []),
     ("perl_runtime", "complete", "FUTURE-PARITY-BACKLOG.14.2.1.3", ["perl"]),
     ("rust_runtime", "complete", "FUTURE-PARITY-BACKLOG.14.2.2.3", ["rust"]),
-    ("dart_runtime", "pending", "FUTURE-PARITY-BACKLOG.14.2.3.3", ["dart"]),
+    ("dart_runtime", "complete", "FUTURE-PARITY-BACKLOG.14.2.3.3", ["dart"]),
     ("julia_runtime", "pending", "FUTURE-PARITY-BACKLOG.14.2.4.3", ["julia"]),
     ("lua_dual_abi", "pending", "FUTURE-PARITY-BACKLOG.14.2.5.3", ["puc_lua", "luajit"]),
     ("transaction_safety", "pending", "FUTURE-PARITY-BACKLOG.14.3", []),
@@ -1155,6 +1161,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             PERL_VALUE_CONSUMER_PATH,
             PERL_PROJECTION_CONSUMER_PATH,
             RUST_CONSUMER_PATH,
+            DART_CONSUMER_PATH,
         ):
             if not path.is_file():
                 fail(f"canonical contract/checker/runner input is missing: {path.relative_to(ROOT)}")
@@ -1170,6 +1177,8 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             "PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t",
             "require_tracked_file rust/linkedspec-runtime/tests/typed_source_location_contract.rs",
             "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract",
+            "require_tracked_file dart/test/typed_source_location_contract_test.dart",
+            "bash ../tools/run_dart_project_data.sh test --reporter failures-only test/typed_source_location_contract_test.dart",
         ]
         for marker in required_markers:
             if ci_text.count(marker) != 1:
@@ -1183,6 +1192,15 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         ):
             if dormant_marker in rust_consumer_text:
                 fail(f"Rust consumer remains dormant behind {dormant_marker}")
+        if DART_DORMANT_CONSUMER_PATH.exists():
+            fail("Dart consumer remains outside ordinary test discovery")
+        dart_consumer_text = DART_CONSUMER_PATH.read_text(encoding="utf-8")
+        for stale_marker in (
+            "test_dormant/typed_source_location_contract_test.dart",
+            "pre-admission directory",
+        ):
+            if stale_marker in dart_consumer_text:
+                fail(f"Dart consumer retains stale dormancy marker: {stale_marker}")
 
 
 def expect_mutation_failure(
@@ -1260,6 +1278,10 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         (
             "Rust runtime admission regressed to pending",
             lambda c: c["rollout"][4].__setitem__("status", "pending"),
+        ),
+        (
+            "Dart runtime admission regressed to pending",
+            lambda c: c["rollout"][5].__setitem__("status", "pending"),
         ),
     ]
     if len(mutations) + len(rollout_regressions) != EXPECTED_COUNTS["mutations"]:

@@ -1,5 +1,25 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.3.3` — Dart typed-source admission): admission is deliberately a
+  discovery/governance transition over the already committed implementation. The checker moved first: it expects
+  40 mutations, completed `dart_runtime`, the ordinary consumer path, and the exact repository-wrapped canonical
+  command, rejects any retained dormant path/comment, and adds one Dart completed-to-pending mutation. Against the
+  unchanged 39-mutation artifact it exits 1 at exact `expected counts drifted`.
+
+  GREEN moves the assertion-identical four-test file into `dart/test/`, changes only its obsolete header, records
+  `dart_runtime` complete and 40 mutations, and adds one tracked-file/command pair to canonical CI. The checker is
+  6/8/40 and the exact consumer is 4/4. No production Dart source, UTF-16 code-unit register, helper result or
+  mutation, carrier, schema, semantic/MCP/capability surface, DSL, README, or other backend changes.
+
+  Complete Dart passes format 98/0, fatal analysis, ordinary 383, storage 20/47, primary CLI 66x2, and corpus
+  105/105. The sole-facing book now admits internal Perl/Rust/Dart values and 92+7 projections while keeping public
+  typed values, transactions, recursive observation, and Julia/Lua runtime work future. Its repository-routed
+  79-file/14,164-KiB build keeps separate paragraph and command-code elements; the generated artifact is removed.
+  Knowledge Map regenerates at 786/6,432 and all seven doctrines pass. Definitive canonical CI passes capability
+  80/0/0, typed Perl 10 plus Rust/Dart 4/4, composed semantic/MCP, six-family containment, moved/outside-CWD
+  execution, CLI 66x2, RAM 73%, and Phase 0 1,031/1,031 in 685 seconds before the exact pass marker. Only the
+  atomic clean handoff remains.
+
 - 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.3.2` — Dart typed-source projections): the compatibility boundary is an
   adapter over the immutable core, not a register rewrite. Each `_RuntimeExecutionContext` snapshots `input` into
   one `SourceAuthority`; cursor, entry/local match, named-mark, anonymous capture, and save-stack state continue to

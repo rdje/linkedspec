@@ -25,16 +25,16 @@
 > same internal projections across native, reconstructed, and generated-plan execution while retaining byte
 > registers; its ordinary four-test consumer is required by canonical CI. Dart now implements the same internal
 > values and all 92+7 projections while retaining UTF-16 code-unit registers. Its explicit four-test consumer
-> passes native, reconstructed, generated-plan, and freshly emitted execution, but remains outside ordinary
-> discovery and canonical CI until the separate admission leaf. Julia and both Lua ABIs still need implementation
-> and admission in their own runtime leaves.
+> passes native, reconstructed, generated-plan, and freshly emitted execution under ordinary discovery and
+> canonical CI. The neutral rollout is 6 complete / 8 pending with 40 drift mutations. Julia and both Lua ABIs
+> still need implementation and admission in their own runtime leaves.
 >
 > Any cursor transaction is one explicit
 > recognition attempt over invocation-local cursor/boundary/marks only; it adds no search tree and cannot undo
 > actions, AST/user state, output/diagnostics, registry work, or host effects. Recursive boundaries remain read-only,
 > progress is portable, span-native parser dispatch grants no implicit authority, and ADR `0045` retains gap syntax/
-> lifecycle ownership. The neutral contract and Perl's internal value/projection runtime are now admitted; Perl's
-> existing helpers retain their public results and scalar mark/cursor behavior.
+> lifecycle ownership. The neutral contract and Perl/Rust/Dart internal value/projection runtimes are now admitted;
+> existing helpers retain their public results and established scalar, byte, or code-unit mark/cursor behavior.
 >
 > Dart admission; Julia, PUC Lua, and LuaJIT implementation/admission; and public authored values, transactions,
 > observation, and dispatch remain owned by

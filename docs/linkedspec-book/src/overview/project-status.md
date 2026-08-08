@@ -17,12 +17,12 @@ general style. This documentation-only slice changes no parser or runtime behavi
 The backend-neutral typed source-location contract is complete under `FUTURE-PARITY-BACKLOG.14.1.1`. Its
 independent checker passes 3 sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation
 and 8 transaction transitions, 6 recursive observations, 4 structural cases, 92 current helper projections,
-31 diagnostics, and 39 rejected mutations.
+31 diagnostics, and 40 rejected mutations.
 
-Five of 14 rollout legs are complete and 9 remain pending. The neutral contract, public linked-rule structure,
-unchanged neutral/public recomposition, and the Perl and Rust runtime admissions are complete. Both runtimes'
-internal authorities and all 92 helper projections plus 7 aliases are admitted without changing public results or
-their established scalar/byte mark and cursor behavior.
+Six of 14 rollout legs are complete and 8 remain pending. The neutral contract, public linked-rule structure,
+unchanged neutral/public recomposition, and the Perl, Rust, and Dart runtime admissions are complete. All three
+runtimes' internal authorities and all 92 helper projections plus 7 aliases are admitted without changing public
+results or their established scalar/byte/code-unit mark and cursor behavior.
 
 Rust's exact four-test consumer now runs under ordinary Cargo discovery and as a required canonical-CI leg. It
 proves the immutable value core and projection boundary across native, reconstructed, and generated-plan execution;
@@ -30,21 +30,21 @@ the neutral checker independently rejects any regression of the completed `rust_
 
 The Dart runtime now has one immutable decoded-input authority beneath all 92 helpers and 7 compatibility aliases.
 Its explicit four-test consumer passes native, reconstructed, generated-plan, and freshly emitted routes while
-preserving existing result shapes, mutation timing, and UTF-16 code-unit registers. The consumer remains outside
-ordinary Dart discovery and canonical CI, so `dart_runtime` is still pending and the neutral count stays 5/9/39.
+preserving existing result shapes, mutation timing, and UTF-16 code-unit registers. Ordinary Dart discovery and
+canonical CI now require that consumer, and the neutral checker rejects any regression of completed `dart_runtime`.
 
 Public typed values, transaction spelling and behavior, recursive observation, span-native progressive/staged
-dispatch, Dart admission, and the Julia, PUC Lua, and LuaJIT runtime implementations/admissions remain future work.
-The internal Rust admission and unadmitted Dart implementation do not add an authored `Position` or `Span` value,
-transaction operation, schema version, or new helper result; rollout is 5 complete / 9 pending.
+dispatch, and the Julia, PUC Lua, and LuaJIT runtime implementations/admissions remain future work. The internal
+Perl/Rust/Dart admissions do not add an authored `Position` or `Span` value, transaction operation, schema version,
+or new helper result; rollout is 6 complete / 8 pending.
 
 The helper audit distinguishes 7 callable compatibility aliases from 2 internal Perl contract/scanner ids.
 `capture_take_slice` and `capture_take_slice_len` are internal ids, not accepted helper spellings; authored code
 continues to use `capture_take()` and `capture_take_len()`. Rust and Dart now execute all 7 callable aliases through
 the same canonical dispatch routes as their preferred helpers, including Unicode-scalar widths, reversed-span
 absence, anonymous-boundary mutation, reconstructed compiled specs, generated plans, and independently compiled
-emitted source. Dart's compatibility-spelling parity does not promote the separately pending `dart_runtime` typed-
-source admission or claim a public value, transaction, recursive-observation, or span-native dispatch surface.
+emitted source. Dart's compatibility-spelling parity and separately proved typed-source admission do not claim a
+public value, transaction, recursive-observation, or span-native dispatch surface.
 
 Five-backend callable recurring/public admission is complete under `FUTURE-PARITY-BACKLOG.11.8.4`. One rooted
 driver composes neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; both Lua rows execute one focused file. The

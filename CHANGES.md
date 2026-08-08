@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.3.3 — admit Dart typed source runtime
+
+- Moved the unchanged four-test typed-source consumer from `dart/test_dormant/` into ordinary package discovery
+  and corrected only its obsolete dormancy header.
+- Required that tracked consumer and its exact repository-wrapped four-test command once in canonical CI.
+- Promoted only `dart_runtime` and advanced the neutral artifact/checker from 5/9/39 to 6/8/40. The independent
+  checker locks the ordinary path/command, dormant-path absence, and Dart completed-to-pending regression.
+- Passed the neutral checker and focused Dart consumer at 6/8/40 and 4/4, then the complete Dart gate at format
+  98/0, fatal analysis, ordinary 383, storage 20/47, CLI 66x2, and corpus 105/105.
+- Updated the sole-facing capture/source-location, project-status, local-CI, and backend-handoff pages to describe
+  admitted internal Perl/Rust/Dart values/projections without claiming public typed values, transactions, or
+  Julia/Lua admission. The rendered book passes at 79 files/14,164 KiB with separate paragraph/command blocks;
+  its artifact is removed.
+- Regenerated Knowledge Map at 786 facts / 6,432 question keys and synchronized both canonical typed-source cards.
+- Passed all seven doctrines and definitive canonical CI: capability 80/0/0, typed Perl 10 plus Rust/Dart 4/4,
+  composed semantic/MCP, six-family containment, moved/outside-CWD execution, CLI 66x2, RAM 73%, Phase 0
+  1,031/1,031 in 685 seconds, and the exact local-CI pass marker. Atomic commit 156/300 remains.
+
 ## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.3.2 — route Dart typed source projections
 
 - Added fresh detached exact Dart catalogs for all 92 canonical source-boundary projections in 47/30/11/4

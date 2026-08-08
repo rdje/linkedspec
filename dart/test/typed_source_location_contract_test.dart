@@ -1,14 +1,11 @@
-// FUTURE-PARITY-BACKLOG.14.2.3.0.2 — dormant Dart typed source-location RED.
+// FUTURE-PARITY-BACKLOG.14.2.3.3 — admitted Dart typed source-location consumer.
 //
-// Ordinary `dart test` does not discover this pre-admission directory. Run the
-// explicit contract through repository-local project data:
+// Ordinary `dart test` discovers this consumer. Run the focused contract
+// through repository-local project data:
 //
 //   cd dart
-//   bash ../tools/run_dart_project_data.sh test \
-//     test_dormant/typed_source_location_contract_test.dart
-//
-// The immutable core is present and analyzed. Admission moves this consumer
-// under ordinary discovery only after all four tests pass.
+//   bash ../tools/run_dart_project_data.sh test --reporter failures-only \
+//     test/typed_source_location_contract_test.dart
 
 import 'dart:convert';
 import 'dart:io';
