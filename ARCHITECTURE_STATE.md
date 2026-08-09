@@ -23,7 +23,7 @@ seconds. Unchanged `.4.2` proves all seven implementation-owner hashes from clea
 passes the same route/mutation/doctrine chain, CLI 66x2, and Phase 0 1,031/1,031 in 673 seconds. Parent `.4` is
 closed without parser/runtime/backend behavior movement at `0bcb5a36`.
 
-## Live status and future task evidence are bounded over exact durable stores
+## All four routed live-document stores are bounded over exact durable history
 
 `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0` and ADR `0066` classify the debt surfaces by semantics rather than size.
 Before `.1`, `LIVE_ACHIEVEMENT_STATUS.md` was direct required-marker authority for seven capability/public-closeout families,
@@ -56,9 +56,19 @@ refreshes mutable snapshots after an owning leaf edit. The strengthened metadata
 classes, exact clean-source coverage, ID uniqueness/ranges, consumer decoupling, immutable history, lookup, and
 collection/member ceilings. All eleven direct machine consumers now use their semantic owners, and routed task
 evidence is current with an 8,000-line / 1-MiB global per-file ratchet plus stricter 5,000-line / 768-KiB limits
-for every future-backlog member. `.3` migrates changes/notes and author workflow; `.4` recomposes/ratchets. These
-storage migrations change documentation governance only; they change no language, compiler, runtime, backend,
-fixture, CLI, protocol, or project-data root.
+for every future-backlog member.
+
+`.3` implements the two chronological author stores from clean `61a52dbd`. Eleven change-history and six
+engineering-note segments preserve exact sources of 44,270 lines / 3,104,131 bytes and 21,308 lines / 2,291,424
+bytes. Their stable roots are now 512-line / 64-KiB hot shards with complete-record boundaries, root-derived
+literal/segment/full queries, 80% warning, 90% required rollover, and a <=50% retained target. Initial immutable
+IDs reserve `5000` upward; later content-addressed rollover segments decrement from `4999`, preserving ascending
+newest-to-oldest manifest order without renaming an archive. ADR `0069` retires both route debts, and `COMMIT.md`
+causally requires both pressure checks on every slice. Exact legacy trailing whitespace remains byte authority
+only inside raw history segments through a narrowly scoped Git attribute. Rollover publishes segment, manifest,
+then root and idempotently completes an exact interrupted generation, avoiding a root-before-index loss window.
+`.4` independently recomposes and ratchets the four stores. These storage migrations change documentation
+governance only; they change no language, compiler, runtime, backend, fixture, CLI, protocol, or project-data root.
 
 - `2026-08-09 cursor transaction authored/static contract`: behavior-free
   `FUTURE-PARITY-BACKLOG.14.3.1.0` ratifies four accepted future special forms:

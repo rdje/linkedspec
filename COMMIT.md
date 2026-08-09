@@ -19,16 +19,27 @@ This document defines the standard commit workflow for this repository so any ne
 - **Important:** this file is workflow tooling and should remain untracked.
 
 ### 2) `CHANGES.md`
-- **Type:** persistent, git-tracked technical change history.
+- **Type:** persistent, git-tracked bounded technical-change hot shard over immutable history.
 - **Purpose:** record what changed, why, and how it was validated.
-- **Lifecycle:** append/update for each accepted implementation slice.
-- **Important:** this file is cumulative and not reset.
+- **Lifecycle:** prepend one complete `## ` record for each accepted implementation slice, then run
+  `perl tools/roll_document_history.pl --surface change_history --check` before staging. If the check requires a
+  rollover, run the same command with `--apply`, inspect the atomic root/manifest/segment changes, and re-run
+  `--check`.
+- **Important:** the stable root is capped at 512 lines / 65,536 bytes. Exact older records are immutable under
+  `docs/history/changes/` and queryable with
+  `perl tools/read_document_history.pl --surface change_history --grep '<literal>'` or `--all`.
 
 ### 3) `DEVELOPMENT_NOTES.md`
-- **Type:** persistent, git-tracked technical knowledge base.
+- **Type:** persistent, git-tracked bounded engineering-notes hot shard over immutable history.
 - **Purpose:** capture architecture insights, design rationale, migration notes, and key implementation details for future maintainers/AI sessions.
-- **Lifecycle:** update whenever meaningful technical understanding or workflow-relevant implementation details are added.
-- **Important:** this file is cumulative and not reset.
+- **Lifecycle:** prepend one complete dated record whenever meaningful technical understanding or workflow-relevant
+  implementation detail is added, then run
+  `perl tools/roll_document_history.pl --surface engineering_notes --check` before staging. If the check requires
+  a rollover, run the same command with `--apply`, inspect the atomic root/manifest/segment changes, and re-run
+  `--check`.
+- **Important:** the stable root is capped at 512 lines / 65,536 bytes. Exact older notes are immutable under
+  `docs/history/development-notes/` and queryable with
+  `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'` or `--all`.
 
 ### 4) `MEMORY.md`
 - **Type:** git-tracked **resume pointer** (memory layer A of `MEMORY_ARCHITECTURE.md`).
@@ -63,6 +74,9 @@ This document defines the standard commit workflow for this repository so any ne
 
 ## Required pre-commit validation
 - Run relevant syntax/tests for the task.
+- Run both bounded chronology checks on every accepted slice:
+  - `perl tools/roll_document_history.pl --surface change_history --check`
+  - `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - For LinkedSpec action-rewriter slices, standard gate is:
   - `perl -c perl/LinkedSpec.pm`
   - `perl -c -Iperl t/phase0_regression.t`
@@ -71,7 +85,7 @@ This document defines the standard commit workflow for this repository so any ne
 ## Documentation Layers
 - Keep the public book and the continuity docs separate.
 - `docs/linkedspec-book/` is the public-facing explanation of LinkedSpec.
-- `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `MEMORY.md`, `LIVE_ACHIEVEMENT_STATUS.md`, roadmap notes, and the workflow described here exist for interruption recovery, handoff continuity, and execution hygiene.
+- `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `MEMORY.md`, `LIVE_ACHIEVEMENT_STATUS.md`, roadmap notes, and the workflow described here exist for interruption recovery, handoff continuity, and execution hygiene. Older changes/notes chronology is read through the repository-local manifests rather than loading the immutable archive wholesale.
 - Updating continuity docs does **not** replace updating the public book when a slice changes what users or outside readers need to understand.
 
 ## Exact workflow steps
@@ -81,9 +95,13 @@ This document defines the standard commit workflow for this repository so any ne
    - Ensure unrelated artifacts are excluded (for example swap files).
 
 2. **Update persistent docs**
-   - Add concise but precise entries to:
-     - `CHANGES.md`
-     - `DEVELOPMENT_NOTES.md`
+   - Prepend concise but precise complete records to:
+     - `CHANGES.md` (one `## ` record)
+     - `DEVELOPMENT_NOTES.md` (one dated record or complete `## ` section)
+   - Run both `tools/roll_document_history.pl --check` commands from Required pre-commit validation. A required
+     rollover is part of this same slice: run `--apply`, inspect the new immutable segment plus manifest/root
+     changes, and re-run `--check`. The tool archives only complete clean-HEAD suffix records and refuses to
+     archive uncommitted new records.
    - Overwrite the current sections of `LIVE_ACHIEVEMENT_STATUS.md`; do not append historical paragraphs. Keep at
      most sixteen recent one-line rows and preserve its exact history-query section.
    - **Overwrite** the current-state block in `MEMORY.md` (the bounded resume pointer, layer A — do not append; keep within the size cap). Set `activation_commit` to the current clean `HEAD` from which this leaf started; write the remaining fields as the intended clean post-landing handoff (completed leaf/subject, next action, and no in-flight uncommitted work). Git remains the current-commit authority. If the slice established a durable cross-cutting fact, add or refresh a record under `docs/decisions/` (layer C).
@@ -118,6 +136,7 @@ This document defines the standard commit workflow for this repository so any ne
 ## Guardrails
 - Do not bundle unrelated changes in the same commit.
 - Keep commit messages specific and technically descriptive.
-- Keep `CHANGES.md`, `DEVELOPMENT_NOTES.md`, and `MEMORY.md` synchronized with the actual committed slice.
+- Keep the bounded `CHANGES.md` / `DEVELOPMENT_NOTES.md` hot shards and `MEMORY.md` synchronized with the actual
+  committed slice; never append directly to an immutable `docs/history/**/segment-*.md` file.
 - In tracked live docs and the public book, write repository file references relative to the git repo root (for example `perl/LinkedSpec.pm`), never as machine-local absolute checkout paths or developer-specific checkout directories.
 - If `git_message_brief.txt` is accidentally committed, remove it from index immediately and restore the untracked-temp-file invariant. Amend when appropriate; otherwise make the corrective follow-up commit right away.

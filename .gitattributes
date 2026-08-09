@@ -1,2 +1,2 @@
 # Raw document-history segments preserve exact source bytes across artificial partition boundaries.
-docs/history/**/segment-*.md whitespace=-blank-at-eof
+docs/history/**/segment-*.md whitespace=-blank-at-eol,-blank-at-eof

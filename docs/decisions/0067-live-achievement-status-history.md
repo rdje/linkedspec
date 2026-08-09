@@ -63,8 +63,8 @@ contains none of the transferred closeout markers.
 - Capability governance no longer depends on an append chronology, while each public inventory retains its exact
   document cardinality and independent expected projection.
 - Live-route pressure becomes a current bounded collection with executable freshness/non-loss enforcement.
-- The future task monolith is separately migrated by ADR `0068`; changes and engineering notes remain under `.3`.
-  This decision does not change parser/runtime/backend/MCP/CLI/language behavior.
+- The future task monolith is separately migrated by ADR `0068`; changes and engineering notes are separately
+  migrated by ADR `0069`. This decision does not change parser/runtime/backend/MCP/CLI/language behavior.
 
 ## Links
 

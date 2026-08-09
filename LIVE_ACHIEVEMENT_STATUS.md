@@ -2,26 +2,27 @@
 
 ## Current Activity
 
-- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.2` is active task-tree-first from clean live-history commit `99fe03f3` as
-  intended atomic 178/300 with no push.
-- The slice partitions future task evidence into a bounded root, seven semantic owners, immutable history, and a
-  strict index under ADRs `0066` and `0068`, preserving all 510 stable IDs and transferring eleven machine consumers.
-- Focused implementation, consumer, metadata, route, Knowledge, and rendered-book proof is green. Definitive E4
-  is also green through all eight doctrines, containment/relocation, CLI 66x2, RAM 57%, and Phase 0 1,031/1,031;
-  only the atomic commit workflow remains.
+- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3` is active task-tree-first from clean future-task commit `61a52dbd` as
+  intended atomic 179/300 with no push.
+- The slice preserves exact changes/notes history in eleven/six immutable segments, bounds both stable hot roots,
+  and installs complete-record rollover/query plus both reviewed route retirements under ADRs `0066`/`0069`.
+- Focused syntax, 12/12 rollover, 34/34 history mutation, exact reconstruction/query, staged route 32/32,
+  Knowledge 800/6,616, rendered-book proof, and definitive canonical signoff are green; only the atomic commit
+  workflow remains.
 
 ## Latest Completed Slice
 
-- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.1` landed at `99fe03f3`: live status is a bounded current view over four
-  immutable exact-history segments, and all thirteen capability consumers use stable decision authority.
+- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.2` landed at `61a52dbd`: all 510 future-task IDs remain exact across seven
+  bounded semantic owners plus immutable history, and all eleven machine consumers use those owners.
 
 ## Next Action
 
-- Commit `.2` atomically, clear the brief, prove the workspace clean, then activate changes/notes hot-store leaf
-  `.3` task-tree-first.
+- Commit `.3` atomically, clear the brief, prove clean, then activate unchanged four-store recomposition `.4`
+  task-tree-first.
 
 ## Recent Completions
 
+- `2026-08-10` — `61a52dbd` partitioned future task evidence as atomic 178/300.
 - `2026-08-09` — `99fe03f3` bounded live status over exact history as atomic 177/300.
 - `2026-08-09` — `dc8dd896` froze the bounded document-store contract as atomic 176/300.
 - `2026-08-09` — `0bcb5a36` recomposition-closed README routing pressure as atomic 175/300.

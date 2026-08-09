@@ -35,8 +35,9 @@ supporting techniques** that complement them. (Always run with `perl -Iperl …`
   surfaces; closure, existence, lifecycle controls, debt growth, staged-result agreement, and every threshold
   increase fail closed. Its in-memory mutation oracle reports 32/32 before the doctrine can pass.
   `DOCUMENT-HISTORY` ([`scripts/check_document_history.sh`](scripts/check_document_history.sh)) independently
-  verifies bounded current views, strict manifests, immutable repository-local segments, exact clean-Git
-  reconstruction, and queryability. Use `tools/read_document_history.pl` instead of scanning old live prose.
+  verifies bounded current views and hot shards, strict manifests, immutable repository-local segments, exact
+  clean-Git reconstruction/slices, queryability, and rollover limits. Use `tools/read_document_history.pl`
+  instead of scanning old live prose.
 
 ### The task-acceptance checklist (recommended for any code-change leaf)
 
@@ -1066,12 +1067,19 @@ trap 'rm -rf -- "$diagnostic_root"' EXIT
 ### 5.3 Document-history query and doctrine
 - **WHAT:** `tools/read_document_history.pl` reads strict root-relative JSONL manifests and immutable segments;
   `scripts/check_document_history.sh` validates schema, identity, order, counts/digests, byte-exact Git-source
-  reconstruction, current-view limits, and consumer decoupling.
-- **WHEN:** use `--grep '<literal>'` before searching old live chronology, `--segment NNNN` for bounded raw bytes,
-  and `--all` only for exact complete reconstruction. Never infer current capability state from an archive.
-- **HOW:** `perl tools/read_document_history.pl --surface live_status --grep 'needle'` and
-  `bash scripts/check_document_history.sh`. Initial snapshots are created deterministically with
-  `perl tools/build_document_history.pl` from a named clean 40-hex source commit.
+  reconstruction/slices, current-view limits, consumer decoupling, and bounded-hot-root shape. The paired
+  `tools/roll_document_history.pl` warns at 80%, requires rollover at 90%, and keeps at most 50% after rollover.
+- **WHEN:** use `--grep '<literal>'` before searching old live, change, or engineering chronology; `--segment NNNN`
+  for bounded raw bytes; and `--all` only for exact complete reconstruction. Never infer current capability state
+  from an archive. After prepending a complete change or notes record, run the matching rollover `--check` before
+  staging; run `--apply` only when the check requires it.
+- **HOW:** `perl tools/read_document_history.pl --surface live_status --grep 'needle'`,
+  `perl tools/read_document_history.pl --surface change_history --grep 'needle'`,
+  `perl tools/read_document_history.pl --surface engineering_notes --grep 'needle'`, and
+  `bash scripts/check_document_history.sh`. Check current author pressure with
+  `perl tools/roll_document_history.pl --surface change_history --check` and the equivalent `engineering_notes`
+  surface. Initial snapshots are created deterministically with `perl tools/build_document_history.pl` from a
+  named clean 40-hex source commit.
 
 ### 5.4 Task-tree partition lookup and metadata
 - **WHAT:** `tools/read_task_tree.pl` resolves a stable ID through the strict task-tree JSONL index and prints its

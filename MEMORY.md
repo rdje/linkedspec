@@ -5,17 +5,17 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `99fe03f3` — clean live-history HEAD from which future-task partition leaf `.2` activated
-  task-tree-first (177/300; no push).
-- latest_completed_leaf: future-task partition `.2` is intended to land under exact subject
-  `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.2 - partition future task evidence` as atomic 178/300.
-- active_work_unit: intended clean post-landing handoff; `.2` is complete and no implementation leaf is active.
-- next_action: prove atomic 178/300 clean, then activate `.3` task-tree-first for changes/notes history, bounded hot
-  shards, rollover/query, author workflow, and exact route transitions.
+- activation_commit: `61a52dbd` — clean future-task-partition HEAD from which changes/notes leaf `.3` activated
+  task-tree-first (178/300; no push).
+- latest_completed_leaf: changes/notes hot-store `.3` is intended to land under exact subject
+  `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3 - bound changes and engineering notes` as atomic 179/300.
+- active_work_unit: intended clean post-landing handoff; `.3` is complete and no implementation leaf is active.
+- next_action: prove atomic 179/300 clean, then activate `.4` task-tree-first to recompose all four stores,
+  retrieval/rollover controls, route ratchets, and continuity before returning to the prior product frontier.
 - in_flight_uncommitted: none after the intended commit; no background job remains.
-- blockers: none. Focused partition/lookup/consumer/metadata/routing/Knowledge/book proof passes; definitive E4
-  exits 0 through all eight doctrines, containment/relocation, CLI 66x2, RAM 57%, and Phase 0 1,031/1,031 in 696
-  seconds. Only commit plus post-commit brief/residue/status verification remains before `.3` activation.
+- blockers: none. Focused syntax, 12/12 rollover, 34/34 history mutation, exact three-surface retrieval,
+  routing 32/32, Knowledge 800/6,616, rendered-book proof, and definitive E4 pass. Only commit/post-commit clean
+  workflow remains before `.4` activation.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes, and 11 topology mutations advance governance to 53. Public authored values/transactions remain future.
@@ -42,10 +42,11 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - preserved_contract_handoff: repeated-action closure next_owner remains `FUTURE-PARITY-BACKLOG.10.1`.
 - current_readme_contract: README stays 105/5,057 under hard 128/6,144 caps. `.4.1` implements 62 routes over 20
   surfaces with reader/overflow separation, lifecycle controls, immutable debt, reviewed limits, and 32/32
-  mutations. `live_status` and `task_evidence` are current/bounded through ADRs `0067`/`0068`; two debts remain.
+  mutations. All four debt surfaces are current/bounded through ADRs `0067`-`0069`; `.4` owns recomposition.
 - documentation_debt_owner: ADR `0066` freezes all stores. `.1` landed four exact live segments/query/doctrine;
   `.2` preserves 510 task IDs across seven semantic parts plus immutable history, strict lookup/update, 26/26
-  mutations, eleven-consumer transfer, and reviewed task-evidence retirement under ADR `0068`. `.3` owns notes/changes.
+  mutations, and eleven-consumer transfer. `.3` adds eleven/six exact change/note segments, bounded hot roots,
+  recoverable complete-record rollover, mandatory author checks, and both debt retirements under ADR `0069`.
 - current_transaction_contract: future syntax is exact `recognition_checkpoint`,
   `recognize_once(token, call(Rule))`, `recognition_commit`, and `recognition_rollback`; match boolean and staged
   payload are separate. Tokens are linear; effects are closed 9 allowed/11 rejected; marks become invocation-
@@ -53,8 +54,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_future_direction: transaction `.14.3` remains split through neutral `.1`, five backend families/six
   runtimes `.2-.6`, recurring `.7`, and closeout `.8`; executable neutral contract `.14.3.1.1` is next and `.14.8`
   retains final public no-drift. `TASK-TREE-METADATA-HYGIENE.5` separately owns active-frontier freshness.
-- latest_bootstrap_read: 2026-08-09 — complete roadmap, codebase, mdBook, bootstrap/memory/task/ADR/Knowledge,
-  README-policy/checker/routes, storage/canonical, history, and sole-facing status review refreshed.
-- pivot_guard: commit/prove task migration `.2` clean before activating `.3` or returning to transaction work.
-- push_policy: hard lock at 300 new local commits; containment `.2` is intended atomic 178/300; no push.
-- environment: use project-data wrappers and `perl -Iperl`; approved canonical containment may take 30 minutes.
+- latest_bootstrap_read: 2026-08-09 — complete roadmap/codebase/mdBook and required continuity/tooling review.
+- pivot_guard: commit/prove changes/notes migration `.3` clean before activating `.4` or returning to transaction work.
+- push_policy: hard lock at 300 new local commits; containment `.3` is intended atomic 179/300; no push. Use
+  project-data wrappers and `perl -Iperl`; approved canonical containment may take 30 minutes.

@@ -86,8 +86,10 @@ clean 14,872-line source as four immutable manifest segments, installs query plu
 the stable root with a five-section bounded current view, and lands at `99fe03f3`. Semantic future-task partition
 `.2` now preserves 510 stable IDs across seven mutable semantic parts plus immutable history, installs a strict
 nine-record index with root-derived lookup/update tools, transfers all eleven direct machine consumers, and ratchets
-task evidence to current bounded limits under 26/26 metadata mutations. Changes/notes hot stores `.3` and final
-recomposition `.4` remain pending. No parser/runtime/backend/MCP/CLI/fixture/protocol/`.spec` behavior changes.
+task evidence to current bounded limits under 26/26 metadata mutations. Changes/notes hot stores `.3` now preserve
+the exact clean 44,270-line and 21,308-line sources across eleven/six immutable segments, install bounded roots
+with complete-record rollover, and make both pressure checks mandatory under ADR `0069`. Final recomposition `.4`
+remains pending. No parser/runtime/backend/MCP/CLI/fixture/protocol/`.spec` behavior changes.
 Recurring MCP `.10.9.7.1.1.4`
 recomposes the committed rooted promotion unchanged and closes its implementation parents; `.10.9.7.2` now
 independently recomposes the full chain, closes `.10.9.7` and `.10.9`, and hands the clean boundary to public

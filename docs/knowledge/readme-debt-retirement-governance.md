@@ -7,14 +7,16 @@ answers:
   - what authorizes debt to current route transitions
   - may an immutable routing debt baseline be deleted or refreshed
 date: 2026-08-09
-status: accepted and implemented under LIVE-DOCUMENT-PRESSURE-CONTAINMENT.1 at 99fe03f3
+status: accepted and exercised for all four routed debts under ADRs 0067-0069
 tags: [readme, routing, debt, governance, documentation, transition]
-evidence: "The original routing checker rejected every baseline difference before evaluating the exact staged old/new contract ADR, while non-debt surfaces were separately required to have empty baseline/transition objects. That made a ratified debt-to-current closure structurally impossible. The checker now permits baseline clearing only when HEAD state is debt, resulting state is current, resulting baseline/transition are empty, and a newly added indexed ADR matches the canonical old/new route contracts exactly. ADR 0067 authorizes live_status; all other baseline changes remain rejected, and mutation class 31 locks authorized versus unauthorized retirement."
-last_verified: 2026-08-09
+evidence: "The original routing checker rejected every baseline difference before evaluating the exact staged old/new contract ADR, while non-debt surfaces were separately required to have empty baseline/transition objects. That made a ratified debt-to-current closure structurally impossible. The checker now permits baseline clearing only when HEAD state is debt, resulting state is current, resulting baseline/transition are empty, and a newly added indexed ADR matches the canonical old/new route contracts exactly. ADR 0067 authorizes live_status, ADR 0068 task_evidence, and ADR 0069 change_history plus engineering_notes; all other baseline changes remain rejected, and mutation class 31 locks authorized versus unauthorized retirement."
+last_verified: 2026-08-10
 reverify:
   - "perl scripts/check_readme_routing_pressure.pl --report"
   - "rg -n 'debt_retirement_permitted|immutable debt baseline changed without exact reviewed debt retirement|threshold_and_debt_retirement_review' scripts/check_readme_routing_pressure.pl"
   - "sed -n '1,220p' docs/decisions/0067-live-achievement-status-history.md"
+  - "sed -n '1,260p' docs/decisions/0068-future-parity-task-partitions.md"
+  - "sed -n '1,260p' docs/decisions/0069-bounded-change-and-notes-history.md"
 ---
 
 # Debt retirement is an authorized state transition

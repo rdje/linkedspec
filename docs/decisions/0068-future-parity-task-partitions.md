@@ -1,7 +1,7 @@
 # ADR 0068: Future parity task evidence uses stable semantic partitions
 
 - Date: 2026-08-09
-- Status: accepted and implemented under `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.2`; atomic commit pending
+- Status: accepted and implemented under `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.2` at `61a52dbd`
 - Tags: documentation, task-tree, retrieval, routing, continuity, doctrine
 
 ## Routing transition authorization
@@ -75,7 +75,7 @@ navigation, not a compatibility content duplicate.
 - Task evidence is now a current bounded collection with 8,000-line / 1-MiB global member limits and stricter
   5,000-line / 768-KiB future-backlog member limits.
 - No parser, compiler, runtime, backend, MCP, CLI, fixture, protocol, schema, `.spec` language behavior, or README
-  content changes. Changes and engineering-note migration remains under `.3`.
+  content changes. Changes and engineering-note migration is separately implemented by ADR `0069`.
 
 ## Links
 

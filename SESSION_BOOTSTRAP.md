@@ -16,6 +16,12 @@ registered `README-STABILITY` doctrine enforces the reviewed line/byte budgets a
 `perl tools/read_document_history.pl --surface live_status --grep '<literal>'`; use `--all` only when full
 byte reconstruction is required. `scripts/check_document_history.sh` enforces the manifest and current view.
 
+`CHANGES.md` and `DEVELOPMENT_NOTES.md` are bounded current hot shards. Query older records with
+`perl tools/read_document_history.pl --surface change_history|engineering_notes --grep '<literal>'`. After
+prepending complete current records, run the matching `perl tools/roll_document_history.pl --surface <surface>
+--check`; if it requires rollover, use `--apply`, inspect the atomic archive/manifest/root update, and recheck.
+Never edit an immutable history segment.
+
 `docs/tasks/FUTURE-PARITY-BACKLOG.md` is a bounded current index. Resolve a stable leaf with
 `perl tools/read_task_tree.pl --tree FUTURE-PARITY-BACKLOG --id <stable-id>`; after editing the returned mutable
 semantic part, refresh its current index snapshot with

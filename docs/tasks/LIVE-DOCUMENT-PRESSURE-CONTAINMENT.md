@@ -3,11 +3,11 @@
 ## Metadata
 
 - Tree ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-- Status: `active` / task-evidence migration `.2` active
+- Status: `active` / changes-notes migration `.3` active
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-08-09`
-- Last updated: `2026-08-09` (`.0-.1` landed through `99fe03f3`; `.2` activated task-tree-first from that clean
-  boundary as intended atomic 178/300; no push)
+- Last updated: `2026-08-10` (`.0-.2` landed through `61a52dbd`; `.3` is active from that clean boundary as
+  intended atomic 179/300; no push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -159,8 +159,7 @@ or the README `.4` adoption/closeout that installs the guard.
   CLI 66/66 in both option environments, RAM 25%, and Phase 0 1,031/1,031 in 685 seconds.
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.2`
-  Status: `active` (2026-08-09; activated task-tree-first from clean live-history commit `99fe03f3`; intended
-    atomic 178/300; no push)
+  Status: `done` (2026-08-10; landed clean at `61a52dbd` as atomic 178/300; no push)
   Goal: Partition the oversized `FUTURE-PARITY-BACKLOG` task evidence by stable semantic ranges without changing
     node ids, frontier truth, acceptance evidence, or central task metadata enforcement.
   Depends on: `.0`
@@ -195,10 +194,50 @@ or the README `.4` adoption/closeout that installs the guard.
     brief, remove exact generated residue, and prove clean before `.3`.
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3`
-  Status: `pending`
+  Status: `active` (2026-08-10; activated task-tree-first from clean future-task-partition commit `61a52dbd`;
+    intended atomic 179/300; no push)
   Goal: Give `CHANGES.md` and `DEVELOPMENT_NOTES.md` bounded current indexes/hot shards, ordered archive manifests,
     query-first retrieval, and finite rollover thresholds without losing history.
   Depends on: `.0`
+  Acceptance: Preserve both exact clean sources while replacing each unbounded chronology with a bounded current
+    index/hot shard over immutable ordered history; reuse or deliberately extend the accepted document-history
+    contract; add repository-rooted query and deterministic threshold-driven rollover; make `COMMIT.md` the causal
+    bounded author workflow; ratchet both route debts through a newly staged execution ADR; align public/live docs;
+    pass focused and canonical signoff; commit, clear, remove exact residue, and prove clean before `.4`.
+
+  #### Acceptance Checklist
+
+  - [x] **CLEAN BASE / TASK-FIRST ACTIVATION** — Prove `61a52dbd` parent/subject, zero-byte brief, fresh memory/
+    Knowledge/task history, absent rendered book, zero managed runs, removed stale incremental cache, and empty
+    index/worktree; make this task file the sole first `.3` mutation.
+  - [x] **EXACT SOURCE / RECORD CLASSIFICATION** — Measure and bind both clean Git sources, identify complete
+    chronology-record boundaries and current hot material, and prove exact ordered accounting before moving bytes.
+  - [x] **IMMUTABLE HISTORY / BOUNDED CURRENT VIEWS** — Install strict ordered archive manifests and bounded stable
+    current indexes/hot shards that preserve every clean byte without making archives current-state authority.
+  - [x] **QUERY / ROLLOVER / MUTATION PROOF** — Provide root-derived literal/segment/reconstruction retrieval and a
+    deterministic 80%-warn / 90%-roll / <=50%-post-roll workflow with path, digest, ordering, and mutation checks.
+  - [x] **AUTHOR WORKFLOW / ROUTE RETIREMENT** — Update `COMMIT.md` and bootstrap/toolbox guidance so appends stay
+    bounded by construction; retire both immutable route debts only through an exact newly staged indexed ADR.
+  - [x] **LOCKSTEP / SOLE-FACING BOOK** — Align task index, architecture, roadmaps, Knowledge, live/memory, and the
+    mdBook without changing parser/compiler/runtime/backend/MCP/CLI/fixture/schema/language behavior or README.
+  - [x] **VERIFY / COMMIT / CLEAN HANDOFF** — Pass exact reconstruction/query/rollover/mutation/routing, task/
+    memory/Knowledge/doctrine/book checks and definitive canonical CI; commit atomically as 179/300, clear the
+    brief, remove exact generated residue, and prove clean before `.4`.
+
+  #### TOOLBOX Task-Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — Exact clean Git census, routed debt report, and `rg -n` consumer scan reproduce both
+    unbounded author histories plus the causal cumulative workflow before any root replacement.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Consumer/toolbox audit proves the roots have no executable content parser;
+    `COMMIT.md` mandates their growth, while ordered complete records and exact retrieval forbid blind truncation.
+  - [x] **FIX** — Preserve both clean sources in strict immutable manifests, replace roots with bounded hot shards,
+    add complete-record query/rollover, make the author checks mandatory, and retire routes through ADR `0069`.
+  - [x] **ADDRESSED (verified)** — Result: PASS for exact source hashes, three surfaces / 21 segments, 12/12
+    rollover cases, 34/34 history mutations, 32/32 routing mutations, outside-CWD query, and rendered-book review.
+  - [x] **NO REGRESSION** — Consumer census stays content-parser-free; all eleven task consumers remain partitioned;
+    parser/runtime/backend/MCP/CLI/fixture/schema/language behavior and README are unchanged.
+  - [x] **LOCKSTEP** — Workflow/bootstrap/toolbox, routes/ADRs/Knowledge, task/roadmaps/architecture, continuity roots,
+    and sole-facing book agree; final doctrine/canonical/commit evidence remains in the owning verification row.
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.4`
   Status: `pending`
@@ -208,9 +247,9 @@ or the README `.4` adoption/closeout that installs the guard.
 
 ## Current Frontier
 
-`.1` landed clean at `99fe03f3` as atomic 177/300. `.2` is the only active/eligible leaf and owns future-task
-semantic partitioning, stable-ID lookup, direct-consumer transfer, metadata mutation enforcement, and route
-transition as intended atomic 178/300. `.3-.4` remain pending; no pivot is permitted from the dirty `.2` worktree.
+`.2` landed clean at `61a52dbd` as atomic 178/300. `.3` is the only active/eligible leaf and owns exact changes/
+notes history, bounded current hot shards, query/rollover enforcement, author workflow, and both route transitions
+as intended atomic 179/300. `.4` remains pending; no pivot is permitted from the dirty `.3` worktree.
 
 ## Decisions
 
@@ -225,6 +264,9 @@ transition as intended atomic 178/300. `.3-.4` remain pending; no pivot is permi
   correctly refuses to treat this already-committed planning authority as a later mutation permit.
 - ADR `0068` implements the task partition from clean `99fe03f3`: exact source-line provenance, seven mutable
   semantic owners, immutable global history, strict current snapshots, stable-ID lookup, and route ratchet.
+- ADR `0069` implements the two author histories from clean `61a52dbd`: eleven/six exact immutable initial
+  segments, bounded stable hot roots, reserved reverse-chronological IDs, complete-record rollover, exact Git
+  source-slice checks, both debt retirements, and a mandatory two-surface author check in `COMMIT.md`.
 
 ## Reverification And Classification
 
@@ -323,7 +365,7 @@ All files and transient proof stay on the repository filesystem; no off-volume c
 
 ## Blockers
 
-- None. `.2` activated task-tree-first from verified clean `99fe03f3`.
+- None. `.3` activated task-tree-first from verified clean `61a52dbd`.
 
 ## Verification Log
 
@@ -361,11 +403,47 @@ doctrines, capability 80/0/0, MCP complete/141, Rust semantic admission 1/1 in 8
 admission 416/416 in 31.7 seconds, cursor 288, six-family containment, moved-root/outside-CWD execution, CLI 66/66
 in both option environments, RAM 57%, and Phase 0 1,031/1,031 in 696 seconds. Optional matrices remain unclaimed.
 
+Changes/notes clean-source classification: activation commit
+`61a52dbdd625230a69ae7cbc792be7a1ca7ee702` owns `CHANGES.md` at 44,270 lines / 3,104,131 bytes, Git blob
+`2e951cabd39f4f8cc00b5eebb499c9fbf417b971`, SHA-256
+`c8ba1b7c92fe2536d75bad23f047f46da6cf1fc036f5f420bdf997f2b2c14e42`, and 3,540 `^## ` record boundaries.
+The same commit owns `DEVELOPMENT_NOTES.md` at 21,308 lines / 2,291,424 bytes, Git blob
+`0522cdf5b9b1b182c44ffa764e56b1a6ed087508`, SHA-256
+`ca9ad5c3e3d243d972053cfbdc8a37fe545c92e41e143b1a70a8bd2fcfe9443c`, and 2,110 dated-entry or `^## `
+boundaries. Both working files remain byte-identical to HEAD before migration. Initial history may use exact
+line-greedy segments; future rollover must move only complete root records at those surface-specific boundaries.
+The first staged whitespace proof finds legacy trailing spaces in the exact notes tail. Byte preservation forbids
+normalizing them, so the existing raw-history-only Git attribute expands narrowly from blank-at-EOF to blank-at-
+EOL/EOF exemption for `docs/history/**/segment-*.md`; all current roots and non-archive files retain normal checks.
+Pre-signoff code review then finds the first rollover draft replacing the bounded root before publishing its
+manifest, creating a crash window where records could leave the current view before becoming queryable. The
+corrected recoverable transaction publishes segment/manifest/root in that order and idempotently completes an
+exact orphan or pending generation on rerun; mismatched bytes/metadata fail closed. Rollover self-proof expands
+from 10 to 12 cases for record identity and publication order.
+
+Changes/notes focused implementation proof: builder, reader, rollover, and checker syntax pass; rollover self-
+tests pass 12/12; document-history mutations pass 34/34 and all three surfaces / 21 segments reconstruct or source-
+slice exactly. Manifest-order full queries hash to clean-source SHA-256 `c8ba1b7...c14e42` and
+`ca9ad5c3...9443c`; literal queries succeed from `docs/`, proving caller-CWD independence. Current roots are
+27/512 lines and 2,184/65,536 bytes plus 34/512 lines and 3,251/65,536 bytes, both `OK`. Staged routing passes 44
+reader + 18 author routes, 20 current surfaces, and 32/32 mutations; exact routed totals are change history 13
+files / 44,305 lines / 3,112,606 bytes and notes 8 / 21,349 / 2,298,664. Knowledge passes at 800 facts / 6,616
+keys. The sole-facing 79-file book builds, and generated HTML isolates all-four-current, author-rollover,
+recoverable-publication, query, and remaining-closeout claims into rendered blocks before exact output removal.
+
+Changes/notes definitive signoff: one uninterrupted approved repository-volume canonical gate exits 0 after all
+eight doctrines, capability 80/0/0, MCP complete/141, Rust semantic admission 1/1 in 81.16 seconds, Julia
+semantic admission 416/416 in 30.9 seconds, cursor 288, six-family process containment, moved-root/outside-CWD
+execution, primary CLI 66/66 in both option environments, RAM 51%, and Phase 0 1,031/1,031 in 716 seconds.
+Optional matrices remain explicitly unclaimed; only the atomic commit, brief clearing, and clean proof remain.
+
 ## Commit Log
 
 `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0 - freeze bounded document store contract` — `dc8dd896`, atomic 176/300.
 
 `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.1 - bound live status over exact history` — `99fe03f3`, atomic 177/300.
+
+`LIVE-DOCUMENT-PRESSURE-CONTAINMENT.2 - partition future task evidence` — `61a52dbd`, atomic 178/300.
 
 ## Changelog
 
@@ -395,3 +473,12 @@ in both option environments, RAM 57%, and Phase 0 1,031/1,031 in 696 seconds. Op
 - `2026-08-10`: `.2` focused/book/eight-doctrine proof and one uninterrupted permission-correct canonical rerun
   pass through containment, relocation, CLI 66x2, RAM 57%, and Phase 0 1,031/1,031 in 696 seconds. Atomic commit,
   brief clearing, residue census, and clean proof are the remaining workflow actions.
+- `2026-08-10`: `.2` lands at `61a52dbd` with exact parent/subject, hook/doctrine/post-pointer proof, zero-byte
+  brief, fresh memory/Knowledge, absent book, empty managed runs, and 2.4-GiB stale incremental-cache cleanup;
+  clean cadence 178/300 passes. Activated `.3` as the sole first mutation for exact changes/notes hot stores.
+- `2026-08-10`: `.3` preserves both clean sources as eleven/six immutable segments, replaces the stable roots with
+  bounded hot shards, installs deterministic query/complete-record rollover, and retires both route debts through
+  ADR `0069`. Pre-signoff review closes a root-before-manifest interruption window with recoverable segment/
+  manifest/root publication. Focused history/routing/Knowledge/rendered-book proof and one uninterrupted canonical
+  gate pass through containment, relocation, CLI 66x2, RAM 51%, and Phase 0 1,031/1,031 in 716 seconds; the atomic
+  commit workflow remains.

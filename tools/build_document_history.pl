@@ -15,12 +15,16 @@ my $AUTHORITY = 'docs/decisions/0066-bounded-live-document-store.md';
 my $JSON = JSON::PP->new->canonical(1)->utf8(1);
 
 my ($surface, $family, $source_path, $source_commit, $current_path);
+my $segment_base = 1;
+my $source_order = 'source-file';
 GetOptions(
     'surface=s'       => \$surface,
     'family=s'        => \$family,
     'source-path=s'   => \$source_path,
     'source-commit=s' => \$source_commit,
     'current-path=s'  => \$current_path,
+    'segment-base=i'  => \$segment_base,
+    'source-order=s'  => \$source_order,
 ) or die usage();
 die usage() if grep { !defined($_) || $_ eq '' }
     ($surface, $family, $source_path, $source_commit, $current_path);
@@ -31,6 +35,10 @@ safe_path($source_path, 'source path');
 safe_path($current_path, 'current path');
 die "source commit must be a full lowercase Git object id\n"
     if $source_commit !~ /\A[0-9a-f]{40}\z/;
+die "segment base must be between 1 and 9999\n"
+    if $segment_base < 1 || $segment_base > 9_999;
+die "source order must be source-file or reverse-chronological\n"
+    if $source_order ne 'source-file' && $source_order ne 'reverse-chronological';
 
 chdir $ROOT or die "cannot enter repository root: $!\n";
 my $output_dir = "docs/history/$family";
@@ -61,6 +69,8 @@ for my $line (@lines) {
 }
 push @segments, [$start_line, $segment_lines, $segment] if $segment_lines;
 die "source is empty; refusing to create an empty history snapshot\n" if !@segments;
+die "segment ids would exceed four decimal digits\n"
+    if $segment_base + @segments - 1 > 9_999;
 
 make_path($output_dir) or die "cannot create $output_dir: $!\n";
 my @records;
@@ -68,7 +78,7 @@ my $ordinal = 0;
 for my $item (@segments) {
     my ($first, $count, $bytes) = @$item;
     ++$ordinal;
-    my $segment_id = sprintf('%04d', $ordinal);
+    my $segment_id = sprintf('%04d', $segment_base + $ordinal - 1);
     my $digest = sha256_hex($bytes);
     my $target = "$output_dir/segment-$segment_id-" . substr($digest, 0, 12) . '.md';
     write_bytes($target, $bytes);
@@ -98,7 +108,7 @@ my $metadata = {
     max_segment_lines  => $MAX_LINES,
     schema_version     => 1,
     segment_count      => scalar(@records),
-    source_order       => 'source-file',
+    source_order       => $source_order,
     surface            => $surface,
     type               => 'document_history',
 };
@@ -109,7 +119,8 @@ print "document-history: wrote $surface from $source_commit:$source_path as "
 
 sub usage {
     return "usage: perl tools/build_document_history.pl --surface ID --family DIR --source-path PATH "
-        . "--source-commit 40HEX --current-path PATH\n";
+        . "--source-commit 40HEX --current-path PATH [--segment-base N] "
+        . "[--source-order source-file|reverse-chronological]\n";
 }
 
 sub safe_token {

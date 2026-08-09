@@ -104,8 +104,10 @@ and replaces the stable root with its bounded five-section current view; it land
 `.2` preserves all 510 stable IDs from that clean boundary across seven mutable semantic parts and one immutable
 history part, replaces the monolith with a 381-line current index, transfers all eleven exact machine consumers,
 adds root-derived lookup/index update tooling, and closes 26/26 metadata mutations plus current route limits.
-Changes/notes remain `.3`; recomposition remains `.4`. No parser, runtime,
-backend, MCP, CLI, fixture, protocol, or `.spec` behavior changes. Recurring MCP
+Changes/notes `.3` now preserves exact clean sources across eleven/six immutable segments, installs bounded hot
+roots plus deterministic complete-record rollover, makes both pressure checks mandatory in the commit workflow,
+and retires both route debts under ADR `0069`. Recomposition remains `.4`. No parser, runtime, backend, MCP, CLI,
+fixture, protocol, or `.spec` behavior changes. Recurring MCP
 `.10.9.7.1.1.4` recomposes the committed rooted promotion
 unchanged and closes its implementation parents; `.10.9.7.2` now independently recomposes that full chain,
 closes `.10.9.7` and `.10.9`, and hands the clean boundary to public semantic/MCP no-drift `.10.10`.
