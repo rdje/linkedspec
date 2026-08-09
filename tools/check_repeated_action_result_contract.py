@@ -278,7 +278,7 @@ PUBLIC_CONTRACT = {
         {"path": "ROADMAP.md", "required_markers": ["Repeated-action rollout is closed at 8 complete / 0 pending", "tools/check_repeated_action_result_five_backend.sh"]},
         {"path": "ROADMAP_V2.md", "required_markers": ["Repeated-action rollout is closed at 8 complete / 0 pending", "tools/check_repeated_action_result_five_backend.sh"]},
         {"path": "ARCHITECTURE_STATE.md", "required_markers": ["repeated-action recurring/public no-drift is closed at 8 complete / 0 pending"]},
-        {"path": "LIVE_ACHIEVEMENT_STATUS.md", "required_markers": ["FUTURE-PARITY-BACKLOG.9.1.10.7 — close repeated-action public no-drift", "Repeated-action rollout is closed at 8 complete / 0 pending"]},
+        {"path": "docs/decisions/0067-live-achievement-status-history.md", "required_markers": ["FUTURE-PARITY-BACKLOG.9.1.10.7 — close repeated-action public no-drift", "Repeated-action rollout is closed at 8 complete / 0 pending"]},
         {"path": "docs/TASK_TREE.md", "required_markers": ["repeated-action recurring/public no-drift is closed"]},
         {"path": "docs/decisions/0048-explicit-repetition-action-result-collection.md", "required_markers": ["Status: accepted; rollout complete", "tools/check_repeated_action_result_five_backend.sh"]},
         {"path": "docs/decisions/INDEX.md", "required_markers": ["accepted; rollout complete", "Explicit repetition action returns are per-hit collection values"]},
@@ -304,7 +304,7 @@ PUBLIC_CONTRACT = {
         {"path": "docs/linkedspec-book/src/appendix/runtime-semantics.md", "text": "7 complete / 1 pending"},
         {"path": "docs/knowledge/explicit-or-action-result-shape-parity-gap.md", "text": "public rollout pending FUTURE-PARITY-BACKLOG.9.1.10.7"},
         {"path": "docs/tasks/FUTURE-PARITY-BACKLOG.md", "text": "Dual-ABI Lua `.9.1.10.5` is the next eligible leaf"},
-        {"path": "LIVE_ACHIEVEMENT_STATUS.md", "text": "`FUTURE-PARITY-BACKLOG.9.1.10.6` is active task-tree-first"},
+        {"path": "docs/decisions/0067-live-achievement-status-history.md", "text": "`FUTURE-PARITY-BACKLOG.9.1.10.6` is active task-tree-first"},
     ],
 }
 CLOSURE = {

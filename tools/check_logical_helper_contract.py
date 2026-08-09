@@ -313,7 +313,7 @@ PUBLIC_CONTRACT = {
             "required_markers": ["logical public no-drift", "8 complete / 0 pending"],
         },
         {
-            "path": "LIVE_ACHIEVEMENT_STATUS.md",
+            "path": "docs/decisions/0067-live-achievement-status-history.md",
             "required_markers": [
                 "FUTURE-PARITY-BACKLOG.5.2.9 — close logical-helper public no-drift",
                 "8 complete / 0 pending",

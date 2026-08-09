@@ -420,7 +420,7 @@ PUBLIC_CONTRACT = {
             "required_markers": ["duplicate-slot recurring/public no-drift", "7 complete / 0 pending"],
         },
         {
-            "path": "LIVE_ACHIEVEMENT_STATUS.md",
+            "path": "docs/decisions/0067-live-achievement-status-history.md",
             "required_markers": [
                 "FUTURE-PARITY-BACKLOG.9.1.8.1.7 — close duplicate-slot recurring/public no-drift",
                 "7 complete / 0 pending",

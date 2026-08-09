@@ -231,7 +231,7 @@
       {"path": "ROADMAP.md", "required_markers": ["Duplicate-slot rollout is closed at 7 complete / 0 pending", "tools/check_duplicate_regex_slot_identity_five_backend.sh"]},
       {"path": "ROADMAP_V2.md", "required_markers": ["Duplicate-slot rollout is closed at 7 complete / 0 pending", "tools/check_duplicate_regex_slot_identity_five_backend.sh"]},
       {"path": "ARCHITECTURE_STATE.md", "required_markers": ["duplicate-slot recurring/public no-drift", "7 complete / 0 pending"]},
-      {"path": "LIVE_ACHIEVEMENT_STATUS.md", "required_markers": ["FUTURE-PARITY-BACKLOG.9.1.8.1.7 — close duplicate-slot recurring/public no-drift", "7 complete / 0 pending"]},
+      {"path": "docs/decisions/0067-live-achievement-status-history.md", "required_markers": ["FUTURE-PARITY-BACKLOG.9.1.8.1.7 — close duplicate-slot recurring/public no-drift", "7 complete / 0 pending"]},
       {"path": "docs/TASK_TREE.md", "required_markers": ["duplicate-slot recurring/public no-drift is closed"]},
       {"path": "docs/linkedspec-book/src/overview/project-status.md", "required_markers": ["7 complete / 0 pending", "tools/check_duplicate_regex_slot_identity_five_backend.sh"]},
       {"path": "docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md", "required_markers": ["single-choice `::|`", "7 complete / 0 pending"]},

@@ -97,11 +97,12 @@ root-causes original adoption's nonexistent `test_input/` layout marker. `.4.1` 
 policy, strict JSONL registry, unconditional resulting-tree checker, stale-route repair, and 32/32 mutation
 classes. Canonical signoff passes all seven doctrines, CLI 66x2, and Phase 0 1,031/1,031 in 694 seconds. Unchanged
 `.4.2` proves the seven admitted owner hashes and independently passes CLI 66x2 plus Phase 0 1,031/1,031 in 673
-seconds, then closes atomically at `0bcb5a36`. Bounded-view audit `.0` now freezes ADR `0066`: seven historical
-live-status capability families and six exact future-task machine consumers must be decoupled before roots shrink;
-chronologies use strict Git-reconstructable manifests and bounded current views, while the future task uses seven
-semantic parts plus immutable legacy history. No debt-family content moves in `.0`; `.1` is next after its clean
-commit. Recurring MCP
+seconds, then closes atomically at `0bcb5a36`. Bounded-view audit `.0` freezes ADR `0066` and lands at `dc8dd896`.
+Live migration `.1` transfers all 13 capability consumers to indexed ADR `0067`, reconstructs the clean
+14,872-line source exactly from four immutable manifest segments, installs the `DOCUMENT-HISTORY` doctrine/query,
+and replaces the stable root with its bounded five-section current view. The future task still has six exact
+machine consumers and remains the semantic-partition owner `.2`; changes/notes remain `.3`. No parser, runtime,
+backend, MCP, CLI, fixture, protocol, or `.spec` behavior changes. Recurring MCP
 `.10.9.7.1.1.4` recomposes the committed rooted promotion
 unchanged and closes its implementation parents; `.10.9.7.2` now independently recomposes that full chain,
 closes `.10.9.7` and `.10.9`, and hands the clean boundary to public semantic/MCP no-drift `.10.10`.

@@ -12,6 +12,10 @@ Read `README.md`, then read and thoroughly understand:
 Before editing root `README.md`, read `README_POLICY.md`; changing detail routes to its canonical owner and the
 registered `README-STABILITY` doctrine enforces the reviewed line/byte budgets and cap-increase decision rule.
 
+`LIVE_ACHIEVEMENT_STATUS.md` is a bounded current view. Query exact older chronology through
+`perl tools/read_document_history.pl --surface live_status --grep '<literal>'`; use `--all` only when full
+byte reconstruction is required. `scripts/check_document_history.sh` enforces the manifest and current view.
+
 After reading the above, thoroughly, meticulously and precisely analyze `LinkedSpec.pm` and its import tree.
 
 When done, update `ARCHITECTURE_STATE.md` if deemed necessary, then help me fulfil all the objectives as captured in the roadmap. When PNT is requested, select the first eligible leaf from the active task tree's current frontier.

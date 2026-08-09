@@ -297,7 +297,7 @@
       {"path": "ROADMAP.md", "required_markers": ["Rule-local cursor rollout is closed at 74 files / 8 complete + 0 pending / 60 mutations", "tools/check_rule_local_cursor_five_backend.sh"]},
       {"path": "ROADMAP_V2.md", "required_markers": ["Rule-local cursor rollout is closed at 74 files / 8 complete + 0 pending / 60 mutations", "selected 5x2x5 recurring and public proof"]},
       {"path": "ARCHITECTURE_STATE.md", "required_markers": ["rule-local cursor public no-drift refresh", "74 migration files / 8 complete + 0 pending / 60 mutations"]},
-      {"path": "LIVE_ACHIEVEMENT_STATUS.md", "required_markers": ["FUTURE-PARITY-BACKLOG.9.1.9 — close cursor public no-drift", "74 migration files / 8 complete + 0 pending / 60 mutations"]},
+      {"path": "docs/decisions/0067-live-achievement-status-history.md", "required_markers": ["FUTURE-PARITY-BACKLOG.9.1.9 — close cursor public no-drift", "74 migration files / 8 complete + 0 pending / 60 mutations"]},
       {"path": "docs/TASK_TREE.md", "required_markers": ["rule-local cursor recurring/public no-drift at 74 files / 8 complete + 0 pending / 60 mutations", "Explicit repeated-OR action-result shape `.9.1.10` remains"]},
       {"path": "docs/decisions/0044-rule-local-cursor-and-mode-sensitive-bare-edges.md", "required_markers": ["accepted; implemented and public no-drift closed", "8 complete / 0 pending"]},
       {"path": "docs/knowledge/rule-local-cursor-and-bare-edge-contract.md", "required_markers": ["accepted and public-admitted; rollout 8 complete / 0 pending", "60 mutations"]},

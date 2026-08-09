@@ -65,8 +65,8 @@ or the README `.4` adoption/closeout that installs the guard.
   Children: `.0-.4`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0`
-  Status: `active` / signoff-complete pending atomic commit (2026-08-09; activated task-tree-first from clean
-    `0bcb5a36`; intended atomic 176/300; no push)
+  Status: `done` (2026-08-09; committed atomically at `dc8dd896` as 176/300; brief cleared; clean proof passed;
+    no push)
   Goal: Reverify the committed route registry, audit semantic retrieval obligations for all four debt families,
     and freeze exact archive/partition descriptors plus migration order without moving content.
   Depends on: `README-STABILITY-POLICY.4.2`
@@ -105,10 +105,58 @@ or the README `.4` adoption/closeout that installs the guard.
   - [x] **LOCKSTEP** — Plan, public book, continuity, atomic commit, brief, cleanup, and next-owner handoff align.
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.1`
-  Status: `pending`
+  Status: `active / signoff-complete pending atomic commit` (2026-08-09; activated task-tree-first from clean
+    descriptor commit `dc8dd896`; intended atomic 177/300; no push)
   Goal: Convert `LIVE_ACHIEVEMENT_STATUS.md` into a bounded current view while preserving its exact historical
     chronology in indexed repository-relative durable partitions and Git history.
   Depends on: `.0`
+  Acceptance: Decouple every executable current-state assertion from live chronology before shrinking it; archive
+    the exact clean `dc8dd896` live-status blob into strict schema-v1 root-relative segments and manifest; install
+    deterministic query/reconstruction and mutation-checked doctrine enforcement; replace the stable root with the
+    five-section bounded current view; update the commit workflow and public/live architecture; ratchet routing
+    through a newly staged execution ADR; pass focused and canonical signoff; commit, clear, remove exact residue,
+    and prove clean before `.2`.
+
+  #### Acceptance Checklist
+
+  - [x] **CLEAN BASE / TASK-FIRST ACTIVATION** — Descriptor commit `dc8dd896` has parent `0bcb5a36`, exact `.0`
+    subject, zero-byte brief, fresh 797/6,590 Knowledge Map, absent rendered book, zero managed runs, and empty
+    index/worktree; this task file is the sole first `.1` mutation.
+  - [x] **CURRENT-AUTHORITY DECOUPLING** — Remove all seven capability/public-closeout required-marker and stale-
+    claim dependencies on `LIVE_ACHIEVEMENT_STATUS.md`; route current assertions to governed contracts, ADRs,
+    Knowledge/task/roadmap/architecture/book owners, and mutation-lock zero residual live-history authority.
+  - [x] **EXACT HISTORY STORE / QUERY** — Snapshot `dc8dd896:LIVE_ACHIEVEMENT_STATUS.md` byte-for-byte into greedy
+    line-preserving <=4,096-line / 524,288-byte immutable repository segments, a strict schema-v1 JSONL manifest,
+    and `perl tools/read_document_history.pl` source/query/reconstruction modes with root-safe path handling.
+  - [x] **BOUNDED CURRENT VIEW / ROUTE TRANSITION** — Replace only the stable live root with five fixed sections,
+    at most sixteen recent rows, and <=256 lines / 32 KiB; add a staged execution ADR and ratchet the routing
+    registry/checker to indexed history plus bounded-current controls without refreshing the debt baseline.
+  - [x] **DOCTRINE / MUTATION / FAILURE PROOF** — Register strict document-history enforcement and reject schema,
+    order, identity, path, symlink, gap/overlap, count/hash/blob/reconstruction, immutable-segment, current-view,
+    marker-authority, limit, and transition-governance mutations with deterministic diagnostics.
+  - [x] **LOCKSTEP / NO LANGUAGE REGRESSION** — Align COMMIT/bootstrap/toolbox/architecture/task/roadmap/Knowledge,
+    changes/notes/live/memory, and sole-facing mdBook; preserve parser/compiler/runtime/backend/MCP/CLI/fixture/
+    schema/language behavior and leave future-task plus changes/notes migrations to `.2-.3`.
+  - [x] **VERIFY / COMMIT / CLEAN HANDOFF** — Pass exact reconstruction/query/current-view/consumer/mutation/routing,
+    task/memory/Knowledge/doctrine/book checks and definitive canonical CI; commit atomically as 177/300, clear the
+    brief, remove exact generated residue, and prove clean before `.2`.
+
+  Implementation evidence: `dc8dd896:LIVE_ACHIEVEMENT_STATUS.md` is 14,872 lines / 1,271,326 bytes, blob
+  `221159c6e15bdf1505186b3714c4b5c5848df889`, SHA-256
+  `683ef70df66c64e5f195c8bfe0e70f9561a13ed61ef4b1686a73a41ae35a9d55`. Greedy segments are 4,096 / 4,096 /
+  4,096 / 2,584 lines and their `--all` query hashes identically to the clean Git source. The new root is 36 lines
+  and has the exact six-heading title/section sequence. Six JSON files plus seven executable checkers now name
+  ADR `0067`; a complete repository scan under those scopes finds zero live-status authority.
+
+  Focused evidence: document history passes 20/20 mutation classes and 1 surface / 4 segments; callable remains
+  23 governance mutations, capability 80/0/0 + 24/6, duplicate 21 documents / 59 mutations, logical 19/26,
+  repeated 54, root 24/54, and cursor 28/60. The staged route report passes 44 reader + 18 author routes, all 20
+  surfaces, 32/32 mutations, and current/bounded `live_status` at 6 files / 14,913 lines / 1,276,086 bytes. mdBook
+  builds and generated HTML shows the history heading, three-command block, current status, and doctrine text as
+  separate rendered blocks; output and the exact empty managed run are removed. All eight doctrines pass. The
+  definitive repository-volume canonical gate exits 0 with MCP complete/141, Rust semantic admission 1/1 in
+  81.92 seconds, Julia semantic admission 416/416 in 31.5 seconds, cursor 288, containment and moved-root proof,
+  CLI 66/66 in both option environments, RAM 25%, and Phase 0 1,031/1,031 in 685 seconds.
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.2`
   Status: `pending`
@@ -130,9 +178,9 @@ or the README `.4` adoption/closeout that installs the guard.
 
 ## Current Frontier
 
-`.0` is signoff-complete for intended atomic 176/300 from clean README closeout `0bcb5a36`. `.1` becomes the only
-eligible leaf after this behavior-free descriptor contract commits, the brief clears, and the repository proves
-clean. No content migration may share `.0` or start from its dirty worktree.
+`.0` landed clean at `dc8dd896` as atomic 176/300. `.1` is signoff-complete and remains the only active/eligible
+leaf through its intended atomic 177/300 commit, brief clearing, residue check, and clean proof. `.2-.4` remain
+pending; no pivot is permitted from the dirty `.1` worktree.
 
 ## Decisions
 
@@ -243,7 +291,7 @@ All files and transient proof stay on the repository filesystem; no off-volume c
 
 ## Blockers
 
-- None. `.1` is dependency-complete but remains ineligible until `.0` commits, clears its brief, and proves clean.
+- None. `.1` activated task-tree-first from verified clean `dc8dd896`.
 
 ## Verification Log
 
@@ -258,9 +306,19 @@ runtimes complete/141, Rust semantic admission in 82.47 seconds, Julia semantic 
 288, project-data process containment, moved-root execution, primary CLI 66/66 in both option environments, RAM
 66%, and Phase 0 1,031/1,031 in 710 seconds. No optional matrix is claimed.
 
+Live-history implementation signoff: exact reconstruction/query/current-view and 20/20 history mutations pass;
+all seven transferred capability consumers preserve their admitted cardinalities; staged routing passes 20
+surfaces / 62 routes / 32/32 mutations with bounded `live_status`; task, memory, Knowledge, book, and all eight
+doctrines pass. The definitive repository-volume canonical gate exits 0 after MCP complete/141, Rust semantic
+admission 1/1 in 81.92 seconds, Julia semantic admission 416/416 in 31.5 seconds, cursor 288, project-data process
+containment, moved-root execution, CLI 66/66 in both option environments, RAM 25%, and Phase 0 1,031/1,031 in 685
+seconds. Optional matrices remain explicitly unclaimed.
+
 ## Commit Log
 
-`LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0 - freeze bounded document store contract` — intended atomic 176/300;
+`LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0 - freeze bounded document store contract` — `dc8dd896`, atomic 176/300.
+
+`LIVE-DOCUMENT-PRESSURE-CONTAINMENT.1 - bound live status over exact history` — intended atomic 177/300;
 commit pending.
 
 ## Changelog
@@ -276,3 +334,9 @@ commit pending.
 - `2026-08-09`: Focused routing/task/memory/Knowledge/doctrine/book proof and the definitive repository-volume
   canonical gate pass; canonical evidence includes containment, moved-root execution, CLI 66x2, RAM 66%, and
   Phase 0 1,031/1,031 in 710 seconds. Atomic commit/brief/clean proof remain the final workflow actions.
+- `2026-08-09`: `.0` lands at `dc8dd896` with exact parent/subject, hook/doctrine/post-pointer proof, zero-byte
+  brief, fresh memory/Knowledge, absent book, empty managed runs, and clean cadence 176/300. Activated `.1` as the
+  sole first mutation for live consumer/history/current-view migration.
+- `2026-08-09`: `.1` preserves the exact clean chronology in four immutable segments, transfers all thirteen
+  capability consumers to ADR `0067`, installs query/doctrine enforcement, and ratchets `live_status` from debt to
+  bounded current. Focused, book, eight-doctrine, and canonical proof pass; atomic commit/clean proof remain.

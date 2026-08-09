@@ -76,7 +76,8 @@ changed* lives in git (layer D), not here.
 | [0063](0063-bounded-readme-landing-page.md) | README is a bounded stable landing page | 2026-07-29 | accepted; original adoption and routing-pressure revision implemented/recomposed/closed | documentation, readme, doctrine, maintenance, navigation, local-ci, routing, pressure, lifecycle |
 | [0064](0064-expressive-self-containment-and-ebnf-profile.md) | Expressive self-containment and EBNF-like authoring use one semantic core | 2026-07-30 | accepted direction; contract and implementation pending | architecture, dsl, expressiveness, self-containment, ebnf, frontend, lowering, source-map, portability, parity |
 | [0065](0065-satisfiable-memory-activation-commit-pointer.md) | MEMORY records the clean activation commit, while Git owns current HEAD | 2026-07-30 | accepted/implemented; enforcement and independent closeout complete | architecture, memory, continuity, git, commit-workflow, hooks, enforcement, task-tree |
-| [0066](0066-bounded-live-document-store.md) | Live documentation uses bounded views over verified durable stores | 2026-08-09 | accepted direction; descriptor contract frozen, migrations pending | architecture, documentation, history, task-tree, retrieval, pressure, continuity, doctrine |
+| [0066](0066-bounded-live-document-store.md) | Live documentation uses bounded views over verified durable stores | 2026-08-09 | accepted direction; live status implemented, remaining migrations pending | architecture, documentation, history, task-tree, retrieval, pressure, continuity, doctrine |
+| [0067](0067-live-achievement-status-history.md) | Live achievement status is a bounded current view over exact history | 2026-08-09 | accepted and implemented; atomic commit pending | documentation, history, retrieval, routing, capability-governance, doctrine |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

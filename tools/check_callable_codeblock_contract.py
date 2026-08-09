@@ -156,7 +156,7 @@ EXPECTED_PUBLIC_CONTRACT = {
             "parent `.11.7` is closed",
             FIVE_BACKEND_PUBLIC_MARKER,
         ]},
-        {"path": "LIVE_ACHIEVEMENT_STATUS.md", "required_markers": [
+        {"path": "docs/decisions/0067-live-achievement-status-history.md", "required_markers": [
             "Four-backend callable public no-drift is signoff-complete",
             "parent `.11.7` is closed",
             FIVE_BACKEND_PUBLIC_MARKER,

@@ -358,7 +358,7 @@ sub validate_surface_contracts {
         my %verifier = map { $_ => 1 } qw(
             internal:executable internal:exists internal:indexed internal:landing internal:measure
             internal:overwrite internal:policy internal:query_first task_tree_metadata knowledge_map
-            external:https git:log
+            document_history external:https git:log
         );
         push @contract_errors, "surface $id has an undeclared verifier: $surface->{verifier}"
             if !$verifier{$surface->{verifier}};
@@ -695,6 +695,7 @@ sub run_fixed_verifier {
     my %commands = (
         task_tree_metadata => ['bash', 'scripts/check_task_tree_metadata.sh'],
         knowledge_map      => ['bash', 'knowledge-map/scripts/check_knowledge_map.sh'],
+        document_history   => ['bash', 'scripts/check_document_history.sh'],
     );
     return 1 if $surface->{verifier} =~ /\Ainternal:/;
     return 1 if $surface->{verifier} =~ /\A(?:external|git):/;
@@ -729,6 +730,15 @@ sub numeric_increase {
 sub limit_change_permitted {
     my ($old, $new, $reviewed) = @_;
     return !numeric_increase($old, $new) || $reviewed;
+}
+
+sub debt_retirement_permitted {
+    my ($old, $new, $reviewed_contract) = @_;
+    return $reviewed_contract
+        && ($old->{state} // '') eq 'debt'
+        && ($new->{state} // '') eq 'current'
+        && !keys(%{$new->{baseline} // {}})
+        && !keys(%{$new->{transition} // {}});
 }
 
 sub staged_new_adrs {
@@ -788,20 +798,6 @@ sub validate_registry_governance {
     for my $surface (@$surfaces) {
         my $id = $surface->{id};
         next if !$old{$id};
-        push @governance_errors, "surface $id immutable debt baseline changed"
-            if canonical_object($surface->{baseline}) ne canonical_object($old{$id}{baseline});
-        my %old_limits = %{$old{$id}{limits}};
-        my %new_limits = %{$surface->{limits}};
-        for my $key (grep { $_ ne 'owners' } keys %{$old{$id}{transition}}) {
-            $old_limits{"transition_$key"} = $old{$id}{transition}{$key};
-        }
-        for my $key (grep { $_ ne 'owners' } keys %{$surface->{transition}}) {
-            $new_limits{"transition_$key"} = $surface->{transition}{$key};
-        }
-        my $limit_reviewed = adr_authorizes_limit_change($id, \%old_limits, \%new_limits);
-        if (!limit_change_permitted(\%old_limits, \%new_limits, $limit_reviewed)) {
-            push @governance_errors, "surface $id threshold increase requires a newly added staged indexed ADR with exact old/new canonical limit objects";
-        }
         my $old_contract = {
             authority => $old{$id}{authority}, control => $old{$id}{control}, lifecycle => $old{$id}{lifecycle},
             member_limits => $old{$id}{member_limits}, members => $old{$id}{members}, owner => $old{$id}{owner},
@@ -814,8 +810,25 @@ sub validate_registry_governance {
             route_targets => $surface->{route_targets}, state => $surface->{state},
             transition_owners => $surface->{transition}{owners}, verifier => $surface->{verifier},
         };
+        my $contract_reviewed = adr_authorizes_contract_change($id, $old_contract, $new_contract);
+        if (canonical_object($surface->{baseline}) ne canonical_object($old{$id}{baseline})
+            && !debt_retirement_permitted($old{$id}, $surface, $contract_reviewed)) {
+            push @governance_errors, "surface $id immutable debt baseline changed without exact reviewed debt retirement";
+        }
+        my %old_limits = %{$old{$id}{limits}};
+        my %new_limits = %{$surface->{limits}};
+        for my $key (grep { $_ ne 'owners' } keys %{$old{$id}{transition}}) {
+            $old_limits{"transition_$key"} = $old{$id}{transition}{$key};
+        }
+        for my $key (grep { $_ ne 'owners' } keys %{$surface->{transition}}) {
+            $new_limits{"transition_$key"} = $surface->{transition}{$key};
+        }
+        my $limit_reviewed = adr_authorizes_limit_change($id, \%old_limits, \%new_limits);
+        if (!limit_change_permitted(\%old_limits, \%new_limits, $limit_reviewed)) {
+            push @governance_errors, "surface $id threshold increase requires a newly added staged indexed ADR with exact old/new canonical limit objects";
+        }
         if (canonical_object($old_contract) ne canonical_object($new_contract)
-            && !adr_authorizes_contract_change($id, $old_contract, $new_contract)) {
+            && !$contract_reviewed) {
             push @governance_errors, "surface $id lifecycle/control/owner contract change requires a newly added staged indexed ADR with exact old/new canonical contract objects";
         }
     }
@@ -883,7 +896,14 @@ sub run_mutation_self_tests {
     push @tests, ['28_frozen_identity_drift', sub { return sha256_hex('a') ne sha256_hex('b') && sha256_hex('a') =~ /^[0-9a-f]{64}$/ }];
     push @tests, ['29_debt_without_owner', sub { my $x={owners=>[]}; return !@{$x->{owners}} }];
     push @tests, ['30_unauthorized_debt_growth', sub { my $a={files=>2,lines=>2,bytes=>2}; my $b={files=>1,lines=>1,bytes=>1}; return $a->{lines}>$b->{lines} }];
-    push @tests, ['31_threshold_review', sub { my $o={max_lines=>10}; my $n={max_lines=>11}; return !limit_change_permitted($o,$n,0) && limit_change_permitted($o,$n,1) && limit_change_permitted($n,$o,0) }];
+    push @tests, ['31_threshold_and_debt_retirement_review', sub {
+        my $o={max_lines=>10}; my $n={max_lines=>11};
+        my $debt={state=>'debt',baseline=>{lines=>10},transition=>{owners=>['x']}};
+        my $current={state=>'current',baseline=>{},transition=>{}};
+        return !limit_change_permitted($o,$n,0) && limit_change_permitted($o,$n,1)
+            && limit_change_permitted($n,$o,0) && !debt_retirement_permitted($debt,$current,0)
+            && debt_retirement_permitted($debt,$current,1);
+    }];
     push @tests, ['32_resulting_tree_disagreement', sub { my ($index,$worktree)=('a','b'); return $index ne $worktree }];
     my @failed;
     for my $test (@tests) {

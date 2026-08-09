@@ -41,6 +41,7 @@ DOCTRINES=(
   "TASK-ACCEPTANCE|staged governed changes carry a task-tree acceptance checklist with LinkedSpec-tool evidence|scripts/check_diagnosis_evidence.sh"
   "REPO-ROOT-PATHS|tracked repository paths and all five primary-command roots are relocation-safe|scripts/check_repo_root_path_portability.sh"
   "PROJECT-DATA-STORAGE|tracked project-storage defaults and documented outputs stay repository-filesystem rooted|scripts/check_project_data_storage_locality.sh"
+  "DOCUMENT-HISTORY|bounded current documentation views preserve exact repository-local queryable history|scripts/check_document_history.sh"
   "README-STABILITY|README and every routed destination retain reviewed resulting-tree pressure controls|scripts/check_readme_stability.sh"
 )
 

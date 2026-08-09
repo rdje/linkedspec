@@ -5,16 +5,17 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `0bcb5a36` — clean README routing-pressure closeout HEAD from which bounded-store descriptor
-  leaf `.0` activated task-tree-first (175/300; no push).
-- latest_completed_leaf: bounded document-store contract `.0` is signoff-complete under intended subject
-  `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0 - freeze bounded document store contract` as atomic 176/300; commit pending.
-- active_work_unit: behavior-free consumer/retrieval audit and exact descriptor/topology/rollback contract `.0`.
-- next_action: commit canonical-green `.0`, clear the brief, prove clean, then activate `.1` to decouple live
-  capability assertions and implement the verified history mechanism/current view.
-- in_flight_uncommitted: task/ADR/Knowledge/roadmap/architecture/book/continuity planning only; none of the four
-  debt-family sources is moved, registry/checker/runtime behavior is unchanged, and no background job remains.
-- blockers: none. Focused checks and definitive canonical CI pass; `.1` waits only for atomic `.0` clean handoff.
+- activation_commit: `dc8dd896` — clean bounded-store descriptor HEAD from which live history leaf `.1` activated
+  task-tree-first (176/300; no push).
+- latest_completed_leaf: descriptor/topology contract `.0` is committed at `dc8dd896` under exact subject
+  `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0 - freeze bounded document store contract` as atomic 176/300.
+- active_work_unit: live consumer decoupling, exact history mechanism, bounded current view, and route transition `.1`.
+- next_action: commit canonical-green `.1`, clear the brief, prove clean, then activate `.2` task-tree-first for
+  semantic future-task partitioning and exact consumer lookup.
+- in_flight_uncommitted: `.1` implementation/docs only; four segments preserve the clean live source exactly,
+  the root is bounded, all 13 capability consumers moved, and no background job remains.
+- blockers: none. Focused history/capability/routing/book checks, all eight doctrines, and canonical E4 pass; only
+  the atomic commit, brief clearing, residue check, and clean proof remain before `.2`.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes, and 11 topology mutations advance governance to 53. Public authored values/transactions remain future.
@@ -41,9 +42,9 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - preserved_contract_handoff: repeated-action closure next_owner remains `FUTURE-PARITY-BACKLOG.10.1`.
 - current_readme_contract: README stays 105/5,057 under hard 128/6,144 caps. `.4.1` implements 62 routes over 20
   surfaces with reader/overflow separation, lifecycle controls, immutable debt, reviewed limits, and 32/32
-  mutations. Current fixture roots are `t/` and `tests/`, not root `test_input/`; `.4.2` closes parent `.4` unchanged.
-- documentation_debt_owner: ADR `0066` freezes root-relative Git-reconstructable history manifests, bounded live/
-  hot roots, seven semantic future parts plus legacy history, exact consumer rerouting, `.1-.4` order, and rollback.
+  mutations. `live_status` is now current/bounded through exact ADR `0067`; other three debt families remain.
+- documentation_debt_owner: ADR `0066` freezes all stores; `.1` adds four exact live segments, query, 20 mutation
+  classes, the eighth doctrine, 13-consumer transfer, bounded root, and reviewed debt retirement under ADR `0067`.
 - current_transaction_contract: future syntax is exact `recognition_checkpoint`,
   `recognize_once(token, call(Rule))`, `recognition_commit`, and `recognition_rollback`; match boolean and staged
   payload are separate. Tokens are linear; effects are closed 9 allowed/11 rejected; marks become invocation-
@@ -53,6 +54,6 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   retains final public no-drift. `TASK-TREE-METADATA-HYGIENE.5` separately owns active-frontier freshness.
 - latest_bootstrap_read: 2026-08-09 — complete roadmap, codebase, mdBook, bootstrap/memory/task/ADR/Knowledge,
   README-policy/checker/routes, storage/canonical, history, and sole-facing status review refreshed.
-- pivot_guard: commit/prove containment `.0` clean before `.1` migration or returning to transaction work.
-- push_policy: hard lock at 300 new local commits; containment `.0` is intended atomic 176/300; no push.
+- pivot_guard: commit/prove live migration `.1` clean before `.2` partitioning or returning to transaction work.
+- push_policy: hard lock at 300 new local commits; containment `.1` is intended atomic 177/300; no push.
 - environment: use project-data wrappers and `perl -Iperl`; approved canonical containment may take 30 minutes.

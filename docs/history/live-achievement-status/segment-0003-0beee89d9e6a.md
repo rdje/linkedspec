@@ -1,0 +1,4096 @@
+  four-backend admission; census remains 56/1/3.
+
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.4.4 — add Julia native spec resolution**
+  (DONE — Julia file-oriented native role passes; final admission `.1.6.4.5` active).
+
+  **Implementation:** Public progressive resolve/load/compile API, exact name/path intent, ordered roots, strict
+  UTF-8, source identity, typed structured exceptions, staged-function composition, attributed engine, CLI
+  delegation, and removal of recursive repository fallback.
+
+  **Proof:** Direct 14/9/4 fixture plus pipeline testsets pass 82 assertions; complete Julia package passes 1,110
+  assertions, exact 61x2 CLI and 105 corpus fixtures pass. Census 56/1/3.
+
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.4.3 — add Dart native spec resolution**
+  (DONE — Dart file-oriented native role passes; Julia `.1.6.4.4` active).
+
+  **Implementation:** Public progressive resolve/load/compile API, exact name/path intent, ordered roots, strict
+  UTF-8, source identity, structured exceptions, staged-function composition, attributed engine, and CLI delegation.
+
+  **Proof:** Direct 14/9/4 fixture plus pipeline tests pass; format/analyze and the complete Dart gate pass 165
+  tests, exact 61x2 CLI, and 105 corpus fixtures. Census 55/1/4.
+
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.4.2 — add Rust native spec resolution**
+  (DONE — Rust file-oriented native role passes; Dart `.1.6.4.3` active).
+
+  **Implementation:** Public progressive resolve/load/compile API, exact name/path intent, ordered roots, strict
+  UTF-8, source identity, typed JSON errors, full staged-function composition, attributed engine, and CLI delegation.
+
+  **Proof/cleanup:** Direct 14/9/4 fixture plus pipeline tests pass; complete Rust gate passes
+  137/105/196/5-diagnostic/3-generated/5-loader/10-trace and 61x2 CLI. No new Clippy findings. Census 54/1/5; 2.0 GB
+  target removed.
+
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.4.1 — define native spec resolution contract**
+  (DONE — executable policy fixed; Rust native API `.1.6.4.2` active).
+
+  **Contract:** Separate portable names/exact paths, cwd→suffix→ordered roots, no recursion/traversal, first regular
+  file, exact identity, stable pipeline errors, and strict preserved UTF-8 without UTF-16/32 autodetection.
+
+  **Proof:** The standalone checker originally passed 13 name, nine resolution/file-kind, and four text cases and is wired
+  into the canonical local gate. That complete gate passes 239-name coverage, focused suites, 61x2 Perl CLI, and
+  Phase 0 `1..1030` in 502 seconds. No backend behavior changed; census remains 53/1/6.
+
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.4.0 — split native spec resolution**
+  (DONE — source-backed fallback drift recorded; neutral contract `.1.6.4.1` active).
+
+  **Finding:** Perl `PathSearch` fallback has unordered hash-key precedence; Rust/Dart stop after three candidates;
+  Julia alone recursively scans the repository. Non-Perl resolution is still process-adapter-only.
+
+  **Split:** `.1` owns explicit ordered roots and the neutral fixture; `.2`/`.3`/`.4` own Rust/Dart/Julia native
+  APIs; `.5` owns exact direct-library plus CLI admission. No behavior changed; census remains 53/1/6.
+
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.3.2 — admit Rust runtime diagnostics**
+  (DONE — structured diagnostic parent `.1.6.3` closed; native resolution `.1.6.4` active).
+
+  **Proof:** Complete Rust gate passes format, 137 unit, 105 oracle, 196 integration, five diagnostic, three
+  generated-source, ten trace, and 61x2 CLI cases.
+
+  **Admission/cleanup:** Structured diagnostics promote to pass at census 53/1/6. The consumed 2.0 GB Rust target
+  cache is removed.
+
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.3.1 — add Rust runtime diagnostics**
+  (DONE — typed native implementation closed; final admission `.1.6.3.2` active).
+
+  **Implementation:** Serializable neutral diagnostic/error records, optional engine source identity, typed
+  accumulator/direct-value methods, deepest-rule capture before unwind, and unchanged string adapters.
+
+  **Proof:** Five focused tests and the full runtime package pass (137 unit, 105 oracle, 196 integration, five
+  diagnostic, three generated-source, ten trace). Strict Clippy has no new findings; 14 pre-existing failures remain
+  in untouched files.
+
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.3.0 — split Rust runtime diagnostics**
+  (DONE — actual failure boundary established; typed implementation `.1.6.3.1` active).
+
+  **Finding:** Runtime `Engine` APIs and frames return raw strings; core `LinkedSpecError::Runtime` is unused.
+  `execute_rule` sees the deepest child error before unwind, while current context/engine state lacks diagnostic
+  and source identity.
+
+  **Split:** `.1` adds typed diagnostic-aware native execution with compatibility adapters; `.2` runs complete
+  no-drift proof, promotes the capability, and closes the parent. No runtime behavior changed in this audit leaf.
+
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.2.3 — admit exact descriptor parity**
+  (DONE — compiled-descriptor parent `.1.6.2` closed; structured Rust diagnostics `.1.6.3` active).
+
+  **Implementation:** One shared JSON contract fixes exact top-level, metadata, and canonical function-record
+  fields. Perl adds the source-order index; Dart/Julia use descriptor-only projections; Rust's typed projection
+  already matches. Internal backend AST serialization remains private.
+
+  **Proof:** Focused shared-contract tests pass on all four variants. Dart passes 160 tests, 61x2 CLI, and 105
+  corpus cases; Julia passes 1,040 assertions, primary CLI processes, and 105 corpus cases; Rust's three focused
+  tests plus its prior full gate pass; Perl Phase 0 passes `1..1030` in 775 seconds. Census: 52 pass / one partial /
+  seven gap.
+
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.2.2 — expose Rust compiled descriptors**
+  (DONE — typed Rust projection closed; four-backend admission `.1.6.2.3` active).
+
+  **Implementation:** Public typed `descriptor_state()` and JSON `to_descriptor_json()` project `spec`,
+  `functions`, `dependency_regex_map`, and `meta` directly from `CompiledSpec`. Ordered dependency refs and staged
+  function metadata survive compiled-state round trips; runtime execution remains independent.
+
+  **Proof:** Three focused descriptor tests, full core package, formatting, 137 runtime, 105 oracle, 196
+  integration, three generated-source, ten trace, and 61x2 CLI cases pass. Strict clippy finds only 14 pre-existing
+  untouched-file errors.
+
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.2.1 — reconcile descriptor model identity**
+  (DONE — Perl/Dart/Julia identity aligned; Rust projection `.1.6.2.2` active).
+
+  **Implementation:** Perl now reports `compiled_descriptor_state` as the outward model and explicitly names its
+  `compiled_spec_state` / `compiled_dependency_regex_state` components. No descriptor payload or parser behavior
+  changed.
+
+  **Proof:** Exact four-key/model probe, syntax, and full Phase 0 `1..1030` pass in 509 seconds. The census returns
+  to 51 pass / one partial / eight gap.
+
+- 2026-07-11: **FUTURE-PARITY-BACKLOG.1.6.2.0 — split outward descriptor parity**
+  (DONE — canonical descriptor identity `.1.6.2.1` active before Rust projection).
+
+  **Audit:** `return_descriptor` confirms the four public top-level keys but finds Perl's stale
+  `compiled_spec_state_v1` model tag. Source proves the final owner is actually `compiled_descriptor_state`, which
+  already matches the mdBook, Dart, and Julia. Rust has no public projection or descriptor-focused proof.
+
+  **Split/status:** `.1` reconciles the public model identity, `.2` adds Rust's idiomatic projection, and `.3`
+  closes four-backend admission. The capability census is honestly 50 pass / two partial / eight gap while repair
+  is active.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.5 — admit exhaustive capability corpus**
+  (DONE — exhaustive current-surface `.1.6.1` closed; outward Rust descriptor `.1.6.2` active).
+
+  **Implementation:** Reconciled the two shared inventory omissions, strengthened strict coverage with a reverse
+  neutral-source-to-Perl-contract check, and atomically admitted six governed semantic families. The aligned
+  surface is 239 current calls and the mandatory neutral corpus is 105 exact fixtures.
+
+  **Proof:** Perl regeneration and the full local gate pass Phase 0 `1..1030`; Rust passes its full gate over 105
+  fixtures, Dart passes 160 tests plus 105/105 and both CLI environments, and Julia passes 1,036 assertions plus
+  105/105 and primary CLI conformance. Strict coverage reports zero omissions. About 1.75 GB of reproducible
+  Rust, Dart, and Julia artifacts were removed.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3 — complete Julia capture marks**
+  (DONE — all backend capture repairs closed; final admission `.2.2.5` active).
+
+  **Implementation:** Julia now executes the complete stable/advancing anonymous and named capture family over
+  rule-local code-unit marks with character-based public projections. Bare mark names remain symbolic; implicit
+  non-repeated `AND` blind-call results retain ordered child values.
+
+  **Proof:** Both governed hashes, implicit-result/rule-local/multibyte locks, 1,028 package assertions, primary
+  CLI conformance, and 99/99 corpus pass. The disposable 70 MB depot was removed. Final admission owns the
+  provisional two-helper inventory reconciliation and six-fixture promotion.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.2 — complete Dart capture marks**
+  (DONE — Dart exact anonymous/named capture values closed; Julia `.2.2.4.3` active).
+
+  **Implementation:** Rule-local code-unit marks with character projections execute all stable/advancing, bridge,
+  boundary/copy, and two-mark operations. Bare mark names remain symbolic; implicit non-repeated `AND` blind-call
+  results retain ordered child values.
+
+  **Proof:** Both governed hashes, implicit-result/rule-local/multibyte locks, formatting, fatal analysis, 160 package
+  tests, 61/61 CLI cases in both environments, and 99/99 corpus pass. The 30 MB cache was removed. Final admission
+  owns the newly exposed provisional-inventory omission for two governed bridge helpers.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.1 — complete Rust capture marks**
+  (DONE — Rust exact anonymous/named capture values closed; Dart `.2.2.4.2` active).
+
+  **Implementation:** Bare mark arguments retain symbolic identity; missing bridge/column/two-mark advancing
+  helpers and numeric mark presence now match Perl. Interpreted and generated non-repeated `AND` blind-call
+  wrappers surface their ordered child-return array when no explicit parent return overrides it.
+
+  **Proof:** Both governed exact hashes, 137 library, 196 integration, 99 oracle, three emitter, ten trace, and
+  61/61 CLI cases in both environments pass.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.3 — align Julia marker control**
+  (DONE — all exact control values closed; Rust capture/mark `.2.2.4.1` active).
+
+  **Implementation:** Marker switch siblings execute as one nested-depth-aware first-match/default chain in action
+  and value blocks; existing `i`/`elif` aliases remain intact.
+
+  **Proof:** Governed `["elif","case-b"]`, 1,023 package assertions, 61/61 shared CLI cases in both environments,
+  and unchanged 99/99 corpus pass. The disposable 122 MB depot was removed.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.2 — align Dart marker control**
+  (DONE — Dart exact control value closed; Julia `.2.2.3.3` active).
+
+  **Implementation:** Marker switch siblings now execute as one nested-depth-aware selectable chain in action and
+  value blocks. The first matching case excludes later cases/default; existing `i`/`elif` aliases stay intact.
+
+  **Proof:** Governed `["elif","case-b"]`, formatting, fatal analyzer, 155/155 package tests, 61/61 shared CLI
+  cases in both environments, and unchanged 99/99 corpus pass.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.3.1 — align Rust marker control**
+  (DONE — Rust exact control value closed; Dart `.2.2.3.2` active).
+
+  **Implementation:** Rust known-call validation and statement-if gating now treat `i`/`elif` as exact short
+  aliases for `if`/`elseif`. Existing switch match tracking already excludes default after a matched case.
+
+  **Proof:** Governed `["elif","case-b"]`, formatting, 137 library, 194 integration, 99 oracle, three emitter,
+  ten trace, and 61/61 CLI cases in both environments pass. The 1.6 GB target cache was removed.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.3 — align Julia empty-match positions**
+  (DONE — all exact position values closed; Rust marker-control `.2.2.3.1` active).
+
+  **Implementation:** Existing nullable local-match state now projects exact null capture/length/position values,
+  empty containers, numeric named presence, and stable 1-based line/column defaults. A real zero-width match
+  remains present.
+
+  **Proof:** Governed exact position source, independent zero-width lock, 1,022 package assertions, 61/61 shared
+  CLI cases in both environments, and unchanged 99/99 corpus all pass. The 122 MB disposable depot was removed.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.2 — align Dart empty-match positions**
+  (DONE — Dart exact position values closed; Julia `.2.2.2.3` active).
+
+  **Implementation:** Nullable local-match state now projects exact null capture/length/position values, empty
+  containers, numeric named presence, and stable 1-based line/column defaults. A real zero-width match remains
+  present.
+
+  **Proof:** Governed exact position source, independent zero-width lock, formatting, fatal analyzer, 154/154
+  package tests, 61/61 shared CLI cases in both environments, and unchanged 99/99 corpus all pass.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.2.1 — align Rust empty-match positions**
+  (DONE — Rust exact position values closed; Dart `.2.2.2.2` active).
+
+  **Implementation:** Explicit entry/local match-presence bits replace zero-offset inference across saved rule
+  frames. Absent local capture/length/position values are null, containers are empty, named presence is numeric,
+  and 1-based line/column defaults remain stable; real zero-width matches remain present.
+
+  **Proof:** Governed exact position source, independent zero-width lock, 137/137 library, 193/193 integration,
+  unchanged 99-case oracle (three harness tests), and formatting pass. Strict clippy exposed only 12 pre-existing
+  unrelated lints and no changed-line issue.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.3 — align Julia pure helper values**
+  (DONE — all exact pure values closed; Rust position `.2.2.2.1` active).
+
+  **Implementation:** Numeric `1`/`0` predicate results, shared direct-literal explicit-splice evaluation, and
+  standalone explicit working-array string transforms now match Perl, Rust, and Dart. Typed literal booleans and
+  pure value/receiver forms remain distinct and unchanged.
+
+  **Proof:** The governed exact source, 1,020 package assertions, 61/61 shared CLI cases in default and POSIX
+  environments, and the unchanged 99-case corpus pass. The pure mechanism parent is closed.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.2 — align Dart pure helper values**
+  (DONE — Dart exact pure values closed; Julia `.2.2.1.3` active).
+
+  **Implementation:** Numeric `1`/`0` predicate results, direct-literal explicit `flat` splicing, and standalone
+  explicit working-array string transforms now match Perl and Rust. Typed literal booleans and pure
+  value/receiver forms remain distinct and unchanged.
+
+  **Proof:** Governed exact fixture, 152/152 package tests, fatal analyzer, 61/61 shared CLI cases in default and
+  POSIX environments, unchanged 99-case corpus, and Dart formatting pass through the recurring backend gate.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.1.1 — align Rust pure helper values**
+  (DONE — Rust exact pure values closed; Dart `.2.2.1.2` followed).
+
+  **Implementation:** Numeric `1`/`0` predicate results, direct-literal explicit `flat` splicing, and standalone
+  explicit working-array string transforms now match Perl. Typed literal booleans and pure value/receiver forms
+  remain distinct and unchanged.
+
+  **Proof:** Governed exact fixture, 191/191 integration, unchanged 99-case oracle (three harness tests), and Rust
+  formatting pass. Nine stale helper-result expectations were aligned; mdBook statement/value semantics agree.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.2.0 — split executable capability residuals**
+  (DONE — 100/105 diagnostic split; Rust pure-value `.2.2.1.1` active).
+
+  **Audit:** Corrected three-slot capture timing and newline control produce all six exact Perl values; provisional
+  105-case source coverage is 237/237. Rust, Dart, and Julia each pass 100/105, proving call recognition alone is
+  insufficient. Residuals are pure values, empty local match, marker control, and capture/mark execution.
+
+  **Ownership/safety:** Each mechanism is split into one child per backend. The reusable safe `source_file`
+  generator seam and corrected governed sources remain, while diagnostic corpus entries were removed so the
+  mandatory 99-case boundary stays green. Exact findings are in the task tree, census, book, and Knowledge Map.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.1 — terminate newline switch closure**
+  (DONE — narrow Perl repair closed; final fixture/oracle proof `.1.6.1.2.2` active).
+
+  **Implementation:** Pending lowered statements retain their canonical contract ID. `endswitch_flow` now emits
+  the host `;` needed after its Perl `do { ... }` wrapper; ordinary leading-`}` block closures remain unchanged.
+
+  **Proof:** Five focused source/runtime assertions pass, including newline-only combined control returning
+  `["elif","case-b"]`. Perl syntax checks and full Phase 0 `1..1030` pass in 491 seconds. The mdBook limitation
+  and Knowledge Map gap are resolved.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.2.0 — split control-close terminator residual**
+  (DONE — audit/split closed; contract-aware repair `.1.6.1.2.1` active).
+
+  **Audit:** Corrected three-slot capture/mark timing returns the exact anonymous and named hashes in memory.
+  Newline-only combined control splits into independent events but emits `} }` directly before `return`.
+
+  **Root cause/ownership:** Marker switch is a Perl `do { ... }` expression requiring termination; generic
+  leading-`}` suppression is too broad. `.2.1` owns precise repair and Phase 0; `.2.2` owns final fixtures and
+  four-backend proof. No runtime or committed 99-case corpus behavior changed in this slice.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.1 — enforce universal newline separators**
+  (DONE — common Perl repair closed; strict current-call coverage `.1.6.1.2` active).
+
+  **Implementation:** Every unquoted depth-zero LF/CRLF/CR now separates statements regardless of call versus
+  assignment shape; quote, regex, nesting, comment, attached-continuation, and same-line rules remain protected.
+
+  **Proof/cleanup:** New 17-assertion focused lock, Phase 0 `1..1029`, unchanged Perl regeneration, and Rust/Dart/
+  Julia 99/99 pass. Stale empty corpus dirs and 1.4 GB Rust/86 MB Julia/20 KB Dart caches were safely removed.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.1.0 — audit neutral language coverage**
+  (DONE — exhaustive audit/split closed; newline separator repair `.1.6.1.1` active).
+
+  **Audit:** Dart and Julia expose the same 237 current ActionIR names. All are in the mdBook; 98 are absent from
+  the 99-case neutral source corpus. Six canonical fixture families make the residual surface concrete.
+
+  **Finding/proof:** Pure, position, and explicit-separator control fixtures execute on Perl. Toolbox probes isolate
+  missing generated boundaries/raw targets in newline capture, cursor, and marker sequences. Phase 0 `1..1028`
+  passes; no runtime behavior or generated corpus changed.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.6.0 — audit backend capability parity**
+  (DONE — validated 15x4 census/split closed; neutral proof `.1.6.1` active).
+
+  **Inventory:** Added a strict machine-readable matrix with 47 pass, five partial-proof, and eight gap backend
+  states. Every evidence path and non-pass/future/legacy owner is validated; core CI now runs the checker.
+
+  **Findings:** Ordered leaves own exhaustive language/helper proof, Rust descriptor projection, Rust structured
+  runtime diagnostics, native named/file resolution, and Dart full-pipeline trace. Generated source remains `.3`.
+
+  **Proof:** Checker syntax/self-validation, full core gate through Phase 0 `1..1028` in 496s, mdBook, Knowledge
+  Map, governance, whitespace, and cleanup pass. No parser/compiler/runtime behavior changed.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.4.3 — close exact primary CLI parity**
+  (DONE — exact CLI parent `.1.5` is closed; capability census `.1.6` is active).
+
+  **Implementation:** Added one recurring driver that builds/prepares/warms Perl, Rust, Dart, and Julia, then runs
+  the unchanged 61-case suite under default and POSIX option environments. The core gate exposes the matrix via
+  `LINKEDSPEC_RUN_CLI_MATRIX=1` and governs every backend script as a tracked, syntax-checked CI input.
+
+  **Proof/cleanup:** All 4x2x61 legs, complete Rust/Dart/Julia focused gates, and the broader Phase 0 `1..1028`
+  gate pass. Safe cleanup removes 1.6 GB Rust target, 143 MB Julia depot, and 30 MB Dart cache after use.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.4.2 — add canonical Julia CLI trace**
+  (DONE — Julia is 61/61 default/POSIX; recurring four-command gate `.1.5.4.3` active).
+
+  **Implementation:** Added adapter-local ADR `0024` phases with exact thresholds, UTF-8 counts, escaping, emoji,
+  sinks, file lifecycle, traced failures, and result framing. Rich native Julia trace remains independent.
+
+  **Proof:** The complete Julia gate passes 1,019 assertions, nine process families, and 99/99 corpus; the unchanged
+  61-case suite passes in both option environments. Docs/KM/governance/book/whitespace/cleanup agree.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.4.1 — align Julia CLI boundary**
+  (DONE — Julia is 42/61 default/POSIX; `.1.5.4.2` active for 19 canonical-trace cases).
+
+  **Implementation:** Exact shared help/usage, raw-byte `isvalid` UTF-8 loading, and phase-only primary stderr now
+  match the portable contract. Native structured exceptions and rich trace remain independent and unchanged.
+
+  **Proof:** The package passes 1,019 assertions, the updated nine-family process checker and 99/99 corpus pass,
+  and all non-trace shared cases pass in both option environments. Docs/KM/governance/book/whitespace/cleanup agree.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.4.0 — split Julia global CLI repair**
+  (DONE — warmed Julia is 13/61; `.1.5.4.1` active for help/UTF-8/errors).
+
+  **Audit:** All 11 ordinary results plus silent trace pass. Forty-eight failures partition into shared help bytes,
+  strict invalid-UTF-8 plus phase-only stderr, and canonical trace; cold precompile output requires driver warmup.
+
+  **Ownership:** `.1` repairs boundary/errors, `.2` canonical trace, `.3` the recurring four-backend driver. No
+  Julia behavior changed in this audit/split; docs/KM/governance/book/cleanup pass.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.3.4 — close Dart primary CLI**
+  (DONE — Dart parent closed; global four-backend identity `.1.5.4` active).
+
+  **Recurring gate:** `tools/run_dart_local.sh` passes format/analyzer, 151 tests, 61/61 default, 61/61 POSIX, and
+  99/99 corpus. The broader gate passes doctrines/focused suites, both Perl legs, and Phase 0 `1..1028` in 527s.
+
+  **Closeout:** Help/fixtures are unchanged; task/roadmap/live docs, README, mdBook, Knowledge Map, whitespace, and
+  generated-artifact cleanup agree. Dart exact CLI is closed without claiming full capability/codegen parity.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.3.3 — add canonical Dart CLI trace**
+  (DONE — Dart reaches 61/61 default/POSIX; `.1.5.3.4` active for recurring gate/no-drift).
+
+  **Implementation:** Added the independent ADR `0024` compile/input/invoke trace with exact levels, UTF-8 counts,
+  escaping, emoji, stdout/route/mirror, reset/append, persistence, and stable traced failures.
+
+  **Proof:** Three focused trace tests, analyzer/full Dart suite, 99/99 corpus, and both complete 61-case legs pass;
+  rich native Dart trace remains separate. Docs/KM/governance/book/cleanup pass.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.3.2 — add Dart primary execution**
+  (DONE — native direct results advance Dart to 41/61; `.1.5.3.3` active for 20 trace cases).
+
+  **Implementation:** Retained compiled state, composed native global mode/top rule execution, emitted direct
+  `RuntimeParseResult.value`, and recursively sorted compact UTF-8 JSON with one newline. Stable failure projection
+  remains at the adapter boundary.
+
+  **Proof:** Focused canonical nested/top/mode coverage, all 11 direct results, and quiet trace pass default/POSIX.
+  Analyzer, full Dart tests, 99/99 corpus, and docs/KM/governance/book/cleanup pass.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.3.1 — add Dart CLI boundary**
+  (DONE — exact boundary/loading/failures are 29/29 default/POSIX; `.1.5.3.2` active for direct results).
+
+  **Implementation:** Replaced the corpus primary with exact shared options/help, deterministic resolution,
+  strict raw UTF-8 and source-BOM policy, deferred input, stable phases, and raw channels. The corpus runner stays
+  separate. The staged extractor now treats an ordinary no-function spec as an empty definition result.
+
+  **Proof:** Six focused tests, staged regression, analyzer, 147 Dart tests, 99/99 corpus, and both 29-case legs
+  pass. The residual 11 results and 21 trace cases map exactly to `.2` and `.3`.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.3.0 — split Dart primary CLI work**
+  (DONE — current Dart primary is 0/61; `.1.5.3.1` is active for exact boundary/loading).
+
+  **Audit/split:** The corpus-oriented primary command is isolated from the reusable staged parser,
+  validation/compiler, native direct-value execution, top-rule/global-mode controls, rich trace, and canonical
+  JSON pattern. Separate leaves now own boundary/loading, execution/results/failures, canonical trace, and
+  unchanged default/POSIX closeout. `bin/corpus_runner.dart` remains the developer corpus surface.
+
+  **Proof:** The unchanged shared runner establishes 0/61; source/API/manifest inspection and docs/KM/governance/
+  mdBook/whitespace checks pass. No Dart implementation or fixture bytes changed.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.2.4 — close Rust primary CLI**
+  (DONE — Rust `.1.5.2` closed at 61/61 default/POSIX; Dart `.1.5.3` active).
+
+  **Gate:** Added `tools/run_rust_local.sh` for formatting, the full Rust runtime package, binary build, and both
+  unchanged 61-case environments. `LINKEDSPEC_RUN_RUST=1 bash tools/run_ci_local.sh` composes it explicitly.
+
+  **Proof:** Rust passes 137 unit, 99 oracle, 190 integration, three emitter, 10 native trace-control, and both
+  61-case legs. Broader local CI passes doctrines/syntax, focused suites, both Perl legs, and Phase 0 `1..1028`;
+  docs/KM/governance/book and safe cache cleanup pass.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.2.3 — add canonical Rust CLI trace**
+  (DONE — 61/61 exact; `.1.5.2.4` active for recurring-gate/default-POSIX no-drift closeout).
+
+  **Implementation:** Added the deterministic canonical compile/input/invoke trace adapter with exact aliases/
+  thresholds, UTF-8 byte counts, escaped fields, emoji, stdout/route/mirror, reset/append, and portable failures;
+  rich native Rust trace remains independent.
+
+  **Proof:** Six focused adapter tests, the full 137-unit/99-oracle/190-integration/three-emitter/10-native-trace
+  package, and all 61 unchanged process cases pass. Formatting, touched-file Clippy, docs/KM/governance/book, and
+  cache cleanup pass; strict package Clippy remains at the pre-existing backlog.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.2.2 — add Rust direct execution API**
+  (DONE — 41/61 exact; `.1.5.2.3` active for 20 non-quiet trace cases).
+
+  **Native API:** `ExecutionOptions` and `Engine::execute_value` plus traced variants select entry/global mode per
+  invocation and return the direct rule value without compiled mutation. Legacy accumulator execution remains.
+
+  **Parity:** Ordinary nested hashes no longer splice implicitly; only explicit `flat`/`flat_hash` does. Three
+  focused tests and all 11 result cases pass. Full runtime, 41/61 process baseline, formatting/build, docs/KM/
+  governance/book, and cache cleanup pass; strict Clippy is unchanged at the pre-existing lint backlog.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.2.1 — add Rust CLI boundary**
+  (DONE — 29/61 exact; `.1.5.2.2` active for reusable direct-result/entry/mode execution).
+
+  **Implementation:** Added `linkedspec_runtime::primary_cli` and `linkedspec-rust` with exact manual arguments,
+  shared help bytes, deterministic named/file/inline source loading, deferred input files, strict preserved UTF-8,
+  stable phase failures, raw channels, and native parser/compiler/runtime delegation.
+
+  **Proof:** Four unit tests, all 22 help/usage fixtures, three invalid-UTF-8 cases, and four operational failures
+  pass. The 32 residuals are exactly 11 known accumulator-wrapped results plus 21 trace cases. The full package's
+  133 unit, 99 oracle, 190 integration, three emitter, and 10 trace-control tests pass, as do formatting/build,
+  default/POSIX argument fixtures, docs/KM/governance/book, and safe artifact cleanup.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.2.0 — split Rust primary CLI work**
+  (DONE — `.1.5.2.1` is active for the exact binary/argument/loading boundary).
+
+  **Audit/split:** Rust already has native full-spec parsing, validation, compilation, structured execution, and
+  rich trace, but no binary. Reusable entry-rule/global parse-mode controls are absent. Separate leaves now own
+  boundary/loading, native execution/results/failures, canonical trace, and unchanged 61-case closeout.
+
+  **Proof:** Source/API/manifest audit, memory architecture, task metadata, doctrine, Knowledge Map, mdBook, and
+  whitespace checks pass. No Rust source or fixture bytes changed; generated book output was removed.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.6.3 — close Perl CLI reference**
+  (DONE — Perl is the exact 61-case reference; Rust `.1.5.2` is active).
+
+  **No-drift:** Current task/roadmap/live/book/help/KM/fixture surfaces agree on strict preserved UTF-8, resolved
+  mojibake, recursive JSON, stable invalid phases, and 61 cases. Historical 53-case/pre-fix records remain dated.
+
+  **Proof:** Focused runner/trace suites, 61/61 default and POSIX, full local CI through Phase 0, mdBook,
+  Knowledge Map, governance, whitespace, and generated-book cleanup pass; no behavior or fixture bytes changed.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.6.2 — enforce Perl CLI UTF-8 text**
+  (DONE — Perl passes 61/61 strict shared cases; `.1.5.1.6.3` later closed reference no-drift).
+
+  **Implementation:** Valid argv and raw source/input files decode strictly as UTF-8; code points, normalization,
+  BOM, and newlines are preserved; canonical nested JSON and stable help/errors encode once; invalid files retain
+  compilation/input-load headings. UTF-16/UTF-32 are not implicitly detected.
+
+  **Proof:** Eight new cases cover inline/file/nested Unicode, composed/decomposed input, U+FEFF with CRLF/LF,
+  source-BOM non-stripping, invalid spec/input bytes, and exact full-trace byte counts. Focused suites, 61/61 in
+  default/POSIX environments, full local CI/Phase 0, docs/KM/governance/book/cleanup pass.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.11.0 — capture generic trailing codeblocks**
+  (DONE — corrective direction parked; `.1.5.1.6.2` and `.6.3` later closed, with Rust `.1.5.2` active).
+
+  **Finding/direction:** Perl/Rust/Dart/Julia all implement the narrow named `with` surface, selected traversal
+  methods also take blocks, and Lua is not implemented. The closed `.14` contract explicitly excluded
+  `call(args, { block })`; a reference lowering probe confirms it is not equivalent today. The director's intended
+  model instead has scalar, array, harray/hash, and codeblock values, with trailing braces as generic sugar for an
+  accepted final codeblock argument.
+
+  **Ownership:** Parked `.11.1` defines the canonical callable/AST/runtime contract, every-backend parity, and the
+  decision to retain `with` as an ordinary block-taking helper or remove it. No parser/runtime behavior changed.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.6.1 — add neutral hex byte fixtures**
+  (DONE — reusable non-text inputs locked; `.1.5.1.6.2` and final `.6.3` later closed).
+
+  **Change:** Schema version 1 file inputs accept exactly one checked-in `source` or explicit `bytes_hex`; the
+  latter is non-empty lowercase even hex and materializes through the existing raw workspace writer.
+
+  **Proof:** Six runner subtests prove `00 c3 28 ff 0a` exactly and reject both/neither/empty/uppercase/odd/non-hex
+  before launch. Syntax/help/full local gate/docs/KM/governance/book/cleanup pass.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.6.0 — split primary CLI UTF-8 boundary**
+  (DONE — ADR `0025` ratified; `.1.5.1.6.1` active for neutral hex-byte fixtures).
+
+  **Change:** Defined strict preserved UTF-8 for args/source/input/JSON/trace, stable invalid-file phases, and binary
+  exclusion. Split runner byte materialization, Perl decode/fixtures, and final no-drift before Rust.
+
+  **Proof:** Raw argv `xé` reproduces mojibake, while decoded native `input_text()` and `/é/` probes return exact
+  `c3 a9`, isolating the adapter. Perl/Julia/Rust/runner/docs audit and KM/governance/book/cleanup pass; no code.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.10.0 — capture semantic introspection MCP direction**
+  (DONE — future direction parked; active frontier is now `.1.5.1.6.1`).
+
+  **Change:** Added `.10` with a completed capture leaf and pending design leaf `.10.1`. The intended product
+  surface is a versioned backend-neutral semantic query API in every native variant, with deterministic results,
+  stable provenance, exact parity fixtures, and MCP as a thin transport rather than the semantic owner.
+
+  **Proof:** Task/roadmap/live/book/KM/memory alignment, Knowledge Map, doctrine, metadata, whitespace, mdBook, and
+  cleanup pass; no parser/compiler/runtime/MCP implementation or active-frontier change.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.5 — close Perl CLI conformance**
+  (DONE — canonical trace is 53/53 exact; `.1.5.1.6` active for UTF-8 boundary before Rust).
+
+  **Change:** ADR `0024` separates canonical primary phase trace from rich native trace. Twenty exact trace cases
+  lock stdout/route/mirror, reset/persistence/append, levels/aliases/numeric thresholds, UTF-8 emoji, and every
+  failure phase, UTF-8 byte counts, and escaped user fields; the local gate now runs the same 53-case runner under
+  default/POSIX environments.
+
+  **Proof:** Pre-change traces measured 1.7/6.8 MB and emoji stderr warnings. Canonical cases pass 53/53 twice;
+  four runner and three trace subtests pass; the full local gate, Phase 0, docs/KM/governance/book pass. Signoff's
+  separate `input_text()` probe exposed raw UTF-8 argv `xé` serializing as `xÃ©`; `.1.5.1.6` durably owns it.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.4 — normalize Perl CLI failures**
+  (DONE — 33/33 exact cases; `.1.5.1.5` subsequently closed trace/final gate).
+
+  **Change:** Added four exact compile/input/invocation failures. Untraced operations now emit empty stdout, one
+  stable phase heading on stderr, exit `1`, and no files; compilation wins before input loading. Ambient backend
+  trace state cannot opt in a primary command that has no CLI trace option.
+
+  **Proof:** Baseline probes captured timestamp/path/host drift before repair. All 33 cases pass in default/POSIX
+  environments; four runner and three trace CLI subtests pass, including ambient debug/file/reset isolation.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.3 — lock Perl CLI success behavior**
+  (DONE — 29/29 exact cases; `.1.5.1.4` subsequently closed operational failures).
+
+  **Change:** Added seven neutral success cases for named/file/inline source, literal/file input, explicit top
+  rule, seek/consume, nested canonical JSON, exact input-newline bytes, empty stderr, exit `0`, and one record
+  newline. Existing Perl runtime behavior was sufficient; portable action-edge grammars avoid ADR `0020` drift.
+
+  **Proof:** Toolbox `Get`/`get_parser`/generated-source/trace probes established the mechanisms. All 29 cases pass
+  in default and POSIX environments; runner/trace tests and governance/book gates pass.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.2 — normalize Perl CLI arguments**
+  (DONE — 22/22 exact help/usage cases; `.1.5.1.3` subsequently closed success/IO).
+
+  **Change:** Replaced ambient `Getopt::Long` behavior with one explicit case-sensitive parser. Positionals,
+  subcommands, `--`, uppercase/abbreviated/negated aliases, malformed values, selector conflicts, and invalid
+  parser/trace values now have exact shared stderr and exit `2`; custom template variables cannot override runner
+  placeholders.
+
+  **Proof:** 22/22 cases pass with `POSIXLY_CORRECT` both unset and `1`. CLI/runner/test syntax, four runner
+  subtests, and two trace CLI subtests pass; usage failure stdout is always empty.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.1 — add neutral CLI fixture runner**
+  (DONE — exact help baseline green; `.1.5.1.2` subsequently closed strict usage).
+
+  **Change:** Added a strict manifest and arbitrary-command runner with private canonical workspaces, safe raw file
+  materialization, explicit placeholders, concurrent raw stdout/stderr capture, exact exit/generated-file checks,
+  and first-byte mismatch diagnostics. Perl help is now backend-neutral and documents all trace/help aliases.
+
+  **Proof:** CLI/runner/test syntax, four runner subtests (13 assertions), two trace CLI subtests, and direct exact
+  Perl help conformance pass. README, TOOLBOX, mdBook, task/roadmap/live docs, and Knowledge Map use one suite.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.5.1.0 — split neutral CLI fixture work**
+  (DONE — read-only audit/split; `.1.5.1.1` subsequently closed harness/help).
+
+  **Finding:** Perl's parser CLI passes its two existing trace smokes but accepts ignored positionals, uppercase/
+  abbreviated/negated option aliases, and environment-dependent `Getopt::Long` behavior. Unknown options prepend
+  an uncontrolled warning, while compilation/invocation failures leak timestamped level-zero trace to stdout.
+
+  **Routing:** Neutral manifest/runner plus help, strict arguments, successful source/input/parser controls,
+  operational failures/stdout purity, and deterministic trace/final gate are five ordered leaves. No implementation
+  source changed; `t/trace_cli.t` remains green.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.7.3.3 — reconcile Julia scoped parity status**
+  (DONE — local audit closed; Julia root remains active/delegated; `.1.5.1.0` subsequently split the next work).
+
+  **Change:** Corrected one stale mdBook sentence that denied the exact Julia primary CLI after it had been
+  process-locked. Current task, roadmap, live, book, architecture, and Knowledge Map surfaces now distinguish the
+  local `runtime-corpus-primary-cli` milestone from complete cross-backend parity.
+
+  **Proof:** No implementation source changed. Current-status/provenance scans, Knowledge Map, memory/task/doctrine
+  gates, mdBook build, and whitespace pass. Commit `431f0472` immediately prior proves 1,017 package assertions,
+  nine direct process families, and 99/99. Global `.1.5`, `.1.6`, and `.3` remain explicit owners.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.7.3.2.5 — close Julia primary CLI conformance**
+  (DONE — local primary CLI is process-locked; `.7.3.3` subsequently closed honest outer no-drift).
+
+  **Change:** A standalone checker now owns nine real-process families with exact stdout/stderr/newline/file bytes
+  and exit 0/1/2. The focused gate delegates to it, and public status advances precisely to
+  `runtime-corpus-primary-cli` without claiming global capability/codegen parity.
+
+  **Proof:** Direct help, rule/function success, retired usage, three operational failures, route, and mirror pass;
+  1,017 package assertions and all 99 corpus outputs remain green.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.7.3.2.4 — normalize Julia CLI failures and trace routing**
+  (DONE — failure/trace behavior is green; `.7.3.2.5` subsequently closed direct-process/no-drift).
+
+  **Change:** Compilation now precedes deferred input-file loading. Compilation/input/invocation errors have stable
+  stderr/exit `1`, usage remains `2`, and runtime fields are ordered. Stdout/route/mirror, file/no-file, reset,
+  quiet, and level-specific emoji now compose with canonical JSON; fatal Julia errors still rethrow.
+
+  **Proof:** Seventy-five focused assertions, the full 1,017-assertion suite, and all 99 exact corpus outputs pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.7.3.2.3 — execute Julia primary parser requests**
+  (DONE — native execution/canonical JSON is green; `.7.3.2.4` subsequently closed error/trace normalization).
+
+  **Change:** Prepared rule-only and top-level-function requests now execute through one traced native parse,
+  compile, and runtime pipeline with top-rule/parse-mode controls. A recursive serializer emits the direct
+  top-rule value with lexicographically sorted nested keys plus one newline.
+
+  **Proof:** Twenty-two focused assertions, the full 942-assertion suite, direct canonical primary output, and all
+  99 exact corpus outputs pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.7.3.2.2 — align Julia CLI arguments and loading**
+  (DONE — exact preparation is green; `.7.3.2.3` subsequently closed execution/JSON).
+
+  **Change:** The primary module now accepts only ADR `0023` source/input/parser/trace/help flags, rejects old
+  subcommands and all positionals, resolves named specs through deterministic current/repository/fallback order,
+  and loads exact file/inline source and input. The corpus runner remains separate.
+
+  **Proof:** Fifty focused assertions, the full 920-assertion suite, direct help/subcommand-rejection checks, and
+  all 99 exact corpus outputs pass. At that leaf boundary, requests intentionally stopped before execution.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.7.3.2.1 — trace Julia frontend compiler and staged dispatch**
+  (DONE — complete native trace propagation is green; `.7.3.2.2` is active).
+
+  **Change:** One optional existing emitter now spans parse/validation/compile, function-shell parse/projection/
+  runtime execution, and staged normalize/queue/resolve/load/compile/execute. Balanced scopes and decisions report
+  both success and failure; omitted or disabled tracing stays quiet and result-identical.
+
+  **Proof:** Twenty-eight focused assertions, the full 868-assertion Julia suite, CLI smokes, and all 99 exact
+  corpus outputs pass. Routed output uses the existing sink, and generated depot compilation state was removed.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.7.3.2.0 — split Julia primary CLI alignment**
+  (DONE — five mechanisms are owned; `.7.3.2.1` is active).
+
+  **Finding:** Native parse/compile/runtime, structured diagnostics, and runtime trace sinks exist. Missing primary
+  CLI mechanisms are compile/parser/staged tracing, exact arguments/resolution, execution/canonical JSON,
+  normalized failure/routing, and direct-command conformance.
+
+  **Boundary:** Read-only audit/task split; no behavior changed. Trace prerequisites are first because accepting
+  `--trace` without compile/parser meaning would violate ADR `0023`.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.7.3.1 — ratify exact backend interface parity**
+  (DONE — ADR `0023` and global repair owners are durable; `.7.3.2` has since been split).
+
+  **Contract:** Complete parity is identical user-observable capability/behavior. Distinct command names expose
+  one parser interface with the same options/meanings, no subcommands/positionals, canonical JSON, normalized
+  output/errors, and 0/1/2 exits.
+
+  **Routing:** Julia CLI repair stays in `.7.3.2`; global `.1.5`, `.1.6`, and `.3` own current-backend CLI identity,
+  full capability census, and public generated-source parity. No implementation behavior changed.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.7.3.0 — split strict user-facing parity closeout**
+  (DONE — current CLI drift is source-proven; `.7.3.1` has since ratified the contract).
+
+  **Finding:** Distinct executable names do not currently expose the same API. Perl has the parser CLI, Dart/Julia
+  have corpus/status CLIs, and Rust declares no binary target. The 99/99 corpus gate is not CLI-parity proof.
+
+  **Routing:** `.7.3.1` has since ratified the exact feature/CLI contract and cross-backend repair ownership;
+  `.7.3.2` owns Julia CLI alignment and `.7.3.3` honest no-drift. No behavior changed in this planning slice.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.7.2 — defer Julia generated source proof**
+  (DONE — generated source is routed to future split ownership; `.7.3` has since been split).
+
+  **Decision:** The native in-memory interpreter remains Julia's primary conformance surface at 99/99. A credible
+  generated path requires a separate scaffold/compile-run, family-plan, structural-family, and curated-corpus lane;
+  `FUTURE-PARITY-BACKLOG.3` now owns those future Dart/Julia splits alongside Rust breadth.
+
+  **Boundary:** No behavior changed. Full tests remain 840 and status remains `runtime-corpus-full`.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.7.1 — document Julia usage and parity boundary**
+  (DONE — public commands, native examples, status, and limitations are aligned; `.7.2` has since deferred codegen).
+
+  **Change:** Reframed the mdBook Julia handoff from scaffold to mature native backend; added self-contained
+  rule-only and top-level-function in-memory examples; corrected historical trace status; documented focused,
+  direct, and opt-in commands plus generated-source/trace/tooling non-claims.
+
+  **Boundary:** No behavior changed. The accepted interpreter gate remains 840 assertions and 99/99 exact outputs
+  at `runtime-corpus-full`; generated Julia source was left to `.7.2` at this boundary and has since been deferred.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.6.4 — wire Julia local verification**
+  (DONE — focused Julia gate and optional shared-CI inclusion are green; `.7.1` has since closed docs).
+
+  **Change:** Added `tools/run_julia_local.sh` over package tests, Julia CLI checks, and the full corpus. The Julia
+  binary/depot are configurable. Shared local CI remains core-only unless `LINKEDSPEC_RUN_JULIA=1` is set.
+
+  **Verification:** The focused gate passes 840 assertions and 99/99 corpus execution. Shell syntax, default local
+  CI, mdBook, Knowledge Map, and governance gates pass without a default Julia SDK requirement.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.6.3 — close full Julia corpus gate**
+  (DONE — complete ordered corpus execution is 99/99 green; `.6.4` has since closed).
+
+  **Change:** Removed the temporary rollout fence so bare CLI `--execute` runs the complete validated manifest;
+  named, bounded, and offset-only selection remains available. Added one permanent aggregate regression over all
+  99 fixtures in exact manifest order.
+
+  **Verification:** The permanent library gate and direct full CLI both pass 99/99 with zero failures and exact
+  outputs. Full Julia tests pass with 840 assertions; status is `runtime-corpus-full`.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.6.2.5 — execute Julia function shell corpus**
+  (DONE — all three routed top-level function fixtures pass; `.6.3` has since closed 99/99).
+
+  **Change:** Julia now executes the checked-in user-function definition spec over source in memory, normalizes
+  its neutral nodes, and reuses the existing staged body parser, compiled registry, and runtime path. Rule-only
+  parsing remains primary and falls back only after a source parse error; no raw scanner or fixture shortcut exists.
+
+  **Verification:** Direct CLI execution is 3 passed / 0 failed. Full Julia tests pass with 827 assertions; status
+  is `runtime-corpus-function-shells`. Full 99/99 parity remains owned by `.6.3`.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.6.2.4.6 — close Julia shipped corpus no drift**
+  (DONE — complete shipped window is permanently 31/31; `.6.2.5` has since closed).
+
+  **Change:** Added one full offset-68/limit-31 regression that locks manifest/result counts, stable first/last
+  fixtures, 31 passes, zero failures, and exact expected output for every case. Status advances to
+  `runtime-corpus-shipped`; no runtime or fixture changed.
+
+  **Verification:** Direct CLI execution is 31 passed / 0 failed. Full Julia tests pass with 816 assertions.
+
+- 2026-07-10: **FUTURE-PARITY-BACKLOG.1.4 — ratify native in-memory backend contract**
+  (DONE — native embedding is the primary cross-backend gate; Julia `.6.2.4.6` has since closed).
+
+  **Change:** ADR `0022`, the mdBook, roadmap, backend task acceptance, and Knowledge Map now require native
+  host-process parse/compile/execute APIs for Rust, Dart, Julia, Lua, and future backends. Variant CLIs and corpus
+  runners are thin adapters with no exclusive semantics.
+
+  **Boundary:** The audited Perl/Rust/Dart/Julia library surfaces already follow this architecture. This leaf
+  changes no parser/compiler/runtime behavior; Lua must expose a native module and direct embedding tests.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.6.2.4.5.3 — mirror Julia public parser leading trivia**
+  (DONE — history closes; `.6.2.4.6` has since closed final shipped-window no-drift).
+
+  **Change:** Julia's in-memory `runtime_parse(...)` entrypoint now begins after leading blank and `#` comment
+  lines, matching the public Perl/Rust oracle and completed Dart backend without changing ordinary indexed reads.
+
+  **Verification:** Focused entry/indexed-read assertions, history exact output, and the full 31-case shipped
+  window pass. Full Julia tests pass with 810 assertions; status is `runtime-corpus-leading-trivia`.
+
+- 2026-07-10: **REPO-HYGIENE.4 — clean Rust and Julia generated caches**
+  (DONE — about 20G reclaimed; Julia `.6.2.4.5.3` and `.6.2.4.6` have since closed).
+
+  **Change:** Removed only ignored/untracked Rust/mdBook output and the dedicated/user Julia depot `compiled/`
+  caches, then removed twelve provenance-checked stale LinkedSpec/RGX generation logs from `/private/tmp`. Julia
+  depot content, unrelated temp trees, and all source/fixture data remain.
+
+  **Verification:** Availability moved from 50G/90% to 68G/86%; all generated targets are absent, noncompiled Julia
+  depot content remains, and the unrelated 29G `claude-501` plus cargo-mutants trees were preserved.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.6.2.4.5.2 — add Julia statement regex mutation**
+  (DONE — five parser smokes close; `.6.2.4.5.3` and `.6.2.4.6` have since closed).
+
+  **Change:** Added statement-context four-argument scalar regex substitution with strict flags, global/first-only
+  replacement, and `$n` capture expansion while preserving pure numeric slicing. Status advances to
+  `runtime-corpus-statement-mutation`.
+
+  **Boundary:** Both EBNF, both lib_reader, and simenv fixtures pass. Only `ds_vhistory_version_entry` remains in
+  the shipped window, under its existing public-parser leading-trivia owner.
+
+  **Verification:** Six focused mutation/pure-slice assertions and five exact corpus outputs pass; shipped smoke
+  improves from 25/31 to 30/31 and full Julia tests pass with 808 assertions. All documentation/governance gates
+  pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.6.2.4.5.1 — add Julia terminating exit control**
+  (DONE — fatal control is executable; `.6.2.4.5.2` has since closed and `.6.2.4.5.3` is active).
+
+  **Change:** Added immediate `exit_now(...)` termination with evaluated explicit numeric status, default status
+  `1`, and existing structured runtime attribution. Status advances to `runtime-corpus-exit-now`.
+
+  **Boundary:** Simenv now executes `exit_now(1)` in `begin_end_blocks` instead of reporting an unsupported helper.
+  Its earlier statement-form `substr(...)` mutation remains the independent `.6.2.4.5.2` prerequisite.
+
+  **Verification:** Explicit/default status, unreachable successor statement, and diagnostic attribution pass;
+  shipped smoke remains 25/31 and full Julia tests pass with 801 assertions. All documentation/governance gates
+  pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.6.2.4.4 — add Julia action-edge child push**
+  (DONE — all four spec.spec smokes pass; `.6.2.4.5.1` has since closed and `.6.2.4.5.3` is active).
+
+  **Change:** Added implicit/explicit whole and indexed child-result append forms with cached action-edge child
+  reuse. Status advances to `runtime-corpus-action-edge-child-push`.
+
+  **Boundary:** Both EBNF fixtures now retain complete structures and differ only at statement-form quote
+  normalization, routed to `.6.2.4.5.2` with lib_reader.
+
+  **Verification:** Four spec.spec cases pass; two EBNF quote-only residuals are locked; shipped smoke improves
+  from 21/31 to 25/31 and full Julia tests pass with 793 assertions. All documentation/governance gates pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.6.2.4.3 — scope Julia recursive rule resets**
+  (DONE — all three recursive top-rule fixtures pass; `.6.2.4.4` has since closed child push).
+
+  **Change:** Added first-reset rule-local snapshots for explicit array/hash replacement while preserving ordinary
+  caller-visible child mutation and independent user-function stores. Status advances to
+  `runtime-corpus-recursive-rule-scope`.
+
+  **Boundary:** This leaf changes typed-store scope only. The remaining EBNF/spec.spec structural outputs,
+  simenv/history residuals, and lib_reader normalization stay with their existing owners.
+
+  **Verification:** Focused mechanism tests and all three recursive corpus cases pass; shipped smoke improves from
+  18/31 to 21/31 and full Julia tests pass with 785 assertions. All documentation/governance gates pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.6.2.4.2.2 — add Julia diagnostic output helpers**
+  (DONE — both routed fixtures advance past unsupported `print`; `.6.2.4.3` has since closed recursion parity).
+
+  **Change:** Added eager `print`/`say` concatenation and `print_each` array walking through the configured
+  low-level trace sink. Helpers return no parse value. Status advances to `runtime-corpus-diagnostic-output`.
+
+  **Boundary:** Simenv now stops at unsupported `exit_now`; history reaches its leading-trivia output mismatch.
+  Those are successor-owned mechanisms, so shipped smoke remains 18/31.
+
+  **Verification:** Focused diagnostics and both corpus-boundary assertions pass; full Julia tests are green with
+  780 assertions. CLI, mdBook, memory, Knowledge Map, task, doctrine, and whitespace gates pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.6.2.4.2.3 — normalize Julia helper regex flags**
+  (DONE — portmap constant passes; `.6.2.4.2.2` has since closed diagnostic-output helpers).
+
+  **Change:** Centralized strict helper regex compilation: preserve `imsx`, ignore execution-only `g` and Perl
+  compile-once `o`, and reject unknown flags. Status advances to `runtime-corpus-helper-regex-flags`.
+
+  **Boundary:** This changes helper regex literals only; compiled rule-pattern behavior remains unchanged.
+
+  **Verification:** `igo`, regex split `go`, invalid `q`, and portmap constant pass; shipped smoke improves from
+  17/31 to 18/31 and full Julia tests remain green with 772 assertions. All documentation/governance gates pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.6.2.4.2.1 — add Julia logical helpers**
+  (DONE — four routed cases pass; `.6.2.4.2.3` has since closed portmap constant and `.6.2.4.5.3` is active).
+
+  **Change:** Added eager boolean `and`/`or`/`not` through the established truthiness contract. Status advances to
+  `runtime-corpus-logical-helpers`.
+
+  **Boundary:** `portmap_constant` no longer fails on unsupported `or`; direct captures are correct, but Perl's
+  no-op `o` flag invalidates Julia helper regex compilation. That independent residual is split to `.6.2.4.2.3`.
+
+  **Verification:** Three portmap cases and tablegrep pass, shipped smoke improves from 13/31 to 17/31, and full
+  Julia tests pass with 772 assertions. CLI, mdBook, memory, Knowledge Map, task, doctrine, and whitespace gates pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.6.2.4.1 — add Julia anonymous capture boundaries**
+  (DONE — all three hlink delimiter fixtures pass; `.6.2.4.2.1` has since moved shipped smoke to 17/31 and
+  `.6.2.4.5.3` is active).
+
+  **Change:** Added start/read/location/take execution for the complete direct anonymous capture family across
+  match-start, live-cursor, and input-end endpoints. Status advances to `runtime-corpus-capture-boundaries`.
+
+  **Boundary:** EBNF logging now reaches execution but shares the structural-item loss of the other EBNF case, so
+  it is routed to `.6.2.4.4`; this leaf makes no EBNF structural-output claim.
+
+  **Verification:** Focused hlink corpus is 3/3, the complete window improves from 10/31 to 13/31, and full Julia
+  tests pass with 766 assertions. CLI, mdBook, memory, Knowledge Map, task, doctrine, and whitespace gates pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.6.2.4.0 — split Julia shipped corpus smoke batch**
+  (DONE — the initial boundary was 10/31; `.6.2.4.1` has since moved it to 13/31 and `.6.2.4.5.3` is active).
+
+  **Change:** Executed all manifest fixtures 68–98 and split 21 failures into capture boundaries, logical helpers,
+  diagnostic-output helpers, recursive top-rule outputs, EBNF/spec.spec structural outputs, lib_reader quote
+  normalization, and final no-drift. No Julia runtime, test, fixture, or status behavior changed.
+
+  **Boundary:** Ten fixtures already pass. The split records observed failure families without assuming that Julia
+  shares Dart's historical causes; each implementation leaf must establish its own focused root-cause evidence.
+
+  **Verification:** Bounded runner reports 10 passed / 21 failed and accounts for every fixture exactly once.
+  mdBook, memory, Knowledge Map, task, doctrine, and whitespace gates pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.6.2.3 — close Julia middle corpus batch**
+  (DONE — non-function middle fixtures are 25/25 green; `.6.2.4.0` has since split the 10/31 shipped-smoke
+  boundary and `.6.2.4.5.3` is active).
+
+  **Change:** Three bounded windows pass 17/17, 2/2, and 6/6 unchanged. Added a six-assertion package regression
+  locking window endpoints/counts, 25 passes, zero failures, and exact top-level function routes. Status is
+  `runtime-corpus-middle`.
+
+  **Boundary:** No production or fixture correction. Offsets 57, 60, and 61 remain excluded under `.6.2.5`; the
+  shipped-spec/parser-smoke window is not yet claimed.
+
+  **Verification:** Direct windows total 25 passed / 0 failed; full Julia tests pass with 757 assertions. CLI,
+  mdBook, memory, Knowledge Map, task, doctrine, and whitespace gates pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.6.2.2 — close Julia starter corpus batch**
+  (DONE — starter fixtures are 40/40 green; `.6.2.3` has since closed 25/25 and `.6.2.4.5.3` is active).
+
+  **Change:** The real bounded manifest window 0–39 passes unchanged. Added a permanent six-assertion package test
+  for manifest count, exact endpoints, 40 results/passes, and zero failures. Status is `runtime-corpus-starter`.
+
+  **Boundary:** No production parser/runtime or fixture change. The 40-case proof covers proof-edge, autoexist,
+  core value/store/mutation, primitive, block, and attached-control semantics only; later manifest windows remain
+  unclaimed.
+
+  **Verification:** Direct runner output is 40 passed / 0 failed; full Julia tests pass with 751 assertions. CLI,
+  mdBook, memory, Knowledge Map, task, doctrine, and whitespace gates pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.6.2.1 — add Julia executable corpus selection**
+  (DONE — bounded selection/reporting is green; `.6.2.2` and `.6.2.3` have since closed 40/40 and 25/25, and
+  `.6.2.4.5.3` is active).
+
+  **Change:** Added ordered named and offset/limit library selection with strict diagnostics. The runner now accepts
+  bounded opt-in execution, reports every PASS/FAIL plus summary, returns `0`/`1` for pass/fixture failure, and
+  rejects invalid selectors, selectors without execute, and unbounded requests. Status is
+  `runtime-corpus-selection`.
+
+  **Boundary:** Complete manifest validation still precedes selection. Validation-only behavior remains default;
+  unbounded 99-fixture CLI execution remains gated until full parity.
+
+  **Verification:** Thirty added assertions bring full Julia tests to 745; CLI status/help, validation-only load,
+  bounded execution, unbounded rejection, mdBook, memory, Knowledge Map, task, doctrine, and whitespace gates pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.6.2.0 — split Julia corpus expansion batches**
+  (DONE — the rollout is recoverably decomposed; `.6.2.1` through `.6.2.4.2.3` have since landed and `.6.2.4.5.3` is active).
+
+  **Change:** Split `.6.2` into bounded execution/reporting, starter 0–39, middle non-function 40–67,
+  shipped-spec/parser-smoke 68–98, and spec-defined top-level function-shell owners before diagnostic or behavior
+  changes. Every implementation batch must preserve fixtures and route observed mismatches with shared oracle
+  evidence.
+
+  **Boundary:** Planning/docs only. No parser, runtime, runner, fixture, or parity behavior changed; the last
+  executable boundary remains `.6.1` with 715 green assertions and status `runtime-controlled-corpus`.
+
+  **Verification:** mdBook, memory, Knowledge Map, task metadata, doctrine, and whitespace gates pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.6.1 — add Julia controlled corpus execution**
+  (DONE — controlled execution is green; `.6.2.0` through `.6.2.4.2.3` have since landed and `.6.2.4.5.3` is active).
+
+  **Change:** Added public corpus execution/result/query APIs that compose manifest validation with
+  parse/compile/runtime, compare the expected value after one backend-neutral output wrap, retain optional trace
+  lines and structured runtime diagnostics, and report all fixture failures without aborting. Six passing authored
+  fixtures prove scalar/nested shapes, dispatch, lifecycle output, staged function calls, and traced boundary
+  capture; a second corpus proves diagnostic/mismatch continuation. Status is `runtime-controlled-corpus`.
+
+  **Boundary:** Library-level controlled execution only. The default parser remains rule-only; controlled staged
+  function fixtures use an explicit parser callback. CLI `--execute`, fixture selection, and shipped 99-fixture
+  breadth remain owned by later `.6` leaves.
+
+  **Verification:** Twenty-four focused assertions pass; full Julia tests pass with 715 assertions. CLI status/
+  manifest validation, mdBook, memory, Knowledge Map, task metadata, doctrine, and whitespace gates pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.5.3 — preserve Julia staged descriptor shapes**
+  (DONE — neutral staged function shape is locked; `.5` is closed, `.6.1` through `.6.2.4.2.3` have since landed, and `.6.2.4.5.3` is active).
+
+  **Change:** Added a 20-assertion end-to-end fixture that preserves two spec-returned functions through source
+  order, normalized staged payload/jobs, stitched `body_ast`, compiled registry, public descriptor metadata, and
+  runtime output. No production projection correction was required; status remains `runtime-user-functions`.
+
+  **Boundary:** Descriptor-shape/no-drift proof only. General public `parse_job(...)` authoring and corpus execution
+  are not inferred; `.6.1` owns controlled executable fixtures.
+
+  **Verification:** Full Julia tests pass with 691 assertions; CLI status/help, mdBook, memory, Knowledge Map,
+  task metadata, doctrine, and whitespace gates pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.5.2 — execute Julia user functions**
+  (DONE — registered-call runtime execution is green; `.5.3` closed `.5`, `.6.1` through `.6.2.4.2.3` have since landed, and `.6.2.4.5.3` is active).
+
+  **Change:** Julia now resolves registered exact-arity functions before helper fallback, evaluates arguments in
+  caller scope, executes cached ActionIR bodies with fresh scalar/array/hash stores, restores caller state, returns
+  final expressions or local-return payloads, composes receiver chains, and discards standalone results. Direct and
+  mutual recursion report structured cycle diagnostics. Package status is `runtime-user-functions`.
+
+  **Boundary:** Exact-arity pure value functions only. Descriptor-shape preservation remains `.5.3`; recursion
+  support, caller-state capture/mutation, closures, and namespaces remain outside the accepted MVP.
+
+  **Verification:** Full Julia tests pass with 671 assertions, including nine focused runtime-function assertions;
+  CLI status, mdBook, memory, KM, task, doctrine, and whitespace gates pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.5.1 — add Julia staged function-body registry**
+  (DONE — staged dispatch/stitching is green; `.5.2` through `.6.2.4.2.3` have since landed and `.6.2.4.5.3` is active).
+
+  **Change:** Added the fixed built-in ActionIR-body provider, stable path/span/id job queue, portable
+  cache/compiled/result records, contextual diagnostics, immutable `body_ast` stitching, and composed shell API.
+  Package status is `runtime-staged-registry`.
+
+  **Boundary:** Minimal function-body provider only; no general provider search, recursive staged queues, or
+  public `parse_job(...)` authoring. User-function runtime execution has since landed in `.5.2`.
+
+  **Verification:** Full Julia tests pass with 662 assertions, including 31 staged-registry assertions; CLI status,
+  mdBook, memory, KM, task, doctrine, and whitespace gates pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.4.5.4 — close Julia diagnostics trace no drift**
+  (DONE — `.4.5` and `.5` are closed; `.5.1` through `.6.2.4.2.3` have since landed and `.6.2.4.5.3` is active).
+
+  **Change:** Audited and aligned the 631-assertion diagnostics/trace boundary across package/CLI status, README,
+  mdBook, KM, roadmap/task/live docs, and architecture. Status remains the precise `runtime-trace-events`.
+
+  **Boundary:** No source change and no broader compile/parser trace or staged/corpus parity claim.
+
+  **Verification:** Full Julia tests, CLI status/help, stale-frontier scans, book, KM, memory, task, doctrine, and
+  whitespace gates pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.4.5.3 — add Julia runtime trace events**
+  (DONE — runtime instrumentation is green; `.4.5` and `.5` have since closed, `.6.1` through `.6.2.4.2.3` have landed, and `.6.2.4.5.3` is active).
+
+  **Change:** Added rule scopes, regex decisions, action/blind dispatch decisions, lifecycle marks, recursion
+  cutoffs, cursor/stack transitions, and source-boundary events through the optional Julia trace emitter. Package
+  status is `runtime-trace-events`.
+
+  **Boundary:** Runtime mechanism instrumentation only. Final diagnostics/trace parity/no-drift remains `.4.5.4`.
+
+  **Verification:** Full `Pkg.test()` passes with 631 assertions, including 43 trace assertions; traced/untraced
+  action, blind, and recursion results agree. CLI status and commit-time docs/governance gates pass.
+
+- 2026-07-10: **STATEMENT-SEPARATOR-EXAMPLE-ALIGNMENT.1 — align separator example style**
+  (DONE — the director-identified fixture is canonical; Julia `.5` has since closed, `.6.1` through `.6.2.4.2.3` have landed, and `.6.2.4.5.3` is active).
+
+  **Change:** Removed redundant trailing semicolons from eight newline-separated statements in the Dart
+  hash-helper runtime fixture. mdBook and Knowledge Map wording explicitly preserve separator-only style.
+
+  **Boundary:** Presentation/test-source alignment only; no parser or runtime semantic change.
+
+  **Verification:** Focused Dart execution passes unchanged; commit-time documentation/governance gates pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.4.5.2 — add Julia trace controls**
+  (DONE — trace controls/events/sinks are green; `.5` has since closed, `.6.1` through `.6.2.4.2.3` have landed, and `.6.2.4.5.3` is active).
+
+  **Change:** Added ordered trace levels, environment/config controls, structured events/scopes/decisions/logs/
+  dumps, stdout/route/mirror sinks with reset, optional runtime emitter injection, and traced wrappers with
+  parse-scope routing and output preservation. Package status is `runtime-trace-controls`.
+
+  **Boundary:** Trace control and routing only. Internal runtime rule/regex/dispatch/lifecycle/recursion/cursor/
+  boundary events remain `.4.5.3`; final no-drift remains `.4.5.4`.
+
+  **Verification:** `Pkg.test()` passes with 617 assertions, including 29 focused trace assertions; CLI status,
+  mdBook, memory, Knowledge Map, task-tree, doctrine, and whitespace checks pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.4.5.1 — add Julia runtime diagnostics**
+  (DONE — structured diagnostics are green; `.5` has since closed, `.6.1` through `.6.2.4.2.3` have landed, and `.6.2.4.5.3` is active).
+
+  **Change:** Exported neutral-field `RuntimeDiagnostic` payloads on `RuntimeInterpreterException`, added optional
+  engine spec identity, preserved top/child-rule/Julia-handler attribution through unwind, retained richer inner
+  diagnostics, and kept successful parse JSON and textual errors unchanged. Package status is
+  `runtime-diagnostics`.
+
+  **Boundary:** Structured runtime failures only. Trace controls/events/sinks remain `.4.5.2`; runtime
+  instrumentation and final no-drift remain `.4.5.3` / `.4.5.4`.
+
+  **Verification:** `Pkg.test()` passes with 588 assertions, including seven focused diagnostic assertions; CLI
+  status, mdBook, memory, Knowledge Map, task-tree, doctrine, and whitespace checks pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.4.5.0 — split Julia diagnostics trace controls**
+  (DONE — diagnostics/trace is decomposed before code; `.5` has since closed, `.6.1` through `.6.2.4.2.3` have landed, and `.6.2.4.5.3` is active).
+
+  **Change:** Split `.4.5` into `.4.5.1` structured runtime diagnostics, `.4.5.2` trace
+  levels/config/events/sinks, `.4.5.3` runtime branch/lifecycle/cursor/boundary instrumentation, and `.4.5.4`
+  no-drift closeout.
+
+  **Boundary:** Planning only. Julia runtime behavior, tests, and package status `runtime-cursor-boundary` are
+  unchanged.
+
+  **Verification:** mdBook, memory, Knowledge Map, task-tree, doctrine, and whitespace checks pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.4.4 — add Julia runtime cursor controls**
+  (DONE — cursor controls and boundary capture are green; `.5` has since closed, `.6.1` through `.6.2.4.2.3` have landed, and `.6.2.4.5.3` is active).
+
+  **Change:** Added explicit LIFO cursor save/restore, entry/local anchor rewinds, synchronized live/register
+  cursor updates, character-based cursor/input helpers, and earliest usable non-consuming boundary capture with
+  EOF fallback and unresolved-rule no-op behavior. Package status is now `runtime-cursor-boundary`.
+
+  **Boundary:** Cursor controls, cursor/input reads, and named structural boundary capture only. Runtime
+  diagnostics/trace, staged functions, and corpus execution remain later leaves.
+
+  **Verification:** `Pkg.test()` passes with 581 assertions, including 14 focused cursor/boundary assertions; CLI
+  status, mdBook, memory, Knowledge Map, task-tree, doctrine, and whitespace checks pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.4.3.6 — close Julia helper value no drift**
+  (DONE — the `.4.3` helper/value container is closed; `.5` has since closed, `.6.1` through `.6.2.4.2.3` have landed, and `.6.2.4.5.3` is active).
+
+  **Change:** Audited focused runtime tests, `runtime-value-control-tree` package/CLI status, mdBook helper
+  contracts and backend status/handoff, live docs, and Knowledge Map facts. Julia already had the final checked
+  nested-write contract, so no runtime correction was needed. Reconciled stale `.3`/`.4.3` parent metadata and
+  removed redundant end-of-line semicolons from central helper-catalog `.spec` examples.
+
+  **Boundary:** Helper/value no-drift only. Cursor controls/boundary capture, diagnostics/trace, staged functions,
+  and corpus execution remain later leaves.
+
+  **Verification:** `Pkg.test()` remains green with 567 assertions; CLI status, mdBook, memory, Knowledge Map,
+  task-tree, doctrine, and whitespace checks pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.4.3.5 — add Julia runtime controls and tree callbacks**
+  (DONE — value/control/block/callback execution is green; `.4.3.6` and `.4.4` have since landed, `.4.5.0`
+  split diagnostics/trace, and `.4.5.1` through `.6.2.4.2.3` have since landed and `.6.2.4.5.3` is active).
+
+  **Change:** Added expression-valued blocks with final yields and local returns, attached and marker statement
+  controls, lazy inline branches, deterministic while guards, immediate helper/receiver with-blocks, full
+  same-name binding snapshots/restoration, and hash/array walk/map/reduce callbacks. Non-aggregate receivers return
+  `nothing` without running callbacks or reduce initializers. Package status is now `runtime-value-control-tree`.
+
+  **Boundary:** Current helper/value/control/callback execution only. Final no-drift remains `.4.3.6`; cursor
+  controls and later runtime families remain subsequent leaves.
+
+  **Verification:** `Pkg.test()` passes with 567 assertions, including eight focused block/control/callback
+  assertions; commit-time mdBook, memory, Knowledge Map, task-tree, doctrine, and whitespace checks pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.4.3.4 — add Julia runtime hash helpers**
+  (DONE — hash helper/receiver/mutation behavior is green; `.4.3.5` through `.4.4` have since landed, `.4.5.0`
+  split diagnostics/trace, and `.4.5.1` through `.6.2.4.2.3` have since landed and `.6.2.4.5.3` is active).
+
+  **Change:** Added copied hash views and pure merge/pick/drop/rename/set-key transformations, compatible
+  hash-to-array receiver chains, statement-only named typed set-key mutation, direct hash-index assignment,
+  base/overlay-aware merge resolution, and explicit flat-style splicing while preserving ordinary nested maps.
+  The focused `.spec` proof uses newline separators without trailing semicolons. Package status is now
+  `runtime-hash-helpers`.
+
+  **Boundary:** Hash behavior only. Value/control/block/callback execution and no-drift remain `.4.3.5` and
+  `.4.3.6`.
+
+  **Verification:** `Pkg.test()` passes with 559 assertions, including one focused end-to-end hash case;
+  commit-time mdBook, memory, Knowledge Map, task-tree, doctrine, and whitespace checks pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.4.3.3 — add Julia runtime array helpers**
+  (DONE — array helper/receiver/mutation behavior is green; `.4.3.4` through `.4.4` have since landed, `.4.5.0`
+  split diagnostics/trace, and `.4.5.1` through `.6.2.4.2.3` have since landed and `.6.2.4.5.3` is active).
+
+  **Change:** Added copied array pipelines, delimiter-first receiver joins, string/regex/split bridges,
+  flatten/concat and explicit constructor splicing, numeric reducer terminals, typed split replacement, tagged
+  records, and statement-only named/scalar-held end mutations. Value-position end methods return `nothing` without
+  mutation. Package status is now `runtime-array-helpers`.
+
+  **Boundary:** Array behavior only. Hash helpers, controls/blocks/callbacks, and no-drift remain `.4.3.4` through
+  `.4.3.6`.
+
+  **Verification:** `Pkg.test()` passes with 558 assertions, including two focused end-to-end array cases;
+  commit-time mdBook, memory, Knowledge Map, task-tree, doctrine, and whitespace checks pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.4.3.2 — add Julia runtime string numeric helpers**
+  (DONE — pure string/scalar/numeric helpers are green; `.4.3.3` through `.4.4` have since landed, `.4.5.0`
+  split diagnostics/trace, and `.4.5.1` through `.6.2.4.2.3` have since landed and `.6.2.4.5.3` is active).
+
+  **Change:** Added canonical function/receiver dispatch for current string/scalar and numeric helpers, internal
+  regex flag retention, lazy coalescing, explicit lexical comparisons, numeric aliases and symbol callees,
+  JSON-number normalization, invalid-operation `nothing`, and compatible string/number receiver chains. Package
+  status is now `runtime-string-numeric`.
+
+  **Boundary:** Pure string/scalar/numeric behavior only. Array-aware construction/transforms/reducers/mutations,
+  hash helpers, controls/blocks/callbacks, and no-drift remain `.4.3.3` through `.4.3.6`.
+
+  **Verification:** `Pkg.test()` passes with 556 assertions, including two focused end-to-end helper cases;
+  commit-time mdBook, memory, Knowledge Map, task-tree, doctrine, and whitespace checks pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.4.3.1 — add Julia runtime value capture helpers**
+  (DONE — core value/store/capture semantics are green; `.4.3.2` has since landed and `.4.3.3` is active).
+
+  **Change:** Extended the Julia interpreter with scalar/array/hash stores, copied bare and typed snapshots,
+  structural literals/assignments/access, final checked no-autovivification nested writes, and entry/local named
+  capture maps plus character and line-column positions. Package status is now `runtime-core-values`.
+
+  **Boundary:** Core value/store/capture behavior only. String/scalar and numeric helpers, array/hash helper
+  breadth, controls/blocks/callbacks, and no-drift remain `.4.3.2` through `.4.3.6`.
+
+  **Verification:** `Pkg.test()` passes with 554 assertions, including four focused end-to-end core-value cases;
+  commit-time mdBook, memory, Knowledge Map, task-tree, doctrine, and whitespace checks pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.4.3.0 — split Julia runtime helper families**
+  (DONE — helper/value work is decomposed before code; `.4.3.1` has since landed and `.4.3.2` is active).
+
+  **Change:** Converted `.4.3` into an active container with six implementation/closeout leaves: core
+  values/stores/captures, string/numeric helpers, arrays, hashes, value/control/block/callback execution, and final
+  no-drift. The completed Dart rollout supplies the sequencing evidence.
+
+  **Boundary:** Planning and lockstep status only. No Julia source or runtime behavior changed; `.4.3.1` is the
+  first implementation leaf.
+
+  **Verification:** The `.4.2` baseline remains 550 Julia assertions. mdBook, memory architecture, Knowledge Map,
+  task-tree metadata, doctrine, stale-frontier scans, and whitespace checks pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.4.2 — add Julia runtime rule interpreter**
+  (DONE — first compiled-rule dispatch is in place; `.4.3.0` has since split helper/value work and next active leaf
+  is `JULIA-BACKEND-PARITY.4.3.1`).
+
+  **Change:** Added `julia/src/runtime/Interpreter.jl`, wired its public API into `LinkedSpecJulia`, and updated
+  package status to `runtime-dispatch`. Julia now executes default/AND/OR/repetition modes, lifecycle flow/events,
+  action and blind-call children, `retv`, explicit call/return, narrow explicit-array/rule accumulators and capture
+  reads, seek/consume matching, one-element output projection, repetition bounds, zero-progress cutoffs, and
+  recursion guards.
+
+  **Boundary:** Dispatch-facing interpreter only. `.4.3.0` has since split general stores/captures and the broader
+  string/number/array/hash, expression-block, structured-control, trailing-block, and tree-callback families into
+  `.4.3.1` through `.4.3.6`.
+
+  **Verification:** `Pkg.test()` passes with 550 assertions, including 34 runtime-interpreter assertions and the
+  existing runtime-matching/compiled-state/registry/ActionIR/frontend/corpus coverage. Commit-time
+  docs/governance checks pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.4.1 — add Julia runtime matching state**
+  (DONE — Julia seek/consume matching and interpreter match registers are in place; `.4.2` has since added rule
+  dispatch, `.4.3.1` has added core values/stores/captures, and `.4.3.2` is active).
+
+  **Change:** Added `julia/src/runtime/Matching.jl`, wired its public API into `LinkedSpecJulia`, and updated package
+  status to `runtime-matching`. Julia now preserves stable regex alternative identity, full/compact/named captures,
+  zero-based code-unit spans, public character and line/column positions, cursor/capture anchors, separate
+  entry/local match registers, immutable register updates, and zero-width/zero-progress state.
+
+  **Boundary:** Runtime matching state only. Rule dispatch has since landed in `.4.2`; broader ActionIR evaluation,
+  staged parser execution, diagnostics/trace, and corpus execution remain future leaves.
+
+  **Verification:** `Pkg.test()` passes with 516 assertions, including 60 runtime-matching assertions and the
+  existing compiled-state/registry/ActionIR/frontend/corpus coverage. Commit-time docs/governance checks pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.3.4 — add Julia compiled-spec state**
+  (DONE — the Julia compiled-spec/interpreter-state records and descriptor projection are in place; `.4.1` has
+  since closed, `.4.2` has since added rule dispatch, `.4.3.0` has split helpers, and next active leaf is
+  `JULIA-BACKEND-PARITY.4.3.1`).
+
+  **Change:** Added `julia/src/compiler/CompiledSpec.jl`, wired compiler exports into `LinkedSpecJulia`, and
+  updated package status to `compiled-state`. Julia now builds ordered `CompiledSpec` / `CompiledRule` state,
+  dependency refs, dependency-regex rows, lifecycle/action payload ASTs with registry-aware contracts, function
+  registry projection, mode metadata, last-definition-wins metadata when validation is skipped, and
+  descriptor-shaped JSON.
+
+  **Boundary:** Compiled state and descriptor projection only. Runtime matching has since landed in `.4.1`;
+  executable rule dispatch, staged parser execution, diagnostics/trace, and corpus execution remain future leaves.
+
+  **Verification:** `Pkg.test()` passes with 456 tests, including 41 compiled-state assertions and the existing
+  registry/ActionIR/frontend/corpus coverage. Commit-time docs/governance checks pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.3.3 — add Julia user-function registry**
+  (DONE — the Julia user-function registry and registry-aware contract resolution seam is in place; `.3.4` has
+  since closed, `.4.1` and `.4.2` have since added matching/dispatch, and next active leaf is
+  `JULIA-BACKEND-PARITY.4.3`).
+
+  **Change:** Added `julia/src/action/FunctionRegistry.jl`, wired registry exports into `LinkedSpecJulia`, and
+  updated package status to `function-registry`. Julia now builds ordered `UserFunctionRegistry` entries from
+  function definitions, exposes staged body parse jobs, preserves `body_payload` and optional `body_ast`, can stitch
+  staged `body_ast` payloads immutably, and resolves exact-arity user calls before helper fallback in
+  `resolve_action_*_contracts(...; function_registry=...)`.
+
+  **Boundary:** Registry and contract classification only. Compiled state has since landed in `.3.4`; runtime
+  interpretation, staged parser execution, diagnostics/trace, and corpus execution remain future leaves.
+
+  **Verification:** `Pkg.test()` passes with 415 tests, including 23 user-function registry assertions and the
+  existing 39 Action contract resolver assertions. Commit-time docs/governance checks pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.3.2 — add Julia ActionIR contract resolver**
+  (DONE — the Julia typed ActionIR contract-resolution layer is in place; `.3.3` and `.3.4` have since closed, and
+  `.4.1` through `.4.3.6` added matching, dispatch, and current helper/control families; next active leaf is
+  `JULIA-BACKEND-PARITY.4.4`).
+
+  **Change:** Added `julia/src/action/ActionContracts.jl`, wired resolver exports into `LinkedSpecJulia`, and
+  updated package status to `action-contracts`. Julia now records canonical helper/control contracts and
+  diagnostics for typed ActionIR calls, receiver methods, structural assignments, structured controls, nested
+  arguments, block values, shape literals, and access expressions. `validate_spec(...)` shares the resolver's
+  current helper/control name predicate for user-function collision checks.
+
+  **Boundary:** Contract classification only. Function-registry-aware user-call classification has since landed in
+  `.3.3`; compiled state, runtime interpretation, staged parser execution, diagnostics/trace, and corpus execution
+  remain future leaves.
+
+  **Verification:** `Pkg.test()` passes with 392 tests, including 39 Action contract resolver assertions.
+  Commit-time docs/governance checks pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.3.1 — add Julia ActionIR AST parser**
+  (DONE — the Julia helper/action text-to-AST layer is in place; `.3.2` through `.4.3.6` have since closed, and next
+  current active leaf is `JULIA-BACKEND-PARITY.6.2.4`).
+
+  **Change:** Added `julia/src/action/ActionAst.jl` and `julia/src/action/ActionParser.jl`, wired their public
+  exports into `LinkedSpecJulia`, and updated package status to `action-ast-parser`. Julia now parses action
+  blocks, value-drop statements, calls, arguments, literals, variables, indexed/nested access, shape literals,
+  assignments, receiver chains, trailing block arguments, block values, structured controls, and raw fallback nodes
+  as typed AST structures with JSON projection.
+
+  **Boundary:** Structural parsing only. Canonical helper-contract resolution has since landed in `.3.2`;
+  user-function registry resolution, compiled state, runtime interpretation, staged parser execution,
+  diagnostics/trace, and corpus execution remain future leaves.
+
+  **Verification:** `Pkg.test()` passes with 353 tests, including 74 Action AST parser assertions. Commit-time
+  docs/governance checks pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.2.4 — project Julia function-definition shells**
+  (DONE — the Julia frontend container is closed; `.3.1` through `.4.3.6` have since closed, and next active leaf is
+  `JULIA-BACKEND-PARITY.4.4`).
+
+  **Change:** Added `project_user_function_definition_asts(...)`,
+  `parse_spec_with_user_function_definition_asts(...)`, and wrapper-output normalization in
+  `julia/src/spec/UserFunctionDefinitionShell.jl`. Julia now consumes spec-shaped `function_definition` /
+  `function_definition_error` nodes, validates source/body spans and staged sidecars, normalizes
+  `functions.<index>.body_source` paths/job IDs, and strips function spans before rule parsing.
+
+  **Boundary:** Projection of spec-returned function shell nodes only. Julia does not execute
+  `specs/user_function_definition.spec` yet, and direct `parse_spec(...)` remains rule-only. Typed ActionIR parsing
+  has since landed in `.3.1`; compiled state, runtime interpretation, staged parser execution, and corpus execution
+  remain future leaves.
+
+  **Verification:** `Pkg.test()` passes with 279 tests, including 27 function-shell projection tests. Commit-time
+  docs/governance checks pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.2.3 — add Julia frontend validation**
+  (DONE — the Julia frontend now validates parsed source ASTs; `.2.4` through `.4.3.6` have since closed, and
+  current active leaf is `JULIA-BACKEND-PARITY.6.2.4`).
+
+  **Change:** Added `validate_spec(spec; strict_syntax=false)` and `SpecValidationException` in
+  `julia/src/spec/Validator.jl`, wired validation into the public module, and updated package status to
+  `source-validator`.
+
+  **Boundary:** Source parsing and validation only. Top-level function-shell projection, typed ActionIR, compiled
+  state, runtime interpretation, and corpus execution remain future leaves; `--execute` remains rejected.
+
+  **Verification:** `Pkg.test()` passes with 252 tests, including source-validator coverage over Dart parity cases,
+  all checked-in specs, and rule-only corpus specs. Commit-time docs/governance checks pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.2.2 — add Julia source spec parser**
+  (DONE — the Julia frontend now parses rule paragraphs into source ASTs; `.2.3` through `.4.3.6` have since closed,
+  and current active leaf is `JULIA-BACKEND-PARITY.6.2.4`).
+
+  **Change:** Added `parse_spec(source)` and `SpecParseException` in `julia/src/spec/Parser.jl`, wired the parser
+  into the public module, and updated package status to `source-parser`.
+
+  **Boundary:** Source parsing only. Frontend validation, top-level function-shell projection, typed ActionIR,
+  compiled state, runtime interpretation, and corpus execution remain future leaves; `--execute` remains rejected.
+
+  **Verification:** `Pkg.test()` passes with 229 tests, including parser smoke over all 21 checked-in specs and
+  rule-only corpus specs. Commit-time docs/governance checks pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.2.1 — define Julia frontend AST data types**
+  (DONE — the Julia frontend now has data records and JSON projection; `.2.2` through `.4.3.6` have since closed,
+  and current active leaf is `JULIA-BACKEND-PARITY.6.2.4`).
+
+  **Change:** Added Julia source AST/data types for spec files, function definitions, source spans, staged parse
+  jobs, rule headers/modes, body element variants, edge targets, and fluent calls.
+
+  **Boundary:** Data-only frontend layer. No `.spec` text parser, ActionIR parser, runtime interpreter, or corpus
+  execution semantics exist yet; `--execute` remains rejected.
+
+  **Verification:** `Pkg.test()` passes with 52 tests, including source AST JSON round-trip coverage. Commit-time
+  docs/governance checks pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.1.3 — add Julia corpus manifest IO**
+  (DONE — the Julia foundation container is closed; `.2.1` through `.4.3.6` have since closed, and current active
+  leaf is `JULIA-BACKEND-PARITY.4.4`).
+
+  **Change:** Added JSON3-backed corpus manifest loading, fixture drift/file guards, expected JSON parsing, and
+  corpus CLI validation output over the checked-in 99-fixture corpus.
+
+  **Boundary:** Manifest and fixture IO only. No `.spec` parser, typed AST, runtime interpreter, or corpus
+  execution semantics exist yet; `--execute` remains rejected.
+
+  **Verification:** `Pkg.instantiate()`, `Pkg.test()` (36 tests), Julia corpus validation commands, and `--execute`
+  rejection pass with a writable Julia depot. Commit-time docs/governance checks pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.1.2 — scaffold Julia package**
+  (DONE — the minimal Julia package scaffold is in place; `.1.3` through `.4.3.6` have since closed, and current
+  active leaf is `JULIA-BACKEND-PARITY.6.2.4`).
+
+  **Change:** Added `julia/` as the repo-owned `LinkedSpecJulia` package with package metadata, committed
+  `Manifest.toml`, status helpers, CLI/corpus modules, `bin/linkedspec_julia.jl`, `bin/corpus_runner.jl`, README
+  commands, and a Julia smoke test.
+
+  **Boundary:** Package and command surface only at this leaf. `.1.3` later added manifest validation; parser,
+  runtime interpreter, and corpus execution remain future work.
+
+  **Verification:** `Pkg.instantiate()`, `Pkg.test()`, Julia-specific CLI help/status, and corpus-runner scaffold
+  commands pass with a writable Julia depot. Commit-time docs/governance checks pass.
+
+- 2026-07-10: **JULIA-BACKEND-PARITY.1.1 — verify Julia toolchain preflight**
+  (DONE — Julia toolchain/package-layout preflight is complete; `.1.2` has since created the scaffold, and the
+  current active leaf is `JULIA-BACKEND-PARITY.6.2.4`).
+
+  **Change:** Verified local Homebrew Julia 1.12.6 and matched it to the official current stable release. Recorded
+  the intended `julia/` package layout, package/test commands, optional formatter/linter commands, Julia-specific
+  CLI entrypoint, corpus-runner entrypoint, and writable-depot note for this managed harness.
+
+  **Boundary:** Planning/toolchain only. No Julia package scaffold, source, tests, parser behavior, corpus IO, or
+  CLI files were created yet.
+
+  **Verification:** Julia version/Homebrew probes and `Pkg`/`Test` import with a writable depot pass.
+  `JuliaFormatter` and `JET` are absent optional tools. Commit-time docs/governance checks pass.
+
+- 2026-07-09: **FUTURE-PARITY-BACKLOG.1.2 — scope Julia backend parity plan**
+  (DONE — Julia backend parity now has a dedicated task tree; `.1` through `.4.3.6` have since closed, and the
+  current active leaf is `JULIA-BACKEND-PARITY.6.2.4`).
+
+  **Change:** Created `docs/tasks/JULIA-BACKEND-PARITY.md` with the full parity plan for the Julia backend:
+  toolchain/package preflight, scaffold, corpus IO, `.spec` frontend, typed ActionIR, compiled state, runtime
+  interpreter, staged user functions, diagnostics/trace, corpus parity, local verification, mdBook closeout, and
+  generated-source follow-up decision.
+
+  **Boundary:** Planning only. No Julia package, source, tests, or CLI files were created; toolchain availability
+  is intentionally left to `.1.1`.
+
+  **Verification:** mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, stale-status scans,
+  and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.7.5 — close Dart parity milestone**
+  (DONE — the scoped interpreter-first Dart milestone is complete; Julia planning has since completed in
+  `FUTURE-PARITY-BACKLOG.1.2`, and executable Julia work has advanced through `.1.3` to
+  `JULIA-BACKEND-PARITY.2.1`).
+
+  **Change:** Closed the Dart task tree after aligning the roadmaps, task-tree index, future-backlog frontier,
+  mdBook status/handoff text, architecture snapshot, live docs, resume pointer, and Knowledge Map around the
+  accepted Dart boundary.
+
+  **Boundary:** No Dart runtime behavior changed. Generated Dart source remains deferred to a future split proof
+  lane; no Julia or Lua implementation starts in this closeout slice.
+
+  **Verification:** Focused Dart gate, mdBook build, memory architecture, Knowledge Map, task-tree metadata,
+  doctrine, default local CI, stale-status scans, and `git diff --check` pass. The focused Dart gate includes
+  140 Dart tests and 99/99 corpus execution; default local CI includes phase0 `1..1028`.
+
+- 2026-07-09: **DART-BACKEND-PARITY.7.4 — productize Dart-specific CLI**
+  (DONE — Dart now has a productized variant-specific CLI; frontier advances to `.7.5`).
+
+  **Change:** `dart run bin/linkedspec_dart.dart` now exposes the Dart backend command contract. Its `corpus`
+  command validates or executes the manifest-backed corpus through the existing Dart parser/compiler/runtime
+  harness. `bin/corpus_runner.dart` remains available as a compatibility wrapper over the same shared CLI runner.
+
+  **Boundary:** This is CLI productization over the already-green 99/99 interpreter corpus path. It does not add
+  generated Dart source and does not change trace parity or runtime semantics.
+
+  **Verification:** Focused Dart local gate passes: format, analyzer, 140 tests, CLI help checks, bounded
+  Dart-specific CLI corpus smoke, and full 99-fixture corpus execution. Commit-time docs/governance gates also pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.7.2 — defer Dart generated source proof**
+  (DONE — generated Dart source is explicitly deferred; frontier advances to `.7.4`).
+
+  **Change:** Recorded that generated Dart source is not part of the current Dart parity closeout. A future source
+  emitter must be split into scaffold/compile-run harness, generated family-plan metadata, direct structural-family
+  execution, and curated manifest-backed corpus proof before it can claim parity evidence.
+
+  **Boundary:** No Dart runtime behavior changed. The current Dart conformance gate remains the interpreter-first
+  99/99 corpus run, matching the Rust model where generated source is a separate curated proof layer.
+
+  **Verification:** mdBook build, memory architecture, Knowledge Map, task-tree metadata, doctrine,
+  stale-status scans, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.7.1 — close Dart mdBook usage status**
+  (DONE — mdBook usage/status/handoff docs match the green `.6` boundary; frontier advances to `.7.2`).
+
+  **Change:** Added an explicit Dart backend command/status section to the backend handoff appendix and aligned
+  project status plus trace-status cross-references around the focused Dart gate, optional local-CI integration,
+  full 99-fixture corpus parity, and remaining generated-source / Dart-specific CLI follow-ups.
+
+  **Boundary:** No Dart runtime behavior changed. This is a documentation closeout for the public book after the
+  `.6` corpus and verification boundary landed.
+
+  **Verification:** mdBook build, focused Dart gate, default local-CI gate, memory architecture, Knowledge Map,
+  task-tree metadata, doctrine, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.6.4 — wire Dart local verification**
+  (DONE — focused Dart gate is documented and optional from local CI; frontier advances to `.7.1`).
+
+  **Change:** Added `tools/run_dart_local.sh` for Dart format/analyze/tests/CLI help/full-corpus execution and
+  wired it into `tools/run_ci_local.sh` behind `LINKEDSPEC_RUN_DART=1`.
+
+  **Boundary:** The canonical local CI gate stays core-only by default, so checkouts without Dart SDK availability
+  still have a reliable regression path. Dart checks are explicit through the focused script or the opt-in env var.
+
+  **Verification:** Focused Dart gate, default local-CI skip behavior, Dart format/analyze/full tests, full
+  99-fixture corpus execution, mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
+  `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.6.3 — close full Dart corpus gate**
+  (DONE — the checked-in Dart corpus executes 99/99 green; frontier advances to verification wiring `.6.4`).
+
+  **Change:** Promoted the Dart corpus runner from bounded batch execution to full-manifest execution. CLI
+  `--execute` without a selector now runs the full manifest in order, while named and bounded selection remain
+  available for diagnostics.
+
+  **Boundary:** This closes the `.6` full-corpus output parity gate for the current 99-fixture manifest. Manifest
+  drift and malformed-manifest guards remain strict: unsupported formats, count mismatch, invalid/duplicate case
+  names, missing fixture dirs, stale extra dirs, missing files, and output mismatches are covered.
+
+  **Verification:** Full 99-fixture corpus execution, focused corpus tests, Dart format/analyze/full tests, mdBook,
+  memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.5 — route Dart fn corpus through spec shell**
+  (DONE — the three routed top-level `fn` corpus fixtures now pass; frontier advances to full corpus gate `.6.3`).
+
+  **Change:** Added Dart execution of `specs/user_function_definition.spec` for returned function-definition nodes,
+  public shell helpers for staged parsing, and corpus-runner routing that falls back to the shell when rule-only
+  parsing rejects top-level `fn` source. Runtime statement-form `next()` and entry/match line-end helpers now cover
+  the shell's current helper requirements.
+
+  **Boundary:** No Dart raw scanner owns `fn` semantics. Rule-only corpus fixtures still use the established
+  `parseSpec(...)` path; top-level function fixtures use the spec-defined shell and staged body projection.
+  The next active leaf is `DART-BACKEND-PARITY.6.3` for the full Dart corpus gate.
+
+  **Verification:** Focused parser/corpus/runtime/contract tests, routed three-fixture corpus run, Dart
+  format/analyze/full tests, default 99-fixture corpus loader, diagnostic 31-fixture parser-smoke corpus run,
+  mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.6 — close Dart structural regex smoke**
+  (DONE — shipped-spec/parser-smoke window is now 31/31 green; frontier advances to top-level `fn` corpus fixtures).
+
+  **Change:** Dart now handles the exact shipped structural PCRE forms with bounded matchers instead of a broad
+  regex-engine replacement: Lispish recursive square brackets, EBNF `\K` / recursive named subpatterns /
+  `(?(DEFINE)...)` return structures, and spec.spec recursive block forms. Dart also implements action-edge
+  `push(child, index)`, preserving the EBNF logging annotation payloads.
+
+  **Boundary:** The `.6.2.4` shipped-spec/parser-smoke parent is closed at 31/31 green. The current frontier is
+  `DART-BACKEND-PARITY.6.2.5` for the routed top-level `fn` corpus fixtures.
+
+  **Verification:** Focused matching/interpreter/corpus-manifest tests, diagnostic 31-fixture parser-smoke corpus
+  run, default 99-fixture corpus loader, Dart format/analyze/full tests, mdBook, memory architecture, Knowledge
+  Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.5 — close parser smoke no drift**
+  (DONE — final no-drift closeout confirms the shipped-smoke parser window is 24/31 green and advances to PCRE structural work).
+
+  **Change:** No Dart runtime behavior changed. This slice reconciles task-tree status, roadmaps, Dart README,
+  mdBook status/backend handoff, live docs, and Knowledge Map around the measured shipped-spec/parser-smoke
+  boundary after the non-PCRE residual group closed.
+
+  **Boundary:** The 31-fixture shipped-spec/parser-smoke window remains 24/31 green. The seven remaining failures
+  are PCRE structural regex constructs already routed to `DART-BACKEND-PARITY.6.2.4.6`; active implementation work
+  advances there.
+
+  **Verification:** Diagnostic 31-fixture parser-smoke corpus run, current-status no-drift scans, Dart
+  format/analyze/full tests, mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
+  `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.4.6 — mirror public parser leading trivia**
+  (DONE — `ds_vhistory_version_entry` now passes on Dart; shipped-smoke parser window is 24/31 green).
+
+  **Change:** Dart `LinkedSpecRuntimeEngine.parse(...)` now mirrors the Perl public parser wrapper by skipping
+  leading blank lines and leading `#` comment lines before invoking the top rule. Direct descriptor handlers on
+  Perl bypass that wrapper; Dart's public runtime entrypoint now matches the public parser oracle.
+
+  **Boundary:** The non-PCRE `.6.2.4.4` residual group is green. The 31-fixture shipped-spec/parser-smoke window is
+  24/31 green; the seven remaining failures are PCRE structural regex constructs routed to
+  `DART-BACKEND-PARITY.6.2.4.6`. Active implementation work advances to `DART-BACKEND-PARITY.6.2.4.5` for final
+  no-drift closeout.
+
+  **Verification:** Focused runtime/corpus tests, focused `ds_vhistory_version_entry` corpus run, diagnostic
+  31-fixture parser-smoke corpus run, Dart format, mdBook, memory architecture, Knowledge Map, task-tree metadata,
+  doctrine, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.4.5 — split ds_vhistory oracle boundary**
+  (DONE — `ds_vhistory_version_entry` has public-parser, descriptor-handler, scalar-held indexed-read, and
+  leading-newline evidence; no Dart runtime behavior changed).
+
+  **Change:** Closed the residual parser-smoke leaf as an evidence split. Public `LinkedSpec::get_parser` returns
+  the checked null object name for the leading-newline fixture, but the direct generated `vhistory` descriptor
+  handler returns `/proj/foo`; a minimal public scalar-held `payload[1]` probe still returns `"name"`.
+
+  **Boundary:** The shipped-spec/parser-smoke diagnostic window remains 23/31 green. The new active frontier is
+  `DART-BACKEND-PARITY.6.2.4.4.6`, which must resolve the leading-newline public-parser/oracle boundary without
+  weakening ordinary scalar-held direct access.
+
+  **Verification:** Perl public-parser, descriptor-handler, scalar-held indexed-read, and leading-newline minimal
+  probes; focused Dart `ds_vhistory_version_entry` corpus run; Rust `oracle_corpus_matches_perl_reference`;
+  mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass or record
+  the expected Dart mismatch as evidence.
+
+- 2026-07-09: **FUTURE-PARITY-BACKLOG.9.0 — capture AND OR edge default correction**
+  (DONE — director's corrected AND/OR edge-default model is parked for later design).
+
+  **Change:** Added `FUTURE-PARITY-BACKLOG.9` with completed capture leaf `.9.0` and pending design leaf `.9.1`.
+  The future direction is that AND rules default bare entries to blind-call sequence semantics, while OR/default
+  rules default bare entries to action-edge regex-dispatch semantics.
+
+  **Boundary:** Planning capture only. No parser/runtime behavior changed, and then-active implementation work
+  remained on `DART-BACKEND-PARITY.6.2.4.4.5`.
+
+  **Verification:** mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
+  `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.4.4 — close Dart legacy accumulator smoke**
+  (DONE — `regdef_nested_register_fields` now passes on Dart; `ds_vhistory_version_entry` is routed with evidence).
+
+  **Change:** Dart one-argument action-edge `push(Child)` now recognizes rule arguments, executes the child, updates
+  `retv`, and appends the child result to the current rule accumulator instead of treating the argument as the
+  target accumulator.
+
+  **Boundary:** `regdef_nested_register_fields` passes. The shipped-spec/parser-smoke diagnostic window is now
+  23/31 green. `ds_vhistory_version_entry` remains routed to `DART-BACKEND-PARITY.6.2.4.4.5` because its checked
+  null object-name oracle conflicts with the current scalar-held direct-access contract for `cur_object[1]`.
+
+  **Verification:** Dart format/analyze/full tests, focused runtime/corpus tests, focused structural corpus run,
+  diagnostic parser-smoke corpus measurement, CLI/help corpus-loader smokes, mdBook, memory architecture,
+  Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.4.3 — close Dart helper mutation surfaces**
+  (DONE — helper mutation and text-normalization parser-smoke fixtures now pass on Dart).
+
+  **Change:** Dart now executes statement-context `substr(...)` / `regex_subst(...)` scalar mutations, expands
+  regex replacement captures, replaces explicit `split(array(target), ...)` targets, and exposes entry/local regex
+  start line/column helpers.
+
+  **Boundary:** `simenv_multiline_value`, `lib_reader_sattribute`, and `lib_reader_cattribute` pass. The
+  shipped-spec/parser-smoke diagnostic window is now 22/31 green. Active implementation work advances to
+  `DART-BACKEND-PARITY.6.2.4.4.4` for the remaining legacy structural smoke outputs:
+  `regdef_nested_register_fields` and `ds_vhistory_version_entry`.
+
+  **Verification:** Dart format/analyze/full tests, focused runtime/corpus tests, focused helper/text-normalizing
+  corpus run, CLI/help corpus-loader smokes, mdBook, memory architecture, Knowledge Map, task-tree metadata,
+  doctrine, and `git diff --check` pass. The diagnostic parser-smoke corpus run measures the expected 22/31
+  boundary with remaining failures routed.
+
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.4.2 — close Dart hlink delimiter captures**
+  (DONE — hlink delimiter/capture fixtures now pass on Dart).
+
+  **Change:** Dart `call(...)` refreshes the runtime `retv` channel with child results, and append-style mutations
+  now update scalar-held lists created by assignments such as `items = []`. That makes
+  `push(array(word_items), retv)` visible through `array(word_items)` in `hlink_substitution.spec`.
+
+  **Boundary:** All five hlink fixtures pass. The shipped-spec/parser-smoke diagnostic window is now 19/31 green;
+  `tablegrep_simple_term` is also green from the same scalar-held append behavior. Active implementation work
+  advances to `DART-BACKEND-PARITY.6.2.4.4.3` for helper mutation and text-normalization parity.
+
+  **Verification:** Dart format/analyze/full tests, focused runtime/corpus tests, focused hlink corpus run,
+  diagnostic corpus run, CLI/help corpus-loader smokes, mdBook, memory architecture, Knowledge Map, task-tree
+  metadata, doctrine, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.4.1 — close Dart portmap result shapes**
+  (DONE — explicit `flat*` arguments splice correctly inside Dart `array(...)`).
+
+  **Change:** Dart `array(...)` now splices explicit `flat(...)`, `flat_array(...)`, and `flat_hash(...)` call or
+  fluent arguments into the constructed array, while `copy(...)` remains nested. This fixes the extra array layer
+  in the five portmap corpus fixtures and also turns `vhdl_library_use` green.
+
+  **Boundary:** The shipped-spec/parser-smoke diagnostic window is now 13/31 green. Active implementation work
+  advances to `DART-BACKEND-PARITY.6.2.4.4.2` for hlink delimiter/capture parity. PCRE structural regex blockers
+  remain routed to `.6.2.4.6`.
+
+  **Verification:** Dart format/analyze/full tests, focused runtime/corpus tests, focused portmap corpus run,
+  diagnostic corpus run, mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
+  `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.4.0 — split Dart residual parser-smoke parity**
+  (DONE — residual shipped-spec parser-smoke work is split into narrow non-PCRE implementation leaves).
+
+  **Change:** The 7/31 parser-smoke boundary after `.6.2.4.3` is now classified into portmap/action-edge child
+  result shape, hlink delimiter/capture, helper mutation and text normalization, legacy structural smoke outputs,
+  residual closeout, and the already separate PCRE structural-regex follow-up.
+
+  **Boundary:** Planning split only. No implementation code changed. Active implementation work advances to
+  `DART-BACKEND-PARITY.6.2.4.4.1` for portmap/action-edge child result shape parity.
+
+  **Verification:** mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
+  `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.3 — close Dart recursive dispatch semantics**
+  (DONE — tclite/default-mode and recursive top-rule parser-smoke fixtures now pass on Dart).
+
+  **Change:** Dart compiled action edges now carry resolved regex-dispatch metadata, edge-only child regexes are
+  folded into the parent alternation, and runtime dispatch executes all edges for the matched regex index. Explicit
+  aggregate resets through `set(array(name), ...)` / `set(hash(name), ...)` now scope those bindings to the current
+  rule invocation, preserving recursive `sexpr` value parity without hiding ordinary undeclared child mutations.
+
+  **Boundary:** The final shipped-spec/parser-smoke window is now 7/31 green. Lispish still hits recursive PCRE
+  `(?R)` and is routed to `.6.2.4.6`; residual hlink/output/helper mismatches advance to
+  `DART-BACKEND-PARITY.6.2.4.4`.
+
+  **Verification:** Focused compiler/runtime tests, Dart format/analyze, full Dart tests, selected tclite/top-rule
+  corpus cases, diagnostic corpus run, mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine,
+  and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.2 — bridge Dart helper action surfaces**
+  (DONE — missing helper/action surfaces no longer block Dart).
+
+  **Change:** Dart now executes direct capture-slice helpers, diagnostic `print`/`print_each`/`say`, logical
+  `and`/`or`/`not`, and Rust-style terminating `exit_now(...)`. The action parser now keeps literal delimiters
+  inside quoted helper arguments while matching call parentheses, so shipped `print("...", "\n")` calls no longer
+  become raw fallback expressions.
+
+  **Boundary:** The final shipped-spec/parser-smoke window remains 2/31 green, but missing helper/action blockers
+  now move to explicit recursion/default-mode/output mismatches, deliberate `exit_now(...)` diagnostic branches,
+  and already-routed PCRE structural regex blockers. Active implementation work advances to
+  `DART-BACKEND-PARITY.6.2.4.3`.
+
+  **Verification:** Focused action parser/runtime interpreter tests, Dart format/analyze, full Dart tests,
+  diagnostic corpus run, mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
+  `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.1 — bridge Dart shipped regex dialect**
+  (DONE — basic shipped regex dialect incompatibilities no longer block Dart).
+
+  **Change:** Dart now normalizes POSIX character classes, inline/scoped `i`/`m`/`s` flag groups, possessive
+  quantifier markers, lower-bound `{,n}` quantifiers, and Python-style named captures through a shared runtime
+  regex compiler used by both rule matching and helper regex values.
+
+  **Boundary:** The final shipped-spec/parser-smoke window remains 2/31 green, but the earlier
+  POSIX/inline-flag/possessive FormatExceptions now move to narrower runtime/helper/output failures. Remaining
+  PCRE structural constructs (`\K`, `(?&name)`, `(?(DEFINE)...)`) are routed to `DART-BACKEND-PARITY.6.2.4.6`.
+  Active implementation work advances to `DART-BACKEND-PARITY.6.2.4.2`.
+
+  **Verification:** Focused runtime matching/interpreter tests, Dart format/analyze, diagnostic corpus run,
+  mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.4.0 — split Dart shipped corpus smoke batch**
+  (DONE — final shipped-spec/parser-smoke window measured and split).
+
+  **Change:** The bounded window `--execute --offset 68 --limit 31` is 2/31 green on Dart: `pplugin_empty` and
+  `tkgui_empty` pass. The 29 failures are now grouped into regex-dialect translation, missing helper/action
+  surfaces, recursive/default-mode output semantics, and residual shipped-spec smoke parity.
+
+  **Boundary:** Planning split only. No implementation code changed. Active implementation work advances to
+  `DART-BACKEND-PARITY.6.2.4.1` for the Dart regex-dialect bridge.
+
+  **Verification:** Diagnostic corpus run, mdBook, memory architecture, Knowledge Map, task-tree metadata,
+  doctrine, and `git diff --check` pass.
+
+- 2026-07-09: **FUTURE-PARITY-BACKLOG.8.0 — capture spec-derived roundtrip idea**
+  (DONE — director's single-source `.spec` parser/stimuli arc is parked for later design).
+
+  **Change:** Added `FUTURE-PARITY-BACKLOG.8` with completed capture leaf `.8.0` and pending design leaf `.8.1`.
+  The idea is to derive both a parser and a stimuli generator from the same `foo.spec`, making `.spec` the sole
+  source of truth for future closed-loop roundtrip validation.
+
+  **Boundary:** Planning capture only. No implementation code changed, no generator grammar was introduced, and
+  active implementation work remains on `DART-BACKEND-PARITY.6.2.4`.
+
+  **Verification:** mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
+  `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.3 — close Dart middle corpus batch**
+  (DONE — non-`fn` helper/control/receiver middle fixtures pass; `fn` corpus fixtures routed).
+
+  **Change:** Dart now preserves assignment expressions inside helper argument lists, supports plain fallback
+  values in inline `if(...)`, evaluates numeric aggregate reducer aliases such as `min(scores)` through
+  aggregate-aware reads, and follows the duck-typed scalar-held list/map readback contract through `array(name)`,
+  `hash(name)`, and `copy(name)`. Explicit aggregate writes clear stale scalar-held values.
+
+  **Boundary:** The owned middle corpus window is 25/28 green. The three top-level `fn` fixtures remain routed to
+  `DART-BACKEND-PARITY.6.2.5` because the corpus runner needs spec-produced `function_definition` nodes rather
+  than a Dart raw scanner. Active implementation work advances to `DART-BACKEND-PARITY.6.2.4`.
+
+  **Verification:** Focused parser/runtime tests, Dart format/analyze/full tests, split execute-mode corpus smokes
+  over the 25 passing middle fixtures, default corpus loader/help, CLI help, mdBook, memory architecture,
+  Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.6.2.2 — close Dart starter corpus batch**
+  (DONE — first 40 shipped manifest fixtures execute green on Dart).
+
+  **Change:** Dart now treats non-null empty array/hash returns as successful rule matches, uses the child
+  rule's `matched` bit for blind dispatch instead of output truthiness, and executes marker-form
+  `if(...)` / `elseif(...)` / `else()` / `endif()` statement chains as grouped branches in action and value
+  blocks. The starter shipped-corpus batch now passes with
+  `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 40`.
+
+  **Boundary:** This is a bounded starter corpus proof, not full 99-fixture Dart corpus parity. Active
+  implementation work advances to `DART-BACKEND-PARITY.6.2.3` for helper/control/receiver/user-function/tree
+  traversal fixtures.
+
+  **Verification:** Dart format/analyze/full tests, default corpus loader/help, bounded 40-fixture execute
+  smoke, CLI help, mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
+  `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.5.3 — preserve Dart staged descriptor shapes**
+  (DONE — staged parse-job/function-registry descriptor-shape proof).
+
+  **Change:** Dart now has a focused descriptor proof for staged user functions. The compiled-state test starts
+  from spec-returned `function_definition` nodes, dispatches `body_parse_job` records through the staged registry,
+  compiles the stitched `SpecFile`, asserts neutral `body_payload`, normalized `body_parse_job`, stitched
+  `body_ast`, function-order metadata, and verifies runtime output from the same compiled state.
+
+  **Boundary:** This closes the `.5` staged/user-function container. It does not claim full corpus output parity;
+  active implementation work advances to `DART-BACKEND-PARITY.6`.
+
+  **Verification:** Focused compiled-state tests, Dart format/analyze/full tests, corpus runner, CLI help, mdBook,
+  memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.5.2 — execute Dart user functions**
+  (DONE — registered exact-arity user-function runtime execution).
+
+  **Change:** Dart now resolves registered exact-arity user-function calls before ordinary runtime helper
+  fallback. Arguments evaluate eagerly in the caller, params bind into fresh function-local scalar/array/hash
+  stores, function bodies return the final expression or local `return(...)` payload, returned values continue
+  through compatible receiver chains, standalone calls execute with discarded results, and direct/mutual recursion
+  produces structured `user_function_call` diagnostics.
+
+  **Boundary:** This executes registered functions in the interpreter; it does not yet close descriptor/corpus
+  shape preservation or full corpus output parity. Active implementation work advances to
+  `DART-BACKEND-PARITY.5.3`.
+
+  **Verification:** Focused runtime tests, Dart format/analyze/full tests, corpus runner, CLI help, mdBook, memory
+  architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.5.1 — add Dart staged function-body registry**
+  (DONE — minimal staged registry provider for function-body parse jobs).
+
+  **Change:** Dart now exports the narrow staged registry path for function-body parse jobs. The registry resolves
+  `actionir-body.spec` to `builtin:actionir-body.spec`, records the fixed adapter digest/cache key and compiled
+  parser shape for top rule `action_block`, executes jobs in stable queue order, and stitches returned
+  `action_block` JSON into `body_ast` through `dispatchFunctionBodyParseJobs(...)` and
+  `parseSpecWithStagedUserFunctionDefinitionAsts(...)`.
+
+  **Boundary:** This is not general staged parsing. Public `parse_job(...)` authoring, provider search roots, and
+  recursive staged queues remain future work. Runtime function-call execution has since landed in
+  `DART-BACKEND-PARITY.5.2`.
+
+  **Verification:** Focused staged-registry tests, Dart format/analyze/full tests, corpus runner, CLI help, mdBook,
+  memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.4.5.4 — close Dart diagnostics trace no drift**
+  (DONE — diagnostics/trace status closeout; `.4.5` container closed).
+
+  **Change:** Dart README, CLI/scaffold status, mdBook trace/status/handoff pages, live docs, roadmap, task-tree
+  index, MEMORY, and Knowledge Map now agree on the diagnostics/trace boundary: structured runtime diagnostics,
+  trace controls/sinks/events, traced runtime entrypoints, and runtime interpreter trace events are implemented.
+
+  **Boundary:** This is a no-runtime-source closeout. Dart does not claim full backend parity yet; staged registry
+  execution, user-function runtime parity, corpus output parity, Dart-specific CLI productization, and final Dart
+  parity closeout remain later leaves. Active implementation work advances to `DART-BACKEND-PARITY.5.1`.
+
+  **Verification:** CLI help, focused drift scans, mdBook, memory architecture, Knowledge Map, task-tree metadata,
+  doctrine, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.4.5.3 — add Dart runtime trace events**
+  (DONE — branch/lifecycle/source-boundary runtime trace instrumentation).
+
+  **Change:** Dart runtime tracing now emits rule scopes, recursion-cutoff decisions, regex match/no-match
+  decisions, action-edge and blind-call child-dispatch decisions, lifecycle block marks, cursor-control helper
+  marks, and `capture_until_boundary(...)` source-boundary marks through the optional `LinkedSpecTraceEmitter`.
+  Traced and untraced parse-result JSON remain identical.
+
+  **Boundary:** This lands runtime instrumentation on top of the existing trace controls. Diagnostics/trace
+  no-drift remains `.4.5.4`; staged runtime execution and corpus output parity remain later leaves. Active
+  implementation work advances to `DART-BACKEND-PARITY.4.5.4`.
+
+  **Verification:** Focused trace tests, Dart format/analyze/full tests, corpus runner, CLI help, mdBook, memory
+  architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.4.5.2 — add Dart trace controls**
+  (DONE — trace levels, controls, event primitives, and sinks).
+
+  **Change:** Dart now exports trace levels/config/emitter/event primitives, parses the documented
+  `LINKEDSPEC_TRACE_*` environment controls, supports stdout/routed-file/mirror sinks with reset/truncate behavior,
+  and exposes traced runtime entrypoints that preserve parse output while emitting parse-scope events.
+
+  **Boundary:** This lands trace controls only. Runtime branch/lifecycle/source-boundary trace instrumentation
+  remains `.4.5.3`; staged runtime execution and corpus output parity remain later leaves. Active implementation
+  work advances to `DART-BACKEND-PARITY.4.5.3`.
+
+  **Verification:** Focused trace tests, Dart format/analyze/full tests, corpus runner, CLI help, mdBook, memory
+  architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.4.5.1 — add Dart runtime diagnostics**
+  (DONE — structured diagnostics on Dart runtime exceptions).
+
+  **Change:** Dart now exports `RuntimeDiagnostic` and attaches it to
+  `RuntimeInterpreterException.diagnostic`. Runtime failures preserve stable neutral fields for type, stage,
+  owner stage, summary, detail, top rule, rule label, handler/source attribution, and optional spec identity.
+  Successful `RuntimeParseResult` output remains unchanged.
+
+  **Boundary:** This lands diagnostics only. Trace levels, event classes, stdout/routed-file/mirror sinks, and
+  runtime trace instrumentation remain later `.4.5` leaves. Active implementation work advances to
+  `DART-BACKEND-PARITY.4.5.2`.
+
+  **Verification:** Focused runtime interpreter tests, Dart format/analyze/full tests, corpus runner, CLI help,
+  mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.4.5.0 — split Dart diagnostics trace controls**
+  (DONE — task-tree split before code).
+
+  **Change:** The broad Dart runtime diagnostics/trace-controls leaf is now a container. `.4.5.1` owns structured
+  runtime diagnostics, `.4.5.2` owns trace levels/controls/event classes and stdout/routed-file/mirror sinks,
+  `.4.5.3` owns runtime branch/lifecycle/source-boundary trace instrumentation, and `.4.5.4` owns no-drift
+  closeout.
+
+  **Boundary:** No Dart runtime behavior changed. Active implementation work advances to
+  `DART-BACKEND-PARITY.4.5.1` for structured runtime diagnostics.
+
+  **Verification:** Memory architecture, Knowledge Map generation/check, task-tree metadata, doctrine, and
+  `git diff --check` pass.
+
+- 2026-07-09: **BACKTRACK-SURFACE-RUST-ALIGNMENT.2 — add boundary lookahead helper**
+  (DONE — non-consuming structural boundary capture across current variants).
+
+  **Change:** Perl, Rust, and Dart now support `capture_until_boundary(rule[, ...])`. The helper starts from the
+  live cursor, probes named structural rules, captures the text before the earliest boundary, and leaves that
+  boundary unconsumed for the normal rule path. `specs/ebnf.spec` and Rust corpus copies now use it for
+  `semantic_annotation`, so annotation bodies stop before the next `semantic_annotation` or `grammar_rule`
+  without consume-then-rewind behavior.
+
+  **Boundary:** This closes the Rust-reference backtrack-surface alignment tree. The current portable cursor
+  surface is now `save_cursor()` / `restore_cursor()`, `rewind_match_start()` / `rewind_entry_start()`, and
+  `capture_until_boundary(rule[, ...])`; old broad backtrack spellings are not current user-facing API. The
+  AND-only compact child-sequence / quantifier idea is recorded as deferred design direction, not active work.
+
+  **Verification:** Focused Perl/Rust/Dart boundary tests, standalone phase0 `1..1028`, Rust format/core/runtime
+  package tests, Dart format/analyze/full tests, mdBook, Knowledge Map, memory architecture, doctrine, local CI,
+  and `git diff --check` pass.
+
+- 2026-07-09: **BACKTRACK-SURFACE-RUST-ALIGNMENT.1 — explicit cursor controls**
+  (DONE — replacing broad backtrack names with precise cursor controls across current variants).
+
+  **Change:** Perl, Rust, and Dart now target `save_cursor()` / `restore_cursor()` for explicit cursor-stack
+  semantics and `rewind_match_start()` / `rewind_entry_start()` for lifecycle-anchor rewinds. The old
+  `BACKTRACK()` / `IBACKTRACK()` and lowercase `backtrack(label)` / `ibacktrack(label)` forms are not current
+  portable API. `specs/ebnf.spec` and Rust corpus copies use `rewind_match_start()` as the semantic-preserving
+  replacement for the former annotation consume-then-rewind pattern.
+
+  **Boundary:** This closes the cross-variant cursor-stack and anchor-rewind rename. Active implementation work
+  advances to `BACKTRACK-SURFACE-RUST-ALIGNMENT.2`, which owns the preferred zero-width/lookahead boundary
+  primitive so annotation bodies can stop at the next structural token without consuming it.
+
+  **Verification:** Perl syntax checks, standalone phase0 `1..1027`, local CI, Rust format/core/runtime tests,
+  Dart format/analyze/full tests/CLI/corpus runner, mdBook, Knowledge Map, memory architecture, doctrine,
+  active old-helper scan, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.4.4 — add Dart backtrack cursor rewinds**
+  (DONE BACKTRACK/IBACKTRACK cursor rewinds and cursor/input helpers).
+
+  **Change:** Dart runtime execution now supports `BACKTRACK()` as a cursor-only rewind to the current local match
+  start and `IBACKTRACK()` as a cursor-only rewind to the initial/entry match start for the current context. The
+  `I` in `IBACKTRACK` is the Initial/`I` lifecycle context. The runtime also exposes char-based cursor/input
+  helpers such as `cursor_pos`, `cursor_rest`, `input_slice`, and `input_end_pos`, while preserving Dart's
+  internal code-unit cursor state. A later Rust-reference cleanup removes the short-lived Dart lowercase backtrack
+  compatibility aliases before they become a durable public surface.
+
+  **Boundary:** This closes the BACKTRACK/cursor-helper slice. Runtime diagnostics/tracing, staged runtime
+  execution, corpus output parity, Dart-specific CLI productization, and final parity closeout remain later
+  leaves. Active implementation work advances to `DART-BACKEND-PARITY.4.5`.
+
+  **Verification:** Focused runtime tests, Dart format/analyze/full tests, corpus runner, CLI help, mdBook,
+  memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.4.3.6 — close Dart helper value no drift**
+  (DONE helper/value no-drift; `.4.3` container closed).
+
+  **Change:** Dart nested value-path assignment now matches the Perl/Rust contract. Successful writes return the
+  updated root aggregate, missing or wrong intermediate paths return `null` without mutation, final hash keys may
+  be created, final array writes only replace or append exactly at `len`, and intermediate containers are not
+  autovivified. Direct hash-index assignment also preserves scalar-held map/list root ownership before named hash
+  fallback.
+
+  **Boundary:** This closes the Dart helper/value runtime container. BACKTRACK and local cursor rewind behavior,
+  tracing, staged runtime execution, corpus output parity, Dart-specific CLI productization, and final parity
+  closeout remain later leaves. Active implementation work advances to `DART-BACKEND-PARITY.4.4`.
+
+  **Verification:** Focused parser/runtime tests, Dart format/analyze/full tests, corpus runner, CLI help, mdBook,
+  memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.4.3.5 — add Dart runtime controls and tree callbacks**
+  (DONE value blocks, structured controls, with-blocks, and tree traversal receiver callbacks).
+
+  **Change:** Dart runtime execution now supports expression-valued blocks with block-local `return(...)` /
+  `return_undef()`, final-expression yields, attached `if` / `elseif` / `else` and `when` / `otherwise`, attached
+  `switch` / `case` / `default`, attached `while` with the deterministic iteration guard, inline lazy `if(...)` /
+  `switch(...)`, helper-form `with(value) { ... }` / `with() { ... }`, receiver `.with() { ... }`, and hash/array
+  `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` receiver callbacks. Callback frames scope and restore
+  `value`, `path`, `depth`, hash `key`, array `index`, and reduce-only `acc`.
+
+  **Boundary:** This closes the helper/control/tree runtime execution slice. BACKTRACK, tracing, staged runtime
+  execution, corpus output parity, Dart-specific CLI productization, and final no-drift closeout remain later
+  leaves. Active implementation work advances to `DART-BACKEND-PARITY.4.3.6`.
+
+  **Verification:** Focused parser/runtime tests, Dart format/analyze/full tests, corpus runner, CLI help, mdBook,
+  memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.7.3 — record variant-specific CLI requirement**
+  (DONE docs-only planning split for per-variant LinkedSpec CLI ownership).
+
+  **Change:** Recorded the directive that each LinkedSpec backend variant should have a distinct CLI. Dart-specific
+  CLI productization is now owned by `DART-BACKEND-PARITY.7.4`; final Dart no-drift closeout shifts to `.7.5`.
+  The future-backlog tree records that Julia and Lua planning must include equivalent CLI ownership when activated.
+
+  **Boundary:** No CLI behavior changed in this slice. It recorded future CLI ownership before the runtime frontier
+  advanced through `DART-BACKEND-PARITY.4.3.5`.
+
+  **Verification:** mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine checks, and
+  `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.4.3.4 — add Dart runtime hash helpers**
+  (DONE hash helper family, hash receiver chains, and statement/value mutation boundaries).
+
+  **Change:** Dart runtime helper execution now covers `count_keys`, `sorted_keys`, `sorted_values`, `has_key`,
+  `merge_hash`, pure/value `set_key`, `rename_key`, `drop_keys`, `pick_keys`, `flat_hash`, bare hash
+  working-variable receiver chains, statement-form `set_key(...)` mutation, direct hash-index assignment values,
+  and explicit flat-style hash splicing inside `hash(...)`.
+
+  **Boundary:** This closed hash helper breadth only. Value-block/control/tree traversal helpers landed later in
+  `.4.3.5`; BACKTRACK, tracing, staged function execution, full corpus output parity, and per-variant CLI
+  productization remain later leaves.
+
+  **Verification:** Focused runtime interpreter and ActionIR contract tests, Dart format/analyze/full tests,
+  corpus runner, CLI help, mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, diagnosis
+  evidence, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.4.3.3 — add Dart runtime array helpers**
+  (DONE array helper family, array receiver chains, split bridges, reducers, and statement-only end mutations).
+
+  **Change:** Dart runtime helper execution now covers array count/select/order/membership helpers, transform and
+  filter pipelines, delimiter-first `join_values`, regex split/filter bridges, `flat_array`, `concat_arrays`,
+  `split_tagged_records`, array numeric reducers, bare array working-variable receiver chains, and statement-only
+  `push_back` / `push_front` / `pop_back` / `pop_front` mutation forms.
+
+  **Boundary:** This closes array helper breadth only. Hash helper breadth, value-block/control/tree traversal
+  helpers, BACKTRACK, tracing, staged function execution, and full corpus output parity remain later leaves.
+
+  **Verification:** Focused runtime interpreter and ActionIR contract tests, Dart format/analyze/full tests,
+  corpus runner, CLI help, mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, diagnosis
+  evidence, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.4.3.2 — add Dart runtime string numeric helpers**
+  (DONE string/scalar helper family, numeric helper family, aliases/symbol callees, and scalar receiver chains).
+
+  **Change:** Dart runtime helper execution now canonicalizes ActionIR helper names and evaluates current
+  string/scalar helpers, explicit `str_*` lexical comparisons, numeric arithmetic/reducer/comparison helpers,
+  numeric word aliases, arithmetic/comparison symbol callees, and compatible string/number receiver chains.
+
+  **Boundary:** This closes the string/scalar and numeric helper slice only. Broader array helper breadth, hash
+  helper breadth, value-block/control/tree traversal helpers, BACKTRACK, tracing, staged function execution, and
+  full corpus output parity remain later leaves.
+
+  **Verification:** Focused runtime interpreter tests, Dart format/analyze/full tests, corpus runner, CLI help,
+  mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, diagnosis evidence, and
+  `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.4.3.1 — add Dart runtime value capture helpers**
+  (DONE core runtime value/store and capture-reader subset).
+
+  **Change:** Dart runtime execution now preserves scalar/array/hash/null/boolean/number shapes through
+  assignment and wrapper snapshots; supports `hash(...)`, `set(hash(...), ...)`, hash-index mutation, nested
+  access reads, non-numeric map indexing, aggregate `copy(...)`, and the named/map/length/start/end
+  `entry_*` / `match_*` capture helper family.
+
+  **Boundary:** This is still the core value/capture subset. String/scalar helpers, numeric helpers, array helper
+  family breadth, hash helper breadth, value-block/control/tree traversal helpers, BACKTRACK, tracing, staged
+  function execution, and full corpus output parity remain later leaves.
+
+  **Verification:** Focused runtime interpreter test, Dart format/analyze/full tests, corpus runner, CLI help,
+  mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.4.3.0 — split Dart runtime helper families**
+  (DONE task-tree split before broad helper/value implementation).
+
+  **Change:** Split `.4.3` into focused runtime helper/value leaves: core value/store/capture helpers,
+  string/number helpers, array helpers, hash helpers, value-block/control/tree traversal helpers, and final
+  helper/value no-drift closeout.
+
+  **Boundary:** No runtime code changed in this planning slice. The first executable child was `.4.3.1`.
+
+  **Verification:** Memory architecture, task-tree metadata, doctrine checks, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.4.2 — add Dart runtime rule interpreter**
+  (DONE first executable rule-dispatch interpreter; broader helper families are next).
+
+  **Change:** Added `LinkedSpecRuntimeEngine` and `RuntimeParseResult` over `CompiledSpec`, with
+  default/AND/OR/repetition dispatch, action-edge and blind-call child execution, lifecycle blocks, explicit
+  returns, `retv`, accumulator collection, bounded repetition, zero-progress cutoffs, and recursion cutoffs.
+
+  **Boundary:** The embedded ActionIR evaluator is intentionally dispatch-facing only. Full helper/value
+  families, BACKTRACK, runtime diagnostics/tracing, staged function execution, and corpus output parity remain
+  later leaves.
+
+  **Verification:** Focused runtime interpreter test, Dart format/analyze/full tests, corpus runner, CLI help,
+  mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.4.1 — add Dart runtime matching state**
+  (DONE regex matching and match-state primitives; rule dispatch is next).
+
+  **Change:** Added Dart seek/consume regex alternation, stable alternative identity, capture and named-capture
+  records, char-offset/line-column projection, entry/local match registers, cursor state, and zero-progress
+  helpers over compiled rule regex lists.
+
+  **Boundary:** This is still below rule dispatch. Lifecycle order, rule modes, recursion guards, helper/action
+  execution, tracing, and corpus output comparison remain later leaves.
+
+  **Verification:** Focused runtime matching test, Dart format/analyze/full tests, corpus runner, CLI help, mdBook,
+  memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.3.4 — add Dart compiled spec state**
+  (DONE compiled rule/dependency/descriptor state; runtime matching is next).
+
+  **Change:** Added `compileSpec(...)` and the Dart compiled-state model: ordered rules, rule metadata,
+  dependency refs, structured dependency-regex entries, lifecycle/action `ActionBlock` payloads, registry-aware
+  ActionIR contract resolution, user-function registry carry-through, and descriptor-shaped JSON projection.
+
+  **Boundary:** This is still non-executing compiler/interpreter state. Dart runtime matching, rule dispatch,
+  helper execution, tracing, and corpus output comparison remain later leaves.
+
+  **Verification:** Focused compiled-state test, Dart format/analyze/full tests, corpus runner, CLI help, mdBook,
+  memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.3.3 — add Dart function registry**
+  (DONE user-function registry and staged function-body parse-job records; compiled state is next).
+
+  **Change:** Added `UserFunctionRegistry`, `UserFunctionEntry`, and exact-arity call resolution over Dart
+  `FunctionDefinition` records. ActionIR contract resolution can now classify exact-arity user calls before helper
+  fallback and reports wrong-arity registered calls as user-function arity diagnostics.
+
+  **Boundary:** This is still non-executing frontend/contract infrastructure. Dart compiled-spec state, runtime
+  interpreter execution, and corpus output comparison remain later leaves.
+
+  **Verification:** Focused registry/contract tests, Dart format/analyze/full tests, corpus runner, CLI help, and
+  mdBook build pass.
+
+- 2026-07-09: **NONCURRENT-HELPER-CODE-PURGE.5 — close helper purge no-drift**
+  (DONE final no-drift scan and documentation closeout; tree complete).
+
+  **Change:** Migrated the last active Rust runtime unit-test fixture that still used retired helper-call strings
+  for generic fallback coverage to invented unknown helper names. Closed the task tree, Knowledge facts, roadmap
+  row, and resume pointer. PNT returns to `DART-BACKEND-PARITY.3.3` after the clean commit.
+
+  **Boundary:** Historical migration notes and retired-helper reference documentation remain allowed, but active
+  source/test/tool/spec helper-call examples and colliding labels are closed for this purge.
+
+  **Verification:** Final exact retired-helper call-shape scans, label/tag scans, exact `?concat:` scans,
+  scalar-wrapper scans, short-wrapper spec-surface scan classification, Rust formatting, and the focused runtime
+  generic unknown-helper unit test pass.
+
+- 2026-07-09: **NONCURRENT-HELPER-CODE-PURGE.4 — migrate retired helper fixtures**
+  (DONE active test/tool/generated fixture and checked-in `.spec` spelling migration; final no-drift closeout is
+  next).
+
+  **Change:** Replaced active retired-helper call examples with current syntax or invented unknown-helper names,
+  renamed EBNF return annotation labels/output tags to `return_scalar_value` / `return_array_value`, and renamed
+  portmap concatenation output from `?concat:` to `?concatenation:` across source spec, generated corpus inputs,
+  expected output, Perl/Rust tests, and mdBook examples.
+
+  **Boundary:** This closes active fixture/tool/spec migration. Historical retirement documentation and explicit
+  retired-helper reference sections remain allowed; `NONCURRENT-HELPER-CODE-PURGE.5` owns the final no-drift scan
+  and closeout.
+
+  **Verification:** Exact retired-helper call-shape scans, retired label/tag scans, exact `?concat:` scan, touched
+  Perl syntax checks, focused Perl tests, full phase0 (`1027` tests), regenerated 99-fixture oracle corpus,
+  full `linkedspec-runtime` package tests, and `mdbook build docs/linkedspec-book` pass.
+
+- 2026-07-09: **NONCURRENT-HELPER-CODE-PURGE.3 — purge Rust helper diagnostics**
+  (DONE Rust source recognition/diagnostic cleanup; active fixture/tool/spec migration is next).
+
+  **Change:** Rust known-call validation no longer lists retired helper spellings, the expression parser no longer
+  special-cases `declare(...)` keyword arguments, and runtime helper dispatch no longer returns name-specific
+  retired-helper diagnostics. Retired helper-looking calls now follow the generic unknown-helper fallback. Runtime
+  context internals were renamed away from public-looking retired helper names, and stale positive Rust fixtures now
+  use current colon hash-literal syntax.
+
+  **Boundary:** This closes Rust source recognition/diagnostic paths. It deliberately leaves broader active
+  test/tool/generated fixture and checked-in `.spec` spelling migration for `NONCURRENT-HELPER-CODE-PURGE.4`.
+
+  **Verification:** Rust focused retired-helper scans, `cargo fmt --manifest-path rust/Cargo.toml --all --check`,
+  `cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-core`,
+  `cargo test --quiet --manifest-path rust/Cargo.toml -p linkedspec-runtime`, and focused runtime
+  `helpers_5_1_retired_terse_8_4_spellings_use_generic_unknown_helper_path` / `scalaref_retirement_4` runs pass.
+
+- 2026-07-09: **NONCURRENT-HELPER-CODE-PURGE.2.4 — close Perl source purge scans**
+  (DONE Perl source purge verification; Rust source cleanup is next).
+
+  **Change:** Focused source scans over `perl/LinkedSpec.pm` and `perl/LinkedSpec` are clean for exact retired
+  helper call-shape recognition paths from the `SPEC-FORMAT-TERSE.8` spelling set. Direct lowering probes confirm
+  current `cat(...)`, `copy(...)`, `set(...)`, and `push(...)` still lower through current helper names, while
+  retired value-position helper-looking calls such as `concat(...)`, `a(...)`, and `scalaref(...)` use the same
+  generic unsupported-helper sentinel path as an invented unknown helper.
+
+  **Boundary:** This is the Perl source closeout leaf. Standalone unregistered function-shaped statements remain
+  the existing raw compatibility debt documented in the mdBook; active test/tool/spec fixture migration remains
+  owned by `.4`. The next frontier is `NONCURRENT-HELPER-CODE-PURGE.3` for Rust source recognition/diagnostic
+  path cleanup.
+
+  **Verification:** Exact retired-helper call-shape scans over Perl source, direct current-helper and retired-helper
+  behavior probes, `perl -c perl/LinkedSpec.pm`, `perl -c -Iperl t/noncurrent_helper_metadata.t`,
+  `prove -q -Iperl t/noncurrent_helper_metadata.t t/actionir_ast_parser.t t/trace_actionir_method_lowering.t
+  t/trace_actionir_pipeline.t`, and `PERL5LIB= prove -q -Iperl t/phase0_regression.t` (`1027` tests) pass.
+
+- 2026-07-09: **NONCURRENT-HELPER-CODE-PURGE.2.3 — purge Perl helper metadata names**
+  (DONE Perl contract/canonical metadata name cleanup; broader Perl source purge scans still active).
+
+  **Change:** Raw-Perl passthrough ActionIR contracts no longer publish exact retired helper names through
+  diagnostic metadata. Lexical declaration and raw assignment compatibility events now use neutral `raw_*`
+  diagnostic labels instead of `declare` / `assign`, and `t/noncurrent_helper_metadata.t` locks contract IDs,
+  diagnostic names, rewrite metadata, canonical events, and unsupported-helper events against the
+  `SPEC-FORMAT-TERSE.8` retired helper set.
+
+  **Boundary:** This slice is metadata-only. It preserves raw-Perl compatibility behavior and does not claim the
+  entire Perl purge is closed. The next frontier is `NONCURRENT-HELPER-CODE-PURGE.2.4` for broader Perl source
+  purge scans and current/unknown-helper behavior probes before Rust source work.
+
+  **Verification:** `perl -c -Iperl perl/LinkedSpec/ActionIR/Contracts.pm`, `perl -c -Iperl
+  t/noncurrent_helper_metadata.t`, `prove -q -Iperl t/noncurrent_helper_metadata.t`, focused exact metadata scan,
+  `prove -q -Iperl t/actionir_ast_parser.t t/trace_actionir_compact_lowerers.t
+  t/noncurrent_helper_metadata.t`, and `PERL5LIB= prove -q -Iperl t/phase0_regression.t` (`1027` tests) pass.
+
+- 2026-07-09: **NONCURRENT-HELPER-CODE-PURGE.2.1 — purge Perl current helper compatibility**
+  (DONE Perl current-helper/source-owner cleanup; broader Perl metadata/source purge still active).
+
+  **Change:** Perl current `cat(...)`, `copy(...)`, `set(...)`, and `push(...)` lowering now stays on current
+  method/contract names. Removed the old normalization/compatibility paths in the current string/copy/assignment
+  family, deleted the removed append-helper scanner/contract/lowerer branches, and renamed the current explicit
+  append lowerer/dependency to `push` terminology. AST tests now fabricate current helper AST nodes and expect the
+  current `__ls_cat_*` generated local names. The current `set(...)` owner also handles slash-regex payloads
+  without routing through an old normalized method name, and the bootstrap classifier no longer whitelists deleted
+  current-helper-family spellings.
+
+  **Boundary:** This slice does not claim the whole Perl purge is done. Declaration, return-family, short-wrapper,
+  capture/named-map, Rust, active fixture/tool/spec, and historical doc cleanup remain in
+  `NONCURRENT-HELPER-CODE-PURGE`. The next frontier is `NONCURRENT-HELPER-CODE-PURGE.2.2`.
+
+  **Verification:** Syntax checks passed for touched Perl ActionIR/RuleIR owners. `prove -q -Iperl
+  t/actionir_ast_parser.t`, `prove -q -Iperl t/trace_actionir_compact_lowerers.t`, direct current-helper lowering
+  probes, `PERL5LIB= prove -q -Iperl t/phase0_regression.t` (`1..1028`), and a focused deleted-spelling scan over
+  touched Perl/test paths passed.
+
+- 2026-07-09: **NONCURRENT-HELPER-CODE-PURGE.1 — split code purge task tree**
+  (DONE ownership/inventory split; no parser/runtime code edited in this slice).
+
+  **Change:** Added `docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md` to own the director directive that
+  non-current helper spellings must be deleted from Perl/Rust code surfaces rather than preserved as
+  name-specific compatibility or diagnostic paths. Read-only scans split the work into Perl source cleanup,
+  Rust source cleanup, active test/tool/spec fixture migration, and final no-drift verification.
+
+  **Boundary:** This is task ownership and inventory only. It does not yet remove Perl or Rust source paths.
+  The next frontier is `NONCURRENT-HELPER-CODE-PURGE.2` for Perl source recognition/diagnostic path removal.
+
+  **Verification:** Read-only scans over `perl`, `rust`, `t`, `tools`, `scripts`, `bin`, and `specs` identified
+  the owner categories and false-positive classes. `git diff --check`, memory architecture, Knowledge Map,
+  task-tree metadata, doctrine gates, and mdBook build pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.3.2 — add Dart ActionIR contract resolver**
+  (DONE current helper/control contract resolution; function registry compilation still deferred).
+
+  **Change:** Added Dart ActionIR contract resolver APIs over typed helper/action AST nodes. The resolver
+  records current canonical helper/control contracts for calls, receiver methods, structural assignments,
+  controls, nested arguments, block values, shapes, and access expressions. Function registry validation now
+  shares the same current helper/control name table, and non-current helper-looking calls diagnose
+  generically instead of falling through to host-language calls.
+
+  **Boundary:** This is still frontend/contract resolution. It does not build the staged function-body
+  registry, compile specs into runtime state, execute helper/action semantics, or compare corpus outputs.
+  The Dart frontier is `DART-BACKEND-PARITY.3.3`; the director also requested a separately owned Perl/Rust
+  source purge after this dirty Dart leaf is committed clean.
+
+  **Verification:** `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
+  `dart test`, `dart run bin/linkedspec_dart.dart --help`,
+  `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`,
+  `dart run bin/corpus_runner.dart --help`, Dart-tree non-current-spelling scan, `git diff --check`, memory
+  architecture, Knowledge Map, task-tree metadata, doctrine gates, and mdBook build pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.3.1 — add Dart ActionIR AST parser**
+  (DONE typed helper/action AST parser; helper-contract mapping and runtime behavior still deferred).
+
+  **Change:** Added Dart ActionIR AST node classes and parser entrypoints. `parseActionBlock(...)`,
+  `parseActionStatement(...)`, and `parseActionExpression(...)` now produce typed nodes for calls,
+  literals, variables, indexed/nested access, shape literals, scalar/array/hash/nested assignments,
+  expression-valued blocks, attached control flow, receiver chains, trailing block arguments, and standalone
+  value-drop statements. Unsupported expressions remain structural `raw_perl` nodes for later diagnostics.
+
+  **Boundary:** This is parsing only. It does not map helper families to canonical contracts, emit
+  current-contract diagnostics, build compiled-spec state, execute helper/action semantics, or compare corpus
+  outputs. The next frontier is `DART-BACKEND-PARITY.3.2`.
+
+  **Verification:** `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
+  and `dart test` pass. Full repo gates are run during commit closeout.
+
+- 2026-07-09: **DART-BACKEND-PARITY.2.4 — integrate Dart function shell projection**
+  (DONE spec-returned function-definition projection; helper/action AST and runtime behavior still deferred).
+
+  **Change:** Added `projectUserFunctionDefinitionAsts(...)` and
+  `parseSpecWithUserFunctionDefinitionAsts(...)` in Dart. The projection consumes
+  `function_definition` / `function_definition_error` nodes returned by
+  `specs/user_function_definition.spec`, validates source/body spans and staged sidecars, normalizes
+  source-order `parent_ast_path` plus deterministic `body_parse_job` ids, strips returned definition
+  spans while preserving line layout, and attaches ordered `FunctionDefinition` records before rule parsing.
+  `StagedParseJob` now round-trips function-body metadata fields.
+
+  **Boundary:** Dart still does not execute `specs/user_function_definition.spec` itself and does not
+  raw-scan top-level `fn` source as a fallback. Until the Dart runtime can execute `.spec` grammars, the
+  semantic input is the owning spec's returned AST node list. The next frontier is `DART-BACKEND-PARITY.3.1`
+  for typed helper/action AST parsing.
+
+  **Verification:** `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
+  `dart test`, `dart run bin/linkedspec_dart.dart --help`,
+  `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`, and
+  `dart run bin/corpus_runner.dart --help` pass. `git diff --check`, memory architecture, Knowledge Map
+  regeneration/check, task-tree metadata, doctrine gates, and `mdbook build docs/linkedspec-book` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.2.3 — add Dart frontend validation**
+  (DONE AST validation; top-level function-shell extraction and runtime behavior still deferred).
+
+  **Change:** Added `validateSpec(...)` for Dart source ASTs. It rejects missing top rules, duplicate labels,
+  duplicate/colliding function records, invalid function parameters, raw malformed body lines, mixed action/blind
+  edge families, grouped action targets without a shared block, undefined targets, out-of-range regex slots, and
+  lightweight regex structural errors. Strict mode adds unused-rule rejection.
+
+  **Boundary:** This validates parsed source ASTs only. It does not parse top-level `fn` shells from source,
+  compile helper/action AST, execute runtime semantics, or compare corpus outputs. The next frontier is
+  `DART-BACKEND-PARITY.2.4`.
+
+  **Verification:** `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
+  `dart test`, `dart run bin/linkedspec_dart.dart --help`,
+  `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`, and
+  `dart run bin/corpus_runner.dart --help` pass. `git diff --check`, memory architecture, Knowledge Map
+  regeneration/check, task-tree metadata, doctrine gates, and `mdbook build docs/linkedspec-book` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.2.2 — implement Dart spec parser**
+  (DONE core rule parser; validation/function-shell/runtime behavior still deferred).
+
+  **Change:** Added the Dart `parseSpec(...)` source parser for rule paragraphs, headers/modes, header-rest
+  body elements, regex slots, lifecycle blocks, action/blind-call edges, action-edge fluent continuations,
+  receiver-fluent `when/otherwise` blocks, split/conditional markers, comments, raw fallback lines, and nested
+  block boundaries. Parser tests cover focused Rust-compatible seams, all shipped `specs/*.spec`, and rule-only
+  corpus `input.spec` files.
+
+  **Boundary:** Strict frontend validation remains `DART-BACKEND-PARITY.2.3`; top-level `fn` definition
+  extraction/staging remains `DART-BACKEND-PARITY.2.4`; no compiler/runtime/corpus output comparison was added.
+
+  **Verification:** `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
+  `dart test`, `dart run bin/linkedspec_dart.dart --help`,
+  `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`, and
+  `dart run bin/corpus_runner.dart --help` pass. `git diff --check`, memory architecture, Knowledge Map
+  regeneration/check, task-tree metadata, doctrine gates, and `mdbook build docs/linkedspec-book` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.2.1 — define Dart frontend AST data types**
+  (DONE source-level AST/data contracts; parser still deferred).
+
+  **Change:** Added Dart data types for `.spec` files, function definitions, source spans, staged parse
+  jobs, rules, rule headers, rule modes, body-element variants, edge targets, and fluent calls. Added JSON
+  round-trip tests and `RuleMode` helper parity tests.
+
+  **Boundary:** No parser, compiler, runtime, corpus output comparison, or helper/action lowering logic was
+  added. The next frontier is `DART-BACKEND-PARITY.2.2` for `.spec` parsing.
+
+  **Verification:** `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
+  `dart test`, `dart run bin/linkedspec_dart.dart --help`,
+  `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`, and
+  `dart run bin/corpus_runner.dart --help` pass. `git diff --check`, memory architecture, Knowledge Map
+  regeneration/check, task-tree metadata, doctrine gates, and `mdbook build docs/linkedspec-book` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.1.3 — add Dart corpus manifest IO scaffold**
+  (DONE corpus manifest loading/drift guard; no parser/runtime execution yet).
+
+  **Change:** Added Dart manifest/corpus IO scaffolding and tests. The loader validates manifest shape,
+  duplicate/invalid case names, missing and stale fixture directories, required fixture files, and
+  `expected.json` syntax. The corpus runner now accepts `--corpus <path>` and reports the loaded fixture
+  count for the 99-fixture checked-in corpus.
+
+  **Boundary:** This is IO validation only. It does not parse `.spec`, compile, execute, compare expected
+  output, or claim corpus parity. The next frontier is `DART-BACKEND-PARITY.2.1` for frontend AST/data
+  types.
+
+  **Verification:** `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
+  `dart test`, `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`,
+  `dart run bin/corpus_runner.dart --help`, and `dart run bin/linkedspec_dart.dart --help` pass.
+  `git diff --check`, memory architecture, Knowledge Map regeneration/check, task-tree metadata, doctrine
+  gates, and `mdbook build docs/linkedspec-book` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.1.2 — create Dart scaffold smoke package**
+  (DONE minimal Dart package scaffold; parser/runtime/corpus semantics still deferred).
+
+  **Change:** Added the repo-owned `dart/` package with metadata, committed lockfile, analyzer options,
+  package README, public scaffold API, CLI smoke entrypoint, corpus-runner entrypoint, and a
+  `package:test` smoke test. Added Dart tool-state ignores for `.dart_tool/`, `.packages`, and build output.
+
+  **Boundary:** The CLI and corpus-runner are scaffold-only. Manifest IO starts in
+  `DART-BACKEND-PARITY.1.3`; parser/compiler/runtime work starts in later leaves.
+
+  **Verification:** `dart pub get`, `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos
+  --fatal-warnings`, `dart test`, `dart run bin/linkedspec_dart.dart --help`, and
+  `dart run bin/corpus_runner.dart --help` pass. Pub dependency download and analyzer state initialization
+  required approved access outside the workspace sandbox. `git diff --check`, memory architecture,
+  Knowledge Map regeneration/check, task-tree metadata, doctrine gates, and
+  `mdbook build docs/linkedspec-book` pass.
+
+- 2026-07-09: **DART-BACKEND-PARITY.1.1 — record Dart toolchain and layout**
+  (DONE toolchain/package-layout preflight; no Dart package files created).
+
+  **Change:** Verified `/opt/homebrew/bin/dart` with Dart SDK `3.9.2` on macOS arm64. Flutter is absent
+  and non-blocking for the CLI/library backend path. Recorded the planned `dart/` package layout and
+  commands for scaffold creation, formatting, analysis, tests, corpus runner, and CLI smoke entrypoint.
+
+  **Boundary:** No source scaffold yet. The next leaf, `DART-BACKEND-PARITY.1.2`, creates the minimal
+  package and smoke test.
+
+  **Verification:** Dart command probes passed after one approved `dart --disable-analytics` initialization
+  outside the sandbox. `git diff --check`, memory architecture, Knowledge Map, task-tree metadata,
+  doctrine gates, and `mdbook build docs/linkedspec-book` pass.
+
+- 2026-07-09: **FUTURE-PARITY-BACKLOG.1.1 — scope Dart backend parity plan**
+  (DONE scoping/task-tree/docs ownership; no Dart/backend implementation code change).
+
+  **Change:** Created `docs/tasks/DART-BACKEND-PARITY.md` as the dedicated Dart backend plan.
+  The Dart lane starts interpreter-first over typed `.spec` and helper/action AST plus compiled state,
+  then runtime/corpus parity. Generated Dart source is deferred to a later proof lane after interpreter
+  parity.
+
+  **Boundary:** Planning, roadmap, mdBook, Knowledge Map, and live-doc alignment only. Actual Dart
+  code starts under `DART-BACKEND-PARITY.1.1` after SDK/toolchain and package-layout preflight.
+
+  **Verification:** `git diff --check`, memory architecture, Knowledge Map, doctrine,
+  task-tree metadata, mdBook build, and `tools/run_ci_local.sh` pass. Local CI includes
+  phase0 `1..1028`.
+
+- 2026-07-09: **FUTURE-PARITY-BACKLOG.0 — create future parity backlog**
+  (DONE task-tree/decision/docs ownership; no parser/runtime/backend code change).
+
+  **Change:** Created `docs/tasks/FUTURE-PARITY-BACKLOG.md` with seven owned lanes for the
+  deferred backlog. ADR `0021` accepts Lua and fixes future backend rollout order as Dart first,
+  Julia second, Lua third, each targeting full parity with Perl5 and Rust.
+
+  **Boundary:** Tracking, decision, roadmap, mdBook, Knowledge Map, and live-doc alignment only.
+  Actual Dart implementation is now delegated to `DART-BACKEND-PARITY`.
+
+  **Verification:** `git diff --check`, memory architecture, Knowledge Map, doctrine,
+  task-tree metadata, mdBook build, and `tools/run_ci_local.sh` pass. Local CI includes
+  phase0 `1..1028`.
+
+- 2026-07-08: **SPEC-LANG-REFERENCE.8 — correct top-rule doctrine drift and close language reference**
+  (DONE final consistency/closeout; `SPEC-LANG-REFERENCE` closed).
+
+  **Change:** ADR `0010` is the current doctrine: `::` marks the rule entered first, and after entry
+  selection `::` and `:` share the same regex/mode/action feature surface. The old no-regex/two-rule
+  minimum card is now a superseded historical redirect; mdBook/toolbox/task-tree wording is being
+  aligned so the no-regex wrapper reads as a stream-parser idiom only. The language-reference tree is
+  closed.
+
+  **Boundary:** Documentation, Knowledge Map, and coordination-state correction only; no parser/runtime
+  behavior change.
+
+  **Verification:** Focused Perl probes confirm regex-bearing `Entry::` and selected regex-bearing
+  `Body:` forms produce matching default-mode and `AND`-mode outputs. mdBook, Knowledge Map, memory,
+  task-tree metadata, doctrine, and whitespace gates pass.
+
+- 2026-07-08: **SPEC-LANG-REFERENCE.7 — add spec-language Knowledge Map cards**
+  (DONE KM fact-card coverage; frontier `.8` next).
+
+  **Change:** Added canonical `.spec` language KM cards for output/return shape, regex backend
+  features, rule-mode semantics, lifecycle/`retv`, and capture/mark taxonomy. Extended
+  `spec-edge-syntax-contract` with action-vs-blind dispatch retrieval keys and summary.
+
+  **Boundary:** No parser/runtime/source or mdBook behavior changed. This is a durable retrieval
+  closeout for subjects already documented in the book.
+
+  **Verification:** Required question spot-checks route to the expected fact cards; Knowledge Map
+  regeneration and gate pass.
+
+- 2026-07-08: **SPEC-LANG-REFERENCE.6 — add capture/mark marker cross-example**
+  (DONE mdBook capture/mark cross-example + thin-spot fixes; frontier `.7` next).
+
+  **Change:** Added a verified marker-form example to `source-boundary-helper-reference.md`
+  and `action-and-lifecycle-placement.md`, exercising `@capture_slice`, `@mark(body_start)`,
+  `mark_match_start(close_start)`, `capture_slice()`, `capture_from(...)`, and
+  `capture_between(...)` together. Corrected placement-sensitive named-mark examples to use
+  `mark_here(...)` where exact action-local timing is needed. Added KM fact
+  `split-boundary-marker-action-timing`.
+
+  **Boundary:** No parser/runtime/source behavior changed. The slice documents the current
+  marker visibility rule and fixes stale documentation examples only.
+
+  **Verification:** Focused `LinkedSpec::Get` probes verify the marker example and corrected
+  consume-mode helper-call examples; mdBook, doctrine, task-tree, memory, Knowledge Map, and
+  whitespace checks pass.
+
+- 2026-07-08: **SPEC-LANG-REFERENCE.5.5 — add remaining helper-family worked examples**
+  (DONE mdBook helper catalog examples; helper-catalog sweep `.5` closed; frontier `.6` next).
+
+  **Change:** Added verified Declaration, Capture/Mark, Entry/Match, Input, and Call examples to
+  `helper-contract-catalog.md`. Corrected stale entry-vs-match examples in
+  `capture-marks-and-source-locations.md` and `source-boundary-helper-reference.md` to the verified
+  ordered-child shape, and added KM fact `entry-match-divergence-verified-shape`.
+
+  **Boundary:** No parser/runtime/source behavior changed. The stale example correction is a documentation
+  alignment fix discovered while verifying `.5.5`.
+
+  **Verification:** Focused `LinkedSpec::Get` probes generated the documented outputs for the five
+  remaining helper families and the corrected entry-vs-match shape; mdBook, doctrine, task-tree, memory,
+  Knowledge Map, and whitespace checks pass.
+
+- 2026-07-08: **SPEC-LANG-REFERENCE.5.4 — add Hash and Control Flow worked examples**
+  (DONE mdBook helper catalog examples; frontier `.5.5` next).
+
+  **Change:** Added verified Hash examples to `helper-contract-catalog.md`, covering
+  constructor/copy/splice forms, pure and mutating hash updates, sorted views, receiver chains,
+  block receivers, and hash-tree traversal. Added verified Control Flow examples for
+  inline/marker/attached branches, `switch`, `while`, `next`, `return`, and `return_undef`;
+  `exit_now(2)` is descriptor-verified without running the terminating path. Added KM fact
+  `hash-helper-odd-arity-current-behavior`.
+
+  **Boundary:** No parser/runtime/source behavior changed. Direct odd-arity `hash(...)`
+  behavior normalization is deferred to `.5.4.1` and is not PNT-active unless explicitly
+  activated.
+
+  **Verification:** Focused `LinkedSpec::Get` probes generated the documented outputs,
+  `call_spec_handler_subst` root-caused the direct odd-arity constructor caveat, and the
+  descriptor probe verified `exit_now(2)` metadata; mdBook, doctrine, task-tree, memory,
+  Knowledge Map, and whitespace checks pass.
+
+- 2026-07-08: **SPEC-LANG-REFERENCE.5.3 — add Array helper worked examples**
+  (DONE mdBook helper catalog examples; frontier `.5.4` next).
+
+  **Change:** Added verified Array helper examples to `helper-contract-catalog.md`, covering
+  constructor/copy/splice, count/selectors, edge slices, ordering, membership, split, pipelines,
+  mutations, receiver chains, and array-tree traversal. Added KM fact
+  `array-helper-return-shape-caveats` for shape-sensitive current Perl forms.
+
+  **Boundary:** No parser/runtime/source behavior changed. Optional behavior normalization for compact
+  split/pipeline return caveats is deferred to `.5.3.1` and is not PNT-active unless explicitly
+  activated.
+
+  **Verification:** Focused `LinkedSpec::Get` probes generated the documented outputs and confirmed
+  the caveats; mdBook, doctrine, task-tree, memory, Knowledge Map, and whitespace checks pass.
+
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.20 — document lifecycle drift policy**
+  (DONE policy/documentation closeout; frontier `.5.3` next).
+
+  **Change:** Recorded ADR `0020`, updated `appendix/runtime-semantics.md`, and refreshed the
+  lifecycle drift KM fact so lifecycle final-value/direct-`E` handler-shape drift is a documented
+  current Perl-reference caveat until a separately-owned implementation/parity leaf authorizes
+  behavior changes.
+
+  **Boundary:** No parser/runtime/source behavior changed. This closes the `.10.5` whole-book
+  scorch follow-up and returns the language-reference frontier to helper-catalog Array examples.
+
+  **Verification:** Focused Perl probes reproduce the direct default-rule `I`+regex+`E` drift,
+  dispatched child no-return drift, and generated-source omission; mdBook, doctrine, task-tree,
+  memory, Knowledge Map, and whitespace checks pass.
+
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.19 — finalize book scorch**
+  (DONE mdBook closeout; frontier `.10.5.20` next).
+
+  **Change:** Fixed the final residual regex-on-`::` mdBook examples in
+  `spec-files-and-rule-paragraphs.md`, `helper-contract-catalog.md`, and
+  `compiler/pipeline-overview.md`, and corrected the helper-catalog direct value-path output.
+
+  **Boundary:** No parser/runtime/source behavior changed. This closes the planned page-scorch
+  sweep and leaves the previously tracked lifecycle handler-shape drift as `.10.5.20`.
+
+  **Verification:** Whole-book regex-on-`::` scans return no matches; focused `LinkedSpec::Get`
+  probes cover the corrected recursion, direct value-path, array mutation, and function-registry
+  examples; mdBook, doctrine, task-tree, memory, Knowledge Map, and whitespace checks pass.
+
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.18 — verify portmap walkthrough outputs**
+  (DONE mdBook verification; frontier `.10.5.19` next).
+
+  **Change:** Rechecked the five `portmap.spec` output-shape examples against the Perl
+  reference backend. The current walkthrough already shows the live nested JSON shapes, so
+  no mdBook source rewrite was needed.
+
+  **Boundary:** No parser/runtime/source behavior changed. This is a shipped-spec walkthrough
+  verification closeout for the whole-book scorch.
+
+  **Verification:** `LinkedSpec::get_parser('portmap')` probes cover bare, bit, slice,
+  constant, and concatenation cases; mdBook, doctrine, task-tree, memory, Knowledge Map,
+  and whitespace checks pass.
+
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.17 — fix tablegrep walkthrough outputs**
+  (DONE mdBook correction; frontier `.10.5.18` next).
+
+  **Change:** Replaced tablegrep simple-term and grouped-expression output examples with
+  verified JSON from `specs/tablegrep.spec`, and refreshed the descriptor helper list.
+
+  **Boundary:** No parser/runtime/source behavior changed. This is a shipped-spec walkthrough
+  documentation correction for the whole-book scorch.
+
+  **Verification:** `LinkedSpec::get_parser('tablegrep')` probes cover both outputs; descriptor
+  metadata reports five ready rules and zero blocked/compat/raw/unresolved counts; mdBook,
+  doctrine, task-tree, memory, Knowledge Map, and whitespace checks pass.
+
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.16 — fix runtime semantics examples**
+  (DONE mdBook correction; frontier `.10.5.17` next).
+
+  **Change:** Reworked `appendix/runtime-semantics.md` §5.5/§5.6 examples to use
+  no-regex `Top::` wrappers plus normal regex-owning body rules, folding the `.10.4`
+  Pair target into this leaf.
+
+  **Boundary:** No parser/runtime/source behavior changed. This is a runtime semantics
+  documentation correction for the whole-book scorch.
+
+  **Verification:** Focused `LinkedSpec::Get` probes cover scalar, proof-array, Pair,
+  object, and manifest outputs; page scan finds no regex under `::`; mdBook, doctrine,
+  task-tree, memory, Knowledge Map, and whitespace checks pass.
+
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.15 — fix formal grammar examples**
+  (DONE mdBook correction; frontier `.10.5.16` next).
+
+  **Change:** Reworked `appendix/formal-grammar.md` §1 and §12 examples so no top `::`
+  rule owns regex slots, and the complete example defines all ordered-sequence child targets.
+
+  **Boundary:** No parser/runtime/source behavior changed. This is a formal grammar appendix
+  documentation correction for the whole-book scorch.
+
+  **Verification:** Focused `LinkedSpec::Get` probes cover the paragraph example plus
+  `DemoParser`, `SecondChild`, and `ThirdChild`; appendix scan finds no regex under `::`;
+  mdBook, doctrine, task-tree, memory, Knowledge Map, and whitespace checks pass.
+
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.14 — fix remaining DSL examples**
+  (DONE mdBook correction/audit; frontier `.10.5.15` next).
+
+  **Change:** Reworked the remaining DSL-page examples so Token, Value, and Items use
+  no-regex entry/wrapper rules plus normal regex-owning matcher rules. Reduced the
+  `Toplevel:AND+` structured-style sketch to the lifecycle block fragment it demonstrates.
+
+  **Boundary:** No parser/runtime/source behavior changed. `actionir-lowering-mental-model.md`
+  was audited and left unchanged because the relevant blocks are helper/pipeline fragments.
+
+  **Verification:** Focused `LinkedSpec::Get` probes cover Token, Value, and Items singleton/pair/list
+  outputs; the four-page scan finds no regex under `::`; mdBook, doctrine, task-tree, memory,
+  Knowledge Map, and whitespace checks pass.
+
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.13 — fix value-container flow examples**
+  (DONE mdBook correction; frontier `.10.5.14` next).
+
+  **Change:** Reworked `dsl/value-container-flow-helper-reference.md` so Token, FieldList,
+  Node, Sequence, and Kind examples use no-regex wrappers or entry rules with explicit normal
+  matcher rules for regex-bearing work.
+
+  **Boundary:** No parser/runtime/source behavior changed. This is a documentation correction
+  for the active whole-book scorch.
+
+  **Verification:** Five focused `LinkedSpec::Get` probes cover the replacement snippets; page
+  scan finds no regex under `::`; mdBook, doctrine, task-tree, memory, Knowledge Map, and
+  whitespace checks pass.
+
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.12 — fix source-boundary examples**
+  (DONE mdBook correction; frontier `.10.5.13` next).
+
+  **Change:** Reworked `dsl/source-boundary-helper-reference.md` so the source-boundary examples use
+  no-regex `Top::AND` blind-call wrappers plus normal regex-owning rules for Tuple, Block, Paren,
+  Pair, Body, AtEnd, and entry-vs-match examples.
+
+  **Boundary:** No parser/runtime/source behavior changed. Delimiter-body examples are now explicitly
+  seek-shaped, matching the previously recorded capture-slice caveat.
+
+  **Verification:** Seven focused `LinkedSpec::Get` probes cover the replacement snippets; page scan
+  finds no regex under `::`; mdBook, doctrine, task-tree, memory, Knowledge Map, and whitespace checks pass.
+
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.11 — fix declaration helper examples**
+  (DONE mdBook correction; frontier `.10.5.12` next).
+
+  **Change:** Reworked `dsl/declaration-helper-reference.md` so the accumulator and metadata
+  examples use no-regex `::` wrappers with regex-owning normal rules. `List::` owns state and
+  calls `Item:`, while `Top::` dispatches to `Token:` for the metadata example.
+
+  **Boundary:** No parser/runtime/source behavior changed. This is a documentation correction for
+  the active whole-book scorch.
+
+  **Verification:** Focused `LinkedSpec::Get` probes cover the documented list and token outputs;
+  page scan finds no regex under `::`; mdBook, doctrine, task-tree, memory, and whitespace checks pass.
+
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.10 — fix capture and entry-match examples**
+  (DONE mdBook + Knowledge fact correction; frontier `.10.5.11` next).
+
+  **Change:** Reworked `dsl/capture-marks-and-source-locations.md` so the capture example uses a
+  no-regex `Top::` wrapper plus normal `Body:` delimiter rule, and the entry-vs-match example uses
+  a no-regex blind-call wrapper plus normal `Call:`/`Inner:` matcher rules.
+
+  **Boundary:** No parser/runtime/source behavior changed. The slice records the Perl seek-vs-consume
+  delimiter-capture authoring boundary in Knowledge fact `perl-capture-slice-delimiter-seek-boundary`.
+
+  **Verification:** Focused `LinkedSpec::Get` probes cover the seek-mode capture output and the
+  `greet`/`world` entry-vs-match split; page scan finds no regex under `::`; mdBook, Knowledge Map,
+  doctrine, task-tree, memory, and whitespace checks pass.
+
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.9 — fix action and lifecycle placement examples**
+  (DONE mdBook + Knowledge fact correction; frontier `.10.5.10` next).
+
+  **Change:** Reworked `dsl/action-and-lifecycle-placement.md` so regex-bearing examples use normal
+  `:` rules, entry-match transforms use `I { ... }` plus `entry_*`, local-slot action edges use `match_*`,
+  and lifecycle examples use explicit `return(...)` instead of implying direct `E` finalization.
+
+  **Boundary:** No parser/runtime/source behavior changed. The slice documents an observed current Perl
+  lifecycle handler-shape caveat in Knowledge fact `perl-lifecycle-final-value-e-drift`.
+
+  **Verification:** Focused `LinkedSpec::Get` probes cover entry-match, later-slot action, explicit lifecycle
+  return, and Pair slot-flow examples; page scan finds no regex under `::`; mdBook, Knowledge Map, and whitespace
+  checks pass.
+
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.8 — fix blind-call orchestration examples**
+  (DONE mdBook correction; frontier `.10.5.9` next).
+
+  **Change:** Kept no-regex blind-call `::` wrapper examples intact in
+  `user-model/blind-calls-and-parser-orchestration.md`, converted regex-owning action-edge examples
+  to single-colon labels, and clarified the mixed-edge negative example.
+
+  **Boundary:** No parser/runtime/source behavior changed. This is a documentation correction.
+
+  **Verification:** Focused scan finds no regex slot under a `::` header; the wrapped mixed-edge probe
+  logs the expected validation error; mdBook build passes.
+
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.7 — fix regex chapter examples**
+  (DONE mdBook correction; frontier `.10.5.8` next).
+
+  **Change:** Reworked `user-model/regex-in-spec.md` so keyword, numbered-capture, named-capture, and
+  compaction examples use no-regex `Top::` wrappers plus single-colon regex-bearing rules.
+
+  **Boundary:** No parser/runtime/source behavior changed. Capture-indexing facts remain the same:
+  numbered groups are 0-based, captures-only, and compacted; named groups remain stable.
+
+  **Verification:** `LinkedSpec::Get` probes confirm keyword, pair, named capture, numbered-compaction,
+  and named-compaction outputs; remaining `::` labels on the page are no-regex wrappers; mdBook build passes.
+
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.6 — fix rule mode and parse mode examples**
+  (DONE mdBook correction; frontier `.10.5.7` next).
+
+  **Change:** Reworked `user-model/rule-modes-and-parse-modes.md` so regex-owning mode examples use
+  single-colon labels, `::` examples are no-regex entry/dispatcher shapes, and the parse-mode
+  `Top:: /foo/` snippets are now a verified `Top::` + `Word:` wrapper.
+
+  **Boundary:** No parser/runtime/source behavior changed. This is a documentation correction for the
+  active whole-book scorch.
+
+  **Verification:** `LinkedSpec::Get` probes confirm the documented token-stream and `seek`/`consume`
+  outputs; remaining `::` labels on the page are no-regex entry/dispatcher examples; mdBook build passes.
+
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.5 — fix spec file paragraph examples**
+  (DONE mdBook + Knowledge fact; frontier `.10.5.6` next).
+
+  **Change:** Rewrote `user-model/spec-files-and-rule-paragraphs.md` examples to the verified 2-rule
+  idiom and replaced the malformed bare `label:` block with valid quoted `"label:"` helper content plus
+  the exact validation-error note.
+
+  **Boundary:** No parser/runtime/source behavior changed. This is a documentation correction plus the
+  narrow Knowledge fact `rule-starts-open-block-validation`.
+
+  **Verification:** Four replacement snippets compile/run through `LinkedSpec::Get`; the bad bare-label
+  probe reports `Rule definition not allowed inside open block`; mdBook, memory, Knowledge, doctrine,
+  task-tree, and whitespace gates cover the final committed slice.
+
+- 2026-07-08: **SPEC-LANG-REFERENCE.10.5.4.1 — reactivate book scorch**
+  (DONE metadata-only activation; frontier `.10.5.5` next).
+
+  **Change:** Resolved the old `SPEC-LANG-REFERENCE` scorch pause by user directive and pointed the durable
+  frontier at `.10.5.5`.
+
+  **Boundary:** No parser/runtime/source/book behavior changed. The next book-content work is still pending:
+  `user-model/spec-files-and-rule-paragraphs.md` malformed label-in-block plus `Top::AND` sketches.
+
+  **Verification:** Memory architecture, task-tree metadata, doctrine registry, and whitespace gates cover this
+  coordination-only slice.
+
+- 2026-07-08: **TASK-TREE-METADATA-HYGIENE.4 — reconcile closeout commit metadata**
+  (DONE metadata-only task-tree handoff cleanup; tree CLOSED).
+
+  **Change:** Reconciled `docs/tasks/SPEC-SOURCE-TERSE-CLOSEOUT.md` so the completed `.1` leaf records its landed
+  commit instead of saying commit execution is pending.
+
+  **Boundary:** No parser/runtime/source/book behavior changed. This is a continuity cleanup for the just-closed
+  root-spec closeout, not a broad historical task-file backfill.
+
+  **Verification:** Focused stale pending-commit scan found the contradiction in the closeout task file; memory,
+  task-tree, doctrine, and whitespace gates cover the final committed slice.
+
+- 2026-07-08: **SPEC-SOURCE-TERSE-CLOSEOUT.1 — close root spec terse source**
+  (DONE source-format closeout; tree CLOSED).
+
+  **Change:** Completed the all-root `specs/*.spec` terse source closeout. Remaining root-spec host-action residues
+  were migrated in `hlink_substitution`, `pplugin`, `Lispish`, `ebnf`, `simenv`, and `vhdl`. Hlink bracket payloads
+  are now neutral strings, and `pplugin.spec` now returns plugin body text while `perl/PPlugin.pm` preserves legacy
+  coderef execution for `.plg` callers.
+
+  **Boundary:** This closes source-format doubt for shipped specs. It does not make dynamic `.plg` execution a
+  backend-neutral target, and it does not churn valid current syntax merely to use every newer terse feature.
+
+  **Verification:** Retired-helper/host-residue scans are clean; all 21 shipped descriptors report `1.0000 0 0`;
+  focused hlink/pplugin probes pass; oracle generation emits 99 fixtures; Rust
+  `oracle_corpus_matches_perl_reference` passes over the 99-fixture manifest.
+
+- 2026-07-08: **RUST-STATUS-DRIFT-SYNC.1 — sync Rust status counts**
+  (DONE docs-only drift correction; tree CLOSED).
+
+  **Change:** Registered a narrow owner for startup-discovered Rust status drift, then synchronized current-facing
+  `ROADMAP.md`, `rust/README.md`, and mdBook shipped-corpora wording to the current 97-fixture Rust oracle, 21
+  shipped specs, and phase0 `1..1028`.
+
+  **Boundary:** No parser/runtime behavior or corpus data changed. Historical earlier-count task/log entries remain
+  unchanged when they describe the baseline at the time of their slice.
+
+  **Verification:** Focused current-facing stale-count scans, manifest `case_count` check, shipped-spec count check,
+  mdBook build, memory architecture, Knowledge Map, doctrine, task-tree metadata, and whitespace gates pass.
+
+- 2026-07-08: **DOCTRINE-ENFORCEMENT-ADOPT.3.3 — close task-acceptance no-drift**
+  (DONE docs/KM/no-drift closeout; `DOCTRINE-ENFORCEMENT-ADOPT` CLOSED).
+
+  **Change:** Reconciled the shipped `TASK-ACCEPTANCE` boundary across `DOCTRINE_ENFORCEMENT.md`, `TOOLBOX.md`,
+  mdBook local-CI/task-tree ownership wording, ADR `0009`, Knowledge Map source facts, task-tree index, and live
+  docs.
+
+  **Boundary:** No executable behavior changed. The gate remains a staged evidence-shape check. The docs now spell
+  out the false-positive path (`git diff --cached --name-only`, then unstage, update the real owning task leaf, or
+  split the work) and the known limit (ownership/evidence shape, not truthfulness or historical completeness).
+
+  **Verification:** No-drift scans, Knowledge Map regeneration, doctrine driver, memory architecture, task-tree
+  metadata, mdBook build, and whitespace checks pass.
+
+- 2026-07-08: **DOCTRINE-ENFORCEMENT-ADOPT.3.2 — implement task-acceptance evidence gate**
+  (DONE `TASK-ACCEPTANCE` staged evidence-shape gate; frontier `.3.3` closeout next).
+
+  **Change:** Added executable `scripts/check_diagnosis_evidence.sh`, registered it in
+  `scripts/check_doctrines.sh`, and synced the doctrine standard, `TOOLBOX.md`, local gate audit, mdBook local-CI
+  chapter, ADR `0009`, Knowledge Map source facts, task tree, and live docs.
+
+  **Boundary:** The check is staged-set scoped. It governs code/spec/test/tooling paths and checks for a completed
+  task-file acceptance checklist with LinkedSpec-tool signatures; it does not execute arbitrary Markdown commands.
+
+  **Verification:** Direct script check, staged self-check, doctrine driver, memory architecture, task-tree
+  metadata, mdBook build, and whitespace checks pass.
+
+- 2026-07-08: **DOCTRINE-ENFORCEMENT-ADOPT.3.1 — split evidence gate before code**
+  (DONE scope/signature design split; frontier `.3.2` implementation next).
+
+  **Change:** Reactivated the deferred evidence/task-acceptance doctrine by splitting `.3` into a narrow staged
+  implementation sequence. `.3.2` now owns `scripts/check_diagnosis_evidence.sh` plus `TASK-ACCEPTANCE`
+  registration; `.3.3` owns docs/KM/no-drift closeout after the checker exists.
+
+  **Boundary:** No parser/runtime, corpus, mdBook behavior, or gate behavior changed in this slice. The planned
+  checker is intentionally staged-set/checklist-shape scoped to avoid broad historical false positives.
+
+  **Verification:** Bootstrap/read review, Knowledge Map search for existing evidence-gate facts, relevant
+  enforcement owner paths read, task-tree split review, memory architecture, doctrine, task-tree metadata, and
+  whitespace checks pass.
+
+- 2026-07-08: **SPEC-FORMAT-TERSE.13.5 — close parent terse task tree**
+  (DONE metadata-only parent task-tree status reconciliation; `SPEC-FORMAT-TERSE` CLOSED).
+
+  **Change:** Reconciled the parent `SPEC-FORMAT-TERSE` task tree from `active` with an empty frontier to
+  `done` / `closed`. Stale internal split-container rows that still looked active now read as historical
+  done/closed rows.
+
+  **Boundary:** No parser/runtime, corpus, or behavioral mdBook semantics changed.
+
+  **Verification:** Parent-status scans, mdBook build, Knowledge Map regeneration/check, memory architecture,
+  doctrine, task-tree metadata, and whitespace gates pass.
+
+- 2026-07-08: **SPEC-FORMAT-TERSE.13.4 — close array-tree traversal drift**
+  (DONE docs/KM/oracle/no-drift closeout; `.13` CLOSED/exhausted).
+
+  **Change:** Closed the array-tree traversal activity after `.13.2` Perl reference support and `.13.3` Rust/oracle
+  parity. Live docs, task-tree rows, roadmap state, mdBook status/helper/formal/backend pages, Knowledge Map facts,
+  and the generated oracle manifest now agree on the shipped 97-fixture array-tree traversal surface.
+
+  **Boundary:** No parser/runtime or corpus semantics changed in this closeout slice.
+
+  **Verification:** Stale frontier/pending-parity scans, mdBook build, Knowledge Map regeneration/check, memory
+  architecture, doctrine, task-tree metadata, and whitespace gates pass.
+
+- 2026-07-08: **SPEC-FORMAT-TERSE.13.3 — implement Rust array-tree traversal**
+  (DONE Rust parser/runtime parity plus generated oracle fixture; `.13.4` closeout is now complete above).
+
+  **Change:** Rust now accepts and executes array-valued receiver `walk_leaves`, `map_leaves`, and
+  `reduce_leaves(initial)` attached-block traversal through the same receiver trailing-block chain used for
+  hash-tree traversal. Hash receivers keep `.12` sorted-key traversal; array receivers recurse through nested
+  arrays by index, treat hashes as leaves, bind scoped `value`, `index`, `path`, `depth`, and reduce-only `acc`,
+  and return `undef` without callbacks for scalar receivers.
+
+  **Oracle:** `tools/gen_oracle_corpus.pl` regenerated the corpus to **97** fixtures, adding
+  `terse_13_3_array_tree_traversal_receiver_blocks`; Rust `oracle_corpus_matches_perl_reference` passes.
+
+  **Verification:** Focused Rust parser tree traversal tests, focused `.13.3` runtime tests, focused `.12.3`
+  hash-tree runtime regressions, oracle regeneration, and the 97-fixture Rust corpus oracle all pass.
+
+- 2026-07-08: **SPEC-FORMAT-TERSE.13.2 — implement Perl array-tree traversal**
+  (DONE Perl reference implementation; `.13.3` Rust/oracle parity is now complete above).
+
+  **Change:** Perl now lowers receiver `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` through shared
+  tree traversal dispatch. Hash receivers keep the `.12` sorted-key semantics; array receivers traverse nested
+  arrays depth-first by zero-based index, treat hashes as leaves, bind scoped `value`, `index`, `path`, `depth`,
+  and reduce-only `acc`, and return `undef` without callbacks for scalar receivers.
+
+  **Boundary:** Rust runtime parity and the generated oracle fixture were split to `.13.3`, and final
+  docs/KM/no-drift closeout was split to `.13.4`; both are now complete.
+
+  **Verification:** `MethodLowering.pm` syntax check, focused lowering/runtime/source-residue probes, parser AST
+  test, and full Perl phase0 pass (`Files=1, Tests=1028`, `Result: PASS`), plus Knowledge/live-doc sync.
+
+- 2026-07-08: **SPEC-FORMAT-TERSE.13.1 — split array-tree traversal**
+  (DONE spec-first split; frontier `.13.2` Perl reference implementation).
+
+  **Change:** Reactivated and split the array-tree traversal backlog item before parser/runtime code. The accepted
+  surface is receiver-only `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` on array-valued receivers,
+  with nested arrays as interior nodes, scalar/hash leaves, index-order traversal, and scoped callback bindings
+  `value`, `index`, `path`, `depth`, and reduce-only `acc`.
+
+  **Boundary:** No parser/runtime behavior changed. Perl implementation was `.13.2`; Rust/oracle parity was
+  `.13.3`; docs/KM/no-drift closeout was `.13.4`. All are now complete.
+
+  **Verification:** Knowledge Map retrieval, task-tree split review, Knowledge fact creation/regeneration,
+  memory architecture, doctrine, task-tree metadata, and whitespace checks pass.
+
+- 2026-07-08: **SPEC-FORMAT-TERSE.10.1 — ratify dynamic hash-literal keys**
+  (DONE spec-ratification/no-engine-change closeout; `.10` CLOSED).
+
+  **Change:** The direct hash-literal key contract is now explicit in the task tree, mdBook, and Knowledge Map:
+  `{ key_expr : value_expr }` evaluates the key expression at runtime. Bare keys are scalar reads, quoted keys are
+  fixed fields, computed helper expressions can supply keys, and old `=>` remains retired.
+
+  **Boundary:** No parser/runtime behavior changed. This slice records current Perl/Rust behavior and moves the
+  remaining `SPEC-FORMAT-TERSE` frontier to `.13` under the user's exhaustion directive.
+
+  **Verification:** LinkedSpec lowering/runtime probes, Rust parser/runtime code read, mdBook, Knowledge Map,
+  memory architecture, doctrine, task-tree metadata, and whitespace checks pass.
+
+- 2026-07-08: **MEMORY-PUSH-POINTER-SYNC.1 — remove stale push threshold claim**
+  (DONE continuity-only correction; tree CLOSED).
+
+  **Change:** Replaced the stale `MEMORY.md` claim that the branch was over the 300-commit push threshold with
+  policy-oriented guidance to check `git status -sb` for the live ahead count and avoid pushing mid-PNT unless
+  explicitly instructed or deliberately invoking the threshold policy.
+
+  **Boundary:** No parser/runtime behavior, corpus data, roadmap status, or mdBook source changed. The known
+  post-commit `latest_commit` hash warning remains soft and unchanged.
+
+  **Verification:** Focused stale-threshold scan, live branch-status check, memory architecture, doctrine,
+  task-tree metadata, and whitespace checks pass.
+
+- 2026-07-08: **ROADMAP-POST-12-DRIFT-SYNC.1 — sync long roadmap baseline**
+  (DONE docs-only drift correction; tree CLOSED).
+
+  **Change:** Registered a narrow owner for startup-discovered `ROADMAP.md` drift, then synchronized current-state
+  roadmap references to the post-`SPEC-FORMAT-TERSE.12.4` baseline: phase0 `PASS 1..1027` and the 96-fixture Rust
+  interpreter oracle.
+
+  **Boundary:** No parser/runtime behavior, corpus data, or mdBook source changed. The mdBook was reviewed and was
+  already current for the `1..1027` / 96-fixture hash-tree traversal state.
+
+  **Verification:** Focused stale-count scans, mdBook build, memory architecture, Knowledge Map, doctrine,
+  task-tree metadata, and whitespace checks pass.
+
+- 2026-07-08: **SPEC-FORMAT-TERSE.12.4 — close hash-tree traversal drift**
+  (DONE final no-drift closeout; `SPEC-FORMAT-TERSE.12` exhausted).
+
+  **Change:** Closed the hash-tree traversal lane after verifying mdBook helper/reference/formal/backend-handoff
+  coverage, Knowledge Map retrieval, live docs, task-tree state, and the 96-fixture oracle manifest agree on
+  `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` semantics. No parser/runtime behavior changed.
+
+  **Boundary:** No current PNT-eligible `.12` leaf remains. `SPEC-FORMAT-TERSE.10` and `.13` remain deferred
+  unless explicitly activated.
+
+  **Verification:** No-drift scans covered method names, callback bindings, traversal semantics, trailing-block
+  boundary wording, historical 95-fixture references, and the current 96-fixture oracle state. mdBook build,
+  memory architecture, Knowledge Map, doctrine, and whitespace gates pass.
+
+- 2026-07-08: **SPEC-FORMAT-TERSE.12.3 — implement Rust hash-tree traversal**
+  (DONE Rust parser/runtime parity and 96th generated oracle fixture; frontier `.12.4` final no-drift next).
+
+  **Change:** Rust now parses and executes receiver attached-block hash-tree traversal methods:
+  `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)`. Runtime traversal is sorted depth-first over hash
+  keys, arrays are leaves, callbacks get scoped `value`/`key`/`path`/`depth` plus reduction `acc`, non-hash
+  receivers return `undef` without callbacks, malformed calls diagnose explicitly, and hash-family continuations
+  after `walk_leaves` / `map_leaves` work through the existing receiver dispatcher.
+
+  **Boundary:** Public helper examples, Knowledge Map facts, and current status/count docs now name the shipped
+  hash-tree traversal surface and 96-fixture Rust oracle boundary. `.12.4` remains the final no-drift
+  scan/closeout leaf.
+
+  **Verification:** Focused Rust parser/runtime tests pass; the generated oracle corpus has 96 fixtures; the full
+  Rust corpus oracle passes over all 96 fixtures. mdBook build, memory architecture, Knowledge Map, doctrine, and
+  whitespace gates pass.
+
+- 2026-07-08: **SPEC-FORMAT-TERSE.12.2 — implement Perl hash-tree traversal**
+  (DONE Perl reference implementation; frontier `.12.3` Rust parity and oracle next).
+
+  **Change:** Perl now accepts and lowers receiver attached-block hash-tree traversal methods:
+  `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)`. Traversal is sorted depth-first over hash keys,
+  arrays are leaves, callbacks get scoped `value`/`key`/`path`/`depth` plus reduction `acc`, non-hash receivers
+  return `undef` without callbacks, and malformed calls produce explicit unsupported-helper diagnostics.
+
+  **Boundary:** Rust parser/runtime parity and generated oracle fixtures remain next in `.12.3`. Full public
+  helper examples and Knowledge Map closeout remain `.12.4`; current mdBook status counts only were refreshed to
+  phase0 `1..1027`.
+
+  **Verification:** Perl syntax checks pass; `t/actionir_ast_parser.t` passes; full phase0 passes 1027 tests.
+
+- 2026-07-08: **SPEC-FORMAT-TERSE.12.1 — activate hash-tree traversal split**
+  (DONE tracking/spec split; frontier `.12.2` Perl reference implementation next).
+
+  **Change:** Reactivated `SPEC-FORMAT-TERSE.12` and split the hash-tree attached-block traversal lane before code.
+  The MVP is receiver-only `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` with immediate attached
+  blocks, sorted depth-first hash traversal, scoped callback bindings, array leaves, and explicit Perl/Rust/docs
+  child leaves.
+
+  **Boundary:** No parser/runtime behavior changed and no public mdBook content changed.
+
+  **Verification:** Memory architecture, doctrine, task-tree metadata, and diff checks pass.
+
+- 2026-07-08: **STAGED-LINKED-PARSING.6 — close staged linked parsing tree**
+  (DONE metadata closeout; tree CLOSED).
+
+  **Change:** `STAGED-LINKED-PARSING` is now marked done and moved from Active to Completed in the central
+  task-tree index. Its stale PNT pointer to already-closed `TOP-RULE-AS-NORMAL.3.2` now routes back to the active
+  task-tree index.
+
+  **Boundary:** No parser/runtime behavior changed and no public mdBook content changed.
+
+  **Verification:** Memory architecture, doctrine, task-tree metadata, and diff checks pass.
+
+- 2026-07-08: **RUST-README-DRIFT-SYNC.1 — sync Rust README oracle count**
+  (DONE docs-only correction; tree CLOSED).
+
+  **Change:** `rust/README.md` now names the current full Rust interpreter oracle as **95** fixtures, matching the
+  checked-in manifest and current mdBook status/handoff/corpora pages. The owner tree is complete and moved to
+  Completed.
+
+  **Boundary:** No parser/runtime behavior changed and no mdBook content changed.
+
+  **Verification:** Focused stale-count scans, memory-architecture check, doctrine driver, and diff checks pass.
+
+- 2026-07-08: **RUST-README-DRIFT-SYNC.0 — own Rust README count drift**
+  (DONE tracking-only owner; frontier `.1` README correction next).
+
+  **Change:** Registered a narrow task tree for the startup-discovered drift where `rust/README.md` still says the
+  full Rust interpreter oracle has 93 fixtures while the manifest, mdBook, live docs, and Knowledge Map are at
+  **95** fixtures.
+
+  **Boundary:** No parser/runtime behavior changed and the README itself is intentionally untouched in this owner
+  slice.
+
+  **Verification:** Memory-architecture check, doctrine driver, and diff checks pass.
+
+- 2026-07-08: **TASK-TREE-METADATA-HYGIENE.3 — gate completed-tree frontiers**
+  (DONE doctrine gate; tree CLOSED).
+
+  **Change:** Added `scripts/check_task_tree_metadata.sh` and registered `TASK-TREE-METADATA` in the doctrine
+  driver. Completed task files are now gated against live `Current Frontier` status cells while historical prose
+  and old commit-backfill fields stay outside the check.
+
+  **Boundary:** No parser/runtime behavior changed and no public mdBook behavior changed.
+
+  **Verification:** New task-tree metadata check, doctrine driver, Knowledge Map regeneration/check, memory
+  architecture, and diff checks pass.
+
+- 2026-07-08: **TASK-TREE-METADATA-HYGIENE.2 — reconcile stale frontier rows**
+  (DONE metadata-only cleanup; frontier `.3` doctrine/check decision next).
+
+  **Change:** Completed/completed-like task files no longer carry stale live `pending` frontier/verification/commit
+  rows. `COMPAT-ALIAS-RETIREMENT` and `NONCORE-QUARANTINE` are explicitly classified as deferred/non-goal cases
+  where their surviving deferred rows are intentional. `LINKEDSPEC-LOW-EFFORT.2` now correctly says the
+  post-commit hook verifies/warns about `MEMORY.md` drift but does not auto-regenerate it.
+
+  **Boundary:** No parser/runtime behavior changed and no public mdBook behavior changed.
+
+  **Verification:** Focused stale-marker scans, Knowledge Map regeneration/check, memory/doctrine checks, and diff
+  checks pass.
+
+- 2026-07-07: **TASK-TREE-METADATA-HYGIENE.1 — reconcile top task metadata**
+  (DONE metadata-only cleanup; frontier `.2` stale frontier/verification rows next).
+
+  **Change:** Completed/exhausted task trees no longer advertise stale top-level `active` metadata in
+  `FLUENT-BLOCK-EQUIVALENCE.md`, `MEDIUM-IMPACT.md`, or `PHASE0-BACKHALF-TRIAGE.md`. The owning hygiene tree and
+  central index now point to `.2`.
+
+  **Boundary:** No parser/runtime behavior changed and no public mdBook behavior changed.
+
+  **Verification:** Focused stale-active scans, memory/doctrine checks, and diff checks pass.
+
+- 2026-07-07: **SPEC-FORMAT-TERSE.14.5 — close trailing block drift**
+  (DONE no-drift closeout; `SPEC-FORMAT-TERSE.14` closed).
+
+  **Change:** The trailing block-argument lane is synchronized across roadmap, mdBook status, Knowledge Map, oracle
+  corpus, task-tree, and live docs. The shipped surface remains helper-function `with(value) { ... }` / `with() { ... }` and
+  receiver-method `.with() { ... }` on Perl/Rust, with the Rust oracle corpus at **95** fixtures.
+
+  **Boundary:** No parser/runtime behavior changed. Bare `with { ... }`, explicit receiver `.with(value) { ... }`,
+  closures, delayed callbacks, assignable/returnable blocks, and arbitrary non-`with` trailing blocks remain
+  deferred.
+
+  **Verification:** Focused stale-wording scans, mdBook build, Knowledge Map regeneration/check, oracle
+  regeneration, Rust oracle pass, memory/doctrine checks, and diff checks pass.
+
+- 2026-07-07: **SPEC-FORMAT-TERSE.14.4 — add receiver trailing blocks**
+  (DONE implementation; frontier `.14.5` final trailing block no-drift closeout next).
+
+  **Change:** Perl and Rust now support receiver `.with() { ... }` as an immediate trailing block argument. The
+  receiver value is scoped as `value`, block-local `return(expr)` yields the `.with` result, and that result can be
+  terminal or feed later compatible receiver-family links.
+
+  **Boundary:** Explicit receiver `.with(value) { ... }`, bare `with { ... }`, closures, assignable/returnable
+  blocks, delayed callbacks, and arbitrary non-`with` receiver trailing blocks remain unshipped.
+
+  **Verification:** Focused Perl and Rust parser/runtime checks pass; full phase0 passes 1026 tests; oracle
+  generation emits **95** fixtures; Rust `oracle_corpus_matches_perl_reference` passes over the full
+  manifest-backed corpus.
+
+- 2026-07-07: **REPO-HYGIENE.3 — remove generated artifacts**
+  (DONE urgent cleanup; return to `SPEC-FORMAT-TERSE.14.4` next).
+
+  **Change:** Removed ignored/untracked generated outputs `rust/target` (5.2G) and `docs/linkedspec-book/book`
+  (7.0M). This reclaims the large Rust build output and mdBook HTML output; both are rebuildable.
+
+  **Boundary:** No source, fixtures, checked-in docs, or submodule corpus content was deleted. `.log` and `.bin`
+  hits under `rgx/` were preserved as submodule stimulus/fixture/issue artifacts.
+
+  **Verification:** Ignored/tracked checks passed before deletion; post-clean checks confirm both generated
+  directories are removed and no safe log/bin/temp artifacts remain in the main checkout outside ignored/submodule
+  boundaries.
+
+- 2026-07-07: **SPEC-FORMAT-TERSE.14.3 — add Rust helper trailing blocks**
+  (DONE implementation; next at that time was `.14.4` receiver `.with() { ... }`).
+
+  **Change:** Rust parser/runtime parity now supports helper-function form `with(value) { ... }` / `with() { ... }` as an
+  immediate trailing block argument. The block runs in the caller's current action/runtime context; only scalar
+  `value` is the portable scoped block parameter. Runtime restores the prior `value` binding after the block, and
+  block-local `return(expr)` yields the `with` result.
+
+  **Boundary:** Receiver `.with() { ... }`, bare `with { ... }`, closures, assignable/returnable blocks, delayed
+  callbacks, and non-`with` helper trailing blocks remain unshipped.
+
+  **Verification:** Focused Rust parser/runtime checks pass; oracle generation emits **94** fixtures; Rust
+  `oracle_corpus_matches_perl_reference` passes over the full manifest-backed corpus.
+
+- 2026-07-07: **SPEC-FORMAT-TERSE.14.2 — add Perl helper trailing blocks**
+  (DONE implementation; frontier `.14.3` Rust helper-function form parity next).
+
+  **Change:** The Perl reference now parses and lowers `with(value) { ... }` / `with() { ... }` as immediate
+  trailing block arguments. The block gets scoped lexical `value`, block-local `return(expr)` behavior, hash-literal
+  separation, and unsupported-helper diagnostics for unknown trailing-block callees.
+
+  **Boundary:** Rust parity, receiver `.with() { ... }`, bare `with { ... }`, closures, assignable/returnable block
+  values, and delayed callbacks remain unshipped.
+
+  **Verification:** Focused parser/lowering probes pass; `t/actionir_ast_parser.t` passes; full phase0 passes
+  1025 tests; mdBook, memory, Knowledge Map, doctrine, and whitespace checks pass.
+
+- 2026-07-07: **SPEC-FORMAT-TERSE.14.1 — activate trailing block-argument plan**
+  (DONE tracking/specification; frontier `.14.2` Perl helper-function form implementation next).
+
+  **Change:** Reactivated the non-closed `SPEC-FORMAT-TERSE.14` trailing code-block owner and split it before code.
+  The first MVP is `with(value) { ... }` / `with() { ... }` as an immediate, final-only block argument with scoped
+  `value` binding and no closure/assignable/returnable block semantics.
+
+  **Boundary:** Documentation/tracking only. No parser/runtime behavior changed and the public mdBook remains
+  unchanged until the user-facing syntax ships.
+
+  **Verification:** Memory architecture, Knowledge Map, doctrine driver, and whitespace diff checks pass.
+
+- 2026-07-07: **TASK-TREE-METADATA-HYGIENE.0 — own task-tree metadata audit**
+  (DONE tracking-only; frontier `.1` top-level metadata reconciliation next).
+
+  **Change:** Added `TASK-TREE-METADATA-HYGIENE` to own the user-requested audit of non-closed task trees and stale
+  per-file task metadata. The authoritative live non-closed trees are recorded; stale old task-file metadata is now
+  split into cleanup leaves before any edits.
+
+  **Boundary:** Documentation/tracking only. No parser/runtime behavior changed, no public mdBook behavior changed,
+  and no old task files were cleaned up in this slice.
+
+  **Verification:** Memory architecture, doctrine driver, and whitespace diff checks pass.
+
+- 2026-07-07: **PUBLIC-STATUS-DRIFT-SYNC.2 — fix residual shipped corpus count drift**
+  (DONE; tree CLOSED).
+
+  **Change:** Updated the shipped-specs/corpora mdBook page to use the then-current manifest-backed 93-fixture Rust
+  oracle and to point at `rust/linkedspec-runtime/tests/corpus/manifest.json` for the exact case list.
+
+  **Boundary:** Documentation/status only. No parser/runtime behavior changed. Long-form roadmap and architecture
+  count drift remain owned by deferred `ROADMAP-DRIFT-RECONCILE` leaves.
+
+  **Verification:** mdBook build, focused stale-count scan, memory architecture, Knowledge Map, doctrine driver,
+  and whitespace diff checks pass.
+
+- 2026-07-07: **BOOTSTRAP-RESUME-SYNC.1 — correct stale resume pointer**
+  (DONE; continuity-only tree CLOSED).
+
+  **Change:** Added and completed a narrow task tree for the bootstrap finding that `MEMORY.md` still treated
+  `PUBLIC-STATUS-DRIFT-SYNC.1` as in-flight after commit `e1101e1a` was already present and `git status --short`
+  was clean. `MEMORY.md` now records the clean handoff state and the absence of an in-flight work unit.
+
+  **Boundary:** No parser/runtime behavior changed, and no public mdBook content changed.
+
+  **Verification:** Memory architecture, doctrine driver, and whitespace diff checks pass.
+
+- 2026-07-07: **PUBLIC-STATUS-DRIFT-SYNC.1 — sync public Rust status docs**
+  (DONE; tree CLOSED).
+
+  **Change:** Updated the mdBook public project status and backend handoff pages to the then-current Rust state:
+  interpreter parity was the then-current manifest-backed 93-fixture oracle gate, and generated Rust source remains a
+  direct structural-family proof plus curated corpus subset. The related Rust oracle/generated-source Knowledge
+  cards and derived `KNOWLEDGE_MAP.md` were refreshed.
+
+  **Boundary:** Documentation/status only. No parser/runtime behavior changed. Long-form `ROADMAP.md` and
+  `ARCHITECTURE_STATE.md` drift remain owned by `ROADMAP-DRIFT-RECONCILE`.
+
+  **Verification:** mdBook build, focused stale-status scan, memory architecture, Knowledge Map, doctrine driver,
+  and whitespace diff checks pass.
+
+- 2026-07-07: **PUBLIC-STATUS-DRIFT-SYNC.0 — create public status drift tree**
+  (DONE tracking-only; frontier `.1` public mdBook status/handoff sync next).
+
+  **Change:** Added an active task tree to own the public status drift found during the bootstrap/context pass before
+  any book edits. The concrete drift is narrow: `overview/project-status.md` still presents Rust parity as ongoing,
+  and `appendix/backend-handoff.md` still carries an older Rust oracle corpus count.
+
+  **Boundary:** No code, runtime behavior, roadmap content, or mdBook content changed. `ROADMAP-DRIFT-RECONCILE`
+  continues to own long-form `ROADMAP.md` and `ARCHITECTURE_STATE.md` drift.
+
+  **Verification:** Memory architecture, Knowledge Map, doctrine driver, and whitespace diff checks pass.
+
+- 2026-07-07: **SPEC-FORMAT-TERSE.9.6 — close hash literal colon drift**
+  (DONE; `.9` CLOSED; no concrete `SPEC-FORMAT-TERSE` PNT-eligible leaf remains unless a deferred leaf is
+  explicitly activated).
+
+  **Change:** Final no-drift closeout for the `{ key : value }` hash-literal migration. No parser/runtime
+  behavior changed; the closeout records that current specs, corpus inputs, generated oracle inputs, active tests,
+  docs/mdBook, current Knowledge facts, and implementation support sites are aligned on colon hash-literal
+  association.
+
+  **Boundary:** Remaining `=>` owners are blind-call edge syntax, VHDL/source-language associations, generated
+  Perl host output, Perl metadata/test data, backend value-rendering examples, explicit retired-syntax
+  diagnostics/tests, or historical records. They are not current direct hash-literal source syntax.
+
+  **Verification:** Current `.spec` source scans are clean for direct hash-literal `=>`; mdBook documents `:` as
+  current and old `{ key => value }` only as retired. Oracle generation remains **93** fixtures, focused Perl and
+  Rust `.9` checks pass, Rust `corpus_oracle` passes, and full phase0 passes `1..1024`.
+
+- 2026-07-07: **SPEC-FORMAT-TERSE.9.5 — retire hash literal fat arrows**
+  (DONE; superseded by `.9.6` final no-drift closeout).
+
+  **Change:** Old `{ key => value }` no longer succeeds as current ActionIR hash-literal syntax. Perl routes
+  retired direct hash-literal fat arrows to `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:hash_literal_use_colon`, valid
+  colon hash literals still lower, and Rust rejects the retired form during ActionIR parsing/compilation instead
+  of accepting a rule with dropped action code. Perl multi-argument `array(...)` AST lowering now emits the
+  already-lowered constructor directly, so generated Perl host hashrefs are not reparsed as retired source fat
+  arrows.
+
+  **Boundary:** Blind-call edge `=> Rule` remains valid. Generated Perl host hashrefs, Perl metadata hashes,
+  VHDL/source-language associations, and historical notes remain separate `=>` owners.
+
+  **Verification:** Focused Perl AST/lowering checks, focused Rust parser/compiler/runtime checks, full phase0
+  `1..1024`, mdBook, Knowledge Map, memory, doctrine, Rust format, diff, and local CI gates pass.
+
+- 2026-07-07: **SPEC-FORMAT-TERSE.9.4 — migrate hash literals to colon**
+  (DONE; superseded by `.9.5` hard retirement and `.9.6` no-drift closeout).
+
+  **Change:** Current-facing specs, checked-in corpus specs, generated Rust oracle inputs, active Perl/Rust tests,
+  mdBook examples, root docs, and Knowledge facts now prefer `{ key : value }` for direct hash-literal
+  association. `tkgui.spec` now returns a named hash accumulator directly instead of reconstructing one through
+  flat-array pairs.
+
+  **Boundary:** Blind-call edge `=>`, VHDL/source-language associations, generated Perl host hashrefs, Perl
+  metadata hashes, historical records, and explicit migration-window compatibility locks remained intentionally
+  classified at this leaf. Old hash-literal `=>` acceptance was removed by `.9.5`.
+
+  **Verification:** Oracle generation over **93** fixtures, focused Perl/Rust checks, full phase0 `1..1023`,
+  Rust oracle corpus, mdBook, Knowledge Map, memory, whitespace, doctrine gates, and `tools/run_ci_local.sh` pass.
+
+- 2026-07-07: **SPEC-FORMAT-TERSE.9.3 — add Rust colon hash literals**
+  (DONE; FRONTIER `.9.4` CURRENT-SOURCE/DOCS/CORPUS COLON MIGRATION NEXT).
+
+  **Change:** The Rust ActionIR expression parser now accepts `{ key : value }` direct hash-literal association
+  during the migration window, matching the Perl `.9.2` reference behavior. Colon pairs compose in nested hash
+  shapes, direct assignment RHS values, hash-index mutation RHS values, expression-valued `set(...)` / `=(...)`,
+  array composition, direct hash receiver chains, and block-vs-hash precedence.
+
+  **Boundary:** At this migration-window leaf, old hash-literal `{ key => value }` remained accepted only until
+  `.9.5`; blind-call edge `=> Rule` remained separate rule-body syntax. `.9.5` has since retired the old
+  hash-literal spelling.
+
+  **Verification:** Rust formatting passes; focused Rust parser and runtime integration tests pass. Knowledge Map,
+  mdBook, memory, whitespace, and doctrine gates pass in commit closeout.
+
+- 2026-07-07: **SPEC-FORMAT-TERSE.9.2 — add Perl colon hash literals**
+  (DONE; FRONTIER `.9.3` RUST COLON HASH-LITERAL PARITY NEXT).
+
+  **Change:** The Perl reference ActionIR AST parser now accepts `{ key : value }` as hash-literal association
+  syntax during the migration window. Colon pairs work for bare and quoted keys, nested array/hash shapes, direct
+  assignment RHS values, hash-index mutation RHS values, expression-valued `set(...)` / `=(...)`, and array shape
+  composition. The old `{ key => value }` spelling remained accepted only until the hard-retirement leaf, which is
+  now done.
+
+  **Boundary:** Blind-call edge `=> Rule` syntax is untouched. Generated Perl host code still legitimately emits
+  Perl fat arrows inside hashrefs, and double-colon payloads such as `{ JSON::PP }` still parse as block values
+  instead of hash literals.
+
+  **Verification:** Focused AST tests pass; full phase0 passes with `PERL5LIB=` cleared and plan `1..1023`.
+  Knowledge Map, mdBook, memory, whitespace, and doctrine gates pass in commit closeout.
+
+- 2026-07-07: **SPEC-FORMAT-TERSE.9.1 — split hash literal colon migration**
+  (DONE; FRONTIER `.9.2` PERL REFERENCE COLON HASH-LITERAL SUPPORT NEXT).
+
+  **Change:** `.9` is split before implementation. Direct hash-literal `=>` migration candidates are classified
+  apart from blind-call edge syntax, VHDL/source-language associations, historical material, active fixture strings,
+  and parser/runtime support sites. A Knowledge fact records the split so future sessions can start from the owner
+  buckets instead of redoing the scan.
+
+  **Boundary:** No parser/runtime behavior changed. Blind-call `=> Rule` remains valid, and source-language
+  association syntax such as VHDL `=>` is outside the ActionIR hash-literal migration.
+
+  **Verification:** Knowledge Map regenerated and checked; mdBook builds; memory, whitespace, and doctrine gates
+  pass in commit closeout.
+
+- 2026-07-07: **SPEC-FORMAT-TERSE.8.6 — close helper retirement no-drift**
+  (DONE; FRONTIER `.9` HASH-LITERAL COLON ASSOCIATION NEXT AFTER CLEAN COMMIT).
+
+  **Change:** Final helper-retirement scans classify current specs/corpora as clean for retired helper calls, keep
+  remaining old names in diagnostics/regression/historical/reference buckets only, and correct the root guide so
+  current scalar assembly is `cat(...)`; source-spelled `concat(...)` is retired. A Knowledge fact card records the
+  no-drift audit result.
+
+  **Boundary:** No parser/runtime behavior changed. This is a closeout/documentation/Knowledge slice after Perl and
+  Rust hard retirement.
+
+  **Verification:** Oracle generation is byte-identical over **93** fixtures; Rust `corpus_oracle` passes **3**
+  tests. mdBook, Knowledge Map, memory, whitespace, and doctrine gates pass in commit closeout.
+
+- 2026-07-07: **SPEC-FORMAT-TERSE.8.5 — reconcile helper retirement docs**
+  (DONE; FRONTIER `.8.6` FINAL HELPER-RETIREMENT NO-DRIFT CLOSEOUT NEXT).
+
+  **Change:** Current-facing docs, root guides, Rust README, and Knowledge cards now agree on the post-retirement
+  helper surface: auto-existing variables, direct assignment/mutation, `set(...)`, `push(...)`, `copy(...)`,
+  `cat(...)`, `array(...)`, `hash(...)`, and bare scalar reads. Old helper names are kept only as historical
+  lowering evidence or retired-diagnostic guidance.
+
+  **Boundary:** No parser/runtime behavior changed. Historical `.6.4` compatibility policy records remain as dated
+  history, but visible summaries now say `.8` superseded that policy with hard retirement.
+
+  **Verification:** Knowledge Map regenerated and checked; mdBook builds; `git diff --check` passes. Commit closeout
+  runs memory/doctrine gates.
+
+- 2026-07-07: **SPEC-FORMAT-TERSE.8.4 — hard-retire Rust legacy helpers**
+  (DONE; FRONTIER `.8.5`/`.8.6` HELPER-RETIREMENT CLEANUP NEXT).
+
+  **Change:** Rust no longer executes retired helper spellings successfully. `declare`, `array_copy`, `hash_copy`,
+  `concat`, `push_value`, `push_nonempty`, and wrapper aliases `a(...)` / `h(...)` now return explicit
+  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<name>` diagnostics; current `set(...)`/assignment, `push(...)`,
+  `copy(...)`, `cat(...)`, `array(...)`, `hash(...)`, and receiver `.copy()` spellings keep corpus parity.
+
+  **Boundary:** Recursive aggregate reset now uses current syntax: `set(array(items), [])` records a rule-local
+  binding before mutation, replacing the old Rust `declare(array, items)` scoped boundary. Perl oracle source
+  reconstruction now preserves `source_method` so current `cat(...)` inside attached control flow is not rebuilt as
+  retired `concat(...)`.
+
+  **Verification:** Oracle regeneration over **93** fixtures, focused Rust retirement/TOP-RULE/hash-receiver/corpus
+  tests, full `linkedspec-core`, full `linkedspec-runtime`, and full phase0 **1022** pass.
+
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.3 — hard-retire Perl legacy helpers**
+  (DONE; FRONTIER `.8.4` RUST HARD RETIREMENT NEXT).
+
+  **Change:** Perl reference lowering now treats the remaining old helper spellings as retired. Declaration helpers
+  and aliases, function-form `concat(...)`, `array_copy(...)`, `hash_copy(...)`, `push_value(...)`, and
+  `push_nonempty(...)` emit explicit unsupported-helper diagnostics instead of successful lowering. Current
+  `cat(...)`, `copy(...)`, `push(...)`, assignments, typed wrappers, and receiver methods still lower.
+
+  **Boundary:** Rust compatibility remains for the next owned leaf, `.8.4`; explicit diagnostic/compatibility test
+  fixtures stay in place to lock the retirement boundary.
+
+  **Verification:** Focused Perl helper probe, syntax checks for touched Perl/test modules, focused
+  `t/actionir_ast_parser.t`, `t/trace_actionir_compact_lowerers.t`, and `t/phase0_validation_fuzz.t`, full phase0
+  with `PERL5LIB=` cleared (**1022** tests), mdBook, Knowledge Map, memory, whitespace, and doctrine gates pass.
+
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.2.4 — close helper migration no-drift gates**
+  (DONE; FRONTIER `.8.3` PERL REFERENCE HARD RETIREMENT NEXT).
+
+  **Change:** `.8.2` migration closeout is complete. Root authored specs and checked-in corpus specs are clean for
+  retired helper spellings; generated corpus/test residues are classified as compatibility/retirement locks; and
+  the active frontier advances to Perl hard retirement.
+
+  **Boundary:** No parser/runtime behavior changed. This slice only proved no drift after the source/test/corpus/book
+  and Knowledge Map migrations.
+
+  **Verification:** Oracle generator syntax and regeneration pass with **93** fixtures and no git drift; Rust
+  `corpus_oracle` passes **3** tests; full phase0 passes **1022** tests with `PERL5LIB=` cleared; mdBook,
+  whitespace, and doctrine checks pass.
+
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.2.3 — migrate book and knowledge helper references**
+  (DONE; FRONTIER `.8.2.4` NO-DRIFT SCAN/GATE CLOSEOUT NEXT).
+
+  **Change:** Current-facing mdBook helper examples now teach current terse spellings first: `cat(...)`,
+  `copy(...)`, assignment/operator forms, `push(...)`, and explicit `is_nonempty(...)` guards before `push(...)`.
+  Knowledge fact-card `reverify` commands were migrated away from legacy helper spellings unless they explicitly
+  prove retirement/compatibility, and `KNOWLEDGE_MAP.md` was regenerated.
+
+  **Boundary:** No parser/runtime behavior changed. Legacy helper names remain only in compatibility/catalog,
+  retired-diagnostic, or historical contexts.
+
+  **Verification:** mdBook build, Knowledge Map check, whitespace check, memory architecture check, and doctrine
+  check pass.
+
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.5 — close active test/corpus helper residue**
+  (DONE; FRONTIER `.8.2.3` MDBOOK/KM HELPER-REFERENCE MIGRATION NEXT).
+
+  **Change:** Active-test/corpus closeout scans classify or clear the remaining helper residue before current-facing
+  docs/KM cleanup. Rust integration comments now explicitly classify the remaining `a(...)` / `h(...)`
+  wrapper-alias fixture strings as `.8.4` retirement locks.
+
+  **Boundary:** No parser/runtime behavior changed. Root `specs/` and `tests/corpus/` scan clean for retired helper
+  spellings; generated oracle inputs retain only declaration, aggregate-copy, and current hash receiver-method
+  cases; phase0 retains only the `.8.2.2.4` compatibility/equivalence categories.
+
+  **Verification:** Focused residue scans over Rust active tests, generated corpus inputs, generator source, root
+  corpus/specs, and the Perl phase0 terse block passed with only owned residual categories. Rust formatting,
+  whitespace, memory architecture, and doctrine checks pass.
+
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.4 — migrate Perl phase0 helper strings**
+  (DONE; FRONTIER `.8.2.2.5` ACTIVE-TEST/CORPUS RESIDUE SCANS NEXT).
+
+  **Change:** Perl phase0 embedded specs now use current `cat(...)`, `push(...)`, and `copy(...)` spellings where
+  the fixture is not an explicit legacy compatibility lock. TOP-RULE recursion append/snapshot paths,
+  user-function helpers, auto-existence append proofs, current-feature snapshot returns, array method fixtures, and
+  mutation-expression snapshots were migrated.
+
+  **Boundary:** No runtime behavior changed. Remaining old-helper strings are classified under declaration scope,
+  `push_nonempty(...)` semantic filtering, aggregate-copy compatibility, helper-renaming equivalence, canonical
+  old-side equivalence, or current `.hash_copy()` receiver-method surface. The all-bare
+  `push(words, label)` candidate failed as expected because that spelling remains child-call-shaped; the accepted
+  current form is `push(array(words), label)` where the RHS is a bare scalar read.
+
+  **Verification:** `perl -c -Iperl t/phase0_regression.t` passes. Full phase0 with `PERL5LIB=` cleared passes
+  **1022** tests. Focused phase0 residue scan shows every retained old-helper spelling under an explicit owner.
+  Rust formatting, whitespace, memory architecture, and doctrine checks pass.
+
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.3 — migrate generated corpus helper fixtures**
+  (DONE; FRONTIER `.8.2.2.4` PERL PHASE0 OLD-HELPER STRING MIGRATION NEXT).
+
+  **Change:** Generated oracle corpus sources now use current `push(...)` and `copy(...)` spellings where the
+  fixture behavior is current-surface. `autoexist_array_bare_arg` and TOP-RULE recursion fixture inputs were
+  migrated, and incidental setup in the aggregate-copy compatibility fixture now uses `push(...)`.
+
+  **Boundary:** No runtime behavior changed and no oracle expected-output or manifest drift occurred. Remaining
+  generated-corpus helper residue is intentionally classified as declaration compatibility, aggregate-copy
+  compatibility, or current hash receiver-method surface.
+
+  **Verification:** `perl -c -Iperl tools/gen_oracle_corpus.pl`, `perl -Iperl tools/gen_oracle_corpus.pl`, and Rust
+  `corpus_oracle` pass over **93** generated fixtures. Focused residue scans, formatting, whitespace, memory
+  architecture, and doctrine checks pass.
+
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.2.5 — classify integration helper residue**
+  (DONE; `.8.2.2.3` GENERATED ORACLE CORPUS HELPER-FIXTURE MIGRATION HAS SINCE CLOSED).
+
+  **Change:** The remaining Rust integration-test helper-string residue is classified in place. Recursive
+  `declare(...)` usage remains owned by `.8.2.2.2.2`; explicit helper compatibility strings remain owned by
+  `.8.2.2.2.3`/`.8.4`; receiver-dot `.hash_copy()` is documented current hash receiver surface; and `h(...)` in
+  the quoted wrapper-boundary test is a legacy wrapper-alias retirement lock.
+
+  **Boundary:** No runtime behavior or user-facing syntax changed. The Rust integration-test helper cleanup lane is
+  closed, so the next active cleanup surface is generated oracle corpus fixture inputs.
+
+  **Verification:** Focused residue scan over `integration_test.rs` shows every remaining old-helper spelling under
+  an explicit `.8.2.2.2.2`, `.8.2.2.2.3`, or `.8.2.2.2.5` classification. Rust formatting passes.
+
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.2.4 — migrate later integration fixtures**
+  (DONE; `.8.2.2.2.5` RUST INTEGRATION-TEST RESIDUE CLASSIFICATION HAS SINCE CLOSED).
+
+  **Change:** Later current-feature Rust integration fixtures outside explicit compatibility blocks now use current
+  `push(...)`, `copy(...)`, and explicit aggregate-setter spellings where supported. The array append-operator
+  equivalence test now compares against current `push(...)`.
+
+  **Boundary:** No runtime behavior changed. Hash receiver chains intentionally keep documented `.hash_copy()`
+  receiver spelling today, and wrapper-alias `h(...)` fixture residue remains for `.8.2.2.2.5` classification.
+
+  **Verification:** Focused Rust filters for `terse_1_`, `terse_2_3`, `rust_parity_7_3_4`,
+  `rust_parity_7_5_2`, `terse_11_3`, and `terse_3_3` pass. Full Rust `integration_test` passes **172** tests,
+  and Rust formatting plus whitespace checks pass.
+
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.2.3 — annotate legacy helper compatibility tests**
+  (DONE; `.8.2.2.2.4` LATER CURRENT-FEATURE RUST INTEGRATION FIXTURE CLEANUP HAS SINCE CLOSED).
+
+  **Change:** The early Rust integration compatibility block now uses current `push(...)`, `copy(...)`, and
+  `hash(...)` spellings on current-side assertions. Retained old-helper sides are labelled as `.8.4` hard-retirement
+  locks.
+
+  **Boundary:** Rust still executes the legacy helpers for compatibility. This slice only classifies explicit
+  compatibility/equivalence tests; later incidental Rust integration fixture strings remain owned by `.8.2.2.2.4`.
+
+  **Verification:** Focused Rust filters for `terse_1_1_2`, `terse_1_2`, `terse_1_4_2`, and `terse_1_3_2` pass.
+  Full Rust `integration_test` passes **172** tests, and Rust formatting, memory/doctrine, and whitespace checks
+  pass.
+
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.2.2 — classify recursive helper fixtures**
+  (DONE; `.8.2.2.2.3` EXPLICIT LEGACY-HELPER COMPATIBILITY/EQUIVALENCE TESTS HAVE SINCE CLOSED).
+
+  **Change:** TOP-RULE-AS-NORMAL recursive Rust integration fixtures now use current `push(...)`, `copy(...)`,
+  and `array(...)` spellings for append/snapshot behavior.
+
+  **Boundary:** `declare(array, items)` remains intentionally retained as a Rust scoped-declaration compatibility
+  lock. The current-surface `set(array(items), [])` candidate preserves the matching Perl probe but fails Rust
+  recursive value parity, so `.8.4` must resolve that before declaration-helper removal.
+
+  **Verification:** Focused TOP-RULE Rust integration filter passes, full Rust `integration_test` passes **172**
+  tests, and mdBook/Knowledge Map/memory/doctrine/whitespace checks pass.
+
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.2.1 — migrate integration smoke helper fixtures**
+  (DONE; `.8.2.2.2.2` TOP-RULE-AS-NORMAL RECURSIVE HELPER CLASSIFICATION HAS SINCE CLOSED).
+
+  **Change:** Non-compatibility Rust integration smoke fixtures before the recursive and explicit compatibility
+  blocks now use current helper spellings: explicit aggregate setters, `push(...)`, `copy(...)`, `cat(...)`, and
+  direct scalar assignment.
+
+  **Boundary:** TOP-RULE-AS-NORMAL recursive fixtures and explicit legacy-helper equivalence blocks remain
+  untouched and owned by later `.8.2.2.2` children.
+
+  **Verification:** Scoped old-helper scan now starts at the TOP-RULE-AS-NORMAL block, outside this child. Focused
+  `full_pipeline` and staged user-function filters pass. Full Rust `integration_test` passes **172** tests.
+
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.2.2.1 — migrate source-emitter helper fixtures**
+  (DONE; `.8.2.2.2.1` INTEGRATION SMOKE HELPER-FIXTURE MIGRATION HAS SINCE CLOSED).
+
+  **Change:** Rust source-emitter smoke specs no longer use incidental `declare(...)`, `push_value(...)`,
+  `array_copy(...)`, or `concat(...)` helper spellings. They now use explicit aggregate setters,
+  `push(...)`, `copy(...)`, and `cat(...)`.
+
+  **Guard:** Repetition snapshot fixtures need `set(array(name), [])` when resetting named aggregate storage.
+  Direct `name = []` binds a scalar-held array value and does not clear the aggregate later targeted by
+  `push(array(name), ...)`.
+
+  **Verification:** Source-emitter old-helper residue scan is clean. `cargo test --manifest-path rust/Cargo.toml
+  -p linkedspec-runtime --test source_emitter` passes all **3** tests, including generated Rust parser compile/run
+  proofs.
+
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.2.1 — migrate EBNF nonempty append flow**
+  (DONE; `.8.2.2.1` SOURCE-EMITTER HELPER-FIXTURE MIGRATION HAS SINCE CLOSED).
+
+  **Change:** `specs/ebnf.spec::logging_annotation` no longer uses `push_nonempty(...)`. The optional capture span
+  is now trimmed once into `logging_annotation_part`, checked with `is_nonempty(...)`, and appended with
+  `push(array(logging_annotation), logging_annotation_part)`.
+
+  **Sync:** Generated EBNF oracle `input.spec` copies and the EBNF mdBook walkthrough match the shipped spec. The
+  oracle `expected.json` files did not drift.
+
+  **Verification:** `perl -Iperl tools/gen_oracle_corpus.pl` regenerated **93** fixtures; `LinkedSpec::get_parser("ebnf")`
+  preserves the `@log_rule("expr", "term")` payload; Rust `corpus_oracle` passes **93** fixtures; `mdbook build`
+  passes; full phase0 passes **1022** tests after refreshing the stale source-inspection lock.
+
+- 2026-07-06: **SPEC-FORMAT-TERSE.8.1 — split legacy helper retirement**
+  (DONE; `.8.2.1` EBNF NONEMPTY APPEND MIGRATION HAS SINCE CLOSED).
+
+  **Inventory:** Perl already leaves `assign(...)` raw/unlowered and emits unsupported-helper diagnostics for
+  `scalar(...)` plus `s(...)`/`a(...)`/`h(...)`. Perl still lowers declaration helpers, `concat(...)`,
+  `array_copy(...)`, `hash_copy(...)`, `push_value(...)`, and `push_nonempty(...)`. Rust still executes
+  `declare`, `array_copy`, `hash_copy`, `concat`, `push_value`, `push_nonempty`, and `array|a` / `hash|h`.
+
+  **Next:** `.8.2` owns current-source/test/corpus/doc migration before engine retirement, including a
+  behavior-preserving `push_nonempty(...)` replacement decision.
+
+- 2026-07-06: **SPEC-FORMAT-TERSE.15.5 — close colon scalar-slot drift**
+  (DONE; `.8.1` HAS SINCE SPLIT LEGACY HELPER REMOVAL).
+
+  **Closeout:** Current shipped specs, generated corpus inputs, mdBook guidance, active tests, and non-historical
+  Knowledge Map facts no longer depend on successful `:name` scalar-slot syntax. Remaining colon hits are retired
+  diagnostic code/tests, rule-mode/regex/public-API colon syntax, or explicitly historical records.
+
+  **Drift fixed:** Two stale current Knowledge fact-card examples were corrected: duck-typed assignment now
+  reverifies with bare `items` / `meta`, and statement regex substitution is documented as `substr(target, ...)`
+  instead of retired `substr(:target, ...)`.
+
+  **Verification:** Live probes for the corrected examples pass; oracle generation keeps **93** fixtures; Rust
+  `corpus_oracle` passes over all **93** fixtures; mdBook builds; Knowledge Map, memory/doctrine, diff, and full
+  phase0 checks pass (`env PERL5LIB= perl -Iperl t/phase0_regression.t`, plan `1..1022`).
+
+- 2026-07-06: **SPEC-FORMAT-TERSE.15.4 — retire Rust colon scalar slots**
+  (DONE; `.15.5` FINAL NO-DRIFT CLOSEOUT HAS SINCE CLOSED).
+
+  **Change:** Rust `Expr::ScalarSlot` was removed from the core AST and runtime/source-emitter paths. A retired
+  `:name` value primary now emits
+  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read` with bare-read migration guidance.
+
+  **Semantics preserved:** Runtime fixtures use bare reads. Action-edge blocks that call a child or read bare
+  `retv` pre-dispatch the matched edge child and expose the scoped child return to the attached block. `specs/ebnf.spec`
+  now uses `rule_header` for the scalar rule header and `rule` for the aggregate body, avoiding the old same-name
+  scalar/array collision under bare reads. The generated corpus case formerly named
+  `terse_6_2_3_1_scalar_slot_shorthand` is now `terse_15_4_bare_scalar_payload_readback`.
+
+  **Verification:** Focused Rust core/runtime/source-emitter/trace suites pass; `perl -Iperl
+  tools/gen_oracle_corpus.pl` regenerates **93** fixtures; Rust `corpus_oracle` passes over all **93** fixtures;
+  full Phase0 with `PERL5LIB=` cleared passes (`env PERL5LIB= perl -Iperl t/phase0_regression.t`, plan `1..1022`)
+  after refreshing the EBNF source-lock assertion to `rule_header`.
+
+- 2026-07-06: **SPEC-FORMAT-TERSE.15.3 — retire Perl colon scalar slots**
+  (DONE; `.15.4` RUST `Expr::ScalarSlot` REMOVAL HAS SINCE CLOSED).
+
+  **Change:** Perl reference `:name` scalar-slot syntax no longer parses/lowers as a successful read or target.
+  Retired colon scalar slots now emit
+  `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:colon_scalar_slot_use_bare_read`, and the former
+  `scalar_slot_fallback` trace/declaration path is gone.
+
+  **Semantics preserved:** Active Perl fixtures now use bare value reads. The retirement also locks bare-read
+  boundaries for inline `if`/`elseif`/`switch` conditions, logical `or(...)` / `and(...)`, ordinary
+  `entry_text()` / `match_text()` value helpers, assignment-source passthrough, flow RHS values, and scalar-held
+  hash `count_keys(...)`.
+
+  **Verification:** Focused ActionIR/trace tests pass; full phase0 passes with `PERL5LIB=` cleared and reaches
+  `1..1022`. mdBook/KM/live docs updated.
+
+- 2026-07-06: **SPEC-FORMAT-TERSE.15.2.4 — migrate current sources to bare reads**
+  (DONE; `.15.3` PERL `:name` REMOVAL HAS SINCE CLOSED).
+
+  **Change:** Current shipped specs, root corpus examples, generated Rust oracle inputs, and mdBook examples now use
+  bare value reads instead of `:name` scalar-slot reads. The migration preserved the **93** fixture oracle expected
+  JSON and manifest.
+
+  **Engine boundaries locked:** Perl lowering now keeps parser-backed `set(...)` reconstruction, variadic
+  `split_tagged_records(...)` source arguments, copy-return payloads, and declaration/type-memory tracking aligned
+  with the migrated source surface. Rust action-edge `call(child)` blocks publish child `retv` after the block
+  completes, and descriptor scalar bare reads can coexist with same-name aggregate accumulators.
+
+  **Verification:** Full phase0 passes (`1..1022`); oracle regeneration preserves expected JSON; Rust
+  `corpus_oracle` passes over **93** fixtures; mdBook build, whitespace diff check, and scalar-slot residue scan
+  pass with only rule-mode/regex/historical-string exclusions.
+
+- 2026-07-06: **REPO-HYGIENE.2 — ignore Claude project state and rgx local dirt**
+  (DONE; REPO HANDOFF CLEANUP).
+
+  **Change:** `.claude/projects/` is ignored local agent state. `rgx` remains a tracked gitlink/submodule, and
+  `.gitmodules` now records `ignore = dirty` so local dirt inside `rgx/` does not dirty the parent repo status.
+
+  **Finding:** `rgx` was a tracked gitlink, so `.gitignore` alone could not suppress its dirty parent status.
+  Keeping the submodule and setting its submodule ignore policy is the correct cleanup.
+
+- 2026-07-06: **SPEC-FORMAT-TERSE.15.2.3 — Rust bare-read parity and switch case-label alignment**
+  (DONE; FRONTIER `.15.2.4` SOURCE MIGRATION NEXT, NOT STARTED).
+
+  **Change:** Rust statement/attached switch and inline lazy `switch(...)` now share one case-value path: bare case
+  labels are literal tags (`case(foo)` matches `"foo"`), while `case(:foo)` and quoted/helper expressions still
+  evaluate normally during the transition. Bare switch subjects, numeric/comparison helper args, and `if(...)`
+  conditions read bound scalar values. The Perl inline switch lowering was aligned after the new oracle exposed
+  that inline `case(foo, body)` still read `$foo` while attached `case(foo)` was already literal.
+
+  **Source alignment:** `specs/spec.spec` now initializes `paragraphs` and `current` with explicit aggregate
+  `array(...)` targets. Under `.11` duck-typed assignment, `paragraphs = []` / `current = []` create scalar-held
+  array values, which do not feed later aggregate `push(rule_header, current)` mutations.
+
+  **Verification:** Focused Rust `.15.2.3` tests pass; regenerated Rust oracle corpus passes over **93** fixtures;
+  `perl -c` and `cargo fmt --check` pass; full phase0 reaches `ok 1022` / plan `1..1022` with **1021 pass** and
+  only known baseline `not ok 796`. mdBook/KM/live docs updated.
+
+- 2026-07-05: **SPEC-FORMAT-TERSE.15.2.2 — Perl reference bare-read completion in value positions**
+  (DONE; `.15.2.3` RUST PARITY HAS SINCE CLOSED; FRONTIER `.15.2.4` NEXT).
+
+  **Change:** One guarded branch in `ActionIR::FlowExpr::_lower_flow_composite_expr` (bare identifier at the
+  `passthrough_no_call` site → `$name` variable read, mirroring the `:name` branch) closed all three enumerated
+  value-position gaps at once — if/elseif/while + `num_*` + logical conditions delegate to it and the switch
+  selector funnels through it. A second change in `ActionIR::ControlFlow::_lower_switch_case_value_expr` keeps a bare
+  switch CASE LABEL a literal tag (hash-key-analogous exemption, ADR `0019`): `switch(kind)` reads variable `kind`,
+  `case(foo)` matches literal `"foo"`. `:name` stays accepted (compat) during the transition.
+
+  **Verification:** Discriminating probes show `switch(kind)`→`good`, `num_lt(n,5)`@n=10→`no`, `if(c)`@c=0→`F`, all
+  == their `:name` forms. FULL phase0 (`PERL5LIB=` cleared, 10-min timeout): reach `ok 1022`, **1021 pass**, only
+  the pre-existing `not ok 796`; zero regressions (`comm` vs baseline `{796}` empty both ways). `perl -c` clean on
+  both changed modules. Memory/KM/doctrine gates pass.
+
+  **Env:** phase0 needs `PERL5LIB=` cleared (stale `pgen/fx/perl` poisons the pplugin subprocess subtests) and the
+  10-min foreground timeout (else it caps mid-run at exit 144/143 — always check the REACH first).
+
+- 2026-07-05: **SPEC-FORMAT-TERSE.15.2.1 — bare-vs-`:name` value-position inventory + engine seams**
+  (DESIGN/INVENTORY DONE; PERL `.15.2.2` NOW DONE).
+
+  **Inventory (discriminating reference-engine probes):** bare identifiers are NOT read as the bound variable in
+  exactly three value positions — `switch(...)` selector (`switch(:kind)`→`good` vs `switch(kind)`→`def`),
+  `num_*(...)` callee args (`num_lt(:n,5)`@n=10→`no` vs bare→`yes`), and `if(...)`/`while(...)`/logical conditions
+  (`if(:c)`@c=0→`F` vs bare→`T`). Plain `return(name)`/assign-RHS/receiver already read bare. Real shipped-spec
+  hazard is rule-name collisions in `spec.spec`/`ebnf.spec` (ADR `0019`); `switch(` appears in no shipped spec.
+
+  **Seams pinned for `.15.2.2`/`.15.2.3`:** Perl `ActionIR::FlowExpr::_lower_flow_composite_expr`
+  (`perl/LinkedSpec/ActionIR/FlowExpr.pm:319`; `:name`→`$name` at `:364`, no bare arm) covers if/elseif/while/
+  logical + `num_*` args; switch selector via `ActionIR::ControlFlow._control_ast_value_source_expr:332`. Rust
+  `Expr::Variable` (`rust/linkedspec-core/src/expr.rs:1350`) vs `Expr::ScalarSlot`→`ctx.get_scalar`
+  (`rust/linkedspec-runtime/src/engine.rs:3287`). Policy locked (value-position-is-variable, ADR `0019`); composes
+  with the `.11` type-at-assignment duck-typed model.
+
+  **Verification:** design/inventory only — no code path changed; baseline phase0 stays 1021 pass / 1 pre-existing
+  unrelated fail (test 796). Memory/KM/doctrine gates pass. No engine/source/mdBook behavior changed.
+
+- 2026-07-05: **SPEC-FORMAT-TERSE.15.2 re-scope — reorder .15 to engine-first (bare-read gap) + recovery**
+  (PLANNING/RECOVERY DONE; ENGINE-FIRST `.15.2.1` DESIGN NOW DONE).
+
+  **Recovery:** A prior session left the working tree dirty with uncommitted, intermingled `.15.2/.15.3/.15.4/.8/.9`
+  work (152 files, phase0 RED). Preserved verbatim on branch `recovery/terse-15-uncommitted-20260705`
+  (`b1a2aefe`, reference-only); `main` reset clean to `104088e5`.
+
+  **Finding:** Source-first `.15.2` migration is NOT output-preserving at `104088e5` — bare identifiers are not
+  read as the bound variable in `switch(...)`, numeric callees, `if(...)` conditions, or all-bare `push(A,B)`
+  second args, and collide with rule names in `spec.spec`/`ebnf.spec` (`switch(:kind)`→`good` vs
+  `switch(kind)`→`def`). Per user directive (`:name` shall NOT be supported), `.15` re-sequenced engine-first:
+  `.15.2.1` design → `.15.2.2` Perl → `.15.2.3` Rust → `.15.2.4` migration → `.15.3`/`.15.4` remove → `.15.5`
+  closeout. ADR `0019`, KM `terse-bare-read-value-position-gap`.
+
+  **Verification:** Baseline phase0 = 1021 pass / 1 pre-existing unrelated fail (test 796). Memory/KM/doctrine
+  gates pass. No engine/source behavior changed.
+
+- 2026-07-05: **SPEC-FORMAT-TERSE.15.1 — split colon scalar-slot removal**
+  (AUDIT/SPLIT DONE; CURRENT-SURFACE MIGRATION FRONTIER ACTIVE).
+
+  **Fix:** Audited `:name` scalar-slot usage before implementation and split the removal lane. Current usage spans
+  shipped/root specs, root corpus examples, generated oracle fixtures, mdBook guidance, Knowledge Map facts,
+  trace/phase0 tests, oracle-generation sources, and Perl/Rust parser/runtime support, so hard removal is not one
+  safe slice.
+
+  **Verification:** Audit scans recorded in `docs/tasks/SPEC-FORMAT-TERSE.md`; Knowledge Map, memory, doctrine,
+  whitespace, and mdBook checks pass. No parser/runtime behavior changed.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.15.2` is active for migrating current specs/corpus/docs/KM away from `:name`
+  while compatibility remains. `.15.3` and `.15.4` own Perl and Rust retirement; `.15.5` owns final no-drift.
+
+- 2026-07-05: **SPEC-FORMAT-TERSE.11.5 — close duck-typed assignment alignment**
+  (DUCK-TYPED ASSIGNMENT LANE CLOSED; COLON-SLOT REMOVAL FRONTIER NEXT).
+
+  **Fix:** Current roadmap and Knowledge Map retrieval now describe direct RHS shape assignment as typed value
+  binding. Target-kind inference remains documented only as superseded history. The mdBook assignment/container
+  guidance already matched `.11` semantics, including explicit aggregate targets and nested no-autovivification
+  value-path writes.
+
+  **Verification:** Current-facing stale-wording scans passed after targeted roadmap/fact-card edits.
+  `KNOWLEDGE_MAP.md` was regenerated over 199 facts / 1418 question keys; mdBook, Knowledge Map, memory,
+  doctrine, and whitespace checks pass.
+
+  **Historical frontier:** At this slice, `SPEC-FORMAT-TERSE.15` was next for removing `:name` scalar-slot syntax.
+  That lane, `.8`, `.9`, and `.14` have since closed; the current active terse frontier is `.12.2`.
+
+- 2026-07-05: **SPEC-FORMAT-TERSE.11.4 — implement nested value-path assignment**
+  (NESTED VALUE-PATH DONE; DUCK-TYPED CLOSEOUT FRONTIER ACTIVE).
+
+  **Fix:** Perl and Rust now support nested direct-access assignment through scalar-held array/hash payloads, such
+  as `payload["items"][0]["name"] = value`. Writes use explicit path checks instead of Perl autovivification:
+  intermediates must exist and match shape; final hash keys may be created/replaced; final array indexes may
+  replace or append exactly at len; missing/wrong/gap paths return `undef`/`null` and leave the root unchanged.
+  Single-segment scalar-held array roots such as `payload[1] = value` now mutate the array value consistently.
+
+  **Verification:** Focused Perl syntax/probe checks pass for nested lowering, scalar-held array root mutation,
+  generated declarations, and descriptor readiness. Focused Rust `.11.4` tests pass. The oracle corpus was
+  regenerated to **92** fixtures with `terse_11_4_nested_mixed_value_path_assignment`, known `spec_spec_*`
+  generator drift restored, and the Rust corpus oracle passes.
+
+  **Frontier:** This was closed by `SPEC-FORMAT-TERSE.11.5`; current frontier is `.15`, followed by `.8` and `.9`.
+
+- 2026-07-05: **SPEC-FORMAT-TERSE.11.3 — implement Rust duck-typed assignment parity**
+  (RUST PARITY DONE; NESTED VALUE-PATH FRONTIER ACTIVE).
+
+  **Fix:** Rust bare assignment now binds the evaluated typed RHS value instead of retagging direct array/hash RHS
+  shapes into aggregate storage. `name = [value]`, `set(name, [value])`, and `=(name, [value])` store scalar-held
+  array values and yield them in value positions; `set(array(items), [value])` and `set(hash(meta), {...})` remain
+  explicit aggregate mutations. Scalar-held `array(name)` / `hash(name)` reads, `copy(...)`, aggregate-consuming
+  helper slots, and receiver chains now use guarded snapshots. The oracle pass also closed the narrow Perl
+  reference fallback where scalar-held `copy(name)` and bare array receiver chains still preferred aggregate
+  storage unless explicitly wrapped, including the generated-source declaration collector.
+
+  **Verification:** Perl syntax/probe checks for scalar-held copy/receiver readback and declaration collection
+  passed. Focused Rust runtime tests for `.11.3`, scalar-slot shorthand, aggregate assignment values, and
+  assignment-expression closure passed. The oracle corpus was regenerated to 91 fixtures with `.11.3` cases; Rust
+  corpus oracle, mdBook build, Knowledge Map, memory, doctrine, and diff checks pass. Broad phase0 completed with
+  the `.11` locks clean and one known unrelated failure in `emit_context_lowers_split_tagged_records_helper`.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.11.4` is active for nested mixed array/hash value-path reads and writes.
+  `.11.5` remains behind it for final docs/KM/corpus closeout.
+
+- 2026-07-05: **SPEC-FORMAT-TERSE.11.2 — implement Perl duck-typed assignment binding**
+  (PERL REFERENCE DONE; RUST PARITY FRONTIER ACTIVE).
+
+  **Fix:** Bare Perl assignment and `set` targets now bind typed RHS values through `$name`; direct shape RHS no
+  longer emits `@name`/`%name` or matching aggregate declarations solely from RHS shape. Explicit
+  `array(...)`/`hash(...)` targets remain aggregate mutation storage, and scalar-bound typed views read guarded
+  snapshots from `$name`.
+
+  **Verification:** Perl module/test syntax checks, `git diff --check` for touched Perl/test files, focused
+  lowering/generated-source/runtime probes, and assignment-expression closure probe passed. A broad
+  `prove -q -Iperl t/phase0_regression.t` run was interrupted after surfacing unrelated dirty-work failures and
+  stale assignment expectations updated in this slice.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.11.3` is active for Rust parity. Nested mixed value paths and docs/KM/corpus
+  closeout remain split behind `.11.3`.
+
+- 2026-07-05: **SPEC-FORMAT-TERSE.11.1 — split duck-typed assignment work**
+  (TASK-TREE SPLIT/PROBE DONE; IMPLEMENTATION FRONTIER ADVANCED).
+
+  **Fix:** Split the active duck-typed assignment leaf into signoff-sized children after codebase, mdBook, Knowledge
+  Map, and toolbox inspection. Current ground truth is recorded: Perl still infers `@name`/`%name` from direct RHS
+  shape assignment, and Rust still has matching direct-shape assignment branches.
+
+  **Verification:** `git diff --check -- CHANGES.md DEVELOPMENT_NOTES.md LIVE_ACHIEVEMENT_STATUS.md MEMORY.md docs/TASK_TREE.md docs/tasks/SPEC-FORMAT-TERSE.md`; `perl -Iperl -MLinkedSpec` module-path check; focused `call_spec_handler_subst` probes.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.11.2` is active for the Perl reference duck-typed value-binding implementation.
+  Rust parity, nested mixed value paths, and docs/KM/corpus closeout are split behind it.
+
+- 2026-07-05: **SPEC-FORMAT-TERSE.15 — track colon scalar-reference removal**
+  (TASK-TREE OWNERSHIP TRACKED; IMPLEMENTATION NOT ACTIVE).
+
+  **Fix:** Added pending ownership for removing `:name` scalar variable references from the future duck-typed
+  surface. Variables and parameters should be read as bare names in value positions, while bare names in
+  hash-literal key position remain stringified keys.
+
+  **Verification:** `git diff --check -- CHANGES.md DEVELOPMENT_NOTES.md LIVE_ACHIEVEMENT_STATUS.md MEMORY.md docs/TASK_TREE.md docs/tasks/SPEC-FORMAT-TERSE.md`.
+
+  **Frontier:** `.15` is owned and pending behind the active `.11` duck-typed semantics work. Implementation has
+  not started.
+
+- 2026-07-05: **SPEC-FORMAT-TERSE.14 — track trailing block arguments**
+  (TASK-TREE BACKLOG TRACKED; IMPLEMENTATION NOT ACTIVE).
+
+  **Fix:** Added deferred ownership for a future block-argument type on helper and receiver-method calls. Blocks
+  are final arguments only, with preferred trailing syntax such as `fn(args) { ... }`; zero-arg `fn { ... }` is
+  grammar-gated, inline `fn(args, { ... })` is deferred or allowed only if unambiguous from hash literals, and
+  closures/assignable blocks/returnable blocks remain out of scope. The leaf also requires a defined callee-side
+  block invocation surface before code.
+
+  **Verification:** `git diff --check -- CHANGES.md DEVELOPMENT_NOTES.md LIVE_ACHIEVEMENT_STATUS.md MEMORY.md docs/TASK_TREE.md docs/tasks/SPEC-FORMAT-TERSE.md`.
+
+  **Frontier:** `.14` is not PNT-eligible unless explicitly reactivated. `SPEC-FORMAT-TERSE.11` remains active.
+
+- 2026-07-05: **SPEC-FORMAT-TERSE.12/.13 — track tree traversal backlog**
+  (TASK-TREE BACKLOG TRACKED; IMPLEMENTATION NOT ACTIVE).
+
+  **Fix:** Added deferred hash-tree traversal ownership and a lower-priority array-tree traversal backlog item.
+  Hash-tree traversal is defined for future spec work as a hash root with hash interior nodes and scalar or array
+  leaves, with attached-block traversal method names, callback context, traversal order, and return/mutation policy
+  still to be specified before code.
+
+  **Verification:** `git diff --check -- CHANGES.md DEVELOPMENT_NOTES.md LIVE_ACHIEVEMENT_STATUS.md MEMORY.md docs/TASK_TREE.md docs/tasks/SPEC-FORMAT-TERSE.md`.
+
+  **Frontier:** `.12` and `.13` are not PNT-eligible unless explicitly reactivated. `SPEC-FORMAT-TERSE.11`
+  remains the active spec-first assignment-semantics owner.
+
+- 2026-07-05: **SPEC-FORMAT-TERSE.11 — track nested typed-value paths**
+  (TASK-TREE ACCEPTANCE REFINED; IMPLEMENTATION PENDING).
+
+  **Fix:** Expanded the active duck-typed assignment leaf to require deeply nested references and assignments
+  through mixed array/hash value trees in arbitrary combinations. The implementation must define intermediate
+  container behavior explicitly instead of inheriting Perl autovivification behavior by accident.
+
+  **Verification:** `git diff --check -- CHANGES.md DEVELOPMENT_NOTES.md LIVE_ACHIEVEMENT_STATUS.md MEMORY.md docs/TASK_TREE.md docs/tasks/SPEC-FORMAT-TERSE.md`.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.11` remains active.
+
+- 2026-07-05: **SPEC-FORMAT-TERSE.11 — activate duck-typed assignment semantics**
+  (TASK-TREE OWNERSHIP ACTIVE; IMPLEMENTATION PENDING).
+
+  **Fix:** Added active task-tree ownership for duck-typed `.spec` assignment semantics. The accepted direction is
+  that `name = value` binds a runtime typed value rather than exposing Perl `$/@/%` storage classes. Explicit
+  aggregate RHS forms `name = [...]` and `name = {...}` are the MVP; delimiterless aggregate RHS sugar remains out
+  of scope unless a later leaf owns it.
+
+  **Verification:** `git diff --check -- docs/TASK_TREE.md docs/tasks/SPEC-FORMAT-TERSE.md MEMORY.md`.
+
+  **Frontier:** `SPEC-FORMAT-TERSE.11` is active and spec-first. In-flight `SPEC-FORMAT-TERSE.8` helper-removal
+  work remains owned and must align with `.11`; `.9` colon hash-literal syntax follows; `.10` dynamic/computed
+  hash keys remains deferred/potential.
+
+- 2026-07-04: **TRACE-OBSERVABILITY.4.5 — close trace parity proof**
+  (TRACE PARITY PROOF DONE; TRACE-OBSERVABILITY TREE CLOSED).
+
+  **Fix:** Proved the mdBook-documented external trace capability contract across Perl and Rust, updated the common
+  book with the future-variant checklist, and added Rust unit coverage for structured dump/log trace primitives.
+  Rust can now claim trace parity for the behavioral contract: ordered levels, normal-entrypoint controls,
+  stdout/routed-file/mirror sinks, routed-file reset, default-quiet behavior, structured scope and branch events,
+  mark/capture/source-boundary events where implemented, and dump/log diagnostics.
+
+  **Verification:** Perl CLI/help plus the nine-file Perl trace suite pass; Rust core trace tests and runtime trace
+  controls pass; mdBook, Knowledge Map, memory/doctrine, whitespace, and full local CI are part of the `.4.5`
+  commit workflow.
+
+  **Frontier:** no `TRACE-OBSERVABILITY` leaf remains. Return to the active task-tree index; listed remaining
+  frontiers are paused or deferred unless explicitly reactivated.
+
+- 2026-07-04: **TRACE-OBSERVABILITY.4.4 — add Rust runtime trace events**
+  (RUST INTERPRETED/GENERATED-PLAN RUNTIME TRACE EVENTS DONE; TRACE TREE CLOSED AFTER .4.5).
+
+  **Fix:** Wired Rust traced runtime execution through the shared `linkedspec-core::trace` model without changing
+  default quiet entrypoints. Interpreted traces now report `rust_runtime:engine:*` top-rule, rule entry/exit,
+  recursion-cutoff, child/passive-terminal dispatch, regex match/no-match, acode/bcode dispatch, lifecycle block,
+  statement-form `if`/`switch`, helper `call(child)`, and mark/capture helper events. Generated-plan traces now
+  report `rust_runtime:generated_plan:*` top-rule, family/direct-rule, recursion, child, regex, acode/bcode, and
+  AND-sequence decisions.
+
+  **Verification:** Focused Rust trace controls/runtime tests, source-emitter tests, core trace tests, formatting,
+  mdBook, Knowledge Map, memory/doctrine, whitespace, and full local CI gates are part of the `.4.4` commit workflow.
+  A diagnostic full Rust runtime `integration_test` still has the known residual 9 failures and is not the `.4.4`
+  acceptance gate.
+
+  **Frontier:** `TRACE-OBSERVABILITY.4.5`; `.4.5` has since closed and the trace tree is done.
+
+- 2026-07-04: **TRACE-OBSERVABILITY.4.3 — add Rust compile/spec-parser trace events**
+  (RUST COMPILE/SPEC-PARSER/STAGED-DISPATCH EVENTS DONE; `.4.4` HAS SINCE CLOSED; TRACE TREE CLOSED AFTER .4.5).
+
+  **Fix:** Wired the shared Rust trace emitter through core parse, validation, compile, dependency-regex mapping,
+  full-spec user-function parsing, and staged parse-job dispatch. Routed debug traces now include
+  `rust_core:parse_spec`, validation pass decisions, `rust_core:compile` rule/function decisions,
+  `rust_core:compile:dependency_regex_map`, user-function-definition parser phases, full-spec function projection,
+  and staged dispatcher normalize/queue/resolve/load/compile/execute decisions.
+
+  **Verification:** Focused Rust trace controls, core trace unit tests, and source-emitter tests pass. mdBook,
+  Knowledge Map, memory/doctrine, whitespace, and full local CI gates are part of the `.4.3` commit workflow.
+  `.4.4` has since added runtime branch/mark/capture events, and `.4.5` has since closed the documented contract
+  proof.
+
+  **Frontier at completion:** `TRACE-OBSERVABILITY.4.4`; `.4.4` and `.4.5` have since closed and the trace tree is
+  done.
+
+- 2026-07-04: **TRACE-OBSERVABILITY.4.2 — add Rust trace controls**
+  (RUST TRACE CONTROLS/SINKS DONE; `.4.3`/`.4.4` HAVE SINCE CLOSED; TRACE TREE CLOSED AFTER .4.5).
+
+  **Fix:** Added the shared Rust trace control layer in `linkedspec-core::trace`: ordered levels and `DUMP_*`
+  constants, `TraceConfig`, `TraceSinkMode`, `TraceEmitter`, environment-derived configuration, stdout/routed-file/
+  mirror sinks, routed-file reset, and structured event primitives. `linkedspec-runtime::trace` re-exports the same
+  surface, and opt-in traced entrypoints now exist beside core parse/validate/compile, full-spec user-function
+  parsing, staged parse jobs, interpreter execution, generated-plan execution, generated parser execution, and
+  emitted generated module `parse_with_trace(...)`.
+
+  **Verification:** `cargo test -p linkedspec-core trace`; `cargo test -p linkedspec-runtime --test trace_controls`;
+  `cargo test -p linkedspec-runtime --test source_emitter`; `cargo fmt`; mdBook; Knowledge Map; memory/doctrine;
+  whitespace; full local CI. Full local CI includes phase0 at 1021 green. `.4.3` has since added compile/
+  spec-parser/staged-dispatch events, `.4.4` has since added runtime branch/mark/capture events, and `.4.5` has
+  since closed the parity proof.
+
+  **Frontier at completion:** `TRACE-OBSERVABILITY.4.3`; `.4.3` through `.4.5` have since closed and the trace tree
+  is done.
+
+- 2026-07-04: **TRACE-OBSERVABILITY.4.1 — map Rust trace parity design**
+  (RUST TRACE PARITY DESIGN INVENTORY DONE; `.4.2`/`.4.3`/`.4.4` HAVE SINCE CLOSED; TRACE TREE CLOSED AFTER .4.5).
+
+  **Fix:** Mapped the mdBook trace contract onto Rust's real entrypoints and owner boundaries before code.
+  `linkedspec-core` must own or expose the shared Rust trace levels/configuration/sink/event primitives because it
+  owns parsing, validation, compilation, dependency-regex resolution, and compiled contract types.
+  `linkedspec-runtime` then reuses the same model for full-spec user-function parsing, staged parser dispatch, interpreter
+  execution, generated-plan execution, lifecycle blocks, rule dispatch, statement controls, repetition/AND/OR
+  branch choices, and mark/capture helper operations.
+
+  **Verification:** Targeted Rust inventory covered the core parser/compiler/type surfaces, runtime spec parser,
+  engine, runtime context, source emitter, and public Rust harnesses. mdBook, Knowledge Map, memory/doctrine,
+  whitespace, and local CI pass. An over-broad `cargo test` attempt failed in existing runtime integration tests
+  with no Rust source diff, so `.4.1` uses the repo local CI gate for this docs/design slice.
+
+  **Frontier at completion:** `TRACE-OBSERVABILITY.4.2`; `.4.2` through `.4.5` have since closed and the trace tree
+  is done.
+
+- 2026-07-04: **TRACE-OBSERVABILITY.3.5 — close trace contract and split parity**
+  (TRACE CONTRACT CLOSEOUT DONE; `.4.1`/`.4.2`/`.4.3`/`.4.4` HAVE SINCE CLOSED; TRACE TREE CLOSED AFTER .4.5).
+
+  **Fix:** Closed the overall trace no-drift/contract leaf. The mdBook now presents trace as a variant-neutral
+  external contract: ordered levels, normal-entrypoint controls, stdout/routed-file/mirror sink behavior, file reset,
+  enter/exit scope events, decision/branch events, mark/capture events where applicable, dump/log events, and
+  unchanged default output. The required backend parity lane is split into `.4.*` leaves before Rust trace code.
+
+  **Verification:** `perl bin/linkedspec --help` shows the trace controls; the nine-file Perl trace regression suite
+  passes across CLI, generated-handler helper, non-REP dispatch, REP dispatch, RuleIR, EmitContext, ActionIR
+  pipeline, compact lowerers, and MethodLowering; and `rg` over `rust/` excluding corpus fixtures finds no
+  trace-control/API surface yet, confirming `.4.*` is required.
+
+  **Frontier at completion:** `TRACE-OBSERVABILITY.4.1`; `.4.1` through `.4.5` have since closed and the trace tree
+  is done.
+
+- 2026-07-04: **TRACE-OBSERVABILITY.3.4.6 — close compile ActionIR trace coverage**
+  (COMPILE/ACTIONIR TRACE COVERAGE CLOSED; `.3.5` HAS SINCE CLOSED).
+
+  **Fix:** Closed the compile/ActionIR trace lane after the planned Perl reference owner namespaces were covered:
+  RuleIR planning, EmitContext owner bridge/rewrite orchestration, ActionIR scanner/canonical/diagnostic/rewrite
+  pipeline, compact lowerers, and MethodLowering. A representative descriptor compile now shows those namespaces
+  together and keeps the descriptor language-agnostic ready.
+
+  **Verification:** A routed debug `LinkedSpec::Get(... return_descriptor => 1, trace_level => 'debug')` probe over
+  return/set/receiver/control paths emitted `rule_ir`, `emit_context`, `actionir:scanner`,
+  `actionir:rewrite_pipeline`, `actionir:control_flow`, and `actionir:method_lowering` decisions with
+  `ready=1 raw=0 unresolved=0`. mdBook, Knowledge Map, memory/doctrine, whitespace, and full local CI pass. Full
+  local CI includes phase0 at 1021 green.
+
+  **Frontier at completion:** `TRACE-OBSERVABILITY.3.5`; `.3.5` has since closed and current frontier is
+  `TRACE-OBSERVABILITY.4.2`.
+
+- 2026-07-04: **TRACE-OBSERVABILITY.3.4.5 — trace MethodLowering decisions**
+  (METHODLOWERING TRACE CLOSED; `.3.4.6` HAS SINCE CLOSED).
+
+  **Fix:** `perl/LinkedSpec/ActionIR/MethodLowering.pm` now emits debug-level
+  `DECISION actionir:method_lowering:<phase>:<label>:<decision>` events for helper-family selection,
+  AST-vs-string fallback/bypass choices, unsupported helper exits, receiver-chain family transitions,
+  assignment/mutation operators, mutation-slot value classification, return-payload fallback choices, and the
+  `_lower_assign_statement` enter/exit boundary. The hooks use the shared lazy ActionIR trace seam, so require-only
+  MethodLowering consumers and untraced owner calls still do not load `LinkedSpec::Trace`.
+
+  **Verification:** `perl -c` coverage for `MethodLowering.pm` and `t/trace_actionir_method_lowering.t`, focused
+  MethodLowering trace `prove`, adjacent RuleIR/EmitContext/ActionIR trace suites, ActionIR AST focused suite,
+  mdBook, Knowledge Map, memory/doctrine, whitespace, and full local CI pass. Full local CI includes phase0 at
+  1021 green.
+
+  **Frontier at completion:** `TRACE-OBSERVABILITY.3.4.6`; `.3.4.6` has since closed and current frontier is
+  `TRACE-OBSERVABILITY.3.5`.
+
+- 2026-07-04: **TRACE-OBSERVABILITY.3.4.4 — trace compact ActionIR lowerers**
+  (COMPACT ACTIONIR LOWERER TRACE CLOSED; `.3.4.5` HAS SINCE CLOSED).
+
+  **Fix:** `FlowExpr`, `ValueExpr`, `ArrayPipeline`, `DeclareMethod`, and `ControlFlow` now emit debug-level
+  `DECISION actionir:<owner>:<phase>:<label>:<decision>` events and matching owner scopes for the compact lowering
+  decisions outside `MethodLowering`. The trace reports flow-expression families, value direct access and
+  assignment-source choices, array-pipeline plan/op construction, declaration initializer and set routing, and
+  attached/inline/marker if/switch control paths. The book/task-tree now also state the trace capability contract
+  as variant-agnostic: Perl reference mechanics are not enough for Rust/future trace parity unless the user-visible
+  controls, levels, event classes, and sink behavior are equivalent. `MethodLowering.pm` remains owned by `.3.4.5`.
+
+  **Verification:** `perl -c` coverage for the touched compact ActionIR owners and
+  `t/trace_actionir_compact_lowerers.t`, focused compact-lowerer trace `prove`, adjacent RuleIR/EmitContext/
+  ActionIR pipeline trace suites, ActionIR AST focused suite, mdBook, Knowledge Map, memory/doctrine, whitespace,
+  and full local CI pass. Full local CI includes phase0 at 1021 green.
+
+  **Frontier at completion:** `TRACE-OBSERVABILITY.3.4.5`; `.3.4.5` and `.3.4.6` have since closed and current
+  frontier is `TRACE-OBSERVABILITY.4.3`.
+
+- 2026-07-04: **TRACE-OBSERVABILITY.3.4.3 — trace ActionIR pipeline decisions**
+  (ACTIONIR PIPELINE TRACE CLOSED; `.3.4.4` HAS SINCE CLOSED).
+
+  **Fix:** `perl/LinkedSpec/ActionIR/Trace.pm` now provides the shared lazy formatting seam for ActionIR owner
+  internals, and the scanner, scanner-core, canonical-events, diagnostics, and rewrite-pipeline owners emit
+  debug-level `DECISION actionir:<owner>:<phase>:<label>:<decision>` events plus matching owner scopes. The trace
+  reports helper-event discovery, canonical queue/fallback decisions, unresolved helper diagnostics, RAW_PERL and
+  unmatched-event fallback handling, source-span/contract skips, and implicit attached-if closure insertion or
+  append decisions without loading `LinkedSpec::Trace` for require-only consumers.
+
+  **Verification:** `perl -c` coverage for the touched ActionIR owners and `t/trace_actionir_pipeline.t`, focused
+  `prove` for the new ActionIR pipeline trace regression, adjacent RuleIR/EmitContext/generated-handler trace
+  suites, mdBook, Knowledge Map, memory/doctrine, whitespace, and full local CI pass. Full local CI includes phase0
+  at 1021 green.
+
+  **Frontier at completion:** `TRACE-OBSERVABILITY.3.4.4`; `.3.4.4` through `.3.5` have since closed and current
+  frontier is `TRACE-OBSERVABILITY.4.3`.
+
+- 2026-07-04: **TRACE-OBSERVABILITY.3.4.2 — trace EmitContext owner bridge**
+  (EMITCONTEXT OWNER-BRIDGE TRACE CLOSED; `.3.4.3` HAS SINCE CLOSED).
+
+  **Fix:** `perl/LinkedSpec/RuleIR/EmitContext.pm` now emits debug-level
+  `DECISION emit_context:<phase>:<label>:<decision>` events and matching owner/rewrite scopes for ActionIR owner
+  package resolution, callback lookup, default dependency bundles, current function-registry injection,
+  bare-symbol-kind injection, compatibility fallback paths, canonical rewrite-pipeline use, and rule emit-context
+  build boundaries. Trace remains lazy for require-only EmitContext consumers and preserves delegated return
+  context.
+
+  **Verification:** `perl -c -Iperl perl/LinkedSpec/RuleIR/EmitContext.pm`,
+  `perl -c -Iperl t/trace_emit_context_bridge.t`, focused `prove`, paired RuleIR/EmitContext trace `prove`,
+  mdBook, Knowledge Map, memory/doctrine, whitespace, and full local CI pass. Full local CI includes phase0 at
+  1021 green.
+
+  **Frontier at completion:** `TRACE-OBSERVABILITY.3.4.3`; `.3.4.3` has since closed and current frontier is
+  `TRACE-OBSERVABILITY.3.5`.
+
+- 2026-07-04: **TRACE-OBSERVABILITY.3.4.1 — trace RuleIR planning decisions**
+  (RULEIR PLANNING TRACE CLOSED; EMITCONTEXT FRONTIER HAS SINCE CLOSED).
+
+  **Fix:** `perl/LinkedSpec/RuleIR.pm` now emits debug-level
+  `DECISION rule_ir:<phase>:<rule>:<decision>` events for collection routing, explicit ACODE/BCODE edges,
+  per-regex lifecycle routing, `MOVE_POS`/`MARK_POS` LECODE lowering, handler-variant selection, action-mode/
+  execution-shape planning, and mixed-action validation. Normal descriptor compilation with
+  `trace_level => 'debug'` exposes those decisions without changing parser metadata or generated behavior.
+
+  **Verification:** `perl -c -Iperl perl/LinkedSpec/RuleIR.pm`,
+  `perl -c -Iperl t/trace_ruleir_planning.t`, focused `prove`, mdBook, Knowledge Map, memory/doctrine,
+  whitespace, and full local CI pass.
+
+  **Frontier at completion:** `TRACE-OBSERVABILITY.3.4.2`; `.3.4.2` through `.3.5` have since closed and current
+  frontier is `TRACE-OBSERVABILITY.4.3`.
+
+- 2026-07-04: **TRACE-OBSERVABILITY.3.4 — split compile action trace coverage**
+  (COMPILE/ACTIONIR TRACE COVERAGE SPLIT; RULEIR FRONTIER HAS SINCE CLOSED).
+
+  **Split:** A read-only owner audit showed the compile/ActionIR trace leaf spans `RuleIR.pm`,
+  `RuleIR/EmitContext.pm`, the scanner/canonical/diagnostic/rewrite owners, compact value/flow/control/declaration/
+  array lowering owners, and the large `ActionIR::MethodLowering` owner. The parent `.3.4` is now split into
+  signoff-sized children: `.3.4.1` RuleIR planning, `.3.4.2` EmitContext bridge, `.3.4.3` scanner/canonical/
+  diagnostics/rewrite, `.3.4.4` compact lowering owners, `.3.4.5` MethodLowering, and `.3.4.6` closeout.
+
+  **Verification:** Read-only `rg` trace call-site inventory, owner sizing with `wc -l`, targeted reads of RuleIR
+  and EmitContext, and ActionIR owner inventory. No runtime/code behavior changed in the split.
+
+  **Frontier at completion:** `TRACE-OBSERVABILITY.3.4.1`; `.3.4.1` through `.3.5` have since closed and current
+  frontier is `TRACE-OBSERVABILITY.4.3`.
+
+- 2026-07-04: **TRACE-OBSERVABILITY.3.3 — trace repetition generated paths**
+  (REP GENERATED HANDLER BRANCH TRACE CLOSED; TRACE-OBSERVABILITY.3.4 HAS SINCE SPLIT).
+
+  **Fix:** Perl generated handlers for repetition runtime paths now wrap REP loop branch conditions with
+  `LinkedSpec::Trace::trace_generated_handler_branch(...)`. Debug trace now reports REP loop entry,
+  per-iteration success/failure, min-satisfied stop decisions, max-bound continuation/cutoff decisions, `REP_ACODE`
+  match/acode-index dispatch, and bcode REP zero-progress cutoffs. Nested non-REP bcode helper calls stay quiet
+  inside REP coderefs so REP trace lines remain loop-owned.
+
+  **Verification:** `perl -c -Iperl perl/LinkedSpec/HandlerVariantEmitter.pm`,
+  `perl -c -Iperl t/trace_generated_rep_dispatch.t`, focused REP and non-REP `prove` runs, mdBook, Knowledge Map,
+  memory/doctrine, whitespace, and full local CI pass. The REP regression locks runtime traces for `REP_ACODE` and
+  `REP_AND_ACODE` and source-locks all four REP template families.
+
+  **Frontier at completion:** `TRACE-OBSERVABILITY.3.4`; `.3.4` has since split, `.3.4.1` through `.3.4.6` have
+  since closed, and `TRACE-OBSERVABILITY` has since closed.
+
+- 2026-07-04: **TRACE-OBSERVABILITY.3.2 — trace non-repetition generated dispatch**
+  (NON-REP GENERATED HANDLER BRANCH TRACE CLOSED; TRACE-OBSERVABILITY.3.3 HAS SINCE CLOSED).
+
+  **Fix:** Perl generated handlers for non-repetition runtime paths now wrap emitted branch conditions with
+  `LinkedSpec::Trace::trace_generated_handler_branch(...)`. Debug trace now reports match/miss, `LX` no-match,
+  acode index dispatch, AND sequence index checks, bcode child-call dispatch, and bcode child-result decisions
+  inside generated handler bodies. Repetition loop min/max/zero-progress branches have since closed under `.3.3`.
+
+  **Verification:** `perl -c -Iperl perl/LinkedSpec/HandlerVariantEmitter.pm`,
+  `perl -c -Iperl t/trace_generated_nonrep_dispatch.t`, and focused `prove` pass. The regression isolates runtime
+  trace from compile-time bootstrap trace and source-inspects a REP handler; the REP assertion has since been
+  updated under `.3.3` to expect REP instrumentation. `tools/run_ci_local.sh` passes with phase0 at 1021 green.
+
+  **Frontier at completion:** `TRACE-OBSERVABILITY.3.3`; `.3.3` has since closed, `.3.4` has since split, `.3.4.1`
+  through `.4.1` have since closed, and `TRACE-OBSERVABILITY` has since closed.
+
+- 2026-07-04: **TRACE-OBSERVABILITY.3.1 — add generated-handler trace helper seam**
+  (HELPER CONTRACT CLOSED; TRACE-OBSERVABILITY.3.2 HAS SINCE CLOSED).
+
+  **Fix:** Added `LinkedSpec::Trace::trace_generated_handler_branch(%args)`, the reusable Perl reference helper
+  that generated handler templates can use for branch decisions. It returns the original branch boolean, emits a
+  `generated_handler_branch:<handler_kind>:<rule_label>:<branch>` decision when tracing is enabled, skips lazy
+  detail builders when trace is disabled, and captures detail-builder errors without perturbing parser behavior.
+
+  **Verification:** `perl -c -Iperl perl/LinkedSpec/Trace.pm`, `perl -c -Iperl t/trace_generated_handler_branch.t`,
+  focused `prove`, mdBook, Knowledge Map, memory/doctrine, whitespace, and `tools/run_ci_local.sh` pass. Full local
+  CI includes phase0 at 1021 green. Template call-site wiring was left to `.3.2` and `.3.3`; `.3.2` has since
+  closed non-repetition template wiring.
+
+  **Frontier at completion:** `TRACE-OBSERVABILITY.3.2`; `.3.2` and `.3.3` have since closed, `.3.4` has since
+  split, `.3.4.1` through `.4.1` have since closed, and `TRACE-OBSERVABILITY` has since closed.
+
+- 2026-07-04: **TRACE-OBSERVABILITY.3 — split trace coverage extension**
+  (DOCS-ONLY SPLIT CLOSED; TRACE-OBSERVABILITY.3.1 HAS SINCE CLOSED).
+
+  **Split:** The broad "see everything" coverage leaf is now a sequence of executable children: `.3.1` generated
+  handler trace helper seam, `.3.2` non-repetition generated dispatch decisions, `.3.3` repetition/min/max/
+  zero-progress paths, `.3.4` compile/ActionIR owner scopes, and `.3.5` coverage closeout plus backend-parity
+  split decision.
+
+  **Verification:** Task-tree/frontier review plus memory/doctrine/Knowledge Map/whitespace gates. No runtime or
+  CLI behavior changed in this split.
+
+  **Frontier at completion:** `TRACE-OBSERVABILITY.3.1`; `.3.1` through `.4.5` have since closed and the trace tree
+  is done.
+
+- 2026-07-04: **TRACE-OBSERVABILITY.2 — add trace CLI control**
+  (DISCOVERABLE TRACE CONTROL CLOSED; TRACE-OBSERVABILITY.3 HAS SINCE SPLIT).
+
+  **Fix:** Added `bin/linkedspec`, a Perl reference compile/run CLI that exposes existing trace controls through
+  `--trace`, `--trace-file`, `--trace-mode`, `--trace-reset`, and `--trace-emoji`. The runner supports named specs,
+  spec files, or inline spec source plus inline/file input, and prints parser results as canonical JSON. Routed
+  trace mode keeps human trace output out of machine-readable stdout.
+

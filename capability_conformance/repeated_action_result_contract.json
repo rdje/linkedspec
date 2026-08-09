@@ -741,7 +741,7 @@
         "required_markers": ["repeated-action recurring/public no-drift is closed at 8 complete / 0 pending"]
       },
       {
-        "path": "LIVE_ACHIEVEMENT_STATUS.md",
+        "path": "docs/decisions/0067-live-achievement-status-history.md",
         "required_markers": ["FUTURE-PARITY-BACKLOG.9.1.10.7 — close repeated-action public no-drift", "Repeated-action rollout is closed at 8 complete / 0 pending"]
       },
       {
@@ -808,7 +808,7 @@
       {"path": "docs/linkedspec-book/src/appendix/runtime-semantics.md", "text": "7 complete / 1 pending"},
       {"path": "docs/knowledge/explicit-or-action-result-shape-parity-gap.md", "text": "public rollout pending FUTURE-PARITY-BACKLOG.9.1.10.7"},
       {"path": "docs/tasks/FUTURE-PARITY-BACKLOG.md", "text": "Dual-ABI Lua `.9.1.10.5` is the next eligible leaf"},
-      {"path": "LIVE_ACHIEVEMENT_STATUS.md", "text": "`FUTURE-PARITY-BACKLOG.9.1.10.6` is active task-tree-first"}
+      {"path": "docs/decisions/0067-live-achievement-status-history.md", "text": "`FUTURE-PARITY-BACKLOG.9.1.10.6` is active task-tree-first"}
     ]
   },
   "closure": {

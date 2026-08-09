@@ -39,8 +39,11 @@ This document defines the standard commit workflow for this repository so any ne
 ### 5) `LIVE_ACHIEVEMENT_STATUS.md`
 - **Type:** persistent, git-tracked live batch status.
 - **Purpose:** preserve current batch progress, latest completed slice, and immediate next direction for crash recovery and handoff.
-- **Lifecycle:** update for each accepted implementation slice when batch/workflow status changes.
-- **Important:** this file is cumulative/current-state documentation and is not reset.
+- **Lifecycle:** overwrite the fixed `Current Activity`, `Latest Completed Slice`, and `Next Action` sections for
+  each accepted slice; retain at most sixteen one-line `Recent Completions` rows; keep the `History` query section.
+- **Important:** this file is a bounded current view (≤256 lines / 32,768 bytes), not a cumulative chronology.
+  Exact older bytes live in `docs/history/live-achievement-status/manifest.jsonl` plus immutable segments and are
+  reconstructed with `perl tools/read_document_history.pl --surface live_status --all`.
 
 ### 6) Source/test/docs changed by the task
 - Examples: `perl/LinkedSpec.pm`, `t/phase0_regression.t`, `USER_GUIDE.md`, etc.
@@ -81,7 +84,8 @@ This document defines the standard commit workflow for this repository so any ne
    - Add concise but precise entries to:
      - `CHANGES.md`
      - `DEVELOPMENT_NOTES.md`
-     - `LIVE_ACHIEVEMENT_STATUS.md`
+   - Overwrite the current sections of `LIVE_ACHIEVEMENT_STATUS.md`; do not append historical paragraphs. Keep at
+     most sixteen recent one-line rows and preserve its exact history-query section.
    - **Overwrite** the current-state block in `MEMORY.md` (the bounded resume pointer, layer A — do not append; keep within the size cap). Set `activation_commit` to the current clean `HEAD` from which this leaf started; write the remaining fields as the intended clean post-landing handoff (completed leaf/subject, next action, and no in-flight uncommitted work). Git remains the current-commit authority. If the slice established a durable cross-cutting fact, add or refresh a record under `docs/decisions/` (layer C).
    - If the completed activity belongs to a task-tree leaf, update the owning `docs/tasks/*.md` file (node status, verification log, commit log, blockers, decisions, and changelog).
    - Include validation commands/results.

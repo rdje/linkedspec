@@ -269,7 +269,7 @@
       {"path": "ROADMAP.md", "required_markers": ["ledger is 8 complete / 0 pending", "parent `.5.2` is done"]},
       {"path": "ROADMAP_V2.md", "required_markers": ["ledger is 8 complete / 0 pending", "parent `.5.2` is done"]},
       {"path": "ARCHITECTURE_STATE.md", "required_markers": ["logical public no-drift", "8 complete / 0 pending"]},
-      {"path": "LIVE_ACHIEVEMENT_STATUS.md", "required_markers": ["FUTURE-PARITY-BACKLOG.5.2.9 — close logical-helper public no-drift", "8 complete / 0 pending"]},
+      {"path": "docs/decisions/0067-live-achievement-status-history.md", "required_markers": ["FUTURE-PARITY-BACKLOG.5.2.9 — close logical-helper public no-drift", "8 complete / 0 pending"]},
       {"path": "docs/TASK_TREE.md", "required_markers": ["Logical helper parent `.5.2` is closed at 8/0"]},
       {"path": "docs/knowledge/logical-helper-neutral-contract.md", "required_markers": ["8 complete / 0 pending", "public no-drift"]}
     ],

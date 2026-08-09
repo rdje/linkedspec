@@ -280,7 +280,7 @@ PUBLIC_CONTRACT = {
             "74 migration files / 8 complete + 0 pending / 60 mutations",
         ),
         public_document(
-            "LIVE_ACHIEVEMENT_STATUS.md",
+            "docs/decisions/0067-live-achievement-status-history.md",
             "FUTURE-PARITY-BACKLOG.9.1.9 — close cursor public no-drift",
             "74 migration files / 8 complete + 0 pending / 60 mutations",
         ),

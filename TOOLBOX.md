@@ -34,6 +34,9 @@ supporting techniques** that complement them. (Always run with `perl -Iperl …`
   `doctrine/readme_stability/routes.jsonl` must exactly cover 62 actual reader/author routes across 20 controlled
   surfaces; closure, existence, lifecycle controls, debt growth, staged-result agreement, and every threshold
   increase fail closed. Its in-memory mutation oracle reports 32/32 before the doctrine can pass.
+  `DOCUMENT-HISTORY` ([`scripts/check_document_history.sh`](scripts/check_document_history.sh)) independently
+  verifies bounded current views, strict manifests, immutable repository-local segments, exact clean-Git
+  reconstruction, and queryability. Use `tools/read_document_history.pl` instead of scanning old live prose.
 
 ### The task-acceptance checklist (recommended for any code-change leaf)
 
@@ -84,6 +87,7 @@ check, not proof that the cited commands were run.
 | "Is the suite green? did my change move exactly the right tests?" | [§5.1 phase0 gate](#51-the-phase0-regression-gate-tphase0_regressiont) + [§6.1 `comm`](#61-comm-failing-set-diff-the-no-regression-proof) |
 | "A parse hangs / burns CPU — which file, regex blowup?" | [§6.3 fork+SIGKILL census](#63-forksigkill-hard-timeout-census-alarm-cannot-kill-a-regex) |
 | "Did I already establish this fact? (avoid archaeology)" | [§5.2 Knowledge Map grep](#52-knowledge-map-grep-before-re-deriving) |
+| "Where is an older live-status completion or exact chronology?" | [§5.3 document-history query](#53-document-history-query-and-doctrine) |
 | "Where should this workflow put temporary/package/build data, and how do I recover a run?" | [§4.4.1 project-data environment](#441-toolsproject_data_envsh--repo-filesystem-project-state) + [§4.4.2 run lifecycle](#442-toolsproject_data_runsh--per-run-scratch-lifecycle) |
 
 ---
@@ -1058,9 +1062,20 @@ trap 'rm -rf -- "$diagnostic_root"' EXIT
   archaeology). **HOW:** `grep -i "<question>" KNOWLEDGE_MAP.md` → follow the pointer → trust the dated
   fact or run its `reverify`. Write a new card when you establish a durable fact.
 
-### 5.3 Doctrine / memory gates
+### 5.3 Document-history query and doctrine
+- **WHAT:** `tools/read_document_history.pl` reads strict root-relative JSONL manifests and immutable segments;
+  `scripts/check_document_history.sh` validates schema, identity, order, counts/digests, byte-exact Git-source
+  reconstruction, current-view limits, and consumer decoupling.
+- **WHEN:** use `--grep '<literal>'` before searching old live chronology, `--segment NNNN` for bounded raw bytes,
+  and `--all` only for exact complete reconstruction. Never infer current capability state from an archive.
+- **HOW:** `perl tools/read_document_history.pl --surface live_status --grep 'needle'` and
+  `bash scripts/check_document_history.sh`. Initial snapshots are created deterministically with
+  `perl tools/build_document_history.pl` from a named clean 40-hex source commit.
+
+### 5.4 Doctrine / memory gates
 - `bash scripts/check_doctrines.sh` (driver — runs every registered check) ·
   `bash scripts/check_memory_architecture.sh` · `bash knowledge-map/scripts/check_knowledge_map.sh` ·
+  `bash scripts/check_document_history.sh` ·
   `bash scripts/check_diagnosis_evidence.sh` (staged task-acceptance evidence gate).
 - `bash scripts/check_project_data_storage_locality.sh` directly runs the `PROJECT-DATA-STORAGE` structural
   doctrine. It scans current code/config/test/tool and command-guidance surfaces, including Knowledge `reverify:`

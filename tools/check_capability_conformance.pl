@@ -114,7 +114,7 @@ my @expected_public_projections = (
   required_markers => ['schema v2 with exactly two status-fresh records:', $public_close_marker],
  },
  {
-  path => 'LIVE_ACHIEVEMENT_STATUS.md',
+  path => 'docs/decisions/0067-live-achievement-status-history.md',
   required_markers => ['Capability exclusion public no-drift is closed', $public_close_marker],
  },
  {

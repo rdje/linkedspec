@@ -1,7 +1,7 @@
 # ADR 0066: Live documentation uses bounded views over verified durable stores
 
 - Date: 2026-08-09
-- Status: accepted direction; descriptor contract frozen, migrations pending under
+- Status: accepted direction; descriptor contract frozen, live-status migration implemented, remaining migrations pending under
   `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.1-.4`
 - Tags: architecture, documentation, history, task-tree, retrieval, pressure, continuity, doctrine
 
@@ -177,7 +177,8 @@ No off-volume copy, temporary root, cache, or generated owner is introduced.
 - Stable task IDs survive physical partitioning; checkers no longer depend on a historical monolith.
 - Routing-pressure debt baselines stay immutable and are replaced by reviewed current contracts, not refreshed.
 - Archive parts are immutable data, not user-facing book chapters or new append sinks.
-- The migrations require checker/workflow changes and execution-time ADRs; this planning leaf moves no content.
+- The migrations require checker/workflow changes and execution-time ADRs. Live status is implemented under ADR
+  `0067`; future-task and changes/notes migrations remain pending.
 
 ## Links
 

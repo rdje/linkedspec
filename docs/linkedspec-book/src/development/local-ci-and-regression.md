@@ -35,8 +35,9 @@ The data-only registry declares 62 routes over 20 surfaces. The checker independ
 routes, five policy/enforcement reader routes, 18 policy author-overflow routes, and the actual failure hints; it
 rejects any mismatch, missing or symlinked local target, route cycle, incompatible lifecycle/control, stale
 generated owner, unowned debt growth, staged/worktree split, or unreviewed threshold increase. Its in-memory
-mutation oracle must report 32/32. Large live status, task evidence, change history, and engineering notes remain
-immutable measured debt pending their separately owned containment work; their ceilings are not healthy defaults.
+mutation oracle must report 32/32. At adoption, live status, task evidence, change history, and engineering notes
+were immutable measured debt. Live status is now current/bounded under ADR `0067`; the other three retain their
+separate owners and their ceilings are not healthy defaults.
 
 `README-STABILITY-POLICY.4.1` canonical admission passes that unconditional doctrine together with the other six
 registered doctrines, repository containment and moved-root execution, primary CLI 66/66 in both option
@@ -47,23 +48,24 @@ wrapper, doctrine registry, and canonical driver from commit `5c570719`. It inde
 62 routes, 32/32 mutations, seven doctrines, semantic/MCP/cursor admission, containment/moved-root execution,
 primary CLI 66/66 twice, RAM 52%, and Phase 0 1,031/1,031 in 673 seconds. The revision closes without a new oracle.
 
-#### Planned bounded views over exact history
+#### Bounded views over exact history
 
-ADR `0066` defines the migration contract for the four measured debt families. This is currently an accepted
-plan, not shipped store tooling: the original files and route controls remain unchanged until their owning leaves
-land.
+ADR `0066` defines the migration contract for the four measured debt families. Live status is now implemented;
+the future task, changes, and engineering-notes stores remain owned by the next migration leaves.
 
-The audit found two important machine interfaces. Seven capability/public-closeout families still require
-historical markers from `LIVE_ACHIEVEMENT_STATUS.md`. Four executable checkers and two contract projections read
+The audit found two important machine interfaces. Seven capability/public-closeout families previously required
+historical markers from `LIVE_ACHIEVEMENT_STATUS.md`; six JSON projections and seven executable checkers now use
+indexed ADR `0067` as current decision authority instead. Four executable checkers and two contract projections read
 exact task nodes, statuses, and evidence from `docs/tasks/FUTURE-PARITY-BACKLOG.md`. The live migration must first
 move current assertions to stable contract/decision/Knowledge/book owners; the task migration must reroute those
 consumers to semantic parts or stable-ID lookup. Neither file can be safely truncated or split by byte count alone.
 
-The planned chronology protocol uses a tracked JSONL manifest per family. Every immutable segment records its
+The chronology protocol uses a tracked JSONL manifest per family. Every immutable segment records its
 repository-relative path, clean source commit and Git blob, exact source line range, line/byte counts, SHA-256,
 current replacement, and root-derived retrieval command. The checker must concatenate segments and reproduce
-`git show <commit>:<path>` byte-for-byte. `LIVE_ACHIEVEMENT_STATUS.md` will remain the stable path as a five-section
-overwrite view capped at 256 lines / 32 KiB. `CHANGES.md` and `DEVELOPMENT_NOTES.md` will remain stable bounded hot
+`git show <commit>:<path>` byte-for-byte. `LIVE_ACHIEVEMENT_STATUS.md` remains the stable path as a five-section
+overwrite view capped at 256 lines / 32 KiB. Its first manifest describes four segments that reconstruct clean
+commit `dc8dd896` exactly. `CHANGES.md` and `DEVELOPMENT_NOTES.md` will remain stable bounded hot
 shards capped at 512 lines / 64 KiB over ordered archives.
 
 The future task root will remain the navigable live index. Stable IDs will route into seven semantic parts:
@@ -72,6 +74,19 @@ frontier and legacy global logs. The split at real `.10` child boundaries keeps 
 while strengthened task metadata will reject duplicate/missing nodes, wrong ranges, stale digests, or a frontier
 without one canonical node. Migration order is live/history mechanism, task partition, changes/notes and author
 workflow, then unchanged registry recomposition. Each stage starts and lands at its own clean Git boundary.
+
+Use the bounded query that matches the question:
+
+```sh
+perl tools/read_document_history.pl --surface live_status --grep 'needle'
+perl tools/read_document_history.pl --surface live_status --segment 0001
+perl tools/read_document_history.pl --surface live_status --all
+```
+
+The first form is the normal historical lookup, the second returns one raw immutable segment, and the third
+reconstructs every pre-migration byte. `scripts/check_document_history.sh` is the fixed routing verifier and the
+registered eighth doctrine. It checks 20 mutation classes plus real schema/path/range/count/hash/blob/source/
+immutability/current-view invariants. Archives are positive historical evidence, never current-state denials.
 
 ### Neutral typed source-location contract
 

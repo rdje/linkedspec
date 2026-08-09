@@ -1,5 +1,32 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-09 (`LIVE-DOCUMENT-PRESSURE-CONTAINMENT.1` — exact live history): a current status page and an exact
+  chronology are different data products. Preserve the stable root as a small five-section overwrite view; store
+  the pre-migration bytes in source-ordered immutable segments whose strict manifest binds clean commit, whole-file
+  blob, line ranges/counts, byte counts, SHA-256, current path, target path, and root-derived query.
+- Capability/public governance must never depend on chronological prose. Six JSON projections and seven executable
+  checkers now use decision ADR `0067` for the same exact markers and inventory cardinalities; the history doctrine
+  rejects any reintroduction of `LIVE_ACHIEVEMENT_STATUS.md` under those consumer scopes. Archives remain positive
+  history, never current-state denial surfaces.
+- Routing debt needs a legal terminal transition. The old checker correctly prohibited baseline refresh but also
+  rejected clearing a baseline after a route became `current`, while the schema simultaneously required all
+  non-debt routes to carry empty baseline/transition objects. The narrow repair admits clearing only when HEAD is
+  `debt`, the resulting tree is `current` with empty debt metadata, and a newly staged indexed ADR exactly matches
+  both canonical route contracts. This is retirement, not normalization; historical debt evidence remains in Git.
+- The history writer is deterministic and migration-only: it refuses an existing output directory, preserves raw
+  bytes, splits greedily without crossing 4,096 lines / 524,288 bytes, and emits canonical JSONL. The reader and
+  checker derive the repository root from their own paths, reject traversal/absolute/symlink targets, and never use
+  OS temp or home storage. Future changes/notes migration reuses this mechanism under `.3`.
+- Exact line partitions can end immediately after a source blank line, which Git otherwise reports as a newly
+  introduced blank line at the artificial segment EOF. `.gitattributes` disables only `blank-at-eof` for
+  `docs/history/**/segment-*.md`; the history checker requires that narrow rule, reconstruction locks the bytes,
+  and ordinary whitespace checks remain active for every other path and whitespace class.
+- Signoff is repository-volume definitive: exact history and its 20/20 mutations, all transferred capability
+  consumers, 20 surfaces / 62 routes / 32/32 routing mutations, book rendering, and all eight doctrines pass. E4
+  exits 0 after MCP complete/141, Rust semantic admission in 81.92 seconds, Julia 416/416 in 31.5 seconds, cursor
+  288, containment/moved-root execution, CLI 66x2, RAM 25%, and Phase 0 1,031/1,031 in 685 seconds. Optional
+  matrices remain explicitly unclaimed.
+
 - 2026-08-09 (`LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0` — bounded-store architecture): documentation pressure is a
   consumer migration, not a line-splitting exercise. Live status still owns required markers for seven capability
   closeouts, while four checkers and two JSON contracts parse exact future-task nodes and evidence. Decouple those

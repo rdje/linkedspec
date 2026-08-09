@@ -1,5 +1,29 @@
 # CHANGES
 
+## 2026-08-09 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.1 — bound live status over exact history
+
+- Activated task-tree-first from clean descriptor commit `dc8dd896` at cadence 176/300. The exact clean
+  `LIVE_ACHIEVEMENT_STATUS.md` source is 14,872 lines / 1,271,326 bytes, Git blob `221159c6...f889`, SHA-256
+  `683ef70d...a9d55`.
+- Added deterministic history builder/query tools and a strict checker/wrapper. Four greedy immutable segments
+  (4,096 / 4,096 / 4,096 / 2,584 lines) plus one canonical schema-v1 JSONL manifest reconstruct the clean source
+  byte-for-byte. Query modes are literal grep, one bounded segment, and full reconstruction.
+- Transferred six capability JSON projections and seven executable checker expectations from live chronology to
+  indexed execution ADR `0067`, preserving every governed document count and marker while mutation-locking zero
+  residual live-history authority. The repeated-action stale-current denial moved to the same decision authority.
+- Replaced only the stable live root with the fixed five-section bounded current view and at most sixteen recent
+  rows. Updated `COMMIT.md`, bootstrap, Toolbox, architecture, roadmap, task, Knowledge, and sole-facing book to use
+  the queryable store rather than cumulative live prose.
+- Registered `DOCUMENT-HISTORY` as the eighth doctrine and the fixed `live_status` route verifier. ADR `0067`
+  authorizes exact debt-to-current contract/limit movement; the routing checker now permits baseline clearing only
+  for an exact staged debt-retirement ADR and still rejects every refresh or unauthorized mutation.
+- Focused history/capability/routing/task/memory/Knowledge/book checks and all eight doctrines pass. Definitive
+  repository-volume E4 exits 0 with MCP complete/141, Rust semantic admission 1/1 in 81.92 seconds, Julia semantic
+  admission 416/416 in 31.5 seconds, cursor 288, containment/moved-root proof, CLI 66x2, RAM 25%, and Phase 0
+  1,031/1,031 in 685 seconds; optional matrices remain unclaimed.
+- No parser, compiler, runtime, backend, MCP, CLI, fixture, protocol, schema, `.spec` language, README, or
+  project-data root changes.
+
 ## 2026-08-09 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0 — freeze bounded document store contract
 
 - Activated from clean README closeout `0bcb5a36` at cadence 175/300 and reverified the four immutable route-debt

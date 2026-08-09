@@ -547,7 +547,7 @@
       {"path": "ROADMAP.md", "required_markers": ["Root-selection rollout is closed at 7 complete / 0 pending", "tools/check_root_rule_selection_five_backend.sh"]},
       {"path": "ROADMAP_V2.md", "required_markers": ["Root-selection rollout is closed at 7 complete / 0 pending", "tools/check_root_rule_selection_five_backend.sh"]},
       {"path": "ARCHITECTURE_STATE.md", "required_markers": ["root-selection public no-drift", "7 complete / 0 pending"]},
-      {"path": "LIVE_ACHIEVEMENT_STATUS.md", "required_markers": ["FUTURE-PARITY-BACKLOG.9.1.1.2.6 — close root-selection public no-drift", "7 complete / 0 pending"]},
+      {"path": "docs/decisions/0067-live-achievement-status-history.md", "required_markers": ["FUTURE-PARITY-BACKLOG.9.1.1.2.6 — close root-selection public no-drift", "7 complete / 0 pending"]},
       {"path": "docs/TASK_TREE.md", "required_markers": ["final five-backend recurring/public no-drift"]},
       {"path": "docs/linkedspec-book/src/overview/project-status.md", "required_markers": ["7 complete / 0 pending", "tools/check_root_rule_selection_five_backend.sh"]},
       {"path": "docs/linkedspec-book/src/appendix/formal-grammar.md", "required_markers": ["7 complete / 0 pending", "tools/check_root_rule_selection_five_backend.sh"]},
