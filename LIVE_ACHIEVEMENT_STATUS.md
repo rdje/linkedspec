@@ -1,5 +1,27 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-07 — Lua typed-source boundary is mapped; seven shared aliases come first
+
+`FUTURE-PARITY-BACKLOG.14.2.5.0` activated task-tree-first from clean Julia admission commit `46612a72` as
+intended 163/300 with no push. One source graph serves PUC Lua and LuaJIT. The invocation context owns one validated
+decoded input, and established cursor/match/capture/mark/stack state remains zero-based UTF-8 byte offsets; existing
+helper seams alone convert to scalar offsets or one-based coordinates. Native, loaded, reconstructed, generated-
+plan, and emitted-module routes converge on the same runtime and structured diagnostic boundary.
+
+Identical repository-routed probes on both ABIs prove 92/92 canonical source helpers known, canonical-stable, and
+contract-resolvable, but 0/7 neutral compatibility aliases known or canonicalized. Each alias resolves as
+`unknown_helper` and raises the exact owned unsupported-helper diagnostic. The audit therefore creates no
+misleading typed-source RED. It splits seven-alias parity as `.14.2.5.0.1`, followed by the dormant dual-ABI
+typed-source RED `.14.2.5.0.2`; no runtime or user-visible behavior changes in this audit.
+
+Complete Lua passes 177/177 per ABI, byte-fresh MCP 83,166 bytes, CLI 66/66 under default and POSIX environments,
+corpus 105/105, and storage 17 owners / three dual-ABI modules. The source-unchanged sole-facing mdBook remains
+accurate; its 79-file/14,172-KiB render keeps Lua status, alias note, commands, and limitations in separate blocks.
+Knowledge Map 788/6,487, neutral 7/7/41, language coverage 246/105+1/122, and all seven doctrines pass. Canonical CI
+preserves capability 80/0/0 and typed source 7/7/41, passes CLI 66x2, reports RAM 45%, and completes Phase 0
+1,031/1,031 in 672 seconds before its exact marker. Only atomic commit 163/300, brief clearing, and clean proof
+remain before `.14.2.5.0.1` activates.
+
 ## 2026-08-07 — Julia typed source-location runtime is admitted
 
 `FUTURE-PARITY-BACKLOG.14.2.4.3` activated task-tree-first from clean Julia projection commit `779e9757` as

@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-01` (`.24.0` landed clean at `7a5d0af3`; pending-owner provenance/supersession repair
-  `.24.0.1` is active task-tree-first from that exact 126/300 boundary with no push)
+- Last updated: `2026-08-07` (`.14.2.5.0` mapped the shared Lua typed-source boundary, found the exact seven-alias
+  prerequisite, and is signoff-complete for atomic commit 163/300 with no push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -19174,8 +19174,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   task-tree-first.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.4`
-  Status: `active` parent (2026-08-07; projection routing `.2` landed at `779e9757`; admission `.3` is
-    signoff-complete for intended 162/300, no push)
+  Status: `completed` (`46612a72`, 2026-08-07, 162/300, no push)
   Goal: Implement and independently admit the same neutral typed source-location algebra in Julia.
   Children: `.14.2.4.0` authority/prerequisite-split audit; `.14.2.4.0.1` seven-alias Julia parity;
     `.14.2.4.0.2` exact typed-source RED; `.14.2.4.1` immutable value/conversion core; `.14.2.4.2` helper/
@@ -19682,8 +19681,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   activate task-tree-first.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.4.3`
-  Status: `signoff-complete` (2026-08-07; task-tree-first from clean projection commit `779e9757`, intended
-    162/300, no push)
+  Status: `completed` (`46612a72`, 2026-08-07, 162/300, no push)
   Goal: Admit the unchanged Julia typed-source consumer into ordinary and canonical discovery and promote only the
     neutral `julia_runtime` rollout row.
   Depends on: `.14.2.4.2`
@@ -19770,15 +19768,165 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   1,031/1,031 in 716 seconds before exact `[ci] local CI gate passed` and exit 0. Atomic commit 162/300,
   ignored-brief clearing, and clean handoff proof remain before task-tree-first Lua `.14.2.5.0`; no push.
 
+  Commit/handoff evidence 2026-08-07: atomic commit `46612a72` lands with first parent `779e9757`; the hook
+  regenerates Knowledge Map at 787/6,467, passes all seven doctrines, and validates the memory activation pointer
+  against both pre-commit HEAD and post-commit `HEAD^1`. Status plus staged/unstaged diffs are empty, the ignored
+  brief is zero bytes, memory architecture passes from the landed boundary, the rendered book artifact is absent,
+  and the exact empty canonical-run directory is removed. Lua dual-ABI authority audit `.14.2.5.0` may therefore
+  activate task-tree-first.
+
 - ID: `FUTURE-PARITY-BACKLOG.14.2.5`
-  Status: `pending` parent
+  Status: `active` parent (2026-08-07; Julia admission `.14.2.4.3` landed at `46612a72`; dual-ABI authority audit
+    `.0` found the exact seven-alias prerequisite and is behavior-free signoff-complete from that clean boundary
+    as intended 163/300, no push)
   Goal: Implement one shared Lua typed source-location algebra and admit it independently on PUC Lua and LuaJIT.
-  Children: `.14.2.5.0` dual-ABI authority/RED audit; `.14.2.5.1` immutable shared core; `.14.2.5.2` helper/
-    unchanged loaded-emitted-plan interpreter routes; `.14.2.5.3` exact dual-ABI admission/promotion.
+  Children: `.14.2.5.0` dual-ABI authority/prerequisite-split audit; `.14.2.5.0.1` seven-alias shared Lua parity;
+    `.14.2.5.0.2` exact dual-ABI typed-source RED; `.14.2.5.1` immutable shared core; `.14.2.5.2` helper/unchanged
+    loaded-emitted-plan interpreter routes; `.14.2.5.3` exact dual-ABI admission/promotion.
   Acceptance: Use `source_location.lua`, `matching.lua`, `interpreter.lua`,
     `typed_source_location_contract_test.lua`, and `run.lua`; retain byte registers, convert at the typed boundary,
     prove native/serialized/emitted execution from the same shared source on both ABIs, bind both routes, and
     promote only `lua_dual_abi`.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.5.0`
+  Status: `signoff-complete; atomic commit pending` (2026-08-07; task-tree-first from clean Julia-
+    admission commit `46612a72`, intended 163/300, no push)
+  Goal: Map the shared Lua typed source-location authority, byte-based runtime registers, exact 92+7 helper surface,
+    PUC-Lua/LuaJIT behavior, carrier convergence, diagnostics, discovery, and canonical boundary before freezing an
+    honest dual-ABI RED or splitting any measured prerequisite correction.
+  Depends on: `.14.2.4.3`, `.14.2.0`
+  Acceptance: Retrieve the typed-source runtime-rollout Knowledge card, ADR `0056` section 9, neutral artifact/
+    checker, admitted Perl/Rust/Dart/Julia consumers, Lua runtime/matching/generated/diagnostic Knowledge owners,
+    Toolbox, exact shared Lua source/tests, both complete ABI routes, canonical registration, storage owners, and
+    every sole-facing typed-source passage before implementation. Use LinkedSpec's own parser/runtime probes first
+    and prove decoded-input ownership; byte cursor/mark/match units and exact scalar/line/column/UTF-8 conversion
+    seams; all 92 canonical helpers plus seven aliases; cursor, mark, entry/local-match, anonymous-boundary, and
+    save-stack state; native, serialized, generated-plan, emitted, and loaded convergence on both ABIs; structured-
+    error boundary; ordinary package discovery; and current behavior through repository-routed executable probes.
+    If every prerequisite holds, add one shared dormant final-path consumer outside ordinary/canonical discovery
+    whose failures name only the absent future Lua typed API. If a premise is false, add no misleading RED or
+    production code: record the exact contradiction and split the narrow prerequisite owner first. Preserve current
+    production behavior, helper results/mutations, byte registers, schemas/identities, semantic/MCP/capability state,
+    DSL/facade, neutral 7/7/41, root README, sole-facing book truth, and other backends; pass exact audit/complete-
+    dual-ABI/recurring/book/Knowledge/doctrine/canonical signoff, commit, clear the brief, and prove clean before
+    any correction or immutable core leaf.
+  Verification: exact PUC-Lua and LuaJIT probes plus source/runtime topology evidence establish either one honest
+    shared RED or one exact prerequisite split without production or public behavior change
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.5.0 - map Lua typed source boundary`
+
+  ### `FUTURE-PARITY-BACKLOG.14.2.5.0` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove Julia admission `.14.2.4.3` landed at `46612a72` as 162/300
+    with parent `779e9757`, empty status/diffs, zero-byte brief, valid post-commit memory pointer, absent generated
+    book, and empty project-data run; make this task-tree file the sole activation diff.
+  - [x] **RETRIEVE / EXACT AUTHORITY MAP** — Follow the Knowledge Map and ADR before code archaeology; retrieve
+    shared Lua runtime, matching, interpreter, loader/emitter, diagnostics, tests, storage, CI, and book owners.
+  - [x] **DUAL-ABI EXECUTABLE AUDIT** — Measure the decoded-source owner, byte/scalar boundaries, exact 92+7 known/
+    canonical/executable helpers, register mutations, carrier convergence, diagnostics, and discovery on both PUC
+    Lua and LuaJIT through repository-routed commands.
+  - [x] **HONEST RED OR PREREQUISITE SPLIT** — Freeze one shared dormant consumer only if every current premise is
+    sound; otherwise preserve the failing evidence and split the smallest prerequisite without implementation.
+  - [x] **NO REGRESSION / CLEAN HANDOFF** — Preserve production/public/neutral 7/7/41 and pass complete dual-ABI,
+    recurring contracts, sole-facing book truth/readability, Knowledge, all doctrines, definitive canonical CI,
+    atomic commit 163/300, brief clearing, and clean proof before any next leaf.
+
+  Activation evidence 2026-08-07: Julia admission `.14.2.4.3` lands atomically at `46612a72` as intended 162/300
+  with first parent `779e9757` and no push. Hooks regenerate Knowledge Map at 787/6,467, pass all seven doctrines,
+  and validate the activation pointer in pre-commit and post-commit Git phases. Status plus staged/unstaged diffs
+  are empty, `git_message_brief.txt` is zero bytes, post-commit memory architecture passes, the generated book is
+  absent, and the exact empty canonical-run directory is removed. This task-tree file is the sole activation diff
+  before any Lua source/test, neutral artifact/checker, book, Knowledge, roadmap, live-doc, or other change.
+
+  Retrieval/authority evidence 2026-08-07: the Knowledge Map routes typed-source rollout to
+  `typed-source-location-runtime-rollout-plan` and the shared Lua boundary to the matching-state, cursor/capture,
+  generated-source, native-loading, and structured-diagnostic cards. ADR `0056` section 9, the neutral artifact and
+  checker, admitted Perl/Rust/Dart/Julia consumers, Toolbox, exact shared source/tests/drivers, storage and
+  canonical registration, and all sole-facing typed-source passages agree on the intended boundary. One validated
+  decoded Lua string is stored in the invocation context and reused by `RuntimeMatchRegisters` and
+  `RuntimeRegexMatch`. Cursor, entry/local-match, anonymous capture, named-mark, and save-stack positions remain
+  zero-based UTF-8 byte offsets. `matching.lua` rejects non-boundaries and converts bytes to Unicode-scalar offsets
+  or one-based line/column only at public helper/result seams. Native compilation, effective-SpecFile JSON
+  reconstruction, loaded specs, generated-v2 plans, and emitted modules all compile into and re-enter the same
+  `LinkedSpecRuntimeEngine` from one Lua-5.1-compatible source graph on PUC Lua and LuaJIT. Failures leave through
+  `RuntimeInterpreterException.diagnostic`; ordinary discovery is the explicit shared-test command sequence in
+  `tools/run_lua_local.sh`. No `source_location.lua`, typed-source consumer, immutable authority/value core, typed
+  projection catalog, canonical Lua typed-source command, or rollout promotion exists. The sole-facing book
+  accurately leaves both Lua ABIs pending at neutral 7/7/41.
+
+  Dual-ABI contradiction evidence 2026-08-07: one identical repository-routed probe reads the neutral artifact on
+  PUC Lua and LuaJIT and proves all 92 canonical rows in exact 47/30/11/4 families are unique, known, canonically
+  stable, and contract-resolvable. All seven compatibility rows are absent from the known-name/canonicalization
+  seam: `capture_from_rule_start`, `capture_len_from_rule_start`, `capture_rest_length`, `capture_slice_here`,
+  `capture_slice_length`, `entry_named_map`, and `match_named_map` remain their authored names, resolve to
+  `unknown_helper`, and compiled execution raises `RuntimeInterpreterException` with stage `runtime_execution`,
+  owner `lua_runtime`, rule `Top`, and exact `unsupported runtime helper '<name>'` detail on both ABIs. Lua source
+  and tests contain no authored alias occurrence; the private implementation function named `match_named_map` is
+  only the canonical `entry_map`/`match_map` projector and does not admit the authored alias. The unchanged complete
+  shared suite passes 177/177 per ABI, including Unicode matches/conversions, immutable register updates, exact
+  input/cursor, anonymous capture, named marks/spans, serialized reconstruction, loaded specs, generated plans,
+  emitted modules, structured failures, and the all-call runtime-owner census. Therefore this audit adds no
+  misleading typed RED and no production/test behavior. Shared alias parity `.14.2.5.0.1` must land before exact
+  dormant dual-ABI RED `.14.2.5.0.2`.
+
+  Book/Knowledge/signoff evidence 2026-08-07: the source-unchanged sole-facing mdBook already says PUC Lua and
+  LuaJIT typed-source values/projections and Lua alias rollout are pending. Its repository-routed build produces
+  79 files / 14,172 KiB; direct generated-HTML inspection confirms Lua status, alias note, commands, and following
+  limitations remain separate `<p>`/`<pre>` blocks rather than a stitched prose blob, and the artifact is removed.
+  The new exact alias-gap fact plus updated rollout card regenerate Knowledge Map at 788 facts / 6,487 question
+  keys. Complete `tools/run_lua_local.sh` proves the byte-fresh 83,166-byte MCP binding, all ordinary/focused suites
+  at 177/177 independently on PUC Lua and LuaJIT, primary CLI 66/66 in default and POSIX environments, corpus
+  105/105, storage 17 owners / three dual-ABI modules, and exact Lua pass marker. Neutral 7/7/41 and language
+  coverage 246/105+1/122 remain unchanged; all seven doctrines pass.
+
+  Definitive canonical CI independently preserves capability 80/0/0 and typed source 7/7/41; executes every
+  admitted typed-source, byte-fresh MCP, and composed semantic/MCP consumer; proves six-family repository
+  containment plus relocated/moved/outside-CWD execution; and passes primary CLI 66/66 under default and POSIX
+  environments. RAM is 45% against the 88% threshold. Phase 0 passes 1,031/1,031 in 672 wallclock seconds before
+  exact `[ci] local CI gate passed` and exit 0. No production, test, neutral artifact/checker, schema, semantic/MCP/
+  capability, DSL, root README, sole-facing book source, or other-backend behavior changed. Atomic commit 163/300,
+  ignored-brief clearing, and clean proof remain before task-tree-first alias parity `.14.2.5.0.1`; no push.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.5.0.1`
+  Status: `pending` prerequisite split by dual-ABI authority audit `.14.2.5.0`
+  Goal: Add exactly the seven neutral source-boundary compatibility spellings at Lua's existing shared known-name
+    and canonicalization seams so PUC Lua and LuaJIT execute every alias through its preferred helper branch without
+    widening the common 246-name inventory or admitting typed source values.
+  Depends on: `.14.2.5.0`
+  Acceptance: Retrieve the Lua alias-gap Knowledge owner, neutral alias rows/checker, exact Dart/Julia alias
+    precedents, `action_call_names.lua`, `action_contracts.lua`, `interpreter.lua`, generated-v2 carriers, complete
+    mark/cursor tests, language coverage, both ABI drivers, canonical registration, and sole-facing book before
+    implementation. Add exactly one separate seven-name known-alias inventory and one exact canonical-name map;
+    keep `CURRENT_CALL_NAMES`, `current_names()`, and `count()` at 246, and add no alias-specific interpreter branch.
+    Prove exact contract resolution, unrelated-helper diagnostics, Unicode text/scalar widths, anonymous-boundary
+    mutation and reversed-span absence, named-map shapes, and alias/canonical equality across native, loaded,
+    reconstructed, generated-plan, and independently loaded emitted source on both ABIs. Extend independent
+    language coverage to derive and bind Lua's seven pairs to the neutral contract. Preserve canonical helper
+    behavior, byte registers, schemas/identities, neutral 7/7/41, Lua typed-source pending state, root README, other
+    backends, and public typed/transaction claims. Pass focused/complete dual-ABI, storage/corpus/CLI, language/
+    neutral, book/readability, Knowledge, doctrine, and definitive canonical gates; commit, clear the brief, and
+    prove clean before `.14.2.5.0.2`.
+  Verification: exact seven-alias RED/GREEN consumer on PUC Lua and LuaJIT; 92+7 inventory and carrier equality;
+    complete Lua/canonical no-drift; unchanged neutral 7/7/41 and public book truth
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.5.0.1 - add Lua source aliases`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.2.5.0.2`
+  Status: `pending` behind shared Lua alias parity `.14.2.5.0.1`
+  Goal: Freeze one shared dormant Lua consumer for the neutral immutable source values, four owned diagnostics,
+    exact 92 canonical projections plus seven now-callable aliases, and unchanged runtime carriers on both ABIs
+    before production core implementation.
+  Depends on: `.14.2.5.0.1`
+  Acceptance: Start from clean alias parity. Add one test-local consumer outside `tools/run_lua_local.sh` ordinary
+    discovery and canonical registration. Its core mode must fail on both PUC Lua and LuaJIT only for the absent
+    future `linkedspec.source_location` API; projection mode must remain independently nested behind core and
+    require exact 92+7 catalogs plus native/reconstructed/generated-plan behavior. Lock 3/7/6/3 value fixtures,
+    four private errors, detached values, native byte/scalar conversion, rule-local marks, anonymous boundary,
+    cursor stack, and unchanged external results without production, neutral, schema, or public-book admission
+    change. Pass ordinary complete dual-ABI Lua with the dormant file excluded, exact explicit RED diagnostics,
+    storage/corpus/CLI, language/neutral, book/readability, Knowledge, doctrine, and definitive canonical gates;
+    commit, clear the brief, and prove clean before `.14.2.5.1`.
+  Verification: ordinary Lua remains green on both ABIs; explicit core/projection modes fail only on owned absent
+    future APIs; neutral remains 7/7/41 and `lua_dual_abi` remains pending
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.5.0.2 - freeze Lua typed source RED`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.6`
   Status: `pending`

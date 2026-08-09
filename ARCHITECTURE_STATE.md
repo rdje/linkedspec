@@ -1,5 +1,25 @@
 # ARCHITECTURE STATE
 
+- `2026-08-07 Lua typed source-location boundary audit`: `FUTURE-PARITY-BACKLOG.14.2.5.0` changes no production,
+  test, neutral-contract, or mdBook source. PUC Lua and LuaJIT execute one Lua-5.1-compatible implementation: each
+  invocation owns one validated decoded input, while cursor, entry/local match, anonymous-boundary, named-mark,
+  and save-stack registers remain zero-based UTF-8 byte offsets. Scalar offsets and one-based coordinates are
+  derived only at existing public helper/result seams.
+
+  Native, loaded, effective-SpecFile reconstruction, generated-v2 plan, and emitted-module routes all compile or
+  re-enter the same `LinkedSpecRuntimeEngine`; structured failures leave through
+  `RuntimeInterpreterException.diagnostic`. Exact dual-ABI probes prove all 92 canonical source-boundary helpers
+  are known, canonical-stable, and contract-resolvable, but all seven neutral compatibility aliases are unknown and
+  fail with the same owned unsupported-helper diagnostic. This is a real shared compatibility prerequisite, so
+  `.14.2.5.0.1` owns only the seven aliases and `.14.2.5.0.2` owns the later honest dormant typed-source RED.
+
+  Complete Lua passes 177/177 independently on both ABIs, byte-fresh MCP 83,166 bytes, CLI 66/66 in both option
+  environments, corpus 105/105, and storage 17/3. The source-unchanged sole-facing book remains accurate and its
+  79-file/14,172-KiB render keeps Lua status, alias note, commands, and limitations in separate blocks. Knowledge
+  Map 788/6,487, neutral 7/7/41, language 246/105+1/122, and all seven doctrines pass. Definitive canonical CI
+  preserves capability 80/0/0 and typed source 7/7/41, passes CLI 66x2, reports RAM 45%, and completes Phase 0
+  1,031/1,031 in 672 seconds before the exact marker. Atomic commit 163/300 and clean proof remain.
+
 - `2026-08-07 Julia typed source-location runtime admission`: `FUTURE-PARITY-BACKLOG.14.2.4.3` changes no
   production Julia source. It removes the obsolete RED selector from the unchanged 127-assertion consumer,
   includes that consumer exactly once in ordinary package discovery, and runs its exact tracked target

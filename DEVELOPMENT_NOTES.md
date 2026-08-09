@@ -1,5 +1,31 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.5.0` — shared Lua typed-source audit): PUC Lua and LuaJIT load the same
+  Lua-5.1-compatible `matching.lua`/`interpreter.lua` runtime graph. Each invocation context holds one validated
+  decoded string. Cursor, entry/local-match, anonymous-capture start, named marks, and cursor-stack snapshots remain
+  zero-based UTF-8 byte offsets; boundary validation and byte-to-scalar or one-based line/column conversion happen
+  only at current helper/result seams.
+- Native compilation, effective-SpecFile reconstruction, loaded specs, generated-v2 plans, and emitted modules all
+  compile or re-enter `LinkedSpecRuntimeEngine`. Runtime failures carry `RuntimeInterpreterException.diagnostic`;
+  ordinary shared-test discovery is the explicit command list in `tools/run_lua_local.sh`.
+- One identical repository-routed probe on both ABIs establishes 92/92 canonical helper names known, stable, and
+  contract-resolvable. It also establishes 0/7 compatibility aliases known/canonicalized: every alias resolves to
+  `unknown_helper` and compiled invocation produces stage `runtime_execution`, owner `lua_runtime`, rule `Top`,
+  and `unsupported runtime helper '<name>'`. The private function `match_named_map` serves canonical map helpers;
+  it does not admit the authored `match_named_map` alias.
+
+  Because alias parity is a real premise of the typed-source consumer, the audit freezes no misleading RED and
+  changes no production/test behavior. `.14.2.5.0.1` owns exactly the seven shared aliases; `.14.2.5.0.2` then owns
+  the honest dormant dual-ABI typed-source RED. The exact finding lives in the Knowledge Map.
+
+  Complete Lua passes 177/177 independently on PUC Lua and LuaJIT, byte-fresh MCP 83,166 bytes, primary CLI 66/66
+  in default and POSIX environments, corpus 105/105, storage 17 owners / three dual-ABI modules, and its exact pass
+  marker. Neutral 7/7/41 and language 246/105+1/122 remain unchanged. The source-unchanged sole-facing book builds
+  79 files / 14,172 KiB and retains separate rendered status, alias-note, command, and limitation blocks. Knowledge
+  Map is 788/6,487; all seven doctrines pass. Canonical CI preserves capability 80/0/0 and typed source 7/7/41,
+  passes CLI 66x2, reports RAM 45%, and passes Phase 0 1,031/1,031 in 672 seconds before its exact marker. The leaf
+  is signoff-complete for atomic commit 163/300; no push.
+
 - 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.4.3` — Julia typed source admission): Julia ordinary test discovery is
   the explicit include list in `julia/test/runtests.jl`. Admission removes the obsolete RED mode selector from the
   unchanged final-path consumer, includes it exactly once, and makes the canonical driver run the exact tracked

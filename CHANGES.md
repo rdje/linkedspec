@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.5.0 — map Lua typed source boundary
+
+- Audited the one shared PUC Lua/LuaJIT source graph: decoded-input ownership, zero-based UTF-8 byte registers,
+  scalar/coordinate conversion seams, native/loaded/reconstructed/generated-plan/emitted convergence, structured
+  diagnostics, ordinary discovery, and project-local storage are now durably mapped.
+- Proved all 92 canonical source-boundary helpers known, canonical-stable, and contract-resolvable on both ABIs.
+  Proved all seven neutral compatibility aliases unknown and rejected through the exact Lua runtime diagnostic.
+- Split the measured prerequisite into `.14.2.5.0.1` for exactly seven shared aliases and `.14.2.5.0.2` for the
+  later honest dormant typed-source RED. Added a Knowledge fact card so this boundary is retrieved, not re-derived.
+- Complete Lua passes 177/177 per ABI, byte-fresh MCP 83,166 bytes, CLI 66/66 twice, corpus 105/105, and storage
+  17/3. Neutral 7/7/41 and language 246/105+1/122 remain unchanged.
+- The source-unchanged sole-facing mdBook remains accurate and builds 79 files / 14,172 KiB; rendered Lua status,
+  alias note, commands, and limitations remain separate readable blocks. Knowledge Map is 788/6,487.
+- No production, test, neutral contract, schema, semantic/MCP/capability, DSL, README, book source, or other backend
+  changed. All seven doctrines pass. Canonical CI preserves capability 80/0/0 and typed source 7/7/41, passes CLI
+  66x2, reports RAM 45%, and passes Phase 0 1,031/1,031 in 672 seconds. The audit is signoff-complete for atomic
+  commit 163/300; no push.
+
 ## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.4.3 — admit Julia typed source runtime
 
 - Removed the obsolete test-local RED selector from the unchanged 127-assertion Julia typed-source consumer and

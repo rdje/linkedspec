@@ -78,11 +78,19 @@ answers:
   - "where is the admitted Julia typed source location consumer"
   - "does ordinary Julia test discovery run the typed source location consumer"
   - "what canonical command runs the Julia typed source location consumer"
+  - "are all 92 Lua source boundary helpers implemented"
+  - "does Lua execute the seven typed source compatibility aliases"
+  - "what error do Lua source boundary compatibility aliases return"
+  - "why must Lua alias parity precede the typed source RED"
+  - "where does Lua store source cursor mark and match offsets"
+  - "do PUC Lua and LuaJIT use the same source boundary interpreter"
+  - "do Lua loaded generated and emitted parsers use the same helper interpreter"
 date: 2026-08-01
 status: Perl, Rust, Dart, and Julia admitted; PUC Lua and LuaJIT pending
 tags: [architecture, source-location, spans, cursor, helpers, perl, rust, dart, julia, lua, rollout]
 evidence: "FUTURE-PARITY-BACKLOG.14.2.0 retrieved ADR 0056, the neutral contract/checker, adjacent live-ledger contracts, TOOLBOX.md, and exact runtime source/test authorities. Perl uses decoded-string scalar offsets; Rust and Lua use UTF-8 bytes; Dart and Julia use code units. Complete named-mark consumers pass on all six runtimes. The exact contract/checker still encode completed public owners .14.1.2-.3 as pending because both leaves explicitly excluded contract changes, leaving no promotion owner. ADR 0056 section 9 and the owning task freeze the correction and implementation order."
 evidence_update_2026_08_01_public_rollout: "Correction .14.2.0.1 promotes completed public owners .14.1.2-.3, re-owners runtime admissions to .14.2.1.3-.14.2.5.3, advances current truth to 3 complete / 11 pending, and locks 37 mutations including two independent completed-to-pending regressions."
+evidence_update_2026_08_07_lua_prerequisites: "Shared Lua authority audit .14.2.5.0 proves all 92 canonical source-boundary names in exact 47/30/11/4 families are unique, known, canonically stable, contract-resolvable, and owned by runtime dispatch, but all seven neutral aliases are absent from is_known_action_ir_call_name and canonical_action_helper_name. Ordinary compiled invocation of each alias throws RuntimeInterpreterException at runtime_execution with owner lua_runtime, rule Top, and exact unsupported runtime helper detail identically on PUC Lua and LuaJIT. Lua retains validated decoded input plus cursor, match, anonymous-boundary, rule-local mark, and stack state as zero-based UTF-8 byte offsets and projects Unicode-scalar positions/lengths plus one-based line/column at helper boundaries. Loaded, reconstructed, generated-plan, and emitted adapters converge on LinkedSpecRuntimeEngine from the same shared source. Alias parity .0.1 must precede dormant dual-ABI typed RED .0.2; the audit changes no production, tests, neutral 7/7/41, or book behavior."
 evidence_update_2026_08_01_perl_red: "Perl authority/RED .14.2.1.0 freezes two unregistered consumers without implementation. typed_source_location_values.t requires LinkedSpec::SourceLocation authority plus immutable Position/Span/DerivedText values, coordinates/materialization, detached records, and the four value errors across all 3/7/6/3 fixtures. typed_source_location_perl_contract.t requires ActionIR::Contracts::typed_source_projection_rows, exact 92-row routing, seven aliases, and unchanged live/generated named-mark results. The first exits only for the missing module; the second has one failure naming only the missing catalog."
 evidence_update_2026_08_01_perl_core: "Perl core .14.2.1.1 adds SourceLocation.pm. Module-private authority state snapshots decoded text and precomputes scalar-boundary line/column/UTF-8-byte evidence; monotonic authority ids plus module-private value state keep Position, Span, and DerivedText records immutable and free of text/host references. The authority alone validates, derives coordinates, and materializes direct or ordered derived text. All value fixtures and four locked structured errors pass; the projection consumer still has exactly one failure for absent typed_source_projection_rows. Definitive canonical CI passes CLI 66/66 twice, RAM 47%, and Phase 0 1,031/1,031 in 633 seconds."
 evidence_update_2026_08_01_perl_projections: "Perl projection .14.2.1.2 initializes one input authority in every SpecEntry handler, propagates it through LinkedRE child match info, and routes the exact detached 92-row/four-family catalog plus seven aliases through SourceLocation::Runtime. Typed positions/spans validate and materialize source text, coordinates, mark reads/writes, capture boundaries, and cursor operations while external scalar/string/list/map/boolean/absence results and scalar mark/cursor storage remain unchanged. RuleIR, both handler IMATCH bridges, nested MethodLowering expressions, live execution, and independently emitted/loaded source share the route. The unregistered projection consumer passes all 3 top-level and 202 nested assertions; focused baselines pass 423/423. Definitive canonical CI passes repository containment, moved-root/outside-CWD execution, composed semantic/MCP admissions, CLI 66/66 twice, RAM 53%, and Phase 0 1,031/1,031 in 651 seconds before the explicit pass marker. Admission and public support remain pending under .14.2.1.3."
@@ -210,6 +218,13 @@ reconstructed, generated-plan, and independently emitted alias execution converg
 `.14.2.4.3` includes the unchanged 127-assertion consumer exactly once in ordinary package discovery, runs it
 unconditionally through the exact repository-routed Julia command in canonical CI, and promotes only
 `julia_runtime`. The checker rejects stale dormancy and completed-to-pending regression; rollout is now 7/7/41.
+
+Lua already has all 92 canonical helper spellings and one shared UTF-8-byte interpreter topology on PUC Lua and
+LuaJIT, but it does not yet have the neutral seven-alias callable baseline required by typed-source rollout. All
+seven authored aliases remain unknown and fail through the same structured runtime diagnostic seam. Prerequisite
+`.14.2.5.0.1` therefore owns only separate known-name and canonical-name adapters that re-enter the existing
+preferred helper branches without widening the common 246-name inventory. Dormant typed-source consumer
+`.14.2.5.0.2` remains behind that correction; no immutable Lua value core or `lua_dual_abi` admission exists yet.
 
 ## Links
 
