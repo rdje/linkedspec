@@ -150,7 +150,9 @@ program rather than becoming indefinite README destinations.
 
 Implementation signoff is complete: all seven doctrines, the full semantic/MCP/cursor chain, repository
 containment and moved-root execution, primary CLI 66/66 in both option environments, and Phase 0 1,031/1,031 in
-694 seconds pass. Atomic `.4.1` landing and unchanged `.4.2` recomposition precede the bounded-view migration.
+694 seconds pass. Implementation lands at `5c570719`; unchanged `.4.2` then proves seven exact owner hashes and
+independently passes the same closure controls, CLI 66/66 twice, and Phase 0 1,031/1,031 in 673 seconds. Revision
+`.4` is recomposition-closed; bounded-view migration `.0` follows after the atomic clean handoff.
 
 Julia now has an admitted callable native decoded MCP adapter and strict synchronous stdio under
 `FUTURE-PARITY-BACKLOG.10.9.5.1-.3`: a deterministic

@@ -3,11 +3,11 @@
 ## Metadata
 
 - Tree ID: `README-STABILITY-POLICY`
-- Status: `active` / routing-pressure revision reopened
+- Status: `active` / routing-pressure closeout signoff-complete pending atomic commit; license proposal `.3` remains
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-07-29`
-- Last updated: `2026-08-09` (routing-pressure implementation `.4.1` signoff-complete from clean
-  audit/ratification commit `6a5d1dcc`; intended atomic 174/300; no push)
+- Last updated: `2026-08-09` (unchanged routing-pressure closeout `.4.2` and parent `.4` signoff-complete from clean
+  implementation commit `5c570719`; intended atomic 175/300; no push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -51,8 +51,8 @@ moving unbounded append pressure into a neighboring live document.
 ## Task Tree
 
 - ID: `README-STABILITY-POLICY`
-  Status: `active` (2026-08-09; original adoption `.0-.2` remains complete; `.3` remains an independent proposed
-    director decision; routing-pressure revision `.4` is active)
+  Status: `active` (2026-08-09; original adoption `.0-.2` remains complete; routing-pressure revision `.4` is
+    signoff-complete pending atomic `.4.2`; `.3` remains an independent proposed director decision)
   Goal: Adopt and mechanically enforce a stable, bounded LinkedSpec repository landing page.
   Children: `.0`, `.1`, `.2`, `.3`, `.4`
 
@@ -184,7 +184,7 @@ moving unbounded append pressure into a neighboring live document.
     to add the approved root license/notice and synchronize public documentation.
 
 - ID: `README-STABILITY-POLICY.4`
-  Status: `active`
+  Status: `signoff-complete` (2026-08-09; `.4.0-.4.2` complete; atomic closeout commit/hygiene still to follow)
   Goal: Deliberately adopt the director-supplied routing-pressure revision without changing README caps or turning
     the external template into an upstream dependency.
   Depends on: `.2`; director priority on 2026-08-09
@@ -234,8 +234,8 @@ moving unbounded append pressure into a neighboring live document.
     `COMMIT.md`, clear the brief, remove exact generated residue, and prove a clean boundary before `.4.1`.
 
 - ID: `README-STABILITY-POLICY.4.1`
-  Status: `signoff-complete` (2026-08-09; canonical gate passes from clean `6a5d1dcc`; intended atomic 174/300,
-    commit/brief-clear/clean handoff still to follow; no push)
+  Status: `done` (2026-08-09; committed at `5c570719` from clean `6a5d1dcc` as atomic 174/300; brief cleared,
+    clean handoff proved; no push)
   Goal: Adopt the fenced local policy revision, routed-destination registry, unconditional closure checker, exact
     pressure controls, and mutation corpus under the existing `README-STABILITY` doctrine.
   Depends on: `.4.0`
@@ -313,10 +313,69 @@ moving unbounded append pressure into a neighboring live document.
     inspected, and final canonical evidence is written to changes/notes/live/memory before commit.
 
 - ID: `README-STABILITY-POLICY.4.2`
-  Status: `pending`
+  Status: `active` / `signoff-complete` (2026-08-09; unchanged canonical recomposition passes from clean
+    `5c570719`; intended atomic 175/300; active transition authority remains until commit; no push)
   Goal: Recompose the committed policy, registry, controls, and checker unchanged; close `.4` and hand back to
-    `FUTURE-PARITY-BACKLOG.14.3.1.1` only from a clean boundary.
+    `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0` only from a clean boundary. Transaction `.14.3.1.1` remains behind the
+    containment activity already frozen by `.4.0`.
   Depends on: `.4.1`
+  Acceptance: Prove clean activation from exact implementation commit `5c570719`; hash and byte-compare every
+    admitted policy/README/registry/checker/doctrine/gate owner unchanged; independently rerun route, mutation,
+    budget, task, Knowledge, memory, mdBook, doctrine, storage, and canonical signoff; close parent `.4` without a
+    replacement implementation or relaxed control; align durable/public closure truth; commit, clear the brief,
+    remove exact generated residue, and prove clean before containment `.0`.
+
+  #### Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Commit `5c570719` is clean at 174/300; its parent is `6a5d1dcc`,
+    subject is exact, the brief is zero bytes, memory/Knowledge are fresh, rendered book and managed runs are
+    absent, and this task-only activation is the first `.4.2` mutation.
+  - [x] **UNCHANGED OWNER RECOMPOSITION** — Prove policy, README, route registry, checker, doctrine registry/wrapper,
+    and canonical-CI requirement are byte-identical to committed `.4.1`; add no implementation or substitute oracle.
+  - [x] **FOCUSED CONTRACT PROOF** — Rerun 20-surface/62-route closure, 44 reader + 18 author routes, 32/32
+    mutations, README 105/128 lines and 5,057/6,144 bytes, task/Knowledge/memory checks, and all seven doctrines.
+  - [x] **CANONICAL NO-CHANGE SIGNOFF** — Rerun `bash tools/run_ci_local.sh` over the committed implementation and
+    require the exact terminal success marker without parser/runtime/backend/MCP/fixture/CLI behavior movement.
+  - [x] **LOCKSTEP / PARENT CLOSURE** — Mark `.4` closed in task/index, ADR/Knowledge, roadmaps, architecture,
+    continuity layers, and sole-facing mdBook; keep containment `.0` next and licensing `.3` independent/proposed.
+  - [x] **COMMIT / CLEAN HANDOFF** — Commit through `COMMIT.md`, clear the brief, remove exact generated residue,
+    and prove a clean boundary before `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0` activation.
+
+  #### TOOLBOX Task-Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — Clean `5c570719` is the exact implementation snapshot to recompose unchanged.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — ADR `0063` and `.4.0` require independent closeout so one implementation
+    pass cannot silently substitute for committed-owner recomposition and parent closure.
+  - [x] **FIX** — No new code: rerun the committed checker/doctrine/canonical owners and close only status/docs.
+  - [x] **ADDRESSED (verified)** — Record byte identity, focused route/mutation/budget results, and canonical PASS.
+  - [x] **NO REGRESSION** — Prove no admitted implementation-owner diff from `5c570719` and no language movement.
+  - [x] **LOCKSTEP** — Closure truth, book, continuity, commit, brief, cleanup, and clean handoff align.
+
+  #### Recomposition Evidence
+
+  Clean activation proof: `5c570719` has exact subject `README-STABILITY-POLICY.4.1 - enforce routing-pressure
+  closure`, parent `6a5d1dcc`, empty worktree/index, zero-byte brief, valid memory pointer, fresh Knowledge, absent
+  rendered book, zero managed runs, and cadence 174/300. This task file was the sole first `.4.2` mutation and task
+  metadata passed before the bounded memory pointer update or any verification.
+
+  `git diff --exit-code 5c570719 --` over README, policy, registry, route checker, Bash wrapper, doctrine registry,
+  and canonical-CI driver passes. Their SHA-256 identities are respectively `cfaaad24…9251`, `9e967c6a…686`,
+  `b43853e2…0d93`, `e3fb9682…4415`, `a0289f97…f42e`, `2762db3a…099f`, and `7a7a7277…a51`; sizes remain README
+  105/5,057, policy 158/9,102, registry 83/22,695, and checker 1,025/46,496.
+
+  Independent worktree proof passes 44 reader + 18 author routes, all 20 surfaces, 62 registry routes, 32/32
+  mutations, README 105/128 lines and 5,057/6,144 bytes, task metadata, Knowledge freshness, memory 58/60, and all
+  seven doctrines. Definitive unchanged `bash tools/run_ci_local.sh` exits 0 after MCP 5/5 implementations + 6/6
+  runtimes complete/141, Rust semantic 81.34 seconds, Julia semantic 416/416 in 31.0 seconds, cursor 288,
+  containment/moved-root execution, CLI 66/66 in both option environments, RAM 52%, and Phase 0 1,031/1,031 in
+  673 seconds. No implementation-owner byte or language/runtime behavior moved.
+
+  The first final staged proof correctly rejected growth in all four debt surfaces after their README transition
+  owner had been marked only `signoff-complete`. Source inspection at
+  `scripts/check_readme_routing_pressure.pl::task_owner_is_active` proves authorization requires a literal active
+  task through the commit whose resulting tree records the growth. `.4.2` therefore remains mechanically active,
+  annotated signoff-complete/pending atomic commit; no baseline, limit, registry, or checker behavior changes.
+  Knowledge card `readme-debt-transition-owner-commit-boundary` preserves this commit-boundary fact.
 
   ### `README-STABILITY-POLICY.4.0` Ratified Audit and Implementation Contract
 
@@ -491,6 +550,7 @@ decision records, and git; they do not need a second current-facing copy in READ
 | `2026-07-29` | `README-STABILITY-POLICY.2` | Clean `ca846e7a`; README/policy/checker unchanged; quick start exact; 27/27 local links; seven doctrines; eight owners; KM 756/6,129; memory 57/60; mdBook; canonical MCP 5/5 + 6/6 pending/114, Rust 82.85s, Julia 416/416 in 29.3s, cursor 288, containment/moved-root, CLI 66x2, RAM 64%, Phase 0 1,031/1,031 in 663s. | DONE. Parent closed unchanged; closeout commit/brief-clear/clean then MCP `.10.9.7.1`. |
 | `2026-08-09` | `README-STABILITY-POLICY.4.0` | Clean `7c2ff407`; 185-line revision; 62 routes / 20 surface ids / 32 mutations; stale-path Git root cause; four debt baselines and new owner; README/policy/checker unchanged; KM 795/6,574; memory 60/60; book 78/14,260 KiB; seven doctrines; canonical MCP 5/5 + 6/6 complete/141, Rust semantic 82.69s, Julia 416/416 in 32.4s, cursor 288, containment/moved-root, CLI 66x2, RAM 53%, Phase 0 1,031/1,031 in 688s. | DONE. Behavior-free plan is signoff-complete; atomic commit/brief-clear/clean precedes `.4.1`. |
 | `2026-08-09` | `README-STABILITY-POLICY.4.1` | README 105/128 and 5,057/6,144; strict 20-surface/62-route registry; focused 44 reader + 18 author routes and 32/32 mutations; seven doctrines; canonical MCP 5/5 + 6/6 complete/141, composed semantic/admission consumers, cursor 288, containment/moved-root, CLI 66x2, RAM 32%, Phase 0 1,031/1,031 in 694s. | DONE. Routing-pressure enforcement is signoff-complete with no language/runtime movement; atomic commit/brief-clear/clean precedes `.4.2`. |
+| `2026-08-09` | `README-STABILITY-POLICY.4.2` | Clean `5c570719`; seven admitted owners byte-identical by Git diff and SHA-256; focused 20 surfaces / 62 routes / 44+18 / 32/32 / README 105/128 and 5,057/6,144; seven doctrines; canonical MCP complete/141, Rust semantic 81.34s, Julia 416/416 in 31.0s, cursor 288, containment/moved-root, CLI 66x2, RAM 52%, Phase 0 1,031/1,031 in 673s. | DONE. Parent `.4` closes without implementation or behavior movement; atomic commit/brief-clear/clean precedes containment `.0`. |
 
 ## Commit Log
 
@@ -501,7 +561,8 @@ decision records, and git; they do not need a second current-facing copy in READ
 | `README-STABILITY-POLICY.2` | `README-STABILITY-POLICY.2 - close bounded README adoption` | Unchanged closeout and MCP handback. |
 | `README-STABILITY-POLICY.3` | `proposed` | Project-level license decision; not part of the adoption critical path. |
 | `README-STABILITY-POLICY.4.0` | `6a5d1dcc` — `README-STABILITY-POLICY.4.0 - plan routing-pressure closure` | Behavior-free route/control audit and implementation plan. |
-| `README-STABILITY-POLICY.4.1` | `README-STABILITY-POLICY.4.1 - enforce routing-pressure closure` | Signoff-complete implementation from clean `6a5d1dcc`; hash supplied by Git history after landing. |
+| `README-STABILITY-POLICY.4.1` | `5c570719` — `README-STABILITY-POLICY.4.1 - enforce routing-pressure closure` | Committed implementation from clean `6a5d1dcc`; exact post-commit hygiene proved. |
+| `README-STABILITY-POLICY.4.2` | `README-STABILITY-POLICY.4.2 - close routing-pressure revision` | Signoff-complete unchanged closeout from clean `5c570719`; hash supplied by Git history after landing. |
 
 ## Changelog
 
@@ -537,3 +598,9 @@ decision records, and git; they do not need a second current-facing copy in READ
   unconditional resulting-tree checker, stale-route repair, and 32/32 mutation oracle pass focused proof and the
   definitive local gate. Canonical CI exits 0 through CLI 66x2 and Phase 0 1,031/1,031 in 694 seconds; atomic
   commit, brief clearing, exact residue removal, and clean proof remain before unchanged `.4.2` activation.
+- `2026-08-09`: Committed `.4.1` at `5c570719`, cleared the brief, and proved exact parent/subject, memory,
+  Knowledge, absent book, zero managed runs, clean worktree/index, and local cadence 174/300. Activated unchanged
+  closeout `.4.2` task-tree-first; no other repository owner changed before this acceptance contract existed.
+- `2026-08-09`: Completed `.4.2` unchanged recomposition and parent `.4` closure: exact Git/SHA owner identity,
+  focused route/mutation/budget/doctrine proof, and canonical CLI 66x2 plus Phase 0 1,031/1,031 in 673 seconds pass.
+  Atomic commit, brief clearing, exact residue removal, and clean proof precede containment `.0` activation.

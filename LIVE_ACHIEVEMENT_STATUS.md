@@ -1,5 +1,26 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-09 — README routing-pressure revision is recomposition-closed
+
+`README-STABILITY-POLICY.4.2` activates task-tree-first from clean implementation commit `5c570719` as intended
+atomic 175/300 with no push. Exact parent/subject, zero-byte brief, fresh memory/Knowledge, absent rendered book,
+zero managed runs, and empty worktree/index prove the handoff; the task file is the sole first closeout mutation.
+
+Git diff and SHA-256 checks prove README, policy, strict 20-surface/62-route registry, core-Perl resulting-tree
+checker, Bash wrapper, doctrine registry, and canonical-CI driver byte-identical to the implementation commit.
+No replacement oracle, threshold relaxation, debt-baseline refresh, parser/runtime/backend change, or public
+language behavior is introduced.
+
+Independent focused proof passes 44 reader + 18 author routes, all 20 surfaces, all 62 declarations, 32/32
+mutations, README 105/128 lines and 5,057/6,144 bytes, task metadata, Knowledge, memory, and all seven doctrines.
+Definitive CI exits 0 after MCP 5/5 implementations + 6/6 runtimes complete/141, Rust semantic 81.34 seconds,
+Julia semantic 416/416 in 31.0 seconds, cursor 288, repository containment and moved-root execution, primary CLI
+66/66 in both option environments, RAM 52%, and Phase 0 1,031/1,031 in 673 seconds.
+
+Routing-pressure parent `.4` is closed unchanged. Atomic commit, brief clearing, exact residue cleanup, and clean
+proof precede `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0`; project licensing `.3` remains independent/proposed and
+transaction `.14.3.1.1` remains behind the containment activity.
+
 ## 2026-08-09 — README routing-pressure enforcement is signoff-complete
 
 `README-STABILITY-POLICY.4.1` implements the ratified destination-closure contract from clean audit commit

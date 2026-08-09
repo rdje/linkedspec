@@ -2,7 +2,7 @@
 
 - Date: 2026-07-29
 - Status: accepted; original content/enforcement closed by `README-STABILITY-POLICY.2`; routing-pressure closure
-  ratified by `.4.0` and signoff-complete under `.4.1`
+  ratified by `.4.0`, implemented by `.4.1`, and independently recomposed/closed by `.4.2`
 - Tags: documentation, readme, doctrine, maintenance, navigation, local-ci, routing, pressure, lifecycle
 
 ## Context

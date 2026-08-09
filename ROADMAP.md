@@ -83,7 +83,7 @@ ten stale-current denials through six public mutations. Capability exclusion fre
 passes Knowledge Map 783/6,348, sole-facing mdBook 79/14,072 KiB with isolated rendered paragraphs, all doctrines,
 canonical CLI 66x2, RAM 52%, and Phase 0 1,031/1,031 in 651 seconds.
 
-README sustainability is an active repository-architecture revision lane under `README-STABILITY-POLICY`. ADR `0063`
+README sustainability is implementation- and recomposition-closed under `README-STABILITY-POLICY`. ADR `0063`
 defines the root README as a stable landing page rather than a status ledger: purpose/audience, one verified first
 use, stable architecture/invariants, concise canonical navigation, contribution/support, and accurate notices.
 The complete 1,615-line / 159,437-byte baseline is routed losslessly before trimming; the adopted README is the
@@ -95,8 +95,9 @@ and closes the original adoption. Director-priority revision `.4.0` ratifies tra
 status, the task collection, changes, and engineering notes; opens `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`; and
 root-causes original adoption's nonexistent `test_input/` layout marker. `.4.1` now implements the local fenced
 policy, strict JSONL registry, unconditional resulting-tree checker, stale-route repair, and 32/32 mutation
-classes. Canonical signoff passes all seven doctrines, CLI 66x2, and Phase 0 1,031/1,031 in 694 seconds; atomic
-commit remains before `.4.2` recomposes them unchanged and enables bounded-view debt migration. Recurring MCP
+classes. Canonical signoff passes all seven doctrines, CLI 66x2, and Phase 0 1,031/1,031 in 694 seconds. Unchanged
+`.4.2` proves the seven admitted owner hashes and independently passes CLI 66x2 plus Phase 0 1,031/1,031 in 673
+seconds; only its atomic clean handoff remains before bounded-view debt migration `.0`. Recurring MCP
 `.10.9.7.1.1.4` recomposes the committed rooted promotion
 unchanged and closes its implementation parents; `.10.9.7.2` now independently recomposes that full chain,
 closes `.10.9.7` and `.10.9`, and hands the clean boundary to public semantic/MCP no-drift `.10.10`.

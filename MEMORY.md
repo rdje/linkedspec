@@ -5,16 +5,16 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `6a5d1dcc` — clean README route/control plan HEAD from which implementation `.4.1` activated
-  task-tree-first (173/300; no push).
-- latest_completed_leaf: README routing-pressure implementation `.4.1` is signoff-complete under intended subject
-  `README-STABILITY-POLICY.4.1 - enforce routing-pressure closure` as atomic 174/300; commit not yet landed.
-- active_work_unit: `README-STABILITY-POLICY.4.1` evidence-only closeout after definitive canonical PASS.
-- next_action: regenerate Knowledge, build and inspect the final mdBook, run focused staged checks, remove exact
-  generated residue, commit `.4.1`, clear the brief, and prove clean before activating unchanged `.4.2`.
-- in_flight_uncommitted: staged policy/README/registry/checker/doctrine/public-doc implementation plus final
-  continuity evidence; no background job remains.
-- blockers: none. Definitive `bash tools/run_ci_local.sh` exits 0; Phase 0 passes 1,031/1,031 in 694 seconds.
+- activation_commit: `5c570719` — clean README routing-pressure implementation HEAD from which unchanged closeout
+  `.4.2` activated task-tree-first (174/300; no push).
+- latest_completed_leaf: unchanged README routing-pressure closeout `.4.2` is signoff-complete under intended subject
+  `README-STABILITY-POLICY.4.2 - close routing-pressure revision` as atomic 175/300; commit not yet landed.
+- active_work_unit: `.4.2` evidence-only lockstep/commit closeout after parent `.4` canonical closure.
+- next_action: regenerate Knowledge, build/inspect the final mdBook, run focused staged checks, remove exact residue,
+  commit `.4.2`, clear the brief, and prove clean before activating `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0`.
+- in_flight_uncommitted: task/roadmap/ADR/Knowledge/book/continuity closure evidence only; all seven admitted
+  implementation owners remain byte-identical to `5c570719`; no background job remains.
+- blockers: none. Definitive no-change CI exits 0; Phase 0 passes 1,031/1,031 in 673 seconds.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes, and 11 topology mutations advance governance to 53. Public authored values/transactions remain future.
@@ -41,7 +41,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - preserved_contract_handoff: repeated-action closure next_owner remains `FUTURE-PARITY-BACKLOG.10.1`.
 - current_readme_contract: README stays 105/5,057 under hard 128/6,144 caps. `.4.1` implements 62 routes over 20
   surfaces with reader/overflow separation, lifecycle controls, immutable debt, reviewed limits, and 32/32
-  mutations. Current fixture roots are `t/` and `tests/`, not root `test_input/`; `.4.2` closes unchanged.
+  mutations. Current fixture roots are `t/` and `tests/`, not root `test_input/`; `.4.2` closes parent `.4` unchanged.
 - documentation_debt_owner: live status, task evidence, changes, and engineering notes retain measured immutable
   baselines during `.4`; `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0-.4` owns their later bounded-view migrations.
 - current_transaction_contract: future syntax is exact `recognition_checkpoint`,
@@ -53,7 +53,6 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   retains final public no-drift. `TASK-TREE-METADATA-HYGIENE.5` separately owns active-frontier freshness.
 - latest_bootstrap_read: 2026-08-09 — complete roadmap, codebase, mdBook, bootstrap/memory/task/ADR/Knowledge,
   README-policy/checker/routes, storage/canonical, history, and sole-facing status review refreshed.
-- pivot_guard: prove `.4.1` post-commit clean before `.4.2`; prove README `.4.2` clean before transaction or live-
-  document containment work.
-- push_policy: hard lock at 300 new local commits; `.4.1` is intended atomic 174/300; no push.
+- pivot_guard: prove README `.4.2` clean before live-document containment or transaction work.
+- push_policy: hard lock at 300 new local commits; `.4.2` is intended atomic 175/300; no push.
 - environment: use project-data wrappers and `perl -Iperl`; approved canonical containment may take 30 minutes.

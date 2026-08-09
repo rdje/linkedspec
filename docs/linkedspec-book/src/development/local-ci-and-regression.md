@@ -42,6 +42,11 @@ immutable measured debt pending their separately owned containment work; their c
 registered doctrines, repository containment and moved-root execution, primary CLI 66/66 in both option
 environments, RAM 32%, and Phase 0 1,031/1,031 in 694 seconds. No language/runtime surface moves in that proof.
 
+Unchanged closeout `.4.2` proves the SHA-256/Git identity of README, policy, registry, routing checker, Bash
+wrapper, doctrine registry, and canonical driver from commit `5c570719`. It independently repeats 20 surfaces,
+62 routes, 32/32 mutations, seven doctrines, semantic/MCP/cursor admission, containment/moved-root execution,
+primary CLI 66/66 twice, RAM 52%, and Phase 0 1,031/1,031 in 673 seconds. The revision closes without a new oracle.
+
 ### Neutral typed source-location contract
 
 The default gate requires and runs the backend-neutral typed source-location checker through repository-managed

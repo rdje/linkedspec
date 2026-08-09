@@ -1,6 +1,6 @@
 # ARCHITECTURE STATE
 
-## README route-pressure closure is implemented and signoff-complete
+## README route-pressure closure is implementation- and recomposition-closed
 
 `README-STABILITY-POLICY.4.0` ratifies the existing bounded landing-page doctrine's transitive destination model;
 `.4.1` implements it as one project-owned
@@ -19,7 +19,9 @@ audit also proves root `test_input/` never existed and was introduced only as st
 `ca846e7a`; `.4.1` removes that marker and the checker now rejects missing/symlinked local targets. Focused proof
 passes 44 reader + 18 author routes, all 20 surfaces, 32/32 mutation classes, and README 105/128 lines plus
 5,057/6,144 bytes. Canonical signoff exits 0 after all seven doctrines, CLI 66x2, and Phase 0 1,031/1,031 in 694
-seconds. Parser/runtime/backend behavior remains unchanged; only atomic commit and unchanged `.4.2` closeout remain.
+seconds. Unchanged `.4.2` proves all seven implementation-owner hashes from clean `5c570719` and independently
+passes the same route/mutation/doctrine chain, CLI 66x2, and Phase 0 1,031/1,031 in 673 seconds. Parent `.4` is
+closed without parser/runtime/backend behavior movement; containment `.0` is next after atomic clean handoff.
 
 - `2026-08-09 cursor transaction authored/static contract`: behavior-free
   `FUTURE-PARITY-BACKLOG.14.3.1.0` ratifies four accepted future special forms:

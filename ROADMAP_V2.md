@@ -69,7 +69,7 @@ public-closed under `FUTURE-PARITY-BACKLOG.24` without manifest, row, runtime, o
 signoff passes Knowledge Map 783/6,348, sole-facing mdBook 79/14,072 KiB with isolated rendered paragraphs, all
 doctrines, canonical CLI 66x2, RAM 52%, and Phase 0 1,031/1,031 in 651 seconds.
 
-Active README-sustainability revision: `README-STABILITY-POLICY` and ADR `0063` make root `README.md` a stable,
+Closed README-sustainability revision: `README-STABILITY-POLICY` and ADR `0063` make root `README.md` a stable,
 bounded landing page. A full 1,615-line / 159,437-byte audit routes all changing/deep detail before a reviewed
 105-line / 5,072-byte trim; hard maxima are 128 lines / 6,144 bytes. `.0` is committed at `adcc89fe`; `.1` has
 adopted `README_POLICY.md`, the exact trim, and registered enforcement at `ca846e7a`; `.2` recomposes those owners
@@ -79,7 +79,8 @@ task evidence, changes, and engineering notes, opens `LIVE-DOCUMENT-PRESSURE-CON
 nonexistent `test_input/` layout marker introduced by `ca846e7a`. `.4.1` now implements the local policy revision,
 strict registry, unconditional resulting-tree checker, stale-route correction, and 32/32 mutation classes.
 Canonical signoff passes CLI 66x2 and Phase 0 1,031/1,031 in 694 seconds before atomic commit and unchanged `.4.2`
-closeout; bounded-view debt migration follows. Recurring MCP `.10.9.7.1.1.4`
+closeout. `.4.2` proves seven admitted owner hashes and independently passes CLI 66x2 plus Phase 0 1,031/1,031 in
+673 seconds, closing `.4`; bounded-view debt migration `.0` follows after atomic clean handoff. Recurring MCP `.10.9.7.1.1.4`
 recomposes the committed rooted promotion unchanged and closes its implementation parents; `.10.9.7.2` now
 independently recomposes the full chain, closes `.10.9.7` and `.10.9`, and hands the clean boundary to public
 semantic/MCP no-drift `.10.10`. The

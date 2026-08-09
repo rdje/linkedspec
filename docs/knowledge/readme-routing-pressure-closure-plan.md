@@ -12,9 +12,9 @@ answers:
   - may a routed destination baseline refresh automatically
   - what implements README route closure
 date: 2026-08-09
-status: implemented; canonical signoff complete
+status: implemented and independently recomposed; routing-pressure revision closed
 tags: [readme, documentation, routing, pressure, lifecycle, doctrine, containment, debt]
-evidence: "README-STABILITY-POLICY.4.0 reads the supplied 185-line policy revision and freezes 62 routes over 20 surfaces plus 32 mutation classes. Implementation .4.1 adds the 83-line strict JSONL registry and a core-Perl resulting-tree checker; focused report passes 44 reader + 18 author routes, all 20 measured/classified surfaces, and 32/32 mutations. README remains 105 lines and shrinks 5,072->5,057 bytes after removing only stale test_input/. Clean 7c2ff407 debt baselines remain immutable; finite README .4 or LIVE-DOCUMENT-PRESSURE-CONTAINMENT owners alone may grow them. Canonical signoff exits 0 through CLI 66x2 and Phase 0 1,031/1,031 in 694 seconds."
+evidence: "README-STABILITY-POLICY.4.0 reads the supplied 185-line policy revision and freezes 62 routes over 20 surfaces plus 32 mutation classes. Implementation .4.1 adds the 83-line strict JSONL registry and a core-Perl resulting-tree checker; focused report passes 44 reader + 18 author routes, all 20 measured/classified surfaces, and 32/32 mutations. README remains 105 lines and shrinks 5,072->5,057 bytes after removing only stale test_input/. Clean 7c2ff407 debt baselines remain immutable; finite README .4 or LIVE-DOCUMENT-PRESSURE-CONTAINMENT owners alone may grow them. Implementation signoff exits 0 through CLI 66x2 and Phase 0 1,031/1,031 in 694 seconds. Unchanged .4.2 proves seven owner hashes from clean 5c570719 and independently passes CLI 66x2 plus Phase 0 1,031/1,031 in 673 seconds, closing .4."
 last_verified: 2026-08-09
 reverify:
   - "wc -l -c README.md README_POLICY.md LIVE_ACHIEVEMENT_STATUS.md CHANGES.md DEVELOPMENT_NOTES.md docs/tasks/FUTURE-PARITY-BACKLOG.md"

@@ -35,6 +35,11 @@ The implementation's definitive local gate passes all seven doctrines, repositor
 proof, primary CLI 66/66 in both option environments, and Phase 0 1,031/1,031 in 694 seconds. This closes
 implementation signoff without changing parser, runtime, backend, fixture, MCP, or CLI behavior.
 
+Closeout `.4.2` then byte-compares the seven admitted policy/README/registry/checker/doctrine/gate owners with
+commit `5c570719` and reruns the full proof without a replacement implementation. The independent gate passes
+primary CLI 66/66 twice and Phase 0 1,031/1,031 in 673 seconds, closing routing-pressure revision `.4` unchanged.
+`LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0` is the next documentation-sustainability owner after atomic clean handoff.
+
 The public book explains LinkedSpec to the outside world. The continuity docs help the project survive crashes, handoffs, and long refactoring sessions.
 
 ## Public book

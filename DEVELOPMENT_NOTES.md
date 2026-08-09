@@ -1,5 +1,18 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-09 (`README-STABILITY-POLICY.4.2` — unchanged routing-pressure closeout): close an enforcement revision
+  by recomposing the committed owners, not by adding a second checker. Git diff plus SHA-256 identity over README,
+  policy, registry, route checker, wrapper, doctrine registry, and canonical driver is the implementation boundary.
+- The independent focused rerun remains 20 surfaces / 62 routes / 44 reader + 18 author / 32/32 mutations, with
+  README 105/128 lines and 5,057/6,144 bytes. The canonical no-change rerun passes seven doctrines, semantic/MCP/
+  cursor admission, containment/moved-root, CLI 66x2, RAM 52%, and Phase 0 1,031/1,031 in 673 seconds.
+- Parent `.4` closes without refreshing debt baselines or spending containment semantics. The exact next
+  documentation-sustainability owner is `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0`; licensing `.3` remains a separate
+  director decision and transaction `.14.3.1.1` remains behind the containment activity.
+- A debt-transition task must remain mechanically `active` through the commit that records its final continuity
+  growth. “Signoff-complete” alone is intentionally insufficient because authorization compares the staged
+  resulting tree with `HEAD`; closeout status becomes final only after that snapshot lands.
+
 - 2026-08-09 (`README-STABILITY-POLICY.4.1` — routing-pressure enforcement): a bounded landing page is only
   durable when every actual reader and overflow destination is declared and reaches a lifecycle-appropriate
   controlled terminal. Keep the 20-surface/62-route JSONL registry data-only and make the core-Perl checker derive

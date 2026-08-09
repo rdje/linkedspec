@@ -14,9 +14,9 @@ answers:
   - are README routed destinations pressure controlled
   - what revision adds README routing pressure closure
 date: 2026-07-29
-status: original adoption closed; routing-pressure enforcement signoff-complete
+status: original adoption and routing-pressure revision closed; license decision remains independent proposed
 tags: [readme, documentation, doctrine, navigation, maintenance, license, routing, pressure, lifecycle]
-evidence: "README-STABILITY-POLICY.0-.2 close the 105-line / 5,072-byte landing page, hard 128/6,144 budgets, and original doctrine. Revision .4.0 ratifies the unchecked-neighbor repair; implementation .4.1 enforces exactly 62 routes across 20 surfaces with 32/32 mutation classes from one strict project-owned registry and unconditional resulting-tree checker. README is 105 lines / 5,057 bytes after deleting only ca846e7a's nonexistent test_input/ marker. Four dated debt baselines cannot auto-refresh and have finite README .4 or LIVE-DOCUMENT-PRESSURE-CONTAINMENT owners. Canonical signoff exits 0 through CLI 66x2 and Phase 0 1,031/1,031 in 694 seconds; licensing remains independent proposed .3."
+evidence: "README-STABILITY-POLICY.0-.2 close the 105-line / 5,072-byte landing page, hard 128/6,144 budgets, and original doctrine. Revision .4.0 ratifies the unchecked-neighbor repair; implementation .4.1 enforces exactly 62 routes across 20 surfaces with 32/32 mutation classes from one strict project-owned registry and unconditional resulting-tree checker. README is 105 lines / 5,057 bytes after deleting only ca846e7a's nonexistent test_input/ marker. Four dated debt baselines cannot auto-refresh and have finite README .4 or LIVE-DOCUMENT-PRESSURE-CONTAINMENT owners. Implementation canonical signoff passes CLI 66x2 and Phase 0 1,031/1,031 in 694 seconds; unchanged .4.2 repeats exact owner identity, focused closure, CLI 66x2, and Phase 0 1,031/1,031 in 673 seconds and closes the revision. Licensing remains independent proposed .3."
 last_verified: 2026-08-09
 reverify:
   - "wc -l -c README.md"

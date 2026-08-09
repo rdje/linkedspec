@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-08-09 — README-STABILITY-POLICY.4.2 — close routing-pressure revision
+
+- Activated from clean implementation commit `5c570719` after proving exact parent/subject, zero-byte brief,
+  fresh memory/Knowledge, absent rendered book, zero managed runs, and local cadence 174/300. The task tree was the
+  sole first closeout mutation.
+- Recombined the committed landing-page policy, README, strict JSONL registry, core-Perl routing checker, Bash
+  wrapper, doctrine registry, and canonical-CI requirement without changing any implementation owner. Git diff
+  and SHA-256 checks prove all seven files byte-identical to `5c570719`.
+- Independently reran the admitted contract: README 105/128 lines and 5,057/6,144 bytes; 20 controlled surfaces;
+  62 declared routes split 44 reader + 18 author; 32/32 mutation classes; memory, Knowledge, task metadata, and all
+  seven doctrines pass.
+- Definitive no-change CI exits 0 with MCP 5/5 implementations + 6/6 runtimes complete/141, Rust semantic 81.34
+  seconds, Julia semantic 416/416 in 31.0 seconds, cursor 288, repository containment/moved-root execution, primary
+  CLI 66x2, RAM 52%, and Phase 0 1,031/1,031 in 673 seconds.
+- Closed routing-pressure parent `.4` without a replacement implementation, relaxed control, parser/runtime/backend
+  behavior, or user-visible language change. `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0` is next after atomic clean
+  handoff; project licensing remains the independent proposed director decision `.3`.
+- The first staged closeout proof correctly rejected four debt surfaces when `.4.2` lost active status before its
+  own commit. Root cause is the resulting-tree-versus-HEAD authorization rule: the transition owner remains active,
+  annotated signoff-complete/pending commit, until the atomic snapshot lands. No threshold or checker was weakened.
+
 ## 2026-08-09 — README-STABILITY-POLICY.4.1 — enforce routing-pressure closure
 
 - Adopted the fenced LinkedSpec routing-pressure policy behind the existing 128-line / 6,144-byte landing-page
