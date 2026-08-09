@@ -438,6 +438,8 @@ require_tracked_file tools/test_memory_commit_pointer.sh
 require_tracked_file scripts/check_doctrines.sh
 require_tracked_file scripts/check_diagnosis_evidence.sh
 require_tracked_file scripts/check_readme_stability.sh
+require_tracked_file scripts/check_readme_routing_pressure.pl
+require_tracked_file doctrine/readme_stability/routes.jsonl
 require_tracked_file README_POLICY.md
 require_tracked_file DOCTRINE_ENFORCEMENT.md
 require_tracked_file TOOLBOX.md
@@ -488,6 +490,7 @@ bash -n tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh \
  tools/check_punctuation_light_five_backend.sh tools/check_scalar_numeric_six_runtime.sh
 perl -c perl/LinkedSpec.pm
 perl -c bin/linkedspec
+perl -c scripts/check_readme_routing_pressure.pl
 perl -c tools/run_cli_conformance.pl
 perl -c tools/check_capability_conformance.pl
 perl -c tools/check_generated_source_contract.pl

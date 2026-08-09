@@ -12,14 +12,15 @@ answers:
   - may a routed destination baseline refresh automatically
   - what implements README route closure
 date: 2026-08-09
-status: accepted plan; implementation pending
+status: implemented; canonical signoff complete
 tags: [readme, documentation, routing, pressure, lifecycle, doctrine, containment, debt]
-evidence: "README-STABILITY-POLICY.4.0 reads the supplied 185-line policy revision, compares it to LinkedSpec's 88-line policy and ADR 0063, derives 62 planned routes over 20 surfaces, and freezes a strict JSONL registry plus dependency-free checker and 32 mutation classes. Clean 7c2ff407 measurements identify debt at LIVE_ACHIEVEMENT_STATUS.md 14,769/1,262,969, docs/tasks 85 files/64,378/6,204,304 with FUTURE-PARITY-BACKLOG 26,979/2,720,175, CHANGES 44,128/3,091,199, and DEVELOPMENT_NOTES 21,169/2,277,541. Baselines are immutable; only finite named transition owners may grow debt. README-STABILITY-POLICY.4.1 owns registry/checker adoption, .4.2 unchanged closeout, and LIVE-DOCUMENT-PRESSURE-CONTAINMENT owns subsequent bounded-view migrations."
+evidence: "README-STABILITY-POLICY.4.0 reads the supplied 185-line policy revision and freezes 62 routes over 20 surfaces plus 32 mutation classes. Implementation .4.1 adds the 83-line strict JSONL registry and a core-Perl resulting-tree checker; focused report passes 44 reader + 18 author routes, all 20 measured/classified surfaces, and 32/32 mutations. README remains 105 lines and shrinks 5,072->5,057 bytes after removing only stale test_input/. Clean 7c2ff407 debt baselines remain immutable; finite README .4 or LIVE-DOCUMENT-PRESSURE-CONTAINMENT owners alone may grow them. Canonical signoff exits 0 through CLI 66x2 and Phase 0 1,031/1,031 in 694 seconds."
 last_verified: 2026-08-09
 reverify:
   - "wc -l -c README.md README_POLICY.md LIVE_ACHIEVEMENT_STATUS.md CHANGES.md DEVELOPMENT_NOTES.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
   - "rg --files docs/tasks -g '*.md' | sort | xargs wc -lc"
   - "rg -n 'README-STABILITY-POLICY\\.4|LIVE-DOCUMENT-PRESSURE-CONTAINMENT' docs/tasks/README-STABILITY-POLICY.md docs/tasks/LIVE-DOCUMENT-PRESSURE-CONTAINMENT.md docs/TASK_TREE.md"
+  - "perl scripts/check_readme_routing_pressure.pl --report"
 ---
 
 # README routing-pressure closure plan
@@ -27,7 +28,7 @@ reverify:
 A bounded landing page is not sufficient when its routing advice can grow an unchecked neighboring document.
 LinkedSpec's revision classifies direct reader navigation separately from author-overflow guidance, declares every
 actual route in `doctrine/readme_stability/routes.jsonl`, and requires transitive closure at a lifecycle-appropriate
-controlled terminal. The registry and checker are planned in `.4.0` and remain non-executable until `.4.1`.
+controlled terminal. `.4.0` ratified the data model; `.4.1` implements it and the unconditional core-Perl checker.
 
 Bounded snapshots use independent line/byte limits and current-state semantics; collections use an index plus
 per-part, file-count, and aggregate limits; generated views retain freshness checks; append histories are query-
@@ -37,3 +38,8 @@ components used only for reader navigation need exact root-relative existence bu
 Current large measurements are immutable debt baselines, not recommended values. Debt may consume only a finite
 transition owned by README `.4` or its exact containment leaf; ordinary work cannot refresh the baseline merely by
 changing the registry. Subsequent semantic migrations belong to `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`.
+
+The checker reads the staged resulting tree whenever an index change exists and otherwise reads the worktree. It
+rejects a controlled staged/worktree split, derives all 39 README routes, five local-enforcement routes, 18 policy
+overflow routes, and 18 emitted hints independently, then requires exact registry equality. Its `--report` mode
+exposes deterministic per-surface counts without writing an artifact.

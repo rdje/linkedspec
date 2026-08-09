@@ -19,18 +19,21 @@ closed by `.2`, and is checked with:
 bash scripts/check_readme_stability.sh
 ```
 
-Routing-pressure revision `.4.0` audits the next boundary before changing that checker. It classifies reader
-navigation separately from author-overflow destinations, follows routes transitively, assigns lifecycle-specific
-controls, and records legacy high-water marks as debt rather than healthy targets. Its frozen implementation plan
-contains 62 routes over 20 surfaces and 32 mutation classes. Implementation leaf `.4.1` will add the local route
-registry and unconditional resulting-tree closure check; until that leaf lands, the command above enforces the
-existing README-only policy.
+Routing-pressure revision `.4.0` audited the next boundary before changing that checker. Implementation `.4.1`
+adds `doctrine/readme_stability/routes.jsonl` and an unconditional core-Perl resulting-tree check. It classifies
+reader navigation separately from author-overflow destinations, follows routes transitively, assigns
+lifecycle-specific controls, and records legacy high-water marks as debt rather than healthy targets. Every focused run now
+proves 62 exact routes over 20 surfaces and all 32 mutation classes before the README doctrine can pass.
 
 The audit also found and traced a stale root `test_input/` layout entry introduced during the original README
-trim. LinkedSpec's current fixture roots are `t/` and `tests/`; `.4.1` owns the landing-page correction and exact
-route-existence guard. Four already-large neighboring families—live status, task evidence, changes, and engineering
+trim. LinkedSpec's current fixture roots are `t/` and `tests/`; `.4.1` removes the false route and checks every local
+target for existence and symlinks. Four already-large neighboring families—live status, task evidence, changes, and engineering
 notes—have a separate `LIVE-DOCUMENT-PRESSURE-CONTAINMENT` owner so the README revision does not silently bless
 their present size or mix semantic migration into doctrine admission.
+
+The implementation's definitive local gate passes all seven doctrines, repository containment and moved-root
+proof, primary CLI 66/66 in both option environments, and Phase 0 1,031/1,031 in 694 seconds. This closes
+implementation signoff without changing parser, runtime, backend, fixture, MCP, or CLI behavior.
 
 The public book explains LinkedSpec to the outside world. The continuity docs help the project survive crashes, handoffs, and long refactoring sessions.
 

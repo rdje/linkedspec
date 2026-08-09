@@ -1,5 +1,22 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-09 (`README-STABILITY-POLICY.4.1` — routing-pressure enforcement): a bounded landing page is only
+  durable when every actual reader and overflow destination is declared and reaches a lifecycle-appropriate
+  controlled terminal. Keep the 20-surface/62-route JSONL registry data-only and make the core-Perl checker derive
+  README, policy, and emitted-hint candidates independently; do not let the registry prove itself.
+- Run route pressure on the resulting Git tree regardless of changed paths. Staged controlled content is
+  authoritative when the index differs; a staged/worktree split for the same controlled owner is a hard failure,
+  not a reason to silently choose one view.
+- Preserve separate route meanings. Reader navigation proves exact ownership/existence and may terminate at
+  component, executable, query, or external surfaces. Author-overflow authority must terminate at a surface with
+  bounded, partitioned, generated-fresh, append/query, frozen, or equivalent pressure control.
+- Legacy high-water marks for live status, task evidence, changes, and engineering notes are immutable debt, not
+  reusable targets. Only finite README `.4` or exact `LIVE-DOCUMENT-PRESSURE-CONTAINMENT` evidence may consume
+  transition headroom; changing a baseline or any canonical limit requires explicit reviewed authority.
+- Signoff evidence: focused routing reports 44 reader + 18 author routes and 32/32 mutations; README is 105/128
+  lines and 5,057/6,144 bytes. The definitive gate exits 0 through seven doctrines, semantic/MCP/cursor proof,
+  repository containment/moved-root execution, CLI 66x2, RAM 32%, and Phase 0 1,031/1,031 in 694 seconds.
+
 - 2026-08-09 (`README-STABILITY-POLICY.4.0` — routing-pressure closure plan): the stable landing-page doctrine
   must control its destinations transitively, not merely cap `README.md`. Preserve the local 128-line / 6,144-byte
   ceiling; do not import FSMGen-specific owners, numbers, or paths and do not create an upstream dependency.

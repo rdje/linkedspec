@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-08-09 — README-STABILITY-POLICY.4.1 — enforce routing-pressure closure
+
+- Adopted the fenced LinkedSpec routing-pressure policy behind the existing 128-line / 6,144-byte landing-page
+  ceilings. Added one strict project-owned JSONL authority with exactly 20 surfaces and 62 routes: 39 README
+  reader routes, five policy/enforcement reader routes, and 18 independent author-overflow routes.
+- Added a repository-rooted core-Perl resulting-tree checker that runs unconditionally through the existing
+  `README-STABILITY` doctrine. It rejects route drift, missing/symlinked targets, cycles, lifecycle/control errors,
+  stale generated projections, unowned debt growth, unreviewed thresholds, and staged/worktree disagreement.
+- Locked 32/32 in-memory mutation classes, class-appropriate controls, immutable legacy-debt baselines with finite
+  transition owners, 80% warning and 90% rollover milestones, and accepted/indexed-ADR authority for limit changes.
+- Removed only the nonexistent root `test_input/` marker from README, preserving current `t/` and `tests/` fixture
+  roots. README remains 105 lines and shrinks from 5,072 to 5,057 bytes; every local route now proves existence,
+  non-symlink identity, and declared ownership.
+- Synchronized the doctrine mirrors, local-CI requirements, ADR `0063`, Knowledge, task/index, roadmaps,
+  architecture, continuity layers, and sole-facing mdBook. No parser, runtime, backend, MCP, fixture, CLI, storage,
+  hosted-CI, or user-visible language behavior changed.
+- Focused proof passes 44 reader + 18 author routes, all 20 surfaces, 32/32 mutations, and README 105/128 lines
+  plus 5,057/6,144 bytes. Definitive local CI exits 0 through all seven doctrines, MCP 5/5 implementations + 6/6
+  runtimes complete/141, composed semantic/admission consumers, cursor 288, containment/moved-root execution,
+  primary CLI 66x2, RAM 32%, and Phase 0 1,031/1,031 in 694 seconds.
+
 ## 2026-08-09 — README-STABILITY-POLICY.4.0 — plan routing-pressure closure
 
 - Read the director-supplied 185-line policy revision in full and ratified its project-neutral additions as a

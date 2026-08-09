@@ -140,13 +140,17 @@ runtime behavior movement. Unchanged closeout `.2` repeats all seven doctrines, 
 quick start, public owner checks, repository containment/moved-root proof, CLI 66x2, and Phase 0 1,031/1,031;
 the bounded-README adoption critical path is closed.
 
-Routing-pressure audit `.4.0` now ratifies a stricter follow-on without changing the current landing page or
-checker: every reader and author-overflow route will terminate at a classified, lifecycle-controlled surface.
-The frozen `.4.1` implementation shape is 62 routes over 20 surfaces with 32 failure mutations and reviewed
-authority for every threshold change. It also corrects the stale root `test_input/` layout marker introduced by
-the original adoption; current fixture roots are `t/` and `tests/`. Oversized live status, task evidence, changes,
-and engineering notes are explicitly debt and have a separate bounded-view migration program rather than being
-accepted as indefinite README destinations.
+Routing-pressure audit `.4.0` ratifies a stricter follow-on; implementation `.4.1` now enforces it without language
+or runtime movement. A strict project-owned JSONL registry declares 62 exact routes over 20 surfaces, and the
+unconditional resulting-tree checker reports 44 reader routes, 18 author routes, and 32/32 mutation classes. It
+also removes the stale root `test_input/` layout marker introduced by the original adoption; current fixture roots
+are `t/` and `tests/`, and every local route now proves exact existence and non-symlink ownership. Oversized live
+status, task evidence, changes, and engineering notes remain immutable debt with a separate bounded-view migration
+program rather than becoming indefinite README destinations.
+
+Implementation signoff is complete: all seven doctrines, the full semantic/MCP/cursor chain, repository
+containment and moved-root execution, primary CLI 66/66 in both option environments, and Phase 0 1,031/1,031 in
+694 seconds pass. Atomic `.4.1` landing and unchanged `.4.2` recomposition precede the bounded-view migration.
 
 Julia now has an admitted callable native decoded MCP adapter and strict synchronous stdio under
 `FUTURE-PARITY-BACKLOG.10.9.5.1-.3`: a deterministic

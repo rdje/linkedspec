@@ -2,7 +2,7 @@
 
 - Date: 2026-07-29
 - Status: accepted; original content/enforcement closed by `README-STABILITY-POLICY.2`; routing-pressure closure
-  ratified by `.4.0` with implementation pending in `.4.1`
+  ratified by `.4.0` and signoff-complete under `.4.1`
 - Tags: documentation, readme, doctrine, maintenance, navigation, local-ci, routing, pressure, lifecycle
 
 ## Context
@@ -90,7 +90,7 @@ README is not successful when its destination can grow as an unclassified neighb
 distinguishes `reader_navigation` from `author_overflow`, inventories every actual path-shaped destination named
 by README, this policy, and checker failure guidance, and follows each route until it reaches a controlled terminal.
 
-The project-owned registry selected for `.4.1` is `doctrine/readme_stability/routes.jsonl`. It contains strict,
+The project-owned registry implemented by `.4.1` is `doctrine/readme_stability/routes.jsonl`. It contains strict,
 typed JSON Lines records for surfaces and routes. Surface records name a stable id, root-relative target patterns,
 owner, lifecycle, verifier, line/byte/file/aggregate limits where applicable, 80% warning and 90% rollover
 milestones, route targets, and any immutable baseline/debt transition. Route records name exact source path,
@@ -108,7 +108,7 @@ Controls are lifecycle-specific:
 - source/executable repository components used only for reader navigation must exist at their exact root-relative
   location but are not misclassified as prose sinks.
 
-The checker runs unconditionally as part of existing doctrine `README-STABILITY`; it does not depend on README
+The checker now runs unconditionally as part of existing doctrine `README-STABILITY`; it does not depend on README
 being changed. It derives local Markdown/code-path route candidates and all emitted `route_hint` author guidance,
 requires exact registry coverage, evaluates transitive closure, measures the staged resulting tree, and rejects
 undeclared threshold increases. Any pressure-limit increase requires a new accepted and indexed ADR with exact
@@ -134,6 +134,15 @@ for absent root `test_input/`. Git proves neither its parent nor current tree co
 fixture roots are `t/` and `tests/`, with nested Pgen inputs under `rgx/subs/pgen/tests/`. `.4.1` removes the stale
 root path and makes reader-route existence mutation-tested.
 
+Implementation result 2026-08-09: `README_POLICY.md` is a 158-line / 9,102-byte fenced local authority under its
+256-line / 24,576-byte surface control; README remains 105 lines and shrinks to 5,057 bytes after only the stale
+marker is removed. The 83-line registry declares the 20 ratified ids and 62 exact routes (39 README reader, five
+policy/enforcement reader, 18 author-overflow). The core-Perl checker extracts those routes from the resulting
+documents and its actual `route_hint` lines, rejects staged/worktree disagreement, measures every declared member,
+executes the task-index and Knowledge freshness verifiers, checks exact path/command/external/query terminals, and
+governs immutable debt plus future contract/limit changes against `HEAD`. Its in-memory oracle independently
+exercises all 32 named mutation classes on every run.
+
 ## Consequences
 
 - README becomes fast to scan and mechanically resistant to unbounded growth.
@@ -148,8 +157,9 @@ root path and makes reader-route existence mutation-tested.
 
 Original adoption signoff passes the staged-snapshot checker and the complete canonical local gate, including all
 seven doctrines, repository-volume containment, moved-root execution, primary CLI 66x2, and Phase 0
-1,031/1,031. Revision `.4.0` changes planning truth only; `.4.1` must earn a new implementation signoff before its
-registry or closure checker is accepted. Capability behavior remains unchanged.
+1,031/1,031. Revision `.4.0` changed planning truth only; `.4.1` focused proof now passes 20 surfaces, 62 routes,
+32/32 mutation classes, and README 105/128 lines plus 5,057/6,144 bytes. Canonical implementation signoff remains
+the final acceptance oracle. Capability behavior remains unchanged.
 
 ## Links
 

@@ -20,6 +20,28 @@ bash tools/run_ci_local.sh
 
 This is the canonical regression gate for local development.
 
+### README and routed-document pressure
+
+The registered `README-STABILITY` doctrine runs on every doctrine invocation, regardless of which paths changed.
+Its Bash entry point checks the stable landing-page headings and 128-line / 6,144-byte ceilings, then invokes the
+core-Perl routing check over the resulting Git tree:
+
+```bash
+bash scripts/check_readme_stability.sh
+perl scripts/check_readme_routing_pressure.pl --report
+```
+
+The data-only registry declares 62 routes over 20 surfaces. The checker independently extracts 39 README reader
+routes, five policy/enforcement reader routes, 18 policy author-overflow routes, and the actual failure hints; it
+rejects any mismatch, missing or symlinked local target, route cycle, incompatible lifecycle/control, stale
+generated owner, unowned debt growth, staged/worktree split, or unreviewed threshold increase. Its in-memory
+mutation oracle must report 32/32. Large live status, task evidence, change history, and engineering notes remain
+immutable measured debt pending their separately owned containment work; their ceilings are not healthy defaults.
+
+`README-STABILITY-POLICY.4.1` canonical admission passes that unconditional doctrine together with the other six
+registered doctrines, repository containment and moved-root execution, primary CLI 66/66 in both option
+environments, RAM 32%, and Phase 0 1,031/1,031 in 694 seconds. No language/runtime surface moves in that proof.
+
 ### Neutral typed source-location contract
 
 The default gate requires and runs the backend-neutral typed source-location checker through repository-managed

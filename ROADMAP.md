@@ -90,12 +90,14 @@ The complete 1,615-line / 159,437-byte baseline is routed losslessly before trim
 reviewed 105-line / 5,072-byte prototype within hard 128-line / 6,144-byte budgets. Leaf `.0` commits the
 behavior-free adoption plan at `adcc89fe`; `.1` implements the repository policy, trim, and registered
 `README-STABILITY` doctrine at `ca846e7a`; `.2` recomposes those owners unchanged under a second canonical gate
-and closes the original adoption. Director-priority revision `.4.0` now ratifies transitive pressure closure for
+and closes the original adoption. Director-priority revision `.4.0` ratifies transitive pressure closure for
 62 exact reader/author routes over 20 lifecycle-controlled surfaces. It records immutable debt baselines for live
 status, the task collection, changes, and engineering notes; opens `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`; and
-root-causes original adoption's nonexistent `test_input/` layout marker. `.4.1` owns the local fenced policy,
-strict JSONL registry, unconditional checker, stale-route repair, and 32 mutation classes; `.4.2` recomposes them
-unchanged before bounded-view debt migration. Recurring MCP `.10.9.7.1.1.4` recomposes the committed rooted promotion
+root-causes original adoption's nonexistent `test_input/` layout marker. `.4.1` now implements the local fenced
+policy, strict JSONL registry, unconditional resulting-tree checker, stale-route repair, and 32/32 mutation
+classes. Canonical signoff passes all seven doctrines, CLI 66x2, and Phase 0 1,031/1,031 in 694 seconds; atomic
+commit remains before `.4.2` recomposes them unchanged and enables bounded-view debt migration. Recurring MCP
+`.10.9.7.1.1.4` recomposes the committed rooted promotion
 unchanged and closes its implementation parents; `.10.9.7.2` now independently recomposes that full chain,
 closes `.10.9.7` and `.10.9`, and hands the clean boundary to public semantic/MCP no-drift `.10.10`.
 Project-level licensing remains a separate proposed director decision; no terms are inferred from component/

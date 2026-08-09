@@ -73,7 +73,7 @@ The governing decisions and verification commands are indexed in the [decision r
 | `perl/` | Perl reference implementation. |
 | `rust/`, `dart/`, `julia/`, `lua/` | Native runtime variants and their local guides. |
 | `bin/` | User-facing command-line entry points. |
-| `t/`, `tests/`, `test_input/` | Regression, conformance, and input fixtures. |
+| `t/`, `tests/` | Regression, conformance, and input fixtures. |
 | `tools/`, `scripts/` | Repository-rooted verification and maintenance tools. |
 | `docs/linkedspec-book/` | Public mdBook source. |
 | `docs/tasks/`, `docs/decisions/`, `docs/knowledge/` | Work, decisions, and durable facts. |

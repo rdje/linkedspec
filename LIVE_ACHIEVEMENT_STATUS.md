@@ -1,5 +1,30 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-09 — README routing-pressure enforcement is signoff-complete
+
+`README-STABILITY-POLICY.4.1` implements the ratified destination-closure contract from clean audit commit
+`6a5d1dcc` as intended atomic 174/300 with no push. The LinkedSpec-owned policy now distinguishes reader
+navigation from author overflow and requires every actual route to terminate at a classified, pressure-controlled
+surface rather than shifting growth into a neighboring live document.
+
+One strict data-only registry contains exactly 20 surface records and 62 routes: 39 README reader routes, five
+policy/enforcement reader routes, and 18 author-overflow routes. One repository-rooted core-Perl checker reads the
+staged resulting tree when appropriate, derives candidates independently, rejects staged/worktree disagreement,
+validates transitive acyclic closure and lifecycle controls, and executes all 32 mutation classes unconditionally
+through the existing `README-STABILITY` doctrine.
+
+README remains 105 lines and shrinks 5,072→5,057 bytes after removing only the nonexistent root `test_input/`
+entry introduced by `ca846e7a`; the real top-level fixture roots remain `t/` and `tests/`. Large live status, task
+evidence, changes, and engineering notes remain immutable measured debt with finite transition owners under
+README `.4` and `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`, never normalized as healthy destinations.
+
+Focused proof passes 44 reader + 18 author routes, all 20 surfaces, 32/32 mutations, and README 105/128 lines plus
+5,057/6,144 bytes. Definitive local CI exits 0 through all seven doctrines, MCP 5/5 implementations + 6/6 runtimes
+complete/141, composed semantic/admission consumers, cursor 288, repository containment and moved-root execution,
+primary CLI 66/66 in both option environments, RAM 32%, and Phase 0 1,031/1,031 in 694 seconds. No parser,
+runtime, backend, MCP, fixture, CLI, storage, hosted-CI, or public language behavior moves. Atomic commit,
+brief clearing, exact generated-residue cleanup, and clean proof precede unchanged closeout `.4.2`.
+
 ## 2026-08-09 — README routing-pressure closure is ratified before enforcement
 
 `README-STABILITY-POLICY.4.0` starts from clean cursor-contract commit `7c2ff407` as intended atomic 173/300 with

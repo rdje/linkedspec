@@ -108,6 +108,9 @@ initial_adr_authorizes_caps() {
 
 [[ -f README.md ]] || note 'README.md is missing'
 [[ -f README_POLICY.md ]] || note 'README_POLICY.md is missing'
+if ! perl "$ROOT/scripts/check_readme_routing_pressure.pl"; then
+  note 'routed-destination closure or pressure control failed'
+fi
 if [[ "$fail" -ne 0 ]]; then exit 1; fi
 
 run_count_self_tests || note 'internal cap-boundary self-tests failed'
@@ -194,4 +197,4 @@ if [[ "$fail" -ne 0 ]]; then
   exit 1
 fi
 
-ok 'cap self-tests, stable content, routed-heading exclusions, and cap governance pass'
+ok 'cap self-tests, stable content, routed-heading exclusions, cap governance, and routing-pressure closure pass'

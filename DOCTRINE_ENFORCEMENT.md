@@ -239,7 +239,7 @@ Enforced by [`scripts/check_doctrines.sh`](scripts/check_doctrines.sh) via
 | `TASK-ACCEPTANCE` | evidence | `scripts/check_diagnosis_evidence.sh` | staged governed code/spec/test/tooling changes carry a task-tree acceptance checklist with LinkedSpec-tool evidence signatures |
 | `REPO-ROOT-PATHS` | structural | `scripts/check_repo_root_path_portability.sh` | tracked parent-repository text contains no checkout/developer/private-session identity, Rust primary discovery is runtime-rooted, and all five primary commands retain their dynamic anchors |
 | `PROJECT-DATA-STORAGE` | structural | `scripts/check_project_data_storage_locality.sh` | tracked project-storage defaults and current documented output commands stay repository-filesystem rooted while explicit caller/inert/tool/system paths remain legal |
-| `README-STABILITY` | structural | `scripts/check_readme_stability.sh` | root `README.md` stays within reviewed line/byte budgets, retains stable landing-page/navigation anchors, excludes routed status/history/inventory sections, and cannot raise a cap without a new indexed ADR |
+| `README-STABILITY` | structural | `scripts/check_readme_stability.sh` | root `README.md` stays within reviewed line/byte budgets and stable landing scope; all 62 reader/overflow routes close across 20 lifecycle-controlled surfaces in the resulting tree; debt growth and threshold increases require their exact owners/decisions |
 
 Deterministic-oracle doctrine run via the broader gate (`tools/run_ci_local.sh`): the phase0
 regression suite `t/phase0_regression.t` (the cross-variant baseline + the all-spec ActionIR-ready

@@ -14,9 +14,9 @@ answers:
   - are README routed destinations pressure controlled
   - what revision adds README routing pressure closure
 date: 2026-07-29
-status: original adoption closed; routing-pressure revision accepted with implementation pending
+status: original adoption closed; routing-pressure enforcement signoff-complete
 tags: [readme, documentation, doctrine, navigation, maintenance, license, routing, pressure, lifecycle]
-evidence: "README-STABILITY-POLICY.0-.2 adopt and close the 105-line / 5,072-byte landing page, root policy, hard 128-line / 6,144-byte budgets, and registered read-only checker. Director-priority revision .4.0 reads the supplied 185-line revision and closes the original policy's unchecked-neighbor gap: exactly 62 routes over 20 surfaces are planned for one strict project-owned registry and unconditional checker. Clean 7c2ff407 measurements identify four debt families and open LIVE-DOCUMENT-PRESSURE-CONTAINMENT before enforcement; baselines cannot auto-refresh. ADR 0063 now ratifies lifecycle-specific controls, 80/90 warning/rollover milestones, reviewed threshold increases, and correction of ca846e7a's nonexistent root test_input route. Project licensing remains independent proposed .3."
+evidence: "README-STABILITY-POLICY.0-.2 close the 105-line / 5,072-byte landing page, hard 128/6,144 budgets, and original doctrine. Revision .4.0 ratifies the unchecked-neighbor repair; implementation .4.1 enforces exactly 62 routes across 20 surfaces with 32/32 mutation classes from one strict project-owned registry and unconditional resulting-tree checker. README is 105 lines / 5,057 bytes after deleting only ca846e7a's nonexistent test_input/ marker. Four dated debt baselines cannot auto-refresh and have finite README .4 or LIVE-DOCUMENT-PRESSURE-CONTAINMENT owners. Canonical signoff exits 0 through CLI 66x2 and Phase 0 1,031/1,031 in 694 seconds; licensing remains independent proposed .3."
 last_verified: 2026-08-09
 reverify:
   - "wc -l -c README.md"
@@ -65,9 +65,11 @@ Those component terms do not authorize an inferred LinkedSpec license. Proposed 
 `README-STABILITY-POLICY.3` preserves the question for an explicit director decision while the landing page
 states the present fact honestly.
 
-Revision `.4.0` accepts transitive routing-pressure closure without changing the current policy or checker yet.
-The planned registry separates reader navigation from author overflow, classifies lifecycle-specific controls,
-checks the resulting tree unconditionally, and makes every threshold increase decision-owned. The clean audit
+Revision `.4.0` accepts transitive routing-pressure closure without changing the current policy or checker.
+Leaf `.4.1` implements the registry that separates reader navigation from author overflow, classifies lifecycle-
+specific controls, checks the resulting tree unconditionally, and makes every threshold increase decision-owned.
+The checker reports 44 reader routes (39 README plus five policy/enforcement), 18 author routes, 20 surfaces, and
+32/32 in-memory mutation classes. The clean audit
 records oversized neighboring surfaces as immutable debt and opens `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`; it does
 not bless their current size or allow ordinary work to refresh their baselines.
 

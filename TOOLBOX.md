@@ -29,8 +29,11 @@ supporting techniques** that complement them. (Always run with `perl -Iperl …`
   ([`scripts/check_repo_root_path_portability.sh`](scripts/check_repo_root_path_portability.sh)) independently
   scans tracked parent-repository text and locks all five primary-command runtime root anchors on every run.
   `README-STABILITY` ([`scripts/check_readme_stability.sh`](scripts/check_readme_stability.sh)) keeps the root
-  landing page within the reviewed `README_POLICY.md` line/byte caps, verifies stable navigation, rejects routed
-  status/history/inventory headings, and requires a new indexed ADR for any increase.
+  landing page within the reviewed `README_POLICY.md` line/byte caps and unconditionally invokes
+  [`scripts/check_readme_routing_pressure.pl`](scripts/check_readme_routing_pressure.pl). The data registry at
+  `doctrine/readme_stability/routes.jsonl` must exactly cover 62 actual reader/author routes across 20 controlled
+  surfaces; closure, existence, lifecycle controls, debt growth, staged-result agreement, and every threshold
+  increase fail closed. Its in-memory mutation oracle reports 32/32 before the doctrine can pass.
 
 ### The task-acceptance checklist (recommended for any code-change leaf)
 

@@ -5,17 +5,16 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `7c2ff407` — clean cursor-transaction decision HEAD from which README routing-pressure audit
-  `.4.0` activated task-tree-first (172/300; no push).
-- latest_completed_leaf: intended post-landing handoff for behavior-free README route/control plan `.4.0` under
-  subject `README-STABILITY-POLICY.4.0 - plan routing-pressure closure` as atomic 173/300; no push.
-- active_work_unit: none after the intended clean `.4.0` landing; README policy revision `.4` remains active.
-- next_action: prove post-commit status/diffs, zero-byte brief, pointer, Knowledge freshness, absent book, and zero
-  managed-run residue; then activate `README-STABILITY-POLICY.4.1` task-tree-first to implement the frozen local
-  policy revision, 62-route/20-surface registry, closure checker, 32 mutations, and stale-layout correction.
-- in_flight_uncommitted: none after intended atomic `.4.0` landing.
-- blockers: none. Exact final verification evidence is recorded in the owning task before commit; no background
-  job remains after the intended landing.
+- activation_commit: `6a5d1dcc` — clean README route/control plan HEAD from which implementation `.4.1` activated
+  task-tree-first (173/300; no push).
+- latest_completed_leaf: README routing-pressure implementation `.4.1` is signoff-complete under intended subject
+  `README-STABILITY-POLICY.4.1 - enforce routing-pressure closure` as atomic 174/300; commit not yet landed.
+- active_work_unit: `README-STABILITY-POLICY.4.1` evidence-only closeout after definitive canonical PASS.
+- next_action: regenerate Knowledge, build and inspect the final mdBook, run focused staged checks, remove exact
+  generated residue, commit `.4.1`, clear the brief, and prove clean before activating unchanged `.4.2`.
+- in_flight_uncommitted: staged policy/README/registry/checker/doctrine/public-doc implementation plus final
+  continuity evidence; no background job remains.
+- blockers: none. Definitive `bash tools/run_ci_local.sh` exits 0; Phase 0 passes 1,031/1,031 in 694 seconds.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes, and 11 topology mutations advance governance to 53. Public authored values/transactions remain future.
@@ -40,9 +39,9 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_semantic_governance: capability 80/0/0; semantic six groups / 20 responses / 128 mutations, rollout 9/9,
   native admission 6/6; MCP rollout complete/141.
 - preserved_contract_handoff: repeated-action closure next_owner remains `FUTURE-PARITY-BACKLOG.10.1`.
-- current_readme_contract: README stays 105/5,072 under hard 128/6,144 caps. `.4.0` ratifies 62 routes over 20
-  surfaces with reader/overflow separation, lifecycle controls, immutable debt, reviewed limits, and 32 mutations;
-  `.4.1` is the only implementation owner. Current fixture roots are `t/` and `tests/`, not root `test_input/`.
+- current_readme_contract: README stays 105/5,057 under hard 128/6,144 caps. `.4.1` implements 62 routes over 20
+  surfaces with reader/overflow separation, lifecycle controls, immutable debt, reviewed limits, and 32/32
+  mutations. Current fixture roots are `t/` and `tests/`, not root `test_input/`; `.4.2` closes unchanged.
 - documentation_debt_owner: live status, task evidence, changes, and engineering notes retain measured immutable
   baselines during `.4`; `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0-.4` owns their later bounded-view migrations.
 - current_transaction_contract: future syntax is exact `recognition_checkpoint`,
@@ -54,7 +53,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   retains final public no-drift. `TASK-TREE-METADATA-HYGIENE.5` separately owns active-frontier freshness.
 - latest_bootstrap_read: 2026-08-09 — complete roadmap, codebase, mdBook, bootstrap/memory/task/ADR/Knowledge,
   README-policy/checker/routes, storage/canonical, history, and sole-facing status review refreshed.
-- pivot_guard: prove `.4.0` post-commit clean before `.4.1`; prove README `.4.2` clean before transaction or live-
+- pivot_guard: prove `.4.1` post-commit clean before `.4.2`; prove README `.4.2` clean before transaction or live-
   document containment work.
-- push_policy: hard lock at 300 new local commits; `.4.0` is intended atomic 173/300; no push.
+- push_policy: hard lock at 300 new local commits; `.4.1` is intended atomic 174/300; no push.
 - environment: use project-data wrappers and `perl -Iperl`; approved canonical containment may take 30 minutes.

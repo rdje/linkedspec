@@ -76,9 +76,10 @@ adopted `README_POLICY.md`, the exact trim, and registered enforcement at `ca846
 unchanged under a second canonical gate and closes the original adoption. Director-priority `.4.0` ratifies 62
 reader/overflow routes over 20 lifecycle-controlled surfaces, records immutable pressure debt for live status,
 task evidence, changes, and engineering notes, opens `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`, and root-causes the
-nonexistent `test_input/` layout marker introduced by `ca846e7a`. `.4.1` implements the local policy revision,
-strict registry, unconditional checker, stale-route correction, and 32 mutation classes; `.4.2` closes unchanged
-before debt migration. Recurring MCP `.10.9.7.1.1.4`
+nonexistent `test_input/` layout marker introduced by `ca846e7a`. `.4.1` now implements the local policy revision,
+strict registry, unconditional resulting-tree checker, stale-route correction, and 32/32 mutation classes.
+Canonical signoff passes CLI 66x2 and Phase 0 1,031/1,031 in 694 seconds before atomic commit and unchanged `.4.2`
+closeout; bounded-view debt migration follows. Recurring MCP `.10.9.7.1.1.4`
 recomposes the committed rooted promotion unchanged and closes its implementation parents; `.10.9.7.2` now
 independently recomposes the full chain, closes `.10.9.7` and `.10.9`, and hands the clean boundary to public
 semantic/MCP no-drift `.10.10`. The

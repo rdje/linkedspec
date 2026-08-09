@@ -1,9 +1,9 @@
 # ARCHITECTURE STATE
 
-## README route-pressure closure is ratified before enforcement
+## README route-pressure closure is implemented and signoff-complete
 
-`README-STABILITY-POLICY.4.0` refines the existing bounded landing-page doctrine without changing current
-enforcement yet. The implementation contract is one project-owned
+`README-STABILITY-POLICY.4.0` ratifies the existing bounded landing-page doctrine's transitive destination model;
+`.4.1` implements it as one project-owned
 `doctrine/readme_stability/routes.jsonl` registry with 20 lifecycle-controlled surfaces and exactly 62 declared
 `reader_navigation` or `author_overflow` routes, including policy/enforcement origins, plus an unconditional
 core-Perl checker invoked by
@@ -16,8 +16,10 @@ The clean audit records pressure debt rather than normalizing it: `LIVE_ACHIEVEM
 `CHANGES.md` is 44,128 lines / 3,091,199 bytes; and `DEVELOPMENT_NOTES.md` is 21,169 lines / 2,277,541 bytes.
 `LIVE-DOCUMENT-PRESSURE-CONTAINMENT` owns their bounded-view migrations after README `.4.2` closes. The route
 audit also proves root `test_input/` never existed and was introduced only as stale README navigation by
-`ca846e7a`; `.4.1` owns correction and existence-sensitive mutations. No policy/checker/README/runtime behavior
-changes in the planning leaf.
+`ca846e7a`; `.4.1` removes that marker and the checker now rejects missing/symlinked local targets. Focused proof
+passes 44 reader + 18 author routes, all 20 surfaces, 32/32 mutation classes, and README 105/128 lines plus
+5,057/6,144 bytes. Canonical signoff exits 0 after all seven doctrines, CLI 66x2, and Phase 0 1,031/1,031 in 694
+seconds. Parser/runtime/backend behavior remains unchanged; only atomic commit and unchanged `.4.2` closeout remain.
 
 - `2026-08-09 cursor transaction authored/static contract`: behavior-free
   `FUTURE-PARITY-BACKLOG.14.3.1.0` ratifies four accepted future special forms:
