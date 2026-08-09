@@ -1,5 +1,29 @@
 # CHANGES
 
+## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.5.0.2 — freeze Lua typed source RED
+
+- Added one final-path shared Lua typed-source consumer outside ordinary `tools/run_lua_local.sh` discovery and
+  canonical registration. Explicit `core` and `projection` modes parse completely and exit 1 on both PUC Lua and
+  LuaJIT solely with `Lua typed source RED: missing linkedspec.source_location`.
+- Froze all neutral 3/7/6/3 immutable-value fixtures, four private diagnostics, detached values, Unicode-scalar/
+  UTF-8-byte coordinates, exact unique 47/30/11/4 projection catalogs plus seven aliases, named-mark behavior,
+  anonymous capture-boundary mutation, cursor save/rewind/restore, and native/reconstructed/generated-plan values.
+- Kept projection lookup strictly after the core module so `.14.2.5.1` can make core mode green and advance
+  projection mode to its exact separately owned catalog API. Added a retrievable Knowledge fact for that boundary.
+- Materialized exact `.14.2.5.1` core, `.14.2.5.2` projection, and `.14.2.5.3` admission task records. The parent
+  had named those children since the rollout plan, but repository history proved their concrete records had never
+  existed; the next frontier is now durable rather than implicit.
+- Preserved production Lua, the 246-name common inventory, all seven callable aliases, byte registers, helper
+  results/mutations, schemas, other backends, and neutral 7/7/41. Complete Lua remains 177/177 per ABI with alias
+  638/638, CLI 66x2, corpus 105/105, storage 18/3, and its exact pass marker.
+- The source-unchanged sole-facing book builds 79 files / 14,180 KiB. Direct generated-HTML inspection confirms
+  pending-Lua status, alias guidance, rollout text, commands, and limitations remain separate paragraph/code/table
+  blocks; the build artifact is removed. Knowledge Map regenerates at 789 facts / 6,504 question keys.
+- All seven doctrines pass. After the outer execution sandbox denied the canonical gate's required nested
+  `sandbox-exec`, the exact focused containment proof passed with permission and one uninterrupted approved
+  canonical rerun passed capability 80/0/0, typed source 7/7/41, all composed admissions, containment/relocation,
+  CLI 66x2, RAM 60%, and Phase 0 1,031/1,031 in 667 seconds before its exact pass marker and exit 0.
+
 ## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.5.0.1 — add Lua source aliases
 
 - Added the seven neutral source-boundary compatibility spellings to one separate Lua known-name inventory and

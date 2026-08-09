@@ -1,5 +1,42 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.5.0.2` — dormant shared Lua typed-source RED):
+  `lua/test/typed_source_location_contract_test.lua` is tracked at its final path but omitted from the explicit
+  ordinary list in `tools/run_lua_local.sh` and from `tools/run_ci_local.sh` canonical registration. The complete
+  Lua gate still syntax-loads it, so dormancy cannot hide parser drift.
+- `LINKEDSPEC_LUA_TYPED_SOURCE_RED_MODE=core|projection` selects the two future boundaries. The consumer catches
+  only the exact ordinary module-not-found result for `linkedspec.source_location`; any other load failure
+  propagates. Core resolution precedes both catalog lookups. Today PUC Lua and LuaJIT parse the full source and all
+  four ABI/mode commands exit 1 on the one stable missing-module message. After `.1`, projection mode must advance
+  first to `linkedspec.typed_source_projection_rows`, then the compatibility-alias catalog.
+- Core assertions consume the exact neutral contract dynamically: 3 copied decoded sources, 7 scalar positions
+  with UTF-8-byte/line/column evidence, 6 same-source direct spans, 3 ordered derived texts, detached records, and
+  source mismatch / position out of range / reversed span / invalid derived provenance diagnostics without private
+  text, path, match, parser, or host references.
+- Projection assertions require fresh detached 47/30/11/4 catalogs with 92 unique names plus seven alias rows. The
+  complete named-mark fixture, anonymous boundary aliases, and cursor save/rewind/restore fixture must retain exact
+  external JSON across native, effective-SpecFile reconstruction, and generated-v2-plan execution. The consumer
+  creates no temporary directory, so the 18-owner storage inventory remains exact.
+
+  Retrieval exposed a task-tree continuity defect rather than a runtime defect: parent `.14.2.5` named `.1-.3`,
+  but `git log -S` found no concrete child record in history. This slice materializes exact shared immutable-core,
+  typed-projection, and dual-ABI admission leaves with dependencies and exclusions before handoff. The finding and
+  RED boundary live in a dedicated Knowledge card; Knowledge Map is 789/6,504.
+
+  Existing aliases remain 638/638 per ABI; neutral remains 7/7/41 and language remains 246/105+1/122. Complete
+  Lua passes byte-fresh MCP 83,166 bytes, 177/177 package tests per ABI, CLI 66x2, corpus 105/105, storage 18/3,
+  and the exact local-gate marker. The source-unchanged book builds 79 files/14,180 KiB; direct generated HTML
+  shows pending-Lua, alias, command, rollout, and limitation content in separate `<p>`, `<pre>`, and table blocks,
+  and the artifact is removed.
+
+  Knowledge Map is 789/6,504 and all seven doctrines pass. The first canonical invocation was correctly blocked
+  only when the outer execution sandbox denied the gate's nested macOS `sandbox-exec`; the isolated process-
+  containment test passes with the required permission. One uninterrupted approved canonical rerun preserves
+  capability 80/0/0 and typed source 7/7/41, executes every admitted typed-source and composed semantic/MCP
+  consumer, proves six-family containment plus relocated/moved/outside-CWD execution, passes primary CLI 66x2,
+  reports RAM 60%, and passes Phase 0 1,031/1,031 in 667 seconds before its exact marker and exit 0. The leaf is
+  signoff-complete for intended atomic commit 165/300; no push.
+
 - 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.5.0.1` — shared Lua source aliases): Lua's compatibility spellings now
   live in `SOURCE_BOUNDARY_COMPATIBILITY_CALL_NAMES`, separate from the common 246-name inventory. One exact map in
   `action_contracts.lua` canonicalizes them before existing resolution: `capture_from_rule_start` to

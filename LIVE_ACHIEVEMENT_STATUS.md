@@ -1,5 +1,27 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-07 — Lua typed source-location behavior is frozen before implementation
+
+`FUTURE-PARITY-BACKLOG.14.2.5.0.2` activated task-tree-first from clean alias-parity commit `0105bcc1` as intended
+165/300 with no push. One shared final-path consumer remains outside Lua's explicit ordinary list and canonical
+registration while its `core` and independently nested `projection` modes parse fully on PUC Lua and LuaJIT.
+All four explicit runs stop solely at `Lua typed source RED: missing linkedspec.source_location`.
+
+The consumer freezes exact neutral 3/7/6/3 immutable fixtures, four private errors, detached 47/30/11/4 catalogs
+plus seven aliases, Unicode-scalar/UTF-8-byte coordinates, rule-local marks, anonymous capture boundary, cursor
+save/rewind/restore, and native/reconstructed/generated-plan results. It changes no production runtime, ordinary
+test discovery, current alias, register, public result, neutral 7/7/41 state, schema, README, or book source.
+
+Complete Lua passes byte-fresh MCP 83,166 bytes, alias 638/638 and package 177/177 per ABI, CLI 66x2, corpus
+105/105, storage 18/3, language 246/105+1/122, and its exact marker. The source-unchanged sole-facing book builds
+79 files/14,180 KiB with separate rendered blocks. Knowledge Map is 789/6,504 and all seven doctrines pass.
+Definitive approved canonical CI proves containment/relocation, preserves capability 80/0/0 and typed source
+7/7/41, passes CLI 66x2, reports RAM 60%, and passes Phase 0 1,031/1,031 in 667 seconds before its exact marker.
+
+History also proved the parent-declared `.14.2.5.1-.3` records had never been materialized. This slice adds their
+exact core/projection/admission boundaries, so immutable core `.14.2.5.1` has a durable next frontier. The leaf is
+signoff-complete; atomic commit 165/300, brief clearing, and clean proof remain.
+
 ## 2026-08-07 — Lua executes all seven source-boundary compatibility aliases
 
 `FUTURE-PARITY-BACKLOG.14.2.5.0.1` activated task-tree-first from clean audit commit `bdf9956f` as intended
