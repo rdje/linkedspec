@@ -19,6 +19,7 @@ status: current
 tags: [lua, native, storage, filesystem, ssd, temporary-data, generated-source, trace, portability, PROJECT-DATA-SSD-ROOTING]
 evidence: "PROJECT-DATA-SSD-ROOTING.2.5 adds tools/run_lua_project_data.sh and tools/test_lua_project_data_storage.sh, makes tools/build_lua_native.sh self-rooted and same-filesystem guarded, and initially routes all 13 tracked Lua-family allocation owners through managed TMPDIR. Later semantic/runtime and MCP owners advance the exact manifest to 16. FUTURE-PARITY-BACKLOG.10.9.6.1 adds the common mcp_system.c build, so the oracle now builds three native modules for PUC Lua and LuaJIT in a path containing a space, checks actual filesystem devices and non-symlink module identity, runs native parsing, writes generated v2 source and trace output, rejects an other-filesystem builder destination before creation, and cleans its owned state. The exact initial and final old-root linkedspec-lua-* censuses are zero. Process proof .4.2 caught the Apple /usr/bin/cc shim attempting an xcrun_db temporary write; the Darwin default now invokes the active developer clang with the active macOS SDK explicitly, and the final contained build has no denied or xcrun_db diagnostic."
 evidence_update_2026_08_01_callable_emission: "FUTURE-PARITY-BACKLOG.11.8.3 registers lua/test/callable_codeblock_literal_contract_test.lua when it begins allocating fresh emitted-module workspaces. The exact manifest advances from 16 to 17; the consumer proves repository-derived TMPDIR use and cleanup after normal and injected-failure paths on both Lua ABIs."
+evidence_update_2026_08_07_source_aliases: "FUTURE-PARITY-BACKLOG.14.2.5.0.1 registers lua/test/source_boundary_compatibility_aliases_test.lua when its emitted-source carrier begins allocating a fresh workspace. Commit 0105bcc1 advances the executable manifest from 17 to 18 owners and updates the oracle's exact PASS marker; immutable-core leaf .14.2.5.1 repairs this card's stale pre-alias prose without changing any allocator or storage behavior."
 reverify: "bash tools/test_lua_project_data_storage.sh && bash tools/run_lua_local.sh"
 ---
 
@@ -37,7 +38,7 @@ The wrapper derives the checkout from its own file, enters a managed run, create
 `tools/run_lua_local.sh` gate follows the same contract while building both ABIs once for its full package,
 primary-command, corpus, and integrated storage proof.
 
-`tools/test_lua_project_data_storage.sh` freezes the 17 executable Lua-family allocation owners: 16 Lua tests and
+`tools/test_lua_project_data_storage.sh` freezes the 18 executable Lua-family allocation owners: 17 Lua tests and
 the complete local runner. Every Lua owner reads routed `TMPDIR`; no owner retains a hard-coded operating-system
 temporary template or anonymous `io.tmpfile()`. The oracle builds both two-module ABI sets below a path containing
 a space, rejects symlinks or device drift, requires the PCRE2/filesystem/MCP-system module trio, performs a real native parse, writes generated-source v2 and trace

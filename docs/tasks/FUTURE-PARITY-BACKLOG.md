@@ -6,8 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-07` (dormant shared dual-ABI typed-source RED `.14.2.5.0.2` is signoff-complete from clean
-  `0105bcc1` for intended atomic commit 165/300; no push)
+- Last updated: `2026-08-07` (immutable shared Lua source-location core `.14.2.5.1` is signoff-complete from clean
+  dormant-RED commit `1136b1f2` for intended 166/300; projection `.14.2.5.2` follows only after clean landing;
+  no push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -19776,8 +19777,9 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   activate task-tree-first.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.5`
-  Status: `active` parent (2026-08-07; shared alias parity `.0.1` landed at `0105bcc1`; dormant dual-ABI typed-
-    source RED `.0.2` is signoff-complete from that clean 164/300 boundary for intended 165/300, no push)
+  Status: `active` parent (2026-08-07; dormant dual-ABI typed-source RED `.0.2` landed at `1136b1f2`; immutable
+    shared core `.1` is signoff-complete for intended 166/300; projection routing `.2` follows only after its clean
+    landing; no push)
   Goal: Implement one shared Lua typed source-location algebra and admit it independently on PUC Lua and LuaJIT.
   Children: `.14.2.5.0` dual-ABI authority/prerequisite-split audit; `.14.2.5.0.1` seven-alias shared Lua parity;
     `.14.2.5.0.2` exact dual-ABI typed-source RED; `.14.2.5.1` immutable shared core; `.14.2.5.2` helper/unchanged
@@ -19990,8 +19992,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   task-tree-first.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.5.0.2`
-  Status: `signoff-complete` (2026-08-07; task-tree-first from clean alias-parity commit `0105bcc1`, intended
-    165/300, no push; atomic commit, brief clearing, and exact clean proof remain)
+  Status: `completed` (`1136b1f2`, 2026-08-07, 165/300, no push)
   Goal: Freeze one shared dormant Lua consumer for the neutral immutable source values, four owned diagnostics,
     exact 92 canonical projections plus seven now-callable aliases, and unchanged runtime carriers on both ABIs
     before production core implementation.
@@ -20080,8 +20081,16 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   source are unchanged. The leaf is signoff-complete for atomic commit 165/300; brief clearing and clean proof
   remain before `.14.2.5.1`; no push.
 
+  Commit/handoff evidence 2026-08-07: atomic commit `1136b1f2` lands with first parent `0105bcc1`; the hook
+  regenerates Knowledge Map at 789/6,504, passes all seven doctrines, and validates the memory activation pointer
+  against both pre-commit HEAD and post-commit `HEAD^1`. Status plus staged/unstaged diffs are empty, the ignored
+  brief is zero bytes, post-commit memory architecture passes, the rendered book is absent, and the exact empty
+  managed-run directory is removed. Immutable shared Lua source-location core `.14.2.5.1` may therefore activate
+  task-tree-first.
+
 - ID: `FUTURE-PARITY-BACKLOG.14.2.5.1`
-  Status: `pending`
+  Status: `completed` (2026-08-07; signoff-complete from clean dormant-RED commit `1136b1f2`, intended 166/300,
+    no push; atomic landing and clean handoff remain)
   Goal: Implement the one shared immutable Lua decoded-source authority and typed Position, Span, and DerivedText
     value core required by the dormant consumer, identically on PUC Lua and LuaJIT, without routing helpers yet.
   Depends on: `.14.2.5.0.2`
@@ -20095,6 +20104,98 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   Verification: core-mode dual-ABI GREEN; projection-mode exact next RED; complete ordinary dual-ABI no-drift;
     neutral remains 7/7/41 and `lua_dual_abi` pending
   Commit: `FUTURE-PARITY-BACKLOG.14.2.5.1 - add Lua typed source core`
+
+  ### `FUTURE-PARITY-BACKLOG.14.2.5.1` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove dormant RED `.14.2.5.0.2` landed at `1136b1f2` as 165/300
+    with parent `0105bcc1`, empty status/diffs, zero-byte brief, valid post-commit memory pointer, absent rendered
+    book, and no managed-run residue; make this task-tree file the sole activation diff.
+  - [x] **RETRIEVE / EXACT VALUE SEAM** — Follow the Lua dormant-RED, neutral contract, runtime state, storage,
+    and admitted Rust/Dart/Julia core Knowledge owners; inspect the dormant core assertions and shared Lua package
+    conventions before production edits.
+  - [x] **ONE COPIED SOURCE AUTHORITY** — Add one private Lua-5.1-compatible authority that snapshots decoded
+    sources, assigns opaque monotonic identities, and owns scalar-to-UTF-8-byte plus one-based line/column tables.
+  - [x] **IMMUTABLE DETACHED VALUES** — Implement Position, same-source ordered Span, and concatenate-in-order
+    DerivedText values without decoded text or host/runtime references; return fresh detached JSON records.
+  - [x] **FOUR PRIVATE DIAGNOSTICS** — Emit only the neutral source-mismatch, position-out-of-range, reversed-span,
+    and invalid-derived-provenance diagnostics with exact context and no private source/path/parser/match fields.
+  - [x] **CORE GREEN / PROJECTION NEXT RED** — Pass all exact 3/7/6/3 core fixtures on PUC Lua and LuaJIT while
+    projection mode advances solely to missing `linkedspec.typed_source_projection_rows`.
+  - [x] **NO ROUTING OR ADMISSION** — Preserve ordinary discovery, current UTF-8-byte registers, helper results,
+    92+7 routing, schemas, neutral 7/7/41, `lua_dual_abi` pending, root README, and sole-facing admission claims.
+  - [x] **REPAIR STALE STORAGE FACT** — Correct the general Lua project-data Knowledge card from its pre-alias
+    17-owner prose to the exact current 18-owner manifest established by commit `0105bcc1` and the executable
+    storage oracle; add no allocator or storage behavior.
+  - [x] **VERIFY / COMMIT / CLEAN HANDOFF** — Pass focused dual-ABI modes, complete Lua, storage/corpus/CLI,
+    language/neutral, sole-facing book, Knowledge, all doctrines, definitive canonical CI, atomic commit 166/300,
+    brief clearing, and clean proof before projection routing `.14.2.5.2`.
+
+  Activation evidence 2026-08-07: dormant RED `.14.2.5.0.2` lands atomically at `1136b1f2` as intended 165/300
+  with first parent `0105bcc1` and no push. Hooks regenerate Knowledge Map at 789/6,504, pass all seven doctrines,
+  and validate the activation pointer in pre-commit and post-commit Git phases. Status plus staged/unstaged diffs
+  are empty, `git_message_brief.txt` is zero bytes, post-commit memory architecture passes, the rendered book is
+  absent, and the exact empty managed-run directory is removed. This task-tree file is the sole activation diff
+  before any Lua source, test, neutral checker, storage/canonical driver, book, Knowledge, roadmap, live-doc, or
+  other change.
+
+  Retrieval evidence 2026-08-07: Knowledge Map routing led to the dormant Lua RED, neutral 3/7/6/3 and four-error
+  contract, complete runtime rollout plan, shared UTF-8-byte matching state, Lua project-data storage owner, and
+  admitted Rust/Dart/Julia immutable-core precedents before production edits. The final consumer and Lua package
+  conventions establish a private direct module API: one opaque-token store can keep all decoded text, authority
+  identities, value fields, and diagnostics out of public tables while fresh `json.harray`/`json.array` records
+  provide detached projections. Validated UTF-8 first-byte widths are sufficient to precompute zero-based byte
+  boundaries and one-based scalar line/column tables identically on Lua 5.1 and LuaJIT. Retrieval also found one
+  stale Knowledge projection: `lua-project-data-ssd-storage` still says 17 owners, while commit `0105bcc1` added
+  the alias consumer to the executable manifest and `tools/test_lua_project_data_storage.sh` now proves exactly
+  18. This leaf owns correcting that relevant fact without adding an allocator or changing storage behavior.
+
+  Core implementation evidence 2026-08-07: new private `lua/src/linkedspec/source_location.lua` is shared unchanged
+  by PUC Lua and LuaJIT and is deliberately absent from `lua/src/linkedspec/init.lua`. One `SourceAuthority` snapshots
+  every caller string, validates UTF-8, assigns a monotonic exact-integer identity, and precomputes zero-based byte
+  plus one-based scalar line/column data at every Unicode boundary. Empty opaque tokens use protected metatables and
+  module-private weak-key state, so Position, Span, DerivedText, context, and exception values expose neither their
+  records nor decoded text, paths, parser/match objects, runtime state, or authority objects. Fresh hybrid/array JSON
+  records are detached. Direct spans require one source and ordered half-open offsets; derived text preserves only
+  explicit `concatenate_in_order` spans. Authority-owned coordinate and materialization operations emit only the
+  frozen source-mismatch, position-out-of-range, reversed-span, and invalid-derived-provenance records.
+
+  Focused boundary evidence 2026-08-07: both production and dormant-consumer files syntax-load under PUC Lua and
+  LuaJIT. The first implementation run exposed one exact contract-shape mismatch: the frozen consumer directly
+  encodes `coordinates`, so the private API returns a fresh detached hybrid record rather than an opaque coordinate
+  token. After that correction, explicit `core` mode passes all 133 assertions independently on both ABIs across
+  the 3/7/6/3 fixtures, copied authority ownership, detachment, Unicode coordinates, materialization, and four exact
+  diagnostics. Explicit `projection` mode exits 1 on each ABI solely with
+  `Lua typed source RED: missing linkedspec.typed_source_projection_rows` at its intentionally ordered lookup.
+  Independent dual-ABI opacity probes also prove tokens enumerate no fields, expose only protected metatable labels,
+  reject normal field assignment, and remain unchanged after a detached JSON record is mutated.
+
+  Ordinary/no-drift evidence 2026-08-07: complete `tools/run_lua_local.sh` exits 0 with byte-fresh 83,166-byte MCP
+  binding, package 177/177 and compatibility aliases 638/638 independently on both ABIs, primary CLI 66/66 under
+  default and POSIX environments, corpus 105/105, and exact `[lua-ci] Lua local gate passed`. Its integrated storage
+  oracle proves the executable current census is 18 owners (17 Lua tests plus the complete runner) and three native
+  modules per ABI. The relevant Knowledge card now records commit `0105bcc1` as the 17-to-18 transition instead of
+  retaining its stale pre-alias prose; no allocation owner or storage code changes. Independent neutral proof stays
+  7 complete / 7 pending / 41 mutations and language coverage stays 246 current names / 105 corpus plus one named-
+  mark fixture / 122 independently covered public Perl contracts. Public init, interpreter/helper routes, byte
+  registers, ordinary/canonical discovery, schemas, root README, and `lua_dual_abi` remain unchanged. Four book
+  pages move only their project-status wording: private core implemented, projection routing/admission still pending.
+
+  Book/Knowledge/governance evidence 2026-08-07: repository-routed mdBook builds 79 files / 14,180 KiB. Direct
+  generated-HTML inspection proves the new private-core status, pending-routing limitation, and following material
+  remain distinct paragraph/code blocks rather than one stitched blob; the exact generated artifact is removed.
+  The dormant-core, runtime-rollout, and storage Knowledge owners now record the implementation and already-
+  executable 18-owner storage truth; Knowledge Map regenerates and validates at 789 facts / 6,504 question keys.
+  Memory architecture accepts activation commit `1136b1f2`, whitespace and task-tree metadata pass, and all seven
+  enforced doctrines pass including root-relative paths, same-volume project data, and README stability.
+
+  Definitive canonical evidence 2026-08-07: one uninterrupted approved `tools/run_ci_local.sh` exits 0 after
+  preserving capability schema v2 at 80/0/0 and neutral typed source at 7/7/41; executing Perl 10, Rust 4/4, Dart
+  4/4, and Julia 127/127 admitted typed-source consumers plus every byte-fresh MCP and composed semantic admission;
+  proving six-family project-data containment, relocated execution, moved-root Rust, and four outside-CWD anchors;
+  passing primary CLI 66/66 in default and POSIX environments; and reporting RAM 65% against the 88% threshold.
+  Phase 0 passes 1,031/1,031 in 672 wallclock seconds before exact `[ci] local CI gate passed`. The leaf is signoff-
+  complete for atomic commit 166/300; brief clearing, post-commit validation, and clean proof remain before task-
+  tree-first projection routing `.14.2.5.2`; no push.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.5.2`
   Status: `pending`

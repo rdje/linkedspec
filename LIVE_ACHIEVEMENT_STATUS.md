@@ -1,5 +1,28 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-07 — Lua immutable source-location core is implemented but not routed or admitted
+
+`FUTURE-PARITY-BACKLOG.14.2.5.1` activated task-tree-first from clean dormant-RED commit `1136b1f2` as intended
+166/300 with no push. One private Lua-5.1-compatible module now gives PUC Lua and LuaJIT the same copied decoded-
+source authority, opaque monotonic identity, and scalar/UTF-8-byte/line/column boundary tables.
+
+Opaque immutable Position, Span, DerivedText, context, and exception values expose no text, path, parser/match/
+runtime object, or authority reference. Fresh detached records cannot mutate them. The authority alone validates
+coordinates and ordered materialization through the exact four private diagnostics. Core mode passes 133/133 on
+each ABI; projection mode advances only to missing `typed_source_projection_rows`, owned by `.14.2.5.2`.
+
+Complete Lua passes byte-fresh MCP 83,166 bytes, package 177/177 and aliases 638/638 per ABI, CLI 66x2, corpus
+105/105, storage 18/3, and its exact marker. Neutral 7/7/41, language 246/105+1/122, public results, byte registers,
+schemas, and admission stay unchanged. The stale storage Knowledge prose is repaired to the already-executable
+18-owner truth without changing storage behavior.
+
+Four synchronized sole-facing book pages now distinguish implemented private core from pending projection and
+admission. The 79-file/14,180-KiB render keeps the changed status and following guidance in separate HTML blocks;
+Knowledge remains 789/6,504 and all seven doctrines pass. Definitive canonical CI preserves capability 80/0/0 and
+typed source 7/7/41, executes all admitted typed-source and composed semantic/MCP consumers, proves containment/
+relocation, passes CLI 66x2, reports RAM 65%, and passes Phase 0 1,031/1,031 in 672 seconds before its exact marker.
+The leaf is signoff-complete; commit 166/300, brief clearing, and clean proof remain before projection routing.
+
 ## 2026-08-07 — Lua typed source-location behavior is frozen before implementation
 
 `FUTURE-PARITY-BACKLOG.14.2.5.0.2` activated task-tree-first from clean alias-parity commit `0105bcc1` as intended

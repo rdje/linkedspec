@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.5.1 — add Lua typed source core
+
+- Added private `lua/src/linkedspec/source_location.lua`, shared unchanged by PUC Lua and LuaJIT and deliberately
+  not exported from the package root or attached to runtime execution.
+- Added one copied decoded-source authority with monotonic opaque identity and Unicode-scalar boundary tables for
+  zero-based UTF-8 bytes plus one-based line/column coordinates.
+- Added opaque immutable context, Position, Span, DerivedText, and exception tokens backed by module-private state.
+  Values retain no text, path, parser/match/runtime object, or authority reference; JSON records are freshly detached.
+- Kept same-source half-open validation, coordinates, slicing, and explicit `concatenate_in_order` materialization
+  authority-owned with only the four neutral private `validate_value` diagnostics.
+- Explicit core mode passes 133/133 independently on PUC Lua and LuaJIT. Projection mode now reaches only the
+  separately owned missing `linkedspec.typed_source_projection_rows` API; no helper routing or admission moved.
+- Complete Lua passes byte-fresh MCP 83,166 bytes, package 177/177 and aliases 638/638 on each ABI, CLI 66x2,
+  corpus 105/105, storage 18/3, and its exact marker. Neutral 7/7/41 and language 246/105+1/122 stay unchanged.
+- Repaired the Lua storage Knowledge card's stale 17-owner prose to the executable 18-owner census already
+  established by `0105bcc1`; no allocator or storage behavior changed.
+- Synchronized four sole-facing book pages to distinguish implemented private core from still-pending projection/
+  admission. The 79-file/14,180-KiB render keeps changed status and following guidance in separate HTML blocks;
+  Knowledge Map remains exact at 789/6,504 and all seven doctrines pass.
+- Definitive canonical CI preserves capability 80/0/0 and typed source 7/7/41, executes every admitted typed-source
+  and composed semantic/MCP consumer, proves containment/relocation, passes CLI 66x2, reports RAM 65%, and passes
+  Phase 0 1,031/1,031 in 672 seconds before its exact marker. Atomic commit 166/300 is next; no push.
+
 ## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.5.0.2 — freeze Lua typed source RED
 
 - Added one final-path shared Lua typed-source consumer outside ordinary `tools/run_lua_local.sh` discovery and

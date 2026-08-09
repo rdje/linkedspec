@@ -1,5 +1,35 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.5.1` — immutable shared Lua source-location core): one direct private
+  `linkedspec.source_location` module serves PUC Lua and LuaJIT without a package-root export, runtime-context field,
+  projection catalog, interpreter branch, ordinary-test registration, or canonical admission.
+- `SourceAuthority` copies each decoded source, validates UTF-8, assigns a monotonic exact-integer identity, and
+  precomputes every Unicode-scalar boundary's zero-based byte offset plus one-based line and column. Callers' source
+  tables can change afterward without altering authority-owned materialization.
+- Empty opaque tokens have protected metatables; their records live in a module-private weak-key table. Position,
+  Span, DerivedText, context, and exception state therefore cannot expose decoded text, paths, parser/match/runtime
+  objects, or authority objects. `to_json` creates detached hybrid/array records; `coordinates` directly returns a
+  fresh detached hybrid record because the frozen Lua consumer encodes that result without a second projection call.
+- The authority alone checks bounds, authority/source identity, span order, and ordered provenance; it materializes
+  UTF-8-safe half-open direct spans and `concatenate_in_order` derived text. Only source mismatch, position out of
+  range, reversed span, and invalid derived provenance leave as private `validate_value` diagnostics.
+
+  Core mode passes 133/133 on each ABI across the neutral 3/7/6/3 fixtures, copied ownership, detachment, Unicode
+  coordinates, materialization, and four exact errors. Projection mode advances identically to missing
+  `linkedspec.typed_source_projection_rows`, leaving `.14.2.5.2` one honest RED without rewriting the consumer.
+  Complete Lua stays 177/177 per ABI with aliases 638/638, CLI 66x2, corpus 105/105, storage 18/3, and its marker;
+  neutral remains 7/7/41 and language remains 246/105+1/122.
+
+  Retrieval found `lua-project-data-ssd-storage` still described 17 owners although alias commit `0105bcc1` had
+  already updated the executable manifest and PASS marker to 18. The card now records the exact 17-to-18 transition;
+  no allocation owner or storage behavior changes. Four sole-facing book pages now accurately say the shared private
+  core is implemented but helper routing/admission remains pending. Their 79-file/14,180-KiB HTML keeps the changed
+  status and following material in separate paragraph/code blocks. Knowledge remains 789/6,504 and all seven
+  doctrines pass. Definitive canonical CI preserves capability 80/0/0, typed source 7/7/41, admitted typed-source
+  plus composed semantic/MCP consumers, containment/relocation, and CLI 66x2; RAM is 65%, and Phase 0 passes
+  1,031/1,031 in 672 seconds before the exact marker. The leaf is signoff-complete for atomic commit 166/300;
+  projection leaf `.14.2.5.2` cannot activate before clean landing proof.
+
 - 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.5.0.2` — dormant shared Lua typed-source RED):
   `lua/test/typed_source_location_contract_test.lua` is tracked at its final path but omitted from the explicit
   ordinary list in `tools/run_lua_local.sh` and from `tools/run_ci_local.sh` canonical registration. The complete

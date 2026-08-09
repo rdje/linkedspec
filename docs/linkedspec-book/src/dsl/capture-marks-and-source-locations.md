@@ -38,8 +38,9 @@ reconstructed, and generated-plan helper execution under ordinary discovery and 
 
 PUC Lua and LuaJIT now recognize all 92 canonical source-boundary helpers plus the same seven compatibility
 aliases. The aliases canonicalize into existing byte-register runtime branches and pass native, loaded,
-reconstructed, generated-plan, and emitted execution on both ABIs. Lua's immutable typed value/projection core and
-runtime admission are still separate pending leaves.
+reconstructed, generated-plan, and emitted execution on both ABIs. One shared private immutable value core now
+passes 133/133 pre-admission assertions on each ABI. It is not exported or routed into those helper branches yet;
+typed projection routing and runtime admission remain separate pending leaves.
 
 ### Bounded cursor transactions do not mean general backtracking
 

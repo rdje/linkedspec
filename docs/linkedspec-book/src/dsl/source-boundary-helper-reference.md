@@ -107,8 +107,9 @@ with `entry_named_map()` and `match_named_map()`, this gives all five backends a
 compatibility aliases. The aliases do not select a legacy coordinate model: text endpoints, Unicode-scalar widths, `undef` for
 reversed spans, boundary mutation, named-map shapes, and generated-parser behavior are the same as the preferred
 spelling. Lua keeps the aliases outside the shared 246-name current inventory and canonicalizes them before the
-existing preferred runtime branches; this spelling-only parity does not admit Lua's still-pending typed source-
-location value/projection layer. Portable new code should therefore still use the preferred names.
+existing preferred runtime branches. Lua's private immutable value core now exists, but this spelling-only parity
+does not route helpers through it or admit the still-pending typed projection layer. Portable new code should
+therefore still use the preferred names.
 
 For example, this migration-only fixture returns `["é🙂  ", 4, 4, 6]` for input `é🙂  ab` on Perl, Rust, Dart,
 Julia, PUC Lua, and LuaJIT:

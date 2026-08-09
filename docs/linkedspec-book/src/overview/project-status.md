@@ -38,10 +38,15 @@ Its explicit consumer passes native, reconstructed, and generated-plan routes wh
 shapes, mutation timing, and zero-based UTF-8 code-unit registers. Ordinary Julia discovery and canonical CI now
 require that consumer, and the neutral checker rejects any regression of completed `julia_runtime`.
 
+PUC Lua and LuaJIT now share one private immutable value core. Its copied decoded-source authority owns Unicode-
+scalar/UTF-8-byte/line/column boundaries, opaque positions and spans, ordered derived provenance, and the four
+private value diagnostics. Explicit pre-admission core proof passes 133/133 on both ABIs; the module is not exported
+or attached to runtime helper execution yet.
+
 Public typed values, transaction spelling and behavior, recursive observation, span-native progressive/staged
-dispatch, and the PUC Lua and LuaJIT runtime implementations/admissions remain future work. The internal
-Perl/Rust/Dart/Julia admissions do not add an authored `Position` or `Span` value, transaction operation, schema
-version, or new helper result; rollout is 7 complete / 7 pending.
+dispatch, Lua helper projection routing/admission, and all public authored surfaces remain future work. The internal
+Perl/Rust/Dart/Julia admissions and private Lua core do not add an authored `Position` or `Span` value, transaction
+operation, schema version, or new helper result; rollout is 7 complete / 7 pending.
 
 The helper audit distinguishes 7 callable compatibility aliases from 2 internal Perl contract/scanner ids.
 `capture_take_slice` and `capture_take_slice_len` are internal ids, not accepted helper spellings; authored code
