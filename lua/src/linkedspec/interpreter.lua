@@ -12,6 +12,7 @@ local unicode_case = require("linkedspec.unicode_case_mapping")
 local user_function_registry = require("linkedspec.user_function_registry")
 
 local M = {}
+local typed_source = { runtime = require("linkedspec.source_location_runtime") }
 
 local ERROR_MT = {
   __runtime_interpreter_type = "RuntimeInterpreterException",
@@ -190,6 +191,20 @@ function M.runtime_engine(compiled, options)
   )
 end
 
+function M.typed_source_projection_rows(engine)
+  if M.node_type(engine) ~= "LinkedSpecRuntimeEngine" then
+    fail("typed_source_projection_rows expects runtime engine")
+  end
+  return typed_source.runtime.projection_rows()
+end
+
+function M.typed_source_compatibility_aliases(engine)
+  if M.node_type(engine) ~= "LinkedSpecRuntimeEngine" then
+    fail("typed_source_compatibility_aliases expects runtime engine")
+  end
+  return typed_source.runtime.compatibility_aliases()
+end
+
 runtime_diagnostic = function(engine, fields)
   local effective_rule = fields.rule_label or fields.top_rule
   local diagnostic = {
@@ -278,6 +293,7 @@ local function context(
   end
   return {
     input = input,
+    source_location = typed_source.runtime.runtime(input),
     cursor_byte = 0,
     registers = matching.runtime_match_registers(input),
     retv = json.null,
@@ -561,11 +577,6 @@ local function capture_name(engine, expr, ctx, accumulator, edge_state)
   if name then return name end
   local value = evaluate_expr(engine, expr, ctx, accumulator, edge_state)
   return tostring(value == json.null and "" or value)
-end
-
-local function match_line_column(one, at_end)
-  if not one then return { line = 1, column = 1 } end
-  return matching.line_column_at_byte_offset(one.input, at_end and one.byte_end or one.byte_start)
 end
 
 local PURE_STRING_HELPERS = {
@@ -1933,12 +1944,78 @@ local function evaluate_mutable_split(engine, expr, ctx, accumulator, edge_state
   return store_array_mutation(ctx, target, storage, result)
 end
 
+function typed_source.rule_label(ctx)
+  return ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule
+end
+
+function typed_source.position_is_valid(ctx, byte_offset, projection)
+  return ctx.source_location:position_is_valid_byte(
+    byte_offset,
+    typed_source.rule_label(ctx),
+    projection
+  )
+end
+
+function typed_source.position_offset(ctx, byte_offset, projection)
+  return ctx.source_location:position_offset_from_byte(
+    byte_offset,
+    typed_source.rule_label(ctx),
+    projection
+  )
+end
+
+function typed_source.position_line(ctx, byte_offset, projection)
+  return ctx.source_location:position_line_from_byte(
+    byte_offset,
+    typed_source.rule_label(ctx),
+    projection
+  )
+end
+
+function typed_source.position_column(ctx, byte_offset, projection)
+  return ctx.source_location:position_column_from_byte(
+    byte_offset,
+    typed_source.rule_label(ctx),
+    projection
+  )
+end
+
+function typed_source.span_text(ctx, start_byte, end_byte, projection)
+  return ctx.source_location:span_text_from_bytes(
+    start_byte,
+    end_byte,
+    typed_source.rule_label(ctx),
+    projection
+  )
+end
+
+function typed_source.span_length(ctx, start_byte, end_byte, projection)
+  return ctx.source_location:span_length_from_bytes(
+    start_byte,
+    end_byte,
+    typed_source.rule_label(ctx),
+    projection
+  )
+end
+
+function typed_source.span_start_offset(ctx, start_byte, end_byte, projection)
+  return ctx.source_location:span_start_offset_from_bytes(
+    start_byte,
+    end_byte,
+    typed_source.rule_label(ctx),
+    projection
+  )
+end
+
 local function evaluate_match_helper(engine, name, expr, ctx, accumulator, edge_state)
   local entry = name:sub(1, 6) == "entry_"
   local one
   if entry then one = ctx.registers.entry_match else one = ctx.registers.local_match end
   local suffix = name:sub(7)
-  if suffix == "text" then return one and one:text() or json.null end
+  if suffix == "text" then
+    if one == nil then return json.null end
+    return typed_source.span_text(ctx, one.byte_start, one.byte_end, name) or json.null
+  end
   if suffix == "group" then
     local index = expr.args[1] and evaluate_expr(
       engine,
@@ -1957,13 +2034,26 @@ local function evaluate_match_helper(engine, name, expr, ctx, accumulator, edge_
     return one.named[key] == nil and json.null or one.named[key]
   end
   if suffix == "map" then return match_named_map(one) end
-  if suffix == "len" then return one and one:char_length() or json.null end
-  if suffix == "start_pos" then return one and one:char_start() or json.null end
-  if suffix == "end_pos" then return one and one:char_end() or json.null end
+  if suffix == "len" then
+    if one == nil then return json.null end
+    return typed_source.span_length(ctx, one.byte_start, one.byte_end, name) or json.null
+  end
+  if suffix == "start_pos" then
+    if one == nil then return json.null end
+    return typed_source.span_start_offset(ctx, one.byte_start, one.byte_end, name) or json.null
+  end
+  if suffix == "end_pos" then
+    if one == nil then return json.null end
+    return typed_source.position_offset(ctx, one.byte_end, name) or json.null
+  end
   local at_end = suffix:sub(1, 4) == "end_"
-  local position = match_line_column(one, at_end)
-  if suffix == "line" or suffix == "start_line" or suffix == "end_line" then return position.line end
-  if suffix == "col" or suffix == "start_col" or suffix == "end_col" then return position.column end
+  local byte_offset = one and (at_end and one.byte_end or one.byte_start) or nil
+  if suffix == "line" or suffix == "start_line" or suffix == "end_line" then
+    return byte_offset and (typed_source.position_line(ctx, byte_offset, name) or 1) or 1
+  end
+  if suffix == "col" or suffix == "start_col" or suffix == "end_col" then
+    return byte_offset and (typed_source.position_column(ctx, byte_offset, name) or 1) or 1
+  end
   return nil
 end
 
@@ -2040,13 +2130,21 @@ local NAMED_MARK_HELPERS = {
   start_capture_slice_from = true,
 }
 
-local function set_live_cursor(ctx, byte_cursor)
+local function set_live_cursor(ctx, byte_cursor, projection)
+  if projection ~= nil and not typed_source.position_is_valid(ctx, byte_cursor, projection) then
+    return false
+  end
   ctx.registers = ctx.registers:with_cursor_byte(byte_cursor)
   ctx.cursor_byte = ctx.registers.cursor_byte
+  return true
 end
 
-local function set_capture_start(ctx, byte_cursor)
+local function set_capture_start(ctx, byte_cursor, projection)
+  if projection ~= nil and not typed_source.position_is_valid(ctx, byte_cursor, projection) then
+    return false
+  end
   ctx.registers = ctx.registers:with_capture_start_byte(byte_cursor)
+  return true
 end
 
 local function trace_mark_capture_helper(ctx, rule_label, helper_name, arity)
@@ -2064,34 +2162,35 @@ local function trace_mark_capture_helper(ctx, rule_label, helper_name, arity)
   )
 end
 
-local function anonymous_capture_span(ctx, start_byte, end_byte, length_only)
+local function anonymous_capture_span(ctx, start_byte, end_byte, length_only, projection)
   if start_byte == nil or end_byte == nil or start_byte < 0 or start_byte > #ctx.input or
       end_byte < start_byte or end_byte > #ctx.input then
     return json.null
   end
-  if length_only then
-    return matching.byte_offset_to_char_offset(ctx.input, end_byte) -
-      matching.byte_offset_to_char_offset(ctx.input, start_byte)
-  end
-  return ctx.input:sub(start_byte + 1, end_byte)
+  local result = length_only and
+    typed_source.span_length(ctx, start_byte, end_byte, projection) or
+    typed_source.span_text(ctx, start_byte, end_byte, projection)
+  return result == nil and json.null or result
 end
 
 local function evaluate_anonymous_capture_helper(name, expr, ctx)
   if #expr.args ~= 0 then invalid_helper_arity(name, "exactly 0 positional arguments", #expr.args) end
   trace_mark_capture_helper(ctx, ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule, name, #expr.args)
   if name == "start_capture_slice" then
-    set_capture_start(ctx, ctx.cursor_byte)
+    set_capture_start(ctx, ctx.cursor_byte, name)
     return json.null
   end
 
   local start_byte = ctx.registers.capture_start_byte
   if start_byte == nil then return json.null end
   if name == "capture_slice_pos" then
-    return matching.byte_offset_to_char_offset(ctx.input, start_byte)
+    return typed_source.position_offset(ctx, start_byte, name) or json.null
   end
   if name == "capture_slice_line" or name == "capture_slice_col" then
-    local position = matching.line_column_at_byte_offset(ctx.input, start_byte)
-    return name == "capture_slice_line" and position.line or position.column
+    local value = name == "capture_slice_line" and
+      typed_source.position_line(ctx, start_byte, name) or
+      typed_source.position_column(ctx, start_byte, name)
+    return value or json.null
   end
 
   local end_byte
@@ -2105,13 +2204,19 @@ local function evaluate_anonymous_capture_helper(name, expr, ctx)
     end_byte = ctx.registers.local_match.byte_start
   end
 
-  local result = anonymous_capture_span(ctx, start_byte, end_byte, name:sub(-4) == "_len")
+  local result = anonymous_capture_span(
+    ctx,
+    start_byte,
+    end_byte,
+    name:sub(-4) == "_len",
+    name
+  )
   if result == json.null then return result end
   if name == "capture_take" or name == "capture_take_len" or
       name == "capture_take_until_cursor" or name == "capture_take_until_cursor_len" then
-    set_capture_start(ctx, ctx.cursor_byte)
+    set_capture_start(ctx, ctx.cursor_byte, name)
   elseif name == "capture_take_rest" or name == "capture_take_rest_len" then
-    set_capture_start(ctx, #ctx.input)
+    set_capture_start(ctx, #ctx.input, name)
   end
   return result
 end
@@ -2153,37 +2258,55 @@ local function evaluate_named_mark_helper(engine, name, expr, ctx, accumulator, 
     marks = {}
     ctx.mark_buckets[rule_label] = marks
   end
+
+  local function stored_mark(mark_key)
+    local byte_offset = marks[mark_key]
+    if byte_offset == nil or not typed_source.position_is_valid(ctx, byte_offset, name) then
+      return nil
+    end
+    return byte_offset
+  end
+
+  local function write_mark(mark_key, byte_offset)
+    if not typed_source.position_is_valid(ctx, byte_offset, name) then
+      return false
+    end
+    marks[mark_key] = byte_offset
+    return true
+  end
+
   if name == "start_capture_slice_from" then
-    local byte_offset = marks[first_mark_name]
-    if byte_offset ~= nil then set_capture_start(ctx, byte_offset) end
+    local byte_offset = stored_mark(first_mark_name)
+    if byte_offset ~= nil then set_capture_start(ctx, byte_offset, name) end
     return json.null
   elseif name == "mark_here" then
-    marks[first_mark_name] = ctx.cursor_byte
+    write_mark(first_mark_name, ctx.cursor_byte)
     return json.null
   elseif name == "mark_input_start" then
-    marks[first_mark_name] = 0
+    write_mark(first_mark_name, 0)
     return json.null
   elseif name == "mark_input_end" then
-    marks[first_mark_name] = #ctx.input
+    write_mark(first_mark_name, #ctx.input)
     return json.null
   elseif name == "mark_entry_start" or name == "mark_entry_end" then
     local one = ctx.registers.entry_match
     if one ~= nil then
-      marks[first_mark_name] = name == "mark_entry_start" and one.byte_start or one.byte_end
+      write_mark(first_mark_name, name == "mark_entry_start" and one.byte_start or one.byte_end)
     end
     return json.null
   elseif name == "mark_match_start" or name == "mark_match_end" then
     local one = ctx.registers.local_match
     if one ~= nil then
-      marks[first_mark_name] = name == "mark_match_start" and one.byte_start or one.byte_end
+      write_mark(first_mark_name, name == "mark_match_start" and one.byte_start or one.byte_end)
     end
     return json.null
   elseif name == "mark_copy" then
     local source_name = mark_name(2)
-    if marks[source_name] == nil then
+    local source_offset = stored_mark(source_name)
+    if source_offset == nil then
       marks[first_mark_name] = nil
     else
-      marks[first_mark_name] = marks[source_name]
+      write_mark(first_mark_name, source_offset)
     end
     return json.null
   elseif name == "mark_capture_slice" then
@@ -2191,29 +2314,31 @@ local function evaluate_named_mark_helper(engine, name, expr, ctx, accumulator, 
     if capture_start == nil then
       marks[first_mark_name] = nil
     else
-      marks[first_mark_name] = capture_start
+      write_mark(first_mark_name, capture_start)
     end
     return json.null
   elseif name == "mark_exists" then
-    return marks[first_mark_name] ~= nil and 1 or 0
+    return stored_mark(first_mark_name) ~= nil and 1 or 0
   end
 
-  local byte_offset = marks[first_mark_name]
+  local byte_offset = stored_mark(first_mark_name)
   if name == "mark_pos" then
     if byte_offset == nil then return json.null end
-    return matching.byte_offset_to_char_offset(ctx.input, byte_offset)
+    return typed_source.position_offset(ctx, byte_offset, name) or json.null
   elseif name == "mark_line" or name == "mark_col" then
     if byte_offset == nil then return json.null end
-    local position = matching.line_column_at_byte_offset(ctx.input, byte_offset)
-    return name == "mark_line" and position.line or position.column
+    local value = name == "mark_line" and
+      typed_source.position_line(ctx, byte_offset, name) or
+      typed_source.position_column(ctx, byte_offset, name)
+    return value or json.null
   end
 
   if two_mark_helper then
-    local end_byte = marks[mark_name(2)]
+    local end_byte = stored_mark(mark_name(2))
     local length_only = name == "capture_len_between" or name == "capture_take_between_len"
-    local result = anonymous_capture_span(ctx, byte_offset, end_byte, length_only)
+    local result = anonymous_capture_span(ctx, byte_offset, end_byte, length_only, name)
     if result ~= json.null and (name == "capture_take_between" or name == "capture_take_between_len") then
-      marks[first_mark_name] = end_byte
+      write_mark(first_mark_name, end_byte)
     end
     return result
   end
@@ -2233,12 +2358,12 @@ local function evaluate_named_mark_helper(engine, name, expr, ctx, accumulator, 
   local length_only = name == "capture_len_from" or name == "capture_until_cursor_len_from" or
     name == "capture_rest_len_from" or name == "capture_take_len_from" or
     name == "capture_take_until_cursor_len_from" or name == "capture_take_rest_len_from"
-  local result = anonymous_capture_span(ctx, byte_offset, end_byte, length_only)
+  local result = anonymous_capture_span(ctx, byte_offset, end_byte, length_only, name)
   if result ~= json.null and name:sub(1, 12) == "capture_take" then
     if name == "capture_take_rest_from" or name == "capture_take_rest_len_from" then
-      marks[first_mark_name] = #ctx.input
+      write_mark(first_mark_name, #ctx.input)
     else
-      marks[first_mark_name] = ctx.cursor_byte
+      write_mark(first_mark_name, ctx.cursor_byte)
     end
   end
   return result
@@ -2308,8 +2433,9 @@ local function evaluate_capture_until_boundary(engine, expr, ctx, accumulator, e
     )
     return json.null
   end
-  local captured = ctx.input:sub(capture_start + 1, capture_end)
-  set_live_cursor(ctx, capture_end)
+  local captured = typed_source.span_text(ctx, capture_start, capture_end, "capture_until_boundary")
+  if captured == nil then return json.null end
+  set_live_cursor(ctx, capture_end, "capture_until_boundary")
   runtime_trace_event(
     ctx,
     trace.TRACE_MARK,
@@ -2345,29 +2471,42 @@ local function evaluate_input_cursor_helper(engine, name, expr, ctx, accumulator
     if start == nil or width == nil then return json.null end
     start = math.max(0, start)
     width = math.max(0, width)
-    local start_byte = matching.char_offset_to_byte_offset(ctx.input, start)
-    local end_byte = matching.char_offset_to_byte_offset(ctx.input, start + width)
-    return ctx.input:sub(start_byte + 1, end_byte)
+    return ctx.source_location:source_slice(
+      start,
+      width,
+      typed_source.rule_label(ctx),
+      name
+    ) or json.null
   end
 
   if #expr.args ~= 0 then invalid_helper_arity(name, "exactly 0 positional arguments", #expr.args) end
-  if name == "input_text" then return ctx.input end
-  if name == "input_len" or name == "input_end_pos" then
-    return matching.byte_offset_to_char_offset(ctx.input, #ctx.input)
+  if name == "input_text" then
+    return ctx.source_location:source_text(typed_source.rule_label(ctx), name) or json.null
+  end
+  if name == "input_len" then return ctx.source_location:source_length() or json.null end
+  if name == "input_end_pos" then
+    return typed_source.position_offset(ctx, #ctx.input, name) or json.null
   end
   if name == "input_end_line" or name == "input_end_col" then
-    local position = matching.line_column_at_byte_offset(ctx.input, #ctx.input)
-    return name == "input_end_line" and position.line or position.column
+    local value = name == "input_end_line" and
+      typed_source.position_line(ctx, #ctx.input, name) or
+      typed_source.position_column(ctx, #ctx.input, name)
+    return value or json.null
   end
-  if name == "cursor_pos" then return matching.byte_offset_to_char_offset(ctx.input, ctx.cursor_byte) end
+  if name == "cursor_pos" then
+    return typed_source.position_offset(ctx, ctx.cursor_byte, name) or json.null
+  end
   if name == "cursor_line" or name == "cursor_col" then
-    local position = matching.line_column_at_byte_offset(ctx.input, ctx.cursor_byte)
-    return name == "cursor_line" and position.line or position.column
+    local value = name == "cursor_line" and
+      typed_source.position_line(ctx, ctx.cursor_byte, name) or
+      typed_source.position_column(ctx, ctx.cursor_byte, name)
+    return value or json.null
   end
-  if name == "cursor_rest" then return ctx.input:sub(ctx.cursor_byte + 1) end
+  if name == "cursor_rest" then
+    return typed_source.span_text(ctx, ctx.cursor_byte, #ctx.input, name) or json.null
+  end
   if name == "cursor_rest_len" then
-    return matching.byte_offset_to_char_offset(ctx.input, #ctx.input) -
-      matching.byte_offset_to_char_offset(ctx.input, ctx.cursor_byte)
+    return typed_source.span_length(ctx, ctx.cursor_byte, #ctx.input, name) or json.null
   end
   fail("unsupported input/cursor helper '" .. tostring(name) .. "'", { helper_name = name })
 end
@@ -2377,17 +2516,23 @@ local function evaluate_cursor_control(name, expr, ctx)
   local cursor_before = ctx.cursor_byte
   local stack_before = #ctx.cursor_stack
   if name == "save_cursor" then
-    ctx.cursor_stack[#ctx.cursor_stack + 1] = ctx.cursor_byte
+    if typed_source.position_is_valid(ctx, ctx.cursor_byte, name) then
+      ctx.cursor_stack[#ctx.cursor_stack + 1] = ctx.cursor_byte
+    end
   elseif name == "restore_cursor" then
     local saved = ctx.cursor_stack[#ctx.cursor_stack]
     if saved ~= nil then
       ctx.cursor_stack[#ctx.cursor_stack] = nil
-      set_live_cursor(ctx, saved)
+      set_live_cursor(ctx, saved, name)
     end
   elseif name == "rewind_match_start" then
-    if ctx.registers.local_match then set_live_cursor(ctx, ctx.registers.local_match.byte_start) end
+    if ctx.registers.local_match then
+      set_live_cursor(ctx, ctx.registers.local_match.byte_start, name)
+    end
   elseif name == "rewind_entry_start" then
-    if ctx.registers.entry_match then set_live_cursor(ctx, ctx.registers.entry_match.byte_start) end
+    if ctx.registers.entry_match then
+      set_live_cursor(ctx, ctx.registers.entry_match.byte_start, name)
+    end
   end
   runtime_trace_event(
     ctx,
@@ -3794,14 +3939,16 @@ local function execute_rule_slot_events(rule, regex_index, ctx)
   for _, event in ipairs(rule.rule_slot_events) do
     if event.regex_index == regex_index then
       if event.kind == "capture_boundary" then
-        set_capture_start(ctx, ctx.cursor_byte)
+        set_capture_start(ctx, ctx.cursor_byte, "start_capture_slice")
       elseif event.kind == "named_mark" then
         local marks = ctx.mark_buckets[rule.label]
         if marks == nil then
           marks = {}
           ctx.mark_buckets[rule.label] = marks
         end
-        marks[event.mark_name] = ctx.cursor_byte
+        if typed_source.position_is_valid(ctx, ctx.cursor_byte, "mark_here") then
+          marks[event.mark_name] = ctx.cursor_byte
+        end
       else
         fail("unsupported compiled rule-slot event '" .. tostring(event.kind) .. "'", {
           code = "unsupported_rule_slot_event",

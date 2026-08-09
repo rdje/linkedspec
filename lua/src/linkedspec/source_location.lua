@@ -115,6 +115,7 @@ local function decoded_source(source_id, text)
   end
 
   local byte_at_offset = { 0 }
+  local offset_at_byte = { [0] = 0 }
   local line_at_offset = { 1 }
   local column_at_offset = { 1 }
   local byte_index = 1
@@ -134,6 +135,7 @@ local function decoded_source(source_id, text)
       column = column + 1
     end
     byte_at_offset[scalar_offset + 1] = byte_index - 1
+    offset_at_byte[byte_index - 1] = scalar_offset
     line_at_offset[scalar_offset + 1] = line
     column_at_offset[scalar_offset + 1] = column
   end
@@ -143,6 +145,7 @@ local function decoded_source(source_id, text)
     text = text,
     scalar_length = scalar_offset,
     byte_at_offset = byte_at_offset,
+    offset_at_byte = offset_at_byte,
     line_at_offset = line_at_offset,
     column_at_offset = column_at_offset,
   }
@@ -258,6 +261,49 @@ function M.position(authority_value, options)
     source_id = options.source_id,
     offset = options.offset,
   })
+end
+
+function M.position_from_utf8_byte(authority_value, options)
+  local authority = state_of(authority_value, "SourceAuthority")
+  options = options_table(options, "position_from_utf8_byte")
+  local context = context_state(options)
+  if type(options.source_id) ~= "string" then
+    fail("position_from_utf8_byte source_id must be a string")
+  end
+  if not is_integer(options.utf8_byte_offset) then
+    fail("position_from_utf8_byte offset must be an integer")
+  end
+
+  local source = source_for(authority, options.source_id)
+  local offset = source and source.offset_at_byte[options.utf8_byte_offset] or nil
+  if offset == nil then
+    raise_value_error(POSITION_OUT_OF_RANGE_CODE, context, {
+      source_id = options.source_id,
+      position_offset = options.utf8_byte_offset,
+      source_length = source and source.scalar_length or 0,
+    })
+  end
+  return new_token("Position", {
+    authority_id = authority.authority_id,
+    source_id = options.source_id,
+    offset = offset,
+  })
+end
+
+function M.source_scalar_length(authority_value, source_id)
+  local authority = state_of(authority_value, "SourceAuthority")
+  if type(source_id) ~= "string" then fail("source id must be a string") end
+  local source = source_for(authority, source_id)
+  return source and source.scalar_length or nil
+end
+
+function M.position_offset(position_value)
+  return state_of(position_value, "Position").offset
+end
+
+function M.span_scalar_length(span_value)
+  local span = state_of(span_value, "Span")
+  return span.end_offset - span.start_offset
 end
 
 function M.direct_span(authority_value, options)

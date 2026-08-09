@@ -1,5 +1,30 @@
 # CHANGES
 
+## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.5.2 — route Lua typed source projections
+
+- Added private `source_location_runtime.lua` with one copied `input` authority per execution context, exact fresh
+  detached 47/30/11/4 projection catalogs, and seven compatibility-alias rows.
+- Added UTF-8-byte-to-scalar adapters to the immutable core. Entry/local-match text and coordinates, input/cursor
+  views, anonymous/named spans, marks, capture boundaries, rule-slot marks, and cursor controls now construct typed
+  positions/spans and use authority-owned validation, coordinates, slicing, or materialization.
+- Preserved zero-based UTF-8-byte cursor, match, anonymous-boundary, mark, and stack registers plus all strings,
+  numbers, arrays, maps, booleans, nulls, results, and mutation timing. Capture-group value/list/map/existence
+  adapters retain their detached compatibility shapes; aliases still canonicalize into preferred branches.
+- Preserved core 133/133 and made the unchanged projection consumer pass 240/240 on PUC Lua and LuaJIT across
+  native, reconstructed, and generated-plan execution. The alias consumer remains 638/638 per ABI across loaded
+  and independently emitted routes.
+- Composed the new module through one private table to respect the known Lua 5.1 200-local interpreter ceiling.
+  Complete Lua passes package 177/177 per ABI, MCP 83,166 bytes, CLI 66x2, corpus 105/105, storage 18/3, and marker.
+- Kept ordinary/canonical typed-source discovery, neutral 7/7/41, and `lua_dual_abi` promotion exclusively pending
+  for `.14.2.5.3`; language remains 246/105+1/122 and no schema, DSL, semantic/MCP/capability, or README changed.
+- Synchronized the sole-facing capture, helper-reference, project-status, and backend-handoff pages plus task,
+  Knowledge, roadmap, memory, and live docs. The book passes at 79 files / 14,188 KiB with changed material in
+  distinct rendered blocks; Knowledge remains exact at 789/6,504 and all seven doctrines pass.
+- The first two canonical attempts caught summary-row loss of governed `.24.2` capability and `128 mutations,
+  rollout 9/9` semantic markers; restoring the exact closed-state sentences repaired documentation projection
+  drift without changing behavior. The definitive rerun passes containment/relocation, CLI 66x2, RAM 65%, and
+  Phase 0 1,031/1,031 in 662 seconds before its exact marker. Atomic commit 167/300 remains.
+
 ## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.5.1 — add Lua typed source core
 
 - Added private `lua/src/linkedspec/source_location.lua`, shared unchanged by PUC Lua and LuaJIT and deliberately

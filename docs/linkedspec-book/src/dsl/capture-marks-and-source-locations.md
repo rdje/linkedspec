@@ -36,11 +36,20 @@ Julia retains zero-based UTF-8 code-unit runtime registers while its same 92 hel
 immutable input authority at the typed boundary. Its explicit consumer passes immutable values plus native,
 reconstructed, and generated-plan helper execution under ordinary discovery and canonical CI.
 
-PUC Lua and LuaJIT now recognize all 92 canonical source-boundary helpers plus the same seven compatibility
-aliases. The aliases canonicalize into existing byte-register runtime branches and pass native, loaded,
-reconstructed, generated-plan, and emitted execution on both ABIs. One shared private immutable value core now
-passes 133/133 pre-admission assertions on each ABI. It is not exported or routed into those helper branches yet;
-typed projection routing and runtime admission remain separate pending leaves.
+PUC Lua and LuaJIT recognize all 92 canonical source-boundary helpers plus the same seven compatibility aliases.
+One shared private immutable authority now sits beneath those helper branches. Each parse input gets one authority;
+typed positions and spans validate/materialize the existing byte-register state without replacing it. Core proof
+passes 133/133 and projection proof passes 240/240 on each ABI across native, reconstructed, and generated-plan
+execution. Alias proof also retains loaded and independently emitted routes. Runtime admission remains pending.
+
+Run the implemented pre-admission projection proof from the repository root with either ABI:
+
+```bash
+LINKEDSPEC_LUA_TYPED_SOURCE_RED_MODE=projection \
+  bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_test.lua
+LINKEDSPEC_LUA_TYPED_SOURCE_RED_MODE=projection \
+  bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua
+```
 
 ### Bounded cursor transactions do not mean general backtracking
 
@@ -105,6 +114,10 @@ consumer is admitted under ordinary discovery and canonical CI.
 Julia implements that boundary while preserving the same external result kinds, mutation timing, and its native
 zero-based UTF-8 code-unit registers. Its exact consumer and 92+7 detached catalogs are admitted under ordinary
 discovery and canonical CI, so the neutral rollout is 7 complete / 7 pending.
+
+Lua implements the same internal boundary beneath exact detached 92+7 catalogs while preserving zero-based UTF-8
+byte registers, values, and mutation timing. Its 240-assertion consumer is still pre-admission, so it does not yet
+advance the neutral rollout or run through ordinary/canonical discovery.
 
 There is still no public `Position` or `Span` authored value, checkpoint syntax, transaction behavior, recursive
 observation API, or PUC-Lua/LuaJIT runtime admission. Those remain owned by later leaves.

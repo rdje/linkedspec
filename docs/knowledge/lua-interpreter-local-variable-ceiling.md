@@ -10,6 +10,7 @@ date: 2026-07-20
 status: current maintenance constraint
 tags: [lua, luajit, interpreter, architecture, maintenance, local-variable-limit, FUTURE-PARITY-BACKLOG]
 evidence: "During FUTURE-PARITY-BACKLOG.9.1.8.1.6, adding one top-level local module binding and one local trace helper made luac -p reject lua/src/linkedspec/interpreter.lua with 'too many local variables (limit is 200) in main function'. Removing the extra binding and publishing the helper through the existing module table restored PUC Lua and LuaJIT syntax and complete tests."
+evidence_update_2026_08_07: "FUTURE-PARITY-BACKLOG.14.2.5.2 initially added a source-location module local plus seven local typed adapters; PUC Lua again rejected interpreter.lua at the exact 200-local ceiling before any test ran. Moving the module binding into one private typed_source table and publishing adapters as table fields restored PUC and LuaJIT loading. Core 133/133, projection 240/240, aliases 638/638, and complete package 177/177 then pass on each ABI."
 reverify: "find lua/src/linkedspec -name '*.lua' -print0 | xargs -0 -n1 luac -p"
 ---
 
@@ -24,6 +25,10 @@ when a coherent boundary exists, move into a smaller required module. Every
 interpreter change must retain a direct `luac -p` pass before runtime tests.
 The duplicate-slot slice used `M.trace_regex_slot_selected` and an existing
 required module rather than consuming another top-level local.
+
+Typed source projection `.14.2.5.2` confirms the complementary safe pattern: one coherent private module owns the
+large implementation, while the interpreter spends a single private table binding and table-field adapters. Do not
+expand that table into separate chunk-local aliases; doing so recreates the load-time failure before tests execute.
 
 Related: [[lua-duplicate-regex-slot-identity-admission]],
 [[lua-runtime-rule-interpreter]], and [[FUTURE-PARITY-BACKLOG]].

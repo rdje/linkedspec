@@ -1,5 +1,42 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.5.2` — shared Lua typed-source projections):
+  `source_location_runtime.lua` is the private compatibility boundary between immutable scalar positions/spans and
+  the interpreter's unchanged zero-based UTF-8-byte registers. `context(...)` constructs exactly one adapter and
+  copied `input` authority; reconstructed, loaded, generated-plan, and emitted carriers all re-enter that same
+  context constructor instead of serializing typed values or creating route-specific authorities.
+- Static module-owned inventories return fresh detached JSON for exact 47 capture/mark, 30 entry/match, 11 input/
+  cursor, and four cursor-control rows plus seven aliases. Package functions validate the supplied runtime engine.
+- The adapter catches only the four private typed value errors at compatibility boundaries. It constructs positions
+  from scalar or valid UTF-8 byte offsets, constructs same-input spans, and projects offsets, line/column, scalar
+  lengths, source slices, or materialized text. Unexpected module/programming errors continue to propagate.
+- Entry/local-match spans, source/cursor spans, anonymous/named captures, mark/boundary reads and writes, slot
+  markers, and save/restore/rewind targets spend that adapter. Capture-group collections/maps/existence/text remain
+  copied regex-record values because their current records do not carry per-group source offsets; this is the exact
+  `capture_group_*` compatibility projection, not a second coordinate route.
+- Cursor, match, capture-start, mark, and stack storage remains numeric UTF-8 bytes. Typed validation happens before
+  compatibility writes; every valid current path retains the same write timing and result. Aliases canonicalize
+  before dispatch, so they cannot select an alternate typed or legacy implementation.
+
+  The first PUC projection run failed at module load with the known 200-local chunk ceiling. The Knowledge owner
+  now records the proven composition: require the coherent private module through one `typed_source` table field
+  and publish interpreter adapters on that table, not as extra top-level locals. Both ABIs then pass core 133/133,
+  projection 240/240, aliases 638/638, and complete package 177/177; CLI 66x2, corpus 105/105, storage 18/3,
+  neutral 7/7/41, and language 246/105+1/122 also pass. Admission remains `.14.2.5.3`.
+
+  Four sole-facing book pages now state implemented-but-unadmitted Lua projection and preserve the public typed-
+  value boundary. The local book gate emits 79 files / 14,188 KiB; direct generated-HTML inspection proves the
+  changed status, command, limitation, transaction, helper, and following-example material remains in distinct
+  paragraph/code blocks. Regenerated Knowledge remains exact at 789 facts / 6,504 question keys. README is
+  unchanged and all seven doctrines pass.
+
+  Canonical attempts one and two correctly rejected summary-row wording that had dropped the exact closed `.24.2`
+  capability markers and contiguous `128 mutations, rollout 9/9` semantic marker. Prior-row/checker diffs proved
+  public-projection drift only; restoring the full historical sentences made focused 80/0/0 capability and 6/20/
+  128/9/9/6 semantic checks green. The third canonical run completes every typed-source, semantic/MCP, adjacent,
+  containment, relocation, and CLI 66x2 layer; RAM is 65%, and Phase 0 passes 1,031/1,031 in 662 seconds before the
+  exact local-CI marker. Commit 167/300 and clean handoff remain.
+
 - 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.5.1` — immutable shared Lua source-location core): one direct private
   `linkedspec.source_location` module serves PUC Lua and LuaJIT without a package-root export, runtime-context field,
   projection catalog, interpreter branch, ordinary-test registration, or canonical admission.

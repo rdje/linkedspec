@@ -1,5 +1,33 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-07 — Lua typed source projections are implemented but not admitted
+
+`FUTURE-PARITY-BACKLOG.14.2.5.2` activated task-tree-first from clean immutable-core commit `e6a75830` as intended
+167/300 with no push. Each PUC Lua or LuaJIT parse input now owns one copied private authority beneath exact fresh
+47/30/11/4 projection catalogs plus seven aliases.
+
+All 92 canonical helper routes now construct typed positions/spans for text, scalar lengths/offsets, coordinates,
+input slicing, entry/local matches, anonymous/named spans, marks, capture boundaries, and cursor controls. Existing
+UTF-8-byte cursor, match, boundary, mark, and stack registers and every public value/mutation shape remain unchanged;
+capture-group values and collections retain detached compatibility projection.
+
+Core passes 133/133 and the unchanged dormant projection consumer passes 240/240 on each ABI across native,
+reconstructed, and generated-plan execution. Aliases remain 638/638 per ABI across loaded and independently emitted
+routes. Complete Lua passes package 177/177 per ABI, byte-fresh MCP 83,166 bytes, CLI 66x2, corpus 105/105, storage
+18/3, and the exact marker. Neutral remains 7/7/41 and language remains 246/105+1/122 because ordinary/canonical
+admission remains exclusively `.14.2.5.3`.
+
+The sole-facing book, Knowledge owners, roadmap, task index, memory, and live docs now distinguish implemented-
+but-unadmitted Lua projections from public typed values and future admission. The 79-file/14,188-KiB book render
+passes and direct HTML inspection keeps changed prose and commands in distinct blocks; Knowledge remains exact at
+789/6,504. Doctrine/canonical signoff and atomic commit 167/300 remain before the clean admission handoff.
+All seven doctrines now pass; only atomic commit 167/300 and clean proof remain before the admission handoff. Two
+canonical attempts caught exact governed-marker loss in the refreshed task/
+roadmap summary rows; restoring the complete closed `.24.2` capability and `128 mutations, rollout 9/9` semantic
+sentences repaired only documentation projection drift. The definitive rerun passes every typed-source and
+semantic/MCP consumer, containment/relocation, CLI 66x2, RAM 65%, and Phase 0 1,031/1,031 in 662 seconds before its
+exact marker. Atomic commit 167/300 and clean proof remain.
+
 ## 2026-08-07 — Lua immutable source-location core is implemented but not routed or admitted
 
 `FUTURE-PARITY-BACKLOG.14.2.5.1` activated task-tree-first from clean dormant-RED commit `1136b1f2` as intended
