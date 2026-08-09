@@ -193,9 +193,11 @@ The capability audit now derives the same 246 current ActionIR call names from D
 appears in this book and in the governed occurrence sources: the 105-fixture neutral corpus plus the exact
 complete-named-mark fixture. The strict checker independently derives 122 public identifier-shaped calls from the
 Perl ActionIR contract registry, requires every one in each backend inventory, and rejects nine classified
-compatibility/legacy/internal names. Dart's and Julia's separately rolled-out seven source-boundary compatibility
-aliases are checked with their canonical targets against the neutral typed-source contract; they do not silently
-widen the shared 246-name inventory. This supersedes two historical blind spots: aligned lists first omitted
+compatibility/legacy/internal names. Dart's, Julia's, and Lua's separately rolled-out seven source-boundary
+compatibility aliases are checked with their canonical targets against the neutral typed-source contract; they do
+not silently widen the shared 246-name inventory. Lua executes the mappings through one shared runtime on PUC Lua
+and LuaJIT across native, loaded, reconstructed, generated-plan, and emitted carriers. This supersedes two
+historical blind spots: aligned lists first omitted
 `mark_capture_slice(...)` and `start_capture_slice_from(...)` at 237 names, then all inventories omitted seven
 documented complete-mark helpers at 239 names because the old reverse check began with corpus occurrences.
 

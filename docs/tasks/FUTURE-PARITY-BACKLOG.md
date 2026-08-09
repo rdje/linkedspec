@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-07` (`.14.2.5.0` mapped the shared Lua typed-source boundary, found the exact seven-alias
-  prerequisite, and is signoff-complete for atomic commit 163/300 with no push)
+- Last updated: `2026-08-07` (`.14.2.5.0.1` implements the exact seven shared Lua aliases and has passed focused,
+  complete dual-ABI, storage, language, neutral, and sole-facing-book proof for atomic commit 164/300; no push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -19776,9 +19776,8 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   activate task-tree-first.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.5`
-  Status: `active` parent (2026-08-07; Julia admission `.14.2.4.3` landed at `46612a72`; dual-ABI authority audit
-    `.0` found the exact seven-alias prerequisite and is behavior-free signoff-complete from that clean boundary
-    as intended 163/300, no push)
+  Status: `active` parent (2026-08-07; dual-ABI authority audit `.0` landed at `bdf9956f`; exact seven-alias
+    shared parity `.0.1` is active task-tree-first from that clean 163/300 boundary, no push)
   Goal: Implement one shared Lua typed source-location algebra and admit it independently on PUC Lua and LuaJIT.
   Children: `.14.2.5.0` dual-ABI authority/prerequisite-split audit; `.14.2.5.0.1` seven-alias shared Lua parity;
     `.14.2.5.0.2` exact dual-ABI typed-source RED; `.14.2.5.1` immutable shared core; `.14.2.5.2` helper/unchanged
@@ -19789,8 +19788,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
     promote only `lua_dual_abi`.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.5.0`
-  Status: `signoff-complete; atomic commit pending` (2026-08-07; task-tree-first from clean Julia-
-    admission commit `46612a72`, intended 163/300, no push)
+  Status: `completed` (`bdf9956f`, 2026-08-07, 163/300, no push)
   Goal: Map the shared Lua typed source-location authority, byte-based runtime registers, exact 92+7 helper surface,
     PUC-Lua/LuaJIT behavior, carrier convergence, diagnostics, discovery, and canonical boundary before freezing an
     honest dual-ABI RED or splitting any measured prerequisite correction.
@@ -19886,8 +19884,15 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   capability, DSL, root README, sole-facing book source, or other-backend behavior changed. Atomic commit 163/300,
   ignored-brief clearing, and clean proof remain before task-tree-first alias parity `.14.2.5.0.1`; no push.
 
+  Commit/handoff evidence 2026-08-07: atomic commit `bdf9956f` lands with first parent `46612a72`; the hook
+  regenerates Knowledge Map at 788/6,487, passes all seven doctrines, and validates the memory activation pointer
+  against both pre-commit HEAD and post-commit `HEAD^1`. Status plus staged/unstaged diffs are empty, the ignored
+  brief is zero bytes, post-commit memory architecture passes, the rendered book is absent, and the exact empty
+  canonical-run directory is removed. Seven-alias Lua parity `.14.2.5.0.1` may therefore activate task-tree-first.
+
 - ID: `FUTURE-PARITY-BACKLOG.14.2.5.0.1`
-  Status: `pending` prerequisite split by dual-ABI authority audit `.14.2.5.0`
+  Status: `signoff-complete` (2026-08-07; task-tree-first from clean audit commit `bdf9956f`, intended 164/300,
+    no push; atomic commit, brief clearing, and clean proof remain)
   Goal: Add exactly the seven neutral source-boundary compatibility spellings at Lua's existing shared known-name
     and canonicalization seams so PUC Lua and LuaJIT execute every alias through its preferred helper branch without
     widening the common 246-name inventory or admitting typed source values.
@@ -19908,6 +19913,75 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   Verification: exact seven-alias RED/GREEN consumer on PUC Lua and LuaJIT; 92+7 inventory and carrier equality;
     complete Lua/canonical no-drift; unchanged neutral 7/7/41 and public book truth
   Commit: `FUTURE-PARITY-BACKLOG.14.2.5.0.1 - add Lua source aliases`
+
+  ### `FUTURE-PARITY-BACKLOG.14.2.5.0.1` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove audit `.14.2.5.0` landed at `bdf9956f` as 163/300 with parent
+    `46612a72`, empty status/diffs, zero-byte brief, valid post-commit memory pointer, absent rendered book, and no
+    managed-run residue; make this task-tree file the sole activation diff.
+  - [x] **RETRIEVE / EXACT SEAM MAP** — Follow the Lua alias-gap Knowledge card and retrieve the neutral rows,
+    Dart/Julia precedents, known/canonical name owners, interpreter branches, carrier routes, discovery, language
+    coverage, complete dual-ABI gate, and sole-facing book before code.
+  - [x] **EXECUTABLE SEVEN-ALIAS RED** — Lock 0/7 known/canonical and exact unsupported-helper behavior on both
+    ABIs before production changes, including unrelated unknown-helper control and common inventory count 246.
+  - [x] **SHARED NAME/CANONICAL REPAIR** — Add exactly seven compatibility names and their preferred targets at
+    the shared recognition/canonicalization seams, with no alias-specific runtime branch or current-name widening.
+  - [x] **DUAL-ABI CARRIER PARITY** — Prove alias/canonical equality, Unicode scalar widths, capture-boundary
+    mutation, reversed-span absence, named maps, and native/loaded/reconstructed/generated/emitted execution on
+    PUC Lua and LuaJIT.
+  - [x] **COVERAGE / SOLE-FACING LOCKSTEP** — Bind Lua's seven pairs independently to neutral language coverage;
+    keep typed source 7/7/41 and the book's pending-Lua/public-value claims exact with readable rendered blocks.
+  - [x] **NO REGRESSION / CLEAN HANDOFF** — Pass focused/complete Lua, storage/corpus/CLI, language/neutral, book,
+    Knowledge, all doctrines, definitive canonical CI, atomic commit 164/300, brief clearing, and clean proof before
+    dormant RED `.14.2.5.0.2`.
+
+  Activation evidence 2026-08-07: audit `.14.2.5.0` lands atomically at `bdf9956f` as intended 163/300 with first
+  parent `46612a72` and no push. Hooks regenerate Knowledge Map at 788/6,487, pass all seven doctrines, and validate
+  the activation pointer in pre-commit and post-commit Git phases. Status plus staged/unstaged diffs are empty,
+  `git_message_brief.txt` is zero bytes, post-commit memory architecture passes, the rendered book is absent, and
+  the exact empty canonical-run directory is removed. This task-tree file is the sole activation diff before any
+  Lua source/test, neutral checker, language coverage, book, Knowledge, roadmap, live-doc, or other change.
+
+  Retrieval/RED evidence 2026-08-07: the Knowledge Map routes the exact gap to
+  `lua-typed-source-compatibility-alias-gap` and the rollout boundary to
+  `typed-source-location-runtime-rollout-plan`. The neutral rows/checker, Dart/Julia precedents, shared Lua
+  known/canonical owners, interpreter branches, five carrier routes, discovery/storage/canonical drivers, and all
+  five sole-facing book passages were retrieved before production edits. One final-path consumer first passed all
+  92 canonical-name assertions on both ABIs while failing exactly 62 of 572 assertions: only the seven aliases were
+  unknown/noncanonical, their downstream carriers stopped at the existing unsupported-helper diagnostic, the
+  unrelated-helper control remained exact, and the common current inventory remained 246.
+
+  Implementation/focused evidence 2026-08-07: `action_call_names.lua` now owns a separate exact seven-name
+  compatibility set and `action_contracts.lua` owns the exact preferred-name map. Known-name recognition and
+  canonical resolution consume those structures before existing helper resolution; `CURRENT_CALL_NAMES`,
+  `current_names()`, and `count()` remain 246, and the interpreter has no alias-specific branch. The ordinary
+  consumer passes 638/638 on PUC Lua and 638/638 on LuaJIT across 92 canonical names, seven aliases, authored arity,
+  Unicode text and reversed spans, capture-boundary mutation, named maps, unrelated diagnostics, and native,
+  reconstructed, loaded, generated-plan, plus independently loaded emitted carriers. Independent language
+  coverage derives Lua's seven pairs and binds them to neutral while remaining 246/105+1/122; neutral typed source
+  stays 7/7/41. Syntax checks, both complete 177-test package runs, and storage 18/3 pass.
+
+  Complete-Lua/book evidence 2026-08-07: `tools/run_lua_local.sh` proves the byte-fresh 83,166-byte MCP binding,
+  the 638-assertion alias consumer and all 177 ordinary tests independently on both ABIs, primary CLI 66/66 in
+  default and POSIX environments, all 105 corpus cases, 18 repository-local temporary owners, three dual-ABI
+  native modules, and exact `[lua-ci] Lua local gate passed`. The sole-facing book is updated across helper
+  reference, capture/source-location, project status, local CI, and backend handoff: Lua alias behavior is current
+  while internal typed values/admission and public typed/transaction surfaces stay future. Its repository-routed
+  build produces 79 files / 14,180 KiB; direct HTML inspection confirms separate paragraphs, code blocks, and
+  following limitations on all five pages, and the generated artifact is removed. Knowledge Map regenerates at
+  788 facts / 6,489 question keys. Definitive doctrine/canonical signoff remains before the atomic commit.
+
+  Definitive canonical evidence 2026-08-07: the first staged attempt passed all seven doctrines, tracked-input,
+  syntax, and memory-pointer proof, then correctly rejected the refreshed task-index row for dropping the exact
+  governed historical markers `exclusion public closeout .24.2` and `Capability exclusion freshness is public-
+  closed under FUTURE-PARITY-BACKLOG.24`. Restoring both still-true projections made focused capability proof pass
+  schema v2 / 80-0-0 / two exclusions / 24 governance mutations / 12 projections / six public mutations. The
+  definitive rerun preserves typed source 7/7/41; executes every admitted typed-source and composed semantic/MCP
+  consumer; proves six-family repository containment plus relocated/moved/outside-CWD execution; and passes primary
+  CLI 66/66 under default and POSIX environments. RAM is 59% against the 88% threshold. Phase 0 passes
+  1,031/1,031 in 659 wallclock seconds before exact `[ci] local CI gate passed` and exit 0. Knowledge 788/6,489,
+  all seven doctrines, staged/unstaged whitespace, and memory/task metadata pass. The leaf is signoff-complete for
+  atomic commit 164/300; brief clearing and clean proof remain before `.14.2.5.0.2`; no push.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.5.0.2`
   Status: `pending` behind shared Lua alias parity `.14.2.5.0.1`

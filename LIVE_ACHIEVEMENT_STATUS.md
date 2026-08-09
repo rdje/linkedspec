@@ -1,5 +1,26 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-07 — Lua executes all seven source-boundary compatibility aliases
+
+`FUTURE-PARITY-BACKLOG.14.2.5.0.1` activated task-tree-first from clean audit commit `bdf9956f` as intended
+164/300 with no push. A separate exact seven-name inventory and canonical-name map admit the neutral spellings
+without widening the common 246-name inventory or adding interpreter branches. Both Lua ABIs execute the same
+existing preferred helper paths.
+
+The valid pre-production RED passed all 92 canonical names and failed exactly 62/572 assertions per ABI, isolated
+to the absent aliases and their downstream carriers. GREEN is 638/638 independently on PUC Lua and LuaJIT across
+seven mappings, exact arity, Unicode and reversed spans, anonymous-boundary mutation, named maps, unrelated
+diagnostics, and native, reconstructed, loaded, generated-plan, plus independently emitted carriers.
+
+Complete Lua passes byte-fresh MCP 83,166 bytes, package 177/177 per ABI, CLI 66x2, corpus 105/105, storage 18/3,
+and its exact marker. Language coverage remains 246/105+1/122; neutral typed source remains 7/7/41. Five updated
+sole-facing book pages accurately separate callable Lua alias parity from pending Lua typed values/admission and
+public typed/transaction work; their 79-file/14,180-KiB HTML uses separate blocks. Knowledge Map is 788/6,489.
+All seven doctrines pass. Definitive canonical CI preserves capability 80/0/0 and typed source 7/7/41, executes
+all composed semantic/MCP admissions, proves containment/relocation, passes CLI 66x2, reports RAM 59%, and passes
+Phase 0 1,031/1,031 in 659 seconds before its exact marker. The leaf is signoff-complete; atomic commit 164/300,
+brief clearing, and clean proof remain before dormant RED `.0.2`.
+
 ## 2026-08-07 — Lua typed-source boundary is mapped; seven shared aliases come first
 
 `FUTURE-PARITY-BACKLOG.14.2.5.0` activated task-tree-first from clean Julia admission commit `46612a72` as

@@ -249,6 +249,19 @@ local CURRENT_CALL_NAMES = {
   ["when"] = true,
 }
 
+-- Compatibility-only source spellings stay outside the shared 246-name
+-- current inventory. They are accepted for migration and canonicalized by
+-- action_contracts.lua before runtime dispatch.
+local SOURCE_BOUNDARY_COMPATIBILITY_CALL_NAMES = {
+  ["capture_from_rule_start"] = true,
+  ["capture_len_from_rule_start"] = true,
+  ["capture_rest_length"] = true,
+  ["capture_slice_here"] = true,
+  ["capture_slice_length"] = true,
+  ["entry_named_map"] = true,
+  ["match_named_map"] = true,
+}
+
 -- Exact contract view retained after FUTURE-PARITY-BACKLOG.17.5 admits these
 -- names into CURRENT_CALL_NAMES. Keeping the governed family view avoids
 -- reconstructing it from the larger shared inventory in focused tests.
@@ -263,7 +276,9 @@ local COMPLETE_NAMED_MARK_CALL_NAMES = {
 }
 
 function M.is_known(name)
-  return CURRENT_CALL_NAMES[name] == true or COMPLETE_NAMED_MARK_CALL_NAMES[name] == true
+  return CURRENT_CALL_NAMES[name] == true or
+    SOURCE_BOUNDARY_COMPATIBILITY_CALL_NAMES[name] == true or
+    COMPLETE_NAMED_MARK_CALL_NAMES[name] == true
 end
 
 function M.is_shared_inventory_name(name)

@@ -73,6 +73,7 @@ expected_temp_owners=(
  lua/test/semantic_index_runtime_observation_generated_routes_test.lua
  lua/test/semantic_index_runtime_observation_native_test.lua
  lua/test/semantic_introspection_lua_admission_test.lua
+ lua/test/source_boundary_compatibility_aliases_test.lua
  lua/test/unicode_rule_label_identity_routes_test.lua
  lua/test/unicode_rule_label_negative_isolation_test.lua
  tools/run_lua_local.sh
@@ -191,4 +192,4 @@ if [[ -n "$owned_native_root" ]]; then rm -rf -- "$owned_native_root"; fi
 [[ ! -e "$probe_root" ]] || fail 'Lua storage probe remained after cleanup'
 [[ -z "$owned_native_root" || ! -e "$owned_native_root" ]] || fail 'Lua native build remained after cleanup'
 
-printf '[lua-project-data-test] PASS: 17 owners, three dual-ABI native modules, generated output, and traces stay on repository storage\n'
+printf '[lua-project-data-test] PASS: 18 owners, three dual-ABI native modules, generated output, and traces stay on repository storage\n'

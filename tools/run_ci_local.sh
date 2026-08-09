@@ -391,6 +391,7 @@ require_tracked_file t/typed_source_location_perl_contract.t
 require_tracked_file rust/linkedspec-runtime/tests/typed_source_location_contract.rs
 require_tracked_file dart/test/typed_source_location_contract_test.dart
 require_tracked_file julia/test/typed_source_location_contract_test.jl
+require_tracked_file lua/test/source_boundary_compatibility_aliases_test.lua
 require_tracked_file t/variadic_user_function_contract.t
 require_tracked_file t/callable_codeblock_literal_contract.t
 require_tracked_file t/uniform_binding_contract.t

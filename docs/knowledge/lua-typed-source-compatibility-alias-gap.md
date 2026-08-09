@@ -1,6 +1,6 @@
 ---
 id: lua-typed-source-compatibility-alias-gap
-title: Lua is missing all seven neutral source-boundary compatibility aliases before typed-source implementation
+title: Lua implements all seven neutral source-boundary compatibility aliases through one shared canonical seam
 answers:
   - "does Lua execute all seven typed source location compatibility aliases"
   - "which typed source compatibility aliases are missing in Lua"
@@ -15,11 +15,14 @@ answers:
   - "where does Lua store source cursor mark and match offsets"
   - "do PUC Lua and LuaJIT share source boundary helper code"
   - "do Lua loaded generated and emitted parsers use the same helper interpreter"
+  - "are the seven Lua source boundary compatibility aliases implemented now"
 date: 2026-08-07
-status: exact seven-alias prerequisite measured by FUTURE-PARITY-BACKLOG.14.2.5.0; implementation pending .14.2.5.0.1
+status: implemented by FUTURE-PARITY-BACKLOG.14.2.5.0.1 on PUC Lua and LuaJIT; typed-source RED remains pending .14.2.5.0.2
 tags: [lua, PUC-Lua, LuaJIT, source-location, helpers, aliases, parity, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.14.2.5.0 retrieves ADR 0056, the neutral contract/checker, Lua authority cards, exact shared source/tests/drivers, prior runtime precedents, and the sole-facing book before probing. One identical repository-routed command on PUC Lua and LuaJIT proves all 92 canonical source-boundary rows are unique, known, canonically stable, and contract-resolvable, but zero of seven aliases is known or canonicalized. Each authored alias executes through a compiled spec far enough to throw RuntimeInterpreterException at runtime_execution with owner lua_runtime, rule Top, and exact unsupported runtime helper '<name>' detail. The complete unchanged shared suite passes 177/177 per ABI. The audit therefore splits alias parity .14.2.5.0.1 before dormant dual-ABI typed RED .14.2.5.0.2 without production, test, or neutral 7/7/41 movement."
-reverify: "bash tools/run_lua_project_data.sh puc -e 'local l=require(\"linkedspec\"); local j=require(\"linkedspec.json\"); local f=assert(io.open(\"capability_conformance/typed_source_location_contract.json\",\"rb\")); local c=j.decode(f:read(\"*a\")); f:close(); local n=0; for _,family in ipairs(c.helper_projection_schema.families) do for _,row in ipairs(c.helper_projections[family]) do assert(l.is_known_action_ir_call_name(row[1])); assert(l.canonical_action_helper_name(row[1])==row[1]); n=n+1 end end; local missing=0; for _,row in ipairs(c.compatibility_aliases) do assert(not l.is_known_action_ir_call_name(row[1])); assert(l.canonical_action_helper_name(row[1])==row[1]); missing=missing+1 end; assert(n==92 and missing==7)' && bash tools/run_lua_project_data.sh luajit -e 'local l=require(\"linkedspec\"); local j=require(\"linkedspec.json\"); local f=assert(io.open(\"capability_conformance/typed_source_location_contract.json\",\"rb\")); local c=j.decode(f:read(\"*a\")); f:close(); local n=0; for _,family in ipairs(c.helper_projection_schema.families) do for _,row in ipairs(c.helper_projections[family]) do assert(l.is_known_action_ir_call_name(row[1])); assert(l.canonical_action_helper_name(row[1])==row[1]); n=n+1 end end; local missing=0; for _,row in ipairs(c.compatibility_aliases) do assert(not l.is_known_action_ir_call_name(row[1])); assert(l.canonical_action_helper_name(row[1])==row[1]); missing=missing+1 end; assert(n==92 and missing==7)'"
+evidence: "FUTURE-PARITY-BACKLOG.14.2.5.0.1 adds one private seven-name compatibility inventory beside Lua's shared 246 current names and one exact seven-row source-to-canonical map before existing alias resolution. Every spelling re-enters its preferred interpreter branch; there is no alias-specific runtime path. The ordinary consumer passes 638 assertions independently on PUC Lua and LuaJIT across exact 92+7 resolution, unchanged inventory size, unrelated structured diagnostics, Unicode widths, reversed-span absence, anonymous-boundary mutation, named maps, and native, loaded, reconstructed, generated-plan, and emitted carriers. Language coverage independently derives Lua's pairs and binds them to neutral. Typed source remains 7/7/41 and lua_dual_abi remains pending."
+evidence_history_2026_08_07: "Audit FUTURE-PARITY-BACKLOG.14.2.5.0 originally proved 92/92 canonical names and 0/7 aliases on both ABIs; each missing spelling raised RuntimeInterpreterException at runtime_execution with owner lua_runtime and the exact unsupported-helper detail. That prerequisite caused the .0.1 split before dormant typed-source RED .0.2."
+evidence_signoff_2026_08_07: "Complete Lua passes byte-fresh MCP 83166 bytes, alias 638/638 and package 177/177 on both ABIs, CLI 66x2, corpus 105/105, storage 18/3, and its exact marker. Five sole-facing book pages build as 79 files/14180 KiB with separate rendered blocks. Knowledge is 788/6489 and all seven doctrines pass. Definitive canonical CI preserves capability 80/0/0 and typed source 7/7/41, proves containment and relocation, passes CLI 66x2, reports RAM 59%, and passes Phase 0 1031/1031 in 659 seconds before the exact local-CI marker."
+reverify: "bash tools/run_lua_project_data.sh puc lua/test/source_boundary_compatibility_aliases_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/source_boundary_compatibility_aliases_test.lua && perl tools/check_language_capability_coverage.pl"
 ---
 
 # Lua source-boundary compatibility-alias gap
@@ -34,12 +37,11 @@ The neutral typed-source contract defines seven callable compatibility aliases:
 - `entry_named_map()` → `entry_map()`; and
 - `match_named_map()` → `match_map()`.
 
-The shared Lua implementation recognizes and executes all 92 canonical source-boundary helpers, but it currently
-recognizes none of these seven authored aliases. `action_call_names.lua` omits them from both the common 246-name
-inventory and any separate compatibility inventory. `action_contracts.lua` has no corresponding canonical-name
-rows. Each alias therefore remains unchanged through canonicalization, receives an `unknown_helper` contract
-diagnostic, and reaches the shared interpreter's exact structured unsupported-helper failure when invoked from a
-compiled spec. PUC Lua and LuaJIT produce the same result from the same Lua-5.1-compatible source.
+The shared Lua implementation recognizes and executes all 92 canonical source-boundary helpers. The prerequisite
+audit first proved that none of these seven authored aliases was recognized. `.14.2.5.0.1` then added a separate
+seven-name compatibility inventory beside—not inside—the common 246-name inventory, plus one exact canonical-name
+map. Each alias now resolves to its preferred helper before the existing interpreter dispatch. PUC Lua and LuaJIT
+execute the same result from the same Lua-5.1-compatible source.
 
 The private `match_named_map` function in `interpreter.lua` does not contradict this finding. It implements the
 map-shaped result for canonical `entry_map()` and `match_map()` dispatch; it is not an authored helper name and is
@@ -52,11 +54,10 @@ converts to Unicode-scalar positions or one-based line/column only at helper and
 loaded, effective-SpecFile reconstructed, generated-v2-plan, and emitted routes all compile into and re-enter
 `LinkedSpecRuntimeEngine`.
 
-The narrow repair belongs at the existing name-recognition/canonicalization boundary: one separate seven-name
-known-alias inventory plus one exact alias-to-preferred map, followed by the existing interpreter branches. It must
-not widen `CURRENT_CALL_NAMES`, duplicate helper execution, add typed source values, or promote `lua_dual_abi`.
-Only after that parity leaf lands can a dormant dual-ABI typed-source consumer honestly freeze a callable 92+7
-baseline.
+The repair is confined to the existing name-recognition/canonicalization boundary: one separate seven-name known-
+alias inventory plus one exact alias-to-preferred map, followed by the existing interpreter branches. It does not
+widen `CURRENT_CALL_NAMES`, duplicate helper execution, add typed source values, or promote `lua_dual_abi`. The
+next leaf can therefore freeze a dormant dual-ABI typed-source consumer against an honest callable 92+7 baseline.
 
 ## Links
 

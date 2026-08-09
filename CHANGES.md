@@ -1,5 +1,23 @@
 # CHANGES
 
+## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.5.0.1 — add Lua source aliases
+
+- Added the seven neutral source-boundary compatibility spellings to one separate Lua known-name inventory and
+  one exact canonical-name map. Both PUC Lua and LuaJIT now route each spelling through its preferred helper branch;
+  the common current inventory remains 246 and no alias-specific interpreter branch exists.
+- Added one ordinary 638-assertion consumer per ABI. The executable RED was 62/572 failures on each ABI, isolated
+  to 0/7 known/canonical aliases and their stopped carrier routes; GREEN covers all 92 canonical names, the seven
+  aliases, Unicode/reversed spans, boundary mutation, named maps, exact unrelated diagnostics, and five carriers.
+- Extended independent language coverage to derive Lua's seven mappings and bind them to neutral, while preserving
+  language 246/105+1/122 and typed-source rollout 7/7/41. The storage gate advances to 18 owners / three modules.
+- Updated five sole-facing mdBook pages so callable Lua alias parity is current while Lua typed-source values,
+  projections, admission, and public typed/transaction surfaces remain future. The 79-file/14,180-KiB render keeps
+  changed prose, examples, commands, and limitations in separate readable HTML blocks and is removed after review.
+- Complete Lua passes its byte-fresh 83,166-byte MCP binding, alias 638/638 and package 177/177 on both ABIs, CLI
+  66/66 twice, corpus 105/105, storage 18/3, and the exact local-gate marker. Knowledge Map is 788/6,489 and all
+  seven doctrines pass. Canonical CI preserves capability 80/0/0 and typed source 7/7/41, passes CLI 66x2, reports
+  RAM 59%, and passes Phase 0 1,031/1,031 in 659 seconds. Signoff is complete for atomic commit 164/300; no push.
+
 ## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.5.0 — map Lua typed source boundary
 
 - Audited the one shared PUC Lua/LuaJIT source graph: decoded-input ownership, zero-based UTF-8 byte registers,

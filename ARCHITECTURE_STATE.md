@@ -1,5 +1,22 @@
 # ARCHITECTURE STATE
 
+- `2026-08-07 Lua source-boundary compatibility aliases`: `FUTURE-PARITY-BACKLOG.14.2.5.0.1` adds exactly seven
+  source spellings at the shared known-name/canonicalization boundary. They remain separate from the common
+  246-name inventory and resolve to existing preferred helper branches, so there is no alias-specific interpreter
+  behavior. PUC Lua and LuaJIT consume the identical Lua-5.1-compatible implementation.
+
+  The exact RED passed all 92 canonical rows and failed 62/572 assertions per ABI, isolated to absent alias
+  recognition/canonicalization and downstream carrier stops. GREEN passes 638/638 per ABI across Unicode/reversed
+  spans, capture-boundary mutation, named maps, unrelated diagnostics, and native, loaded, reconstructed,
+  generated-plan, plus independently loaded emitted execution. Language coverage remains 246/105+1/122 and binds
+  all seven Lua pairs to neutral; typed-source rollout remains 7/7/41 pending Lua values and admission.
+
+  Complete Lua passes byte-fresh MCP 83,166 bytes, package 177/177 per ABI, CLI 66x2, corpus 105/105, storage 18/3,
+  and its exact marker. Five synchronized sole-facing book pages render 79 files/14,180 KiB with separate blocks;
+  Knowledge Map is 788/6,489 and all seven doctrines pass. Definitive canonical CI preserves capability 80/0/0
+  and typed source 7/7/41, proves containment/relocation, passes CLI 66x2, reports RAM 59%, and completes Phase 0
+  1,031/1,031 in 659 seconds before its exact marker. Atomic commit 164/300 and clean proof remain.
+
 - `2026-08-07 Lua typed source-location boundary audit`: `FUTURE-PARITY-BACKLOG.14.2.5.0` changes no production,
   test, neutral-contract, or mdBook source. PUC Lua and LuaJIT execute one Lua-5.1-compatible implementation: each
   invocation owns one validated decoded input, while cursor, entry/local match, anonymous-boundary, named-mark,

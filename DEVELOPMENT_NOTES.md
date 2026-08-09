@@ -1,5 +1,28 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.5.0.1` — shared Lua source aliases): Lua's compatibility spellings now
+  live in `SOURCE_BOUNDARY_COMPATIBILITY_CALL_NAMES`, separate from the common 246-name inventory. One exact map in
+  `action_contracts.lua` canonicalizes them before existing resolution: `capture_from_rule_start` to
+  `capture_slice`, both length spellings to `capture_slice_len`, `capture_rest_length` to `capture_rest_len`,
+  `capture_slice_here` to `start_capture_slice`, and the two named-map spellings to `entry_map`/`match_map`.
+  The interpreter therefore executes only established canonical branches.
+- The final-path test's valid pre-production RED passed all 92 canonical assertions and failed exactly 62/572 on
+  each ABI, all attributable to seven absent recognition/canonicalization rows and downstream carriers stopping at
+  `capture_slice_here`; its common count and unrelated-helper diagnostic were exact. GREEN is 638/638 on PUC Lua
+  and LuaJIT across authored arity, Unicode/reversed spans, anonymous-boundary mutation, named maps, native,
+  reconstructed, loaded, generated-plan, and independently loaded emitted execution.
+- Independent language coverage derives Lua's inventory/map and binds all seven pairs to neutral; current coverage
+  remains 246/105+1/122 and neutral typed source remains 7/7/41. Complete Lua passes MCP 83,166 bytes, package
+  177/177 per ABI, CLI 66x2, corpus 105/105, storage 18/3, and its exact marker.
+
+  The sole-facing helper reference, capture/source-location guide, project status, local-CI guide, and backend
+  handoff now state Lua alias parity without claiming typed-source values/admission. Their 79-file/14,180-KiB HTML
+  uses separate paragraph/code blocks and is removed after inspection. Knowledge Map is 788/6,489 and all seven
+  doctrines pass. The first canonical attempt correctly rejected two dropped historical task-index projections;
+  restoring them returns capability governance to 80/0/0. The definitive rerun preserves typed source 7/7/41,
+  passes containment/relocation and CLI 66x2, reports RAM 59%, and passes Phase 0 1,031/1,031 in 659 seconds before
+  its exact marker. Signoff is complete for intended atomic commit 164/300; no push.
+
 - 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.5.0` — shared Lua typed-source audit): PUC Lua and LuaJIT load the same
   Lua-5.1-compatible `matching.lua`/`interpreter.lua` runtime graph. Each invocation context holds one validated
   decoded string. Cursor, entry/local-match, anonymous-capture start, named marks, and cursor-stack snapshots remain

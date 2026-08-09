@@ -45,11 +45,12 @@ version, or new helper result; rollout is 7 complete / 7 pending.
 
 The helper audit distinguishes 7 callable compatibility aliases from 2 internal Perl contract/scanner ids.
 `capture_take_slice` and `capture_take_slice_len` are internal ids, not accepted helper spellings; authored code
-continues to use `capture_take()` and `capture_take_len()`. Rust, Dart, and Julia execute all 7 callable aliases
-through the same canonical dispatch routes as their preferred helpers, including Unicode-scalar widths, reversed-
-span absence, anonymous-boundary mutation, reconstructed compiled specs, generated plans, and independently
-compiled emitted source. Alias parity and the separately staged typed-source rollout do not claim a public value,
-transaction, recursive-observation, or span-native dispatch surface.
+continues to use `capture_take()` and `capture_take_len()`. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT execute all
+7 callable aliases through the same canonical dispatch routes as their preferred helpers, including Unicode-
+scalar widths, reversed-span absence, anonymous-boundary mutation, reconstructed compiled specs, generated plans,
+and independently loaded emitted source. Lua keeps those migration spellings outside the shared 246-name current
+inventory. Alias parity and the separately staged typed-source rollout do not claim a public value, transaction,
+recursive-observation, or span-native dispatch surface.
 
 Five-backend callable recurring/public admission is complete under `FUTURE-PARITY-BACKLOG.11.8.4`. One rooted
 driver composes neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; both Lua rows execute one focused file. The

@@ -34,8 +34,12 @@ native, reconstructed, generated-plan, and freshly emitted execution under ordin
 
 Julia retains zero-based UTF-8 code-unit runtime registers while its same 92 helpers and seven aliases now use one
 immutable input authority at the typed boundary. Its explicit consumer passes immutable values plus native,
-reconstructed, and generated-plan helper execution under ordinary discovery and canonical CI. PUC Lua and LuaJIT
-still need their own implementation and admission leaves.
+reconstructed, and generated-plan helper execution under ordinary discovery and canonical CI.
+
+PUC Lua and LuaJIT now recognize all 92 canonical source-boundary helpers plus the same seven compatibility
+aliases. The aliases canonicalize into existing byte-register runtime branches and pass native, loaded,
+reconstructed, generated-plan, and emitted execution on both ABIs. Lua's immutable typed value/projection core and
+runtime admission are still separate pending leaves.
 
 ### Bounded cursor transactions do not mean general backtracking
 

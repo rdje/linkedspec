@@ -72,6 +72,16 @@ local ALIAS_CANONICAL_NAMES = {
   when = "if",
 }
 
+local SOURCE_BOUNDARY_COMPATIBILITY_ALIAS_CANONICAL_NAMES = {
+  ["capture_from_rule_start"] = "capture_slice",
+  ["capture_len_from_rule_start"] = "capture_slice_len",
+  ["capture_rest_length"] = "capture_rest_len",
+  ["capture_slice_here"] = "start_capture_slice",
+  ["capture_slice_length"] = "capture_slice_len",
+  ["entry_named_map"] = "entry_map",
+  ["match_named_map"] = "match_map",
+}
+
 local STRING_HELPERS = make_set({
   "cat", "coalesce", "coalesce_nonempty", "contains_substr", "ends_with", "length", "lowercase",
   "matches", "replace_substr", "rm_prefix", "rm_suffix", "starts_with", "substr", "trim", "uppercase",
@@ -255,7 +265,8 @@ function M.canonical_action_helper_name(name)
   if type(name) ~= "string" then
     error("ActionContractException: helper name must be a string", 0)
   end
-  return ALIAS_CANONICAL_NAMES[name] or name
+  return SOURCE_BOUNDARY_COMPATIBILITY_ALIAS_CANONICAL_NAMES[name] or
+    ALIAS_CANONICAL_NAMES[name] or name
 end
 
 function M.is_known_action_ir_call_name(name)

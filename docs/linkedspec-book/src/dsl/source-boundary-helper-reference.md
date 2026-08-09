@@ -102,16 +102,16 @@ Compatibility aliases:
 | `capture_from_rule_start()` | `capture_slice()` |
 | `capture_len_from_rule_start()` | `capture_slice_len()` |
 
-Perl, Rust, Dart, and Julia execute all five rows identically to their preferred helpers. Together with
-`entry_named_map()` and `match_named_map()`, this gives all four backends all seven callable compatibility
-aliases. The aliases do not select a legacy coordinate model: text endpoints, Unicode-scalar widths, `undef` for
+Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT execute all five rows identically to their preferred helpers. Together
+with `entry_named_map()` and `match_named_map()`, this gives all five backends and both Lua ABIs all seven callable
+compatibility aliases. The aliases do not select a legacy coordinate model: text endpoints, Unicode-scalar widths, `undef` for
 reversed spans, boundary mutation, named-map shapes, and generated-parser behavior are the same as the preferred
-spelling. Julia's internal typed source-location value/projection layer is admitted independently of this
-spelling-only parity, while Lua alias rollout remains pending. Portable new code should therefore still use the
-preferred names.
+spelling. Lua keeps the aliases outside the shared 246-name current inventory and canonicalizes them before the
+existing preferred runtime branches; this spelling-only parity does not admit Lua's still-pending typed source-
+location value/projection layer. Portable new code should therefore still use the preferred names.
 
 For example, this migration-only fixture returns `["é🙂  ", 4, 4, 6]` for input `é🙂  ab` on Perl, Rust, Dart,
-and Julia:
+Julia, PUC Lua, and LuaJIT:
 
 ```text
 Top::OR{1,1}

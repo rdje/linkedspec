@@ -560,8 +560,9 @@ perl tools/check_language_capability_coverage.pl
 That checker requires exact Dart/Julia/Lua inventory identity at 246 current names, occurrence across the mdBook
 and governed 105-case corpus plus exact named-mark fixture, every one of 122 independently derived public Perl
 contracts in each backend inventory, and rejection of nine classified non-public names. It separately requires
-Dart's and Julia's seven source-boundary compatibility aliases and canonical targets to match the neutral typed-
-source contract, without inflating the common 246-name inventory before Lua compatibility rollout.
+Dart's, Julia's, and Lua's seven source-boundary compatibility aliases and canonical targets to match the neutral
+typed-source contract without inflating the common 246-name inventory. Lua's focused consumer executes those
+mappings through native, loaded, reconstructed, generated-plan, and emitted routes on both PUC Lua and LuaJIT.
 
 ## Focused Rust Gate
 

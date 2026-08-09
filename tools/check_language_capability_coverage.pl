@@ -94,6 +94,31 @@ sub lua_names {
  return sort $1 =~ /\["([^"]+)"\]\s*=\s*true/g;
 }
 
+sub lua_source_boundary_compatibility_aliases {
+ my $names_text = read_text('lua/src/linkedspec/action_call_names.lua');
+ $names_text =~ /local SOURCE_BOUNDARY_COMPATIBILITY_CALL_NAMES = \{(.*?)\n\}/s
+  or fail('cannot locate Lua source-boundary compatibility alias inventory');
+ my @names = $1 =~ /\["([^"]+)"\]\s*=\s*true/g;
+ $names_text =~ /function M[.]is_known\(name\).*?SOURCE_BOUNDARY_COMPATIBILITY_CALL_NAMES\[name\]/s
+  or fail('Lua known-name resolver does not consume the source-boundary compatibility alias inventory');
+
+ my $contracts_text = read_text('lua/src/linkedspec/action_contracts.lua');
+ $contracts_text =~ /local SOURCE_BOUNDARY_COMPATIBILITY_ALIAS_CANONICAL_NAMES = \{(.*?)\n\}/s
+  or fail('cannot locate Lua source-boundary compatibility alias canonical-name map');
+ my %canonical_names = $1 =~ /\["([^"]+)"\]\s*=\s*"([^"]+)"/g;
+ $contracts_text =~ /function M[.]canonical_action_helper_name\(name\).*?return\s+SOURCE_BOUNDARY_COMPATIBILITY_ALIAS_CANONICAL_NAMES\[name\]/s
+  or fail('Lua canonical helper resolver does not consume the source-boundary compatibility alias map');
+ my @aliases;
+ for my $name (sort @names) {
+  fail("Lua source-boundary compatibility alias '$name' has no canonical target")
+   unless exists $canonical_names{$name};
+  push @aliases, [$name, $canonical_names{$name}];
+ }
+ fail('Lua source-boundary compatibility alias map contains a non-inventory name')
+  unless @aliases == keys %canonical_names;
+ return @aliases;
+}
+
 my @dart = dart_names();
 my @julia = julia_names();
 my @lua = lua_names();
@@ -114,6 +139,7 @@ my @neutral_source_boundary_aliases = map {
 } @{$typed_source_contract->{compatibility_aliases}};
 my @dart_source_boundary_aliases = dart_source_boundary_compatibility_aliases();
 my @julia_source_boundary_aliases = julia_source_boundary_compatibility_aliases();
+my @lua_source_boundary_aliases = lua_source_boundary_compatibility_aliases();
 my $serialize_aliases = sub {
  return join("\n", map { join("\0", @{$_}) } sort { $a->[0] cmp $b->[0] } @_);
 };
@@ -122,6 +148,9 @@ fail('Dart source-boundary compatibility aliases differ from the neutral typed-s
   eq $serialize_aliases->(@neutral_source_boundary_aliases);
 fail('Julia source-boundary compatibility aliases differ from the neutral typed-source contract')
  unless $serialize_aliases->(@julia_source_boundary_aliases)
+  eq $serialize_aliases->(@neutral_source_boundary_aliases);
+fail('Lua source-boundary compatibility aliases differ from the neutral typed-source contract')
+ unless $serialize_aliases->(@lua_source_boundary_aliases)
   eq $serialize_aliases->(@neutral_source_boundary_aliases);
 
 my %seen;
