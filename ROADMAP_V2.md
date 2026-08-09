@@ -80,7 +80,11 @@ nonexistent `test_input/` layout marker introduced by `ca846e7a`. `.4.1` now imp
 strict registry, unconditional resulting-tree checker, stale-route correction, and 32/32 mutation classes.
 Canonical signoff passes CLI 66x2 and Phase 0 1,031/1,031 in 694 seconds before atomic commit and unchanged `.4.2`
 closeout. `.4.2` proves seven admitted owner hashes and independently passes CLI 66x2 plus Phase 0 1,031/1,031 in
-673 seconds, closing `.4`; bounded-view debt migration `.0` follows after atomic clean handoff. Recurring MCP `.10.9.7.1.1.4`
+673 seconds, closing `.4` atomically at `0bcb5a36`. Bounded-view audit `.0` now accepts ADR `0066` without moving
+content: seven live-status capability families and six exact future-task consumers are explicit prerequisites;
+strict Git-reconstructable manifests back a 256-line live view and 512-line changes/notes hot shards; the future
+tree keeps its stable root over seven semantic parts plus immutable legacy history. `.1` follows only after the
+descriptor slice commits and proves clean. Recurring MCP `.10.9.7.1.1.4`
 recomposes the committed rooted promotion unchanged and closes its implementation parents; `.10.9.7.2` now
 independently recomposes the full chain, closes `.10.9.7` and `.10.9`, and hands the clean boundary to public
 semantic/MCP no-drift `.10.10`. The

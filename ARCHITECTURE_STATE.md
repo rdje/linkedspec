@@ -21,7 +21,29 @@ passes 44 reader + 18 author routes, all 20 surfaces, 32/32 mutation classes, an
 5,057/6,144 bytes. Canonical signoff exits 0 after all seven doctrines, CLI 66x2, and Phase 0 1,031/1,031 in 694
 seconds. Unchanged `.4.2` proves all seven implementation-owner hashes from clean `5c570719` and independently
 passes the same route/mutation/doctrine chain, CLI 66x2, and Phase 0 1,031/1,031 in 673 seconds. Parent `.4` is
-closed without parser/runtime/backend behavior movement; containment `.0` is next after atomic clean handoff.
+closed without parser/runtime/backend behavior movement at `0bcb5a36`.
+
+## Bounded live-document store contract is accepted before migration
+
+`LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0` and ADR `0066` classify the debt surfaces by semantics rather than size.
+`LIVE_ACHIEVEMENT_STATUS.md` is direct required-marker authority for seven capability/public-closeout families,
+and four executable checkers plus two contract JSON projections read exact node/status/evidence markers from
+`docs/tasks/FUTURE-PARITY-BACKLOG.md`. A blind truncation or filesystem split would therefore break governance.
+`CHANGES.md` and `DEVELOPMENT_NOTES.md` have no executable content parser; their growth is instead mandated by the
+current commit workflow.
+
+The accepted topology keeps every stable root. Chronological sources receive strict repository-relative JSONL
+manifests whose immutable segments record clean source commit/blob, line span/count, bytes, SHA-256, current
+replacement, and exact root-derived query; concatenation must reproduce the Git source byte-for-byte. Live status
+becomes a five-section 256-line / 32-KiB overwrite view. Changes and notes become 512-line / 64-KiB hot shards
+with 80% warning, 90% rollover, and 50% post-roll target.
+
+The future task root becomes a bounded live index. Stable nodes route to seven semantic parts (`.0-.8`, `.9`,
+`.10.0-.6`, `.10.7-.10`, `.11-.13`, `.14`, `.15-.24`) and one immutable legacy-history part; every exact part
+stays below 5,000 lines and a strengthened metadata gate enforces unique IDs, manifest coverage, digests, and
+frontier lookup. `.1` installs and proves live history after consumer decoupling, `.2` partitions task evidence,
+`.3` migrates changes/notes and author workflow, and `.4` recomposes/ratchets. This planning slice moves none of
+the four sources and changes no language, compiler, runtime, backend, fixture, CLI, protocol, or storage behavior.
 
 - `2026-08-09 cursor transaction authored/static contract`: behavior-free
   `FUTURE-PARITY-BACKLOG.14.3.1.0` ratifies four accepted future special forms:

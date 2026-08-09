@@ -1,5 +1,24 @@
 # Project Status
 
+## Documentation pressure containment
+
+README routing-pressure enforcement is closed at `0bcb5a36`. The next documentation-sustainability program has
+accepted its behavior-free architecture in ADR `0066`, but has not yet moved any history or changed the current
+files.
+
+The plan keeps `LIVE_ACHIEVEMENT_STATUS.md`, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, and
+`docs/tasks/FUTURE-PARITY-BACKLOG.md` as stable entry points. Exact historical bytes move only after a strict
+repository-relative manifest records their clean Git source, line/byte counts, digest, immutable segments, and
+reconstruction query. Live status will become a bounded overwrite view; changes and notes will become bounded hot
+shards; the oversized future tree will become a live index over stable semantic parts.
+
+This is consumer-aware work. Seven capability/public-closeout families currently require markers from the live
+chronology, while four executable checkers and two contract projections read the future task monolith directly.
+Those dependencies must be rerouted and mutation-locked before either stable root shrinks. Implementation order is
+live status and the history mechanism, future-task partitioning, changes/notes plus commit workflow, then an
+unchanged closeout. No language, runtime, backend, CLI, fixture, protocol, or public parser behavior changes in
+the accepted plan.
+
 ## Linked-rule authoring guidance
 
 The sole-facing user model now teaches the current executable zero/one/two-regex rule

@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-08-09 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0 — freeze bounded document store contract
+
+- Activated from clean README closeout `0bcb5a36` at cadence 175/300 and reverified the four immutable route-debt
+  baselines against current line/byte/SHA-256 state. Current sources are live status 14,844/1,269,091, changes
+  44,193/3,097,056, notes 21,220/2,282,687, and future task 26,979/2,720,175.
+- Root-caused non-mechanical compatibility: seven capability/public-closeout families require markers from live
+  status; four executable checkers plus two contract JSON projections read exact nodes/status/evidence from the
+  future task monolith; `COMMIT.md` itself mandates continued chronology growth.
+- Added accepted ADR `0066` and Knowledge retrieval authority. It freezes strict root-relative JSONL descriptors,
+  clean Git commit/blob identity, exact counts/digests, 4,096-line/512-KiB immutable segments, byte-for-byte source
+  reconstruction, root-derived query commands, mutation classes, and atomic rollback.
+- Froze a 256-line/32-KiB five-section live view; 512-line/64-KiB changes/notes hot shards with 80/90/50% rollover;
+  and a bounded future root over seven semantic parts plus one immutable legacy-history part. Splitting `.10` at
+  `.10.0-.6` / `.10.7-.10` keeps all future parts below 5,000 lines without changing any node ID.
+- Dependency-ordered `.1` live consumer/history migration, `.2` task partition/consumer migration, `.3` changes/
+  notes/workflow migration, and `.4` unchanged registry recomposition. This slice moves no debt-family content,
+  registry control, language/runtime/backend behavior, fixture, CLI, protocol, or project-data root.
+- Focused signoff passes task metadata, memory architecture, Knowledge Map 797/6,590, all 20 surfaces / 62 routes /
+  32/32 routing mutations, all seven doctrines, mdBook build, and generated-HTML inspection. The definitive
+  repository-volume canonical gate exits 0 with MCP 5/5 + 6/6 complete/141, Rust semantic admission in 82.47
+  seconds, Julia semantic 416/416 in 31.0 seconds, cursor 288, containment/moved-root proof, CLI 66x2, RAM 66%,
+  and Phase 0 1,031/1,031 in 710 seconds.
+
 ## 2026-08-09 — README-STABILITY-POLICY.4.2 — close routing-pressure revision
 
 - Activated from clean implementation commit `5c570719` after proving exact parent/subject, zero-byte brief,

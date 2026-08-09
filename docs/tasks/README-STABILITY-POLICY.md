@@ -3,11 +3,11 @@
 ## Metadata
 
 - Tree ID: `README-STABILITY-POLICY`
-- Status: `active` / routing-pressure closeout signoff-complete pending atomic commit; license proposal `.3` remains
+- Status: `done` / routing-pressure revision closed at `0bcb5a36`; independent license proposal `.3` remains
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-07-29`
-- Last updated: `2026-08-09` (unchanged routing-pressure closeout `.4.2` and parent `.4` signoff-complete from clean
-  implementation commit `5c570719`; intended atomic 175/300; no push)
+- Last updated: `2026-08-09` (unchanged routing-pressure closeout `.4.2` landed at `0bcb5a36`, clearing the clean
+  handoff for `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0`; no push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -51,8 +51,8 @@ moving unbounded append pressure into a neighboring live document.
 ## Task Tree
 
 - ID: `README-STABILITY-POLICY`
-  Status: `active` (2026-08-09; original adoption `.0-.2` remains complete; routing-pressure revision `.4` is
-    signoff-complete pending atomic `.4.2`; `.3` remains an independent proposed director decision)
+  Status: `done` (2026-08-09; original adoption `.0-.2` and routing-pressure revision `.4` are closed;
+    `.3` remains an independent proposed director decision, not an unfinished child of this closed program)
   Goal: Adopt and mechanically enforce a stable, bounded LinkedSpec repository landing page.
   Children: `.0`, `.1`, `.2`, `.3`, `.4`
 
@@ -176,7 +176,7 @@ moving unbounded append pressure into a neighboring live document.
   Commit: `README-STABILITY-POLICY.2 - close bounded README adoption`
 
 - ID: `README-STABILITY-POLICY.3`
-  Status: `proposed` (non-blocking; requires director decision)
+  Status: `deferred` (non-blocking; requires explicit director decision and a new task-tree owner before any edit)
   Goal: Decide whether LinkedSpec should declare a project-level license and, if so, which license and notice text.
   Depends on: explicit director direction
   Acceptance: Preserve the current truthful README notice until the director chooses terms; never infer licensing
@@ -184,7 +184,7 @@ moving unbounded append pressure into a neighboring live document.
     to add the approved root license/notice and synchronize public documentation.
 
 - ID: `README-STABILITY-POLICY.4`
-  Status: `signoff-complete` (2026-08-09; `.4.0-.4.2` complete; atomic closeout commit/hygiene still to follow)
+  Status: `done` (2026-08-09; `.4.0-.4.2` complete and atomic closeout/hygiene landed at `0bcb5a36`)
   Goal: Deliberately adopt the director-supplied routing-pressure revision without changing README caps or turning
     the external template into an upstream dependency.
   Depends on: `.2`; director priority on 2026-08-09
@@ -313,8 +313,8 @@ moving unbounded append pressure into a neighboring live document.
     inspected, and final canonical evidence is written to changes/notes/live/memory before commit.
 
 - ID: `README-STABILITY-POLICY.4.2`
-  Status: `active` / `signoff-complete` (2026-08-09; unchanged canonical recomposition passes from clean
-    `5c570719`; intended atomic 175/300; active transition authority remains until commit; no push)
+  Status: `done` (2026-08-09; unchanged canonical recomposition landed at `0bcb5a36` from clean `5c570719` as
+    atomic 175/300; transition authority ended at the commit boundary; no push)
   Goal: Recompose the committed policy, registry, controls, and checker unchanged; close `.4` and hand back to
     `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0` only from a clean boundary. Transaction `.14.3.1.1` remains behind the
     containment activity already frozen by `.4.0`.
@@ -512,8 +512,9 @@ decision records, and git; they do not need a second current-facing copy in READ
 | --- | --- | --- | --- |
 | 1 | `README-STABILITY-POLICY.0` | `done` | Lossless routing, measured budgets, doctrine design, and implementation seams are frozen in ADR `0063`. |
 | 2 | `README-STABILITY-POLICY.1` | `done` | Canonical implementation is committed at clean `ca846e7a`; brief and exact residue are cleared. |
-| 3 | `README-STABILITY-POLICY.2` | `done` | Unchanged canonical recomposition passes; closeout awaits its per-leaf commit. |
-| — | `README-STABILITY-POLICY.3` | `proposed` | Separate director decision; it does not block bounded-README adoption or MCP handback. |
+| 3 | `README-STABILITY-POLICY.2` | `done` | Unchanged original-adoption recomposition committed and clean. |
+| 4 | `README-STABILITY-POLICY.4` | `done` | Routing-pressure audit, implementation, and unchanged closeout are committed through `0bcb5a36`. |
+| — | `README-STABILITY-POLICY.3` | `deferred` | Separate director decision; any future implementation requires a new active owner. |
 
 ## Decisions
 
@@ -559,15 +560,17 @@ decision records, and git; they do not need a second current-facing copy in READ
 | `README-STABILITY-POLICY.0` | `README-STABILITY-POLICY.0 - plan bounded README adoption` | Behavior-free adoption plan; commit hash recorded by git history. |
 | `README-STABILITY-POLICY.1` | `ca846e7a` — `README-STABILITY-POLICY.1 - adopt bounded README doctrine` | Policy, trim, checker, doctrine, and canonical lockstep. |
 | `README-STABILITY-POLICY.2` | `README-STABILITY-POLICY.2 - close bounded README adoption` | Unchanged closeout and MCP handback. |
-| `README-STABILITY-POLICY.3` | `proposed` | Project-level license decision; not part of the adoption critical path. |
+| `README-STABILITY-POLICY.3` | `deferred` | Project-level license decision; explicit director direction and a new active owner are required. |
 | `README-STABILITY-POLICY.4.0` | `6a5d1dcc` — `README-STABILITY-POLICY.4.0 - plan routing-pressure closure` | Behavior-free route/control audit and implementation plan. |
 | `README-STABILITY-POLICY.4.1` | `5c570719` — `README-STABILITY-POLICY.4.1 - enforce routing-pressure closure` | Committed implementation from clean `6a5d1dcc`; exact post-commit hygiene proved. |
-| `README-STABILITY-POLICY.4.2` | `README-STABILITY-POLICY.4.2 - close routing-pressure revision` | Signoff-complete unchanged closeout from clean `5c570719`; hash supplied by Git history after landing. |
+| `README-STABILITY-POLICY.4.2` | `0bcb5a36` — `README-STABILITY-POLICY.4.2 - close routing-pressure revision` | Unchanged closeout from clean `5c570719`; exact post-commit hygiene passed and containment `.0` activated separately. |
 
 ## Changelog
 
 - `2026-07-29`: Created the task tree first from clean commit `c6f36fe3`; recorded full external-policy read and
   measured README baseline before any LinkedSpec policy, README, checker, or documentation mutation.
+- `2026-08-09`: Atomic closeout `0bcb5a36` landed and cleared the transition-owner commit boundary. Containment
+  `.0` records the successor descriptor contract; project licensing remains independently proposed.
 - `2026-07-29`: Recorded the absence of a project-level root license as proposed leaf `.3`; nested/vendor licenses
   are not authority to choose LinkedSpec's license.
 - `2026-07-29`: Completed `.0`: lossless route table, ADR `0063`, 128-line / 6,144-byte enforcement design,

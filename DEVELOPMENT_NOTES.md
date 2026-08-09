@@ -1,5 +1,32 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-09 (`LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0` — bounded-store architecture): documentation pressure is a
+  consumer migration, not a line-splitting exercise. Live status still owns required markers for seven capability
+  closeouts, while four checkers and two JSON contracts parse exact future-task nodes and evidence. Decouple those
+  assertions before replacing either current root; never make an immutable historical archive a current-state
+  denial authority.
+- Chronology identity is the clean source commit plus whole-file Git blob and exact source-order byte slices.
+  Each manifest record also fixes line span/count, byte count, SHA-256, target/current paths, and one root-derived
+  query. Concatenation must reproduce `git show <commit>:<path>` exactly. This lets current views shrink without
+  hiding history only in Git or pretending individual raw archive fragments are maintained book pages.
+- Keep stable author/reader paths. Live status becomes an overwrite view with current activity/latest/next/recent
+  sixteen/history. Changes and notes become bounded hot shards over immutable archives. Warn at 80%, roll oldest
+  complete records at 90%, and stop only after the root is at most 50%; update the author workflow so it no longer
+  calls these root files cumulative unbounded stores.
+- Partition task evidence by stable semantic ownership. The future root remains the live index; node blocks and
+  ID-scoped evidence route to seven exact range parts, with `.10` split at real child boundaries, and legacy
+  superseded/global logs become one immutable history part. A digest is a same-commit snapshot; the stable identity
+  is the node range. Strengthen metadata to reject missing/duplicate IDs, uncovered ranges, stale part digests, and
+  frontiers without one canonical node.
+- Route-contract execution still needs a newly added staged ADR in `.1`, `.2`, and `.3`. ADR `0066` freezes design
+  but cannot pre-authorize later staged lifecycle/control changes; that separation is an intentional registry
+  governance boundary. Roll back before landing from the clean activation commit and after landing only by an
+  explicit revert of the atomic migration.
+- Signoff is repository-volume definitive: focused task/memory/Knowledge/routing/doctrine/book checks pass, and
+  the canonical gate exits 0 after MCP complete/141, Rust semantic admission in 82.47 seconds, Julia 416/416 in
+  31.0 seconds, cursor 288, process containment, moved-root execution, CLI 66x2, RAM 66%, and Phase 0 1,031/1,031
+  in 710 seconds. Optional matrices remain explicitly unclaimed.
+
 - 2026-08-09 (`README-STABILITY-POLICY.4.2` — unchanged routing-pressure closeout): close an enforcement revision
   by recomposing the committed owners, not by adding a second checker. Git diff plus SHA-256 identity over README,
   policy, registry, route checker, wrapper, doctrine registry, and canonical driver is the implementation boundary.

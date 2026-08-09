@@ -3,10 +3,11 @@
 ## Metadata
 
 - Tree ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-- Status: `proposed` / dependency-queued behind `README-STABILITY-POLICY.4.2`
+- Status: `active` / audit-and-descriptor leaf `.0` active
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-08-09`
-- Last updated: `2026-08-09`
+- Last updated: `2026-08-09` (`.0` activated task-tree-first from clean README closeout `0bcb5a36`; intended
+  atomic 176/300; consumer-aware descriptor contract accepted; no content migration or push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -21,7 +22,8 @@ query-first history, navigable partitions, and mechanically controlled aggregate
 - Do not hide maintained user documentation only in Git history when it still needs direct navigation.
 - Do not treat sharding alone as containment; every collection needs per-part, file-count, and aggregate controls.
 - Do not change language, compiler, runtime, backend, fixture, CLI, protocol, storage-root, or hosted-CI behavior.
-- Do not activate a migration while `README-STABILITY-POLICY.4` is dirty or before its closure checker lands.
+- Do not activate a migration while `README-STABILITY-POLICY.4` is dirty or before its closure checker lands;
+  clean closeout `0bcb5a36` satisfies this dependency.
 
 ## Measured Intake
 
@@ -57,16 +59,50 @@ or the README `.4` adoption/closeout that installs the guard.
 ## Task Tree
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-  Status: `proposed` / dependency-queued
+  Status: `active` (2026-08-09; clean README dependency closed at `0bcb5a36`; planning `.0` active)
   Goal: Replace measured oversized routed destinations with bounded views over durable stores.
   Depends on: `README-STABILITY-POLICY.4.2`
   Children: `.0-.4`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0`
-  Status: `pending`
+  Status: `active` / signoff-complete pending atomic commit (2026-08-09; activated task-tree-first from clean
+    `0bcb5a36`; intended atomic 176/300; no push)
   Goal: Reverify the committed route registry, audit semantic retrieval obligations for all four debt families,
     and freeze exact archive/partition descriptors plus migration order without moving content.
   Depends on: `README-STABILITY-POLICY.4.2`
+  Acceptance: Prove clean activation and dependency closure; use the committed pressure checker and repository
+    queries to remeasure the immutable baseline/current state and semantic retrieval contracts of all four debt
+    families; freeze exact descriptor schemas, stable identities, archive/index/current-view topology, retrieval
+    commands, migration ordering, failure/rollback proof, registry ratchets, and `.1-.4` ownership without moving
+    content; align durable/public planning truth; pass focused and canonical signoff; commit and prove clean.
+
+  #### Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Commit `0bcb5a36` is clean at 175/300 with exact parent/subject,
+    zero-byte brief, valid memory/Knowledge, absent rendered book, zero managed runs, and this task-only first diff.
+  - [x] **REVERIFY / CLASSIFY ALL FOUR DEBTS** — Reproduce clean registry baselines and current counts/digests for
+    live status, task evidence, changes, and engineering notes; classify what is current view, ordered history,
+    maintained reference, machine input, stable identity, and Git-only recovery evidence.
+  - [x] **RETRIEVAL / CONSUMER AUDIT** — Inventory every repository/public/checker/book/agent consumer that depends
+    on paths, headings, order, anchors, task ids, metadata, or append behavior; freeze compatibility obligations.
+  - [x] **DESCRIPTOR / TOPOLOGY CONTRACT** — Define exact root-relative descriptor fields, stable range identities,
+    digests/counts, current replacements, archive/index topology, query commands, freshness, and non-loss proof.
+  - [x] **MIGRATION / ROLLBACK ORDER** — Dependency-order `.1-.4`, exact pre/post verification, copy/verify/use/delete
+    where applicable, rollback boundaries, registry state/limit ratchets, and mutation/failure oracles.
+  - [x] **LOCKSTEP / NO CONTENT MOVE** — Align task/index, roadmaps, ADR/Knowledge, architecture, continuity, and
+    sole-facing mdBook without moving or rewriting debt-family content or changing language/runtime behavior.
+  - [x] **VERIFY / COMMIT / CLEAN HANDOFF** — Pass focused query/metadata/routing/book/Knowledge/memory/doctrine
+    checks and canonical CI; commit through `COMMIT.md`, clear the brief, remove exact residue, and prove clean.
+
+  #### TOOLBOX Task-Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — Committed README route report identifies four debt surfaces and exact controls.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Tool-assisted consumer/retrieval audit explains why each live surface grew
+    and which semantics prevent a mechanical split.
+  - [x] **FIX** — Freeze migration descriptors and dependency order only; implementation belongs to `.1-.4`.
+  - [x] **ADDRESSED (verified)** — Named queries prove every unique fact/identity/order/consumer has a destination.
+  - [x] **NO REGRESSION** — No debt-family content, registry control, checker, source, test, or runtime behavior moves.
+  - [x] **LOCKSTEP** — Plan, public book, continuity, atomic commit, brief, cleanup, and next-owner handoff align.
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.1`
   Status: `pending`
@@ -94,7 +130,9 @@ or the README `.4` adoption/closeout that installs the guard.
 
 ## Current Frontier
 
-None until `README-STABILITY-POLICY.4.2` closes cleanly. Then `.0` is the only eligible leaf.
+`.0` is signoff-complete for intended atomic 176/300 from clean README closeout `0bcb5a36`. `.1` becomes the only
+eligible leaf after this behavior-free descriptor contract commits, the brief clears, and the repository proves
+clean. No content migration may share `.0` or start from its dirty worktree.
 
 ## Decisions
 
@@ -103,16 +141,138 @@ None until `README-STABILITY-POLICY.4.2` closes cleanly. Then `.0` is the only e
   instead of silently redefining the current high-water mark after every append.
 - An archive descriptor must name the source/range, immutable revision locator, line/byte counts, digest, current
   replacement, and a repository-rooted retrieval command before working-tree content can move.
+- ADR `0066` freezes one schema-v1 document-history manifest per chronological family, one bounded live root per
+  stable path, exact byte reconstruction from a clean Git source, and semantic rather than chronological task
+  partitioning. Execution-time route-contract changes still require newly added staged ADRs because the registry
+  correctly refuses to treat this already-committed planning authority as a later mutation permit.
+
+## Reverification And Classification
+
+The committed route registry still reports the immutable clean `7c2ff407` baselines. From activation commit
+`0bcb5a36`, the exact current files are:
+
+| Surface | Current lines / bytes | SHA-256 | Classification |
+| --- | ---: | --- | --- |
+| `LIVE_ACHIEVEMENT_STATUS.md` | 14,844 / 1,269,091 | `c13abe0052f8f43730cb9c7ed71311558ee5de02a2f883bf90c2590f113f1994` | Hot/current intent plus accumulated newest-first chronology and machine-required closeout markers. |
+| `CHANGES.md` | 44,193 / 3,097,056 | `c19ba672c1fc445d60d92b9afc3520e95fd81f94e404cd57c8de714ec0a58b06` | Ordered newest-first technical history; exact path is an author/reader entry point, not a machine content oracle. |
+| `DEVELOPMENT_NOTES.md` | 21,220 / 2,282,687 | `2735b56d46ed81810339eba2f6f7c6e6459f81cf70347c2245ee9c5a97cbe0f5` | Ordered newest-first rationale ledger with dated records and older maintained sections. |
+| `docs/tasks/FUTURE-PARITY-BACKLOG.md` | 26,979 / 2,720,175 | `48de44a56bcde1ae6d5e274e2786d939b596d2063756f994d4cfb407be4b3f95` | Mutable canonical node evidence, current and superseded frontier prose, global decisions, and legacy verification/commit/changelog history. |
+
+The current task collection before this leaf's edits is 86 files / 64,751 lines / 6,236,424 bytes. Its next
+largest members are `SPEC-FORMAT-TERSE.md` at 6,981 lines / 791,991 bytes and `LUA-BACKEND-PARITY.md` at 5,304 /
+477,656, proving an 8,000-line / 1-MiB global ratchet is feasible once the 26,979-line outlier is partitioned.
+Git remains a recovery backstop, but maintained task identities and directly queryable chronology stay tracked.
+
+## Consumer And Retrieval Audit
+
+### Live achievement status
+
+Seven public-closeout families treat the live chronology as a required-marker authority: callable codeblocks,
+logical helpers, root selection, duplicate regex-slot identity, repeated-action results, rule-local cursors, and
+capability exclusions. The dependencies are declared in six `capability_conformance/*.json` files plus
+`tools/check_capability_conformance.pl`, and are duplicated by their Python contract checkers. A stale-claim
+denial in the repeated-action contract also reads the live file. `.1` must move required current assertions to
+the already governed contract/ADR/Knowledge/task-index/architecture/roadmap/mdBook owners and mutation-lock the
+absence of live-history authority before shrinking the root. The historical archive is positive evidence, never
+a current-state denial surface.
+
+### Future-parity task evidence
+
+`tools/check_capability_conformance.pl`, `tools/check_repeated_action_result_contract.py`,
+`tools/check_root_rule_selection_contract.py`, and `tools/check_semantic_introspection_contract.py` read the exact
+monolith and require nodes/statuses/checklist headings for `.9.1.1.2*`, `.9.1.10*`, `.10.2`, `.10.10`, and `.24*`.
+`repeated_action_result_contract.json` and `semantic_introspection_contract.json` also name the exact path. The
+stable root path must remain navigable, but `.2` changes these consumers to the exact semantic part or governed
+ID lookup; it may not duplicate node blocks into a compatibility summary. `scripts/check_task_tree_metadata.sh`
+already expands `docs/tasks/*.md`, so strengthening uniqueness, part-manifest, and frontier checks composes its
+existing scope.
+
+### Changes and engineering notes
+
+`t/phase0_regression.t` includes the three root paths only in repository-root portability discovery and does not
+parse their content. The routing checker measures them. Remaining references are author/reader doctrine or prose,
+so `.3` may preserve the exact roots as bounded hot shards and route historical reading through manifests without
+breaking an executable content contract. `COMMIT.md` is the causal append owner: it currently calls changes
+“cumulative and not reset” and asks every slice to add entries to all three live documents. `.1` and `.3` must
+rewrite those instructions to bounded current/rollover semantics.
+
+## Frozen Descriptor And Topology Contract
+
+ADR `0066` is normative. Chronology manifests live beside repository-volume segments under
+`docs/history/{live-achievement-status,changes,development-notes}/`. Each source-order record fixes source path,
+40-hex clean commit, whole-file Git blob, exact line range/count, bytes, SHA-256, target path, current replacement,
+and a root-relative `perl tools/read_document_history.pl` command. Segments are greedy line-preserving slices of
+at most 4,096 lines / 524,288 bytes; concatenation must equal `git show <commit>:<path>` byte-for-byte.
+
+The live root becomes a 256-line / 32-KiB overwrite view with five fixed sections and sixteen recent one-line
+rows. Changes and notes become 512-line / 64-KiB hot shards; 80% warns, 90% atomically moves oldest complete
+records until the root is at most 50%. Their initial snapshots archive the whole pre-migration source.
+
+The future root retains only metadata, authoritative frontier, current global state, part navigation, and lookup.
+Seven semantic parts own `.0-.8`, `.9`, `.10.0-.6`, `.10.7-.10`, `.11-.13`, `.14`, and `.15-.24`; one immutable
+history part owns superseded frontier plus legacy global logs. The exact clean structural intake is 351 root
+lines, 3,340 legacy-history lines, 3,108 / 3,596 / 4,188 / 4,139 / 2,016 / 3,952 / 1,804 node lines, and 485
+late ID-scoped evidence lines routed to `.1` or `.5`. A strict JSONL index fixes range identity and current
+digests. Every part stays below 5,000 lines / 786,432 bytes; the collection ratchets globally to 8,000 lines /
+1 MiB per file while retaining 128 files / 80,000 lines / 8 MiB aggregate.
+
+## Migration, Failure, And Rollback Contract
+
+1. `.1`: from clean `.0`, decouple all live capability assertions; add the root-derived query, strict document-
+   history checker, registered doctrine, initial exact live snapshot, bounded current view, and a newly staged
+   indexed route-transition ADR. Verify reconstruction and all affected capability/public mutations before the
+   root rewrite commits.
+2. `.2`: from clean `.1`, add the task index/lookup and semantic parts; strengthen metadata uniqueness/frontier/
+   range/digest oracles; reroute six direct machine consumers; archive legacy global logs; ratchet the task route
+   through its own newly staged ADR.
+3. `.3`: from clean `.2`, snapshot changes and notes, install bounded hot shards/rollover/query, align
+   `COMMIT.md`/bootstrap/task doctrine, and ratchet both route contracts through one newly staged execution ADR.
+4. `.4`: independently recompose every committed checker/store/consumer, repeat complete retrieval and registry
+   mutations, close debt state, and return to `FUTURE-PARITY-BACKLOG.14.3.1.1` only after a clean commit.
+
+Mutations reject missing/reordered/duplicate descriptors, gap/overlap/count/hash/blob drift, unsafe paths,
+symlinks, oversize/stale current views, source reconstruction failure, missing/duplicate/wrong-range task IDs,
+uncovered or stale parts, broken frontier lookup, and residual old-monolith authority. Before commit, the clean
+activation commit is rollback authority; after commit, only an explicit revert of the atomic migration is valid.
+All files and transient proof stay on the repository filesystem; no off-volume copy/delete workflow applies.
+
+## Open Questions
+
+- None. Exact archive boundaries are intentionally computed from each migration's clean activation source so
+  `.0` does not falsely predeclare hashes for continuity entries that must land before `.1` or `.3`.
+
+## Blockers
+
+- None. `.1` is dependency-complete but remains ineligible until `.0` commits, clears its brief, and proves clean.
 
 ## Verification Log
 
-Pending dependency closure.
+Planning evidence: clean activation `0bcb5a36`; route report 20 surfaces / 62 routes / 32/32 mutations; exact
+four-file line/byte/SHA-256 census; 121 / 117 / 75 / 132 repository-reference counts; seven live required-marker
+families; four executable plus two JSON future-task consumers; 25 top-level future-node boundaries; exact
+semantic range sizing; task metadata parser and commit-workflow owner audit. Focused signoff passes whitespace,
+task metadata, memory architecture at 58/60 lines, Knowledge Map at 797 facts / 6,590 keys, route closure at 20
+surfaces / 62 routes / 32/32 mutations, all seven doctrines, mdBook build, and direct generated-HTML block/anchor
+inspection. The definitive repository-volume canonical rerun exits 0 after MCP 5/5 implementations + 6/6
+runtimes complete/141, Rust semantic admission in 82.47 seconds, Julia semantic 416/416 in 31.0 seconds, cursor
+288, project-data process containment, moved-root execution, primary CLI 66/66 in both option environments, RAM
+66%, and Phase 0 1,031/1,031 in 710 seconds. No optional matrix is claimed.
 
 ## Commit Log
 
-Pending.
+`LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0 - freeze bounded document store contract` — intended atomic 176/300;
+commit pending.
 
 ## Changelog
 
 - `2026-08-09`: Opened from the director-priority README routing-pressure audit. Recorded exact clean measurements
   and owners before policy/checker enforcement or any content migration.
+- `2026-08-09`: README routing-pressure implementation/closeout commits `5c570719`/`0bcb5a36`; brief clearing,
+  memory/Knowledge, absent book, zero managed runs, and clean cadence 175/300 pass. Activated `.0` task-tree-first;
+  descriptor/retrieval audit follows without moving content.
+- `2026-08-09`: `.0` tool-assisted audit finds real machine coupling in live status and the future task monolith,
+  freezes ADR `0066` manifest/topology/query/limit/mutation/rollback contracts, and routes `.1-.4` without moving
+  any debt-family content or changing language/runtime behavior.
+- `2026-08-09`: Focused routing/task/memory/Knowledge/doctrine/book proof and the definitive repository-volume
+  canonical gate pass; canonical evidence includes containment, moved-root execution, CLI 66x2, RAM 66%, and
+  Phase 0 1,031/1,031 in 710 seconds. Atomic commit/brief/clean proof remain the final workflow actions.

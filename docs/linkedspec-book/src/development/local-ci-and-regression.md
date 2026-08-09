@@ -47,6 +47,32 @@ wrapper, doctrine registry, and canonical driver from commit `5c570719`. It inde
 62 routes, 32/32 mutations, seven doctrines, semantic/MCP/cursor admission, containment/moved-root execution,
 primary CLI 66/66 twice, RAM 52%, and Phase 0 1,031/1,031 in 673 seconds. The revision closes without a new oracle.
 
+#### Planned bounded views over exact history
+
+ADR `0066` defines the migration contract for the four measured debt families. This is currently an accepted
+plan, not shipped store tooling: the original files and route controls remain unchanged until their owning leaves
+land.
+
+The audit found two important machine interfaces. Seven capability/public-closeout families still require
+historical markers from `LIVE_ACHIEVEMENT_STATUS.md`. Four executable checkers and two contract projections read
+exact task nodes, statuses, and evidence from `docs/tasks/FUTURE-PARITY-BACKLOG.md`. The live migration must first
+move current assertions to stable contract/decision/Knowledge/book owners; the task migration must reroute those
+consumers to semantic parts or stable-ID lookup. Neither file can be safely truncated or split by byte count alone.
+
+The planned chronology protocol uses a tracked JSONL manifest per family. Every immutable segment records its
+repository-relative path, clean source commit and Git blob, exact source line range, line/byte counts, SHA-256,
+current replacement, and root-derived retrieval command. The checker must concatenate segments and reproduce
+`git show <commit>:<path>` byte-for-byte. `LIVE_ACHIEVEMENT_STATUS.md` will remain the stable path as a five-section
+overwrite view capped at 256 lines / 32 KiB. `CHANGES.md` and `DEVELOPMENT_NOTES.md` will remain stable bounded hot
+shards capped at 512 lines / 64 KiB over ordered archives.
+
+The future task root will remain the navigable live index. Stable IDs will route into seven semantic parts:
+`.0-.8`, `.9`, `.10.0-.6`, `.10.7-.10`, `.11-.13`, `.14`, and `.15-.24`. One immutable part preserves superseded
+frontier and legacy global logs. The split at real `.10` child boundaries keeps every part below 5,000 lines,
+while strengthened task metadata will reject duplicate/missing nodes, wrong ranges, stale digests, or a frontier
+without one canonical node. Migration order is live/history mechanism, task partition, changes/notes and author
+workflow, then unchanged registry recomposition. Each stage starts and lands at its own clean Git boundary.
+
 ### Neutral typed source-location contract
 
 The default gate requires and runs the backend-neutral typed source-location checker through repository-managed

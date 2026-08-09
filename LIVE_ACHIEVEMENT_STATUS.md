@@ -1,5 +1,33 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-09 — Bounded live-document store architecture is frozen before migration
+
+`LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0` activates from clean README closeout `0bcb5a36` as intended atomic 176/300
+with no push. Exact current measurements and SHA-256 identities reverify all four immutable debt baselines without
+refreshing them. No live/task/change/note content is moved or rewritten in this planning slice.
+
+The consumer audit proves why blind truncation is unsafe. Seven capability/public-closeout families still require
+historical markers from this file. Four executable checkers plus two JSON contracts read exact node, status,
+checklist, or closeout evidence from `docs/tasks/FUTURE-PARITY-BACKLOG.md`. The existing commit workflow also
+requires every slice to grow the chronology roots.
+
+ADR `0066` freezes strict repository-relative manifests with clean source commit/blob, line/byte/SHA-256 evidence,
+immutable 4,096-line/512-KiB segments, exact Git-source reconstruction, and root-derived retrieval. This root will
+become a five-section 256-line/32-KiB overwrite view after its machine assertions move. Changes and notes become
+512-line/64-KiB hot shards. The future tree keeps stable IDs through seven semantic parts plus immutable legacy
+history; `.10` splits at `.10.0-.6` / `.10.7-.10` so no new part exceeds 5,000 lines.
+
+Migration order is `.1` live/history mechanism, `.2` task partition and consumer reroute, `.3` changes/notes plus
+author workflow, then `.4` unchanged recomposition/registry closure. Each starts from its own clean commit and
+uses an execution-time ADR, mutation proof, byte-exact reconstruction, and atomic revert boundary. `.1` becomes
+eligible only after `.0` commits, clears the brief, and proves clean.
+
+Focused proof passes task metadata, memory architecture, Knowledge Map 797/6,590, all 20 surfaces / 62 routes /
+32/32 mutations, all seven doctrines, mdBook build, and generated-HTML inspection. Definitive repository-volume
+CI exits 0 after MCP complete/141, Rust semantic admission in 82.47 seconds, Julia 416/416 in 31.0 seconds, cursor
+288, process containment and moved-root execution, primary CLI 66/66 in both option environments, RAM 66%, and
+Phase 0 1,031/1,031 in 710 seconds.
+
 ## 2026-08-09 — README routing-pressure revision is recomposition-closed
 
 `README-STABILITY-POLICY.4.2` activates task-tree-first from clean implementation commit `5c570719` as intended
