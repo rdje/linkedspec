@@ -11,15 +11,18 @@ answers:
   - which doctrine checks README stability
   - does LinkedSpec currently have a project level license
   - where is the README policy task tracked
+  - are README routed destinations pressure controlled
+  - what revision adds README routing pressure closure
 date: 2026-07-29
-status: accepted, implemented, canonical-signoff-complete, and adoption closed
-tags: [readme, documentation, doctrine, navigation, maintenance, license]
-evidence: "README-STABILITY-POLICY.0 reads the approved 71-line policy template, measures the 1,615-line / 159,437-byte baseline, inventories every section, and validates a lossless prototype. README-STABILITY-POLICY.1 adopts that exact 105-line / 5,072-byte landing page, root README_POLICY.md, and registered read-only checker. Canonical E4 exposed six capability contract/checker pairs and two public-surface checks that still used root README status/examples as machine inputs; .1 routes those requirements to the already-governed guide/capability/mdBook owners while retaining broad forbidden-syntax scans. Current derived inventories are cursor 74/8+0/60 and selector public surface 59/25/0. The staged-snapshot canonical rerun passes all seven doctrines, MCP 5/5 + 6/6 pending/114, semantic/cursor/storage/relocation proof, CLI 66x2, and Phase 0 1,031/1,031. ADR 0063 fixes hard maxima of 128 lines and 6,144 bytes, canonical routing, and reviewed cap increases. The repository has nested/vendor licenses but no declared project-level root license; proposed leaf .3 tracks that separate director decision."
-last_verified: 2026-07-29
+status: original adoption closed; routing-pressure revision accepted with implementation pending
+tags: [readme, documentation, doctrine, navigation, maintenance, license, routing, pressure, lifecycle]
+evidence: "README-STABILITY-POLICY.0-.2 adopt and close the 105-line / 5,072-byte landing page, root policy, hard 128-line / 6,144-byte budgets, and registered read-only checker. Director-priority revision .4.0 reads the supplied 185-line revision and closes the original policy's unchecked-neighbor gap: exactly 62 routes over 20 surfaces are planned for one strict project-owned registry and unconditional checker. Clean 7c2ff407 measurements identify four debt families and open LIVE-DOCUMENT-PRESSURE-CONTAINMENT before enforcement; baselines cannot auto-refresh. ADR 0063 now ratifies lifecycle-specific controls, 80/90 warning/rollover milestones, reviewed threshold increases, and correction of ca846e7a's nonexistent root test_input route. Project licensing remains independent proposed .3."
+last_verified: 2026-08-09
 reverify:
   - "wc -l -c README.md"
   - "bash scripts/check_readme_stability.sh"
   - "rg -n 'README-STABILITY|README_POLICY.md' scripts/check_doctrines.sh DOCTRINE_ENFORCEMENT.md AGENTS.md docs/linkedspec-book/src/development/documentation-workflow.md"
+  - "rg -n 'README-STABILITY-POLICY\\.4|LIVE-DOCUMENT-PRESSURE-CONTAINMENT' docs/tasks docs/TASK_TREE.md"
 ---
 
 # README stability policy
@@ -61,5 +64,11 @@ The repository currently has licenses for nested/vendor components but no declar
 Those component terms do not authorize an inferred LinkedSpec license. Proposed leaf
 `README-STABILITY-POLICY.3` preserves the question for an explicit director decision while the landing page
 states the present fact honestly.
+
+Revision `.4.0` accepts transitive routing-pressure closure without changing the current policy or checker yet.
+The planned registry separates reader navigation from author overflow, classifies lifecycle-specific controls,
+checks the resulting tree unconditionally, and makes every threshold increase decision-owned. The clean audit
+records oversized neighboring surfaces as immutable debt and opens `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`; it does
+not bless their current size or allow ordinary work to refresh their baselines.
 
 Related: [[repository-root-path-portability]] and [[project-data-workflow-routing]].

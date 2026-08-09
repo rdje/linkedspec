@@ -1,5 +1,26 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-09 (`README-STABILITY-POLICY.4.0` — routing-pressure closure plan): the stable landing-page doctrine
+  must control its destinations transitively, not merely cap `README.md`. Preserve the local 128-line / 6,144-byte
+  ceiling; do not import FSMGen-specific owners, numbers, or paths and do not create an upstream dependency.
+- `.4.1` must implement exactly one strict `doctrine/readme_stability/routes.jsonl` authority: registry, surface,
+  and route records with closed keys, deterministic order, root-relative targets, lifecycle/control compatibility,
+  thresholds, debt baselines, transition owners, and reviewed limit authority. The existing Bash doctrine invokes
+  one core-Perl checker unconditionally over the resulting staged tree.
+- Freeze the audit cardinalities unless task-owned evidence changes them deliberately: 62 route records, 20
+  surfaces, 39 README reader routes after stale-marker removal, 18 author-overflow routes, five policy/enforcement
+  routes, and 32 mutation classes. Reader navigation and author-overflow authority are independent properties.
+- Treat the measured live status, task-evidence, changes, and engineering-note ceilings as immutable debt. Only
+  README `.4` or the exact `LIVE-DOCUMENT-PRESSURE-CONTAINMENT` transition owner may consume finite headroom;
+  ordinary feature commits cannot refresh a baseline or grow a debt surface merely because it remains below cap.
+- Remove the stale root `test_input/` README marker in `.4.1`; current tracked fixture roots are `t/` and `tests/`,
+  with Pgen-specific inputs below `rgx/subs/pgen/tests/`. Git proves `ca846e7a` introduced the marker without an
+  existing root target, so route existence must be part of mutation proof rather than a manual link census.
+- Audit signoff is exact: Knowledge 795/6,574, memory 60/60, book 78/14,260 KiB, all seven doctrines, MCP
+  complete/141, Rust semantic 82.69 seconds, Julia 416/416 in 32.4 seconds, cursor 288, containment/relocation,
+  CLI 66x2, RAM 53%, and Phase 0 1,031/1,031 in 688 seconds. Do not reinterpret this planning proof as `.4.1`
+  implementation admission; the policy, registry, and closure checker are still unchanged.
+
 - 2026-08-09 (`FUTURE-PARITY-BACKLOG.14.3.1.0` — cursor-transaction authored/static contract): implement exactly
   `recognition_checkpoint()`, `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and
   `recognition_rollback(token)`. They lower to dedicated `RECOGNITION_*` nodes; they are not ordinary helpers and

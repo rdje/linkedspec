@@ -1,8 +1,9 @@
 # ADR 0063: README is a bounded stable landing page
 
 - Date: 2026-07-29
-- Status: accepted; content/enforcement implemented by `README-STABILITY-POLICY.1`; adoption closed by `.2`
-- Tags: documentation, readme, doctrine, maintenance, navigation, local-ci
+- Status: accepted; original content/enforcement closed by `README-STABILITY-POLICY.2`; routing-pressure closure
+  ratified by `.4.0` with implementation pending in `.4.1`
+- Tags: documentation, readme, doctrine, maintenance, navigation, local-ci, routing, pressure, lifecycle
 
 ## Context
 
@@ -82,6 +83,57 @@ Capability/public no-drift checkers must follow the same rule. They may scan REA
 classes, but current capability markers, rollout counts, commands, and examples belong to the governed neutral
 contract, guide, capability/backend documentation, mdBook, roadmap, ADR, or Knowledge owners—not README.
 
+### 5. Routing is complete only at a controlled terminal
+
+The 2026-08-09 director-priority policy revision closes a gap in the original adoption: moving content out of
+README is not successful when its destination can grow as an unclassified neighboring sink. LinkedSpec therefore
+distinguishes `reader_navigation` from `author_overflow`, inventories every actual path-shaped destination named
+by README, this policy, and checker failure guidance, and follows each route until it reaches a controlled terminal.
+
+The project-owned registry selected for `.4.1` is `doctrine/readme_stability/routes.jsonl`. It contains strict,
+typed JSON Lines records for surfaces and routes. Surface records name a stable id, root-relative target patterns,
+owner, lifecycle, verifier, line/byte/file/aggregate limits where applicable, 80% warning and 90% rollover
+milestones, route targets, and any immutable baseline/debt transition. Route records name exact source path,
+marker, route kind, and target surface. Unknown fields, unsafe paths, duplicate ids, absent markers or targets,
+cycles, and lifecycle/control contradictions fail closed.
+
+Controls are lifecycle-specific:
+
+- bounded current files have independent line/byte ceilings plus overwrite, review, or staleness semantics;
+- partitioned manuals/tasks have a bounded index, per-part, file-count, line-total, and byte-total ceilings;
+- generated projections have size ceilings and an executable freshness verifier over canonical inputs;
+- append-only history is query-first and has a finite shard/rotation threshold;
+- external services have an exact HTTPS authority plus named lifecycle owner;
+- frozen records require a pinned identity and cannot receive author overflow; and
+- source/executable repository components used only for reader navigation must exist at their exact root-relative
+  location but are not misclassified as prose sinks.
+
+The checker runs unconditionally as part of existing doctrine `README-STABILITY`; it does not depend on README
+being changed. It derives local Markdown/code-path route candidates and all emitted `route_hint` author guidance,
+requires exact registry coverage, evaluates transitive closure, measures the staged resulting tree, and rejects
+undeclared threshold increases. Any pressure-limit increase requires a new accepted and indexed ADR with exact
+surface id and old/new canonical limits.
+
+Initial-registry authority markers:
+
+- Initial README pressure registry: `doctrine/readme_stability/routes.jsonl`
+- Initial README pressure registry version: `1`
+- Initial README pressure warning percent: `80`
+- Initial README pressure rollover percent: `90`
+- Initial README pressure authority: `README-STABILITY-POLICY.4.0`
+
+The clean `7c2ff407` audit measures four debt families: `LIVE_ACHIEVEMENT_STATUS.md` at 14,769 lines /
+1,262,969 bytes; `docs/tasks/` at 85 files / 64,378 lines / 6,204,304 bytes with
+`docs/tasks/FUTURE-PARITY-BACKLOG.md` at 26,979 lines / 2,720,175 bytes; `CHANGES.md` at 44,128 lines /
+3,091,199 bytes; and `DEVELOPMENT_NOTES.md` at 21,169 lines / 2,277,541 bytes. These immutable baselines are debt,
+not healthy defaults. Registry transition allowance is finite and owned only by README `.4` adoption/closeout or
+`LIVE-DOCUMENT-PRESSURE-CONTAINMENT`; ordinary feature commits cannot refresh the baseline or spend the allowance.
+
+The same audit finds one original-adoption navigation defect: commit `ca846e7a` introduced a README layout entry
+for absent root `test_input/`. Git proves neither its parent nor current tree contains that directory; the actual
+fixture roots are `t/` and `tests/`, with nested Pgen inputs under `rgx/subs/pgen/tests/`. `.4.1` removes the stale
+root path and makes reader-route existence mutation-tested.
+
 ## Consequences
 
 - README becomes fast to scan and mechanically resistant to unbounded growth.
@@ -89,12 +141,15 @@ contract, guide, capability/backend documentation, mdBook, roadmap, ADR, or Know
 - Stable navigation can evolve within measured headroom; a larger responsibility requires explicit review.
 - README edits become uncommon and are justified by changes to purpose, first use, top-level architecture, or
   navigation rather than by every implementation slice.
+- README routing can no longer claim success while silently shifting append pressure to an unclassified live file.
+- Large existing destinations are explicit debt with immutable measurements, finite transition owners, and a
+  queued containment task; their size is not normalized into a reusable policy default.
 - Licensing remains truthful but unresolved until the director chooses project-level terms.
 
-Implementation signoff passes the staged-snapshot checker and the complete canonical local gate, including all
+Original adoption signoff passes the staged-snapshot checker and the complete canonical local gate, including all
 seven doctrines, repository-volume containment, moved-root execution, primary CLI 66x2, and Phase 0
-1,031/1,031. Capability behavior is unchanged; only canonical documentation ownership and derived public-file
-inventories move.
+1,031/1,031. Revision `.4.0` changes planning truth only; `.4.1` must earn a new implementation signoff before its
+registry or closure checker is accepted. Capability behavior remains unchanged.
 
 ## Links
 

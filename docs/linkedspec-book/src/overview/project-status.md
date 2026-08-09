@@ -140,6 +140,14 @@ runtime behavior movement. Unchanged closeout `.2` repeats all seven doctrines, 
 quick start, public owner checks, repository containment/moved-root proof, CLI 66x2, and Phase 0 1,031/1,031;
 the bounded-README adoption critical path is closed.
 
+Routing-pressure audit `.4.0` now ratifies a stricter follow-on without changing the current landing page or
+checker: every reader and author-overflow route will terminate at a classified, lifecycle-controlled surface.
+The frozen `.4.1` implementation shape is 62 routes over 20 surfaces with 32 failure mutations and reviewed
+authority for every threshold change. It also corrects the stale root `test_input/` layout marker introduced by
+the original adoption; current fixture roots are `t/` and `tests/`. Oversized live status, task evidence, changes,
+and engineering notes are explicitly debt and have a separate bounded-view migration program rather than being
+accepted as indefinite README destinations.
+
 Julia now has an admitted callable native decoded MCP adapter and strict synchronous stdio under
 `FUTURE-PARITY-BACKLOG.10.9.5.1-.3`: a deterministic
 120,030-byte Base64 binding, digest-verified frozen contract runtime, opaque secure handle registry, lower-only

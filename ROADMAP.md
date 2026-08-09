@@ -83,14 +83,19 @@ ten stale-current denials through six public mutations. Capability exclusion fre
 passes Knowledge Map 783/6,348, sole-facing mdBook 79/14,072 KiB with isolated rendered paragraphs, all doctrines,
 canonical CLI 66x2, RAM 52%, and Phase 0 1,031/1,031 in 651 seconds.
 
-README sustainability is a completed repository-architecture lane under `README-STABILITY-POLICY`. ADR `0063`
+README sustainability is an active repository-architecture revision lane under `README-STABILITY-POLICY`. ADR `0063`
 defines the root README as a stable landing page rather than a status ledger: purpose/audience, one verified first
 use, stable architecture/invariants, concise canonical navigation, contribution/support, and accurate notices.
 The complete 1,615-line / 159,437-byte baseline is routed losslessly before trimming; the adopted README is the
 reviewed 105-line / 5,072-byte prototype within hard 128-line / 6,144-byte budgets. Leaf `.0` commits the
 behavior-free adoption plan at `adcc89fe`; `.1` implements the repository policy, trim, and registered
 `README-STABILITY` doctrine at `ca846e7a`; `.2` recomposes those owners unchanged under a second canonical gate
-and closes the adoption critical path. Recurring MCP `.10.9.7.1.1.4` recomposes the committed rooted promotion
+and closes the original adoption. Director-priority revision `.4.0` now ratifies transitive pressure closure for
+62 exact reader/author routes over 20 lifecycle-controlled surfaces. It records immutable debt baselines for live
+status, the task collection, changes, and engineering notes; opens `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`; and
+root-causes original adoption's nonexistent `test_input/` layout marker. `.4.1` owns the local fenced policy,
+strict JSONL registry, unconditional checker, stale-route repair, and 32 mutation classes; `.4.2` recomposes them
+unchanged before bounded-view debt migration. Recurring MCP `.10.9.7.1.1.4` recomposes the committed rooted promotion
 unchanged and closes its implementation parents; `.10.9.7.2` now independently recomposes that full chain,
 closes `.10.9.7` and `.10.9`, and hands the clean boundary to public semantic/MCP no-drift `.10.10`.
 Project-level licensing remains a separate proposed director decision; no terms are inferred from component/

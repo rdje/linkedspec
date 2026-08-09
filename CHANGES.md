@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-08-09 — README-STABILITY-POLICY.4.0 — plan routing-pressure closure
+
+- Read the director-supplied 185-line policy revision in full and ratified its project-neutral additions as a
+  fenced LinkedSpec doctrine revision: proof-before-relocation, transitive route closure, separate reader and
+  author-overflow routes, lifecycle-specific pressure controls, immutable debt baselines, unconditional checks,
+  and reviewed authority for every threshold increase.
+- Inventoried the current landing-page policy boundary as 62 planned route records over 20 controlled surfaces.
+  Froze a strict root-relative JSONL registry, dependency-free Perl closure checker, staged-resulting-tree model,
+  80/90 warning and rollover milestones, and 32 independent mutation classes for implementation leaf `.4.1`.
+- Measured four legacy pressure families without normalizing them: live status, task evidence, changes, and
+  engineering notes. Opened `LIVE-DOCUMENT-PRESSURE-CONTAINMENT` to preserve exact history while later replacing
+  oversized neighboring sinks with bounded views and controlled aggregate stores.
+- Root-caused the README's nonexistent root `test_input/` layout marker to original adoption commit `ca846e7a`;
+  neither its parent nor current Git contains that path. Actual fixture roots are `t/` and `tests/`; `.4.1` owns
+  the correction and mutation-sensitive route-existence proof.
+- Changed no policy, checker, registry, README, cap, source, runtime, fixture, CLI, storage, hosted workflow, or
+  current user behavior. Updated ADR `0063`, Knowledge, task/index, roadmaps, architecture, continuity, and the
+  sole-facing book with the exact audit and implementation boundary.
+- Passed Knowledge 795/6,574, memory 60/60, task metadata, current README 105/128 and 5,072/6,144, all seven
+  doctrines, and the 78-file / 14,260-KiB rendered book. Definitive CI passes MCP 5/5 + 6/6 complete/141, Rust
+  semantic 82.69 seconds, Julia 416/416 in 32.4 seconds, cursor 288, containment/moved-root, CLI 66x2, RAM 53%,
+  and Phase 0 1,031/1,031 in 688 seconds before its exact success marker.
+
 ## 2026-08-09 — FUTURE-PARITY-BACKLOG.14.3.1.0 — ratify cursor transaction contract
 
 - Ratified four exact accepted-future special forms: `recognition_checkpoint()`,

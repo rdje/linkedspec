@@ -5,15 +5,15 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `c8fcea6f` — clean transaction-audit HEAD from which behavior-free authored/static contract
-  `.14.3.1.0` activated task-tree-first (171/300; no push).
-- latest_completed_leaf: intended post-landing handoff for exact cursor-transaction decision `.14.3.1.0` under
-  subject `FUTURE-PARITY-BACKLOG.14.3.1.0 - ratify cursor transaction contract` as atomic 172/300; no push.
-- active_work_unit: none after the intended clean `.14.3.1.0` landing; parent `.14.3.1` remains active.
-- next_action: prove post-commit status/diffs, zero-byte brief, memory pointer, Knowledge freshness, absent book,
-  and zero managed-run residue; then activate executable neutral artifact `.14.3.1.1` task-tree-first unless the
-  director-priority README-policy adoption first requires its own clean task-tree slice.
-- in_flight_uncommitted: none after intended atomic `.14.3.1.0` landing.
+- activation_commit: `7c2ff407` — clean cursor-transaction decision HEAD from which README routing-pressure audit
+  `.4.0` activated task-tree-first (172/300; no push).
+- latest_completed_leaf: intended post-landing handoff for behavior-free README route/control plan `.4.0` under
+  subject `README-STABILITY-POLICY.4.0 - plan routing-pressure closure` as atomic 173/300; no push.
+- active_work_unit: none after the intended clean `.4.0` landing; README policy revision `.4` remains active.
+- next_action: prove post-commit status/diffs, zero-byte brief, pointer, Knowledge freshness, absent book, and zero
+  managed-run residue; then activate `README-STABILITY-POLICY.4.1` task-tree-first to implement the frozen local
+  policy revision, 62-route/20-surface registry, closure checker, 32 mutations, and stale-layout correction.
+- in_flight_uncommitted: none after intended atomic `.4.0` landing.
 - blockers: none. Exact final verification evidence is recorded in the owning task before commit; no background
   job remains after the intended landing.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
@@ -40,6 +40,11 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_semantic_governance: capability 80/0/0; semantic six groups / 20 responses / 128 mutations, rollout 9/9,
   native admission 6/6; MCP rollout complete/141.
 - preserved_contract_handoff: repeated-action closure next_owner remains `FUTURE-PARITY-BACKLOG.10.1`.
+- current_readme_contract: README stays 105/5,072 under hard 128/6,144 caps. `.4.0` ratifies 62 routes over 20
+  surfaces with reader/overflow separation, lifecycle controls, immutable debt, reviewed limits, and 32 mutations;
+  `.4.1` is the only implementation owner. Current fixture roots are `t/` and `tests/`, not root `test_input/`.
+- documentation_debt_owner: live status, task evidence, changes, and engineering notes retain measured immutable
+  baselines during `.4`; `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0-.4` owns their later bounded-view migrations.
 - current_transaction_contract: future syntax is exact `recognition_checkpoint`,
   `recognize_once(token, call(Rule))`, `recognition_commit`, and `recognition_rollback`; match boolean and staged
   payload are separate. Tokens are linear; effects are closed 9 allowed/11 rejected; marks become invocation-
@@ -47,9 +52,9 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_future_direction: transaction `.14.3` remains split through neutral `.1`, five backend families/six
   runtimes `.2-.6`, recurring `.7`, and closeout `.8`; executable neutral contract `.14.3.1.1` is next and `.14.8`
   retains final public no-drift. `TASK-TREE-METADATA-HYGIENE.5` separately owns active-frontier freshness.
-- latest_bootstrap_read: 2026-08-09 — complete roadmap, code-owner, mdBook, bootstrap/memory/task/ADR/Knowledge,
-  transaction/action/runtime, storage/canonical, history, and sole-facing status review refreshed.
-- pivot_guard: prove `.14.3.1.0` post-commit clean before any `.14.3.1.1`, README-policy, or metadata pivot.
-- push_policy: hard lock at 300 new local commits; `.14.3.1.0` is intended atomic 172/300; no push.
-- environment: use project-data wrappers; `perl -Iperl`; canonical nested macOS containment may require approved
-  execution and up to 30 minutes.
+- latest_bootstrap_read: 2026-08-09 — complete roadmap, codebase, mdBook, bootstrap/memory/task/ADR/Knowledge,
+  README-policy/checker/routes, storage/canonical, history, and sole-facing status review refreshed.
+- pivot_guard: prove `.4.0` post-commit clean before `.4.1`; prove README `.4.2` clean before transaction or live-
+  document containment work.
+- push_policy: hard lock at 300 new local commits; `.4.0` is intended atomic 173/300; no push.
+- environment: use project-data wrappers and `perl -Iperl`; approved canonical containment may take 30 minutes.

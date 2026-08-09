@@ -19,6 +19,19 @@ closed by `.2`, and is checked with:
 bash scripts/check_readme_stability.sh
 ```
 
+Routing-pressure revision `.4.0` audits the next boundary before changing that checker. It classifies reader
+navigation separately from author-overflow destinations, follows routes transitively, assigns lifecycle-specific
+controls, and records legacy high-water marks as debt rather than healthy targets. Its frozen implementation plan
+contains 62 routes over 20 surfaces and 32 mutation classes. Implementation leaf `.4.1` will add the local route
+registry and unconditional resulting-tree closure check; until that leaf lands, the command above enforces the
+existing README-only policy.
+
+The audit also found and traced a stale root `test_input/` layout entry introduced during the original README
+trim. LinkedSpec's current fixture roots are `t/` and `tests/`; `.4.1` owns the landing-page correction and exact
+route-existence guard. Four already-large neighboring families—live status, task evidence, changes, and engineering
+notes—have a separate `LIVE-DOCUMENT-PRESSURE-CONTAINMENT` owner so the README revision does not silently bless
+their present size or mix semantic migration into doctrine admission.
+
 The public book explains LinkedSpec to the outside world. The continuity docs help the project survive crashes, handoffs, and long refactoring sessions.
 
 ## Public book

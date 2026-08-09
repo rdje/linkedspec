@@ -3,17 +3,21 @@
 ## Metadata
 
 - Tree ID: `README-STABILITY-POLICY`
-- Status: `done` / `closed`
+- Status: `active` / routing-pressure revision reopened
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-07-29`
-- Last updated: `2026-07-29`
+- Last updated: `2026-08-09` (director-priority routing-pressure revision `.4` activated task-tree-first from
+  clean cursor-transaction contract commit `7c2ff407`; `.4.0` audit/ratification is active; no push)
 - Owner: repo-local workflow
 
 ## Goal
 
 Adopt the director-approved project-neutral README stability policy as a repository-owned LinkedSpec doctrine:
 turn `README.md` into a concise stable landing page, route changing detail to canonical homes, and enforce reviewed
-line/byte budgets through the existing doctrine registry, pre-commit hook, and canonical local CI gate.
+line/byte budgets through the existing doctrine registry, pre-commit hook, and canonical local CI gate. The
+director-priority 2026-08-09 revision extends that doctrine with transitive routing-pressure closure: every actual
+reader and author-overflow route must terminate at a classified, mechanically controlled destination rather than
+moving unbounded append pressure into a neighboring live document.
 
 ## Non-Goals
 
@@ -34,15 +38,23 @@ line/byte budgets through the existing doctrine registry, pre-commit hook, and c
   includes rejection/acceptance self-tests, and is registered as a doctrine.
 - The existing registry makes the checker run through pre-commit and canonical local CI; doctrine prose, bootstrap,
   task-tree, roadmap/live docs, Knowledge Map, and mdBook remain aligned.
+- Every path-shaped destination named by README, the adopted policy, or checker failure guidance is inventoried as
+  `reader_navigation`, `author_overflow`, or both; every route reaches a controlled terminal without an unclassified
+  hop, cycle, or pressure-shifting chain.
+- Hot/live, partitioned, generated, append-only, external, and frozen destinations have class-appropriate pressure
+  controls and reviewed threshold governance. Legacy measured ceilings are recorded as debt, never reusable ideals.
+- The README checker validates the routed-destination inventory and controls unconditionally, including when README
+  itself is unchanged, and mutation tests reject missing routes, undeclared hints, cycles, invalid lifecycle/control
+  combinations, stale generated owners, and unauthorized threshold increases.
 - Each completed leaf is committed through `COMMIT.md`; no push occurs before cadence 300.
 
 ## Task Tree
 
 - ID: `README-STABILITY-POLICY`
-  Status: `done` / `closed` (2026-07-29; adoption critical path `.0-.2` complete; `.3` remains an independent
-    proposed director decision)
+  Status: `active` (2026-08-09; original adoption `.0-.2` remains complete; `.3` remains an independent proposed
+    director decision; routing-pressure revision `.4` is active)
   Goal: Adopt and mechanically enforce a stable, bounded LinkedSpec repository landing page.
-  Children: `.0`, `.1`, `.2`, `.3`
+  Children: `.0`, `.1`, `.2`, `.3`, `.4`
 
 - ID: `README-STABILITY-POLICY.0`
   Status: `done` (2026-07-29; behavior-free adoption plan signoff-complete from clean recurring MCP plan commit
@@ -171,6 +183,156 @@ line/byte budgets through the existing doctrine registry, pre-commit hook, and c
     rights from the licenses of vendored or nested components; after a decision, use a dedicated implementation leaf
     to add the approved root license/notice and synchronize public documentation.
 
+- ID: `README-STABILITY-POLICY.4`
+  Status: `active`
+  Goal: Deliberately adopt the director-supplied routing-pressure revision without changing README caps or turning
+    the external template into an upstream dependency.
+  Depends on: `.2`; director priority on 2026-08-09
+  Children: `.4.0-.4.2`
+  Acceptance: Ratify the project-owned policy revision and exhaustive destination/control model before enforcement;
+    implement one repository-rooted data registry plus unconditional checker closure and mutations; recompose the
+    committed policy/registry/checker unchanged; preserve the 128-line / 6,144-byte README ceilings, stable landing
+    role, root-relative paths, repository-volume data locality, hosted-CI policy, and all language/runtime behavior.
+
+- ID: `README-STABILITY-POLICY.4.0`
+  Status: `signoff-complete` (2026-08-09; behavior-free plan from clean `7c2ff407`; intended atomic 173/300,
+    no push)
+  Goal: Audit every actual README/policy/checker route and freeze exact lifecycle, control, threshold, closure, and
+    implementation ownership before policy/checker behavior changes.
+  Depends on: `.2`; clean commit `7c2ff407`
+  Acceptance: Read the supplied policy revision completely; compare it with LinkedSpec's adopted policy and ADR
+    `0063`; inspect the established checker and canonical route owners; inventory direct and transitive reader versus
+    author-overflow destinations; measure every controlled surface; identify legacy debt without normalizing it;
+    freeze a minimal data schema, validation/mutation design, threshold-increase authority, and `.4.1-.4.2` split.
+    Change only task/decision/Knowledge/roadmap/live/public-book planning truth—no policy, checker, README, threshold,
+    route registry, source, runtime, fixture, CLI, storage, hosted workflow, or current behavior.
+  Verification: **PASS 2026-08-09.** Clean activation/parent/subject proof; full 185-line supplied revision read;
+    exact old/new policy comparison; README Markdown/code/command candidate census; Git root-cause of absent
+    `test_input/`; direct/grouped measurements; 62 routes, 20 named surface ids, and 32 mutation classes; separate
+    debt task owner; and exact no-change diff for README/policy/checker/registry/source/runtime pass. Knowledge is
+    795 facts / 6,574 keys; memory is 60/60 lines; task metadata, README 105/128 lines and 5,072/6,144 bytes, all
+    seven doctrines, and the 78-file / 14,260-KiB book pass with rendered paragraph inspection. Canonical CI exits
+    0 with MCP 5/5 implementations + 6/6 runtimes complete/141, Rust semantic 1/1 in 82.69 seconds, Julia semantic
+    416/416 in 32.4 seconds, cursor 288, repository containment/moved-root proof, CLI 66x2, RAM 53%, and Phase 0
+    1,031/1,031 in 688 seconds before exact `[ci] local CI gate passed`.
+  Commit: `README-STABILITY-POLICY.4.0 - plan routing-pressure closure`
+
+  #### Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove `7c2ff407` is the clean atomic 172/300 cursor-contract
+    handoff, zero-byte brief, valid pointer, fresh Knowledge, absent rendered book, zero managed runs, and this
+    task-tree activation is the first mutation.
+  - [x] **READ / COMPARE REVISION** — Read the director-supplied revision fully and classify every semantic delta
+    from LinkedSpec's project-owned policy and ADR `0063`.
+  - [x] **INVENTORY / MEASURE ROUTES** — Derive every path-shaped destination and emitted checker hint; classify
+    reader/overflow use, follow transitive routes, measure surfaces, and identify cycles, gaps, or legacy debt.
+  - [x] **RATIFY SCHEMA / CONTROLS / MUTATIONS** — Freeze exact data schema, lifecycle/control compatibility,
+    thresholds/freshness/identity rules, closure algorithm, mutation corpus, and reviewed-increase authority.
+  - [x] **SPLIT / LOCKSTEP / NO BEHAVIOR** — Assign `.4.1` implementation and `.4.2` unchanged closeout; align
+    durable/public planning truth without changing policy, checker, registry, README, or executable behavior.
+  - [x] **VERIFY / COMMIT / CLEAN HANDOFF** — Pass focused documentation checks and canonical CI; commit through
+    `COMMIT.md`, clear the brief, remove exact generated residue, and prove a clean boundary before `.4.1`.
+
+- ID: `README-STABILITY-POLICY.4.1`
+  Status: `pending`
+  Goal: Adopt the fenced local policy revision, routed-destination registry, unconditional closure checker, exact
+    pressure controls, and mutation corpus under the existing `README-STABILITY` doctrine.
+  Depends on: `.4.0`
+
+- ID: `README-STABILITY-POLICY.4.2`
+  Status: `pending`
+  Goal: Recompose the committed policy, registry, controls, and checker unchanged; close `.4` and hand back to
+    `FUTURE-PARITY-BACKLOG.14.3.1.1` only from a clean boundary.
+  Depends on: `.4.1`
+
+  ### `README-STABILITY-POLICY.4.0` Ratified Audit and Implementation Contract
+
+  Clean activation evidence 2026-08-09: cursor-transaction decision commit `7c2ff407` has first parent
+  `c8fcea6f`, exact subject `FUTURE-PARITY-BACKLOG.14.3.1.0 - ratify cursor transaction contract`, empty
+  worktree/index, zero-byte brief, valid activation pointer, fresh Knowledge, absent rendered book, and zero
+  managed runs. The first README-revision mutation is task-tree-only and task metadata passes.
+
+  Revision delta 2026-08-09: the supplied 185-line project-neutral policy retains LinkedSpec's original stable
+  content contract and dual-cap/review rule, then adds fenced project-local authority/provenance, proof-before-
+  relocation, transitive route closure, separate reader versus author-overflow classes, lifecycle-specific pressure
+  controls, legacy-debt handling, unconditional resulting-tree checks, and reviewed increases for every routed
+  threshold. LinkedSpec adopts those semantics deliberately; it does not copy FSMGen owner names, decisions,
+  paths, measurements, health targets, or implementation packages and does not treat the source as an upstream.
+
+  Exact route census 2026-08-09: current README contains 22 unique Markdown destinations—21 root-relative files
+  and one exact GitHub Issues HTTPS service—plus 16 repository-layout path markers and two command paths. One
+  layout marker, root `test_input/`, is invalid; `.4.1` removes it, leaving 15 valid component markers. The revised
+  project policy names 18 exact author destinations across public behavior, direction/task, architecture,
+  diagnostics, rationale/facts, history, continuity, and contribution. It also names the policy, route registry,
+  checker, doctrine registry, and canonical CI owners. Implementation therefore freezes exactly 62 route records:
+  39 README reader routes after stale-path removal, 18 author-overflow routes, and 5 policy/enforcement navigation
+  routes. Duplicate markers may target one surface but route ids and `(kind, source, marker)` triples are unique.
+
+  The 20 frozen surface ids are `landing_readme`, `readme_policy`, `public_reference`, `roadmaps`,
+  `architecture_state`, `task_index`, `task_evidence`, `decisions`, `knowledge_cards`, `knowledge_map`,
+  `diagnostics`, `active_memory`, `live_status`, `change_history`, `engineering_notes`, `contributor_doctrine`,
+  `git_history`, `issue_service`, `repository_components`, and `command_paths`. These ids, not prose-family names,
+  are the `.4.1` registry join keys; a lifecycle or control change requires explicit task/decision evidence.
+
+  Stale-layout root cause 2026-08-09: `git blame` and `-S` assign absent root `test_input/` solely to original
+  adoption commit `ca846e7a`. Neither its parent nor current Git tree contains that directory; current fixtures are
+  rooted at `t/` and `tests/`, with Pgen-specific inputs nested under `rgx/subs/pgen/tests/`. No deleted root path
+  or later rename exists. `.4.1` corrects README to `t/`, `tests/` and makes route existence mutation-sensitive.
+
+  Surface schema 2026-08-09: `doctrine/readme_stability/routes.jsonl` version 1 contains strict `registry`,
+  `surface`, and `route` objects. Registry metadata pins 80/90 warning/rollover percentages and ADR `0063` initial
+  authority. Surface objects require id, root-relative target patterns, owner, lifecycle, pressure control,
+  verifier, route targets, state, and applicable independent line/byte/per-file/file-count/aggregate limits;
+  debt adds immutable baseline plus finite transition owners/deltas. Route objects require id, kind, source path,
+  exact marker, source surface, and target surface. Keys are closed by record type; ids, paths, and order are
+  deterministic; absolute/home/traversal paths, symbolic-link targets, duplicate coverage, or null required limits
+  fail closed.
+
+  Reviewed surface controls 2026-08-09:
+
+  | Surface family | Clean measurement | Initial control selected for `.4.1` |
+  | --- | ---: | --- |
+  | README | 105 lines / 5,072 bytes | Existing hard 128 / 6,144 bounded snapshot; unchanged. |
+  | Policy | 88 lines / 4,156 bytes before revision | Bounded policy, max 256 lines / 24,576 bytes; only stable contract/provenance. |
+  | Public reference | 50 files / 33,956 lines / 2,058,834 bytes; largest 4,282 / 290,387 | Membership indexes; max 64 files, 5,000 lines / 524,288 bytes each, 50,000 lines / 4,194,304 bytes total. |
+  | Roadmap pair | 2 files / 3,815 lines / 638,608 bytes | Reviewed snapshots; max 4,096 lines / 524,288 bytes each and 6,144 / 1,048,576 total. |
+  | Architecture state | 3,466 lines / 364,083 bytes | Reviewed snapshot; max 5,000 lines / 524,288 bytes. |
+  | Task index | 3,492 lines / 329,500 bytes | Bounded generated/current index; max 5,000 / 524,288 plus task-metadata freshness. |
+  | Task evidence | 85 files / 64,378 lines / 6,204,304 bytes; max 26,979 / 2,720,175 | Max 128 files, 32,000 / 4,194,304 each, 80,000 / 8,388,608 total; warning debt owned by containment `.2`. |
+  | Decisions | 66 files / 6,909 lines / 473,214 bytes; max 435 / 32,139 | Indexed collection; max 128 files, 640 / 65,536 each, 12,000 / 2,097,152 total. |
+  | Knowledge cards/map | 794 cards / 40,663 lines / 3,281,081 bytes; map 13,672 / 4,571,555 | Cards max 1,024 files, 512 / 65,536 each, 64,000 / 6,291,456 total; map max 20,000 / 8,388,608 plus freshness gate. |
+  | Diagnostics | Toolbox + local-CI chapter 2 files / 2,818 lines / 210,835 bytes | Maintained reference; max 2 files, 2,048 / 196,608 each, 4,096 / 393,216 total. |
+  | Active memory | `MEMORY.md` 55 / 5,431; architecture 451 / 24,044 | Existing 60-line overwrite pointer plus 512 / 32,768 architecture snapshot. |
+  | Live status | 14,769 / 1,262,969 | Immutable debt baseline; finite `.4`/containment transition only, hard 18,000 / 1,572,864; containment `.1`. |
+  | Changes | 44,128 / 3,091,199 | Query-first append debt; finite transition only, hard 55,000 / 4,194,304; containment `.3`. |
+  | Engineering notes | 21,169 / 2,277,541 | Query-first rolling debt; finite transition only, hard 27,000 / 3,145,728; containment `.3`. |
+  | Contributor/doctrine entry | 5 files / 766 lines / 40,339 bytes | Bounded reference set; max 8 files, 640 / 65,536 each, 1,600 / 131,072 total. |
+  | Git history / issue service / source and command paths | Query, external HTTPS, 15 components, 2 commands | Archive/query terminal, named external owner, and exact existence/executable terminals; never author sinks unless separately declared. |
+
+  Debt semantics 2026-08-09: baseline measurements never refresh automatically. A debt surface may grow only when
+  the staged task evidence names README `.4` or its exact `LIVE-DOCUMENT-PRESSURE-CONTAINMENT` owner and remains
+  within its finite transition delta and hard ceiling. Any other growth fails even below the hard cap. Warning at
+  80% requires a nonempty owner; rollover at 90% requires the active migration owner. Limit changes require a new
+  staged accepted/indexed ADR with exact surface id plus old/new canonical limit objects.
+
+  Checker/mutation split 2026-08-09: `.4.1` adds one core-Perl, dependency-free,
+  repository-rooted `scripts/check_readme_routing_pressure.pl`, invoked unconditionally by the existing Bash
+  checker after cap/navigation checks. It reads the staged resulting tree when an index exists, rejects controlled
+  staged/worktree disagreement, extracts Markdown/code path candidates and exact `route_hint` emissions, validates
+  62 routes and transitive acyclic closure across 20 surfaces, measures every surface, runs freshness/identity/
+  existence controls, and audits threshold authority. Its exact 32-class self-test covers JSON/type/key/id/order,
+  unsafe/missing/symlink targets, missing/duplicate/source-marker routes, reader/overflow drift, emitted-hint gaps,
+  undeclared endpoints, cycles, every lifecycle/control mismatch, line/byte/file/aggregate overflow, stale
+  generated projection, invalid external authority, frozen-identity drift, debt without owner, unauthorized debt
+  growth, unauthorized threshold increase, valid reviewed increase, and resulting-tree disagreement.
+
+  Dependency split 2026-08-09: `.4.1` exclusively changes policy, README stale path, registry, checker, mutation
+  proof, doctrine mirrors, task-acceptance path classification, public book, and continuity owners. `.4.2` changes
+  no admitted policy/route/control/checker behavior; it recomposes the committed state, closes `.4`, then makes
+  `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0` the next documentation-sustainability leaf before transaction work can
+  append to debt surfaces. Root README caps, language/runtime behavior, storage locality, and hosted-CI policy stay
+  unchanged throughout.
+
 ## Audited README Routing Contract
 
 Baseline: `README.md` is 1,615 lines / 159,437 bytes. The adoption prototype is 105 lines / 5,072 bytes and its
@@ -254,6 +416,7 @@ decision records, and git; they do not need a second current-facing copy in READ
 | `2026-07-29` | `README-STABILITY-POLICY.0` | Clean `c6f36fe3`; external policy 71/71 lines read-only; baseline 1,615/159,437; prototype 105/5,072 and quick start exact; Knowledge Map 756/6,129; mdBook, memory 56/60, six doctrines, whitespace, path scan, and scope checks PASS. | DONE. README/policy/checker behavior unchanged; `.1` follows only after commit/brief-clear/clean proof. |
 | `2026-07-29` | `README-STABILITY-POLICY.1` | First E4 run exposed the stale root-marker coupling after seven doctrines/syntax passed. After complete routing, all eight focused owners pass; the canonical rerun passes MCP 5/5 + 6/6 pending/114, Rust semantic 82.89s, Julia 416/416 in 29.3s, cursor 288, containment/moved-root, CLI 66x2, RAM 74%, and Phase 0 1,031/1,031 in 668s. | DONE. Signoff-complete; no runtime semantics changed; implementation commit/brief-clear/clean follows. |
 | `2026-07-29` | `README-STABILITY-POLICY.2` | Clean `ca846e7a`; README/policy/checker unchanged; quick start exact; 27/27 local links; seven doctrines; eight owners; KM 756/6,129; memory 57/60; mdBook; canonical MCP 5/5 + 6/6 pending/114, Rust 82.85s, Julia 416/416 in 29.3s, cursor 288, containment/moved-root, CLI 66x2, RAM 64%, Phase 0 1,031/1,031 in 663s. | DONE. Parent closed unchanged; closeout commit/brief-clear/clean then MCP `.10.9.7.1`. |
+| `2026-08-09` | `README-STABILITY-POLICY.4.0` | Clean `7c2ff407`; 185-line revision; 62 routes / 20 surface ids / 32 mutations; stale-path Git root cause; four debt baselines and new owner; README/policy/checker unchanged; KM 795/6,574; memory 60/60; book 78/14,260 KiB; seven doctrines; canonical MCP 5/5 + 6/6 complete/141, Rust semantic 82.69s, Julia 416/416 in 32.4s, cursor 288, containment/moved-root, CLI 66x2, RAM 53%, Phase 0 1,031/1,031 in 688s. | DONE. Behavior-free plan is signoff-complete; atomic commit/brief-clear/clean precedes `.4.1`. |
 
 ## Commit Log
 
@@ -263,6 +426,7 @@ decision records, and git; they do not need a second current-facing copy in READ
 | `README-STABILITY-POLICY.1` | `ca846e7a` — `README-STABILITY-POLICY.1 - adopt bounded README doctrine` | Policy, trim, checker, doctrine, and canonical lockstep. |
 | `README-STABILITY-POLICY.2` | `README-STABILITY-POLICY.2 - close bounded README adoption` | Unchanged closeout and MCP handback. |
 | `README-STABILITY-POLICY.3` | `proposed` | Project-level license decision; not part of the adoption critical path. |
+| `README-STABILITY-POLICY.4.0` | `README-STABILITY-POLICY.4.0 - plan routing-pressure closure` | Behavior-free route/control audit and implementation plan; hash supplied by Git history after landing. |
 
 ## Changelog
 
@@ -286,3 +450,7 @@ decision records, and git; they do not need a second current-facing copy in READ
 - `2026-07-29`: Completed `.2` and closed the adoption parent after byte-unchanged policy/README/checker proof,
   27/27 retained links, exact quick start, all seven doctrines/eight public owners, mdBook/KM/memory, and full
   canonical signoff. MCP `.10.9.7.1` resumes only after closeout commit/brief-clear/clean.
+- `2026-08-09`: Activated `.4.0` from clean `7c2ff407`, read the complete supplied revision, froze the exact local
+  route/control/debt contract, opened the separate containment owner, and root-caused stale root `test_input/`.
+  Focused checks and canonical CI pass without changing README, policy, checker, registry, or executable behavior;
+  `.4.1` remains dependency-ordered behind atomic commit, brief clearing, and clean proof.

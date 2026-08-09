@@ -1,5 +1,24 @@
 # ARCHITECTURE STATE
 
+## README route-pressure closure is ratified before enforcement
+
+`README-STABILITY-POLICY.4.0` refines the existing bounded landing-page doctrine without changing current
+enforcement yet. The implementation contract is one project-owned
+`doctrine/readme_stability/routes.jsonl` registry with 20 lifecycle-controlled surfaces and exactly 62 declared
+`reader_navigation` or `author_overflow` routes, including policy/enforcement origins, plus an unconditional
+core-Perl checker invoked by
+`scripts/check_readme_stability.sh`. It checks candidate coverage, transitive acyclic closure, independent
+line/byte/per-file/file-count/aggregate limits, generated freshness, external/frozen/executable terminals,
+immutable debt baselines, finite transition owners, and reviewed limit increases.
+
+The clean audit records pressure debt rather than normalizing it: `LIVE_ACHIEVEMENT_STATUS.md` is
+14,769 lines / 1,262,969 bytes; `docs/tasks/` is 85 files / 6,204,304 bytes with one 2,720,175-byte part;
+`CHANGES.md` is 44,128 lines / 3,091,199 bytes; and `DEVELOPMENT_NOTES.md` is 21,169 lines / 2,277,541 bytes.
+`LIVE-DOCUMENT-PRESSURE-CONTAINMENT` owns their bounded-view migrations after README `.4.2` closes. The route
+audit also proves root `test_input/` never existed and was introduced only as stale README navigation by
+`ca846e7a`; `.4.1` owns correction and existence-sensitive mutations. No policy/checker/README/runtime behavior
+changes in the planning leaf.
+
 - `2026-08-09 cursor transaction authored/static contract`: behavior-free
   `FUTURE-PARITY-BACKLOG.14.3.1.0` ratifies four accepted future special forms:
   `recognition_checkpoint()`, `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and

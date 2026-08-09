@@ -1,5 +1,34 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-09 — README routing-pressure closure is ratified before enforcement
+
+`README-STABILITY-POLICY.4.0` starts from clean cursor-contract commit `7c2ff407` as intended atomic 173/300 with
+no push. It reads the complete director-supplied revision and adopts its project-neutral semantics behind a
+LinkedSpec-owned authority fence. The root README remains exactly 105 lines / 5,072 bytes with hard 128-line /
+6,144-byte ceilings; no policy or checker behavior changes in this audit slice.
+
+The implementation contract contains exactly 62 planned routes over 20 controlled surfaces: 39 README reader
+routes after one stale-marker correction, 18 author-overflow routes, and five policy/enforcement routes. One
+strict root-relative JSONL registry will define lifecycle, control, thresholds, ownership, closure, external/query
+terminals, and immutable debt. One dependency-free Perl checker will validate the staged resulting tree
+unconditionally and exercise 32 mutation classes. Warning and rollover milestones are 80% and 90%; every limit
+change needs a newly accepted, indexed decision record naming exact old and new canonical limits.
+
+Clean measurements identify legacy pressure at live status, task evidence, changes, and engineering notes.
+`LIVE-DOCUMENT-PRESSURE-CONTAINMENT` now owns later bounded-view migrations; ordinary feature work may neither
+refresh those baselines nor spend their finite transition allowances. This audit also finds that original README
+adoption `ca846e7a` advertised nonexistent root `test_input/`; current fixtures are under `t/`, `tests/`, and the
+nested Pgen tree. `.4.1` owns the correction and route-existence mutation proof.
+
+No source, runtime, backend, fixture, CLI, storage, hosted-CI, or user-visible language behavior moves. ADR `0063`,
+Knowledge, task/index, roadmaps, architecture, continuity, and the sole-facing book record the frozen plan;
+implementation may start only after focused and canonical signoff, atomic commit, brief clearing, and clean proof.
+
+That signoff now passes: Knowledge 795/6,574, memory 60/60, task metadata, README 105/128 and 5,072/6,144, all
+seven doctrines, and the 78-file / 14,260-KiB book are green. Canonical CI proves MCP 5/5 + 6/6 complete/141,
+Rust semantic 82.69 seconds, Julia semantic 416/416 in 32.4 seconds, cursor 288, repository containment and moved-
+root execution, CLI 66x2, RAM 53%, and Phase 0 1,031/1,031 in 688 seconds before its exact success marker.
+
 ## 2026-08-09 — Exact future cursor-transaction syntax and effects are ratified behavior-free
 
 `FUTURE-PARITY-BACKLOG.14.3.1.0` activates from clean audit commit `c8fcea6f` as intended 172/300 with no push.
