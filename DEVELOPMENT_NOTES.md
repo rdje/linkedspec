@@ -1,5 +1,20 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-09 (`FUTURE-PARITY-BACKLOG.14.2.7` — typed-source value/helper closeout): this is strict no-change
+  recomposition. Reuse `tools/check_typed_source_location_six_runtime.sh`; do not add an umbrella consumer,
+  replacement oracle, second source authority, new rollout row, or final-public claim.
+- The committed route remains neutral→Perl→Rust→Dart→Julia→PUC Lua→LuaJIT→generated-source→capability→language.
+  Exact closure proof is 8/6/53, Perl 10, Rust/Dart 4/4, Julia 127, Lua 240/240, generated-source strict Rust
+  105/105, capability 80/0/0, and language 246/105+1/122.
+- Closing `.14.2` means the six internal immutable value/helper projections are composition-complete. It does not
+  make `Position` or `Span` authored values, add checkpoint/transaction behavior, change existing registers/results,
+  or consume the combined `.14.8` recurring/public no-drift row. `.14.3` is the next behavior owner after a clean
+  closeout commit.
+- Closeout signoff is exact: sole-facing book 79 files/14,212 KiB with isolated rendered paragraphs, Knowledge
+  790/6,526, all seven doctrines, six-family containment, moved/outside-CWD execution, reference CLI 66x2, RAM
+  82%, and Phase 0 1,031/1,031 in 691 seconds. Require the exact local-CI pass marker and clean atomic 170/300
+  landing before activating `.14.3`; do not rerun or replace the already-admitted typed-source implementation.
+
 - 2026-08-09 (`FUTURE-PARITY-BACKLOG.14.2.6` — typed-source recurring composition): the recurring driver is an
   orchestrator, not a seventh value model. Preserve exact fail-fast order: neutral; Perl values plus projections;
   Rust; Dart; Julia; PUC Lua; LuaJIT; then generated-source, capability, and language-coverage ledgers.

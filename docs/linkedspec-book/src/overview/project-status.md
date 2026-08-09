@@ -57,6 +57,10 @@ Canonical CI requires and syntax-checks that driver; `LINKEDSPEC_RUN_TYPED_SOURC
 all-toolchain route. Five backend consumer groups map to six runtime routes because the shared Lua source runs once
 on each ABI. Eleven independent topology mutations account for the checker increase from 42 to 53.
 
+An unchanged `FUTURE-PARITY-BACKLOG.14.2.7` recomposition reruns that complete authority and closes the internal
+value/helper implementation slice `.14.2`. This is a project-state closure, not a new language surface: the six
+admitted runtimes, helper results, schemas, and 8-complete/6-pending rollout remain unchanged.
+
 Public typed values, transaction spelling and behavior, recursive observation, span-native progressive/staged
 dispatch, and all public authored surfaces remain future work. The internal
 Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT admissions do not add an authored `Position` or `Span` value, transaction

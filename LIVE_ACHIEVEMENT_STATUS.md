@@ -1,5 +1,26 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-09 — Typed source-location internal values and helper projections are composition-closed
+
+`FUTURE-PARITY-BACKLOG.14.2.7` activates from clean recurring-proof commit `3ac89665` as intended 170/300 with no
+push. It adds no replacement implementation or umbrella test. The committed recurring authority passes unchanged:
+neutral 8 complete / 6 pending / 53 mutations, Perl 10, Rust/Dart 4/4, Julia 127, PUC Lua/LuaJIT 240/240,
+generated-source strict Rust 105/105, capability 80/0/0, and language 246/105+1/122.
+
+Immediately after that proof, the task tree is the only changed path. Runtime modules, admitted consumers, fixtures,
+contract/checker, generated sources, schemas, helper results and host-unit registers, DSL, CLI, root README,
+storage routing, hosted workflows, and the combined `.14.8` row remain byte-committed and unchanged.
+
+Internal value/helper parent `.14.2` is therefore composition-closed across Perl, Rust, Dart, Julia, PUC Lua, and
+LuaJIT. This does not expose authored `Position` or `Span` values or transactions. Transaction safety remains
+owned by `.14.3`; recursive observation, progressive/staged span dispatch, and final public examples/tooling/
+no-drift remain later owners through `.14.8`. ADR, Knowledge, roadmap/live records, and the sole-facing book now
+state that boundary. The repository-routed book builds 79 files/14,212 KiB, with direct generated-HTML inspection
+confirming each new explanation is an isolated paragraph; Knowledge is 790/6,526 and all seven doctrines pass.
+Definitive canonical CI proves containment/relocation, CLI 66/66 in both option environments, RAM 82% below the
+88% guard, and Phase 0 1,031/1,031 in 691 seconds before exact `[ci] local CI gate passed` and exit zero. Atomic
+170/300 closes `.14.2` without a push and hands the clean frontier to `.14.3`.
+
 ## 2026-08-09 — Typed source-location has one governed six-runtime recurring proof
 
 `FUTURE-PARITY-BACKLOG.14.2.6` activated task-tree-first from clean Lua admission commit `5dcfc992` as intended

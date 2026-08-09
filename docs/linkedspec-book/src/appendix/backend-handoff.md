@@ -39,6 +39,9 @@
 > `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1`. Five backend source groups map to six runtime routes because the shared
 > Lua source executes on both ABIs. Governance is 8 complete / 6 pending with 53 drift mutations.
 >
+> No-change recomposition `.14.2.7` reruns that exact authority and closes the internal value/helper implementation
+> parent `.14.2`. It adds no replacement backend surface and does not promote the combined final `.14.8` row.
+>
 > Any cursor transaction is one explicit
 > recognition attempt over invocation-local cursor/boundary/marks only; it adds no search tree and cannot undo
 > actions, AST/user state, output/diagnostics, registry work, or host effects. Recursive boundaries remain read-only,

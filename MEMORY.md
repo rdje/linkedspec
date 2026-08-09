@@ -5,16 +5,17 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `5dcfc992` — clean Lua admission HEAD from which recurring composition `.14.2.6` activated
-  task-tree-first (168/300; no push).
-- latest_completed_leaf: recurring typed-source proof `.14.2.6` is signoff-complete under intended subject
-  `FUTURE-PARITY-BACKLOG.14.2.6 - compose typed source runtime proof` as 169/300 with no push.
-- active_work_unit: none after the clean `.14.2.6` landing; recomposition `.14.2.7` remains pending.
-- next_action: prove post-commit clean status, zero-byte brief, valid `HEAD^1` activation pointer, absent rendered
-  book, and zero managed-run residue; then activate `.14.2.7` task-tree-first as the sole diff.
-- in_flight_uncommitted: none in the intended clean post-landing state.
-- blockers: none. Full recurrence, book/Knowledge, all seven doctrines, canonical containment/relocation, CLI 66x2,
-  RAM 78%, and Phase 0 1,031/1,031 in 669 seconds pass with the exact local-CI marker and exit zero.
+- activation_commit: `3ac89665` — clean recurring-proof HEAD from which no-change recomposition `.14.2.7`
+  activated task-tree-first (169/300; no push).
+- latest_completed_leaf: typed-source value/helper closeout `.14.2.7` lands under intended subject
+  `FUTURE-PARITY-BACKLOG.14.2.7 - recompose typed source value rollout` as atomic 170/300 with no push.
+- active_work_unit: none after the clean `.14.2.7` landing; parent `.14.2` is composition-closed.
+- next_action: prove post-commit status/diffs, zero-byte brief, memory pointer, Knowledge freshness, absent book,
+  and zero managed-run residue; then activate transaction-safety `.14.3` task-tree-first from the clean commit.
+- in_flight_uncommitted: none after atomic `.14.2.7` landing.
+- blockers: none. The unchanged recurring authority passes 8/6/53, Perl 10, Rust/Dart 4/4, Julia 127, Lua 240/240,
+  generated-source, capability 80/0/0, and language 246/105+1/122. Definitive canonical CI passes CLI 66x2,
+  RAM 82%, and Phase 0 1,031/1,031 in 691 seconds; no background job remains.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes, and 11 topology mutations advance governance to 53. Public authored values/transactions remain future.
@@ -39,12 +40,12 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_semantic_governance: capability 80/0/0; semantic six groups / 20 responses / 128 mutations, rollout 9/9,
   native admission 6/6; MCP rollout complete/141.
 - preserved_contract_handoff: repeated-action closure next_owner remains `FUTURE-PARITY-BACKLOG.10.1`.
-- current_future_direction: ADR `0056` continues through `.14.2.7-.14.8`; rendered mdBook readability remains
-  queued and nonurgent; `.14.2.7` may activate only after the `.14.2.6` landing is proven clean.
+- current_future_direction: internal value/helper parent `.14.2` is composition-closed; transaction safety `.14.3`
+  is the next clean activation, and `.14.8` retains final public no-drift.
 - latest_bootstrap_read: 2026-08-09 — bootstrap/memory/task/roadmap, ADR `0056`, typed-source neutral/rollout and
   recurring precedents, storage/canonical owners, exact consumer/driver authorities, history, and sole-facing
   status claims refreshed.
-- pivot_guard: prove `.14.2.6` committed, brief-cleared, pointer-valid, residue-free, and clean before `.14.2.7`.
-- push_policy: hard lock at 300 new local commits; `.14.2.6` is 169/300 after landing; no push.
+- pivot_guard: prove `.14.2.7` post-commit clean before activating transaction `.14.3` task-tree-first.
+- push_policy: hard lock at 300 new local commits; `.14.2.7` is atomic 170/300; no push.
 - environment: use project-data wrappers; `perl -Iperl`; canonical nested macOS containment may require approved
   execution and up to 30 minutes.

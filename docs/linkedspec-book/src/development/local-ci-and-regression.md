@@ -105,6 +105,10 @@ paths, missing/reordered/duplicated runtime routes, command or source-binding dr
 driver/switch drift, and premature completion of the combined final row. Rollout therefore remains 8 complete /
 6 pending until `FUTURE-PARITY-BACKLOG.14.8` closes program-wide public no-drift.
 
+No-change recomposition `.14.2.7` reruns this exact driver and closes the internal six-runtime value/helper parent
+`.14.2`. It adds no umbrella test or replacement oracle. Transactions remain owned by `.14.3`, and the combined
+recurring/public no-drift row remains pending under `.14.8`.
+
 The gate unconditionally verifies the neutral MCP transport before checking all five derived bindings. It requires
 every contract artifact and runs the generators in this exact order before the admitted implementation proofs:
 

@@ -1,5 +1,22 @@
 # ARCHITECTURE STATE
 
+- `2026-08-09 typed source-location value/helper closure`: `FUTURE-PARITY-BACKLOG.14.2.7` recomposes the committed
+  neutral contract, six admitted runtime routes, recurring driver, and three support ledgers without replacement
+  implementation. Exact proof remains neutral 8 complete / 6 pending / 53 mutations, Perl 10, Rust/Dart 4/4,
+  Julia 127, PUC Lua/LuaJIT 240/240, generated-source strict Rust 105/105, capability 80/0/0, and language
+  246 current names / 105 corpus + 1 named-mark fixture / 122 public Perl contracts.
+
+  This closes internal immutable value/helper parent `.14.2`; it does not add authored `Position`/`Span` values,
+  change host-unit registers or helper results, introduce transactions, revise a descriptor/schema, or promote
+  the combined `.14.8` recurring/public no-drift row. ADR `0056` now records `.14.2` complete, transaction safety
+  remains `.14.3`, and final examples/tooling/no-drift remain `.14.8`. Before lockstep documentation changes, the
+  owning task tree was the sole diff, proving executable owners stayed committed and unchanged.
+
+  Five sole-facing pages build as 79 files/14,212 KiB and preserve each new explanation as an isolated rendered
+  paragraph; Knowledge remains 790/6,526. All seven doctrines and definitive canonical CI pass, including
+  six-family containment, moved/outside-CWD execution, CLI 66x2, RAM 82%, and Phase 0 1,031/1,031 in 691 seconds
+  before the exact local-CI marker and exit zero. Atomic 170/300 closes `.14.2` without a push.
+
 - `2026-08-09 typed source-location recurring composition`: `FUTURE-PARITY-BACKLOG.14.2.6` adds one
   repository-routed fail-fast driver over the already-admitted internal consumers. Execution order is neutral,
   Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, then generated-source, capability, and language-coverage ledgers.

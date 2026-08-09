@@ -17522,7 +17522,8 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   Commit: `FUTURE-PARITY-BACKLOG.14.1.3 - close typed source location contract`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2`
-  Status: `active` (2026-08-01; split task-tree-first from clean `0d1b7378`, 135/300, no push)
+  Status: `done; composition-closed` (2026-08-09; completed through no-change child `.14.2.7`, atomic 170/300,
+    no push)
   Goal: Implement immutable position/span/provenance values and current-helper projections in the Perl reference,
     then admit the same neutral contract independently in Rust, Dart, Julia, PUC Lua, and LuaJIT.
   Children: `.14.2.0`, `.14.2.0.1`, `.14.2.1-.14.2.7`; backend parents `.14.2.1-.5` each own audit, core,
@@ -17732,8 +17733,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   Commit: `FUTURE-PARITY-BACKLOG.14.2.0.1 - correct typed source rollout truth`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.1`
-  Status: `active` parent (2026-08-01; Perl authority/RED `.0`, immutable core `.1`, projection `.2`, and exact
-    admission/promotion `.3` are signoff-complete; Rust authority/RED `.14.2.2.0` is next after clean `.3`)
+  Status: `completed` parent (all four Perl children landed; closure reverified by `.14.2.7`)
   Goal: Implement and admit the immutable typed source-location algebra in the Perl reference while preserving
     existing helper compatibility through explicit projections.
   Children: `.14.2.1.0` authority/RED audit; `.14.2.1.1` immutable value/conversion core; `.14.2.1.2` helper
@@ -18072,8 +18072,8 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   changed. Commit, brief clearing, and exact clean proof precede task-tree-first Rust `.14.2.2.0`; no push.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.2`
-  Status: `signoff-complete` parent (2026-08-07; all audit, correction, parity, RED, core, projection, and exact
-    admission children verified; atomic commit pending)
+  Status: `completed` parent (all audit, correction, parity, RED, core, projection, and exact admission children
+    landed; closure reverified by `.14.2.7`)
   Goal: Implement and independently admit the same neutral typed source-location algebra in Rust.
   Children: `.14.2.2.0` authority/split audit; `.14.2.2.0.1` neutral alias-target correction;
     `.14.2.2.0.2` five-alias Rust parity; `.14.2.2.0.3` exact typed-source RED; `.14.2.2.1` immutable
@@ -20533,9 +20533,82 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   managed-run cleanup, and clean status proof are the mechanical landing steps before `.14.2.7` activation.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.7`
-  Status: `pending`
+  Status: `done; signoff-complete` (2026-08-09; task-tree-first from clean recurring-proof commit `3ac89665`,
+    atomic 170/300, no push)
   Goal: Recompose the committed rollout correction, five backend implementations, six runtime admissions, and
     recurring driver unchanged; close `.14.2` and hand one clean next action to transaction safety `.14.3`.
+  Depends on: `.14.2.6`
+  Acceptance: Prove the committed neutral values/projections, all six runtime admissions, exact recurring topology,
+    support ledgers, and current public/future boundary compose without replacement implementation, contract,
+    fixture, schema, helper, CLI, or rollout movement. Close `.14.2` only after lockstep book/Knowledge/live truth,
+    definitive canonical signoff, atomic commit, and clean handoff.
+  Verification: clean activation; Knowledge-first owner retrieval; committed-source/no-replacement census; exact
+    six-runtime recurring driver; support/capability/language ledgers; sole-facing book render and paragraph-block
+    inspection; Knowledge, memory, task metadata, README, doctrines, canonical CI, atomic commit, and clean proof
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.7 - recompose typed source value rollout`
+
+  ### `FUTURE-PARITY-BACKLOG.14.2.7` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove `.14.2.6` landed atomically at `3ac89665` as 169/300 with
+    first parent `5dcfc992`, empty status/diffs, zero-byte brief, valid post-commit pointer, absent rendered book,
+    zero managed-run residue, and this task-tree file as the sole activation diff.
+  - [x] **RETRIEVE / FREEZE RECOMPOSITION BOUNDARY** — Follow ADR `0056`, the `.14.2.0` frozen implementation plan,
+    current typed-source Knowledge owners, exact runtime admissions, recurring topology, and sole-facing claims;
+    reject replacement implementation or premature `.14.8` public no-drift promotion.
+  - [x] **COMMITTED OWNER RECOMPOSITION** — Run the unchanged neutral checker and exact neutral→Perl→Rust→Dart→
+    Julia→PUC-Lua→LuaJIT→three-ledger driver; prove five consumer groups, six routes, 8/6/53 governance, 80/0/0
+    capability, and 246/105+1/122 language coverage remain exact.
+  - [x] **NO-REPLACEMENT / NO-DRIFT CENSUS** — Prove no production runtime, existing consumer, fixture, contract,
+    schema, descriptor, helper result/register, DSL, CLI, root README, storage root, hosted workflow, or combined
+    `.14.8` rollout row moves in this closeout.
+  - [x] **LOCKSTEP / PARENT CLOSURE** — Synchronize task/roadmap/memory/change/development/architecture/live and the
+    sole-facing book to the verified committed state; close `.14.2` while retaining transactions `.14.3` and final
+    examples/tooling/no-drift `.14.8` as future owners.
+  - [x] **VERIFY / COMMIT / CLEAN HANDOFF** — Pass focused recurrence, rendered book, Knowledge/memory/task/README,
+    all doctrines, definitive canonical CI, atomic commit 170/300, brief clearing, pointer validation, managed-run
+    cleanup, and clean proof before `.14.3` activation.
+
+  Activation evidence 2026-08-09: recurring composition `.14.2.6` lands atomically at `3ac89665` as 169/300 with
+  first parent `5dcfc992` and no push. Its hook regenerates Knowledge at 790/6,526, passes all seven doctrines, and
+  validates `activation_commit 5dcfc992` before and after commit. Status and staged/unstaged diffs are empty, the
+  ignored brief is zero bytes, post-commit memory architecture and Knowledge freshness pass, rendered book output
+  is absent, and managed-run census reports `found=0 removed=0 skipped=0`. This task-tree file is the sole activation
+  diff before any closeout evidence, book, Knowledge, roadmap, memory, live-doc, or other change.
+
+  Retrieval evidence 2026-08-09: ADR `0056` sections 8-9, the complete `.14.2.0` frozen plan, neutral-contract,
+  runtime-rollout, and recurring-gate Knowledge owners all agree on one closeout boundary. Each backend already
+  owns one admitted internal source authority/value/projection path; host-unit registers and external helper values
+  remain unchanged; only four private value diagnostics belong to `.14.2`; and the committed driver is the exact
+  recurrence authority. This leaf adds no replacement consumer, implementation, fixture, artifact, schema, helper,
+  authored typed facade, transaction, progressive/staged dispatch, or rollout promotion. It recomposes 8/6/53 and
+  closes `.14.2`; transactions remain `.14.3`, while the combined recurring/public no-drift row and public examples/
+  tooling remain `.14.8`.
+
+  Recomposition/no-replacement evidence 2026-08-09: the committed
+  `tools/check_typed_source_location_six_runtime.sh` exits zero without changing a tracked executable owner. It
+  reports neutral 8 complete / 6 pending / 53 mutations, Perl 10 tests, Rust 4, Dart 4, Julia 127, PUC Lua 240,
+  LuaJIT 240, generated-source v1 with strict Rust 105/105, capability schema v2 at 80/0/0, and language coverage
+  246 current names / 105 corpus + 1 exact named-mark fixture / 122 public Perl contracts. Immediately afterward,
+  status and `git diff --name-only` contain only this task-tree file. No runtime, consumer, fixture, artifact,
+  checker, schema, generated source, helper, CLI, README, storage, hosted-workflow, or `.14.8` row changed.
+
+  Lockstep/render evidence 2026-08-09: ADR `0056` now records the internal six-runtime value/projection slice
+  complete while retaining `.14.3-.8`; existing neutral, rollout, and recurring Knowledge owners record the same
+  no-change closeout; parent/backend task summaries, both roadmaps, task index, memory, changes, development,
+  architecture, and live status align. Five sole-facing pages add only isolated closeout paragraphs. The supported
+  repository-routed mdBook build produces 79 files / 14,212 KiB, and direct HTML inspection proves every new status
+  paragraph is its own `<p>` with preceding/following material in separate blocks. No screenshot claim is made
+  because the in-app browser surface is unavailable. Knowledge remains exact at 790 facts / 6,526 question keys,
+  memory is 52/60 lines, whitespace is clean, generated book output is removed, and the diff remains 18 task/ADR/
+  Knowledge/book/live documents with no executable or root README path.
+
+  Canonical/landing evidence 2026-08-09: all seven doctrines, six-family process containment, moved/outside-CWD
+  execution, both reference CLI environments at 66/66, and the unchanged composed semantic/MCP/typed-source gates
+  pass in the definitive approved local-CI run. RAM is 82% below the 88% guard; Phase 0 passes 1,031/1,031 in 691
+  wall-clock seconds; optional typed-source execution is recognized and default-skipped after its focused exact
+  run; the gate emits exact `[ci] local CI gate passed` and exits zero. Atomic commit 170/300, zero-byte brief,
+  pointer validation, zero managed-run residue, and clean status/diffs complete the mechanical handoff. Parent
+  `.14.2` is composition-closed; `.14.3` is the sole next activation and `.14.8` remains unconsumed.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3`
   Status: `pending`
@@ -22726,16 +22799,16 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 99.1 | `FUTURE-PARITY-BACKLOG.14.1.1` | `done` | The v1 neutral contract/checker, fixtures/mutations, tracked canonical route, truthful status docs, and complete canonical signoff pass. |
 | 99.2 | `FUTURE-PARITY-BACKLOG.14.1.2` | `done` | Sole-facing 0/1/2-regex linked teaching and five accurate compatibility reframings pass complete signoff. |
 | 99.3 | `FUTURE-PARITY-BACKLOG.14.1.3` | `done` | Committed contract/public teaching recompose unchanged under complete canonical signoff; `.14.1` closes. |
-| 100 | `FUTURE-PARITY-BACKLOG.14.2` | `active` | Implement immutable values/helper projections and admit all six runtimes through audited children `.0-.7`. |
+| 100 | `FUTURE-PARITY-BACKLOG.14.2` | `done` | Immutable values/helper projections are composition-closed across all six runtimes through audited children `.0-.7`. |
 | 100.0 | `FUTURE-PARITY-BACKLOG.14.2.0` | `done` | Stale public rollout truth is root-caused and the exact value/projection/admission plan is signoff-complete before behavior. |
 | 100.0.1 | `FUTURE-PARITY-BACKLOG.14.2.0.1` | `done` | Live rollout is 3/11 with 37 mutations, exact backend owners, and synchronized Knowledge/book truth; no runtime behavior. |
-| 100.1 | `FUTURE-PARITY-BACKLOG.14.2.1` | `pending` | Audit, implement, project, and admit the Perl reference through `.0-.3`. |
-| 100.2 | `FUTURE-PARITY-BACKLOG.14.2.2` | `pending` | Audit, implement, route, and admit Rust through `.0-.3`. |
-| 100.3 | `FUTURE-PARITY-BACKLOG.14.2.3` | `pending` | Audit, implement, route, and admit Dart through `.0-.3`. |
-| 100.4 | `FUTURE-PARITY-BACKLOG.14.2.4` | `pending` | Audit, implement, route, and admit Julia through `.0-.3`. |
-| 100.5 | `FUTURE-PARITY-BACKLOG.14.2.5` | `pending` | Audit, implement, route, and admit shared Lua independently on both ABIs through `.0-.3`. |
+| 100.1 | `FUTURE-PARITY-BACKLOG.14.2.1` | `done` | Perl immutable values, projections, and exact runtime admission are complete through `.0-.3`. |
+| 100.2 | `FUTURE-PARITY-BACKLOG.14.2.2` | `done` | Rust prerequisite corrections, immutable values, projections, and exact runtime admission are complete. |
+| 100.3 | `FUTURE-PARITY-BACKLOG.14.2.3` | `done` | Dart prerequisites, immutable values, projections, and exact runtime admission are complete. |
+| 100.4 | `FUTURE-PARITY-BACKLOG.14.2.4` | `done` | Julia prerequisites, immutable values, projections, and exact runtime admission are complete. |
+| 100.5 | `FUTURE-PARITY-BACKLOG.14.2.5` | `done` | Shared Lua immutable values/projections are admitted independently on PUC Lua and LuaJIT. |
 | 100.6 | `FUTURE-PARITY-BACKLOG.14.2.6` | `done` | Exact repository-routed six-runtime recurrence is signoff-complete without consuming final public `.14.8`. |
-| 100.7 | `FUTURE-PARITY-BACKLOG.14.2.7` | `pending` | Recompose unchanged, close `.14.2`, and hand off cleanly to `.14.3`. |
+| 100.7 | `FUTURE-PARITY-BACKLOG.14.2.7` | `done` | Unchanged recomposition and complete canonical signoff close `.14.2` and hand off cleanly to `.14.3`. |
 | 101 | `FUTURE-PARITY-BACKLOG.14.3` | `pending` | Implement bounded cursor transactions plus progress and safety diagnostics. |
 | 102 | `FUTURE-PARITY-BACKLOG.14.4` | `pending` | Expose recursive entry/match/exit boundaries and bounded provenance read-only. |
 | 103 | `FUTURE-PARITY-BACKLOG.14.5` | `pending` | Compose stable slots and separately owned inter-match gap spans without owner duplication. |

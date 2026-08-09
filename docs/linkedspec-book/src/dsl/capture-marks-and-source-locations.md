@@ -130,6 +130,9 @@ language-coverage ledgers. Canonical CI exposes the same all-toolchain proof beh
 `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1`. Five backend consumer groups become six routes because one shared Lua
 source executes independently on both ABIs. The extra 11 mutations reject topology drift, not authored behavior.
 
+The unchanged `.14.2.7` recomposition reruns that authority and closes the six-runtime internal value/helper
+implementation slice. It does not add an authored value or advance the 8-complete/6-pending public rollout.
+
 There is still no public `Position` or `Span` authored value, checkpoint syntax, transaction behavior, recursive
 observation API, or span-native parser dispatch. Those remain owned by later leaves. The combined recurring/public
 no-drift rollout row remains pending for final closeout `FUTURE-PARITY-BACKLOG.14.8`, so recurring composition does

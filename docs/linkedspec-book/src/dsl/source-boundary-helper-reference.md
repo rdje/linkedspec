@@ -124,6 +124,9 @@ That recurring driver executes the neutral contract, the five backend consumer g
 and the generated-source, capability, and language-coverage ledgers. It changes none of the helper results in this
 reference. Canonical CI offers the same all-toolchain route through `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1`.
 
+No-change closeout `.14.2.7` reruns that driver and composition-closes the internal value/helper implementation.
+The preferred names, compatibility aliases, return values, and final `.14.8` public no-drift owner stay unchanged.
+
 For example, this migration-only fixture returns `["é🙂  ", 4, 4, 6]` for input `é🙂  ab` on Perl, Rust, Dart,
 Julia, PUC Lua, and LuaJIT:
 

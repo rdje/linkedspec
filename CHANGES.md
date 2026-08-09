@@ -1,5 +1,22 @@
 # CHANGES
 
+## 2026-08-09 — FUTURE-PARITY-BACKLOG.14.2.7 — recompose typed source value rollout
+
+- Re-ran the committed typed source-location recurring authority unchanged: neutral 8/6/53, Perl 10, Rust/Dart
+  4/4, Julia 127, PUC Lua/LuaJIT 240/240, generated-source strict Rust 105/105, capability 80/0/0, and language
+  246/105+1/122 all pass.
+- Proved the pre-lockstep working diff contained only the owning task tree. No runtime implementation, existing
+  consumer, fixture, contract/checker, schema, helper result/register, DSL, CLI, root README, storage root, hosted
+  workflow, or combined `.14.8` rollout row changed.
+- Composition-closed internal value/helper parent `.14.2`, corrected its five backend-parent summary rows, and
+  retained transactions under `.14.3` plus final public examples/tooling/no-drift under `.14.8`.
+- Synchronized ADR `0056`, Knowledge owners, roadmap/live continuity, and the sole-facing book. The new book status
+  paragraphs are isolated blocks and accurately describe project closure without claiming new user behavior.
+- Passed the 79-file/14,212-KiB book build and direct generated-HTML paragraph inspection, Knowledge 790/6,526,
+  all seven doctrines, and definitive canonical CI. The canonical run proves containment/relocation, CLI 66x2,
+  RAM 82%, and Phase 0 1,031/1,031 in 691 seconds before exact `[ci] local CI gate passed` and exit zero. Atomic
+  commit 170/300 closes `.14.2`; no push.
+
 ## 2026-08-09 — FUTURE-PARITY-BACKLOG.14.2.6 — compose typed source runtime proof
 
 - Added `tools/check_typed_source_location_six_runtime.sh` as one repository-routed recurring driver. It runs the

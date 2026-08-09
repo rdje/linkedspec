@@ -1,8 +1,8 @@
 # ADR 0056: Typed source-location algebra governs cursor, spans, and parser composition
 
 - Date: 2026-07-29
-- Status: accepted; neutral/public contract complete, six-runtime value/projection plan frozen, implementation
-  pending under `FUTURE-PARITY-BACKLOG.14.2-.8`
+- Status: accepted; neutral/public contract and six-runtime internal value/projection implementation complete;
+  transactions through final public no-drift remain under `FUTURE-PARITY-BACKLOG.14.3-.8`
 - Tags: architecture, cursor, source-location, spans, capture, recursion, parser-composition, diagnostics, portability
 
 ## Context
