@@ -1,5 +1,26 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-07 — Julia typed source-location runtime is admitted
+
+`FUTURE-PARITY-BACKLOG.14.2.4.3` activated task-tree-first from clean Julia projection commit `779e9757` as
+intended 162/300 with no push. The unchanged 127-assertion consumer is now included exactly once by ordinary Julia
+package discovery and executed unconditionally by canonical CI through the repository-routed project-data wrapper.
+
+Only `julia_runtime` moves to complete. The neutral contract/checker is now 7 complete / 7 pending / 41 mutations
+and independently locks the tracked path, exact command, ordinary include count, absence of stale dormancy, and
+Julia completed-to-pending regression. Production source, zero-based UTF-8 code-unit registers, public helper
+results and mutations, runtime carriers, schemas, semantic/MCP/capability surfaces, DSL, README, and other backends
+remain unchanged.
+
+Focused admission passes 127/127. Complete Julia passes byte-fresh 120,030-byte MCP bindings, ordinary package
+tests including typed source 127/127 and aliases 141/141, storage 19/5, primary CLI, corpus 105/105, and its exact
+pass marker. The sole-facing book is synchronized across five affected pages; rendered inspection, Knowledge Map,
+and artifact cleanup pass at 79 files / 14,172 KiB with separate paragraph/command/limitation blocks. The derived
+Knowledge Map passes at 787/6,467, and all seven doctrines pass. Definitive canonical CI proves capability 80/0/0,
+typed source 7/7/41 with Julia 127/127, all byte-fresh MCP and composed semantic/MCP admissions, six-family
+containment plus relocated/moved/outside-CWD execution, CLI 66x2, RAM 79%, and Phase 0 1,031/1,031 in 716 seconds
+before the exact pass marker. Only atomic commit 162/300, brief clearing, and clean proof remain.
+
 ## 2026-08-07 — Julia typed source projections are implemented but not admitted
 
 `FUTURE-PARITY-BACKLOG.14.2.4.2` activates task-tree-first from clean immutable-core commit `4d394752` as intended

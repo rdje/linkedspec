@@ -106,8 +106,9 @@ Perl, Rust, Dart, and Julia execute all five rows identically to their preferred
 `entry_named_map()` and `match_named_map()`, this gives all four backends all seven callable compatibility
 aliases. The aliases do not select a legacy coordinate model: text endpoints, Unicode-scalar widths, `undef` for
 reversed spans, boundary mutation, named-map shapes, and generated-parser behavior are the same as the preferred
-spelling. Julia's typed source-location values and projections remain pending independently of this spelling-only
-parity; Lua alias rollout is also pending. Portable new code should therefore still use the preferred names.
+spelling. Julia's internal typed source-location value/projection layer is admitted independently of this
+spelling-only parity, while Lua alias rollout remains pending. Portable new code should therefore still use the
+preferred names.
 
 For example, this migration-only fixture returns `["é🙂  ", 4, 4, 6]` for input `é🙂  ab` on Perl, Rust, Dart,
 and Julia:

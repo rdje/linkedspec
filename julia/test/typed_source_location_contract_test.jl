@@ -1,58 +1,26 @@
-# FUTURE-PARITY-BACKLOG.14.2.4.0.2 — dormant Julia typed source-location RED.
+# FUTURE-PARITY-BACKLOG.14.2.4.3 — admitted Julia typed source-location consumer.
 #
-# Ordinary Julia discovery is the explicit include list in `test/runtests.jl`;
-# that list deliberately omits this pre-admission consumer. Run either mode
-# through repository-local project data from the repository root:
+# Ordinary Julia discovery includes this consumer from `test/runtests.jl`.
+# Run the focused contract through repository-local project data from the
+# repository root:
 #
-#   LINKEDSPEC_JULIA_TYPED_SOURCE_RED_MODE=core \
-#     bash tools/run_julia_project_data.sh --project=julia \
-#       --startup-file=no --history-file=no -e \
-#       'using LinkedSpecJulia, JSON3, Test; include("julia/test/typed_source_location_contract_test.jl")'
-#
-#   LINKEDSPEC_JULIA_TYPED_SOURCE_RED_MODE=projection \
-#     bash tools/run_julia_project_data.sh --project=julia \
-#       --startup-file=no --history-file=no -e \
-#       'using LinkedSpecJulia, JSON3, Test; include("julia/test/typed_source_location_contract_test.jl")'
-#
-# Core implementation makes `core` green. Projection implementation then
-# makes the independently nested `projection` mode green. Admission removes
-# this mode switch and adds the unchanged assertions to `test/runtests.jl`.
+#   bash tools/run_julia_project_data.sh --project=julia \
+#     --startup-file=no --history-file=no -e \
+#     'using LinkedSpecJulia, JSON3, Test; include("julia/test/typed_source_location_contract_test.jl")'
 
 using LinkedSpecJulia
 using JSON3
 using Test
-
-const JULIA_TYPED_SOURCE_RED_MODE = get(
-    ENV,
-    "LINKEDSPEC_JULIA_TYPED_SOURCE_RED_MODE",
-    "core",
-)
-
-if !(JULIA_TYPED_SOURCE_RED_MODE in ("core", "projection"))
-    error(
-        "LINKEDSPEC_JULIA_TYPED_SOURCE_RED_MODE must be 'core' or 'projection', " *
-        "got '$(JULIA_TYPED_SOURCE_RED_MODE)'",
-    )
-end
 
 # The namespace is deliberately private. LinkedSpecJulia already exports an
 # unrelated parser `SourceSpan`; nesting the neutral Position/Span vocabulary
 # prevents a collision and does not create authored DSL or facade methods.
 const JuliaTypedSource = getproperty(LinkedSpecJulia, :SourceLocation)
 
-# Projection lookup is ordered strictly after the core namespace. Today both
-# modes stop at the missing core. Once the core lands, projection mode advances
-# to one exact missing projection API instead of reclassifying that failure.
-const JULIA_TYPED_SOURCE_PROJECTION_ROWS = if JULIA_TYPED_SOURCE_RED_MODE == "projection"
+const JULIA_TYPED_SOURCE_PROJECTION_ROWS =
     getproperty(LinkedSpecJulia, :typed_source_projection_rows)
-else
-    nothing
-end
-const JULIA_TYPED_SOURCE_COMPATIBILITY_ALIASES = if JULIA_TYPED_SOURCE_RED_MODE == "projection"
+const JULIA_TYPED_SOURCE_COMPATIBILITY_ALIASES =
     getproperty(LinkedSpecJulia, :typed_source_compatibility_aliases)
-else
-    nothing
-end
 
 const JULIA_TYPED_SOURCE_CONTRACT = JSON3.read(
     read(
@@ -229,7 +197,7 @@ function _julia_typed_source_assert_carriers(
     @test generated == expected
 end
 
-@testset "Julia dormant typed source-location contract" begin
+@testset "Julia typed source-location contract" begin
     @testset "neutral immutable values and coordinate conversions" begin
         @test JULIA_TYPED_SOURCE_CONTRACT["contract_id"] ==
               "linkedspec-typed-source-location-v1"
@@ -418,66 +386,64 @@ end
         )
     end
 
-    if JULIA_TYPED_SOURCE_RED_MODE == "projection"
-        @testset "detached exact 92 projection rows and seven aliases" begin
-            engine = LinkedSpecRuntimeEngine(
-                compile_spec(parse_spec("Top::\n I { return(\"ok\") }\n")),
-            )
-            expected_rows = JULIA_TYPED_SOURCE_CONTRACT["helper_projections"]
-            rows = JULIA_TYPED_SOURCE_PROJECTION_ROWS(engine)
-            @test rows == expected_rows
+    @testset "detached exact 92 projection rows and seven aliases" begin
+        engine = LinkedSpecRuntimeEngine(
+            compile_spec(parse_spec("Top::\n I { return(\"ok\") }\n")),
+        )
+        expected_rows = JULIA_TYPED_SOURCE_CONTRACT["helper_projections"]
+        rows = JULIA_TYPED_SOURCE_PROJECTION_ROWS(engine)
+        @test rows == expected_rows
 
-            families = JULIA_TYPED_SOURCE_CONTRACT["helper_projection_schema"]["families"]
-            names = String[]
-            for family in families
-                append!(names, String(row[1]) for row in rows[String(family)])
-            end
-            @test length(names) == 92
-            @test length(Set(names)) == 92
-
-            expected_aliases = JULIA_TYPED_SOURCE_CONTRACT["compatibility_aliases"]
-            @test JULIA_TYPED_SOURCE_COMPATIBILITY_ALIASES(engine) == expected_aliases
-            @test length(expected_aliases) == 7
-
-            rows["capture_mark"][1][2] = "wrong"
-            @test JULIA_TYPED_SOURCE_PROJECTION_ROWS(engine) == expected_rows
+        families = JULIA_TYPED_SOURCE_CONTRACT["helper_projection_schema"]["families"]
+        names = String[]
+        for family in families
+            append!(names, String(row[1]) for row in rows[String(family)])
         end
+        @test length(names) == 92
+        @test length(Set(names)) == 92
 
-        @testset "mark capture cursor and alias results on all carriers" begin
-            named_mark_contract = JSON3.read(
-                read(
-                    normpath(
-                        joinpath(
-                            @__DIR__,
-                            "..",
-                            "..",
-                            "capability_conformance",
-                            "complete_named_mark_contract.json",
-                        ),
+        expected_aliases = JULIA_TYPED_SOURCE_CONTRACT["compatibility_aliases"]
+        @test JULIA_TYPED_SOURCE_COMPATIBILITY_ALIASES(engine) == expected_aliases
+        @test length(expected_aliases) == 7
+
+        rows["capture_mark"][1][2] = "wrong"
+        @test JULIA_TYPED_SOURCE_PROJECTION_ROWS(engine) == expected_rows
+    end
+
+    @testset "mark capture cursor and alias results on all carriers" begin
+        named_mark_contract = JSON3.read(
+            read(
+                normpath(
+                    joinpath(
+                        @__DIR__,
+                        "..",
+                        "..",
+                        "capability_conformance",
+                        "complete_named_mark_contract.json",
                     ),
-                    String,
                 ),
-                Dict{String,Any},
-            )
-            fixture = named_mark_contract["fixture"]
-            _julia_typed_source_assert_carriers(
-                fixture["spec_source"],
-                fixture["input"],
-                "typed-source/complete-named-mark.spec",
-                fixture["expected"],
-            )
-            _julia_typed_source_assert_carriers(
-                JULIA_TYPED_SOURCE_CURSOR_SOURCE,
-                "ab",
-                "typed-source/cursor-control.spec",
-                JULIA_TYPED_SOURCE_CURSOR_EXPECTED,
-            )
-            _julia_typed_source_assert_carriers(
-                JULIA_TYPED_SOURCE_ALIAS_SOURCE,
-                "é🙂  ab",
-                "typed-source/compatibility-aliases.spec",
-                JULIA_TYPED_SOURCE_ALIAS_EXPECTED,
-            )
-        end
+                String,
+            ),
+            Dict{String,Any},
+        )
+        fixture = named_mark_contract["fixture"]
+        _julia_typed_source_assert_carriers(
+            fixture["spec_source"],
+            fixture["input"],
+            "typed-source/complete-named-mark.spec",
+            fixture["expected"],
+        )
+        _julia_typed_source_assert_carriers(
+            JULIA_TYPED_SOURCE_CURSOR_SOURCE,
+            "ab",
+            "typed-source/cursor-control.spec",
+            JULIA_TYPED_SOURCE_CURSOR_EXPECTED,
+        )
+        _julia_typed_source_assert_carriers(
+            JULIA_TYPED_SOURCE_ALIAS_SOURCE,
+            "é🙂  ab",
+            "typed-source/compatibility-aliases.spec",
+            JULIA_TYPED_SOURCE_ALIAS_EXPECTED,
+        )
     end
 end

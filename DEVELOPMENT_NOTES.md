@@ -1,5 +1,29 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.4.3` — Julia typed source admission): Julia ordinary test discovery is
+  the explicit include list in `julia/test/runtests.jl`. Admission removes the obsolete RED mode selector from the
+  unchanged final-path consumer, includes it exactly once, and makes the canonical driver run the exact tracked
+  target unconditionally through `tools/run_julia_project_data.sh`. Production `LinkedSpecJulia` source is
+  unchanged.
+- The neutral checker now treats the committed Julia consumer and ordinary include list as governance inputs. It
+  requires the exact repository-routed command, rejects missing or duplicate ordinary inclusion and stale dormancy,
+  and adds Julia's independent completed-to-pending mutation. Only `julia_runtime` changes from pending to complete,
+  so the ledger advances from 6/8/40 to 7/7/41.
+- Focused execution passes all 127 assertions. The complete Julia gate passes its byte-fresh 120,030-byte MCP
+  binding, ordinary package suites including typed source 127/127 and source aliases 141/141, project-data storage
+  19 owners / five locked package trees, primary CLI, corpus 105/105, and exact pass marker.
+
+  The sole-facing book now teaches Julia's internal values/projections as admitted alongside Perl, Rust, and Dart,
+  while public authored Position/Span values, transactions, and PUC-Lua/LuaJIT runtime admissions remain future.
+  Five affected pages are synchronized. The repository-routed render is 79 files / 14,172 KiB; direct HTML
+  inspection proves changed status prose, four runtime commands, rollout result, and following limitations are
+  separate `<p>`/`<pre>` blocks. The artifact is removed. Knowledge Map regenerates and validates at 787/6,467.
+  All seven doctrines pass. Definitive canonical CI proves capability 80/0/0 and typed source 7/7/41, executes
+  Perl 10 plus Rust/Dart 4/4 and Julia 127/127, validates all byte-fresh MCP bindings and composed semantic/MCP
+  admissions, proves six-family containment plus relocated/moved/outside-CWD execution, passes primary CLI 66/66
+  under default and POSIX environments, reports RAM 79% against 88%, and passes Phase 0 1,031/1,031 in 716 seconds
+  before the exact marker. `.14.2.4.3` is signoff-complete for atomic commit 162/300; no push.
+
 - 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.4.2` — Julia typed source projections): one
   `SourceLocation.SourceAuthority` now snapshots `input` in every `_RuntimeExecutionContext`. The context retains
   its established zero-based UTF-8 code-unit registers; private adapters construct scalar Position/Span values only

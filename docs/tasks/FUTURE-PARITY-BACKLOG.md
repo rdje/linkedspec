@@ -19174,9 +19174,8 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   task-tree-first.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.4`
-  Status: `active` parent (2026-08-07; immutable core `.1` landed at `4d394752`; projection routing `.2` is
-    signoff-complete for intended 161/300, no push, and admission `.3` remains inactive until that commit lands
-    clean)
+  Status: `active` parent (2026-08-07; projection routing `.2` landed at `779e9757`; admission `.3` is
+    signoff-complete for intended 162/300, no push)
   Goal: Implement and independently admit the same neutral typed source-location algebra in Julia.
   Children: `.14.2.4.0` authority/prerequisite-split audit; `.14.2.4.0.1` seven-alias Julia parity;
     `.14.2.4.0.2` exact typed-source RED; `.14.2.4.1` immutable value/conversion core; `.14.2.4.2` helper/
@@ -19587,8 +19586,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   therefore activate task-tree-first.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.4.2`
-  Status: `signoff-complete` (2026-08-07; task-tree-first from clean immutable-core commit `4d394752`, intended
-    161/300, no push; atomic landing and clean proof remain)
+  Status: `completed` (`779e9757`, 2026-08-07, 161/300, no push)
   Goal: Route all 92 canonical Julia source-boundary helpers plus seven aliases through the immutable authority at
     the compatibility boundary while preserving established public results and live code-unit registers.
   Depends on: `.14.2.4.1`
@@ -19676,8 +19674,16 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   0. Atomic commit 161/300, ignored-brief clearing, and clean handoff proof remain before task-tree-first admission
   `.14.2.4.3`; no push.
 
+  Commit/handoff evidence 2026-08-07: atomic commit `779e9757` lands with first parent `4d394752`; the hook
+  regenerates Knowledge Map at 787/6,463, passes all seven doctrines, and validates the memory activation pointer
+  against both pre-commit HEAD and post-commit `HEAD^1`. Status plus staged/unstaged diffs are empty, the ignored
+  brief is zero bytes, post-commit memory architecture passes, the generated book is absent, and the exact empty
+  managed-run directory recreated by final verification is removed. Julia admission `.14.2.4.3` may therefore
+  activate task-tree-first.
+
 - ID: `FUTURE-PARITY-BACKLOG.14.2.4.3`
-  Status: `pending` behind Julia projection routing `.14.2.4.2`
+  Status: `signoff-complete` (2026-08-07; task-tree-first from clean projection commit `779e9757`, intended
+    162/300, no push)
   Goal: Admit the unchanged Julia typed-source consumer into ordinary and canonical discovery and promote only the
     neutral `julia_runtime` rollout row.
   Depends on: `.14.2.4.2`
@@ -19691,6 +19697,78 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   Verification: ordinary/canonical Julia consumer green; only `julia_runtime` advances; public book and neutral
     counts/mutations match the exact admitted boundary
   Commit: `FUTURE-PARITY-BACKLOG.14.2.4.3 - admit Julia typed source runtime`
+
+  ### `FUTURE-PARITY-BACKLOG.14.2.4.3` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove projection routing `.14.2.4.2` landed at `779e9757` as
+    161/300 with parent `4d394752`, empty status/diffs, zero-byte brief, valid post-commit memory pointer, absent
+    generated book, and empty project-data run; make this task-tree file the sole activation diff.
+  - [x] **RETRIEVE / EXACT ADMISSION MAP** — Retrieve the dormant consumer, Julia ordinary discovery, complete
+    driver, neutral rollout artifact/checker, admitted Rust/Dart precedents, canonical command registry, project-
+    storage owners, sole-facing pending claims, and Knowledge owners before changing registration.
+  - [x] **ORDINARY JULIA ADMISSION** — Remove dormant-only mode scaffolding without changing assertions or
+    production behavior, include the exact consumer once in `julia/test/runtests.jl`, and preserve repository-
+    routed execution plus project-storage ownership.
+  - [x] **CANONICAL / GOVERNANCE ADMISSION** — Require the tracked ordinary consumer path and one exact repository-
+    routed Julia command in canonical governance; reject omission, duplication, stale dormancy, or an unwrapped
+    command independently.
+  - [x] **JULIA-ONLY ROLLOUT PROMOTION** — Promote only `julia_runtime`, add its completed-to-pending mutation, and
+    preserve every other row, exact helper/value fixture, schema, semantic/MCP/capability surface, README, DSL,
+    production runtime, native code-unit register, result, and carrier.
+  - [x] **SOLE-FACING BOOK LOCKSTEP** — Update every affected mdBook surface from implemented-but-unadmitted to
+    admitted Julia internal values/projections, retain the absence of public authored Position/Span/transaction
+    claims, and keep rendered prose, commands, and limitations in separate readable blocks.
+  - [x] **NO REGRESSION / CLEAN HANDOFF** — Pass focused and complete Julia, recurring neutral/language/storage/
+    corpus/CLI, book/readability, Knowledge, all doctrines, and definitive canonical CI; synchronize durable/live
+    records, commit as 162/300, clear the brief, and prove clean before Lua `.14.2.5.0`.
+
+  Activation evidence 2026-08-07: projection routing `.14.2.4.2` lands atomically at `779e9757` as intended
+  161/300 with first parent `4d394752` and no push. Hooks regenerate Knowledge Map at 787/6,463, pass all seven
+  doctrines, and validate the activation pointer in pre-commit and post-commit Git phases. Status plus staged/
+  unstaged diffs are empty, `git_message_brief.txt` is zero bytes, post-commit memory architecture passes, the
+  generated book is absent, and the exact empty managed-run directory recreated by verification is removed. This
+  task-tree file is the sole activation diff before any Julia consumer/discovery/driver, neutral artifact/checker,
+  book, Knowledge, roadmap, live-doc, or other change.
+
+  Retrieval/design evidence 2026-08-07: Knowledge Map routes the admission question to the typed-source rollout
+  card and ADR `0056`. The final-path Julia consumer is 483 lines with two top-level implementation testsets and
+  two projection/carrier testsets; only one environment mode, one conditional, and stale dormancy comments keep
+  the already-green assertions outside ordinary discovery. `julia/test/runtests.jl` is the explicit include owner,
+  and the consumer allocates no temporary directory, so the exact 19-owner/five-package storage census does not
+  widen. The admitted Dart precedent requires the tracked consumer, exact canonical command, ordinary discovery,
+  stale-dormancy rejection, rollout promotion, and one independent complete-to-pending mutation. Julia needs the
+  same checker/driver topology with its repository-routed wrapper. The five affected sole-facing book surfaces are
+  capture/source mental model, method-reference status, project status, canonical-CI guidance, and backend
+  handoff. Retrieval also proves `ROADMAP.md` stopped at the immutable-core boundary while `ROADMAP_V2.md` reached
+  projection signoff; this leaf must repair both to the same admitted boundary.
+
+  Admission implementation evidence 2026-08-07: the consumer now has no RED-mode environment read, validation,
+  conditional projection block, or dormant wording; its assertion bodies and carrier fixtures are unchanged.
+  `julia/test/runtests.jl` includes it exactly once. Canonical CI requires its tracked path and runs one exact
+  repository-routed focused command. The independent checker requires both ordinary and canonical registration,
+  rejects the three stale dormancy markers, promotes only `julia_runtime`, and adds Julia's completed-to-pending
+  mutation. The neutral artifact/checker advance only from 6/8/40 to 7/7/41. Focused Julia passes 127/127, and the
+  neutral checker reports the exact 3/7/6/3, 8+8, 6, 4, 92+7+2, 31, and 7/7/41 boundary.
+
+  Book/continuity evidence 2026-08-07: the capture/source mental model, source-boundary helper reference, project
+  status, local-CI guide, and backend handoff now report Julia's admitted internal values/projections at 7/7/41
+  while retaining absent public authored Position/Span values, transactions, and PUC-Lua/LuaJIT support. The
+  repository-routed build produces 79 files / 14,172 KiB. Direct generated-HTML inspection proves changed status
+  prose, each Perl/Rust/Dart/Julia command, rollout result, and following limitations remain distinct `<p>` and
+  `<pre>` blocks rather than one stitched blob; the generated book is then removed. Both roadmap projections now
+  agree on admission after retrieval exposed their core/projection drift. The two Knowledge owners are current,
+  and the derived map regenerates and validates at 787 facts / 6,467 question keys.
+
+  Signoff evidence 2026-08-07: focused Julia passes 127/127; complete Julia passes its byte-fresh 120,030-byte MCP
+  binding, every ordinary package suite including typed source 127/127 and aliases 141/141, storage 19/5, primary
+  CLI, corpus 105/105, and exact Julia marker. Recurring neutral 7/7/41 and language 246/105+1/122 pass. The
+  synchronized book passes as recorded above, Knowledge Map is 787/6,467, and all seven doctrines pass. Definitive
+  canonical CI independently proves capability 80/0/0 and typed source 7/7/41; executes Perl 10, Rust/Dart 4/4,
+  and Julia 127/127; validates byte-fresh MCP bindings and every composed semantic/MCP admission; proves six-family
+  repository containment, relocation, moved-root Rust, and four outside-CWD runtime anchors; and passes primary
+  CLI 66/66 under default and POSIX environments. RAM is 79% against the 88% threshold. Phase 0 passes
+  1,031/1,031 in 716 seconds before exact `[ci] local CI gate passed` and exit 0. Atomic commit 162/300,
+  ignored-brief clearing, and clean handoff proof remain before task-tree-first Lua `.14.2.5.0`; no push.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.5`
   Status: `pending` parent

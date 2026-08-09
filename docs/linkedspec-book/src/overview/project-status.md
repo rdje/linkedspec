@@ -17,10 +17,10 @@ general style. This documentation-only slice changes no parser or runtime behavi
 The backend-neutral typed source-location contract is complete under `FUTURE-PARITY-BACKLOG.14.1.1`. Its
 independent checker passes 3 sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation
 and 8 transaction transitions, 6 recursive observations, 4 structural cases, 92 current helper projections,
-31 diagnostics, and 40 rejected mutations.
+31 diagnostics, and 41 rejected mutations.
 
-Six of 14 rollout legs are complete and 8 remain pending. The neutral contract, public linked-rule structure,
-unchanged neutral/public recomposition, and the Perl, Rust, and Dart runtime admissions are complete. All three
+Seven of 14 rollout legs are complete and 7 remain pending. The neutral contract, public linked-rule structure,
+unchanged neutral/public recomposition, and the Perl, Rust, Dart, and Julia runtime admissions are complete. All four
 runtimes' internal authorities and all 92 helper projections plus 7 aliases are admitted without changing public
 results or their established scalar/byte/code-unit mark and cursor behavior.
 
@@ -35,13 +35,13 @@ canonical CI now require that consumer, and the neutral checker rejects any regr
 
 The Julia runtime now implements the same immutable value/projection boundary beneath all 92 helpers and 7 aliases.
 Its explicit consumer passes native, reconstructed, and generated-plan routes while preserving established result
-shapes, mutation timing, and zero-based UTF-8 code-unit registers. That consumer remains outside ordinary Julia
-discovery and canonical CI, so `julia_runtime` remains pending and the neutral count stays 6/8/40.
+shapes, mutation timing, and zero-based UTF-8 code-unit registers. Ordinary Julia discovery and canonical CI now
+require that consumer, and the neutral checker rejects any regression of completed `julia_runtime`.
 
 Public typed values, transaction spelling and behavior, recursive observation, span-native progressive/staged
-dispatch, Julia admission, and the PUC Lua and LuaJIT runtime implementations/admissions remain future work. The
-internal Perl/Rust/Dart admissions and unadmitted Julia implementation do not add an authored `Position` or `Span`
-value, transaction operation, schema version, or new helper result; rollout is 6 complete / 8 pending.
+dispatch, and the PUC Lua and LuaJIT runtime implementations/admissions remain future work. The internal
+Perl/Rust/Dart/Julia admissions do not add an authored `Position` or `Span` value, transaction operation, schema
+version, or new helper result; rollout is 7 complete / 7 pending.
 
 The helper audit distinguishes 7 callable compatibility aliases from 2 internal Perl contract/scanner ids.
 `capture_take_slice` and `capture_take_slice_len` are internal ids, not accepted helper spellings; authored code

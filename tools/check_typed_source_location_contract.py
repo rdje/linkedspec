@@ -30,6 +30,8 @@ DART_CONSUMER_PATH = (
 DART_DORMANT_CONSUMER_PATH = (
     ROOT / "dart" / "test_dormant" / "typed_source_location_contract_test.dart"
 )
+JULIA_CONSUMER_PATH = ROOT / "julia" / "test" / "typed_source_location_contract_test.jl"
+JULIA_RUNTESTS_PATH = ROOT / "julia" / "test" / "runtests.jl"
 
 EXPECTED_COUNTS = {
     "sources": 3,
@@ -45,7 +47,7 @@ EXPECTED_COUNTS = {
     "internal_contract_ids": 2,
     "diagnostics": 31,
     "rollout_legs": 14,
-    "mutations": 40,
+    "mutations": 41,
 }
 
 POLICY = {
@@ -384,7 +386,7 @@ ROLLOUT = [
     ("perl_runtime", "complete", "FUTURE-PARITY-BACKLOG.14.2.1.3", ["perl"]),
     ("rust_runtime", "complete", "FUTURE-PARITY-BACKLOG.14.2.2.3", ["rust"]),
     ("dart_runtime", "complete", "FUTURE-PARITY-BACKLOG.14.2.3.3", ["dart"]),
-    ("julia_runtime", "pending", "FUTURE-PARITY-BACKLOG.14.2.4.3", ["julia"]),
+    ("julia_runtime", "complete", "FUTURE-PARITY-BACKLOG.14.2.4.3", ["julia"]),
     ("lua_dual_abi", "pending", "FUTURE-PARITY-BACKLOG.14.2.5.3", ["puc_lua", "luajit"]),
     ("transaction_safety", "pending", "FUTURE-PARITY-BACKLOG.14.3", []),
     ("recursive_observation", "pending", "FUTURE-PARITY-BACKLOG.14.4", []),
@@ -1162,6 +1164,8 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             PERL_PROJECTION_CONSUMER_PATH,
             RUST_CONSUMER_PATH,
             DART_CONSUMER_PATH,
+            JULIA_CONSUMER_PATH,
+            JULIA_RUNTESTS_PATH,
         ):
             if not path.is_file():
                 fail(f"canonical contract/checker/runner input is missing: {path.relative_to(ROOT)}")
@@ -1179,6 +1183,8 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract",
             "require_tracked_file dart/test/typed_source_location_contract_test.dart",
             "bash ../tools/run_dart_project_data.sh test --reporter failures-only test/typed_source_location_contract_test.dart",
+            "require_tracked_file julia/test/typed_source_location_contract_test.jl",
+            "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/typed_source_location_contract_test.jl\")'",
         ]
         for marker in required_markers:
             if ci_text.count(marker) != 1:
@@ -1201,6 +1207,18 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         ):
             if stale_marker in dart_consumer_text:
                 fail(f"Dart consumer retains stale dormancy marker: {stale_marker}")
+        julia_runtests_text = JULIA_RUNTESTS_PATH.read_text(encoding="utf-8")
+        julia_include = 'include("typed_source_location_contract_test.jl")'
+        if julia_runtests_text.count(julia_include) != 1:
+            fail("Julia typed-source consumer must appear exactly once in ordinary discovery")
+        julia_consumer_text = JULIA_CONSUMER_PATH.read_text(encoding="utf-8")
+        for stale_marker in (
+            "JULIA_TYPED_SOURCE_RED_MODE",
+            "dormant Julia typed source-location RED",
+            "pre-admission consumer",
+        ):
+            if stale_marker in julia_consumer_text:
+                fail(f"Julia consumer retains stale dormancy marker: {stale_marker}")
 
 
 def expect_mutation_failure(
@@ -1282,6 +1300,10 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         (
             "Dart runtime admission regressed to pending",
             lambda c: c["rollout"][5].__setitem__("status", "pending"),
+        ),
+        (
+            "Julia runtime admission regressed to pending",
+            lambda c: c["rollout"][6].__setitem__("status", "pending"),
         ),
     ]
     if len(mutations) + len(rollout_regressions) != EXPECTED_COUNTS["mutations"]:

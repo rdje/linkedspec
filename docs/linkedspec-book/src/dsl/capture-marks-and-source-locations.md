@@ -8,10 +8,8 @@ For the method-by-method public reference, read [Source Boundary Helper Referenc
 
 ## Accepted model: one typed source-location algebra
 
-ADR `0056` adopts one conceptual core beneath these helper families. Perl, Rust, and Dart admit that core as an
-internal runtime value/projection layer. Julia implements the same layer, but its exact consumer remains outside
-ordinary test discovery until the separate admission leaf. This is not a new public value type or new `.spec`
-syntax:
+ADR `0056` adopts one conceptual core beneath these helper families. Perl, Rust, Dart, and Julia admit that core as
+an internal runtime value/projection layer. This is not a new public value type or new `.spec` syntax:
 
 - a source identity names caller-authorized decoded input, not a path;
 - a position is a zero-based Unicode-scalar offset in that source;
@@ -36,7 +34,7 @@ native, reconstructed, generated-plan, and freshly emitted execution under ordin
 
 Julia retains zero-based UTF-8 code-unit runtime registers while its same 92 helpers and seven aliases now use one
 immutable input authority at the typed boundary. Its explicit consumer passes immutable values plus native,
-reconstructed, and generated-plan helper execution, but remains dormant and unregistered. PUC Lua and LuaJIT
+reconstructed, and generated-plan helper execution under ordinary discovery and canonical CI. PUC Lua and LuaJIT
 still need their own implementation and admission leaves.
 
 ### Bounded cursor transactions do not mean general backtracking
@@ -80,12 +78,12 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 ```
 
 The checker covers 3 decoded sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation
-and 8 transaction transitions, 6 recursive observations, 4 structural cases, 31 diagnostics, and 40 mutations.
+and 8 transaction transitions, 6 recursive observations, 4 structural cases, 31 diagnostics, and 41 mutations.
 It also proves that all 92 current source-boundary helpers project onto the algebra.
 
-This is rollout status, not authored-value status. Six of 14 rollout legs are complete: the neutral contract,
-public linked-rule structure, unchanged neutral/public recomposition, and the Perl, Rust, and Dart runtime
-admissions. The other 8 remain pending.
+This is rollout status, not authored-value status. Seven of 14 rollout legs are complete: the neutral contract,
+public linked-rule structure, unchanged neutral/public recomposition, and the Perl, Rust, Dart, and Julia runtime
+admissions. The other 7 remain pending.
 
 Perl now uses an internal decoded-source authority plus immutable position/span values beneath every governed
 helper projection. Exact Unicode execution is admitted on live and independently emitted/loaded generated routes.
@@ -97,14 +95,14 @@ absence values, statement results, and UTF-8-byte mark/cursor registers remain u
 
 Dart implements the same internal projection boundary while preserving strings, numbers, collections, booleans,
 absence values, statement results, mutation timing, and UTF-16 code-unit mark/cursor registers. Its four-test
-consumer is admitted under ordinary discovery and canonical CI, so the neutral rollout is 6 complete / 8 pending.
+consumer is admitted under ordinary discovery and canonical CI.
 
 Julia implements that boundary while preserving the same external result kinds, mutation timing, and its native
-zero-based UTF-8 code-unit registers. Its exact consumer and 92+7 detached catalogs remain pre-admission, so the
-neutral rollout correctly stays 6 complete / 8 pending.
+zero-based UTF-8 code-unit registers. Its exact consumer and 92+7 detached catalogs are admitted under ordinary
+discovery and canonical CI, so the neutral rollout is 7 complete / 7 pending.
 
 There is still no public `Position` or `Span` authored value, checkpoint syntax, transaction behavior, recursive
-observation API, or Julia/PUC-Lua/LuaJIT runtime admission. Those remain owned by later leaves.
+observation API, or PUC-Lua/LuaJIT runtime admission. Those remain owned by later leaves.
 
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions,
 typed spans, or cursor transactions are available as authored values.

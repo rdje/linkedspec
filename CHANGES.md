@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.4.3 — admit Julia typed source runtime
+
+- Removed the obsolete test-local RED selector from the unchanged 127-assertion Julia typed-source consumer and
+  included that consumer exactly once in ordinary package discovery.
+- Required the tracked consumer and its exact repository-routed Julia command unconditionally in canonical CI.
+- Promoted only `julia_runtime`, advancing the neutral artifact/checker from 6/8/40 to 7/7/41. The independent
+  checker now locks the path, exact command, one ordinary include, absence of stale dormancy, and Julia
+  completed-to-pending regression.
+- Focused admission passes 127/127. Complete Julia passes its byte-fresh 120,030-byte MCP binding, ordinary package
+  suites including typed source 127/127 and aliases 141/141, storage 19/5, primary CLI, corpus 105/105, and exact
+  Julia local-gate marker.
+- Updated the sole-facing capture/source-location, helper-reference, project-status, local-CI, and backend-handoff
+  pages to distinguish admitted internal Perl/Rust/Dart/Julia values and projections from public authored values,
+  transactions, and the pending PUC-Lua/LuaJIT admissions.
+- The repository-routed book builds 79 files / 14,172 KiB; direct generated-HTML inspection confirms the changed
+  status prose, runtime commands, rollout result, and following limitations remain distinct paragraph/code blocks.
+  The artifact is removed. Knowledge Map regenerates and validates at 787 facts / 6,467 question keys.
+- No production runtime, helper result, UTF-8 code-unit register, carrier, schema, semantic/MCP/capability surface,
+  DSL, root README, or other backend changed. All seven doctrines pass. Definitive canonical CI proves capability
+  80/0/0, typed source 7/7/41 with Julia 127/127, all composed semantic/MCP and containment/relocation checks,
+  CLI 66x2, RAM 79%, and Phase 0 1,031/1,031 in 716 seconds before its exact pass marker. The slice is
+  signoff-complete for atomic commit 162/300; no push.
+
 ## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.4.2 — route Julia typed source projections
 
 - Added one copied input `SourceAuthority` to every Julia runtime execution context without replacing the existing

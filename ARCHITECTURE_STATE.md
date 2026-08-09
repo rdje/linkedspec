@@ -1,5 +1,26 @@
 # ARCHITECTURE STATE
 
+- `2026-08-07 Julia typed source-location runtime admission`: `FUTURE-PARITY-BACKLOG.14.2.4.3` changes no
+  production Julia source. It removes the obsolete RED selector from the unchanged 127-assertion consumer,
+  includes that consumer exactly once in ordinary package discovery, and runs its exact tracked target
+  unconditionally in canonical CI through the repository-routed Julia wrapper.
+
+  Only `julia_runtime` moves to complete. The independent neutral checker now requires the path, exact command,
+  ordinary include count, and absence of stale dormancy, and rejects Julia complete-to-pending regression as
+  mutation 41. Live rollout is 7 complete / 7 pending. Existing zero-based UTF-8 code-unit registers, external
+  helper values and mutations, immutable values/projections, carriers, schemas, semantic/MCP/capability surfaces,
+  DSL, README, and other backends are unchanged.
+
+  Focused admission passes 127/127. Complete Julia passes byte-fresh 120,030-byte MCP bindings, package tests
+  including typed source 127/127 and aliases 141/141, storage 19/5, primary CLI, corpus 105/105, and its exact
+  marker. The sole-facing book now reports admitted internal Perl/Rust/Dart/Julia values/projections while public
+  authored values, transactions, and PUC-Lua/LuaJIT admissions remain future. Its 79-file/14,172-KiB HTML keeps
+  changed prose, commands, and limitations in separate blocks and is removed after inspection. Knowledge Map
+  passes at 787/6,467 and all seven doctrines pass. Definitive canonical CI proves capability 80/0/0, typed source
+  7/7/41 with Julia 127/127, all composed semantic/MCP and repository containment/relocation checks, CLI 66x2,
+  RAM 79%, and Phase 0 1,031/1,031 in 716 seconds before its exact marker. Atomic commit 162/300 and clean-handoff
+  proof remain before this leaf closes.
+
 - `2026-08-07 Julia typed source-location projections`: `FUTURE-PARITY-BACKLOG.14.2.4.2` adds one copied input
   `SourceLocation.SourceAuthority` to every `_RuntimeExecutionContext` and private exact code-unit/scalar adapters.
   All 92 canonical source-boundary helpers plus seven aliases now construct, validate, derive, or materialize
