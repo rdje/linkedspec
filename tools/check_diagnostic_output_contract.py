@@ -12,7 +12,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = ROOT / "capability_conformance" / "diagnostic_output_contract.json"
-TASK_PATH = ROOT / "docs" / "tasks" / "FUTURE-PARITY-BACKLOG.md"
+TASK_PATH = ROOT / "docs" / "tasks" / "FUTURE-PARITY-BACKLOG.00-08.md"
 CLI_MANIFEST_PATH = ROOT / "cli_conformance" / "manifest.json"
 
 POLICY = {

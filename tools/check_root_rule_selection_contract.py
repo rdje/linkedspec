@@ -665,7 +665,7 @@ def validate_filesystem_contract() -> None:
         "docs/decisions/0046-root-rule-selection-precedence.md": [CONTRACT_ID, TASK_OWNER],
         "docs/decisions/0010-top-rule-is-ordinary-rule-entered-first.md": ["ADR `0046`"],
         "docs/decisions/INDEX.md": ["0046-root-rule-selection-precedence.md"],
-        "docs/tasks/FUTURE-PARITY-BACKLOG.md": ["FUTURE-PARITY-BACKLOG.9.1.1.2.0"],
+        "docs/tasks/FUTURE-PARITY-BACKLOG.09.md": ["FUTURE-PARITY-BACKLOG.9.1.1.2.0"],
         "capability_conformance/README.md": [CONTRACT_ID, "7 complete / 0 pending"],
         "ROADMAP.md": [
             CONTRACT_ID,

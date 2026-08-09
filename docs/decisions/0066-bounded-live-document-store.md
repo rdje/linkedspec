@@ -1,8 +1,8 @@
 # ADR 0066: Live documentation uses bounded views over verified durable stores
 
 - Date: 2026-08-09
-- Status: accepted direction; descriptor contract frozen, live-status migration implemented, remaining migrations pending under
-  `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.1-.4`
+- Status: accepted direction; descriptor, live-status, and future-task migrations implemented; changes/notes and
+  recomposition pending under `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3-.4`
 - Tags: architecture, documentation, history, task-tree, retrieval, pressure, continuity, doctrine
 
 ## Context
@@ -15,7 +15,7 @@ smaller measurements captured at `7c2ff407`; the larger values include the three
 diagnostic state, not refreshed baselines.
 
 A mechanical split would break real consumers. Seven capability contracts require historical public-closeout
-markers from `LIVE_ACHIEVEMENT_STATUS.md`. Four executable checkers and two contract JSON files read the exact
+markers from `LIVE_ACHIEVEMENT_STATUS.md`. Nine executable checkers and two contract JSON files read the exact
 future-backlog path and search node blocks, statuses, acceptance headings, or closure markers. The commit and
 task-tree doctrines also instruct every slice to append or update all three chronological documents. Growth is
 therefore caused by workflow and checker ownership, not merely by prose length.
@@ -120,7 +120,7 @@ the stable range, while the digest is a same-commit snapshot and may change only
 
 Every node ID remains unique and unchanged. `scripts/check_task_tree_metadata.sh` expands all top-level Markdown
 parts, rejects missing/duplicate nodes and frontier targets, verifies manifest coverage/digests/ranges, and
-proves lookup. The four executable consumers and two JSON contracts switch from the old monolith to the exact
+proves lookup. The nine executable consumers and two JSON contracts switch from the old monolith to the exact
 semantic part or lookup; no duplicate compatibility node is allowed in the root index. New verification,
 commit, and changelog evidence lives with its owning semantic part, while the root keeps bounded current state.
 

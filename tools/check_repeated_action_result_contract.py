@@ -303,7 +303,7 @@ PUBLIC_CONTRACT = {
         {"path": "docs/linkedspec-book/src/user-model/rule-modes-and-" "parse" "-modes.md", "text": "7 complete / 1 pending"},
         {"path": "docs/linkedspec-book/src/appendix/runtime-semantics.md", "text": "7 complete / 1 pending"},
         {"path": "docs/knowledge/explicit-or-action-result-shape-parity-gap.md", "text": "public rollout pending FUTURE-PARITY-BACKLOG.9.1.10.7"},
-        {"path": "docs/tasks/FUTURE-PARITY-BACKLOG.md", "text": "Dual-ABI Lua `.9.1.10.5` is the next eligible leaf"},
+        {"path": "docs/tasks/FUTURE-PARITY-BACKLOG.09.md", "text": "Dual-ABI Lua `.9.1.10.5` is the next eligible leaf"},
         {"path": "docs/decisions/0067-live-achievement-status-history.md", "text": "`FUTURE-PARITY-BACKLOG.9.1.10.6` is active task-tree-first"},
     ],
 }
@@ -485,7 +485,8 @@ def validate_contract(contract: dict[str, Any], *, check_filesystem: bool = True
 def validate_filesystem(contract: dict[str, Any]) -> None:
     decision_text = (ROOT / contract["decision"]).read_text(encoding="utf-8")
     require("Explicit repetition action returns are per-hit collection values" in decision_text, "ADR 0048 decision marker is missing")
-    task_text = (ROOT / "docs/tasks/FUTURE-PARITY-BACKLOG.md").read_text(encoding="utf-8")
+    task_text = (ROOT / "docs/tasks/FUTURE-PARITY-BACKLOG.09.md").read_text(encoding="utf-8")
+    handoff_task_text = (ROOT / "docs/tasks/FUTURE-PARITY-BACKLOG.10.0-6.md").read_text(encoding="utf-8")
     task_status = re.search(
         r"- ID: `FUTURE-PARITY-BACKLOG\.9\.1\.10\.1`\n  Status: `(active|done)`",
         task_text,
@@ -698,7 +699,8 @@ def validate_filesystem(contract: dict[str, Any]) -> None:
         "repeated-action parent closeout checklist drifted",
     )
     require(
-        CLOSURE["next_owner"] in task_text and CLOSURE["next_owner"] in (ROOT / "MEMORY.md").read_text(encoding="utf-8"),
+        CLOSURE["next_owner"] in handoff_task_text
+        and CLOSURE["next_owner"] in (ROOT / "MEMORY.md").read_text(encoding="utf-8"),
         "repeated-action next-owner handoff drifted",
     )
 

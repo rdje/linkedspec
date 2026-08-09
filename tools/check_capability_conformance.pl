@@ -10,7 +10,18 @@ use JSON::PP qw(decode_json encode_json);
 my $repo_root = abs_path(File::Spec->catdir(dirname(__FILE__), '..'));
 my $manifest_path = File::Spec->catfile($repo_root, 'capability_conformance', 'manifest.json');
 my @task_paths = (
- File::Spec->catfile($repo_root, 'docs', 'tasks', 'FUTURE-PARITY-BACKLOG.md'),
+ map(
+  { File::Spec->catfile($repo_root, 'docs', 'tasks', $_) }
+  qw(
+   FUTURE-PARITY-BACKLOG.00-08.md
+   FUTURE-PARITY-BACKLOG.09.md
+   FUTURE-PARITY-BACKLOG.10.0-6.md
+   FUTURE-PARITY-BACKLOG.10.7-10.md
+   FUTURE-PARITY-BACKLOG.11-13.md
+   FUTURE-PARITY-BACKLOG.14.md
+   FUTURE-PARITY-BACKLOG.15-24.md
+  )
+ ),
  File::Spec->catfile($repo_root, 'docs', 'tasks', 'LUA-BACKEND-PARITY.md'),
 );
 
@@ -122,7 +133,7 @@ my @expected_public_projections = (
   required_markers => ['exclusion public closeout `.24.2`', $public_close_marker],
  },
  {
-  path => 'docs/tasks/FUTURE-PARITY-BACKLOG.md',
+  path => 'docs/tasks/FUTURE-PARITY-BACKLOG.15-24.md',
   required_markers => [
    "- ID: `FUTURE-PARITY-BACKLOG.24`\n  Status: `done`",
    "- ID: `FUTURE-PARITY-BACKLOG.24.2`\n  Status: `done`",
@@ -155,11 +166,11 @@ my @expected_forbidden_current_claims = (
  {path => 'docs/linkedspec-book/src/overview/project-status.md', text => 'schema v1 with four stale records'},
  {path => 'docs/TASK_TREE.md', text => 'exclusion public closeout `.24.2` active'},
  {
-  path => 'docs/tasks/FUTURE-PARITY-BACKLOG.md',
+  path => 'docs/tasks/FUTURE-PARITY-BACKLOG.15-24.md',
   text => "- ID: `FUTURE-PARITY-BACKLOG.24`\n  Status: `active`",
  },
  {
-  path => 'docs/tasks/FUTURE-PARITY-BACKLOG.md',
+  path => 'docs/tasks/FUTURE-PARITY-BACKLOG.15-24.md',
   text => "- ID: `FUTURE-PARITY-BACKLOG.24.2`\n  Status: `active`",
  },
  {

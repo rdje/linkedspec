@@ -23,11 +23,11 @@ seconds. Unchanged `.4.2` proves all seven implementation-owner hashes from clea
 passes the same route/mutation/doctrine chain, CLI 66x2, and Phase 0 1,031/1,031 in 673 seconds. Parent `.4` is
 closed without parser/runtime/backend behavior movement at `0bcb5a36`.
 
-## Live status is bounded over exact history; remaining store migrations are pending
+## Live status and future task evidence are bounded over exact durable stores
 
 `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0` and ADR `0066` classify the debt surfaces by semantics rather than size.
 Before `.1`, `LIVE_ACHIEVEMENT_STATUS.md` was direct required-marker authority for seven capability/public-closeout families,
-and four executable checkers plus two contract JSON projections read exact node/status/evidence markers from
+and nine executable checkers plus two contract JSON projections read exact node/status/evidence markers from
 `docs/tasks/FUTURE-PARITY-BACKLOG.md`. A blind truncation or filesystem split would therefore break governance.
 `CHANGES.md` and `DEVELOPMENT_NOTES.md` have no executable content parser; their growth is instead mandated by the
 current commit workflow.
@@ -47,12 +47,18 @@ identity, order, counts/digests, committed immutability, Git reconstruction, con
 five-section 256-line / 32-KiB current view. Exact staged ADR authority is the only legal debt-to-current baseline
 retirement; arbitrary baseline refresh remains rejected.
 
-The future task root becomes a bounded live index. Stable nodes route to seven semantic parts (`.0-.8`, `.9`,
-`.10.0-.6`, `.10.7-.10`, `.11-.13`, `.14`, `.15-.24`) and one immutable legacy-history part; every exact part
-stays below 5,000 lines and a strengthened metadata gate enforces unique IDs, manifest coverage, digests, and
-frontier lookup. `.2` partitions task evidence, `.3` migrates changes/notes and author workflow, and `.4`
-recomposes/ratchets. The live migration changes documentation storage and governance only; it changes no language,
-compiler, runtime, backend, fixture, CLI, protocol, or project-data root.
+`.2` now makes the future task root a 381-line bounded live index. Clean source `99fe03f3` is preserved by exact
+line-range provenance across that root, seven mutable semantic parts (`.0-.8`, `.9`, `.10.0-.6`, `.10.7-.10`,
+`.11-.13`, `.14`, `.15-.24`), and one immutable 3,340-line legacy-history part. A strict nine-record JSONL index
+binds the source commit/blob/digest, range ownership, initial source digests, and same-commit current digests.
+Root-derived lookup returns the one bounded owner of each of the preserved 510 stable IDs; a paired updater
+refreshes mutable snapshots after an owning leaf edit. The strengthened metadata doctrine proves 26/26 mutation
+classes, exact clean-source coverage, ID uniqueness/ranges, consumer decoupling, immutable history, lookup, and
+collection/member ceilings. All eleven direct machine consumers now use their semantic owners, and routed task
+evidence is current with an 8,000-line / 1-MiB global per-file ratchet plus stricter 5,000-line / 768-KiB limits
+for every future-backlog member. `.3` migrates changes/notes and author workflow; `.4` recomposes/ratchets. These
+storage migrations change documentation governance only; they change no language, compiler, runtime, backend,
+fixture, CLI, protocol, or project-data root.
 
 - `2026-08-09 cursor transaction authored/static contract`: behavior-free
   `FUTURE-PARITY-BACKLOG.14.3.1.0` ratifies four accepted future special forms:

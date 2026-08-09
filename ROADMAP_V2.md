@@ -82,9 +82,12 @@ Canonical signoff passes CLI 66x2 and Phase 0 1,031/1,031 in 694 seconds before 
 closeout. `.4.2` proves seven admitted owner hashes and independently passes CLI 66x2 plus Phase 0 1,031/1,031 in
 673 seconds, closing `.4` atomically at `0bcb5a36`. Bounded-view audit `.0` accepts ADR `0066` and lands at
 `dc8dd896`. Live migration `.1` transfers all 13 capability consumers to indexed ADR `0067`, preserves the exact
-clean 14,872-line source as four immutable manifest segments, installs query plus the eighth doctrine, and replaces
-the stable root with a five-section bounded current view. Semantic future-task partition `.2` and changes/notes
-hot stores `.3` remain pending. No parser/runtime/backend/MCP/CLI/fixture/protocol/`.spec` behavior changes.
+clean 14,872-line source as four immutable manifest segments, installs query plus the eighth doctrine, replaces
+the stable root with a five-section bounded current view, and lands at `99fe03f3`. Semantic future-task partition
+`.2` now preserves 510 stable IDs across seven mutable semantic parts plus immutable history, installs a strict
+nine-record index with root-derived lookup/update tools, transfers all eleven direct machine consumers, and ratchets
+task evidence to current bounded limits under 26/26 metadata mutations. Changes/notes hot stores `.3` and final
+recomposition `.4` remain pending. No parser/runtime/backend/MCP/CLI/fixture/protocol/`.spec` behavior changes.
 Recurring MCP `.10.9.7.1.1.4`
 recomposes the committed rooted promotion unchanged and closes its implementation parents; `.10.9.7.2` now
 independently recomposes the full chain, closes `.10.9.7` and `.10.9`, and hands the clean boundary to public

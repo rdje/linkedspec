@@ -1,0 +1,1805 @@
+- ID: `FUTURE-PARITY-BACKLOG.15`
+  Status: `pending`
+  Goal: Make any standalone/dangling rule-level `{ ... }` block exact syntax sugar for `I { ... }`.
+  Children: `.15.0`, `.15.1`, `.15.2`
+  Acceptance: At top-level rule-body item parsing, accept a standalone `{ ... }` anywhere an item may occur and
+    normalize it to the existing `I` lifecycle AST rather than adding runtime semantics. Action-edge and blind-call
+    blocks remain owned by their preceding edge productions and therefore are not standalone/dangling; nested
+    expression/callable blocks remain owned after entering code parsing. Apply the same rule to OR, AND, zero-regex,
+    one-regex, and two-regex rules; preserve explicit `I { ... }`; inherit its ordering/duplicate behavior; align
+    all admitted backends, source generation, diagnostics, examples, and complete gates.
+
+- ID: `FUTURE-PARITY-BACKLOG.15.0`
+  Status: `pending`
+  Goal: Audit and ratify the anywhere-in-rule standalone-block normalization contract before behavior code.
+  Acceptance: Use parser/toolbox evidence to confirm there is currently no dangling `{ ... }` rule-body form and
+    enumerate the non-dangling brace owners: action-edge/blind-call suffix blocks and nested code/callable blocks.
+    Record direct normalization to `I`, inherited duplicate/order behavior, source spans, and malformed forms.
+
+- ID: `FUTURE-PARITY-BACKLOG.15.1`
+  Status: `pending`
+  Goal: Implement the ratified bare rule-level lifecycle shorthand on the Perl reference and Rust backend.
+
+- ID: `FUTURE-PARITY-BACKLOG.15.2`
+  Status: `pending`
+  Goal: Align Dart, Julia, Lua, generated paths, public examples, Knowledge Map, and complete no-drift proof.
+
+- ID: `FUTURE-PARITY-BACKLOG.16`
+  Status: `done`
+  Goal: Complete the deliberately narrow punctuation-light zero-argument call surface without creating a general
+    parenthesis-free call grammar.
+  Children: `.16.0`, `.16.1`, `.16.2`, `.16.3`, `.16.4`, `.16.5`, `.16.6`, `.16.7`
+  Acceptance: Standalone zero-argument flow markers accept `else`, `endif`, `default`, `endcase`, `endswitch`,
+    and `next` wherever their parenthesized forms are valid; the final call in an ActionIR receiver chain may use
+    `.method` exactly when it has no authored arguments; existing parenthesized forms remain valid; intermediate
+    receiver calls, calls with arguments, ordinary helper/user-function calls, and condition-bearing `if`/`while`
+    headers retain parentheses. All five backends, available generated paths, diagnostics, examples, and public
+    contracts agree; future generated Lua preservation remains owned by `LUA-BACKEND-PARITY.8.1-.8.4`.
+  Verification: **PASS 2026-07-13.** Design/contract leaves `.16.0-.16.2`, backend leaves `.16.2.1-.16.6`, and
+    public/capability no-drift `.16.7` are complete. One recurring five-backend/two-Lua-ABI command locks the
+    exact alias and exclusion surface. Capability census is 64/0/0, current examples prefer the admitted syntax
+    selectively, and no path claims parenthesis-free condition headers or nonexistent generated Lua.
+
+- ID: `FUTURE-PARITY-BACKLOG.16.0`
+  Status: `done`
+  Goal: Audit and ratify the exact existing/missing punctuation-light zero-argument surfaces before behavior code.
+  Acceptance: Distinguish rule-edge/lifecycle fluent suffix parsing from ActionIR expression parsing; inventory
+    bare `else`/`endif`/`default`/`endcase`/`endswitch` and `next` across Perl, Rust, Dart, Julia, and Lua; inventory
+    final bare receiver parsing and contract resolution; prove the final-segment boundary is unambiguous; record
+    exclusions for intermediate bare calls, attached final-codeblock calls, arbitrary helpers/user functions, and
+    parenthesis-free condition headers; split backend and no-drift leaves from source-backed evidence.
+  Verification: **PASS 2026-07-13.** Source-backed audit distinguishes established rule-edge/lifecycle fluent
+    suffix handling from the five ActionIR parsers. Perl, Dart, and Julia normalize the five existing bare control
+    markers; Rust parses them as variables outside attached-control synthesis; Lua normalizes only bare
+    `else`/`otherwise`/`default`. No backend recognizes bare `next` as the current call. Perl, Rust, Dart, and Julia
+    require parentheses for every ActionIR receiver segment; Lua currently accepts a bare identifier in every
+    segment. All five rule/lifecycle suffix parsers already preserve zero-argument bare suffixes. ADR 0033 adopts
+    the narrow six-marker plus final-receiver contract, keeps condition headers/calls-with-arguments/general calls
+    parenthesized, and splits one neutral contract plus five backend and no-drift leaves. No behavior source changed.
+  Commit: `FUTURE-PARITY-BACKLOG.16.0 - ratify zero-argument call aliases`
+
+- ID: `FUTURE-PARITY-BACKLOG.16.1`
+  Status: `done`
+  Goal: Add one backend-neutral syntax/AST/diagnostic fixture contract for the ratified zero-argument aliases.
+  Dependencies: `.16.0`
+  Acceptance: Positive cases cover all six standalone markers and terminal `.method`; negative cases preserve
+    parentheses on condition headers, argument-bearing calls, non-final bare receiver segments, and nonzero-arity
+    terminal methods; the contract is reusable by native and generated backends.
+  Verification: **PASS 2026-07-13.** Strict contract `linkedspec-punctuation-light-zero-arg-v1` fixes six
+    standalone equivalences, four terminal-receiver equivalences, three retained bare value reads, six invalid
+    syntax classes, two arity-resolution cases, and one deterministic future fixture. The independent checker
+    proves bare/parenthesized AST equality, final-only receiver recognition, unchanged condition-header/general-
+    call/trailing-block boundaries, existing method-contract delegation, exact fixture rendering/evaluation, and
+    three mutation failures. Canonical local CI passes capability 60/0/0, primary CLI 61/61 twice, and Phase 0
+    `1..1031` in 604 seconds. No backend parser/runtime behavior changed and the capability remains future-owned.
+  Commit: `FUTURE-PARITY-BACKLOG.16.1 - adopt zero-argument syntax contract`
+
+- ID: `FUTURE-PARITY-BACKLOG.16.2`
+  Status: `done`
+  Goal: Implement and regression-lock the ratified aliases on the Perl reference backend after calibrating the
+    neutral arity example against the existing helper contract.
+  Dependencies: `.16.1`
+  Children: `.16.2.0`, `.16.2.1`
+  Acceptance: Statement splitting, typed control parsing, `next` scanning/lowering, and fluent AST parsing map
+    aliases to the same zero-argument nodes/descriptors/runtime behavior as parenthesized calls; generic bare
+    receiver parsing is final-only; generated Perl and normal execution agree; exclusions diagnose unchanged.
+  Verification: **PASS 2026-07-13.** Arity calibration `.16.2.0` and Perl implementation `.16.2.1` close the
+    parent. The Perl reference consumes all six standalone aliases and four terminal receiver cases while keeping
+    general calls, intermediate receiver segments, receiver trailing blocks, and condition-bearing `if`/`while`
+    headers unchanged. Live and standalone generated execution match the neutral fixture exactly.
+  Commit: completed by `.16.2.0` and `.16.2.1`
+
+- ID: `FUTURE-PARITY-BACKLOG.16.2.0`
+  Status: `done`
+  Goal: Correct the neutral nonzero-arity receiver example exposed by the Perl reference preflight before parser
+    behavior changes.
+  Dependencies: `.16.1`
+  Acceptance: LinkedSpec toolbox output and the canonical helper-arity table prove `drop_front` has zero-or-one
+    authored receiver arguments; replace it with an actually required-argument receiver method without changing
+    the ratified terminal-call rule, fixture, or any backend parser/runtime; update durable facts and rerun the
+    strict contract plus canonical gates.
+  Verification: **PASS 2026-07-13.** `call_spec_handler_subst` proves `.drop_front()` lowers as the established
+    default-one operation and `.contains()` follows the missing-argument unsupported-helper path. The canonical
+    `%ast_aggregate_call_arity` table records function-form `drop_front` `[1,2]` and `contains` `[2,2]`, hence
+    authored receiver arities `[0,1]` and `[1,1]`. The neutral required-argument example now uses `contains`; the
+    strict checker and mutations pass unchanged, capability remains 60/0/0, CLI passes 61/61 twice, and Phase 0
+    passes `1..1031` in 605 seconds. No backend parser/compiler/runtime behavior changed.
+  Commit: `FUTURE-PARITY-BACKLOG.16.2.0 - calibrate receiver arity fixture`
+
+- ID: `FUTURE-PARITY-BACKLOG.16.2.1`
+  Status: `done`
+  Goal: Implement the unchanged punctuation-light contract on the Perl reference backend.
+  Dependencies: `.16.2.0`
+  Acceptance: Statement splitting, typed control parsing, `next` scanning/lowering, and fluent AST parsing map
+    aliases to the same zero-argument nodes/descriptors/runtime behavior as parenthesized calls; generic bare
+    receiver parsing is final-only; generated Perl and normal execution agree; exclusions diagnose unchanged.
+  Verification: **PASS 2026-07-13.** The Perl typed parser maps all six standalone bare forms to the same semantic
+    ASTs as their parenthesized calls and accepts a bare generic receiver identifier only as the final segment.
+    Exact bare `next` scans as canonical `NEXT`, lowers identically to `next()`, and no longer enters compatibility
+    metadata; labeled `next LABEL` remains separately compatible. Ordinary value-position `next` stays a variable,
+    all six neutral exclusions retain their existing raw/invalid reasons, and method resolution remains unchanged.
+    The deterministic fixture returns `{result: "yes", picked: "a", count: 2}` in live and standalone generated
+    Perl. Focused AST/contract tests pass; canonical CI passes capability 60/0/0, CLI 61/61 twice, and Phase 0
+    `1..1031` in 611 seconds.
+  Commit: `FUTURE-PARITY-BACKLOG.16.2.1 - implement Perl zero-argument aliases`
+
+- ID: `FUTURE-PARITY-BACKLOG.16.3`
+  Status: `done`
+  Goal: Implement and regression-lock the ratified aliases on the Rust backend and Rust oracle/generated paths.
+  Dependencies: `.16.1`, `.16.2`
+  Acceptance: Rust ActionIR parsing emits the same typed calls/controls for aliases and parenthesized forms,
+    preserves final-only receiver and condition-header boundaries, executes the neutral contract identically,
+    and passes native, oracle, and generated-source proof.
+  Verification: **PASS 2026-07-13.** Rust recognizes the six enumerated names only at an exact statement
+    boundary and admits a generic bare receiver identifier only when it is terminal. Bare and parenthesized forms
+    share the same typed `Expr::Call` / `Expr::FluentChain`; value-position `next` remains a variable and all six
+    excluded forms retain their prior parse failures. The unchanged fixture returns
+    `{result: "yes", picked: "a", count: 2}` natively, after compiled-state serialization, through emitted source
+    validation, and through generated-plan execution. The rebuilt CLI returns that exact object for bare and
+    parenthesized `.spec` files. The complete Rust gate passes 137 runtime unit tests, 105-fixture Perl oracle,
+    105 generated-source classifications, 197 integration tests, the new 5-test contract, focused source/loader/
+    trace/Unicode suites, and CLI 61/61 twice. Preflight also exposed a pre-existing helper gap: Rust
+    `.contains()` defaults an absent needle to empty text and returns `0`, unlike Perl's missing-argument
+    rejection; the new alias preserves the parenthesized Rust outcome and backlog `.5` now owns normalization.
+  Commit: `FUTURE-PARITY-BACKLOG.16.3 - implement Rust zero-argument aliases`
+
+- ID: `FUTURE-PARITY-BACKLOG.16.4`
+  Status: `done`
+  Goal: Implement and regression-lock the ratified aliases on the Dart backend and generated path.
+  Dependencies: `.16.1`, `.16.2`
+  Acceptance: Dart normalizes all six standalone forms and final generic receiver form to the same typed AST,
+    retains the negative boundaries and diagnostics, and passes native plus generated execution of the unchanged
+    neutral contract.
+  Verification: **PASS 2026-07-13.** Dart's statement parser recognizes exact bare `next` only in statement
+    context, preserving expression/value-position `next` as a variable, while its existing control-head
+    normalization already covers the other five standalone markers. Fluent parsing admits a generic bare
+    identifier only in the terminal receiver segment and synthesizes the same empty-argument typed call as `()`.
+    The neutral contract proves six statement and four receiver semantic-AST equivalences, ordinary identifier
+    retention, all six unchanged exclusions, and existing arity outcomes. The fixture returns
+    `{result: "yes", picked: "a", count: 2}` through native execution, generated-plan execution, emitted-state
+    reconstruction, and exact bare/parenthesized CLI twins. The complete Dart gate passes format, strict analysis,
+    211 package tests, CLI 61/61 twice, and corpus 105/105. Dart's pre-existing `.contains()` missing-argument
+    result matches its parenthesized twin at `0`; helper normalization remains owned by `.5`.
+  Commit: `FUTURE-PARITY-BACKLOG.16.4 - implement Dart zero-argument aliases`
+
+- ID: `FUTURE-PARITY-BACKLOG.16.5`
+  Status: `done`
+  Goal: Implement and regression-lock the ratified aliases on the Julia backend and generated path.
+  Dependencies: `.16.1`, `.16.2`
+  Acceptance: Julia normalizes all six standalone forms and final generic receiver form to the same typed AST,
+    retains the negative boundaries and diagnostics, and passes native plus generated execution of the unchanged
+    neutral contract.
+  Verification: **PASS 2026-07-13.** Julia's statement parser recognizes exact bare `next` only in statement
+    context, preserving expression/value-position `next` as a variable, while its existing control-head
+    normalization already covers the other five standalone markers. Fluent parsing admits a generic bare
+    identifier only in the terminal receiver segment and synthesizes the same empty-argument typed call as `()`.
+    The neutral contract proves six statement and four receiver semantic-AST equivalences, ordinary identifier
+    retention, all six unchanged exclusions, and existing arity outcomes. The fixture returns
+    `{result: "yes", picked: "a", count: 2}` through native execution, generated-plan execution, emitted-state
+    reconstruction, and exact bare/parenthesized CLI twins. The complete Julia gate passes 1,394 package
+    assertions, primary CLI conformance, and corpus 105/105. Julia's pre-existing `.contains()` missing-argument
+    result matches its parenthesized twin at `0`; helper normalization remains owned by `.5`.
+  Commit: `FUTURE-PARITY-BACKLOG.16.5 - implement Julia zero-argument aliases`
+
+- ID: `FUTURE-PARITY-BACKLOG.16.6`
+  Status: `done`
+  Goal: Align Lua's parser-ahead bare receiver behavior with the final-only contract and add all standalone aliases
+    on both PUC Lua and LuaJIT without preempting the parked runtime leaf.
+  Dependencies: `.16.1`, `.16.2`
+  Acceptance: Lua normalizes all six standalone forms; generic bare receiver calls are accepted only in the final
+    segment; existing rule/lifecycle control-marker suffixes and attached `else`/`default` remain valid; both ABIs
+    pass the neutral typed-AST, serialized-state, native execution, and negative-diagnostic contract without
+    changing `.4.3.6.4` runtime scope. Lua generated source does not yet exist and remains owned by
+    `LUA-BACKEND-PARITY.8.1-.8.4`; that later emitter must preserve the already-normalized typed state.
+  Verification: **PASS 2026-07-13.** Lua now normalizes all five structural markers in `parse_control(...)` and
+    exact bare `next` only while constructing a complete statement, preserving expression/value-position `next`
+    as a variable. The parser-ahead generic bare receiver path is narrowed from every segment to the terminal
+    segment and explicitly rejects a receiver trailing block without `()`. The neutral contract proves six
+    statement and four receiver semantic-AST equivalences, three retained identifiers, all six negative classes,
+    method-resolution twins, and the exact fixture after public SpecFile JSON serialization/reconstruction. The
+    fixture returns `{result: "yes", picked: "a", count: 2}` natively on PUC Lua 5.4 and LuaJIT. Both complete
+    local gates pass 109/109 plus corpus validation/scaffold checks. Lua's pre-existing `.contains()` no-needle
+    result remains `0` and joins Rust/Dart/Julia under helper owner `.5`. No Lua emitter exists; generated-source
+    preservation remains explicitly owned by `LUA-BACKEND-PARITY.8.1-.8.4`.
+  Commit: `FUTURE-PARITY-BACKLOG.16.6 - implement Lua zero-argument aliases`
+
+- ID: `FUTURE-PARITY-BACKLOG.16.7`
+  Status: `done`
+  Goal: Migrate current examples where useful and close mdBook, grammar, Knowledge Map, roadmap, generated-source,
+    corpus, capability, and complete no-drift alignment.
+  Dependencies: `.16.2`, `.16.3`, `.16.4`, `.16.5`, `.16.6`
+  Acceptance: Current examples prefer the punctuation-light spelling where it improves readability; all public
+    text clearly preserves parentheses for the general call grammar and condition headers; recurring scans and
+    complete backend gates prove no parser, available generated-source, diagnostic, or documentation drift; Lua's
+    future generated-source preservation remains explicitly owned by `LUA-BACKEND-PARITY.8.1-.8.4`; `.16` closes.
+  Verification: **PASS 2026-07-13.** The capability census promotes
+    `language.punctuation_light_zero_argument_aliases` to pass on all four established census backends and removes
+    its future exclusion, advancing the exact census from 60/0/0 to 64/0/0. Public examples selectively prefer
+    bare markers and terminal receivers while explicitly retaining parenthesized twins and condition headers.
+    `tools/check_punctuation_light_five_backend.sh` composes the neutral checker, Perl 7 assertions, Rust 5 tests,
+    Dart 5 tests, Julia 55 assertions, and the complete Lua 109/109 PUC plus 109/109 LuaJIT gates. Native,
+    serialized, and every available generated route return the exact fixture; Lua generated-source ownership
+    stays with `.8.1-.8.4`. A closeout scan found the generated-source checker and current public summaries still
+    hard-coded the former 15/60 census; the checker now derives status totals from the manifest and reports
+    64/0/0. Capability, docs, ADR, Knowledge Map, roadmap, task, and canonical CI wiring agree.
+  Commit: `FUTURE-PARITY-BACKLOG.16.7 - admit punctuation-light aliases`
+
+- ID: `FUTURE-PARITY-BACKLOG.17`
+  Status: `done`
+  Goal: Reconcile the complete documented current named-mark helper surface across every backend and its coverage
+    inventory.
+  Children: `.17.0`, `.17.1`, `.17.2`, `.17.3`, `.17.4`, `.17.5`
+  Acceptance: The seven public current helpers outside the governed 239-name inventory—`mark_entry_start/end`,
+    `mark_match_start/end`, `mark_line`, `mark_col`, and `clear_mark`—have one neutral exact contract and execute
+    identically on Perl, Rust, Dart, Julia, and Lua; generated paths preserve them where available; inventory and
+    coverage gates cannot pass through a symmetric omission; public docs, capabilities, KM, and task state agree.
+  Verification: **PASS 2026-07-15.** One exact contract and five-backend execution rollout admit the seven names
+    into the aligned 246-name inventories. Coverage supplements the 105-case corpus with the exact named-mark
+    fixture, independently derives all 122 public Perl contracts, and rejects the exact nine classified
+    compatibility/legacy/internal names. A simultaneous three-inventory `clear_mark` mutation is detected by both
+    the exact-family and independent reverse checks. Complete backend and canonical gates pass.
+  Commit: `FUTURE-PARITY-BACKLOG.17.5 - admit complete named mark inventory`
+
+- ID: `FUTURE-PARITY-BACKLOG.17.0`
+  Status: `done`
+  Goal: Classify the inventory blind spot and split complete named-mark parity before behavior changes.
+  Acceptance: Compare all non-compatibility Perl contract diagnostics with the aligned backend inventories;
+    distinguish internal operators, legacy/compatibility names, and public current calls; prove the seven-helper
+    gap from source and book evidence; define neutral/backend/admission owners and return to the Lua `.4.3.7.1`
+    frontier without changing parser/compiler/runtime behavior.
+  Verification: **PASS 2026-07-13.** Direct contract/inventory comparison produces exactly 16 names and classifies
+    seven public current marks, two compatibility map aliases, two legacy capture names, and five internal lowering
+    operations. The still-green 239-name/105-fixture report proves the corpus-seeded blind spot. `.17.1-.17.5`
+    own exact neutral/Perl/Rust, Dart, Julia, Lua, and admission/gate work. Knowledge Map, memory architecture, task
+    metadata, doctrines, mdBook, and whitespace checks pass; no runtime, inventory, corpus, or capability changed.
+  Commit: `FUTURE-PARITY-BACKLOG.17.0 - split complete named mark parity`
+
+- ID: `FUTURE-PARITY-BACKLOG.17.1`
+  Status: `done`
+  Goal: Adopt the exact seven-helper neutral contract and align Perl/Rust execution.
+  Dependencies: `.17.0`
+  Acceptance: One unchanged fixture covers entry/local start/end mark writes, Unicode position/line/column reads,
+    clear/existence behavior, symbolic bare names, absent marks, rule-local isolation, and generated preservation;
+    Perl proves the reference result and Rust native/oracle/generated paths match it.
+  Verification: **PASS 2026-07-13.** The strict neutral checker locks seven helpers, the unchanged Unicode
+    parent/child fixture, and three rejected drift mutations. Perl live and standalone-generated execution match;
+    Rust native, serialized, emitted-plan, and generated execution match the same value. The complete Rust package
+    passes 188 core, 137 runtime, 105 oracle, 105 generated-corpus, 197 integration, and all specialized suites.
+    The first canonical gate measured only two stale Phase-0 top-level source-lock subtests; migrating their exact
+    19 guarded trace-edge strings produces capability 64/0/0, CLI 61/61 twice, and Phase 0 `1..1031` in 983 seconds.
+  Commit: `FUTURE-PARITY-BACKLOG.17.1 - align Perl Rust complete named marks`
+
+- ID: `FUTURE-PARITY-BACKLOG.17.2`
+  Status: `done`
+  Goal: Align Dart complete named-mark execution and inventory.
+  Dependencies: `.17.1`
+  Acceptance: Dart consumes the unchanged neutral contract through native/generated/emitted-state/CLI paths,
+    preserves code-unit storage with character-based public values, and adds exactly the seven current names.
+  Verification: **PASS 2026-07-13.** The exact staged seven-name inventory is
+    exported and folded into Dart's known-call/capture-mark boundaries while remaining disjoint from the legacy
+    shared 239-name set. Native, generated-plan, emitted-state reconstruction, and primary-CLI execution return
+    the unchanged Unicode parent/child value. Format and fatal analysis pass; the focused compatibility set passes
+    68 tests, and the complete Dart gate passes all 214 package tests, CLI 61/61 twice, and corpus 105/105. The
+    canonical repository gate passes capability 64/0/0, the unchanged shared 239-name/105-fixture coverage check,
+    CLI 61/61 twice, and Phase 0 `1..1031` in 1,061 seconds; docs/KM/governance/book/whitespace also pass.
+  Commit: `FUTURE-PARITY-BACKLOG.17.2 - align Dart complete named marks`
+
+- ID: `FUTURE-PARITY-BACKLOG.17.3`
+  Status: `done`
+  Goal: Align Julia complete named-mark execution and inventory.
+  Dependencies: `.17.2`
+  Acceptance: Julia consumes the unchanged neutral contract through native/generated/emitted-state/CLI paths,
+    preserves code-unit storage with character-based public values, and adds exactly the seven current names.
+  Verification: **PASS 2026-07-14.** The exact staged seven-name inventory is
+    exported and folded into Julia's known-call/capture-mark boundaries while remaining disjoint from the legacy
+    shared 239-name set. Native, generated-plan, emitted-state reconstruction, and primary-CLI execution return
+    the unchanged Unicode parent/child value. The focused contract passes 13 assertions, and the complete Julia
+    gate passes 1,414 package assertions, shared CLI 61/61 twice, and corpus 105/105. The canonical repository
+    gate passes capability 64/0/0, the unchanged shared 239-name/105-fixture coverage check, CLI 61/61 twice, and
+    Phase 0 `1..1031` in 614 seconds; docs/KM/governance/book/whitespace also pass.
+  Commit: `FUTURE-PARITY-BACKLOG.17.3 - align Julia complete named marks`
+
+- ID: `FUTURE-PARITY-BACKLOG.17.4`
+  Status: `done`
+  Goal: Align Lua complete named-mark execution and inventory without a backend-only dialect.
+  Dependencies: `.17.1`, `.17.2`, `.17.3`, `LUA-BACKEND-PARITY.4.3.7.2`
+  Acceptance: Lua consumes the unchanged neutral contract on PUC Lua and LuaJIT through its rule-local named-mark
+    frame and Unicode projection seam; the seven calls join the shared inventory only with all established
+    backends aligned, and `LUA-BACKEND-PARITY.4.3.7.3` consumes rather than duplicates the implementation.
+  Verification: **PASS 2026-07-14.** Lua resolves exactly the seven staged calls through a parse-scoped
+    rule-label/mark-name/UTF-8-byte-offset store, existing entry/local match registers, and Unicode public
+    projections. Bare names remain symbolic, clear is rule-local, and a same-name child mark cannot replace its
+    parent's checkpoint. Native and serialized `SpecFile` reconstruction return the unchanged neutral value.
+    `bash tools/run_lua_local.sh` passes 119/119 on separately built PUC Lua and LuaJIT adapters plus syntax,
+    CLI-scaffold, and exact 105-fixture manifest checks. The legacy shared inventory remains exactly 239 names.
+    Canonical CI passes capability 64/0/0, shared coverage 239/105, CLI 61/61 twice, and Phase 0 `1..1031` in
+    627 seconds; doctrine, Knowledge Map, mdBook, and whitespace checks also pass.
+  Commit: `FUTURE-PARITY-BACKLOG.17.4 - align Lua complete named marks`
+
+- ID: `FUTURE-PARITY-BACKLOG.17.5`
+  Status: `done`
+  Goal: Admit complete named-mark inventory and close the symmetric-omission gate weakness.
+  Dependencies: `.17.1`, `.17.2`, `.17.3`, `.17.4`
+  Acceptance: Coverage derives or checks the complete public-current contract set independently of corpus seeding;
+    inventories, neutral fixtures, exact outputs, all available generated paths, mdBook, capability census, KM,
+    roadmaps, and complete local gates agree; `.17` closes and Lua `.4.3.7.3` may claim full named-mark parity.
+  Verification: **PASS 2026-07-15.** Dart, Julia, and Lua admit the exact seven names into equal 246-name shared
+    inventories while retaining exact family views. The coverage gate now uses 105 corpus fixtures plus the
+    complete named-mark fixture, independently checks all 122 public identifier-shaped Perl contracts, and locks
+    nine compatibility/legacy/internal exclusions. A simultaneous three-backend `clear_mark` deletion reports it
+    through both the exact-family and independent-public checks. Exact contract and Perl/Rust focused proofs pass;
+    complete Dart 214/CLI 61x2/corpus 105, Julia 1,414/CLI 61x2/corpus 105, Lua 119/119 on both ABIs, and the full
+    Rust package/CLI 61x2 gates pass. Canonical CI passes capability 64/0/0, coverage 246/105+1/122, CLI 61x2,
+    and Phase 0 `1..1031` in 633 seconds.
+  Commit: `FUTURE-PARITY-BACKLOG.17.5 - admit complete named mark inventory`
+
+- ID: `FUTURE-PARITY-BACKLOG.18`
+  Status: `proposed`
+  Goal: Govern the post-current-backend-parity Unicode structured-text-to-AST format program.
+  Children: `.18.0`, `.18.1`, `.18.2`, `.18.3`; detailed execution trees:
+    `STRUCTURED-TEXT-FORMAT-PROGRAM`, `NATIVE-PARSER-ACCELERATOR`
+  Acceptance: The agreed program is dependency-gated on complete Perl/Rust/Dart/Julia/Lua parity, enumerates every
+    eligible catalog row, makes the dynamically compiled `.spec` graph the sole parser source, uses real formats
+    as requirements evidence for reusable `.spec` features, forbids hidden host parsers, separates parsing from
+    evaluation/domain semantics, governs those features as terse/readable/highly expressive without discarding
+    semantic signal, and keeps roadmap/book/KM/live state exact.
+    Dynamic format-parser construction and execution are also correlated through the neutral trace contract, with
+    exact emission-only rule filters and shared non-interference proof owned after current parity.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.18.0`
+  Status: `done`
+  Goal: Ratify and durably decompose the post-parity Unicode structured-text format program.
+  Dependencies: director/engineer agreement; execution dependencies live in `STRUCTURED-TEXT-FORMAT-PROGRAM.1`.
+  Acceptance: ADR, dedicated detailed tree, exact 91-row eligible inventory, exclusion boundary, parity-first gate,
+    dynamic `.spec`-graph sole-source contract, roadmap/index/live-doc/mdBook/Knowledge Map sync, and no behavior change.
+  Verification: **PASS 2026-07-15.** Direct source/task extraction reports 91/91 unique eligible row names with
+    zero missing/extra; the dedicated tree preserves exact binary/container exclusions. ADR `0034`, roadmap/index/live docs, mdBook,
+    and Knowledge Map agree on full-current-backend parity first, dynamic `.spec`-graph sole-source construction,
+    format-driven general features, no hidden host parser, layered syntax reuse, independent full HTML,
+    parsing/evaluation separation, explicit future decoder
+    seams, and measured correctness-preserving performance. Governance/book/count/whitespace checks pass; no
+    parser/compiler/runtime/helper/fixture/capability or format behavior changed.
+  Commit: `FUTURE-PARITY-BACKLOG.18.0 - adopt structured text requirements program`
+
+- ID: `FUTURE-PARITY-BACKLOG.18.1`
+  Status: `done`
+  Goal: Govern terse, readable, and highly expressive universal `.spec` authoring without erasing semantic signal.
+  Dependencies: `.18.0`
+  Acceptance: A durable neutral doctrine defines concision, readability, expressiveness, orthogonal composition,
+    diagnostic precision, representative-format evidence, and the uniform value-binding precedent; explicitly
+    retains semantically informative recursive traversal names; synchronizes ADR, roadmap, dedicated program tree,
+    mdBook, Knowledge Map, and live docs; and changes no parser/compiler/runtime behavior.
+  Verification: **PASS 2026-07-15.** ADR `0035`, the structured-format program, roadmap/index/live docs, mdBook,
+    and Knowledge Map define terseness as removal of redundant ceremony, readability as local predictability, and
+    expressiveness as small typed orthogonal composition. Uniform binding is the positive precedent. Recursive
+    `walk_leaves`/`map_leaves`/`reduce_leaves` retain their semantic suffix and gain no short aliases. Memory
+    architecture, Knowledge Map, doctrines, mdBook, task metadata, and whitespace checks pass. No syntax,
+    parser/compiler/runtime, helper, alias, fixture, inventory, capability, or format behavior changed.
+  Commit: `FUTURE-PARITY-BACKLOG.18.1 - govern expressive spec authoring`
+
+- ID: `FUTURE-PARITY-BACKLOG.18.2`
+  Status: `done`
+  Goal: Govern end-to-end, selectively focused observability for dynamically constructed format parsers.
+  Dependencies: `.18.1`; execution remains gated by `STRUCTURED-TEXT-FORMAT-PROGRAM.1`.
+  Acceptance: A durable neutral contract requires compile-time tracing from `.spec` graph load through staged
+    parsing, validation, contract resolution, cache identity, and compiled plan; runtime tracing through rule,
+    branch, cursor/capture, AST-emission, recovery, and diagnostic behavior; the existing ordered trace levels and
+    sinks; exact rule-label filtering that changes emission only; correlated source/spec/rule identity; bounded
+    diagnostic payloads; traced/untraced semantic identity; reusable cross-backend fixtures; and roadmap/program/
+    mdBook/Knowledge Map/live-doc synchronization without changing current parser/compiler/runtime behavior.
+  Verification: **PASS 2026-07-15.** Knowledge Map-first trace inspection confirms the existing neutral ordered
+    levels/sinks and completed Perl/Rust plus Dart/Julia full native-pipeline propagation; Lua runtime trace is
+    complete while full frontend/compiler/function/staged propagation remains correctly owned by `.5.3`. ADR
+    `0037` makes construction plus execution observability a format-readiness contract, adopts future exact
+    rule-label allowlists as emission-only filters, correlates spec/cache/rule/source/position identity, bounds
+    payloads, and requires shared traced/untraced parity proof. `STRUCTURED-TEXT-FORMAT-PROGRAM.2.7` owns the
+    executable neutral contract after current parity. The stale pre-full-pipeline Dart mdBook section and one
+    duplicated Julia bullet are removed. Memory architecture, Knowledge Map, doctrines, task metadata, mdBook,
+    and whitespace checks pass; no parser/compiler/runtime/CLI/trace behavior changes.
+  Commit: `FUTURE-PARITY-BACKLOG.18.2 - govern selective parser observability`
+
+- ID: `FUTURE-PARITY-BACKLOG.18.3`
+  Status: `done`
+  Goal: Govern an optional backend-native acceleration tier derived from dynamic `.spec` parsers.
+  Dependencies: `.18.2`; implementation requires at least one completed dynamic format parser and objective
+    benchmark evidence.
+  Acceptance: Audit generated-source v1 before planning; preserve load-`foo.spec` immediate dynamic parsing as the
+    primary contract and sole source of truth; distinguish current semantic source wrappers from an optimizing
+    compiler; define native artifacts as fingerprinted disposable derivatives of normalized compiled IR; require
+    exact AST/diagnostic/Unicode/recovery/trace equivalence, source/rule correlation, safe trust/toolchain
+    boundaries, deterministic invalidation and dynamic fallback, correctness-preserving cold/warm/parse
+    benchmarks, backend-specific strategies without making acceleration a format-support or semantic-parity gate,
+    a separate detailed horizon tree, and roadmap/program/mdBook/Knowledge Map/live-doc synchronization without
+    changing current behavior.
+  Verification: **PASS 2026-07-15.** Knowledge Map-first generated-source audit confirms v1 already supplies
+    deterministic identity, normalized compiled state, independent host loading, portable trace roles, and
+    dynamic-oracle equivalence, but its current wrappers/state reconstruction make no optimizing-compiler or speed
+    claim. ADR `0038` and `NATIVE-PARSER-ACCELERATOR` preserve dynamic/warm/native tiers, the dynamic parser as
+    primary/oracle/fallback, exact behavioral/trace equivalence, complete fingerprint/invalidation, explicit
+    toolchain/trust boundaries, objective build/load/break-even proof, backend-specific internal strategies, and
+    optional Perl participation. Program/roadmap/index/live-doc/mdBook/Knowledge Map alignment and governance/
+    book/whitespace checks pass; no code, behavior, capability, format support, or benchmark claim changes.
+  Commit: `FUTURE-PARITY-BACKLOG.18.3 - plan optional native parser acceleration`
+
+- ID: `FUTURE-PARITY-BACKLOG.19`
+  Status: `proposed`
+  Goal: Add portable explicit nested-write vivification and receiver-mutating method semantics without hidden
+    reads, host-language aliasing, or backend drift.
+  Children: `.19.0`, `.19.1`, `.19.2`, `.19.3`, `.19.4`, `.19.5`, `.19.6`, `.19.7`
+  Acceptance: The language distinguishes reads from creating writes, defines path/container/conflict/gap semantics
+    neutrally, uses `!` only for methods that genuinely mutate their receiver and have a clear non-mutating twin,
+    preserves root-kind traversal and stable callback paths, reaches exact Perl/Rust/Dart/Julia/Lua parity, and
+    closes capability/public/book/KM/no-drift proof before the parent is done.
+
+- ID: `FUTURE-PARITY-BACKLOG.19.0`
+  Status: `done`
+  Goal: Audit current nested-path/traversal/method grammar and ratify the portable write-vivification/receiver-
+    mutation direction before syntax or runtime code.
+  Dependencies: `.18.1`
+  Acceptance: Knowledge Map and exact current-contract evidence establish the non-vivifying nested-write boundary,
+    uniform-binding top-level creation, both root-kind traversal contracts, callback path/value scope, and current
+    identifier grammar; a durable decision fixes accepted creation/gap/conflict/method invariants and exclusions
+    while routing exact AST/diagnostic/re-entrancy contracts to `.19.1`; implementation is split per backend plus
+    admission; roadmap, mdBook, KM, and live docs align; no syntax/parser/compiler/runtime behavior changes.
+  Verification: **PASS 2026-07-15.** Knowledge Map retrieval plus exact five-backend source/tests confirm current
+    intermediate non-vivification, dense array replace/append, updated-root results, root-kind traversal, scoped
+    complete paths, and identifier-only method grammar. Perl's direct probe, Rust three-test `terse_11_4`, Dart's
+    exact no-autovivification test, Julia's complete local suite through the stacked installed depot, and Lua
+    121/121 on PUC Lua/LuaJIT pass. The first Julia command with an empty writable depot alone failed only because
+    it attempted forbidden registry/network resolution; the documented stacked-depot rerun passed. ADR `0036`,
+    roadmap/book/KM/live docs, and the detailed neutral/backend/admission split align. Memory architecture,
+    Knowledge Map, doctrines, task metadata, mdBook, and whitespace checks pass. No behavior changed.
+  Commit: `FUTURE-PARITY-BACKLOG.19.0 - plan write vivification and bang mutation`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.1`
+  Status: `pending`
+  Goal: Lock an executable backend-neutral v1 contract for nested write-vivification and approved `!` mutation.
+  Children: `.19.1.1`, `.19.1.2`, `.19.1.3`
+  Dependencies: `.19.0`; complete current Perl/Rust/Dart/Julia/Lua parity (satisfied by
+    `LUA-BACKEND-PARITY.8.4`; not selected ahead of `.5.1`)
+  Acceptance: Strict fixtures define syntax/AST, write-only creation, path segment/container selection, gaps,
+    kind conflicts, copied results, mutation identity, callback return replacement, original-shape traversal,
+    stable copied paths, exact exclusions, and typed diagnostics before backend code.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.1.1`
+  Status: `pending`
+  Goal: Lock the neutral nested write-vivification syntax, AST, evaluation, creation, conflict, dense-array, result,
+    and diagnostic contract.
+  Dependencies: `.19.0`; complete current-backend parity
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.1.2`
+  Status: `pending`
+  Goal: Lock the neutral `map_leaves!` parser, addressable receiver, callback, stable path, original-shape,
+    atomic-commit, re-entrancy, result, continuation, and exclusion contract.
+  Dependencies: `.19.0`; complete current-backend parity
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.1.3`
+  Status: `pending`
+  Goal: Compose strict future fixtures/checkers for both v1 mechanisms and prove current backends fail only at the
+    expected pre-implementation boundary.
+  Dependencies: `.19.1.1`, `.19.1.2`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.2`
+  Status: `pending`
+  Goal: Implement the unchanged v1 contract on the Perl reference backend.
+  Children: `.19.2.1`, `.19.2.2`
+  Dependencies: `.19.1`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.2.1`
+  Status: `pending`
+  Goal: Implement Perl reference nested write-vivification over scalar-held typed value trees.
+  Dependencies: `.19.1.3`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.2.2`
+  Status: `pending`
+  Goal: Implement Perl reference `map_leaves!` parsing, lowering, atomic receiver rebinding, and typed boundaries.
+  Dependencies: `.19.2.1`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.3`
+  Status: `pending`
+  Goal: Implement the unchanged v1 contract on Rust, including interpreted and supported generated routes.
+  Children: `.19.3.1`, `.19.3.2`
+  Dependencies: `.19.2`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.3.1`
+  Status: `pending`
+  Goal: Implement Rust nested write-vivification through typed parsed/serialized/emitted state and runtime.
+  Dependencies: `.19.2`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.3.2`
+  Status: `pending`
+  Goal: Implement Rust `map_leaves!` through typed parsed/serialized/emitted state and runtime.
+  Dependencies: `.19.3.1`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.4`
+  Status: `pending`
+  Goal: Implement the unchanged v1 contract on Dart across native and supported generated/emitted routes.
+  Children: `.19.4.1`, `.19.4.2`
+  Dependencies: `.19.3`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.4.1`
+  Status: `pending`
+  Goal: Implement Dart nested write-vivification through typed parsed/emitted state and runtime.
+  Dependencies: `.19.3`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.4.2`
+  Status: `pending`
+  Goal: Implement Dart `map_leaves!` through typed parsed/emitted state and runtime.
+  Dependencies: `.19.4.1`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.5`
+  Status: `pending`
+  Goal: Implement the unchanged v1 contract on Julia across native and supported generated/emitted routes.
+  Children: `.19.5.1`, `.19.5.2`
+  Dependencies: `.19.4`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.5.1`
+  Status: `pending`
+  Goal: Implement Julia nested write-vivification through typed parsed/emitted state and runtime.
+  Dependencies: `.19.4`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.5.2`
+  Status: `pending`
+  Goal: Implement Julia `map_leaves!` through typed parsed/emitted state and runtime.
+  Dependencies: `.19.5.1`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.6`
+  Status: `pending`
+  Goal: Implement the unchanged v1 contract on PUC Lua and LuaJIT through public compiled-state reconstruction.
+  Children: `.19.6.1`, `.19.6.2`
+  Dependencies: `.19.5`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.6.1`
+  Status: `pending`
+  Goal: Implement Lua nested write-vivification through typed parsed/reconstructed state on both ABIs.
+  Dependencies: `.19.5`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.6.2`
+  Status: `pending`
+  Goal: Implement Lua `map_leaves!` through typed parsed/reconstructed state on both ABIs.
+  Dependencies: `.19.6.1`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.19.7`
+  Status: `pending`
+  Goal: Admit the portable surface and close public/capability/book/KM/cross-backend no-drift.
+  Dependencies: `.19.2`, `.19.3`, `.19.4`, `.19.5`, `.19.6`
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.20`
+  Status: `proposed`
+  Goal: Add evidence-based Rust mutation testing as a targeted verification layer.
+  Children: `.20.0`, `.20.1`, `.20.2`, `.20.3`, `.20.4`; detailed execution tree: `RUST-MUTATION-TESTING`
+  Acceptance: The Rust workspace gains a measured mutation-testing policy that focuses hand-written semantic code,
+    records justified exclusions, converts meaningful survivors into focused tests or documented equivalents,
+    keeps all mutation execution outside per-commit/pre-commit/ordinary-local-CI gates, uses only explicit
+    on-demand or milestone/admission campaigns, bounds resources and artifacts, and integrates a stable manual
+    command rather than turning mutation score into an unexamined vanity metric.
+
+- ID: `FUTURE-PARITY-BACKLOG.20.0`
+  Status: `done`
+  Goal: Audit and ratify targeted `cargo-mutants` use for the Rust backend before configuration or test changes.
+  Dependencies: `.18.3`
+  Acceptance: Check the Knowledge Map and current Rust/local-CI test architecture; confirm available tool/version;
+    inventory candidate production files and mutations without executing the full mutation campaign; define scope,
+    exclusions, baseline/survivor/timeout/unviable handling, resource/artifact safety, explicit campaign cadence
+    cadence, and follow-on implementation/admission leaves in a detailed task tree; synchronize roadmap/index/live
+    docs/mdBook/KM without changing Rust behavior or claiming a mutation score before measurement.
+  Verification: **PASS 2026-07-15.** Knowledge Map and Rust workspace/test/local-CI audit found no prior mutation
+    plan or config. Installed `cargo-mutants 27.0.0` list-only inventory reports 3,333 candidates across 19 files:
+    core 1,217, runtime 2,116; largest files `engine.rs` 1,343, `expr.rs` 522, `parser.rs` 320. No mutant executed.
+    ADR `0039` and `RUST-MUTATION-TESTING` prohibit all per-commit/pre-commit/ordinary-local-CI mutation runs,
+    require explicit targeted or milestone/release campaigns, typed survivor/timeout/unviable dispositions,
+    resource/artifact controls, and only the generator-backed Unicode table as the initial exclusion. Roadmap,
+    index, live docs, mdBook, Knowledge Map, governance, and whitespace checks pass; no Rust code/test/CI behavior
+    or mutation-score claim changes.
+  Commit: `FUTURE-PARITY-BACKLOG.20.0 - plan targeted Rust mutation testing`
+
+- ID: `FUTURE-PARITY-BACKLOG.21`
+  Status: `proposed`
+  Goal: Add backend-specific implementation companion books around the canonical neutral mdBook.
+  Children: `.21.0`, `.21.1`; detailed execution tree: `BACKEND-COMPANION-BOOKS`
+  Acceptance: The neutral mdBook remains the sole normative language/portable-behavior owner; independently
+    buildable Perl/Rust/Dart/Julia/Lua companions document only user-relevant variant implementation, embedding,
+    operation, performance, debugging, and limitation material; cross-links, canonical-owner metadata, and
+    registered drift checks prevent five copied manuals.
+
+- ID: `FUTURE-PARITY-BACKLOG.21.0`
+  Status: `done`
+  Goal: Adopt and dependency-order the companion-book architecture before scaffolding or migration.
+  Dependencies: `.20.0`
+  Acceptance: Record ADR `0040`, the detailed task tree, exact content boundary, five companion scope, risks,
+    parity dependency, and one future inventory frontier across task/index/roadmaps/live/KM/mdBook; change no book
+    layout or current content ownership.
+  Verification: **PASS 2026-07-15.** ADR `0040` and `BACKEND-COMPANION-BOOKS` define one normative neutral book,
+    five optional implementation companions, precise what-versus-how routing, shared-template/independent-build/
+    canonical-owner/drift gates, and a read-only inventory first. `.21.1` remains dependency-gated until current
+    backend parity completes. No scaffold, content move, runtime behavior, or capability changed.
+  Commit: `FUTURE-PARITY-BACKLOG.21.0 - plan backend companion books`
+
+- ID: `FUTURE-PARITY-BACKLOG.21.1`
+  Status: `pending` / parity prerequisite satisfied
+  Goal: Execute the detailed `BACKEND-COMPANION-BOOKS.1-.8` inventory/scaffold/population/closeout program.
+  Dependencies: `.21.0`, complete current Perl/Rust/Dart/Julia/Lua parity (satisfied by
+    `LUA-BACKEND-PARITY.8.4`; detailed inventory remains separately activatable)
+  Acceptance: All five companions and the neutral book satisfy the detailed tree's build/navigation/ownership/
+    no-duplication gates; ordinary portable readers never require a companion.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.22`
+  Status: `pending`
+  Goal: Make immutable cross-contract status markers survive mutable task-index frontier rewrites by construction.
+  Acceptance: Inventory every contract checker that anchors an unrelated closed-state marker inside a mutable
+    `docs/TASK_TREE.md` active-row summary; move or derive those markers through one stable governed status section
+    without weakening current public claims; prove an active-row rewrite cannot erase repeated-action or another
+    closed contract; update checker diagnostics, task-tree guidance, Knowledge Map, roadmaps, and mdBook together.
+  Finding: `.10.2`, `.10.3.0`, `.10.3.2.0`, `.10.4.0.1`, and `.10.4.1` canonical runs independently lost the
+    exact repeated-action closeout sentence when the same active row was refreshed. The existing checker prevents
+    a bad commit, but the mutable anchor repeatedly burns a full canonical restart. This task owns the structural
+    repair after the current dirty semantic leaf is committed; it is not active and does not authorize a pivot.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.23`
+  Status: `pending`
+  Goal: Repair and mechanically guard mdBook current-state drift exposed by a complete startup review.
+  Children: `.23.1`, `.23.2`
+  Acceptance: Root-cause every recorded current-facing contradiction against executable contracts and git history;
+    repair only under dependency-correct leaves; strengthen the owning no-drift checks so semantic meaning, not
+    merely anchor/count presence, is enforced; preserve genuinely dated history; synchronize book/KM/live docs;
+    pass focused and canonical gates before closure.
+  Finding: The 2026-07-21 full 46-page startup review found two distinct drift classes. Commit `ac217f6c`
+    mechanically removed aggregate-selector spellings from the migration examples themselves, yielding meaningless
+    identity rewrites such as ``items` becomes `items``; `check_public_aggregate_selector_surface.py` validates
+    classified-occurrence counts and bare-binding anchors but does not require an old-selector-to-new-binding
+    contrast. Separately, current-facing pages retain superseded rollout statements, including semantic
+    introspection at 50 mutations/no backend, bare-edge rollout as Perl-only, logical-helper rollout as pending,
+    and formal-grammar backend/marker status that contradicts admitted current contracts. At discovery this task
+    was queued only: active Rust `.10.4.2` remained the dirty-tree frontier, so no pivot was authorized before its
+    clean commit.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `FUTURE-PARITY-BACKLOG.23.1`
+  Status: `pending`
+  Goal: Restore meaningful aggregate-selector migration examples and guard their semantic contrast.
+  Depends on: `.23`
+  Acceptance: Inventory every mechanically collapsed old-to-new selector example, restore exact rejected
+    `array(IDENTIFIER)` / `hash(IDENTIFIER)` source only in explicit migration context, and extend the public
+    checker with exact contrast mutations so another broad replacement cannot produce identity guidance while
+    retaining the expected file/reference counts.
+
+- ID: `FUTURE-PARITY-BACKLOG.23.2`
+  Status: `pending`
+  Goal: Reconcile remaining current-facing mdBook rollout and backend-status claims with executable contracts.
+  Depends on: `.23.1`
+  Acceptance: Audit the startup finding set plus adjacent prose; correct semantic-introspection, bare-edge,
+    logical-helper/truthiness, structured-control, and root-marker current status from their canonical contracts;
+    distinguish dated history from current guidance; add omission/stale-claim checks at the owning gates; build and
+    review the complete book before closing `.23`.
+
+- ID: `FUTURE-PARITY-BACKLOG.24`
+  Status: `done`
+  Goal: Make capability `excluded_or_future` narratives status-fresh and mechanically governed.
+  Children: `.24.0`, `.24.0.1`, `.24.0.2`, `.24.1`, `.24.2`
+  Dependencies: `.11.7.2`
+  Acceptance: Audit every exclusion against its current task/decision/rollout authority; distinguish retained
+    legacy exclusions from genuinely pending directions; remove or correct satisfied future narratives; make the
+    capability checker reject a closed owner with stale pending prose and omission/duplication/status mutations;
+    synchronize capability docs, Knowledge Map, roadmaps, and mdBook without changing capability rows or behavior.
+  Finding: While `.11.7.1` corrected `future.generic_final_codeblock`, the same manifest still described semantic
+    introspection/MCP as parked under completed `.10.1` and rule-local cursor rollout as 5 complete / 3 pending
+    under completed `.9.1.2`, despite their committed complete/public states. `check_capability_conformance.pl`
+    validates only record fields, unique ids, and tracked owner existence, so the 80/0/0 census can coexist with
+    stale exclusion narratives. This queued owner does not widen or block the active callable leaf.
+
+- ID: `FUTURE-PARITY-BACKLOG.24.0`
+  Status: `done`
+  Goal: Freeze the exact exclusion-freshness model and RED mutation plan before changing governance.
+  Children: `.24.0.1`, `.24.0.2`
+  Dependencies: `.11.7.2`
+  Acceptance: Classify every current exclusion as retained legacy or pending future from canonical decisions/tasks;
+    reproduce each stale claim; define allowed owner states, supersession/removal rules, and exact mutations without
+    changing manifest status or production behavior.
+  Verification: **PASS 2026-08-01.** Exact four-record authority audit and 24-mutation schema-v2 model are
+    behavior-free; capability remains 80/0/0; Knowledge Map 783/6,343, sole-facing mdBook 79/14,056 KiB, all
+    seven doctrines, and canonical RAM 52% plus Phase 0 1,031/1,031 in 651 seconds pass.
+  Commit: `FUTURE-PARITY-BACKLOG.24.0 - freeze exclusion freshness model`
+
+### `FUTURE-PARITY-BACKLOG.24.0` Acceptance Checklist
+
+- [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Activate task-tree-first from clean callable-admission commit
+  `47b40c7a` (125/300), with a zero-byte brief and no rendered-book, bytecode, managed-run, or stray-log residue.
+- [x] **RETRIEVE CANONICAL AUTHORITIES** — Read the Knowledge Map pointers, every exclusion owner and governing
+  decision/task, the manifest checker, capability docs, roadmaps, and sole-facing mdBook projections before
+  classifying status or designing mutations.
+- [x] **FREEZE THE COMPLETE EXCLUSION CENSUS** — Account for every current exclusion exactly once, distinguishing
+  retained compatibility/legacy records, live future directions, and satisfied/stale narratives with evidence.
+- [x] **DEFINE STATUS / SUPERSESSION RULES** — Specify allowed owner states and the exact retain, rewrite, remove,
+  or supersede rule without assuming that every completed owner makes a legacy exclusion invalid.
+- [x] **FREEZE RED MUTATIONS AND ORDERED HANDOFF** — Record omission, duplication, owner/status, satisfied-claim,
+  and false-current/future mutations that `.24.1` must reject; route the two audit-discovered prior-closeout
+  defects through `.24.0.1-.2`, then keep `.24.2` as the public no-drift closeout.
+- [x] **LOCKSTEP / NO BEHAVIOR / COMMIT / CLEAN HANDOFF** — Synchronize task-tree, continuity, roadmap, Knowledge
+  Map, and mdBook planning truth; change no manifest row, checker behavior, runtime, capability status, or public
+  contract; pass focused governance/docs/canonical gates, commit `.24.0`, clear the brief, and prove clean before
+  `.24.1` activation.
+
+Activation evidence 2026-08-01: `.11.8.4` landed at `47b40c7a` with all hooks green. Git status was empty,
+`git_message_brief.txt` was zero bytes, and rendered-book/Python-bytecode residue was absent. The empty managed
+run namespace remains the stable repository-local allocator parent; zero Rust logs were found, while 606 normal
+incremental `.bin` records remain retained reusable SSD cache. This leaf owns only the exclusion census,
+authority classification, status/supersession model, and RED mutation plan. Manifest/checker behavior, capability
+rows, parser/compiler/runtime/emitter/MCP behavior, root README, push, and `.24.1` implementation are excluded.
+
+Audit/model evidence 2026-08-01: the exact four-record census is now classified from canonical authority.
+`legacy.perl_plugin_registry` remains a deprecated Perl-only compatibility exclusion under pending `.6`.
+`future.general_parse_job_authoring` remains genuinely future, but its broad `.2` owner was superseded by the
+structural/progressive/staged program: closed `STAGED-LINKED-PARSING` transfers it to `.14`, and ADR `0056` refines
+progressive/staged work into `.14.6-.7`. `.24.0.1` repairs `.2`'s two cross-slice corruptions and records the
+supersession; `.24.1` re-owners the manifest record to active parent `.14`. Semantic/MCP is complete under `.10`
+at public rollout 9/9, native admission 6/6, and MCP 5/5 implementations + 6/6 runtimes; rule-local cursor is
+complete under `.9` at 8/0 with six-runtime recurrence. Both satisfied future records must be removed. Capability
+rows remain 80/0/0.
+
+Frozen governance model 2026-08-01: `.24.1` advances the manifest to schema v2 and adds exact exclusion fields
+`disposition` (`legacy`/`future`) plus nullable `retention_authority`. Future owners may be proposed, pending, or
+active and never use retention authority. Open legacy owners use no retention authority; a completed legacy owner
+is accepted only with an existing repository-relative durable retention authority. Exact current objects/order are
+the unchanged plugin legacy record and a rewritten general parse-job future record owned by `.14`; all satisfied
+ids are denied. The checker parses unique task ids plus their leading status enum, removes redundant hard-coded
+owner insertions, and runs 24 in-memory RED mutations: schema downgrade; missing/unknown disposition; both
+id/disposition mismatches; future/open-legacy retention misuse; completed legacy without retention; completed
+future even with retention; missing task/status, duplicate id, invalid status; extra/omitted/duplicated/reordered
+records; both reason drifts; both owner drifts; and reintroduction of each satisfied semantic/cursor record. No
+temporary workspace is required.
+
+Signoff evidence 2026-08-01: focused capability conformance remains exactly 16 capabilities and 80/0/0; the
+Knowledge Map passes at 783 facts / 6,343 question keys; the sole-facing mdBook builds 79 files / 14,056 KiB; and
+memory, task-tree metadata, whitespace, plus all seven doctrines pass. The definitive authorized canonical gate
+passes semantic/MCP admissions, repository containment and moved-root/outside-CWD execution, callable governance
+at 25 documents, CLI 66x2, RAM 52%, and Phase 0 1,031/1,031 in 651 seconds before `local CI gate passed`. The diff
+changes no manifest/checker behavior, capability row, parser/compiler/runtime/emitter/MCP behavior, root README,
+or public language contract. Commit and exact clean-boundary proof are the only remaining workflow actions.
+
+- ID: `FUTURE-PARITY-BACKLOG.24.0.1`
+  Status: `done`
+  Goal: Repair the broad `.2` owner's cross-slice provenance corruption and reconcile its supersession by `.14`.
+  Dependencies: `.24.0`
+  Acceptance: Use Git blame/diffs to preserve the exact two introducing commits; replace `.2`'s unrelated
+    verification/commit fields with truthful supersession by `.14`/`.14.6-.7`; reconcile the stale `.14.1-.4`
+    closed-tree reference, both current Knowledge-card `.14.2-.4` references, and `.2`'s stale pending frontier
+    row; add the narrowest durable
+    metadata guard that rejects the proven pending-node contamination without invalidating legitimate parent/
+    historical records; synchronize task/KM/live evidence; change no manifest, capability, parser/runtime, MCP,
+    or public language behavior.
+  Finding: Commit `e96d389e` accidentally wrote the completed `.9.1.7.4` commit identity into pending `.2`, and
+    commit `7dd70a2d` accidentally wrote `.9.1.7.6` activation/admission detail into `.2` verification. Git history
+    proves both were patch-context placement errors; `.2` goal/acceptance/status remained pending throughout.
+  Finding: The exact current-reference census after RED proof found a third stale owner projection in current card
+    `staged-linked-parsing-architecture`, introduced with structural clarification commit `96179766`; it joins the
+    closed staged tree and current `structural-progressive-staged-authoring-doctrine` card in this repair. Dated
+    2026-07-12 roadmap/live/change/development prose remains truthful history and is not rewritten.
+  Finding: The same census found `.2`'s current-frontier row still pending from original commit `7083eb61`, despite
+    the superseded node repair. It is the fourth current projection and must become superseded with the same exact
+    replacement; broad active-tree frontier/body correspondence remains outside this leaf's low-noise guard.
+  Verification: **PASS 2026-08-01.** Exact Git provenance, RED-before-repair metadata diagnostics, four repaired
+    current projections, four checker fixtures, capability 80/0/0, Knowledge Map 783/6,345, sole-facing mdBook
+    79/14,060 KiB, all seven doctrines, CLI 66x2, RAM 50%, and Phase 0 1,031/1,031 in 640 seconds pass.
+  Commit: `FUTURE-PARITY-BACKLOG.24.0.1 - repair staged owner metadata`
+
+### `FUTURE-PARITY-BACKLOG.24.0.1` Acceptance Checklist
+
+- [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Activate task-tree-first from clean exclusion-model commit
+  `7a5d0af3` (126/300), with zero-byte brief and no rendered-book, untracked, or in-flight process residue.
+- [x] **RETRIEVE / REVERIFY EXACT PROVENANCE** — Use the Knowledge Map before Git blame/show and current task/
+  decision authorities; preserve exact introducing commits, original `.2` metadata, current status enums, and the
+  `.14`/`.14.6-.7` supersession chain before editing the corrupted node or a checker.
+- [x] **RED-GUARD THE PROVEN CONTAMINATION CLASS** — Add the narrowest mutation-sensitive task-metadata denial
+  that catches unrelated descendant commit/verification text in an open node without rejecting legitimate parent,
+  historical, planned, or superseded records; prove RED before changing `.2`.
+- [x] **REPAIR `.2` / RECONCILE SUPERSESSION** — Replace only the two cross-slice insertions with truthful
+  no-implementation supersession evidence, use an allowed status, and update the two stale `.14.1-.4` /
+  `.14.2-.4` forms plus the stale pending frontier row across all four current references to parent `.14` plus
+  progressive `.14.6` and staged `.14.7` ownership; preserve dated historical claims.
+- [x] **LOCKSTEP / NO BEHAVIOR / COMMIT / CLEAN HANDOFF** — Synchronize task-tree, Knowledge Map, roadmaps, live
+  continuity, and sole-facing mdBook only where current architectural truth changes; preserve manifest/checker
+  capability meaning, rows 80/0/0, parser/runtime/MCP/public language behavior, and root README; pass focused,
+  doctrine, book, and warranted canonical gates, commit `.24.0.1`, clear the brief, and prove clean before `.24.0.2`.
+
+Activation evidence 2026-08-01: `.24.0` landed at `7a5d0af3` with pre/post memory-boundary checks and all seven
+doctrines green. Git status and both diffs were empty, `git_message_brief.txt` was zero bytes, rendered-book output
+was absent, and no background result remained to consume. Existing `.linkedspec-data` Python bytecode and migrated
+trace caches plus tracked PGEN issue logs are retained project-local authorities/caches, not disposable residue.
+This leaf owns only exact task metadata, four stale current owner references, one narrow metadata guard, and their durable
+projections. Manifest/exclusion implementation, capability rows, parser/compiler/runtime/emitter/MCP behavior,
+root README, callable count repair `.24.0.2`, `.24.1`, push, and unrelated artifact deletion are excluded.
+
+Provenance/RED evidence 2026-08-01: Knowledge Map retrieval led to the existing narrow doctrine boundary before
+Git archaeology. Original commit `59cbf0be` created pending `.2` with both evidence fields `pending`; `e96d389e`
+misplaced completed `.9.1.7.4` identity into its `Commit`, and `7dd70a2d` replaced its `Verification` with unrelated
+`.9.1.7.6` activation/admission prose. Status vocabulary explicitly allows `superseded` with a named replacement.
+A complete pending-node census showed seven legacy files with non-pending evidence but exactly one node claiming
+task-tree-first activation and exactly one naming a foreign same-tree commit: `.2` in both cases. The first run of
+the expanded checker therefore exited 1 with exactly those two diagnostics before any `.2` repair.
+
+Repair/guard evidence 2026-08-01: `.2` now says `superseded`, names parent `.14` plus progressive `.14.6` and staged
+`.14.7`, states no implementation/activation landed, and has no completion commit. Its current-frontier row, closed
+staged-tree authority, and both current architecture cards agree; dated 2026-07-12 history remains unchanged. The
+checker retains its completed-tree frontier rule and adds only pending activation/foreign-same-tree-commit denials.
+Four in-memory fixtures prove ordinary pending and explicit supersession pass while each exact corruption fails.
+Focused `bash -n`, checker/census/old-owner scans, capability 80/0/0, Knowledge Map 783/6,345, sole-facing mdBook
+79/14,060 KiB, whitespace, and all seven doctrines pass; rendered output is removed. The definitive authorized
+canonical gate passes all seven doctrines, semantic/MCP admissions, repository containment and moved-root/outside-
+CWD execution, CLI 66x2, RAM 50%, and Phase 0 1,031/1,031 in 640 seconds before `local CI gate passed`.
+
+### `FUTURE-PARITY-BACKLOG.24.0.1` TOOLBOX Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — `git show`/`git blame` and `rg -n` prove two unrelated cursor insertions, four stale
+  current node/frontier/authority projections, and the unchanged manifest owner reserved for `.24.1`.
+- [x] **ROOT CAUSE (WHY + WHERE)** — WHY: broad patch context selected `.2`'s first evidence fields; WHERE:
+  `docs/tasks/FUTURE-PARITY-BACKLOG.md:1428` plus introducing commits `e96d389e` and `7dd70a2d`; later ADR `0056`
+  refined ownership without reconciling three other current projections.
+- [x] **FIX** — Mark `.2` superseded without implementation, align four current projections to `.14`/`.14.6-.7`,
+  and extend `scripts/check_task_tree_metadata.sh` with two narrow contradictions plus four in-memory fixtures.
+- [x] **ADDRESSED (verified)** — Exact pre-repair checker exit 1 names both `.2` violations; post-repair checker,
+  zero-result current stale-owner/census scans, Knowledge Map 783/6,345, and mdBook build 79/14,060 KiB pass.
+- [x] **NO REGRESSION** — Focused capability 80/0/0, memory, all seven doctrines, book, and whitespace pass;
+  canonical `bash tools/run_ci_local.sh` passes CLI 66x2, RAM 50%, and Phase 0 1,031/1,031 in 640 seconds.
+- [x] **LOCKSTEP** — Task/index, doctrine registry/mirror/card, staged-architecture cards/tree, continuity, roadmaps,
+  changes/development/live state, and sole-facing book must agree before commit and clean `.24.0.2` handoff.
+
+- ID: `FUTURE-PARITY-BACKLOG.24.0.2`
+  Status: `done`
+  Goal: Repair and guard the sole-facing mdBook callable public-document count.
+  Dependencies: `.24.0.1`
+  Acceptance: Correct project status from 24 to the actual governed 25 public documents; make the callable
+    checker require the exact current count there and reject the stale count; rebuild/review the complete book;
+    preserve callable behavior, 22 existing governance mutations except for the explicit new count mutation,
+    capability 80/0/0, and every backend/runtime route.
+  Finding: `.11.8.4` added the helper catalog as document 25 and guarded the capability README count, but its new
+    opening mdBook project-status paragraph was authored as 24. The page was inventoried without an exact count
+    marker, so both the checker and rendered build passed while the user's sole-facing surface drifted.
+  Verification: Exact neutral 7/11/9/7/4/8 plus all 23 mutations; five-backend/six-runtime callable driver;
+    capability 80/0/0; Knowledge Map 783/6,345; sole-facing mdBook 79 files / 14,060 KiB with rendered exact-line
+    inspection; memory/task/whitespace and all seven doctrines; canonical CLI 66x2, RAM 61%, Phase 0
+    1,031/1,031 in 646 seconds, and `local CI gate passed`.
+  Commit: `FUTURE-PARITY-BACKLOG.24.0.2 - guard callable book count`
+
+### `FUTURE-PARITY-BACKLOG.24.0.2` Acceptance Checklist
+
+- [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Activate task-tree-first from clean pending-owner repair commit
+  `094ed840` (127/300), with zero-byte brief and no rendered-book, untracked, or background-process residue.
+- [x] **RETRIEVE / REVERIFY EXACT PUBLIC INVENTORY** — Use the Knowledge Map and callable contract before source
+  inspection; reverify the governed 25-document inventory, existing 22 mutations, the sole-facing 24 claim, and
+  every current count projection without changing production behavior.
+- [x] **RED-GUARD THE SOLE-FACING COUNT** — First prove the current checker accepts the stale book count, then add
+  the smallest exact marker plus one mutation that rejects 24 or any non-25 current claim while preserving all 22
+  existing topology/route/status/public mutations.
+- [x] **REPAIR / RENDER / REVIEW THE COMPLETE BOOK** — Correct the sole-facing project-status count from 24 to 25,
+  rebuild all 79 rendered files, inspect the affected output and surrounding current callable guidance, and remove
+  generated output after measurement.
+- [x] **LOCKSTEP / NO BEHAVIOR / COMMIT / CLEAN HANDOFF** — Synchronize task/index, Knowledge Map, roadmaps, live
+  continuity, changes/development/architecture, and the mdBook; preserve callable/runtime/emitter/MCP/capability
+  behavior and rows 80/0/0, root README, and `.24.1`; pass focused/doctrine/book/warranted canonical gates, commit,
+  clear the brief, and prove clean before `.24.1`.
+
+Activation evidence 2026-08-01: `.24.0.1` landed at `094ed840` after its pre/post activation-pointer checks and all
+seven doctrines passed. Exact post-commit proof found empty status plus staged/unstaged diffs, a zero-byte brief,
+no rendered book, synchronized Knowledge Map 783/6,345, and no background result. This leaf owns only the exact
+sole-facing callable count, its narrow checker mutation, and lockstep projections. Callable implementation/routes,
+the existing 22 mutations, capability rows/manifest semantics, parser/compiler/runtime/emitter/MCP behavior, root
+README, `.24.1`, push, and unrelated artifact cleanup are excluded.
+
+Reproduction/root-cause evidence 2026-08-01: Knowledge Map retrieval led directly to the callable-count drift and
+five-backend admission cards. The contract contains exactly 25 documents and 12 stale-claim denials, while the
+unchanged checker passes 7/11/9/7/4/8 plus all 22 governance mutations even though sole-facing project status says
+24. `git blame` proves commit `47b40c7a` authored the stale paragraph and added only the generic five-backend marker
+to the pre-existing project-status inventory entry; exact numeric text was never required or denied. The existing
+22 mutation targets remain fixed. This leaf adds one project-status `25 public documents` marker, one path-scoped
+stale-24 denial, and one explicit count-drift mutation, then repairs the book only after the checker is RED.
+
+RED/GREEN evidence 2026-08-01: after the checker and JSON contract required project status to contain `25 public
+documents`, denied path-scoped `24 public documents`, and appended `project_status_public_count_drift` after the
+unchanged 22 mutations, the routed checker exited 1 with exact `callable_public_marker_missing` on the sole-facing
+page. Changing only that page's current line to 25 documents and 23 total mutations made the same checker pass
+7/11/9/7/4/8 plus all 23 governance mutations. The complete book then builds 79 files / 14,060 KiB; rendered
+project status contains the exact corrected line, rendered local-CI guidance says 23 mutations and 25 documents,
+and rendered project status contains no `24 public documents`. Exact generated output is removed after review.
+
+Signoff evidence 2026-08-01: the rooted callable driver passes neutral 7/11/9/7/4/8+23, Perl 10, Rust 18, Dart
+21, Julia 125+118+239, and the same Lua consumer at 449 assertions on PUC Lua and LuaJIT. Capability remains
+80/0/0; Knowledge Map is 783/6,345; memory/task/whitespace and all seven doctrines pass. The definitive authorized
+canonical gate proves semantic/MCP admissions, callable 25 documents/23 mutations, repository containment,
+moved-root/outside-CWD execution, CLI 66x2, RAM 61%, and Phase 0 1,031/1,031 in 646 seconds before
+`local CI gate passed`. No callable implementation, backend route, capability, parser/runtime/emitter/MCP, root
+README, or push movement occurs.
+
+### `FUTURE-PARITY-BACKLOG.24.0.2` TOOLBOX Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Show the governed inventory says 25 while the sole-facing book says 24 and the
+  current checker still passes.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Identify the exact closeout patch and checker inventory/count boundary that
+  allowed a listed public document's own numeric status claim to escape validation.
+- [x] **FIX** — Make the book say 25 and make callable governance require that exact current marker.
+- [x] **ADDRESSED (verified)** — Prove the corrected marker passes and the isolated stale-24 mutation fails.
+- [x] **NO REGRESSION** — Preserve all existing 22 mutations, backend/runtime routes, capability 80/0/0, complete
+  rendered book, all seven doctrines, and warranted canonical proof.
+- [x] **LOCKSTEP** — Task/index, Knowledge Map, roadmaps, live docs, checker, capability guidance, and sole-facing
+  book agree before commit and clean `.24.1` handoff.
+
+- ID: `FUTURE-PARITY-BACKLOG.24.1`
+  Status: `done`
+  Goal: Correct stale exclusion records and enforce owner/status freshness in capability governance.
+  Dependencies: `.24.0.2`
+  Acceptance: Advance manifest governance to schema v2 with explicit legacy/future disposition and nullable
+    durable retention authority; retain the exact plugin legacy record, rewrite/re-owner general parse-job work to
+    active `.14`, remove satisfied semantic/cursor records, parse unique owner task states instead of existence
+    alone, and reject the frozen 24 in-memory schema/status/retention/omission/duplication/order/reason/owner/
+    satisfied-record mutations while preserving capability rows at 80/0/0.
+
+### `FUTURE-PARITY-BACKLOG.24.1` Acceptance Checklist
+
+- [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Activate task-tree-first from clean readability-intake commit
+  `f1cd59d3` (129/300), with zero-byte brief and no rendered-book, untracked, or background-result residue.
+- [x] **RETRIEVE / REVERIFY FROZEN MODEL** — Use the Knowledge Map, `.24.0` audit evidence, exact manifest,
+  checker, task statuses, and retention authority before editing; confirm the two retained records and all 24
+  frozen mutation classes still match current committed truth.
+- [x] **RED SCHEMA / STATUS GOVERNANCE** — Make the checker reject schema v1, missing/unknown/mismatched
+  disposition, invalid retention combinations, missing/duplicate/invalid owner status, completed future owners,
+  record omission/duplication/reordering, reason/owner drift, and both satisfied-record resurrections before
+  repairing the manifest.
+- [x] **IMPLEMENT EXACT SCHEMA V2 STATE** — Retain only deprecated Perl plugin legacy under `.6` and general
+  parse-job future work re-owned to active `.14`; add exact disposition/nullable retention fields; remove satisfied
+  semantic/MCP and rule-local cursor narratives; preserve all 16 capability rows at 80/0/0.
+- [x] **LOCKSTEP / NO BEHAVIOR** — Synchronize task/index, Knowledge Map, roadmaps, live docs, capability guidance,
+  and sole-facing mdBook wherever current exclusion truth changes; reserve independent public no-drift/parent
+  closure for `.24.2`; change no parser/compiler/runtime/emitter/MCP or root README behavior.
+- [x] **VERIFY / COMMIT / CLEAN HANDOFF** — Pass all 24 mutations, capability 80/0/0, focused task/memory/
+  doctrine/book checks and warranted canonical proof; commit, clear the brief, and prove clean before `.24.2`.
+
+Activation evidence 2026-08-01: callable-count repair landed clean at `5bc31609`; non-urgent rendered-readability
+intake then landed clean at `f1cd59d3` without book or behavior changes. Exact post-commit proof found empty status
+and both diffs, zero-byte brief, synchronized Knowledge Map 783/6,345, no rendered book, and no background result.
+This leaf owns only the schema-v2 manifest/checker implementation and its lockstep current-truth projections.
+Capability rows, parser/compiler/runtime/emitter/MCP behavior, root README, `.24.2` final public no-drift/parent
+closure, push, and unrelated artifact cleanup are excluded.
+
+Authority/root-cause evidence 2026-08-01: Knowledge Map retrieval led directly to the frozen four-record audit and
+checker-gap cards. Current task truth remains exact: plugin owner `.6` is pending, broad `.2` is superseded,
+replacement parent `.14` is active, and satisfied parents `.9`/`.10` are done. The original prose says 24
+mutations but enumerates only 23 labels. Root cause is a bookkeeping omission, not a wrong total: schema v2
+requires `retention_authority` to exist even when null, so `missing_retention_authority` is the omitted exact 24th
+mutation. The implementation and Knowledge card make that class explicit rather than silently changing the total.
+
+RED/GREEN evidence 2026-08-01: after syntax passed, the checker-first run against the unchanged manifest exited
+255 with exact `schema_version must be 2`. The manifest then moved from schema 1/four narratives to schema 2/two
+records: plugin legacy remains under pending `.6`, general parse-job future work moves from superseded `.2` to
+active `.14`, and satisfied semantic/MCP plus cursor records are absent. The same checker passes exactly
+`schema v2; 16 capabilities; backend states pass=80 partial=0 gap=0; 2 exclusions; 24 governance mutations`.
+Task parsing derives unique ids and leading status enums from tracked sources; unrelated legacy status suffixes
+remain readable, while every referenced owner must use the current status vocabulary.
+
+Signoff evidence 2026-08-01: focused schema-v2 proof remains exact at 16 capabilities / 80 pass / 0 partial /
+0 gap / two ordered exclusions / 24 governance mutations; the adjacent callable contract remains 23 mutations.
+Knowledge Map passes 783/6,346, the sole-facing mdBook builds 79 files / 14,068 KiB with affected rendered pages
+inspected, and all seven doctrines pass. The definitive canonical gate proves semantic/MCP admissions,
+repository containment, moved-root/outside-CWD execution, CLI 66x2, RAM 52%, and Phase 0 1,031/1,031 in 660
+seconds before `local CI gate passed`. No capability row or parser/compiler/runtime/emitter/MCP/root-README
+behavior moves. Commit subject is `FUTURE-PARITY-BACKLOG.24.1 - enforce exclusion status freshness`; `.24.2`
+follows only after brief clearing and exact clean proof.
+
+- ID: `FUTURE-PARITY-BACKLOG.24.2`
+  Status: `done`
+  Goal: Close public no-drift for capability exclusion freshness.
+  Dependencies: `.24.1`
+  Acceptance: Capability README, Knowledge Map, roadmaps, mdBook, live status, manifest, tasks, and mutation proof
+    agree on retained legacy versus active future work; focused/canonical gates pass and parent `.24` closes.
+
+### `FUTURE-PARITY-BACKLOG.24.2` Acceptance Checklist
+
+- [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Activate task-tree-first from clean `.24.1` commit `b576c646`
+  (130/300; no push), with zero-byte brief and no rendered-book, bytecode, untracked, or background-result residue.
+- [x] **RETRIEVE / RECOMPOSE COMMITTED AUTHORITY** — Use the Knowledge Map and committed `.24.0-.24.1` evidence
+  before re-derivation; independently rerun schema-v2/two-record/24-mutation/80-0-0 proof from clean HEAD.
+- [x] **AUDIT COMPLETE PUBLIC SURFACE** — Inventory capability guidance, Knowledge cards, roadmaps, mdBook, live
+  status, manifest, tasks, and governed checker prose for exact retained-legacy/active-future/satisfied-absent truth;
+  classify historical statements rather than rewriting history.
+- [x] **RED / PUBLIC NO-DRIFT** — Prove the current checker accepts at least one stale, omitted, or contradictory
+  public exclusion claim, then add the smallest mutation-sensitive public marker/denial boundary justified by the
+  audit without duplicating the manifest's semantic authority.
+- [x] **ALIGN / CLOSE** — Correct only audit-proven public drift, keep paragraphs readable in rendered HTML, align
+  the Knowledge Map and all live projections, mark `.24` and `.24.2` done, and name the next clean PNT frontier.
+- [x] **NO BEHAVIOR / VERIFY / COMMIT / CLEAN** — Preserve manifest rows 80/0/0 and schema-v2 semantics plus all
+  parser/compiler/runtime/emitter/MCP behavior and root README; pass focused/public/doctrine/book/canonical gates,
+  commit, clear the brief, and prove clean before any pivot.
+
+Activation evidence 2026-08-01: `.24.1` landed at `b576c646` with all hooks green after exact schema-v2/two-record/
+24-mutation, Knowledge Map 783/6,346, rendered book 79/14,068 KiB, all-doctrine, CLI 66x2, RAM 52%, and Phase 0
+1,031/1,031 in 660-second signoff. Post-commit proof found empty status and staged/unstaged diffs, zero-byte brief,
+synchronized Knowledge Map, no rendered book or Python bytecode, and no background result. This leaf owns only
+independent public no-drift, exact current projection repair if proven, and parent `.24` closure. Manifest semantics,
+capability rows, parser/compiler/runtime/emitter/MCP behavior, root README, rendered-readability audit, push, and
+unrelated cleanup are excluded.
+
+Recomposition/audit evidence 2026-08-01: committed HEAD independently passes exact schema v2 / 16 capabilities /
+80-0-0 / two exclusions / 24 manifest mutations. The standard 59-file public Markdown inventory has six current
+exclusion projections—capability README, both roadmaps, architecture state, and two mdBook pages—and no unclassified
+stale semantic/MCP, cursor, or `.2`-owner claim. Six continuity/retrieval projections complete the governed set:
+live achievement status, task index, this task tree, two canonical Knowledge cards, and derived `KNOWLEDGE_MAP.md`
+(12 total).
+Historical rollout/audit prose remains classified history; root README has no exclusion detail and remains bounded.
+The existing capability checker governs only manifest/task semantics, so the smallest closeout extends that same
+checker with an exact 12-projection marker/denial contract and in-memory public mutations—no new script, workflow,
+allocator, schema, capability row, or runtime route.
+
+RED evidence 2026-08-01: a transient sole-facing project-status contradiction changed the exact current marker
+from `schema v2 with exactly two status-fresh records` to `schema v1 with four stale records`. The unchanged
+checker still exited 0 with its exact schema-v2/80-0-0/two-exclusion/24-mutation line, proving that manifest truth
+did not protect the book. The project-status text was immediately restored byte-for-byte; its working-tree diff is
+empty. Checker-first implementation must now reject that marker drift before final closeout prose is repaired.
+
+GREEN/closure evidence 2026-08-01: checker-first validation rejected the missing close marker before any public
+repair. The existing checker now owns an exact ordered 12-projection contract across six current user-facing and
+six continuity/retrieval surfaces, ten path-scoped stale-current denials, and six in-memory public mutations for
+projection/marker/denial omission, contract drift, the reproduced rendered-book contradiction, and forbidden-claim
+injection. Manifest semantics remain independently governed by the original 24 mutations at two exclusions and
+80/0/0. Capability exclusion freshness is public-closed under `FUTURE-PARITY-BACKLOG.24`. The sole-facing book
+uses a separate closeout paragraph rather than extending an existing prose blob; `.14.1` is the next clean PNT
+frontier after commit.
+
+Focused/rendered evidence 2026-08-01: exact checker output is `schema v2; 16 capabilities; backend states pass=80
+partial=0 gap=0; 2 exclusions; 24 governance mutations; 12 governed projections; 6 public mutations`. Knowledge
+Map generation is 783 facts / 6,348 keys. The complete mdBook builds 79 files / 14,072 KiB; direct rendered-HTML
+inspection proves each new closeout is an isolated `<p>` block between neighboring paragraphs on both affected
+pages. In-app browser control is not exposed in this session, so no visual viewport claim is made. Generated book
+output is removed after inspection.
+
+Signoff evidence 2026-08-01: the final focused chain preserves exact capability output at schema v2 / 16 rows /
+80-0-0 / two exclusions / 24 manifest mutations / 12 governed projections / six public mutations, adjacent
+callable governance at 23 mutations, Knowledge Map 783/6,348, the complete sole-facing mdBook at 79 files /
+14,072 KiB, isolated rendered closeout paragraphs, whitespace, memory/task alignment, and all seven doctrines.
+The definitive canonical gate proves semantic/MCP admissions, repository containment, moved-root/outside-CWD
+execution, CLI 66x2, RAM 52%, and Phase 0 1,031/1,031 in 651 seconds before `local CI gate passed`. Manifest rows,
+schema-v2 semantics, parser/compiler/runtime/emitter/MCP behavior, and root README remain unchanged. Commit subject
+is `FUTURE-PARITY-BACKLOG.24.2 - close exclusion public no-drift`; `.14.1` follows only after brief clearing and
+exact clean proof.
+
+## `FUTURE-PARITY-BACKLOG.17.0` Read-only audit
+
+Comparing every identifier-shaped, non-compatibility `diag_name` in the Perl lowering contracts with the aligned
+239-name Dart/Julia/Lua inventories produces 16 differences. They are not one semantic class:
+
+| Classification | Names | Disposition |
+| --- | --- | --- |
+| Public current named-mark helpers | `mark_entry_start`, `mark_entry_end`, `mark_match_start`, `mark_match_end`, `mark_line`, `mark_col`, `clear_mark` | `.17.1-.17.5` neutral/backend/admission parity. |
+| Documented compatibility aliases | `entry_named_map`, `match_named_map` | Retain compatibility classification; do not inflate the current inventory. |
+| Legacy capture surface | `capture`, `capture_macro` | Retain legacy classification; no current-backend admission. |
+| Internal lowering operations | `array_append_operator`, `array_end_mutation_method`, `hash_index_assignment_operator`, `scalar_assignment_operator`, `value_drop` | Structural IR/lowering names, not public calls. |
+
+The seven public calls are each listed as current mark helpers in the source-boundary reference and have concrete
+Perl lowerings. Rust's earlier mark-family audit independently recorded the entry/match writers as follow-on gaps.
+The exact 239-name checker compares Dart/Julia/Lua inventories, requires every inventoried name in the book and
+neutral corpus, then reverse-checks only Perl current calls already found in that corpus. Because no governed
+fixture calls the seven helpers, the symmetric omission is invisible. `.17.5` must replace or supplement that
+corpus-seeded reverse leg with an independent public-current source of truth after exact backend execution lands.
+
+## `FUTURE-PARITY-BACKLOG.16.0` Read-only audit
+
+The parser inventory intentionally separates two surfaces that previously looked like one feature:
+
+| Surface | Perl | Rust | Dart | Julia | Lua |
+| --- | --- | --- | --- | --- | --- |
+| Rule-edge/lifecycle dotted suffix without `()` | already parsed as zero-argument suffix | already parsed | already parsed | already parsed | already parsed |
+| Standalone bare five control markers | all five normalize to calls/typed controls | bare words remain value reads outside attached-control synthesis | all five normalize | all five normalize | only `else`/`otherwise`/`default` normalize |
+| Standalone bare `next` | not a call | not a call | not a call | not a call | not a call |
+| Bare ActionIR receiver segment | rejected | rejected | rejected | rejected | accepted in every segment |
+
+Source owners are Perl `ActionIR/ControlFlow.pm`, `StatementSplit/Core.pm`, and `AST/Parser.pm`; Rust
+`linkedspec-core/src/expr.rs` plus the separate `parser.rs` suffix parser; Dart and Julia ActionParser/spec-parser
+pairs; and Lua `action_parser.lua` plus `spec_parser.lua`. The existing mdBook statement that bare fluent control
+markers are equivalent is accurate for rule/lifecycle suffix parsing but overstated for standalone typed ActionIR
+paths across every backend.
+
+ADR `0033` resolves the scope without expanding the grammar: six enumerated standalone zero-argument markers,
+plus a bare final receiver segment lowered to an ordinary zero-argument call and checked by the existing arity
+resolver. A generic bare receiver segment followed by another dot remains invalid; existing control-marker fluent
+syntax is the named exception. A following `(...)`, `{ ... }`, or another dot preserves the existing productions,
+so final-segment recognition needs no condition-expression lookahead. `if(condition)` and `while(condition)` keep
+their parentheses; `if condition { ... }` / `while condition { ... }` remain a separate deferred design candidate.
+
+### `FUTURE-PARITY-BACKLOG.16.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Existing docs promise bare marker aliases, but source inspection finds differing
+  standalone ActionIR support and no bare `next`; Lua alone accepts generic bare receiver segments broadly.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Rule/lifecycle suffix parsers already encode missing parentheses as empty
+  arguments, while typed ActionIR parsers use separate control normalization and receiver-call productions.
+- [x] **FIX / SPLIT** — ADR 0033 fixes the narrow target; `.16.1` owns the neutral contract, `.16.2-.16.6` own
+  Perl/Rust/Dart/Julia/Lua alignment, and `.16.7` owns generated/public/no-drift closeout.
+- [x] **ADDRESSED (verified)** — Exact positive and excluded forms, terminality, arity behavior, retained
+  parenthesized syntax, and parenthesis-free-header deferral are durable before parser behavior changes.
+- [x] **NO REGRESSION** — Planning only: no parser/compiler/runtime/fixture behavior source changes.
+- [x] **LOCKSTEP** — Task tree, ADR, roadmaps, mdBook status/grammar correction, Knowledge Map, live docs, and
+  resume pointer all identify `.16.1` as the next leaf; parked Lua `.4.3.6.4` remains clean and recoverable.
+
+### `FUTURE-PARITY-BACKLOG.16.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The ratified syntax had no backend-neutral executable artifact capable of rejecting
+  accidental general parenthesis-free calls or premature backend-specific interpretations.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Existing fixtures exercise backend behavior, while this language boundary
+  requires a parser-independent contract for equivalence, terminality, arity delegation, and negative classes.
+- [x] **FIX** — Add `punctuation_light_zero_arg_contract.json` and an independent strict checker covering six
+  standalone aliases, four final receiver aliases, three retained value reads, six invalid forms, two arity
+  outcomes, and one deterministic future fixture; wire both into canonical CI.
+- [x] **ADDRESSED (verified)** — Bare and parenthesized forms produce identical neutral ASTs; the future fixture
+  renders exactly and evaluates to `{result: "yes", picked: "a", count: 2}`; all three contract mutations fail.
+- [x] **NO REGRESSION** — Capability remains excluded/future-owned at 60/0/0; canonical CLI passes 61/61 twice and
+  Phase 0 passes `1..1031` in 604 seconds; no backend parser/compiler/runtime behavior changes in this leaf.
+- [x] **LOCKSTEP** — Contract README, capability manifest, mdBook grammar, Knowledge Map, task/live/roadmap docs,
+  and CI agree; Perl implementation `.16.2` is the sole next leaf while Lua `.4.3.6.4` stays cleanly queued.
+
+### `FUTURE-PARITY-BACKLOG.16.2.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — LinkedSpec `call_spec_handler_subst` lowers `return(values.drop_front())` as a valid
+  default-one operation, contradicting the neutral contract's required-argument example.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `perl/LinkedSpec/ActionIR/MethodLowering.pm` records function-form
+  `drop_front` arity `[1,2]`; subtracting the implicit receiver yields authored method arity `[0,1]`. `contains`
+  is `[2,2]`, hence authored method arity `[1,1]`, and its zero-argument form takes the existing rejection path.
+- [x] **FIX** — Replace only the method-resolution example with `values.contains` / `values.contains()`; preserve
+  the syntax policy, AST cases, future fixture, and every backend implementation.
+- [x] **ADDRESSED (verified)** — The strict contract/checker remains green with 6 standalone, 4 receiver, 6
+  invalid, exact future fixture, and all mutation checks; the new fact card makes receiver-slot subtraction durable.
+- [x] **NO REGRESSION** — Capability remains 60/0/0; canonical CLI passes 61/61 twice and Phase 0 passes
+  `1..1031` in 605 seconds; no parser/compiler/runtime source changed.
+- [x] **LOCKSTEP** — Contract, formal grammar, task/live/roadmap docs, Knowledge Map, and resume pointer agree;
+  Perl implementation `.16.2.1` is next while Lua `.4.3.6.4` remains cleanly queued.
+
+### `FUTURE-PARITY-BACKLOG.16.2.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Toolbox AST/lowering probes showed exact bare `next` was a variable plus legacy
+  compatibility event and generic final bare receivers were invalid, unlike the ratified parenthesized twins.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Standalone statement parsing, statement splitting, scanner contract routing,
+  and fluent-segment parsing are separate Perl ActionIR seams; the old `next_bare` scanner also claimed exact
+  `next` before canonical lowering could own it.
+- [x] **FIX** — Normalize the six named standalone markers in statement/control scanning, route exact bare `next`
+  through canonical `next_stmt` while retaining labeled `next LABEL`, and admit an identifier-only generic
+  receiver segment solely when it is terminal.
+- [x] **ADDRESSED (verified)** — The neutral Perl contract proves six statement and four receiver semantic-AST
+  equivalences, retained value reads, all six unchanged exclusions, delegated arity outcomes, canonical `NEXT`,
+  and exact live plus standalone generated fixture output.
+- [x] **NO REGRESSION** — Focused AST/contract suites pass; capability stays 60/0/0, CLI passes 61/61 in both
+  environments, and canonical Phase 0 passes `1..1031` in 611 seconds. Labeled `next LOOP` remains compatible.
+- [x] **LOCKSTEP** — CI, capability README, formal grammar/helper guidance, task/live/roadmap docs, Knowledge Map,
+  and resume pointer agree; Rust `.16.3` is next while parenthesis-free `if`/`while` headers stay deferred.
+
+### `FUTURE-PARITY-BACKLOG.16.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The existing Rust CLI compiled the bare neutral fixture with a dropped action block
+  and returned `null`, while the parenthesized fixture returned the exact expected object.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `linkedspec-core/src/expr.rs` required `()` for every generic receiver segment
+  and parsed standalone bare markers as ordinary variables; its generic variable lookahead also consumed the
+  newline after a marker before statement-separator accounting.
+- [x] **FIX** — Recognize only the six named aliases at exact statement boundaries before generic expression
+  parsing, and synthesize an empty argument list only for a terminal generic receiver identifier.
+- [x] **ADDRESSED (verified)** — Contract tests prove six statement and four receiver typed-AST equivalences,
+  ordinary identifier retention, six unchanged exclusions, exact CLI parity, and native/serialized/emitted/
+  generated execution of the unchanged fixture.
+- [x] **NO REGRESSION** — The complete Rust gate passes 137 runtime unit tests, 105-fixture oracle, 105 generated
+  classifications, 197 integration tests, focused contract/source/loader/trace/Unicode suites, and CLI 61x2.
+- [x] **LOCKSTEP / FINDING** — Task/live/roadmap/book/capability/KM state advances Dart `.16.4`; the pre-existing
+  Rust `.contains()` missing-argument default is recorded under helper-normalization owner `.5`, not changed here.
+
+### `FUTURE-PARITY-BACKLOG.16.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Dart already normalized five standalone control markers, but bare `next` remained a
+  value expression and every generic receiver segment still required `()`; the bare neutral CLI fixture failed.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `action_parser.dart` has distinct statement, control-head, expression, and
+  fluent-segment seams. The terminal segment position was already explicit, so no grammar-wide lookahead was needed.
+- [x] **FIX** — Normalize exact bare `next` only in `parseStatement()` and allow an identifier-only fluent segment
+  only when it is the final segment, synthesizing the existing empty argument list.
+- [x] **ADDRESSED (verified)** — The neutral Dart contract proves six statement and four receiver typed-AST
+  equivalences, retained value reads, six unchanged exclusions, and exact native/generated/emitted/CLI fixture output.
+- [x] **NO REGRESSION** — The complete Dart gate passes format, strict analysis, 211 package tests, CLI 61x2, and
+  corpus 105/105. Parenthesized syntax and all excluded grammar classes are unchanged.
+- [x] **LOCKSTEP / FINDING** — Task/live/roadmap/book/capability/KM state advances Julia `.16.5`; Dart's pre-existing
+  `.contains()` zero-argument result is recorded with Rust under helper-normalization owner `.5`, not changed here.
+
+### `FUTURE-PARITY-BACKLOG.16.5` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Julia already normalized five standalone control markers, but bare `next` remained a
+  value expression and every generic receiver segment still required `()`; the bare neutral fixture failed.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `ActionParser.jl` has distinct statement, control-head, expression, and
+  fluent-segment seams. The terminal segment position was already explicit, so no grammar-wide lookahead was needed.
+- [x] **FIX** — Normalize exact bare `next` only in `parse_action_statement(...)` and allow an identifier-only
+  fluent segment only when it is final, synthesizing the existing empty argument list.
+- [x] **ADDRESSED (verified)** — The neutral Julia contract proves six statement and four receiver typed-AST
+  equivalences, retained value reads, six unchanged exclusions, and exact native/generated/emitted/CLI fixture output.
+- [x] **NO REGRESSION** — The complete Julia gate passes 1,394 package assertions, primary CLI conformance, and
+  corpus 105/105. Parenthesized syntax and all excluded grammar classes are unchanged.
+- [x] **LOCKSTEP / FINDING** — Task/live/roadmap/book/capability/KM state advances Lua `.16.6`; Julia's pre-existing
+  `.contains()` zero-argument result is recorded with Rust/Dart under helper-normalization owner `.5`, not changed here.
+
+### `FUTURE-PARITY-BACKLOG.16.6` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Lua normalized only bare `else`/`otherwise`/`default`, left bare `next` as a value,
+  accepted generic bare receiver identifiers in every segment, and accepted `.with { ... }` without `()`.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `action_parser.lua` used one unconditional identifier fallback inside
+  `parse_fluent_call(...)`, while block/public statement construction bypassed a shared statement-context seam.
+- [x] **FIX** — Normalize all five structural markers, route exact bare `next` only through shared statement-node
+  construction, and permit the generic identifier fallback only for a terminal non-block receiver segment.
+- [x] **ADDRESSED (verified)** — The neutral Lua contract proves six statement and four receiver typed-AST
+  equivalences, retained value reads, six negative classes, method twins, public SpecFile JSON reconstruction, and
+  exact native fixture output on PUC Lua and LuaJIT.
+- [x] **NO REGRESSION** — `luac -p` passes changed source/tests and the complete dual-ABI local gate passes 109/109
+  on each runtime plus corpus validation and the explicit unavailable-primary-CLI scaffold check.
+- [x] **LOCKSTEP / FINDINGS** — Public/task/KM state advances no-drift `.16.7`; Lua's `.contains()` result joins
+  Rust/Dart/Julia under `.5`, and absent Lua generated-source proof stays with `.8.1-.8.4` rather than being faked.
+
+### `FUTURE-PARITY-BACKLOG.16.7` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — All implementations were green, but the capability manifest still classified the
+  syntax as future, public surfaces still named `.16.7` as pending, and no one command reran every backend proof.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Admission had intentionally waited for Lua `.16.6`; the four-backend census,
+  five-backend runtime evidence, public examples, and future Lua emitter have distinct honest boundaries.
+- [x] **FIX** — Admit one 64/0/0 census row, remove the future exclusion, add a composed recurring five-backend
+  script and optional local-CI leg, derive generated-checker census totals, selectively migrate current examples,
+  and preserve the `.8.1-.8.4` emitter owner.
+- [x] **ADDRESSED (verified)** — The composed gate passes Perl 7, Rust 5, Dart 5, Julia 55, PUC Lua 109, and LuaJIT
+  109 checks plus the exact neutral fixture, typed/serialized paths, and every currently available generated path.
+- [x] **NO REGRESSION** — The strict neutral checker retains six invalid classes and three mutations; public
+  examples keep `if(condition)` / `while(condition)`, general calls, intermediate receiver `()`, and block-call `()`.
+- [x] **LOCKSTEP** — ADR/capability/task/roadmap/live/KM/mdBook state closes `.16` without claiming generated Lua;
+  `LUA-BACKEND-PARITY.4.3.6.4` is the clean-pivot resume target.
+
+### `FUTURE-PARITY-BACKLOG.14.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Preserve the director's exact distinction between linked-rule structural recursion,
+  progressive in-parse parser composition, and staged post-AST enrichment without collapsing them into regex work.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Locate current canonical architecture, mdBook, toolbox, capture/extraction,
+  spec-loading/invocation, and staged-dispatch evidence before making implementation-completeness claims.
+- [x] **FIX** — Create ordered doctrine, progressive-composition, staged-enrichment, and final audit leaves; make
+  explicit that later behavior or public examples require proof against the current implementation.
+- [x] **ADDRESSED (verified)** — The task tree preserves simple zero/one/two-regex roles, graph-owned recursion,
+  cursor-relative extraction, any-number spec composition as the intended contract, and multi-level AST parsing.
+- [x] **NO REGRESSION** — Planning only: no parser, runtime, grammar, fixture, or accepted behavior changes.
+- [x] **LOCKSTEP** — Task/index, roadmap, Knowledge Map/live docs, memory, and mdBook status point at the durable
+  future owner; the arc remains queued behind selector retirement while Dart `.12.1.8.3` is active.
+
+### `FUTURE-PARITY-BACKLOG.12.1.8.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — With all positive executable sources migrated, prove exact one-bare-identifier
+  `array(name)` / `hash(name)` calls still enter Perl compatibility recognition and can still execute as selectors.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Use the Knowledge Map and LinkedSpec toolbox/tests to identify every Perl
+  parser/scanner/lowering/runtime recognition and diagnostic seam that distinguishes selector calls from retained
+  constructors; do not confuse generated Perl sigils with `.spec` language surface.
+- [x] **FIX** — Emit the adopted `aggregate_selector_removed` diagnostic for both exact forms and delete public
+  selector acceptance/dispatch while retaining non-selector constructors, literals, bare typed bindings,
+  `flat_array(...)`, `flat_hash(...)`, and ordinary private host-language storage/normalization.
+- [x] **ADDRESSED (verified)** — Exact selector calls fail deterministically through live and generated Perl paths;
+  no authored selector node crosses the canonical lowering boundary, and retained constructor/control cases still
+  execute. Private generated-Perl storage machinery is not a `.spec` surface and remains separately classified.
+- [x] **NO REGRESSION** — Neutral uniform-binding and executable-source checkers, focused parser/ActionIR/runtime/
+  generated-source suites, capability contracts, CLI 61x2, Phase 0, doctrines/KM/mdBook/whitespace, and artifact
+  cleanup pass at their true stopping points.
+- [x] **LOCKSTEP** — Task/index, roadmaps, README/book, architecture, Knowledge Map, changes/notes/live, and memory
+  identify Perl hard rejection complete and Rust `.12.1.8.2` as next.
+
+### `FUTURE-PARITY-BACKLOG.12.1.8.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Consume the neutral six invalid-selector cases and prove Rust still parses/executes
+  exact one-bare-identifier `array(...)` / `hash(...)` calls after all executable sources migrated.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Identify the typed AST/compiler/runtime/generated-plan seams that distinguish
+  exact selectors from retained zero/multi/quoted/computed constructors; keep private runtime maps out of the
+  public-language decision.
+- [x] **FIX** — Reject exact selector nodes with `aggregate_selector_removed` plus portable surface/identifier/
+  replacement fields before native or generated execution, and remove public selector dispatch while retaining
+  bare bindings, constructors, literals, `flat_array(...)`, `flat_hash(...)`, and private host storage.
+- [x] **ADDRESSED (verified)** — Direct parser/compiler, native execution, serialized/generated-plan, dead/nested,
+  and unused-function paths reject deterministically; the eight retained constructor/literal classes still pass.
+- [x] **NO REGRESSION** — Neutral/executable checkers, focused core/runtime/generated suites, complete Rust package,
+  105 interpreted/generated corpus, CLI 61x2 where warranted, docs/KM/doctrines/mdBook/whitespace, and artifact
+  cleanup pass at their true stopping points.
+- [x] **LOCKSTEP** — Task/index, roadmaps, README/book, architecture, Knowledge Map, changes/notes/live, and memory
+  identify Rust hard rejection complete and Dart `.12.1.8.3` as next.
+
+### `FUTURE-PARITY-BACKLOG.12.1.8.3.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Consume all six neutral invalid-selector cases and prove exact one-bare-identifier
+  `array(name)` / `hash(name)` calls still survive Dart parsed/compiled/native/generated paths after migration.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Use the Knowledge Map, focused contract test, typed frontend/compiler models,
+  runtime interpreter, and generated adapter to locate every selector recognition and trust boundary; distinguish
+  exact selectors from retained zero/multi/quoted/computed constructors and direct literals.
+- [x] **FIX** — Reject exact selector nodes with `aggregate_selector_removed` plus portable surface/identifier/
+  replacement fields before native or generated execution, and delete selector-specific Dart dispatch while
+  preserving bare typed bindings, retained constructors/literals, and private host storage.
+- [x] **ADDRESSED (verified)** — Direct compile/native/generated paths, nested/dead code, unused functions, and
+  decoded/emitted compiled state reject deterministically; all eight retained constructor/literal classes execute.
+- [x] **NO REGRESSION** — Neutral/executable checkers, 15 focused tests, format, strict analysis, docs/KM/doctrines/
+  mdBook/whitespace, and artifact cleanup pass. The complete package leg reaches 203 passes; its only two failures
+  are the independently root-caused variadic `spec.spec` bridge drift owned by `.12.1.8.3.2`, not selector code.
+- [x] **LOCKSTEP** — Task/index, live docs, Knowledge Map, changes/notes, and memory identify selector implementation
+  complete, full Dart no-drift pending `.12.1.8.3.2`, and Julia `.12.1.8.4` only after the parent closes.
+
+### `FUTURE-PARITY-BACKLOG.12.1.8.3.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Reproduce all four `spec_spec_*` failures through the real Dart corpus runner and
+  capture the exact invalid recursive group after the shipped function-definition pattern became variadic.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Retrieve the bounded structural-regex bridge fact and prove its detector,
+  prefix matcher, capture list, and named-capture map know fixed `blkFN` only while `spec.spec` now emits `blkVFN`.
+- [x] **FIX** — Extend only the exact shipped variadic family with fixed/rest captures and `blkVFN` named block;
+  preserve the existing fixed family and avoid claiming general recursive-PCRE support.
+- [x] **ADDRESSED (verified)** — Focused runtime matching locks fixed and variadic definitions, and all four
+  `spec_spec_*` corpus cases execute with unchanged expected outputs.
+- [x] **NO REGRESSION** — Format/analyze, complete Dart tests, CLI 61x2, all 105 corpus cases, selector focused/
+  neutral/source gates, docs/KM/doctrines/mdBook/whitespace, and cleanup pass.
+- [x] **LOCKSTEP** — Task/index, roadmaps, README/book, architecture, Knowledge Map, changes/notes/live, and memory
+  close Dart `.12.1.8.3` and identify Julia `.12.1.8.4` as next.
+
+### `FUTURE-PARITY-BACKLOG.12.1.8.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Prove all six exact selector-shaped neutral cases still compile on Julia, including
+  whitespace, nested, target, and receiver shapes.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Retrieve the Julia uniform-binding fact and trace selector compatibility
+  through typed ActionIR, deferred user-function/fluent sources, generated boundaries, and runtime dispatch.
+- [x] **FIX** — Add recursive whole-compiled-state rejection with the portable diagnostic at native and generated
+  boundaries, then delete every selector-only runtime recognition/dispatch branch.
+- [x] **ADDRESSED (verified)** — Lock all six neutral cases, dead/fluent/unused-function coverage, caller-constructed
+  generated payload rejection, and all eight retained constructor/literal classes.
+- [x] **NO REGRESSION** — Focused Julia proof, zero-positive executable scan, 1,339 package assertions, CLI 61x2,
+  105 corpus, canonical local CI, docs/KM/doctrines/mdBook/cleanup/whitespace all pass.
+- [x] **LOCKSTEP** — Task/index, live docs, roadmaps, README/book, architecture, Knowledge Map, changes/notes, and
+  memory close Julia and identify Lua `.12.1.8.5` as next.
+
+### `FUTURE-PARITY-BACKLOG.12.1.8.5` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Prove all six exact selector-shaped neutral cases still compile on Lua, including
+  whitespace, nested, target, and receiver shapes.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Retrieve the Lua uniform-binding fact and trace compatibility through typed
+  ActionIR, deferred function/fluent source, runtime-engine admission, and every wrapper dispatch branch.
+- [x] **FIX** — Add recursive whole-compiled-state rejection at compile/runtime-engine boundaries and delete every
+  selector-only runtime recognition/dispatch branch.
+- [x] **ADDRESSED (verified)** — Lock all six neutral cases, dead/fluent/function and caller-mutation coverage, and
+  all eight retained constructor/literal classes on both PUC Lua and LuaJIT.
+- [x] **NO REGRESSION** — Dual-ABI 88/88 full tests, zero-positive executable scan, exact 105-manifest/CLI scaffold,
+  docs/KM/doctrines/mdBook/cleanup/whitespace all pass.
+- [x] **LOCKSTEP** — Task/index, live docs, roadmaps, README/book, architecture, Knowledge Map, changes/notes, and
+  memory close Lua and activate cross-variant no-drift `.12.1.8.6`.
+
+### `FUTURE-PARITY-BACKLOG.12.1.8.6` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Audit all five backend validators/tests/runtime sources and identify any remaining
+  unguarded drift or stale selector-compatibility statement.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Prove existing backend tests are individually strong but no single recurring
+  gate requires their shared contract consumption, portable fields, validation boundaries, and runtime deletions.
+- [x] **FIX** — Add and register the cross-variant retirement checker; remove stale compatibility commentary.
+- [x] **ADDRESSED (verified)** — Checker requires all five contract-driven rejection suites/boundaries and forbids
+  known runtime selector symbols/patterns while composing the executable-source scan.
+- [x] **NO REGRESSION** — Cross-variant checker, all five focused/dual-ABI rejection suites, canonical registration,
+  docs/KM/doctrines/mdBook/cleanup/whitespace all pass.
+- [x] **LOCKSTEP** — Task/index, live docs, roadmaps, README/book, architecture, Knowledge Map, changes/notes, and
+  memory close `.12.1.8` and activate final public admission `.12.1.9`.
+
+### `FUTURE-PARITY-BACKLOG.12.1.9` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Audit all current public docs, mdBook examples, capability status, diagnostics, tests,
+  and executable sources after hard retirement; distinguish normative drift from historical/rejection evidence.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Identify why implementation/source no-drift alone cannot prevent a stale public
+  compatibility statement, positive authoring example, or future-capability exclusion from surviving admission.
+- [x] **FIX** — Add/register a deterministic public-surface retirement checker; remove every current-facing caveat
+  or positive selector example; retire the capability future exclusion and align public/live status.
+- [x] **ADDRESSED (verified)** — Public guidance teaches bare typed bindings and literals/retained constructors only;
+  removed exact selectors appear solely in classified rejection, migration-history, or durable fact evidence.
+- [x] **NO REGRESSION** — Public-surface, uniform-binding, aggregate-retirement, capability, canonical local CI,
+  docs/KM/doctrines/mdBook/cleanup/whitespace all pass.
+- [x] **LOCKSTEP** — Task/index, roadmaps, README/book, architecture, Knowledge Map, changes/notes/live, and memory
+  close `.12.1` and point at the next dependency-correct PNT leaf.
+
+### `FUTURE-PARITY-BACKLOG.12.1.10` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Scan every backend README and prove current positive selector examples survived the
+  admitted 47-file public gate while executable sources and the root/capability/mdBook set remain clean.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Show that `check_public_aggregate_selector_surface.py` enumerates a curated
+  root/capability/mdBook set but does not discover tracked backend READMEs, allowing public language drift.
+- [x] **FIX** — Migrate current backend README prose/snippets and extend the checker with deterministic backend
+  README discovery plus stable classification/count assertions.
+- [x] **ADDRESSED (verified)** — Every backend README teaches bare typed bindings and exact selectors occur only in
+  explicit removed/rejected/history evidence accepted by the canonical classifier.
+- [x] **NO REGRESSION** — Expanded public/runtime/capability checker, relevant backend gates, docs/KM/doctrines,
+  mdBook, artifact cleanup, and whitespace all pass with no runtime or fixture behavior change.
+- [x] **LOCKSTEP** — Task/index, roadmaps, root/backend README/book, architecture, Knowledge Map, changes/notes/live,
+  and memory re-close `.12.1`/`.12` and resume Lua numeric alias/receiver `.4.3.3.2`.
+
+### `FUTURE-PARITY-BACKLOG.12.1.11` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Inventory all current statement-only/no-value array-end result claims against the
+  adopted contract, five backend implementation facts/tests, and public examples that already chain updates;
+  reproduce Perl leaving value-position calls raw until generated execution fails in `SpecEntry::push_back`.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Distinguish valid dated history from current normative drift introduced when
+  `.12.1.1-.6` superseded the earlier terse slice without revisiting every book/KM/backend summary; prove Perl's
+  `BindingRuntime::array_end_mutation` already returns the independent update while the ActionIR fluent-chain value
+  path explicitly rejects all four methods.
+- [x] **FIX** — Correct public/KM/backend semantics, preserve explicit supersession provenance, lower the first
+  array-end mutation on a named typed binding as an array-valued assignment that may feed compatible continuations,
+  replace the superseded statement-only Perl regression lock, and add a recurring checker that rejects future
+  current-facing statement-only array-end result claims.
+- [x] **ADDRESSED (verified)** — Public guidance says all four end methods mutate and return independent updated
+  arrays, pop discards only the removed element, saved results stay isolated, and receiver continuations consume
+  the update; historical cards identify their original slice and later supersession.
+- [x] **NO REGRESSION** — Uniform-binding checker, five backend focused tests, public checker, mdBook, KM,
+  doctrines, cleanup, and whitespace pass.
+- [x] **LOCKSTEP** — `.12.1`/`.12` re-close and the single frontier returns to Lua array construction `.4.3.4.1`.
+
+### `FUTURE-PARITY-BACKLOG.12.1.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Count exact selector-shaped calls and prove that current bare alternatives are not
+  yet uniformly executable, rather than assuming source replacement is mechanical.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Locate public ambiguity and each backend's selector recognition, target
+  extraction, constructor special case, store lookup, and mutation dispatch seams.
+- [x] **FIX** — Split neutral semantics, Perl/Rust/Dart/Julia/Lua enablement, three source-migration surfaces, five
+  hard-retirement backends plus no-drift, and final public documentation before behavior code.
+- [x] **ADDRESSED (verified)** — Boundary-correct inventory covers 600 calls/82 specs, 210 calls/15 shipped specs,
+  parent-helper and
+  receiver categories, toolbox lowering, and concrete backend owner locations.
+- [x] **NO REGRESSION** — Read-only inventory and task/docs/KM updates only; no grammar, lowering, runtime,
+  generated-source, fixture, or accepted `.spec` behavior changes.
+- [x] **LOCKSTEP** — Task/index, roadmaps, README/book, Knowledge Map, changes/notes/live, and bounded memory route
+  exact selector removal through neutral contract `.12.1.1`; selector survival is not an open question.
+
+### `FUTURE-PARITY-BACKLOG.12.1.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Encode the concrete bare push/split ambiguity and selector-shaped constructor/read/
+  target problem as neutral cases before any backend changes.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Define one observable typed binding independently of backend host storage;
+  callable purpose, arity, static rule registry, and runtime value—not wrapper syntax—must govern dispatch.
+- [x] **FIX** — Add a strict versioned contract/checker with canonical migration mappings, valid binding/mutation/
+  constructor cases, exact future selector diagnostics, deterministic future fixture source/results, and CI wiring.
+- [x] **ADDRESSED (verified)** — Independent evaluation checks set/push/split/hash mutation/copy/read/chaining,
+  absent binding creation, static rule precedence, silent drop, result values, and invalid selectors.
+- [x] **NO REGRESSION** — Contract/docs/checker only: current Perl/Rust/Dart/Julia/Lua parsing, lowering, runtime,
+  generated source, shipped specs, corpus fixtures, and current capability census remain unchanged.
+- [x] **LOCKSTEP** — Contract README, task/index, roadmaps, README/book, Knowledge Map, changes/notes/live, memory,
+  and canonical CI identify Perl `.12.1.2` as the first behavior consumer.
+
+### `FUTURE-PARITY-BACKLOG.12.1.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Consume the neutral future fixture and focused bare set/push/split/hash/read/chaining/
+  static-precedence/wrong-kind cases on live and standalone generated Perl, preserving measured failure evidence.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Remove observable bare-target dependence across `MethodLowering`,
+  `ArrayPipeline`, `Contracts`, `ControlFlow`, `FlowExpr`, and `EmitContext` type/declaration memory while preserving
+  static child-rule push precedence and temporary wrapper compatibility.
+- [x] **FIX** — Lower bare typed mutations through one scalar-held value binding (or an observationally identical
+  private representation), return post-operation values, auto-create absent required kinds, reject wrong kinds,
+  and make three-argument bare split mutate without changing pure two-argument split.
+- [x] **ADDRESSED (verified)** — Neutral checker plus focused live/generated proof cover all seven execution cases,
+  deterministic fixture, expression chaining/drop, static precedence, diagnostics, compatibility selectors, and
+  current constructor classification.
+- [x] **NO REGRESSION** — Shipped specs, wrapper-era Phase-0 locks, ActionIR, generated source, CLI, capability,
+  doctrines, Knowledge Map, whitespace, and mdBook reach their true stops before source migration.
+- [x] **LOCKSTEP** — Code/tests/task/index, roadmaps, README/book, KM, changes/notes/live, and memory describe Perl
+  selector-free enablement as current while exact selector rejection remains deferred until `.12.1.8.1`.
+
+### `FUTURE-PARITY-BACKLOG.12.1.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Run the neutral future fixture and the seven binding/mutation cases through Rust
+  native and generated execution, retaining exact failures for bare push, mutable split, hash update, chaining,
+  static precedence, or wrong-kind diagnostics.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Trace bare reads and mutation ownership through parsed ActionIR,
+  `RuntimeContext`, `execute_call`, receiver dispatch, target resolvers, generated plans, and diagnostic projection;
+  distinguish public binding semantics from private scalar/array/hash stores.
+- [x] **FIX** — Make bare set/push/append/mutable split/hash/index/collection mutations observe and return one
+  `RuntimeValue`, auto-create only missing required kinds, reject incompatible existing kinds, preserve static-rule
+  push precedence, and retain selectors solely as migration compatibility.
+- [x] **ADDRESSED (verified)** — Focused Rust native/generated fixtures match the neutral expected values and error
+  fields, including saved mutation results, `set(...).sorted().first()`, array-end result continuation, pure versus
+  mutable split, and silent drop.
+- [x] **NO REGRESSION** — Core/runtime/integration/oracle/generated-source/CLI/capability/doctrine/Knowledge Map/
+  whitespace/mdBook gates reach their true stops without migrating or rejecting tracked selector sources.
+- [x] **LOCKSTEP** — Rust code/tests/task/index, roadmaps, README/book, KM, changes/notes/live, and memory identify
+  Rust as the second enabled backend and Dart `.12.1.4` as next.
+
+### `FUTURE-PARITY-BACKLOG.12.1.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Run the neutral future fixture and all seven binding/mutation cases through Dart
+  native and generated-plan execution, preserving exact push/split/hash/result/chaining/precedence/wrong-kind gaps.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Trace `ActionVariableExpr`, statement interception, `_RuntimeExecutionContext`
+  variable/array/hash stores, target-name helpers, fluent dispatch, generated plans, and diagnostic projection;
+  separate one public typed binding from private migration storage.
+- [x] **FIX** — Make bare set/push/append/mutable split/hash/index/array-end/collection mutations read, validate,
+  update, and return one typed value; auto-create only absent required kinds; preserve static-rule push precedence;
+  keep exact selectors solely as temporary migration input.
+- [x] **ADDRESSED (verified)** — Native/generated fixtures match the neutral result/error fields, saved snapshots,
+  `set(...).sorted().first()`, mutation continuation, pure/mutable split, collection rebinding, and silent drop.
+- [x] **NO REGRESSION** — Dart format/analyze/unit/corpus/generated/CLI plus neutral/capability/doctrine/KM/mdBook/
+  whitespace gates reach their true stops without migrating or rejecting tracked selector sources.
+- [x] **LOCKSTEP** — Dart code/tests/task/index, roadmaps, README/book, KM, changes/notes/live, and memory identify
+  Dart as the third enabled backend and Julia `.12.1.5` as next.
+
+### `FUTURE-PARITY-BACKLOG.12.1.5` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Run the neutral future fixture and all seven binding/mutation cases through Julia
+  native and generated execution, preserving exact push/split/hash/result/chaining/precedence/wrong-kind gaps.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Trace `ActionVariableExpr`, statement interception, `_read_runtime_store`,
+  private variable/array/hash stores, target-name helpers, fluent dispatch, generated execution, and diagnostic
+  projection; separate one public typed binding from private migration storage.
+- [x] **FIX** — Make bare set/push/append/mutable split/hash/index/array-end/collection mutations read, validate,
+  update, and return one typed value; auto-create only absent required kinds; preserve static-rule push precedence;
+  keep exact selectors solely as temporary migration input.
+- [x] **ADDRESSED (verified)** — Native/generated fixtures match the neutral result/error fields, saved snapshots,
+  `set(...).sorted().first()`, mutation continuation, pure/mutable split, collection rebinding, and silent drop.
+- [x] **NO REGRESSION** — Julia formatting/package/corpus/generated/CLI plus neutral/capability/doctrine/KM/mdBook/
+  whitespace gates reach their true stops without migrating or rejecting tracked selector sources.
+- [x] **LOCKSTEP** — Julia code/tests/task/index, roadmaps, README/book, KM, changes/notes/live, and memory identify
+  Julia as the fourth enabled backend and Lua `.12.1.6` as next.
+
+### `FUTURE-PARITY-BACKLOG.12.1.6` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Run the neutral future fixture and all seven binding/mutation cases through PUC Lua
+  and LuaJIT, preserving exact push/split/hash/result/chaining/precedence/wrong-kind gaps.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Trace variable reads, `lookup_binding`, scalar/array/harray stores,
+  `target_descriptor`, call/statement interception, fluent dispatch, and diagnostic projection; separate one public
+  typed binding from private migration storage.
+- [x] **FIX** — Make bare set/push/append/mutable split/hash/index/array-end/collection mutations read, validate,
+  update, and return one typed value; auto-create only absent required kinds; preserve static-rule push precedence;
+  keep exact selectors solely as temporary migration input.
+- [x] **ADDRESSED (verified)** — Both Lua ABIs match neutral result/error fields, saved snapshots,
+  `set(...).sorted().first()`, mutation continuation, pure/mutable split, collection rebinding, and silent drop.
+- [x] **NO REGRESSION** — Dual-ABI Lua package/corpus/CLI plus neutral/capability/doctrine/KM/mdBook/whitespace gates
+  reach their true stops without migrating or rejecting tracked selector sources.
+- [x] **LOCKSTEP** — Lua code/tests/task/index, roadmaps, README/book, KM, changes/notes/live, and memory identify all
+  five enabled backends and source migration `.12.1.7.1` as next.
+
+### `FUTURE-PARITY-BACKLOG.12.1.7.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Recount exact selector-shaped calls in the 15 affected shipped `specs/*.spec` files,
+  classify every occurrence as typed read/target/receiver versus intended one-element construction, and preserve a
+  file-by-file baseline before editing. Require a left identifier boundary so `flat_array(name)` is not counted.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Use the recorded parent-call/receiver inventory plus parser/runtime proof to
+  select bare bindings for reads and mutation targets, `[value]` for intended one-element arrays, and ordinary
+  retained constructors only where the neutral contract permits them. The first migrated Lispish CLI proof also
+  exposed a Perl-only lowering split: uniform mutations write scalar-held typed values (`$name`), while legacy
+  read-only array/hash helper fast paths still read `@name` / `%name`; repair that bounded read seam in this leaf.
+- [x] **FIX** — Remove every exact `array(IDENTIFIER)` / `hash(IDENTIFIER)` occurrence from shipped specs without
+  changing unrelated syntax, helper choice, or rule behavior; make Perl pure collection helpers consume the same
+  scalar-held bare typed binding that mutation helpers update.
+- [x] **ADDRESSED (verified)** — Shipped source scan is zero and reference/generated descriptors/execution preserve
+  the intended values for every affected spec and shipped proof fixture.
+- [x] **NO REGRESSION** — Focused shipped-spec, generated-source, backend corpus, capability/doctrine/KM/mdBook/
+  whitespace gates reach their true stops; derived expectations change only when selector-free syntax requires it.
+- [x] **LOCKSTEP** — Shipped specs/task/index, roadmaps, README/book, KM, changes/notes/live, and memory identify
+  shipped migration complete and neutral/oracle/corpus migration `.12.1.7.2` as next.
+
+### `FUTURE-PARITY-BACKLOG.12.1.7.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Preserve the boundary-correct 390-occurrence/67-file baseline: five occurrences in
+  two capability fixtures, 366 in 62 neutral Rust-oracle inputs, and 19 in three legacy corpus inputs; identify
+  intended `[undef]` one-element construction separately from binding selectors.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Treat capability fixtures and their mirrored oracle inputs as one source
+  contract, preserve quoted/multi/computed constructors, and distinguish scalar-held typed array/harray reads from
+  explicit construction before mechanical replacement.
+- [x] **FIX** — Remove every exact selector from file-backed capability/oracle/corpus `.spec` inputs, using bare
+  bindings for reads/targets/receivers and `[undef]` for the three intended one-element arrays; regenerate only
+  expectations or classifications whose derived bytes genuinely change.
+- [x] **ADDRESSED (verified)** — All tracked file-backed `.spec` inputs scan at zero exact selectors; capability
+  mirrors agree; Perl/Rust/Dart/Julia/Lua corpus results preserve their expected values.
+- [x] **NO REGRESSION** — Strict uniform/capability/generated/native contracts, full corpus and generated-source
+  breadth, CLI, doctrines/KM/mdBook/whitespace, and the canonical local gate reach their true stops.
+- [x] **LOCKSTEP** — Corpus inputs/derived expectations/task/index, roadmaps, README/book, KM, changes/notes/live,
+  and memory identify file-backed migration complete and embedded source-string migration `.12.1.7.3` as next.
+
+### `FUTURE-PARITY-BACKLOG.12.1.7.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Preserve the boundary-correct baseline of 1,356 positive exact occurrences across 25
+  test/tool/backend files or test-only source sections, separated from 28 implementation/neutral-contract
+  occurrences in recognizers, diagnostics, comments, two explicit compatibility-path tests, and the removed-syntax
+  checker; exclude four dotted Lua host `json.array(...)` calls, documentation/history, and ordinary constructors.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Identify tests and tools that still compile or execute legacy selector source,
+  distinguish source assertions from host implementation text, and preserve the hard-rejection evidence owned by
+  `.12.1.8` without allowing compatibility syntax to remain an executable positive fixture.
+- [x] **FIX** — Migrate every positive embedded test/tool/backend spec source to bare typed bindings and literals;
+  update derived AST/source expectations only where those embedded inputs genuinely change.
+- [x] **ADDRESSED (verified)** — A boundary-correct executable-source scan reaches zero positive selector inputs;
+  any remaining exact spellings are mechanically classified as implementation recognition/diagnostic text,
+  neutral rejection/migration contract data, or non-executable historical documentation.
+- [x] **NO REGRESSION** — Focused Perl/Rust/Dart/Julia/Lua parser/runtime/generated-source tests, complete backend
+  gates, uniform/capability contracts, canonical CI, doctrines/KM/mdBook/whitespace, and artifact cleanup pass.
+- [x] **LOCKSTEP** — Task/index, roadmaps, README/book, KM, changes/notes/live, and memory identify all source
+  migration complete and Perl hard rejection `.12.1.8.1` as next.
+
+### `FUTURE-PARITY-BACKLOG.13.1` Acceptance Checklist
+
+- [ ] **REPRODUCE / ISSUE** — Preserve exact raw-expression and lifecycle/action-chain inspector failures showing
+  plugin AUTOLOAD receives `_rewrite_action_code_with_diagnostics` and `_render_method_call_chain`.
+- [ ] **ROOT CAUSE (WHY + WHERE)** — Confirm current implementations/ownership, thin-facade history, tool callers,
+  and whether any supported public probe seam should replace direct private-owner calls.
+- [ ] **FIX** — Route all four documented snippet forms through explicit current owners or one deliberate stable
+  inspection API; do not expose unrelated internals through the public facade.
+- [ ] **ADDRESSED (verified)** — Raw helper, lifecycle block, lifecycle chain, and action-edge block/chain examples
+  print generated Perl plus canonical diagnostics without plugin dispatch.
+- [ ] **NO REGRESSION** — Add a recurring smoke test and pass focused tool/ActionIR, Phase-0, doctrine/KM/mdBook,
+  whitespace, and canonical local gates.
+- [ ] **LOCKSTEP** — Task/index, TOOLBOX/README, Knowledge Map, changes/notes/live, and memory identify the restored
+  inspector contract and next PNT frontier.
+
+### `FUTURE-PARITY-BACKLOG.12.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Duck-typed values coexist with legacy wrapper-selected scalar/aggregate namespaces,
+  while earlier expression and trailing-codeblock doctrine was distributed across several completed trees.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The `.spec` language retained `array(name)` / `hash(name)` selector and
+  mutation forms after bare assignments became typed value bindings, leaving two public ways to identify storage.
+- [x] **FIX** — Capture one uniform-expression doctrine and create `.12.1` to design/split removal of temporary
+  compatibility, especially `array(name)`/`hash(name)` as type or mutation authority.
+- [x] **ADDRESSED (verified)** — Existing records prove assignment, inline if/switch, user/helper calls, VALUE_DROP,
+  and generic trailing-codeblock ownership; the new card joins them and states the missing retirement contract.
+- [x] **NO REGRESSION** — Planning-only: no parser, compiler, runtime, fixture, or active Lua frontier changed.
+- [x] **LOCKSTEP** — Future task, index, roadmaps, mdBook status, KM, changes/notes/live, and memory agree.
+
+### `FUTURE-PARITY-BACKLOG.17.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Compare current Perl contract diagnostics against the aligned 239-name inventories
+  and show why the existing coverage report remains green while seven public mark calls are missing everywhere.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Classify every difference as internal operator, legacy/compatibility spelling,
+  or public current helper; trace the checker's corpus-seeded reverse direction that preserves symmetric omissions.
+- [x] **FIX** — Create `.17.1-.17.5` for neutral/Perl/Rust, Dart, Julia, Lua, and final admission/gate hardening;
+  make Lua `.4.3.7.3` depend on the shared resolution instead of adding an isolated extension.
+- [x] **ADDRESSED (verified)** — Task, book/status, Knowledge Map, roadmap, live docs, and memory record the exact
+  seven names, affected surfaces, dependency order, and clean return to Lua `.4.3.7.1`.
+- [x] **NO REGRESSION** — Planning changes no parser/compiler/runtime/inventory/corpus/capability behavior; focused
+  coverage, memory, task, doctrine, Knowledge Map, book, and whitespace checks pass.
+- [x] **LOCKSTEP** — `.17` remains owned by its implementation leaves, `.17.0` closes only the tracking/audit slice,
+  and Lua input/cursor `.4.3.7.1` resumes without a false named-mark parity claim.
+
+### `FUTURE-PARITY-BACKLOG.17.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The exact Unicode parent/child fixture shows that Perl already has the seven public
+  helpers, while Rust lacks their dispatch and keeps all mark names in one execution-global bucket; standalone
+  generated Perl also fails when emitted mark writers call a trace delegate absent from the generated package.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `LinkedSpec::call_spec_handler_subst` and generated-handler source inspection
+  prove the Perl lowerings and missing generated delegate; the Rust runtime/engine audit proves global mark storage,
+  absent `mark_pos` coercion to zero, and missing entry/local/location/delete helper arms.
+- [x] **FIX** — Adopt one strict seven-helper contract and unchanged fixture; make Perl generated source provide the
+  safe trace delegate; make Rust store marks by rule label, preserve every named capture operation through that
+  bucket, expose character locations, return undef when absent, and implement all seven helpers.
+- [x] **ADDRESSED (verified)** — The neutral checker rejects three semantic drifts; Perl live and standalone-generated
+  execution and Rust native/serialized/emitted-plan/generated execution return the exact same nested value.
+- [x] **NO REGRESSION** — Focused Perl and Rust contracts pass; the complete Rust core/runtime package gate passes
+  188 core, 137 runtime, 105 oracle, 105 generated-corpus, 197 integration, and all specialized suites. The
+  canonical repository gate passes capability 64/0/0, CLI 61/61 twice, and Phase 0 `1..1031` in 983 seconds.
+- [x] **LOCKSTEP** — The exact contract, CI wiring, public helper reference/example, task/index/roadmap/live state,
+  Knowledge Map evidence, and backend handoff agree; Dart `.17.2` is the next backend consumer after commit.
+
+### `FUTURE-PARITY-BACKLOG.17.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The neutral fixture proves Dart's existing rule-local/code-unit mark store lacks the
+  four entry/local writers, two location readers, and clear dispatch, while absent `mark_pos` incorrectly becomes
+  public character position zero.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The runtime dispatch and capture/mark contract set omit all seven calls; the
+  existing store and Unicode projection seams are otherwise correct. Direct admission to the legacy shared
+  239-name set would also make the exact Dart/Julia/Lua inventory comparison fail before Julia/Lua alignment.
+- [x] **FIX** — Route all seven calls through the current rule bucket and match registers, preserve code-unit
+  storage plus character public values, return undef for missing positions/locations, and expose a separate exact
+  staged inventory folded into Dart's known-call boundary.
+- [x] **ADDRESSED (verified)** — One contract test returns the unchanged exact value through native execution,
+  generated-plan execution, emitted-state reconstruction, and the primary CLI; it also locks exactly seven staged
+  names and their deliberate disjointness from the legacy shared inventory.
+- [x] **NO REGRESSION** — Focused format/analyze/68 and complete 214-package/CLI-61x2/corpus-105 gates pass; the
+  canonical repository gate passes capability 64/0/0, shared inventory 239/105, CLI 61x2, and Phase 0 `1..1031`
+  in 1,061 seconds.
+- [x] **LOCKSTEP** — Source, test, capability README, task/index/roadmap/live docs, mdBook, Knowledge Map, and
+  governance agree; Julia `.17.3` is the next backend consumer after the prepared commit and clean pivot.
+
+### `FUTURE-PARITY-BACKLOG.17.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The neutral fixture proves Julia's existing rule-local/code-unit mark store lacks
+  the four entry/local writers, two location readers, and clear dispatch even though absent position behavior and
+  character projection are already correct.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Runtime dispatch and the capture/mark contract set omit all seven calls; the
+  store, match registers, and Unicode projection seams are otherwise correct. Direct admission to the legacy
+  shared 239-name set would also break exact Dart/Julia/Lua inventory equality before Lua alignment.
+- [x] **FIX** — Route all seven calls through the current rule bucket and match registers, preserve code-unit
+  storage plus character public values, and export a separate exact staged inventory folded into Julia's
+  known-call boundary.
+- [x] **ADDRESSED (verified)** — One 13-assertion contract returns the unchanged exact value through native,
+  generated-plan, emitted-state reconstruction, and primary-CLI execution while locking exactly seven staged
+  names and their deliberate disjointness from the legacy shared inventory.
+- [x] **NO REGRESSION** — The complete Julia gate passes 1,414 package assertions, shared CLI 61x2, and corpus
+  105/105; canonical CI passes capability 64/0/0, shared inventory 239/105, CLI 61x2, and Phase 0 `1..1031` in
+  614 seconds.
+- [x] **LOCKSTEP** — Source, test, capability README, task/index/roadmap/live docs, mdBook, Knowledge Map, and
+  governance agree; Lua `.17.4` is the next backend consumer after the prepared commit and clean pivot.
+
+### `FUTURE-PARITY-BACKLOG.17.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The unchanged Unicode parent/child fixture proves Lua had no runtime named-mark
+  bucket or dispatch for the four entry/local writers, two location readers, and explicit clear, even though its
+  match registers and byte/character projection seams were already sufficient.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `interpreter.lua` routed no governed named-mark helpers and execution context
+  owned no rule-label mark store; `action_call_names.lua` also lacked the seven staged names. Directly changing the
+  legacy shared 239-name set would prematurely perform `.17.5` admission.
+- [x] **FIX** — Add one parse-scoped rule-label/name/byte-offset store; route the exact seven calls through existing
+  match snapshots and Unicode projections; preserve symbolic bare names; and expose a disjoint staged known-call
+  set without changing the shared count.
+- [x] **ADDRESSED (verified)** — Native and serialized `SpecFile` reconstruction return the exact neutral value,
+  including same-name child/parent isolation, missing undef, clear/existence, and 1-based character locations.
+- [x] **NO REGRESSION** — The complete Lua gate passes 119/119 on PUC Lua and LuaJIT plus syntax, CLI scaffold,
+  and all 105 manifest checks; canonical CI passes capability 64/0/0, shared coverage 239/105, CLI 61x2, Phase 0
+  `1..1031` in 627 seconds, and every doctrine/documentation gate.
+- [x] **LOCKSTEP** — Source, focused tests, capability README, task/index/roadmap/live docs, mdBook, and Knowledge
+  Map agree; `.17.5` is the next clean-pivot admission/hardening leaf and Lua `.4.3.7.3` consumes this foundation.
+
+### `FUTURE-PARITY-BACKLOG.17.5` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The former checker stayed green when one current public call was omitted from every
+  backend inventory and every corpus fixture because its Perl reverse check was seeded only by corpus source.
+- [x] **ROOT CAUSE (WHY + WHERE)** — `tools/check_language_capability_coverage.pl` had no independent definition
+  of the public Perl contract set and treated the 105-case corpus as both coverage evidence and discovery input.
+- [x] **FIX** — Admit the exact seven helpers into all three shared inventories; supplement the corpus with the
+  exact named-mark fixture; independently derive 122 public Perl contracts; and lock the exact nine excluded
+  compatibility, legacy, and internal lowering names.
+- [x] **ADDRESSED (verified)** — A simultaneous Dart/Julia/Lua deletion of `clear_mark` is reported by both the
+  exact seven-helper family check and the independent 122-contract reverse check, even though backend equality is
+  preserved by the mutation.
+- [x] **NO REGRESSION** — The exact neutral/Perl/Rust proofs and complete Dart, Julia, Lua, and Rust local gates
+  pass; shared coverage reports 246 names, 105 corpus fixtures plus one exact fixture, and 122/122 public contracts.
+- [x] **LOCKSTEP** — Source, tests, capability material, task/index/roadmap/live docs, mdBook, Knowledge Map, and
+  canonical CI agree; parent `.17` is closed and Lua `.4.3.7.3` is the next active executable leaf.
+
+### `FUTURE-PARITY-BACKLOG.9.1.1.1` Acceptance Checklist
+
+- [x] **RETRIEVE / CURRENT MECHANISM** — Read the cursor/edge Knowledge Map facts and exact Perl compiler,
+  HandlerIR, validation/bootstrap, descriptor, generated-v1, CLI, and Rust/Dart/Julia/Lua owner seams before
+  choosing the future contract.
+- [x] **ROOT CAUSE / AUTHORITY** — Preserve the measured distinction between authored rule family, low-level
+  matcher algorithm, parent composition, child-owned semantics, and explicit action/blind match ownership.
+- [x] **RATIFY EXACTLY** — ADR `0044` fixes family-to-cursor mapping, bare normalization and lexical boundary,
+  explicit/indexed/grouped/fluent legality, mixed ownership, structural cross-combinations, API/CLI retirement,
+  descriptor facts, generated-v2 family derivation, diagnostics, and conformance.
+- [x] **SPLIT BEFORE CODE** — `.9.1.2-.9` separately own neutral contract/inventory, Perl, Rust, Dart, Julia,
+  Lua/LuaJIT, symmetric admission, and public no-drift; no implementation is hidden in the decision leaf.
+- [x] **ADDRESSED (verified)** — ADR/index, task/frontier, roadmaps, architecture, guide, mdBook, live status,
+  bounded memory, and a generated Knowledge Map fact agree on accepted versus currently shipped behavior.
+- [x] **NO REGRESSION / LOCKSTEP** — Memory architecture, Knowledge Map, task metadata, doctrines, mdBook, and
+  whitespace pass. No parser/compiler/runtime/descriptor/generated/CLI/fixture/test/capability behavior changes;
+  Rust logical `.5.2.3` resumes after the clean commit.
+
+<!-- Source ranges and their immutable migration digest are recorded in docs/tasks/FUTURE-PARITY-BACKLOG.index.jsonl. -->

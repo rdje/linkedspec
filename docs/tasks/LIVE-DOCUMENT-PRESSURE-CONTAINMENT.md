@@ -3,11 +3,11 @@
 ## Metadata
 
 - Tree ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-- Status: `active` / audit-and-descriptor leaf `.0` active
+- Status: `active` / task-evidence migration `.2` active
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-08-09`
-- Last updated: `2026-08-09` (`.0` activated task-tree-first from clean README closeout `0bcb5a36`; intended
-  atomic 176/300; consumer-aware descriptor contract accepted; no content migration or push)
+- Last updated: `2026-08-09` (`.0-.1` landed through `99fe03f3`; `.2` activated task-tree-first from that clean
+  boundary as intended atomic 178/300; no push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -105,8 +105,8 @@ or the README `.4` adoption/closeout that installs the guard.
   - [x] **LOCKSTEP** — Plan, public book, continuity, atomic commit, brief, cleanup, and next-owner handoff align.
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.1`
-  Status: `active / signoff-complete pending atomic commit` (2026-08-09; activated task-tree-first from clean
-    descriptor commit `dc8dd896`; intended atomic 177/300; no push)
+  Status: `done` (2026-08-09; committed atomically at `99fe03f3` as 177/300; brief cleared; clean proof passed;
+    no push)
   Goal: Convert `LIVE_ACHIEVEMENT_STATUS.md` into a bounded current view while preserving its exact historical
     chronology in indexed repository-relative durable partitions and Git history.
   Depends on: `.0`
@@ -159,10 +159,40 @@ or the README `.4` adoption/closeout that installs the guard.
   CLI 66/66 in both option environments, RAM 25%, and Phase 0 1,031/1,031 in 685 seconds.
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.2`
-  Status: `pending`
+  Status: `active` (2026-08-09; activated task-tree-first from clean live-history commit `99fe03f3`; intended
+    atomic 178/300; no push)
   Goal: Partition the oversized `FUTURE-PARITY-BACKLOG` task evidence by stable semantic ranges without changing
     node ids, frontier truth, acceptance evidence, or central task metadata enforcement.
   Depends on: `.0`
+  Acceptance: Preserve the exact clean future-task source while replacing the monolith with a bounded root index,
+    seven mutable semantic parts, one immutable legacy-history part, and one strict schema-v1 JSONL index; add
+    root-derived stable-ID lookup and mutation-checked metadata/range/digest/frontier enforcement; reroute every
+    direct machine consumer; ratchet the route through a newly staged execution ADR; align public/live docs; pass
+    focused and canonical signoff; commit, clear, remove exact residue, and prove clean before `.3`.
+
+  #### Acceptance Checklist
+
+  - [x] **CLEAN BASE / TASK-FIRST ACTIVATION** — Prove `99fe03f3` parent/subject, zero-byte brief, fresh memory/
+    Knowledge/history, absent rendered book, zero managed runs, and empty index/worktree; make this task file the
+    sole first `.2` mutation.
+  - [x] **EXACT STRUCTURAL CLASSIFICATION** — Use the task metadata/toolbox owners to classify root-current,
+    seven stable numeric node ranges, ID-scoped late evidence, and legacy global history without changing or
+    duplicating any stable ID, status, checklist, frontier, decision, question, blocker, or evidence payload.
+  - [x] **BOUNDED ROOT / INDEX / LOOKUP** — Install the bounded stable root, strict eight-part schema-v1 JSONL
+    index, seven <=5,000-line / 786,432-byte mutable semantic parts, immutable history part, and repository-rooted
+    `perl tools/read_task_tree.pl --tree FUTURE-PARITY-BACKLOG --id <stable-id>` retrieval.
+  - [x] **CONSUMER DECOUPLING** — Transfer all nine executable checker and two JSON-contract reads from the old
+    monolith to exact semantic owners or governed lookup; mutation-lock zero residual machine authority and forbid
+    root compatibility duplicates.
+  - [x] **METADATA / MUTATION / ROUTE PROOF** — Strengthen task metadata to reject missing/duplicate/wrong-range
+    IDs, uncovered/stale parts, unsafe paths/symlinks, stale digests/counts, broken frontier lookup, oversize
+    members, mutable history, and unauthorized route debt retirement through a newly staged indexed ADR.
+  - [x] **LOCKSTEP / NO BEHAVIOR REGRESSION** — Align task index, architecture, roadmap, Knowledge, changes/notes/
+    live/memory, and sole-facing mdBook; preserve parser/compiler/runtime/backend/MCP/CLI/fixture/schema/language
+    behavior and leave changes/notes migration to `.3`.
+  - [x] **VERIFY / COMMIT / CLEAN HANDOFF** — Pass exact source-accounting/lookup/consumer/metadata/mutation/routing,
+    task/memory/Knowledge/doctrine/book checks and definitive canonical CI; commit atomically as 178/300, clear the
+    brief, remove exact generated residue, and prove clean before `.3`.
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3`
   Status: `pending`
@@ -178,9 +208,9 @@ or the README `.4` adoption/closeout that installs the guard.
 
 ## Current Frontier
 
-`.0` landed clean at `dc8dd896` as atomic 176/300. `.1` is signoff-complete and remains the only active/eligible
-leaf through its intended atomic 177/300 commit, brief clearing, residue check, and clean proof. `.2-.4` remain
-pending; no pivot is permitted from the dirty `.1` worktree.
+`.1` landed clean at `99fe03f3` as atomic 177/300. `.2` is the only active/eligible leaf and owns future-task
+semantic partitioning, stable-ID lookup, direct-consumer transfer, metadata mutation enforcement, and route
+transition as intended atomic 178/300. `.3-.4` remain pending; no pivot is permitted from the dirty `.2` worktree.
 
 ## Decisions
 
@@ -193,6 +223,8 @@ pending; no pivot is permitted from the dirty `.1` worktree.
   stable path, exact byte reconstruction from a clean Git source, and semantic rather than chronological task
   partitioning. Execution-time route-contract changes still require newly added staged ADRs because the registry
   correctly refuses to treat this already-committed planning authority as a later mutation permit.
+- ADR `0068` implements the task partition from clean `99fe03f3`: exact source-line provenance, seven mutable
+  semantic owners, immutable global history, strict current snapshots, stable-ID lookup, and route ratchet.
 
 ## Reverification And Classification
 
@@ -226,14 +258,13 @@ a current-state denial surface.
 
 ### Future-parity task evidence
 
-`tools/check_capability_conformance.pl`, `tools/check_repeated_action_result_contract.py`,
-`tools/check_root_rule_selection_contract.py`, and `tools/check_semantic_introspection_contract.py` read the exact
-monolith and require nodes/statuses/checklist headings for `.9.1.1.2*`, `.9.1.10*`, `.10.2`, `.10.10`, and `.24*`.
-`repeated_action_result_contract.json` and `semantic_introspection_contract.json` also name the exact path. The
-stable root path must remain navigable, but `.2` changes these consumers to the exact semantic part or governed
-ID lookup; it may not duplicate node blocks into a compatibility summary. `scripts/check_task_tree_metadata.sh`
-already expands `docs/tasks/*.md`, so strengthening uniqueness, part-manifest, and frontier checks composes its
-existing scope.
+`tools/check_capability_conformance.pl` now scans all seven semantic parts for its complete census and `.15-.24`
+for the public exclusion projection. Repeated action reads `.09` plus the `.10.0-.6` handoff; root selection
+reads `.09`; semantic introspection reads `.10.0-.6` for implementation ownership and `.10.7-.10` for its public
+projection. Their two contract JSON files name the matching public owners. The stable root remains navigation,
+not a compatibility duplicate. Logical-helper, diagnostic-output, generated-source, and native-resolution
+checkers read `.00-08`; duplicate-slot identity reads `.09`. The partition checker rejects the old monolith path
+in all nine executable and two JSON scopes.
 
 ### Changes and engineering notes
 
@@ -260,9 +291,10 @@ The future root retains only metadata, authoritative frontier, current global st
 Seven semantic parts own `.0-.8`, `.9`, `.10.0-.6`, `.10.7-.10`, `.11-.13`, `.14`, and `.15-.24`; one immutable
 history part owns superseded frontier plus legacy global logs. The exact clean structural intake is 351 root
 lines, 3,340 legacy-history lines, 3,108 / 3,596 / 4,188 / 4,139 / 2,016 / 3,952 / 1,804 node lines, and 485
-late ID-scoped evidence lines routed to `.1` or `.5`. A strict JSONL index fixes range identity and current
-digests. Every part stays below 5,000 lines / 786,432 bytes; the collection ratchets globally to 8,000 lines /
-1 MiB per file while retaining 128 files / 80,000 lines / 8 MiB aggregate.
+late ID-scoped evidence lines routed to `.1` or `.5`. A strict nine-record JSONL index fixes range identity,
+clean source digests, and same-commit current digests. Every part stays below 5,000 lines / 786,432 bytes; the
+collection ratchets globally to 8,000 lines / 1 MiB per file while retaining 128 files / 80,000 lines / 8 MiB
+aggregate. All 510 clean stable IDs remain exact and unique.
 
 ## Migration, Failure, And Rollback Contract
 
@@ -271,7 +303,7 @@ digests. Every part stays below 5,000 lines / 786,432 bytes; the collection ratc
    indexed route-transition ADR. Verify reconstruction and all affected capability/public mutations before the
    root rewrite commits.
 2. `.2`: from clean `.1`, add the task index/lookup and semantic parts; strengthen metadata uniqueness/frontier/
-   range/digest oracles; reroute six direct machine consumers; archive legacy global logs; ratchet the task route
+   range/digest oracles; reroute eleven direct machine consumers; archive legacy global logs; ratchet the task route
    through its own newly staged ADR.
 3. `.3`: from clean `.2`, snapshot changes and notes, install bounded hot shards/rollover/query, align
    `COMMIT.md`/bootstrap/task doctrine, and ratchet both route contracts through one newly staged execution ADR.
@@ -291,13 +323,13 @@ All files and transient proof stay on the repository filesystem; no off-volume c
 
 ## Blockers
 
-- None. `.1` activated task-tree-first from verified clean `dc8dd896`.
+- None. `.2` activated task-tree-first from verified clean `99fe03f3`.
 
 ## Verification Log
 
 Planning evidence: clean activation `0bcb5a36`; route report 20 surfaces / 62 routes / 32/32 mutations; exact
 four-file line/byte/SHA-256 census; 121 / 117 / 75 / 132 repository-reference counts; seven live required-marker
-families; four executable plus two JSON future-task consumers; 25 top-level future-node boundaries; exact
+families; an initial four-executable plus two-JSON future-task inventory; 25 top-level future-node boundaries; exact
 semantic range sizing; task metadata parser and commit-workflow owner audit. Focused signoff passes whitespace,
 task metadata, memory architecture at 58/60 lines, Knowledge Map at 797 facts / 6,590 keys, route closure at 20
 surfaces / 62 routes / 32/32 mutations, all seven doctrines, mdBook build, and direct generated-HTML block/anchor
@@ -314,12 +346,26 @@ admission 1/1 in 81.92 seconds, Julia semantic admission 416/416 in 31.5 seconds
 containment, moved-root execution, CLI 66/66 in both option environments, RAM 25%, and Phase 0 1,031/1,031 in 685
 seconds. Optional matrices remain explicitly unclaimed.
 
+Task-partition implementation focused proof: source coverage, 510 unique/range-owned stable IDs, bounded lookup,
+current digests, immutable history, 26/26 mutations, task limits, staged route retirement, and the first six
+transferred consumers pass. The first canonical E4 attempt then fails at logical-helper owner `.5.2.2`, proving
+the prose-led consumer audit incomplete. Exact executable-scope search finds five more readers: logical-helper,
+diagnostic-output, generated-source, and native-resolution in `.00-08`, plus duplicate-slot identity in `.09`.
+All five focused contracts pass after transfer; the partition checker now guards the complete nine-executable +
+two-JSON topology. This is root-caused consumer-discovery evidence, not a relaxed gate or classification-only move.
+
+Task-partition definitive signoff: a restricted outer attempt reaches the process-locality proof only after all
+preceding checks pass, then denies nested macOS `sandbox-exec` with status 71. The unchanged isolated six-family
+proof passes with the required permission. One uninterrupted approved canonical rerun exits 0 after all eight
+doctrines, capability 80/0/0, MCP complete/141, Rust semantic admission 1/1 in 82.34 seconds, Julia semantic
+admission 416/416 in 31.7 seconds, cursor 288, six-family containment, moved-root/outside-CWD execution, CLI 66/66
+in both option environments, RAM 57%, and Phase 0 1,031/1,031 in 696 seconds. Optional matrices remain unclaimed.
+
 ## Commit Log
 
 `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0 - freeze bounded document store contract` — `dc8dd896`, atomic 176/300.
 
-`LIVE-DOCUMENT-PRESSURE-CONTAINMENT.1 - bound live status over exact history` — intended atomic 177/300;
-commit pending.
+`LIVE-DOCUMENT-PRESSURE-CONTAINMENT.1 - bound live status over exact history` — `99fe03f3`, atomic 177/300.
 
 ## Changelog
 
@@ -340,3 +386,12 @@ commit pending.
 - `2026-08-09`: `.1` preserves the exact clean chronology in four immutable segments, transfers all thirteen
   capability consumers to ADR `0067`, installs query/doctrine enforcement, and ratchets `live_status` from debt to
   bounded current. Focused, book, eight-doctrine, and canonical proof pass; atomic commit/clean proof remain.
+- `2026-08-09`: `.1` lands at `99fe03f3` with exact parent/subject, hook/doctrine/post-pointer proof, zero-byte
+  brief, fresh memory/Knowledge/history, absent book, empty managed runs, and clean cadence 177/300. Activated `.2`
+  as the sole first mutation for future-task semantic partitioning and consumer/metadata transfer.
+- `2026-08-09`: `.2` initially transfers the six consumers found by planning. Canonical E4 fails at the omitted
+  logical-helper task owner; exact executable census finds and transfers five additional consumers, focused-green,
+  and expands durable checker/docs/Knowledge ownership to the complete eleven-consumer topology.
+- `2026-08-10`: `.2` focused/book/eight-doctrine proof and one uninterrupted permission-correct canonical rerun
+  pass through containment, relocation, CLI 66x2, RAM 57%, and Phase 0 1,031/1,031 in 696 seconds. Atomic commit,
+  brief clearing, residue census, and clean proof are the remaining workflow actions.

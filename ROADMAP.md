@@ -100,8 +100,11 @@ classes. Canonical signoff passes all seven doctrines, CLI 66x2, and Phase 0 1,0
 seconds, then closes atomically at `0bcb5a36`. Bounded-view audit `.0` freezes ADR `0066` and lands at `dc8dd896`.
 Live migration `.1` transfers all 13 capability consumers to indexed ADR `0067`, reconstructs the clean
 14,872-line source exactly from four immutable manifest segments, installs the `DOCUMENT-HISTORY` doctrine/query,
-and replaces the stable root with its bounded five-section current view. The future task still has six exact
-machine consumers and remains the semantic-partition owner `.2`; changes/notes remain `.3`. No parser, runtime,
+and replaces the stable root with its bounded five-section current view; it lands at `99fe03f3`. Task migration
+`.2` preserves all 510 stable IDs from that clean boundary across seven mutable semantic parts and one immutable
+history part, replaces the monolith with a 381-line current index, transfers all eleven exact machine consumers,
+adds root-derived lookup/index update tooling, and closes 26/26 metadata mutations plus current route limits.
+Changes/notes remain `.3`; recomposition remains `.4`. No parser, runtime,
 backend, MCP, CLI, fixture, protocol, or `.spec` behavior changes. Recurring MCP
 `.10.9.7.1.1.4` recomposes the committed rooted promotion
 unchanged and closes its implementation parents; `.10.9.7.2` now independently recomposes that full chain,

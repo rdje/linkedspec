@@ -1,5 +1,35 @@
 # CHANGES
 
+## 2026-08-09 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.2 — partition future task evidence
+
+- Activated task-tree-first from clean live-history commit `99fe03f3` at cadence 177/300. The exact clean
+  `docs/tasks/FUTURE-PARITY-BACKLOG.md` source is 26,979 lines / 2,720,175 bytes, Git blob `f3b59f72...ed0c9`,
+  SHA-256 `48de44a5...3f95`.
+- Replaced the monolith with a 381-line stable current index, seven mutable semantic owners (`.0-.8`, `.9`,
+  `.10.0-.6`, `.10.7-.10`, `.11-.13`, `.14`, `.15-.24`), one immutable 3,340-line legacy-history part, and one
+  canonical nine-record schema-v1 JSONL index. Exact provenance ranges account for every clean source line once.
+- Added repository-root-derived stable-ID lookup and same-slice mutable-index update tools. All 510 clean IDs
+  remain unique and range-owned; the index separately binds immutable source identity/digests and current mutable
+  counts/digests.
+- Transferred nine executable and two JSON contract consumers from the old monolith to bounded owners.
+  Capability conformance scans all semantic parts; repeated action uses `.09` plus its `.10.0-.6` handoff; root
+  selection uses `.09`; semantic introspection uses `.10.0-.6` and `.10.7-.10` for its distinct roles.
+- The first canonical run exposed five consumers omitted by the initial four-plus-two audit: logical-helper,
+  diagnostic-output, generated-source, and native-resolution owners in `.00-08`, plus duplicate-slot identity in
+  `.09`. Exact executable-scope census, focused contract reruns, and the partition checker now guard all eleven.
+- Strengthened the existing task metadata doctrine with strict schema/path/source/range/digest/ID/frontier/
+  consumer/immutability/pressure proof and 26/26 independent mutations. ADR `0068` authorizes exact task-evidence
+  debt retirement; route limits ratchet to 8,000 lines / 1 MiB globally and 5,000 lines / 768 KiB per named future
+  member while preserving the 128-file / 80,000-line / 8-MiB collection limits.
+- Synchronized bootstrap/commit/Toolbox guidance, doctrine mirrors, architecture/roadmaps/task index, ADRs,
+  Knowledge Map, continuity layers, and the sole-facing mdBook. Focused syntax, lookup, all affected consumers,
+  task metadata, 26/26 mutations, resulting-tree route pressure, Knowledge 799/6,605, book build, and generated-
+  HTML inspection pass. Definitive repository-volume E4 exits 0 after all eight doctrines, MCP complete/141,
+  Rust semantic admission 1/1 in 82.34 seconds, Julia 416/416 in 31.7 seconds, cursor 288, containment/relocation,
+  CLI 66x2, RAM 57%, and Phase 0 1,031/1,031 in 696 seconds; optional matrices remain unclaimed.
+- No parser, compiler, runtime, backend, MCP, CLI, fixture, protocol, schema, `.spec` language, README, or
+  project-data root changes.
+
 ## 2026-08-09 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.1 — bound live status over exact history
 
 - Activated task-tree-first from clean descriptor commit `dc8dd896` at cadence 176/300. The exact clean

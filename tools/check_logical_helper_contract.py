@@ -13,7 +13,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = ROOT / "capability_conformance" / "logical_helper_contract.json"
-TASK_PATH = ROOT / "docs" / "tasks" / "FUTURE-PARITY-BACKLOG.md"
+TASK_PATH = ROOT / "docs" / "tasks" / "FUTURE-PARITY-BACKLOG.00-08.md"
 CLI_MANIFEST_PATH = ROOT / "cli_conformance" / "manifest.json"
 CONTRACT_ID = "linkedspec-logical-helper-v1"
 TOP_LEVEL_FIELDS = [

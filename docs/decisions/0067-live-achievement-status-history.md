@@ -1,7 +1,7 @@
 # ADR 0067: Live achievement status is a bounded current view over exact history
 
 - Date: 2026-08-09
-- Status: accepted and implemented under `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.1`; atomic commit pending
+- Status: accepted and implemented under `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.1` at `99fe03f3`
 - Tags: documentation, history, retrieval, routing, capability-governance, doctrine
 
 ## Routing transition authorization
@@ -63,8 +63,8 @@ contains none of the transferred closeout markers.
 - Capability governance no longer depends on an append chronology, while each public inventory retains its exact
   document cardinality and independent expected projection.
 - Live-route pressure becomes a current bounded collection with executable freshness/non-loss enforcement.
-- Changes, engineering notes, and the future task monolith remain under `.2-.3`; this decision does not migrate
-  them or change parser/runtime/backend/MCP/CLI/language behavior.
+- The future task monolith is separately migrated by ADR `0068`; changes and engineering notes remain under `.3`.
+  This decision does not change parser/runtime/backend/MCP/CLI/language behavior.
 
 ## Links
 

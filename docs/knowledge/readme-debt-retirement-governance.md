@@ -7,7 +7,7 @@ answers:
   - what authorizes debt to current route transitions
   - may an immutable routing debt baseline be deleted or refreshed
 date: 2026-08-09
-status: accepted and implemented under LIVE-DOCUMENT-PRESSURE-CONTAINMENT.1; commit pending
+status: accepted and implemented under LIVE-DOCUMENT-PRESSURE-CONTAINMENT.1 at 99fe03f3
 tags: [readme, routing, debt, governance, documentation, transition]
 evidence: "The original routing checker rejected every baseline difference before evaluating the exact staged old/new contract ADR, while non-debt surfaces were separately required to have empty baseline/transition objects. That made a ratified debt-to-current closure structurally impossible. The checker now permits baseline clearing only when HEAD state is debt, resulting state is current, resulting baseline/transition are empty, and a newly added indexed ADR matches the canonical old/new route contracts exactly. ADR 0067 authorizes live_status; all other baseline changes remain rejected, and mutation class 31 locks authorized versus unauthorized retirement."
 last_verified: 2026-08-09

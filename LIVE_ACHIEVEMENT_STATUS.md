@@ -2,25 +2,27 @@
 
 ## Current Activity
 
-- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.1` is active task-tree-first from clean descriptor commit `dc8dd896` as
-  intended atomic 177/300 with no push.
-- The slice is decoupling capability assertions from chronology, installing exact indexed history, and replacing
-  this stable path with a bounded current projection under ADRs `0066` and `0067`.
-- Focused proof, all eight doctrines, and definitive canonical E4 are green; the atomic commit is the remaining
-  current action.
+- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.2` is active task-tree-first from clean live-history commit `99fe03f3` as
+  intended atomic 178/300 with no push.
+- The slice partitions future task evidence into a bounded root, seven semantic owners, immutable history, and a
+  strict index under ADRs `0066` and `0068`, preserving all 510 stable IDs and transferring eleven machine consumers.
+- Focused implementation, consumer, metadata, route, Knowledge, and rendered-book proof is green. Definitive E4
+  is also green through all eight doctrines, containment/relocation, CLI 66x2, RAM 57%, and Phase 0 1,031/1,031;
+  only the atomic commit workflow remains.
 
 ## Latest Completed Slice
 
-- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0` landed at `dc8dd896`: consumer-aware descriptor, topology, limits,
-  mutation classes, migration order, and rollback were frozen without moving content or changing behavior.
+- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.1` landed at `99fe03f3`: live status is a bounded current view over four
+  immutable exact-history segments, and all thirteen capability consumers use stable decision authority.
 
 ## Next Action
 
-- Commit canonical-green `.1`, clear the brief, remove exact generated residue, prove clean, then activate
-  future-task partition leaf `.2` task-tree-first.
+- Commit `.2` atomically, clear the brief, prove the workspace clean, then activate changes/notes hot-store leaf
+  `.3` task-tree-first.
 
 ## Recent Completions
 
+- `2026-08-09` — `99fe03f3` bounded live status over exact history as atomic 177/300.
 - `2026-08-09` — `dc8dd896` froze the bounded document-store contract as atomic 176/300.
 - `2026-08-09` — `0bcb5a36` recomposition-closed README routing pressure as atomic 175/300.
 - `2026-08-09` — `5c570719` enforced 20 routed surfaces and 62 routes as atomic 174/300.

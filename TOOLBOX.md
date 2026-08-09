@@ -88,6 +88,7 @@ check, not proof that the cited commands were run.
 | "A parse hangs / burns CPU — which file, regex blowup?" | [§6.3 fork+SIGKILL census](#63-forksigkill-hard-timeout-census-alarm-cannot-kill-a-regex) |
 | "Did I already establish this fact? (avoid archaeology)" | [§5.2 Knowledge Map grep](#52-knowledge-map-grep-before-re-deriving) |
 | "Where is an older live-status completion or exact chronology?" | [§5.3 document-history query](#53-document-history-query-and-doctrine) |
+| "Which bounded part owns a stable future-task ID?" | [§5.4 task-tree partition lookup](#54-task-tree-partition-lookup-and-metadata) |
 | "Where should this workflow put temporary/package/build data, and how do I recover a run?" | [§4.4.1 project-data environment](#441-toolsproject_data_envsh--repo-filesystem-project-state) + [§4.4.2 run lifecycle](#442-toolsproject_data_runsh--per-run-scratch-lifecycle) |
 
 ---
@@ -1072,7 +1073,18 @@ trap 'rm -rf -- "$diagnostic_root"' EXIT
   `bash scripts/check_document_history.sh`. Initial snapshots are created deterministically with
   `perl tools/build_document_history.pl` from a named clean 40-hex source commit.
 
-### 5.4 Doctrine / memory gates
+### 5.4 Task-tree partition lookup and metadata
+- **WHAT:** `tools/read_task_tree.pl` resolves a stable ID through the strict task-tree JSONL index and prints its
+  one bounded semantic owner. `scripts/check_task_tree_partitions.pl`, invoked by the existing metadata doctrine,
+  proves clean-source coverage, current counts/digests, immutable history, unique stable IDs, bounded lookup, and
+  collection/member ceilings.
+- **WHEN:** retrieve an active or historical `FUTURE-PARITY-BACKLOG.*` node without scanning the task collection.
+  Put new evidence in the returned mutable semantic part; never append to the bounded root or immutable history.
+- **HOW:** `perl tools/read_task_tree.pl --tree FUTURE-PARITY-BACKLOG --id FUTURE-PARITY-BACKLOG.14.3.1.1`.
+  After an owning-part edit, run `perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG`, then
+  `bash scripts/check_task_tree_metadata.sh`.
+
+### 5.5 Doctrine / memory gates
 - `bash scripts/check_doctrines.sh` (driver — runs every registered check) ·
   `bash scripts/check_memory_architecture.sh` · `bash knowledge-map/scripts/check_knowledge_map.sh` ·
   `bash scripts/check_document_history.sh` ·

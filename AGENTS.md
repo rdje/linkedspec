@@ -14,7 +14,8 @@ point back here. The system of record is **`README.md`** (the project) +
    layer-A pointer: clean leaf `activation_commit`, active task-tree frontier leaf,
    the single next action, any in-flight uncommitted work.
 4. Read **`SESSION_BOOTSTRAP.md`** and open the active **task-tree** under `docs/tasks/`
-   (index: `docs/TASK_TREE.md`); its frontier row is your precise next step.
+   (index: `docs/TASK_TREE.md`); its frontier row is your precise next step. For a partitioned tree, resolve the
+   stable leaf with `perl tools/read_task_tree.pl --tree <tree> --id <stable-id>` instead of scanning every part.
 5. Pull only the relevant **decision records** under `docs/decisions/` (index: `INDEX.md`).
 6. **Before re-deriving any fact from code or runtime, check `KNOWLEDGE_MAP.md`** — grep your
    question, follow the one pointer to the canonical home, and trust the dated fact or run its
@@ -23,11 +24,13 @@ point back here. The system of record is **`README.md`** (the project) +
 7. **Before searching old live-status chronology, use the indexed history query** — run
    `perl tools/read_document_history.pl --surface live_status --grep '<literal>'`, or `--all` for exact
    reconstruction. `LIVE_ACHIEVEMENT_STATUS.md` is the bounded current view, not the historical store.
-8. **When debugging, reach for LinkedSpec's own tools FIRST** — read `TOOLBOX.md` (the
+8. **After editing a mutable partitioned task part, refresh its index snapshot** — run
+   `perl tools/update_task_tree_index.pl --tree <tree>` in the same slice; never edit an immutable history part.
+9. **When debugging, reach for LinkedSpec's own tools FIRST** — read `TOOLBOX.md` (the
    `LinkedSpec::Get`/`return_descriptor`/`call_spec_handler_subst`/`dump_parser_source` probes, the
    `LINKEDSPEC_TRACE_LEVEL` trace framework, the `tools/` scripts, the gates). Never eyeball a `.spec`
    or guess a root cause before the toolbox has shown the exact mechanism + source location.
-9. **Doctrines are mechanically enforced** (`DOCTRINE_ENFORCEMENT.md`, the 4th portable architecture):
+10. **Doctrines are mechanically enforced** (`DOCTRINE_ENFORCEMENT.md`, the 4th portable architecture):
    every rule pairs with a `scripts/check_*.sh` run by the registry driver `scripts/check_doctrines.sh`
    via `.githooks/pre-commit` (E3) + `tools/run_ci_local.sh` (E4). Add a doctrine = a check + one
    registry line.

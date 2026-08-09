@@ -13,7 +13,7 @@ my $repo_root = abs_path(File::Spec->catdir(dirname(__FILE__), '..'));
 my $contract_path = File::Spec->catfile(
  $repo_root, 'capability_conformance', 'native_spec_resolution_contract.json'
 );
-my $task_path = File::Spec->catfile($repo_root, 'docs', 'tasks', 'FUTURE-PARITY-BACKLOG.md');
+my $task_path = File::Spec->catfile($repo_root, 'docs', 'tasks', 'FUTURE-PARITY-BACKLOG.00-08.md');
 
 sub fail {
  my ($message) = @_;

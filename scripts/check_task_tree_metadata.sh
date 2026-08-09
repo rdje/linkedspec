@@ -12,6 +12,8 @@ source "$ROOT/tools/project_data_env.sh"
 linkedspec_project_data_enter_run "$ROOT/scripts/check_task_tree_metadata.sh" "$@"
 cd "$ROOT"
 
+perl scripts/check_task_tree_partitions.pl
+
 perl - <<'PERL' docs/tasks/*.md
 use strict;
 use warnings;

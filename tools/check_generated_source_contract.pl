@@ -87,7 +87,7 @@ fail("unexpected contract_id '$contract->{contract_id}'")
  unless $contract->{contract_id} eq 'linkedspec-generated-source-v1';
 fail("unexpected task_owner '$contract->{task_owner}'")
  unless $contract->{task_owner} eq 'FUTURE-PARITY-BACKLOG.3.1';
-my $task_path = File::Spec->catfile($repo_root, 'docs', 'tasks', 'FUTURE-PARITY-BACKLOG.md');
+my $task_path = File::Spec->catfile($repo_root, 'docs', 'tasks', 'FUTURE-PARITY-BACKLOG.00-08.md');
 my $task_text = decode('UTF-8', read_bytes($task_path), FB_CROAK | LEAVE_SRC);
 fail("task owner '$contract->{task_owner}' is not tracked")
  unless $task_text =~ /^- ID: `\Q$contract->{task_owner}\E`/m;

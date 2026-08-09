@@ -16,6 +16,12 @@ registered `README-STABILITY` doctrine enforces the reviewed line/byte budgets a
 `perl tools/read_document_history.pl --surface live_status --grep '<literal>'`; use `--all` only when full
 byte reconstruction is required. `scripts/check_document_history.sh` enforces the manifest and current view.
 
+`docs/tasks/FUTURE-PARITY-BACKLOG.md` is a bounded current index. Resolve a stable leaf with
+`perl tools/read_task_tree.pl --tree FUTURE-PARITY-BACKLOG --id <stable-id>`; after editing the returned mutable
+semantic part, refresh its current index snapshot with
+`perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG`. Never append new evidence to its immutable
+history part. `scripts/check_task_tree_metadata.sh` enforces the complete partition contract.
+
 After reading the above, thoroughly, meticulously and precisely analyze `LinkedSpec.pm` and its import tree.
 
 When done, update `ARCHITECTURE_STATE.md` if deemed necessary, then help me fulfil all the objectives as captured in the roadmap. When PNT is requested, select the first eligible leaf from the active task tree's current frontier.

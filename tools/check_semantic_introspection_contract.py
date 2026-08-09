@@ -304,7 +304,7 @@ PUBLIC_CONTRACT = {
         {"path": "ARCHITECTURE_STATE.md", "required_markers": ["2026-07-30 semantic-introspection public closeout", "128 omission-sensitive mutations"]},
         {"path": "TOOLBOX.md", "required_markers": ["128 rejected mutations, rollout 9 complete / 0 pending", "public current-state contract"]},
         {"path": "docs/TASK_TREE.md", "required_markers": ["FUTURE-PARITY-BACKLOG.10.10", "128 omission-sensitive mutations"]},
-        {"path": "docs/tasks/FUTURE-PARITY-BACKLOG.md", "required_markers": ["ID: `FUTURE-PARITY-BACKLOG.10.10`", "Status: `done`", "128 rejected mutations"]},
+        {"path": "docs/tasks/FUTURE-PARITY-BACKLOG.10.7-10.md", "required_markers": ["ID: `FUTURE-PARITY-BACKLOG.10.10`", "Status: `done`", "128 rejected mutations"]},
         {"path": "docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md", "required_markers": ["public no-drift complete", "9/9 rollout"]},
         {"path": "docs/decisions/0054-one-mcp-contract-native-per-backend-servers.md", "required_markers": ["Semantic public no-drift is complete", "five native implementations"]},
         {"path": "docs/decisions/0055-modern-mcp-2026-07-28-stdio-contract.md", "required_markers": ["Public closeout", "MCP `2026-07-28`"]},
@@ -1270,7 +1270,7 @@ def validate_filesystem(contract: dict[str, Any]) -> None:
     adr_50 = (ROOT / contract["decisions"][1]).read_text(encoding="utf-8")
     require("linkedspec-semantic-model-v1" in adr_49 and "thin MCP" in adr_49, "ADR 0049 direction markers drifted")
     require("staged_artifact" in adr_50 and "consumes" in adr_50 and "produces" in adr_50, "ADR 0050 correction markers drifted")
-    task_text = (ROOT / "docs/tasks/FUTURE-PARITY-BACKLOG.md").read_text(encoding="utf-8")
+    task_text = (ROOT / "docs/tasks/FUTURE-PARITY-BACKLOG.10.0-6.md").read_text(encoding="utf-8")
     require(re.search(r"- ID: `FUTURE-PARITY-BACKLOG\.10\.2`\n  Status: `(active|done)`", task_text) is not None, "task owner is neither active nor done")
     require("explicit staged payload/job/result records" in task_text, "task-tree staged correction marker drifted")
     ci_text = (ROOT / contract["canonical_ci"]["driver"]).read_text(encoding="utf-8")

@@ -3,25 +3,29 @@
 ## Documentation pressure containment
 
 README routing-pressure enforcement is closed at `0bcb5a36`, and the behavior-free store architecture landed at
-`dc8dd896`. Live-status migration is now implemented under ADRs `0066` and `0067`; the remaining future-task,
-changes, and engineering-notes migrations are pending.
+`dc8dd896`. Live-status migration landed at `99fe03f3` under ADRs `0066` and `0067`; future-task partitioning is
+implemented under ADR `0068`. Changes, engineering notes, and final recomposition remain pending.
 
 The plan keeps `LIVE_ACHIEVEMENT_STATUS.md`, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, and
 `docs/tasks/FUTURE-PARITY-BACKLOG.md` as stable entry points. Exact historical bytes move only after a strict
 repository-relative manifest records their clean Git source, line/byte counts, digest, immutable segments, and
 reconstruction query. Live status is now a bounded overwrite view; changes and notes will become bounded hot
-shards; the oversized future tree will become a live index over stable semantic parts.
+shards; the former oversized future tree is now a 381-line live index over seven stable semantic parts and one
+immutable history part.
 
 This is consumer-aware work. The six live JSON projections and seven executable checkers now use stable decision
-authority ADR `0067`, and the chronology root contains no capability marker authority. Four executable checkers
-and two contract projections still read the future task monolith directly. Those dependencies must be rerouted and
-mutation-locked before that stable root shrinks. Remaining order is future-task partitioning, changes/notes plus
-commit workflow, then unchanged closeout.
+authority ADR `0067`, and the chronology root contains no capability marker authority. Nine executable checkers
+and two contract projections now read their bounded task owners instead of the future monolith. Strict metadata
+preserves all 510 stable IDs, clean-source coverage, current digests, immutable history, bounded lookup, and
+26/26 rejected mutation classes. Remaining order is changes/notes plus commit workflow, then unchanged closeout.
 
 The live manifest has four immutable segments and reproduces the exact 14,872-line clean source. Historical lookup
 uses `perl tools/read_document_history.pl --surface live_status --grep '<literal>'`; `--all` reconstructs complete
 pre-migration bytes. The registered `DOCUMENT-HISTORY` doctrine enforces the store and the current 256-line /
-32-KiB view. No language, runtime, backend, MCP, CLI, fixture, protocol, or public parser behavior changes.
+32-KiB view. Task lookup uses
+`perl tools/read_task_tree.pl --tree FUTURE-PARITY-BACKLOG --id <stable-id>`; mutable owner edits require
+`perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG` in the same slice. No language, runtime,
+backend, MCP, CLI, fixture, protocol, or public parser behavior changes.
 
 ## Linked-rule authoring guidance
 

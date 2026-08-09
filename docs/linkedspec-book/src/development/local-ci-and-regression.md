@@ -36,8 +36,9 @@ routes, five policy/enforcement reader routes, 18 policy author-overflow routes,
 rejects any mismatch, missing or symlinked local target, route cycle, incompatible lifecycle/control, stale
 generated owner, unowned debt growth, staged/worktree split, or unreviewed threshold increase. Its in-memory
 mutation oracle must report 32/32. At adoption, live status, task evidence, change history, and engineering notes
-were immutable measured debt. Live status is now current/bounded under ADR `0067`; the other three retain their
-separate owners and their ceilings are not healthy defaults.
+were immutable measured debt. Live status is now current/bounded under ADR `0067`, and task evidence is current/
+bounded under ADR `0068`; changes and engineering notes retain separate owners and their ceilings are not healthy
+defaults.
 
 `README-STABILITY-POLICY.4.1` canonical admission passes that unconditional doctrine together with the other six
 registered doctrines, repository containment and moved-root execution, primary CLI 66/66 in both option
@@ -50,15 +51,15 @@ primary CLI 66/66 twice, RAM 52%, and Phase 0 1,031/1,031 in 673 seconds. The re
 
 #### Bounded views over exact history
 
-ADR `0066` defines the migration contract for the four measured debt families. Live status is now implemented;
-the future task, changes, and engineering-notes stores remain owned by the next migration leaves.
+ADR `0066` defines the migration contract for the four measured debt families. Live status and future task
+evidence are now implemented; changes and engineering notes remain owned by the next migration leaf.
 
 The audit found two important machine interfaces. Seven capability/public-closeout families previously required
 historical markers from `LIVE_ACHIEVEMENT_STATUS.md`; six JSON projections and seven executable checkers now use
-indexed ADR `0067` as current decision authority instead. Four executable checkers and two contract projections read
-exact task nodes, statuses, and evidence from `docs/tasks/FUTURE-PARITY-BACKLOG.md`. The live migration must first
-move current assertions to stable contract/decision/Knowledge/book owners; the task migration must reroute those
-consumers to semantic parts or stable-ID lookup. Neither file can be safely truncated or split by byte count alone.
+indexed ADR `0067` as current decision authority instead. Nine executable checkers and two contract projections
+previously read exact task nodes, statuses, and evidence from `docs/tasks/FUTURE-PARITY-BACKLOG.md`; all eleven now
+read their bounded semantic owners. Both migrations preserve those machine interfaces before shrinking the stable
+roots, proving why neither file could be safely truncated or split by byte count alone.
 
 The chronology protocol uses a tracked JSONL manifest per family. Every immutable segment records its
 repository-relative path, clean source commit and Git blob, exact source line range, line/byte counts, SHA-256,
@@ -68,12 +69,19 @@ overwrite view capped at 256 lines / 32 KiB. Its first manifest describes four s
 commit `dc8dd896` exactly. `CHANGES.md` and `DEVELOPMENT_NOTES.md` will remain stable bounded hot
 shards capped at 512 lines / 64 KiB over ordered archives.
 
-The future task root will remain the navigable live index. Stable IDs will route into seven semantic parts:
-`.0-.8`, `.9`, `.10.0-.6`, `.10.7-.10`, `.11-.13`, `.14`, and `.15-.24`. One immutable part preserves superseded
-frontier and legacy global logs. The split at real `.10` child boundaries keeps every part below 5,000 lines,
-while strengthened task metadata will reject duplicate/missing nodes, wrong ranges, stale digests, or a frontier
-without one canonical node. Migration order is live/history mechanism, task partition, changes/notes and author
-workflow, then unchanged registry recomposition. Each stage starts and lands at its own clean Git boundary.
+The future task root is now a 381-line navigable live index. All 510 stable IDs route unchanged into seven semantic
+parts: `.0-.8`, `.9`, `.10.0-.6`, `.10.7-.10`, `.11-.13`, `.14`, and `.15-.24`. One immutable 3,340-line part
+preserves superseded frontier and legacy global logs. The split at real `.10` child boundaries keeps every part
+below 5,000 lines. A strict nine-record JSONL index binds the clean source identity/ranges and same-commit current
+counts/digests; strengthened task metadata rejects duplicate/missing nodes, wrong ranges, stale snapshots,
+consumer recoupling, mutable history, or a frontier without one canonical node. Migration order continues with
+changes/notes and author workflow, then unchanged registry recomposition; each stage starts and lands at a clean
+Git boundary.
+
+Consumer inventory is executable evidence. The initial planning audit found four checkers plus two JSON
+projections; the first canonical run exposed an omitted logical-helper task read. A complete executable-scope scan
+then found diagnostic-output, duplicate-slot-identity, generated-source, and native-resolution reads too. All
+eleven now have focused passing contracts, and the partition checker rejects the old monolith path in every scope.
 
 Use the bounded query that matches the question:
 
@@ -81,12 +89,15 @@ Use the bounded query that matches the question:
 perl tools/read_document_history.pl --surface live_status --grep 'needle'
 perl tools/read_document_history.pl --surface live_status --segment 0001
 perl tools/read_document_history.pl --surface live_status --all
+perl tools/read_task_tree.pl --tree FUTURE-PARITY-BACKLOG --id FUTURE-PARITY-BACKLOG.14.3.1.1
+perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 ```
 
 The first form is the normal historical lookup, the second returns one raw immutable segment, and the third
-reconstructs every pre-migration byte. `scripts/check_document_history.sh` is the fixed routing verifier and the
-registered eighth doctrine. It checks 20 mutation classes plus real schema/path/range/count/hash/blob/source/
-immutability/current-view invariants. Archives are positive historical evidence, never current-state denials.
+reconstructs every pre-migration byte. The fourth resolves one stable task ID to its bounded owner; after editing
+that mutable owner, the fifth refreshes its current index snapshot. `scripts/check_document_history.sh` is the
+fixed chronology verifier; the existing task metadata doctrine composes the 26/26 partition mutation oracle.
+Archives and task history are positive historical evidence, never current-state denials or append targets.
 
 ### Neutral typed source-location contract
 

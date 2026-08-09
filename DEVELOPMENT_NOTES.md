@@ -1,5 +1,39 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-09 (`LIVE-DOCUMENT-PRESSURE-CONTAINMENT.2` — semantic task partitions): task-tree identity belongs to
+  stable node IDs and semantic ownership, not one ever-growing Markdown file. Keep the stable root as a bounded
+  current index; resolve an ID to one mutable owner; preserve superseded global narrative in immutable history.
+- Source provenance and current mutable state are intentionally separate index fields. `source_ranges` and
+  `source_sha256` prove clean `99fe03f3` coverage forever; `line_count`, `byte_count`, and `sha256` are same-commit
+  current snapshots refreshed by `tools/update_task_tree_index.pl`. Never rewrite migration provenance after an
+  ordinary owning-leaf edit.
+- The migration builder is deterministic and migration-only. It validates the exact clean commit/blob/census/
+  digest, refuses existing outputs, source-accounts all 26,979 lines exactly once, and installs outputs atomically.
+  Mutable parts end with an explicit provenance comment so artificial source boundaries do not create Git
+  blank-at-EOF errors; immutable history remains byte-exact to its two source ranges.
+- Stable-ID lookup derives the repository root from the tool path, canonical-decodes the strict JSONL index,
+  range-selects one part, and proves the requested ID actually occurs there. New verification/commit/changelog
+  evidence belongs in that returned semantic part; after editing it, update the index in the same task slice.
+- Consumer routing is semantic, not merely path replacement. Capability exclusion needs all seven parts for its
+  full task-status census; repeated action also needs the later `.10.0-.6` next-owner handoff; semantic
+  introspection separates implementation ownership from public projection. Focused tests caught both hidden
+  multi-part dependencies before closure.
+- `scripts/check_task_tree_partitions.pl` composes under the existing metadata doctrine. It proves strict schema,
+  safe nonsymlink paths, exact clean-source coverage and identity, immutable committed history, mutable snapshots,
+  510 unique/range-correct stable IDs, bounded root lookup, eleven-consumer decoupling, and member/collection limits.
+  Its 26 in-memory mutations exercise each failure family; the route checker independently governs exact staged
+  debt retirement through ADR `0068`.
+- Canonical execution is part of consumer discovery, not only final confirmation. The prose-led intake inventory
+  found four executable plus two JSON consumers, but E4's next neutral logical-helper check exposed a fifth
+  executable family. A literal scan of executable scopes then found diagnostic output, duplicate-slot identity,
+  generated source, and native resolution too. The durable rule is an exact executable-path census plus focused
+  execution and a checker-owned zero-old-path list; the closed topology is nine executable plus two JSON consumers.
+- Signoff is repository-volume definitive. A restricted outer attempt denied nested macOS `sandbox-exec` only at
+  the process-locality oracle; the unchanged isolated proof passed with permission, then one uninterrupted approved
+  E4 rerun passed all eight doctrines, MCP complete/141, Rust semantic admission in 82.34 seconds, Julia 416/416 in
+  31.7 seconds, cursor 288, containment/relocation, CLI 66x2, RAM 57%, and Phase 0 1,031/1,031 in 696 seconds before
+  the exact local-CI marker. Optional matrices remain explicitly unclaimed.
+
 - 2026-08-09 (`LIVE-DOCUMENT-PRESSURE-CONTAINMENT.1` — exact live history): a current status page and an exact
   chronology are different data products. Preserve the stable root as a small five-section overwrite view; store
   the pre-migration bytes in source-ordered immutable segments whose strict manifest binds clean commit, whole-file

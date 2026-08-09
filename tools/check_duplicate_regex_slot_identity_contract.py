@@ -890,7 +890,7 @@ def validate_filesystem_contract() -> None:
     )
     capability_text = (ROOT / "capability_conformance" / "README.md").read_text(encoding="utf-8")
     require(CONTRACT_ID in capability_text, "capability README omits duplicate-slot contract")
-    task_text = (ROOT / "docs" / "tasks" / "FUTURE-PARITY-BACKLOG.md").read_text(encoding="utf-8")
+    task_text = (ROOT / "docs" / "tasks" / "FUTURE-PARITY-BACKLOG.09.md").read_text(encoding="utf-8")
     require(
         "FUTURE-PARITY-BACKLOG.9.1.8.1.1" in task_text
         and "RATIFY PORTABLE IDENTITY" in task_text,

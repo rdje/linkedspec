@@ -579,7 +579,7 @@
       {"path": "ARCHITECTURE_STATE.md", "required_markers": ["2026-07-30 semantic-introspection public closeout", "128 omission-sensitive mutations"]},
       {"path": "TOOLBOX.md", "required_markers": ["128 rejected mutations, rollout 9 complete / 0 pending", "public current-state contract"]},
       {"path": "docs/TASK_TREE.md", "required_markers": ["FUTURE-PARITY-BACKLOG.10.10", "128 omission-sensitive mutations"]},
-      {"path": "docs/tasks/FUTURE-PARITY-BACKLOG.md", "required_markers": ["ID: `FUTURE-PARITY-BACKLOG.10.10`", "Status: `done`", "128 rejected mutations"]},
+      {"path": "docs/tasks/FUTURE-PARITY-BACKLOG.10.7-10.md", "required_markers": ["ID: `FUTURE-PARITY-BACKLOG.10.10`", "Status: `done`", "128 rejected mutations"]},
       {"path": "docs/decisions/0049-versioned-semantic-introspection-model-and-thin-mcp.md", "required_markers": ["public no-drift complete", "9/9 rollout"]},
       {"path": "docs/decisions/0054-one-mcp-contract-native-per-backend-servers.md", "required_markers": ["Semantic public no-drift is complete", "five native implementations"]},
       {"path": "docs/decisions/0055-modern-mcp-2026-07-28-stdio-contract.md", "required_markers": ["Public closeout", "MCP `2026-07-28`"]},
