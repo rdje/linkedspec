@@ -1,5 +1,32 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.5.3` — dual-ABI Lua typed-source admission): admission changes test and
+  governance registration only. `lua/test/typed_source_location_contract_test.lua` now binds the already-present
+  private core and package catalogs unconditionally and executes its complete 240-assertion body. Do not add a
+  second runtime implementation, authored typed value, or ABI-specific assertion path.
+- `tools/run_lua_local.sh` is explicit discovery. Keep exactly one primary command using `$LUA_CMD` and one
+  secondary command using `$LUAJIT_CMD` plus its ABI-specific `LUA_CPATH`. Canonical CI intentionally uses two
+  separate `tools/run_lua_project_data.sh` commands so both ABI identities and same-volume storage routes are
+  omission-sensitive.
+- The neutral checker owns registration topology as well as semantic truth: tracked consumer and ordinary driver,
+  two ordinary markers, two canonical markers, exact multiplicity, stale-selector absence, and the Lua complete-
+  to-pending mutation. Only `lua_dual_abi` changes; current truth is 8/6/42.
+- Focused and complete proof passes 240/240 per ABI, package 177/177 per ABI, aliases 638/638, MCP 83,166 bytes,
+  CLI 66x2, corpus 105/105, and storage 18/3. UTF-8-byte registers, helper results/mutations, production modules,
+  schemas, DSL, README, semantic/MCP/capability state, and other backends are unchanged.
+
+  The all-current-surface census exposed `capability_conformance/README.md` at 3/11/37. Blame ties the section to
+  initial contract/correction commits `e8f6198b`/`bd777ee8`; logs prove Perl, Rust, Dart, and Julia admissions each
+  omitted the guide. Treat this as accumulated documentation projection drift. The current leaf owns the repair
+  to 8/6/42 and records the root cause in task/Knowledge/live documents so later archaeology is unnecessary.
+
+  Five sole-facing pages now distinguish admitted internal values/projections on all six runtime targets from
+  still-future authored `Position`/`Span`, transaction, observation, dispatch, and recurring composition surfaces.
+  Repository-routed book 79/14,184 and rendered HTML inspection pass with separate blocks; Knowledge 789/6,512
+  and all seven doctrines pass. Definitive canonical CI preserves capability 80/0/0, typed source 8/6/42, every
+  composed semantic/MCP admission, containment/relocation, and CLI 66x2, then reports RAM 75% and passes Phase 0
+  1,031/1,031 in 670 seconds before its exact marker and exit zero. Atomic commit 168/300 remains before handoff.
+
 - 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.5.2` — shared Lua typed-source projections):
   `source_location_runtime.lua` is the private compatibility boundary between immutable scalar positions/spans and
   the interpreter's unchanged zero-based UTF-8-byte registers. `context(...)` constructs exactly one adapter and

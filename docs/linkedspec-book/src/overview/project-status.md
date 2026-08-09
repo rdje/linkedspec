@@ -17,12 +17,12 @@ general style. This documentation-only slice changes no parser or runtime behavi
 The backend-neutral typed source-location contract is complete under `FUTURE-PARITY-BACKLOG.14.1.1`. Its
 independent checker passes 3 sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation
 and 8 transaction transitions, 6 recursive observations, 4 structural cases, 92 current helper projections,
-31 diagnostics, and 41 rejected mutations.
+31 diagnostics, and 42 rejected mutations.
 
-Seven of 14 rollout legs are complete and 7 remain pending. The neutral contract, public linked-rule structure,
-unchanged neutral/public recomposition, and the Perl, Rust, Dart, and Julia runtime admissions are complete. All four
-runtimes' internal authorities and all 92 helper projections plus 7 aliases are admitted without changing public
-results or their established scalar/byte/code-unit mark and cursor behavior.
+Eight of 14 rollout legs are complete and 6 remain pending. The neutral contract, public linked-rule structure,
+unchanged neutral/public recomposition, and all six runtime targets are complete. Their internal authorities and
+all 92 helper projections plus 7 aliases are admitted without changing public results or their established scalar,
+byte, or code-unit mark and cursor behavior.
 
 Rust's exact four-test consumer now runs under ordinary Cargo discovery and as a required canonical-CI leg. It
 proves the immutable value core and projection boundary across native, reconstructed, and generated-plan execution;
@@ -38,17 +38,17 @@ Its explicit consumer passes native, reconstructed, and generated-plan routes wh
 shapes, mutation timing, and zero-based UTF-8 code-unit registers. Ordinary Julia discovery and canonical CI now
 require that consumer, and the neutral checker rejects any regression of completed `julia_runtime`.
 
-PUC Lua and LuaJIT now share one private immutable value core and typed helper boundary. Each execution input owns
-one copied authority beneath exact 47/30/11/4 projection catalogs plus 7 aliases. All 92 canonical helpers route
+PUC Lua and LuaJIT share one private immutable value core and typed helper boundary. Each execution input owns one
+copied authority beneath exact 47/30/11/4 projection catalogs plus 7 aliases. All 92 canonical helpers route
 positions, spans, coordinates, slicing, marks, capture boundaries, and cursor controls through it while preserving
-their established zero-based UTF-8-byte registers and public results. Explicit pre-admission proof passes core
-133/133 and projection 240/240 on both ABIs across native, reconstructed, and generated-plan execution.
+their established zero-based UTF-8-byte registers and public results. One shared consumer passes 240/240 on each
+ABI across native, reconstructed, and generated-plan execution and now runs once per ABI in ordinary and canonical
+discovery.
 
 Public typed values, transaction spelling and behavior, recursive observation, span-native progressive/staged
-dispatch, Lua runtime admission, and all public authored surfaces remain future work. The internal Perl/Rust/Dart/
-Julia admissions and implemented-but-unadmitted Lua core/projections do not add an authored `Position` or `Span`
-value, transaction operation, schema version, or new helper result; rollout remains 7 complete / 7 pending until
-the unchanged Lua consumer enters ordinary and canonical discovery.
+dispatch, recurring six-runtime composition, and all public authored surfaces remain future work. The internal
+Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT admissions do not add an authored `Position` or `Span` value, transaction
+operation, schema version, or new helper result. Rollout is 8 complete / 6 pending.
 
 The helper audit distinguishes 7 callable compatibility aliases from 2 internal Perl contract/scanner ids.
 `capture_take_slice` and `capture_take_slice_len` are internal ids, not accepted helper spellings; authored code

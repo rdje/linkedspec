@@ -19776,8 +19776,8 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   activate task-tree-first.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.5`
-  Status: `active` parent (2026-08-07; immutable shared core `.1` landed at `e6a75830`; projection routing `.2` is
-    active task-tree-first from that clean 166/300 boundary; no push)
+  Status: `active` parent (2026-08-07; projection routing `.2` landed at `10e99190`; exact dual-ABI admission `.3`
+    is active task-tree-first from that clean 167/300 boundary; no push)
   Goal: Implement one shared Lua typed source-location algebra and admit it independently on PUC Lua and LuaJIT.
   Children: `.14.2.5.0` dual-ABI authority/prerequisite-split audit; `.14.2.5.0.1` seven-alias shared Lua parity;
     `.14.2.5.0.2` exact dual-ABI typed-source RED; `.14.2.5.1` immutable shared core; `.14.2.5.2` helper/unchanged
@@ -20202,8 +20202,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   therefore activate task-tree-first.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.5.2`
-  Status: `signoff-complete` (2026-08-07; task-tree-first from clean immutable-core commit `e6a75830`, intended
-    167/300, no push; atomic landing and clean proof next)
+  Status: `completed` (`10e99190`, 2026-08-07, 167/300, no push)
   Goal: Route every shared Lua source-boundary helper and compatibility alias through the immutable typed boundary
     while preserving all UTF-8-byte registers, public results, and mutation timing on both ABIs.
   Depends on: `.14.2.5.1`
@@ -20219,6 +20218,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   Verification: explicit core/projection dual-ABI GREEN; exact 92+7 catalogs; alias loaded/emitted no-drift;
     complete Lua/corpus/CLI/storage; neutral remains 7/7/41 and `lua_dual_abi` pending
   Commit: `FUTURE-PARITY-BACKLOG.14.2.5.2 - route Lua typed source projections`
+  Commit: `10e99190`
 
   ### `FUTURE-PARITY-BACKLOG.14.2.5.2` Acceptance Checklist
 
@@ -20326,8 +20326,15 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   after inspection; the sole canonical-run directory is empty/0 KiB and removed exactly. Atomic commit 167/300,
   brief clearing, post-commit pointer validation, and clean proof remain before `.14.2.5.3` activation.
 
+  Commit/handoff evidence 2026-08-07: atomic commit `10e99190` lands with first parent `e6a75830`; the hook
+  regenerates Knowledge Map at 789/6,504, passes all seven doctrines, and validates the activation pointer against
+  pre-commit HEAD plus post-commit `HEAD^1`. Status and staged/unstaged diffs are empty, the ignored brief is zero
+  bytes, post-commit memory architecture passes, the rendered book is absent, and the sole 0-KiB/no-file managed-
+  run directory is removed exactly. Admission `.14.2.5.3` may therefore activate task-tree-first.
+
 - ID: `FUTURE-PARITY-BACKLOG.14.2.5.3`
-  Status: `pending`
+  Status: `signoff-complete` (2026-08-07; task-tree-first from clean projection commit `10e99190`, intended
+    168/300, no push; atomic landing and clean proof next)
   Goal: Admit the unchanged shared Lua value/projection consumer on both PUC Lua and LuaJIT and promote only the
     neutral `lua_dual_abi` rollout leg.
   Depends on: `.14.2.5.2`
@@ -20342,6 +20349,86 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   Verification: ordinary and canonical consumer once per ABI; neutral 8/6/42 plus independent Lua regression;
     complete dual-ABI/storage/corpus/CLI/book/Knowledge/doctrine/canonical signoff
   Commit: `FUTURE-PARITY-BACKLOG.14.2.5.3 - admit Lua typed source runtime`
+
+  ### `FUTURE-PARITY-BACKLOG.14.2.5.3` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove projection `.14.2.5.2` landed at `10e99190` as 167/300 with
+    first parent `e6a75830`, empty status/diffs, zero-byte brief, valid post-commit pointer, absent rendered book,
+    and no managed-run residue; make this task-tree file the sole activation diff.
+  - [x] **RETRIEVE / FREEZE ADMISSION DELTA** — Follow the Lua dormant-consumer, rollout, ordinary-discovery,
+    canonical-registration, storage, and prior Perl/Rust/Dart/Julia admission owners before edits; prove the exact
+    final-path consumer and implemented runtime stay unchanged outside test-local dormancy removal.
+  - [x] **ORDINARY DUAL-ABI ADMISSION** — Remove only the consumer's RED selector and register the unchanged body
+    exactly once for PUC Lua and once for LuaJIT in `tools/run_lua_local.sh`, retaining core 133 plus projection 240
+    assertions and all existing Lua package/alias/corpus/CLI/storage results.
+  - [x] **CANONICAL EXACT REGISTRATION** — Require the tracked consumer path and two exact repository-routed ABI
+    commands in canonical CI; reject missing path, ABI, command drift, duplicate execution, or retained dormancy.
+  - [x] **NEUTRAL PROMOTION / MUTATION** — Promote only `lua_dual_abi`, advance 7/7/41 to exact 8/6/42, and add an
+    independent complete-to-pending Lua regression while every other rollout row and contract stays byte-exact.
+  - [x] **NO-DRIFT / BOOK / KNOWLEDGE** — Preserve helpers, byte registers, values/mutations, grammar, public typed/
+    transaction/observation/dispatch surfaces, schemas, semantic/MCP/capability state, README, and other backends;
+    synchronize the sole-facing book, Knowledge, task/roadmap, memory, changes, development notes, and live status.
+  - [ ] **VERIFY / COMMIT / CLEAN HANDOFF** — Pass ordinary/exact dual-ABI consumers, neutral 8/6/42, complete Lua/
+    storage/corpus/CLI, book, Knowledge, all doctrines, definitive canonical CI, atomic commit 168/300, brief
+    clearing, post-commit pointer validation, and clean proof before recurring composition `.14.2.6`.
+
+  Activation evidence 2026-08-07: projection `.14.2.5.2` lands atomically at `10e99190` as 167/300 with first
+  parent `e6a75830` and no push. Hooks regenerate Knowledge at 789/6,504, pass all seven doctrines, and validate
+  pre/post-commit activation pointers. Status plus staged/unstaged diffs are empty, the brief is zero bytes, memory
+  architecture passes, rendered book output is absent, and the exact empty managed-run directory is removed. This
+  task-tree file is the sole activation diff before any consumer, driver, neutral artifact/checker, canonical,
+  book, Knowledge, roadmap, memory, live-doc, or other change.
+
+  Retrieval evidence 2026-08-07: the Knowledge Map routes this leaf to the dormant Lua typed-source consumer,
+  runtime rollout, neutral contract, dual-ABI storage, shared matching/alias authorities, and prior Rust/Dart/Julia
+  admissions. The final-path Lua consumer is already GREEN at 133 core assertions and 240 projection assertions on
+  each ABI; its sole remaining test-local dormancy is `LINKEDSPEC_LUA_TYPED_SOURCE_RED_MODE` plus conditional
+  projection lookup/execution and stale RED prose. `tools/run_lua_local.sh` is one repository-rooted managed run
+  with explicit PUC and LuaJIT command lists, and `tools/run_lua_project_data.sh` is the exact targeted same-volume
+  wrapper. Prior admissions prove the locked pattern: require the tracked final path, execute exact canonical
+  repository-routed commands once, reject stale dormancy and command multiplicity in the independent checker,
+  promote exactly one rollout row, and add its completed-to-pending mutation. Therefore this leaf changes no Lua
+  production module or assertion body: it unconditionally binds the already-implemented catalogs, registers that
+  same consumer once in each ordinary ABI list and once per ABI canonically, then advances only `lua_dual_abi`
+  from pending to complete and 41 to 42 mutations.
+
+  Focused admission evidence 2026-08-07: the test-local RED selector, conditional projection block, missing-module
+  translation, and stale dormant prose are removed while the immutable value and projection assertion bodies stay
+  exact. Both repository-routed focused commands pass 240/240 assertions. The independent checker requires the
+  tracked final path, exact PUC and LuaJIT ordinary-driver command forms, exact two canonical wrapper commands,
+  single occurrence of every registration, and absence of the RED selector/stale dormancy markers. It promotes
+  only `lua_dual_abi`, independently rejects its completed-to-pending regression, and passes at exact 8 complete /
+  6 pending / 42 mutations. The complete managed Lua gate then executes the consumer once per ABI and passes MCP
+  83,166-byte freshness, package 177/177 and aliases 638/638 per ABI, CLI 66/66 under default and POSIX options,
+  corpus 105/105, and storage 18 owners / three native modules. No production Lua file changes.
+
+  Lockstep-drift root cause 2026-08-07: a full current-surface census finds `capability_conformance/README.md`
+  still reporting correction `.14.2.0.1` truth (3/11/37 and every runtime pending). `git blame` fixes those lines
+  to commits `e8f6198b`/`bd777ee8`; `git log` proves none of the subsequent Perl/Rust/Dart/Julia admission commits
+  touched the artifact guide even though they updated the executable JSON/checker, Knowledge, and sole-facing
+  book. This is accumulated documentation projection drift, not runtime or contract drift. The active all-live-doc
+  acceptance owns its repair directly to exact 8/6/42 and all six runtime targets admitted, and this durable
+  evidence prevents silently classifying the stale guide as current again.
+
+  Lockstep evidence 2026-08-07: five sole-facing pages now admit the shared consumer once per PUC Lua/LuaJIT ABI
+  while keeping authored Position/Span values, transactions, observations, dispatch, and recurring composition
+  future. The repository-routed book builds 79 files / 14,184 KiB. Direct generated-HTML inspection proves each
+  changed status, command, checker, limitation, and helper paragraph is a distinct `<p>` or `<pre>` block rather
+  than a stitched blob. Knowledge regenerates and checks at 789 facts / 6,512 question keys, including searchable
+  8/6/42 admission and artifact-guide drift-cause answers. Focused neutral 8/6/42, language 246/105+1/122,
+  capability 80/0/0, semantic 6/20/128/9/9/6, MCP transport 35/10/10/76, memory, task metadata, diff/README,
+  command multiplicity, and selector-absence checks pass. A broad stale scan finds only dated Julia-admission
+  evidence fields, not current status/body prose. No production module, README, schema, DSL, semantic/MCP/
+  capability artifact, or other backend changed; generated book cleanup precedes doctrine/canonical signoff.
+
+  Signoff evidence 2026-08-07: the rendered book artifact is absent after its exact 79-file/14,184-KiB inspection;
+  Knowledge regenerates/checks at 789 facts / 6,512 question keys, all seven doctrines pass, README remains exact,
+  and definitive canonical CI exits zero. The canonical run preserves capability 80/0/0, typed source 8/6/42
+  with Perl 10, Rust/Dart 4/4, Julia 127/127, and PUC Lua/LuaJIT 240/240, every byte-fresh MCP binding and composed
+  semantic/MCP admission, six-family containment, relocated/moved/outside-CWD execution, and CLI 66/66 under both
+  option environments. It reports RAM 75%, passes Phase 0 1,031/1,031 in 670 wall-clock seconds, emits the exact
+  `[ci] local CI gate passed` marker, and exits zero. Atomic commit 168/300, brief clearing, post-commit pointer
+  validation, managed-run cleanup, and clean proof remain before recurring composition `.14.2.6` can activate.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.6`
   Status: `pending`

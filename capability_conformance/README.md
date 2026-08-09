@@ -243,8 +243,8 @@ capability ledger remains the semantic convergence baseline while current Perl, 
 emitters use v2. Lua's dedicated dual-ABI generated-v2 proof passes 106 assertions per ABI under `.9.1.7.4`;
 its composed admission now passes 119 assertions per ABI under `.9.1.7.6`.
 
-`typed_source_location_contract.json` (`linkedspec-typed-source-location-v1`) makes ADR `0056` executable before
-syntax or backend values are admitted. Run:
+`typed_source_location_contract.json` (`linkedspec-typed-source-location-v1`) makes ADR `0056` executable and
+governs each internal runtime admission without creating authored typed-value syntax. Run:
 
 ```bash
 bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py
@@ -261,12 +261,13 @@ seven callable compatibility aliases. Two similarly named values—`capture_take
 
 The checker derives coordinates and text independently, executes both state machines, cross-checks current Lua
 helper authority and the Perl alias/internal-id seams, locks 31 diagnostics, verifies canonical tracked execution,
-and rejects 37 mutations. Rollout is 3 complete / 11 pending across 14 legs: the neutral contract, public structure,
-and unchanged neutral/public recomposition are complete. All backend value admissions remain pending under their
-exact `.14.2.1.3-.14.2.5.3` owners.
+and rejects 42 mutations. Rollout is 8 complete / 6 pending across 14 legs: the neutral contract, public structure,
+unchanged neutral/public recomposition, and the Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal runtime
+admissions are complete. The two Lua ABIs share one rollout leg because they execute the same consumer source
+independently through distinct runtimes.
 
-No public `Position`/`Span` value, transaction spelling, backend implementation, parser behavior, descriptor or
-generated schema, semantic/MCP projection, or source-authority elevation is claimed by this artifact.
+No public `Position`/`Span` value, transaction spelling, parser behavior, descriptor or generated schema,
+semantic/MCP projection, or source-authority elevation is claimed by these internal runtime admissions.
 
 `root_rule_selection_contract.json` (`linkedspec-root-rule-selection-v1`) makes ADR `0046` executable without
 claiming markerless execution before the

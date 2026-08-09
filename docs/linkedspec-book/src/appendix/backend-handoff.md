@@ -30,21 +30,20 @@
 >
 > Julia now admits the same internal values and 92+7 projections while retaining zero-based UTF-8 code-unit
 > registers. Its explicit consumer passes native, reconstructed, and generated-plan execution under ordinary
-> discovery and canonical CI. The neutral rollout is therefore 7 complete / 7 pending with 41 drift mutations.
-> Both Lua ABIs now share a private immutable value core proven at 133/133 each and exact 92+7 helper projections
-> proven at 240/240 each across native, reconstructed, and generated-plan execution. Existing UTF-8-byte registers,
-> values, and mutation timing remain unchanged; only ordinary/canonical admission is pending.
+> discovery and canonical CI. Both Lua ABIs share a private immutable value core and exact 92+7 helper projections
+> across native, reconstructed, and generated-plan execution. Their one shared consumer now runs once per ABI in
+> ordinary and canonical discovery and passes 240/240 each while preserving existing UTF-8-byte registers, values,
+> and mutation timing. The neutral rollout is therefore 8 complete / 6 pending with 42 drift mutations.
 >
 > Any cursor transaction is one explicit
 > recognition attempt over invocation-local cursor/boundary/marks only; it adds no search tree and cannot undo
 > actions, AST/user state, output/diagnostics, registry work, or host effects. Recursive boundaries remain read-only,
 > progress is portable, span-native parser dispatch grants no implicit authority, and ADR `0045` retains gap syntax/
-> lifecycle ownership. The neutral contract and Perl/Rust/Dart/Julia internal value/projection runtimes are
-> admitted. Existing helpers retain their public results and established scalar, byte, or code-unit mark/cursor
-> behavior.
+> lifecycle ownership. The neutral contract and all six internal value/projection runtime targets are admitted.
+> Existing helpers retain their public results and established scalar, byte, or code-unit mark/cursor behavior.
 >
-> PUC Lua and LuaJIT admission plus public authored values, transactions, observation, and dispatch remain owned by
-> `FUTURE-PARITY-BACKLOG.14.2.5.3-.14.8`.
+> Recurring six-runtime composition plus public authored values, transactions, observation, and dispatch remain
+> owned by `FUTURE-PARITY-BACKLOG.14.2.6-.14.8`.
 >
 > **Repeated-action handoff:** Every backend must consume
 > `linkedspec-explicit-repetition-action-result-v1`: bare `OR` is minimum-one repetition, explicit action returns

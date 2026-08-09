@@ -17,7 +17,7 @@
     "internal_contract_ids": 2,
     "diagnostics": 31,
     "rollout_legs": 14,
-    "mutations": 41
+    "mutations": 42
   },
   "policy": {
     "source_identity": "caller-authorized decoded input identity; never a path, backend object, or implicit read authority",
@@ -188,7 +188,7 @@
     {"leg": "rust_runtime", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.2.2.3", "runtimes": ["rust"]},
     {"leg": "dart_runtime", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.2.3.3", "runtimes": ["dart"]},
     {"leg": "julia_runtime", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.2.4.3", "runtimes": ["julia"]},
-    {"leg": "lua_dual_abi", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.2.5.3", "runtimes": ["puc_lua", "luajit"]},
+    {"leg": "lua_dual_abi", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.2.5.3", "runtimes": ["puc_lua", "luajit"]},
     {"leg": "transaction_safety", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.3", "runtimes": []},
     {"leg": "recursive_observation", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.4", "runtimes": []},
     {"leg": "lossless_gap_composition", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.5", "runtimes": []},

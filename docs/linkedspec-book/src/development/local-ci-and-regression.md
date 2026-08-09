@@ -31,7 +31,7 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 
 The check is unconditional. It independently derives Unicode-scalar, line/column, and UTF-8 coordinates;
 materializes direct and derived spans; executes invocation and bounded-transaction state transitions; validates
-recursive and zero/one/two-regex structural cases; and rejects all 41 registered mutations.
+recursive and zero/one/two-regex structural cases; and rejects all 42 registered mutations.
 
 The gate then unconditionally runs the admitted Perl value and projection consumers:
 
@@ -62,12 +62,18 @@ bash tools/run_julia_project_data.sh --project=julia \
   'using LinkedSpecJulia, JSON3, Test; include("julia/test/typed_source_location_contract_test.jl")'
 ```
 
-Its current rollout result is 7 complete / 7 pending with 41 registered mutations. Passing this gate proves the
-neutral contract, both completed public-structure rows, and the internal Perl, Rust, Dart, and Julia runtimes
-across their exact value/helper carriers. Rust retains UTF-8-byte registers, Dart retains UTF-16 code-unit
-registers, and Julia retains zero-based UTF-8 code-unit registers while each converts at its immutable typed
-boundary. This does not claim public authored `Position`/`Span` values, transaction syntax or behavior, or
-admission of PUC Lua or LuaJIT.
+The gate then requires the shared Lua consumer and executes it once through each repository-routed ABI:
+
+```bash
+bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_test.lua
+bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua
+```
+
+Its current rollout result is 8 complete / 6 pending with 42 registered mutations. Passing this gate proves the
+neutral contract, both completed public-structure rows, and all six internal runtime targets across their exact
+value/helper carriers. Rust and Lua retain UTF-8-byte registers, Dart retains UTF-16 code-unit registers, and Julia
+retains zero-based UTF-8 code-unit registers while each converts at its immutable typed boundary. This does not
+claim public authored `Position`/`Span` values or transaction syntax or behavior.
 
 Dart's admitted consumer covers its internal value core and all 92+7 helper projections across native,
 reconstructed, generated-plan, and freshly emitted execution. The independent rollout checker requires its
@@ -77,6 +83,10 @@ completed `dart_runtime` row.
 Julia's admitted consumer covers its internal value core and all 92+7 helper projections across native,
 reconstructed, and generated-plan execution. The independent rollout checker requires its ordinary include and
 canonical command exactly once, rejects stale dormancy, and rejects any regression of completed `julia_runtime`.
+
+Lua's admitted consumer covers the same immutable values and 92+7 projections across native, reconstructed, and
+generated-plan execution. The checker requires its tracked path, exact PUC Lua and LuaJIT ordinary and canonical
+commands once each, rejects stale RED dormancy, and rejects regression of completed `lua_dual_abi`.
 
 The gate unconditionally verifies the neutral MCP transport before checking all five derived bindings. It requires
 every contract artifact and runs the generators in this exact order before the admitted implementation proofs:

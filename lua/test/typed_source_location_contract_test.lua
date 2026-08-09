@@ -1,61 +1,17 @@
--- FUTURE-PARITY-BACKLOG.14.2.5.0.2 — dormant shared Lua typed source-location RED.
+-- FUTURE-PARITY-BACKLOG.14.2.5.3 — admitted shared Lua typed source-location consumer.
 --
--- Ordinary Lua discovery is the explicit list in `tools/run_lua_local.sh`; that
--- list deliberately omits this pre-admission consumer. Run either mode through
+-- Ordinary Lua discovery executes this exact consumer once on PUC Lua and once
+-- on LuaJIT from `tools/run_lua_local.sh`. Run either focused ABI through
 -- repository-local project data from the repository root:
 --
---   LINKEDSPEC_LUA_TYPED_SOURCE_RED_MODE=core \
---     bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_test.lua
---   LINKEDSPEC_LUA_TYPED_SOURCE_RED_MODE=core \
---     bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua
---
---   LINKEDSPEC_LUA_TYPED_SOURCE_RED_MODE=projection \
---     bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_test.lua
---   LINKEDSPEC_LUA_TYPED_SOURCE_RED_MODE=projection \
---     bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua
---
--- Core implementation makes `core` green. Projection implementation then
--- makes the independently nested `projection` mode green. Admission removes
--- this mode switch and adds the unchanged assertions to ordinary discovery.
-
-local mode = os.getenv("LINKEDSPEC_LUA_TYPED_SOURCE_RED_MODE") or "core"
-if mode ~= "core" and mode ~= "projection" then
-  error(
-    "LINKEDSPEC_LUA_TYPED_SOURCE_RED_MODE must be 'core' or 'projection', got '" ..
-      tostring(mode) .. "'",
-    0
-  )
-end
+--   bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_test.lua
+--   bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua
 
 local json = require("linkedspec.json")
-
--- Core lookup is deliberately first. Convert only the ordinary absent-module
--- diagnostic to one stable RED boundary; propagate every other load failure.
-local source_location_ok, source_location = pcall(require, "linkedspec.source_location")
-if not source_location_ok then
-  if tostring(source_location):match("module 'linkedspec%.source_location' not found") then
-    error("Lua typed source RED: missing linkedspec.source_location", 0)
-  end
-  error(source_location, 0)
-end
-
+local source_location = require("linkedspec.source_location")
 local linkedspec = require("linkedspec")
-
--- Projection lookup is strictly nested after the immutable core. Today both
--- modes stop at the missing module. Once the core lands, projection mode must
--- advance to these separately owned catalog APIs.
-local typed_source_projection_rows
-local typed_source_compatibility_aliases
-if mode == "projection" then
-  if type(linkedspec.typed_source_projection_rows) ~= "function" then
-    error("Lua typed source RED: missing linkedspec.typed_source_projection_rows", 0)
-  end
-  if type(linkedspec.typed_source_compatibility_aliases) ~= "function" then
-    error("Lua typed source RED: missing linkedspec.typed_source_compatibility_aliases", 0)
-  end
-  typed_source_projection_rows = linkedspec.typed_source_projection_rows
-  typed_source_compatibility_aliases = linkedspec.typed_source_compatibility_aliases
-end
+local typed_source_projection_rows = linkedspec.typed_source_projection_rows
+local typed_source_compatibility_aliases = linkedspec.typed_source_compatibility_aliases
 
 local assertions = 0
 local failures = {}
@@ -411,71 +367,67 @@ do
   })
 end
 
-if mode == "projection" then
-  local _, catalog_compiled = compile_source("Top::\n I { return(\"ok\") }\n")
-  local catalog_engine = linkedspec.runtime_engine(catalog_compiled)
-  local rows = typed_source_projection_rows(catalog_engine)
-  check_same_json(rows, contract.helper_projections, "exact detached 92 projection rows")
+local _, catalog_compiled = compile_source("Top::\n I { return(\"ok\") }\n")
+local catalog_engine = linkedspec.runtime_engine(catalog_compiled)
+local rows = typed_source_projection_rows(catalog_engine)
+check_same_json(rows, contract.helper_projections, "exact detached 92 projection rows")
 
-  local names = {}
-  local name_count = 0
-  for _, family in ipairs(contract.helper_projection_schema.families) do
-    for _, row in ipairs(rows[family]) do
-      name_count = name_count + 1
-      check_equal(names[row[1]], nil, row[1] .. " projection name is unique")
-      names[row[1]] = true
-    end
+local names = {}
+local name_count = 0
+for _, family in ipairs(contract.helper_projection_schema.families) do
+  for _, row in ipairs(rows[family]) do
+    name_count = name_count + 1
+    check_equal(names[row[1]], nil, row[1] .. " projection name is unique")
+    names[row[1]] = true
   end
-  check_equal(name_count, 92, "projection row count")
-
-  local aliases = typed_source_compatibility_aliases(catalog_engine)
-  check_same_json(aliases, contract.compatibility_aliases, "exact detached seven compatibility aliases")
-  check_equal(#aliases, 7, "compatibility alias count")
-
-  rows.capture_mark[1][2] = "wrong"
-  aliases[1][2] = "wrong"
-  check_same_json(
-    typed_source_projection_rows(catalog_engine),
-    contract.helper_projections,
-    "projection rows are detached"
-  )
-  check_same_json(
-    typed_source_compatibility_aliases(catalog_engine),
-    contract.compatibility_aliases,
-    "compatibility aliases are detached"
-  )
-
-  local named_mark_contract = json.decode(
-    read_file("capability_conformance/complete_named_mark_contract.json")
-  )
-  local fixture = named_mark_contract.fixture
-  check_carriers(
-    fixture.spec_source,
-    fixture.input,
-    "typed-source/complete-named-mark.spec",
-    fixture.expected
-  )
-  check_carriers(
-    cursor_source,
-    "ab",
-    "typed-source/cursor-control.spec",
-    cursor_expected
-  )
-  check_carriers(
-    alias_source,
-    "é🙂  ab",
-    "typed-source/compatibility-aliases.spec",
-    alias_expected
-  )
 end
+check_equal(name_count, 92, "projection row count")
+
+local aliases = typed_source_compatibility_aliases(catalog_engine)
+check_same_json(aliases, contract.compatibility_aliases, "exact detached seven compatibility aliases")
+check_equal(#aliases, 7, "compatibility alias count")
+
+rows.capture_mark[1][2] = "wrong"
+aliases[1][2] = "wrong"
+check_same_json(
+  typed_source_projection_rows(catalog_engine),
+  contract.helper_projections,
+  "projection rows are detached"
+)
+check_same_json(
+  typed_source_compatibility_aliases(catalog_engine),
+  contract.compatibility_aliases,
+  "compatibility aliases are detached"
+)
+
+local named_mark_contract = json.decode(
+  read_file("capability_conformance/complete_named_mark_contract.json")
+)
+local fixture = named_mark_contract.fixture
+check_carriers(
+  fixture.spec_source,
+  fixture.input,
+  "typed-source/complete-named-mark.spec",
+  fixture.expected
+)
+check_carriers(
+  cursor_source,
+  "ab",
+  "typed-source/cursor-control.spec",
+  cursor_expected
+)
+check_carriers(
+  alias_source,
+  "é🙂  ab",
+  "typed-source/compatibility-aliases.spec",
+  alias_expected
+)
 
 if #failures == 0 then
-  io.stdout:write(
-    "Lua dormant typed source-location ", mode, ": ", assertions, " assertions passed\n"
-  )
+  io.stdout:write("Lua typed source-location contract: ", assertions, " assertions passed\n")
 else
   io.stderr:write(
-    "Lua dormant typed source-location ", mode, ": ", #failures, " of ", assertions,
+    "Lua typed source-location contract: ", #failures, " of ", assertions,
     " assertions failed\n"
   )
   for _, message in ipairs(failures) do io.stderr:write("- ", message, "\n") end

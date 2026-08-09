@@ -1,5 +1,28 @@
 # CHANGES
 
+## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.5.3 — admit Lua typed source runtime
+
+- Removed only the Lua typed-source consumer's RED selector, missing-module translation, conditional projection
+  scaffolding, and stale dormant prose. The immutable-value and complete projection assertion bodies remain exact;
+  no production Lua source changed.
+- Registered the final-path consumer exactly once in the PUC Lua list and once in the LuaJIT list of
+  `tools/run_lua_local.sh`; required its tracked path and exact repository-routed `puc`/`luajit` commands in
+  canonical CI.
+- Strengthened the neutral checker against missing input, either missing ABI, ordinary/canonical command drift or
+  duplication, stale dormancy, and Lua completed-to-pending regression. Promoted only `lua_dual_abi`, advancing
+  live truth from 7/7/41 to 8/6/42.
+- Passed focused 240/240 per ABI and the complete Lua gate: package 177/177 per ABI, aliases 638/638, MCP 83,166
+  bytes, CLI 66x2, corpus 105/105, and storage 18 owners / three native modules.
+- Root-caused accumulated typed-source guide drift: `capability_conformance/README.md` retained the 3/11/37 state
+  introduced by `bd777ee8`, and none of four later runtime-admission commits updated it. Corrected the guide to
+  current all-six-runtime admission under this owning all-live-doc leaf.
+- Synchronized the sole-facing project-status, capture/source-location, local-CI, backend-handoff, and helper-
+  reference pages plus artifact guide, Knowledge cards, roadmaps, task index, architecture, live status, memory,
+  and development records. The book builds 79 files/14,184 KiB with separate rendered blocks; Knowledge is
+  789/6,512 and all seven doctrines pass. Definitive canonical CI exits zero after capability 80/0/0, typed source
+  8/6/42, all composed semantic/MCP admissions, containment/relocation, CLI 66x2, RAM 75%, and Phase 0
+  1,031/1,031 in 670 seconds. Atomic commit proof remains.
+
 ## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.5.2 — route Lua typed source projections
 
 - Added private `source_location_runtime.lua` with one copied `input` authority per execution context, exact fresh

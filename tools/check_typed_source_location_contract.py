@@ -32,6 +32,8 @@ DART_DORMANT_CONSUMER_PATH = (
 )
 JULIA_CONSUMER_PATH = ROOT / "julia" / "test" / "typed_source_location_contract_test.jl"
 JULIA_RUNTESTS_PATH = ROOT / "julia" / "test" / "runtests.jl"
+LUA_CONSUMER_PATH = ROOT / "lua" / "test" / "typed_source_location_contract_test.lua"
+LUA_ORDINARY_DRIVER_PATH = ROOT / "tools" / "run_lua_local.sh"
 
 EXPECTED_COUNTS = {
     "sources": 3,
@@ -47,7 +49,7 @@ EXPECTED_COUNTS = {
     "internal_contract_ids": 2,
     "diagnostics": 31,
     "rollout_legs": 14,
-    "mutations": 41,
+    "mutations": 42,
 }
 
 POLICY = {
@@ -387,7 +389,7 @@ ROLLOUT = [
     ("rust_runtime", "complete", "FUTURE-PARITY-BACKLOG.14.2.2.3", ["rust"]),
     ("dart_runtime", "complete", "FUTURE-PARITY-BACKLOG.14.2.3.3", ["dart"]),
     ("julia_runtime", "complete", "FUTURE-PARITY-BACKLOG.14.2.4.3", ["julia"]),
-    ("lua_dual_abi", "pending", "FUTURE-PARITY-BACKLOG.14.2.5.3", ["puc_lua", "luajit"]),
+    ("lua_dual_abi", "complete", "FUTURE-PARITY-BACKLOG.14.2.5.3", ["puc_lua", "luajit"]),
     ("transaction_safety", "pending", "FUTURE-PARITY-BACKLOG.14.3", []),
     ("recursive_observation", "pending", "FUTURE-PARITY-BACKLOG.14.4", []),
     ("lossless_gap_composition", "pending", "FUTURE-PARITY-BACKLOG.14.5", []),
@@ -1166,6 +1168,8 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             DART_CONSUMER_PATH,
             JULIA_CONSUMER_PATH,
             JULIA_RUNTESTS_PATH,
+            LUA_CONSUMER_PATH,
+            LUA_ORDINARY_DRIVER_PATH,
         ):
             if not path.is_file():
                 fail(f"canonical contract/checker/runner input is missing: {path.relative_to(ROOT)}")
@@ -1185,6 +1189,9 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             "bash ../tools/run_dart_project_data.sh test --reporter failures-only test/typed_source_location_contract_test.dart",
             "require_tracked_file julia/test/typed_source_location_contract_test.jl",
             "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/typed_source_location_contract_test.jl\")'",
+            "require_tracked_file lua/test/typed_source_location_contract_test.lua",
+            "bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_test.lua",
+            "bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua",
         ]
         for marker in required_markers:
             if ci_text.count(marker) != 1:
@@ -1219,6 +1226,25 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         ):
             if stale_marker in julia_consumer_text:
                 fail(f"Julia consumer retains stale dormancy marker: {stale_marker}")
+        lua_ordinary_text = LUA_ORDINARY_DRIVER_PATH.read_text(encoding="utf-8")
+        lua_ordinary_markers = (
+            'LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" '
+            "lua/test/typed_source_location_contract_test.lua",
+            'LUA_CPATH="$secondary_native/?.so;;" LINKEDSPEC_LUA_TEST_RUNTIME="$LUAJIT_CMD" \\\n'
+            '  "$LUAJIT_CMD" lua/test/typed_source_location_contract_test.lua',
+        )
+        for marker in lua_ordinary_markers:
+            if lua_ordinary_text.count(marker) != 1:
+                fail(f"Lua ordinary typed-source registration must appear exactly once: {marker}")
+        lua_consumer_text = LUA_CONSUMER_PATH.read_text(encoding="utf-8")
+        for stale_marker in (
+            "LINKEDSPEC_LUA_TYPED_SOURCE_RED_MODE",
+            "dormant shared Lua typed source-location RED",
+            "pre-admission consumer",
+            'mode == "projection"',
+        ):
+            if stale_marker in lua_consumer_text:
+                fail(f"Lua consumer retains stale dormancy marker: {stale_marker}")
 
 
 def expect_mutation_failure(
@@ -1304,6 +1330,10 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         (
             "Julia runtime admission regressed to pending",
             lambda c: c["rollout"][6].__setitem__("status", "pending"),
+        ),
+        (
+            "Lua dual-ABI runtime admission regressed to pending",
+            lambda c: c["rollout"][7].__setitem__("status", "pending"),
         ),
     ]
     if len(mutations) + len(rollout_regressions) != EXPECTED_COUNTS["mutations"]:

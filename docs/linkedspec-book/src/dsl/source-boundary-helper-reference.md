@@ -110,9 +110,9 @@ spelling.
 
 Lua keeps the aliases outside the shared 246-name current inventory and canonicalizes them before the
 existing preferred runtime branches. Those branches now cross Lua's private immutable typed boundary, exactly like
-their preferred spellings, while retaining byte registers and external values. The implementation is proven on
-both ABIs but not yet admitted into ordinary/canonical typed-source discovery. Portable new code should still use
-the preferred names because aliases remain migration spellings.
+their preferred spellings, while retaining byte registers and external values. The shared consumer is admitted
+once on each ABI in ordinary and canonical typed-source discovery. Portable new code should still use the preferred
+names because aliases remain migration spellings.
 
 For example, this migration-only fixture returns `["é🙂  ", 4, 4, 6]` for input `é🙂  ab` on Perl, Rust, Dart,
 Julia, PUC Lua, and LuaJIT:

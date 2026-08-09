@@ -1,5 +1,26 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-07 — Lua typed source-location runtime is admitted on both ABIs
+
+`FUTURE-PARITY-BACKLOG.14.2.5.3` activated task-tree-first from clean projection commit `10e99190` as intended
+168/300 with no push. The final-path consumer no longer has a RED selector or conditional projection mode. Its
+complete assertion body now executes once on PUC Lua and once on LuaJIT in ordinary discovery and through exact
+repository-routed commands in canonical CI; no production Lua module changes.
+
+Each ABI passes 240/240 immutable-value and projection assertions across native, reconstructed, and generated-plan
+execution. The independent neutral checker requires the tracked path, exact two ordinary forms, exact two canonical
+forms, single occurrence, and stale-dormancy absence. Only `lua_dual_abi` moves to complete, and its own completed-
+to-pending regression advances current truth to 8 complete / 6 pending / 42 mutations.
+
+Complete Lua passes package 177/177 per ABI, aliases 638/638, byte-fresh MCP 83,166 bytes, CLI 66x2, corpus 105/105,
+storage 18/3, and its exact marker without register, helper-result, mutation, schema, DSL, README, or other-backend
+change. A lockstep census also found `capability_conformance/README.md` stranded at pre-runtime 3/11/37 truth since
+`bd777ee8`; history proves all four earlier runtime-admission commits omitted that guide. This active live-doc leaf
+owns and records the repair. The sole-facing book builds 79 files/14,184 KiB with separate rendered blocks;
+Knowledge is 789/6,512 and all seven doctrines pass. Definitive canonical CI preserves capability 80/0/0, typed
+source 8/6/42, all composed semantic/MCP admissions, containment/relocation, and CLI 66x2, then reports RAM 75%
+and passes Phase 0 1,031/1,031 in 670 seconds before the exact local-CI marker and exit zero. Atomic commit remains.
+
 ## 2026-08-07 — Lua typed source projections are implemented but not admitted
 
 `FUTURE-PARITY-BACKLOG.14.2.5.2` activated task-tree-first from clean immutable-core commit `e6a75830` as intended

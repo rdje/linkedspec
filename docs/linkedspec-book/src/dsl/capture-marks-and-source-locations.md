@@ -8,8 +8,9 @@ For the method-by-method public reference, read [Source Boundary Helper Referenc
 
 ## Accepted model: one typed source-location algebra
 
-ADR `0056` adopts one conceptual core beneath these helper families. Perl, Rust, Dart, and Julia admit that core as
-an internal runtime value/projection layer. This is not a new public value type or new `.spec` syntax:
+ADR `0056` adopts one conceptual core beneath these helper families. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT
+admit that core as an internal runtime value/projection layer. This is not a new public value type or new `.spec`
+syntax:
 
 - a source identity names caller-authorized decoded input, not a path;
 - a position is a zero-based Unicode-scalar offset in that source;
@@ -40,15 +41,14 @@ PUC Lua and LuaJIT recognize all 92 canonical source-boundary helpers plus the s
 One shared private immutable authority now sits beneath those helper branches. Each parse input gets one authority;
 typed positions and spans validate/materialize the existing byte-register state without replacing it. Core proof
 passes 133/133 and projection proof passes 240/240 on each ABI across native, reconstructed, and generated-plan
-execution. Alias proof also retains loaded and independently emitted routes. Runtime admission remains pending.
+execution. Alias proof also retains loaded and independently emitted routes. Runtime admission is complete through
+one ordinary and one canonical execution per ABI.
 
-Run the implemented pre-admission projection proof from the repository root with either ABI:
+Run the admitted consumer from the repository root with either ABI:
 
 ```bash
-LINKEDSPEC_LUA_TYPED_SOURCE_RED_MODE=projection \
-  bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_test.lua
-LINKEDSPEC_LUA_TYPED_SOURCE_RED_MODE=projection \
-  bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua
+bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_test.lua
+bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua
 ```
 
 ### Bounded cursor transactions do not mean general backtracking
@@ -92,12 +92,12 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 ```
 
 The checker covers 3 decoded sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation
-and 8 transaction transitions, 6 recursive observations, 4 structural cases, 31 diagnostics, and 41 mutations.
+and 8 transaction transitions, 6 recursive observations, 4 structural cases, 31 diagnostics, and 42 mutations.
 It also proves that all 92 current source-boundary helpers project onto the algebra.
 
-This is rollout status, not authored-value status. Seven of 14 rollout legs are complete: the neutral contract,
-public linked-rule structure, unchanged neutral/public recomposition, and the Perl, Rust, Dart, and Julia runtime
-admissions. The other 7 remain pending.
+This is rollout status, not authored-value status. Eight of 14 rollout legs are complete: the neutral contract,
+public linked-rule structure, unchanged neutral/public recomposition, and the Perl, Rust, Dart, Julia, PUC Lua,
+and LuaJIT runtime targets. The other 6 remain pending.
 
 Perl now uses an internal decoded-source authority plus immutable position/span values beneath every governed
 helper projection. Exact Unicode execution is admitted on live and independently emitted/loaded generated routes.
@@ -113,14 +113,15 @@ consumer is admitted under ordinary discovery and canonical CI.
 
 Julia implements that boundary while preserving the same external result kinds, mutation timing, and its native
 zero-based UTF-8 code-unit registers. Its exact consumer and 92+7 detached catalogs are admitted under ordinary
-discovery and canonical CI, so the neutral rollout is 7 complete / 7 pending.
+discovery and canonical CI.
 
 Lua implements the same internal boundary beneath exact detached 92+7 catalogs while preserving zero-based UTF-8
-byte registers, values, and mutation timing. Its 240-assertion consumer is still pre-admission, so it does not yet
-advance the neutral rollout or run through ordinary/canonical discovery.
+byte registers, values, and mutation timing. The same 240-assertion source runs exactly once on PUC Lua and once on
+LuaJIT under ordinary discovery and canonical CI. The neutral rollout is therefore 8 complete / 6 pending.
 
 There is still no public `Position` or `Span` authored value, checkpoint syntax, transaction behavior, recursive
-observation API, or PUC-Lua/LuaJIT runtime admission. Those remain owned by later leaves.
+observation API, recurring six-runtime composition, or span-native parser dispatch. Those remain owned by later
+leaves.
 
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions,
 typed spans, or cursor transactions are available as authored values.

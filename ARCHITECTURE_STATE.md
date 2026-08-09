@@ -1,5 +1,25 @@
 # ARCHITECTURE STATE
 
+- `2026-08-07 Lua typed source-location runtime admission`: `FUTURE-PARITY-BACKLOG.14.2.5.3` changes no
+  production Lua module. It removes the test-local RED selector and conditional projection scaffolding from the
+  final-path consumer, registers that same complete body once in each PUC Lua/LuaJIT ordinary list, and runs exact
+  repository-routed `puc` and `luajit` commands unconditionally in canonical CI.
+
+  The independent checker now requires the tracked consumer, exact ordinary and canonical forms once each, absence
+  of stale dormancy, and a Lua completed-to-pending regression. Only `lua_dual_abi` moves to complete, advancing
+  live truth to 8 complete / 6 pending / 42 mutations. Each ABI passes 240/240 across immutable values and native,
+  reconstructed, and generated-plan projections while retaining zero-based UTF-8-byte registers, helper values,
+  mutation timing, schemas, DSL, and all other runtime state.
+
+  Complete Lua passes package 177/177 per ABI, aliases 638/638, byte-fresh MCP 83,166 bytes, CLI 66x2, corpus
+  105/105, storage 18/3, and its exact marker. A full current-surface census found the artifact guide stranded at
+  pre-runtime 3/11/37 truth since correction commit `bd777ee8`; every earlier runtime-admission commit omitted it.
+  This leaf repairs that accumulated documentation projection drift and synchronizes the sole-facing book and all
+  live/Knowledge owners. Book 79 files/14,184 KiB, Knowledge 789/6,512, all seven doctrines, and definitive
+  canonical CI are GREEN. Canonical proof preserves capability 80/0/0, typed source 8/6/42, every composed
+  semantic/MCP admission, containment/relocation, and CLI 66x2 before RAM 75%, Phase 0 1,031/1,031 in 670 seconds,
+  the exact local-CI marker, and exit zero. Atomic commit 168/300 remains.
+
 - `2026-08-07 Lua source-boundary compatibility aliases`: `FUTURE-PARITY-BACKLOG.14.2.5.0.1` adds exactly seven
   source spellings at the shared known-name/canonicalization boundary. They remain separate from the common
   246-name inventory and resolve to existing preferred helper branches, so there is no alias-specific interpreter
