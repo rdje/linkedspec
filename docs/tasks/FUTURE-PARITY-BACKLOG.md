@@ -6,8 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-07` (immutable shared Lua source-location core `.14.2.5.1` landed cleanly at `e6a75830`;
-  typed projection routing `.14.2.5.2` is active task-tree-first for intended 167/300; no push)
+- Last updated: `2026-08-09` (behavior-free syntax/result/effect ratification `.14.3.1.0` is
+  signoff-complete for intended atomic 172/300; executable neutral contract `.14.3.1.1` is next after the
+  director-priority README-policy adoption receives and completes its own clean task-tree slice; no push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -20754,17 +20755,129 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   mechanical handoff; exact syntax/result/effect ratification `.14.3.1.0` is next.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.1`
-  Status: `pending`
+  Status: `active`
   Goal: Adopt the versioned backend-neutral transaction/progress contract, exact fixtures, diagnostics, mutations,
     public future/current boundary, and canonical registration before backend behavior.
   Depends on: `.14.3.0`
   Children: `.14.3.1.0-.14.3.1.2`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.1.0`
-  Status: `pending`
+  Status: `done; signoff-complete` (2026-08-09; task-tree-first from clean transaction-audit commit `c8fcea6f`,
+    intended atomic 172/300, no push)
   Goal: Ratify exact authored transaction spellings, recognition-result exposure, closed effect taxonomy, token
     lifetime, invocation-mark migration, and cursor-only v1 progress rule without changing executable behavior.
   Depends on: `.14.3.0`
+  Acceptance: Prove the clean `.14.3.0` handoff; retrieve ADR `0056`, the cursor-transaction audit, source-location
+    direction, task-metadata boundary, and exact current ActionIR/runtime owners before choosing names. Freeze one
+    grammar-owned authored transaction surface that is unmistakably distinct from compatibility
+    `save_cursor`/`restore_cursor`, exposes match presence separately from falsey staged values, and preserves
+    explicit `call(Rule)` semantics. Freeze the closed fail-closed ActionIR effect lattice and transitive callable
+    rule, opaque token ownership/generation/single-terminal lifetime, invocation-scoped mark migration, and
+    cursor-only v1 progress obligation with exact current-versus-future book language. Root-cause and repair the
+    stale active-tree `Current Frontier` prose discovered during startup, retain a durable finding, and route the
+    active-frontier enforcement gap to its own clean follow-up task. Change no executable source, neutral artifact,
+    fixture, schema, generated carrier, CLI, README, storage root, hosted workflow, or current public behavior.
+  Verification: **PASS 2026-08-09.** Clean activation and exact parent/subject proof; Knowledge-first retrieval;
+    toolbox/source owner comparison; spelling ambiguity and falsey-result review; complete ActionIR category
+    closure; token/mark/progress contradiction review; no-change census; rendered 79-file / 14,248-KiB mdBook;
+    Knowledge 793 facts / 6,558 question keys; memory, task metadata, unchanged README 105/128 lines and
+    5,072/6,144 bytes, all seven doctrines, typed-source/capability/language-coverage focused gates; and the
+    definitive canonical gate all pass. Canonical proof includes both CLI environments at 66/66, RAM 58% below
+    the 88% ceiling, moved-root/five-anchor containment, and Phase 0 1,031/1,031 in 672 wall-clock seconds before
+    exact `[ci] local CI gate passed` and exit zero. Atomic commit, zero-byte brief, post-commit pointer/Knowledge,
+    zero managed runs, absent rendered book, and clean status/diffs complete the mechanical handoff.
+  Commit: `FUTURE-PARITY-BACKLOG.14.3.1.0 - ratify cursor transaction contract`
+
+  ### `FUTURE-PARITY-BACKLOG.14.3.1.0` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove `.14.3.0` landed atomically at `c8fcea6f` as 171/300 with
+    first parent `bef75489`, exact subject, empty status/diffs, zero-byte brief, valid pointer, fresh Knowledge,
+    absent rendered book, zero managed-run residue, and this task-tree file as the sole activation diff.
+  - [x] **RETRIEVE / CURRENT AUTHORITY** — Follow ADR `0056`, canonical Knowledge, and toolbox/source owners before
+    selecting authored spellings, result shape, effects, token rules, invocation marks, or progress semantics.
+  - [x] **RATIFY EXACT CONTRACT** — Freeze exact grammar, ActionIR nodes/effects, staged result, token state machine,
+    invocation-mark migration, and cursor-only progress rule without executable behavior.
+  - [x] **ROOT-CAUSE / ROUTE FRONTIER DRIFT** — Correct this file's stale authoritative frontier, preserve the
+    causal finding, and create a clean follow-up owner for active-tree frontier freshness enforcement.
+  - [x] **LOCKSTEP / NO-BEHAVIOR PROOF** — Synchronize decision, Knowledge, roadmap, live docs, task truth, and the
+    sole-facing book while proving runtime, neutral executable artifacts, fixtures, schemas, CLI, README, storage,
+    hosted workflow, and public-current behavior stay unchanged.
+  - [x] **VERIFY / COMMIT / CLEAN HANDOFF** — Pass focused and broad gates, atomic 172/300, brief clearing, pointer
+    validation, managed-run cleanup, absent rendered book, and clean proof before `.14.3.1.1` activation.
+
+  Activation evidence 2026-08-09: behavior-free transaction audit `.14.3.0` lands atomically at `c8fcea6f` as
+  171/300 with first parent `bef75489` and exact subject
+  `FUTURE-PARITY-BACKLOG.14.3.0 - audit cursor transaction safety`. Status plus staged/unstaged diffs are empty,
+  the ignored brief is zero bytes, post-commit memory architecture validates `activation_commit bef75489` against
+  `HEAD^1`, Knowledge is fresh, rendered book output is absent, and managed-run census reports
+  `found=0 removed=0 skipped=0`. This task-tree file is the sole activation diff before contract evidence or any
+  other change.
+
+  Retrieval and current-authority evidence 2026-08-09: ADR `0056`, the cursor-direction and transaction-audit
+  Knowledge cards, the exhaustive 246-name ActionIR fact, task-metadata gate boundary, `TOOLBOX.md`, current
+  source-location neutral state machines/diagnostics, and the exact Perl/Rust/Dart/Julia/Lua cursor/mark owners
+  were read before choosing names. Current `save_cursor`/`restore_cursor` remains a cursor-only compatibility
+  stack; current marks remain rule-label buckets; `CALL` and falsey rule results have no public accepted-bit
+  channel; and current ActionIR has canonical kinds/contracts but no closed effect field. The decision therefore
+  cannot be implemented as helper aliases, payload truthiness, or an illustrative semantic-effect extension.
+
+  Exact spelling/result decision 2026-08-09: accepted future authored code uses
+  `tx = recognition_checkpoint()` followed by exactly one `recognize_once(tx, call(Rule))` and exactly one
+  `recognition_commit(tx)` or `recognition_rollback(tx)` on every path. The four calls are grammar-owned dedicated
+  `RECOGNITION_*` ActionIR nodes, not ordinary helpers. `recognize_once` treats its exact static `call(Rule)`
+  operand specially so the call is not evaluated before the snapshot, executes the named rule path once, and
+  returns a strict match boolean. The payload stays staged. Commit invalidates first, keeps recognized state, then
+  yields the payload—including valid `false`, `0`, empty-string, or `undef`; rollback restores and discards. It is
+  legal to rollback either a match or miss, and commit of a miss yields `undef` while the prior boolean remains the
+  authoritative match fact. Neither terminal implicitly writes `retv`, accumulators, or visible match registers.
+
+  Token/effect decision 2026-08-09: one token is bound directly to one bare rule-local linear slot and carries
+  source, rule, invocation id/generation, transaction id, and origin. Copy, comparison, aggregate/function/
+  codeblock storage, return/capture/serialization, retry, nesting, caller unwind, and cross-invocation/source use
+  are rejected. Missing terminal, repeated attempt, or forbidden placement uses the existing transaction-escape
+  family; terminal reuse retains exact double-terminal/invalidated-token ownership. The closed effect lattice has
+  nine allowed atoms (`pure_value`, `source_read`, bounded `structured_control`, `rule_recognition`,
+  `transaction_state`, matcher `cursor_advance`, `capture_boundary_write`, `invocation_mark_write`,
+  `staged_return`) and eleven rejected families (binding, aggregate, AST/object, compatibility cursor, output,
+  authored diagnostic, exit/unbounded control, dynamic callable, registry/staged, external/host, unknown/raw).
+  Every ActionIR node and all 246 call contracts receive one base row in `.14.3.1.1`; composite/rule-call effects
+  form a transitive fixed point, including recursive SCCs, and the runtime restores before a dynamic violation.
+
+  Invocation-mark/progress decision 2026-08-09: every rule entry receives a fresh monotonic invocation frame and
+  mark generation. Its anonymous boundary begins from the caller-visible position, its marks begin empty, and
+  child exit propagates only normal accepted cursor/result state; same-label recursive frames cannot alias marks.
+  Rollback restores only the owning-frame cursor/boundary/mark snapshot, commit keeps its writes, and frame exit
+  invalidates its mark generation. V1 progress is exactly `end_offset > start_offset` for each accepted repetition
+  iteration and each accepted direct/mutual recursive cycle edge. One-shot zero-width recognition remains legal;
+  rolled-back candidates and variable/mark/AST/transaction changes never satisfy progress; no decreasing-measure
+  authoring escape hatch is selected.
+
+  Surfaced frontier-drift evidence 2026-08-09: this file's node states plus central index, roadmaps, architecture,
+  memory, and Knowledge all named `.14.3.1.0`, but its own free-form authoritative frontier still named
+  `.14.2.0.1`. `git blame` assigns that paragraph to `bd777ee8`; later typed-source/transaction commits advanced
+  real truth without updating it. `scripts/check_task_tree_metadata.sh` passed because its documented low-noise
+  boundary checks frontier status cells only for top-level completed trees plus two pending-node contradictions.
+  The immediate prose and stale top metadata are repaired here. `TASK-TREE-METADATA-HYGIENE.5` is reopened as the
+  separate pending owner for a low-false-positive active-tree freshness invariant after this leaf lands cleanly;
+  Knowledge card `active-task-frontier-prose-drift` preserves the causal fact.
+
+  Lockstep/no-behavior evidence 2026-08-09: the working census contains only decision, Knowledge, task/index,
+  roadmap/live continuity, and sole-facing book paths. No production/compiler/runtime source, `.spec`, test,
+  executable neutral artifact/checker, fixture, schema, generated carrier, capability/semantic/MCP data, CLI,
+  README, storage tool, hosted workflow, or current public result changes. ADR `0056` and Knowledge carry the
+  canonical future contract; the book labels the exact syntax accepted but unavailable, and its rendered HTML
+  preserves the heading, code block, match/result explanation, effect paragraph, and current-feature warning as
+  separate elements. Executable neutral ownership remains `.14.3.1.1`.
+
+  Final verification evidence 2026-08-09: `git diff --check`, the exact no-change census, Knowledge regeneration
+  and freshness at 793 facts / 6,558 question keys, memory/task/README stability, all seven doctrines, focused
+  typed-source and language-capability proofs, and a real 79-source-file mdBook build at 14,248 KiB pass; rendered
+  transaction sections were inspected and the generated book was removed. The approved definitive local CI gate
+  passes moved-root containment, every maintained mandatory runtime/contract consumer, primary CLI 66/66 under
+  both default and POSIX option environments, RAM 58% below 88%, and Phase 0 1,031/1,031 in 672 wall-clock seconds,
+  ending with exact `[ci] local CI gate passed` and exit zero. The guarded managed-run tool reports
+  `found=0 removed=0 skipped=0`; no background job remains. Commit/brief/pointer/status evidence is completed by
+  the mechanical commit workflow before any task-tree pivot.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.1.1`
   Status: `pending`
@@ -22765,12 +22878,14 @@ their parentheses; `if condition { ... }` / `while condition { ... }` remain a s
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-01):** behavior-free rollout/public-truth correction `.14.2.0.1` is signoff-
-complete from clean planning commit `5a294f39` (intended 137/300; no push). The executable ledger is 3 complete /
-11 pending with 37 mutations, exact backend admission owners, and synchronized Knowledge/mdBook truth without
-runtime or root README behavior. Commit and clean proof precede dedicated tracking of the surfaced mdBook custom-
-destination base mismatch; Perl parent `.14.2.1`, Rust `.2`, Dart `.3`, Julia `.4`, Lua dual-ABI `.5`, recurring
-`.6`, and closeout `.7` then follow cleanly.
+**Authoritative frontier (2026-08-09):** behavior-free cursor-transaction ratification `.14.3.1.0` is
+signoff-complete for intended atomic 172/300 from clean activation commit `c8fcea6f` (no push). It fixes the exact
+authored grammar, falsey-safe staged result exposure, closed fail-closed ActionIR effect taxonomy, opaque token
+lifetime, invocation-mark migration, and cursor-only progress rule without executable or current-public behavior.
+Executable neutral artifact/checker/fixture authority `.14.3.1.1` is the next transaction leaf after the
+director-priority README-policy adoption receives and completes an independent clean task-tree slice. The stale
+`.14.2.0.1` frontier introduced at `bd777ee8` is repaired; `TASK-TREE-METADATA-HYGIENE.5` separately owns a
+low-noise active-tree freshness invariant.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private

@@ -111,8 +111,10 @@ recurring/public no-drift row remains pending under `.14.8`.
 
 Behavior-free `.14.3.0` adds no transaction test or canonical switch. It audits the current six-runtime baseline
 with the existing typed-source, named-mark, rule-local cursor, repetition, recursion, capability, and language
-authorities. The next neutral leaf must add an independently checked transaction/progress artifact and closed
-ActionIR effect classification before any backend consumer or runtime route can claim support.
+authorities. Behavior-free `.14.3.1.0` then selects the exact future `recognition_*` forms, falsey-safe staged
+result channel, linear token rules, closed 9-allowed/11-rejected base-effect taxonomy, invocation marks, and
+cursor-only progress. The next neutral leaf must make those decisions independently executable and classify the
+complete ActionIR/call inventory before any backend consumer or runtime route can claim support.
 
 The gate unconditionally verifies the neutral MCP transport before checking all five derived bindings. It requires
 every contract artifact and runs the generators in this exact order before the admitted implementation proofs:

@@ -1,5 +1,27 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-09 (`FUTURE-PARITY-BACKLOG.14.3.1.0` — cursor-transaction authored/static contract): implement exactly
+  `recognition_checkpoint()`, `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and
+  `recognition_rollback(token)`. They lower to dedicated `RECOGNITION_*` nodes; they are not ordinary helpers and
+  may not alias the compatibility cursor stack.
+- `recognize_once` returns only a strict accepted/not-accepted boolean. The child payload stays in the token and is
+  exposed only after commit invalidates the token. Do not infer match from payload truthiness or write `retv`, the
+  accumulator, or match registers early.
+- Tokens are linear compiler/runtime authority. Accept one direct bare local binding, one exact static
+  `call(Rule)` attempt, and one terminal on every path. Reject copy/compare/aggregate/function/codeblock/return/
+  capture/serialization/retry/nesting/cross-invocation/source forms. Restore and invalidate before dynamic escape
+  or effect diagnostics.
+- The neutral artifact must classify every ActionIR node and all 246 current call names bidirectionally. Allowed
+  base atoms are pure value, source read, bounded structured control, rule recognition, transaction state,
+  matcher cursor advance, boundary write, invocation-mark write, and staged return. All eleven rejected families
+  in ADR `0056` fail closed; user functions and codeblocks receive no v1 purity override.
+- Allocate a fresh mark table per rule invocation. Parent/child and same-label recursive frames cannot alias;
+  transaction rollback restores only the owning frame. Progress is `end_offset > start_offset` for accepted
+  repetition or direct/mutual recursive cycle edges. Rolled-back candidates and non-cursor state never count.
+- The stale future-backlog prose frontier was introduced by `bd777ee8` and escaped because
+  `scripts/check_task_tree_metadata.sh` intentionally checks completed trees only. Immediate repair belongs to
+  this live-doc leaf; prevention is separately task-tree-owned by `TASK-TREE-METADATA-HYGIENE.5`.
+
 - 2026-08-09 (`FUTURE-PARITY-BACKLOG.14.3.0` — cursor-transaction safety audit): do not reuse or rename
   `save_cursor`/`restore_cursor`. Their execution-context stack stores only cursor positions and has no source,
   invocation, generation, transaction, or terminal authority.

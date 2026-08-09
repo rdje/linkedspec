@@ -2,7 +2,8 @@
 
 - Date: 2026-07-29
 - Status: accepted; neutral/public contract and six-runtime internal value/projection implementation complete;
-  transactions through final public no-drift remain under `FUTURE-PARITY-BACKLOG.14.3-.8`
+  exact future transaction syntax/effect/progress contract ratified; executable transaction artifacts through final
+  public no-drift remain under `FUTURE-PARITY-BACKLOG.14.3.1.1-.14.8`
 - Tags: architecture, cursor, source-location, spans, capture, recursion, parser-composition, diagnostics, portability
 
 ## Context
@@ -140,8 +141,9 @@ No source spelling is selected by this decision. `Position`, `Span`, and transac
 not promised helper identifiers. `FUTURE-PARITY-BACKLOG.14.1` has defined the versioned base schema, fixtures,
 coordinate/provenance conversions, architectural state machine, diagnostics, mutations, and current-helper
 projection. `.14.2` has independently admitted the internal immutable value/projection layer on Perl, Rust, Dart,
-Julia, PUC Lua, and LuaJIT. Transaction spelling and exact recognition-result exposure remain a separate
-behavior-free decision in `.14.3.1.0`; backend code cannot select them by accident. Generated/emitted/reconstructed/
+Julia, PUC Lua, and LuaJIT. Transaction spelling and exact recognition-result exposure were reserved to the
+separate behavior-free decision `.14.3.1.0` and are now ratified in section 11; backend code cannot select them by
+accident. Generated/emitted/reconstructed/
 descriptor/trace/semantic projections change only in explicitly owned descendant leaves if the executable
 transaction contract proves they need a new version.
 
@@ -225,6 +227,94 @@ nullable-repetition and direct/mutual-recursion diagnostics carry rule/invocatio
 Staged-dispatch cycle ownership remains `.14.7`. The four immutable-value errors—including
 `source_location_reversed_span`—remain `.14.2` owners; `.14.3` composes them and must not implement duplicate codes.
 
+### 11. Ratify the authored v1 transaction and effect contract
+
+`FUTURE-PARITY-BACKLOG.14.3.1.0` selects four canonical call-form intrinsics. They are accepted future syntax,
+not yet executable current syntax:
+
+```text
+tx = recognition_checkpoint();
+if (recognize_once(tx, call(Child))) {
+    child = recognition_commit(tx);
+} else {
+    recognition_rollback(tx);
+}
+```
+
+- `recognition_checkpoint()` creates the snapshot and yields one opaque linear token. It is legal only as the
+  direct right-hand side of one bare rule-local token binding.
+- `recognize_once(token, call(Rule))` is a grammar-owned special form. Its second operand must be exactly one
+  statically named `call(Rule)`, preserving the ordinary explicit child-dispatch spelling while preventing eager
+  evaluation before the transaction begins. It executes that rule path once and returns only a strict match
+  boolean.
+- The child payload, including `false`, `0`, `""`, or `undef`, is staged separately from the match boolean.
+  `recognition_commit(token)` invalidates the token first, retains the accepted cursor/boundary/mark state, and
+  then yields that staged payload. An unmatched attempt has no staged payload and commit yields `undef`; the prior
+  boolean remains the authoritative match fact.
+- `recognition_rollback(token)` restores the snapshot, discards any staged payload, invalidates the token, and is
+  statement-only. Rollback is legal for either a matched or unmatched attempt, so an author may explicitly reject
+  a recognized candidate.
+
+The four intrinsics lower to dedicated `RECOGNITION_CHECKPOINT`, `RECOGNIZE_ONCE`, `RECOGNITION_COMMIT`, and
+`RECOGNITION_ROLLBACK` ActionIR nodes. They are not ordinary helpers, aliases for `save_cursor`/`restore_cursor`,
+or host exception constructs. The token is not a general value: it cannot be copied, compared, placed in an array
+or harray, passed to a user/callable function, returned, captured, serialized, or used by another invocation.
+Every static path must perform exactly one `recognize_once` and reach exactly one terminal operation before any
+ordinary effect. A missing terminal, repeated attempt, forbidden token position, or unwind is transaction escape;
+the runtime restores and invalidates before reporting it. Same-terminal reuse retains the existing exact
+double-commit/double-rollback diagnostics; other post-terminal use is invalidated-token use.
+
+The match boolean and payload split is deliberate. Ordinary `call(Rule)` historically cannot distinguish a failed
+recognition from a successful rule whose return is falsey. Transactions do not change ordinary calls. The special
+form observes the runtime's internal accepted/not-accepted channel, while commit exposes exactly the result that
+the one explicit call would have returned. It does not implicitly assign `retv`, append an accumulator, or publish
+entry/local match registers before commit.
+
+The v1 ActionIR effect lattice is closed and fail-closed. Every statement node, expression node, and canonical
+call contract receives exactly one base effect; composite nodes and statically named rule calls take the union to
+a call-graph fixed point, including recursive strongly connected components. The only recognition-admissible base
+effects are:
+
+1. `pure_value` — literals, immutable construction, comparison, and pure transformation;
+2. `source_read` — immutable input/cursor/entry/match/capture/mark projections;
+3. `structured_control` — bounded `if`/`elseif`/`else` and `switch`/`case` structure with admissible predicates;
+4. `rule_recognition` — statically named rule dispatch, expanded transitively;
+5. `transaction_state` — the four dedicated linear transaction nodes;
+6. `cursor_advance` — matcher-owned forward recognition movement, not authored compatibility rewinds;
+7. `capture_boundary_write` — transaction-owned anonymous-boundary writes;
+8. `invocation_mark_write` — transaction-owned current-frame mark writes; and
+9. `staged_return` — a target rule's return staged inside the active token.
+
+The closed rejected effects are `binding_write`, `aggregate_write`, `ast_or_object_write`,
+`compatibility_cursor_control`, `output`, `authored_diagnostic`, `exit_or_unbounded_control`, `dynamic_callable`,
+`parser_registry_or_staged_dispatch`, `external_or_host`, and `unknown_or_raw`. Token binding and post-terminal
+payload binding are properties of the dedicated transaction nodes, not permission for ordinary binding mutation
+inside an uncommitted path. `WHILE`, `NEXT`, `RAW_PERL`, all user/callable/codeblock calls, current cursor-stack or
+rewind helpers, hidden multi-boundary probing, output/diagnostic/exit operations, and unknown future nodes fail
+closed. No purity annotation can override these v1 exclusions. The independent `.14.3.1.1` artifact must classify
+the complete ActionIR/node/call inventory bidirectionally; a runtime barrier checks the same admitted set before
+performing each dynamic effect and restores the snapshot on violation.
+
+Rule entry now owns an invocation frame with a monotonic non-reused invocation id and generation. The frame owns
+the live cursor, inherited anonymous-boundary position, and a fresh named-mark table. Child exit propagates only
+the ordinary accepted cursor/result channel; it cannot alias or overwrite the caller's marks or boundary. Thus a
+recursive `Top` invocation and its parent may both use mark `m` independently. Current `mark_*` and `@mark` syntax
+will resolve against the active frame when each backend behavior leaf lands. Frame exit invalidates its mark
+generation; rollback restores exactly the token's owning-frame mark snapshot; commit retains its writes.
+
+V1 progress is cursor-only. Each accepted repetition iteration must have `end_offset > start_offset`. Each accepted
+edge that closes a direct or mutual recursive cycle must likewise advance relative to that edge's entry offset.
+An accepted zero-width one-shot outside a progress obligation remains legal. A rolled-back recognition attempt is
+not an accepted edge and neither satisfies nor violates progress. A committed candidate is checked when the
+progress-sensitive edge accepts. No variable change, mark change, AST growth, transaction count, or authored
+decreasing measure can substitute for cursor advance in v1. The existing nullable-repetition and direct/mutual
+recursion diagnostics carry portable scalar start/end offsets plus source, rule, invocation, and edge identity.
+
+This ratification changes no current grammar, helper recognition, ActionIR emitted by current specs, descriptor,
+runtime, fixture, schema, generated carrier, CLI, or public result. `.14.3.1.1` owns the first executable neutral
+artifact and exact full-inventory rows. Backend behavior remains ordered Perl, Rust, Dart, Julia, then shared Lua
+with independent PUC Lua and LuaJIT admission.
+
 ## Consequences
 
 - Cursor control, capture, recursion, segmentation, and parser composition share one precise model instead of
@@ -235,12 +325,17 @@ Staged-dispatch cycle ownership remains `.14.7`. The four immutable-value errors
 - Progress becomes a portable contract rather than a backend timeout/stack-overflow convention.
 - Current helper APIs and intrinsic rule-local cursor policy remain valid. The separately owned `.14.3` migration
   from execution-wide rule-label mark buckets to invocation frames is explicit, versioned, and mechanically checked.
+- The accepted `recognition_*` spellings are deliberately verbose enough to distinguish bounded recognition from
+  compatibility cursor stacks, host exception handling, and systemic backtracking; they remain unavailable until
+  the separately admitted backend behavior leaves land.
 - Lossless gap capture gains the common typed representation it anticipated while retaining its separate owner.
 - This decision and its `.14.3.0` audit amendment change no grammar, helper, parser/compiler/runtime, descriptor,
   generated format, semantic/MCP response, primary CLI, rollout, admission, or current public feature-completeness
   claim.
 - The `.14.2.0` planning amendment changes no behavior itself; its exact backend module/test seams and rollout
   correction are durable in the owning task-tree and Knowledge card.
+- The `.14.3.1.0` amendment selects syntax and static semantics only; it adds no executable contract or current
+  authored capability.
 
 ## Links
 

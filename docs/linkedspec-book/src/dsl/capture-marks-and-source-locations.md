@@ -67,9 +67,9 @@ else:
 
 #### What the current engines do today
 
-There is still no authored transaction syntax. `save_cursor()` and `restore_cursor()` are older cursor-only LIFO
-compatibility controls. They do not save the anonymous boundary or named marks, carry an invocation/source owner,
-or diagnose reuse and escape. They are not aliases for a transaction token.
+The accepted future transaction spelling is not executable yet. `save_cursor()` and `restore_cursor()` are older
+cursor-only LIFO compatibility controls. They do not save the anonymous boundary or named marks, carry an
+invocation/source owner, or diagnose reuse and escape. They are not aliases for a transaction token.
 
 Named marks are currently isolated by rule label for one parser execution. A `Top` mark and a `Child` mark with the
 same name are independent. Recursive re-entry of `Top`, however, uses the same `Top` bucket; a child invocation can
@@ -92,8 +92,44 @@ only possible v1 effects. User or aggregate mutation, compatibility cursor-stack
 diagnostics, exit, unknown/raw code, callable/user functions, parser registry work, external calls, and host effects
 fail closed. Runtime checks remain a backstop for dynamic paths.
 
-The audit deliberately does not promise helper spellings. Exact syntax and how a staged child result becomes
-visible are decided in behavior-free `FUTURE-PARITY-BACKLOG.14.3.1.0`, before any backend behavior changes.
+#### Accepted future authored form
+
+Behavior-free `FUTURE-PARITY-BACKLOG.14.3.1.0` ratifies this exact future shape:
+
+```text
+tx = recognition_checkpoint();
+if (recognize_once(tx, call(Child))) {
+    child = recognition_commit(tx);
+} else {
+    recognition_rollback(tx);
+}
+```
+
+`recognition_checkpoint()` creates one opaque, rule-invocation-local linear token. `recognize_once` is a special
+form whose second operand is exactly a statically named `call(Rule)`. The call is not evaluated before the
+checkpoint; it runs once inside the transaction and keeps the familiar explicit child-dispatch spelling.
+
+The return from `recognize_once` is a strict match boolean, not the child payload. The payload stays staged in the
+token until `recognition_commit`, so a successful child result of `false`, `0`, an empty string, or `undef` remains
+distinguishable from no match. Commit invalidates the token before exposing the payload. Rollback is statement-only;
+it restores the cursor, anonymous boundary, and current invocation's named marks and discards the payload. Either a
+matched or unmatched attempt may be rolled back explicitly.
+
+The token cannot be copied, compared, returned, put in an array or harray, passed to a function/codeblock, retried,
+or used by another invocation or source. Every path performs one attempt and one commit or rollback before ordinary
+effects. The four forms are dedicated ActionIR nodes, not ordinary helpers, host exception syntax, or aliases for
+the compatibility cursor stack.
+
+The closed recognition-safe effect set is pure value work, immutable source reads, bounded `if`/`switch` control,
+statically named rule recognition, transaction state, matcher-owned cursor advance, anonymous-boundary writes,
+current-invocation mark writes, and staged return. Binding or aggregate/AST mutation, cursor stack/rewind controls,
+output, authored diagnostics, exit/unbounded control, user or callable functions/codeblocks, registry/staged work,
+external/host work, raw code, and unknown nodes fail closed. Rule calls are classified transitively, and the
+runtime checks the same boundary before performing an effect.
+
+This section describes an accepted future contract, not a current feature. The neutral artifact/checker is next,
+then Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT must each be admitted independently before the form becomes
+portable public behavior.
 
 Only cursor/source-boundary state participates. A rollback cannot undo variables, AST mutation, diagnostic or
 output events, parser-registry work, external calls, or host effects. An uncommitted path must therefore remain
@@ -163,13 +199,14 @@ source executes independently on both ABIs. The extra 11 mutations reject topolo
 The unchanged `.14.2.7` recomposition reruns that authority and closes the six-runtime internal value/helper
 implementation slice. It does not add an authored value or advance the 8-complete/6-pending public rollout.
 
-There is still no public `Position` or `Span` authored value, checkpoint syntax, transaction behavior, recursive
-observation API, or span-native parser dispatch. Those remain owned by later leaves. The combined recurring/public
+There is still no public `Position` or `Span` authored value, executable transaction behavior, recursive
+observation API, or span-native parser dispatch. Exact future transaction spelling is accepted but unavailable;
+implementation remains owned by later leaves. The combined recurring/public
 no-drift rollout row remains pending for final closeout `FUTURE-PARITY-BACKLOG.14.8`, so recurring composition does
 not change the current 8 complete / 6 pending ledger.
 
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions,
-typed spans, or cursor transactions are available as authored values.
+typed spans, or the accepted `recognition_*` forms are executable authored values or operations.
 
 ## Five anchor families
 

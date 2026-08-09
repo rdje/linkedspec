@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `TASK-TREE-METADATA-HYGIENE`
-- Status: `done`
+- Status: `active` (reopened for `.5`; prior `.0-.4` remain complete)
 - Roadmap lane: `Overall roadmap - durable architecture / task-tree hygiene`
 - Created: `2026-07-07`
-- Last updated: `2026-07-08` (`.4` done; tree complete)
+- Last updated: `2026-08-09` (`.5` queued after a stale active-tree prose frontier escaped the completed-tree gate)
 - Owner: repo-local workflow
 
 ## Goal
@@ -34,9 +34,9 @@ agents can determine the true open/closed task state without re-auditing old tas
 ## Task Tree
 
 - ID: `TASK-TREE-METADATA-HYGIENE`
-  Status: `done`
+  Status: `active`
   Goal: Reconcile stale task-tree metadata found during the 2026-07-07 bootstrap/open-tree audit.
-  Children: `.0`, `.1`, `.2`, `.3`, `.4`
+  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`
 
 - ID: `TASK-TREE-METADATA-HYGIENE.0`
   Status: `done`
@@ -100,6 +100,19 @@ agents can determine the true open/closed task state without re-auditing old tas
     parser/runtime/source/book behavior changed.
   Commit: `TASK-TREE-METADATA-HYGIENE.4 - reconcile closeout commit metadata`
 
+- ID: `TASK-TREE-METADATA-HYGIENE.5`
+  Status: `pending`
+  Goal: Extend the low-noise metadata doctrine so an active task tree cannot retain a stale authoritative prose
+    frontier after its actual active/next leaf has advanced.
+  Depends on: `FUTURE-PARITY-BACKLOG.14.3.1.0`
+  Acceptance: Retrieve the existing narrow gate boundary and the 2026-08-09 future-backlog escape before code;
+    inventory active-tree frontier shapes; define one mechanically decidable invariant that catches the proven
+    stale authoritative-summary case without turning historical changelog prose, deferred leaves, or legacy
+    metadata debt into false positives; add self-test fixtures and register no second doctrine line; synchronize
+    the task/index/Knowledge/live owners; change no parser/runtime/public behavior.
+  Verification: `pending`
+  Commit: `TASK-TREE-METADATA-HYGIENE.5 - gate active task frontiers`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -108,6 +121,7 @@ agents can determine the true open/closed task state without re-auditing old tas
 | 2 | `TASK-TREE-METADATA-HYGIENE.2` | `done` | Stale frontier/verification/commit rows are reconciled or explicitly classified. |
 | 3 | `TASK-TREE-METADATA-HYGIENE.3` | `done` | Low-noise completed-tree Current Frontier gate added to the doctrine registry. |
 | 4 | `TASK-TREE-METADATA-HYGIENE.4` | `done` | The just-closed root-spec closeout task now records its landed commit instead of pending handoff text. |
+| 5 | `TASK-TREE-METADATA-HYGIENE.5` | `pending` | A current active tree retained an obsolete authoritative prose frontier because the existing doctrine intentionally inspects only completed trees. |
 
 ## Decisions
 
@@ -147,10 +161,18 @@ agents can determine the true open/closed task state without re-auditing old tas
   `SPEC-SOURCE-TERSE-CLOSEOUT` task file still said `.1` commit execution was pending even though HEAD is
   `SPEC-SOURCE-TERSE-CLOSEOUT.1 - close root spec terse source` and the central index/memory already treat the
   tree as closed.
+- `2026-08-09`: Startup for `FUTURE-PARITY-BACKLOG.14.3.1.0` found that active backlog file's authoritative prose
+  frontier still named `.14.2.0.1` even though its node statuses, central index, roadmaps, architecture, memory, and
+  Knowledge all named `.14.3.1.0`. Git blame ties the prose to `bd777ee8`; every later `.14.2` and `.14.3.0` commit
+  advanced the real frontier without touching it. The existing checker passed by design because it only examines
+  `Current Frontier` table status cells for top-level completed trees and two narrow pending-node contradictions.
+  `.5` owns a low-noise active-tree invariant after the current transaction decision lands cleanly.
 
 ## Open Questions
 
-- None.
+- Which mechanically decidable relation among active node status, central-index frontier, and a task file's
+  authoritative summary catches the proven escape with low false-positive risk? `.5` must answer from a complete
+  active/deferred shape inventory; it may not guess from arbitrary historical prose.
 
 ## Blockers
 
@@ -190,3 +212,6 @@ agents can determine the true open/closed task state without re-auditing old tas
   completed-tree Current Frontier rows. Tree complete.
 - `2026-07-08`: Added `.4` to reconcile the just-closed `SPEC-SOURCE-TERSE-CLOSEOUT.1` commit metadata after
   startup review found the task file still described the landed closeout commit as pending.
+- `2026-08-09`: Reopened the tree with pending `.5` after a stale active-tree authoritative prose frontier escaped
+  the intentionally completed-tree-only doctrine boundary. The discovering transaction leaf repairs the immediate
+  tracker; `.5` owns prevention after that leaf commits.

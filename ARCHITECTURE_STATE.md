@@ -1,5 +1,24 @@
 # ARCHITECTURE STATE
 
+- `2026-08-09 cursor transaction authored/static contract`: behavior-free
+  `FUTURE-PARITY-BACKLOG.14.3.1.0` ratifies four accepted future special forms:
+  `recognition_checkpoint()`, `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and
+  `recognition_rollback(token)`. Recognition returns a strict match boolean; commit separately exposes the staged
+  payload, preserving successful falsey values. Tokens are linear rule-local authority, not general values.
+
+  The closed transitive ActionIR lattice has nine admitted base effects (`pure_value`, `source_read`, bounded
+  structured control, rule recognition, transaction state, matcher cursor advance, boundary write,
+  invocation-mark write, staged return) and eleven fail-closed families (binding, aggregate, AST/object,
+  compatibility cursor, output, authored diagnostic, exit/unbounded control, dynamic callable, registry/staged,
+  external/host, unknown/raw). Invocation frames replace recursive same-label mark aliasing. V1 repetition and
+  direct/mutual recursion accept only cursor advance; rolled-back attempts do not count.
+
+  This is syntax/static-semantics ratification only: current grammar, runtime, artifacts, fixtures, schemas,
+  descriptors, CLI, and results do not change. `.14.3.1.1` owns executable neutral rows. Startup also found the
+  future-backlog task's own authoritative prose frontier stranded at `.14.2.0.1`; blame ties it to `bd777ee8`, and
+  the completed-tree-only metadata doctrine explains the escape. Immediate prose is repaired; enforcement is
+  durably queued under reopened `TASK-TREE-METADATA-HYGIENE.5`.
+
 - `2026-08-09 cursor transaction safety audit`: `FUTURE-PARITY-BACKLOG.14.3.0` separates current compatibility
   state from future transactions before behavior. Existing save/restore stacks carry cursor positions only;
   rule-label mark buckets isolate different labels but not recursive invocations of one label; match/capture

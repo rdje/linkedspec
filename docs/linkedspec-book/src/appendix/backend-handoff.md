@@ -46,7 +46,10 @@
 > execution-context cursor-only compatibility stack. Child match and anonymous-boundary registers are already
 > framed, but recursive same-label marks, opaque token ownership/generation, a closed ActionIR effect classifier,
 > and structured repetition/recursion progress failures are not. Do not rename `save_cursor`/`restore_cursor` or
-> claim transaction support. Exact source spelling is selected separately before Perl implementation.
+> claim transaction support. The accepted future forms are `recognition_checkpoint()`,
+> `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and `recognition_rollback(token)`. The attempt
+> returns a match boolean; commit separately exposes the staged payload. They remain non-executable until neutral
+> and per-runtime admission.
 >
 > Any cursor transaction is one explicit
 > recognition attempt over invocation-local cursor/boundary/marks only; it adds no search tree and cannot undo

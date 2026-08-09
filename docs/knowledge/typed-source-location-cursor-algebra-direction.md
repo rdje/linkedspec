@@ -18,9 +18,9 @@ answers:
   - "which diagnostics protect cursor and span safety"
   - "what owns the typed cursor span implementation program"
 date: 2026-08-09
-status: accepted architecture; neutral model and six-runtime internal value/projection layer complete; transaction and later composition legs pending
+status: accepted architecture; internal values complete and exact future transaction syntax/effects ratified; executable transaction and later composition legs pending
 tags: [architecture, cursor, source-location, spans, capture, recursion, parser-composition, diagnostics, portability]
-evidence: "Director approval on 2026-07-29 plus ADR 0056. FUTURE-PARITY-BACKLOG.14.1 completed the executable base model and structural teaching; .14.2 completed the internal immutable value/projection layer on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT at 8 complete / 6 pending / 53 mutations. Behavior-free .14.3.0 now freezes the separate invocation-frame/token/effect/progress implementation boundary without selecting authored syntax or changing behavior."
+evidence: "Director approval on 2026-07-29 plus ADR 0056. FUTURE-PARITY-BACKLOG.14.1 completed the executable base model and structural teaching; .14.2 completed the internal immutable value/projection layer on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT at 8 complete / 6 pending / 53 mutations. Behavior-free .14.3.0 froze the invocation-frame/token/effect/progress boundary; .14.3.1.0 ratifies exact future recognition_* syntax, falsey-safe result exposure, closed effects, invocation marks, and cursor-only progress without behavior."
 reverify: "rg -n 'source-location algebra|Cursor transactions|Progressive and staged parsing consume spans|Lossless segmentation|FUTURE-PARITY-BACKLOG[.]14[.]0[.]1' docs/decisions/0056-typed-source-location-and-cursor-algebra.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -48,10 +48,12 @@ child diagnostics map exactly to the original source. This grants no implicit fi
 execution, or policy authority. Lossless `@capture_gaps` prefix/gap/tail segmentation uses the same span model but
 keeps its existing syntax/lifecycle/migration owner in `docs/tasks/INTER-MATCH-GAP-CAPTURE.md` and ADR `0045`.
 
-ADR `0056` itself selects no final DSL spelling. The neutral base and six-runtime internal value/projection layer
-are now complete. Exact transaction spelling and committed-result exposure remain a behavior-free decision in
-`.14.3.1.0`; invocation frames, a closed ActionIR effect taxonomy, structured progress diagnostics, independent
-six-runtime admission, recursive observation, gap composition, progressive/staged dispatch, and final public
-no-drift continue under `FUTURE-PARITY-BACKLOG.14.3-.8`.
+ADR `0056` now ratifies the future `recognition_checkpoint()` / `recognize_once(token, call(Rule))` /
+`recognition_commit(token)` / `recognition_rollback(token)` surface. Match presence is a strict boolean and the
+child payload remains staged until commit, so falsey successful values are not collapsed into failure. The neutral
+base and six-runtime internal value/projection layer are complete; executable transaction artifacts, invocation
+frames, full effect rows, progress diagnostics, independent six-runtime admission, recursive observation, gap
+composition, progressive/staged dispatch, and final public no-drift continue under
+`FUTURE-PARITY-BACKLOG.14.3.1.1-.14.8`.
 
 Related transaction audit: [[cursor-transaction-safety-audit-plan]].

@@ -1,5 +1,21 @@
 # CHANGES
 
+## 2026-08-09 — FUTURE-PARITY-BACKLOG.14.3.1.0 — ratify cursor transaction contract
+
+- Ratified four exact accepted-future special forms: `recognition_checkpoint()`,
+  `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and `recognition_rollback(token)`. Preserved
+  explicit named `call(Rule)` dispatch without eager evaluation or hidden alternative search.
+- Split recognition success from result value: the attempt returns a strict boolean, while commit separately
+  exposes the staged payload, preserving successful `false`, `0`, empty-string, and `undef` results.
+- Froze linear token placement/lifetime, one-attempt/one-terminal control flow, nine allowed and eleven rejected
+  ActionIR effect atoms, transitive rule-call classification, runtime backstop, invocation-frame mark migration,
+  and cursor-only repetition/direct/mutual-recursion progress.
+- Changed no executable grammar, ActionIR output, compiler/runtime, fixture, neutral artifact, schema, carrier,
+  CLI, README, storage/workflow boundary, or current behavior. Synchronized ADR `0056`, Knowledge, task/index,
+  roadmaps, live docs, and the sole-facing book as accepted-future/non-executable truth.
+- Root-caused and repaired the future-backlog task's stale `.14.2.0.1` authoritative prose frontier. The current
+  doctrine deliberately omits active-tree prose; reopened `TASK-TREE-METADATA-HYGIENE.5` now owns prevention.
+
 ## 2026-08-09 — FUTURE-PARITY-BACKLOG.14.3.0 — audit cursor transaction safety
 
 - Audited current cursor, anonymous-boundary, named-mark, recursion, repetition, ActionIR/effect, diagnostic, and

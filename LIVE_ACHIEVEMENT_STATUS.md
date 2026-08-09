@@ -1,5 +1,31 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-09 — Exact future cursor-transaction syntax and effects are ratified behavior-free
+
+`FUTURE-PARITY-BACKLOG.14.3.1.0` activates from clean audit commit `c8fcea6f` as intended 172/300 with no push.
+It selects accepted future `recognition_checkpoint()`, `recognize_once(token, call(Rule))`,
+`recognition_commit(token)`, and `recognition_rollback(token)` special forms. `recognize_once` yields a strict
+match boolean while the child payload stays staged, so falsey successful results remain distinct from no match.
+
+One opaque token belongs to a source/rule/invocation/generation/transaction/origin and one bare local slot. It
+cannot be copied, aggregated, passed, returned, captured, serialized, retried, nested, or used across an
+invocation/source. Every path has one attempt and one terminal before ordinary effects. Commit retains the
+transaction state and yields the payload; rollback restores cursor, anonymous boundary, and invocation marks.
+
+The contract freezes nine recognition-safe effect atoms and eleven fail-closed families, with transitive rule-call
+fixed-point classification and a runtime barrier. Rule entry owns fresh invocation marks, removing recursive
+same-label aliasing when backend behavior lands. V1 progress requires cursor advance for accepted repetition and
+direct/mutual recursive cycle edges; rollback, variables, marks, AST growth, and transaction count do not qualify.
+
+No executable grammar, ActionIR output, compiler/runtime, fixture, neutral artifact, schema, generated carrier,
+CLI, README, storage, hosted workflow, or current public behavior changes. The sole-facing book labels the forms
+accepted but unavailable; executable neutral ownership is `.14.3.1.1`.
+
+Startup also root-caused a stale `.14.2.0.1` authoritative prose frontier inside the active future-backlog task.
+The actual node/index/roadmap/memory authorities had advanced; the metadata doctrine passed because its deliberate
+boundary covers completed-tree frontier tables, not active-tree prose. The immediate tracker is repaired and a
+separate pending prevention owner is opened as `TASK-TREE-METADATA-HYGIENE.5`.
+
 ## 2026-08-09 — Cursor transaction safety is audited and dependency-split before behavior
 
 `FUTURE-PARITY-BACKLOG.14.3.0` activates task-tree-first from clean typed-source closeout `bef75489` as intended

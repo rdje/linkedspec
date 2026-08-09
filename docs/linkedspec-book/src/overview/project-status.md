@@ -61,8 +61,11 @@ An unchanged `FUTURE-PARITY-BACKLOG.14.2.7` recomposition reruns that complete a
 value/helper implementation slice `.14.2`. This is a project-state closure, not a new language surface: the six
 admitted runtimes, helper results, schemas, and 8-complete/6-pending rollout remain unchanged.
 
-Public typed values, transaction spelling and behavior, recursive observation, span-native progressive/staged
-dispatch, and all public authored surfaces remain future work. The internal
+Public typed values, executable transaction behavior, recursive observation, span-native progressive/staged
+dispatch, and all public authored surfaces remain future work. Exact future transaction syntax is now ratified:
+`recognition_checkpoint()`, `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and
+`recognition_rollback(token)`. Match is a strict boolean and the falsey-safe payload remains staged until commit.
+These forms are accepted architecture, not current executable syntax. The internal
 Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT admissions do not add an authored `Position` or `Span` value, transaction
 operation, schema version, or new helper result. Rollout is 8 complete / 6 pending because the combined recurring/
 public no-drift row remains owned by final program-wide closeout `FUTURE-PARITY-BACKLOG.14.8`.
