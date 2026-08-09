@@ -34,6 +34,7 @@ JULIA_CONSUMER_PATH = ROOT / "julia" / "test" / "typed_source_location_contract_
 JULIA_RUNTESTS_PATH = ROOT / "julia" / "test" / "runtests.jl"
 LUA_CONSUMER_PATH = ROOT / "lua" / "test" / "typed_source_location_contract_test.lua"
 LUA_ORDINARY_DRIVER_PATH = ROOT / "tools" / "run_lua_local.sh"
+RECURRING_DRIVER_PATH = ROOT / "tools" / "check_typed_source_location_six_runtime.sh"
 
 EXPECTED_COUNTS = {
     "sources": 3,
@@ -49,7 +50,9 @@ EXPECTED_COUNTS = {
     "internal_contract_ids": 2,
     "diagnostics": 31,
     "rollout_legs": 14,
-    "mutations": 42,
+    "recurring_source_groups": 5,
+    "recurring_runtime_routes": 6,
+    "mutations": 53,
 }
 
 POLICY = {
@@ -76,6 +79,86 @@ CANONICAL_EXECUTION = {
     "canonical_driver": "tools/run_ci_local.sh",
     "invocation": "bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py",
     "tracked_required": True,
+}
+
+RECURRING_GATE = {
+    "driver": "tools/check_typed_source_location_six_runtime.sh",
+    "source_schema": {
+        "fields": ["backend", "paths"],
+        "policy": "five backend source groups are immutable; Perl owns its separate value and projection tests and Lua owns one source shared by both ABIs",
+    },
+    "consumer_sources": [
+        {
+            "backend": "perl",
+            "paths": [
+                "t/typed_source_location_values.t",
+                "t/typed_source_location_perl_contract.t",
+            ],
+        },
+        {
+            "backend": "rust",
+            "paths": [
+                "rust/linkedspec-runtime/tests/typed_source_location_contract.rs"
+            ],
+        },
+        {
+            "backend": "dart",
+            "paths": ["dart/test/typed_source_location_contract_test.dart"],
+        },
+        {
+            "backend": "julia",
+            "paths": ["julia/test/typed_source_location_contract_test.jl"],
+        },
+        {
+            "backend": "lua",
+            "paths": ["lua/test/typed_source_location_contract_test.lua"],
+        },
+    ],
+    "route_schema": {
+        "fields": ["runtime", "source_backend", "command"],
+        "policy": "neutral runs first; Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT then run exactly once in order",
+    },
+    "runtime_routes": [
+        {
+            "runtime": "perl",
+            "source_backend": "perl",
+            "command": "PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t",
+        },
+        {
+            "runtime": "rust",
+            "source_backend": "rust",
+            "command": '"$CARGO_CMD" test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract',
+        },
+        {
+            "runtime": "dart",
+            "source_backend": "dart",
+            "command": "cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/typed_source_location_contract_test.dart",
+        },
+        {
+            "runtime": "julia",
+            "source_backend": "julia",
+            "command": "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/typed_source_location_contract_test.jl\")'",
+        },
+        {
+            "runtime": "puc_lua",
+            "source_backend": "lua",
+            "command": "bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_test.lua",
+        },
+        {
+            "runtime": "luajit",
+            "source_backend": "lua",
+            "command": "bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua",
+        },
+    ],
+    "support_checks": [
+        "perl tools/check_generated_source_contract.pl",
+        "perl tools/check_capability_conformance.pl",
+        "perl tools/check_language_capability_coverage.pl",
+    ],
+    "local_ci": {
+        "driver": "tools/run_ci_local.sh",
+        "switch": "LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX",
+    },
 }
 
 HELPER_GROUPS = {
@@ -667,6 +750,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         "internal_contract_ids",
         "diagnostic_schema",
         "diagnostics",
+        "recurring_gate",
         "rollout",
     ]
     require_fields(contract, top_fields, "contract")
@@ -1127,6 +1211,22 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
     if observed_diagnostics != DIAGNOSTICS:
         fail("diagnostic membership, order, phase, detection, or context drifted")
 
+    recurring = require_fields(
+        contract["recurring_gate"],
+        [
+            "driver",
+            "source_schema",
+            "consumer_sources",
+            "route_schema",
+            "runtime_routes",
+            "support_checks",
+            "local_ci",
+        ],
+        "recurring gate",
+    )
+    if recurring != RECURRING_GATE:
+        fail("recurring gate source, route, command, support, or canonical topology drifted")
+
     rollout = require_list(contract["rollout"], "rollout", EXPECTED_COUNTS["rollout_legs"])
     observed_rollout: list[tuple[Any, ...]] = []
     for leg in rollout:
@@ -1151,6 +1251,8 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         "internal_contract_ids": len(internal_ids),
         "diagnostics": len(diagnostics),
         "rollout_legs": len(rollout),
+        "recurring_source_groups": len(recurring["consumer_sources"]),
+        "recurring_runtime_routes": len(recurring["runtime_routes"]),
         "mutations": EXPECTED_COUNTS["mutations"],
     }
     if actual_counts != EXPECTED_COUNTS:
@@ -1170,6 +1272,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             JULIA_RUNTESTS_PATH,
             LUA_CONSUMER_PATH,
             LUA_ORDINARY_DRIVER_PATH,
+            RECURRING_DRIVER_PATH,
         ):
             if not path.is_file():
                 fail(f"canonical contract/checker/runner input is missing: {path.relative_to(ROOT)}")
@@ -1198,6 +1301,38 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
                 fail(f"canonical registration marker must appear exactly once: {marker}")
         if CI_PATH.name != Path(CANONICAL_EXECUTION["canonical_driver"]).name:
             fail("canonical driver identity drifted")
+        recurring_driver_text = RECURRING_DRIVER_PATH.read_text(encoding="utf-8")
+        recurring_markers = [
+            CANONICAL_EXECUTION["invocation"],
+            *[route["command"] for route in RECURRING_GATE["runtime_routes"]],
+            *RECURRING_GATE["support_checks"],
+        ]
+        recurring_positions: list[int] = []
+        for marker in recurring_markers:
+            if recurring_driver_text.count(marker) != 1:
+                fail(f"recurring driver marker must appear exactly once: {marker}")
+            recurring_positions.append(recurring_driver_text.index(marker))
+        if recurring_positions != sorted(recurring_positions):
+            fail("recurring driver neutral/runtime/support order drifted")
+        for source in RECURRING_GATE["consumer_sources"]:
+            for relative_path in source["paths"]:
+                if not (ROOT / relative_path).is_file():
+                    fail(f"recurring consumer source is missing: {relative_path}")
+        recurring_ci = RECURRING_GATE["local_ci"]
+        if recurring_ci["driver"] != CI_PATH.relative_to(ROOT).as_posix():
+            fail("recurring canonical driver identity drifted")
+        recurring_ci_markers = (
+            f"require_tracked_file {RECURRING_GATE['driver']}",
+            f'if [[ "${{{recurring_ci["switch"]}:-0}}" == "1" ]]; then',
+            f'bash "$REPO_ROOT/{RECURRING_GATE["driver"]}"',
+        )
+        expected_ci_counts = (2, 1, 1)
+        for marker, expected_count in zip(recurring_ci_markers, expected_ci_counts, strict=True):
+            if ci_text.count(marker) != expected_count:
+                fail(
+                    "recurring canonical registration marker count drifted: "
+                    f"{marker} expected {expected_count}"
+                )
         rust_consumer_text = RUST_CONSUMER_PATH.read_text(encoding="utf-8")
         for dormant_marker in (
             "linkedspec_typed_source_red",
@@ -1269,6 +1404,10 @@ def mutation_checks(contract: dict[str, Any]) -> int:
             {"cursor": 5, "anonymous_boundary": 5, "marks": [["m", 5]]}
         )
 
+    def swap_recurring_routes(candidate: dict[str, Any]) -> None:
+        routes = candidate["recurring_gate"]["runtime_routes"]
+        routes[0], routes[1] = routes[1], routes[0]
+
     mutations: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
         ("format", lambda c: c.__setitem__("format", 2)),
         ("contract id", lambda c: c.__setitem__("contract_id", "drift")),
@@ -1302,9 +1441,58 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("diagnostic removed", lambda c: c["diagnostics"].pop()),
         ("diagnostic code", lambda c: c["diagnostics"][0].__setitem__("code", "wrong")),
         ("diagnostic context", lambda c: c["diagnostics"][19]["required_context"].pop()),
+        (
+            "recurring source group omitted",
+            lambda c: c["recurring_gate"]["consumer_sources"].pop(),
+        ),
+        (
+            "recurring source path omitted",
+            lambda c: c["recurring_gate"]["consumer_sources"][0]["paths"].pop(),
+        ),
+        (
+            "recurring runtime route omitted",
+            lambda c: c["recurring_gate"]["runtime_routes"].pop(),
+        ),
+        ("recurring runtime route order", swap_recurring_routes),
+        (
+            "recurring runtime route duplicated",
+            lambda c: c["recurring_gate"]["runtime_routes"].append(
+                copy.deepcopy(c["recurring_gate"]["runtime_routes"][0])
+            ),
+        ),
+        (
+            "recurring runtime command",
+            lambda c: c["recurring_gate"]["runtime_routes"][1].__setitem__(
+                "command", "cargo test --wrong"
+            ),
+        ),
+        (
+            "recurring runtime source binding",
+            lambda c: c["recurring_gate"]["runtime_routes"][5].__setitem__(
+                "source_backend", "rust"
+            ),
+        ),
+        (
+            "recurring support check omitted",
+            lambda c: c["recurring_gate"]["support_checks"].pop(),
+        ),
+        (
+            "recurring driver",
+            lambda c: c["recurring_gate"].__setitem__("driver", "tools/missing.sh"),
+        ),
+        (
+            "recurring canonical switch",
+            lambda c: c["recurring_gate"]["local_ci"].__setitem__(
+                "switch", "LINKEDSPEC_RUN_WRONG_MATRIX"
+            ),
+        ),
+        (
+            "combined public no-drift promoted prematurely",
+            lambda c: c["rollout"][13].__setitem__("status", "complete"),
+        ),
         ("rollout removed", lambda c: c["rollout"].pop()),
         ("canonical checker", lambda c: c["canonical_execution"].__setitem__("checker_path", "tools/wrong.py")),
-        ("mutation count", lambda c: c["expected_counts"].__setitem__("mutations", 37)),
+        ("mutation count", lambda c: c["expected_counts"].__setitem__("mutations", 52)),
     ]
     rollout_regressions = [
         (

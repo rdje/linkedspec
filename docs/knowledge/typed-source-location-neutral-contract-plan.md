@@ -24,6 +24,7 @@ answers:
   - "how many typed source location rollout legs and mutations are current after Lua admission"
   - "why did the capability conformance guide still say typed source rollout was 3 11 37"
   - "which task corrected the stale typed source capability guide after runtime admissions"
+  - "how many typed source location mutations exist after recurring composition"
 date: 2026-08-01
 status: neutral artifact, public teaching/recomposition, and all six runtime targets complete; 8 of 14 rollout legs complete
 tags: [architecture, source-location, spans, cursor, helpers, recursion, conformance, mdbook, portability]
@@ -38,19 +39,21 @@ evidence_update_2026_08_07_julia_admission_signoff: "Julia admission signoff kee
 evidence_update_2026_08_07_lua_admission: "Lua admission .14.2.5.3 removes only test-local RED selection/scaffolding and executes the unchanged complete 240-assertion value/projection body once on PUC Lua and once on LuaJIT in ordinary discovery. Canonical CI requires the tracked final path and exact repository-routed command for each ABI. The checker locks both ordinary and canonical command forms, multiplicity, tracked inputs, stale-dormancy absence, and an independent Lua complete-to-pending regression. Only lua_dual_abi moves to complete, advancing live truth to 8 complete / 6 pending / 42 mutations. Production modules, UTF-8-byte registers, helper results/mutations, schemas, DSL, README, and other backends do not change."
 evidence_update_2026_08_07_lua_admission_signoff: "Lua admission signoff passes book 79 files/14184 KiB, Knowledge 789/6512, all seven doctrines, and definitive canonical CI. Canonical proof preserves capability 80/0/0, typed source 8/6/42 with all six admitted consumers, byte-fresh MCP bindings, every composed semantic/MCP admission, containment/relocation, and CLI 66x2; RAM is 75% and Phase 0 passes 1031/1031 in 670 seconds before the exact marker and exit zero."
 evidence_update_2026_08_07_capability_guide_drift: "The .14.2.5.3 current-surface census found capability_conformance/README.md still claiming 3 complete / 11 pending / 37 mutations and all backends pending. Git blame ties the section to initial contract commit e8f6198b and public-row correction bd777ee8. Git history proves later Perl, Rust, Dart, and Julia admission commits updated executable artifact/checker, Knowledge, and sole-facing book but omitted this guide. The runtime contract never regressed; this was accumulated documentation projection drift. The active all-live-doc acceptance repairs the guide directly to 8/6/42 and all six runtime targets admitted."
-reverify: "bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py && bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua && rg -n 'complex regex|Single regex|recursive regex|single-regex multi-classification' docs/linkedspec-book/src/specs-and-corpora"
+evidence_update_2026_08_09_recurring_topology: "Recurring composition .14.2.6 binds five backend consumer groups to exact Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT routes plus three support ledgers through one repository-routed driver and canonical opt-in. Eleven independent topology mutations advance current governance to 53 while rollout remains 8/6 because the combined recurring_public_no_drift row belongs to final .14.8. No neutral fixture, runtime result, register, schema, DSL, README, hosted workflow, or storage root changes."
+reverify: "bash tools/check_typed_source_location_six_runtime.sh && rg -n 'complex regex|Single regex|recursive regex|single-regex multi-classification' docs/linkedspec-book/src/specs-and-corpora"
 ---
 
 The first executable artifact is
 `capability_conformance/typed_source_location_contract.json`, identified as
 `linkedspec-typed-source-location-v1`. Its independent validator is
 `tools/check_typed_source_location_contract.py`; canonical execution must route that checker through
-`tools/run_python_project_data.sh` without a new driver or off-volume scratch path.
+`tools/run_python_project_data.sh`. Recurring composition calls that exact route from one repository-managed driver;
+neither path uses off-volume scratch.
 
 The frozen neutral envelope has three decoded sources, seven position conversions, six direct spans, three derived
 text/provenance cases, eight invocation-state transitions, eight transaction transitions, six recursive-observation
 cases, four structural-authoring cases, 92 canonical helper projections, seven callable compatibility aliases,
-two internal contract ids, 31 exact diagnostic/negative fixtures, 14 rollout legs, and 42 independent mutations.
+two internal contract ids, 31 exact diagnostic/negative fixtures, 14 rollout legs, and 53 independent mutations.
 This defines target semantics without selecting DSL spelling or claiming non-admitted backend implementation.
 
 The 92 modern current helpers divide into 47 capture/mark, 30 entry/match, 11 input/cursor, and four explicit cursor
@@ -74,4 +77,6 @@ walkthrough's three complex-regex passages, the EBNF walkthrough's recursive-reg
 reading-order phrase describe current compatibility material rather than preferred general authoring. Perl runtime
 admission `.14.2.1.3`, Rust admission `.14.2.2.3`, Dart admission `.14.2.3.3`, Julia admission `.14.2.4.3`, and
 dual-ABI Lua admission `.14.2.5.3` advance the current ledger to 8 complete / 6 pending with 42 mutations. Internal
-values/projections are current on all six runtime targets; public authored values and transactions remain future.
+values/projections are current on all six runtime targets. Recurring topology `.14.2.6` adds 11 mutations for a
+current total of 53 without promoting the combined `.14.8` final row; public authored values and transactions
+remain future.

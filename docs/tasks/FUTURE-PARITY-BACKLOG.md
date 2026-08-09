@@ -19776,8 +19776,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   activate task-tree-first.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.5`
-  Status: `active` parent (2026-08-07; projection routing `.2` landed at `10e99190`; exact dual-ABI admission `.3`
-    is active task-tree-first from that clean 167/300 boundary; no push)
+  Status: `completed` (`5dcfc992`, 2026-08-09, through child `.3`, 168/300, no push)
   Goal: Implement one shared Lua typed source-location algebra and admit it independently on PUC Lua and LuaJIT.
   Children: `.14.2.5.0` dual-ABI authority/prerequisite-split audit; `.14.2.5.0.1` seven-alias shared Lua parity;
     `.14.2.5.0.2` exact dual-ABI typed-source RED; `.14.2.5.1` immutable shared core; `.14.2.5.2` helper/unchanged
@@ -20333,8 +20332,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   run directory is removed exactly. Admission `.14.2.5.3` may therefore activate task-tree-first.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.5.3`
-  Status: `signoff-complete` (2026-08-07; task-tree-first from clean projection commit `10e99190`, intended
-    168/300, no push; atomic landing and clean proof next)
+  Status: `completed` (`5dcfc992`, 2026-08-09, 168/300, no push)
   Goal: Admit the unchanged shared Lua value/projection consumer on both PUC Lua and LuaJIT and promote only the
     neutral `lua_dual_abi` rollout leg.
   Depends on: `.14.2.5.2`
@@ -20349,6 +20347,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   Verification: ordinary and canonical consumer once per ABI; neutral 8/6/42 plus independent Lua regression;
     complete dual-ABI/storage/corpus/CLI/book/Knowledge/doctrine/canonical signoff
   Commit: `FUTURE-PARITY-BACKLOG.14.2.5.3 - admit Lua typed source runtime`
+  Commit: `5dcfc992`
 
   ### `FUTURE-PARITY-BACKLOG.14.2.5.3` Acceptance Checklist
 
@@ -20368,7 +20367,7 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   - [x] **NO-DRIFT / BOOK / KNOWLEDGE** — Preserve helpers, byte registers, values/mutations, grammar, public typed/
     transaction/observation/dispatch surfaces, schemas, semantic/MCP/capability state, README, and other backends;
     synchronize the sole-facing book, Knowledge, task/roadmap, memory, changes, development notes, and live status.
-  - [ ] **VERIFY / COMMIT / CLEAN HANDOFF** — Pass ordinary/exact dual-ABI consumers, neutral 8/6/42, complete Lua/
+  - [x] **VERIFY / COMMIT / CLEAN HANDOFF** — Pass ordinary/exact dual-ABI consumers, neutral 8/6/42, complete Lua/
     storage/corpus/CLI, book, Knowledge, all doctrines, definitive canonical CI, atomic commit 168/300, brief
     clearing, post-commit pointer validation, and clean proof before recurring composition `.14.2.6`.
 
@@ -20430,13 +20429,108 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   `[ci] local CI gate passed` marker, and exits zero. Atomic commit 168/300, brief clearing, post-commit pointer
   validation, managed-run cleanup, and clean proof remain before recurring composition `.14.2.6` can activate.
 
+  Commit/handoff evidence 2026-08-09: atomic commit `5dcfc992` lands with first parent `10e99190`; its hook
+  regenerates Knowledge at 789/6,512, passes all seven doctrines, and validates the activation pointer against
+  pre-commit HEAD plus post-commit `HEAD^1`. Status and staged/unstaged diffs are empty, the ignored brief is zero
+  bytes, post-commit memory architecture passes, the rendered book is absent, and managed-run residue is zero.
+  Recurring composition `.14.2.6` may therefore activate task-tree-first.
+
 - ID: `FUTURE-PARITY-BACKLOG.14.2.6`
-  Status: `pending`
+  Status: `done; signoff-complete` (2026-08-09; task-tree-first from clean dual-ABI admission commit `5dcfc992`,
+    atomic commit intended as 169/300 with no push)
   Goal: Compose the six admitted runtime consumers, exact helper/value cases, support ledgers, and canonical opt-in
     behind one repository-routed recurring driver without duplicating final program-wide public no-drift `.14.8`.
+  Depends on: `.14.2.5.3`
   Acceptance: Run neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT in that exact order; bind six runtime roles,
     five consumer sources, exact supported commands, route multiplicity, tracked registration, and canonical opt-in
     through independent omissions. Add no new storage root or hosted workflow.
+  Verification: exact recurring driver order and role/source/command topology; neutral artifact/checker mutation
+    proof; canonical opt-in registration; five backend/six-runtime consumers; support ledgers; storage, book,
+    Knowledge, doctrines, definitive canonical CI, atomic commit, and clean handoff
+  Commit: `FUTURE-PARITY-BACKLOG.14.2.6 - compose typed source runtime proof`
+
+  ### `FUTURE-PARITY-BACKLOG.14.2.6` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove Lua admission `.14.2.5.3` landed at `5dcfc992` as 168/300
+    with first parent `10e99190`, empty status/diffs, zero-byte brief, valid post-commit pointer, absent rendered
+    book, and zero managed-run residue; make this task-tree file the sole activation diff.
+  - [x] **RETRIEVE / FREEZE RECURRING BOUNDARY** — Follow the typed-source ADR, neutral/rollout Knowledge owners,
+    all six admitted consumers, existing recurring-driver precedents, project-data storage, canonical opt-ins, and
+    sole-facing current/future claims before changing executable topology.
+  - [x] **EXACT REPOSITORY-ROUTED DRIVER** — Add one managed recurring driver that runs neutral first, then Perl,
+    Rust, Dart, Julia, PUC Lua, and LuaJIT in exact order using the five existing consumer sources unchanged.
+  - [x] **ROLE / SOURCE / COMMAND GOVERNANCE** — Bind six runtime roles, five tracked consumer paths, exact
+    supported commands, route multiplicity, driver inputs, and independent omission/order/command mutations in the
+    neutral artifact/checker while leaving the combined `.14.8` rollout row pending, preserving rollout at 8/6,
+    and advancing mutation governance from the 42-admission baseline to 53.
+  - [x] **CANONICAL OPT-IN** — Register the exact tracked driver once behind one explicit canonical opt-in without
+    adding a default cost, hosted workflow, storage root, alternate driver, or implicit toolchain assumption.
+  - [x] **NO-DRIFT / BOOK / KNOWLEDGE** — Preserve all runtime values, helper results, registers, schemas, DSL,
+    semantic/MCP/capability state, README, and public `.14.8` no-drift ownership; synchronize the sole-facing book,
+    Knowledge, task/roadmap, memory, changes, development notes, and live status.
+  - [x] **VERIFY / COMMIT / CLEAN HANDOFF** — Pass the exact recurring proof, every support ledger, storage/book/
+    Knowledge/doctrines, definitive canonical CI, atomic commit 169/300, brief clearing, pointer validation, and
+    clean proof before unchanged recomposition `.14.2.7`.
+
+  Activation evidence 2026-08-09: Lua admission `.14.2.5.3` lands atomically at `5dcfc992` as 168/300 with first
+  parent `10e99190` and no push. Hooks regenerate Knowledge at 789/6,512, pass all seven doctrines, and validate
+  pre/post-commit activation pointers. Status plus staged/unstaged diffs are empty, the ignored brief is zero bytes,
+  memory architecture passes, rendered book output is absent, and managed-run residue is zero. This task-tree file
+  is the sole activation diff before any recurring driver, neutral artifact/checker, canonical, book, Knowledge,
+  roadmap, memory, live-doc, or other change.
+
+  Retrieval/root-cause evidence 2026-08-09: ADR `0056` sections 8-9, the `.14.2.0` frozen plan, current rollout
+  Knowledge, and semantic/MCP/cursor recurring precedents establish composition as orchestration over unchanged
+  admitted consumers. One apparent mismatch required history: the executable ledger has no `.14.2.6` rollout row,
+  only pending `recurring_public_no_drift` owned by `.14.8`, whereas adjacent contracts promote a separate recurring
+  leg. Blame and `git -S` prove the combined row originates in neutral commit `e8f6198b`; detailed plan `5a294f39`
+  later froze `.14.2.6` as driver/topology binding and `.14.8` as final examples/tooling/no-drift, and correction
+  `bd777ee8` deliberately changed only stale public rows and runtime owners. The original/current `.14.2.6`
+  acceptance names roles, paths, commands, multiplicity, registration, and opt-in but no rollout promotion;
+  `.14.8` explicitly owns recomposing recurring governance and completing public no-drift. Therefore this leaf
+  adds a governed recurring topology while preserving the combined `.14.8` row pending and the 8/6 rollout from
+  the 8/6/42 admission baseline. It must not invent a fifteenth rollout leg or prematurely consume `.14.8`.
+
+  Implementation evidence 2026-08-09: `tools/check_typed_source_location_six_runtime.sh` enters the existing
+  repository-derived managed run and executes neutral, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, then the three
+  support ledgers in exact fail-fast order. The JSON and independent checker model five backend consumer groups—
+  two Perl paths, one Rust, one Dart, one Julia, and one shared Lua path—and bind them to six runtime routes because
+  Lua executes independently on both ABIs. Exact driver/source/role/command/order/multiplicity/support/canonical
+  markers are locked. Eleven independent topology mutations advance 42 to 53 while rollout remains exact 8/6;
+  one mutation specifically rejects premature completion of the combined `.14.8` row.
+
+  Canonical/storage evidence 2026-08-09: canonical CI rejects the driver while untracked, requires it once as an
+  input and once inside the optional block, audits machine-specific paths, syntax-checks it, and executes it only
+  behind exact `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1`. The outside-CWD workflow-routing oracle includes the driver
+  and proves missing-Julia failure cleanup through the existing project-data initializer. The driver owns no
+  `mktemp`, cache, package store, alternative scratch root, hosted workflow, or default all-toolchain cost. Shell
+  syntax, whitespace, focused neutral 8 complete / 6 pending / 53 mutations, and hostile routing proof pass.
+
+  Lockstep evidence 2026-08-09: the artifact guide and toolbox expose the exact recurring command,
+  five-source/six-route topology, 53-mutation result, canonical switch, and `.14.8` boundary. Five sole-facing
+  pages teach the same current internal recurrence while retaining future authored values, transactions,
+  observations, and progressive/staged dispatch. Each changed explanation is separated into paragraphs and code
+  blocks at source; rendered HTML inspection remains before signoff. A dedicated Knowledge card makes the combined-
+  row root cause and reverify commands searchable, and roadmap/task/memory/change/development/architecture/live
+  projections align without changing root README or runtime/helper/schema behavior.
+
+  Recurring/runtime and rendered-book evidence 2026-08-09: the complete new driver exits zero after neutral
+  8/6/53, Perl 10 tests, Rust 4, Dart 4, Julia 127, PUC Lua 240, LuaJIT 240, and the exact generated-source,
+  capability 80/0/0, and language 246/105+1/122 support authorities. The repository-routed mdBook builds 79 files /
+  14,204 KiB. Direct generated-HTML inspection of all five changed pages proves the recurring explanation, command,
+  canonical switch, topology, limitation, and following material are separate `<p>` and `<pre>` blocks; the
+  rendered artifact is then removed exactly. The in-app browser control surface is unavailable in this session,
+  so no screenshot-level claim is made. Knowledge regenerates/checks at 790 facts / 6,526 question keys; memory
+  architecture, task metadata, README stability, shell syntax, whitespace, and focused routing remain green.
+
+  Definitive signoff evidence 2026-08-09: all seven doctrines pass on the staged slice. The first restricted-
+  harness canonical attempt reaches the representative process-I/O proof after every preceding section passes,
+  then macOS `sandbox-exec` is denied by the outer harness with status 71. The approved canonical rerun crosses
+  that exact boundary: relocated six-family containment passes, all five moved/outside-CWD anchors pass, both CLI
+  environments pass 66/66, RAM is 78% below the 88% guard, and Phase 0 passes 1,031/1,031 in 669 wall-clock
+  seconds. The run recognizes and default-skips the new `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX` opt-in, emits exact
+  `[ci] local CI gate passed`, and exits zero. Atomic commit 169/300, brief clearing, post-commit pointer proof,
+  managed-run cleanup, and clean status proof are the mechanical landing steps before `.14.2.7` activation.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.2.7`
   Status: `pending`
@@ -22640,7 +22734,7 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 100.3 | `FUTURE-PARITY-BACKLOG.14.2.3` | `pending` | Audit, implement, route, and admit Dart through `.0-.3`. |
 | 100.4 | `FUTURE-PARITY-BACKLOG.14.2.4` | `pending` | Audit, implement, route, and admit Julia through `.0-.3`. |
 | 100.5 | `FUTURE-PARITY-BACKLOG.14.2.5` | `pending` | Audit, implement, route, and admit shared Lua independently on both ABIs through `.0-.3`. |
-| 100.6 | `FUTURE-PARITY-BACKLOG.14.2.6` | `pending` | Add exact repository-routed six-runtime recurrence without consuming final public `.14.8`. |
+| 100.6 | `FUTURE-PARITY-BACKLOG.14.2.6` | `done` | Exact repository-routed six-runtime recurrence is signoff-complete without consuming final public `.14.8`. |
 | 100.7 | `FUTURE-PARITY-BACKLOG.14.2.7` | `pending` | Recompose unchanged, close `.14.2`, and hand off cleanly to `.14.3`. |
 | 101 | `FUTURE-PARITY-BACKLOG.14.3` | `pending` | Implement bounded cursor transactions plus progress and safety diagnostics. |
 | 102 | `FUTURE-PARITY-BACKLOG.14.4` | `pending` | Expose recursive entry/match/exit boundaries and bounded provenance read-only. |

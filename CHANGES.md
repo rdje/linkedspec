@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-08-09 — FUTURE-PARITY-BACKLOG.14.2.6 — compose typed source runtime proof
+
+- Added `tools/check_typed_source_location_six_runtime.sh` as one repository-routed recurring driver. It runs the
+  neutral checker, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT in exact order, then generated-source, capability,
+  and language-coverage ledgers.
+- Extended the typed-source artifact/checker with five backend consumer groups, six runtime routes, exact commands,
+  support checks, and canonical opt-in metadata. Eleven independent topology mutations raise governance from 42
+  to 53 while live rollout deliberately remains 8 complete / 6 pending.
+- Registered the tracked driver for untracked-input, path, syntax, and optional canonical execution checks behind
+  `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1`. Added it to the outside-CWD project-data routing oracle without creating
+  a new scratch root or package/cache owner.
+- Root-caused the apparent absence of a separate recurring rollout row. The original contract combines recurring
+  and public no-drift under `.14.8`, while the detailed rollout plan assigns `.14.2.6` only driver/topology binding.
+  The checker now rejects premature completion rather than inventing a fifteenth row or consuming `.14.8` early.
+- Synchronized the artifact guide, toolbox, Knowledge, sole-facing mdBook, task/roadmap/live continuity, and current
+  user-facing limitations. Complete recurrence passes Perl 10, Rust/Dart 4, Julia 127, PUC Lua/LuaJIT 240 each,
+  neutral 8/6/53, and all support ledgers. The book builds 79 files/14,204 KiB with separate rendered paragraph/
+  command blocks; Knowledge is 790/6,526. All seven doctrines and definitive canonical CI pass, including exact
+  six-family containment, moved/outside-CWD execution, CLI 66x2, RAM 78%, and Phase 0 1,031/1,031 in 669 seconds;
+  the run ends with exact `[ci] local CI gate passed` and exit zero.
+
 ## 2026-08-07 — FUTURE-PARITY-BACKLOG.14.2.5.3 — admit Lua typed source runtime
 
 - Removed only the Lua typed-source consumer's RED selector, missing-module translation, conditional projection

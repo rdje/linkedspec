@@ -261,10 +261,20 @@ seven callable compatibility aliases. Two similarly named values—`capture_take
 
 The checker derives coordinates and text independently, executes both state machines, cross-checks current Lua
 helper authority and the Perl alias/internal-id seams, locks 31 diagnostics, verifies canonical tracked execution,
-and rejects 42 mutations. Rollout is 8 complete / 6 pending across 14 legs: the neutral contract, public structure,
-unchanged neutral/public recomposition, and the Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal runtime
-admissions are complete. The two Lua ABIs share one rollout leg because they execute the same consumer source
-independently through distinct runtimes.
+and rejects 53 mutations. Eleven of those mutations govern one recurring topology: five backend consumer groups
+map to exact Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT runtime routes, followed by generated-source, capability,
+and language-coverage ledgers. Run the complete recurring proof with:
+
+```bash
+bash tools/check_typed_source_location_six_runtime.sh
+```
+
+Canonical local CI requires and syntax-checks that driver; `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1` opts into its
+all-toolchain execution. Rollout remains 8 complete / 6 pending across 14 legs: the neutral contract, public
+structure, unchanged neutral/public recomposition, and the Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
+runtime admissions are complete. The two Lua ABIs share one rollout leg because they execute the same consumer
+source independently through distinct runtimes. The combined `recurring_public_no_drift` row remains pending for
+final program-wide owner `FUTURE-PARITY-BACKLOG.14.8`; recurring composition does not promote it early.
 
 No public `Position`/`Span` value, transaction spelling, parser behavior, descriptor or generated schema,
 semantic/MCP projection, or source-authority elevation is claimed by these internal runtime admissions.

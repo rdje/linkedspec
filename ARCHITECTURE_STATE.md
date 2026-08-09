@@ -1,5 +1,25 @@
 # ARCHITECTURE STATE
 
+- `2026-08-09 typed source-location recurring composition`: `FUTURE-PARITY-BACKLOG.14.2.6` adds one
+  repository-routed fail-fast driver over the already-admitted internal consumers. Execution order is neutral,
+  Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, then generated-source, capability, and language-coverage ledgers.
+
+  Five backend source groups map to six runtime routes: Perl owns separate immutable-value and projection files;
+  Rust, Dart, and Julia each own one combined source; and the shared Lua source executes on both ABIs. The neutral
+  artifact/checker now binds the exact driver, paths, roles, source/runtime mapping, commands, order, multiplicity,
+  support ledgers, and canonical `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX` opt-in through 11 independent mutations.
+  Governance advances from 42 to 53 mutations while rollout remains 8 complete / 6 pending.
+
+  The unchanged rollout count is intentional. The original neutral contract combined recurring and public
+  no-drift in one row owned by final program-wide `.14.8`; detailed plan/history assigned `.14.2.6` only recurring
+  driver/topology ownership. This leaf therefore neither invents a fifteenth rollout leg nor completes `.14.8`
+  early. No runtime/helper/register/result/schema/DSL/CLI behavior, root README, hosted workflow, or storage root
+  changes. Full recurrence passes neutral 8/6/53, Perl 10, Rust/Dart 4, Julia 127, PUC Lua/LuaJIT 240 each, and
+  all three support ledgers. The sole-facing book builds 79 files/14,204 KiB with every changed explanation and
+  command in separate rendered blocks; Knowledge is 790/6,526. All seven doctrines and definitive canonical CI
+  pass, including six-family containment, moved/outside-CWD anchors, CLI 66x2, RAM 78%, and Phase 0 1,031/1,031 in
+  669 seconds before the exact local-CI marker and exit zero. Atomic commit 169/300 is the remaining landing step.
+
 - `2026-08-07 Lua typed source-location runtime admission`: `FUTURE-PARITY-BACKLOG.14.2.5.3` changes no
   production Lua module. It removes the test-local RED selector and conditional projection scaffolding from the
   final-path consumer, registers that same complete body once in each PUC Lua/LuaJIT ordinary list, and runs exact

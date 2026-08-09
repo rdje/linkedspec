@@ -31,7 +31,7 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 
 The check is unconditional. It independently derives Unicode-scalar, line/column, and UTF-8 coordinates;
 materializes direct and derived spans; executes invocation and bounded-transaction state transitions; validates
-recursive and zero/one/two-regex structural cases; and rejects all 42 registered mutations.
+recursive and zero/one/two-regex structural cases; and rejects all 53 registered mutations.
 
 The gate then unconditionally runs the admitted Perl value and projection consumers:
 
@@ -69,7 +69,7 @@ bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_t
 bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua
 ```
 
-Its current rollout result is 8 complete / 6 pending with 42 registered mutations. Passing this gate proves the
+Its current rollout result is 8 complete / 6 pending with 53 registered mutations. Passing this gate proves the
 neutral contract, both completed public-structure rows, and all six internal runtime targets across their exact
 value/helper carriers. Rust and Lua retain UTF-8-byte registers, Dart retains UTF-16 code-unit registers, and Julia
 retains zero-based UTF-8 code-unit registers while each converts at its immutable typed boundary. This does not
@@ -87,6 +87,23 @@ canonical command exactly once, rejects stale dormancy, and rejects any regressi
 Lua's admitted consumer covers the same immutable values and 92+7 projections across native, reconstructed, and
 generated-plan execution. The checker requires its tracked path, exact PUC Lua and LuaJIT ordinary and canonical
 commands once each, rejects stale RED dormancy, and rejects regression of completed `lua_dual_abi`.
+
+The same six runtime routes and three support ledgers can be recomposed through one fail-fast driver:
+
+```bash
+bash tools/check_typed_source_location_six_runtime.sh
+```
+
+It executes neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT in exact order, then generated-source,
+capability, and language-coverage checks. Canonical CI always requires, path-audits, and syntax-checks the driver;
+set `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1` to execute it from the canonical gate. The default stays economical
+because this all-toolchain composition is opt-in. Existing project-data routing supplies its run scratch, so the
+driver adds no temporary root or global package cache.
+
+Eleven recurring-topology mutations bring the total to 53. They independently reject missing consumer sources or
+paths, missing/reordered/duplicated runtime routes, command or source-binding drift, support-ledger omission,
+driver/switch drift, and premature completion of the combined final row. Rollout therefore remains 8 complete /
+6 pending until `FUTURE-PARITY-BACKLOG.14.8` closes program-wide public no-drift.
 
 The gate unconditionally verifies the neutral MCP transport before checking all five derived bindings. It requires
 every contract artifact and runs the generators in this exact order before the admitted implementation proofs:

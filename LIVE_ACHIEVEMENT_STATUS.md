@@ -1,5 +1,36 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-09 — Typed source-location has one governed six-runtime recurring proof
+
+`FUTURE-PARITY-BACKLOG.14.2.6` activated task-tree-first from clean Lua admission commit `5dcfc992` as intended
+169/300 with no push. One repository-routed driver now composes the unchanged neutral, Perl, Rust, Dart, Julia,
+PUC Lua, and LuaJIT consumers in exact order, followed by generated-source, capability, and language-coverage
+ledgers.
+
+The contract distinguishes five backend consumer groups from six runtime routes: Perl uses two complementary test
+files, while one shared Lua source executes independently on PUC Lua and LuaJIT. Exact source paths, role/source
+bindings, commands, order, multiplicity, support ledgers, driver path, and canonical switch are now mutation-
+resistant. Eleven new topology mutations advance the independent checker to 53; focused 8/6/53 and hostile
+outside-CWD project-data routing proof pass.
+
+The complete recurring driver also passes Perl 10, Rust 4, Dart 4, Julia 127, PUC Lua 240, LuaJIT 240, and all
+three support ledgers. The sole-facing book builds 79 files/14,204 KiB, and direct generated-HTML inspection proves
+each changed explanation and command is a separate paragraph or code block rather than a stitched blob. Knowledge
+regenerates/checks at 790 facts / 6,526 question keys; the rendered artifact is removed.
+
+Canonical CI requires, path-audits, and syntax-checks the driver and exposes its expensive full execution through
+`LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1`. Existing repository-derived run scratch is reused; no new storage root,
+hosted workflow, CLI option, runtime/helper/register/result/schema/DSL behavior, or root README change is present.
+
+Rollout remains 8 complete / 6 pending because the original contract intentionally combines recurring and final
+public no-drift in one `.14.8` row. Git history and the detailed plan prove `.14.2.6` owns topology only; the new
+checker rejects premature `.14.8` completion. Artifact guide, toolbox, Knowledge, and five sole-facing pages now
+reflect that boundary. All seven doctrines pass. The definitive approved canonical run proves six-family process
+containment, moved/outside-CWD execution, CLI 66/66 in both option environments, RAM 78% below the 88% guard, and
+Phase 0 1,031/1,031 in 669 seconds before exact `[ci] local CI gate passed` and exit zero. The first restricted-
+harness run's status-71 `sandbox-exec` denial is environmental and is crossed by that approved rerun. Atomic commit
+169/300 and its mechanical clean-handoff proof are next; no push.
+
 ## 2026-08-07 — Lua typed source-location runtime is admitted on both ABIs
 
 `FUTURE-PARITY-BACKLOG.14.2.5.3` activated task-tree-first from clean projection commit `10e99190` as intended

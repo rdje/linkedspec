@@ -92,7 +92,7 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 ```
 
 The checker covers 3 decoded sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation
-and 8 transaction transitions, 6 recursive observations, 4 structural cases, 31 diagnostics, and 42 mutations.
+and 8 transaction transitions, 6 recursive observations, 4 structural cases, 31 diagnostics, and 53 mutations.
 It also proves that all 92 current source-boundary helpers project onto the algebra.
 
 This is rollout status, not authored-value status. Eight of 14 rollout legs are complete: the neutral contract,
@@ -119,9 +119,21 @@ Lua implements the same internal boundary beneath exact detached 92+7 catalogs w
 byte registers, values, and mutation timing. The same 240-assertion source runs exactly once on PUC Lua and once on
 LuaJIT under ordinary discovery and canonical CI. The neutral rollout is therefore 8 complete / 6 pending.
 
+One recurring command now composes those already-admitted consumers without adding another value model:
+
+```bash
+bash tools/check_typed_source_location_six_runtime.sh
+```
+
+It runs neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT in order, then the generated-source, capability, and
+language-coverage ledgers. Canonical CI exposes the same all-toolchain proof behind
+`LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1`. Five backend consumer groups become six routes because one shared Lua
+source executes independently on both ABIs. The extra 11 mutations reject topology drift, not authored behavior.
+
 There is still no public `Position` or `Span` authored value, checkpoint syntax, transaction behavior, recursive
-observation API, recurring six-runtime composition, or span-native parser dispatch. Those remain owned by later
-leaves.
+observation API, or span-native parser dispatch. Those remain owned by later leaves. The combined recurring/public
+no-drift rollout row remains pending for final closeout `FUTURE-PARITY-BACKLOG.14.8`, so recurring composition does
+not change the current 8 complete / 6 pending ledger.
 
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions,
 typed spans, or cursor transactions are available as authored values.

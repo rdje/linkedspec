@@ -960,6 +960,30 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   returns only permitted fields or rejects elevation. The neutral `privacy_limited` construction oracle therefore
   contains full private refs even though outward identity requests receive no span, excerpt, or digest.
 
+### 4.9.1 `tools/check_typed_source_location_six_runtime.sh` — exact recurring typed-source proof
+
+- **WHAT:** one repository-routed fail-fast composition of the neutral typed source-location checker; admitted
+  Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT consumers; and generated-source, capability, and language-coverage
+  support ledgers.
+- **WHEN:** changing immutable source positions/spans/derived text, source-boundary helper projections or aliases,
+  runtime admission topology, recurring commands, or any supporting capability ledger.
+- **HOW:** run the complete all-toolchain proof directly:
+
+  ```bash
+  bash tools/check_typed_source_location_six_runtime.sh
+  ```
+
+  Canonical CI always requires and syntax-checks the driver. Use
+  `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1 bash tools/run_ci_local.sh` to opt into the same composition from the
+  canonical gate.
+- **OUTPUT:** neutral governance reports 3 sources, 7 positions, 6 direct spans, 3 derived texts, 8+8 state
+  transitions, 6 recursive observations, 4 structural cases, 92 helper projections + 7 aliases + 2 internal ids,
+  31 diagnostics, 8 complete / 6 pending rollout, and 53 rejected drift mutations. The driver then reports each
+  of the six ordered runtime routes and three support ledgers before its exact success marker.
+- **BOUNDARY:** this is orchestration over existing internal consumers, not a new public typed-value surface. The
+  combined recurring/public no-drift row remains pending for `FUTURE-PARITY-BACKLOG.14.8`. Retrieve
+  [[typed-source-location-recurring-gate]] before changing the source/runtime cardinality or rollout ownership.
+
 ### 4.10 MCP transport materializer and independent validator
 
 - **WHAT:** `tools/materialize_mcp_semantic_transport_contract.py` deterministically reconstructs and digest-checks

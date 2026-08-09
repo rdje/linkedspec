@@ -102,6 +102,12 @@ check_no_untracked_ci_inputs() {
   found=1
  fi
 
+ status_line=$(git status --short --untracked-files=all -- tools/check_typed_source_location_six_runtime.sh)
+ if [[ "$status_line" == '?? '* ]]; then
+  printf '[ci] ERROR: untracked CI input: %s\n' "${status_line#?? }" >&2
+  found=1
+ fi
+
  (( found == 0 )) || exit 1
 }
 
@@ -225,6 +231,7 @@ require_tracked_file tools/check_root_rule_selection_five_backend.sh
 require_tracked_file tools/check_rule_local_cursor_contract.py
 require_tracked_file tools/check_rule_local_cursor_five_backend.sh
 require_tracked_file tools/check_typed_source_location_contract.py
+require_tracked_file tools/check_typed_source_location_six_runtime.sh
 require_tracked_file tools/check_semantic_introspection_contract.py
 require_tracked_file tools/check_semantic_introspection_six_runtime.sh
 require_tracked_file tools/check_mcp_six_runtime.sh
@@ -454,6 +461,9 @@ $semantic_driver_matches"
 mcp_driver_matches=$(grep -nE '/(Users|home)/[^[:space:]]*|[[:alpha:]]:\\\\' tools/check_mcp_six_runtime.sh || true)
 [[ -z "$mcp_driver_matches" ]] || fail "machine-specific absolute path(s) in MCP recurring driver:
 $mcp_driver_matches"
+typed_source_driver_matches=$(grep -nE '/(Users|home)/[^[:space:]]*|[[:alpha:]]:\\\\' tools/check_typed_source_location_six_runtime.sh || true)
+[[ -z "$typed_source_driver_matches" ]] || fail "machine-specific absolute path(s) in typed source-location recurring driver:
+$typed_source_driver_matches"
 
 log "running syntax checks"
 bash -n tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh \
@@ -472,6 +482,7 @@ bash -n tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh \
  tools/check_rule_local_cursor_five_backend.sh \
  tools/check_semantic_introspection_six_runtime.sh \
  tools/check_mcp_six_runtime.sh \
+ tools/check_typed_source_location_six_runtime.sh \
  scripts/check_memory_commit_pointer.sh scripts/check_readme_stability.sh \
  tools/test_memory_commit_pointer.sh \
  tools/check_punctuation_light_five_backend.sh tools/check_scalar_numeric_six_runtime.sh
@@ -860,6 +871,14 @@ if [[ "${LINKEDSPEC_RUN_MCP_MATRIX:-0}" == "1" ]]; then
  bash "$REPO_ROOT/tools/check_mcp_six_runtime.sh"
 else
  log "skipping optional six-runtime MCP composition matrix (set LINKEDSPEC_RUN_MCP_MATRIX=1 when all backend toolchains are available)"
+fi
+
+if [[ "${LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX:-0}" == "1" ]]; then
+ log "running optional six-runtime typed source-location matrix (LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1)"
+ require_tracked_file tools/check_typed_source_location_six_runtime.sh
+ bash "$REPO_ROOT/tools/check_typed_source_location_six_runtime.sh"
+else
+ log "skipping optional six-runtime typed source-location matrix (set LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1 when all backend toolchains are available)"
 fi
 
 if [[ "${LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX:-0}" == "1" ]]; then

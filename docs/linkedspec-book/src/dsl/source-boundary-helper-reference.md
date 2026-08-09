@@ -114,6 +114,16 @@ their preferred spellings, while retaining byte registers and external values. T
 once on each ABI in ordinary and canonical typed-source discovery. Portable new code should still use the preferred
 names because aliases remain migration spellings.
 
+To re-prove the complete internal typed-source boundary across every runtime, run:
+
+```bash
+bash tools/check_typed_source_location_six_runtime.sh
+```
+
+That recurring driver executes the neutral contract, the five backend consumer groups through six runtime routes,
+and the generated-source, capability, and language-coverage ledgers. It changes none of the helper results in this
+reference. Canonical CI offers the same all-toolchain route through `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1`.
+
 For example, this migration-only fixture returns `["é🙂  ", 4, 4, 6]` for input `é🙂  ab` on Perl, Rust, Dart,
 Julia, PUC Lua, and LuaJIT:
 

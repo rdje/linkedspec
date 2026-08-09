@@ -17,7 +17,7 @@ general style. This documentation-only slice changes no parser or runtime behavi
 The backend-neutral typed source-location contract is complete under `FUTURE-PARITY-BACKLOG.14.1.1`. Its
 independent checker passes 3 sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation
 and 8 transaction transitions, 6 recursive observations, 4 structural cases, 92 current helper projections,
-31 diagnostics, and 42 rejected mutations.
+31 diagnostics, and 53 rejected mutations.
 
 Eight of 14 rollout legs are complete and 6 remain pending. The neutral contract, public linked-rule structure,
 unchanged neutral/public recomposition, and all six runtime targets are complete. Their internal authorities and
@@ -45,10 +45,23 @@ their established zero-based UTF-8-byte registers and public results. One shared
 ABI across native, reconstructed, and generated-plan execution and now runs once per ABI in ordinary and canonical
 discovery.
 
+Recurring composition is also complete. One repository-routed driver runs the neutral checker, then Perl, Rust,
+Dart, Julia, PUC Lua, and LuaJIT in exact order, followed by generated-source, capability, and language-coverage
+ledgers:
+
+```bash
+bash tools/check_typed_source_location_six_runtime.sh
+```
+
+Canonical CI requires and syntax-checks that driver; `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1` opts into its complete
+all-toolchain route. Five backend consumer groups map to six runtime routes because the shared Lua source runs once
+on each ABI. Eleven independent topology mutations account for the checker increase from 42 to 53.
+
 Public typed values, transaction spelling and behavior, recursive observation, span-native progressive/staged
-dispatch, recurring six-runtime composition, and all public authored surfaces remain future work. The internal
+dispatch, and all public authored surfaces remain future work. The internal
 Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT admissions do not add an authored `Position` or `Span` value, transaction
-operation, schema version, or new helper result. Rollout is 8 complete / 6 pending.
+operation, schema version, or new helper result. Rollout is 8 complete / 6 pending because the combined recurring/
+public no-drift row remains owned by final program-wide closeout `FUTURE-PARITY-BACKLOG.14.8`.
 
 The helper audit distinguishes 7 callable compatibility aliases from 2 internal Perl contract/scanner ids.
 `capture_take_slice` and `capture_take_slice_len` are internal ids, not accepted helper spellings; authored code

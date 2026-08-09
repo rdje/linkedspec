@@ -17,7 +17,9 @@
     "internal_contract_ids": 2,
     "diagnostics": 31,
     "rollout_legs": 14,
-    "mutations": 42
+    "recurring_source_groups": 5,
+    "recurring_runtime_routes": 6,
+    "mutations": 53
   },
   "policy": {
     "source_identity": "caller-authorized decoded input identity; never a path, backend object, or implicit read authority",
@@ -180,6 +182,41 @@
     {"id": "span_dispatch_capability_denied", "code": "source_location_span_dispatch_capability_denied", "phase": "dispatch", "detection": "runtime", "required_context": ["rule_role", "invocation_role", "source_id", "parser_identity", "capability", "originating_edge_or_job"]},
     {"id": "span_dispatch_policy_denied", "code": "source_location_span_dispatch_policy_denied", "phase": "dispatch", "detection": "runtime", "required_context": ["rule_role", "invocation_role", "source_id", "parser_identity", "policy", "originating_edge_or_job"]}
   ],
+  "recurring_gate": {
+    "driver": "tools/check_typed_source_location_six_runtime.sh",
+    "source_schema": {
+      "fields": ["backend", "paths"],
+      "policy": "five backend source groups are immutable; Perl owns its separate value and projection tests and Lua owns one source shared by both ABIs"
+    },
+    "consumer_sources": [
+      {"backend": "perl", "paths": ["t/typed_source_location_values.t", "t/typed_source_location_perl_contract.t"]},
+      {"backend": "rust", "paths": ["rust/linkedspec-runtime/tests/typed_source_location_contract.rs"]},
+      {"backend": "dart", "paths": ["dart/test/typed_source_location_contract_test.dart"]},
+      {"backend": "julia", "paths": ["julia/test/typed_source_location_contract_test.jl"]},
+      {"backend": "lua", "paths": ["lua/test/typed_source_location_contract_test.lua"]}
+    ],
+    "route_schema": {
+      "fields": ["runtime", "source_backend", "command"],
+      "policy": "neutral runs first; Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT then run exactly once in order"
+    },
+    "runtime_routes": [
+      {"runtime": "perl", "source_backend": "perl", "command": "PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t"},
+      {"runtime": "rust", "source_backend": "rust", "command": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract"},
+      {"runtime": "dart", "source_backend": "dart", "command": "cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/typed_source_location_contract_test.dart"},
+      {"runtime": "julia", "source_backend": "julia", "command": "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/typed_source_location_contract_test.jl\")'"},
+      {"runtime": "puc_lua", "source_backend": "lua", "command": "bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_test.lua"},
+      {"runtime": "luajit", "source_backend": "lua", "command": "bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua"}
+    ],
+    "support_checks": [
+      "perl tools/check_generated_source_contract.pl",
+      "perl tools/check_capability_conformance.pl",
+      "perl tools/check_language_capability_coverage.pl"
+    ],
+    "local_ci": {
+      "driver": "tools/run_ci_local.sh",
+      "switch": "LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX"
+    }
+  },
   "rollout": [
     {"leg": "neutral_contract", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.1.1", "runtimes": []},
     {"leg": "public_structure", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.1.2", "runtimes": []},

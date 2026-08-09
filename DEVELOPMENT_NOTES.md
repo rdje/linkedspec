@@ -1,5 +1,24 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-09 (`FUTURE-PARITY-BACKLOG.14.2.6` — typed-source recurring composition): the recurring driver is an
+  orchestrator, not a seventh value model. Preserve exact fail-fast order: neutral; Perl values plus projections;
+  Rust; Dart; Julia; PUC Lua; LuaJIT; then generated-source, capability, and language-coverage ledgers.
+- Treat consumer-source and runtime-route cardinalities separately. The five backend groups contain two Perl paths,
+  one path each for Rust/Dart/Julia, and one shared Lua path; that Lua path runs twice, producing six runtime routes.
+- Canonical CI must always require, path-audit, and syntax-check the driver. Its all-toolchain execution remains
+  explicitly opt-in through `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1`; do not make it an implicit toolchain/default-
+  cost assumption.
+- The exact ledger stays 8/6 while mutation governance advances 42→53. `recurring_public_no_drift` is deliberately
+  one combined `.14.8` row from the original contract. Do not add a separate `.14.2.6` row or promote the combined
+  row before public authored values, transactions, observations, dispatch examples/tooling, and final no-drift.
+- The driver enters the existing repository-derived managed run and creates no new temporary owner or cache root.
+  Hostile outside-CWD routing and the full recurring proof pass: Perl 10, Rust/Dart 4, Julia 127, PUC Lua/LuaJIT
+  240 each, neutral 8/6/53, and three support ledgers. The 79-file/14,204-KiB sole-facing render exposes the command
+  and boundaries in separate paragraph/code blocks; Knowledge is 790/6,526. All seven doctrines and definitive
+  canonical CI pass with CLI 66x2, RAM 78%, and Phase 0 1,031/1,031 in 669 seconds. A restricted outer harness can
+  deny the nested macOS `sandbox-exec` containment proof with status 71; rerun the unchanged canonical gate in its
+  approved execution context and require the process-containment pass plus exact local-CI marker before signoff.
+
 - 2026-08-07 (`FUTURE-PARITY-BACKLOG.14.2.5.3` — dual-ABI Lua typed-source admission): admission changes test and
   governance registration only. `lua/test/typed_source_location_contract_test.lua` now binds the already-present
   private core and package catalogs unconditionally and executes its complete 240-assertion body. Do not add a

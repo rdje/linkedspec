@@ -33,7 +33,11 @@
 > discovery and canonical CI. Both Lua ABIs share a private immutable value core and exact 92+7 helper projections
 > across native, reconstructed, and generated-plan execution. Their one shared consumer now runs once per ABI in
 > ordinary and canonical discovery and passes 240/240 each while preserving existing UTF-8-byte registers, values,
-> and mutation timing. The neutral rollout is therefore 8 complete / 6 pending with 42 drift mutations.
+> and mutation timing. One repository-routed recurring driver composes neutral, Perl, Rust, Dart, Julia, PUC Lua,
+> and LuaJIT in exact order, then generated-source, capability, and language-coverage ledgers. Run
+> `bash tools/check_typed_source_location_six_runtime.sh`; canonical CI exposes the same all-toolchain proof behind
+> `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1`. Five backend source groups map to six runtime routes because the shared
+> Lua source executes on both ABIs. Governance is 8 complete / 6 pending with 53 drift mutations.
 >
 > Any cursor transaction is one explicit
 > recognition attempt over invocation-local cursor/boundary/marks only; it adds no search tree and cannot undo
@@ -42,8 +46,9 @@
 > lifecycle ownership. The neutral contract and all six internal value/projection runtime targets are admitted.
 > Existing helpers retain their public results and established scalar, byte, or code-unit mark/cursor behavior.
 >
-> Recurring six-runtime composition plus public authored values, transactions, observation, and dispatch remain
-> owned by `FUTURE-PARITY-BACKLOG.14.2.6-.14.8`.
+> Public authored values, transactions, observation, and dispatch remain owned by later leaves. The combined
+> recurring/public no-drift row stays pending for final program-wide owner `FUTURE-PARITY-BACKLOG.14.8`; the
+> recurring driver does not promote it early.
 >
 > **Repeated-action handoff:** Every backend must consume
 > `linkedspec-explicit-repetition-action-result-v1`: bare `OR` is minimum-one repetition, explicit action returns
