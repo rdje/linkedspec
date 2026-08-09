@@ -1,29 +1,31 @@
 ---
 id: exhaustive-current-actionir-capability-proof
-title: Exhaustive current ActionIR proof is 239 bidirectionally checked names and 105 exact cross-backend fixtures
+title: Exhaustive current ActionIR proof is 246 bidirectionally checked names, 105 corpus fixtures, and one exact named-mark fixture
 answers:
   - "what is the final current ActionIR call count"
   - "how many neutral interpreter fixtures are current"
   - "does every backend pass the complete current mdBook language surface"
   - "how does the coverage checker prevent identical backend inventory omissions"
   - "which leaf admitted the six governed capability fixtures"
-date: 2026-07-10
-status: confirmed
+date: 2026-08-09
+status: current at 246 names / 105 corpus fixtures + 1 exact named-mark fixture / 122 public Perl contracts
 tags: [actionir, capability, corpus, perl, rust, dart, julia, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.1.6.1.2.2.5. tools/check_language_capability_coverage.pl reports 239 current call names documented and present in 105 neutral fixtures, with zero book omissions, zero corpus omissions, and zero neutral Perl contract calls missing from Dart/Julia inventories. Perl regeneration and the full Rust, Dart, and Julia gates pass the same 105 exact outputs; capability_conformance/manifest.json marks language.current_mdbook_surface pass on all four backends."
+evidence: "FUTURE-PARITY-BACKLOG.1.6.1.2.2.5 established the original 239-name proof. Subsequent admitted helper work advances the live tools/check_language_capability_coverage.pl result to 246 current names, 105 neutral corpus fixtures plus one exact named-mark fixture, and 122 independently covered public Perl contracts. Perl, Rust, Dart, Julia, and both Lua ABIs consume the governed current surface; FUTURE-PARITY-BACKLOG.14.3.0 uses this count to prove semantic introspection's three illustrative helper effects are not a closed recognition-only effect classification."
 reverify: "perl tools/check_language_capability_coverage.pl --report && perl tools/check_capability_conformance.pl && jq '.case_count' rust/linkedspec-runtime/tests/corpus/manifest.json"
 ---
 
 # Exhaustive Current ActionIR Capability Proof
 
-The admitted current surface contains 239 ActionIR call names and 105 neutral exact-output fixtures. Coverage is
-bidirectional: inventory names must be documented and used by neutral source, while every neutral call that is a
-current Perl contract must occur in the aligned Dart and Julia inventories. That second direction prevents two
-backend-derived inventories from agreeing on the same omission.
+The admitted current surface contains 246 ActionIR call names, 105 neutral corpus fixtures, one exact named-mark
+fixture, and 122 independently covered public Perl contracts. Coverage is bidirectional: inventory names must be
+documented and used by governed source, while every neutral call that is a current Perl contract must occur in the
+aligned backend inventories. That second direction prevents backend-derived inventories from agreeing on the same
+omission.
 
 Name coverage remains a structural prerequisite, not a semantic substitute. Perl generates the frozen expected
-values, and Rust, Dart, and Julia execute those same 105 fixtures. The capability census therefore records the
-complete current mdBook language surface as `pass` for all four variants.
+values, and Rust, Dart, Julia, PUC Lua, and LuaJIT execute the governed corpus. In particular, 246-name coverage
+cannot authorize a recognition-only transaction: `.14.3` must classify every ActionIR contract/effect transitively
+and fail closed on unknown or dynamic effects.
 
 ## Links
 

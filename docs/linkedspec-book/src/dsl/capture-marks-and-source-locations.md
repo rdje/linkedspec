@@ -65,11 +65,41 @@ else:
     restore(checkpoint)
 ```
 
+#### What the current engines do today
+
+There is still no authored transaction syntax. `save_cursor()` and `restore_cursor()` are older cursor-only LIFO
+compatibility controls. They do not save the anonymous boundary or named marks, carry an invocation/source owner,
+or diagnose reuse and escape. They are not aliases for a transaction token.
+
+Named marks are currently isolated by rule label for one parser execution. A `Top` mark and a `Child` mark with the
+same name are independent. Recursive re-entry of `Top`, however, uses the same `Top` bucket; a child invocation can
+overwrite its parent's same-named mark. Transaction work will migrate that lifetime to explicit invocation frames.
+
+Current recursion and repetition protect the process but do not yet expose the future portable diagnostics. A
+direct no-consume recursive call is cut and returns no value; its trace explains the cutoff, but `last_error` stays
+empty. A bounded repeated zero-width match retains one accepted hit and then stops. These are current compatibility
+facts, not the final progress contract.
+
+#### What the transaction-safety audit freezes
+
+Each future transaction token belongs to one source, rule invocation, generation, and originating edge. V1 permits
+one active token per invocation. Commit or rollback is terminal; nesting, escape, caller unwind, cross-rule/source
+use, automatic alternatives, and retry are rejected.
+
+The compiler must classify the complete ActionIR path before executing an uncommitted attempt. Pure reads and value
+construction, bounded recognition/control, staged return, and transaction-owned cursor/boundary/mark writes are the
+only possible v1 effects. User or aggregate mutation, compatibility cursor-stack mutation, output, authored
+diagnostics, exit, unknown/raw code, callable/user functions, parser registry work, external calls, and host effects
+fail closed. Runtime checks remain a backstop for dynamic paths.
+
+The audit deliberately does not promise helper spellings. Exact syntax and how a staged child result becomes
+visible are decided in behavior-free `FUTURE-PARITY-BACKLOG.14.3.1.0`, before any backend behavior changes.
+
 Only cursor/source-boundary state participates. A rollback cannot undo variables, AST mutation, diagnostic or
 output events, parser-registry work, external calls, or host effects. An uncommitted path must therefore remain
 recognition-only; effectful action/lifecycle work occurs after commit. The engine does not search for alternatives,
-unwind callers, or retry automatically. Repetition, recursion, and staged queues must still prove forward progress
-or another well-founded decreasing measure.
+unwind callers, or retry automatically. V1 repetition and recursive edges must prove cursor advance; it exposes no
+authored alternate decreasing-measure API. Later staged-queue progress remains separately owned by `.14.7`.
 
 Recursive rules may eventually expose immutable entry, selected-match, and accepted-exit positions plus bounded
 parent/child provenance. Those observations do not change rule ownership: each child begins at the caller's current

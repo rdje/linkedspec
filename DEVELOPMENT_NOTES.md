@@ -1,5 +1,26 @@
 # DEVELOPMENT NOTES
 
+- 2026-08-09 (`FUTURE-PARITY-BACKLOG.14.3.0` — cursor-transaction safety audit): do not reuse or rename
+  `save_cursor`/`restore_cursor`. Their execution-context stack stores only cursor positions and has no source,
+  invocation, generation, transaction, or terminal authority.
+- Current marks are rule-label scoped for one parse execution. The complete named-mark fixture proves `Top` versus
+  `Child`, not recursive `Top` versus `Top`; the measured recursive probe returns the child's position `2`.
+  Transaction work needs monotonic invocation frames and generation-bound marks/tokens while retaining intrinsic
+  child seek/consume ownership.
+- Current recursion guards and repetition loops are termination mechanisms, not portable diagnostics. Direct
+  no-consume recursion returns `undef`, traces its cutoff, and leaves `last_error` null. Bounded `/x*/` repetition
+  retains one `"Z"` and stops. RED consumers must lock these baselines before each backend implements the neutral
+  nullable/direct/mutual progress failures.
+- `return_descriptor` exposes exact ActionIR nodes and contract ids but no complete effect class; semantic
+  introspection has only three illustrative helper effect rows. V1 recognition must consume a new closed,
+  independently checked effect taxonomy, classify callees transitively, and fail closed on unknown/raw/dynamic or
+  nonrollbackable effects. A runtime barrier remains mandatory.
+- V1 transaction authority is one active opaque token per invocation, bound to source/rule/invocation generation
+  and originating edge. It snapshots only cursor, anonymous boundary, and invocation marks. Commit/rollback is
+  single-use; nesting, escape, aggregate/function storage, cross-rule/source use, caller unwind, alternative search,
+  retry, and authored decreasing measures are outside v1. `.14.3.1.0` selects exact spelling/result exposure before
+  behavior; `.14.3.1.1` then makes the contract executable.
+
 - 2026-08-09 (`FUTURE-PARITY-BACKLOG.14.2.7` — typed-source value/helper closeout): this is strict no-change
   recomposition. Reuse `tools/check_typed_source_location_six_runtime.sh`; do not add an umbrella consumer,
   replacement oracle, second source authority, new rollout row, or final-public claim.

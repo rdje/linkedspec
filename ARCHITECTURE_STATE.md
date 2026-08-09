@@ -1,5 +1,17 @@
 # ARCHITECTURE STATE
 
+- `2026-08-09 cursor transaction safety audit`: `FUTURE-PARITY-BACKLOG.14.3.0` separates current compatibility
+  state from future transactions before behavior. Existing save/restore stacks carry cursor positions only;
+  rule-label mark buckets isolate different labels but not recursive invocations of one label; match/capture
+  registers are already child-framed; recursion/repetition terminate without portable progress diagnostics.
+  V1 therefore requires monotonic invocation frames, opaque source/rule/invocation/generation-bound single-use
+  tokens, cursor/boundary/invocation-mark snapshots, staged recognition results, and one closed transitive ActionIR
+  effect taxonomy with runtime backstop. No nesting, escape, caller unwind, search tree, retry, cross-rule/source
+  use, or decreasing-measure syntax is admitted. `.14.3.1.0` selects exact spelling behavior-free; `.1.1` makes it
+  executable before independent Perl/Rust/Dart/Julia/shared-Lua rollout. `source_location_reversed_span` remains
+  the completed `.14.2` value owner. No production, neutral artifact, schema, fixture, or public-current behavior
+  changes in the audit.
+
 - `2026-08-09 typed source-location value/helper closure`: `FUTURE-PARITY-BACKLOG.14.2.7` recomposes the committed
   neutral contract, six admitted runtime routes, recurring driver, and three support ledgers without replacement
   implementation. Exact proof remains neutral 8 complete / 6 pending / 53 mutations, Perl 10, Rust/Dart 4/4,

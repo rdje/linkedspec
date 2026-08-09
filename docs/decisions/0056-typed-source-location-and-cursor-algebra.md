@@ -137,11 +137,13 @@ phase, and the originating edge/job without leaking source text above the active
 ### 8. Contract and rollout precede syntax or behavior
 
 No source spelling is selected by this decision. `Position`, `Span`, and transaction verbs are architectural names,
-not promised helper identifiers. `FUTURE-PARITY-BACKLOG.14.1` must first define the versioned neutral schema,
-fixtures, coordinate/provenance conversions, state machine, diagnostics, mutations, and current-helper projection.
-Later leaves implement and admit Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT independently, then recompose recurring
-and public no-drift proof. Generated/emitted/reconstructed/descriptor/trace/semantic projections change only in
-explicitly owned descendant leaves if the neutral contract proves they need a new version.
+not promised helper identifiers. `FUTURE-PARITY-BACKLOG.14.1` has defined the versioned base schema, fixtures,
+coordinate/provenance conversions, architectural state machine, diagnostics, mutations, and current-helper
+projection. `.14.2` has independently admitted the internal immutable value/projection layer on Perl, Rust, Dart,
+Julia, PUC Lua, and LuaJIT. Transaction spelling and exact recognition-result exposure remain a separate
+behavior-free decision in `.14.3.1.0`; backend code cannot select them by accident. Generated/emitted/reconstructed/
+descriptor/trace/semantic projections change only in explicitly owned descendant leaves if the executable
+transaction contract proves they need a new version.
 
 ### 9. Freeze the runtime value and compatibility-projection boundary
 
@@ -190,6 +192,39 @@ loaded generated/serialized/emitted plans converge on the same interpreter route
 one execution carrier. A final repository-routed recurring driver composes all six runtimes before `.14.2`
 closeout, while `.14.8` retains final program-wide examples, tooling, and no-drift ownership.
 
+### 10. Freeze the transaction-safety implementation boundary
+
+`FUTURE-PARITY-BACKLOG.14.3.0` audits the live runtimes before transaction behavior. The existing compatibility
+mechanisms are intentionally insufficient:
+
+- `save_cursor`/`restore_cursor` use one execution-context LIFO stack and snapshot only the cursor;
+- named marks are keyed by rule label for one parser execution, so different labels are isolated but a recursive
+  invocation of the same label can overwrite its parent's same-named mark;
+- immediate entry/local-match and anonymous-boundary registers are already saved and restored around child calls;
+- direct/mutual non-progress recursion is silently cut by an active `(rule, cursor)` key; and
+- repetition retains one accepted zero-width hit before stopping, without a portable progress diagnostic.
+
+V1 transaction implementation therefore introduces an explicit invocation frame rather than renaming the
+compatibility cursor stack. Invocation ids are monotonic and non-reused within one parse execution. A token binds
+the source authority, owning rule, invocation id and generation, transaction id, and originating edge/job. It
+snapshots only cursor, anonymous boundary, and the owning invocation's named marks. One token may be active per
+invocation; nesting, escape, aggregate/function storage, caller unwind, cross-rule/source use, retry, and automatic
+alternative search are rejected. Commit or rollback is terminal and invalidates the token. A recognition result is
+staged inside the token until commit and discarded on rollback.
+
+Static admission consumes a closed ActionIR effect classification, not an illustrative semantic-introspection
+sample. Pure values/reads/control, once-only rule recognition, staged return, and typed cursor/boundary/invocation-
+mark writes are the only possible v1 recognition effects. Binding/aggregate/AST mutation, compatibility cursor-
+stack mutation, output or authored diagnostic emission, exit, unknown/RAW_PERL, callable/user-function invocation,
+registry/parser/external work, and host effects fail closed. Transitive callees are classified, and a runtime
+barrier remains mandatory for dynamic paths.
+
+V1 progress proves cursor advance only; it does not select an authored decreasing-measure API. Zero-width success
+remains a value outside a progress-sensitive edge, but it cannot satisfy repetition or recursive progress. Exact
+nullable-repetition and direct/mutual-recursion diagnostics carry rule/invocation/source/edge/start/end context.
+Staged-dispatch cycle ownership remains `.14.7`. The four immutable-value errors—including
+`source_location_reversed_span`—remain `.14.2` owners; `.14.3` composes them and must not implement duplicate codes.
+
 ## Consequences
 
 - Cursor control, capture, recursion, segmentation, and parser composition share one precise model instead of
@@ -198,11 +233,12 @@ closeout, while `.14.8` retains final program-wide examples, tooling, and no-dri
 - Explicit cursor transactions add controlled local speculation without converting LinkedSpec into a packrat,
   PEG backtracking, GLL, or general search-tree parser and without pretending arbitrary side effects can roll back.
 - Progress becomes a portable contract rather than a backend timeout/stack-overflow convention.
-- Current helper APIs and rule-local cursor semantics remain valid; migration can be gradual and mechanically
-  checked.
+- Current helper APIs and intrinsic rule-local cursor policy remain valid. The separately owned `.14.3` migration
+  from execution-wide rule-label mark buckets to invocation frames is explicit, versioned, and mechanically checked.
 - Lossless gap capture gains the common typed representation it anticipated while retaining its separate owner.
-- This decision changes no grammar, helper, parser/compiler/runtime, descriptor, generated format, semantic/MCP
-  response, primary CLI, rollout, admission, or current public feature-completeness claim.
+- This decision and its `.14.3.0` audit amendment change no grammar, helper, parser/compiler/runtime, descriptor,
+  generated format, semantic/MCP response, primary CLI, rollout, admission, or current public feature-completeness
+  claim.
 - The `.14.2.0` planning amendment changes no behavior itself; its exact backend module/test seams and rollout
   correction are durable in the owning task-tree and Knowledge card.
 

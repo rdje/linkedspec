@@ -17,10 +17,10 @@ answers:
   - "which task owns lossless segmentation syntax"
   - "which diagnostics protect cursor and span safety"
   - "what owns the typed cursor span implementation program"
-date: 2026-07-29
-status: accepted direction; executable contract and implementation pending
+date: 2026-08-09
+status: accepted architecture; neutral model and six-runtime internal value/projection layer complete; transaction and later composition legs pending
 tags: [architecture, cursor, source-location, spans, capture, recursion, parser-composition, diagnostics, portability]
-evidence: "Director approval on 2026-07-29 plus ADR 0056. The direction reconciles ADR 0012 staged composition, ADRs 0014/0015 parse jobs and dispatch, ADR 0044 rule-local cursor ownership, ADR 0045 inter-match gaps, the Phase 4 capture/mark taxonomy, and Phase 3's forward-moving non-backtracking model. FUTURE-PARITY-BACKLOG.14.0.1 owns the behavior-free capture and splits executable work into .14.1-.8."
+evidence: "Director approval on 2026-07-29 plus ADR 0056. FUTURE-PARITY-BACKLOG.14.1 completed the executable base model and structural teaching; .14.2 completed the internal immutable value/projection layer on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT at 8 complete / 6 pending / 53 mutations. Behavior-free .14.3.0 now freezes the separate invocation-frame/token/effect/progress implementation boundary without selecting authored syntax or changing behavior."
 reverify: "rg -n 'source-location algebra|Cursor transactions|Progressive and staged parsing consume spans|Lossless segmentation|FUTURE-PARITY-BACKLOG[.]14[.]0[.]1' docs/decisions/0056-typed-source-location-and-cursor-algebra.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -48,6 +48,10 @@ child diagnostics map exactly to the original source. This grants no implicit fi
 execution, or policy authority. Lossless `@capture_gaps` prefix/gap/tail segmentation uses the same span model but
 keeps its existing syntax/lifecycle/migration owner in `docs/tasks/INTER-MATCH-GAP-CAPTURE.md` and ADR `0045`.
 
-ADR `0056` selects no final DSL spelling and changes no current behavior. Neutral schema/fixtures/mutations precede
-backend code; Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT are admitted independently before recurring and public
-no-drift closeout under `FUTURE-PARITY-BACKLOG.14.1-.8`.
+ADR `0056` itself selects no final DSL spelling. The neutral base and six-runtime internal value/projection layer
+are now complete. Exact transaction spelling and committed-result exposure remain a behavior-free decision in
+`.14.3.1.0`; invocation frames, a closed ActionIR effect taxonomy, structured progress diagnostics, independent
+six-runtime admission, recursive observation, gap composition, progressive/staged dispatch, and final public
+no-drift continue under `FUTURE-PARITY-BACKLOG.14.3-.8`.
+
+Related transaction audit: [[cursor-transaction-safety-audit-plan]].

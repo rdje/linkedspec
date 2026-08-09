@@ -20611,9 +20611,328 @@ pass. Canonical CI exits zero with Phase 0 1,031/1,031 in 639 seconds and `[ci] 
   `.14.2` is composition-closed; `.14.3` is the sole next activation and `.14.8` remains unconsumed.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3`
-  Status: `pending`
+  Status: `active` (2026-08-09; task-tree-first from clean value/helper closeout commit `bef75489`, intended
+    171/300, no push)
   Goal: Specify and implement bounded checkpoint/try/commit/rollback cursor transactions plus exact progress,
-    nullable-recursion, stale-mark, reversed-span, and cross-boundary safety diagnostics.
+    nullable-recursion, stale-mark, and cross-boundary safety diagnostics while composing, not re-owning, the
+    already-admitted reversed-span value diagnostic.
+  Depends on: `.14.2.7`
+  Children: `.14.3.0-.14.3.8`; `.0` audits and freezes the contract/split before behavior, `.1` owns the executable
+    neutral state machine, `.2-.6` own Perl/Rust/Dart/Julia/shared-Lua implementation and admission, `.7` owns
+    six-runtime recurrence, and `.8` recomposes unchanged and closes this parent.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.0`
+  Status: `done` (2026-08-09; task-tree-first behavior-free audit from clean `bef75489`, intended 171/300,
+    no push)
+  Goal: Audit current cursor/mark/recursion/repetition/effect semantics and freeze the dependency-complete neutral,
+    syntax, diagnostic, backend, admission, recurrence, and closeout plan before transaction behavior changes.
+  Depends on: `.14.2.7`
+  Acceptance: Retrieve ADR `0056` and canonical Knowledge before inspection; use LinkedSpec's toolbox to map
+    `save_cursor`/`restore_cursor`, anonymous boundaries, named-mark lifetime, rule invocation ownership, recursive
+    and repeated progress, action/effect families, backend control paths, and current diagnostics. Reconcile the
+    stale parent wording that repeats `reversed-span` ownership even though `.14.2` already owns and admits
+    `source_location_reversed_span`; freeze `.14.3` interaction coverage without duplicating that diagnostic.
+    Specify one bounded recognition-only transaction state machine, exact token lifetime/nesting/escape rules,
+    commit/rollback visibility, effect barrier, progress obligations, portable diagnostic payloads, syntax/API
+    decision point, RED-first fixtures, mutations, per-backend seams, independent admissions, recurring topology,
+    storage, mdBook, and `.14.3.1-.8` dependencies. Change no runtime, DSL, neutral executable contract, schema,
+    helper result/register, fixture, CLI, README, storage root, hosted workflow, or public-current behavior.
+  Verification: clean activation and exact parent/subject proof; Knowledge-first retrieval; toolbox-led source and
+    runtime probes; owner/diagnostic contradiction evidence; existing typed-source/mark/cursor/repetition/recursion
+    focused gates; complete no-change census; Knowledge, memory, task metadata, sole-facing book, all doctrines,
+    definitive canonical CI, atomic commit, brief clearing, pointer validation, managed-run cleanup, and clean proof
+  Commit: `FUTURE-PARITY-BACKLOG.14.3.0 - audit cursor transaction safety`
+
+  ### `FUTURE-PARITY-BACKLOG.14.3.0` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove `.14.2.7` landed atomically at `bef75489` as 170/300 with
+    first parent `3ac89665`, exact subject, empty status/diffs, zero-byte brief, valid post-commit pointer, fresh
+    Knowledge, absent rendered book, zero managed-run residue, and this task-tree file as the sole activation diff.
+  - [x] **RETRIEVE / CURRENT AUTHORITY MAP** — Follow ADR `0056`, the typed-source direction and rollout Knowledge,
+    existing rule-local cursor/mark/progress decisions, and toolbox entrypoints before re-deriving current behavior.
+  - [x] **TOOLBOX-LED SEMANTIC AUDIT** — Map exact Perl/Rust/Dart/Julia/Lua owners and observable cursor, boundary,
+    mark, recursion, repetition, call, action/effect, diagnostic, and generated/reconstructed behavior.
+  - [x] **OWNERSHIP RECONCILIATION** — Root-cause the stale `reversed-span` phrase, retain the admitted `.14.2`
+    diagnostic owner, and assign only transaction interaction plus mark/progress/cross-boundary failures to `.14.3`.
+  - [x] **FREEZE CONTRACT / SPLIT** — Freeze the bounded recognition-only state machine, effect barrier, progress
+    proof, diagnostics, fixtures/mutations, syntax decision, backend seams, admissions, recurrence, and `.1-.8`
+    dependency/commit boundaries before executable work.
+  - [x] **LOCKSTEP / NO-BEHAVIOR PROOF** — Synchronize ADR/Knowledge/task/roadmap/memory/live/book plan truth while
+    proving production, executable neutral contract, fixtures, schemas, helper values/registers, CLI, README,
+    storage, hosted workflows, and public-current behavior remain unchanged.
+  - [x] **VERIFY / COMMIT / CLEAN HANDOFF** — Pass focused current-behavior proof, book/Knowledge/memory/task/README,
+    all doctrines, definitive canonical CI, atomic 171/300, brief clearing, pointer validation, managed-run cleanup,
+    and clean proof before neutral contract `.14.3.1` activation.
+
+  Activation evidence 2026-08-09: no-change value/helper closeout `.14.2.7` lands atomically at `bef75489` as
+  170/300 with first parent `3ac89665` and exact subject
+  `FUTURE-PARITY-BACKLOG.14.2.7 - recompose typed source value rollout`. Status plus staged/unstaged diffs are
+  empty, the ignored brief is zero bytes, post-commit memory architecture validates `activation_commit 3ac89665`
+  against `HEAD^1`, Knowledge is fresh, rendered book output is absent, and managed-run census reports
+  `found=0 removed=0 skipped=0`. This task-tree file is the sole activation diff before audit evidence or any other
+  change.
+
+  Retrieval and ownership evidence 2026-08-09: ADR `0056`, the typed-source direction/rollout cards, rule-local
+  cursor/mark decisions, recursion/progress records, current neutral artifact, and `TOOLBOX.md` were retrieved
+  before source or runtime inspection. Git blame proves the parent diagnostic phrase came from architecture commit
+  `64735109` on 2026-07-29, while the later `.14.2.0` plan commit `5a294f39` explicitly assigned
+  `source_location_reversed_span` and the other three immutable-value diagnostics to `.14.2`. That later exact
+  owner wins. `.14.3` owns only transaction interaction, mark lifetime, progress, and cross-rule/source failures;
+  it must reuse rather than duplicate the admitted reversed-span record.
+
+  Toolbox/current-behavior evidence 2026-08-09: `call_spec_handler_subst` lowers `save_cursor()` to
+  `cursor_checkpoint_compatibility`, lowers `restore_cursor()` to a pop from `$info->{cursor_stack}`, and shows
+  mark storage addressed by rule label. The documented `LinkedSpec::Get` example already passes a scalar reference;
+  an earlier by-value probe failure was caller error, not a toolbox defect, so no false `.22` handoff is opened.
+  A correct same-label recursive probe over `aa` returns numeric `2`: the child invocation overwrites the parent's
+  `shared` mark because the current contract is `rule_label -> mark_name -> position`, not invocation identity.
+  A direct no-consume `return(call(Top))` probe returns `undef`, emits the `(rule,position)` recursion-cut trace, and
+  leaves `last_error` null. A bounded `OR{,3}` over `/x*/` returns one `"Z"` and stops without a diagnostic. These
+  are measured current compatibility boundaries, not already-portable transaction/progress behavior.
+
+  Backend authority evidence 2026-08-09: Perl carries `$info->{marks}` and `$info->{cursor_stack}` through generated
+  handlers. Rust `RuntimeContext`, Dart `_RuntimeExecutionContext`, Julia `_RuntimeExecutionContext`, and Lua's
+  runtime context likewise carry rule-label mark maps and one execution-global LIFO cursor stack. All five owners
+  already save/restore immediate entry/local-match plus anonymous capture-boundary registers around child calls.
+  Their recursion guards use active `(rule/entry, cursor)` keys and silently cut a repeated key; repetition loops
+  break after an accepted zero-width iteration. Native/reconstructed/generated carriers re-enter these same runtime
+  seams. Existing `save_cursor`/`restore_cursor` therefore cannot be renamed into transactions: they have no opaque
+  owner/generation, snapshot only the cursor, and cannot diagnose escape, reuse, cross-invocation, or cross-source
+  authority.
+
+  Effect-model evidence 2026-08-09: `return_descriptor` for
+  `state = "wrong"; mark_here(shared); call(Done); return(retv)` reports exact canonical `ASSIGN`, `MARK_HERE`,
+  `CALL`, and `RETURN` nodes plus contract ids, but no purity/effect class. Semantic introspection exposes illustrative
+  effect facts for only `trim`, `match_text`, and `return`; it is not a closed classification of the current 246
+  call names or all ActionIR statement/control forms. Transaction admission must therefore add one independently
+  checked, closed effect taxonomy and transitive call-graph analysis. Unknown/RAW_PERL, user/callable function,
+  binding/aggregate/AST mutation, compatibility cursor-stack mutation, output/diagnostic, exit, registry/parser,
+  external, and host effects fail closed before commit; pure reads/construction/control and typed cursor/boundary/
+  invocation-mark writes are the only v1 candidates, with a runtime barrier as the dynamic backstop.
+
+  Frozen v1 implementation plan 2026-08-09: each parse execution allocates monotonic non-reused invocation ids;
+  each entered rule owns an invocation frame and generation. An opaque token binds source authority, rule identity,
+  invocation id/generation, transaction id, and originating edge/job, and snapshots only cursor, anonymous boundary,
+  and that invocation's named marks. V1 permits one active transaction per invocation: no nesting, aggregate/function
+  storage, return/escape, caller unwind, alternative search, retry, or cross-rule/source use. Commit or rollback is
+  single-use and invalidates the token. A recognition attempt executes one explicitly named rule path once; its
+  return/control result remains staged until commit and is discarded on rollback. Exact authored spellings and
+  staged-result exposure are deliberately selected in behavior-free `.14.3.1.0`, not guessed in this audit; they
+  must remain visibly distinct from `save_cursor`/`restore_cursor` and preserve explicit `call(Rule)` semantics.
+
+  Progress and diagnostic plan 2026-08-09: v1 proves cursor advance only; it selects no authored decreasing-measure
+  API. A zero-width match remains representable outside a progress obligation, but a repetition or direct/mutual
+  recursive edge that accepts without cursor advance emits the existing neutral nullable/direct/mutual progress
+  code with exact source/rule/invocation/edge/start/end context. Transaction tokens use the existing eleven neutral
+  unknown/stale/cross-invocation/invalidated/nesting/escape/double-terminal/effect/cross-rule/cross-source codes;
+  mark-frame migration uses the four existing mark-lifetime codes. Staged-dispatch cycles remain `.14.7`; the four
+  immutable-value diagnostics remain `.14.2`. RED consumers must lock current silent cutoff/one-hit baselines before
+  each backend changes them.
+
+  Frozen slice topology 2026-08-09: neutral parent `.1` splits behavior-free syntax/effect ratification `.1.0`,
+  executable artifact/checker/mutations `.1.1`, and neutral/public-future closeout `.1.2`. Each backend parent
+  `.2-.6` splits dormant RED `.0`, private invocation/token core `.1`, transaction/effect/progress integration `.2`,
+  and independent ordinary/canonical admission `.3`; Lua owns one shared implementation and two ABI admissions.
+  `.7` binds one exact six-runtime recurring route and promotes only transaction safety; `.8` recomposes unchanged,
+  closes this parent, and hands off to `.14.4`. Every behavior slice updates the sole-facing book with separate
+  readable paragraphs and exact current-versus-future claims.
+
+  Final verification 2026-08-09: the focused Perl named-mark/cursor/repeated-result proof passes 301 assertions;
+  typed source-location passes neutral 8 complete / 6 pending / 53 mutations plus Perl 10, Rust/Dart 4/4, Julia
+  127, and PUC Lua/LuaJIT 240/240; repeated-action proof passes neutral 8/0/54 plus Perl 10, Rust/Dart 3/3, Julia
+  162, and PUC Lua/LuaJIT 175/175. Capability remains 80/0/0 and language coverage remains 246 current names /
+  105 corpus + 1 named-mark fixture / 122 public Perl contracts. The complete working census is documentation,
+  Knowledge, task, decision, live, roadmap, and sole-facing book only. The repository-routed book builds 79 files /
+  14,232 KiB, and generated HTML inspection proves the new headings and explanations render as distinct paragraphs,
+  not a stitched blob; the generated book is then removed. Knowledge regenerates/checks at 791 facts / 6,538
+  question keys, memory/task/README checks pass with README unchanged at 105/128 lines and 5,072/6,144 bytes, and
+  all seven doctrines pass. The first restricted canonical run reaches the nested containment proof but receives
+  environmental `sandbox-exec` status 71; the approved authoritative rerun passes containment, moved-root and four
+  outside-CWD anchors, both CLI environments at 66/66, RAM 63% below the 88% guard, and Phase 0 1,031/1,031 in
+  708 wall-clock seconds before exact `[ci] local CI gate passed` and exit zero. Atomic 171/300, zero-byte brief,
+  pointer validation, zero managed-run residue, absent rendered book, and clean status/diffs complete the intended
+  mechanical handoff; exact syntax/result/effect ratification `.14.3.1.0` is next.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.1`
+  Status: `pending`
+  Goal: Adopt the versioned backend-neutral transaction/progress contract, exact fixtures, diagnostics, mutations,
+    public future/current boundary, and canonical registration before backend behavior.
+  Depends on: `.14.3.0`
+  Children: `.14.3.1.0-.14.3.1.2`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.1.0`
+  Status: `pending`
+  Goal: Ratify exact authored transaction spellings, recognition-result exposure, closed effect taxonomy, token
+    lifetime, invocation-mark migration, and cursor-only v1 progress rule without changing executable behavior.
+  Depends on: `.14.3.0`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.1.1`
+  Status: `pending`
+  Goal: Add the independently executable neutral transaction/progress artifact, checker, positive/negative
+    fixtures, ActionIR/effect rows, rollout topology, and exact mutation corpus.
+  Depends on: `.14.3.1.0`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.1.2`
+  Status: `pending`
+  Goal: Recompose the committed neutral authority and truthful public-future boundary unchanged before Perl RED.
+  Depends on: `.14.3.1.1`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.2`
+  Status: `pending`
+  Goal: Implement and independently admit the bounded recognition-only transaction/progress contract in the Perl
+    reference without changing unrelated action, result, register, or rollback semantics.
+  Depends on: `.14.3.1`
+  Children: `.14.3.2.0-.14.3.2.3`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.2.0`
+  Status: `pending`
+  Goal: Freeze dormant Perl RED for tokens, recursive same-label mark frames, recognition attempts, effect barriers,
+    progress diagnostics, source generation, and unchanged compatibility controls.
+  Depends on: `.14.3.1.2`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.2.1`
+  Status: `pending`
+  Goal: Add private Perl invocation-frame, mark-generation, opaque-token, snapshot, and invalidation authority while
+    leaving authored/current routes dormant.
+  Depends on: `.14.3.2.0`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.2.2`
+  Status: `pending`
+  Goal: Integrate the ratified Perl syntax, once-only recognition, staged result, static/runtime effect barrier,
+    invocation marks, structured progress failures, and independently emitted generated source.
+  Depends on: `.14.3.2.1`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.2.3`
+  Status: `pending`
+  Goal: Remove Perl dormancy, register exact ordinary/canonical proof, promote only Perl transaction admission, and
+    synchronize current public guidance.
+  Depends on: `.14.3.2.2`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.3`
+  Status: `pending`
+  Goal: Implement and independently admit exact Rust parity through its native/reconstructed/generated carriers.
+  Depends on: `.14.3.2`
+  Children: `.14.3.3.0-.14.3.3.3`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.3.0`
+  Status: `pending`
+  Goal: Freeze dormant Rust RED against the admitted Perl/neutral authority across native, reconstructed,
+    generated-plan, and independently compiled emitted-source carriers.
+  Depends on: `.14.3.2.3`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.3.1`
+  Status: `pending`
+  Goal: Add private Rust invocation-frame, mark-generation, opaque-token, snapshot, and invalidation authority with
+    current public routes unchanged.
+  Depends on: `.14.3.3.0`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.3.2`
+  Status: `pending`
+  Goal: Integrate exact Rust syntax/runtime/effect/progress parity through native, reconstructed, generated-plan,
+    and independently compiled emitted-source carriers.
+  Depends on: `.14.3.3.1`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.3.3`
+  Status: `pending`
+  Goal: Remove Rust dormancy, register ordinary/canonical proof, and promote only Rust transaction admission.
+  Depends on: `.14.3.3.2`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.4`
+  Status: `pending`
+  Goal: Implement and independently admit exact Dart parity while retaining native UTF-16 register compatibility.
+  Depends on: `.14.3.3`
+  Children: `.14.3.4.0-.14.3.4.3`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.4.0`
+  Status: `pending`
+  Goal: Freeze dormant Dart RED across native, reconstructed, generated-plan, and freshly emitted carriers.
+  Depends on: `.14.3.3.3`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.4.1`
+  Status: `pending`
+  Goal: Add private Dart invocation-frame, mark-generation, opaque-token, snapshot, and invalidation authority while
+    retaining UTF-16 registers and current routes.
+  Depends on: `.14.3.4.0`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.4.2`
+  Status: `pending`
+  Goal: Integrate exact Dart syntax/runtime/effect/progress parity through all required carriers.
+  Depends on: `.14.3.4.1`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.4.3`
+  Status: `pending`
+  Goal: Remove Dart dormancy, register ordinary/canonical proof, and promote only Dart transaction admission.
+  Depends on: `.14.3.4.2`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.5`
+  Status: `pending`
+  Goal: Implement and independently admit exact Julia parity while retaining native code-unit register compatibility.
+  Depends on: `.14.3.4`
+  Children: `.14.3.5.0-.14.3.5.3`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.5.0`
+  Status: `pending`
+  Goal: Freeze dormant Julia RED across native, reconstructed, generated-plan, and independently loaded emitted
+    module carriers.
+  Depends on: `.14.3.4.3`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.5.1`
+  Status: `pending`
+  Goal: Add private Julia invocation-frame, mark-generation, opaque-token, snapshot, and invalidation authority
+    while retaining native code-unit registers and current routes.
+  Depends on: `.14.3.5.0`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.5.2`
+  Status: `pending`
+  Goal: Integrate exact Julia syntax/runtime/effect/progress parity through all required carriers.
+  Depends on: `.14.3.5.1`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.5.3`
+  Status: `pending`
+  Goal: Remove Julia dormancy, register ordinary/canonical proof, and promote only Julia transaction admission.
+  Depends on: `.14.3.5.2`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.6`
+  Status: `pending`
+  Goal: Implement one shared Lua transaction/progress core and independently admit it on PUC Lua and LuaJIT.
+  Depends on: `.14.3.5`
+  Children: `.14.3.6.0-.14.3.6.3`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.6.0`
+  Status: `pending`
+  Goal: Freeze one dormant shared Lua RED source and exact independent PUC Lua/LuaJIT expectations across native,
+    reconstructed, generated-plan, and emitted carriers.
+  Depends on: `.14.3.5.3`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.6.1`
+  Status: `pending`
+  Goal: Add one shared private Lua invocation-frame, mark-generation, opaque-token, snapshot, and invalidation core
+    without current behavior or ABI-specific forks.
+  Depends on: `.14.3.6.0`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.6.2`
+  Status: `pending`
+  Goal: Integrate shared syntax/runtime/effect/progress parity across native, reconstructed, generated-plan, and
+    emitted carriers on both Lua ABIs.
+  Depends on: `.14.3.6.1`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.6.3`
+  Status: `pending`
+  Goal: Remove Lua dormancy, register one consumer exactly once per ABI in ordinary/canonical proof, and promote
+    PUC Lua plus LuaJIT transaction admission independently.
+  Depends on: `.14.3.6.2`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.7`
+  Status: `pending`
+  Goal: Bind the unchanged neutral and five-backend/six-runtime consumers into one exact repository-routed recurring
+    proof with omission/order/multiplicity/storage/canonical governance.
+  Depends on: `.14.3.6`
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.8`
+  Status: `pending`
+  Goal: Recompose the committed contract, six runtime admissions, recurring authority, support ledgers, and public
+    boundary unchanged; close `.14.3` and hand off cleanly to recursive observation `.14.4`.
+  Depends on: `.14.3.7`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.4`
   Status: `pending`
@@ -22809,7 +23128,16 @@ next eligible leaf after the clean Julia commit; recurring `.6` and public/paren
 | 100.5 | `FUTURE-PARITY-BACKLOG.14.2.5` | `done` | Shared Lua immutable values/projections are admitted independently on PUC Lua and LuaJIT. |
 | 100.6 | `FUTURE-PARITY-BACKLOG.14.2.6` | `done` | Exact repository-routed six-runtime recurrence is signoff-complete without consuming final public `.14.8`. |
 | 100.7 | `FUTURE-PARITY-BACKLOG.14.2.7` | `done` | Unchanged recomposition and complete canonical signoff close `.14.2` and hand off cleanly to `.14.3`. |
-| 101 | `FUTURE-PARITY-BACKLOG.14.3` | `pending` | Implement bounded cursor transactions plus progress and safety diagnostics. |
+| 101 | `FUTURE-PARITY-BACKLOG.14.3` | `active` | Audit/freeze, neutral contract, five-backend/six-runtime rollout, recurrence, and no-change closeout are owned by `.0-.8`. |
+| 101.0 | `FUTURE-PARITY-BACKLOG.14.3.0` | `done` | Current authorities and ownership are audited; the exact transaction/progress split is frozen and signoff-complete before behavior. |
+| 101.1 | `FUTURE-PARITY-BACKLOG.14.3.1` | `pending` | Adopt the executable backend-neutral transaction/progress contract before backend code. |
+| 101.2 | `FUTURE-PARITY-BACKLOG.14.3.2` | `pending` | Implement and admit the Perl reference behavior. |
+| 101.3 | `FUTURE-PARITY-BACKLOG.14.3.3` | `pending` | Implement and admit exact Rust parity. |
+| 101.4 | `FUTURE-PARITY-BACKLOG.14.3.4` | `pending` | Implement and admit exact Dart parity. |
+| 101.5 | `FUTURE-PARITY-BACKLOG.14.3.5` | `pending` | Implement and admit exact Julia parity. |
+| 101.6 | `FUTURE-PARITY-BACKLOG.14.3.6` | `pending` | Implement one shared Lua core and admit PUC Lua plus LuaJIT independently. |
+| 101.7 | `FUTURE-PARITY-BACKLOG.14.3.7` | `pending` | Bind exact six-runtime recurrence and governance. |
+| 101.8 | `FUTURE-PARITY-BACKLOG.14.3.8` | `pending` | Recompose unchanged, close `.14.3`, and hand off cleanly to `.14.4`. |
 | 102 | `FUTURE-PARITY-BACKLOG.14.4` | `pending` | Expose recursive entry/match/exit boundaries and bounded provenance read-only. |
 | 103 | `FUTURE-PARITY-BACKLOG.14.5` | `pending` | Compose stable slots and separately owned inter-match gap spans without owner duplication. |
 | 104 | `FUTURE-PARITY-BACKLOG.14.6` | `pending` | Implement authority-preserving span-native progressive parser composition. |

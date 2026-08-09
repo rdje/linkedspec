@@ -42,6 +42,12 @@
 > No-change recomposition `.14.2.7` reruns that exact authority and closes the internal value/helper implementation
 > parent `.14.2`. It adds no replacement backend surface and does not promote the combined final `.14.8` row.
 >
+> Behavior-free transaction audit `.14.3.0` proves every backend still has rule-label mark buckets and an
+> execution-context cursor-only compatibility stack. Child match and anonymous-boundary registers are already
+> framed, but recursive same-label marks, opaque token ownership/generation, a closed ActionIR effect classifier,
+> and structured repetition/recursion progress failures are not. Do not rename `save_cursor`/`restore_cursor` or
+> claim transaction support. Exact source spelling is selected separately before Perl implementation.
+>
 > Any cursor transaction is one explicit
 > recognition attempt over invocation-local cursor/boundary/marks only; it adds no search tree and cannot undo
 > actions, AST/user state, output/diagnostics, registry work, or host effects. Recursive boundaries remain read-only,

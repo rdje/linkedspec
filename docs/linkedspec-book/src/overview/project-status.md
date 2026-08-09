@@ -715,11 +715,14 @@ Three backbone items tracked major structural modernization — all done:
   composition: Unicode-scalar positions, half-open spans, ordered provenance, bounded recognition-only cursor
   transactions, recursive entry/match/exit observations, progress checks, and span-native parser dispatch. The
   neutral contract is complete under `FUTURE-PARITY-BACKLOG.14.1.1`, public rule-shape teaching is current under
-  `.14.1.2`, and the Perl internal runtime is admitted under `.14.2.1.3`; the other five runtime admissions and
-  broader transaction/observation/dispatch work remain future under `.14.2.2-.14.8`. ADR `0045`
-  separately retains gap syntax and lifecycle ownership. The EBNF recursive-regex and portmap complex-regex
-  walkthroughs now preserve those shipped facts as compatibility descriptions, not the target general authoring
-  idiom.
+  `.14.1.2`, and the internal immutable value/helper layer is admitted on Perl, Rust, Dart, Julia, PUC Lua, and
+  LuaJIT and composition-closed under `.14.2`. Behavior-free `.14.3.0` has now audited the separate transaction
+  boundary: current cursor save/restore is cursor-only compatibility state, same-label recursive marks are not yet
+  invocation-local, recursion/repetition terminate without the future structured progress errors, and the complete
+  ActionIR surface has no closed recognition-only effect taxonomy. Exact syntax/effects precede backend behavior
+  under `.14.3.1.0`; broader observation/dispatch work remains future through `.14.8`. ADR `0045` separately retains
+  gap syntax and lifecycle ownership. The EBNF recursive-regex and portmap complex-regex walkthroughs preserve
+  those shipped facts as compatibility descriptions, not the target general authoring idiom.
 - **Semantic introspection / MCP direction** - ADRs `0049`/`0050` and completed neutral leaf `.10.2` make
   `linkedspec-semantic-model-v1` / `linkedspec-semantic-query-v1` executable before backend behavior. Six fixture
   groups and 20 digest-locked queries cover normalized graph/call/shape/staged/generated/diagnostic/explanation/

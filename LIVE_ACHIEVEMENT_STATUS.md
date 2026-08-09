@@ -1,5 +1,35 @@
 # LIVE ACHIEVEMENT STATUS
 
+## 2026-08-09 — Cursor transaction safety is audited and dependency-split before behavior
+
+`FUTURE-PARITY-BACKLOG.14.3.0` activates task-tree-first from clean typed-source closeout `bef75489` as intended
+171/300 with no push. The audit changes no grammar, helper, parser/compiler/runtime, existing fixture, executable
+neutral contract, schema, generated carrier, CLI, README, storage root, hosted workflow, or public-current result.
+
+Toolbox and source evidence distinguish the current compatibility mechanisms from the target. Cursor save/restore
+is a cursor-only execution-context LIFO stack. Marks are keyed by rule label, so different-label children remain
+isolated but recursive same-label children can overwrite their parent. Match and anonymous-boundary registers are
+already framed around child calls. Direct no-consume recursion silently cuts to `undef` with trace-only evidence,
+and zero-width repetition retains one accepted hit before stopping.
+
+The frozen v1 plan adds monotonic invocation frames, opaque source/rule/invocation/generation-bound single-use
+tokens, cursor/boundary/invocation-mark snapshots, staged recognition results, a closed transitive ActionIR effect
+taxonomy, and structured repetition/direct/mutual progress diagnostics. It allows no nesting, escape, caller unwind,
+automatic alternative search, retry, cross-rule/source use, or authored decreasing-measure API. Exact source
+spelling remains a separate behavior-free `.14.3.1.0` decision.
+
+Git history proves the old `.14.3` `reversed-span` phrase predates `.14.2.0`; the already-admitted value diagnostic
+remains `.14.2`-owned. Neutral `.1`, Perl `.2`, Rust `.3`, Dart `.4`, Julia `.5`, shared Lua/two-ABI `.6`, recurring
+`.7`, and no-change closeout `.8` now have exact dependency leaves. The sole-facing book describes present behavior
+and future boundaries in separate readable paragraphs without claiming transaction availability.
+
+Focused current-behavior authorities pass, the no-change census contains only documentation/Knowledge/task/book
+paths, and the repository-routed book builds 79 files/14,232 KiB with direct HTML inspection confirming separate
+headings and paragraphs. Knowledge is fresh at 791 facts / 6,538 question keys and all seven doctrines pass. The
+approved authoritative canonical run passes containment/relocation, CLI 66/66 in both option environments, RAM
+63% below the 88% guard, and Phase 0 1,031/1,031 in 708 seconds before exact local-CI success. Audit `.14.3.0` is
+therefore signoff-complete; `.14.3.1.0` is the next task-tree-first activation after clean atomic 171/300.
+
 ## 2026-08-09 — Typed source-location internal values and helper projections are composition-closed
 
 `FUTURE-PARITY-BACKLOG.14.2.7` activates from clean recurring-proof commit `3ac89665` as intended 170/300 with no

@@ -1,5 +1,26 @@
 # CHANGES
 
+## 2026-08-09 — FUTURE-PARITY-BACKLOG.14.3.0 — audit cursor transaction safety
+
+- Audited current cursor, anonymous-boundary, named-mark, recursion, repetition, ActionIR/effect, diagnostic, and
+  carrier ownership before changing transaction behavior. `save_cursor`/`restore_cursor` remain cursor-only LIFO
+  compatibility state; they are not transaction aliases.
+- Measured the two missing safety boundaries: recursive same-label marks share and overwrite one rule-label bucket,
+  while direct no-consume recursion and repeated zero-width matching terminate without the future structured
+  progress diagnostics. Different-label mark isolation and intrinsic child seek/consume policy remain unchanged.
+- Froze monotonic invocation frames, opaque owner/generation-bound single-use tokens, cursor/boundary/mark-only
+  snapshots, staged recognition results, no nesting/escape/search/retry, cursor-advance-only v1 progress, and a
+  closed fail-safe ActionIR effect taxonomy with transitive static proof plus a runtime barrier.
+- Root-caused stale `reversed-span` ownership: the parent phrase predates `.14.2.0`, which already assigned and
+  admitted `source_location_reversed_span`. `.14.3` composes that record and owns only transaction interaction,
+  mark lifetime, progress, and cross-rule/source failures.
+- Split neutral ratification/artifact/closeout, four leaves per backend, exact dual-ABI Lua admission, six-runtime
+  recurrence, and no-change closeout. Synchronized ADR `0056`, Knowledge, roadmap/live continuity, and the
+  sole-facing book without adding syntax, runtime behavior, fixtures, contracts, schema, or public-current claims.
+- Verified focused current behavior, exact documentation-only file scope, book 79 files/14,232 KiB, Knowledge
+  791/6,538, all seven doctrines, canonical CLI 66/66 in both option environments, RAM 63%, and Phase 0
+  1,031/1,031 in 708 seconds before exact local-CI success.
+
 ## 2026-08-09 — FUTURE-PARITY-BACKLOG.14.2.7 — recompose typed source value rollout
 
 - Re-ran the committed typed source-location recurring authority unchanged: neutral 8/6/53, Perl 10, Rust/Dart

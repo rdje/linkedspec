@@ -109,6 +109,11 @@ No-change recomposition `.14.2.7` reruns this exact driver and closes the intern
 `.14.2`. It adds no umbrella test or replacement oracle. Transactions remain owned by `.14.3`, and the combined
 recurring/public no-drift row remains pending under `.14.8`.
 
+Behavior-free `.14.3.0` adds no transaction test or canonical switch. It audits the current six-runtime baseline
+with the existing typed-source, named-mark, rule-local cursor, repetition, recursion, capability, and language
+authorities. The next neutral leaf must add an independently checked transaction/progress artifact and closed
+ActionIR effect classification before any backend consumer or runtime route can claim support.
+
 The gate unconditionally verifies the neutral MCP transport before checking all five derived bindings. It requires
 every contract artifact and runs the generators in this exact order before the admitted implementation proofs:
 
