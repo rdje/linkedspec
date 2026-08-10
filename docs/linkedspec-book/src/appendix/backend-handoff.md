@@ -59,11 +59,13 @@
 > CI requires, syntax-checks, and executes that consumer exactly once. Only the Perl leg advances, so recognition
 > rollout is 2/9 complete while Rust, Dart, Julia, PUC Lua, LuaJIT, recurring, and public-no-drift remain RED.
 >
-> Rust now has a documentation-hidden private transaction authority behind the dormant consumer's outer custom
-> cfg. Its seven tests prove source-local opaque generations, detached snapshots, falsey-safe staging, invocation-
-> local marks, and restore-before-invalidate lifecycle handling. Ordinary Cargo still runs zero tests for the
-> target, and the nested cfg stops next at missing dedicated ActionIR/effect/progress integration. This changes no
-> parser, engine, generated-source, manifest, canonical-driver, rollout, or current Rust-support claim.
+> Rust now has a documentation-hidden end-to-end integration behind the dormant consumer's nested custom cfg.
+> Four dedicated non-eager expression nodes survive serialized reconstruction; the recursive effect and cursor-
+> progress classifiers enforce the neutral fixtures; and native, reconstructed, generated-plan, and independently
+> compiled emitted-source carriers share the private invocation/cursor/boundary/mark/token authority. The nested
+> contract passes 12 tests, including a false recognized payload, while the outer authority contract remains 7/7
+> and ordinary Cargo still runs zero tests. No manifest or canonical-driver route admits this implementation, so
+> rollout stays 2/9 and current authored Rust support remains unavailable until its separate admission leaf.
 >
 > Any cursor transaction is one explicit
 > recognition attempt over invocation-local cursor/boundary/marks only; it adds no search tree and cannot undo

@@ -128,6 +128,22 @@ pub enum Expr {
     /// A helper function call: `push(results, retv)`
     #[serde(rename = "call")]
     Call { name: String, args: Vec<Arg> },
+    /// Create one rule-local recognition transaction token.
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    #[serde(rename = "recognition_checkpoint")]
+    RecognitionCheckpoint,
+    /// Perform one non-eager static child-rule recognition attempt.
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    #[serde(rename = "recognize_once")]
+    RecognizeOnce { token: String, rule: String },
+    /// Commit one attempted recognition transaction and return its payload.
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    #[serde(rename = "recognition_commit")]
+    RecognitionCommit { token: String },
+    /// Roll back one attempted recognition transaction.
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    #[serde(rename = "recognition_rollback")]
+    RecognitionRollback { token: String },
     /// A scalar assignment operator: `name = value`
     #[serde(rename = "assign_scalar")]
     AssignScalar { name: String, value: Box<Expr> },
@@ -291,6 +307,11 @@ impl Expr {
                 }
                 in_args(args)
             }
+            #[cfg(linkedspec_recognition_transaction_integration_red)]
+            Expr::RecognitionCheckpoint
+            | Expr::RecognizeOnce { .. }
+            | Expr::RecognitionCommit { .. }
+            | Expr::RecognitionRollback { .. } => None,
             Expr::AssignScalar { value, .. } | Expr::AssignArrayAppend { value, .. } => {
                 value.find_removed_aggregate_selector()
             }
@@ -337,6 +358,71 @@ impl Expr {
             | Expr::Undef => None,
         }
     }
+
+    /// Report whether this expression tree contains a dedicated transaction node.
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    pub fn contains_recognition_transaction(&self) -> bool {
+        let args_contain = |args: &[Arg]| {
+            args.iter()
+                .any(|argument| argument.value().contains_recognition_transaction())
+        };
+        let segments_contain = |segments: &[AccessSegment]| {
+            segments.iter().any(|segment| match segment {
+                AccessSegment::Key { .. } => false,
+                AccessSegment::Index { expr } => expr.contains_recognition_transaction(),
+            })
+        };
+        match self {
+            Expr::RecognitionCheckpoint
+            | Expr::RecognizeOnce { .. }
+            | Expr::RecognitionCommit { .. }
+            | Expr::RecognitionRollback { .. } => true,
+            Expr::Call { args, .. } => args_contain(args),
+            Expr::AssignScalar { value, .. } | Expr::AssignArrayAppend { value, .. } => {
+                value.contains_recognition_transaction()
+            }
+            Expr::AssignHashIndex { key, value, .. } => {
+                key.contains_recognition_transaction() || value.contains_recognition_transaction()
+            }
+            Expr::AssignNestedAccess {
+                segments, value, ..
+            } => segments_contain(segments) || value.contains_recognition_transaction(),
+            Expr::IndexedVar { index, .. } => index.contains_recognition_transaction(),
+            Expr::NestedAccess { segments, .. } => segments_contain(segments),
+            Expr::ValueAccess { receiver, segments } => {
+                receiver.contains_recognition_transaction() || segments_contain(segments)
+            }
+            Expr::ArrayLiteral { items } => {
+                items.iter().any(Expr::contains_recognition_transaction)
+            }
+            Expr::HashLiteral { entries } => entries.iter().any(|entry| {
+                entry.key.contains_recognition_transaction()
+                    || entry.value.contains_recognition_transaction()
+            }),
+            Expr::BlockValue { block } => block.contains_recognition_transaction(),
+            Expr::ContextualCodeblockCandidate(candidate) => candidate
+                .codeblock
+                .body_ast
+                .statements
+                .iter()
+                .any(|statement| statement.expr.contains_recognition_transaction()),
+            Expr::CodeblockArgument(codeblock) | Expr::CodeblockLiteral(codeblock) => codeblock
+                .body_ast
+                .statements
+                .iter()
+                .any(|statement| statement.expr.contains_recognition_transaction()),
+            Expr::FluentChain { receiver, calls } => {
+                receiver.contains_recognition_transaction()
+                    || calls.iter().any(|call| args_contain(&call.args))
+            }
+            Expr::Variable { .. }
+            | Expr::StringLiteral { .. }
+            | Expr::NumberLiteral { .. }
+            | Expr::BooleanLiteral { .. }
+            | Expr::RegexLiteral { .. }
+            | Expr::Undef => false,
+        }
+    }
 }
 
 // ── Display for debugging ──
@@ -366,6 +452,16 @@ impl std::fmt::Display for Expr {
                 }
                 write!(f, ")")
             }
+            #[cfg(linkedspec_recognition_transaction_integration_red)]
+            Expr::RecognitionCheckpoint => f.write_str("recognition_checkpoint()"),
+            #[cfg(linkedspec_recognition_transaction_integration_red)]
+            Expr::RecognizeOnce { token, rule } => {
+                write!(f, "recognize_once({token}, call({rule}))")
+            }
+            #[cfg(linkedspec_recognition_transaction_integration_red)]
+            Expr::RecognitionCommit { token } => write!(f, "recognition_commit({token})"),
+            #[cfg(linkedspec_recognition_transaction_integration_red)]
+            Expr::RecognitionRollback { token } => write!(f, "recognition_rollback({token})"),
             Expr::AssignScalar { name, value } => write!(f, "{name} = {value}"),
             Expr::AssignArrayAppend { name, value } => write!(f, "{name} += {value}"),
             Expr::AssignHashIndex { name, key, value } => write!(f, "{name}[{key}] = {value}"),
@@ -509,6 +605,14 @@ impl CodeBlock {
         self.statements
             .iter()
             .find_map(|stmt| stmt.expr.find_removed_aggregate_selector())
+    }
+
+    /// Report whether this block contains a dedicated transaction node.
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    pub fn contains_recognition_transaction(&self) -> bool {
+        self.statements
+            .iter()
+            .any(|statement| statement.expr.contains_recognition_transaction())
     }
 }
 
@@ -1915,6 +2019,10 @@ impl<'a> Parser<'a> {
             }
             self.advance(1); // consume ')'
 
+            #[cfg(linkedspec_recognition_transaction_integration_red)]
+            if let Some(expr) = Self::recognition_transaction_expr(&name, &args)? {
+                return Ok(expr);
+            }
             let expr = self.parse_optional_trailing_block_arg(name, args)?;
             let expr = self.parse_postfix_value_access(expr)?;
             // Parse any fluent chain continuations: .method(args)
@@ -1940,6 +2048,68 @@ impl<'a> Parser<'a> {
             // Plain variable — check for fluent chain too
             let expr = Expr::Variable { name };
             self.parse_fluent_chain(expr)
+        }
+    }
+
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    fn recognition_transaction_expr(name: &str, args: &[Arg]) -> Result<Option<Expr>, String> {
+        let bare = |argument: &Arg| match argument {
+            Arg::Positional(Expr::Variable { name }) => Some(name.clone()),
+            _ => None,
+        };
+        let invalid = || {
+            Err(format!(
+                "LINKEDSPEC_RECOGNITION_TRANSACTION_ERROR:recognition_static_form_required:{name}"
+            ))
+        };
+
+        match name {
+            "recognition_checkpoint" => {
+                if args.is_empty() {
+                    Ok(Some(Expr::RecognitionCheckpoint))
+                } else {
+                    invalid()
+                }
+            }
+            "recognize_once" => {
+                let [token_arg, operand_arg] = args else {
+                    return invalid();
+                };
+                let Some(token) = bare(token_arg) else {
+                    return invalid();
+                };
+                let Arg::Positional(Expr::Call {
+                    name: call_name,
+                    args: call_args,
+                }) = operand_arg
+                else {
+                    return invalid();
+                };
+                let [rule_arg] = call_args.as_slice() else {
+                    return invalid();
+                };
+                let Some(rule) = bare(rule_arg) else {
+                    return invalid();
+                };
+                if call_name != "call" {
+                    return invalid();
+                }
+                Ok(Some(Expr::RecognizeOnce { token, rule }))
+            }
+            "recognition_commit" | "recognition_rollback" => {
+                let [token_arg] = args else {
+                    return invalid();
+                };
+                let Some(token) = bare(token_arg) else {
+                    return invalid();
+                };
+                if name == "recognition_commit" {
+                    Ok(Some(Expr::RecognitionCommit { token }))
+                } else {
+                    Ok(Some(Expr::RecognitionRollback { token }))
+                }
+            }
+            _ => Ok(None),
         }
     }
 

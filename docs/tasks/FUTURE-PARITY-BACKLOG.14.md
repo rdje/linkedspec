@@ -4460,9 +4460,8 @@
   subject, and Rust RED `.14.3.3.0` remains the next task-tree-first activation after a clean post-commit handoff.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.3`
-  Status: `active` (2026-08-10; private Rust transaction authority `.14.3.3.1` signoff-complete from clean
-    dormant-RED closeout `cb9420b1` as intended atomic 189/300; integration `.14.3.3.2` next after clean landing;
-    no push)
+  Status: `active` (2026-08-10; Rust integration `.14.3.3.2` activated task-tree-first from clean private-authority
+    closeout `fd8a1934` as intended atomic 190/300; no push)
   Goal: Implement and independently admit exact Rust parity through its native/reconstructed/generated carriers.
   Depends on: `.14.3.2`
   Children: `.14.3.3.0-.14.3.3.3`
@@ -4689,10 +4688,99 @@
   `.14.3.3.2` remains pending until the clean post-commit boundary.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.3.2`
-  Status: `pending`
+  Status: `complete` (2026-08-10; integration and definitive signoff complete from clean private-authority
+    closeout `fd8a1934`, commit-ready as intended atomic 190/300; admission `.14.3.3.3` next; no push)
   Goal: Integrate exact Rust syntax/runtime/effect/progress parity through native, reconstructed, generated-plan,
     and independently compiled emitted-source carriers.
   Depends on: `.14.3.3.1`
+  Acceptance: Retrieve the neutral transaction authority, ADR `0056`, admitted Perl implementation, frozen Rust
+    consumer, cfg-private Rust authority, current Rust scanner/ActionIR/parser/runtime/source-emitter carriers,
+    typed-source values, Toolbox probes, and canonical/storage owners before implementation. Add the four dedicated
+    non-eager recognition transaction forms to Rust scanning, ActionIR reconstruction, static effect/progress
+    policy, live runtime state, generated-plan execution, and independently compiled emitted source. Bind the
+    existing private authority to real cursor, anonymous-boundary, invocation-mark, child-acceptance, and falsey-
+    safe staged-payload channels without widening public APIs or enabling ordinary discovery. Make the nested cfg
+    consumer GREEN across native, reconstructed, generated-plan, and fresh emitted-source carriers while the outer
+    cfg remains 7/7 and ordinary Cargo remains zero-test. Preserve Perl, other backends, neutral artifact, rollout
+    2/9, public sequence 3/8/14, guide 1/2/6, current Rust authored-support claims, manifest/canonical dormancy,
+    helper results/registers, schemas, CLI, README, mdBook truth, storage roots, and hosted-workflow state. Pass
+    focused integration/current Rust, complete Rust local, neutral/public/guide, book, Knowledge/task/memory/
+    storage/doctrine, and definitive canonical proof; synchronize durable records; commit atomically as 190/300;
+    clear the brief and prove clean before Rust admission `.14.3.3.3` activates.
+  Verification: clean activation; Knowledge/Toolbox-first retrieval; nested cfg exact integration GREEN; outer cfg
+    7/7 and ordinary zero-test dormancy; unchanged recognition 132/246/41 + rollout 2/9 + public 3/8/14 + guide
+    1/2/6; current-suite/no-registration no-drift; book/Knowledge/task/memory/storage/doctrines; canonical CI;
+    atomic clean handoff
+  Commit: `FUTURE-PARITY-BACKLOG.14.3.3.2 - integrate Rust recognition transactions`
+
+  ### `FUTURE-PARITY-BACKLOG.14.3.3.2` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove private authority `.14.3.3.1` landed at full `fd8a1934` as
+    atomic 189/300 with parent `cb9420b1`, exact subject, empty status/diffs, zero-byte brief, valid post-commit
+    pointer, fresh Knowledge/task partitions, absent rendered book, zero managed-run descendants, no background
+    work, and this task-tree file as the sole first activation mutation.
+  - [x] **RETRIEVE / PROBE RUST INTEGRATION SEAMS** — Follow neutral, Perl, frozen RED, private authority,
+    typed-source, scanner/ActionIR/runtime/emitter, ADR, Toolbox, canonical, and storage owners before implementation.
+  - [x] **INTEGRATE DEDICATED STATIC AND LIVE SEMANTICS** — Add exact non-eager nodes, recursive effect closure,
+    cursor-only progress, invocation/mark/token binding, falsey-safe completion, and terminal cleanup.
+  - [x] **PROVE ALL FOUR RUST CARRIERS** — Make nested native, reconstructed, generated-plan, and independently
+    compiled emitted-source assertions GREEN without enabling the target in ordinary or canonical discovery.
+  - [x] **PRESERVE CURRENT ROUTES / PUBLIC TRUTH** — Keep ordinary suites, Perl/other backends, rollout 2/9,
+    public 3/8/14, guide 1/2/6, manifests, canonical registration, README/book, APIs, and storage boundaries exact.
+  - [x] **SIGNOFF / ATOMIC CLEAN HANDOFF** — Synchronize task/index, roadmaps, CHANGES, DEVELOPMENT_NOTES, MEMORY,
+    Knowledge, and mdBook; pass focused/current and definitive canonical gates; commit exactly atomic 190/300 with
+    the frozen subject; clear the brief; and prove pointer/Knowledge/task/residue/book/status clean before `.3`.
+
+  Activation evidence 2026-08-10: private Rust transaction authority `.14.3.3.1` lands at full commit
+  `fd8a19341d7f682636104d778ef7c2b5db5baa41` as atomic 189/300 with first parent
+  `cb9420b167467da55fca18008973b1cb94c00021` and exact subject
+  `FUTURE-PARITY-BACKLOG.14.3.3.1 - add private Rust transaction authority`. Its hook regenerates Knowledge at 807
+  facts / 6,684 question keys, passes all eight doctrines, and validates `activation_commit cb9420b1` against
+  `HEAD^1`. Post-commit status and staged/unstaged diffs are empty; `git_message_brief.txt` is zero bytes; memory,
+  Knowledge, and 26/26 task partitions over 511 stable ids pass; generated book output is absent; the verified-
+  empty hook run container is removed and the managed-run census is zero; and no background result remains. This
+  task-tree file is the sole first activation mutation before index, retrieval/probes, Rust source/tests, checker,
+  canonical driver, book, Knowledge, roadmap, or live-doc changes.
+
+  Integration and focused-carrier evidence 2026-08-10: behind the nested integration cfg, the expression parser
+  normalizes only the four complete static shapes to dedicated `RecognitionCheckpoint`, `RecognizeOnce`,
+  `RecognitionCommit`, and `RecognitionRollback` variants after parsing their arguments, so the static child rule
+  is preserved without eager generic-call execution. Recursive structural discovery covers every expression/block
+  carrier and serde reconstruction preserves the variants. The private authority now exposes the exact neutral
+  recursive-effect fixed point and cursor-progress fixture validator, plus a cfg-private live adapter whose frames
+  synchronize the actual cursor, anonymous boundary, and current invocation's same-label mark bucket. Native and
+  generated-plan engines enter/leave those frames, publish child acceptance independently from payload truthiness,
+  and restore unfinished snapshots before returning terminal failures. Structural AST inspection switches only a
+  transaction-bearing emitted module's compatibility `parse` function to its direct effective-engine route;
+  ordinary emitted modules retain the established path.
+
+  The first full nested execution exposed one dormant harness defect after compilation reached the independent
+  emitted project: its repository-local child manifest sat beneath the parent workspace but neither joined nor
+  excluded it. Adding the standard empty `[workspace]` marker makes the transient project self-owned without
+  changing any assertion or persisted project-data root. The same run then exposed two frozen-plan aliases and the
+  emitted compatibility projection of the transaction result; exact cfg-private aliases plus structural direct
+  routing resolve those carrier seams. After cleanup of outer-only unused/dead cfg paths, final focused proof is
+  nested 12/12, outer authority 7/7, and ordinary discovery 0 tests. All changed-crate warnings are absent in those
+  three states; remaining diagnostic output belongs to the pre-existing `pgen`/`rgx` dependencies.
+
+  Current-route and complete-Rust evidence 2026-08-10: strict changed-crate Clippy passes with only the explicit
+  pre-existing core/runtime categories allowed; its one new finding, a needless cfg-branch `return`, was removed.
+  The neutral oracle remains exactly 132/246/41, rollout 2/9, public 3/8/14, and guide 1/2/6 after the sole-facing
+  book update. Manifests and the canonical driver have no recognition-consumer registration diff. The complete
+  `tools/run_rust_local.sh` gate passes 195 core and 166 runtime unit tests, 105/105 corpus cases, 197 integration
+  tests, every specialized consumer, ordinary recognition discovery at zero tests, the 17-owner project-data and
+  relocation proof, binary build, and CLI 66/66 in both default and POSIX option environments before exact
+  `[rust-ci] Rust local gate passed`. The repository-routed mdBook build produces 79 files / 14,388 KiB; rendered
+  inspection confirms cfg-private Rust integration and unchanged Perl-only admission, then generated output is
+  removed. `rust/target/test-workspaces` has no emitted-project residue.
+
+  Definitive signoff evidence 2026-08-10: after the final code, tests, sole-facing book, Knowledge, task, roadmap,
+  and live-doc synchronization, `tools/run_ci_local.sh` passes all eight doctrines, mandatory neutral and admitted
+  cross-runtime contracts, repository-local storage and moved-root proofs, primary CLI 66/66 in both default and
+  POSIX option environments, RAM 45% below the 88% ceiling, and Phase 0 1,031/1,031 in 735 wall-clock seconds before
+  exact `[ci] local CI gate passed`. The final tracked state still has no recognition manifest/canonical-driver
+  registration, so nested 12/12 integration remains cfg-private, outer authority remains 7/7, ordinary discovery
+  remains zero-test, and admission is owned exclusively by `.14.3.3.3` after atomic 190 lands cleanly.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.3.3`
   Status: `pending`

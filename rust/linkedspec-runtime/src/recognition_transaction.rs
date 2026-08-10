@@ -39,6 +39,21 @@ impl RecognitionFrameState {
             "marks": self.marks,
         })
     }
+
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    pub(crate) fn cursor(&self) -> u64 {
+        self.cursor
+    }
+
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    pub(crate) fn boundary(&self) -> Option<u64> {
+        self.boundary
+    }
+
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    pub(crate) fn marks(&self) -> &BTreeMap<String, u64> {
+        &self.marks
+    }
 }
 
 /// Detached observation of one live recognition frame.
@@ -65,6 +80,11 @@ impl RecognitionFrameSnapshot {
     /// Return only cursor, anonymous-boundary, and named-mark state.
     pub fn state_record(&self) -> Value {
         self.state.as_record()
+    }
+
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    pub(crate) fn state(&self) -> RecognitionFrameState {
+        self.state.clone()
     }
 
     /// Return a detached neutral record.
@@ -296,6 +316,18 @@ impl RecognitionTransactionAuthority {
             generation: frame.generation,
             state: frame.frame_state.clone(),
         })
+    }
+
+    /// Replace the live frame state from its owning runtime registers.
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    pub(crate) fn set_frame_state(
+        &mut self,
+        frame: &RecognitionInvocationFrame,
+        state: RecognitionFrameState,
+    ) -> Result<(), RecognitionTransactionError> {
+        let frame = self.frame_for_authority(frame)?;
+        frame.borrow_mut().frame_state = state;
+        Ok(())
     }
 
     /// Write one invocation-local named mark.
@@ -631,6 +663,357 @@ impl RecognitionTransactionAuthority {
                 ("count", json!(count)),
             ],
         ))
+    }
+}
+
+const ALLOWED_EFFECTS: &[&str] = &[
+    "pure_value",
+    "source_read",
+    "structured_control",
+    "rule_recognition",
+    "transaction_state",
+    "cursor_advance",
+    "capture_boundary_write",
+    "invocation_mark_write",
+    "staged_return",
+];
+
+const REJECTED_EFFECTS: &[&str] = &[
+    "binding_write",
+    "aggregate_write",
+    "ast_or_object_write",
+    "compatibility_cursor_control",
+    "output",
+    "authored_diagnostic",
+    "exit_or_unbounded_control",
+    "dynamic_callable",
+    "parser_registry_or_staged_dispatch",
+    "external_or_host",
+    "unknown_or_raw",
+];
+
+/// Classify one neutral recognition-effect graph by recursive fixed point.
+pub fn classify_recognition_effects(graph: &Value) -> Result<(), RecognitionTransactionError> {
+    let entry = graph
+        .get("entry")
+        .and_then(Value::as_str)
+        .unwrap_or("<entry>");
+    let rules = graph
+        .get("rules")
+        .and_then(Value::as_object)
+        .ok_or_else(|| effect_error("recognition_unknown_effect", entry, "unknown_or_raw"))?;
+    let mut effects = BTreeMap::<String, std::collections::BTreeSet<String>>::new();
+    let mut calls = BTreeMap::<String, Vec<String>>::new();
+
+    for (rule, row) in rules {
+        let base = row
+            .get("base")
+            .and_then(Value::as_array)
+            .ok_or_else(|| effect_error("recognition_unknown_effect", rule, "unknown_or_raw"))?;
+        let mut rule_effects = std::collections::BTreeSet::new();
+        for effect in base {
+            let effect = effect.as_str().unwrap_or("unknown_or_raw");
+            if !ALLOWED_EFFECTS.contains(&effect) && !REJECTED_EFFECTS.contains(&effect) {
+                return Err(effect_error("recognition_unknown_effect", rule, effect));
+            }
+            rule_effects.insert(effect.to_owned());
+        }
+        let callees = row
+            .get("calls")
+            .and_then(Value::as_array)
+            .ok_or_else(|| effect_error("recognition_unknown_effect", rule, "unknown_or_raw"))?
+            .iter()
+            .map(|callee| callee.as_str().unwrap_or("<dynamic>").to_owned())
+            .collect();
+        effects.insert(rule.clone(), rule_effects);
+        calls.insert(rule.clone(), callees);
+    }
+
+    let mut changed = true;
+    while changed {
+        changed = false;
+        for (rule, callees) in &calls {
+            let mut inherited = std::collections::BTreeSet::new();
+            for callee in callees {
+                match effects.get(callee) {
+                    Some(callee_effects) => inherited.extend(callee_effects.iter().cloned()),
+                    None => {
+                        inherited.insert("unknown_or_raw".to_owned());
+                    }
+                }
+            }
+            let target = effects
+                .get_mut(rule)
+                .expect("effect rows and call rows share keys");
+            let before = target.len();
+            target.extend(inherited);
+            changed |= target.len() != before;
+        }
+    }
+
+    let entry_effects = effects
+        .get(entry)
+        .ok_or_else(|| effect_error("recognition_unknown_effect", entry, "unknown_or_raw"))?;
+    if let Some(effect) = entry_effects
+        .iter()
+        .find(|effect| REJECTED_EFFECTS.contains(&effect.as_str()))
+    {
+        let code = if effect == "unknown_or_raw" {
+            "recognition_unknown_effect"
+        } else {
+            "recognition_effect_forbidden"
+        };
+        return Err(effect_error(code, entry, effect));
+    }
+    Ok(())
+}
+
+fn effect_error(code: &'static str, rule: &str, effect: &str) -> RecognitionTransactionError {
+    RecognitionTransactionError::new(
+        code,
+        [
+            ("rule", json!(rule)),
+            ("origin", json!(format!("{rule}:recognize_once"))),
+            ("effect", json!(effect)),
+        ],
+    )
+}
+
+/// Enforce cursor-only progress for accepted repetition and recursive edges.
+pub fn validate_recognition_progress(fixture: &Value) -> Result<(), RecognitionTransactionError> {
+    let context = fixture
+        .get("context")
+        .and_then(Value::as_str)
+        .unwrap_or("unknown");
+    let start = fixture.get("start").and_then(Value::as_u64).unwrap_or(0);
+    let end = fixture.get("end").and_then(Value::as_u64).unwrap_or(0);
+    if end > start || context == "one_shot" {
+        return Ok(());
+    }
+
+    let rule = fixture
+        .get("id")
+        .and_then(Value::as_str)
+        .unwrap_or("<rule>");
+    let code = if context == "accepted_repetition_iteration" {
+        "recognition_zero_progress_repetition"
+    } else {
+        "recognition_zero_progress_recursive_cycle"
+    };
+    let mut fields = vec![
+        ("rule", json!(rule)),
+        ("origin", json!(format!("{rule}:recognize_once"))),
+    ];
+    if code == "recognition_zero_progress_recursive_cycle" {
+        fields.push(("cycle", json!(context)));
+    }
+    fields.push(("start_offset", json!(start)));
+    fields.push(("end_offset", json!(end)));
+    Err(RecognitionTransactionError::new(code, fields))
+}
+
+#[cfg(linkedspec_recognition_transaction_integration_red)]
+#[derive(Clone)]
+pub(crate) struct RecognitionRuntime {
+    state: Rc<RefCell<RecognitionRuntimeState>>,
+}
+
+#[cfg(linkedspec_recognition_transaction_integration_red)]
+impl fmt::Debug for RecognitionRuntime {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        formatter.write_str("RecognitionRuntime(<opaque>)")
+    }
+}
+
+#[cfg(linkedspec_recognition_transaction_integration_red)]
+struct RecognitionRuntimeState {
+    authority: RecognitionTransactionAuthority,
+    frames: Vec<RecognitionLiveFrame>,
+}
+
+#[cfg(linkedspec_recognition_transaction_integration_red)]
+struct RecognitionLiveFrame {
+    rule: String,
+    frame: RecognitionInvocationFrame,
+    tokens: BTreeMap<String, RecognitionLiveToken>,
+    accepted: bool,
+    prior_marks: Option<std::collections::HashMap<String, usize>>,
+}
+
+#[cfg(linkedspec_recognition_transaction_integration_red)]
+struct RecognitionLiveToken {
+    token: RecognitionTransactionToken,
+    snapshot: RecognitionFrameState,
+}
+
+#[cfg(linkedspec_recognition_transaction_integration_red)]
+pub(crate) struct RecognitionInvocationExit {
+    pub(crate) state: RecognitionFrameState,
+    pub(crate) accepted: bool,
+    pub(crate) prior_marks: Option<std::collections::HashMap<String, usize>>,
+}
+
+#[cfg(linkedspec_recognition_transaction_integration_red)]
+impl RecognitionRuntime {
+    pub(crate) fn new(source_authority: Arc<SourceAuthority>, source_identity: &str) -> Self {
+        Self {
+            state: Rc::new(RefCell::new(RecognitionRuntimeState {
+                authority: RecognitionTransactionAuthority::new(source_authority, source_identity),
+                frames: Vec::new(),
+            })),
+        }
+    }
+
+    pub(crate) fn enter(
+        &self,
+        rule: &str,
+        state: RecognitionFrameState,
+        prior_marks: Option<std::collections::HashMap<String, usize>>,
+    ) -> Result<(), RecognitionTransactionError> {
+        let mut runtime = self.state.borrow_mut();
+        let frame =
+            runtime
+                .authority
+                .enter_invocation(rule, &format!("{rule}:handler_entry"), state)?;
+        runtime.frames.push(RecognitionLiveFrame {
+            rule: rule.to_owned(),
+            frame,
+            tokens: BTreeMap::new(),
+            accepted: false,
+            prior_marks,
+        });
+        Ok(())
+    }
+
+    pub(crate) fn note_match(&self) {
+        if let Some(frame) = self.state.borrow_mut().frames.last_mut() {
+            frame.accepted = true;
+        }
+    }
+
+    pub(crate) fn checkpoint(
+        &self,
+        slot: &str,
+        actual: RecognitionFrameState,
+    ) -> Result<(), RecognitionTransactionError> {
+        let mut runtime = self.state.borrow_mut();
+        let RecognitionRuntimeState { authority, frames } = &mut *runtime;
+        let frame = frames.last_mut().expect("recognition invocation is active");
+        authority.set_frame_state(&frame.frame, actual.clone())?;
+        let token = authority.checkpoint(&frame.frame, &format!("{}:{slot}", frame.rule))?;
+        frame.tokens.insert(
+            slot.to_owned(),
+            RecognitionLiveToken {
+                token,
+                snapshot: actual,
+            },
+        );
+        Ok(())
+    }
+
+    pub(crate) fn attempt(
+        &self,
+        slot: &str,
+        matched: bool,
+        payload: Option<Value>,
+        actual: RecognitionFrameState,
+    ) -> Result<bool, RecognitionTransactionError> {
+        let mut runtime = self.state.borrow_mut();
+        let RecognitionRuntimeState { authority, frames } = &mut *runtime;
+        let frame = frames.last_mut().expect("recognition invocation is active");
+        let token = frame.tokens.get(slot).ok_or_else(|| {
+            RecognitionTransactionError::new(
+                "recognition_token_expected",
+                [
+                    ("rule", json!(frame.rule)),
+                    ("origin", json!(format!("{}:recognize_once", frame.rule))),
+                ],
+            )
+        })?;
+        authority.attempt(&frame.frame, &token.token, matched, payload, actual)
+    }
+
+    pub(crate) fn commit(
+        &self,
+        slot: &str,
+        actual: RecognitionFrameState,
+    ) -> Result<Option<Value>, RecognitionTransactionError> {
+        let mut runtime = self.state.borrow_mut();
+        let RecognitionRuntimeState { authority, frames } = &mut *runtime;
+        let frame = frames.last_mut().expect("recognition invocation is active");
+        authority.set_frame_state(&frame.frame, actual)?;
+        let token = frame.tokens.remove(slot).ok_or_else(|| {
+            RecognitionTransactionError::new(
+                "recognition_token_expected",
+                [
+                    ("rule", json!(frame.rule)),
+                    (
+                        "origin",
+                        json!(format!("{}:recognition_commit", frame.rule)),
+                    ),
+                ],
+            )
+        })?;
+        authority.commit(&frame.frame, &token.token)
+    }
+
+    pub(crate) fn rollback(
+        &self,
+        slot: &str,
+        actual: RecognitionFrameState,
+    ) -> Result<RecognitionFrameState, RecognitionTransactionError> {
+        let mut runtime = self.state.borrow_mut();
+        let RecognitionRuntimeState { authority, frames } = &mut *runtime;
+        let frame = frames.last_mut().expect("recognition invocation is active");
+        authority.set_frame_state(&frame.frame, actual)?;
+        let token = frame.tokens.remove(slot).ok_or_else(|| {
+            RecognitionTransactionError::new(
+                "recognition_token_expected",
+                [
+                    ("rule", json!(frame.rule)),
+                    (
+                        "origin",
+                        json!(format!("{}:recognition_rollback", frame.rule)),
+                    ),
+                ],
+            )
+        })?;
+        authority.rollback(&frame.frame, &token.token)?;
+        authority
+            .frame_snapshot(&frame.frame)
+            .map(|snapshot| snapshot.state())
+    }
+
+    pub(crate) fn leave(
+        &self,
+        actual: RecognitionFrameState,
+    ) -> (
+        RecognitionInvocationExit,
+        Result<(), RecognitionTransactionError>,
+    ) {
+        let mut runtime = self.state.borrow_mut();
+        let RecognitionRuntimeState { authority, frames } = &mut *runtime;
+        let mut frame = frames.pop().expect("recognition invocation is active");
+        let sync_result = authority.set_frame_state(&frame.frame, actual.clone());
+        let restored = frame
+            .tokens
+            .values()
+            .next()
+            .map(|token| token.snapshot.clone())
+            .unwrap_or(actual);
+        let result = match sync_result {
+            Ok(()) => authority.leave_invocation(&frame.frame),
+            Err(error) => {
+                let _ = authority.leave_invocation(&frame.frame);
+                Err(error)
+            }
+        };
+        let exit = RecognitionInvocationExit {
+            state: restored,
+            accepted: frame.accepted,
+            prior_marks: frame.prior_marks.take(),
+        };
+        (exit, result)
     }
 }
 

@@ -157,12 +157,14 @@ PERL5LIB= prove -Iperl t/recognition_transaction_perl_contract.t
 
 This is current authored behavior on Perl and completes only the Perl rollout leg.
 
-Rust now also has a private source-local transaction authority behind the dormant consumer's explicit custom cfg.
-Its seven outer-contract tests prove opaque monotonic invocation/frame/token ownership, detached snapshots,
-falsey-safe payload staging, invocation-local marks, and restore-before-invalidate cleanup. Ordinary Cargo still
-runs zero tests for that target, and the Rust parser, ActionIR, engine, generated source, manifest, and canonical
-driver do not activate the module. The nested integration cfg stops at the missing dedicated lowering/effect/
-progress seam, so this private foundation is implementation evidence—not current authored Rust support.
+Rust now also has a cfg-private end-to-end implementation behind the dormant consumer's two explicit custom cfgs.
+The parser normalizes the four forms into dedicated non-eager nodes, serialized ActionIR reconstructs those nodes,
+the neutral effect/progress fixtures are enforced, and live invocation frames synchronize cursor, anonymous
+boundary, current-invocation marks, child acceptance, and staged payload independently of payload truthiness.
+Native, reconstructed, generated-plan, and freshly compiled emitted-source execution pass the nested 12-test
+contract; the outer authority contract remains 7/7 and ordinary Cargo still runs zero tests. Neither the manifest
+nor canonical driver enables this code, so it is internal implementation evidence—not current authored Rust
+support. Admission remains the separately owned next leaf.
 
 The same checker fails closed over three public transaction pages, eight forbidden claims, and fourteen sequence mutations.
 This guards the milestone order alongside the neutral artifact's 41 semantic mutations.

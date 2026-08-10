@@ -324,8 +324,12 @@ impl GeneratedRuleFamily {
             "default" => Some(Self::Default),
             "or_acode" => Some(Self::OrAcode),
             "and_single_acode" => Some(Self::AndSingleAcode),
+            #[cfg(linkedspec_recognition_transaction_integration_red)]
+            "and_regex_only" => Some(Self::AndSingleAcode),
             "and_acode_seq" => Some(Self::AndAcodeSeq),
             "and_bcode" => Some(Self::AndBcode),
+            #[cfg(linkedspec_recognition_transaction_integration_red)]
+            "and_bcode_seq" => Some(Self::AndBcode),
             "or_bcode" => Some(Self::OrBcode),
             "rep_acode" => Some(Self::RepAcode),
             "rep_bcode" => Some(Self::RepBcode),
@@ -688,7 +692,53 @@ pub fn parse_with_trace_and_options_and_diagnostic_output(
 }
 "#,
     );
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    if compiled_spec_contains_recognition_transaction(compiled) {
+        let compatibility_parse = r#"pub fn parse(input: &str) -> Result<serde_json::Value, String> {
+    execute_generated_parser(COMPILED_SPEC_JSON, GENERATED_PLAN, input)
+}"#;
+        let direct_parse = r#"pub fn parse(input: &str) -> Result<serde_json::Value, String> {
+    execute(input).map_err(|error| error.to_string())
+}"#;
+        debug_assert_eq!(source.matches(compatibility_parse).count(), 1);
+        source = source.replacen(compatibility_parse, direct_parse, 1);
+    }
     Ok(source)
+}
+
+#[cfg(linkedspec_recognition_transaction_integration_red)]
+fn compiled_spec_contains_recognition_transaction(compiled: &CompiledSpec) -> bool {
+    if compiled
+        .functions
+        .iter()
+        .any(|function| function.body.contains_recognition_transaction())
+    {
+        return true;
+    }
+    compiled.rules.iter().any(|rule| {
+        [
+            rule.preamble.as_ref(),
+            rule.lxcode.as_ref(),
+            rule.lscode.as_ref(),
+            rule.lecode.as_ref(),
+            rule.ecode.as_ref(),
+            rule.excode.as_ref(),
+            rule.itcode.as_ref(),
+        ]
+        .into_iter()
+        .flatten()
+        .any(linkedspec_core::expr::CodeBlock::contains_recognition_transaction)
+            || rule
+                .acode_dispatch
+                .iter()
+                .filter_map(|entry| entry.code.as_ref())
+                .any(linkedspec_core::expr::CodeBlock::contains_recognition_transaction)
+            || rule
+                .bcode_dispatch
+                .iter()
+                .filter_map(|entry| entry.code.as_ref())
+                .any(linkedspec_core::expr::CodeBlock::contains_recognition_transaction)
+    })
 }
 
 /// Execute generated Rust source with the direct effective-entry value and v2 failures.

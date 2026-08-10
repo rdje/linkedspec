@@ -10,6 +10,31 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-10 — FUTURE-PARITY-BACKLOG.14.3.3.2 — integrate Rust recognition transactions
+
+- Activated task-tree-first from clean private-authority commit `fd8a1934` as intended atomic 190/300.
+- Added four cfg-private, dedicated, non-eager expression nodes with exact authored-form normalization, recursive
+  structural discovery, stable serialization/reconstruction, and neutral-derived recursive-effect/cursor-progress
+  classifiers.
+- Bound native and generated-plan execution to the existing source-local private authority over real cursor,
+  anonymous boundary, recursive same-label invocation marks, linear tokens, explicit child acceptance, and falsey-
+  safe staged payloads. Invocation exit restores unfinished snapshots on both success and error paths.
+- Kept generated source on its ordinary compatibility route unless structural AST inspection finds a transaction;
+  transaction-bearing source reuses the direct effective engine and passes an independently compiled repository-
+  local emitted project. Added the missing empty workspace declaration to that transient project manifest.
+- Made the nested final-path contract GREEN at 12/12 across native, serialized reconstruction, generated plan,
+  emitted source, static policy, and compatibility proof. The outer authority contract remains 7/7; ordinary Cargo
+  remains zero-test and warning-clean.
+- Preserved all manifests/canonical registrations, Perl and every other backend, recognition 132/246/41, rollout
+  2/9, public 3/8/14, guide 1/2/6, schemas, helper results/registers, APIs, CLI, README, and current Perl-only public
+  support. Rust admission remains exclusively owned by `.14.3.3.3`.
+- Formatting, strict changed-crate Clippy, the complete Rust local gate, repository-local storage/relocation, and
+  rendered mdBook proof pass. Rust-local coverage includes 195 core, 166 runtime, 105/105 corpus, 197 integration,
+  every focused group, ordinary transaction discovery at zero tests, and CLI 66/66 twice.
+- Definitive canonical signoff passes all eight doctrines, every mandatory neutral/cross-runtime/storage/relocation
+  proof, CLI 66/66 in both option environments, RAM 45%, and Phase 0 1,031/1,031 in 735 wall-clock seconds before
+  exact `[ci] local CI gate passed`.
+
 ## 2026-08-10 — FUTURE-PARITY-BACKLOG.14.3.3.1 — add private Rust transaction authority
 
 - Activated task-tree-first from clean dormant-RED commit `cb9420b1` as intended atomic 189/300.

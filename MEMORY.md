@@ -5,13 +5,13 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `cb9420b1` — clean dormant-Rust-RED parent for active private authority atomic 189/300; no push.
-- latest_completed_leaf: private Rust transaction authority `.14.3.3.1` is signoff-complete and commit-ready as atomic 189/300; Git will supply the landing hash.
-- active_work_unit: none beyond the completed atomic 189 commit candidate; `.14.3.3.2` is not yet activated.
-- next_action: land atomic 189/300, clear the brief, prove clean, then activate Rust integration `.14.3.3.2` task-tree-first.
+- activation_commit: `fd8a1934` — clean private-Rust-authority parent for active integration atomic 190/300; no push.
+- latest_completed_leaf: cfg-private Rust transaction integration `.14.3.3.2` is signoff-complete and commit-ready as atomic 190/300; Git will supply the landing hash.
+- active_work_unit: none beyond the completed atomic 190 commit candidate; Rust admission `.14.3.3.3` is not yet activated.
+- next_action: land atomic 190/300, clear the brief, prove clean, then activate Rust admission `.14.3.3.3` task-tree-first.
 - in_flight_uncommitted: none in the intended post-landing handoff; no background job or rendered book.
-- blockers: none. Ordinary discovery passes zero tests; outer cfg passes 7/7; nested cfg reaches only the exact
-  `.14.3.3.2` missing ActionIR/effect/progress seam; the complete Rust local and canonical gates pass.
+- blockers: none. Ordinary discovery passes zero tests; outer cfg passes 7/7; nested integration passes 12/12
+  across native/reconstructed/generated-plan/emitted carriers; the complete Rust local and canonical gates pass.
   Recognition remains 132/246/41, rollout 2/9, public 3/8/14; the separate guide guard is 1/2/6.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
@@ -48,12 +48,11 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_transaction_contract: syntax is exact `recognition_checkpoint`,
   `recognize_once(token, call(Rule))`, `recognition_commit`, and `recognition_rollback`; match boolean and staged
   payload are separate. Tokens are linear; effects are closed 9 allowed/11 rejected; marks become invocation-
-  framed; v1 progress is cursor-only. Perl is the first admitted backend: its exact consumer passes 51/51 and is
-  tracked, syntax-checked, and canonically executed once. Rust's cfg-private authority passes its outer consumer
-  7/7 while ordinary discovery stays zero-test; nested integration remains RED at `.14.3.3.2`, so Rust authored
-  support and rollout do not move. Rollout is 2/9 at 41 mutations; public 3/8/14; guide guard 1/2/6.
+  framed; v1 progress is cursor-only. Perl is admitted at 51/51. Rust's cfg-private dedicated nodes, policy,
+  native/reconstructed/generated-plan/emitted carriers pass nested 12/12 while outer remains 7/7 and ordinary
+  discovery stays zero-test. Rust is not admitted, so rollout stays 2/9 at 41 mutations; public 3/8/14; guide 1/2/6.
 - current_future_direction: transaction `.14.3` remains split through neutral `.1`, backend families `.2-.6`,
-  recurring `.7`, and closeout `.8`; Rust `.14.3.3.1` is complete, `.2` is next, and `.14.8` retains no-drift.
+  recurring `.7`, and closeout `.8`; Rust `.14.3.3.2` is complete, admission `.3` is next, and `.14.8` retains no-drift.
 - latest_bootstrap_read: 2026-08-10 — complete roadmap/codebase/mdBook and required continuity/tooling review.
-- pivot_guard: prove atomic 189 cleanly landed before activating Rust integration `.14.3.3.2`.
-- push_policy: hard lock at 300 commits; private Rust authority is commit-ready as atomic 189/300; no push; use wrappers.
+- pivot_guard: prove atomic 190 cleanly landed before activating Rust admission `.14.3.3.3`.
+- push_policy: hard lock at 300 commits; Rust integration is commit-ready as atomic 190/300; no push; use wrappers.

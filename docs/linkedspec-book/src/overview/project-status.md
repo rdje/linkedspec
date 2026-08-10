@@ -116,10 +116,12 @@ effect closure, invocation-local mark/cursor snapshots, falsey-safe commit resul
 errors, and independent generated-source execution. Its exact 51-test final-path consumer is GREEN, tracked,
 syntax-checked, and executed once by canonical CI; only `perl` advances, leaving recognition rollout at 2/9.
 
-Rust now has the next private foundation only. A documentation-hidden custom-cfg module passes the dormant
-consumer's seven authority/lifecycle tests while ordinary Cargo still executes zero tests for that target. The
-nested cfg reaches the missing dedicated ActionIR/effect/progress integration seam; no Rust parser, engine,
-generated-source, manifest, canonical-driver, rollout, or current-support claim changes.
+Rust now has a documentation-hidden end-to-end implementation behind two explicit custom cfgs. Dedicated
+non-eager nodes survive serialized reconstruction, the neutral effect/progress fixtures pass, and the native,
+reconstructed, generated-plan, and independently compiled emitted-source carriers preserve a false recognized
+payload through the private invocation/cursor/boundary/mark/token authority. The nested contract passes 12/12,
+the outer authority contract remains 7/7, and ordinary Cargo still executes zero tests. No manifest or canonical-
+driver route admits the implementation, so rollout and the current Perl-only support claim remain unchanged.
 
 The helper audit distinguishes 7 callable compatibility aliases from 2 internal Perl contract/scanner ids.
 `capture_take_slice` and `capture_take_slice_len` are internal ids, not accepted helper spellings; authored code

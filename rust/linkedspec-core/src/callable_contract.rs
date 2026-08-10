@@ -318,6 +318,11 @@ fn normalize_expr(
             }
             Ok(())
         }
+        #[cfg(linkedspec_recognition_transaction_integration_red)]
+        Expr::RecognitionCheckpoint
+        | Expr::RecognizeOnce { .. }
+        | Expr::RecognitionCommit { .. }
+        | Expr::RecognitionRollback { .. } => Ok(()),
         Expr::Variable { .. }
         | Expr::StringLiteral { .. }
         | Expr::NumberLiteral { .. }

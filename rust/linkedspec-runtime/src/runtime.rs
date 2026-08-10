@@ -134,6 +134,25 @@ pub fn typed_source_compatibility_aliases() -> Value {
     ])
 }
 
+#[cfg(linkedspec_recognition_transaction_integration_red)]
+fn runtime_value_from_json(value: Value) -> RuntimeValue {
+    match value {
+        Value::Null => RuntimeValue::Undef,
+        Value::Bool(value) => RuntimeValue::Bool(value),
+        Value::Number(value) => RuntimeValue::Number(value.as_f64().unwrap_or(0.0)),
+        Value::String(value) => RuntimeValue::Scalar(value),
+        Value::Array(values) => {
+            RuntimeValue::Array(values.into_iter().map(runtime_value_from_json).collect())
+        }
+        Value::Object(values) => RuntimeValue::Hash(
+            values
+                .into_iter()
+                .map(|(key, value)| (key, runtime_value_from_json(value)))
+                .collect(),
+        ),
+    }
+}
+
 #[derive(Clone)]
 struct RuntimeSourceAuthority(Arc<SourceAuthority>);
 
@@ -142,6 +161,11 @@ impl RuntimeSourceAuthority {
         let sources =
             std::collections::BTreeMap::from([(INPUT_SOURCE_ID.to_owned(), input.to_owned())]);
         Self(Arc::new(SourceAuthority::new(&sources)))
+    }
+
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    fn authority(&self) -> Arc<SourceAuthority> {
+        Arc::clone(&self.0)
     }
 }
 
@@ -165,6 +189,14 @@ pub struct RuntimeContext {
     pub input: String,
     /// Opaque per-execution authority for immutable typed source projections.
     source_authority: RuntimeSourceAuthority,
+    /// Cfg-private authority binding for dormant recognition transactions.
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    recognition_transactions: crate::recognition_transaction::RecognitionRuntime,
+    /// Active non-eager recognition scopes publish explicit child acceptance.
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    recognition_scope_depth: usize,
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    recognition_completions: Vec<(String, bool)>,
     /// Current match position in the input.
     pub pos: usize,
     /// Declared scalar variables.
@@ -355,9 +387,19 @@ pub(crate) struct RuntimeVariableStores {
 impl RuntimeContext {
     /// Create a new runtime context for the given input.
     pub fn new(input: &str) -> Self {
+        let source_authority = RuntimeSourceAuthority::new(input);
         Self {
             input: input.to_string(),
-            source_authority: RuntimeSourceAuthority::new(input),
+            #[cfg(linkedspec_recognition_transaction_integration_red)]
+            recognition_transactions: crate::recognition_transaction::RecognitionRuntime::new(
+                source_authority.authority(),
+                INPUT_SOURCE_ID,
+            ),
+            #[cfg(linkedspec_recognition_transaction_integration_red)]
+            recognition_scope_depth: 0,
+            #[cfg(linkedspec_recognition_transaction_integration_red)]
+            recognition_completions: Vec::new(),
+            source_authority,
             pos: 0,
             scalars: std::collections::HashMap::new(),
             arrays: std::collections::HashMap::new(),
@@ -420,6 +462,210 @@ impl RuntimeContext {
         self.marks
             .get(rule_label)
             .is_some_and(|bucket| bucket.contains_key(name))
+    }
+
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    fn recognition_frame_state(
+        &self,
+        rule_label: &str,
+    ) -> crate::recognition_transaction::RecognitionFrameState {
+        let marks = self
+            .marks
+            .get(rule_label)
+            .into_iter()
+            .flat_map(|bucket| bucket.iter())
+            .map(|(name, offset)| {
+                (
+                    name.clone(),
+                    u64::try_from(*offset).expect("Rust cursor offset fits u64"),
+                )
+            })
+            .collect();
+        crate::recognition_transaction::RecognitionFrameState::new(
+            u64::try_from(self.pos).expect("Rust cursor offset fits u64"),
+            self.capture_start
+                .map(|offset| u64::try_from(offset).expect("Rust boundary offset fits u64")),
+            marks,
+        )
+    }
+
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    fn apply_recognition_frame_state(
+        &mut self,
+        rule_label: &str,
+        state: &crate::recognition_transaction::RecognitionFrameState,
+    ) -> Result<(), String> {
+        self.pos = usize::try_from(state.cursor())
+            .map_err(|_| "recognition cursor does not fit this Rust target".to_owned())?;
+        self.capture_start = state
+            .boundary()
+            .map(usize::try_from)
+            .transpose()
+            .map_err(|_| "recognition boundary does not fit this Rust target".to_owned())?;
+        let marks = state
+            .marks()
+            .iter()
+            .map(|(name, offset)| {
+                usize::try_from(*offset)
+                    .map(|offset| (name.clone(), offset))
+                    .map_err(|_| "recognition mark does not fit this Rust target".to_owned())
+            })
+            .collect::<Result<std::collections::HashMap<_, _>, _>>()?;
+        self.marks.insert(rule_label.to_owned(), marks);
+        Ok(())
+    }
+
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    pub(crate) fn enter_recognition_invocation(&mut self, rule_label: &str) -> Result<(), String> {
+        let prior_marks = self.marks.remove(rule_label);
+        self.marks.insert(rule_label.to_owned(), Default::default());
+        let state = self.recognition_frame_state(rule_label);
+        let recognition = self.recognition_transactions.clone();
+        match recognition.enter(rule_label, state, prior_marks.clone()) {
+            Ok(()) => Ok(()),
+            Err(error) => {
+                if let Some(prior_marks) = prior_marks {
+                    self.marks.insert(rule_label.to_owned(), prior_marks);
+                } else {
+                    self.marks.remove(rule_label);
+                }
+                Err(error.to_string())
+            }
+        }
+    }
+
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    pub(crate) fn leave_recognition_invocation(
+        &mut self,
+        rule_label: &str,
+    ) -> Result<bool, String> {
+        let state = self.recognition_frame_state(rule_label);
+        let recognition = self.recognition_transactions.clone();
+        let (exit, terminal) = recognition.leave(state);
+        self.apply_recognition_frame_state(rule_label, &exit.state)?;
+        if let Some(prior_marks) = exit.prior_marks {
+            self.marks.insert(rule_label.to_owned(), prior_marks);
+        } else {
+            self.marks.remove(rule_label);
+        }
+        if self.recognition_scope_depth > 0 {
+            self.recognition_completions
+                .push((rule_label.to_owned(), exit.accepted));
+        }
+        terminal
+            .map(|()| exit.accepted)
+            .map_err(|error| error.to_string())
+    }
+
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    pub(crate) fn note_recognition_match(&mut self) {
+        self.recognition_transactions.note_match();
+    }
+
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    pub(crate) fn begin_recognition_scope(&mut self) -> usize {
+        self.recognition_scope_depth += 1;
+        self.recognition_completions.len()
+    }
+
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    pub(crate) fn finish_recognition_scope(
+        &mut self,
+        completion_base: usize,
+        expected_rule: &str,
+    ) -> Result<bool, String> {
+        self.recognition_scope_depth = self
+            .recognition_scope_depth
+            .checked_sub(1)
+            .expect("recognition scope depth is balanced");
+        let completions = self.recognition_completions.split_off(completion_base);
+        let completion = completions
+            .into_iter()
+            .rev()
+            .find(|(rule, _)| rule == expected_rule)
+            .ok_or_else(|| {
+                format!(
+                    "recognition child '{expected_rule}' did not publish one invocation completion"
+                )
+            })?;
+        Ok(completion.1)
+    }
+
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    pub(crate) fn cancel_recognition_scope(&mut self, completion_base: usize) {
+        self.recognition_scope_depth = self
+            .recognition_scope_depth
+            .checked_sub(1)
+            .expect("recognition scope depth is balanced");
+        self.recognition_completions.truncate(completion_base);
+    }
+
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    pub(crate) fn recognition_result_is_match(&mut self, fallback: bool) -> bool {
+        if self.recognition_scope_depth == 0 {
+            return fallback;
+        }
+        self.recognition_completions
+            .pop()
+            .map(|(_, accepted)| accepted)
+            .unwrap_or(fallback)
+    }
+
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    pub(crate) fn recognition_checkpoint(
+        &mut self,
+        rule_label: &str,
+        slot: &str,
+    ) -> Result<(), String> {
+        let state = self.recognition_frame_state(rule_label);
+        self.recognition_transactions
+            .checkpoint(slot, state)
+            .map_err(|error| error.to_string())
+    }
+
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    pub(crate) fn recognition_attempt(
+        &mut self,
+        rule_label: &str,
+        slot: &str,
+        matched: bool,
+        payload: RuntimeValue,
+    ) -> Result<bool, String> {
+        let state = self.recognition_frame_state(rule_label);
+        self.recognition_transactions
+            .attempt(slot, matched, Some(payload.to_json()), state)
+            .map_err(|error| error.to_string())
+    }
+
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    pub(crate) fn recognition_commit(
+        &mut self,
+        rule_label: &str,
+        slot: &str,
+    ) -> Result<RuntimeValue, String> {
+        let state = self.recognition_frame_state(rule_label);
+        self.recognition_transactions
+            .commit(slot, state)
+            .map(|payload| {
+                payload
+                    .map(runtime_value_from_json)
+                    .unwrap_or(RuntimeValue::Undef)
+            })
+            .map_err(|error| error.to_string())
+    }
+
+    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    pub(crate) fn recognition_rollback(
+        &mut self,
+        rule_label: &str,
+        slot: &str,
+    ) -> Result<(), String> {
+        let state = self.recognition_frame_state(rule_label);
+        let recognition = self.recognition_transactions.clone();
+        let restored = recognition
+            .rollback(slot, state)
+            .map_err(|error| error.to_string())?;
+        self.apply_recognition_frame_state(rule_label, &restored)
     }
 
     pub(crate) fn typed_mark_set(

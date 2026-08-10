@@ -2,27 +2,27 @@
 
 ## Current Activity
 
-- Private Rust transaction authority `FUTURE-PARITY-BACKLOG.14.3.3.1` is signoff-complete from clean dormant-RED
-  commit `cb9420b1` and commit-ready as intended atomic 189/300. The cfg-only module and repaired/strengthened
-  dormant consumer pass 7/7; ordinary Cargo still executes zero tests.
-- The nested cfg now reaches only `.14.3.3.2` missing ActionIR/effect/progress integration. The complete Rust local
-  and definitive canonical gates pass, including CLI 66x2, RAM 65%, Phase 0 1,031/1,031 in 701 seconds, and
-  repository-storage proof. Production and rollout remain unchanged at recognition 132/246/41, 2/9, public
-  3/8/14, and guide 1/2/6.
+- Rust transaction integration `FUTURE-PARITY-BACKLOG.14.3.3.2` is signoff-complete from clean private-authority
+  commit `fd8a1934` and commit-ready as intended atomic 190/300. Dedicated cfg-private nodes, policy, live state,
+  generated-plan, and emitted-source carriers pass nested 12/12; outer remains 7/7 and ordinary Cargo runs zero.
+- The complete Rust local and definitive canonical gates pass, including CLI 66x2, repository-storage proof, and
+  Phase 0 1,031/1,031. Production admission and public truth remain unchanged at recognition 132/246/41, rollout
+  2/9, public 3/8/14, and guide 1/2/6; Rust admission `.14.3.3.3` is next after clean landing.
 
 ## Latest Completed Slice
 
-- `FUTURE-PARITY-BACKLOG.14.3.3.1` — private Rust transaction authority is commit-ready as atomic 189/300.
-- `cb9420b1` — dormant Rust transaction RED landed as atomic 188/300.
+- `FUTURE-PARITY-BACKLOG.14.3.3.2` — cfg-private Rust transaction integration is commit-ready as atomic 190/300.
+- `fd8a1934` — private Rust transaction authority landed as atomic 189/300.
 
 ## Next Action
 
-- Land private Rust authority `.14.3.3.1` as atomic 189/300, prove the clean handoff, then activate integration
-  `.14.3.3.2` task-tree-first.
+- Land Rust integration `.14.3.3.2` as atomic 190/300, prove the clean handoff, then activate admission
+  `.14.3.3.3` task-tree-first.
 
 ## Recent Completions
 
-- `2026-08-10` — `.14.3.3.1` completed private Rust authority signoff for atomic 189/300.
+- `2026-08-10` — `.14.3.3.2` completed cfg-private Rust integration signoff for atomic 190/300.
+- `2026-08-10` — `fd8a1934` landed private Rust authority as atomic 189/300.
 - `2026-08-10` — `cb9420b1` froze and signed off the dormant Rust transaction RED as atomic 188/300.
 - `2026-08-10` — `.14.3.2.3` admitted Perl recognition transactions for atomic 187/300.
 - `2026-08-10` — `.14.3.2.2` integrated Perl recognition transactions for atomic 186/300.
@@ -37,7 +37,6 @@
 - `2026-08-09` — `99fe03f3` bounded live status over exact history as atomic 177/300.
 - `2026-08-09` — `dc8dd896` froze the bounded document-store contract as atomic 176/300.
 - `2026-08-09` — `0bcb5a36` recomposition-closed README routing pressure as atomic 175/300.
-- `2026-08-09` — `5c570719` enforced 20 routed surfaces and 62 routes as atomic 174/300.
 
 ## History
 

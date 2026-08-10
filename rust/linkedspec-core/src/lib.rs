@@ -10,6 +10,11 @@
 //! The Perl reference implementation lives at `perl/LinkedSpec.pm`.
 //! The Rust implementation is idiomatic Rust — it does NOT mimic Perl internals.
 
+#![allow(
+    unexpected_cfgs,
+    reason = "the dormant transaction integration is selected only by an explicit test cfg"
+)]
+
 pub mod ast;
 pub mod callable_contract;
 pub mod compiler;

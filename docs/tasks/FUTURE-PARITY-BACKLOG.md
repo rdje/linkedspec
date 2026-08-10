@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-10` (private Rust transaction authority `.14.3.3.1` is signoff-complete from clean
-  dormant-RED commit `cb9420b1` as intended atomic 189/300; `.14.3.3.2` next after clean landing; no push)
+- Last updated: `2026-08-10` (cfg-private Rust transaction integration `.14.3.3.2` is signoff-complete from clean
+  private-authority commit `fd8a1934` as intended atomic 190/300; admission `.14.3.3.3` next after landing; no push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -103,13 +103,13 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-10):** Rust dormant RED `.14.3.3.0` landed at `cb9420b1` as atomic 188/300 (no
-push). Private transaction authority `.14.3.3.1` is signoff-complete from that clean handoff as intended atomic
-189/300. Its custom-cfg source-local invocation/frame/mark/token/snapshot authority makes the recovered outer
-contract GREEN at 7/7 while ordinary Cargo remains zero-test. The complete Rust local and canonical gates pass;
-the nested integration cfg stops only at the `.14.3.3.2` ActionIR/effect/progress boundary, which is next after
-clean landing. Production Rust routes, recognition 132/246/41, rollout 2/9, public 3/8/14, and guide 1/2/6 remain
-fixed. `TASK-TREE-METADATA-HYGIENE.5`
+**Authoritative frontier (2026-08-10):** private Rust transaction authority `.14.3.3.1` landed at `fd8a1934` as
+atomic 189/300 (no push). Integration `.14.3.3.2` is signoff-complete from that clean handoff as intended atomic
+190/300. Four dedicated cfg-private nodes, neutral effect/progress policy, live invocation/cursor/boundary/mark/
+acceptance binding, generated-plan execution, and independently compiled emitted source pass nested 12/12; outer
+authority remains 7/7 and ordinary discovery stays zero-test. Complete Rust local and canonical gates pass.
+Recognition remains 132/246/41, rollout 2/9, public 3/8/14, guide 1/2/6; admission `.14.3.3.3` is next after clean
+landing and current authored Rust support does not move. `TASK-TREE-METADATA-HYGIENE.5`
 separately owns a low-noise active-tree freshness invariant.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent

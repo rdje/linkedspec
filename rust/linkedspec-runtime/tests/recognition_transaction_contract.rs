@@ -852,7 +852,7 @@ Child::AND
         fs::write(
             project.root.join("Cargo.toml"),
             format!(
-                "[package]\nname = \"recognition-transaction-red-probe\"\nversion = \"0.0.0\"\nedition = \"2024\"\n\n[dependencies]\nlinkedspec-runtime = {{ path = {:?} }}\nserde_json = \"1\"\n",
+                "[package]\nname = \"recognition-transaction-red-probe\"\nversion = \"0.0.0\"\nedition = \"2024\"\n\n[dependencies]\nlinkedspec-runtime = {{ path = {:?} }}\nserde_json = \"1\"\n\n[workspace]\n",
                 runtime_manifest
             ),
         )

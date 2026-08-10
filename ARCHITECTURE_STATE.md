@@ -73,6 +73,17 @@ consumers pass, and the route registry remains 20 surfaces / 62 routes / 32/32 w
 empty debt metadata. The program is composition-closed. These storage migrations change documentation governance
 only; they change no language, compiler, runtime, backend, fixture, CLI, protocol, or project-data root.
 
+- `2026-08-10 integrated Rust recognition transactions`: `FUTURE-PARITY-BACKLOG.14.3.3.2` adds four dedicated
+  non-eager cfg-private expression nodes and exact parser normalization, serialized ActionIR reconstruction, the
+  neutral recursive-effect and cursor-progress classifiers, and one live adapter over the existing private
+  authority. Native and generated-plan engines enter invocation-local frames, synchronize real cursor,
+  anonymous-boundary, and same-label mark state, and carry child acceptance separately from falsey payloads.
+  Emitted source selects the direct effective engine only when structural AST inspection finds a transaction;
+  ordinary emitted compatibility remains unchanged. The nested final-path contract passes all 12 tests across
+  native, reconstructed, generated-plan, and independently compiled emitted-source carriers; the outer authority
+  contract remains 7/7 and ordinary discovery remains zero-test. Neither cfg is registered in manifests or
+  canonical CI, so rollout stays 2/9 and current authored Rust support remains RED until `.14.3.3.3`.
+
 - `2026-08-10 private Rust recognition-transaction authority`: `FUTURE-PARITY-BACKLOG.14.3.3.1` adds one
   documentation-hidden module reachable only under the dormant consumer's outer custom cfg. One source-local
   authority owns monotonic invocation/frame/mark/token generations, detached cursor/boundary/mark snapshots,

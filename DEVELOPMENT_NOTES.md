@@ -10,6 +10,31 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-10 (`FUTURE-PARITY-BACKLOG.14.3.3.2` — integrated Rust recognition transactions): normalize the four
+  special forms only after the ordinary expression parser has built their arguments, then replace the complete
+  static shape with dedicated nodes. This preserves syntax handling while ensuring `call(Rule)` is never evaluated
+  eagerly or retained as a generic helper invocation.
+- Carry recognition acceptance through an internal completion channel rather than `RuntimeValue::as_bool`.
+  Invocation exit publishes the child's actual match state, while commit separately converts the staged JSON value
+  back to a runtime value; successful `false`, zero, empty, and undefined payloads therefore remain distinguishable
+  from a miss.
+- Treat cursor, anonymous boundary, and the current invocation's same-label mark bucket as one synchronized frame.
+  Recursive entry temporarily replaces that mark bucket and restores the caller's bucket on exit; unfinished
+  tokens restore their checkpoint before terminal failure is returned to the engine.
+- Select emitted-source behavior structurally. Only a compiled tree containing one of the four dedicated nodes may
+  replace the legacy compatibility `parse` adapter with the direct effective-engine route; ordinary emitted source
+  retains byte-for-byte route selection. The independent child project also needs an empty `[workspace]` section
+  because its repository-local location is beneath the parent workspace but it is intentionally not a member.
+- Custom-cfg integration must be warning-clean in all three states. Cfg-bound accessors and mutable result rebinding
+  belong under the nested predicate; otherwise the outer authority-only build reports dead code and unnecessary
+  mutability even though the integration build uses both.
+- Run strict Clippy over both changed crates with only enumerated pre-existing categories allowed. That separation
+  caught one integration-owned needless `return` after the ordinary compiler had accepted it; fixing the source
+  rather than broadening the allowance leaves the nested integration warning-clean.
+- Treat the complete gate as signoff over the synchronized integration tree, not as a substitute for focused cfg
+  proof. Here the nested 12/12, outer 7/7, ordinary zero-test, complete Rust-local gate, and rendered-book inspection
+  precede canonical proof; the latter then passes CLI 66x2, RAM 45%, and Phase 0 1,031/1,031 in 735 seconds.
+
 - 2026-08-10 (`FUTURE-PARITY-BACKLOG.14.3.3.1` — private Rust recognition-transaction authority): keep the
   authority behind the exact dormant consumer cfg until parser/ActionIR integration. A documentation-hidden public
   module gives the final-path integration test access without making ordinary crate builds or docs expose a
