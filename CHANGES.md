@@ -10,6 +10,25 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-10 — FUTURE-PARITY-BACKLOG.14.3.3.0 — freeze Rust transaction RED
+
+- Activated task-tree-first from clean Perl-admission commit `a0595411` as intended atomic 188/300.
+- Added one final-path Rust consumer behind outer private-authority and nested integration custom cfgs. Ordinary
+  Cargo discovers the target and runs zero tests; no manifest or canonical-driver registration activates it.
+- Froze neutral-derived invocation/frame/token/snapshot ownership, falsey-safe payloads, mark restoration,
+  lifecycle/authority diagnostics, four dedicated ActionIR forms, effect/progress policy, and native,
+  reconstructed, generated-plan, independently compiled emitted-source, and compatibility carriers.
+- Explicit outer-cfg execution reaches one deterministic first compiler boundary only: `E0432` for missing
+  `linkedspec_runtime::recognition_transaction`, the private authority owned by `.14.3.3.1`.
+- Preserved production Rust and every other backend, neutral 132/246/41, rollout 2/9, public sequence 3/8/14,
+  language coverage 246/105+1/122, README, mdBook current claims, schemas, APIs, storage, and workflow state.
+- Repaired a contradictory capability-guide paragraph left by atomic 187: current neutral+Perl 2/9 guidance had
+  been appended above stale neutral-only 1/9/all-backends-unavailable text. A separate 1-document/2-forbidden/
+  6-mutation checker guard now prevents recurrence without changing semantic or mdBook-public mutation domains.
+- Focused Rust, explicit RED-shape, language, task, Knowledge, memory, doctrine, storage, and rendered-book proof
+  pass. The host-authorized definitive gate passes repository containment and moved-root proof, CLI 66/66 in both
+  option environments, RAM 55%, Phase 0 1,031/1,031 in 700 seconds, and exact `[ci] local CI gate passed`.
+
 ## 2026-08-10 — FUTURE-PARITY-BACKLOG.14.3.2.3 — admit Perl recognition transactions
 
 - Activated task-tree-first from clean integration commit `e173bbcb` as intended atomic 187/300.

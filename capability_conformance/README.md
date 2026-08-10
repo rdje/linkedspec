@@ -303,9 +303,8 @@ reported by `tools/check_language_capability_coverage.pl`.
 Canonical CI requires the tracked artifact/checker and runs the same project-data-routed command unconditionally.
 It also requires, syntax-checks, and executes `t/recognition_transaction_perl_contract.t` exactly once. Rollout is
 neutral + Perl 2/9 complete; Rust, Dart, Julia, PUC Lua, LuaJIT, recurring, and public-no-drift remain RED.
-Rollout is neutral 1/9 complete: Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurring composition, and public
-no-drift remain RED. The exact `recognition_checkpoint` / `recognize_once` / `recognition_commit` /
-`recognition_rollback` forms remain future and unavailable in every backend.
+The exact `recognition_checkpoint` / `recognize_once` / `recognition_commit` / `recognition_rollback` forms are
+current on Perl and remain future on every other runtime.
 
 `root_rule_selection_contract.json` (`linkedspec-root-rule-selection-v1`) makes ADR `0046` executable without
 claiming markerless execution before the

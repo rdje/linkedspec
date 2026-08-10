@@ -5,14 +5,14 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `e173bbcb` — clean Perl-integration parent for signoff-complete admission atomic 187/300; no push.
-- latest_completed_leaf: admission `.14.3.2.3` is signoff-complete and commit-ready as atomic 187/300.
-- active_work_unit: none; Perl transaction parent `.14.3.2` is composition-complete at the current commit candidate.
-- next_action: land atomic 187/300 with its frozen subject, prove the clean post-commit handoff, then activate Rust
-  dormant RED `.14.3.3.0` task-tree-first from that clean commit.
-- in_flight_uncommitted: none beyond the signoff-complete atomic commit candidate; no background job or book output.
-- blockers: none. Definitive CI passes exact 51-test admission, recognition 132/246/41 and rollout 2/9, public
-  3/8/14, CLI 66/66 twice, RAM 34%, and Phase 0 1,031/1,031 in 733 wall-clock seconds.
+- activation_commit: `a0595411` — clean Perl-admission parent for signoff-complete Rust RED atomic 188/300; no push.
+- latest_completed_leaf: Rust dormant transaction RED `.14.3.3.0` is verified and commit-ready as atomic 188/300.
+- active_work_unit: none beyond the atomic 188/300 commit candidate; `.14.3.3.1` remains pending until clean.
+- next_action: land Rust RED atomic 188/300, prove clean handoff, then activate private authority `.14.3.3.1`.
+- in_flight_uncommitted: signoff-complete commit candidate only; no test job, rendered book, or managed-run residue.
+- blockers: none. Ordinary discovery passes zero tests; explicit cfg reaches sole missing-module `E0432`; canonical
+  signoff passes CLI 66x2, RAM 55%, and Phase 0 1,031/1,031 in 700 seconds.
+  Recognition remains 132/246/41, rollout 2/9, public 3/8/14; the separate guide guard is 1/2/6.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes, and 11 topology mutations advance governance to 53. Public authored values remain future; Perl
@@ -42,17 +42,19 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   surfaces with reader/overflow separation, lifecycle controls, immutable debt, reviewed limits, and 32/32
   mutations. All four debt surfaces are current/bounded through ADRs `0067`-`0069` and composition-closed by `.4`.
 - documentation_debt_owner: ADR `0066` composition-closes all stores. `.1` landed four exact live segments/query/doctrine;
-  `.2` preserves 510 task IDs across seven semantic parts plus history, strict lookup/update, 26/26 mutations, and
+  `.2` preserves 511 task IDs across seven semantic parts plus history, strict lookup/update, 26/26 mutations, and
   eleven-consumer transfer. `.3` adds eleven/six exact change/note segments, bounded roots, recoverable rollover,
   mandatory author checks, and both debt retirements; `.4` recomposes every committed owner unchanged.
 - current_transaction_contract: syntax is exact `recognition_checkpoint`,
   `recognize_once(token, call(Rule))`, `recognition_commit`, and `recognition_rollback`; match boolean and staged
   payload are separate. Tokens are linear; effects are closed 9 allowed/11 rejected; marks become invocation-
   framed; v1 progress is cursor-only. Perl is the first admitted backend: its exact consumer passes 51/51 and is
-  tracked, syntax-checked, and canonically executed once. Rollout is 2/9 at 41 mutations; public is 3/8/14.
+  tracked, syntax-checked, and canonically executed once. Rust's dormant cfg-gated consumer runs zero ordinary
+  tests and stops explicitly at sole missing private-module `E0432`; no Rust production or rollout changes.
+  Rollout is 2/9 at 41 mutations; public is 3/8/14; the capability-guide drift guard is separate at 1/2/6.
 - current_future_direction: transaction `.14.3` remains split through neutral `.1`, five backend families/six
   runtimes `.2-.6`, recurring `.7`, and closeout `.8`; Perl admission `.14.3.2.3` precedes Rust RED `.14.3.3.0`,
   and `.14.8` retains public no-drift. `TASK-TREE-METADATA-HYGIENE.5` owns frontier freshness.
 - latest_bootstrap_read: 2026-08-10 — complete roadmap/codebase/mdBook and required continuity/tooling review.
-- pivot_guard: activate Rust `.14.3.3.0` only task-tree-first after atomic 187/300 lands and the handoff is clean.
-- push_policy: hard lock at 300 commits; admission is commit-ready as atomic 187/300; no push; use project wrappers.
+- pivot_guard: cleanly commit `.14.3.3.0` before activating private authority `.14.3.3.1`.
+- push_policy: hard lock at 300 commits; Rust RED is commit-ready as atomic 188/300; no push; use project wrappers.

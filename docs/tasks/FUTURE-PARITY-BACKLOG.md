@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-10` (Perl transaction admission `.14.3.2.3` and parent `.14.3.2` are signoff-complete;
-  atomic 187/300 is commit-ready from clean activation parent `e173bbcb`; Rust RED `.14.3.3.0` next; no push)
+- Last updated: `2026-08-10` (Rust dormant RED `.14.3.3.0` is signoff-complete from clean Perl-admission commit
+  `a0595411` and commit-ready as intended atomic 188/300; `.14.3.3.1` remains pending until clean; no push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -103,12 +103,15 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-10):** Perl transaction admission `.14.3.2.3` and parent `.14.3.2` are signoff-
-complete at the current atomic 187/300 candidate from clean activation parent `e173bbcb` (no push). The exact
-51-test consumer is canonical once, only Perl is complete at rollout 2/9, and production behavior remains fixed at
-the already-verified integration. Rust dormant RED `.14.3.3.0` is the next task-tree-first activation after atomic
-187 lands and its clean handoff is proved. `TASK-TREE-METADATA-HYGIENE.5` separately owns a low-noise active-tree
-freshness invariant.
+**Authoritative frontier (2026-08-10):** Perl transaction admission `.14.3.2.3` landed at `a0595411` as atomic
+187/300 (no push), composition-closing `.14.3.2`. Rust dormant RED `.14.3.3.0` is signoff-complete from that clean
+handoff and commit-ready as intended atomic 188/300. It owns only one neutral-derived, cfg-gated, tracked-but-undiscovered
+consumer and exact first-boundary proof across native/reconstructed/generated-plan/emitted carriers. Ordinary
+Cargo runs zero tests; explicit cfg reaches sole missing-private-module `E0432`. Production Rust behavior, rollout
+2/9, and public truth stay fixed. The slice also repairs and separately guards stale technical capability guidance
+at 1 document / 2 forbidden claims / 6 mutations. Definitive signoff passes CLI 66x2, RAM 55%, and Phase 0
+1,031/1,031 in 700 seconds. Private authority `.14.3.3.1` remains pending until atomic 188 lands cleanly.
+`TASK-TREE-METADATA-HYGIENE.5` separately owns a low-noise active-tree freshness invariant.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private

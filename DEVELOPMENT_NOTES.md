@@ -10,6 +10,26 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-10 (`FUTURE-PARITY-BACKLOG.14.3.3.0` — dormant Rust recognition-transaction RED): use a file-level
+  custom cfg so the final-path integration target is tracked and syntax-visible to Cargo while ordinary and
+  canonical discovery execute zero tests. A second nested cfg can freeze later compiler/runtime/carrier behavior
+  without competing with the first missing private-authority boundary.
+- Derive the future Rust API from the neutral contract and the admitted Perl mechanism, not from host convenience:
+  one source authority owns opaque monotonic invocation/frame/mark/token generations and detached snapshots;
+  match presence is distinct from staged payload truthiness; terminal or unwind paths restore before invalidating.
+- Freeze all carriers before implementation: dedicated non-eager AST lowering, recursive effect closure,
+  cursor-only progress, native and reconstructed execution, generated-plan execution, and independently compiled
+  emitted source. The explicit outer cfg must fail solely at missing
+  `linkedspec_runtime::recognition_transaction`; any earlier syntax/fixture error invalidates the RED slice.
+- Keep technical capability guidance outside the three-page mdBook public-sequence inventory as an explicit
+  separate guard. Atomic 187 added current 2/9 prose without deleting its adjacent 1/9 predecessor; two required
+  markers, two forbidden stale claims, and six mutations now catch path, marker, duplication, deletion, and both
+  stale-text regressions while leaving semantic 41 and public 14 counts stable.
+- Definitive signoff must run host-authorized when the canonical storage proof invokes its own macOS sandbox. An
+  outer-sandbox run reached that proof but denied nested `sandbox-exec` with status 71; a complete authorized rerun
+  passed repository-contained/moved-root IO, both CLI environments at 66/66, RAM 55%, and Phase 0 1,031/1,031 in
+  700 seconds. Treat harness denial separately from a repository assertion failure and still rerun the full gate.
+
 - 2026-08-10 (`FUTURE-PARITY-BACKLOG.14.3.2.3` — Perl recognition-transaction admission): admission is a
   registry/ledger/public-current slice, not another implementation seam. Require the exact final-path file once,
   syntax-check it once, and execute it once through ordinary `prove`; make all four occurrences omission- and

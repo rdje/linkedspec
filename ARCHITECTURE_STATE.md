@@ -73,6 +73,19 @@ consumers pass, and the route registry remains 20 surfaces / 62 routes / 32/32 w
 empty debt metadata. The program is composition-closed. These storage migrations change documentation governance
 only; they change no language, compiler, runtime, backend, fixture, CLI, protocol, or project-data root.
 
+- `2026-08-10 dormant Rust recognition-transaction RED`: `FUTURE-PARITY-BACKLOG.14.3.3.0` adds one tracked
+  final-path Rust consumer behind an outer private-authority cfg and a nested integration cfg. Ordinary Cargo
+  discovers zero active tests; explicit outer-cfg execution stops at sole `E0432` for absent private module
+  `linkedspec_runtime::recognition_transaction`, which fixes `.14.3.3.1` as the first implementation seam. The
+  consumer freezes opaque monotonic invocation/frame/token/snapshot authority, falsey-safe payload separation,
+  mark restoration, lifecycle diagnostics, four dedicated non-eager nodes, effect/progress policy, and native,
+  reconstructed, generated-plan, independently compiled emitted-source, and compatibility carriers. Production
+  and rollout remain unchanged at 132/246/41, 2/9, and public 3/8/14. The same review repairs contradictory
+  technical capability guidance left by atomic 187 and adds a separate 1/2/6 guide guard without changing the
+  semantic or mdBook-public mutation domains. Signoff passes the complete Rust local gate, all eight doctrines,
+  repository-contained and moved-root canonical proof, CLI 66/66 in both option environments, RAM 55%, and Phase
+  0 at 1,031/1,031 in 700 seconds; production and canonical registration remain unchanged.
+
 - `2026-08-10 admitted Perl recognition transactions`: `FUTURE-PARITY-BACKLOG.14.3.2.3` registers the exact
   51-test final-path consumer once for tracking, syntax, and canonical ordinary `prove` execution without changing
   production Perl. The neutral artifact advances only `perl` to complete and names that consumer as its sole path;

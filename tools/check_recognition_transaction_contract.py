@@ -230,6 +230,20 @@ PUBLIC_SEQUENCE_CONTRACT = {
     ],
 }
 PUBLIC_SEQUENCE_MUTATION_COUNT = 14
+CAPABILITY_GUIDE_CONTRACT = {
+    "path": "capability_conformance/README.md",
+    "required_markers": [
+        "neutral + Perl 2/9 complete",
+        (
+            "current on Perl and remain future on every other runtime"
+        ),
+    ],
+    "forbidden_claims": [
+        "Rollout is neutral 1/9 complete",
+        "forms remain future and unavailable in every backend",
+    ],
+}
+CAPABILITY_GUIDE_MUTATION_COUNT = 6
 EXPECTED_TOP_LEVEL = {
     "format",
     "contract_id",
@@ -269,6 +283,50 @@ def read_text(path: Path) -> str:
 def public_sequence_texts() -> dict[str, str]:
     paths = [row["path"] for row in PUBLIC_SEQUENCE_CONTRACT["documents"]]
     return {path: read_text(ROOT / path) for path in paths}
+
+
+def validate_capability_guide(
+    guide_contract: dict[str, Any],
+    text: str,
+    *,
+    check_tracked: bool,
+) -> None:
+    require(
+        guide_contract == CAPABILITY_GUIDE_CONTRACT,
+        "recognition capability-guide contract drifted",
+    )
+    path = guide_contract.get("path")
+    markers = guide_contract.get("required_markers")
+    forbidden = guide_contract.get("forbidden_claims")
+    require(isinstance(path, str) and path, "capability-guide path drifted")
+    require(
+        isinstance(markers, list) and len(markers) == 2 == len(set(markers)),
+        "capability-guide marker inventory drifted",
+    )
+    require(
+        isinstance(forbidden, list)
+        and len(forbidden) == 2 == len(set(forbidden)),
+        "capability-guide forbidden-claim inventory drifted",
+    )
+    for marker in markers:
+        require(
+            isinstance(marker, str) and text.count(marker) == 1,
+            f"capability-guide marker missing or duplicated: {marker}",
+        )
+    for claim in forbidden:
+        require(
+            isinstance(claim, str) and claim not in text,
+            f"stale capability-guide claim remains: {claim}",
+        )
+    if check_tracked:
+        tracked = subprocess.run(
+            ["git", "ls-files", "--error-unmatch", "--", path],
+            cwd=ROOT,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            check=False,
+        )
+        require(tracked.returncode == 0, f"capability guide is not tracked: {path}")
 
 
 def validate_public_sequence(
@@ -887,6 +945,11 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
             public_sequence_texts(),
             check_tracked=True,
         )
+        validate_capability_guide(
+            CAPABILITY_GUIDE_CONTRACT,
+            read_text(ROOT / CAPABILITY_GUIDE_CONTRACT["path"]),
+            check_tracked=True,
+        )
 
 
 def _set(path: list[Any], value: Any) -> Callable[[dict[str, Any]], None]:
@@ -1094,12 +1157,73 @@ def validate_public_sequence_mutations(document: dict[str, Any]) -> int:
     return len(mutations)
 
 
+def validate_capability_guide_mutations() -> int:
+    text = read_text(ROOT / CAPABILITY_GUIDE_CONTRACT["path"])
+    marker = CAPABILITY_GUIDE_CONTRACT["required_markers"][0]
+    stale_first = CAPABILITY_GUIDE_CONTRACT["forbidden_claims"][0]
+    stale_second = CAPABILITY_GUIDE_CONTRACT["forbidden_claims"][1]
+    mutations: list[tuple[str, Callable[[dict[str, Any], str], tuple[dict[str, Any], str]]]] = [
+        (
+            "guide path drift",
+            lambda contract, candidate: (
+                {**contract, "path": "capability_conformance/missing.md"},
+                candidate,
+            ),
+        ),
+        (
+            "guide marker contract drift",
+            lambda contract, candidate: (
+                {
+                    **contract,
+                    "required_markers": ["changed marker", *contract["required_markers"][1:]],
+                },
+                candidate,
+            ),
+        ),
+        (
+            "guide marker deletion",
+            lambda contract, candidate: (contract, candidate.replace(marker, "", 1)),
+        ),
+        (
+            "guide marker duplication",
+            lambda contract, candidate: (contract, candidate + "\n" + marker),
+        ),
+        (
+            "stale neutral-only rollout",
+            lambda contract, candidate: (contract, candidate + "\n" + stale_first),
+        ),
+        (
+            "stale all-backend unavailability",
+            lambda contract, candidate: (contract, candidate + "\n" + stale_second),
+        ),
+    ]
+    require(
+        len(mutations) == CAPABILITY_GUIDE_MUTATION_COUNT,
+        "capability-guide mutation count drifted",
+    )
+    for name, mutate in mutations:
+        candidate_contract, candidate_text = mutate(
+            copy.deepcopy(CAPABILITY_GUIDE_CONTRACT), text
+        )
+        try:
+            validate_capability_guide(
+                candidate_contract,
+                candidate_text,
+                check_tracked=False,
+            )
+        except ContractError:
+            continue
+        raise ContractError(f"capability-guide mutation {name!r} was accepted")
+    return len(mutations)
+
+
 def main() -> int:
     try:
         document = load_contract()
         validate_contract(document, check_environment=True)
         validate_mutations(document)
         public_mutations = validate_public_sequence_mutations(document)
+        guide_mutations = validate_capability_guide_mutations()
     except ContractError as exc:
         print(f"recognition-transaction-contract: ERROR: {exc}", file=sys.stderr)
         return 1
@@ -1108,7 +1232,8 @@ def main() -> int:
         "(132 ActionIR rows = 128 current + 4 dedicated; 246 call rows; "
         "token 8 positive/17 negative; effects 6 graphs; marks 6; progress 8; "
         "41 rejected mutations; rollout neutral + Perl 2/9 complete; "
-        f"public sequence 3 documents/8 forbidden/{public_mutations} mutations)"
+        f"public sequence 3 documents/8 forbidden/{public_mutations} mutations; "
+        f"capability guide 1 document/2 forbidden/{guide_mutations} mutations)"
     )
     return 0
 

@@ -2,24 +2,26 @@
 
 ## Current Activity
 
-- Perl transaction parent `FUTURE-PARITY-BACKLOG.14.3.2` is composition-complete at the current atomic 187/300
-  candidate. Admission `.14.3.2.3` requires, syntax-checks, and executes the exact 51-test consumer once without
-  changing production implementation bytes.
-- Only Perl advances: recognition proof is 132 ActionIR rows / 246 calls / 41 mutations, rollout 2/9, and public
-  sequence 3 documents / 8 forbidden claims / 14 mutations. Definitive CI passes CLI 66/66 twice, RAM 34%, and
-  Phase 0 1,031/1,031 in 733 seconds. Rust RED `.14.3.3.0` is next after clean atomic closeout; no push before 300.
+- Rust transaction RED `FUTURE-PARITY-BACKLOG.14.3.3.0` is signoff-complete from clean Perl-admission commit
+  `a0595411` and commit-ready as atomic 188/300. One tracked custom-cfg consumer freezes private state plus all four
+  Rust carriers while ordinary Cargo discovers zero active tests.
+- Explicit cfg execution stops at sole `E0432` for missing `linkedspec_runtime::recognition_transaction`, the exact
+  `.14.3.3.1` private-authority seam. Production and rollout remain unchanged at recognition 132/246/41, 2/9, and
+  public 3/8/14. A stale capability-guide 1/9 paragraph is repaired and separately guarded at 1/2/6 mutations.
+  Definitive signoff passes CLI 66x2, RAM 55%, and Phase 0 1,031/1,031 in 700 seconds.
 
 ## Latest Completed Slice
 
-- `FUTURE-PARITY-BACKLOG.14.3.2.3 - admit Perl recognition transactions` is signoff-complete and commit-ready as
-  atomic 187/300 with its frozen subject.
+- `.14.3.3.0` — dormant Rust transaction RED is complete, verified, and commit-ready as atomic 188/300.
+- `a0595411` — Perl recognition-transaction admission landed as atomic 187/300.
 
 ## Next Action
 
-- Land atomic 187/300, prove the clean post-commit handoff, then activate Rust RED `.14.3.3.0` task-tree-first.
+- Land atomic 188/300, prove clean handoff, then activate private Rust authority `.14.3.3.1` task-tree-first.
 
 ## Recent Completions
 
+- `2026-08-10` — `.14.3.3.0` froze and signed off the dormant Rust transaction RED for atomic 188/300.
 - `2026-08-10` — `.14.3.2.3` admitted Perl recognition transactions for atomic 187/300.
 - `2026-08-10` — `.14.3.2.2` integrated Perl recognition transactions for atomic 186/300.
 - `2026-08-10` — `FUTURE-PARITY-BACKLOG.14.3.2.1` added private Perl transaction authority as atomic 185/300.
