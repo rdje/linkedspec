@@ -1,7 +1,7 @@
 //! Private recognition-invocation frames and linear transaction tokens.
 //!
-//! This authority is intentionally available only to the dormant transaction
-//! contract. Authored lowering and runtime admission remain separately owned.
+//! The runtime and exact conformance consumer share this internal authority;
+//! public documentation exposes only the portable authored transaction contract.
 
 use crate::source_location::SourceAuthority;
 use serde_json::{Map, Value, json};
@@ -40,17 +40,14 @@ impl RecognitionFrameState {
         })
     }
 
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     pub(crate) fn cursor(&self) -> u64 {
         self.cursor
     }
 
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     pub(crate) fn boundary(&self) -> Option<u64> {
         self.boundary
     }
 
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     pub(crate) fn marks(&self) -> &BTreeMap<String, u64> {
         &self.marks
     }
@@ -82,7 +79,6 @@ impl RecognitionFrameSnapshot {
         self.state.as_record()
     }
 
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     pub(crate) fn state(&self) -> RecognitionFrameState {
         self.state.clone()
     }
@@ -319,7 +315,6 @@ impl RecognitionTransactionAuthority {
     }
 
     /// Replace the live frame state from its owning runtime registers.
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     pub(crate) fn set_frame_state(
         &mut self,
         frame: &RecognitionInvocationFrame,
@@ -812,26 +807,22 @@ pub fn validate_recognition_progress(fixture: &Value) -> Result<(), RecognitionT
     Err(RecognitionTransactionError::new(code, fields))
 }
 
-#[cfg(linkedspec_recognition_transaction_integration_red)]
 #[derive(Clone)]
 pub(crate) struct RecognitionRuntime {
     state: Rc<RefCell<RecognitionRuntimeState>>,
 }
 
-#[cfg(linkedspec_recognition_transaction_integration_red)]
 impl fmt::Debug for RecognitionRuntime {
     fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
         formatter.write_str("RecognitionRuntime(<opaque>)")
     }
 }
 
-#[cfg(linkedspec_recognition_transaction_integration_red)]
 struct RecognitionRuntimeState {
     authority: RecognitionTransactionAuthority,
     frames: Vec<RecognitionLiveFrame>,
 }
 
-#[cfg(linkedspec_recognition_transaction_integration_red)]
 struct RecognitionLiveFrame {
     rule: String,
     frame: RecognitionInvocationFrame,
@@ -840,20 +831,17 @@ struct RecognitionLiveFrame {
     prior_marks: Option<std::collections::HashMap<String, usize>>,
 }
 
-#[cfg(linkedspec_recognition_transaction_integration_red)]
 struct RecognitionLiveToken {
     token: RecognitionTransactionToken,
     snapshot: RecognitionFrameState,
 }
 
-#[cfg(linkedspec_recognition_transaction_integration_red)]
 pub(crate) struct RecognitionInvocationExit {
     pub(crate) state: RecognitionFrameState,
     pub(crate) accepted: bool,
     pub(crate) prior_marks: Option<std::collections::HashMap<String, usize>>,
 }
 
-#[cfg(linkedspec_recognition_transaction_integration_red)]
 impl RecognitionRuntime {
     pub(crate) fn new(source_authority: Arc<SourceAuthority>, source_identity: &str) -> Self {
         Self {

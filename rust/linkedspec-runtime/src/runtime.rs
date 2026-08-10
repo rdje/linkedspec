@@ -134,7 +134,6 @@ pub fn typed_source_compatibility_aliases() -> Value {
     ])
 }
 
-#[cfg(linkedspec_recognition_transaction_integration_red)]
 fn runtime_value_from_json(value: Value) -> RuntimeValue {
     match value {
         Value::Null => RuntimeValue::Undef,
@@ -163,7 +162,6 @@ impl RuntimeSourceAuthority {
         Self(Arc::new(SourceAuthority::new(&sources)))
     }
 
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     fn authority(&self) -> Arc<SourceAuthority> {
         Arc::clone(&self.0)
     }
@@ -189,13 +187,10 @@ pub struct RuntimeContext {
     pub input: String,
     /// Opaque per-execution authority for immutable typed source projections.
     source_authority: RuntimeSourceAuthority,
-    /// Cfg-private authority binding for dormant recognition transactions.
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
+    /// Internal authority binding for recognition transactions.
     recognition_transactions: crate::recognition_transaction::RecognitionRuntime,
     /// Active non-eager recognition scopes publish explicit child acceptance.
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     recognition_scope_depth: usize,
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     recognition_completions: Vec<(String, bool)>,
     /// Current match position in the input.
     pub pos: usize,
@@ -390,14 +385,11 @@ impl RuntimeContext {
         let source_authority = RuntimeSourceAuthority::new(input);
         Self {
             input: input.to_string(),
-            #[cfg(linkedspec_recognition_transaction_integration_red)]
             recognition_transactions: crate::recognition_transaction::RecognitionRuntime::new(
                 source_authority.authority(),
                 INPUT_SOURCE_ID,
             ),
-            #[cfg(linkedspec_recognition_transaction_integration_red)]
             recognition_scope_depth: 0,
-            #[cfg(linkedspec_recognition_transaction_integration_red)]
             recognition_completions: Vec::new(),
             source_authority,
             pos: 0,
@@ -464,7 +456,6 @@ impl RuntimeContext {
             .is_some_and(|bucket| bucket.contains_key(name))
     }
 
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     fn recognition_frame_state(
         &self,
         rule_label: &str,
@@ -489,7 +480,6 @@ impl RuntimeContext {
         )
     }
 
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     fn apply_recognition_frame_state(
         &mut self,
         rule_label: &str,
@@ -515,7 +505,6 @@ impl RuntimeContext {
         Ok(())
     }
 
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     pub(crate) fn enter_recognition_invocation(&mut self, rule_label: &str) -> Result<(), String> {
         let prior_marks = self.marks.remove(rule_label);
         self.marks.insert(rule_label.to_owned(), Default::default());
@@ -534,7 +523,6 @@ impl RuntimeContext {
         }
     }
 
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     pub(crate) fn leave_recognition_invocation(
         &mut self,
         rule_label: &str,
@@ -557,18 +545,15 @@ impl RuntimeContext {
             .map_err(|error| error.to_string())
     }
 
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     pub(crate) fn note_recognition_match(&mut self) {
         self.recognition_transactions.note_match();
     }
 
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     pub(crate) fn begin_recognition_scope(&mut self) -> usize {
         self.recognition_scope_depth += 1;
         self.recognition_completions.len()
     }
 
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     pub(crate) fn finish_recognition_scope(
         &mut self,
         completion_base: usize,
@@ -591,7 +576,6 @@ impl RuntimeContext {
         Ok(completion.1)
     }
 
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     pub(crate) fn cancel_recognition_scope(&mut self, completion_base: usize) {
         self.recognition_scope_depth = self
             .recognition_scope_depth
@@ -600,7 +584,6 @@ impl RuntimeContext {
         self.recognition_completions.truncate(completion_base);
     }
 
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     pub(crate) fn recognition_result_is_match(&mut self, fallback: bool) -> bool {
         if self.recognition_scope_depth == 0 {
             return fallback;
@@ -611,7 +594,6 @@ impl RuntimeContext {
             .unwrap_or(fallback)
     }
 
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     pub(crate) fn recognition_checkpoint(
         &mut self,
         rule_label: &str,
@@ -623,7 +605,6 @@ impl RuntimeContext {
             .map_err(|error| error.to_string())
     }
 
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     pub(crate) fn recognition_attempt(
         &mut self,
         rule_label: &str,
@@ -637,7 +618,6 @@ impl RuntimeContext {
             .map_err(|error| error.to_string())
     }
 
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     pub(crate) fn recognition_commit(
         &mut self,
         rule_label: &str,
@@ -654,7 +634,6 @@ impl RuntimeContext {
             .map_err(|error| error.to_string())
     }
 
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     pub(crate) fn recognition_rollback(
         &mut self,
         rule_label: &str,

@@ -5,18 +5,17 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `fd8a1934` — clean private-Rust-authority parent for active integration atomic 190/300; no push.
-- latest_completed_leaf: cfg-private Rust transaction integration `.14.3.3.2` is signoff-complete and commit-ready as atomic 190/300; Git will supply the landing hash.
-- active_work_unit: none beyond the completed atomic 190 commit candidate; Rust admission `.14.3.3.3` is not yet activated.
-- next_action: land atomic 190/300, clear the brief, prove clean, then activate Rust admission `.14.3.3.3` task-tree-first.
-- in_flight_uncommitted: none in the intended post-landing handoff; no background job or rendered book.
-- blockers: none. Ordinary discovery passes zero tests; outer cfg passes 7/7; nested integration passes 12/12
-  across native/reconstructed/generated-plan/emitted carriers; the complete Rust local and canonical gates pass.
-  Recognition remains 132/246/41, rollout 2/9, public 3/8/14; the separate guide guard is 1/2/6.
+- activation_commit: `1cf2923a` — clean Rust-integration parent for commit-ready admission atomic 191/300; no push.
+- latest_completed_leaf: Rust transaction admission `.14.3.3.3` is signoff-complete and commit-ready as atomic 191/300.
+- active_work_unit: land the fully verified Rust admission `.14.3.3.3`; no implementation or verification remains.
+- next_action: commit atomic 191/300, prove clean, then activate Dart RED `.14.3.4.0` task-tree-first.
+- in_flight_uncommitted: verified admission code/contract/checker/driver/book/live-doc/Knowledge/task changes; no background job or rendered book.
+- blockers: none. Canonical passes Perl 51/51, Rust 12/12, containment/relocation, CLI 66x2, RAM 77%, and Phase 0 1,031/1,031 in 739 seconds.
+  Recognition is 132/246/42, rollout 3/9, public 3/11/25; guide 1/4/8; Rust registration/dormancy 8.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
-  routes, and 11 topology mutations advance governance to 53. Public authored values remain future; Perl
-  recognition transactions are current while cross-runtime portability remains future.
+  routes, and 11 topology mutations advance governance to 53. Public authored values remain future; Perl and Rust
+  recognition transactions are current while complete cross-runtime portability remains future.
 - recurring_rollout_fact: the original contract combines recurring and public no-drift in one `.14.8` row. Detailed
   plan/history assign `.14.2.6` driver/topology only; do not add a fifteenth row or promote `.14.8` prematurely.
 - rust_audit_fact: all 92 canonical names and seven aliases project through one per-input immutable authority while
@@ -47,12 +46,11 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   mandatory author checks, and both debt retirements; `.4` recomposes every committed owner unchanged.
 - current_transaction_contract: syntax is exact `recognition_checkpoint`,
   `recognize_once(token, call(Rule))`, `recognition_commit`, and `recognition_rollback`; match boolean and staged
-  payload are separate. Tokens are linear; effects are closed 9 allowed/11 rejected; marks become invocation-
-  framed; v1 progress is cursor-only. Perl is admitted at 51/51. Rust's cfg-private dedicated nodes, policy,
-  native/reconstructed/generated-plan/emitted carriers pass nested 12/12 while outer remains 7/7 and ordinary
-  discovery stays zero-test. Rust is not admitted, so rollout stays 2/9 at 41 mutations; public 3/8/14; guide 1/2/6.
+  payload are separate. Tokens are linear; effects are closed 9 allowed/11 rejected; marks are invocation-framed;
+  v1 progress is cursor-only. Perl is admitted at 51/51 and Rust at ordinary/canonical 12/12. Rollout is 3/9 at
+  42 semantic mutations; public 3/11/25; guide 1/4/8; Rust admission 8. Dart and later legs remain RED.
 - current_future_direction: transaction `.14.3` remains split through neutral `.1`, backend families `.2-.6`,
-  recurring `.7`, and closeout `.8`; Rust `.14.3.3.2` is complete, admission `.3` is next, and `.14.8` retains no-drift.
+  recurring `.7`, and closeout `.8`; Rust `.14.3.3` is complete/commit-ready, Dart RED `.14.3.4.0` follows, and `.14.8` retains no-drift.
 - latest_bootstrap_read: 2026-08-10 — complete roadmap/codebase/mdBook and required continuity/tooling review.
-- pivot_guard: prove atomic 190 cleanly landed before activating Rust admission `.14.3.3.3`.
-- push_policy: hard lock at 300 commits; Rust integration is commit-ready as atomic 190/300; no push; use wrappers.
+- pivot_guard: land atomic 191 cleanly before activating Dart RED `.14.3.4.0`.
+- push_policy: hard lock at 300 commits; Rust admission is intended atomic 191/300; no push; use wrappers.

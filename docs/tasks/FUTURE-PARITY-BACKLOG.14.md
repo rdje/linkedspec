@@ -4460,8 +4460,8 @@
   subject, and Rust RED `.14.3.3.0` remains the next task-tree-first activation after a clean post-commit handoff.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.3`
-  Status: `active` (2026-08-10; Rust integration `.14.3.3.2` activated task-tree-first from clean private-authority
-    closeout `fd8a1934` as intended atomic 190/300; no push)
+  Status: `complete` (2026-08-11; Rust admission `.14.3.3.3` signoff-complete from clean integration closeout
+    `1cf2923a`, commit-ready as atomic 191/300; Dart RED `.14.3.4.0` next after landing; no push)
   Goal: Implement and independently admit exact Rust parity through its native/reconstructed/generated carriers.
   Depends on: `.14.3.2`
   Children: `.14.3.3.0-.14.3.3.3`
@@ -4783,9 +4783,75 @@
   remains zero-test, and admission is owned exclusively by `.14.3.3.3` after atomic 190 lands cleanly.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.3.3`
-  Status: `pending`
+  Status: `complete` (2026-08-11; exact Rust admission and definitive signoff complete from clean integration
+    closeout `1cf2923a`, commit-ready as atomic 191/300; Dart RED `.14.3.4.0` next after landing; no push)
   Goal: Remove Rust dormancy, register ordinary/canonical proof, and promote only Rust transaction admission.
   Depends on: `.14.3.3.2`
+  Acceptance: Retrieve the neutral rollout/checker, integrated Rust consumer and cfg boundary, Cargo test discovery,
+    canonical Rust route, public-sequence/guide guards, Perl and typed-source admission precedents, the three governed
+    mdBook pages, storage owners, and ADR `0056` before changing registration. Prove the unchanged nested consumer is
+    12/12 but ordinary/canonical dormant, then replace test-only custom-cfg discovery with one exact ordinary Cargo
+    target and canonical execution without widening public Rust APIs or changing transaction behavior. Promote only
+    `rust` from RED to complete, add omission/duplicate/completed-to-RED/premature-Dart mutation proof, and advance
+    exactly the governed current-support guidance while Dart, Julia, PUC Lua, LuaJIT, recurring composition, and
+    final public no-drift remain future. Preserve production semantics, the 132-node/246-call inventories, token/
+    effect/mark/progress fixtures, helper results/registers, schemas, semantic/MCP/capability/CLI surfaces, README,
+    storage roots, and unrelated docs. Pass focused registration/rollout/public, complete Rust, rendered-book,
+    doctrine, and definitive canonical signoff; synchronize durable records; commit atomically as 191/300; clear
+    the brief and prove clean before Dart RED `.14.3.4.0` activates task-tree-first.
+  Verification: unchanged 12-test Rust consumer is exact-once ordinary/canonical; only `rust` advances; neutral,
+    public/current, guide, and language counts agree; focused/Rust/book/doctrine/canonical gates pass; atomic clean
+  Commit: `FUTURE-PARITY-BACKLOG.14.3.3.3 - admit Rust recognition transactions`
+
+  ### `FUTURE-PARITY-BACKLOG.14.3.3.3` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove `.14.3.3.2` landed as atomic 190/300 at full `1cf2923a` with
+    parent `fd8a1934`, exact subject, empty status/diffs, zero-byte brief, valid post-commit pointer, fresh Knowledge/
+    task partitions, absent rendered book, zero managed-run/emitted-workspace residue, no background work, and this
+    task-tree file as the sole first activation mutation.
+  - [x] **RETRIEVE / REPRODUCE ADMISSION BOUNDARY** — Follow Knowledge, ADR, neutral/checker, integrated consumer,
+    Cargo/canonical, public/guide, admission-precedent, storage, and sole-facing owners; prove 12/12 explicit GREEN
+    and zero ordinary/canonical discovery with Rust still pending.
+  - [x] **EXACT ORDINARY / CANONICAL REGISTRATION** — Make the unchanged final-path consumer one ordinary Cargo
+    target and execute it exactly once in the canonical Rust route; reject missing, duplicate, stale-dormant, and
+    misrouted registration without broadening production APIs or behavior.
+  - [x] **RUST-ONLY ROLLOUT / PUBLIC-CURRENT LOCKSTEP** — Promote only Rust, add complete-to-RED and premature-Dart
+    guards, and update only governed book guidance while all later/runtime-recurring/public-closeout rows stay RED.
+  - [x] **NO-DRIFT / RENDERED PROOF** — Preserve production semantics, neutral/language/schema/helper/register/
+    semantic/MCP/capability/CLI/README/storage surfaces; build, inspect, and remove sole-facing book output.
+  - [x] **SIGNOFF / ATOMIC CLEAN HANDOFF** — Synchronize task/index, roadmaps, live docs, Knowledge, and mdBook;
+    pass focused/Rust/canonical gates; land atomic 191/300, clear the brief, and prove clean before Dart RED `.4.0`.
+
+  Activation evidence 2026-08-10: integration `.14.3.3.2` lands at full
+  `1cf2923aa749594a8c56903418fe5749134f6872` as atomic 190/300 with first parent `fd8a1934` and exact subject
+  `FUTURE-PARITY-BACKLOG.14.3.3.2 - integrate Rust recognition transactions`. Its hook regenerates Knowledge at
+  808 facts / 6,693 keys, passes all eight doctrines, and validates `activation_commit fd8a1934` against `HEAD^1`.
+  Post-commit status/diffs are empty; the brief is zero bytes; memory, Knowledge, and 26/26 task partitions over 511
+  ids pass; rendered book, managed runs, and emitted workspaces are absent; no background result remains. This file
+  is the sole first activation mutation before registration, checker, contract, book, Knowledge, roadmap, or live docs.
+
+  Admission evidence 2026-08-10: Knowledge/ADR/Toolbox-first retrieval and an explicit two-cfg run proved the
+  integrated consumer unchanged at 12/12 while ordinary Cargo ran zero tests. Both custom cfgs are now absent from
+  the exact nine-source inventory; the documentation-hidden authority remains internal, ordinary Cargo runs the
+  same 12/12 target, and canonical CI contains one exact tracked-file marker, log, and Cargo invocation. The
+  independent checker rejects 42 semantic mutations at rollout neutral + Perl + Rust 3/9, public 3/11/25, guide
+  1/4/8, and eight registration/dormancy mutations; Dart and every later leg remain RED. Public review found three
+  adjacent Perl-only claims outside the prior forbidden inventory, so every one of eleven stale claims is now
+  injected independently. The first ordinary post-promotion run caught its own stale 41/RED Rust metadata
+  assertion while the other 11 tests passed; the corrected governed assertion restores 12/12. Formatting, strict
+  changed-crate Clippy, and the complete Rust-local gate pass, including core 195, runtime 166, project-data
+  locality, and CLI 66/66 in both option environments.
+
+  Render/no-drift evidence 2026-08-10: mdBook builds 79 files / 14,380 KiB; all three governed HTML pages show
+  Perl+Rust current, Rust ordinary/canonical 12, rollout 3/9, later legs RED, and 42 plus 3/11/25 governance with
+  clean paragraph/code structure. Browser control was unavailable, so no visual-browser claim is made. Generated
+  output is removed. Language remains 246/105+1/122; README 105/5,057; all eight doctrines and residue scans pass.
+
+  Signoff evidence 2026-08-11: the first canonical run caught two stale Perl consumer rollout/availability
+  expectations; their exact 51-test correction passes. An outer sandbox then denied the nested macOS containment
+  profile, while its isolated authorized run passed. One uninterrupted authorized canonical rerun passes all eight
+  doctrines, Perl 51/51, Rust 12/12, six-family containment, relocation, CLI 66x2, RAM 77%, Phase 0 1,031/1,031 in
+  739 seconds, and exact `[ci] local CI gate passed`. Atomic 191/300 is commit-ready; Dart RED `.14.3.4.0` follows.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.4`
   Status: `pending`

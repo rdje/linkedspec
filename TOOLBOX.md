@@ -1007,30 +1007,26 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   ```
 
 - **OUTPUT:** 132 ActionIR rows (128 live plus four dedicated), 246 live call rows, token 8 positive / 17 negative,
-  six fixed-point graphs, six mark cases, eight progress cases, fifteen diagnostics, and 41 rejected mutations;
-  rollout is neutral + Perl 2/9 complete. A separate public-sequence projection locks three book pages, eight
-  forbidden milestone/current claims, and fourteen in-memory mutations. A distinct canonical capability-guide
-  guard locks one document, two stale claims, and six mutations so technical guidance cannot simultaneously report
-  the older neutral-only state.
-- **BOUNDARY:** this checker derives the live inventories and proves the shared target plus exact Perl admission.
-  Perl's 51-test consumer is canonical; Rust/Dart/Julia/Lua and recurring remain `.14.3.3-.7`, with public no-drift
-  owned by `.14.3.8`.
-- **RUST DORMANT RED:** ordinary offline Cargo discovers
-  `rust/linkedspec-runtime/tests/recognition_transaction_contract.rs` but runs zero tests. Enable the first private
-  boundary explicitly with:
+  six fixed-point graphs, six mark cases, eight progress cases, fifteen diagnostics, and 42 rejected mutations;
+  rollout is neutral + Perl + Rust 3/9 complete. A separate public-sequence projection locks three book pages,
+  eleven forbidden milestone/current claims, and 25 in-memory mutations. A distinct canonical capability-guide
+  guard locks one document, four stale claims, and eight mutations. Eight Rust-admission mutations separately lock
+  the exact tracked consumer, canonical log/command, and absence of both former custom cfgs.
+- **BOUNDARY:** this checker derives the live inventories and proves the shared target plus exact Perl and Rust
+  admissions. Perl's 51-test and Rust's 12-test consumers are canonical; Dart/Julia/Lua and recurring remain
+  `.14.3.4-.7`, with public no-drift owned by `.14.3.8`.
+- **RUST ADMISSION:** ordinary offline Cargo and canonical CI execute the same exact final-path target:
 
   ```bash
   source tools/project_data_env.sh
-  RUSTFLAGS='--cfg linkedspec_recognition_transaction_red -Awarnings' \
-    cargo test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime \
+  cargo test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime \
     --test recognition_transaction_contract
   ```
 
-  The exact current failure is sole `E0432`: missing private module
-  `linkedspec_runtime::recognition_transaction`. `.14.3.3.1` owns that module. A nested
-  `linkedspec_recognition_transaction_integration_red` cfg freezes later dedicated lowering, effect/progress, and
-  native/reconstructed/generated-plan/independently compiled emitted-source integration without competing at the
-  first boundary. Retrieve [[rust-recognition-transaction-dormant-red]] before changing the consumer or cfg seam.
+  It passes 12/12 across authority, dedicated lowering, effect/progress policy, native, reconstructed,
+  generated-plan, independently compiled emitted-source, and compatibility proof. The internal authority module
+  remains documentation-hidden; admission removes dormancy without adding a separately supported public Rust API.
+  Retrieve [[rust-recognition-transaction-integration]] before changing this consumer or its canonical route.
 
 ### 4.10 MCP transport materializer and independent validator
 

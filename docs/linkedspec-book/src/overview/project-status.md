@@ -104,9 +104,9 @@ Public typed values, cross-runtime transaction portability, recursive observatio
 dispatch, and the remaining public authored surfaces remain future work. Exact transaction syntax is ratified:
 `recognition_checkpoint()`, `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and
 `recognition_rollback(token)`. Match is a strict boolean and the falsey-safe payload remains staged until commit.
-Their neutral artifact/checker is executable at 128 current + 4 dedicated ActionIR rows, 246 call rows, and 41
-rejected mutations, with recognition rollout 2/9 complete. The authored forms are current executable syntax on
-Perl only; Rust, Dart, Julia, PUC Lua, LuaJIT, recurring, and public-no-drift legs remain RED. The internal
+Their neutral artifact/checker is executable at 128 current + 4 dedicated ActionIR rows, 246 call rows, and 42
+rejected mutations, with recognition rollout 3/9 complete. The authored forms are current executable syntax on
+Perl and Rust; Dart, Julia, PUC Lua, LuaJIT, recurring, and public-no-drift legs remain RED. The internal
 Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT admissions do not add an authored `Position` or `Span` value, transaction
 operation, schema version, or new helper result. Rollout is 8 complete / 6 pending because the combined recurring/
 public no-drift row remains owned by final program-wide closeout `FUTURE-PARITY-BACKLOG.14.8`.
@@ -114,14 +114,14 @@ public no-drift row remains owned by final program-wide closeout `FUTURE-PARITY-
 Perl now has an admitted transaction implementation with four dedicated ActionIR nodes, recursive static
 effect closure, invocation-local mark/cursor snapshots, falsey-safe commit results, typed recognition-only progress
 errors, and independent generated-source execution. Its exact 51-test final-path consumer is GREEN, tracked,
-syntax-checked, and executed once by canonical CI; only `perl` advances, leaving recognition rollout at 2/9.
+syntax-checked, and executed once by canonical CI.
 
-Rust now has a documentation-hidden end-to-end implementation behind two explicit custom cfgs. Dedicated
+Rust now has an admitted documentation-hidden end-to-end implementation. Dedicated
 non-eager nodes survive serialized reconstruction, the neutral effect/progress fixtures pass, and the native,
 reconstructed, generated-plan, and independently compiled emitted-source carriers preserve a false recognized
-payload through the private invocation/cursor/boundary/mark/token authority. The nested contract passes 12/12,
-the outer authority contract remains 7/7, and ordinary Cargo still executes zero tests. No manifest or canonical-
-driver route admits the implementation, so rollout and the current Perl-only support claim remain unchanged.
+payload through the private invocation/cursor/boundary/mark/token authority. The ordinary contract passes 12/12
+and canonical CI executes that exact target once. Only Rust advances; recognition rollout is 3/9 and every later
+runtime, recurring, and public-no-drift leg remains RED.
 
 The helper audit distinguishes 7 callable compatibility aliases from 2 internal Perl contract/scanner ids.
 `capture_take_slice` and `capture_take_slice_len` are internal ids, not accepted helper spellings; authored code

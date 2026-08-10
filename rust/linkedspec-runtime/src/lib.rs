@@ -9,11 +9,6 @@
 //! The Perl reference implementation lives at `perl/LinkedSpec.pm`.
 //! The Rust implementation is idiomatic Rust — no code generation, no eval.
 
-#![allow(
-    unexpected_cfgs,
-    reason = "the dormant transaction contract is selected only by an explicit test cfg"
-)]
-
 pub mod diagnostic;
 pub mod diagnostic_output;
 pub mod engine;
@@ -23,7 +18,6 @@ mod mcp_contract_runtime;
 pub mod mcp_server;
 mod mcp_wire;
 pub mod primary_cli;
-#[cfg(linkedspec_recognition_transaction_red)]
 #[doc(hidden)]
 pub mod recognition_transaction;
 pub mod runtime;

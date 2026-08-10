@@ -21,6 +21,18 @@ JULIA_CONTRACTS_PATH = ROOT / "julia" / "src" / "action" / "ActionContracts.jl"
 LUA_CALL_NAMES_PATH = ROOT / "lua" / "src" / "linkedspec" / "action_call_names.lua"
 CI_PATH = ROOT / "tools" / "run_ci_local.sh"
 PERL_CONSUMER_PATH = "t/recognition_transaction_perl_contract.t"
+RUST_CONSUMER_PATH = "rust/linkedspec-runtime/tests/recognition_transaction_contract.rs"
+RUST_ADMISSION_SOURCE_PATHS = [
+    "rust/linkedspec-core/src/lib.rs",
+    "rust/linkedspec-core/src/callable_contract.rs",
+    "rust/linkedspec-core/src/expr.rs",
+    "rust/linkedspec-runtime/src/lib.rs",
+    "rust/linkedspec-runtime/src/engine.rs",
+    "rust/linkedspec-runtime/src/recognition_transaction.rs",
+    "rust/linkedspec-runtime/src/runtime.rs",
+    "rust/linkedspec-runtime/src/source_emitter.rs",
+    RUST_CONSUMER_PATH,
+]
 
 ALLOWED_EFFECTS = [
     "pure_value",
@@ -66,7 +78,7 @@ EXPECTED_COUNTS = {
     "progress_cases": 8,
     "diagnostics": 15,
     "rollout_legs": 9,
-    "mutations": 41,
+    "mutations": 42,
 }
 EXPECTED_EFFECT_ROW_HASHES = {
     "action_ir_effect_rows": "560de8fc586cee7adf66e1b6eeab7d931f441ebda6ca9cb0498ecc9d4392f775",
@@ -83,8 +95,8 @@ EXPECTED_SURFACE = {
         "remains staged until commit"
     ),
     "availability": (
-        "available only in an admitted backend; currently Perl, with all other "
-        "runtime legs future and unavailable"
+        "available only in an admitted backend; currently Perl and Rust, with "
+        "all later runtime legs future and unavailable"
     ),
 }
 EXPECTED_TOKEN_STATES = [
@@ -130,7 +142,7 @@ EXPECTED_DIAGNOSTICS = [
 EXPECTED_ROLLOUT = [
     (1, "FUTURE-PARITY-BACKLOG.14.3.1.1", "neutral", "complete"),
     (2, "FUTURE-PARITY-BACKLOG.14.3.2", "perl", "complete"),
-    (3, "FUTURE-PARITY-BACKLOG.14.3.3", "rust", "red"),
+    (3, "FUTURE-PARITY-BACKLOG.14.3.3", "rust", "complete"),
     (4, "FUTURE-PARITY-BACKLOG.14.3.4", "dart", "red"),
     (5, "FUTURE-PARITY-BACKLOG.14.3.5", "julia", "red"),
     (6, "FUTURE-PARITY-BACKLOG.14.3.6", "puc_lua", "red"),
@@ -159,17 +171,25 @@ EXPECTED_PERL_ADMISSION = {
     "registration_marker": "running exact Perl recognition transaction admission consumer",
     "invocation": f"PERL5LIB= prove -Iperl {PERL_CONSUMER_PATH}",
 }
+EXPECTED_RUST_ADMISSION = {
+    "consumer_path": RUST_CONSUMER_PATH,
+    "registration_marker": "running exact Rust recognition transaction admission consumer",
+    "invocation": (
+        "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime "
+        "--test recognition_transaction_contract"
+    ),
+}
 PUBLIC_SEQUENCE_CONTRACT = {
     "documents": [
         {
             "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
             "required_markers": [
                 "The shared contract now has an executable backend-neutral authority",
-                "The Perl reference now recognizes and admits the four forms as a current capability",
-                "This section describes a current Perl feature and an accepted future portable contract",
-                "fails closed over three public transaction pages, eight forbidden claims, and fourteen sequence mutations",
+                "The Perl and Rust lanes now recognize and admit the four forms as a current capability",
+                "This section describes current Perl and Rust features and an accepted future portable contract",
+                "fails closed over three public transaction pages, eleven forbidden claims, and twenty-five sequence mutations",
                 (
-                    "executable, and Perl is admitted; Rust, Dart, Julia, PUC Lua, "
+                    "executable, and Perl and Rust are admitted; Dart, Julia, PUC Lua, "
                     "and LuaJIT must each be admitted independently"
                 ),
             ],
@@ -178,7 +198,7 @@ PUBLIC_SEQUENCE_CONTRACT = {
             "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
             "required_markers": [
                 "The neutral authority is now executable",
-                "support is current and canonically admitted",
+                "Perl and Rust transaction support is current and canonically admitted",
                 "Neutral proof alone is not backend support",
             ],
         },
@@ -189,8 +209,8 @@ PUBLIC_SEQUENCE_CONTRACT = {
                     "Their neutral artifact/checker is executable at 128 current + 4 "
                     "dedicated ActionIR rows"
                 ),
-                "recognition rollout 2/9 complete",
-                "Rust, Dart, Julia, PUC Lua, LuaJIT, recurring, and public-no-drift legs remain RED",
+                "recognition rollout 3/9 complete",
+                "Dart, Julia, PUC Lua, LuaJIT, recurring, and public-no-drift legs remain RED",
             ],
         },
     ],
@@ -227,23 +247,38 @@ PUBLIC_SEQUENCE_CONTRACT = {
             "path": "docs/linkedspec-book/src/overview/project-status.md",
             "text": "neutral rollout 9/9 complete",
         },
+        {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "text": "current on Perl and future on the other runtimes",
+        },
+        {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "text": "Rust, Dart, Julia, PUC Lua, and LuaJIT do not yet admit the forms",
+        },
+        {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "text": "the other runtimes do not yet implement that route",
+        },
     ],
 }
-PUBLIC_SEQUENCE_MUTATION_COUNT = 14
+PUBLIC_SEQUENCE_MUTATION_COUNT = 25
 CAPABILITY_GUIDE_CONTRACT = {
     "path": "capability_conformance/README.md",
     "required_markers": [
-        "neutral + Perl 2/9 complete",
+        "neutral + Perl + Rust 3/9 complete",
         (
-            "current on Perl and remain future on every other runtime"
+            "current on Perl and Rust and remain future on Dart, Julia, PUC Lua, and LuaJIT"
         ),
     ],
     "forbidden_claims": [
         "Rollout is neutral 1/9 complete",
         "forms remain future and unavailable in every backend",
+        "neutral + Perl 2/9 complete",
+        "current on Perl and remain future on every other runtime",
     ],
 }
-CAPABILITY_GUIDE_MUTATION_COUNT = 6
+CAPABILITY_GUIDE_MUTATION_COUNT = 8
+RUST_ADMISSION_MUTATION_COUNT = 8
 EXPECTED_TOP_LEVEL = {
     "format",
     "contract_id",
@@ -280,6 +315,32 @@ def read_text(path: Path) -> str:
         raise ContractError(f"cannot read {path.relative_to(ROOT)}: {exc}") from exc
 
 
+def rust_admission_sources() -> dict[str, str]:
+    return {path: read_text(ROOT / path) for path in RUST_ADMISSION_SOURCE_PATHS}
+
+
+def validate_rust_admission(ci: str, sources: dict[str, str]) -> None:
+    require(
+        set(sources) == set(RUST_ADMISSION_SOURCE_PATHS),
+        "Rust admission source inventory drifted",
+    )
+    markers = [
+        f"require_tracked_file {EXPECTED_RUST_ADMISSION['consumer_path']}",
+        f"log \"{EXPECTED_RUST_ADMISSION['registration_marker']}\"",
+        EXPECTED_RUST_ADMISSION["invocation"],
+    ]
+    for marker in markers:
+        require(
+            ci.count(marker) == 1,
+            f"canonical Rust admission marker missing or duplicated: {marker}",
+        )
+    for relative_path, source in sources.items():
+        require(
+            "linkedspec_recognition_transaction" not in source,
+            f"Rust recognition transaction source remains dormant: {relative_path}",
+        )
+
+
 def public_sequence_texts() -> dict[str, str]:
     paths = [row["path"] for row in PUBLIC_SEQUENCE_CONTRACT["documents"]]
     return {path: read_text(ROOT / path) for path in paths}
@@ -305,7 +366,7 @@ def validate_capability_guide(
     )
     require(
         isinstance(forbidden, list)
-        and len(forbidden) == 2 == len(set(forbidden)),
+        and len(forbidden) == 4 == len(set(forbidden)),
         "capability-guide forbidden-claim inventory drifted",
     )
     for marker in markers:
@@ -354,13 +415,14 @@ def validate_public_sequence(
     require(rollout_status.get("neutral") == "complete", "public sequence requires neutral complete")
     require(
         rollout_status.get("perl") == "complete"
+        and rollout_status.get("rust") == "complete"
         and set(rollout_status.values()) == {"complete", "red"}
         and all(
             status == "red"
             for leg, status in rollout_status.items()
-            if leg not in {"neutral", "perl"}
+            if leg not in {"neutral", "perl", "rust"}
         ),
-        "public sequence requires neutral and Perl complete with every later leg RED",
+        "public sequence requires neutral, Perl, and Rust complete with every later leg RED",
     )
 
     for row in documents:
@@ -385,7 +447,7 @@ def validate_public_sequence(
             )
             require(tracked.returncode == 0, f"public document is not tracked: {path}")
 
-    require(len(forbidden) == 8, "public forbidden-claim inventory drifted")
+    require(len(forbidden) == 11, "public forbidden-claim inventory drifted")
     for row in forbidden:
         path = row.get("path")
         claim = row.get("text")
@@ -720,7 +782,7 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
         "task_owner drifted",
     )
     require(
-        document.get("status") == "neutral_and_perl_complete_other_legs_red",
+        document.get("status") == "neutral_perl_and_rust_complete_other_legs_red",
         "neutral/backend status drifted",
     )
     require(document.get("expected_counts") == EXPECTED_COUNTS, "expected_counts drifted")
@@ -881,7 +943,11 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
         "Perl rollout consumer path drifted",
     )
     require(
-        all(row.get("paths") == [] for row in rollout[2:]),
+        rollout[2].get("paths") == [EXPECTED_RUST_ADMISSION["consumer_path"]],
+        "Rust rollout consumer path drifted",
+    )
+    require(
+        all(row.get("paths") == [] for row in rollout[3:]),
         "RED rollout legs must not claim implementation paths",
     )
 
@@ -939,6 +1005,7 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
             ci.count(EXPECTED_PERL_ADMISSION["invocation"]) == 1,
             "canonical Perl admission invocation missing or duplicated",
         )
+        validate_rust_admission(ci, rust_admission_sources())
         validate_public_sequence(
             document,
             PUBLIC_SEQUENCE_CONTRACT,
@@ -1013,8 +1080,9 @@ MUTATIONS: dict[str, Callable[[dict[str, Any]], None]] = {
     "diagnostic": _set(["diagnostics", 0, "code"], "changed"),
     "rollout_order": _set(["rollout", 0, "order"], 2),
     "rollout_owner": _set(["rollout", 1, "owner"], "FUTURE-PARITY-BACKLOG.14.3.1.1"),
-    "rollout_status": _set(["rollout", 2, "status"], "complete"),
+    "rollout_status": _set(["rollout", 2, "status"], "red"),
     "rollout_perl_regression": _set(["rollout", 1, "status"], "red"),
+    "rollout_next_backend": _set(["rollout", 3, "status"], "complete"),
     "canonical_contract_path": _set(["canonical_execution", "contract_path"], "changed.json"),
     "canonical_checker_path": _set(["canonical_execution", "checker_path"], "changed.py"),
     "canonical_invocation": _set(
@@ -1040,11 +1108,24 @@ def validate_mutations(document: dict[str, Any]) -> None:
         raise ContractError(f"mutation {mutation_id!r} was accepted")
 
 
+def public_claim_mutation(
+    path: str,
+    claim: str,
+) -> Callable[[dict[str, Any], dict[str, Any], dict[str, str]], None]:
+    def mutate(
+        _document: dict[str, Any],
+        _contract: dict[str, Any],
+        candidate_texts: dict[str, str],
+    ) -> None:
+        candidate_texts[path] += "\n" + claim
+
+    return mutate
+
+
 def validate_public_sequence_mutations(document: dict[str, Any]) -> int:
     texts = public_sequence_texts()
     capture_path = PUBLIC_SEQUENCE_CONTRACT["documents"][0]["path"]
     capture_marker = PUBLIC_SEQUENCE_CONTRACT["documents"][0]["required_markers"][0]
-    stale_claim = PUBLIC_SEQUENCE_CONTRACT["forbidden_claims"][0]["text"]
     mutations: list[
         tuple[
             str,
@@ -1110,13 +1191,6 @@ def validate_public_sequence_mutations(document: dict[str, Any]) -> int:
             ),
         ),
         (
-            "stale neutral-next claim",
-            lambda _document, _contract, candidate_texts: candidate_texts.__setitem__(
-                capture_path,
-                candidate_texts[capture_path] + "\n" + stale_claim,
-            ),
-        ),
-        (
             "neutral rollout regression",
             lambda candidate, _contract, _texts: candidate["rollout"][0].__setitem__(
                 "status", "red"
@@ -1129,12 +1203,27 @@ def validate_public_sequence_mutations(document: dict[str, Any]) -> int:
             ),
         ),
         (
-            "backend rollout promotion",
+            "Rust rollout regression",
             lambda candidate, _contract, _texts: candidate["rollout"][2].__setitem__(
+                "status", "red"
+            ),
+        ),
+        (
+            "backend rollout promotion",
+            lambda candidate, _contract, _texts: candidate["rollout"][3].__setitem__(
                 "status", "complete"
             ),
         ),
     ]
+    for index, forbidden_row in enumerate(PUBLIC_SEQUENCE_CONTRACT["forbidden_claims"], 1):
+        forbidden_path = forbidden_row["path"]
+        forbidden_text = forbidden_row["text"]
+        mutations.append(
+            (
+                f"forbidden public claim {index}",
+                public_claim_mutation(forbidden_path, forbidden_text),
+            )
+        )
     require(
         len(mutations) == PUBLIC_SEQUENCE_MUTATION_COUNT,
         "public sequence mutation count drifted",
@@ -1160,8 +1249,6 @@ def validate_public_sequence_mutations(document: dict[str, Any]) -> int:
 def validate_capability_guide_mutations() -> int:
     text = read_text(ROOT / CAPABILITY_GUIDE_CONTRACT["path"])
     marker = CAPABILITY_GUIDE_CONTRACT["required_markers"][0]
-    stale_first = CAPABILITY_GUIDE_CONTRACT["forbidden_claims"][0]
-    stale_second = CAPABILITY_GUIDE_CONTRACT["forbidden_claims"][1]
     mutations: list[tuple[str, Callable[[dict[str, Any], str], tuple[dict[str, Any], str]]]] = [
         (
             "guide path drift",
@@ -1188,15 +1275,17 @@ def validate_capability_guide_mutations() -> int:
             "guide marker duplication",
             lambda contract, candidate: (contract, candidate + "\n" + marker),
         ),
-        (
-            "stale neutral-only rollout",
-            lambda contract, candidate: (contract, candidate + "\n" + stale_first),
-        ),
-        (
-            "stale all-backend unavailability",
-            lambda contract, candidate: (contract, candidate + "\n" + stale_second),
-        ),
     ]
+    for index, stale_claim in enumerate(CAPABILITY_GUIDE_CONTRACT["forbidden_claims"], 1):
+        mutations.append(
+            (
+                f"stale guide claim {index}",
+                lambda contract, candidate, claim=stale_claim: (
+                    contract,
+                    candidate + "\n" + claim,
+                ),
+            )
+        )
     require(
         len(mutations) == CAPABILITY_GUIDE_MUTATION_COUNT,
         "capability-guide mutation count drifted",
@@ -1217,6 +1306,52 @@ def validate_capability_guide_mutations() -> int:
     return len(mutations)
 
 
+def validate_rust_admission_mutations() -> int:
+    ci = read_text(CI_PATH)
+    sources = rust_admission_sources()
+    markers = [
+        f"require_tracked_file {EXPECTED_RUST_ADMISSION['consumer_path']}",
+        f"log \"{EXPECTED_RUST_ADMISSION['registration_marker']}\"",
+        EXPECTED_RUST_ADMISSION["invocation"],
+    ]
+    mutations: list[tuple[str, str, str | None]] = []
+    for label, marker in zip(("require", "log", "invocation"), markers, strict=True):
+        mutations.extend(
+            [
+                (f"Rust {label} omission", ci.replace(marker, "", 1), None),
+                (f"Rust {label} duplication", ci + "\n" + marker, None),
+            ]
+        )
+    mutations.extend(
+        [
+            (
+                "Rust outer cfg retained",
+                ci,
+                "#![cfg(linkedspec_recognition_transaction_red)]",
+            ),
+            (
+                "Rust integration cfg retained",
+                ci,
+                "#[cfg(linkedspec_recognition_transaction_integration_red)]",
+            ),
+        ]
+    )
+    require(
+        len(mutations) == RUST_ADMISSION_MUTATION_COUNT,
+        "Rust admission mutation count drifted",
+    )
+    for name, candidate_ci, stale_source in mutations:
+        candidate_sources = dict(sources)
+        if stale_source is not None:
+            candidate_sources[RUST_CONSUMER_PATH] += "\n" + stale_source
+        try:
+            validate_rust_admission(candidate_ci, candidate_sources)
+        except ContractError:
+            continue
+        raise ContractError(f"Rust admission mutation {name!r} was accepted")
+    return len(mutations)
+
+
 def main() -> int:
     try:
         document = load_contract()
@@ -1224,6 +1359,7 @@ def main() -> int:
         validate_mutations(document)
         public_mutations = validate_public_sequence_mutations(document)
         guide_mutations = validate_capability_guide_mutations()
+        rust_admission_mutations = validate_rust_admission_mutations()
     except ContractError as exc:
         print(f"recognition-transaction-contract: ERROR: {exc}", file=sys.stderr)
         return 1
@@ -1231,9 +1367,10 @@ def main() -> int:
         "recognition-transaction-contract: OK "
         "(132 ActionIR rows = 128 current + 4 dedicated; 246 call rows; "
         "token 8 positive/17 negative; effects 6 graphs; marks 6; progress 8; "
-        "41 rejected mutations; rollout neutral + Perl 2/9 complete; "
-        f"public sequence 3 documents/8 forbidden/{public_mutations} mutations; "
-        f"capability guide 1 document/2 forbidden/{guide_mutations} mutations)"
+        "42 rejected mutations; rollout neutral + Perl + Rust 3/9 complete; "
+        f"public sequence 3 documents/11 forbidden/{public_mutations} mutations; "
+        f"capability guide 1 document/4 forbidden/{guide_mutations} mutations; "
+        f"Rust admission {rust_admission_mutations} mutations)"
     )
     return 0
 

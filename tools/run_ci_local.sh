@@ -399,6 +399,7 @@ require_tracked_file t/typed_source_location_values.t
 require_tracked_file t/typed_source_location_perl_contract.t
 require_tracked_file t/recognition_transaction_perl_authority.t
 require_tracked_file t/recognition_transaction_perl_contract.t
+require_tracked_file rust/linkedspec-runtime/tests/recognition_transaction_contract.rs
 require_tracked_file rust/linkedspec-runtime/tests/typed_source_location_contract.rs
 require_tracked_file dart/test/typed_source_location_contract_test.dart
 require_tracked_file julia/test/typed_source_location_contract_test.jl
@@ -587,6 +588,9 @@ PERL5LIB= prove -Iperl t/recognition_transaction_perl_authority.t
 
 log "running exact Perl recognition transaction admission consumer"
 PERL5LIB= prove -Iperl t/recognition_transaction_perl_contract.t
+
+log "running exact Rust recognition transaction admission consumer"
+cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test recognition_transaction_contract
 
 log "running exact Perl typed source-location value and projection admission consumers"
 PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t

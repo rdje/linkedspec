@@ -49,23 +49,21 @@
 > treat those compatibility controls as transaction support. The accepted transaction forms are `recognition_checkpoint()`,
 > `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and `recognition_rollback(token)`. The attempt
 > returns a match boolean; commit separately exposes the staged payload. The neutral authority is now executable
-> and fail-closed over 128 current + four dedicated node rows, 246 call rows, and 41 mutations. Perl transaction
-> support is current and canonically admitted; the other runtime legs remain unavailable until their own
+> and fail-closed over 128 current + four dedicated node rows, 246 call rows, and 42 mutations. Perl and Rust transaction support is current and canonically admitted; the later runtime legs remain unavailable until their own
 > admissions land. Neutral proof alone is not backend support.
 >
 > Perl now has an admitted end-to-end implementation behind that boundary: dedicated ActionIR, recursive static
 > effect validation, invocation-local cursor/boundary/marks, falsey-safe staging, typed cursor-progress failures,
 > and independently loaded generated-source execution are GREEN in the exact 51-test final-path consumer. Canonical
-> CI requires, syntax-checks, and executes that consumer exactly once. Only the Perl leg advances, so recognition
-> rollout is 2/9 complete while Rust, Dart, Julia, PUC Lua, LuaJIT, recurring, and public-no-drift remain RED.
+> CI requires, syntax-checks, and executes that consumer exactly once.
 >
-> Rust now has a documentation-hidden end-to-end integration behind the dormant consumer's nested custom cfg.
+> Rust now has an admitted documentation-hidden end-to-end integration.
 > Four dedicated non-eager expression nodes survive serialized reconstruction; the recursive effect and cursor-
 > progress classifiers enforce the neutral fixtures; and native, reconstructed, generated-plan, and independently
-> compiled emitted-source carriers share the private invocation/cursor/boundary/mark/token authority. The nested
-> contract passes 12 tests, including a false recognized payload, while the outer authority contract remains 7/7
-> and ordinary Cargo still runs zero tests. No manifest or canonical-driver route admits this implementation, so
-> rollout stays 2/9 and current authored Rust support remains unavailable until its separate admission leaf.
+> compiled emitted-source carriers share the private invocation/cursor/boundary/mark/token authority. The ordinary
+> contract passes 12 tests, including a false recognized payload, and canonical CI executes that exact target once.
+> Only Rust advances: recognition rollout is 3/9 while Dart, Julia, PUC Lua, LuaJIT, recurring, and public-no-drift
+> remain RED.
 >
 > Any cursor transaction is one explicit
 > recognition attempt over invocation-local cursor/boundary/marks only; it adds no search tree and cannot undo

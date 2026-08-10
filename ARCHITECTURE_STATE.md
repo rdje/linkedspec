@@ -73,6 +73,19 @@ consumers pass, and the route registry remains 20 surfaces / 62 routes / 32/32 w
 empty debt metadata. The program is composition-closed. These storage migrations change documentation governance
 only; they change no language, compiler, runtime, backend, fixture, CLI, protocol, or project-data root.
 
+- `2026-08-10 admitted Rust recognition transactions`: `FUTURE-PARITY-BACKLOG.14.3.3.3` removes the two dormant
+  custom cfgs from the exact nine-source Rust inventory while retaining the authority as documentation-hidden.
+  Cargo ordinarily executes the unchanged 12-test final-path consumer, and canonical CI requires, logs, and runs
+  that exact target once. Eight mutations reject registration omission/duplication and either stale cfg. Only Rust
+  advances: recognition stays 132 node rows / 246 calls, semantic proof becomes 42, and rollout becomes neutral +
+  Perl + Rust 3/9. Dart, Julia, PUC Lua, LuaJIT, recurring composition, and final public no-drift remain RED.
+  Sole-facing review advances the public projection to three pages / eleven forbidden claims / 25 mutations after
+  finding three adjacent Perl-only sentences outside the earlier inventory; every forbidden claim is now injected
+  independently. The distinct capability guide is 1/4/8. Ordinary 12/12, strict changed-crate Clippy, and the
+  complete Rust-local gate pass without changing helper results/registers, schemas, semantic/MCP/capability/CLI,
+  README, or later-backend behavior. Definitive authorized CI also passes Perl 51/51, Rust 12/12, six-family
+  containment, relocation, CLI 66x2, RAM 77%, and Phase 0 1,031/1,031 in 739 seconds.
+
 - `2026-08-10 integrated Rust recognition transactions`: `FUTURE-PARITY-BACKLOG.14.3.3.2` adds four dedicated
   non-eager cfg-private expression nodes and exact parser normalization, serialized ActionIR reconstruction, the
   neutral recursive-effect and cursor-progress classifiers, and one live adapter over the existing private

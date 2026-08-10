@@ -129,19 +129,15 @@ pub enum Expr {
     #[serde(rename = "call")]
     Call { name: String, args: Vec<Arg> },
     /// Create one rule-local recognition transaction token.
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     #[serde(rename = "recognition_checkpoint")]
     RecognitionCheckpoint,
     /// Perform one non-eager static child-rule recognition attempt.
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     #[serde(rename = "recognize_once")]
     RecognizeOnce { token: String, rule: String },
     /// Commit one attempted recognition transaction and return its payload.
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     #[serde(rename = "recognition_commit")]
     RecognitionCommit { token: String },
     /// Roll back one attempted recognition transaction.
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     #[serde(rename = "recognition_rollback")]
     RecognitionRollback { token: String },
     /// A scalar assignment operator: `name = value`
@@ -307,7 +303,6 @@ impl Expr {
                 }
                 in_args(args)
             }
-            #[cfg(linkedspec_recognition_transaction_integration_red)]
             Expr::RecognitionCheckpoint
             | Expr::RecognizeOnce { .. }
             | Expr::RecognitionCommit { .. }
@@ -360,7 +355,6 @@ impl Expr {
     }
 
     /// Report whether this expression tree contains a dedicated transaction node.
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     pub fn contains_recognition_transaction(&self) -> bool {
         let args_contain = |args: &[Arg]| {
             args.iter()
@@ -452,15 +446,11 @@ impl std::fmt::Display for Expr {
                 }
                 write!(f, ")")
             }
-            #[cfg(linkedspec_recognition_transaction_integration_red)]
             Expr::RecognitionCheckpoint => f.write_str("recognition_checkpoint()"),
-            #[cfg(linkedspec_recognition_transaction_integration_red)]
             Expr::RecognizeOnce { token, rule } => {
                 write!(f, "recognize_once({token}, call({rule}))")
             }
-            #[cfg(linkedspec_recognition_transaction_integration_red)]
             Expr::RecognitionCommit { token } => write!(f, "recognition_commit({token})"),
-            #[cfg(linkedspec_recognition_transaction_integration_red)]
             Expr::RecognitionRollback { token } => write!(f, "recognition_rollback({token})"),
             Expr::AssignScalar { name, value } => write!(f, "{name} = {value}"),
             Expr::AssignArrayAppend { name, value } => write!(f, "{name} += {value}"),
@@ -608,7 +598,6 @@ impl CodeBlock {
     }
 
     /// Report whether this block contains a dedicated transaction node.
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     pub fn contains_recognition_transaction(&self) -> bool {
         self.statements
             .iter()
@@ -2019,7 +2008,6 @@ impl<'a> Parser<'a> {
             }
             self.advance(1); // consume ')'
 
-            #[cfg(linkedspec_recognition_transaction_integration_red)]
             if let Some(expr) = Self::recognition_transaction_expr(&name, &args)? {
                 return Ok(expr);
             }
@@ -2051,7 +2039,6 @@ impl<'a> Parser<'a> {
         }
     }
 
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     fn recognition_transaction_expr(name: &str, args: &[Arg]) -> Result<Option<Expr>, String> {
         let bare = |argument: &Arg| match argument {
             Arg::Positional(Expr::Variable { name }) => Some(name.clone()),

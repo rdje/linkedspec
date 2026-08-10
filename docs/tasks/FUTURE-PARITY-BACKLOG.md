@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-10` (cfg-private Rust transaction integration `.14.3.3.2` is signoff-complete from clean
-  private-authority commit `fd8a1934` as intended atomic 190/300; admission `.14.3.3.3` next after landing; no push)
+- Last updated: `2026-08-11` (Rust transaction admission `.14.3.3.3` is signoff-complete from clean integration
+  commit `1cf2923a` and commit-ready as atomic 191/300; Dart RED `.14.3.4.0` follows after landing; no push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -103,14 +103,13 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-10):** private Rust transaction authority `.14.3.3.1` landed at `fd8a1934` as
-atomic 189/300 (no push). Integration `.14.3.3.2` is signoff-complete from that clean handoff as intended atomic
-190/300. Four dedicated cfg-private nodes, neutral effect/progress policy, live invocation/cursor/boundary/mark/
-acceptance binding, generated-plan execution, and independently compiled emitted source pass nested 12/12; outer
-authority remains 7/7 and ordinary discovery stays zero-test. Complete Rust local and canonical gates pass.
-Recognition remains 132/246/41, rollout 2/9, public 3/8/14, guide 1/2/6; admission `.14.3.3.3` is next after clean
-landing and current authored Rust support does not move. `TASK-TREE-METADATA-HYGIENE.5`
-separately owns a low-noise active-tree freshness invariant.
+**Authoritative frontier (2026-08-11):** Rust integration `.14.3.3.2` landed at `1cf2923a` as atomic 190/300 (no
+push). Admission `.14.3.3.3` is signoff-complete from that clean handoff and commit-ready as atomic 191/300. Both dormant cfgs are
+removed; the unchanged consumer is ordinary/canonical and passes 12/12 across authority, lowering, policy,
+native/reconstructed/generated-plan/emitted carriers, and compatibility. Recognition is 132/246/42, rollout 3/9,
+public 3/11/25, guide 1/4/8, and Rust admission 8; only Rust advances. Rust-local and definitive canonical proof
+pass, including CLI 66x2, RAM 77%, and Phase 0 1,031/1,031 in 739 seconds. Dart RED `.14.3.4.0` follows only after
+the clean atomic handoff. `TASK-TREE-METADATA-HYGIENE.5` separately owns active-tree freshness.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private

@@ -582,13 +582,8 @@ fn runtime_value_trace_kind(value: &RuntimeValue) -> &'static str {
     }
 }
 
-fn child_result_is_match(_ctx: &mut RuntimeContext, value: &RuntimeValue) -> bool {
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
-    {
-        _ctx.recognition_result_is_match(value.as_bool())
-    }
-    #[cfg(not(linkedspec_recognition_transaction_integration_red))]
-    value.as_bool()
+fn child_result_is_match(ctx: &mut RuntimeContext, value: &RuntimeValue) -> bool {
+    ctx.recognition_result_is_match(value.as_bool())
 }
 
 struct GeneratedPlanExecutor<'a> {
@@ -763,7 +758,6 @@ impl GeneratedPlanExecutor<'_> {
             return Ok(RuntimeValue::Undef);
         }
 
-        #[cfg(linkedspec_recognition_transaction_integration_red)]
         if let Err(error) = ctx.enter_recognition_invocation(label) {
             ctx.exit_recursion(label, entry_pos);
             return Err(error);
@@ -788,7 +782,6 @@ impl GeneratedPlanExecutor<'_> {
             TraceLevel::MEDIUM,
         );
         ctx.exit_rule_variable_scope();
-        #[cfg(linkedspec_recognition_transaction_integration_red)]
         let result = match ctx.leave_recognition_invocation(label) {
             Err(error) if result.is_ok() => Err(error),
             _ => result,
@@ -982,7 +975,6 @@ impl GeneratedPlanExecutor<'_> {
             }
 
             if let Some(m) = match_result {
-                #[cfg(linkedspec_recognition_transaction_integration_red)]
                 ctx.note_recognition_match();
                 let dispatch_index = required_and_idx.unwrap_or(m.index);
                 let (target_rule, target_regex_index) =
@@ -1224,7 +1216,6 @@ impl GeneratedPlanExecutor<'_> {
             return Ok(RuntimeValue::Undef);
         }
 
-        #[cfg(linkedspec_recognition_transaction_integration_red)]
         if let Err(error) = ctx.enter_recognition_invocation(label) {
             ctx.exit_recursion(label, entry_pos);
             return Err(error);
@@ -1249,7 +1240,6 @@ impl GeneratedPlanExecutor<'_> {
             TraceLevel::MEDIUM,
         );
         ctx.exit_rule_variable_scope();
-        #[cfg(linkedspec_recognition_transaction_integration_red)]
         let result = match ctx.leave_recognition_invocation(label) {
             Err(error) if result.is_ok() => Err(error),
             _ => result,
@@ -2430,7 +2420,6 @@ impl Engine {
             );
             return Ok(RuntimeValue::Undef);
         }
-        #[cfg(linkedspec_recognition_transaction_integration_red)]
         if let Err(error) = ctx.enter_recognition_invocation(label) {
             ctx.exit_recursion(label, entry_pos);
             return Err(error);
@@ -2447,7 +2436,6 @@ impl Engine {
             );
         }
         ctx.exit_rule_variable_scope();
-        #[cfg(linkedspec_recognition_transaction_integration_red)]
         let result = match ctx.leave_recognition_invocation(label) {
             Err(error) if result.is_ok() => Err(error),
             _ => result,
@@ -2956,7 +2944,6 @@ impl Engine {
             }
 
             if let Some(m) = match_result {
-                #[cfg(linkedspec_recognition_transaction_integration_red)]
                 ctx.note_recognition_match();
                 let dispatch_index = required_and_idx.unwrap_or(m.index);
                 let (target_rule, target_regex_index) =
@@ -3231,9 +3218,7 @@ impl Engine {
                 (name == "call" && Self::call_names_rule(args, rule_label))
                     || args.iter().any(|arg| Self::arg_calls_rule(arg, rule_label))
             }
-            #[cfg(linkedspec_recognition_transaction_integration_red)]
             Expr::RecognizeOnce { rule, .. } => rule == rule_label,
-            #[cfg(linkedspec_recognition_transaction_integration_red)]
             Expr::RecognitionCheckpoint
             | Expr::RecognitionCommit { .. }
             | Expr::RecognitionRollback { .. } => false,
@@ -3305,7 +3290,6 @@ impl Engine {
     fn expr_reads_retv(expr: &Expr) -> bool {
         match expr {
             Expr::Call { args, .. } => args.iter().any(Self::arg_reads_retv),
-            #[cfg(linkedspec_recognition_transaction_integration_red)]
             Expr::RecognitionCheckpoint
             | Expr::RecognizeOnce { .. }
             | Expr::RecognitionCommit { .. }
@@ -4038,7 +4022,6 @@ impl Engine {
         let Expr::AssignScalar { name, value } = expr else {
             return Ok(false);
         };
-        #[cfg(linkedspec_recognition_transaction_integration_red)]
         if matches!(value.as_ref(), Expr::RecognitionCheckpoint) {
             ctx.recognition_checkpoint(rule_label, name)?;
             ctx.set_scalar(name, RuntimeValue::Undef);
@@ -4664,11 +4647,9 @@ impl Engine {
                     .collect::<Result<Vec<_>, _>>()?;
                 self.call_helper_with_args(name, args, &evaluated, ctx, rule_label)
             }
-            #[cfg(linkedspec_recognition_transaction_integration_red)]
             Expr::RecognitionCheckpoint => Err(format!(
                 "recognition_checkpoint must be assigned to a rule-local token in rule '{rule_label}'"
             )),
-            #[cfg(linkedspec_recognition_transaction_integration_red)]
             Expr::RecognizeOnce { token, rule } => {
                 let completion_base = ctx.begin_recognition_scope();
                 let payload = match self.execute_rule(rule, 0, ctx) {
@@ -4682,15 +4663,12 @@ impl Engine {
                 ctx.recognition_attempt(rule_label, token, matched, payload)?;
                 Ok(RuntimeValue::Bool(matched))
             }
-            #[cfg(linkedspec_recognition_transaction_integration_red)]
             Expr::RecognitionCommit { token } => ctx.recognition_commit(rule_label, token),
-            #[cfg(linkedspec_recognition_transaction_integration_red)]
             Expr::RecognitionRollback { token } => {
                 ctx.recognition_rollback(rule_label, token)?;
                 Ok(RuntimeValue::Undef)
             }
             Expr::AssignScalar { name, value } => {
-                #[cfg(linkedspec_recognition_transaction_integration_red)]
                 if matches!(value.as_ref(), Expr::RecognitionCheckpoint) {
                     ctx.recognition_checkpoint(rule_label, name)?;
                     ctx.set_scalar(name, RuntimeValue::Undef);

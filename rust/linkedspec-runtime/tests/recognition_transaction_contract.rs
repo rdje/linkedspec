@@ -1,15 +1,6 @@
-#![allow(unexpected_cfgs)]
-#![cfg(linkedspec_recognition_transaction_red)]
-
-//! FUTURE-PARITY-BACKLOG.14.3.3.0 — dormant Rust recognition-transaction contract.
+//! FUTURE-PARITY-BACKLOG.14.3.3.3 — admitted Rust recognition-transaction contract.
 //!
-//! Ordinary Cargo discovery must compile this target with zero active tests. Before admission,
-//! execute the private-authority boundary with:
-//!
-//! `RUSTFLAGS='--cfg linkedspec_recognition_transaction_red' cargo test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test recognition_transaction_contract`.
-//!
-//! The authored/compiler/runtime/carrier integration leaf additionally supplies
-//! `--cfg linkedspec_recognition_transaction_integration_red`.
+//! Ordinary and canonical Cargo execution run this exact final-path consumer once.
 
 use linkedspec_runtime::recognition_transaction::{
     RecognitionFrameState, RecognitionTransactionAuthority, RecognitionTransactionError,
@@ -108,7 +99,7 @@ fn payload_for(operation: &str) -> Value {
 }
 
 #[test]
-fn neutral_authority_and_rust_red_boundary_are_exact() {
+fn neutral_authority_and_rust_admission_are_exact() {
     let contract = contract();
     assert_eq!(contract["contract_id"], CONTRACT_ID);
     assert_eq!(contract["format"], 1);
@@ -121,7 +112,7 @@ fn neutral_authority_and_rust_red_boundary_are_exact() {
     assert_eq!(contract["expected_counts"]["mark_cases"], 6);
     assert_eq!(contract["expected_counts"]["progress_cases"], 8);
     assert_eq!(contract["expected_counts"]["diagnostics"], 15);
-    assert_eq!(contract["expected_counts"]["mutations"], 41);
+    assert_eq!(contract["expected_counts"]["mutations"], 42);
 
     let rollout = contract["rollout"].as_array().expect("rollout rows");
     assert_eq!(rollout.len(), 9);
@@ -130,8 +121,11 @@ fn neutral_authority_and_rust_red_boundary_are_exact() {
     assert_eq!(rollout[1]["leg"], "perl");
     assert_eq!(rollout[1]["status"], "complete");
     assert_eq!(rollout[2]["leg"], "rust");
-    assert_eq!(rollout[2]["status"], "red");
-    assert_eq!(rollout[2]["paths"], json!([]));
+    assert_eq!(rollout[2]["status"], "complete");
+    assert_eq!(
+        rollout[2]["paths"],
+        json!(["rust/linkedspec-runtime/tests/recognition_transaction_contract.rs"])
+    );
     assert!(rollout[3..].iter().all(|row| row["status"] == "red"));
 
     assert_eq!(
@@ -143,7 +137,7 @@ fn neutral_authority_and_rust_red_boundary_are_exact() {
             "rollback": "recognition_rollback(tx)",
             "operand": "recognize_once accepts exactly one unevaluated static call(Rule) operand",
             "result_separation": "recognize_once returns a strict match boolean; the recognized payload remains staged until commit",
-            "availability": "available only in an admitted backend; currently Perl, with all other runtime legs future and unavailable",
+            "availability": "available only in an admitted backend; currently Perl and Rust, with all later runtime legs future and unavailable",
         })
     );
 }
@@ -635,7 +629,6 @@ fn nesting_rejection_and_token_drop_restore_before_invalidation() {
         .expect("leave restored token-drop frame");
 }
 
-#[cfg(linkedspec_recognition_transaction_integration_red)]
 mod integration {
     use super::*;
     use linkedspec_core::compiler::compile;
@@ -807,7 +800,7 @@ Child::AND
                 &encoded,
                 PLAN,
                 "xx",
-                "recognition-transaction/rust-red.spec",
+                "recognition-transaction/rust.spec",
                 GENERATED_SOURCE_CONTRACT,
             )
             .expect("generated-plan transaction execution"),
@@ -828,7 +821,7 @@ Child::AND
             let root = Path::new(env!("CARGO_MANIFEST_DIR"))
                 .join("../target/test-workspaces")
                 .join(format!(
-                    "recognition-transaction-red-{}-{nonce}",
+                    "recognition-transaction-probe-{}-{nonce}",
                     std::process::id()
                 ));
             fs::create_dir_all(root.join("src")).expect("create emitted transaction workspace");
@@ -845,14 +838,14 @@ Child::AND
     #[test]
     fn independently_compiled_emitted_source_uses_the_same_transaction_runtime() {
         let compiled = compile_source(AUTHORED_SOURCE);
-        let emitted = emit_rust_source_v2(&compiled, "recognition-transaction/rust-red.spec")
+        let emitted = emit_rust_source_v2(&compiled, "recognition-transaction/rust.spec")
             .expect("emit transaction source");
         let project = EmittedProject::new();
         let runtime_manifest = Path::new(env!("CARGO_MANIFEST_DIR"));
         fs::write(
             project.root.join("Cargo.toml"),
             format!(
-                "[package]\nname = \"recognition-transaction-red-probe\"\nversion = \"0.0.0\"\nedition = \"2024\"\n\n[dependencies]\nlinkedspec-runtime = {{ path = {:?} }}\nserde_json = \"1\"\n\n[workspace]\n",
+                "[package]\nname = \"recognition-transaction-probe\"\nversion = \"0.0.0\"\nedition = \"2024\"\n\n[dependencies]\nlinkedspec-runtime = {{ path = {:?} }}\nserde_json = \"1\"\n\n[workspace]\n",
                 runtime_manifest
             ),
         )

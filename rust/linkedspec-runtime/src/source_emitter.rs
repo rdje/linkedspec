@@ -324,11 +324,9 @@ impl GeneratedRuleFamily {
             "default" => Some(Self::Default),
             "or_acode" => Some(Self::OrAcode),
             "and_single_acode" => Some(Self::AndSingleAcode),
-            #[cfg(linkedspec_recognition_transaction_integration_red)]
             "and_regex_only" => Some(Self::AndSingleAcode),
             "and_acode_seq" => Some(Self::AndAcodeSeq),
             "and_bcode" => Some(Self::AndBcode),
-            #[cfg(linkedspec_recognition_transaction_integration_red)]
             "and_bcode_seq" => Some(Self::AndBcode),
             "or_bcode" => Some(Self::OrBcode),
             "rep_acode" => Some(Self::RepAcode),
@@ -692,7 +690,6 @@ pub fn parse_with_trace_and_options_and_diagnostic_output(
 }
 "#,
     );
-    #[cfg(linkedspec_recognition_transaction_integration_red)]
     if compiled_spec_contains_recognition_transaction(compiled) {
         let compatibility_parse = r#"pub fn parse(input: &str) -> Result<serde_json::Value, String> {
     execute_generated_parser(COMPILED_SPEC_JSON, GENERATED_PLAN, input)
@@ -706,7 +703,6 @@ pub fn parse_with_trace_and_options_and_diagnostic_output(
     Ok(source)
 }
 
-#[cfg(linkedspec_recognition_transaction_integration_red)]
 fn compiled_spec_contains_recognition_transaction(compiled: &CompiledSpec) -> bool {
     if compiled
         .functions

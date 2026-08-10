@@ -1,6 +1,6 @@
 ---
 id: recognition-transaction-neutral-contract
-title: The recognition-transaction contract covers 132 node rows, 246 call rows, and 41 mutations
+title: The recognition-transaction contract covers 132 node rows, 246 call rows, and 42 mutations
 answers:
   - "where is the executable neutral recognition transaction contract"
   - "how do I run the recognition transaction checker"
@@ -15,10 +15,11 @@ answers:
   - "what is the recognition transaction rollout status"
   - "does the neutral transaction checker change parser behavior"
 date: 2026-08-10
-status: current neutral authority; Perl complete; later runtime, recurring, and public-no-drift legs RED
+status: current neutral authority; Perl and Rust complete; later runtime, recurring, and public-no-drift legs RED
 tags: [cursor, transactions, recognition, actionir, effects, progress, marks, recursion, conformance]
 evidence: "FUTURE-PARITY-BACKLOG.14.3.1.1 adds linkedspec-recognition-transaction-v1 plus an independent checker. The checker derives 128 live ActionIR node kinds from Perl and the same 246 current call names from Dart, Julia, and Lua; adds four future RECOGNITION_* rows; executes token 8/17, effect graphs 6, marks 6, progress 8, diagnostics 15; and rejects 40 semantic mutations. FUTURE-PARITY-BACKLOG.14.3.1.2.0 separately binds public sequence at 3 documents / 8 forbidden / 13 mutations."
 evidence_update_2026_08_10_perl_admission: "FUTURE-PARITY-BACKLOG.14.3.2.3 promotes only Perl, binds its exact final-path consumer, and adds a complete-to-RED regression while retaining premature Rust promotion rejection. Current truth is 2/9 complete and 41 semantic mutations; the public projection independently advances to 3 documents / 8 forbidden claims / 14 mutations."
+evidence_update_2026_08_10_rust_admission: "FUTURE-PARITY-BACKLOG.14.3.3.3 promotes only Rust after making its unchanged 12-test final-path consumer ordinary and canonical. Rust complete-to-RED plus premature Dart promotion raise semantic proof to 42 mutations and rollout to 3/9. Exhaustive stale-claim review advances the public projection to 3 documents / 11 forbidden claims / 25 mutations, the capability guide to 1/4/8, and exact Rust registration/dormancy proof to 8 mutations."
 reverify: "bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && perl tools/check_language_capability_coverage.pl --report"
 ---
 
@@ -43,12 +44,13 @@ recursion—are evaluated to a fixed point so a transitive forbidden effect cann
 
 Executable semantic fixtures cover eight valid falsey-safe token outcomes, seventeen token/ownership failures,
 six invocation-mark snapshot/isolation cases, eight repetition/direct/mutual-recursion progress cases, and fifteen
-portable diagnostic records. Forty-one in-memory mutations cover schema, syntax, token/result, effects, inventories,
+portable diagnostic records. Forty-two in-memory mutations cover schema, syntax, token/result, effects, inventories,
 graphs, marks, progress, diagnostics, rollout, canonical registration, tracked input, freshness, and the
 public-current boundary.
 
-Neutral and Perl are complete. Rust, Dart, Julia, PUC Lua, LuaJIT, recurring composition, and public no-drift
-remain RED. Perl admission binds existing behavior without changing production compiler/runtime/generated-source
-bytes, descriptor/schema, CLI, semantic/MCP, capability, or unrelated helper behavior. The same canonical checker
-separately locks three public transaction pages, eight forbidden milestone/current claims, and fourteen in-memory
-sequence mutations; that accounting remains distinct from the JSON's 41 semantic mutations.
+Neutral, Perl, and Rust are complete. Dart, Julia, PUC Lua, LuaJIT, recurring composition, and public no-drift
+remain RED. Backend admission binds already integrated behavior without changing descriptor/schema, CLI,
+semantic/MCP, capability, or unrelated helper behavior. The same canonical checker separately locks three public
+transaction pages, eleven forbidden milestone/current claims, and 25 in-memory sequence mutations; that accounting
+remains distinct from the JSON's 42 semantic mutations. A one-document/four-forbidden/eight-mutation guide guard
+and eight Rust-registration/dormancy mutations remain separate again.

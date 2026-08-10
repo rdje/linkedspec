@@ -10,6 +10,28 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-10 — FUTURE-PARITY-BACKLOG.14.3.3.3 — admit Rust recognition transactions
+
+- Activated task-tree-first from clean Rust-integration commit `1cf2923a` as intended atomic 191/300.
+- Removed both dormant recognition-transaction custom cfgs from the exact nine-source Rust inventory. The private
+  authority remains documentation-hidden, while the already integrated nodes, policy, runtime, and emitted carrier
+  now compile and execute in ordinary builds.
+- Made the unchanged final-path consumer ordinary at 12/12 and added one exact canonical require/log/Cargo command.
+  Eight independent mutations reject missing or duplicate registration and either stale outer/nested cfg.
+- Promoted only Rust to complete. Recognition is now 132/246/42 with rollout neutral + Perl + Rust 3/9; Dart,
+  Julia, PUC Lua, LuaJIT, recurring composition, and final public no-drift remain RED.
+- Updated the three governed mdBook pages to current Perl/Rust behavior. Review found three adjacent Perl-only
+  claims outside the previous guard; the exhaustive public inventory is now 3 documents / 11 forbidden claims /
+  25 mutations. The separate capability guide advances to 1/4/8.
+- Preserved helper results/registers, schemas, semantic/MCP/capability/CLI surfaces, README, all later backends,
+  and the documentation-hidden Rust authority API boundary.
+- Focused proof passes the neutral checker, ordinary Rust consumer 12/12, formatting, strict changed-crate Clippy,
+  and the complete Rust-local gate including core 195, runtime 166, recognition 12, project-data locality, and CLI
+  66/66 in both option environments.
+- The first canonical pass caught two stale rollout/availability expectations in the exact Perl consumer; after
+  synchronizing them, the full authorized rerun passes Perl 51/51, Rust 12/12, containment, relocation, CLI 66x2,
+  RAM 77%, and Phase 0 1,031/1,031 in 739 seconds before exact `[ci] local CI gate passed`.
+
 ## 2026-08-10 — FUTURE-PARITY-BACKLOG.14.3.3.2 — integrate Rust recognition transactions
 
 - Activated task-tree-first from clean private-authority commit `fd8a1934` as intended atomic 190/300.

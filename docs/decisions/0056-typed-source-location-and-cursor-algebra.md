@@ -359,6 +359,21 @@ the same neutral + Perl state, retains eight forbidden claims, and adds a separa
 sequence mutations. The authored forms are therefore current on Perl but not yet portable to Rust, Dart, Julia,
 PUC Lua, or LuaJIT; recurring composition and public no-drift retain their later owners.
 
+### 15. Admit Rust independently without widening the public runtime API
+
+`FUTURE-PARITY-BACKLOG.14.3.3.2` implements the same four dedicated nodes, recursive effect/progress policy,
+invocation-local authority binding, falsey-safe result channel, and native/reconstructed/generated-plan/emitted
+carriers behind two custom cfgs. Admission `.14.3.3.3` removes those dormant predicates without changing the
+integrated behavior or exporting a new authored runtime API. Cargo now discovers the exact 12-test final-path
+consumer ordinarily, and canonical CI requires, logs, and executes that target exactly once.
+
+Current recognition rollout is neutral + Perl + Rust 3/9 complete. A Rust complete-to-RED regression and a
+separate premature-Dart promotion raise semantic mutation proof to 42. The three-page public projection now
+forbids all eleven superseded neutral-only, Perl-only, or all-runtime-future claims and rejects 25 mutations; the
+separate capability guide forbids four stale claims and rejects eight mutations. Eight further admission mutations
+lock Rust tracking, logging, exact command registration, and complete removal of both custom cfgs. Dart, Julia,
+PUC Lua, LuaJIT, recurring composition, and final public no-drift remain RED under their existing owners.
+
 ## Consequences
 
 - Cursor control, capture, recursion, segmentation, and parser composition share one precise model instead of
@@ -371,7 +386,7 @@ PUC Lua, or LuaJIT; recurring composition and public no-drift retain their later
   from execution-wide rule-label mark buckets to invocation frames is explicit, versioned, and mechanically checked.
 - The accepted `recognition_*` spellings are deliberately verbose enough to distinguish bounded recognition from
   compatibility cursor stacks, host exception handling, and systemic backtracking. Their neutral authority is
-  executable, but the spellings remain unavailable until separately admitted backend behavior leaves land.
+  executable, and the spellings are current only on the independently admitted Perl and Rust backends.
 - Lossless gap capture gains the common typed representation it anticipated while retaining its separate owner.
 - This decision and its `.14.3.0` audit amendment change no grammar, helper, parser/compiler/runtime, descriptor,
   generated format, semantic/MCP response, primary CLI, rollout, admission, or current public feature-completeness
@@ -380,8 +395,9 @@ PUC Lua, or LuaJIT; recurring composition and public no-drift retain their later
   correction are durable in the owning task-tree and Knowledge card.
 - The `.14.3.1.0` amendment selects syntax and static semantics only. `.14.3.1.1` adds the executable neutral
   authority without adding current authored capability or backend behavior. `.14.3.1.2.0` separately governs the
-  three-page public milestone sequence at eight forbidden claims / thirteen mutations without changing that
-  semantic authority.
+  public milestone sequence without changing that semantic authority. Independent Perl and Rust admissions advance
+  current rollout to 3/9, semantic proof to 42 mutations, public proof to 3/11/25, and the capability guide to 1/4/8;
+  every later runtime and composed/public-closeout leg retains its separate owner.
 
 ## Links
 

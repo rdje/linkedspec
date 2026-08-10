@@ -10,6 +10,30 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-10 (`FUTURE-PARITY-BACKLOG.14.3.3.3` — admitted Rust recognition transactions): admission removes
+  dormancy, not behavior. Delete both custom cfgs across the complete source inventory, leave the private authority
+  documentation-hidden, and run the already GREEN consumer ordinarily before changing rollout.
+- Lock canonical registration as three distinct exact-once markers: tracked file, human-readable log, and the full
+  Cargo test command. Mutation-test omission and duplication of each, plus reintroduction of either historical cfg.
+- Keep backend movement one row at a time. Rust complete-to-RED and premature Dart promotion are independent
+  semantic mutations; later runtime, recurring, and final public-no-drift rows stay RED.
+- A public stale-claim guard must enumerate every superseded sentence, not just representative examples. Rust
+  admission review found three adjacent Perl-only claims that the previous eight-item inventory missed. Injecting
+  each of all eleven forbidden claims as a mutation raises the public proof to 25 and closes that latent gap.
+- Treat Rust contract metadata assertions as part of admission. The first ordinary post-promotion run correctly
+  failed one stale 41-mutation/RED-rollout assertion while the other 11 tests passed; update it to governed 42 and
+  the exact Rust path, then require 12/12 before broader signoff.
+- Preserve the distinction between four mutation domains: semantic 42, mdBook public sequence 3/11/25,
+  capability guide 1/4/8, and Rust registration/dormancy 8.
+- Reverify commands are part of Knowledge authority. Two Perl historical cards still asserted the final-path
+  consumer was absent after Perl admission; retain frozen-commit reconstruction but make current verification
+  require the exact three canonical registration markers.
+- Run every already-admitted consumer after a rollout promotion. Canonical CI correctly caught two stale Perl
+  self-assertions after Rust moved to complete; the 51-test consumer now expects neutral+Perl+Rust and remains an
+  independent cross-backend drift lock. The outer Codex sandbox separately denied the nested macOS containment
+  profile; its isolated proof and one uninterrupted authorized canonical rerun passed, including CLI 66x2, RAM
+  77%, and Phase 0 1,031/1,031 in 739 seconds.
+
 - 2026-08-10 (`FUTURE-PARITY-BACKLOG.14.3.3.2` — integrated Rust recognition transactions): normalize the four
   special forms only after the ordinary expression parser has built their arguments, then replace the complete
   static shape with dedicated nodes. This preserves syntax handling while ensuring `call(Rule)` is never evaluated
