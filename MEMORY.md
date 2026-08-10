@@ -5,17 +5,15 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `c26a9556` — clean bounded-document closeout HEAD from which neutral transaction leaf
-  `.14.3.1.1` activated task-tree-first (180/300; no push).
-- latest_completed_leaf: executable neutral recognition transaction `.14.3.1.1` is intended complete for atomic
-  181/300 under its exact subject.
-- active_work_unit: intended clean post-landing handoff; neutral is 1/9 complete and no leaf is active.
-- next_action: activate `FUTURE-PARITY-BACKLOG.14.3.1.2` task-tree-first for unchanged neutral recomposition.
+- activation_commit: `e0cc7182` — clean neutral-authority HEAD from which public-boundary repair `.14.3.1.2`
+  activated task-tree-first (181/300; no push).
+- latest_completed_leaf: neutral public-boundary repair `.14.3.1.2` is intended complete as atomic 182/300.
+- active_work_unit: intended clean post-landing handoff; neutral stays 1/9 and no leaf is active.
+- next_action: activate public-sequence guard `FUTURE-PARITY-BACKLOG.14.3.1.2.0` task-tree-first.
 - in_flight_uncommitted: none after the intended commit; no background job remains.
-- blockers: none. Focused neutral proof passes 132 ActionIR rows, 246 call rows, token 8/17, graphs 6, marks 6,
-  progress 8, diagnostics 15, and 40 mutations; book/Knowledge/storage proof passes. Definitive E4 passes all
-  eight doctrines, process/moved-root containment, CLI 66x2, RAM 55%, and Phase 0 1,031/1,031 in 675 seconds;
-  atomic commit/post-commit mechanics complete the intended handoff.
+- blockers: none. Neutral proof remains 132 ActionIR rows, 246 calls, token 8/17, graphs 6, marks 6, progress 8,
+  diagnostics 15, 40 mutations, and rollout 1/9. Rendered review caught a `7c2ff407` milestone sentence missed by
+  `e0cc7182`; correction and E4 pass process/moved-root containment, CLI 66x2, RAM 59%, and Phase 0 1,031/695s.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes, and 11 topology mutations advance governance to 53. Public authored values/transactions remain future.
@@ -53,8 +51,8 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   framed; v1 repetition/recursive progress is cursor-only. Neutral authority is executable at 1/9, but no backend
   recognizes the authored forms.
 - current_future_direction: transaction `.14.3` remains split through neutral `.1`, five backend families/six
-  runtimes `.2-.6`, recurring `.7`, and closeout `.8`; neutral recomposition `.14.3.1.2` is next and `.14.8`
+  runtimes `.2-.6`, recurring `.7`, and closeout `.8`; sequence guard `.14.3.1.2.0` precedes Perl RED and `.14.8`
   retains final public no-drift. `TASK-TREE-METADATA-HYGIENE.5` separately owns active-frontier freshness.
 - latest_bootstrap_read: 2026-08-09 — complete roadmap/codebase/mdBook and required continuity/tooling review.
-- pivot_guard: commit/prove neutral artifact `.14.3.1.1` clean before activating recomposition `.14.3.1.2`.
-- push_policy: hard lock at 300 commits; `.14.3.1.1` is intended atomic 181/300; no push; use project-data wrappers.
+- pivot_guard: commit/prove `.14.3.1.2` clean before activating public-sequence guard `.14.3.1.2.0`.
+- push_policy: hard lock at 300 commits; `.14.3.1.2` is intended atomic 182/300; no push; use project-data wrappers.

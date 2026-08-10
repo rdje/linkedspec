@@ -73,6 +73,14 @@ consumers pass, and the route registry remains 20 surfaces / 62 routes / 32/32 w
 empty debt metadata. The program is composition-closed. These storage migrations change documentation governance
 only; they change no language, compiler, runtime, backend, fixture, CLI, protocol, or project-data root.
 
+- `2026-08-10 recognition-transaction public-sequence repair`: rendered recomposition
+  `FUTURE-PARITY-BACKLOG.14.3.1.2` found the capture/source page claiming both that the neutral authority is
+  executable and that it is still next. Blame ties the stale sentence to ratification `7c2ff407`; implementation
+  `e0cc7182` inserted the new executable paragraph without updating the old milestone order. The page now says the
+  neutral authority is executable while all six runtimes remain pending. Artifact, checker, registration, runtime,
+  schema, and capability bytes stay unchanged; fail-closed public-sequence prevention is separately owned by
+  `.14.3.1.2.0` before Perl RED.
+
 - `2026-08-10 executable neutral recognition-transaction authority`: `FUTURE-PARITY-BACKLOG.14.3.1.1` encodes
   the accepted future syntax and state machine in one backend-neutral artifact plus independent checker without
   adding production behavior. Exact coverage is 128 current ActionIR node effects + four dedicated future nodes,

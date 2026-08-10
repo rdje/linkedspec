@@ -139,9 +139,9 @@ bash tools/run_python_project_data.sh tools/check_recognition_transaction_contra
 That command proves the target semantics only. No current parser recognizes the four forms, and no backend may
 claim transaction support until its separate behavior and admission leg lands.
 
-This section describes an accepted future contract, not a current feature. The neutral artifact/checker is next,
-then Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT must each be admitted independently before the form becomes
-portable public behavior.
+This section describes an accepted future contract, not a current feature. The neutral artifact/checker is
+executable, but Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT must each be admitted independently before the form
+becomes portable public behavior.
 
 Only cursor/source-boundary state participates. A rollback cannot undo variables, AST mutation, diagnostic or
 output events, parser-registry work, external calls, or host effects. An uncommitted path must therefore remain

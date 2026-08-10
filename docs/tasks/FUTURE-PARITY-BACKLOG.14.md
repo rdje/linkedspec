@@ -3637,7 +3637,7 @@
   Goal: Adopt the versioned backend-neutral transaction/progress contract, exact fixtures, diagnostics, mutations,
     public future/current boundary, and canonical registration before backend behavior.
   Depends on: `.14.3.0`
-  Children: `.14.3.1.0-.14.3.1.2`
+  Children: `.14.3.1.0-.14.3.1.2`, plus public-sequence guard `.14.3.1.2.0`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.1.0`
   Status: `done; signoff-complete` (2026-08-09; task-tree-first from clean transaction-audit commit `c8fcea6f`,
@@ -3855,22 +3855,114 @@
   before the next task-tree activation.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.1.2`
-  Status: `pending`
+  Status: `done; signoff-complete` (2026-08-10; task-tree-first from clean neutral-authority commit `e0cc7182`;
+    intended atomic 182/300; no push; atomic commit/clean handoff pending)
   Goal: Recompose the committed neutral authority and truthful public-future boundary unchanged before Perl RED.
   Depends on: `.14.3.1.1`
+  Acceptance: Prove the committed recognition-transaction artifact, independent checker, live-derived inventories,
+    canonical/storage registration, authored/static decision, Knowledge owners, rollout truth, and sole-facing
+    future/current teaching compose unchanged except for an exact rendered-review correction if a stale milestone
+    sequence contradicts the committed neutral state. Add no replacement artifact, checker, fixture, mutation, grammar,
+    compiler, runtime, backend, generated carrier, `.spec`/corpus, CLI, schema, capability/semantic/MCP surface,
+    storage root, hosted workflow, README, or current-public capability claim. If rendered review finds an
+    enforcement gap, preserve its cause and open a separate guard leaf rather than widening this recomposition.
+    Hand off cleanly to that guard, which alone may close `.14.3.1` before Perl RED `.14.3.2.0`.
+  Verification: clean activation; Knowledge-first owner retrieval; committed-byte/no-replacement census; exact
+    recognition checker and independent language inventories; canonical/storage route identity; public-current
+    marker census; rendered mdBook review; Knowledge, memory, task metadata, README, doctrines, canonical CI,
+    atomic commit 182/300, brief clearing, post-pointer, residue, absent-book, and clean-status proof
+  Commit: `FUTURE-PARITY-BACKLOG.14.3.1.2 - repair neutral transaction status boundary`
+
+  ### `FUTURE-PARITY-BACKLOG.14.3.1.2` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove `.14.3.1.1` landed atomically at `e0cc7182` as 181/300 with
+    first parent `c26a9556`, exact subject, empty status/diffs, zero-byte brief, valid post-commit pointer, fresh
+    Knowledge, absent rendered book, zero managed-run residue, and this task-tree file as the sole activation diff.
+  - [x] **RETRIEVE / FREEZE RECOMPOSITION BOUNDARY** — Follow ADR `0056`, both transaction Knowledge cards,
+    `.14.3.1.0-.1`, the committed artifact/checker and registration/storage owners, and sole-facing claims before
+    running proof; reject replacement implementation or premature backend/public rollout.
+  - [x] **COMMITTED NEUTRAL RECOMPOSITION** — Re-run the independent checker and live inventories; prove exact
+    132 = 128 + 4 ActionIR rows, 246 call rows, token 8/17, graphs 6, marks 6, progress 8, diagnostics 15,
+    40 mutations, and neutral 1/9 rollout without changing any executable owner.
+  - [x] **NO-REPLACEMENT / PUBLIC-FUTURE CENSUS** — Prove committed artifact/checker/registration bytes and all
+    grammar, compiler, runtime, backend, generated, CLI, schema, capability/semantic/MCP, README, storage, hosted,
+    and public-current capability surfaces remain unchanged while the exact authored contract remains future-only;
+    permit only the exact stale sequencing correction surfaced by rendered inspection.
+  - [x] **ROOT-CAUSE / TRACK SEQUENCE DRIFT** — Trace any stale milestone sentence to its introducing and missed-
+    update commits, correct it narrowly, preserve the causal fact in Knowledge/task evidence, and open guard leaf
+    `.14.3.1.2.0` without changing the neutral checker or its exact 40-mutation contract in this slice.
+  - [x] **LOCKSTEP / GUARDED HANDOFF** — Synchronize task/index, ADR/Knowledge, architecture, roadmaps,
+    changes/notes, live/memory, and sole-facing book to the verified state; hand one clean next action to public-
+    sequence guard `.14.3.1.2.0` without closing `.14.3.1` or activating Perl RED early.
+  - [x] **VERIFY / COMMIT / CLEAN HANDOFF** — Pass focused and canonical proofs, rendered-book inspection,
+    Knowledge/memory/task/README/doctrines, atomic 182/300, zero-byte brief, pointer/residue/absent-book checks, and
+    clean status before `.14.3.2.0` activates task-tree-first.
+
+  Activation evidence 2026-08-10: neutral-authority leaf `.14.3.1.1` lands atomically at full commit
+  `e0cc71825b76548bb27ce01a66170ac00bd2406e` as 181/300 with first parent `c26a9556` and exact subject
+  `FUTURE-PARITY-BACKLOG.14.3.1.1 - add neutral recognition transaction contract`. Its hook regenerates Knowledge
+  at 801 facts / 6,629 question keys, passes all eight doctrines, and validates `activation_commit c26a9556`
+  against `HEAD^1`. Post-commit memory-pointer and Knowledge checks pass; status and staged/unstaged diffs are
+  empty; the ignored brief is zero bytes; generated book output is absent; managed-run recovery reports
+  `found=0 removed=0 skipped=0`; and no background job remains. This task-tree file is the sole first activation
+  mutation before index, evidence, public/durable status, or any other closeout change.
+
+  Rendered-review finding 2026-08-10: the built capture/source page first says the neutral authority is executable,
+  then two paragraphs later says “The neutral artifact/checker is next.” `git blame` assigns the stale sentence to
+  ratification commit `7c2ff407`; implementation commit `e0cc7182` added the new executable-authority paragraph but
+  did not update that older milestone-order sentence. The neutral checker governs its artifact's current-behavior
+  boundary and exact 40 mutations, but it has no governed public milestone-sequence projection, so focused and
+  canonical checks could not reject the contradiction. This leaf owns the exact prose repair and durable cause;
+  `.14.3.1.2.0` separately owns a fail-closed public-sequence guard before Perl RED.
+
+  Retrieval/recomposition evidence 2026-08-10: Knowledge-first review followed the neutral and authored contract
+  cards into ADR `0056`, `.14.3.1.0-.1`, the JSON/checker, canonical and project-data registration, capability
+  guide, toolbox, roadmaps, architecture, and all three sole-facing transaction passages. Before the rendered
+  repair, `git rev-parse HEAD:<path>` and `git hash-object <path>` agreed for the artifact (`b292d8ca`), checker
+  (`04e306be`), canonical driver (`ac661674`), storage proof (`0df08efc`), ADR, both Knowledge cards, and all three
+  book sources. The unchanged checker passes 132 = 128 + 4 ActionIR rows, 246 call rows, token 8/17, six fixed-point
+  graphs, six marks, eight progress cases, fifteen diagnostics, 40 rejected mutations, and rollout neutral 1/9.
+  Independent language coverage remains 246 current names / 105+1 fixtures / 122 public Perl contracts, and the
+  complete tool project-data proof passes without changing an executable owner.
+
+  Public-boundary/render evidence 2026-08-10: direct HTML exposed the exact contradictory paragraph and `git blame`
+  proved the `7c2ff407` introduction / `e0cc7182` missed-update chain. Only the stale capture/source sentence now
+  changes: it says the neutral artifact/checker is executable while Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT
+  still require independent admission. Backend-handoff remains “neutral proof is not backend support”; project
+  status remains 1/9 with every runtime, recurring, and public leg RED. The rebuilt book contains 79 files / 14,356
+  KiB; the heading, checker command, target-only warning, corrected future/current paragraph, and following scope
+  paragraph render as separate elements. `neutral artifact/checker is next` is absent, generated output is removed,
+  and Knowledge regenerates to 802 facts / 6,633 question keys. No neutral artifact/checker/registration, grammar,
+  compiler, runtime, backend, generated carrier, fixture, CLI, schema, capability/semantic/MCP, README, storage,
+  hosted-workflow, or current authored-capability path changes.
+
+  Definitive signoff evidence 2026-08-10: the staged-intent slice passes exact neutral/language/storage/public-
+  boundary proofs, Knowledge 802/6,633, task metadata at 511 stable IDs, memory 58/60, README 105/5,057, document
+  pressure, whitespace, and all eight doctrines. The host-authorized canonical gate passes the repository-contained
+  relocated six-family process proof, moved-root Rust plus four outside-CWD anchors, every mandatory typed-source,
+  MCP, semantic, cursor, contract, and focused Perl consumer, both primary CLI environments at 66/66, RAM 59%
+  below the 88% threshold, and Phase 0 1,031/1,031 in 695 wall-clock seconds. It ends with exact
+  `[ci] local CI gate passed` and exit zero. Atomic commit, brief clearing, post-pointer, Knowledge freshness,
+  managed-run recovery, absent rendered book, and clean status complete mechanically before `.14.3.1.2.0` activates.
+
+- ID: `FUTURE-PARITY-BACKLOG.14.3.1.2.0`
+  Status: `pending`
+  Goal: Add a fail-closed governed public milestone-sequence projection that rejects stale neutral-next claims,
+    recompose the corrected boundary unchanged, close `.14.3.1`, and hand one clean next action to Perl RED.
+  Depends on: `.14.3.1.2`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.2`
   Status: `pending`
   Goal: Implement and independently admit the bounded recognition-only transaction/progress contract in the Perl
     reference without changing unrelated action, result, register, or rollback semantics.
-  Depends on: `.14.3.1`
+  Depends on: `.14.3.1.2.0`
   Children: `.14.3.2.0-.14.3.2.3`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.2.0`
   Status: `pending`
   Goal: Freeze dormant Perl RED for tokens, recursive same-label mark frames, recognition attempts, effect barriers,
     progress diagnostics, source generation, and unchanged compatibility controls.
-  Depends on: `.14.3.1.2`
+  Depends on: `.14.3.1.2.0`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.2.1`
   Status: `pending`

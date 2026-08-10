@@ -10,6 +10,18 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-10 (`FUTURE-PARITY-BACKLOG.14.3.1.2` — rendered milestone-order repair): status statements can each be
+  historically correct yet become contradictory when a later slice inserts new truth without retiring old
+  sequencing prose. Commit `7c2ff407` said the neutral checker was next; `e0cc7182` inserted its executable status
+  two paragraphs earlier but missed the original sentence. Source-only searches did not expose the juxtaposition;
+  rendered paragraph inspection did.
+- The neutral checker's `current_boundary` mutation protects artifact policy and false current-capability claims,
+  not mdBook milestone ordering. Do not widen the semantic artifact's exact 40-mutation boundary during a public-
+  text repair. Correct the sentence narrowly, preserve the cause, and let `.14.3.1.2.0` add a separate governed
+  public-sequence projection with its own mutation proof before backend work.
+- Definitive recomposition signoff passes all eight doctrines, exact repository-contained process and moved-root
+  proofs, primary CLI 66x2, RAM 59%, and Phase 0 1,031/1,031 in 695 seconds without changing an executable owner.
+
 - 2026-08-10 (`FUTURE-PARITY-BACKLOG.14.3.1.1` — executable neutral recognition transactions): distinguish
   inventory domains before freezing counts. Perl currently exposes 128 unique canonical ActionIR node kinds, while
   the language coverage checker reports 122 public identifier-shaped Perl call contracts and 246 aligned
