@@ -38,7 +38,9 @@ implementation signoff without changing parser, runtime, backend, fixture, MCP, 
 Closeout `.4.2` then byte-compares the seven admitted policy/README/registry/checker/doctrine/gate owners with
 commit `5c570719` and reruns the full proof without a replacement implementation. The independent gate passes
 primary CLI 66/66 twice and Phase 0 1,031/1,031 in 673 seconds, closing routing-pressure revision `.4` unchanged.
-`LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0` is the next documentation-sustainability owner after atomic clean handoff.
+`LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0-.4` then preserve exact live/change/note history, partition future task
+evidence by stable ID, install bounded current views and complete-record rollover, and independently recompose
+the four current routes unchanged. That documentation-sustainability program is composition-closed.
 
 The public book explains LinkedSpec to the outside world. The continuity docs help the project survive crashes, handoffs, and long refactoring sessions.
 

@@ -13,10 +13,10 @@ answers:
   - what enforces future parity task partition bounds and digests
   - what is the clean source identity for the future parity partition
 date: 2026-08-09
-status: accepted and implemented under LIVE-DOCUMENT-PRESSURE-CONTAINMENT.2; commit pending
+status: accepted and implemented under LIVE-DOCUMENT-PRESSURE-CONTAINMENT.2 at 61a52dbd
 tags: [task-tree, partition, retrieval, continuity, routing, doctrine]
 evidence: "Clean 99fe03f3:docs/tasks/FUTURE-PARITY-BACKLOG.md is 26,979 lines / 2,720,175 bytes, blob f3b59f72..., SHA-256 48de44a5.... Exact source ranges route once into a 381-line root, seven mutable semantic parts, and one byte-exact 3,340-line immutable history part. The strict nine-record index preserves 510 unique stable IDs. Nine executable and two JSON consumers use bounded owners. The initial prose-led audit found only four plus two; canonical E4 failed at logical-helper, and an exact executable-scope scan found four additional omissions. The composed metadata gate now guards all eleven, passes 26/26 mutations, and proves the task collection remains within 128 files / 80,000 lines / 8 MiB."
-last_verified: 2026-08-09
+last_verified: 2026-08-10
 reverify:
   - "bash scripts/check_task_tree_metadata.sh"
   - "perl tools/read_task_tree.pl --tree FUTURE-PARITY-BACKLOG --id FUTURE-PARITY-BACKLOG.14.3.1.1"

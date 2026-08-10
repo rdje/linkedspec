@@ -5,7 +5,8 @@
 README routing-pressure enforcement is closed at `0bcb5a36`, and the behavior-free store architecture landed at
 `dc8dd896`. Live-status migration landed at `99fe03f3` under ADRs `0066` and `0067`; future-task partitioning
 landed at `61a52dbd` under ADR `0068`; change and engineering-note hot stores are implemented under ADR `0069`.
-Only independent unchanged recomposition remains.
+The changes/notes migration landed at `921f0507`; independent unchanged recomposition now composition-closes all
+four stores without changing their accepted routes or executable owners.
 
 The plan keeps `LIVE_ACHIEVEMENT_STATUS.md`, `CHANGES.md`, `DEVELOPMENT_NOTES.md`, and
 `docs/tasks/FUTURE-PARITY-BACKLOG.md` as stable entry points. Exact historical bytes move only after a strict
@@ -20,7 +21,9 @@ and two contract projections now read their bounded task owners instead of the f
 preserves all 510 stable IDs, clean-source coverage, current digests, immutable history, bounded lookup, and
 26/26 rejected mutation classes. The changes/notes migration preserves the clean 44,270-line and 21,308-line
 sources in eleven and six immutable segments, respectively. Both roots are capped at 512 lines / 64 KiB, and the
-commit workflow now requires both rollover checks. Remaining order is unchanged closeout.
+commit workflow now requires both rollover checks. Closeout independently passes history 34/34 across three
+surfaces / 21 segments, task metadata 26/26 over 510 IDs, rollover recovery 12/12, all eleven transferred task
+consumers, and routing at 20 surfaces / 62 routes / 32/32 with all four stores current and no debt metadata.
 
 The live manifest has four immutable segments and reproduces the exact 14,872-line clean source. Historical lookup
 uses `perl tools/read_document_history.pl --surface live_status --grep '<literal>'`; `--all` reconstructs complete

@@ -10,6 +10,22 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-10 (`LIVE-DOCUMENT-PRESSURE-CONTAINMENT.4` — unchanged four-store recomposition): the four routed
+  records already have their final normal shape: `state=current`, bounded controls, executable verifiers, and
+  empty `baseline`/`transition` objects. Closeout therefore must not invent another transition ADR, rewrite the
+  migration owners, or refresh old debt facts. It independently composes the committed history/task/consumer/
+  rollover/route checks and updates only durable status/frontier owners. This preserves the exact contracts while
+  proving they work together and returns product work to `FUTURE-PARITY-BACKLOG.14.3.1.1` after the clean commit.
+- The first closeout canonical run rejects a shortened `docs/TASK_TREE.md` future-backlog row because it dropped
+  the capability checker-owned marker “exclusion public closeout `.24.2` remains closed”. The parent `.24`
+  statement is not an equivalent projection. The focused rerun then rejects “remains public-closed” in place of
+  the exact parent “is public-closed” marker. Restore both exact projections and rerun the focused consumer plus
+  the complete canonical gate; do not weaken the checker or classify either failure away.
+- Corrected closeout signoff passes capability 80/0/0 and one uninterrupted definitive repository-volume gate:
+  all eight doctrines, MCP complete/141, Rust semantic 1/1 in 85.71 seconds, Julia semantic 416/416 in 29.9
+  seconds, cursor 288, process containment, moved-root execution, CLI 66x2, RAM 49%, and Phase 0 1,031/1,031 in
+  673 seconds. The two failures therefore remain useful exact-projection regression evidence, not open blockers.
+
 - 2026-08-10 (`LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3` — bounded chronology hot stores): reverse-chronological
   roots need insertion headroom that immutable legacy segment IDs cannot provide after landing. Changes and notes
   therefore reserve initial archive IDs from `5000` upward. Each later rollover removes only an exact suffix of

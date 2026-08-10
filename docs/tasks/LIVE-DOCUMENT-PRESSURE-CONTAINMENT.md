@@ -3,11 +3,11 @@
 ## Metadata
 
 - Tree ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-- Status: `active` / changes-notes migration `.3` active
+- Status: `done` / composition-closeout `.4` signoff-complete for atomic 180/300
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-08-09`
-- Last updated: `2026-08-10` (`.0-.2` landed through `61a52dbd`; `.3` is active from that clean boundary as
-  intended atomic 179/300; no push)
+- Last updated: `2026-08-10` (`.0-.3` landed through `921f0507`; `.4` definitive signoff is complete for
+  intended atomic 180/300; no push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -59,7 +59,7 @@ or the README `.4` adoption/closeout that installs the guard.
 ## Task Tree
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-  Status: `active` (2026-08-09; clean README dependency closed at `0bcb5a36`; planning `.0` active)
+  Status: `done` (2026-08-10; `.0-.4` composition-closeout signoff complete; atomic 180/300 commit pending)
   Goal: Replace measured oversized routed destinations with bounded views over durable stores.
   Depends on: `README-STABILITY-POLICY.4.2`
   Children: `.0-.4`
@@ -194,8 +194,7 @@ or the README `.4` adoption/closeout that installs the guard.
     brief, remove exact generated residue, and prove clean before `.3`.
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3`
-  Status: `active` (2026-08-10; activated task-tree-first from clean future-task-partition commit `61a52dbd`;
-    intended atomic 179/300; no push)
+  Status: `done` (2026-08-10; landed clean at `921f0507` as atomic 179/300; no push)
   Goal: Give `CHANGES.md` and `DEVELOPMENT_NOTES.md` bounded current indexes/hot shards, ordered archive manifests,
     query-first retrieval, and finite rollover thresholds without losing history.
   Depends on: `.0`
@@ -240,16 +239,52 @@ or the README `.4` adoption/closeout that installs the guard.
     and sole-facing book agree; final doctrine/canonical/commit evidence remains in the owning verification row.
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.4`
-  Status: `pending`
+  Status: `done` (2026-08-10; definitive focused/book/doctrine/canonical signoff complete from clean changes/
+    notes commit `921f0507`; intended atomic 180/300 commit pending; no push)
   Goal: Ratchet all four registry surfaces to normal, recompose retrieval and pressure controls unchanged, close
     the program, and return to the prior product frontier from a clean boundary.
   Depends on: `.1-.3`
+  Acceptance: Starting from the three clean migration commits, independently recompose exact durable/current
+    state for live status, future tasks, changes, and engineering notes; prove every query, lookup, rollover,
+    limit, mutation, route, consumer, and rollback contract unchanged; prove all debt metadata and finite migration
+    allowances are already absent without rewriting the accepted route contracts; align all planning/continuity/
+    public owners; pass focused and canonical
+    signoff; commit, clear, remove exact residue, prove clean, and restore the prior product frontier.
+
+  #### Acceptance Checklist
+
+  - [x] **CLEAN BASE / TASK-FIRST ACTIVATION** — Prove `921f0507` parent/subject, zero-byte brief, absent rendered
+    book, zero managed runs, and empty index/worktree; make this task file the sole first `.4` mutation.
+  - [x] **FOUR-STORE RECOMPOSITION** — Independently enumerate and verify every current root, immutable archive,
+    semantic task part, manifest/index record, clean source identity, exact reconstruction, and stable-ID lookup.
+  - [x] **RETRIEVAL / PRESSURE / RECOVERY** — Exercise root-derived history queries and task lookup outside the
+    repository cwd, both chronology rollover states, recoverable publication, finite limits, and failure behavior.
+  - [x] **NORMAL ROUTE RATCHET / CONSUMERS** — Prove all four surfaces and every transferred consumer use only
+    current bounded owners with empty debt metadata; preserve the exact accepted route contracts unchanged.
+  - [x] **PROGRAM CLOSEOUT / FRONTIER RESTORE** — Mark ADR `0066` and this activity implemented, align task index,
+    architecture, roadmaps, Knowledge, continuity roots, and the sole-facing book, and restore the prior product
+    frontier without changing parser/compiler/runtime/backend/MCP/CLI/fixture/schema/language behavior or README.
+  - [x] **VERIFY / COMMIT / CLEAN HANDOFF** — Pass recomposition/retrieval/rollover/recovery/routing/consumer,
+    task/memory/Knowledge/doctrine/book checks and definitive canonical CI; commit atomically as 180/300, clear
+    the brief, remove exact generated residue, and prove the restored frontier clean.
+
+  #### TOOLBOX Task-Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — Clean-boundary Git, route, task, history, and rollover probes establish the exact
+    three-migration state that must be recomposed before migration allowances can close.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Registry inspection proves all four route records are already current with
+    empty `baseline`/`transition`; `.4` owns independent proof and status closure, not another route transition.
+  - [x] **FIX** — Preserve the four accepted route contracts and update only composed closeout/status owners.
+  - [x] **ADDRESSED (verified)** — Record exact four-store, retrieval, recovery, routing, mutation, and gate proof.
+  - [x] **NO REGRESSION** — Preserve exact archived bytes, stable IDs, current limits, consumer authority, public
+    behavior, README content, and repository-local/root-relative execution.
+  - [x] **LOCKSTEP** — Close the ADR/task/program state and return every live/public pointer to the prior frontier.
 
 ## Current Frontier
 
-`.2` landed clean at `61a52dbd` as atomic 178/300. `.3` is the only active/eligible leaf and owns exact changes/
-notes history, bounded current hot shards, query/rollover enforcement, author workflow, and both route transitions
-as intended atomic 179/300. `.4` remains pending; no pivot is permitted from the dirty `.3` worktree.
+`.4` definitive signoff is complete from clean activation `921f0507` and awaits only its atomic 180/300 commit,
+brief clearing, and exact clean proof. The restored product frontier is `FUTURE-PARITY-BACKLOG.14.3.1.1`; it may
+activate task-tree-first only after this worktree is clean.
 
 ## Decisions
 
@@ -365,7 +400,7 @@ All files and transient proof stay on the repository filesystem; no off-volume c
 
 ## Blockers
 
-- None. `.3` activated task-tree-first from verified clean `61a52dbd`.
+- None. `.4` activated task-tree-first from verified clean `921f0507`.
 
 ## Verification Log
 
@@ -437,6 +472,34 @@ semantic admission 416/416 in 30.9 seconds, cursor 288, six-family process conta
 execution, primary CLI 66/66 in both option environments, RAM 51%, and Phase 0 1,031/1,031 in 716 seconds.
 Optional matrices remain explicitly unclaimed; only the atomic commit, brief clearing, and clean proof remain.
 
+Four-store recomposition focused proof: the committed `921f0507` migration boundary is unchanged outside
+closeout/status owners. Document history passes 34/34 mutations across three surfaces / 21 segments; task metadata
+passes 26/26 across seven semantic parts, one immutable history part, and all 510 stable IDs; rollover recovery
+passes 12/12. Capability 80/0/0 plus logical 8/0/26, diagnostic 8/0/20, generated source, native resolution,
+duplicate slot 7/0/59, repeated action 8/0/54, root selection 7/0/54, and semantic introspection 9/0/128 prove
+all nine executable plus two JSON consumer projections. From `docs/`, full history queries hash exactly to
+`683ef70d...a9d55`, `c8ba1b7c...c14e42`, and `ca9ad5c3...9443c`; three literal queries and bounded task lookup
+for `.14.3.1.1` resolve; change/notes roots remain `OK` at 44/512 and 44/512 lines. The unchanged route registry
+passes 44 reader + 18 author routes, 20 current/terminal surfaces, and 32/32 mutations; target totals are live
+6 files / 14,918 lines / 1,276,548 bytes, tasks 95 / 65,222 / 6,283,181, changes 13 / 44,326 / 3,114,398, and
+notes 8 / 21,359 / 2,299,646. Memory 60/60, Knowledge 800/6,617, task metadata, exact index refresh, and
+rendered 79-file book inspection pass; generated book output is removed. Definitive canonical CI remains.
+
+The first `.4` canonical attempt passes all eight doctrines and syntax, then fails the capability census because
+the closeout rewrite of `docs/TASK_TREE.md` retained parent `.24` closure but removed its checker-owned marker
+“exclusion public closeout `.24.2` remains closed”. The canonical consumer is correct: parent state is not
+an interchangeable public projection. Its focused rerun next rejects synonymous “remains public-closed” in place
+of the exact parent “is public-closed” marker. Both governed projections are restored without weakening any
+oracle. Focused capability passes at 80/0/0 from the restored projections, and the complete corrected canonical
+rerun exits 0 without weakening any checker, expected marker, or mutation boundary.
+
+Four-store recomposition definitive signoff: one uninterrupted approved repository-volume canonical gate passes
+all eight doctrines, capability 80/0/0, MCP 5/5 implementations plus 6/6 runtimes complete with 141 rejected
+mutations, Rust semantic admission 1/1 in 85.71 seconds, Julia semantic admission 416/416 in 29.9 seconds, cursor
+288, six-family project-data process containment, moved-root/outside-CWD execution, primary CLI 66/66 in both
+option environments, RAM 49%, and Phase 0 1,031/1,031 in 673 seconds. The gate exits 0; only the atomic commit,
+brief clearing, generated-residue census, post-pointer check, and clean proof remain.
+
 ## Commit Log
 
 `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0 - freeze bounded document store contract` — `dc8dd896`, atomic 176/300.
@@ -444,6 +507,10 @@ Optional matrices remain explicitly unclaimed; only the atomic commit, brief cle
 `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.1 - bound live status over exact history` — `99fe03f3`, atomic 177/300.
 
 `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.2 - partition future task evidence` — `61a52dbd`, atomic 178/300.
+
+`LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3 - bound changes and engineering notes` — `921f0507`, atomic 179/300.
+
+`LIVE-DOCUMENT-PRESSURE-CONTAINMENT.4 - close bounded document store program` — intended atomic 180/300.
 
 ## Changelog
 
@@ -482,3 +549,12 @@ Optional matrices remain explicitly unclaimed; only the atomic commit, brief cle
   manifest/root publication. Focused history/routing/Knowledge/rendered-book proof and one uninterrupted canonical
   gate pass through containment, relocation, CLI 66x2, RAM 51%, and Phase 0 1,031/1,031 in 716 seconds; the atomic
   commit workflow remains.
+- `2026-08-10`: `.3` lands at `921f0507` with exact parent/subject, hook/doctrine/post-pointer proof, zero-byte
+  brief, absent book, empty managed runs, and clean cadence 179/300. Activated `.4` as the sole first mutation for
+  independent four-store recomposition, normal route ratchets, program closeout, and product-frontier restoration.
+- `2026-08-10`: `.4` focused recomposition passes history 34/34, task metadata 26/26 over 510 IDs, rollover 12/12,
+  all eleven consumers, three outside-CWD source hashes/literal queries, task lookup, normal routes 20/62/32,
+  bounded memory/roots, Knowledge, and rendered-book inspection. After two exact governed marker corrections, the
+  definitive canonical gate passes MCP complete/141, Rust semantic 1/1 in 85.71 seconds, Julia semantic 416/416
+  in 29.9 seconds, containment/relocation, CLI 66x2, RAM 49%, and Phase 0 1,031/1,031 in 673 seconds. Atomic commit,
+  brief clearing, residue census, post-pointer verification, and clean proof remain.

@@ -1,7 +1,7 @@
 # ADR 0069: Changes and engineering notes use bounded rollover hot stores
 
 - Date: 2026-08-10
-- Status: accepted and implemented under `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3`; atomic commit pending
+- Status: accepted and implemented under `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3` at `921f0507`
 - Tags: documentation, history, retrieval, rollover, routing, continuity, doctrine
 
 ## Change-history routing transition authorization

@@ -67,8 +67,11 @@ newest-to-oldest manifest order without renaming an archive. ADR `0069` retires 
 causally requires both pressure checks on every slice. Exact legacy trailing whitespace remains byte authority
 only inside raw history segments through a narrowly scoped Git attribute. Rollover publishes segment, manifest,
 then root and idempotently completes an exact interrupted generation, avoiding a root-before-index loss window.
-`.4` independently recomposes and ratchets the four stores. These storage migrations change documentation
-governance only; they change no language, compiler, runtime, backend, fixture, CLI, protocol, or project-data root.
+`.4` independently recomposes all committed owners unchanged: history is 34/34 across three surfaces / 21
+segments, task metadata is 26/26 across 510 stable IDs, rollover recovery is 12/12, all eleven transferred task
+consumers pass, and the route registry remains 20 surfaces / 62 routes / 32/32 with all four stores current and
+empty debt metadata. The program is composition-closed. These storage migrations change documentation governance
+only; they change no language, compiler, runtime, backend, fixture, CLI, protocol, or project-data root.
 
 - `2026-08-09 cursor transaction authored/static contract`: behavior-free
   `FUTURE-PARITY-BACKLOG.14.3.1.0` ratifies four accepted future special forms:

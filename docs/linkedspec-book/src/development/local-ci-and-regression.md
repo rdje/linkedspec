@@ -52,7 +52,7 @@ primary CLI 66/66 twice, RAM 52%, and Phase 0 1,031/1,031 in 673 seconds. The re
 #### Bounded views over exact history
 
 ADR `0066` defines the migration contract for the four measured debt families. Live status, future task evidence,
-change history, and engineering notes are implemented; only independent unchanged recomposition remains.
+change history, and engineering notes are implemented and independently recomposed unchanged.
 
 The audit found two important machine interfaces. Seven capability/public-closeout families previously required
 historical markers from `LIVE_ACHIEVEMENT_STATUS.md`; six JSON projections and seven executable checkers now use
@@ -84,8 +84,8 @@ headings; engineering-note boundaries are dated entries or `## ` headings. New c
 below the initial `5000` reserve, so manifest order remains newest-to-oldest without renaming immutable files.
 Publication is recoverable: segment first, manifest second, bounded root last; rerun reuses an exact orphan segment
 or completes an exact pending manifest generation, while any conflict fails closed. `COMMIT.md` requires both
-pressure checks on every accepted slice. Only unchanged registry recomposition remains; each stage starts and
-lands at a clean Git boundary.
+pressure checks on every accepted slice. Unchanged registry recomposition passes 20 surfaces / 62 routes / 32/32
+with all four stores current and empty debt metadata; every migration starts and lands at a clean Git boundary.
 
 Consumer inventory is executable evidence. The initial planning audit found four checkers plus two JSON
 projections; the first canonical run exposed an omitted logical-helper task read. A complete executable-scope scan

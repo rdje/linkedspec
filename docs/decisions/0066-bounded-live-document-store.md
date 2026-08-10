@@ -1,8 +1,8 @@
 # ADR 0066: Live documentation uses bounded views over verified durable stores
 
 - Date: 2026-08-09
-- Status: accepted direction; descriptor plus all four store migrations implemented; independent recomposition
-  pending under `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.4`
+- Status: accepted and implemented; all four stores independently recomposed and composition-closed under
+  `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.4`
 - Tags: architecture, documentation, history, task-tree, retrieval, pressure, continuity, doctrine
 
 ## Context
@@ -178,8 +178,8 @@ No off-volume copy, temporary root, cache, or generated owner is introduced.
 - Routing-pressure debt baselines stay immutable and are replaced by reviewed current contracts, not refreshed.
 - Archive parts are immutable data, not user-facing book chapters or new append sinks.
 - The migrations require checker/workflow changes and execution-time ADRs. Live status is implemented under ADR
-  `0067`, future-task evidence under ADR `0068`, and changes/notes hot stores under ADR `0069`; independent
-  unchanged recomposition remains `.4` work.
+  `0067`, future-task evidence under ADR `0068`, and changes/notes hot stores under ADR `0069`; `.4` independently
+  recomposes those committed owners unchanged and closes the program.
 
 ## Links
 

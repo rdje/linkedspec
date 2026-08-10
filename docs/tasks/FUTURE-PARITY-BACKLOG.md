@@ -6,9 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-09` (behavior-free syntax/result/effect ratification `.14.3.1.0` is
-  signoff-complete for intended atomic 172/300; executable neutral contract `.14.3.1.1` is next after the
-  director-priority README-policy adoption receives and completes its own clean task-tree slice; no push)
+- Last updated: `2026-08-10` (behavior-free syntax/result/effect ratification `.14.3.1.0` is committed;
+  executable neutral contract `.14.3.1.1` is the restored next product leaf after bounded-document containment
+  composition-closeout; no push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -104,12 +104,12 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-09):** behavior-free cursor-transaction ratification `.14.3.1.0` is
-signoff-complete for intended atomic 172/300 from clean activation commit `c8fcea6f` (no push). It fixes the exact
+**Authoritative frontier (2026-08-10):** behavior-free cursor-transaction ratification `.14.3.1.0` is committed at
+`7c2ff407` as atomic 172/300 (no push). It fixes the exact
 authored grammar, falsey-safe staged result exposure, closed fail-closed ActionIR effect taxonomy, opaque token
 lifetime, invocation-mark migration, and cursor-only progress rule without executable or current-public behavior.
-Executable neutral artifact/checker/fixture authority `.14.3.1.1` is the next transaction leaf after the
-director-priority README-policy adoption receives and completes an independent clean task-tree slice. The stale
+Executable neutral artifact/checker/fixture authority `.14.3.1.1` is the restored next transaction leaf after the
+README policy and bounded-document containment priorities complete their independent clean task-tree slices. The stale
 `.14.2.0.1` frontier introduced at `bd777ee8` is repaired; `TASK-TREE-METADATA-HYGIENE.5` separately owns a
 low-noise active-tree freshness invariant.
 
