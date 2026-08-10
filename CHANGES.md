@@ -10,6 +10,28 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-10 — FUTURE-PARITY-BACKLOG.14.3.1.1 — add neutral recognition transaction contract
+
+- Activated task-tree-first from clean bounded-document closeout commit `c26a9556` as intended atomic 181/300.
+- Added `linkedspec-recognition-transaction-v1` and an independently implemented checker over the exact future
+  authored forms, five-state linear token lifecycle, falsey-safe match/payload channels, invocation-mark snapshots,
+  cursor-only repetition/recursion progress, fifteen diagnostics, and neutral/backend/public rollout ownership.
+- Classified all 128 live ActionIR node kinds plus four dedicated future transaction nodes and all 246 current
+  cross-backend call contracts exactly once under a closed nine-allowed/eleven-rejected base-effect vocabulary.
+  Six named-rule graphs compute transitive effects to a recursive fixed point and fail closed on unknown effects.
+- Added 8 positive / 17 negative token cases, six mark cases, eight progress cases, and 40 exact schema/syntax/
+  token/effect/inventory/graph/mark/progress/diagnostic/rollout/registration/freshness mutations. The checker
+  re-derives live inventories and locks the full classifications independently.
+- Registered the tracked neutral authority unconditionally in canonical CI through repository-local Python project
+  data and advanced the exact rollout to neutral 1/9 complete. Perl, Rust, Dart, Julia, PUC Lua, LuaJIT,
+  recurring, and public legs remain RED; authored transaction syntax remains unavailable.
+- Aligned ADR `0056`, Knowledge, both roadmaps, architecture, capability guide, toolbox, task/index, continuity,
+  and the sole-facing book. A real 79-file mdBook build renders the future/current boundary correctly.
+- No grammar, compiler, runtime, backend, generated carrier, `.spec`/corpus, CLI, capability ledger, semantic/MCP,
+  README, project-data root, hosted workflow, or current public behavior changes.
+- Definitive signoff passes all eight doctrines, repository-contained process/moved-root proofs, both primary CLI
+  matrices at 66/66, RAM 55% below the 88% threshold, and Phase 0 1,031/1,031 in 675 wall-clock seconds.
+
 ## 2026-08-10 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.4 — close bounded document store program
 
 - Activated task-tree-first from clean changes/notes migration commit `921f0507` at cadence 179/300.

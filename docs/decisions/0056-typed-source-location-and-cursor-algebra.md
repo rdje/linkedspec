@@ -2,8 +2,8 @@
 
 - Date: 2026-07-29
 - Status: accepted; neutral/public contract and six-runtime internal value/projection implementation complete;
-  exact future transaction syntax/effect/progress contract ratified; executable transaction artifacts through final
-  public no-drift remain under `FUTURE-PARITY-BACKLOG.14.3.1.1-.14.8`
+  exact future transaction syntax/effect/progress contract ratified; executable neutral transaction authority is
+  complete while backend behavior through final public no-drift remains under `FUTURE-PARITY-BACKLOG.14.3.2-.14.8`
 - Tags: architecture, cursor, source-location, spans, capture, recursion, parser-composition, diagnostics, portability
 
 ## Context
@@ -315,6 +315,26 @@ runtime, fixture, schema, generated carrier, CLI, or public result. `.14.3.1.1` 
 artifact and exact full-inventory rows. Backend behavior remains ordered Perl, Rust, Dart, Julia, then shared Lua
 with independent PUC Lua and LuaJIT admission.
 
+### 12. Execute the neutral authority before backend behavior
+
+`FUTURE-PARITY-BACKLOG.14.3.1.1` makes the ratified contract independently executable at
+`capability_conformance/recognition_transaction_contract.json`, with
+`tools/check_recognition_transaction_contract.py` as the separately implemented oracle. The artifact remains
+future-facing: it does not add the four node kinds to any production parser or backend.
+
+The authority assigns exactly one base effect to all 128 current canonical ActionIR node kinds, the four future
+`RECOGNITION_*` kinds, and all 246 current cross-backend call contracts. The checker derives both live inventories
+from their canonical source owners, rejects missing, duplicate, unknown, or reclassified rows, executes eight
+positive and seventeen negative token cases, computes six acyclic/recursive rule graphs to a fixed point, checks
+six invocation-mark and eight progress cases, and locks fifteen portable diagnostics. Forty in-memory mutations
+cover schema, syntax, result separation, token state, effects, inventories, graphs, marks, progress, diagnostics,
+rollout, canonical registration, tracked input, freshness, and the public-current boundary.
+
+Neutral rollout is therefore exactly one of nine legs complete. Perl, Rust, Dart, Julia, PUC Lua, LuaJIT,
+recurring composition, and public no-drift remain RED under their existing owners. The accepted authored spelling
+is still unavailable in every backend; neutral executability is proof of the target semantics, not implementation
+or public admission.
+
 ## Consequences
 
 - Cursor control, capture, recursion, segmentation, and parser composition share one precise model instead of
@@ -326,16 +346,16 @@ with independent PUC Lua and LuaJIT admission.
 - Current helper APIs and intrinsic rule-local cursor policy remain valid. The separately owned `.14.3` migration
   from execution-wide rule-label mark buckets to invocation frames is explicit, versioned, and mechanically checked.
 - The accepted `recognition_*` spellings are deliberately verbose enough to distinguish bounded recognition from
-  compatibility cursor stacks, host exception handling, and systemic backtracking; they remain unavailable until
-  the separately admitted backend behavior leaves land.
+  compatibility cursor stacks, host exception handling, and systemic backtracking. Their neutral authority is
+  executable, but the spellings remain unavailable until separately admitted backend behavior leaves land.
 - Lossless gap capture gains the common typed representation it anticipated while retaining its separate owner.
 - This decision and its `.14.3.0` audit amendment change no grammar, helper, parser/compiler/runtime, descriptor,
   generated format, semantic/MCP response, primary CLI, rollout, admission, or current public feature-completeness
   claim.
 - The `.14.2.0` planning amendment changes no behavior itself; its exact backend module/test seams and rollout
   correction are durable in the owning task-tree and Knowledge card.
-- The `.14.3.1.0` amendment selects syntax and static semantics only; it adds no executable contract or current
-  authored capability.
+- The `.14.3.1.0` amendment selects syntax and static semantics only. `.14.3.1.1` adds the executable neutral
+  authority without adding current authored capability or backend behavior.
 
 ## Links
 

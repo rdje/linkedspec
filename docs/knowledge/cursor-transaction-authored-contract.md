@@ -17,11 +17,11 @@ answers:
   - "what is the cursor-only v1 progress rule"
   - "does a rolled back attempt satisfy parser progress"
   - "are recognition transactions executable yet"
-date: 2026-08-09
-status: accepted future authored/static contract; executable neutral artifact and runtime support pending
+date: 2026-08-10
+status: accepted future authored/static contract; executable neutral authority complete; runtime support pending
 tags: [cursor, transactions, recognition, actionir, effects, progress, marks, recursion, diagnostics]
-evidence: "FUTURE-PARITY-BACKLOG.14.3.1.0 amends ADR 0056 after the .14.3.0 six-runtime safety audit. It selects four dedicated recognition_* forms, separate match and staged-payload channels, one linear token state machine, a closed 9-allowed/11-rejected base-effect taxonomy, invocation-frame mark migration, and cursor-only progress without changing executable behavior."
-reverify: "rg -n 'recognition_checkpoint|recognize_once|recognition_commit|recognition_rollback|pure_value|cursor-only' docs/decisions/0056-typed-source-location-and-cursor-algebra.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md"
+evidence: "FUTURE-PARITY-BACKLOG.14.3.1.0 amends ADR 0056 after the .14.3.0 six-runtime safety audit. It selects four dedicated recognition_* forms, separate match and staged-payload channels, one linear token state machine, a closed 9-allowed/11-rejected base-effect taxonomy, invocation-frame mark migration, and cursor-only progress. .14.3.1.1 then makes that target independently executable at 128 current + 4 future node rows, 246 call rows, and 40 mutations without backend behavior."
+reverify: "bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && rg -n 'recognition_checkpoint|recognize_once|recognition_commit|recognition_rollback|pure_value|cursor-only' docs/decisions/0056-typed-source-location-and-cursor-algebra.md docs/tasks/FUTURE-PARITY-BACKLOG.14.md docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md"
 ---
 
 The accepted future authored shape is:
@@ -67,5 +67,6 @@ cycle edges require `end_offset > start_offset`. One-shot zero-width recognition
 obligations. Rolled-back attempts do not count. Mark, variable, AST, or transaction-state changes cannot substitute
 for cursor movement, and v1 exposes no authored decreasing-measure escape hatch.
 
-These spellings and rules are accepted architecture, not current executable syntax. Neutral artifact/checker work
-is owned by `.14.3.1.1`; backend behavior follows independently on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT.
+These spellings and rules are accepted architecture, not current executable syntax. The neutral artifact/checker
+is complete under `.14.3.1.1`, but backend behavior still follows independently on Perl, Rust, Dart, Julia, PUC
+Lua, and LuaJIT; neutral executability does not make the authored forms available.

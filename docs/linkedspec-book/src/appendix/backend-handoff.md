@@ -48,8 +48,9 @@
 > and structured repetition/recursion progress failures are not. Do not rename `save_cursor`/`restore_cursor` or
 > claim transaction support. The accepted future forms are `recognition_checkpoint()`,
 > `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and `recognition_rollback(token)`. The attempt
-> returns a match boolean; commit separately exposes the staged payload. They remain non-executable until neutral
-> and per-runtime admission.
+> returns a match boolean; commit separately exposes the staged payload. The neutral authority is now executable
+> and fail-closed over 128 current + four future node rows, 246 call rows, and 40 mutations. The authored forms
+> remain unavailable until each runtime and public admission lands; neutral proof is not backend support.
 >
 > Any cursor transaction is one explicit
 > recognition attempt over invocation-local cursor/boundary/marks only; it adds no search tree and cannot undo

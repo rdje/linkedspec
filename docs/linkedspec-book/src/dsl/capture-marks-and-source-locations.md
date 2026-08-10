@@ -127,6 +127,18 @@ output, authored diagnostics, exit/unbounded control, user or callable functions
 external/host work, raw code, and unknown nodes fail closed. Rule calls are classified transitively, and the
 runtime checks the same boundary before performing an effect.
 
+The future contract now has an executable backend-neutral authority. Its independent checker covers 128 current
+ActionIR node kinds plus four dedicated transaction kinds, all 246 current call contracts, falsey token results,
+recursive effect fixed points, invocation-frame marks, cursor-only progress, fifteen portable diagnostics, and 40
+drift mutations:
+
+```bash
+bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py
+```
+
+That command proves the target semantics only. No current parser recognizes the four forms, and no backend may
+claim transaction support until its separate behavior and admission leg lands.
+
 This section describes an accepted future contract, not a current feature. The neutral artifact/checker is next,
 then Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT must each be admitted independently before the form becomes
 portable public behavior.

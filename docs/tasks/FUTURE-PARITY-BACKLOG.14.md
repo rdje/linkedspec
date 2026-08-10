@@ -3758,10 +3758,101 @@
   the mechanical commit workflow before any task-tree pivot.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.1.1`
-  Status: `pending`
+  Status: `done; signoff-complete` (2026-08-10; task-tree-first from clean bounded-document closeout commit
+    `c26a9556`; intended atomic 181/300; no push; atomic commit/clean handoff pending)
   Goal: Add the independently executable neutral transaction/progress artifact, checker, positive/negative
     fixtures, ActionIR/effect rows, rollout topology, and exact mutation corpus.
   Depends on: `.14.3.1.0`
+  Acceptance: Encode the ratified authored/static contract as one versioned backend-neutral executable authority;
+    bind exact dedicated node kinds, token/result state machine, complete ActionIR/canonical-call base effects,
+    transitive rule effects, invocation-mark and cursor-only progress semantics, portable diagnostics, fixture
+    identities, rollout ownership, and fail-closed mutation proof; register the neutral checker in focused and
+    canonical governance without enabling grammar, compiler, runtime, backend, generated-source, CLI, public,
+    storage-root, or hosted-workflow behavior; align durable/public owners; pass signoff and land clean before
+    unchanged neutral recomposition `.14.3.1.2`.
+  Verification: exact artifact/schema/checker/fixture topology and generated freshness; positive/negative token,
+    falsey-result, effect, mark-frame, repetition, recursion, diagnostic, and mutation cases; ActionIR/call-contract
+    census closure; rollout/canonical/storage no-drift; book, Knowledge, memory, task metadata, README, doctrines,
+    definitive local CI, atomic commit 181/300, brief clearing, pointer validation, residue cleanup, and clean proof
+  Commit: `FUTURE-PARITY-BACKLOG.14.3.1.1 - add neutral recognition transaction contract`
+
+  ### `FUTURE-PARITY-BACKLOG.14.3.1.1` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove bounded-document closeout `.4` landed at clean `c26a9556`
+    as atomic 180/300 with first parent `921f0507`, exact subject, zero-byte brief, valid post-commit pointer,
+    absent rendered book, zero managed-run residue, and this task-tree part as the sole first activation mutation.
+  - [x] **RETRIEVE / FREEZE NEUTRAL BOUNDARY** — Follow ADR `0056`, the canonical transaction Knowledge card,
+    `.14.3.0-.14.3.1.0` evidence, toolbox probes, current ActionIR/call-contract authorities, neutral-artifact
+    precedents, canonical registration, project-data routing, and sole-facing future/current claims before design.
+  - [x] **VERSIONED EXECUTABLE AUTHORITY / FIXTURES** — Add one deterministic backend-neutral artifact with an
+    independently implemented checker and exact positive/negative fixtures for the four dedicated forms, strict
+    match versus staged payload, linear token lifecycle, invocation marks, and cursor-only repetition/recursion.
+  - [x] **CLOSED EFFECT / DIAGNOSTIC GOVERNANCE** — Classify every current ActionIR node and all canonical call
+    contracts exactly once, compute composite and named-rule effects to a recursive fixed point, reject unknowns,
+    and bind portable token/effect/progress diagnostics without illustrative or open-ended rows.
+  - [x] **ROLLOUT / MUTATION / CANONICAL PROOF** — Freeze neutral/backend/recurring/public ownership and reject
+    schema, topology, node, token, result, effect, call-graph, mark, progress, fixture, diagnostic, rollout,
+    registration, and freshness drift through an exact mutation corpus registered in mandatory canonical CI.
+  - [x] **NO RUNTIME OR PUBLIC ACTIVATION** — Prove no grammar, compiler, runtime, backend, generated carrier,
+    `.spec`, corpus, CLI, capability, semantic/MCP, README, storage root, hosted workflow, or current-public claim
+    changes; backend RED and implementation remain exclusively in `.14.3.2+`.
+  - [x] **LOCKSTEP / SOLE-FACING BOOK** — Synchronize task/index, ADR status, Knowledge, architecture, roadmaps,
+    continuity roots, changes/notes, and the mdBook's explicitly future/unavailable contract with rendered review.
+  - [x] **VERIFY / COMMIT / CLEAN HANDOFF** — Pass focused artifact/mutation/topology/freshness/no-drift checks,
+    book, Knowledge/memory/task/README, all doctrines, definitive canonical CI, atomic 181/300, zero-byte brief,
+    post-pointer and residue checks, and clean proof before `.14.3.1.2` activates task-tree-first.
+
+  #### TOOLBOX Task-Acceptance Checklist
+
+  - [x] **REPRODUCE / ISSUE** — Show the ratified transaction contract has no executable neutral artifact yet and
+    current ActionIR/call authorities expose no complete fail-closed effect/progress/token contract.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Use descriptor/lowering/source and repository contract probes to identify
+    exact current node/call/progress owners and why helper aliases, payload truthiness, or sample effects are invalid.
+  - [x] **FIX** — Implement only the independent neutral authority, checker, fixtures, topology, and mutations.
+  - [x] **ADDRESSED (verified)** — Prove every accepted form/state/effect/mark/progress/diagnostic/rollout obligation
+    is represented once and every rejected family fails deterministically.
+  - [x] **NO REGRESSION** — Preserve current executable behavior, schemas, public surfaces, storage, and toolchains.
+  - [x] **LOCKSTEP** — Land the exact artifact contract, task/public explanation, atomic commit, and clean handoff.
+
+  Retrieval/reproduction evidence 2026-08-10: the clean parent has no
+  `capability_conformance/recognition_transaction_contract.json` or matching checker. Knowledge-first retrieval
+  followed ADR `0056`, the authored transaction and typed-source cards, `.14.3.0-.14.3.1.0`, neutral checker
+  precedents, canonical/project-data owners, and the sole-facing book before design. Live source derives 128 unique
+  current ActionIR node kinds; `tools/check_language_capability_coverage.pl --report` separately derives 246
+  current cross-backend call names and 122 public identifier-shaped Perl contracts. The counts are different
+  domains, so the durable neutral-contract card records the distinction rather than propagating a false 122-node
+  assumption.
+
+  Toolbox mechanism evidence 2026-08-10: `return_descriptor` reports canonical `RETURN` for an exact action;
+  `call_spec_handler_subst` rejects the retired aggregate-selector spelling with `aggregate_selector_removed`;
+  and `dump_parser_source` yields a 10,449-byte current handler containing direct `$IPOS`/mark/cursor machinery but
+  no transaction state/effect/progress owner. `CALL` and ordinary falsey return payloads expose no separate
+  authored accepted-bit channel. These mechanisms prove helper aliases, eager payload truthiness, or an
+  illustrative sample-effect list cannot implement the ratified contract.
+
+  Neutral implementation evidence 2026-08-10: `linkedspec-recognition-transaction-v1` encodes the four exact
+  future forms, five-state token model, strict match/staged-payload separation, closed 9/11 effects, 128 current +
+  four dedicated node rows, all 246 call rows, six recursive fixed-point effect graphs, invocation mark snapshots,
+  cursor-only progress, fifteen diagnostics, nine exact rollout legs, and 40 named mutations. The independent
+  checker re-derives live inventories, locks the base classification digests, executes token 8 positive / 17
+  negative, marks 6, progress 8, rejects all 40 mutations, and is tracked/unconditionally routed through canonical
+  project-local Python execution. Focused execution passes at neutral 1/9 complete.
+
+  No-activation evidence 2026-08-10: the implementation census contains only the neutral artifact/checker,
+  canonical registration/storage-entrypoint governance, task/index, ADR/Knowledge/architecture/roadmap/live
+  documentation, capability guide, toolbox, and sole-facing book. It changes no grammar, compiler/runtime/backend,
+  generated carrier, `.spec`/corpus, CLI, capability ledger, semantic/MCP surface, README, storage root, or hosted
+  workflow. Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurring, and public legs stay exact RED owners.
+
+  Final verification evidence 2026-08-10: focused artifact, mutation, inventory, language, storage, Knowledge,
+  memory, task, README, doctrine, and real 79-source-file mdBook proofs pass, including rendered inspection and
+  generated-book removal. The host-authorized definitive canonical gate passes all eight doctrines, the exact
+  repository-contained six-family process-I/O proof, moved-root execution, primary CLI 66/66 in both default and
+  POSIX option environments, RAM 55% below the 88% threshold, and Phase 0 1,031/1,031 in 675 wall-clock seconds,
+  ending with `[ci] local CI gate passed`. The first sandboxed attempt reached the process-I/O proof but the outer
+  harness denied its nested `sandbox-exec`; the unchanged host-authorized rerun passed that proof and the full gate.
+  Commit, zero-byte brief, post-pointer, residue, absent-book, and clean-status evidence are completed mechanically
+  before the next task-tree activation.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.1.2`
   Status: `pending`

@@ -73,6 +73,13 @@ consumers pass, and the route registry remains 20 surfaces / 62 routes / 32/32 w
 empty debt metadata. The program is composition-closed. These storage migrations change documentation governance
 only; they change no language, compiler, runtime, backend, fixture, CLI, protocol, or project-data root.
 
+- `2026-08-10 executable neutral recognition-transaction authority`: `FUTURE-PARITY-BACKLOG.14.3.1.1` encodes
+  the accepted future syntax and state machine in one backend-neutral artifact plus independent checker without
+  adding production behavior. Exact coverage is 128 current ActionIR node effects + four dedicated future nodes,
+  all 246 cross-backend call effects, token 8 positive / 17 negative, six fixed-point effect graphs, six mark
+  cases, eight progress cases, fifteen diagnostics, and 40 rejected mutations. Neutral is 1/9 complete; every
+  backend, recurring, and public leg remains RED, so the authored forms are still unavailable.
+
 - `2026-08-09 cursor transaction authored/static contract`: behavior-free
   `FUTURE-PARITY-BACKLOG.14.3.1.0` ratifies four accepted future special forms:
   `recognition_checkpoint()`, `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and
@@ -87,7 +94,7 @@ only; they change no language, compiler, runtime, backend, fixture, CLI, protoco
   direct/mutual recursion accept only cursor advance; rolled-back attempts do not count.
 
   This is syntax/static-semantics ratification only: current grammar, runtime, artifacts, fixtures, schemas,
-  descriptors, CLI, and results do not change. `.14.3.1.1` owns executable neutral rows. Startup also found the
+  descriptors, CLI, and results do not change. `.14.3.1.1` now owns the executable neutral rows above. Startup also found the
   future-backlog task's own authoritative prose frontier stranded at `.14.2.0.1`; blame ties it to `bd777ee8`, and
   the completed-tree-only metadata doctrine explains the escape. Immediate prose is repaired; enforcement is
   durably queued under reopened `TASK-TREE-METADATA-HYGIENE.5`.

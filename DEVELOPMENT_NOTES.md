@@ -10,6 +10,32 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-10 (`FUTURE-PARITY-BACKLOG.14.3.1.1` — executable neutral recognition transactions): distinguish
+  inventory domains before freezing counts. Perl currently exposes 128 unique canonical ActionIR node kinds, while
+  the language coverage checker reports 122 public identifier-shaped Perl call contracts and 246 aligned
+  cross-backend call names. Treating 122 as the node count would silently omit six node kinds; the new Knowledge
+  card and checker preserve the distinction.
+- A single base-effect row must be conservative across overloaded call spellings. `split`, `set_key`, and array-end
+  mutation calls therefore classify as aggregate writes even where a value-only form can return a copy; `with`
+  and tree traversal classify as dynamic callables; compatibility save/restore/rewind never masquerade as
+  transaction state. Readable rows live in the artifact, while independent canonical digests reject reclassification.
+- Falsey-safe recognition requires two channels. `recognize_once` returns only a strict accepted bit, while commit
+  retrieves the separately staged payload; `false`, `0`, empty string, and `undef` are four successful payloads.
+  Ordinary `CALL` results cannot be reinterpreted by truthiness and compatibility cursor helpers have no token,
+  invocation generation, staged result, effect barrier, or progress authority.
+- Recursive effect analysis is a monotone set-union fixed point over named rules, not depth-first sampling. This
+  terminates for direct and mutual SCCs and ensures a forbidden transitive callee remains visible. Progress is a
+  separate cursor-edge obligation: effect, variable, mark, or transaction-state changes never substitute for
+  `end_offset > start_offset` on accepted repetition or recursive-cycle edges.
+- The neutral artifact is deliberately executable before any parser understands its syntax. Canonical CI proves
+  132 node rows, 246 call rows, token 8/17, graphs 6, marks 6, progress 8, diagnostics 15, and 40 mutations while
+  rollout remains 1/9. This isolates target-contract mistakes from six later backend implementations and prevents
+  neutral proof from being misreported as current authored capability.
+- Definitive signoff must run where the gate can apply its own `sandbox-exec` profile. An outer sandbox correctly
+  blocked nested profile application with `Operation not permitted`; the unchanged host-authorized rerun passed
+  repository-contained process I/O, moved-root execution, CLI 66x2, RAM 55%, and Phase 0 1,031/1,031 in 675
+  seconds. Treat that first result as an execution-context denial, never as permission to weaken containment.
+
 - 2026-08-10 (`LIVE-DOCUMENT-PRESSURE-CONTAINMENT.4` — unchanged four-store recomposition): the four routed
   records already have their final normal shape: `state=current`, bounded controls, executable verifiers, and
   empty `baseline`/`transition` objects. Closeout therefore must not invent another transition ADR, rewrite the

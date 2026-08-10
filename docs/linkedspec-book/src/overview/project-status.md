@@ -104,7 +104,9 @@ Public typed values, executable transaction behavior, recursive observation, spa
 dispatch, and all public authored surfaces remain future work. Exact future transaction syntax is now ratified:
 `recognition_checkpoint()`, `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and
 `recognition_rollback(token)`. Match is a strict boolean and the falsey-safe payload remains staged until commit.
-These forms are accepted architecture, not current executable syntax. The internal
+Their neutral artifact/checker is executable at 128 current + 4 future ActionIR rows, 246 call rows, and 40
+rejected mutations, with neutral rollout 1/9 complete. The authored forms themselves are not current executable
+syntax; all six runtime, recurring, and public legs remain RED. The internal
 Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT admissions do not add an authored `Position` or `Span` value, transaction
 operation, schema version, or new helper result. Rollout is 8 complete / 6 pending because the combined recurring/
 public no-drift row remains owned by final program-wide closeout `FUTURE-PARITY-BACKLOG.14.8`.

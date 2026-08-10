@@ -279,6 +279,27 @@ final program-wide owner `FUTURE-PARITY-BACKLOG.14.8`; recurring composition doe
 No public `Position`/`Span` value, transaction spelling, parser behavior, descriptor or generated schema,
 semantic/MCP projection, or source-authority elevation is claimed by these internal runtime admissions.
 
+`recognition_transaction_contract.json` (`linkedspec-recognition-transaction-v1`) makes the accepted future
+bounded-recognition transaction, effect, invocation-mark, and cursor-progress semantics executable without adding
+grammar or runtime behavior. Run:
+
+```bash
+bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py
+```
+
+The independent checker derives all 128 current ActionIR node kinds from the Perl contract authority and all 246
+current call names from matching Dart, Julia, and Lua inventories. The artifact assigns one base effect to each
+of those rows plus four dedicated future `RECOGNITION_*` nodes under the closed nine-allowed/eleven-rejected
+lattice. It separately executes 8 positive / 17 negative token cases, six recursive fixed-point effect graphs,
+six invocation-mark cases, eight cursor-only progress cases, and fifteen portable diagnostic records, then rejects
+40 exact drift mutations. This 128-node census is distinct from the 122 public identifier-shaped Perl contracts
+reported by `tools/check_language_capability_coverage.pl`.
+
+Canonical CI requires the tracked artifact/checker and runs the same project-data-routed command unconditionally.
+Rollout is neutral 1/9 complete: Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurring composition, and public
+no-drift remain RED. The exact `recognition_checkpoint` / `recognize_once` / `recognition_commit` /
+`recognition_rollback` forms remain future and unavailable in every backend.
+
 `root_rule_selection_contract.json` (`linkedspec-root-rule-selection-v1`) makes ADR `0046` executable without
 claiming markerless execution before the
 backends admit it. Run `bash tools/run_python_project_data.sh tools/check_root_rule_selection_contract.py` to validate explicit selector > first

@@ -2,26 +2,26 @@
 
 ## Current Activity
 
-- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.4` is composition-closeout signoff-complete from clean changes/notes commit
-  `921f0507` as intended atomic 180/300 with no push.
-- Independent recomposition passes history 34/34 over three surfaces / 21 segments, task metadata 26/26 over 510
-  IDs, rollover 12/12, all eleven transferred consumers, outside-CWD retrieval, and both root pressure checks.
-- All four route records remain current/bounded with empty debt metadata under the unchanged 20-surface / 62-route
-  / 32-mutation registry. Definitive canonical proof exits 0 after CLI 66x2 and Phase 0 1,031/1,031 in 673 seconds;
-  only the atomic commit, brief clearing, residue census, post-pointer check, and clean proof remain.
+- `FUTURE-PARITY-BACKLOG.14.3.1.1` is signoff-complete from clean bounded-document closeout `c26a9556` as intended
+  atomic 181/300 with no push; its mechanical commit/clean-handoff proof is in progress.
+- The executable neutral authority is focused-green over 128 current + four future ActionIR rows, 246 call rows,
+  token 8/17, six fixed-point graphs, six mark cases, eight progress cases, fifteen diagnostics, and 40 mutations.
+- Neutral rollout is 1/9 complete. All six runtime routes, recurring composition, and public no-drift remain RED;
+  no authored transaction syntax or production behavior is enabled. The definitive canonical gate is green.
 
 ## Latest Completed Slice
 
-- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.4` independently recomposes all four bounded stores unchanged and restores
-  product frontier `FUTURE-PARITY-BACKLOG.14.3.1.1`; atomic 180/300 commit remains.
+- `FUTURE-PARITY-BACKLOG.14.3.1.1` is complete for its intended atomic 181/300 landing: executable neutral
+  transaction authority, independent mutation checker, durable/public alignment, and canonical signoff are green.
 
 ## Next Action
 
-- Commit `.4` atomically, clear the brief, remove exact residue, prove clean, then activate
-  `FUTURE-PARITY-BACKLOG.14.3.1.1` task-tree-first.
+- Commit `.14.3.1.1` atomically and prove the clean handoff, then activate unchanged neutral recomposition
+  `.14.3.1.2` task-tree-first from that clean landing.
 
 ## Recent Completions
 
+- `2026-08-10` — `c26a9556` composition-closed all four bounded document stores as atomic 180/300.
 - `2026-08-10` — `921f0507` bounded changes and engineering notes as atomic 179/300.
 - `2026-08-10` — `61a52dbd` partitioned future task evidence as atomic 178/300.
 - `2026-08-09` — `99fe03f3` bounded live status over exact history as atomic 177/300.
@@ -29,7 +29,6 @@
 - `2026-08-09` — `0bcb5a36` recomposition-closed README routing pressure as atomic 175/300.
 - `2026-08-09` — `5c570719` enforced 20 routed surfaces and 62 routes as atomic 174/300.
 - `2026-08-09` — `6a5d1dcc` ratified routing-pressure closure as atomic 173/300.
-- `2026-08-09` — `7c2ff407` ratified the rule-local recognition transaction contract as atomic 172/300.
 
 ## History
 

@@ -1,0 +1,807 @@
+#!/usr/bin/env python3
+"""Independently validate the neutral recognition-transaction v1 contract."""
+
+from __future__ import annotations
+
+import copy
+import hashlib
+import json
+import re
+import sys
+from pathlib import Path
+from typing import Any, Callable
+
+
+ROOT = Path(__file__).resolve().parents[1]
+CONTRACT_PATH = ROOT / "capability_conformance" / "recognition_transaction_contract.json"
+PERL_CONTRACTS_PATH = ROOT / "perl" / "LinkedSpec" / "ActionIR" / "Contracts.pm"
+DART_CONTRACTS_PATH = ROOT / "dart" / "lib" / "src" / "action" / "action_contracts.dart"
+JULIA_CONTRACTS_PATH = ROOT / "julia" / "src" / "action" / "ActionContracts.jl"
+LUA_CALL_NAMES_PATH = ROOT / "lua" / "src" / "linkedspec" / "action_call_names.lua"
+CI_PATH = ROOT / "tools" / "run_ci_local.sh"
+
+ALLOWED_EFFECTS = [
+    "pure_value",
+    "source_read",
+    "structured_control",
+    "rule_recognition",
+    "transaction_state",
+    "cursor_advance",
+    "capture_boundary_write",
+    "invocation_mark_write",
+    "staged_return",
+]
+REJECTED_EFFECTS = [
+    "binding_write",
+    "aggregate_write",
+    "ast_or_object_write",
+    "compatibility_cursor_control",
+    "output",
+    "authored_diagnostic",
+    "exit_or_unbounded_control",
+    "dynamic_callable",
+    "parser_registry_or_staged_dispatch",
+    "external_or_host",
+    "unknown_or_raw",
+]
+DEDICATED_NODES = [
+    "RECOGNITION_COMMIT",
+    "RECOGNITION_CHECKPOINT",
+    "RECOGNITION_ROLLBACK",
+    "RECOGNIZE_ONCE",
+]
+EXPECTED_COUNTS = {
+    "current_action_ir_nodes": 128,
+    "dedicated_action_ir_nodes": 4,
+    "all_action_ir_nodes": 132,
+    "canonical_call_contracts": 246,
+    "allowed_effects": 9,
+    "rejected_effects": 11,
+    "token_positive_cases": 8,
+    "token_negative_cases": 17,
+    "effect_graph_cases": 6,
+    "mark_cases": 6,
+    "progress_cases": 8,
+    "diagnostics": 15,
+    "rollout_legs": 9,
+    "mutations": 40,
+}
+EXPECTED_EFFECT_ROW_HASHES = {
+    "action_ir_effect_rows": "560de8fc586cee7adf66e1b6eeab7d931f441ebda6ca9cb0498ecc9d4392f775",
+    "canonical_call_effect_rows": "b0e25c4ab45ed53f83e5eaa8a1b2d66ec3ddc5a9cc4764ff031b3903efb64929",
+}
+EXPECTED_SURFACE = {
+    "checkpoint": "tx = recognition_checkpoint()",
+    "attempt": "matched = recognize_once(tx, call(Child))",
+    "commit": "payload = recognition_commit(tx)",
+    "rollback": "recognition_rollback(tx)",
+    "operand": "recognize_once accepts exactly one unevaluated static call(Rule) operand",
+    "result_separation": (
+        "recognize_once returns a strict match boolean; the recognized payload "
+        "remains staged until commit"
+    ),
+    "availability": "future and unavailable in every backend until its rollout leg is admitted",
+}
+EXPECTED_TOKEN_STATES = [
+    "uninitialized",
+    "active_unattempted",
+    "active_staged_match",
+    "active_staged_miss",
+    "invalidated",
+]
+EXPECTED_TOKEN_OPERATIONS = [
+    "checkpoint",
+    "attempt_match",
+    "attempt_miss",
+    "commit",
+    "rollback",
+]
+EXPECTED_TRANSITIONS = [
+    ["uninitialized", "checkpoint", "active_unattempted"],
+    ["active_unattempted", "attempt_match", "active_staged_match"],
+    ["active_unattempted", "attempt_miss", "active_staged_miss"],
+    ["active_staged_match", "commit", "invalidated"],
+    ["active_staged_miss", "commit", "invalidated"],
+    ["active_staged_match", "rollback", "invalidated"],
+    ["active_staged_miss", "rollback", "invalidated"],
+]
+EXPECTED_DIAGNOSTICS = [
+    ("recognition_token_expected", ["code", "rule", "origin"]),
+    ("recognition_token_escape", ["code", "rule", "origin", "escape"]),
+    ("recognition_token_reused", ["code", "rule", "origin", "operation"]),
+    ("recognition_nesting_forbidden", ["code", "rule", "origin"]),
+    ("recognition_cross_invocation", ["code", "rule", "origin", "expected_invocation", "actual_invocation"]),
+    ("recognition_cross_source", ["code", "rule", "origin", "expected_source", "actual_source"]),
+    ("recognition_attempt_count", ["code", "rule", "origin", "count"]),
+    ("recognition_terminal_required", ["code", "rule", "origin"]),
+    ("recognition_effect_forbidden", ["code", "rule", "origin", "effect"]),
+    ("recognition_unknown_effect", ["code", "rule", "origin", "effect"]),
+    ("recognition_zero_progress_repetition", ["code", "rule", "origin", "start_offset", "end_offset"]),
+    ("recognition_zero_progress_recursive_cycle", ["code", "rule", "origin", "cycle", "start_offset", "end_offset"]),
+    ("recognition_static_rule_required", ["code", "rule", "origin", "operand"]),
+    ("recognition_match_boolean_required", ["code", "rule", "origin"]),
+    ("recognition_mark_generation_invalid", ["code", "rule", "origin", "generation"]),
+]
+EXPECTED_ROLLOUT = [
+    (1, "FUTURE-PARITY-BACKLOG.14.3.1.1", "neutral", "complete"),
+    (2, "FUTURE-PARITY-BACKLOG.14.3.2", "perl", "red"),
+    (3, "FUTURE-PARITY-BACKLOG.14.3.3", "rust", "red"),
+    (4, "FUTURE-PARITY-BACKLOG.14.3.4", "dart", "red"),
+    (5, "FUTURE-PARITY-BACKLOG.14.3.5", "julia", "red"),
+    (6, "FUTURE-PARITY-BACKLOG.14.3.6", "puc_lua", "red"),
+    (7, "FUTURE-PARITY-BACKLOG.14.3.6", "luajit", "red"),
+    (8, "FUTURE-PARITY-BACKLOG.14.3.7", "recurring", "red"),
+    (9, "FUTURE-PARITY-BACKLOG.14.3.8", "public_no_drift", "red"),
+]
+EXPECTED_EXECUTION = {
+    "contract_path": "capability_conformance/recognition_transaction_contract.json",
+    "checker_path": "tools/check_recognition_transaction_contract.py",
+    "project_data_runner": "tools/run_python_project_data.sh",
+    "canonical_driver": "tools/run_ci_local.sh",
+    "invocation": "bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py",
+    "registration_marker": "checking backend-neutral recognition transaction and progress contract",
+    "tracked_required": True,
+    "freshness_sources": [
+        "perl/LinkedSpec/ActionIR/Contracts.pm",
+        "dart/lib/src/action/action_contracts.dart",
+        "julia/src/action/ActionContracts.jl",
+        "lua/src/linkedspec/action_call_names.lua",
+    ],
+}
+EXPECTED_TOP_LEVEL = {
+    "format",
+    "contract_id",
+    "task_owner",
+    "status",
+    "expected_counts",
+    "authored_surface",
+    "policy",
+    "effect_model",
+    "action_ir_effect_rows",
+    "canonical_call_effect_rows",
+    "token_model",
+    "fixtures",
+    "diagnostics",
+    "rollout",
+    "canonical_execution",
+    "mutation_ids",
+}
+
+
+class ContractError(RuntimeError):
+    """One neutral contract invariant failed."""
+
+
+def require(condition: bool, message: str) -> None:
+    if not condition:
+        raise ContractError(message)
+
+
+def read_text(path: Path) -> str:
+    try:
+        return path.read_text(encoding="utf-8")
+    except OSError as exc:
+        raise ContractError(f"cannot read {path.relative_to(ROOT)}: {exc}") from exc
+
+
+def load_contract() -> dict[str, Any]:
+    try:
+        value = json.loads(read_text(CONTRACT_PATH))
+    except json.JSONDecodeError as exc:
+        raise ContractError(f"invalid JSON: {exc}") from exc
+    require(isinstance(value, dict), "contract root must be an object")
+    return value
+
+
+def current_action_ir_nodes() -> list[str]:
+    nodes = sorted(set(re.findall(r"ir_node\s*=>\s*'([^']+)'", read_text(PERL_CONTRACTS_PATH))))
+    require(nodes, "cannot derive current Perl ActionIR node inventory")
+    return nodes
+
+
+def _extract_named_set(text: str, pattern: str, label: str, item_pattern: str) -> list[str]:
+    match = re.search(pattern, text, re.DOTALL)
+    require(match is not None, f"cannot derive {label}")
+    return re.findall(item_pattern, match.group(1))
+
+
+def current_call_names() -> list[str]:
+    dart_text = read_text(DART_CONTRACTS_PATH)
+    dart: list[str] = []
+    for constant in (
+        "supportedActionIrCallNames",
+        "numericAliasActionIrCallNames",
+        "currentAliasActionIrCallNames",
+    ):
+        dart.extend(
+            _extract_named_set(
+                dart_text,
+                rf"const {constant} = <String>\{{(.*?)\n\}};",
+                f"Dart {constant}",
+                r"'([^']+)'",
+            )
+        )
+
+    julia_text = read_text(JULIA_CONTRACTS_PATH)
+    julia: list[str] = []
+    for constant in (
+        "_SUPPORTED_ACTION_IR_CALL_NAMES",
+        "_NUMERIC_ALIAS_ACTION_IR_CALL_NAMES",
+        "_CURRENT_ALIAS_ACTION_IR_CALL_NAMES",
+    ):
+        julia.extend(
+            _extract_named_set(
+                julia_text,
+                rf"const {constant} = Set\{{String\}}\(\[(.*?)\n\]\)",
+                f"Julia {constant}",
+                r'"([^"]+)"',
+            )
+        )
+
+    lua = _extract_named_set(
+        read_text(LUA_CALL_NAMES_PATH),
+        r"local CURRENT_CALL_NAMES = \{(.*?)\n\}",
+        "Lua current call names",
+        r'\["([^"]+)"\]\s*=\s*true',
+    )
+    inventories = {"Dart": sorted(dart), "Julia": sorted(julia), "Lua": sorted(lua)}
+    for language, names in inventories.items():
+        require(len(names) == len(set(names)), f"{language} current call inventory contains a duplicate")
+    require(inventories["Dart"] == inventories["Julia"], "Dart and Julia current call inventories differ")
+    require(inventories["Dart"] == inventories["Lua"], "Dart and Lua current call inventories differ")
+    return inventories["Dart"]
+
+
+def flatten_effect_rows(rows: Any, label: str) -> tuple[list[str], dict[str, str]]:
+    effects = ALLOWED_EFFECTS + REJECTED_EFFECTS
+    require(isinstance(rows, dict), f"{label} must be an object")
+    require(list(rows) == effects, f"{label} effect keys/order drifted")
+    flattened: list[str] = []
+    assignments: dict[str, str] = {}
+    for effect in effects:
+        names = rows[effect]
+        require(isinstance(names, list), f"{label}.{effect} must be an array")
+        require(all(isinstance(name, str) and name for name in names), f"{label}.{effect} contains an invalid name")
+        for name in names:
+            require(name not in assignments, f"{label} assigns {name!r} more than once")
+            assignments[name] = effect
+            flattened.append(name)
+    return flattened, assignments
+
+
+def effect_row_hash(assignments: dict[str, str]) -> str:
+    pairs = sorted(assignments.items())
+    encoded = json.dumps(pairs, separators=(",", ":"), ensure_ascii=True).encode("ascii")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def json_equal(left: Any, right: Any) -> bool:
+    return type(left) is type(right) and left == right
+
+
+def decode_payload(text: str) -> Any:
+    if text == "false":
+        return False
+    if text == "0":
+        return 0
+    if text == "null":
+        return None
+    return text
+
+
+def simulate_token(ops: Any) -> tuple[bool, Any]:
+    require(isinstance(ops, list) and ops, "token ops must be a non-empty array")
+    state = "uninitialized"
+    attempts = 0
+    matched = False
+    payload: Any = None
+    result: Any = None
+    for raw in ops:
+        require(isinstance(raw, str), "token operation must be a string")
+        operation, separator, argument = raw.partition(":")
+        if operation == "checkpoint":
+            if state != "uninitialized":
+                raise ContractError("recognition_nesting_forbidden")
+            state = "active_unattempted"
+        elif operation in {"attempt_match", "attempt_miss"}:
+            if state != "active_unattempted":
+                raise ContractError("recognition_attempt_count")
+            attempts += 1
+            matched = operation == "attempt_match"
+            payload = decode_payload(argument) if matched and separator else None
+            state = "active_staged_match" if matched else "active_staged_miss"
+        elif operation in {"commit", "rollback"}:
+            if state == "invalidated":
+                raise ContractError("recognition_token_reused")
+            if state != "active_staged_match" and state != "active_staged_miss":
+                raise ContractError("recognition_attempt_count")
+            result = payload if operation == "commit" and matched else None
+            if operation == "rollback":
+                result = "no_authored_value"
+            state = "invalidated"
+        else:
+            raise ContractError("recognition_token_expected")
+    if attempts != 1:
+        raise ContractError("recognition_attempt_count")
+    if state != "invalidated":
+        raise ContractError("recognition_terminal_required")
+    return matched, result
+
+
+def validate_token_fixtures(fixtures: dict[str, Any]) -> None:
+    positives = fixtures.get("token_positive")
+    negatives = fixtures.get("token_negative")
+    require(isinstance(positives, list), "token_positive fixtures must be an array")
+    require(isinstance(negatives, list), "token_negative fixtures must be an array")
+    require(len(positives) == EXPECTED_COUNTS["token_positive_cases"], "token positive count drifted")
+    require(len(negatives) == EXPECTED_COUNTS["token_negative_cases"], "token negative count drifted")
+    require(len({case.get("id") for case in positives}) == len(positives), "token positive ids must be unique")
+    require(len({case.get("id") for case in negatives}) == len(negatives), "token negative ids must be unique")
+    for case in positives:
+        matched, result = simulate_token(case.get("ops"))
+        require(type(case.get("matched")) is bool, f"{case.get('id')} expected match must be strict boolean")
+        require(matched is case["matched"], f"{case.get('id')} match result drifted")
+        require(json_equal(result, case.get("result")), f"{case.get('id')} staged result drifted")
+
+    violation_diagnostics = {
+        "copy": "recognition_token_escape",
+        "comparison": "recognition_token_escape",
+        "aggregate_storage": "recognition_token_escape",
+        "function_storage": "recognition_token_escape",
+        "codeblock_storage": "recognition_token_escape",
+        "return": "recognition_token_escape",
+        "capture": "recognition_token_escape",
+        "serialization": "recognition_token_escape",
+        "cross_invocation": "recognition_cross_invocation",
+        "cross_source": "recognition_cross_source",
+        "dynamic_rule_operand": "recognition_static_rule_required",
+        "payload_as_match_boolean": "recognition_match_boolean_required",
+    }
+    for case in negatives:
+        expected = case.get("diagnostic")
+        require(isinstance(expected, str), f"{case.get('id')} lacks a diagnostic")
+        if "violation" in case:
+            actual = violation_diagnostics.get(case["violation"], "recognition_token_expected")
+        else:
+            try:
+                simulate_token(case.get("ops"))
+            except ContractError as exc:
+                actual = str(exc)
+            else:
+                raise ContractError(f"{case.get('id')} token negative was accepted")
+        require(actual == expected, f"{case.get('id')} diagnostic drifted: {actual} != {expected}")
+
+
+def rule_effects(graph: dict[str, Any], allowed: set[str], rejected: set[str]) -> tuple[bool, str | None]:
+    rules = graph.get("rules")
+    entry = graph.get("entry")
+    require(isinstance(rules, dict) and rules, f"{graph.get('id')} rules must be a non-empty object")
+    require(entry in rules, f"{graph.get('id')} entry is not declared")
+    computed: dict[str, set[str]] = {}
+    for name, rule in rules.items():
+        require(isinstance(rule, dict), f"{graph.get('id')}.{name} must be an object")
+        base = rule.get("base")
+        calls = rule.get("calls")
+        require(isinstance(base, list) and isinstance(calls, list), f"{graph.get('id')}.{name} shape drifted")
+        require(all(isinstance(effect, str) for effect in base), f"{graph.get('id')}.{name} effect is invalid")
+        if any(effect not in allowed | rejected for effect in base):
+            return False, "recognition_unknown_effect"
+        require(all(call in rules for call in calls), f"{graph.get('id')}.{name} references an unknown rule")
+        computed[name] = set(base)
+    changed = True
+    while changed:
+        changed = False
+        for name, rule in rules.items():
+            union = set(computed[name])
+            for callee in rule["calls"]:
+                union.update(computed[callee])
+            if union != computed[name]:
+                computed[name] = union
+                changed = True
+    if computed[entry] & rejected:
+        return False, "recognition_effect_forbidden"
+    return True, None
+
+
+def validate_effect_graphs(fixtures: dict[str, Any], allowed: set[str], rejected: set[str]) -> None:
+    graphs = fixtures.get("effect_graphs")
+    require(isinstance(graphs, list), "effect_graphs must be an array")
+    require(len(graphs) == EXPECTED_COUNTS["effect_graph_cases"], "effect graph count drifted")
+    require(len({case.get("id") for case in graphs}) == len(graphs), "effect graph ids must be unique")
+    for case in graphs:
+        accepted, diagnostic = rule_effects(case, allowed, rejected)
+        require(type(case.get("accepted")) is bool, f"{case.get('id')} accepted must be boolean")
+        require(accepted is case["accepted"], f"{case.get('id')} effect acceptance drifted")
+        require(diagnostic == case.get("diagnostic"), f"{case.get('id')} effect diagnostic drifted")
+
+
+def validate_mark_fixtures(fixtures: dict[str, Any]) -> None:
+    cases = fixtures.get("marks")
+    require(isinstance(cases, list), "mark fixtures must be an array")
+    require(len(cases) == EXPECTED_COUNTS["mark_cases"], "mark fixture count drifted")
+    require(
+        len({case.get("id") for case in cases}) == len(cases),
+        "mark fixture ids must be unique",
+    )
+    for case in cases:
+        case_id = case.get("id")
+        if case_id in {"rollback_restores", "commit_retains"}:
+            actual = case["before"] if case["terminal"] == "rollback" else case["staged"]
+            require(actual == case.get("expected"), f"{case_id} snapshot behavior drifted")
+        elif case_id == "recursive_same_label_isolated":
+            parent, child = case["parent"], case["child"]
+            actual = (
+                parent["invocation"] != child["invocation"]
+                and parent["generation"] != child["generation"]
+                and child["marks"] == {}
+            )
+            require(actual is case.get("accepted"), "recursive mark isolation drifted")
+        elif case_id == "stale_generation":
+            actual = case["parent"]["generation"] == case["token"]["generation"]
+            require(
+                actual is case.get("accepted")
+                and case.get("diagnostic") == "recognition_mark_generation_invalid",
+                "stale generation fixture drifted",
+            )
+        elif case_id == "mark_cross_invocation":
+            actual = case["parent"]["invocation"] == case["token"]["invocation"]
+            require(
+                actual is case.get("accepted")
+                and case.get("diagnostic") == "recognition_cross_invocation",
+                "cross-invocation mark fixture drifted",
+            )
+        elif case_id == "mark_cross_source":
+            actual = case["parent"]["source"] == case["token"]["source"]
+            require(
+                actual is case.get("accepted")
+                and case.get("diagnostic") == "recognition_cross_source",
+                "cross-source mark fixture drifted",
+            )
+        else:
+            raise ContractError(f"unknown mark fixture {case_id!r}")
+
+
+def validate_progress_fixtures(fixtures: dict[str, Any]) -> None:
+    cases = fixtures.get("progress")
+    require(isinstance(cases, list), "progress fixtures must be an array")
+    require(len(cases) == EXPECTED_COUNTS["progress_cases"], "progress fixture count drifted")
+    require(
+        len({case.get("id") for case in cases}) == len(cases),
+        "progress fixture ids must be unique",
+    )
+    recursive = {"accepted_direct_recursive_cycle_edge", "accepted_mutual_recursive_cycle_edge"}
+    for case in cases:
+        context = case.get("context")
+        require(
+            context in recursive | {"accepted_repetition_iteration", "one_shot"},
+            f"{case.get('id')} context is unknown",
+        )
+        actual = True if context == "one_shot" else case.get("end") > case.get("start")
+        require(actual is case.get("accepted"), f"{case.get('id')} progress acceptance drifted")
+        expected_diagnostic = None
+        if not actual:
+            expected_diagnostic = (
+                "recognition_zero_progress_recursive_cycle"
+                if context in recursive
+                else "recognition_zero_progress_repetition"
+            )
+        require(
+            expected_diagnostic == case.get("diagnostic"),
+            f"{case.get('id')} progress diagnostic drifted",
+        )
+
+
+def validate_contract(document: dict[str, Any], *, check_environment: bool) -> None:
+    require(set(document) == EXPECTED_TOP_LEVEL, "top-level schema drifted")
+    require(document.get("format") == 1, "format must remain 1")
+    require(
+        document.get("contract_id") == "linkedspec-recognition-transaction-v1",
+        "contract_id drifted",
+    )
+    require(
+        document.get("task_owner") == "FUTURE-PARITY-BACKLOG.14.3.1.1",
+        "task_owner drifted",
+    )
+    require(
+        document.get("status") == "neutral_complete_backends_red",
+        "neutral/backend status drifted",
+    )
+    require(document.get("expected_counts") == EXPECTED_COUNTS, "expected_counts drifted")
+    require(document.get("authored_surface") == EXPECTED_SURFACE, "authored surface drifted")
+
+    policy = document.get("policy")
+    require(isinstance(policy, dict), "policy must be an object")
+    require(len(policy) == 13, "policy field count drifted")
+    require(
+        policy.get("fail_closed")
+        == (
+            "unknown nodes, calls, effects, graph references, token states, or "
+            "fixture operations reject before recognition"
+        ),
+        "fail-closed policy drifted",
+    )
+    require(
+        policy.get("current_boundary")
+        == (
+            "this artifact admits only the neutral contract and does not change "
+            "grammar, compiler, runtime, backend, generated-source, CLI, descriptor, "
+            "schema, semantic, MCP, capability, or public-current behavior"
+        ),
+        "current behavior boundary drifted",
+    )
+
+    effect_model = document.get("effect_model")
+    require(
+        effect_model == {"allowed": ALLOWED_EFFECTS, "rejected": REJECTED_EFFECTS},
+        "effect vocabulary/order drifted",
+    )
+    allowed, rejected = set(ALLOWED_EFFECTS), set(REJECTED_EFFECTS)
+
+    current_nodes = current_action_ir_nodes()
+    action_names, action_assignments = flatten_effect_rows(
+        document.get("action_ir_effect_rows"), "action_ir_effect_rows"
+    )
+    require(
+        len(current_nodes) == EXPECTED_COUNTS["current_action_ir_nodes"],
+        "current ActionIR node census drifted",
+    )
+    require(
+        set(action_names) == set(current_nodes) | set(DEDICATED_NODES),
+        "ActionIR effect rows are not fresh and complete",
+    )
+    require(
+        len(action_names) == EXPECTED_COUNTS["all_action_ir_nodes"],
+        "ActionIR effect row count drifted",
+    )
+    require(
+        effect_row_hash(action_assignments)
+        == EXPECTED_EFFECT_ROW_HASHES["action_ir_effect_rows"],
+        "ActionIR base-effect classification drifted",
+    )
+    require(
+        [name for name in action_names if name in DEDICATED_NODES]
+        == DEDICATED_NODES,
+        "dedicated transaction node order drifted",
+    )
+    require(
+        all(
+            action_assignments[name] == "transaction_state"
+            for name in DEDICATED_NODES
+        ),
+        "dedicated nodes must have transaction_state effect",
+    )
+
+    calls = current_call_names()
+    call_names, call_assignments = flatten_effect_rows(
+        document.get("canonical_call_effect_rows"), "canonical_call_effect_rows"
+    )
+    require(
+        len(calls) == EXPECTED_COUNTS["canonical_call_contracts"],
+        "canonical call census drifted",
+    )
+    require(
+        set(call_names) == set(calls),
+        "canonical call effect rows are not fresh and complete",
+    )
+    require(
+        len(call_names) == EXPECTED_COUNTS["canonical_call_contracts"],
+        "canonical call effect row count drifted",
+    )
+    require(
+        effect_row_hash(call_assignments)
+        == EXPECTED_EFFECT_ROW_HASHES["canonical_call_effect_rows"],
+        "canonical call base-effect classification drifted",
+    )
+
+    token = document.get("token_model")
+    require(
+        isinstance(token, dict)
+        and set(token)
+        == {"states", "operations", "transitions", "matched_payloads", "terminal_results"},
+        "token model schema drifted",
+    )
+    require(token["states"] == EXPECTED_TOKEN_STATES, "token states drifted")
+    require(token["operations"] == EXPECTED_TOKEN_OPERATIONS, "token operations drifted")
+    require(token["transitions"] == EXPECTED_TRANSITIONS, "token transitions drifted")
+    require(
+        len(token["matched_payloads"]) == 5
+        and all(
+            json_equal(actual, expected)
+            for actual, expected in zip(
+                token["matched_payloads"], [False, 0, "", None, "value"]
+            )
+        ),
+        "falsey staged-payload authority drifted",
+    )
+    require(
+        token["terminal_results"]
+        == {
+            "commit_match": "staged_payload",
+            "commit_miss": None,
+            "rollback": "no_authored_value",
+        },
+        "terminal result contract drifted",
+    )
+
+    fixtures = document.get("fixtures")
+    require(
+        isinstance(fixtures, dict)
+        and set(fixtures)
+        == {"token_positive", "token_negative", "effect_graphs", "marks", "progress"},
+        "fixture topology drifted",
+    )
+    validate_token_fixtures(fixtures)
+    validate_effect_graphs(fixtures, allowed, rejected)
+    validate_mark_fixtures(fixtures)
+    validate_progress_fixtures(fixtures)
+
+    diagnostics = document.get("diagnostics")
+    require(isinstance(diagnostics, list), "diagnostics must be an array")
+    require(
+        [(row.get("code"), row.get("fields")) for row in diagnostics]
+        == EXPECTED_DIAGNOSTICS,
+        "diagnostic codes/fields/order drifted",
+    )
+
+    rollout = document.get("rollout")
+    require(isinstance(rollout, list), "rollout must be an array")
+    require(
+        [
+            (row.get("order"), row.get("owner"), row.get("leg"), row.get("status"))
+            for row in rollout
+        ]
+        == EXPECTED_ROLLOUT,
+        "rollout order/owner/status drifted",
+    )
+    require(
+        rollout[0].get("paths")
+        == [EXPECTED_EXECUTION["contract_path"], EXPECTED_EXECUTION["checker_path"]],
+        "neutral rollout paths drifted",
+    )
+    require(
+        all(row.get("paths") == [] for row in rollout[1:]),
+        "RED rollout legs must not claim implementation paths",
+    )
+
+    execution = document.get("canonical_execution")
+    require(execution == EXPECTED_EXECUTION, "canonical execution/freshness topology drifted")
+
+    mutations = document.get("mutation_ids")
+    require(
+        isinstance(mutations, list)
+        and len(mutations) == EXPECTED_COUNTS["mutations"],
+        "mutation count drifted",
+    )
+    require(len(mutations) == len(set(mutations)), "mutation ids must be unique")
+    require(mutations == list(MUTATIONS), "mutation identity/order drifted")
+
+    if check_environment:
+        ci = read_text(CI_PATH)
+        require(
+            ci.count(
+                f"require_tracked_file {EXPECTED_EXECUTION['contract_path']}"
+            )
+            == 1,
+            "canonical CI must require the neutral artifact exactly once",
+        )
+        require(
+            ci.count(f"require_tracked_file {EXPECTED_EXECUTION['checker_path']}")
+            == 1,
+            "canonical CI must require the neutral checker exactly once",
+        )
+        require(
+            ci.count(f"log \"{EXPECTED_EXECUTION['registration_marker']}\"") == 1,
+            "canonical CI registration marker missing or duplicated",
+        )
+        require(
+            ci.count(EXPECTED_EXECUTION["invocation"]) == 1,
+            "canonical CI invocation missing or duplicated",
+        )
+
+
+def _set(path: list[Any], value: Any) -> Callable[[dict[str, Any]], None]:
+    def mutate(document: dict[str, Any]) -> None:
+        target: Any = document
+        for key in path[:-1]:
+            target = target[key]
+        target[path[-1]] = value
+    return mutate
+
+
+def _delete_effect_row(surface: str, effect: str) -> Callable[[dict[str, Any]], None]:
+    def mutate(document: dict[str, Any]) -> None:
+        document[surface][effect].pop()
+    return mutate
+
+
+def _duplicate_effect_row(surface: str, source_effect: str, target_effect: str) -> Callable[[dict[str, Any]], None]:
+    def mutate(document: dict[str, Any]) -> None:
+        document[surface][target_effect].append(document[surface][source_effect][0])
+        document[surface][target_effect].sort()
+    return mutate
+
+
+def _unknown_effect_row(surface: str, effect: str) -> Callable[[dict[str, Any]], None]:
+    def mutate(document: dict[str, Any]) -> None:
+        document[surface][effect][0] += "_UNKNOWN"
+        document[surface][effect].sort()
+    return mutate
+
+
+MUTATIONS: dict[str, Callable[[dict[str, Any]], None]] = {
+    "format": _set(["format"], 2),
+    "contract_id": _set(["contract_id"], "changed"),
+    "task_owner": _set(["task_owner"], "FUTURE-PARITY-BACKLOG.14.3.2"),
+    "status": _set(["status"], "complete"),
+    "count_current_nodes": _set(["expected_counts", "current_action_ir_nodes"], 127),
+    "count_dedicated_nodes": _set(["expected_counts", "dedicated_action_ir_nodes"], 3),
+    "count_calls": _set(["expected_counts", "canonical_call_contracts"], 245),
+    "syntax_checkpoint": _set(["authored_surface", "checkpoint"], "tx = save_cursor()"),
+    "syntax_attempt": _set(["authored_surface", "attempt"], "matched = call(Child)"),
+    "syntax_commit": _set(["authored_surface", "commit"], "payload = restore_cursor(tx)"),
+    "syntax_rollback": _set(["authored_surface", "rollback"], "restore_cursor(tx)"),
+    "result_separation": _set(["authored_surface", "result_separation"], "payload truthiness is match presence"),
+    "token_state": _set(["token_model", "states", 1], "active"),
+    "token_transition": _set(["token_model", "transitions", 1, 2], "invalidated"),
+    "token_payload": _set(["token_model", "matched_payloads"], ["value"]),
+    "token_positive": _set(["fixtures", "token_positive", 0, "result"], True),
+    "token_negative": _set(["fixtures", "token_negative", 0, "diagnostic"], "recognition_token_expected"),
+    "effect_allowed": _set(["effect_model", "allowed", 0], "binding_write"),
+    "effect_rejected": _set(["effect_model", "rejected", 0], "pure_value"),
+    "action_row_missing": _delete_effect_row("action_ir_effect_rows", "source_read"),
+    "action_row_duplicate": _duplicate_effect_row("action_ir_effect_rows", "pure_value", "source_read"),
+    "action_row_unknown": _unknown_effect_row("action_ir_effect_rows", "pure_value"),
+    "call_row_missing": _delete_effect_row("canonical_call_effect_rows", "pure_value"),
+    "call_row_duplicate": _duplicate_effect_row("canonical_call_effect_rows", "source_read", "pure_value"),
+    "call_row_unknown": _unknown_effect_row("canonical_call_effect_rows", "pure_value"),
+    "effect_graph": _set(["fixtures", "effect_graphs", 0, "accepted"], False),
+    "mark_fixture": _set(["fixtures", "marks", 0, "expected", "cursor"], 5),
+    "progress_fixture": _set(["fixtures", "progress", 0, "end"], 1),
+    "diagnostic": _set(["diagnostics", 0, "code"], "changed"),
+    "rollout_order": _set(["rollout", 0, "order"], 2),
+    "rollout_owner": _set(["rollout", 1, "owner"], "FUTURE-PARITY-BACKLOG.14.3.1.1"),
+    "rollout_status": _set(["rollout", 1, "status"], "complete"),
+    "canonical_contract_path": _set(["canonical_execution", "contract_path"], "changed.json"),
+    "canonical_checker_path": _set(["canonical_execution", "checker_path"], "changed.py"),
+    "canonical_invocation": _set(
+        ["canonical_execution", "invocation"],
+        "python3 tools/check_recognition_transaction_contract.py",
+    ),
+    "canonical_registration": _set(["canonical_execution", "registration_marker"], "changed"),
+    "tracked_required": _set(["canonical_execution", "tracked_required"], False),
+    "freshness_source": _set(["canonical_execution", "freshness_sources", 0], "changed"),
+    "policy_fail_closed": _set(["policy", "fail_closed"], "unknown nodes are allowed"),
+    "current_boundary": _set(["policy", "current_boundary"], "public and current"),
+}
+
+
+def validate_mutations(document: dict[str, Any]) -> None:
+    for mutation_id, mutate in MUTATIONS.items():
+        candidate = copy.deepcopy(document)
+        mutate(candidate)
+        try:
+            validate_contract(candidate, check_environment=False)
+        except ContractError:
+            continue
+        raise ContractError(f"mutation {mutation_id!r} was accepted")
+
+
+def main() -> int:
+    try:
+        document = load_contract()
+        validate_contract(document, check_environment=True)
+        validate_mutations(document)
+    except ContractError as exc:
+        print(f"recognition-transaction-contract: ERROR: {exc}", file=sys.stderr)
+        return 1
+    print(
+        "recognition-transaction-contract: OK "
+        "(132 ActionIR rows = 128 current + 4 dedicated; 246 call rows; "
+        "token 8 positive/17 negative; effects 6 graphs; marks 6; progress 8; "
+        "40 rejected mutations; rollout neutral 1/9 complete)"
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

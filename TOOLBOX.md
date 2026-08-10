@@ -388,7 +388,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 
 - **WHAT:** `tools/run_python_project_data.sh` runs one repository-relative Python checker with managed scratch and
   retained `PYTHONPYCACHEPREFIX`; `tools/test_tool_project_data_storage.sh` freezes three Python temporary owners,
-  13 shell allocator owners, and 19 Python checker entrypoints while exercising Python bytecode, Unicode-generator
+  14 shell allocator owners, and 29 Python tool entrypoints while exercising Python bytecode, Unicode-generator
   scratch, Knowledge Map output, mdBook destinations, CLI workspaces, TAP, and oracle capture boundaries.
 - **WHEN:** use the targeted wrapper for every maintained Python checker command; run the oracle when changing
   Python imports/tempfiles, shell allocation, Knowledge Map configuration/output, mdBook output, conformance,
@@ -992,6 +992,25 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **BOUNDARY:** this is orchestration over existing internal consumers, not a new public typed-value surface. The
   combined recurring/public no-drift row remains pending for `FUTURE-PARITY-BACKLOG.14.8`. Retrieve
   [[typed-source-location-recurring-gate]] before changing the source/runtime cardinality or rollout ownership.
+
+### 4.9.2 `tools/check_recognition_transaction_contract.py` — neutral transaction/progress oracle
+
+- **WHAT:** independently interprets `linkedspec-recognition-transaction-v1`: four future authored forms, a linear
+  token state machine with falsey-safe staged results, closed ActionIR/call base effects, recursive fixed-point
+  effects, invocation-frame marks, cursor-only repetition/recursion progress, diagnostics, and rollout topology.
+- **WHEN:** changing the accepted recognition-transaction design, current ActionIR node or call-contract inventory,
+  any transaction-safe effect classification, token/mark/progress rule, backend owner, or canonical registration.
+- **HOW:** run the repository-routed focused proof:
+
+  ```bash
+  bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py
+  ```
+
+- **OUTPUT:** 132 ActionIR rows (128 live plus four future), 246 live call rows, token 8 positive / 17 negative,
+  six fixed-point graphs, six mark cases, eight progress cases, fifteen diagnostics, and 40 rejected mutations;
+  rollout is neutral 1/9 complete.
+- **BOUNDARY:** this checker derives the live inventories and proves the future target. It does not parse or execute
+  the authored `recognition_*` forms. Backend RED remains owned by `.14.3.2-.7`, and public no-drift by `.14.3.8`.
 
 ### 4.10 MCP transport materializer and independent validator
 
