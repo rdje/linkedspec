@@ -10,6 +10,21 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-10 — FUTURE-PARITY-BACKLOG.14.3.1.2.0 — govern transaction public sequence
+
+- Activated task-tree-first from clean public-boundary repair `774516fa` as intended atomic 183/300.
+- Extended the existing recognition-transaction checker with an exact three-document public marker inventory,
+  rollout-derived neutral-complete/every-backend-RED state, tracked-file proof, and eight forbidden stale/current
+  claims. Thirteen independent in-memory mutations reject inventory, marker, claim, text, and rollout drift.
+- Kept `recognition_transaction_contract.json` and its forty semantic mutations byte-exact; reused the existing
+  unconditional canonical/project-data route without adding an entrypoint or changing storage topology.
+- Updated ADR `0056`, Knowledge, capability/toolbox guidance, roadmaps, architecture, task/index, continuity, and
+  the sole-facing book. The rendered guard paragraph is distinct while every authored/runtime/public leg stays RED.
+- Definitive local CI passes all eight doctrines, repository-contained six-family process proof, moved-root and
+  outside-CWD execution, both CLI environments at 66/66, RAM 68%, and Phase 0 1,031/1,031 in 672 seconds.
+- Changed no grammar, compiler, runtime, backend, generated carrier, fixture, `.spec`/corpus, CLI, schema,
+  capability/semantic/MCP surface, README, storage root, hosted workflow, or current authored transaction behavior.
+
 ## 2026-08-10 — FUTURE-PARITY-BACKLOG.14.3.1.2 — repair neutral transaction status boundary
 
 - Activated task-tree-first from clean neutral-authority commit `e0cc7182` as intended atomic 182/300.

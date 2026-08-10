@@ -287,6 +287,10 @@ grammar or runtime behavior. Run:
 bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py
 ```
 
+The checker also binds three exact public transaction pages to neutral-complete/every-backend-RED rollout truth,
+rejects eight stale or false milestone/current claims, and executes thirteen public-sequence mutations in memory.
+This public projection does not alter the neutral artifact's forty semantic mutations.
+
 The independent checker derives all 128 current ActionIR node kinds from the Perl contract authority and all 246
 current call names from matching Dart, Julia, and Lua inventories. The artifact assigns one base effect to each
 of those rows plus four dedicated future `RECOGNITION_*` nodes under the closed nine-allowed/eleven-rejected

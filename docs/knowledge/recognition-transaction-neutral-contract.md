@@ -17,7 +17,7 @@ answers:
 date: 2026-08-10
 status: current neutral authority; all backend, recurring, and public legs remain RED
 tags: [cursor, transactions, recognition, actionir, effects, progress, marks, recursion, conformance]
-evidence: "FUTURE-PARITY-BACKLOG.14.3.1.1 adds linkedspec-recognition-transaction-v1 plus an independent checker. The checker derives 128 live ActionIR node kinds from Perl and the same 246 current call names from Dart, Julia, and Lua; adds four future RECOGNITION_* rows; executes token 8/17, effect graphs 6, marks 6, progress 8, diagnostics 15; and rejects 40 mutations."
+evidence: "FUTURE-PARITY-BACKLOG.14.3.1.1 adds linkedspec-recognition-transaction-v1 plus an independent checker. The checker derives 128 live ActionIR node kinds from Perl and the same 246 current call names from Dart, Julia, and Lua; adds four future RECOGNITION_* rows; executes token 8/17, effect graphs 6, marks 6, progress 8, diagnostics 15; and rejects 40 semantic mutations. FUTURE-PARITY-BACKLOG.14.3.1.2.0 separately binds public sequence at 3 documents / 8 forbidden / 13 mutations."
 reverify: "bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && perl tools/check_language_capability_coverage.pl --report"
 ---
 
@@ -49,3 +49,5 @@ public-current boundary.
 Only the neutral rollout leg is complete. Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurring composition, and
 public no-drift remain RED. The artifact is executable proof of a future target; no current grammar, compiler,
 runtime, backend, generated source, descriptor/schema, CLI, semantic/MCP, capability, or authored feature changes.
+The same canonical checker separately locks three public transaction pages, eight forbidden milestone/current
+claims, and thirteen in-memory sequence mutations; those counts do not change the JSON's forty semantic mutations.

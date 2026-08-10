@@ -2,25 +2,25 @@
 
 ## Current Activity
 
-- `FUTURE-PARITY-BACKLOG.14.3.1.2` is signoff-complete from clean neutral-authority commit `e0cc7182` as intended
-  atomic 182/300 with no push; its mechanical commit/clean-handoff proof is in progress.
+- `FUTURE-PARITY-BACKLOG.14.3.1.2.0` is signoff-complete from clean public-boundary repair `774516fa` as intended
+  atomic 183/300 with no push; its mechanical commit/clean-handoff proof is in progress.
 - The executable neutral authority is focused-green over 128 current + four future ActionIR rows, 246 call rows,
   token 8/17, six fixed-point graphs, six mark cases, eight progress cases, fifteen diagnostics, and 40 mutations.
-- Neutral rollout is 1/9 complete. Rendered recomposition caught and repaired one stale “neutral checker is next”
-  sentence; all six runtime routes, recurring composition, and public no-drift remain RED. Canonical signoff is green.
+- Neutral rollout is 1/9 complete. The canonical checker now separately passes public sequence at three book pages,
+  eight forbidden claims, and thirteen mutations; every runtime, recurring, and public rollout leg remains RED.
 
 ## Latest Completed Slice
 
-- `FUTURE-PARITY-BACKLOG.14.3.1.2` is complete for its intended atomic 182/300 landing: the stale milestone-order
-  sentence is repaired, its cause is durable, and the unchanged neutral/public RED boundary is fully signed off.
+- `FUTURE-PARITY-BACKLOG.14.3.1.2.0` is intended complete as atomic 183/300: public sequence is fail-closed at
+  three pages / eight forbidden claims / thirteen mutations and parent `.14.3.1` is composition-closed.
 
 ## Next Action
 
-- Commit `.14.3.1.2` atomically and prove the clean handoff, then activate fail-closed sequence guard
-  `.14.3.1.2.0` task-tree-first before Perl RED.
+- Commit `.14.3.1.2.0` atomically and prove the clean handoff, then activate Perl RED `.14.3.2.0` task-tree-first.
 
 ## Recent Completions
 
+- `2026-08-10` — `774516fa` repaired neutral transaction public status sequencing as atomic 182/300.
 - `2026-08-10` — `e0cc7182` added the executable neutral recognition-transaction authority as atomic 181/300.
 - `2026-08-10` — `c26a9556` composition-closed all four bounded document stores as atomic 180/300.
 - `2026-08-10` — `921f0507` bounded changes and engineering notes as atomic 179/300.

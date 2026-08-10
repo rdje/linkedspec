@@ -7,9 +7,9 @@ answers:
   - "does the neutral transaction checker govern public milestone ordering"
   - "who owns recognition transaction public sequence enforcement"
 date: 2026-08-10
-status: prose corrected; fail-closed public-sequence guard pending under FUTURE-PARITY-BACKLOG.14.3.1.2.0
+status: prose corrected; fail-closed public-sequence guard complete at 3 documents / 8 forbidden / 13 mutations
 tags: [transactions, documentation, mdbook, drift, governance, rendering]
-evidence: "FUTURE-PARITY-BACKLOG.14.3.1.2 rendered the capture/source page and found adjacent claims that the neutral authority was executable and still next. Git blame traced the old sentence to 7c2ff407 and the missed update to e0cc7182; the existing checker governs artifact policy but no public milestone-sequence projection."
+evidence: "FUTURE-PARITY-BACKLOG.14.3.1.2 rendered the capture/source page and found adjacent claims that the neutral authority was executable and still next. Git blame traced the old sentence to 7c2ff407 and the missed update to e0cc7182. FUTURE-PARITY-BACKLOG.14.3.1.2.0 then extended the same canonical checker with a separate exact public projection over 3 documents, 8 forbidden claims, and 13 in-memory mutations while preserving the JSON and its 40 semantic mutations."
 reverify: "bash tools/run_mdbook_local.sh && rg -n 'neutral artifact/checker is executable|neutral artifact/checker is next' docs/linkedspec-book/book/dsl/capture-marks-and-source-locations.html && bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py"
 ---
 
@@ -24,7 +24,8 @@ the neutral JSON policy and prevents false current-runtime/public-capability cla
 for stale milestone-order prose. Rendered review in `.14.3.1.2` exposed the contradiction. That leaf corrects only
 the sentence to say the neutral authority is executable while every runtime remains pending.
 
-Fail-closed prevention is intentionally separate: `FUTURE-PARITY-BACKLOG.14.3.1.2.0` owns a governed public
-milestone-sequence projection and mutation proof before Perl RED begins. Keeping that guard separate preserves
-`.14.3.1.2` as a narrow public-boundary repair and avoids silently changing the neutral artifact's 40-mutation
-semantic contract during recomposition.
+Fail-closed prevention is intentionally separate: `FUTURE-PARITY-BACKLOG.14.3.1.2.0` extends the already canonical
+checker with an exact three-document marker inventory, eight forbidden stale/current claims, tracked-file proof,
+rollout-derived neutral/backend state, and thirteen in-memory sequence mutations. The JSON remains byte-identical
+with forty semantic mutations. Keeping the counts and mutation loops separate prevents public milestone governance
+from silently changing the neutral semantic contract.

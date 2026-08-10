@@ -10,6 +10,16 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-10 (`FUTURE-PARITY-BACKLOG.14.3.1.2.0` — public sequence governance): derive documentation status from
+  the semantic artifact's rollout instead of duplicating it as an independent claim. The guard requires neutral
+  complete and every non-neutral leg RED before checking exact page markers, so public prose cannot move ahead of
+  or lag behind rollout without one deterministic failure.
+- Keep semantic and public mutation accounting separate. The JSON still owns forty syntax/token/effect/inventory/
+  rollout mutations; the checker owns thirteen additional in-memory public inventory/marker/claim/text/rollout
+  mutations. This preserves contract identity while making the three-page milestone order fail closed.
+- `git ls-files --error-unmatch` is the right tracked-source proof here: all public inputs remain root-relative,
+  exact, and canonical without introducing a new tool entrypoint or widening project-storage topology.
+
 - 2026-08-10 (`FUTURE-PARITY-BACKLOG.14.3.1.2` — rendered milestone-order repair): status statements can each be
   historically correct yet become contradictory when a later slice inserts new truth without retiring old
   sequencing prose. Commit `7c2ff407` said the neutral checker was next; `e0cc7182` inserted its executable status

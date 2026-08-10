@@ -335,6 +335,18 @@ recurring composition, and public no-drift remain RED under their existing owner
 is still unavailable in every backend; neutral executability is proof of the target semantics, not implementation
 or public admission.
 
+### 13. Govern public milestone sequence separately
+
+Rendered recomposition `.14.3.1.2` exposed one stale sentence that still called the neutral artifact/checker the
+next milestone after `.14.3.1.1` made it executable. Guard leaf `.14.3.1.2.0` therefore extends the existing oracle
+with a separate public-sequence projection: three exact mdBook pages, rollout-derived neutral-complete and every-
+backend-RED state, required executable/future/unavailable markers, eight forbidden stale or false current claims,
+tracked-file proof, and thirteen in-memory mutations.
+
+This projection does not alter `recognition_transaction_contract.json`, its forty semantic mutations, rollout,
+syntax, effect model, or backend state. It prevents milestone prose from lagging the neutral authority while still
+forbidding public transaction-support claims until the backend, recurring, and public owners land.
+
 ## Consequences
 
 - Cursor control, capture, recursion, segmentation, and parser composition share one precise model instead of
@@ -355,7 +367,9 @@ or public admission.
 - The `.14.2.0` planning amendment changes no behavior itself; its exact backend module/test seams and rollout
   correction are durable in the owning task-tree and Knowledge card.
 - The `.14.3.1.0` amendment selects syntax and static semantics only. `.14.3.1.1` adds the executable neutral
-  authority without adding current authored capability or backend behavior.
+  authority without adding current authored capability or backend behavior. `.14.3.1.2.0` separately governs the
+  three-page public milestone sequence at eight forbidden claims / thirteen mutations without changing that
+  semantic authority.
 
 ## Links
 

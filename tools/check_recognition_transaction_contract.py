@@ -7,6 +7,7 @@ import copy
 import hashlib
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any, Callable
@@ -148,6 +149,77 @@ EXPECTED_EXECUTION = {
         "lua/src/linkedspec/action_call_names.lua",
     ],
 }
+PUBLIC_SEQUENCE_CONTRACT = {
+    "documents": [
+        {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "required_markers": [
+                "The future contract now has an executable backend-neutral authority",
+                "No current parser recognizes the four forms",
+                "This section describes an accepted future contract, not a current feature",
+                "fails closed over three public transaction pages, eight forbidden claims",
+                (
+                    "executable, but Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT "
+                    "must each be admitted independently"
+                ),
+            ],
+        },
+        {
+            "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+            "required_markers": [
+                "The neutral authority is now executable",
+                "remain unavailable until each runtime and public admission lands",
+                "neutral proof is not backend support",
+            ],
+        },
+        {
+            "path": "docs/linkedspec-book/src/overview/project-status.md",
+            "required_markers": [
+                (
+                    "Their neutral artifact/checker is executable at 128 current + 4 "
+                    "future ActionIR rows"
+                ),
+                "neutral rollout 1/9 complete",
+                "all six runtime, recurring, and public legs remain RED",
+            ],
+        },
+    ],
+    "forbidden_claims": [
+        {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "text": "The neutral artifact/checker is next",
+        },
+        {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "text": "neutral artifact/checker is next",
+        },
+        {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "text": "This section describes a current feature",
+        },
+        {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "text": "all six runtimes are admitted",
+        },
+        {
+            "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+            "text": "neutral proof is backend support",
+        },
+        {
+            "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+            "text": "transaction support is current",
+        },
+        {
+            "path": "docs/linkedspec-book/src/overview/project-status.md",
+            "text": "all six runtime, recurring, and public legs are complete",
+        },
+        {
+            "path": "docs/linkedspec-book/src/overview/project-status.md",
+            "text": "neutral rollout 9/9 complete",
+        },
+    ],
+}
+PUBLIC_SEQUENCE_MUTATION_COUNT = 13
 EXPECTED_TOP_LEVEL = {
     "format",
     "contract_id",
@@ -182,6 +254,71 @@ def read_text(path: Path) -> str:
         return path.read_text(encoding="utf-8")
     except OSError as exc:
         raise ContractError(f"cannot read {path.relative_to(ROOT)}: {exc}") from exc
+
+
+def public_sequence_texts() -> dict[str, str]:
+    paths = [row["path"] for row in PUBLIC_SEQUENCE_CONTRACT["documents"]]
+    return {path: read_text(ROOT / path) for path in paths}
+
+
+def validate_public_sequence(
+    document: dict[str, Any],
+    public_contract: dict[str, Any],
+    texts: dict[str, str],
+    *,
+    check_tracked: bool,
+) -> None:
+    require(
+        public_contract == PUBLIC_SEQUENCE_CONTRACT,
+        "public milestone-sequence contract drifted",
+    )
+    documents = public_contract.get("documents")
+    forbidden = public_contract.get("forbidden_claims")
+    require(isinstance(documents, list), "public documents must be an array")
+    require(isinstance(forbidden, list), "public forbidden claims must be an array")
+    paths = [row.get("path") for row in documents]
+    require(len(paths) == len(set(paths)) == 3, "public document inventory drifted")
+    require(set(texts) == set(paths), "public text inventory drifted")
+
+    rollout = document.get("rollout")
+    require(isinstance(rollout, list), "public sequence needs rollout rows")
+    rollout_status = {row.get("leg"): row.get("status") for row in rollout}
+    require(rollout_status.get("neutral") == "complete", "public sequence requires neutral complete")
+    require(
+        set(rollout_status.values()) == {"complete", "red"}
+        and all(status == "red" for leg, status in rollout_status.items() if leg != "neutral"),
+        "public sequence requires every non-neutral leg RED",
+    )
+
+    for row in documents:
+        path = row.get("path")
+        markers = row.get("required_markers")
+        require(isinstance(path, str) and path in texts, "public document path drifted")
+        require(isinstance(markers, list) and markers, f"public markers missing for {path}")
+        require(len(markers) == len(set(markers)), f"public markers duplicate in {path}")
+        for marker in markers:
+            require(isinstance(marker, str) and marker, f"public marker invalid in {path}")
+            require(
+                texts[path].count(marker) == 1,
+                f"public marker missing or duplicated in {path}: {marker}",
+            )
+        if check_tracked:
+            tracked = subprocess.run(
+                ["git", "ls-files", "--error-unmatch", "--", path],
+                cwd=ROOT,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                check=False,
+            )
+            require(tracked.returncode == 0, f"public document is not tracked: {path}")
+
+    require(len(forbidden) == 8, "public forbidden-claim inventory drifted")
+    for row in forbidden:
+        path = row.get("path")
+        claim = row.get("text")
+        require(isinstance(path, str) and path in texts, "forbidden public path drifted")
+        require(isinstance(claim, str) and claim, f"forbidden public claim invalid in {path}")
+        require(claim not in texts[path], f"forbidden public claim remains in {path}: {claim}")
 
 
 def load_contract() -> dict[str, Any]:
@@ -697,6 +834,12 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
             ci.count(EXPECTED_EXECUTION["invocation"]) == 1,
             "canonical CI invocation missing or duplicated",
         )
+        validate_public_sequence(
+            document,
+            PUBLIC_SEQUENCE_CONTRACT,
+            public_sequence_texts(),
+            check_tracked=True,
+        )
 
 
 def _set(path: list[Any], value: Any) -> Callable[[dict[str, Any]], None]:
@@ -786,11 +929,123 @@ def validate_mutations(document: dict[str, Any]) -> None:
         raise ContractError(f"mutation {mutation_id!r} was accepted")
 
 
+def validate_public_sequence_mutations(document: dict[str, Any]) -> int:
+    texts = public_sequence_texts()
+    capture_path = PUBLIC_SEQUENCE_CONTRACT["documents"][0]["path"]
+    capture_marker = PUBLIC_SEQUENCE_CONTRACT["documents"][0]["required_markers"][0]
+    stale_claim = PUBLIC_SEQUENCE_CONTRACT["forbidden_claims"][0]["text"]
+    mutations: list[
+        tuple[
+            str,
+            Callable[[dict[str, Any], dict[str, Any], dict[str, str]], None],
+        ]
+    ] = [
+        (
+            "public document omission",
+            lambda _document, contract, _texts: contract["documents"].pop(),
+        ),
+        (
+            "public document duplication",
+            lambda _document, contract, _texts: contract["documents"].append(
+                copy.deepcopy(contract["documents"][0])
+            ),
+        ),
+        (
+            "public document path drift",
+            lambda _document, contract, _texts: contract["documents"][0].__setitem__(
+                "path", "docs/linkedspec-book/src/missing.md"
+            ),
+        ),
+        (
+            "public marker omission",
+            lambda _document, contract, _texts: contract["documents"][0][
+                "required_markers"
+            ].pop(),
+        ),
+        (
+            "public marker drift",
+            lambda _document, contract, _texts: contract["documents"][0][
+                "required_markers"
+            ].__setitem__(0, "changed marker"),
+        ),
+        (
+            "forbidden public claim omission",
+            lambda _document, contract, _texts: contract["forbidden_claims"].pop(),
+        ),
+        (
+            "forbidden public path drift",
+            lambda _document, contract, _texts: contract["forbidden_claims"][0].__setitem__(
+                "path", "docs/linkedspec-book/src/missing.md"
+            ),
+        ),
+        (
+            "forbidden public text drift",
+            lambda _document, contract, _texts: contract["forbidden_claims"][0].__setitem__(
+                "text", "changed stale claim"
+            ),
+        ),
+        (
+            "required public marker deletion",
+            lambda _document, _contract, candidate_texts: candidate_texts.__setitem__(
+                capture_path,
+                candidate_texts[capture_path].replace(capture_marker, "", 1),
+            ),
+        ),
+        (
+            "required public marker duplication",
+            lambda _document, _contract, candidate_texts: candidate_texts.__setitem__(
+                capture_path,
+                candidate_texts[capture_path] + "\n" + capture_marker,
+            ),
+        ),
+        (
+            "stale neutral-next claim",
+            lambda _document, _contract, candidate_texts: candidate_texts.__setitem__(
+                capture_path,
+                candidate_texts[capture_path] + "\n" + stale_claim,
+            ),
+        ),
+        (
+            "neutral rollout regression",
+            lambda candidate, _contract, _texts: candidate["rollout"][0].__setitem__(
+                "status", "red"
+            ),
+        ),
+        (
+            "backend rollout promotion",
+            lambda candidate, _contract, _texts: candidate["rollout"][1].__setitem__(
+                "status", "complete"
+            ),
+        ),
+    ]
+    require(
+        len(mutations) == PUBLIC_SEQUENCE_MUTATION_COUNT,
+        "public sequence mutation count drifted",
+    )
+    for name, mutate in mutations:
+        candidate_document = copy.deepcopy(document)
+        candidate_contract = copy.deepcopy(PUBLIC_SEQUENCE_CONTRACT)
+        candidate_texts = dict(texts)
+        mutate(candidate_document, candidate_contract, candidate_texts)
+        try:
+            validate_public_sequence(
+                candidate_document,
+                candidate_contract,
+                candidate_texts,
+                check_tracked=False,
+            )
+        except ContractError:
+            continue
+        raise ContractError(f"public sequence mutation {name!r} was accepted")
+    return len(mutations)
+
+
 def main() -> int:
     try:
         document = load_contract()
         validate_contract(document, check_environment=True)
         validate_mutations(document)
+        public_mutations = validate_public_sequence_mutations(document)
     except ContractError as exc:
         print(f"recognition-transaction-contract: ERROR: {exc}", file=sys.stderr)
         return 1
@@ -798,7 +1053,8 @@ def main() -> int:
         "recognition-transaction-contract: OK "
         "(132 ActionIR rows = 128 current + 4 dedicated; 246 call rows; "
         "token 8 positive/17 negative; effects 6 graphs; marks 6; progress 8; "
-        "40 rejected mutations; rollout neutral 1/9 complete)"
+        "40 rejected mutations; rollout neutral 1/9 complete; "
+        f"public sequence 3 documents/8 forbidden/{public_mutations} mutations)"
     )
     return 0
 

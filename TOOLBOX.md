@@ -1008,7 +1008,8 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 
 - **OUTPUT:** 132 ActionIR rows (128 live plus four future), 246 live call rows, token 8 positive / 17 negative,
   six fixed-point graphs, six mark cases, eight progress cases, fifteen diagnostics, and 40 rejected mutations;
-  rollout is neutral 1/9 complete.
+  rollout is neutral 1/9 complete. A separate public-sequence projection locks three book pages, eight forbidden
+  milestone/current claims, and thirteen in-memory mutations without changing the neutral JSON mutation corpus.
 - **BOUNDARY:** this checker derives the live inventories and proves the future target. It does not parse or execute
   the authored `recognition_*` forms. Backend RED remains owned by `.14.3.2-.7`, and public no-drift by `.14.3.8`.
 

@@ -73,6 +73,12 @@ consumers pass, and the route registry remains 20 surfaces / 62 routes / 32/32 w
 empty debt metadata. The program is composition-closed. These storage migrations change documentation governance
 only; they change no language, compiler, runtime, backend, fixture, CLI, protocol, or project-data root.
 
+- `2026-08-10 recognition-transaction public-sequence governance`: `FUTURE-PARITY-BACKLOG.14.3.1.2.0` extends
+  the existing canonical neutral oracle with a separately counted public projection over three exact book pages,
+  eight forbidden stale/current claims, rollout-derived neutral-complete/every-backend-RED state, tracked inputs,
+  and thirteen in-memory mutations. The JSON authority and its forty semantic mutations remain byte-exact. This
+  guard prevents the milestone-order drift found by `.14.3.1.2` without enabling authored transaction behavior.
+
 - `2026-08-10 recognition-transaction public-sequence repair`: rendered recomposition
   `FUTURE-PARITY-BACKLOG.14.3.1.2` found the capture/source page claiming both that the neutral authority is
   executable and that it is still next. Blame ties the stale sentence to ratification `7c2ff407`; implementation

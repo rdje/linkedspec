@@ -139,6 +139,9 @@ bash tools/run_python_project_data.sh tools/check_recognition_transaction_contra
 That command proves the target semantics only. No current parser recognizes the four forms, and no backend may
 claim transaction support until its separate behavior and admission leg lands.
 
+The same checker fails closed over three public transaction pages, eight forbidden claims, and thirteen sequence
+mutations. This guards the milestone order without changing the neutral artifact's forty semantic mutations.
+
 This section describes an accepted future contract, not a current feature. The neutral artifact/checker is
 executable, but Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT must each be admitted independently before the form
 becomes portable public behavior.

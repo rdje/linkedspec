@@ -3633,7 +3633,8 @@
   mechanical handoff; exact syntax/result/effect ratification `.14.3.1.0` is next.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.1`
-  Status: `active`
+  Status: `done; composition-closed` (2026-08-10; ratification, executable neutral authority, rendered repair, and
+    fail-closed public-sequence guard complete through `.14.3.1.2.0`; intended atomic 183/300; no push)
   Goal: Adopt the versioned backend-neutral transaction/progress contract, exact fixtures, diagnostics, mutations,
     public future/current boundary, and canonical registration before backend behavior.
   Depends on: `.14.3.0`
@@ -3758,8 +3759,8 @@
   the mechanical commit workflow before any task-tree pivot.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.1.1`
-  Status: `done; signoff-complete` (2026-08-10; task-tree-first from clean bounded-document closeout commit
-    `c26a9556`; intended atomic 181/300; no push; atomic commit/clean handoff pending)
+  Status: `done; landed` (2026-08-10; task-tree-first from clean bounded-document closeout commit `c26a9556`;
+    landed at `e0cc7182` as atomic 181/300; no push)
   Goal: Add the independently executable neutral transaction/progress artifact, checker, positive/negative
     fixtures, ActionIR/effect rows, rollout topology, and exact mutation corpus.
   Depends on: `.14.3.1.0`
@@ -3855,8 +3856,8 @@
   before the next task-tree activation.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.1.2`
-  Status: `done; signoff-complete` (2026-08-10; task-tree-first from clean neutral-authority commit `e0cc7182`;
-    intended atomic 182/300; no push; atomic commit/clean handoff pending)
+  Status: `done; landed` (2026-08-10; task-tree-first from clean neutral-authority commit `e0cc7182`; landed at
+    `774516fa` as atomic 182/300; no push)
   Goal: Recompose the committed neutral authority and truthful public-future boundary unchanged before Perl RED.
   Depends on: `.14.3.1.1`
   Acceptance: Prove the committed recognition-transaction artifact, independent checker, live-derived inventories,
@@ -3946,10 +3947,79 @@
   managed-run recovery, absent rendered book, and clean status complete mechanically before `.14.3.1.2.0` activates.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.1.2.0`
-  Status: `pending`
+  Status: `done; signoff-complete` (2026-08-10; task-tree-first from clean public-boundary repair commit
+    `774516fa`; intended atomic 183/300; no push; atomic commit/clean handoff pending)
   Goal: Add a fail-closed governed public milestone-sequence projection that rejects stale neutral-next claims,
     recompose the corrected boundary unchanged, close `.14.3.1`, and hand one clean next action to Perl RED.
   Depends on: `.14.3.1.2`
+  Acceptance: Extend the existing recognition-transaction oracle with an independently counted public-sequence
+    projection over an exact public-document inventory. Derive neutral/backend rollout truth from the committed
+    artifact; require current executable-neutral, unavailable-authored-form, independent-backend-admission, and
+    neutral-not-backend-support markers; reject stale neutral-next wording, false current capability, missing or
+    duplicate paths/markers, inventory drift, and rollout contradiction through an exact in-memory mutation corpus.
+    Keep the semantic artifact and its 40 mutations byte-exact, reuse the existing tracked/canonical/project-data
+    route, change no grammar/compiler/runtime/backend/generated/fixture/CLI/schema/capability/semantic/MCP/README/
+    storage-root/hosted-workflow behavior, recompose rendered public truth, close `.14.3.1`, and land clean before
+    Perl RED `.14.3.2.0`.
+  Verification: clean activation; Knowledge-first cause/owner retrieval; exact public inventory/marker design;
+    positive and mutation proof with byte-exact semantic artifact; checker syntax/style/storage/canonical freshness;
+    rendered mdBook and stale/current marker census; neutral/language/capability no-drift; Knowledge, memory, task,
+    README, doctrines, canonical CI, atomic commit 183/300, brief clearing, pointer/residue/book/status clean proof
+  Commit: `FUTURE-PARITY-BACKLOG.14.3.1.2.0 - govern transaction public sequence`
+
+  ### `FUTURE-PARITY-BACKLOG.14.3.1.2.0` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove `.14.3.1.2` landed atomically at `774516fa` as 182/300 with
+    first parent `e0cc7182`, exact subject, empty status/diffs, zero-byte brief, valid post-commit pointer, fresh
+    Knowledge, absent rendered book, zero managed-run residue, and this task-tree file as the sole activation diff.
+  - [x] **RETRIEVE / FREEZE PUBLIC-SEQUENCE BOUNDARY** — Follow the sequence-drift Knowledge card, ADR `0056`,
+    `.14.3.1.1-.2`, the neutral artifact/checker, public-contract precedents, canonical/storage routes, and all
+    current transaction passages before choosing paths, markers, forbidden claims, or mutation families.
+  - [x] **FAIL-CLOSED PUBLIC PROJECTION** — Require one exact public inventory and marker matrix derived against
+    artifact rollout truth; reject missing/duplicate/unknown paths or markers, stale neutral-next text, false
+    current/backend capability, and rollout contradiction without weakening the semantic contract.
+  - [x] **INDEPENDENT MUTATION / ROUTING PROOF** — Execute every public-sequence mutation in memory, keep the JSON
+    and its exact 40 semantic mutations byte-identical, and prove the extended checker remains tracked,
+    unconditionally canonical, repository-storage routed, fresh, and non-dormant.
+  - [x] **RECOMPOSE / CLOSE PARENT** — Rebuild and inspect the corrected book, prove all three public pages and
+    durable/live owners agree, close `.14.3.1`, and leave every runtime/recurring/public rollout leg RED.
+  - [x] **NO REGRESSION / COMMIT-READY HANDOFF** — Pass focused and canonical proof, prepare exact atomic 183/300,
+    and require zero-byte brief, pointer/Knowledge/residue/absent-book, and clean-status proof before `.14.3.2.0`
+    activates task-tree-first.
+
+  Activation evidence 2026-08-10: public-boundary repair `.14.3.1.2` lands atomically at full commit
+  `774516faa7261cc2ccdacf793747373618458d7b` as 182/300 with first parent `e0cc7182` and exact subject
+  `FUTURE-PARITY-BACKLOG.14.3.1.2 - repair neutral transaction status boundary`. Its hook regenerates Knowledge at
+  802 facts / 6,633 question keys, passes all eight doctrines, and validates `activation_commit e0cc7182` against
+  `HEAD^1`. Post-commit pointer and Knowledge checks pass; status and staged/unstaged diffs are empty; the ignored
+  brief is zero bytes; generated book output is absent; managed-run recovery reports `found=0 removed=0 skipped=0`;
+  and no background job remains. This task-tree file is the sole first activation mutation before index, checker,
+  public, or durable-status changes.
+
+  Implementation evidence 2026-08-10: Knowledge-first retrieval followed the sequence-drift and neutral-contract
+  cards to ADR `0056`, the exact three sole-facing transaction pages, the committed JSON/checker, and the existing
+  unconditional canonical/project-data route before implementation. The checker now derives neutral-complete and
+  every-non-neutral-RED public truth from the artifact; requires one exact three-document inventory, exact-once
+  executable/future/unavailable/admission markers, tracked-file proof, and eight forbidden stale/current claims;
+  and rejects thirteen independently executed inventory/marker/claim/text/rollout mutations. Public mutation
+  accounting remains separate from the unchanged forty semantic mutations. The JSON working file and `HEAD` are
+  byte-identical at SHA-256 `f2c4f231282cdb4966a14f551c19869fe8edb7c5097ed5b5a3d35b47ccc93248`;
+  the existing checker path, canonical registration, invocation, and project-data topology are unchanged. Focused
+  checker syntax, exact output, tool-storage, language 246 / fixtures 105+1 / public Perl contracts 122, and
+  capability 80/0/0 proofs pass. The rebuilt book contains 79 files / 14,356 KiB; direct HTML inspection confirms
+  the guard as a distinct paragraph, the repaired executable-neutral sequence, neutral-not-backend-support, and
+  1/9 RED status. Generated book output is removed.
+
+  Definitive signoff evidence 2026-08-10: Knowledge is synchronized at 802 facts / 6,633 question keys; task
+  metadata remains 511 stable IDs; memory stays within 58/60 lines; README is unchanged at 105/128 lines and
+  5,057/6,144 bytes; bounded-history pressure, whitespace, and all eight doctrines pass. The host-authorized
+  canonical gate passes every mandatory neutral, typed-source, semantic, MCP, cursor, capability, focused Perl,
+  and storage consumer; the repository-contained relocated six-family process proof; moved-root Rust plus four
+  outside-CWD anchors; and both primary CLI environments at 66/66. RAM is 68% below the 88% ceiling and Phase 0
+  passes 1,031/1,031 in 672 wall-clock seconds before exact `[ci] local CI gate passed` and exit zero. Parent
+  `.14.3.1` is composition-closed with neutral rollout 1/9 and every runtime/recurring/public leg still RED. Atomic
+  commit 183/300, zero-byte brief, post-pointer, Knowledge freshness, managed-run recovery, absent-book, and clean
+  status complete mechanically before Perl RED `.14.3.2.0` activates.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.2`
   Status: `pending`

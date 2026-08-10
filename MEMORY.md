@@ -5,15 +5,16 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `e0cc7182` — clean neutral-authority HEAD from which public-boundary repair `.14.3.1.2`
-  activated task-tree-first (181/300; no push).
-- latest_completed_leaf: neutral public-boundary repair `.14.3.1.2` is intended complete as atomic 182/300.
-- active_work_unit: intended clean post-landing handoff; neutral stays 1/9 and no leaf is active.
-- next_action: activate public-sequence guard `FUTURE-PARITY-BACKLOG.14.3.1.2.0` task-tree-first.
+- activation_commit: `774516fa` — clean public-boundary repair HEAD from which sequence guard `.14.3.1.2.0`
+  activated task-tree-first (182/300; no push).
+- latest_completed_leaf: public-sequence guard `.14.3.1.2.0` is intended complete as atomic 183/300; neutral parent
+  `.14.3.1` is composition-closed.
+- active_work_unit: intended clean post-landing handoff; neutral remains 1/9 and no leaf is active.
+- next_action: activate Perl RED `FUTURE-PARITY-BACKLOG.14.3.2.0` task-tree-first.
 - in_flight_uncommitted: none after the intended commit; no background job remains.
 - blockers: none. Neutral proof remains 132 ActionIR rows, 246 calls, token 8/17, graphs 6, marks 6, progress 8,
   diagnostics 15, 40 mutations, and rollout 1/9. Rendered review caught a `7c2ff407` milestone sentence missed by
-  `e0cc7182`; correction and E4 pass process/moved-root containment, CLI 66x2, RAM 59%, and Phase 0 1,031/695s.
+  `e0cc7182`; the canonical checker now separately passes public sequence at 3 documents / 8 forbidden / 13 mutations.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes, and 11 topology mutations advance governance to 53. Public authored values/transactions remain future.
@@ -49,10 +50,10 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   `recognize_once(token, call(Rule))`, `recognition_commit`, and `recognition_rollback`; match boolean and staged
   payload are separate. Tokens are linear; effects are closed 9 allowed/11 rejected; marks become invocation-
   framed; v1 repetition/recursive progress is cursor-only. Neutral authority is executable at 1/9, but no backend
-  recognizes the authored forms.
+  recognizes the forms; public sequence is separately governed at 3 documents / 8 forbidden / 13 mutations.
 - current_future_direction: transaction `.14.3` remains split through neutral `.1`, five backend families/six
-  runtimes `.2-.6`, recurring `.7`, and closeout `.8`; sequence guard `.14.3.1.2.0` precedes Perl RED and `.14.8`
+  runtimes `.2-.6`, recurring `.7`, and closeout `.8`; Perl RED `.14.3.2.0` follows this guard and `.14.8`
   retains final public no-drift. `TASK-TREE-METADATA-HYGIENE.5` separately owns active-frontier freshness.
 - latest_bootstrap_read: 2026-08-09 — complete roadmap/codebase/mdBook and required continuity/tooling review.
-- pivot_guard: commit/prove `.14.3.1.2` clean before activating public-sequence guard `.14.3.1.2.0`.
-- push_policy: hard lock at 300 commits; `.14.3.1.2` is intended atomic 182/300; no push; use project-data wrappers.
+- pivot_guard: commit/prove `.14.3.1.2.0` clean before activating Perl RED `.14.3.2.0` task-tree-first.
+- push_policy: hard lock at 300 commits; `.14.3.1.2.0` is intended atomic 183/300; no push; use project wrappers.
