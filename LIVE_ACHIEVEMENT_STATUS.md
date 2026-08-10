@@ -2,24 +2,29 @@
 
 ## Current Activity
 
-- `FUTURE-PARITY-BACKLOG.14.3.1.2.0` is signoff-complete from clean public-boundary repair `774516fa` as intended
-  atomic 183/300 with no push; its mechanical commit/clean-handoff proof is in progress.
-- The executable neutral authority is focused-green over 128 current + four future ActionIR rows, 246 call rows,
-  token 8/17, six fixed-point graphs, six mark cases, eight progress cases, fifteen diagnostics, and 40 mutations.
-- Neutral rollout is 1/9 complete. The canonical checker now separately passes public sequence at three book pages,
-  eight forbidden claims, and thirteen mutations; every runtime, recurring, and public rollout leg remains RED.
+- `FUTURE-PARITY-BACKLOG.14.3.2.0` is complete from clean public-sequence closeout `77872bfe` as intended atomic
+  184/300 with no push; definitive canonical signoff passed both CLI environments 66/66, RAM 69%, and Phase 0
+  1,031/1,031 in 672 seconds.
+- The final-path consumer passes 49 neutral-derived assertions, fails exactly one four-dedicated-node assertion,
+  and skips one future live/generated-source body. Descriptor construction succeeds; three helpers remain
+  unresolved, rollback remains raw, and the consumer has zero canonical registration references.
+- Neutral rollout stays 1/9. Public sequence remains three pages / eight forbidden claims / thirteen mutations;
+  every runtime, recurring, and public leg remains RED and current authored behavior is unchanged.
 
 ## Latest Completed Slice
 
-- `FUTURE-PARITY-BACKLOG.14.3.1.2.0` is intended complete as atomic 183/300: public sequence is fail-closed at
-  three pages / eight forbidden claims / thirteen mutations and parent `.14.3.1` is composition-closed.
+- `FUTURE-PARITY-BACKLOG.14.3.2.0` freezes one tracked but canonically dormant Perl transaction consumer at its
+  exact 49-pass / one-fail / one-skip boundary without changing current authored or production behavior.
 
 ## Next Action
 
-- Commit `.14.3.1.2.0` atomically and prove the clean handoff, then activate Perl RED `.14.3.2.0` task-tree-first.
+- Land `.14.3.2.0` atomically, prove its clean handoff, then activate private invocation-frame/token authority
+  `.14.3.2.1` task-tree-first.
 
 ## Recent Completions
 
+- `2026-08-10` — `FUTURE-PARITY-BACKLOG.14.3.2.0` froze the dormant Perl transaction RED as atomic 184/300.
+- `2026-08-10` — `77872bfe` governed transaction public sequence as atomic 183/300.
 - `2026-08-10` — `774516fa` repaired neutral transaction public status sequencing as atomic 182/300.
 - `2026-08-10` — `e0cc7182` added the executable neutral recognition-transaction authority as atomic 181/300.
 - `2026-08-10` — `c26a9556` composition-closed all four bounded document stores as atomic 180/300.

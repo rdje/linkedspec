@@ -4022,17 +4022,104 @@
   status complete mechanically before Perl RED `.14.3.2.0` activates.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.2`
-  Status: `pending`
+  Status: `active` (2026-08-10; dormant RED child `.14.3.2.0` is complete from clean neutral-parent closeout
+    `77872bfe` as intended atomic 184/300; private authority `.14.3.2.1` is next; no push)
   Goal: Implement and independently admit the bounded recognition-only transaction/progress contract in the Perl
     reference without changing unrelated action, result, register, or rollback semantics.
   Depends on: `.14.3.1.2.0`
   Children: `.14.3.2.0-.14.3.2.3`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.2.0`
-  Status: `pending`
+  Status: `complete` (2026-08-10; dormant Perl RED and definitive signoff complete from clean
+    public-sequence/neutral-parent closeout `77872bfe` as atomic 184/300; no push)
   Goal: Freeze dormant Perl RED for tokens, recursive same-label mark frames, recognition attempts, effect barriers,
     progress diagnostics, source generation, and unchanged compatibility controls.
   Depends on: `.14.3.1.2.0`
+  Acceptance: Retrieve the neutral transaction and cursor/runtime Knowledge owners, ADR `0056`, exact JSON/checker,
+    current Perl ActionIR/compiler/runtime/generated-source seams, toolbox probes, existing dormant-RED precedents,
+    and canonical/storage registration before writing tests. Freeze one tracked but canonically dormant Perl RED
+    consumer that derives its expectations from the neutral artifact and covers all four authored forms, strict
+    match/payload separation including falsey payloads, linear token lifetime/escape/nesting/cross-boundary rules,
+    exactly-one static `call(Rule)` attempt, closed direct/transitive effect rejection, commit/rollback cursor and
+    invocation-mark behavior including recursive same-label generations, repetition/recursive cursor-only progress,
+    fifteen structured diagnostics, unchanged compatibility save/restore controls, and independently emitted source.
+    Prove the consumer fails only at the intended unavailable grammar/implementation boundary; keep it absent from
+    canonical invocation until `.14.3.2.3`; change no production grammar/compiler/runtime/backend/generated carrier,
+    neutral artifact/checker, capability/semantic/MCP/CLI/schema, public-current claim, README, storage root, or
+    hosted workflow; land clean before private Perl authority `.14.3.2.1` activates.
+  Verification: clean activation; Knowledge/toolbox-first retrieval; exact current Perl source/runtime probes;
+    neutral-derived consumer inventory and expectation audit; syntax plus deterministic intended RED evidence;
+    compatibility and current-suite no-drift; tracked-but-dormant canonical/storage proof; Knowledge, memory, task,
+    README, history, doctrines, canonical CI, atomic commit 184/300, brief clearing, pointer/residue/book/status clean
+  Commit: `FUTURE-PARITY-BACKLOG.14.3.2.0 - freeze Perl transaction RED`
+
+  ### `FUTURE-PARITY-BACKLOG.14.3.2.0` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove `.14.3.1.2.0` landed atomically at `77872bfe` as 183/300 with
+    first parent `774516fa`, exact subject, empty status/diffs, zero-byte brief, valid post-commit pointer, fresh
+    Knowledge, absent rendered book, zero managed-run residue, and this task-tree file as the sole activation diff.
+  - [x] **RETRIEVE / PROBE CURRENT PERL BOUNDARY** — Follow Knowledge, ADR, neutral artifact/checker, toolbox, and
+    dormant-RED precedents before using LinkedSpec probes to locate exact grammar/lowering/runtime/generated seams.
+  - [x] **FREEZE NEUTRAL-DERIVED RED CONSUMER** — Add one exact tracked consumer covering syntax, tokens, attempts,
+    effects, marks/recursion, progress, diagnostics, compatibility controls, and independently emitted source.
+  - [x] **PROVE INTENDED DORMANCY** — Show syntax is valid, the consumer fails deterministically only because the
+    transaction forms are unavailable, and it is absent from canonical invocation until Perl admission `.14.3.2.3`.
+  - [x] **NO PRODUCTION OR PUBLIC MOVEMENT** — Prove all implementation, neutral, capability, semantic/MCP, CLI,
+    README, storage, hosted-workflow, and current public transaction-support owners remain unchanged/RED.
+  - [x] **NO REGRESSION / COMMIT-READY HANDOFF** — Pass focused/current/canonical proof, prepare atomic 184/300, and
+    require brief/pointer/Knowledge/residue/absent-book/clean-status proof before `.14.3.2.1` activates task-tree-first.
+
+  Activation evidence 2026-08-10: public-sequence guard `.14.3.1.2.0` lands atomically at full commit
+  `77872bfe1bc57284f3198778d786c3a404e958b2` as 183/300 with first parent `774516fa` and exact subject
+  `FUTURE-PARITY-BACKLOG.14.3.1.2.0 - govern transaction public sequence`. Its hook regenerates Knowledge at 802
+  facts / 6,633 question keys, passes all eight doctrines, and validates `activation_commit 774516fa` against
+  `HEAD^1`. Post-commit pointer and Knowledge checks pass; status and staged/unstaged diffs are empty; the ignored
+  brief is zero bytes; generated book output is absent; managed-run listing reports `found=0 removed=0 skipped=0`;
+  and no background job remains. This task-tree file is the sole first activation mutation before index, consumer,
+  probes, or durable-status changes.
+
+  Retrieval/probe evidence 2026-08-10: Knowledge lookup followed `cursor-transaction-safety-audit-plan`,
+  `cursor-transaction-authored-contract`, `recognition-transaction-neutral-contract`,
+  `perl-generated-source-contract-v2`, and the typed-source dormant-RED precedents before code/runtime probing.
+  ADR `0056`, the exact JSON/checker, relevant Toolbox descriptor/lowering/generated-source/runtime-context probes,
+  and existing final-path dormant consumers were read before the test was written. `call_spec_handler_subst`
+  proves checkpoint, attempt, and commit become `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER` sentinels while rollback
+  remains raw; compatibility `save_cursor`/`restore_cursor` still route through the typed source-location core.
+  Exact `return_descriptor` construction succeeds rather than rejecting grammar. Its Top action reports
+  `language_agnostic_action_ir_ready=0`, three unresolved helpers, one raw dependency, and no dedicated
+  `RECOGNITION_CHECKPOINT`, `RECOGNIZE_ONCE`, `RECOGNITION_COMMIT`, or `RECOGNITION_ROLLBACK` nodes. Live execution
+  reaches the same raw rollback boundary as a structured runtime-handler error; no exception escapes.
+
+  Consumer/dormancy evidence 2026-08-10: final-path `t/recognition_transaction_perl_contract.t` syntax-checks and
+  derives all four authored forms, 8 positive / 17 negative token fixtures, six effect graphs, six mark cases,
+  eight progress cases, exact 9/11 effects, and all fifteen diagnostics from the neutral artifact. It passes 49
+  assertions, fails exactly one assertion requiring the four dedicated language-agnostic nodes, and skips one
+  future live/generated-source subtest. Repeated execution reports the byte-stable boundary: four missing nodes,
+  unresolved helpers `[recognition_checkpoint,recognition_commit,recognize_once]`, and one raw dependency. The
+  skipped body freezes falsey/miss/commit/rollback, cursor/mark state, unchanged compatibility cursor-stack
+  controls, and independently emitted/loaded execution without creating a second current implementation.
+  `tools/run_ci_local.sh` and all other ordinary/canonical registries contain zero references to the consumer;
+  `.14.3.2.3` remains the sole admission owner.
+
+  No-drift evidence 2026-08-10: the independent neutral oracle remains green at 132 ActionIR rows / 246 calls /
+  token 8+17 / graphs 6 / marks 6 / progress 8 / diagnostics 15 / 40 semantic mutations plus the separate
+  three-page/eight-forbidden/thirteen-mutation public sequence. Current typed-source values/projections,
+  complete named marks, and generated-source tests pass together. Diffs contain no production Perl, grammar,
+  neutral artifact/checker, canonical driver, capability/semantic/MCP/CLI/schema, README, storage, workflow, or
+  mdBook source change. Knowledge card `perl-recognition-transaction-dormant-red` makes the exact causal boundary
+  retrievable; the derived map advances to 803 facts / 6,643 question keys.
+
+  Definitive signoff evidence 2026-08-10: the staged final-path consumer remains tracked but absent from every
+  ordinary/canonical registry and keeps its deterministic 49-pass / one-fail / one-skip RED boundary. The complete
+  host-authorized canonical gate passes all eight doctrines; every mandatory neutral, typed-source, semantic, MCP,
+  cursor, capability, focused Perl, and storage consumer; repository-contained six-family process I/O; moved-root
+  Rust plus four outside-CWD runtime anchors; and both primary CLI option environments at 66/66. RAM is 69% against
+  the 88% ceiling, and Phase 0 passes 1,031/1,031 in 672 wall-clock seconds before the exact
+  `[ci] local CI gate passed` marker. Production/public/mdBook inputs remain byte-unchanged, the real 79-file /
+  14,356-KiB rendered book was inspected deterministically and removed, and no generated book output remains.
+  Knowledge is synchronized at 803 facts / 6,643 question keys; memory stays at 60/60 lines; README remains
+  105 lines / 5,057 bytes; task metadata, bounded-history pressure, whitespace, and all eight doctrines pass.
+  Atomic 184/300 is commit-ready with `.14.3.2.1` retained as the next task-tree-first activation.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.2.1`
   Status: `pending`

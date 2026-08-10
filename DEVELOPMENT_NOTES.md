@@ -10,6 +10,24 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-10 (`FUTURE-PARITY-BACKLOG.14.3.2.0` — dormant Perl transaction RED): the accepted four-form specimen
+  already passes bootstrap/descriptor construction, so do not describe the current boundary as missing grammar.
+  Current scalar assignment lowering hides checkpoint, attempt, and commit behind three unsupported-helper
+  sentinels, while statement-only rollback falls through as raw Perl. Require all four dedicated `RECOGNITION_*`
+  nodes, zero unresolved helpers, zero raw dependencies, and language-agnostic readiness as one atomic RED seam.
+- A dormant consumer should execute stable neutral facts before its implementation boundary. Here 49 assertions
+  independently lock the authored strings, 8/17 token fixtures, six effect graphs, six mark cases, eight progress
+  cases, 9/11 effects, fifteen codes/fields, and exact counts before one RED assertion. The later live/generated
+  behavior stays behind one skip, so current canonical CI remains green without weakening future coverage.
+- Keep admission mechanically distinct from final-path tracking. Explicit commands in `tools/run_ci_local.sh`
+  define ordinary/canonical Perl discovery; a tracked `t/*.t` file is dormant when those registries contain zero
+  references. Stage it before canonical signoff so the tracked-input audit sees the final repository shape, but
+  do not register or execute it until `.14.3.2.3`.
+- Definitive signoff proves that staging a dormant final-path consumer does not silently admit it: all eight
+  doctrines, repository-contained six-family process I/O, moved-root/outside-CWD execution, both CLI environments
+  at 66/66, RAM 69%, and Phase 0 1,031/1,031 in 672 seconds pass while the consumer still has zero registry
+  references and retains its exact intended RED result.
+
 - 2026-08-10 (`FUTURE-PARITY-BACKLOG.14.3.1.2.0` — public sequence governance): derive documentation status from
   the semantic artifact's rollout instead of duplicating it as an independent claim. The guard requires neutral
   complete and every non-neutral leg RED before checking exact page markers, so public prose cannot move ahead of

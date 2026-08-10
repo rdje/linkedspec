@@ -73,6 +73,15 @@ consumers pass, and the route registry remains 20 surfaces / 62 routes / 32/32 w
 empty debt metadata. The program is composition-closed. These storage migrations change documentation governance
 only; they change no language, compiler, runtime, backend, fixture, CLI, protocol, or project-data root.
 
+- `2026-08-10 dormant Perl recognition-transaction RED`: `FUTURE-PARITY-BACKLOG.14.3.2.0` adds one final-path
+  consumer without ordinary or canonical registration. The accepted four-form source reaches descriptor
+  construction, so the boundary is not grammar parsing: checkpoint, attempt, and commit lower through three
+  unsupported-helper sentinels; rollback remains one raw dependency; and all four dedicated `RECOGNITION_*`
+  ActionIR nodes are absent. The consumer derives the exact 8/17 token, 6 graph, 6 mark, 8 progress, 9/11 effect,
+  and 15-diagnostic inventories from the neutral artifact, passes 49 assertions, fails one dedicated-node
+  assertion, and skips the future live/generated-source body. Neutral remains 1/9 and production/public behavior
+  remains unchanged until private authority `.14.3.2.1` and integration/admission `.14.3.2.2-.3`.
+
 - `2026-08-10 recognition-transaction public-sequence governance`: `FUTURE-PARITY-BACKLOG.14.3.1.2.0` extends
   the existing canonical neutral oracle with a separately counted public projection over three exact book pages,
   eight forbidden stale/current claims, rollout-derived neutral-complete/every-backend-RED state, tracked inputs,

@@ -10,6 +10,25 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-10 — FUTURE-PARITY-BACKLOG.14.3.2.0 — freeze Perl transaction RED
+
+- Activated task-tree-first from clean public-sequence closeout `77872bfe` as intended atomic 184/300.
+- Added final-path `t/recognition_transaction_perl_contract.t` without ordinary/canonical registration. It derives
+  the four authored forms, exact 8 positive / 17 negative token cases, six effect graphs, six mark cases, eight
+  progress cases, 9 allowed / 11 rejected effects, and all fifteen diagnostics from the neutral artifact.
+- Proved the accepted source reaches descriptor construction. Forty-nine assertions pass; one exact assertion
+  fails because all four dedicated transaction nodes are absent, checkpoint/attempt/commit remain three
+  unsupported helpers, and rollback remains one raw dependency. The future live/generated-source body skips.
+- Froze falsey/miss/commit/rollback, compatibility cursor-stack independence, and emitted/loaded execution behind
+  that boundary. Recorded the mechanism in a new Knowledge card and regenerated the map at 803 facts / 6,643 keys.
+- Kept the neutral oracle green at 132 ActionIR rows, 246 calls, 40 semantic mutations, and rollout 1/9 plus the
+  separate three-page/eight-forbidden/thirteen-mutation public sequence. Current source-location, mark, and
+  generated-source consumers pass; production and mdBook source remain unchanged.
+- Definitive local CI passes all eight doctrines, repository-contained six-family process proof, moved-root and
+  outside-CWD execution, both CLI environments at 66/66, RAM 69%, and Phase 0 1,031/1,031 in 672 seconds.
+- Changed no grammar, compiler, runtime, backend, generated carrier, neutral artifact/checker, canonical driver,
+  capability/semantic/MCP/CLI/schema, README, storage root, hosted workflow, or current public transaction behavior.
+
 ## 2026-08-10 — FUTURE-PARITY-BACKLOG.14.3.1.2.0 — govern transaction public sequence
 
 - Activated task-tree-first from clean public-boundary repair `774516fa` as intended atomic 183/300.

@@ -5,16 +5,16 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `774516fa` — clean public-boundary repair HEAD from which sequence guard `.14.3.1.2.0`
-  activated task-tree-first (182/300; no push).
-- latest_completed_leaf: public-sequence guard `.14.3.1.2.0` is intended complete as atomic 183/300; neutral parent
-  `.14.3.1` is composition-closed.
-- active_work_unit: intended clean post-landing handoff; neutral remains 1/9 and no leaf is active.
-- next_action: activate Perl RED `FUTURE-PARITY-BACKLOG.14.3.2.0` task-tree-first.
-- in_flight_uncommitted: none after the intended commit; no background job remains.
-- blockers: none. Neutral proof remains 132 ActionIR rows, 246 calls, token 8/17, graphs 6, marks 6, progress 8,
-  diagnostics 15, 40 mutations, and rollout 1/9. Rendered review caught a `7c2ff407` milestone sentence missed by
-  `e0cc7182`; the canonical checker now separately passes public sequence at 3 documents / 8 forbidden / 13 mutations.
+- activation_commit: `77872bfe` — clean public-sequence/neutral-parent closeout HEAD from which Perl dormant RED
+  `.14.3.2.0` activated task-tree-first (183/300; no push).
+- latest_completed_leaf: Perl dormant RED `.14.3.2.0` is atomic 184/300; consumer canonically dormant; production unchanged.
+- active_work_unit: clean post-landing handoff for `.14.3.2.0`; private Perl authority `.14.3.2.1` is next.
+- next_action: activate private Perl invocation-frame/token authority `FUTURE-PARITY-BACKLOG.14.3.2.1`
+  task-tree-first from the clean atomic 184/300 closeout.
+- in_flight_uncommitted: none; no background job.
+- blockers: none. The dormant test passes 49 neutral-derived assertions and fails one exact four-node boundary;
+  three helpers remain unresolved and rollback remains raw. Neutral stays 132 nodes / 246 calls / token 8/17 /
+  graphs 6 / marks 6 / progress 8 / diagnostics 15 / 40 mutations / rollout 1/9, with public sequence 3/8/13.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes, and 11 topology mutations advance governance to 53. Public authored values/transactions remain future.
@@ -49,11 +49,12 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_transaction_contract: future syntax is exact `recognition_checkpoint`,
   `recognize_once(token, call(Rule))`, `recognition_commit`, and `recognition_rollback`; match boolean and staged
   payload are separate. Tokens are linear; effects are closed 9 allowed/11 rejected; marks become invocation-
-  framed; v1 repetition/recursive progress is cursor-only. Neutral authority is executable at 1/9, but no backend
-  recognizes the forms; public sequence is separately governed at 3 documents / 8 forbidden / 13 mutations.
+  framed; v1 repetition/recursive progress is cursor-only. Neutral authority is executable at 1/9. Perl dormant
+  RED proves descriptor parsing succeeds but all four dedicated nodes are absent, three helpers are unresolved,
+  and rollback is raw; no backend recognizes the forms. Public sequence remains governed at 3/8/13.
 - current_future_direction: transaction `.14.3` remains split through neutral `.1`, five backend families/six
-  runtimes `.2-.6`, recurring `.7`, and closeout `.8`; Perl RED `.14.3.2.0` follows this guard and `.14.8`
-  retains final public no-drift. `TASK-TREE-METADATA-HYGIENE.5` separately owns active-frontier freshness.
-- latest_bootstrap_read: 2026-08-09 — complete roadmap/codebase/mdBook and required continuity/tooling review.
-- pivot_guard: commit/prove `.14.3.1.2.0` clean before activating Perl RED `.14.3.2.0` task-tree-first.
-- push_policy: hard lock at 300 commits; `.14.3.1.2.0` is intended atomic 183/300; no push; use project wrappers.
+  runtimes `.2-.6`, recurring `.7`, and closeout `.8`; private Perl authority `.14.3.2.1` follows the clean RED
+  commit and `.14.8` retains final public no-drift. `TASK-TREE-METADATA-HYGIENE.5` owns frontier freshness.
+- latest_bootstrap_read: 2026-08-10 — complete roadmap/codebase/mdBook and required continuity/tooling review.
+- pivot_guard: prove `.14.3.2.0` clean before activating private Perl authority `.14.3.2.1` task-tree-first.
+- push_policy: hard lock at 300 commits; `.14.3.2.0` is atomic 184/300; no push; use project wrappers.
