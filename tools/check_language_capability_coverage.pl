@@ -180,10 +180,12 @@ for my $contract (@{$perl_contracts}) {
  $perl_current_contract{$name} = 1 if defined($name) && $name =~ /^[A-Za-z_]\w*\z/;
 }
 
-# These nine identifier-shaped diagnostics are deliberately not public current
-# calls. Keeping the classification next to the independent reverse check means
-# a newly added Perl current contract cannot disappear symmetrically from every
-# backend inventory merely because no corpus fixture happens to call it.
+# These thirteen identifier-shaped diagnostics are deliberately not ordinary
+# public current calls. Keeping the classification next to the independent
+# reverse check means a newly added Perl current contract cannot disappear
+# symmetrically from every backend inventory merely because no corpus fixture
+# happens to call it. The four recognition forms are grammar-owned intrinsics
+# with dedicated ActionIR nodes, not members of the shared helper-call surface.
 my %classified_non_public_perl_contract = (
  array_append_operator => 'internal lowering operation',
  array_end_mutation_method => 'internal lowering operation',
@@ -192,6 +194,10 @@ my %classified_non_public_perl_contract = (
  entry_named_map => 'documented compatibility alias',
  hash_index_assignment_operator => 'internal lowering operation',
  match_named_map => 'documented compatibility alias',
+ recognition_checkpoint => 'grammar-owned dedicated intrinsic',
+ recognition_commit => 'grammar-owned dedicated intrinsic',
+ recognition_rollback => 'grammar-owned dedicated intrinsic',
+ recognize_once => 'grammar-owned dedicated intrinsic',
  scalar_assignment_operator => 'internal lowering operation',
  value_drop => 'internal lowering operation',
 );

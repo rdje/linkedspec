@@ -50,6 +50,102 @@ sub _lower_child_call_push_builtin {
  return 'push @'.$target.', '.$value
 }
 
+sub _quote_recognition_transaction_string {
+ my ($value) = @_;
+ $value = '' unless defined $value;
+ $value =~ s/\\/\\\\/g;
+ $value =~ s/'/\\'/g;
+ $value =~ s/\r/\\r/g;
+ $value =~ s/\n/\\n/g;
+ return "'$value'"
+}
+
+#------------------------------------------------------------------------------
+# Function: _build_recognition_transaction_contracts
+# Purpose : Own the four exact authored transaction statements and preserve
+#           their token/result/static-callee fields in dedicated ActionIR.
+#------------------------------------------------------------------------------
+sub _build_recognition_transaction_contracts {
+ my ($label) = @_;
+ return [
+  {
+   id                 => 'recognition_checkpoint',
+   ir_node            => 'RECOGNITION_CHECKPOINT',
+   diag_name          => 'recognition_checkpoint',
+   unresolved_pattern => qr/\brecognition_checkpoint\s*\(/o,
+   lower              => sub {
+    my ($code, $ctx) = @_;
+    my $args = ref($ctx) eq 'HASH' && ref($ctx->{event}) eq 'HASH'
+     ? $ctx->{event}{args}
+     : undef;
+    my $token = ref($args) eq 'HASH' ? $args->{token} : undef;
+    return $code unless defined($token) && $token =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+    return 'my $'.$token.' = LinkedSpec::RecognitionTransactionRuntime::begin('
+     .'$descr, $STRING, $info, \\$IPOS, '. _quote_recognition_transaction_string($label)
+     .', '. _quote_recognition_transaction_string($token) .')'
+   },
+  },
+  {
+   id                 => 'recognize_once',
+   ir_node            => 'RECOGNIZE_ONCE',
+   diag_name          => 'recognize_once',
+   unresolved_pattern => qr/\brecognize_once\s*\(/o,
+   lower              => sub {
+    my ($code, $ctx) = @_;
+    my $args = ref($ctx) eq 'HASH' && ref($ctx->{event}) eq 'HASH'
+     ? $ctx->{event}{args}
+     : undef;
+    return $code unless ref($args) eq 'HASH';
+    my ($matched, $token, $callee, $operand) = @{$args}{qw/matched token callee operand/};
+    return $code unless defined($matched) && $matched =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o
+     && defined($token) && $token =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+    my $callee_expr = defined($callee)
+     ? _quote_recognition_transaction_string($callee)
+     : 'undef';
+    return 'my $'.$matched.' = LinkedSpec::RecognitionTransactionRuntime::attempt_static('
+     .'$descr, $STRING, $info, \\$IPOS, $'.$token.', '.$callee_expr.', '
+     ._quote_recognition_transaction_string($label).')'
+   },
+  },
+  {
+   id                 => 'recognition_commit',
+   ir_node            => 'RECOGNITION_COMMIT',
+   diag_name          => 'recognition_commit',
+   unresolved_pattern => qr/\brecognition_commit\s*\(/o,
+   lower              => sub {
+    my ($code, $ctx) = @_;
+    my $args = ref($ctx) eq 'HASH' && ref($ctx->{event}) eq 'HASH'
+     ? $ctx->{event}{args}
+     : undef;
+    return $code unless ref($args) eq 'HASH';
+    my ($payload, $token) = @{$args}{qw/payload token/};
+    return $code unless defined($payload) && $payload =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o
+     && defined($token) && $token =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+    return 'my $'.$payload.' = LinkedSpec::RecognitionTransactionRuntime::finish_commit('
+     .'$descr, $STRING, $info, \\$IPOS, $'.$token.', '
+     ._quote_recognition_transaction_string($label).')'
+   },
+  },
+  {
+   id                 => 'recognition_rollback',
+   ir_node            => 'RECOGNITION_ROLLBACK',
+   diag_name          => 'recognition_rollback',
+   unresolved_pattern => qr/\brecognition_rollback\s*\(/o,
+   lower              => sub {
+    my ($code, $ctx) = @_;
+    my $args = ref($ctx) eq 'HASH' && ref($ctx->{event}) eq 'HASH'
+     ? $ctx->{event}{args}
+     : undef;
+    my $token = ref($args) eq 'HASH' ? $args->{token} : undef;
+    return $code unless defined($token) && $token =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+    return 'LinkedSpec::RecognitionTransactionRuntime::finish_rollback('
+     .'$descr, $STRING, $info, \\$IPOS, $'.$token.', '
+     ._quote_recognition_transaction_string($label).')'
+   },
+  },
+ ]
+}
+
 #------------------------------------------------------------------------------
 # Function: default_deps_for_package
 # Purpose : Build the default contracts dependency bundle for one owner
@@ -2344,6 +2440,7 @@ sub build_action_lowering_contracts {
  my $d = _require_lowering_deps($deps);
  return [
   @{_build_call_and_dispatch_contracts($label, $deps)},
+  @{_build_recognition_transaction_contracts($label)},
   @{_build_return_contracts($label, $d)},
   @{_build_capture_and_cursor_contracts($label, $d)},
   @{_build_passthrough_ir_contracts()},

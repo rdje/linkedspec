@@ -428,6 +428,9 @@ require_tracked_file perl/LinkedSpec/BindingRuntime.pm
 require_tracked_file perl/LinkedSpec/SpecLoader.pm
 require_tracked_file perl/LinkedSpec/GeneratedSource.pm
 require_tracked_file perl/LinkedSpec/RecognitionTransaction.pm
+require_tracked_file perl/LinkedSpec/RecognitionTransactionPolicy.pm
+require_tracked_file perl/LinkedSpec/RecognitionTransactionRuntime.pm
+require_tracked_file perl/LinkedSpec/ActionIR/Scanner/RecognitionTransactionRules.pm
 require_tracked_file perl/LinkedSpec/SemanticIndex.pm
 require_tracked_file perl/LinkedSpec/SemanticSourceMap.pm
 require_tracked_file perl/LinkedSpec/MCPContract.pm
@@ -534,6 +537,9 @@ perl -c -Iperl t/mcp_server_perl_stdio.t
 perl -c -Iperl t/mcp_server_perl_admission.t
 perl -c -Iperl perl/LinkedSpec/BindingRuntime.pm
 perl -c -Iperl perl/LinkedSpec/RecognitionTransaction.pm
+perl -c -Iperl perl/LinkedSpec/RecognitionTransactionPolicy.pm
+perl -c -Iperl perl/LinkedSpec/RecognitionTransactionRuntime.pm
+perl -c -Iperl perl/LinkedSpec/ActionIR/Scanner/RecognitionTransactionRules.pm
 perl -c -Iperl perl/LinkedSpec/SemanticIndex.pm
 perl -c -Iperl perl/LinkedSpec/SemanticSourceMap.pm
 perl -c -Iperl perl/LinkedSpec/SemanticCallProjection.pm

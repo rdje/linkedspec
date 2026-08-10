@@ -2,28 +2,26 @@
 
 ## Current Activity
 
-- `FUTURE-PARITY-BACKLOG.14.3.2.1` private Perl authority implementation and definitive signoff are complete from
-  clean dormant-RED closeout `59306f37` as atomic 185/300 with no push and no remaining in-flight work.
-- One inside-out owner now provides opaque frames/tokens, monotonic invocation/mark generations, snapshots,
-  falsey-safe staging, restore-before-report misuse handling, and terminal invalidation. Its direct canonical unit
-  proof passes 293 nested TAP assertions.
-- The final-path consumer remains unregistered and exact at 49 pass / one four-node failure / one skip. Neutral
-  rollout stays 1/9, public sequence stays 3/8/13, and no authored/current route loads the private owner.
-- Canonical passes all eight doctrines, CLI 66/66 in both environments, RAM 71%, and Phase 0 1,031/1,031 in
-  688 seconds. The inspected 79-file / 14,356-KiB book is removed and no background job remains.
+- `FUTURE-PARITY-BACKLOG.14.3.2.2` is complete from clean private-authority closeout `8138bea5` as atomic
+  186/300. Dedicated ActionIR, static effect/linearity policy, live/generated authority binding, falsey-safe
+  recognition, and cursor-only progress behavior are implemented. The first canonical attempt caught and repaired
+  the exact dedicated-intrinsic/helper-inventory classification; the definitive rerun passes CLI 66x2, RAM 58%,
+  and Phase 0 1,031/1,031 in 727 seconds.
+- The final-path consumer is GREEN but still absent from ordinary/canonical discovery. Perl rollout/public-current
+  admission remains exclusively owned by `.14.3.2.3`; neutral stays 1/9 and no push occurs before atomic 300.
 
 ## Latest Completed Slice
 
-- `FUTURE-PARITY-BACKLOG.14.3.2.1 - add private Perl transaction authority` lands as atomic 185/300: the opaque
-  authority and private canonical proof are complete while every authored/current route remains dormant.
+- `FUTURE-PARITY-BACKLOG.14.3.2.2 - integrate Perl recognition transactions` lands as atomic 186/300; its
+  final-path proof remains deliberately unadmitted.
 
 ## Next Action
 
-- From the clean atomic-185 handoff, activate authored/compiler/runtime/generated integration `.14.3.2.2`
-  task-tree-first, retrieve its exact owners, and implement only that integration slice.
+- Activate admission `.14.3.2.3` task-tree-first from `.14.3.2.2`'s proved clean atomic-186 handoff.
 
 ## Recent Completions
 
+- `2026-08-10` — `.14.3.2.2` integrated Perl recognition transactions for atomic 186/300.
 - `2026-08-10` — `FUTURE-PARITY-BACKLOG.14.3.2.1` added private Perl transaction authority as atomic 185/300.
 - `2026-08-10` — `59306f37` froze the dormant Perl transaction RED as atomic 184/300.
 - `2026-08-10` — `77872bfe` governed transaction public sequence as atomic 183/300.

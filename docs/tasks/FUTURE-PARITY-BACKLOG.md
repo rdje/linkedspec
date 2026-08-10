@@ -6,9 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-10` (behavior-free syntax/result/effect ratification `.14.3.1.0` is committed;
-  executable neutral contract `.14.3.1.1` is the restored next product leaf after bounded-document containment
-  composition-closeout; no push)
+- Last updated: `2026-08-10` (Perl transaction integration `.14.3.2.2` is complete as atomic 186/300 from clean
+  private-authority commit `8138bea5`; admission `.14.3.2.3` remains next; no push)
 - Owner: repo-local workflow
 
 ## Goal

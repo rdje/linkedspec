@@ -4022,8 +4022,9 @@
   status complete mechanically before Perl RED `.14.3.2.0` activates.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.2`
-  Status: `active` (2026-08-10; dormant RED `.14.3.2.0` landed at `59306f37` as atomic 184/300; private authority
-    `.14.3.2.1` implementation/focused proof is active as intended atomic 185/300; no push)
+  Status: `active` (2026-08-10; private authority `.14.3.2.1` landed at `8138bea5` as atomic 185/300; authored/
+    compiler/runtime/generated integration `.14.3.2.2` is signoff-complete for atomic 186/300; explicit admission
+    `.14.3.2.3` remains pending; no push)
   Goal: Implement and independently admit the bounded recognition-only transaction/progress contract in the Perl
     reference without changing unrelated action, result, register, or rollback semantics.
   Depends on: `.14.3.1.2.0`
@@ -4213,10 +4214,142 @@
   commit-ready with `.14.3.2.2` retained as the next task-tree-first activation.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.2.2`
-  Status: `pending`
+  Status: `complete` (2026-08-10; activated task-tree-first from clean private-authority closeout `8138bea5`;
+    implementation, focused proof, durable synchronization, rendered review, and canonical signoff are complete;
+    atomic 186/300 is commit-ready; no push)
   Goal: Integrate the ratified Perl syntax, once-only recognition, staged result, static/runtime effect barrier,
     invocation marks, structured progress failures, and independently emitted generated source.
   Depends on: `.14.3.2.1`
+  Commit: `FUTURE-PARITY-BACKLOG.14.3.2.2 - integrate Perl recognition transactions`
+
+  ### `FUTURE-PARITY-BACKLOG.14.3.2.2` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / OWNER RETRIEVAL** — Prove private authority `.14.3.2.1` landed atomically at full
+    commit `8138bea5718198e1a7ce89599c1ae84618dc5211`, activate only this leaf from its clean closeout, and retrieve
+    the canonical ActionIR scanner/contract/canonical-event/rewrite owners, post-rule-table compiler validation
+    seam, shared handler preamble and match-emission seams, runtime-context diagnostics, source-location mark
+    authority, generated-source v2 carrier, private transaction authority, neutral JSON/checker, ADR 0056, and
+    dormant final-path consumer before re-deriving or changing behavior.
+  - [x] **FOUR DEDICATED ACTIONIR NODES / EXACT AUTHORED SHAPES** — Add scanner and lowering ownership for only
+    `tx = recognition_checkpoint()`, `matched = recognize_once(tx, call(StaticRule))`,
+    `payload = recognition_commit(tx)`, and statement-only `recognition_rollback(tx)`. Emit exactly
+    `RECOGNITION_CHECKPOINT`, `RECOGNIZE_ONCE`, `RECOGNITION_COMMIT`, and `RECOGNITION_ROLLBACK`, preserve the
+    static callee and direct bare local slots in canonical event arguments, prevent generic assignment/call
+    rewrites from eagerly evaluating the operand or duplicating assignment nodes, and leave malformed/dynamic
+    operands fail-closed with portable recognition diagnostics.
+  - [x] **STATIC LINEARITY / EFFECT FIXED POINT** — Validate after the complete compiled rule table exists: one
+    opaque token slot, exactly one attempt, an exact same-token terminal on every admitted structured path, no
+    token escape or nesting, and an existing static callee. Classify every canonical ActionIR node through the
+    neutral 132-node effect inventory, union named-rule effects transitively to a recursive fixed point, admit
+    only the nine neutral effects, and reject forbidden or unknown effects before recognition with the exact
+    portable `code/rule/origin/effect` fields. Do not promote Perl rollout or public-current availability.
+  - [x] **INVOCATION / FALSEY-SAFE RUNTIME** — Bind one source-local transaction authority to handler-source
+    invocation guards shared by live and emitted parsers; allocate monotonic frames/generations, replace and
+    restore same-label recursive mark tables, synchronize real cursor/anonymous-boundary/invocation-mark state,
+    execute the static child exactly once, and carry accepted/missed status on a dedicated channel separate from
+    returned false, zero, empty, or undef payloads. Commit invalidates before retaining staged state/payload;
+    rollback restores before invalidation; unwind reports a missing terminal without leaking a live token.
+  - [x] **CURSOR-ONLY PROGRESS / STRUCTURED FAILURES** — Instrument accepted repetition iterations and direct or
+    mutual recursive re-entry while a recognition attempt is active. Require `end_offset > start_offset` for
+    those cases, allow a one-shot zero-width result, ignore binding/mark/transaction changes as progress, and
+    throw the neutral `recognition_zero_progress_repetition` or
+    `recognition_zero_progress_recursive_cycle` typed payload with its exact portable scalar fields in both live
+    and independently emitted execution.
+  - [x] **RED-FIRST FINAL-PATH PROOF** — Extend `t/recognition_transaction_perl_contract.t` before production
+    implementation to lock dedicated event arguments, static/dynamic operand and effect failures, falsey-safe
+    match/payload separation, commit/rollback cursor and mark behavior, recursive mark isolation, repetition and
+    recursive progress failures, unchanged compatibility save/restore, exact once-only child execution, and
+    standalone generated-source load/execute parity. First record the expanded deterministic RED boundary, then
+    make that same final-path consumer GREEN without adding it to ordinary/canonical discovery (admission remains
+    exclusively `.14.3.2.3`).
+  - [x] **LIVE DOCS / SIGNOFF / ATOMIC CLOSEOUT** — Add the durable Knowledge fact, synchronize MEMORY/CHANGES/
+    DEVELOPMENT_NOTES and the live mdBook with current private integration plus explicit dormancy, render and
+    inspect the book, run focused syntax/unit/final-path/generated-source/neutral/doctrine checks and the
+    definitive canonical local gate when warranted, commit exactly atomic 186/300 with the frozen subject, then
+    require zero-byte brief, clean pointer/Knowledge/residue/absent-book/status proof before `.14.3.2.3` may
+    activate task-tree-first; do not push before the 300-step batch closes.
+
+  Activation evidence 2026-08-10: private authority `.14.3.2.1` lands at full commit
+  `8138bea5718198e1a7ce89599c1ae84618dc5211` (`FUTURE-PARITY-BACKLOG.14.3.2.1 - add private Perl transaction
+  authority`) with first parent `59306f372e742a9e815c9b409d4502a8533b0fbd`. Its definitive canonical gate passes
+  every doctrine, 66/66 in both CLI option environments, RAM 71% below the 88% ceiling, and Phase 0 at
+  1,031/1,031 in 688 seconds. Post-commit proof records zero-byte `git_message_brief.txt`, activation pointer
+  `59306f37 == HEAD^1`, Knowledge 804 facts / 6,653 answers, no rendered book, no managed-run residue, and clean
+  status/diffs. This leaf's retrieval follows Knowledge cards
+  `recognition-transaction-neutral-contract`, `cursor-transaction-authored-contract`,
+  `perl-recognition-transaction-private-authority`, `perl-recognition-transaction-dormant-red`,
+  `actionir-lowering-stack`, `perl-actionir-ast-value-lowering-dispatcher`,
+  `perl-actionir-ast-statement-call-lowering`, `perl-generated-source-contract-v2`, and
+  `perl-rule-local-cursor-rollout-boundaries`; ADR 0056 §§3 and 11-13; and TOOLBOX lowering, descriptor,
+  generated-source, runtime-context, and neutral-oracle probes. Direct probes confirm the parser already accepts
+  the exact future spellings, but checkpoint/attempt/commit become unsupported-helper sentinels, rollback remains
+  raw, and the final-path consumer is deterministically 49-pass / one-fail / one-skip. The complete rule table is
+  the first seam with enough information for recursive effect closure; `_build_handler_preamble` and emitted raw
+  handler bodies are the common live/generated invocation seam; `_build_lmatch_extraction` plus explicit miss
+  sites are the payload-independent recognition channel; and the existing runtime wrapper's recursion guard must
+  delegate to the typed transaction progress owner only while a recognition attempt is active.
+
+  Expanded RED evidence 2026-08-10: the final-path consumer now freezes exact dedicated-event arguments, dynamic
+  operand and direct/transitive/unknown effect rejection, typed cursor-only repetition progress, and the complete
+  live/generated falsey-safe behavior before any production edit. `perl -Iperl -c` passes; the verbose consumer
+  remains deterministically 49 pass / one fail / one skip across 51 outer assertions, with the sole failure still
+  `missing nodes=[RECOGNITION_CHECKPOINT,RECOGNIZE_ONCE,RECOGNITION_COMMIT,RECOGNITION_ROLLBACK]`, unresolved
+  checkpoint/attempt/commit, and one raw rollback dependency. The expanded integration subtest remains wholly
+  dormant behind that one readiness boundary.
+
+  Implementation evidence 2026-08-10: one transaction scanner family emits the four exact dedicated events and
+  excludes their nested call/RHS text from legacy scanners. Contract lowering consumes canonical arguments without
+  evaluating the static operand. `RecognitionTransactionPolicy` mirrors the closed neutral 132-node inventory,
+  checks checkpoint/attempt/terminal order and structured terminal paths, rejects token escape/dynamic callees,
+  and unions named-rule/dependency effects to a recursive fixed point only after established descriptor validation.
+  `RecognitionTransactionRuntime` binds the unchanged private authority to source-local handler guards, replaces
+  and restores recursive same-label marks, synchronizes cursor/boundary/marks, carries child acceptance separately
+  from payload, and publishes completion records only during recognition scopes. Live and emitted handlers note
+  match/miss state, use acceptance rather than falsey payload truthiness, and enforce typed repetition/direct/mutual
+  recursive progress only inside recognition. Generated v2 source includes runtime support universally but carries
+  local recognition regexes only for transaction specs and rethrows typed errors unchanged.
+
+  Focused GREEN and compatibility-repair evidence 2026-08-10: the final-path consumer passes all 51 outer tests;
+  its nested integration body covers the four exact event records, dynamic/ordering/effect rejection, all eight
+  falsey/miss/commit/rollback fixtures, compatibility cursor controls, zero-width repetition, legal one-shot
+  zero-width, direct/mutual recursion, and two independently loaded generated parsers. Private authority plus final
+  path pass together, and generated-source plus repetition/nonrepetition trace tests pass. The first complete Phase
+  0 run reached all 1,031 tests and found exactly two compatibility regressions: the transaction hook intercepted
+  one malformed `dependency_refs` fixture before its established final-descriptor diagnostic, and transaction
+  contracts displaced stable `call`-first metadata. Moving policy after descriptor validation, failing closed on
+  malformed policy input, and restoring contract order reproduce both exact expected results; no transaction or
+  neutral semantic expectation changed. Neutral remains 132/246, token 8/17, graphs 6, marks 6, progress 8,
+  diagnostics 15, mutations 40, rollout 1/9, and public sequence 3/8/13.
+
+  Recomposition evidence 2026-08-10: the repaired complete Phase 0 rerun passes 1,031/1,031 in 749 wall-clock
+  seconds, including both previously failing compatibility owners. Public transaction governance passes at
+  132/246, 40 semantic mutations, and 3/8/13 sequence proof; Knowledge is synchronized at 805 facts / 6,664
+  question keys; MEMORY is exactly 60 lines; README remains 105 lines / 5,057 bytes; document history passes 34/34,
+  task partitions pass 26/26 over 511 stable ids, and task metadata is consistent. The real book builds to 79 files
+  / 14,364 KiB; deterministic rendered HTML inspection confirms separate coherent paragraphs for internal GREEN,
+  unadmitted Perl, and cross-runtime future status on all three governed pages, then the generated book is removed.
+  Artifact census retains only tracked diagnostic fixtures, project-local dependency/cache data, and active Rust
+  incremental caches; none is an unowned disposable artifact. Managed-run listing is empty. Definitive staged
+  canonical CI and atomic commit workflow remain.
+
+  Canonical-coverage repair evidence 2026-08-10: the first definitive gate passed all earlier doctrine, neutral,
+  typed-source, MCP, semantic-introspection, and portable regression stages, then stopped at exhaustive ActionIR
+  language coverage because the four new identifier-shaped Perl contract diagnostics were not classified. They
+  are grammar-owned intrinsics lowering to dedicated `RECOGNITION_*` nodes, not ordinary shared helper calls; adding
+  them to the Dart/Julia/Lua inventories would have falsely promoted a Perl-only unadmitted implementation. The
+  checker now classifies those exact four alongside the nine established compatibility/legacy/internal contracts,
+  requires them to exist in Perl and remain absent from all shared inventories, and again passes at 246 current
+  calls / 105 corpus + one named-mark fixture / 122 independently covered ordinary public Perl calls. The neutral
+  transaction checker remains exact at 132 = 128 + 4 nodes and 246 call rows.
+
+  Definitive signoff evidence 2026-08-10: the repaired staged tree passes all eight doctrines, tracked-input and
+  path audits, every focused neutral/private/typed-source/semantic/MCP/regression contract, repository-contained
+  six-family process I/O, Rust moved-root plus four outside-CWD anchors, and both primary CLI environments at
+  66/66. RAM is 58% below the 88% ceiling. Phase 0 passes 1,031/1,031 in 727 wall-clock seconds before exact
+  `[ci] local CI gate passed`. Knowledge regenerates at 805 facts / 6,665 question keys; the task partition remains
+  26/26 over 511 stable ids; MEMORY is 60 lines; README remains 105 lines / 5,057 bytes; the rendered 79-file /
+  14,364-KiB book has been inspected and removed. Atomic 186/300 is ready with the frozen subject; admission
+  `.14.3.2.3` remains pending until this commit's clean post-commit handoff.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.2.3`
   Status: `pending`

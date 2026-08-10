@@ -46,6 +46,21 @@ sub run_spec {
  return ($parser->(\$runtime_input), \%runtime_ctx)
 }
 
+sub compile_rejection {
+ my ($source) = @_;
+ my %runtime_ctx;
+ my $parser = LinkedSpec::Get(\$source, runtime_ctx_ref => \%runtime_ctx);
+ return ($parser, $runtime_ctx{last_error} // {})
+}
+
+sub transaction_event_by_kind {
+ my ($rewriter, $kind) = @_;
+ my @events = grep {
+  ref($_) eq 'HASH' && ($_->{kind} // '') eq $kind
+ } @{$rewriter->{canonical_action_ir_events} // []};
+ return $events[0]
+}
+
 sub transaction_spec {
  my (%args) = @_;
  my $terminal = $args{terminal};
@@ -249,6 +264,178 @@ SKIP: {
   unless $descriptor_ready;
 
  subtest 'neutral transaction behavior executes live and from standalone generated source' => sub {
+  is_deeply(
+   transaction_event_by_kind($rewriter, 'RECOGNITION_CHECKPOINT')->{args},
+   {token => 'tx'},
+   'checkpoint ActionIR owns the direct local token slot',
+  );
+  is_deeply(
+   transaction_event_by_kind($rewriter, 'RECOGNIZE_ONCE')->{args},
+   {matched => 'matched', token => 'tx', callee => 'Child', operand => 'call(Child)'},
+   'attempt ActionIR preserves one unevaluated static child operand and strict-boolean slot',
+  );
+  is_deeply(
+   transaction_event_by_kind($rewriter, 'RECOGNITION_COMMIT')->{args},
+   {payload => 'payload', token => 'tx'},
+   'commit ActionIR owns the staged-payload binding exception',
+  );
+  is_deeply(
+   transaction_event_by_kind($rewriter, 'RECOGNITION_ROLLBACK')->{args},
+   {token => 'tx'},
+   'rollback ActionIR is statement-only and owns no authored value',
+  );
+
+  subtest 'static operand and transitive effect barriers fail before recognition' => sub {
+   my @cases = (
+    {
+     id => 'dynamic operand',
+     code => 'recognition_static_rule_required',
+     source => <<'SPEC',
+Top::
+ I {
+  tx = recognition_checkpoint()
+  matched = recognize_once(tx, Child)
+  recognition_rollback(tx)
+  return(matched)
+ }
+ /never/
+Child::
+ /c/
+SPEC
+    },
+    {
+     id => 'copied token',
+     code => 'recognition_token_escape',
+     source => <<'SPEC',
+Top::
+ I {
+  tx = recognition_checkpoint()
+  copy = tx
+  matched = recognize_once(tx, call(Child))
+  recognition_rollback(tx)
+  return(matched)
+ }
+ /never/
+Child::
+ /c/
+SPEC
+    },
+    {
+     id => 'missing terminal',
+     code => 'recognition_terminal_required',
+     source => <<'SPEC',
+Top::
+ I {
+  tx = recognition_checkpoint()
+  matched = recognize_once(tx, call(Child))
+  return(matched)
+ }
+ /never/
+Child::
+ /c/
+SPEC
+    },
+    {
+     id => 'attempt before checkpoint',
+     code => 'recognition_token_expected',
+     source => <<'SPEC',
+Top::
+ I {
+  matched = recognize_once(tx, call(Child))
+  tx = recognition_checkpoint()
+  recognition_rollback(tx)
+  return(matched)
+ }
+ /never/
+Child::
+ /c/
+SPEC
+    },
+    {
+     id => 'terminal before attempt',
+     code => 'recognition_terminal_required',
+     source => <<'SPEC',
+Top::
+ I {
+  tx = recognition_checkpoint()
+  recognition_rollback(tx)
+  matched = recognize_once(tx, call(Child))
+  return(matched)
+ }
+ /never/
+Child::
+ /c/
+SPEC
+    },
+    {
+     id => 'direct forbidden output effect',
+     code => 'recognition_effect_forbidden',
+     effect => 'output',
+     source => <<'SPEC',
+Top::
+ I {
+  tx = recognition_checkpoint()
+  matched = recognize_once(tx, call(Child))
+  recognition_rollback(tx)
+  return(matched)
+ }
+ /never/
+Child::
+ I { say("forbidden") }
+ /c/
+SPEC
+    },
+    {
+     id => 'transitive forbidden binding effect',
+     code => 'recognition_effect_forbidden',
+     effect => 'binding_write',
+     source => <<'SPEC',
+Top::
+ I {
+  tx = recognition_checkpoint()
+  matched = recognize_once(tx, call(Child))
+  recognition_rollback(tx)
+  return(matched)
+ }
+ /never/
+Child::
+ I { return(call(Grandchild)) }
+ /c/
+Grandchild::
+ I { value = 1 }
+ /d/
+SPEC
+    },
+    {
+     id => 'unknown raw effect',
+     code => 'recognition_unknown_effect',
+     effect => 'unknown_or_raw',
+     source => <<'SPEC',
+Top::
+ I {
+  tx = recognition_checkpoint()
+  matched = recognize_once(tx, call(Child))
+  recognition_rollback(tx)
+  return(matched)
+ }
+ /never/
+Child::
+ I { future_unclassified_helper() }
+ /c/
+SPEC
+    },
+   );
+   for my $case (@cases) {
+    my ($parser, $error) = compile_rejection($case->{source});
+    ok(!defined($parser), "$case->{id} rejects during parser construction");
+    is($error->{code}, $case->{code}, "$case->{id} reports the portable code");
+    is($error->{effect}, $case->{effect}, "$case->{id} reports the classified effect")
+     if exists $case->{effect};
+    ok(defined($error->{rule}) && length($error->{rule}), "$case->{id} reports the owning rule");
+    ok(defined($error->{origin}) && length($error->{origin}), "$case->{id} reports the authored origin");
+   }
+  };
+
   my %payload_source = (
    commit_false => 'false',
    commit_zero  => '0',
@@ -301,6 +488,125 @@ SPEC
    'save/restore remains an independent compatibility stack rather than a transaction token',
   );
   ok(!exists($compatibility_ctx->{last_error}), 'compatibility cursor-stack diagnostics remain clear');
+
+  my $zero_width_repetition_source = <<'SPEC';
+Top::
+ I {
+  tx = recognition_checkpoint()
+  matched = recognize_once(tx, call(Child))
+  recognition_rollback(tx)
+  return(matched)
+ }
+ /never/
+Child:+
+ /(?=c)/ -> Child { return("zero") }
+SPEC
+  my ($zero_width_parser, $zero_width_ctx) = compile_rejection($zero_width_repetition_source);
+  ok(ref($zero_width_parser) eq 'CODE', 'zero-width repetition transaction compiles before runtime progress validation');
+  if (ref($zero_width_parser) eq 'CODE') {
+   my $input = 'c';
+   my $run_ok = eval { $zero_width_parser->(\$input); 1 };
+   ok(!$run_ok, 'accepted zero-width repetition rejects at runtime');
+   my $error = $@;
+   is(ref($error), 'LinkedSpec::RecognitionTransaction::Error', 'progress rejection remains a typed transaction error');
+   is($error->{code}, 'recognition_zero_progress_repetition', 'repetition rejection reports its portable code');
+   is($error->{start_offset}, 0, 'repetition rejection reports its start offset');
+   is($error->{end_offset}, 0, 'repetition rejection reports its end offset');
+  }
+
+  my $one_shot_zero_width_source = <<'SPEC';
+Top::
+ I {
+  tx = recognition_checkpoint()
+  matched = recognize_once(tx, call(Child))
+  recognition_rollback(tx)
+  return(array(matched, cursor_pos()))
+ }
+ /never/
+Child::AND
+ /(?=c)/
+SPEC
+  my ($one_shot_result, $one_shot_ctx) = run_spec(
+   $one_shot_zero_width_source,
+   'c',
+   'one-shot zero-width recognition',
+  );
+  is_deeply($one_shot_result, [1, 0], 'one-shot zero-width recognition remains legal');
+  ok(!exists($one_shot_ctx->{last_error}), 'one-shot zero-width recognition leaves diagnostics clear');
+
+  my @recursive_progress_cases = (
+   {
+    id => 'direct recursive zero progress',
+    cycle => 'Top->Child->Child',
+    source => <<'SPEC',
+Top::
+ I {
+  tx = recognition_checkpoint()
+  matched = recognize_once(tx, call(Child))
+  recognition_rollback(tx)
+  return(matched)
+ }
+ /never/
+Child::
+ I { return(call(Child)) }
+ /(?=c)/
+SPEC
+   },
+   {
+    id => 'mutual recursive zero progress',
+    cycle => 'Top->Child->Other->Child',
+    source => <<'SPEC',
+Top::
+ I {
+  tx = recognition_checkpoint()
+  matched = recognize_once(tx, call(Child))
+  recognition_rollback(tx)
+  return(matched)
+ }
+ /never/
+Child::
+ I { return(call(Other)) }
+ /(?=c)/
+Other::
+ I { return(call(Child)) }
+ /(?=c)/
+SPEC
+   },
+  );
+  for my $case (@recursive_progress_cases) {
+   my ($parser, $ctx) = compile_rejection($case->{source});
+   ok(ref($parser) eq 'CODE', "$case->{id} compiles before runtime progress validation");
+   next unless ref($parser) eq 'CODE';
+   my $input = 'c';
+   my $ok = eval { $parser->(\$input); 1 };
+   my $error = $@;
+   ok(!$ok, "$case->{id} rejects at runtime");
+   is(ref($error), 'LinkedSpec::RecognitionTransaction::Error', "$case->{id} remains typed");
+   if (ref($error) eq 'LinkedSpec::RecognitionTransaction::Error') {
+    is($error->{code}, 'recognition_zero_progress_recursive_cycle', "$case->{id} reports its portable code");
+    is($error->{cycle}, $case->{cycle}, "$case->{id} reports the exact active cycle");
+    is($error->{start_offset}, 0, "$case->{id} reports its start offset");
+    is($error->{end_offset}, 0, "$case->{id} reports its end offset");
+   }
+  }
+
+  my $generated_recursive_source = LinkedSpec::emit_generated_source(
+   \$recursive_progress_cases[1]{source},
+   source_identity => 'recognition-transaction-mutual-recursion.spec',
+  );
+  my $recursive_package = 'LinkedSpec::RecognitionTransactionRecursiveGenerated';
+  my $recursive_loaded = eval "package $recursive_package; $generated_recursive_source; 1";
+  ok($recursive_loaded, 'mutual-recursion transaction source loads independently') or diag($@);
+  if ($recursive_loaded) {
+   no strict 'refs';
+   my $input = 'c';
+   my $ok = eval { &{$recursive_package . '::Execute'}(\$input); 1 };
+   my $error = $@;
+   ok(!$ok, 'independent mutual-recursion execution rejects zero progress');
+   is(ref($error), 'LinkedSpec::RecognitionTransaction::Error', 'independent recursive progress stays typed');
+   is($error->{code}, 'recognition_zero_progress_recursive_cycle', 'independent recursive progress keeps its code')
+    if ref($error) eq 'LinkedSpec::RecognitionTransaction::Error';
+  }
 
   my $emitted_fixture = transaction_spec(terminal => 'commit', payload => 'false');
   my $generated_source = LinkedSpec::emit_generated_source(

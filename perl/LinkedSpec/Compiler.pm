@@ -102,6 +102,31 @@ sub _generated_source_entry_rule_rows {
  return \@rows
 }
 
+sub _recognition_regex_source_expression {
+ my ($compiled_spec_state, $label) = @_;
+ my $info = _call_compiler_state('compiled_spec_state_rule_info', $compiled_spec_state, $label);
+ return '[]' unless ref($info) eq 'HASH' && ref($info->{re}) eq 'ARRAY';
+ my @patterns = map {
+  my $literal = _quote_generated_source_string(''.$_);
+  'do { my $linkedspec_pattern = '.$literal.'; qr/$linkedspec_pattern/ }'
+ } @{$info->{re}};
+ return '['.join(', ', @patterns).']'
+}
+
+sub _compiled_spec_uses_recognition_transactions {
+ my ($compiled_spec_state) = @_;
+ for my $row (@{_call_compiler_state('compiled_spec_state_rule_rows', $compiled_spec_state)}) {
+  my $info = $row->[1];
+  my $hits = ref($info) eq 'HASH'
+   && ref($info->{meta}) eq 'HASH'
+   && ref($info->{meta}{action_rewriter}) eq 'HASH'
+   ? $info->{meta}{action_rewriter}{canonical_action_ir_hits}
+   : undef;
+  return 1 if ref($hits) eq 'HASH' && ($hits->{RECOGNIZE_ONCE} // 0);
+ }
+ return 0
+}
+
 sub _generated_source_plan_literal {
  my ($plan) = @_;
  return "[\n" . join('', map {
@@ -134,6 +159,7 @@ sub _generated_source_preamble {
   . "use LinkedSpec::RuntimeSemanticObservation ();\n"
   . "use LinkedSpec::Numeric ();\n"
   . "use LinkedSpec::UnicodeCaseMapping ();\n"
+  . "use LinkedSpec::RecognitionTransactionRuntime ();\n"
   . "sub _trace_runtime_mark_event { return LinkedSpec::GeneratedSource::trace_mark_event(\@_) }\n"
   . "our \$LINKEDSPEC_GENERATED_SOURCE_CONTRACT = 'linkedspec-generated-source-v2';\n"
   . "our \$LINKEDSPEC_GENERATED_SOURCE_FORMAT = 2;\n"
@@ -353,6 +379,8 @@ sub Execute {
     \$execution_error,
    )
   );
+ die \$execution_error
+  if !\$ok && LinkedSpec::RecognitionTransactionRuntime::is_error(\$execution_error);
  die LinkedSpec::GeneratedSource::new_error(
   stage => 'execute_generated',
   code => 'generated_execution_failed',
@@ -1463,6 +1491,33 @@ if ($validate_dependency_regex_references_error) {
  _trace_exit($trace_scope, { status => 'error', stage => 'validate_dependency_regex_references' }, DUMP_LOW);
  return undef;
 }
+
+my $recognition_transaction_diagnostic = eval {
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::RecognitionTransactionPolicy');
+ LinkedSpec::RecognitionTransactionPolicy::validate_rule_rows(
+  _call_compiler_state('compiled_spec_state_rule_rows', $compiled_spec_state),
+ )
+};
+my $recognition_transaction_policy_error = $@;
+if ($recognition_transaction_policy_error || ref($recognition_transaction_diagnostic) eq 'HASH') {
+ my $diagnostic = ref($recognition_transaction_diagnostic) eq 'HASH'
+  ? $recognition_transaction_diagnostic
+  : {};
+ my $detail = $recognition_transaction_policy_error || ($diagnostic->{code} // 'recognition transaction policy rejected');
+ _call_runtime_ctx(
+  'set_runtime_ctx_last_error_for_owner',
+  $runtime_ctx,
+  'compiler_pipeline',
+  stage => 'recognition_transaction_policy',
+  summary => 'Recognition transaction policy rejected the compiled rule table',
+  detail => $detail,
+  (map { exists($diagnostic->{$_}) ? ($_ => $diagnostic->{$_}) : () }
+   qw/code rule origin effect operand escape operation count cycle start_offset end_offset/),
+ );
+ _trace_log_output(DUMP_NONE, 'CRITICAL ERROR', 'Recognition transaction policy rejected the compiled rule table');
+ _trace_exit($trace_scope, { status => 'error', stage => 'recognition_transaction_policy' }, DUMP_LOW);
+ return undef;
+}
  my $final_descriptor = _call_compiler_state('compiled_descriptor_state_to_legacy_descriptor', $final_descriptor_state);
 
  my $entry_selection = LinkedSpec::EntryRuleSelection::select_entry_rule(
@@ -1506,6 +1561,19 @@ if ($validate_dependency_regex_references_error) {
     $runtime_ctx,
     $prefix . ' ' . $label . ' => ' . $slot_rows,
    );
+  }
+  if (_compiled_spec_uses_recognition_transactions($compiled_spec_state)) {
+   _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, "\n },\n recognition_regex_map => {\n");
+   my @recognition_labels = @{_call_compiler_state('compiled_spec_state_compiled_rule_order', $compiled_spec_state)};
+   for (my $i = 0; $i < @recognition_labels; ++$i) {
+    my $label = $recognition_labels[$i];
+    my $prefix = $i ? ",\n" : '';
+    _call_runtime_ctx(
+     'emit_runtime_ctx_parser_source_line',
+     $runtime_ctx,
+     $prefix.' '.$label.' => '._recognition_regex_source_expression($compiled_spec_state, $label),
+    );
+   }
   }
   _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, "\n }\n};\n");
   _call_runtime_ctx(

@@ -52,6 +52,12 @@
 > and fail-closed over 128 current + four future node rows, 246 call rows, and 40 mutations. The authored forms
 > remain unavailable until each runtime and public admission lands; neutral proof is not backend support.
 >
+> Perl now has an internal end-to-end implementation behind that boundary: dedicated ActionIR, recursive static
+> effect validation, invocation-local cursor/boundary/marks, falsey-safe staging, typed cursor-progress failures,
+> and independently loaded generated-source execution are GREEN in the explicit final-path consumer. That consumer
+> remains outside ordinary/canonical discovery until `.14.3.2.3`; do not project this proof as Perl admission or
+> alter the neutral 1/9 rollout state.
+>
 > Any cursor transaction is one explicit
 > recognition attempt over invocation-local cursor/boundary/marks only; it adds no search tree and cannot undo
 > actions, AST/user state, output/diagnostics, registry work, or host effects. Recursive boundaries remain read-only,
@@ -211,9 +217,10 @@ same driver to Lua and 5x2x61.
 The capability audit now derives the same 246 current ActionIR call names from Dart, Julia, and Lua. Every name
 appears in this book and in the governed occurrence sources: the 105-fixture neutral corpus plus the exact
 complete-named-mark fixture. The strict checker independently derives 122 public identifier-shaped calls from the
-Perl ActionIR contract registry, requires every one in each backend inventory, and rejects nine classified
-compatibility/legacy/internal names. Dart's, Julia's, and Lua's separately rolled-out seven source-boundary
-compatibility aliases are checked with their canonical targets against the neutral typed-source contract; they do
+Perl ActionIR contract registry, requires every one in each backend inventory, and rejects thirteen classified
+names: nine compatibility/legacy/internal contracts plus the four grammar-owned recognition intrinsics that lower
+to dedicated nodes rather than shared helper calls. Dart's, Julia's, and Lua's separately rolled-out seven
+source-boundary compatibility aliases are checked with their canonical targets against the neutral typed-source contract; they do
 not silently widen the shared 246-name inventory. Lua executes the mappings through one shared runtime on PUC Lua
 and LuaJIT across native, loaded, reconstructed, generated-plan, and emitted carriers. This supersedes two
 historical blind spots: aligned lists first omitted

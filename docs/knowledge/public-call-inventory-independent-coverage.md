@@ -12,7 +12,7 @@ answers:
 date: 2026-07-15
 status: current
 tags: [actionir, inventory, coverage, parity, marks, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.17.5 admits the exact seven complete named-mark helpers into equal 246-name Dart/Julia/Lua inventories. tools/check_language_capability_coverage.pl combines 105 corpus sources with complete_named_mark_contract.json, independently derives 131 identifier-shaped Perl contracts, subtracts nine classified compatibility/legacy/internal contracts, and requires the remaining 122 in every inventory. A simultaneous clear_mark deletion from all three inventories is reported by the exact-family and independent-public checks."
+evidence: "FUTURE-PARITY-BACKLOG.17.5 admits the exact seven complete named-mark helpers into equal 246-name Dart/Julia/Lua inventories. FUTURE-PARITY-BACKLOG.14.3.2.2 advances the Perl lowering registry to 135 identifier-shaped diagnostics by adding four grammar-owned recognition intrinsics with dedicated ActionIR nodes. tools/check_language_capability_coverage.pl combines 105 corpus sources with complete_named_mark_contract.json, subtracts thirteen exact compatibility/legacy/internal/intrinsic classifications, and still requires the remaining 122 ordinary public calls in every inventory. A simultaneous clear_mark deletion from all three inventories is reported by the exact-family and independent-public checks."
 evidence_update_2026_08_07_dart_source_aliases: "FUTURE-PARITY-BACKLOG.14.2.3.0.1 keeps Dart's seven source-boundary compatibility spellings in a separate private inventory instead of widening the 246 names shared with Julia/Lua. The same checker derives their canonical targets from Dart and requires the exact seven name/target pairs to equal typed_source_location_contract.json."
 reverify: "perl tools/check_language_capability_coverage.pl --report && bash tools/run_python_project_data.sh tools/check_complete_named_mark_contract.py"
 ---
@@ -36,12 +36,14 @@ the 246-name shared Dart/Julia/Lua inventory. The checker derives their exact Da
 all seven name/target pairs to equal the neutral typed-source contract, so compatibility parity cannot drift while
 the common vocabulary remains honest.
 
-The independent Perl set starts with 131 identifier-shaped contracts and excludes exactly nine names:
+The independent Perl set starts with 135 identifier-shaped contracts and excludes exactly thirteen names.
 `entry_named_map` and `match_named_map` are compatibility aliases; `capture` and `capture_macro` are legacy; and
 `array_append_operator`, `array_end_mutation_method`, `hash_index_assignment_operator`,
 `scalar_assignment_operator`, and `value_drop` are internal lowering operations. The checker also requires those
-nine classifications to remain present in Perl and absent from backend public inventories, so disappearance or
-accidental admission fails loudly.
+operations plus `recognition_checkpoint`, `recognize_once`, `recognition_commit`, and `recognition_rollback` to
+remain present in Perl and absent from backend public helper inventories. The recognition forms are grammar-owned
+intrinsics with dedicated ActionIR nodes, not ordinary calls; disappearance or accidental helper admission fails
+loudly.
 
 Mutation proof removes `clear_mark` from all three backend inventories simultaneously while retaining their exact
 seven-name family views. Backend equality still holds, but the report identifies `clear_mark` through both the

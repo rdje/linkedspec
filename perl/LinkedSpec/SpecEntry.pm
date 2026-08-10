@@ -17,6 +17,7 @@ use LinkedSpec::OwnerDispatch ();
 use LinkedSpec::HandlerVariantEmitter ();
 use LinkedSpec::RuntimeDiagnosticOutput ();
 use LinkedSpec::RuntimeSemanticObservation ();
+use LinkedSpec::RecognitionTransactionRuntime ();
 
 our $BACKEND;
 
@@ -123,6 +124,9 @@ my $IPOS        = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_po
  $info, $STRING, pos $$STRING, "handler_entry"
 );
 $$info{marks} = {} unless ref($$info{marks}) eq "HASH";
+my $__ls_recognition_invocation = LinkedSpec::RecognitionTransactionRuntime::enter_invocation(
+ $descr, $STRING, $info, \$IPOS, "'.$label.'"
+);
 
 my @'.$label.';
 
@@ -357,6 +361,8 @@ sub _build_runtime_handler {
    ? ("$descr\0$label\0" . (defined($progress_pos) ? $progress_pos : -1))
    : undef;
   if (defined($progress_key) && $__ls_recursion_active{$progress_key}) {
+   LinkedSpec::RecognitionTransactionRuntime::reject_recursive_zero_progress($descr, $STRING, $label)
+    if LinkedSpec::RecognitionTransactionRuntime::recognition_active($descr, $STRING);
    _trace_decision("rule_handler_forward_progress:$label", 0,
     "non-progressing recursive re-entry at pos " . (defined($progress_pos) ? $progress_pos : -1) . "; cut to terminate", DUMP_NONE);
    _trace_exit($runtime_scope, { returned_defined => 0, return_ref => '', return_size => undef }, DUMP_HIGH);
@@ -372,6 +378,7 @@ sub _build_runtime_handler {
   my $eval_error = $@;
   delete $__ls_recursion_active{$progress_key} if defined($progress_key);
   unless ($eval_ok) {
+   die $eval_error if LinkedSpec::RecognitionTransactionRuntime::is_error($eval_error);
    if (LinkedSpec::RuntimeDiagnosticOutput::is_marked_control_error($descr, $eval_error)
     || LinkedSpec::RuntimeSemanticObservation::is_marked_control_error($descr, $eval_error)) {
     _trace_decision("rule_handler_control:$label", 1, $eval_error, DUMP_DEBUG);

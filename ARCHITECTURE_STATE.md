@@ -73,6 +73,16 @@ consumers pass, and the route registry remains 20 surfaces / 62 routes / 32/32 w
 empty debt metadata. The program is composition-closed. These storage migrations change documentation governance
 only; they change no language, compiler, runtime, backend, fixture, CLI, protocol, or project-data root.
 
+- `2026-08-10 internally integrated Perl recognition transactions`: `FUTURE-PARITY-BACKLOG.14.3.2.2` adds four
+  dedicated scanner/lowering nodes, exact local-slot/static-callee event fields, and a post-descriptor closed
+  132-node effect fixed point. Live and emitted handlers bind the unchanged private authority to real cursor,
+  anonymous-boundary, and invocation-mark state; child acceptance remains separate from falsey payloads.
+  Accepted repetition and recursive-cycle edges require cursor advance only while recognition is active and throw
+  portable typed progress errors; one-shot zero-width recognition stays legal. Generated v2 source carries
+  transaction regexes only when used and rethrows typed errors unchanged. The final-path consumer is GREEN but
+  remains absent from ordinary/canonical discovery, so Perl admission/public-current truth stays RED until
+  `.14.3.2.3`.
+
 - `2026-08-10 private Perl recognition-transaction authority`: `FUTURE-PARITY-BACKLOG.14.3.2.1` adds one
   inside-out `LinkedSpec::RecognitionTransaction` owner with opaque scalar authority/frame/token handles.
   Monotonic invocation ids and mark generations isolate recursive same-label frames; tokens bind source,

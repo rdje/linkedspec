@@ -65,20 +65,23 @@ else:
     restore(checkpoint)
 ```
 
-#### What the current engines do today
+#### What the current admitted engines do today
 
-The accepted future transaction spelling is not executable yet. `save_cursor()` and `restore_cursor()` are older
-cursor-only LIFO compatibility controls. They do not save the anonymous boundary or named marks, carry an
-invocation/source owner, or diagnose reuse and escape. They are not aliases for a transaction token.
+No current parser recognizes the four forms as an admitted capability. The Perl lane now has an internally
+executable implementation proof, but its final-path consumer is deliberately outside ordinary/canonical discovery
+until the next admission leaf. `save_cursor()` and `restore_cursor()` remain older cursor-only LIFO compatibility
+controls. They do not save the anonymous boundary or named marks, carry an invocation/source owner, or diagnose
+reuse and escape. They are not aliases for a transaction token.
 
 Named marks are currently isolated by rule label for one parser execution. A `Top` mark and a `Child` mark with the
 same name are independent. Recursive re-entry of `Top`, however, uses the same `Top` bucket; a child invocation can
-overwrite its parent's same-named mark. Transaction work will migrate that lifetime to explicit invocation frames.
+overwrite its parent's same-named mark in ordinary parsing. The internal Perl transaction route temporarily installs
+one invocation-local bucket and restores the parent bucket on exit; this has not yet been admitted as public behavior.
 
-Current recursion and repetition protect the process but do not yet expose the future portable diagnostics. A
-direct no-consume recursive call is cut and returns no value; its trace explains the cutoff, but `last_error` stays
-empty. A bounded repeated zero-width match retains one accepted hit and then stops. These are current compatibility
-facts, not the final progress contract.
+Ordinary recursion and repetition retain their established process protection. A direct no-consume recursive call
+is cut and returns no value; its trace explains the cutoff, but `last_error` stays empty. A bounded repeated
+zero-width match retains one accepted hit and then stops. Only the internal Perl transaction scope currently throws
+the future typed repetition or recursive-cycle error, and that proof remains unadmitted.
 
 #### What the transaction-safety audit freezes
 
@@ -118,7 +121,9 @@ matched or unmatched attempt may be rolled back explicitly.
 The token cannot be copied, compared, returned, put in an array or harray, passed to a function/codeblock, retried,
 or used by another invocation or source. Every path performs one attempt and one commit or rollback before ordinary
 effects. The four forms are dedicated ActionIR nodes, not ordinary helpers, host exception syntax, or aliases for
-the compatibility cursor stack.
+the compatibility cursor stack. Consequently they are not added to the aligned 246-name ordinary helper-call
+inventory; exhaustive coverage classifies the four exact intrinsic names separately while still requiring all 122
+ordinary public Perl calls in every backend inventory.
 
 The closed recognition-safe effect set is pure value work, immutable source reads, bounded `if`/`switch` control,
 statically named rule recognition, transaction state, matcher-owned cursor advance, anonymous-boundary writes,
@@ -136,22 +141,22 @@ drift mutations:
 bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py
 ```
 
-That command proves the target semantics only. No current parser recognizes the four forms, and no backend may
-claim transaction support until its separate behavior and admission leg lands.
+That command proves the target semantics only. No backend may claim transaction support until its separate
+behavior and admission leg lands.
 
-The Perl lane now has a canonically tested private state foundation in
-`perl/LinkedSpec/RecognitionTransaction.pm`. It owns opaque invocation frames and tokens, monotonic mark
-generations, snapshots, falsey-safe staged payloads, and restore-before-invalidate misuse handling. The public
-facade, compiler, ActionIR lowering, live runtime, and generated source do not load it yet; the final-path Perl
-consumer therefore remains deliberately RED at the same four missing nodes. This private foundation is an
-implementation prerequisite, not current authored syntax or a completed Perl rollout leg.
+The Perl lane now has both its private state foundation and an internal end-to-end implementation. Four dedicated
+ActionIR nodes preserve token/result/static-callee arguments; a recursive effect fixed point rejects unsafe callees
+before recognition; live and independently emitted handlers use invocation-local marks, falsey-safe payload staging,
+and cursor-only progress diagnostics. The final-path consumer is GREEN, including generated-source execution, but
+remains deliberately absent from ordinary/canonical discovery. This is an implementation proof, not current
+authored syntax or a completed Perl rollout leg.
 
 The same checker fails closed over three public transaction pages, eight forbidden claims, and thirteen sequence
 mutations. This guards the milestone order without changing the neutral artifact's forty semantic mutations.
 
 This section describes an accepted future contract, not a current feature. The neutral artifact/checker is
 executable, but Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT must each be admitted independently before the form
-becomes portable public behavior.
+becomes portable public behavior. Perl's internal GREEN proof does not advance the neutral 1/9 rollout ledger.
 
 Only cursor/source-boundary state participates. A rollback cannot undo variables, AST mutation, diagnostic or
 output events, parser-registry work, external calls, or host effects. An uncommitted path must therefore remain
@@ -221,9 +226,9 @@ source executes independently on both ABIs. The extra 11 mutations reject topolo
 The unchanged `.14.2.7` recomposition reruns that authority and closes the six-runtime internal value/helper
 implementation slice. It does not add an authored value or advance the 8-complete/6-pending public rollout.
 
-There is still no public `Position` or `Span` authored value, executable transaction behavior, recursive
-observation API, or span-native parser dispatch. Exact future transaction spelling is accepted but unavailable;
-implementation remains owned by later leaves. The combined recurring/public
+There is still no public `Position` or `Span` authored value, admitted transaction behavior, recursive observation
+API, or span-native parser dispatch. Exact future transaction spelling is accepted but unavailable as a current
+capability; Perl's internal implementation still awaits admission and the other runtimes remain later leaves. The combined recurring/public
 no-drift rollout row remains pending for final closeout `FUTURE-PARITY-BACKLOG.14.8`, so recurring composition does
 not change the current 8 complete / 6 pending ledger.
 

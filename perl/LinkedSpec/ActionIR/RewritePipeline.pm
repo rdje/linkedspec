@@ -484,6 +484,7 @@ sub _lower_action_code_from_canonical_ir {
    next;
   }
 
+  local $lower_ctx->{event} = $event;
   my $lowered_stmt = $rewrite_by_id{$contract_id}{apply}->($source_stmt, $lower_ctx);
   if (!(defined($lowered_stmt) && length($lowered_stmt)) || $lowered_stmt eq $source_stmt) {
    LinkedSpec::ActionIR::Trace::decision(

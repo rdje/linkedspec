@@ -555,12 +555,25 @@ sub _build_bcodes_dispatch_block {
 # Purpose : Common LMATCH/LMATCH_LIST/LMATCH_HASH/LINDEX/LSPOS extraction block.
 #------------------------------------------------------------------------------
 sub _build_lmatch_extraction {
+    my (%args) = @_;
+    my $label = _quote_perl_string($args{label});
+    my $handler_kind = _quote_perl_string($args{handler_kind});
     return '
    my $LMATCH      = $$minfo{match};
    my @LMATCH_LIST = @{$$minfo{match_list} // []};
    my %LMATCH_HASH = %{$$minfo{match_hash} // {}};
    my $LINDEX      = $$minfo{index};
-   my $LSPOS       = pos $$STRING;';
+   my $LSPOS       = pos $$STRING;
+   LinkedSpec::RecognitionTransactionRuntime::note_match(
+    $descr, $STRING, ' . $label . ', ' . $handler_kind . ',
+    $LSPOS - length($LMATCH // ""), $LSPOS
+   );';
+}
+
+sub _recognition_miss_statement {
+    my ($label) = @_;
+    return 'LinkedSpec::RecognitionTransactionRuntime::note_miss($descr, $STRING, '
+        . _quote_perl_string($label) . '); '
 }
 
 sub _quote_perl_string {
@@ -668,7 +681,7 @@ sub _emit_default_handler {
     my $handler_kind = $ir->{kind};
     my $trace_enabled = _trace_branches_enabled($ir);
     my $match_expr = _linkedre_or_expr(%$ir, label => $label);
-    my $lxcode     = $ir->{lxcode} || 'return undef';
+    my $lxcode     = _recognition_miss_statement($label) . ($ir->{lxcode} || 'return undef');
     my $lscode     = $ir->{lscode} || '';
     my $lecode     = $ir->{lecode} || '';
     my $acodes     = _build_acodes_dispatch_block(
@@ -677,7 +690,7 @@ sub _emit_default_handler {
         handler_kind => $handler_kind,
         trace_enabled => $trace_enabled,
     );
-    my $lmatch     = _build_lmatch_extraction();
+    my $lmatch     = _build_lmatch_extraction(label => $label, handler_kind => $handler_kind);
     my $match_trace = _trace_branch_statement(
         enabled => $trace_enabled,
         indent => '  ',
@@ -739,7 +752,7 @@ sub _emit_and_bcode_handler {
     my $label      = $ir->{label};
     my $handler_kind = $ir->{kind};
     my $trace_enabled = _trace_branches_enabled($ir);
-    my $lxcode     = $ir->{lxcode} || 'return undef';
+    my $lxcode     = _recognition_miss_statement($label) . ($ir->{lxcode} || 'return undef');
     my $lecode     = $ir->{lecode} || 'push @' . $label . '_collect, $' . $label;
     my $ecode      = $ir->{ecode}  || 'return \@' . $label . '_collect';
     my $bcodes     = _build_bcodes_dispatch_block(
@@ -755,7 +768,7 @@ sub _emit_and_bcode_handler {
         label => $label,
         handler_kind => $handler_kind,
         branch => 'bcode_child_result',
-        taken_expr => '$' . $label,
+        taken_expr => 'LinkedSpec::RecognitionTransactionRuntime::result_is_match($descr, $STRING, $' . $label . ')',
         meta => [
             [ call => '$current_call' ],
             [ pos => 'pos($$STRING)' ],
@@ -769,7 +782,7 @@ sub _emit_and_bcode_handler {
     my $match_section = '';
     if (ref($ir->{REs}) eq 'ARRAY' && @{$ir->{REs}}) {
         my $match_expr = _linkedre_or_expr(%$ir, label => $label);
-        my $lmatch = _build_lmatch_extraction();
+        my $lmatch = _build_lmatch_extraction(label => $label, handler_kind => $handler_kind);
         my $match_trace = _trace_branch_statement(
             enabled => $trace_enabled,
             indent => '  ',
@@ -856,7 +869,7 @@ sub _emit_and_single_acode_handler {
     my $handler_kind = $ir->{kind};
     my $trace_enabled = _trace_branches_enabled($ir);
     my $match_expr = _linkedre_required_slot_expr(%$ir, label => $label, index_expr => '0');
-    my $lxcode     = $ir->{lxcode} || 'return undef';
+    my $lxcode     = _recognition_miss_statement($label) . ($ir->{lxcode} || 'return undef');
     my $lscode     = $ir->{lscode} || '';
     my $lecode     = $ir->{lecode} || '';
     # Edge acodes are emitted verbatim (already lowered): a `return(...)` edge lowers
@@ -872,7 +885,7 @@ sub _emit_and_single_acode_handler {
         handler_kind => $handler_kind,
         trace_enabled => $trace_enabled,
     );
-    my $lmatch     = _build_lmatch_extraction();
+    my $lmatch     = _build_lmatch_extraction(label => $label, handler_kind => $handler_kind);
     my $match_trace = _trace_branch_statement(
         enabled => $trace_enabled,
         indent => ' ',
@@ -980,7 +993,7 @@ sub _emit_and_acode_seq_handler {
     my $match_expr  = $uses_local_structural_slots
         ? _linkedre_local_structural_slot_expr(%$ir, label => $label, index_expr => '$idx')
         : _linkedre_required_slot_expr(%$ir, label => $label, index_expr => '$idx');
-    my $lxcode      = $ir->{lxcode} || 'return undef';
+    my $lxcode      = _recognition_miss_statement($label) . ($ir->{lxcode} || 'return undef');
     my $lscode      = $ir->{lscode} || '';
     my $lecode      = $ir->{lecode} || '';
     my $acode_count = $ir->{acode_count};
@@ -1004,7 +1017,7 @@ sub _emit_and_acode_seq_handler {
         trace_enabled => $trace_enabled,
         dispatch_indices => $ir->{acode_dispatch_indices},
     );
-    my $lmatch      = _build_lmatch_extraction();
+    my $lmatch      = _build_lmatch_extraction(label => $label, handler_kind => $handler_kind);
     my $match_trace = _trace_branch_statement(
         enabled => $trace_enabled,
         indent => '  ',
@@ -1094,7 +1107,7 @@ sub _emit_or_bcode_handler {
         label => $label,
         handler_kind => $handler_kind,
         branch => 'bcode_child_result',
-        taken_expr => '$' . $label,
+        taken_expr => 'LinkedSpec::RecognitionTransactionRuntime::result_is_match($descr, $STRING, $' . $label . ')',
         meta => [
             [ call => '$current_call' ],
             [ pos => 'pos($$STRING)' ],
@@ -1140,14 +1153,14 @@ sub _emit_or_acode_handler {
     my $handler_kind = $ir->{kind};
     my $trace_enabled = _trace_branches_enabled($ir);
     my $match_expr = _linkedre_or_expr(%$ir, label => $label);
-    my $lxcode     = $ir->{lxcode} || 'return undef';
+    my $lxcode     = _recognition_miss_statement($label) . ($ir->{lxcode} || 'return undef');
     my $acodes     = _build_acodes_dispatch_block(
         $ir->{acodes_ref},
         label => $label,
         handler_kind => $handler_kind,
         trace_enabled => $trace_enabled,
     );
-    my $lmatch     = _build_lmatch_extraction();
+    my $lmatch     = _build_lmatch_extraction(label => $label, handler_kind => $handler_kind);
     my $match_trace = _trace_branch_statement(
         enabled => $trace_enabled,
         indent => ' ',
@@ -1227,7 +1240,7 @@ sub _emit_rep_bcode_handler {
         label => $label,
         handler_kind => $handler_kind,
         branch => 'iteration_result',
-        taken_expr => '$or_ret',
+        taken_expr => 'LinkedSpec::RecognitionTransactionRuntime::result_is_match($descr, $STRING, $or_ret)',
         meta => [
             [ loop_count => '$ccount' ],
             [ rep_min => '$min' ],
@@ -1326,6 +1339,9 @@ sub _emit_rep_bcode_handler {
     }
 
     my $loop_end_pos = defined(pos $$STRING) ? pos $$STRING : -1;
+    LinkedSpec::RecognitionTransactionRuntime::assert_repetition_progress(
+     $descr, $STRING, ' . _quote_perl_string($label) . ', $loop_start_pos, $loop_end_pos
+    );
     if (' . $zero_progress_condition . ') {
      if (' . $zero_progress_min_condition . ') {
       ' . $excode . '
@@ -1378,7 +1394,7 @@ sub _emit_rep_and_bcode_handler {
         label => $label,
         handler_kind => $handler_kind,
         branch => 'iteration_result',
-        taken_expr => '$and_ret',
+        taken_expr => 'LinkedSpec::RecognitionTransactionRuntime::result_is_match($descr, $STRING, $and_ret)',
         meta => [
             [ loop_count => '$ccount' ],
             [ rep_min => '$min' ],
@@ -1476,6 +1492,9 @@ sub _emit_rep_and_bcode_handler {
     }
 
     my $loop_end_pos = defined(pos $$STRING) ? pos $$STRING : -1;
+    LinkedSpec::RecognitionTransactionRuntime::assert_repetition_progress(
+     $descr, $STRING, ' . _quote_perl_string($label) . ', $loop_start_pos, $loop_end_pos
+    );
     if (' . $zero_progress_condition . ') {
      if (' . $zero_progress_min_condition . ') {
       ' . $excode . '
@@ -1528,7 +1547,7 @@ sub _emit_rep_and_acode_handler {
         label => $label,
         handler_kind => $handler_kind,
         branch => 'iteration_result',
-        taken_expr => '$and_ret',
+        taken_expr => 'LinkedSpec::RecognitionTransactionRuntime::result_is_match($descr, $STRING, $and_ret)',
         meta => [
             [ loop_count => '$ccount' ],
             [ rep_min => '$min' ],
@@ -1587,6 +1606,7 @@ sub _emit_rep_and_acode_handler {
 
    while(1) {
 ' . $loop_enter_trace . '
+    my $loop_start_pos = defined(pos $$STRING) ? pos $$STRING : -1;
     my $and_ret = $and_code->();
     unless (' . $and_result_condition . ') {
      if (' . $miss_min_condition . ') {
@@ -1595,6 +1615,11 @@ sub _emit_rep_and_acode_handler {
       return undef
      }
     }
+
+    my $loop_end_pos = defined(pos $$STRING) ? pos $$STRING : -1;
+    LinkedSpec::RecognitionTransactionRuntime::assert_repetition_progress(
+     $descr, $STRING, ' . _quote_perl_string($label) . ', $loop_start_pos, $loop_end_pos
+    );
 
     ++$ccount;
 
@@ -1638,7 +1663,7 @@ sub _emit_rep_acode_handler {
         handler_kind => $handler_kind,
         trace_enabled => $trace_enabled,
     );
-    my $lmatch = _build_lmatch_extraction();
+    my $lmatch = _build_lmatch_extraction(label => $label, handler_kind => $handler_kind);
     my $loop_enter_trace = _trace_branch_statement(
         enabled => $trace_enabled,
         indent => '    ',

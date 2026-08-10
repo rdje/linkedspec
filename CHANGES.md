@@ -10,6 +10,28 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-10 — FUTURE-PARITY-BACKLOG.14.3.2.2 — integrate Perl recognition transactions
+
+- Activated task-tree-first from clean private-authority closeout `8138bea5` as intended atomic 186/300.
+- Added four dedicated ActionIR scanner/lowering contracts with exact token/result/static-callee arguments and no
+  duplicate generic assignment or eager nested-call lowering. A closed 132-node policy runs after established
+  descriptor validation, checks linear source/path shape, and computes transitive named-rule effects to a recursive
+  fixed point before rejecting dynamic, forbidden, or unknown recognition.
+- Bound every live/emitted handler invocation to source-local private frames, real cursor/anonymous-boundary/marks,
+  recursive same-label mark replacement/restoration, and a child-completion acceptance channel independent of
+  false, zero, empty, or undef payloads. Commit retains synchronized candidate state; rollback/unwind restore.
+- Added transaction-scoped cursor-only progress enforcement for accepted repetition and direct/mutual recursive
+  cycles while preserving one-shot zero-width recognition and ordinary compatibility behavior.
+- Extended the dormant final-path consumer first, recorded its deterministic 49-pass/one-fail/one-skip RED, then
+  made it GREEN at 51 outer tests including independently loaded generated source. It remains deliberately absent
+  from ordinary/canonical execution until admission `.14.3.2.3`.
+- The first canonical-gate attempt reached exhaustive language coverage and exposed the four new identifier-shaped
+  diagnostics as unclassified. Classified them exactly as grammar-owned dedicated intrinsics, kept them out of the
+  246-name ordinary helper inventories, and restored the independent result to 122/122 public Perl calls.
+- Kept neutral rollout 1/9 and public-current claims RED. Canonical CI tracks/syntax-checks only the production
+  integration modules and passes both CLI environments at 66/66, RAM 58%, and Phase 0 1,031/1,031 in 727 seconds;
+  the final-path consumer stays unregistered until `.14.3.2.3`.
+
 ## 2026-08-10 — FUTURE-PARITY-BACKLOG.14.3.2.1 — add private Perl transaction authority
 
 - Activated task-tree-first from clean dormant-RED closeout `59306f37` as intended atomic 185/300.

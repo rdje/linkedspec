@@ -11,6 +11,7 @@ date: 2026-07-13
 status: resolved
 tags: [actionir, capture, marks, inventory, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.17.0 compares identifier-shaped Perl contract diagnostics with the aligned Dart/Julia/Lua 239-name inventories and classifies seven public current marks plus nine compatibility/legacy/internal names. FUTURE-PARITY-BACKLOG.17.1-.17.4 align all five backends. FUTURE-PARITY-BACKLOG.17.5 admits the seven at 246 shared names; tools/check_language_capability_coverage.pl now combines 105 corpus fixtures with the exact named-mark fixture, independently checks 122 public Perl contracts, and rejects the nine classified exclusions."
+evidence_update_2026_08_10: "FUTURE-PARITY-BACKLOG.14.3.2.2 adds four grammar-owned recognition intrinsics with dedicated nodes. They remain outside the ordinary helper inventories, advancing the exact classified exclusions from nine to thirteen while the shared inventory remains 246 and independent ordinary-public coverage remains 122/122."
 reverify: "bash tools/run_python_project_data.sh tools/check_complete_named_mark_contract.py && perl tools/check_language_capability_coverage.pl --report && rg -n 'mark_entry_start|mark_entry_end|mark_match_start|mark_match_end|mark_line|mark_col|clear_mark' perl/LinkedSpec/ActionIR/Contracts.pm docs/linkedspec-book/src/dsl/source-boundary-helper-reference.md lua/src/linkedspec/action_call_names.lua dart/lib/src/action/action_contracts.dart julia/src/action/ActionContracts.jl"
 ---
 

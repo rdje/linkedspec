@@ -5,16 +5,16 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `59306f37` — clean dormant-RED closeout HEAD from which private Perl authority `.14.3.2.1`
-  activated task-tree-first (184/300; no push).
-- latest_completed_leaf: private Perl authority `.14.3.2.1` lands with subject
-  `FUTURE-PARITY-BACKLOG.14.3.2.1 - add private Perl transaction authority` as atomic 185/300.
-- active_work_unit: none after atomic 185/300; authored/compiler/runtime/generated integration `.14.3.2.2` is pending.
-- next_action: activate `.14.3.2.2` task-tree-first from the clean atomic-185 HEAD, then retrieve its integration owners.
+- activation_commit: `8138bea5` — clean private-authority closeout HEAD for task-first Perl integration `.14.3.2.2` (185/300; no push).
+- latest_completed_leaf: integration `.14.3.2.2` lands as atomic 186/300 with its frozen subject.
+- active_work_unit: none; `.14.3.2.2` is complete and explicit Perl admission `.14.3.2.3` is the next pending leaf.
+- next_action: activate admission `.14.3.2.3` task-tree-first from the clean atomic-186 landing, then freeze its
+  exact registration/rollout/public-current acceptance before changing behavior.
 - in_flight_uncommitted: none; no background job and no generated book output.
-- blockers: none. Private proof passes 293 nested assertions; dormant final consumer stays 49 pass / one exact
-  four-node failure / one skip. Canonical passes CLI 66x2, RAM 71%, and Phase 0 1,031/1,031 in 688 seconds; neutral
-  remains 132/246, token 8/17, graphs 6, marks 6, progress 8, diagnostics 15, mutations 40, rollout 1/9, public 3/8/13.
+- blockers: none. Private proof stays 293 nested assertions; final-path integration is GREEN at 51 outer tests and
+  remains unregistered. Definitive CI passes CLI 66x2, RAM 58%, Phase 0 1,031/1,031 in 727 seconds, and exact
+  246/105+1/122 coverage after intrinsic classification. Neutral remains 132/246, graphs 6, progress 8,
+  diagnostics 15, mutations 40, rollout 1/9, public 3/8/13.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes, and 11 topology mutations advance governance to 53. Public authored values/transactions remain future.
@@ -49,12 +49,12 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_transaction_contract: future syntax is exact `recognition_checkpoint`,
   `recognize_once(token, call(Rule))`, `recognition_commit`, and `recognition_rollback`; match boolean and staged
   payload are separate. Tokens are linear; effects are closed 9 allowed/11 rejected; marks become invocation-
-  framed; v1 progress is cursor-only. Neutral is 1/9. Perl private opaque frames/tokens pass 293 assertions while
-  the dormant consumer still proves all four nodes absent, three helpers unresolved, and rollback raw; no backend
-  recognizes the forms. Public sequence remains 3/8/13.
+  framed; v1 progress is cursor-only. Neutral is 1/9. Perl private opaque frames/tokens pass 293 assertions and the
+  internal live/generated final path is GREEN, but its consumer remains outside canonical discovery and no backend
+  is admitted for the forms. Public sequence remains 3/8/13.
 - current_future_direction: transaction `.14.3` remains split through neutral `.1`, five backend families/six
-  runtimes `.2-.6`, recurring `.7`, and closeout `.8`; authored Perl integration `.14.3.2.2` follows the private
-  authority commit and `.14.8` retains public no-drift. `TASK-TREE-METADATA-HYGIENE.5` owns frontier freshness.
+  runtimes `.2-.6`, recurring `.7`, and closeout `.8`; Perl integration `.14.3.2.2` precedes explicit admission
+  `.14.3.2.3`, and `.14.8` retains public no-drift. `TASK-TREE-METADATA-HYGIENE.5` owns frontier freshness.
 - latest_bootstrap_read: 2026-08-10 — complete roadmap/codebase/mdBook and required continuity/tooling review.
-- pivot_guard: activate integration `.14.3.2.2` task-tree-first only from the proved clean atomic-185 handoff.
-- push_policy: hard lock at 300 commits; `.14.3.2.1` is atomic 185/300; no push; use project wrappers.
+- pivot_guard: activate `.14.3.2.3` only task-tree-first from `.14.3.2.2`'s proved clean atomic-186 handoff.
+- push_policy: hard lock at 300 commits; `.14.3.2.2` is intended atomic 186/300; no push; use project wrappers.

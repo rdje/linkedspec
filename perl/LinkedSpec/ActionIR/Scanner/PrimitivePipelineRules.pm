@@ -157,6 +157,7 @@ foreach my $statement (@{_split_action_ir_statements($code)}) {
  next unless $trimmed =~ /^([A-Za-z_][A-Za-z0-9_]*)\s*=(?!=|>)\s*(.+)$/s;
  my ($target_expr, $source_expr) = ($1, _trim_action_ir_value($2));
  next unless defined($source_expr) && length($source_expr);
+ next if $source_expr =~ /\A(?:recognition_checkpoint|recognize_once|recognition_commit)\s*\(/o;
  push @events, {
   raw => $trimmed,
   args => {

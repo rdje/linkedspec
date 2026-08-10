@@ -13,11 +13,12 @@ answers:
   - "what neutral transaction fixtures does the Perl RED consumer freeze"
   - "does the Perl transaction RED change production behavior"
 date: 2026-08-10
-status: current dormant RED; Perl implementation and admission pending
+status: historical dormant RED boundary at .14.3.2.0; superseded by internal integration .14.3.2.2
 tags: [perl, recognition, transaction, ActionIR, RED, generated-source, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.14.3.2.0 adds t/recognition_transaction_perl_contract.t at its final path without ordinary or canonical registration. The exact four-form specimen reaches return_descriptor successfully. Top action metadata remains language_agnostic_action_ir_ready=0 because recognition_checkpoint, recognize_once, and recognition_commit become unsupported-helper sentinels while recognition_rollback remains one RAW_PERL dependency; all four dedicated RECOGNITION_* node kinds are absent. The consumer loads every neutral family (8 positive tokens, 17 violations, 6 effect graphs, 6 mark cases, 8 progress cases, 9 allowed/11 rejected effects, and 15 diagnostics), passes 49 assertions, fails one exact dedicated-ActionIR assertion, then skips one complete future live/generated-source subtest. Production grammar/compiler/runtime/generated source, the neutral artifact/checker, canonical discovery, public claims, and compatibility controls remain unchanged."
 evidence_update_2026_08_10_signoff: "With the consumer staged and tracked, definitive canonical CI still passes all eight doctrines, repository-contained six-family process I/O, moved-root Rust plus four outside-CWD runtime anchors, both primary CLI option environments at 66/66, RAM 69%, and Phase 0 1,031/1,031 in 672 seconds. The consumer has zero ordinary/canonical registry references and retains its deterministic 49-pass / one-fail / one-skip dormant RED boundary."
-reverify: "perl -Iperl -c t/recognition_transaction_perl_contract.t && ! prove -q -Iperl t/recognition_transaction_perl_contract.t && prove -v -Iperl t/recognition_transaction_perl_contract.t 2>&1 | rg -n 'missing nodes=\\[RECOGNITION_CHECKPOINT,RECOGNIZE_ONCE,RECOGNITION_COMMIT,RECOGNITION_ROLLBACK\\]|failed 1 test of 51|1\\.\\.51' && ! rg -q 'recognition_transaction_perl_contract[.]t' tools/run_ci_local.sh"
+evidence_update_2026_08_10_supersession: "FUTURE-PARITY-BACKLOG.14.3.2.2 makes the same final-path consumer GREEN after adding all four nodes and live/generated integration. The test stays unregistered, so this card remains the canonical historical explanation of the pre-implementation boundary rather than current status."
+reverify: "git show 59306f372e742a9e815c9b409d4502a8533b0fbd:t/recognition_transaction_perl_contract.t | rg -n 'expected RED: missing nodes|future Perl recognition-transaction ActionIR is unavailable' && prove -Iperl t/recognition_transaction_perl_contract.t && ! rg -q 'recognition_transaction_perl_contract[.]t' tools/run_ci_local.sh"
 ---
 
 # Perl recognition-transaction dormant RED
@@ -46,10 +47,10 @@ raw dependencies. A following skipped subtest freezes live falsey/miss,
 commit/rollback, unchanged compatibility-stack, and independently emitted
 source behavior for the integration leaf.
 
-This dormant proof changes no current parser behavior. Private invocation/token
-authority belongs to .14.3.2.1, authored/compiler/runtime/generated-source
-integration belongs to .14.3.2.2, and explicit ordinary/canonical execution
-plus the public rollout promotion belongs to .14.3.2.3.
+This was the exact dormant boundary before implementation. Private
+invocation/token authority landed in `.14.3.2.1`; authored/compiler/runtime/
+generated-source integration now passes under `.14.3.2.2`; explicit ordinary/
+canonical execution plus Perl rollout promotion still belongs to `.14.3.2.3`.
 
 ## Links
 
@@ -57,4 +58,5 @@ plus the public rollout promotion belongs to .14.3.2.3.
 - Authored/static policy: [[cursor-transaction-authored-contract]].
 - Safety seam audit: [[cursor-transaction-safety-audit-plan]].
 - Generated-source carrier: [[perl-generated-source-contract-v2]].
+- Current internal integration: [[perl-recognition-transaction-integration]].
 - Owner: [[FUTURE-PARITY-BACKLOG.14]] .14.3.2.0.

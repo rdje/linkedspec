@@ -10,6 +10,31 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-10 (`FUTURE-PARITY-BACKLOG.14.3.2.2` — integrated Perl recognition transactions): scan the four special
+  forms before generic statement families, but preserve the established lowering-contract metadata order with
+  `call` first. Dedicated event arguments are the only source of token/result/static-callee lowering; generic
+  assignment and nested call scans must not duplicate or eagerly execute them.
+- Run transaction policy only after ordinary final-descriptor construction/validation. The first broad Phase 0 run
+  proved why: an earlier hook stole the established malformed-`dependency_refs` diagnostic owner, while placing
+  transaction contracts first changed stable public metadata. Preserve both pre-existing contracts, fail closed on
+  malformed policy input, then apply recursive effect closure.
+- Invocation completion is an internal acceptance channel, not a second result API. Publish child completion only
+  while a recognition scope is active, consume it at bcode edges, and keep payload truthiness irrelevant inside
+  `recognize_once`. This avoids ordinary parses accumulating unused completion records.
+- Progress is stricter only in an active recognition attempt. Accepted repeated edges and same-cursor direct/mutual
+  re-entry require `end_offset > start_offset`; marks, bindings, transaction state, and backward movement never
+  count. Existing ordinary recursion cutoff and repetition compatibility remain unchanged.
+- Internal behavior and admission are separate commits. Production modules enter canonical tracked/syntax
+  inventory in `.2`, while `t/recognition_transaction_perl_contract.t` remains undiscovered until `.3`. Public
+  prose must describe the internal GREEN proof without promoting neutral rollout 1/9 or an authored capability.
+- Identifier-shaped lowering diagnostics are not automatically ordinary helper calls. The canonical coverage gate
+  caught the four transaction intrinsics after implementation; classify those exact grammar-owned dedicated nodes
+  alongside the nine established non-public contracts, require their Perl presence and helper-inventory absence,
+  and keep the shared inventory at 246 with all 122 ordinary public calls independently covered.
+- Definitive composition after that repair passes all eight doctrines, repository-contained and relocated process
+  proofs, both primary CLI environments at 66/66, RAM 58%, and Phase 0 at 1,031/1,031 in 727 seconds. Keep the
+  GREEN final-path consumer absent from canonical discovery until the separate admission leaf.
+
 - 2026-08-10 (`FUTURE-PARITY-BACKLOG.14.3.2.1` — private Perl transaction authority): follow the typed-source
   inside-out pattern for linear transaction state. Opaque scalar handles prevent caller-visible owner hashes while
   module-owned tables retain source authority, invocation/generation identity, snapshots, attempt state, staged

@@ -331,7 +331,14 @@ def load_contract() -> dict[str, Any]:
 
 
 def current_action_ir_nodes() -> list[str]:
-    nodes = sorted(set(re.findall(r"ir_node\s*=>\s*'([^']+)'", read_text(PERL_CONTRACTS_PATH))))
+    discovered = set(
+        re.findall(r"ir_node\s*=>\s*'([^']+)'", read_text(PERL_CONTRACTS_PATH))
+    )
+    require(
+        set(DEDICATED_NODES).issubset(discovered),
+        "Perl dedicated recognition-transaction ActionIR inventory is incomplete",
+    )
+    nodes = sorted(discovered - set(DEDICATED_NODES))
     require(nodes, "cannot derive current Perl ActionIR node inventory")
     return nodes
 
