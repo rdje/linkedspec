@@ -330,10 +330,9 @@ six invocation-mark and eight progress cases, and locks fifteen portable diagnos
 cover schema, syntax, result separation, token state, effects, inventories, graphs, marks, progress, diagnostics,
 rollout, canonical registration, tracked input, freshness, and the public-current boundary.
 
-Neutral rollout is therefore exactly one of nine legs complete. Perl, Rust, Dart, Julia, PUC Lua, LuaJIT,
-recurring composition, and public no-drift remain RED under their existing owners. The accepted authored spelling
-is still unavailable in every backend; neutral executability is proof of the target semantics, not implementation
-or public admission.
+At the `.14.3.1.1` boundary, neutral rollout was exactly one of nine legs complete. Perl, Rust, Dart, Julia, PUC
+Lua, LuaJIT, recurring composition, and public no-drift remained RED under their existing owners. Neutral
+executability proved the target semantics without implementation or public admission.
 
 ### 13. Govern public milestone sequence separately
 
@@ -343,9 +342,22 @@ with a separate public-sequence projection: three exact mdBook pages, rollout-de
 backend-RED state, required executable/future/unavailable markers, eight forbidden stale or false current claims,
 tracked-file proof, and thirteen in-memory mutations.
 
-This projection does not alter `recognition_transaction_contract.json`, its forty semantic mutations, rollout,
-syntax, effect model, or backend state. It prevents milestone prose from lagging the neutral authority while still
-forbidding public transaction-support claims until the backend, recurring, and public owners land.
+At that guard boundary, the projection did not alter `recognition_transaction_contract.json`, its forty semantic
+mutations, rollout, syntax, effect model, or backend state. It prevented milestone prose from lagging the neutral
+authority while still forbidding premature transaction-support claims.
+
+### 14. Admit Perl independently before cross-runtime portability
+
+`FUTURE-PARITY-BACKLOG.14.3.2.2` implements the four dedicated nodes, closed recursive effect policy,
+invocation-local state, falsey-safe results, cursor-only progress diagnostics, and live/generated execution.
+Admission `.14.3.2.3` changes no production implementation: canonical CI requires, syntax-checks, and executes the
+exact 51-test final-path consumer once, and only the `perl` rollout row becomes complete.
+
+Current recognition rollout is neutral + Perl 2/9 complete. One independent Perl complete-to-RED regression raises
+semantic mutation proof to 41 while premature Rust promotion still fails. The three-page public projection derives
+the same neutral + Perl state, retains eight forbidden claims, and adds a separate Perl regression for fourteen
+sequence mutations. The authored forms are therefore current on Perl but not yet portable to Rust, Dart, Julia,
+PUC Lua, or LuaJIT; recurring composition and public no-drift retain their later owners.
 
 ## Consequences
 

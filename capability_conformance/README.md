@@ -276,30 +276,33 @@ runtime admissions are complete. The two Lua ABIs share one rollout leg because 
 source independently through distinct runtimes. The combined `recurring_public_no_drift` row remains pending for
 final program-wide owner `FUTURE-PARITY-BACKLOG.14.8`; recurring composition does not promote it early.
 
-No public `Position`/`Span` value, transaction spelling, parser behavior, descriptor or generated schema,
-semantic/MCP projection, or source-authority elevation is claimed by these internal runtime admissions.
+No public `Position`/`Span` value, descriptor or generated schema, semantic/MCP projection, or source-authority
+elevation is claimed by these internal typed-source runtime admissions. Recognition transaction spelling and
+behavior are current on Perl only under the separate transaction ledger described next.
 
-`recognition_transaction_contract.json` (`linkedspec-recognition-transaction-v1`) makes the accepted future
-bounded-recognition transaction, effect, invocation-mark, and cursor-progress semantics executable without adding
-grammar or runtime behavior. Run:
+`recognition_transaction_contract.json` (`linkedspec-recognition-transaction-v1`) makes the accepted bounded-
+recognition transaction, effect, invocation-mark, and cursor-progress semantics executable and records exact
+runtime admission. Run:
 
 ```bash
 bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py
 ```
 
-The checker also binds three exact public transaction pages to neutral-complete/every-backend-RED rollout truth,
-rejects eight stale or false milestone/current claims, and executes thirteen public-sequence mutations in memory.
-This public projection does not alter the neutral artifact's forty semantic mutations.
+The checker also binds three exact public transaction pages to neutral + Perl complete with every later leg RED,
+rejects eight stale or false milestone/current claims, and executes fourteen public-sequence mutations in memory.
+That public projection is distinct from the artifact's 41 semantic mutations.
 
 The independent checker derives all 128 current ActionIR node kinds from the Perl contract authority and all 246
 current call names from matching Dart, Julia, and Lua inventories. The artifact assigns one base effect to each
-of those rows plus four dedicated future `RECOGNITION_*` nodes under the closed nine-allowed/eleven-rejected
+of those rows plus four dedicated `RECOGNITION_*` nodes under the closed nine-allowed/eleven-rejected
 lattice. It separately executes 8 positive / 17 negative token cases, six recursive fixed-point effect graphs,
 six invocation-mark cases, eight cursor-only progress cases, and fifteen portable diagnostic records, then rejects
-40 exact drift mutations. This 128-node census is distinct from the 122 public identifier-shaped Perl contracts
+41 exact drift mutations. This 128-node census is distinct from the 122 public identifier-shaped Perl contracts
 reported by `tools/check_language_capability_coverage.pl`.
 
 Canonical CI requires the tracked artifact/checker and runs the same project-data-routed command unconditionally.
+It also requires, syntax-checks, and executes `t/recognition_transaction_perl_contract.t` exactly once. Rollout is
+neutral + Perl 2/9 complete; Rust, Dart, Julia, PUC Lua, LuaJIT, recurring, and public-no-drift remain RED.
 Rollout is neutral 1/9 complete: Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurring composition, and public
 no-drift remain RED. The exact `recognition_checkpoint` / `recognize_once` / `recognition_commit` /
 `recognition_rollback` forms remain future and unavailable in every backend.

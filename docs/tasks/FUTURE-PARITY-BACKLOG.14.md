@@ -4022,9 +4022,8 @@
   status complete mechanically before Perl RED `.14.3.2.0` activates.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.2`
-  Status: `active` (2026-08-10; private authority `.14.3.2.1` landed at `8138bea5` as atomic 185/300; authored/
-    compiler/runtime/generated integration `.14.3.2.2` is signoff-complete for atomic 186/300; explicit admission
-    `.14.3.2.3` remains pending; no push)
+  Status: `complete` (2026-08-10; all four Perl recognition-transaction leaves are composition-complete through
+    signoff-complete admission `.14.3.2.3`, commit-ready as atomic 187/300; Rust RED `.14.3.3.0` next; no push)
   Goal: Implement and independently admit the bounded recognition-only transaction/progress contract in the Perl
     reference without changing unrelated action, result, register, or rollback semantics.
   Depends on: `.14.3.1.2.0`
@@ -4214,9 +4213,9 @@
   commit-ready with `.14.3.2.2` retained as the next task-tree-first activation.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.2.2`
-  Status: `complete` (2026-08-10; activated task-tree-first from clean private-authority closeout `8138bea5`;
-    implementation, focused proof, durable synchronization, rendered review, and canonical signoff are complete;
-    atomic 186/300 is commit-ready; no push)
+  Status: `complete` (`e173bbcb`, 2026-08-10, atomic 186/300, no push; activated task-tree-first from clean
+    private-authority closeout `8138bea5`, then completed implementation, focused proof, durable synchronization,
+    rendered review, canonical signoff, commit, and clean handoff)
   Goal: Integrate the ratified Perl syntax, once-only recognition, staged result, static/runtime effect barrier,
     invocation marks, structured progress failures, and independently emitted generated source.
   Depends on: `.14.3.2.1`
@@ -4351,11 +4350,114 @@
   14,364-KiB book has been inspected and removed. Atomic 186/300 is ready with the frozen subject; admission
   `.14.3.2.3` remains pending until this commit's clean post-commit handoff.
 
+  Commit/handoff evidence 2026-08-10: atomic commit
+  `e173bbcbfdc750f39714909a1a0ee720068e679d` lands with first parent
+  `8138bea5718198e1a7ce89599c1ae84618dc5211` and exact subject
+  `FUTURE-PARITY-BACKLOG.14.3.2.2 - integrate Perl recognition transactions`. Its hook regenerates Knowledge at
+  805/6,665, passes all eight doctrines, and validates `activation_commit 8138bea5` against `HEAD^1`. Post-commit
+  status and staged/unstaged diffs are empty; the ignored brief is zero bytes; the memory pointer, Knowledge, and
+  task partitions pass; rendered book output is absent; the correct managed-run census reports zero residue; and
+  no background job remains. Admission `.14.3.2.3` may therefore activate task-tree-first.
+
 - ID: `FUTURE-PARITY-BACKLOG.14.3.2.3`
-  Status: `pending`
+  Status: `complete` (2026-08-10; exact Perl-only admission and definitive signoff complete from clean integration
+    closeout `e173bbcb`, commit-ready as atomic 187/300; Rust RED `.14.3.3.0` next; no push)
   Goal: Remove Perl dormancy, register exact ordinary/canonical proof, promote only Perl transaction admission, and
     synchronize current public guidance.
   Depends on: `.14.3.2.2`
+  Acceptance: Retrieve the neutral transaction rollout, authored/static contract, integrated Perl authority,
+    final-path consumer, canonical driver, public-sequence guard, admitted-runtime precedents, exact three governed
+    book pages, storage owners, and ADR `0056` before changing registration. Prove the unchanged final-path consumer
+    is GREEN but absent from canonical execution, then require, syntax-check, and execute that exact tracked
+    consumer once in canonical CI. Promote only `perl` from RED to complete, add omission-sensitive
+    canonical and completed-to-pending mutation proof, and advance current guidance on the three governed pages
+    from implemented-but-unadmitted Perl to admitted Perl while retaining every other runtime, recurring, and final
+    public-no-drift row as future. Preserve all production Perl/compiler/runtime/generated-source files, the 132
+    node and 246 ordinary-call inventories, token/effect/mark/progress/diagnostic fixtures, helper results, runtime
+    registers, descriptor/generated schemas and identities, semantic/MCP/capability/CLI surfaces, root README,
+    project-data roots, and unrelated docs. Pass focused registration/rollout/public-sequence, language, book render
+    inspection, doctrines, and definitive canonical signoff; synchronize durable/live records; commit atomically as
+    187/300; clear the brief and prove clean before Rust RED `.14.3.3.0` activates task-tree-first.
+  Verification: behavior-unchanged 51-test Perl consumer is exact-once canonical; only `perl` advances;
+    other neutral counts and public/current guidance agree; focused, book, doctrine, and canonical gates pass
+  Commit: `FUTURE-PARITY-BACKLOG.14.3.2.3 - admit Perl recognition transactions`
+
+  ### `FUTURE-PARITY-BACKLOG.14.3.2.3` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove `.14.3.2.2` landed at full `e173bbcb` as atomic 186/300 with
+    parent `8138bea5`, exact subject, empty status/diffs, zero-byte brief, valid post-commit pointer, fresh
+    Knowledge/task partitions, absent rendered book, zero managed-run residue, no background work, and only
+    task-tree metadata changed to activate this leaf.
+  - [x] **RETRIEVE / REPRODUCE EXACT ADMISSION BOUNDARY** — Follow Knowledge, ADR, neutral artifact/checker,
+    integrated consumer, canonical-driver, public-sequence, admission-precedent, storage, and sole-facing owners;
+    prove the 51-test consumer is GREEN, tracked, and absent from canonical execution while `perl` and
+    current Perl support guidance remain pending.
+  - [x] **EXACT CANONICAL REGISTRATION** — Require, syntax-check, and execute the behavior-unchanged final-path consumer once
+    through the canonical Perl route; independently reject missing, duplicate, stale-dormant, or misrouted
+    registration without broadening ordinary helper discovery or production behavior.
+  - [x] **PERL-ONLY ROLLOUT / PUBLIC-CURRENT LOCKSTEP** — Promote only `perl`, add completed-to-RED
+    regression coverage, and update exactly the three governed book pages to admit current Perl transaction
+    support while every other runtime, recurring composition, and final public-no-drift row remains RED.
+  - [x] **NO-DRIFT / RENDERED PROOF** — Preserve production source, neutral 132 nodes / 246 calls / token 8+17 /
+    graphs 6 / marks 6 / progress 8 / diagnostics 15 / semantic fixtures, language 246/105+1/122, schemas,
+    helper/register behavior, semantic/MCP/capability/CLI, README, storage, and unrelated docs; build, inspect, and
+    remove the sole-facing book output.
+  - [x] **SIGNOFF / ATOMIC CLEAN HANDOFF** — Synchronize task/index, roadmaps, CHANGES, DEVELOPMENT_NOTES, MEMORY,
+    Knowledge, and mdBook; pass focused and definitive canonical gates; commit exactly atomic 187/300 with the
+    frozen subject; clear the brief; and prove pointer/Knowledge/task/residue/book/status clean before Rust RED
+    `.14.3.3.0` activates task-tree-first.
+
+  Activation evidence 2026-08-10: Perl integration `.14.3.2.2` lands atomically at full commit
+  `e173bbcbfdc750f39714909a1a0ee720068e679d` as 186/300 with first parent
+  `8138bea5718198e1a7ce89599c1ae84618dc5211` and exact subject
+  `FUTURE-PARITY-BACKLOG.14.3.2.2 - integrate Perl recognition transactions`. Its hook regenerates Knowledge at
+  805 facts / 6,665 question keys, passes all eight doctrines, and validates `activation_commit 8138bea5` against
+  `HEAD^1`. Post-commit status and staged/unstaged diffs are empty; `git_message_brief.txt` is zero bytes; pointer,
+  Knowledge, and 26/26 task partitions over 511 stable ids pass; generated book output is absent; the correct
+  managed-run census reports zero residue; and no background work remains. Only task-tree metadata changes in this
+  activation before any contract/checker/canonical-driver/book/Knowledge/roadmap/live-doc or behavior file.
+
+  Retrieval/boundary evidence 2026-08-10: Knowledge lookup followed
+  `recognition-transaction-neutral-contract`, `cursor-transaction-authored-contract`,
+  `perl-recognition-transaction-integration`, and the typed-source Perl admission precedent before inspecting the
+  neutral JSON/checker, exact final-path consumer, canonical driver, ADR `0056`, storage routes, and all three
+  governed mdBook pages. The unchanged consumer passes 51/51 in 10 seconds, is tracked, and has zero canonical
+  references. The checker reports exact 132 = 128 + 4 ActionIR rows, 246 calls, token 8/17, graphs 6, marks 6,
+  progress 8, diagnostics 15, 40 mutations, neutral-only rollout 1/9, and public sequence 3/8/13. The ledger-first
+  promotion then produces one intentional RED—`neutral/backend status drifted`—before the oracle is updated.
+
+  Admission implementation evidence 2026-08-10: only the `perl` row moves to complete and names
+  `t/recognition_transaction_perl_contract.t`; every later runtime, recurring, and public-no-drift row remains RED.
+  Canonical CI requires, syntax-checks, logs, and executes that exact consumer once through ordinary `prove`. The
+  independent checker requires all four fragments exactly once, rejects premature Rust promotion, and adds a
+  distinct Perl complete-to-RED mutation, advancing semantic proof to 41. Public governance now derives neutral +
+  Perl complete with every later leg RED and independently rejects neutral regression, Perl regression, and
+  premature Rust promotion, advancing to three documents / eight forbidden claims / fourteen mutations. The
+  consumer's 49 behavior assertions are unchanged; only two neutral-only admission-metadata expectations advance,
+  and all 51 tests pass. Language coverage remains exact at 246 current calls / 105+1 fixtures / 122 public Perl
+  contracts. No production Perl/compiler/runtime/generated-source path is changed.
+
+  Focused/no-drift/render evidence 2026-08-10: the independent checker is GREEN at exact 132/246, token 8/17,
+  graphs 6, marks 6, progress 8, diagnostics 15, semantic mutations 41, rollout 2/9, and public sequence 3/8/14.
+  Private authority, admitted transaction, generated source, complete named marks, and typed-source projection pass
+  together at 71 tests in 41 seconds. Language remains 246/105+1/122; task metadata passes 26/26 over 511 stable
+  ids; memory passes at 59/60 lines; Knowledge is current at 805 facts / 6,666 question keys; and production-path
+  diff is empty. The repository-routed mdBook build produces 79 files / 14,368 KiB. Direct HTML inspection on all
+  three governed pages confirms current Perl support, the exact canonical command, 2/9 rollout, remaining-runtime
+  limitations, and following guidance in coherent separate paragraph/preformatted blocks; generated output is then
+  removed.
+
+  Definitive signoff evidence 2026-08-10: the complete host-authorized canonical gate requires, syntax-checks,
+  logs, and executes the exact 51-test Perl admission consumer once and passes all eight doctrines; neutral and
+  admission proof at 132 ActionIR rows / 246 calls / 41 rejected mutations / rollout 2/9; public sequence at three
+  documents / eight forbidden claims / fourteen mutations; language coverage 246/105+1/122; the focused five-file
+  Perl composition at 71 tests; all mandatory typed-source, semantic, MCP, cursor, capability, storage, and moved-
+  root consumers; and both primary CLI environments at 66/66. RAM is 34% against the 88% ceiling, and Phase 0
+  passes 1,031/1,031 in 733 wall-clock seconds before exact `[ci] local CI gate passed` and exit zero. Production
+  implementation diff remains empty; Knowledge is current at 805 facts / 6,666 question keys; task metadata passes
+  26/26 over 511 stable ids; MEMORY is within its 60-line bound; README remains 105 lines / 5,057 bytes; the
+  rendered 79-file / 14,368-KiB book was inspected and removed. Atomic 187/300 is commit-ready with the frozen
+  subject, and Rust RED `.14.3.3.0` remains the next task-tree-first activation after a clean post-commit handoff.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.3`
   Status: `pending`

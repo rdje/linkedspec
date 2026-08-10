@@ -398,6 +398,7 @@ require_tracked_file t/complete_named_mark_contract.t
 require_tracked_file t/typed_source_location_values.t
 require_tracked_file t/typed_source_location_perl_contract.t
 require_tracked_file t/recognition_transaction_perl_authority.t
+require_tracked_file t/recognition_transaction_perl_contract.t
 require_tracked_file rust/linkedspec-runtime/tests/typed_source_location_contract.rs
 require_tracked_file dart/test/typed_source_location_contract_test.dart
 require_tracked_file julia/test/typed_source_location_contract_test.jl
@@ -516,6 +517,7 @@ perl -c -Iperl t/complete_named_mark_contract.t
 perl -c -Iperl t/typed_source_location_values.t
 perl -c -Iperl t/typed_source_location_perl_contract.t
 perl -c -Iperl t/recognition_transaction_perl_authority.t
+perl -c -Iperl t/recognition_transaction_perl_contract.t
 perl -c -Iperl t/rule_local_cursor_perl_contract.t
 perl -c -Iperl t/duplicate_regex_slot_identity_perl_contract.t
 perl -c -Iperl t/sparse_and_action_slots_perl_regression.t
@@ -582,6 +584,9 @@ bash tools/run_python_project_data.sh tools/check_recognition_transaction_contra
 
 log "running private Perl recognition transaction authority contract"
 PERL5LIB= prove -Iperl t/recognition_transaction_perl_authority.t
+
+log "running exact Perl recognition transaction admission consumer"
+PERL5LIB= prove -Iperl t/recognition_transaction_perl_contract.t
 
 log "running exact Perl typed source-location value and projection admission consumers"
 PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t

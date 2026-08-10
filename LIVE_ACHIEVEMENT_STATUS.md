@@ -2,25 +2,25 @@
 
 ## Current Activity
 
-- `FUTURE-PARITY-BACKLOG.14.3.2.2` is complete from clean private-authority closeout `8138bea5` as atomic
-  186/300. Dedicated ActionIR, static effect/linearity policy, live/generated authority binding, falsey-safe
-  recognition, and cursor-only progress behavior are implemented. The first canonical attempt caught and repaired
-  the exact dedicated-intrinsic/helper-inventory classification; the definitive rerun passes CLI 66x2, RAM 58%,
-  and Phase 0 1,031/1,031 in 727 seconds.
-- The final-path consumer is GREEN but still absent from ordinary/canonical discovery. Perl rollout/public-current
-  admission remains exclusively owned by `.14.3.2.3`; neutral stays 1/9 and no push occurs before atomic 300.
+- Perl transaction parent `FUTURE-PARITY-BACKLOG.14.3.2` is composition-complete at the current atomic 187/300
+  candidate. Admission `.14.3.2.3` requires, syntax-checks, and executes the exact 51-test consumer once without
+  changing production implementation bytes.
+- Only Perl advances: recognition proof is 132 ActionIR rows / 246 calls / 41 mutations, rollout 2/9, and public
+  sequence 3 documents / 8 forbidden claims / 14 mutations. Definitive CI passes CLI 66/66 twice, RAM 34%, and
+  Phase 0 1,031/1,031 in 733 seconds. Rust RED `.14.3.3.0` is next after clean atomic closeout; no push before 300.
 
 ## Latest Completed Slice
 
-- `FUTURE-PARITY-BACKLOG.14.3.2.2 - integrate Perl recognition transactions` lands as atomic 186/300; its
-  final-path proof remains deliberately unadmitted.
+- `FUTURE-PARITY-BACKLOG.14.3.2.3 - admit Perl recognition transactions` is signoff-complete and commit-ready as
+  atomic 187/300 with its frozen subject.
 
 ## Next Action
 
-- Activate admission `.14.3.2.3` task-tree-first from `.14.3.2.2`'s proved clean atomic-186 handoff.
+- Land atomic 187/300, prove the clean post-commit handoff, then activate Rust RED `.14.3.3.0` task-tree-first.
 
 ## Recent Completions
 
+- `2026-08-10` — `.14.3.2.3` admitted Perl recognition transactions for atomic 187/300.
 - `2026-08-10` — `.14.3.2.2` integrated Perl recognition transactions for atomic 186/300.
 - `2026-08-10` — `FUTURE-PARITY-BACKLOG.14.3.2.1` added private Perl transaction authority as atomic 185/300.
 - `2026-08-10` — `59306f37` froze the dormant Perl transaction RED as atomic 184/300.

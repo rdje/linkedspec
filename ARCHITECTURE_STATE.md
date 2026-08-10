@@ -73,6 +73,13 @@ consumers pass, and the route registry remains 20 surfaces / 62 routes / 32/32 w
 empty debt metadata. The program is composition-closed. These storage migrations change documentation governance
 only; they change no language, compiler, runtime, backend, fixture, CLI, protocol, or project-data root.
 
+- `2026-08-10 admitted Perl recognition transactions`: `FUTURE-PARITY-BACKLOG.14.3.2.3` registers the exact
+  51-test final-path consumer once for tracking, syntax, and canonical ordinary `prove` execution without changing
+  production Perl. The neutral artifact advances only `perl` to complete and names that consumer as its sole path;
+  Rust, Dart, Julia, PUC Lua, LuaJIT, recurring, and public-no-drift remain RED. The independent oracle now rejects
+  41 semantic mutations and the public projection rejects 14 sequence mutations across three pages/eight forbidden
+  claims. Current guidance admits the authored forms on Perl while retaining all cross-runtime portability work.
+
 - `2026-08-10 internally integrated Perl recognition transactions`: `FUTURE-PARITY-BACKLOG.14.3.2.2` adds four
   dedicated scanner/lowering nodes, exact local-slot/static-callee event fields, and a post-descriptor closed
   132-node effect fixed point. Live and emitted handlers bind the unchanged private authority to real cursor,

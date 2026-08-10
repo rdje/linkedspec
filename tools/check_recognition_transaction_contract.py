@@ -20,6 +20,7 @@ DART_CONTRACTS_PATH = ROOT / "dart" / "lib" / "src" / "action" / "action_contrac
 JULIA_CONTRACTS_PATH = ROOT / "julia" / "src" / "action" / "ActionContracts.jl"
 LUA_CALL_NAMES_PATH = ROOT / "lua" / "src" / "linkedspec" / "action_call_names.lua"
 CI_PATH = ROOT / "tools" / "run_ci_local.sh"
+PERL_CONSUMER_PATH = "t/recognition_transaction_perl_contract.t"
 
 ALLOWED_EFFECTS = [
     "pure_value",
@@ -65,7 +66,7 @@ EXPECTED_COUNTS = {
     "progress_cases": 8,
     "diagnostics": 15,
     "rollout_legs": 9,
-    "mutations": 40,
+    "mutations": 41,
 }
 EXPECTED_EFFECT_ROW_HASHES = {
     "action_ir_effect_rows": "560de8fc586cee7adf66e1b6eeab7d931f441ebda6ca9cb0498ecc9d4392f775",
@@ -81,7 +82,10 @@ EXPECTED_SURFACE = {
         "recognize_once returns a strict match boolean; the recognized payload "
         "remains staged until commit"
     ),
-    "availability": "future and unavailable in every backend until its rollout leg is admitted",
+    "availability": (
+        "available only in an admitted backend; currently Perl, with all other "
+        "runtime legs future and unavailable"
+    ),
 }
 EXPECTED_TOKEN_STATES = [
     "uninitialized",
@@ -125,7 +129,7 @@ EXPECTED_DIAGNOSTICS = [
 ]
 EXPECTED_ROLLOUT = [
     (1, "FUTURE-PARITY-BACKLOG.14.3.1.1", "neutral", "complete"),
-    (2, "FUTURE-PARITY-BACKLOG.14.3.2", "perl", "red"),
+    (2, "FUTURE-PARITY-BACKLOG.14.3.2", "perl", "complete"),
     (3, "FUTURE-PARITY-BACKLOG.14.3.3", "rust", "red"),
     (4, "FUTURE-PARITY-BACKLOG.14.3.4", "dart", "red"),
     (5, "FUTURE-PARITY-BACKLOG.14.3.5", "julia", "red"),
@@ -149,18 +153,24 @@ EXPECTED_EXECUTION = {
         "lua/src/linkedspec/action_call_names.lua",
     ],
 }
+EXPECTED_PERL_ADMISSION = {
+    "consumer_path": PERL_CONSUMER_PATH,
+    "syntax_invocation": f"perl -c -Iperl {PERL_CONSUMER_PATH}",
+    "registration_marker": "running exact Perl recognition transaction admission consumer",
+    "invocation": f"PERL5LIB= prove -Iperl {PERL_CONSUMER_PATH}",
+}
 PUBLIC_SEQUENCE_CONTRACT = {
     "documents": [
         {
             "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
             "required_markers": [
-                "The future contract now has an executable backend-neutral authority",
-                "No current parser recognizes the four forms",
-                "This section describes an accepted future contract, not a current feature",
-                "fails closed over three public transaction pages, eight forbidden claims",
+                "The shared contract now has an executable backend-neutral authority",
+                "The Perl reference now recognizes and admits the four forms as a current capability",
+                "This section describes a current Perl feature and an accepted future portable contract",
+                "fails closed over three public transaction pages, eight forbidden claims, and fourteen sequence mutations",
                 (
-                    "executable, but Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT "
-                    "must each be admitted independently"
+                    "executable, and Perl is admitted; Rust, Dart, Julia, PUC Lua, "
+                    "and LuaJIT must each be admitted independently"
                 ),
             ],
         },
@@ -168,8 +178,8 @@ PUBLIC_SEQUENCE_CONTRACT = {
             "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
             "required_markers": [
                 "The neutral authority is now executable",
-                "remain unavailable until each runtime and public admission lands",
-                "neutral proof is not backend support",
+                "support is current and canonically admitted",
+                "Neutral proof alone is not backend support",
             ],
         },
         {
@@ -177,10 +187,10 @@ PUBLIC_SEQUENCE_CONTRACT = {
             "required_markers": [
                 (
                     "Their neutral artifact/checker is executable at 128 current + 4 "
-                    "future ActionIR rows"
+                    "dedicated ActionIR rows"
                 ),
-                "neutral rollout 1/9 complete",
-                "all six runtime, recurring, and public legs remain RED",
+                "recognition rollout 2/9 complete",
+                "Rust, Dart, Julia, PUC Lua, LuaJIT, recurring, and public-no-drift legs remain RED",
             ],
         },
     ],
@@ -207,7 +217,7 @@ PUBLIC_SEQUENCE_CONTRACT = {
         },
         {
             "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
-            "text": "transaction support is current",
+            "text": "all-backend transaction support is current",
         },
         {
             "path": "docs/linkedspec-book/src/overview/project-status.md",
@@ -219,7 +229,7 @@ PUBLIC_SEQUENCE_CONTRACT = {
         },
     ],
 }
-PUBLIC_SEQUENCE_MUTATION_COUNT = 13
+PUBLIC_SEQUENCE_MUTATION_COUNT = 14
 EXPECTED_TOP_LEVEL = {
     "format",
     "contract_id",
@@ -285,9 +295,14 @@ def validate_public_sequence(
     rollout_status = {row.get("leg"): row.get("status") for row in rollout}
     require(rollout_status.get("neutral") == "complete", "public sequence requires neutral complete")
     require(
-        set(rollout_status.values()) == {"complete", "red"}
-        and all(status == "red" for leg, status in rollout_status.items() if leg != "neutral"),
-        "public sequence requires every non-neutral leg RED",
+        rollout_status.get("perl") == "complete"
+        and set(rollout_status.values()) == {"complete", "red"}
+        and all(
+            status == "red"
+            for leg, status in rollout_status.items()
+            if leg not in {"neutral", "perl"}
+        ),
+        "public sequence requires neutral and Perl complete with every later leg RED",
     )
 
     for row in documents:
@@ -647,7 +662,7 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
         "task_owner drifted",
     )
     require(
-        document.get("status") == "neutral_complete_backends_red",
+        document.get("status") == "neutral_and_perl_complete_other_legs_red",
         "neutral/backend status drifted",
     )
     require(document.get("expected_counts") == EXPECTED_COUNTS, "expected_counts drifted")
@@ -667,9 +682,10 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
     require(
         policy.get("current_boundary")
         == (
-            "this artifact admits only the neutral contract and does not change "
-            "grammar, compiler, runtime, backend, generated-source, CLI, descriptor, "
-            "schema, semantic, MCP, capability, or public-current behavior"
+            "this artifact admits the neutral contract and current Perl runtime "
+            "behavior; Rust, Dart, Julia, PUC Lua, LuaJIT, recurring, and "
+            "public-no-drift legs remain unavailable, and no schema, semantic, MCP, "
+            "capability, CLI, or unrelated helper behavior changes"
         ),
         "current behavior boundary drifted",
     )
@@ -803,7 +819,11 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
         "neutral rollout paths drifted",
     )
     require(
-        all(row.get("paths") == [] for row in rollout[1:]),
+        rollout[1].get("paths") == [EXPECTED_PERL_ADMISSION["consumer_path"]],
+        "Perl rollout consumer path drifted",
+    )
+    require(
+        all(row.get("paths") == [] for row in rollout[2:]),
         "RED rollout legs must not claim implementation paths",
     )
 
@@ -840,6 +860,26 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
         require(
             ci.count(EXPECTED_EXECUTION["invocation"]) == 1,
             "canonical CI invocation missing or duplicated",
+        )
+        require(
+            ci.count(
+                f"require_tracked_file {EXPECTED_PERL_ADMISSION['consumer_path']}"
+            )
+            == 1,
+            "canonical CI must require the Perl consumer exactly once",
+        )
+        require(
+            ci.count(EXPECTED_PERL_ADMISSION["syntax_invocation"]) == 1,
+            "canonical CI must syntax-check the Perl consumer exactly once",
+        )
+        require(
+            ci.count(f"log \"{EXPECTED_PERL_ADMISSION['registration_marker']}\"")
+            == 1,
+            "canonical Perl admission marker missing or duplicated",
+        )
+        require(
+            ci.count(EXPECTED_PERL_ADMISSION["invocation"]) == 1,
+            "canonical Perl admission invocation missing or duplicated",
         )
         validate_public_sequence(
             document,
@@ -910,7 +950,8 @@ MUTATIONS: dict[str, Callable[[dict[str, Any]], None]] = {
     "diagnostic": _set(["diagnostics", 0, "code"], "changed"),
     "rollout_order": _set(["rollout", 0, "order"], 2),
     "rollout_owner": _set(["rollout", 1, "owner"], "FUTURE-PARITY-BACKLOG.14.3.1.1"),
-    "rollout_status": _set(["rollout", 1, "status"], "complete"),
+    "rollout_status": _set(["rollout", 2, "status"], "complete"),
+    "rollout_perl_regression": _set(["rollout", 1, "status"], "red"),
     "canonical_contract_path": _set(["canonical_execution", "contract_path"], "changed.json"),
     "canonical_checker_path": _set(["canonical_execution", "checker_path"], "changed.py"),
     "canonical_invocation": _set(
@@ -1019,8 +1060,14 @@ def validate_public_sequence_mutations(document: dict[str, Any]) -> int:
             ),
         ),
         (
-            "backend rollout promotion",
+            "Perl rollout regression",
             lambda candidate, _contract, _texts: candidate["rollout"][1].__setitem__(
+                "status", "red"
+            ),
+        ),
+        (
+            "backend rollout promotion",
+            lambda candidate, _contract, _texts: candidate["rollout"][2].__setitem__(
                 "status", "complete"
             ),
         ),
@@ -1060,7 +1107,7 @@ def main() -> int:
         "recognition-transaction-contract: OK "
         "(132 ActionIR rows = 128 current + 4 dedicated; 246 call rows; "
         "token 8 positive/17 negative; effects 6 graphs; marks 6; progress 8; "
-        "40 rejected mutations; rollout neutral 1/9 complete; "
+        "41 rejected mutations; rollout neutral + Perl 2/9 complete; "
         f"public sequence 3 documents/8 forbidden/{public_mutations} mutations)"
     )
     return 0

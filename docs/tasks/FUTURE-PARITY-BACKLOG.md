@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-10` (Perl transaction integration `.14.3.2.2` is complete as atomic 186/300 from clean
-  private-authority commit `8138bea5`; admission `.14.3.2.3` remains next; no push)
+- Last updated: `2026-08-10` (Perl transaction admission `.14.3.2.3` and parent `.14.3.2` are signoff-complete;
+  atomic 187/300 is commit-ready from clean activation parent `e173bbcb`; Rust RED `.14.3.3.0` next; no push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -103,14 +103,12 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-10):** behavior-free cursor-transaction ratification `.14.3.1.0` is committed at
-`7c2ff407` as atomic 172/300 (no push). It fixes the exact
-authored grammar, falsey-safe staged result exposure, closed fail-closed ActionIR effect taxonomy, opaque token
-lifetime, invocation-mark migration, and cursor-only progress rule without executable or current-public behavior.
-Executable neutral artifact/checker/fixture authority `.14.3.1.1` is the restored next transaction leaf after the
-README policy and bounded-document containment priorities complete their independent clean task-tree slices. The stale
-`.14.2.0.1` frontier introduced at `bd777ee8` is repaired; `TASK-TREE-METADATA-HYGIENE.5` separately owns a
-low-noise active-tree freshness invariant.
+**Authoritative frontier (2026-08-10):** Perl transaction admission `.14.3.2.3` and parent `.14.3.2` are signoff-
+complete at the current atomic 187/300 candidate from clean activation parent `e173bbcb` (no push). The exact
+51-test consumer is canonical once, only Perl is complete at rollout 2/9, and production behavior remains fixed at
+the already-verified integration. Rust dormant RED `.14.3.3.0` is the next task-tree-first activation after atomic
+187 lands and its clean handoff is proved. `TASK-TREE-METADATA-HYGIENE.5` separately owns a low-noise active-tree
+freshness invariant.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private

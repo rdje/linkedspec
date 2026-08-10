@@ -53,8 +53,8 @@ bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contrac
 
 ### Bounded cursor transactions do not mean general backtracking
 
-The accepted future checkpoint/try/commit/rollback model is one explicit recognition attempt inside one rule
-invocation. Conceptually:
+The accepted checkpoint/try/commit/rollback model—current on Perl and future on the other runtimes—is one explicit
+recognition attempt inside one rule invocation. Conceptually:
 
 ```text
 checkpoint = snapshot(cursor, anonymous_boundary, named_marks)
@@ -67,25 +67,26 @@ else:
 
 #### What the current admitted engines do today
 
-No current parser recognizes the four forms as an admitted capability. The Perl lane now has an internally
-executable implementation proof, but its final-path consumer is deliberately outside ordinary/canonical discovery
-until the next admission leaf. `save_cursor()` and `restore_cursor()` remain older cursor-only LIFO compatibility
-controls. They do not save the anonymous boundary or named marks, carry an invocation/source owner, or diagnose
-reuse and escape. They are not aliases for a transaction token.
+The Perl reference now recognizes and admits the four forms as a current capability. Its exact 51-test consumer is
+required, syntax-checked, and executed by canonical CI. Rust, Dart, Julia, PUC Lua, and LuaJIT do not yet admit the
+forms. `save_cursor()` and `restore_cursor()` remain older cursor-only LIFO compatibility controls. They do not
+save the anonymous boundary or named marks, carry an invocation/source owner, or diagnose reuse and escape. They
+are not aliases for a transaction token.
 
 Named marks are currently isolated by rule label for one parser execution. A `Top` mark and a `Child` mark with the
 same name are independent. Recursive re-entry of `Top`, however, uses the same `Top` bucket; a child invocation can
-overwrite its parent's same-named mark in ordinary parsing. The internal Perl transaction route temporarily installs
-one invocation-local bucket and restores the parent bucket on exit; this has not yet been admitted as public behavior.
+overwrite its parent's same-named mark in ordinary parsing. The admitted Perl transaction route temporarily
+installs one invocation-local bucket and restores the parent bucket on exit; ordinary non-transaction parsing keeps
+its established bucket behavior.
 
 Ordinary recursion and repetition retain their established process protection. A direct no-consume recursive call
 is cut and returns no value; its trace explains the cutoff, but `last_error` stays empty. A bounded repeated
-zero-width match retains one accepted hit and then stops. Only the internal Perl transaction scope currently throws
-the future typed repetition or recursive-cycle error, and that proof remains unadmitted.
+zero-width match retains one accepted hit and then stops. The admitted Perl transaction scope throws the typed
+repetition or recursive-cycle error for accepted non-progress; the other runtimes do not yet implement that route.
 
 #### What the transaction-safety audit freezes
 
-Each future transaction token belongs to one source, rule invocation, generation, and originating edge. V1 permits
+Each transaction token belongs to one source, rule invocation, generation, and originating edge. V1 permits
 one active token per invocation. Commit or rollback is terminal; nesting, escape, caller unwind, cross-rule/source
 use, automatic alternatives, and retry are rejected.
 
@@ -95,9 +96,9 @@ only possible v1 effects. User or aggregate mutation, compatibility cursor-stack
 diagnostics, exit, unknown/raw code, callable/user functions, parser registry work, external calls, and host effects
 fail closed. Runtime checks remain a backstop for dynamic paths.
 
-#### Accepted future authored form
+#### Accepted authored form (current on Perl)
 
-Behavior-free `FUTURE-PARITY-BACKLOG.14.3.1.0` ratifies this exact future shape:
+Behavior-free `FUTURE-PARITY-BACKLOG.14.3.1.0` ratifies this exact shape:
 
 ```text
 tx = recognition_checkpoint();
@@ -132,31 +133,37 @@ output, authored diagnostics, exit/unbounded control, user or callable functions
 external/host work, raw code, and unknown nodes fail closed. Rule calls are classified transitively, and the
 runtime checks the same boundary before performing an effect.
 
-The future contract now has an executable backend-neutral authority. Its independent checker covers 128 current
+The shared contract now has an executable backend-neutral authority. Its independent checker covers 128 current
 ActionIR node kinds plus four dedicated transaction kinds, all 246 current call contracts, falsey token results,
-recursive effect fixed points, invocation-frame marks, cursor-only progress, fifteen portable diagnostics, and 40
+recursive effect fixed points, invocation-frame marks, cursor-only progress, fifteen portable diagnostics, and 41
 drift mutations:
 
 ```bash
 bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py
 ```
 
-That command proves the target semantics only. No backend may claim transaction support until its separate
-behavior and admission leg lands.
+That command proves the target semantics only. A backend may claim transaction support only after its separate
+behavior and admission leg lands; Perl is the first admitted backend.
 
-The Perl lane now has both its private state foundation and an internal end-to-end implementation. Four dedicated
+The Perl lane now has both its private state foundation and an admitted end-to-end implementation. Four dedicated
 ActionIR nodes preserve token/result/static-callee arguments; a recursive effect fixed point rejects unsafe callees
 before recognition; live and independently emitted handlers use invocation-local marks, falsey-safe payload staging,
-and cursor-only progress diagnostics. The final-path consumer is GREEN, including generated-source execution, but
-remains deliberately absent from ordinary/canonical discovery. This is an implementation proof, not current
-authored syntax or a completed Perl rollout leg.
+and cursor-only progress diagnostics. The final-path consumer is GREEN, including generated-source execution, and
+canonical CI now requires, syntax-checks, and executes it exactly once:
 
-The same checker fails closed over three public transaction pages, eight forbidden claims, and thirteen sequence
-mutations. This guards the milestone order without changing the neutral artifact's forty semantic mutations.
+```bash
+PERL5LIB= prove -Iperl t/recognition_transaction_perl_contract.t
+```
 
-This section describes an accepted future contract, not a current feature. The neutral artifact/checker is
-executable, but Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT must each be admitted independently before the form
-becomes portable public behavior. Perl's internal GREEN proof does not advance the neutral 1/9 rollout ledger.
+This is current authored behavior on Perl and completes only the Perl rollout leg.
+
+The same checker fails closed over three public transaction pages, eight forbidden claims, and fourteen sequence mutations.
+This guards the milestone order alongside the neutral artifact's 41 semantic mutations.
+
+This section describes a current Perl feature and an accepted future portable contract. The neutral artifact/checker is
+executable, and Perl is admitted; Rust, Dart, Julia, PUC Lua, and LuaJIT must each be admitted independently before
+the form becomes portable behavior. Recognition rollout is now 2/9 complete; recurring composition and final
+public no-drift remain separate later legs.
 
 Only cursor/source-boundary state participates. A rollback cannot undo variables, AST mutation, diagnostic or
 output events, parser-registry work, external calls, or host effects. An uncommitted path must therefore remain
@@ -226,14 +233,15 @@ source executes independently on both ABIs. The extra 11 mutations reject topolo
 The unchanged `.14.2.7` recomposition reruns that authority and closes the six-runtime internal value/helper
 implementation slice. It does not add an authored value or advance the 8-complete/6-pending public rollout.
 
-There is still no public `Position` or `Span` authored value, admitted transaction behavior, recursive observation
-API, or span-native parser dispatch. Exact future transaction spelling is accepted but unavailable as a current
-capability; Perl's internal implementation still awaits admission and the other runtimes remain later leaves. The combined recurring/public
+There is still no public `Position` or `Span` authored value, recursive observation API, or span-native parser
+dispatch. Exact transaction spelling is current on Perl but unavailable on the other runtimes until their own
+admission leaves. The combined recurring/public
 no-drift rollout row remains pending for final closeout `FUTURE-PARITY-BACKLOG.14.8`, so recurring composition does
 not change the current 8 complete / 6 pending ledger.
 
-Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions,
-typed spans, or the accepted `recognition_*` forms are executable authored values or operations.
+Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions or
+typed spans are authored values, or that the admitted Perl `recognition_*` operations are portable to another
+runtime.
 
 ## Five anchor families
 

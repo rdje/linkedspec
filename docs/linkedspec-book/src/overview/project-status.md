@@ -100,21 +100,21 @@ An unchanged `FUTURE-PARITY-BACKLOG.14.2.7` recomposition reruns that complete a
 value/helper implementation slice `.14.2`. This is a project-state closure, not a new language surface: the six
 admitted runtimes, helper results, schemas, and 8-complete/6-pending rollout remain unchanged.
 
-Public typed values, executable transaction behavior, recursive observation, span-native progressive/staged
-dispatch, and all public authored surfaces remain future work. Exact future transaction syntax is now ratified:
+Public typed values, cross-runtime transaction portability, recursive observation, span-native progressive/staged
+dispatch, and the remaining public authored surfaces remain future work. Exact transaction syntax is ratified:
 `recognition_checkpoint()`, `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and
 `recognition_rollback(token)`. Match is a strict boolean and the falsey-safe payload remains staged until commit.
-Their neutral artifact/checker is executable at 128 current + 4 future ActionIR rows, 246 call rows, and 40
-rejected mutations, with neutral rollout 1/9 complete. The authored forms themselves are not current executable
-syntax; all six runtime, recurring, and public legs remain RED. The internal
+Their neutral artifact/checker is executable at 128 current + 4 dedicated ActionIR rows, 246 call rows, and 41
+rejected mutations, with recognition rollout 2/9 complete. The authored forms are current executable syntax on
+Perl only; Rust, Dart, Julia, PUC Lua, LuaJIT, recurring, and public-no-drift legs remain RED. The internal
 Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT admissions do not add an authored `Position` or `Span` value, transaction
 operation, schema version, or new helper result. Rollout is 8 complete / 6 pending because the combined recurring/
 public no-drift row remains owned by final program-wide closeout `FUTURE-PARITY-BACKLOG.14.8`.
 
-Perl now has an internal transaction implementation proof with four dedicated ActionIR nodes, recursive static
+Perl now has an admitted transaction implementation with four dedicated ActionIR nodes, recursive static
 effect closure, invocation-local mark/cursor snapshots, falsey-safe commit results, typed recognition-only progress
-errors, and independent generated-source execution. Its final-path consumer is GREEN but deliberately absent from
-ordinary/canonical discovery until `.14.3.2.3`, so this does not make the syntax current or advance rollout 1/9.
+errors, and independent generated-source execution. Its exact 51-test final-path consumer is GREEN, tracked,
+syntax-checked, and executed once by canonical CI; only `perl` advances, leaving recognition rollout at 2/9.
 
 The helper audit distinguishes 7 callable compatibility aliases from 2 internal Perl contract/scanner ids.
 `capture_take_slice` and `capture_take_slice_len` are internal ids, not accepted helper spellings; authored code
@@ -782,7 +782,7 @@ Three backbone items tracked major structural modernization — all done:
   LuaJIT and composition-closed under `.14.2`. Behavior-free `.14.3.0` audited the separate transaction baseline:
   cursor save/restore is cursor-only compatibility state, ordinary same-label recursive marks are not invocation-
   local, and ordinary recursion/repetition retain their compatibility termination. `.14.3.1` froze exact syntax,
-  effects, and neutral proof; Perl `.14.3.2.2` now implements that behavior internally without admission. Broader
+  effects, and neutral proof; Perl `.14.3.2.3` now admits that implementation through exact canonical proof. Broader
   runtime rollout, observation, and dispatch work remains future through `.14.8`. ADR `0045` separately retains
   gap syntax and lifecycle ownership. The EBNF recursive-regex and portmap complex-regex walkthroughs preserve
   those shipped facts as compatibility descriptions, not the target general authoring idiom.

@@ -10,6 +10,22 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-10 (`FUTURE-PARITY-BACKLOG.14.3.2.3` — Perl recognition-transaction admission): admission is a
+  registry/ledger/public-current slice, not another implementation seam. Require the exact final-path file once,
+  syntax-check it once, and execute it once through ordinary `prove`; make all four occurrences omission- and
+  duplication-sensitive in the independent checker without changing production Perl.
+- A final-path consumer can contain admission-state assertions even when its behavioral proof is already GREEN.
+  Advancing neutral-only status and all-backends-unavailable metadata changed exactly two assertions; the other 49
+  still prove the integrated ActionIR, effects, tokens, marks, progress, compatibility, and generated-source routes.
+- Preserve two distinct mutation domains. The semantic corpus advances 40→41 by retaining premature Rust promotion
+  rejection and adding Perl complete→RED regression. The three-page public projection advances 13→14 by separately
+  rejecting neutral regression, Perl regression, and premature next-backend promotion.
+- Current support is runtime-scoped: Perl now admits the exact `recognition_*` forms, but this does not complete
+  recurring or public-no-drift governance and does not make the forms portable to Rust, Dart, Julia, or Lua.
+- Treat the full canonical result as the admission boundary: exact registration is insufficient until the same
+  staged tree passes CLI 66/66 in both option environments, RAM policy, and Phase 0 1,031/1,031. This slice closes
+  at 34% RAM and 733 wall-clock seconds with production implementation bytes unchanged.
+
 - 2026-08-10 (`FUTURE-PARITY-BACKLOG.14.3.2.2` — integrated Perl recognition transactions): scan the four special
   forms before generic statement families, but preserve the established lowering-contract metadata order with
   `call` first. Dedicated event arguments are the only source of token/result/static-callee lowering; generic

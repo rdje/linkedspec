@@ -46,17 +46,18 @@
 > execution-context cursor-only compatibility stack. Child match and anonymous-boundary registers are already
 > framed, but recursive same-label marks, opaque token ownership/generation, a closed ActionIR effect classifier,
 > and structured repetition/recursion progress failures are not. Do not rename `save_cursor`/`restore_cursor` or
-> claim transaction support. The accepted future forms are `recognition_checkpoint()`,
+> treat those compatibility controls as transaction support. The accepted transaction forms are `recognition_checkpoint()`,
 > `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and `recognition_rollback(token)`. The attempt
 > returns a match boolean; commit separately exposes the staged payload. The neutral authority is now executable
-> and fail-closed over 128 current + four future node rows, 246 call rows, and 40 mutations. The authored forms
-> remain unavailable until each runtime and public admission lands; neutral proof is not backend support.
+> and fail-closed over 128 current + four dedicated node rows, 246 call rows, and 41 mutations. Perl transaction
+> support is current and canonically admitted; the other runtime legs remain unavailable until their own
+> admissions land. Neutral proof alone is not backend support.
 >
-> Perl now has an internal end-to-end implementation behind that boundary: dedicated ActionIR, recursive static
+> Perl now has an admitted end-to-end implementation behind that boundary: dedicated ActionIR, recursive static
 > effect validation, invocation-local cursor/boundary/marks, falsey-safe staging, typed cursor-progress failures,
-> and independently loaded generated-source execution are GREEN in the explicit final-path consumer. That consumer
-> remains outside ordinary/canonical discovery until `.14.3.2.3`; do not project this proof as Perl admission or
-> alter the neutral 1/9 rollout state.
+> and independently loaded generated-source execution are GREEN in the exact 51-test final-path consumer. Canonical
+> CI requires, syntax-checks, and executes that consumer exactly once. Only the Perl leg advances, so recognition
+> rollout is 2/9 complete while Rust, Dart, Julia, PUC Lua, LuaJIT, recurring, and public-no-drift remain RED.
 >
 > Any cursor transaction is one explicit
 > recognition attempt over invocation-local cursor/boundary/marks only; it adds no search tree and cannot undo
@@ -65,7 +66,8 @@
 > lifecycle ownership. The neutral contract and all six internal value/projection runtime targets are admitted.
 > Existing helpers retain their public results and established scalar, byte, or code-unit mark/cursor behavior.
 >
-> Public authored values, transactions, observation, and dispatch remain owned by later leaves. The combined
+> Public authored values, portable transactions across the remaining runtimes, observation, and dispatch remain
+> owned by later leaves. The combined
 > recurring/public no-drift row stays pending for final program-wide owner `FUTURE-PARITY-BACKLOG.14.8`; the
 > recurring driver does not promote it early.
 >

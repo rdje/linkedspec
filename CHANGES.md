@@ -10,6 +10,25 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-10 — FUTURE-PARITY-BACKLOG.14.3.2.3 — admit Perl recognition transactions
+
+- Activated task-tree-first from clean integration commit `e173bbcb` as intended atomic 187/300.
+- Promoted only the `perl` recognition-transaction rollout row and bound its exact final-path consumer. The neutral
+  checker now rejects 41 semantic mutations, including independent Perl complete-to-RED regression, while Rust,
+  Dart, Julia, PUC Lua, LuaJIT, recurring, and public-no-drift remain RED at rollout 2/9.
+- Canonical CI now requires, syntax-checks, and executes `t/recognition_transaction_perl_contract.t` exactly once.
+  Its 51 tests remain behaviorally identical; only the neutral-only status and all-backends-unavailable metadata
+  assertions advance to the admitted state.
+- Advanced the three governed mdBook pages from implemented-but-unadmitted Perl to current Perl support without
+  implying cross-runtime portability. Public sequence proof is now 3 documents / 8 forbidden claims / 14
+  mutations, with separate neutral, Perl-regression, and premature-next-backend guards. The rendered book is 79
+  files / 14,368 KiB with distinct status/command/limitation blocks and is removed after inspection.
+- Preserved all production compiler/runtime/generated-source modules, exact 132 ActionIR / 246 call inventories,
+  fixtures, helper results/registers, schemas, semantic/MCP/capability/CLI surfaces, README, and project-data roots.
+- Definitive canonical CI passes all eight doctrines, the exact Perl consumer, every mandatory cross-runtime and
+  storage/relocation proof, CLI 66/66 twice, RAM 34%, and Phase 0 1,031/1,031 in 733 wall-clock seconds before the
+  exact local-gate pass marker. Perl parent `.14.3.2` is composition-complete; Rust RED `.14.3.3.0` is next.
+
 ## 2026-08-10 — FUTURE-PARITY-BACKLOG.14.3.2.2 — integrate Perl recognition transactions
 
 - Activated task-tree-first from clean private-authority closeout `8138bea5` as intended atomic 186/300.
