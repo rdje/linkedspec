@@ -29,7 +29,7 @@ fn contract() -> Value {
     serde_json::from_str(CONTRACT_SOURCE).expect("recognition-transaction contract JSON")
 }
 
-fn authority(source_identity: &str) -> RecognitionTransactionAuthority {
+fn new_authority(source_identity: &str) -> RecognitionTransactionAuthority {
     let sources = BTreeMap::from([("input".to_owned(), "abcdef".to_owned())]);
     RecognitionTransactionAuthority::new(Arc::new(SourceAuthority::new(&sources)), source_identity)
 }
@@ -114,12 +114,12 @@ fn neutral_authority_and_rust_red_boundary_are_exact() {
     assert_eq!(contract["format"], 1);
     assert_eq!(contract["expected_counts"]["current_action_ir_nodes"], 128);
     assert_eq!(contract["expected_counts"]["dedicated_action_ir_nodes"], 4);
-    assert_eq!(contract["expected_counts"]["canonical_calls"], 246);
-    assert_eq!(contract["expected_counts"]["token_positive"], 8);
-    assert_eq!(contract["expected_counts"]["token_negative"], 17);
-    assert_eq!(contract["expected_counts"]["effect_graphs"], 6);
-    assert_eq!(contract["expected_counts"]["marks"], 6);
-    assert_eq!(contract["expected_counts"]["progress"], 8);
+    assert_eq!(contract["expected_counts"]["canonical_call_contracts"], 246);
+    assert_eq!(contract["expected_counts"]["token_positive_cases"], 8);
+    assert_eq!(contract["expected_counts"]["token_negative_cases"], 17);
+    assert_eq!(contract["expected_counts"]["effect_graph_cases"], 6);
+    assert_eq!(contract["expected_counts"]["mark_cases"], 6);
+    assert_eq!(contract["expected_counts"]["progress_cases"], 8);
     assert_eq!(contract["expected_counts"]["diagnostics"], 15);
     assert_eq!(contract["expected_counts"]["mutations"], 41);
 
@@ -135,7 +135,7 @@ fn neutral_authority_and_rust_red_boundary_are_exact() {
     assert!(rollout[3..].iter().all(|row| row["status"] == "red"));
 
     assert_eq!(
-        contract["syntax"],
+        contract["authored_surface"],
         json!({
             "checkpoint": "tx = recognition_checkpoint()",
             "attempt": "matched = recognize_once(tx, call(Child))",
@@ -143,13 +143,14 @@ fn neutral_authority_and_rust_red_boundary_are_exact() {
             "rollback": "recognition_rollback(tx)",
             "operand": "recognize_once accepts exactly one unevaluated static call(Rule) operand",
             "result_separation": "recognize_once returns a strict match boolean; the recognized payload remains staged until commit",
+            "availability": "available only in an admitted backend; currently Perl, with all other runtime legs future and unavailable",
         })
     );
 }
 
 #[test]
 fn invocation_frames_are_monotonic_opaque_and_same_label_isolated() {
-    let mut authority = authority("input.spec");
+    let mut authority = new_authority("input.spec");
     let parent = authority
         .enter_invocation("Top", "root", initial_state())
         .expect("enter parent invocation");
@@ -231,7 +232,7 @@ fn all_eight_positive_tokens_keep_match_presence_separate_from_payload() {
         .as_array()
         .expect("positive token fixtures")
     {
-        let mut authority = authority("input.spec");
+        let mut authority = new_authority("input.spec");
         let frame = authority
             .enter_invocation(
                 "Top",
@@ -303,7 +304,7 @@ fn rollback_restores_and_commit_retains_cursor_boundary_and_invocation_marks() {
         .iter()
         .take(2)
     {
-        let mut authority = authority("input.spec");
+        let mut authority = new_authority("input.spec");
         let frame = authority
             .enter_invocation(
                 "Top",
@@ -365,7 +366,7 @@ fn negative_token_ownership_and_lifecycle_paths_use_portable_diagnostics() {
             )
         })
     {
-        let mut authority = authority("input.spec");
+        let mut authority = new_authority("input.spec");
         let frame = authority
             .enter_invocation(
                 "Top",
@@ -395,7 +396,7 @@ fn negative_token_ownership_and_lifecycle_paths_use_portable_diagnostics() {
             .expect("leave escape fixture");
     }
 
-    let mut authority = authority("input.spec");
+    let mut authority = new_authority("input.spec");
     let frame = authority
         .enter_invocation("Top", "missing_attempt", initial_state())
         .expect("enter missing-attempt fixture");
@@ -419,7 +420,7 @@ fn negative_token_ownership_and_lifecycle_paths_use_portable_diagnostics() {
         .leave_invocation(&frame)
         .expect("leave missing-attempt fixture");
 
-    let mut authority = authority("input.spec");
+    let mut authority = new_authority("input.spec");
     let frame = authority
         .enter_invocation("Top", "retry", initial_state())
         .expect("enter retry fixture");
@@ -451,7 +452,7 @@ fn negative_token_ownership_and_lifecycle_paths_use_portable_diagnostics() {
 fn cross_invocation_cross_source_nesting_reuse_and_unwind_are_exact() {
     let contract = contract();
 
-    let mut authority = authority("input.spec");
+    let mut authority = new_authority("input.spec");
     let parent = authority
         .enter_invocation("Top", "parent", initial_state())
         .expect("enter parent");
@@ -477,14 +478,14 @@ fn cross_invocation_cross_source_nesting_reuse_and_unwind_are_exact() {
         .leave_invocation(&parent)
         .expect("leave cross-invocation parent");
 
-    let mut first = authority("first.spec");
+    let mut first = new_authority("first.spec");
     let first_frame = first
         .enter_invocation("Top", "cross_source", initial_state())
         .expect("enter first source");
     let first_token = first
         .checkpoint(&first_frame, "cross_source")
         .expect("checkpoint first source");
-    let mut second = authority("second.spec");
+    let mut second = new_authority("second.spec");
     let second_frame = second
         .enter_invocation("Top", "cross_source", initial_state())
         .expect("enter second source");
@@ -504,7 +505,7 @@ fn cross_invocation_cross_source_nesting_reuse_and_unwind_are_exact() {
         .leave_invocation(&first_frame)
         .expect("leave first source");
 
-    let mut authority = authority("input.spec");
+    let mut authority = new_authority("input.spec");
     let frame = authority
         .enter_invocation("Top", "double_terminal", initial_state())
         .expect("enter double-terminal fixture");
@@ -534,7 +535,7 @@ fn cross_invocation_cross_source_nesting_reuse_and_unwind_are_exact() {
         .leave_invocation(&frame)
         .expect("leave double-terminal fixture");
 
-    let mut authority = authority("input.spec");
+    let mut authority = new_authority("input.spec");
     let frame = authority
         .enter_invocation("Top", "unwind", initial_state())
         .expect("enter unwind fixture");
@@ -553,6 +554,85 @@ fn cross_invocation_cross_source_nesting_reuse_and_unwind_are_exact() {
         "recognition_terminal_required",
         &[("rule", json!("Top")), ("origin", json!("unwind"))],
     );
+}
+
+#[test]
+fn nesting_rejection_and_token_drop_restore_before_invalidation() {
+    let contract = contract();
+
+    let mut authority = new_authority("input.spec");
+    let parent = authority
+        .enter_invocation("Top", "nesting_parent", initial_state())
+        .expect("enter nesting parent");
+    let parent_before = authority
+        .frame_snapshot(&parent)
+        .expect("snapshot nesting parent before checkpoint")
+        .state_record();
+    let parent_token = authority
+        .checkpoint(&parent, "nesting_parent")
+        .expect("checkpoint nesting parent");
+    authority
+        .attempt(
+            &parent,
+            &parent_token,
+            true,
+            Some(json!("value")),
+            staged_state(),
+        )
+        .expect("stage nesting parent");
+    let child = authority
+        .enter_invocation("Child", "nesting_child", state(3, Some(2), &[]))
+        .expect("enter nesting child");
+    let nesting = match authority.checkpoint(&child, "nesting_child") {
+        Ok(_) => panic!("nested transaction must reject"),
+        Err(error) => error,
+    };
+    assert_diagnostic(
+        &contract,
+        nesting,
+        "recognition_nesting_forbidden",
+        &[("rule", json!("Child")), ("origin", json!("nesting_child"))],
+    );
+    assert_eq!(
+        authority
+            .frame_snapshot(&parent)
+            .expect("snapshot restored nesting parent")
+            .state_record(),
+        parent_before
+    );
+    authority
+        .leave_invocation(&child)
+        .expect("leave nesting child");
+    authority
+        .leave_invocation(&parent)
+        .expect("leave restored nesting parent");
+
+    let mut authority = new_authority("input.spec");
+    let frame = authority
+        .enter_invocation("Top", "drop", initial_state())
+        .expect("enter token-drop fixture");
+    let frame_before = authority
+        .frame_snapshot(&frame)
+        .expect("snapshot token-drop frame before checkpoint")
+        .state_record();
+    {
+        let token = authority
+            .checkpoint(&frame, "drop")
+            .expect("checkpoint token-drop fixture");
+        authority
+            .attempt(&frame, &token, true, Some(json!("value")), staged_state())
+            .expect("stage token-drop fixture");
+    }
+    assert_eq!(
+        authority
+            .frame_snapshot(&frame)
+            .expect("snapshot restored token-drop frame")
+            .state_record(),
+        frame_before
+    );
+    authority
+        .leave_invocation(&frame)
+        .expect("leave restored token-drop frame");
 }
 
 #[cfg(linkedspec_recognition_transaction_integration_red)]

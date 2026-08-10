@@ -5,13 +5,13 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `a0595411` — clean Perl-admission parent for signoff-complete Rust RED atomic 188/300; no push.
-- latest_completed_leaf: Rust dormant transaction RED `.14.3.3.0` is verified and commit-ready as atomic 188/300.
-- active_work_unit: none beyond the atomic 188/300 commit candidate; `.14.3.3.1` remains pending until clean.
-- next_action: land Rust RED atomic 188/300, prove clean handoff, then activate private authority `.14.3.3.1`.
-- in_flight_uncommitted: signoff-complete commit candidate only; no test job, rendered book, or managed-run residue.
-- blockers: none. Ordinary discovery passes zero tests; explicit cfg reaches sole missing-module `E0432`; canonical
-  signoff passes CLI 66x2, RAM 55%, and Phase 0 1,031/1,031 in 700 seconds.
+- activation_commit: `cb9420b1` — clean dormant-Rust-RED parent for active private authority atomic 189/300; no push.
+- latest_completed_leaf: private Rust transaction authority `.14.3.3.1` is signoff-complete and commit-ready as atomic 189/300; Git will supply the landing hash.
+- active_work_unit: none beyond the completed atomic 189 commit candidate; `.14.3.3.2` is not yet activated.
+- next_action: land atomic 189/300, clear the brief, prove clean, then activate Rust integration `.14.3.3.2` task-tree-first.
+- in_flight_uncommitted: none in the intended post-landing handoff; no background job or rendered book.
+- blockers: none. Ordinary discovery passes zero tests; outer cfg passes 7/7; nested cfg reaches only the exact
+  `.14.3.3.2` missing ActionIR/effect/progress seam; the complete Rust local and canonical gates pass.
   Recognition remains 132/246/41, rollout 2/9, public 3/8/14; the separate guide guard is 1/2/6.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
@@ -49,12 +49,11 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   `recognize_once(token, call(Rule))`, `recognition_commit`, and `recognition_rollback`; match boolean and staged
   payload are separate. Tokens are linear; effects are closed 9 allowed/11 rejected; marks become invocation-
   framed; v1 progress is cursor-only. Perl is the first admitted backend: its exact consumer passes 51/51 and is
-  tracked, syntax-checked, and canonically executed once. Rust's dormant cfg-gated consumer runs zero ordinary
-  tests and stops explicitly at sole missing private-module `E0432`; no Rust production or rollout changes.
-  Rollout is 2/9 at 41 mutations; public is 3/8/14; the capability-guide drift guard is separate at 1/2/6.
-- current_future_direction: transaction `.14.3` remains split through neutral `.1`, five backend families/six
-  runtimes `.2-.6`, recurring `.7`, and closeout `.8`; Perl admission `.14.3.2.3` precedes Rust RED `.14.3.3.0`,
-  and `.14.8` retains public no-drift. `TASK-TREE-METADATA-HYGIENE.5` owns frontier freshness.
+  tracked, syntax-checked, and canonically executed once. Rust's cfg-private authority passes its outer consumer
+  7/7 while ordinary discovery stays zero-test; nested integration remains RED at `.14.3.3.2`, so Rust authored
+  support and rollout do not move. Rollout is 2/9 at 41 mutations; public 3/8/14; guide guard 1/2/6.
+- current_future_direction: transaction `.14.3` remains split through neutral `.1`, backend families `.2-.6`,
+  recurring `.7`, and closeout `.8`; Rust `.14.3.3.1` is complete, `.2` is next, and `.14.8` retains no-drift.
 - latest_bootstrap_read: 2026-08-10 — complete roadmap/codebase/mdBook and required continuity/tooling review.
-- pivot_guard: cleanly commit `.14.3.3.0` before activating private authority `.14.3.3.1`.
-- push_policy: hard lock at 300 commits; Rust RED is commit-ready as atomic 188/300; no push; use project wrappers.
+- pivot_guard: prove atomic 189 cleanly landed before activating Rust integration `.14.3.3.2`.
+- push_policy: hard lock at 300 commits; private Rust authority is commit-ready as atomic 189/300; no push; use wrappers.

@@ -10,6 +10,26 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-10 — FUTURE-PARITY-BACKLOG.14.3.3.1 — add private Rust transaction authority
+
+- Activated task-tree-first from clean dormant-RED commit `cb9420b1` as intended atomic 189/300.
+- Added one documentation-hidden Rust module behind the existing outer custom cfg. Its source-local authority owns
+  opaque monotonic invocation/frame/mark/token generations, detached cursor/boundary/mark snapshots, exactly-once
+  attempt state, falsey-safe payload staging, commit/rollback, and restore-before-invalidate terminal cleanup.
+- Made the outer dormant consumer GREEN at 7/7 while ordinary Cargo still runs zero tests. The nested two-cfg
+  consumer now stops only at `.14.3.3.2` missing dedicated ActionIR variants and effect/progress classifiers.
+- Repaired test-only defects masked by the prior missing-module compiler stop: two constructor-shadow sites, six
+  stale abbreviated neutral JSON keys, and one incomplete stale authored-surface assertion. Added explicit nesting
+  and token-drop restoration proof without changing the frozen semantic contract.
+- Preserved every ordinary Rust parser/compiler/runtime/emitter route, Cargo manifest and canonical registration,
+  other backends, recognition 132/246/41, rollout 2/9, public 3/8/14, guide 1/2/6, schemas, APIs, CLI, and README.
+- Formatting, strict new-module Clippy, exact cfg/next-RED proofs, and the complete Rust local gate pass, including
+  195 core and 166 runtime unit tests, 105/105 corpus cases, 197 integration cases, storage containment, binary
+  build, and CLI 66/66 in both option environments.
+- Definitive canonical signoff passes all eight doctrines, every mandatory cross-runtime/storage/relocation proof,
+  CLI 66/66 in both option environments, RAM 65%, and Phase 0 1,031/1,031 in 701 seconds before exact
+  `[ci] local CI gate passed`.
+
 ## 2026-08-10 — FUTURE-PARITY-BACKLOG.14.3.3.0 — freeze Rust transaction RED
 
 - Activated task-tree-first from clean Perl-admission commit `a0595411` as intended atomic 188/300.

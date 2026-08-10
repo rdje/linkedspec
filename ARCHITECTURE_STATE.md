@@ -73,6 +73,17 @@ consumers pass, and the route registry remains 20 surfaces / 62 routes / 32/32 w
 empty debt metadata. The program is composition-closed. These storage migrations change documentation governance
 only; they change no language, compiler, runtime, backend, fixture, CLI, protocol, or project-data root.
 
+- `2026-08-10 private Rust recognition-transaction authority`: `FUTURE-PARITY-BACKLOG.14.3.3.1` adds one
+  documentation-hidden module reachable only under the dormant consumer's outer custom cfg. One source-local
+  authority owns monotonic invocation/frame/mark/token generations, detached cursor/boundary/mark snapshots,
+  strict match-versus-payload state, exactly-once attempt state, and terminal restoration/invalidation. The outer
+  consumer passes 7/7 while ordinary Cargo runs zero tests. Its previously sole missing-module error had masked a
+  shadowed constructor plus stale neutral JSON paths; test-only repairs retain the governed semantics and add
+  nesting/token-drop cleanup coverage. The nested cfg now stops at `.14.3.3.2` missing dedicated ActionIR variants
+  and effect/progress classifiers. Parser, engine, generated source, manifest, canonical driver, rollout 2/9, and
+  current Rust authored behavior remain unchanged. Definitive signoff passes the complete Rust local gate and the
+  canonical gate with CLI 66/66 twice, RAM 65%, and Phase 0 1,031/1,031 in 701 seconds.
+
 - `2026-08-10 dormant Rust recognition-transaction RED`: `FUTURE-PARITY-BACKLOG.14.3.3.0` adds one tracked
   final-path Rust consumer behind an outer private-authority cfg and a nested integration cfg. Ordinary Cargo
   discovers zero active tests; explicit outer-cfg execution stops at sole `E0432` for absent private module

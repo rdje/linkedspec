@@ -10,6 +10,31 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-10 (`FUTURE-PARITY-BACKLOG.14.3.3.1` — private Rust recognition-transaction authority): keep the
+  authority behind the exact dormant consumer cfg until parser/ActionIR integration. A documentation-hidden public
+  module gives the final-path integration test access without making ordinary crate builds or docs expose a
+  premature runtime surface.
+- Use authority-owned shared token/frame state for fail-safe misuse. Cross-source or cross-invocation calls may be
+  presented through the wrong authority, but must still restore and invalidate the token's originating frame.
+  Pointer identity for the immutable source authority plus authority-local monotonic ids distinguishes those cases;
+  `Rc<RefCell<_>>` is sufficient and intentional for this cfg-only, single-thread state machine.
+- Keep match acceptance independent from payload presence. A miss discards any supplied payload, while commit may
+  return false, zero, empty text, null, or no payload after invalidating the token. Retry, nesting, escape, unwind,
+  authority drop, and token drop restore before invalidation so failed control never leaks staged cursor or marks.
+- A compile-time RED can mask defects behind its first boundary. Supplying the missing module revealed constructor
+  shadowing, six stale abbreviated neutral-contract keys, and a nonexistent partial `syntax` object in the frozen
+  consumer. Repair the dormant test only after recording the discovery in its owning leaf, retain every governed
+  expectation, and strengthen lifecycle coverage so the next RED is demonstrably the intended integration seam.
+- Verification must distinguish three cfg states: ordinary discovery runs zero tests; the outer authority cfg
+  passes 7/7; outer plus integration cfg fails only on missing dedicated ActionIR variants/classifiers owned by
+  `.14.3.3.2`. The complete Rust gate then proves the cfg-private work did not perturb ordinary behavior.
+- Rust evaluates an unknown `cfg` predicate before an item-level lint allowance can take effect. Because this leaf
+  deliberately forbids Cargo-manifest/build-script registration, keep the required crate-level allowance explicit
+  and reason-annotated; exact source/no-registration checks retain the dormant boundary until the later admission.
+- A partitioned task index must be regenerated after the final evidence append, not merely after implementation
+  evidence. The first canonical attempt correctly rejected the stale `.14` digest before product tests; after the
+  refresh, the complete gate passed CLI 66x2, RAM 65%, and Phase 0 1,031/1,031 in 701 seconds.
+
 - 2026-08-10 (`FUTURE-PARITY-BACKLOG.14.3.3.0` — dormant Rust recognition-transaction RED): use a file-level
   custom cfg so the final-path integration target is tracked and syntax-visible to Cargo while ordinary and
   canonical discovery execute zero tests. A second nested cfg can freeze later compiler/runtime/carrier behavior

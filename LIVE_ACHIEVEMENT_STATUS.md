@@ -2,26 +2,28 @@
 
 ## Current Activity
 
-- Rust transaction RED `FUTURE-PARITY-BACKLOG.14.3.3.0` is signoff-complete from clean Perl-admission commit
-  `a0595411` and commit-ready as atomic 188/300. One tracked custom-cfg consumer freezes private state plus all four
-  Rust carriers while ordinary Cargo discovers zero active tests.
-- Explicit cfg execution stops at sole `E0432` for missing `linkedspec_runtime::recognition_transaction`, the exact
-  `.14.3.3.1` private-authority seam. Production and rollout remain unchanged at recognition 132/246/41, 2/9, and
-  public 3/8/14. A stale capability-guide 1/9 paragraph is repaired and separately guarded at 1/2/6 mutations.
-  Definitive signoff passes CLI 66x2, RAM 55%, and Phase 0 1,031/1,031 in 700 seconds.
+- Private Rust transaction authority `FUTURE-PARITY-BACKLOG.14.3.3.1` is signoff-complete from clean dormant-RED
+  commit `cb9420b1` and commit-ready as intended atomic 189/300. The cfg-only module and repaired/strengthened
+  dormant consumer pass 7/7; ordinary Cargo still executes zero tests.
+- The nested cfg now reaches only `.14.3.3.2` missing ActionIR/effect/progress integration. The complete Rust local
+  and definitive canonical gates pass, including CLI 66x2, RAM 65%, Phase 0 1,031/1,031 in 701 seconds, and
+  repository-storage proof. Production and rollout remain unchanged at recognition 132/246/41, 2/9, public
+  3/8/14, and guide 1/2/6.
 
 ## Latest Completed Slice
 
-- `.14.3.3.0` — dormant Rust transaction RED is complete, verified, and commit-ready as atomic 188/300.
-- `a0595411` — Perl recognition-transaction admission landed as atomic 187/300.
+- `FUTURE-PARITY-BACKLOG.14.3.3.1` — private Rust transaction authority is commit-ready as atomic 189/300.
+- `cb9420b1` — dormant Rust transaction RED landed as atomic 188/300.
 
 ## Next Action
 
-- Land atomic 188/300, prove clean handoff, then activate private Rust authority `.14.3.3.1` task-tree-first.
+- Land private Rust authority `.14.3.3.1` as atomic 189/300, prove the clean handoff, then activate integration
+  `.14.3.3.2` task-tree-first.
 
 ## Recent Completions
 
-- `2026-08-10` — `.14.3.3.0` froze and signed off the dormant Rust transaction RED for atomic 188/300.
+- `2026-08-10` — `.14.3.3.1` completed private Rust authority signoff for atomic 189/300.
+- `2026-08-10` — `cb9420b1` froze and signed off the dormant Rust transaction RED as atomic 188/300.
 - `2026-08-10` — `.14.3.2.3` admitted Perl recognition transactions for atomic 187/300.
 - `2026-08-10` — `.14.3.2.2` integrated Perl recognition transactions for atomic 186/300.
 - `2026-08-10` — `FUTURE-PARITY-BACKLOG.14.3.2.1` added private Perl transaction authority as atomic 185/300.
@@ -36,7 +38,6 @@
 - `2026-08-09` — `dc8dd896` froze the bounded document-store contract as atomic 176/300.
 - `2026-08-09` — `0bcb5a36` recomposition-closed README routing pressure as atomic 175/300.
 - `2026-08-09` — `5c570719` enforced 20 routed surfaces and 62 routes as atomic 174/300.
-- `2026-08-09` — `6a5d1dcc` ratified routing-pressure closure as atomic 173/300.
 
 ## History
 

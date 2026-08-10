@@ -4460,9 +4460,9 @@
   subject, and Rust RED `.14.3.3.0` remains the next task-tree-first activation after a clean post-commit handoff.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.3`
-  Status: `active` (2026-08-10; dormant Rust RED `.14.3.3.0` is signoff-complete from clean Perl-admission
-    closeout `a0595411` and commit-ready as intended atomic 188/300; private authority `.14.3.3.1` remains pending
-    until the clean post-commit handoff; no push)
+  Status: `active` (2026-08-10; private Rust transaction authority `.14.3.3.1` signoff-complete from clean
+    dormant-RED closeout `cb9420b1` as intended atomic 189/300; integration `.14.3.3.2` next after clean landing;
+    no push)
   Goal: Implement and independently admit exact Rust parity through its native/reconstructed/generated carriers.
   Depends on: `.14.3.2`
   Children: `.14.3.3.0-.14.3.3.3`
@@ -4569,10 +4569,124 @@
   commit-ready with the frozen subject; `.14.3.3.1` remains pending until a clean post-commit handoff.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.3.1`
-  Status: `pending`
+  Status: `complete` (2026-08-10; private authority and definitive signoff complete from clean dormant-RED
+    closeout `cb9420b1`, commit-ready as intended atomic 189/300; integration `.14.3.3.2` next; no push)
   Goal: Add private Rust invocation-frame, mark-generation, opaque-token, snapshot, and invalidation authority with
     current public routes unchanged.
   Depends on: `.14.3.3.0`
+  Acceptance: Retrieve the neutral transaction authority, ADR `0056`, admitted Perl private owner and consumer,
+    Rust dormant RED, typed-source inside-out precedent, current Rust runtime value/error conventions, generated
+    carrier boundaries, Toolbox probes, and canonical/storage owners before changing Rust source. Add one
+    custom-cfg-only, public-to-the-integration-test but documentation-hidden Rust module that owns source-local
+    monotonic invocation/frame/mark/token generations, detached cursor/boundary/mark snapshots, strict
+    match-presence versus staged-payload presence/value, linear exactly-once attempt state, commit/rollback, and
+    restore-before-invalidate misuse handling. Keep the module unreachable in ordinary builds and change no
+    ActionIR node, scanner, parser, engine, RuntimeContext route, generated source, manifest, canonical driver,
+    admitted Perl behavior, neutral artifact, rollout, or public-current claim. Make the existing outer cfg contract
+    GREEN without enabling the nested integration cfg; prove ordinary Cargo still discovers zero active tests and
+    the nested cfg now stops first at the `.14.3.3.2` dedicated lowering/runtime seam. Lock recursive same-label
+    frame isolation, falsey payloads, miss/commit/rollback, stale/double/escaped/dropped token handling,
+    cross-source/invocation misuse, unwind restoration, detached snapshots, opaque diagnostics, and monotonic
+    non-reuse. Pass focused private/current Rust, explicit next-RED shape, complete Rust local, neutral/public/guide,
+    book, Knowledge/task/memory/storage/doctrine, and definitive canonical proof; synchronize durable records;
+    commit atomically as 189/300; clear the brief and prove clean before integration `.14.3.3.2` activates.
+  Verification: clean activation; Knowledge/Toolbox-first retrieval; ordinary zero-test dormancy; explicit outer-cfg
+    private authority GREEN; nested integration cfg exact next RED; unchanged recognition 132/246/41 + rollout 2/9
+    + public 3/8/14 + guide 1/2/6; production/current-suite no-drift; book/Knowledge/task/memory/storage/doctrines;
+    canonical CI; atomic clean handoff
+  Commit: `FUTURE-PARITY-BACKLOG.14.3.3.1 - add private Rust transaction authority`
+
+  ### `FUTURE-PARITY-BACKLOG.14.3.3.1` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove dormant RED `.14.3.3.0` landed at full `cb9420b1` as atomic
+    188/300 with parent `a0595411`, exact subject, empty status/diffs, zero-byte brief, valid post-commit pointer,
+    fresh Knowledge/task partitions, absent rendered book, zero managed-run descendants, no background work, and
+    this task-tree file as the sole first activation mutation.
+  - [x] **RETRIEVE / PROBE PRIVATE RUST OWNER SEAMS** — Follow neutral, Perl, dormant-RED, typed-source, runtime,
+    error, mark/snapshot, generated carrier, ADR, Toolbox, canonical, and storage owners before implementation.
+  - [x] **IMPLEMENT CFG-PRIVATE TRANSACTION AUTHORITY** — Add the narrow source authority, invocation/frame/mark
+    generations, opaque tokens, detached snapshots, staged result channels, terminal invalidation, and typed errors.
+  - [x] **PROVE LIFECYCLE / MISUSE / NEXT BOUNDARY** — Make the outer contract GREEN across exact lifecycle and
+    misuse cases while ordinary discovery stays zero-test and nested integration stops only at `.14.3.3.2`.
+  - [x] **PRESERVE DORMANCY / PRODUCTION / PUBLIC TRUTH** — Change no ordinary Rust route or other backend and keep
+    recognition 132/246/41, rollout 2/9, public 3/8/14, guide 1/2/6, README/book, and support ledgers exact.
+  - [x] **SIGNOFF / ATOMIC CLEAN HANDOFF** — Synchronize task/index, roadmaps, CHANGES, DEVELOPMENT_NOTES, MEMORY,
+    Knowledge, and mdBook; pass focused/current and definitive canonical gates; commit exactly atomic 189/300 with
+    the frozen subject; clear the brief; and prove pointer/Knowledge/task/residue/book/status clean before `.2`.
+
+  Activation evidence 2026-08-10: dormant Rust RED `.14.3.3.0` lands at full commit
+  `cb9420b167467da55fca18008973b1cb94c00021` as atomic 188/300 with first parent
+  `a0595411145cb85fb8b492c20c6f0c58fbbc5995` and exact subject
+  `FUTURE-PARITY-BACKLOG.14.3.3.0 - freeze Rust transaction RED`. Its hook regenerates Knowledge at 807 facts /
+  6,682 question keys, passes all eight doctrines, and validates `activation_commit a0595411` against `HEAD^1`.
+  Post-commit status and staged/unstaged diffs are empty; `git_message_brief.txt` is zero bytes; memory, Knowledge,
+  and 26/26 task partitions over 511 stable ids pass; generated book output is absent; the managed checkout
+  container has zero run descendants; and no background work remains. This task-tree file is the sole first
+  activation mutation before index, probes, Rust source/tests, checker, canonical driver, book, Knowledge, roadmap,
+  or live-doc changes.
+
+  Retrieval and first implementation-probe evidence 2026-08-10: Knowledge Map-first retrieval followed the neutral
+  authority, Perl private owner/consumer, dormant Rust RED, cursor/transaction contract, typed-source rollout, ADR
+  `0056`, Toolbox explicit-cfg command, source-location value/error conventions, and generated-carrier boundary. The
+  first module-supplied compile then exposed a latent frozen-consumer defect that the prior missing-module `E0432`
+  had masked: within each of two tests, a local `authority` binding shadowed the same-named constructor function, so
+  later `authority(...)` expressions failed with `E0618` before any private-authority assertion could run. This leaf
+  owns the narrow dormant-test-only constructor rename required to recover the already-frozen semantic assertions.
+  With that compile blocker removed, five of six outer tests pass; the remaining neutral-count test reads six
+  nonexistent abbreviated keys even though the governed contract has always exposed `canonical_call_contracts`,
+  `token_positive_cases`, `token_negative_cases`, `effect_graph_cases`, `mark_cases`, and `progress_cases`. The same
+  test-only recovery therefore owns correcting those JSON field paths while retaining every expected number. That
+  rerun reaches the final neutral assertion and shows the same drift once more: nonexistent top-level `syntax` was
+  used instead of canonical `authored_surface`, and its required current-availability member was omitted. Recover
+  the assertion against the complete governed object. No fixture, behavioral expectation, discovery, integration
+  boundary, production route, or rollout truth may change.
+
+  Private-authority and next-boundary evidence 2026-08-10: the new documentation-hidden
+  `rust/linkedspec-runtime/src/recognition_transaction.rs` is reachable only when the existing outer custom cfg is
+  explicitly selected. One `Rc<RefCell<_>>` authority owns the test-only single-thread invocation stack while an
+  `Arc<SourceAuthority>` pointer supplies exact cross-source identity. Opaque handles expose no clone/debug value;
+  authority-local counters never reuse invocation, mark-generation, or transaction identities; snapshots detach
+  cursor/boundary/marks; and match presence stays independent of optional staged payload. Retry, nesting, escape,
+  cross-source/invocation misuse, unwind, authority drop, and token drop restore the owning snapshot before terminal
+  invalidation. Commit copies the falsey-safe payload only after retaining staged frame state and invalidating the
+  token. The recovered consumer now passes 7/7 under the outer cfg, including explicit nesting and token-drop
+  restoration; ordinary Cargo still executes exactly zero tests. The nested two-cfg build reaches `.14.3.3.2` and
+  fails only at missing `classify_recognition_effects`, `validate_recognition_progress`, and dedicated
+  `RecognitionCheckpoint`, `RecognizeOnce`, and `RecognitionRollback` expression variants. No private-authority
+  error remains.
+
+  Focused Rust evidence 2026-08-10: `cargo fmt --check` passes. Strict Clippy passes for the new module after
+  allowing only eight pre-existing runtime-crate lint categories; dependency warnings remain confined to the
+  existing `pgen`/`rgx` trees. The complete `tools/run_rust_local.sh` gate passes 195 core unit tests, 166 runtime
+  unit tests, 105/105 corpus-oracle fixtures, 197 integration cases, all other focused runtime groups, the dormant
+  target at zero ordinary tests, the Rust project-data/storage proof, primary binary build, and both CLI matrices
+  at 66/66 before exact `[rust-ci] Rust local gate passed`.
+
+  Cfg-lint scope evidence 2026-08-10: a direct ordinary Cargo check proves Rust diagnoses the custom predicate
+  before an item-level `allow(unexpected_cfgs)` can take effect. Manifest or build-script registration would make
+  the cfg an ordinary build input and violate this leaf's frozen no-manifest/no-build-route boundary. The crate-
+  level allowance is therefore retained with an explicit reason string; source/no-registration proof continues to
+  lock the two exact predicates and their dormant test-only use.
+
+  First canonical attempt 2026-08-10: the gate stopped in doctrine enforcement before product tests because this
+  leaf's focused/cfg-lint evidence had been appended after the earlier task-partition index refresh. The checker
+  reported exact `.14` line-count, byte-count, and digest drift plus the consequent stable-id lookup failure; README
+  routing failed only because it composes that same freshness verifier. Regenerate the mutable task index after
+  this final evidence, rerun task metadata and README stability, then rerun the complete canonical gate from the
+  beginning. No implementation, contract, book, runtime, or storage assertion failed.
+
+  Definitive signoff evidence 2026-08-10: after regenerating the task partition from the final evidence, task
+  metadata and README routing returned GREEN and the complete host-authorized canonical rerun passed from the
+  beginning. It passes all eight doctrines; exact recognition 132/246/41, rollout 2/9, public 3/8/14, and guide
+  1/2/6; every mandatory typed-source, semantic-introspection, MCP, cursor, capability, project-data containment,
+  and moved-root/outside-CWD consumer; and both primary CLI option environments at 66/66. RAM is 65% against the
+  88% ceiling, and Phase 0 passes 1,031/1,031 in 701 wall-clock seconds before exact `[ci] local CI gate passed`
+  and exit zero. The independent outer cfg remains 7/7, ordinary discovery remains zero-test, the nested cfg still
+  reaches only `.14.3.3.2`, and the complete Rust local gate remains GREEN. Knowledge is synchronized at 807 facts
+  / 6,684 question keys; task metadata passes 26/26 over 511 stable ids; MEMORY and README remain bounded; the
+  inspected 79-file / 14,376-KiB book output is removed; and no production route, manifest, canonical registration,
+  support ledger, or rollout changed. Atomic 189/300 is commit-ready with the frozen subject; integration
+  `.14.3.3.2` remains pending until the clean post-commit boundary.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.3.2`
   Status: `pending`
