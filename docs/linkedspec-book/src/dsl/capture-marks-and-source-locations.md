@@ -139,6 +139,13 @@ bash tools/run_python_project_data.sh tools/check_recognition_transaction_contra
 That command proves the target semantics only. No current parser recognizes the four forms, and no backend may
 claim transaction support until its separate behavior and admission leg lands.
 
+The Perl lane now has a canonically tested private state foundation in
+`perl/LinkedSpec/RecognitionTransaction.pm`. It owns opaque invocation frames and tokens, monotonic mark
+generations, snapshots, falsey-safe staged payloads, and restore-before-invalidate misuse handling. The public
+facade, compiler, ActionIR lowering, live runtime, and generated source do not load it yet; the final-path Perl
+consumer therefore remains deliberately RED at the same four missing nodes. This private foundation is an
+implementation prerequisite, not current authored syntax or a completed Perl rollout leg.
+
 The same checker fails closed over three public transaction pages, eight forbidden claims, and thirteen sequence
 mutations. This guards the milestone order without changing the neutral artifact's forty semantic mutations.
 

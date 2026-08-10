@@ -2,28 +2,30 @@
 
 ## Current Activity
 
-- `FUTURE-PARITY-BACKLOG.14.3.2.0` is complete from clean public-sequence closeout `77872bfe` as intended atomic
-  184/300 with no push; definitive canonical signoff passed both CLI environments 66/66, RAM 69%, and Phase 0
-  1,031/1,031 in 672 seconds.
-- The final-path consumer passes 49 neutral-derived assertions, fails exactly one four-dedicated-node assertion,
-  and skips one future live/generated-source body. Descriptor construction succeeds; three helpers remain
-  unresolved, rollback remains raw, and the consumer has zero canonical registration references.
-- Neutral rollout stays 1/9. Public sequence remains three pages / eight forbidden claims / thirteen mutations;
-  every runtime, recurring, and public leg remains RED and current authored behavior is unchanged.
+- `FUTURE-PARITY-BACKLOG.14.3.2.1` private Perl authority implementation and definitive signoff are complete from
+  clean dormant-RED closeout `59306f37` as atomic 185/300 with no push and no remaining in-flight work.
+- One inside-out owner now provides opaque frames/tokens, monotonic invocation/mark generations, snapshots,
+  falsey-safe staging, restore-before-report misuse handling, and terminal invalidation. Its direct canonical unit
+  proof passes 293 nested TAP assertions.
+- The final-path consumer remains unregistered and exact at 49 pass / one four-node failure / one skip. Neutral
+  rollout stays 1/9, public sequence stays 3/8/13, and no authored/current route loads the private owner.
+- Canonical passes all eight doctrines, CLI 66/66 in both environments, RAM 71%, and Phase 0 1,031/1,031 in
+  688 seconds. The inspected 79-file / 14,356-KiB book is removed and no background job remains.
 
 ## Latest Completed Slice
 
-- `FUTURE-PARITY-BACKLOG.14.3.2.0` freezes one tracked but canonically dormant Perl transaction consumer at its
-  exact 49-pass / one-fail / one-skip boundary without changing current authored or production behavior.
+- `FUTURE-PARITY-BACKLOG.14.3.2.1 - add private Perl transaction authority` lands as atomic 185/300: the opaque
+  authority and private canonical proof are complete while every authored/current route remains dormant.
 
 ## Next Action
 
-- Land `.14.3.2.0` atomically, prove its clean handoff, then activate private invocation-frame/token authority
-  `.14.3.2.1` task-tree-first.
+- From the clean atomic-185 handoff, activate authored/compiler/runtime/generated integration `.14.3.2.2`
+  task-tree-first, retrieve its exact owners, and implement only that integration slice.
 
 ## Recent Completions
 
-- `2026-08-10` — `FUTURE-PARITY-BACKLOG.14.3.2.0` froze the dormant Perl transaction RED as atomic 184/300.
+- `2026-08-10` — `FUTURE-PARITY-BACKLOG.14.3.2.1` added private Perl transaction authority as atomic 185/300.
+- `2026-08-10` — `59306f37` froze the dormant Perl transaction RED as atomic 184/300.
 - `2026-08-10` — `77872bfe` governed transaction public sequence as atomic 183/300.
 - `2026-08-10` — `774516fa` repaired neutral transaction public status sequencing as atomic 182/300.
 - `2026-08-10` — `e0cc7182` added the executable neutral recognition-transaction authority as atomic 181/300.

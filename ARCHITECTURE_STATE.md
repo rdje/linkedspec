@@ -73,6 +73,15 @@ consumers pass, and the route registry remains 20 surfaces / 62 routes / 32/32 w
 empty debt metadata. The program is composition-closed. These storage migrations change documentation governance
 only; they change no language, compiler, runtime, backend, fixture, CLI, protocol, or project-data root.
 
+- `2026-08-10 private Perl recognition-transaction authority`: `FUTURE-PARITY-BACKLOG.14.3.2.1` adds one
+  inside-out `LinkedSpec::RecognitionTransaction` owner with opaque scalar authority/frame/token handles.
+  Monotonic invocation ids and mark generations isolate recursive same-label frames; tokens bind source,
+  invocation, generation, rule, origin, and transaction identity; snapshots clone cursor/boundary/current-frame
+  marks; match presence and staged payload remain separate; and commit/rollback/misuse invalidate terminally with
+  restore-before-report failure handling. Its direct neutral-derived test passes 293 nested TAP assertions and is
+  canonical as a private unit proof. No public facade, grammar, compiler, ActionIR, SpecEntry, RuntimeContext,
+  generated source, final-path RED registration, or rollout changes; authored Perl integration remains `.14.3.2.2`.
+
 - `2026-08-10 dormant Perl recognition-transaction RED`: `FUTURE-PARITY-BACKLOG.14.3.2.0` adds one final-path
   consumer without ordinary or canonical registration. The accepted four-form source reaches descriptor
   construction, so the boundary is not grammar parsing: checkpoint, attempt, and commit lower through three

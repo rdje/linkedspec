@@ -4022,8 +4022,8 @@
   status complete mechanically before Perl RED `.14.3.2.0` activates.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.2`
-  Status: `active` (2026-08-10; dormant RED child `.14.3.2.0` is complete from clean neutral-parent closeout
-    `77872bfe` as intended atomic 184/300; private authority `.14.3.2.1` is next; no push)
+  Status: `active` (2026-08-10; dormant RED `.14.3.2.0` landed at `59306f37` as atomic 184/300; private authority
+    `.14.3.2.1` implementation/focused proof is active as intended atomic 185/300; no push)
   Goal: Implement and independently admit the bounded recognition-only transaction/progress contract in the Perl
     reference without changing unrelated action, result, register, or rollback semantics.
   Depends on: `.14.3.1.2.0`
@@ -4122,10 +4122,95 @@
   Atomic 184/300 is commit-ready with `.14.3.2.1` retained as the next task-tree-first activation.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.2.1`
-  Status: `pending`
+  Status: `complete` (2026-08-10; private authority implementation and definitive signoff complete from clean
+    dormant-RED closeout `59306f37` as intended atomic 185/300; authored integration `.14.3.2.2` next; no push)
   Goal: Add private Perl invocation-frame, mark-generation, opaque-token, snapshot, and invalidation authority while
     leaving authored/current routes dormant.
   Depends on: `.14.3.2.0`
+  Acceptance: Retrieve the neutral transaction, dormant Perl RED, cursor/runtime-context, named-mark, generated-
+    source, and transaction-safety Knowledge owners plus ADR `0056` and Toolbox probes before implementation.
+    Introduce one private Perl authority for invocation generations, same-label mark generations, opaque linear
+    tokens, cursor/mark snapshots, separately staged match/payload state, exactly-once attempt state, and terminal
+    commit/rollback invalidation. Keep the authority unreachable from authored grammar, ActionIR lowering, public
+    runtime helpers, generated carriers, ordinary/canonical transaction admission, and public-current claims.
+    Prove falsey payload preservation, miss state, nested/cross-invocation/token misuse rejection, recursive
+    same-label isolation, commit/rollback restoration, and unchanged compatibility cursor-stack behavior through
+    focused private tests. Change no neutral artifact/checker, grammar/compiler/ActionIR/generated source, backend
+    ledger, CLI/schema/semantic/MCP/capability surface, README, storage root, hosted workflow, or current public
+    behavior; land clean before authored/compiler/runtime integration `.14.3.2.2` activates task-tree-first.
+  Verification: clean activation; Knowledge/toolbox-first retrieval; exact current runtime/context/mark ownership
+    probes; focused private authority syntax/unit/lifecycle/misuse proof; dormant RED byte-result unchanged;
+    compatibility/current-suite no-drift; canonical/storage/public source unchanged; Knowledge, memory, task,
+    README, history, doctrines, canonical CI, atomic commit 185/300, brief clearing, pointer/residue/book/status clean
+  Commit: `FUTURE-PARITY-BACKLOG.14.3.2.1 - add private Perl transaction authority`
+
+  ### `FUTURE-PARITY-BACKLOG.14.3.2.1` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove `.14.3.2.0` landed atomically at `59306f37` as 184/300 with
+    first parent `77872bfe`, exact subject, empty status/diffs, zero-byte brief, valid post-commit pointer, fresh
+    Knowledge, absent rendered book, zero managed-run residue, and this task-tree file as the sole activation diff.
+  - [x] **RETRIEVE / PROBE PRIVATE OWNER SEAMS** — Follow the transaction, cursor, mark, runtime-context, dormant-
+    RED, generated-source, ADR, and Toolbox owners before locating the narrow private authority integration seam.
+  - [x] **IMPLEMENT PRIVATE TRANSACTION AUTHORITY** — Add one unreachable private owner for invocation/mark
+    generations, opaque tokens, snapshots, staged match/payload, exactly-once attempts, and terminal invalidation.
+  - [x] **PROVE LIFECYCLE / MISUSE CONTRACT** — Lock falsey/miss/commit/rollback, recursion and same-label marks,
+    nested/cross-invocation misuse, stale/double/escaped token rejection, and compatibility-stack independence.
+  - [x] **PRESERVE DORMANCY / PUBLIC BOUNDARY** — Keep the final-path RED byte-stable at its exact four-node
+    boundary and change no authored, lowering, generated, canonical-admission, capability, or public-current route.
+  - [x] **NO REGRESSION / COMMIT-READY HANDOFF** — Pass focused/current/canonical proof, prepare atomic 185/300, and
+    require brief/pointer/Knowledge/residue/absent-book/clean-status proof before `.14.3.2.2` activates task-tree-first.
+
+  Activation evidence 2026-08-10: dormant Perl RED `.14.3.2.0` lands atomically at full commit
+  `59306f372e742a9e815c9b409d4502a8533b0fbd` as 184/300 with first parent `77872bfe` and exact subject
+  `FUTURE-PARITY-BACKLOG.14.3.2.0 - freeze Perl transaction RED`. Its hook regenerates Knowledge at 803 facts /
+  6,643 question keys, passes all eight doctrines, and validates `activation_commit 77872bfe` against `HEAD^1`.
+  Post-commit pointer and Knowledge checks pass; status and staged/unstaged diffs are empty; the ignored brief is
+  zero bytes; generated book output is absent; managed-run listing reports `found=0 removed=0 skipped=0`; and no
+  background job remains. This task-tree file is the sole first activation mutation before index, probes, private
+  implementation, tests, or durable-status changes.
+
+  Retrieval/probe evidence 2026-08-10: Knowledge lookup followed `cursor-transaction-safety-audit-plan`,
+  `cursor-transaction-authored-contract`, `recognition-transaction-neutral-contract`,
+  `perl-recognition-transaction-dormant-red`, `complete-named-mark-perl-rust-parity`, and
+  `perl-rule-local-cursor-rollout-boundaries` before source inspection. ADR `0056` transaction sections and
+  Toolbox lowering/descriptor/runtime-context/generated-source probes were retrieved. The exact lowering probe
+  still emits compatibility cursor-stack save/restore; a corrected scalar-reference runtime probe leaves
+  `cursor_stack` and `last_error` absent; the current mark/cursor/generated suite passes 94 tests. The first probe
+  intentionally failed input validation because it passed a scalar rather than the required scalar reference;
+  the corrected probe passed, so no engine defect or expectation change was inferred.
+
+  Implementation evidence 2026-08-10: new private `perl/LinkedSpec/RecognitionTransaction.pm` uses inside-out
+  scalar handles for one source authority, invocation frame, and linear token. Monotonic non-reused invocation ids,
+  mark generations, and transaction ids bind fresh same-label recursive mark tables plus cursor/boundary/mark
+  snapshots. Attempt state separates one strict match bit from staged payload presence/value; commit invalidates
+  before returning falsey-safe payload, while rollback and every dynamic misuse restore before invalidation.
+  Typed immutable diagnostics expose only the exact neutral scalar fields. Frame/token/authority destruction also
+  fails safe by restoring/invalidation and removing private stack ownership without emitting from destructors.
+
+  Focused lifecycle/no-drift evidence 2026-08-10: `t/recognition_transaction_perl_authority.t` derives its
+  fixture and diagnostic authority from the neutral JSON and passes 293 nested TAP assertions across opaque scalar
+  storage, monotonic recursion frames, all eight positive token cases, all eight explicit escape classes, stale
+  generations, retry/missing/double terminal, nesting, strict boolean, cross-invocation/source restoration, and
+  compatibility-stack isolation. The initial test expected a missed commit to retain matched candidate state;
+  neutral semantics require unchanged miss state, and the implementation already behaved correctly, so only that
+  expectation was repaired. Canonical CI now tracks, syntax-checks, and executes this private unit consumer without
+  registering the final-path dormant RED. Neutral remains 132/246, token 8/17, graphs 6, marks 6, progress 8,
+  diagnostics 15, mutations 40, rollout 1/9, and public sequence 3/8/13. The dormant consumer remains byte-unchanged
+  at 49 pass / one exact four-node failure / one skip; public facade, compiler, SpecEntry, RuntimeContext, ActionIR,
+  GeneratedSource, README, capability/semantic/MCP/CLI/schema, and current authored behavior remain unchanged.
+
+  Definitive signoff evidence 2026-08-10: the focused six-file current suite passes 112 tests, while the separately
+  executed final-path consumer retains exactly 49 pass / one missing-four-node failure / one skip and remains absent
+  from every ordinary/canonical registry. The neutral/public oracle remains 132/246, token 8/17, graphs 6, marks 6,
+  progress 8, diagnostics 15, semantic mutations 40, rollout 1/9, and public sequence 3/8/13. The real rendered book
+  contains 79 files / 14,356 KiB; deterministic HTML inspection proves the private-foundation/current-RED boundary,
+  then exact generated output is removed. Knowledge is synchronized at 804 facts / 6,653 question keys; memory is
+  60/60 lines; README remains 105 lines / 5,057 bytes; task partitions retain 511 stable ids; bounded history,
+  whitespace, metadata, and all eight doctrines pass. The host-authorized canonical gate passes tracked-input and
+  path audits, private authority execution, all six runtime admissions, repository-contained process I/O,
+  moved-root plus four outside-CWD anchors, both primary CLI environments at 66/66, RAM 71% below the 88% ceiling,
+  and Phase 0 at 1,031/1,031 in 688 wall-clock seconds before exact `[ci] local CI gate passed`. Atomic 185/300 is
+  commit-ready with `.14.3.2.2` retained as the next task-tree-first activation.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.2.2`
   Status: `pending`

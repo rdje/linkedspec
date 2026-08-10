@@ -10,6 +10,24 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-10 (`FUTURE-PARITY-BACKLOG.14.3.2.1` — private Perl transaction authority): follow the typed-source
+  inside-out pattern for linear transaction state. Opaque scalar handles prevent caller-visible owner hashes while
+  module-owned tables retain source authority, invocation/generation identity, snapshots, attempt state, staged
+  payload presence/value, and terminal status. Detached frame snapshots clone marks before crossing the seam.
+- Invocation frames must be distinct from current rule-label mark buckets before either is wired together. Fresh
+  frame marks plus monotonic non-reused ids prove recursive same-label isolation privately; `.14.3.2.2` must route
+  live marks and child entry/exit through that owner atomically rather than partially shadowing legacy buckets.
+- Dynamic misuse is restore-before-report. Escape, retry, cross-authority use, missing terminal, token/frame drop,
+  and nesting restore the owning snapshot and clear active-token ownership before a typed neutral diagnostic or
+  destructor return. Commit alone retains candidate state, and it invalidates before exposing staged payload.
+- Canonical execution of `t/recognition_transaction_perl_authority.t` is a private foundation proof, not backend
+  admission. Keep the final-path `t/recognition_transaction_perl_contract.t` absent until `.14.3.2.3`; its unchanged
+  four-node RED is the mechanical guard against confusing an internal module with authored/runtime support.
+- Definitive signoff preserves that separation across all eight doctrines, repository-contained and relocated
+  runtime proofs, both CLI environments at 66/66, RAM 71%, and Phase 0 at 1,031/1,031 in 688 seconds. Rendered
+  documentation explicitly says private prerequisite rather than authored support, and generated book output is
+  removed after inspection.
+
 - 2026-08-10 (`FUTURE-PARITY-BACKLOG.14.3.2.0` — dormant Perl transaction RED): the accepted four-form specimen
   already passes bootstrap/descriptor construction, so do not describe the current boundary as missing grammar.
   Current scalar assignment lowering hides checkpoint, attempt, and commit behind three unsupported-helper

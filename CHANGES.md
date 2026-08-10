@@ -10,6 +10,28 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-10 — FUTURE-PARITY-BACKLOG.14.3.2.1 — add private Perl transaction authority
+
+- Activated task-tree-first from clean dormant-RED closeout `59306f37` as intended atomic 185/300.
+- Added private inside-out `LinkedSpec::RecognitionTransaction` authority with opaque scalar authority/frame/token
+  handles, monotonic non-reused invocation/mark/transaction generations, fresh same-label recursive mark tables,
+  detached cursor/boundary/mark snapshots, strict match/payload separation, and terminal invalidation.
+- Restored owning snapshots before reporting token escape, retry, missing terminal, nesting, cross-invocation/source,
+  and strict-boolean violations. Commit invalidates before returning falsey-safe staged payload; rollback, unwind,
+  frame/token destruction, and dynamic misuse discard payload and fail safe without aliasing compatibility state.
+- Added a neutral-derived private test with 293 nested TAP assertions over all eight positive cases, all eight
+  explicit escape classes, recursive generation isolation, lifecycle/authority misuse, exact diagnostic fields,
+  and compatibility cursor-stack/rule-label-mark independence.
+- Registered only that private unit proof for canonical tracking, syntax, and execution. The final-path Perl
+  consumer remains unregistered and byte-exact at 49 pass / one four-node failure / one skip; neutral stays
+  132/246, token 8/17, graphs 6, marks 6, progress 8, diagnostics 15, mutations 40, rollout 1/9, public 3/8/13.
+- Updated architecture, Knowledge, roadmaps, task/index, continuity, and the sole-facing book to distinguish private
+  foundation from current authored support. Changed no public facade, grammar, compiler, ActionIR, SpecEntry,
+  RuntimeContext, generated source, capability/semantic/MCP/CLI/schema, README, storage, workflow, or current result.
+- Definitive local CI passes all eight doctrines, repository-contained six-family process proof, moved-root and
+  outside-CWD execution, both CLI environments at 66/66, RAM 71%, and Phase 0 1,031/1,031 in 688 seconds. The
+  rendered book is 79 files / 14,356 KiB and is removed after exact boundary inspection.
+
 ## 2026-08-10 — FUTURE-PARITY-BACKLOG.14.3.2.0 — freeze Perl transaction RED
 
 - Activated task-tree-first from clean public-sequence closeout `77872bfe` as intended atomic 184/300.

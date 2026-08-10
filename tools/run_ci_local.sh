@@ -397,6 +397,7 @@ require_tracked_file t/punctuation_light_zero_arg_contract.t
 require_tracked_file t/complete_named_mark_contract.t
 require_tracked_file t/typed_source_location_values.t
 require_tracked_file t/typed_source_location_perl_contract.t
+require_tracked_file t/recognition_transaction_perl_authority.t
 require_tracked_file rust/linkedspec-runtime/tests/typed_source_location_contract.rs
 require_tracked_file dart/test/typed_source_location_contract_test.dart
 require_tracked_file julia/test/typed_source_location_contract_test.jl
@@ -426,6 +427,7 @@ require_tracked_file perl/LinkedSpec.pm
 require_tracked_file perl/LinkedSpec/BindingRuntime.pm
 require_tracked_file perl/LinkedSpec/SpecLoader.pm
 require_tracked_file perl/LinkedSpec/GeneratedSource.pm
+require_tracked_file perl/LinkedSpec/RecognitionTransaction.pm
 require_tracked_file perl/LinkedSpec/SemanticIndex.pm
 require_tracked_file perl/LinkedSpec/SemanticSourceMap.pm
 require_tracked_file perl/LinkedSpec/MCPContract.pm
@@ -510,6 +512,7 @@ perl -c -Iperl t/punctuation_light_zero_arg_contract.t
 perl -c -Iperl t/complete_named_mark_contract.t
 perl -c -Iperl t/typed_source_location_values.t
 perl -c -Iperl t/typed_source_location_perl_contract.t
+perl -c -Iperl t/recognition_transaction_perl_authority.t
 perl -c -Iperl t/rule_local_cursor_perl_contract.t
 perl -c -Iperl t/duplicate_regex_slot_identity_perl_contract.t
 perl -c -Iperl t/sparse_and_action_slots_perl_regression.t
@@ -530,6 +533,7 @@ perl -c -Iperl t/mcp_server_perl_dispatch.t
 perl -c -Iperl t/mcp_server_perl_stdio.t
 perl -c -Iperl t/mcp_server_perl_admission.t
 perl -c -Iperl perl/LinkedSpec/BindingRuntime.pm
+perl -c -Iperl perl/LinkedSpec/RecognitionTransaction.pm
 perl -c -Iperl perl/LinkedSpec/SemanticIndex.pm
 perl -c -Iperl perl/LinkedSpec/SemanticSourceMap.pm
 perl -c -Iperl perl/LinkedSpec/SemanticCallProjection.pm
@@ -569,6 +573,9 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 
 log "checking backend-neutral recognition transaction and progress contract"
 bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py
+
+log "running private Perl recognition transaction authority contract"
+PERL5LIB= prove -Iperl t/recognition_transaction_perl_authority.t
 
 log "running exact Perl typed source-location value and projection admission consumers"
 PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t
