@@ -2,25 +2,26 @@
 
 ## Current Activity
 
-- Dual-ABI Lua admission leaf `FUTURE-PARITY-BACKLOG.14.3.6.3` is signoff-complete from clean `70b4ed04` as atomic
-  204/300; no push. The runtime implementation and private facade boundary are unchanged.
-- The selector is gone and the same source passes 243/243 on PUC Lua and LuaJIT. Ordinary and canonical routes each
-  register it once per ABI. Recognition is 132/246/46 at rollout 7/9; public governance is 3/20/38, guide 1/10/14,
-  and Lua admission rejects 22 mutations beside retained authority 22 and integration 19.
-- Full signoff passes Lua package 177x2, CLI 66x2, corpus 105, book 79 files/14,412 KiB, all eight doctrines, RAM
-  65%, and canonical Phase 0 1,031/1,031 in 758 seconds. Recurring `.14.3.7` and public no-drift `.14.3.8` remain RED.
+- Recurring recognition leaf `FUTURE-PARITY-BACKLOG.14.3.7` is signoff-complete from clean `1aedfe98` as intended
+  atomic 205/300; no push. One project-data-routed driver composes five sources over six exact runtime routes.
+- Direct proof passes Perl 51, Rust 12, Dart 10, Julia 207, Lua 246x2, all support ledgers, and outside-CWD routing.
+  Recognition is 132/246/58 at rollout 8/9; public governance is 3/23/42 and guide governance is 1/12/16.
+- The 79-file/14,428-KiB rendered book, Knowledge Map 819/6,803, all eight doctrines, CLI 66x2, RAM 62%, and
+  canonical Phase 0 1,031/1,031 in 745 seconds pass. Behavior is unchanged; public no-drift `.14.3.8` remains RED.
 
 ## Latest Completed Slice
 
-- Lua admission `.14.3.6.3` is signoff-complete and commit-ready as atomic 204/300 with no push.
-- Private Lua integration `.14.3.6.2` remains the clean `70b4ed04` activation base.
+- Recurring `.14.3.7` is signoff-complete and lands with this pointer commit as atomic 205/300 with no push.
+- Lua admission `.14.3.6.3` remains its clean activation base at `1aedfe98`, atomic 204/300.
 
 ## Next Action
 
-- Land and prove atomic 204 cleanly, then activate recurring transaction composition `.14.3.7` task-tree-first.
+- Commit/prove atomic 205 clean, then activate public no-drift/parent closeout `.14.3.8` task-tree-first.
 
 ## Recent Completions
 
+- `2026-08-11` — `.14.3.7` completed six-runtime recurring proof and canonical signoff for atomic 205/300.
+- `2026-08-11` — `1aedfe98` landed exact dual-ABI Lua recognition admission as atomic 204/300.
 - `2026-08-11` — `.14.3.6.3` completed exact dual-ABI Lua recognition admission and canonical signoff for atomic 204/300.
 - `2026-08-11` — `70b4ed04` landed private dual-ABI Lua transaction integration as atomic 203/300.
 - `2026-08-11` — `.14.3.6.2` completed dual-ABI integration and canonical signoff for atomic 203/300.
@@ -35,8 +36,6 @@
 - `2026-08-11` — `923285aa` landed the private Julia transaction authority as atomic 198/300.
 - `2026-08-11` — `.14.3.5.0` froze and signed off the dormant Julia transaction boundary for atomic 197/300.
 - `2026-08-11` — `38318827` landed exact Dart transaction admission as atomic 196/300.
-- `2026-08-11` — `.14.3.4.3` completed exact Dart transaction admission signoff for atomic 196/300.
-- `2026-08-11` — `bee6cf45` landed private Dart transaction integration as atomic 195/300.
 
 ## History
 

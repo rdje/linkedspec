@@ -4958,10 +4958,13 @@
     79 files/14,412 KiB, Knowledge 818/6,792, all eight doctrines, RAM 65%, and Phase 0 1,031/1,031 in 758 sec pass.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.7`
-  Status: `pending`
-  Goal: Bind the unchanged neutral and five-backend/six-runtime consumers into one exact repository-routed recurring
-    proof with omission/order/multiplicity/storage/canonical governance.
+  Status: `done` (2026-08-11; signoff-complete atomic 205/300 from clean `1aedfe98`; no push)
+  Goal: Bind the unchanged neutral and five-backend/six-runtime consumers into one exact repository-routed recurring proof with omission/order/multiplicity/storage/canonical governance.
   Depends on: `.14.3.6`
+  Acceptance: Add one fail-fast project-data-routed driver over the neutral checker, exact Perl/Rust/Dart/Julia/PUC Lua/LuaJIT consumers, and support ledgers; lock driver/CI/order/path/multiplicity/storage topology, promote only recurring, preserve public no-drift RED and every runtime/API/schema/CLI/README boundary, then pass focused/book/doctrine/canonical signoff.
+  Commit: `FUTURE-PARITY-BACKLOG.14.3.7 - compose recognition transaction proof`
+  Checklist: [x] clean activation/task ownership; [x] authority/topology audit; [x] driver/CI route; [x] governance/mutations; [x] focused six-runtime proof; [x] no-drift/docs/book; [x] doctrine/canonical signoff.
+  Evidence: driver passes Perl 51, Rust 12, Dart 10, Julia 207, Lua 246x2, support ledgers, and routing; checker 58 at rollout 8/9, public 3/23/42, guide 1/12/16; book 79/14,428, Knowledge 819/6,803, eight doctrines, CLI 66x2, RAM 62%, and canonical Phase 0 1,031/1,031 in 745 seconds pass. No runtime/API/schema/CLI/README behavior changes; `.14.3.8` follows only after clean atomic 205.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.8`
   Status: `pending`

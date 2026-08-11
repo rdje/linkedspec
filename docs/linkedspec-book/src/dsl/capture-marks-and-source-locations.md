@@ -140,7 +140,7 @@ runtime checks the same boundary before performing an effect.
 
 The shared contract now has an executable backend-neutral authority. Its independent checker covers 128 current
 ActionIR node kinds plus four dedicated transaction kinds, all 246 current call contracts, falsey token results,
-recursive effect fixed points, invocation-frame marks, cursor-only progress, fifteen portable diagnostics, and 44
+recursive effect fixed points, invocation-frame marks, cursor-only progress, fifteen portable diagnostics, and 58
 drift mutations:
 
 ```bash
@@ -193,8 +193,9 @@ the four exact forms to dedicated non-eager nodes and retains `call(Rule)` as a 
 effect fixed point and cursor-only progress validator enforce the neutral fixtures; one invocation adapter binds
 the existing UTF-8 code-unit cursor, anonymous boundary, and same-label mark bucket to the non-exported authority.
 Native, reconstructed, generated-plan, and independently loaded emitted-module execution preserve a successful
-`false` payload. The consumer was 203 assertions at Julia admission and is now 205 after checking both promoted
-Lua rollout rows; it is included by ordinary Julia tests and executed once directly by
+`false` payload. The consumer was 203 assertions at Julia admission, reached 205 after checking both promoted Lua
+rollout rows, and now runs 207 after freezing recurring and public-no-drift metadata; it is included by ordinary
+Julia tests and executed once directly by
 canonical CI; the private namespace remains unexported:
 
 ```bash
@@ -205,7 +206,7 @@ bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history
 Julia's rollout row advanced alone in its admission; the later Lua slice did not rewrite that implementation.
 
 Lua now has the same admitted private end-to-end behavior through one shared Lua-5.1-compatible implementation.
-The exact consumer runs 243 assertions unchanged on PUC Lua and LuaJIT. It verifies the 187-assertion private
+The exact consumer runs 246 assertions unchanged on PUC Lua and LuaJIT. It verifies the 187-assertion private
 authority boundary, four non-eager nodes, recursive effects, cursor-only progress, and native, reconstructed,
 generated-plan, and independently loaded emitted-module execution. Successful `false` remains staged until commit.
 Ordinary Lua discovery and canonical CI each execute that source once per ABI:
@@ -217,12 +218,24 @@ bash tools/run_lua_project_data.sh luajit lua/test/recognition_transaction_contr
 
 Both the authority and runtime adapter remain private; admission changes proof and availability, not facade shape.
 
-The same checker fails closed over three public transaction pages, twenty forbidden claims, and thirty-eight sequence mutations.
-This guards the milestone order alongside the neutral artifact's 46 semantic mutations.
+The exact six-runtime recurring proof is current. Run:
+
+```bash
+bash tools/check_recognition_transaction_six_runtime.sh
+```
+
+That fail-fast, repository-routed driver validates the neutral contract first, then the exact Perl, Rust, Dart,
+Julia, PUC Lua, and LuaJIT consumers in order. The two Lua routes deliberately execute one shared source on two
+different ABIs. Generated-source, capability, and language-coverage ledgers run last. Canonical local CI exposes
+the same all-toolchain composition behind `LINKEDSPEC_RUN_RECOGNITION_TRANSACTION_MATRIX=1`; ordinary CI still
+runs its already-admitted individual consumers regardless of that opt-in.
+
+The same checker fails closed over three public transaction pages, twenty-three forbidden claims, and forty-two sequence mutations.
+This guards the milestone order alongside the neutral artifact's 58 semantic and topology mutations.
 
 This section describes current Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT features and the remaining portable closeout. The neutral artifact/checker is
 executable, and Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT are independently admitted. Recognition rollout is now
-7/9 complete; recurring composition and final public no-drift remain separate later legs.
+8/9 complete; recurring composition is current and only final public no-drift remains unavailable.
 
 Only cursor/source-boundary state participates. A rollback cannot undo variables, AST mutation, diagnostic or
 output events, parser-registry work, external calls, or host effects. An uncommitted path must therefore remain
@@ -295,14 +308,16 @@ implementation slice. It does not add an authored value or advance the 8-complet
 There is still no public `Position` or `Span` authored value, recursive observation API, or span-native parser
 dispatch. Exact transaction spelling is current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Lua's shared
 private authority passes 187 assertions per ABI, and its admitted consumer passes 243 per ABI across four dedicated
-nodes, recursive effect/progress policy, and all four runtime carriers. The modules remain unexported while the
-consumer is now ordinarily and canonically discovered once per ABI. The
-combined recurring/public no-drift rollout row remains pending for final closeout
-`FUTURE-PARITY-BACKLOG.14.8`, so recurring composition does not change the current 8 complete / 6 pending ledger.
+nodes, recursive effect/progress policy, and all four runtime carriers at its Lua admission boundary. Recurring
+metadata raises that consumer to 246 per ABI without changing the implementation. The modules remain unexported
+while the consumer is ordinarily and canonically discovered once per ABI. Transaction recurrence is current at
+8/9 under `.14.3.7`, with only transaction public no-drift `.14.3.8` RED. The separate typed-source combined
+recurring/public-no-drift row remains pending for final program-wide closeout `FUTURE-PARITY-BACKLOG.14.8`, so
+typed-source composition still remains 8 complete / 6 pending.
 
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions or
 typed spans are authored values. The `recognition_*` operations are current across all six runtime routes, while
-recurring composition and final public no-drift remain separately governed.
+their exact recurring composition is current and final public no-drift remains separately governed.
 
 ## Five anchor families
 

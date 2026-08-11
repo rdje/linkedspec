@@ -10,6 +10,30 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.7` — recurring recognition-transaction proof): recurrence is
+  orchestration, not another transaction implementation. Keep the neutral checker first and the already admitted
+  Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT consumers exact; support ledgers follow all runtime routes.
+- Freeze source and runtime cardinality separately. There are five backend source groups but six runtime routes
+  because the one shared Lua source must execute independently on PUC Lua and LuaJIT. Exact command strings plus
+  order and multiplicity are stronger evidence than filename presence alone.
+- No primary recognition-transaction CLI case exists, so this driver must not invent a CLI projection. Its
+  compatibility boundary is instead the neutral contract, exact runtime consumers, and existing support ledgers.
+- Enter `tools/project_data_env.sh` at the driver boundary and keep all nested language wrappers. Canonical CI owns
+  tracked-input, path-audit, syntax, and opt-in execution; `tools/test_project_data_workflow_routing.sh` proves the
+  new entrypoint from outside cwd without creating another storage root.
+- Count governance causally: eleven source/route/command/support/storage/CI mutations plus recurring regression move
+  46 to 58. Public stale-claim growth adds three forbidden claims and one rollout mutation, moving 3/20/38 to
+  3/23/42; the guide analog moves 1/10/14 to 1/12/16. Promote only recurring and retain public no-drift `.14.3.8`.
+- Every admitted consumer snapshots mutable ledger metadata. Updating status, availability, mutations, and rollout
+  raises current Julia proof to 207 and Lua to 246 per ABI without changing runtime behavior. Full recurring proof
+  passes Perl 51, Rust 12, Dart 10, Julia 207, Lua 246x2, and all three support ledgers.
+- The first canonical run caught a cross-contract prose collision: semantic public governance reserves generic
+  `rollout 8/9` as a stale semantic claim. Keep the exact semantic `128 mutations, rollout 9/9` anchor and express
+  recognition as “eight of nine rollout legs complete” in both roadmaps; no governed state or count changes.
+- The repaired definitive run passes all eight doctrines, containment/relocation, CLI 66x2, RAM 62%, and Phase 0
+  1,031/1,031 in 745 seconds through exact canonical success. Land atomic 205 cleanly before `.14.3.8` recomposes
+  the public boundary and closes the transaction activity.
+
 - 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.6.3` — dual-ABI Lua recognition admission): admission is a topology
   change, not another runtime layer. Remove the selector and RED diagnostics, keep the 243-assertion body and both
   private production modules unchanged, and execute the same Lua-5.1 source independently on both ABIs.

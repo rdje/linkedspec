@@ -1,6 +1,6 @@
 ---
 id: recognition-transaction-neutral-contract
-title: The recognition-transaction contract covers 132 node rows, 246 call rows, and 46 mutations
+title: The recognition-transaction contract covers 132 node rows, 246 call rows, and 58 mutations
 answers:
   - "where is the executable neutral recognition transaction contract"
   - "how do I run the recognition transaction checker"
@@ -16,7 +16,7 @@ answers:
   - "which admitted recognition transaction consumers must update when rollout advances"
   - "does the neutral transaction checker change parser behavior"
 date: 2026-08-10
-status: current neutral authority; all six runtime routes complete; recurring and public-no-drift legs RED
+status: current neutral authority; all six runtime routes and recurring proof complete; public-no-drift RED
 tags: [cursor, transactions, recognition, actionir, effects, progress, marks, recursion, conformance]
 evidence: "FUTURE-PARITY-BACKLOG.14.3.1.1 adds linkedspec-recognition-transaction-v1 plus an independent checker. The checker derives 128 live ActionIR node kinds from Perl and the same 246 current call names from Dart, Julia, and Lua; adds four future RECOGNITION_* rows; executes token 8/17, effect graphs 6, marks 6, progress 8, diagnostics 15; and rejects 40 semantic mutations. FUTURE-PARITY-BACKLOG.14.3.1.2.0 separately binds public sequence at 3 documents / 8 forbidden / 13 mutations."
 evidence_update_2026_08_10_perl_admission: "FUTURE-PARITY-BACKLOG.14.3.2.3 promotes only Perl, binds its exact final-path consumer, and adds a complete-to-RED regression while retaining premature Rust promotion rejection. Current truth is 2/9 complete and 41 semantic mutations; the public projection independently advances to 3 documents / 8 forbidden claims / 14 mutations."
@@ -27,6 +27,7 @@ evidence_update_2026_08_11_lua_red: "FUTURE-PARITY-BACKLOG.14.3.6.0 freezes one 
 evidence_update_2026_08_11_lua_private_authority: "FUTURE-PARITY-BACKLOG.14.3.6.1 adds one shared private Lua-5.1-compatible authority. Authority mode passes 187 assertions per ABI and integration stops only at missing dedicated ActionIR nodes. Twenty-two separate mutations lock the authority surface and next RED; the earlier twelve dormancy mutations, neutral 132/246/44, and rollout 5/9 remain unchanged."
 evidence_update_2026_08_11_lua_integration: "FUTURE-PARITY-BACKLOG.14.3.6.2 makes the unchanged Lua integration mode pass 243 assertions on PUC Lua and 243 on LuaJIT across four dedicated nodes, recursive effect/progress policy, and native/reconstructed/generated-plan/emitted carriers. Nineteen integration mutations lock the private implementation while selector dormancy, rollout 5/9, neutral 132/246/44, and public claims remain unchanged for admission .14.3.6.3."
 evidence_update_2026_08_11_lua_admission: "FUTURE-PARITY-BACKLOG.14.3.6.3 removes selector dormancy and registers the unchanged 243-assertion consumer exactly once per ABI in ordinary and canonical proof. PUC Lua and LuaJIT complete-to-RED plus premature recurring promotion raise semantic proof to 46 mutations and rollout to 7/9. Public governance is 3/20/38; the guide is 1/10/14; exact Lua registration/privacy proof rejects 22 mutations beside retained authority 22 and integration 19."
+evidence_update_2026_08_11_recurring: "FUTURE-PARITY-BACKLOG.14.3.7 adds one repository-routed driver over neutral, exact Perl/Rust/Dart/Julia/PUC Lua/LuaJIT consumers, and three support ledgers. Eleven topology/storage mutations plus recurring regression advance the suite to 58 and only recurring to complete, yielding rollout 8/9. Public governance is 3/23/42 and guide governance 1/12/16; public no-drift remains RED. Mutable consumer metadata is synchronized without runtime or API changes."
 evidence_update_2026_08_11_cross_consumer_metadata: "The first atomic-196 canonical run proved that every admitted consumer snapshots mutable neutral metadata as well as backend behavior: Perl retained the pre-Dart status/availability and Rust retained the pre-Dart mutation/rollout/availability assertions. Updating both consumers closes that coupling without runtime changes; each later admission must update all earlier admitted consumer metadata assertions."
 reverify: "bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && perl tools/check_language_capability_coverage.pl --report"
 ---
@@ -52,12 +53,12 @@ recursion—are evaluated to a fixed point so a transitive forbidden effect cann
 
 Executable semantic fixtures cover eight valid falsey-safe token outcomes, seventeen token/ownership failures,
 six invocation-mark snapshot/isolation cases, eight repetition/direct/mutual-recursion progress cases, and fifteen
-portable diagnostic records. Forty-six in-memory mutations cover schema, syntax, token/result, effects, inventories,
-graphs, marks, progress, diagnostics, rollout, canonical registration, tracked input, freshness, and the
-public-current boundary.
+portable diagnostic records. Fifty-eight in-memory mutations cover schema, syntax, token/result, effects,
+inventories, graphs, marks, progress, diagnostics, recurring source/runtime/storage/CI topology, rollout,
+canonical registration, tracked input, freshness, and the public-current boundary.
 
-Neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT are complete. Recurring composition and public no-drift
-remain RED. Runtime admission binds already integrated behavior without changing descriptor/schema, CLI,
+Neutral, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, and recurring composition are complete. Public no-drift remains
+RED. Runtime and recurring admission bind already integrated behavior without changing descriptor/schema, CLI,
 semantic/MCP, capability, or unrelated helper behavior. The same canonical checker separately locks three public
 transaction pages, twenty forbidden milestone/current claims, and 38 in-memory sequence mutations; that
 accounting remains distinct from the JSON's 46 semantic mutations. A one-document/ten-forbidden/fourteen-mutation

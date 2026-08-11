@@ -1008,15 +1008,25 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   ```
 
 - **OUTPUT:** 132 ActionIR rows (128 live plus four dedicated), 246 live call rows, token 8 positive / 17 negative,
-  six fixed-point graphs, six mark cases, eight progress cases, fifteen diagnostics, and 46 rejected mutations;
-  rollout is neutral through dual-ABI Lua 7/9 complete. A separate public-sequence projection locks three book
-  pages, twenty forbidden claims, and 38 mutations; the guide guard locks one document, ten stale claims, and 14
+  six fixed-point graphs, six mark cases, eight progress cases, fifteen diagnostics, and 58 rejected mutations;
+  rollout is neutral through recurring 8/9 complete. A separate public-sequence projection locks three book
+  pages, 23 forbidden claims, and 42 mutations; the guide guard locks one document, 12 stale claims, and 16
   mutations. Admission guards remain 8 Rust, 13 Dart, 14 Julia, and 22 Lua mutations, with Lua authority 22 and
   integration 19 independently retained.
 - **BOUNDARY:** this checker derives the live inventories and proves the shared target plus every runtime admission.
-  Perl 51, Rust 12, Dart 10, current Julia 205, and Lua 243 per ABI are canonical; recurring remains `.14.3.7`,
-  with public no-drift owned by `.14.3.8`. Its exact `policy.current_boundary` prose is generated
+  Perl 51, Rust 12, Dart 10, current Julia 207, and Lua 246 per ABI are canonical; recurring is current under
+  `.14.3.7`, with public no-drift owned by `.14.3.8`. Its exact `policy.current_boundary` prose is generated
   from the expected rollout, so a backend promotion cannot leave a separately hard-coded earlier boundary behind.
+- **RECURRING:** run the five-source/six-runtime orchestration with:
+
+  ```bash
+  bash tools/check_recognition_transaction_six_runtime.sh
+  ```
+
+  It executes neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT in order, then generated-source, capability,
+  and language-coverage ledgers. Canonical CI requires, path-audits, and syntax-checks the project-data-routed
+  driver; `LINKEDSPEC_RUN_RECOGNITION_TRANSACTION_MATRIX=1` opts into the complete all-toolchain route. Retrieve
+  [[recognition-transaction-recurring-gate]] before changing its topology or ownership.
 - **RUST ADMISSION:** ordinary offline Cargo and canonical CI execute the same exact final-path target:
 
   ```bash
@@ -1037,7 +1047,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   bash tools/run_lua_project_data.sh luajit lua/test/recognition_transaction_contract_test.lua
   ```
 
-  Each run passes 243 assertions. The authority and runtime adapter remain private; admission adds no facade export
+  Each current run passes 246 assertions. The authority and runtime adapter remain private; admission adds no facade export
   or ABI-specific implementation. Retrieve [[lua-recognition-transaction-admission]] before changing these routes.
 
 ### 4.10 MCP transport materializer and independent validator

@@ -40,6 +40,7 @@ JULIA_PRIVATE_AUTHORITY_ACCESS = """const JuliaRecognitionTransaction = getprope
 )"""
 LUA_CONSUMER_PATH = "lua/test/recognition_transaction_contract_test.lua"
 LUA_ORDINARY_PATH = "tools/run_lua_local.sh"
+RECURRING_DRIVER_PATH = "tools/check_recognition_transaction_six_runtime.sh"
 LUA_FACADE_PATH = "lua/src/linkedspec/init.lua"
 LUA_AUTHORITY_PATH = "lua/src/linkedspec/recognition_transaction.lua"
 LUA_RUNTIME_ADAPTER_PATH = "lua/src/linkedspec/recognition_transaction_runtime.lua"
@@ -171,7 +172,9 @@ EXPECTED_COUNTS = {
     "progress_cases": 8,
     "diagnostics": 15,
     "rollout_legs": 9,
-    "mutations": 46,
+    "recurring_source_groups": 5,
+    "recurring_runtime_routes": 6,
+    "mutations": 58,
 }
 EXPECTED_EFFECT_ROW_HASHES = {
     "action_ir_effect_rows": "560de8fc586cee7adf66e1b6eeab7d931f441ebda6ca9cb0498ecc9d4392f775",
@@ -188,8 +191,8 @@ EXPECTED_SURFACE = {
         "remains staged until commit"
     ),
     "availability": (
-        "available only in an admitted runtime; currently Perl, Rust, Dart, Julia, "
-        "PUC Lua, and LuaJIT, with recurring and public-no-drift legs future and unavailable"
+        "available in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; exact recurring "
+        "proof is current and public no-drift remains future and unavailable"
     ),
 }
 EXPECTED_TOKEN_STATES = [
@@ -240,7 +243,7 @@ EXPECTED_ROLLOUT = [
     (5, "FUTURE-PARITY-BACKLOG.14.3.5", "julia", "complete"),
     (6, "FUTURE-PARITY-BACKLOG.14.3.6", "puc_lua", "complete"),
     (7, "FUTURE-PARITY-BACKLOG.14.3.6", "luajit", "complete"),
-    (8, "FUTURE-PARITY-BACKLOG.14.3.7", "recurring", "red"),
+    (8, "FUTURE-PARITY-BACKLOG.14.3.7", "recurring", "complete"),
     (9, "FUTURE-PARITY-BACKLOG.14.3.8", "public_no_drift", "red"),
 ]
 EXPECTED_EXECUTION = {
@@ -314,6 +317,92 @@ EXPECTED_LUA_ADMISSION = {
     ),
     "success_marker": "Lua admitted recognition-transaction contract:",
 }
+RECURRING_GATE = {
+    "driver": RECURRING_DRIVER_PATH,
+    "source_schema": {
+        "fields": ["backend", "paths"],
+        "policy": (
+            "five admitted backend source groups are immutable; one shared Lua "
+            "source executes independently on both ABIs"
+        ),
+    },
+    "consumer_sources": [
+        {"backend": "perl", "paths": [PERL_CONSUMER_PATH]},
+        {"backend": "rust", "paths": [RUST_CONSUMER_PATH]},
+        {"backend": "dart", "paths": [DART_CONSUMER_PATH]},
+        {"backend": "julia", "paths": [JULIA_CONSUMER_PATH]},
+        {"backend": "lua", "paths": [LUA_CONSUMER_PATH]},
+    ],
+    "route_schema": {
+        "fields": ["runtime", "source_backend", "command"],
+        "policy": (
+            "neutral runs first; Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT "
+            "then run exactly once in order"
+        ),
+    },
+    "runtime_routes": [
+        {
+            "runtime": "perl",
+            "source_backend": "perl",
+            "command": "PERL5LIB= prove -Iperl t/recognition_transaction_perl_contract.t",
+        },
+        {
+            "runtime": "rust",
+            "source_backend": "rust",
+            "command": (
+                '"$CARGO_CMD" test --manifest-path rust/Cargo.toml '
+                "-p linkedspec-runtime --test recognition_transaction_contract"
+            ),
+        },
+        {
+            "runtime": "dart",
+            "source_backend": "dart",
+            "command": (
+                "cd dart && bash ../tools/run_dart_project_data.sh test "
+                "--reporter failures-only test/recognition_transaction_contract_test.dart"
+            ),
+        },
+        {
+            "runtime": "julia",
+            "source_backend": "julia",
+            "command": (
+                "bash tools/run_julia_project_data.sh --project=julia --startup-file=no "
+                "--history-file=no -e 'using LinkedSpecJulia, JSON3, Test; "
+                'include("julia/test/recognition_transaction_contract_test.jl")\''
+            ),
+        },
+        {
+            "runtime": "puc_lua",
+            "source_backend": "lua",
+            "command": (
+                "bash tools/run_lua_project_data.sh puc "
+                "lua/test/recognition_transaction_contract_test.lua"
+            ),
+        },
+        {
+            "runtime": "luajit",
+            "source_backend": "lua",
+            "command": (
+                "bash tools/run_lua_project_data.sh luajit "
+                "lua/test/recognition_transaction_contract_test.lua"
+            ),
+        },
+    ],
+    "support_checks": [
+        "perl tools/check_generated_source_contract.pl",
+        "perl tools/check_capability_conformance.pl",
+        "perl tools/check_language_capability_coverage.pl",
+    ],
+    "storage": {
+        "initializer": "tools/project_data_env.sh",
+        "managed_entrypoint": RECURRING_DRIVER_PATH,
+        "policy": "all temporary, cache, build, native, and test data stays under repository-derived storage",
+    },
+    "local_ci": {
+        "driver": "tools/run_ci_local.sh",
+        "switch": "LINKEDSPEC_RUN_RECOGNITION_TRANSACTION_MATRIX",
+    },
+}
 PUBLIC_SEQUENCE_CONTRACT = {
     "documents": [
         {
@@ -322,11 +411,12 @@ PUBLIC_SEQUENCE_CONTRACT = {
                 "The shared contract now has an executable backend-neutral authority",
                 "The Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT lanes now recognize and admit the four forms as a current capability",
                 "This section describes current Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT features and the remaining portable closeout",
-                "fails closed over three public transaction pages, twenty forbidden claims, and thirty-eight sequence mutations",
+                "fails closed over three public transaction pages, twenty-three forbidden claims, and forty-two sequence mutations",
                 (
                     "executable, and Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT are "
                     "independently admitted"
                 ),
+                "The exact six-runtime recurring proof is current",
             ],
         },
         {
@@ -335,6 +425,7 @@ PUBLIC_SEQUENCE_CONTRACT = {
                 "The neutral authority is now executable",
                 "Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT transaction support is current and canonically admitted",
                 "Neutral proof alone is not backend support",
+                "The exact six-runtime recurring proof is current",
             ],
         },
         {
@@ -344,8 +435,8 @@ PUBLIC_SEQUENCE_CONTRACT = {
                     "Their neutral artifact/checker is executable at 128 current + 4 "
                     "dedicated ActionIR rows"
                 ),
-                "recognition rollout 7/9 complete",
-                "recurring and public-no-drift legs remain RED",
+                "recognition rollout 8/9 complete",
+                "only public-no-drift remains RED",
             ],
         },
     ],
@@ -430,15 +521,27 @@ PUBLIC_SEQUENCE_CONTRACT = {
             "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
             "text": "Both modules remain unexported and the final-path consumer remains outside ordinary/canonical discovery",
         },
+        {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "text": "7/9 complete; recurring composition and final public no-drift remain separate later legs.",
+        },
+        {
+            "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+            "text": "recurring composition and public",
+        },
+        {
+            "path": "docs/linkedspec-book/src/overview/project-status.md",
+            "text": "recurring and public-no-drift legs remain RED",
+        },
     ],
 }
-PUBLIC_SEQUENCE_MUTATION_COUNT = 38
+PUBLIC_SEQUENCE_MUTATION_COUNT = 42
 CAPABILITY_GUIDE_CONTRACT = {
     "path": "capability_conformance/README.md",
     "required_markers": [
-        "neutral + Perl + Rust + Dart + Julia + PUC Lua + LuaJIT 7/9 complete",
+        "neutral + Perl + Rust + Dart + Julia + PUC Lua + LuaJIT + recurring 8/9 complete",
         (
-            "current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; recurring and public no-drift remain future"
+            "current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; exact recurring proof is current and public no-drift remains future"
         ),
     ],
     "forbidden_claims": [
@@ -452,9 +555,11 @@ CAPABILITY_GUIDE_CONTRACT = {
         "current on Perl, Rust, and Dart and remain future on Julia, PUC Lua, and LuaJIT",
         "neutral + Perl + Rust + Dart + Julia 5/9 complete",
         "current on Perl, Rust, Dart, and Julia and remain future on PUC Lua and LuaJIT",
+        "neutral + Perl + Rust + Dart + Julia + PUC Lua + LuaJIT 7/9 complete",
+        "current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; recurring and public no-drift remain future",
     ],
 }
-CAPABILITY_GUIDE_MUTATION_COUNT = 14
+CAPABILITY_GUIDE_MUTATION_COUNT = 16
 RUST_ADMISSION_MUTATION_COUNT = 8
 DART_ADMISSION_MUTATION_COUNT = 13
 JULIA_ADMISSION_MUTATION_COUNT = 14
@@ -475,6 +580,7 @@ EXPECTED_TOP_LEVEL = {
     "token_model",
     "fixtures",
     "diagnostics",
+    "recurring_gate",
     "rollout",
     "canonical_execution",
     "mutation_ids",
@@ -507,16 +613,21 @@ def expected_current_boundary() -> str:
         "julia": "Julia",
         "puc_lua": "PUC Lua",
         "luajit": "LuaJIT",
-        "recurring": "recurring",
         "public_no_drift": "public-no-drift",
     }
-    runtime_rows = [row for row in EXPECTED_ROLLOUT if row[2] != "neutral"]
+    runtime_rows = [row for row in EXPECTED_ROLLOUT if row[2] in labels and row[2] != "public_no_drift"]
     admitted = [labels[leg] for _, _, leg, status in runtime_rows if status == "complete"]
-    unavailable = [labels[leg] for _, _, leg, status in runtime_rows if status == "red"]
+    unavailable = [
+        labels[leg]
+        for _, _, leg, status in EXPECTED_ROLLOUT
+        if leg in labels and status == "red"
+    ]
+    recurring = next(row for row in EXPECTED_ROLLOUT if row[2] == "recurring")
+    recurring_clause = ", and recurring proof" if recurring[3] == "complete" else ""
     return (
-        "this artifact admits the neutral contract and current "
-        f"{_english_join(admitted)} runtime behavior; "
-        f"{_english_join(unavailable)} legs remain unavailable, and no schema, "
+        "this artifact admits the neutral contract, current "
+        f"{_english_join(admitted)} runtime behavior{recurring_clause}; "
+        f"{_english_join(unavailable)} remains unavailable, and no schema, "
         "semantic, MCP, capability, CLI, or unrelated helper behavior changes"
     )
 
@@ -726,6 +837,74 @@ def validate_lua_admission(
         )
 
 
+def validate_recurring_gate(ci: str, driver: str) -> None:
+    require(
+        RECURRING_GATE["storage"]["initializer"] == "tools/project_data_env.sh"
+        and RECURRING_GATE["storage"]["managed_entrypoint"] == RECURRING_DRIVER_PATH,
+        "recurring storage topology drifted",
+    )
+    require(
+        'source "$REPO_ROOT/tools/project_data_env.sh"' in driver
+        and (
+            'linkedspec_project_data_enter_run '
+            '"$REPO_ROOT/tools/check_recognition_transaction_six_runtime.sh" "$@"'
+        ) in driver,
+        "recurring driver is not repository-routed",
+    )
+
+    source_paths = [
+        path
+        for source in RECURRING_GATE["consumer_sources"]
+        for path in source["paths"]
+    ]
+    require(
+        len(source_paths) == len(set(source_paths)) == EXPECTED_COUNTS["recurring_source_groups"],
+        "recurring consumer source inventory drifted",
+    )
+    for path in source_paths:
+        require((ROOT / path).is_file(), f"recurring consumer source is missing: {path}")
+
+    route_sources = {row["source_backend"] for row in RECURRING_GATE["runtime_routes"]}
+    source_backends = {row["backend"] for row in RECURRING_GATE["consumer_sources"]}
+    require(route_sources == source_backends, "recurring route/source binding drifted")
+    markers = [
+        EXPECTED_EXECUTION["invocation"],
+        *[row["command"] for row in RECURRING_GATE["runtime_routes"]],
+        *RECURRING_GATE["support_checks"],
+    ]
+    positions: list[int] = []
+    for marker in markers:
+        require(
+            driver.count(marker) == 1,
+            f"recurring driver marker missing or duplicated: {marker}",
+        )
+        positions.append(driver.index(marker))
+    require(positions == sorted(positions), "recurring neutral/runtime/support order drifted")
+    recurring_ci = RECURRING_GATE["local_ci"]
+    require(
+        recurring_ci["driver"] == CI_PATH.relative_to(ROOT).as_posix(),
+        "recurring canonical driver identity drifted",
+    )
+    require(
+        ci.count(f"require_tracked_file {RECURRING_DRIVER_PATH}") == 2,
+        "canonical CI must require the recurring driver at inventory and execution",
+    )
+    syntax_start = ci.index('log "running syntax checks"')
+    syntax_end = ci.index("perl -c perl/LinkedSpec.pm", syntax_start)
+    require(
+        ci[syntax_start:syntax_end].count(RECURRING_DRIVER_PATH) == 1,
+        "canonical CI must syntax-check the recurring driver exactly once",
+    )
+    require(
+        ci.count(f'if [[ "${{{recurring_ci["switch"]}:-0}}" == "1" ]]; then') == 1,
+        "canonical recurring opt-in switch drifted",
+    )
+    require(
+        ci.count(f'bash "$REPO_ROOT/{RECURRING_DRIVER_PATH}"') == 1,
+        "canonical CI recurring invocation drifted",
+    )
+
+
 def public_sequence_texts() -> dict[str, str]:
     paths = [row["path"] for row in PUBLIC_SEQUENCE_CONTRACT["documents"]]
     return {path: read_text(ROOT / path) for path in paths}
@@ -751,7 +930,7 @@ def validate_capability_guide(
     )
     require(
         isinstance(forbidden, list)
-        and len(forbidden) == 10 == len(set(forbidden)),
+        and len(forbidden) == 12 == len(set(forbidden)),
         "capability-guide forbidden-claim inventory drifted",
     )
     for marker in markers:
@@ -805,13 +984,24 @@ def validate_public_sequence(
         and rollout_status.get("julia") == "complete"
         and rollout_status.get("puc_lua") == "complete"
         and rollout_status.get("luajit") == "complete"
+        and rollout_status.get("recurring") == "complete"
         and set(rollout_status.values()) == {"complete", "red"}
         and all(
             status == "red"
             for leg, status in rollout_status.items()
-            if leg not in {"neutral", "perl", "rust", "dart", "julia", "puc_lua", "luajit"}
+            if leg
+            not in {
+                "neutral",
+                "perl",
+                "rust",
+                "dart",
+                "julia",
+                "puc_lua",
+                "luajit",
+                "recurring",
+            }
         ),
-        "public sequence requires neutral through dual-ABI Lua complete with later legs RED",
+        "public sequence requires neutral through recurring complete with public no-drift RED",
     )
 
     for row in documents:
@@ -836,7 +1026,7 @@ def validate_public_sequence(
             )
             require(tracked.returncode == 0, f"public document is not tracked: {path}")
 
-    require(len(forbidden) == 20, "public forbidden-claim inventory drifted")
+    require(len(forbidden) == 23, "public forbidden-claim inventory drifted")
     for row in forbidden:
         path = row.get("path")
         claim = row.get("text")
@@ -1172,7 +1362,7 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
     )
     require(
         document.get("status")
-        == "neutral_perl_rust_dart_julia_puc_lua_and_luajit_complete_other_legs_red",
+        == "neutral_through_recurring_complete_public_no_drift_red",
         "neutral/backend status drifted",
     )
     require(document.get("expected_counts") == EXPECTED_COUNTS, "expected_counts drifted")
@@ -1307,6 +1497,12 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
         "diagnostic codes/fields/order drifted",
     )
 
+    recurring = document.get("recurring_gate")
+    require(
+        recurring == RECURRING_GATE,
+        "recurring source, route, command, support, storage, or canonical topology drifted",
+    )
+
     rollout = document.get("rollout")
     require(isinstance(rollout, list), "rollout must be an array")
     require(
@@ -1343,7 +1539,11 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
         and rollout[6].get("paths") == [EXPECTED_LUA_ADMISSION["consumer_path"]],
         "dual-ABI Lua rollout consumer paths drifted",
     )
-    require(all(row.get("paths") == [] for row in rollout[7:]), "RED rollout paths drifted")
+    require(
+        rollout[7].get("paths") == [RECURRING_DRIVER_PATH],
+        "recurring rollout driver path drifted",
+    )
+    require(rollout[8].get("paths") == [], "public-no-drift rollout path drifted")
 
     execution = document.get("canonical_execution")
     require(execution == EXPECTED_EXECUTION, "canonical execution/freshness topology drifted")
@@ -1407,6 +1607,13 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
             read_text(ROOT / LUA_ORDINARY_PATH),
             lua_admission_sources(),
         )
+        recurring_path = ROOT / RECURRING_DRIVER_PATH
+        require(recurring_path.is_file(), "recurring recognition driver is missing")
+        require(
+            recurring_path.stat().st_mode & 0o111 != 0,
+            "recurring recognition driver is not executable",
+        )
+        validate_recurring_gate(ci, read_text(recurring_path))
         validate_public_sequence(
             document,
             PUBLIC_SEQUENCE_CONTRACT,
@@ -1449,6 +1656,16 @@ def _unknown_effect_row(surface: str, effect: str) -> Callable[[dict[str, Any]],
     return mutate
 
 
+def _swap_recurring_routes(document: dict[str, Any]) -> None:
+    routes = document["recurring_gate"]["runtime_routes"]
+    routes[0], routes[1] = routes[1], routes[0]
+
+
+def _duplicate_recurring_route(document: dict[str, Any]) -> None:
+    routes = document["recurring_gate"]["runtime_routes"]
+    routes.append(copy.deepcopy(routes[0]))
+
+
 MUTATIONS: dict[str, Callable[[dict[str, Any]], None]] = {
     "format": _set(["format"], 2),
     "contract_id": _set(["contract_id"], "changed"),
@@ -1479,6 +1696,17 @@ MUTATIONS: dict[str, Callable[[dict[str, Any]], None]] = {
     "mark_fixture": _set(["fixtures", "marks", 0, "expected", "cursor"], 5),
     "progress_fixture": _set(["fixtures", "progress", 0, "end"], 1),
     "diagnostic": _set(["diagnostics", 0, "code"], "changed"),
+    "recurring_source_group_missing": lambda document: document["recurring_gate"]["consumer_sources"].pop(),
+    "recurring_source_path_missing": lambda document: document["recurring_gate"]["consumer_sources"][0]["paths"].pop(),
+    "recurring_route_missing": lambda document: document["recurring_gate"]["runtime_routes"].pop(),
+    "recurring_route_order": _swap_recurring_routes,
+    "recurring_route_duplicate": _duplicate_recurring_route,
+    "recurring_command": _set(["recurring_gate", "runtime_routes", 1, "command"], "cargo test --wrong"),
+    "recurring_source_binding": _set(["recurring_gate", "runtime_routes", 5, "source_backend"], "rust"),
+    "recurring_support_missing": lambda document: document["recurring_gate"]["support_checks"].pop(),
+    "recurring_storage_initializer": _set(["recurring_gate", "storage", "initializer"], "/tmp/project_data_env.sh"),
+    "recurring_driver": _set(["recurring_gate", "driver"], "tools/missing.sh"),
+    "recurring_ci_switch": _set(["recurring_gate", "local_ci", "switch"], "LINKEDSPEC_RUN_WRONG_MATRIX"),
     "rollout_order": _set(["rollout", 0, "order"], 2),
     "rollout_owner": _set(["rollout", 1, "owner"], "FUTURE-PARITY-BACKLOG.14.3.1.1"),
     "rollout_status": _set(["rollout", 2, "status"], "red"),
@@ -1487,7 +1715,8 @@ MUTATIONS: dict[str, Callable[[dict[str, Any]], None]] = {
     "rollout_julia_regression": _set(["rollout", 4, "status"], "red"),
     "rollout_puc_lua_regression": _set(["rollout", 5, "status"], "red"),
     "rollout_luajit_regression": _set(["rollout", 6, "status"], "red"),
-    "rollout_next_backend": _set(["rollout", 7, "status"], "complete"),
+    "rollout_recurring_regression": _set(["rollout", 7, "status"], "red"),
+    "rollout_next_backend": _set(["rollout", 8, "status"], "complete"),
     "canonical_contract_path": _set(["canonical_execution", "contract_path"], "changed.json"),
     "canonical_checker_path": _set(["canonical_execution", "checker_path"], "changed.py"),
     "canonical_invocation": _set(
@@ -1638,8 +1867,14 @@ def validate_public_sequence_mutations(document: dict[str, Any]) -> int:
             ),
         ),
         (
-            "backend rollout promotion",
+            "recurring rollout regression",
             lambda candidate, _contract, _texts: candidate["rollout"][7].__setitem__(
+                "status", "red"
+            ),
+        ),
+        (
+            "public rollout promotion",
+            lambda candidate, _contract, _texts: candidate["rollout"][8].__setitem__(
                 "status", "complete"
             ),
         ),
@@ -2064,9 +2299,9 @@ def main() -> int:
         "recognition-transaction-contract: OK "
         "(132 ActionIR rows = 128 current + 4 dedicated; 246 call rows; "
         "token 8 positive/17 negative; effects 6 graphs; marks 6; progress 8; "
-        "46 rejected mutations; rollout neutral through dual-ABI Lua 7/9 complete; "
-        f"public sequence 3 documents/20 forbidden/{public_mutations} mutations; "
-        f"capability guide 1 document/10 forbidden/{guide_mutations} mutations; "
+        "58 rejected mutations; rollout neutral through recurring 8/9 complete; "
+        f"public sequence 3 documents/23 forbidden/{public_mutations} mutations; "
+        f"capability guide 1 document/12 forbidden/{guide_mutations} mutations; "
         f"Rust admission {rust_admission_mutations} mutations; "
         f"Dart admission {dart_admission_mutations} mutations; "
         f"Julia admission {julia_admission_mutations} mutations; "

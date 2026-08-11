@@ -198,6 +198,23 @@ paths, missing/reordered/duplicated runtime routes, command or source-binding dr
 driver/switch drift, and premature completion of the combined final row. Rollout therefore remains 8 complete /
 6 pending until `FUTURE-PARITY-BACKLOG.14.8` closes program-wide public no-drift.
 
+Recognition transactions have a separate exact recurring composition:
+
+```bash
+bash tools/check_recognition_transaction_six_runtime.sh
+```
+
+It runs the neutral transaction checker first, then Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT, followed by the
+generated-source, capability, and language-coverage ledgers. Five backend consumer sources produce six runtime
+routes because the shared Lua source executes once per ABI. The driver enters the existing project-data
+initializer; it adds no scratch root or global cache. Canonical CI always requires, path-audits, and syntax-checks
+it, while `LINKEDSPEC_RUN_RECOGNITION_TRANSACTION_MATRIX=1` opts into the complete all-toolchain run.
+
+Eleven topology/storage mutations plus one recurring complete-to-RED regression bring neutral governance to 58.
+Only the recurring row advances: recognition rollout is 8/9 and public no-drift remains RED under
+`FUTURE-PARITY-BACKLOG.14.3.8`. The recurring gate changes no parser, runtime, public facade, schema, CLI, or
+generated format.
+
 No-change recomposition `.14.2.7` reruns this exact driver and closes the internal six-runtime value/helper parent
 `.14.2`. It adds no umbrella test or replacement oracle. Transactions remain owned by `.14.3`, and the combined
 recurring/public no-drift row remains pending under `.14.8`.
@@ -990,6 +1007,8 @@ To re-enable hosted CI later, restore the `push` and `pull_request` triggers in 
 - optionally runs the dual-ABI `tools/run_lua_local.sh` when `LINKEDSPEC_RUN_LUA=1` is set,
 - optionally runs the recurring Perl/Rust/Dart/Julia callable-codeblock composition when
   `LINKEDSPEC_RUN_CALLABLE_CODEBLOCK_MATRIX=1` is set,
+- optionally runs the exact six-runtime recognition-transaction composition when
+  `LINKEDSPEC_RUN_RECOGNITION_TRANSACTION_MATRIX=1` is set,
 - optionally runs the complete warmed five-backend primary CLI matrix when `LINKEDSPEC_RUN_CLI_MATRIX=1` is set.
 
 The command sequence includes:

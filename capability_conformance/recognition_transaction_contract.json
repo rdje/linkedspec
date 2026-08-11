@@ -2,7 +2,7 @@
   "format": 1,
   "contract_id": "linkedspec-recognition-transaction-v1",
   "task_owner": "FUTURE-PARITY-BACKLOG.14.3.1.1",
-  "status": "neutral_perl_rust_dart_julia_puc_lua_and_luajit_complete_other_legs_red",
+  "status": "neutral_through_recurring_complete_public_no_drift_red",
   "expected_counts": {
     "current_action_ir_nodes": 128,
     "dedicated_action_ir_nodes": 4,
@@ -17,7 +17,9 @@
     "progress_cases": 8,
     "diagnostics": 15,
     "rollout_legs": 9,
-    "mutations": 46
+    "recurring_source_groups": 5,
+    "recurring_runtime_routes": 6,
+    "mutations": 58
   },
   "authored_surface": {
     "checkpoint": "tx = recognition_checkpoint()",
@@ -26,7 +28,7 @@
     "rollback": "recognition_rollback(tx)",
     "operand": "recognize_once accepts exactly one unevaluated static call(Rule) operand",
     "result_separation": "recognize_once returns a strict match boolean; the recognized payload remains staged until commit",
-    "availability": "available only in an admitted runtime; currently Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT, with recurring and public-no-drift legs future and unavailable"
+    "availability": "available in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; exact recurring proof is current and public no-drift remains future and unavailable"
   },
   "policy": {
     "recognition_scope": "one bounded recognition-only attempt per token; no retry or hidden multi-boundary probing",
@@ -41,7 +43,7 @@
     "non_progress": "rolled-back candidates and variable, mark, AST, object, or transaction-state changes do not establish progress; zero-width one-shot recognition remains legal",
     "effects": "every ActionIR node and canonical call contract has exactly one base effect; composite and named-rule effects are unions computed to a recursive fixed point",
     "fail_closed": "unknown nodes, calls, effects, graph references, token states, or fixture operations reject before recognition",
-    "current_boundary": "this artifact admits the neutral contract and current Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT runtime behavior; recurring and public-no-drift legs remain unavailable, and no schema, semantic, MCP, capability, CLI, or unrelated helper behavior changes"
+    "current_boundary": "this artifact admits the neutral contract, current Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT runtime behavior, and recurring proof; public-no-drift remains unavailable, and no schema, semantic, MCP, capability, CLI, or unrelated helper behavior changes"
   },
   "effect_model": {
     "allowed": [
@@ -202,6 +204,46 @@
     {"code": "recognition_match_boolean_required", "fields": ["code", "rule", "origin"]},
     {"code": "recognition_mark_generation_invalid", "fields": ["code", "rule", "origin", "generation"]}
   ],
+  "recurring_gate": {
+    "driver": "tools/check_recognition_transaction_six_runtime.sh",
+    "source_schema": {
+      "fields": ["backend", "paths"],
+      "policy": "five admitted backend source groups are immutable; one shared Lua source executes independently on both ABIs"
+    },
+    "consumer_sources": [
+      {"backend": "perl", "paths": ["t/recognition_transaction_perl_contract.t"]},
+      {"backend": "rust", "paths": ["rust/linkedspec-runtime/tests/recognition_transaction_contract.rs"]},
+      {"backend": "dart", "paths": ["dart/test/recognition_transaction_contract_test.dart"]},
+      {"backend": "julia", "paths": ["julia/test/recognition_transaction_contract_test.jl"]},
+      {"backend": "lua", "paths": ["lua/test/recognition_transaction_contract_test.lua"]}
+    ],
+    "route_schema": {
+      "fields": ["runtime", "source_backend", "command"],
+      "policy": "neutral runs first; Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT then run exactly once in order"
+    },
+    "runtime_routes": [
+      {"runtime": "perl", "source_backend": "perl", "command": "PERL5LIB= prove -Iperl t/recognition_transaction_perl_contract.t"},
+      {"runtime": "rust", "source_backend": "rust", "command": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test recognition_transaction_contract"},
+      {"runtime": "dart", "source_backend": "dart", "command": "cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/recognition_transaction_contract_test.dart"},
+      {"runtime": "julia", "source_backend": "julia", "command": "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/recognition_transaction_contract_test.jl\")'"},
+      {"runtime": "puc_lua", "source_backend": "lua", "command": "bash tools/run_lua_project_data.sh puc lua/test/recognition_transaction_contract_test.lua"},
+      {"runtime": "luajit", "source_backend": "lua", "command": "bash tools/run_lua_project_data.sh luajit lua/test/recognition_transaction_contract_test.lua"}
+    ],
+    "support_checks": [
+      "perl tools/check_generated_source_contract.pl",
+      "perl tools/check_capability_conformance.pl",
+      "perl tools/check_language_capability_coverage.pl"
+    ],
+    "storage": {
+      "initializer": "tools/project_data_env.sh",
+      "managed_entrypoint": "tools/check_recognition_transaction_six_runtime.sh",
+      "policy": "all temporary, cache, build, native, and test data stays under repository-derived storage"
+    },
+    "local_ci": {
+      "driver": "tools/run_ci_local.sh",
+      "switch": "LINKEDSPEC_RUN_RECOGNITION_TRANSACTION_MATRIX"
+    }
+  },
   "rollout": [
     {"order": 1, "owner": "FUTURE-PARITY-BACKLOG.14.3.1.1", "leg": "neutral", "status": "complete", "paths": ["capability_conformance/recognition_transaction_contract.json", "tools/check_recognition_transaction_contract.py"]},
     {"order": 2, "owner": "FUTURE-PARITY-BACKLOG.14.3.2", "leg": "perl", "status": "complete", "paths": ["t/recognition_transaction_perl_contract.t"]},
@@ -210,7 +252,7 @@
     {"order": 5, "owner": "FUTURE-PARITY-BACKLOG.14.3.5", "leg": "julia", "status": "complete", "paths": ["julia/test/recognition_transaction_contract_test.jl"]},
     {"order": 6, "owner": "FUTURE-PARITY-BACKLOG.14.3.6", "leg": "puc_lua", "status": "complete", "paths": ["lua/test/recognition_transaction_contract_test.lua"]},
     {"order": 7, "owner": "FUTURE-PARITY-BACKLOG.14.3.6", "leg": "luajit", "status": "complete", "paths": ["lua/test/recognition_transaction_contract_test.lua"]},
-    {"order": 8, "owner": "FUTURE-PARITY-BACKLOG.14.3.7", "leg": "recurring", "status": "red", "paths": []},
+    {"order": 8, "owner": "FUTURE-PARITY-BACKLOG.14.3.7", "leg": "recurring", "status": "complete", "paths": ["tools/check_recognition_transaction_six_runtime.sh"]},
     {"order": 9, "owner": "FUTURE-PARITY-BACKLOG.14.3.8", "leg": "public_no_drift", "status": "red", "paths": []}
   ],
   "canonical_execution": {
@@ -224,6 +266,6 @@
     "freshness_sources": ["perl/LinkedSpec/ActionIR/Contracts.pm", "dart/lib/src/action/action_contracts.dart", "julia/src/action/ActionContracts.jl", "lua/src/linkedspec/action_call_names.lua"]
   },
   "mutation_ids": [
-    "format", "contract_id", "task_owner", "status", "count_current_nodes", "count_dedicated_nodes", "count_calls", "syntax_checkpoint", "syntax_attempt", "syntax_commit", "syntax_rollback", "result_separation", "token_state", "token_transition", "token_payload", "token_positive", "token_negative", "effect_allowed", "effect_rejected", "action_row_missing", "action_row_duplicate", "action_row_unknown", "call_row_missing", "call_row_duplicate", "call_row_unknown", "effect_graph", "mark_fixture", "progress_fixture", "diagnostic", "rollout_order", "rollout_owner", "rollout_status", "rollout_perl_regression", "rollout_dart_regression", "rollout_julia_regression", "rollout_puc_lua_regression", "rollout_luajit_regression", "rollout_next_backend", "canonical_contract_path", "canonical_checker_path", "canonical_invocation", "canonical_registration", "tracked_required", "freshness_source", "policy_fail_closed", "current_boundary"
+    "format", "contract_id", "task_owner", "status", "count_current_nodes", "count_dedicated_nodes", "count_calls", "syntax_checkpoint", "syntax_attempt", "syntax_commit", "syntax_rollback", "result_separation", "token_state", "token_transition", "token_payload", "token_positive", "token_negative", "effect_allowed", "effect_rejected", "action_row_missing", "action_row_duplicate", "action_row_unknown", "call_row_missing", "call_row_duplicate", "call_row_unknown", "effect_graph", "mark_fixture", "progress_fixture", "diagnostic", "recurring_source_group_missing", "recurring_source_path_missing", "recurring_route_missing", "recurring_route_order", "recurring_route_duplicate", "recurring_command", "recurring_source_binding", "recurring_support_missing", "recurring_storage_initializer", "recurring_driver", "recurring_ci_switch", "rollout_order", "rollout_owner", "rollout_status", "rollout_perl_regression", "rollout_dart_regression", "rollout_julia_regression", "rollout_puc_lua_regression", "rollout_luajit_regression", "rollout_recurring_regression", "rollout_next_backend", "canonical_contract_path", "canonical_checker_path", "canonical_invocation", "canonical_registration", "tracked_required", "freshness_source", "policy_fail_closed", "current_boundary"
   ]
 }

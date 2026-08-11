@@ -49,8 +49,9 @@
 > treat those compatibility controls as transaction support. The accepted transaction forms are `recognition_checkpoint()`,
 > `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and `recognition_rollback(token)`. The attempt
 > returns a match boolean; commit separately exposes the staged payload. The neutral authority is now executable
-> and fail-closed over 128 current + four dedicated node rows, 246 call rows, and 46 mutations. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT transaction support is current and canonically admitted; recurring composition and public
-> no-drift remain unavailable until their own closeout leaves land. Neutral proof alone is not backend support.
+> and fail-closed over 128 current + four dedicated node rows, 246 call rows, and 58 mutations.
+> Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT transaction support is current and canonically admitted; public no-drift remains
+> unavailable until its closeout leaf lands. Neutral proof alone is not backend support.
 >
 > Perl now has an admitted end-to-end implementation behind that boundary: dedicated ActionIR, recursive static
 > effect validation, invocation-local cursor/boundary/marks, falsey-safe staging, typed cursor-progress failures,
@@ -73,17 +74,25 @@
 > Julia now has an admitted private end-to-end integration behind the same non-exported authority. Four dedicated non-eager
 > nodes, recursive effect closure, cursor-only progress, and live UTF-8 code-unit cursor/boundary/invocation-mark
 > synchronization converge across native, reconstructed, generated-plan, and independently loaded emitted-module
-> execution. The Julia consumer now passes 205 assertions after checking both promoted Lua rows; it is included in ordinary Julia discovery and executed once directly by
+> execution. The Julia consumer now passes 207 assertions after freezing the promoted Lua, recurring, and public-
+> no-drift rows; it is included in ordinary Julia discovery and executed once directly by
 > canonical CI. That admission advanced only Julia; the private authority stays unexported.
 >
 > Shared Lua transaction work uses one private Lua-5.1-compatible authority and one private runtime adapter rather
 > than an ABI-specific fork. Explicit authority runs pass 187 assertions per ABI. Explicit integration runs pass
-> 243 per ABI across four non-eager nodes, recursive effect closure, cursor-only progress, native/reconstructed/
+> 246 per ABI across four non-eager nodes, recursive effect closure, cursor-only progress, native/reconstructed/
 > generated-plan execution, and an independently loaded emitted module. The adapter synchronizes the live UTF-8-byte
 > cursor, nullable anonymous boundary, and isolated same-label marks, and successful `false` survives commit.
 > Both modules remain unexported. Admission `.14.3.6.3` removes the RED selector and executes the unchanged
-> 243-assertion source once per ABI in ordinary discovery and once per ABI in canonical CI. Only PUC Lua and LuaJIT
-> advance, yielding recognition rollout 7/9; recurring and public-no-drift remain RED.
+> 246-assertion source once per ABI in ordinary discovery and once per ABI in canonical CI. Only PUC Lua and LuaJIT
+> advanced in that admission.
+>
+> The exact six-runtime recurring proof is current. `tools/check_recognition_transaction_six_runtime.sh` runs the
+> neutral checker, then Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT in that order, followed by the generated-source,
+> capability, and language-coverage ledgers. Five source groups map to six runtime routes because one unchanged Lua
+> source runs on both ABIs. It uses the project-data initializer and is optionally composed by canonical CI through
+> `LINKEDSPEC_RUN_RECOGNITION_TRANSACTION_MATRIX=1`. Only recurring advanced, yielding recognition rollout 8/9;
+> public-no-drift remains RED.
 >
 > Any cursor transaction is one explicit
 > recognition attempt over invocation-local cursor/boundary/marks only; it adds no search tree and cannot undo

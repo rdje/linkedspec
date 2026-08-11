@@ -60,7 +60,7 @@ void main() {
     expect(_contract['format'], 1);
     expect(
       _contract['status'],
-      'neutral_perl_rust_dart_julia_puc_lua_and_luajit_complete_other_legs_red',
+      'neutral_through_recurring_complete_public_no_drift_red',
     );
 
     final counts = _object(_contract['expected_counts']);
@@ -74,7 +74,7 @@ void main() {
     expect(counts, containsPair('mark_cases', 6));
     expect(counts, containsPair('progress_cases', 8));
     expect(counts, containsPair('diagnostics', 15));
-    expect(counts, containsPair('mutations', 46));
+    expect(counts, containsPair('mutations', 58));
 
     expect(_object(_contract['authored_surface']), {
       'checkpoint': 'tx = recognition_checkpoint()',
@@ -86,7 +86,7 @@ void main() {
       'result_separation':
           'recognize_once returns a strict match boolean; the recognized payload remains staged until commit',
       'availability':
-          'available only in an admitted runtime; currently Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT, with recurring and public-no-drift legs future and unavailable',
+          'available in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; exact recurring proof is current and public no-drift remains future and unavailable',
     });
 
     final rollout = _objectRows('rollout');
@@ -126,7 +126,15 @@ void main() {
       'status': 'complete',
       'paths': ['lua/test/recognition_transaction_contract_test.lua'],
     });
-    expect(rollout.skip(7).every((row) => row['status'] == 'red'), isTrue);
+    expect(rollout[7], {
+      'order': 8,
+      'owner': 'FUTURE-PARITY-BACKLOG.14.3.7',
+      'leg': 'recurring',
+      'status': 'complete',
+      'paths': ['tools/check_recognition_transaction_six_runtime.sh'],
+    });
+    expect(rollout[8]['leg'], 'public_no_drift');
+    expect(rollout[8]['status'], 'red');
   });
 
   test(

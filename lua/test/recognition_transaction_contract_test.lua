@@ -180,7 +180,7 @@ check_equal(contract.contract_id, "linkedspec-recognition-transaction-v1", "cont
 check_equal(contract.format, 1, "contract format")
 check_equal(
   contract.status,
-  "neutral_perl_rust_dart_julia_puc_lua_and_luajit_complete_other_legs_red",
+  "neutral_through_recurring_complete_public_no_drift_red",
   "admitted Lua status"
 )
 for name, expected in pairs({
@@ -194,25 +194,32 @@ for name, expected in pairs({
   mark_cases = 6,
   progress_cases = 8,
   diagnostics = 15,
-  mutations = 46,
+  mutations = 58,
 }) do
   check_equal(contract.expected_counts[name], expected, "count " .. name)
 end
 check_equal(
   contract.authored_surface.availability,
-  "available only in an admitted runtime; currently Perl, Rust, Dart, Julia, " ..
-    "PUC Lua, and LuaJIT, with recurring and public-no-drift legs future and unavailable",
+  "available in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; exact recurring " ..
+    "proof is current and public no-drift remains future and unavailable",
   "Lua runtimes are admitted"
 )
 check_equal(#contract.rollout, 9, "rollout count")
-for index = 1, 7 do
+for index = 1, 8 do
   check_equal(contract.rollout[index].status, "complete", "complete rollout " .. index)
 end
 check_equal(contract.rollout[6].leg, "puc_lua", "PUC Lua rollout")
 check_equal(contract.rollout[6].status, "complete", "PUC Lua admitted")
 check_equal(contract.rollout[7].leg, "luajit", "LuaJIT rollout")
 check_equal(contract.rollout[7].status, "complete", "LuaJIT admitted")
-for index = 8, 9 do
+check_equal(contract.rollout[8].leg, "recurring", "recurring rollout")
+check_equal(contract.rollout[8].status, "complete", "recurring proof admitted")
+check_equal(
+  contract.rollout[8].paths[1],
+  "tools/check_recognition_transaction_six_runtime.sh",
+  "recurring driver path"
+)
+for index = 9, 9 do
   check_equal(contract.rollout[index].status, "red", "later rollout " .. index)
 end
 

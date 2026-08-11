@@ -73,6 +73,17 @@ consumers pass, and the route registry remains 20 surfaces / 62 routes / 32/32 w
 empty debt metadata. The program is composition-closed. These storage migrations change documentation governance
   only; they change no language, compiler, runtime, backend, fixture, CLI, protocol, or project-data root.
 
+- `2026-08-11 composed recurring recognition-transaction proof`: `FUTURE-PARITY-BACKLOG.14.3.7` adds one
+  project-data-routed driver over the neutral checker, exact Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT consumers, and
+  generated-source/capability/language-coverage ledgers. Five backend sources form six ordered runtime routes
+  because the shared Lua source executes once per ABI. Canonical CI inventories, path-audits, syntax-checks, and
+  optionally runs the driver through `LINKEDSPEC_RUN_RECOGNITION_TRANSACTION_MATRIX=1`. Eleven topology/storage
+  mutations plus a recurring regression advance governance to 58 and only recurring to complete: rollout 8/9,
+  public 3/23/42, guide 1/12/16. Focused proof passes Perl 51, Rust 12, Dart 10, Julia 207, and Lua 246 per ABI.
+  Book 79/14,428, Knowledge 819/6,803, all eight doctrines, CLI 66x2, RAM 62%, and canonical Phase 0 1,031/1,031
+  in 745 seconds pass. No parser/runtime/facade/schema/CLI/README/generated-format behavior changes; public
+  no-drift remains `.14.3.8`.
+
 - `2026-08-11 admitted Lua recognition transactions on both ABIs`: `FUTURE-PARITY-BACKLOG.14.3.6.3` removes
   selector dormancy from the unchanged final-path source and executes all 243 assertions exactly once with PUC Lua
   and once with LuaJIT in both ordinary discovery and canonical CI. The shared Lua-5.1 authority and runtime adapter

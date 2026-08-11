@@ -3,7 +3,8 @@
 - Date: 2026-07-29
 - Status: accepted; neutral/public contract and six-runtime internal value/projection implementation complete;
   exact future transaction syntax/effect/progress contract ratified; executable neutral transaction authority is
-  complete while backend behavior through final public no-drift remains under `FUTURE-PARITY-BACKLOG.14.3.2-.14.8`
+  complete; Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, and recurring transaction proof are current while final
+  public no-drift remains under `FUTURE-PARITY-BACKLOG.14.3.8`
 - Tags: architecture, cursor, source-location, spans, capture, recursion, parser-composition, diagnostics, portability
 
 ## Context
@@ -381,10 +382,24 @@ authority, and integrates four non-eager nodes plus recursive effects, cursor-on
 Admission `.14.3.6.3` removes only selector dormancy. Ordinary discovery and canonical CI each execute the
 unchanged 243-assertion source once with PUC Lua and once with LuaJIT; the authority and adapter remain unexported.
 
-Current recognition rollout is neutral through dual-ABI Lua 7/9 complete. Semantic mutation proof is 46; public
+At the Lua-admission boundary, recognition rollout was neutral through dual-ABI Lua 7/9 complete. Semantic mutation proof was 46; public
 sequence governance is 3 documents / 20 forbidden / 38 mutations; the guide is 1/10/14. Twenty-two Lua admission
 mutations independently reject ordinary/canonical omission or duplication, RED residue, private lookup removal,
 and facade export. Recurring composition and final public no-drift remain RED under `.14.3.7-.8`.
+
+### 17. Compose exact recurring transaction proof without widening behavior
+
+`FUTURE-PARITY-BACKLOG.14.3.7` adds one fail-fast repository-routed driver over the unchanged neutral checker,
+exact Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT consumers, and the generated-source, capability, and language-
+coverage ledgers. Five backend source groups map to six runtime routes because the shared Lua source executes
+independently on both ABIs. Canonical CI requires, path-audits, and syntax-checks the driver; the full all-toolchain
+route is opt-in through `LINKEDSPEC_RUN_RECOGNITION_TRANSACTION_MATRIX=1`.
+
+Eleven source/route/order/multiplicity/command/support/storage/CI mutations and one recurring regression advance
+semantic/topology proof from 46 to 58. Public governance advances to 3 documents / 23 forbidden / 42 mutations and
+the capability guide to 1/12/16. Only recurring advances, so recognition rollout is 8/9 and final public no-drift
+remains RED under `.14.3.8`. The driver changes no parser, runtime, facade, schema, CLI, generated format, README,
+or authored transaction behavior.
 
 ## Consequences
 
@@ -398,7 +413,8 @@ and facade export. Recurring composition and final public no-drift remain RED un
   from execution-wide rule-label mark buckets to invocation frames is explicit, versioned, and mechanically checked.
 - The accepted `recognition_*` spellings are deliberately verbose enough to distinguish bounded recognition from
   compatibility cursor stacks, host exception handling, and systemic backtracking. Their neutral authority is
-  executable, and the spellings are current only on the independently admitted Perl and Rust backends.
+  executable, and the spellings plus exact recurring proof are current on independently admitted Perl, Rust, Dart,
+  Julia, PUC Lua, and LuaJIT runtimes.
 - Lossless gap capture gains the common typed representation it anticipated while retaining its separate owner.
 - This decision and its `.14.3.0` audit amendment change no grammar, helper, parser/compiler/runtime, descriptor,
   generated format, semantic/MCP response, primary CLI, rollout, admission, or current public feature-completeness
@@ -407,9 +423,9 @@ and facade export. Recurring composition and final public no-drift remain RED un
   correction are durable in the owning task-tree and Knowledge card.
 - The `.14.3.1.0` amendment selects syntax and static semantics only. `.14.3.1.1` adds the executable neutral
   authority without adding current authored capability or backend behavior. `.14.3.1.2.0` separately governs the
-  public milestone sequence without changing that semantic authority. Independent Perl and Rust admissions advance
-  current rollout to 3/9, semantic proof to 42 mutations, public proof to 3/11/25, and the capability guide to 1/4/8;
-  every later runtime and composed/public-closeout leg retains its separate owner.
+  public milestone sequence without changing that semantic authority. Subsequent independent backend admissions
+  and recurring composition advance current rollout to 8/9, semantic/topology proof to 58 mutations, public proof
+  to 3/23/42, and the capability guide to 1/12/16; final public no-drift retains its separate `.14.3.8` owner.
 
 ## Links
 

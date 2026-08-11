@@ -10,6 +10,28 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.7 — compose recurring recognition-transaction proof
+
+- Added `tools/check_recognition_transaction_six_runtime.sh` as one fail-fast, project-data-routed composition. It
+  validates neutral first, executes exact Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT consumers in order, then
+  runs generated-source, capability, and language-coverage ledgers. Five backend sources form six routes because
+  one shared Lua-5.1 source executes independently on both ABIs.
+- Canonical CI now inventories, machine-path-audits, syntax-checks, and optionally invokes that driver through
+  `LINKEDSPEC_RUN_RECOGNITION_TRANSACTION_MATRIX=1`. The workflow-routing regression proves its repository-derived
+  storage entry and failure propagation. No new storage root, primary CLI option/case, or hosted workflow exists.
+- Extended the neutral artifact/checker with exact source/route/command/support/storage/CI topology. Eleven new
+  topology/storage mutations plus a recurring complete-to-RED regression advance governance from 46 to 58 and
+  promote only recurring, yielding rollout 8/9 with public no-drift RED.
+- Synchronized every admitted consumer's mutable metadata without changing its implementation. Focused recurring
+  proof passes Perl 51, Rust 12, Dart 10, Julia 207, and Lua 246 per ABI. The private authorities, dedicated nodes,
+  effect/progress behavior, runtime carriers, and public facades remain unchanged.
+- Advanced public sequence governance to three pages / 23 forbidden claims / 42 mutations and the capability guide
+  to one page / 12 forbidden / 16 mutations. Synchronized ADR `0056`, roadmaps, architecture, Toolbox, task/live
+  state, capability guidance, Knowledge cards, and sole-facing mdBook while keeping README byte-exact.
+- Final signoff passes the 79-file/14,428-KiB rendered book, Knowledge 819/6,803, all eight doctrines, repository
+  containment and relocation, CLI 66/66 in both option environments, RAM 62%, and canonical Phase 0 1,031/1,031
+  in 745 seconds through the exact `[ci] local CI gate passed` marker.
+
 ## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.6.3 — admit Lua recognition transactions
 
 - Removed the Lua RED mode selector, conditional integration wrapper, and missing-authority/integration diagnostics

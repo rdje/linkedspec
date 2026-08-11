@@ -289,23 +289,35 @@ bash tools/run_python_project_data.sh tools/check_recognition_transaction_contra
 ```
 
 The checker also binds three exact public transaction pages to neutral + Perl + Rust + Dart + Julia + PUC Lua +
-LuaJIT complete with only recurring and public no-drift RED, rejects twenty stale milestone/current claims, and
-executes thirty-eight public-sequence mutations in memory. That projection is distinct from 46 semantic mutations.
+LuaJIT + recurring complete with only public no-drift RED, rejects twenty-three stale milestone/current claims,
+and executes forty-two public-sequence mutations in memory. That projection is distinct from 58 semantic and
+recurring-topology mutations.
 
 The independent checker derives all 128 current ActionIR node kinds from the Perl contract authority and all 246
 current call names from matching Dart, Julia, and Lua inventories. The artifact assigns one base effect to each
 of those rows plus four dedicated `RECOGNITION_*` nodes under the closed nine-allowed/eleven-rejected
 lattice. It separately executes 8 positive / 17 negative token cases, six recursive fixed-point effect graphs,
 six invocation-mark cases, eight cursor-only progress cases, and fifteen portable diagnostic records, then rejects
-46 exact drift mutations. This 128-node census is distinct from the 122 public identifier-shaped Perl contracts
+58 exact drift mutations. This 128-node census is distinct from the 122 public identifier-shaped Perl contracts
 reported by `tools/check_language_capability_coverage.pl`.
 
 Canonical CI requires the tracked artifact/checker and runs the same project-data-routed command unconditionally.
 It executes each Perl, Rust, Dart, and Julia consumer once and the unchanged Lua consumer once per ABI. Rollout is
-neutral + Perl + Rust + Dart + Julia + PUC Lua + LuaJIT 7/9 complete; recurring and public-no-drift remain RED. The
-four exact transaction forms are current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; recurring and public no-drift remain future.
+neutral + Perl + Rust + Dart + Julia + PUC Lua + LuaJIT + recurring 8/9 complete; public-no-drift alone remains RED.
+The four exact transaction forms are current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; exact recurring proof is current and public no-drift remains future.
 
-One shared Lua-5.1-compatible final-path consumer now executes 243 assertions independently on PUC Lua and LuaJIT.
+Run the fail-fast recurring composition with:
+
+```bash
+bash tools/check_recognition_transaction_six_runtime.sh
+```
+
+It validates the neutral checker first, executes the five source groups through exact Perl, Rust, Dart, Julia,
+PUC Lua, and LuaJIT routes in order, and finishes with generated-source, capability, and language-coverage ledgers.
+All data is routed through repository-derived storage. Canonical CI exposes the same all-toolchain proof behind
+`LINKEDSPEC_RUN_RECOGNITION_TRANSACTION_MATRIX=1`.
+
+One shared Lua-5.1-compatible final-path consumer now executes 246 assertions independently on PUC Lua and LuaJIT.
 It covers the private 187-assertion invocation/mark/token authority plus four non-eager nodes, recursive effects,
 cursor-only progress, and native/reconstructed/generated-plan/emitted carriers. Ordinary discovery and canonical
 CI each run it once per ABI; the private authority and runtime adapter remain absent from the facade. Governance

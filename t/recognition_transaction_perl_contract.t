@@ -106,8 +106,8 @@ is(
 is($contract->{format}, 1, 'loads contract format 1');
 is(
  $contract->{status},
- 'neutral_perl_rust_dart_julia_puc_lua_and_luajit_complete_other_legs_red',
- 'loads the neutral-through-dual-ABI-Lua-complete rollout state',
+ 'neutral_through_recurring_complete_public_no_drift_red',
+ 'loads the neutral-through-recurring-complete rollout state',
 );
 
 is_deeply(
@@ -119,7 +119,7 @@ is_deeply(
   rollback          => 'recognition_rollback(tx)',
   operand           => 'recognize_once accepts exactly one unevaluated static call(Rule) operand',
   result_separation => 'recognize_once returns a strict match boolean; the recognized payload remains staged until commit',
-  availability      => 'available only in an admitted runtime; currently Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT, with recurring and public-no-drift legs future and unavailable',
+  availability      => 'available in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; exact recurring proof is current and public no-drift remains future and unavailable',
  },
  'freezes all four authored forms and their static operand/result boundary',
 );
