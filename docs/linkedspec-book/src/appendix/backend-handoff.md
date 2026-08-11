@@ -50,8 +50,8 @@
 > `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and `recognition_rollback(token)`. The attempt
 > returns a match boolean; commit separately exposes the staged payload. The neutral authority is now executable
 > and fail-closed over 128 current + four dedicated node rows, 246 call rows, and 58 mutations.
-> Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT transaction support is current and canonically admitted; public no-drift remains
-> unavailable until its closeout leaf lands. Neutral proof alone is not backend support.
+> Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT transaction support is current and canonically admitted.
+> Public no-drift is current and recognition rollout is 9/9 complete. Neutral proof alone is not backend support.
 >
 > Perl now has an admitted end-to-end implementation behind that boundary: dedicated ActionIR, recursive static
 > effect validation, invocation-local cursor/boundary/marks, falsey-safe staging, typed cursor-progress failures,
@@ -91,8 +91,8 @@
 > neutral checker, then Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT in that order, followed by the generated-source,
 > capability, and language-coverage ledgers. Five source groups map to six runtime routes because one unchanged Lua
 > source runs on both ABIs. It uses the project-data initializer and is optionally composed by canonical CI through
-> `LINKEDSPEC_RUN_RECOGNITION_TRANSACTION_MATRIX=1`. Only recurring advanced, yielding recognition rollout 8/9;
-> public-no-drift remains RED.
+> `LINKEDSPEC_RUN_RECOGNITION_TRANSACTION_MATRIX=1`. Public no-drift now locks that unchanged composition:
+> recognition rollout is 9/9 complete and transaction activity `.14.3` is closed.
 >
 > Any cursor transaction is one explicit
 > recognition attempt over invocation-local cursor/boundary/marks only; it adds no search tree and cannot undo
@@ -101,10 +101,9 @@
 > lifecycle ownership. The neutral contract and all six internal value/projection runtime targets are admitted.
 > Existing helpers retain their public results and established scalar, byte, or code-unit mark/cursor behavior.
 >
-> Public authored values, portable transactions across the remaining runtimes, observation, and dispatch remain
-> owned by later leaves. The combined
+> Public authored typed values, recursive observation, and span-native dispatch remain owned by later leaves. The combined
 > recurring/public no-drift row stays pending for final program-wide owner `FUTURE-PARITY-BACKLOG.14.8`; the
-> recurring driver does not promote it early.
+> transaction closeout does not promote that separate typed-source row early.
 >
 > **Repeated-action handoff:** Every backend must consume
 > `linkedspec-explicit-repetition-action-result-v1`: bare `OR` is minimum-one repetition, explicit action returns

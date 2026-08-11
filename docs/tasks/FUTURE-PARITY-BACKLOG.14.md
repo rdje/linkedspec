@@ -3490,8 +3490,8 @@
   `.14.2` is composition-closed; `.14.3` is the sole next activation and `.14.8` remains unconsumed.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3`
-  Status: `active` (2026-08-09; task-tree-first from clean value/helper closeout commit `bef75489`, intended
-    171/300, no push)
+  Status: `done; signoff-complete` (2026-08-11; public closeout `.8` is commit-ready as atomic 206/300 from clean
+    recurring commit `e6893fd4`; exact doctrine/canonical proof passes; clean commit remains; no push)
   Goal: Specify and implement bounded checkpoint/try/commit/rollback cursor transactions plus exact progress,
     nullable-recursion, stale-mark, and cross-boundary safety diagnostics while composing, not re-owning, the
     already-admitted reversed-span value diagnostic.
@@ -4945,12 +4945,9 @@
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6.3`
   Status: `complete` (2026-08-11; signoff-complete atomic 204/300 from clean `70b4ed04`; no push)
-  Goal: Remove Lua dormancy, register one consumer exactly once per ABI in ordinary/canonical proof, and promote
-    PUC Lua plus LuaJIT transaction admission independently.
+  Goal: Remove Lua dormancy, register one consumer exactly once per ABI in ordinary/canonical proof, and promote PUC Lua plus LuaJIT transaction admission independently.
   Depends on: `.14.3.6.2`
-  Acceptance: Retrieve the Lua integration and admitted backend authorities before edits; remove only the RED
-    selector/dormancy scaffolding; register the unchanged consumer exactly once for PUC Lua and LuaJIT in ordinary
-    and canonical routes; promote only those two rollout legs and exact ledgers while keeping the API private.
+  Acceptance: Retrieve the Lua integration and admitted backend authorities before edits; remove only RED selector/dormancy scaffolding; register the unchanged consumer exactly once per ABI in ordinary/canonical routes; promote only those two rollout legs and exact ledgers while keeping the API private.
   Commit: `FUTURE-PARITY-BACKLOG.14.3.6.3 - admit Lua recognition transactions`
   Checklist: [x] clean activation/task ownership; [x] authority/predecessor audit; [x] remove dormancy; [x] ordinary
     dual-ABI registration; [x] canonical registration; [x] governance/mutations; [x] no-drift; [x] docs/signoff.
@@ -4967,10 +4964,13 @@
   Evidence: driver passes Perl 51, Rust 12, Dart 10, Julia 207, Lua 246x2, support ledgers, and routing; checker 58 at rollout 8/9, public 3/23/42, guide 1/12/16; book 79/14,428, Knowledge 819/6,803, eight doctrines, CLI 66x2, RAM 62%, and canonical Phase 0 1,031/1,031 in 745 seconds pass. No runtime/API/schema/CLI/README behavior changes; `.14.3.8` follows only after clean atomic 205.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.8`
-  Status: `pending`
-  Goal: Recompose the committed contract, six runtime admissions, recurring authority, support ledgers, and public
-    boundary unchanged; close `.14.3` and hand off cleanly to recursive observation `.14.4`.
+  Status: `done; signoff-complete` (2026-08-11; atomic 206/300 from clean recurring commit `e6893fd4`; no push)
+  Goal: Recompose the committed contract, six runtime admissions, recurring authority, support ledgers, and public boundary unchanged; close `.14.3` and hand off cleanly to recursive observation `.14.4`.
   Depends on: `.14.3.7`
+  Acceptance: Retrieve and hash the committed authorities first; promote only final public no-drift, reject stale/current projection drift, re-run the exact six-runtime/support composition and broader gates, close `.14.3`, and preserve parser/runtime/facade/schema/CLI/README behavior.
+  Commit: `FUTURE-PARITY-BACKLOG.14.3.8 - close recognition transaction rollout`
+  Checklist: [x] clean activation/task ownership; [x] committed-authority retrieval; [x] public no-drift governance; [x] exact recomposition; [x] activity/roadmap/book/live closeout; [x] doctrine/canonical signoff.
+  Evidence: committed hashes retained; driver passes Perl 51, Rust 12, Dart 10, Julia 207, Lua 246x2 plus support ledgers; checker 132/246/58 at 9/9, public 3/26/45, guide 1/14/18; book 79/14,428, Knowledge 820/6,813, eight doctrines, CLI 66x2, RAM 60%, and Phase 0 1,031/1,031 in 722 seconds pass without runtime/API/CLI/README movement.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.4`
   Status: `pending`

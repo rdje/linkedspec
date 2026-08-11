@@ -180,7 +180,7 @@ check_equal(contract.contract_id, "linkedspec-recognition-transaction-v1", "cont
 check_equal(contract.format, 1, "contract format")
 check_equal(
   contract.status,
-  "neutral_through_recurring_complete_public_no_drift_red",
+  "neutral_runtime_recurring_and_public_no_drift_complete",
   "admitted Lua status"
 )
 for name, expected in pairs({
@@ -201,11 +201,11 @@ end
 check_equal(
   contract.authored_surface.availability,
   "available in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; exact recurring " ..
-    "proof is current and public no-drift remains future and unavailable",
+    "and public no-drift proof is current",
   "Lua runtimes are admitted"
 )
 check_equal(#contract.rollout, 9, "rollout count")
-for index = 1, 8 do
+for index = 1, 9 do
   check_equal(contract.rollout[index].status, "complete", "complete rollout " .. index)
 end
 check_equal(contract.rollout[6].leg, "puc_lua", "PUC Lua rollout")
@@ -219,10 +219,6 @@ check_equal(
   "tools/check_recognition_transaction_six_runtime.sh",
   "recurring driver path"
 )
-for index = 9, 9 do
-  check_equal(contract.rollout[index].status, "red", "later rollout " .. index)
-end
-
 do
   local value = authority("input.spec")
   local parent = transaction.enter_invocation(value, {

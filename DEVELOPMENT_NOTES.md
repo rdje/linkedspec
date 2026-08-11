@@ -10,6 +10,21 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.8` — recognition public closeout): the ninth row owns only the final
+  public projection. Its exact paths are the capture/source chapter, backend-handoff appendix, project-status page,
+  and capability guide; it does not add a seventh implementation, another runtime route, or a public facade.
+- Keep semantic/topology governance at 58. Replace the obsolete premature-public-promotion mutation with a
+  complete-to-RED regression so final current truth is protected without inflating the causal mutation census.
+- Close recurring-era prose explicitly. Three stale book claims move public governance from 3/23/42 to 3/26/45;
+  two stale guide claims move its independent guard from 1/12/16 to 1/14/18.
+- Every admitted consumer snapshots mutable status/availability/rollout metadata, so the final promotion updates
+  all six exact consumers while preserving their assertion counts and backend behavior: 51, 12, 10, 207, 246,
+  and 246. The five-source/six-runtime recurring route and all three support ledgers remain byte-unchanged.
+- Close only transaction parent `.14.3`. Recursive source observation `.14.4` is next after the clean commit, while
+  the broader typed-source recurring/public row `.14.8` remains pending and must not be inferred from 9/9 here.
+- Definitive proof passes all eight doctrines, containment/relocation, CLI 66x2, RAM 60%, and Phase 0 1,031/1,031
+  in 722 seconds through exact canonical success. Land atomic 206 cleanly before `.14.4` activates task-tree-first.
+
 - 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.7` — recurring recognition-transaction proof): recurrence is
   orchestration, not another transaction implementation. Keep the neutral checker first and the already admitted
   Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT consumers exact; support ledgers follow all runtime routes.

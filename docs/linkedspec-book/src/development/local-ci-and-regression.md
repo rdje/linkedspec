@@ -211,8 +211,9 @@ initializer; it adds no scratch root or global cache. Canonical CI always requir
 it, while `LINKEDSPEC_RUN_RECOGNITION_TRANSACTION_MATRIX=1` opts into the complete all-toolchain run.
 
 Eleven topology/storage mutations plus one recurring complete-to-RED regression bring neutral governance to 58.
-Only the recurring row advances: recognition rollout is 8/9 and public no-drift remains RED under
-`FUTURE-PARITY-BACKLOG.14.3.8`. The recurring gate changes no parser, runtime, public facade, schema, CLI, or
+At the `.14.3.7` boundary only recurring advanced, leaving recognition rollout at 8/9. Public closeout `.14.3.8`
+then promotes only the final no-drift row, advances public governance to 3/26/45 and the guide to 1/14/18, and
+closes the transaction ledger at 9/9. Neither slice changes a parser, runtime, public facade, schema, CLI, or
 generated format.
 
 No-change recomposition `.14.2.7` reruns this exact driver and closes the internal six-runtime value/helper parent

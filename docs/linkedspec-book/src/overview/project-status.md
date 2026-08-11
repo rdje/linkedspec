@@ -100,13 +100,14 @@ An unchanged `FUTURE-PARITY-BACKLOG.14.2.7` recomposition reruns that complete a
 value/helper implementation slice `.14.2`. This is a project-state closure, not a new language surface: the six
 admitted runtimes, helper results, schemas, and 8-complete/6-pending rollout remain unchanged.
 
-Public typed values, recurring transaction composition, recursive observation, span-native progressive/staged
+Public typed values, recursive observation, span-native progressive/staged
 dispatch, and the remaining public authored surfaces remain future work. Exact transaction syntax is ratified:
 `recognition_checkpoint()`, `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and
 `recognition_rollback(token)`. Match is a strict boolean and the falsey-safe payload remains staged until commit.
 Their neutral artifact/checker is executable at 128 current + 4 dedicated ActionIR rows, 246 call rows, and 58
-rejected mutations, with recognition rollout 8/9 complete. The authored forms and their exact recurring proof are
-current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; only public-no-drift remains RED. The separate typed-
+rejected mutations, with recognition rollout 9/9 complete. The authored forms and their exact recurring proof are
+current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; public no-drift is current and transaction activity
+`.14.3` is closed. The separate typed-
 source admissions do not add an authored `Position` or `Span` value, schema version, or new helper result. Their
 rollout is 8 complete / 6 pending because the combined recurring/
 public no-drift row remains owned by final program-wide closeout `FUTURE-PARITY-BACKLOG.14.8`.
@@ -141,8 +142,8 @@ non-eager ActionIR nodes, recursive effect closure, cursor-only progress, the li
 UTF-8-byte cursor/anonymous-boundary/invocation-mark adapter, and native, reconstructed, generated-plan, and
 independently loaded emitted-module execution all agree. A successful `false` remains a matched payload through
 commit. Both private modules are absent from the public facade. Ordinary discovery and canonical CI each execute
-the final-path source exactly once on PUC Lua and once on LuaJIT. The later repository-routed recurring driver
-composes all six exact runtime routes plus the support ledgers, leaving public-no-drift as the sole RED leg.
+the final-path source exactly once on PUC Lua and once on LuaJIT. The repository-routed recurring driver composes
+all six exact runtime routes plus the support ledgers, and public no-drift locks that unchanged final projection.
 
 The helper audit distinguishes 7 callable compatibility aliases from 2 internal Perl contract/scanner ids.
 `capture_take_slice` and `capture_take_slice_len` are internal ids, not accepted helper spellings; authored code

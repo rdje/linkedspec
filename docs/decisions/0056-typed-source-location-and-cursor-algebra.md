@@ -2,9 +2,8 @@
 
 - Date: 2026-07-29
 - Status: accepted; neutral/public contract and six-runtime internal value/projection implementation complete;
-  exact future transaction syntax/effect/progress contract ratified; executable neutral transaction authority is
-  complete; Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, and recurring transaction proof are current while final
-  public no-drift remains under `FUTURE-PARITY-BACKLOG.14.3.8`
+  transaction syntax/effect/progress plus Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurring, and public no-drift
+  proof are current; transaction activity `FUTURE-PARITY-BACKLOG.14.3` is closed
 - Tags: architecture, cursor, source-location, spans, capture, recursion, parser-composition, diagnostics, portability
 
 ## Context
@@ -401,6 +400,15 @@ the capability guide to 1/12/16. Only recurring advances, so recognition rollout
 remains RED under `.14.3.8`. The driver changes no parser, runtime, facade, schema, CLI, generated format, README,
 or authored transaction behavior.
 
+### 18. Close transaction public no-drift without widening behavior
+
+`FUTURE-PARITY-BACKLOG.14.3.8` promotes only the final public-no-drift ledger row. The same checker now requires
+all nine rollout rows complete, binds that final row to the three transaction book pages plus the capability guide,
+and turns premature-promotion governance into a complete-to-RED regression. Semantic and recurring-topology proof
+remains 58 mutations. Three recurring-era stale claims advance public governance to 3 documents / 26 forbidden /
+45 mutations; the guide advances to 1/14/18. The exact six-runtime driver, consumer counts, private authorities,
+runtime behavior, facades, schemas, primary CLI, README, and separate typed-source `.14.8` row remain unchanged.
+
 ## Consequences
 
 - Cursor control, capture, recursion, segmentation, and parser composition share one precise model instead of
@@ -424,8 +432,9 @@ or authored transaction behavior.
 - The `.14.3.1.0` amendment selects syntax and static semantics only. `.14.3.1.1` adds the executable neutral
   authority without adding current authored capability or backend behavior. `.14.3.1.2.0` separately governs the
   public milestone sequence without changing that semantic authority. Subsequent independent backend admissions
-  and recurring composition advance current rollout to 8/9, semantic/topology proof to 58 mutations, public proof
-  to 3/23/42, and the capability guide to 1/12/16; final public no-drift retains its separate `.14.3.8` owner.
+  and recurring composition first advanced current rollout to 8/9. Final public no-drift `.14.3.8` closes the
+  transaction ledger at 9/9 while semantic/topology proof remains 58 mutations; public proof is 3/26/45 and the
+  capability guide is 1/14/18.
 
 ## Links
 

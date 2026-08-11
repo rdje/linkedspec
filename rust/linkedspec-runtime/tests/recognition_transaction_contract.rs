@@ -161,7 +161,7 @@ fn neutral_authority_and_rust_admission_are_exact() {
         })
     );
     assert_eq!(rollout[8]["leg"], "public_no_drift");
-    assert_eq!(rollout[8]["status"], "red");
+    assert_eq!(rollout[8]["status"], "complete");
 
     assert_eq!(
         contract["authored_surface"],
@@ -172,7 +172,7 @@ fn neutral_authority_and_rust_admission_are_exact() {
             "rollback": "recognition_rollback(tx)",
             "operand": "recognize_once accepts exactly one unevaluated static call(Rule) operand",
             "result_separation": "recognize_once returns a strict match boolean; the recognized payload remains staged until commit",
-            "availability": "available in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; exact recurring proof is current and public no-drift remains future and unavailable",
+            "availability": "available in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; exact recurring and public no-drift proof is current",
         })
     );
 }

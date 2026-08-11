@@ -1009,13 +1009,13 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 
 - **OUTPUT:** 132 ActionIR rows (128 live plus four dedicated), 246 live call rows, token 8 positive / 17 negative,
   six fixed-point graphs, six mark cases, eight progress cases, fifteen diagnostics, and 58 rejected mutations;
-  rollout is neutral through recurring 8/9 complete. A separate public-sequence projection locks three book
-  pages, 23 forbidden claims, and 42 mutations; the guide guard locks one document, 12 stale claims, and 16
+  rollout is 9/9 complete. A separate public-sequence projection locks three book
+  pages, 26 forbidden claims, and 45 mutations; the guide guard locks one document, 14 stale claims, and 18
   mutations. Admission guards remain 8 Rust, 13 Dart, 14 Julia, and 22 Lua mutations, with Lua authority 22 and
   integration 19 independently retained.
 - **BOUNDARY:** this checker derives the live inventories and proves the shared target plus every runtime admission.
-  Perl 51, Rust 12, Dart 10, current Julia 207, and Lua 246 per ABI are canonical; recurring is current under
-  `.14.3.7`, with public no-drift owned by `.14.3.8`. Its exact `policy.current_boundary` prose is generated
+  Perl 51, Rust 12, Dart 10, current Julia 207, and Lua 246 per ABI are canonical; recurring and public no-drift
+  are current and transaction activity `.14.3` is closed. Its exact `policy.current_boundary` prose is generated
   from the expected rollout, so a backend promotion cannot leave a separately hard-coded earlier boundary behind.
 - **RECURRING:** run the five-source/six-runtime orchestration with:
 

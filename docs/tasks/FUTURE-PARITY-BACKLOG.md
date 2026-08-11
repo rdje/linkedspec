@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-11` (recurring transaction composition `.14.3.7` signoff-complete as intended atomic
-  205/300 from clean Lua-admission commit `1aedfe98`; no push; `.14.3.8` follows after the clean commit)
+- Last updated: `2026-08-11` (transaction public closeout `.14.3.8` signoff-complete as intended atomic 206/300
+  from clean recurring commit `e6893fd4`; no push; clean commit and handoff remain)
 - Owner: repo-local workflow
 
 ## Goal
@@ -103,12 +103,13 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-11):** recurring `.14.3.7` is signoff-complete from clean `1aedfe98` for atomic
-205/300. Its routed driver composes neutral plus exact Perl 51, Rust 12, Dart 10, Julia 207, Lua 246x2, and three
-support ledgers. Governance is 132/246/58 at rollout 8/9, public 3/23/42, and guide 1/12/16. Book 79/14,428,
-Knowledge 819/6,803, routing, all eight doctrines, CLI 66x2, RAM 62%, and canonical Phase 0 1,031/1,031 in 745
-seconds pass through the exact local-CI marker. Runtime/facade/schema/CLI/README behavior stays unchanged. Public
-no-drift `.14.3.8` remains RED and activates only after atomic 205 commits and the tree proves clean.
+**Authoritative frontier (2026-08-11):** public closeout `.14.3.8` is signoff-complete from clean recurring commit
+`e6893fd4` for atomic 206/300. It promotes only final public no-drift: governance is 132/246/58 at rollout 9/9,
+public 3/26/45, and guide 1/14/18. Exact consumers remain Perl 51, Rust 12, Dart 10, Julia 207, and Lua 246x2;
+runtime/facade/schema/CLI/README behavior and the recurring driver remain unchanged. Book/doctrine/canonical
+signoff passes at book 79/14,428, Knowledge 820/6,813, eight doctrines, CLI 66x2, RAM 60%, and Phase 0 1,031/1,031
+in 722 seconds. Transaction parent `.14.3` is closed; recursive observation `.14.4` activates only after
+atomic 206 commits and the tree proves clean, while program-wide typed-source closeout `.14.8` remains pending.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private

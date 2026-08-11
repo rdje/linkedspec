@@ -230,12 +230,13 @@ different ABIs. Generated-source, capability, and language-coverage ledgers run 
 the same all-toolchain composition behind `LINKEDSPEC_RUN_RECOGNITION_TRANSACTION_MATRIX=1`; ordinary CI still
 runs its already-admitted individual consumers regardless of that opt-in.
 
-The same checker fails closed over three public transaction pages, twenty-three forbidden claims, and forty-two sequence mutations.
+The same checker fails closed over three public transaction pages, twenty-six forbidden claims, and forty-five sequence mutations.
 This guards the milestone order alongside the neutral artifact's 58 semantic and topology mutations.
 
-This section describes current Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT features and the remaining portable closeout. The neutral artifact/checker is
-executable, and Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT are independently admitted. Recognition rollout is now
-8/9 complete; recurring composition is current and only final public no-drift remains unavailable.
+This section describes current Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT features and the complete portable transaction rollout. The neutral artifact/checker is
+executable, and Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT are independently admitted.
+Recognition rollout is 9/9 complete; public no-drift is current, and `.14.3` is closed without
+changing transaction syntax, runtime behavior, schemas, facades, helper results, or the primary CLI.
 
 Only cursor/source-boundary state participates. A rollback cannot undo variables, AST mutation, diagnostic or
 output events, parser-registry work, external calls, or host effects. An uncommitted path must therefore remain
@@ -310,14 +311,14 @@ dispatch. Exact transaction spelling is current on Perl, Rust, Dart, Julia, PUC 
 private authority passes 187 assertions per ABI, and its admitted consumer passes 243 per ABI across four dedicated
 nodes, recursive effect/progress policy, and all four runtime carriers at its Lua admission boundary. Recurring
 metadata raises that consumer to 246 per ABI without changing the implementation. The modules remain unexported
-while the consumer is ordinarily and canonically discovered once per ABI. Transaction recurrence is current at
-8/9 under `.14.3.7`, with only transaction public no-drift `.14.3.8` RED. The separate typed-source combined
+while the consumer is ordinarily and canonically discovered once per ABI. Transaction rollout is complete at
+9/9 under `.14.3.8`; the unchanged recurring authority and all six admissions remain exact. The separate typed-source combined
 recurring/public-no-drift row remains pending for final program-wide closeout `FUTURE-PARITY-BACKLOG.14.8`, so
 typed-source composition still remains 8 complete / 6 pending.
 
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions or
 typed spans are authored values. The `recognition_*` operations are current across all six runtime routes, while
-their exact recurring composition is current and final public no-drift remains separately governed.
+their exact recurring composition and public no-drift projection are both current.
 
 ## Five anchor families
 

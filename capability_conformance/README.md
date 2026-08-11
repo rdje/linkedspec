@@ -289,8 +289,8 @@ bash tools/run_python_project_data.sh tools/check_recognition_transaction_contra
 ```
 
 The checker also binds three exact public transaction pages to neutral + Perl + Rust + Dart + Julia + PUC Lua +
-LuaJIT + recurring complete with only public no-drift RED, rejects twenty-three stale milestone/current claims,
-and executes forty-two public-sequence mutations in memory. That projection is distinct from 58 semantic and
+LuaJIT + recurring + public no-drift 9/9 complete, rejects twenty-six stale milestone/current claims,
+and executes forty-five public-sequence mutations in memory. That projection is distinct from 58 semantic and
 recurring-topology mutations.
 
 The independent checker derives all 128 current ActionIR node kinds from the Perl contract authority and all 246
@@ -303,8 +303,8 @@ reported by `tools/check_language_capability_coverage.pl`.
 
 Canonical CI requires the tracked artifact/checker and runs the same project-data-routed command unconditionally.
 It executes each Perl, Rust, Dart, and Julia consumer once and the unchanged Lua consumer once per ABI. Rollout is
-neutral + Perl + Rust + Dart + Julia + PUC Lua + LuaJIT + recurring 8/9 complete; public-no-drift alone remains RED.
-The four exact transaction forms are current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; exact recurring proof is current and public no-drift remains future.
+neutral + Perl + Rust + Dart + Julia + PUC Lua + LuaJIT + recurring + public no-drift 9/9 complete.
+The four exact transaction forms are current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; exact recurring and public no-drift proof is current.
 
 Run the fail-fast recurring composition with:
 

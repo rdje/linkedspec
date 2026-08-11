@@ -60,7 +60,7 @@ void main() {
     expect(_contract['format'], 1);
     expect(
       _contract['status'],
-      'neutral_through_recurring_complete_public_no_drift_red',
+      'neutral_runtime_recurring_and_public_no_drift_complete',
     );
 
     final counts = _object(_contract['expected_counts']);
@@ -86,7 +86,7 @@ void main() {
       'result_separation':
           'recognize_once returns a strict match boolean; the recognized payload remains staged until commit',
       'availability':
-          'available in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; exact recurring proof is current and public no-drift remains future and unavailable',
+          'available in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; exact recurring and public no-drift proof is current',
     });
 
     final rollout = _objectRows('rollout');
@@ -134,7 +134,7 @@ void main() {
       'paths': ['tools/check_recognition_transaction_six_runtime.sh'],
     });
     expect(rollout[8]['leg'], 'public_no_drift');
-    expect(rollout[8]['status'], 'red');
+    expect(rollout[8]['status'], 'complete');
   });
 
   test(

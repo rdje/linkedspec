@@ -41,6 +41,12 @@ JULIA_PRIVATE_AUTHORITY_ACCESS = """const JuliaRecognitionTransaction = getprope
 LUA_CONSUMER_PATH = "lua/test/recognition_transaction_contract_test.lua"
 LUA_ORDINARY_PATH = "tools/run_lua_local.sh"
 RECURRING_DRIVER_PATH = "tools/check_recognition_transaction_six_runtime.sh"
+PUBLIC_NO_DRIFT_PATHS = [
+    "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+    "docs/linkedspec-book/src/appendix/backend-handoff.md",
+    "docs/linkedspec-book/src/overview/project-status.md",
+    "capability_conformance/README.md",
+]
 LUA_FACADE_PATH = "lua/src/linkedspec/init.lua"
 LUA_AUTHORITY_PATH = "lua/src/linkedspec/recognition_transaction.lua"
 LUA_RUNTIME_ADAPTER_PATH = "lua/src/linkedspec/recognition_transaction_runtime.lua"
@@ -192,7 +198,7 @@ EXPECTED_SURFACE = {
     ),
     "availability": (
         "available in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; exact recurring "
-        "proof is current and public no-drift remains future and unavailable"
+        "and public no-drift proof is current"
     ),
 }
 EXPECTED_TOKEN_STATES = [
@@ -244,7 +250,7 @@ EXPECTED_ROLLOUT = [
     (6, "FUTURE-PARITY-BACKLOG.14.3.6", "puc_lua", "complete"),
     (7, "FUTURE-PARITY-BACKLOG.14.3.6", "luajit", "complete"),
     (8, "FUTURE-PARITY-BACKLOG.14.3.7", "recurring", "complete"),
-    (9, "FUTURE-PARITY-BACKLOG.14.3.8", "public_no_drift", "red"),
+    (9, "FUTURE-PARITY-BACKLOG.14.3.8", "public_no_drift", "complete"),
 ]
 EXPECTED_EXECUTION = {
     "contract_path": "capability_conformance/recognition_transaction_contract.json",
@@ -410,13 +416,14 @@ PUBLIC_SEQUENCE_CONTRACT = {
             "required_markers": [
                 "The shared contract now has an executable backend-neutral authority",
                 "The Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT lanes now recognize and admit the four forms as a current capability",
-                "This section describes current Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT features and the remaining portable closeout",
-                "fails closed over three public transaction pages, twenty-three forbidden claims, and forty-two sequence mutations",
+                "This section describes current Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT features and the complete portable transaction rollout",
+                "fails closed over three public transaction pages, twenty-six forbidden claims, and forty-five sequence mutations",
                 (
                     "executable, and Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT are "
                     "independently admitted"
                 ),
                 "The exact six-runtime recurring proof is current",
+                "Recognition rollout is 9/9 complete; public no-drift is current",
             ],
         },
         {
@@ -426,6 +433,7 @@ PUBLIC_SEQUENCE_CONTRACT = {
                 "Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT transaction support is current and canonically admitted",
                 "Neutral proof alone is not backend support",
                 "The exact six-runtime recurring proof is current",
+                "Public no-drift is current and recognition rollout is 9/9 complete",
             ],
         },
         {
@@ -435,8 +443,8 @@ PUBLIC_SEQUENCE_CONTRACT = {
                     "Their neutral artifact/checker is executable at 128 current + 4 "
                     "dedicated ActionIR rows"
                 ),
-                "recognition rollout 8/9 complete",
-                "only public-no-drift remains RED",
+                "recognition rollout 9/9 complete",
+                "public no-drift is current and transaction activity",
             ],
         },
     ],
@@ -533,15 +541,27 @@ PUBLIC_SEQUENCE_CONTRACT = {
             "path": "docs/linkedspec-book/src/overview/project-status.md",
             "text": "recurring and public-no-drift legs remain RED",
         },
+        {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "text": "only final public no-drift remains unavailable",
+        },
+        {
+            "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+            "text": "public-no-drift remains RED",
+        },
+        {
+            "path": "docs/linkedspec-book/src/overview/project-status.md",
+            "text": "only public-no-drift remains RED",
+        },
     ],
 }
-PUBLIC_SEQUENCE_MUTATION_COUNT = 42
+PUBLIC_SEQUENCE_MUTATION_COUNT = 45
 CAPABILITY_GUIDE_CONTRACT = {
     "path": "capability_conformance/README.md",
     "required_markers": [
-        "neutral + Perl + Rust + Dart + Julia + PUC Lua + LuaJIT + recurring 8/9 complete",
+        "neutral + Perl + Rust + Dart + Julia + PUC Lua + LuaJIT + recurring + public no-drift 9/9 complete",
         (
-            "current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; exact recurring proof is current and public no-drift remains future"
+            "current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; exact recurring and public no-drift proof is current"
         ),
     ],
     "forbidden_claims": [
@@ -557,9 +577,11 @@ CAPABILITY_GUIDE_CONTRACT = {
         "current on Perl, Rust, Dart, and Julia and remain future on PUC Lua and LuaJIT",
         "neutral + Perl + Rust + Dart + Julia + PUC Lua + LuaJIT 7/9 complete",
         "current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; recurring and public no-drift remain future",
+        "neutral + Perl + Rust + Dart + Julia + PUC Lua + LuaJIT + recurring 8/9 complete",
+        "current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; exact recurring proof is current and public no-drift remains future",
     ],
 }
-CAPABILITY_GUIDE_MUTATION_COUNT = 16
+CAPABILITY_GUIDE_MUTATION_COUNT = 18
 RUST_ADMISSION_MUTATION_COUNT = 8
 DART_ADMISSION_MUTATION_COUNT = 13
 JULIA_ADMISSION_MUTATION_COUNT = 14
@@ -624,11 +646,18 @@ def expected_current_boundary() -> str:
     ]
     recurring = next(row for row in EXPECTED_ROLLOUT if row[2] == "recurring")
     recurring_clause = ", and recurring proof" if recurring[3] == "complete" else ""
+    if unavailable:
+        return (
+            "this artifact admits the neutral contract, current "
+            f"{_english_join(admitted)} runtime behavior{recurring_clause}; "
+            f"{_english_join(unavailable)} remains unavailable, and no schema, "
+            "semantic, MCP, capability, CLI, or unrelated helper behavior changes"
+        )
     return (
         "this artifact admits the neutral contract, current "
-        f"{_english_join(admitted)} runtime behavior{recurring_clause}; "
-        f"{_english_join(unavailable)} remains unavailable, and no schema, "
-        "semantic, MCP, capability, CLI, or unrelated helper behavior changes"
+        f"{_english_join(admitted)} runtime behavior, recurring proof, and public no-drift; "
+        "every recognition rollout leg is complete, and no schema, semantic, MCP, capability, "
+        "CLI, or unrelated helper behavior changes"
     )
 
 
@@ -930,7 +959,7 @@ def validate_capability_guide(
     )
     require(
         isinstance(forbidden, list)
-        and len(forbidden) == 12 == len(set(forbidden)),
+        and len(forbidden) == 14 == len(set(forbidden)),
         "capability-guide forbidden-claim inventory drifted",
     )
     for marker in markers:
@@ -985,23 +1014,9 @@ def validate_public_sequence(
         and rollout_status.get("puc_lua") == "complete"
         and rollout_status.get("luajit") == "complete"
         and rollout_status.get("recurring") == "complete"
-        and set(rollout_status.values()) == {"complete", "red"}
-        and all(
-            status == "red"
-            for leg, status in rollout_status.items()
-            if leg
-            not in {
-                "neutral",
-                "perl",
-                "rust",
-                "dart",
-                "julia",
-                "puc_lua",
-                "luajit",
-                "recurring",
-            }
-        ),
-        "public sequence requires neutral through recurring complete with public no-drift RED",
+        and rollout_status.get("public_no_drift") == "complete"
+        and set(rollout_status.values()) == {"complete"},
+        "public sequence requires all nine recognition rollout legs complete",
     )
 
     for row in documents:
@@ -1026,7 +1041,7 @@ def validate_public_sequence(
             )
             require(tracked.returncode == 0, f"public document is not tracked: {path}")
 
-    require(len(forbidden) == 23, "public forbidden-claim inventory drifted")
+    require(len(forbidden) == 26, "public forbidden-claim inventory drifted")
     for row in forbidden:
         path = row.get("path")
         claim = row.get("text")
@@ -1362,7 +1377,7 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
     )
     require(
         document.get("status")
-        == "neutral_through_recurring_complete_public_no_drift_red",
+        == "neutral_runtime_recurring_and_public_no_drift_complete",
         "neutral/backend status drifted",
     )
     require(document.get("expected_counts") == EXPECTED_COUNTS, "expected_counts drifted")
@@ -1543,7 +1558,10 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
         rollout[7].get("paths") == [RECURRING_DRIVER_PATH],
         "recurring rollout driver path drifted",
     )
-    require(rollout[8].get("paths") == [], "public-no-drift rollout path drifted")
+    require(
+        rollout[8].get("paths") == PUBLIC_NO_DRIFT_PATHS,
+        "public-no-drift rollout path drifted",
+    )
 
     execution = document.get("canonical_execution")
     require(execution == EXPECTED_EXECUTION, "canonical execution/freshness topology drifted")
@@ -1716,7 +1734,7 @@ MUTATIONS: dict[str, Callable[[dict[str, Any]], None]] = {
     "rollout_puc_lua_regression": _set(["rollout", 5, "status"], "red"),
     "rollout_luajit_regression": _set(["rollout", 6, "status"], "red"),
     "rollout_recurring_regression": _set(["rollout", 7, "status"], "red"),
-    "rollout_next_backend": _set(["rollout", 8, "status"], "complete"),
+    "rollout_public_regression": _set(["rollout", 8, "status"], "red"),
     "canonical_contract_path": _set(["canonical_execution", "contract_path"], "changed.json"),
     "canonical_checker_path": _set(["canonical_execution", "checker_path"], "changed.py"),
     "canonical_invocation": _set(
@@ -1873,9 +1891,9 @@ def validate_public_sequence_mutations(document: dict[str, Any]) -> int:
             ),
         ),
         (
-            "public rollout promotion",
+            "public rollout regression",
             lambda candidate, _contract, _texts: candidate["rollout"][8].__setitem__(
-                "status", "complete"
+                "status", "red"
             ),
         ),
     ]
@@ -2299,9 +2317,9 @@ def main() -> int:
         "recognition-transaction-contract: OK "
         "(132 ActionIR rows = 128 current + 4 dedicated; 246 call rows; "
         "token 8 positive/17 negative; effects 6 graphs; marks 6; progress 8; "
-        "58 rejected mutations; rollout neutral through recurring 8/9 complete; "
-        f"public sequence 3 documents/23 forbidden/{public_mutations} mutations; "
-        f"capability guide 1 document/12 forbidden/{guide_mutations} mutations; "
+        "58 rejected mutations; rollout 9/9 complete; "
+        f"public sequence 3 documents/26 forbidden/{public_mutations} mutations; "
+        f"capability guide 1 document/14 forbidden/{guide_mutations} mutations; "
         f"Rust admission {rust_admission_mutations} mutations; "
         f"Dart admission {dart_admission_mutations} mutations; "
         f"Julia admission {julia_admission_mutations} mutations; "

@@ -4,17 +4,17 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `1aedfe98` — clean Lua-admission base for recurring atomic 205/300; no push.
-- latest_completed_leaf: recurring `.14.3.7` is signoff-complete and lands with this pointer commit as atomic 205/300.
-- active_work_unit: none after this commit; public no-drift/parent closeout `.14.3.8` is the next clean-tree leaf.
-- next_action: commit atomic 205, prove post-commit pointer and clean tree, then activate `.14.3.8` task-tree-first.
-- in_flight_uncommitted: none after this commit; no background job.
-- blockers: none. Recurring proof passes Perl 51, Rust 12, Dart 10, Julia 207, Lua 246x2, support ledgers, routing,
-  checker 132/246/58, book 79/14,428, Knowledge 819/6,803, eight doctrines, CLI 66x2, RAM 62%, and Phase 0 1,031/745s.
+- activation_commit: `e6893fd4` — clean recurring-proof base for public-closeout atomic 206/300; no push.
+- latest_completed_leaf: recurring `.14.3.7` landed cleanly at `e6893fd4` as atomic 205/300.
+- active_work_unit: `.14.3.8` final recognition public no-drift and parent closeout; signoff-complete.
+- next_action: commit atomic 206, clear the brief, prove pointer/clean tree, then activate recursive observation `.14.4` task-tree-first.
+- in_flight_uncommitted: `.14.3.8` signoff evidence and exact public-closeout implementation candidate.
+- blockers: none. Exact recomposition, checker 132/246/58 at 9/9 + public 3/26/45 + guide 1/14/18, book
+  79/14,428, Knowledge 820/6,813, eight doctrines, CLI 66x2, RAM 60%, and Phase 0 1,031/1,031 in 722s pass.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes, and 11 topology mutations advance governance to 53. Public authored values remain future; recognition
-  transactions are current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; recurring proof is current and only transaction public no-drift `.14.3.8` remains RED.
+  transactions are current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; recurrence and public no-drift are current at 9/9, closing transaction parent `.14.3` without runtime or public-API movement.
 - recurring_rollout_fact: the original contract combines recurring and public no-drift in one `.14.8` row. Detailed
   plan/history assign `.14.2.6` driver/topology only; do not add a fifteenth row or promote `.14.8` prematurely.
 - rust_audit_fact: all 92 canonical names and seven aliases project through one per-input immutable authority while
@@ -47,14 +47,14 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   `recognize_once(token, call(Rule))`, `recognition_commit`, and `recognition_rollback`; match boolean and staged
   payload are separate. Tokens are linear; effects are closed 9 allowed/11 rejected; marks are invocation-framed;
   v1 progress is cursor-only. Perl 51/51, Rust 12/12, Dart 10/10, Julia 207/207, and Lua 246/246 per ABI are admitted.
-  Exact recurring composition is current at rollout 8/9 and 58 mutations; public 3/23/42; guide 1/12/16; Lua admission 22.
+  Exact recurrence/public composition is current at rollout 9/9 and 58 mutations; public 3/26/45; guide 1/14/18.
   Dart retains four private dedicated nodes, recursive effect/progress policy, and authority-backed native/
   reconstructed/generated-plan/emitted execution without facade exports. Julia has the same four private nodes,
   policy, and authority-backed carriers at 207/207; exact ordinary/canonical proof is current while the API stays private.
   Lua has one shared Lua-5.1 authority at 187/187 and admitted ActionIR/effect/progress/runtime/carriers at 246/246
   per ABI; ordinary/canonical proof runs once per ABI while facade privacy remains unchanged.
-- current_future_direction: transaction `.14.3` is complete through recurring `.7`; public no-drift/parent closeout
-  `.8` is next, while program-wide `.14.8` retains the separate typed-source combined final row.
+- current_future_direction: transaction `.14.3` is signoff-complete through public `.8`; recursive observation `.14.4`
+  follows clean atomic 206, while program-wide `.14.8` retains the separate typed-source combined final row.
 - latest_bootstrap_read: 2026-08-11 — complete roadmap/codebase/mdBook and required continuity/tooling review.
-- pivot_guard: prove recurring atomic 205 cleanly before public no-drift `.14.3.8` activates.
-- push_policy: hard lock at 300 commits; recurring proof lands as atomic 205/300; no push; use wrappers.
+- pivot_guard: prove public-closeout atomic 206 cleanly before recursive observation `.14.4` activates.
+- push_policy: hard lock at 300 commits; atomics 205-206 are local-only; no push; use wrappers.

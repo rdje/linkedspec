@@ -73,6 +73,17 @@ consumers pass, and the route registry remains 20 surfaces / 62 routes / 32/32 w
 empty debt metadata. The program is composition-closed. These storage migrations change documentation governance
   only; they change no language, compiler, runtime, backend, fixture, CLI, protocol, or project-data root.
 
+- `2026-08-11 closed recognition-transaction public no-drift`: `FUTURE-PARITY-BACKLOG.14.3.8` promotes only the
+  final governed public projection, bringing neutral, six runtime routes, recurrence, and public no-drift to 9/9.
+  The exact runtime composition remains Perl 51, Rust 12, Dart 10, Julia 207, and Lua 246 per ABI; the neutral
+  artifact remains 132 ActionIR rows / 246 calls / 58 semantic and topology mutations. Three exact book pages are
+  now locked against 26 stale claims by 45 mutations, while the capability guide is locked against 14 claims by
+  18 mutations. No parser, runtime, private authority, public facade, schema, CLI, README, recurring driver, or
+  generated format changes. Final proof passes book 79/14,428, Knowledge 820/6,813, all eight doctrines,
+  containment/relocation, CLI 66x2, RAM 60%, and canonical Phase 0 1,031/1,031 in 722 seconds. Parent `.14.3` is
+  signoff-closed; recursive source observation `.14.4` follows only after the clean atomic-206 boundary.
+  Program-wide typed-source closeout `.14.8` remains separately pending.
+
 - `2026-08-11 composed recurring recognition-transaction proof`: `FUTURE-PARITY-BACKLOG.14.3.7` adds one
   project-data-routed driver over the neutral checker, exact Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT consumers, and
   generated-source/capability/language-coverage ledgers. Five backend sources form six ordered runtime routes

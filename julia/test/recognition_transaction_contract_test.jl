@@ -195,7 +195,7 @@ end
         @test contract["contract_id"] == "linkedspec-recognition-transaction-v1"
         @test contract["format"] == 1
         @test contract["status"] ==
-              "neutral_through_recurring_complete_public_no_drift_red"
+              "neutral_runtime_recurring_and_public_no_drift_complete"
 
         counts = contract["expected_counts"]
         @test counts["current_action_ir_nodes"] == 128
@@ -220,7 +220,7 @@ end
             "result_separation" =>
                 "recognize_once returns a strict match boolean; the recognized payload remains staged until commit",
             "availability" =>
-                "available in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; exact recurring proof is current and public no-drift remains future and unavailable",
+                "available in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; exact recurring and public no-drift proof is current",
         )
 
         rollout = contract["rollout"]
@@ -257,7 +257,7 @@ end
             "paths" => Any["tools/check_recognition_transaction_six_runtime.sh"],
         )
         @test rollout[9]["leg"] == "public_no_drift"
-        @test rollout[9]["status"] == "red"
+        @test rollout[9]["status"] == "complete"
     end
 
     @testset "invocation identities and same-label marks are isolated" begin

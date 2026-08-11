@@ -10,6 +10,25 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.8 — close recognition-transaction rollout
+
+- Promoted only the final `public_no_drift` row in the neutral artifact. Recognition transactions are now complete
+  across neutral, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurrence, and public projection at rollout 9/9.
+- Bound that final row to the three exact transaction book pages plus the capability guide. Three recurring-era
+  stale claims advance book governance to 3 documents / 26 forbidden claims / 45 mutations; two guide claims
+  advance its independent guard to 1 document / 14 forbidden claims / 18 mutations.
+- Replaced the former premature-public-promotion mutation with a public complete-to-RED regression while retaining
+  all 58 semantic/topology mutations. The neutral inventory remains 132 ActionIR rows and 246 calls.
+- Synchronized mutable metadata in the unchanged Perl 51, Rust 12, Dart 10, Julia 207, PUC Lua 246, and LuaJIT 246
+  consumers. The recurring driver, support ledgers, runtime implementations, private authorities, public facades,
+  schemas, primary CLI, README, and generated formats are unchanged.
+- Closed transaction activity `.14.3` in roadmaps, ADR `0056`, capability guidance, task/live state, Knowledge
+  cards, Toolbox, and the sole-facing mdBook. Recursive observation `.14.4` follows after clean atomic 206;
+  program-wide typed-source closeout `.14.8` remains separately pending.
+- Final signoff passes the 79-file/14,428-KiB rendered book, Knowledge 820/6,813, all eight doctrines, repository
+  containment and relocation, CLI 66/66 in both option environments, RAM 60%, and canonical Phase 0 1,031/1,031
+  in 722 seconds through the exact `[ci] local CI gate passed` marker.
+
 ## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.7 — compose recurring recognition-transaction proof
 
 - Added `tools/check_recognition_transaction_six_runtime.sh` as one fail-fast, project-data-routed composition. It
