@@ -112,7 +112,7 @@ fn neutral_authority_and_rust_admission_are_exact() {
     assert_eq!(contract["expected_counts"]["mark_cases"], 6);
     assert_eq!(contract["expected_counts"]["progress_cases"], 8);
     assert_eq!(contract["expected_counts"]["diagnostics"], 15);
-    assert_eq!(contract["expected_counts"]["mutations"], 44);
+    assert_eq!(contract["expected_counts"]["mutations"], 46);
 
     let rollout = contract["rollout"].as_array().expect("rollout rows");
     assert_eq!(rollout.len(), 9);
@@ -138,7 +138,19 @@ fn neutral_authority_and_rust_admission_are_exact() {
         rollout[4]["paths"],
         json!(["julia/test/recognition_transaction_contract_test.jl"])
     );
-    assert!(rollout[5..].iter().all(|row| row["status"] == "red"));
+    assert_eq!(rollout[5]["leg"], "puc_lua");
+    assert_eq!(rollout[5]["status"], "complete");
+    assert_eq!(
+        rollout[5]["paths"],
+        json!(["lua/test/recognition_transaction_contract_test.lua"])
+    );
+    assert_eq!(rollout[6]["leg"], "luajit");
+    assert_eq!(rollout[6]["status"], "complete");
+    assert_eq!(
+        rollout[6]["paths"],
+        json!(["lua/test/recognition_transaction_contract_test.lua"])
+    );
+    assert!(rollout[7..].iter().all(|row| row["status"] == "red"));
 
     assert_eq!(
         contract["authored_surface"],
@@ -149,7 +161,7 @@ fn neutral_authority_and_rust_admission_are_exact() {
             "rollback": "recognition_rollback(tx)",
             "operand": "recognize_once accepts exactly one unevaluated static call(Rule) operand",
             "result_separation": "recognize_once returns a strict match boolean; the recognized payload remains staged until commit",
-            "availability": "available only in an admitted backend; currently Perl, Rust, Dart, and Julia, with all later runtime legs future and unavailable",
+            "availability": "available only in an admitted runtime; currently Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT, with recurring and public-no-drift legs future and unavailable",
         })
     );
 }

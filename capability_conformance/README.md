@@ -278,7 +278,7 @@ final program-wide owner `FUTURE-PARITY-BACKLOG.14.8`; recurring composition doe
 
 No public `Position`/`Span` value, descriptor or generated schema, semantic/MCP projection, or source-authority
 elevation is claimed by these internal typed-source runtime admissions. Recognition transaction spelling and
-behavior are current on Perl, Rust, Dart, and Julia under the separate transaction ledger described next.
+behavior are current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT under the separate ledger described next.
 
 `recognition_transaction_contract.json` (`linkedspec-recognition-transaction-v1`) makes the accepted bounded-
 recognition transaction, effect, invocation-mark, and cursor-progress semantics executable and records exact
@@ -288,32 +288,29 @@ runtime admission. Run:
 bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py
 ```
 
-The checker also binds three exact public transaction pages to neutral + Perl + Rust + Dart + Julia complete with
-every later leg RED, rejects seventeen stale or false milestone/current claims, and executes thirty-three public-
-sequence mutations in memory. That public projection is distinct from the artifact's 44 semantic mutations.
+The checker also binds three exact public transaction pages to neutral + Perl + Rust + Dart + Julia + PUC Lua +
+LuaJIT complete with only recurring and public no-drift RED, rejects twenty stale milestone/current claims, and
+executes thirty-eight public-sequence mutations in memory. That projection is distinct from 46 semantic mutations.
 
 The independent checker derives all 128 current ActionIR node kinds from the Perl contract authority and all 246
 current call names from matching Dart, Julia, and Lua inventories. The artifact assigns one base effect to each
 of those rows plus four dedicated `RECOGNITION_*` nodes under the closed nine-allowed/eleven-rejected
 lattice. It separately executes 8 positive / 17 negative token cases, six recursive fixed-point effect graphs,
 six invocation-mark cases, eight cursor-only progress cases, and fifteen portable diagnostic records, then rejects
-44 exact drift mutations. This 128-node census is distinct from the 122 public identifier-shaped Perl contracts
+46 exact drift mutations. This 128-node census is distinct from the 122 public identifier-shaped Perl contracts
 reported by `tools/check_language_capability_coverage.pl`.
 
 Canonical CI requires the tracked artifact/checker and runs the same project-data-routed command unconditionally.
-It also executes the exact Perl, Rust, Dart, and Julia final-path consumers once apiece. Rollout is
-neutral + Perl + Rust + Dart + Julia 5/9 complete; PUC Lua, LuaJIT, recurring, and public-no-drift remain RED. The exact
-`recognition_checkpoint` / `recognize_once` / `recognition_commit` / `recognition_rollback` forms are
-current on Perl, Rust, Dart, and Julia and remain future on PUC Lua and LuaJIT.
+It executes each Perl, Rust, Dart, and Julia consumer once and the unchanged Lua consumer once per ABI. Rollout is
+neutral + Perl + Rust + Dart + Julia + PUC Lua + LuaJIT 7/9 complete; recurring and public-no-drift remain RED. The
+four exact transaction forms are current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; recurring and public no-drift remain future.
 
-One shared dormant Lua final-path consumer freezes those future semantics on both ABIs. Its explicit `authority`
-mode now exercises the same private Lua-5.1-compatible authority on PUC Lua and LuaJIT and passes 187 assertions
-per runtime. The private module owns invocation/mark generations, detached snapshots, opaque linear tokens, exact
-misuse diagnostics, and falsey-safe commit/rollback without a facade export or an ABI fork. Explicit `integration`
-mode advances to one stable RED: the four dedicated ActionIR nodes do not exist yet. Ordinary and canonical
-discovery continue to omit the consumer, so current Lua behavior and rollout 5/9 do not move. The checker rejects
-twelve Lua dormancy/topology mutations and twenty-two private-authority mutations separately from the unchanged
-44 semantic mutations.
+One shared Lua-5.1-compatible final-path consumer now executes 243 assertions independently on PUC Lua and LuaJIT.
+It covers the private 187-assertion invocation/mark/token authority plus four non-eager nodes, recursive effects,
+cursor-only progress, and native/reconstructed/generated-plan/emitted carriers. Ordinary discovery and canonical
+CI each run it once per ABI; the private authority and runtime adapter remain absent from the facade. Governance
+rejects 22 authority, 19 integration, and 22 admission mutations. The earlier 12 dormancy mutations remain durable
+historical RED evidence, not current topology.
 
 `root_rule_selection_contract.json` (`linkedspec-root-rule-selection-v1`) makes ADR `0046` executable without
 claiming markerless execution before the

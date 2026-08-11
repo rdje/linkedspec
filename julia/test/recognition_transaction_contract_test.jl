@@ -195,7 +195,7 @@ end
         @test contract["contract_id"] == "linkedspec-recognition-transaction-v1"
         @test contract["format"] == 1
         @test contract["status"] ==
-              "neutral_perl_rust_dart_and_julia_complete_other_legs_red"
+              "neutral_perl_rust_dart_julia_puc_lua_and_luajit_complete_other_legs_red"
 
         counts = contract["expected_counts"]
         @test counts["current_action_ir_nodes"] == 128
@@ -208,7 +208,7 @@ end
         @test counts["mark_cases"] == 6
         @test counts["progress_cases"] == 8
         @test counts["diagnostics"] == 15
-        @test counts["mutations"] == 44
+        @test counts["mutations"] == 46
 
         @test contract["authored_surface"] == Dict{String,Any}(
             "checkpoint" => "tx = recognition_checkpoint()",
@@ -220,7 +220,7 @@ end
             "result_separation" =>
                 "recognize_once returns a strict match boolean; the recognized payload remains staged until commit",
             "availability" =>
-                "available only in an admitted backend; currently Perl, Rust, Dart, and Julia, with all later runtime legs future and unavailable",
+                "available only in an admitted runtime; currently Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT, with recurring and public-no-drift legs future and unavailable",
         )
 
         rollout = contract["rollout"]
@@ -235,7 +235,21 @@ end
             "status" => "complete",
             "paths" => Any["julia/test/recognition_transaction_contract_test.jl"],
         )
-        @test all(row["status"] == "red" for row in rollout[6:end])
+        @test rollout[6] == Dict{String,Any}(
+            "order" => 6,
+            "owner" => "FUTURE-PARITY-BACKLOG.14.3.6",
+            "leg" => "puc_lua",
+            "status" => "complete",
+            "paths" => Any["lua/test/recognition_transaction_contract_test.lua"],
+        )
+        @test rollout[7] == Dict{String,Any}(
+            "order" => 7,
+            "owner" => "FUTURE-PARITY-BACKLOG.14.3.6",
+            "leg" => "luajit",
+            "status" => "complete",
+            "paths" => Any["lua/test/recognition_transaction_contract_test.lua"],
+        )
+        @test all(row["status"] == "red" for row in rollout[8:end])
     end
 
     @testset "invocation identities and same-label marks are isolated" begin

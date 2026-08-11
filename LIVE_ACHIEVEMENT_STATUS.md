@@ -2,26 +2,27 @@
 
 ## Current Activity
 
-- Private shared Lua integration leaf `FUTURE-PARITY-BACKLOG.14.3.6.2` is signoff-complete and commit-ready from
-  clean `d87dcac3` for atomic 203/300; the approved definitive canonical gate exits zero.
-- Authority remains 187/187 and integration passes 243/243 on PUC Lua and LuaJIT across four dedicated nodes,
-  effect/progress policy, native, reconstructed, generated-plan, and emitted execution. The checker rejects 19
-  integration mutations beside 22 authority and 12 dormancy mutations.
-- Ordinary Lua remains 177/177 per ABI, CLI 66x2, corpus 105, storage 18/3, book 79/14,412 KiB, and KM 817/6,781.
-  Recognition stays 132/246/44 at rollout 5/9 with no facade or discovery movement. All eight doctrines,
-  containment, RAM 65%, and Phase 0 1,031/1,031 in 736 seconds pass through the exact canonical marker.
+- Dual-ABI Lua admission leaf `FUTURE-PARITY-BACKLOG.14.3.6.3` is signoff-complete from clean `70b4ed04` as atomic
+  204/300; no push. The runtime implementation and private facade boundary are unchanged.
+- The selector is gone and the same source passes 243/243 on PUC Lua and LuaJIT. Ordinary and canonical routes each
+  register it once per ABI. Recognition is 132/246/46 at rollout 7/9; public governance is 3/20/38, guide 1/10/14,
+  and Lua admission rejects 22 mutations beside retained authority 22 and integration 19.
+- Full signoff passes Lua package 177x2, CLI 66x2, corpus 105, book 79 files/14,412 KiB, all eight doctrines, RAM
+  65%, and canonical Phase 0 1,031/1,031 in 758 seconds. Recurring `.14.3.7` and public no-drift `.14.3.8` remain RED.
 
 ## Latest Completed Slice
 
-- Private Lua authority `.14.3.6.1` landed cleanly at `d87dcac3` as atomic 202/300 with no push.
-- Private Lua integration `.14.3.6.2` is signoff-complete and commit-ready as intended atomic 203/300.
+- Lua admission `.14.3.6.3` is signoff-complete and commit-ready as atomic 204/300 with no push.
+- Private Lua integration `.14.3.6.2` remains the clean `70b4ed04` activation base.
 
 ## Next Action
 
-- Land atomic 203 cleanly, prove its handoff, then activate Lua admission `.14.3.6.3` task-tree-first.
+- Land and prove atomic 204 cleanly, then activate recurring transaction composition `.14.3.7` task-tree-first.
 
 ## Recent Completions
 
+- `2026-08-11` — `.14.3.6.3` completed exact dual-ABI Lua recognition admission and canonical signoff for atomic 204/300.
+- `2026-08-11` — `70b4ed04` landed private dual-ABI Lua transaction integration as atomic 203/300.
 - `2026-08-11` — `.14.3.6.2` completed dual-ABI integration and canonical signoff for atomic 203/300.
 - `2026-08-11` — `d87dcac3` landed the shared private Lua authority as atomic 202/300.
 - `2026-08-11` — `.14.3.6.1` completed exact dual-ABI private Lua authority signoff for atomic 202/300.
@@ -36,8 +37,6 @@
 - `2026-08-11` — `38318827` landed exact Dart transaction admission as atomic 196/300.
 - `2026-08-11` — `.14.3.4.3` completed exact Dart transaction admission signoff for atomic 196/300.
 - `2026-08-11` — `bee6cf45` landed private Dart transaction integration as atomic 195/300.
-- `2026-08-11` — `.14.3.4.2` completed private Dart integration signoff for atomic 195/300; Phase 0 passed 1,031/1,031.
-- `2026-08-11` — `.14.3.4.1` completed private Dart authority signoff for atomic 194/300; Phase 0 passed 1,031/1,031.
 
 ## History
 

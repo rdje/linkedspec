@@ -374,6 +374,18 @@ separate capability guide forbids four stale claims and rejects eight mutations.
 lock Rust tracking, logging, exact command registration, and complete removal of both custom cfgs. Dart, Julia,
 PUC Lua, LuaJIT, recurring composition, and final public no-drift remain RED under their existing owners.
 
+### 16. Admit one shared Lua implementation independently on both ABIs
+
+`FUTURE-PARITY-BACKLOG.14.3.6.0-.2` freezes one shared final-path RED, adds one private Lua-5.1-compatible
+authority, and integrates four non-eager nodes plus recursive effects, cursor-only progress, and all carriers.
+Admission `.14.3.6.3` removes only selector dormancy. Ordinary discovery and canonical CI each execute the
+unchanged 243-assertion source once with PUC Lua and once with LuaJIT; the authority and adapter remain unexported.
+
+Current recognition rollout is neutral through dual-ABI Lua 7/9 complete. Semantic mutation proof is 46; public
+sequence governance is 3 documents / 20 forbidden / 38 mutations; the guide is 1/10/14. Twenty-two Lua admission
+mutations independently reject ordinary/canonical omission or duplication, RED residue, private lookup removal,
+and facade export. Recurring composition and final public no-drift remain RED under `.14.3.7-.8`.
+
 ## Consequences
 
 - Cursor control, capture, recursion, segmentation, and parser composition share one precise model instead of

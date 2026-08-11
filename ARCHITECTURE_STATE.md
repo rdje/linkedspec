@@ -73,6 +73,21 @@ consumers pass, and the route registry remains 20 surfaces / 62 routes / 32/32 w
 empty debt metadata. The program is composition-closed. These storage migrations change documentation governance
   only; they change no language, compiler, runtime, backend, fixture, CLI, protocol, or project-data root.
 
+- `2026-08-11 admitted Lua recognition transactions on both ABIs`: `FUTURE-PARITY-BACKLOG.14.3.6.3` removes
+  selector dormancy from the unchanged final-path source and executes all 243 assertions exactly once with PUC Lua
+  and once with LuaJIT in both ordinary discovery and canonical CI. The shared Lua-5.1 authority and runtime adapter
+  remain unexported. Only the two Lua rows advance: neutral governance is 132/246/46 at rollout 7/9, public
+  governance is 3/20/38, and guide governance is 1/10/14. Twenty-two admission mutations reject ordinary/canonical
+  omission or duplication, dormancy residue, private lookup loss, and facade export beside the retained 22
+  authority and 19 integration mutations. Canonical signoff passes containment, relocation, CLI 66x2, RAM 65%,
+  and Phase 0 1,031/1,031 in 758 seconds. Recurring composition and public no-drift remain RED.
+
+- `2026-08-11 integrated private shared Lua recognition transactions`: `FUTURE-PARITY-BACKLOG.14.3.6.2` adds
+  four dedicated non-eager ActionIR nodes, recursive effect closure, cursor-only progress, and one private adapter
+  for native, reconstructed, generated-plan, and emitted execution. The same source passes 243 assertions on each
+  ABI while authority remains 187/187. Atomic 203 lands cleanly at `70b4ed04` with facade, discovery, and then-current
+  rollout unchanged; 19 integration mutations lock the implementation boundary.
+
 - `2026-08-11 added the private shared Lua recognition-transaction authority`: `FUTURE-PARITY-BACKLOG.14.3.6.1`
   adds one non-exported Lua-5.1-compatible module consumed unchanged by PUC Lua and LuaJIT. One weak-key private
   store owns opaque authority/frame/snapshot/token/error handles, monotonic invocation/mark/transaction generations,

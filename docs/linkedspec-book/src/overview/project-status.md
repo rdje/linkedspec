@@ -100,15 +100,15 @@ An unchanged `FUTURE-PARITY-BACKLOG.14.2.7` recomposition reruns that complete a
 value/helper implementation slice `.14.2`. This is a project-state closure, not a new language surface: the six
 admitted runtimes, helper results, schemas, and 8-complete/6-pending rollout remain unchanged.
 
-Public typed values, cross-runtime transaction portability, recursive observation, span-native progressive/staged
+Public typed values, recurring transaction composition, recursive observation, span-native progressive/staged
 dispatch, and the remaining public authored surfaces remain future work. Exact transaction syntax is ratified:
 `recognition_checkpoint()`, `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and
 `recognition_rollback(token)`. Match is a strict boolean and the falsey-safe payload remains staged until commit.
-Their neutral artifact/checker is executable at 128 current + 4 dedicated ActionIR rows, 246 call rows, and 44
-rejected mutations, with recognition rollout 5/9 complete. The authored forms are current executable syntax on
-Perl, Rust, Dart, and Julia; PUC Lua, LuaJIT, recurring, and public-no-drift legs remain RED. The internal
-Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT admissions do not add an authored `Position` or `Span` value, transaction
-operation, schema version, or new helper result. Rollout is 8 complete / 6 pending because the combined recurring/
+Their neutral artifact/checker is executable at 128 current + 4 dedicated ActionIR rows, 246 call rows, and 46
+rejected mutations, with recognition rollout 7/9 complete. The authored forms are current executable syntax on
+Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; recurring and public-no-drift legs remain RED. The separate typed-
+source admissions do not add an authored `Position` or `Span` value, schema version, or new helper result. Their
+rollout is 8 complete / 6 pending because the combined recurring/
 public no-drift row remains owned by final program-wide closeout `FUTURE-PARITY-BACKLOG.14.8`.
 
 Perl now has an admitted transaction implementation with four dedicated ActionIR nodes, recursive static
@@ -132,18 +132,17 @@ remains unexported.
 Julia now has an admitted private integrated implementation. Four dedicated non-eager
 nodes, recursive effect closure, cursor-only progress, and live UTF-8 code-unit cursor/boundary/invocation-mark
 synchronization converge across native, reconstructed, generated-plan, and independently loaded emitted-module
-execution. The exact 203/203 consumer is included in ordinary Julia discovery and executed directly once by canonical
-CI. Only Julia advances: recognition rollout is 5/9 while PUC Lua, LuaJIT, recurring, and public-no-drift remain
-RED; the private namespace remains unexported.
+execution. The consumer now passes 205/205 after checking both promoted Lua rollout rows; it is included in ordinary Julia discovery and executed directly once by canonical
+CI. Its private namespace remains unexported.
 
-Lua now has one shared private end-to-end transaction implementation without an ABI-specific fork. Explicit
-`authority` execution passes 187 assertions on PUC Lua and 187 on LuaJIT. Explicit `integration` execution passes
-243 assertions on each: four non-eager ActionIR nodes, recursive effect closure, cursor-only progress, the live
+Lua now has one shared admitted private end-to-end transaction implementation without an ABI-specific fork. The
+authority boundary passes 187 assertions per ABI, and the unchanged admitted consumer passes 243 on each: four
+non-eager ActionIR nodes, recursive effect closure, cursor-only progress, the live
 UTF-8-byte cursor/anonymous-boundary/invocation-mark adapter, and native, reconstructed, generated-plan, and
 independently loaded emitted-module execution all agree. A successful `false` remains a matched payload through
-commit. Both private modules are absent from the public facade, and the final-path consumer remains outside ordinary
-and canonical discovery. This integrated foundation therefore changes no current Lua syntax or recognition rollout;
-the ledger remains 5/9 until admission `.14.3.6.3` runs the unchanged consumer ordinarily and canonically.
+commit. Both private modules are absent from the public facade. Ordinary discovery and canonical CI each execute
+the final-path source exactly once on PUC Lua and once on LuaJIT. Only those two rows advance, so recognition is
+7/9 complete while recurring and public-no-drift remain RED.
 
 The helper audit distinguishes 7 callable compatibility aliases from 2 internal Perl contract/scanner ids.
 `capture_take_slice` and `capture_take_slice_len` are internal ids, not accepted helper spellings; authored code

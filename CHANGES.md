@@ -10,6 +10,28 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.6.3 — admit Lua recognition transactions
+
+- Removed the Lua RED mode selector, conditional integration wrapper, and missing-authority/integration diagnostics
+  from the unchanged final-path consumer. It now directly reaches the private authority and always executes all
+  243 assertions; no runtime implementation or facade export changed.
+- Registered that source exactly once with PUC Lua and once with LuaJIT in `tools/run_lua_local.sh`. Canonical CI
+  now requires the tracked path and executes one exact repository-routed command for each ABI.
+- Promoted only the `puc_lua` and `luajit` rollout rows. Neutral governance advances from 44 to 46 mutations and
+  5/9 to 7/9; recurring composition and public no-drift remain RED. Earlier admitted consumers were synchronized
+  to the mutable ledger; Julia now passes 205 assertions after checking the two promoted rows.
+- Replaced current Lua dormancy governance with 22 admission mutations covering ordinary/canonical omission and
+  duplication, selector/RED residue, private require integrity, admitted-result identity, and facade privacy.
+  The separate 22 authority and 19 integration mutation suites remain active; the 12 dormancy cases are history.
+- Advanced sole-facing/public governance to three pages / 20 forbidden claims / 38 mutations and the capability
+  guide to one page / 10 forbidden / 14 mutations. Synchronized ADR `0056`, roadmaps, task indexes, architecture,
+  Knowledge cards, Toolbox commands, live docs, and the mdBook without changing README or generated schemas.
+- Focused proof passes PUC Lua 243/243, LuaJIT 243/243, Perl 51/51, Dart 10/10, current Julia 205/205, and the
+  independent checker at 132/246/46, rollout 7/9, public 3/20/38, guide 1/10/14, and Lua admission 22.
+- Final signoff passes Lua package 177/177 per ABI, CLI 66/66 per option environment, corpus 105/105, storage
+  18 owners / 3 native modules, the 79-file/14,412-KiB rendered book, Knowledge 818/6,792, all eight doctrines,
+  repository containment and relocation, RAM 65%, and canonical Phase 0 1,031/1,031 in 758 seconds.
+
 ## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.6.2 — integrate shared Lua recognition transactions
 
 - Added four exact non-eager Lua ActionIR nodes for checkpoint, one static child attempt, commit, and rollback.

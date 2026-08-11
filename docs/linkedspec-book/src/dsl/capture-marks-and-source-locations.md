@@ -57,7 +57,7 @@ bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contrac
 
 ### Bounded cursor transactions do not mean general backtracking
 
-The accepted checkpoint/try/commit/rollback model—current on Perl, Rust, Dart, and Julia, future on Lua—is one
+The accepted checkpoint/try/commit/rollback model—current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT—is one
 explicit recognition attempt inside one rule invocation. Conceptually:
 
 ```text
@@ -71,23 +71,23 @@ else:
 
 #### What the current admitted engines do today
 
-Perl, Rust, Dart, and Julia now recognize and independently admit the four forms as current capabilities. Their
-exact 51-test, 12-test, 10-test, and 203-assertion consumers are required and executed by canonical CI. PUC Lua and
-LuaJIT do not yet admit the forms. `save_cursor()` and `restore_cursor()` remain older cursor-only LIFO compatibility
+Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT now recognize and independently admit the four forms. Canonical CI
+requires their exact 51-test, 12-test, 10-test, current 205-assertion Julia, and shared 243-assertion-per-Lua-ABI consumers.
+`save_cursor()` and `restore_cursor()` remain older cursor-only LIFO compatibility
 controls. They do not
 save the anonymous boundary or named marks, carry an invocation/source owner, or diagnose reuse and escape. They
 are not aliases for a transaction token.
 
 Named marks are currently isolated by rule label for one parser execution. A `Top` mark and a `Child` mark with the
 same name are independent. Recursive re-entry of `Top`, however, uses the same `Top` bucket; a child invocation can
-overwrite its parent's same-named mark in ordinary parsing. The admitted Perl, Rust, Dart, and Julia transaction routes
+overwrite its parent's same-named mark in ordinary parsing. All admitted transaction routes
 temporarily install one invocation-local bucket and restore the parent bucket on exit; ordinary parsing keeps
 its established bucket behavior.
 
 Ordinary recursion and repetition retain their established process protection. A direct no-consume recursive call
 is cut and returns no value; its trace explains the cutoff, but `last_error` stays empty. A bounded repeated
-zero-width match retains one accepted hit and then stops. The admitted Perl, Rust, Dart, and Julia transaction scopes
-throw the typed repetition or recursive-cycle error for accepted non-progress; Lua does not yet implement it.
+zero-width match retains one accepted hit and then stops. The admitted Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT
+transaction scopes throw the typed repetition or recursive-cycle error for accepted non-progress.
 
 #### What the transaction-safety audit freezes
 
@@ -101,7 +101,7 @@ only possible v1 effects. User or aggregate mutation, compatibility cursor-stack
 diagnostics, exit, unknown/raw code, callable/user functions, parser registry work, external calls, and host effects
 fail closed. Runtime checks remain a backstop for dynamic paths.
 
-#### Accepted authored form (current on Perl, Rust, Dart, and Julia)
+#### Accepted authored form (current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT)
 
 Behavior-free `FUTURE-PARITY-BACKLOG.14.3.1.0` ratifies this exact shape:
 
@@ -147,8 +147,8 @@ drift mutations:
 bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py
 ```
 
-That command proves the target semantics only. A backend may claim transaction support only after its separate
-behavior and admission leg lands; Perl, Rust, Dart, and Julia are now independently admitted.
+That command proves the target semantics only. A runtime may claim transaction support only after its separate
+behavior and admission leg lands; Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT are independently admitted.
 
 The Perl lane now has both its private state foundation and an admitted end-to-end implementation. Four dedicated
 ActionIR nodes preserve token/result/static-callee arguments; a recursive effect fixed point rejects unsafe callees
@@ -162,7 +162,7 @@ PERL5LIB= prove -Iperl t/recognition_transaction_perl_contract.t
 
 This is current authored behavior on Perl and completes only the Perl rollout leg.
 
-The Perl, Rust, Dart, and Julia lanes now recognize and admit the four forms as a current capability. Rust uses the same four
+The Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT lanes now recognize and admit the four forms as a current capability. Rust uses the same four
 dedicated non-eager nodes through parsing and serialized reconstruction, enforces the neutral effect/progress
 fixtures, and synchronizes live cursor, anonymous boundary, current-invocation marks, child acceptance, and staged
 payload independently of payload truthiness. Native, reconstructed, generated-plan, and freshly compiled emitted-
@@ -193,7 +193,8 @@ the four exact forms to dedicated non-eager nodes and retains `call(Rule)` as a 
 effect fixed point and cursor-only progress validator enforce the neutral fixtures; one invocation adapter binds
 the existing UTF-8 code-unit cursor, anonymous boundary, and same-label mark bucket to the non-exported authority.
 Native, reconstructed, generated-plan, and independently loaded emitted-module execution preserve a successful
-`false` payload. The exact 203-assertion consumer is included by ordinary Julia tests and executed once directly by
+`false` payload. The consumer was 203 assertions at Julia admission and is now 205 after checking both promoted
+Lua rollout rows; it is included by ordinary Julia tests and executed once directly by
 canonical CI; the private namespace remains unexported:
 
 ```bash
@@ -201,22 +202,27 @@ bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history
   -e 'using LinkedSpecJulia, JSON3, Test; include("julia/test/recognition_transaction_contract_test.jl")'
 ```
 
-Only Julia's rollout row advances in this admission; PUC Lua, LuaJIT, recurring, and final public no-drift remain RED.
+Julia's rollout row advanced alone in its admission; the later Lua slice did not rewrite that implementation.
 
-The next implementation boundary is executable RED, not current Lua support. One shared final-path consumer now
-parses its complete `authority` and `integration` expectations on both PUC Lua and LuaJIT. All four explicit runs
-stop at the same missing private `linkedspec.recognition_transaction` module. The consumer is intentionally absent
-from ordinary Lua discovery and canonical CI while it freezes invocation/token/mark semantics, recursive effect
-and progress proof, and native, reconstructed, generated-plan, and in-memory emitted-module carriers. Twelve
-independent mutations guard that dormant dual-ABI boundary; rollout remains 5/9.
+Lua now has the same admitted private end-to-end behavior through one shared Lua-5.1-compatible implementation.
+The exact consumer runs 243 assertions unchanged on PUC Lua and LuaJIT. It verifies the 187-assertion private
+authority boundary, four non-eager nodes, recursive effects, cursor-only progress, and native, reconstructed,
+generated-plan, and independently loaded emitted-module execution. Successful `false` remains staged until commit.
+Ordinary Lua discovery and canonical CI each execute that source once per ABI:
 
-The same checker fails closed over three public transaction pages, seventeen forbidden claims, and thirty-three sequence mutations.
-This guards the milestone order alongside the neutral artifact's 44 semantic mutations.
+```bash
+bash tools/run_lua_project_data.sh puc lua/test/recognition_transaction_contract_test.lua
+bash tools/run_lua_project_data.sh luajit lua/test/recognition_transaction_contract_test.lua
+```
 
-This section describes current Perl, Rust, Dart, and Julia features and an accepted future portable contract. The neutral artifact/checker is
-executable, and Perl, Rust, Dart, and Julia are admitted; PUC Lua and LuaJIT must each be admitted independently
-before the form becomes portable behavior. Recognition rollout is now 5/9 complete; recurring composition and final
-public no-drift remain separate later legs.
+Both the authority and runtime adapter remain private; admission changes proof and availability, not facade shape.
+
+The same checker fails closed over three public transaction pages, twenty forbidden claims, and thirty-eight sequence mutations.
+This guards the milestone order alongside the neutral artifact's 46 semantic mutations.
+
+This section describes current Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT features and the remaining portable closeout. The neutral artifact/checker is
+executable, and Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT are independently admitted. Recognition rollout is now
+7/9 complete; recurring composition and final public no-drift remain separate later legs.
 
 Only cursor/source-boundary state participates. A rollback cannot undo variables, AST mutation, diagnostic or
 output events, parser-registry work, external calls, or host effects. An uncommitted path must therefore remain
@@ -287,17 +293,16 @@ The unchanged `.14.2.7` recomposition reruns that authority and closes the six-r
 implementation slice. It does not add an authored value or advance the 8-complete/6-pending public rollout.
 
 There is still no public `Position` or `Span` authored value, recursive observation API, or span-native parser
-dispatch. Exact transaction spelling is current on Perl, Rust, Dart, and Julia but unavailable on both Lua
-runtimes until their admission leaf. Lua's shared private authority passes 187 assertions per ABI, and its private
-integration passes 243 per ABI across four dedicated nodes, recursive effect/progress policy, and all four runtime
-carriers. It remains unexported and undiscovered, so implementation readiness is not authored availability. The
+dispatch. Exact transaction spelling is current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Lua's shared
+private authority passes 187 assertions per ABI, and its admitted consumer passes 243 per ABI across four dedicated
+nodes, recursive effect/progress policy, and all four runtime carriers. The modules remain unexported while the
+consumer is now ordinarily and canonically discovered once per ABI. The
 combined recurring/public no-drift rollout row remains pending for final closeout
 `FUTURE-PARITY-BACKLOG.14.8`, so recurring composition does not change the current 8 complete / 6 pending ledger.
 
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions or
-typed spans are authored values, or that the admitted Perl/Rust/Dart/Julia `recognition_*` operations are portable to every
-runtime. A private backend authority and green carrier integration are implementation prerequisites, not authored
-syntax or admission.
+typed spans are authored values. The `recognition_*` operations are current across all six runtime routes, while
+recurring composition and final public no-drift remain separately governed.
 
 ## Five anchor families
 

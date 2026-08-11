@@ -4,17 +4,17 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `d87dcac3` — clean private-authority base for Lua integration atomic 203/300; no push.
-- latest_completed_leaf: Lua integration `.14.3.6.2` completes with atomic 203/300; private authority base is `d87dcac3`.
-- active_work_unit: none after atomic 203 lands; Lua admission `.14.3.6.3` is the next task-tree frontier.
-- next_action: prove atomic 203 clean, then activate `.14.3.6.3` task-tree-first from that clean commit.
-- in_flight_uncommitted: none after atomic 203 lands.
-- blockers: none. Authority is 187/187 and integration 243/243 per ABI; Lua 177x2, CLI 66x2, corpus 105,
-  storage 18/3, book 79/14,412 KiB, KM 817/6,781, eight doctrines, containment, RAM 65%, and Phase 0 1,031/1,031 in 736 seconds pass.
+- activation_commit: `70b4ed04` — clean Lua-integration base for admission atomic 204/300; no push.
+- latest_completed_leaf: Lua admission `.14.3.6.3` is signoff-complete and lands with this pointer as atomic 204/300.
+- active_work_unit: none after atomic 204 lands; recurring transaction composition `.14.3.7` is next.
+- next_action: prove atomic 204 clean, then activate recurring transaction composition `.14.3.7` task-tree-first.
+- in_flight_uncommitted: none after the atomic 204 commit; no background job remains.
+- blockers: none. PUC Lua/LuaJIT 243 each, Lua 177x2/CLI 66x2/corpus 105, checker 132/246/46 at 7/9,
+  book 79/14,412 KiB, all eight doctrines, RAM 65%, and canonical Phase 0 1,031/1,031 in 758 seconds pass.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes, and 11 topology mutations advance governance to 53. Public authored values remain future; recognition
-  transactions are current on Perl, Rust, Dart, and Julia while complete cross-runtime portability is future.
+  transactions are current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; recurring/public closeout is future.
 - recurring_rollout_fact: the original contract combines recurring and public no-drift in one `.14.8` row. Detailed
   plan/history assign `.14.2.6` driver/topology only; do not add a fifteenth row or promote `.14.8` prematurely.
 - rust_audit_fact: all 92 canonical names and seven aliases project through one per-input immutable authority while
@@ -25,12 +25,12 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - julia_audit_fact: private non-exported `SourceLocation` owns copied text and immutable scalar/code-unit/coordinate
   tables plus detached values/errors; all 92+7 helpers route through one per-context authority while retaining
   native code-unit registers/results. Private `RecognitionTransaction` integrates four nodes and effect/progress/
-  runtime/carriers at 203/203 and is ordinarily/canonically admitted without an export; typed source 127 remains current.
+  runtime/carriers at current 205/205 and is ordinarily/canonically admitted without an export; typed source 127 remains current.
 - lua_audit_fact: each runtime input owns one copied private source authority; all exact 92+7 helper routes construct
   typed positions/spans for validation, coordinates, slicing, materialization, marks, capture boundaries, and cursor
   control while retaining zero-based UTF-8-byte registers and results. One shared 240-assertion consumer now runs
-  once per ABI ordinarily/canonically. Private transactions pass authority 187/187 and integration 243/243 per ABI
-  across four nodes, effect/progress, and all carriers while remaining dormant, undiscovered, and unexported.
+  once per ABI ordinarily/canonically. Private transactions pass authority 187/187 and admission 243/243 per ABI
+  across four nodes, effect/progress, and all carriers; the modules remain unexported.
 - current_storage_contract: ADR `0053` keeps all project data on the repository filesystem; use routed wrappers, never OS temp/home caches.
 - current_path_contract: ADR `0052` and `REPO-ROOT-PATHS` require durable root-relative paths and runtime-derived
   absolute roots; moved/outside-CWD execution is canonical.
@@ -46,15 +46,15 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_transaction_contract: syntax is exact `recognition_checkpoint`,
   `recognize_once(token, call(Rule))`, `recognition_commit`, and `recognition_rollback`; match boolean and staged
   payload are separate. Tokens are linear; effects are closed 9 allowed/11 rejected; marks are invocation-framed;
-  v1 progress is cursor-only. Perl 51/51, Rust 12/12, Dart 10/10, and Julia 203/203 are ordinarily/canonically admitted.
-  Rollout is 5/9 at 44 semantic mutations; public 3/17/33; guide 1/8/12; Rust admission 8; Dart 13; Julia 14.
+  v1 progress is cursor-only. Perl 51/51, Rust 12/12, Dart 10/10, Julia 205/205, and Lua 243/243 per ABI are admitted.
+  Rollout is 7/9 at 46 semantic mutations; public 3/20/38; guide 1/10/14; Lua admission 22.
   Dart retains four private dedicated nodes, recursive effect/progress policy, and authority-backed native/
   reconstructed/generated-plan/emitted execution without facade exports. Julia has the same four private nodes,
-  policy, and authority-backed carriers at 203/203; exact ordinary/canonical proof is current while the API stays private.
-  Lua now has one shared Lua-5.1 authority at 187/187 and private integrated ActionIR/effect/progress/runtime/
-  carriers at 243/243 per ABI; facade/discovery and rollout stay unchanged until admission `.14.3.6.3`.
+  policy, and authority-backed carriers at 205/205; exact ordinary/canonical proof is current while the API stays private.
+  Lua has one shared Lua-5.1 authority at 187/187 and admitted ActionIR/effect/progress/runtime/carriers at 243/243
+  per ABI; ordinary/canonical proof runs once per ABI while facade privacy remains unchanged.
 - current_future_direction: transaction `.14.3` remains split through neutral `.1`, backend families `.2-.6`,
   recurring `.7`, and closeout `.8`; corrective `.14.3.4.0.0` precedes Dart RED `.14.3.4.0.1`, and `.14.8` retains no-drift.
 - latest_bootstrap_read: 2026-08-11 — complete roadmap/codebase/mdBook and required continuity/tooling review.
-- pivot_guard: land and prove Lua integration atomic 203 cleanly before admission `.14.3.6.3` activates.
-- push_policy: hard lock at 300 commits; Lua integration is intended atomic 203/300; no push; use wrappers.
+- pivot_guard: prove Lua admission atomic 204 cleanly before recurring `.14.3.7` activates.
+- push_policy: hard lock at 300 commits; Lua admission is atomic 204/300; no push; use wrappers.

@@ -402,6 +402,7 @@ require_tracked_file t/recognition_transaction_perl_contract.t
 require_tracked_file rust/linkedspec-runtime/tests/recognition_transaction_contract.rs
 require_tracked_file dart/test/recognition_transaction_contract_test.dart
 require_tracked_file julia/test/recognition_transaction_contract_test.jl
+require_tracked_file lua/test/recognition_transaction_contract_test.lua
 require_tracked_file rust/linkedspec-runtime/tests/typed_source_location_contract.rs
 require_tracked_file dart/test/typed_source_location_contract_test.dart
 require_tracked_file julia/test/typed_source_location_contract_test.jl
@@ -599,6 +600,12 @@ log "running exact Dart recognition transaction admission consumer"
 
 log "running exact Julia recognition transaction admission consumer"
 bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include("julia/test/recognition_transaction_contract_test.jl")'
+
+log "running exact Lua recognition transaction admission consumer on PUC Lua"
+bash tools/run_lua_project_data.sh puc lua/test/recognition_transaction_contract_test.lua
+
+log "running exact Lua recognition transaction admission consumer on LuaJIT"
+bash tools/run_lua_project_data.sh luajit lua/test/recognition_transaction_contract_test.lua
 
 log "running exact Perl typed source-location value and projection admission consumers"
 PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t

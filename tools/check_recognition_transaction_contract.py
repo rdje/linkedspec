@@ -48,19 +48,8 @@ LUA_ACTION_CONTRACTS_PATH = "lua/src/linkedspec/action_contracts.lua"
 LUA_ACTION_PARSER_PATH = "lua/src/linkedspec/action_parser.lua"
 LUA_INTERPRETER_PATH = "lua/src/linkedspec/interpreter.lua"
 LUA_SOURCE_RUNTIME_PATH = "lua/src/linkedspec/source_location_runtime.lua"
-LUA_RED_SELECTOR = (
-    'local mode = os.getenv("LINKEDSPEC_LUA_RECOGNITION_TRANSACTION_RED_MODE") '
-    'or "authority"'
-)
 LUA_PRIVATE_REQUIRE = (
-    'local loaded, transaction = pcall(require, '
-    '"linkedspec.recognition_transaction")'
-)
-LUA_RED_DIAGNOSTIC = (
-    "Lua recognition transaction RED: missing linkedspec.recognition_transaction"
-)
-LUA_INTEGRATION_RED_DIAGNOSTIC = (
-    "Lua recognition transaction integration RED: missing dedicated ActionIR nodes"
+    'local transaction = require("linkedspec.recognition_transaction")'
 )
 LUA_AUTHORITY_MARKERS = (
     ('local source_location = require("linkedspec.source_location")', "source authority"),
@@ -182,7 +171,7 @@ EXPECTED_COUNTS = {
     "progress_cases": 8,
     "diagnostics": 15,
     "rollout_legs": 9,
-    "mutations": 44,
+    "mutations": 46,
 }
 EXPECTED_EFFECT_ROW_HASHES = {
     "action_ir_effect_rows": "560de8fc586cee7adf66e1b6eeab7d931f441ebda6ca9cb0498ecc9d4392f775",
@@ -199,8 +188,8 @@ EXPECTED_SURFACE = {
         "remains staged until commit"
     ),
     "availability": (
-        "available only in an admitted backend; currently Perl, Rust, Dart, and Julia, with "
-        "all later runtime legs future and unavailable"
+        "available only in an admitted runtime; currently Perl, Rust, Dart, Julia, "
+        "PUC Lua, and LuaJIT, with recurring and public-no-drift legs future and unavailable"
     ),
 }
 EXPECTED_TOKEN_STATES = [
@@ -249,8 +238,8 @@ EXPECTED_ROLLOUT = [
     (3, "FUTURE-PARITY-BACKLOG.14.3.3", "rust", "complete"),
     (4, "FUTURE-PARITY-BACKLOG.14.3.4", "dart", "complete"),
     (5, "FUTURE-PARITY-BACKLOG.14.3.5", "julia", "complete"),
-    (6, "FUTURE-PARITY-BACKLOG.14.3.6", "puc_lua", "red"),
-    (7, "FUTURE-PARITY-BACKLOG.14.3.6", "luajit", "red"),
+    (6, "FUTURE-PARITY-BACKLOG.14.3.6", "puc_lua", "complete"),
+    (7, "FUTURE-PARITY-BACKLOG.14.3.6", "luajit", "complete"),
     (8, "FUTURE-PARITY-BACKLOG.14.3.7", "recurring", "red"),
     (9, "FUTURE-PARITY-BACKLOG.14.3.8", "public_no_drift", "red"),
 ]
@@ -300,18 +289,43 @@ EXPECTED_JULIA_ADMISSION = {
         "include(\"julia/test/recognition_transaction_contract_test.jl\")'"
     ),
 }
+EXPECTED_LUA_ADMISSION = {
+    "consumer_path": LUA_CONSUMER_PATH,
+    "ordinary_puc_invocation": (
+        'LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" '
+        + LUA_CONSUMER_PATH
+    ),
+    "ordinary_luajit_invocation": (
+        'LUA_CPATH="$secondary_native/?.so;;" '
+        'LINKEDSPEC_LUA_TEST_RUNTIME="$LUAJIT_CMD" \\\n'
+        '  "$LUAJIT_CMD" ' + LUA_CONSUMER_PATH
+    ),
+    "canonical_puc_marker": (
+        "running exact Lua recognition transaction admission consumer on PUC Lua"
+    ),
+    "canonical_puc_invocation": (
+        "bash tools/run_lua_project_data.sh puc " + LUA_CONSUMER_PATH
+    ),
+    "canonical_luajit_marker": (
+        "running exact Lua recognition transaction admission consumer on LuaJIT"
+    ),
+    "canonical_luajit_invocation": (
+        "bash tools/run_lua_project_data.sh luajit " + LUA_CONSUMER_PATH
+    ),
+    "success_marker": "Lua admitted recognition-transaction contract:",
+}
 PUBLIC_SEQUENCE_CONTRACT = {
     "documents": [
         {
             "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
             "required_markers": [
                 "The shared contract now has an executable backend-neutral authority",
-                "The Perl, Rust, Dart, and Julia lanes now recognize and admit the four forms as a current capability",
-                "This section describes current Perl, Rust, Dart, and Julia features and an accepted future portable contract",
-                "fails closed over three public transaction pages, seventeen forbidden claims, and thirty-three sequence mutations",
+                "The Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT lanes now recognize and admit the four forms as a current capability",
+                "This section describes current Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT features and the remaining portable closeout",
+                "fails closed over three public transaction pages, twenty forbidden claims, and thirty-eight sequence mutations",
                 (
-                    "executable, and Perl, Rust, Dart, and Julia are admitted; PUC Lua "
-                    "and LuaJIT must each be admitted independently"
+                    "executable, and Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT are "
+                    "independently admitted"
                 ),
             ],
         },
@@ -319,7 +333,7 @@ PUBLIC_SEQUENCE_CONTRACT = {
             "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
             "required_markers": [
                 "The neutral authority is now executable",
-                "Perl, Rust, Dart, and Julia transaction support is current and canonically admitted",
+                "Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT transaction support is current and canonically admitted",
                 "Neutral proof alone is not backend support",
             ],
         },
@@ -330,8 +344,8 @@ PUBLIC_SEQUENCE_CONTRACT = {
                     "Their neutral artifact/checker is executable at 128 current + 4 "
                     "dedicated ActionIR rows"
                 ),
-                "recognition rollout 5/9 complete",
-                "PUC Lua, LuaJIT, recurring, and public-no-drift legs remain RED",
+                "recognition rollout 7/9 complete",
+                "recurring and public-no-drift legs remain RED",
             ],
         },
     ],
@@ -404,15 +418,27 @@ PUBLIC_SEQUENCE_CONTRACT = {
             "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
             "text": "Julia and Lua do not yet implement it",
         },
+        {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "text": "current on Perl, Rust, Dart, and Julia, future on Lua",
+        },
+        {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "text": "PUC Lua and LuaJIT do not yet admit the forms",
+        },
+        {
+            "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+            "text": "Both modules remain unexported and the final-path consumer remains outside ordinary/canonical discovery",
+        },
     ],
 }
-PUBLIC_SEQUENCE_MUTATION_COUNT = 33
+PUBLIC_SEQUENCE_MUTATION_COUNT = 38
 CAPABILITY_GUIDE_CONTRACT = {
     "path": "capability_conformance/README.md",
     "required_markers": [
-        "neutral + Perl + Rust + Dart + Julia 5/9 complete",
+        "neutral + Perl + Rust + Dart + Julia + PUC Lua + LuaJIT 7/9 complete",
         (
-            "current on Perl, Rust, Dart, and Julia and remain future on PUC Lua and LuaJIT"
+            "current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; recurring and public no-drift remain future"
         ),
     ],
     "forbidden_claims": [
@@ -424,15 +450,17 @@ CAPABILITY_GUIDE_CONTRACT = {
         "current on Perl and Rust and remain future on Dart, Julia, PUC Lua, and LuaJIT",
         "neutral + Perl + Rust + Dart 4/9 complete",
         "current on Perl, Rust, and Dart and remain future on Julia, PUC Lua, and LuaJIT",
+        "neutral + Perl + Rust + Dart + Julia 5/9 complete",
+        "current on Perl, Rust, Dart, and Julia and remain future on PUC Lua and LuaJIT",
     ],
 }
-CAPABILITY_GUIDE_MUTATION_COUNT = 12
+CAPABILITY_GUIDE_MUTATION_COUNT = 14
 RUST_ADMISSION_MUTATION_COUNT = 8
 DART_ADMISSION_MUTATION_COUNT = 13
 JULIA_ADMISSION_MUTATION_COUNT = 14
-LUA_DORMANT_RED_MUTATION_COUNT = 12
 LUA_AUTHORITY_MUTATION_COUNT = 22
 LUA_INTEGRATION_MUTATION_COUNT = 19
+LUA_ADMISSION_MUTATION_COUNT = 22
 EXPECTED_TOP_LEVEL = {
     "format",
     "contract_id",
@@ -618,7 +646,7 @@ def validate_julia_admission(ci: str, sources: dict[str, str]) -> None:
     )
 
 
-def lua_dormant_red_sources() -> dict[str, str]:
+def lua_admission_sources() -> dict[str, str]:
     paths = {
         LUA_CONSUMER_PATH,
         LUA_FACADE_PATH,
@@ -628,7 +656,7 @@ def lua_dormant_red_sources() -> dict[str, str]:
     return {path: read_text(ROOT / path) for path in paths}
 
 
-def validate_lua_dormant_red(
+def validate_lua_admission(
     ci: str,
     ordinary: str,
     sources: dict[str, str],
@@ -641,41 +669,44 @@ def validate_lua_dormant_red(
             LUA_AUTHORITY_PATH,
             *(path for path, _, _ in LUA_INTEGRATION_MARKERS),
         },
-        "Lua dormant RED source inventory drifted",
+        "Lua admission source inventory drifted",
     )
     consumer = sources[LUA_CONSUMER_PATH]
-    for marker, label in (
-        (LUA_RED_SELECTOR, "selector"),
-        (LUA_PRIVATE_REQUIRE, "private authority lookup"),
-        (LUA_RED_DIAGNOSTIC, "stable missing-authority diagnostic"),
-        ('if mode == "integration" then', "integration boundary"),
-        (
-            "neutral_perl_rust_dart_and_julia_complete_other_legs_red",
-            "current neutral status",
-        ),
+    canonical_markers = (
+        f"require_tracked_file {EXPECTED_LUA_ADMISSION['consumer_path']}",
+        f"log \"{EXPECTED_LUA_ADMISSION['canonical_puc_marker']}\"",
+        EXPECTED_LUA_ADMISSION["canonical_puc_invocation"],
+        f"log \"{EXPECTED_LUA_ADMISSION['canonical_luajit_marker']}\"",
+        EXPECTED_LUA_ADMISSION["canonical_luajit_invocation"],
+    )
+    for marker in canonical_markers:
+        require(
+            ci.count(marker) == 1,
+            f"canonical Lua admission marker missing or duplicated: {marker}",
+        )
+    for marker in (
+        EXPECTED_LUA_ADMISSION["ordinary_puc_invocation"],
+        EXPECTED_LUA_ADMISSION["ordinary_luajit_invocation"],
     ):
         require(
-            consumer.count(marker) == 1,
-            f"Lua dormant RED {label} missing or duplicated",
+            ordinary.count(marker) == 1,
+            f"ordinary Lua admission marker missing or duplicated: {marker}",
         )
+    require(consumer.count(LUA_PRIVATE_REQUIRE) == 1, "Lua private authority require drifted")
     require(
-        consumer.count("bash tools/run_lua_project_data.sh puc " + LUA_CONSUMER_PATH)
-        == 2,
-        "Lua dormant RED must document authority/integration PUC Lua commands",
+        consumer.count(EXPECTED_LUA_ADMISSION["success_marker"]) == 2,
+        "Lua admitted result marker drifted",
     )
-    require(
-        consumer.count("bash tools/run_lua_project_data.sh luajit " + LUA_CONSUMER_PATH)
-        == 2,
-        "Lua dormant RED must document authority/integration LuaJIT commands",
-    )
-    require(
-        LUA_CONSUMER_PATH not in ordinary,
-        "ordinary Lua discovery prematurely registers recognition transactions",
-    )
-    require(
-        LUA_CONSUMER_PATH not in ci,
-        "canonical CI prematurely registers Lua recognition transactions",
-    )
+    for stale in (
+        "LINKEDSPEC_LUA_RECOGNITION_TRANSACTION_RED_MODE",
+        "local mode =",
+        'if mode == "integration" then',
+        "pcall(require",
+        "recognition transaction RED:",
+        "recognition transaction integration RED:",
+        "dormant shared Lua recognition transactions",
+    ):
+        require(stale not in consumer, f"Lua admission remains dormant: {stale}")
     require(
         "recognition_transaction =" not in sources[LUA_FACADE_PATH]
         and "M.recognition_transaction" not in sources[LUA_FACADE_PATH]
@@ -688,10 +719,6 @@ def validate_lua_dormant_red(
             authority.count(marker) == 1,
             f"Lua private transaction authority {label} missing or duplicated",
         )
-    require(
-        consumer.count(LUA_INTEGRATION_RED_DIAGNOSTIC) == 1,
-        "Lua integrated consumer must retain its stable missing-ActionIR diagnostic",
-    )
     for path, marker, label in LUA_INTEGRATION_MARKERS:
         require(
             sources[path].count(marker) == 1,
@@ -724,7 +751,7 @@ def validate_capability_guide(
     )
     require(
         isinstance(forbidden, list)
-        and len(forbidden) == 8 == len(set(forbidden)),
+        and len(forbidden) == 10 == len(set(forbidden)),
         "capability-guide forbidden-claim inventory drifted",
     )
     for marker in markers:
@@ -776,13 +803,15 @@ def validate_public_sequence(
         and rollout_status.get("rust") == "complete"
         and rollout_status.get("dart") == "complete"
         and rollout_status.get("julia") == "complete"
+        and rollout_status.get("puc_lua") == "complete"
+        and rollout_status.get("luajit") == "complete"
         and set(rollout_status.values()) == {"complete", "red"}
         and all(
             status == "red"
             for leg, status in rollout_status.items()
-            if leg not in {"neutral", "perl", "rust", "dart", "julia"}
+            if leg not in {"neutral", "perl", "rust", "dart", "julia", "puc_lua", "luajit"}
         ),
-        "public sequence requires neutral, Perl, Rust, Dart, and Julia complete with every later leg RED",
+        "public sequence requires neutral through dual-ABI Lua complete with later legs RED",
     )
 
     for row in documents:
@@ -807,7 +836,7 @@ def validate_public_sequence(
             )
             require(tracked.returncode == 0, f"public document is not tracked: {path}")
 
-    require(len(forbidden) == 17, "public forbidden-claim inventory drifted")
+    require(len(forbidden) == 20, "public forbidden-claim inventory drifted")
     for row in forbidden:
         path = row.get("path")
         claim = row.get("text")
@@ -1143,7 +1172,7 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
     )
     require(
         document.get("status")
-        == "neutral_perl_rust_dart_and_julia_complete_other_legs_red",
+        == "neutral_perl_rust_dart_julia_puc_lua_and_luajit_complete_other_legs_red",
         "neutral/backend status drifted",
     )
     require(document.get("expected_counts") == EXPECTED_COUNTS, "expected_counts drifted")
@@ -1310,9 +1339,11 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
         "Julia rollout consumer path drifted",
     )
     require(
-        all(row.get("paths") == [] for row in rollout[5:]),
-        "RED rollout legs must not claim implementation paths",
+        rollout[5].get("paths") == [EXPECTED_LUA_ADMISSION["consumer_path"]]
+        and rollout[6].get("paths") == [EXPECTED_LUA_ADMISSION["consumer_path"]],
+        "dual-ABI Lua rollout consumer paths drifted",
     )
+    require(all(row.get("paths") == [] for row in rollout[7:]), "RED rollout paths drifted")
 
     execution = document.get("canonical_execution")
     require(execution == EXPECTED_EXECUTION, "canonical execution/freshness topology drifted")
@@ -1371,10 +1402,10 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
         validate_rust_admission(ci, rust_admission_sources())
         validate_dart_admission(ci, dart_admission_sources())
         validate_julia_admission(ci, julia_admission_sources())
-        validate_lua_dormant_red(
+        validate_lua_admission(
             ci,
             read_text(ROOT / LUA_ORDINARY_PATH),
-            lua_dormant_red_sources(),
+            lua_admission_sources(),
         )
         validate_public_sequence(
             document,
@@ -1454,7 +1485,9 @@ MUTATIONS: dict[str, Callable[[dict[str, Any]], None]] = {
     "rollout_perl_regression": _set(["rollout", 1, "status"], "red"),
     "rollout_dart_regression": _set(["rollout", 3, "status"], "red"),
     "rollout_julia_regression": _set(["rollout", 4, "status"], "red"),
-    "rollout_next_backend": _set(["rollout", 5, "status"], "complete"),
+    "rollout_puc_lua_regression": _set(["rollout", 5, "status"], "red"),
+    "rollout_luajit_regression": _set(["rollout", 6, "status"], "red"),
+    "rollout_next_backend": _set(["rollout", 7, "status"], "complete"),
     "canonical_contract_path": _set(["canonical_execution", "contract_path"], "changed.json"),
     "canonical_checker_path": _set(["canonical_execution", "checker_path"], "changed.py"),
     "canonical_invocation": _set(
@@ -1593,8 +1626,20 @@ def validate_public_sequence_mutations(document: dict[str, Any]) -> int:
             ),
         ),
         (
-            "backend rollout promotion",
+            "PUC Lua rollout regression",
             lambda candidate, _contract, _texts: candidate["rollout"][5].__setitem__(
+                "status", "red"
+            ),
+        ),
+        (
+            "LuaJIT rollout regression",
+            lambda candidate, _contract, _texts: candidate["rollout"][6].__setitem__(
+                "status", "red"
+            ),
+        ),
+        (
+            "backend rollout promotion",
+            lambda candidate, _contract, _texts: candidate["rollout"][7].__setitem__(
                 "status", "complete"
             ),
         ),
@@ -1863,91 +1908,92 @@ def validate_julia_admission_mutations() -> int:
     return len(mutations)
 
 
-def validate_lua_dormant_red_mutations() -> int:
+def validate_lua_admission_mutations() -> int:
     ci = read_text(CI_PATH)
     ordinary = read_text(ROOT / LUA_ORDINARY_PATH)
-    sources = lua_dormant_red_sources()
+    sources = lua_admission_sources()
     mutations: list[tuple[str, str, str, dict[str, str]]] = []
 
+    canonical_markers = [
+        f"require_tracked_file {EXPECTED_LUA_ADMISSION['consumer_path']}",
+        f"log \"{EXPECTED_LUA_ADMISSION['canonical_puc_marker']}\"",
+        EXPECTED_LUA_ADMISSION["canonical_puc_invocation"],
+        f"log \"{EXPECTED_LUA_ADMISSION['canonical_luajit_marker']}\"",
+        EXPECTED_LUA_ADMISSION["canonical_luajit_invocation"],
+    ]
+    for label, marker in zip(
+        ("require", "PUC log", "PUC invocation", "LuaJIT log", "LuaJIT invocation"),
+        canonical_markers,
+        strict=True,
+    ):
+        mutations.extend(
+            [
+                (f"Lua canonical {label} omission", ci.replace(marker, "", 1), ordinary, dict(sources)),
+                (f"Lua canonical {label} duplication", ci + "\n" + marker, ordinary, dict(sources)),
+            ]
+        )
+
     for label, marker in (
-        ("selector", LUA_RED_SELECTOR),
-        ("private lookup", LUA_PRIVATE_REQUIRE),
-        ("stable diagnostic", LUA_RED_DIAGNOSTIC),
-        ("integration boundary", 'if mode == "integration" then'),
-        (
-            "current neutral status",
-            "neutral_perl_rust_dart_and_julia_complete_other_legs_red",
-        ),
+        ("PUC invocation", EXPECTED_LUA_ADMISSION["ordinary_puc_invocation"]),
+        ("LuaJIT invocation", EXPECTED_LUA_ADMISSION["ordinary_luajit_invocation"]),
+    ):
+        mutations.extend(
+            [
+                (f"Lua ordinary {label} omission", ci, ordinary.replace(marker, "", 1), dict(sources)),
+                (f"Lua ordinary {label} duplication", ci, ordinary + "\n" + marker, dict(sources)),
+            ]
+        )
+
+    private_omission = dict(sources)
+    private_omission[LUA_CONSUMER_PATH] = private_omission[LUA_CONSUMER_PATH].replace(
+        LUA_PRIVATE_REQUIRE, "", 1
+    )
+    mutations.append(("Lua private require omission", ci, ordinary, private_omission))
+    private_duplication = dict(sources)
+    private_duplication[LUA_CONSUMER_PATH] += "\n" + LUA_PRIVATE_REQUIRE
+    mutations.append(("Lua private require duplication", ci, ordinary, private_duplication))
+
+    for label, stale in (
+        ("environment selector retained", "LINKEDSPEC_LUA_RECOGNITION_TRANSACTION_RED_MODE"),
+        ("integration conditional retained", 'if mode == "integration" then'),
+        ("authority RED diagnostic retained", "recognition transaction RED:"),
+        ("integration RED diagnostic retained", "recognition transaction integration RED:"),
     ):
         candidate = dict(sources)
-        candidate[LUA_CONSUMER_PATH] = candidate[LUA_CONSUMER_PATH].replace(
-            marker, "", 1
-        )
-        mutations.append((f"Lua RED {label} omission", ci, ordinary, candidate))
+        candidate[LUA_CONSUMER_PATH] += "\n" + stale
+        mutations.append((f"Lua {label}", ci, ordinary, candidate))
 
-    omitted = dict(sources)
-    omitted[LUA_CONSUMER_PATH] = ""
-    mutations.append(("Lua RED consumer omission", ci, ordinary, omitted))
-    mutations.extend(
-        [
-            (
-                "Lua RED ordinary PUC registration",
-                ci,
-                ordinary + "\n" + LUA_CONSUMER_PATH + " puc",
-                dict(sources),
-            ),
-            (
-                "Lua RED ordinary LuaJIT registration",
-                ci,
-                ordinary + "\n" + LUA_CONSUMER_PATH + " luajit",
-                dict(sources),
-            ),
-            (
-                "Lua RED canonical PUC registration",
-                ci + "\n" + LUA_CONSUMER_PATH + " puc",
-                ordinary,
-                dict(sources),
-            ),
-            (
-                "Lua RED canonical LuaJIT registration",
-                ci + "\n" + LUA_CONSUMER_PATH + " luajit",
-                ordinary,
-                dict(sources),
-            ),
-        ]
+    result_omission = dict(sources)
+    result_omission[LUA_CONSUMER_PATH] = result_omission[LUA_CONSUMER_PATH].replace(
+        EXPECTED_LUA_ADMISSION["success_marker"], "", 1
     )
+    mutations.append(("Lua admitted result marker omission", ci, ordinary, result_omission))
+
     facade_export = dict(sources)
     facade_export[LUA_FACADE_PATH] += "\nM.recognition_transaction = require('x')"
-    mutations.append(("Lua RED facade export", ci, ordinary, facade_export))
-    wrong_commands = dict(sources)
-    wrong_commands[LUA_CONSUMER_PATH] = wrong_commands[LUA_CONSUMER_PATH].replace(
-        "bash tools/run_lua_project_data.sh luajit " + LUA_CONSUMER_PATH,
-        "bash tools/run_lua_project_data.sh puc " + LUA_CONSUMER_PATH,
-        1,
-    )
-    mutations.append(("Lua RED ABI command collapse", ci, ordinary, wrong_commands))
+    mutations.append(("Lua private authority publicly exported", ci, ordinary, facade_export))
 
     require(
-        len(mutations) == LUA_DORMANT_RED_MUTATION_COUNT,
-        "Lua dormant RED mutation count drifted",
+        len(mutations) == LUA_ADMISSION_MUTATION_COUNT,
+        "Lua admission mutation count drifted",
     )
     for name, candidate_ci, candidate_ordinary, candidate_sources in mutations:
         try:
-            validate_lua_dormant_red(
+            validate_lua_admission(
                 candidate_ci,
                 candidate_ordinary,
                 candidate_sources,
             )
         except ContractError:
             continue
-        raise ContractError(f"Lua dormant RED mutation {name!r} was accepted")
+        raise ContractError(f"Lua admission mutation {name!r} was accepted")
     return len(mutations)
 
 
 def validate_lua_authority_mutations() -> int:
     ci = read_text(CI_PATH)
     ordinary = read_text(ROOT / LUA_ORDINARY_PATH)
-    sources = lua_dormant_red_sources()
+    sources = lua_admission_sources()
     mutations: list[tuple[str, dict[str, str]]] = []
     for marker, label in LUA_AUTHORITY_MARKERS:
         candidate = dict(sources)
@@ -1956,11 +2002,11 @@ def validate_lua_authority_mutations() -> int:
         )
         mutations.append((f"Lua authority {label} omission", candidate))
 
-    missing_integration_red = dict(sources)
-    missing_integration_red[LUA_CONSUMER_PATH] = missing_integration_red[
-        LUA_CONSUMER_PATH
-    ].replace(LUA_INTEGRATION_RED_DIAGNOSTIC, "", 1)
-    mutations.append(("Lua authority next-RED omission", missing_integration_red))
+    private_require = dict(sources)
+    private_require[LUA_CONSUMER_PATH] = private_require[LUA_CONSUMER_PATH].replace(
+        LUA_PRIVATE_REQUIRE, "", 1
+    )
+    mutations.append(("Lua authority consumer require omission", private_require))
 
     require(
         len(mutations) == LUA_AUTHORITY_MUTATION_COUNT,
@@ -1968,7 +2014,7 @@ def validate_lua_authority_mutations() -> int:
     )
     for name, candidate_sources in mutations:
         try:
-            validate_lua_dormant_red(ci, ordinary, candidate_sources)
+            validate_lua_admission(ci, ordinary, candidate_sources)
         except ContractError:
             continue
         raise ContractError(f"Lua private authority mutation {name!r} was accepted")
@@ -1978,7 +2024,7 @@ def validate_lua_authority_mutations() -> int:
 def validate_lua_integration_mutations() -> int:
     ci = read_text(CI_PATH)
     ordinary = read_text(ROOT / LUA_ORDINARY_PATH)
-    sources = lua_dormant_red_sources()
+    sources = lua_admission_sources()
     mutations: list[tuple[str, dict[str, str]]] = []
     for path, marker, label in LUA_INTEGRATION_MARKERS:
         candidate = dict(sources)
@@ -1991,7 +2037,7 @@ def validate_lua_integration_mutations() -> int:
     )
     for name, candidate_sources in mutations:
         try:
-            validate_lua_dormant_red(ci, ordinary, candidate_sources)
+            validate_lua_admission(ci, ordinary, candidate_sources)
         except ContractError:
             continue
         raise ContractError(f"Lua private integration mutation {name!r} was accepted")
@@ -2008,9 +2054,9 @@ def main() -> int:
         rust_admission_mutations = validate_rust_admission_mutations()
         dart_admission_mutations = validate_dart_admission_mutations()
         julia_admission_mutations = validate_julia_admission_mutations()
-        lua_red_mutations = validate_lua_dormant_red_mutations()
         lua_authority_mutations = validate_lua_authority_mutations()
         lua_integration_mutations = validate_lua_integration_mutations()
+        lua_admission_mutations = validate_lua_admission_mutations()
     except ContractError as exc:
         print(f"recognition-transaction-contract: ERROR: {exc}", file=sys.stderr)
         return 1
@@ -2018,15 +2064,15 @@ def main() -> int:
         "recognition-transaction-contract: OK "
         "(132 ActionIR rows = 128 current + 4 dedicated; 246 call rows; "
         "token 8 positive/17 negative; effects 6 graphs; marks 6; progress 8; "
-        "44 rejected mutations; rollout neutral + Perl + Rust + Dart + Julia 5/9 complete; "
-        f"public sequence 3 documents/17 forbidden/{public_mutations} mutations; "
-        f"capability guide 1 document/8 forbidden/{guide_mutations} mutations; "
+        "46 rejected mutations; rollout neutral through dual-ABI Lua 7/9 complete; "
+        f"public sequence 3 documents/20 forbidden/{public_mutations} mutations; "
+        f"capability guide 1 document/10 forbidden/{guide_mutations} mutations; "
         f"Rust admission {rust_admission_mutations} mutations; "
         f"Dart admission {dart_admission_mutations} mutations; "
         f"Julia admission {julia_admission_mutations} mutations; "
-        f"Lua dormant RED {lua_red_mutations} mutations; "
         f"Lua private authority {lua_authority_mutations} mutations; "
-        f"Lua private integration {lua_integration_mutations} mutations)"
+        f"Lua private integration {lua_integration_mutations} mutations; "
+        f"Lua admission {lua_admission_mutations} mutations)"
     )
     return 0
 

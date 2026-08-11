@@ -10,6 +10,28 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.6.3` — dual-ABI Lua recognition admission): admission is a topology
+  change, not another runtime layer. Remove the selector and RED diagnostics, keep the 243-assertion body and both
+  private production modules unchanged, and execute the same Lua-5.1 source independently on both ABIs.
+- Ordinary proof belongs in `tools/run_lua_local.sh`: one direct command under the PUC native path and one under
+  the LuaJIT native path. Canonical proof separately requires the tracked consumer and uses one project-data-routed
+  command per ABI. Governance counts exact marker multiplicity rather than merely searching for the filename.
+- Treat PUC Lua and LuaJIT as independent rollout rows even though they share source. Promotion therefore adds two
+  complete-to-RED semantic mutations and two exact rollout paths, moving 44 to 46 and 5/9 to 7/9. Recurring and
+  public no-drift are still later responsibilities; do not collapse them into admission.
+- Every admitted consumer snapshots mutable neutral metadata. Lua promotion changes no Perl/Rust/Dart/Julia runtime
+  behavior, but their expected status, availability, mutation count, and later-row assertions must advance. Julia
+  consequently moves from 203 to 205 current assertions solely through two new rollout-row checks.
+- Current admission governance replaces, rather than pretends to execute, the historical RED oracle: 22 mutations
+  lock canonical and ordinary omission/duplication, direct private lookup, stale selector/diagnostics, result
+  identity, and facade privacy. Retain 22 authority and 19 integration suites as independent implementation locks.
+- Public truth must move with admission. The mdBook now teaches the exact dual-ABI commands and private/public
+  boundary; checker-governed sequence truth is 3/20/38 and capability-guide truth is 1/10/14.
+- Canonical signoff caught and rejected two accidental documentation-projection omissions before acceptance: the
+  retained `.24.2` capability-exclusion marker in `docs/TASK_TREE.md` and exact `128 mutations, rollout 9/9`
+  semantic text in both roadmaps. Restoring those historical/current anchors made the independent guards pass;
+  final locality, relocation, CLI 66x2, RAM 65%, and Phase 0 1,031/1,031 in 758 seconds are green.
+
 - 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.6.2` — shared Lua recognition-transaction integration): parse the four
   exact authored forms after ordinary argument parsing, then replace them with dedicated nodes. In particular,
   retain only the token slot and static child label for `recognize_once`; never evaluate its `call(Rule)` operand as

@@ -1,42 +1,17 @@
--- FUTURE-PARITY-BACKLOG.14.3.6.0 — dormant shared Lua recognition transactions.
+-- FUTURE-PARITY-BACKLOG.14.3.6.3 — admitted shared Lua recognition transactions.
 --
--- Ordinary Lua discovery is the explicit command list in tools/run_lua_local.sh;
--- that list and canonical CI deliberately omit this pre-admission consumer.
--- Run both modes independently on both ABIs through repository-local data:
+-- Ordinary Lua discovery and canonical CI execute this exact consumer once on
+-- each ABI through repository-local project data:
 --
---   LINKEDSPEC_LUA_RECOGNITION_TRANSACTION_RED_MODE=authority \
---     bash tools/run_lua_project_data.sh puc lua/test/recognition_transaction_contract_test.lua
---   LINKEDSPEC_LUA_RECOGNITION_TRANSACTION_RED_MODE=integration \
---     bash tools/run_lua_project_data.sh puc lua/test/recognition_transaction_contract_test.lua
---   LINKEDSPEC_LUA_RECOGNITION_TRANSACTION_RED_MODE=authority \
---     bash tools/run_lua_project_data.sh luajit lua/test/recognition_transaction_contract_test.lua
---   LINKEDSPEC_LUA_RECOGNITION_TRANSACTION_RED_MODE=integration \
---     bash tools/run_lua_project_data.sh luajit lua/test/recognition_transaction_contract_test.lua
---
--- Private-core work makes authority mode green. Integration then closes the
--- nested compiler/runtime/carrier section. Admission removes the selector and
--- registers this unchanged full consumer once per ABI.
+--   bash tools/run_lua_project_data.sh puc lua/test/recognition_transaction_contract_test.lua
+--   bash tools/run_lua_project_data.sh luajit lua/test/recognition_transaction_contract_test.lua
 
 local json = require("linkedspec.json")
 local linkedspec = require("linkedspec")
 local source_location = require("linkedspec.source_location")
 
-local mode = os.getenv("LINKEDSPEC_LUA_RECOGNITION_TRANSACTION_RED_MODE") or "authority"
-if mode ~= "authority" and mode ~= "integration" then
-  error(
-    "LINKEDSPEC_LUA_RECOGNITION_TRANSACTION_RED_MODE must be " ..
-      "'authority' or 'integration', got '" .. mode .. "'",
-    0
-  )
-end
-
 -- This module is deliberately private: linkedspec/init.lua must not export it.
--- Authority mode is current; integration stays RED at absent dedicated nodes.
-local loaded, transaction = pcall(require, "linkedspec.recognition_transaction")
-if not loaded then
-  io.stderr:write("Lua recognition transaction RED: missing linkedspec.recognition_transaction\n")
-  os.exit(1)
-end
+local transaction = require("linkedspec.recognition_transaction")
 
 local assertions = 0
 local failures = {}
@@ -205,8 +180,8 @@ check_equal(contract.contract_id, "linkedspec-recognition-transaction-v1", "cont
 check_equal(contract.format, 1, "contract format")
 check_equal(
   contract.status,
-  "neutral_perl_rust_dart_and_julia_complete_other_legs_red",
-  "dormant Lua status"
+  "neutral_perl_rust_dart_julia_puc_lua_and_luajit_complete_other_legs_red",
+  "admitted Lua status"
 )
 for name, expected in pairs({
   current_action_ir_nodes = 128,
@@ -219,25 +194,25 @@ for name, expected in pairs({
   mark_cases = 6,
   progress_cases = 8,
   diagnostics = 15,
-  mutations = 44,
+  mutations = 46,
 }) do
   check_equal(contract.expected_counts[name], expected, "count " .. name)
 end
 check_equal(
   contract.authored_surface.availability,
-  "available only in an admitted backend; currently Perl, Rust, Dart, and Julia, " ..
-    "with all later runtime legs future and unavailable",
-  "Lua remains unavailable"
+  "available only in an admitted runtime; currently Perl, Rust, Dart, Julia, " ..
+    "PUC Lua, and LuaJIT, with recurring and public-no-drift legs future and unavailable",
+  "Lua runtimes are admitted"
 )
 check_equal(#contract.rollout, 9, "rollout count")
-for index = 1, 5 do
+for index = 1, 7 do
   check_equal(contract.rollout[index].status, "complete", "complete rollout " .. index)
 end
-check_equal(contract.rollout[6].leg, "puc_lua", "PUC Lua next")
-check_equal(contract.rollout[6].status, "red", "PUC Lua dormant")
-check_equal(contract.rollout[7].leg, "luajit", "LuaJIT follows")
-check_equal(contract.rollout[7].status, "red", "LuaJIT dormant")
-for index = 6, 9 do
+check_equal(contract.rollout[6].leg, "puc_lua", "PUC Lua rollout")
+check_equal(contract.rollout[6].status, "complete", "PUC Lua admitted")
+check_equal(contract.rollout[7].leg, "luajit", "LuaJIT rollout")
+check_equal(contract.rollout[7].status, "complete", "LuaJIT admitted")
+for index = 8, 9 do
   check_equal(contract.rollout[index].status, "red", "later rollout " .. index)
 end
 
@@ -489,7 +464,7 @@ do
   end, { rule = "Top", origin = "unwind" })
 end
 
-if mode == "integration" then
+do
   local parsed, compiled = compile_source(authored_source)
   local compiled_json = linkedspec.compiled_spec_to_json(compiled)
   local top = compiled_json.rules_by_label.Top
@@ -508,7 +483,7 @@ if mode == "integration" then
   end
   if not dedicated_nodes_ready then
     io.stderr:write(
-      "Lua recognition transaction integration RED: missing dedicated ActionIR nodes\n"
+      "Lua recognition transaction invariant: missing dedicated ActionIR nodes\n"
     )
     os.exit(1)
   end
@@ -580,12 +555,12 @@ end
 
 if #failures == 0 then
   io.stdout:write(
-    "Lua recognition-transaction ", mode, " contract: ", assertions,
+    "Lua admitted recognition-transaction contract: ", assertions,
     " assertions passed on ", linkedspec.runtime_implementation(), "\n"
   )
 else
   io.stderr:write(
-    "Lua recognition-transaction ", mode, " contract: ", #failures,
+    "Lua admitted recognition-transaction contract: ", #failures,
     " of ", assertions, " assertions failed\n"
   )
   for _, message in ipairs(failures) do io.stderr:write("- ", message, "\n") end

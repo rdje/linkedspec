@@ -4917,7 +4917,7 @@
     RAM 69%, and canonical Phase 0 1,031/1,031 in 738 sec pass through the exact success marker; Lua/later remain RED.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6`
-  Status: `active` (2026-08-11; integration `.2` signoff-complete for atomic 203; admission `.3` pending; no push)
+  Status: `complete` (2026-08-11; admission `.3` signoff-complete as atomic 204/300 from `70b4ed04`; no push)
   Goal: Implement one shared Lua transaction/progress core and independently admit it on PUC Lua and LuaJIT.
   Depends on: `.14.3.5`
   Children: `.14.3.6.0-.14.3.6.3`
@@ -4927,35 +4927,35 @@
   Goal: Freeze one shared dual-ABI dormant final-path RED.
   Depends on: `.14.3.5.3`
   Commit: `FUTURE-PARITY-BACKLOG.14.3.6.0 - freeze Lua transaction RED`
-  Evidence: four modes stopped at missing authority; 12 mutations, Lua 177x2, CLI 66x2, corpus 105, storage 18/3,
-    book 79/14,412 KiB, all doctrines, RAM 60%, and Phase 0 1,031/1,031 in 740 sec passed; clean `6a8ec091`.
+  Evidence: four modes stopped at missing authority; 12 mutations and full signoff passed; clean `6a8ec091`.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6.1`
   Status: `complete` (2026-08-11; clean atomic 202/300 `d87dcac3`; no push)
   Goal: Add one shared private Lua invocation/mark/snapshot/linear-token authority.
   Depends on: `.14.3.6.0`
   Commit: `FUTURE-PARITY-BACKLOG.14.3.6.1 - add private Lua transaction authority`
-  Evidence: authority 187x2, 22+12 mutations, Lua 177x2, CLI 66x2, corpus 105, storage 18/3, book 79/14,412 KiB,
-    KM 816/6,772, eight doctrines, RAM 82%, and Phase 0 1,031/1,031 in 753 sec passed; clean `d87dcac3`.
+  Evidence: authority 187x2, 22+12 mutations, and full signoff passed; clean `d87dcac3`.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6.2`
-  Status: `complete` (2026-08-11; 243x2, eight doctrines, RAM 65%, Phase 0 1,031/1,031 in 736s; atomic 203 pending)
-  Goal: Integrate shared syntax/runtime/effect/progress parity across native, reconstructed, generated-plan, and
-    emitted carriers on both Lua ABIs.
+  Status: `complete` (2026-08-11; clean atomic 203/300 `70b4ed04`; no push)
+  Goal: Integrate syntax/runtime/effect/progress parity across all carriers on both Lua ABIs.
   Depends on: `.14.3.6.1`
-  Acceptance: Retrieve/probe current Lua scanner/ActionIR/compiler/interpreter/emitter, private authority, neutral
-    contract, and admitted backend precedents; add four dedicated non-eager nodes, recursive effect and cursor-only
-    progress policy, and one authority-backed adapter across live/reconstructed/generated-plan/emitted execution;
-    keep facade/discovery/rollout/current behavior unchanged; prove both ABIs, Lua gate, book/KM/doctrines/canonical.
   Commit: `FUTURE-PARITY-BACKLOG.14.3.6.2 - integrate Lua recognition transactions`
-  Checklist: [x] clean activation; [x] retrieve/probe seams; [x] ActionIR/policy; [x] runtime/carriers; [x] dual-ABI
-    integration GREEN; [x] current/no-registration no-drift; [x] book/live/KM; [x] canonical; [ ] clean atomic 203.
+  Evidence: authority 187x2, integration 243x2, 22+19+12 mutations, full signoff, and clean `70b4ed04`.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6.3`
-  Status: `pending`
+  Status: `complete` (2026-08-11; signoff-complete atomic 204/300 from clean `70b4ed04`; no push)
   Goal: Remove Lua dormancy, register one consumer exactly once per ABI in ordinary/canonical proof, and promote
     PUC Lua plus LuaJIT transaction admission independently.
   Depends on: `.14.3.6.2`
+  Acceptance: Retrieve the Lua integration and admitted backend authorities before edits; remove only the RED
+    selector/dormancy scaffolding; register the unchanged consumer exactly once for PUC Lua and LuaJIT in ordinary
+    and canonical routes; promote only those two rollout legs and exact ledgers while keeping the API private.
+  Commit: `FUTURE-PARITY-BACKLOG.14.3.6.3 - admit Lua recognition transactions`
+  Checklist: [x] clean activation/task ownership; [x] authority/predecessor audit; [x] remove dormancy; [x] ordinary
+    dual-ABI registration; [x] canonical registration; [x] governance/mutations; [x] no-drift; [x] docs/signoff.
+  Evidence: PUC/LuaJIT 243x2, Lua package 177x2, CLI 66x2, corpus 105, checker 46/38/14 + Lua 22, book
+    79 files/14,412 KiB, Knowledge 818/6,792, all eight doctrines, RAM 65%, and Phase 0 1,031/1,031 in 758 sec pass.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.7`
   Status: `pending`

@@ -996,7 +996,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 
 ### 4.9.2 `tools/check_recognition_transaction_contract.py` — neutral transaction/progress oracle
 
-- **WHAT:** independently interprets `linkedspec-recognition-transaction-v1`: four future authored forms, a linear
+- **WHAT:** independently interprets `linkedspec-recognition-transaction-v1`: four current authored forms, a linear
   token state machine with falsey-safe staged results, closed ActionIR/call base effects, recursive fixed-point
   effects, invocation-frame marks, cursor-only repetition/recursion progress, diagnostics, and rollout topology.
 - **WHEN:** changing the accepted recognition-transaction design, current ActionIR node or call-contract inventory,
@@ -1008,14 +1008,14 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   ```
 
 - **OUTPUT:** 132 ActionIR rows (128 live plus four dedicated), 246 live call rows, token 8 positive / 17 negative,
-  six fixed-point graphs, six mark cases, eight progress cases, fifteen diagnostics, and 42 rejected mutations;
-  rollout is neutral + Perl + Rust 3/9 complete. A separate public-sequence projection locks three book pages,
-  eleven forbidden milestone/current claims, and 25 in-memory mutations. A distinct canonical capability-guide
-  guard locks one document, four stale claims, and eight mutations. Eight Rust-admission mutations separately lock
-  the exact tracked consumer, canonical log/command, and absence of both former custom cfgs.
-- **BOUNDARY:** this checker derives the live inventories and proves the shared target plus exact Perl and Rust
-  admissions. Perl's 51-test and Rust's 12-test consumers are canonical; Dart/Julia/Lua and recurring remain
-  `.14.3.4-.7`, with public no-drift owned by `.14.3.8`. Its exact `policy.current_boundary` prose is generated
+  six fixed-point graphs, six mark cases, eight progress cases, fifteen diagnostics, and 46 rejected mutations;
+  rollout is neutral through dual-ABI Lua 7/9 complete. A separate public-sequence projection locks three book
+  pages, twenty forbidden claims, and 38 mutations; the guide guard locks one document, ten stale claims, and 14
+  mutations. Admission guards remain 8 Rust, 13 Dart, 14 Julia, and 22 Lua mutations, with Lua authority 22 and
+  integration 19 independently retained.
+- **BOUNDARY:** this checker derives the live inventories and proves the shared target plus every runtime admission.
+  Perl 51, Rust 12, Dart 10, current Julia 205, and Lua 243 per ABI are canonical; recurring remains `.14.3.7`,
+  with public no-drift owned by `.14.3.8`. Its exact `policy.current_boundary` prose is generated
   from the expected rollout, so a backend promotion cannot leave a separately hard-coded earlier boundary behind.
 - **RUST ADMISSION:** ordinary offline Cargo and canonical CI execute the same exact final-path target:
 
@@ -1029,6 +1029,16 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   generated-plan, independently compiled emitted-source, and compatibility proof. The internal authority module
   remains documentation-hidden; admission removes dormancy without adding a separately supported public Rust API.
   Retrieve [[rust-recognition-transaction-integration]] before changing this consumer or its canonical route.
+
+- **LUA ADMISSION:** ordinary and canonical proof execute one shared source independently on both ABIs:
+
+  ```bash
+  bash tools/run_lua_project_data.sh puc lua/test/recognition_transaction_contract_test.lua
+  bash tools/run_lua_project_data.sh luajit lua/test/recognition_transaction_contract_test.lua
+  ```
+
+  Each run passes 243 assertions. The authority and runtime adapter remain private; admission adds no facade export
+  or ABI-specific implementation. Retrieve [[lua-recognition-transaction-admission]] before changing these routes.
 
 ### 4.10 MCP transport materializer and independent validator
 

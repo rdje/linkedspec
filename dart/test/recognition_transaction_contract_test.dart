@@ -60,7 +60,7 @@ void main() {
     expect(_contract['format'], 1);
     expect(
       _contract['status'],
-      'neutral_perl_rust_dart_and_julia_complete_other_legs_red',
+      'neutral_perl_rust_dart_julia_puc_lua_and_luajit_complete_other_legs_red',
     );
 
     final counts = _object(_contract['expected_counts']);
@@ -74,7 +74,7 @@ void main() {
     expect(counts, containsPair('mark_cases', 6));
     expect(counts, containsPair('progress_cases', 8));
     expect(counts, containsPair('diagnostics', 15));
-    expect(counts, containsPair('mutations', 44));
+    expect(counts, containsPair('mutations', 46));
 
     expect(_object(_contract['authored_surface']), {
       'checkpoint': 'tx = recognition_checkpoint()',
@@ -86,7 +86,7 @@ void main() {
       'result_separation':
           'recognize_once returns a strict match boolean; the recognized payload remains staged until commit',
       'availability':
-          'available only in an admitted backend; currently Perl, Rust, Dart, and Julia, with all later runtime legs future and unavailable',
+          'available only in an admitted runtime; currently Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT, with recurring and public-no-drift legs future and unavailable',
     });
 
     final rollout = _objectRows('rollout');
@@ -112,7 +112,21 @@ void main() {
       'status': 'complete',
       'paths': ['julia/test/recognition_transaction_contract_test.jl'],
     });
-    expect(rollout.skip(5).every((row) => row['status'] == 'red'), isTrue);
+    expect(rollout[5], {
+      'order': 6,
+      'owner': 'FUTURE-PARITY-BACKLOG.14.3.6',
+      'leg': 'puc_lua',
+      'status': 'complete',
+      'paths': ['lua/test/recognition_transaction_contract_test.lua'],
+    });
+    expect(rollout[6], {
+      'order': 7,
+      'owner': 'FUTURE-PARITY-BACKLOG.14.3.6',
+      'leg': 'luajit',
+      'status': 'complete',
+      'paths': ['lua/test/recognition_transaction_contract_test.lua'],
+    });
+    expect(rollout.skip(7).every((row) => row['status'] == 'red'), isTrue);
   });
 
   test(
