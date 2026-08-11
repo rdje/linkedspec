@@ -308,6 +308,37 @@ def require(condition: bool, message: str) -> None:
         raise ContractError(message)
 
 
+def _english_join(values: list[str]) -> str:
+    require(values, "current-boundary rollout group must not be empty")
+    if len(values) == 1:
+        return values[0]
+    if len(values) == 2:
+        return f"{values[0]} and {values[1]}"
+    return f"{', '.join(values[:-1])}, and {values[-1]}"
+
+
+def expected_current_boundary() -> str:
+    labels = {
+        "perl": "Perl",
+        "rust": "Rust",
+        "dart": "Dart",
+        "julia": "Julia",
+        "puc_lua": "PUC Lua",
+        "luajit": "LuaJIT",
+        "recurring": "recurring",
+        "public_no_drift": "public-no-drift",
+    }
+    runtime_rows = [row for row in EXPECTED_ROLLOUT if row[2] != "neutral"]
+    admitted = [labels[leg] for _, _, leg, status in runtime_rows if status == "complete"]
+    unavailable = [labels[leg] for _, _, leg, status in runtime_rows if status == "red"]
+    return (
+        "this artifact admits the neutral contract and current "
+        f"{_english_join(admitted)} runtime behavior; "
+        f"{_english_join(unavailable)} legs remain unavailable, and no schema, "
+        "semantic, MCP, capability, CLI, or unrelated helper behavior changes"
+    )
+
+
 def read_text(path: Path) -> str:
     try:
         return path.read_text(encoding="utf-8")
@@ -800,13 +831,7 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
         "fail-closed policy drifted",
     )
     require(
-        policy.get("current_boundary")
-        == (
-            "this artifact admits the neutral contract and current Perl runtime "
-            "behavior; Rust, Dart, Julia, PUC Lua, LuaJIT, recurring, and "
-            "public-no-drift legs remain unavailable, and no schema, semantic, MCP, "
-            "capability, CLI, or unrelated helper behavior changes"
-        ),
+        policy.get("current_boundary") == expected_current_boundary(),
         "current behavior boundary drifted",
     )
 

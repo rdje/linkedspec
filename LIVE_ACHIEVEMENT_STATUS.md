@@ -2,24 +2,26 @@
 
 ## Current Activity
 
-- Rust transaction admission `FUTURE-PARITY-BACKLOG.14.3.3.3` is signoff-complete from clean integration commit
-  `1cf2923a` and commit-ready as atomic 191/300. Both dormant cfgs are removed; ordinary/canonical proof is 12/12.
-- Only Rust advances: recognition 132/246/42, rollout 3/9, public 3/11/25, guide 1/4/8, and Rust admission 8.
-  Rust-local and canonical gates pass; later runtimes, recurring composition, and final public no-drift remain RED.
+- Corrective leaf `FUTURE-PARITY-BACKLOG.14.3.4.0.0` repairs one neutral-policy contradiction found during Dart RED
+  retrieval: the rollout admitted Rust while `policy.current_boundary` and its checker literal called Rust unavailable.
+- The JSON now states current Perl+Rust truth and the checker derives the exact boundary from expected rollout.
+  Recognition remains 132/246/42, rollout 3/9, public 3/11/25, guide 1/4/8, and Rust admission 8.
+- Signoff is complete: all eight doctrines, Perl 51, Rust 12, CLI 66x2, RAM 45%, and Phase 0 1,031/1,031 in
+  721 seconds pass before the exact local-CI success marker.
 
 ## Latest Completed Slice
 
-- `FUTURE-PARITY-BACKLOG.14.3.3.3` — exact Rust admission is signoff-complete and commit-ready as atomic 191/300.
+- `FUTURE-PARITY-BACKLOG.14.3.4.0.0` is atomic 192/300: the neutral boundary now derives from rollout.
 - Definitive CI passes Perl 51/51, Rust 12/12, six-family containment, CLI 66x2, and Phase 0 1,031/1,031.
 
 ## Next Action
 
-- Land Rust admission `.14.3.3.3` as atomic 191/300, prove clean, then activate Dart dormant RED `.14.3.4.0`
-  task-tree-first from that handoff.
+- Activate Dart dormant RED `.14.3.4.0.1` task-tree-first from the clean atomic-192 handoff.
 
 ## Recent Completions
 
-- `2026-08-11` — `.14.3.3.3` completed exact Rust transaction admission signoff for atomic 191/300.
+- `2026-08-11` — `.14.3.4.0.0` repaired and definitively verified transaction boundary policy as atomic 192/300.
+- `2026-08-11` — `02c612f5` landed exact Rust transaction admission as atomic 191/300.
 - `2026-08-10` — `1cf2923a` landed cfg-private Rust transaction integration as atomic 190/300.
 - `2026-08-10` — `.14.3.3.2` completed cfg-private Rust integration signoff for atomic 190/300.
 - `2026-08-10` — `fd8a1934` landed private Rust authority as atomic 189/300.
@@ -34,7 +36,6 @@
 - `2026-08-10` — `c26a9556` composition-closed all four bounded document stores as atomic 180/300.
 - `2026-08-10` — `921f0507` bounded changes and engineering notes as atomic 179/300.
 - `2026-08-10` — `61a52dbd` partitioned future task evidence as atomic 178/300.
-- `2026-08-09` — `99fe03f3` bounded live status over exact history as atomic 177/300.
 
 ## History
 

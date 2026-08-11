@@ -10,6 +10,18 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.4.0.0` — repaired transaction current-boundary policy): rollout-bearing
+  prose inside an executable contract must not be validated against a second hand-maintained prose literal. Rust
+  admission updated status, availability, rollout, and mutation projections but omitted `policy.current_boundary`;
+  because the checker repeated the old text, the canonical gate enforced rather than detected the contradiction.
+- Generate the exact boundary from `EXPECTED_ROLLOUT` while retaining explicit backend display names and the existing
+  mutation. A future admission now changes the checker expectation at the same rollout edit point and must update the
+  JSON or fail. This preserves all semantic/public/admission counts and avoids inventing a new governance domain.
+- Preserve exact machine-owned prose when compacting live task and roadmap projections. Two canonical attempts
+  rejected dropped capability `.24`/`.24.2` and semantic `128 mutations, rollout 9/9` markers; restoring their full
+  governed rows made focused checks pass without weakening a guard. Definitive proof then passes all eight doctrines,
+  CLI 66x2, RAM 45%, and Phase 0 1,031/1,031 in 721 seconds.
+
 - 2026-08-10 (`FUTURE-PARITY-BACKLOG.14.3.3.3` — admitted Rust recognition transactions): admission removes
   dormancy, not behavior. Delete both custom cfgs across the complete source inventory, leave the private authority
   documentation-hidden, and run the already GREEN consumer ordinarily before changing rollout.

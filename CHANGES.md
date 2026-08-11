@@ -10,6 +10,22 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.4.0.0 — repair transaction boundary policy
+
+- Dart RED retrieval found the neutral contract internally contradictory after Rust admission: status, authored
+  availability, and rollout said neutral+Perl+Rust 3/9, while `policy.current_boundary` still called Rust unavailable.
+- Blame and the `02c612f5` admission diff proved the policy field was omitted, and the checker duplicated the stale
+  Perl-only literal; canonical validation therefore passed while positively enforcing the contradiction.
+- Corrected the JSON to current Perl+Rust truth and made the checker derive that exact prose from `EXPECTED_ROLLOUT`,
+  so later admission changes cannot leave an independent earlier boundary behind.
+- Preserved transaction 132 ActionIR / 246 calls / 42 mutations, rollout 3/9, public 3/11/25, guide 1/4/8, Rust
+  admission 8, every runtime, production behavior, schema/API/CLI/storage surface, and sole-facing support claim.
+- Two pre-definitive canonical attempts rejected public markers dropped during task/roadmap compaction; restoring
+  the exact capability `.24`/`.24.2` and semantic `128 mutations, rollout 9/9` projections kept their checkers
+  strict. The uninterrupted definitive rerun passes all eight doctrines, Perl transaction 51/51, Rust 12/12,
+  every typed-source runtime, capability 80/0/0, semantic 128/9/9, MCP complete/141, containment/relocation, CLI
+  66/66 twice, RAM 45%, and Phase 0 1,031/1,031 in 721 seconds before exact `[ci] local CI gate passed`.
+
 ## 2026-08-10 — FUTURE-PARITY-BACKLOG.14.3.3.3 — admit Rust recognition transactions
 
 - Activated task-tree-first from clean Rust-integration commit `1cf2923a` as intended atomic 191/300.

@@ -5,13 +5,13 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `1cf2923a` — clean Rust-integration parent for commit-ready admission atomic 191/300; no push.
-- latest_completed_leaf: Rust transaction admission `.14.3.3.3` is signoff-complete and commit-ready as atomic 191/300.
-- active_work_unit: land the fully verified Rust admission `.14.3.3.3`; no implementation or verification remains.
-- next_action: commit atomic 191/300, prove clean, then activate Dart RED `.14.3.4.0` task-tree-first.
-- in_flight_uncommitted: verified admission code/contract/checker/driver/book/live-doc/Knowledge/task changes; no background job or rendered book.
-- blockers: none. Canonical passes Perl 51/51, Rust 12/12, containment/relocation, CLI 66x2, RAM 77%, and Phase 0 1,031/1,031 in 739 seconds.
-  Recognition is 132/246/42, rollout 3/9, public 3/11/25; guide 1/4/8; Rust registration/dormancy 8.
+- activation_commit: `02c612f5` — clean Rust-admission base for current-boundary repair atomic 192/300; no push.
+- latest_completed_leaf: transaction boundary-policy repair `.14.3.4.0.0` is atomic 192/300 with subject
+  `FUTURE-PARITY-BACKLOG.14.3.4.0.0 - repair transaction boundary policy`.
+- active_work_unit: clean handoff after atomic 192; dormant Dart RED `.14.3.4.0.1` is the next leaf.
+- next_action: activate `.14.3.4.0.1` task-tree-first, then freeze the exact missing-private-authority Dart RED.
+- in_flight_uncommitted: none after landing; no background job or rendered book.
+- blockers: none. Definitive canonical CI passes all eight doctrines, Perl 51, Rust 12, CLI 66x2, RAM 45%, and Phase 0 1,031/1,031 in 721 seconds.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes, and 11 topology mutations advance governance to 53. Public authored values remain future; Perl and Rust
@@ -50,7 +50,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   v1 progress is cursor-only. Perl is admitted at 51/51 and Rust at ordinary/canonical 12/12. Rollout is 3/9 at
   42 semantic mutations; public 3/11/25; guide 1/4/8; Rust admission 8. Dart and later legs remain RED.
 - current_future_direction: transaction `.14.3` remains split through neutral `.1`, backend families `.2-.6`,
-  recurring `.7`, and closeout `.8`; Rust `.14.3.3` is complete/commit-ready, Dart RED `.14.3.4.0` follows, and `.14.8` retains no-drift.
-- latest_bootstrap_read: 2026-08-10 — complete roadmap/codebase/mdBook and required continuity/tooling review.
-- pivot_guard: land atomic 191 cleanly before activating Dart RED `.14.3.4.0`.
-- push_policy: hard lock at 300 commits; Rust admission is intended atomic 191/300; no push; use wrappers.
+  recurring `.7`, and closeout `.8`; corrective `.14.3.4.0.0` precedes Dart RED `.14.3.4.0.1`, and `.14.8` retains no-drift.
+- latest_bootstrap_read: 2026-08-11 — complete roadmap/codebase/mdBook and required continuity/tooling review.
+- pivot_guard: atomic 192 must be clean before activating Dart RED `.14.3.4.0.1`.
+- push_policy: hard lock at 300 commits; boundary repair is intended atomic 192/300; no push; use wrappers.

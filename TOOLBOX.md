@@ -1014,7 +1014,8 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   the exact tracked consumer, canonical log/command, and absence of both former custom cfgs.
 - **BOUNDARY:** this checker derives the live inventories and proves the shared target plus exact Perl and Rust
   admissions. Perl's 51-test and Rust's 12-test consumers are canonical; Dart/Julia/Lua and recurring remain
-  `.14.3.4-.7`, with public no-drift owned by `.14.3.8`.
+  `.14.3.4-.7`, with public no-drift owned by `.14.3.8`. Its exact `policy.current_boundary` prose is generated
+  from the expected rollout, so a backend promotion cannot leave a separately hard-coded earlier boundary behind.
 - **RUST ADMISSION:** ordinary offline Cargo and canonical CI execute the same exact final-path target:
 
   ```bash

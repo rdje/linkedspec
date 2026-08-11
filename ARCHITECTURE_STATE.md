@@ -71,7 +71,18 @@ then root and idempotently completes an exact interrupted generation, avoiding a
 segments, task metadata is 26/26 across 510 stable IDs, rollover recovery is 12/12, all eleven transferred task
 consumers pass, and the route registry remains 20 surfaces / 62 routes / 32/32 with all four stores current and
 empty debt metadata. The program is composition-closed. These storage migrations change documentation governance
-only; they change no language, compiler, runtime, backend, fixture, CLI, protocol, or project-data root.
+  only; they change no language, compiler, runtime, backend, fixture, CLI, protocol, or project-data root.
+
+- `2026-08-11 recognition-transaction current-boundary repair`: Dart RED retrieval under
+  `FUTURE-PARITY-BACKLOG.14.3.4.0.0` found that neutral status, authored availability, and rollout correctly admitted
+  Perl+Rust 3/9 while `policy.current_boundary` and its checker expectation still called Rust unavailable. Git blame
+  traces both stale literals to neutral commit `e0cc7182`; Rust admission `02c612f5` updated every adjacent projection
+  but omitted this field, so canonical validation enforced the contradiction. The checker now constructs the exact
+  boundary from `EXPECTED_ROLLOUT`, making later status edits update its expectation at the same authority point.
+  JSON prose now says Perl+Rust current and Dart onward unavailable. Syntax, runtime behavior, 132/246/42 semantic
+  proof, rollout 3/9, public 3/11/25, guide 1/4/8, Rust admission 8, schemas, APIs, CLI, and storage are unchanged.
+  Definitive recomposition passes all eight doctrines, every typed-source runtime, capability 80/0/0, semantic
+  128/9/9, MCP complete/141, containment/relocation, CLI 66x2, RAM 45%, and Phase 0 1,031/1,031 in 721 seconds.
 
 - `2026-08-10 admitted Rust recognition transactions`: `FUTURE-PARITY-BACKLOG.14.3.3.3` removes the two dormant
   custom cfgs from the exact nine-source Rust inventory while retaining the authority as documentation-hidden.

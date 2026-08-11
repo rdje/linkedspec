@@ -41,7 +41,7 @@
     "non_progress": "rolled-back candidates and variable, mark, AST, object, or transaction-state changes do not establish progress; zero-width one-shot recognition remains legal",
     "effects": "every ActionIR node and canonical call contract has exactly one base effect; composite and named-rule effects are unions computed to a recursive fixed point",
     "fail_closed": "unknown nodes, calls, effects, graph references, token states, or fixture operations reject before recognition",
-    "current_boundary": "this artifact admits the neutral contract and current Perl runtime behavior; Rust, Dart, Julia, PUC Lua, LuaJIT, recurring, and public-no-drift legs remain unavailable, and no schema, semantic, MCP, capability, CLI, or unrelated helper behavior changes"
+    "current_boundary": "this artifact admits the neutral contract and current Perl and Rust runtime behavior; Dart, Julia, PUC Lua, LuaJIT, recurring, and public-no-drift legs remain unavailable, and no schema, semantic, MCP, capability, CLI, or unrelated helper behavior changes"
   },
   "effect_model": {
     "allowed": [
