@@ -133,6 +133,61 @@ final class ActionCallExpr extends ActionExpr {
   }
 }
 
+/// Creates one rule-local opaque recognition-transaction token.
+final class ActionRecognitionCheckpointExpr extends ActionExpr {
+  const ActionRecognitionCheckpointExpr({
+    required super.source,
+    required super.sourceSpan,
+  }) : super(kind: 'recognition_checkpoint');
+
+  @override
+  ActionJsonObject toJson() => baseJson();
+}
+
+/// Performs one non-eager recognition attempt against a static child rule.
+final class ActionRecognizeOnceExpr extends ActionExpr {
+  const ActionRecognizeOnceExpr({
+    required super.source,
+    required super.sourceSpan,
+    required this.token,
+    required this.rule,
+  }) : super(kind: 'recognize_once');
+
+  final String token;
+  final String rule;
+
+  @override
+  ActionJsonObject toJson() => {...baseJson(), 'token': token, 'rule': rule};
+}
+
+/// Commits one attempted token and returns its staged payload.
+final class ActionRecognitionCommitExpr extends ActionExpr {
+  const ActionRecognitionCommitExpr({
+    required super.source,
+    required super.sourceSpan,
+    required this.token,
+  }) : super(kind: 'recognition_commit');
+
+  final String token;
+
+  @override
+  ActionJsonObject toJson() => {...baseJson(), 'token': token};
+}
+
+/// Restores one attempted token's checkpoint and invalidates the token.
+final class ActionRecognitionRollbackExpr extends ActionExpr {
+  const ActionRecognitionRollbackExpr({
+    required super.source,
+    required super.sourceSpan,
+    required this.token,
+  }) : super(kind: 'recognition_rollback');
+
+  final String token;
+
+  @override
+  ActionJsonObject toJson() => {...baseJson(), 'token': token};
+}
+
 final class ActionVariableExpr extends ActionExpr {
   const ActionVariableExpr({
     required super.source,
@@ -967,6 +1022,11 @@ RemovedAggregateSelector? findRemovedAggregateSelectorInExpr(ActionExpr expr) {
         }
       }
       return inArgs(args);
+    case ActionRecognitionCheckpointExpr():
+    case ActionRecognizeOnceExpr():
+    case ActionRecognitionCommitExpr():
+    case ActionRecognitionRollbackExpr():
+      return null;
     case ActionFluentChainExpr(:final receiver, :final calls):
       final receiverSelector = findRemovedAggregateSelectorInExpr(receiver);
       if (receiverSelector != null) {

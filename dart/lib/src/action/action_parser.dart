@@ -544,7 +544,7 @@ final class _ActionParser {
     return _SwitchBranches(cases: cases, defaultCase: defaultCase);
   }
 
-  ActionCallExpr? _parseCall(String text, int start) {
+  ActionExpr? _parseCall(String text, int start) {
     final attached = _splitAttachedBlock(text);
     if (attached != null) {
       final head = _trimWithOffsets(attached.head, start);
@@ -594,13 +594,104 @@ final class _ActionParser {
     if (parsed == null) {
       return null;
     }
+    final args = _parseArguments(parsed.payload, start + parsed.payloadStart);
+    final transaction = _recognitionTransactionExpr(
+      name: parsed.name,
+      args: args,
+      source: text,
+      sourceSpan: _span(start, start + text.length),
+    );
+    if (transaction != null) {
+      return transaction;
+    }
     return ActionCallExpr(
       source: text,
       sourceSpan: _span(start, start + text.length),
       name: parsed.name,
       sourceMethod: parsed.sourceMethod,
-      args: _parseArguments(parsed.payload, start + parsed.payloadStart),
+      args: args,
     );
+  }
+
+  ActionExpr? _recognitionTransactionExpr({
+    required String name,
+    required List<ActionArgument> args,
+    required String source,
+    required ActionSourceSpan sourceSpan,
+  }) {
+    String? bareName(ActionArgument argument) {
+      if (argument case ActionPositionalArgument(
+        value: ActionVariableExpr(:final name),
+      )) {
+        return name;
+      }
+      return null;
+    }
+
+    Never invalid() => throw FormatException(
+      'LINKEDSPEC_RECOGNITION_TRANSACTION_ERROR:'
+      'recognition_static_form_required:$name',
+    );
+
+    switch (name) {
+      case 'recognition_checkpoint':
+        if (args.isNotEmpty) {
+          invalid();
+        }
+        return ActionRecognitionCheckpointExpr(
+          source: source,
+          sourceSpan: sourceSpan,
+        );
+      case 'recognize_once':
+        if (args.length != 2) {
+          invalid();
+        }
+        final token = bareName(args.first);
+        final operand = args.last;
+        if (token == null ||
+            operand is! ActionPositionalArgument ||
+            operand.value is! ActionCallExpr) {
+          invalid();
+        }
+        final call = operand.value as ActionCallExpr;
+        if (call.name != 'call' ||
+            call.sourceMethod != 'call' ||
+            call.args.length != 1) {
+          invalid();
+        }
+        final rule = bareName(call.args.single);
+        if (rule == null) {
+          invalid();
+        }
+        return ActionRecognizeOnceExpr(
+          source: source,
+          sourceSpan: sourceSpan,
+          token: token,
+          rule: rule,
+        );
+      case 'recognition_commit':
+      case 'recognition_rollback':
+        if (args.length != 1) {
+          invalid();
+        }
+        final token = bareName(args.single);
+        if (token == null) {
+          invalid();
+        }
+        return name == 'recognition_commit'
+            ? ActionRecognitionCommitExpr(
+                source: source,
+                sourceSpan: sourceSpan,
+                token: token,
+              )
+            : ActionRecognitionRollbackExpr(
+                source: source,
+                sourceSpan: sourceSpan,
+                token: token,
+              );
+      default:
+        return null;
+    }
   }
 
   ActionValueAccessExpr? _parseCallResultAccess(String text, int start) {

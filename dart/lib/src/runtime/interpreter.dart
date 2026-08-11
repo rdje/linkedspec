@@ -11,6 +11,7 @@ import '../trace/trace.dart';
 import '../validation/spec_validator.dart';
 import 'generated_plan.dart';
 import 'matching.dart';
+import 'recognition_transaction.dart';
 import 'semantic_observation.dart';
 import 'source_location.dart';
 import 'unicode_case_mapping.dart';
@@ -536,6 +537,7 @@ final class LinkedSpecRuntimeEngine {
     );
     context.enterRule(label);
     context.enterRuleLocalBindingScope();
+    context.enterRecognitionInvocation(label);
     final generatedIdentity = context.generatedSourceIdentity;
     if (generatedFamily != null && generatedIdentity != null) {
       context.trace?.emitEvent(
@@ -621,10 +623,14 @@ final class LinkedSpecRuntimeEngine {
           LinkedSpecTraceLevel.low,
         );
       }
-      context.exitRuleLocalBindingScope();
-      context.exitRule();
-      context.registers = savedRegisters;
-      context.activeRuleEntries.remove(recursionKey);
+      try {
+        context.leaveRecognitionInvocation(label);
+      } finally {
+        context.exitRuleLocalBindingScope();
+        context.exitRule();
+        context.registers = savedRegisters;
+        context.activeRuleEntries.remove(recursionKey);
+      }
     }
   }
 
@@ -3157,6 +3163,13 @@ final class LinkedSpecRuntimeEngine {
           'invalid callable-codeblock literal in rule $ruleLabel: $code',
         );
       case ActionAssignScalarExpr(:final name, :final value):
+        if (value is ActionRecognitionCheckpointExpr) {
+          context.recognitionCheckpoint(ruleLabel, name);
+          context.variables[name] = null;
+          context.arrays.remove(name);
+          context.hashes.remove(name);
+          return null;
+        }
         final stored = _copyValue(
           _evaluateExpression(
             value,
@@ -3241,6 +3254,27 @@ final class LinkedSpecRuntimeEngine {
       case ActionControlCaseExpr():
       case ActionControlDefaultExpr():
       case ActionControlMarkerExpr():
+        return null;
+      case ActionRecognitionCheckpointExpr():
+        throw RuntimeInterpreterException(
+          'recognition_checkpoint must be assigned to a rule-local token '
+          "in rule '$ruleLabel'",
+        );
+      case ActionRecognizeOnceExpr(:final token, :final rule):
+        final child = currentEdge != null && currentEdge.target.label == rule
+            ? _executeActionEdgeChild(currentEdge, context)
+            : _executeRule(rule, 0, context);
+        context.retv = child.value;
+        return context.recognitionAttempt(
+          ruleLabel,
+          token,
+          matched: child.matched,
+          payload: child.value,
+        );
+      case ActionRecognitionCommitExpr(:final token):
+        return context.recognitionCommit(ruleLabel, token);
+      case ActionRecognitionRollbackExpr(:final token):
+        context.recognitionRollback(ruleLabel, token);
         return null;
       case ActionCallExpr():
         return _evaluateCall(
@@ -7146,7 +7180,12 @@ final class _RuntimeExecutionContext {
     this.generatedPlan,
     this.generatedSourceIdentity,
   }) : registers = RuntimeMatchRegisters.empty(input),
-       sourceAuthority = SourceAuthority(sources: {'input': input});
+       sourceAuthority = SourceAuthority(sources: {'input': input}) {
+    recognitionAuthority = RecognitionTransactionAuthority(
+      sourceAuthority: sourceAuthority,
+      sourceIdentity: 'input',
+    );
+  }
 
   final LinkedSpecRuntimeEngine engine;
   final String input;
@@ -7158,6 +7197,7 @@ final class _RuntimeExecutionContext {
   final Map<String, GeneratedRuleFamily>? generatedPlan;
   final String? generatedSourceIdentity;
   final SourceAuthority sourceAuthority;
+  late final RecognitionTransactionAuthority recognitionAuthority;
   final Map<String, Object?> variables = <String, Object?>{};
   final Map<String, List<Object?>> arrays = <String, List<Object?>>{};
   final Map<String, Map<String, Object?>> hashes =
@@ -7172,6 +7212,8 @@ final class _RuntimeExecutionContext {
   final List<String> _ruleStack = <String>[];
   final List<Map<String, _VariableSnapshot>> _ruleLocalBindingScopes =
       <Map<String, _VariableSnapshot>>[];
+  final List<_RecognitionRuntimeFrame> _recognitionFrames =
+      <_RecognitionRuntimeFrame>[];
   int _ruleLocalBindingSuppressionDepth = 0;
 
   RuntimeMatchRegisters registers;
@@ -7200,6 +7242,161 @@ final class _RuntimeExecutionContext {
 
   Map<String, int> marksFor(String ruleLabel) {
     return markBuckets.putIfAbsent(ruleLabel, () => <String, int>{});
+  }
+
+  RecognitionFrameState _recognitionFrameState(String ruleLabel) {
+    return RecognitionFrameState(
+      cursor: cursorCodeUnit,
+      boundary: registers.captureStartCodeUnit,
+      marks: marksFor(ruleLabel),
+    );
+  }
+
+  void _applyRecognitionFrameState(
+    String ruleLabel,
+    RecognitionFrameState state,
+  ) {
+    cursorCodeUnit = state.cursor.clamp(0, input.length);
+    registers = RuntimeMatchRegisters(
+      input: input,
+      cursorCodeUnit: cursorCodeUnit,
+      entryMatch: registers.entryMatch,
+      localMatch: registers.localMatch,
+      captureStartCodeUnit: state.boundary,
+    );
+    markBuckets[ruleLabel] = Map<String, int>.from(state.marks);
+  }
+
+  void enterRecognitionInvocation(String ruleLabel) {
+    final priorMarks = markBuckets.remove(ruleLabel);
+    markBuckets[ruleLabel] = <String, int>{};
+    try {
+      final frame = recognitionAuthority.enterInvocation(
+        rule: ruleLabel,
+        origin: '$ruleLabel:handler_entry',
+        state: _recognitionFrameState(ruleLabel),
+      );
+      _recognitionFrames.add(
+        _RecognitionRuntimeFrame(
+          rule: ruleLabel,
+          authorityFrame: frame,
+          priorMarks: priorMarks,
+        ),
+      );
+    } on Object {
+      if (priorMarks == null) {
+        markBuckets.remove(ruleLabel);
+      } else {
+        markBuckets[ruleLabel] = priorMarks;
+      }
+      rethrow;
+    }
+  }
+
+  void leaveRecognitionInvocation(String ruleLabel) {
+    final frame = _recognitionFrame(ruleLabel);
+    final actual = _recognitionFrameState(ruleLabel);
+    final restored = frame.tokens.isEmpty
+        ? actual
+        : frame.tokens.values.first.snapshot;
+    try {
+      recognitionAuthority.setFrameState(frame.authorityFrame, actual);
+      recognitionAuthority.leaveInvocation(frame.authorityFrame);
+    } finally {
+      _applyRecognitionFrameState(ruleLabel, restored);
+      _recognitionFrames.removeLast();
+      if (frame.priorMarks == null) {
+        markBuckets.remove(ruleLabel);
+      } else {
+        markBuckets[ruleLabel] = frame.priorMarks!;
+      }
+    }
+  }
+
+  void recognitionCheckpoint(String ruleLabel, String slot) {
+    final frame = _recognitionFrame(ruleLabel);
+    final actual = _recognitionFrameState(ruleLabel);
+    recognitionAuthority.setFrameState(frame.authorityFrame, actual);
+    final token = recognitionAuthority.checkpoint(
+      frame.authorityFrame,
+      '$ruleLabel:$slot',
+    );
+    frame.tokens[slot] = _RecognitionRuntimeToken(
+      authorityToken: token,
+      snapshot: actual,
+    );
+  }
+
+  bool recognitionAttempt(
+    String ruleLabel,
+    String slot, {
+    required bool matched,
+    required Object? payload,
+  }) {
+    final frame = _recognitionFrame(ruleLabel);
+    final token = _recognitionToken(frame, slot, '$ruleLabel:recognize_once');
+    return recognitionAuthority.attempt(
+      frame.authorityFrame,
+      token.authorityToken,
+      matched: matched,
+      payload: payload,
+      state: _recognitionFrameState(ruleLabel),
+    );
+  }
+
+  Object? recognitionCommit(String ruleLabel, String slot) {
+    final frame = _recognitionFrame(ruleLabel);
+    final token = _recognitionToken(
+      frame,
+      slot,
+      '$ruleLabel:recognition_commit',
+    );
+    recognitionAuthority.setFrameState(
+      frame.authorityFrame,
+      _recognitionFrameState(ruleLabel),
+    );
+    final payload = recognitionAuthority.commit(
+      frame.authorityFrame,
+      token.authorityToken,
+    );
+    frame.tokens.remove(slot);
+    return payload;
+  }
+
+  void recognitionRollback(String ruleLabel, String slot) {
+    final frame = _recognitionFrame(ruleLabel);
+    final token = _recognitionToken(
+      frame,
+      slot,
+      '$ruleLabel:recognition_rollback',
+    );
+    recognitionAuthority.setFrameState(
+      frame.authorityFrame,
+      _recognitionFrameState(ruleLabel),
+    );
+    recognitionAuthority.rollback(frame.authorityFrame, token.authorityToken);
+    _applyRecognitionFrameState(
+      ruleLabel,
+      recognitionAuthority.frameState(frame.authorityFrame),
+    );
+    frame.tokens.remove(slot);
+  }
+
+  _RecognitionRuntimeFrame _recognitionFrame(String ruleLabel) {
+    if (_recognitionFrames.isEmpty ||
+        _recognitionFrames.last.rule != ruleLabel) {
+      throw StateError('recognition invocation is not active for $ruleLabel');
+    }
+    return _recognitionFrames.last;
+  }
+
+  _RecognitionRuntimeToken _recognitionToken(
+    _RecognitionRuntimeFrame frame,
+    String slot,
+    String origin,
+  ) {
+    return frame.tokens[slot] ??
+        recognitionAuthority.rejectMissingToken(frame.authorityFrame, origin);
   }
 
   SourceLocationContext _typedSourceContext(
@@ -7621,6 +7818,30 @@ final class _RuntimeExecutionContext {
       registers = registers.withCaptureStartCodeUnit(codeUnitOffset);
     }
   }
+}
+
+final class _RecognitionRuntimeFrame {
+  _RecognitionRuntimeFrame({
+    required this.rule,
+    required this.authorityFrame,
+    required this.priorMarks,
+  });
+
+  final String rule;
+  final Object authorityFrame;
+  final Map<String, int>? priorMarks;
+  final Map<String, _RecognitionRuntimeToken> tokens =
+      <String, _RecognitionRuntimeToken>{};
+}
+
+final class _RecognitionRuntimeToken {
+  const _RecognitionRuntimeToken({
+    required this.authorityToken,
+    required this.snapshot,
+  });
+
+  final Object authorityToken;
+  final RecognitionFrameState snapshot;
 }
 
 final class _StatementStep {

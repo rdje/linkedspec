@@ -1,6 +1,6 @@
 ---
 id: dart-recognition-transaction-dormant-red
-title: Dart recognition transactions have a private authority and stop next at integration
+title: Dart recognition transactions are integrated privately and await admission
 answers:
   - "where is the dormant Dart recognition transaction RED consumer"
   - "where is the private Dart recognition transaction authority"
@@ -8,18 +8,20 @@ answers:
   - "how do I enable only the Dart recognition transaction integration RED"
   - "why does ordinary Dart test not discover recognition transactions"
   - "what is the next Dart recognition transaction failure"
+  - "does Dart have dedicated recognition transaction ActionIR nodes"
+  - "does Dart execute recognition transactions through generated and emitted carriers"
   - "which Dart recognition transaction API is frozen"
   - "does the Dart transaction RED cover UTF-16 state"
   - "does the Dart transaction RED cover emitted source"
   - "does the Dart recognition transaction RED change rollout or production behavior"
 date: 2026-08-11
-status: current private-authority boundary; integration owned by FUTURE-PARITY-BACKLOG.14.3.4.2
-tags: [dart, recognition, transaction, ActionIR, RED, generated-source, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.14.3.4.0.1 freezes dart/test_dormant/recognition_transaction_contract_test.dart at the absent private module. FUTURE-PARITY-BACKLOG.14.3.4.1 adds unexported dart/lib/src/runtime/recognition_transaction.dart over the existing SourceAuthority and removes the exact analyzer exclusion. One source-local authority owns opaque frame/token handles, monotonic invocation/mark/transaction generations, detached cursor/boundary/mark snapshots, same-label isolation, strict match/payload state, one attempt and terminal, restore-before-invalidate misuse/unwind/discard, and exact portable diagnostics. The default routed target passes 6 authority tests with 4 integration skips. LINKEDSPEC_DART_RECOGNITION_TRANSACTION_INTEGRATION_RED=1 exposes exactly four later failures: missing dedicated nodes, missing effect/progress methods, native unknown_helper, and emitted unknown_helper. Fatal analysis is clean, ordinary discovery remains 383 tests, no canonical route names the file, and production UTF-16 behavior plus neutral 132/246/42 and rollout 3/9 remain unchanged. Complete Dart passes format 100/0, ordinary 383, storage 21/47, CLI 66x2, and corpus 105; definitive CI passes eight doctrines, containment/relocation, CLI 66x2, RAM 65%, and Phase 0 1,031/1,031 in 697 seconds."
-reverify: "cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test_dormant/recognition_transaction_contract_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings && bash ../tools/run_dart_project_data.sh test --reporter failures-only"
+status: current private integration boundary; admission owned by FUTURE-PARITY-BACKLOG.14.3.4.3
+tags: [dart, recognition, transaction, ActionIR, dormant, generated-source, FUTURE-PARITY-BACKLOG]
+evidence: "FUTURE-PARITY-BACKLOG.14.3.4.0.1 freezes dart/test_dormant/recognition_transaction_contract_test.dart; `.1` adds the unexported source-local authority; `.2` integrates four dedicated non-eager ActionIR nodes, static call(Rule) ownership, recursive effect closure, cursor-only progress, and live UTF-16 cursor/boundary/invocation-mark state. Native, serialized reconstruction, generated-plan, and freshly analyzed emitted-source carriers all route through LinkedSpecRuntimeEngine and preserve a successful false payload. LINKEDSPEC_DART_RECOGNITION_TRANSACTION_INTEGRATION_RED=1 now passes 10/10; default explicit execution remains 6 pass / 4 skipped. Fatal analysis is clean, ordinary discovery remains 383 tests, no canonical route names the dormant file, the private module has no facade export, and neutral 132/246/42 plus rollout 3/9 remain unchanged. The complete Dart gate passes format 100/0, ordinary 383, storage 21/47, CLI 66x2, and corpus 105. Admission and public promotion remain solely owned by `.14.3.4.3`."
+reverify: "cd dart && env LINKEDSPEC_DART_RECOGNITION_TRANSACTION_INTEGRATION_RED=1 bash ../tools/run_dart_project_data.sh test --reporter failures-only test_dormant/recognition_transaction_contract_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings && bash ../tools/run_dart_project_data.sh test --reporter failures-only"
 ---
 
-# Private Dart recognition-transaction boundary
+# Private Dart recognition-transaction integration boundary
 
 The final-path consumer is
 `dart/test_dormant/recognition_transaction_contract_test.dart`. Ordinary Dart
@@ -35,24 +37,25 @@ payload; and retry, escape, cross-owner use, nesting, unwind, and explicit
 discard restore before invalidation. The module is not exported by the package
 facade and does not recognize authored syntax.
 
-The consumer already owns the complete later integration boundary: UTF-16-safe
-state snapshots, recursive mark isolation, exact neutral diagnostics, dedicated
-non-eager authored forms, effect and progress policy, falsey payloads, native
-and reconstructed execution, generated-plan execution, independently analyzed
-emitted source, and ordinary cursor compatibility. This RED slice changes no
-production Dart source, canonical registration, rollout row, or public support
-claim.
+The parser now replaces the four exact static forms with dedicated ActionIR
+nodes. `recognize_once` stores only the token slot and static child-rule name,
+so `call(Rule)` is never evaluated as an ordinary helper. Runtime invocation
+entry/exit synchronizes the existing UTF-16 cursor registers, anonymous capture
+boundary, and fresh same-label mark bucket through the private authority.
+Effect graphs use the neutral recursive fixed point and progress accepts only
+cursor advance on repetition/recursive edges.
 
-Set `LINKEDSPEC_DART_RECOGNITION_TRANSACTION_INTEGRATION_RED=1` to expose only
-the next integration boundary. Its four tests fail at missing dedicated
-ActionIR lowering, effect/progress classifiers, native runtime dispatch, and
-the same emitted-runtime dispatch. Integration `.14.3.4.2` owns those seams;
-admission `.14.3.4.3` moves the consumer to ordinary discovery only after every
-frozen assertion is GREEN.
+Set `LINKEDSPEC_DART_RECOGNITION_TRANSACTION_INTEGRATION_RED=1` to prove all
+ten frozen tests. Native, reconstructed, generated-plan, and emitted carriers
+converge on `LinkedSpecRuntimeEngine`, so the same authority-backed behavior
+preserves successful false payloads everywhere. Default execution deliberately
+keeps the four integration tests skipped. Admission `.14.3.4.3` moves the
+consumer to ordinary/canonical discovery and advances rollout; until then the
+module stays unexported and Dart remains unavailable publicly.
 
 ## Links
 
 - Neutral contract: [[recognition-transaction-neutral-contract]].
 - Rust precedent: [[rust-recognition-transaction-dormant-red]].
 - Dart typed-source authority: [[dart-typed-source-location-integration]].
-- Owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.3.4.0.1-.1`; next owner `.14.3.4.2`.
+- Owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.3.4.0.1-.2`; next owner `.14.3.4.3`.

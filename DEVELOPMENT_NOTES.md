@@ -10,6 +10,34 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.4.2` — integrated Dart recognition transactions): normalize the four
+  static transaction forms only after ordinary arguments parse, then replace the entire call shape with a dedicated
+  node. The attempt node stores a token slot and rule name, so its `call(Rule)` operand cannot be resolved or run as
+  an eager helper and does not perturb the callable inventory.
+- Reuse the existing effective runtime for all carriers. Reconstructed specs recompile the same parsed action text;
+  generated plans select structural rule execution inside `LinkedSpecRuntimeEngine`; emitted source reconstructs
+  the compiled spec and calls that engine. One runtime integration therefore proves four carriers without creating
+  backend-specific transaction interpreters.
+- Wrap every rule invocation with the private authority, even while admission is dormant. Entry replaces the
+  same-label mark bucket and saves its predecessor; exit applies current or unfinished-token state before restoring
+  the caller bucket. This gives recursive same-label isolation while leaving different-label parent marks live.
+- Keep match acceptance separate from the payload. Dart's `_RuleResult` already owns an explicit `matched` bit, so
+  `recognize_once` stages that bit plus `value` directly; `_returned(false)` is matched because only null denotes
+  absence, and commit can therefore expose `false` without misclassifying the child as a miss.
+- Synchronize cursor from the context's live UTF-16 register, boundary from `RuntimeMatchRegisters`, and marks from
+  the current invocation bucket before checkpoint/attempt/terminal operations. Rollback rebuilds registers while
+  preserving entry/local match objects, then restores cursor, nullable boundary, and marks as one state.
+- Effect policy mirrors the neutral/Rust monotone set-union fixed point exactly; progress is independent and accepts
+  only `end > start` on repetition/recursive edges (with one-shot zero width allowed). State or mark mutation never
+  substitutes for cursor progress.
+- Dormancy and integration are orthogonal. The environment-enabled consumer passes 10/10, but default remains
+  6/4 skipped, the module stays unexported, canonical discovery remains absent, and rollout stays 3/9 until `.3`.
+- Complete verification passes Dart format 100/0, fatal analysis, ordinary 383, storage 21/47, CLI 66x2, corpus 105,
+  and a rendered 79-file / 14,396-KiB book inspection; generated book output is then safely removed and rebuildable.
+- Close only after one uninterrupted definitive gate. Atomic 195 signoff passes all eight doctrines, capability
+  80/0/0, MCP complete/141, containment/relocation, canonical CLI 66x2, RAM 64%, Phase 0 1,031/1,031, and the exact
+  local-CI success marker before the frozen commit workflow begins.
+
 - 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.4.1` — added private Dart transaction authority): return opaque
   frame/token handles as `Object` from the unexported module so the public method surface does not expose private
   implementation types. Keep snapshots and exception records detached at every observation boundary.

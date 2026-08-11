@@ -97,7 +97,7 @@ only possible v1 effects. User or aggregate mutation, compatibility cursor-stack
 diagnostics, exit, unknown/raw code, callable/user functions, parser registry work, external calls, and host effects
 fail closed. Runtime checks remain a backstop for dynamic paths.
 
-#### Accepted authored form (current on Perl)
+#### Accepted authored form (current on Perl and Rust)
 
 Behavior-free `FUTURE-PARITY-BACKLOG.14.3.1.0` ratifies this exact shape:
 
@@ -170,12 +170,15 @@ cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test recognit
 
 Only Rust's rollout row advances; no later runtime, recurring, or public-no-drift row is promoted.
 
-Dart now has a package-private transaction state authority behind the dormant consumer. Its default six-test mode
-proves opaque monotonic generations, invocation-local marks, detached UTF-16-register snapshots, falsey-safe
-payload staging, and restore-before-invalidate misuse, unwind, and discard handling. Strict analysis includes the
-consumer, but ordinary discovery and canonical CI still omit it. The explicit integration RED mode stops at the
-missing dedicated nodes, recursive effect/cursor-progress policy, native dispatch, and emitted dispatch. This
-private foundation is implementation evidence, not current authored Dart support, so rollout remains 3/9.
+Dart now has a package-private integrated implementation behind the dormant consumer. The parser lowers the four
+forms to dedicated non-eager ActionIR nodes, the static `call(Rule)` operand is retained structurally, and the
+private authority synchronizes live UTF-16 cursor, anonymous-boundary, and invocation-mark state. Recursive effect
+closure and cursor-only progress use the neutral policy. Native, serialized reconstruction, generated-plan, and
+freshly analyzed emitted-source execution preserve a successful `false` payload, while ordinary cursor-stack
+behavior remains compatible. The enabled dormant mode passes all ten tests; its default mode keeps the four
+integration tests skipped. Strict analysis includes the consumer, but ordinary discovery and canonical CI still
+omit it. This is implementation evidence, not current authored Dart support, so rollout remains 3/9 until the
+separate admission leaf lands.
 
 The same checker fails closed over three public transaction pages, eleven forbidden claims, and twenty-five sequence mutations.
 This guards the milestone order alongside the neutral artifact's 42 semantic mutations.

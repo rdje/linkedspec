@@ -15,7 +15,38 @@ const _crossInvocationCode = 'recognition_cross_invocation';
 const _crossSourceCode = 'recognition_cross_source';
 const _attemptCountCode = 'recognition_attempt_count';
 const _terminalRequiredCode = 'recognition_terminal_required';
+const _effectForbiddenCode = 'recognition_effect_forbidden';
+const _unknownEffectCode = 'recognition_unknown_effect';
+const _zeroProgressRepetitionCode = 'recognition_zero_progress_repetition';
+const _zeroProgressRecursiveCycleCode =
+    'recognition_zero_progress_recursive_cycle';
 const _markGenerationInvalidCode = 'recognition_mark_generation_invalid';
+
+const _allowedEffects = <String>{
+  'pure_value',
+  'source_read',
+  'structured_control',
+  'rule_recognition',
+  'transaction_state',
+  'cursor_advance',
+  'capture_boundary_write',
+  'invocation_mark_write',
+  'staged_return',
+};
+
+const _rejectedEffects = <String>{
+  'binding_write',
+  'aggregate_write',
+  'ast_or_object_write',
+  'compatibility_cursor_control',
+  'output',
+  'authored_diagnostic',
+  'exit_or_unbounded_control',
+  'dynamic_callable',
+  'parser_registry_or_staged_dispatch',
+  'external_or_host',
+  'unknown_or_raw',
+};
 
 /// Cursor, anonymous-boundary, and invocation-local named-mark state.
 final class RecognitionFrameState {
@@ -253,6 +284,24 @@ final class RecognitionTransactionAuthority {
     );
   }
 
+  /// Returns a detached copy of one live backend frame state.
+  RecognitionFrameState frameState(Object frame) =>
+      _frameForAuthority(frame).frameState._copy();
+
+  /// Synchronizes one live frame from the backend's native registers.
+  void setFrameState(Object frame, RecognitionFrameState state) {
+    _frameForAuthority(frame).frameState = state._copy();
+  }
+
+  /// Reports that a dedicated transaction node did not resolve its slot.
+  Never rejectMissingToken(Object frame, String origin) {
+    final state = _frameForAuthority(frame);
+    throw _error(_tokenExpectedCode, <String, Object?>{
+      'rule': state.rule,
+      'origin': origin,
+    });
+  }
+
   /// Writes one invocation-local named mark.
   int writeMark(Object frame, String name, int offset) {
     final state = _frameForAuthority(frame);
@@ -372,6 +421,106 @@ final class RecognitionTransactionAuthority {
     _restoreAndInvalidate(tokenState);
   }
 
+  /// Classifies one neutral recognition-effect graph by recursive fixed point.
+  void classifyEffects(Map<String, Object?> graph) {
+    final entry = graph['entry'] is String
+        ? graph['entry']! as String
+        : '<entry>';
+    final rawRules = graph['rules'];
+    if (rawRules is! Map) {
+      throw _effectError(_unknownEffectCode, entry, 'unknown_or_raw');
+    }
+
+    final effects = <String, Set<String>>{};
+    final calls = <String, List<String>>{};
+    for (final ruleEntry in rawRules.entries) {
+      final rule = '${ruleEntry.key}';
+      final rawRow = ruleEntry.value;
+      if (rawRow is! Map) {
+        throw _effectError(_unknownEffectCode, rule, 'unknown_or_raw');
+      }
+      final row = Map<String, Object?>.from(rawRow);
+      final rawBase = row['base'];
+      final rawCalls = row['calls'];
+      if (rawBase is! List || rawCalls is! List) {
+        throw _effectError(_unknownEffectCode, rule, 'unknown_or_raw');
+      }
+
+      final ruleEffects = <String>{};
+      for (final rawEffect in rawBase) {
+        final effect = rawEffect is String ? rawEffect : 'unknown_or_raw';
+        if (!_allowedEffects.contains(effect) &&
+            !_rejectedEffects.contains(effect)) {
+          throw _effectError(_unknownEffectCode, rule, effect);
+        }
+        ruleEffects.add(effect);
+      }
+      effects[rule] = ruleEffects;
+      calls[rule] = [
+        for (final rawCallee in rawCalls)
+          rawCallee is String ? rawCallee : '<dynamic>',
+      ];
+    }
+
+    var changed = true;
+    while (changed) {
+      changed = false;
+      for (final callEntry in calls.entries) {
+        final inherited = <String>{};
+        for (final callee in callEntry.value) {
+          inherited.addAll(effects[callee] ?? const {'unknown_or_raw'});
+        }
+        final target = effects[callEntry.key]!;
+        final before = target.length;
+        target.addAll(inherited);
+        changed = changed || target.length != before;
+      }
+    }
+
+    final entryEffects = effects[entry];
+    if (entryEffects == null) {
+      throw _effectError(_unknownEffectCode, entry, 'unknown_or_raw');
+    }
+    final forbidden =
+        entryEffects.where(_rejectedEffects.contains).toList(growable: false)
+          ..sort();
+    if (forbidden.isNotEmpty) {
+      final effect = forbidden.first;
+      throw _effectError(
+        effect == 'unknown_or_raw' ? _unknownEffectCode : _effectForbiddenCode,
+        entry,
+        effect,
+      );
+    }
+  }
+
+  /// Enforces cursor-only progress for accepted repetition/recursion edges.
+  void validateProgress(Map<String, Object?> fixture) {
+    final context = fixture['context'] is String
+        ? fixture['context']! as String
+        : 'unknown';
+    final start = fixture['start'] is num
+        ? (fixture['start']! as num).toInt()
+        : 0;
+    final end = fixture['end'] is num ? (fixture['end']! as num).toInt() : 0;
+    if (end > start || context == 'one_shot') {
+      return;
+    }
+
+    final rule = fixture['id'] is String ? fixture['id']! as String : '<rule>';
+    final recursive = context != 'accepted_repetition_iteration';
+    throw _error(
+      recursive ? _zeroProgressRecursiveCycleCode : _zeroProgressRepetitionCode,
+      <String, Object?>{
+        'rule': rule,
+        'origin': '$rule:recognize_once',
+        if (recursive) 'cycle': context,
+        'start_offset': start,
+        'end_offset': end,
+      },
+    );
+  }
+
   _InvocationState _frameForAuthority(Object frame) {
     if (frame is! _RecognitionInvocationFrame) {
       throw ArgumentError.value(frame, 'frame', 'must be an opaque frame');
@@ -456,6 +605,16 @@ final class RecognitionTransactionAuthority {
     });
   }
 }
+
+RecognitionTransactionException _effectError(
+  String code,
+  String rule,
+  String effect,
+) => _error(code, <String, Object?>{
+  'rule': rule,
+  'origin': '$rule:recognize_once',
+  'effect': effect,
+});
 
 bool _tokenIsActive(_TransactionState token) =>
     token.status != _TransactionStatus.invalidated;

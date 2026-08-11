@@ -200,6 +200,11 @@ void _normalizeExpr(ActionExpr expr, UserFunctionRegistry registry) {
   switch (expr) {
     case ActionCallExpr(:final name, :final args):
       _normalizeArgs(CallableSurface.helper, name, args, registry);
+    case ActionRecognitionCheckpointExpr():
+    case ActionRecognizeOnceExpr():
+    case ActionRecognitionCommitExpr():
+    case ActionRecognitionRollbackExpr():
+      break;
     case ActionFluentChainExpr(:final receiver, :final calls):
       _normalizeExpr(receiver, registry);
       for (final call in calls) {

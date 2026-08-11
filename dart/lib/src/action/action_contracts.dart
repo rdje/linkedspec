@@ -741,6 +741,13 @@ final class _ActionContractResolver {
           args: args,
         );
         _visitArgs(args);
+      case ActionRecognitionCheckpointExpr():
+      case ActionRecognizeOnceExpr():
+      case ActionRecognitionCommitExpr():
+      case ActionRecognitionRollbackExpr():
+        // Grammar-owned recognition intrinsics are dedicated ActionIR nodes,
+        // not entries in the ordinary callable-helper registry.
+        break;
       case ActionFluentChainExpr(:final receiver, :final calls):
         visitExpr(receiver);
         for (final call in calls) {

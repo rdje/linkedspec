@@ -10,6 +10,29 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.4.2 — integrate Dart recognition transactions
+
+- Added four dedicated Dart ActionIR nodes for checkpoint, non-eager static recognition, commit, and rollback.
+  Exact valid forms normalize after ordinary argument parsing; `call(Rule)` is retained as structure and never
+  enters the ordinary callable-helper registry or aligned 246-name inventory.
+- Extended the private authority with backend-state synchronization, recursive fixed-point effect classification,
+  cursor-only repetition/recursion progress validation, detached state reads, and exact missing-token reporting.
+- Added one invocation adapter around every Dart rule execution. It replaces/restores same-label mark buckets,
+  synchronizes live UTF-16 cursor and anonymous boundary registers, retains staged falsey payloads, and restores
+  unfinished checkpoints before terminal failure and cleanup.
+- Routed native, serialized reconstruction, generated-plan, and freshly analyzed emitted-source execution through
+  the same effective engine path. A successful child payload of `false` stays matched and returns `false` at commit.
+- The unchanged enabled dormant consumer now passes 10/10; default explicit execution remains 6 pass / 4 skipped.
+  The private module remains absent from the facade and the consumer remains outside ordinary/canonical discovery.
+- Preserved neutral 132/246/42, rollout 3/9, public 3/11/25, guide 1/4/8, existing UTF-16/result behavior, schemas,
+  APIs, CLI, README, and project-storage topology. Dart admission remains solely owned by `.14.3.4.3`.
+- Complete Dart passes format 100/0, fatal analysis, ordinary 383/383, storage 21/47, CLI 66x2, and corpus 105/105.
+  The synchronized book renders 79 files / 14,396 KiB with the private-integrated/not-admitted boundary, then its
+  reproducible output is removed.
+- Definitive CI exits 0 after all eight doctrines, capability 80/0/0, MCP complete/141, repository containment and
+  relocation, both primary CLI environments at 66/66, RAM 64% below the 88% threshold, Phase 0 1,031/1,031, and
+  the exact local-CI success marker.
+
 ## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.4.1 — add private Dart transaction authority
 
 - Added unexported `dart/lib/src/runtime/recognition_transaction.dart` over the existing immutable source authority.

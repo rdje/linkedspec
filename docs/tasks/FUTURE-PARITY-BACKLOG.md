@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-11` (Dart dormant RED landed at `3a29b34e` as atomic 193/300; private authority
-  `.14.3.4.1` is complete as atomic 194/300 at the exact `.2` integration boundary; no push)
+- Last updated: `2026-08-11` (Dart private authority `.14.3.4.1` is atomic 194/300; integration `.14.3.4.2`
+  is signoff-complete for atomic 195/300 with admission/rollout deliberately unchanged; no push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -103,14 +103,14 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-11):** Rust admission landed at `02c612f5` as atomic 191/300, corrective Dart
-boundary policy at `b1c59d03` as 192/300, and dormant Dart RED at `3a29b34e` as 193/300 (no push). Private Dart
-authority `.14.3.4.1` now passes the dormant default mode at 6 authority tests / 4 integration skips with strict
-analysis clean. Its explicit integration mode fails only at four `.14.3.4.2` seams: dedicated nodes, effect/progress
-methods, native dispatch, and emitted dispatch. The module remains unexported and ordinary/canonical discovery,
-UTF-16 behavior, recognition 132/246/42, rollout 3/9, public 3/11/25, guide 1/4/8, and Rust admission 8 stay exact.
-Definitive signoff passes eight doctrines, containment/relocation, CLI 66x2, RAM 65%, and Phase 0 1,031/1,031 in
-697 seconds. Clean-boundary `.14.3.4.2` task-first activation is next; task hygiene remains separate.
+**Authoritative frontier (2026-08-11):** Dart private authority `.14.3.4.1` landed at `f6f154c6` as atomic 194/300
+(no push). Integration `.14.3.4.2` now lowers four dedicated non-eager nodes, applies recursive effect/cursor-
+progress policy, and binds native/reconstructed/generated-plan/emitted execution to live UTF-16 transaction state.
+The enabled dormant consumer passes 10/10; default remains 6 pass / 4 skips. Complete Dart passes format 100/0,
+strict analysis, ordinary 383, storage 21/47, CLI 66x2, and corpus 105. The module remains unexported and ordinary/
+canonical discovery, recognition 132/246/42, rollout 3/9, public 3/11/25, guide 1/4/8, and Rust admission 8 remain
+exact. All eight doctrines and canonical CI pass containment/relocation, CLI 66x2, RAM 64%, and Phase 0
+1,031/1,031. Atomic 195 commit is next; admission `.14.3.4.3` remains separate.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private

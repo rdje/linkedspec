@@ -5,13 +5,13 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `3a29b34e` — clean dormant-Dart-RED base for private authority atomic 194/300; no push.
-- latest_completed_leaf: private Dart transaction authority `.14.3.4.1`, atomic 194/300 with frozen commit subject.
-- active_work_unit: no in-flight leaf; atomic 194 clean-handoff state.
-- next_action: activate Dart transaction integration `.14.3.4.2` task-tree-first from clean atomic 194.
-- in_flight_uncommitted: none; no background job or rendered book.
-- blockers: none. Private 6-pass/4-skip, exact four-failure integration RED, Dart-local, rendered book, eight doctrines,
-  and definitive CI are green; canonical closure includes CLI 66x2, RAM 65%, and Phase 0 1,031/1,031 in 697 seconds.
+- activation_commit: `f6f154c6` — clean private-Dart-authority base for integration atomic 195/300; no push.
+- latest_completed_leaf: Dart transaction integration `.14.3.4.2`, signoff-complete atomic 195/300 subject.
+- active_work_unit: no in-flight leaf after atomic 195 lands; this pointer describes the intended clean handoff.
+- next_action: activate Dart transaction admission `.14.3.4.3` task-tree-first from clean atomic 195.
+- in_flight_uncommitted: none after the commit workflow; no background job or rendered book.
+- blockers: none. Enabled dormant 10/10, default 6/4, complete Dart/book, all eight doctrines, containment/relocation,
+  CLI 66x2, RAM 64%, Phase 0 1,031/1,031, and exact canonical success are green.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes, and 11 topology mutations advance governance to 53. Public authored values remain future; Perl and Rust
@@ -48,11 +48,12 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   `recognize_once(token, call(Rule))`, `recognition_commit`, and `recognition_rollback`; match boolean and staged
   payload are separate. Tokens are linear; effects are closed 9 allowed/11 rejected; marks are invocation-framed;
   v1 progress is cursor-only. Perl is admitted at 51/51 and Rust at ordinary/canonical 12/12. Rollout is 3/9 at
-  42 semantic mutations; public 3/11/25; guide 1/4/8; Rust admission 8. Dart's dormant final-path consumer is
-  now backed by an unexported private authority: default proof is 6 pass / 4 integration skips and the enabled RED
-  stops only at nodes, effect/progress, native, and emitted `.2` seams. Ordinary analysis/tests remain unchanged.
+  42 semantic mutations; public 3/11/25; guide 1/4/8; Rust admission 8. Dart now has four private dedicated nodes,
+  recursive effect/progress policy, and authority-backed native/reconstructed/generated-plan/emitted execution.
+  Enabled dormant proof is 10/10 while default remains 6 pass / 4 skips; no export, canonical registration, or
+  rollout promotion exists, so admission remains `.14.3.4.3` and current public behavior is still Perl plus Rust.
 - current_future_direction: transaction `.14.3` remains split through neutral `.1`, backend families `.2-.6`,
   recurring `.7`, and closeout `.8`; corrective `.14.3.4.0.0` precedes Dart RED `.14.3.4.0.1`, and `.14.8` retains no-drift.
 - latest_bootstrap_read: 2026-08-11 — complete roadmap/codebase/mdBook and required continuity/tooling review.
-- pivot_guard: activate Dart integration `.14.3.4.2` only from the clean atomic 194 boundary.
+- pivot_guard: finish and commit integration `.14.3.4.2` cleanly before activating Dart admission `.14.3.4.3`.
 - push_policy: hard lock at 300 commits; private Dart authority is atomic 194/300; no push; use wrappers.
