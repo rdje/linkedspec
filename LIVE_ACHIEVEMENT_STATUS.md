@@ -2,24 +2,24 @@
 
 ## Current Activity
 
-- Corrective leaf `FUTURE-PARITY-BACKLOG.14.3.4.0.0` repairs one neutral-policy contradiction found during Dart RED
-  retrieval: the rollout admitted Rust while `policy.current_boundary` and its checker literal called Rust unavailable.
-- The JSON now states current Perl+Rust truth and the checker derives the exact boundary from expected rollout.
-  Recognition remains 132/246/42, rollout 3/9, public 3/11/25, guide 1/4/8, and Rust admission 8.
-- Signoff is complete: all eight doctrines, Perl 51, Rust 12, CLI 66x2, RAM 45%, and Phase 0 1,031/1,031 in
-  721 seconds pass before the exact local-CI success marker.
+- Dormant Dart RED leaf `FUTURE-PARITY-BACKLOG.14.3.4.0.1` freezes the complete final-path transaction consumer at
+  the absent private module and its three authority/state/exception types.
+- Exact explicit execution fails only there; fatal analysis and all 383 ordinary Dart tests pass, and canonical
+  discovery remains unchanged. Production, UTF-16 behavior, recognition 132/246/42, and rollout 3/9 are preserved.
+- Signoff passes Dart-local, unchanged rendered book, eight doctrines, CLI 66x2, RAM 56%, and Phase 0 1,031/1,031.
 
 ## Latest Completed Slice
 
-- `FUTURE-PARITY-BACKLOG.14.3.4.0.0` is atomic 192/300: the neutral boundary now derives from rollout.
-- Definitive CI passes Perl 51/51, Rust 12/12, six-family containment, CLI 66x2, and Phase 0 1,031/1,031.
+- `FUTURE-PARITY-BACKLOG.14.3.4.0.1` is signoff-complete as atomic 193/300 with exact dormant RED and no admission.
+- Definitive CI passes every canonical contract and Phase 0 1,031/1,031 in 700 seconds.
 
 ## Next Action
 
-- Activate Dart dormant RED `.14.3.4.0.1` task-tree-first from the clean atomic-192 handoff.
+- Finish canonical signoff and land atomic 193 cleanly, then activate private Dart authority `.14.3.4.1` task-first.
 
 ## Recent Completions
 
+- `2026-08-11` — `.14.3.4.0.1` froze exact dormant Dart transaction RED for atomic 193/300.
 - `2026-08-11` — `.14.3.4.0.0` repaired and definitively verified transaction boundary policy as atomic 192/300.
 - `2026-08-11` — `02c612f5` landed exact Rust transaction admission as atomic 191/300.
 - `2026-08-10` — `1cf2923a` landed cfg-private Rust transaction integration as atomic 190/300.
@@ -35,7 +35,6 @@
 - `2026-08-10` — `e0cc7182` added the executable neutral recognition-transaction authority as atomic 181/300.
 - `2026-08-10` — `c26a9556` composition-closed all four bounded document stores as atomic 180/300.
 - `2026-08-10` — `921f0507` bounded changes and engineering notes as atomic 179/300.
-- `2026-08-10` — `61a52dbd` partitioned future task evidence as atomic 178/300.
 
 ## History
 

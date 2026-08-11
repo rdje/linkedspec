@@ -10,6 +10,22 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.4.0.1 — freeze Dart transaction RED
+
+- Added one dormant final-path Dart consumer for the complete neutral recognition-transaction contract: authority
+  generations and snapshots, falsey-safe match/payload state, token/mark/lifecycle diagnostics, dedicated
+  non-eager ActionIR, effect/progress policy, all four execution carriers, and ordinary cursor compatibility.
+- Froze the next boundary at one absent private package module and its three named authority/state/exception types.
+  The explicitly routed test exits 1 only there; the exact analyzer exclusion remains warning-clean.
+- Kept the consumer outside ordinary and canonical discovery. Fatal Dart analysis reports no issues, all 383
+  ordinary tests pass, and neither canonical driver names the dormant file.
+- Preserved all production Dart bytes, UTF-16 registers/results, recognition 132/246/42, rollout 3/9, public
+  3/11/25, guide 1/4/8, schemas/APIs/CLI/README/storage, and current mdBook behavior.
+- Dart-local passes format/analyze, 383 tests, storage, CLI 66x2, and corpus 105. The unchanged book renders 79
+  files / 14,380 KiB and is removed after exact inspection. Definitive CI passes eight doctrines, Perl 51, Rust 12,
+  all typed-source runtimes, capability 80/0/0, semantic 128/9/9, MCP complete/141, containment/relocation, CLI
+  66x2, RAM 56%, and Phase 0 1,031/1,031 in 700 seconds before the exact success marker.
+
 ## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.4.0.0 — repair transaction boundary policy
 
 - Dart RED retrieval found the neutral contract internally contradictory after Rust admission: status, authored

@@ -10,6 +10,20 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.4.0.1` — froze dormant Dart transaction RED): use an unregistered
+  `test_dormant/` consumer plus one exact analyzer exclusion to preserve a final-path test without asserting an
+  unavailable private package boundary. Ordinary discovery and fatal analysis must remain independently green.
+- Freeze the whole later implementation seam in the first RED: authority and detached frame state, falsey-safe
+  token lifecycle, recursive marks, all portable diagnostics, four non-eager nodes, effect/progress policy, native
+  and reconstructed runtime, generated plan, independently compiled emitted source, and compatibility behavior.
+- Keep only three future types statically named. The explicit compiler then proves the intended missing-module seam
+  without cascading through speculative integration members; later private-authority work can make this outer
+  contract GREEN before integration advances the same unchanged file to its next failure.
+- Route even the test's `Directory.systemTemp` through `run_dart_project_data.sh`: the wrapper supplies a
+  repository-volume temp root, and the emitted child package gives its own repository-local `PUB_CACHE`.
+- The definitive unchanged-runtime composition passes all eight doctrines, both transaction admissions, every
+  typed-source runtime, containment/relocation, CLI 66x2, RAM 56%, and Phase 0 1,031/1,031 in 700 seconds.
+
 - 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.4.0.0` — repaired transaction current-boundary policy): rollout-bearing
   prose inside an executable contract must not be validated against a second hand-maintained prose literal. Rust
   admission updated status, availability, rollout, and mutation projections but omitted `policy.current_boundary`;
