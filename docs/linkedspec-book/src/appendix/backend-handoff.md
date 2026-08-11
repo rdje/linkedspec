@@ -71,11 +71,12 @@
 > data-routed target once. Only Dart advances: recognition rollout is 4/9 while Julia, PUC Lua, LuaJIT, recurring,
 > and public-no-drift remain RED. The private authority is not exported.
 >
-> Julia now has only its non-exported transaction-state foundation. The explicit dormant authority mode passes
-> 155 assertions over opaque frame/token generations, invocation-local marks, detached state, falsey-safe payloads,
-> restoration, and lifecycle diagnostics. Generic call parsing, missing effect/progress policy, unsupported runtime
-> dispatch, and omitted ordinary/canonical discovery remain the exact integration/admission boundary; rollout does
-> not move.
+> Julia now has a private end-to-end integration behind the same non-exported authority. Four dedicated non-eager
+> nodes, recursive effect closure, cursor-only progress, and live UTF-8 code-unit cursor/boundary/invocation-mark
+> synchronization converge across native, reconstructed, generated-plan, and independently loaded emitted-module
+> execution. The explicit integration mode passes 203 assertions and authority mode remains 155/155. The final-path
+> consumer is still omitted from ordinary/canonical discovery, so this is integration rather than admission and
+> rollout remains 4/9.
 >
 > Any cursor transaction is one explicit
 > recognition attempt over invocation-local cursor/boundary/marks only; it adds no search tree and cannot undo

@@ -271,9 +271,22 @@ struct _RuntimeRuleLocalBinding
     hash::Any
 end
 
+struct _RuntimeRecognitionToken
+    authority_token::Any
+    snapshot::RecognitionTransaction.RecognitionFrameState
+end
+
+struct _RuntimeRecognitionFrame
+    rule::String
+    authority_frame::Any
+    prior_marks::Union{Nothing,Dict{String,Int}}
+    tokens::Dict{String,_RuntimeRecognitionToken}
+end
+
 mutable struct _RuntimeExecutionContext
     input::String
     source_authority::SourceLocation.SourceAuthority
+    recognition_authority::RecognitionTransaction.RecognitionTransactionAuthority
     cursor_codeunit::Int
     registers::RuntimeMatchRegisters
     retv::Any
@@ -281,6 +294,7 @@ mutable struct _RuntimeExecutionContext
     arrays::Dict{String,Vector{Any}}
     hashes::Dict{String,Dict{String,Any}}
     mark_buckets::Dict{String,Dict{String,Int}}
+    recognition_frames::Vector{_RuntimeRecognitionFrame}
     cursor_stack::Vector{Int}
     active_rule_entries::Set{Tuple{String,Int,Int}}
     rule_local_binding_scopes::Vector{Dict{String,_RuntimeRuleLocalBinding}}
@@ -310,9 +324,16 @@ function _RuntimeExecutionContext(
     generated_source_identity = nothing,
 )
     input_text = String(input)
+    source_authority = SourceLocation.SourceAuthority(
+        sources = Dict{String,String}("input" => input_text),
+    )
     return _RuntimeExecutionContext(
         input_text,
-        SourceLocation.SourceAuthority(sources = Dict{String,String}("input" => input_text)),
+        source_authority,
+        RecognitionTransaction.RecognitionTransactionAuthority(
+            source_authority = source_authority,
+            source_identity = "input",
+        ),
         0,
         RuntimeMatchRegisters(input_text),
         nothing,
@@ -320,6 +341,7 @@ function _RuntimeExecutionContext(
         Dict{String,Vector{Any}}(),
         Dict{String,Dict{String,Any}}(),
         Dict{String,Dict{String,Int}}(),
+        _RuntimeRecognitionFrame[],
         Int[],
         Set{Tuple{String,Int,Int}}(),
         Dict{String,_RuntimeRuleLocalBinding}[],
@@ -338,6 +360,231 @@ function _RuntimeExecutionContext(
         generated_source_identity === nothing ?
             nothing : String(generated_source_identity),
     )
+end
+
+function _runtime_recognition_frame_state(
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+)
+    return RecognitionTransaction.RecognitionFrameState(
+        cursor = context.cursor_codeunit,
+        boundary = context.registers.capture_start_codeunit,
+        marks = get!(context.mark_buckets, rule_label, Dict{String,Int}()),
+    )
+end
+
+function _apply_runtime_recognition_frame_state!(
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+    state::RecognitionTransaction.RecognitionFrameState,
+)
+    cursor = clamp(
+        RecognitionTransaction.state_cursor(state),
+        0,
+        ncodeunits(context.input),
+    )
+    context.cursor_codeunit = cursor
+    context.registers = RuntimeMatchRegisters(
+        context.input;
+        cursor_codeunit = cursor,
+        entry_match = context.registers.entry_match,
+        local_match = context.registers.local_match,
+        capture_start_codeunit = RecognitionTransaction.state_boundary(state),
+    )
+    context.mark_buckets[rule_label] = RecognitionTransaction.state_marks(state)
+    return nothing
+end
+
+function _enter_runtime_recognition_invocation!(
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+)
+    prior_marks = pop!(context.mark_buckets, rule_label, nothing)
+    context.mark_buckets[rule_label] = Dict{String,Int}()
+    try
+        authority_frame = RecognitionTransaction.enter_invocation(
+            context.recognition_authority;
+            rule = rule_label,
+            origin = "$rule_label:handler_entry",
+            state = _runtime_recognition_frame_state(context, rule_label),
+        )
+        push!(
+            context.recognition_frames,
+            _RuntimeRecognitionFrame(
+                rule_label,
+                authority_frame,
+                prior_marks,
+                Dict{String,_RuntimeRecognitionToken}(),
+            ),
+        )
+    catch
+        if prior_marks === nothing
+            delete!(context.mark_buckets, rule_label)
+        else
+            context.mark_buckets[rule_label] = prior_marks
+        end
+        rethrow()
+    end
+    return nothing
+end
+
+function _runtime_recognition_frame(
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+)
+    if isempty(context.recognition_frames) ||
+            last(context.recognition_frames).rule != rule_label
+        throw(RuntimeInterpreterException(
+            "recognition invocation is not active for rule '$rule_label'",
+        ))
+    end
+    return last(context.recognition_frames)
+end
+
+function _leave_runtime_recognition_invocation!(
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+)
+    frame = _runtime_recognition_frame(context, rule_label)
+    actual = _runtime_recognition_frame_state(context, rule_label)
+    restored = isempty(frame.tokens) ? actual : first(values(frame.tokens)).snapshot
+    try
+        RecognitionTransaction.set_frame_state!(
+            context.recognition_authority,
+            frame.authority_frame,
+            actual,
+        )
+        RecognitionTransaction.leave_invocation!(
+            context.recognition_authority,
+            frame.authority_frame,
+        )
+    finally
+        _apply_runtime_recognition_frame_state!(context, rule_label, restored)
+        pop!(context.recognition_frames)
+        if frame.prior_marks === nothing
+            delete!(context.mark_buckets, rule_label)
+        else
+            context.mark_buckets[rule_label] = frame.prior_marks
+        end
+    end
+    return nothing
+end
+
+function _runtime_recognition_checkpoint!(
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+    slot::String,
+)
+    frame = _runtime_recognition_frame(context, rule_label)
+    actual = _runtime_recognition_frame_state(context, rule_label)
+    RecognitionTransaction.set_frame_state!(
+        context.recognition_authority,
+        frame.authority_frame,
+        actual,
+    )
+    authority_token = RecognitionTransaction.checkpoint(
+        context.recognition_authority,
+        frame.authority_frame,
+        "$rule_label:$slot",
+    )
+    frame.tokens[slot] = _RuntimeRecognitionToken(authority_token, actual)
+    return nothing
+end
+
+function _runtime_recognition_token(
+    context::_RuntimeExecutionContext,
+    frame::_RuntimeRecognitionFrame,
+    slot::String,
+    origin::String,
+)
+    token = get(frame.tokens, slot, nothing)
+    token !== nothing && return token
+    return RecognitionTransaction.reject_missing_token(
+        context.recognition_authority,
+        frame.authority_frame,
+        origin,
+    )
+end
+
+function _runtime_recognition_attempt!(
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+    slot::String;
+    matched::Bool,
+    payload,
+)
+    frame = _runtime_recognition_frame(context, rule_label)
+    token = _runtime_recognition_token(
+        context,
+        frame,
+        slot,
+        "$rule_label:recognize_once",
+    )
+    return RecognitionTransaction.attempt!(
+        context.recognition_authority,
+        frame.authority_frame,
+        token.authority_token;
+        matched = matched,
+        payload = payload,
+        state = _runtime_recognition_frame_state(context, rule_label),
+    )
+end
+
+function _runtime_recognition_commit!(
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+    slot::String,
+)
+    frame = _runtime_recognition_frame(context, rule_label)
+    token = _runtime_recognition_token(
+        context,
+        frame,
+        slot,
+        "$rule_label:recognition_commit",
+    )
+    RecognitionTransaction.set_frame_state!(
+        context.recognition_authority,
+        frame.authority_frame,
+        _runtime_recognition_frame_state(context, rule_label),
+    )
+    payload = RecognitionTransaction.commit!(
+        context.recognition_authority,
+        frame.authority_frame,
+        token.authority_token,
+    )
+    delete!(frame.tokens, slot)
+    return payload
+end
+
+function _runtime_recognition_rollback!(
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+    slot::String,
+)
+    frame = _runtime_recognition_frame(context, rule_label)
+    token = _runtime_recognition_token(
+        context,
+        frame,
+        slot,
+        "$rule_label:recognition_rollback",
+    )
+    RecognitionTransaction.set_frame_state!(
+        context.recognition_authority,
+        frame.authority_frame,
+        _runtime_recognition_frame_state(context, rule_label),
+    )
+    RecognitionTransaction.rollback!(
+        context.recognition_authority,
+        frame.authority_frame,
+        token.authority_token,
+    )
+    restored = RecognitionTransaction.frame_state(
+        context.recognition_authority,
+        frame.authority_frame,
+    )
+    _apply_runtime_recognition_frame_state!(context, rule_label, restored)
+    delete!(frame.tokens, slot)
+    return nothing
 end
 
 function _typed_source_context(rule_label::AbstractString, projection::AbstractString)
@@ -1066,6 +1313,7 @@ function _execute_runtime_rule!(
     push!(context.rule_local_binding_scopes, Dict{String,_RuntimeRuleLocalBinding}())
     saved_registers = context.registers
     context.registers = enter_child(saved_registers)
+    _enter_runtime_recognition_invocation!(context, label)
     trace_scope = _enter_runtime_trace_scope!(
         context,
         "julia_runtime:rule",
@@ -1154,9 +1402,13 @@ function _execute_runtime_rule!(
             trace_scope,
             "rule=$label cursor=$(context.cursor_codeunit)",
         )
-        _restore_runtime_rule_local_bindings!(context)
-        context.registers = saved_registers
-        delete!(context.active_rule_entries, recursion_key)
+        try
+            _leave_runtime_recognition_invocation!(context, label)
+        finally
+            _restore_runtime_rule_local_bindings!(context)
+            context.registers = saved_registers
+            delete!(context.active_rule_entries, recursion_key)
+        end
     end
 end
 
@@ -2700,6 +2952,10 @@ function _evaluate_runtime_action_expr!(
         end
         return result
     elseif expr isa ActionAssignScalarExpr
+        if expr.value isa ActionRecognitionCheckpointExpr
+            _runtime_recognition_checkpoint!(context, rule_label, expr.name)
+            return _store_runtime_bare_binding!(context, expr.name, nothing)
+        end
         value = _runtime_copy(_evaluate_runtime_action_expr!(
             engine,
             expr.value,
@@ -2786,6 +3042,30 @@ function _evaluate_runtime_action_expr!(
         )
     elseif expr isa ActionControlElseExpr || expr isa ActionControlCaseExpr ||
            expr isa ActionControlDefaultExpr || expr isa ActionControlMarkerExpr
+        return nothing
+    elseif expr isa ActionRecognitionCheckpointExpr
+        throw(RuntimeInterpreterException(
+            "recognition_checkpoint must be assigned to a rule-local token " *
+            "in rule '$rule_label'",
+        ))
+    elseif expr isa ActionRecognizeOnceExpr
+        target_index = current_edge !== nothing &&
+            current_edge.target.label == expr.rule ? current_edge.target.index : 0
+        child = current_edge !== nothing && current_edge.target.label == expr.rule ?
+            _execute_runtime_action_edge_child!(engine, current_edge, context) :
+            _execute_runtime_rule!(engine, expr.rule, target_index, context)
+        context.retv = child.value
+        return _runtime_recognition_attempt!(
+            context,
+            rule_label,
+            expr.token;
+            matched = child.matched,
+            payload = child.value,
+        )
+    elseif expr isa ActionRecognitionCommitExpr
+        return _runtime_recognition_commit!(context, rule_label, expr.token)
+    elseif expr isa ActionRecognitionRollbackExpr
+        _runtime_recognition_rollback!(context, rule_label, expr.token)
         return nothing
     elseif expr isa ActionCallExpr
         return _evaluate_runtime_call!(

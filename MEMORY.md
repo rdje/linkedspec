@@ -5,13 +5,13 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `8db3aeee` — clean Julia-RED base for private authority atomic 198/300; no push.
-- latest_completed_leaf: Julia private transaction authority `.14.3.5.1` is signoff-complete in atomic 198/300.
-- active_work_unit: none after this commit; Julia transaction integration `.14.3.5.2` awaits clean activation.
-- next_action: verify clean atomic 198, then activate `.14.3.5.2` task-tree-first and integrate only its four seams.
-- in_flight_uncommitted: none once this atomic commit lands; no managed or background job remains.
-- blockers: none. Authority passes 155/155; integration stops at zero dedicated nodes and absent effect/progress/
-  runtime routes; canonical signoff passes CLI 66x2, RAM 68%, and Phase 0 1,031/1,031 in 747 seconds.
+- activation_commit: `923285aa` — clean private-Julia-authority base for integration atomic 199/300; no push.
+- latest_completed_leaf: Julia transaction integration `.14.3.5.2` is signoff-complete for atomic 199/300.
+- active_work_unit: none after atomic 199 lands; Julia admission `.14.3.5.3` awaits clean activation.
+- next_action: land atomic 199, verify clean/pointer/maps/brief, then activate Julia admission `.14.3.5.3` task-tree-first.
+- in_flight_uncommitted: signoff-complete atomic 199 source/docs pending commit; no background job.
+- blockers: none. Integration 203/203, authority 155/155, full Julia/book, eight doctrines, CLI 66x2, RAM 65%,
+  and canonical Phase 0 1,031/1,031 in 731 seconds pass while privacy/discovery and rollout 4/9 stay unchanged.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes, and 11 topology mutations advance governance to 53. Public authored values remain future; Perl and Rust
@@ -25,8 +25,8 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   4/4 consumer across native/reconstructed/generated/emitted carriers while retaining UTF-16 registers and results.
 - julia_audit_fact: private non-exported `SourceLocation` owns copied text and immutable scalar/code-unit/coordinate
   tables plus detached values/errors; all 92+7 helpers route through one per-context authority while retaining
-  native code-unit registers/results. Private `RecognitionTransaction` now owns frames/tokens/state, but authored
-  integration remains future; the exact typed-source 127-assertion consumer remains ordinary/canonically admitted.
+  native code-unit registers/results. Private `RecognitionTransaction` now integrates four nodes and effect/
+  progress/runtime/carriers at 203/203 but remains dormant; typed source 127 stays ordinary/canonically admitted.
 - lua_audit_fact: each runtime input now owns one copied private authority; all exact 92+7 helper routes construct
   typed positions/spans for validation, coordinates, slicing, materialization, marks, capture boundaries, and cursor
   control while retaining zero-based UTF-8-byte registers and results. One shared 240-assertion consumer now runs
@@ -51,10 +51,10 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   v1 progress is cursor-only. Perl is admitted at 51/51, Rust at 12/12, and Dart at ordinary/canonical 10/10.
   Rollout is 4/9 at 43 semantic mutations; public 3/14/29; guide 1/6/10; Rust admission 8; Dart admission 13.
   Dart retains four private dedicated nodes, recursive effect/progress policy, and authority-backed native/
-  reconstructed/generated-plan/emitted execution without a facade export. Julia now has the private non-exported
-  frame/token/state authority at 155/155, while dedicated nodes and effect/progress/runtime integration remain `.2`.
+  reconstructed/generated-plan/emitted execution without a facade export. Julia now has the same four private node,
+  policy, and authority-backed carrier seams at 203/203, but no export, discovery, admission, or rollout movement.
 - current_future_direction: transaction `.14.3` remains split through neutral `.1`, backend families `.2-.6`,
   recurring `.7`, and closeout `.8`; corrective `.14.3.4.0.0` precedes Dart RED `.14.3.4.0.1`, and `.14.8` retains no-drift.
 - latest_bootstrap_read: 2026-08-11 — complete roadmap/codebase/mdBook and required continuity/tooling review.
-- pivot_guard: land private Julia authority `.14.3.5.1` cleanly before integration `.14.3.5.2` activates.
-- push_policy: hard lock at 300 commits; private Julia authority is atomic 198/300; no push; use wrappers.
+- pivot_guard: land signoff-complete Julia integration `.14.3.5.2` cleanly before admission `.14.3.5.3` activates.
+- push_policy: hard lock at 300 commits; private Julia integration is intended atomic 199/300; no push; use wrappers.

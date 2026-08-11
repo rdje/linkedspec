@@ -10,6 +10,29 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.5.2` — private Julia recognition-transaction integration): normalize
+  transaction calls only after ordinary argument parsing, then replace the complete call shape with a dedicated
+  node. The attempt node stores a token-slot name plus static child label, so `call(Rule)` is never eagerly resolved.
+- Keep grammar-owned transaction nodes outside callable-contract and final-codeblock normalization. Semantic call
+  projection consequently retains the shared 246-name current inventory without a recognition-specific exception.
+- Evaluate effect graphs to a monotone set-union fixed point so direct/mutual recursion cannot hide a forbidden
+  transitive effect. Validate progress separately and accept only cursor advance on repetition/recursive edges;
+  binding, mark, or transaction state changes never substitute for progress.
+- Enter one transaction frame for every rule invocation. Remove and later restore only the same-label mark bucket,
+  leaving different-label parent marks live while recursive same-label calls receive fresh isolated state.
+- Synchronize the authority from the live code-unit cursor, anonymous boundary, and invocation marks at checkpoint,
+  attempt, and terminal operations. Rollback rebuilds current registers; commit retains them; rule exit restores
+  caller registers and same-label marks while leaving the resulting cursor intact.
+- Reuse existing carrier convergence. Reconstructed and emitted modules recompile the same source; generated plans
+  already call the effective runtime. No emitter-specific transaction fork or filesystem workspace is required.
+- Treat matched presence independently from payload truthiness. Julia's `_RuntimeRuleResult` already owns `matched`,
+  so the adapter stages it directly and preserves a committed `false` through all four carriers at 203/203.
+- Keep admission separate: the module is unexported, discovery is unchanged, neutral rollout stays 4/9, and only
+  `.14.3.5.3` may register the exact final-path consumer and promote Julia.
+- Close integration only after the complete canonical gate repeats all current admissions and repository-locality
+  proof unchanged. The definitive run passed all eight doctrines, CLI 66x2, RAM 65%, and Phase 0 1,031/1,031 in
+  731 seconds through the exact local-CI success marker; `.3` remains a clean-tree admission activation.
+
 - 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.5.1` — private Julia recognition-transaction authority): include one
   non-exported sibling module immediately after `SourceLocation`; reuse the exact authority object as the first
   cross-source discriminator while keeping artifact `source_identity` independent from its decoded-source key.

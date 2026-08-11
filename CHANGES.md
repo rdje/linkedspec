@@ -10,6 +10,25 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.5.2 — integrate Julia recognition transactions
+
+- Added four dedicated Julia ActionIR nodes for checkpoint, non-eager static recognition, commit, and rollback.
+  Exact forms normalize after ordinary argument parsing; `call(Rule)` is retained only as a static child label and
+  never enters the ordinary callable-helper inventory or dispatch path.
+- Extended the private authority with the neutral recursive effect fixed point, cursor-only progress validator,
+  detached state access, and exact missing-token diagnostics. Six effect graphs and eight progress cases pass.
+- Added one private frame adapter around every Julia rule invocation. It synchronizes the existing UTF-8 code-unit
+  cursor, anonymous capture boundary, and fresh same-label mark bucket while retaining separate match/payload state.
+- Routed native, reconstructed, generated-plan, and independently loaded emitted-module execution through the same
+  effective engine. A successful child payload of `false` stays matched and survives commit on every carrier.
+- The unchanged explicit integration consumer passes 203/203 and authority remains 155/155. The namespace stays
+  unexported and the consumer stays outside ordinary/canonical discovery, so recognition remains 132/246/43 at
+  rollout 4/9 with public 3/14/29 and guide 1/6/10 unchanged.
+- Complete Julia passes package tests, typed source 127/127, storage 19/5, primary CLI, and corpus 105/105. The
+  synchronized mdBook renders 79 files / 14,404 KiB and its reproducible output is removed.
+- Definitive signoff passes all eight doctrines, canonical containment/relocation and CLI 66x2, RAM 65%, Phase 0
+  1,031/1,031 in 731 seconds, and the exact `[ci] local CI gate passed` marker.
+
 ## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.5.1 — add private Julia transaction authority
 
 - Added non-exported `LinkedSpecJulia.RecognitionTransaction` immediately behind the existing private source-

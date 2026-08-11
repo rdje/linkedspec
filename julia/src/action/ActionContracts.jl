@@ -718,6 +718,13 @@ function _visit_expr!(resolver::_ActionContractResolver, expr::ActionExpr)
             args = expr.args,
         )
         _visit_args!(resolver, expr.args)
+    elseif expr isa ActionRecognitionCheckpointExpr ||
+           expr isa ActionRecognizeOnceExpr ||
+           expr isa ActionRecognitionCommitExpr ||
+           expr isa ActionRecognitionRollbackExpr
+        # Grammar-owned recognition intrinsics are dedicated ActionIR nodes,
+        # not entries in the ordinary callable-helper registry.
+        return nothing
     elseif expr isa ActionFluentChainExpr
         _visit_expr!(resolver, expr.receiver)
         for call in expr.calls

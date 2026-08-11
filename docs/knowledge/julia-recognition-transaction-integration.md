@@ -1,0 +1,58 @@
+---
+id: julia-recognition-transaction-integration
+title: Julia recognition transactions are integrated privately but not admitted
+answers:
+  - "where are Julia recognition transactions integrated"
+  - "which Julia nodes represent recognition transactions"
+  - "how does Julia preserve a false recognition payload"
+  - "how does Julia bind recognition transactions to cursor boundary and marks"
+  - "which Julia recognition transaction carriers pass"
+  - "does emitted Julia source execute recognition transactions"
+  - "are Julia recognition transactions admitted or public"
+  - "why does Julia recognition rollout remain red after integration"
+date: 2026-08-11
+status: current private integrated boundary; ordinary and canonical admission pending
+tags: [julia, recognition, transaction, ActionIR, effects, progress, generated-source, private, FUTURE-PARITY-BACKLOG]
+evidence: "FUTURE-PARITY-BACKLOG.14.3.5.2 adds ActionRecognitionCheckpointExpr, ActionRecognizeOnceExpr, ActionRecognitionCommitExpr, and ActionRecognitionRollbackExpr with exact static normalization after ordinary argument parsing. recognize_once retains only the token slot and static child-rule label, so call(Rule) never enters ordinary helper dispatch. RecognitionTransaction implements the neutral six-graph recursive effect fixed point and eight-case cursor-progress policy. Interpreter enters one private frame per rule invocation and synchronizes the existing UTF-8 code-unit cursor, anonymous boundary, and isolated same-label mark bucket through the non-exported authority. Native, reconstructed, generated-plan, and independently loaded emitted-module execution preserve a successful false payload. The unchanged dormant integration consumer passes 203/203 and authority remains 155/155; ordinary/canonical discovery omit it, the namespace is unexported, neutral remains 132/246/43 at rollout 4/9, and admission belongs only to FUTURE-PARITY-BACKLOG.14.3.5.3. Definitive signoff passes eight doctrines, CLI 66x2, RAM 65%, and Phase 0 1,031/1,031 in 731 seconds through the exact local-CI success marker."
+reverify: "LINKEDSPEC_JULIA_RECOGNITION_TRANSACTION_RED_MODE=integration bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/recognition_transaction_contract_test.jl\")' && ! rg -n 'recognition_transaction_contract_test' julia/test/runtests.jl && ! rg -n 'julia/test/recognition_transaction_contract_test[.]jl' tools/run_ci_local.sh"
+---
+
+# Private Julia recognition-transaction integration
+
+The Julia action parser replaces only the four exact static forms with
+dedicated nodes. The attempt node stores an opaque token-slot name and a static
+child-rule label; its `call(Rule)` operand is structure, not an eager callable
+helper. Contract resolution and callable-codeblock normalization therefore do
+not add these intrinsics to the ordinary 246-name call inventory.
+
+The private transaction authority evaluates the neutral effect graphs to a
+fixed point, including direct and mutual recursion, and rejects the closed
+forbidden vocabulary. Progress is separate: repetition and recursive-cycle
+edges require UTF-8 code-unit cursor advance, while one-shot zero-width
+recognition remains valid. Binding, mark, or transaction changes never count as
+progress.
+
+Each runtime rule invocation owns one private authority frame. The adapter
+copies the live code-unit cursor, anonymous capture boundary, and a fresh
+same-label mark bucket into transaction state, then restores the caller's mark
+bucket at exit. Attempt presence is independent of payload truthiness, so a
+recognized `false` survives commit.
+
+Native and reconstructed specs compile the same action source. Generated plans
+already invoke the effective runtime, and emitted modules reconstruct and
+compile the same spec before invoking that plan. The unchanged dormant consumer
+therefore proves all four carriers at 203/203 without an emitter-specific fork.
+
+This remains an internal implementation boundary. The module is unexported,
+ordinary Julia and canonical CI omit the final-path consumer, and rollout stays
+4/9. Only admission leaf `.14.3.5.3` may register the consumer and promote Julia.
+The complete canonical gate also passed all eight doctrines, CLI 66x2, the 65%
+RAM guard, and Phase 0 at 1,031/1,031 in 731 seconds.
+
+## Links
+
+- Neutral contract: [[recognition-transaction-neutral-contract]].
+- Dormant boundary: [[julia-recognition-transaction-dormant-red]].
+- Private authority: [[julia-recognition-transaction-private-authority]].
+- Dart precedent: [[dart-recognition-transaction-dormant-red]].
+- Owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.3.5.2`; next owner `.14.3.5.3`.

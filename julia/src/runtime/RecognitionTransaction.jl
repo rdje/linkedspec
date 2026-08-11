@@ -10,8 +10,39 @@ const _CROSS_INVOCATION_CODE = "recognition_cross_invocation"
 const _CROSS_SOURCE_CODE = "recognition_cross_source"
 const _ATTEMPT_COUNT_CODE = "recognition_attempt_count"
 const _TERMINAL_REQUIRED_CODE = "recognition_terminal_required"
+const _EFFECT_FORBIDDEN_CODE = "recognition_effect_forbidden"
+const _UNKNOWN_EFFECT_CODE = "recognition_unknown_effect"
+const _ZERO_PROGRESS_REPETITION_CODE = "recognition_zero_progress_repetition"
+const _ZERO_PROGRESS_RECURSIVE_CYCLE_CODE =
+    "recognition_zero_progress_recursive_cycle"
 const _MARK_GENERATION_INVALID_CODE = "recognition_mark_generation_invalid"
 const _NEXT_AUTHORITY_ID = Base.Threads.Atomic{UInt64}(0)
+
+const _ALLOWED_EFFECTS = Set{String}([
+    "pure_value",
+    "source_read",
+    "structured_control",
+    "rule_recognition",
+    "transaction_state",
+    "cursor_advance",
+    "capture_boundary_write",
+    "invocation_mark_write",
+    "staged_return",
+])
+
+const _REJECTED_EFFECTS = Set{String}([
+    "binding_write",
+    "aggregate_write",
+    "ast_or_object_write",
+    "compatibility_cursor_control",
+    "output",
+    "authored_diagnostic",
+    "exit_or_unbounded_control",
+    "dynamic_callable",
+    "parser_registry_or_staged_dispatch",
+    "external_or_host",
+    "unknown_or_raw",
+])
 
 """Detached cursor, anonymous-boundary, and invocation-local mark state."""
 struct RecognitionFrameState
@@ -289,6 +320,11 @@ function frame_state(authority::RecognitionTransactionAuthority, frame)
     return _copy_state(_frame_for_authority(authority, frame).frame_state)
 end
 
+state_cursor(state::RecognitionFrameState) = state._cursor
+state_boundary(state::RecognitionFrameState) = state._boundary
+state_marks(state::RecognitionFrameState) =
+    Dict{String,Int}(mark.first => mark.second for mark in state._marks)
+
 """Synchronize one live frame from the backend's native registers."""
 function set_frame_state!(
     authority::RecognitionTransactionAuthority,
@@ -297,6 +333,22 @@ function set_frame_state!(
 )
     _frame_for_authority(authority, frame).frame_state = _copy_state(state)
     return nothing
+end
+
+"""Report that a dedicated transaction node did not resolve its token slot."""
+function reject_missing_token(
+    authority::RecognitionTransactionAuthority,
+    frame,
+    origin::AbstractString,
+)
+    state = _frame_for_authority(authority, frame)
+    throw(
+        _error(
+            _TOKEN_EXPECTED_CODE,
+            "rule" => state.rule,
+            "origin" => String(origin),
+        ),
+    )
 end
 
 """Write one invocation-local named mark."""
@@ -563,6 +615,132 @@ function discard_token!(authority::RecognitionTransactionAuthority, frame, token
     token_state = _token_for_operation(authority, frame_state, token, "discard")
     _restore_and_invalidate!(token_state)
     return nothing
+end
+
+function _effect_error(code::String, rule::String, effect::String)
+    return _error(
+        code,
+        "rule" => rule,
+        "origin" => "$rule:recognize_once",
+        "effect" => effect,
+    )
+end
+
+"""Classify one neutral recognition-effect graph by recursive fixed point."""
+function classify_effects(
+    ::RecognitionTransactionAuthority,
+    graph::AbstractDict,
+)
+    entry = get(graph, "entry", "<entry>")
+    entry_name = entry isa AbstractString ? String(entry) : "<entry>"
+    raw_rules = get(graph, "rules", nothing)
+    raw_rules isa AbstractDict ||
+        throw(_effect_error(_UNKNOWN_EFFECT_CODE, entry_name, "unknown_or_raw"))
+
+    effects = Dict{String,Set{String}}()
+    calls = Dict{String,Vector{String}}()
+    for (raw_rule, raw_row) in pairs(raw_rules)
+        raw_rule isa AbstractString ||
+            throw(_effect_error(_UNKNOWN_EFFECT_CODE, entry_name, "unknown_or_raw"))
+        rule = String(raw_rule)
+        raw_row isa AbstractDict ||
+            throw(_effect_error(_UNKNOWN_EFFECT_CODE, rule, "unknown_or_raw"))
+        raw_base = get(raw_row, "base", nothing)
+        raw_calls = get(raw_row, "calls", nothing)
+        if !(raw_base isa AbstractVector) || !(raw_calls isa AbstractVector)
+            throw(_effect_error(_UNKNOWN_EFFECT_CODE, rule, "unknown_or_raw"))
+        end
+
+        rule_effects = Set{String}()
+        for raw_effect in raw_base
+            effect = raw_effect isa AbstractString ? String(raw_effect) : "unknown_or_raw"
+            if !(effect in _ALLOWED_EFFECTS) && !(effect in _REJECTED_EFFECTS)
+                throw(_effect_error(_UNKNOWN_EFFECT_CODE, rule, effect))
+            end
+            push!(rule_effects, effect)
+        end
+        effects[rule] = rule_effects
+        calls[rule] = String[
+            raw_callee isa AbstractString ? String(raw_callee) : "<dynamic>"
+            for raw_callee in raw_calls
+        ]
+    end
+
+    changed = true
+    while changed
+        changed = false
+        for (rule, callees) in pairs(calls)
+            target = effects[rule]
+            before = length(target)
+            for callee in callees
+                union!(target, get(effects, callee, Set(["unknown_or_raw"])))
+            end
+            changed |= length(target) != before
+        end
+    end
+
+    entry_effects = get(effects, entry_name, nothing)
+    entry_effects === nothing &&
+        throw(_effect_error(_UNKNOWN_EFFECT_CODE, entry_name, "unknown_or_raw"))
+    forbidden = sort!(collect(intersect(entry_effects, _REJECTED_EFFECTS)))
+    if !isempty(forbidden)
+        effect = first(forbidden)
+        code = effect == "unknown_or_raw" ? _UNKNOWN_EFFECT_CODE : _EFFECT_FORBIDDEN_CODE
+        throw(_effect_error(code, entry_name, effect))
+    end
+    return nothing
+end
+
+function _progress_offset(value)
+    if !(value isa Integer) || value isa Bool
+        return 0
+    end
+    return try
+        Int(value)
+    catch
+        0
+    end
+end
+
+"""Enforce cursor-only progress for accepted repetition and recursion edges."""
+function validate_progress(
+    ::RecognitionTransactionAuthority,
+    fixture::AbstractDict,
+)
+    context_value = get(fixture, "context", "unknown")
+    context = context_value isa AbstractString ? String(context_value) : "unknown"
+    start_value = get(fixture, "start", 0)
+    end_value = get(fixture, "end", 0)
+    start_offset = _progress_offset(start_value)
+    end_offset = _progress_offset(end_value)
+    if end_offset > start_offset || context == "one_shot"
+        return nothing
+    end
+
+    rule_value = get(fixture, "id", "<rule>")
+    rule = rule_value isa AbstractString ? String(rule_value) : "<rule>"
+    recursive = context != "accepted_repetition_iteration"
+    if recursive
+        throw(
+            _error(
+                _ZERO_PROGRESS_RECURSIVE_CYCLE_CODE,
+                "rule" => rule,
+                "origin" => "$rule:recognize_once",
+                "cycle" => context,
+                "start_offset" => start_offset,
+                "end_offset" => end_offset,
+            ),
+        )
+    end
+    throw(
+        _error(
+            _ZERO_PROGRESS_REPETITION_CODE,
+            "rule" => rule,
+            "origin" => "$rule:recognize_once",
+            "start_offset" => start_offset,
+            "end_offset" => end_offset,
+        ),
+    )
 end
 
 """Leave the most recently entered invocation."""

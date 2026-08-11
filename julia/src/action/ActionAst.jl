@@ -76,6 +76,74 @@ function ActionCallExpr(;
     )
 end
 
+"""Create one rule-local opaque recognition-transaction token."""
+struct ActionRecognitionCheckpointExpr <: ActionExpr
+    kind::String
+    source::String
+    source_span::ActionSourceSpan
+end
+
+function ActionRecognitionCheckpointExpr(; source, source_span)
+    return ActionRecognitionCheckpointExpr(
+        "recognition_checkpoint",
+        String(source),
+        source_span,
+    )
+end
+
+"""Perform one non-eager recognition attempt against a static child rule."""
+struct ActionRecognizeOnceExpr <: ActionExpr
+    kind::String
+    source::String
+    source_span::ActionSourceSpan
+    token::String
+    rule::String
+end
+
+function ActionRecognizeOnceExpr(; source, source_span, token, rule)
+    return ActionRecognizeOnceExpr(
+        "recognize_once",
+        String(source),
+        source_span,
+        String(token),
+        String(rule),
+    )
+end
+
+"""Commit one attempted token and return its staged payload."""
+struct ActionRecognitionCommitExpr <: ActionExpr
+    kind::String
+    source::String
+    source_span::ActionSourceSpan
+    token::String
+end
+
+function ActionRecognitionCommitExpr(; source, source_span, token)
+    return ActionRecognitionCommitExpr(
+        "recognition_commit",
+        String(source),
+        source_span,
+        String(token),
+    )
+end
+
+"""Restore one attempted token's checkpoint and invalidate the token."""
+struct ActionRecognitionRollbackExpr <: ActionExpr
+    kind::String
+    source::String
+    source_span::ActionSourceSpan
+    token::String
+end
+
+function ActionRecognitionRollbackExpr(; source, source_span, token)
+    return ActionRecognitionRollbackExpr(
+        "recognition_rollback",
+        String(source),
+        source_span,
+        String(token),
+    )
+end
+
 struct ActionVariableExpr <: ActionExpr
     kind::String
     source::String
@@ -753,6 +821,11 @@ function find_removed_aggregate_selector(expr::ActionExpr)
             end
         end
         return _find_removed_aggregate_selector_in_args(expr.args)
+    elseif expr isa ActionRecognitionCheckpointExpr ||
+           expr isa ActionRecognizeOnceExpr ||
+           expr isa ActionRecognitionCommitExpr ||
+           expr isa ActionRecognitionRollbackExpr
+        return nothing
     elseif expr isa ActionFluentChainExpr
         selector = find_removed_aggregate_selector(expr.receiver)
         if selector !== nothing
@@ -881,6 +954,27 @@ function to_json(expr::ActionCallExpr)
     if expr.trailing_block_source_span !== nothing
         result["trailing_block_source_span"] = to_json(expr.trailing_block_source_span)
     end
+    return result
+end
+
+to_json(expr::ActionRecognitionCheckpointExpr) = _action_base_json(expr)
+
+function to_json(expr::ActionRecognizeOnceExpr)
+    result = _action_base_json(expr)
+    result["token"] = expr.token
+    result["rule"] = expr.rule
+    return result
+end
+
+function to_json(expr::ActionRecognitionCommitExpr)
+    result = _action_base_json(expr)
+    result["token"] = expr.token
+    return result
+end
+
+function to_json(expr::ActionRecognitionRollbackExpr)
+    result = _action_base_json(expr)
+    result["token"] = expr.token
     return result
 end
 

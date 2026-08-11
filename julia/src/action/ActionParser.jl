@@ -686,13 +686,89 @@ function _action_parse_call(text::String, start::Int)
     if parsed === nothing
         return nothing
     end
+    args = _action_parse_arguments(parsed.payload, start + parsed.payload_start)
+    transaction = _action_recognition_transaction_expr(
+        parsed.name,
+        args,
+        text,
+        ActionSourceSpan(start, start + _action_len(text)),
+    )
+    if transaction !== nothing
+        return transaction
+    end
     return ActionCallExpr(
         source = text,
         source_span = ActionSourceSpan(start, start + _action_len(text)),
         name = parsed.name,
         source_method = parsed.source_method,
-        args = _action_parse_arguments(parsed.payload, start + parsed.payload_start),
+        args = args,
     )
+end
+
+function _action_recognition_bare_name(argument)
+    if argument isa ActionPositionalArgument && argument.value isa ActionVariableExpr
+        return argument.value.name
+    end
+    return nothing
+end
+
+function _action_recognition_transaction_expr(
+    name::String,
+    args::Vector{ActionArgument},
+    source::String,
+    source_span::ActionSourceSpan,
+)
+    function invalid()
+        error(
+            "LINKEDSPEC_RECOGNITION_TRANSACTION_ERROR:" *
+            "recognition_static_form_required:$name",
+        )
+    end
+
+    if name == "recognition_checkpoint"
+        isempty(args) || invalid()
+        return ActionRecognitionCheckpointExpr(
+            source = source,
+            source_span = source_span,
+        )
+    elseif name == "recognize_once"
+        length(args) == 2 || invalid()
+        token = _action_recognition_bare_name(first(args))
+        operand = last(args)
+        if token === nothing || !(operand isa ActionPositionalArgument) ||
+                !(operand.value isa ActionCallExpr)
+            invalid()
+        end
+        call = operand.value
+        if call.name != "call" || call.source_method != "call" || length(call.args) != 1
+            invalid()
+        end
+        rule = _action_recognition_bare_name(only(call.args))
+        rule === nothing && invalid()
+        return ActionRecognizeOnceExpr(
+            source = source,
+            source_span = source_span,
+            token = token,
+            rule = rule,
+        )
+    elseif name == "recognition_commit" || name == "recognition_rollback"
+        length(args) == 1 || invalid()
+        token = _action_recognition_bare_name(only(args))
+        token === nothing && invalid()
+        if name == "recognition_commit"
+            return ActionRecognitionCommitExpr(
+                source = source,
+                source_span = source_span,
+                token = token,
+            )
+        end
+        return ActionRecognitionRollbackExpr(
+            source = source,
+            source_span = source_span,
+            token = token,
+        )
+    end
+    return nothing
 end
 
 function _action_parse_variable_or_access(text::String, start::Int)

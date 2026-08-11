@@ -148,6 +148,11 @@ function _normalize_final_codeblock_expr!(expr::ActionExpr, registry::UserFuncti
             expr.trailing_block_arg,
             registry,
         )
+    elseif expr isa ActionRecognitionCheckpointExpr ||
+           expr isa ActionRecognizeOnceExpr ||
+           expr isa ActionRecognitionCommitExpr ||
+           expr isa ActionRecognitionRollbackExpr
+        return nothing
     elseif expr isa ActionFluentChainExpr
         _normalize_final_codeblock_expr!(expr.receiver, registry)
         for call in expr.calls

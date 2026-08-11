@@ -2,24 +2,26 @@
 
 ## Current Activity
 
-- Private Julia authority leaf `FUTURE-PARITY-BACKLOG.14.3.5.1` is complete: its non-exported module owns opaque
-  frames/tokens, copied state, monotonic generations, falsey-safe staging, and restore-before-invalidate lifecycle.
-- Explicit authority passes 155/155. Integration remains RED at zero dedicated nodes and absent effect/progress/
-  runtime routes; discovery, authored availability, recognition 132/246/43, and rollout 4/9 remain unchanged.
-- Signoff passes storage 19/5, CLI 66x2, RAM 68%, and Phase 0 1,031/1,031 in 747 seconds.
+- Private Julia integration leaf `FUTURE-PARITY-BACKLOG.14.3.5.2` now owns four dedicated non-eager nodes, recursive
+  effect closure, cursor-only progress, and one authority-backed invocation/runtime adapter.
+- The unchanged integration consumer passes 203/203 across native, reconstructed, generated-plan, and emitted
+  modules; authority stays 155/155 and privacy/discovery preserve recognition 132/246/43 at rollout 4/9.
+- Full Julia, storage 19/5, CLI/corpus 105, book 79/14,404 KiB, eight doctrines, CLI 66x2, RAM 65%, and canonical
+  Phase 0 1,031/1,031 in 731 seconds pass through the exact local-CI success marker.
 
 ## Latest Completed Slice
 
-- Julia RED `.14.3.5.0` landed cleanly at `8db3aeee` as atomic 197/300 with no push.
-- Private authority `.14.3.5.1` is signoff-complete and lands as atomic 198/300 in this commit.
+- Private authority `.14.3.5.1` landed cleanly at `923285aa` as atomic 198/300 with no push.
+- Julia integration `.14.3.5.2` is signoff-complete and ready to land as atomic 199/300.
 
 ## Next Action
 
-- Verify clean atomic 198, then activate Julia integration `.14.3.5.2` task-tree-first.
+- Land atomic 199 cleanly, verify its durable handoff, then activate Julia admission `.14.3.5.3` task-tree-first.
 
 ## Recent Completions
 
-- `2026-08-11` — `.14.3.5.1` added and signed off the private Julia transaction authority for atomic 198/300.
+- `2026-08-11` — `.14.3.5.2` completed private Julia integration signoff for atomic 199/300; Phase 0 passed 1,031/1,031.
+- `2026-08-11` — `923285aa` landed the private Julia transaction authority as atomic 198/300.
 - `2026-08-11` — `.14.3.5.0` froze and signed off the dormant Julia transaction boundary for atomic 197/300.
 - `2026-08-11` — `38318827` landed exact Dart transaction admission as atomic 196/300.
 - `2026-08-11` — `.14.3.4.3` completed exact Dart transaction admission signoff for atomic 196/300.
@@ -34,7 +36,6 @@
 - `2026-08-10` — `fd8a1934` landed private Rust authority as atomic 189/300.
 - `2026-08-10` — `cb9420b1` froze and signed off the dormant Rust transaction RED as atomic 188/300.
 - `2026-08-10` — `.14.3.2.3` admitted Perl recognition transactions for atomic 187/300.
-- `2026-08-10` — `.14.3.2.2` integrated Perl recognition transactions for atomic 186/300.
 
 ## History
 
