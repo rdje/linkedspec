@@ -18,8 +18,39 @@ local CROSS_INVOCATION_CODE = "recognition_cross_invocation"
 local CROSS_SOURCE_CODE = "recognition_cross_source"
 local ATTEMPT_COUNT_CODE = "recognition_attempt_count"
 local TERMINAL_REQUIRED_CODE = "recognition_terminal_required"
+local EFFECT_FORBIDDEN_CODE = "recognition_effect_forbidden"
+local UNKNOWN_EFFECT_CODE = "recognition_unknown_effect"
+local ZERO_PROGRESS_REPETITION_CODE = "recognition_zero_progress_repetition"
+local ZERO_PROGRESS_RECURSIVE_CYCLE_CODE =
+  "recognition_zero_progress_recursive_cycle"
 local MARK_GENERATION_INVALID_CODE = "recognition_mark_generation_invalid"
 local MAX_EXACT_INTEGER = 9007199254740991
+
+local ALLOWED_EFFECTS = {
+  pure_value = true,
+  source_read = true,
+  structured_control = true,
+  rule_recognition = true,
+  transaction_state = true,
+  cursor_advance = true,
+  capture_boundary_write = true,
+  invocation_mark_write = true,
+  staged_return = true,
+}
+
+local REJECTED_EFFECTS = {
+  binding_write = true,
+  aggregate_write = true,
+  ast_or_object_write = true,
+  compatibility_cursor_control = true,
+  output = true,
+  authored_diagnostic = true,
+  exit_or_unbounded_control = true,
+  dynamic_callable = true,
+  parser_registry_or_staged_dispatch = true,
+  external_or_host = true,
+  unknown_or_raw = true,
+}
 
 local next_authority_id = 0
 local private_state = setmetatable({}, { __mode = "k" })
@@ -278,6 +309,18 @@ function M.frame_state(first, second)
   })
 end
 
+function M.state_cursor(state_value)
+  return state_of(state_value, "RecognitionFrameState").cursor
+end
+
+function M.state_boundary(state_value)
+  return state_of(state_value, "RecognitionFrameState").boundary
+end
+
+function M.state_marks(state_value)
+  return copied_harray(state_of(state_value, "RecognitionFrameState").marks)
+end
+
 function M.authority(options)
   options = options_table(options, "authority")
   if source_location.node_type(options.source_authority) ~= "SourceAuthority" then
@@ -335,6 +378,16 @@ function M.set_frame_state(authority_value, frame_value, state_value)
   local authority = authority_state(authority_value)
   local frame = frame_for_authority(authority, frame_value)
   frame.frame_state = copy_frame_state(state_of(state_value, "RecognitionFrameState"))
+end
+
+function M.reject_missing_token(authority_value, frame_value, origin)
+  local authority = authority_state(authority_value)
+  local frame = frame_for_authority(authority, frame_value)
+  if type(origin) ~= "string" then fail("reject_missing_token origin must be a string") end
+  raise_transaction_error(TOKEN_EXPECTED_CODE, {
+    rule = frame.rule,
+    origin = origin,
+  })
 end
 
 function M.write_mark(authority_value, frame_value, name, offset)
@@ -460,6 +513,114 @@ function M.discard_token(authority_value, frame_value, token_value)
   local frame = frame_for_authority(authority, frame_value)
   local token = token_for_operation(authority, frame, token_value, "discard")
   restore_and_invalidate(token)
+end
+
+local function effect_error(code, rule, effect)
+  raise_transaction_error(code, {
+    rule = rule,
+    origin = rule .. ":recognize_once",
+    effect = effect,
+  })
+end
+
+function M.classify_effects(authority_value, graph)
+  authority_state(authority_value)
+  local entry = type(graph) == "table" and graph.entry or nil
+  if type(entry) ~= "string" then entry = "<entry>" end
+  local raw_rules = type(graph) == "table" and graph.rules or nil
+  if json.kind(raw_rules) ~= "harray" then
+    effect_error(UNKNOWN_EFFECT_CODE, entry, "unknown_or_raw")
+  end
+
+  local effects = {}
+  local calls = {}
+  for raw_rule, row in pairs(raw_rules) do
+    if type(raw_rule) ~= "string" or json.kind(row) ~= "harray" or
+        json.kind(row.base) ~= "array" or json.kind(row.calls) ~= "array" then
+      effect_error(UNKNOWN_EFFECT_CODE, type(raw_rule) == "string" and raw_rule or entry, "unknown_or_raw")
+    end
+    local rule_effects = {}
+    for _, raw_effect in ipairs(row.base) do
+      local effect = type(raw_effect) == "string" and raw_effect or "unknown_or_raw"
+      if not ALLOWED_EFFECTS[effect] and not REJECTED_EFFECTS[effect] then
+        effect_error(UNKNOWN_EFFECT_CODE, raw_rule, effect)
+      end
+      rule_effects[effect] = true
+    end
+    effects[raw_rule] = rule_effects
+    local rule_calls = {}
+    for index, raw_callee in ipairs(row.calls) do
+      rule_calls[index] = type(raw_callee) == "string" and raw_callee or "<dynamic>"
+    end
+    calls[raw_rule] = rule_calls
+  end
+
+  local changed = true
+  while changed do
+    changed = false
+    for rule, callees in pairs(calls) do
+      local target = effects[rule]
+      for _, callee in ipairs(callees) do
+        local inherited = effects[callee] or { unknown_or_raw = true }
+        for effect in pairs(inherited) do
+          if not target[effect] then
+            target[effect] = true
+            changed = true
+          end
+        end
+      end
+    end
+  end
+
+  local entry_effects = effects[entry]
+  if entry_effects == nil then
+    effect_error(UNKNOWN_EFFECT_CODE, entry, "unknown_or_raw")
+  end
+  local forbidden = {}
+  for effect in pairs(entry_effects) do
+    if REJECTED_EFFECTS[effect] then forbidden[#forbidden + 1] = effect end
+  end
+  table.sort(forbidden)
+  if #forbidden > 0 then
+    local effect = forbidden[1]
+    effect_error(
+      effect == "unknown_or_raw" and UNKNOWN_EFFECT_CODE or EFFECT_FORBIDDEN_CODE,
+      entry,
+      effect
+    )
+  end
+end
+
+local function progress_offset(value)
+  if not is_integer(value) then return 0 end
+  return value
+end
+
+function M.validate_progress(authority_value, fixture)
+  authority_state(authority_value)
+  local context = type(fixture) == "table" and fixture.context or nil
+  if type(context) ~= "string" then context = "unknown" end
+  local start_offset = progress_offset(type(fixture) == "table" and fixture.start or nil)
+  local end_offset = progress_offset(type(fixture) == "table" and fixture["end"] or nil)
+  if end_offset > start_offset or context == "one_shot" then return end
+
+  local rule = type(fixture) == "table" and fixture.id or nil
+  if type(rule) ~= "string" then rule = "<rule>" end
+  if context ~= "accepted_repetition_iteration" then
+    raise_transaction_error(ZERO_PROGRESS_RECURSIVE_CYCLE_CODE, {
+      rule = rule,
+      origin = rule .. ":recognize_once",
+      cycle = context,
+      start_offset = start_offset,
+      end_offset = end_offset,
+    })
+  end
+  raise_transaction_error(ZERO_PROGRESS_REPETITION_CODE, {
+    rule = rule,
+    origin = rule .. ":recognize_once",
+    start_offset = start_offset,
+    end_offset = end_offset,
+  })
 end
 
 function M.leave_invocation(authority_value, frame_value)

@@ -4917,41 +4917,39 @@
     RAM 69%, and canonical Phase 0 1,031/1,031 in 738 sec pass through the exact success marker; Lua/later remain RED.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6`
-  Status: `active` (2026-08-11; private authority `.1` signoff-complete for atomic 202; integration `.2` follows
-    only after landing cleanly; no push)
+  Status: `active` (2026-08-11; integration `.2` signoff-complete for atomic 203; admission `.3` pending; no push)
   Goal: Implement one shared Lua transaction/progress core and independently admit it on PUC Lua and LuaJIT.
   Depends on: `.14.3.5`
   Children: `.14.3.6.0-.14.3.6.3`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6.0`
   Status: `complete` (2026-08-11; clean atomic 201/300 `6a8ec091`; no push)
-  Goal: Freeze one dormant shared Lua RED source and exact independent PUC Lua/LuaJIT expectations across native,
-    reconstructed, generated-plan, and emitted carriers.
+  Goal: Freeze one shared dual-ABI dormant final-path RED.
   Depends on: `.14.3.5.3`
   Commit: `FUTURE-PARITY-BACKLOG.14.3.6.0 - freeze Lua transaction RED`
-  Evidence: four dual-ABI/mode REDs stopped at the missing private module; 12 mutations preserved neutral 132/246/44
-    at rollout 5/9. Lua 177x2, CLI 66x2, corpus 105, storage 18/3, book 79/14,412 KiB, all doctrines, RAM 60%, and
-    canonical Phase 0 1,031/1,031 in 740 sec passed; `6a8ec091` has valid maps/pointer and zero residue.
+  Evidence: four modes stopped at missing authority; 12 mutations, Lua 177x2, CLI 66x2, corpus 105, storage 18/3,
+    book 79/14,412 KiB, all doctrines, RAM 60%, and Phase 0 1,031/1,031 in 740 sec passed; clean `6a8ec091`.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6.1`
-  Status: `complete` (2026-08-11; definitive signoff complete and commit-ready as atomic 202/300 from clean
-    activation `6a8ec091`; no push)
-  Goal: Add one shared private Lua invocation-frame, mark-generation, opaque-token, snapshot, and invalidation core
-    without current behavior or ABI-specific forks.
+  Status: `complete` (2026-08-11; clean atomic 202/300 `d87dcac3`; no push)
+  Goal: Add one shared private Lua invocation/mark/snapshot/linear-token authority.
   Depends on: `.14.3.6.0`
-  Acceptance: Implement one Lua-5.1-compatible package-private authority shared by PUC Lua and LuaJIT; make the
-    frozen authority-mode consumer pass while integration remains RED at its exact next seam; preserve current
-    behavior, exports, discovery, neutral/public ledgers, ABI parity, project storage, and complete signoff.
   Commit: `FUTURE-PARITY-BACKLOG.14.3.6.1 - add private Lua transaction authority`
-  Evidence: shared weak-store authority passes 187/187 per ABI; integration exits only at missing dedicated ActionIR
-    nodes; 22 authority + 12 dormant mutations pass; ordinary Lua 177x2, CLI 66x2, corpus 105, storage 18/3, book
-    79/14,412 KiB, KM 816/6,772, eight doctrines, RAM 82%, and Phase 0 1,031/1,031 in 753 sec pass exactly.
+  Evidence: authority 187x2, 22+12 mutations, Lua 177x2, CLI 66x2, corpus 105, storage 18/3, book 79/14,412 KiB,
+    KM 816/6,772, eight doctrines, RAM 82%, and Phase 0 1,031/1,031 in 753 sec passed; clean `d87dcac3`.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6.2`
-  Status: `pending`
+  Status: `complete` (2026-08-11; 243x2, eight doctrines, RAM 65%, Phase 0 1,031/1,031 in 736s; atomic 203 pending)
   Goal: Integrate shared syntax/runtime/effect/progress parity across native, reconstructed, generated-plan, and
     emitted carriers on both Lua ABIs.
   Depends on: `.14.3.6.1`
+  Acceptance: Retrieve/probe current Lua scanner/ActionIR/compiler/interpreter/emitter, private authority, neutral
+    contract, and admitted backend precedents; add four dedicated non-eager nodes, recursive effect and cursor-only
+    progress policy, and one authority-backed adapter across live/reconstructed/generated-plan/emitted execution;
+    keep facade/discovery/rollout/current behavior unchanged; prove both ABIs, Lua gate, book/KM/doctrines/canonical.
+  Commit: `FUTURE-PARITY-BACKLOG.14.3.6.2 - integrate Lua recognition transactions`
+  Checklist: [x] clean activation; [x] retrieve/probe seams; [x] ActionIR/policy; [x] runtime/carriers; [x] dual-ABI
+    integration GREEN; [x] current/no-registration no-drift; [x] book/live/KM; [x] canonical; [ ] clean atomic 203.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6.3`
   Status: `pending`

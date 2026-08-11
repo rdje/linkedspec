@@ -4,13 +4,13 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `6a8ec091` — clean shared-Lua-RED base for private authority atomic 202/300; no push.
-- latest_completed_leaf: private shared Lua authority `.14.3.6.1` completes with this atomic 202/300 commit.
-- active_work_unit: none after this commit; Lua transaction integration `.14.3.6.2` is next.
-- next_action: prove atomic 202 clean, then activate `.14.3.6.2` task-tree-first from that durable boundary.
-- in_flight_uncommitted: none after this commit.
-- blockers: none. Authority passes 187/187 per ABI; integration stops at missing dedicated nodes; book 79/14,412
-  KiB, KM 816/6,772, all doctrines, CLI 66x2, RAM 82%, and Phase 0 1,031/1,031 in 753 sec pass exactly.
+- activation_commit: `d87dcac3` — clean private-authority base for Lua integration atomic 203/300; no push.
+- latest_completed_leaf: Lua integration `.14.3.6.2` completes with atomic 203/300; private authority base is `d87dcac3`.
+- active_work_unit: none after atomic 203 lands; Lua admission `.14.3.6.3` is the next task-tree frontier.
+- next_action: prove atomic 203 clean, then activate `.14.3.6.3` task-tree-first from that clean commit.
+- in_flight_uncommitted: none after atomic 203 lands.
+- blockers: none. Authority is 187/187 and integration 243/243 per ABI; Lua 177x2, CLI 66x2, corpus 105,
+  storage 18/3, book 79/14,412 KiB, KM 817/6,781, eight doctrines, containment, RAM 65%, and Phase 0 1,031/1,031 in 736 seconds pass.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes, and 11 topology mutations advance governance to 53. Public authored values remain future; recognition
@@ -29,8 +29,8 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - lua_audit_fact: each runtime input owns one copied private source authority; all exact 92+7 helper routes construct
   typed positions/spans for validation, coordinates, slicing, materialization, marks, capture boundaries, and cursor
   control while retaining zero-based UTF-8-byte registers and results. One shared 240-assertion consumer now runs
-  once per ABI ordinarily/canonically. A second private transaction authority passes 187/187 per ABI; its dormant
-  integration consumer stops only at missing dedicated ActionIR nodes and remains undiscovered/unexported.
+  once per ABI ordinarily/canonically. Private transactions pass authority 187/187 and integration 243/243 per ABI
+  across four nodes, effect/progress, and all carriers while remaining dormant, undiscovered, and unexported.
 - current_storage_contract: ADR `0053` keeps all project data on the repository filesystem; use routed wrappers, never OS temp/home caches.
 - current_path_contract: ADR `0052` and `REPO-ROOT-PATHS` require durable root-relative paths and runtime-derived
   absolute roots; moved/outside-CWD execution is canonical.
@@ -51,10 +51,10 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   Dart retains four private dedicated nodes, recursive effect/progress policy, and authority-backed native/
   reconstructed/generated-plan/emitted execution without facade exports. Julia has the same four private nodes,
   policy, and authority-backed carriers at 203/203; exact ordinary/canonical proof is current while the API stays private.
-  Lua now has one shared Lua-5.1-compatible invocation/mark/snapshot/token authority at 187/187 per ABI, still
-  outside facade/discovery; dedicated ActionIR/effect/progress/runtime/carriers remain `.14.3.6.2`-owned.
+  Lua now has one shared Lua-5.1 authority at 187/187 and private integrated ActionIR/effect/progress/runtime/
+  carriers at 243/243 per ABI; facade/discovery and rollout stay unchanged until admission `.14.3.6.3`.
 - current_future_direction: transaction `.14.3` remains split through neutral `.1`, backend families `.2-.6`,
   recurring `.7`, and closeout `.8`; corrective `.14.3.4.0.0` precedes Dart RED `.14.3.4.0.1`, and `.14.8` retains no-drift.
 - latest_bootstrap_read: 2026-08-11 — complete roadmap/codebase/mdBook and required continuity/tooling review.
-- pivot_guard: prove private Lua authority atomic 202 clean before integration `.14.3.6.2` activates.
-- push_policy: hard lock at 300 commits; private Lua authority is intended atomic 202/300; no push; use wrappers.
+- pivot_guard: land and prove Lua integration atomic 203 cleanly before admission `.14.3.6.3` activates.
+- push_policy: hard lock at 300 commits; Lua integration is intended atomic 203/300; no push; use wrappers.

@@ -42,6 +42,12 @@ LUA_CONSUMER_PATH = "lua/test/recognition_transaction_contract_test.lua"
 LUA_ORDINARY_PATH = "tools/run_lua_local.sh"
 LUA_FACADE_PATH = "lua/src/linkedspec/init.lua"
 LUA_AUTHORITY_PATH = "lua/src/linkedspec/recognition_transaction.lua"
+LUA_RUNTIME_ADAPTER_PATH = "lua/src/linkedspec/recognition_transaction_runtime.lua"
+LUA_ACTION_AST_PATH = "lua/src/linkedspec/action_ast.lua"
+LUA_ACTION_CONTRACTS_PATH = "lua/src/linkedspec/action_contracts.lua"
+LUA_ACTION_PARSER_PATH = "lua/src/linkedspec/action_parser.lua"
+LUA_INTERPRETER_PATH = "lua/src/linkedspec/interpreter.lua"
+LUA_SOURCE_RUNTIME_PATH = "lua/src/linkedspec/source_location_runtime.lua"
 LUA_RED_SELECTOR = (
     'local mode = os.getenv("LINKEDSPEC_LUA_RECOGNITION_TRANSACTION_RED_MODE") '
     'or "authority"'
@@ -78,6 +84,47 @@ LUA_AUTHORITY_MARKERS = (
     ("function M.to_json(value)", "detached projection"),
     ("token.payload = json.null", "explicit miss sentinel"),
     ("local payload = token.payload", "falsey commit payload"),
+)
+LUA_INTEGRATION_MARKERS = (
+    (LUA_ACTION_PARSER_PATH, 'callee.name == "recognition_checkpoint"', "checkpoint parser"),
+    (LUA_ACTION_PARSER_PATH, 'elseif callee.name == "recognize_once" then', "attempt parser"),
+    (
+        LUA_ACTION_PARSER_PATH,
+        'elseif callee.name == "recognition_commit" or callee.name == "recognition_rollback" then',
+        "terminal parser",
+    ),
+    (
+        LUA_ACTION_AST_PATH,
+        'kind == "recognition_checkpoint" or kind == "recognize_once" or',
+        "selector traversal",
+    ),
+    (
+        LUA_ACTION_CONTRACTS_PATH,
+        "Grammar-owned recognition intrinsics are dedicated ActionIR nodes",
+        "call-contract exclusion",
+    ),
+    (LUA_AUTHORITY_PATH, "function M.state_cursor(state_value)", "cursor state access"),
+    (LUA_AUTHORITY_PATH, "function M.reject_missing_token(", "missing-token rejection"),
+    (LUA_AUTHORITY_PATH, "function M.classify_effects(", "recursive effects"),
+    (LUA_AUTHORITY_PATH, "function M.validate_progress(", "cursor-only progress"),
+    (LUA_SOURCE_RUNTIME_PATH, "function M.source_authority(adapter)", "source authority adapter"),
+    (LUA_RUNTIME_ADAPTER_PATH, "function M.context(source_runtime)", "runtime context"),
+    (LUA_RUNTIME_ADAPTER_PATH, "function M.enter_invocation(ctx, rule_label)", "runtime entry"),
+    (LUA_RUNTIME_ADAPTER_PATH, "function M.leave_invocation(ctx, rule_label)", "runtime exit"),
+    (LUA_RUNTIME_ADAPTER_PATH, "function M.checkpoint(ctx, rule_label, slot)", "runtime checkpoint"),
+    (LUA_RUNTIME_ADAPTER_PATH, "function M.attempt(ctx, rule_label, slot, matched, payload)", "runtime attempt"),
+    (LUA_RUNTIME_ADAPTER_PATH, "function M.commit(ctx, rule_label, slot)", "runtime commit"),
+    (LUA_RUNTIME_ADAPTER_PATH, "function M.rollback(ctx, rule_label, slot)", "runtime rollback"),
+    (
+        LUA_INTERPRETER_PATH,
+        'recognition = require("linkedspec.recognition_transaction_runtime")',
+        "private adapter load",
+    ),
+    (
+        LUA_INTERPRETER_PATH,
+        'if kind == "recognition_checkpoint" then',
+        "dedicated runtime dispatch",
+    ),
 )
 RUST_ADMISSION_SOURCE_PATHS = [
     "rust/linkedspec-core/src/lib.rs",
@@ -385,6 +432,7 @@ DART_ADMISSION_MUTATION_COUNT = 13
 JULIA_ADMISSION_MUTATION_COUNT = 14
 LUA_DORMANT_RED_MUTATION_COUNT = 12
 LUA_AUTHORITY_MUTATION_COUNT = 22
+LUA_INTEGRATION_MUTATION_COUNT = 19
 EXPECTED_TOP_LEVEL = {
     "format",
     "contract_id",
@@ -571,11 +619,13 @@ def validate_julia_admission(ci: str, sources: dict[str, str]) -> None:
 
 
 def lua_dormant_red_sources() -> dict[str, str]:
-    return {
-        LUA_CONSUMER_PATH: read_text(ROOT / LUA_CONSUMER_PATH),
-        LUA_FACADE_PATH: read_text(ROOT / LUA_FACADE_PATH),
-        LUA_AUTHORITY_PATH: read_text(ROOT / LUA_AUTHORITY_PATH),
+    paths = {
+        LUA_CONSUMER_PATH,
+        LUA_FACADE_PATH,
+        LUA_AUTHORITY_PATH,
+        *(path for path, _, _ in LUA_INTEGRATION_MARKERS),
     }
+    return {path: read_text(ROOT / path) for path in paths}
 
 
 def validate_lua_dormant_red(
@@ -584,7 +634,13 @@ def validate_lua_dormant_red(
     sources: dict[str, str],
 ) -> None:
     require(
-        set(sources) == {LUA_CONSUMER_PATH, LUA_FACADE_PATH, LUA_AUTHORITY_PATH},
+        set(sources)
+        == {
+            LUA_CONSUMER_PATH,
+            LUA_FACADE_PATH,
+            LUA_AUTHORITY_PATH,
+            *(path for path, _, _ in LUA_INTEGRATION_MARKERS),
+        },
         "Lua dormant RED source inventory drifted",
     )
     consumer = sources[LUA_CONSUMER_PATH]
@@ -622,7 +678,8 @@ def validate_lua_dormant_red(
     )
     require(
         "recognition_transaction =" not in sources[LUA_FACADE_PATH]
-        and "M.recognition_transaction" not in sources[LUA_FACADE_PATH],
+        and "M.recognition_transaction" not in sources[LUA_FACADE_PATH]
+        and "recognition_transaction_runtime" not in sources[LUA_FACADE_PATH],
         "Lua recognition transaction authority became publicly exported",
     )
     authority = sources[LUA_AUTHORITY_PATH]
@@ -633,8 +690,13 @@ def validate_lua_dormant_red(
         )
     require(
         consumer.count(LUA_INTEGRATION_RED_DIAGNOSTIC) == 1,
-        "Lua private authority must stop integration at dedicated ActionIR nodes",
+        "Lua integrated consumer must retain its stable missing-ActionIR diagnostic",
     )
+    for path, marker, label in LUA_INTEGRATION_MARKERS:
+        require(
+            sources[path].count(marker) == 1,
+            f"Lua private transaction integration {label} missing or duplicated",
+        )
 
 
 def public_sequence_texts() -> dict[str, str]:
@@ -1913,6 +1975,29 @@ def validate_lua_authority_mutations() -> int:
     return len(mutations)
 
 
+def validate_lua_integration_mutations() -> int:
+    ci = read_text(CI_PATH)
+    ordinary = read_text(ROOT / LUA_ORDINARY_PATH)
+    sources = lua_dormant_red_sources()
+    mutations: list[tuple[str, dict[str, str]]] = []
+    for path, marker, label in LUA_INTEGRATION_MARKERS:
+        candidate = dict(sources)
+        candidate[path] = candidate[path].replace(marker, "", 1)
+        mutations.append((f"Lua integration {label} omission", candidate))
+
+    require(
+        len(mutations) == LUA_INTEGRATION_MUTATION_COUNT,
+        "Lua private integration mutation count drifted",
+    )
+    for name, candidate_sources in mutations:
+        try:
+            validate_lua_dormant_red(ci, ordinary, candidate_sources)
+        except ContractError:
+            continue
+        raise ContractError(f"Lua private integration mutation {name!r} was accepted")
+    return len(mutations)
+
+
 def main() -> int:
     try:
         document = load_contract()
@@ -1925,6 +2010,7 @@ def main() -> int:
         julia_admission_mutations = validate_julia_admission_mutations()
         lua_red_mutations = validate_lua_dormant_red_mutations()
         lua_authority_mutations = validate_lua_authority_mutations()
+        lua_integration_mutations = validate_lua_integration_mutations()
     except ContractError as exc:
         print(f"recognition-transaction-contract: ERROR: {exc}", file=sys.stderr)
         return 1
@@ -1939,7 +2025,8 @@ def main() -> int:
         f"Dart admission {dart_admission_mutations} mutations; "
         f"Julia admission {julia_admission_mutations} mutations; "
         f"Lua dormant RED {lua_red_mutations} mutations; "
-        f"Lua private authority {lua_authority_mutations} mutations)"
+        f"Lua private authority {lua_authority_mutations} mutations; "
+        f"Lua private integration {lua_integration_mutations} mutations)"
     )
     return 0
 

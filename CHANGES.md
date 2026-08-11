@@ -10,6 +10,25 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.6.2 — integrate shared Lua recognition transactions
+
+- Added four exact non-eager Lua ActionIR nodes for checkpoint, one static child attempt, commit, and rollback.
+  `recognize_once(token, call(Rule))` retains the token slot and child label without entering ordinary helper dispatch.
+- Extended the private authority with the neutral recursive effect fixed point, cursor-only progress policy, detached
+  frame accessors, and missing-token rejection while preserving its opaque weak-store state and falsey-safe payloads.
+- Added one private Lua-5.1-compatible runtime adapter shared unchanged by PUC Lua and LuaJIT. Every rule invocation
+  synchronizes the real UTF-8-byte cursor, nullable anonymous boundary, and isolated same-label mark bucket through
+  the authority; rollback/unwind restore snapshots and commit retains staged state.
+- Reused the same interpreter path for native, reconstructed AST, generated-plan, and independently loaded emitted
+  execution. The exact dormant integration consumer passes 243/243 on each ABI and retains successful `false`.
+- Kept the authority and adapter absent from the public facade and kept the consumer outside ordinary/canonical
+  discovery. Neutral 132/246/44, rollout 5/9, and all current public claims remain unchanged until admission `.3`.
+- Extended the independent checker with 19 integration mutations, separate from 22 authority, 12 dormancy, and 44
+  neutral semantic mutations. The complete Lua gate passes 177/177 per ABI, CLI 66x2, corpus 105, and storage 18/3.
+- Signoff passes the 79-file / 14,412-KiB book, Knowledge Map 817/6,781, all eight doctrines, every mandatory
+  admission, repository containment/relocation, both CLI matrices at 66/66, RAM 65%, and Phase 0 1,031/1,031 in
+  736 seconds before exact `[ci] local CI gate passed`.
+
 ## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.6.1 — add private shared Lua transaction authority
 
 - Added one package-private Lua-5.1-compatible transaction module shared unchanged by PUC Lua and LuaJIT. Its

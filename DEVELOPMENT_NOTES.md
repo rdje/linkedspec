@@ -10,6 +10,30 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.6.2` — shared Lua recognition-transaction integration): parse the four
+  exact authored forms after ordinary argument parsing, then replace them with dedicated nodes. In particular,
+  retain only the token slot and static child label for `recognize_once`; never evaluate its `call(Rule)` operand as
+  a generic helper and never add the four grammar-owned intrinsics to the 246-name call inventory.
+- Keep effect closure and progress separate. Effects propagate through direct and mutual recursion to a fixed point
+  over the neutral 9-allowed/11-rejected vocabulary; only accepted repetition and recursive-cycle edges require
+  cursor movement. Binding, mark, boundary, or transaction changes do not count as progress.
+- Bind live state through one private adapter. Every invocation gets a fresh same-label mark bucket and authority
+  frame; checkpoint/attempt/terminal operations synchronize the UTF-8-byte cursor, nullable anonymous boundary,
+  and marks. Attempt presence remains separate from payload so a successful `false` commits intact.
+- `interpreter.lua` was already at Lua 5.1's 200-local main-chunk ceiling. A cohesive private
+  `recognition_transaction_runtime.lua` module avoids crossing that structural limit and keeps one implementation
+  shared by PUC Lua and LuaJIT instead of scattering adapter functions through the interpreter.
+- Native, reconstructed, generated-plan, and emitted-module carriers all re-enter the effective compiler/runtime;
+  no emitter-specific transaction fork or filesystem workspace is needed. Exact integration is 243/243 per ABI.
+- Keep integration distinct from admission: facade and ordinary/canonical discovery stay unchanged, rollout remains
+  5/9, and the checker adds 19 private-integration mutations beside 22 authority and 12 dormancy mutations.
+- A supplemental apparent miss anomaly was an invalid probe assumption: `E { return(false) }` is a final lifecycle
+  return and therefore accepts after a regex miss. The corrected `LE` probe proves hit=`false`/cursor 2 and
+  rollback=`"miss"`/cursor 0 identically on both ABIs; existing lifecycle knowledge already owns that behavior.
+- Final proof passes book 79/14,412 KiB, KM 817/6,781, all eight doctrines, every mandatory admission, containment/
+  relocation, CLI 66x2, RAM 65%, and Phase 0 1,031/1,031 in 736 seconds through exact canonical success. Land
+  atomic 203 cleanly before `.14.3.6.3` changes discovery or rollout truth.
+
 - 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.6.1` — private shared Lua recognition-transaction authority): follow the
   existing private `source_location.lua` pattern: opaque tables backed by one module-local weak-key store and a
   non-exported direct module. This keeps handles unforgeable enough for the internal contract without public API.

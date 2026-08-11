@@ -776,6 +776,54 @@ local function parser(root_source)
     local callee = parse_callee(head_text, head_start)
     if not callee then return nil end
     local args = parse_arguments(callee.payload, callee.payload_start)
+    local function invalid_recognition_form()
+      error(
+        "LINKEDSPEC_RECOGNITION_TRANSACTION_ERROR:" ..
+          "recognition_static_form_required:" .. callee.name,
+        0
+      )
+    end
+    local function recognition_bare_name(argument)
+      if argument ~= nil and argument.argument_kind == "positional" and
+          argument.value ~= nil and argument.value.kind == "variable" then
+        return argument.value.name
+      end
+      return nil
+    end
+    local transaction_expr
+    if callee.name == "recognition_checkpoint" then
+      if #args ~= 0 then invalid_recognition_form() end
+      transaction_expr = action_ast.expr(
+        "recognition_checkpoint",
+        text,
+        span(start_byte, start_byte + #text)
+      )
+    elseif callee.name == "recognize_once" then
+      if #args ~= 2 then invalid_recognition_form() end
+      local token = recognition_bare_name(args[1])
+      local operand = args[2]
+      local call = operand and operand.argument_kind == "positional" and operand.value or nil
+      local rule = call and call.kind == "call" and call.name == "call" and
+        #call.args == 1 and recognition_bare_name(call.args[1]) or nil
+      if token == nil or rule == nil then invalid_recognition_form() end
+      transaction_expr = action_ast.expr(
+        "recognize_once",
+        text,
+        span(start_byte, start_byte + #text),
+        { token = token, rule = rule }
+      )
+    elseif callee.name == "recognition_commit" or callee.name == "recognition_rollback" then
+      if #args ~= 1 then invalid_recognition_form() end
+      local token = recognition_bare_name(args[1])
+      if token == nil then invalid_recognition_form() end
+      transaction_expr = action_ast.expr(
+        callee.name,
+        text,
+        span(start_byte, start_byte + #text),
+        { token = token }
+      )
+    end
+    if transaction_expr ~= nil then return transaction_expr end
     local fields = { name = callee.name, args = args }
     if attached then
       local block_source = text:sub(attached.open_position, attached.close_position)

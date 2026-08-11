@@ -178,6 +178,14 @@ function M.runtime(input)
   return setmetatable({ authority = authority }, ADAPTER_MT)
 end
 
+function M.source_authority(adapter)
+  if type(adapter) ~= "table" or getmetatable(adapter) ~= ADAPTER_MT.__metatable or
+      source_location.node_type(adapter.authority) ~= "SourceAuthority" then
+    error("runtime source authority expects the private adapter", 0)
+  end
+  return adapter.authority
+end
+
 function AdapterMethods:position_from_byte(byte_offset, rule_label, projection)
   return compatible(function()
     return source_location.position_from_utf8_byte(self.authority, {

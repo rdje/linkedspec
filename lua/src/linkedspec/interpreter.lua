@@ -12,7 +12,10 @@ local unicode_case = require("linkedspec.unicode_case_mapping")
 local user_function_registry = require("linkedspec.user_function_registry")
 
 local M = {}
-local typed_source = { runtime = require("linkedspec.source_location_runtime") }
+local typed_source = {
+  runtime = require("linkedspec.source_location_runtime"),
+  recognition = require("linkedspec.recognition_transaction_runtime"),
+}
 
 local ERROR_MT = {
   __runtime_interpreter_type = "RuntimeInterpreterException",
@@ -291,9 +294,12 @@ local function context(
       }),
     })
   end
+  local source_runtime = typed_source.runtime.runtime(input)
+  local recognition_state = typed_source.recognition.context(source_runtime)
   return {
     input = input,
-    source_location = typed_source.runtime.runtime(input),
+    source_location = source_runtime,
+    recognition_authority = recognition_state.recognition_authority,
     cursor_byte = 0,
     registers = matching.runtime_match_registers(input),
     retv = json.null,
@@ -303,6 +309,7 @@ local function context(
     active_user_functions = {},
     active_codeblocks = {},
     mark_buckets = {},
+    recognition_frames = recognition_state.recognition_frames,
     active = {},
     lifecycle_events = {},
     diagnostic_sink = diagnostic_sink,
@@ -2980,6 +2987,11 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     return result
   end
   if kind == "assign_scalar" then
+    if expr.value.kind == "recognition_checkpoint" then
+      local rule_label = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule
+      typed_source.recognition.checkpoint(ctx, rule_label, expr.name)
+      return bind_scalar(ctx, expr.name, json.null)
+    end
     local value = evaluate_expr(engine, expr.value, ctx, accumulator, edge_state)
     return bind_scalar(ctx, expr.name, value)
   end
@@ -3069,6 +3081,45 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
       end
     end
     return store_binding(ctx, expr.base, storage, root)
+  end
+  if kind == "recognition_checkpoint" then
+    local rule_label = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule
+    fail(
+      "recognition_checkpoint must be assigned to a rule-local token in rule '" ..
+        rule_label .. "'",
+      { rule_label = rule_label, action_kind = kind }
+    )
+  end
+  if kind == "recognize_once" then
+    local child
+    if edge_state ~= nil and edge_state.target.label == expr.rule then
+      child = dispatch_edge_child(engine, edge_state, ctx)
+    else
+      child = execute_rule(engine, expr.rule, 0, ctx)
+    end
+    ctx.retv = copy_value(child.value)
+    return typed_source.recognition.attempt(
+      ctx,
+      ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule,
+      expr.token,
+      child.matched,
+      child.value
+    )
+  end
+  if kind == "recognition_commit" then
+    return typed_source.recognition.commit(
+      ctx,
+      ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule,
+      expr.token
+    )
+  end
+  if kind == "recognition_rollback" then
+    typed_source.recognition.rollback(
+      ctx,
+      ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule,
+      expr.token
+    )
+    return json.null
   end
   if kind == "call" then return evaluate_call(engine, expr, ctx, accumulator, edge_state) end
   if kind == "fluent_chain" then
@@ -4308,6 +4359,20 @@ execute_rule = function(engine, label, entry_index, ctx)
   ctx.arrays = copy_store(saved_arrays)
   ctx.harrays = copy_store(saved_harrays)
   ctx.rule_stack[#ctx.rule_stack + 1] = label
+  local recognition_ok, recognition_error = pcall(
+    typed_source.recognition.enter_invocation,
+    ctx,
+    label
+  )
+  if not recognition_ok then
+    ctx.rule_stack[#ctx.rule_stack] = nil
+    ctx.registers = saved_registers
+    ctx.variables = saved_variables
+    ctx.arrays = saved_arrays
+    ctx.harrays = saved_harrays
+    ctx.active[recursion_key] = nil
+    error(recognition_error, 0)
+  end
   local accumulator = json.array()
   local action_iteration_values = collects_explicit_action_iteration_values(rule) and json.array() or nil
   ctx.accumulator_stack[#ctx.accumulator_stack + 1] = { label = label, values = accumulator }
@@ -4414,6 +4479,15 @@ execute_rule = function(engine, label, entry_index, ctx)
     local value = action_iteration_values ~= nil and action_iteration_values or finish_value(accumulator, ctx.retv)
     return rule_result(count > 0, value)
   end)
+  local recognition_leave_ok, recognition_leave_error = pcall(
+    typed_source.recognition.leave_invocation,
+    ctx,
+    label
+  )
+  if not recognition_leave_ok then
+    ok = false
+    result_or_flow = recognition_leave_error
+  end
   if not ok and getmetatable(result_or_flow) == ERROR_MT then
     result_or_flow = with_runtime_diagnostic(result_or_flow, runtime_diagnostic(engine, {
       stage = "runtime_execution",

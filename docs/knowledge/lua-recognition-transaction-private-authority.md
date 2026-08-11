@@ -14,10 +14,11 @@ answers:
   - "what is the next Lua transaction integration failure"
   - "how many Lua transaction authority mutations are rejected"
 date: 2026-08-11
-status: private authority green on both ABIs; integration and admission remain dormant
+status: private authority and integration green on both ABIs; admission remains dormant
 tags: [lua, PUC-Lua, LuaJIT, recognition, transaction, invocation, marks, token, snapshot, private]
 evidence: "FUTURE-PARITY-BACKLOG.14.3.6.1 adds lua/src/linkedspec/recognition_transaction.lua as a Lua-5.1-compatible direct module absent from lua/src/linkedspec/init.lua. One module-local weak-key store backs opaque source authority, invocation, frame-state, snapshot, linear-token, and exception handles. Monotonic authority/invocation/mark/transaction ids, detached JSON projections, restore-before-invalidate lifecycle, and separate match/payload storage preserve false, zero, empty string, and json.null. The same final-path authority mode passes 187 assertions on PUC Lua and 187 on LuaJIT. Integration exits 1 only at missing dedicated ActionIR nodes; ordinary/canonical discovery and rollout 5/9 remain unchanged. The independent checker rejects 22 private-authority mutations separately from 12 dormant-RED and 44 neutral semantic mutations."
 evidence_update_2026_08_11_signoff: "The complete Lua gate remains 177/177 per ABI, CLI 66x2, corpus 105, and storage 18/3. Sole-facing book 79/14,412 KiB, Knowledge Map 816/6,772, all eight doctrines, repository containment/relocation, CLI 66x2, RAM 82%, and canonical Phase 0 1,031/1,031 in 753 seconds pass through the exact local-CI success marker. Atomic 202 is commit-ready from clean activation 6a8ec091."
+evidence_update_2026_08_11_integration: "FUTURE-PARITY-BACKLOG.14.3.6.2 adds policy/state accessors to this authority and binds it through a separate private Lua-5.1 runtime adapter. Authority remains 187/187 per ABI; integration passes 243/243 per ABI across all four carriers, while facade/discovery and rollout remain unchanged."
 reverify: "LINKEDSPEC_LUA_RECOGNITION_TRANSACTION_RED_MODE=authority bash tools/run_lua_project_data.sh puc lua/test/recognition_transaction_contract_test.lua && LINKEDSPEC_LUA_RECOGNITION_TRANSACTION_RED_MODE=authority bash tools/run_lua_project_data.sh luajit lua/test/recognition_transaction_contract_test.lua && bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py"
 ---
 
@@ -40,16 +41,17 @@ and invocation unwind restore the copy before invalidating the token. Attempt
 presence and payload are stored separately, so `false`, zero, empty string, and
 `json.null` survive successful commit without becoming misses.
 
-Authority mode passes 187 assertions on each ABI. The module owns no ActionIR,
-effect, progress, runtime adapter, or carrier code yet; integration mode stops
-at the exact missing-dedicated-ActionIR boundary owned by `.14.3.6.2`. No Lua
-transaction syntax is current until later admission `.14.3.6.3` removes
-dormancy and advances the rollout.
+Authority mode passes 187 assertions on each ABI. The module now also owns the
+neutral effect/progress policy and state accessors consumed by private adapter
+`recognition_transaction_runtime.lua`; the parser/interpreter own the dedicated
+nodes and carrier execution. No Lua transaction syntax is current until later
+admission `.14.3.6.3` removes dormancy and advances the rollout.
 
 ## Links
 
 - Neutral authority: [[recognition-transaction-neutral-contract]].
 - Dormant final-path boundary: [[lua-recognition-transaction-dormant-red]].
+- Integration: [[lua-recognition-transaction-integration]].
 - Source authority precedent: [[lua-typed-source-location-dormant-red]].
 - Runtime seams: [[lua-runtime-rule-interpreter]] and [[lua-runtime-matching-state]].
 - Owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.3.6.1`.

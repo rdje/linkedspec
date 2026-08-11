@@ -136,13 +136,14 @@ execution. The exact 203/203 consumer is included in ordinary Julia discovery an
 CI. Only Julia advances: recognition rollout is 5/9 while PUC Lua, LuaJIT, recurring, and public-no-drift remain
 RED; the private namespace remains unexported.
 
-Lua now has one shared private transaction authority implemented without an ABI-specific fork. Explicit
-`authority` execution passes 187 assertions on PUC Lua and 187 on LuaJIT, covering invocation/mark generations,
-detached snapshots, opaque linear tokens, lifecycle diagnostics, and successful `false`, zero, empty-string, and
-JSON-null payloads. The module is absent from the public facade, and its final-path consumer remains outside
-ordinary and canonical discovery. Explicit `integration` execution therefore remains RED at the next exact seam:
-Lua has no four dedicated transaction ActionIR nodes yet. This private foundation changes no current Lua syntax,
-behavior, or recognition rollout; the ledger remains 5/9 until integration and admission land separately.
+Lua now has one shared private end-to-end transaction implementation without an ABI-specific fork. Explicit
+`authority` execution passes 187 assertions on PUC Lua and 187 on LuaJIT. Explicit `integration` execution passes
+243 assertions on each: four non-eager ActionIR nodes, recursive effect closure, cursor-only progress, the live
+UTF-8-byte cursor/anonymous-boundary/invocation-mark adapter, and native, reconstructed, generated-plan, and
+independently loaded emitted-module execution all agree. A successful `false` remains a matched payload through
+commit. Both private modules are absent from the public facade, and the final-path consumer remains outside ordinary
+and canonical discovery. This integrated foundation therefore changes no current Lua syntax or recognition rollout;
+the ledger remains 5/9 until admission `.14.3.6.3` runs the unchanged consumer ordinarily and canonically.
 
 The helper audit distinguishes 7 callable compatibility aliases from 2 internal Perl contract/scanner ids.
 `capture_take_slice` and `capture_take_slice_len` are internal ids, not accepted helper spellings; authored code

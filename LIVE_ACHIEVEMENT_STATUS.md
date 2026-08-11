@@ -2,24 +2,28 @@
 
 ## Current Activity
 
-- Private shared Lua authority leaf `FUTURE-PARITY-BACKLOG.14.3.6.1` is signoff-complete and commit-ready as atomic
-  202/300 from clean `6a8ec091`; no push.
-- Authority mode passes 187/187 on PUC Lua and LuaJIT; integration stops only at missing dedicated ActionIR nodes.
-  Recognition remains 132/246/44 at rollout 5/9; 12 dormant and 22 authority mutations lock the private boundary.
-- Ordinary Lua remains 177/177 per ABI, CLI 66x2, corpus 105, storage 18/3, book 79/14,412 KiB, KM 816/6,772,
-  all doctrines, RAM 82%, and Phase 0 1,031/1,031 in 753 sec pass with no export/discovery movement.
+- Private shared Lua integration leaf `FUTURE-PARITY-BACKLOG.14.3.6.2` is signoff-complete and commit-ready from
+  clean `d87dcac3` for atomic 203/300; the approved definitive canonical gate exits zero.
+- Authority remains 187/187 and integration passes 243/243 on PUC Lua and LuaJIT across four dedicated nodes,
+  effect/progress policy, native, reconstructed, generated-plan, and emitted execution. The checker rejects 19
+  integration mutations beside 22 authority and 12 dormancy mutations.
+- Ordinary Lua remains 177/177 per ABI, CLI 66x2, corpus 105, storage 18/3, book 79/14,412 KiB, and KM 817/6,781.
+  Recognition stays 132/246/44 at rollout 5/9 with no facade or discovery movement. All eight doctrines,
+  containment, RAM 65%, and Phase 0 1,031/1,031 in 736 seconds pass through the exact canonical marker.
 
 ## Latest Completed Slice
 
-- Lua dormant RED `.14.3.6.0` landed cleanly at `6a8ec091` as atomic 201/300 with no push.
-- Private Lua authority `.14.3.6.1` is fully verified and commit-ready from that clean boundary as atomic 202/300.
+- Private Lua authority `.14.3.6.1` landed cleanly at `d87dcac3` as atomic 202/300 with no push.
+- Private Lua integration `.14.3.6.2` is signoff-complete and commit-ready as intended atomic 203/300.
 
 ## Next Action
 
-- Land atomic 202 cleanly, then activate Lua transaction integration `.14.3.6.2` task-tree-first.
+- Land atomic 203 cleanly, prove its handoff, then activate Lua admission `.14.3.6.3` task-tree-first.
 
 ## Recent Completions
 
+- `2026-08-11` — `.14.3.6.2` completed dual-ABI integration and canonical signoff for atomic 203/300.
+- `2026-08-11` — `d87dcac3` landed the shared private Lua authority as atomic 202/300.
 - `2026-08-11` — `.14.3.6.1` completed exact dual-ABI private Lua authority signoff for atomic 202/300.
 - `2026-08-11` — `6a8ec091` landed exact dual-ABI dormant Lua transaction RED as atomic 201/300.
 - `2026-08-11` — `.14.3.6.0` completed exact dual-ABI dormant Lua transaction RED signoff for atomic 201/300.
@@ -34,8 +38,6 @@
 - `2026-08-11` — `bee6cf45` landed private Dart transaction integration as atomic 195/300.
 - `2026-08-11` — `.14.3.4.2` completed private Dart integration signoff for atomic 195/300; Phase 0 passed 1,031/1,031.
 - `2026-08-11` — `.14.3.4.1` completed private Dart authority signoff for atomic 194/300; Phase 0 passed 1,031/1,031.
-- `2026-08-11` — `3a29b34e` landed exact dormant Dart transaction RED as atomic 193/300.
-- `2026-08-11` — `02c612f5` landed exact Rust transaction admission as atomic 191/300.
 
 ## History
 
