@@ -1,5 +1,34 @@
 # ARCHITECTURE STATE
 
+## Recursive source observation is audit-frozen on the existing invocation authority
+
+Behavior-free `FUTURE-PARITY-BACKLOG.14.4.0` audits clean transaction closeout `3ac018f8` across Perl, Rust,
+Dart, Julia, PUC Lua, and LuaJIT. LinkedSpec's own lowering/descriptor/generated-source/execution probes prove that
+an action edge carries the selected parent match into child entry state, a direct call invents no entry match, and
+every child receives the caller's current position but derives seek/consume from its own rule family. Runtime source
+then confirms that all engines guard an already-active `(rule, cursor)` before entering the attempted child frame.
+
+The accepted observation is one detached immutable record extending the private monotonic recognition invocation
+authority: source/rule identity, fresh invocation id, nullable distinct direct-parent id, entry position, nullable
+terminal selected-match span, nullable accepted-exit position, closed outcome, and optional diagnostic. Entry is
+captured before child `I` lifecycle/family matching; accepted exit exists only after normal accepted return. A
+guard-rejected edge reserves a fresh child identity, points at the active parent, records `rejected`, and pushes no
+live frame. There is no second stack, parse-wide completed-history ledger, backend address, parent cursor-policy
+override, or current public accessor/carrier/API/schema/CLI movement.
+
+The audit found one foundational neutral mismatch introduced at `e8f6198b`: `direct_nonprogress` uses the same
+`recursive-1` identity for invocation and parent, while the checker only compares exact tuples and never validates
+self-parent, reuse, parent order, or cycles. Corrective prerequisite `.14.4.0.1` now owns that fixture/checker repair
+before executable neutral observation `.14.4.1`; Perl `.2`, Rust `.3`, Dart `.4`, Julia `.5`, shared Lua `.6`,
+recurring `.7`, and public closeout `.8` follow. ADR `0056` section 19 and
+`docs/knowledge/recursive-source-observation-audit.md` are the durable authorities.
+
+Audit signoff preserves every executable owner and passes focused six-runtime typed-source composition,
+recognition 132/246/58, cursor 36/18/8, the 79-file/14,460-KiB book, Knowledge 821/6,826, all eight doctrines,
+repository containment/relocation including the six-family process sandbox, CLI 66x2, RAM 59%, and canonical
+Phase 0 1,031/1,031 in 832 seconds. The outer workspace sandbox cannot nest the canonical macOS `sandbox-exec`
+probe; the unchanged host-permitted canonical run supplies the definitive success marker.
+
 ## README route-pressure closure is implementation- and recomposition-closed
 
 `README-STABILITY-POLICY.4.0` ratifies the existing bounded landing-page doctrine's transitive destination model;

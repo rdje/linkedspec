@@ -4,13 +4,13 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `e6893fd4` — clean recurring-proof base for public-closeout atomic 206/300; no push.
-- latest_completed_leaf: recurring `.14.3.7` landed cleanly at `e6893fd4` as atomic 205/300.
-- active_work_unit: `.14.3.8` final recognition public no-drift and parent closeout; signoff-complete.
-- next_action: commit atomic 206, clear the brief, prove pointer/clean tree, then activate recursive observation `.14.4` task-tree-first.
-- in_flight_uncommitted: `.14.3.8` signoff evidence and exact public-closeout implementation candidate.
-- blockers: none. Exact recomposition, checker 132/246/58 at 9/9 + public 3/26/45 + guide 1/14/18, book
-  79/14,428, Knowledge 820/6,813, eight doctrines, CLI 66x2, RAM 60%, and Phase 0 1,031/1,031 in 722s pass.
+- activation_commit: `3ac018f8` — clean recognition-public-closeout base for recursive-observation audit atomic 207/300; no push.
+- latest_completed_leaf: `.14.4.0` recursive source-observation audit is signoff-complete from clean `3ac018f8`, pending atomic-207 commit.
+- active_work_unit: `.14.4.0` final documentation and atomic-207 commit closeout.
+- next_action: commit behavior-free audit atomic 207, verify the clean boundary, then activate tracked lineage correction `.14.4.0.1` task-tree-first.
+- in_flight_uncommitted: `.14.4.0` signoff-complete audit docs and durable lineage finding; no behavior change.
+- blockers: none. Audit found `direct_nonprogress` self-parent plus missing lineage invariants; corrective prerequisite
+  `.14.4.0.1` is tracked before executable observation `.14.4.1` and does not block this behavior-free audit.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes, and 11 topology mutations advance governance to 53. Public authored values remain future; recognition
@@ -53,8 +53,8 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   policy, and authority-backed carriers at 207/207; exact ordinary/canonical proof is current while the API stays private.
   Lua has one shared Lua-5.1 authority at 187/187 and admitted ActionIR/effect/progress/runtime/carriers at 246/246
   per ABI; ordinary/canonical proof runs once per ABI while facade privacy remains unchanged.
-- current_future_direction: transaction `.14.3` is signoff-complete through public `.8`; recursive observation `.14.4`
-  follows clean atomic 206, while program-wide `.14.8` retains the separate typed-source combined final row.
-- latest_bootstrap_read: 2026-08-11 — complete roadmap/codebase/mdBook and required continuity/tooling review.
-- pivot_guard: prove public-closeout atomic 206 cleanly before recursive observation `.14.4` activates.
-- push_policy: hard lock at 300 commits; atomics 205-206 are local-only; no push; use wrappers.
+- current_future_direction: recursive observation `.14.4.0` freezes one detached record on the existing invocation
+  authority; `.0.1` corrects lineage, then `.1-.8` own neutral/six-runtime/recurring/public rollout.
+- latest_bootstrap_read: 2026-08-12 — complete roadmap/codebase/mdBook and required continuity/tooling review.
+- pivot_guard: finish and commit recursive-observation audit `.14.4.0` cleanly before corrective `.14.4.0.1`.
+- push_policy: hard lock at 300 commits; atomics 206-207 are local-only; no push; use wrappers.

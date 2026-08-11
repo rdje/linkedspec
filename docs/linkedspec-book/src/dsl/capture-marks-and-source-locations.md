@@ -55,6 +55,41 @@ bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_t
 bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua
 ```
 
+### Recursive source observation: audited next boundary, not yet an authored API
+
+The behavior-free `.14.4.0` audit fixes what a future recursive observation means before implementation. It reuses
+the private monotonic invocation authority already present for recognition transactions; it does not create another
+stack, retain runtime objects, or accumulate a parse-wide history.
+
+One requested observation will be a detached immutable record:
+
+| Field | Meaning |
+|---|---|
+| source identity | The same caller-authorized decoded source, never a path or backend object. |
+| rule identity | The entered rule that owns the observation. |
+| invocation id | A fresh, parse-local, monotonic identity. |
+| parent invocation id | The nullable distinct earlier direct parent in the same source authority. |
+| entry position | The caller's current position before the child's `I` lifecycle and family-local matching. |
+| selected-match span | The child's terminal local regex match, or absence for a zero-regex/no-selection outcome. |
+| accepted-exit position | The cursor from which the caller resumes after normal accepted return; otherwise absent. |
+| outcome | Exactly `accepted`, `failed`, `aborted`, or `rejected`. |
+| diagnostic | An optional typed diagnostic associated with the terminal outcome. |
+
+Action edges already carry the parent's selected local match into the child's entry-match register. A direct call
+enters at the current cursor without inventing an entry match. In either case, the child derives seek or consume
+from its own rule family; observing the child never lets the parent override that policy.
+
+All six runtimes currently reject an already-active `(rule, cursor)` edge before pushing a child recognition
+frame. The accepted observation design reserves a fresh attempted-child identity from the existing authority,
+links it to the active parent, records a rejected outcome, and pushes no live frame. The original neutral
+`direct_nonprogress` fixture instead makes an invocation its own parent. The checker pins that row but has no
+self-parent, identity-order, or cycle invariant. Corrective prerequisite `.14.4.0.1` owns that fixture/checker repair
+before neutral observation implementation `.14.4.1`; Perl, Rust, Dart, Julia, shared Lua, recurring proof, and public
+closeout then follow in `.2-.8`.
+
+There is still no authored recursive-observation helper, ActionIR node, schema field, semantic/MCP projection, or
+CLI option. Exact accessor spelling and carrier projection remain future executable-contract work.
+
 ### Bounded cursor transactions do not mean general backtracking
 
 The accepted checkpoint/try/commit/rollback model—current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT—is one
@@ -72,7 +107,7 @@ else:
 #### What the current admitted engines do today
 
 Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT now recognize and independently admit the four forms. Canonical CI
-requires their exact 51-test, 12-test, 10-test, current 205-assertion Julia, and shared 243-assertion-per-Lua-ABI consumers.
+requires their exact 51-test, 12-test, 10-test, current 207-assertion Julia, and shared 246-assertion-per-Lua-ABI consumers.
 `save_cursor()` and `restore_cursor()` remain older cursor-only LIFO compatibility
 controls. They do not
 save the anonymous boundary or named marks, carry an invocation/source owner, or diagnose reuse and escape. They
@@ -308,9 +343,8 @@ implementation slice. It does not add an authored value or advance the 8-complet
 
 There is still no public `Position` or `Span` authored value, recursive observation API, or span-native parser
 dispatch. Exact transaction spelling is current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Lua's shared
-private authority passes 187 assertions per ABI, and its admitted consumer passes 243 per ABI across four dedicated
-nodes, recursive effect/progress policy, and all four runtime carriers at its Lua admission boundary. Recurring
-metadata raises that consumer to 246 per ABI without changing the implementation. The modules remain unexported
+private authority passes 187 assertions per ABI, and its admitted consumer passes 246 per ABI across four dedicated
+nodes, recursive effect/progress policy, and all four runtime carriers after recurring/public metadata closeout. The modules remain unexported
 while the consumer is ordinarily and canonically discovered once per ABI. Transaction rollout is complete at
 9/9 under `.14.3.8`; the unchanged recurring authority and all six admissions remain exact. The separate typed-source combined
 recurring/public-no-drift row remains pending for final program-wide closeout `FUTURE-PARITY-BACKLOG.14.8`, so

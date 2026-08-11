@@ -10,6 +10,30 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-12 (`FUTURE-PARITY-BACKLOG.14.4.0` — recursive observation audit): committed audit authorities at
+  `3ac018f8` are neutral `7663edf5`/`80b85e86`; Perl `07ff872d`/`2cc9cefa`/`a020f1c1`; Rust
+  `5801b30f`/`d7f39fcb`/`1bf17d9b`; Dart `770a183e`/`0867a6de`/`534ad289`; Julia
+  `bf55e355`/`aa060778`/`9f1390d4`; and shared Lua `5ad6f644`/`2b8f4050`/`6982f7b9`/`11d8e464`.
+- `call_spec_handler_subst` proves `call(Leaf)` receives the current match-info object; `return_descriptor` proves
+  the child still owns family/cursor policy; `dump_parser_source` and `LinkedSpec::Get` prove action-edge entry
+  match `[0,1]` at cursor 1 versus direct-call entry at current cursor with no invented selected match.
+- Capture entry before child `I` lifecycle/family matching. Preserve the invocation's terminal local regex match,
+  not a parent's match or backend match object. Publish accepted exit only on normal accepted return. Preserve
+  `accepted`, `failed`, `aborted`, and `rejected` as distinct outcomes with explicit absence.
+- Reuse the transaction invocation authority. Rust/Dart/Julia/Lua guards run before recognition-frame entry; Perl's
+  wrapper guard runs before the generated handler and raises typed progress only in recognition mode. A rejected
+  attempt needs a fresh reserved child id linked to the active parent, but no pushed frame or second stack.
+- The original neutral `direct_nonprogress` row at `e8f6198b` self-parents. The checker validates source/span bounds
+  and exact tuple equality only; it has no self-parent/reuse/order/cycle invariant. Finish `.14.4.0` cleanly, then
+  activate corrective `.14.4.0.1` before `.14.4.1` executable observation work.
+- Avoid enabling broad debug trace while the bootstrap parser is being built: it can emit the entire compilation
+  path at very high volume. Build first, then enable a focused runtime trace or use the dedicated probe/test route.
+  The audit's accidental broad probe left no file or process residue and was not used as evidence.
+- Definitive canonical proof requires the host-permitted run because its representative process-I/O test invokes
+  macOS `sandbox-exec`; an outer workspace sandbox rejects that nested sandbox with status 71. The unchanged host
+  run passes the six-family containment proof, both 66-case CLI environments, RAM 59%, and Phase 0 1,031/1,031 in
+  832 seconds through exact local-CI success. This is an execution-environment requirement, not a weakened gate.
+
 - 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.8` — recognition public closeout): the ninth row owns only the final
   public projection. Its exact paths are the capture/source chapter, backend-handoff appendix, project-status page,
   and capability guide; it does not add a seventh implementation, another runtime route, or a public facade.

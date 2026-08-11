@@ -10,6 +10,26 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-12 — FUTURE-PARITY-BACKLOG.14.4.0 — audit recursive source observation
+
+- Audited committed neutral, Perl, Rust, Dart, Julia, and shared Lua entry/local-match/accepted-exit, recursion-
+  guard, invocation-authority, and cursor-policy seams without changing parser/compiler/runtime behavior.
+- Used LinkedSpec lowering, descriptor, generated-handler, and execution probes to prove action-edge entry-match
+  transfer, direct-call absence, current-cursor entry, and child-owned family policy. Source inspection then proves
+  all engines reject an already-active `(rule, cursor)` before entering the attempted child recognition frame.
+- Froze one detached immutable observation record on the existing monotonic invocation authority: source/rule,
+  invocation/direct-parent identity, entry, selected match, accepted exit, terminal outcome, and diagnostic. Rejected
+  attempts reserve a fresh identity without pushing a second stack or retaining a parse-wide history.
+- Found and root-caused a neutral lineage contradiction: `direct_nonprogress` self-parents, and the checker pins
+  that tuple without distinct/ordered/acyclic lineage validation. Added prerequisite task `.14.4.0.1` to repair the
+  fixture and checker before executable observation work.
+- Froze rollout as correction `.0.1`, neutral `.1`, Perl `.2`, Rust `.3`, Dart `.4`, Julia `.5`, shared dual-ABI
+  Lua `.6`, recurring `.7`, and public `.8`. Synchronized ADR `0056`, Knowledge, architecture, Toolbox, roadmaps,
+  task/live state, and four sole-facing mdBook pages; README, APIs, schemas, CLI, and current rollout stay unchanged.
+- Final signoff passes the 79-file/14,460-KiB rendered book, Knowledge 821/6,826, all eight doctrines, repository
+  containment and relocation including the six-family process sandbox, CLI 66/66 in both option environments,
+  RAM 59%, and canonical Phase 0 1,031/1,031 in 832 seconds through the exact local-CI success marker.
+
 ## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.8 — close recognition-transaction rollout
 
 - Promoted only the final `public_no_drift` row in the neutral artifact. Recognition transactions are now complete

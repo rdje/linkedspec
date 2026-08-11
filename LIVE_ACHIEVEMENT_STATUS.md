@@ -2,25 +2,27 @@
 
 ## Current Activity
 
-- Public closeout leaf `FUTURE-PARITY-BACKLOG.14.3.8` is signoff-complete from clean recurring commit `e6893fd4`
-  as intended atomic 206/300; no push. Only final public no-drift advances, closing transaction parent `.14.3`.
-- Focused checker passes recognition 132/246/58 at rollout 9/9, public governance 3/26/45, and guide governance
-  1/14/18. Runtime implementations, private/public APIs, recurring composition, schemas, CLI, and README are unchanged.
-- Exact recomposition passes Perl 51, Rust 12, Dart 10, Julia 207, Lua 246x2 plus support ledgers; rendered book is
-  79 files / 14,428 KiB and Knowledge is 820/6,813. Eight doctrines, CLI 66x2, RAM 60%, and canonical Phase 0
-  1,031/1,031 in 722 seconds pass; only commit/clean proof remains for atomic 206.
+- Behavior-free recursive source-observation audit `FUTURE-PARITY-BACKLOG.14.4.0` is signoff-complete from clean
+  transaction closeout `3ac018f8` as intended atomic 207/300; commit remains; no push.
+- The audit retrieves the current five-backend/six-runtime recursion mechanisms and freezes immutable entry,
+  local-match, accepted-exit, invocation, and bounded parent/child provenance without changing runtime behavior.
+- Child rules continue to derive seek/consume from their own family. The audit found one neutral self-parent row
+  and missing lineage invariants; tracked `.14.4.0.1` corrects them before `.14.4.1-.8` implementation/rollout.
 
 ## Latest Completed Slice
 
-- Recurring `.14.3.7` landed cleanly at `e6893fd4` as atomic 205/300 with no push.
-- Lua admission `.14.3.6.3` remains its clean activation base at `1aedfe98`, atomic 204/300.
+- Recursive observation audit `.14.4.0` passes focused six-runtime proof, book 79/14,460 KiB, Knowledge
+  821/6,826, eight doctrines, containment/relocation, CLI 66x2, RAM 59%, and Phase 0 1,031/1,031 in 832 seconds.
+- No parser/compiler/runtime/backend/API/schema/CLI/README behavior changed; atomic-207 commit remains.
 
 ## Next Action
 
-- Commit/prove atomic 206 clean, then activate recursive observation `.14.4` task-tree-first.
+- Commit atomic 207 cleanly; then activate corrective `.14.4.0.1` task-tree-first from that boundary.
 
 ## Recent Completions
 
+- `2026-08-12` — `.14.4.0` completed recursive source-observation audit and canonical signoff for atomic 207/300.
+- `2026-08-12` — `3ac018f8` landed recognition public no-drift and closed transaction `.14.3` as atomic 206/300.
 - `2026-08-11` — `.14.3.8` completed recognition public closeout and canonical signoff for atomic 206/300.
 - `2026-08-11` — `.14.3.7` completed six-runtime recurring proof and canonical signoff for atomic 205/300.
 - `2026-08-11` — `e6893fd4` landed six-runtime recurring recognition proof as atomic 205/300.
@@ -35,8 +37,6 @@
 - `2026-08-11` — `e9b169bb` landed exact Julia transaction admission as atomic 200/300.
 - `2026-08-11` — `.14.3.5.3` made Julia recognition transactions ordinary/canonical at 203/203 for atomic 200/300.
 - `2026-08-11` — `0d15f8c2` landed private Julia transaction integration as atomic 199/300.
-- `2026-08-11` — `.14.3.5.2` completed private Julia integration signoff for atomic 199/300; Phase 0 passed 1,031/1,031.
-- `2026-08-11` — `923285aa` landed the private Julia transaction authority as atomic 198/300.
 
 ## History
 

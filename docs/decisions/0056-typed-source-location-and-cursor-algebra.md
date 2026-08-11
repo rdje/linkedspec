@@ -3,7 +3,8 @@
 - Date: 2026-07-29
 - Status: accepted; neutral/public contract and six-runtime internal value/projection implementation complete;
   transaction syntax/effect/progress plus Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurring, and public no-drift
-  proof are current; transaction activity `FUTURE-PARITY-BACKLOG.14.3` is closed
+  proof are current; transaction activity `FUTURE-PARITY-BACKLOG.14.3` is closed; recursive-observation audit
+  `.14.4.0` freezes the next behavior boundary and tracks one neutral lineage correction before implementation
 - Tags: architecture, cursor, source-location, spans, capture, recursion, parser-composition, diagnostics, portability
 
 ## Context
@@ -409,6 +410,47 @@ remains 58 mutations. Three recurring-era stale claims advance public governance
 45 mutations; the guide advances to 1/14/18. The exact six-runtime driver, consumer counts, private authorities,
 runtime behavior, facades, schemas, primary CLI, README, and separate typed-source `.14.8` row remain unchanged.
 
+### 19. Freeze recursive observation on the existing invocation authority
+
+`FUTURE-PARITY-BACKLOG.14.4.0` audits the committed engines at clean transaction closeout `3ac018f8`; it changes no
+parser, compiler, runtime, facade, schema, CLI, README, or authored behavior. LinkedSpec-tool probes establish the
+reference seam rather than inferring it from source: `call_spec_handler_subst` lowers `call(Leaf)` to the child
+handler with the current match-info object, `return_descriptor` proves the entered child's own family/cursor policy,
+and `dump_parser_source` plus `LinkedSpec::Get` prove that an action edge supplies its selected parent match as the
+child entry match while a direct call enters at the current cursor without inventing one.
+
+All five backend implementations agree on the state boundary. The input cursor is shared and survives accepted
+child exit; entry/local-match registers are saved and restored around the child; and the child derives seek or
+consume from its own rule family. Rust, Dart, Julia, and shared Lua reject an already-active `(rule, cursor)` edge
+before pushing the child's recognition frame. Perl's runtime wrapper performs the same guard before executing the
+generated handler and emits the typed recursive-progress error only inside recognition mode. None of these guards
+may become a parent-owned cursor-policy override.
+
+Recursive observation extends the private monotonic invocation authority introduced by `.14.3`; it does not add a
+second invocation stack or retain backend objects. One detached immutable record has source identity, rule identity,
+fresh invocation id, nullable direct-parent invocation id, entry position, nullable selected-match span, nullable
+accepted-exit position, terminal outcome, and nullable diagnostic. Entry is the caller's current position before
+the entered rule's `I` lifecycle and before family-local matching. Selected match is that invocation's terminal
+local regex match, so it is absent for a zero-regex coordinator or when no match was selected. Accepted exit exists
+only after normal accepted return and is the exact cursor from which the caller resumes. Failure, abnormal unwind,
+and progress rejection leave accepted exit absent. The closed outcome vocabulary is `accepted`, `failed`, `aborted`,
+and `rejected`.
+
+Invocation ids remain parse-local, monotonic, and non-reused. Every non-root parent link names a distinct earlier
+invocation in the same source authority; links are direct, acyclic, numeric provenance, never a live frame or
+address. A recursive edge rejected before frame entry still reserves one fresh attempted-child identity from the
+same authority and records the currently active invocation as parent; it does not push a live child frame. Completed
+records are returned/detached at the explicit observation boundary rather than accumulated in a parse-wide history.
+Exact authored accessor spelling and carrier projection remain for the executable neutral leaf; this audit adds no
+public helper, ActionIR node, descriptor/generated version, semantic/MCP field, or CLI surface.
+
+The committed neutral fixture predates transaction ratification and contains one contradiction: `direct_nonprogress`
+uses `recursive-1` as both invocation and parent. Its checker compares the six rows exactly but enforces no distinct
+identity, parent ordering, or cycle invariant. Corrective prerequisite `.14.4.0.1` must repair direct and mutual
+lineage and add fail-closed proof before `.14.4.1` builds the executable observation authority. The remaining order
+is neutral `.1`, Perl `.2`, Rust `.3`, Dart `.4`, Julia `.5`, one shared Lua implementation with independent PUC
+Lua/LuaJIT proof `.6`, recurring composition `.7`, and public closeout `.8`.
+
 ## Consequences
 
 - Cursor control, capture, recursion, segmentation, and parser composition share one precise model instead of
@@ -435,6 +477,9 @@ runtime behavior, facades, schemas, primary CLI, README, and separate typed-sour
   and recurring composition first advanced current rollout to 8/9. Final public no-drift `.14.3.8` closes the
   transaction ledger at 9/9 while semantic/topology proof remains 58 mutations; public proof is 3/26/45 and the
   capability guide is 1/14/18.
+- The `.14.4.0` amendment is behavior-free. It reuses the existing invocation authority, freezes detached
+  observation semantics and intrinsic child cursor ownership, and makes `.14.4.0.1` a mandatory neutral-lineage
+  correction before any runtime observation implementation.
 
 ## Links
 

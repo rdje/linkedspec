@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-11` (transaction public closeout `.14.3.8` signoff-complete as intended atomic 206/300
-  from clean recurring commit `e6893fd4`; no push; clean commit and handoff remain)
+- Last updated: `2026-08-12` (recursive observation audit `.14.4.0` signoff-complete as intended atomic 207/300
+  from clean transaction closeout `3ac018f8`; behavior-free; commit remains; no push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -103,13 +103,17 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-11):** public closeout `.14.3.8` is signoff-complete from clean recurring commit
-`e6893fd4` for atomic 206/300. It promotes only final public no-drift: governance is 132/246/58 at rollout 9/9,
-public 3/26/45, and guide 1/14/18. Exact consumers remain Perl 51, Rust 12, Dart 10, Julia 207, and Lua 246x2;
-runtime/facade/schema/CLI/README behavior and the recurring driver remain unchanged. Book/doctrine/canonical
-signoff passes at book 79/14,428, Knowledge 820/6,813, eight doctrines, CLI 66x2, RAM 60%, and Phase 0 1,031/1,031
-in 722 seconds. Transaction parent `.14.3` is closed; recursive observation `.14.4` activates only after
-atomic 206 commits and the tree proves clean, while program-wide typed-source closeout `.14.8` remains pending.
+**Authoritative frontier (2026-08-12):** behavior-free recursive observation audit `.14.4.0` is signoff-complete
+from clean transaction closeout `3ac018f8` for atomic 207/300; commit remains. It retrieves actual
+Perl/Rust/Dart/Julia/shared-Lua rule-entry,
+local-match, accepted-exit, recursive-call, invocation, source-authority, and carrier seams before freezing one
+portable observation contract plus corrective `.14.4.0.1` and `.14.4.1-.8` neutral/runtime/recurring/public split.
+Children receive the current position but retain intrinsic family-derived seek/consume policy. The audit found the
+neutral `direct_nonprogress` self-parent and missing distinct/order/cycle checks; `.0.1` owns correction before
+behavior. No parser/compiler/runtime/backend/API/schema/CLI/README behavior may change in the audit. Transaction
+`.14.3` remains clean-closed at 132/246/58 and rollout 9/9; typed-source `.14.8` remains separately pending. Final
+proof passes book 79/14,460 KiB, Knowledge 821/6,826, all eight doctrines, CLI 66x2, RAM 59%, and canonical Phase 0
+1,031/1,031 in 832 seconds; activate `.14.4.0.1` only after the clean atomic-207 boundary.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private

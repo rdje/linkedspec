@@ -112,6 +112,18 @@ source admissions do not add an authored `Position` or `Span` value, schema vers
 rollout is 8 complete / 6 pending because the combined recurring/
 public no-drift row remains owned by final program-wide closeout `FUTURE-PARITY-BACKLOG.14.8`.
 
+Recursive observation now has a behavior-free six-runtime audit under `.14.4.0`. The frozen record is detached and
+immutable: source/rule identity, a fresh monotonic invocation id, nullable distinct direct-parent id, entry
+position, nullable terminal selected-match span, nullable accepted-exit position, terminal outcome, and optional
+diagnostic. It extends the existing private invocation authority and never gives a parent control over the child's
+family-derived seek/consume policy. No authored accessor, ActionIR node, facade, schema, semantic/MCP field, CLI, or
+runtime behavior is current from this audit.
+
+The audit also found that the original neutral `direct_nonprogress` fixture makes one invocation its own parent.
+Its checker compares exact rows but does not validate distinct/ordered/acyclic lineage. Corrective prerequisite
+`.14.4.0.1` is now tracked before executable neutral observation `.14.4.1`; independent Perl, Rust, Dart, Julia,
+shared Lua, recurring, and public legs follow through `.14.4.8`.
+
 Perl now has an admitted transaction implementation with four dedicated ActionIR nodes, recursive static
 effect closure, invocation-local mark/cursor snapshots, falsey-safe commit results, typed recognition-only progress
 errors, and independent generated-source execution. Its exact 51-test final-path consumer is GREEN, tracked,

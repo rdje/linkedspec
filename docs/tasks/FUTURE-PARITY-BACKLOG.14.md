@@ -4973,20 +4973,20 @@
   Evidence: committed hashes retained; driver passes Perl 51, Rust 12, Dart 10, Julia 207, Lua 246x2 plus support ledgers; checker 132/246/58 at 9/9, public 3/26/45, guide 1/14/18; book 79/14,428, Knowledge 820/6,813, eight doctrines, CLI 66x2, RAM 60%, and Phase 0 1,031/1,031 in 722 seconds pass without runtime/API/CLI/README movement.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.4`
-  Status: `pending`
-  Goal: Expose immutable recursive rule entry/match/exit positions and parent/child provenance without allowing a
-    parent to override the child's intrinsic cursor policy or retaining backend/runtime objects.
+  Status: `active` (2026-08-12; behavior-free audit `.0` activated from clean transaction closeout `3ac018f8`); Goal: Expose immutable recursive rule entry/match/accepted-exit positions and bounded parent/child provenance without allowing a parent to override the child's intrinsic cursor policy or retaining backend/runtime objects; Children: `.14.4.0`, corrective prerequisite `.14.4.0.1`, then `.14.4.1-.14.4.8` in neutral, Perl, Rust, Dart, Julia, shared-Lua, recurring, and public order.
+- ID: `FUTURE-PARITY-BACKLOG.14.4.0`
+  Status: `done; signoff-complete` (2026-08-12; task-tree-first from clean `3ac018f8`; intended atomic 207/300; no push); Goal: Audit the current five-backend/six-runtime recursive entry/local-match/accepted-exit and caller/child seams, then freeze portable observation values, invocation/provenance identity, intrinsic cursor-policy invariants, recursion/cycle/error boundaries, carrier/API exclusions, and exact corrective/`.1-.8` ownership without behavior; Depends on: `.14.3.8`; Acceptance: retrieve ADR `0056`, Knowledge cards, task history, and toolbox first; probe actual runtime mechanisms and source locations rather than infer them; record hashes/current divergences and an executable neutral-plan boundary; synchronize roadmap/ADR/book/live/Knowledge; change no parser/compiler/runtime/backend/schema/facade/CLI/README behavior; pass focused/book/doctrine/canonical signoff and land clean before `.14.4.0.1`; Commit: `FUTURE-PARITY-BACKLOG.14.4.0 - audit recursive source observation`; Checklist: [x] clean activation/task ownership; [x] canonical authority retrieval; [x] LinkedSpec-tool runtime audit; [x] portable contract/diagnostic/split freeze; [x] roadmap/ADR/book/live/Knowledge alignment; [x] no-behavior proof; [x] doctrine/canonical signoff; Finding: `direct_nonprogress` self-parents despite monotonic non-reused invocation identity because the checker compares exact fixture rows but enforces no distinct/order/cycle invariant; `.14.4.0.1` owns correction before executable observation work; Evidence: committed blobs neutral `7663edf5/80b85e86`, Perl `07ff872d/2cc9cefa/a020f1c1`, Rust `5801b30f/d7f39fcb/1bf17d9b`, Dart `770a183e/0867a6de/534ad289`, Julia `bf55e355/aa060778/9f1390d4`, Lua `5ad6f644/2b8f4050/6982f7b9/11d8e464`; LinkedSpec probes prove edge/direct entry and child family policy; focused typed source six-runtime, recognition 132/246/58, cursor 36/18/8, book 79/14,460 KiB, Knowledge 821/6,826, all eight doctrines, containment/relocation including the six-family process sandbox, CLI 66x2, RAM 59%, and canonical Phase 0 1,031/1,031 in 832 seconds pass through the exact local-CI success marker.
+- ID: `FUTURE-PARITY-BACKLOG.14.4.0.1`
+  Status: `pending` (tracked 2026-08-12 from `.14.4.0` audit; activate only after clean atomic 207); Goal: Correct the direct/mutual non-progress neutral invocation-lineage fixtures and make the checker reject self-parent, reused identity, invalid parent ordering, and cyclic bounded provenance before `.14.4.1` extends the executable observation authority; Depends on: `.14.4.0`; Acceptance: preserve the six observation roles and current behavior/public boundary; allocate each rejected attempted child a distinct monotonic identity from the existing invocation authority with the active frame as parent; add exact RED/positive/mutation proof; synchronize durable docs and land clean; Commit: `FUTURE-PARITY-BACKLOG.14.4.0.1 - correct recursive observation lineage`.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.5`
   Status: `pending`
   Goal: Compose stable named regex-slot identity and the separately owned `INTER-MATCH-GAP-CAPTURE` contract into
     lossless prefix/gap/tail span segmentation without duplicating its syntax, lifecycle, or compatibility owner.
-
 - ID: `FUTURE-PARITY-BACKLOG.14.6`
   Status: `pending`
   Goal: Specify and implement span-native progressive in-parse invocation of loaded specs at arbitrary safe points,
     preserving source provenance, diagnostic coordinates, policy ceilings, cancellation, and zero implicit paths.
-
 - ID: `FUTURE-PARITY-BACKLOG.14.7`
   Status: `pending`
   Goal: Specify and implement staged AST enrichment where later loaded specs parse selected exact spans returned by

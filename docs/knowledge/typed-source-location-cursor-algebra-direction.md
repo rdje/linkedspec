@@ -17,10 +17,10 @@ answers:
   - "which task owns lossless segmentation syntax"
   - "which diagnostics protect cursor and span safety"
   - "what owns the typed cursor span implementation program"
-date: 2026-08-09
-status: accepted architecture; internal values complete and exact future transaction syntax/effects ratified; executable transaction and later composition legs pending
+date: 2026-08-12
+status: accepted architecture; internal values and transaction rollout complete; recursive-observation audit frozen with one prerequisite lineage correction
 tags: [architecture, cursor, source-location, spans, capture, recursion, parser-composition, diagnostics, portability]
-evidence: "Director approval on 2026-07-29 plus ADR 0056. FUTURE-PARITY-BACKLOG.14.1 completed the executable base model and structural teaching; .14.2 completed the internal immutable value/projection layer on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT at 8 complete / 6 pending / 53 mutations. Behavior-free .14.3.0 froze the invocation-frame/token/effect/progress boundary; .14.3.1.0 ratifies exact future recognition_* syntax, falsey-safe result exposure, closed effects, invocation marks, and cursor-only progress without behavior."
+evidence: "Director approval on 2026-07-29 plus ADR 0056. FUTURE-PARITY-BACKLOG.14.1 completed the executable base model and structural teaching; .14.2 completed the internal immutable value/projection layer on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT at 8 complete / 6 pending / 53 mutations; .14.3 closed exact six-runtime recognition transactions at rollout 9/9; behavior-free .14.4.0 freezes recursive observation on the same authority and tracks the neutral self-parent correction under .14.4.0.1."
 reverify: "rg -n 'source-location algebra|Cursor transactions|Progressive and staged parsing consume spans|Lossless segmentation|FUTURE-PARITY-BACKLOG[.]14[.]0[.]1' docs/decisions/0056-typed-source-location-and-cursor-algebra.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -48,12 +48,11 @@ child diagnostics map exactly to the original source. This grants no implicit fi
 execution, or policy authority. Lossless `@capture_gaps` prefix/gap/tail segmentation uses the same span model but
 keeps its existing syntax/lifecycle/migration owner in `docs/tasks/INTER-MATCH-GAP-CAPTURE.md` and ADR `0045`.
 
-ADR `0056` now ratifies the future `recognition_checkpoint()` / `recognize_once(token, call(Rule))` /
+ADR `0056` ratified `recognition_checkpoint()` / `recognize_once(token, call(Rule))` /
 `recognition_commit(token)` / `recognition_rollback(token)` surface. Match presence is a strict boolean and the
-child payload remains staged until commit, so falsey successful values are not collapsed into failure. The neutral
-base and six-runtime internal value/projection layer are complete; executable transaction artifacts, invocation
-frames, full effect rows, progress diagnostics, independent six-runtime admission, recursive observation, gap
-composition, progressive/staged dispatch, and final public no-drift continue under
-`FUTURE-PARITY-BACKLOG.14.3.1.1-.14.8`.
+child payload remains staged until commit, so falsey successful values are not collapsed into failure. Neutral,
+six-runtime transaction admission, recurrence, and public no-drift are complete. Recursive observation now has a
+behavior-free six-runtime audit and one tracked neutral-lineage correction; implementation, gap composition,
+progressive/staged dispatch, and final typed-source no-drift continue under `FUTURE-PARITY-BACKLOG.14.4.0.1-.14.8`.
 
-Related transaction audit: [[cursor-transaction-safety-audit-plan]].
+Related records: [[cursor-transaction-safety-audit-plan]], [[recursive-source-observation-audit]].

@@ -126,6 +126,13 @@ The check is unconditional. It independently derives Unicode-scalar, line/column
 materializes direct and derived spans; executes invocation and bounded-transaction state transitions; validates
 recursive and zero/one/two-regex structural cases; and rejects all 53 registered mutations.
 
+The `.14.4.0` audit found one deliberate next correction in that otherwise-current baseline. The
+`direct_nonprogress` fixture uses the same textual identity for invocation and parent, and the checker only compares
+the six rows exactly; it does not yet reject self-parent, reused identity, invalid parent order, or cyclic lineage.
+Pending leaf `.14.4.0.1` owns the fixture correction and new negative mutations before recursive-observation runtime
+work. Until that leaf lands, a green typed-source checker proves its pinned current artifact—not the later
+monotonic/acyclic recursive-observation contract.
+
 The gate then unconditionally runs the admitted Perl value and projection consumers:
 
 ```bash

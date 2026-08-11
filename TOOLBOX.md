@@ -242,6 +242,10 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **HOW (per-call):** `LinkedSpec::Get(\$s, trace_level => 'debug', trace_log_mode => 'stdout')`, or
   `LinkedSpec::configure_trace(...)`. Programmatic API: `trace_enter/trace_exit/trace_decision`,
   `log_output`, `log_dump`, `should_dump`.
+- **SCOPE BEFORE DEBUG:** an environment-level `debug` trace is active during bootstrap/parser compilation and can
+  emit the entire compiler path before the runtime event of interest. For a focused execution question, build the
+  parser first with tracing quiet, then call `LinkedSpec::configure_trace(...)` immediately before execution, or
+  use the exact dedicated probe/test. Do not route an unbounded bootstrap debug stream to the conversation.
 - **Generated handler branches:** Perl generated handlers now emit debug-level
   `DECISION generated_handler_branch:<handler_kind>:<rule>:<branch>` lines for non-repetition match/miss, acode
   index dispatch, AND sequence checks, bcode child-call dispatch, child-result checks, and REP loop decisions.
@@ -993,6 +997,13 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **BOUNDARY:** this is orchestration over existing internal consumers, not a new public typed-value surface. The
   combined recurring/public no-drift row remains pending for `FUTURE-PARITY-BACKLOG.14.8`. Retrieve
   [[typed-source-location-recurring-gate]] before changing the source/runtime cardinality or rollout ownership.
+- **RECURSIVE-OBSERVATION PREFLIGHT:** retrieve [[recursive-source-observation-audit]] before changing recursive
+  entry/match/exit state or provenance. First use `call_spec_handler_subst` to prove child-call lowering,
+  `return_descriptor` to prove the child's family/cursor policy, and `dump_parser_source` plus `LinkedSpec::Get` to
+  prove action-edge versus direct-call entry state. All live engines guard an active `(rule, cursor)` before child
+  frame entry. Extend the existing monotonic recognition authority; never add a second invocation stack. Until
+  corrective leaf `.14.4.0.1` lands, the green neutral checker pins a known self-parent `direct_nonprogress` row
+  and does not prove distinct/ordered/acyclic invocation lineage.
 
 ### 4.9.2 `tools/check_recognition_transaction_contract.py` — neutral transaction/progress oracle
 

@@ -105,6 +105,20 @@
 > recurring/public no-drift row stays pending for final program-wide owner `FUTURE-PARITY-BACKLOG.14.8`; the
 > transaction closeout does not promote that separate typed-source row early.
 >
+> Recursive-observation audit `.14.4.0` is behavior-free and now fixes the handoff boundary. Extend each backend's
+> existing private monotonic recognition-invocation authority; do not add another stack or completed-history log.
+> Capture entry before child `I` lifecycle/family matching, preserve the terminal child-local regex match when one
+> exists, publish accepted exit only after normal accepted return, and keep `accepted` / `failed` / `aborted` /
+> `rejected` distinct. Action edges carry the parent-selected match into child entry state; direct calls do not
+> invent one. The child always derives seek/consume from its own family.
+>
+> Every non-root parent id must name a distinct earlier invocation in the same source authority. A non-progress
+> guard that fires before child frame entry reserves a fresh attempted-child identity, points it at the active
+> parent, records rejection, and pushes no live frame. The original `direct_nonprogress` neutral row self-parents;
+> `.14.4.0.1` must correct that fixture and add identity/order/cycle rejection before `.14.4.1` neutral behavior.
+> Perl `.2`, Rust `.3`, Dart `.4`, Julia `.5`, one shared PUC-Lua/LuaJIT implementation `.6`, recurring `.7`, and
+> public `.8` follow. No recursive-observation authored API or carrier projection is current yet.
+>
 > **Repeated-action handoff:** Every backend must consume
 > `linkedspec-explicit-repetition-action-result-v1`: bare `OR` is minimum-one repetition, explicit action returns
 > collect per hit, lifecycle returns remain whole-rule authority, pipe remains scalar, and generated source remains
