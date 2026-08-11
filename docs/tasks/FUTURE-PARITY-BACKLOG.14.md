@@ -4869,7 +4869,8 @@
     `38318827` retains the private authority, aligned Perl/Rust metadata, valid maps/pointer, and zero residue.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.5`
-  Status: `active` (2026-08-11; Julia integration `.14.3.5.2` signoff-complete; `.3` awaits clean activation; no push)
+  Status: `complete` (2026-08-11; all four Julia transaction children are signoff-complete through commit-ready
+    atomic 200/300 from clean `0d15f8c2`; shared Lua RED `.14.3.6.0` follows only after landing; no push)
   Goal: Implement and independently admit exact Julia parity while retaining native code-unit register compatibility.
   Depends on: `.14.3.4`
   Children: `.14.3.5.0-.14.3.5.3`
@@ -4905,9 +4906,15 @@
     canonical Phase 0 1,031/1,031 in 731 sec pass; rollout stays 4/9 and discovery/export remain dormant.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.5.3`
-  Status: `pending`
+  Status: `complete` (2026-08-11; definitive signoff complete and commit-ready as atomic 200/300 from clean
+    activation `0d15f8c2`; no push)
   Goal: Remove Julia dormancy, register ordinary/canonical proof, and promote only Julia transaction admission.
   Depends on: `.14.3.5.2`
+  Commit: `FUTURE-PARITY-BACKLOG.14.3.5.3 - admit Julia recognition transactions`
+  Evidence: exact Julia 203/203 is ordinary/canonical once without selector/conditional dormancy; the namespace
+    remains private/unexported. Neutral 132/246/44 at rollout 5/9, public 3/17/33, guide 1/8/12, Perl 51/51, Rust
+    12/12, Dart 10/10, complete Julia package/primary/corpus 105, book 79/14,404 KiB, all eight doctrines, CLI 66x2,
+    RAM 69%, and canonical Phase 0 1,031/1,031 in 738 sec pass through the exact success marker; Lua/later remain RED.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6`
   Status: `pending`

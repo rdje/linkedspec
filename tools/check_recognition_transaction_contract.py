@@ -30,6 +30,14 @@ DART_FACADE_PATH = "dart/lib/linkedspec_dart.dart"
 DART_PRIVATE_IMPORT = (
     "package:linkedspec_dart/src/runtime/recognition_transaction.dart"
 )
+JULIA_CONSUMER_PATH = "julia/test/recognition_transaction_contract_test.jl"
+JULIA_RUNTESTS_PATH = "julia/test/runtests.jl"
+JULIA_FACADE_PATH = "julia/src/LinkedSpecJulia.jl"
+JULIA_ORDINARY_INCLUDE = 'include("recognition_transaction_contract_test.jl")'
+JULIA_PRIVATE_AUTHORITY_ACCESS = """const JuliaRecognitionTransaction = getproperty(
+    LinkedSpecJulia,
+    :RecognitionTransaction,
+)"""
 RUST_ADMISSION_SOURCE_PATHS = [
     "rust/linkedspec-core/src/lib.rs",
     "rust/linkedspec-core/src/callable_contract.rs",
@@ -86,7 +94,7 @@ EXPECTED_COUNTS = {
     "progress_cases": 8,
     "diagnostics": 15,
     "rollout_legs": 9,
-    "mutations": 43,
+    "mutations": 44,
 }
 EXPECTED_EFFECT_ROW_HASHES = {
     "action_ir_effect_rows": "560de8fc586cee7adf66e1b6eeab7d931f441ebda6ca9cb0498ecc9d4392f775",
@@ -103,7 +111,7 @@ EXPECTED_SURFACE = {
         "remains staged until commit"
     ),
     "availability": (
-        "available only in an admitted backend; currently Perl, Rust, and Dart, with "
+        "available only in an admitted backend; currently Perl, Rust, Dart, and Julia, with "
         "all later runtime legs future and unavailable"
     ),
 }
@@ -152,7 +160,7 @@ EXPECTED_ROLLOUT = [
     (2, "FUTURE-PARITY-BACKLOG.14.3.2", "perl", "complete"),
     (3, "FUTURE-PARITY-BACKLOG.14.3.3", "rust", "complete"),
     (4, "FUTURE-PARITY-BACKLOG.14.3.4", "dart", "complete"),
-    (5, "FUTURE-PARITY-BACKLOG.14.3.5", "julia", "red"),
+    (5, "FUTURE-PARITY-BACKLOG.14.3.5", "julia", "complete"),
     (6, "FUTURE-PARITY-BACKLOG.14.3.6", "puc_lua", "red"),
     (7, "FUTURE-PARITY-BACKLOG.14.3.6", "luajit", "red"),
     (8, "FUTURE-PARITY-BACKLOG.14.3.7", "recurring", "red"),
@@ -195,17 +203,26 @@ EXPECTED_DART_ADMISSION = {
         "failures-only test/recognition_transaction_contract_test.dart)"
     ),
 }
+EXPECTED_JULIA_ADMISSION = {
+    "consumer_path": JULIA_CONSUMER_PATH,
+    "registration_marker": "running exact Julia recognition transaction admission consumer",
+    "invocation": (
+        "bash tools/run_julia_project_data.sh --project=julia --startup-file=no "
+        "--history-file=no -e 'using LinkedSpecJulia, JSON3, Test; "
+        "include(\"julia/test/recognition_transaction_contract_test.jl\")'"
+    ),
+}
 PUBLIC_SEQUENCE_CONTRACT = {
     "documents": [
         {
             "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
             "required_markers": [
                 "The shared contract now has an executable backend-neutral authority",
-                "The Perl, Rust, and Dart lanes now recognize and admit the four forms as a current capability",
-                "This section describes current Perl, Rust, and Dart features and an accepted future portable contract",
-                "fails closed over three public transaction pages, fourteen forbidden claims, and twenty-nine sequence mutations",
+                "The Perl, Rust, Dart, and Julia lanes now recognize and admit the four forms as a current capability",
+                "This section describes current Perl, Rust, Dart, and Julia features and an accepted future portable contract",
+                "fails closed over three public transaction pages, seventeen forbidden claims, and thirty-three sequence mutations",
                 (
-                    "executable, and Perl, Rust, and Dart are admitted; Julia, PUC Lua, "
+                    "executable, and Perl, Rust, Dart, and Julia are admitted; PUC Lua "
                     "and LuaJIT must each be admitted independently"
                 ),
             ],
@@ -214,7 +231,7 @@ PUBLIC_SEQUENCE_CONTRACT = {
             "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
             "required_markers": [
                 "The neutral authority is now executable",
-                "Perl, Rust, and Dart transaction support is current and canonically admitted",
+                "Perl, Rust, Dart, and Julia transaction support is current and canonically admitted",
                 "Neutral proof alone is not backend support",
             ],
         },
@@ -225,8 +242,8 @@ PUBLIC_SEQUENCE_CONTRACT = {
                     "Their neutral artifact/checker is executable at 128 current + 4 "
                     "dedicated ActionIR rows"
                 ),
-                "recognition rollout 4/9 complete",
-                "Julia, PUC Lua, LuaJIT, recurring, and public-no-drift legs remain RED",
+                "recognition rollout 5/9 complete",
+                "PUC Lua, LuaJIT, recurring, and public-no-drift legs remain RED",
             ],
         },
     ],
@@ -287,15 +304,27 @@ PUBLIC_SEQUENCE_CONTRACT = {
             "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
             "text": "later runtimes do not yet implement that route",
         },
+        {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "text": "current on Perl, Rust, and Dart, future on later runtimes",
+        },
+        {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "text": "Julia, PUC Lua, and LuaJIT do not yet admit the forms",
+        },
+        {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "text": "Julia and Lua do not yet implement it",
+        },
     ],
 }
-PUBLIC_SEQUENCE_MUTATION_COUNT = 29
+PUBLIC_SEQUENCE_MUTATION_COUNT = 33
 CAPABILITY_GUIDE_CONTRACT = {
     "path": "capability_conformance/README.md",
     "required_markers": [
-        "neutral + Perl + Rust + Dart 4/9 complete",
+        "neutral + Perl + Rust + Dart + Julia 5/9 complete",
         (
-            "current on Perl, Rust, and Dart and remain future on Julia, PUC Lua, and LuaJIT"
+            "current on Perl, Rust, Dart, and Julia and remain future on PUC Lua and LuaJIT"
         ),
     ],
     "forbidden_claims": [
@@ -305,11 +334,14 @@ CAPABILITY_GUIDE_CONTRACT = {
         "current on Perl and remain future on every other runtime",
         "neutral + Perl + Rust 3/9 complete",
         "current on Perl and Rust and remain future on Dart, Julia, PUC Lua, and LuaJIT",
+        "neutral + Perl + Rust + Dart 4/9 complete",
+        "current on Perl, Rust, and Dart and remain future on Julia, PUC Lua, and LuaJIT",
     ],
 }
-CAPABILITY_GUIDE_MUTATION_COUNT = 10
+CAPABILITY_GUIDE_MUTATION_COUNT = 12
 RUST_ADMISSION_MUTATION_COUNT = 8
 DART_ADMISSION_MUTATION_COUNT = 13
+JULIA_ADMISSION_MUTATION_COUNT = 14
 EXPECTED_TOP_LEVEL = {
     "format",
     "contract_id",
@@ -448,6 +480,53 @@ def validate_dart_admission(ci: str, sources: dict[str, str]) -> None:
     )
 
 
+def julia_admission_sources() -> dict[str, str]:
+    return {
+        JULIA_CONSUMER_PATH: read_text(ROOT / JULIA_CONSUMER_PATH),
+        JULIA_RUNTESTS_PATH: read_text(ROOT / JULIA_RUNTESTS_PATH),
+        JULIA_FACADE_PATH: read_text(ROOT / JULIA_FACADE_PATH),
+    }
+
+
+def validate_julia_admission(ci: str, sources: dict[str, str]) -> None:
+    require(
+        set(sources) == {JULIA_CONSUMER_PATH, JULIA_RUNTESTS_PATH, JULIA_FACADE_PATH},
+        "Julia admission source inventory drifted",
+    )
+    markers = [
+        f"require_tracked_file {EXPECTED_JULIA_ADMISSION['consumer_path']}",
+        f"log \"{EXPECTED_JULIA_ADMISSION['registration_marker']}\"",
+        EXPECTED_JULIA_ADMISSION["invocation"],
+    ]
+    for marker in markers:
+        require(
+            ci.count(marker) == 1,
+            f"canonical Julia admission marker missing or duplicated: {marker}",
+        )
+
+    runtests = sources[JULIA_RUNTESTS_PATH]
+    require(
+        runtests.count(JULIA_ORDINARY_INCLUDE) == 1,
+        "ordinary Julia admission include is missing or duplicated",
+    )
+    consumer = sources[JULIA_CONSUMER_PATH]
+    require(
+        consumer.count(JULIA_PRIVATE_AUTHORITY_ACCESS) == 1,
+        "Julia admission consumer must access the private authority exactly once",
+    )
+    for stale in (
+        "LINKEDSPEC_JULIA_RECOGNITION_TRANSACTION_RED_MODE",
+        "JULIA_RECOGNITION_TRANSACTION_RED_MODE",
+        'if JULIA_RECOGNITION_TRANSACTION_RED_MODE == "integration"',
+        "Julia dormant recognition-transaction contract",
+    ):
+        require(stale not in consumer, f"Julia admission consumer remains dormant: {stale}")
+    require(
+        "\n    RecognitionTransaction," not in sources[JULIA_FACADE_PATH],
+        "Julia recognition transaction authority became publicly exported",
+    )
+
+
 def public_sequence_texts() -> dict[str, str]:
     paths = [row["path"] for row in PUBLIC_SEQUENCE_CONTRACT["documents"]]
     return {path: read_text(ROOT / path) for path in paths}
@@ -473,7 +552,7 @@ def validate_capability_guide(
     )
     require(
         isinstance(forbidden, list)
-        and len(forbidden) == 6 == len(set(forbidden)),
+        and len(forbidden) == 8 == len(set(forbidden)),
         "capability-guide forbidden-claim inventory drifted",
     )
     for marker in markers:
@@ -524,13 +603,14 @@ def validate_public_sequence(
         rollout_status.get("perl") == "complete"
         and rollout_status.get("rust") == "complete"
         and rollout_status.get("dart") == "complete"
+        and rollout_status.get("julia") == "complete"
         and set(rollout_status.values()) == {"complete", "red"}
         and all(
             status == "red"
             for leg, status in rollout_status.items()
-            if leg not in {"neutral", "perl", "rust", "dart"}
+            if leg not in {"neutral", "perl", "rust", "dart", "julia"}
         ),
-        "public sequence requires neutral, Perl, Rust, and Dart complete with every later leg RED",
+        "public sequence requires neutral, Perl, Rust, Dart, and Julia complete with every later leg RED",
     )
 
     for row in documents:
@@ -555,7 +635,7 @@ def validate_public_sequence(
             )
             require(tracked.returncode == 0, f"public document is not tracked: {path}")
 
-    require(len(forbidden) == 14, "public forbidden-claim inventory drifted")
+    require(len(forbidden) == 17, "public forbidden-claim inventory drifted")
     for row in forbidden:
         path = row.get("path")
         claim = row.get("text")
@@ -891,7 +971,7 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
     )
     require(
         document.get("status")
-        == "neutral_perl_rust_and_dart_complete_other_legs_red",
+        == "neutral_perl_rust_dart_and_julia_complete_other_legs_red",
         "neutral/backend status drifted",
     )
     require(document.get("expected_counts") == EXPECTED_COUNTS, "expected_counts drifted")
@@ -1054,7 +1134,11 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
         "Dart rollout consumer path drifted",
     )
     require(
-        all(row.get("paths") == [] for row in rollout[4:]),
+        rollout[4].get("paths") == [EXPECTED_JULIA_ADMISSION["consumer_path"]],
+        "Julia rollout consumer path drifted",
+    )
+    require(
+        all(row.get("paths") == [] for row in rollout[5:]),
         "RED rollout legs must not claim implementation paths",
     )
 
@@ -1114,6 +1198,7 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
         )
         validate_rust_admission(ci, rust_admission_sources())
         validate_dart_admission(ci, dart_admission_sources())
+        validate_julia_admission(ci, julia_admission_sources())
         validate_public_sequence(
             document,
             PUBLIC_SEQUENCE_CONTRACT,
@@ -1191,7 +1276,8 @@ MUTATIONS: dict[str, Callable[[dict[str, Any]], None]] = {
     "rollout_status": _set(["rollout", 2, "status"], "red"),
     "rollout_perl_regression": _set(["rollout", 1, "status"], "red"),
     "rollout_dart_regression": _set(["rollout", 3, "status"], "red"),
-    "rollout_next_backend": _set(["rollout", 4, "status"], "complete"),
+    "rollout_julia_regression": _set(["rollout", 4, "status"], "red"),
+    "rollout_next_backend": _set(["rollout", 5, "status"], "complete"),
     "canonical_contract_path": _set(["canonical_execution", "contract_path"], "changed.json"),
     "canonical_checker_path": _set(["canonical_execution", "checker_path"], "changed.py"),
     "canonical_invocation": _set(
@@ -1324,8 +1410,14 @@ def validate_public_sequence_mutations(document: dict[str, Any]) -> int:
             ),
         ),
         (
-            "backend rollout promotion",
+            "Julia rollout regression",
             lambda candidate, _contract, _texts: candidate["rollout"][4].__setitem__(
+                "status", "red"
+            ),
+        ),
+        (
+            "backend rollout promotion",
+            lambda candidate, _contract, _texts: candidate["rollout"][5].__setitem__(
                 "status", "complete"
             ),
         ),
@@ -1536,6 +1628,64 @@ def validate_dart_admission_mutations() -> int:
     return len(mutations)
 
 
+def validate_julia_admission_mutations() -> int:
+    ci = read_text(CI_PATH)
+    sources = julia_admission_sources()
+    markers = [
+        f"require_tracked_file {EXPECTED_JULIA_ADMISSION['consumer_path']}",
+        f"log \"{EXPECTED_JULIA_ADMISSION['registration_marker']}\"",
+        EXPECTED_JULIA_ADMISSION["invocation"],
+    ]
+    mutations: list[tuple[str, str, dict[str, str]]] = []
+    for label, marker in zip(("require", "log", "invocation"), markers, strict=True):
+        mutations.extend(
+            [
+                (f"Julia {label} omission", ci.replace(marker, "", 1), dict(sources)),
+                (f"Julia {label} duplication", ci + "\n" + marker, dict(sources)),
+            ]
+        )
+
+    omitted_include = dict(sources)
+    omitted_include[JULIA_RUNTESTS_PATH] = omitted_include[JULIA_RUNTESTS_PATH].replace(
+        JULIA_ORDINARY_INCLUDE, "", 1
+    )
+    mutations.append(("Julia ordinary include omission", ci, omitted_include))
+    duplicated_include = dict(sources)
+    duplicated_include[JULIA_RUNTESTS_PATH] += "\n" + JULIA_ORDINARY_INCLUDE
+    mutations.append(("Julia ordinary include duplication", ci, duplicated_include))
+
+    for label, stale in (
+        ("environment switch retained", "LINKEDSPEC_JULIA_RECOGNITION_TRANSACTION_RED_MODE"),
+        ("selector constant retained", "JULIA_RECOGNITION_TRANSACTION_RED_MODE"),
+        ("integration conditional retained", 'if JULIA_RECOGNITION_TRANSACTION_RED_MODE == "integration"'),
+        ("dormant testset retained", "Julia dormant recognition-transaction contract"),
+    ):
+        candidate = dict(sources)
+        candidate[JULIA_CONSUMER_PATH] += "\n" + stale
+        mutations.append((f"Julia {label}", ci, candidate))
+
+    private_removed = dict(sources)
+    private_removed[JULIA_CONSUMER_PATH] = private_removed[JULIA_CONSUMER_PATH].replace(
+        JULIA_PRIVATE_AUTHORITY_ACCESS, "", 1
+    )
+    mutations.append(("Julia private authority access removed", ci, private_removed))
+    facade_export = dict(sources)
+    facade_export[JULIA_FACADE_PATH] += "\n    RecognitionTransaction,"
+    mutations.append(("Julia private authority publicly exported", ci, facade_export))
+
+    require(
+        len(mutations) == JULIA_ADMISSION_MUTATION_COUNT,
+        "Julia admission mutation count drifted",
+    )
+    for name, candidate_ci, candidate_sources in mutations:
+        try:
+            validate_julia_admission(candidate_ci, candidate_sources)
+        except ContractError:
+            continue
+        raise ContractError(f"Julia admission mutation {name!r} was accepted")
+    return len(mutations)
+
+
 def main() -> int:
     try:
         document = load_contract()
@@ -1545,6 +1695,7 @@ def main() -> int:
         guide_mutations = validate_capability_guide_mutations()
         rust_admission_mutations = validate_rust_admission_mutations()
         dart_admission_mutations = validate_dart_admission_mutations()
+        julia_admission_mutations = validate_julia_admission_mutations()
     except ContractError as exc:
         print(f"recognition-transaction-contract: ERROR: {exc}", file=sys.stderr)
         return 1
@@ -1552,11 +1703,12 @@ def main() -> int:
         "recognition-transaction-contract: OK "
         "(132 ActionIR rows = 128 current + 4 dedicated; 246 call rows; "
         "token 8 positive/17 negative; effects 6 graphs; marks 6; progress 8; "
-        "43 rejected mutations; rollout neutral + Perl + Rust + Dart 4/9 complete; "
-        f"public sequence 3 documents/14 forbidden/{public_mutations} mutations; "
-        f"capability guide 1 document/6 forbidden/{guide_mutations} mutations; "
+        "44 rejected mutations; rollout neutral + Perl + Rust + Dart + Julia 5/9 complete; "
+        f"public sequence 3 documents/17 forbidden/{public_mutations} mutations; "
+        f"capability guide 1 document/8 forbidden/{guide_mutations} mutations; "
         f"Rust admission {rust_admission_mutations} mutations; "
-        f"Dart admission {dart_admission_mutations} mutations)"
+        f"Dart admission {dart_admission_mutations} mutations; "
+        f"Julia admission {julia_admission_mutations} mutations)"
     )
     return 0
 

@@ -49,7 +49,7 @@
 > treat those compatibility controls as transaction support. The accepted transaction forms are `recognition_checkpoint()`,
 > `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and `recognition_rollback(token)`. The attempt
 > returns a match boolean; commit separately exposes the staged payload. The neutral authority is now executable
-> and fail-closed over 128 current + four dedicated node rows, 246 call rows, and 43 mutations. Perl, Rust, and Dart transaction support is current and canonically admitted; the later runtime legs remain unavailable until their own
+> and fail-closed over 128 current + four dedicated node rows, 246 call rows, and 44 mutations. Perl, Rust, Dart, and Julia transaction support is current and canonically admitted; the later runtime legs remain unavailable until their own
 > admissions land. Neutral proof alone is not backend support.
 >
 > Perl now has an admitted end-to-end implementation behind that boundary: dedicated ActionIR, recursive static
@@ -68,15 +68,14 @@
 > closure, cursor-only progress, and live UTF-16 cursor/boundary/invocation-mark synchronization converge across
 > native, reconstructed, generated-plan, and freshly analyzed emitted-source execution. The ordinary 10-test
 > consumer preserves false payloads and compatibility cursor behavior; canonical CI executes that exact project-
-> data-routed target once. Only Dart advances: recognition rollout is 4/9 while Julia, PUC Lua, LuaJIT, recurring,
-> and public-no-drift remain RED. The private authority is not exported.
+> data-routed target once. Only Dart advanced in that admission; its private authority is not exported.
 >
-> Julia now has a private end-to-end integration behind the same non-exported authority. Four dedicated non-eager
+> Julia now has an admitted private end-to-end integration behind the same non-exported authority. Four dedicated non-eager
 > nodes, recursive effect closure, cursor-only progress, and live UTF-8 code-unit cursor/boundary/invocation-mark
 > synchronization converge across native, reconstructed, generated-plan, and independently loaded emitted-module
-> execution. The explicit integration mode passes 203 assertions and authority mode remains 155/155. The final-path
-> consumer is still omitted from ordinary/canonical discovery, so this is integration rather than admission and
-> rollout remains 4/9.
+> execution. The exact 203-assertion consumer is included in ordinary Julia discovery and executed once directly by
+> canonical CI. Only Julia advances: recognition rollout is 5/9 while PUC Lua, LuaJIT, recurring, and public-no-drift
+> remain RED; the private authority stays unexported.
 >
 > Any cursor transaction is one explicit
 > recognition attempt over invocation-local cursor/boundary/marks only; it adds no search tree and cannot undo

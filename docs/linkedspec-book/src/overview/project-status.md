@@ -104,9 +104,9 @@ Public typed values, cross-runtime transaction portability, recursive observatio
 dispatch, and the remaining public authored surfaces remain future work. Exact transaction syntax is ratified:
 `recognition_checkpoint()`, `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and
 `recognition_rollback(token)`. Match is a strict boolean and the falsey-safe payload remains staged until commit.
-Their neutral artifact/checker is executable at 128 current + 4 dedicated ActionIR rows, 246 call rows, and 43
-rejected mutations, with recognition rollout 4/9 complete. The authored forms are current executable syntax on
-Perl, Rust, and Dart; Julia, PUC Lua, LuaJIT, recurring, and public-no-drift legs remain RED. The internal
+Their neutral artifact/checker is executable at 128 current + 4 dedicated ActionIR rows, 246 call rows, and 44
+rejected mutations, with recognition rollout 5/9 complete. The authored forms are current executable syntax on
+Perl, Rust, Dart, and Julia; PUC Lua, LuaJIT, recurring, and public-no-drift legs remain RED. The internal
 Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT admissions do not add an authored `Position` or `Span` value, transaction
 operation, schema version, or new helper result. Rollout is 8 complete / 6 pending because the combined recurring/
 public no-drift row remains owned by final program-wide closeout `FUTURE-PARITY-BACKLOG.14.8`.
@@ -126,15 +126,15 @@ Dart now has an admitted package-private end-to-end implementation. Four dedicat
 recursive effect closure, cursor-only progress, and live UTF-16 cursor/boundary/invocation-mark synchronization
 converge across native, reconstructed, generated-plan, and freshly analyzed emitted-source execution. The ordinary
 10-test consumer preserves a successful `false` payload and compatibility cursor behavior, and canonical CI
-executes its exact project-data-routed target once. Only Dart advances; recognition rollout is 4/9 while Julia,
-PUC Lua, LuaJIT, recurring, and public-no-drift remain RED. The private authority remains unexported.
+executes its exact project-data-routed target once. Only Dart advanced in that admission; its private authority
+remains unexported.
 
-Julia now has a private integrated implementation but remains deliberately unadmitted. Four dedicated non-eager
+Julia now has an admitted private integrated implementation. Four dedicated non-eager
 nodes, recursive effect closure, cursor-only progress, and live UTF-8 code-unit cursor/boundary/invocation-mark
 synchronization converge across native, reconstructed, generated-plan, and independently loaded emitted-module
-execution. The dormant integration contract passes 203/203 and its authority remains 155/155. The private namespace
-is not exported and the final-path consumer is absent from ordinary and canonical discovery, so recognition rollout
-stays 4/9 until Julia's separate admission leaf.
+execution. The exact 203/203 consumer is included in ordinary Julia discovery and executed directly once by canonical
+CI. Only Julia advances: recognition rollout is 5/9 while PUC Lua, LuaJIT, recurring, and public-no-drift remain
+RED; the private namespace remains unexported.
 
 The helper audit distinguishes 7 callable compatibility aliases from 2 internal Perl contract/scanner ids.
 `capture_take_slice` and `capture_take_slice_len` are internal ids, not accepted helper spellings; authored code

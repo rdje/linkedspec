@@ -401,6 +401,7 @@ require_tracked_file t/recognition_transaction_perl_authority.t
 require_tracked_file t/recognition_transaction_perl_contract.t
 require_tracked_file rust/linkedspec-runtime/tests/recognition_transaction_contract.rs
 require_tracked_file dart/test/recognition_transaction_contract_test.dart
+require_tracked_file julia/test/recognition_transaction_contract_test.jl
 require_tracked_file rust/linkedspec-runtime/tests/typed_source_location_contract.rs
 require_tracked_file dart/test/typed_source_location_contract_test.dart
 require_tracked_file julia/test/typed_source_location_contract_test.jl
@@ -595,6 +596,9 @@ cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test recognit
 
 log "running exact Dart recognition transaction admission consumer"
 (cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/recognition_transaction_contract_test.dart)
+
+log "running exact Julia recognition transaction admission consumer"
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include("julia/test/recognition_transaction_contract_test.jl")'
 
 log "running exact Perl typed source-location value and projection admission consumers"
 PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t

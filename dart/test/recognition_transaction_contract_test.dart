@@ -60,7 +60,7 @@ void main() {
     expect(_contract['format'], 1);
     expect(
       _contract['status'],
-      'neutral_perl_rust_and_dart_complete_other_legs_red',
+      'neutral_perl_rust_dart_and_julia_complete_other_legs_red',
     );
 
     final counts = _object(_contract['expected_counts']);
@@ -74,7 +74,7 @@ void main() {
     expect(counts, containsPair('mark_cases', 6));
     expect(counts, containsPair('progress_cases', 8));
     expect(counts, containsPair('diagnostics', 15));
-    expect(counts, containsPair('mutations', 43));
+    expect(counts, containsPair('mutations', 44));
 
     expect(_object(_contract['authored_surface']), {
       'checkpoint': 'tx = recognition_checkpoint()',
@@ -86,7 +86,7 @@ void main() {
       'result_separation':
           'recognize_once returns a strict match boolean; the recognized payload remains staged until commit',
       'availability':
-          'available only in an admitted backend; currently Perl, Rust, and Dart, with all later runtime legs future and unavailable',
+          'available only in an admitted backend; currently Perl, Rust, Dart, and Julia, with all later runtime legs future and unavailable',
     });
 
     final rollout = _objectRows('rollout');
@@ -105,7 +105,14 @@ void main() {
       'status': 'complete',
       'paths': ['dart/test/recognition_transaction_contract_test.dart'],
     });
-    expect(rollout.skip(4).every((row) => row['status'] == 'red'), isTrue);
+    expect(rollout[4], {
+      'order': 5,
+      'owner': 'FUTURE-PARITY-BACKLOG.14.3.5',
+      'leg': 'julia',
+      'status': 'complete',
+      'paths': ['julia/test/recognition_transaction_contract_test.jl'],
+    });
+    expect(rollout.skip(5).every((row) => row['status'] == 'red'), isTrue);
   });
 
   test(

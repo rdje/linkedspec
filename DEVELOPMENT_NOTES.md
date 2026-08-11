@@ -10,6 +10,25 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.5.3` — Julia recognition-transaction admission): treat admission as an
+  exact discovery/governance operation over the already-green private implementation. Include the final-path
+  consumer once in `julia/test/runtests.jl`, require its exact canonical marker/command, and remove both selector
+  environment variables plus the conditional testset rather than retaining a hidden alternate execution mode.
+- Keep the authority deliberately private. Ordinary test code reaches the unexported source-local namespace for
+  proof, while mutation governance separately rejects facade export and loss of the private lookup.
+- Synchronize every admitted consumer's neutral metadata snapshot on rollout movement. Perl, Rust, Dart, and Julia
+  now agree on status, availability, mutation 44, rollout paths, and the Lua-next boundary without runtime changes
+  to the first three backends.
+- Separate semantic, public-sequence, guide, and registration mutation domains. Julia complete-to-RED plus
+  premature Lua promotion produce semantic 44; three superseded Dart-era public claims yield 3/17/33; two guide
+  claims yield 1/8/12; fourteen Julia mutations own exact discovery, dormancy removal, privacy, and facade denial.
+- Keep native UTF-8 code-unit registers/results and the shared carrier implementation unchanged. The admitted
+  consumer always executes all 203 assertions, and the complete Julia gate proves package, primary CLI, and all
+  105 corpus fixtures without a new project-data owner.
+- Capability/book/live/Knowledge Map truth, direct rendered inspection, and all eight doctrines agree. Definitive
+  canonical proof passes containment/relocation, CLI 66x2, RAM 69%, and Phase 0 1,031/1,031 in 738 seconds through
+  the exact success marker; land atomic 200/300 cleanly before activating shared Lua RED `.14.3.6.0`.
+
 - 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.5.2` — private Julia recognition-transaction integration): normalize
   transaction calls only after ordinary argument parsing, then replace the complete call shape with a dedicated
   node. The attempt node stores a token-slot name plus static child label, so `call(Rule)` is never eagerly resolved.

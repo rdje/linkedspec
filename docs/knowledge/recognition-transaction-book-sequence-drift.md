@@ -7,12 +7,13 @@ answers:
   - "does the neutral transaction checker govern public milestone ordering"
   - "who owns recognition transaction public sequence enforcement"
 date: 2026-08-10
-status: current public-sequence guard tracks Perl, Rust, and Dart admission at 3 documents / 14 forbidden / 29 mutations
+status: current public-sequence guard tracks Perl, Rust, Dart, and Julia admission at 3 documents / 17 forbidden / 33 mutations
 tags: [transactions, documentation, mdbook, drift, governance, rendering]
 evidence: "FUTURE-PARITY-BACKLOG.14.3.1.2 rendered the capture/source page and found adjacent claims that the neutral authority was executable and still next. Git blame traced the old sentence to 7c2ff407 and the missed update to e0cc7182. FUTURE-PARITY-BACKLOG.14.3.1.2.0 then extended the same canonical checker with a separate exact public projection over 3 documents, 8 forbidden claims, and 13 in-memory mutations while preserving the JSON and its 40 semantic mutations."
 evidence_update_2026_08_10_perl_admission: "FUTURE-PARITY-BACKLOG.14.3.2.3 advances the same projection to current Perl support while every later leg remains RED. Separate neutral regression, Perl regression, and premature Rust promotion checks raise public sequence proof to 14 mutations; semantic proof is independently 41 mutations."
 evidence_update_2026_08_10_rust_admission: "FUTURE-PARITY-BACKLOG.14.3.3.3 review finds three adjacent Perl-only statements outside the earlier eight-claim forbidden inventory: one all-other-runtimes-future sentence, one explicit Rust-through-Lua rejection sentence, and one all-other-runtimes-no-progress sentence. The checker now enumerates all eleven stale claims and injects every claim as its own mutation. Together with document, marker, and rollout mutations, public proof is 3/11/25 while semantic proof remains separately 42."
 evidence_update_2026_08_11_dart_admission: "FUTURE-PARITY-BACKLOG.14.3.4.3 advances current public claims to Perl, Rust, and Dart while all later legs remain RED. It adds the superseded Perl/Rust-only model, explicit Dart-through-Lua rejection, and later-runtimes progress sentence to the forbidden inventory, plus a Dart regression mutation before premature Julia promotion. Public proof is 3/14/29 while semantic proof is separately 43."
+evidence_update_2026_08_11_julia_admission: "FUTURE-PARITY-BACKLOG.14.3.5.3 advances current public claims to Perl, Rust, Dart, and Julia while both Lua runtimes and all later legs remain RED. It adds three superseded Dart-era claims plus a Julia regression and premature Lua promotion. Public proof is 3/17/33 while semantic proof is separately 44."
 reverify: "bash tools/run_mdbook_local.sh && rg -n 'neutral artifact/checker is executable|neutral artifact/checker is next' docs/linkedspec-book/book/dsl/capture-marks-and-source-locations.html && bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py"
 ---
 
@@ -31,8 +32,9 @@ Fail-closed prevention is intentionally separate: `FUTURE-PARITY-BACKLOG.14.3.1.
 checker with an exact three-document marker inventory, tracked-file proof, and rollout-derived public state. Perl
 admission first advanced that projection to eight forbidden claims and fourteen mutations. Rust-admission review
 then found three adjacent Perl-only sentences that the earlier inventory did not name. Dart admission adds three
-superseded Perl/Rust-only claims. The guard now forbids all fourteen stale/current claims and injects each one
-independently, producing 29 sequence mutations alongside neutral, Perl, Rust, Dart, and premature-next-backend
-rollout regressions. The JSON separately owns 43 semantic mutations. Keeping
+superseded Perl/Rust-only claims, and Julia admission adds three superseded Dart-era claims. The guard now forbids
+all seventeen stale/current claims and injects each one independently, producing 33 sequence mutations alongside
+neutral, Perl, Rust, Dart, Julia, and premature-next-backend rollout regressions. The JSON separately owns 44
+semantic mutations. Keeping
 the counts and mutation loops separate prevents public milestone governance from silently changing the semantic
 contract.

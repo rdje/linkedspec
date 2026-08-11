@@ -1,40 +1,11 @@
-# FUTURE-PARITY-BACKLOG.14.3.5.0 — dormant Julia recognition transactions.
+# FUTURE-PARITY-BACKLOG.14.3.5.3 — admitted Julia recognition transactions.
 #
-# Ordinary Julia discovery is the explicit include list in `test/runtests.jl`;
-# that list deliberately omits this pre-admission consumer. Run either mode
-# through repository-local project data from the repository root:
-#
-#   LINKEDSPEC_JULIA_RECOGNITION_TRANSACTION_RED_MODE=authority \
-#     bash tools/run_julia_project_data.sh --project=julia \
-#       --startup-file=no --history-file=no -e \
-#       'using LinkedSpecJulia, JSON3, Test; include("julia/test/recognition_transaction_contract_test.jl")'
-#
-#   LINKEDSPEC_JULIA_RECOGNITION_TRANSACTION_RED_MODE=integration \
-#     bash tools/run_julia_project_data.sh --project=julia \
-#       --startup-file=no --history-file=no -e \
-#       'using LinkedSpecJulia, JSON3, Test; include("julia/test/recognition_transaction_contract_test.jl")'
-#
-# Private-authority work makes `authority` mode green. Integration then makes
-# the independently nested `integration` mode green. Admission removes this
-# selector and adds the unchanged assertions to `test/runtests.jl`.
+# Ordinary Julia discovery and canonical CI execute this exact consumer through
+# repository-local project data. The transaction namespace remains private.
 
 using LinkedSpecJulia
 using JSON3
 using Test
-
-const JULIA_RECOGNITION_TRANSACTION_RED_MODE = get(
-    ENV,
-    "LINKEDSPEC_JULIA_RECOGNITION_TRANSACTION_RED_MODE",
-    "authority",
-)
-
-if !(JULIA_RECOGNITION_TRANSACTION_RED_MODE in ("authority", "integration"))
-    error(
-        "LINKEDSPEC_JULIA_RECOGNITION_TRANSACTION_RED_MODE must be " *
-        "'authority' or 'integration', got " *
-        "'$(JULIA_RECOGNITION_TRANSACTION_RED_MODE)'",
-    )
-end
 
 const JULIA_RECOGNITION_TRANSACTION_CONTRACT = JSON3.read(
     read(
@@ -53,7 +24,7 @@ const JULIA_RECOGNITION_TRANSACTION_CONTRACT = JSON3.read(
 )
 
 # This namespace is deliberately private and must remain absent from the
-# LinkedSpecJulia export list. Its absence is the sole current RED boundary.
+# LinkedSpecJulia export list.
 const JuliaRecognitionTransaction = getproperty(
     LinkedSpecJulia,
     :RecognitionTransaction,
@@ -218,13 +189,13 @@ function _julia_recognition_execute_emitted(
     return value, source_identity
 end
 
-@testset "Julia dormant recognition-transaction contract" begin
-    @testset "neutral contract and dormant Julia boundary are exact" begin
+@testset "Julia admitted recognition-transaction contract" begin
+    @testset "neutral contract and admitted Julia boundary are exact" begin
         contract = JULIA_RECOGNITION_TRANSACTION_CONTRACT
         @test contract["contract_id"] == "linkedspec-recognition-transaction-v1"
         @test contract["format"] == 1
         @test contract["status"] ==
-              "neutral_perl_rust_and_dart_complete_other_legs_red"
+              "neutral_perl_rust_dart_and_julia_complete_other_legs_red"
 
         counts = contract["expected_counts"]
         @test counts["current_action_ir_nodes"] == 128
@@ -237,7 +208,7 @@ end
         @test counts["mark_cases"] == 6
         @test counts["progress_cases"] == 8
         @test counts["diagnostics"] == 15
-        @test counts["mutations"] == 43
+        @test counts["mutations"] == 44
 
         @test contract["authored_surface"] == Dict{String,Any}(
             "checkpoint" => "tx = recognition_checkpoint()",
@@ -249,22 +220,22 @@ end
             "result_separation" =>
                 "recognize_once returns a strict match boolean; the recognized payload remains staged until commit",
             "availability" =>
-                "available only in an admitted backend; currently Perl, Rust, and Dart, with all later runtime legs future and unavailable",
+                "available only in an admitted backend; currently Perl, Rust, Dart, and Julia, with all later runtime legs future and unavailable",
         )
 
         rollout = contract["rollout"]
         @test length(rollout) == 9
-        @test [row["leg"] for row in rollout[1:4]] ==
-              ["neutral", "perl", "rust", "dart"]
-        @test all(row["status"] == "complete" for row in rollout[1:4])
+        @test [row["leg"] for row in rollout[1:5]] ==
+              ["neutral", "perl", "rust", "dart", "julia"]
+        @test all(row["status"] == "complete" for row in rollout[1:5])
         @test rollout[5] == Dict{String,Any}(
             "order" => 5,
             "owner" => "FUTURE-PARITY-BACKLOG.14.3.5",
             "leg" => "julia",
-            "status" => "red",
-            "paths" => Any[],
+            "status" => "complete",
+            "paths" => Any["julia/test/recognition_transaction_contract_test.jl"],
         )
-        @test all(row["status"] == "red" for row in rollout[5:end])
+        @test all(row["status"] == "red" for row in rollout[6:end])
     end
 
     @testset "invocation identities and same-label marks are isolated" begin
@@ -697,113 +668,111 @@ end
         )
     end
 
-    if JULIA_RECOGNITION_TRANSACTION_RED_MODE == "integration"
-        @testset "authored forms lower to four dedicated non-eager nodes" begin
-            _, compiled = _julia_recognition_compile(
-                JULIA_RECOGNITION_AUTHORED_SOURCE,
-            )
-            top = compiled_rule(compiled, "Top")
-            payload = only(top.blind_edges).action_payload
-            action = to_json(payload.action_ast)
-            expected = Dict(
-                "recognition_checkpoint" => 1,
-                "recognize_once" => 1,
-                "recognition_commit" => 1,
-                "recognition_rollback" => 1,
-            )
-            for (kind, count) in expected
-                @test length(_julia_recognition_objects_with_kind(action, kind)) == count
-            end
-            attempt = only(
-                _julia_recognition_objects_with_kind(action, "recognize_once"),
-            )
-            @test attempt["token"] == "tx"
-            @test attempt["rule"] == "Child"
-            @test isempty([
-                object for object in _julia_recognition_all_objects(action)
-                if get(object, "kind", nothing) == "call" &&
-                   get(object, "name", nothing) == "Child"
-            ])
+    @testset "authored forms lower to four dedicated non-eager nodes" begin
+        _, compiled = _julia_recognition_compile(
+            JULIA_RECOGNITION_AUTHORED_SOURCE,
+        )
+        top = compiled_rule(compiled, "Top")
+        payload = only(top.blind_edges).action_payload
+        action = to_json(payload.action_ast)
+        expected = Dict(
+            "recognition_checkpoint" => 1,
+            "recognize_once" => 1,
+            "recognition_commit" => 1,
+            "recognition_rollback" => 1,
+        )
+        for (kind, count) in expected
+            @test length(_julia_recognition_objects_with_kind(action, kind)) == count
         end
+        attempt = only(
+            _julia_recognition_objects_with_kind(action, "recognize_once"),
+        )
+        @test attempt["token"] == "tx"
+        @test attempt["rule"] == "Child"
+        @test isempty([
+            object for object in _julia_recognition_all_objects(action)
+            if get(object, "kind", nothing) == "call" &&
+               get(object, "name", nothing) == "Child"
+        ])
+    end
 
-        @testset "effect closure and cursor-only progress are exact" begin
-            authority = _julia_recognition_authority("input.spec")
-            for graph in _julia_recognition_fixture_rows("effect_graphs")
-                if graph["accepted"]
-                    @test JuliaRecognitionTransaction.classify_effects(authority, graph) ===
-                          nothing
-                else
-                    _julia_recognition_expect_diagnostic(
-                        String(graph["diagnostic"]),
-                        () -> JuliaRecognitionTransaction.classify_effects(
-                            authority,
-                            graph,
-                        ),
-                        Dict{String,Any}(),
-                    )
-                end
+    @testset "effect closure and cursor-only progress are exact" begin
+        authority = _julia_recognition_authority("input.spec")
+        for graph in _julia_recognition_fixture_rows("effect_graphs")
+            if graph["accepted"]
+                @test JuliaRecognitionTransaction.classify_effects(authority, graph) ===
+                      nothing
+            else
+                _julia_recognition_expect_diagnostic(
+                    String(graph["diagnostic"]),
+                    () -> JuliaRecognitionTransaction.classify_effects(
+                        authority,
+                        graph,
+                    ),
+                    Dict{String,Any}(),
+                )
             end
-            for fixture in _julia_recognition_fixture_rows("progress")
-                if fixture["accepted"]
-                    @test JuliaRecognitionTransaction.validate_progress(
+        end
+        for fixture in _julia_recognition_fixture_rows("progress")
+            if fixture["accepted"]
+                @test JuliaRecognitionTransaction.validate_progress(
+                    authority,
+                    fixture,
+                ) === nothing
+            else
+                _julia_recognition_expect_diagnostic(
+                    String(fixture["diagnostic"]),
+                    () -> JuliaRecognitionTransaction.validate_progress(
                         authority,
                         fixture,
-                    ) === nothing
-                else
-                    _julia_recognition_expect_diagnostic(
-                        String(fixture["diagnostic"]),
-                        () -> JuliaRecognitionTransaction.validate_progress(
-                            authority,
-                            fixture,
-                        ),
-                        Dict{String,Any}(),
-                    )
-                end
+                    ),
+                    Dict{String,Any}(),
+                )
             end
         end
+    end
 
-        @testset "native reconstructed and generated-plan carriers preserve false" begin
-            parsed, compiled = _julia_recognition_compile(
-                JULIA_RECOGNITION_AUTHORED_SOURCE,
-            )
-            @test runtime_parse(LinkedSpecRuntimeEngine(compiled), "xx").value === false
+    @testset "native reconstructed and generated-plan carriers preserve false" begin
+        parsed, compiled = _julia_recognition_compile(
+            JULIA_RECOGNITION_AUTHORED_SOURCE,
+        )
+        @test runtime_parse(LinkedSpecRuntimeEngine(compiled), "xx").value === false
 
-            normalized = JSON3.read(
-                JSON3.write(to_json(parsed)),
-                Dict{String,Any},
-            )
-            reconstructed = from_json(SpecFile, normalized)
-            validate_spec(reconstructed)
-            reconstructed_compiled = compile_spec(reconstructed)
-            @test runtime_parse(
-                LinkedSpecRuntimeEngine(reconstructed_compiled),
-                "xx",
-            ).value === false
-            @test execute_generated_parser_v2(
-                compiled,
-                build_generated_rule_plan(compiled),
-                "xx",
-                "recognition-transaction/julia.spec",
-            ) === false
+        normalized = JSON3.read(
+            JSON3.write(to_json(parsed)),
+            Dict{String,Any},
+        )
+        reconstructed = from_json(SpecFile, normalized)
+        validate_spec(reconstructed)
+        reconstructed_compiled = compile_spec(reconstructed)
+        @test runtime_parse(
+            LinkedSpecRuntimeEngine(reconstructed_compiled),
+            "xx",
+        ).value === false
+        @test execute_generated_parser_v2(
+            compiled,
+            build_generated_rule_plan(compiled),
+            "xx",
+            "recognition-transaction/julia.spec",
+        ) === false
 
-            _, ordinary = _julia_recognition_compile(
-                JULIA_RECOGNITION_ORDINARY_CURSOR_SOURCE,
-            )
-            @test runtime_parse(LinkedSpecRuntimeEngine(ordinary), "a").value == "ok"
-        end
+        _, ordinary = _julia_recognition_compile(
+            JULIA_RECOGNITION_ORDINARY_CURSOR_SOURCE,
+        )
+        @test runtime_parse(LinkedSpecRuntimeEngine(ordinary), "a").value == "ok"
+    end
 
-        @testset "independently loaded emitted module uses the same runtime" begin
-            _, compiled = _julia_recognition_compile(
-                JULIA_RECOGNITION_AUTHORED_SOURCE,
-            )
-            identity = "recognition-transaction/julia-emitted.spec"
-            value, source_identity = _julia_recognition_execute_emitted(
-                compiled,
-                identity,
-                "xx",
-            )
-            @test value === false
-            @test source_identity == identity
-        end
+    @testset "independently loaded emitted module uses the same runtime" begin
+        _, compiled = _julia_recognition_compile(
+            JULIA_RECOGNITION_AUTHORED_SOURCE,
+        )
+        identity = "recognition-transaction/julia-emitted.spec"
+        value, source_identity = _julia_recognition_execute_emitted(
+            compiled,
+            identity,
+            "xx",
+        )
+        @test value === false
+        @test source_identity == identity
     end
 end

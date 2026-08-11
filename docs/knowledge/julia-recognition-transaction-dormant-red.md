@@ -1,6 +1,6 @@
 ---
 id: julia-recognition-transaction-dormant-red
-title: Julia recognition transactions are integrated behind dormant admission
+title: Dormant Julia recognition-transaction RED was the admission prerequisite
 answers:
   - "where is the dormant Julia recognition transaction RED consumer"
   - "how do I run the Julia recognition transaction RED"
@@ -12,18 +12,18 @@ answers:
   - "does the Julia transaction RED allocate temporary storage"
   - "does the Julia recognition transaction RED change rollout or production behavior"
 date: 2026-08-11
-status: current privately integrated dormant boundary; admission owned by FUTURE-PARITY-BACKLOG.14.3.5.3
+status: historical prerequisite completed by FUTURE-PARITY-BACKLOG.14.3.5.3 admission
 tags: [julia, recognition, transaction, ActionIR, RED, generated-source, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.14.3.5.0 adds julia/test/recognition_transaction_contract_test.jl at its final path but omits it from julia/test/runtests.jl and canonical registration. `.1` supplies the non-exported source-local authority at 155/155. `.2` adds four dedicated non-eager nodes, recursive effect closure, cursor-only progress, and one invocation adapter over the existing UTF-8 code-unit cursor, anonymous boundary, and same-label marks. Native, reconstructed, generated-plan, and independently loaded Base.include_string emitted-module execution preserve a successful false payload; the unchanged integration mode passes 203/203. The consumer uses no filesystem temporary workspace and remains absent from ordinary/canonical discovery. Production admission, neutral 132/246/43, and rollout 4/9 are unchanged."
-reverify: "LINKEDSPEC_JULIA_RECOGNITION_TRANSACTION_RED_MODE=integration bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/recognition_transaction_contract_test.jl\")'"
+evidence: "FUTURE-PARITY-BACKLOG.14.3.5.0 added julia/test/recognition_transaction_contract_test.jl at its final path but omitted it from ordinary/canonical discovery. `.1` supplied the non-exported source-local authority at 155/155, and `.2` integrated four dedicated non-eager nodes, recursive effect closure, cursor-only progress, and all four carriers at 203/203. Admission `.14.3.5.3` removes both selector modes and conditional dormancy, includes the same consumer exactly once ordinarily/canonically, retains the unexported authority, and promotes only Julia to rollout 5/9."
+reverify: "test \"$(rg -c '^include\\(\"recognition_transaction_contract_test[.]jl\"\\)$' julia/test/runtests.jl)\" = 1 && ! rg -n 'LINKEDSPEC_JULIA_RECOGNITION_TRANSACTION_RED_MODE|JULIA_RECOGNITION_TRANSACTION_RED_MODE' julia/test/recognition_transaction_contract_test.jl && rg -n 'julia/test/recognition_transaction_contract_test[.]jl' tools/run_ci_local.sh"
 ---
 
 # Dormant Julia recognition-transaction boundary
 
-The final-path consumer is `julia/test/recognition_transaction_contract_test.jl`. Julia package discovery is the
-explicit include list in `julia/test/runtests.jl`; that list and canonical CI deliberately omit this file until
-admission. Repository-routed `authority` and `integration` selections load the same neutral fixture and now pass
-155 and 203 assertions respectively while the private namespace remains unexported.
+The final-path consumer is `julia/test/recognition_transaction_contract_test.jl`. Before admission, Julia package
+discovery and canonical CI deliberately omitted it while explicit `authority` and `integration` selector modes
+proved the private seams. Admission `.14.3.5.3` removes those selectors and runs all 203 assertions in ordinary
+package discovery and canonical CI while the private namespace remains unexported.
 
 The consumer freezes the complete later path now: invocation and mark generations, opaque linear tokens, detached
 state, falsey payloads, exact misuse diagnostics, four non-eager nodes, recursive effect closure, cursor-only
@@ -31,9 +31,9 @@ progress, native and reconstructed runtime, generated plans, independently loade
 cursor controls. Emitted proof uses a fresh module with `Base.include_string`, so the dormant test creates no
 project-data owner and cannot bypass the repository storage policy.
 
-Private authority `.14.3.5.1` supplies the non-exported namespace. Integration `.14.3.5.2` closes the nested
-node/policy/runtime/carrier assertions in the unchanged consumer. Admission `.14.3.5.3` alone may remove the
-selector, include the exact final-path file ordinarily/canonically, and advance Julia's rollout row.
+Private authority `.14.3.5.1` supplied the non-exported namespace. Integration `.14.3.5.2` closed the nested
+node/policy/runtime/carrier assertions. Admission `.14.3.5.3` then removed dormancy, registered the unchanged
+consumer exactly once, and advanced only Julia's rollout row.
 
 ## Links
 
@@ -41,4 +41,5 @@ selector, include the exact final-path file ordinarily/canonically, and advance 
 - Julia typed-source authority: [[typed-source-location-runtime-rollout-plan]].
 - Dart precedent: [[dart-recognition-transaction-dormant-red]].
 - Integration: [[julia-recognition-transaction-integration]].
-- Owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.3.5.0-.2`; next owner `.14.3.5.3`.
+- Current admission: [[julia-recognition-transaction-admission]].
+- Owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.3.5.0-.3`.

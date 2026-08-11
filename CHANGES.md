@@ -10,6 +10,25 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.5.3 — admit Julia recognition transactions
+
+- Registered the unchanged 203-assertion final-path Julia consumer exactly once in ordinary package discovery and
+  canonical CI. Removed both environment selectors and the conditional integration wrapper; all authority,
+  ActionIR, effect/progress, native, reconstructed, generated-plan, and emitted-module assertions now always run.
+- Retained the implementation boundary as private: the consumer explicitly reaches the source-local
+  `LinkedSpecJulia.RecognitionTransaction` namespace, while the public facade still exports no transaction API.
+- Promoted only Julia in the neutral rollout and synchronized the mutable status, availability, mutation, rollout,
+  and later-RED assertions in the admitted Perl, Rust, Dart, and Julia consumers. PUC Lua and LuaJIT remain next.
+- Advanced executable governance to 132 ActionIR rows / 246 calls / 44 semantic mutations and rollout 5/9. Exact
+  Julia registration/privacy/dormancy proof rejects 14 mutations; public governance is 3/17/33 and the distinct
+  capability guide is 1/8/12.
+- Updated the capability guide and sole-facing book to teach that the four authored recognition forms are current
+  on Perl, Rust, Dart, and Julia while both Lua runtimes, recurring composition, and final no-drift remain RED.
+- Focused proof passes the neutral checker, Julia 203/203, Perl 51/51, Rust 12/12, Dart 10/10, and the complete
+  Julia package/primary/105-fixture gate. The 79-file / 14,404-KiB book and all eight doctrines pass; definitive
+  canonical proof passes repository containment/relocation, CLI 66x2, RAM 69%, Phase 0 1,031/1,031 in 738 seconds,
+  and the exact `[ci] local CI gate passed` marker.
+
 ## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.5.2 — integrate Julia recognition transactions
 
 - Added four dedicated Julia ActionIR nodes for checkpoint, non-eager static recognition, commit, and rollback.

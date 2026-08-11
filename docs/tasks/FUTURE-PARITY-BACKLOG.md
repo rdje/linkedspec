@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-11` (Dart integration `.14.3.4.2` is atomic 195/300; admission `.14.3.4.3` is
-  signoff-complete for atomic 196/300 with only Dart promoted; no push)
+- Last updated: `2026-08-11` (Julia admission `.14.3.5.3` is signoff-complete and commit-ready as atomic 200/300;
+  shared Lua transaction RED `.14.3.6.0` follows only after the clean landing; no push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -103,14 +103,15 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-11):** Dart admission `.14.3.4.3` landed at `38318827` as atomic 196/300
-(no push), with exact ordinary/canonical 10/10 proof and its private authority unexported. Dormant Julia RED
-`.14.3.5.0` is signoff-complete and commit-ready from that clean boundary. One final-path consumer freezes authority,
-falsey-safe tokens, detached state, diagnostics, four dedicated nodes, effect/progress policy, native/reconstructed/
-generated-plan/emitted carriers, and ordinary cursor compatibility. Explicit authority/integration modes parse and
-fail only for absent private `LinkedSpecJulia.RecognitionTransaction`; ordinary Julia remains green with storage
-19/5 and corpus 105/105. Recognition stays 132/246/43, rollout 4/9, public 3/14/29, guide 1/6/10, and Julia remains
-RED. Canonical proof passes CLI 66x2, RAM 60%, and Phase 0 1,031/1,031; atomic 197 precedes `.14.3.5.1`.
+**Authoritative frontier (2026-08-11):** Julia integration `.14.3.5.2` landed cleanly at `0d15f8c2` as atomic
+199/300 (no push). Admission `.14.3.5.3` now runs the unchanged 203-assertion consumer exactly once in ordinary
+package discovery and canonical CI while retaining `LinkedSpecJulia.RecognitionTransaction` as private and
+unexported. Only Julia advances: recognition is 132/246/44 at rollout 5/9, public governance is 3/17/33, guide
+governance is 1/8/12, and PUC Lua, LuaJIT, recurring composition, and final public no-drift remain RED. Focused
+Julia 203/203, Perl 51/51, Rust 12/12, Dart 10/10, and the complete Julia package/primary/corpus 105 gate pass.
+The 79-file / 14,404-KiB book, all eight doctrines, CLI 66x2, RAM 69%, and canonical Phase 0 1,031/1,031 in 738
+seconds pass through the exact success marker. Atomic 200 is commit-ready; shared Lua RED `.14.3.6.0` activates
+only after its clean landing.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private

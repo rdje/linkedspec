@@ -106,8 +106,8 @@ is(
 is($contract->{format}, 1, 'loads contract format 1');
 is(
  $contract->{status},
- 'neutral_perl_rust_and_dart_complete_other_legs_red',
- 'loads the neutral-Perl-Rust-and-Dart-complete rollout state',
+ 'neutral_perl_rust_dart_and_julia_complete_other_legs_red',
+ 'loads the neutral-Perl-Rust-Dart-and-Julia-complete rollout state',
 );
 
 is_deeply(
@@ -119,7 +119,7 @@ is_deeply(
   rollback          => 'recognition_rollback(tx)',
   operand           => 'recognize_once accepts exactly one unevaluated static call(Rule) operand',
   result_separation => 'recognize_once returns a strict match boolean; the recognized payload remains staged until commit',
-  availability      => 'available only in an admitted backend; currently Perl, Rust, and Dart, with all later runtime legs future and unavailable',
+  availability      => 'available only in an admitted backend; currently Perl, Rust, Dart, and Julia, with all later runtime legs future and unavailable',
  },
  'freezes all four authored forms and their static operand/result boundary',
 );

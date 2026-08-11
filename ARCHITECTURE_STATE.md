@@ -73,6 +73,20 @@ consumers pass, and the route registry remains 20 surfaces / 62 routes / 32/32 w
 empty debt metadata. The program is composition-closed. These storage migrations change documentation governance
   only; they change no language, compiler, runtime, backend, fixture, CLI, protocol, or project-data root.
 
+- `2026-08-11 admitted Julia recognition transactions`: `FUTURE-PARITY-BACKLOG.14.3.5.3` removes both dormant
+  selector modes and the conditional integration wrapper from the unchanged 203-assertion final-path consumer.
+  Julia package discovery includes it once, and canonical CI requires its tracked path, exact marker, and exact
+  repository-routed command once. The consumer explicitly reaches the private source-local authority; the
+  `LinkedSpecJulia` facade still exports no recognition-transaction API. Fourteen mutations reject ordinary or
+  canonical omission/duplication, every stale dormancy mechanism, loss of the private lookup, and facade export.
+  Only Julia advances: the neutral contract is 132 ActionIR rows / 246 calls / 44 semantic mutations at rollout
+  5/9; public governance is 3/17/33 and the capability guide is 1/8/12. Perl, Rust, Dart, and Julia consumers agree
+  on mutable neutral metadata, while PUC Lua, LuaJIT, recurring composition, and final public no-drift remain RED.
+  Focused proof passes Julia 203/203, Perl 51/51, Rust 12/12, Dart 10/10, and the complete Julia package, primary
+  CLI, storage 19/5, and corpus 105/105 gate without changing native UTF-8 code-unit registers/results or exports.
+  The 79-file / 14,404-KiB book, all eight doctrines, repository containment/relocation, CLI 66x2, RAM 69%, and
+  canonical Phase 0 1,031/1,031 in 738 seconds pass through the exact `[ci] local CI gate passed` marker.
+
 - `2026-08-11 admitted Dart recognition transactions`: `FUTURE-PARITY-BACKLOG.14.3.4.2` integrates four private
   dedicated non-eager nodes, recursive effect closure, cursor-only progress, and live UTF-16 cursor/boundary/mark
   synchronization through one package-private authority across native, reconstructed, generated-plan, and emitted
