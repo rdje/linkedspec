@@ -79,16 +79,20 @@ expected_temp_owners=(
  dart/test/spec_loader_test.dart
  dart/test/trace_test.dart
  dart/test/unicode_rule_label_identity_routes_test.dart
+ dart/test_dormant/recognition_transaction_contract_test.dart
 )
 mapfile -t actual_temp_owners < <(
  while IFS= read -r relative; do
   if rg -q 'Directory[.]systemTemp' "$REPO_ROOT/$relative"; then
    printf '%s\n' "$relative"
   fi
- done < <(git -C "$REPO_ROOT" ls-files 'dart/**/*.dart')
+ done < <(
+  git -C "$REPO_ROOT" ls-files --cached --others --exclude-standard 'dart/**/*.dart' |
+   LC_ALL=C sort -u
+ )
 )
 (( ${#actual_temp_owners[@]} == ${#expected_temp_owners[@]} )) ||
- fail "tracked Dart temporary-owner inventory drifted from ${#expected_temp_owners[@]} to ${#actual_temp_owners[@]}"
+ fail "maintained Dart temporary-owner inventory drifted from ${#expected_temp_owners[@]} to ${#actual_temp_owners[@]}"
 for index in "${!expected_temp_owners[@]}"; do
  [[ "${actual_temp_owners[$index]}" == "${expected_temp_owners[$index]}" ]] ||
   fail "Dart temporary-owner inventory drifted at entry $index"

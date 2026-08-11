@@ -22,6 +22,8 @@ tags: [dart, pub, storage, filesystem, ssd, cache, temporary-data, generated-sou
 evidence: "PROJECT-DATA-SSD-ROOTING.2.3 adds tools/test_dart_project_data_storage.sh and invokes it from tools/run_dart_local.sh. The oracle locks 18 tracked Directory.systemTemp owners, verifies TMPDIR/PUB_CACHE and the managed run share the repository device, resolves all 47 hosted pubspec.lock packages and hashes offline, and exercises trace/generated-source paths. The canonical cache contains 5,903 payload files / 63,744,165 bytes with hash 039c5fd8728ea44f23b028ee9400846c353e71a071d46da355b8e1e0d857f29e; 47 package-index JSON files match the shared cache after removing only _fetchedAt, normalized hash 21e59ae7c96ad7a94b77f7e854a685d4729c22623486a1acea4ab444777f067b. Full proof passes 337 package tests, primary 66x2, corpus 105/105. After use, the two exact current/former shared active-root records are deleted and residue is zero; ambiguous shared package payload remains untouched and unused. Process proof .4.2 exposes Dartdev's pre-command HOME telemetry read and adds tools/run_dart_project_data.sh plus LINKEDSPEC_DART_HOME, so every maintained Dart command uses the repository-local Dart home without changing CLI behavior."
 evidence_update_2026_07_30_callable_codeblock_emission: "FUTURE-PARITY-BACKLOG.11.5.2 adds one independently compiled emitted-Dart callable-codeblock workspace, advancing the live tracked Directory.systemTemp manifest from 18 to 19. The oracle registers that exact owner and reports its manifest size dynamically; the complete gate passes 369 tests before the storage leg."
 evidence_update_2026_08_07_bare_test_recovery: "During FUTURE-PARITY-BACKLOG.14.2.3.0.1, an accidental bare dart test regenerated ignored dart/.dart_tool/package_config.json with file roots under the user-global Pub cache. The maintained wrapper then waited before discovery because its repository-local PUB_CACHE disagreed with that graph. bash tools/run_dart_project_data.sh pub get -C dart --offline restored every root to /.linkedspec-data/cache/dart-pub; shared active-root residue for this checkout was already zero; the 20-owner/47-package oracle and wrapped alias test pass. This confirms the existing rule: never run a bare maintained Dart command."
+evidence_update_2026_08_11_transaction_owner: "FUTURE-PARITY-BACKLOG.14.3.4.1 finds that atomic 193 added a dormant emitted-source test using Directory.systemTemp but the pre-commit storage oracle enumerated only git ls-files, so that untracked first-commit file was invisible until the next clean commit. The oracle now registers the exact 21st owner and derives its census from cached plus non-ignored untracked Dart sources in C-locale order. This closes the first-commit gap without scanning ignored package/build data; the emitted workspace remains under managed repository scratch and uses its own local PUB_CACHE."
+verification_update_2026_08_11_transaction_owner: "Corrected complete Dart proof passes format 100/0, strict analysis, ordinary 383/383, storage 21 owners / 47 packages, CLI 66x2, corpus 105/105, and the exact Dart success marker. Definitive CI then passes repository containment/relocation and Phase 0 1,031/1,031."
 reverify: "bash tools/test_dart_project_data_storage.sh && bash tools/run_dart_local.sh && bash tools/run_dart_project_data.sh pub get -C dart --offline"
 ---
 
@@ -37,11 +39,11 @@ The canonical cache covers all 47 hosted packages and hashes in `dart/pubspec.lo
 shared cache only in `_fetchedAt`; after removing that volatile field their canonical JSON hash is
 `21e59ae7c96ad7a94b77f7e854a685d4729c22623486a1acea4ab444777f067b`.
 
-The storage oracle locks exactly 20 tracked Dart `Directory.systemTemp` owners. A native pipeline test directly
-requires `Directory.systemTemp` to resolve to routed `TMPDIR`; the shell boundary independently checks filesystem
-device identity, package configuration, offline resolution, generated caller packages, traces, and cleanup. The
-complete gate passes formatting, strict analysis, 379 package tests, primary 66/66 in both environments, and the
-105-fixture corpus.
+The storage oracle locks exactly 21 maintained Dart `Directory.systemTemp` owners. Its census includes cached and
+non-ignored untracked Dart source, so a new first-commit owner cannot evade the manifest before `git add`; ignored
+package/build state remains outside the source inventory. A native pipeline test directly requires
+`Directory.systemTemp` to resolve to routed `TMPDIR`; the shell boundary independently checks filesystem device
+identity, package configuration, offline resolution, generated caller packages, traces, and cleanup.
 
 Migration moved the warmed SSD cache atomically from its noncanonical target-era location into the canonical
 cache, so no duplicate source remains. Only after offline and full-gate use were the two exact shared

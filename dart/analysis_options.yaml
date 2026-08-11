@@ -6,5 +6,3 @@ analyzer:
   exclude:
     - .dart_tool/**
     - build/**
-    # FUTURE-PARITY-BACKLOG.14.3.4.0.1: remove at transaction admission.
-    - test_dormant/recognition_transaction_contract_test.dart

@@ -123,6 +123,13 @@ payload through the private invocation/cursor/boundary/mark/token authority. The
 and canonical CI executes that exact target once. Only Rust advances; recognition rollout is 3/9 and every later
 runtime, recurring, and public-no-drift leg remains RED.
 
+Dart now has only the next package-private state foundation. The dormant consumer's default mode passes six tests
+over monotonic invocation/mark/token ownership, detached cursor/boundary/mark snapshots, same-label isolation,
+falsey-safe staging, and restore-before-invalidate lifecycle handling. Its explicit integration mode remains RED
+at missing dedicated ActionIR, effect/progress, native-runtime, and emitted-runtime seams. The module is unexported,
+ordinary discovery remains 383 tests, and no parser, engine, generated source, canonical route, rollout row, or
+current Dart-support claim changes.
+
 The helper audit distinguishes 7 callable compatibility aliases from 2 internal Perl contract/scanner ids.
 `capture_take_slice` and `capture_take_slice_len` are internal ids, not accepted helper spellings; authored code
 continues to use `capture_take()` and `capture_take_len()`. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT execute all

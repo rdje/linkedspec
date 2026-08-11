@@ -2,24 +2,25 @@
 
 ## Current Activity
 
-- Dormant Dart RED leaf `FUTURE-PARITY-BACKLOG.14.3.4.0.1` freezes the complete final-path transaction consumer at
-  the absent private module and its three authority/state/exception types.
-- Exact explicit execution fails only there; fatal analysis and all 383 ordinary Dart tests pass, and canonical
-  discovery remains unchanged. Production, UTF-16 behavior, recognition 132/246/42, and rollout 3/9 are preserved.
-- Signoff passes Dart-local, unchanged rendered book, eight doctrines, CLI 66x2, RAM 56%, and Phase 0 1,031/1,031.
+- Private Dart authority leaf `FUTURE-PARITY-BACKLOG.14.3.4.1` adds opaque source-local frames/tokens, monotonic
+  generations, detached state, falsey-safe attempts, and exact restore/invalidation without a facade export.
+- The dormant default mode passes 6 authority tests / 4 integration skips; its explicit integration mode fails only
+  at four `.14.3.4.2` nodes/policy/native/emitted seams. Strict analysis is clean and ordinary discovery stays 383.
+- Durable synchronization and complete Dart/book/doctrine/canonical signoff are complete for atomic 194/300.
 
 ## Latest Completed Slice
 
-- `FUTURE-PARITY-BACKLOG.14.3.4.0.1` is signoff-complete as atomic 193/300 with exact dormant RED and no admission.
-- Definitive CI passes every canonical contract and Phase 0 1,031/1,031 in 700 seconds.
+- `FUTURE-PARITY-BACKLOG.14.3.4.1` is atomic 194/300 with the private authority and exact `.2` integration RED.
+- Its definitive CI passed every canonical contract and Phase 0 1,031/1,031 in 697 seconds.
 
 ## Next Action
 
-- Finish canonical signoff and land atomic 193 cleanly, then activate private Dart authority `.14.3.4.1` task-first.
+- Activate integration `.14.3.4.2` task-first from the clean atomic 194 boundary.
 
 ## Recent Completions
 
-- `2026-08-11` — `.14.3.4.0.1` froze exact dormant Dart transaction RED for atomic 193/300.
+- `2026-08-11` — `.14.3.4.1` completed private Dart authority signoff for atomic 194/300; Phase 0 passed 1,031/1,031.
+- `2026-08-11` — `3a29b34e` landed exact dormant Dart transaction RED as atomic 193/300.
 - `2026-08-11` — `.14.3.4.0.0` repaired and definitively verified transaction boundary policy as atomic 192/300.
 - `2026-08-11` — `02c612f5` landed exact Rust transaction admission as atomic 191/300.
 - `2026-08-10` — `1cf2923a` landed cfg-private Rust transaction integration as atomic 190/300.
@@ -34,7 +35,6 @@
 - `2026-08-10` — `774516fa` repaired neutral transaction public status sequencing as atomic 182/300.
 - `2026-08-10` — `e0cc7182` added the executable neutral recognition-transaction authority as atomic 181/300.
 - `2026-08-10` — `c26a9556` composition-closed all four bounded document stores as atomic 180/300.
-- `2026-08-10` — `921f0507` bounded changes and engineering notes as atomic 179/300.
 
 ## History
 

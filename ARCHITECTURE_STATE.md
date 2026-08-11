@@ -73,6 +73,24 @@ consumers pass, and the route registry remains 20 surfaces / 62 routes / 32/32 w
 empty debt metadata. The program is composition-closed. These storage migrations change documentation governance
   only; they change no language, compiler, runtime, backend, fixture, CLI, protocol, or project-data root.
 
+- `2026-08-11 private Dart recognition-transaction authority`: `FUTURE-PARITY-BACKLOG.14.3.4.1` adds one
+  package-private authority over the admitted Dart `SourceAuthority`, with opaque frame/token handles, monotonic
+  invocation/mark/transaction generations, detached cursor/boundary/mark snapshots, recursive same-label isolation,
+  strict match/payload separation, exactly-once attempt/terminal state, and restore-before-invalidate misuse,
+  unwind, and discard handling. The exact analyzer exclusion is removed; strict analysis is clean and the dormant
+  default mode passes 6 authority tests with 4 integration skips. Enabling only
+  `LINKEDSPEC_DART_RECOGNITION_TRANSACTION_INTEGRATION_RED=1` produces four owned `.14.3.4.2` failures: absent
+  dedicated ActionIR nodes, effect/progress methods, native dispatch, and emitted dispatch. The module is not
+  exported, ordinary discovery stays 383 tests, canonical registration stays absent, and production UTF-16
+  registers/results plus recognition 132/246/42 and rollout 3/9 are unchanged.
+  The first complete Dart gate also exposed that atomic 193's new dormant `Directory.systemTemp` owner had been
+  invisible pre-commit because the storage oracle enumerated only `git ls-files`. Owner 21 is now registered and
+  the census includes cached plus non-ignored untracked Dart sources in deterministic C-locale order, closing the
+  first-commit gap without scanning ignored package/build state.
+  Complete Dart proof passes format 100/0, ordinary 383, storage 21/47, CLI 66x2, and corpus 105. The book renders
+  79 files / 14,392 KiB and is removed. All eight doctrines and definitive CI pass capability 80/0/0, semantic
+  128/9/9, MCP complete/141, containment/relocation, CLI 66x2, RAM 65%, and Phase 0 1,031/1,031 in 697 seconds.
+
 - `2026-08-11 recognition-transaction current-boundary repair`: Dart RED retrieval under
   `FUTURE-PARITY-BACKLOG.14.3.4.0.0` found that neutral status, authored availability, and rollout correctly admitted
   Perl+Rust 3/9 while `policy.current_boundary` and its checker expectation still called Rust unavailable. Git blame

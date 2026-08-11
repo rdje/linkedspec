@@ -10,6 +10,29 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.4.1` — added private Dart transaction authority): return opaque
+  frame/token handles as `Object` from the unexported module so the public method surface does not expose private
+  implementation types. Keep snapshots and exception records detached at every observation boundary.
+- Compare `SourceAuthority` by object identity before authority/invocation generations. This matches the admitted
+  Rust authority: cross-source misuse restores the token owner first, while a same-source wrong invocation reports
+  the narrower invocation diagnostic.
+- Treat the active token as invocation-stack state, not a truthy payload. `matched` and `payload` remain separate,
+  so `false`, zero, empty string, and null all survive a successful commit without turning into a miss.
+- Restore before invalidating on every misuse path. Nesting rejection may occur from a child frame while the active
+  token belongs to its parent; restoring through the token's owning frame preserves recursive state exactly.
+- Use one dormant environment switch only for the four integration tests. Default explicit execution proves the
+  private authority at 6 pass / 4 skipped; the enabled mode exposes four independent `.14.3.4.2` failures without
+  changing ordinary discovery or canonical registration.
+- Remove the analyzer exclusion as soon as the private module exists. Strict analysis then proves the future
+  consumer and private API together while the `test_dormant/` path alone preserves admission ownership.
+- Exact owner manifests must census non-ignored untracked sources as well as the Git index. Atomic 193's new dormant
+  temp owner was invisible to `git ls-files` before its first commit; cached+others with C-locale sorting closes that
+  timing gap while continuing to exclude ignored package/build output.
+- Rerun the complete backend gate from its first step after repairing a late storage failure. The corrected run
+  proves format 100/0, analyzer, ordinary 383, storage 21/47, CLI 66x2, corpus 105, and the exact Dart success marker.
+- Close the slice only on one uninterrupted definitive run after that backend repair. Atomic 194 signoff passes all
+  eight doctrines, containment/relocation, CLI 66x2, RAM 65%, and Phase 0 1,031/1,031 in 697 seconds.
+
 - 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.4.0.1` — froze dormant Dart transaction RED): use an unregistered
   `test_dormant/` consumer plus one exact analyzer exclusion to preserve a final-path test without asserting an
   unavailable private package boundary. Ordinary discovery and fatal analysis must remain independently green.

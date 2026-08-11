@@ -65,6 +65,12 @@
 > Only Rust advances: recognition rollout is 3/9 while Dart, Julia, PUC Lua, LuaJIT, recurring, and public-no-drift
 > remain RED.
 >
+> Dart now has the next package-private state foundation only. Six dormant default-mode tests prove opaque
+> invocation/mark/token generations, detached UTF-16-register snapshots, same-label mark isolation, falsey-safe
+> staging, and restore-before-invalidate lifecycle handling. An explicit integration mode remains RED at dedicated
+> ActionIR/effect/progress and native/emitted runtime seams. The module is unexported; ordinary discovery remains
+> 383 tests; and no parser, engine, generated-source, canonical, rollout, or current-support claim changes.
+>
 > Any cursor transaction is one explicit
 > recognition attempt over invocation-local cursor/boundary/marks only; it adds no search tree and cannot undo
 > actions, AST/user state, output/diagnostics, registry work, or host effects. Recursive boundaries remain read-only,

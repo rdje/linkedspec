@@ -10,6 +10,27 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.4.1 — add private Dart transaction authority
+
+- Added unexported `dart/lib/src/runtime/recognition_transaction.dart` over the existing immutable source authority.
+  Opaque frames and tokens retain monotonic invocation, mark, and transaction generations without a facade export.
+- Implemented detached cursor/boundary/mark snapshots, recursive same-label isolation, strict match/payload state,
+  exactly one attempt and terminal, commit retention, rollback restoration, and explicit token discard.
+- Restored before invalidating on retry, escape, cross-source/invocation use, nesting, missing terminal, and discard;
+  the frozen exception type returns exact detached neutral fields and portable error strings.
+- Removed the temporary analyzer exclusion. The dormant target now passes 6 authority tests with exactly 4
+  integration skips, and strict fatal analysis reports no issues.
+- Added one explicit integration-RED environment switch. It exits 1 only at the four `.14.3.4.2` seams: missing
+  dedicated nodes, effect/progress methods, native runtime dispatch, and emitted runtime dispatch.
+- The first complete Dart gate exposed atomic 193's git-only temporary-owner census gap. Registered the dormant
+  emitted-source test as owner 21 and made the oracle include non-ignored untracked Dart sources before first commit.
+- Kept the module outside the public facade and the consumer outside ordinary/canonical discovery. Production
+  parsing, UTF-16 registers/results, recognition 132/246/42, rollout 3/9, and all existing surfaces remain unchanged.
+- Corrected Dart-local proof passes format 100/0, strict analysis, ordinary 383/383, storage 21/47, CLI 66x2, and
+  corpus 105/105. The synchronized book renders 79 files / 14,392 KiB in separate current/future blocks and is removed.
+- Definitive CI passes all eight doctrines, capability 80/0/0, semantic 128/9/9, MCP complete/141,
+  repository containment/relocation, CLI 66x2, RAM 65%, and Phase 0 1,031/1,031 in 697 seconds.
+
 ## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.4.0.1 — freeze Dart transaction RED
 
 - Added one dormant final-path Dart consumer for the complete neutral recognition-transaction contract: authority

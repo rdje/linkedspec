@@ -353,7 +353,8 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 
 ### 4.3.4 `tools/test_dart_project_data_storage.sh` — Dart SSD-local storage oracle
 
-- **WHAT:** lock the exact 19 tracked Dart temporary owners; verify managed temp/pub/generated/trace paths share
+- **WHAT:** lock the exact 21 maintained Dart temporary owners, including non-ignored untracked sources before
+  their first commit; verify managed temp/pub/generated/trace paths share
   the repository device; require all 47 hosted lockfile packages and hashes offline; and exercise representative
   native trace, emitted-source caller, and trace-control paths.
 - **WHEN:** changing Dart temporary allocation, package resolution, generated-source callers, traces, `PUB_CACHE`,

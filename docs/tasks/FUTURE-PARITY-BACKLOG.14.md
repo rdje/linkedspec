@@ -4805,21 +4805,20 @@
   Evidence 2026-08-10/11: clean activation `1cf2923aa749594a8c56903418fe5749134f6872`/`fd8a1934` (atomic 190) had Knowledge 808/6,693, eight doctrines, valid pointer/maps, zero brief/residue/background work, and sole task-first mutation. Retrieval proved nested 12/12 and ordinary zero; admission removed both cfgs, retained the internal authority, and registered that exact 12/12 target once. Checker proof is semantic 132/246/42, rollout 3/9, public 3/11/25, guide 1/4/8, Rust admission 8; a first ordinary run caught stale consumer expectations, then Rust format/Clippy/local passed (core 195, runtime 166, CLI 66x2). Book 79/14,380 KiB rendered Perl+Rust current with clean block structure; browser control was unavailable, so no visual claim is made. After an outer-sandbox containment denial and isolated authorized pass, one uninterrupted authorized canonical run passed eight doctrines, Perl 51, Rust 12, containment/relocation, CLI 66x2, RAM 77%, and Phase 0 1,031 in 739 seconds. Atomic 191 is clean `02c612f5`.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.4`
-  Status: `active` (2026-08-11; dormant Dart RED `.14.3.4.0` is composition-complete through intended atomic
-    193/300; private authority `.14.3.4.1` is next; no push)
+  Status: `active` (2026-08-11; dormant Dart RED is atomic 193/300 and private authority `.14.3.4.1` is atomic
+    194/300 at the exact `.2` integration boundary; no push)
   Goal: Implement and independently admit exact Dart parity while retaining native UTF-16 register compatibility.
   Depends on: `.14.3.3`
   Children: `.14.3.4.0-.14.3.4.3`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.4.0`
-  Status: `complete` (2026-08-11; corrective `.0.0` landed cleanly and dormant Dart RED `.0.1` is commit-ready)
+  Status: `complete` (2026-08-11; corrective atomic 192 and dormant Dart RED atomic 193 landed cleanly)
   Goal: Establish a sound neutral boundary, then freeze dormant Dart RED across all carriers.
   Depends on: `.14.3.3.3`
   Children: `.14.3.4.0.0-.14.3.4.0.1`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.4.0.0`
-  Status: `complete` (2026-08-11; urgent retrieval finding repaired and definitively verified from clean
-    Rust-admission base `02c612f5`; commit-ready as intended atomic 192/300; no push)
+  Status: `complete` (2026-08-11; clean atomic 192/300 `b1c59d03`; no push)
   Goal: Repair the neutral transaction policy that canonically enforced a stale Perl-only current boundary after Rust admission.
   Depends on: `.14.3.3.3`
   Acceptance: Update only `policy.current_boundary` to neutral+Perl+Rust truth; derive its expected prose from the rollout expectation so future admissions cannot omit it; retain 132/246/42, rollout 3/9, public 3/11/25, guide 1/4/8, production/book/schema/API/CLI/storage behavior; add causal Knowledge and live-doc evidence; pass focused/book/doctrine/canonical proof and land clean atomic 192/300.
@@ -4833,61 +4832,55 @@
   - [x] **NO DRIFT / RENDER** — Neutral 132/246/42, rollout/public/guide/admission/language/README stay exact; unchanged book builds 79 files / 14,380 KiB and generated support blocks remain accurate; output removed.
   - [x] **SIGNOFF / CLEAN ATOMIC** — Pass all doctrines and definitive canonical CI; sync final evidence; land 192/300 cleanly.
 
-  Implementation evidence 2026-08-11: focused checker passes all 42 semantic mutations and separate 3/11/25,
-  1/4/8, and 8 domains; language remains 246/105+1/122 and README 105/5,057 with 20/62/32 routing. Knowledge is
-  809/6,699; memory, 26/26 task partitions over 513 ids, and both bounded history stores pass. No mdBook source
-  changed; generated HTML confirms current Perl+Rust, 3/9, and later RED wording before safe deletion.
-
-  Signoff evidence 2026-08-11: two pre-definitive canonical attempts did their job by rejecting exact public
-  projections dropped during task/roadmap compaction: the capability `.24`/`.24.2` markers first, then semantic
-  `128 mutations, rollout 9/9`. Restoring the governed text rather than weakening either checker made both focused
-  contracts green. One uninterrupted definitive rerun then passes all eight doctrines; recognition 132/246/42,
-  rollout 3/9, public 3/11/25, guide 1/4/8, Rust admission 8; Perl transaction 51/51 and Rust transaction 12/12;
-  all six typed-source runtimes; capability 80/0/0; semantic 128/9/9; MCP complete/141; containment/relocation;
-  CLI 66/66 in default and POSIX option environments; RAM 45%/88%; and Phase 0 1,031/1,031 in 721 seconds before
-  exact `[ci] local CI gate passed`. Commit, brief clearing, and clean proof remain as the atomic boundary.
+  Evidence 2026-08-11: focused proof preserves recognition 132/246/42, public 3/11/25, guide 1/4/8, Rust 8,
+  language 246/105+1/122, README 105/5,057 and 20/62/32 routing. After strict guards rejected dropped capability
+  `.24`/`.24.2` and semantic `128 mutations, rollout 9/9` markers, definitive CI passed all eight doctrines,
+  Perl 51, Rust 12, typed source, capability 80/0/0, semantic 128/9/9, MCP 141, containment/relocation, CLI 66x2,
+  RAM 45%/88%, and Phase 0 1,031 in 721 sec before exact success; `b1c59d03` landed cleanly.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.4.0.1`
-  Status: `complete` (2026-08-11; activated task-tree-first from clean corrective commit `b1c59d03`, frozen at
-    the exact missing private-authority boundary, and commit-ready as intended atomic 193/300; no push)
+  Status: `complete` (2026-08-11; clean atomic 193/300 `3a29b34e`; no push)
   Goal: Freeze dormant Dart RED across native, reconstructed, generated-plan, and freshly emitted carriers.
   Depends on: `.14.3.4.0.0`
   Acceptance: Retrieve neutral/Perl/Rust, ADR `0056`, Toolbox, typed-source, Dart carrier/canonical/storage/public owners; add one final-path test-switched ordinary/canonical-dormant consumer for exact syntax/authority/falsey/ActionIR/effects/progress/diagnostics/carriers; reach only missing private authority `.14.3.4.1`; preserve production/backends, UTF-16/results, 132/246/42, rollout 3/9, public 3/11/25, guide 1/4/8, language 246/105+1/122, schemas/APIs/CLI/README/book/storage; pass focused/book/doctrine/canonical proof and land clean atomic 193/300.
   Verification: exact intended authority RED, no admission/drift, complete Dart/book/doctrine/canonical/storage and clean atomic proof
   Commit: `FUTURE-PARITY-BACKLOG.14.3.4.0.1 - freeze Dart transaction RED`
 
-  Activation evidence 2026-08-11: corrective commit `b1c59d037ef5b80d01ddeb667ae3579c74de3b86`
-  (parent `02c612f5`, exact `.0.0` subject) passed both hook phases/eight doctrines/post-commit pointer; status/diffs
-  were empty, brief zero, Knowledge 809/6,699 and partitions 26/26 over 513 ids valid, and exact empty scratch
-  residue removed. This task file was the sole first mutation before Dart consumer, exclusion, runtime, or live docs.
-
   ### `FUTURE-PARITY-BACKLOG.14.3.4.0.1` Acceptance Checklist
 
-  - [x] **RETRIEVE / OWN** — Retrieve all listed owners after task-first activation from clean `b1c59d03`.
-  - [x] **FREEZE FINAL-PATH RED** — Cover authority/falsey state/marks/tokens/diagnostics, four dedicated nodes,
-    effect/progress policy, all four carriers, and compatibility in one dormant consumer.
-  - [x] **EXACT BOUNDARY / DORMANCY** — Exit 1 only for the absent module/three types; analysis and 383 ordinary
-    tests pass; neither canonical runner names the file.
-  - [x] **NO DRIFT** — Preserve production/UTF-16/results, 132/246/42, rollout 3/9, public 3/11/25, guide 1/4/8,
-    language/schema/API/CLI/README/book behavior, and repository-local execution.
-  - [x] **SIGNOFF / CLEAN ATOMIC** — Pass book/doctrine/canonical proof; commit/brief/clean handoff remain.
-
-  Implementation evidence 2026-08-11: the root-relative neutral consumer freezes one named authority/state/error
-  API, opaque handles, detached snapshots, monotonic generations, mark isolation, falsey-safe matched/payload state,
-  restore-before-report lifecycle/escape errors, four non-eager nodes, policy fixtures, and all four plus ordinary
-  carriers. Its formatted explicit run exits 1 only for the missing module/three types; exact exclusion leaves fatal
-  analysis clean and ordinary discovery 383/383, with no canonical marker or production/public/book change.
-
-  Signoff evidence 2026-08-11: unchanged book renders 79 files / 14,380 KiB with exact current/future claims and is
-  removed; Dart-local passes format/analyze, 383 tests, storage, CLI 66x2, corpus 105. Definitive canonical passes
-  eight doctrines, Perl 51, Rust 12, all typed-source runtimes, capability 80/0/0, semantic 128/9/9, MCP 141,
-  containment/relocation, CLI 66x2, RAM 56%, and Phase 0 1,031/1,031 in 700 seconds before exact CI success.
+  - [x] Retrieve all owners task-first from clean `b1c59d03`; freeze one final-path dormant consumer across exact
+    authority/falsey/marks/tokens/diagnostics, four nodes, policies, and all carriers at only the missing module/types.
+  - [x] Preserve production/UTF-16 and all governed counts/surfaces; pass Dart 383, book 79/14,380 KiB, doctrines,
+    and definitive CI (Perl 51, Rust 12, capability 80/0/0, semantic 128/9/9, MCP 141, Phase 0 1,031 in 700 sec).
+  - [x] Land `3a29b34e` with exact subject, zero brief/status/residue, valid pointer/maps, and no background work.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.4.1`
-  Status: `pending`
+  Status: `complete` (2026-08-11; atomic 194/300 from clean activation `3a29b34e`; no push)
   Goal: Add private Dart invocation-frame, mark-generation, opaque-token, snapshot, and invalidation authority while
     retaining UTF-16 registers and current routes.
   Depends on: `.14.3.4.0`
+  Acceptance: Retrieve neutral/Perl/Rust, frozen Dart RED, ADR `0056`, Toolbox, typed-source, runtime/public/canonical/storage owners; implement the exact private module/API with detached snapshots, monotonic invocation/generation identity, same-label isolation, falsey-safe attempts, commit/rollback restoration, all escape/retry diagnostics, nested unwind, and discard; use only dormant test switching to prove the authority independently and expose the next missing integration owned by `.14.3.4.2`; preserve production/current routes, UTF-16/results, inventories, admissions, public surfaces, book, schemas/APIs/CLI/README, and project-local storage; pass focused/Dart/book/doctrine/canonical proof and land clean atomic 194/300.
+  Verification: private-authority consumer GREEN; integration switch RED only at absent dedicated ActionIR/runtime/policy seams; ordinary analyzer/tests/canonical discovery and every governed count unchanged
+  Commit: `FUTURE-PARITY-BACKLOG.14.3.4.1 - add private Dart transaction authority`
+
+  ### `FUTURE-PARITY-BACKLOG.14.3.4.1` Acceptance Checklist
+
+  - [x] **RETRIEVE / PROBE** — Follow every listed owner before deriving implementation or test-switch mechanics.
+  - [x] **PRIVATE AUTHORITY** — Implement the frozen frame/mark/token/snapshot/error contract with no public export.
+  - [x] **EXACT NEXT RED / NO DRIFT** — Keep integration dormant and stop only at `.2`; preserve all current routes,
+    UTF-16 behavior, production discovery, governed counts/surfaces, book truth, and repository-local execution.
+  - [x] **SIGNOFF / CLEAN ATOMIC** — Sync durable layers and pass focused and definitive gates for clean 194/300 landing.
+
+  Activation evidence 2026-08-11: `3a29b34ec8653a91b8c981d895dab96e32a86c00` has empty status/diffs, zero-byte
+  brief, no managed-run descendants/rendered book/background work; this task partition is the sole first mutation.
+
+  Focused evidence: unexported Dart authority + analyzer inclusion pass strict analysis and 6 authority tests with
+  4 integration skips; integration fails only at four `.2` seams. Full Dart first exposed atomic 193's git-only
+  temp-owner census gap; this leaf owns 21st-owner registration plus untracked maintained-source prevention.
+  Corrected Dart-local passes format 100/0, 383 tests, storage 21/47, CLI 66x2, and corpus 105; book renders
+  79 files / 14,392 KiB with the private-not-current boundary in three separate blocks, then output is removed.
+  All eight doctrines and definitive CI pass capability 80/0/0, semantic 128/9/9, MCP complete/141,
+  containment/relocation, CLI 66x2, RAM 65%, and Phase 0 1,031/1,031 in 697 seconds before the exact success marker.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.4.2`
   Status: `pending`

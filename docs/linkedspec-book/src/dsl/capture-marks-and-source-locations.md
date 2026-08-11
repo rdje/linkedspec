@@ -170,6 +170,13 @@ cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test recognit
 
 Only Rust's rollout row advances; no later runtime, recurring, or public-no-drift row is promoted.
 
+Dart now has a package-private transaction state authority behind the dormant consumer. Its default six-test mode
+proves opaque monotonic generations, invocation-local marks, detached UTF-16-register snapshots, falsey-safe
+payload staging, and restore-before-invalidate misuse, unwind, and discard handling. Strict analysis includes the
+consumer, but ordinary discovery and canonical CI still omit it. The explicit integration RED mode stops at the
+missing dedicated nodes, recursive effect/cursor-progress policy, native dispatch, and emitted dispatch. This
+private foundation is implementation evidence, not current authored Dart support, so rollout remains 3/9.
+
 The same checker fails closed over three public transaction pages, eleven forbidden claims, and twenty-five sequence mutations.
 This guards the milestone order alongside the neutral artifact's 42 semantic mutations.
 
