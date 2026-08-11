@@ -5,17 +5,17 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `f6f154c6` — clean private-Dart-authority base for integration atomic 195/300; no push.
-- latest_completed_leaf: Dart transaction integration `.14.3.4.2`, signoff-complete atomic 195/300 subject.
-- active_work_unit: no in-flight leaf after atomic 195 lands; this pointer describes the intended clean handoff.
-- next_action: activate Dart transaction admission `.14.3.4.3` task-tree-first from clean atomic 195.
+- activation_commit: `bee6cf45` — clean integrated-Dart base for admission atomic 196/300; no push.
+- latest_completed_leaf: Dart transaction admission `.14.3.4.3`, signoff-complete atomic 196/300 subject.
+- active_work_unit: no in-flight leaf after atomic 196 lands; this pointer describes the intended clean handoff.
+- next_action: activate dormant Julia transaction RED `.14.3.5.0` task-tree-first from clean atomic 196.
 - in_flight_uncommitted: none after the commit workflow; no background job or rendered book.
-- blockers: none. Enabled dormant 10/10, default 6/4, complete Dart/book, all eight doctrines, containment/relocation,
-  CLI 66x2, RAM 64%, Phase 0 1,031/1,031, and exact canonical success are green.
+- blockers: none. Focused 10/10 and complete Dart 393/393 plus book, all doctrines, containment/relocation, CLI 66x2,
+  RAM 60%, Phase 0 1,031/1,031 in 694 seconds, and exact canonical success are green.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes, and 11 topology mutations advance governance to 53. Public authored values remain future; Perl and Rust
-  recognition transactions are current while complete cross-runtime portability remains future.
+  recognition transactions are current on Perl, Rust, and Dart while complete cross-runtime portability is future.
 - recurring_rollout_fact: the original contract combines recurring and public no-drift in one `.14.8` row. Detailed
   plan/history assign `.14.2.6` driver/topology only; do not add a fifteenth row or promote `.14.8` prematurely.
 - rust_audit_fact: all 92 canonical names and seven aliases project through one per-input immutable authority while
@@ -47,13 +47,12 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_transaction_contract: syntax is exact `recognition_checkpoint`,
   `recognize_once(token, call(Rule))`, `recognition_commit`, and `recognition_rollback`; match boolean and staged
   payload are separate. Tokens are linear; effects are closed 9 allowed/11 rejected; marks are invocation-framed;
-  v1 progress is cursor-only. Perl is admitted at 51/51 and Rust at ordinary/canonical 12/12. Rollout is 3/9 at
-  42 semantic mutations; public 3/11/25; guide 1/4/8; Rust admission 8. Dart now has four private dedicated nodes,
-  recursive effect/progress policy, and authority-backed native/reconstructed/generated-plan/emitted execution.
-  Enabled dormant proof is 10/10 while default remains 6 pass / 4 skips; no export, canonical registration, or
-  rollout promotion exists, so admission remains `.14.3.4.3` and current public behavior is still Perl plus Rust.
+  v1 progress is cursor-only. Perl is admitted at 51/51, Rust at 12/12, and Dart at ordinary/canonical 10/10.
+  Rollout is 4/9 at 43 semantic mutations; public 3/14/29; guide 1/6/10; Rust admission 8; Dart admission 13.
+  Dart retains four private dedicated nodes, recursive effect/progress policy, and authority-backed native/
+  reconstructed/generated-plan/emitted execution without a facade export. Julia `.14.3.5.0` is next.
 - current_future_direction: transaction `.14.3` remains split through neutral `.1`, backend families `.2-.6`,
   recurring `.7`, and closeout `.8`; corrective `.14.3.4.0.0` precedes Dart RED `.14.3.4.0.1`, and `.14.8` retains no-drift.
 - latest_bootstrap_read: 2026-08-11 — complete roadmap/codebase/mdBook and required continuity/tooling review.
-- pivot_guard: finish and commit integration `.14.3.4.2` cleanly before activating Dart admission `.14.3.4.3`.
-- push_policy: hard lock at 300 commits; private Dart authority is atomic 194/300; no push; use wrappers.
+- pivot_guard: commit signoff-complete admission `.14.3.4.3` cleanly before activating Julia RED `.14.3.5.0`.
+- push_policy: hard lock at 300 commits; Dart admission is commit-ready atomic 196/300; no push; use wrappers.

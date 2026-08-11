@@ -1,7 +1,10 @@
 ---
 id: dart-recognition-transaction-dormant-red
-title: Dart recognition transactions are integrated privately and await admission
+title: Dart recognition transactions are integrated privately and canonically admitted
 answers:
+  - "where is the admitted Dart recognition transaction consumer"
+  - "how are Dart recognition transactions registered in canonical CI"
+  - "are Dart recognition transactions publicly exported"
   - "where is the dormant Dart recognition transaction RED consumer"
   - "where is the private Dart recognition transaction authority"
   - "how do I run the Dart recognition transaction RED"
@@ -15,20 +18,20 @@ answers:
   - "does the Dart transaction RED cover emitted source"
   - "does the Dart recognition transaction RED change rollout or production behavior"
 date: 2026-08-11
-status: current private integration boundary; admission owned by FUTURE-PARITY-BACKLOG.14.3.4.3
+status: current private integrated and canonically admitted Dart boundary
 tags: [dart, recognition, transaction, ActionIR, dormant, generated-source, FUTURE-PARITY-BACKLOG]
-evidence: "FUTURE-PARITY-BACKLOG.14.3.4.0.1 freezes dart/test_dormant/recognition_transaction_contract_test.dart; `.1` adds the unexported source-local authority; `.2` integrates four dedicated non-eager ActionIR nodes, static call(Rule) ownership, recursive effect closure, cursor-only progress, and live UTF-16 cursor/boundary/invocation-mark state. Native, serialized reconstruction, generated-plan, and freshly analyzed emitted-source carriers all route through LinkedSpecRuntimeEngine and preserve a successful false payload. LINKEDSPEC_DART_RECOGNITION_TRANSACTION_INTEGRATION_RED=1 now passes 10/10; default explicit execution remains 6 pass / 4 skipped. Fatal analysis is clean, ordinary discovery remains 383 tests, no canonical route names the dormant file, the private module has no facade export, and neutral 132/246/42 plus rollout 3/9 remain unchanged. The complete Dart gate passes format 100/0, ordinary 383, storage 21/47, CLI 66x2, and corpus 105. Admission and public promotion remain solely owned by `.14.3.4.3`."
-reverify: "cd dart && env LINKEDSPEC_DART_RECOGNITION_TRANSACTION_INTEGRATION_RED=1 bash ../tools/run_dart_project_data.sh test --reporter failures-only test_dormant/recognition_transaction_contract_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings && bash ../tools/run_dart_project_data.sh test --reporter failures-only"
+evidence: "FUTURE-PARITY-BACKLOG.14.3.4.0.1 froze dart/test_dormant/recognition_transaction_contract_test.dart; `.1` added the unexported source-local authority; `.2` integrated four dedicated non-eager ActionIR nodes, static call(Rule) ownership, recursive effect closure, cursor-only progress, and live UTF-16 cursor/boundary/invocation-mark state. `.3` moves the same 10-test consumer to dart/test/recognition_transaction_contract_test.dart, removes only environment/skip dormancy, keeps the authority absent from the facade, and requires/logs/executes its exact project-data-routed command once in canonical CI. Thirteen mutations reject admission/privacy/dormancy drift. Native, serialized reconstruction, generated-plan, and freshly analyzed emitted-source carriers preserve a successful false payload. Recognition is 132/246/43, rollout neutral+Perl+Rust+Dart 4/9, public 3/14/29, and guide 1/6/10. Complete Dart passes format 100/0, ordinary 393, storage 21/47, CLI 66x2, and corpus 105. Julia and all later legs remain RED."
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/recognition_transaction_contract_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings && cd .. && bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py"
 ---
 
-# Private Dart recognition-transaction integration boundary
+# Admitted private Dart recognition-transaction boundary
 
 The final-path consumer is
-`dart/test_dormant/recognition_transaction_contract_test.dart`. Ordinary Dart
-test discovery ignores that directory. The unexported
+`dart/test/recognition_transaction_contract_test.dart`. Ordinary Dart test
+discovery and canonical CI execute it. The unexported
 `dart/lib/src/runtime/recognition_transaction.dart` module now supplies the
-frozen authority API, so strict analysis includes the consumer and its default
-repository-routed invocation passes six authority tests.
+frozen authority API, so strict analysis includes the consumer and its
+repository-routed invocation passes all ten tests.
 
 One source-local authority owns monotonic invocation, mark, and transaction
 generations plus opaque frames and tokens. Snapshots are detached; recursive
@@ -45,17 +48,15 @@ boundary, and fresh same-label mark bucket through the private authority.
 Effect graphs use the neutral recursive fixed point and progress accepts only
 cursor advance on repetition/recursive edges.
 
-Set `LINKEDSPEC_DART_RECOGNITION_TRANSACTION_INTEGRATION_RED=1` to prove all
-ten frozen tests. Native, reconstructed, generated-plan, and emitted carriers
+Native, reconstructed, generated-plan, and emitted carriers
 converge on `LinkedSpecRuntimeEngine`, so the same authority-backed behavior
-preserves successful false payloads everywhere. Default execution deliberately
-keeps the four integration tests skipped. Admission `.14.3.4.3` moves the
-consumer to ordinary/canonical discovery and advances rollout; until then the
-module stays unexported and Dart remains unavailable publicly.
+preserves successful false payloads everywhere. Admission `.14.3.4.3` removes
+the dormant switch, registers the exact consumer once, and advances only Dart
+to rollout 4/9. The module stays unexported; Julia and Lua remain unavailable.
 
 ## Links
 
 - Neutral contract: [[recognition-transaction-neutral-contract]].
 - Rust precedent: [[rust-recognition-transaction-dormant-red]].
 - Dart typed-source authority: [[dart-typed-source-location-integration]].
-- Owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.3.4.0.1-.2`; next owner `.14.3.4.3`.
+- Owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.3.4.0.1-.3`; next owner `.14.3.5.0`.

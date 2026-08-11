@@ -10,6 +10,26 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.4.3` — admitted Dart recognition transactions): admission is a
+  discovery/governance slice over the already-green private integration. Move the exact consumer into `dart/test/`,
+  remove only the environment-backed skip authority, and retain its source-local authority import.
+- Keep the private runtime boundary explicit. The checker requires that import exactly once, denies any facade
+  export, and mutation-tests dormant path, switch, skip, registration, log, and invocation residue independently.
+- Derive rollout policy from the same ordered authority used by `policy.current_boundary`: Dart becomes complete,
+  Julia becomes the sole next-backend premature-promotion mutation, and semantic mutations advance 42 to 43.
+- Every admitted backend consumer snapshots mutable neutral status/availability metadata in addition to its own
+  runtime proof. A new admission must update those assertions in all earlier consumers; canonical Perl/Rust targets
+  are the executable no-drift backstop for that cross-consumer coupling.
+- Treat public milestone governance as a separate domain. Adding Dart regression plus three superseded Rust-era
+  claims yields 3 documents / 14 forbidden / 29 mutations; the guide separately becomes 1/6/10.
+- Canonical Dart execution must use `tools/run_dart_project_data.sh`, because the emitted-source test owns scratch
+  and package-cache data. The storage owner remains one of 21; only its sorted path changes from dormant to final.
+- Complete backend proof passes format 100/0, strict analysis, ordinary 393, storage 21/47, CLI 66x2, and corpus 105.
+- Close admission only after every earlier consumer agrees with mutable neutral metadata. The first canonical run
+  rejected stale Perl/Rust snapshots; after their status/availability/count/rollout assertions were synchronized,
+  one full host-permitted run passed all eight doctrines, containment/relocation, CLI 66x2, RAM 60%, and Phase 0
+  1,031/1,031 in 694 seconds before the exact local-CI success marker.
+
 - 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.4.2` — integrated Dart recognition transactions): normalize the four
   static transaction forms only after ordinary arguments parse, then replace the entire call shape with a dedicated
   node. The attempt node stores a token slot and rule name, so its `call(Rule)` operand cannot be resolved or run as

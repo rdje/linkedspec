@@ -22,6 +22,14 @@ LUA_CALL_NAMES_PATH = ROOT / "lua" / "src" / "linkedspec" / "action_call_names.l
 CI_PATH = ROOT / "tools" / "run_ci_local.sh"
 PERL_CONSUMER_PATH = "t/recognition_transaction_perl_contract.t"
 RUST_CONSUMER_PATH = "rust/linkedspec-runtime/tests/recognition_transaction_contract.rs"
+DART_CONSUMER_PATH = "dart/test/recognition_transaction_contract_test.dart"
+DART_DORMANT_CONSUMER_PATH = (
+    "dart/test_dormant/recognition_transaction_contract_test.dart"
+)
+DART_FACADE_PATH = "dart/lib/linkedspec_dart.dart"
+DART_PRIVATE_IMPORT = (
+    "package:linkedspec_dart/src/runtime/recognition_transaction.dart"
+)
 RUST_ADMISSION_SOURCE_PATHS = [
     "rust/linkedspec-core/src/lib.rs",
     "rust/linkedspec-core/src/callable_contract.rs",
@@ -78,7 +86,7 @@ EXPECTED_COUNTS = {
     "progress_cases": 8,
     "diagnostics": 15,
     "rollout_legs": 9,
-    "mutations": 42,
+    "mutations": 43,
 }
 EXPECTED_EFFECT_ROW_HASHES = {
     "action_ir_effect_rows": "560de8fc586cee7adf66e1b6eeab7d931f441ebda6ca9cb0498ecc9d4392f775",
@@ -95,7 +103,7 @@ EXPECTED_SURFACE = {
         "remains staged until commit"
     ),
     "availability": (
-        "available only in an admitted backend; currently Perl and Rust, with "
+        "available only in an admitted backend; currently Perl, Rust, and Dart, with "
         "all later runtime legs future and unavailable"
     ),
 }
@@ -143,7 +151,7 @@ EXPECTED_ROLLOUT = [
     (1, "FUTURE-PARITY-BACKLOG.14.3.1.1", "neutral", "complete"),
     (2, "FUTURE-PARITY-BACKLOG.14.3.2", "perl", "complete"),
     (3, "FUTURE-PARITY-BACKLOG.14.3.3", "rust", "complete"),
-    (4, "FUTURE-PARITY-BACKLOG.14.3.4", "dart", "red"),
+    (4, "FUTURE-PARITY-BACKLOG.14.3.4", "dart", "complete"),
     (5, "FUTURE-PARITY-BACKLOG.14.3.5", "julia", "red"),
     (6, "FUTURE-PARITY-BACKLOG.14.3.6", "puc_lua", "red"),
     (7, "FUTURE-PARITY-BACKLOG.14.3.6", "luajit", "red"),
@@ -179,17 +187,25 @@ EXPECTED_RUST_ADMISSION = {
         "--test recognition_transaction_contract"
     ),
 }
+EXPECTED_DART_ADMISSION = {
+    "consumer_path": DART_CONSUMER_PATH,
+    "registration_marker": "running exact Dart recognition transaction admission consumer",
+    "invocation": (
+        "(cd dart && bash ../tools/run_dart_project_data.sh test --reporter "
+        "failures-only test/recognition_transaction_contract_test.dart)"
+    ),
+}
 PUBLIC_SEQUENCE_CONTRACT = {
     "documents": [
         {
             "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
             "required_markers": [
                 "The shared contract now has an executable backend-neutral authority",
-                "The Perl and Rust lanes now recognize and admit the four forms as a current capability",
-                "This section describes current Perl and Rust features and an accepted future portable contract",
-                "fails closed over three public transaction pages, eleven forbidden claims, and twenty-five sequence mutations",
+                "The Perl, Rust, and Dart lanes now recognize and admit the four forms as a current capability",
+                "This section describes current Perl, Rust, and Dart features and an accepted future portable contract",
+                "fails closed over three public transaction pages, fourteen forbidden claims, and twenty-nine sequence mutations",
                 (
-                    "executable, and Perl and Rust are admitted; Dart, Julia, PUC Lua, "
+                    "executable, and Perl, Rust, and Dart are admitted; Julia, PUC Lua, "
                     "and LuaJIT must each be admitted independently"
                 ),
             ],
@@ -198,7 +214,7 @@ PUBLIC_SEQUENCE_CONTRACT = {
             "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
             "required_markers": [
                 "The neutral authority is now executable",
-                "Perl and Rust transaction support is current and canonically admitted",
+                "Perl, Rust, and Dart transaction support is current and canonically admitted",
                 "Neutral proof alone is not backend support",
             ],
         },
@@ -209,8 +225,8 @@ PUBLIC_SEQUENCE_CONTRACT = {
                     "Their neutral artifact/checker is executable at 128 current + 4 "
                     "dedicated ActionIR rows"
                 ),
-                "recognition rollout 3/9 complete",
-                "Dart, Julia, PUC Lua, LuaJIT, recurring, and public-no-drift legs remain RED",
+                "recognition rollout 4/9 complete",
+                "Julia, PUC Lua, LuaJIT, recurring, and public-no-drift legs remain RED",
             ],
         },
     ],
@@ -259,15 +275,27 @@ PUBLIC_SEQUENCE_CONTRACT = {
             "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
             "text": "the other runtimes do not yet implement that route",
         },
+        {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "text": "current on Perl and Rust, future on later runtimes",
+        },
+        {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "text": "Dart, Julia, PUC Lua, and LuaJIT do not yet admit the forms",
+        },
+        {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "text": "later runtimes do not yet implement that route",
+        },
     ],
 }
-PUBLIC_SEQUENCE_MUTATION_COUNT = 25
+PUBLIC_SEQUENCE_MUTATION_COUNT = 29
 CAPABILITY_GUIDE_CONTRACT = {
     "path": "capability_conformance/README.md",
     "required_markers": [
-        "neutral + Perl + Rust 3/9 complete",
+        "neutral + Perl + Rust + Dart 4/9 complete",
         (
-            "current on Perl and Rust and remain future on Dart, Julia, PUC Lua, and LuaJIT"
+            "current on Perl, Rust, and Dart and remain future on Julia, PUC Lua, and LuaJIT"
         ),
     ],
     "forbidden_claims": [
@@ -275,10 +303,13 @@ CAPABILITY_GUIDE_CONTRACT = {
         "forms remain future and unavailable in every backend",
         "neutral + Perl 2/9 complete",
         "current on Perl and remain future on every other runtime",
+        "neutral + Perl + Rust 3/9 complete",
+        "current on Perl and Rust and remain future on Dart, Julia, PUC Lua, and LuaJIT",
     ],
 }
-CAPABILITY_GUIDE_MUTATION_COUNT = 8
+CAPABILITY_GUIDE_MUTATION_COUNT = 10
 RUST_ADMISSION_MUTATION_COUNT = 8
+DART_ADMISSION_MUTATION_COUNT = 13
 EXPECTED_TOP_LEVEL = {
     "format",
     "contract_id",
@@ -372,6 +403,51 @@ def validate_rust_admission(ci: str, sources: dict[str, str]) -> None:
         )
 
 
+def dart_admission_sources() -> dict[str, str]:
+    return {
+        DART_CONSUMER_PATH: read_text(ROOT / DART_CONSUMER_PATH),
+        DART_FACADE_PATH: read_text(ROOT / DART_FACADE_PATH),
+    }
+
+
+def validate_dart_admission(ci: str, sources: dict[str, str]) -> None:
+    require(
+        set(sources) == {DART_CONSUMER_PATH, DART_FACADE_PATH},
+        "Dart admission source inventory drifted",
+    )
+    markers = [
+        f"require_tracked_file {EXPECTED_DART_ADMISSION['consumer_path']}",
+        f"log \"{EXPECTED_DART_ADMISSION['registration_marker']}\"",
+        EXPECTED_DART_ADMISSION["invocation"],
+    ]
+    for marker in markers:
+        require(
+            ci.count(marker) == 1,
+            f"canonical Dart admission marker missing or duplicated: {marker}",
+        )
+    require(
+        DART_DORMANT_CONSUMER_PATH not in ci,
+        "canonical CI retains the dormant Dart consumer path",
+    )
+
+    consumer = sources[DART_CONSUMER_PATH]
+    require(
+        consumer.count(DART_PRIVATE_IMPORT) == 1,
+        "Dart admission consumer must import the private authority exactly once",
+    )
+    for stale in (
+        "LINKEDSPEC_DART_RECOGNITION_TRANSACTION_INTEGRATION_RED",
+        "_integrationRedSkip",
+        DART_DORMANT_CONSUMER_PATH,
+        "skip:",
+    ):
+        require(stale not in consumer, f"Dart admission consumer remains dormant: {stale}")
+    require(
+        "src/runtime/recognition_transaction.dart" not in sources[DART_FACADE_PATH],
+        "Dart recognition transaction authority became publicly exported",
+    )
+
+
 def public_sequence_texts() -> dict[str, str]:
     paths = [row["path"] for row in PUBLIC_SEQUENCE_CONTRACT["documents"]]
     return {path: read_text(ROOT / path) for path in paths}
@@ -397,7 +473,7 @@ def validate_capability_guide(
     )
     require(
         isinstance(forbidden, list)
-        and len(forbidden) == 4 == len(set(forbidden)),
+        and len(forbidden) == 6 == len(set(forbidden)),
         "capability-guide forbidden-claim inventory drifted",
     )
     for marker in markers:
@@ -447,13 +523,14 @@ def validate_public_sequence(
     require(
         rollout_status.get("perl") == "complete"
         and rollout_status.get("rust") == "complete"
+        and rollout_status.get("dart") == "complete"
         and set(rollout_status.values()) == {"complete", "red"}
         and all(
             status == "red"
             for leg, status in rollout_status.items()
-            if leg not in {"neutral", "perl", "rust"}
+            if leg not in {"neutral", "perl", "rust", "dart"}
         ),
-        "public sequence requires neutral, Perl, and Rust complete with every later leg RED",
+        "public sequence requires neutral, Perl, Rust, and Dart complete with every later leg RED",
     )
 
     for row in documents:
@@ -478,7 +555,7 @@ def validate_public_sequence(
             )
             require(tracked.returncode == 0, f"public document is not tracked: {path}")
 
-    require(len(forbidden) == 11, "public forbidden-claim inventory drifted")
+    require(len(forbidden) == 14, "public forbidden-claim inventory drifted")
     for row in forbidden:
         path = row.get("path")
         claim = row.get("text")
@@ -813,7 +890,8 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
         "task_owner drifted",
     )
     require(
-        document.get("status") == "neutral_perl_and_rust_complete_other_legs_red",
+        document.get("status")
+        == "neutral_perl_rust_and_dart_complete_other_legs_red",
         "neutral/backend status drifted",
     )
     require(document.get("expected_counts") == EXPECTED_COUNTS, "expected_counts drifted")
@@ -972,7 +1050,11 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
         "Rust rollout consumer path drifted",
     )
     require(
-        all(row.get("paths") == [] for row in rollout[3:]),
+        rollout[3].get("paths") == [EXPECTED_DART_ADMISSION["consumer_path"]],
+        "Dart rollout consumer path drifted",
+    )
+    require(
+        all(row.get("paths") == [] for row in rollout[4:]),
         "RED rollout legs must not claim implementation paths",
     )
 
@@ -1031,6 +1113,7 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
             "canonical Perl admission invocation missing or duplicated",
         )
         validate_rust_admission(ci, rust_admission_sources())
+        validate_dart_admission(ci, dart_admission_sources())
         validate_public_sequence(
             document,
             PUBLIC_SEQUENCE_CONTRACT,
@@ -1107,7 +1190,8 @@ MUTATIONS: dict[str, Callable[[dict[str, Any]], None]] = {
     "rollout_owner": _set(["rollout", 1, "owner"], "FUTURE-PARITY-BACKLOG.14.3.1.1"),
     "rollout_status": _set(["rollout", 2, "status"], "red"),
     "rollout_perl_regression": _set(["rollout", 1, "status"], "red"),
-    "rollout_next_backend": _set(["rollout", 3, "status"], "complete"),
+    "rollout_dart_regression": _set(["rollout", 3, "status"], "red"),
+    "rollout_next_backend": _set(["rollout", 4, "status"], "complete"),
     "canonical_contract_path": _set(["canonical_execution", "contract_path"], "changed.json"),
     "canonical_checker_path": _set(["canonical_execution", "checker_path"], "changed.py"),
     "canonical_invocation": _set(
@@ -1234,8 +1318,14 @@ def validate_public_sequence_mutations(document: dict[str, Any]) -> int:
             ),
         ),
         (
-            "backend rollout promotion",
+            "Dart rollout regression",
             lambda candidate, _contract, _texts: candidate["rollout"][3].__setitem__(
+                "status", "red"
+            ),
+        ),
+        (
+            "backend rollout promotion",
+            lambda candidate, _contract, _texts: candidate["rollout"][4].__setitem__(
                 "status", "complete"
             ),
         ),
@@ -1377,6 +1467,75 @@ def validate_rust_admission_mutations() -> int:
     return len(mutations)
 
 
+def validate_dart_admission_mutations() -> int:
+    ci = read_text(CI_PATH)
+    sources = dart_admission_sources()
+    markers = [
+        f"require_tracked_file {EXPECTED_DART_ADMISSION['consumer_path']}",
+        f"log \"{EXPECTED_DART_ADMISSION['registration_marker']}\"",
+        EXPECTED_DART_ADMISSION["invocation"],
+    ]
+    mutations: list[tuple[str, str, str | None, str | None]] = []
+    for label, marker in zip(("require", "log", "invocation"), markers, strict=True):
+        mutations.extend(
+            [
+                (f"Dart {label} omission", ci.replace(marker, "", 1), None, None),
+                (f"Dart {label} duplication", ci + "\n" + marker, None, None),
+            ]
+        )
+    mutations.extend(
+        [
+            (
+                "Dart dormant canonical path retained",
+                ci + "\n" + DART_DORMANT_CONSUMER_PATH,
+                None,
+                None,
+            ),
+            (
+                "Dart environment switch retained",
+                ci,
+                "LINKEDSPEC_DART_RECOGNITION_TRANSACTION_INTEGRATION_RED",
+                None,
+            ),
+            ("Dart skip authority retained", ci, "_integrationRedSkip", None),
+            ("Dart dormant source path retained", ci, DART_DORMANT_CONSUMER_PATH, None),
+            ("Dart skipped test retained", ci, "skip:", None),
+            (
+                "Dart private import removed",
+                ci,
+                None,
+                DART_PRIVATE_IMPORT,
+            ),
+            (
+                "Dart private authority publicly exported",
+                ci,
+                None,
+                "export 'src/runtime/recognition_transaction.dart';",
+            ),
+        ]
+    )
+    require(
+        len(mutations) == DART_ADMISSION_MUTATION_COUNT,
+        "Dart admission mutation count drifted",
+    )
+    for name, candidate_ci, stale_consumer, source_change in mutations:
+        candidate_sources = dict(sources)
+        if stale_consumer is not None:
+            candidate_sources[DART_CONSUMER_PATH] += "\n" + stale_consumer
+        if source_change == DART_PRIVATE_IMPORT:
+            candidate_sources[DART_CONSUMER_PATH] = candidate_sources[
+                DART_CONSUMER_PATH
+            ].replace(DART_PRIVATE_IMPORT, "changed/private/import.dart", 1)
+        elif source_change is not None:
+            candidate_sources[DART_FACADE_PATH] += "\n" + source_change
+        try:
+            validate_dart_admission(candidate_ci, candidate_sources)
+        except ContractError:
+            continue
+        raise ContractError(f"Dart admission mutation {name!r} was accepted")
+    return len(mutations)
+
+
 def main() -> int:
     try:
         document = load_contract()
@@ -1385,6 +1544,7 @@ def main() -> int:
         public_mutations = validate_public_sequence_mutations(document)
         guide_mutations = validate_capability_guide_mutations()
         rust_admission_mutations = validate_rust_admission_mutations()
+        dart_admission_mutations = validate_dart_admission_mutations()
     except ContractError as exc:
         print(f"recognition-transaction-contract: ERROR: {exc}", file=sys.stderr)
         return 1
@@ -1392,10 +1552,11 @@ def main() -> int:
         "recognition-transaction-contract: OK "
         "(132 ActionIR rows = 128 current + 4 dedicated; 246 call rows; "
         "token 8 positive/17 negative; effects 6 graphs; marks 6; progress 8; "
-        "42 rejected mutations; rollout neutral + Perl + Rust 3/9 complete; "
-        f"public sequence 3 documents/11 forbidden/{public_mutations} mutations; "
-        f"capability guide 1 document/4 forbidden/{guide_mutations} mutations; "
-        f"Rust admission {rust_admission_mutations} mutations)"
+        "43 rejected mutations; rollout neutral + Perl + Rust + Dart 4/9 complete; "
+        f"public sequence 3 documents/14 forbidden/{public_mutations} mutations; "
+        f"capability guide 1 document/6 forbidden/{guide_mutations} mutations; "
+        f"Rust admission {rust_admission_mutations} mutations; "
+        f"Dart admission {dart_admission_mutations} mutations)"
     )
     return 0
 

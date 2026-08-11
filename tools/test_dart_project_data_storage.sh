@@ -65,6 +65,7 @@ expected_temp_owners=(
  dart/test/logical_helper_contract_test.dart
  dart/test/native_pipeline_trace_test.dart
  dart/test/primary_cli_test.dart
+ dart/test/recognition_transaction_contract_test.dart
  dart/test/repeated_action_result_contract_test.dart
  dart/test/root_rule_selection_admission_test.dart
  dart/test/root_rule_selection_routes_test.dart
@@ -79,7 +80,6 @@ expected_temp_owners=(
  dart/test/spec_loader_test.dart
  dart/test/trace_test.dart
  dart/test/unicode_rule_label_identity_routes_test.dart
- dart/test_dormant/recognition_transaction_contract_test.dart
 )
 mapfile -t actual_temp_owners < <(
  while IFS= read -r relative; do

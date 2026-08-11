@@ -1,22 +1,14 @@
-// FUTURE-PARITY-BACKLOG.14.3.4.0.1 — dormant Dart recognition-transaction RED.
+// FUTURE-PARITY-BACKLOG.14.3.4.3 — admitted Dart recognition transactions.
 //
-// Ordinary `dart test` does not discover this pre-admission directory, and
-// `analysis_options.yaml` excludes this exact file while its future private
-// authority import is absent. Run the private-authority proof through project
-// data:
+// Ordinary Dart discovery and canonical CI execute this exact consumer through
+// project-local data routing:
 //
 //   cd dart
 //   bash ../tools/run_dart_project_data.sh test --reporter failures-only \
-//     test_dormant/recognition_transaction_contract_test.dart
+//     test/recognition_transaction_contract_test.dart
 //
-// Enable only the separately owned integration RED with:
-//
-//   LINKEDSPEC_DART_RECOGNITION_TRANSACTION_INTEGRATION_RED=1 \
-//     bash ../tools/run_dart_project_data.sh test --reporter failures-only \
-//       test_dormant/recognition_transaction_contract_test.dart
-//
-// Private authority work removes the analyzer exclusion. Admission moves this
-// consumer under ordinary discovery only after every test is GREEN.
+// The implementation authority remains package-private; admission adds no
+// public Dart export.
 
 import 'dart:convert';
 import 'dart:io';
@@ -32,12 +24,6 @@ typedef _JsonObject = Map<String, Object?>;
 final _JsonObject _contract = _readObject(
   '../capability_conformance/recognition_transaction_contract.json',
 );
-
-final Object? _integrationRedSkip =
-    Platform.environment['LINKEDSPEC_DART_RECOGNITION_TRANSACTION_INTEGRATION_RED'] ==
-        '1'
-    ? false
-    : 'FUTURE-PARITY-BACKLOG.14.3.4.2 owns Dart transaction integration';
 
 const _authoredSource = r'''
 Top::AND
@@ -69,12 +55,12 @@ Top::AND
 ''';
 
 void main() {
-  test('neutral contract and dormant Dart rollout boundary are exact', () {
+  test('neutral contract and admitted Dart rollout boundary are exact', () {
     expect(_contract['contract_id'], 'linkedspec-recognition-transaction-v1');
     expect(_contract['format'], 1);
     expect(
       _contract['status'],
-      'neutral_perl_and_rust_complete_other_legs_red',
+      'neutral_perl_rust_and_dart_complete_other_legs_red',
     );
 
     final counts = _object(_contract['expected_counts']);
@@ -88,7 +74,7 @@ void main() {
     expect(counts, containsPair('mark_cases', 6));
     expect(counts, containsPair('progress_cases', 8));
     expect(counts, containsPair('diagnostics', 15));
-    expect(counts, containsPair('mutations', 42));
+    expect(counts, containsPair('mutations', 43));
 
     expect(_object(_contract['authored_surface']), {
       'checkpoint': 'tx = recognition_checkpoint()',
@@ -100,25 +86,26 @@ void main() {
       'result_separation':
           'recognize_once returns a strict match boolean; the recognized payload remains staged until commit',
       'availability':
-          'available only in an admitted backend; currently Perl and Rust, with all later runtime legs future and unavailable',
+          'available only in an admitted backend; currently Perl, Rust, and Dart, with all later runtime legs future and unavailable',
     });
 
     final rollout = _objectRows('rollout');
     expect(rollout, hasLength(9));
-    expect(rollout.take(3).map((row) => row['leg']), [
+    expect(rollout.take(4).map((row) => row['leg']), [
       'neutral',
       'perl',
       'rust',
+      'dart',
     ]);
-    expect(rollout.take(3).every((row) => row['status'] == 'complete'), isTrue);
+    expect(rollout.take(4).every((row) => row['status'] == 'complete'), isTrue);
     expect(rollout[3], {
       'order': 4,
       'owner': 'FUTURE-PARITY-BACKLOG.14.3.4',
       'leg': 'dart',
-      'status': 'red',
-      'paths': <Object?>[],
+      'status': 'complete',
+      'paths': ['dart/test/recognition_transaction_contract_test.dart'],
     });
-    expect(rollout.skip(3).every((row) => row['status'] == 'red'), isTrue);
+    expect(rollout.skip(4).every((row) => row['status'] == 'red'), isTrue);
   });
 
   test(
@@ -473,71 +460,63 @@ void main() {
     );
   });
 
-  test(
-    'authored forms lower to four dedicated non-eager ActionIR nodes',
-    () {
-      final compiled = _compile(_authoredSource);
-      final top = compiled.rule('Top')!;
-      final payload = top.blindEdges.single.actionPayload!;
-      final action = payload.actionAst.toJson();
-      final expected = <String, int>{
-        'recognition_checkpoint': 1,
-        'recognize_once': 1,
-        'recognition_commit': 1,
-        'recognition_rollback': 1,
-      };
-      for (final entry in expected.entries) {
-        expect(
-          _mapsWithKind(action, entry.key),
-          hasLength(entry.value),
-          reason: 'one dedicated ${entry.key} node',
+  test('authored forms lower to four dedicated non-eager ActionIR nodes', () {
+    final compiled = _compile(_authoredSource);
+    final top = compiled.rule('Top')!;
+    final payload = top.blindEdges.single.actionPayload!;
+    final action = payload.actionAst.toJson();
+    final expected = <String, int>{
+      'recognition_checkpoint': 1,
+      'recognize_once': 1,
+      'recognition_commit': 1,
+      'recognition_rollback': 1,
+    };
+    for (final entry in expected.entries) {
+      expect(
+        _mapsWithKind(action, entry.key),
+        hasLength(entry.value),
+        reason: 'one dedicated ${entry.key} node',
+      );
+    }
+    final attempt = _mapsWithKind(action, 'recognize_once').single;
+    expect(attempt, containsPair('token', 'tx'));
+    expect(attempt, containsPair('rule', 'Child'));
+    expect(
+      _allMaps(
+        action,
+      ).where((node) => node['kind'] == 'call' && node['name'] == 'Child'),
+      isEmpty,
+      reason: 'call(Child) must remain unevaluated transaction structure',
+    );
+  });
+
+  test('neutral effect closure and cursor-only progress are exact', () {
+    final dynamic integration = _newAuthority('input.spec');
+    for (final graph in _fixtureRows('effect_graphs')) {
+      final accepted = graph['accepted']! as bool;
+      if (accepted) {
+        integration.classifyEffects(graph);
+      } else {
+        _expectDiagnostic(
+          graph['diagnostic']! as String,
+          () => integration.classifyEffects(graph),
+          const <String, Object?>{},
         );
       }
-      final attempt = _mapsWithKind(action, 'recognize_once').single;
-      expect(attempt, containsPair('token', 'tx'));
-      expect(attempt, containsPair('rule', 'Child'));
-      expect(
-        _allMaps(
-          action,
-        ).where((node) => node['kind'] == 'call' && node['name'] == 'Child'),
-        isEmpty,
-        reason: 'call(Child) must remain unevaluated transaction structure',
-      );
-    },
-    skip: _integrationRedSkip,
-  );
-
-  test(
-    'neutral effect closure and cursor-only progress are exact',
-    () {
-      final dynamic integration = _newAuthority('input.spec');
-      for (final graph in _fixtureRows('effect_graphs')) {
-        final accepted = graph['accepted']! as bool;
-        if (accepted) {
-          integration.classifyEffects(graph);
-        } else {
-          _expectDiagnostic(
-            graph['diagnostic']! as String,
-            () => integration.classifyEffects(graph),
-            const <String, Object?>{},
-          );
-        }
+    }
+    for (final fixture in _fixtureRows('progress')) {
+      final accepted = fixture['accepted']! as bool;
+      if (accepted) {
+        integration.validateProgress(fixture);
+      } else {
+        _expectDiagnostic(
+          fixture['diagnostic']! as String,
+          () => integration.validateProgress(fixture),
+          const <String, Object?>{},
+        );
       }
-      for (final fixture in _fixtureRows('progress')) {
-        final accepted = fixture['accepted']! as bool;
-        if (accepted) {
-          integration.validateProgress(fixture);
-        } else {
-          _expectDiagnostic(
-            fixture['diagnostic']! as String,
-            () => integration.validateProgress(fixture),
-            const <String, Object?>{},
-          );
-        }
-      }
-    },
-    skip: _integrationRedSkip,
-  );
+    }
+  });
 
   test(
     'native reconstructed and generated-plan carriers keep false payload',
@@ -579,26 +558,23 @@ void main() {
         reason: 'nontransaction compatibility cursor stack',
       );
     },
-    skip: _integrationRedSkip,
   );
 
-  test(
-    'freshly emitted source uses the same transaction runtime',
-    () async {
-      final compiled = _compile(_authoredSource);
-      final emitted = emitDartSourceV2(
-        compiled,
-        'recognition-transaction/dart.spec',
-      );
-      final packageRoot = Directory.current.absolute;
-      final scratch = Directory.systemTemp.createTempSync(
-        'linkedspec-dart-recognition-transaction-',
-      );
-      final pubCache = Directory('${scratch.path}/pub-cache')..createSync();
-      try {
-        Directory('${scratch.path}/lib').createSync();
-        Directory('${scratch.path}/bin').createSync();
-        File('${scratch.path}/pubspec.yaml').writeAsStringSync('''
+  test('freshly emitted source uses the same transaction runtime', () async {
+    final compiled = _compile(_authoredSource);
+    final emitted = emitDartSourceV2(
+      compiled,
+      'recognition-transaction/dart.spec',
+    );
+    final packageRoot = Directory.current.absolute;
+    final scratch = Directory.systemTemp.createTempSync(
+      'linkedspec-dart-recognition-transaction-',
+    );
+    final pubCache = Directory('${scratch.path}/pub-cache')..createSync();
+    try {
+      Directory('${scratch.path}/lib').createSync();
+      Directory('${scratch.path}/bin').createSync();
+      File('${scratch.path}/pubspec.yaml').writeAsStringSync('''
 name: linkedspec_recognition_transaction_probe
 publish_to: none
 environment:
@@ -607,8 +583,8 @@ dependencies:
   linkedspec_dart:
     path: ${jsonEncode(packageRoot.path)}
 ''');
-        File('${scratch.path}/lib/generated.dart').writeAsStringSync(emitted);
-        File('${scratch.path}/bin/main.dart').writeAsStringSync(r'''
+      File('${scratch.path}/lib/generated.dart').writeAsStringSync(emitted);
+      File('${scratch.path}/bin/main.dart').writeAsStringSync(r'''
 import 'dart:convert';
 
 import 'package:linkedspec_recognition_transaction_probe/generated.dart'
@@ -622,31 +598,29 @@ void main() {
   print(jsonEncode(value));
 }
 ''');
-        final environment = <String, String>{
-          ...Platform.environment,
-          'PUB_CACHE': pubCache.path,
-        };
-        await _expectProcessSuccess(scratch, environment, const [
-          'pub',
-          'get',
-          '--offline',
-        ]);
-        await _expectProcessSuccess(scratch, environment, const [
-          'analyze',
-          '--fatal-infos',
-          '--fatal-warnings',
-        ]);
-        final run = await _expectProcessSuccess(scratch, environment, const [
-          'run',
-          'bin/main.dart',
-        ]);
-        expect((run.stdout as String).trim(), 'false');
-      } finally {
-        scratch.deleteSync(recursive: true);
-      }
-    },
-    skip: _integrationRedSkip,
-  );
+      final environment = <String, String>{
+        ...Platform.environment,
+        'PUB_CACHE': pubCache.path,
+      };
+      await _expectProcessSuccess(scratch, environment, const [
+        'pub',
+        'get',
+        '--offline',
+      ]);
+      await _expectProcessSuccess(scratch, environment, const [
+        'analyze',
+        '--fatal-infos',
+        '--fatal-warnings',
+      ]);
+      final run = await _expectProcessSuccess(scratch, environment, const [
+        'run',
+        'bin/main.dart',
+      ]);
+      expect((run.stdout as String).trim(), 'false');
+    } finally {
+      scratch.deleteSync(recursive: true);
+    }
+  });
 }
 
 transaction.RecognitionTransactionAuthority _newAuthority(

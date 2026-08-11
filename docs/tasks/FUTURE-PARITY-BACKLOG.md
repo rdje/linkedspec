@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-11` (Dart private authority `.14.3.4.1` is atomic 194/300; integration `.14.3.4.2`
-  is signoff-complete for atomic 195/300 with admission/rollout deliberately unchanged; no push)
+- Last updated: `2026-08-11` (Dart integration `.14.3.4.2` is atomic 195/300; admission `.14.3.4.3` is
+  signoff-complete for atomic 196/300 with only Dart promoted; no push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -103,14 +103,13 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-11):** Dart private authority `.14.3.4.1` landed at `f6f154c6` as atomic 194/300
-(no push). Integration `.14.3.4.2` now lowers four dedicated non-eager nodes, applies recursive effect/cursor-
-progress policy, and binds native/reconstructed/generated-plan/emitted execution to live UTF-16 transaction state.
-The enabled dormant consumer passes 10/10; default remains 6 pass / 4 skips. Complete Dart passes format 100/0,
-strict analysis, ordinary 383, storage 21/47, CLI 66x2, and corpus 105. The module remains unexported and ordinary/
-canonical discovery, recognition 132/246/42, rollout 3/9, public 3/11/25, guide 1/4/8, and Rust admission 8 remain
-exact. All eight doctrines and canonical CI pass containment/relocation, CLI 66x2, RAM 64%, and Phase 0
-1,031/1,031. Atomic 195 commit is next; admission `.14.3.4.3` remains separate.
+**Authoritative frontier (2026-08-11):** Dart integration `.14.3.4.2` landed at `bee6cf45` as atomic 195/300
+(no push). Admission `.14.3.4.3` is signoff-complete and commit-ready as atomic 196: its unchanged 10-test proof
+is ordinary/canonical, dormant switching is gone, and the private authority remains unexported. Recognition is
+132/246/43, rollout neutral + Perl + Rust + Dart 4/9, public 3/14/29, guide 1/6/10, Rust admission 8, and Dart
+admission 13. Complete Dart passes 100/393/21/47/66x2/105; all eight doctrines and definitive canonical proof pass
+CLI 66x2, RAM 60%, and Phase 0 1,031/1,031 in 694 seconds. Land atomic 196 cleanly before dormant Julia RED
+`.14.3.5.0` activates task-first.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private

@@ -73,6 +73,18 @@ consumers pass, and the route registry remains 20 surfaces / 62 routes / 32/32 w
 empty debt metadata. The program is composition-closed. These storage migrations change documentation governance
   only; they change no language, compiler, runtime, backend, fixture, CLI, protocol, or project-data root.
 
+- `2026-08-11 admitted Dart recognition transactions`: `FUTURE-PARITY-BACKLOG.14.3.4.2` integrates four private
+  dedicated non-eager nodes, recursive effect closure, cursor-only progress, and live UTF-16 cursor/boundary/mark
+  synchronization through one package-private authority across native, reconstructed, generated-plan, and emitted
+  carriers. Admission `.14.3.4.3` moves the unchanged 10-test consumer into ordinary discovery, removes only its
+  environment/skip dormancy, and requires/logs/executes its exact project-data-routed target once in canonical CI.
+  The authority remains unexported. Thirteen mutations reject registration, stale-dormancy, private-import, and
+  facade-export drift. Only Dart advances: recognition is 132/246/43 at rollout 4/9, public 3/14/29, and guide
+  1/6/10; Julia, both Lua ABIs, recurring, and final public no-drift remain RED. Complete Dart passes format 100/0,
+  strict analysis, ordinary 393, storage 21/47, CLI 66x2, and corpus 105 without changing UTF-16 results or APIs.
+  Definitive canonical proof passes all eight doctrines, repository containment/relocation, CLI 66x2, RAM 60%,
+  and Phase 0 1,031/1,031 in 694 seconds before the exact local-CI success marker.
+
 - `2026-08-11 private Dart recognition-transaction authority`: `FUTURE-PARITY-BACKLOG.14.3.4.1` adds one
   package-private authority over the admitted Dart `SourceAuthority`, with opaque frame/token handles, monotonic
   invocation/mark/transaction generations, detached cursor/boundary/mark snapshots, recursive same-label isolation,

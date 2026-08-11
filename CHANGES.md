@@ -10,6 +10,27 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.4.3 — admit Dart recognition transactions
+
+- Moved the unchanged 10-test consumer to `dart/test/recognition_transaction_contract_test.dart`, removed its
+  environment/skip dormancy, and kept the private authority absent from the package facade.
+- Canonical CI now requires, logs, and executes the exact project-data-routed Dart consumer once. Thirteen
+  independent mutations reject marker omission/duplication, dormant path/switch/skip residue, missing private
+  import, or accidental public export.
+- Promoted only Dart to complete. Recognition is now 132 ActionIR rows / 246 calls / 43 semantic mutations with
+  rollout neutral + Perl + Rust + Dart 4/9; Julia, PUC Lua, LuaJIT, recurring, and final public no-drift remain RED.
+- Updated the admitted Perl and Rust consumers' contract metadata assertions to the same Dart-current status,
+  availability, mutation count, rollout path, and later-RED boundary; their runtime behavior remains unchanged.
+- Synchronized the three-page public projection to 14 forbidden claims / 29 mutations and the capability guide to
+  1 document / 6 forbidden claims / 10 mutations. No later-runtime or complete-portability claim advances.
+- Preserved UTF-16 registers/results, compatibility cursor behavior, schemas, public APIs, CLI, README, and
+  project-storage ownership. The ordinary consumer preserves a successful `false` payload through native,
+  reconstructed, generated-plan, and freshly analyzed emitted-source execution.
+- Complete Dart passes format 100/0, fatal analysis, ordinary 393/393, storage 21/47, CLI 66x2, and corpus 105/105.
+- The first canonical attempt caught the admitted-consumer metadata coupling by rejecting stale Perl/Rust snapshots;
+  after aligning both, they pass 51/51 and 12/12. A full host-permitted rerun passes all eight doctrines,
+  repository containment/relocation, CLI 66x2, RAM 60%, Phase 0 1,031/1,031 in 694 seconds, and the exact success marker.
+
 ## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.4.2 — integrate Dart recognition transactions
 
 - Added four dedicated Dart ActionIR nodes for checkpoint, non-eager static recognition, commit, and rollback.

@@ -49,7 +49,7 @@
 > treat those compatibility controls as transaction support. The accepted transaction forms are `recognition_checkpoint()`,
 > `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and `recognition_rollback(token)`. The attempt
 > returns a match boolean; commit separately exposes the staged payload. The neutral authority is now executable
-> and fail-closed over 128 current + four dedicated node rows, 246 call rows, and 42 mutations. Perl and Rust transaction support is current and canonically admitted; the later runtime legs remain unavailable until their own
+> and fail-closed over 128 current + four dedicated node rows, 246 call rows, and 43 mutations. Perl, Rust, and Dart transaction support is current and canonically admitted; the later runtime legs remain unavailable until their own
 > admissions land. Neutral proof alone is not backend support.
 >
 > Perl now has an admitted end-to-end implementation behind that boundary: dedicated ActionIR, recursive static
@@ -62,14 +62,14 @@
 > progress classifiers enforce the neutral fixtures; and native, reconstructed, generated-plan, and independently
 > compiled emitted-source carriers share the private invocation/cursor/boundary/mark/token authority. The ordinary
 > contract passes 12 tests, including a false recognized payload, and canonical CI executes that exact target once.
-> Only Rust advances: recognition rollout is 3/9 while Dart, Julia, PUC Lua, LuaJIT, recurring, and public-no-drift
-> remain RED.
+> Rust's admission advanced only its own row; no later leg was promoted early.
 >
-> Dart now has the next package-private state foundation only. Six dormant default-mode tests prove opaque
-> invocation/mark/token generations, detached UTF-16-register snapshots, same-label mark isolation, falsey-safe
-> staging, and restore-before-invalidate lifecycle handling. An explicit integration mode remains RED at dedicated
-> ActionIR/effect/progress and native/emitted runtime seams. The module is unexported; ordinary discovery remains
-> 383 tests; and no parser, engine, generated-source, canonical, rollout, or current-support claim changes.
+> Dart now has an admitted package-private end-to-end integration. Four dedicated non-eager nodes, recursive effect
+> closure, cursor-only progress, and live UTF-16 cursor/boundary/invocation-mark synchronization converge across
+> native, reconstructed, generated-plan, and freshly analyzed emitted-source execution. The ordinary 10-test
+> consumer preserves false payloads and compatibility cursor behavior; canonical CI executes that exact project-
+> data-routed target once. Only Dart advances: recognition rollout is 4/9 while Julia, PUC Lua, LuaJIT, recurring,
+> and public-no-drift remain RED. The private authority is not exported.
 >
 > Any cursor transaction is one explicit
 > recognition attempt over invocation-local cursor/boundary/marks only; it adds no search tree and cannot undo

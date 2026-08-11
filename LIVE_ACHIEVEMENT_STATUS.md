@@ -2,23 +2,24 @@
 
 ## Current Activity
 
-- Dart integration leaf `FUTURE-PARITY-BACKLOG.14.3.4.2` adds four dedicated non-eager nodes, neutral effect/
-  progress policy, and live UTF-16 cursor/boundary/mark synchronization through the private authority.
-- Enabled dormant proof passes 10/10 across native, reconstructed, generated-plan, and emitted carriers; default
-  remains 6 pass / 4 skips, with no export, canonical registration, or rollout promotion.
-- Complete Dart/book/doctrine/canonical proof is green; atomic 195 commit is the only remaining workflow step.
+- Dart admission leaf `FUTURE-PARITY-BACKLOG.14.3.4.3` is signoff-complete: the exact 10-test consumer is ordinary
+  and canonical while its recognition authority remains package-private.
+- Recognition is 132/246/43 with rollout 4/9, public governance 3/14/29, guide 1/6/10, and Dart admission 13.
+- Complete Dart, book, all eight doctrines, and definitive canonical signoff are green; atomic 196 is commit-ready.
 
 ## Latest Completed Slice
 
-- `FUTURE-PARITY-BACKLOG.14.3.4.2` is signoff-complete for atomic 195/300 with exact frozen subject.
-- Canonical CI passes all doctrines, containment/relocation, CLI 66x2, RAM 64%, and Phase 0 1,031/1,031.
+- `.14.3.4.3` completes Dart transaction admission signoff for atomic 196/300 from clean `bee6cf45`.
+- Exact 10/10 admission, complete Dart 393/393, canonical Phase 0 1,031/1,031, and the private export boundary pass.
 
 ## Next Action
 
-- Land `.14.3.4.2` as atomic 195, verify the clean boundary, then activate admission `.14.3.4.3` task-first.
+- Land `.14.3.4.3` as atomic 196, prove the clean boundary, then activate Julia RED `.14.3.5.0` task-first.
 
 ## Recent Completions
 
+- `2026-08-11` — `.14.3.4.3` completed exact Dart transaction admission signoff for atomic 196/300.
+- `2026-08-11` — `bee6cf45` landed private Dart transaction integration as atomic 195/300.
 - `2026-08-11` — `.14.3.4.2` completed private Dart integration signoff for atomic 195/300; Phase 0 passed 1,031/1,031.
 - `2026-08-11` — `.14.3.4.1` completed private Dart authority signoff for atomic 194/300; Phase 0 passed 1,031/1,031.
 - `2026-08-11` — `3a29b34e` landed exact dormant Dart transaction RED as atomic 193/300.
@@ -33,8 +34,6 @@
 - `2026-08-10` — `FUTURE-PARITY-BACKLOG.14.3.2.1` added private Perl transaction authority as atomic 185/300.
 - `2026-08-10` — `59306f37` froze the dormant Perl transaction RED as atomic 184/300.
 - `2026-08-10` — `77872bfe` governed transaction public sequence as atomic 183/300.
-- `2026-08-10` — `774516fa` repaired neutral transaction public status sequencing as atomic 182/300.
-- `2026-08-10` — `e0cc7182` added the executable neutral recognition-transaction authority as atomic 181/300.
 
 ## History
 
