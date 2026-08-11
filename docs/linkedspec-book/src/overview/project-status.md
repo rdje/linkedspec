@@ -136,10 +136,13 @@ execution. The exact 203/203 consumer is included in ordinary Julia discovery an
 CI. Only Julia advances: recognition rollout is 5/9 while PUC Lua, LuaJIT, recurring, and public-no-drift remain
 RED; the private namespace remains unexported.
 
-Lua's next transaction boundary is now frozen as one shared dormant consumer. Explicit `authority` and
-`integration` executions parse identically on PUC Lua and LuaJIT and stop only at the missing private
-`linkedspec.recognition_transaction` module. The consumer remains outside ordinary and canonical discovery, so
-this RED adds no current Lua transaction support and does not advance recognition rollout beyond 5/9.
+Lua now has one shared private transaction authority implemented without an ABI-specific fork. Explicit
+`authority` execution passes 187 assertions on PUC Lua and 187 on LuaJIT, covering invocation/mark generations,
+detached snapshots, opaque linear tokens, lifecycle diagnostics, and successful `false`, zero, empty-string, and
+JSON-null payloads. The module is absent from the public facade, and its final-path consumer remains outside
+ordinary and canonical discovery. Explicit `integration` execution therefore remains RED at the next exact seam:
+Lua has no four dedicated transaction ActionIR nodes yet. This private foundation changes no current Lua syntax,
+behavior, or recognition rollout; the ledger remains 5/9 until integration and admission land separately.
 
 The helper audit distinguishes 7 callable compatibility aliases from 2 internal Perl contract/scanner ids.
 `capture_take_slice` and `capture_take_slice_len` are internal ids, not accepted helper spellings; authored code

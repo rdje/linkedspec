@@ -10,6 +10,26 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.6.1` — private shared Lua recognition-transaction authority): follow the
+  existing private `source_location.lua` pattern: opaque tables backed by one module-local weak-key store and a
+  non-exported direct module. This keeps handles unforgeable enough for the internal contract without public API.
+- Keep the module within Lua 5.1 syntax and behavior. One source must run unchanged on PUC Lua and LuaJIT; the
+  authority owns no parser/runtime carrier until `.14.3.6.2` integrates it.
+- Separate matched presence from payload at every boundary. Lua's `condition and payload or fallback` idiom loses
+  `false`; explicit branches are mandatory for staged values and diagnostic projections. Use `json.null` for an
+  encodable miss and `json.array()` for empty ordered diagnostic fields rather than ambiguous `{}`.
+- Restore snapshots before invalidating tokens on rollback, discard, misuse, and invocation unwind. Monotonic ids
+  plus private ownership checks make cross-source, cross-invocation, wrong-generation, nesting, retry, reuse, and
+  escape failures deterministic and prevent a failed operation from leaving staged state live.
+- Authority proof is 187/187 on both ABIs. Integration compiles the real authored source and then stops at one
+  stable missing-dedicated-ActionIR diagnostic; do not add effects, progress policy, runtime adapters, or carriers
+  to this authority-only slice.
+- Keep dormant topology and private-authority governance separate: 12 mutations prove absence from ordinary/
+  canonical/facade routes; 22 prove the authority surface and next RED. Neutral 132/246/44 and rollout 5/9 stay exact.
+- Final proof passes book 79/14,412 KiB, KM 816/6,772, all eight doctrines, every mandatory admission, containment/
+  relocation, CLI 66x2, RAM 82%, and Phase 0 1,031/1,031 in 753 seconds through the exact canonical success marker.
+  Land atomic 202 cleanly before `.14.3.6.2` adds any ActionIR/effect/progress/runtime/carrier integration.
+
 - 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.6.0` — shared Lua recognition-transaction RED): use one source for both
   PUC Lua and LuaJIT. The existing interpreter, typed source authority, byte registers, mark/cursor stores,
   generated plan, and in-memory source loader are shared; an ABI-specific transaction implementation would be drift.

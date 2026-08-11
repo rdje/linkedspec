@@ -41,6 +41,7 @@ JULIA_PRIVATE_AUTHORITY_ACCESS = """const JuliaRecognitionTransaction = getprope
 LUA_CONSUMER_PATH = "lua/test/recognition_transaction_contract_test.lua"
 LUA_ORDINARY_PATH = "tools/run_lua_local.sh"
 LUA_FACADE_PATH = "lua/src/linkedspec/init.lua"
+LUA_AUTHORITY_PATH = "lua/src/linkedspec/recognition_transaction.lua"
 LUA_RED_SELECTOR = (
     'local mode = os.getenv("LINKEDSPEC_LUA_RECOGNITION_TRANSACTION_RED_MODE") '
     'or "authority"'
@@ -51,6 +52,32 @@ LUA_PRIVATE_REQUIRE = (
 )
 LUA_RED_DIAGNOSTIC = (
     "Lua recognition transaction RED: missing linkedspec.recognition_transaction"
+)
+LUA_INTEGRATION_RED_DIAGNOSTIC = (
+    "Lua recognition transaction integration RED: missing dedicated ActionIR nodes"
+)
+LUA_AUTHORITY_MARKERS = (
+    ('local source_location = require("linkedspec.source_location")', "source authority"),
+    ('local private_state = setmetatable({}, { __mode = "k" })', "weak private state"),
+    ("function M.node_type(value)", "opaque type query"),
+    ("function M.is_error(value)", "typed error query"),
+    ("function M.frame_state(first, second)", "detached frame state"),
+    ("function M.authority(options)", "private authority"),
+    ("function M.enter_invocation(authority_value, options)", "invocation entry"),
+    ("function M.frame_snapshot(authority_value, frame_value)", "frame snapshot"),
+    ("function M.set_frame_state(authority_value, frame_value, state_value)", "state sync"),
+    ("function M.write_mark(authority_value, frame_value, name, offset)", "mark write"),
+    ("function M.read_mark(authority_value, frame_value, name)", "mark read"),
+    ("function M.checkpoint(authority_value, frame_value, origin)", "checkpoint"),
+    ("function M.attempt(authority_value, frame_value, token_value, options)", "attempt"),
+    ("function M.commit(authority_value, frame_value, token_value)", "commit"),
+    ("function M.rollback(authority_value, frame_value, token_value)", "rollback"),
+    ("function M.reject_escape(authority_value, frame_value, token_value, escape)", "escape rejection"),
+    ("function M.discard_token(authority_value, frame_value, token_value)", "discard"),
+    ("function M.leave_invocation(authority_value, frame_value)", "invocation exit"),
+    ("function M.to_json(value)", "detached projection"),
+    ("token.payload = json.null", "explicit miss sentinel"),
+    ("local payload = token.payload", "falsey commit payload"),
 )
 RUST_ADMISSION_SOURCE_PATHS = [
     "rust/linkedspec-core/src/lib.rs",
@@ -357,6 +384,7 @@ RUST_ADMISSION_MUTATION_COUNT = 8
 DART_ADMISSION_MUTATION_COUNT = 13
 JULIA_ADMISSION_MUTATION_COUNT = 14
 LUA_DORMANT_RED_MUTATION_COUNT = 12
+LUA_AUTHORITY_MUTATION_COUNT = 22
 EXPECTED_TOP_LEVEL = {
     "format",
     "contract_id",
@@ -546,6 +574,7 @@ def lua_dormant_red_sources() -> dict[str, str]:
     return {
         LUA_CONSUMER_PATH: read_text(ROOT / LUA_CONSUMER_PATH),
         LUA_FACADE_PATH: read_text(ROOT / LUA_FACADE_PATH),
+        LUA_AUTHORITY_PATH: read_text(ROOT / LUA_AUTHORITY_PATH),
     }
 
 
@@ -555,7 +584,7 @@ def validate_lua_dormant_red(
     sources: dict[str, str],
 ) -> None:
     require(
-        set(sources) == {LUA_CONSUMER_PATH, LUA_FACADE_PATH},
+        set(sources) == {LUA_CONSUMER_PATH, LUA_FACADE_PATH, LUA_AUTHORITY_PATH},
         "Lua dormant RED source inventory drifted",
     )
     consumer = sources[LUA_CONSUMER_PATH]
@@ -595,6 +624,16 @@ def validate_lua_dormant_red(
         "recognition_transaction =" not in sources[LUA_FACADE_PATH]
         and "M.recognition_transaction" not in sources[LUA_FACADE_PATH],
         "Lua recognition transaction authority became publicly exported",
+    )
+    authority = sources[LUA_AUTHORITY_PATH]
+    for marker, label in LUA_AUTHORITY_MARKERS:
+        require(
+            authority.count(marker) == 1,
+            f"Lua private transaction authority {label} missing or duplicated",
+        )
+    require(
+        consumer.count(LUA_INTEGRATION_RED_DIAGNOSTIC) == 1,
+        "Lua private authority must stop integration at dedicated ActionIR nodes",
     )
 
 
@@ -1843,6 +1882,37 @@ def validate_lua_dormant_red_mutations() -> int:
     return len(mutations)
 
 
+def validate_lua_authority_mutations() -> int:
+    ci = read_text(CI_PATH)
+    ordinary = read_text(ROOT / LUA_ORDINARY_PATH)
+    sources = lua_dormant_red_sources()
+    mutations: list[tuple[str, dict[str, str]]] = []
+    for marker, label in LUA_AUTHORITY_MARKERS:
+        candidate = dict(sources)
+        candidate[LUA_AUTHORITY_PATH] = candidate[LUA_AUTHORITY_PATH].replace(
+            marker, "", 1
+        )
+        mutations.append((f"Lua authority {label} omission", candidate))
+
+    missing_integration_red = dict(sources)
+    missing_integration_red[LUA_CONSUMER_PATH] = missing_integration_red[
+        LUA_CONSUMER_PATH
+    ].replace(LUA_INTEGRATION_RED_DIAGNOSTIC, "", 1)
+    mutations.append(("Lua authority next-RED omission", missing_integration_red))
+
+    require(
+        len(mutations) == LUA_AUTHORITY_MUTATION_COUNT,
+        "Lua private authority mutation count drifted",
+    )
+    for name, candidate_sources in mutations:
+        try:
+            validate_lua_dormant_red(ci, ordinary, candidate_sources)
+        except ContractError:
+            continue
+        raise ContractError(f"Lua private authority mutation {name!r} was accepted")
+    return len(mutations)
+
+
 def main() -> int:
     try:
         document = load_contract()
@@ -1854,6 +1924,7 @@ def main() -> int:
         dart_admission_mutations = validate_dart_admission_mutations()
         julia_admission_mutations = validate_julia_admission_mutations()
         lua_red_mutations = validate_lua_dormant_red_mutations()
+        lua_authority_mutations = validate_lua_authority_mutations()
     except ContractError as exc:
         print(f"recognition-transaction-contract: ERROR: {exc}", file=sys.stderr)
         return 1
@@ -1867,7 +1938,8 @@ def main() -> int:
         f"Rust admission {rust_admission_mutations} mutations; "
         f"Dart admission {dart_admission_mutations} mutations; "
         f"Julia admission {julia_admission_mutations} mutations; "
-        f"Lua dormant RED {lua_red_mutations} mutations)"
+        f"Lua dormant RED {lua_red_mutations} mutations; "
+        f"Lua private authority {lua_authority_mutations} mutations)"
     )
     return 0
 

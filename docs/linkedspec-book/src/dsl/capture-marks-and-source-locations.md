@@ -287,14 +287,15 @@ The unchanged `.14.2.7` recomposition reruns that authority and closes the six-r
 implementation slice. It does not add an authored value or advance the 8-complete/6-pending public rollout.
 
 There is still no public `Position` or `Span` authored value, recursive observation API, or span-native parser
-dispatch. Exact transaction spelling is current on Perl, Rust, Dart, and Julia but unavailable on both Lua runtimes until their own
-admission leaves. The combined recurring/public
+dispatch. Exact transaction spelling is current on Perl, Rust, Dart, and Julia but unavailable on both Lua
+runtimes until their integration and admission leaves. Lua's shared private authority already passes 187 assertions
+per ABI, but it is unexported, undiscovered, and stops at the missing dedicated ActionIR integration seam. The combined recurring/public
 no-drift rollout row remains pending for final closeout `FUTURE-PARITY-BACKLOG.14.8`, so recurring composition does
 not change the current 8 complete / 6 pending ledger.
 
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions or
 typed spans are authored values, or that the admitted Perl/Rust/Dart/Julia `recognition_*` operations are portable to every
-runtime.
+runtime. A private backend authority is an implementation prerequisite, not authored syntax or admission.
 
 ## Five anchor families
 

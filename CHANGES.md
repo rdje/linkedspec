@@ -10,6 +10,26 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.6.1 — add private shared Lua transaction authority
+
+- Added one package-private Lua-5.1-compatible transaction module shared unchanged by PUC Lua and LuaJIT. Its
+  weak-key private store owns opaque authorities, invocation frames, detached snapshots, linear tokens, and typed
+  diagnostic handles without adding a facade export or ABI-specific implementation.
+- Implemented monotonic invocation/mark/transaction generations, checkpoint/attempt/commit/rollback, mark access,
+  discard, escape rejection, and terminal-required unwind. Restore happens before token invalidation; successful
+  `false`, zero, empty-string, and JSON-null payloads remain distinct from recognition misses.
+- Advanced explicit authority mode to 187/187 assertions on each ABI. Explicit integration mode now exits 1 only
+  with `Lua recognition transaction integration RED: missing dedicated ActionIR nodes`, the exact `.14.3.6.2` seam.
+- Strengthened the dormant final-path consumer to use explicit payload branches and typed empty JSON arrays, closing
+  truthiness and empty-table ambiguities exposed by the implemented authority.
+- Extended the independent checker with exact private-module markers and 22 authority mutations. The earlier 12
+  dormant-RED mutations and neutral 132/246/44 at rollout 5/9 remain unchanged.
+- Kept ordinary/canonical discovery and the public facade unchanged. The complete Lua gate remains green at 177/177
+  per ABI, primary CLI 66x2, corpus 105/105, and storage 18/3.
+- Signoff passes the 79-file / 14,412-KiB book, Knowledge Map 816/6,772, all eight doctrines, every mandatory
+  contract/admission, repository containment/relocation, both CLI matrices at 66/66, RAM 82%, and Phase 0
+  1,031/1,031 in 753 seconds before exact `[ci] local CI gate passed`.
+
 ## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.6.0 — freeze shared Lua transaction RED
 
 - Added one shared final-path Lua transaction consumer with explicit `authority` and `integration` modes. The same

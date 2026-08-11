@@ -73,6 +73,19 @@ consumers pass, and the route registry remains 20 surfaces / 62 routes / 32/32 w
 empty debt metadata. The program is composition-closed. These storage migrations change documentation governance
   only; they change no language, compiler, runtime, backend, fixture, CLI, protocol, or project-data root.
 
+- `2026-08-11 added the private shared Lua recognition-transaction authority`: `FUTURE-PARITY-BACKLOG.14.3.6.1`
+  adds one non-exported Lua-5.1-compatible module consumed unchanged by PUC Lua and LuaJIT. One weak-key private
+  store owns opaque authority/frame/snapshot/token/error handles, monotonic invocation/mark/transaction generations,
+  detached state, linear lifecycle, and exact structured diagnostics. Commit retains staged cursor/boundary/marks;
+  rollback, discard, misuse, and invocation unwind restore before invalidation. Match presence stays separate from
+  payload truthiness, preserving `false`, zero, empty string, and JSON null. Authority mode passes 187 assertions
+  per ABI; integration advances to the sole exact missing-dedicated-ActionIR RED. The module remains absent from
+  the facade and ordinary/canonical discovery, so recognition stays 132/246/44 at rollout 5/9. Twelve dormant-RED
+  and twenty-two authority mutations lock that boundary; complete Lua remains 177/177 per ABI, CLI 66x2, corpus
+  105, and storage 18/3. The 79-file / 14,412-KiB book, KM 816/6,772, all eight doctrines, containment/relocation,
+  CLI 66x2, RAM 82%, and canonical Phase 0 1,031/1,031 in 753 seconds pass through the exact success marker.
+  Integration `.14.3.6.2` is the next owner after clean atomic 202.
+
 - `2026-08-11 froze shared Lua recognition-transaction RED`: `FUTURE-PARITY-BACKLOG.14.3.6.0` adds one shared
   final-path Lua consumer with explicit authority and integration modes. PUC Lua and LuaJIT parse the same source;
   all four explicit runs exit 1 only at missing private `linkedspec.recognition_transaction`. The consumer remains

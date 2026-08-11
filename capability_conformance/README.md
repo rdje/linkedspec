@@ -306,10 +306,14 @@ neutral + Perl + Rust + Dart + Julia 5/9 complete; PUC Lua, LuaJIT, recurring, a
 `recognition_checkpoint` / `recognize_once` / `recognition_commit` / `recognition_rollback` forms are
 current on Perl, Rust, Dart, and Julia and remain future on PUC Lua and LuaJIT.
 
-One shared dormant Lua final-path consumer now freezes those future semantics on both ABIs. Its explicit
-`authority` and `integration` modes each parse on PUC Lua and LuaJIT, then stop only at the missing private
-`linkedspec.recognition_transaction` module; ordinary and canonical discovery continue to omit it. The checker
-rejects twelve Lua RED topology/dormancy/privacy mutations separately from the unchanged 44 semantic mutations.
+One shared dormant Lua final-path consumer freezes those future semantics on both ABIs. Its explicit `authority`
+mode now exercises the same private Lua-5.1-compatible authority on PUC Lua and LuaJIT and passes 187 assertions
+per runtime. The private module owns invocation/mark generations, detached snapshots, opaque linear tokens, exact
+misuse diagnostics, and falsey-safe commit/rollback without a facade export or an ABI fork. Explicit `integration`
+mode advances to one stable RED: the four dedicated ActionIR nodes do not exist yet. Ordinary and canonical
+discovery continue to omit the consumer, so current Lua behavior and rollout 5/9 do not move. The checker rejects
+twelve Lua dormancy/topology mutations and twenty-two private-authority mutations separately from the unchanged
+44 semantic mutations.
 
 `root_rule_selection_contract.json` (`linkedspec-root-rule-selection-v1`) makes ADR `0046` executable without
 claiming markerless execution before the

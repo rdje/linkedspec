@@ -31,7 +31,7 @@ if mode ~= "authority" and mode ~= "integration" then
 end
 
 -- This module is deliberately private: linkedspec/init.lua must not export it.
--- Its absence is the sole current RED boundary on both PUC Lua and LuaJIT.
+-- Authority mode is current; integration stays RED at absent dedicated nodes.
 local loaded, transaction = pcall(require, "linkedspec.recognition_transaction")
 if not loaded then
   io.stderr:write("Lua recognition transaction RED: missing linkedspec.recognition_transaction\n")
@@ -156,9 +156,9 @@ local function expect_diagnostic(code, operation, expected)
 
   local record = transaction.to_json(captured)
   local fixture = diagnostic_fixture(code)
-  local actual_fields = {}
+  local actual_fields = json.array()
   for key in pairs(record) do actual_fields[#actual_fields + 1] = key end
-  local expected_fields = {}
+  local expected_fields = json.array()
   for _, key in ipairs(fixture.fields) do expected_fields[#expected_fields + 1] = key end
   table.sort(actual_fields)
   table.sort(expected_fields)
@@ -288,7 +288,12 @@ for _, fixture in ipairs(contract.fixtures.token_positive) do
     if operation:match("^attempt_") then attempt = operation end
   end
   local matched = attempt ~= "attempt_miss"
-  local payload = matched and payload_for(attempt) or json.null
+  local payload
+  if matched then
+    payload = payload_for(attempt)
+  else
+    payload = json.null
+  end
   check_equal(transaction.attempt(value, frame, token, {
     matched = matched,
     payload = payload,
@@ -423,19 +428,89 @@ do
   transaction.leave_invocation(value, frame)
 end
 
+do
+  local value = authority("input.spec")
+  local frame = transaction.enter_invocation(value, {
+    rule = "Top", origin = "token_expected", state = initial_state(),
+  })
+  expect_diagnostic("recognition_token_expected", function()
+    return transaction.commit(value, frame, "not-a-token")
+  end, { rule = "Top", origin = "token_expected" })
+  transaction.leave_invocation(value, frame)
+end
+
+do
+  local value = authority("input.spec")
+  local parent = transaction.enter_invocation(value, {
+    rule = "Top", origin = "nesting_parent", state = initial_state(),
+  })
+  local before = frame_state(value, parent)
+  local token = transaction.checkpoint(value, parent, "nesting_parent")
+  transaction.attempt(value, parent, token, {
+    matched = true, payload = "value", state = staged_state(),
+  })
+  local child = transaction.enter_invocation(value, {
+    rule = "Child", origin = "nesting_child", state = state(3, 2, json.harray()),
+  })
+  expect_diagnostic("recognition_nesting_forbidden", function()
+    return transaction.checkpoint(value, child, "nesting_child")
+  end, { rule = "Child", origin = "nesting_child" })
+  check_same_json(frame_state(value, parent), before, "nested checkpoint restores parent")
+  transaction.leave_invocation(value, child)
+  transaction.leave_invocation(value, parent)
+end
+
+do
+  local value = authority("input.spec")
+  local frame = transaction.enter_invocation(value, {
+    rule = "Top", origin = "discard", state = initial_state(),
+  })
+  local before = frame_state(value, frame)
+  local token = transaction.checkpoint(value, frame, "discard")
+  transaction.attempt(value, frame, token, {
+    matched = true, payload = "value", state = staged_state(),
+  })
+  transaction.discard_token(value, frame, token)
+  check_same_json(frame_state(value, frame), before, "discard restores snapshot")
+  transaction.leave_invocation(value, frame)
+end
+
+do
+  local value = authority("input.spec")
+  local frame = transaction.enter_invocation(value, {
+    rule = "Top", origin = "unwind", state = initial_state(),
+  })
+  local token = transaction.checkpoint(value, frame, "unwind")
+  transaction.attempt(value, frame, token, {
+    matched = true, payload = "value", state = staged_state(),
+  })
+  expect_diagnostic("recognition_terminal_required", function()
+    return transaction.leave_invocation(value, frame)
+  end, { rule = "Top", origin = "unwind" })
+end
+
 if mode == "integration" then
   local parsed, compiled = compile_source(authored_source)
   local compiled_json = linkedspec.compiled_spec_to_json(compiled)
   local top = compiled_json.rules_by_label.Top
   check(top ~= nil, "compiled Top exists")
   local action_objects = all_objects(top)
+  local dedicated_nodes_ready = true
   for _, kind in ipairs({
     "recognition_checkpoint",
     "recognize_once",
     "recognition_commit",
     "recognition_rollback",
   }) do
-    check_equal(#objects_with_kind(top, kind), 1, "one " .. kind .. " node")
+    local count = #objects_with_kind(top, kind)
+    check_equal(count, 1, "one " .. kind .. " node")
+    if count ~= 1 then dedicated_nodes_ready = false end
+  end
+  if not dedicated_nodes_ready then
+    io.stderr:write(
+      "Lua recognition transaction integration RED: missing dedicated ActionIR nodes\n"
+    )
+    os.exit(1)
   end
   local attempts = objects_with_kind(top, "recognize_once")
   check_equal(attempts[1].token, "tx", "attempt token slot")

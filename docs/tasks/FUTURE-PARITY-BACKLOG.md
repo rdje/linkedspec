@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-11` (shared Lua transaction RED `.14.3.6.0` is signoff-complete and commit-ready as atomic
-  201/300 from clean Julia-admission commit `e9b169bb`; no push)
+- Last updated: `2026-08-11` (private shared Lua authority `.14.3.6.1` signoff-complete and commit-ready as atomic
+  202/300 from clean dormant-RED commit `6a8ec091`; no push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -103,13 +103,14 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-11):** Shared Lua RED `.14.3.6.0` is signoff-complete and commit-ready as atomic
-201/300 from clean Julia admission `e9b169bb` (no push). One dormant final-path authority/integration source parses
-on PUC Lua and LuaJIT; all four explicit modes exit 1 only at missing private `linkedspec.recognition_transaction`.
-It remains absent from ordinary/canonical discovery; twelve mutations lock dormancy, privacy, and ABI topology.
-Recognition stays 132/246/44 at rollout 5/9, public 3/17/33, and guide 1/8/12. Lua 177/177 per ABI, CLI 66x2,
-corpus 105, storage 18/3, book 79/14,412 KiB, all eight doctrines, RAM 60%, and canonical Phase 0 1,031/1,031 in
-740 seconds pass through exact `[ci] local CI gate passed`. Private shared Lua core `.14.3.6.1` follows the clean commit.
+**Authoritative frontier (2026-08-11):** Dormant Lua RED `.14.3.6.0` landed cleanly as atomic 201 at `6a8ec091`
+(no push). Private authority `.14.3.6.1` now provides one unexported Lua-5.1-compatible implementation shared by
+PUC Lua and LuaJIT. Authority mode passes 187/187 per ABI; integration stops only at missing dedicated ActionIR
+nodes. It remains absent from facade and ordinary/canonical discovery; 12 dormant plus 22 authority mutations lock
+privacy, ABI topology, and the next seam. Recognition stays 132/246/44 at rollout 5/9, public 3/17/33, guide
+1/8/12; ordinary Lua remains 177/177 per ABI, CLI 66x2, corpus 105, storage 18/3. Book 79/14,412 KiB, KM
+816/6,772, all doctrines, RAM 82%, and Phase 0 1,031/1,031 in 753 sec pass exactly. Atomic 202 is commit-ready;
+integration `.14.3.6.2` follows only after its clean landing.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private

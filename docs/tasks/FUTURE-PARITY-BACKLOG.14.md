@@ -4917,29 +4917,35 @@
     RAM 69%, and canonical Phase 0 1,031/1,031 in 738 sec pass through the exact success marker; Lua/later remain RED.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6`
-  Status: `active` (2026-08-11; shared Lua dormant-RED child `.14.3.6.0` activated task-tree-first from clean
-    Julia-admission atomic 200 `e9b169bb`; no push)
+  Status: `active` (2026-08-11; private authority `.1` signoff-complete for atomic 202; integration `.2` follows
+    only after landing cleanly; no push)
   Goal: Implement one shared Lua transaction/progress core and independently admit it on PUC Lua and LuaJIT.
   Depends on: `.14.3.5`
   Children: `.14.3.6.0-.14.3.6.3`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6.0`
-  Status: `complete` (2026-08-11; definitive signoff complete and commit-ready as atomic 201/300 from clean
-    activation `e9b169bb`; no push)
+  Status: `complete` (2026-08-11; clean atomic 201/300 `6a8ec091`; no push)
   Goal: Freeze one dormant shared Lua RED source and exact independent PUC Lua/LuaJIT expectations across native,
     reconstructed, generated-plan, and emitted carriers.
   Depends on: `.14.3.5.3`
   Commit: `FUTURE-PARITY-BACKLOG.14.3.6.0 - freeze Lua transaction RED`
-  Evidence: one shared final-path source parses in all four ABI/mode combinations and exits 1 only at missing private
-    `linkedspec.recognition_transaction`; twelve mutations keep production/facade/discovery absent and neutral
-    132/246/44 at rollout 5/9. Lua 177/177 per ABI, CLI 66x2, corpus 105, storage 18/3, book 79/14,412 KiB, all eight
-    doctrines, RAM 60%, and canonical Phase 0 1,031/1,031 in 740 sec pass through the exact success marker.
+  Evidence: four dual-ABI/mode REDs stopped at the missing private module; 12 mutations preserved neutral 132/246/44
+    at rollout 5/9. Lua 177x2, CLI 66x2, corpus 105, storage 18/3, book 79/14,412 KiB, all doctrines, RAM 60%, and
+    canonical Phase 0 1,031/1,031 in 740 sec passed; `6a8ec091` has valid maps/pointer and zero residue.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6.1`
-  Status: `pending`
+  Status: `complete` (2026-08-11; definitive signoff complete and commit-ready as atomic 202/300 from clean
+    activation `6a8ec091`; no push)
   Goal: Add one shared private Lua invocation-frame, mark-generation, opaque-token, snapshot, and invalidation core
     without current behavior or ABI-specific forks.
   Depends on: `.14.3.6.0`
+  Acceptance: Implement one Lua-5.1-compatible package-private authority shared by PUC Lua and LuaJIT; make the
+    frozen authority-mode consumer pass while integration remains RED at its exact next seam; preserve current
+    behavior, exports, discovery, neutral/public ledgers, ABI parity, project storage, and complete signoff.
+  Commit: `FUTURE-PARITY-BACKLOG.14.3.6.1 - add private Lua transaction authority`
+  Evidence: shared weak-store authority passes 187/187 per ABI; integration exits only at missing dedicated ActionIR
+    nodes; 22 authority + 12 dormant mutations pass; ordinary Lua 177x2, CLI 66x2, corpus 105, storage 18/3, book
+    79/14,412 KiB, KM 816/6,772, eight doctrines, RAM 82%, and Phase 0 1,031/1,031 in 753 sec pass exactly.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6.2`
   Status: `pending`
