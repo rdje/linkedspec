@@ -103,13 +103,14 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-11):** Dart integration `.14.3.4.2` landed at `bee6cf45` as atomic 195/300
-(no push). Admission `.14.3.4.3` is signoff-complete and commit-ready as atomic 196: its unchanged 10-test proof
-is ordinary/canonical, dormant switching is gone, and the private authority remains unexported. Recognition is
-132/246/43, rollout neutral + Perl + Rust + Dart 4/9, public 3/14/29, guide 1/6/10, Rust admission 8, and Dart
-admission 13. Complete Dart passes 100/393/21/47/66x2/105; all eight doctrines and definitive canonical proof pass
-CLI 66x2, RAM 60%, and Phase 0 1,031/1,031 in 694 seconds. Land atomic 196 cleanly before dormant Julia RED
-`.14.3.5.0` activates task-first.
+**Authoritative frontier (2026-08-11):** Dart admission `.14.3.4.3` landed at `38318827` as atomic 196/300
+(no push), with exact ordinary/canonical 10/10 proof and its private authority unexported. Dormant Julia RED
+`.14.3.5.0` is signoff-complete and commit-ready from that clean boundary. One final-path consumer freezes authority,
+falsey-safe tokens, detached state, diagnostics, four dedicated nodes, effect/progress policy, native/reconstructed/
+generated-plan/emitted carriers, and ordinary cursor compatibility. Explicit authority/integration modes parse and
+fail only for absent private `LinkedSpecJulia.RecognitionTransaction`; ordinary Julia remains green with storage
+19/5 and corpus 105/105. Recognition stays 132/246/43, rollout 4/9, public 3/14/29, guide 1/6/10, and Julia remains
+RED. Canonical proof passes CLI 66x2, RAM 60%, and Phase 0 1,031/1,031; atomic 197 precedes `.14.3.5.1`.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private

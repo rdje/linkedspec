@@ -12,6 +12,10 @@ ADR `0056` adopts one conceptual core beneath these helper families. Perl, Rust,
 admit that core as an internal runtime value/projection layer. This is not a new public value type or new `.spec`
 syntax:
 
+In this book, the neutral checker defines the backend-independent contract. An **admission consumer** is the exact
+backend test target that executes that frozen contract through the runtime's required carriers; **admission** means
+that target is also registered in ordinary discovery and canonical CI. Neutral proof alone is not backend support.
+
 - a source identity names caller-authorized decoded input, not a path;
 - a position is a zero-based Unicode-scalar offset in that source;
 - a span is a same-source half-open interval `[start, end)` with exact provenance; and

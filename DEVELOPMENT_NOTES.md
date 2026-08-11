@@ -10,6 +10,25 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.5.0` — froze dormant Julia transaction RED): Julia ordinary test
+  discovery is an explicit include list, so keep the final-path consumer in `julia/test/` without adding its include
+  until admission. No analyzer exclusion, custom build flag, or second directory is needed.
+- Order one explicit `authority|integration` selector behind neutral-contract loading and before all test execution.
+  Both modes now fail solely at absent private `LinkedSpecJulia.RecognitionTransaction`; after `.1` supplies that
+  namespace, authority mode can prove lifecycle semantics while integration mode advances in the unchanged file.
+- Reuse the admitted private `SourceLocation.SourceAuthority` for source identity without exposing either private
+  namespace. Freeze Julia-idiomatic free functions over opaque frame/token values, detached `to_json` records, and
+  a portable exception whose `showerror` result is the neutral diagnostic marker.
+- Load emitted source into a fresh host with `Base.include_string`. This is an independently loaded emitted module
+  but owns no filesystem scratch, so Julia storage remains 19 temporary owners / five locked package trees.
+- Current Julia authored syntax compiles as four generic calls and runtime stops at unsupported
+  `recognition_checkpoint`; dedicated parsing must replace the complete forms only in integration `.2`.
+- Define `admission consumer` at the first typed-source book boundary: the neutral checker freezes semantics, the
+  backend consumer executes them, and ordinary plus canonical registration makes the backend support claim.
+- Treat an exact public-status marker failure as real drift. The first canonical run rejected altered ROADMAP
+  wording; after restoring the governed marker, the complete rerun passed CLI 66x2, RAM 60%, and Phase 0 1,031/1,031
+  in 724 seconds through the final local-CI marker.
+
 - 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.4.3` — admitted Dart recognition transactions): admission is a
   discovery/governance slice over the already-green private integration. Move the exact consumer into `dart/test/`,
   remove only the environment-backed skip authority, and retain its source-local authority import.

@@ -4805,8 +4805,8 @@
   Evidence 2026-08-10/11: clean activation `1cf2923aa749594a8c56903418fe5749134f6872`/`fd8a1934` (atomic 190) had Knowledge 808/6,693, eight doctrines, valid pointer/maps, zero brief/residue/background work, and sole task-first mutation. Retrieval proved nested 12/12 and ordinary zero; admission removed both cfgs, retained the internal authority, and registered that exact 12/12 target once. Checker proof is semantic 132/246/42, rollout 3/9, public 3/11/25, guide 1/4/8, Rust admission 8; a first ordinary run caught stale consumer expectations, then Rust format/Clippy/local passed (core 195, runtime 166, CLI 66x2). Book 79/14,380 KiB rendered Perl+Rust current with clean block structure; browser control was unavailable, so no visual claim is made. After an outer-sandbox containment denial and isolated authorized pass, one uninterrupted authorized canonical run passed eight doctrines, Perl 51, Rust 12, containment/relocation, CLI 66x2, RAM 77%, and Phase 0 1,031 in 739 seconds. Atomic 191 is clean `02c612f5`.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.4`
-  Status: `complete` (2026-08-11; all four Dart transaction children are signoff-complete and `.14.3.4.3` is
-    commit-ready as atomic 196/300 from clean activation `bee6cf45`; no push)
+  Status: `complete` (2026-08-11; all four Dart transaction children landed cleanly through atomic 196/300
+    `38318827`; no push)
   Goal: Implement and independently admit exact Dart parity while retaining native UTF-16 register compatibility.
   Depends on: `.14.3.3`
   Children: `.14.3.4.0-.14.3.4.3`
@@ -4843,75 +4843,76 @@
   Status: `complete` (2026-08-11; atomic 194/300 from clean activation `3a29b34e`; no push)
   Goal: Add private Dart invocation-frame, mark-generation, opaque-token, snapshot, and invalidation authority.
   Depends on: `.14.3.4.0`
-  Acceptance: Implement the frozen private authority, prove it under dormant switching, stop at exact `.2` seams,
-    preserve production/UTF-16/counts/public/canonical/storage truth, and pass complete signoff.
-  Verification: default 6 pass / 4 skips; enabled RED has four `.2` failures; Dart 383, book 79/14,392 KiB,
-    eight doctrines, CLI 66x2, RAM 65%, and Phase 0 1,031/1,031 in 697 sec pass unchanged.
+  Acceptance: Implement/prove the private authority, stop at exact `.2` seams, preserve all current truth, and sign off.
+  Verification: default 6/4 and enabled four-seam RED; Dart 383, book 79/14,392 KiB, eight doctrines, CLI 66x2,
+    RAM 65%, and Phase 0 1,031/1,031 in 697 sec pass unchanged.
   Commit: `FUTURE-PARITY-BACKLOG.14.3.4.1 - add private Dart transaction authority`
-  Evidence: clean `f6f154c6` lands the unexported authority, owner-21 storage repair, exact proof, zero brief/status,
-    valid pointer/maps, no rendered/managed-run/background residue, and no push.
+  Evidence: clean `f6f154c6` lands unexported authority plus owner-21 repair with valid pointer/maps and zero residue.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.4.2`
   Status: `complete` (2026-08-11; clean atomic 195/300 `bee6cf45`; no push)
   Goal: Integrate exact Dart syntax/runtime/effect/progress parity through all required carriers.
   Depends on: `.14.3.4.1`
-  Acceptance: Add four dedicated nodes plus exact policy/runtime carrier integration, keep Dart dormant/unexported
-    and governed surfaces unchanged, and pass focused/backend/book/doctrine/canonical signoff.
-  Verification: enabled dormant 10/10, default 6/4, Dart 100/383/21/47/66x2/105, book 79/14,396 KiB, eight
-    doctrines, CLI 66x2, RAM 64%, and Phase 0 1,031/1,031 pass without rollout movement.
+  Acceptance: Integrate four dedicated nodes plus policy/runtime carriers; stay dormant/unexported and sign off.
+  Verification: enabled 10/10, default 6/4, Dart 100/383/21/47/66x2/105, book 79/14,396 KiB, eight doctrines,
+    RAM 64%, and Phase 0 1,031/1,031 pass without rollout movement.
   Commit: `FUTURE-PARITY-BACKLOG.14.3.4.2 - integrate Dart recognition transactions`
-  Evidence: clean `bee6cf45` lands exact private integration with zero status/brief/residue, valid pointer/maps,
-    no push, and admission `.3` as the sole next owner.
+  Evidence: clean `bee6cf45` lands private integration with valid pointer/maps, zero residue, and `.3` next.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.4.3`
-  Status: `complete` (2026-08-11; exact Dart admission and definitive signoff complete from clean atomic 195/300
-    `bee6cf45`, commit-ready as atomic 196/300; Julia RED follows only after landing cleanly; no push)
+  Status: `complete` (2026-08-11; clean atomic 196/300 `38318827`; no push)
   Goal: Remove Dart dormancy, register ordinary/canonical proof, and promote only Dart transaction admission.
   Depends on: `.14.3.4.2`
-  Acceptance: Retrieve neutral/Perl/Rust admission, the committed Dart consumer/integration, canonical-driver,
-    analyzer, facade, rollout, public-book, capability-guide, storage, and mutation owners before implementation;
-    move the unchanged final-path consumer into ordinary discovery, remove its environment skip switch, preserve
-    the unexported private authority, register exact tracked/log/execution canonical markers once, and promote only
-    Dart to complete in status/availability/rollout/current-boundary/path/mutation truth; update governed public and
-    capability-guide claims/counts without advancing Julia/Lua/recurring/final legs; preserve UTF-16/results,
-    132 ActionIR, 246 calls, schemas/APIs/CLI/README/storage and all unrelated surfaces; pass focused/Dart/book/
-    doctrine/canonical proof and land clean atomic 196/300.
+  Acceptance: Admit the unchanged 10-test consumer exactly once, retain private authority, promote only Dart,
+    govern public/guide/canonical drift, preserve later RED and every unrelated surface, and land cleanly.
   Verification: ordinary/canonical 10/10, exact 13-mutation Dart admission, neutral 132/246/43 at rollout 4/9,
-    public 3/14/29, guide 1/6/10, complete Dart 100/393/21/47/66x2/105, book 79/14,396 KiB, eight doctrines,
-    canonical CLI 66x2, RAM 60%, and Phase 0 1,031/1,031 in 694 seconds all pass.
+    public 3/14/29, guide 1/6/10, Dart 100/393/21/47/66x2/105, book 79/14,396 KiB, eight doctrines, RAM 60%,
+    and Phase 0 1,031/1,031 in 694 seconds pass.
   Commit: `FUTURE-PARITY-BACKLOG.14.3.4.3 - admit Dart recognition transactions`
 
-  ### `FUTURE-PARITY-BACKLOG.14.3.4.3` Acceptance Checklist
-
-  - [x] **RETRIEVE / PROBE** — Follow every admission/current/public/canonical owner before changing files.
-  - [x] **ADMIT CONSUMER** — Move unchanged 10/10 proof to ordinary discovery and remove only dormant switching.
-  - [x] **REGISTER / PROMOTE** — Add exact canonical markers and advance only governed Dart truth/mutations.
-  - [x] **PUBLIC / NO DRIFT** — Synchronize book/guide/current claims while preserving later RED legs and surfaces.
-  - [x] **SIGNOFF / CLEAN ATOMIC** — Pass complete gates and prepare atomic 196 cleanly before Julia work.
-
-  Activation evidence 2026-08-11: atomic 195 `bee6cf452f1922c5786dfe6785faed93d7d9e676` has exact subject/parent,
-  empty status/diffs, zero brief, valid Knowledge/task/memory maps, and no rendered book, managed run, or background job.
-
-  Completion evidence 2026-08-11: all neutral/consumer/Dart/canonical/public/guide/storage/facade owners were
-  retrieved. The unchanged consumer is ordinary/canonical 10/10 through the project-data wrapper, the private
-  authority stays unexported, and thirteen mutations reject dormant/registration/import/facade drift. Canonical
-  first exposed stale admitted-consumer metadata; aligned Perl/Rust snapshots pass 51/51 and 12/12. Complete Dart
-  passed 100/393/21/47/66x2/105. Book 79/14,396 KiB was inspected and removed; all eight doctrines pass. After the
-  outer sandbox denied nested containment, one full host-permitted rerun passed containment/relocation, CLI 66x2,
-  RAM 60%, Phase 0 1,031/1,031 in 694 seconds, and exact `[ci] local CI gate passed`. Knowledge Map is 810/6,715;
-  later legs stay RED and no schema/API/CLI/README/UTF-16/facade/storage-root/unrelated behavior moved.
+  Evidence 2026-08-11: aligned Perl/Rust metadata consumers pass 51/51 and 12/12; final canonical passed
+  containment/relocation, CLI 66x2, and Phase 0 1,031/1,031. Clean `38318827d470509f2635f2b5887c8373a52ddc2e`
+  has parent `bee6cf45`, valid pointer/maps, zero brief/status/book/run/background residue, and no push.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.5`
-  Status: `pending`
+  Status: `active` (2026-08-11; Julia RED `.14.3.5.0` signoff-complete and commit-ready from atomic 196; no push)
   Goal: Implement and independently admit exact Julia parity while retaining native code-unit register compatibility.
   Depends on: `.14.3.4`
   Children: `.14.3.5.0-.14.3.5.3`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.5.0`
-  Status: `pending`
+  Status: `signoff-complete` (2026-08-11; commit-ready as atomic 197/300 from `38318827`; no push)
   Goal: Freeze dormant Julia RED across native, reconstructed, generated-plan, and independently loaded emitted
     module carriers.
   Depends on: `.14.3.4.3`
+  Acceptance: Retrieve all neutral/admitted/Julia/carrier/canonical/storage/public owners. Freeze one dormant
+    final-path consumer for invocation frames, opaque tokens, detached cursor/boundary/marks, falsey-safe payloads,
+    portable diagnostics, four non-eager nodes, closed effects, cursor-only progress, native/reconstructed/
+    generated-plan/independently loaded emitted carriers, and ordinary cursor compatibility. Stop at the first
+    absent private Julia authority; preserve production/discovery, code-unit registers/results, 132/246/43,
+    rollout 4/9, public 3/14/29, guide 1/6/10, schemas/APIs/CLI/README/storage/backends; sign off and land clean.
+  Commit: `FUTURE-PARITY-BACKLOG.14.3.5.0 - freeze Julia transaction RED`
+
+  ### `FUTURE-PARITY-BACKLOG.14.3.5.0` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove atomic 196 clean and this task part the sole first mutation.
+  - [x] **RETRIEVE / TOOLBOX PROBE** — Follow every Julia/neutral/admission/storage/public owner before RED design.
+  - [x] **EXACT DORMANT CONTRACT** — Freeze the complete final path and one narrow absent-authority RED boundary.
+  - [x] **CURRENT GREEN / NO DRIFT** — Keep ordinary/canonical Julia and all rollout/public/runtime surfaces current.
+  - [x] **SIGNOFF / CLEAN ATOMIC** — Pass focused/Julia/book/doctrine/canonical proof; commit-ready before `.1`.
+
+  Activation evidence 2026-08-11: clean atomic 196 is `38318827d470509f2635f2b5887c8373a52ddc2e` with parent
+  `bee6cf45`, empty status/diffs/brief/book/run/background residue, valid maps/pointer, and this part the first mutation.
+
+  Retrieval/RED evidence 2026-08-11: neutral 132/246/43, admitted consumers, Julia private `SourceLocation`, runtime,
+  parser/ActionIR, emitter, loader, discovery, canonical, and project-data owners were retrieved first. A probe shows
+  current execution stops at unsupported `recognition_checkpoint`. The 809-line final-path consumer loads the
+  neutral fixture and its explicit authority/integration modes both parse fully, exit 1 only at
+  `UndefVarError: RecognitionTransaction not defined in LinkedSpecJulia`, and have zero ordinary/canonical refs.
+  Its `Base.include_string` carrier creates no temp owner. Julia passes package/typed-source 127/127, storage 19/5,
+  primary CLI, and corpus 105/105. The first canonical run caught one exact semantic-status wording
+  drift; after repair, the rerun passed all eight doctrines, transaction/typed-source/MCP/semantic admissions,
+  containment/relocation, CLI 66x2, RAM 60%, Phase 0 1,031/1,031 in 724 seconds, and the local-CI success marker.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.5.1`
   Status: `pending`

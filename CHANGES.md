@@ -10,6 +10,27 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.5.0 — freeze Julia transaction RED
+
+- Added one dormant final-path Julia consumer for the complete neutral recognition-transaction contract: private
+  invocation/frame authority, opaque linear tokens, detached cursor/boundary/mark state, falsey-safe payloads,
+  portable diagnostics, four dedicated non-eager nodes, effect/progress policy, all required carriers, and ordinary
+  cursor compatibility.
+- Split the unchanged consumer into explicit `authority` and nested `integration` modes. Both parse completely and
+  exit 1 only because private `LinkedSpecJulia.RecognitionTransaction` is absent; `.14.3.5.1` can make authority
+  mode green before `.14.3.5.2` exposes and closes the integration seams.
+- Kept the final-path file outside the explicit `julia/test/runtests.jl` include list and canonical registration.
+  No production Julia, export, neutral contract/checker, schema, API, CLI, README, or other-backend source changed.
+- Used an independently loaded `Base.include_string` host module for emitted-source proof, adding no temporary owner.
+  The complete current Julia gate remains green at storage 19/5, primary CLI, and corpus 105/105.
+- Preserved UTF-8 code-unit registers/results, recognition 132/246/43, rollout 4/9, public 3/14/29, guide 1/6/10,
+  ordinary/canonical discovery, project-data topology, and current mdBook support claims. Clarified in the book
+  that a neutral checker defines a contract while an admission consumer plus ordinary/canonical registration proves
+  backend support; no support status changed.
+- The first canonical run caught one exact semantic-status marker wording drift. After repair, the full rerun passed
+  all eight doctrines, transaction/typed-source/MCP/semantic admissions, containment/relocation, CLI 66x2, RAM 60%,
+  Phase 0 1,031/1,031 in 724 seconds, and `[ci] local CI gate passed`.
+
 ## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.4.3 — admit Dart recognition transactions
 
 - Moved the unchanged 10-test consumer to `dart/test/recognition_transaction_contract_test.dart`, removed its
