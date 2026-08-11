@@ -2,24 +2,25 @@
 
 ## Current Activity
 
-- Julia admission leaf `FUTURE-PARITY-BACKLOG.14.3.5.3` registers the unchanged 203-assertion consumer exactly once
-  in ordinary and canonical discovery while retaining the source-local authority as private and unexported.
-- Only Julia advances: recognition is 132/246/44 at rollout 5/9, public governance is 3/17/33, and the guide is
-  1/8/12; PUC Lua, LuaJIT, recurring composition, and final public no-drift remain RED.
-- Julia 203/203, Perl 51/51, Rust 12/12, Dart 10/10, the complete Julia package/primary/105-fixture gate, the book,
-  all eight doctrines, CLI 66x2, and canonical Phase 0 1,031/1,031 in 738 seconds pass; atomic 200 is commit-ready.
+- Shared Lua RED leaf `FUTURE-PARITY-BACKLOG.14.3.6.0` is signoff-complete and commit-ready as atomic 201/300.
+- One final-path authority/integration consumer parses on both Lua ABIs; all four explicit modes stop only at the
+  missing private module. Recognition remains 132/246/44 at rollout 5/9; twelve mutations lock exact dormancy.
+- Lua 177/177 per ABI, CLI 66x2, corpus 105, storage 18/3, book 79/14,412 KiB, all doctrines, RAM 60%, and canonical
+  Phase 0 1,031/1,031 in 740 seconds pass through the exact success marker.
 
 ## Latest Completed Slice
 
-- Julia admission `.14.3.5.3` is signoff-complete and commit-ready as atomic 200/300 from clean `0d15f8c2`.
-- Its exact private 203-assertion consumer is now ordinary and canonical; no later rollout leg moved.
+- Julia admission `.14.3.5.3` landed cleanly at `e9b169bb` as atomic 200/300 with no push.
+- Lua dormant RED `.14.3.6.0` is fully verified and commit-ready from that clean boundary as atomic 201/300.
 
 ## Next Action
 
-- Land atomic 200 cleanly, then activate shared Lua transaction RED `.14.3.6.0` task-tree-first.
+- Land atomic 201 cleanly, then activate private shared Lua core `.14.3.6.1` task-tree-first.
 
 ## Recent Completions
 
+- `2026-08-11` — `.14.3.6.0` completed exact dual-ABI dormant Lua transaction RED signoff for atomic 201/300.
+- `2026-08-11` — `e9b169bb` landed exact Julia transaction admission as atomic 200/300.
 - `2026-08-11` — `.14.3.5.3` made Julia recognition transactions ordinary/canonical at 203/203 for atomic 200/300.
 - `2026-08-11` — `0d15f8c2` landed private Julia transaction integration as atomic 199/300.
 - `2026-08-11` — `.14.3.5.2` completed private Julia integration signoff for atomic 199/300; Phase 0 passed 1,031/1,031.
@@ -34,8 +35,6 @@
 - `2026-08-11` — `.14.3.4.0.0` repaired and definitively verified transaction boundary policy as atomic 192/300.
 - `2026-08-11` — `02c612f5` landed exact Rust transaction admission as atomic 191/300.
 - `2026-08-10` — `1cf2923a` landed cfg-private Rust transaction integration as atomic 190/300.
-- `2026-08-10` — `.14.3.3.2` completed cfg-private Rust integration signoff for atomic 190/300.
-- `2026-08-10` — `fd8a1934` landed private Rust authority as atomic 189/300.
 
 ## History
 

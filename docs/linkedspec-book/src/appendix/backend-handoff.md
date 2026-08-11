@@ -77,6 +77,11 @@
 > canonical CI. Only Julia advances: recognition rollout is 5/9 while PUC Lua, LuaJIT, recurring, and public-no-drift
 > remain RED; the private authority stays unexported.
 >
+> Shared Lua transaction work now has one final-path dormant consumer rather than an ABI-specific fork. Explicit
+> authority and integration runs parse on PUC Lua and LuaJIT and fail only at the absent private
+> `linkedspec.recognition_transaction` module. It remains outside ordinary/canonical discovery, freezes all four
+> carriers including in-memory emitted source, and changes no rollout status before private-core `.14.3.6.1`.
+>
 > Any cursor transaction is one explicit
 > recognition attempt over invocation-local cursor/boundary/marks only; it adds no search tree and cannot undo
 > actions, AST/user state, output/diagnostics, registry work, or host effects. Recursive boundaries remain read-only,

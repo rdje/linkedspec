@@ -38,6 +38,20 @@ JULIA_PRIVATE_AUTHORITY_ACCESS = """const JuliaRecognitionTransaction = getprope
     LinkedSpecJulia,
     :RecognitionTransaction,
 )"""
+LUA_CONSUMER_PATH = "lua/test/recognition_transaction_contract_test.lua"
+LUA_ORDINARY_PATH = "tools/run_lua_local.sh"
+LUA_FACADE_PATH = "lua/src/linkedspec/init.lua"
+LUA_RED_SELECTOR = (
+    'local mode = os.getenv("LINKEDSPEC_LUA_RECOGNITION_TRANSACTION_RED_MODE") '
+    'or "authority"'
+)
+LUA_PRIVATE_REQUIRE = (
+    'local loaded, transaction = pcall(require, '
+    '"linkedspec.recognition_transaction")'
+)
+LUA_RED_DIAGNOSTIC = (
+    "Lua recognition transaction RED: missing linkedspec.recognition_transaction"
+)
 RUST_ADMISSION_SOURCE_PATHS = [
     "rust/linkedspec-core/src/lib.rs",
     "rust/linkedspec-core/src/callable_contract.rs",
@@ -342,6 +356,7 @@ CAPABILITY_GUIDE_MUTATION_COUNT = 12
 RUST_ADMISSION_MUTATION_COUNT = 8
 DART_ADMISSION_MUTATION_COUNT = 13
 JULIA_ADMISSION_MUTATION_COUNT = 14
+LUA_DORMANT_RED_MUTATION_COUNT = 12
 EXPECTED_TOP_LEVEL = {
     "format",
     "contract_id",
@@ -524,6 +539,62 @@ def validate_julia_admission(ci: str, sources: dict[str, str]) -> None:
     require(
         "\n    RecognitionTransaction," not in sources[JULIA_FACADE_PATH],
         "Julia recognition transaction authority became publicly exported",
+    )
+
+
+def lua_dormant_red_sources() -> dict[str, str]:
+    return {
+        LUA_CONSUMER_PATH: read_text(ROOT / LUA_CONSUMER_PATH),
+        LUA_FACADE_PATH: read_text(ROOT / LUA_FACADE_PATH),
+    }
+
+
+def validate_lua_dormant_red(
+    ci: str,
+    ordinary: str,
+    sources: dict[str, str],
+) -> None:
+    require(
+        set(sources) == {LUA_CONSUMER_PATH, LUA_FACADE_PATH},
+        "Lua dormant RED source inventory drifted",
+    )
+    consumer = sources[LUA_CONSUMER_PATH]
+    for marker, label in (
+        (LUA_RED_SELECTOR, "selector"),
+        (LUA_PRIVATE_REQUIRE, "private authority lookup"),
+        (LUA_RED_DIAGNOSTIC, "stable missing-authority diagnostic"),
+        ('if mode == "integration" then', "integration boundary"),
+        (
+            "neutral_perl_rust_dart_and_julia_complete_other_legs_red",
+            "current neutral status",
+        ),
+    ):
+        require(
+            consumer.count(marker) == 1,
+            f"Lua dormant RED {label} missing or duplicated",
+        )
+    require(
+        consumer.count("bash tools/run_lua_project_data.sh puc " + LUA_CONSUMER_PATH)
+        == 2,
+        "Lua dormant RED must document authority/integration PUC Lua commands",
+    )
+    require(
+        consumer.count("bash tools/run_lua_project_data.sh luajit " + LUA_CONSUMER_PATH)
+        == 2,
+        "Lua dormant RED must document authority/integration LuaJIT commands",
+    )
+    require(
+        LUA_CONSUMER_PATH not in ordinary,
+        "ordinary Lua discovery prematurely registers recognition transactions",
+    )
+    require(
+        LUA_CONSUMER_PATH not in ci,
+        "canonical CI prematurely registers Lua recognition transactions",
+    )
+    require(
+        "recognition_transaction =" not in sources[LUA_FACADE_PATH]
+        and "M.recognition_transaction" not in sources[LUA_FACADE_PATH],
+        "Lua recognition transaction authority became publicly exported",
     )
 
 
@@ -1199,6 +1270,11 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool) -> N
         validate_rust_admission(ci, rust_admission_sources())
         validate_dart_admission(ci, dart_admission_sources())
         validate_julia_admission(ci, julia_admission_sources())
+        validate_lua_dormant_red(
+            ci,
+            read_text(ROOT / LUA_ORDINARY_PATH),
+            lua_dormant_red_sources(),
+        )
         validate_public_sequence(
             document,
             PUBLIC_SEQUENCE_CONTRACT,
@@ -1686,6 +1762,87 @@ def validate_julia_admission_mutations() -> int:
     return len(mutations)
 
 
+def validate_lua_dormant_red_mutations() -> int:
+    ci = read_text(CI_PATH)
+    ordinary = read_text(ROOT / LUA_ORDINARY_PATH)
+    sources = lua_dormant_red_sources()
+    mutations: list[tuple[str, str, str, dict[str, str]]] = []
+
+    for label, marker in (
+        ("selector", LUA_RED_SELECTOR),
+        ("private lookup", LUA_PRIVATE_REQUIRE),
+        ("stable diagnostic", LUA_RED_DIAGNOSTIC),
+        ("integration boundary", 'if mode == "integration" then'),
+        (
+            "current neutral status",
+            "neutral_perl_rust_dart_and_julia_complete_other_legs_red",
+        ),
+    ):
+        candidate = dict(sources)
+        candidate[LUA_CONSUMER_PATH] = candidate[LUA_CONSUMER_PATH].replace(
+            marker, "", 1
+        )
+        mutations.append((f"Lua RED {label} omission", ci, ordinary, candidate))
+
+    omitted = dict(sources)
+    omitted[LUA_CONSUMER_PATH] = ""
+    mutations.append(("Lua RED consumer omission", ci, ordinary, omitted))
+    mutations.extend(
+        [
+            (
+                "Lua RED ordinary PUC registration",
+                ci,
+                ordinary + "\n" + LUA_CONSUMER_PATH + " puc",
+                dict(sources),
+            ),
+            (
+                "Lua RED ordinary LuaJIT registration",
+                ci,
+                ordinary + "\n" + LUA_CONSUMER_PATH + " luajit",
+                dict(sources),
+            ),
+            (
+                "Lua RED canonical PUC registration",
+                ci + "\n" + LUA_CONSUMER_PATH + " puc",
+                ordinary,
+                dict(sources),
+            ),
+            (
+                "Lua RED canonical LuaJIT registration",
+                ci + "\n" + LUA_CONSUMER_PATH + " luajit",
+                ordinary,
+                dict(sources),
+            ),
+        ]
+    )
+    facade_export = dict(sources)
+    facade_export[LUA_FACADE_PATH] += "\nM.recognition_transaction = require('x')"
+    mutations.append(("Lua RED facade export", ci, ordinary, facade_export))
+    wrong_commands = dict(sources)
+    wrong_commands[LUA_CONSUMER_PATH] = wrong_commands[LUA_CONSUMER_PATH].replace(
+        "bash tools/run_lua_project_data.sh luajit " + LUA_CONSUMER_PATH,
+        "bash tools/run_lua_project_data.sh puc " + LUA_CONSUMER_PATH,
+        1,
+    )
+    mutations.append(("Lua RED ABI command collapse", ci, ordinary, wrong_commands))
+
+    require(
+        len(mutations) == LUA_DORMANT_RED_MUTATION_COUNT,
+        "Lua dormant RED mutation count drifted",
+    )
+    for name, candidate_ci, candidate_ordinary, candidate_sources in mutations:
+        try:
+            validate_lua_dormant_red(
+                candidate_ci,
+                candidate_ordinary,
+                candidate_sources,
+            )
+        except ContractError:
+            continue
+        raise ContractError(f"Lua dormant RED mutation {name!r} was accepted")
+    return len(mutations)
+
+
 def main() -> int:
     try:
         document = load_contract()
@@ -1696,6 +1853,7 @@ def main() -> int:
         rust_admission_mutations = validate_rust_admission_mutations()
         dart_admission_mutations = validate_dart_admission_mutations()
         julia_admission_mutations = validate_julia_admission_mutations()
+        lua_red_mutations = validate_lua_dormant_red_mutations()
     except ContractError as exc:
         print(f"recognition-transaction-contract: ERROR: {exc}", file=sys.stderr)
         return 1
@@ -1708,7 +1866,8 @@ def main() -> int:
         f"capability guide 1 document/8 forbidden/{guide_mutations} mutations; "
         f"Rust admission {rust_admission_mutations} mutations; "
         f"Dart admission {dart_admission_mutations} mutations; "
-        f"Julia admission {julia_admission_mutations} mutations)"
+        f"Julia admission {julia_admission_mutations} mutations; "
+        f"Lua dormant RED {lua_red_mutations} mutations)"
     )
     return 0
 

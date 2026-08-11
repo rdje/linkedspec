@@ -306,6 +306,11 @@ neutral + Perl + Rust + Dart + Julia 5/9 complete; PUC Lua, LuaJIT, recurring, a
 `recognition_checkpoint` / `recognize_once` / `recognition_commit` / `recognition_rollback` forms are
 current on Perl, Rust, Dart, and Julia and remain future on PUC Lua and LuaJIT.
 
+One shared dormant Lua final-path consumer now freezes those future semantics on both ABIs. Its explicit
+`authority` and `integration` modes each parse on PUC Lua and LuaJIT, then stop only at the missing private
+`linkedspec.recognition_transaction` module; ordinary and canonical discovery continue to omit it. The checker
+rejects twelve Lua RED topology/dormancy/privacy mutations separately from the unchanged 44 semantic mutations.
+
 `root_rule_selection_contract.json` (`linkedspec-root-rule-selection-v1`) makes ADR `0046` executable without
 claiming markerless execution before the
 backends admit it. Run `bash tools/run_python_project_data.sh tools/check_root_rule_selection_contract.py` to validate explicit selector > first

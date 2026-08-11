@@ -4917,16 +4917,23 @@
     RAM 69%, and canonical Phase 0 1,031/1,031 in 738 sec pass through the exact success marker; Lua/later remain RED.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6`
-  Status: `pending`
+  Status: `active` (2026-08-11; shared Lua dormant-RED child `.14.3.6.0` activated task-tree-first from clean
+    Julia-admission atomic 200 `e9b169bb`; no push)
   Goal: Implement one shared Lua transaction/progress core and independently admit it on PUC Lua and LuaJIT.
   Depends on: `.14.3.5`
   Children: `.14.3.6.0-.14.3.6.3`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6.0`
-  Status: `pending`
+  Status: `complete` (2026-08-11; definitive signoff complete and commit-ready as atomic 201/300 from clean
+    activation `e9b169bb`; no push)
   Goal: Freeze one dormant shared Lua RED source and exact independent PUC Lua/LuaJIT expectations across native,
     reconstructed, generated-plan, and emitted carriers.
   Depends on: `.14.3.5.3`
+  Commit: `FUTURE-PARITY-BACKLOG.14.3.6.0 - freeze Lua transaction RED`
+  Evidence: one shared final-path source parses in all four ABI/mode combinations and exits 1 only at missing private
+    `linkedspec.recognition_transaction`; twelve mutations keep production/facade/discovery absent and neutral
+    132/246/44 at rollout 5/9. Lua 177/177 per ABI, CLI 66x2, corpus 105, storage 18/3, book 79/14,412 KiB, all eight
+    doctrines, RAM 60%, and canonical Phase 0 1,031/1,031 in 740 sec pass through the exact success marker.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6.1`
   Status: `pending`

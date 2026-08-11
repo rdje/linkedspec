@@ -73,6 +73,17 @@ consumers pass, and the route registry remains 20 surfaces / 62 routes / 32/32 w
 empty debt metadata. The program is composition-closed. These storage migrations change documentation governance
   only; they change no language, compiler, runtime, backend, fixture, CLI, protocol, or project-data root.
 
+- `2026-08-11 froze shared Lua recognition-transaction RED`: `FUTURE-PARITY-BACKLOG.14.3.6.0` adds one shared
+  final-path Lua consumer with explicit authority and integration modes. PUC Lua and LuaJIT parse the same source;
+  all four explicit runs exit 1 only at missing private `linkedspec.recognition_transaction`. The consumer remains
+  absent from ordinary and canonical discovery, and the facade exports no authority. It freezes invocation/token/
+  mark/lifecycle semantics, four non-eager nodes, recursive effect closure, cursor-only progress, and native,
+  reconstructed, generated-plan, and in-memory emitted-module carriers without creating a project-data owner.
+  Twelve mutations reject dormancy, privacy, status, registration, and ABI-topology drift. Recognition remains
+  132/246/44 at rollout 5/9; complete ordinary Lua passes 177/177 per ABI, CLI 66x2, corpus 105, and storage 18/3.
+  The 79-file / 14,412-KiB book, all eight doctrines, repository containment/relocation, CLI 66x2, RAM 60%, and
+  canonical Phase 0 1,031/1,031 in 740 seconds pass; the dormant RED is commit-ready before private core `.14.3.6.1`.
+
 - `2026-08-11 admitted Julia recognition transactions`: `FUTURE-PARITY-BACKLOG.14.3.5.3` removes both dormant
   selector modes and the conditional integration wrapper from the unchanged 203-assertion final-path consumer.
   Julia package discovery includes it once, and canonical CI requires its tracked path, exact marker, and exact

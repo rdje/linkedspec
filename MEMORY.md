@@ -5,13 +5,13 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first;
   require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `0d15f8c2` — clean private-Julia-integration base for admission atomic 200/300; no push.
-- latest_completed_leaf: Julia transaction admission `.14.3.5.3` completes with this commit as atomic 200/300.
-- active_work_unit: none after the atomic-200 landing; the repository is at the Julia-admission handoff.
-- next_action: activate shared Lua transaction RED `.14.3.6.0` task-tree-first from the clean atomic-200 boundary.
-- in_flight_uncommitted: none after landing; all Julia admission source, proof, book, and durable truth are committed.
-- blockers: none. Julia 203/203, Perl 51/51, Rust 12/12, Dart 10/10, full Julia package/primary/corpus 105, book,
-  doctrines, CLI 66x2, RAM 69%, and canonical Phase 0 1,031/1,031 in 738 seconds pass with the exact success marker.
+- activation_commit: `e9b169bb` — clean Julia-admission base for shared Lua dormant RED atomic 201/300; no push.
+- latest_completed_leaf: shared Lua transaction RED `.14.3.6.0` completes with this atomic 201/300 commit.
+- active_work_unit: none after this commit; private shared Lua transaction authority `.14.3.6.1` is next.
+- next_action: prove atomic 201 clean, then activate `.14.3.6.1` task-tree-first from that durable boundary.
+- in_flight_uncommitted: none after this commit.
+- blockers: none. Four dual-ABI RED modes stop exactly at missing private authority; Lua 177/177 per ABI, CLI 66x2,
+  corpus 105, storage 18/3, book 79/14,412 KiB, all doctrines, RAM 60%, and Phase 0 1,031/1,031 in 740 sec pass.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes, and 11 topology mutations advance governance to 53. Public authored values remain future; Perl and Rust
@@ -30,7 +30,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - lua_audit_fact: each runtime input now owns one copied private authority; all exact 92+7 helper routes construct
   typed positions/spans for validation, coordinates, slicing, materialization, marks, capture boundaries, and cursor
   control while retaining zero-based UTF-8-byte registers and results. One shared 240-assertion consumer now runs
-  exactly once per ABI through ordinary and canonical discovery.
+  once per ABI ordinarily/canonically; one dormant transaction consumer now fails only at its absent private module.
 - current_storage_contract: ADR `0053` keeps project outputs, caches, logs, fixtures, and scratch on the repository
   filesystem; use repository-routed wrappers and never default project data to OS temp/home caches.
 - current_path_contract: ADR `0052` and `REPO-ROOT-PATHS` require durable root-relative paths and runtime-derived
@@ -56,5 +56,5 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_future_direction: transaction `.14.3` remains split through neutral `.1`, backend families `.2-.6`,
   recurring `.7`, and closeout `.8`; corrective `.14.3.4.0.0` precedes Dart RED `.14.3.4.0.1`, and `.14.8` retains no-drift.
 - latest_bootstrap_read: 2026-08-11 — complete roadmap/codebase/mdBook and required continuity/tooling review.
-- pivot_guard: land Julia admission `.14.3.5.3` cleanly before shared Lua RED `.14.3.6.0` activates.
-- push_policy: hard lock at 300 commits; Julia admission is intended atomic 200/300; no push; use wrappers.
+- pivot_guard: land shared Lua RED `.14.3.6.0` cleanly before private Lua authority `.14.3.6.1` activates.
+- push_policy: hard lock at 300 commits; shared Lua RED is intended atomic 201/300; no push; use wrappers.

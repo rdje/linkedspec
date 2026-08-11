@@ -203,6 +203,13 @@ bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history
 
 Only Julia's rollout row advances in this admission; PUC Lua, LuaJIT, recurring, and final public no-drift remain RED.
 
+The next implementation boundary is executable RED, not current Lua support. One shared final-path consumer now
+parses its complete `authority` and `integration` expectations on both PUC Lua and LuaJIT. All four explicit runs
+stop at the same missing private `linkedspec.recognition_transaction` module. The consumer is intentionally absent
+from ordinary Lua discovery and canonical CI while it freezes invocation/token/mark semantics, recursive effect
+and progress proof, and native, reconstructed, generated-plan, and in-memory emitted-module carriers. Twelve
+independent mutations guard that dormant dual-ABI boundary; rollout remains 5/9.
+
 The same checker fails closed over three public transaction pages, seventeen forbidden claims, and thirty-three sequence mutations.
 This guards the milestone order alongside the neutral artifact's 44 semantic mutations.
 
