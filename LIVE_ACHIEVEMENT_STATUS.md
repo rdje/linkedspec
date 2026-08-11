@@ -2,23 +2,24 @@
 
 ## Current Activity
 
-- Dormant Julia RED leaf `FUTURE-PARITY-BACKLOG.14.3.5.0` freezes one complete final-path transaction consumer at
-  the absent private `LinkedSpecJulia.RecognitionTransaction` namespace.
-- Explicit authority and integration modes parse fully and fail only at that namespace. Ordinary Julia discovery,
-  production, UTF-8 code-unit behavior, recognition 132/246/43, and rollout 4/9 remain unchanged.
-- Signoff is complete: storage 19/5, CLI 66x2, RAM 60%, and Phase 0 1,031/1,031 in 724 seconds are green.
+- Private Julia authority leaf `FUTURE-PARITY-BACKLOG.14.3.5.1` is complete: its non-exported module owns opaque
+  frames/tokens, copied state, monotonic generations, falsey-safe staging, and restore-before-invalidate lifecycle.
+- Explicit authority passes 155/155. Integration remains RED at zero dedicated nodes and absent effect/progress/
+  runtime routes; discovery, authored availability, recognition 132/246/43, and rollout 4/9 remain unchanged.
+- Signoff passes storage 19/5, CLI 66x2, RAM 68%, and Phase 0 1,031/1,031 in 747 seconds.
 
 ## Latest Completed Slice
 
-- `.14.3.4.3` landed cleanly at `38318827` as atomic 196/300 with exact Dart admission and no push.
-- Julia RED `.14.3.5.0` is signoff-complete and commit-ready as the sole current uncommitted slice.
+- Julia RED `.14.3.5.0` landed cleanly at `8db3aeee` as atomic 197/300 with no push.
+- Private authority `.14.3.5.1` is signoff-complete and lands as atomic 198/300 in this commit.
 
 ## Next Action
 
-- Land commit-ready Julia RED atomic 197, verify the clean handoff, then activate `.14.3.5.1`.
+- Verify clean atomic 198, then activate Julia integration `.14.3.5.2` task-tree-first.
 
 ## Recent Completions
 
+- `2026-08-11` — `.14.3.5.1` added and signed off the private Julia transaction authority for atomic 198/300.
 - `2026-08-11` — `.14.3.5.0` froze and signed off the dormant Julia transaction boundary for atomic 197/300.
 - `2026-08-11` — `38318827` landed exact Dart transaction admission as atomic 196/300.
 - `2026-08-11` — `.14.3.4.3` completed exact Dart transaction admission signoff for atomic 196/300.
@@ -34,7 +35,6 @@
 - `2026-08-10` — `cb9420b1` froze and signed off the dormant Rust transaction RED as atomic 188/300.
 - `2026-08-10` — `.14.3.2.3` admitted Perl recognition transactions for atomic 187/300.
 - `2026-08-10` — `.14.3.2.2` integrated Perl recognition transactions for atomic 186/300.
-- `2026-08-10` — `FUTURE-PARITY-BACKLOG.14.3.2.1` added private Perl transaction authority as atomic 185/300.
 
 ## History
 

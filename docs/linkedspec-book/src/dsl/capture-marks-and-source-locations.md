@@ -189,6 +189,13 @@ bash ../tools/run_dart_project_data.sh test --reporter failures-only test/recogn
 Only Dart's rollout row advances; the authority remains unexported and no Julia, Lua, recurring, or final-public
 row is promoted.
 
+Julia now also has the private state foundation required by its later integration: a non-exported source-local
+authority owns fresh invocation/mark/token generations, opaque linear handles, detached cursor/boundary/mark
+snapshots, falsey-safe staged payloads, and restore-before-invalidate lifecycle errors. Its explicit dormant
+authority proof passes 155 assertions. This does **not** make the four authored forms available on Julia: parsing
+still yields ordinary calls, effect/progress policy and runtime routing remain unimplemented, and the consumer is
+still absent from ordinary and canonical discovery. Those boundaries belong to Julia integration and admission.
+
 The same checker fails closed over three public transaction pages, fourteen forbidden claims, and twenty-nine sequence mutations.
 This guards the milestone order alongside the neutral artifact's 43 semantic mutations.
 

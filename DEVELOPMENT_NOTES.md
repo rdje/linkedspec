@@ -10,6 +10,28 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.5.1` — private Julia recognition-transaction authority): include one
+  non-exported sibling module immediately after `SourceLocation`; reuse the exact authority object as the first
+  cross-source discriminator while keeping artifact `source_identity` independent from its decoded-source key.
+- Represent frame state as an immutable tuple of copied mark pairs rather than retaining a caller-owned `Dict`.
+  Every constructor, snapshot, state read, and JSON projection detaches again, so observation cannot mutate live
+  cursor/boundary/mark state.
+- Return opaque private frame/token wrappers around module-owned mutable lifecycle records. Authority-local UInt64
+  counters allocate non-reused invocation, mark, and transaction generations; a frame owns at most one active token.
+- Keep staged match presence and payload in separate fields. This makes a matched `false`, zero, empty string, or
+  `nothing` distinguishable from a miss until commit, which invalidates before returning the captured payload.
+- Restore through the token's owning frame before invalidation on escape, retry, nesting, cross-owner use, discard,
+  rollback, and unwind. In particular, a child-frame nesting rejection restores its parent's snapshot without
+  aliasing a recursive same-label mark table.
+- Keep integration rigorously out of this leaf. The authority selector passes 155/155, while the unchanged nested
+  selector first finds zero dedicated nodes and later confirms absent effect/progress functions plus unsupported
+  runtime dispatch. Ordinary discovery never includes the dormant consumer.
+- Complete Julia remains green across package tests, typed source 127/127, storage 19/5, primary CLI, and corpus
+  105/105. The private namespace changes architecture, not authored availability or rollout.
+- Close the authority leaf only after the complete host-permitted gate proves every existing admission and routing
+  boundary unchanged. Canonical signoff passed CLI 66x2, RAM 68%, and Phase 0 1,031/1,031 in 747 seconds through
+  the exact local-CI success marker; integration remains a separate clean-tree activation.
+
 - 2026-08-11 (`FUTURE-PARITY-BACKLOG.14.3.5.0` — froze dormant Julia transaction RED): Julia ordinary test
   discovery is an explicit include list, so keep the final-path consumer in `julia/test/` without adding its include
   until admission. No analyzer exclusion, custom build flag, or second directory is needed.

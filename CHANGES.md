@@ -10,6 +10,26 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.5.1 — add private Julia transaction authority
+
+- Added non-exported `LinkedSpecJulia.RecognitionTransaction` immediately behind the existing private source-
+  location authority. One source-local owner allocates monotonic invocation, mark, and transaction generations and
+  returns opaque frame/token handles over copied cursor, nullable boundary, and invocation-local mark state.
+- Kept match presence separate from staged payload, so `false`, zero, empty string, and `nothing` remain successful
+  values. Commit retains staged state; rollback, discard, escape, retry, cross-owner use, forbidden nesting, and
+  unwind restore before monotonic terminal invalidation.
+- Added detached frame snapshots and exact portable lifecycle diagnostics without adding a public export. The
+  unchanged explicit authority consumer passes 155/155.
+- Preserved the `.14.3.5.2` boundary: integration mode first observes zero dedicated transaction nodes; its missing
+  effect/progress classifiers and unsupported runtime helper route remain untouched. The consumer remains outside
+  ordinary and canonical discovery.
+- Complete current Julia passes typed source 127/127, storage 19/5, primary CLI, and corpus 105/105. Recognition
+  remains 132/246/43 at rollout 4/9, public 3/14/29, and guide 1/6/10; native UTF-8 code-unit registers/results,
+  schemas, APIs, CLI, README, project storage, and every other backend remain unchanged.
+- Definitive signoff passes the synchronized 79-file / 14,404-KiB book, all eight doctrines, complete canonical
+  admission/containment/relocation and CLI 66x2 proof, RAM 68%, Phase 0 1,031/1,031 in 747 seconds, and the exact
+  `[ci] local CI gate passed` marker.
+
 ## 2026-08-11 — FUTURE-PARITY-BACKLOG.14.3.5.0 — freeze Julia transaction RED
 
 - Added one dormant final-path Julia consumer for the complete neutral recognition-transaction contract: private

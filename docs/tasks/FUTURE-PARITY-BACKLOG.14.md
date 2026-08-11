@@ -4863,62 +4863,50 @@
   Status: `complete` (2026-08-11; clean atomic 196/300 `38318827`; no push)
   Goal: Remove Dart dormancy, register ordinary/canonical proof, and promote only Dart transaction admission.
   Depends on: `.14.3.4.2`
-  Acceptance: Admit the unchanged 10-test consumer exactly once, retain private authority, promote only Dart,
-    govern public/guide/canonical drift, preserve later RED and every unrelated surface, and land cleanly.
-  Verification: ordinary/canonical 10/10, exact 13-mutation Dart admission, neutral 132/246/43 at rollout 4/9,
-    public 3/14/29, guide 1/6/10, Dart 100/393/21/47/66x2/105, book 79/14,396 KiB, eight doctrines, RAM 60%,
-    and Phase 0 1,031/1,031 in 694 seconds pass.
   Commit: `FUTURE-PARITY-BACKLOG.14.3.4.3 - admit Dart recognition transactions`
-
-  Evidence 2026-08-11: aligned Perl/Rust metadata consumers pass 51/51 and 12/12; final canonical passed
-  containment/relocation, CLI 66x2, and Phase 0 1,031/1,031. Clean `38318827d470509f2635f2b5887c8373a52ddc2e`
-  has parent `bee6cf45`, valid pointer/maps, zero brief/status/book/run/background residue, and no push.
+  Evidence: exact consumer 10/10; neutral 132/246/43 at rollout 4/9; public 3/14/29; guide 1/6/10; Dart
+    100/393/21/47/66x2/105; book 79/14,396 KiB; all doctrines; RAM 60%; Phase 0 1,031/1,031 in 694 sec. Clean
+    `38318827` retains the private authority, aligned Perl/Rust metadata, valid maps/pointer, and zero residue.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.5`
-  Status: `active` (2026-08-11; Julia RED `.14.3.5.0` signoff-complete and commit-ready from atomic 196; no push)
+  Status: `active` (2026-08-11; private Julia authority `.14.3.5.1` complete; `.14.3.5.2` awaits clean activation)
   Goal: Implement and independently admit exact Julia parity while retaining native code-unit register compatibility.
   Depends on: `.14.3.4`
   Children: `.14.3.5.0-.14.3.5.3`
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.5.0`
-  Status: `signoff-complete` (2026-08-11; commit-ready as atomic 197/300 from `38318827`; no push)
+  Status: `complete` (2026-08-11; clean atomic 197/300 `8db3aeee`; no push)
   Goal: Freeze dormant Julia RED across native, reconstructed, generated-plan, and independently loaded emitted
     module carriers.
   Depends on: `.14.3.4.3`
-  Acceptance: Retrieve all neutral/admitted/Julia/carrier/canonical/storage/public owners. Freeze one dormant
-    final-path consumer for invocation frames, opaque tokens, detached cursor/boundary/marks, falsey-safe payloads,
-    portable diagnostics, four non-eager nodes, closed effects, cursor-only progress, native/reconstructed/
-    generated-plan/independently loaded emitted carriers, and ordinary cursor compatibility. Stop at the first
-    absent private Julia authority; preserve production/discovery, code-unit registers/results, 132/246/43,
-    rollout 4/9, public 3/14/29, guide 1/6/10, schemas/APIs/CLI/README/storage/backends; sign off and land clean.
   Commit: `FUTURE-PARITY-BACKLOG.14.3.5.0 - freeze Julia transaction RED`
-
-  ### `FUTURE-PARITY-BACKLOG.14.3.5.0` Acceptance Checklist
-
-  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove atomic 196 clean and this task part the sole first mutation.
-  - [x] **RETRIEVE / TOOLBOX PROBE** — Follow every Julia/neutral/admission/storage/public owner before RED design.
-  - [x] **EXACT DORMANT CONTRACT** — Freeze the complete final path and one narrow absent-authority RED boundary.
-  - [x] **CURRENT GREEN / NO DRIFT** — Keep ordinary/canonical Julia and all rollout/public/runtime surfaces current.
-  - [x] **SIGNOFF / CLEAN ATOMIC** — Pass focused/Julia/book/doctrine/canonical proof; commit-ready before `.1`.
-
-  Activation evidence 2026-08-11: clean atomic 196 is `38318827d470509f2635f2b5887c8373a52ddc2e` with parent
-  `bee6cf45`, empty status/diffs/brief/book/run/background residue, valid maps/pointer, and this part the first mutation.
-
-  Retrieval/RED evidence 2026-08-11: neutral 132/246/43, admitted consumers, Julia private `SourceLocation`, runtime,
-  parser/ActionIR, emitter, loader, discovery, canonical, and project-data owners were retrieved first. A probe shows
-  current execution stops at unsupported `recognition_checkpoint`. The 809-line final-path consumer loads the
-  neutral fixture and its explicit authority/integration modes both parse fully, exit 1 only at
-  `UndefVarError: RecognitionTransaction not defined in LinkedSpecJulia`, and have zero ordinary/canonical refs.
-  Its `Base.include_string` carrier creates no temp owner. Julia passes package/typed-source 127/127, storage 19/5,
-  primary CLI, and corpus 105/105. The first canonical run caught one exact semantic-status wording
-  drift; after repair, the rerun passed all eight doctrines, transaction/typed-source/MCP/semantic admissions,
-  containment/relocation, CLI 66x2, RAM 60%, Phase 0 1,031/1,031 in 724 seconds, and the local-CI success marker.
+  Evidence: clean `8db3aeee` freezes both modes solely at absent private authority with Julia typed source 127,
+    storage 19/5, CLI 66x2, corpus 105, RAM 60%, and Phase 0 1,031/1,031 in 724 sec; exact maps/pointer, zero
+    residue, and no production/discovery/rollout movement.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.5.1`
-  Status: `pending`
+  Status: `complete` (2026-08-11; atomic 198/300 from clean activation `8db3aeee`; no push)
   Goal: Add private Julia invocation-frame, mark-generation, opaque-token, snapshot, and invalidation authority
     while retaining native code-unit registers and current routes.
   Depends on: `.14.3.5.0`
+  Acceptance: Retrieve the frozen Julia RED and admitted authority precedents; add only the non-exported private
+    namespace/value/state/error foundation; make explicit authority mode green while integration remains at its
+    exact `.2` boundary; preserve production/discovery, 132/246/43, rollout 4/9, public/guide, storage, and APIs;
+    pass focused/Julia/book/doctrine/canonical signoff and land cleanly before `.2`.
+  Commit: `FUTURE-PARITY-BACKLOG.14.3.5.1 - add private Julia transaction authority`
+
+  ### `FUTURE-PARITY-BACKLOG.14.3.5.1` Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove atomic 197 clean and this task part the sole first mutation.
+  - [x] **RETRIEVE / TOOLBOX PROBE** — Follow frozen/admitted/Julia authority and lifecycle owners before code.
+  - [x] **PRIVATE AUTHORITY** — Implement invocation frames, generations, snapshots, opaque tokens, and diagnostics.
+  - [x] **EXACT NEXT RED / NO DRIFT** — Authority GREEN; integration stops only at the first `.2` seam.
+  - [x] **SIGNOFF / CLEAN ATOMIC** — Pass complete proof and land atomic 198 before integration activates.
+
+  Evidence: clean `8db3aeee` activation; non-exported authority after `SourceLocation`; 155/155 explicit proof;
+    integration stops at zero dedicated nodes and absent effect/progress/runtime routes; Julia typed source 127,
+    storage 19/5, CLI/corpus 105, book 79/14,404 KiB, eight doctrines, recognition 132/246/43, rollout 4/9,
+    RAM 68%, and canonical Phase 0 1,031/1,031 in 747 sec through `[ci] local CI gate passed`.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.3.5.2`
   Status: `pending`

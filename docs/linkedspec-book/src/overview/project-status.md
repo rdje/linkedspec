@@ -129,6 +129,12 @@ converge across native, reconstructed, generated-plan, and freshly analyzed emit
 executes its exact project-data-routed target once. Only Dart advances; recognition rollout is 4/9 while Julia,
 PUC Lua, LuaJIT, recurring, and public-no-drift remain RED. The private authority remains unexported.
 
+Julia's next internal foundation is implemented but deliberately unadmitted. Its non-exported transaction authority
+passes the frozen 155-assertion authority contract for opaque tokens, invocation-local marks, detached state,
+falsey payloads, exact restoration, and terminal invalidation. Julia still has no dedicated transaction ActionIR,
+effect/progress classifier, or runtime route; the final-path consumer remains dormant and rollout therefore stays
+4/9.
+
 The helper audit distinguishes 7 callable compatibility aliases from 2 internal Perl contract/scanner ids.
 `capture_take_slice` and `capture_take_slice_len` are internal ids, not accepted helper spellings; authored code
 continues to use `capture_take()` and `capture_take_len()`. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT execute all
