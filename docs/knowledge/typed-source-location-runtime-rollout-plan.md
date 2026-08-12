@@ -176,9 +176,10 @@ contract and no-change recomposition `.14.1.3` required it unchanged. Correction
 two completed public rows and re-owned the five runtime rows to exact admission leaves
 `.14.2.1.3-.14.2.5.3`. Perl admission `.14.2.1.3`, Rust admission `.14.2.2.3`, Dart admission `.14.2.3.3`, Julia
 admission `.14.2.4.3`, and dual-ABI Lua admission `.14.2.5.3` have promoted only their own runtime rows; current
-truth is 8 complete / 6 pending, protected by 53 mutations. The original 42 include one completed-to-pending
-regression per completed public/runtime row; recurring composition `.14.2.6` adds 11 topology mutations without
-promoting the combined `.14.8` recurring/public no-drift row.
+truth is 8 complete / 6 pending, protected by 57 mutations. The original 42 include one completed-to-pending
+regression per completed public/runtime row; recurring composition `.14.2.6` added 11 topology mutations, and
+recursive-lineage correction `.14.4.0.1` adds four invariant mutations without promoting the combined `.14.8`
+recurring/public no-drift row.
 
 Perl core `.14.2.1.1` now implements `LinkedSpec::SourceLocation`. Module-private authority state snapshots decoded
 text and precomputes scalar-boundary line, column, and UTF-8 byte evidence. Positions, direct spans, and derived

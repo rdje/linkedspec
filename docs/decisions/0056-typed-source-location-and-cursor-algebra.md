@@ -4,7 +4,7 @@
 - Status: accepted; neutral/public contract and six-runtime internal value/projection implementation complete;
   transaction syntax/effect/progress plus Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurring, and public no-drift
   proof are current; transaction activity `FUTURE-PARITY-BACKLOG.14.3` is closed; recursive-observation audit
-  `.14.4.0` freezes the next behavior boundary and tracks one neutral lineage correction before implementation
+  `.14.4.0` freezes the next behavior boundary and `.14.4.0.1` makes its neutral lineage contract fail-closed
 - Tags: architecture, cursor, source-location, spans, capture, recursion, parser-composition, diagnostics, portability
 
 ## Context
@@ -444,12 +444,29 @@ records are returned/detached at the explicit observation boundary rather than a
 Exact authored accessor spelling and carrier projection remain for the executable neutral leaf; this audit adds no
 public helper, ActionIR node, descriptor/generated version, semantic/MCP field, or CLI surface.
 
-The committed neutral fixture predates transaction ratification and contains one contradiction: `direct_nonprogress`
-uses `recursive-1` as both invocation and parent. Its checker compares the six rows exactly but enforces no distinct
-identity, parent ordering, or cycle invariant. Corrective prerequisite `.14.4.0.1` must repair direct and mutual
-lineage and add fail-closed proof before `.14.4.1` builds the executable observation authority. The remaining order
-is neutral `.1`, Perl `.2`, Rust `.3`, Dart `.4`, Julia `.5`, one shared Lua implementation with independent PUC
-Lua/LuaJIT proof `.6`, recurring composition `.7`, and public closeout `.8`.
+The pre-correction neutral fixture predated transaction ratification and contained one contradiction:
+`direct_nonprogress` used `recursive-1` as both invocation and parent. Its checker compared the six rows exactly but
+enforced no distinct identity, parent ordering, or cycle invariant. Corrective prerequisite `.14.4.0.1` owns the
+completed repair before `.14.4.1`
+builds the executable observation authority. The remaining order is neutral `.1`, Perl `.2`, Rust `.3`, Dart `.4`,
+Julia `.5`, one shared Lua implementation with independent PUC Lua/LuaJIT proof `.6`, recurring composition `.7`,
+and public closeout `.8`.
+
+### 20. Make recursive invocation lineage numeric and fail-closed before behavior
+
+`FUTURE-PARITY-BACKLOG.14.4.0.1` changes only the neutral artifact and checker. Each observation now uses a positive
+numeric identity from one parse-local monotonic authority. Nullable parents are positive, distinct, earlier
+identities; the six rows remain ordered and unique. In particular, a direct progress rejection reserves attempted
+child `9` under active parent `8`, and mutual rejection reserves attempted child `11` under active parent `10`.
+Neither rejection pushes a frame or creates another history authority.
+
+Lineage validation runs after ordinary row/source/span checks and before exact tuple comparison. It rejects invalid
+identity kinds or ranges, self-parenting, reused invocation ids, parents that do not precede children, and cycles
+among represented observations. Four reason-checked negative mutations lock the self/reuse/order/cycle mechanisms,
+advancing neutral governance from 53 to 57 mutations. The initial RED against the committed artifact fails on its
+textual invocation id; the corrected fixture passes all 57 mutations. The six observation roles, 8-complete /
+6-pending rollout, runtime implementations, public helpers, carriers, schemas, CLI, README, and executable
+recursive-observation status remain unchanged.
 
 ## Consequences
 
@@ -480,6 +497,8 @@ Lua/LuaJIT proof `.6`, recurring composition `.7`, and public closeout `.8`.
 - The `.14.4.0` amendment is behavior-free. It reuses the existing invocation authority, freezes detached
   observation semantics and intrinsic child cursor ownership, and makes `.14.4.0.1` a mandatory neutral-lineage
   correction before any runtime observation implementation.
+- The `.14.4.0.1` amendment completes that behavior-free correction: numeric monotonic lineage and four
+  reason-checked invariant mutations are current, while executable observation remains owned by `.14.4.1+`.
 
 ## Links
 

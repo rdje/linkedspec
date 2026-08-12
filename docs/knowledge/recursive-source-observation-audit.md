@@ -16,10 +16,10 @@ answers:
   - "which task fixes recursive observation invocation lineage"
   - "what is the recursive source observation rollout order"
 date: 2026-08-12
-status: accepted behavior-free audit; neutral lineage correction pending before executable observation work
+status: accepted behavior-free audit; neutral lineage correction implemented before executable observation work
 tags: [architecture, source-location, recursion, invocation, provenance, cursor, diagnostics, portability]
-evidence: "FUTURE-PARITY-BACKLOG.14.4.0 at clean activation 3ac018f8; ADR 0056 section 19; committed authority blobs and LinkedSpec-tool probes recorded in the owning task. The original self-parent fixture entered at e8f6198b, before transaction invocation identity was ratified."
-reverify: "rg -n 'Freeze recursive observation|direct_nonprogress|invocation parent identity drifted|recursion_guard|enter_recognition_invocation|enter_invocation' docs/decisions/0056-typed-source-location-and-cursor-algebra.md capability_conformance/typed_source_location_contract.json tools/check_typed_source_location_contract.py perl/LinkedSpec/SpecEntry.pm rust/linkedspec-runtime/src/engine.rs dart/lib/src/runtime/interpreter.dart julia/src/runtime/Interpreter.jl lua/src/linkedspec/interpreter.lua"
+evidence: "FUTURE-PARITY-BACKLOG.14.4.0 audit landed at 2c968259; corrective .14.4.0.1 exact RED rejects the committed textual fixture, then positive numeric fixtures plus four reason-checked lineage mutations pass. ADR 0056 sections 19-20 preserve the boundary and historical cause."
+reverify: "bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py && rg -n 'Make recursive invocation lineage|direct_nonprogress|validate_recursive_observation_lineage|recursion_guard|enter_recognition_invocation|enter_invocation' docs/decisions/0056-typed-source-location-and-cursor-algebra.md capability_conformance/typed_source_location_contract.json tools/check_typed_source_location_contract.py perl/LinkedSpec/SpecEntry.pm rust/linkedspec-runtime/src/engine.rs dart/lib/src/runtime/interpreter.dart julia/src/runtime/Interpreter.jl lua/src/linkedspec/interpreter.lua"
 ---
 
 Recursive observation extends the private recognition invocation authority already implemented by Perl, Rust,
@@ -39,13 +39,14 @@ attempt must therefore reserve a fresh monotonic child identity from the existin
 invocation as its distinct earlier parent, emit a detached rejected record, and avoid pushing a live frame. Parent
 links are parse-local, same-source, direct, acyclic numeric provenance—not stack frames or backend addresses.
 
-The neutral artifact currently violates that rule for `direct_nonprogress`: both `invocation_id` and
-`parent_invocation_id` are `recursive-1`. The row was introduced with the original typed-source contract at
-`e8f6198b`; later transaction work made invocation identities monotonic and non-reused. The checker still passes
-because it compares the six fixture tuples exactly and validates source/span bounds, but it has no self-parent,
-identity-reuse, parent-order, or cycle check. `FUTURE-PARITY-BACKLOG.14.4.0.1` owns the correction and fail-closed
-checker proof before executable observation work begins.
+The original neutral artifact violated that rule for `direct_nonprogress`: both `invocation_id` and
+`parent_invocation_id` were `recursive-1`. The row entered with the original typed-source contract at `e8f6198b`;
+later transaction work made invocation identities monotonic and non-reused, but exact tuple comparison masked the
+missing lineage invariants. Corrective `.14.4.0.1` replaces textual rows with positive numeric identities and
+assigns rejected attempted children `9` and `11` to active parents `8` and `10`. Validation now rejects invalid
+identity kinds/ranges, self-parenting, reuse, non-earlier parents, and represented cycles before tuple equality.
+Four reason-checked regressions advance governance from 53 to 57 mutations without changing behavior or rollout.
 
-After that prerequisite, rollout is neutral `.14.4.1`, Perl `.2`, Rust `.3`, Dart `.4`, Julia `.5`, shared Lua with
+After that completed prerequisite, rollout is neutral `.14.4.1`, Perl `.2`, Rust `.3`, Dart `.4`, Julia `.5`, shared Lua with
 independent PUC Lua/LuaJIT proof `.6`, recurring composition `.7`, and public closeout `.8`. The audit itself adds
 no syntax, helper, ActionIR node, descriptor/generated version, semantic/MCP field, CLI option, or runtime behavior.

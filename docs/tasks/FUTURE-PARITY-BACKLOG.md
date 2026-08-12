@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-12` (recursive observation audit `.14.4.0` signoff-complete as intended atomic 207/300
-  from clean transaction closeout `3ac018f8`; behavior-free; commit remains; no push)
+- Last updated: `2026-08-12` (recursive observation lineage correction `.14.4.0.1` signoff-complete as intended
+  atomic 208/300 from clean audit activation `2c968259`; behavior-free; no push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -103,17 +103,16 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-12):** behavior-free recursive observation audit `.14.4.0` is signoff-complete
-from clean transaction closeout `3ac018f8` for atomic 207/300; commit remains. It retrieves actual
-Perl/Rust/Dart/Julia/shared-Lua rule-entry,
-local-match, accepted-exit, recursive-call, invocation, source-authority, and carrier seams before freezing one
-portable observation contract plus corrective `.14.4.0.1` and `.14.4.1-.8` neutral/runtime/recurring/public split.
-Children receive the current position but retain intrinsic family-derived seek/consume policy. The audit found the
-neutral `direct_nonprogress` self-parent and missing distinct/order/cycle checks; `.0.1` owns correction before
-behavior. No parser/compiler/runtime/backend/API/schema/CLI/README behavior may change in the audit. Transaction
-`.14.3` remains clean-closed at 132/246/58 and rollout 9/9; typed-source `.14.8` remains separately pending. Final
-proof passes book 79/14,460 KiB, Knowledge 821/6,826, all eight doctrines, CLI 66x2, RAM 59%, and canonical Phase 0
-1,031/1,031 in 832 seconds; activate `.14.4.0.1` only after the clean atomic-207 boundary.
+**Authoritative frontier (2026-08-12):** corrective recursive-observation lineage `.14.4.0.1` is signoff-complete
+as atomic 208/300 from clean audit activation `2c968259`. The neutral fixture uses positive unique monotonic invocation ids;
+direct and mutual pre-entry progress rejections reserve distinct attempted children under their active parents.
+Validation independently rejects invalid ids, self-parenting, reuse, reverse ordering, and represented cycles
+before exact tuple equality, with four reason-checked mutations advancing typed-source governance from 53 to 57.
+The six observation roles, rollout 8 complete / 6 pending, child-owned family policy, and every runtime/public
+surface remain unchanged. Book 79/14,460, Knowledge 821/6,826, all eight doctrines, containment/relocation, CLI
+66x2, RAM 34%, and Phase 0 1,031/1,031 in 739 seconds pass. Executable neutral observation `.14.4.1` is next but
+not active; Perl/Rust/Dart/Julia/shared-Lua/recurring/public legs remain `.2-.8`. Transaction `.14.3`
+stays closed at 132/246/58 and rollout 9/9; typed-source `.14.8` remains separately pending.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private

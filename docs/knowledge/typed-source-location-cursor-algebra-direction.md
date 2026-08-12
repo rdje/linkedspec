@@ -18,9 +18,9 @@ answers:
   - "which diagnostics protect cursor and span safety"
   - "what owns the typed cursor span implementation program"
 date: 2026-08-12
-status: accepted architecture; internal values and transaction rollout complete; recursive-observation audit frozen with one prerequisite lineage correction
+status: accepted architecture; internal values and transaction rollout complete; recursive-observation audit frozen with fail-closed neutral lineage
 tags: [architecture, cursor, source-location, spans, capture, recursion, parser-composition, diagnostics, portability]
-evidence: "Director approval on 2026-07-29 plus ADR 0056. FUTURE-PARITY-BACKLOG.14.1 completed the executable base model and structural teaching; .14.2 completed the internal immutable value/projection layer on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT at 8 complete / 6 pending / 53 mutations; .14.3 closed exact six-runtime recognition transactions at rollout 9/9; behavior-free .14.4.0 freezes recursive observation on the same authority and tracks the neutral self-parent correction under .14.4.0.1."
+evidence: "Director approval on 2026-07-29 plus ADR 0056. FUTURE-PARITY-BACKLOG.14.1 completed the executable base model and structural teaching; .14.2 completed the internal immutable value/projection layer on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT at 8 complete / 6 pending; .14.3 closed exact six-runtime recognition transactions at rollout 9/9; behavior-free .14.4.0 freezes recursive observation on the same authority and .14.4.0.1 corrects its neutral lineage with four fail-closed mutations, advancing current typed-source governance to 57."
 reverify: "rg -n 'source-location algebra|Cursor transactions|Progressive and staged parsing consume spans|Lossless segmentation|FUTURE-PARITY-BACKLOG[.]14[.]0[.]1' docs/decisions/0056-typed-source-location-and-cursor-algebra.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -52,7 +52,7 @@ ADR `0056` ratified `recognition_checkpoint()` / `recognize_once(token, call(Rul
 `recognition_commit(token)` / `recognition_rollback(token)` surface. Match presence is a strict boolean and the
 child payload remains staged until commit, so falsey successful values are not collapsed into failure. Neutral,
 six-runtime transaction admission, recurrence, and public no-drift are complete. Recursive observation now has a
-behavior-free six-runtime audit and one tracked neutral-lineage correction; implementation, gap composition,
-progressive/staged dispatch, and final typed-source no-drift continue under `FUTURE-PARITY-BACKLOG.14.4.0.1-.14.8`.
+behavior-free six-runtime audit and a fail-closed neutral-lineage correction; implementation, gap composition,
+progressive/staged dispatch, and final typed-source no-drift continue under `FUTURE-PARITY-BACKLOG.14.4.1-.14.8`.
 
 Related records: [[cursor-transaction-safety-audit-plan]], [[recursive-source-observation-audit]].

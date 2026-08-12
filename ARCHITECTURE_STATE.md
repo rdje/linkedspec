@@ -1,6 +1,6 @@
 # ARCHITECTURE STATE
 
-## Recursive source observation is audit-frozen on the existing invocation authority
+## Recursive source-observation lineage is fail-closed on the existing invocation authority
 
 Behavior-free `FUTURE-PARITY-BACKLOG.14.4.0` audits clean transaction closeout `3ac018f8` across Perl, Rust,
 Dart, Julia, PUC Lua, and LuaJIT. LinkedSpec's own lowering/descriptor/generated-source/execution probes prove that
@@ -16,11 +16,15 @@ guard-rejected edge reserves a fresh child identity, points at the active parent
 live frame. There is no second stack, parse-wide completed-history ledger, backend address, parent cursor-policy
 override, or current public accessor/carrier/API/schema/CLI movement.
 
-The audit found one foundational neutral mismatch introduced at `e8f6198b`: `direct_nonprogress` uses the same
-`recursive-1` identity for invocation and parent, while the checker only compares exact tuples and never validates
-self-parent, reuse, parent order, or cycles. Corrective prerequisite `.14.4.0.1` now owns that fixture/checker repair
-before executable neutral observation `.14.4.1`; Perl `.2`, Rust `.3`, Dart `.4`, Julia `.5`, shared Lua `.6`,
-recurring `.7`, and public closeout `.8` follow. ADR `0056` section 19 and
+The audit found one foundational neutral mismatch introduced at `e8f6198b`: `direct_nonprogress` used the same
+textual identity for invocation and parent, while the checker only compared exact tuples. Corrective prerequisite
+`.14.4.0.1` replaces all six rows with positive numeric identities from one monotonic authority: accepted root/leaf
+and failure/abort samples retain their roles, while direct and mutual guard rejections reserve attempted children
+`9` and `11` with active parents `8` and `10`. The checker now independently rejects non-positive/textual ids,
+self-parenting, identity reuse, invalid parent order, and represented cycles before exact tuple comparison. Four
+reason-checked lineage regressions advance governance from 53 to 57 mutations without changing rollout, runtime,
+or public behavior. Executable neutral observation `.14.4.1`; Perl `.2`, Rust `.3`, Dart `.4`, Julia `.5`, shared
+Lua `.6`, recurring `.7`, and public closeout `.8` follow. ADR `0056` sections 19-20 and
 `docs/knowledge/recursive-source-observation-audit.md` are the durable authorities.
 
 Audit signoff preserves every executable owner and passes focused six-runtime typed-source composition,
@@ -28,6 +32,13 @@ recognition 132/246/58, cursor 36/18/8, the 79-file/14,460-KiB book, Knowledge 8
 repository containment/relocation including the six-family process sandbox, CLI 66x2, RAM 59%, and canonical
 Phase 0 1,031/1,031 in 832 seconds. The outer workspace sandbox cannot nest the canonical macOS `sandbox-exec`
 probe; the unchanged host-permitted canonical run supplies the definitive success marker.
+
+Correction signoff independently repeats the corrected neutral 57-mutation authority and exact six-runtime
+composition: Perl 10, Rust/Dart 4/4, Julia 127, and PUC Lua/LuaJIT 240/240, followed by strict generated Rust
+105/105, capability 80/0/0, and language coverage 246 current / 105 corpus plus one named-mark fixture / 122
+public Perl contracts. The rendered book remains 79 files / 14,460 KiB and Knowledge remains 821/6,826. All eight
+doctrines, repository containment/relocation, CLI 66x2, RAM 34%, and canonical Phase 0 1,031/1,031 in 739 seconds
+pass through the exact local-CI success marker without executable-owner or public-surface movement.
 
 ## README route-pressure closure is implementation- and recomposition-closed
 

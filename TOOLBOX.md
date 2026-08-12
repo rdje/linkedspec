@@ -992,7 +992,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   canonical gate.
 - **OUTPUT:** neutral governance reports 3 sources, 7 positions, 6 direct spans, 3 derived texts, 8+8 state
   transitions, 6 recursive observations, 4 structural cases, 92 helper projections + 7 aliases + 2 internal ids,
-  31 diagnostics, 8 complete / 6 pending rollout, and 53 rejected drift mutations. The driver then reports each
+  31 diagnostics, 8 complete / 6 pending rollout, and 57 rejected drift mutations. The driver then reports each
   of the six ordered runtime routes and three support ledgers before its exact success marker.
 - **BOUNDARY:** this is orchestration over existing internal consumers, not a new public typed-value surface. The
   combined recurring/public no-drift row remains pending for `FUTURE-PARITY-BACKLOG.14.8`. Retrieve
@@ -1001,9 +1001,10 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   entry/match/exit state or provenance. First use `call_spec_handler_subst` to prove child-call lowering,
   `return_descriptor` to prove the child's family/cursor policy, and `dump_parser_source` plus `LinkedSpec::Get` to
   prove action-edge versus direct-call entry state. All live engines guard an active `(rule, cursor)` before child
-  frame entry. Extend the existing monotonic recognition authority; never add a second invocation stack. Until
-  corrective leaf `.14.4.0.1` lands, the green neutral checker pins a known self-parent `direct_nonprogress` row
-  and does not prove distinct/ordered/acyclic invocation lineage.
+  frame entry. Extend the existing monotonic recognition authority; never add a second invocation stack.
+  Corrective leaf `.14.4.0.1` replaces the historical self-parent row with positive numeric attempted-child
+  lineage and makes the checker reject self-parenting, reuse, invalid parent order, and represented cycles before
+  tuple comparison. Current neutral governance is 57 mutations; executable observation still starts at `.14.4.1`.
 
 ### 4.9.2 `tools/check_recognition_transaction_contract.py` — neutral transaction/progress oracle
 

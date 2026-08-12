@@ -19,7 +19,7 @@
     "rollout_legs": 14,
     "recurring_source_groups": 5,
     "recurring_runtime_routes": 6,
-    "mutations": 53
+    "mutations": 57
   },
   "policy": {
     "source_identity": "caller-authorized decoded input identity; never a path, backend object, or implicit read authority",
@@ -31,7 +31,7 @@
     "invocation_state": "cursor, anonymous boundary, and marks are mutable only inside one invocation; public projections are immutable",
     "transactions": "one bounded recognition-only attempt snapshots cursor, boundary, and marks; commit or rollback invalidates its token",
     "transaction_effects": "rollback never restores user variables, AST mutation, diagnostics, output, external calls, registry effects, or host state",
-    "recursion": "entry, selected-match, and accepted-exit observations are read-only; absence is explicit and parent links are bounded",
+    "recursion": "entry, selected-match, and accepted-exit observations are read-only; invocation ids are positive, unique, and monotonic; nullable parents are distinct earlier same-authority ids with bounded acyclic links",
     "progress": "repetition, recursion, and staged queues must advance the cursor or prove a well-founded decreasing measure",
     "dispatch_authority": "a span conveys data and provenance only; source, registry, capability, and policy authority remain independently required",
     "source_spelling": "not selected; Position, Span, checkpoint, try, commit, and rollback are architectural names only",
@@ -99,12 +99,12 @@
     ]
   },
   "recursive_observations": [
-    {"id": "ordinary_leaf", "invocation_id": "leaf-1", "parent_invocation_id": "root-1", "source_id": "unicode", "entry_offset": 2, "selected_match_span_id": "unicode_emoji_tail", "accepted_exit_offset": 4, "outcome": "accepted", "diagnostic": null},
-    {"id": "zero_regex_coordinator", "invocation_id": "root-2", "parent_invocation_id": null, "source_id": "unicode", "entry_offset": 0, "selected_match_span_id": null, "accepted_exit_offset": 4, "outcome": "accepted", "diagnostic": null},
-    {"id": "failed_selection", "invocation_id": "leaf-2", "parent_invocation_id": "root-3", "source_id": "unicode", "entry_offset": 0, "selected_match_span_id": null, "accepted_exit_offset": null, "outcome": "failed", "diagnostic": null},
-    {"id": "abnormal_exit", "invocation_id": "leaf-3", "parent_invocation_id": "root-4", "source_id": "unicode", "entry_offset": 2, "selected_match_span_id": "unicode_emoji_tail", "accepted_exit_offset": null, "outcome": "aborted", "diagnostic": null},
-    {"id": "direct_nonprogress", "invocation_id": "recursive-1", "parent_invocation_id": "recursive-1", "source_id": "unicode", "entry_offset": 1, "selected_match_span_id": null, "accepted_exit_offset": null, "outcome": "rejected", "diagnostic": "source_location_nonprogress_direct_recursion"},
-    {"id": "mutual_nonprogress", "invocation_id": "recursive-a", "parent_invocation_id": "recursive-b", "source_id": "unicode", "entry_offset": 1, "selected_match_span_id": null, "accepted_exit_offset": null, "outcome": "rejected", "diagnostic": "source_location_nonprogress_mutual_recursion"}
+    {"id": "ordinary_leaf", "invocation_id": 2, "parent_invocation_id": 1, "source_id": "unicode", "entry_offset": 2, "selected_match_span_id": "unicode_emoji_tail", "accepted_exit_offset": 4, "outcome": "accepted", "diagnostic": null},
+    {"id": "zero_regex_coordinator", "invocation_id": 3, "parent_invocation_id": null, "source_id": "unicode", "entry_offset": 0, "selected_match_span_id": null, "accepted_exit_offset": 4, "outcome": "accepted", "diagnostic": null},
+    {"id": "failed_selection", "invocation_id": 5, "parent_invocation_id": 4, "source_id": "unicode", "entry_offset": 0, "selected_match_span_id": null, "accepted_exit_offset": null, "outcome": "failed", "diagnostic": null},
+    {"id": "abnormal_exit", "invocation_id": 7, "parent_invocation_id": 6, "source_id": "unicode", "entry_offset": 2, "selected_match_span_id": "unicode_emoji_tail", "accepted_exit_offset": null, "outcome": "aborted", "diagnostic": null},
+    {"id": "direct_nonprogress", "invocation_id": 9, "parent_invocation_id": 8, "source_id": "unicode", "entry_offset": 1, "selected_match_span_id": null, "accepted_exit_offset": null, "outcome": "rejected", "diagnostic": "source_location_nonprogress_direct_recursion"},
+    {"id": "mutual_nonprogress", "invocation_id": 11, "parent_invocation_id": 10, "source_id": "unicode", "entry_offset": 1, "selected_match_span_id": null, "accepted_exit_offset": null, "outcome": "rejected", "diagnostic": "source_location_nonprogress_mutual_recursion"}
   ],
   "structural_authoring_cases": [
     {"id": "zero_regex_coordinator", "regex_count": 0, "role": "coordinator", "entry_rule_valid": true, "recursion_owner": "linked_rule_graph", "guidance": "coordinate child rules without embedding a boundary regex"},

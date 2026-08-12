@@ -10,6 +10,22 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-12 — FUTURE-PARITY-BACKLOG.14.4.0.1 — correct recursive observation lineage
+
+- Replaced the six neutral recursive-observation rows' textual identities with positive, unique, monotonic numeric
+  identities. Direct and mutual non-progress rejection now reserve distinct children `9` and `11` under active
+  parents `8` and `10`; the observation roles, source/span/outcome semantics, and rollout remain unchanged.
+- Added lineage validation before exact fixture comparison. The checker rejects invalid identity kinds/ranges,
+  self-parenting, reused identities, parent ids that do not precede children, and cycles among represented rows.
+- Added four reason-checked regression mutations for self-parent, reuse, ordering, and cycle failures, advancing
+  neutral governance from 53 to 57 mutations. Exact RED first rejected the old fixture because its invocation id
+  was not a positive integer; the corrected neutral contract then passed all 57 mutations.
+- Synchronized ADR `0056`, Knowledge, architecture, roadmaps, task/live state, Toolbox, and the sole-facing mdBook.
+  No parser/compiler/runtime/backend/helper/API/schema/CLI/README behavior or 8-complete/6-pending rollout moved.
+- Final signoff passes the 79-file/14,460-KiB rendered book, Knowledge 821/6,826, all eight doctrines, repository
+  containment and relocation including the six-family process sandbox, CLI 66/66 in both option environments,
+  RAM 34%, and canonical Phase 0 1,031/1,031 in 739 seconds through the exact local-CI success marker.
+
 ## 2026-08-12 — FUTURE-PARITY-BACKLOG.14.4.0 — audit recursive source observation
 
 - Audited committed neutral, Perl, Rust, Dart, Julia, and shared Lua entry/local-match/accepted-exit, recursion-

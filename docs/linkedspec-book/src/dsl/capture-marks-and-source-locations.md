@@ -82,10 +82,11 @@ from its own rule family; observing the child never lets the parent override tha
 All six runtimes currently reject an already-active `(rule, cursor)` edge before pushing a child recognition
 frame. The accepted observation design reserves a fresh attempted-child identity from the existing authority,
 links it to the active parent, records a rejected outcome, and pushes no live frame. The original neutral
-`direct_nonprogress` fixture instead makes an invocation its own parent. The checker pins that row but has no
-self-parent, identity-order, or cycle invariant. Corrective prerequisite `.14.4.0.1` owns that fixture/checker repair
-before neutral observation implementation `.14.4.1`; Perl, Rust, Dart, Julia, shared Lua, recurring proof, and public
-closeout then follow in `.2-.8`.
+`direct_nonprogress` fixture instead made an invocation its own parent. Corrective `.14.4.0.1` replaces all textual
+fixture identities with positive unique monotonic numbers; direct and mutual rejection each receive a fresh child
+under an earlier active parent. The checker now rejects self-parent, reuse, invalid parent order, and cycles before
+tuple comparison. Neutral observation implementation `.14.4.1`; Perl, Rust, Dart, Julia, shared Lua, recurring
+proof, and public closeout then follow in `.2-.8`.
 
 There is still no authored recursive-observation helper, ActionIR node, schema field, semantic/MCP projection, or
 CLI option. Exact accessor spelling and carrier projection remain future executable-contract work.
@@ -300,7 +301,7 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 ```
 
 The checker covers 3 decoded sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation
-and 8 transaction transitions, 6 recursive observations, 4 structural cases, 31 diagnostics, and 53 mutations.
+and 8 transaction transitions, 6 recursive observations, 4 structural cases, 31 diagnostics, and 57 mutations.
 It also proves that all 92 current source-boundary helpers project onto the algebra.
 
 This is rollout status, not authored-value status. Eight of 14 rollout legs are complete: the neutral contract,

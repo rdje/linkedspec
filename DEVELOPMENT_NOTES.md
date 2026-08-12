@@ -10,6 +10,24 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-12 (`FUTURE-PARITY-BACKLOG.14.4.0.1` — recursive observation lineage correction): keep invocation ids
+  numeric at the neutral boundary. `bool` must be rejected explicitly because Python treats it as an `int`; ids
+  must otherwise be positive, unique, and drawn monotonically from the existing parse-local authority.
+- Validate lineage after row field/source/span validation but before exact tuple comparison. This preserves useful
+  structural failures and ensures lineage invariants are independently executable rather than consequences of a
+  pinned fixture. Parent-before-child is `parent_id < invocation_id`; represented-parent traversal separately
+  detects cycles so that cycle mutations fail for the intended reason.
+- Model each pre-entry progress rejection as an attempted child, not as the active frame: direct rejection is
+  child `9` under parent `8`, and mutual rejection is child `11` under parent `10`. No child frame is pushed and no
+  second stack or completed-history ledger is introduced.
+- Exact RED with the committed artifact failed `recursive invocation identity must be a positive integer` after
+  the validator landed. The corrected artifact passes six observation roles and 57 total mutations, including
+  reason-checked self-parent, reuse, parent-order, and cycle regressions. Runtime and public surfaces stay inert.
+- Definitive proof repeats the composed six-runtime typed-source route, generated-source/capability/language
+  ledgers, the rendered 79-file/14,460-KiB book, Knowledge 821/6,826, all eight doctrines, repository containment
+  and relocation, CLI 66x2, RAM 34%, and Phase 0 1,031/1,031 in 739 seconds through exact canonical success.
+  Commit atomic 208 cleanly before activating executable neutral observation `.14.4.1` task-tree-first.
+
 - 2026-08-12 (`FUTURE-PARITY-BACKLOG.14.4.0` — recursive observation audit): committed audit authorities at
   `3ac018f8` are neutral `7663edf5`/`80b85e86`; Perl `07ff872d`/`2cc9cefa`/`a020f1c1`; Rust
   `5801b30f`/`d7f39fcb`/`1bf17d9b`; Dart `770a183e`/`0867a6de`/`534ad289`; Julia

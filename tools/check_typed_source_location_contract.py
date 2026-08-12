@@ -52,7 +52,7 @@ EXPECTED_COUNTS = {
     "rollout_legs": 14,
     "recurring_source_groups": 5,
     "recurring_runtime_routes": 6,
-    "mutations": 53,
+    "mutations": 57,
 }
 
 POLICY = {
@@ -65,7 +65,7 @@ POLICY = {
     "invocation_state": "cursor, anonymous boundary, and marks are mutable only inside one invocation; public projections are immutable",
     "transactions": "one bounded recognition-only attempt snapshots cursor, boundary, and marks; commit or rollback invalidates its token",
     "transaction_effects": "rollback never restores user variables, AST mutation, diagnostics, output, external calls, registry effects, or host state",
-    "recursion": "entry, selected-match, and accepted-exit observations are read-only; absence is explicit and parent links are bounded",
+    "recursion": "entry, selected-match, and accepted-exit observations are read-only; invocation ids are positive, unique, and monotonic; nullable parents are distinct earlier same-authority ids with bounded acyclic links",
     "progress": "repetition, recursion, and staged queues must advance the cursor or prove a well-founded decreasing measure",
     "dispatch_authority": "a span conveys data and provenance only; source, registry, capability, and policy authority remain independently required",
     "source_spelling": "not selected; Position, Span, checkpoint, try, commit, and rollback are architectural names only",
@@ -234,14 +234,14 @@ INTERNAL_CONTRACT_IDS = [
 ]
 
 RECURSIVE_OBSERVATIONS = [
-    ("ordinary_leaf", "leaf-1", "root-1", "unicode", 2, "unicode_emoji_tail", 4, "accepted", None),
-    ("zero_regex_coordinator", "root-2", None, "unicode", 0, None, 4, "accepted", None),
-    ("failed_selection", "leaf-2", "root-3", "unicode", 0, None, None, "failed", None),
-    ("abnormal_exit", "leaf-3", "root-4", "unicode", 2, "unicode_emoji_tail", None, "aborted", None),
+    ("ordinary_leaf", 2, 1, "unicode", 2, "unicode_emoji_tail", 4, "accepted", None),
+    ("zero_regex_coordinator", 3, None, "unicode", 0, None, 4, "accepted", None),
+    ("failed_selection", 5, 4, "unicode", 0, None, None, "failed", None),
+    ("abnormal_exit", 7, 6, "unicode", 2, "unicode_emoji_tail", None, "aborted", None),
     (
         "direct_nonprogress",
-        "recursive-1",
-        "recursive-1",
+        9,
+        8,
         "unicode",
         1,
         None,
@@ -251,8 +251,8 @@ RECURSIVE_OBSERVATIONS = [
     ),
     (
         "mutual_nonprogress",
-        "recursive-a",
-        "recursive-b",
+        11,
+        10,
         "unicode",
         1,
         None,
@@ -727,6 +727,45 @@ def apply_transaction_transition(state: dict[str, Any], transition: dict[str, An
         fail(f"unknown transaction transition operation: {operation!r}")
 
 
+def validate_recursive_observation_lineage(observations: list[dict[str, Any]]) -> None:
+    observations_by_invocation: dict[int, dict[str, Any]] = {}
+    for observation in observations:
+        invocation_id = observation["invocation_id"]
+        parent_invocation_id = observation["parent_invocation_id"]
+        if (
+            not isinstance(invocation_id, int)
+            or isinstance(invocation_id, bool)
+            or invocation_id <= 0
+        ):
+            fail("recursive invocation identity must be a positive integer")
+        if invocation_id in observations_by_invocation:
+            fail("recursive invocation identity was reused")
+        if parent_invocation_id is not None and (
+            not isinstance(parent_invocation_id, int)
+            or isinstance(parent_invocation_id, bool)
+            or parent_invocation_id <= 0
+        ):
+            fail("recursive parent invocation identity must be a positive integer or null")
+        if parent_invocation_id == invocation_id:
+            fail("recursive observation cannot self-parent")
+        observations_by_invocation[invocation_id] = observation
+
+    for invocation_id in observations_by_invocation:
+        visited: set[int] = set()
+        current_id: int | None = invocation_id
+        while current_id is not None and current_id in observations_by_invocation:
+            if current_id in visited:
+                fail("recursive invocation lineage is cyclic")
+            visited.add(current_id)
+            current_id = observations_by_invocation[current_id]["parent_invocation_id"]
+
+    for observation in observations:
+        invocation_id = observation["invocation_id"]
+        parent_invocation_id = observation["parent_invocation_id"]
+        if parent_invocation_id is not None and parent_invocation_id >= invocation_id:
+            fail("recursive parent invocation must precede child")
+
+
 def validate_contract(contract: dict[str, Any], *, check_registration: bool = True) -> None:
     top_fields = [
         "format",
@@ -1070,6 +1109,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             if span is None or span["source_id"] != observation["source_id"]:
                 fail("recursive selected-match span identity drifted")
         observed_recursive.append(tuple(observation.values()))
+    validate_recursive_observation_lineage(observations)
     if observed_recursive != RECURSIVE_OBSERVATIONS:
         fail("recursive observation semantics or order drifted")
 
@@ -1408,6 +1448,22 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         routes = candidate["recurring_gate"]["runtime_routes"]
         routes[0], routes[1] = routes[1], routes[0]
 
+    def recursive_self_parent(candidate: dict[str, Any]) -> None:
+        observation = candidate["recursive_observations"][4]
+        observation["parent_invocation_id"] = observation["invocation_id"]
+
+    def recursive_reused_identity(candidate: dict[str, Any]) -> None:
+        observations = candidate["recursive_observations"]
+        observations[5]["invocation_id"] = observations[4]["invocation_id"]
+
+    def recursive_parent_order(candidate: dict[str, Any]) -> None:
+        candidate["recursive_observations"][0]["parent_invocation_id"] = 3
+
+    def recursive_cycle(candidate: dict[str, Any]) -> None:
+        observations = candidate["recursive_observations"]
+        observations[0]["parent_invocation_id"] = observations[2]["invocation_id"]
+        observations[2]["parent_invocation_id"] = observations[0]["invocation_id"]
+
     mutations: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
         ("format", lambda c: c.__setitem__("format", 2)),
         ("contract id", lambda c: c.__setitem__("contract_id", "drift")),
@@ -1492,7 +1548,29 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ),
         ("rollout removed", lambda c: c["rollout"].pop()),
         ("canonical checker", lambda c: c["canonical_execution"].__setitem__("checker_path", "tools/wrong.py")),
-        ("mutation count", lambda c: c["expected_counts"].__setitem__("mutations", 52)),
+        ("mutation count", lambda c: c["expected_counts"].__setitem__("mutations", 56)),
+    ]
+    recursive_lineage_regressions = [
+        (
+            "recursive self-parent",
+            recursive_self_parent,
+            "recursive observation cannot self-parent",
+        ),
+        (
+            "recursive invocation identity reused",
+            recursive_reused_identity,
+            "recursive invocation identity was reused",
+        ),
+        (
+            "recursive parent order",
+            recursive_parent_order,
+            "recursive parent invocation must precede child",
+        ),
+        (
+            "recursive lineage cycle",
+            recursive_cycle,
+            "recursive invocation lineage is cyclic",
+        ),
     ]
     rollout_regressions = [
         (
@@ -1524,10 +1602,23 @@ def mutation_checks(contract: dict[str, Any]) -> int:
             lambda c: c["rollout"][7].__setitem__("status", "pending"),
         ),
     ]
-    if len(mutations) + len(rollout_regressions) != EXPECTED_COUNTS["mutations"]:
+    if (
+        len(mutations) + len(recursive_lineage_regressions) + len(rollout_regressions)
+        != EXPECTED_COUNTS["mutations"]
+    ):
         fail("checker mutation inventory count drifted")
     for name, mutate in mutations:
         expect_mutation_failure(contract, name, mutate)
+    for name, mutate, expected_error in recursive_lineage_regressions:
+        candidate = copy.deepcopy(contract)
+        mutate(candidate)
+        try:
+            validate_contract(candidate, check_registration=False)
+        except ContractError as error:
+            if expected_error not in str(error):
+                fail(f"mutation {name!r} failed for the wrong reason: {error}")
+        else:
+            fail(f"mutation {name!r} was not rejected")
     for name, mutate in rollout_regressions:
         candidate = copy.deepcopy(contract)
         mutate(candidate)
@@ -1538,7 +1629,7 @@ def mutation_checks(contract: dict[str, Any]) -> int:
                 fail(f"mutation {name!r} failed for the wrong reason: {error}")
         else:
             fail(f"mutation {name!r} was not rejected")
-    return len(mutations) + len(rollout_regressions)
+    return len(mutations) + len(recursive_lineage_regressions) + len(rollout_regressions)
 
 
 def main() -> int:

@@ -56,7 +56,7 @@ general style. This documentation-only slice changes no parser or runtime behavi
 The backend-neutral typed source-location contract is complete under `FUTURE-PARITY-BACKLOG.14.1.1`. Its
 independent checker passes 3 sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation
 and 8 transaction transitions, 6 recursive observations, 4 structural cases, 92 current helper projections,
-31 diagnostics, and 53 rejected mutations.
+31 diagnostics, and 57 rejected mutations.
 
 Eight of 14 rollout legs are complete and 6 remain pending. The neutral contract, public linked-rule structure,
 unchanged neutral/public recomposition, and all six runtime targets are complete. Their internal authorities and
@@ -94,7 +94,8 @@ bash tools/check_typed_source_location_six_runtime.sh
 
 Canonical CI requires and syntax-checks that driver; `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1` opts into its complete
 all-toolchain route. Five backend consumer groups map to six runtime routes because the shared Lua source runs once
-on each ABI. Eleven independent topology mutations account for the checker increase from 42 to 53.
+on each ABI. Eleven independent topology mutations first increased the checker from 42 to 53; four later
+recursive-lineage invariants advance current governance to 57.
 
 An unchanged `FUTURE-PARITY-BACKLOG.14.2.7` recomposition reruns that complete authority and closes the internal
 value/helper implementation slice `.14.2`. This is a project-state closure, not a new language surface: the six
@@ -119,10 +120,15 @@ diagnostic. It extends the existing private invocation authority and never gives
 family-derived seek/consume policy. No authored accessor, ActionIR node, facade, schema, semantic/MCP field, CLI, or
 runtime behavior is current from this audit.
 
-The audit also found that the original neutral `direct_nonprogress` fixture makes one invocation its own parent.
-Its checker compares exact rows but does not validate distinct/ordered/acyclic lineage. Corrective prerequisite
-`.14.4.0.1` is now tracked before executable neutral observation `.14.4.1`; independent Perl, Rust, Dart, Julia,
-shared Lua, recurring, and public legs follow through `.14.4.8`.
+The audit also found that the original neutral `direct_nonprogress` fixture made one invocation its own parent.
+Corrective prerequisite `.14.4.0.1` now gives all six observations positive unique monotonic numeric identities.
+A rejected direct or mutual recursive attempt receives a fresh child identity under the active parent, without a
+frame push. The checker independently rejects self-parenting, identity reuse, non-earlier parents, and represented
+cycles before exact tuple comparison. This is still behavior-free; executable neutral observation remains
+`.14.4.1`, followed by independent Perl, Rust, Dart, Julia, shared Lua, recurring, and public legs through `.14.4.8`.
+Correction signoff passes the exact six-runtime composition, generated-source/capability/language ledgers,
+79-file/14,460-KiB rendered book, Knowledge 821/6,826, all eight doctrines, containment/relocation, CLI 66x2,
+RAM 34%, and canonical Phase 0 1,031/1,031 in 739 seconds without moving any executable or public surface.
 
 Perl now has an admitted transaction implementation with four dedicated ActionIR nodes, recursive static
 effect closure, invocation-local mark/cursor snapshots, falsey-safe commit results, typed recognition-only progress

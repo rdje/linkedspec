@@ -37,7 +37,7 @@
 > and LuaJIT in exact order, then generated-source, capability, and language-coverage ledgers. Run
 > `bash tools/check_typed_source_location_six_runtime.sh`; canonical CI exposes the same all-toolchain proof behind
 > `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1`. Five backend source groups map to six runtime routes because the shared
-> Lua source executes on both ABIs. Governance is 8 complete / 6 pending with 53 drift mutations.
+> Lua source executes on both ABIs. Governance is 8 complete / 6 pending with 57 drift mutations.
 >
 > No-change recomposition `.14.2.7` reruns that exact authority and closes the internal value/helper implementation
 > parent `.14.2`. It adds no replacement backend surface and does not promote the combined final `.14.8` row.
@@ -114,8 +114,9 @@
 >
 > Every non-root parent id must name a distinct earlier invocation in the same source authority. A non-progress
 > guard that fires before child frame entry reserves a fresh attempted-child identity, points it at the active
-> parent, records rejection, and pushes no live frame. The original `direct_nonprogress` neutral row self-parents;
-> `.14.4.0.1` must correct that fixture and add identity/order/cycle rejection before `.14.4.1` neutral behavior.
+> parent, records rejection, and pushes no live frame. Corrective `.14.4.0.1` has replaced the original
+> `direct_nonprogress` self-parent with numeric attempted-child lineage and now rejects self-parenting, identity
+> reuse, non-earlier parents, and cycles before `.14.4.1` neutral behavior.
 > Perl `.2`, Rust `.3`, Dart `.4`, Julia `.5`, one shared PUC-Lua/LuaJIT implementation `.6`, recurring `.7`, and
 > public `.8` follow. No recursive-observation authored API or carrier projection is current yet.
 >
