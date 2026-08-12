@@ -783,6 +783,9 @@ local function parser(root_source)
         0
       )
     end
+    local function invalid_recursive_observation(code)
+      error("LINKEDSPEC_SOURCE_LOCATION_ERROR:" .. code, 0)
+    end
     local function recognition_bare_name(argument)
       if argument ~= nil and argument.argument_kind == "positional" and
           argument.value ~= nil and argument.value.kind == "variable" then
@@ -811,6 +814,27 @@ local function parser(root_source)
         text,
         span(start_byte, start_byte + #text),
         { token = token, rule = rule }
+      )
+    elseif callee.name == "observe_recognition" then
+      if #args ~= 2 then
+        invalid_recursive_observation("source_location_recursive_observation_operand")
+      end
+      local target = recognition_bare_name(args[1])
+      if target == nil then
+        invalid_recursive_observation("source_location_recursive_observation_target")
+      end
+      local operand = args[2]
+      local call = operand and operand.argument_kind == "positional" and operand.value or nil
+      local rule = call and call.kind == "call" and call.name == "call" and
+        #call.args == 1 and recognition_bare_name(call.args[1]) or nil
+      if rule == nil then
+        invalid_recursive_observation("source_location_recursive_observation_operand")
+      end
+      transaction_expr = action_ast.expr(
+        "observe_recognition",
+        text,
+        span(start_byte, start_byte + #text),
+        { target = target, rule = rule }
       )
     elseif callee.name == "recognition_commit" or callee.name == "recognition_rollback" then
       if #args ~= 1 then invalid_recognition_form() end

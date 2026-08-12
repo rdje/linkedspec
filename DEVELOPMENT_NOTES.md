@@ -10,6 +10,35 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-12 (`FUTURE-PARITY-BACKLOG.14.4.6` — shared Lua recursive observation): parse the exact special form
+  into one Lua-5.1-compatible `observe_recognition` node; keep the static rule operand unevaluated, and close the
+  existing `binding_write` recognition effect through ordinary rule and user-function call graphs.
+- Extend the existing private recognition transaction authority with direct-parent snapshots and fresh rejected-
+  attempt reservation. A pending scope intercepts only its intended child and disarms at entry, so later ordinary
+  nested recursion retains the existing cutoff.
+- Publish a terminal completion only inside an active observation boundary, consume it immediately, and bind the
+  recursively detached nine-field harray before returning the unchanged payload or propagating the unchanged typed
+  failure. Retain no source text, parser/runtime object, second invocation stack, or parse-wide history.
+- Keep cursor, boundary, match, and mark registers in zero-based UTF-8 bytes. Project entry, selected match, and
+  accepted exit through the existing private `source_location` authority only when constructing the record.
+- Treat an observed action edge as its one child dispatch and retain the existing repeated-action collection
+  topology. Native, reconstructed, generated-plan, and independently loaded emitted-source execution all use the
+  shared engine; the exact 43-assertion consumer and combined 704-assertion focused set pass on each ABI.
+- Add the shared Lua recurring path and CI locks plus one omission mutation. Typed-source proof is 8/6/75 with all
+  six runtimes recorded on the pending observation row; recognition stays 129+4/246/58, language stays
+  246/105+1/122, repeated-action stays 8 governed seams / 54 mutations, and facade/schema/CLI/README stay closed.
+- Complete ordinary Lua and storage 18/3 pass; exact six-runtime typed-source and five-backend repeated-action
+  compositions are green. Recurrence `.14.4.7` remains a no-behavior composition leaf and must follow only after
+  this admission lands cleanly. Rendered book 79/14,548 KiB, Knowledge 826/6,897, and all eight doctrines pass.
+- The first staged canonical run correctly rejects ADR `0056` at 653/640 lines. Preserve every decision while
+  compacting recent backend amendments and consequence wrapping to exactly 640 lines; do not raise the reviewed
+  cap or weaken the README-policy routed-destination guard.
+- The corrected sandboxed canonical restart passes doctrines and every earlier gate, including task-specific Lua
+  43/43 per ABI, before the outer harness denies nested macOS `sandbox-exec` at representative containment with
+  status 71. The unchanged permission-authorized command then passes containment/relocation, CLI 66/66 in both
+  environments, RAM 61%, Phase 0 1,031/1,031 in 734 seconds, and the complete six-runtime typed-source matrix
+  through exact `[ci] local CI gate passed` with exit 0.
+
 - 2026-08-12 (`FUTURE-PARITY-BACKLOG.14.4.5` — Julia recursive observation): parse the exact special form into one
   private `ActionObserveRecognitionExpr`; keep the static rule operand unevaluated, and close the existing
   `binding_write` recognition effect through ordinary rule and user-function call graphs.

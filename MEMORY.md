@@ -4,18 +4,18 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `b1895a05` — clean Dart recursive-observation admission base for Julia atomic 213/300; no push.
-- latest_completed_leaf: `.14.4.5` private Julia recursive observation is signoff-complete for atomic 213/300.
-- active_work_unit: `.14.4.5` complete and staged from clean activation `b1895a05`; atomic commit is the only remaining handoff action.
-- next_action: commit atomic 213/300, clear the brief, prove clean, then activate shared Lua `.14.4.6` task-tree-first.
-- in_flight_uncommitted: none after the intended atomic commit; the exact verified Julia slice is staged for landing.
-- blockers: none. Julia passes 207+30+127+162, full ordinary, storage 19/5, typed source 8/6/74, repeated action 8/54, recognition 129+4/246/58, language 246/105+1/122, book 79/14,528 KiB, Knowledge 825/6,883, all eight doctrines, containment/relocation, CLI 66x2, RAM 60%, and canonical Phase 0 1,031/1,031 in 725 seconds through the exact success marker.
+- activation_commit: `4666ae9c` — clean Julia recursive-observation admission base for shared Lua atomic 214/300; no push.
+- latest_completed_leaf: `.14.4.6` shared Lua recursive observation is signoff-complete for clean atomic 214/300 landing.
+- active_work_unit: `.14.4.6` shared Lua recursive observation is implementation/focused/composed/book/Knowledge/doctrine/canonical GREEN from clean activation `4666ae9c`.
+- next_action: after atomic 214 lands and proves clean, activate recurrence `.14.4.7` task-tree-first and compose only unchanged owners.
+- in_flight_uncommitted: none in the intended committed handoff; `.14.4.6` owns this exact commit and no pivot occurs before it lands cleanly.
+- blockers: none. Canonical passes containment/relocation, CLI 66x2, RAM 61%, Phase 0 1,031/1,031 in 734 seconds, and the exact six-runtime typed-source opt-in through exit 0; Lua remains 43 assertions per ABI.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes. Eleven topology mutations advanced governance to 53, four lineage mutations to 57, and executable
-  neutral observation to 70, Perl admission to 71, Rust admission to 72, Dart admission to 73, and Julia admission
-  to 74. The pending observation row lists Perl, Rust, Dart, and Julia; public authored values and shared-Lua
-  observation remain future. Recognition
+  neutral observation to 70, Perl admission to 71, Rust admission to 72, Dart admission to 73, Julia admission to
+  74, and shared-Lua admission to 75. The pending observation row lists all six runtimes; public authored values
+  and observation recurrence remain future. Recognition
   transactions are current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; recurrence and public no-drift are current at 9/9, closing transaction parent `.14.3` without runtime or public-API movement.
 - recurring_rollout_fact: the original contract combines recurring and public no-drift in one `.14.8` row. Detailed
   plan/history assign `.14.2.6` driver/topology only; do not add a fifteenth row or promote `.14.8` prematurely.
@@ -32,7 +32,8 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   typed positions/spans for validation, coordinates, slicing, materialization, marks, capture boundaries, and cursor
   control while retaining zero-based UTF-8-byte registers and results. One shared 240-assertion consumer now runs
   once per ABI ordinarily/canonically. Private transactions pass authority 187/187 and current admission 246/246 per ABI
-  across four nodes, effect/progress, and all carriers; the modules remain unexported.
+  across four nodes, effect/progress, and all carriers; recursive observation adds one dedicated private node and
+  43 assertions per ABI across four carriers while reusing that authority; the modules remain unexported.
 - current_storage_contract: ADR `0053` keeps all project data on the repository filesystem; use routed wrappers, never OS temp/home caches.
 - current_path_contract: ADR `0052` and `REPO-ROOT-PATHS` require durable root-relative paths and runtime-derived
   absolute roots; moved/outside-CWD execution is canonical.
@@ -54,7 +55,6 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   policy, and authority-backed carriers at 207/207; exact ordinary/canonical proof is current while the API stays private.
   Lua has one shared Lua-5.1 authority at 187/187 and admitted ActionIR/effect/progress/runtime/carriers at 246/246
   per ABI; ordinary/canonical proof runs once per ABI while facade privacy remains unchanged.
-- current_future_direction: Julia `.14.4.5` is signoff-complete from clean Dart admission `b1895a05`; shared Lua/
-  recurring/public `.14.4.6-.8` remain pending behind its clean commit; the closed repeated-action next owner remains
-  `FUTURE-PARITY-BACKLOG.10.1` as required by its historical handoff contract.
-- latest_bootstrap_read: 2026-08-12 — complete roadmap/codebase/mdBook and continuity/tooling review; pivot guard: do not leave Julia `.14.4.5` until its owned tree is committed and clean; push lock is 300.
+- current_future_direction: shared Lua `.14.4.6` is signoff-complete from clean Julia admission `4666ae9c`;
+  recurrence `.14.4.7` is next after clean atomic 214; closed repeated-action next owner remains `FUTURE-PARITY-BACKLOG.10.1`.
+- latest_bootstrap_read: 2026-08-12 — complete roadmap/codebase/mdBook and continuity/tooling review; pivot guard: do not leave shared Lua `.14.4.6` until its owned tree is committed and clean; push lock is 300.

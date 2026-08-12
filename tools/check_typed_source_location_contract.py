@@ -42,6 +42,9 @@ JULIA_OBSERVATION_CONSUMER_PATH = (
 )
 JULIA_RUNTESTS_PATH = ROOT / "julia" / "test" / "runtests.jl"
 LUA_CONSUMER_PATH = ROOT / "lua" / "test" / "typed_source_location_contract_test.lua"
+LUA_OBSERVATION_CONSUMER_PATH = (
+    ROOT / "lua" / "test" / "recursive_observation_contract_test.lua"
+)
 LUA_ORDINARY_DRIVER_PATH = ROOT / "tools" / "run_lua_local.sh"
 RECURRING_DRIVER_PATH = ROOT / "tools" / "check_typed_source_location_six_runtime.sh"
 
@@ -62,7 +65,7 @@ EXPECTED_COUNTS = {
     "rollout_legs": 14,
     "recurring_source_groups": 5,
     "recurring_runtime_routes": 6,
-    "mutations": 74,
+    "mutations": 75,
 }
 
 POLICY = {
@@ -78,8 +81,8 @@ POLICY = {
     "recursion": "entry, selected-match, and accepted-exit observations are read-only; invocation ids are positive, unique, and monotonic; nullable parents are distinct earlier same-authority ids with bounded acyclic links",
     "progress": "repetition, recursion, and staged queues must advance the cursor or prove a well-founded decreasing measure",
     "dispatch_authority": "a span conveys data and provenance only; source, registry, capability, and policy authority remain independently required",
-    "source_spelling": "observe_recognition(observation, call(Child)) is current in Perl, Rust, Dart, and Julia and selected for the remaining runtimes; Position and Span remain private architectural values projected as detached records",
-    "implementation_boundary": "the recursive-observation spelling, dedicated private node, detached carrier, and parser behavior are admitted only in Perl, Rust, Dart, and Julia; PUC Lua and LuaJIT remain pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted",
+    "source_spelling": "observe_recognition(observation, call(Child)) is current in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; Position and Span remain private architectural values projected as detached records",
+    "implementation_boundary": "the recursive-observation spelling, dedicated private node, detached carrier, and parser behavior are admitted in all six runtimes; recurring composition and public no-drift remain pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted",
 }
 
 CANONICAL_EXECUTION = {
@@ -129,7 +132,10 @@ RECURRING_GATE = {
         },
         {
             "backend": "lua",
-            "paths": ["lua/test/typed_source_location_contract_test.lua"],
+            "paths": [
+                "lua/test/typed_source_location_contract_test.lua",
+                "lua/test/recursive_observation_contract_test.lua",
+            ],
         },
     ],
     "route_schema": {
@@ -160,12 +166,12 @@ RECURRING_GATE = {
         {
             "runtime": "puc_lua",
             "source_backend": "lua",
-            "command": "bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_test.lua",
+            "command": "bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_test.lua && bash tools/run_lua_project_data.sh puc lua/test/recursive_observation_contract_test.lua",
         },
         {
             "runtime": "luajit",
             "source_backend": "lua",
-            "command": "bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua",
+            "command": "bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/recursive_observation_contract_test.lua",
         },
     ],
     "support_checks": [
@@ -347,7 +353,7 @@ RECURSIVE_OBSERVATION_SURFACE = {
     "operand": "the second operand is exactly one unevaluated statically named call(Rule)",
     "return": "the expression returns the ordinary child payload unchanged; observation data is never mixed with payload truthiness",
     "terminal": "accepted and failed calls bind before returning; aborted and rejected calls finalize the detached record before propagating the unchanged typed failure",
-    "availability": "private syntax is current only in Perl, Rust, Dart, and Julia; no facade, descriptor/schema, semantic/MCP, CLI, or public support admission is current",
+    "availability": "private syntax is current in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; recurring and public support admission remain pending, and no facade, descriptor/schema, semantic/MCP, or CLI surface is current",
 }
 
 RECURSIVE_OBSERVATION_CARRIER = {
@@ -616,7 +622,7 @@ ROLLOUT = [
         "recursive_observation",
         "pending",
         "FUTURE-PARITY-BACKLOG.14.4",
-        ["perl", "rust", "dart", "julia"],
+        ["perl", "rust", "dart", "julia", "puc_lua", "luajit"],
     ),
     ("lossless_gap_composition", "pending", "FUTURE-PARITY-BACKLOG.14.5", []),
     ("progressive_span_dispatch", "pending", "FUTURE-PARITY-BACKLOG.14.6", []),
@@ -1192,7 +1198,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         fail("contract id drifted")
     if contract["task_owner"] != "FUTURE-PARITY-BACKLOG.14.1.1":
         fail("task owner drifted")
-    if contract["status"] != "neutral_contract_with_perl_rust_dart_julia_recursive_observation":
+    if contract["status"] != "neutral_contract_with_six_runtime_recursive_observation":
         fail("typed source-location status drifted")
     if contract["expected_counts"] != EXPECTED_COUNTS:
         fail("expected counts drifted")
@@ -1838,6 +1844,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             JULIA_OBSERVATION_CONSUMER_PATH,
             JULIA_RUNTESTS_PATH,
             LUA_CONSUMER_PATH,
+            LUA_OBSERVATION_CONSUMER_PATH,
             LUA_ORDINARY_DRIVER_PATH,
             RECURRING_DRIVER_PATH,
         ):
@@ -1865,8 +1872,11 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             "require_tracked_file julia/test/recursive_observation_contract_test.jl",
             "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/typed_source_location_contract_test.jl\"); include(\"julia/test/recursive_observation_contract_test.jl\")'",
             "require_tracked_file lua/test/typed_source_location_contract_test.lua",
+            "require_tracked_file lua/test/recursive_observation_contract_test.lua",
             "bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_test.lua",
+            "bash tools/run_lua_project_data.sh puc lua/test/recursive_observation_contract_test.lua",
             "bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua",
+            "bash tools/run_lua_project_data.sh luajit lua/test/recursive_observation_contract_test.lua",
         ]
         for marker in required_markers:
             if ci_text.count(marker) != 1:
@@ -1951,8 +1961,12 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         lua_ordinary_markers = (
             'LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" '
             "lua/test/typed_source_location_contract_test.lua",
+            'LINKEDSPEC_LUA_TEST_RUNTIME="$LUA_CMD" "$LUA_CMD" '
+            "lua/test/recursive_observation_contract_test.lua",
             'LUA_CPATH="$secondary_native/?.so;;" LINKEDSPEC_LUA_TEST_RUNTIME="$LUAJIT_CMD" \\\n'
             '  "$LUAJIT_CMD" lua/test/typed_source_location_contract_test.lua',
+            'LUA_CPATH="$secondary_native/?.so;;" LINKEDSPEC_LUA_TEST_RUNTIME="$LUAJIT_CMD" \\\n'
+            '  "$LUAJIT_CMD" lua/test/recursive_observation_contract_test.lua',
         )
         for marker in lua_ordinary_markers:
             if lua_ordinary_text.count(marker) != 1:
@@ -1966,6 +1980,17 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         ):
             if stale_marker in lua_consumer_text:
                 fail(f"Lua consumer retains stale dormancy marker: {stale_marker}")
+        lua_observation_text = LUA_OBSERVATION_CONSUMER_PATH.read_text(
+            encoding="utf-8"
+        )
+        for marker in (
+            "observe_recognition(observation, call(Child))",
+            'objects_with_kind(top, "observe_recognition")',
+            "execute_generated_parser_v2",
+            "emit_lua_source_v2",
+        ):
+            if marker not in lua_observation_text:
+                fail(f"Lua recursive-observation consumer marker is missing: {marker}")
 
 
 def expect_mutation_failure(
@@ -2111,6 +2136,12 @@ def mutation_checks(contract: dict[str, Any]) -> int:
             "Julia recursive observation admission omitted",
             lambda c: c["rollout"][9].__setitem__(
                 "runtimes", ["perl", "rust", "dart"]
+            ),
+        ),
+        (
+            "Lua recursive observation admission omitted",
+            lambda c: c["rollout"][9].__setitem__(
+                "runtimes", ["perl", "rust", "dart", "julia"]
             ),
         ),
         ("structural case removed", lambda c: c["structural_authoring_cases"].pop()),

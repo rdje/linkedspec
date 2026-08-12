@@ -46,11 +46,11 @@ log "checking the Dart immutable values, exact helper projections, and recursive
 log "checking the Julia immutable values and exact helper projections"
 bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include("julia/test/typed_source_location_contract_test.jl"); include("julia/test/recursive_observation_contract_test.jl")'
 
-log "checking the shared Lua immutable values and exact helper projections on PUC Lua"
-bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_test.lua
+log "checking the shared Lua immutable values, exact helper projections, and recursive observation on PUC Lua"
+bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_test.lua && bash tools/run_lua_project_data.sh puc lua/test/recursive_observation_contract_test.lua
 
-log "checking the shared Lua immutable values and exact helper projections on LuaJIT"
-bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua
+log "checking the shared Lua immutable values, exact helper projections, and recursive observation on LuaJIT"
+bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/recursive_observation_contract_test.lua
 
 log "checking generated-source, capability, and language-coverage ledgers"
 perl tools/check_generated_source_contract.pl

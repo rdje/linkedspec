@@ -346,6 +346,7 @@ function M.enter_invocation(authority_value, options)
   if type(options.rule) ~= "string" then fail("enter_invocation rule must be a string") end
   if type(options.origin) ~= "string" then fail("enter_invocation origin must be a string") end
   local supplied_state = state_of(options.state, "RecognitionFrameState")
+  local parent = authority.invocation_stack[#authority.invocation_stack]
   local frame = {
     authority_id = authority.authority_id,
     source_authority = authority.source_authority,
@@ -353,6 +354,7 @@ function M.enter_invocation(authority_value, options)
     rule = options.rule,
     origin = options.origin,
     invocation = claim_generation(authority, "next_invocation"),
+    parent_invocation = parent and parent.invocation or nil,
     generation = claim_generation(authority, "next_generation"),
     active = true,
     frame_state = copy_frame_state(supplied_state),
@@ -360,6 +362,27 @@ function M.enter_invocation(authority_value, options)
   }
   authority.invocation_stack[#authority.invocation_stack + 1] = frame
   return new_token("RecognitionInvocationFrame", { frame = frame })
+end
+
+function M.invocation_identity(authority_value, frame_value)
+  local authority = authority_state(authority_value)
+  local frame = frame_for_authority(authority, frame_value)
+  return json.harray({
+    rule_label = frame.rule,
+    invocation_id = frame.invocation,
+    parent_invocation_id = frame.parent_invocation or json.null,
+  })
+end
+
+function M.reserve_rejected_invocation(authority_value, rule)
+  local authority = authority_state(authority_value)
+  if type(rule) ~= "string" then fail("reserve_rejected_invocation rule must be a string") end
+  local parent = authority.invocation_stack[#authority.invocation_stack]
+  return json.harray({
+    rule_label = rule,
+    invocation_id = claim_generation(authority, "next_invocation"),
+    parent_invocation_id = parent and parent.invocation or json.null,
+  })
 end
 
 function M.frame_snapshot(authority_value, frame_value)

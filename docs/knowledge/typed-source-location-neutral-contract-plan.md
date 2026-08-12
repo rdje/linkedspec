@@ -43,7 +43,7 @@ evidence_update_2026_08_07_capability_guide_drift: "The .14.2.5.3 current-surfac
 evidence_update_2026_08_09_recurring_topology: "Recurring composition .14.2.6 binds five backend consumer groups to exact Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT routes plus three support ledgers through one repository-routed driver and canonical opt-in. Eleven independent topology mutations advance current governance to 53 while rollout remains 8/6 because the combined recurring_public_no_drift row belongs to final .14.8. No neutral fixture, runtime result, register, schema, DSL, README, hosted workflow, or storage root changes."
 evidence_update_2026_08_09_value_rollout_closeout: "No-change recomposition .14.2.7 reruns the committed six-runtime driver at neutral 8/6/53, Perl 10, Rust/Dart 4/4, Julia 127, PUC Lua/LuaJIT 240/240, generated-source strict Rust 105/105, capability 80/0/0, and language 246/105+1/122. Its pre-lockstep diff contains only the owning task tree, proving no replacement implementation, consumer, fixture, contract, schema, helper, CLI, storage, README, hosted workflow, or .14.8 promotion. This composition closes internal value/helper slice .14.2; transactions remain .14.3 and final public no-drift remains .14.8."
 evidence_update_2026_08_12_recursive_observation: "Corrective .14.4.0.1 advances neutral lineage to 57 mutations. Executable neutral .14.4.1 adds 33 deterministic transitions, selects future observe_recognition(observation, call(Child)) with one separate detached nine-field harray, adds two static diagnostics, and reaches 70 mutations. It preserves 8 complete / 6 pending and admits no backend/runtime/public/schema/CLI behavior."
-evidence_update_2026_08_12_observation_admissions: "Perl .14.4.2, Rust .14.4.3, Dart .14.4.4, and Julia .14.4.5 admit the neutral observation boundary privately without promoting the parent row. One omission regression per runtime advances governance to 74 while rollout stays 8 complete / 6 pending; shared Lua, recurring observation composition, and public closeout remain future."
+evidence_update_2026_08_12_observation_admissions: "Perl .14.4.2, Rust .14.4.3, Dart .14.4.4, Julia .14.4.5, and shared Lua .14.4.6 admit the neutral observation boundary privately on all six runtimes without promoting the parent row. One omission regression per backend implementation advances governance to 75 while rollout stays 8 complete / 6 pending; recurring observation composition and public closeout remain future."
 evidence_update_2026_08_12_recursive_observation_signoff: "Complete signoff passes the exact six-runtime typed-source composition, strict generated Rust 105/105, capability 80/0/0, language 246/105+1/122, rendered book, Knowledge 821/6831, all eight doctrines, six-family process containment, repository relocation, CLI 66x2, RAM 35%, and canonical Phase 0 1031/1031 in 714 seconds through the exact local-CI marker and exit 0."
 reverify: "bash tools/check_typed_source_location_six_runtime.sh && rg -n 'complex regex|Single regex|recursive regex|single-regex multi-classification' docs/linkedspec-book/src/specs-and-corpora"
 ---
@@ -59,8 +59,8 @@ The frozen neutral envelope has three decoded sources, seven position conversion
 text/provenance cases, eight invocation-state transitions, eight transaction transitions, 33 recursive-observation
 transitions, six detached recursive-observation cases, four structural-authoring cases, 92 canonical helper
 projections, seven callable compatibility aliases, two internal contract ids, 33 exact diagnostics, 14 rollout
-legs, and 74 independent mutations. The recursive-observation spelling/carrier is selected by the neutral contract
-and privately admitted on Perl, Rust, Dart, and Julia while shared Lua remains pending.
+legs, and 75 independent mutations. The recursive-observation spelling/carrier is selected by the neutral contract
+and privately admitted on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT.
 
 The 92 modern current helpers divide into 47 capture/mark, 30 entry/match, 11 input/cursor, and four explicit cursor
 controls. Perl retains seven callable aliases: `capture_from_rule_start`, `capture_len_from_rule_start`,
@@ -89,5 +89,5 @@ future `value = observe_recognition(observation, call(Child))`: one bare local h
 call, and the unchanged ordinary child payload as expression result. The separate nine-field observation uses
 ordinary harray field access and retains no parse-wide history. Thirteen new mutations advance the checker to 70;
 this is neutral authority rather than backend admission, so rollout remains 8 complete / 6 pending. Subsequent
-private Perl, Rust, Dart, and Julia admissions add one omission regression each for 74 total mutations without
+private Perl, Rust, Dart, Julia, and shared-Lua admissions add one omission regression each for 75 total mutations without
 promoting the parent observation row.

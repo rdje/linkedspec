@@ -310,6 +310,7 @@ local function context(
     active_codeblocks = {},
     mark_buckets = {},
     recognition_frames = recognition_state.recognition_frames,
+    recursive_observation_scopes = recognition_state.recursive_observation_scopes,
     active = {},
     lifecycle_events = {},
     diagnostic_sink = diagnostic_sink,
@@ -538,7 +539,7 @@ local function dispatch_edge_child(engine, edge_state, ctx)
     })
   end
   local passive = is_passive_terminal_rule(child_rule)
-  if passive then
+  if passive and not typed_source.recognition.expects_observation(ctx, edge_state.target.label) then
     edge_state.child_result = rule_result(false, json.null)
   else
     edge_state.child_result = execute_rule(engine, edge_state.target.label, edge_state.target.index, ctx)
@@ -3106,6 +3107,34 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
       child.value
     )
   end
+  if kind == "observe_recognition" then
+    local scope = typed_source.recognition.begin_observation(ctx, expr.rule)
+    local ok, child = pcall(function()
+      if edge_state ~= nil and edge_state.target.label == expr.rule then
+        return dispatch_edge_child(engine, edge_state, ctx)
+      end
+      return execute_rule(engine, expr.rule, 0, ctx)
+    end)
+    if ok then
+      ctx.retv = copy_value(child.value)
+      typed_source.recognition.bind_observation(
+        ctx,
+        ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule,
+        expr.target,
+        scope
+      )
+      return copy_value(child.value)
+    end
+    if typed_source.recognition.observation_scope_is_active(ctx, scope) then
+      typed_source.recognition.bind_observation(
+        ctx,
+        ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule,
+        expr.target,
+        scope
+      )
+    end
+    error(child, 0)
+  end
   if kind == "recognition_commit" then
     return typed_source.recognition.commit(
       ctx,
@@ -4097,6 +4126,7 @@ end
 local function accept_match(engine, rule, one, ctx, accumulator, action_iteration_values)
   ctx.cursor_byte = one.byte_end
   ctx.registers = ctx.registers:with_local_match(one)
+  typed_source.recognition.note_match(ctx, one)
   for _, edge in ipairs(rule.action_edges) do
     if edge.regex_index == one.alternative_index then
       local edge_state = {
@@ -4347,6 +4377,21 @@ execute_rule = function(engine, label, entry_index, ctx)
         " cursor=" .. tostring(ctx.cursor_byte),
       trace.TRACE_DEBUG
     )
+    if typed_source.recognition.expects_observation(ctx, label) then
+      local code = typed_source.recognition.reject_observation(ctx, label, ctx.cursor_byte)
+      fail(code, {
+        code = code,
+        rule_label = label,
+        diagnostic = runtime_diagnostic(engine, {
+          stage = "runtime_execution",
+          code = code,
+          summary = "Lua recursive recognition made no progress",
+          detail = code,
+          top_rule = ctx.top_rule,
+          rule_label = label,
+        }),
+      })
+    end
     return rule_result(false, json.null)
   end
   ctx.active[recursion_key] = true
@@ -4373,6 +4418,7 @@ execute_rule = function(engine, label, entry_index, ctx)
     ctx.active[recursion_key] = nil
     error(recognition_error, 0)
   end
+  typed_source.recognition.note_observation_entry(ctx, label, ctx.cursor_byte)
   local accumulator = json.array()
   local action_iteration_values = collects_explicit_action_iteration_values(rule) and json.array() or nil
   ctx.accumulator_stack[#ctx.accumulator_stack + 1] = { label = label, values = accumulator }
@@ -4479,10 +4525,24 @@ execute_rule = function(engine, label, entry_index, ctx)
     local value = action_iteration_values ~= nil and action_iteration_values or finish_value(accumulator, ctx.retv)
     return rule_result(count > 0, value)
   end)
+  local recognition_result
+  local recognition_terminal_error
+  if ok then
+    recognition_result = result_or_flow
+  else
+    recognition_terminal_error = result_or_flow
+    if getmetatable(result_or_flow) == FLOW_MT and
+        (result_or_flow.kind == "return" or result_or_flow.kind == "next") then
+      recognition_result = rule_result(true, result_or_flow.value)
+      recognition_terminal_error = nil
+    end
+  end
   local recognition_leave_ok, recognition_leave_error = pcall(
-    typed_source.recognition.leave_invocation,
+    typed_source.recognition.leave_invocation_with_outcome,
     ctx,
-    label
+    label,
+    recognition_result,
+    recognition_terminal_error
   )
   if not recognition_leave_ok then
     ok = false

@@ -20,7 +20,7 @@ answers:
 date: 2026-08-12
 status: accepted architecture; internal values and transactions complete; recursive observation private on Perl Rust Dart Julia
 tags: [architecture, cursor, source-location, spans, capture, recursion, parser-composition, diagnostics, portability]
-evidence: "Director approval on 2026-07-29 plus ADR 0056. FUTURE-PARITY-BACKLOG.14.1 completed the executable base model and structural teaching; .14.2 completed the internal immutable value/projection layer on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT at 8 complete / 6 pending; .14.3 closed exact six-runtime recognition transactions at rollout 9/9; .14.4.0-.1 freeze recursive observation and fail-closed lineage; .14.4.1 makes the neutral state machine executable; and .14.4.2-.5 privately admit Perl, Rust, Dart, and Julia at 74 mutations while shared Lua remains pending."
+evidence: "Director approval on 2026-07-29 plus ADR 0056. FUTURE-PARITY-BACKLOG.14.1 completed the executable base model and structural teaching; .14.2 completed the internal immutable value/projection layer on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT at 8 complete / 6 pending; .14.3 closed exact six-runtime recognition transactions at rollout 9/9; .14.4.0-.1 freeze recursive observation and fail-closed lineage; .14.4.1 makes the neutral state machine executable; and .14.4.2-.6 privately admit Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT at 75 mutations while recurrence remains pending."
 reverify: "rg -n 'source-location algebra|Cursor transactions|Progressive and staged parsing consume spans|Lossless segmentation|FUTURE-PARITY-BACKLOG[.]14[.]0[.]1' docs/decisions/0056-typed-source-location-and-cursor-algebra.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -53,7 +53,7 @@ ADR `0056` ratified `recognition_checkpoint()` / `recognize_once(token, call(Rul
 child payload remains staged until commit, so falsey successful values are not collapsed into failure. Neutral,
 six-runtime transaction admission, recurrence, and public no-drift are complete. Recursive observation has a
 behavior-free six-runtime audit, fail-closed neutral lineage, and private Perl/Rust/Dart/Julia implementations;
-shared Lua, recurring/public closeout, gap composition, progressive/staged dispatch, and final typed-source
+recurring/public closeout, gap composition, progressive/staged dispatch, and final typed-source
 no-drift continue under `FUTURE-PARITY-BACKLOG.14.4.6-.14.8`.
 
 Related records: [[cursor-transaction-safety-audit-plan]], [[recursive-source-observation-audit]].

@@ -495,6 +495,145 @@ local function validate_no_removed_aggregate_selectors(compiled)
   end
 end
 
+local function recursive_observation_effects(value, function_names)
+  local effects = {
+    writes_observation = false,
+    rule_calls = {},
+    function_calls = {},
+    recognition_attempts = {},
+    observed_rules = {},
+  }
+
+  local function visit(node)
+    if type(node) ~= "table" then return end
+    local kind = node.kind
+    if kind == "observe_recognition" then
+      effects.writes_observation = true
+      if type(node.rule) == "string" then effects.observed_rules[node.rule] = true end
+    elseif kind == "recognize_once" then
+      if type(node.rule) == "string" then effects.recognition_attempts[node.rule] = true end
+    elseif kind == "call" then
+      if node.name == "call" and type(node.args) == "table" and #node.args == 1 then
+        local argument = node.args[1]
+        if type(argument) == "table" and argument.kind == "variable" and
+            type(argument.name) == "string" then
+          effects.rule_calls[argument.name] = true
+        end
+      elseif type(node.name) == "string" and function_names[node.name] then
+        effects.function_calls[node.name] = true
+      end
+    end
+    for _, child in pairs(node) do visit(child) end
+  end
+
+  visit(value)
+  return effects
+end
+
+local function action_payloads_for_recursive_observation(rule)
+  local payloads = {}
+  for _, edge in ipairs(rule.action_edges) do
+    if edge.action_payload then payloads[#payloads + 1] = edge.action_payload end
+  end
+  for _, edge in ipairs(rule.blind_edges) do
+    if edge.action_payload then payloads[#payloads + 1] = edge.action_payload end
+  end
+  for _, payload in ipairs(rule.lifecycle_action_payloads) do payloads[#payloads + 1] = payload end
+  for _, payload in ipairs(rule.plain_action_payloads) do payloads[#payloads + 1] = payload end
+  return payloads
+end
+
+local function recursive_observation_inherits(effects, rule_writes, function_writes)
+  for callee in pairs(effects.rule_calls) do
+    if rule_writes[callee] then return true end
+  end
+  for callee in pairs(effects.function_calls) do
+    if function_writes[callee] then return true end
+  end
+  return false
+end
+
+local function validate_recursive_observation_policy(compiled)
+  local function_names = {}
+  for _, entry in ipairs(compiled.function_registry.entries) do
+    function_names[entry.definition.name] = true
+  end
+
+  local rule_effects = {}
+  for _, label in ipairs(compiled.compiled_rule_order) do
+    local projected = json.array()
+    for index, payload in ipairs(
+        action_payloads_for_recursive_observation(compiled.rules_by_label[label])
+      ) do
+      projected[index] = action_ast.to_json(payload.action_ast)
+    end
+    rule_effects[label] = recursive_observation_effects(projected, function_names)
+  end
+
+  local function_effects = {}
+  for _, entry in ipairs(compiled.function_registry.entries) do
+    local definition = entry.definition
+    function_effects[definition.name] = recursive_observation_effects(
+      action_ast.to_json(action_parser.parse_action_block(definition.body_source)),
+      function_names
+    )
+  end
+
+  for _, effect_map in ipairs({ rule_effects, function_effects }) do
+    for _, effects in pairs(effect_map) do
+      for observed_rule in pairs(effects.observed_rules) do
+        if compiled.rules_by_label[observed_rule] == nil then
+          fail(
+            "source_location_recursive_observation_operand missing static rule '" ..
+              observed_rule .. "'",
+            { code = "source_location_recursive_observation_operand", target_label = observed_rule }
+          )
+        end
+      end
+    end
+  end
+
+  local rule_writes = {}
+  local function_writes = {}
+  for owner, effects in pairs(rule_effects) do rule_writes[owner] = effects.writes_observation end
+  for owner, effects in pairs(function_effects) do
+    function_writes[owner] = effects.writes_observation
+  end
+
+  local changed = true
+  while changed do
+    changed = false
+    for owner, effects in pairs(rule_effects) do
+      if not rule_writes[owner] and
+          recursive_observation_inherits(effects, rule_writes, function_writes) then
+        rule_writes[owner] = true
+        changed = true
+      end
+    end
+    for owner, effects in pairs(function_effects) do
+      if not function_writes[owner] and
+          recursive_observation_inherits(effects, rule_writes, function_writes) then
+        function_writes[owner] = true
+        changed = true
+      end
+    end
+  end
+
+  for _, effect_map in ipairs({ rule_effects, function_effects }) do
+    for owner, effects in pairs(effect_map) do
+      for target in pairs(effects.recognition_attempts) do
+        if rule_writes[target] then
+          fail(
+            "recognition_effect_forbidden:binding_write owner=" .. owner ..
+              " target=" .. target,
+            { code = "recognition_effect_forbidden", effect = "binding_write", owner = owner, target = target }
+          )
+        end
+      end
+    end
+  end
+end
+
 local function authored_regex_count(rule)
   local count = 0
   for _, element in ipairs(rule.body_elements) do
@@ -625,6 +764,7 @@ function M.compile_spec(spec, options)
       }, COMPILED_SPEC_MT)
       M.validate_compiled_regex_slot_identities(compiled)
       validate_no_removed_aggregate_selectors(compiled)
+      validate_recursive_observation_policy(compiled)
       return compiled
     end,
     function(compiled)

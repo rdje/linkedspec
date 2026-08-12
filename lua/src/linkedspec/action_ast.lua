@@ -182,6 +182,7 @@ find_removed_aggregate_selector = function(value)
     end
     return find_in_args(value.args)
   elseif kind == "recognition_checkpoint" or kind == "recognize_once" or
+      kind == "observe_recognition" or
       kind == "recognition_commit" or kind == "recognition_rollback" then
     return nil
   elseif kind == "fluent_chain" then

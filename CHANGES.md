@@ -10,6 +10,35 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-12 — FUTURE-PARITY-BACKLOG.14.4.6 — admit Lua recursive observation
+
+- Added the exact private `observe_recognition(observation, call(Child))` form to shared Lua as one dedicated,
+  serialized action node with fail-closed target, operand, static-rule, and transaction-effect validation.
+- Reused the existing parse-local recognition invocation authority for direct-parent lineage and fresh rejected-
+  attempt ids. One pending-entry scope consumes one ephemeral completion and binds the detached nine-field record
+  without adding a second stack or retained parse history.
+- Preserved child payload/error identity, zero-based UTF-8-byte registers, child-owned family/cursor policy,
+  terminal local match, action-edge single dispatch, and rule-local binding across native, reconstructed,
+  generated-plan, and independently loaded emitted-source carriers.
+- Added one Lua-5.1-compatible 43-assertion ordinary/canonical consumer covering static drift, falsey success,
+  typed Unicode-scalar projection, detachment, failed/zero-regex/action-edge outcomes, nested separation, abort,
+  direct/mutual rejection, and all four carriers independently on PUC Lua and LuaJIT.
+- Recorded both Lua runtimes alongside Perl, Rust, Dart, and Julia on the still-pending observation row. Typed-
+  source governance is now 75 mutations at unchanged 8 complete / 6 pending; recognition remains 129+4/246/58,
+  repeated action remains 8/54, language remains 246/105+1/122, and public surfaces stay closed.
+- Complete ordinary Lua, storage 18/3, exact six-runtime typed-source, and five-backend repeated-action proof pass.
+  ADR, Knowledge, capability guidance, roadmaps/live state, and the sole-facing mdBook are synchronized; recurrence
+  and public closeout remain owned by `.14.4.7-.8`. The rendered book passes 79 files / 14,548 KiB, Knowledge
+  passes 826 facts / 6,897 question keys, and all eight doctrines pass.
+- The first staged canonical run stopped at the README-policy routed-destination guard because ADR `0056` reached
+  653 lines against its reviewed 640-line cap. Content-preserving compaction of recent admission amendments and
+  consequences returns the ADR to exactly 640 lines without raising or bypassing the pressure control.
+- The corrected staged sandbox run passed every doctrine and project gate through relocation, then stopped only
+  when the outer harness denied nested macOS `sandbox-exec` with status 71. The unchanged permission-authorized
+  canonical run passes containment/relocation, CLI 66/66 in both option environments, RAM 61%, Phase 0
+  1,031/1,031 in 734 seconds, and the complete six-runtime typed-source opt-in through exact
+  `[ci] local CI gate passed` with exit 0.
+
 ## 2026-08-12 — FUTURE-PARITY-BACKLOG.14.4.5 — admit Julia recursive observation
 
 - Added the exact private `observe_recognition(observation, call(Child))` form to Julia as one dedicated action

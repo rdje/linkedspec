@@ -495,6 +495,7 @@ local function resolver(function_registry)
       resolve_call(normalized.name, normalized.source, normalized.source_span, "function", normalized.args)
       visit_args(normalized.args)
     elseif kind == "recognition_checkpoint" or kind == "recognize_once" or
+        kind == "observe_recognition" or
         kind == "recognition_commit" or kind == "recognition_rollback" then
       -- Grammar-owned recognition intrinsics are dedicated ActionIR nodes,
       -- not entries in the ordinary callable-helper registry.

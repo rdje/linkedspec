@@ -597,20 +597,23 @@ CLI option, README claim, or Dart/Julia/Lua behavior.
 - The existing invocation authority supplies parent and rejected-child identity; one pending-entry scope consumes one detached completion, binds before typed failure propagation, and retains neither a second stack nor history.
 - Existing zero-based UTF-8 code-unit registers cross `SourceLocation` only when projecting Unicode-scalar record positions/spans. Seven final-path groups and 30 assertions are canonical; the pending row records Perl/Rust/Dart/Julia at 8/6/74 with no public facade/helper/value/schema/semantic/MCP/CLI/README or Lua movement.
 
+### 26. Admit the same private recursive-observation boundary in shared Lua
+
+- `.14.4.6` adds one Lua-5.1-compatible dedicated `observe_recognition` action node; exact bare-target/static-call validation and recursive rule/function effect closure reject malformed operands, missing rules, and transaction-reachable `binding_write` before execution.
+- One shared-engine child dispatch preserves payload, family/cursor ownership, and terminal match across native, reconstructed, generated-plan, and independently loaded emitted-source carriers.
+- The existing recognition authority supplies parent and rejected-child identity; one pending-entry scope consumes one detached completion, binds before typed failure propagation, and retains neither a second stack nor history.
+- Existing zero-based UTF-8-byte registers cross the private `source_location` authority only when projecting Unicode-scalar record positions/spans. One Lua-5.1-compatible 43-assertion final-path consumer is canonical on PUC Lua and LuaJIT; the pending row records all six runtimes at 8/6/75 with no public facade/helper/value/schema/semantic/MCP/CLI/README movement.
+
 ## Consequences
 
-- Cursor control, capture, recursion, segmentation, and parser composition share one precise model instead of
-  accumulating pairwise helper semantics.
+- Cursor control, capture, recursion, segmentation, and parser composition share one precise model instead of accumulating pairwise helper semantics.
 - Immutable spans make exact text extraction cheap, provenance-preserving, and safe to pass between parser stages.
-- Explicit cursor transactions add controlled local speculation without converting LinkedSpec into a packrat,
-  PEG backtracking, GLL, or general search-tree parser and without pretending arbitrary side effects can roll back.
+- Explicit cursor transactions add controlled local speculation without converting LinkedSpec into a packrat, PEG backtracking, GLL, or general search-tree parser and without pretending arbitrary side effects can roll back.
 - Progress becomes a portable contract rather than a backend timeout/stack-overflow convention.
-- Current helper APIs and intrinsic rule-local cursor policy remain valid. The separately owned `.14.3` migration
-  from execution-wide rule-label mark buckets to invocation frames is explicit, versioned, and mechanically checked.
-- The accepted `recognition_*` spellings are deliberately verbose enough to distinguish bounded recognition from
-  compatibility cursor stacks, host exception handling, and systemic backtracking. Their neutral authority is
-  executable, and the spellings plus exact recurring proof are current on independently admitted Perl, Rust, Dart,
-  Julia, PUC Lua, and LuaJIT runtimes.
+- Current helper APIs and intrinsic rule-local cursor policy remain valid. The separately owned `.14.3` migration from execution-wide rule-label mark buckets to invocation frames is explicit, versioned, and mechanically checked.
+- The accepted `recognition_*` spellings are deliberately verbose enough to distinguish bounded recognition from compatibility cursor stacks, host exception handling, and systemic backtracking. Their neutral authority is executable, and the spellings plus exact recurring proof are current on independently admitted Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT runtimes.
+- The accepted private recursive-observation spelling and detached carrier are implemented on those same six
+  runtimes. Runtime admission alone does not promote the separately owned recurring or public closeout rows.
 - Lossless gap capture gains the common typed representation it anticipated while retaining its separate owner.
 - This decision and its `.14.3.0` audit amendment change no grammar, helper, parser/compiler/runtime, descriptor,
   generated format, semantic/MCP response, primary CLI, rollout, admission, or current public feature-completeness

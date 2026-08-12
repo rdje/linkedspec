@@ -418,6 +418,7 @@ require_tracked_file dart/test/recursive_observation_contract_test.dart
 require_tracked_file julia/test/typed_source_location_contract_test.jl
 require_tracked_file julia/test/recursive_observation_contract_test.jl
 require_tracked_file lua/test/typed_source_location_contract_test.lua
+require_tracked_file lua/test/recursive_observation_contract_test.lua
 require_tracked_file lua/test/source_boundary_compatibility_aliases_test.lua
 require_tracked_file t/variadic_user_function_contract.t
 require_tracked_file t/callable_codeblock_literal_contract.t
@@ -637,11 +638,13 @@ log "running exact Dart typed source-location value, projection, and recursive-o
 log "running exact Julia typed source-location value and projection admission consumer"
 bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include("julia/test/typed_source_location_contract_test.jl"); include("julia/test/recursive_observation_contract_test.jl")'
 
-log "running exact Lua typed source-location value and projection admission consumer on PUC Lua"
+log "running exact Lua typed source-location value, projection, and recursive-observation admission consumers on PUC Lua"
 bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_test.lua
+bash tools/run_lua_project_data.sh puc lua/test/recursive_observation_contract_test.lua
 
-log "running exact Lua typed source-location value and projection admission consumer on LuaJIT"
+log "running exact Lua typed source-location value, projection, and recursive-observation admission consumers on LuaJIT"
 bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua
+bash tools/run_lua_project_data.sh luajit lua/test/recursive_observation_contract_test.lua
 
 log "checking backend-neutral root-rule selection contract"
 bash tools/run_python_project_data.sh tools/check_root_rule_selection_contract.py

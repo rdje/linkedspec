@@ -1,10 +1,10 @@
 # ARCHITECTURE STATE
 
-## Recursive source observation is privately admitted in Perl, Rust, Dart, and Julia
+## Recursive source observation is privately admitted on all six runtimes
 
 `FUTURE-PARITY-BACKLOG.14.4.1` selected
-`value = observe_recognition(observation, call(Child))`; `.14.4.2-.5` admit it privately in Perl, Rust, Dart, and
-Julia. The first operand is one bare rule-local harray binding; the second is one unevaluated statically named call.
+`value = observe_recognition(observation, call(Child))`; `.14.4.2-.6` admit it privately in Perl, Rust, Dart,
+Julia, PUC Lua, and LuaJIT. The first operand is one bare rule-local harray binding; the second is one unevaluated statically named call.
 The expression preserves the ordinary child payload—including falsey accepted values—while the binding receives a
 separate recursively detached record at the terminal boundary. Accepted/failed calls bind before returning;
 aborted/rejected calls finalize the record before propagating their unchanged typed failure.
@@ -19,20 +19,26 @@ The neutral checker now executes 33 ordered transitions over invocation ids `1..
 entry, caller-cursor capture before `I`, child-owned OR/default seek and AND consume, terminal local-match
 replacement, zero-regex absence, accepted-only exit, all four outcomes, fresh rejected-child ids without frame
 push, immediate detach, and unavailable history. Two static target/operand diagnostics plus ten reason-checked
-state corruptions and three surface/topology mutations advance typed-source governance from 57 to 70. Four backend
-admission regressions take the total to 74 while rollout stays 8 complete / 6 pending. Each runtime owns one private
-dedicated node, fail-closed static/effect policy, and the existing monotonic invocation authority. Rust, Dart, and
-Julia additionally prove reconstructed, generated-plan, and emitted carriers; their internal byte/code-unit
-registers cross existing source authorities only at Unicode-scalar record projection. The pending recursive-
-observation row lists Perl, Rust, Dart, and Julia. No public helper/value, facade, descriptor/generated schema,
-result schema, semantic/MCP projection, CLI, README, or Lua behavior becomes current; shared Lua `.14.4.6` follows
-only after clean Julia landing.
+state corruptions and three surface/topology mutations advance typed-source governance from 57 to 70. Five backend
+admission regressions take the total to 75 while rollout stays 8 complete / 6 pending. Each runtime owns one private
+dedicated node, fail-closed static/effect policy, and the existing monotonic invocation authority. Rust, Dart,
+Julia, and shared Lua additionally prove reconstructed, generated-plan, and emitted carriers; their internal
+byte/code-unit registers cross existing source authorities only at Unicode-scalar record projection. The pending
+recursive-observation row lists all six runtimes. No public helper/value, facade, descriptor/generated schema,
+result schema, semantic/MCP projection, CLI, or README behavior becomes current; recurrence `.14.4.7` follows only
+after clean shared-Lua landing.
 
-The Julia final-path consumer passes seven groups / 30 assertions; combined transaction/observation/typed-source/
-repeated-action proof passes 207+30+127+162. Exact six-runtime typed-source and five-backend repeated-action
-composition are GREEN. Final book 79/14,528 KiB, Knowledge 825/6,883, all eight doctrines, repository containment
-and relocation, CLI 66x2, RAM 60%, and canonical Phase 0 1,031/1,031 in 725 seconds pass through the exact local-CI
-success marker. Julia leaf `.14.4.5` is signoff-complete and must land cleanly before shared Lua `.14.4.6` activates.
+The shared Lua final-path consumer passes 43 assertions independently on PUC Lua and LuaJIT; combined per-ABI
+transaction/observation/typed-source/repeated-action proof passes 246+43+240+175. Complete ordinary Lua, storage
+18/3, exact six-runtime typed-source, and five-backend repeated-action composition are GREEN. The rendered book
+passes 79 files / 14,548 KiB, Knowledge passes 826 facts / 6,897 question keys, and all eight doctrines pass.
+Recurrence and public closeout remain separately owned by `.14.4.7-.8`.
+
+Definitive shared-Lua signoff passes repository containment and relocation, primary CLI 66/66 in both option
+environments, RAM 61%, canonical Phase 0 1,031/1,031 in 734 seconds, and the complete opt-in six-runtime typed-
+source matrix. That matrix independently passes Lua typed source 240 plus recursive observation 43 on PUC Lua
+and LuaJIT before exact `[ci] local CI gate passed` and exit 0. The first sandboxed attempt stopped only because
+the outer harness denied nested macOS `sandbox-exec`; the unchanged permission-authorized run is authoritative.
 
 ## Recursive source-observation lineage is fail-closed on the existing invocation authority
 

@@ -101,7 +101,7 @@
 > lifecycle ownership. The neutral contract and all six internal value/projection runtime targets are admitted.
 > Existing helpers retain their public results and established scalar, byte, or code-unit mark/cursor behavior.
 >
-> Public authored typed values, shared-Lua recursive observation, and span-native dispatch remain owned by later leaves. The combined
+> Public authored typed values, recursive-observation recurrence, and span-native dispatch remain owned by later leaves. The combined
 > recurring/public no-drift row stays pending for final program-wide owner `FUTURE-PARITY-BACKLOG.14.8`; the
 > transaction closeout does not promote that separate typed-source row early.
 >
@@ -139,9 +139,11 @@
 > `ActionObserveRecognitionExpr` across native, reconstructed, generated-plan, and independently loaded emitted-
 > module execution. It reuses the same authority, projects zero-based UTF-8 code-unit registers to Unicode-scalar
 > records only at the typed boundary, preserves falsey payloads and child-owned cursor policy, binds before typed
-> failure propagation, retains no history, and is a forbidden transaction binding-write. One shared PUC-Lua/LuaJIT
-> implementation `.6`, recurring `.7`,
-> and public `.8` follow. No public helper/value/schema/facade/semantic/MCP/CLI/README surface moved.
+> failure propagation, retains no history, and is a forbidden transaction binding-write. Shared Lua `.6` now
+> admits one Lua-5.1-compatible dedicated `observe_recognition` node across native, reconstructed, generated-plan,
+> and independently loaded emitted-source execution. The same 43 assertions pass independently on PUC Lua and
+> LuaJIT; zero-based UTF-8-byte registers cross the private typed source authority only at projection. Recurring
+> `.7` and public `.8` follow. No public helper/value/schema/facade/semantic/MCP/CLI/README surface moved.
 >
 > Definitive neutral signoff passes the exact six-runtime composition and support ledgers, all eight doctrines,
 > six-family containment, repository relocation, CLI 66x2, RAM 35%, and canonical Phase 0 1,031/1,031 in 714
@@ -152,9 +154,11 @@
 > and Phase 0 1,031/1,031 in 723 seconds. Rust `.14.4.3` signoff passes the exact six-runtime and repeated-action
 > compositions, containment/relocation, CLI 66x2, RAM 46%, and Phase 0 1,031/1,031 in 744 seconds. Dart `.14.4.4`
 > signoff passes the corresponding Dart 7+4 route, all eight doctrines, containment/relocation, CLI 66x2, RAM 57%,
-> and Phase 0 1,031/1,031 in 752 seconds through the complete typed-source opt-in and exact local-CI marker. The
-> clean handoff points the remaining backend implementer to Julia `.14.4.5`. No public recursive-
-> observation surface is implied.
+> and Phase 0 1,031/1,031 in 752 seconds through the complete typed-source opt-in and exact local-CI marker. Julia
+> `.14.4.5` then passes 30 observation assertions and the corresponding composed authorities. Shared Lua `.14.4.6`
+> passes 43 observation assertions per ABI, complete ordinary/storage proof, both composed matrices,
+> containment/relocation, CLI 66x2, RAM 61%, and Phase 0 1,031/1,031 in 734 seconds through exact canonical success.
+> The clean handoff points to recurrence `.14.4.7`; no public recursive-observation surface is implied.
 >
 > **Repeated-action handoff:** Every backend must consume
 > `linkedspec-explicit-repetition-action-result-v1`: bare `OR` is minimum-one repetition, explicit action returns
