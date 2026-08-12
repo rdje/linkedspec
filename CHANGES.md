@@ -10,6 +10,24 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-12 — FUTURE-PARITY-BACKLOG.14.4.8 — close recursive observation rollout
+
+- Added an independent recursive-observation public projection/no-drift section to the typed-source contract. Six
+  documents now require exact current markers, six stale milestone claims are forbidden, and ten facade/API/schema
+  surfaces reject five private observation tokens.
+- Added nine contract mutations and eighteen in-memory document/surface mutations, advancing governance from 87
+  to 114 without changing the accepted 14-row ledger: `recursive_observation` remains complete and combined
+  `recurring_public_no_drift` remains pending under final program-wide `.14.8`.
+- Updated the mdBook, capability guide, Toolbox, ADR `0056`, roadmaps, architecture state, Knowledge, and live docs
+  to distinguish current public documentation/no-drift from a public API admission. No parser, compiler, runtime,
+  storage, helper/value, facade, schema, semantic/MCP, CLI, or README behavior moved.
+- Recomposition passes the checker at 6 documents / 6 forbidden / 10 surface guards / 9 complete / 5 pending /
+  114 mutations, then Perl/Rust/Dart 7 each, Julia 30, Lua 43 per ABI, and all three support ledgers.
+- Definitive canonical CI passes all eight doctrines, containment and relocation, CLI 66/66 in both option
+  environments, RAM 57%, Phase 0 1,031/1,031 in 713 seconds, and the full opt-in observation matrix before exact
+  `[ci] local CI gate passed` and exit 0. The first staged run stopped only at the outer harness's nested-sandbox
+  denial; the unchanged permission-authorized run supplied the authoritative result.
+
 ## 2026-08-12 — FUTURE-PARITY-BACKLOG.14.4.7 — recur recursive observation
 
 - Added `tools/check_recursive_observation_six_runtime.sh` as one project-data-routed fail-fast proof over the

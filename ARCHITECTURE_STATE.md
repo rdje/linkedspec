@@ -29,20 +29,23 @@ Recurrence `.14.4.7` adds one repository-routed observation-only driver. It runs
 Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT consumers in order, then generated-source, capability, and language-
 coverage ledgers. Five sources form six routes because one shared Lua source executes on both ABIs. Eleven
 topology/storage regressions plus one recurrence regression promote only `recursive_observation`, advancing typed-
-source governance to 9 complete / 5 pending / 87 mutations. The combined final public no-drift row remains
-pending. No public helper/value, facade, descriptor/generated schema, result schema, semantic/MCP projection, CLI,
-README, parser, compiler, or runtime behavior becomes current.
+source rollout to 9 complete / 5 pending. Public closeout `.14.4.8` governs six current projections, denies six
+stale claims, and scans ten public surfaces through 27 additional mutations, advancing governance to 114 without
+changing the 14-row rollout. The combined final `.14.8` row remains pending. No public helper/value, facade,
+descriptor/generated schema, result schema, semantic/MCP projection, CLI, README, parser, compiler, or runtime
+behavior becomes current.
 
 The dedicated recurrence proof passes Perl/Rust/Dart 7 each, Julia 30, and the shared 43-assertion Lua consumer
 independently on PUC Lua and LuaJIT, followed by strict generated Rust 105/105, capability 80/0/0, and language
-coverage 246/105+1/122. The rendered book passes 79 files / 14,568 KiB, Knowledge passes 827 facts / 6,908
-question keys, and all eight doctrines pass. Public closeout remains separately owned by `.14.4.8` and the combined
-final `.14.8` row.
+coverage 246/105+1/122. Public closeout renders 78 book files / 14,576 KiB, passes Knowledge at 828 facts / 6,919
+question keys, and passes all eight doctrines. Observation public closeout is current under `.14.4.8`; only the
+combined final `.14.8` row remains pending.
 
-Definitive recurrence signoff passes repository containment and relocation, primary CLI 66/66 in both option
-environments, RAM 62%, canonical Phase 0 1,031/1,031 in 723 seconds, and the complete opt-in observation matrix
-before exact `[ci] local CI gate passed` and exit 0. The first sandboxed attempt stopped only because the outer
-harness denied nested macOS `sandbox-exec`; the unchanged permission-authorized run is authoritative.
+Definitive public-closeout signoff passes repository containment and relocation, primary CLI 66/66 in both option
+environments, RAM 57%, canonical Phase 0 1,031/1,031 in 713 seconds, and the complete opt-in observation matrix
+before exact `[ci] local CI gate passed` and exit 0. The first fully staged sandboxed attempt passed every prior
+gate and stopped only because the outer harness denied nested macOS `sandbox-exec`; the unchanged permission-
+authorized run is authoritative.
 
 ## Recursive source-observation lineage is fail-closed on the existing invocation authority
 
@@ -68,7 +71,7 @@ and failure/abort samples retain their roles, while direct and mutual guard reje
 self-parenting, identity reuse, invalid parent order, and represented cycles before exact tuple comparison. Four
 reason-checked lineage regressions advance governance from 53 to 57 mutations without changing rollout, runtime,
 or public behavior. Executable neutral observation `.14.4.1`; Perl `.2`, Rust `.3`, Dart `.4`, Julia `.5`, shared
-Lua `.6`, recurring `.7`, and public closeout `.8` follow. ADR `0056` sections 19-20 and
+Lua `.6`, recurring `.7`, and public closeout `.8` are now complete. ADR `0056` sections 19-28 and
 `docs/knowledge/recursive-source-observation-audit.md` are the durable authorities.
 
 Audit signoff preserves every executable owner and passes focused six-runtime typed-source composition,

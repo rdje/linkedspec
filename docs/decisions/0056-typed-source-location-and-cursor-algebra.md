@@ -557,9 +557,20 @@ behavior becomes current in this neutral leaf.
 - Five tracked sources form six ordered routes because one shared Lua source runs independently on both ABIs.
   The checker binds paths, commands, order, multiplicity, source mapping, storage, workflow routing, and CI opt-in.
 - Eleven topology/storage mutations plus one recurrence regression promote only `recursive_observation`, advancing
-  typed-source truth to 9 complete / 5 pending / 87. Public no-drift and every API/schema/CLI/README surface stay unchanged.
+  typed-source truth to 9 complete / 5 pending / 87. At that recurrence boundary, public no-drift and every
+  API/schema/CLI/README surface stay unchanged.
 - Definitive local CI passes containment/relocation, CLI 66/66 in both option environments, RAM 62%, Phase 0
   1,031/1,031 in 723 seconds, and all six exact observation routes plus support ledgers through its success marker.
+
+### 28. Close recursive-observation public projection without changing rollout
+
+- `.14.4.8` governs six exact current projections and denies six stale milestone claims while ten guards keep the
+  five facades, outward/result schemas, semantic/MCP wire model, CLI manifest, and bounded README unchanged.
+- Nine contract mutations plus eighteen in-memory document/surface mutations advance typed-source governance from
+  87 to 114. They add no parser, compiler, runtime, storage, helper, authored value, facade, schema, semantic/MCP,
+  CLI, or README behavior.
+- The accepted 14-row architecture remains 9 complete / 5 pending: `recursive_observation` stays complete under
+  `.14.4`, and combined program-wide `recurring_public_no_drift` stays pending under `.14.8`.
 
 ## Consequences
 
@@ -570,7 +581,7 @@ behavior becomes current in this neutral leaf.
 - Current helper APIs and intrinsic rule-local cursor policy remain valid. The separately owned `.14.3` migration from execution-wide rule-label mark buckets to invocation frames is explicit, versioned, and mechanically checked.
 - The accepted `recognition_*` spellings are deliberately verbose enough to distinguish bounded recognition from compatibility cursor stacks, host exception handling, and systemic backtracking. Their neutral authority is executable, and the spellings plus exact recurring proof are current on independently admitted Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT runtimes.
 - The accepted private recursive-observation spelling, detached carrier, and exact recurrence are current on those
-  same six runtimes. Public closeout remains separately owned.
+  same six runtimes. Its public documentation/no-drift projection is current without a public API admission.
 - Lossless gap capture gains the common typed representation it anticipated while retaining its separate owner.
 - This decision and its `.14.3.0` audit amendment change no grammar, helper, parser/compiler/runtime, descriptor,
   generated format, semantic/MCP response, primary CLI, rollout, admission, or current public feature-completeness
@@ -584,7 +595,8 @@ behavior becomes current in this neutral leaf.
   transaction ledger at 9/9 while semantic/topology proof remains 58 mutations; public proof is 3/26/45 and the
   capability guide is 1/14/18.
 - Amendments `.14.4.0-.1` freeze the behavior-free boundary and correct lineage; `.14.4.1` selects the private form and makes its detached state machine executable without backend admission.
-- Amendments `.14.4.2-.6` admit every runtime in order; `.14.4.7` promotes only recurrence. Public closeout remains `.14.4.8`.
+- Amendments `.14.4.2-.6` admit every runtime in order; `.14.4.7` promotes only recurrence; `.14.4.8` closes the
+  public projection without changing the 14-row rollout. The combined program-wide `.14.8` row remains pending.
 
 ## Links
 

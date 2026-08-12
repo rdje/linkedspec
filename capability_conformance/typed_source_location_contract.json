@@ -2,7 +2,7 @@
   "format": 1,
   "contract_id": "linkedspec-typed-source-location-v1",
   "task_owner": "FUTURE-PARITY-BACKLOG.14.1.1",
-  "status": "neutral_contract_with_recursive_observation_recurrence",
+  "status": "neutral_contract_with_recursive_observation_public_no_drift",
   "expected_counts": {
     "sources": 3,
     "position_conversions": 7,
@@ -22,7 +22,10 @@
     "recurring_runtime_routes": 6,
     "recursive_observation_recurring_source_groups": 5,
     "recursive_observation_recurring_runtime_routes": 6,
-    "mutations": 87
+    "recursive_observation_public_documents": 6,
+    "recursive_observation_public_forbidden_claims": 6,
+    "recursive_observation_public_surface_guard_paths": 10,
+    "mutations": 114
   },
   "policy": {
     "source_identity": "caller-authorized decoded input identity; never a path, backend object, or implicit read authority",
@@ -38,7 +41,7 @@
     "progress": "repetition, recursion, and staged queues must advance the cursor or prove a well-founded decreasing measure",
     "dispatch_authority": "a span conveys data and provenance only; source, registry, capability, and policy authority remain independently required",
     "source_spelling": "observe_recognition(observation, call(Child)) is current in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; Position and Span remain private architectural values projected as detached records",
-    "implementation_boundary": "the recursive-observation spelling, dedicated private node, detached carrier, parser behavior, and exact six-runtime recurring composition are current; public no-drift remains pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted"
+    "implementation_boundary": "the recursive-observation spelling, dedicated private node, detached carrier, parser behavior, exact six-runtime recurring composition, and public projection/no-drift proof are current; this is not a public API admission, the combined program-wide public-no-drift row remains pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted"
   },
   "canonical_execution": {
     "contract_path": "capability_conformance/typed_source_location_contract.json",
@@ -108,7 +111,7 @@
       "operand": "the second operand is exactly one unevaluated statically named call(Rule)",
       "return": "the expression returns the ordinary child payload unchanged; observation data is never mixed with payload truthiness",
       "terminal": "accepted and failed calls bind before returning; aborted and rejected calls finalize the detached record before propagating the unchanged typed failure",
-      "availability": "private syntax and exact recurring proof are current in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; public support admission remains pending, and no facade, descriptor/schema, semantic/MCP, or CLI surface is current"
+      "availability": "private syntax, exact recurring proof, and public documentation/no-drift projection are current in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; this is not a public API admission, and no facade, descriptor/schema, semantic/MCP, or CLI surface is current"
     },
     "carrier_projection": {
       "kind": "detached_harray",
@@ -323,6 +326,107 @@
     "local_ci": {
       "driver": "tools/run_ci_local.sh",
       "switch": "LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX"
+    }
+  },
+  "recursive_observation_public_no_drift": {
+    "owner": "FUTURE-PARITY-BACKLOG.14.4.8",
+    "status": "complete",
+    "policy": "current public documentation must describe the private recursive-observation spelling and exact six-runtime proof without admitting a public helper, authored Position/Span value, facade export, descriptor/generated or result schema, semantic/MCP field, CLI option, README behavior, runtime change, or storage-root change",
+    "rollout_assertions": {
+      "row_count": 14,
+      "recursive_observation": {
+        "status": "complete",
+        "owner": "FUTURE-PARITY-BACKLOG.14.4"
+      },
+      "recurring_public_no_drift": {
+        "status": "pending",
+        "owner": "FUTURE-PARITY-BACKLOG.14.8"
+      }
+    },
+    "documents": [
+      {
+        "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+        "required_markers": [
+          "Recursive-observation public projection/no-drift is current: the private authored spelling and exact six-runtime proof are documented without adding a public API."
+        ]
+      },
+      {
+        "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+        "required_markers": [
+          "Recursive-observation public projection is current without a public facade, value, schema, semantic/MCP, CLI, or README admission."
+        ]
+      },
+      {
+        "path": "docs/linkedspec-book/src/overview/project-status.md",
+        "required_markers": [
+          "Recursive-observation public no-drift is current under `.14.4.8`, while the combined program-wide `.14.8` row remains pending."
+        ]
+      },
+      {
+        "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+        "required_markers": [
+          "The recursive-observation public projection/no-drift check is current and does not promote the combined program-wide rollout row."
+        ]
+      },
+      {
+        "path": "capability_conformance/README.md",
+        "required_markers": [
+          "Recursive-observation public projection/no-drift is current without a new public API; the 14-row rollout remains 9 complete / 5 pending."
+        ]
+      },
+      {
+        "path": "TOOLBOX.md",
+        "required_markers": [
+          "Recursive-observation public projection/no-drift is current without moving any public or runtime surface."
+        ]
+      }
+    ],
+    "forbidden_claims": [
+      {
+        "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+        "text": "public closeout remains"
+      },
+      {
+        "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+        "text": "final public no-drift remains pending"
+      },
+      {
+        "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+        "text": "public `.8` follows"
+      },
+      {
+        "path": "docs/linkedspec-book/src/overview/project-status.md",
+        "text": "Public closeout remains `.14.4.8` and the combined final `.14.8` row."
+      },
+      {
+        "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+        "text": "Public no-drift remains pending."
+      },
+      {
+        "path": "TOOLBOX.md",
+        "text": "Public no-drift remains pending;"
+      }
+    ],
+    "surface_guard": {
+      "paths": [
+        "perl/LinkedSpec.pm",
+        "rust/linkedspec-runtime/src/lib.rs",
+        "dart/lib/linkedspec_dart.dart",
+        "julia/src/LinkedSpecJulia.jl",
+        "lua/src/linkedspec/init.lua",
+        "capability_conformance/outward_descriptor_contract.json",
+        "capability_conformance/semantic_introspection_model.json",
+        "capability_conformance/mcp_semantic_transport/schema.json",
+        "cli_conformance/manifest.json",
+        "README.md"
+      ],
+      "forbidden_tokens": [
+        "observe_recognition",
+        "ObserveRecognition",
+        "ActionObserveRecognitionExpr",
+        "RecursiveObservation",
+        "OBSERVE_RECOGNITION"
+      ]
     }
   },
   "rollout": [

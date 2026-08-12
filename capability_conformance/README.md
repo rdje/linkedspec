@@ -271,7 +271,7 @@ bash tools/check_typed_source_location_six_runtime.sh
 ```
 
 Canonical local CI requires and syntax-checks that driver; `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1` opts into its
-all-toolchain execution. Current governance is 87 mutations and rollout is 9 complete / 5 pending across 14 legs:
+all-toolchain execution. Current governance is 114 mutations and rollout is 9 complete / 5 pending across 14 legs:
 the neutral contract, public structure, unchanged neutral/public recomposition, and the Perl, Rust, Dart, Julia,
 PUC Lua, and LuaJIT internal
 runtime admissions are complete. The two Lua ABIs share one rollout leg because they execute the same consumer
@@ -295,9 +295,11 @@ bash tools/check_recursive_observation_six_runtime.sh
 ```
 
 Canonical CI exposes the same route behind `LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1`. Eleven topology/storage
-regressions plus one recurrence regression promote only `recursive_observation`, making overall rollout 9/5 and
-governance 87. The combined public no-drift row stays pending. No public helper/value, descriptor/generated schema,
-semantic/MCP field, CLI, or README behavior moved.
+regressions plus one recurrence regression promote only `recursive_observation`. The public closeout then binds
+six current projections, rejects six stale claims, and guards ten facade/API/schema surfaces through 27 further
+mutations. Recursive-observation public projection/no-drift is current without a new public API; the 14-row rollout remains 9 complete / 5 pending.
+Governance is 114, and the combined program-wide public-no-drift row stays pending for `.14.8`. No public
+helper/value, descriptor/generated schema, semantic/MCP field, CLI, or README behavior moved.
 
 No public `Position`/`Span` value, descriptor or generated schema, semantic/MCP projection, or source-authority
 elevation is claimed by these internal typed-source runtime admissions. Recognition transaction spelling and

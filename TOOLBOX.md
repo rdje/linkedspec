@@ -992,7 +992,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   canonical gate.
 - **OUTPUT:** neutral governance reports 3 sources, 7 positions, 6 direct spans, 3 derived texts, 8+8+33 state
   transitions, 6 recursive observations, 4 structural cases, 92 helper projections + 7 aliases + 2 internal ids,
-  33 diagnostics, 9 complete / 5 pending rollout, and 87 rejected drift mutations. The driver then reports each
+  33 diagnostics, 9 complete / 5 pending rollout, and 114 rejected drift mutations. The driver then reports each
   of the six ordered runtime routes and three support ledgers before its exact success marker.
 - **BOUNDARY:** this is orchestration over existing internal consumers, not a new public typed-value surface. The
   combined recurring/public no-drift row remains pending for `FUTURE-PARITY-BACKLOG.14.8`. Retrieve
@@ -1020,10 +1020,12 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   machine-path-audits, and syntax-checks the driver; use
   `LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1 bash tools/run_ci_local.sh` for its all-toolchain route.
 - **OUTPUT:** Perl 7, Rust 7, Dart 7, Julia 30, PUC Lua 43, and LuaJIT 43 pass before the three support ledgers and
-  exact success marker. Neutral truth is 9 complete / 5 pending / 87 mutations.
+  exact success marker. Neutral truth is 9 complete / 5 pending / 114 mutations.
 - **BOUNDARY:** five backend sources form six routes because one shared Lua source executes independently on both
-  ABIs. Twelve regressions lock topology/storage and recurrence-only promotion. Public no-drift remains pending;
-  no parser, runtime, facade, schema, semantic/MCP, CLI, README, or storage-root behavior changes. Retrieve
+  ABIs. Twelve regressions lock topology/storage and recurrence-only promotion; 27 more lock six public documents,
+  six stale-claim denials, and ten surface guards without changing the 14-row rollout. Recursive-observation public projection/no-drift is current without moving any public or runtime surface.
+  The combined program-wide `.14.8` row remains pending; no parser, runtime, facade, schema, semantic/MCP, CLI,
+  README, or storage-root behavior changes. Retrieve
   [[recursive-observation-recurring-gate]] before changing this proof.
 
 ### 4.9.2 `tools/check_recognition_transaction_contract.py` — neutral transaction/progress oracle

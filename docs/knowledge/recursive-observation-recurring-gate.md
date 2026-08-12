@@ -13,9 +13,10 @@ answers:
   - "does recursive observation recurrence add a public API"
   - "is recurring_public_no_drift complete after recursive observation recurrence"
 date: 2026-08-12
-status: current recurring proof; public no-drift remains pending under FUTURE-PARITY-BACKLOG.14.4.8 and the combined FUTURE-PARITY-BACKLOG.14.8 row
+status: current recurring proof and public projection/no-drift; combined FUTURE-PARITY-BACKLOG.14.8 row remains pending
 tags: [source-location, recursion, observation, recurring-gate, perl, rust, dart, julia, lua, luajit, local-ci]
 evidence: "FUTURE-PARITY-BACKLOG.14.4.7 adds tools/check_recursive_observation_six_runtime.sh as one project-data-routed fail-fast driver. It runs the neutral checker, then the exact Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT recursive-observation consumers, followed by generated-source, capability, and language-coverage ledgers. Five tracked backend sources form six routes because lua/test/recursive_observation_contract_test.lua executes unchanged once per ABI. Canonical CI requires, path-audits, and syntax-checks the driver; LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1 opts into it. Eleven topology/storage mutations plus one recurrence regression advance typed-source governance from 75 to 87 and promote only recursive_observation, producing 9 complete / 5 pending. Definitive canonical proof passes containment/relocation, CLI 66/66 twice, RAM 62%, Phase 0 1031/1031 in 723 seconds, and the complete matrix through the exact local-CI marker. The combined recurring_public_no_drift row remains pending. No parser, compiler, runtime, facade, schema, semantic/MCP, CLI, README, or storage-root behavior changes."
+evidence_update_2026_08_12_public_closeout: "FUTURE-PARITY-BACKLOG.14.4.8 leaves the five sources, six routes, support ledgers, storage route, CI switch, recursive_observation completion, and combined .14.8 row unchanged. It adds independent public projection/no-drift governance over six documents, six stale claims, and ten public surfaces through 27 mutations, advancing the checker from 87 to 114 while rollout remains 9 complete / 5 pending."
 last_verified: 2026-08-12
 reverify:
   - "bash tools/check_recursive_observation_six_runtime.sh"
@@ -42,10 +43,10 @@ Canonical CI always inventories and syntax-checks the rooted driver. Set
 The project-data initializer derives every cache, build, native, test, and temporary path from the repository.
 
 The checker binds exact source paths, commands, source-to-runtime mapping, order, multiplicity, support-ledger
-order, storage initialization, workflow routing, CI registration, and rollout ownership. Its twelve new
-regressions reject drift in those properties or a recurrence complete-to-pending regression. Only the
-`recursive_observation` row becomes complete. Public helpers and values remain absent, and the combined final
-`recurring_public_no_drift` row remains pending.
+order, storage initialization, workflow routing, CI registration, and rollout ownership. Its twelve recurrence
+regressions reject drift in those properties or a complete-to-pending regression. Public closeout adds 27
+independent projection, stale-claim, and surface mutations, bringing current governance to 114. Public helpers and
+values remain absent, and the combined final `recurring_public_no_drift` row remains pending under `.14.8`.
 
-Related: [[recursive-source-observation-audit]], [[typed-source-location-recurring-gate]], and
-[[typed-source-location-runtime-rollout-plan]].
+Related: [[recursive-observation-public-no-drift]], [[recursive-source-observation-audit]],
+[[typed-source-location-recurring-gate]], and [[typed-source-location-runtime-rollout-plan]].

@@ -110,8 +110,7 @@ fixture identities with positive unique monotonic numbers; direct and mutual rej
 under an earlier active parent. The checker now rejects self-parent, reuse, invalid parent order, and cycles before
 tuple comparison. Two additional static diagnostics reserve invalid-target and invalid-static-call errors. Ten
 reason-checked state corruptions plus three surface/topology mutations raise typed-source governance from 57 to 70.
-Runtime admissions are complete, and `.14.4.7` now supplies their exact recurring proof; public closeout remains
-`.14.4.8`.
+Runtime admissions and their exact `.14.4.7` recurring proof are complete. Recursive-observation public projection/no-drift is current: the private authored spelling and exact six-runtime proof are documented without adding a public API.
 
 Perl owns one dedicated private `OBSERVE_RECOGNITION` ActionIR node; Rust owns one dedicated private
 `ObserveRecognition` expression node; Dart and Julia each own one dedicated private
@@ -141,10 +140,11 @@ bash tools/check_recursive_observation_six_runtime.sh
 It executes neutral first; Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT in order; then generated-source,
 capability, and language-coverage ledgers. Canonical CI exposes the same route behind
 `LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1`. Twelve new regressions lock topology, repository-local storage,
-canonical registration, and recurrence-only promotion. The recursive-observation row is now complete, so typed-
-source rollout is 9 complete / 5 pending with 87 mutations. There is still no public helper, authored
+canonical registration, and recurrence-only promotion. Twenty-seven public-contract, document, stale-claim, and
+surface-guard mutations close the observation projection without changing the ledger. The recursive-observation
+row remains complete, so typed-source rollout is 9 complete / 5 pending with 114 mutations. There is still no public helper, authored
 `Position`/`Span` value, descriptor/generated version, result-schema field, semantic/MCP projection, CLI option,
-or README behavior; final public no-drift remains pending. Definitive local CI passes containment/relocation, CLI
+or README behavior; the combined program-wide public-no-drift row remains pending for `.14.8`. Definitive local CI passes containment/relocation, CLI
 66/66 twice, RAM 62%, Phase 0 1,031/1,031 in 723 seconds, and the complete observation matrix.
 
 ### Bounded cursor transactions do not mean general backtracking
@@ -358,7 +358,7 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 
 The checker covers 3 decoded sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation,
 8 transaction, and 33 recursive-observation transitions, 6 detached observations, 4 structural cases,
-33 diagnostics, and 87 mutations.
+33 diagnostics, and 114 mutations.
 It also proves that all 92 current source-boundary helpers project onto the algebra.
 
 This is rollout status, not authored-value status. Nine of 14 rollout legs are complete: the neutral contract,
@@ -405,7 +405,7 @@ bash tools/check_recursive_observation_six_runtime.sh
 
 It then runs the same three support ledgers. `LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1` selects it from
 canonical CI. Twelve additional regressions make only `recursive_observation` complete, advancing the current
-contract to 9 complete / 5 pending / 87 mutations.
+contract to 9 complete / 5 pending / 114 mutations before the separately governed public-projection checks.
 
 The unchanged `.14.2.7` recomposition reruns that authority and closes the six-runtime internal value/helper
 implementation slice. It does not add an authored value or promote final public no-drift.

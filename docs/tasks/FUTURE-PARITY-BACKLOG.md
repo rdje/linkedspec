@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-12` (recursive observation lineage correction `.14.4.0.1` signoff-complete as intended
-  atomic 208/300 from clean audit activation `2c968259`; behavior-free; no push)
+- Last updated: `2026-08-12` (recursive-observation public projection `.14.4.8` signoff-complete as intended atomic
+  216/300 from clean recurrence activation `eb8d052c`; no public API or rollout movement; no push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -103,16 +103,15 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-12):** corrective recursive-observation lineage `.14.4.0.1` is signoff-complete
-as atomic 208/300 from clean audit activation `2c968259`. The neutral fixture uses positive unique monotonic invocation ids;
-direct and mutual pre-entry progress rejections reserve distinct attempted children under their active parents.
-Validation independently rejects invalid ids, self-parenting, reuse, reverse ordering, and represented cycles
-before exact tuple equality, with four reason-checked mutations advancing typed-source governance from 53 to 57.
-The six observation roles, rollout 8 complete / 6 pending, child-owned family policy, and every runtime/public
-surface remain unchanged. Book 79/14,460, Knowledge 821/6,826, all eight doctrines, containment/relocation, CLI
-66x2, RAM 34%, and Phase 0 1,031/1,031 in 739 seconds pass. Executable neutral observation `.14.4.1` is next but
-not active; Perl/Rust/Dart/Julia/shared-Lua/recurring/public legs remain `.2-.8`. Transaction `.14.3`
-stays closed at 132/246/58 and rollout 9/9; typed-source `.14.8` remains separately pending.
+**Authoritative frontier (2026-08-12):** recursive-observation public projection `.14.4.8` is signoff-complete as
+intended atomic 216/300 from clean recurrence activation `eb8d052c`. Six exact documents, six stale-claim denials,
+and ten facade/API/schema guards add 27 mutations without changing parser/compiler/runtime/storage or exporting a
+helper, authored `Position`/`Span` value, facade, schema, semantic/MCP field, CLI option, or README behavior. The
+accepted 14-row typed-source ledger remains 9 complete / 5 pending while governance advances to 114:
+`recursive_observation` stays complete and combined program-wide `recurring_public_no_drift` stays pending for
+`.14.8`. The unchanged five-source/six-runtime proof passes Perl/Rust/Dart 7 each, Julia 30, Lua 43 per ABI, and
+all support ledgers. Activity `.14.4` is closed; lossless gap composition `.14.5` is the next sequential activity.
+Recognition transaction `.14.3` stays closed at 133/246/58 and rollout 9/9.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private

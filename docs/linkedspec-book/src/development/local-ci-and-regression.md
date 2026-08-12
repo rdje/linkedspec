@@ -124,7 +124,7 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 
 The check is unconditional. It independently derives Unicode-scalar, line/column, and UTF-8 coordinates;
 materializes direct and derived spans; executes invocation and bounded-transaction state transitions; validates
-recursive and zero/one/two-regex structural cases; and rejects all 87 registered mutations.
+recursive and zero/one/two-regex structural cases; and rejects all 114 registered mutations.
 
 In the test-first workflow used here, **RED** means writing the exact contract or consumer first and proving that
 it fails for the intended missing capability. **GREEN** means implementing the smallest owned change that makes
@@ -188,7 +188,7 @@ bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contrac
 bash tools/run_lua_project_data.sh luajit lua/test/recursive_observation_contract_test.lua
 ```
 
-Its current rollout result is 9 complete / 5 pending with 87 registered mutations. Passing this gate proves the
+Its current rollout result is 9 complete / 5 pending with 114 registered mutations. Passing this gate proves the
 neutral contract, both completed public-structure rows, and all six internal runtime targets across their exact
 value/helper carriers. Rust and Lua retain UTF-8-byte registers, Dart retains UTF-16 code-unit registers, and Julia
 retains zero-based UTF-8 code-unit registers while each converts at its immutable typed boundary. This does not
@@ -205,9 +205,12 @@ then generated-source, capability, and language coverage. Five source groups for
 shared Lua source runs once per ABI. The driver enters repository-derived project storage; canonical CI requires,
 path-audits, and syntax-checks it, while `LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1` opts into execution.
 Twelve regressions lock omission, order, multiplicity, commands, source binding, support ledgers, storage,
-workflow routing, CI registration, and recurrence-only promotion. Definitive local CI passes repository
+workflow routing, CI registration, and recurrence-only promotion. The recursive-observation public projection/no-drift check is current and does not promote the combined program-wide rollout row.
+It additionally requires six current projections, rejects six stale claims, and guards ten public/API/schema
+surfaces through 27 mutations. Definitive local CI passes repository
 containment and relocation, CLI 66/66 in both option environments, RAM 62%, Phase 0 1,031/1,031 in 723 seconds,
-and this complete matrix through its exact success marker. Public no-drift remains pending.
+and this complete matrix through its exact success marker. The combined program-wide `.14.8` public-no-drift row
+remains pending.
 
 Dart's admitted consumer covers its internal value core and all 92+7 helper projections across native,
 reconstructed, generated-plan, and freshly emitted execution. The independent rollout checker requires its

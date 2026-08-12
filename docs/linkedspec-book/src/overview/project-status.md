@@ -56,7 +56,7 @@ general style. This documentation-only slice changes no parser or runtime behavi
 The backend-neutral typed source-location contract is complete under `FUTURE-PARITY-BACKLOG.14.1.1`. Its
 independent checker passes 3 sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation,
 8 transaction, and 33 recursive-observation transitions, 6 detached recursive observations, 4 structural cases,
-92 current helper projections, 33 diagnostics, and 87 rejected mutations.
+92 current helper projections, 33 diagnostics, and 114 rejected mutations.
 
 Nine of 14 rollout legs are complete and 5 remain pending. The neutral contract, public linked-rule structure,
 unchanged neutral/public recomposition, and all six runtime targets are complete. Their internal authorities and
@@ -158,9 +158,11 @@ reconstructed, generated-plan, and independently loaded emitted source. Its 43-a
 Lua and LuaJIT, preserves zero-based UTF-8-byte registers behind typed scalar projection, and keeps the repeated-
 action seam unchanged. Five admission regressions advance governance to 75 with all six runtimes recorded.
 Recurrence `.14.4.7` adds one exact rooted driver over five sources/six routes and three support ledgers; twelve
-new regressions promote only the observation row and advance typed-source truth to 9/5/87. No public helper,
-facade, descriptor/generated version, result schema, semantic/MCP field, CLI, or README behavior is current.
-Public closeout remains `.14.4.8` and the combined final `.14.8` row.
+new regressions promote only the observation row. Public closeout `.14.4.8` adds six governed documents, six
+stale-claim denials, ten surface guards, and 27 mutations, advancing typed-source truth to 9/5/114 without a
+rollout change. Recursive-observation public no-drift is current under `.14.4.8`, while the combined program-wide `.14.8` row remains pending.
+No public helper, facade, descriptor/generated version, result schema, semantic/MCP field, CLI, or README behavior
+is current.
 Definitive recurrence signoff passes all eight doctrines, repository containment/relocation, CLI 66/66 in both
 option environments, RAM 62%, Phase 0 1,031/1,031 in 723 seconds, and Perl/Rust/Dart 7 each, Julia 30, and Lua
 43 per ABI plus all support ledgers through the exact local-CI success marker.

@@ -37,7 +37,8 @@
 > and LuaJIT in exact order, then generated-source, capability, and language-coverage ledgers. Run
 > `bash tools/check_typed_source_location_six_runtime.sh`; canonical CI exposes the same all-toolchain proof behind
 > `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1`. Five backend source groups map to six runtime routes because the shared
-> Lua source executes on both ABIs. Governance is now 9 complete / 5 pending with 87 drift mutations.
+> Lua source executes on both ABIs. Governance is now 9 complete / 5 pending with 114 drift mutations after the
+> independently governed recursive-observation public projection/no-drift closeout.
 >
 > No-change recomposition `.14.2.7` reruns that exact authority and closes the internal value/helper implementation
 > parent `.14.2`. It adds no replacement backend surface and does not promote the combined final `.14.8` row.
@@ -143,14 +144,14 @@
 > admits one Lua-5.1-compatible dedicated `observe_recognition` node across native, reconstructed, generated-plan,
 > and independently loaded emitted-source execution. The same 43 assertions pass independently on PUC Lua and
 > LuaJIT; zero-based UTF-8-byte registers cross the private typed source authority only at projection. Recurring
-> `.7` now composes the exact unchanged consumers; public `.8` follows. No public
-> helper/value/schema/facade/semantic/MCP/CLI/README surface moved.
+> `.7` composes the exact unchanged consumers and public closeout `.8` governs documentation plus absence. Recursive-observation public projection is current without a public facade, value, schema, semantic/MCP, CLI, or README admission.
 >
 > Recursive-observation recurrence is one repository-routed five-source/six-runtime proof:
 > `bash tools/check_recursive_observation_six_runtime.sh`. It runs neutral; Perl, Rust, Dart, Julia, PUC Lua, and
 > LuaJIT; then generated-source, capability, and language-coverage ledgers. Canonical CI exposes it behind
 > `LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1`. Twelve topology/storage/rollout regressions promote only the
-> observation row, producing 9/5/87 while final public no-drift remains pending.
+> observation row. Twenty-seven further public-projection mutations reject stale prose and premature surface
+> widening without adding a rollout row, producing 9/5/114 while the combined program-wide `.14.8` row remains pending.
 >
 > Definitive neutral signoff passes the exact six-runtime composition and support ledgers, all eight doctrines,
 > six-family containment, repository relocation, CLI 66x2, RAM 35%, and canonical Phase 0 1,031/1,031 in 714

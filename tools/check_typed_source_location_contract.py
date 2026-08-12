@@ -71,7 +71,10 @@ EXPECTED_COUNTS = {
     "recurring_runtime_routes": 6,
     "recursive_observation_recurring_source_groups": 5,
     "recursive_observation_recurring_runtime_routes": 6,
-    "mutations": 87,
+    "recursive_observation_public_documents": 6,
+    "recursive_observation_public_forbidden_claims": 6,
+    "recursive_observation_public_surface_guard_paths": 10,
+    "mutations": 114,
 }
 
 POLICY = {
@@ -88,7 +91,7 @@ POLICY = {
     "progress": "repetition, recursion, and staged queues must advance the cursor or prove a well-founded decreasing measure",
     "dispatch_authority": "a span conveys data and provenance only; source, registry, capability, and policy authority remain independently required",
     "source_spelling": "observe_recognition(observation, call(Child)) is current in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; Position and Span remain private architectural values projected as detached records",
-    "implementation_boundary": "the recursive-observation spelling, dedicated private node, detached carrier, parser behavior, and exact six-runtime recurring composition are current; public no-drift remains pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted",
+    "implementation_boundary": "the recursive-observation spelling, dedicated private node, detached carrier, parser behavior, exact six-runtime recurring composition, and public projection/no-drift proof are current; this is not a public API admission, the combined program-wide public-no-drift row remains pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted",
 }
 
 CANONICAL_EXECUTION = {
@@ -270,6 +273,110 @@ RECURSIVE_OBSERVATION_RECURRING_GATE = {
     },
 }
 
+RECURSIVE_OBSERVATION_PUBLIC_NO_DRIFT = {
+    "owner": "FUTURE-PARITY-BACKLOG.14.4.8",
+    "status": "complete",
+    "policy": "current public documentation must describe the private recursive-observation spelling and exact six-runtime proof without admitting a public helper, authored Position/Span value, facade export, descriptor/generated or result schema, semantic/MCP field, CLI option, README behavior, runtime change, or storage-root change",
+    "rollout_assertions": {
+        "row_count": 14,
+        "recursive_observation": {
+            "status": "complete",
+            "owner": "FUTURE-PARITY-BACKLOG.14.4",
+        },
+        "recurring_public_no_drift": {
+            "status": "pending",
+            "owner": "FUTURE-PARITY-BACKLOG.14.8",
+        },
+    },
+    "documents": [
+        {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "required_markers": [
+                "Recursive-observation public projection/no-drift is current: the private authored spelling and exact six-runtime proof are documented without adding a public API."
+            ],
+        },
+        {
+            "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+            "required_markers": [
+                "Recursive-observation public projection is current without a public facade, value, schema, semantic/MCP, CLI, or README admission."
+            ],
+        },
+        {
+            "path": "docs/linkedspec-book/src/overview/project-status.md",
+            "required_markers": [
+                "Recursive-observation public no-drift is current under `.14.4.8`, while the combined program-wide `.14.8` row remains pending."
+            ],
+        },
+        {
+            "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+            "required_markers": [
+                "The recursive-observation public projection/no-drift check is current and does not promote the combined program-wide rollout row."
+            ],
+        },
+        {
+            "path": "capability_conformance/README.md",
+            "required_markers": [
+                "Recursive-observation public projection/no-drift is current without a new public API; the 14-row rollout remains 9 complete / 5 pending."
+            ],
+        },
+        {
+            "path": "TOOLBOX.md",
+            "required_markers": [
+                "Recursive-observation public projection/no-drift is current without moving any public or runtime surface."
+            ],
+        },
+    ],
+    "forbidden_claims": [
+        {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "text": "public closeout remains",
+        },
+        {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "text": "final public no-drift remains pending",
+        },
+        {
+            "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+            "text": "public `.8` follows",
+        },
+        {
+            "path": "docs/linkedspec-book/src/overview/project-status.md",
+            "text": "Public closeout remains `.14.4.8` and the combined final `.14.8` row.",
+        },
+        {
+            "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+            "text": "Public no-drift remains pending.",
+        },
+        {
+            "path": "TOOLBOX.md",
+            "text": "Public no-drift remains pending;",
+        },
+    ],
+    "surface_guard": {
+        "paths": [
+            "perl/LinkedSpec.pm",
+            "rust/linkedspec-runtime/src/lib.rs",
+            "dart/lib/linkedspec_dart.dart",
+            "julia/src/LinkedSpecJulia.jl",
+            "lua/src/linkedspec/init.lua",
+            "capability_conformance/outward_descriptor_contract.json",
+            "capability_conformance/semantic_introspection_model.json",
+            "capability_conformance/mcp_semantic_transport/schema.json",
+            "cli_conformance/manifest.json",
+            "README.md",
+        ],
+        "forbidden_tokens": [
+            "observe_recognition",
+            "ObserveRecognition",
+            "ActionObserveRecognitionExpr",
+            "RecursiveObservation",
+            "OBSERVE_RECOGNITION",
+        ],
+    },
+}
+
+RECURSIVE_OBSERVATION_PUBLIC_MUTATION_COUNT = 18
+
 HELPER_GROUPS = {
     "capture_mark": "CAPTURE_MARK_HELPERS",
     "entry_match": "ENTRY_MATCH_HELPERS",
@@ -438,7 +545,7 @@ RECURSIVE_OBSERVATION_SURFACE = {
     "operand": "the second operand is exactly one unevaluated statically named call(Rule)",
     "return": "the expression returns the ordinary child payload unchanged; observation data is never mixed with payload truthiness",
     "terminal": "accepted and failed calls bind before returning; aborted and rejected calls finalize the detached record before propagating the unchanged typed failure",
-    "availability": "private syntax and exact recurring proof are current in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; public support admission remains pending, and no facade, descriptor/schema, semantic/MCP, or CLI surface is current",
+    "availability": "private syntax, exact recurring proof, and public documentation/no-drift projection are current in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; this is not a public API admission, and no facade, descriptor/schema, semantic/MCP, or CLI surface is current",
 }
 
 RECURSIVE_OBSERVATION_CARRIER = {
@@ -741,6 +848,115 @@ def require_list(value: Any, context: str, length: int | None = None) -> list[An
     if length is not None and len(value) != length:
         fail(f"{context} count drifted")
     return value
+
+
+def recursive_observation_public_texts(
+    public_contract: dict[str, Any],
+) -> tuple[dict[str, str], dict[str, str]]:
+    document_texts: dict[str, str] = {}
+    for row in public_contract["documents"]:
+        path = row["path"]
+        source = ROOT / path
+        if not source.is_file():
+            fail(f"recursive-observation public document is missing: {path}")
+        document_texts[path] = source.read_text(encoding="utf-8")
+
+    surface_texts: dict[str, str] = {}
+    for path in public_contract["surface_guard"]["paths"]:
+        source = ROOT / path
+        if not source.is_file():
+            fail(f"recursive-observation public surface guard is missing: {path}")
+        surface_texts[path] = source.read_text(encoding="utf-8")
+    return document_texts, surface_texts
+
+
+def validate_recursive_observation_public_no_drift(
+    public_contract: dict[str, Any],
+    rollout: list[dict[str, Any]],
+    document_texts: dict[str, str] | None = None,
+    surface_texts: dict[str, str] | None = None,
+) -> None:
+    if public_contract != RECURSIVE_OBSERVATION_PUBLIC_NO_DRIFT:
+        fail("recursive-observation public no-drift contract drifted")
+
+    documents = public_contract["documents"]
+    document_paths = [row["path"] for row in documents]
+    if (
+        len(document_paths) != len(set(document_paths))
+        or len(document_paths)
+        != EXPECTED_COUNTS["recursive_observation_public_documents"]
+    ):
+        fail("recursive-observation public document inventory drifted")
+    forbidden_claims = public_contract["forbidden_claims"]
+    forbidden_pairs = [(row["path"], row["text"]) for row in forbidden_claims]
+    if (
+        len(forbidden_pairs)
+        != len(set(forbidden_pairs))
+        or len(forbidden_pairs)
+        != EXPECTED_COUNTS["recursive_observation_public_forbidden_claims"]
+    ):
+        fail("recursive-observation public forbidden-claim inventory drifted")
+    if any(path not in document_paths for path, _text in forbidden_pairs):
+        fail("recursive-observation forbidden claim has an unmanaged document path")
+
+    surface_guard = public_contract["surface_guard"]
+    guard_paths = surface_guard["paths"]
+    guard_tokens = surface_guard["forbidden_tokens"]
+    if (
+        len(guard_paths)
+        != len(set(guard_paths))
+        or len(guard_paths)
+        != EXPECTED_COUNTS["recursive_observation_public_surface_guard_paths"]
+    ):
+        fail("recursive-observation public surface-guard inventory drifted")
+    if not guard_tokens or len(guard_tokens) != len(set(guard_tokens)):
+        fail("recursive-observation public surface-guard token inventory drifted")
+
+    assertions = public_contract["rollout_assertions"]
+    if assertions["row_count"] != len(rollout):
+        fail("recursive-observation public proof changed rollout cardinality")
+    rollout_by_leg = {row["leg"]: row for row in rollout}
+    for leg in ("recursive_observation", "recurring_public_no_drift"):
+        expected = assertions[leg]
+        actual = rollout_by_leg.get(leg)
+        if actual is None or {
+            "status": actual["status"],
+            "owner": actual["owner"],
+        } != expected:
+            fail(f"recursive-observation public rollout assertion drifted: {leg}")
+
+    if document_texts is None and surface_texts is None:
+        return
+    if document_texts is None or surface_texts is None:
+        fail("recursive-observation public text inventories must be provided together")
+    if set(document_texts) != set(document_paths):
+        fail("recursive-observation public document text inventory drifted")
+    if set(surface_texts) != set(guard_paths):
+        fail("recursive-observation public surface text inventory drifted")
+
+    for row in documents:
+        path = row["path"]
+        markers = row["required_markers"]
+        if not markers or len(markers) != len(set(markers)):
+            fail(f"recursive-observation public marker inventory drifted: {path}")
+        for marker in markers:
+            if document_texts[path].count(marker) != 1:
+                fail(
+                    "recursive-observation public marker missing or duplicated: "
+                    f"{path}: {marker}"
+                )
+    for row in forbidden_claims:
+        path = row["path"]
+        claim = row["text"]
+        if claim in document_texts[path]:
+            fail(f"stale recursive-observation public claim remains: {path}: {claim}")
+    for path in guard_paths:
+        for token in guard_tokens:
+            if token in surface_texts[path]:
+                fail(
+                    "recursive-observation public surface widened: "
+                    f"{path}: {token}"
+                )
 
 
 def position_coordinates(text: str, offset: int) -> tuple[int, int, int]:
@@ -1252,6 +1468,8 @@ def apply_recursive_observation_transition(
 def validate_contract(contract: dict[str, Any], *, check_registration: bool = True) -> None:
     if "recursive_observation_recurring_gate" not in contract:
         fail("recursive-observation recurring gate is missing")
+    if "recursive_observation_public_no_drift" not in contract:
+        fail("recursive-observation public no-drift contract is missing")
     top_fields = [
         "format",
         "contract_id",
@@ -1277,6 +1495,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         "diagnostics",
         "recurring_gate",
         "recursive_observation_recurring_gate",
+        "recursive_observation_public_no_drift",
         "rollout",
     ]
     require_fields(contract, top_fields, "contract")
@@ -1286,7 +1505,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         fail("contract id drifted")
     if contract["task_owner"] != "FUTURE-PARITY-BACKLOG.14.1.1":
         fail("task owner drifted")
-    if contract["status"] != "neutral_contract_with_recursive_observation_recurrence":
+    if contract["status"] != "neutral_contract_with_recursive_observation_public_no_drift":
         fail("typed source-location status drifted")
     if contract["expected_counts"] != EXPECTED_COUNTS:
         fail("expected counts drifted")
@@ -1912,6 +2131,13 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         observed_rollout.append((leg["leg"], leg["status"], leg["owner"], leg["runtimes"]))
     if observed_rollout != ROLLOUT:
         fail("rollout membership, order, status, owner, or runtime coverage drifted")
+    recursive_observation_public = contract[
+        "recursive_observation_public_no_drift"
+    ]
+    validate_recursive_observation_public_no_drift(
+        recursive_observation_public,
+        rollout,
+    )
 
     actual_counts = {
         "sources": len(sources),
@@ -1935,6 +2161,15 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         ),
         "recursive_observation_recurring_runtime_routes": len(
             recursive_observation_recurring["runtime_routes"]
+        ),
+        "recursive_observation_public_documents": len(
+            recursive_observation_public["documents"]
+        ),
+        "recursive_observation_public_forbidden_claims": len(
+            recursive_observation_public["forbidden_claims"]
+        ),
+        "recursive_observation_public_surface_guard_paths": len(
+            recursive_observation_public["surface_guard"]["paths"]
         ),
         "mutations": EXPECTED_COUNTS["mutations"],
     }
@@ -1965,6 +2200,15 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         ):
             if not path.is_file():
                 fail(f"canonical contract/checker/runner input is missing: {path.relative_to(ROOT)}")
+        public_document_texts, public_surface_texts = recursive_observation_public_texts(
+            recursive_observation_public
+        )
+        validate_recursive_observation_public_no_drift(
+            recursive_observation_public,
+            rollout,
+            public_document_texts,
+            public_surface_texts,
+        )
         ci_text = CI_PATH.read_text(encoding="utf-8")
         required_markers = [
             f"require_tracked_file {CANONICAL_EXECUTION['contract_path']}",
@@ -2472,6 +2716,58 @@ def mutation_checks(contract: dict[str, Any]) -> int:
             ),
         ),
         (
+            "recursive-observation public owner",
+            lambda c: c["recursive_observation_public_no_drift"].__setitem__(
+                "owner", "FUTURE-PARITY-BACKLOG.14.8"
+            ),
+        ),
+        (
+            "recursive-observation public status",
+            lambda c: c["recursive_observation_public_no_drift"].__setitem__(
+                "status", "pending"
+            ),
+        ),
+        (
+            "recursive-observation public policy",
+            lambda c: c["recursive_observation_public_no_drift"].__setitem__(
+                "policy", "public API admitted"
+            ),
+        ),
+        (
+            "recursive-observation public document omitted",
+            lambda c: c["recursive_observation_public_no_drift"]["documents"].pop(),
+        ),
+        (
+            "recursive-observation public marker omitted",
+            lambda c: c["recursive_observation_public_no_drift"]["documents"][0][
+                "required_markers"
+            ].pop(),
+        ),
+        (
+            "recursive-observation public forbidden claim omitted",
+            lambda c: c["recursive_observation_public_no_drift"][
+                "forbidden_claims"
+            ].pop(),
+        ),
+        (
+            "recursive-observation public surface path omitted",
+            lambda c: c["recursive_observation_public_no_drift"]["surface_guard"][
+                "paths"
+            ].pop(),
+        ),
+        (
+            "recursive-observation public surface token omitted",
+            lambda c: c["recursive_observation_public_no_drift"]["surface_guard"][
+                "forbidden_tokens"
+            ].pop(),
+        ),
+        (
+            "recursive-observation public combined row promoted",
+            lambda c: c["recursive_observation_public_no_drift"][
+                "rollout_assertions"
+            ]["recurring_public_no_drift"].__setitem__("status", "complete"),
+        ),
+        (
             "recursive observation Perl admission omitted",
             lambda c: c["rollout"][9]["runtimes"].pop(),
         ),
@@ -2593,6 +2889,7 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         + len(recursive_state_regressions)
         + len(rollout_regressions)
         != EXPECTED_COUNTS["mutations"]
+        - RECURSIVE_OBSERVATION_PUBLIC_MUTATION_COUNT
     ):
         fail("checker mutation inventory count drifted")
     for name, mutate in mutations:
@@ -2635,10 +2932,57 @@ def mutation_checks(contract: dict[str, Any]) -> int:
     )
 
 
+def recursive_observation_public_mutation_checks(contract: dict[str, Any]) -> int:
+    public_contract = contract["recursive_observation_public_no_drift"]
+    document_texts, surface_texts = recursive_observation_public_texts(public_contract)
+    first_document = public_contract["documents"][0]
+    first_path = first_document["path"]
+    first_marker = first_document["required_markers"][0]
+    mutations: list[tuple[str, str, str, str]] = [
+        ("required marker deleted", "replace", first_path, first_marker),
+        ("required marker duplicated", "append_document", first_path, first_marker),
+    ]
+    mutations.extend(
+        (f"stale claim {index}", "append_document", row["path"], row["text"])
+        for index, row in enumerate(public_contract["forbidden_claims"], 1)
+    )
+    guard_token = public_contract["surface_guard"]["forbidden_tokens"][0]
+    mutations.extend(
+        (f"surface widening {index}", "append_surface", path, guard_token)
+        for index, path in enumerate(public_contract["surface_guard"]["paths"], 1)
+    )
+    if len(mutations) != RECURSIVE_OBSERVATION_PUBLIC_MUTATION_COUNT:
+        fail("recursive-observation public mutation inventory count drifted")
+
+    for name, operation, path, value in mutations:
+        candidate_documents = dict(document_texts)
+        candidate_surfaces = dict(surface_texts)
+        if operation == "replace":
+            candidate_documents[path] = candidate_documents[path].replace(value, "", 1)
+        elif operation == "append_document":
+            candidate_documents[path] += "\n" + value
+        elif operation == "append_surface":
+            candidate_surfaces[path] += "\n" + value
+        else:
+            fail(f"unknown recursive-observation public mutation operation: {operation}")
+        try:
+            validate_recursive_observation_public_no_drift(
+                public_contract,
+                contract["rollout"],
+                candidate_documents,
+                candidate_surfaces,
+            )
+        except ContractError:
+            continue
+        fail(f"recursive-observation public mutation {name!r} was not rejected")
+    return len(mutations)
+
+
 def main() -> int:
     contract = json.loads(CONTRACT_PATH.read_text(encoding="utf-8"))
     validate_contract(contract)
     mutation_count = mutation_checks(contract)
+    mutation_count += recursive_observation_public_mutation_checks(contract)
     complete = sum(leg["status"] == "complete" for leg in contract["rollout"])
     pending = len(contract["rollout"]) - complete
     print(
@@ -2654,6 +2998,10 @@ def main() -> int:
         f"{len(contract['compatibility_aliases'])} aliases + "
         f"{len(contract['internal_contract_ids'])} internal ids; "
         f"{len(contract['diagnostics'])} diagnostics; "
+        f"recursive-observation public "
+        f"{EXPECTED_COUNTS['recursive_observation_public_documents']} documents/"
+        f"{EXPECTED_COUNTS['recursive_observation_public_forbidden_claims']} forbidden/"
+        f"{EXPECTED_COUNTS['recursive_observation_public_surface_guard_paths']} surface guards; "
         f"{complete} complete / {pending} pending rollout; {mutation_count} drift mutations)"
     )
     return 0

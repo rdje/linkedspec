@@ -10,6 +10,24 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-12 (`FUTURE-PARITY-BACKLOG.14.4.8` — recursive-observation public closeout): preserve the accepted
+  14-row rollout. This leaf governs the observation projection independently; it must neither invent a fifteenth
+  row nor consume combined program-wide `recurring_public_no_drift` before `.14.8`.
+- Treat “public projection” as current documentation plus fail-closed absence proof, not a public API admission.
+  Require six exact current markers, reject six stale milestone claims, and scan ten public facade/API/schema
+  surfaces for private observation names.
+- Write the complete checker-side oracle first. RED must fail only with `recursive-observation public no-drift
+  contract is missing`; GREEN must preserve 9 complete / 5 pending and advance mutations from 87 to 114.
+- Keep the five exact observation sources, six runtime routes, support ledgers, storage initializer, and CI switch
+  unchanged. Focused recomposition passes Perl/Rust/Dart 7 each, Julia 30, Lua 43 per ABI, and all support ledgers.
+- Close parent `.14.4` only after the mdBook, capability guide, Toolbox, ADR, Knowledge, both roadmaps, architecture,
+  and bounded live layers agree that no helper/value/facade/schema/semantic/MCP/CLI/README/runtime surface moved.
+- The fully staged sandboxed canonical run passes every doctrine and executable gate through the task-specific
+  matrix, then stops only when the outer harness denies nested macOS `sandbox-exec` at representative containment
+  with status 71. The unchanged permission-authorized run passes containment/relocation, CLI 66/66 in both option
+  environments, RAM 57%, Phase 0 1,031/1,031 in 713 seconds, and the complete observation matrix through exact
+  `[ci] local CI gate passed` with exit 0.
+
 - 2026-08-12 (`FUTURE-PARITY-BACKLOG.14.4.7` — recursive-observation recurrence): keep the existing broad typed-
   source driver and add one narrower observation-only proof; do not create a seventh implementation or oracle.
 - Bind five exact consumer sources to six ordered runtime routes. Shared Lua must remain one tracked source run

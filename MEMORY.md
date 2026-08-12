@@ -4,18 +4,19 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `77806855` — clean shared-Lua recursive-observation admission base for recurrence atomic 215/300; no push.
-- latest_completed_leaf: `.14.4.7` recursive-observation recurrence is signoff-complete for clean atomic 215/300 landing.
-- active_work_unit: `.14.4.7` exact recurrence signoff is complete; this pointer describes the intended committed handoff.
-- next_action: land atomic 215 cleanly, then activate public closeout `.14.4.8` task-tree-first.
-- in_flight_uncommitted: none in the intended committed handoff; `.14.4.7` owns the atomic staged snapshot until commit.
-- blockers: none. Canonical recurrence proof passes containment/relocation, CLI 66x2, RAM 62%, Phase 0 1,031/1,031 in 723 seconds, all six exact observation routes, and support ledgers through local-CI success.
+- activation_commit: `eb8d052c` — clean recursive-observation recurrence base for public closeout atomic 216/300; no push.
+- latest_completed_leaf: `.14.4.8` recursive-observation public projection/no-drift is signoff-complete for intended atomic 216/300 landing.
+- active_work_unit: `.14.4.8` public closeout signoff is complete; this pointer describes the intended committed handoff.
+- next_action: land atomic 216 cleanly, then activate lossless gap-composition activity `.14.5` task-tree-first.
+- in_flight_uncommitted: none in the intended committed handoff; `.14.4.8` owns the atomic staged snapshot until commit.
+- blockers: none. Focused/public/six-runtime proof and canonical CI pass all eight doctrines, containment/relocation,
+  CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 713 seconds, and the opt-in matrix; the task has full evidence.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes. Eleven topology mutations advanced governance to 53, four lineage mutations to 57, and executable
   neutral observation to 70, Perl admission to 71, Rust admission to 72, Dart admission to 73, Julia admission to
-  74, shared-Lua admission to 75, and dedicated recurrence to 87. Observation is complete at 9/5; public authored
-  values and final public no-drift remain future. Recognition
+  74, shared-Lua admission to 75, dedicated recurrence to 87, and observation public projection/no-drift to 114.
+  Observation remains complete at 9/5; no public API is admitted and combined program-wide `.14.8` remains future. Recognition
   transactions are current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; recurrence and public no-drift are current at 9/9, closing transaction parent `.14.3` without runtime or public-API movement.
 - recurring_rollout_fact: the original contract combines recurring and public no-drift in one `.14.8` row. Detailed
   plan/history assign `.14.2.6` driver/topology only; do not add a fifteenth row or promote `.14.8` prematurely.
@@ -55,6 +56,5 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   policy, and authority-backed carriers at 207/207; exact ordinary/canonical proof is current while the API stays private.
   Lua has one shared Lua-5.1 authority at 187/187 and admitted ActionIR/effect/progress/runtime/carriers at 246/246
   per ABI; ordinary/canonical proof runs once per ABI while facade privacy remains unchanged.
-- current_future_direction: recurrence `.14.4.7` is signoff-complete from clean activation `77806855`; public
-  closeout `.14.4.8` follows only after atomic 215 is clean; closed repeated-action next owner remains `FUTURE-PARITY-BACKLOG.10.1`.
-- latest_bootstrap_read: 2026-08-12 — complete roadmap/codebase/mdBook and continuity/tooling review; pivot guard: do not leave recurrence `.14.4.7` until its owned tree is committed and clean; push lock is 300.
+- current_future_direction: `.14.4.8` is signoff-complete from clean `eb8d052c`; `.14.5` follows only after atomic 216 is clean; closed repeated-action next owner remains `FUTURE-PARITY-BACKLOG.10.1`.
+- latest_bootstrap_read: 2026-08-12 — complete roadmap/codebase/mdBook and continuity/tooling review; pivot guard: do not leave public closeout `.14.4.8` until its owned tree is committed and clean; push lock is 300.
