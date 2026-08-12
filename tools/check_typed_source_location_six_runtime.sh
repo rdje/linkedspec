@@ -38,7 +38,7 @@ log "checking the Perl immutable values, exact helper projections, and recursive
 PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t t/recursive_observation_perl_contract.t
 
 log "checking the Rust immutable values and exact helper projections"
-"$CARGO_CMD" test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract
+"$CARGO_CMD" test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract --test recursive_observation_contract
 
 log "checking the Dart immutable values and exact helper projections"
 ( cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/typed_source_location_contract_test.dart )

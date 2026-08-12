@@ -24,6 +24,9 @@ PERL_PROJECTION_CONSUMER_PATH = ROOT / "t" / "typed_source_location_perl_contrac
 RUST_CONSUMER_PATH = (
     ROOT / "rust" / "linkedspec-runtime" / "tests" / "typed_source_location_contract.rs"
 )
+RUST_OBSERVATION_CONSUMER_PATH = (
+    ROOT / "rust" / "linkedspec-runtime" / "tests" / "recursive_observation_contract.rs"
+)
 DART_CONSUMER_PATH = (
     ROOT / "dart" / "test" / "typed_source_location_contract_test.dart"
 )
@@ -53,7 +56,7 @@ EXPECTED_COUNTS = {
     "rollout_legs": 14,
     "recurring_source_groups": 5,
     "recurring_runtime_routes": 6,
-    "mutations": 71,
+    "mutations": 72,
 }
 
 POLICY = {
@@ -69,8 +72,8 @@ POLICY = {
     "recursion": "entry, selected-match, and accepted-exit observations are read-only; invocation ids are positive, unique, and monotonic; nullable parents are distinct earlier same-authority ids with bounded acyclic links",
     "progress": "repetition, recursion, and staged queues must advance the cursor or prove a well-founded decreasing measure",
     "dispatch_authority": "a span conveys data and provenance only; source, registry, capability, and policy authority remain independently required",
-    "source_spelling": "observe_recognition(observation, call(Child)) is current in Perl and selected for the remaining runtimes; Position and Span remain private architectural values projected as detached records",
-    "implementation_boundary": "the recursive-observation spelling, dedicated ActionIR node, detached carrier, and parser behavior are admitted only in Perl; Rust, Dart, Julia, PUC Lua, and LuaJIT remain pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted",
+    "source_spelling": "observe_recognition(observation, call(Child)) is current in Perl and Rust and selected for the remaining runtimes; Position and Span remain private architectural values projected as detached records",
+    "implementation_boundary": "the recursive-observation spelling, dedicated private node, detached carrier, and parser behavior are admitted only in Perl and Rust; Dart, Julia, PUC Lua, and LuaJIT remain pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted",
 }
 
 CANONICAL_EXECUTION = {
@@ -100,7 +103,8 @@ RECURRING_GATE = {
         {
             "backend": "rust",
             "paths": [
-                "rust/linkedspec-runtime/tests/typed_source_location_contract.rs"
+                "rust/linkedspec-runtime/tests/typed_source_location_contract.rs",
+                "rust/linkedspec-runtime/tests/recursive_observation_contract.rs",
             ],
         },
         {
@@ -129,7 +133,7 @@ RECURRING_GATE = {
         {
             "runtime": "rust",
             "source_backend": "rust",
-            "command": '"$CARGO_CMD" test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract',
+            "command": '"$CARGO_CMD" test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract --test recursive_observation_contract',
         },
         {
             "runtime": "dart",
@@ -331,7 +335,7 @@ RECURSIVE_OBSERVATION_SURFACE = {
     "operand": "the second operand is exactly one unevaluated statically named call(Rule)",
     "return": "the expression returns the ordinary child payload unchanged; observation data is never mixed with payload truthiness",
     "terminal": "accepted and failed calls bind before returning; aborted and rejected calls finalize the detached record before propagating the unchanged typed failure",
-    "availability": "selected backend-neutral future syntax only; no runtime, ActionIR, facade, schema, semantic/MCP, CLI, or public support admission is current",
+    "availability": "private syntax is current only in Perl and Rust; no facade, descriptor/schema, semantic/MCP, CLI, or public support admission is current",
 }
 
 RECURSIVE_OBSERVATION_CARRIER = {
@@ -596,7 +600,12 @@ ROLLOUT = [
     ("julia_runtime", "complete", "FUTURE-PARITY-BACKLOG.14.2.4.3", ["julia"]),
     ("lua_dual_abi", "complete", "FUTURE-PARITY-BACKLOG.14.2.5.3", ["puc_lua", "luajit"]),
     ("transaction_safety", "pending", "FUTURE-PARITY-BACKLOG.14.3", []),
-    ("recursive_observation", "pending", "FUTURE-PARITY-BACKLOG.14.4", ["perl"]),
+    (
+        "recursive_observation",
+        "pending",
+        "FUTURE-PARITY-BACKLOG.14.4",
+        ["perl", "rust"],
+    ),
     ("lossless_gap_composition", "pending", "FUTURE-PARITY-BACKLOG.14.5", []),
     ("progressive_span_dispatch", "pending", "FUTURE-PARITY-BACKLOG.14.6", []),
     ("staged_span_dispatch", "pending", "FUTURE-PARITY-BACKLOG.14.7", []),
@@ -1171,8 +1180,8 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         fail("contract id drifted")
     if contract["task_owner"] != "FUTURE-PARITY-BACKLOG.14.1.1":
         fail("task owner drifted")
-    if contract["status"] != "neutral_contract_with_perl_recursive_observation":
-        fail("neutral-only status drifted")
+    if contract["status"] != "neutral_contract_with_perl_rust_recursive_observation":
+        fail("typed source-location status drifted")
     if contract["expected_counts"] != EXPECTED_COUNTS:
         fail("expected counts drifted")
     if contract["policy"] != POLICY:
@@ -1810,6 +1819,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             PERL_VALUE_CONSUMER_PATH,
             PERL_PROJECTION_CONSUMER_PATH,
             RUST_CONSUMER_PATH,
+            RUST_OBSERVATION_CONSUMER_PATH,
             DART_CONSUMER_PATH,
             JULIA_CONSUMER_PATH,
             JULIA_RUNTESTS_PATH,
@@ -1832,7 +1842,8 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             "perl -c -Iperl t/recursive_observation_perl_contract.t",
             "PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t t/recursive_observation_perl_contract.t",
             "require_tracked_file rust/linkedspec-runtime/tests/typed_source_location_contract.rs",
-            "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract",
+            "require_tracked_file rust/linkedspec-runtime/tests/recursive_observation_contract.rs",
+            "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract --test recursive_observation_contract",
             "require_tracked_file dart/test/typed_source_location_contract_test.dart",
             "bash ../tools/run_dart_project_data.sh test --reporter failures-only test/typed_source_location_contract_test.dart",
             "require_tracked_file julia/test/typed_source_location_contract_test.jl",
@@ -2058,6 +2069,10 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ),
         ("recursive observation removed", lambda c: c["recursive_observations"].pop()),
         ("recursive diagnostic", lambda c: c["recursive_observations"][4].__setitem__("diagnostic", None)),
+        (
+            "Rust recursive observation admission omitted",
+            lambda c: c["rollout"][9].__setitem__("runtimes", ["perl"]),
+        ),
         ("structural case removed", lambda c: c["structural_authoring_cases"].pop()),
         ("structural regex count", lambda c: c["structural_authoring_cases"][2].__setitem__("regex_count", 3)),
         ("helper projection removed", lambda c: c["helper_projections"]["capture_mark"].pop()),

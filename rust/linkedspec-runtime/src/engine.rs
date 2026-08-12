@@ -755,6 +755,9 @@ impl GeneratedPlanExecutor<'_> {
                 format!("label={label} entry_regex_idx={entry_regex_idx} pos={entry_pos}"),
                 TraceLevel::MEDIUM,
             );
+            if ctx.recursive_observation_expects(label) {
+                return Err(ctx.reject_recursive_observation(label, entry_pos));
+            }
             return Ok(RuntimeValue::Undef);
         }
 
@@ -762,6 +765,7 @@ impl GeneratedPlanExecutor<'_> {
             ctx.exit_recursion(label, entry_pos);
             return Err(error);
         }
+        ctx.note_recursive_observation_entry(label);
 
         ctx.enter_rule_variable_scope();
         ctx.trace_enter(
@@ -975,7 +979,7 @@ impl GeneratedPlanExecutor<'_> {
             }
 
             if let Some(m) = match_result {
-                ctx.note_recognition_match();
+                ctx.note_recognition_match(m.start, m.end);
                 let dispatch_index = required_and_idx.unwrap_or(m.index);
                 let (target_rule, target_regex_index) =
                     structural_slot_identity(rule, dispatch_index);
@@ -1054,9 +1058,17 @@ impl GeneratedPlanExecutor<'_> {
                         );
                         if entry.fluent_chain.is_empty() {
                             if let Some(ref block) = entry.code {
-                                if Engine::block_calls_rule(block, &entry.child_label)
-                                    || Engine::block_reads_retv(block)
+                                let observes_child =
+                                    Engine::block_observes_rule(block, &entry.child_label);
+                                let calls_child =
+                                    Engine::block_calls_rule(block, &entry.child_label);
+                                let reads_retv = Engine::block_reads_retv(block);
+                                if observes_child
+                                    || (entry.child_label == label && !calls_child && !reads_retv)
                                 {
+                                    self.engine.execute_block(block, ctx, label)?;
+                                    collect_or_return_action_value!();
+                                } else if calls_child || reads_retv {
                                     let child_retv = self.execute_action_edge_child_rule(
                                         &entry.child_label,
                                         entry.child_regex_idx,
@@ -1072,9 +1084,6 @@ impl GeneratedPlanExecutor<'_> {
                                     block_result?;
                                     collect_or_return_action_value!();
                                     ctx.set_retv(child_retv);
-                                } else if entry.child_label == label {
-                                    self.engine.execute_block(block, ctx, label)?;
-                                    collect_or_return_action_value!();
                                 } else {
                                     self.engine.execute_block(block, ctx, label)?;
                                     collect_or_return_action_value!();
@@ -1213,6 +1222,9 @@ impl GeneratedPlanExecutor<'_> {
                 format!("label={label} entry_regex_idx={entry_regex_idx} pos={entry_pos}"),
                 TraceLevel::MEDIUM,
             );
+            if ctx.recursive_observation_expects(label) {
+                return Err(ctx.reject_recursive_observation(label, entry_pos));
+            }
             return Ok(RuntimeValue::Undef);
         }
 
@@ -1220,6 +1232,7 @@ impl GeneratedPlanExecutor<'_> {
             ctx.exit_recursion(label, entry_pos);
             return Err(error);
         }
+        ctx.note_recursive_observation_entry(label);
 
         ctx.enter_rule_variable_scope();
         ctx.trace_enter(
@@ -2418,12 +2431,16 @@ impl Engine {
                 format!("status=cut label={label} pos={}", ctx.pos),
                 TraceLevel::LOW,
             );
+            if ctx.recursive_observation_expects(label) {
+                return Err(ctx.reject_recursive_observation(label, entry_pos));
+            }
             return Ok(RuntimeValue::Undef);
         }
         if let Err(error) = ctx.enter_recognition_invocation(label) {
             ctx.exit_recursion(label, entry_pos);
             return Err(error);
         }
+        ctx.note_recursive_observation_entry(label);
         // Run the body, then leave the frame on BOTH the Ok and Err paths so the
         // active set stays balanced (empty between top-level parses).
         ctx.enter_rule_variable_scope();
@@ -2944,7 +2961,7 @@ impl Engine {
             }
 
             if let Some(m) = match_result {
-                ctx.note_recognition_match();
+                ctx.note_recognition_match(m.start, m.end);
                 let dispatch_index = required_and_idx.unwrap_or(m.index);
                 let (target_rule, target_regex_index) =
                     structural_slot_identity(rule, dispatch_index);
@@ -3035,9 +3052,16 @@ impl Engine {
                         );
                         if entry.fluent_chain.is_empty() {
                             if let Some(ref block) = entry.code {
-                                if Self::block_calls_rule(block, &entry.child_label)
-                                    || Self::block_reads_retv(block)
+                                let observes_child =
+                                    Self::block_observes_rule(block, &entry.child_label);
+                                let calls_child = Self::block_calls_rule(block, &entry.child_label);
+                                let reads_retv = Self::block_reads_retv(block);
+                                if observes_child
+                                    || (entry.child_label == label && !calls_child && !reads_retv)
                                 {
+                                    self.execute_block(block, ctx, label)?;
+                                    collect_or_return_action_value!();
+                                } else if calls_child || reads_retv {
                                     // Perl lowers `call(child)` inside the edge
                                     // block to the already matched edge child.
                                     // A bare `retv` read has the same dependency:
@@ -3058,17 +3082,6 @@ impl Engine {
                                     block_result?;
                                     collect_or_return_action_value!();
                                     ctx.set_retv(child_retv);
-                                } else if entry.child_label == label {
-                                    // A self-recursive code edge such as
-                                    // `-> rule[1] { return(...) }` is usually a
-                                    // close/finalizer branch. The matched regex
-                                    // already selected that entry point; running
-                                    // the same rule again would seek forward to a
-                                    // later close marker and move the cursor
-                                    // past the current construct before the
-                                    // block can return.
-                                    self.execute_block(block, ctx, label)?;
-                                    collect_or_return_action_value!();
                                 } else {
                                     // Blocks that do not call the child run before
                                     // the generated Perl handler dispatches that
@@ -3212,13 +3225,28 @@ impl Engine {
             .any(|stmt| Self::expr_calls_rule(&stmt.expr, rule_label))
     }
 
+    fn block_observes_rule(block: &CodeBlock, rule_label: &str) -> bool {
+        block.statements.iter().any(|statement| {
+            matches!(
+                &statement.expr,
+                Expr::AssignScalar { value, .. }
+                    if matches!(
+                        value.as_ref(),
+                        Expr::ObserveRecognition { rule, .. } if rule == rule_label
+                    )
+            )
+        })
+    }
+
     fn expr_calls_rule(expr: &Expr, rule_label: &str) -> bool {
         match expr {
             Expr::Call { name, args } => {
                 (name == "call" && Self::call_names_rule(args, rule_label))
                     || args.iter().any(|arg| Self::arg_calls_rule(arg, rule_label))
             }
-            Expr::RecognizeOnce { rule, .. } => rule == rule_label,
+            Expr::RecognizeOnce { rule, .. } | Expr::ObserveRecognition { rule, .. } => {
+                rule == rule_label
+            }
             Expr::RecognitionCheckpoint
             | Expr::RecognitionCommit { .. }
             | Expr::RecognitionRollback { .. } => false,
@@ -3292,6 +3320,7 @@ impl Engine {
             Expr::Call { args, .. } => args.iter().any(Self::arg_reads_retv),
             Expr::RecognitionCheckpoint
             | Expr::RecognizeOnce { .. }
+            | Expr::ObserveRecognition { .. }
             | Expr::RecognitionCommit { .. }
             | Expr::RecognitionRollback { .. } => false,
             Expr::AssignScalar { value, .. } => Self::expr_reads_retv(value),
@@ -4662,6 +4691,32 @@ impl Engine {
                 let matched = ctx.finish_recognition_scope(completion_base, rule)?;
                 ctx.recognition_attempt(rule_label, token, matched, payload)?;
                 Ok(RuntimeValue::Bool(matched))
+            }
+            Expr::ObserveRecognition { target, rule } => {
+                let has_recognition_structure = self
+                    .spec
+                    .find(rule)
+                    .map(|child| {
+                        !child.regex_patterns.is_empty() || !child.dependency_refs.is_empty()
+                    })
+                    .ok_or_else(|| {
+                        "LINKEDSPEC_SOURCE_LOCATION_ERROR:source_location_recursive_observation_operand"
+                            .to_owned()
+                    })?;
+                let completion_base = ctx.begin_recursive_observation(rule_label, rule);
+                let result = self.execute_rule(rule, 0, ctx);
+                let observation = ctx.finish_recursive_observation(
+                    completion_base,
+                    rule,
+                    result.is_ok(),
+                    has_recognition_structure,
+                )?;
+                let RuntimeValue::Hash(entries) = observation else {
+                    unreachable!("recursive observation always projects one detached harray");
+                };
+                ctx.record_rule_local_binding(target);
+                ctx.set_hash(target, entries);
+                result
             }
             Expr::RecognitionCommit { token } => ctx.recognition_commit(rule_label, token),
             Expr::RecognitionRollback { token } => {
@@ -8955,6 +9010,34 @@ Child::
         let engine = Engine::new(compiled);
         let result = engine.execute("no match here").unwrap();
         assert!(result.is_array());
+    }
+
+    #[test]
+    fn recursive_observation_binds_aborted_record_before_propagating_child_error() {
+        let source = r#"Top:
+AbortChild:
+ I { recognition_commit(missing) }
+"#;
+        let spec = parse_spec(source).unwrap();
+        validate(&spec).unwrap();
+        let engine = Engine::new(compile(&spec).unwrap());
+        let mut ctx = RuntimeContext::new("");
+        ctx.enter_recognition_invocation("Top").unwrap();
+        let observation_expr = Expr::ObserveRecognition {
+            target: "observation".to_owned(),
+            rule: "AbortChild".to_owned(),
+        };
+
+        let error = engine
+            .eval_expr(&observation_expr, &mut ctx, "Top")
+            .expect_err("child error must propagate");
+        assert!(error.contains("recognition_token_expected"), "{error}");
+        let observation = RuntimeValue::Hash(ctx.get_hash("observation")).to_json();
+        assert_eq!(observation["rule_label"], "AbortChild");
+        assert_eq!(observation["outcome"], "aborted");
+        assert_eq!(observation["accepted_exit"], Value::Null);
+        assert_eq!(observation["diagnostic"], Value::Null);
+        ctx.leave_recognition_invocation("Top").unwrap();
     }
 
     #[test]

@@ -124,14 +124,15 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 
 The check is unconditional. It independently derives Unicode-scalar, line/column, and UTF-8 coordinates;
 materializes direct and derived spans; executes invocation and bounded-transaction state transitions; validates
-recursive and zero/one/two-regex structural cases; and rejects all 71 registered mutations.
+recursive and zero/one/two-regex structural cases; and rejects all 72 registered mutations.
 
 The `.14.4.0` audit found one contradiction in that baseline: `direct_nonprogress` used the same textual identity
 for invocation and parent. Corrective `.14.4.0.1` changes all six observation identities to positive unique
 monotonic numbers and validates lineage before exact fixture comparison. Four reason-checked regressions prove
 self-parent, reused identity, invalid parent order, and cyclic-lineage rejection. The gate therefore proves the
-monotonic/acyclic neutral contract now. Executable `.14.4.1` and Perl admission `.14.4.2` add the dedicated
-private node, fail-closed static policy, and live/generated runtime behavior while other engines remain pending.
+monotonic/acyclic neutral contract now. Executable `.14.4.1` plus Perl `.14.4.2` and Rust `.14.4.3` admissions add
+dedicated private nodes, fail-closed static/effect policy, and live/generated runtime behavior while Dart, Julia,
+and shared Lua remain pending.
 Its definitive correction run also passes the six-runtime typed-source composition, strict Rust generated-source
 105/105, capability 80/0/0, language coverage 246 current / 105 corpus plus one named-mark fixture / 122 public
 Perl contracts, all eight doctrines, repository containment/relocation, CLI 66x2, RAM 34%, and Phase 0
@@ -149,10 +150,11 @@ The gate then unconditionally runs the admitted Perl value, projection, and recu
 PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t t/recursive_observation_perl_contract.t
 ```
 
-The gate also requires and ordinarily executes Rust's exact value and projection consumer:
+The gate also requires and ordinarily executes Rust's exact value/projection and recursive-observation consumers:
 
 ```bash
-cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract
+cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime \
+  --test typed_source_location_contract --test recursive_observation_contract
 ```
 
 The gate then requires and ordinarily executes Dart's exact four-test value and projection consumer through
@@ -179,7 +181,7 @@ bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_t
 bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua
 ```
 
-Its current rollout result is 8 complete / 6 pending with 71 registered mutations. Passing this gate proves the
+Its current rollout result is 8 complete / 6 pending with 72 registered mutations. Passing this gate proves the
 neutral contract, both completed public-structure rows, and all six internal runtime targets across their exact
 value/helper carriers. Rust and Lua retain UTF-8-byte registers, Dart retains UTF-16 code-unit registers, and Julia
 retains zero-based UTF-8 code-unit registers while each converts at its immutable typed boundary. This does not
@@ -211,7 +213,7 @@ because this all-toolchain composition is opt-in. Existing project-data routing 
 driver adds no temporary root or global package cache.
 
 Eleven recurring-topology mutations first brought the total to 53; four recursive-lineage mutations brought it
-to 57, executable neutral observation raised it to 70, and the Perl admission regression raises it to 71. The
+to 57, executable neutral observation raised it to 70, and the Perl and Rust admission regressions raise it to 72. The
 topology cases independently reject missing consumer sources or
 paths, missing/reordered/duplicated runtime routes, command or source-binding drift, support-ledger omission,
 driver/switch drift, and premature completion of the combined final row. Rollout therefore remains 8 complete /

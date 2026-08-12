@@ -29,7 +29,7 @@
 
 use crate::ast::{BodyElementKind, Rule, SpecFile};
 use crate::error::{LinkedSpecError, PortableDiagnostic, Result};
-use crate::expr::{CodeBlock, RemovedAggregateSelector};
+use crate::expr::{AccessSegment, Arg, CodeBlock, Expr, RemovedAggregateSelector};
 use crate::trace::{TraceConfig, TraceEmitter, TraceLevel};
 use crate::types::{
     AcodeEntry, BcodeEntry, CompiledRule, CompiledSpec, CompiledUserFunction, DependencyRef,
@@ -55,6 +55,7 @@ pub fn compile(spec: &SpecFile) -> Result<CompiledSpec> {
         .map_err(LinkedSpecError::Compile)?;
     validate_no_removed_aggregate_selectors(&compiled)?;
     build_dependency_regex_map(&mut compiled)?;
+    validate_recursive_observation_contract(&compiled)?;
     validate_compiled_regex_slot_identities(&compiled)?;
     Ok(compiled)
 }
@@ -220,9 +221,243 @@ fn compile_with_events(spec: &SpecFile, trace: &mut TraceEmitter) -> Result<Comp
         },
     )?;
     dependency_result?;
+    validate_recursive_observation_contract(&compiled)?;
     validate_compiled_regex_slot_identities(&compiled)?;
 
     Ok(compiled)
+}
+
+#[derive(Default)]
+struct RecognitionEffectFacts {
+    observes: bool,
+    calls: Vec<String>,
+    attempts: Vec<String>,
+}
+
+fn visit_expr(
+    expr: &Expr,
+    visitor: &mut impl FnMut(&Expr) -> std::result::Result<(), LinkedSpecError>,
+) -> std::result::Result<(), LinkedSpecError> {
+    visitor(expr)?;
+    match expr {
+        Expr::Call { args, .. } => visit_expr_args(args, visitor),
+        Expr::AssignScalar { value, .. } | Expr::AssignArrayAppend { value, .. } => {
+            visit_expr(value, visitor)
+        }
+        Expr::AssignHashIndex { key, value, .. } => {
+            visit_expr(key, visitor)?;
+            visit_expr(value, visitor)
+        }
+        Expr::AssignNestedAccess {
+            segments, value, ..
+        } => {
+            visit_expr_segments(segments, visitor)?;
+            visit_expr(value, visitor)
+        }
+        Expr::IndexedVar { index, .. } => visit_expr(index, visitor),
+        Expr::NestedAccess { segments, .. } => visit_expr_segments(segments, visitor),
+        Expr::ValueAccess { receiver, segments } => {
+            visit_expr(receiver, visitor)?;
+            visit_expr_segments(segments, visitor)
+        }
+        Expr::ArrayLiteral { items } => {
+            for item in items {
+                visit_expr(item, visitor)?;
+            }
+            Ok(())
+        }
+        Expr::HashLiteral { entries } => {
+            for entry in entries {
+                visit_expr(&entry.key, visitor)?;
+                visit_expr(&entry.value, visitor)?;
+            }
+            Ok(())
+        }
+        Expr::BlockValue { block } => visit_block(block, visitor),
+        Expr::ContextualCodeblockCandidate(candidate) => {
+            visit_statements(&candidate.codeblock.body_ast.statements, visitor)
+        }
+        Expr::CodeblockArgument(codeblock) | Expr::CodeblockLiteral(codeblock) => {
+            visit_statements(&codeblock.body_ast.statements, visitor)
+        }
+        Expr::FluentChain { receiver, calls } => {
+            visit_expr(receiver, visitor)?;
+            for call in calls {
+                visit_expr_args(&call.args, visitor)?;
+            }
+            Ok(())
+        }
+        Expr::RecognitionCheckpoint
+        | Expr::RecognizeOnce { .. }
+        | Expr::ObserveRecognition { .. }
+        | Expr::RecognitionCommit { .. }
+        | Expr::RecognitionRollback { .. }
+        | Expr::Variable { .. }
+        | Expr::StringLiteral { .. }
+        | Expr::NumberLiteral { .. }
+        | Expr::BooleanLiteral { .. }
+        | Expr::RegexLiteral { .. }
+        | Expr::Undef => Ok(()),
+    }
+}
+
+fn visit_expr_args(
+    args: &[Arg],
+    visitor: &mut impl FnMut(&Expr) -> std::result::Result<(), LinkedSpecError>,
+) -> std::result::Result<(), LinkedSpecError> {
+    for argument in args {
+        visit_expr(argument.value(), visitor)?;
+    }
+    Ok(())
+}
+
+fn visit_expr_segments(
+    segments: &[AccessSegment],
+    visitor: &mut impl FnMut(&Expr) -> std::result::Result<(), LinkedSpecError>,
+) -> std::result::Result<(), LinkedSpecError> {
+    for segment in segments {
+        if let AccessSegment::Index { expr } = segment {
+            visit_expr(expr, visitor)?;
+        }
+    }
+    Ok(())
+}
+
+fn visit_block(
+    block: &CodeBlock,
+    visitor: &mut impl FnMut(&Expr) -> std::result::Result<(), LinkedSpecError>,
+) -> std::result::Result<(), LinkedSpecError> {
+    visit_statements(&block.statements, visitor)
+}
+
+fn visit_statements(
+    statements: &[crate::expr::Stmt],
+    visitor: &mut impl FnMut(&Expr) -> std::result::Result<(), LinkedSpecError>,
+) -> std::result::Result<(), LinkedSpecError> {
+    for statement in statements {
+        visit_expr(&statement.expr, visitor)?;
+    }
+    Ok(())
+}
+
+fn rule_blocks(rule: &CompiledRule) -> impl Iterator<Item = &CodeBlock> {
+    [
+        rule.preamble.as_ref(),
+        rule.lxcode.as_ref(),
+        rule.lscode.as_ref(),
+        rule.lecode.as_ref(),
+        rule.ecode.as_ref(),
+        rule.excode.as_ref(),
+        rule.itcode.as_ref(),
+    ]
+    .into_iter()
+    .flatten()
+    .chain(
+        rule.acode_dispatch
+            .iter()
+            .filter_map(|entry| entry.code.as_ref()),
+    )
+    .chain(
+        rule.bcode_dispatch
+            .iter()
+            .filter_map(|entry| entry.code.as_ref()),
+    )
+}
+
+fn rule_reaches_observation(
+    node: &str,
+    facts: &std::collections::BTreeMap<String, RecognitionEffectFacts>,
+    visited: &mut std::collections::BTreeSet<String>,
+) -> bool {
+    if !visited.insert(node.to_owned()) {
+        return false;
+    }
+    let Some(current) = facts.get(node) else {
+        return false;
+    };
+    current.observes
+        || current
+            .calls
+            .iter()
+            .any(|callee| rule_reaches_observation(callee, facts, visited))
+}
+
+/// Validate the dedicated static observation operand and its closed transaction effect.
+fn validate_recursive_observation_contract(spec: &CompiledSpec) -> Result<()> {
+    let rule_names = spec
+        .rules
+        .iter()
+        .map(|rule| rule.label.as_str())
+        .collect::<std::collections::BTreeSet<_>>();
+    let function_names = spec
+        .functions
+        .iter()
+        .map(|function| function.name.as_str())
+        .collect::<std::collections::BTreeSet<_>>();
+    let mut facts = std::collections::BTreeMap::new();
+
+    let gather = |blocks: Vec<&CodeBlock>| -> Result<RecognitionEffectFacts> {
+        let mut current = RecognitionEffectFacts::default();
+        for block in blocks {
+            visit_block(block, &mut |expr| {
+                match expr {
+                    Expr::ObserveRecognition { rule: callee, .. } => {
+                        if !rule_names.contains(callee.as_str()) {
+                            return Err(LinkedSpecError::Compile(
+                                "LINKEDSPEC_SOURCE_LOCATION_ERROR:source_location_recursive_observation_operand"
+                                    .to_owned(),
+                            ));
+                        }
+                        current.observes = true;
+                    }
+                    Expr::RecognizeOnce { rule: callee, .. } => {
+                        current.attempts.push(format!("rule:{callee}"));
+                    }
+                    Expr::Call { name, args } if name == "call" => {
+                        if let [Arg::Positional(Expr::Variable { name: callee })] = args.as_slice()
+                        {
+                            current.calls.push(format!("rule:{callee}"));
+                        }
+                    }
+                    Expr::Call { name, .. } if function_names.contains(name.as_str()) => {
+                        current.calls.push(format!("function:{name}"));
+                    }
+                    _ => {}
+                }
+                Ok(())
+            })?;
+        }
+        Ok(current)
+    };
+
+    for rule in &spec.rules {
+        facts.insert(
+            format!("rule:{}", rule.label),
+            gather(rule_blocks(rule).collect())?,
+        );
+    }
+    for function in &spec.functions {
+        facts.insert(
+            format!("function:{}", function.name),
+            gather(vec![&function.body])?,
+        );
+    }
+
+    for current in facts.values() {
+        for attempted_node in &current.attempts {
+            if rule_reaches_observation(
+                attempted_node,
+                &facts,
+                &mut std::collections::BTreeSet::new(),
+            ) {
+                return Err(LinkedSpecError::Compile(
+                    "LINKEDSPEC_RECOGNITION_TRANSACTION_ERROR:recognition_effect_forbidden:binding_write"
+                        .to_owned(),
+                ));
+            }
+        }
+    }
+    Ok(())
 }
 
 fn removed_aggregate_selector_error(
@@ -385,9 +620,9 @@ fn parse_rule_code_block(
 ) -> Result<Option<CodeBlock>> {
     match CodeBlock::parse_with_callable_candidates(code) {
         Ok(block) => Ok(Some(block)),
-        Err(err) if is_unsupported_actionir_helper_error(&err) => Err(LinkedSpecError::Compile(
-            format!("rule '{rule_label}': failed to parse {code_kind} code: {err}"),
-        )),
+        Err(err) if is_fail_closed_actionir_error(&err) => Err(LinkedSpecError::Compile(format!(
+            "rule '{rule_label}': failed to parse {code_kind} code: {err}"
+        ))),
         Err(err) => {
             eprintln!("warning: rule '{rule_label}': failed to parse {code_kind} code: {err}");
             Ok(None)
@@ -395,8 +630,10 @@ fn parse_rule_code_block(
     }
 }
 
-fn is_unsupported_actionir_helper_error(error: &str) -> bool {
+fn is_fail_closed_actionir_error(error: &str) -> bool {
     error.contains("LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:")
+        || error.contains("LINKEDSPEC_SOURCE_LOCATION_ERROR:")
+        || error.contains("LINKEDSPEC_RECOGNITION_TRANSACTION_ERROR:")
 }
 
 fn compile_rule(rule: &Rule) -> Result<CompiledRule> {

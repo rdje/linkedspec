@@ -15,10 +15,11 @@ answers:
   - "is recursive observation a public helper"
   - "is Perl recursive observation admitted in canonical CI"
 date: 2026-08-12
-status: current private Perl admission; remaining runtimes and public closeout pending
+status: current private Perl admission; Rust successor current; Dart Julia Lua and public closeout pending
 tags: [perl, source-location, recursion, observation, ActionIR, generated-source, admission, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.14.4.2 adds dedicated OBSERVE_RECOGNITION scanning/lowering, RecursiveObservationPolicy static validation, direct-parent and rejected-attempt identity in the existing RecognitionTransaction authority, detached SourceLocation record builders, live/generated runtime observation, and unchanged typed recursion errors. t/recursive_observation_perl_contract.t passes seven top-level groups covering exact event/lowering, static failures, falsey/failure outcomes, entry/match/exit/cursor/detach behavior, abort/reject identity, direct/mutual guards, and independently loaded emitted source. The typed-source checker records Perl on the still-pending recursive_observation row at 8 complete / 6 pending / 71 mutations. The recognition checker remains complete at 129 current + four dedicated transaction nodes, 246 calls, and 58 mutations because OBSERVE_RECOGNITION is a rejected binding_write effect. Language coverage classifies observe_recognition as grammar-owned/non-public outside the 246 helper inventory."
 canonical_update_2026_08_12: "Canonical proof exposed admitted recognition consumers that snapshot the live and aggregate ActionIR counts. Neutral metadata assertions now expect 129 live in Rust, Dart, Julia, and Lua and 133 aggregate in Dart, Julia, and Lua; backend transaction behavior and the 9/9 rollout are unchanged."
+rust_successor_update_2026_08_12: "Rust successor .14.4.3 is now admitted across native, reconstructed, generated-plan, and independently compiled emitted carriers. The pending recursive_observation row contains Perl and Rust at unchanged 8/6 rollout and 72 mutations; Dart, Julia, and shared Lua remain pending."
 signoff_update_2026_08_12: "Definitive signoff passes the rendered book at 79 files / 14508 KiB, Knowledge Map at 822 facts / 6843 question keys, all eight doctrines, exact six-runtime typed-source composition, repository containment and relocation, primary CLI 66/66 in both option environments, RAM 50%, and Phase 0 1031/1031 in 723 seconds through exact local-CI success with exit 0."
 reverify: "perl -c -Iperl perl/LinkedSpec/RecursiveObservationPolicy.pm && perl -c -Iperl perl/LinkedSpec/RecognitionTransactionRuntime.pm && prove -Iperl t/recursive_observation_perl_contract.t t/recognition_transaction_perl_authority.t t/recognition_transaction_perl_contract.t t/generated_source_contract.t && bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py && bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && perl tools/check_language_capability_coverage.pl"
 ---
@@ -42,8 +43,9 @@ or parse-wide history escapes.
 
 Canonical CI requires, syntax-checks, and executes the exact final-path consumer with the existing Perl typed-
 source consumers. The form is grammar-owned and private: it is not a public helper, a new authored value kind, a
-descriptor/generated schema revision, a semantic/MCP field, or a CLI/README surface. Rust, Dart, Julia, shared
-Lua, recurring composition, and public closeout remain owned by `.14.4.3-.8`.
+descriptor/generated schema revision, a semantic/MCP field, or a CLI/README surface. Rust is now independently
+admitted by `.14.4.3`; Dart, Julia, shared Lua, recurring composition, and public
+closeout remain owned by `.14.4.4-.8`.
 
 ## Links
 

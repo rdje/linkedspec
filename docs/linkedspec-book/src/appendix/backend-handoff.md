@@ -101,7 +101,7 @@
 > lifecycle ownership. The neutral contract and all six internal value/projection runtime targets are admitted.
 > Existing helpers retain their public results and established scalar, byte, or code-unit mark/cursor behavior.
 >
-> Public authored typed values, non-Perl recursive observation, and span-native dispatch remain owned by later leaves. The combined
+> Public authored typed values, Dart/Julia/Lua recursive observation, and span-native dispatch remain owned by later leaves. The combined
 > recurring/public no-drift row stays pending for final program-wide owner `FUTURE-PARITY-BACKLOG.14.8`; the
 > transaction closeout does not promote that separate typed-source row early.
 >
@@ -125,10 +125,14 @@
 > custom public value kind or accessor family. The 33-transition neutral machine is authoritative for action-edge
 > versus direct entry, terminal selected-match replacement, accepted-only exit, all four outcomes, child-owned
 > seek/consume, fresh rejected-child ids, and no parse-wide history.
-> Perl `.2` now admits that exact private surface across live and independently loaded generated-source execution.
+> Perl `.2` admits that exact private surface across live and independently loaded generated-source execution.
 > It uses one dedicated `OBSERVE_RECOGNITION` node, fail-closed static target/operand policy, the existing monotonic
 > invocation authority, and no history ledger. The node is a forbidden binding-write inside recognition
-> transactions. Rust `.3`, Dart `.4`, Julia `.5`, one shared PUC-Lua/LuaJIT implementation `.6`, recurring `.7`,
+> transactions. Rust `.3` now admits one dedicated `ObserveRecognition` expression across native, serialized
+> reconstruction, generated-plan, and independently compiled emitted source. It reuses the same invocation
+> authority, converts UTF-8-byte registers only at the typed carrier boundary, preserves falsey payloads and
+> child-owned cursor policy, retains no history, and is likewise a forbidden transaction binding-write. Dart `.4`,
+> Julia `.5`, one shared PUC-Lua/LuaJIT implementation `.6`, recurring `.7`,
 > and public `.8` follow. No public helper/value/schema/facade/semantic/MCP/CLI/README surface moved.
 >
 > Definitive neutral signoff passes the exact six-runtime composition and support ledgers, all eight doctrines,
@@ -137,8 +141,8 @@
 >
 > Definitive Perl-admission signoff passes the 17-test Perl route, the unchanged Rust/Dart/Julia/Lua consumers,
 > generated-source/capability/language ledgers, all eight doctrines, containment/relocation, CLI 66x2, RAM 50%,
-> and Phase 0 1,031/1,031 in 723 seconds. The remaining backend implementer must begin from Rust `.14.4.3`; Perl
-> is complete and no non-Perl or public recursive-observation surface is implied.
+> and Phase 0 1,031/1,031 in 723 seconds. Rust is now complete under `.14.4.3`; the remaining backend implementer
+> begins from Dart `.14.4.4`. No public recursive-observation surface is implied.
 >
 > **Repeated-action handoff:** Every backend must consume
 > `linkedspec-explicit-repetition-action-result-v1`: bare `OR` is minimum-one repetition, explicit action returns

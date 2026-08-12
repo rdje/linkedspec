@@ -134,6 +134,9 @@ pub enum Expr {
     /// Perform one non-eager static child-rule recognition attempt.
     #[serde(rename = "recognize_once")]
     RecognizeOnce { token: String, rule: String },
+    /// Observe one ordinary static child invocation through a detached harray.
+    #[serde(rename = "observe_recognition")]
+    ObserveRecognition { target: String, rule: String },
     /// Commit one attempted recognition transaction and return its payload.
     #[serde(rename = "recognition_commit")]
     RecognitionCommit { token: String },
@@ -305,6 +308,7 @@ impl Expr {
             }
             Expr::RecognitionCheckpoint
             | Expr::RecognizeOnce { .. }
+            | Expr::ObserveRecognition { .. }
             | Expr::RecognitionCommit { .. }
             | Expr::RecognitionRollback { .. } => None,
             Expr::AssignScalar { value, .. } | Expr::AssignArrayAppend { value, .. } => {
@@ -354,59 +358,61 @@ impl Expr {
         }
     }
 
-    /// Report whether this expression tree contains a dedicated transaction node.
-    pub fn contains_recognition_transaction(&self) -> bool {
+    /// Report whether this tree needs the private recognition/observation runtime route.
+    pub fn contains_recognition_runtime_intrinsic(&self) -> bool {
         let args_contain = |args: &[Arg]| {
             args.iter()
-                .any(|argument| argument.value().contains_recognition_transaction())
+                .any(|argument| argument.value().contains_recognition_runtime_intrinsic())
         };
         let segments_contain = |segments: &[AccessSegment]| {
             segments.iter().any(|segment| match segment {
                 AccessSegment::Key { .. } => false,
-                AccessSegment::Index { expr } => expr.contains_recognition_transaction(),
+                AccessSegment::Index { expr } => expr.contains_recognition_runtime_intrinsic(),
             })
         };
         match self {
             Expr::RecognitionCheckpoint
             | Expr::RecognizeOnce { .. }
+            | Expr::ObserveRecognition { .. }
             | Expr::RecognitionCommit { .. }
             | Expr::RecognitionRollback { .. } => true,
             Expr::Call { args, .. } => args_contain(args),
             Expr::AssignScalar { value, .. } | Expr::AssignArrayAppend { value, .. } => {
-                value.contains_recognition_transaction()
+                value.contains_recognition_runtime_intrinsic()
             }
             Expr::AssignHashIndex { key, value, .. } => {
-                key.contains_recognition_transaction() || value.contains_recognition_transaction()
+                key.contains_recognition_runtime_intrinsic()
+                    || value.contains_recognition_runtime_intrinsic()
             }
             Expr::AssignNestedAccess {
                 segments, value, ..
-            } => segments_contain(segments) || value.contains_recognition_transaction(),
-            Expr::IndexedVar { index, .. } => index.contains_recognition_transaction(),
+            } => segments_contain(segments) || value.contains_recognition_runtime_intrinsic(),
+            Expr::IndexedVar { index, .. } => index.contains_recognition_runtime_intrinsic(),
             Expr::NestedAccess { segments, .. } => segments_contain(segments),
             Expr::ValueAccess { receiver, segments } => {
-                receiver.contains_recognition_transaction() || segments_contain(segments)
+                receiver.contains_recognition_runtime_intrinsic() || segments_contain(segments)
             }
-            Expr::ArrayLiteral { items } => {
-                items.iter().any(Expr::contains_recognition_transaction)
-            }
+            Expr::ArrayLiteral { items } => items
+                .iter()
+                .any(Expr::contains_recognition_runtime_intrinsic),
             Expr::HashLiteral { entries } => entries.iter().any(|entry| {
-                entry.key.contains_recognition_transaction()
-                    || entry.value.contains_recognition_transaction()
+                entry.key.contains_recognition_runtime_intrinsic()
+                    || entry.value.contains_recognition_runtime_intrinsic()
             }),
-            Expr::BlockValue { block } => block.contains_recognition_transaction(),
+            Expr::BlockValue { block } => block.contains_recognition_runtime_intrinsic(),
             Expr::ContextualCodeblockCandidate(candidate) => candidate
                 .codeblock
                 .body_ast
                 .statements
                 .iter()
-                .any(|statement| statement.expr.contains_recognition_transaction()),
+                .any(|statement| statement.expr.contains_recognition_runtime_intrinsic()),
             Expr::CodeblockArgument(codeblock) | Expr::CodeblockLiteral(codeblock) => codeblock
                 .body_ast
                 .statements
                 .iter()
-                .any(|statement| statement.expr.contains_recognition_transaction()),
+                .any(|statement| statement.expr.contains_recognition_runtime_intrinsic()),
             Expr::FluentChain { receiver, calls } => {
-                receiver.contains_recognition_transaction()
+                receiver.contains_recognition_runtime_intrinsic()
                     || calls.iter().any(|call| args_contain(&call.args))
             }
             Expr::Variable { .. }
@@ -449,6 +455,9 @@ impl std::fmt::Display for Expr {
             Expr::RecognitionCheckpoint => f.write_str("recognition_checkpoint()"),
             Expr::RecognizeOnce { token, rule } => {
                 write!(f, "recognize_once({token}, call({rule}))")
+            }
+            Expr::ObserveRecognition { target, rule } => {
+                write!(f, "observe_recognition({target}, call({rule}))")
             }
             Expr::RecognitionCommit { token } => write!(f, "recognition_commit({token})"),
             Expr::RecognitionRollback { token } => write!(f, "recognition_rollback({token})"),
@@ -598,10 +607,10 @@ impl CodeBlock {
     }
 
     /// Report whether this block contains a dedicated transaction node.
-    pub fn contains_recognition_transaction(&self) -> bool {
+    pub fn contains_recognition_runtime_intrinsic(&self) -> bool {
         self.statements
             .iter()
-            .any(|statement| statement.expr.contains_recognition_transaction())
+            .any(|statement| statement.expr.contains_recognition_runtime_intrinsic())
     }
 }
 
@@ -2008,7 +2017,7 @@ impl<'a> Parser<'a> {
             }
             self.advance(1); // consume ')'
 
-            if let Some(expr) = Self::recognition_transaction_expr(&name, &args)? {
+            if let Some(expr) = Self::recognition_intrinsic_expr(&name, &args)? {
                 return Ok(expr);
             }
             let expr = self.parse_optional_trailing_block_arg(name, args)?;
@@ -2039,7 +2048,7 @@ impl<'a> Parser<'a> {
         }
     }
 
-    fn recognition_transaction_expr(name: &str, args: &[Arg]) -> Result<Option<Expr>, String> {
+    fn recognition_intrinsic_expr(name: &str, args: &[Arg]) -> Result<Option<Expr>, String> {
         let bare = |argument: &Arg| match argument {
             Arg::Positional(Expr::Variable { name }) => Some(name.clone()),
             _ => None,
@@ -2051,6 +2060,55 @@ impl<'a> Parser<'a> {
         };
 
         match name {
+            "observe_recognition" => {
+                let Some(target_arg) = args.first() else {
+                    return Err(
+                        "LINKEDSPEC_SOURCE_LOCATION_ERROR:source_location_recursive_observation_target"
+                            .to_owned(),
+                    );
+                };
+                let Some(target) = bare(target_arg) else {
+                    return Err(
+                        "LINKEDSPEC_SOURCE_LOCATION_ERROR:source_location_recursive_observation_target"
+                            .to_owned(),
+                    );
+                };
+                let [_, operand_arg] = args else {
+                    return Err(
+                        "LINKEDSPEC_SOURCE_LOCATION_ERROR:source_location_recursive_observation_operand"
+                            .to_owned(),
+                    );
+                };
+                let Arg::Positional(Expr::Call {
+                    name: call_name,
+                    args: call_args,
+                }) = operand_arg
+                else {
+                    return Err(
+                        "LINKEDSPEC_SOURCE_LOCATION_ERROR:source_location_recursive_observation_operand"
+                            .to_owned(),
+                    );
+                };
+                let [rule_arg] = call_args.as_slice() else {
+                    return Err(
+                        "LINKEDSPEC_SOURCE_LOCATION_ERROR:source_location_recursive_observation_operand"
+                            .to_owned(),
+                    );
+                };
+                let Some(rule) = bare(rule_arg) else {
+                    return Err(
+                        "LINKEDSPEC_SOURCE_LOCATION_ERROR:source_location_recursive_observation_operand"
+                            .to_owned(),
+                    );
+                };
+                if call_name != "call" {
+                    return Err(
+                        "LINKEDSPEC_SOURCE_LOCATION_ERROR:source_location_recursive_observation_operand"
+                            .to_owned(),
+                    );
+                }
+                Ok(Some(Expr::ObserveRecognition { target, rule }))
+            }
             "recognition_checkpoint" => {
                 if args.is_empty() {
                     Ok(Some(Expr::RecognitionCheckpoint))

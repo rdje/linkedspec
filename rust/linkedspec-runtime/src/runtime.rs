@@ -180,6 +180,23 @@ pub enum RuntimeVarKind {
     Hash,
 }
 
+#[derive(Debug, Clone)]
+struct RecognitionInvocationCompletion {
+    identity: crate::recognition_transaction::RecognitionInvocationIdentity,
+    accepted: bool,
+    entry_cursor: usize,
+    selected_match: Option<(usize, usize)>,
+    exit_cursor: usize,
+    rejection_diagnostic: Option<&'static str>,
+}
+
+#[derive(Debug, Clone)]
+struct RecursiveObservationScope {
+    observer_rule: String,
+    callee: String,
+    awaiting_entry: bool,
+}
+
 /// Runtime context for a single rule invocation.
 #[derive(Debug, Clone)]
 pub struct RuntimeContext {
@@ -191,7 +208,10 @@ pub struct RuntimeContext {
     recognition_transactions: crate::recognition_transaction::RecognitionRuntime,
     /// Active non-eager recognition scopes publish explicit child acceptance.
     recognition_scope_depth: usize,
-    recognition_completions: Vec<(String, bool)>,
+    recognition_completions: Vec<RecognitionInvocationCompletion>,
+    /// Active explicit observation boundaries; invocation lineage remains owned
+    /// solely by `recognition_transactions` rather than this scope metadata.
+    recursive_observation_scopes: Vec<RecursiveObservationScope>,
     /// Current match position in the input.
     pub pos: usize,
     /// Declared scalar variables.
@@ -391,6 +411,7 @@ impl RuntimeContext {
             ),
             recognition_scope_depth: 0,
             recognition_completions: Vec::new(),
+            recursive_observation_scopes: Vec::new(),
             source_authority,
             pos: 0,
             scalars: std::collections::HashMap::new(),
@@ -536,17 +557,34 @@ impl RuntimeContext {
         } else {
             self.marks.remove(rule_label);
         }
-        if self.recognition_scope_depth > 0 {
+        if self.recognition_scope_depth > 0 || !self.recursive_observation_scopes.is_empty() {
             self.recognition_completions
-                .push((rule_label.to_owned(), exit.accepted));
+                .push(RecognitionInvocationCompletion {
+                    identity: exit.identity,
+                    accepted: exit.accepted,
+                    entry_cursor: usize::try_from(exit.entry_cursor)
+                        .expect("Rust recognition entry cursor fits usize"),
+                    selected_match: exit.selected_match.map(|(start, end)| {
+                        (
+                            usize::try_from(start)
+                                .expect("Rust recognition match start fits usize"),
+                            usize::try_from(end).expect("Rust recognition match end fits usize"),
+                        )
+                    }),
+                    exit_cursor: self.pos,
+                    rejection_diagnostic: None,
+                });
         }
         terminal
             .map(|()| exit.accepted)
             .map_err(|error| error.to_string())
     }
 
-    pub(crate) fn note_recognition_match(&mut self) {
-        self.recognition_transactions.note_match();
+    pub(crate) fn note_recognition_match(&mut self, start: usize, end: usize) {
+        self.recognition_transactions.note_match(
+            u64::try_from(start).expect("Rust recognition match start fits u64"),
+            u64::try_from(end).expect("Rust recognition match end fits u64"),
+        );
     }
 
     pub(crate) fn begin_recognition_scope(&mut self) -> usize {
@@ -567,13 +605,13 @@ impl RuntimeContext {
         let completion = completions
             .into_iter()
             .rev()
-            .find(|(rule, _)| rule == expected_rule)
+            .find(|completion| completion.identity.rule_label == expected_rule)
             .ok_or_else(|| {
                 format!(
                     "recognition child '{expected_rule}' did not publish one invocation completion"
                 )
             })?;
-        Ok(completion.1)
+        Ok(completion.accepted)
     }
 
     pub(crate) fn cancel_recognition_scope(&mut self, completion_base: usize) {
@@ -590,8 +628,181 @@ impl RuntimeContext {
         }
         self.recognition_completions
             .pop()
-            .map(|(_, accepted)| accepted)
+            .map(|completion| completion.accepted)
             .unwrap_or(fallback)
+    }
+
+    pub(crate) fn begin_recursive_observation(
+        &mut self,
+        observer_rule: &str,
+        callee: &str,
+    ) -> usize {
+        let completion_base = self.recognition_completions.len();
+        self.recursive_observation_scopes
+            .push(RecursiveObservationScope {
+                observer_rule: observer_rule.to_owned(),
+                callee: callee.to_owned(),
+                awaiting_entry: true,
+            });
+        completion_base
+    }
+
+    pub(crate) fn note_recursive_observation_entry(&mut self, callee: &str) {
+        if let Some(scope) = self.recursive_observation_scopes.last_mut()
+            && scope.awaiting_entry
+            && scope.callee == callee
+        {
+            scope.awaiting_entry = false;
+        }
+    }
+
+    pub(crate) fn reject_recursive_observation(
+        &mut self,
+        callee: &str,
+        entry_cursor: usize,
+    ) -> String {
+        let scope = self
+            .recursive_observation_scopes
+            .last()
+            .expect("recursive-observation rejection has an active scope");
+        debug_assert_eq!(scope.callee, callee);
+        debug_assert!(scope.awaiting_entry);
+        let diagnostic = if scope.observer_rule == callee {
+            "source_location_nonprogress_direct_recursion"
+        } else {
+            "source_location_nonprogress_mutual_recursion"
+        };
+        let identity = self
+            .recognition_transactions
+            .reserve_rejected_invocation(callee);
+        self.recognition_completions
+            .push(RecognitionInvocationCompletion {
+                identity,
+                accepted: false,
+                entry_cursor,
+                selected_match: None,
+                exit_cursor: entry_cursor,
+                rejection_diagnostic: Some(diagnostic),
+            });
+        format!("LINKEDSPEC_SOURCE_LOCATION_ERROR:{diagnostic}")
+    }
+
+    pub(crate) fn recursive_observation_expects(&self, callee: &str) -> bool {
+        self.recursive_observation_scopes
+            .last()
+            .is_some_and(|scope| scope.awaiting_entry && scope.callee == callee)
+    }
+
+    pub(crate) fn finish_recursive_observation(
+        &mut self,
+        completion_base: usize,
+        expected_rule: &str,
+        execution_succeeded: bool,
+        has_recognition_structure: bool,
+    ) -> Result<RuntimeValue, String> {
+        let scope = self
+            .recursive_observation_scopes
+            .pop()
+            .expect("recursive-observation scopes are balanced");
+        debug_assert_eq!(scope.callee, expected_rule);
+        let completions = self.recognition_completions.split_off(completion_base);
+        let completion = completions
+            .into_iter()
+            .rev()
+            .find(|completion| completion.identity.rule_label == expected_rule)
+            .ok_or_else(|| {
+                format!(
+                    "recursive observation child '{expected_rule}' did not publish one invocation completion"
+                )
+            })?;
+        let accepted = execution_succeeded
+            && completion.rejection_diagnostic.is_none()
+            && (!has_recognition_structure || completion.accepted);
+        let outcome = if completion.rejection_diagnostic.is_some() {
+            "rejected"
+        } else if !execution_succeeded {
+            "aborted"
+        } else if accepted {
+            "accepted"
+        } else {
+            "failed"
+        };
+        self.recursive_observation_record(completion, accepted, outcome)
+    }
+
+    fn recursive_observation_record(
+        &self,
+        completion: RecognitionInvocationCompletion,
+        accepted: bool,
+        outcome: &str,
+    ) -> Result<RuntimeValue, String> {
+        let position = |byte_offset: usize, projection: &str| {
+            self.typed_position_from_byte(byte_offset, &completion.identity.rule_label, projection)
+                .map(|value| runtime_value_from_json(value.as_record()))
+                .ok_or_else(|| {
+                    format!(
+                        "recursive observation position is invalid: rule={} byte_offset={byte_offset}",
+                        completion.identity.rule_label
+                    )
+                })
+        };
+        let entry_position = position(completion.entry_cursor, "recursive_observation_entry")?;
+        let selected_match = completion
+            .selected_match
+            .map(|(start, end)| {
+                self.typed_span_from_bytes(
+                    start,
+                    end,
+                    &completion.identity.rule_label,
+                    "match",
+                )
+                .map(|value| runtime_value_from_json(value.as_record()))
+                .ok_or_else(|| {
+                    format!(
+                        "recursive observation match is invalid: rule={} start={start} end={end}",
+                        completion.identity.rule_label
+                    )
+                })
+            })
+            .transpose()?
+            .unwrap_or(RuntimeValue::Undef);
+        let accepted_exit = if accepted {
+            position(completion.exit_cursor, "recursive_observation_exit")?
+        } else {
+            RuntimeValue::Undef
+        };
+        let parent = completion
+            .identity
+            .parent_invocation_id
+            .map(|value| RuntimeValue::Number(value as f64))
+            .unwrap_or(RuntimeValue::Undef);
+        let diagnostic = completion
+            .rejection_diagnostic
+            .map(|value| RuntimeValue::Scalar(value.to_owned()))
+            .unwrap_or(RuntimeValue::Undef);
+        Ok(RuntimeValue::Hash(vec![
+            (
+                "source_id".to_owned(),
+                RuntimeValue::Scalar(INPUT_SOURCE_ID.to_owned()),
+            ),
+            (
+                "rule_label".to_owned(),
+                RuntimeValue::Scalar(completion.identity.rule_label),
+            ),
+            (
+                "invocation_id".to_owned(),
+                RuntimeValue::Number(completion.identity.invocation_id as f64),
+            ),
+            ("parent_invocation_id".to_owned(), parent),
+            ("entry_position".to_owned(), entry_position),
+            ("selected_match".to_owned(), selected_match),
+            ("accepted_exit".to_owned(), accepted_exit),
+            (
+                "outcome".to_owned(),
+                RuntimeValue::Scalar(outcome.to_owned()),
+            ),
+            ("diagnostic".to_owned(), diagnostic),
+        ]))
     }
 
     pub(crate) fn recognition_checkpoint(

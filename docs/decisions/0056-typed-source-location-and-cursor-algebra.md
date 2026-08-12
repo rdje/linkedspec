@@ -545,6 +545,44 @@ authored observation remains grammar-owned/non-public rather than joining the co
 There is no public helper/value, descriptor or generated schema version, semantic/MCP projection, CLI option,
 README claim, facade export, or non-Perl implementation in this admission.
 
+### 23. Admit the same private recursive-observation boundary in Rust
+
+`FUTURE-PARITY-BACKLOG.14.4.3` admits the selected surface in Rust through one dedicated serialized
+`ObserveRecognition { target, rule }` expression. The parser accepts only one bare target and one unevaluated
+static `call(Rule)` operand. Missing or dynamic targets/operands and missing rules fail closed with the two neutral
+source-location diagnostics. Compiler-wide expression traversal also closes the existing recognition-transaction
+effect graph through ordinary rule calls and user-function calls: any attempted rule that reaches an observation
+binding write is rejected as `recognition_effect_forbidden:binding_write` before execution.
+
+The ordinary engine invokes the child exactly once and returns its payload unchanged, including false. The same
+path is used after serialized compiled-spec reconstruction and by the generated-plan executor. The source emitter
+selects its effective-engine route for the dedicated node, so independently compiled emitted parsers execute the
+same private runtime rather than a divergent template. Action-edge dispatch recognizes the observation as the
+child invocation itself and avoids predispatching the same child a second time. The child retains its own family,
+entry-match, seek/consume, local-match, cursor, and mark policy.
+
+Rust's existing `RecognitionTransactionAuthority` remains the sole invocation authority. Frame entry captures the
+active parent id; an observed recursion rejection reserves one fresh attempted-child id without pushing a frame.
+An observation scope is armed only until that one child entry succeeds; it disarms at entry so an ordinary nested
+self-call inside the child remains governed by the pre-existing recursion cutoff rather than being misclassified
+as the observed edge. A nested explicit observation creates its own independently armed top scope.
+Normal, failed, aborted, and rejected completions are published only while an explicit observation boundary is
+active, consumed at that boundary, and projected as the exact recursively detached nine-field harray. The runtime
+keeps its UTF-8-byte cursor/match registers; entry, selected match, and accepted exit cross the existing typed
+source authority to Unicode-scalar positions/spans only when the record is built. No second stack, retained
+history, source text, path, parser, live frame, match object, authority object, or host reference escapes.
+
+The seven-test final-path consumer covers dedicated lowering and static/effect failures; native and reconstructed
+falsey payloads, detachment, and parse-local id restart; failed, zero-regex, and action-edge cursor behavior;
+direct/mutual progress rejection; unchanged abort propagation; generated-plan execution; and independently
+compiled emitted source. Canonical CI requires it alongside the Rust typed-source consumer. The pending
+`recursive_observation` rollout row now records `perl` and `rust`; one Rust admission-regression mutation advances
+typed-source governance from 71 to 72 while its aggregate remains 8 complete / 6 pending.
+
+This is still a private grammar-owned intrinsic, not a member of the common helper-call inventory. It introduces
+no public `Position`/`Span` value, facade export, descriptor or generated schema version, semantic/MCP projection,
+CLI option, README claim, or Dart/Julia/Lua behavior.
+
 ## Consequences
 
 - Cursor control, capture, recursion, segmentation, and parser composition share one precise model instead of
@@ -582,6 +620,9 @@ README claim, facade export, or non-Perl implementation in this admission.
 - The `.14.4.2` amendment admits that exact private surface in Perl, reusing the invocation authority and generated
   handler families. It records only Perl on the still-pending rollout row and leaves public/non-Perl/schema/
   semantic/MCP/CLI/README boundaries to `.14.4.3-.8`.
+- The `.14.4.3` amendment admits the same private surface in Rust across native, reconstructed, generated-plan, and
+  independently compiled emitted carriers. It records Perl and Rust on the still-pending rollout row and leaves
+  Dart/Julia/Lua plus recurring/public closeout to `.14.4.4-.8`.
 
 ## Links
 

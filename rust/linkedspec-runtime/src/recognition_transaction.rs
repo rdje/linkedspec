@@ -149,6 +149,7 @@ struct InvocationState {
     rule: Box<str>,
     origin: Box<str>,
     invocation: u64,
+    parent_invocation: Option<u64>,
     generation: u64,
     active: bool,
     frame_state: RecognitionFrameState,
@@ -192,6 +193,14 @@ pub struct RecognitionTransactionAuthority {
     invocation_stack: Vec<Rc<RefCell<InvocationState>>>,
 }
 
+/// Parse-local lineage for one entered or pre-entry-rejected invocation.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct RecognitionInvocationIdentity {
+    pub(crate) rule_label: String,
+    pub(crate) invocation_id: u64,
+    pub(crate) parent_invocation_id: Option<u64>,
+}
+
 impl RecognitionTransactionAuthority {
     /// Construct an independent transaction authority over one source authority.
     pub fn new(source_authority: Arc<SourceAuthority>, source_identity: &str) -> Self {
@@ -218,6 +227,10 @@ impl RecognitionTransactionAuthority {
         origin: &str,
         state: RecognitionFrameState,
     ) -> Result<RecognitionInvocationFrame, RecognitionTransactionError> {
+        let parent_invocation = self
+            .invocation_stack
+            .last()
+            .map(|parent| parent.borrow().invocation);
         let invocation = take_generation(
             &mut self.next_invocation,
             "recognition invocation identity space exhausted",
@@ -233,6 +246,7 @@ impl RecognitionTransactionAuthority {
             rule: rule.to_owned().into_boxed_str(),
             origin: origin.to_owned().into_boxed_str(),
             invocation,
+            parent_invocation,
             generation,
             active: true,
             frame_state: state,
@@ -240,6 +254,39 @@ impl RecognitionTransactionAuthority {
         }));
         self.invocation_stack.push(Rc::clone(&state));
         Ok(RecognitionInvocationFrame { state })
+    }
+
+    /// Return detached lineage for one live invocation frame.
+    pub(crate) fn invocation_identity(
+        &self,
+        frame: &RecognitionInvocationFrame,
+    ) -> Result<RecognitionInvocationIdentity, RecognitionTransactionError> {
+        let frame = self.frame_for_authority(frame)?;
+        let frame = frame.borrow();
+        Ok(RecognitionInvocationIdentity {
+            rule_label: frame.rule.to_string(),
+            invocation_id: frame.invocation,
+            parent_invocation_id: frame.parent_invocation,
+        })
+    }
+
+    /// Reserve lineage for a recursion attempt rejected before frame entry.
+    pub(crate) fn reserve_rejected_invocation(
+        &mut self,
+        rule: &str,
+    ) -> RecognitionInvocationIdentity {
+        let parent_invocation_id = self
+            .invocation_stack
+            .last()
+            .map(|parent| parent.borrow().invocation);
+        RecognitionInvocationIdentity {
+            rule_label: rule.to_owned(),
+            invocation_id: take_generation(
+                &mut self.next_invocation,
+                "recognition invocation identity space exhausted",
+            ),
+            parent_invocation_id,
+        }
     }
 
     /// Leave the most recently entered invocation.
@@ -828,6 +875,9 @@ struct RecognitionLiveFrame {
     frame: RecognitionInvocationFrame,
     tokens: BTreeMap<String, RecognitionLiveToken>,
     accepted: bool,
+    identity: RecognitionInvocationIdentity,
+    entry_cursor: u64,
+    selected_match: Option<(u64, u64)>,
     prior_marks: Option<std::collections::HashMap<String, usize>>,
 }
 
@@ -839,6 +889,9 @@ struct RecognitionLiveToken {
 pub(crate) struct RecognitionInvocationExit {
     pub(crate) state: RecognitionFrameState,
     pub(crate) accepted: bool,
+    pub(crate) identity: RecognitionInvocationIdentity,
+    pub(crate) entry_cursor: u64,
+    pub(crate) selected_match: Option<(u64, u64)>,
     pub(crate) prior_marks: Option<std::collections::HashMap<String, usize>>,
 }
 
@@ -859,24 +912,37 @@ impl RecognitionRuntime {
         prior_marks: Option<std::collections::HashMap<String, usize>>,
     ) -> Result<(), RecognitionTransactionError> {
         let mut runtime = self.state.borrow_mut();
+        let entry_cursor = state.cursor();
         let frame =
             runtime
                 .authority
                 .enter_invocation(rule, &format!("{rule}:handler_entry"), state)?;
+        let identity = runtime.authority.invocation_identity(&frame)?;
         runtime.frames.push(RecognitionLiveFrame {
             rule: rule.to_owned(),
             frame,
             tokens: BTreeMap::new(),
             accepted: false,
+            identity,
+            entry_cursor,
+            selected_match: None,
             prior_marks,
         });
         Ok(())
     }
 
-    pub(crate) fn note_match(&self) {
+    pub(crate) fn note_match(&self, start: u64, end: u64) {
         if let Some(frame) = self.state.borrow_mut().frames.last_mut() {
             frame.accepted = true;
+            frame.selected_match = Some((start, end));
         }
+    }
+
+    pub(crate) fn reserve_rejected_invocation(&self, rule: &str) -> RecognitionInvocationIdentity {
+        self.state
+            .borrow_mut()
+            .authority
+            .reserve_rejected_invocation(rule)
     }
 
     pub(crate) fn checkpoint(
@@ -999,6 +1065,9 @@ impl RecognitionRuntime {
         let exit = RecognitionInvocationExit {
             state: restored,
             accepted: frame.accepted,
+            identity: frame.identity,
+            entry_cursor: frame.entry_cursor,
+            selected_match: frame.selected_match,
             prior_marks: frame.prior_marks.take(),
         };
         (exit, result)

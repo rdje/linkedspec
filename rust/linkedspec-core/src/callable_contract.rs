@@ -320,6 +320,7 @@ fn normalize_expr(
         }
         Expr::RecognitionCheckpoint
         | Expr::RecognizeOnce { .. }
+        | Expr::ObserveRecognition { .. }
         | Expr::RecognitionCommit { .. }
         | Expr::RecognitionRollback { .. } => Ok(()),
         Expr::Variable { .. }

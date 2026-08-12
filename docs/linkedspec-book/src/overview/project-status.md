@@ -133,14 +133,17 @@ projection; no new authored value kind or accessor family is introduced.
 The neutral checker executes 33 transitions for action-edge/direct entry, OR/default seek and AND consume,
 terminal-match replacement, zero-regex absence, all four outcomes, fresh pre-entry rejection ids, and detach with
 no retained history. Two static diagnostics plus ten reason-checked state corruptions and three surface/topology
-mutations move governance from 57 to 70. Perl `.14.4.2` now admits the syntax with one dedicated private
+mutations move governance from 57 to 70. Perl `.14.4.2` admits the syntax with one dedicated private
 `OBSERVE_RECOGNITION` node, static target/operand policy, the existing monotonic invocation authority, recursively
 detached carrier construction, pre-entry direct/mutual rejection, and live plus independently loaded generated-
 source execution. The ordinary/canonical consumer preserves falsey payloads and child-owned seek/consume policy.
-One admission-regression mutation advances governance to 71 while the parent row stays pending with only Perl in
-its runtime list. No public helper, facade, descriptor/generated version, result schema, semantic/MCP field, CLI,
-README, or non-Perl behavior is current. Rust, Dart, Julia, shared Lua, recurring, and public legs follow through
-`.14.4.3-.8`.
+Rust `.14.4.3` admits a dedicated private `ObserveRecognition` expression and the same static/effect, invocation,
+detachment, progress, and child-cursor contracts across native, serialized reconstruction, generated-plan, and
+independently compiled emitted-source execution. Its seven-test consumer preserves falsey payloads and converts
+UTF-8-byte registers only at the typed carrier boundary. Two admission regressions advance governance to 72 while
+the parent row stays pending with Perl and Rust in its runtime list. No public helper, facade, descriptor/generated
+version, result schema, semantic/MCP field, CLI, README, or Dart/Julia/Lua behavior is current. Those runtimes,
+recurring, and public legs follow through `.14.4.4-.8`.
 Executable-neutral signoff passes the exact six-runtime composition, support ledgers, all eight doctrines,
 six-family process containment, repository relocation, CLI 66x2, RAM 35%, and canonical Phase 0 1,031/1,031 in
 714 seconds through the exact local-CI success marker.

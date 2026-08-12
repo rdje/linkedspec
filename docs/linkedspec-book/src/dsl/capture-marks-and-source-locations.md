@@ -55,11 +55,13 @@ bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_t
 bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua
 ```
 
-### Recursive source observation: current in Perl
+### Recursive source observation: current in Perl and Rust
 
 The behavior-free `.14.4.0` audit and lineage correction `.14.4.0.1` fix the portable observation boundary.
-Executable neutral leaf `.14.4.1` selected the authored spelling, and Perl admission `.14.4.2` now executes it on
-both live and independently loaded generated-source routes. Rust, Dart, Julia, PUC Lua, and LuaJIT remain pending:
+Executable neutral leaf `.14.4.1` selected the authored spelling. Perl `.14.4.2` executes it on live and
+independently loaded generated-source routes; Rust `.14.4.3` executes it natively, after serialized reconstruction,
+through generated-plan execution, and from independently compiled emitted source. Dart, Julia, PUC Lua, and LuaJIT
+remain pending:
 
 ```text
 value = observe_recognition(observation, call(Child));
@@ -107,15 +109,18 @@ fixture identities with positive unique monotonic numbers; direct and mutual rej
 under an earlier active parent. The checker now rejects self-parent, reuse, invalid parent order, and cycles before
 tuple comparison. Two additional static diagnostics reserve invalid-target and invalid-static-call errors. Ten
 reason-checked state corruptions plus three surface/topology mutations raise typed-source governance from 57 to 70.
-Rust, Dart, Julia, shared Lua, recurring proof, and public closeout still follow in `.3-.8`.
+Dart, Julia, shared Lua, recurring proof, and public closeout still follow in `.4-.8`.
 
-Perl owns one dedicated private `OBSERVE_RECOGNITION` ActionIR node and one static policy pass. Invalid targets and
-operands reject before execution; the runtime uses the existing recognition invocation stack, reserves rejected
-attempt ids without a frame push, and never retains observation history. `OBSERVE_RECOGNITION` is a binding-write
-effect and is therefore forbidden inside a recognition transaction. There is still no public helper, authored
-`Position`/`Span` value, descriptor/generated version, result-schema field, semantic/MCP projection, CLI option,
-or README behavior. The parent recursive-observation row remains pending with only Perl recorded, so the overall
-typed-source rollout remains exactly 8 complete / 6 pending and governance advances to 71 mutations.
+Perl owns one dedicated private `OBSERVE_RECOGNITION` ActionIR node; Rust owns one dedicated private
+`ObserveRecognition` expression node. Both reject invalid targets and operands before execution, reuse the existing
+recognition invocation stack, reserve rejected-attempt ids without a frame push, and retain no observation history.
+Both are binding writes and are therefore forbidden inside a recognition transaction. Rust proves the same
+detached record and falsey payload across native, serialized reconstruction, generated-plan, and independently
+compiled emitted-source execution while preserving UTF-8-byte registers behind typed scalar projections. There is
+still no public helper, authored `Position`/`Span` value, descriptor/generated version, result-schema field,
+semantic/MCP projection, CLI option, or README behavior. The parent recursive-observation row remains pending with
+Perl and Rust recorded, so the overall typed-source rollout remains exactly 8 complete / 6 pending and governance
+advances to 72 mutations.
 
 ### Bounded cursor transactions do not mean general backtracking
 
@@ -328,7 +333,7 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 
 The checker covers 3 decoded sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation,
 8 transaction, and 33 recursive-observation transitions, 6 detached observations, 4 structural cases,
-33 diagnostics, and 71 mutations.
+33 diagnostics, and 72 mutations.
 It also proves that all 92 current source-boundary helpers project onto the algebra.
 
 This is rollout status, not authored-value status. Eight of 14 rollout legs are complete: the neutral contract,
@@ -369,9 +374,10 @@ source executes independently on both ABIs. The extra 11 mutations reject topolo
 The unchanged `.14.2.7` recomposition reruns that authority and closes the six-runtime internal value/helper
 implementation slice. It does not add an authored value or advance the 8-complete/6-pending public rollout.
 
-There is still no public `Position` or `Span` authored value, runtime recursive-observation API, or span-native
-parser dispatch. The future recursive-observation spelling and detached harray carrier are now executable neutral
-contract only. Exact transaction spelling is current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Lua's shared
+There is still no public `Position` or `Span` authored value, public recursive-observation API, or span-native
+parser dispatch. The private recursive-observation spelling and detached harray carrier are executable in the
+neutral contract and admitted internally on Perl and Rust. Exact transaction spelling is current on Perl, Rust,
+Dart, Julia, PUC Lua, and LuaJIT. Lua's shared
 private authority passes 187 assertions per ABI, and its admitted consumer passes 246 per ABI across four dedicated
 nodes, recursive effect/progress policy, and all four runtime carriers after recurring/public metadata closeout. The modules remain unexported
 while the consumer is ordinarily and canonically discovered once per ABI. Transaction rollout is complete at

@@ -10,6 +10,31 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-12 — FUTURE-PARITY-BACKLOG.14.4.3 — admit Rust recursive observation
+
+- Added the exact private `observe_recognition(observation, call(Child))` form to Rust as one serialized,
+  dedicated expression node with fail-closed static target/operand/rule validation.
+- Reused the existing parse-local recognition invocation authority for direct-parent lineage and fresh pre-entry
+  rejection ids. One pending-entry-only scope consumes one ephemeral completion and binds a detached nine-field
+  record without introducing a second stack or parse-wide history.
+- Preserved ordinary child payloads and errors, UTF-8-byte registers, child-owned family/cursor policy, terminal
+  selected matches, action-edge single dispatch, and rule-local target binding across native, reconstructed,
+  generated-plan, and independently compiled emitted-source carriers.
+- Closed recognition transaction effects through both rule and user-function call graphs, so any observation
+  binding write reached from `recognize_once` rejects statically.
+- Added seven final-path regression groups plus an internal bind-before-error proof. Review also corrected a stale
+  Perl-only availability claim and prevented a completed observed entry from misclassifying later ordinary nested
+  recursion.
+- The first staged canonical run caught two duplicated repeated-action result-collection seams introduced by the
+  new observation-only action-edge branches. Consolidating observation and existing self-finalizer dispatch
+  restores the governed eight-site topology; focused recursive-observation 7/7 and repeated-action 3/3 proofs pass.
+- Promoted only Rust alongside Perl on the still-pending observation row, advancing typed-source governance to 72
+  mutations at unchanged 8 complete / 6 pending. Recognition remains 129+4/246/58 and public surfaces stay closed.
+- Synchronized capability guidance, ADR, Knowledge, roadmaps/live state, and the sole-facing mdBook. Focused and
+  exact six-runtime composition, the 79-file/14,512-KiB book, Knowledge 823/6,856, and all eight doctrines pass;
+  definitive canonical proof passes containment/relocation, CLI 66x2, RAM 46%, and Phase 0 1,031/1,031 in 744
+  seconds through exact `[ci] local CI gate passed` with exit 0.
+
 ## 2026-08-12 — FUTURE-PARITY-BACKLOG.14.4.2 — admit Perl recursive observation
 
 - Added the exact authored `value = observe_recognition(observation, call(Child))` route to Perl through one

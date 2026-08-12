@@ -690,7 +690,7 @@ pub fn parse_with_trace_and_options_and_diagnostic_output(
 }
 "#,
     );
-    if compiled_spec_contains_recognition_transaction(compiled) {
+    if compiled_spec_contains_recognition_runtime_intrinsic(compiled) {
         let compatibility_parse = r#"pub fn parse(input: &str) -> Result<serde_json::Value, String> {
     execute_generated_parser(COMPILED_SPEC_JSON, GENERATED_PLAN, input)
 }"#;
@@ -703,11 +703,11 @@ pub fn parse_with_trace_and_options_and_diagnostic_output(
     Ok(source)
 }
 
-fn compiled_spec_contains_recognition_transaction(compiled: &CompiledSpec) -> bool {
+fn compiled_spec_contains_recognition_runtime_intrinsic(compiled: &CompiledSpec) -> bool {
     if compiled
         .functions
         .iter()
-        .any(|function| function.body.contains_recognition_transaction())
+        .any(|function| function.body.contains_recognition_runtime_intrinsic())
     {
         return true;
     }
@@ -723,17 +723,17 @@ fn compiled_spec_contains_recognition_transaction(compiled: &CompiledSpec) -> bo
         ]
         .into_iter()
         .flatten()
-        .any(linkedspec_core::expr::CodeBlock::contains_recognition_transaction)
+        .any(linkedspec_core::expr::CodeBlock::contains_recognition_runtime_intrinsic)
             || rule
                 .acode_dispatch
                 .iter()
                 .filter_map(|entry| entry.code.as_ref())
-                .any(linkedspec_core::expr::CodeBlock::contains_recognition_transaction)
+                .any(linkedspec_core::expr::CodeBlock::contains_recognition_runtime_intrinsic)
             || rule
                 .bcode_dispatch
                 .iter()
                 .filter_map(|entry| entry.code.as_ref())
-                .any(linkedspec_core::expr::CodeBlock::contains_recognition_transaction)
+                .any(linkedspec_core::expr::CodeBlock::contains_recognition_runtime_intrinsic)
     })
 }
 

@@ -4,17 +4,17 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `6e3b77c0` — clean executable-neutral base for Perl recursive-observation atomic 210/300; no push.
-- latest_completed_leaf: `.14.4.2` is signoff-complete as intended atomic 210/300 and awaits its task-scoped commit from activation boundary `6e3b77c0`.
-- active_work_unit: `.14.4.2` Perl recursive-observation implementation/admission, task-tree-first from `6e3b77c0`; commit handoff is the only remaining step.
-- next_action: commit Perl `.14.4.2`, prove clean and clear the brief, then activate Rust `.14.4.3` task-tree-first.
-- in_flight_uncommitted: signoff-complete Perl implementation/admission, contracts, and synchronized durable docs staged for the intended atomic-210 commit.
-- blockers: none. Definitive proof is neutral 8+8+33 / 71, Perl typed-source 17, Rust/Dart 4/4, Julia 127, Lua 240/240 per ABI, recognition 129+4/246/58, language 246/105+1/122, book 79/14,508 KiB, Knowledge 822/6,843, all eight doctrines, containment/relocation, CLI 66x2, RAM 50%, and Phase 0 1,031/1,031 in 723 seconds through exact local-CI success.
+- activation_commit: `2d937d83` — clean Perl recursive-observation admission base for Rust atomic 211/300; no push.
+- latest_completed_leaf: `.14.4.3` private Rust recursive observation is signoff-complete as intended atomic 211/300; commit pending.
+- active_work_unit: `.14.4.3` atomic commit/clean handoff from task-tree-first base `2d937d83`.
+- next_action: commit Rust `.14.4.3` as atomic 211, clear the brief, prove clean, then activate Dart `.14.4.4` task-tree-first.
+- in_flight_uncommitted: terminal canonical evidence and signoff metadata for the complete Rust `.14.4.3` snapshot; implementation and all verification are complete.
+- blockers: none. Definitive proof is neutral 8+8+33 / 72, Perl 17, Rust observation 7 + typed source 4, Dart 4, Julia 127, Lua 240/240 per ABI, recognition 129+4/246/58, language 246/105+1/122, book 79/14,512 KiB, Knowledge 823/6,856, all eight doctrines, CLI 66x2, RAM 46%, and Phase 0 1,031/1,031 in 744 seconds through exact canonical success.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes. Eleven topology mutations advanced governance to 53, four lineage mutations to 57, and executable
-  neutral observation to 70 and Perl observation admission to 71. The pending observation row lists only Perl;
-  public authored values and other observation runtimes remain future. Recognition
+  neutral observation to 70, Perl admission to 71, and Rust admission to 72. The pending observation row lists
+  Perl and Rust; public authored values and Dart/Julia/Lua observation runtimes remain future. Recognition
   transactions are current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; recurrence and public no-drift are current at 9/9, closing transaction parent `.14.3` without runtime or public-API movement.
 - recurring_rollout_fact: the original contract combines recurring and public no-drift in one `.14.8` row. Detailed
   plan/history assign `.14.2.6` driver/topology only; do not add a fifteenth row or promote `.14.8` prematurely.
@@ -54,7 +54,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   policy, and authority-backed carriers at 207/207; exact ordinary/canonical proof is current while the API stays private.
   Lua has one shared Lua-5.1 authority at 187/187 and admitted ActionIR/effect/progress/runtime/carriers at 246/246
   per ABI; ordinary/canonical proof runs once per ABI while facade privacy remains unchanged.
-- current_future_direction: Perl `.14.4.2` signoff-completes `observe_recognition` with one detached nine-field
-  harray; Rust through public rollout remain `.14.4.3-.8` after the clean Perl commit.
+- current_future_direction: Rust `.14.4.3` signoff-completes the detached nine-field observation across native,
+  reconstructed, generated-plan, and emitted carriers while retaining UTF-8-byte registers; atomic commit remains. Dart through public rollout remain `.14.4.4-.8`.
 - latest_bootstrap_read: 2026-08-12 — complete roadmap/codebase/mdBook and required continuity/tooling review.
-- pivot_guard: do not activate Rust `.14.4.3` until Perl `.14.4.2` is committed and clean; push lock is 300.
+- pivot_guard: do not activate Dart `.14.4.4` until Rust `.14.4.3` is committed and clean; push lock is 300.
