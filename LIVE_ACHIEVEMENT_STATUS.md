@@ -2,23 +2,29 @@
 
 ## Current Activity
 
-- Rust recursive-observation leaf `FUTURE-PARITY-BACKLOG.14.4.3` is signoff-complete as intended atomic 211/300
-  from clean Perl-admission commit `2d937d83`; atomic commit remains and no push occurs.
-- The private Rust implementation, four-carrier final-path consumer, governance, Knowledge, mdBook, and live docs
-  pass definitive canonical CLI 66x2, RAM 46%, and Phase 0 1,031/1,031 in 744 seconds.
-- Typed-source truth is 8 complete / 6 pending and 72 mutations; Perl and Rust are recorded on the still-pending
-  recursive-observation row. Recognition governance remains 129 current + four transaction nodes / 246 / 58.
+- Dart recursive-observation leaf `FUTURE-PARITY-BACKLOG.14.4.4` completes as atomic 212/300 from clean
+  Rust-admission commit `91a2b05c`; no push occurs.
+- Dedicated lowering, static/effect policy, existing invocation authority, detached runtime projection, all four
+  carriers, ordinary/canonical/storage governance, and the sole-facing docs are signoff-complete. Dart analysis,
+  observation 7/7, focused 24/24, ordinary package 400, storage 22/47, exact six-runtime typed source, exact five-
+  backend repeated action, final book 79/14,524 KiB, and Knowledge 824/6,869 pass.
+- Typed-source truth is 8 complete / 6 pending and 73 mutations; Perl, Rust, and Dart are recorded on the still-
+  pending recursive-observation row. Recognition remains 129+4/246/58. All eight doctrines and canonical CI pass
+  containment/relocation, CLI 66x2, RAM 57%, Phase 0 1,031/1,031 in 752 seconds, and the typed-source opt-in.
 
 ## Latest Completed Slice
 
-- `.14.4.3` completed private Rust recursive observation and canonical signoff for atomic 211/300; commit pending.
+- `.14.4.4` private Dart recursive observation completes as atomic 212/300.
 
 ## Next Action
 
-- Commit atomic 211, clear the brief, prove clean, and only then activate Dart `.14.4.4` task-tree-first.
+- Activate Julia `.14.4.5` task-tree-first from the clean Dart admission commit, then retrieve its committed
+  authorities before code changes.
 
 ## Recent Completions
 
+- `2026-08-12` — `.14.4.4` completed private Dart recursive-observation admission as atomic 212/300.
+- `2026-08-12` — `91a2b05c` landed private Rust recursive-observation admission `.14.4.3` as atomic 211/300.
 - `2026-08-12` — `.14.4.3` completed private Rust recursive-observation admission and canonical signoff for atomic 211/300.
 - `2026-08-12` — `2d937d83` landed private Perl recursive-observation admission `.14.4.2` as atomic 210/300.
 - `2026-08-12` — `.14.4.2` completed private Perl recursive-observation admission and canonical signoff for atomic 210/300.
@@ -33,8 +39,6 @@
 - `2026-08-11` — `.14.3.7` completed six-runtime recurring proof and canonical signoff for atomic 205/300.
 - `2026-08-11` — `e6893fd4` landed six-runtime recurring recognition proof as atomic 205/300.
 - `2026-08-11` — `1aedfe98` landed exact dual-ABI Lua recognition admission as atomic 204/300.
-- `2026-08-11` — `.14.3.6.3` completed exact dual-ABI Lua recognition admission and canonical signoff for atomic 204/300.
-- `2026-08-11` — `70b4ed04` landed private dual-ABI Lua transaction integration as atomic 203/300.
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source

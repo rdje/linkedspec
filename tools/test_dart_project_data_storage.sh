@@ -66,6 +66,7 @@ expected_temp_owners=(
  dart/test/native_pipeline_trace_test.dart
  dart/test/primary_cli_test.dart
  dart/test/recognition_transaction_contract_test.dart
+ dart/test/recursive_observation_contract_test.dart
  dart/test/repeated_action_result_contract_test.dart
  dart/test/root_rule_selection_admission_test.dart
  dart/test/root_rule_selection_routes_test.dart

@@ -188,6 +188,22 @@ final class ActionRecognitionRollbackExpr extends ActionExpr {
   ActionJsonObject toJson() => {...baseJson(), 'token': token};
 }
 
+/// Invokes one static child and binds its detached recognition observation.
+final class ActionObserveRecognitionExpr extends ActionExpr {
+  const ActionObserveRecognitionExpr({
+    required super.source,
+    required super.sourceSpan,
+    required this.target,
+    required this.rule,
+  }) : super(kind: 'observe_recognition');
+
+  final String target;
+  final String rule;
+
+  @override
+  ActionJsonObject toJson() => {...baseJson(), 'target': target, 'rule': rule};
+}
+
 final class ActionVariableExpr extends ActionExpr {
   const ActionVariableExpr({
     required super.source,
@@ -1026,6 +1042,7 @@ RemovedAggregateSelector? findRemovedAggregateSelectorInExpr(ActionExpr expr) {
     case ActionRecognizeOnceExpr():
     case ActionRecognitionCommitExpr():
     case ActionRecognitionRollbackExpr():
+    case ActionObserveRecognitionExpr():
       return null;
     case ActionFluentChainExpr(:final receiver, :final calls):
       final receiverSelector = findRemovedAggregateSelectorInExpr(receiver);

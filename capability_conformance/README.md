@@ -261,7 +261,7 @@ seven callable compatibility aliases. Two similarly named values—`capture_take
 
 The checker derives coordinates and text independently, executes all three state machines, cross-checks current
 Lua helper authority and the Perl alias/internal-id seams, locks 33 diagnostics, verifies canonical tracked
-execution, and rejects 72 mutations. Eleven of those mutations govern one recurring topology: five backend groups
+execution, and rejects 73 mutations. Eleven of those mutations govern one recurring topology: five backend groups
 map to exact Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT runtime routes, followed by generated-source, capability,
 and language-coverage ledgers. Run the complete recurring proof with:
 
@@ -280,11 +280,12 @@ Executable neutral observation selected
 `value = observe_recognition(observation, call(Child))`: one bare rule-local harray target and one unevaluated
 static call. The ordinary child payload remains the expression result; a separate recursively detached nine-field
 harray records entry, terminal selected match, accepted-only exit, outcome, and numeric lineage. Existing harray
-field access is the complete carrier projection. Perl and Rust now admit the form through dedicated private nodes,
-fail-closed static policy, the existing invocation authority, and ordinary/generated execution. Rust additionally
-locks serialized reconstruction, generated-plan execution, and independently compiled emitted source. The parent
-rollout row remains pending with `perl` and `rust`, so overall rollout remains 8/6. No public helper/value,
-descriptor/generated schema, semantic/MCP field, CLI, README, or Dart/Julia/Lua behavior moved.
+field access is the complete carrier projection. Perl, Rust, and Dart now admit the form through dedicated private
+nodes, fail-closed static policy, the existing invocation authority, and ordinary/generated execution. Rust and
+Dart additionally lock serialized reconstruction, generated-plan execution, and independently compiled or
+analyzed emitted source. Dart retains UTF-16 code-unit registers and converts them only at the typed scalar
+boundary. The parent rollout row remains pending with `perl`, `rust`, and `dart`, so overall rollout remains 8/6.
+No public helper/value, descriptor/generated schema, semantic/MCP field, CLI, README, or Julia/Lua behavior moved.
 
 No public `Position`/`Span` value, descriptor or generated schema, semantic/MCP projection, or source-authority
 elevation is claimed by these internal typed-source runtime admissions. Recognition transaction spelling and

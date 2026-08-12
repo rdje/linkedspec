@@ -745,6 +745,7 @@ final class _ActionContractResolver {
       case ActionRecognizeOnceExpr():
       case ActionRecognitionCommitExpr():
       case ActionRecognitionRollbackExpr():
+      case ActionObserveRecognitionExpr():
         // Grammar-owned recognition intrinsics are dedicated ActionIR nodes,
         // not entries in the ordinary callable-helper registry.
         break;

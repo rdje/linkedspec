@@ -583,6 +583,13 @@ This is still a private grammar-owned intrinsic, not a member of the common help
 no public `Position`/`Span` value, facade export, descriptor or generated schema version, semantic/MCP projection,
 CLI option, README claim, or Dart/Julia/Lua behavior.
 
+### 24. Admit the same private recursive-observation boundary in Dart
+
+- `.14.4.4` adds one private `ActionObserveRecognitionExpr`; exact bare-target/static-call validation and recursive rule/function effect closure reject malformed operands, missing rules, and transaction-reachable `binding_write` before execution.
+- One shared-engine child dispatch preserves payload, family/cursor ownership, and terminal match across native, reconstructed, generated-plan, and independently analyzed/executed emitted carriers.
+- The existing invocation authority supplies parent and rejected-child identity; one pending-entry scope consumes one detached completion, binds before typed failure propagation, and retains neither a second stack nor history.
+- Existing UTF-16 registers cross `SourceAuthority` only when projecting scalar record positions/spans. Seven final-path cases are canonical; the pending row records Perl/Rust/Dart at 8/6/73 with no public facade/helper/value/schema/semantic/MCP/CLI/README or Julia/Lua movement.
+
 ## Consequences
 
 - Cursor control, capture, recursion, segmentation, and parser composition share one precise model instead of
@@ -609,20 +616,8 @@ CLI option, README claim, or Dart/Julia/Lua behavior.
   and recurring composition first advanced current rollout to 8/9. Final public no-drift `.14.3.8` closes the
   transaction ledger at 9/9 while semantic/topology proof remains 58 mutations; public proof is 3/26/45 and the
   capability guide is 1/14/18.
-- The `.14.4.0` amendment is behavior-free. It reuses the existing invocation authority, freezes detached
-  observation semantics and intrinsic child cursor ownership, and makes `.14.4.0.1` a mandatory neutral-lineage
-  correction before any runtime observation implementation.
-- The `.14.4.0.1` amendment completes that behavior-free correction: numeric monotonic lineage and four
-  reason-checked invariant mutations are current, while executable observation remains owned by `.14.4.1+`.
-- The `.14.4.1` amendment selects the future `observe_recognition(observation, call(Child))` surface and makes its
-  detached carrier/state semantics executable in the neutral checker only. Backend implementation and public
-  admission remain dependency-ordered under `.14.4.2-.8`.
-- The `.14.4.2` amendment admits that exact private surface in Perl, reusing the invocation authority and generated
-  handler families. It records only Perl on the still-pending rollout row and leaves public/non-Perl/schema/
-  semantic/MCP/CLI/README boundaries to `.14.4.3-.8`.
-- The `.14.4.3` amendment admits the same private surface in Rust across native, reconstructed, generated-plan, and
-  independently compiled emitted carriers. It records Perl and Rust on the still-pending rollout row and leaves
-  Dart/Julia/Lua plus recurring/public closeout to `.14.4.4-.8`.
+- Amendments `.14.4.0-.1` freeze the behavior-free boundary and correct lineage; `.14.4.1` selects the private form and makes its detached state machine executable without backend admission.
+- Amendments `.14.4.2-.4` admit Perl, Rust, and Dart in order through their governed carriers, leaving the observation row pending and Julia/Lua/recurring/public work to `.14.4.5-.8`.
 
 ## Links
 

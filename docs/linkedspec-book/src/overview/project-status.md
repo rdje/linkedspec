@@ -56,7 +56,7 @@ general style. This documentation-only slice changes no parser or runtime behavi
 The backend-neutral typed source-location contract is complete under `FUTURE-PARITY-BACKLOG.14.1.1`. Its
 independent checker passes 3 sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation,
 8 transaction, and 33 recursive-observation transitions, 6 detached recursive observations, 4 structural cases,
-92 current helper projections, 33 diagnostics, and 70 rejected mutations.
+92 current helper projections, 33 diagnostics, and 73 rejected mutations.
 
 Eight of 14 rollout legs are complete and 6 remain pending. The neutral contract, public linked-rule structure,
 unchanged neutral/public recomposition, and all six runtime targets are complete. Their internal authorities and
@@ -95,7 +95,8 @@ bash tools/check_typed_source_location_six_runtime.sh
 Canonical CI requires and syntax-checks that driver; `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1` opts into its complete
 all-toolchain route. Five backend consumer groups map to six runtime routes because the shared Lua source runs once
 on each ABI. Eleven independent topology mutations first increased the checker from 42 to 53; four later
-recursive-lineage invariants advanced governance to 57, and executable neutral observation advances it to 70.
+recursive-lineage invariants advanced governance to 57, executable neutral observation advances it to 70, and the
+three admitted runtime regressions advance it to 73.
 
 An unchanged `FUTURE-PARITY-BACKLOG.14.2.7` recomposition reruns that complete authority and closes the internal
 value/helper implementation slice `.14.2`. This is a project-state closure, not a new language surface: the six
@@ -140,10 +141,13 @@ source execution. The ordinary/canonical consumer preserves falsey payloads and 
 Rust `.14.4.3` admits a dedicated private `ObserveRecognition` expression and the same static/effect, invocation,
 detachment, progress, and child-cursor contracts across native, serialized reconstruction, generated-plan, and
 independently compiled emitted-source execution. Its seven-test consumer preserves falsey payloads and converts
-UTF-8-byte registers only at the typed carrier boundary. Two admission regressions advance governance to 72 while
-the parent row stays pending with Perl and Rust in its runtime list. No public helper, facade, descriptor/generated
-version, result schema, semantic/MCP field, CLI, README, or Dart/Julia/Lua behavior is current. Those runtimes,
-recurring, and public legs follow through `.14.4.4-.8`.
+UTF-8-byte registers only at the typed carrier boundary. Dart `.14.4.4` admits a dedicated private
+`ActionObserveRecognitionExpr` and the same contracts across native, reconstructed, generated-plan, and freshly
+analyzed emitted-source execution. Its seven-test consumer preserves falsey payloads, projects internal UTF-16
+code-unit positions to Unicode-scalar records, and preserves the governed repeated-action seam. Three admission
+regressions advance governance to 73 while the parent row stays pending with Perl, Rust, and Dart in its runtime
+list. No public helper, facade, descriptor/generated version, result schema, semantic/MCP field, CLI, README, or
+Julia/Lua behavior is current. Those runtimes, recurring, and public legs follow through `.14.4.5-.8`.
 Executable-neutral signoff passes the exact six-runtime composition, support ledgers, all eight doctrines,
 six-family process containment, repository relocation, CLI 66x2, RAM 35%, and canonical Phase 0 1,031/1,031 in
 714 seconds through the exact local-CI success marker.
@@ -154,7 +158,11 @@ Perl-admission signoff passes its 17 tests, Rust and Dart 4 each, Julia 127, PUC
 generated Rust 105/105, capability 80/0/0, and language coverage 246 current / 105 corpus plus one named-mark
 fixture / 122 public Perl contracts. The rendered book, Knowledge 822/6,843, all eight doctrines, repository
 containment/relocation, CLI 66x2, RAM 50%, and canonical Phase 0 1,031/1,031 in 723 seconds also pass through the
-exact local-CI success marker. Rust `.14.4.3` remains next only after the Perl commit lands clean.
+exact local-CI success marker. Rust-admission signoff then passes exact six-runtime typed-source and five-backend
+repeated-action composition, containment/relocation, CLI 66x2, RAM 46%, and Phase 0 1,031/1,031 in 744 seconds.
+Dart-admission signoff passes those same composed authorities, all eight doctrines, containment/relocation, CLI
+66x2, RAM 57%, and Phase 0 1,031/1,031 in 752 seconds through the complete typed-source opt-in and exact local-CI
+success marker. The clean handoff now points to Julia `.14.4.5` as the next backend.
 
 Perl now has an admitted transaction implementation with four dedicated ActionIR nodes, recursive static
 effect closure, invocation-local mark/cursor snapshots, falsey-safe commit results, typed recognition-only progress

@@ -96,6 +96,19 @@ final class RecognitionFrameSnapshot {
   };
 }
 
+/// Opaque parse-local invocation lineage used by the private runtime adapter.
+final class RecognitionInvocationIdentity {
+  const RecognitionInvocationIdentity._({
+    required this.rule,
+    required this.invocationId,
+    required this.parentInvocationId,
+  });
+
+  final String rule;
+  final int invocationId;
+  final int? parentInvocationId;
+}
+
 /// Portable private recognition-transaction diagnostic.
 final class RecognitionTransactionException implements Exception {
   RecognitionTransactionException._(String code, Map<String, Object?> fields)
@@ -140,6 +153,7 @@ final class _InvocationState {
     required this.rule,
     required this.origin,
     required this.invocation,
+    required this.parentInvocation,
     required this.generation,
     required RecognitionFrameState frameState,
   }) : frameState = frameState._copy();
@@ -150,6 +164,7 @@ final class _InvocationState {
   final String rule;
   final String origin;
   final int invocation;
+  final int? parentInvocation;
   final int generation;
   bool active = true;
   RecognitionFrameState frameState;
@@ -221,6 +236,9 @@ final class RecognitionTransactionAuthority {
     required RecognitionFrameState state,
   }) {
     final invocation = _nextInvocation++;
+    final parentInvocation = _invocationStack.isEmpty
+        ? null
+        : _invocationStack.last.invocation;
     final generation = _nextGeneration++;
     final frame = _InvocationState(
       authorityId: _authorityId,
@@ -229,11 +247,36 @@ final class RecognitionTransactionAuthority {
       rule: rule,
       origin: origin,
       invocation: invocation,
+      parentInvocation: parentInvocation,
       generation: generation,
       frameState: state,
     );
     _invocationStack.add(frame);
     return _RecognitionInvocationFrame(frame);
+  }
+
+  /// Returns the parse-local identity of one active invocation.
+  RecognitionInvocationIdentity invocationIdentity(Object frame) {
+    final state = _frameForAuthority(frame);
+    return RecognitionInvocationIdentity._(
+      rule: state.rule,
+      invocationId: state.invocation,
+      parentInvocationId: state.parentInvocation,
+    );
+  }
+
+  /// Reserves one rejected attempted-child identity without pushing a frame.
+  RecognitionInvocationIdentity reserveRejectedInvocation({
+    required String rule,
+  }) {
+    final parentInvocation = _invocationStack.isEmpty
+        ? null
+        : _invocationStack.last.invocation;
+    return RecognitionInvocationIdentity._(
+      rule: rule,
+      invocationId: _nextInvocation++,
+      parentInvocationId: parentInvocation,
+    );
   }
 
   /// Leaves the most recently entered invocation.

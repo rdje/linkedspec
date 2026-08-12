@@ -633,6 +633,14 @@ final class _ActionParser {
       'recognition_static_form_required:$name',
     );
 
+    Never invalidObservationTarget() => throw const FormatException(
+      'source_location_recursive_observation_target',
+    );
+
+    Never invalidObservationOperand() => throw const FormatException(
+      'source_location_recursive_observation_operand',
+    );
+
     switch (name) {
       case 'recognition_checkpoint':
         if (args.isNotEmpty) {
@@ -689,6 +697,34 @@ final class _ActionParser {
                 sourceSpan: sourceSpan,
                 token: token,
               );
+      case 'observe_recognition':
+        if (args.isEmpty || bareName(args.first) == null) {
+          invalidObservationTarget();
+        }
+        if (args.length != 2) {
+          invalidObservationOperand();
+        }
+        final operand = args.last;
+        if (operand is! ActionPositionalArgument ||
+            operand.value is! ActionCallExpr) {
+          invalidObservationOperand();
+        }
+        final call = operand.value as ActionCallExpr;
+        if (call.name != 'call' ||
+            call.sourceMethod != 'call' ||
+            call.args.length != 1) {
+          invalidObservationOperand();
+        }
+        final rule = bareName(call.args.single);
+        if (rule == null) {
+          invalidObservationOperand();
+        }
+        return ActionObserveRecognitionExpr(
+          source: source,
+          sourceSpan: sourceSpan,
+          target: bareName(args.first)!,
+          rule: rule,
+        );
       default:
         return null;
     }

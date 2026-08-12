@@ -4,17 +4,17 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `2d937d83` — clean Perl recursive-observation admission base for Rust atomic 211/300; no push.
-- latest_completed_leaf: `.14.4.3` private Rust recursive observation is signoff-complete as intended atomic 211/300; commit pending.
-- active_work_unit: `.14.4.3` atomic commit/clean handoff from task-tree-first base `2d937d83`.
-- next_action: commit Rust `.14.4.3` as atomic 211, clear the brief, prove clean, then activate Dart `.14.4.4` task-tree-first.
-- in_flight_uncommitted: terminal canonical evidence and signoff metadata for the complete Rust `.14.4.3` snapshot; implementation and all verification are complete.
-- blockers: none. Definitive proof is neutral 8+8+33 / 72, Perl 17, Rust observation 7 + typed source 4, Dart 4, Julia 127, Lua 240/240 per ABI, recognition 129+4/246/58, language 246/105+1/122, book 79/14,512 KiB, Knowledge 823/6,856, all eight doctrines, CLI 66x2, RAM 46%, and Phase 0 1,031/1,031 in 744 seconds through exact canonical success.
+- activation_commit: `91a2b05c` — clean Rust recursive-observation admission base for Dart atomic 212/300; no push.
+- latest_completed_leaf: `.14.4.4` private Dart recursive observation completes as atomic 212/300.
+- active_work_unit: `.14.4.4` completed from clean `91a2b05c`; the clean next frontier is Julia `.14.4.5`.
+- next_action: activate Julia `.14.4.5` task-tree-first from the clean Dart admission commit, then retrieve its committed authorities before code changes.
+- in_flight_uncommitted: none; Dart `.14.4.4` is fully verified, documented, and committed as the durable handoff.
+- blockers: none. Focused/composed proof passes Dart analysis/400/22, observation 7/7, focused 24/24, typed source 8/6/73 across six runtimes, repeated action 8/54 across five backends, recognition 129+4/246/58, language 246/105+1/122, final book 79/14,524 KiB, and Knowledge 824/6,869. Canonical proof passes containment/relocation, CLI 66x2, RAM 57%, Phase 0 1,031/1,031 in 752 seconds, and the complete typed-source opt-in with exit 0.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes. Eleven topology mutations advanced governance to 53, four lineage mutations to 57, and executable
-  neutral observation to 70, Perl admission to 71, and Rust admission to 72. The pending observation row lists
-  Perl and Rust; public authored values and Dart/Julia/Lua observation runtimes remain future. Recognition
+  neutral observation to 70, Perl admission to 71, Rust admission to 72, and Dart admission to 73. The pending
+  observation row lists Perl, Rust, and Dart; public authored values and Julia/Lua observation runtimes remain future. Recognition
   transactions are current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; recurrence and public no-drift are current at 9/9, closing transaction parent `.14.3` without runtime or public-API movement.
 - recurring_rollout_fact: the original contract combines recurring and public no-drift in one `.14.8` row. Detailed
   plan/history assign `.14.2.6` driver/topology only; do not add a fifteenth row or promote `.14.8` prematurely.
@@ -54,7 +54,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   policy, and authority-backed carriers at 207/207; exact ordinary/canonical proof is current while the API stays private.
   Lua has one shared Lua-5.1 authority at 187/187 and admitted ActionIR/effect/progress/runtime/carriers at 246/246
   per ABI; ordinary/canonical proof runs once per ABI while facade privacy remains unchanged.
-- current_future_direction: Rust `.14.4.3` signoff-completes the detached nine-field observation across native,
-  reconstructed, generated-plan, and emitted carriers while retaining UTF-8-byte registers; atomic commit remains. Dart through public rollout remain `.14.4.4-.8`.
+- current_future_direction: Dart `.14.4.4` is complete across all four carriers with UTF-16 registers; the clean
+  handoff points to Julia `.14.4.5`, then shared Lua/recurring/public `.14.4.6-.8`.
 - latest_bootstrap_read: 2026-08-12 — complete roadmap/codebase/mdBook and required continuity/tooling review.
-- pivot_guard: do not activate Dart `.14.4.4` until Rust `.14.4.3` is committed and clean; push lock is 300.
+- pivot_guard: Dart `.14.4.4` is the committed clean boundary; activate Julia `.14.4.5` next; push lock is 300.

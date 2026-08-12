@@ -992,7 +992,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   canonical gate.
 - **OUTPUT:** neutral governance reports 3 sources, 7 positions, 6 direct spans, 3 derived texts, 8+8+33 state
   transitions, 6 recursive observations, 4 structural cases, 92 helper projections + 7 aliases + 2 internal ids,
-  33 diagnostics, 8 complete / 6 pending rollout, and 71 rejected drift mutations. The driver then reports each
+  33 diagnostics, 8 complete / 6 pending rollout, and 73 rejected drift mutations. The driver then reports each
   of the six ordered runtime routes and three support ledgers before its exact success marker.
 - **BOUNDARY:** this is orchestration over existing internal consumers, not a new public typed-value surface. The
   combined recurring/public no-drift row remains pending for `FUTURE-PARITY-BACKLOG.14.8`. Retrieve
@@ -1004,8 +1004,9 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   frame entry. Extend the existing monotonic recognition authority; never add a second invocation stack.
   Corrective leaf `.14.4.0.1` replaces the historical self-parent row with positive numeric attempted-child
   lineage and makes the checker reject self-parenting, reuse, invalid parent order, and represented cycles before
-  tuple comparison. Perl `.14.4.2` admits the exact observation surface through one dedicated private ActionIR
-  node, static policy, existing monotonic authority, and live/generated execution; other runtimes remain pending.
+  tuple comparison. Perl `.14.4.2`, Rust `.14.4.3`, and Dart `.14.4.4` admit the exact observation surface through
+  one dedicated private node per runtime, static policy, the existing monotonic authority, and their governed
+  live/reconstructed/generated/emitted carriers; Julia and shared Lua remain pending.
 
 ### 4.9.2 `tools/check_recognition_transaction_contract.py` — neutral transaction/progress oracle
 

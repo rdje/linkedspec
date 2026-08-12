@@ -10,6 +10,34 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-12 (`FUTURE-PARITY-BACKLOG.14.4.4` — Dart recursive observation): parse the exact special form into one
+  private `ActionObserveRecognitionExpr`; keep the static rule operand unevaluated, and close the existing
+  `binding_write` recognition effect through ordinary rule and user-function call graphs.
+- Extend the existing `RecognitionInvocationAuthority`, not the runtime facade, with direct-parent snapshots and
+  fresh rejected-attempt reservation. A pending scope intercepts only its intended child and disarms at entry, so
+  later ordinary nested recursion retains the existing false cutoff.
+- Publish a terminal completion only inside an active observation boundary, consume it immediately, and bind the
+  recursively detached nine-field harray before returning the unchanged payload or propagating the unchanged typed
+  failure. Retain no source text, parser/runtime object, second invocation stack, or parse-wide history.
+- Keep cursor, boundary, match, and mark registers in UTF-16 code units. Project entry, selected match, and accepted
+  exit through the existing `SourceAuthority` only when constructing the record; the astral fixture freezes
+  code-unit offset 2 as Unicode-scalar offset 1.
+- Treat an observed action edge as its one child dispatch and retain the existing repeated-action collection
+  topology. Native, reconstructed, generated-plan, and independently analyzed/executed emitted source all use the
+  shared engine; the exact seven-test consumer and combined 24-test focused set pass.
+- Add the Dart recurring path/CI/storage locks and one omission mutation. Typed-source proof is 8/6/73 with Perl,
+  Rust, and Dart recorded on the pending observation row; recognition stays 129+4/246/58, language stays
+  246/105+1/122, repeated-action stays 8 governed seams / 54 mutations, and the facade/schema/CLI/README stay closed.
+- Exact composition passes all six typed-source runtimes and all five repeated-action backends, including the
+  latter's 5x2 CLI case. The final book renders 79 files / 14,524 KiB and Knowledge indexes 824/6,869.
+- All eight doctrines pass. The first staged canonical invocation reached the representative-process containment
+  proof and stopped solely because the outer harness denied nested macOS `sandbox-exec` with status 71. Treat
+  that as a harness permission boundary, not a project failure; do not weaken or bypass the containment oracle.
+- The unchanged permission-authorized rerun proves containment and repository relocation, both 66/66 CLI option
+  environments, RAM 57% under the 88% ceiling, Phase 0 1,031/1,031 in 752 wall-clock seconds, and the complete
+  six-runtime typed-source opt-in before exact `[ci] local CI gate passed` with exit 0. Land atomic 212 cleanly
+  before activating Julia `.14.4.5`.
+
 - 2026-08-12 (`FUTURE-PARITY-BACKLOG.14.4.3` — Rust recursive observation): lower the exact special form into one
   serialized `Expr::ObserveRecognition` and keep its static rule operand unevaluated. Reject nested targets,
   dynamic/malformed/missing operands, and observation effects reachable from `recognize_once` through either rule

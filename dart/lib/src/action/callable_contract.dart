@@ -204,6 +204,7 @@ void _normalizeExpr(ActionExpr expr, UserFunctionRegistry registry) {
     case ActionRecognizeOnceExpr():
     case ActionRecognitionCommitExpr():
     case ActionRecognitionRollbackExpr():
+    case ActionObserveRecognitionExpr():
       break;
     case ActionFluentChainExpr(:final receiver, :final calls):
       _normalizeExpr(receiver, registry);

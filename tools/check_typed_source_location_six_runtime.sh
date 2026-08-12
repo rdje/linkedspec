@@ -40,8 +40,8 @@ PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_
 log "checking the Rust immutable values and exact helper projections"
 "$CARGO_CMD" test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract --test recursive_observation_contract
 
-log "checking the Dart immutable values and exact helper projections"
-( cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/typed_source_location_contract_test.dart )
+log "checking the Dart immutable values, exact helper projections, and recursive observation"
+( cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/typed_source_location_contract_test.dart test/recursive_observation_contract_test.dart )
 
 log "checking the Julia immutable values and exact helper projections"
 bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include("julia/test/typed_source_location_contract_test.jl")'

@@ -516,7 +516,8 @@ final class LinkedSpecRuntimeEngine {
     }
     final executionPolicy = _executionPolicyFor(rule, generatedFamily);
 
-    final recursionKey = '$label:$entryRegexIndex:${context.cursorCodeUnit}';
+    final invocationEntryCodeUnit = context.cursorCodeUnit;
+    final recursionKey = '$label:$entryRegexIndex:$invocationEntryCodeUnit';
     if (!context.activeRuleEntries.add(recursionKey)) {
       context.trace?.traceDecision(
         'dart_runtime:recursion_guard',
@@ -524,6 +525,12 @@ final class LinkedSpecRuntimeEngine {
         'rule=$label entry_regex=$entryRegexIndex cursor=${context.cursorCodeUnit}',
         LinkedSpecTraceLevel.debug,
       );
+      if (context.recursiveObservationExpects(label)) {
+        throw context.rejectRecursiveObservation(
+          label,
+          invocationEntryCodeUnit,
+        );
+      }
       return _RuleResult(matched: false, value: null);
     }
 
@@ -538,6 +545,7 @@ final class LinkedSpecRuntimeEngine {
     context.enterRule(label);
     context.enterRuleLocalBindingScope();
     context.enterRecognitionInvocation(label);
+    context.noteRecursiveObservationEntry(label, invocationEntryCodeUnit);
     final generatedIdentity = context.generatedSourceIdentity;
     if (generatedFamily != null && generatedIdentity != null) {
       context.trace?.emitEvent(
@@ -564,11 +572,14 @@ final class LinkedSpecRuntimeEngine {
       LinkedSpecTraceLevel.high,
     );
     var traceExitDetails = 'matched=false cursor=${context.cursorCodeUnit}';
+    _RuleResult? terminalResult;
+    Object? terminalError;
 
     try {
       final initReturn = _executeLifecycle(rule, 'I', context);
       if (initReturn != null) {
         final result = _returned(initReturn.value);
+        terminalResult = result;
         traceExitDetails =
             'matched=${result.matched} cursor=${context.cursorCodeUnit}';
         return result;
@@ -590,19 +601,19 @@ final class LinkedSpecRuntimeEngine {
                 cursorPolicy: executionPolicy.cursorPolicy,
                 usesAndExecution: executionPolicy.usesAndExecution,
               );
+        terminalResult = result;
         traceExitDetails =
             'matched=${result.matched} cursor=${context.cursorCodeUnit}';
         return result;
       } on _ActionReturn catch (returnSignal) {
         final result = _returned(returnSignal.value);
+        terminalResult = result;
         traceExitDetails =
             'matched=${result.matched} cursor=${context.cursorCodeUnit}';
         return result;
       }
     } on RuntimeInterpreterException catch (error) {
-      traceExitDetails =
-          'error=${error.message} cursor=${context.cursorCodeUnit}';
-      throw error.withDiagnostic(
+      final enriched = error.withDiagnostic(
         context.diagnostic(
           stage: 'runtime_execution',
           summary: 'Dart runtime interpreter failed',
@@ -610,6 +621,14 @@ final class LinkedSpecRuntimeEngine {
           ruleLabel: label,
         ),
       );
+      terminalError = enriched;
+      traceExitDetails =
+          'error=${enriched.message} cursor=${context.cursorCodeUnit}';
+      throw enriched;
+    } on Object catch (error) {
+      terminalError = error;
+      traceExitDetails = 'error=$error cursor=${context.cursorCodeUnit}';
+      rethrow;
     } finally {
       if (traceScope != null) {
         context.trace?.exitScope(traceScope, traceExitDetails);
@@ -624,7 +643,11 @@ final class LinkedSpecRuntimeEngine {
         );
       }
       try {
-        context.leaveRecognitionInvocation(label);
+        context.leaveRecognitionInvocation(
+          label,
+          result: terminalResult,
+          error: terminalError,
+        );
       } finally {
         context.exitRuleLocalBindingScope();
         context.exitRule();
@@ -1328,6 +1351,7 @@ final class LinkedSpecRuntimeEngine {
   }) {
     context.cursorCodeUnit = match.codeUnitEnd;
     context.registers = context.registers.withLocalMatch(match);
+    context.noteRecognitionMatch(match);
 
     final edgeMatches = _actionEdgesFor(rule, match.alternativeIndex);
     if (edgeMatches.isEmpty) {
@@ -1411,6 +1435,11 @@ final class LinkedSpecRuntimeEngine {
         for (final statement in payload.actionAst.statements) {
           if (statement.expr case ActionAssignScalarExpr(:final name)) {
             context.recordRuleLocalBinding(name);
+          }
+          if (statement.expr case ActionAssignScalarExpr(
+            value: ActionObserveRecognitionExpr(:final target),
+          )) {
+            context.recordRuleLocalBinding(target);
           }
           final expr = statement.expr;
           if (expr is ActionCallExpr &&
@@ -3276,6 +3305,24 @@ final class LinkedSpecRuntimeEngine {
       case ActionRecognitionRollbackExpr(:final token):
         context.recognitionRollback(ruleLabel, token);
         return null;
+      case ActionObserveRecognitionExpr(:final target, :final rule):
+        final observation = context.beginRecursiveObservation(rule);
+        try {
+          final child = currentEdge != null && currentEdge.target.label == rule
+              ? _executeActionEdgeChild(currentEdge, context)
+              : _executeRule(rule, 0, context);
+          context.retv = child.value;
+          context.bindRecursiveObservation(ruleLabel, target, observation);
+          return child.value;
+        } on Object catch (error, stackTrace) {
+          context.bindRecursiveObservation(
+            ruleLabel,
+            target,
+            observation,
+            error: error,
+          );
+          Error.throwWithStackTrace(error, stackTrace);
+        }
       case ActionCallExpr():
         return _evaluateCall(
           expr,
@@ -5918,7 +5965,8 @@ final class LinkedSpecRuntimeEngine {
         "action edge references undefined child '${currentEdge.target.label}'",
       );
     }
-    if (_isPassiveTerminalRule(childRule)) {
+    if (_isPassiveTerminalRule(childRule) &&
+        !context.recursiveObservationExpects(currentEdge.target.label)) {
       context.trace?.traceDecision(
         'dart_runtime:child_dispatch',
         false,
@@ -7214,6 +7262,8 @@ final class _RuntimeExecutionContext {
       <Map<String, _VariableSnapshot>>[];
   final List<_RecognitionRuntimeFrame> _recognitionFrames =
       <_RecognitionRuntimeFrame>[];
+  final List<_RecursiveObservationScope> _recursiveObservationScopes =
+      <_RecursiveObservationScope>[];
   int _ruleLocalBindingSuppressionDepth = 0;
 
   RuntimeMatchRegisters registers;
@@ -7276,10 +7326,12 @@ final class _RuntimeExecutionContext {
         origin: '$ruleLabel:handler_entry',
         state: _recognitionFrameState(ruleLabel),
       );
+      final identity = recognitionAuthority.invocationIdentity(frame);
       _recognitionFrames.add(
         _RecognitionRuntimeFrame(
           rule: ruleLabel,
           authorityFrame: frame,
+          identity: identity,
           priorMarks: priorMarks,
         ),
       );
@@ -7293,16 +7345,41 @@ final class _RuntimeExecutionContext {
     }
   }
 
-  void leaveRecognitionInvocation(String ruleLabel) {
+  void leaveRecognitionInvocation(
+    String ruleLabel, {
+    required _RuleResult? result,
+    required Object? error,
+  }) {
     final frame = _recognitionFrame(ruleLabel);
     final actual = _recognitionFrameState(ruleLabel);
     final restored = frame.tokens.isEmpty
         ? actual
         : frame.tokens.values.first.snapshot;
+    Object? leaveError;
     try {
       recognitionAuthority.setFrameState(frame.authorityFrame, actual);
       recognitionAuthority.leaveInvocation(frame.authorityFrame);
+    } on Object catch (caught) {
+      leaveError = caught;
+      rethrow;
     } finally {
+      final observation = frame.observationScope;
+      if (observation != null) {
+        final terminalError = error ?? leaveError;
+        final accepted = terminalError == null && (result?.matched ?? false);
+        observation.completion = _RecursiveObservationCompletion(
+          identity: frame.identity,
+          entryCodeUnit: frame.entryCodeUnit,
+          selectedMatch: frame.selectedMatch,
+          acceptedExitCodeUnit: accepted ? actual.cursor : null,
+          outcome: terminalError != null
+              ? 'aborted'
+              : accepted
+              ? 'accepted'
+              : 'failed',
+          diagnostic: _recursiveObservationDiagnostic(terminalError),
+        );
+      }
       _applyRecognitionFrameState(ruleLabel, restored);
       _recognitionFrames.removeLast();
       if (frame.priorMarks == null) {
@@ -7311,6 +7388,141 @@ final class _RuntimeExecutionContext {
         markBuckets[ruleLabel] = frame.priorMarks!;
       }
     }
+  }
+
+  _RecursiveObservationScope beginRecursiveObservation(String rule) {
+    final scope = _RecursiveObservationScope(rule);
+    _recursiveObservationScopes.add(scope);
+    return scope;
+  }
+
+  bool recursiveObservationExpects(String rule) {
+    if (_recursiveObservationScopes.isEmpty) {
+      return false;
+    }
+    final scope = _recursiveObservationScopes.last;
+    return !scope.entered && scope.rule == rule;
+  }
+
+  RuntimeInterpreterException rejectRecursiveObservation(
+    String rule,
+    int entryCodeUnit,
+  ) {
+    final scope = _recursiveObservationScopes.last;
+    final identity = recognitionAuthority.reserveRejectedInvocation(rule: rule);
+    final direct =
+        _recognitionFrames.isNotEmpty && _recognitionFrames.last.rule == rule;
+    final code = direct
+        ? 'source_location_nonprogress_direct_recursion'
+        : 'source_location_nonprogress_mutual_recursion';
+    scope
+      ..entered = true
+      ..completion = _RecursiveObservationCompletion(
+        identity: identity,
+        entryCodeUnit: entryCodeUnit,
+        selectedMatch: null,
+        acceptedExitCodeUnit: null,
+        outcome: 'rejected',
+        diagnostic: code,
+      );
+    return RuntimeInterpreterException(
+      code,
+      diagnostic: diagnostic(
+        stage: 'runtime_execution',
+        summary: 'Dart recursive recognition made no progress',
+        detail: code,
+        code: code,
+        ruleLabel: rule,
+      ),
+    );
+  }
+
+  void noteRecursiveObservationEntry(String rule, int entryCodeUnit) {
+    if (!recursiveObservationExpects(rule)) {
+      return;
+    }
+    final scope = _recursiveObservationScopes.last..entered = true;
+    final frame = _recognitionFrames.last;
+    frame
+      ..entryCodeUnit = entryCodeUnit
+      ..observationScope = scope;
+  }
+
+  void noteRecognitionMatch(RuntimeRegexMatch match) {
+    if (_recognitionFrames.isNotEmpty) {
+      _recognitionFrames.last.selectedMatch = match;
+    }
+  }
+
+  void bindRecursiveObservation(
+    String ruleLabel,
+    String target,
+    _RecursiveObservationScope scope, {
+    Object? error,
+  }) {
+    if (_recursiveObservationScopes.isEmpty ||
+        !identical(_recursiveObservationScopes.last, scope)) {
+      throw StateError('recursive observation scope order is invalid');
+    }
+    final completion = scope.completion;
+    if (completion == null) {
+      throw StateError(
+        'recursive observation for ${scope.rule} completed without a record: '
+        '$error',
+      );
+    }
+    final sourceContext = SourceLocationContext(
+      ruleRole: '$ruleLabel:recursive_observation',
+      invocationRole: 'recursive_observation',
+    );
+    Map<String, Object?> position(int codeUnitOffset) => sourceAuthority
+        .positionFromCodeUnit(
+          sourceId: 'input',
+          codeUnitOffset: codeUnitOffset,
+          context: sourceContext,
+        )
+        .toJson();
+    Map<String, Object?> span(RuntimeRegexMatch match) {
+      final start = sourceAuthority.positionFromCodeUnit(
+        sourceId: 'input',
+        codeUnitOffset: match.codeUnitStart,
+        context: sourceContext,
+      );
+      final end = sourceAuthority.positionFromCodeUnit(
+        sourceId: 'input',
+        codeUnitOffset: match.codeUnitEnd,
+        context: sourceContext,
+      );
+      return sourceAuthority
+          .directSpan(
+            start: start,
+            end: end,
+            provenance: 'match',
+            context: sourceContext,
+          )
+          .toJson();
+    }
+
+    final record = <String, Object?>{
+      'source_id': 'input',
+      'rule_label': completion.identity.rule,
+      'invocation_id': completion.identity.invocationId,
+      'parent_invocation_id': completion.identity.parentInvocationId,
+      'entry_position': position(completion.entryCodeUnit),
+      'selected_match': completion.selectedMatch == null
+          ? null
+          : span(completion.selectedMatch!),
+      'accepted_exit': completion.acceptedExitCodeUnit == null
+          ? null
+          : position(completion.acceptedExitCodeUnit!),
+      'outcome': completion.outcome,
+      'diagnostic': completion.diagnostic,
+    };
+    recordRuleLocalBinding(target);
+    hashes[target] = _asHash(record);
+    variables.remove(target);
+    arrays.remove(target);
+    _recursiveObservationScopes.removeLast();
   }
 
   void recognitionCheckpoint(String ruleLabel, String slot) {
@@ -7824,14 +8036,45 @@ final class _RecognitionRuntimeFrame {
   _RecognitionRuntimeFrame({
     required this.rule,
     required this.authorityFrame,
+    required this.identity,
     required this.priorMarks,
   });
 
   final String rule;
   final Object authorityFrame;
+  final RecognitionInvocationIdentity identity;
   final Map<String, int>? priorMarks;
+  int entryCodeUnit = 0;
+  RuntimeRegexMatch? selectedMatch;
+  _RecursiveObservationScope? observationScope;
   final Map<String, _RecognitionRuntimeToken> tokens =
       <String, _RecognitionRuntimeToken>{};
+}
+
+final class _RecursiveObservationScope {
+  _RecursiveObservationScope(this.rule);
+
+  final String rule;
+  bool entered = false;
+  _RecursiveObservationCompletion? completion;
+}
+
+final class _RecursiveObservationCompletion {
+  const _RecursiveObservationCompletion({
+    required this.identity,
+    required this.entryCodeUnit,
+    required this.selectedMatch,
+    required this.acceptedExitCodeUnit,
+    required this.outcome,
+    required this.diagnostic,
+  });
+
+  final RecognitionInvocationIdentity identity;
+  final int entryCodeUnit;
+  final RuntimeRegexMatch? selectedMatch;
+  final int? acceptedExitCodeUnit;
+  final String outcome;
+  final String? diagnostic;
 }
 
 final class _RecognitionRuntimeToken {
@@ -8126,6 +8369,35 @@ const _explicitActionResultRepetitionModes = <String>{
 bool _collectsExplicitActionIterationValues(CompiledRule rule) {
   return rule.actionEdges.isNotEmpty &&
       _explicitActionResultRepetitionModes.contains(rule.modeMetadata.name);
+}
+
+String? _recursiveObservationDiagnostic(Object? error) {
+  if (error == null) {
+    return null;
+  }
+  if (error is RecognitionTransactionException) {
+    return error.toJson()['code'] as String?;
+  }
+  if (error is RuntimeInterpreterException) {
+    final code = error.diagnostic?.code;
+    if (code != null) {
+      return code;
+    }
+    final transaction = RegExp(
+      r'LINKEDSPEC_RECOGNITION_TRANSACTION_ERROR:([a-z0-9_]+)',
+    ).firstMatch(error.message);
+    if (transaction != null) {
+      return transaction.group(1);
+    }
+    final sourceLocation = RegExp(
+      r'(source_location_[a-z0-9_]+)',
+    ).firstMatch(error.message);
+    return sourceLocation?.group(1);
+  }
+  if (error is RuntimeExitNow) {
+    return 'runtime_exit';
+  }
+  return null;
 }
 
 _NextableBool _nextableBool(bool Function() callback) {

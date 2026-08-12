@@ -232,6 +232,7 @@ CompiledSpec compileSpec(
     );
     validateCompiledRegexSlotIdentities(compiled);
     validateNoRemovedAggregateSelectors(compiled);
+    _validateRecursiveObservationPolicy(compiled);
     if (traceScope != null) {
       trace?.exitScope(
         traceScope,
@@ -478,6 +479,163 @@ void validateNoRemovedAggregateSelectors(CompiledSpec compiled) {
     }
     for (final (index, edge) in rule.blindEdges.indexed) {
       validateFluentCalls(edge.fluentChain, "rule '$label' blind edge $index");
+    }
+  }
+}
+
+final class _RecursiveObservationEffects {
+  bool writesObservation = false;
+  final Set<String> ruleCalls = <String>{};
+  final Set<String> functionCalls = <String>{};
+  final Set<String> recognitionAttempts = <String>{};
+  final Set<String> observedRules = <String>{};
+}
+
+/// Validates static recursive-observation ownership and closes its binding
+/// effect through ordinary rule and user-function calls.
+///
+/// This is intentionally part of compilation rather than runtime dispatch:
+/// `call(Rule)` inside an observation is structural, and a `recognize_once`
+/// target that can reach the observation's two binding writes is forbidden.
+void _validateRecursiveObservationPolicy(CompiledSpec compiled) {
+  final functionNames = <String>{
+    for (final function in compiled.functions) function.name,
+  };
+
+  _RecursiveObservationEffects scan(Object? value) {
+    final effects = _RecursiveObservationEffects();
+
+    void visit(Object? node) {
+      if (node is List) {
+        for (final child in node) {
+          visit(child);
+        }
+        return;
+      }
+      if (node is! Map) {
+        return;
+      }
+      final object = node.cast<String, Object?>();
+      final kind = object['kind'];
+      if (kind == 'observe_recognition') {
+        effects.writesObservation = true;
+        final rule = object['rule'];
+        if (rule is String) {
+          effects.observedRules.add(rule);
+        }
+      } else if (kind == 'recognize_once') {
+        final rule = object['rule'];
+        if (rule is String) {
+          effects.recognitionAttempts.add(rule);
+        }
+      } else if (kind == 'call') {
+        final name = object['name'];
+        if (name == 'call') {
+          final args = object['args'];
+          if (args is List && args.length == 1 && args.single is Map) {
+            final argument = (args.single as Map).cast<String, Object?>();
+            if (argument['kind'] == 'variable' && argument['name'] is String) {
+              effects.ruleCalls.add(argument['name']! as String);
+            }
+          }
+        } else if (name is String && functionNames.contains(name)) {
+          effects.functionCalls.add(name);
+        }
+      }
+      for (final child in object.values) {
+        visit(child);
+      }
+    }
+
+    visit(value);
+    return effects;
+  }
+
+  final ruleEffects = <String, _RecursiveObservationEffects>{};
+  for (final label in compiled.compiledRuleOrder) {
+    final rule = compiled.rulesByLabel[label]!;
+    ruleEffects[label] = scan(<Object?>[
+      for (final payload in rule.actionPayloads) payload.actionAst.toJson(),
+    ]);
+  }
+
+  final functionEffects = <String, _RecursiveObservationEffects>{};
+  for (final function in compiled.functions) {
+    final block = parseActionBlock(function.bodySource);
+    final current = functionEffects.putIfAbsent(
+      function.name,
+      _RecursiveObservationEffects.new,
+    );
+    final discovered = scan(block.toJson());
+    current
+      ..writesObservation =
+          current.writesObservation || discovered.writesObservation
+      ..ruleCalls.addAll(discovered.ruleCalls)
+      ..functionCalls.addAll(discovered.functionCalls)
+      ..recognitionAttempts.addAll(discovered.recognitionAttempts)
+      ..observedRules.addAll(discovered.observedRules);
+  }
+
+  for (final entry in <MapEntry<String, _RecursiveObservationEffects>>[
+    ...ruleEffects.entries,
+    ...functionEffects.entries,
+  ]) {
+    for (final observedRule in entry.value.observedRules) {
+      if (!compiled.rulesByLabel.containsKey(observedRule)) {
+        throw CompiledSpecException(
+          'source_location_recursive_observation_operand '
+          "missing static rule '$observedRule'",
+        );
+      }
+    }
+  }
+
+  final ruleWrites = <String, bool>{
+    for (final entry in ruleEffects.entries)
+      entry.key: entry.value.writesObservation,
+  };
+  final functionWrites = <String, bool>{
+    for (final entry in functionEffects.entries)
+      entry.key: entry.value.writesObservation,
+  };
+  var changed = true;
+  while (changed) {
+    changed = false;
+    for (final entry in ruleEffects.entries) {
+      final inherited =
+          entry.value.ruleCalls.any((callee) => ruleWrites[callee] ?? false) ||
+          entry.value.functionCalls.any(
+            (callee) => functionWrites[callee] ?? false,
+          );
+      if (inherited && !(ruleWrites[entry.key] ?? false)) {
+        ruleWrites[entry.key] = true;
+        changed = true;
+      }
+    }
+    for (final entry in functionEffects.entries) {
+      final inherited =
+          entry.value.ruleCalls.any((callee) => ruleWrites[callee] ?? false) ||
+          entry.value.functionCalls.any(
+            (callee) => functionWrites[callee] ?? false,
+          );
+      if (inherited && !(functionWrites[entry.key] ?? false)) {
+        functionWrites[entry.key] = true;
+        changed = true;
+      }
+    }
+  }
+
+  for (final entry in <MapEntry<String, _RecursiveObservationEffects>>[
+    ...ruleEffects.entries,
+    ...functionEffects.entries,
+  ]) {
+    for (final target in entry.value.recognitionAttempts) {
+      if (ruleWrites[target] ?? false) {
+        throw CompiledSpecException(
+          'recognition_effect_forbidden:binding_write '
+          'owner=${entry.key} target=$target',
+        );
+      }
     }
   }
 }
