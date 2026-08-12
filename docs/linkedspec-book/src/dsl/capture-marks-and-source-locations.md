@@ -55,29 +55,49 @@ bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_t
 bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua
 ```
 
-### Recursive source observation: audited next boundary, not yet an authored API
+### Recursive source observation: executable neutral contract, not yet runtime syntax
 
-The behavior-free `.14.4.0` audit fixes what a future recursive observation means before implementation. It reuses
-the private monotonic invocation authority already present for recognition transactions; it does not create another
-stack, retain runtime objects, or accumulate a parse-wide history.
+The behavior-free `.14.4.0` audit and lineage correction `.14.4.0.1` fix the portable observation boundary.
+Executable neutral leaf `.14.4.1` now selects the future authored spelling and validates it independently, but no
+backend accepts the spelling yet:
 
-One requested observation will be a detached immutable record:
+```text
+value = observe_recognition(observation, call(Child));
+```
+
+`observation` must be one bare rule-local harray binding, and `call(Child)` must be exactly one unevaluated,
+statically named call. The expression preserves the ordinary child payload as `value`; accepted `false`, `0`,
+`""`, and `undef` are not confused with recognition failure. Observation data is written separately at the
+terminal boundary. Accepted and failed calls bind before returning. Aborted and progress-rejected calls finalize
+the record before propagating their unchanged typed failure.
+
+The detached harray has exactly these fields:
 
 | Field | Meaning |
 |---|---|
-| source identity | The same caller-authorized decoded source, never a path or backend object. |
-| rule identity | The entered rule that owns the observation. |
-| invocation id | A fresh, parse-local, monotonic identity. |
-| parent invocation id | The nullable distinct earlier direct parent in the same source authority. |
-| entry position | The caller's current position before the child's `I` lifecycle and family-local matching. |
-| selected-match span | The child's terminal local regex match, or absence for a zero-regex/no-selection outcome. |
-| accepted-exit position | The cursor from which the caller resumes after normal accepted return; otherwise absent. |
-| outcome | Exactly `accepted`, `failed`, `aborted`, or `rejected`. |
-| diagnostic | An optional typed diagnostic associated with the terminal outcome. |
+| `source_id` | The same caller-authorized decoded source, never a path or backend object. |
+| `rule_label` | The entered rule that owns the observation. |
+| `invocation_id` | A fresh, parse-local, monotonic identity. |
+| `parent_invocation_id` | The nullable distinct earlier direct parent in the same source authority. |
+| `entry_position` | Detached `{source_id, offset}` captured before child `I` lifecycle and local matching. |
+| `selected_match` | Detached `{source_id, start, end, provenance}` for the terminal local match, or `undef`. |
+| `accepted_exit` | Detached `{source_id, offset}` from which the caller resumes, or `undef`. |
+| `outcome` | Exactly `accepted`, `failed`, `aborted`, or `rejected`. |
+| `diagnostic` | An optional typed diagnostic associated with the terminal outcome. |
+
+Field access uses the existing harray form, for example `observation["entry_position"]` and
+`observation["accepted_exit"]`. The runtime record and every projection are recursively detached. They contain no
+decoded source text, filesystem path, parser, live invocation frame, match object, source-authority object, or host
+reference. This adds no custom authored value kind and no family of nine new helper names.
 
 Action edges already carry the parent's selected local match into the child's entry-match register. A direct call
 enters at the current cursor without inventing an entry match. In either case, the child derives seek or consume
 from its own rule family; observing the child never lets the parent override that policy.
+
+The neutral checker executes 33 ordered transitions. It proves action-edge and direct entry, OR/default `seek`,
+AND `consume`, replacement of an earlier local candidate by the terminal selected match, zero-regex absence,
+accepted-only exit, and all four outcomes. Each of the six records is detached before the next boundary; an exact
+unavailable-boundary check proves there is no retained parse-wide history.
 
 All six runtimes currently reject an already-active `(rule, cursor)` edge before pushing a child recognition
 frame. The accepted observation design reserves a fresh attempted-child identity from the existing authority,
@@ -85,11 +105,13 @@ links it to the active parent, records a rejected outcome, and pushes no live fr
 `direct_nonprogress` fixture instead made an invocation its own parent. Corrective `.14.4.0.1` replaces all textual
 fixture identities with positive unique monotonic numbers; direct and mutual rejection each receive a fresh child
 under an earlier active parent. The checker now rejects self-parent, reuse, invalid parent order, and cycles before
-tuple comparison. Neutral observation implementation `.14.4.1`; Perl, Rust, Dart, Julia, shared Lua, recurring
-proof, and public closeout then follow in `.2-.8`.
+tuple comparison. Two additional static diagnostics reserve invalid-target and invalid-static-call errors. Ten
+reason-checked state corruptions plus three surface/topology mutations raise typed-source governance from 57 to 70.
+Perl, Rust, Dart, Julia, shared Lua, recurring proof, and public closeout still follow in `.2-.8`.
 
-There is still no authored recursive-observation helper, ActionIR node, schema field, semantic/MCP projection, or
-CLI option. Exact accessor spelling and carrier projection remain future executable-contract work.
+The spelling is selected contract, not current capability. There is still no recursive-observation runtime route,
+public helper, ActionIR node, descriptor/generated version, result-schema field, semantic/MCP projection, CLI
+option, or README behavior. Typed-source rollout therefore remains exactly 8 complete / 6 pending.
 
 ### Bounded cursor transactions do not mean general backtracking
 
@@ -300,8 +322,9 @@ Validate it from the repository root with:
 bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py
 ```
 
-The checker covers 3 decoded sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation
-and 8 transaction transitions, 6 recursive observations, 4 structural cases, 31 diagnostics, and 57 mutations.
+The checker covers 3 decoded sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation,
+8 transaction, and 33 recursive-observation transitions, 6 detached observations, 4 structural cases,
+33 diagnostics, and 70 mutations.
 It also proves that all 92 current source-boundary helpers project onto the algebra.
 
 This is rollout status, not authored-value status. Eight of 14 rollout legs are complete: the neutral contract,
@@ -342,8 +365,9 @@ source executes independently on both ABIs. The extra 11 mutations reject topolo
 The unchanged `.14.2.7` recomposition reruns that authority and closes the six-runtime internal value/helper
 implementation slice. It does not add an authored value or advance the 8-complete/6-pending public rollout.
 
-There is still no public `Position` or `Span` authored value, recursive observation API, or span-native parser
-dispatch. Exact transaction spelling is current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Lua's shared
+There is still no public `Position` or `Span` authored value, runtime recursive-observation API, or span-native
+parser dispatch. The future recursive-observation spelling and detached harray carrier are now executable neutral
+contract only. Exact transaction spelling is current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Lua's shared
 private authority passes 187 assertions per ABI, and its admitted consumer passes 246 per ABI across four dedicated
 nodes, recursive effect/progress policy, and all four runtime carriers after recurring/public metadata closeout. The modules remain unexported
 while the consumer is ordinarily and canonically discovered once per ABI. Transaction rollout is complete at

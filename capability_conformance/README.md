@@ -251,17 +251,17 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 ```
 
 The neutral artifact fixes three decoded sources, seven Unicode-scalar/line/column/UTF-8 conversions, six direct
-spans, three derived-text provenance cases, eight invocation transitions, eight transaction transitions, six
-recursive observations, and four zero/one/two-regex structural cases.
+spans, three derived-text provenance cases, eight invocation transitions, eight transaction transitions,
+33 recursive-observation transitions, six detached observations, and four zero/one/two-regex structural cases.
 
 It also maps the exact 92 current source-boundary helpers onto one algebra. The current Perl inventory contains
 seven callable compatibility aliases. Two similarly named values—`capture_take_slice` and
 `capture_take_slice_len`—are internal contract/scanner ids whose recognized spellings remain canonical
 `capture_take()` and `capture_take_len()`; they are not extra callable aliases.
 
-The checker derives coordinates and text independently, executes both state machines, cross-checks current Lua
-helper authority and the Perl alias/internal-id seams, locks 31 diagnostics, verifies canonical tracked execution,
-and rejects 53 mutations. Eleven of those mutations govern one recurring topology: five backend consumer groups
+The checker derives coordinates and text independently, executes all three state machines, cross-checks current
+Lua helper authority and the Perl alias/internal-id seams, locks 33 diagnostics, verifies canonical tracked
+execution, and rejects 70 mutations. Eleven of those mutations govern one recurring topology: five backend groups
 map to exact Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT runtime routes, followed by generated-source, capability,
 and language-coverage ledgers. Run the complete recurring proof with:
 
@@ -275,6 +275,13 @@ structure, unchanged neutral/public recomposition, and the Perl, Rust, Dart, Jul
 runtime admissions are complete. The two Lua ABIs share one rollout leg because they execute the same consumer
 source independently through distinct runtimes. The combined `recurring_public_no_drift` row remains pending for
 final program-wide owner `FUTURE-PARITY-BACKLOG.14.8`; recurring composition does not promote it early.
+
+Executable neutral observation selects future
+`value = observe_recognition(observation, call(Child))`: one bare rule-local harray target and one unevaluated
+static call. The ordinary child payload remains the expression result; a separate recursively detached nine-field
+harray records entry, terminal selected match, accepted-only exit, outcome, and numeric lineage. Existing harray
+field access is the complete carrier projection. This is neutral contract only: no backend runtime, public helper,
+ActionIR node, schema, semantic/MCP field, CLI, or README behavior is admitted, so rollout remains 8/6.
 
 No public `Position`/`Span` value, descriptor or generated schema, semantic/MCP projection, or source-authority
 elevation is claimed by these internal typed-source runtime admissions. Recognition transaction spelling and

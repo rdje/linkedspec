@@ -2,26 +2,26 @@
 
 ## Current Activity
 
-- Corrective recursive-observation leaf `FUTURE-PARITY-BACKLOG.14.4.0.1` is signoff-complete as atomic 208/300
-  from clean audit activation `2c968259`; no next leaf is active and there is no push.
-- The neutral fixture now uses positive, unique, monotonic invocation identities with nullable distinct earlier
-  parents. Guard-rejected direct and mutual attempts each reserve a fresh child identity from the same authority.
-- Four reason-checked mutations reject self-parenting, identity reuse, invalid parent order, and cyclic lineage.
-  The six observation roles, rollout 8 complete / 6 pending, and every runtime/public boundary remain unchanged.
-- Final proof passes the rendered 79-file/14,460-KiB book, Knowledge 821/6,826, all eight doctrines, containment
-  and relocation, CLI 66x2, RAM 34%, and canonical Phase 0 1,031/1,031 in 739 seconds.
+- Executable neutral recursive-observation leaf `FUTURE-PARITY-BACKLOG.14.4.1` is signoff-complete and commit-ready
+  as intended atomic 209/300 from clean lineage commit `53c687d3`; no push.
+- Future `observe_recognition(observation, call(Child))` now has exact neutral syntax and a detached nine-field
+  harray carrier separate from the unchanged ordinary child payload; no backend/public admission is current.
+- The independent checker executes 33 transitions and rejects 70 total mutations while preserving typed-source
+  rollout 8 complete / 6 pending and every parser/runtime/API/schema/semantic/MCP/CLI/README boundary.
+- Complete six-runtime, rendered-book, all-eight-doctrine, containment/relocation, CLI 66x2, and canonical signoff are green.
 
 ## Latest Completed Slice
 
-- `.14.4.0.1` completed the neutral lineage correction and definitive canonical signoff for atomic 208/300.
-- No parser/compiler/runtime/backend/API/schema/CLI/README behavior changed.
+- `.14.4.1` is signoff-complete and commit-ready as atomic 209/300 from clean activation `53c687d3`.
 
 ## Next Action
 
-- Activate executable neutral observation `.14.4.1` task-tree-first from the verified clean atomic 208 boundary.
+- Land `.14.4.1`, clear/prove the repository clean, then activate Perl `.14.4.2` task-tree-first.
 
 ## Recent Completions
 
+- `2026-08-12` — `.14.4.1` completed executable neutral recursive observation and canonical signoff for atomic 209/300.
+- `2026-08-12` — `53c687d3` landed recursive-observation lineage correction `.14.4.0.1` as atomic 208/300.
 - `2026-08-12` — `.14.4.0.1` completed recursive-observation lineage correction and canonical signoff for atomic 208/300.
 - `2026-08-12` — `2c968259` landed behavior-free recursive source-observation audit `.14.4.0` as atomic 207/300.
 - `2026-08-12` — `.14.4.0` completed recursive source-observation audit and canonical signoff for atomic 207/300.
@@ -35,9 +35,7 @@
 - `2026-08-11` — `.14.3.6.2` completed dual-ABI integration and canonical signoff for atomic 203/300.
 - `2026-08-11` — `d87dcac3` landed the shared private Lua authority as atomic 202/300.
 - `2026-08-11` — `.14.3.6.1` completed exact dual-ABI private Lua authority signoff for atomic 202/300.
-- `2026-08-11` — `6a8ec091` landed exact dual-ABI dormant Lua transaction RED as atomic 201/300.
 - `2026-08-11` — `.14.3.6.0` completed exact dual-ABI dormant Lua transaction RED signoff for atomic 201/300.
-- `2026-08-11` — `e9b169bb` landed exact Julia transaction admission as atomic 200/300.
 
 ## History
 

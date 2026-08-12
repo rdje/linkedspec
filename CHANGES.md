@@ -10,6 +10,21 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-12 — FUTURE-PARITY-BACKLOG.14.4.1 — execute neutral recursive observation
+
+- Added a 33-transition backend-neutral recursive-observation machine over the existing monotonic invocation
+  authority. It executes action-edge/direct entry, terminal selected-match replacement, zero-regex absence,
+  accepted/failed/aborted/rejected terminals, fresh pre-entry rejection ids, and immediate detach with no history.
+- Selected future `value = observe_recognition(observation, call(Child))` syntax. The bare local harray target is
+  separate from the unchanged ordinary child payload; its nine detached fields use existing harray access.
+- Added two static target/operand diagnostics and 13 surface/state regressions, advancing typed-source governance
+  from 57 to 70 mutations while preserving exact rollout 8 complete / 6 pending and every runtime/public boundary.
+- Synchronized ADR `0056`, Knowledge, capability guide, roadmaps/live state, and the sole-facing mdBook. README,
+  parser/compiler/runtime/backend/ActionIR/facade/schema/semantic/MCP/CLI behavior remain unchanged.
+- Complete signoff passes the exact six-runtime composition and support ledgers, rendered book, Knowledge
+  821/6,831, all eight doctrines, six-family containment, relocation, CLI 66x2, RAM 35%, and canonical Phase 0
+  1,031/1,031 in 714 seconds through the exact local-CI success marker and exit 0.
+
 ## 2026-08-12 — FUTURE-PARITY-BACKLOG.14.4.0.1 — correct recursive observation lineage
 
 - Replaced the six neutral recursive-observation rows' textual identities with positive, unique, monotonic numeric

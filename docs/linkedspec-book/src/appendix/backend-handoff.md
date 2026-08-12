@@ -116,9 +116,22 @@
 > guard that fires before child frame entry reserves a fresh attempted-child identity, points it at the active
 > parent, records rejection, and pushes no live frame. Corrective `.14.4.0.1` has replaced the original
 > `direct_nonprogress` self-parent with numeric attempted-child lineage and now rejects self-parenting, identity
-> reuse, non-earlier parents, and cycles before `.14.4.1` neutral behavior.
+> reuse, non-earlier parents, and cycles.
+>
+> Executable neutral `.14.4.1` selects future
+> `value = observe_recognition(observation, call(Child))` syntax. The target is one bare rule-local harray and the
+> operand is exactly one unevaluated static call. Preserve the ordinary child payload as the expression result and
+> bind a separate recursively detached nine-field observation. Use existing harray field access; do not add a
+> custom public value kind or accessor family. The 33-transition neutral machine is authoritative for action-edge
+> versus direct entry, terminal selected-match replacement, accepted-only exit, all four outcomes, child-owned
+> seek/consume, fresh rejected-child ids, and no parse-wide history.
 > Perl `.2`, Rust `.3`, Dart `.4`, Julia `.5`, one shared PUC-Lua/LuaJIT implementation `.6`, recurring `.7`, and
-> public `.8` follow. No recursive-observation authored API or carrier projection is current yet.
+> public `.8` follow. The spelling/carrier are selected neutral contract only; no backend or public admission is
+> current yet.
+>
+> Definitive neutral signoff passes the exact six-runtime composition and support ledgers, all eight doctrines,
+> six-family containment, repository relocation, CLI 66x2, RAM 35%, and canonical Phase 0 1,031/1,031 in 714
+> seconds through the exact local-CI success marker. No runtime or public admission moved.
 >
 > **Repeated-action handoff:** Every backend must consume
 > `linkedspec-explicit-repetition-action-result-v1`: bare `OR` is minimum-one repetition, explicit action returns

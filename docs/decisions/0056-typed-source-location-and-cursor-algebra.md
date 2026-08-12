@@ -468,6 +468,45 @@ textual invocation id; the corrected fixture passes all 57 mutations. The six ob
 6-pending rollout, runtime implementations, public helpers, carriers, schemas, CLI, README, and executable
 recursive-observation status remain unchanged.
 
+### 21. Select and execute the neutral recursive-observation boundary
+
+`FUTURE-PARITY-BACKLOG.14.4.1` selects this future authored special form without admitting it on a backend:
+
+```text
+value = observe_recognition(observation, call(Child));
+```
+
+The first operand must be one bare rule-local harray binding. The second must be exactly one unevaluated,
+statically named `call(Rule)`. The expression returns the same child payload as the ordinary call—including falsey
+accepted values—while the binding receives a separate recursively detached nine-field harray at the terminal
+observation boundary. Accepted and failed calls bind before returning. Aborted and progress-rejected calls finalize
+the record before propagating the unchanged typed failure. This is grammar-owned future syntax, not an ordinary
+helper, callback, host object, transaction alias, or current ActionIR node.
+
+The exact carrier fields, in order, are `source_id`, `rule_label`, `invocation_id`, `parent_invocation_id`,
+`entry_position`, `selected_match`, `accepted_exit`, `outcome`, and `diagnostic`. Positions project as detached
+`{source_id, offset}` harrays; the nullable selected match projects as detached
+`{source_id, start, end, provenance}` with `provenance = match`. The nullable fields are parent id, selected match,
+accepted exit, and diagnostic. Authors use ordinary harray field access such as
+`observation["entry_position"]`; there is no second custom carrier kind or accessor-name expansion. Detached data
+contains no decoded text, path, parser, frame, match object, source-authority object, or host reference.
+
+The executable neutral machine has 33 ordered transitions over the existing invocation-id authority. It proves an
+action edge carries the parent's selected match while a direct call carries none; a child captures the caller
+cursor before `I`; OR/default children derive `seek` and AND children derive `consume`; later local selections
+replace earlier candidates so the record keeps only the terminal selected match; a zero-regex coordinator has no
+selected match; and accepted exit exists only for `accepted`. Failed, aborted, direct-rejected, and mutual-rejected
+paths all omit accepted exit. Rejection reserves ids `9` and `11` without pushing frames. Each terminal record is
+detached immediately, leaving no pending record and no parse-wide history after the sixth boundary.
+
+Two new static diagnostics reject a non-bare target (`source_location_recursive_observation_target`) or a
+non-static-call operand (`source_location_recursive_observation_operand`). The existing unavailable-boundary and
+direct/mutual progress diagnostics retain their owners. Ten reason-checked state-machine corruptions plus three
+surface/topology mutations advance the typed-source checker from 57 to 70 total mutations; the exact current
+rollout remains 8 complete / 6 pending. No runtime implementation, public helper, ActionIR node, value kind,
+descriptor/generated version, result schema, semantic/MCP projection, CLI option, README behavior, or parser
+behavior becomes current in this neutral leaf.
+
 ## Consequences
 
 - Cursor control, capture, recursion, segmentation, and parser composition share one precise model instead of
@@ -499,6 +538,9 @@ recursive-observation status remain unchanged.
   correction before any runtime observation implementation.
 - The `.14.4.0.1` amendment completes that behavior-free correction: numeric monotonic lineage and four
   reason-checked invariant mutations are current, while executable observation remains owned by `.14.4.1+`.
+- The `.14.4.1` amendment selects the future `observe_recognition(observation, call(Child))` surface and makes its
+  detached carrier/state semantics executable in the neutral checker only. Backend implementation and public
+  admission remain dependency-ordered under `.14.4.2-.8`.
 
 ## Links
 

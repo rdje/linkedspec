@@ -10,6 +10,26 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-12 (`FUTURE-PARITY-BACKLOG.14.4.1` — executable neutral recursive observation): the selected future
+  special form is `value = observe_recognition(observation, call(Child))`. Require one bare rule-local harray
+  target and one unevaluated statically named call; return the ordinary child payload unchanged and bind the
+  observation separately so falsey success never collapses into failure.
+- The carrier is an ordinary detached harray rather than another authored value kind. Its exact fields are source,
+  rule, invocation, parent, entry position, terminal selected match, accepted exit, outcome, and diagnostic;
+  positions/spans are detached nested harrays and existing `value["field"]` access is sufficient.
+- Model automatic action edges and explicit observed calls through the same record builder. Capture entry before
+  child `I`, take family policy from the child, overwrite local-match state on every selection, publish exit only
+  on normal acceptance, and reserve rejected attempted-child identity before any frame push.
+- Retain at most one pending record until the explicit boundary, detach it immediately, then make stale boundary
+  reads fail with the existing typed unavailable diagnostic. Never introduce a parse-wide observation ledger.
+- The neutral checker now executes 33 transitions and reason-checks ten state corruptions plus three surface/
+  topology drifts. Current typed-source governance is 70 mutations at unchanged rollout 8/6; backend work begins
+  independently with Perl `.14.4.2` only after this leaf lands cleanly.
+- Definitive signoff composes Perl 10, Rust/Dart 4/4, Julia 127, and Lua 240/240 per ABI with strict generated Rust
+  105/105, capability 80/0/0, and language 246/105+1/122. The rendered book, Knowledge 821/6,831, all eight
+  doctrines, host-permitted six-family containment, relocation, CLI 66x2, RAM 35%, and canonical Phase 0
+  1,031/1,031 in 714 seconds pass through the exact success marker and exit 0.
+
 - 2026-08-12 (`FUTURE-PARITY-BACKLOG.14.4.0.1` — recursive observation lineage correction): keep invocation ids
   numeric at the neutral boundary. `bool` must be rejected explicitly because Python treats it as an `int`; ids
   must otherwise be positive, unique, and drawn monotonically from the existing parse-local authority.

@@ -25,8 +25,9 @@ answers:
   - "why did the capability conformance guide still say typed source rollout was 3 11 37"
   - "which task corrected the stale typed source capability guide after runtime admissions"
   - "how many typed source location mutations exist after recurring composition"
+  - "how many typed source location mutations exist after executable recursive observation"
 date: 2026-08-01
-status: neutral artifact, public teaching/recomposition, and all six runtime targets complete; 8 of 14 rollout legs complete
+status: neutral artifact including executable recursive observation, public teaching/recomposition, and all six internal runtime targets complete; 8 of 14 rollout legs complete
 tags: [architecture, source-location, spans, cursor, helpers, recursion, conformance, mdbook, portability]
 evidence: "FUTURE-PARITY-BACKLOG.14.1.0 retrieved ADR 0056 and adjacent contracts before using LinkedSpec::Get, return_descriptor, and call_spec_handler_subst. Live decoded Unicode input é\\n🙂x is four scalar positions over eight UTF-8 bytes; direct/mutual non-progress recursion returns undef through the current guard without structured last_error. The modern helper inventory is 47 capture/mark + 30 entry/match + 11 input/cursor + 4 cursor-control = 92 canonical calls. Executable .14.1.1 proof corrects the preliminary alias classification to seven callable compatibility aliases plus two internal contract/scanner ids whose recognized spellings are canonical capture_take and capture_take_len. The task tree freezes the exact v1 contract/checker paths, fixture/diagnostic/mutation counts, CI routing, rollout order, and public page set."
 evidence_update_2026_08_01_public_rollout: "Public structure .14.1.2 and unchanged recomposition .14.1.3 are complete. Correction .14.2.0.1 promotes both live rows, advances current truth to 3 complete / 11 pending, and protects each with an independent completed-to-pending regression among 37 mutations. Runtime values remain future."
@@ -41,6 +42,8 @@ evidence_update_2026_08_07_lua_admission_signoff: "Lua admission signoff passes 
 evidence_update_2026_08_07_capability_guide_drift: "The .14.2.5.3 current-surface census found capability_conformance/README.md still claiming 3 complete / 11 pending / 37 mutations and all backends pending. Git blame ties the section to initial contract commit e8f6198b and public-row correction bd777ee8. Git history proves later Perl, Rust, Dart, and Julia admission commits updated executable artifact/checker, Knowledge, and sole-facing book but omitted this guide. The runtime contract never regressed; this was accumulated documentation projection drift. The active all-live-doc acceptance repairs the guide directly to 8/6/42 and all six runtime targets admitted."
 evidence_update_2026_08_09_recurring_topology: "Recurring composition .14.2.6 binds five backend consumer groups to exact Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT routes plus three support ledgers through one repository-routed driver and canonical opt-in. Eleven independent topology mutations advance current governance to 53 while rollout remains 8/6 because the combined recurring_public_no_drift row belongs to final .14.8. No neutral fixture, runtime result, register, schema, DSL, README, hosted workflow, or storage root changes."
 evidence_update_2026_08_09_value_rollout_closeout: "No-change recomposition .14.2.7 reruns the committed six-runtime driver at neutral 8/6/53, Perl 10, Rust/Dart 4/4, Julia 127, PUC Lua/LuaJIT 240/240, generated-source strict Rust 105/105, capability 80/0/0, and language 246/105+1/122. Its pre-lockstep diff contains only the owning task tree, proving no replacement implementation, consumer, fixture, contract, schema, helper, CLI, storage, README, hosted workflow, or .14.8 promotion. This composition closes internal value/helper slice .14.2; transactions remain .14.3 and final public no-drift remains .14.8."
+evidence_update_2026_08_12_recursive_observation: "Corrective .14.4.0.1 advances neutral lineage to 57 mutations. Executable neutral .14.4.1 adds 33 deterministic transitions, selects future observe_recognition(observation, call(Child)) with one separate detached nine-field harray, adds two static diagnostics, and reaches 70 mutations. It preserves 8 complete / 6 pending and admits no backend/runtime/public/schema/CLI behavior."
+evidence_update_2026_08_12_recursive_observation_signoff: "Complete signoff passes the exact six-runtime typed-source composition, strict generated Rust 105/105, capability 80/0/0, language 246/105+1/122, rendered book, Knowledge 821/6831, all eight doctrines, six-family process containment, repository relocation, CLI 66x2, RAM 35%, and canonical Phase 0 1031/1031 in 714 seconds through the exact local-CI marker and exit 0."
 reverify: "bash tools/check_typed_source_location_six_runtime.sh && rg -n 'complex regex|Single regex|recursive regex|single-regex multi-classification' docs/linkedspec-book/src/specs-and-corpora"
 ---
 
@@ -52,10 +55,11 @@ The first executable artifact is
 neither path uses off-volume scratch.
 
 The frozen neutral envelope has three decoded sources, seven position conversions, six direct spans, three derived
-text/provenance cases, eight invocation-state transitions, eight transaction transitions, six recursive-observation
-cases, four structural-authoring cases, 92 canonical helper projections, seven callable compatibility aliases,
-two internal contract ids, 31 exact diagnostic/negative fixtures, 14 rollout legs, and 53 independent mutations.
-This defines target semantics without selecting DSL spelling or claiming non-admitted backend implementation.
+text/provenance cases, eight invocation-state transitions, eight transaction transitions, 33 recursive-observation
+transitions, six detached recursive-observation cases, four structural-authoring cases, 92 canonical helper
+projections, seven callable compatibility aliases, two internal contract ids, 33 exact diagnostics, 14 rollout
+legs, and 70 independent mutations. The future recursive-observation spelling/carrier is selected neutral contract
+while backend implementation remains pending.
 
 The 92 modern current helpers divide into 47 capture/mark, 30 entry/match, 11 input/cursor, and four explicit cursor
 controls. Perl retains seven callable aliases: `capture_from_rule_start`, `capture_len_from_rule_start`,
@@ -79,5 +83,8 @@ reading-order phrase describe current compatibility material rather than preferr
 admission `.14.2.1.3`, Rust admission `.14.2.2.3`, Dart admission `.14.2.3.3`, Julia admission `.14.2.4.3`, and
 dual-ABI Lua admission `.14.2.5.3` advance the current ledger to 8 complete / 6 pending with 42 mutations. Internal
 values/projections are current on all six runtime targets. Recurring topology `.14.2.6` adds 11 mutations for a
-current total of 53 without promoting the combined `.14.8` final row; public authored values and transactions
-remain future.
+current total of 53 without promoting the combined `.14.8` final row. Executable recursive observation then adds
+future `value = observe_recognition(observation, call(Child))`: one bare local harray target, one unevaluated static
+call, and the unchanged ordinary child payload as expression result. The separate nine-field observation uses
+ordinary harray field access and retains no parse-wide history. Thirteen new mutations advance the checker to 70;
+this is neutral authority rather than backend admission, so rollout remains 8 complete / 6 pending.

@@ -43,16 +43,17 @@ EXPECTED_COUNTS = {
     "derived_text_cases": 3,
     "invocation_transitions": 8,
     "transaction_transitions": 8,
+    "recursive_observation_transitions": 33,
     "recursive_observations": 6,
     "structural_authoring_cases": 4,
     "helper_projections": 92,
     "compatibility_aliases": 7,
     "internal_contract_ids": 2,
-    "diagnostics": 31,
+    "diagnostics": 33,
     "rollout_legs": 14,
     "recurring_source_groups": 5,
     "recurring_runtime_routes": 6,
-    "mutations": 57,
+    "mutations": 70,
 }
 
 POLICY = {
@@ -68,8 +69,8 @@ POLICY = {
     "recursion": "entry, selected-match, and accepted-exit observations are read-only; invocation ids are positive, unique, and monotonic; nullable parents are distinct earlier same-authority ids with bounded acyclic links",
     "progress": "repetition, recursion, and staged queues must advance the cursor or prove a well-founded decreasing measure",
     "dispatch_authority": "a span conveys data and provenance only; source, registry, capability, and policy authority remain independently required",
-    "source_spelling": "not selected; Position, Span, checkpoint, try, commit, and rollback are architectural names only",
-    "implementation_boundary": "no backend runtime value, helper spelling, descriptor/schema version, semantic/MCP projection, or parser behavior is admitted by this contract",
+    "source_spelling": "observe_recognition(observation, call(Child)) is selected future syntax; Position and Span remain private architectural values projected as detached records",
+    "implementation_boundary": "the recursive-observation spelling and detached carrier are neutral-only; no backend runtime behavior, public helper, ActionIR node, descriptor/schema version, semantic/MCP projection, or parser behavior is admitted by this contract",
 }
 
 CANONICAL_EXECUTION = {
@@ -234,12 +235,13 @@ INTERNAL_CONTRACT_IDS = [
 ]
 
 RECURSIVE_OBSERVATIONS = [
-    ("ordinary_leaf", 2, 1, "unicode", 2, "unicode_emoji_tail", 4, "accepted", None),
-    ("zero_regex_coordinator", 3, None, "unicode", 0, None, 4, "accepted", None),
-    ("failed_selection", 5, 4, "unicode", 0, None, None, "failed", None),
-    ("abnormal_exit", 7, 6, "unicode", 2, "unicode_emoji_tail", None, "aborted", None),
+    ("ordinary_leaf", "Leaf", 2, 1, "unicode", 2, "unicode_emoji_tail", 4, "accepted", None),
+    ("zero_regex_coordinator", "Coordinator", 3, None, "unicode", 0, None, 4, "accepted", None),
+    ("failed_selection", "Missing", 5, 4, "unicode", 0, None, None, "failed", None),
+    ("abnormal_exit", "AbortChild", 7, 6, "unicode", 2, "unicode_emoji_tail", None, "aborted", None),
     (
         "direct_nonprogress",
+        "DirectRecur",
         9,
         8,
         "unicode",
@@ -251,6 +253,7 @@ RECURSIVE_OBSERVATIONS = [
     ),
     (
         "mutual_nonprogress",
+        "MutualA",
         11,
         10,
         "unicode",
@@ -320,6 +323,112 @@ TRANSACTION_ARG_FIELDS = {
     "commit": ["token"],
     "rollback": ["token"],
 }
+
+RECURSIVE_OBSERVATION_SURFACE = {
+    "request": "value = observe_recognition(observation, call(Child))",
+    "target": "the first operand is one bare rule-local harray binding replaced atomically at the terminal observation boundary",
+    "operand": "the second operand is exactly one unevaluated statically named call(Rule)",
+    "return": "the expression returns the ordinary child payload unchanged; observation data is never mixed with payload truthiness",
+    "terminal": "accepted and failed calls bind before returning; aborted and rejected calls finalize the detached record before propagating the unchanged typed failure",
+    "availability": "selected backend-neutral future syntax only; no runtime, ActionIR, facade, schema, semantic/MCP, CLI, or public support admission is current",
+}
+
+RECURSIVE_OBSERVATION_CARRIER = {
+    "kind": "detached_harray",
+    "fields": [
+        "source_id",
+        "rule_label",
+        "invocation_id",
+        "parent_invocation_id",
+        "entry_position",
+        "selected_match",
+        "accepted_exit",
+        "outcome",
+        "diagnostic",
+    ],
+    "field_access": 'observation["field"]',
+    "position_record": ["source_id", "offset"],
+    "span_record": ["source_id", "start", "end", "provenance"],
+    "nullable_fields": [
+        "parent_invocation_id",
+        "selected_match",
+        "accepted_exit",
+        "diagnostic",
+    ],
+    "outcomes": ["accepted", "failed", "aborted", "rejected"],
+    "detachment": "each projection is a fresh recursively detached harray with no source text, path, parser, frame, match, authority, or host object",
+    "retention": "the runtime retains at most one pending record until the explicit boundary and no parse-wide observation history",
+}
+
+RECURSIVE_FAMILY_POLICIES = {
+    "or_default": "seek",
+    "and": "consume",
+}
+
+RECURSIVE_OBSERVATION_ARG_FIELDS = {
+    "enter": [
+        "rule_label",
+        "source_id",
+        "origin",
+        "entry_match_span_id",
+        "family",
+        "observation_id",
+        "caller_cursor",
+    ],
+    "select_match": ["invocation_id", "span_id"],
+    "accept": ["invocation_id", "exit_offset"],
+    "fail": ["invocation_id"],
+    "abort": ["invocation_id", "diagnostic"],
+    "reject": [
+        "rule_label",
+        "source_id",
+        "origin",
+        "entry_match_span_id",
+        "family",
+        "observation_id",
+        "caller_cursor",
+        "recursion_kind",
+        "diagnostic",
+    ],
+    "detach": ["observation_id"],
+    "assert_unavailable": ["diagnostic"],
+}
+
+RECURSIVE_OBSERVATION_TRANSITION_IDS = [
+    "enter_ordinary_parent",
+    "select_ordinary_parent_entry",
+    "enter_ordinary_child",
+    "select_ordinary_child_initial",
+    "select_ordinary_child_terminal",
+    "accept_ordinary_child",
+    "detach_ordinary_leaf",
+    "accept_ordinary_parent",
+    "enter_zero_coordinator",
+    "accept_zero_coordinator",
+    "detach_zero_coordinator",
+    "enter_failed_parent",
+    "enter_failed_child",
+    "fail_failed_child",
+    "detach_failed_selection",
+    "fail_failed_parent",
+    "enter_aborted_parent",
+    "select_aborted_parent_entry",
+    "enter_aborted_child",
+    "select_aborted_child_initial",
+    "select_aborted_child_terminal",
+    "abort_aborted_child",
+    "detach_abnormal_exit",
+    "abort_aborted_parent",
+    "enter_direct_parent",
+    "reject_direct_child",
+    "detach_direct_nonprogress",
+    "fail_direct_parent",
+    "enter_mutual_parent",
+    "reject_mutual_child",
+    "detach_mutual_nonprogress",
+    "fail_mutual_parent",
+    "assert_detached_history_empty",
+]
 
 VALUE_CONTEXT = ["rule_role", "invocation_role", "source_id"]
 PROGRESS_CONTEXT = [
@@ -425,6 +534,18 @@ DIAGNOSTICS = [
         "observe_recursion",
         "runtime",
         VALUE_CONTEXT + ["boundary_role", "originating_edge_or_job"],
+    ),
+    (
+        "recursive_observation_target",
+        "observe_recursion",
+        "static",
+        ["rule_role", "source_id", "binding_name", "originating_edge_or_job"],
+    ),
+    (
+        "recursive_observation_operand",
+        "observe_recursion",
+        "static",
+        ["rule_role", "source_id", "operand_kind", "originating_edge_or_job"],
     ),
     (
         "ambiguous_regex_slot",
@@ -766,6 +887,255 @@ def validate_recursive_observation_lineage(observations: list[dict[str, Any]]) -
             fail("recursive parent invocation must precede child")
 
 
+def recursive_observation_projection(
+    observation: dict[str, Any], span_by_id: dict[str, dict[str, Any]]
+) -> dict[str, Any]:
+    selected_match = None
+    selected_match_span_id = observation["selected_match_span_id"]
+    if selected_match_span_id is not None:
+        span = span_by_id[selected_match_span_id]
+        selected_match = {
+            "source_id": span["source_id"],
+            "start": span["start"],
+            "end": span["end"],
+            "provenance": "match",
+        }
+    accepted_exit = None
+    if observation["accepted_exit_offset"] is not None:
+        accepted_exit = {
+            "source_id": observation["source_id"],
+            "offset": observation["accepted_exit_offset"],
+        }
+    return {
+        "source_id": observation["source_id"],
+        "rule_label": observation["rule_label"],
+        "invocation_id": observation["invocation_id"],
+        "parent_invocation_id": observation["parent_invocation_id"],
+        "entry_position": {
+            "source_id": observation["source_id"],
+            "offset": observation["entry_offset"],
+        },
+        "selected_match": selected_match,
+        "accepted_exit": accepted_exit,
+        "outcome": observation["outcome"],
+        "diagnostic": observation["diagnostic"],
+    }
+
+
+def recursive_observation_snapshot(state: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "next_invocation_id": state["next_invocation_id"],
+        "stack_depth": len(state["stack"]),
+        "pending_observation": (
+            state["pending_observation"]["id"]
+            if state["pending_observation"] is not None
+            else None
+        ),
+        "detached_count": state["detached_count"],
+        "retained_history_count": 0,
+    }
+
+
+def complete_recursive_observation(
+    state: dict[str, Any], frame: dict[str, Any], outcome: str, exit_offset: int | None,
+    diagnostic: str | None,
+) -> None:
+    observation_id = frame["observation_id"]
+    if observation_id is None:
+        return
+    if state["pending_observation"] is not None:
+        fail("recursive observation boundary retained more than one pending record")
+    state["pending_observation"] = {
+        "id": observation_id,
+        "rule_label": frame["rule_label"],
+        "invocation_id": frame["invocation_id"],
+        "parent_invocation_id": frame["parent_invocation_id"],
+        "source_id": frame["source_id"],
+        "entry_offset": frame["entry_offset"],
+        "selected_match_span_id": frame["selected_match_span_id"],
+        "accepted_exit_offset": exit_offset,
+        "outcome": outcome,
+        "diagnostic": diagnostic,
+    }
+
+
+def apply_recursive_observation_transition(
+    state: dict[str, Any],
+    transition: dict[str, Any],
+    source_by_id: dict[str, dict[str, Any]],
+    span_by_id: dict[str, dict[str, Any]],
+    observation_by_id: dict[str, dict[str, Any]],
+    detached: list[dict[str, Any]],
+) -> None:
+    operation = transition["operation"]
+    args = transition["args"]
+    stack = state["stack"]
+
+    if operation == "enter":
+        source = source_by_id.get(args["source_id"])
+        if source is None:
+            fail("recursive entry references unknown source")
+        position_coordinates(source["decoded_text"], args["caller_cursor"])
+        family = args["family"]
+        if family not in RECURSIVE_FAMILY_POLICIES:
+            fail("recursive entry has unknown child family")
+        parent = stack[-1] if stack else None
+        if parent is not None:
+            if parent["source_id"] != args["source_id"]:
+                fail("recursive child crossed source authority")
+            if parent["cursor"] != args["caller_cursor"]:
+                fail("recursive child entry did not use the caller cursor")
+        origin = args["origin"]
+        entry_match_span_id = args["entry_match_span_id"]
+        if origin == "direct":
+            if entry_match_span_id is not None:
+                fail("direct recursive call invented an entry match")
+        elif origin == "action_edge":
+            if (
+                parent is None
+                or entry_match_span_id is None
+                or parent["selected_match_span_id"] != entry_match_span_id
+            ):
+                fail("action-edge recursive entry did not carry the parent selected match")
+        else:
+            fail("recursive entry origin is unknown")
+        observation_id = args["observation_id"]
+        if observation_id is not None and observation_id not in observation_by_id:
+            fail("recursive entry references unknown observation boundary")
+        invocation_id = state["next_invocation_id"]
+        state["next_invocation_id"] += 1
+        stack.append(
+            {
+                "invocation_id": invocation_id,
+                "parent_invocation_id": parent["invocation_id"] if parent else None,
+                "rule_label": args["rule_label"],
+                "source_id": args["source_id"],
+                "entry_offset": args["caller_cursor"],
+                "entry_match_span_id": entry_match_span_id,
+                "selected_match_span_id": None,
+                "cursor": args["caller_cursor"],
+                "family": family,
+                "cursor_policy": RECURSIVE_FAMILY_POLICIES[family],
+                "observation_id": observation_id,
+            }
+        )
+        return
+
+    if operation == "select_match":
+        if not stack or stack[-1]["invocation_id"] != args["invocation_id"]:
+            fail("recursive selected match does not target the active invocation")
+        frame = stack[-1]
+        span = span_by_id.get(args["span_id"])
+        if span is None or span["source_id"] != frame["source_id"]:
+            fail("recursive selected match crossed source authority")
+        if frame["cursor_policy"] == "consume" and span["start"] != frame["entry_offset"]:
+            fail("consume-family recursive match did not begin at child entry")
+        if frame["cursor_policy"] == "seek" and span["start"] < frame["entry_offset"]:
+            fail("seek-family recursive match began before child entry")
+        frame["selected_match_span_id"] = args["span_id"]
+        frame["cursor"] = span["end"]
+        return
+
+    if operation in {"accept", "fail", "abort"}:
+        if not stack or stack[-1]["invocation_id"] != args["invocation_id"]:
+            fail("recursive terminal does not target the active invocation")
+        frame = stack.pop()
+        if operation == "accept":
+            exit_offset = args["exit_offset"]
+            source = source_by_id[frame["source_id"]]
+            position_coordinates(source["decoded_text"], exit_offset)
+            if exit_offset < frame["entry_offset"]:
+                fail("accepted recursive exit precedes entry")
+            selected_match_span_id = frame["selected_match_span_id"]
+            if (
+                selected_match_span_id is not None
+                and exit_offset < span_by_id[selected_match_span_id]["end"]
+            ):
+                fail("accepted recursive exit precedes terminal selected match")
+            complete_recursive_observation(state, frame, "accepted", exit_offset, None)
+            if stack:
+                stack[-1]["cursor"] = exit_offset
+        elif operation == "fail":
+            complete_recursive_observation(state, frame, "failed", None, None)
+        else:
+            diagnostic = args["diagnostic"]
+            if diagnostic is not None and (
+                not isinstance(diagnostic, str) or not diagnostic.startswith("source_location_")
+            ):
+                fail("recursive abort diagnostic is not typed")
+            complete_recursive_observation(state, frame, "aborted", None, diagnostic)
+        return
+
+    if operation == "reject":
+        if not stack:
+            fail("recursive rejection has no active parent")
+        parent = stack[-1]
+        source = source_by_id.get(args["source_id"])
+        if source is None or parent["source_id"] != args["source_id"]:
+            fail("recursive rejection crossed source authority")
+        position_coordinates(source["decoded_text"], args["caller_cursor"])
+        if parent["cursor"] != args["caller_cursor"]:
+            fail("recursive rejected child did not use the caller cursor")
+        if args["origin"] != "direct" or args["entry_match_span_id"] is not None:
+            fail("pre-entry recursive rejection invented an action-edge match")
+        if args["family"] not in RECURSIVE_FAMILY_POLICIES:
+            fail("recursive rejection has unknown child family")
+        recursion_kind = args["recursion_kind"]
+        expected_diagnostic = {
+            "direct": "source_location_nonprogress_direct_recursion",
+            "mutual": "source_location_nonprogress_mutual_recursion",
+        }.get(recursion_kind)
+        if expected_diagnostic is None or args["diagnostic"] != expected_diagnostic:
+            fail("recursive rejection kind and diagnostic disagree")
+        if recursion_kind == "direct" and args["rule_label"] != parent["rule_label"]:
+            fail("direct recursive rejection changed rule identity")
+        if recursion_kind == "mutual" and args["rule_label"] == parent["rule_label"]:
+            fail("mutual recursive rejection reused parent rule identity")
+        observation_id = args["observation_id"]
+        if observation_id not in observation_by_id:
+            fail("recursive rejection references unknown observation boundary")
+        invocation_id = state["next_invocation_id"]
+        state["next_invocation_id"] += 1
+        rejected = {
+            "invocation_id": invocation_id,
+            "parent_invocation_id": parent["invocation_id"],
+            "rule_label": args["rule_label"],
+            "source_id": args["source_id"],
+            "entry_offset": args["caller_cursor"],
+            "entry_match_span_id": None,
+            "selected_match_span_id": None,
+            "cursor": args["caller_cursor"],
+            "family": args["family"],
+            "cursor_policy": RECURSIVE_FAMILY_POLICIES[args["family"]],
+            "observation_id": observation_id,
+        }
+        complete_recursive_observation(
+            state, rejected, "rejected", None, args["diagnostic"]
+        )
+        return
+
+    if operation == "detach":
+        pending = state["pending_observation"]
+        if pending is None or pending["id"] != args["observation_id"]:
+            fail("recursive observation boundary is unavailable")
+        expected = observation_by_id[args["observation_id"]]
+        if pending != expected:
+            fail("recursive observation state machine emitted the wrong terminal record")
+        detached.append(copy.deepcopy(pending))
+        state["pending_observation"] = None
+        state["detached_count"] += 1
+        return
+
+    if operation == "assert_unavailable":
+        if args["diagnostic"] != "source_location_recursive_boundary_unavailable":
+            fail("recursive unavailable-boundary diagnostic drifted")
+        if state["pending_observation"] is not None:
+            fail("recursive observation history remained available after detach")
+        return
+
+    fail(f"unknown recursive observation transition operation: {operation!r}")
+
+
 def validate_contract(contract: dict[str, Any], *, check_registration: bool = True) -> None:
     top_fields = [
         "format",
@@ -781,6 +1151,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         "derived_text_cases",
         "invocation_state_machine",
         "transaction_state_machine",
+        "recursive_observation_state_machine",
         "recursive_observations",
         "structural_authoring_cases",
         "helper_projection_schema",
@@ -1087,6 +1458,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             observation,
             [
                 "id",
+                "rule_label",
                 "invocation_id",
                 "parent_invocation_id",
                 "source_id",
@@ -1112,6 +1484,135 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
     validate_recursive_observation_lineage(observations)
     if observed_recursive != RECURSIVE_OBSERVATIONS:
         fail("recursive observation semantics or order drifted")
+
+    recursive_machine = require_fields(
+        contract["recursive_observation_state_machine"],
+        [
+            "authored_surface",
+            "carrier_projection",
+            "family_cursor_policies",
+            "match_spans",
+            "initial",
+            "transitions",
+            "expected_final",
+        ],
+        "recursive observation state machine",
+    )
+    if recursive_machine["authored_surface"] != RECURSIVE_OBSERVATION_SURFACE:
+        fail("recursive observation authored surface drifted")
+    if recursive_machine["carrier_projection"] != RECURSIVE_OBSERVATION_CARRIER:
+        fail("recursive observation carrier projection drifted")
+    if recursive_machine["family_cursor_policies"] != RECURSIVE_FAMILY_POLICIES:
+        fail("recursive observation child-family cursor policy drifted")
+
+    recursive_spans = require_list(
+        recursive_machine["match_spans"], "recursive observation match spans", 2
+    )
+    expected_recursive_spans = [
+        ("unicode_zero_at_two", "unicode", 2, 2, ""),
+        ("unicode_emoji", "unicode", 2, 3, "🙂"),
+    ]
+    recursive_span_by_id = dict(span_by_id)
+    for expected, span in zip(expected_recursive_spans, recursive_spans, strict=True):
+        require_fields(
+            span,
+            ["id", "source_id", "start", "end", "expected_text"],
+            "recursive observation match span",
+        )
+        if tuple(span.values()) != expected or span["id"] in recursive_span_by_id:
+            fail("recursive observation match span identity or order drifted")
+        source = source_by_id.get(span["source_id"])
+        if source is None:
+            fail("recursive observation match span references unknown source")
+        position_coordinates(source["decoded_text"], span["start"])
+        position_coordinates(source["decoded_text"], span["end"])
+        if (
+            span["start"] > span["end"]
+            or source["decoded_text"][span["start"] : span["end"]]
+            != span["expected_text"]
+        ):
+            fail("recursive observation match span materialization drifted")
+        recursive_span_by_id[span["id"]] = span
+
+    recursive_initial = {
+        "next_invocation_id": 1,
+        "stack": [],
+        "pending_observation": None,
+        "detached_count": 0,
+    }
+    if recursive_machine["initial"] != recursive_initial:
+        fail("recursive observation initial state drifted")
+    observation_by_id = {observation["id"]: observation for observation in observations}
+    recursive_state = copy.deepcopy(recursive_initial)
+    detached_observations: list[dict[str, Any]] = []
+    recursive_transitions = require_list(
+        recursive_machine["transitions"],
+        "recursive observation transitions",
+        EXPECTED_COUNTS["recursive_observation_transitions"],
+    )
+    for expected_id, transition in zip(
+        RECURSIVE_OBSERVATION_TRANSITION_IDS, recursive_transitions, strict=True
+    ):
+        require_fields(
+            transition, ["id", "operation", "args"], "recursive observation transition"
+        )
+        if transition["id"] != expected_id:
+            fail("recursive observation transition identity or order drifted")
+        operation = transition["operation"]
+        if operation not in RECURSIVE_OBSERVATION_ARG_FIELDS:
+            fail(f"unknown recursive observation operation: {operation!r}")
+        require_fields(
+            transition["args"],
+            RECURSIVE_OBSERVATION_ARG_FIELDS[operation],
+            f"recursive observation transition {expected_id!r} args",
+        )
+        apply_recursive_observation_transition(
+            recursive_state,
+            transition,
+            source_by_id,
+            recursive_span_by_id,
+            observation_by_id,
+            detached_observations,
+        )
+    if [row["id"] for row in detached_observations] != [row["id"] for row in observations]:
+        fail("recursive observation detach order drifted")
+    if recursive_observation_snapshot(recursive_state) != recursive_machine["expected_final"]:
+        fail("recursive observation final state or retention boundary drifted")
+
+    for observation in detached_observations:
+        projection = recursive_observation_projection(observation, recursive_span_by_id)
+        require_fields(
+            projection,
+            RECURSIVE_OBSERVATION_CARRIER["fields"],
+            "detached recursive observation projection",
+        )
+        require_fields(
+            projection["entry_position"],
+            RECURSIVE_OBSERVATION_CARRIER["position_record"],
+            "recursive observation entry position",
+        )
+        if projection["selected_match"] is not None:
+            require_fields(
+                projection["selected_match"],
+                RECURSIVE_OBSERVATION_CARRIER["span_record"],
+                "recursive observation selected match",
+            )
+        if projection["accepted_exit"] is not None:
+            require_fields(
+                projection["accepted_exit"],
+                RECURSIVE_OBSERVATION_CARRIER["position_record"],
+                "recursive observation accepted exit",
+            )
+        if (observation["outcome"] == "accepted") != (
+            projection["accepted_exit"] is not None
+        ):
+            fail("recursive observation accepted-exit presence drifted")
+        independent_projection = recursive_observation_projection(
+            observation, recursive_span_by_id
+        )
+        projection["entry_position"]["offset"] = -1
+        if independent_projection["entry_position"]["offset"] != observation["entry_offset"]:
+            fail("recursive observation projection is not detached")
 
     structural = require_list(
         contract["structural_authoring_cases"],
@@ -1284,6 +1785,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         "derived_text_cases": len(derived_cases),
         "invocation_transitions": len(invocation_transitions),
         "transaction_transitions": len(transaction_transitions),
+        "recursive_observation_transitions": len(recursive_transitions),
         "recursive_observations": len(observations),
         "structural_authoring_cases": len(structural),
         "helper_projections": len(all_names),
@@ -1464,6 +1966,56 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         observations[0]["parent_invocation_id"] = observations[2]["invocation_id"]
         observations[2]["parent_invocation_id"] = observations[0]["invocation_id"]
 
+    def direct_entry_match(candidate: dict[str, Any]) -> None:
+        candidate["recursive_observation_state_machine"]["transitions"][12]["args"][
+            "entry_match_span_id"
+        ] = "unicode_newline"
+
+    def action_entry_match_missing(candidate: dict[str, Any]) -> None:
+        candidate["recursive_observation_state_machine"]["transitions"][2]["args"][
+            "entry_match_span_id"
+        ] = None
+
+    def child_entry_cursor_override(candidate: dict[str, Any]) -> None:
+        candidate["recursive_observation_state_machine"]["transitions"][2]["args"][
+            "caller_cursor"
+        ] = 3
+
+    def child_family_policy_override(candidate: dict[str, Any]) -> None:
+        candidate["recursive_observation_state_machine"]["family_cursor_policies"][
+            "or_default"
+        ] = "consume"
+
+    def terminal_match_not_replaced(candidate: dict[str, Any]) -> None:
+        candidate["recursive_observation_state_machine"]["transitions"][4]["args"][
+            "span_id"
+        ] = "unicode_emoji"
+
+    def accepted_exit_before_match(candidate: dict[str, Any]) -> None:
+        candidate["recursive_observation_state_machine"]["transitions"][5]["args"][
+            "exit_offset"
+        ] = 3
+
+    def failed_outcome_gains_exit(candidate: dict[str, Any]) -> None:
+        transition = candidate["recursive_observation_state_machine"]["transitions"][13]
+        transition["operation"] = "accept"
+        transition["args"] = {"invocation_id": 5, "exit_offset": 0}
+
+    def rejected_child_cursor_override(candidate: dict[str, Any]) -> None:
+        candidate["recursive_observation_state_machine"]["transitions"][25]["args"][
+            "caller_cursor"
+        ] = 2
+
+    def rejected_identity_not_fresh(candidate: dict[str, Any]) -> None:
+        candidate["recursive_observation_state_machine"]["initial"][
+            "next_invocation_id"
+        ] = 2
+
+    def retained_observation_history(candidate: dict[str, Any]) -> None:
+        candidate["recursive_observation_state_machine"]["expected_final"][
+            "retained_history_count"
+        ] = 1
+
     mutations: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
         ("format", lambda c: c.__setitem__("format", 2)),
         ("contract id", lambda c: c.__setitem__("contract_id", "drift")),
@@ -1485,6 +2037,22 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ("transaction transition removed", lambda c: c["transaction_state_machine"]["transitions"].pop()),
         ("transaction operation", lambda c: c["transaction_state_machine"]["transitions"][4].__setitem__("operation", "rollback")),
         ("transaction offset bounds", transaction_out_of_range),
+        (
+            "recursive authored target",
+            lambda c: c["recursive_observation_state_machine"]["authored_surface"].__setitem__(
+                "target", "any expression"
+            ),
+        ),
+        (
+            "recursive carrier field removed",
+            lambda c: c["recursive_observation_state_machine"]["carrier_projection"][
+                "fields"
+            ].pop(),
+        ),
+        (
+            "recursive executable transition removed",
+            lambda c: c["recursive_observation_state_machine"]["transitions"].pop(),
+        ),
         ("recursive observation removed", lambda c: c["recursive_observations"].pop()),
         ("recursive diagnostic", lambda c: c["recursive_observations"][4].__setitem__("diagnostic", None)),
         ("structural case removed", lambda c: c["structural_authoring_cases"].pop()),
@@ -1572,6 +2140,58 @@ def mutation_checks(contract: dict[str, Any]) -> int:
             "recursive invocation lineage is cyclic",
         ),
     ]
+    recursive_state_regressions = [
+        (
+            "direct call invented entry match",
+            direct_entry_match,
+            "direct recursive call invented an entry match",
+        ),
+        (
+            "action edge dropped carried match",
+            action_entry_match_missing,
+            "action-edge recursive entry did not carry the parent selected match",
+        ),
+        (
+            "parent overrode child entry cursor",
+            child_entry_cursor_override,
+            "recursive child entry did not use the caller cursor",
+        ),
+        (
+            "parent overrode child family policy",
+            child_family_policy_override,
+            "recursive observation child-family cursor policy drifted",
+        ),
+        (
+            "terminal selected match was not replaced",
+            terminal_match_not_replaced,
+            "recursive observation state machine emitted the wrong terminal record",
+        ),
+        (
+            "accepted exit preceded selected match",
+            accepted_exit_before_match,
+            "accepted recursive exit precedes terminal selected match",
+        ),
+        (
+            "failed outcome gained accepted exit",
+            failed_outcome_gains_exit,
+            "recursive observation state machine emitted the wrong terminal record",
+        ),
+        (
+            "rejected child changed caller cursor",
+            rejected_child_cursor_override,
+            "recursive rejected child did not use the caller cursor",
+        ),
+        (
+            "rejected child identity was not fresh",
+            rejected_identity_not_fresh,
+            "recursive observation initial state drifted",
+        ),
+        (
+            "detached observation history retained",
+            retained_observation_history,
+            "recursive observation final state or retention boundary drifted",
+        ),
+    ]
     rollout_regressions = [
         (
             "public structure regressed to pending",
@@ -1603,13 +2223,26 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         ),
     ]
     if (
-        len(mutations) + len(recursive_lineage_regressions) + len(rollout_regressions)
+        len(mutations)
+        + len(recursive_lineage_regressions)
+        + len(recursive_state_regressions)
+        + len(rollout_regressions)
         != EXPECTED_COUNTS["mutations"]
     ):
         fail("checker mutation inventory count drifted")
     for name, mutate in mutations:
         expect_mutation_failure(contract, name, mutate)
     for name, mutate, expected_error in recursive_lineage_regressions:
+        candidate = copy.deepcopy(contract)
+        mutate(candidate)
+        try:
+            validate_contract(candidate, check_registration=False)
+        except ContractError as error:
+            if expected_error not in str(error):
+                fail(f"mutation {name!r} failed for the wrong reason: {error}")
+        else:
+            fail(f"mutation {name!r} was not rejected")
+    for name, mutate, expected_error in recursive_state_regressions:
         candidate = copy.deepcopy(contract)
         mutate(candidate)
         try:
@@ -1629,7 +2262,12 @@ def mutation_checks(contract: dict[str, Any]) -> int:
                 fail(f"mutation {name!r} failed for the wrong reason: {error}")
         else:
             fail(f"mutation {name!r} was not rejected")
-    return len(mutations) + len(recursive_lineage_regressions) + len(rollout_regressions)
+    return (
+        len(mutations)
+        + len(recursive_lineage_regressions)
+        + len(recursive_state_regressions)
+        + len(rollout_regressions)
+    )
 
 
 def main() -> int:
@@ -1643,7 +2281,8 @@ def main() -> int:
         f"({len(contract['sources'])} sources; {len(contract['position_conversions'])} positions; "
         f"{len(contract['direct_spans'])} direct spans; {len(contract['derived_text_cases'])} derived texts; "
         f"{len(contract['invocation_state_machine']['transitions'])}+"
-        f"{len(contract['transaction_state_machine']['transitions'])} state transitions; "
+        f"{len(contract['transaction_state_machine']['transitions'])}+"
+        f"{len(contract['recursive_observation_state_machine']['transitions'])} state transitions; "
         f"{len(contract['recursive_observations'])} recursive observations; "
         f"{len(contract['structural_authoring_cases'])} structural cases; "
         f"{EXPECTED_COUNTS['helper_projections']} helper projections + "

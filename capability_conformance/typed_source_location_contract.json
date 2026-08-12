@@ -10,16 +10,17 @@
     "derived_text_cases": 3,
     "invocation_transitions": 8,
     "transaction_transitions": 8,
+    "recursive_observation_transitions": 33,
     "recursive_observations": 6,
     "structural_authoring_cases": 4,
     "helper_projections": 92,
     "compatibility_aliases": 7,
     "internal_contract_ids": 2,
-    "diagnostics": 31,
+    "diagnostics": 33,
     "rollout_legs": 14,
     "recurring_source_groups": 5,
     "recurring_runtime_routes": 6,
-    "mutations": 57
+    "mutations": 70
   },
   "policy": {
     "source_identity": "caller-authorized decoded input identity; never a path, backend object, or implicit read authority",
@@ -34,8 +35,8 @@
     "recursion": "entry, selected-match, and accepted-exit observations are read-only; invocation ids are positive, unique, and monotonic; nullable parents are distinct earlier same-authority ids with bounded acyclic links",
     "progress": "repetition, recursion, and staged queues must advance the cursor or prove a well-founded decreasing measure",
     "dispatch_authority": "a span conveys data and provenance only; source, registry, capability, and policy authority remain independently required",
-    "source_spelling": "not selected; Position, Span, checkpoint, try, commit, and rollback are architectural names only",
-    "implementation_boundary": "no backend runtime value, helper spelling, descriptor/schema version, semantic/MCP projection, or parser behavior is admitted by this contract"
+    "source_spelling": "observe_recognition(observation, call(Child)) is selected future syntax; Position and Span remain private architectural values projected as detached records",
+    "implementation_boundary": "the recursive-observation spelling and detached carrier are neutral-only; no backend runtime behavior, public helper, ActionIR node, descriptor/schema version, semantic/MCP projection, or parser behavior is admitted by this contract"
   },
   "canonical_execution": {
     "contract_path": "capability_conformance/typed_source_location_contract.json",
@@ -98,13 +99,76 @@
       {"id": "rollback_path", "operation": "rollback", "args": {"token": "t2"}, "expected": {"cursor": 3, "anonymous_boundary": 2, "marks": [["m", 1], ["n", 3]], "token": "t2", "token_state": "invalidated"}}
     ]
   },
+  "recursive_observation_state_machine": {
+    "authored_surface": {
+      "request": "value = observe_recognition(observation, call(Child))",
+      "target": "the first operand is one bare rule-local harray binding replaced atomically at the terminal observation boundary",
+      "operand": "the second operand is exactly one unevaluated statically named call(Rule)",
+      "return": "the expression returns the ordinary child payload unchanged; observation data is never mixed with payload truthiness",
+      "terminal": "accepted and failed calls bind before returning; aborted and rejected calls finalize the detached record before propagating the unchanged typed failure",
+      "availability": "selected backend-neutral future syntax only; no runtime, ActionIR, facade, schema, semantic/MCP, CLI, or public support admission is current"
+    },
+    "carrier_projection": {
+      "kind": "detached_harray",
+      "fields": ["source_id", "rule_label", "invocation_id", "parent_invocation_id", "entry_position", "selected_match", "accepted_exit", "outcome", "diagnostic"],
+      "field_access": "observation[\"field\"]",
+      "position_record": ["source_id", "offset"],
+      "span_record": ["source_id", "start", "end", "provenance"],
+      "nullable_fields": ["parent_invocation_id", "selected_match", "accepted_exit", "diagnostic"],
+      "outcomes": ["accepted", "failed", "aborted", "rejected"],
+      "detachment": "each projection is a fresh recursively detached harray with no source text, path, parser, frame, match, authority, or host object",
+      "retention": "the runtime retains at most one pending record until the explicit boundary and no parse-wide observation history"
+    },
+    "family_cursor_policies": {"or_default": "seek", "and": "consume"},
+    "match_spans": [
+      {"id": "unicode_zero_at_two", "source_id": "unicode", "start": 2, "end": 2, "expected_text": ""},
+      {"id": "unicode_emoji", "source_id": "unicode", "start": 2, "end": 3, "expected_text": "🙂"}
+    ],
+    "initial": {"next_invocation_id": 1, "stack": [], "pending_observation": null, "detached_count": 0},
+    "transitions": [
+      {"id": "enter_ordinary_parent", "operation": "enter", "args": {"rule_label": "Parent", "source_id": "unicode", "origin": "direct", "entry_match_span_id": null, "family": "or_default", "observation_id": null, "caller_cursor": 0}},
+      {"id": "select_ordinary_parent_entry", "operation": "select_match", "args": {"invocation_id": 1, "span_id": "unicode_newline"}},
+      {"id": "enter_ordinary_child", "operation": "enter", "args": {"rule_label": "Leaf", "source_id": "unicode", "origin": "action_edge", "entry_match_span_id": "unicode_newline", "family": "or_default", "observation_id": "ordinary_leaf", "caller_cursor": 2}},
+      {"id": "select_ordinary_child_initial", "operation": "select_match", "args": {"invocation_id": 2, "span_id": "unicode_emoji"}},
+      {"id": "select_ordinary_child_terminal", "operation": "select_match", "args": {"invocation_id": 2, "span_id": "unicode_emoji_tail"}},
+      {"id": "accept_ordinary_child", "operation": "accept", "args": {"invocation_id": 2, "exit_offset": 4}},
+      {"id": "detach_ordinary_leaf", "operation": "detach", "args": {"observation_id": "ordinary_leaf"}},
+      {"id": "accept_ordinary_parent", "operation": "accept", "args": {"invocation_id": 1, "exit_offset": 4}},
+      {"id": "enter_zero_coordinator", "operation": "enter", "args": {"rule_label": "Coordinator", "source_id": "unicode", "origin": "direct", "entry_match_span_id": null, "family": "or_default", "observation_id": "zero_regex_coordinator", "caller_cursor": 0}},
+      {"id": "accept_zero_coordinator", "operation": "accept", "args": {"invocation_id": 3, "exit_offset": 4}},
+      {"id": "detach_zero_coordinator", "operation": "detach", "args": {"observation_id": "zero_regex_coordinator"}},
+      {"id": "enter_failed_parent", "operation": "enter", "args": {"rule_label": "FailureParent", "source_id": "unicode", "origin": "direct", "entry_match_span_id": null, "family": "or_default", "observation_id": null, "caller_cursor": 0}},
+      {"id": "enter_failed_child", "operation": "enter", "args": {"rule_label": "Missing", "source_id": "unicode", "origin": "direct", "entry_match_span_id": null, "family": "and", "observation_id": "failed_selection", "caller_cursor": 0}},
+      {"id": "fail_failed_child", "operation": "fail", "args": {"invocation_id": 5}},
+      {"id": "detach_failed_selection", "operation": "detach", "args": {"observation_id": "failed_selection"}},
+      {"id": "fail_failed_parent", "operation": "fail", "args": {"invocation_id": 4}},
+      {"id": "enter_aborted_parent", "operation": "enter", "args": {"rule_label": "AbortParent", "source_id": "unicode", "origin": "direct", "entry_match_span_id": null, "family": "and", "observation_id": null, "caller_cursor": 2}},
+      {"id": "select_aborted_parent_entry", "operation": "select_match", "args": {"invocation_id": 6, "span_id": "unicode_zero_at_two"}},
+      {"id": "enter_aborted_child", "operation": "enter", "args": {"rule_label": "AbortChild", "source_id": "unicode", "origin": "action_edge", "entry_match_span_id": "unicode_zero_at_two", "family": "and", "observation_id": "abnormal_exit", "caller_cursor": 2}},
+      {"id": "select_aborted_child_initial", "operation": "select_match", "args": {"invocation_id": 7, "span_id": "unicode_emoji"}},
+      {"id": "select_aborted_child_terminal", "operation": "select_match", "args": {"invocation_id": 7, "span_id": "unicode_emoji_tail"}},
+      {"id": "abort_aborted_child", "operation": "abort", "args": {"invocation_id": 7, "diagnostic": null}},
+      {"id": "detach_abnormal_exit", "operation": "detach", "args": {"observation_id": "abnormal_exit"}},
+      {"id": "abort_aborted_parent", "operation": "abort", "args": {"invocation_id": 6, "diagnostic": null}},
+      {"id": "enter_direct_parent", "operation": "enter", "args": {"rule_label": "DirectRecur", "source_id": "unicode", "origin": "direct", "entry_match_span_id": null, "family": "or_default", "observation_id": null, "caller_cursor": 1}},
+      {"id": "reject_direct_child", "operation": "reject", "args": {"rule_label": "DirectRecur", "source_id": "unicode", "origin": "direct", "entry_match_span_id": null, "family": "or_default", "observation_id": "direct_nonprogress", "caller_cursor": 1, "recursion_kind": "direct", "diagnostic": "source_location_nonprogress_direct_recursion"}},
+      {"id": "detach_direct_nonprogress", "operation": "detach", "args": {"observation_id": "direct_nonprogress"}},
+      {"id": "fail_direct_parent", "operation": "fail", "args": {"invocation_id": 8}},
+      {"id": "enter_mutual_parent", "operation": "enter", "args": {"rule_label": "MutualB", "source_id": "unicode", "origin": "direct", "entry_match_span_id": null, "family": "or_default", "observation_id": null, "caller_cursor": 1}},
+      {"id": "reject_mutual_child", "operation": "reject", "args": {"rule_label": "MutualA", "source_id": "unicode", "origin": "direct", "entry_match_span_id": null, "family": "or_default", "observation_id": "mutual_nonprogress", "caller_cursor": 1, "recursion_kind": "mutual", "diagnostic": "source_location_nonprogress_mutual_recursion"}},
+      {"id": "detach_mutual_nonprogress", "operation": "detach", "args": {"observation_id": "mutual_nonprogress"}},
+      {"id": "fail_mutual_parent", "operation": "fail", "args": {"invocation_id": 10}},
+      {"id": "assert_detached_history_empty", "operation": "assert_unavailable", "args": {"diagnostic": "source_location_recursive_boundary_unavailable"}}
+    ],
+    "expected_final": {"next_invocation_id": 12, "stack_depth": 0, "pending_observation": null, "detached_count": 6, "retained_history_count": 0}
+  },
   "recursive_observations": [
-    {"id": "ordinary_leaf", "invocation_id": 2, "parent_invocation_id": 1, "source_id": "unicode", "entry_offset": 2, "selected_match_span_id": "unicode_emoji_tail", "accepted_exit_offset": 4, "outcome": "accepted", "diagnostic": null},
-    {"id": "zero_regex_coordinator", "invocation_id": 3, "parent_invocation_id": null, "source_id": "unicode", "entry_offset": 0, "selected_match_span_id": null, "accepted_exit_offset": 4, "outcome": "accepted", "diagnostic": null},
-    {"id": "failed_selection", "invocation_id": 5, "parent_invocation_id": 4, "source_id": "unicode", "entry_offset": 0, "selected_match_span_id": null, "accepted_exit_offset": null, "outcome": "failed", "diagnostic": null},
-    {"id": "abnormal_exit", "invocation_id": 7, "parent_invocation_id": 6, "source_id": "unicode", "entry_offset": 2, "selected_match_span_id": "unicode_emoji_tail", "accepted_exit_offset": null, "outcome": "aborted", "diagnostic": null},
-    {"id": "direct_nonprogress", "invocation_id": 9, "parent_invocation_id": 8, "source_id": "unicode", "entry_offset": 1, "selected_match_span_id": null, "accepted_exit_offset": null, "outcome": "rejected", "diagnostic": "source_location_nonprogress_direct_recursion"},
-    {"id": "mutual_nonprogress", "invocation_id": 11, "parent_invocation_id": 10, "source_id": "unicode", "entry_offset": 1, "selected_match_span_id": null, "accepted_exit_offset": null, "outcome": "rejected", "diagnostic": "source_location_nonprogress_mutual_recursion"}
+    {"id": "ordinary_leaf", "rule_label": "Leaf", "invocation_id": 2, "parent_invocation_id": 1, "source_id": "unicode", "entry_offset": 2, "selected_match_span_id": "unicode_emoji_tail", "accepted_exit_offset": 4, "outcome": "accepted", "diagnostic": null},
+    {"id": "zero_regex_coordinator", "rule_label": "Coordinator", "invocation_id": 3, "parent_invocation_id": null, "source_id": "unicode", "entry_offset": 0, "selected_match_span_id": null, "accepted_exit_offset": 4, "outcome": "accepted", "diagnostic": null},
+    {"id": "failed_selection", "rule_label": "Missing", "invocation_id": 5, "parent_invocation_id": 4, "source_id": "unicode", "entry_offset": 0, "selected_match_span_id": null, "accepted_exit_offset": null, "outcome": "failed", "diagnostic": null},
+    {"id": "abnormal_exit", "rule_label": "AbortChild", "invocation_id": 7, "parent_invocation_id": 6, "source_id": "unicode", "entry_offset": 2, "selected_match_span_id": "unicode_emoji_tail", "accepted_exit_offset": null, "outcome": "aborted", "diagnostic": null},
+    {"id": "direct_nonprogress", "rule_label": "DirectRecur", "invocation_id": 9, "parent_invocation_id": 8, "source_id": "unicode", "entry_offset": 1, "selected_match_span_id": null, "accepted_exit_offset": null, "outcome": "rejected", "diagnostic": "source_location_nonprogress_direct_recursion"},
+    {"id": "mutual_nonprogress", "rule_label": "MutualA", "invocation_id": 11, "parent_invocation_id": 10, "source_id": "unicode", "entry_offset": 1, "selected_match_span_id": null, "accepted_exit_offset": null, "outcome": "rejected", "diagnostic": "source_location_nonprogress_mutual_recursion"}
   ],
   "structural_authoring_cases": [
     {"id": "zero_regex_coordinator", "regex_count": 0, "role": "coordinator", "entry_rule_valid": true, "recursion_owner": "linked_rule_graph", "guidance": "coordinate child rules without embedding a boundary regex"},
@@ -175,6 +239,8 @@
     {"id": "nonprogress_mutual_recursion", "code": "source_location_nonprogress_mutual_recursion", "phase": "progress", "detection": "static_or_runtime", "required_context": ["rule_role", "invocation_role", "source_id", "start_offset", "end_offset", "originating_edge_or_job"]},
     {"id": "staged_dispatch_cycle", "code": "source_location_staged_dispatch_cycle", "phase": "progress", "detection": "static_or_runtime", "required_context": ["rule_role", "invocation_role", "source_id", "start_offset", "end_offset", "originating_edge_or_job"]},
     {"id": "recursive_boundary_unavailable", "code": "source_location_recursive_boundary_unavailable", "phase": "observe_recursion", "detection": "runtime", "required_context": ["rule_role", "invocation_role", "source_id", "boundary_role", "originating_edge_or_job"]},
+    {"id": "recursive_observation_target", "code": "source_location_recursive_observation_target", "phase": "observe_recursion", "detection": "static", "required_context": ["rule_role", "source_id", "binding_name", "originating_edge_or_job"]},
+    {"id": "recursive_observation_operand", "code": "source_location_recursive_observation_operand", "phase": "observe_recursion", "detection": "static", "required_context": ["rule_role", "source_id", "operand_kind", "originating_edge_or_job"]},
     {"id": "ambiguous_regex_slot", "code": "source_location_ambiguous_regex_slot", "phase": "resolve_slot", "detection": "static", "required_context": ["rule_role", "source_id", "slot_reference", "originating_edge_or_job"]},
     {"id": "stale_regex_slot", "code": "source_location_stale_regex_slot", "phase": "resolve_slot", "detection": "static", "required_context": ["rule_role", "source_id", "slot_reference", "originating_edge_or_job"]},
     {"id": "span_dispatch_source_denied", "code": "source_location_span_dispatch_source_denied", "phase": "dispatch", "detection": "runtime", "required_context": ["rule_role", "invocation_role", "source_id", "span_start", "span_end", "originating_edge_or_job"]},

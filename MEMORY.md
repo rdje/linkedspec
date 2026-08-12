@@ -4,16 +4,16 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `2c968259` — clean recursive-observation audit base for lineage-correction atomic 208/300; no push.
-- latest_completed_leaf: `.14.4.0.1` recursive-observation lineage correction is signoff-complete as atomic 208/300 from clean activation base `2c968259`.
-- active_work_unit: none after atomic 208 landing; executable neutral observation `.14.4.1` is not yet activated.
-- next_action: activate executable neutral observation `.14.4.1` task-tree-first from the clean atomic 208 boundary.
-- in_flight_uncommitted: none after atomic 208 landing; the completed correction changes no runtime or public behavior.
-- blockers: none. Exact RED, focused neutral 57, composed six-runtime proof, book, Knowledge, all eight doctrines,
-  containment/relocation, CLI 66x2, RAM 34%, and canonical Phase 0 1,031/1,031 in 739 seconds are green.
+- activation_commit: `53c687d3` — clean recursive-lineage base for executable neutral observation atomic 209/300; no push.
+- latest_completed_leaf: `.14.4.1` signoff-complete neutral recursive observation as intended atomic 209/300 from clean activation `53c687d3`.
+- active_work_unit: none after the intended `.14.4.1` atomic commit; `.14.4.2` is the next task-tree frontier.
+- next_action: land `.14.4.1`, clear/prove clean, then activate Perl recursive-observation `.14.4.2` task-tree-first.
+- in_flight_uncommitted: none after the intended atomic 209 commit.
+- blockers: none. Neutral 8+8+33 / 70, composed six-runtime proof, eight doctrines, containment/relocation, CLI 66x2, RAM 35%, and Phase 0 1,031/1,031 in 714 seconds pass through exact canonical success.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
-  routes. Eleven topology mutations advanced governance to 53; four lineage mutations now advance it to 57. Public authored values remain future; recognition
+  routes. Eleven topology mutations advanced governance to 53, four lineage mutations to 57, and executable
+  neutral observation to 70. Public authored values remain future; recognition
   transactions are current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; recurrence and public no-drift are current at 9/9, closing transaction parent `.14.3` without runtime or public-API movement.
 - recurring_rollout_fact: the original contract combines recurring and public no-drift in one `.14.8` row. Detailed
   plan/history assign `.14.2.6` driver/topology only; do not add a fifteenth row or promote `.14.8` prematurely.
@@ -53,8 +53,8 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   policy, and authority-backed carriers at 207/207; exact ordinary/canonical proof is current while the API stays private.
   Lua has one shared Lua-5.1 authority at 187/187 and admitted ActionIR/effect/progress/runtime/carriers at 246/246
   per ABI; ordinary/canonical proof runs once per ABI while facade privacy remains unchanged.
-- current_future_direction: recursive observation `.14.4.0` freezes one detached record on the existing invocation
-  authority; `.0.1` corrects its neutral lineage contract, then `.1-.8` own neutral/six-runtime/recurring/public rollout.
+- current_future_direction: `.14.4.1` selects future `observe_recognition(observation, call(Child))` with one
+  detached nine-field harray and executes 33 neutral transitions; Perl through public rollout remain `.2-.8`.
 - latest_bootstrap_read: 2026-08-12 — complete roadmap/codebase/mdBook and required continuity/tooling review.
-- pivot_guard: activate executable neutral observation `.14.4.1` only from the verified clean atomic 208 boundary.
-- push_policy: hard lock at 300 commits; atomics 207-208 are local-only; no push; use wrappers.
+- pivot_guard: do not activate Perl `.14.4.2` until neutral `.14.4.1` is committed and the repository is clean.
+- push_policy: hard lock at 300 commits; atomics 207-209 are local-only; no push; use wrappers.

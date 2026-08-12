@@ -54,9 +54,9 @@ general style. This documentation-only slice changes no parser or runtime behavi
 ## Typed source-location contract
 
 The backend-neutral typed source-location contract is complete under `FUTURE-PARITY-BACKLOG.14.1.1`. Its
-independent checker passes 3 sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation
-and 8 transaction transitions, 6 recursive observations, 4 structural cases, 92 current helper projections,
-31 diagnostics, and 57 rejected mutations.
+independent checker passes 3 sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation,
+8 transaction, and 33 recursive-observation transitions, 6 detached recursive observations, 4 structural cases,
+92 current helper projections, 33 diagnostics, and 70 rejected mutations.
 
 Eight of 14 rollout legs are complete and 6 remain pending. The neutral contract, public linked-rule structure,
 unchanged neutral/public recomposition, and all six runtime targets are complete. Their internal authorities and
@@ -95,13 +95,13 @@ bash tools/check_typed_source_location_six_runtime.sh
 Canonical CI requires and syntax-checks that driver; `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1` opts into its complete
 all-toolchain route. Five backend consumer groups map to six runtime routes because the shared Lua source runs once
 on each ABI. Eleven independent topology mutations first increased the checker from 42 to 53; four later
-recursive-lineage invariants advance current governance to 57.
+recursive-lineage invariants advanced governance to 57, and executable neutral observation advances it to 70.
 
 An unchanged `FUTURE-PARITY-BACKLOG.14.2.7` recomposition reruns that complete authority and closes the internal
 value/helper implementation slice `.14.2`. This is a project-state closure, not a new language surface: the six
 admitted runtimes, helper results, schemas, and 8-complete/6-pending rollout remain unchanged.
 
-Public typed values, recursive observation, span-native progressive/staged
+Public typed values, runtime recursive observation, span-native progressive/staged
 dispatch, and the remaining public authored surfaces remain future work. Exact transaction syntax is ratified:
 `recognition_checkpoint()`, `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and
 `recognition_rollback(token)`. Match is a strict boolean and the falsey-safe payload remains staged until commit.
@@ -117,15 +117,28 @@ Recursive observation now has a behavior-free six-runtime audit under `.14.4.0`.
 immutable: source/rule identity, a fresh monotonic invocation id, nullable distinct direct-parent id, entry
 position, nullable terminal selected-match span, nullable accepted-exit position, terminal outcome, and optional
 diagnostic. It extends the existing private invocation authority and never gives a parent control over the child's
-family-derived seek/consume policy. No authored accessor, ActionIR node, facade, schema, semantic/MCP field, CLI, or
-runtime behavior is current from this audit.
+family-derived seek/consume policy.
 
 The audit also found that the original neutral `direct_nonprogress` fixture made one invocation its own parent.
 Corrective prerequisite `.14.4.0.1` now gives all six observations positive unique monotonic numeric identities.
 A rejected direct or mutual recursive attempt receives a fresh child identity under the active parent, without a
 frame push. The checker independently rejects self-parenting, identity reuse, non-earlier parents, and represented
-cycles before exact tuple comparison. This is still behavior-free; executable neutral observation remains
-`.14.4.1`, followed by independent Perl, Rust, Dart, Julia, shared Lua, recurring, and public legs through `.14.4.8`.
+cycles before exact tuple comparison. Executable neutral `.14.4.1` now selects future
+`value = observe_recognition(observation, call(Child))` syntax. Its first operand is one bare rule-local harray;
+its second is one unevaluated static call. The child payload remains the expression result while a separate detached
+nine-field harray records source/rule/invocation/parent, entry, terminal selected match, accepted-only exit,
+outcome, and diagnostic. Ordinary harray access such as `observation["entry_position"]` is the complete carrier
+projection; no new authored value kind or accessor family is introduced.
+
+The neutral checker executes 33 transitions for action-edge/direct entry, OR/default seek and AND consume,
+terminal-match replacement, zero-regex absence, all four outcomes, fresh pre-entry rejection ids, and detach with
+no retained history. Two static diagnostics plus ten reason-checked state corruptions and three surface/topology
+mutations move governance from 57 to 70. The syntax remains neutral-only: no backend runtime, public helper,
+ActionIR node, facade, descriptor/generated version, result schema, semantic/MCP field, CLI, or README behavior is
+current. Independent Perl, Rust, Dart, Julia, shared Lua, recurring, and public legs follow through `.14.4.2-.8`.
+Executable-neutral signoff passes the exact six-runtime composition, support ledgers, all eight doctrines,
+six-family process containment, repository relocation, CLI 66x2, RAM 35%, and canonical Phase 0 1,031/1,031 in
+714 seconds through the exact local-CI success marker. Perl `.14.4.2` remains the first runtime implementation.
 Correction signoff passes the exact six-runtime composition, generated-source/capability/language ledgers,
 79-file/14,460-KiB rendered book, Knowledge 821/6,826, all eight doctrines, containment/relocation, CLI 66x2,
 RAM 34%, and canonical Phase 0 1,031/1,031 in 739 seconds without moving any executable or public surface.

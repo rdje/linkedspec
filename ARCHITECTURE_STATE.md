@@ -1,5 +1,35 @@
 # ARCHITECTURE STATE
 
+## Recursive source observation has an executable neutral syntax and detached carrier
+
+`FUTURE-PARITY-BACKLOG.14.4.1` selects future
+`value = observe_recognition(observation, call(Child))` without admitting it on any runtime. The first operand is
+one bare rule-local harray binding; the second is one unevaluated statically named call. The expression preserves
+the ordinary child payload—including falsey accepted values—while the binding receives a separate recursively
+detached record at the terminal boundary. Accepted/failed calls bind before returning; aborted/rejected calls
+finalize the record before propagating their unchanged typed failure.
+
+The carrier is an ordinary harray with exact ordered fields `source_id`, `rule_label`, `invocation_id`,
+`parent_invocation_id`, `entry_position`, `selected_match`, `accepted_exit`, `outcome`, and `diagnostic`. Positions
+and the match span are detached nested harrays. Existing field access is sufficient; there is no custom public value
+kind or accessor family. Neither record nor projections carry source text, paths, parser/frame/match/authority/host
+objects. The runtime may retain only one pending record until detach and never a parse-wide observation history.
+
+The neutral checker now executes 33 ordered transitions over invocation ids `1..11`: action-edge versus direct
+entry, caller-cursor capture before `I`, child-owned OR/default seek and AND consume, terminal local-match
+replacement, zero-regex absence, accepted-only exit, all four outcomes, fresh rejected-child ids without frame
+push, immediate detach, and unavailable history. Two static target/operand diagnostics plus ten reason-checked
+state corruptions and three surface/topology mutations advance typed-source governance from 57 to 70. Rollout
+stays 8 complete / 6 pending and no backend runtime, public helper, ActionIR node, facade, descriptor/generated
+version, result schema, semantic/MCP projection, CLI, README, or parser behavior becomes current. Perl `.14.4.2`
+is the next implementation owner after this neutral leaf lands cleanly.
+
+Neutral signoff passes the exact six-runtime composition, strict generated Rust 105/105, capability 80/0/0,
+language coverage 246 current / 105 corpus plus one named-mark fixture / 122 public Perl contracts, the rendered
+book, Knowledge 821/6,831, and all eight doctrines. One host-permitted uninterrupted canonical run proves the
+six-family process sandbox, repository relocation, CLI 66x2, RAM 35%, and Phase 0 1,031/1,031 in 714 seconds before
+the exact local-CI success marker and exit 0.
+
 ## Recursive source-observation lineage is fail-closed on the existing invocation authority
 
 Behavior-free `FUTURE-PARITY-BACKLOG.14.4.0` audits clean transaction closeout `3ac018f8` across Perl, Rust,

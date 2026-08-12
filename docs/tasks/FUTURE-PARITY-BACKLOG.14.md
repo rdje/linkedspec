@@ -4810,13 +4810,11 @@
   Goal: Implement and independently admit exact Dart parity while retaining native UTF-16 register compatibility.
   Depends on: `.14.3.3`
   Children: `.14.3.4.0-.14.3.4.3`
-
 - ID: `FUTURE-PARITY-BACKLOG.14.3.4.0`
   Status: `complete` (2026-08-11; corrective atomic 192 and dormant Dart RED atomic 193 landed cleanly)
   Goal: Establish a sound neutral boundary, then freeze dormant Dart RED across all carriers.
   Depends on: `.14.3.3.3`
   Children: `.14.3.4.0.0-.14.3.4.0.1`
-
 - ID: `FUTURE-PARITY-BACKLOG.14.3.4.0.0`
   Status: `complete` (2026-08-11; clean atomic 192/300 `b1c59d03`; no push)
   Goal: Repair the neutral transaction policy that canonically enforced a stale Perl-only current boundary after Rust admission.
@@ -4827,7 +4825,6 @@
     semantic 132/246/42, capability 80/0/0, CLI 66x2, RAM 45%, and Phase 0 1,031 in 721 sec pass.
   Commit: `FUTURE-PARITY-BACKLOG.14.3.4.0.0 - repair transaction boundary policy`
   Evidence: policy/current/checker truth is neutral+Perl+Rust 3/9; `b1c59d03` landed exact no-drift proof cleanly.
-
 - ID: `FUTURE-PARITY-BACKLOG.14.3.4.0.1`
   Status: `complete` (2026-08-11; clean atomic 193/300 `3a29b34e`; no push)
   Goal: Freeze dormant Dart RED across native, reconstructed, generated-plan, and freshly emitted carriers.
@@ -4838,7 +4835,6 @@
     semantic 128/9/9, capability 80/0/0, CLI 66x2, and Phase 0 1,031 in 700 sec pass.
   Commit: `FUTURE-PARITY-BACKLOG.14.3.4.0.1 - freeze Dart transaction RED`
   Evidence: `3a29b34e` landed exact dormant RED with zero brief/status/residue and valid pointer/maps.
-
 - ID: `FUTURE-PARITY-BACKLOG.14.3.4.1`
   Status: `complete` (2026-08-11; atomic 194/300 from clean activation `3a29b34e`; no push)
   Goal: Add private Dart invocation-frame, mark-generation, opaque-token, snapshot, and invalidation authority.
@@ -4848,7 +4844,6 @@
     RAM 65%, and Phase 0 1,031/1,031 in 697 sec pass unchanged.
   Commit: `FUTURE-PARITY-BACKLOG.14.3.4.1 - add private Dart transaction authority`
   Evidence: clean `f6f154c6` lands unexported authority plus owner-21 repair with valid pointer/maps and zero residue.
-
 - ID: `FUTURE-PARITY-BACKLOG.14.3.4.2`
   Status: `complete` (2026-08-11; clean atomic 195/300 `bee6cf45`; no push)
   Goal: Integrate exact Dart syntax/runtime/effect/progress parity through all required carriers.
@@ -4858,7 +4853,6 @@
     RAM 64%, and Phase 0 1,031/1,031 pass without rollout movement.
   Commit: `FUTURE-PARITY-BACKLOG.14.3.4.2 - integrate Dart recognition transactions`
   Evidence: clean `bee6cf45` lands private integration with valid pointer/maps, zero residue, and `.3` next.
-
 - ID: `FUTURE-PARITY-BACKLOG.14.3.4.3`
   Status: `complete` (2026-08-11; clean atomic 196/300 `38318827`; no push)
   Goal: Remove Dart dormancy, register ordinary/canonical proof, and promote only Dart transaction admission.
@@ -4867,14 +4861,12 @@
   Evidence: exact consumer 10/10; neutral 132/246/43 at rollout 4/9; public 3/14/29; guide 1/6/10; Dart
     100/393/21/47/66x2/105; book 79/14,396 KiB; all doctrines; RAM 60%; Phase 0 1,031/1,031 in 694 sec. Clean
     `38318827` retains the private authority, aligned Perl/Rust metadata, valid maps/pointer, and zero residue.
-
 - ID: `FUTURE-PARITY-BACKLOG.14.3.5`
   Status: `complete` (2026-08-11; all four Julia transaction children are signoff-complete through commit-ready
     atomic 200/300 from clean `0d15f8c2`; shared Lua RED `.14.3.6.0` follows only after landing; no push)
   Goal: Implement and independently admit exact Julia parity while retaining native code-unit register compatibility.
   Depends on: `.14.3.4`
   Children: `.14.3.5.0-.14.3.5.3`
-
 - ID: `FUTURE-PARITY-BACKLOG.14.3.5.0`
   Status: `complete` (2026-08-11; clean atomic 197/300 `8db3aeee`; no push)
   Goal: Freeze dormant Julia RED across native, reconstructed, generated-plan, and independently loaded emitted
@@ -4904,7 +4896,6 @@
     native/reconstructed/generated-plan/emitted adapter pass integration 203/203 and authority 155/155. Julia
     typed source 127/storage 19/5/CLI/corpus 105, book 79/14,404 KiB, eight doctrines, CLI 66x2, RAM 65%, and
     canonical Phase 0 1,031/1,031 in 731 sec pass; rollout stays 4/9 and discovery/export remain dormant.
-
 - ID: `FUTURE-PARITY-BACKLOG.14.3.5.3`
   Status: `complete` (2026-08-11; definitive signoff complete and commit-ready as atomic 200/300 from clean
     activation `0d15f8c2`; no push)
@@ -4915,34 +4906,29 @@
     remains private/unexported. Neutral 132/246/44 at rollout 5/9, public 3/17/33, guide 1/8/12, Perl 51/51, Rust
     12/12, Dart 10/10, complete Julia package/primary/corpus 105, book 79/14,404 KiB, all eight doctrines, CLI 66x2,
     RAM 69%, and canonical Phase 0 1,031/1,031 in 738 sec pass through the exact success marker; Lua/later remain RED.
-
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6`
   Status: `complete` (2026-08-11; admission `.3` signoff-complete as atomic 204/300 from `70b4ed04`; no push)
   Goal: Implement one shared Lua transaction/progress core and independently admit it on PUC Lua and LuaJIT.
   Depends on: `.14.3.5`
   Children: `.14.3.6.0-.14.3.6.3`
-
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6.0`
   Status: `complete` (2026-08-11; clean atomic 201/300 `6a8ec091`; no push)
   Goal: Freeze one shared dual-ABI dormant final-path RED.
   Depends on: `.14.3.5.3`
   Commit: `FUTURE-PARITY-BACKLOG.14.3.6.0 - freeze Lua transaction RED`
   Evidence: four modes stopped at missing authority; 12 mutations and full signoff passed; clean `6a8ec091`.
-
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6.1`
   Status: `complete` (2026-08-11; clean atomic 202/300 `d87dcac3`; no push)
   Goal: Add one shared private Lua invocation/mark/snapshot/linear-token authority.
   Depends on: `.14.3.6.0`
   Commit: `FUTURE-PARITY-BACKLOG.14.3.6.1 - add private Lua transaction authority`
   Evidence: authority 187x2, 22+12 mutations, and full signoff passed; clean `d87dcac3`.
-
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6.2`
   Status: `complete` (2026-08-11; clean atomic 203/300 `70b4ed04`; no push)
   Goal: Integrate syntax/runtime/effect/progress parity across all carriers on both Lua ABIs.
   Depends on: `.14.3.6.1`
   Commit: `FUTURE-PARITY-BACKLOG.14.3.6.2 - integrate Lua recognition transactions`
   Evidence: authority 187x2, integration 243x2, 22+19+12 mutations, full signoff, and clean `70b4ed04`.
-
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6.3`
   Status: `complete` (2026-08-11; signoff-complete atomic 204/300 from clean `70b4ed04`; no push)
   Goal: Remove Lua dormancy, register one consumer exactly once per ABI in ordinary/canonical proof, and promote PUC Lua plus LuaJIT transaction admission independently.
@@ -4953,7 +4939,6 @@
     dual-ABI registration; [x] canonical registration; [x] governance/mutations; [x] no-drift; [x] docs/signoff.
   Evidence: PUC/LuaJIT 243x2, Lua package 177x2, CLI 66x2, corpus 105, checker 46/38/14 + Lua 22, book
     79 files/14,412 KiB, Knowledge 818/6,792, all eight doctrines, RAM 65%, and Phase 0 1,031/1,031 in 758 sec pass.
-
 - ID: `FUTURE-PARITY-BACKLOG.14.3.7`
   Status: `done` (2026-08-11; signoff-complete atomic 205/300 from clean `1aedfe98`; no push)
   Goal: Bind the unchanged neutral and five-backend/six-runtime consumers into one exact repository-routed recurring proof with omission/order/multiplicity/storage/canonical governance.
@@ -4962,7 +4947,6 @@
   Commit: `FUTURE-PARITY-BACKLOG.14.3.7 - compose recognition transaction proof`
   Checklist: [x] clean activation/task ownership; [x] authority/topology audit; [x] driver/CI route; [x] governance/mutations; [x] focused six-runtime proof; [x] no-drift/docs/book; [x] doctrine/canonical signoff.
   Evidence: driver passes Perl 51, Rust 12, Dart 10, Julia 207, Lua 246x2, support ledgers, and routing; checker 58 at rollout 8/9, public 3/23/42, guide 1/12/16; book 79/14,428, Knowledge 819/6,803, eight doctrines, CLI 66x2, RAM 62%, and canonical Phase 0 1,031/1,031 in 745 seconds pass. No runtime/API/schema/CLI/README behavior changes; `.14.3.8` follows only after clean atomic 205.
-
 - ID: `FUTURE-PARITY-BACKLOG.14.3.8`
   Status: `done; signoff-complete` (2026-08-11; atomic 206/300 from clean recurring commit `e6893fd4`; no push)
   Goal: Recompose the committed contract, six runtime admissions, recurring authority, support ledgers, and public boundary unchanged; close `.14.3` and hand off cleanly to recursive observation `.14.4`.
@@ -4978,6 +4962,22 @@
   Status: `done; signoff-complete` (2026-08-12; task-tree-first from clean `3ac018f8`; intended atomic 207/300; no push); Goal: Audit the current five-backend/six-runtime recursive entry/local-match/accepted-exit and caller/child seams, then freeze portable observation values, invocation/provenance identity, intrinsic cursor-policy invariants, recursion/cycle/error boundaries, carrier/API exclusions, and exact corrective/`.1-.8` ownership without behavior; Depends on: `.14.3.8`; Acceptance: retrieve ADR `0056`, Knowledge cards, task history, and toolbox first; probe actual runtime mechanisms and source locations rather than infer them; record hashes/current divergences and an executable neutral-plan boundary; synchronize roadmap/ADR/book/live/Knowledge; change no parser/compiler/runtime/backend/schema/facade/CLI/README behavior; pass focused/book/doctrine/canonical signoff and land clean before `.14.4.0.1`; Commit: `FUTURE-PARITY-BACKLOG.14.4.0 - audit recursive source observation`; Checklist: [x] clean activation/task ownership; [x] canonical authority retrieval; [x] LinkedSpec-tool runtime audit; [x] portable contract/diagnostic/split freeze; [x] roadmap/ADR/book/live/Knowledge alignment; [x] no-behavior proof; [x] doctrine/canonical signoff; Finding: `direct_nonprogress` self-parents despite monotonic non-reused invocation identity because the checker compares exact fixture rows but enforces no distinct/order/cycle invariant; `.14.4.0.1` owns correction before executable observation work; Evidence: committed blobs neutral `7663edf5/80b85e86`, Perl `07ff872d/2cc9cefa/a020f1c1`, Rust `5801b30f/d7f39fcb/1bf17d9b`, Dart `770a183e/0867a6de/534ad289`, Julia `bf55e355/aa060778/9f1390d4`, Lua `5ad6f644/2b8f4050/6982f7b9/11d8e464`; LinkedSpec probes prove edge/direct entry and child family policy; focused typed source six-runtime, recognition 132/246/58, cursor 36/18/8, book 79/14,460 KiB, Knowledge 821/6,826, all eight doctrines, containment/relocation including the six-family process sandbox, CLI 66x2, RAM 59%, and canonical Phase 0 1,031/1,031 in 832 seconds pass through the exact local-CI success marker.
 - ID: `FUTURE-PARITY-BACKLOG.14.4.0.1`
   Status: `done; signoff-complete` (2026-08-12; task-tree-first from clean audit commit `2c968259`; intended atomic 208/300; no push); Goal: Correct the direct/mutual non-progress neutral invocation-lineage fixtures and make the checker reject self-parent, reused identity, invalid parent ordering, and cyclic bounded provenance before `.14.4.1` extends the executable observation authority; Depends on: `.14.4.0`; Acceptance: preserve the six observation roles and current behavior/public boundary; allocate each rejected attempted child a distinct monotonic identity from the existing invocation authority with the active frame as parent; add exact RED/positive/mutation proof; synchronize durable docs and land clean; Commit: `FUTURE-PARITY-BACKLOG.14.4.0.1 - correct recursive observation lineage`; Checklist: [x] clean activation/task ownership; [x] committed-authority retrieval; [x] RED lineage-invariant proof; [x] fixture/checker correction; [x] mutation and focused proof; [x] roadmap/ADR/book/live/Knowledge alignment; [x] doctrine/canonical signoff; Evidence: exact RED against the committed textual fixture reports `recursive invocation identity must be a positive integer`; corrected six-role neutral proof passes 57/57 mutations; direct/mutual rejected attempts are children `9`/`11` under active parents `8`/`10`; composed proof passes Perl 10, Rust/Dart 4/4, Julia 127, PUC Lua/LuaJIT 240/240, generated-source strict Rust 105/105, capability 80/0/0, and language 246 current / 105 corpus + 1 named-mark / 122 public Perl; book 79/14,460 KiB, Knowledge 821/6,826, all eight doctrines, containment/relocation including the six-family process sandbox, CLI 66x2, RAM 34%, and canonical Phase 0 1,031/1,031 in 739 seconds pass through exact local-CI success.
+- ID: `FUTURE-PARITY-BACKLOG.14.4.1`
+  Status: `done; signoff-complete` (2026-08-12; task-tree-first from clean lineage commit `53c687d3`; intended atomic 209/300; no push); Goal: Make the neutral recursive-observation contract executable over the existing invocation authority, selecting exact authored accessors/carrier projection and deterministic entry, local-match, accepted-exit, failure, abort, and pre-entry rejection transitions without runtime implementation; Depends on: `.14.4.0.1`; Acceptance: retrieve committed neutral/ADR/Knowledge/toolbox authorities first; add bounded state-machine fixtures and independent validation for action-edge/direct entry, zero-regex absence, terminal local-match replacement, accepted-only exit, all four outcomes, fresh rejected-child provenance, detach/no-history behavior, and child-owned cursor policy; add reason-checked mutations and typed diagnostics; preserve rollout 8/6 plus every runtime/API/schema/semantic/MCP/CLI/README boundary; synchronize task/roadmap/live/Knowledge/mdBook; pass focused/composed/book/doctrine/canonical proof; Commit: `FUTURE-PARITY-BACKLOG.14.4.1 - execute neutral recursive observation`; Checklist: [x] clean activation/task ownership; [x] committed authority retrieval; [x] exact RED; [x] syntax/carrier freeze; [x] 33-transition machine; [x] diagnostics/reason-checked mutations; [x] six-runtime/no-drift composition; [x] roadmap/ADR/Knowledge/book/live alignment; [x] doctrine/canonical signoff; Evidence: exact RED first failed on missing ordered contract fields; neutral proof passes 8+8+33 transitions, six recursive observations, 33 diagnostics, and all 70 mutations at unchanged rollout 8/6; composed proof passes Perl 10, Rust/Dart 4/4, Julia 127, PUC Lua/LuaJIT 240/240, strict generated Rust 105/105, capability 80/0/0, and language 246 current / 105 corpus + 1 named mark / 122 public Perl; rendered book, Knowledge 821/6,831, all eight doctrines, six-family containment, repository relocation, CLI 66x2, RAM 35%, and canonical Phase 0 1,031/1,031 in 714 seconds pass through exact local-CI success without runtime/API/schema/semantic/MCP/CLI/README movement.
+- ID: `FUTURE-PARITY-BACKLOG.14.4.2`
+  Status: `pending`; Goal: Implement and admit the exact private Perl recursive-observation authority and selected carrier/accessor surface from neutral `.1`; Depends on: `.14.4.1`; Acceptance: preserve generated-handler family/cursor ownership, detach records without parse-wide history, execute positive/error/progress cases, promote only Perl, lock ordinary/canonical/storage/public no-drift, synchronize docs, and land clean before Rust.
+- ID: `FUTURE-PARITY-BACKLOG.14.4.3`
+  Status: `pending`; Goal: Implement and admit the exact private Rust recursive-observation authority across native, reconstructed, generated-plan, and emitted carriers; Depends on: `.14.4.2`; Acceptance: reuse the source-local monotonic invocation authority, preserve UTF-8-byte registers and child policy, execute the neutral cases, promote only Rust, lock ordinary/canonical/storage/public no-drift, synchronize docs, and land clean before Dart.
+- ID: `FUTURE-PARITY-BACKLOG.14.4.4`
+  Status: `pending`; Goal: Implement and admit the exact private Dart recursive-observation authority across native, reconstructed, generated-plan, and emitted carriers; Depends on: `.14.4.3`; Acceptance: reuse the source-local monotonic invocation authority, preserve UTF-16 registers and child policy, execute the neutral cases, promote only Dart, lock ordinary/canonical/storage/public no-drift, synchronize docs, and land clean before Julia.
+- ID: `FUTURE-PARITY-BACKLOG.14.4.5`
+  Status: `pending`; Goal: Implement and admit the exact private Julia recursive-observation authority across native, reconstructed, generated-plan, and emitted carriers; Depends on: `.14.4.4`; Acceptance: reuse the source-local monotonic invocation authority, preserve code-unit registers and child policy, execute the neutral cases, promote only Julia, lock ordinary/canonical/storage/public no-drift, synchronize docs, and land clean before Lua.
+- ID: `FUTURE-PARITY-BACKLOG.14.4.6`
+  Status: `pending`; Goal: Implement one shared Lua-5.1-compatible recursive-observation authority and admit it independently on PUC Lua and LuaJIT across all carriers; Depends on: `.14.4.5`; Acceptance: reuse the source-local monotonic authority, preserve UTF-8-byte registers and child policy, execute the neutral cases once per ABI, promote only both Lua rows, lock ordinary/canonical/storage/public no-drift, synchronize docs, and land clean before recurrence.
+- ID: `FUTURE-PARITY-BACKLOG.14.4.7`
+  Status: `pending`; Goal: Compose the unchanged neutral and five-backend/six-runtime recursive-observation consumers plus support ledgers into one exact repository-routed recurring proof; Depends on: `.14.4.6`; Acceptance: bind sources/routes/commands/order/multiplicity/storage/canonical registration, promote only recurrence, reject topology drift, preserve public RED and runtime/API/schema/CLI/README behavior, synchronize docs, and land clean before public closeout.
+- ID: `FUTURE-PARITY-BACKLOG.14.4.8`
+  Status: `pending`; Goal: Complete recursive-observation public projection/no-drift and close `.14.4` without widening the exact neutral surface; Depends on: `.14.4.7`; Acceptance: promote only the selected public row, reject stale/current prose and premature surface drift, recompose all six runtimes/support ledgers, synchronize examples/Toolbox/Knowledge/mdBook/roadmaps/live docs, pass definitive gates, close the parent, and land clean before `.14.5` or another eligible activity.
 
 - ID: `FUTURE-PARITY-BACKLOG.14.5`
   Status: `pending`
