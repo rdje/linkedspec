@@ -261,7 +261,7 @@ seven callable compatibility aliases. Two similarly named values—`capture_take
 
 The checker derives coordinates and text independently, executes all three state machines, cross-checks current
 Lua helper authority and the Perl alias/internal-id seams, locks 33 diagnostics, verifies canonical tracked
-execution, and rejects 70 mutations. Eleven of those mutations govern one recurring topology: five backend groups
+execution, and rejects 71 mutations. Eleven of those mutations govern one recurring topology: five backend groups
 map to exact Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT runtime routes, followed by generated-source, capability,
 and language-coverage ledgers. Run the complete recurring proof with:
 
@@ -276,12 +276,14 @@ runtime admissions are complete. The two Lua ABIs share one rollout leg because 
 source independently through distinct runtimes. The combined `recurring_public_no_drift` row remains pending for
 final program-wide owner `FUTURE-PARITY-BACKLOG.14.8`; recurring composition does not promote it early.
 
-Executable neutral observation selects future
+Executable neutral observation selected
 `value = observe_recognition(observation, call(Child))`: one bare rule-local harray target and one unevaluated
 static call. The ordinary child payload remains the expression result; a separate recursively detached nine-field
 harray records entry, terminal selected match, accepted-only exit, outcome, and numeric lineage. Existing harray
-field access is the complete carrier projection. This is neutral contract only: no backend runtime, public helper,
-ActionIR node, schema, semantic/MCP field, CLI, or README behavior is admitted, so rollout remains 8/6.
+field access is the complete carrier projection. Perl now admits the form through one dedicated private
+`OBSERVE_RECOGNITION` ActionIR node, fail-closed static policy, existing invocation authority, and live/generated
+execution. The parent rollout row remains pending with `perl` as its sole runtime, so overall rollout remains 8/6.
+No public helper/value, descriptor/generated schema, semantic/MCP field, CLI, README, or non-Perl behavior moved.
 
 No public `Position`/`Span` value, descriptor or generated schema, semantic/MCP projection, or source-authority
 elevation is claimed by these internal typed-source runtime admissions. Recognition transaction spelling and
@@ -300,7 +302,7 @@ LuaJIT + recurring + public no-drift 9/9 complete, rejects twenty-six stale mile
 and executes forty-five public-sequence mutations in memory. That projection is distinct from 58 semantic and
 recurring-topology mutations.
 
-The independent checker derives all 128 current ActionIR node kinds from the Perl contract authority and all 246
+The independent checker derives all 129 current ActionIR node kinds from the Perl contract authority and all 246
 current call names from matching Dart, Julia, and Lua inventories. The artifact assigns one base effect to each
 of those rows plus four dedicated `RECOGNITION_*` nodes under the closed nine-allowed/eleven-rejected
 lattice. It separately executes 8 positive / 17 negative token cases, six recursive fixed-point effect graphs,

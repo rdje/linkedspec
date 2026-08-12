@@ -361,6 +361,9 @@ sub _build_runtime_handler {
    ? ("$descr\0$label\0" . (defined($progress_pos) ? $progress_pos : -1))
    : undef;
   if (defined($progress_key) && $__ls_recursion_active{$progress_key}) {
+   if (LinkedSpec::RecognitionTransactionRuntime::recursive_observation_active($descr, $STRING)) {
+    LinkedSpec::RecognitionTransactionRuntime::reject_recursive_observation($descr, $STRING, $label);
+   }
    LinkedSpec::RecognitionTransactionRuntime::reject_recursive_zero_progress($descr, $STRING, $label)
     if LinkedSpec::RecognitionTransactionRuntime::recognition_active($descr, $STRING);
    _trace_decision("rule_handler_forward_progress:$label", 0,
@@ -378,7 +381,8 @@ sub _build_runtime_handler {
   my $eval_error = $@;
   delete $__ls_recursion_active{$progress_key} if defined($progress_key);
   unless ($eval_ok) {
-   die $eval_error if LinkedSpec::RecognitionTransactionRuntime::is_error($eval_error);
+   die $eval_error if LinkedSpec::RecognitionTransactionRuntime::is_error($eval_error)
+    || LinkedSpec::RecognitionTransactionRuntime::is_recursive_observation_error($eval_error);
    if (LinkedSpec::RuntimeDiagnosticOutput::is_marked_control_error($descr, $eval_error)
     || LinkedSpec::RuntimeSemanticObservation::is_marked_control_error($descr, $eval_error)) {
     _trace_decision("rule_handler_control:$label", 1, $eval_error, DUMP_DEBUG);

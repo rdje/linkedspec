@@ -60,6 +60,34 @@ sub _quote_recognition_transaction_string {
  return "'$value'"
 }
 
+sub _build_recursive_observation_contracts {
+ my ($label) = @_;
+ return [
+  {
+   id                 => 'observe_recognition',
+   ir_node            => 'OBSERVE_RECOGNITION',
+   diag_name          => 'observe_recognition',
+   unresolved_pattern => qr/\bobserve_recognition\s*\(/o,
+   lower              => sub {
+    my ($code, $ctx) = @_;
+    my $args = ref($ctx) eq 'HASH' && ref($ctx->{event}) eq 'HASH'
+     ? $ctx->{event}{args}
+     : undef;
+    return $code unless ref($args) eq 'HASH';
+    my ($result, $target, $callee) = @{$args}{qw/result target callee/};
+    return $code unless defined($result) && $result =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o
+     && defined($target) && $target =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o
+     && defined($callee) && $callee =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+    return '$'.$result.' = LinkedSpec::RecognitionTransactionRuntime::observe_static('
+     .'$descr, $STRING, $info, \\$IPOS, \\$'.$target.', '
+     ._quote_recognition_transaction_string($callee).', '
+     ._quote_recognition_transaction_string($label).', '
+     .'(ref($minfo) eq "HASH" ? $minfo : undef))'
+   },
+  },
+ ]
+}
+
 #------------------------------------------------------------------------------
 # Function: _build_recognition_transaction_contracts
 # Purpose : Own the four exact authored transaction statements and preserve
@@ -2440,6 +2468,7 @@ sub build_action_lowering_contracts {
  my $d = _require_lowering_deps($deps);
  return [
   @{_build_call_and_dispatch_contracts($label, $deps)},
+  @{_build_recursive_observation_contracts($label)},
   @{_build_recognition_transaction_contracts($label)},
   @{_build_return_contracts($label, $d)},
   @{_build_capture_and_cursor_contracts($label, $d)},

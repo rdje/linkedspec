@@ -53,7 +53,7 @@ EXPECTED_COUNTS = {
     "rollout_legs": 14,
     "recurring_source_groups": 5,
     "recurring_runtime_routes": 6,
-    "mutations": 70,
+    "mutations": 71,
 }
 
 POLICY = {
@@ -69,8 +69,8 @@ POLICY = {
     "recursion": "entry, selected-match, and accepted-exit observations are read-only; invocation ids are positive, unique, and monotonic; nullable parents are distinct earlier same-authority ids with bounded acyclic links",
     "progress": "repetition, recursion, and staged queues must advance the cursor or prove a well-founded decreasing measure",
     "dispatch_authority": "a span conveys data and provenance only; source, registry, capability, and policy authority remain independently required",
-    "source_spelling": "observe_recognition(observation, call(Child)) is selected future syntax; Position and Span remain private architectural values projected as detached records",
-    "implementation_boundary": "the recursive-observation spelling and detached carrier are neutral-only; no backend runtime behavior, public helper, ActionIR node, descriptor/schema version, semantic/MCP projection, or parser behavior is admitted by this contract",
+    "source_spelling": "observe_recognition(observation, call(Child)) is current in Perl and selected for the remaining runtimes; Position and Span remain private architectural values projected as detached records",
+    "implementation_boundary": "the recursive-observation spelling, dedicated ActionIR node, detached carrier, and parser behavior are admitted only in Perl; Rust, Dart, Julia, PUC Lua, and LuaJIT remain pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted",
 }
 
 CANONICAL_EXECUTION = {
@@ -94,6 +94,7 @@ RECURRING_GATE = {
             "paths": [
                 "t/typed_source_location_values.t",
                 "t/typed_source_location_perl_contract.t",
+                "t/recursive_observation_perl_contract.t",
             ],
         },
         {
@@ -123,7 +124,7 @@ RECURRING_GATE = {
         {
             "runtime": "perl",
             "source_backend": "perl",
-            "command": "PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t",
+            "command": "PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t t/recursive_observation_perl_contract.t",
         },
         {
             "runtime": "rust",
@@ -595,7 +596,7 @@ ROLLOUT = [
     ("julia_runtime", "complete", "FUTURE-PARITY-BACKLOG.14.2.4.3", ["julia"]),
     ("lua_dual_abi", "complete", "FUTURE-PARITY-BACKLOG.14.2.5.3", ["puc_lua", "luajit"]),
     ("transaction_safety", "pending", "FUTURE-PARITY-BACKLOG.14.3", []),
-    ("recursive_observation", "pending", "FUTURE-PARITY-BACKLOG.14.4", []),
+    ("recursive_observation", "pending", "FUTURE-PARITY-BACKLOG.14.4", ["perl"]),
     ("lossless_gap_composition", "pending", "FUTURE-PARITY-BACKLOG.14.5", []),
     ("progressive_span_dispatch", "pending", "FUTURE-PARITY-BACKLOG.14.6", []),
     ("staged_span_dispatch", "pending", "FUTURE-PARITY-BACKLOG.14.7", []),
@@ -1170,7 +1171,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         fail("contract id drifted")
     if contract["task_owner"] != "FUTURE-PARITY-BACKLOG.14.1.1":
         fail("task owner drifted")
-    if contract["status"] != "neutral_contract_only":
+    if contract["status"] != "neutral_contract_with_perl_recursive_observation":
         fail("neutral-only status drifted")
     if contract["expected_counts"] != EXPECTED_COUNTS:
         fail("expected counts drifted")
@@ -1825,9 +1826,11 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             CANONICAL_EXECUTION["invocation"],
             "require_tracked_file t/typed_source_location_values.t",
             "require_tracked_file t/typed_source_location_perl_contract.t",
+            "require_tracked_file t/recursive_observation_perl_contract.t",
             "perl -c -Iperl t/typed_source_location_values.t",
             "perl -c -Iperl t/typed_source_location_perl_contract.t",
-            "PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t",
+            "perl -c -Iperl t/recursive_observation_perl_contract.t",
+            "PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t t/recursive_observation_perl_contract.t",
             "require_tracked_file rust/linkedspec-runtime/tests/typed_source_location_contract.rs",
             "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract",
             "require_tracked_file dart/test/typed_source_location_contract_test.dart",
@@ -2113,6 +2116,10 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         (
             "combined public no-drift promoted prematurely",
             lambda c: c["rollout"][13].__setitem__("status", "complete"),
+        ),
+        (
+            "recursive observation Perl admission omitted",
+            lambda c: c["rollout"][9]["runtimes"].pop(),
         ),
         ("rollout removed", lambda c: c["rollout"].pop()),
         ("canonical checker", lambda c: c["canonical_execution"].__setitem__("checker_path", "tools/wrong.py")),

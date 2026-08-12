@@ -165,9 +165,9 @@ DEDICATED_NODES = [
     "RECOGNIZE_ONCE",
 ]
 EXPECTED_COUNTS = {
-    "current_action_ir_nodes": 128,
+    "current_action_ir_nodes": 129,
     "dedicated_action_ir_nodes": 4,
-    "all_action_ir_nodes": 132,
+    "all_action_ir_nodes": 133,
     "canonical_call_contracts": 246,
     "allowed_effects": 9,
     "rejected_effects": 11,
@@ -183,7 +183,7 @@ EXPECTED_COUNTS = {
     "mutations": 58,
 }
 EXPECTED_EFFECT_ROW_HASHES = {
-    "action_ir_effect_rows": "560de8fc586cee7adf66e1b6eeab7d931f441ebda6ca9cb0498ecc9d4392f775",
+    "action_ir_effect_rows": "fa62b9bb2023fd65be1954fc4466692bc9610d0f4be48eb3c77de51f895bcebf",
     "canonical_call_effect_rows": "b0e25c4ab45ed53f83e5eaa8a1b2d66ec3ddc5a9cc4764ff031b3903efb64929",
 }
 EXPECTED_SURFACE = {
@@ -440,7 +440,7 @@ PUBLIC_SEQUENCE_CONTRACT = {
             "path": "docs/linkedspec-book/src/overview/project-status.md",
             "required_markers": [
                 (
-                    "Their neutral artifact/checker is executable at 128 current + 4 "
+                    "Their neutral artifact/checker is executable at 129 current + 4 "
                     "dedicated ActionIR rows"
                 ),
                 "recognition rollout 9/9 complete",
@@ -2315,7 +2315,7 @@ def main() -> int:
         return 1
     print(
         "recognition-transaction-contract: OK "
-        "(132 ActionIR rows = 128 current + 4 dedicated; 246 call rows; "
+        "(133 ActionIR rows = 129 current + 4 dedicated; 246 call rows; "
         "token 8 positive/17 negative; effects 6 graphs; marks 6; progress 8; "
         "58 rejected mutations; rollout 9/9 complete; "
         f"public sequence 3 documents/26 forbidden/{public_mutations} mutations; "

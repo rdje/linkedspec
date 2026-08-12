@@ -47,6 +47,13 @@ sub enter_invocation {
  my $cursor = _nonnegative_integer($args{cursor}, 'invocation cursor');
  my $boundary = _optional_nonnegative_integer($args{boundary}, 'invocation boundary');
 
+ my $parent_invocation_id;
+ if (@{$authority->{invocation_stack}}) {
+  my $parent_state = $FRAME_STATE_BY_ADDRESS{$authority->{invocation_stack}[-1]};
+  _internal_error('active invocation parent state is unavailable')
+   unless ref($parent_state) eq 'HASH' && $parent_state->{active};
+  $parent_invocation_id = $parent_state->{invocation_id};
+ }
  my $invocation_id = $authority->{next_invocation_id}++;
  my $generation = $authority->{next_generation}++;
  my $token = 0;
@@ -60,6 +67,7 @@ sub enter_invocation {
   rule              => $rule,
   origin            => $origin,
   invocation_id     => $invocation_id,
+  parent_invocation_id => $parent_invocation_id,
   generation        => $generation,
   active            => 1,
   cursor            => $cursor,
@@ -68,6 +76,33 @@ sub enter_invocation {
  };
  push @{$authority->{invocation_stack}}, $frame_address;
  return $frame
+}
+
+sub recursive_observation_identity {
+ my ($self, %args) = @_;
+ my $frame_state = _frame_for_authority($self, $args{frame}, require_active => 1);
+ return {
+  rule_label           => $frame_state->{rule},
+  invocation_id        => $frame_state->{invocation_id},
+  parent_invocation_id => $frame_state->{parent_invocation_id},
+ }
+}
+
+sub reserve_rejected_invocation {
+ my ($self, %args) = @_;
+ my $authority = _authority_state($self);
+ my $rule = _required_scalar($args{rule}, 'rejected invocation rule');
+ _required_scalar($args{origin}, 'rejected invocation origin');
+ my $stack = $authority->{invocation_stack};
+ _internal_error('rejected invocation requires one active parent frame') unless @$stack;
+ my $parent_state = $FRAME_STATE_BY_ADDRESS{$stack->[-1]};
+ _internal_error('rejected invocation parent state is unavailable')
+  unless ref($parent_state) eq 'HASH' && $parent_state->{active};
+ return {
+  rule_label           => $rule,
+  invocation_id        => $authority->{next_invocation_id}++,
+  parent_invocation_id => $parent_state->{invocation_id},
+ }
 }
 
 sub leave_invocation {

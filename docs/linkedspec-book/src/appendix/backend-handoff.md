@@ -49,7 +49,7 @@
 > treat those compatibility controls as transaction support. The accepted transaction forms are `recognition_checkpoint()`,
 > `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and `recognition_rollback(token)`. The attempt
 > returns a match boolean; commit separately exposes the staged payload. The neutral authority is now executable
-> and fail-closed over 128 current + four dedicated node rows, 246 call rows, and 58 mutations.
+> and fail-closed over 129 current + four dedicated node rows, 246 call rows, and 58 mutations.
 > Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT transaction support is current and canonically admitted.
 > Public no-drift is current and recognition rollout is 9/9 complete. Neutral proof alone is not backend support.
 >
@@ -101,7 +101,7 @@
 > lifecycle ownership. The neutral contract and all six internal value/projection runtime targets are admitted.
 > Existing helpers retain their public results and established scalar, byte, or code-unit mark/cursor behavior.
 >
-> Public authored typed values, recursive observation, and span-native dispatch remain owned by later leaves. The combined
+> Public authored typed values, non-Perl recursive observation, and span-native dispatch remain owned by later leaves. The combined
 > recurring/public no-drift row stays pending for final program-wide owner `FUTURE-PARITY-BACKLOG.14.8`; the
 > transaction closeout does not promote that separate typed-source row early.
 >
@@ -118,20 +118,27 @@
 > `direct_nonprogress` self-parent with numeric attempted-child lineage and now rejects self-parenting, identity
 > reuse, non-earlier parents, and cycles.
 >
-> Executable neutral `.14.4.1` selects future
+> Executable neutral `.14.4.1` selected
 > `value = observe_recognition(observation, call(Child))` syntax. The target is one bare rule-local harray and the
 > operand is exactly one unevaluated static call. Preserve the ordinary child payload as the expression result and
 > bind a separate recursively detached nine-field observation. Use existing harray field access; do not add a
 > custom public value kind or accessor family. The 33-transition neutral machine is authoritative for action-edge
 > versus direct entry, terminal selected-match replacement, accepted-only exit, all four outcomes, child-owned
 > seek/consume, fresh rejected-child ids, and no parse-wide history.
-> Perl `.2`, Rust `.3`, Dart `.4`, Julia `.5`, one shared PUC-Lua/LuaJIT implementation `.6`, recurring `.7`, and
-> public `.8` follow. The spelling/carrier are selected neutral contract only; no backend or public admission is
-> current yet.
+> Perl `.2` now admits that exact private surface across live and independently loaded generated-source execution.
+> It uses one dedicated `OBSERVE_RECOGNITION` node, fail-closed static target/operand policy, the existing monotonic
+> invocation authority, and no history ledger. The node is a forbidden binding-write inside recognition
+> transactions. Rust `.3`, Dart `.4`, Julia `.5`, one shared PUC-Lua/LuaJIT implementation `.6`, recurring `.7`,
+> and public `.8` follow. No public helper/value/schema/facade/semantic/MCP/CLI/README surface moved.
 >
 > Definitive neutral signoff passes the exact six-runtime composition and support ledgers, all eight doctrines,
 > six-family containment, repository relocation, CLI 66x2, RAM 35%, and canonical Phase 0 1,031/1,031 in 714
 > seconds through the exact local-CI success marker. No runtime or public admission moved.
+>
+> Definitive Perl-admission signoff passes the 17-test Perl route, the unchanged Rust/Dart/Julia/Lua consumers,
+> generated-source/capability/language ledgers, all eight doctrines, containment/relocation, CLI 66x2, RAM 50%,
+> and Phase 0 1,031/1,031 in 723 seconds. The remaining backend implementer must begin from Rust `.14.4.3`; Perl
+> is complete and no non-Perl or public recursive-observation surface is implied.
 >
 > **Repeated-action handoff:** Every backend must consume
 > `linkedspec-explicit-repetition-action-result-v1`: bare `OR` is minimum-one repetition, explicit action returns

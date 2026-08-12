@@ -477,6 +477,19 @@ sub _span {
  )
 }
 
+sub detached_position_record {
+ my ($info, $string_ref, $offset, $provenance) = @_;
+ return undef unless defined $offset;
+ return _position($info, $string_ref, $offset, $provenance)->as_record
+}
+
+sub detached_span_record {
+ my ($info, $string_ref, $start, $end, $provenance) = @_;
+ return undef unless defined($start) && defined($end);
+ my (undef, $span) = _span($info, $string_ref, $start, $end, $provenance);
+ return $span->as_record
+}
+
 sub position_offset {
  my ($info, $string_ref, $offset, $provenance) = @_;
  return undef unless defined($offset);

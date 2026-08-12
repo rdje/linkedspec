@@ -10,6 +10,28 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-12 — FUTURE-PARITY-BACKLOG.14.4.2 — admit Perl recursive observation
+
+- Added the exact authored `value = observe_recognition(observation, call(Child))` route to Perl through one
+  dedicated `OBSERVE_RECOGNITION` ActionIR node and a fail-closed static target/operand policy.
+- Extended the existing private recognition invocation authority with direct-parent identity and rejected-attempt
+  reservation. The runtime binds a recursively detached nine-field observation for accepted, failed, aborted, and
+  pre-entry rejected outcomes without adding a second stack or parse-wide history.
+- Added an ordinary/canonical final-path consumer covering falsey payloads, action-edge/direct entry state,
+  child-owned seek/consume policy, terminal local-match replacement, zero-regex coordinators, detachment,
+  direct/mutual recursion diagnostics, and independently loaded generated source.
+- Recorded only Perl in the still-pending recursive-observation rollout row and added its regression mutation,
+  advancing typed-source governance to 71. Recognition effect governance now classifies the new live node as a
+  forbidden binding write; current inventory is 129 live + four dedicated transaction nodes.
+- Updated the admitted Rust, Dart, Julia, and Lua transaction consumers' neutral live/aggregate inventory snapshots
+  from 128/132 to 129/133 after canonical proof exposed the stale assertions; their runtime behavior and 9/9
+  rollout did not change.
+- Synchronized capability guidance, Toolbox, ADR, Knowledge, roadmaps/live state, and the sole-facing mdBook. No
+  public helper/value, descriptor/generated schema, semantic/MCP/CLI/README, or non-Perl behavior moved.
+- Definitive signoff passes the 79-file/14,508-KiB rendered book, Knowledge 822/6,843, all eight doctrines, exact
+  six-runtime typed-source composition, repository containment/relocation, CLI 66x2, RAM 50%, and canonical Phase 0
+  1,031/1,031 in 723 seconds through `[ci] local CI gate passed` with exit 0.
+
 ## 2026-08-12 — FUTURE-PARITY-BACKLOG.14.4.1 — execute neutral recursive observation
 
 - Added a 33-transition backend-neutral recursive-observation machine over the existing monotonic invocation

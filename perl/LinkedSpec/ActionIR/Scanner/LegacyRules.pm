@@ -152,6 +152,7 @@ sub _scan_contract_call {
 while ($code =~ /\bcall\s*\(\s*(?<callee>\w+)\s*\)/g) {
  my $prefix = substr($code, 0, $-[0]);
  next if $prefix =~ /recognize_once\s*\(\s*[A-Za-z_][A-Za-z0-9_]*\s*,\s*\z/o;
+ next if $prefix =~ /observe_recognition\s*\(\s*[^,]+\s*,\s*\z/o;
  push @events, {raw => $&, args => {callee => $+{callee}}};
 }
  return \@events

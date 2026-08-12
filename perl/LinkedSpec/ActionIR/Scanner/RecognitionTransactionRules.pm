@@ -11,6 +11,7 @@ use warnings;
 sub try_scan_contract_ir_events {
  my ($id, $code) = @_;
  my %dispatch = (
+  observe_recognition    => \&_scan_observation,
   recognition_checkpoint => \&_scan_checkpoint,
   recognize_once         => \&_scan_attempt,
   recognition_commit     => \&_scan_commit,
@@ -19,6 +20,43 @@ sub try_scan_contract_ir_events {
  my $scanner = $dispatch{$id};
  return undef unless ref($scanner) eq 'CODE';
  return $scanner->($code)
+}
+
+sub _scan_observation {
+ my ($code) = @_;
+ my @events;
+ for my $statement (_statements($code)) {
+  my $raw = _trim_action_ir_value($statement);
+  next unless defined($raw)
+   && $raw =~ /\A(?<result>[A-Za-z_][A-Za-z0-9_]*)\s*=\s*(?<source>observe_recognition\s*\(.*\))\z/so;
+  my ($result, $source) = ($+{result}, $+{source});
+  my $call = _parse_method_function_expr($source);
+  next unless ref($call) eq 'HASH' && ($call->{method} // '') eq 'observe_recognition';
+  my $args = $call->{args};
+  my $target = ref($args) eq 'ARRAY' && @$args ? _trim_action_ir_value($args->[0]) : undef;
+  my $operand = ref($args) eq 'ARRAY' && @$args > 1 ? _trim_action_ir_value($args->[1]) : undef;
+  my $callee = defined($operand)
+   && $operand =~ /\Acall\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)\z/o
+   ? $1
+   : undef;
+  my $operand_kind = !defined($operand) ? 'missing'
+   : $operand =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o ? 'bare_value'
+   : $operand =~ /\Acall\s*\(/o ? 'call_expression'
+   : 'value_expression';
+  push @events, {
+   raw => $raw,
+   args => {
+    result => $result,
+    target => defined($target) ? $target : '',
+    operand => defined($operand) ? $operand : '',
+    ((ref($args) ne 'ARRAY' || @$args != 2)
+     ? (argument_count => ref($args) eq 'ARRAY' ? scalar(@$args) : 0) : ()),
+    (!defined($callee) ? (operand_kind => $operand_kind) : ()),
+    (defined($callee) ? (callee => $callee) : ()),
+   },
+  };
+ }
+ return \@events
 }
 
 sub _statements {

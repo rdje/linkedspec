@@ -1,9 +1,9 @@
 # ARCHITECTURE STATE
 
-## Recursive source observation has an executable neutral syntax and detached carrier
+## Recursive source observation is privately admitted in Perl
 
-`FUTURE-PARITY-BACKLOG.14.4.1` selects future
-`value = observe_recognition(observation, call(Child))` without admitting it on any runtime. The first operand is
+`FUTURE-PARITY-BACKLOG.14.4.1` selected
+`value = observe_recognition(observation, call(Child))`; `.14.4.2` now admits it privately in Perl. The first operand is
 one bare rule-local harray binding; the second is one unevaluated statically named call. The expression preserves
 the ordinary child payload—including falsey accepted values—while the binding receives a separate recursively
 detached record at the terminal boundary. Accepted/failed calls bind before returning; aborted/rejected calls
@@ -19,10 +19,12 @@ The neutral checker now executes 33 ordered transitions over invocation ids `1..
 entry, caller-cursor capture before `I`, child-owned OR/default seek and AND consume, terminal local-match
 replacement, zero-regex absence, accepted-only exit, all four outcomes, fresh rejected-child ids without frame
 push, immediate detach, and unavailable history. Two static target/operand diagnostics plus ten reason-checked
-state corruptions and three surface/topology mutations advance typed-source governance from 57 to 70. Rollout
-stays 8 complete / 6 pending and no backend runtime, public helper, ActionIR node, facade, descriptor/generated
-version, result schema, semantic/MCP projection, CLI, README, or parser behavior becomes current. Perl `.14.4.2`
-is the next implementation owner after this neutral leaf lands cleanly.
+state corruptions and three surface/topology mutations advance typed-source governance from 57 to 70. Perl adds
+one admission-regression mutation, taking the total to 71 while rollout stays 8 complete / 6 pending. One private
+`OBSERVE_RECOGNITION` ActionIR node, static target/operand policy, existing monotonic invocation authority, and
+live/generated runtime route are current only in Perl. The pending recursive-observation row lists only Perl. No
+public helper/value, facade, descriptor/generated schema, result schema, semantic/MCP projection, CLI, README, or
+non-Perl behavior becomes current; Rust `.14.4.3` follows after clean Perl landing.
 
 Neutral signoff passes the exact six-runtime composition, strict generated Rust 105/105, capability 80/0/0,
 language coverage 246 current / 105 corpus plus one named-mark fixture / 122 public Perl contracts, the rendered

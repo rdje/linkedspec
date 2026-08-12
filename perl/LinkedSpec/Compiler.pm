@@ -380,7 +380,10 @@ sub Execute {
    )
   );
  die \$execution_error
-  if !\$ok && LinkedSpec::RecognitionTransactionRuntime::is_error(\$execution_error);
+  if !\$ok && (
+   LinkedSpec::RecognitionTransactionRuntime::is_error(\$execution_error)
+   || LinkedSpec::RecognitionTransactionRuntime::is_recursive_observation_error(\$execution_error)
+  );
  die LinkedSpec::GeneratedSource::new_error(
   stage => 'execute_generated',
   code => 'generated_execution_failed',
@@ -1493,6 +1496,34 @@ if ($validate_dependency_regex_references_error) {
 }
 
 my $recognition_transaction_diagnostic = eval {
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::RecursiveObservationPolicy');
+ LinkedSpec::RecursiveObservationPolicy::validate_rule_rows(
+  _call_compiler_state('compiled_spec_state_rule_rows', $compiled_spec_state),
+ )
+};
+my $recursive_observation_policy_error = $@;
+if ($recursive_observation_policy_error || ref($recognition_transaction_diagnostic) eq 'HASH') {
+ my $diagnostic = ref($recognition_transaction_diagnostic) eq 'HASH'
+  ? $recognition_transaction_diagnostic
+  : {};
+ my $detail = $recursive_observation_policy_error
+  || ($diagnostic->{code} // 'recursive observation policy rejected');
+ _call_runtime_ctx(
+  'set_runtime_ctx_last_error_for_owner',
+  $runtime_ctx,
+  'compiler_pipeline',
+  stage => 'recursive_observation_policy',
+  summary => 'Recursive observation policy rejected the compiled rule table',
+  detail => $detail,
+  (map { exists($diagnostic->{$_}) ? ($_ => $diagnostic->{$_}) : () }
+   qw/code rule_role source_id binding_name operand_kind originating_edge_or_job/),
+ );
+ _trace_log_output(DUMP_NONE, 'CRITICAL ERROR', 'Recursive observation policy rejected the compiled rule table');
+ _trace_exit($trace_scope, { status => 'error', stage => 'recursive_observation_policy' }, DUMP_LOW);
+ return undef;
+}
+
+$recognition_transaction_diagnostic = eval {
  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::RecognitionTransactionPolicy');
  LinkedSpec::RecognitionTransactionPolicy::validate_rule_rows(
   _call_compiler_state('compiled_spec_state_rule_rows', $compiled_spec_state),

@@ -55,11 +55,11 @@ bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_t
 bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua
 ```
 
-### Recursive source observation: executable neutral contract, not yet runtime syntax
+### Recursive source observation: current in Perl
 
 The behavior-free `.14.4.0` audit and lineage correction `.14.4.0.1` fix the portable observation boundary.
-Executable neutral leaf `.14.4.1` now selects the future authored spelling and validates it independently, but no
-backend accepts the spelling yet:
+Executable neutral leaf `.14.4.1` selected the authored spelling, and Perl admission `.14.4.2` now executes it on
+both live and independently loaded generated-source routes. Rust, Dart, Julia, PUC Lua, and LuaJIT remain pending:
 
 ```text
 value = observe_recognition(observation, call(Child));
@@ -107,11 +107,15 @@ fixture identities with positive unique monotonic numbers; direct and mutual rej
 under an earlier active parent. The checker now rejects self-parent, reuse, invalid parent order, and cycles before
 tuple comparison. Two additional static diagnostics reserve invalid-target and invalid-static-call errors. Ten
 reason-checked state corruptions plus three surface/topology mutations raise typed-source governance from 57 to 70.
-Perl, Rust, Dart, Julia, shared Lua, recurring proof, and public closeout still follow in `.2-.8`.
+Rust, Dart, Julia, shared Lua, recurring proof, and public closeout still follow in `.3-.8`.
 
-The spelling is selected contract, not current capability. There is still no recursive-observation runtime route,
-public helper, ActionIR node, descriptor/generated version, result-schema field, semantic/MCP projection, CLI
-option, or README behavior. Typed-source rollout therefore remains exactly 8 complete / 6 pending.
+Perl owns one dedicated private `OBSERVE_RECOGNITION` ActionIR node and one static policy pass. Invalid targets and
+operands reject before execution; the runtime uses the existing recognition invocation stack, reserves rejected
+attempt ids without a frame push, and never retains observation history. `OBSERVE_RECOGNITION` is a binding-write
+effect and is therefore forbidden inside a recognition transaction. There is still no public helper, authored
+`Position`/`Span` value, descriptor/generated version, result-schema field, semantic/MCP projection, CLI option,
+or README behavior. The parent recursive-observation row remains pending with only Perl recorded, so the overall
+typed-source rollout remains exactly 8 complete / 6 pending and governance advances to 71 mutations.
 
 ### Bounded cursor transactions do not mean general backtracking
 
@@ -196,7 +200,7 @@ output, authored diagnostics, exit/unbounded control, user or callable functions
 external/host work, raw code, and unknown nodes fail closed. Rule calls are classified transitively, and the
 runtime checks the same boundary before performing an effect.
 
-The shared contract now has an executable backend-neutral authority. Its independent checker covers 128 current
+The shared contract now has an executable backend-neutral authority. Its independent checker covers 129 current
 ActionIR node kinds plus four dedicated transaction kinds, all 246 current call contracts, falsey token results,
 recursive effect fixed points, invocation-frame marks, cursor-only progress, fifteen portable diagnostics, and 58
 drift mutations:
@@ -324,7 +328,7 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 
 The checker covers 3 decoded sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation,
 8 transaction, and 33 recursive-observation transitions, 6 detached observations, 4 structural cases,
-33 diagnostics, and 70 mutations.
+33 diagnostics, and 71 mutations.
 It also proves that all 92 current source-boundary helpers project onto the algebra.
 
 This is rollout status, not authored-value status. Eight of 14 rollout legs are complete: the neutral contract,

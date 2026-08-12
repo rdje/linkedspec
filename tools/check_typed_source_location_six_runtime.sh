@@ -34,8 +34,8 @@ cd "$REPO_ROOT"
 log "checking the neutral algebra, recurring topology, rollout, and mutations"
 bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py
 
-log "checking the Perl immutable values and exact helper projections"
-PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t
+log "checking the Perl immutable values, exact helper projections, and recursive observation"
+PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t t/recursive_observation_perl_contract.t
 
 log "checking the Rust immutable values and exact helper projections"
 "$CARGO_CMD" test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract

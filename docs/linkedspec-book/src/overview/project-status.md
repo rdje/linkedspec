@@ -105,7 +105,7 @@ Public typed values, runtime recursive observation, span-native progressive/stag
 dispatch, and the remaining public authored surfaces remain future work. Exact transaction syntax is ratified:
 `recognition_checkpoint()`, `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and
 `recognition_rollback(token)`. Match is a strict boolean and the falsey-safe payload remains staged until commit.
-Their neutral artifact/checker is executable at 128 current + 4 dedicated ActionIR rows, 246 call rows, and 58
+Their neutral artifact/checker is executable at 129 current + 4 dedicated ActionIR rows, 246 call rows, and 58
 rejected mutations, with recognition rollout 9/9 complete. The authored forms and their exact recurring proof are
 current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; public no-drift is current and transaction activity
 `.14.3` is closed. The separate typed-
@@ -133,15 +133,25 @@ projection; no new authored value kind or accessor family is introduced.
 The neutral checker executes 33 transitions for action-edge/direct entry, OR/default seek and AND consume,
 terminal-match replacement, zero-regex absence, all four outcomes, fresh pre-entry rejection ids, and detach with
 no retained history. Two static diagnostics plus ten reason-checked state corruptions and three surface/topology
-mutations move governance from 57 to 70. The syntax remains neutral-only: no backend runtime, public helper,
-ActionIR node, facade, descriptor/generated version, result schema, semantic/MCP field, CLI, or README behavior is
-current. Independent Perl, Rust, Dart, Julia, shared Lua, recurring, and public legs follow through `.14.4.2-.8`.
+mutations move governance from 57 to 70. Perl `.14.4.2` now admits the syntax with one dedicated private
+`OBSERVE_RECOGNITION` node, static target/operand policy, the existing monotonic invocation authority, recursively
+detached carrier construction, pre-entry direct/mutual rejection, and live plus independently loaded generated-
+source execution. The ordinary/canonical consumer preserves falsey payloads and child-owned seek/consume policy.
+One admission-regression mutation advances governance to 71 while the parent row stays pending with only Perl in
+its runtime list. No public helper, facade, descriptor/generated version, result schema, semantic/MCP field, CLI,
+README, or non-Perl behavior is current. Rust, Dart, Julia, shared Lua, recurring, and public legs follow through
+`.14.4.3-.8`.
 Executable-neutral signoff passes the exact six-runtime composition, support ledgers, all eight doctrines,
 six-family process containment, repository relocation, CLI 66x2, RAM 35%, and canonical Phase 0 1,031/1,031 in
-714 seconds through the exact local-CI success marker. Perl `.14.4.2` remains the first runtime implementation.
+714 seconds through the exact local-CI success marker.
 Correction signoff passes the exact six-runtime composition, generated-source/capability/language ledgers,
 79-file/14,460-KiB rendered book, Knowledge 821/6,826, all eight doctrines, containment/relocation, CLI 66x2,
 RAM 34%, and canonical Phase 0 1,031/1,031 in 739 seconds without moving any executable or public surface.
+Perl-admission signoff passes its 17 tests, Rust and Dart 4 each, Julia 127, PUC Lua and LuaJIT 240 each, strict
+generated Rust 105/105, capability 80/0/0, and language coverage 246 current / 105 corpus plus one named-mark
+fixture / 122 public Perl contracts. The rendered book, Knowledge 822/6,843, all eight doctrines, repository
+containment/relocation, CLI 66x2, RAM 50%, and canonical Phase 0 1,031/1,031 in 723 seconds also pass through the
+exact local-CI success marker. Rust `.14.4.3` remains next only after the Perl commit lands clean.
 
 Perl now has an admitted transaction implementation with four dedicated ActionIR nodes, recursive static
 effect closure, invocation-local mark/cursor snapshots, falsey-safe commit results, typed recognition-only progress

@@ -10,6 +10,32 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-12 (`FUTURE-PARITY-BACKLOG.14.4.2` — Perl recursive observation): recognize the exact special form as
+  one dedicated ActionIR event before generic assignment/call scans. Validate one bare target, exact arity, one
+  static existing `call(Rule)`, and diagnostic context before generated execution.
+- Reuse `RecognitionTransaction` as the sole parse-local invocation-id and parent-lineage authority. A rejected
+  recursive attempt consumes the next id under the active frame but never enters a frame; accepted/failed/aborted
+  children publish only one ephemeral completion consumed immediately by `observe_static`.
+- Entry is captured before the child's lifecycle and matching. Action-edge observation forwards parent match info;
+  direct observation creates no match. Each generated child continues to derive seek/consume from its own family,
+  and every `note_match` overwrites the terminal selected-match span.
+- Preserve payload and failure identity independently of observation outcome: `false`, `0`, `""`, `undef`, and
+  ordinary failures retain their exact channels; aborted and rejected records bind before the identical typed
+  failure propagates. Detached records contain no source text, path, authority, frame, match object, or coderef.
+- Classify `OBSERVE_RECOGNITION` as `binding_write` in the closed recognition-transaction effect inventory. The
+  recognition checker therefore advances from 128 to 129 current nodes without weakening transaction rollback
+  safety. Language coverage treats `observe_recognition` as the fourteenth grammar-owned/non-public contract.
+- Admitted transaction consumers deliberately snapshot mutable neutral metadata. The first canonical run stopped
+  at Rust's stale `128` assertion; exhaustive review found the same snapshot in Dart, Julia, and Lua, plus the
+  derived `132` aggregate in Dart, Julia, and Lua. Advance them to `129` and `133` respectively as contract-consumer
+  alignment, with no backend transaction implementation or rollout change.
+- The final-path consumer was RED before production edits, then passes seven top-level groups across live and
+  independently loaded generated source. Neutral governance is 8 complete / 6 pending / 71, with only Perl listed
+  on the still-pending recursive-observation row; all non-Perl and public boundaries remain future.
+- Final signoff passes book 79/14,508 KiB, Knowledge 822/6,843, all eight doctrines, repository containment and
+  relocation, primary CLI 66/66 in both option environments, RAM 50%, Phase 0 1,031/1,031 in 723 seconds, and the
+  complete six-runtime typed-source opt-in through the exact local-CI success marker.
+
 - 2026-08-12 (`FUTURE-PARITY-BACKLOG.14.4.1` — executable neutral recursive observation): the selected future
   special form is `value = observe_recognition(observation, call(Child))`. Require one bare rule-local harray
   target and one unevaluated statically named call; return the ordinary child payload unchanged and bind the

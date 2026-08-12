@@ -1,12 +1,12 @@
 ---
 id: recognition-transaction-neutral-contract
-title: The recognition-transaction contract covers 132 node rows, 246 call rows, and 58 mutations
+title: The recognition-transaction contract covers 133 node rows, 246 call rows, and 58 mutations
 answers:
   - "where is the executable neutral recognition transaction contract"
   - "how do I run the recognition transaction checker"
   - "how many ActionIR node effects does the transaction contract classify"
   - "how many current ActionIR node kinds are there"
-  - "why are there 128 ActionIR nodes but 122 public Perl contracts"
+  - "why are there 129 ActionIR nodes but 122 public Perl contracts"
   - "how many canonical call effects does the recognition transaction contract classify"
   - "what recognition transaction fixtures are executable"
   - "how are recursive rule effects checked for transactions"
@@ -30,6 +30,7 @@ evidence_update_2026_08_11_lua_admission: "FUTURE-PARITY-BACKLOG.14.3.6.3 remove
 evidence_update_2026_08_11_recurring: "FUTURE-PARITY-BACKLOG.14.3.7 adds one repository-routed driver over neutral, exact Perl/Rust/Dart/Julia/PUC Lua/LuaJIT consumers, and three support ledgers. Eleven topology/storage mutations plus recurring regression advance the suite to 58 and only recurring to complete, yielding rollout 8/9. Public governance is 3/23/42 and guide governance 1/12/16; public no-drift remains RED. Mutable consumer metadata is synchronized without runtime or API changes."
 evidence_update_2026_08_11_public_closeout: "FUTURE-PARITY-BACKLOG.14.3.8 promotes only final public no-drift and closes transaction activity .14.3 at rollout 9/9. The final row owns the three exact transaction book pages plus the capability guide. Semantic/topology mutations remain 58; three recurring-era stale claims advance public governance to 3/26/45 and the guide to 1/14/18. Runtime implementations, admissions, the recurring driver, private facades, schemas, CLI, and README remain unchanged."
 evidence_update_2026_08_11_cross_consumer_metadata: "The first atomic-196 canonical run proved that every admitted consumer snapshots mutable neutral metadata as well as backend behavior: Perl retained the pre-Dart status/availability and Rust retained the pre-Dart mutation/rollout/availability assertions. Updating both consumers closes that coupling without runtime changes; each later admission must update all earlier admitted consumer metadata assertions."
+evidence_update_2026_08_12_recursive_observation: "FUTURE-PARITY-BACKLOG.14.4.2 adds OBSERVE_RECOGNITION as the 129th live ActionIR node and retains the four dedicated transaction nodes, so the recognition contract covers 133 node rows without changing its 246 calls, 58 mutations, or complete 9/9 rollout. Canonical proof caught stale 128/132 live/aggregate snapshots in the admitted consumers; exhaustive review updated Rust's live count and Dart, Julia, and Lua live plus aggregate counts while leaving their transaction behavior unchanged."
 reverify: "bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && perl tools/check_language_capability_coverage.pl --report"
 ---
 
@@ -41,9 +42,9 @@ checker through repository-local project data:
 bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py
 ```
 
-The checker derives 128 unique current canonical ActionIR node kinds from
+The checker derives 129 unique current canonical ActionIR node kinds from
 `perl/LinkedSpec/ActionIR/Contracts.pm`. It requires one base-effect row for each plus the four future dedicated
-transaction nodes, for 132 total. This is a different census from the 122 public identifier-shaped Perl contracts
+transaction nodes, for 133 total. This is a different census from the 122 public identifier-shaped Perl contracts
 reported by `tools/check_language_capability_coverage.pl`: the latter counts public call-contract names after
 classifying internal/compatibility names, not unique ActionIR node kinds.
 

@@ -2,24 +2,25 @@
 
 ## Current Activity
 
-- Executable neutral recursive-observation leaf `FUTURE-PARITY-BACKLOG.14.4.1` is signoff-complete and commit-ready
-  as intended atomic 209/300 from clean lineage commit `53c687d3`; no push.
-- Future `observe_recognition(observation, call(Child))` now has exact neutral syntax and a detached nine-field
-  harray carrier separate from the unchanged ordinary child payload; no backend/public admission is current.
-- The independent checker executes 33 transitions and rejects 70 total mutations while preserving typed-source
-  rollout 8 complete / 6 pending and every parser/runtime/API/schema/semantic/MCP/CLI/README boundary.
-- Complete six-runtime, rendered-book, all-eight-doctrine, containment/relocation, CLI 66x2, and canonical signoff are green.
+- Perl recursive-observation leaf `FUTURE-PARITY-BACKLOG.14.4.2` is signoff-complete as intended atomic 210/300
+  from clean executable-neutral commit `6e3b77c0`; its task-scoped commit is the only remaining handoff step; no push.
+- Definitive proof passes the rendered book 79/14,508 KiB, Knowledge 822/6,843, all eight doctrines, exact six-runtime
+  typed-source composition, containment/relocation, CLI 66x2, RAM 50%, and Phase 0 1,031/1,031 in 723 seconds.
+- Typed-source truth is 8 complete / 6 pending and 71 mutations; only Perl is recorded on the still-pending
+  recursive-observation row. Recognition governance is 129 current + four transaction nodes / 246 / 58.
 
 ## Latest Completed Slice
 
-- `.14.4.1` is signoff-complete and commit-ready as atomic 209/300 from clean activation `53c687d3`.
+- `.14.4.2` completed private Perl recursive-observation admission and canonical signoff for intended atomic 210/300.
 
 ## Next Action
 
-- Land `.14.4.1`, clear/prove the repository clean, then activate Perl `.14.4.2` task-tree-first.
+- Commit Perl `.14.4.2`, prove clean and clear the brief, then activate Rust `.14.4.3` task-tree-first.
 
 ## Recent Completions
 
+- `2026-08-12` — `.14.4.2` completed private Perl recursive-observation admission and canonical signoff for atomic 210/300.
+- `2026-08-12` — `6e3b77c0` landed executable neutral recursive observation `.14.4.1` as atomic 209/300.
 - `2026-08-12` — `.14.4.1` completed executable neutral recursive observation and canonical signoff for atomic 209/300.
 - `2026-08-12` — `53c687d3` landed recursive-observation lineage correction `.14.4.0.1` as atomic 208/300.
 - `2026-08-12` — `.14.4.0.1` completed recursive-observation lineage correction and canonical signoff for atomic 208/300.
@@ -34,8 +35,6 @@
 - `2026-08-11` — `70b4ed04` landed private dual-ABI Lua transaction integration as atomic 203/300.
 - `2026-08-11` — `.14.3.6.2` completed dual-ABI integration and canonical signoff for atomic 203/300.
 - `2026-08-11` — `d87dcac3` landed the shared private Lua authority as atomic 202/300.
-- `2026-08-11` — `.14.3.6.1` completed exact dual-ABI private Lua authority signoff for atomic 202/300.
-- `2026-08-11` — `.14.3.6.0` completed exact dual-ABI dormant Lua transaction RED signoff for atomic 201/300.
 
 ## History
 

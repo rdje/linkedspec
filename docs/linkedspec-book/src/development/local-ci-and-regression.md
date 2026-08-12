@@ -124,22 +124,29 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 
 The check is unconditional. It independently derives Unicode-scalar, line/column, and UTF-8 coordinates;
 materializes direct and derived spans; executes invocation and bounded-transaction state transitions; validates
-recursive and zero/one/two-regex structural cases; and rejects all 57 registered mutations.
+recursive and zero/one/two-regex structural cases; and rejects all 71 registered mutations.
 
 The `.14.4.0` audit found one contradiction in that baseline: `direct_nonprogress` used the same textual identity
 for invocation and parent. Corrective `.14.4.0.1` changes all six observation identities to positive unique
 monotonic numbers and validates lineage before exact fixture comparison. Four reason-checked regressions prove
 self-parent, reused identity, invalid parent order, and cyclic-lineage rejection. The gate therefore proves the
-monotonic/acyclic neutral contract now; executable recursive-observation behavior remains future `.14.4.1+` work.
+monotonic/acyclic neutral contract now. Executable `.14.4.1` and Perl admission `.14.4.2` add the dedicated
+private node, fail-closed static policy, and live/generated runtime behavior while other engines remain pending.
 Its definitive correction run also passes the six-runtime typed-source composition, strict Rust generated-source
 105/105, capability 80/0/0, language coverage 246 current / 105 corpus plus one named-mark fixture / 122 public
 Perl contracts, all eight doctrines, repository containment/relocation, CLI 66x2, RAM 34%, and Phase 0
 1,031/1,031 in 739 seconds through the exact local-CI success marker.
 
-The gate then unconditionally runs the admitted Perl value and projection consumers:
+Perl `.14.4.2` definitive signoff passes the three-file 17-test Perl typed-source set, Rust/Dart 4/4, Julia 127,
+Lua 240/240 per ABI, strict generated Rust 105/105, capability 80/0/0, and language 246/105+1/122. The same host-
+permitted gate passes containment/relocation, CLI 66x2, RAM 50%, and Phase 0 1,031/1,031 in 723 seconds before the
+exact `[ci] local CI gate passed` marker. The outer sandbox-only attempt stopped at nested macOS `sandbox-exec`
+status 71; the unchanged host-permitted rerun proves the project containment route itself.
+
+The gate then unconditionally runs the admitted Perl value, projection, and recursive-observation consumers:
 
 ```bash
-PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t
+PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t t/recursive_observation_perl_contract.t
 ```
 
 The gate also requires and ordinarily executes Rust's exact value and projection consumer:
@@ -172,7 +179,7 @@ bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_t
 bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua
 ```
 
-Its current rollout result is 8 complete / 6 pending with 57 registered mutations. Passing this gate proves the
+Its current rollout result is 8 complete / 6 pending with 71 registered mutations. Passing this gate proves the
 neutral contract, both completed public-structure rows, and all six internal runtime targets across their exact
 value/helper carriers. Rust and Lua retain UTF-8-byte registers, Dart retains UTF-16 code-unit registers, and Julia
 retains zero-based UTF-8 code-unit registers while each converts at its immutable typed boundary. This does not
@@ -203,8 +210,9 @@ set `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1` to execute it from the canonical gate
 because this all-toolchain composition is opt-in. Existing project-data routing supplies its run scratch, so the
 driver adds no temporary root or global package cache.
 
-Eleven recurring-topology mutations first brought the total to 53; four recursive-lineage mutations now bring it
-to 57. The topology cases independently reject missing consumer sources or
+Eleven recurring-topology mutations first brought the total to 53; four recursive-lineage mutations brought it
+to 57, executable neutral observation raised it to 70, and the Perl admission regression raises it to 71. The
+topology cases independently reject missing consumer sources or
 paths, missing/reordered/duplicated runtime routes, command or source-binding drift, support-ledger omission,
 driver/switch drift, and premature completion of the combined final row. Rollout therefore remains 8 complete /
 6 pending until `FUTURE-PARITY-BACKLOG.14.8` closes program-wide public no-drift.
@@ -719,8 +727,9 @@ perl tools/check_language_capability_coverage.pl
 
 That checker requires exact Dart/Julia/Lua inventory identity at 246 current names, occurrence across the mdBook
 and governed 105-case corpus plus exact named-mark fixture, every one of 122 independently derived public Perl
-contracts in each backend inventory, and rejection of thirteen classified non-public names: nine compatibility,
-legacy, or internal lowering contracts plus four grammar-owned recognition-transaction intrinsics. It separately
+contracts in each backend inventory, and rejection of fourteen classified non-public names: nine compatibility,
+legacy, or internal lowering contracts plus four grammar-owned recognition-transaction intrinsics and the
+grammar-owned recursive-observation intrinsic. It separately
 requires Dart's, Julia's, and Lua's seven source-boundary compatibility aliases and canonical targets to match the neutral
 typed-source contract without inflating the common 246-name inventory. Lua's focused consumer executes those
 mappings through native, loaded, reconstructed, generated-plan, and emitted routes on both PUC Lua and LuaJIT.

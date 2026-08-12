@@ -103,7 +103,7 @@ fn neutral_authority_and_rust_admission_are_exact() {
     let contract = contract();
     assert_eq!(contract["contract_id"], CONTRACT_ID);
     assert_eq!(contract["format"], 1);
-    assert_eq!(contract["expected_counts"]["current_action_ir_nodes"], 128);
+    assert_eq!(contract["expected_counts"]["current_action_ir_nodes"], 129);
     assert_eq!(contract["expected_counts"]["dedicated_action_ir_nodes"], 4);
     assert_eq!(contract["expected_counts"]["canonical_call_contracts"], 246);
     assert_eq!(contract["expected_counts"]["token_positive_cases"], 8);

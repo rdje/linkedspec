@@ -507,6 +507,44 @@ rollout remains 8 complete / 6 pending. No runtime implementation, public helper
 descriptor/generated version, result schema, semantic/MCP projection, CLI option, README behavior, or parser
 behavior becomes current in this neutral leaf.
 
+### 22. Admit the exact recursive-observation boundary privately in Perl
+
+`FUTURE-PARITY-BACKLOG.14.4.2` admits the selected surface only in Perl. The action scanner recognizes one
+dedicated `OBSERVE_RECOGNITION` event before generic assignment and nested-call scans. Its exact args retain the
+result slot, bare observation target, unevaluated operand, and static callee. A separate compiler policy rejects a
+non-bare or missing target with `source_location_recursive_observation_target`; wrong arity, a dynamic/non-call
+operand, or a missing static rule rejects with `source_location_recursive_observation_operand`. Both failures are
+structured before generated execution and carry source/rule/origin plus the target or operand classification.
+
+The generated lowering calls one private `RecognitionTransactionRuntime::observe_static` seam. It invokes the
+ordinary child handler exactly once, preserves its result—including `false`, `0`, empty text, and `undef`—and
+binds the detached observation through a separate scalar reference. Direct calls create child entry state without
+an invented match; action-edge calls forward the selected parent match. The entered child still owns its handler
+family and seek/consume policy. Each child `note_match` replaces the prior candidate so only the terminal local
+match is projected; zero-regex coordinators project no selected match and count normal return as accepted.
+
+The existing private recognition authority is the only invocation authority. Frame entry now captures the active
+direct-parent id. A direct or mutual `(rule, cursor)` rejection consumes one fresh monotonic attempted-child id
+under the active parent without pushing a frame. Normal child completion publishes one ephemeral record only while
+an explicit recognition or observation scope is active; the observer consumes and discards it immediately. No
+second stack, completed-history log, source text, path, parser, authority, live frame, match object, or host
+reference escapes. Aborted and rejected observations bind before rethrowing the identical typed failure.
+
+One final-path consumer proves static diagnostics, ActionIR non-duplication, falsey payloads, failed selection,
+action-edge/direct entry, AND consume and default seek, terminal-match replacement, zero-regex acceptance,
+recursive detachment, parse-local id restart, abort identity, pre-entry direct/mutual rejection, and independently
+loaded generated source. Canonical CI requires, syntax-checks, and executes it with the existing Perl typed-source
+consumers. The recurring topology records the additional Perl path and command, while the still-pending
+`recursive_observation` rollout row records only `perl`. One admission-regression mutation advances typed-source
+governance from 70 to 71 without changing its 8-complete / 6-pending aggregate.
+
+`OBSERVE_RECOGNITION` performs two binding writes and therefore receives the existing rejected
+`binding_write` transaction effect. The live ActionIR inventory consequently becomes 129 current nodes; the
+recognition contract remains complete at 129 current plus four dedicated transaction nodes and 58 mutations. The
+authored observation remains grammar-owned/non-public rather than joining the common 246 helper-call inventory.
+There is no public helper/value, descriptor or generated schema version, semantic/MCP projection, CLI option,
+README claim, facade export, or non-Perl implementation in this admission.
+
 ## Consequences
 
 - Cursor control, capture, recursion, segmentation, and parser composition share one precise model instead of
@@ -541,6 +579,9 @@ behavior becomes current in this neutral leaf.
 - The `.14.4.1` amendment selects the future `observe_recognition(observation, call(Child))` surface and makes its
   detached carrier/state semantics executable in the neutral checker only. Backend implementation and public
   admission remain dependency-ordered under `.14.4.2-.8`.
+- The `.14.4.2` amendment admits that exact private surface in Perl, reusing the invocation authority and generated
+  handler families. It records only Perl on the still-pending rollout row and leaves public/non-Perl/schema/
+  semantic/MCP/CLI/README boundaries to `.14.4.3-.8`.
 
 ## Links
 

@@ -990,9 +990,9 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   Canonical CI always requires and syntax-checks the driver. Use
   `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1 bash tools/run_ci_local.sh` to opt into the same composition from the
   canonical gate.
-- **OUTPUT:** neutral governance reports 3 sources, 7 positions, 6 direct spans, 3 derived texts, 8+8 state
+- **OUTPUT:** neutral governance reports 3 sources, 7 positions, 6 direct spans, 3 derived texts, 8+8+33 state
   transitions, 6 recursive observations, 4 structural cases, 92 helper projections + 7 aliases + 2 internal ids,
-  31 diagnostics, 8 complete / 6 pending rollout, and 57 rejected drift mutations. The driver then reports each
+  33 diagnostics, 8 complete / 6 pending rollout, and 71 rejected drift mutations. The driver then reports each
   of the six ordered runtime routes and three support ledgers before its exact success marker.
 - **BOUNDARY:** this is orchestration over existing internal consumers, not a new public typed-value surface. The
   combined recurring/public no-drift row remains pending for `FUTURE-PARITY-BACKLOG.14.8`. Retrieve
@@ -1004,7 +1004,8 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   frame entry. Extend the existing monotonic recognition authority; never add a second invocation stack.
   Corrective leaf `.14.4.0.1` replaces the historical self-parent row with positive numeric attempted-child
   lineage and makes the checker reject self-parenting, reuse, invalid parent order, and represented cycles before
-  tuple comparison. Current neutral governance is 57 mutations; executable observation still starts at `.14.4.1`.
+  tuple comparison. Perl `.14.4.2` admits the exact observation surface through one dedicated private ActionIR
+  node, static policy, existing monotonic authority, and live/generated execution; other runtimes remain pending.
 
 ### 4.9.2 `tools/check_recognition_transaction_contract.py` — neutral transaction/progress oracle
 
@@ -1019,7 +1020,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py
   ```
 
-- **OUTPUT:** 132 ActionIR rows (128 live plus four dedicated), 246 live call rows, token 8 positive / 17 negative,
+- **OUTPUT:** 133 ActionIR rows (129 live plus four dedicated), 246 live call rows, token 8 positive / 17 negative,
   six fixed-point graphs, six mark cases, eight progress cases, fifteen diagnostics, and 58 rejected mutations;
   rollout is 9/9 complete. A separate public-sequence projection locks three book
   pages, 26 forbidden claims, and 45 mutations; the guide guard locks one document, 14 stale claims, and 18

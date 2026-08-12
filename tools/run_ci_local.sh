@@ -404,6 +404,7 @@ require_tracked_file t/punctuation_light_zero_arg_contract.t
 require_tracked_file t/complete_named_mark_contract.t
 require_tracked_file t/typed_source_location_values.t
 require_tracked_file t/typed_source_location_perl_contract.t
+require_tracked_file t/recursive_observation_perl_contract.t
 require_tracked_file t/recognition_transaction_perl_authority.t
 require_tracked_file t/recognition_transaction_perl_contract.t
 require_tracked_file rust/linkedspec-runtime/tests/recognition_transaction_contract.rs
@@ -442,6 +443,7 @@ require_tracked_file perl/LinkedSpec/GeneratedSource.pm
 require_tracked_file perl/LinkedSpec/RecognitionTransaction.pm
 require_tracked_file perl/LinkedSpec/RecognitionTransactionPolicy.pm
 require_tracked_file perl/LinkedSpec/RecognitionTransactionRuntime.pm
+require_tracked_file perl/LinkedSpec/RecursiveObservationPolicy.pm
 require_tracked_file perl/LinkedSpec/ActionIR/Scanner/RecognitionTransactionRules.pm
 require_tracked_file perl/LinkedSpec/SemanticIndex.pm
 require_tracked_file perl/LinkedSpec/SemanticSourceMap.pm
@@ -531,6 +533,7 @@ perl -c -Iperl t/punctuation_light_zero_arg_contract.t
 perl -c -Iperl t/complete_named_mark_contract.t
 perl -c -Iperl t/typed_source_location_values.t
 perl -c -Iperl t/typed_source_location_perl_contract.t
+perl -c -Iperl t/recursive_observation_perl_contract.t
 perl -c -Iperl t/recognition_transaction_perl_authority.t
 perl -c -Iperl t/recognition_transaction_perl_contract.t
 perl -c -Iperl t/rule_local_cursor_perl_contract.t
@@ -556,6 +559,7 @@ perl -c -Iperl perl/LinkedSpec/BindingRuntime.pm
 perl -c -Iperl perl/LinkedSpec/RecognitionTransaction.pm
 perl -c -Iperl perl/LinkedSpec/RecognitionTransactionPolicy.pm
 perl -c -Iperl perl/LinkedSpec/RecognitionTransactionRuntime.pm
+perl -c -Iperl perl/LinkedSpec/RecursiveObservationPolicy.pm
 perl -c -Iperl perl/LinkedSpec/ActionIR/Scanner/RecognitionTransactionRules.pm
 perl -c -Iperl perl/LinkedSpec/SemanticIndex.pm
 perl -c -Iperl perl/LinkedSpec/SemanticSourceMap.pm
@@ -618,8 +622,8 @@ bash tools/run_lua_project_data.sh puc lua/test/recognition_transaction_contract
 log "running exact Lua recognition transaction admission consumer on LuaJIT"
 bash tools/run_lua_project_data.sh luajit lua/test/recognition_transaction_contract_test.lua
 
-log "running exact Perl typed source-location value and projection admission consumers"
-PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t
+log "running exact Perl typed source-location value, projection, and recursive-observation admission consumers"
+PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t t/recursive_observation_perl_contract.t
 
 log "running exact Rust typed source-location value and projection admission consumer"
 cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract
