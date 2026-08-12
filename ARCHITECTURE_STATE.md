@@ -1,6 +1,6 @@
 # ARCHITECTURE STATE
 
-## Recursive source observation is privately admitted on all six runtimes
+## Recursive source observation is privately admitted and recurrent on all six runtimes
 
 `FUTURE-PARITY-BACKLOG.14.4.1` selected
 `value = observe_recognition(observation, call(Child))`; `.14.4.2-.6` admit it privately in Perl, Rust, Dart,
@@ -20,25 +20,29 @@ entry, caller-cursor capture before `I`, child-owned OR/default seek and AND con
 replacement, zero-regex absence, accepted-only exit, all four outcomes, fresh rejected-child ids without frame
 push, immediate detach, and unavailable history. Two static target/operand diagnostics plus ten reason-checked
 state corruptions and three surface/topology mutations advance typed-source governance from 57 to 70. Five backend
-admission regressions take the total to 75 while rollout stays 8 complete / 6 pending. Each runtime owns one private
+admission regressions take the total to 75. Each runtime owns one private
 dedicated node, fail-closed static/effect policy, and the existing monotonic invocation authority. Rust, Dart,
 Julia, and shared Lua additionally prove reconstructed, generated-plan, and emitted carriers; their internal
-byte/code-unit registers cross existing source authorities only at Unicode-scalar record projection. The pending
-recursive-observation row lists all six runtimes. No public helper/value, facade, descriptor/generated schema,
-result schema, semantic/MCP projection, CLI, or README behavior becomes current; recurrence `.14.4.7` follows only
-after clean shared-Lua landing.
+byte/code-unit registers cross existing source authorities only at Unicode-scalar record projection.
 
-The shared Lua final-path consumer passes 43 assertions independently on PUC Lua and LuaJIT; combined per-ABI
-transaction/observation/typed-source/repeated-action proof passes 246+43+240+175. Complete ordinary Lua, storage
-18/3, exact six-runtime typed-source, and five-backend repeated-action composition are GREEN. The rendered book
-passes 79 files / 14,548 KiB, Knowledge passes 826 facts / 6,897 question keys, and all eight doctrines pass.
-Recurrence and public closeout remain separately owned by `.14.4.7-.8`.
+Recurrence `.14.4.7` adds one repository-routed observation-only driver. It runs the neutral checker, the exact
+Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT consumers in order, then generated-source, capability, and language-
+coverage ledgers. Five sources form six routes because one shared Lua source executes on both ABIs. Eleven
+topology/storage regressions plus one recurrence regression promote only `recursive_observation`, advancing typed-
+source governance to 9 complete / 5 pending / 87 mutations. The combined final public no-drift row remains
+pending. No public helper/value, facade, descriptor/generated schema, result schema, semantic/MCP projection, CLI,
+README, parser, compiler, or runtime behavior becomes current.
 
-Definitive shared-Lua signoff passes repository containment and relocation, primary CLI 66/66 in both option
-environments, RAM 61%, canonical Phase 0 1,031/1,031 in 734 seconds, and the complete opt-in six-runtime typed-
-source matrix. That matrix independently passes Lua typed source 240 plus recursive observation 43 on PUC Lua
-and LuaJIT before exact `[ci] local CI gate passed` and exit 0. The first sandboxed attempt stopped only because
-the outer harness denied nested macOS `sandbox-exec`; the unchanged permission-authorized run is authoritative.
+The dedicated recurrence proof passes Perl/Rust/Dart 7 each, Julia 30, and the shared 43-assertion Lua consumer
+independently on PUC Lua and LuaJIT, followed by strict generated Rust 105/105, capability 80/0/0, and language
+coverage 246/105+1/122. The rendered book passes 79 files / 14,568 KiB, Knowledge passes 827 facts / 6,908
+question keys, and all eight doctrines pass. Public closeout remains separately owned by `.14.4.8` and the combined
+final `.14.8` row.
+
+Definitive recurrence signoff passes repository containment and relocation, primary CLI 66/66 in both option
+environments, RAM 62%, canonical Phase 0 1,031/1,031 in 723 seconds, and the complete opt-in observation matrix
+before exact `[ci] local CI gate passed` and exit 0. The first sandboxed attempt stopped only because the outer
+harness denied nested macOS `sandbox-exec`; the unchanged permission-authorized run is authoritative.
 
 ## Recursive source-observation lineage is fail-closed on the existing invocation authority
 

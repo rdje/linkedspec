@@ -17,10 +17,11 @@ answers:
   - "is Lua recursive observation admitted in canonical CI"
   - "does Lua recursive observation change the public facade"
 date: 2026-08-12
-status: current private shared-Lua admission on both ABIs; recurrence and public closeout pending
+status: current private shared-Lua admission on both ABIs; recurrence current and public closeout pending
 tags: [lua, puc-lua, luajit, source-location, recursion, observation, generated-source, admission, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.14.4.6 adds one Lua-5.1-compatible dedicated observe_recognition action node, compiler-wide static and transaction-effect validation, direct-parent and rejected-attempt identity in the existing RecognitionTransaction authority, pending-entry observation scopes, ephemeral runtime completions, detached typed record construction, and action-edge single dispatch. lua/test/recursive_observation_contract_test.lua passes 43 assertions independently on PUC Lua and LuaJIT across native, reconstructed, generated-plan, and independently loaded emitted-source execution, including captured bind-before-error records for direct rejection, mutual rejection, and abort. A multibyte-input case proves zero-based UTF-8-byte registers become Unicode-scalar positions only through source_location projection. The typed-source checker records Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT on the still-pending recursive_observation row at 8 complete / 6 pending / 75 mutations. Recognition remains 129 current + four dedicated transaction nodes / 246 calls / 58 mutations because observation closes through the existing binding_write effect rather than widening its public inventory."
-reverify: "bash tools/run_lua_project_data.sh puc lua/test/recursive_observation_contract_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/recursive_observation_contract_test.lua && bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py && bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && perl tools/check_language_capability_coverage.pl"
+evidence_update_2026_08_12_recurrence: "The dedicated .14.4.7 gate now runs this same source once on PUC Lua and once on LuaJIT after the four other backend consumers, then runs all three support ledgers. Recurrence is complete at typed-source 9/5/87 while public closeout stays pending; no Lua implementation or facade changes."
+reverify: "bash tools/check_recursive_observation_six_runtime.sh && bash tools/run_lua_project_data.sh puc lua/test/recursive_observation_contract_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/recursive_observation_contract_test.lua && bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && perl tools/check_language_capability_coverage.pl"
 ---
 
 Shared Lua recognizes exactly `value = observe_recognition(observation, call(Child))` as one dedicated private
@@ -48,8 +49,9 @@ emitted-source execution converge on the same engine. One Lua-5.1-compatible con
 independently on PUC Lua and LuaJIT.
 
 The surface remains grammar-owned and private: it adds no facade export, public helper or typed value, schema
-field/version, semantic/MCP projection, CLI option, or README claim. The six-runtime recurring composition and
-public closeout remain separately owned by `.14.4.7-.8`.
+field/version, semantic/MCP projection, CLI option, or README claim. The exact six-runtime recurring composition
+is now current through `.14.4.7`; public closeout remains separately owned by `.14.4.8` and the final combined
+`.14.8` row.
 
 Definitive signoff passes all eight doctrines, repository containment/relocation, primary CLI 66/66 in both option
 environments, RAM 61%, Phase 0 1,031/1,031 in 734 seconds, and the complete six-runtime typed-source opt-in. The
@@ -62,6 +64,7 @@ exact local-CI success marker and exit 0. A sandboxed attempt stopped only at th
 - Neutral/audit authority: [[recursive-source-observation-audit]].
 - Julia predecessor: [[julia-recursive-observation-admission]].
 - Typed-source rollout: [[typed-source-location-runtime-rollout-plan]].
+- Recurring gate: [[recursive-observation-recurring-gate]].
 - Recognition authority: [[lua-recognition-transaction-admission]].
 - Decision: ADR `0056`, section 26.
 - Task owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.4.6`.

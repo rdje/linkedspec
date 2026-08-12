@@ -992,7 +992,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   canonical gate.
 - **OUTPUT:** neutral governance reports 3 sources, 7 positions, 6 direct spans, 3 derived texts, 8+8+33 state
   transitions, 6 recursive observations, 4 structural cases, 92 helper projections + 7 aliases + 2 internal ids,
-  33 diagnostics, 8 complete / 6 pending rollout, and 75 rejected drift mutations. The driver then reports each
+  33 diagnostics, 9 complete / 5 pending rollout, and 87 rejected drift mutations. The driver then reports each
   of the six ordered runtime routes and three support ledgers before its exact success marker.
 - **BOUNDARY:** this is orchestration over existing internal consumers, not a new public typed-value surface. The
   combined recurring/public no-drift row remains pending for `FUTURE-PARITY-BACKLOG.14.8`. Retrieve
@@ -1007,7 +1007,24 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   tuple comparison. Perl `.14.4.2`, Rust `.14.4.3`, Dart `.14.4.4`, Julia `.14.4.5`, and shared Lua `.14.4.6`
   admit the exact observation surface on all six runtimes through one dedicated private node per backend, static
   policy, the existing monotonic authority, and their governed live/reconstructed/generated/emitted carriers.
-  The shared Lua consumer must execute once on PUC Lua and once on LuaJIT; recurrence remains pending.
+  The shared Lua consumer executes once on PUC Lua and once on LuaJIT; dedicated recurrence is current.
+
+### 4.9.1.1 `tools/check_recursive_observation_six_runtime.sh` — exact recurring observation proof
+
+- **WHAT:** one repository-routed fail-fast composition of the neutral typed-source checker; exact Perl, Rust,
+  Dart, Julia, PUC Lua, and LuaJIT recursive-observation consumers; and the generated-source, capability, and
+  language-coverage ledgers.
+- **WHEN:** changing observation sources, runtime route mapping or order, commands, support ledgers, storage
+  routing, recurrence status, or canonical registration.
+- **HOW:** run `bash tools/check_recursive_observation_six_runtime.sh`. Canonical CI always inventories,
+  machine-path-audits, and syntax-checks the driver; use
+  `LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1 bash tools/run_ci_local.sh` for its all-toolchain route.
+- **OUTPUT:** Perl 7, Rust 7, Dart 7, Julia 30, PUC Lua 43, and LuaJIT 43 pass before the three support ledgers and
+  exact success marker. Neutral truth is 9 complete / 5 pending / 87 mutations.
+- **BOUNDARY:** five backend sources form six routes because one shared Lua source executes independently on both
+  ABIs. Twelve regressions lock topology/storage and recurrence-only promotion. Public no-drift remains pending;
+  no parser, runtime, facade, schema, semantic/MCP, CLI, README, or storage-root behavior changes. Retrieve
+  [[recursive-observation-recurring-gate]] before changing this proof.
 
 ### 4.9.2 `tools/check_recognition_transaction_contract.py` — neutral transaction/progress oracle
 

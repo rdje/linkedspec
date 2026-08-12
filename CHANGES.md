@@ -10,6 +10,23 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-12 — FUTURE-PARITY-BACKLOG.14.4.7 — recur recursive observation
+
+- Added `tools/check_recursive_observation_six_runtime.sh` as one project-data-routed fail-fast proof over the
+  neutral checker, exact Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT observation consumers, then generated-source,
+  capability, and language-coverage ledgers. Five sources form six routes because shared Lua runs once per ABI.
+- Extended the neutral contract/checker with exact source/route/command/order/multiplicity/support/storage/CI
+  topology. Eleven topology/storage mutations plus one recurrence regression advance governance from 75 to 87.
+- Promoted only `recursive_observation`, producing 9 complete / 5 pending. The combined final public no-drift row
+  remains pending; no parser, compiler, runtime, facade, schema, semantic/MCP, CLI, README, or storage root changed.
+- Canonical CI now inventories, machine-path-audits, syntax-checks, and optionally runs the driver through
+  `LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1`; the workflow-routing harness proves outside-CWD rooted storage.
+- Focused proof passes Perl 7, Rust 7, Dart 7, Julia 30, PUC Lua 43, LuaJIT 43, all three support ledgers, storage
+  locality across 1,886 governed files, outside-CWD routing, and the broader six-runtime typed-source composition.
+- Definitive canonical proof passes all eight doctrines, repository containment/relocation, CLI 66/66 in both
+  option environments, RAM 62%, Phase 0 1,031/1,031 in 723 seconds, and the complete recurrence matrix through
+  exact `[ci] local CI gate passed`; the prior status-71 stop was solely the outer harness denying nested sandboxing.
+
 ## 2026-08-12 — FUTURE-PARITY-BACKLOG.14.4.6 — admit Lua recursive observation
 
 - Added the exact private `observe_recognition(observation, call(Child))` form to shared Lua as one dedicated,

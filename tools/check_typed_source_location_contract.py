@@ -47,6 +47,10 @@ LUA_OBSERVATION_CONSUMER_PATH = (
 )
 LUA_ORDINARY_DRIVER_PATH = ROOT / "tools" / "run_lua_local.sh"
 RECURRING_DRIVER_PATH = ROOT / "tools" / "check_typed_source_location_six_runtime.sh"
+RECURSIVE_OBSERVATION_RECURRING_DRIVER_PATH = (
+    ROOT / "tools" / "check_recursive_observation_six_runtime.sh"
+)
+PROJECT_DATA_WORKFLOW_ROUTING_PATH = ROOT / "tools" / "test_project_data_workflow_routing.sh"
 
 EXPECTED_COUNTS = {
     "sources": 3,
@@ -65,7 +69,9 @@ EXPECTED_COUNTS = {
     "rollout_legs": 14,
     "recurring_source_groups": 5,
     "recurring_runtime_routes": 6,
-    "mutations": 75,
+    "recursive_observation_recurring_source_groups": 5,
+    "recursive_observation_recurring_runtime_routes": 6,
+    "mutations": 87,
 }
 
 POLICY = {
@@ -82,7 +88,7 @@ POLICY = {
     "progress": "repetition, recursion, and staged queues must advance the cursor or prove a well-founded decreasing measure",
     "dispatch_authority": "a span conveys data and provenance only; source, registry, capability, and policy authority remain independently required",
     "source_spelling": "observe_recognition(observation, call(Child)) is current in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; Position and Span remain private architectural values projected as detached records",
-    "implementation_boundary": "the recursive-observation spelling, dedicated private node, detached carrier, and parser behavior are admitted in all six runtimes; recurring composition and public no-drift remain pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted",
+    "implementation_boundary": "the recursive-observation spelling, dedicated private node, detached carrier, parser behavior, and exact six-runtime recurring composition are current; public no-drift remains pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted",
 }
 
 CANONICAL_EXECUTION = {
@@ -182,6 +188,85 @@ RECURRING_GATE = {
     "local_ci": {
         "driver": "tools/run_ci_local.sh",
         "switch": "LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX",
+    },
+}
+
+RECURSIVE_OBSERVATION_RECURRING_GATE = {
+    "driver": "tools/check_recursive_observation_six_runtime.sh",
+    "source_schema": {
+        "fields": ["backend", "paths"],
+        "policy": "five admitted recursive-observation source groups are immutable; one shared Lua source executes independently on both ABIs",
+    },
+    "consumer_sources": [
+        {"backend": "perl", "paths": ["t/recursive_observation_perl_contract.t"]},
+        {
+            "backend": "rust",
+            "paths": [
+                "rust/linkedspec-runtime/tests/recursive_observation_contract.rs"
+            ],
+        },
+        {
+            "backend": "dart",
+            "paths": ["dart/test/recursive_observation_contract_test.dart"],
+        },
+        {
+            "backend": "julia",
+            "paths": ["julia/test/recursive_observation_contract_test.jl"],
+        },
+        {
+            "backend": "lua",
+            "paths": ["lua/test/recursive_observation_contract_test.lua"],
+        },
+    ],
+    "route_schema": {
+        "fields": ["runtime", "source_backend", "command"],
+        "policy": "neutral runs first; Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT then run exactly once in order",
+    },
+    "runtime_routes": [
+        {
+            "runtime": "perl",
+            "source_backend": "perl",
+            "command": "PERL5LIB= prove -Iperl t/recursive_observation_perl_contract.t",
+        },
+        {
+            "runtime": "rust",
+            "source_backend": "rust",
+            "command": '"$CARGO_CMD" test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test recursive_observation_contract',
+        },
+        {
+            "runtime": "dart",
+            "source_backend": "dart",
+            "command": "cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/recursive_observation_contract_test.dart",
+        },
+        {
+            "runtime": "julia",
+            "source_backend": "julia",
+            "command": "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/recursive_observation_contract_test.jl\")'",
+        },
+        {
+            "runtime": "puc_lua",
+            "source_backend": "lua",
+            "command": "bash tools/run_lua_project_data.sh puc lua/test/recursive_observation_contract_test.lua",
+        },
+        {
+            "runtime": "luajit",
+            "source_backend": "lua",
+            "command": "bash tools/run_lua_project_data.sh luajit lua/test/recursive_observation_contract_test.lua",
+        },
+    ],
+    "support_checks": [
+        "perl tools/check_generated_source_contract.pl",
+        "perl tools/check_capability_conformance.pl",
+        "perl tools/check_language_capability_coverage.pl",
+    ],
+    "storage": {
+        "initializer": "tools/project_data_env.sh",
+        "managed_entrypoint": "tools/check_recursive_observation_six_runtime.sh",
+        "policy": "all temporary, cache, build, native, and test data stays under repository-derived storage",
+    },
+    "local_ci": {
+        "driver": "tools/run_ci_local.sh",
+        "switch": "LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX",
     },
 }
 
@@ -353,7 +438,7 @@ RECURSIVE_OBSERVATION_SURFACE = {
     "operand": "the second operand is exactly one unevaluated statically named call(Rule)",
     "return": "the expression returns the ordinary child payload unchanged; observation data is never mixed with payload truthiness",
     "terminal": "accepted and failed calls bind before returning; aborted and rejected calls finalize the detached record before propagating the unchanged typed failure",
-    "availability": "private syntax is current in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; recurring and public support admission remain pending, and no facade, descriptor/schema, semantic/MCP, or CLI surface is current",
+    "availability": "private syntax and exact recurring proof are current in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; public support admission remains pending, and no facade, descriptor/schema, semantic/MCP, or CLI surface is current",
 }
 
 RECURSIVE_OBSERVATION_CARRIER = {
@@ -620,7 +705,7 @@ ROLLOUT = [
     ("transaction_safety", "pending", "FUTURE-PARITY-BACKLOG.14.3", []),
     (
         "recursive_observation",
-        "pending",
+        "complete",
         "FUTURE-PARITY-BACKLOG.14.4",
         ["perl", "rust", "dart", "julia", "puc_lua", "luajit"],
     ),
@@ -1165,6 +1250,8 @@ def apply_recursive_observation_transition(
 
 
 def validate_contract(contract: dict[str, Any], *, check_registration: bool = True) -> None:
+    if "recursive_observation_recurring_gate" not in contract:
+        fail("recursive-observation recurring gate is missing")
     top_fields = [
         "format",
         "contract_id",
@@ -1189,6 +1276,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         "diagnostic_schema",
         "diagnostics",
         "recurring_gate",
+        "recursive_observation_recurring_gate",
         "rollout",
     ]
     require_fields(contract, top_fields, "contract")
@@ -1198,7 +1286,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         fail("contract id drifted")
     if contract["task_owner"] != "FUTURE-PARITY-BACKLOG.14.1.1":
         fail("task owner drifted")
-    if contract["status"] != "neutral_contract_with_six_runtime_recursive_observation":
+    if contract["status"] != "neutral_contract_with_recursive_observation_recurrence":
         fail("typed source-location status drifted")
     if contract["expected_counts"] != EXPECTED_COUNTS:
         fail("expected counts drifted")
@@ -1796,6 +1884,25 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
     if recurring != RECURRING_GATE:
         fail("recurring gate source, route, command, support, or canonical topology drifted")
 
+    recursive_observation_recurring = require_fields(
+        contract["recursive_observation_recurring_gate"],
+        [
+            "driver",
+            "source_schema",
+            "consumer_sources",
+            "route_schema",
+            "runtime_routes",
+            "support_checks",
+            "storage",
+            "local_ci",
+        ],
+        "recursive-observation recurring gate",
+    )
+    if recursive_observation_recurring != RECURSIVE_OBSERVATION_RECURRING_GATE:
+        fail(
+            "recursive-observation recurring source, route, command, support, storage, or canonical topology drifted"
+        )
+
     rollout = require_list(contract["rollout"], "rollout", EXPECTED_COUNTS["rollout_legs"])
     observed_rollout: list[tuple[Any, ...]] = []
     for leg in rollout:
@@ -1823,6 +1930,12 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         "rollout_legs": len(rollout),
         "recurring_source_groups": len(recurring["consumer_sources"]),
         "recurring_runtime_routes": len(recurring["runtime_routes"]),
+        "recursive_observation_recurring_source_groups": len(
+            recursive_observation_recurring["consumer_sources"]
+        ),
+        "recursive_observation_recurring_runtime_routes": len(
+            recursive_observation_recurring["runtime_routes"]
+        ),
         "mutations": EXPECTED_COUNTS["mutations"],
     }
     if actual_counts != EXPECTED_COUNTS:
@@ -1847,6 +1960,8 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             LUA_OBSERVATION_CONSUMER_PATH,
             LUA_ORDINARY_DRIVER_PATH,
             RECURRING_DRIVER_PATH,
+            RECURSIVE_OBSERVATION_RECURRING_DRIVER_PATH,
+            PROJECT_DATA_WORKFLOW_ROUTING_PATH,
         ):
             if not path.is_file():
                 fail(f"canonical contract/checker/runner input is missing: {path.relative_to(ROOT)}")
@@ -1915,6 +2030,87 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
                     "recurring canonical registration marker count drifted: "
                     f"{marker} expected {expected_count}"
                 )
+        observation_recurring_driver_text = (
+            RECURSIVE_OBSERVATION_RECURRING_DRIVER_PATH.read_text(encoding="utf-8")
+        )
+        observation_storage = RECURSIVE_OBSERVATION_RECURRING_GATE["storage"]
+        if observation_storage != {
+            "initializer": "tools/project_data_env.sh",
+            "managed_entrypoint": "tools/check_recursive_observation_six_runtime.sh",
+            "policy": "all temporary, cache, build, native, and test data stays under repository-derived storage",
+        }:
+            fail("recursive-observation recurring storage topology drifted")
+        for marker in (
+            'source "$REPO_ROOT/tools/project_data_env.sh"',
+            'linkedspec_project_data_enter_run "$REPO_ROOT/tools/check_recursive_observation_six_runtime.sh" "$@"',
+        ):
+            if observation_recurring_driver_text.count(marker) != 1:
+                fail(
+                    "recursive-observation recurring driver is not repository-routed: "
+                    f"{marker}"
+                )
+        observation_markers = [
+            CANONICAL_EXECUTION["invocation"],
+            *[
+                route["command"]
+                for route in RECURSIVE_OBSERVATION_RECURRING_GATE["runtime_routes"]
+            ],
+            *RECURSIVE_OBSERVATION_RECURRING_GATE["support_checks"],
+        ]
+        observation_positions: list[int] = []
+        for marker in observation_markers:
+            if observation_recurring_driver_text.count(marker) != 1:
+                fail(
+                    "recursive-observation recurring driver marker must appear exactly once: "
+                    f"{marker}"
+                )
+            observation_positions.append(observation_recurring_driver_text.index(marker))
+        if observation_positions != sorted(observation_positions):
+            fail("recursive-observation recurring neutral/runtime/support order drifted")
+        observation_sources = RECURSIVE_OBSERVATION_RECURRING_GATE["consumer_sources"]
+        observation_source_paths = [
+            relative_path
+            for source in observation_sources
+            for relative_path in source["paths"]
+        ]
+        if len(observation_source_paths) != len(set(observation_source_paths)):
+            fail("recursive-observation recurring consumer source duplication drifted")
+        for relative_path in observation_source_paths:
+            if not (ROOT / relative_path).is_file():
+                fail(
+                    "recursive-observation recurring consumer source is missing: "
+                    f"{relative_path}"
+                )
+        observation_route_backends = {
+            row["source_backend"]
+            for row in RECURSIVE_OBSERVATION_RECURRING_GATE["runtime_routes"]
+        }
+        observation_source_backends = {row["backend"] for row in observation_sources}
+        if observation_route_backends != observation_source_backends:
+            fail("recursive-observation recurring route/source binding drifted")
+        observation_ci = RECURSIVE_OBSERVATION_RECURRING_GATE["local_ci"]
+        if observation_ci["driver"] != CI_PATH.relative_to(ROOT).as_posix():
+            fail("recursive-observation recurring canonical driver identity drifted")
+        observation_ci_markers = (
+            f"require_tracked_file {RECURSIVE_OBSERVATION_RECURRING_GATE['driver']}",
+            f'if [[ "${{{observation_ci["switch"]}:-0}}" == "1" ]]; then',
+            f'bash "$REPO_ROOT/{RECURSIVE_OBSERVATION_RECURRING_GATE["driver"]}"',
+        )
+        for marker, expected_count in zip(
+            observation_ci_markers, (2, 1, 1), strict=True
+        ):
+            if ci_text.count(marker) != expected_count:
+                fail(
+                    "recursive-observation recurring canonical registration marker count drifted: "
+                    f"{marker} expected {expected_count}"
+                )
+        workflow_routing_text = PROJECT_DATA_WORKFLOW_ROUTING_PATH.read_text(
+            encoding="utf-8"
+        )
+        if workflow_routing_text.count(
+            "tools/check_recursive_observation_six_runtime.sh"
+        ) != 1:
+            fail("recursive-observation recurring project-data routing registration drifted")
         rust_consumer_text = RUST_CONSUMER_PATH.read_text(encoding="utf-8")
         for dormant_marker in (
             "linkedspec_typed_source_red",
@@ -2017,6 +2213,10 @@ def mutation_checks(contract: dict[str, Any]) -> int:
 
     def swap_recurring_routes(candidate: dict[str, Any]) -> None:
         routes = candidate["recurring_gate"]["runtime_routes"]
+        routes[0], routes[1] = routes[1], routes[0]
+
+    def swap_recursive_observation_recurring_routes(candidate: dict[str, Any]) -> None:
+        routes = candidate["recursive_observation_recurring_gate"]["runtime_routes"]
         routes[0], routes[1] = routes[1], routes[0]
 
     def recursive_self_parent(candidate: dict[str, Any]) -> None:
@@ -2204,6 +2404,74 @@ def mutation_checks(contract: dict[str, Any]) -> int:
             lambda c: c["rollout"][13].__setitem__("status", "complete"),
         ),
         (
+            "recursive-observation recurring source group omitted",
+            lambda c: c["recursive_observation_recurring_gate"][
+                "consumer_sources"
+            ].pop(),
+        ),
+        (
+            "recursive-observation recurring source path omitted",
+            lambda c: c["recursive_observation_recurring_gate"]["consumer_sources"][
+                0
+            ]["paths"].pop(),
+        ),
+        (
+            "recursive-observation recurring runtime route omitted",
+            lambda c: c["recursive_observation_recurring_gate"][
+                "runtime_routes"
+            ].pop(),
+        ),
+        (
+            "recursive-observation recurring runtime route order",
+            swap_recursive_observation_recurring_routes,
+        ),
+        (
+            "recursive-observation recurring runtime route duplicated",
+            lambda c: c["recursive_observation_recurring_gate"][
+                "runtime_routes"
+            ].append(
+                copy.deepcopy(
+                    c["recursive_observation_recurring_gate"]["runtime_routes"][0]
+                )
+            ),
+        ),
+        (
+            "recursive-observation recurring runtime command",
+            lambda c: c["recursive_observation_recurring_gate"]["runtime_routes"][
+                1
+            ].__setitem__("command", "cargo test --wrong"),
+        ),
+        (
+            "recursive-observation recurring runtime source binding",
+            lambda c: c["recursive_observation_recurring_gate"]["runtime_routes"][
+                5
+            ].__setitem__("source_backend", "rust"),
+        ),
+        (
+            "recursive-observation recurring support check omitted",
+            lambda c: c["recursive_observation_recurring_gate"][
+                "support_checks"
+            ].pop(),
+        ),
+        (
+            "recursive-observation recurring storage initializer",
+            lambda c: c["recursive_observation_recurring_gate"]["storage"].__setitem__(
+                "initializer", "/tmp/project_data_env.sh"
+            ),
+        ),
+        (
+            "recursive-observation recurring driver",
+            lambda c: c["recursive_observation_recurring_gate"].__setitem__(
+                "driver", "tools/missing.sh"
+            ),
+        ),
+        (
+            "recursive-observation recurring canonical switch",
+            lambda c: c["recursive_observation_recurring_gate"]["local_ci"].__setitem__(
+                "switch", "LINKEDSPEC_RUN_WRONG_MATRIX"
+            ),
+        ),
+        (
             "recursive observation Perl admission omitted",
             lambda c: c["rollout"][9]["runtimes"].pop(),
         ),
@@ -2313,6 +2581,10 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         (
             "Lua dual-ABI runtime admission regressed to pending",
             lambda c: c["rollout"][7].__setitem__("status", "pending"),
+        ),
+        (
+            "recursive-observation recurrence regressed to pending",
+            lambda c: c["rollout"][9].__setitem__("status", "pending"),
         ),
     ]
     if (

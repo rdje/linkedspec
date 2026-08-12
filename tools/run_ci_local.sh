@@ -108,6 +108,12 @@ check_no_untracked_ci_inputs() {
   found=1
  fi
 
+ status_line=$(git status --short --untracked-files=all -- tools/check_recursive_observation_six_runtime.sh)
+ if [[ "$status_line" == '?? '* ]]; then
+  printf '[ci] ERROR: untracked CI input: %s\n' "${status_line#?? }" >&2
+  found=1
+ fi
+
  status_line=$(git status --short --untracked-files=all -- tools/check_recognition_transaction_six_runtime.sh)
  if [[ "$status_line" == '?? '* ]]; then
   printf '[ci] ERROR: untracked CI input: %s\n' "${status_line#?? }" >&2
@@ -239,6 +245,7 @@ require_tracked_file tools/check_rule_local_cursor_contract.py
 require_tracked_file tools/check_rule_local_cursor_five_backend.sh
 require_tracked_file tools/check_typed_source_location_contract.py
 require_tracked_file tools/check_typed_source_location_six_runtime.sh
+require_tracked_file tools/check_recursive_observation_six_runtime.sh
 require_tracked_file tools/check_recognition_transaction_six_runtime.sh
 require_tracked_file tools/check_semantic_introspection_contract.py
 require_tracked_file tools/check_semantic_introspection_six_runtime.sh
@@ -491,6 +498,9 @@ $mcp_driver_matches"
 typed_source_driver_matches=$(grep -nE '/(Users|home)/[^[:space:]]*|[[:alpha:]]:\\\\' tools/check_typed_source_location_six_runtime.sh || true)
 [[ -z "$typed_source_driver_matches" ]] || fail "machine-specific absolute path(s) in typed source-location recurring driver:
 $typed_source_driver_matches"
+recursive_observation_driver_matches=$(grep -nE '/(Users|home)/[^[:space:]]*|[[:alpha:]]:\\\\' tools/check_recursive_observation_six_runtime.sh || true)
+[[ -z "$recursive_observation_driver_matches" ]] || fail "machine-specific absolute path(s) in recursive-observation recurring driver:
+$recursive_observation_driver_matches"
 recognition_driver_matches=$(grep -nE '/(Users|home)/[^[:space:]]*|[[:alpha:]]:\\\\' tools/check_recognition_transaction_six_runtime.sh || true)
 [[ -z "$recognition_driver_matches" ]] || fail "machine-specific absolute path(s) in recognition-transaction recurring driver:
 $recognition_driver_matches"
@@ -513,6 +523,7 @@ bash -n tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh \
  tools/check_semantic_introspection_six_runtime.sh \
  tools/check_mcp_six_runtime.sh \
  tools/check_typed_source_location_six_runtime.sh \
+ tools/check_recursive_observation_six_runtime.sh \
  tools/check_recognition_transaction_six_runtime.sh \
  scripts/check_memory_commit_pointer.sh scripts/check_readme_stability.sh \
  tools/test_memory_commit_pointer.sh \
@@ -945,6 +956,14 @@ if [[ "${LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX:-0}" == "1" ]]; then
  bash "$REPO_ROOT/tools/check_typed_source_location_six_runtime.sh"
 else
  log "skipping optional six-runtime typed source-location matrix (set LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1 when all backend toolchains are available)"
+fi
+
+if [[ "${LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX:-0}" == "1" ]]; then
+ log "running optional six-runtime recursive-observation matrix (LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1)"
+ require_tracked_file tools/check_recursive_observation_six_runtime.sh
+ bash "$REPO_ROOT/tools/check_recursive_observation_six_runtime.sh"
+else
+ log "skipping optional six-runtime recursive-observation matrix (set LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1 when all backend toolchains are available)"
 fi
 
 if [[ "${LINKEDSPEC_RUN_RECOGNITION_TRANSACTION_MATRIX:-0}" == "1" ]]; then

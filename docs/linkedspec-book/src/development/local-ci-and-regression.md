@@ -124,7 +124,11 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 
 The check is unconditional. It independently derives Unicode-scalar, line/column, and UTF-8 coordinates;
 materializes direct and derived spans; executes invocation and bounded-transaction state transitions; validates
-recursive and zero/one/two-regex structural cases; and rejects all 75 registered mutations.
+recursive and zero/one/two-regex structural cases; and rejects all 87 registered mutations.
+
+In the test-first workflow used here, **RED** means writing the exact contract or consumer first and proving that
+it fails for the intended missing capability. **GREEN** means implementing the smallest owned change that makes
+that same proof pass. A RED result is therefore planned evidence, not a claim that the committed project is broken.
 
 The `.14.4.0` audit found one contradiction in that baseline: `direct_nonprogress` used the same textual identity
 for invocation and parent. Corrective `.14.4.0.1` changes all six observation identities to positive unique
@@ -184,11 +188,26 @@ bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contrac
 bash tools/run_lua_project_data.sh luajit lua/test/recursive_observation_contract_test.lua
 ```
 
-Its current rollout result is 8 complete / 6 pending with 75 registered mutations. Passing this gate proves the
+Its current rollout result is 9 complete / 5 pending with 87 registered mutations. Passing this gate proves the
 neutral contract, both completed public-structure rows, and all six internal runtime targets across their exact
 value/helper carriers. Rust and Lua retain UTF-8-byte registers, Dart retains UTF-16 code-unit registers, and Julia
 retains zero-based UTF-8 code-unit registers while each converts at its immutable typed boundary. This does not
 claim public authored `Position`/`Span` values or transaction syntax or behavior.
+
+The dedicated recursive-observation recurrence runs only the exact observation consumers and support ledgers:
+
+```bash
+bash tools/check_recursive_observation_six_runtime.sh
+```
+
+It executes the neutral checker, Perl 7, Rust 7, Dart 7, Julia 30, PUC Lua 43, and LuaJIT 43 in fail-fast order,
+then generated-source, capability, and language coverage. Five source groups form six runtime routes because the
+shared Lua source runs once per ABI. The driver enters repository-derived project storage; canonical CI requires,
+path-audits, and syntax-checks it, while `LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1` opts into execution.
+Twelve regressions lock omission, order, multiplicity, commands, source binding, support ledgers, storage,
+workflow routing, CI registration, and recurrence-only promotion. Definitive local CI passes repository
+containment and relocation, CLI 66/66 in both option environments, RAM 62%, Phase 0 1,031/1,031 in 723 seconds,
+and this complete matrix through its exact success marker. Public no-drift remains pending.
 
 Dart's admitted consumer covers its internal value core and all 92+7 helper projections across native,
 reconstructed, generated-plan, and freshly emitted execution. The independent rollout checker requires its

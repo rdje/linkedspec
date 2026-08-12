@@ -509,79 +509,25 @@ behavior becomes current in this neutral leaf.
 
 ### 22. Admit the exact recursive-observation boundary privately in Perl
 
-`FUTURE-PARITY-BACKLOG.14.4.2` admits the selected surface only in Perl. The action scanner recognizes one
-dedicated `OBSERVE_RECOGNITION` event before generic assignment and nested-call scans. Its exact args retain the
-result slot, bare observation target, unevaluated operand, and static callee. A separate compiler policy rejects a
-non-bare or missing target with `source_location_recursive_observation_target`; wrong arity, a dynamic/non-call
-operand, or a missing static rule rejects with `source_location_recursive_observation_operand`. Both failures are
-structured before generated execution and carry source/rule/origin plus the target or operand classification.
-
-The generated lowering calls one private `RecognitionTransactionRuntime::observe_static` seam. It invokes the
-ordinary child handler exactly once, preserves its result—including `false`, `0`, empty text, and `undef`—and
-binds the detached observation through a separate scalar reference. Direct calls create child entry state without
-an invented match; action-edge calls forward the selected parent match. The entered child still owns its handler
-family and seek/consume policy. Each child `note_match` replaces the prior candidate so only the terminal local
-match is projected; zero-regex coordinators project no selected match and count normal return as accepted.
-
-The existing private recognition authority is the only invocation authority. Frame entry now captures the active
-direct-parent id. A direct or mutual `(rule, cursor)` rejection consumes one fresh monotonic attempted-child id
-under the active parent without pushing a frame. Normal child completion publishes one ephemeral record only while
-an explicit recognition or observation scope is active; the observer consumes and discards it immediately. No
-second stack, completed-history log, source text, path, parser, authority, live frame, match object, or host
-reference escapes. Aborted and rejected observations bind before rethrowing the identical typed failure.
-
-One final-path consumer proves static diagnostics, ActionIR non-duplication, falsey payloads, failed selection,
-action-edge/direct entry, AND consume and default seek, terminal-match replacement, zero-regex acceptance,
-recursive detachment, parse-local id restart, abort identity, pre-entry direct/mutual rejection, and independently
-loaded generated source. Canonical CI requires, syntax-checks, and executes it with the existing Perl typed-source
-consumers. The recurring topology records the additional Perl path and command, while the still-pending
-`recursive_observation` rollout row records only `perl`. One admission-regression mutation advances typed-source
-governance from 70 to 71 without changing its 8-complete / 6-pending aggregate.
-
-`OBSERVE_RECOGNITION` performs two binding writes and therefore receives the existing rejected
-`binding_write` transaction effect. The live ActionIR inventory consequently becomes 129 current nodes; the
-recognition contract remains complete at 129 current plus four dedicated transaction nodes and 58 mutations. The
-authored observation remains grammar-owned/non-public rather than joining the common 246 helper-call inventory.
-There is no public helper/value, descriptor or generated schema version, semantic/MCP projection, CLI option,
-README claim, facade export, or non-Perl implementation in this admission.
+- `.14.4.2` adds one dedicated `OBSERVE_RECOGNITION` event, exact bare-target/static-call diagnostics, and recursive
+  `binding_write` effect closure before execution.
+- One private runtime seam invokes the ordinary child once, preserves falsey payloads and child-owned cursor/match
+  policy, and binds the detached record separately across live and independently loaded generated execution.
+- The existing authority supplies direct-parent and rejected-attempt identity; scoped ephemeral completion binds
+  before typed failure propagation and retains neither a second stack nor history.
+- One seven-group canonical consumer locks static, payload, cursor, outcome, detachment, recursion, and generated
+  behavior. The admission advanced only Perl and governance from 70 to 71 without a public surface.
 
 ### 23. Admit the same private recursive-observation boundary in Rust
 
-`FUTURE-PARITY-BACKLOG.14.4.3` admits the selected surface in Rust through one dedicated serialized
-`ObserveRecognition { target, rule }` expression. The parser accepts only one bare target and one unevaluated
-static `call(Rule)` operand. Missing or dynamic targets/operands and missing rules fail closed with the two neutral
-source-location diagnostics. Compiler-wide expression traversal also closes the existing recognition-transaction
-effect graph through ordinary rule calls and user-function calls: any attempted rule that reaches an observation
-binding write is rejected as `recognition_effect_forbidden:binding_write` before execution.
-
-The ordinary engine invokes the child exactly once and returns its payload unchanged, including false. The same
-path is used after serialized compiled-spec reconstruction and by the generated-plan executor. The source emitter
-selects its effective-engine route for the dedicated node, so independently compiled emitted parsers execute the
-same private runtime rather than a divergent template. Action-edge dispatch recognizes the observation as the
-child invocation itself and avoids predispatching the same child a second time. The child retains its own family,
-entry-match, seek/consume, local-match, cursor, and mark policy.
-
-Rust's existing `RecognitionTransactionAuthority` remains the sole invocation authority. Frame entry captures the
-active parent id; an observed recursion rejection reserves one fresh attempted-child id without pushing a frame.
-An observation scope is armed only until that one child entry succeeds; it disarms at entry so an ordinary nested
-self-call inside the child remains governed by the pre-existing recursion cutoff rather than being misclassified
-as the observed edge. A nested explicit observation creates its own independently armed top scope.
-Normal, failed, aborted, and rejected completions are published only while an explicit observation boundary is
-active, consumed at that boundary, and projected as the exact recursively detached nine-field harray. The runtime
-keeps its UTF-8-byte cursor/match registers; entry, selected match, and accepted exit cross the existing typed
-source authority to Unicode-scalar positions/spans only when the record is built. No second stack, retained
-history, source text, path, parser, live frame, match object, authority object, or host reference escapes.
-
-The seven-test final-path consumer covers dedicated lowering and static/effect failures; native and reconstructed
-falsey payloads, detachment, and parse-local id restart; failed, zero-regex, and action-edge cursor behavior;
-direct/mutual progress rejection; unchanged abort propagation; generated-plan execution; and independently
-compiled emitted source. Canonical CI requires it alongside the Rust typed-source consumer. The pending
-`recursive_observation` rollout row now records `perl` and `rust`; one Rust admission-regression mutation advances
-typed-source governance from 71 to 72 while its aggregate remains 8 complete / 6 pending.
-
-This is still a private grammar-owned intrinsic, not a member of the common helper-call inventory. It introduces
-no public `Position`/`Span` value, facade export, descriptor or generated schema version, semantic/MCP projection,
-CLI option, README claim, or Dart/Julia/Lua behavior.
+- `.14.4.3` adds one serialized `ObserveRecognition { target, rule }` expression, the same exact diagnostics, and
+  recursive rule/function effect closure.
+- One shared-engine dispatch preserves payload and child policy across native, reconstructed, generated-plan, and
+  independently compiled emitted carriers without double-dispatching action edges.
+- The existing authority and pending-entry-only scopes supply direct-parent/rejected identities and recursively
+  detached records. UTF-8-byte registers cross the typed source authority only at Unicode-scalar projection.
+- Seven canonical tests lock the boundary. The admission advanced only Rust and governance from 71 to 72; the
+  grammar-owned intrinsic added no facade/helper/value/schema/semantic/MCP/CLI/README surface.
 
 ### 24. Admit the same private recursive-observation boundary in Dart
 
@@ -604,6 +550,17 @@ CLI option, README claim, or Dart/Julia/Lua behavior.
 - The existing recognition authority supplies parent and rejected-child identity; one pending-entry scope consumes one detached completion, binds before typed failure propagation, and retains neither a second stack nor history.
 - Existing zero-based UTF-8-byte registers cross the private `source_location` authority only when projecting Unicode-scalar record positions/spans. One Lua-5.1-compatible 43-assertion final-path consumer is canonical on PUC Lua and LuaJIT; the pending row records all six runtimes at 8/6/75 with no public facade/helper/value/schema/semantic/MCP/CLI/README movement.
 
+### 27. Compose exact recursive-observation recurrence
+
+- `.14.4.7` adds one repository-routed observation-only driver over the neutral checker; exact Perl, Rust, Dart,
+  Julia, PUC Lua, and LuaJIT consumers; then generated-source, capability, and language-coverage ledgers.
+- Five tracked sources form six ordered routes because one shared Lua source runs independently on both ABIs.
+  The checker binds paths, commands, order, multiplicity, source mapping, storage, workflow routing, and CI opt-in.
+- Eleven topology/storage mutations plus one recurrence regression promote only `recursive_observation`, advancing
+  typed-source truth to 9 complete / 5 pending / 87. Public no-drift and every API/schema/CLI/README surface stay unchanged.
+- Definitive local CI passes containment/relocation, CLI 66/66 in both option environments, RAM 62%, Phase 0
+  1,031/1,031 in 723 seconds, and all six exact observation routes plus support ledgers through its success marker.
+
 ## Consequences
 
 - Cursor control, capture, recursion, segmentation, and parser composition share one precise model instead of accumulating pairwise helper semantics.
@@ -612,8 +569,8 @@ CLI option, README claim, or Dart/Julia/Lua behavior.
 - Progress becomes a portable contract rather than a backend timeout/stack-overflow convention.
 - Current helper APIs and intrinsic rule-local cursor policy remain valid. The separately owned `.14.3` migration from execution-wide rule-label mark buckets to invocation frames is explicit, versioned, and mechanically checked.
 - The accepted `recognition_*` spellings are deliberately verbose enough to distinguish bounded recognition from compatibility cursor stacks, host exception handling, and systemic backtracking. Their neutral authority is executable, and the spellings plus exact recurring proof are current on independently admitted Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT runtimes.
-- The accepted private recursive-observation spelling and detached carrier are implemented on those same six
-  runtimes. Runtime admission alone does not promote the separately owned recurring or public closeout rows.
+- The accepted private recursive-observation spelling, detached carrier, and exact recurrence are current on those
+  same six runtimes. Public closeout remains separately owned.
 - Lossless gap capture gains the common typed representation it anticipated while retaining its separate owner.
 - This decision and its `.14.3.0` audit amendment change no grammar, helper, parser/compiler/runtime, descriptor,
   generated format, semantic/MCP response, primary CLI, rollout, admission, or current public feature-completeness
@@ -627,7 +584,7 @@ CLI option, README claim, or Dart/Julia/Lua behavior.
   transaction ledger at 9/9 while semantic/topology proof remains 58 mutations; public proof is 3/26/45 and the
   capability guide is 1/14/18.
 - Amendments `.14.4.0-.1` freeze the behavior-free boundary and correct lineage; `.14.4.1` selects the private form and makes its detached state machine executable without backend admission.
-- Amendments `.14.4.2-.5` admit Perl, Rust, Dart, and Julia in order through their governed carriers, leaving the observation row pending and shared-Lua/recurring/public work to `.14.4.6-.8`.
+- Amendments `.14.4.2-.6` admit every runtime in order; `.14.4.7` promotes only recurrence. Public closeout remains `.14.4.8`.
 
 ## Links
 

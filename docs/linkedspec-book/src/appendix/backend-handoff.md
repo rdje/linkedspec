@@ -37,7 +37,7 @@
 > and LuaJIT in exact order, then generated-source, capability, and language-coverage ledgers. Run
 > `bash tools/check_typed_source_location_six_runtime.sh`; canonical CI exposes the same all-toolchain proof behind
 > `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1`. Five backend source groups map to six runtime routes because the shared
-> Lua source executes on both ABIs. Governance is 8 complete / 6 pending with 74 drift mutations.
+> Lua source executes on both ABIs. Governance is now 9 complete / 5 pending with 87 drift mutations.
 >
 > No-change recomposition `.14.2.7` reruns that exact authority and closes the internal value/helper implementation
 > parent `.14.2`. It adds no replacement backend surface and does not promote the combined final `.14.8` row.
@@ -101,7 +101,7 @@
 > lifecycle ownership. The neutral contract and all six internal value/projection runtime targets are admitted.
 > Existing helpers retain their public results and established scalar, byte, or code-unit mark/cursor behavior.
 >
-> Public authored typed values, recursive-observation recurrence, and span-native dispatch remain owned by later leaves. The combined
+> Public authored typed values, recursive-observation public no-drift, and span-native dispatch remain owned by later leaves. The combined
 > recurring/public no-drift row stays pending for final program-wide owner `FUTURE-PARITY-BACKLOG.14.8`; the
 > transaction closeout does not promote that separate typed-source row early.
 >
@@ -143,7 +143,14 @@
 > admits one Lua-5.1-compatible dedicated `observe_recognition` node across native, reconstructed, generated-plan,
 > and independently loaded emitted-source execution. The same 43 assertions pass independently on PUC Lua and
 > LuaJIT; zero-based UTF-8-byte registers cross the private typed source authority only at projection. Recurring
-> `.7` and public `.8` follow. No public helper/value/schema/facade/semantic/MCP/CLI/README surface moved.
+> `.7` now composes the exact unchanged consumers; public `.8` follows. No public
+> helper/value/schema/facade/semantic/MCP/CLI/README surface moved.
+>
+> Recursive-observation recurrence is one repository-routed five-source/six-runtime proof:
+> `bash tools/check_recursive_observation_six_runtime.sh`. It runs neutral; Perl, Rust, Dart, Julia, PUC Lua, and
+> LuaJIT; then generated-source, capability, and language-coverage ledgers. Canonical CI exposes it behind
+> `LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1`. Twelve topology/storage/rollout regressions promote only the
+> observation row, producing 9/5/87 while final public no-drift remains pending.
 >
 > Definitive neutral signoff passes the exact six-runtime composition and support ledgers, all eight doctrines,
 > six-family containment, repository relocation, CLI 66x2, RAM 35%, and canonical Phase 0 1,031/1,031 in 714
@@ -158,7 +165,9 @@
 > `.14.4.5` then passes 30 observation assertions and the corresponding composed authorities. Shared Lua `.14.4.6`
 > passes 43 observation assertions per ABI, complete ordinary/storage proof, both composed matrices,
 > containment/relocation, CLI 66x2, RAM 61%, and Phase 0 1,031/1,031 in 734 seconds through exact canonical success.
-> The clean handoff points to recurrence `.14.4.7`; no public recursive-observation surface is implied.
+> Recurrence `.14.4.7` then passes all six exact observation routes and support ledgers, all eight doctrines,
+> containment/relocation, CLI 66x2, RAM 62%, and Phase 0 1,031/1,031 in 723 seconds through exact canonical success;
+> no public recursive-observation surface is implied.
 >
 > **Repeated-action handoff:** Every backend must consume
 > `linkedspec-explicit-repetition-action-result-v1`: bare `OR` is minimum-one repetition, explicit action returns

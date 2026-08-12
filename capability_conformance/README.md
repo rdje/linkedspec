@@ -260,8 +260,9 @@ seven callable compatibility aliases. Two similarly named values—`capture_take
 `capture_take()` and `capture_take_len()`; they are not extra callable aliases.
 
 The checker derives coordinates and text independently, executes all three state machines, cross-checks current
-Lua helper authority and the Perl alias/internal-id seams, locks 33 diagnostics, verifies canonical tracked
-execution, and rejects 75 mutations. Eleven of those mutations govern one recurring topology: five backend groups
+Lua helper authority and the Perl alias/internal-id seams, locks 33 diagnostics, and verifies canonical tracked
+execution. Governance reached 75 mutations at the all-runtime admission boundary. Eleven earlier mutations govern
+the broad recurring topology: five backend groups
 map to exact Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT runtime routes, followed by generated-source, capability,
 and language-coverage ledgers. Run the complete recurring proof with:
 
@@ -270,8 +271,9 @@ bash tools/check_typed_source_location_six_runtime.sh
 ```
 
 Canonical local CI requires and syntax-checks that driver; `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1` opts into its
-all-toolchain execution. Rollout remains 8 complete / 6 pending across 14 legs: the neutral contract, public
-structure, unchanged neutral/public recomposition, and the Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
+all-toolchain execution. Current governance is 87 mutations and rollout is 9 complete / 5 pending across 14 legs:
+the neutral contract, public structure, unchanged neutral/public recomposition, and the Perl, Rust, Dart, Julia,
+PUC Lua, and LuaJIT internal
 runtime admissions are complete. The two Lua ABIs share one rollout leg because they execute the same consumer
 source independently through distinct runtimes. The combined `recurring_public_no_drift` row remains pending for
 final program-wide owner `FUTURE-PARITY-BACKLOG.14.8`; recurring composition does not promote it early.
@@ -285,8 +287,16 @@ through dedicated private nodes, fail-closed static policy, the existing invocat
 ordinary/generated execution. Rust, Dart, Julia, and shared Lua additionally lock serialized reconstruction,
 generated-plan execution, and independently compiled, analyzed, or loaded emitted source. Dart retains UTF-16
 code-unit registers; Julia retains zero-based UTF-8 code-unit registers; Lua retains zero-based UTF-8-byte
-registers; all convert only at the typed Unicode-scalar boundary. The parent rollout row remains pending with all
-six runtimes recorded, so overall rollout remains 8/6. No public helper/value, descriptor/generated schema,
+registers; all convert only at the typed Unicode-scalar boundary. Dedicated recurrence now runs those five exact
+sources over six ordered routes, then all three support ledgers:
+
+```bash
+bash tools/check_recursive_observation_six_runtime.sh
+```
+
+Canonical CI exposes the same route behind `LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1`. Eleven topology/storage
+regressions plus one recurrence regression promote only `recursive_observation`, making overall rollout 9/5 and
+governance 87. The combined public no-drift row stays pending. No public helper/value, descriptor/generated schema,
 semantic/MCP field, CLI, or README behavior moved.
 
 No public `Position`/`Span` value, descriptor or generated schema, semantic/MCP projection, or source-authority

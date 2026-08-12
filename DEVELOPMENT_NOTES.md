@@ -10,6 +10,24 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-12 (`FUTURE-PARITY-BACKLOG.14.4.7` — recursive-observation recurrence): keep the existing broad typed-
+  source driver and add one narrower observation-only proof; do not create a seventh implementation or oracle.
+- Bind five exact consumer sources to six ordered runtime routes. Shared Lua must remain one tracked source run
+  independently on PUC Lua and LuaJIT; neutral precedes runtimes and all three support ledgers follow them.
+- Lock exact commands, source binding, order, multiplicity, support checks, project-data initialization, outside-
+  CWD workflow routing, canonical tracked input, and opt-in registration through independent mutations.
+- Promote only `recursive_observation`; leave combined `recurring_public_no_drift` pending for final `.14.8`.
+  Current truth is 9/5/87 with no parser/runtime/API/schema/semantic/MCP/CLI/README behavior movement.
+- RED is the intentional fail-first proof of the absent recurring gate; GREEN is the same checker and full driver
+  passing after implementation. The mdBook now explains these test-first terms explicitly.
+- Focused signoff passes Perl/Rust/Dart 7 each, Julia 30, Lua 43 per ABI, all support ledgers, storage locality,
+  outside-CWD routing, and the broader six-runtime typed-source gate.
+- The staged sandboxed canonical run passes all eight doctrines and every earlier executable gate before the outer
+  harness denies nested macOS `sandbox-exec` at representative containment with status 71. The unchanged permission-
+  authorized recurrence opt-in passes containment/relocation, CLI 66/66 in both environments, RAM 62%, Phase 0
+  1,031/1,031 in 723 seconds, and all six observation routes/support ledgers through exact local-CI success.
+- Land atomic 215 cleanly before public closeout `.14.4.8`; final public no-drift remains intentionally pending.
+
 - 2026-08-12 (`FUTURE-PARITY-BACKLOG.14.4.6` — shared Lua recursive observation): parse the exact special form
   into one Lua-5.1-compatible `observe_recognition` node; keep the static rule operand unevaluated, and close the
   existing `binding_write` recognition effect through ordinary rule and user-function call graphs.

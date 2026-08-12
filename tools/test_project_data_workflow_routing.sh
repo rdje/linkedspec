@@ -68,6 +68,7 @@ routed_entrypoints=(
  tools/check_semantic_introspection_six_runtime.sh
  tools/check_mcp_six_runtime.sh
  tools/check_typed_source_location_six_runtime.sh
+ tools/check_recursive_observation_six_runtime.sh
  tools/check_recognition_transaction_six_runtime.sh
 )
 

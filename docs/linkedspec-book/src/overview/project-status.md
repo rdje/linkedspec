@@ -56,12 +56,12 @@ general style. This documentation-only slice changes no parser or runtime behavi
 The backend-neutral typed source-location contract is complete under `FUTURE-PARITY-BACKLOG.14.1.1`. Its
 independent checker passes 3 sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation,
 8 transaction, and 33 recursive-observation transitions, 6 detached recursive observations, 4 structural cases,
-92 current helper projections, 33 diagnostics, and 75 rejected mutations.
+92 current helper projections, 33 diagnostics, and 87 rejected mutations.
 
-Eight of 14 rollout legs are complete and 6 remain pending. The neutral contract, public linked-rule structure,
+Nine of 14 rollout legs are complete and 5 remain pending. The neutral contract, public linked-rule structure,
 unchanged neutral/public recomposition, and all six runtime targets are complete. Their internal authorities and
 all 92 helper projections plus 7 aliases are admitted without changing public results or their established scalar,
-byte, or code-unit mark and cursor behavior.
+byte, or code-unit mark and cursor behavior. Exact recursive-observation recurrence is also complete.
 
 Rust's exact four-test consumer now runs under ordinary Cargo discovery and as a required canonical-CI leg. It
 proves the immutable value core and projection boundary across native, reconstructed, and generated-plan execution;
@@ -96,7 +96,8 @@ Canonical CI requires and syntax-checks that driver; `LINKEDSPEC_RUN_TYPED_SOURC
 all-toolchain route. Five backend consumer groups map to six runtime routes because the shared Lua source runs once
 on each ABI. Eleven independent topology mutations first increased the checker from 42 to 53; four later
 recursive-lineage invariants advanced governance to 57, executable neutral observation advances it to 70, and the
-five admitted backend regressions advance it to 75.
+five admitted backend regressions advance it to 75. Dedicated observation recurrence adds twelve topology,
+storage, registration, and recurrence regressions for the current total of 87.
 
 Shared Lua admission signoff passes its unchanged 43-assertion observation consumer on PUC Lua and LuaJIT,
 repository containment/relocation, primary CLI 66/66 in both option environments, RAM 61%, Phase 0 1,031/1,031 in
@@ -106,8 +107,8 @@ An unchanged `FUTURE-PARITY-BACKLOG.14.2.7` recomposition reruns that complete a
 value/helper implementation slice `.14.2`. This is a project-state closure, not a new language surface: the six
 admitted runtimes, helper results, schemas, and 8-complete/6-pending rollout remain unchanged.
 
-Public typed values, recursive-observation recurrence, span-native progressive/staged dispatch, and the remaining
-public authored surfaces remain future work. Exact transaction syntax is ratified:
+Public typed values, recursive-observation public no-drift, span-native progressive/staged dispatch, and the
+remaining public authored surfaces remain future work. Exact transaction syntax is ratified:
 `recognition_checkpoint()`, `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and
 `recognition_rollback(token)`. Match is a strict boolean and the falsey-safe payload remains staged until commit.
 Their neutral artifact/checker is executable at 129 current + 4 dedicated ActionIR rows, 246 call rows, and 58
@@ -115,7 +116,7 @@ rejected mutations, with recognition rollout 9/9 complete. The authored forms an
 current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; public no-drift is current and transaction activity
 `.14.3` is closed. The separate typed-
 source admissions do not add an authored `Position` or `Span` value, schema version, or new helper result. Their
-rollout is 8 complete / 6 pending because the combined recurring/
+rollout is 9 complete / 5 pending because the combined recurring/
 public no-drift row remains owned by final program-wide closeout `FUTURE-PARITY-BACKLOG.14.8`.
 
 Recursive observation now has a behavior-free six-runtime audit under `.14.4.0`. The frozen record is detached and
@@ -155,9 +156,14 @@ projects zero-based UTF-8 code-unit positions to Unicode-scalar records, and pre
 seam. Shared Lua `.14.4.6` admits one Lua-5.1-compatible dedicated node across native,
 reconstructed, generated-plan, and independently loaded emitted source. Its 43-assertion consumer passes on PUC
 Lua and LuaJIT, preserves zero-based UTF-8-byte registers behind typed scalar projection, and keeps the repeated-
-action seam unchanged. Five admission regressions advance governance to 75 while the parent row stays pending with
-all six runtimes recorded. No public helper, facade, descriptor/generated version, result schema, semantic/MCP
-field, CLI, or README behavior is current. Recurring and public legs follow through `.14.4.7-.8`.
+action seam unchanged. Five admission regressions advance governance to 75 with all six runtimes recorded.
+Recurrence `.14.4.7` adds one exact rooted driver over five sources/six routes and three support ledgers; twelve
+new regressions promote only the observation row and advance typed-source truth to 9/5/87. No public helper,
+facade, descriptor/generated version, result schema, semantic/MCP field, CLI, or README behavior is current.
+Public closeout remains `.14.4.8` and the combined final `.14.8` row.
+Definitive recurrence signoff passes all eight doctrines, repository containment/relocation, CLI 66/66 in both
+option environments, RAM 62%, Phase 0 1,031/1,031 in 723 seconds, and Perl/Rust/Dart 7 each, Julia 30, and Lua
+43 per ABI plus all support ledgers through the exact local-CI success marker.
 Executable-neutral signoff passes the exact six-runtime composition, support ledgers, all eight doctrines,
 six-family process containment, repository relocation, CLI 66x2, RAM 35%, and canonical Phase 0 1,031/1,031 in
 714 seconds through the exact local-CI success marker.
@@ -174,7 +180,8 @@ Dart-admission signoff passes those same composed authorities, all eight doctrin
 66x2, RAM 57%, and Phase 0 1,031/1,031 in 752 seconds through the complete typed-source opt-in and exact local-CI
 success marker. Julia admission then passes its 30-assertion consumer and composed authorities. Shared Lua
 admission passes its 43-assertion consumer per ABI, complete ordinary/storage proof, exact six-runtime typed-source,
-and five-backend repeated-action composition. The clean handoff points to recurrence `.14.4.7`.
+and five-backend repeated-action composition. Recurrence then passes Perl 7, Rust 7, Dart 7, Julia 30, and Lua 43
+per ABI plus all support ledgers through `tools/check_recursive_observation_six_runtime.sh`.
 
 Perl now has an admitted transaction implementation with four dedicated ActionIR nodes, recursive static
 effect closure, invocation-local mark/cursor snapshots, falsey-safe commit results, typed recognition-only progress

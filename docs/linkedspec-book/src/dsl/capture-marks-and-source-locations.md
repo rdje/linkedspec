@@ -55,7 +55,7 @@ bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_t
 bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua
 ```
 
-### Recursive source observation: current on all six runtimes
+### Recursive source observation: current and recurring on all six runtimes
 
 The behavior-free `.14.4.0` audit and lineage correction `.14.4.0.1` fix the portable observation boundary.
 Executable neutral leaf `.14.4.1` selected the authored spelling. Perl `.14.4.2` executes it on live and
@@ -110,7 +110,8 @@ fixture identities with positive unique monotonic numbers; direct and mutual rej
 under an earlier active parent. The checker now rejects self-parent, reuse, invalid parent order, and cycles before
 tuple comparison. Two additional static diagnostics reserve invalid-target and invalid-static-call errors. Ten
 reason-checked state corruptions plus three surface/topology mutations raise typed-source governance from 57 to 70.
-Runtime admissions are complete; recurring proof and public closeout still follow in `.7-.8`.
+Runtime admissions are complete, and `.14.4.7` now supplies their exact recurring proof; public closeout remains
+`.14.4.8`.
 
 Perl owns one dedicated private `OBSERVE_RECOGNITION` ActionIR node; Rust owns one dedicated private
 `ObserveRecognition` expression node; Dart and Julia each own one dedicated private
@@ -131,11 +132,20 @@ bash tools/run_lua_project_data.sh puc lua/test/recursive_observation_contract_t
 bash tools/run_lua_project_data.sh luajit lua/test/recursive_observation_contract_test.lua
 ```
 
-There is
-still no public helper, authored `Position`/`Span` value, descriptor/generated version, result-schema field,
-semantic/MCP projection, CLI option, or README behavior. The parent recursive-observation row remains pending with
-Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT recorded, so the overall typed-source rollout remains exactly 8
-complete / 6 pending and governance advances to 75 mutations.
+Run the dedicated five-source/six-runtime recurring proof with:
+
+```bash
+bash tools/check_recursive_observation_six_runtime.sh
+```
+
+It executes neutral first; Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT in order; then generated-source,
+capability, and language-coverage ledgers. Canonical CI exposes the same route behind
+`LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1`. Twelve new regressions lock topology, repository-local storage,
+canonical registration, and recurrence-only promotion. The recursive-observation row is now complete, so typed-
+source rollout is 9 complete / 5 pending with 87 mutations. There is still no public helper, authored
+`Position`/`Span` value, descriptor/generated version, result-schema field, semantic/MCP projection, CLI option,
+or README behavior; final public no-drift remains pending. Definitive local CI passes containment/relocation, CLI
+66/66 twice, RAM 62%, Phase 0 1,031/1,031 in 723 seconds, and the complete observation matrix.
 
 ### Bounded cursor transactions do not mean general backtracking
 
@@ -348,12 +358,12 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 
 The checker covers 3 decoded sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation,
 8 transaction, and 33 recursive-observation transitions, 6 detached observations, 4 structural cases,
-33 diagnostics, and 75 mutations.
+33 diagnostics, and 87 mutations.
 It also proves that all 92 current source-boundary helpers project onto the algebra.
 
-This is rollout status, not authored-value status. Eight of 14 rollout legs are complete: the neutral contract,
+This is rollout status, not authored-value status. Nine of 14 rollout legs are complete: the neutral contract,
 public linked-rule structure, unchanged neutral/public recomposition, and the Perl, Rust, Dart, Julia, PUC Lua,
-and LuaJIT runtime targets. The other 6 remain pending.
+and LuaJIT runtime targets, plus recursive-observation recurrence. The other 5 remain pending.
 
 Perl now uses an internal decoded-source authority plus immutable position/span values beneath every governed
 helper projection. Exact Unicode execution is admitted on live and independently emitted/loaded generated routes.
@@ -373,7 +383,7 @@ discovery and canonical CI.
 
 Lua implements the same internal boundary beneath exact detached 92+7 catalogs while preserving zero-based UTF-8
 byte registers, values, and mutation timing. The same 240-assertion source runs exactly once on PUC Lua and once on
-LuaJIT under ordinary discovery and canonical CI. The neutral rollout is therefore 8 complete / 6 pending.
+LuaJIT under ordinary discovery and canonical CI. Internal value/helper admission remains complete on all routes.
 
 One recurring command now composes those already-admitted consumers without adding another value model:
 
@@ -386,8 +396,19 @@ language-coverage ledgers. Canonical CI exposes the same all-toolchain proof beh
 `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1`. Five backend consumer groups become six routes because one shared Lua
 source executes independently on both ABIs. The extra 11 mutations reject topology drift, not authored behavior.
 
+Recursive observation has a narrower recurring gate over its five exact consumer sources and the same six runtime
+routes:
+
+```bash
+bash tools/check_recursive_observation_six_runtime.sh
+```
+
+It then runs the same three support ledgers. `LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1` selects it from
+canonical CI. Twelve additional regressions make only `recursive_observation` complete, advancing the current
+contract to 9 complete / 5 pending / 87 mutations.
+
 The unchanged `.14.2.7` recomposition reruns that authority and closes the six-runtime internal value/helper
-implementation slice. It does not add an authored value or advance the 8-complete/6-pending public rollout.
+implementation slice. It does not add an authored value or promote final public no-drift.
 
 There is still no public `Position` or `Span` authored value, public recursive-observation API, or span-native
 parser dispatch. The private recursive-observation spelling and detached harray carrier are executable in the
@@ -398,7 +419,7 @@ nodes, recursive effect/progress policy, and all four runtime carriers after rec
 while the consumer is ordinarily and canonically discovered once per ABI. Transaction rollout is complete at
 9/9 under `.14.3.8`; the unchanged recurring authority and all six admissions remain exact. The separate typed-source combined
 recurring/public-no-drift row remains pending for final program-wide closeout `FUTURE-PARITY-BACKLOG.14.8`, so
-typed-source composition still remains 8 complete / 6 pending.
+typed-source composition is 9 complete / 5 pending.
 
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions or
 typed spans are authored values. The `recognition_*` operations are current across all six runtime routes, while

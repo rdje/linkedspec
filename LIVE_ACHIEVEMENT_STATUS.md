@@ -2,25 +2,26 @@
 
 ## Current Activity
 
-- Shared Lua recursive-observation leaf `FUTURE-PARITY-BACKLOG.14.4.6` is signoff-complete for atomic 214/300 from
-  clean Julia-admission commit `4666ae9c`; no push occurs.
-- Task ownership and exact dual-ABI RED preceded production work. Private implementation, four-carrier execution,
-  complete ordinary/storage proof, both composed runtime gates, rendered book, Knowledge, doctrines, and canonical
-  CI are GREEN. Canonical passes containment/relocation, CLI 66x2, RAM 61%, and Phase 0 1,031/1,031 in 734 seconds.
-- Typed-source truth is 8 complete / 6 pending and 75 mutations with all six runtimes recorded on the still-pending
-  recursive-observation row. Recognition remains 129+4/246/58; public surfaces remain closed.
+- Recursive-observation recurrence `FUTURE-PARITY-BACKLOG.14.4.7` is signoff-complete for atomic 215/300 from clean
+  shared-Lua admission commit `77806855`; no push occurs.
+- Exact topology RED preceded the contract, driver, storage/CI routing, and rollout changes. The dedicated rooted
+  gate, full six-runtime execution, three support ledgers, broader typed-source matrix, storage locality, and
+  outside-CWD workflow routing, Knowledge/book/doctrines, and definitive canonical signoff are GREEN.
+- Typed-source truth is 9 complete / 5 pending and 87 mutations. Only recursive-observation recurrence moved;
+  recognition remains 129+4/246/58 and all public/API/schema/semantic/MCP/CLI/README surfaces remain closed.
 
 ## Latest Completed Slice
 
-- `.14.4.6` shared Lua recursive observation is signoff-complete for atomic 214/300 landing.
+- `.14.4.7` completed recursive-observation recurrence and canonical signoff for atomic 215/300.
 
 ## Next Action
 
-- Land exact shared Lua `.14.4.6` atomic 214, prove the clean boundary, and activate recurrence `.14.4.7`
-  task-tree-first without changing runtime behavior.
+- Land recurrence atomic 215 cleanly, then activate public closeout `.14.4.8` task-tree-first.
 
 ## Recent Completions
 
+- `2026-08-12` — `.14.4.7` completed recursive-observation recurrence and canonical signoff for atomic 215/300.
+- `2026-08-12` — `77806855` landed shared Lua recursive-observation admission `.14.4.6` as atomic 214/300.
 - `2026-08-12` — `.14.4.6` completed shared Lua recursive-observation admission and canonical signoff for atomic 214/300.
 - `2026-08-12` — `4666ae9c` landed private Julia recursive-observation admission `.14.4.5` as atomic 213/300.
 - `2026-08-12` — `.14.4.5` completed private Julia recursive-observation admission and canonical signoff for atomic 213/300.
@@ -35,8 +36,6 @@
 - `2026-08-12` — `53c687d3` landed recursive-observation lineage correction `.14.4.0.1` as atomic 208/300.
 - `2026-08-12` — `.14.4.0.1` completed recursive-observation lineage correction and canonical signoff for atomic 208/300.
 - `2026-08-12` — `2c968259` landed behavior-free recursive source-observation audit `.14.4.0` as atomic 207/300.
-- `2026-08-12` — `.14.4.0` completed recursive source-observation audit and canonical signoff for atomic 207/300.
-- `2026-08-12` — `3ac018f8` landed recognition public no-drift and closed transaction `.14.3` as atomic 206/300.
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source

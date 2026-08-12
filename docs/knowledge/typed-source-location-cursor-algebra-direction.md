@@ -18,9 +18,9 @@ answers:
   - "which diagnostics protect cursor and span safety"
   - "what owns the typed cursor span implementation program"
 date: 2026-08-12
-status: accepted architecture; internal values and transactions complete; recursive observation private on Perl Rust Dart Julia
+status: accepted architecture; internal values and transactions complete; recursive observation private and recurring on all six runtimes
 tags: [architecture, cursor, source-location, spans, capture, recursion, parser-composition, diagnostics, portability]
-evidence: "Director approval on 2026-07-29 plus ADR 0056. FUTURE-PARITY-BACKLOG.14.1 completed the executable base model and structural teaching; .14.2 completed the internal immutable value/projection layer on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT at 8 complete / 6 pending; .14.3 closed exact six-runtime recognition transactions at rollout 9/9; .14.4.0-.1 freeze recursive observation and fail-closed lineage; .14.4.1 makes the neutral state machine executable; and .14.4.2-.6 privately admit Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT at 75 mutations while recurrence remains pending."
+evidence: "Director approval on 2026-07-29 plus ADR 0056. FUTURE-PARITY-BACKLOG.14.1 completed the executable base model and structural teaching; .14.2 completed the internal immutable value/projection layer on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; .14.3 closed exact six-runtime recognition transactions at rollout 9/9; .14.4.0-.1 freeze recursive observation and fail-closed lineage; .14.4.1 makes the neutral state machine executable; .14.4.2-.6 privately admit all six runtimes; and .14.4.7 makes their exact five-source/six-route recurrence current at typed-source 9 complete / 5 pending / 87 mutations while public no-drift remains pending."
 reverify: "rg -n 'source-location algebra|Cursor transactions|Progressive and staged parsing consume spans|Lossless segmentation|FUTURE-PARITY-BACKLOG[.]14[.]0[.]1' docs/decisions/0056-typed-source-location-and-cursor-algebra.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
