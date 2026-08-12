@@ -411,6 +411,137 @@ function validate_no_removed_aggregate_selectors(compiled::CompiledSpec)
     return nothing
 end
 
+mutable struct _RecursiveObservationEffects
+    writes_observation::Bool
+    rule_calls::Set{String}
+    function_calls::Set{String}
+    recognition_attempts::Set{String}
+    observed_rules::Set{String}
+end
+
+_RecursiveObservationEffects() = _RecursiveObservationEffects(
+    false,
+    Set{String}(),
+    Set{String}(),
+    Set{String}(),
+    Set{String}(),
+)
+
+function _recursive_observation_effects(value, function_names::Set{String})
+    effects = _RecursiveObservationEffects()
+
+    function visit(node)
+        if node isa AbstractVector
+            foreach(visit, node)
+            return nothing
+        elseif !(node isa AbstractDict)
+            return nothing
+        end
+
+        kind = get(node, "kind", nothing)
+        if kind == "observe_recognition"
+            effects.writes_observation = true
+            rule = get(node, "rule", nothing)
+            rule isa AbstractString && push!(effects.observed_rules, String(rule))
+        elseif kind == "recognize_once"
+            rule = get(node, "rule", nothing)
+            rule isa AbstractString && push!(effects.recognition_attempts, String(rule))
+        elseif kind == "call"
+            name = get(node, "name", nothing)
+            if name == "call"
+                args = get(node, "args", nothing)
+                if args isa AbstractVector && length(args) == 1
+                    argument = only(args)
+                    if argument isa AbstractDict &&
+                            get(argument, "kind", nothing) == "variable"
+                        rule = get(argument, "name", nothing)
+                        rule isa AbstractString && push!(effects.rule_calls, String(rule))
+                    end
+                end
+            elseif name isa AbstractString && String(name) in function_names
+                push!(effects.function_calls, String(name))
+            end
+        end
+        foreach(visit, values(node))
+        return nothing
+    end
+
+    visit(value)
+    return effects
+end
+
+"""Close recursive-observation binding writes through rules and functions."""
+function validate_recursive_observation_policy(compiled::CompiledSpec)
+    function_names = Set{String}(
+        entry.definition.name for entry in compiled.function_registry.entries
+    )
+    rule_effects = Dict{String,_RecursiveObservationEffects}()
+    for label in compiled.compiled_rule_order
+        rule = compiled.rules_by_label[label]
+        rule_effects[label] = _recursive_observation_effects(
+            Any[to_json(payload.action_ast) for payload in action_payloads(rule)],
+            function_names,
+        )
+    end
+
+    function_effects = Dict{String,_RecursiveObservationEffects}()
+    for entry in compiled.function_registry.entries
+        definition = entry.definition
+        block = parse_action_block(definition.body_source)
+        normalize_action_block_final_codeblocks!(block, compiled.function_registry)
+        function_effects[definition.name] = _recursive_observation_effects(
+            to_json(block),
+            function_names,
+        )
+    end
+
+    for effects in Iterators.flatten((values(rule_effects), values(function_effects)))
+        for observed_rule in effects.observed_rules
+            haskey(compiled.rules_by_label, observed_rule) && continue
+            throw(CompiledSpecException(
+                "source_location_recursive_observation_operand " *
+                "missing static rule '$observed_rule'",
+            ))
+        end
+    end
+
+    rule_writes = Dict(label => effects.writes_observation for
+        (label, effects) in pairs(rule_effects))
+    function_writes = Dict(name => effects.writes_observation for
+        (name, effects) in pairs(function_effects))
+    changed = true
+    while changed
+        changed = false
+        for (owner, effects) in pairs(rule_effects)
+            inherited = any(get(rule_writes, callee, false) for callee in effects.rule_calls) ||
+                any(get(function_writes, callee, false) for callee in effects.function_calls)
+            if inherited && !rule_writes[owner]
+                rule_writes[owner] = true
+                changed = true
+            end
+        end
+        for (owner, effects) in pairs(function_effects)
+            inherited = any(get(rule_writes, callee, false) for callee in effects.rule_calls) ||
+                any(get(function_writes, callee, false) for callee in effects.function_calls)
+            if inherited && !function_writes[owner]
+                function_writes[owner] = true
+                changed = true
+            end
+        end
+    end
+
+    for (owner, effects) in Iterators.flatten((pairs(rule_effects), pairs(function_effects)))
+        for target in effects.recognition_attempts
+            get(rule_writes, target, false) || continue
+            throw(CompiledSpecException(
+                "recognition_effect_forbidden:binding_write " *
+                "owner=$owner target=$target",
+            ))
+        end
+    end
+    return nothing
+end
+
 function _compiled_regex_slot_identity_exception(
     rule_label::AbstractString,
     target_rule::AbstractString,
@@ -634,6 +765,7 @@ function _compile_spec(
     )
     validate_compiled_regex_slot_identities(compiled)
     validate_no_removed_aggregate_selectors(compiled)
+    validate_recursive_observation_policy(compiled)
     return compiled
 end
 

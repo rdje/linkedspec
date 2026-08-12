@@ -2,27 +2,26 @@
 
 ## Current Activity
 
-- Dart recursive-observation leaf `FUTURE-PARITY-BACKLOG.14.4.4` completes as atomic 212/300 from clean
-  Rust-admission commit `91a2b05c`; no push occurs.
-- Dedicated lowering, static/effect policy, existing invocation authority, detached runtime projection, all four
-  carriers, ordinary/canonical/storage governance, and the sole-facing docs are signoff-complete. Dart analysis,
-  observation 7/7, focused 24/24, ordinary package 400, storage 22/47, exact six-runtime typed source, exact five-
-  backend repeated action, final book 79/14,524 KiB, and Knowledge 824/6,869 pass.
-- Typed-source truth is 8 complete / 6 pending and 73 mutations; Perl, Rust, and Dart are recorded on the still-
-  pending recursive-observation row. Recognition remains 129+4/246/58. All eight doctrines and canonical CI pass
-  containment/relocation, CLI 66x2, RAM 57%, Phase 0 1,031/1,031 in 752 seconds, and the typed-source opt-in.
+- Julia recursive-observation leaf `FUTURE-PARITY-BACKLOG.14.4.5` is signoff-complete as intended atomic 213/300
+  from clean Dart-admission commit `b1895a05`; no push occurs.
+- Task ownership and exact RED preceded production work. Private implementation, four-carrier execution, Julia
+  ordinary/storage proof, both composed runtime gates, synchronized documentation, and canonical CI are GREEN.
+- Typed-source truth is 8 complete / 6 pending and 74 mutations with Perl, Rust, Dart, and Julia recorded on the
+  still-pending recursive-observation row. Recognition remains 129+4/246/58; public surfaces remain closed.
 
 ## Latest Completed Slice
 
-- `.14.4.4` private Dart recursive observation completes as atomic 212/300.
+- `.14.4.5` private Julia recursive observation is signoff-complete for atomic 213/300; durable commit is next.
 
 ## Next Action
 
-- Activate Julia `.14.4.5` task-tree-first from the clean Dart admission commit, then retrieve its committed
-  authorities before code changes.
+- Commit Julia `.14.4.5` as atomic 213/300, clear the brief, prove the handoff clean, then activate shared Lua
+  recursive observation `.14.4.6` task-tree-first.
 
 ## Recent Completions
 
+- `2026-08-12` — `.14.4.5` completed private Julia recursive-observation admission and canonical signoff for atomic 213/300.
+- `2026-08-12` — `b1895a05` landed private Dart recursive-observation admission `.14.4.4` as atomic 212/300.
 - `2026-08-12` — `.14.4.4` completed private Dart recursive-observation admission as atomic 212/300.
 - `2026-08-12` — `91a2b05c` landed private Rust recursive-observation admission `.14.4.3` as atomic 211/300.
 - `2026-08-12` — `.14.4.3` completed private Rust recursive-observation admission and canonical signoff for atomic 211/300.
@@ -37,8 +36,6 @@
 - `2026-08-12` — `3ac018f8` landed recognition public no-drift and closed transaction `.14.3` as atomic 206/300.
 - `2026-08-11` — `.14.3.8` completed recognition public closeout and canonical signoff for atomic 206/300.
 - `2026-08-11` — `.14.3.7` completed six-runtime recurring proof and canonical signoff for atomic 205/300.
-- `2026-08-11` — `e6893fd4` landed six-runtime recurring recognition proof as atomic 205/300.
-- `2026-08-11` — `1aedfe98` landed exact dual-ABI Lua recognition admission as atomic 204/300.
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source

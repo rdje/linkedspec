@@ -37,7 +37,7 @@
 > and LuaJIT in exact order, then generated-source, capability, and language-coverage ledgers. Run
 > `bash tools/check_typed_source_location_six_runtime.sh`; canonical CI exposes the same all-toolchain proof behind
 > `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1`. Five backend source groups map to six runtime routes because the shared
-> Lua source executes on both ABIs. Governance is 8 complete / 6 pending with 73 drift mutations.
+> Lua source executes on both ABIs. Governance is 8 complete / 6 pending with 74 drift mutations.
 >
 > No-change recomposition `.14.2.7` reruns that exact authority and closes the internal value/helper implementation
 > parent `.14.2`. It adds no replacement backend surface and does not promote the combined final `.14.8` row.
@@ -101,7 +101,7 @@
 > lifecycle ownership. The neutral contract and all six internal value/projection runtime targets are admitted.
 > Existing helpers retain their public results and established scalar, byte, or code-unit mark/cursor behavior.
 >
-> Public authored typed values, Julia/Lua recursive observation, and span-native dispatch remain owned by later leaves. The combined
+> Public authored typed values, shared-Lua recursive observation, and span-native dispatch remain owned by later leaves. The combined
 > recurring/public no-drift row stays pending for final program-wide owner `FUTURE-PARITY-BACKLOG.14.8`; the
 > transaction closeout does not promote that separate typed-source row early.
 >
@@ -135,7 +135,11 @@
 > now admits one private `ActionObserveRecognitionExpr` across native, reconstructed, generated-plan, and freshly
 > analyzed emitted source. It uses the existing invocation authority, converts UTF-16 code-unit registers only at
 > the typed scalar boundary, preserves falsey payloads and child-owned cursor policy, binds before propagating typed
-> failure, retains no history, and is a forbidden transaction binding-write. Julia `.5`, one shared PUC-Lua/LuaJIT
+> failure, retains no history, and is a forbidden transaction binding-write. Julia `.5` now admits one private
+> `ActionObserveRecognitionExpr` across native, reconstructed, generated-plan, and independently loaded emitted-
+> module execution. It reuses the same authority, projects zero-based UTF-8 code-unit registers to Unicode-scalar
+> records only at the typed boundary, preserves falsey payloads and child-owned cursor policy, binds before typed
+> failure propagation, retains no history, and is a forbidden transaction binding-write. One shared PUC-Lua/LuaJIT
 > implementation `.6`, recurring `.7`,
 > and public `.8` follow. No public helper/value/schema/facade/semantic/MCP/CLI/README surface moved.
 >

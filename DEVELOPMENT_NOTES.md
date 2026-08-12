@@ -10,6 +10,34 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-12 (`FUTURE-PARITY-BACKLOG.14.4.5` — Julia recursive observation): parse the exact special form into one
+  private `ActionObserveRecognitionExpr`; keep the static rule operand unevaluated, and close the existing
+  `binding_write` recognition effect through ordinary rule and user-function call graphs.
+- Extend the existing `RecognitionInvocationAuthority`, not the public module, with direct-parent snapshots and
+  fresh rejected-attempt reservation. A pending scope intercepts only its intended child and disarms at entry, so
+  later ordinary nested recursion retains the existing cutoff.
+- Publish a terminal completion only inside an active observation boundary, consume it immediately, and bind the
+  recursively detached nine-field harray before returning the unchanged payload or propagating the unchanged typed
+  failure. Retain no source text, parser/runtime object, second invocation stack, or parse-wide history.
+- Keep cursor, boundary, match, and mark registers in zero-based UTF-8 code units. Project entry, selected match,
+  and accepted exit through the existing `SourceLocation` authority only when constructing the detached record.
+- Treat an observed action edge as its one child dispatch and retain the existing repeated-action collection
+  topology. Native, reconstructed, generated-plan, and independently loaded emitted-module execution all use the
+  shared engine; the exact seven-group/30-assertion consumer and combined 526-assertion focused set pass.
+- Add the Julia recurring path and CI locks plus one omission mutation. Typed-source proof is 8/6/74 with Perl,
+  Rust, Dart, and Julia recorded on the pending observation row; recognition stays 129+4/246/58, language stays
+  246/105+1/122, repeated-action stays 8 governed seams / 54 mutations, and facade/schema/CLI/README stay closed.
+- Final full Julia package and storage 19/5 rerun pass after runtime cleanup. Book 79/14,528 KiB, Knowledge
+  825/6,883, and all eight doctrines pass.
+- The first fully staged canonical run correctly rejected a bounded `MEMORY.md` rewrite that had lost the
+  repeated-action contract's historical next owner `FUTURE-PARITY-BACKLOG.10.1`. The existing marker-anchor
+  Knowledge card identifies this structural coupling; restore the compact fact within the 60-line cap, keep the
+  checker unchanged, and preserve the repair until future owner `.22` moves the marker to a stable governed home.
+- The sandboxed canonical restart reached representative-process containment and stopped only because the outer
+  harness denied nested macOS `sandbox-exec` with status 71. The unchanged permission-authorized command passes
+  containment/relocation, CLI 66/66 in both environments, RAM 60%, Phase 0 1,031/1,031 in 725 seconds, and the
+  complete six-runtime typed-source matrix before exact `[ci] local CI gate passed` with exit 0.
+
 - 2026-08-12 (`FUTURE-PARITY-BACKLOG.14.4.4` — Dart recursive observation): parse the exact special form into one
   private `ActionObserveRecognitionExpr`; keep the static rule operand unevaluated, and close the existing
   `binding_write` recognition effect through ordinary rule and user-function call graphs.

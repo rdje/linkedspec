@@ -276,11 +276,30 @@ struct _RuntimeRecognitionToken
     snapshot::RecognitionTransaction.RecognitionFrameState
 end
 
-struct _RuntimeRecognitionFrame
+struct _RuntimeRecursiveObservationCompletion
+    identity::RecognitionTransaction.RecognitionInvocationIdentity
+    entry_codeunit::Int
+    selected_match::Union{Nothing,RuntimeRegexMatch}
+    accepted_exit_codeunit::Union{Nothing,Int}
+    outcome::String
+    diagnostic::Union{Nothing,String}
+end
+
+mutable struct _RuntimeRecursiveObservationScope
+    rule::String
+    entered::Bool
+    completion::Union{Nothing,_RuntimeRecursiveObservationCompletion}
+end
+
+mutable struct _RuntimeRecognitionFrame
     rule::String
     authority_frame::Any
     prior_marks::Union{Nothing,Dict{String,Int}}
     tokens::Dict{String,_RuntimeRecognitionToken}
+    identity::RecognitionTransaction.RecognitionInvocationIdentity
+    entry_codeunit::Int
+    selected_match::Union{Nothing,RuntimeRegexMatch}
+    observation_scope::Union{Nothing,_RuntimeRecursiveObservationScope}
 end
 
 mutable struct _RuntimeExecutionContext
@@ -295,6 +314,7 @@ mutable struct _RuntimeExecutionContext
     hashes::Dict{String,Dict{String,Any}}
     mark_buckets::Dict{String,Dict{String,Int}}
     recognition_frames::Vector{_RuntimeRecognitionFrame}
+    recursive_observation_scopes::Vector{_RuntimeRecursiveObservationScope}
     cursor_stack::Vector{Int}
     active_rule_entries::Set{Tuple{String,Int,Int}}
     rule_local_binding_scopes::Vector{Dict{String,_RuntimeRuleLocalBinding}}
@@ -342,6 +362,7 @@ function _RuntimeExecutionContext(
         Dict{String,Dict{String,Any}}(),
         Dict{String,Dict{String,Int}}(),
         _RuntimeRecognitionFrame[],
+        _RuntimeRecursiveObservationScope[],
         Int[],
         Set{Tuple{String,Int,Int}}(),
         Dict{String,_RuntimeRuleLocalBinding}[],
@@ -415,6 +436,13 @@ function _enter_runtime_recognition_invocation!(
                 authority_frame,
                 prior_marks,
                 Dict{String,_RuntimeRecognitionToken}(),
+                RecognitionTransaction.invocation_identity(
+                    context.recognition_authority,
+                    authority_frame,
+                ),
+                context.cursor_codeunit,
+                nothing,
+                nothing,
             ),
         )
     catch
@@ -444,10 +472,14 @@ end
 function _leave_runtime_recognition_invocation!(
     context::_RuntimeExecutionContext,
     rule_label::String,
+    ;
+    result,
+    error,
 )
     frame = _runtime_recognition_frame(context, rule_label)
     actual = _runtime_recognition_frame_state(context, rule_label)
     restored = isempty(frame.tokens) ? actual : first(values(frame.tokens)).snapshot
+    leave_error = nothing
     try
         RecognitionTransaction.set_frame_state!(
             context.recognition_authority,
@@ -458,7 +490,22 @@ function _leave_runtime_recognition_invocation!(
             context.recognition_authority,
             frame.authority_frame,
         )
+    catch caught
+        leave_error = caught
+        rethrow()
     finally
+        if frame.observation_scope !== nothing
+            terminal_error = error === nothing ? leave_error : error
+            accepted = terminal_error === nothing && result !== nothing && result.matched
+            frame.observation_scope.completion = _RuntimeRecursiveObservationCompletion(
+                frame.identity,
+                frame.entry_codeunit,
+                frame.selected_match,
+                accepted ? RecognitionTransaction.state_cursor(actual) : nothing,
+                terminal_error !== nothing ? "aborted" : accepted ? "accepted" : "failed",
+                nothing,
+            )
+        end
         _apply_runtime_recognition_frame_state!(context, rule_label, restored)
         pop!(context.recognition_frames)
         if frame.prior_marks === nothing
@@ -467,6 +514,154 @@ function _leave_runtime_recognition_invocation!(
             context.mark_buckets[rule_label] = frame.prior_marks
         end
     end
+    return nothing
+end
+
+function _begin_runtime_recursive_observation!(
+    context::_RuntimeExecutionContext,
+    rule::AbstractString,
+)
+    scope = _RuntimeRecursiveObservationScope(String(rule), false, nothing)
+    push!(context.recursive_observation_scopes, scope)
+    return scope
+end
+
+function _runtime_recursive_observation_expects(
+    context::_RuntimeExecutionContext,
+    rule::AbstractString,
+)
+    isempty(context.recursive_observation_scopes) && return false
+    scope = last(context.recursive_observation_scopes)
+    return !scope.entered && scope.rule == String(rule)
+end
+
+function _note_runtime_recursive_observation_entry!(
+    context::_RuntimeExecutionContext,
+    rule::String,
+    entry_codeunit::Int,
+)
+    _runtime_recursive_observation_expects(context, rule) || return nothing
+    scope = last(context.recursive_observation_scopes)
+    scope.entered = true
+    frame = last(context.recognition_frames)
+    frame.entry_codeunit = entry_codeunit
+    frame.observation_scope = scope
+    return nothing
+end
+
+function _reject_runtime_recursive_observation!(
+    engine::LinkedSpecRuntimeEngine,
+    context::_RuntimeExecutionContext,
+    rule::String,
+    entry_codeunit::Int,
+)
+    scope = last(context.recursive_observation_scopes)
+    direct = !isempty(context.recognition_frames) &&
+        last(context.recognition_frames).rule == rule
+    code = direct ?
+        "source_location_nonprogress_direct_recursion" :
+        "source_location_nonprogress_mutual_recursion"
+    identity = RecognitionTransaction.reserve_rejected_invocation!(
+        context.recognition_authority,
+        rule,
+    )
+    scope.entered = true
+    scope.completion = _RuntimeRecursiveObservationCompletion(
+        identity,
+        entry_codeunit,
+        nothing,
+        nothing,
+        "rejected",
+        code,
+    )
+    return RuntimeInterpreterException(
+        code;
+        diagnostic = _runtime_context_diagnostic(
+            engine,
+            context;
+            stage = "runtime_execution",
+            summary = "Julia recursive recognition made no progress",
+            detail = code,
+            rule_label = rule,
+            code = code,
+        ),
+    )
+end
+
+function _note_runtime_recognition_match!(
+    context::_RuntimeExecutionContext,
+    one_match::RuntimeRegexMatch,
+)
+    isempty(context.recognition_frames) ||
+        (last(context.recognition_frames).selected_match = one_match)
+    return nothing
+end
+
+function _bind_runtime_recursive_observation!(
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+    target::String,
+    scope::_RuntimeRecursiveObservationScope,
+)
+    isempty(context.recursive_observation_scopes) &&
+        error("recursive observation scope order is invalid")
+    last(context.recursive_observation_scopes) === scope ||
+        error("recursive observation scope order is invalid")
+    completion = scope.completion
+    completion isa _RuntimeRecursiveObservationCompletion || error(
+        "recursive observation for $(scope.rule) completed without a record",
+    )
+    source_context = SourceLocation.SourceLocationContext(
+        rule_role = "$rule_label:recursive_observation",
+        invocation_role = "recursive_observation",
+    )
+    function position(codeunit_offset::Int)
+        return SourceLocation.to_json(SourceLocation.position_from_codeunit(
+            context.source_authority;
+            source_id = "input",
+            codeunit_offset,
+            context = source_context,
+        ))
+    end
+    function span(one_match::RuntimeRegexMatch)
+        start = SourceLocation.position_from_codeunit(
+            context.source_authority;
+            source_id = "input",
+            codeunit_offset = one_match.codeunit_start,
+            context = source_context,
+        )
+        stop = SourceLocation.position_from_codeunit(
+            context.source_authority;
+            source_id = "input",
+            codeunit_offset = one_match.codeunit_end,
+            context = source_context,
+        )
+        return SourceLocation.to_json(SourceLocation.direct_span(
+            context.source_authority;
+            start,
+            stop,
+            provenance = "match",
+            context = source_context,
+        ))
+    end
+    record = Dict{String,Any}(
+        "source_id" => "input",
+        "rule_label" => completion.identity.rule,
+        "invocation_id" => completion.identity.invocation_id,
+        "parent_invocation_id" => completion.identity.parent_invocation_id,
+        "entry_position" => position(completion.entry_codeunit),
+        "selected_match" => completion.selected_match === nothing ?
+            nothing : span(completion.selected_match),
+        "accepted_exit" => completion.accepted_exit_codeunit === nothing ?
+            nothing : position(completion.accepted_exit_codeunit),
+        "outcome" => completion.outcome,
+        "diagnostic" => completion.diagnostic,
+    )
+    _record_runtime_rule_local_binding!(context, target)
+    delete!(context.variables, target)
+    delete!(context.arrays, target)
+    context.hashes[target] = _runtime_as_hash(record)
+    pop!(context.recursive_observation_scopes)
     return nothing
 end
 
@@ -1306,6 +1501,14 @@ function _execute_runtime_rule!(
             "rule=$label entry_regex=$entry_regex_index cursor=$(context.cursor_codeunit)",
             LinkedSpecTraceDebug,
         )
+        if _runtime_recursive_observation_expects(context, label)
+            throw(_reject_runtime_recursive_observation!(
+                engine,
+                context,
+                label,
+                context.cursor_codeunit,
+            ))
+        end
         return _RuntimeRuleResult(false, nothing)
     end
 
@@ -1314,6 +1517,11 @@ function _execute_runtime_rule!(
     saved_registers = context.registers
     context.registers = enter_child(saved_registers)
     _enter_runtime_recognition_invocation!(context, label)
+    _note_runtime_recursive_observation_entry!(
+        context,
+        label,
+        recursion_key[3],
+    )
     trace_scope = _enter_runtime_trace_scope!(
         context,
         "julia_runtime:rule",
@@ -1341,24 +1549,28 @@ function _execute_runtime_rule!(
         )
     end
 
+    terminal_result = nothing
+    terminal_error = nothing
     try
         init_return = _execute_runtime_lifecycle!(engine, rule, "I", context)
         if init_return !== nothing
-            return _runtime_returned(init_return.value)
+            terminal_result = _runtime_returned(init_return.value)
+            return terminal_result
         end
 
         try
             uses_blind_dispatch = generated_family === nothing ?
                 !isempty(rule.blind_edges) : _generated_family_uses_blind_dispatch(generated_family)
             if uses_blind_dispatch
-                return _execute_runtime_blind_rule!(
+                terminal_result = _execute_runtime_blind_rule!(
                     engine,
                     rule,
                     context;
                     uses_and_execution = execution_policy.uses_and_execution,
                 )
+                return terminal_result
             end
-            return _execute_runtime_regex_rule!(
+            terminal_result = _execute_runtime_regex_rule!(
                 engine,
                 rule,
                 entry_regex_index,
@@ -1366,15 +1578,17 @@ function _execute_runtime_rule!(
                 cursor_policy = execution_policy.cursor_policy,
                 uses_and_execution = execution_policy.uses_and_execution,
             )
+            return terminal_result
         catch error
             if error isa _RuntimeActionReturn
-                return _runtime_returned(error.value)
+                terminal_result = _runtime_returned(error.value)
+                return terminal_result
             end
             rethrow()
         end
     catch error
         if error isa RuntimeInterpreterException
-            throw(_with_runtime_diagnostic(
+            terminal_error = _with_runtime_diagnostic(
                 error,
                 _runtime_context_diagnostic(
                     engine,
@@ -1384,8 +1598,10 @@ function _execute_runtime_rule!(
                     detail = error.message,
                     rule_label = label,
                 ),
-            ))
+            )
+            throw(terminal_error)
         end
+        terminal_error = error
         rethrow()
     finally
         if generated_family !== nothing && context.generated_source_identity !== nothing
@@ -1403,7 +1619,12 @@ function _execute_runtime_rule!(
             "rule=$label cursor=$(context.cursor_codeunit)",
         )
         try
-            _leave_runtime_recognition_invocation!(context, label)
+            _leave_runtime_recognition_invocation!(
+                context,
+                label;
+                result = terminal_result,
+                error = terminal_error,
+            )
         finally
             _restore_runtime_rule_local_bindings!(context)
             context.registers = saved_registers
@@ -2034,6 +2255,7 @@ function _accept_runtime_regex_match!(
 )
     context.cursor_codeunit = one_match.codeunit_end
     context.registers = with_local_match(context.registers, one_match)
+    _note_runtime_recognition_match!(context, one_match)
 
     for edge in rule.action_edges
         if edge.regex_index != one_match.alternative_index
@@ -3062,6 +3284,34 @@ function _evaluate_runtime_action_expr!(
             matched = child.matched,
             payload = child.value,
         )
+    elseif expr isa ActionObserveRecognitionExpr
+        scope = _begin_runtime_recursive_observation!(context, expr.rule)
+        try
+            target_index = current_edge !== nothing &&
+                current_edge.target.label == expr.rule ? current_edge.target.index : 0
+            child = current_edge !== nothing && current_edge.target.label == expr.rule ?
+                _execute_runtime_action_edge_child!(engine, current_edge, context) :
+                _execute_runtime_rule!(engine, expr.rule, target_index, context)
+            context.retv = child.value
+            _bind_runtime_recursive_observation!(
+                context,
+                rule_label,
+                expr.target,
+                scope,
+            )
+            return _runtime_copy(child.value)
+        catch
+            if !isempty(context.recursive_observation_scopes) &&
+                    last(context.recursive_observation_scopes) === scope
+                _bind_runtime_recursive_observation!(
+                    context,
+                    rule_label,
+                    expr.target,
+                    scope,
+                )
+            end
+            rethrow()
+        end
     elseif expr isa ActionRecognitionCommitExpr
         return _runtime_recognition_commit!(context, rule_label, expr.token)
     elseif expr isa ActionRecognitionRollbackExpr
@@ -6311,7 +6561,11 @@ function _execute_runtime_action_edge_child!(
             "action edge references undefined child '$(current_edge.target.label)'",
         ))
     end
-    if _runtime_passive_terminal_rule(child_rule)
+    if _runtime_passive_terminal_rule(child_rule) &&
+            !_runtime_recursive_observation_expects(
+                context,
+                current_edge.target.label,
+            )
         current_edge.child_result = _RuntimeRuleResult(false, nothing)
         _trace_runtime_decision!(
             context,

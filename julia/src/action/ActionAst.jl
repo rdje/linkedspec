@@ -110,6 +110,25 @@ function ActionRecognizeOnceExpr(; source, source_span, token, rule)
     )
 end
 
+"""Observe one statically named child invocation and bind its detached record."""
+struct ActionObserveRecognitionExpr <: ActionExpr
+    kind::String
+    source::String
+    source_span::ActionSourceSpan
+    target::String
+    rule::String
+end
+
+function ActionObserveRecognitionExpr(; source, source_span, target, rule)
+    return ActionObserveRecognitionExpr(
+        "observe_recognition",
+        String(source),
+        source_span,
+        String(target),
+        String(rule),
+    )
+end
+
 """Commit one attempted token and return its staged payload."""
 struct ActionRecognitionCommitExpr <: ActionExpr
     kind::String
@@ -823,6 +842,7 @@ function find_removed_aggregate_selector(expr::ActionExpr)
         return _find_removed_aggregate_selector_in_args(expr.args)
     elseif expr isa ActionRecognitionCheckpointExpr ||
            expr isa ActionRecognizeOnceExpr ||
+           expr isa ActionObserveRecognitionExpr ||
            expr isa ActionRecognitionCommitExpr ||
            expr isa ActionRecognitionRollbackExpr
         return nothing
@@ -962,6 +982,13 @@ to_json(expr::ActionRecognitionCheckpointExpr) = _action_base_json(expr)
 function to_json(expr::ActionRecognizeOnceExpr)
     result = _action_base_json(expr)
     result["token"] = expr.token
+    result["rule"] = expr.rule
+    return result
+end
+
+function to_json(expr::ActionObserveRecognitionExpr)
+    result = _action_base_json(expr)
+    result["target"] = expr.target
     result["rule"] = expr.rule
     return result
 end

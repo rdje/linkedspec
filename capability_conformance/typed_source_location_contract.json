@@ -2,7 +2,7 @@
   "format": 1,
   "contract_id": "linkedspec-typed-source-location-v1",
   "task_owner": "FUTURE-PARITY-BACKLOG.14.1.1",
-  "status": "neutral_contract_with_perl_rust_dart_recursive_observation",
+  "status": "neutral_contract_with_perl_rust_dart_julia_recursive_observation",
   "expected_counts": {
     "sources": 3,
     "position_conversions": 7,
@@ -20,7 +20,7 @@
     "rollout_legs": 14,
     "recurring_source_groups": 5,
     "recurring_runtime_routes": 6,
-    "mutations": 73
+    "mutations": 74
   },
   "policy": {
     "source_identity": "caller-authorized decoded input identity; never a path, backend object, or implicit read authority",
@@ -35,8 +35,8 @@
     "recursion": "entry, selected-match, and accepted-exit observations are read-only; invocation ids are positive, unique, and monotonic; nullable parents are distinct earlier same-authority ids with bounded acyclic links",
     "progress": "repetition, recursion, and staged queues must advance the cursor or prove a well-founded decreasing measure",
     "dispatch_authority": "a span conveys data and provenance only; source, registry, capability, and policy authority remain independently required",
-    "source_spelling": "observe_recognition(observation, call(Child)) is current in Perl, Rust, and Dart and selected for the remaining runtimes; Position and Span remain private architectural values projected as detached records",
-    "implementation_boundary": "the recursive-observation spelling, dedicated private node, detached carrier, and parser behavior are admitted only in Perl, Rust, and Dart; Julia, PUC Lua, and LuaJIT remain pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted"
+    "source_spelling": "observe_recognition(observation, call(Child)) is current in Perl, Rust, Dart, and Julia and selected for the remaining runtimes; Position and Span remain private architectural values projected as detached records",
+    "implementation_boundary": "the recursive-observation spelling, dedicated private node, detached carrier, and parser behavior are admitted only in Perl, Rust, Dart, and Julia; PUC Lua and LuaJIT remain pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted"
   },
   "canonical_execution": {
     "contract_path": "capability_conformance/typed_source_location_contract.json",
@@ -106,7 +106,7 @@
       "operand": "the second operand is exactly one unevaluated statically named call(Rule)",
       "return": "the expression returns the ordinary child payload unchanged; observation data is never mixed with payload truthiness",
       "terminal": "accepted and failed calls bind before returning; aborted and rejected calls finalize the detached record before propagating the unchanged typed failure",
-      "availability": "private syntax is current only in Perl, Rust, and Dart; no facade, descriptor/schema, semantic/MCP, CLI, or public support admission is current"
+      "availability": "private syntax is current only in Perl, Rust, Dart, and Julia; no facade, descriptor/schema, semantic/MCP, CLI, or public support admission is current"
     },
     "carrier_projection": {
       "kind": "detached_harray",
@@ -258,7 +258,7 @@
       {"backend": "perl", "paths": ["t/typed_source_location_values.t", "t/typed_source_location_perl_contract.t", "t/recursive_observation_perl_contract.t"]},
       {"backend": "rust", "paths": ["rust/linkedspec-runtime/tests/typed_source_location_contract.rs", "rust/linkedspec-runtime/tests/recursive_observation_contract.rs"]},
       {"backend": "dart", "paths": ["dart/test/typed_source_location_contract_test.dart", "dart/test/recursive_observation_contract_test.dart"]},
-      {"backend": "julia", "paths": ["julia/test/typed_source_location_contract_test.jl"]},
+      {"backend": "julia", "paths": ["julia/test/typed_source_location_contract_test.jl", "julia/test/recursive_observation_contract_test.jl"]},
       {"backend": "lua", "paths": ["lua/test/typed_source_location_contract_test.lua"]}
     ],
     "route_schema": {
@@ -269,7 +269,7 @@
       {"runtime": "perl", "source_backend": "perl", "command": "PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t t/recursive_observation_perl_contract.t"},
       {"runtime": "rust", "source_backend": "rust", "command": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract --test recursive_observation_contract"},
       {"runtime": "dart", "source_backend": "dart", "command": "cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/typed_source_location_contract_test.dart test/recursive_observation_contract_test.dart"},
-      {"runtime": "julia", "source_backend": "julia", "command": "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/typed_source_location_contract_test.jl\")'"},
+      {"runtime": "julia", "source_backend": "julia", "command": "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/typed_source_location_contract_test.jl\"); include(\"julia/test/recursive_observation_contract_test.jl\")'"},
       {"runtime": "puc_lua", "source_backend": "lua", "command": "bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_test.lua"},
       {"runtime": "luajit", "source_backend": "lua", "command": "bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contract_test.lua"}
     ],
@@ -293,7 +293,7 @@
     {"leg": "julia_runtime", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.2.4.3", "runtimes": ["julia"]},
     {"leg": "lua_dual_abi", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.2.5.3", "runtimes": ["puc_lua", "luajit"]},
     {"leg": "transaction_safety", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.3", "runtimes": []},
-    {"leg": "recursive_observation", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.4", "runtimes": ["perl", "rust", "dart"]},
+    {"leg": "recursive_observation", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.4", "runtimes": ["perl", "rust", "dart", "julia"]},
     {"leg": "lossless_gap_composition", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.5", "runtimes": []},
     {"leg": "progressive_span_dispatch", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.6", "runtimes": []},
     {"leg": "staged_span_dispatch", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.7", "runtimes": []},

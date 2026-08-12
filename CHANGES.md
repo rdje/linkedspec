@@ -10,6 +10,32 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-12 — FUTURE-PARITY-BACKLOG.14.4.5 — admit Julia recursive observation
+
+- Added the exact private `observe_recognition(observation, call(Child))` form to Julia as one dedicated action
+  expression with fail-closed target, operand, static-rule, and transaction-effect validation.
+- Reused the existing parse-local recognition invocation authority for direct-parent lineage and fresh rejected-
+  attempt ids. One pending-entry scope consumes one ephemeral completion and binds the detached nine-field record
+  without adding a second stack or retained parse history.
+- Preserved child payload/error identity, zero-based UTF-8 code-unit registers, child-owned family/cursor policy,
+  terminal local match, action-edge single dispatch, and rule-local binding across native, reconstructed,
+  generated-plan, and independently loaded emitted-module carriers.
+- Added seven ordinary/canonical groups and 30 assertions covering static drift, falsey success, typed Unicode-
+  scalar projection, detachment, failed/zero-regex/action-edge outcomes, nested separation, abort, direct/mutual
+  rejection, and all four carriers. The combined Julia transaction/observation/typed-source/repeated-action run
+  passes 207+30+127+162 assertions.
+- Promoted only Julia alongside Perl, Rust, and Dart on the still-pending observation row. Typed-source governance
+  is now 74 mutations at unchanged 8 complete / 6 pending; recognition remains 129+4/246/58 and public surfaces
+  stay closed. Focused, final full ordinary, storage, six-runtime typed-source, and five-backend repeated-action
+  proof pass. The rendered book passes 79 files / 14,528 KiB, Knowledge passes 825 facts / 6,883 question keys,
+  and all eight doctrines pass.
+- Canonical CI caught a bounded-memory projection dropping the repeated-action contract's historical next owner
+  `FUTURE-PARITY-BACKLOG.10.1`; restoring that compact marker keeps `MEMORY.md` at 60 lines and returns the exact
+  repeated-action checker to 8/0/54 without weakening it. The sandboxed rerun then stopped only at the expected
+  outer-harness denial of nested macOS `sandbox-exec`; the unchanged permission-authorized run passes containment,
+  relocation, CLI 66/66 twice, RAM 60%, Phase 0 1,031/1,031 in 725 seconds, and the complete six-runtime typed-
+  source opt-in through exact `[ci] local CI gate passed` with exit 0.
+
 ## 2026-08-12 — FUTURE-PARITY-BACKLOG.14.4.4 — admit Dart recursive observation
 
 - Added the exact private `observe_recognition(observation, call(Child))` form to Dart as one dedicated,

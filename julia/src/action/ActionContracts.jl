@@ -720,6 +720,7 @@ function _visit_expr!(resolver::_ActionContractResolver, expr::ActionExpr)
         _visit_args!(resolver, expr.args)
     elseif expr isa ActionRecognitionCheckpointExpr ||
            expr isa ActionRecognizeOnceExpr ||
+           expr isa ActionObserveRecognitionExpr ||
            expr isa ActionRecognitionCommitExpr ||
            expr isa ActionRecognitionRollbackExpr
         # Grammar-owned recognition intrinsics are dedicated ActionIR nodes,

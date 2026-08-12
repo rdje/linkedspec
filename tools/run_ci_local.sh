@@ -416,6 +416,7 @@ require_tracked_file rust/linkedspec-runtime/tests/recursive_observation_contrac
 require_tracked_file dart/test/typed_source_location_contract_test.dart
 require_tracked_file dart/test/recursive_observation_contract_test.dart
 require_tracked_file julia/test/typed_source_location_contract_test.jl
+require_tracked_file julia/test/recursive_observation_contract_test.jl
 require_tracked_file lua/test/typed_source_location_contract_test.lua
 require_tracked_file lua/test/source_boundary_compatibility_aliases_test.lua
 require_tracked_file t/variadic_user_function_contract.t
@@ -634,7 +635,7 @@ log "running exact Dart typed source-location value, projection, and recursive-o
 (cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/typed_source_location_contract_test.dart test/recursive_observation_contract_test.dart)
 
 log "running exact Julia typed source-location value and projection admission consumer"
-bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include("julia/test/typed_source_location_contract_test.jl")'
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include("julia/test/typed_source_location_contract_test.jl"); include("julia/test/recursive_observation_contract_test.jl")'
 
 log "running exact Lua typed source-location value and projection admission consumer on PUC Lua"
 bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_test.lua

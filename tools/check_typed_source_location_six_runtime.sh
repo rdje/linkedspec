@@ -44,7 +44,7 @@ log "checking the Dart immutable values, exact helper projections, and recursive
 ( cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/typed_source_location_contract_test.dart test/recursive_observation_contract_test.dart )
 
 log "checking the Julia immutable values and exact helper projections"
-bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include("julia/test/typed_source_location_contract_test.jl")'
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include("julia/test/typed_source_location_contract_test.jl"); include("julia/test/recursive_observation_contract_test.jl")'
 
 log "checking the shared Lua immutable values and exact helper projections on PUC Lua"
 bash tools/run_lua_project_data.sh puc lua/test/typed_source_location_contract_test.lua

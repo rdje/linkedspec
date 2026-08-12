@@ -150,6 +150,7 @@ function _normalize_final_codeblock_expr!(expr::ActionExpr, registry::UserFuncti
         )
     elseif expr isa ActionRecognitionCheckpointExpr ||
            expr isa ActionRecognizeOnceExpr ||
+           expr isa ActionObserveRecognitionExpr ||
            expr isa ActionRecognitionCommitExpr ||
            expr isa ActionRecognitionRollbackExpr
         return nothing

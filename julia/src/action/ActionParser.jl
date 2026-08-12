@@ -751,6 +751,43 @@ function _action_recognition_transaction_expr(
             token = token,
             rule = rule,
         )
+    elseif name == "observe_recognition"
+        length(args) == 2 || error(
+            "LINKEDSPEC_SOURCE_LOCATION_ERROR:" *
+            "source_location_recursive_observation_operand",
+        )
+        target = _action_recognition_bare_name(first(args))
+        target === nothing && error(
+            "LINKEDSPEC_SOURCE_LOCATION_ERROR:" *
+            "source_location_recursive_observation_target",
+        )
+        operand = last(args)
+        if !(operand isa ActionPositionalArgument) ||
+                !(operand.value isa ActionCallExpr)
+            error(
+                "LINKEDSPEC_SOURCE_LOCATION_ERROR:" *
+                "source_location_recursive_observation_operand",
+            )
+        end
+        call = operand.value
+        if call.name != "call" || call.source_method != "call" ||
+                length(call.args) != 1
+            error(
+                "LINKEDSPEC_SOURCE_LOCATION_ERROR:" *
+                "source_location_recursive_observation_operand",
+            )
+        end
+        rule = _action_recognition_bare_name(only(call.args))
+        rule === nothing && error(
+            "LINKEDSPEC_SOURCE_LOCATION_ERROR:" *
+            "source_location_recursive_observation_operand",
+        )
+        return ActionObserveRecognitionExpr(
+            source = source,
+            source_span = source_span,
+            target = target,
+            rule = rule,
+        )
     elseif name == "recognition_commit" || name == "recognition_rollback"
         length(args) == 1 || invalid()
         token = _action_recognition_bare_name(only(args))

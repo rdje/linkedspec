@@ -8,10 +8,12 @@ answers:
   - "where is the task-index marker-anchor repair tracked"
   - "why did Dart calls canonical CI fail on repeated-action governance"
   - "which repeated-action handoff must remain in bounded MEMORY"
+  - "why did Julia recursive observation canonical CI fail on repeated-action governance"
 date: 2026-07-21
 status: current
 tags: [task-tree, doctrine, governance, repeated-action, local-ci, no-drift]
 evidence: docs/TASK_TREE.md; MEMORY.md; capability_conformance/repeated_action_result_contract.json; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.2, .10.3.0, .10.3.2.0, .10.4.0.1, .10.4.1, .10.5.2.3, and .10.5.3.1
+evidence_update_2026_08_12: "FUTURE-PARITY-BACKLOG.14.4.5 repeated the bounded-memory half of this known coupling: its first fully staged canonical run passed every earlier contract, then rejected MEMORY.md because the current rewrite omitted historical next owner FUTURE-PARITY-BACKLOG.10.1. Restoring one compact marker within the unchanged 60-line cap returned the exact repeated-action checker to 8 complete / 0 pending / 54 mutations. The unchanged canonical restart passed that checkpoint; no checker, runtime, public surface, or task-tree ownership changed."
 reverify: "bash tools/run_python_project_data.sh tools/check_repeated_action_result_contract.py; rg -n 'repeated-action recurring/public no-drift is closed' docs/TASK_TREE.md capability_conformance/repeated_action_result_contract.json"
 ---
 
@@ -34,3 +36,8 @@ exact task-index marker was restored: overwrite-only `MEMORY.md` must also retai
 `FUTURE-PARITY-BACKLOG.10.1`. The bounded repair is to keep the exact closeout sentence in the stable marker section
 and the compact handoff fact in current memory until `.22` moves both requirements to a governed home. Do not
 weaken the checker, and do not pivot from an already dirty semantic leaf merely to perform the structural repair.
+
+Julia recursive-observation leaf `.14.4.5` reproduced only the paired `MEMORY.md` failure after its bounded pointer
+was rewritten for atomic 213. The focused checker proved the root cause, and the same compact historical owner was
+restored without exceeding the 60-line cap. This recurrence reinforces `.22` as the structural owner; it does not
+justify copying more history into layer-A memory or weakening the exact handoff assertion.

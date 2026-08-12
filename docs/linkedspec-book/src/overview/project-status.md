@@ -102,8 +102,8 @@ An unchanged `FUTURE-PARITY-BACKLOG.14.2.7` recomposition reruns that complete a
 value/helper implementation slice `.14.2`. This is a project-state closure, not a new language surface: the six
 admitted runtimes, helper results, schemas, and 8-complete/6-pending rollout remain unchanged.
 
-Public typed values, runtime recursive observation, span-native progressive/staged
-dispatch, and the remaining public authored surfaces remain future work. Exact transaction syntax is ratified:
+Public typed values, shared-Lua recursive observation, span-native progressive/staged dispatch, and the remaining
+public authored surfaces remain future work. Exact transaction syntax is ratified:
 `recognition_checkpoint()`, `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and
 `recognition_rollback(token)`. Match is a strict boolean and the falsey-safe payload remains staged until commit.
 Their neutral artifact/checker is executable at 129 current + 4 dedicated ActionIR rows, 246 call rows, and 58
@@ -144,10 +144,13 @@ independently compiled emitted-source execution. Its seven-test consumer preserv
 UTF-8-byte registers only at the typed carrier boundary. Dart `.14.4.4` admits a dedicated private
 `ActionObserveRecognitionExpr` and the same contracts across native, reconstructed, generated-plan, and freshly
 analyzed emitted-source execution. Its seven-test consumer preserves falsey payloads, projects internal UTF-16
-code-unit positions to Unicode-scalar records, and preserves the governed repeated-action seam. Three admission
-regressions advance governance to 73 while the parent row stays pending with Perl, Rust, and Dart in its runtime
-list. No public helper, facade, descriptor/generated version, result schema, semantic/MCP field, CLI, README, or
-Julia/Lua behavior is current. Those runtimes, recurring, and public legs follow through `.14.4.5-.8`.
+code-unit positions to Unicode-scalar records, and preserves the governed repeated-action seam. Julia `.14.4.5`
+admits the corresponding private `ActionObserveRecognitionExpr` across native, reconstructed, generated-plan, and
+independently loaded emitted-module execution. Its seven-group, 30-assertion consumer preserves falsey payloads,
+projects zero-based UTF-8 code-unit positions to Unicode-scalar records, and preserves the same repeated-action
+seam. Four admission regressions advance governance to 74 while the parent row stays pending with Perl, Rust, Dart,
+and Julia in its runtime list. No public helper, facade, descriptor/generated version, result schema, semantic/MCP
+field, CLI, README, or Lua behavior is current. Shared Lua, recurring, and public legs follow through `.14.4.6-.8`.
 Executable-neutral signoff passes the exact six-runtime composition, support ledgers, all eight doctrines,
 six-family process containment, repository relocation, CLI 66x2, RAM 35%, and canonical Phase 0 1,031/1,031 in
 714 seconds through the exact local-CI success marker.

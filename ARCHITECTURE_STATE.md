@@ -1,13 +1,13 @@
 # ARCHITECTURE STATE
 
-## Recursive source observation is privately admitted in Perl
+## Recursive source observation is privately admitted in Perl, Rust, Dart, and Julia
 
 `FUTURE-PARITY-BACKLOG.14.4.1` selected
-`value = observe_recognition(observation, call(Child))`; `.14.4.2` now admits it privately in Perl. The first operand is
-one bare rule-local harray binding; the second is one unevaluated statically named call. The expression preserves
-the ordinary child payload—including falsey accepted values—while the binding receives a separate recursively
-detached record at the terminal boundary. Accepted/failed calls bind before returning; aborted/rejected calls
-finalize the record before propagating their unchanged typed failure.
+`value = observe_recognition(observation, call(Child))`; `.14.4.2-.5` admit it privately in Perl, Rust, Dart, and
+Julia. The first operand is one bare rule-local harray binding; the second is one unevaluated statically named call.
+The expression preserves the ordinary child payload—including falsey accepted values—while the binding receives a
+separate recursively detached record at the terminal boundary. Accepted/failed calls bind before returning;
+aborted/rejected calls finalize the record before propagating their unchanged typed failure.
 
 The carrier is an ordinary harray with exact ordered fields `source_id`, `rule_label`, `invocation_id`,
 `parent_invocation_id`, `entry_position`, `selected_match`, `accepted_exit`, `outcome`, and `diagnostic`. Positions
@@ -19,18 +19,20 @@ The neutral checker now executes 33 ordered transitions over invocation ids `1..
 entry, caller-cursor capture before `I`, child-owned OR/default seek and AND consume, terminal local-match
 replacement, zero-regex absence, accepted-only exit, all four outcomes, fresh rejected-child ids without frame
 push, immediate detach, and unavailable history. Two static target/operand diagnostics plus ten reason-checked
-state corruptions and three surface/topology mutations advance typed-source governance from 57 to 70. Perl adds
-one admission-regression mutation, taking the total to 71 while rollout stays 8 complete / 6 pending. One private
-`OBSERVE_RECOGNITION` ActionIR node, static target/operand policy, existing monotonic invocation authority, and
-live/generated runtime route are current only in Perl. The pending recursive-observation row lists only Perl. No
-public helper/value, facade, descriptor/generated schema, result schema, semantic/MCP projection, CLI, README, or
-non-Perl behavior becomes current; Rust `.14.4.3` follows after clean Perl landing.
+state corruptions and three surface/topology mutations advance typed-source governance from 57 to 70. Four backend
+admission regressions take the total to 74 while rollout stays 8 complete / 6 pending. Each runtime owns one private
+dedicated node, fail-closed static/effect policy, and the existing monotonic invocation authority. Rust, Dart, and
+Julia additionally prove reconstructed, generated-plan, and emitted carriers; their internal byte/code-unit
+registers cross existing source authorities only at Unicode-scalar record projection. The pending recursive-
+observation row lists Perl, Rust, Dart, and Julia. No public helper/value, facade, descriptor/generated schema,
+result schema, semantic/MCP projection, CLI, README, or Lua behavior becomes current; shared Lua `.14.4.6` follows
+only after clean Julia landing.
 
-Neutral signoff passes the exact six-runtime composition, strict generated Rust 105/105, capability 80/0/0,
-language coverage 246 current / 105 corpus plus one named-mark fixture / 122 public Perl contracts, the rendered
-book, Knowledge 821/6,831, and all eight doctrines. One host-permitted uninterrupted canonical run proves the
-six-family process sandbox, repository relocation, CLI 66x2, RAM 35%, and Phase 0 1,031/1,031 in 714 seconds before
-the exact local-CI success marker and exit 0.
+The Julia final-path consumer passes seven groups / 30 assertions; combined transaction/observation/typed-source/
+repeated-action proof passes 207+30+127+162. Exact six-runtime typed-source and five-backend repeated-action
+composition are GREEN. Final book 79/14,528 KiB, Knowledge 825/6,883, all eight doctrines, repository containment
+and relocation, CLI 66x2, RAM 60%, and canonical Phase 0 1,031/1,031 in 725 seconds pass through the exact local-CI
+success marker. Julia leaf `.14.4.5` is signoff-complete and must land cleanly before shared Lua `.14.4.6` activates.
 
 ## Recursive source-observation lineage is fail-closed on the existing invocation authority
 

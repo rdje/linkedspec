@@ -162,6 +162,7 @@ mutable struct _InvocationState
     rule::String
     origin::String
     invocation::UInt64
+    parent_invocation::Union{Nothing,UInt64}
     generation::UInt64
     active::Bool
     frame_state::RecognitionFrameState
@@ -191,6 +192,13 @@ end
 
 struct _RecognitionTransactionToken
     _state::_TransactionState
+end
+
+"""Detached lineage for one entered or pre-entry-rejected invocation."""
+struct RecognitionInvocationIdentity
+    rule::String
+    invocation_id::UInt64
+    parent_invocation_id::Union{Nothing,UInt64}
 end
 
 Base.show(io::IO, ::_RecognitionInvocationFrame) =
@@ -264,6 +272,8 @@ function enter_invocation(
     origin::AbstractString,
     state::RecognitionFrameState,
 )
+    parent_invocation = isempty(authority._invocation_stack) ?
+        nothing : authority._invocation_stack[end].invocation
     invocation = _claim_generation!(authority, :_next_invocation)
     generation = _claim_generation!(authority, :_next_generation)
     frame = _InvocationState(
@@ -273,6 +283,7 @@ function enter_invocation(
         String(rule),
         String(origin),
         invocation,
+        parent_invocation,
         generation,
         true,
         _copy_state(state),
@@ -280,6 +291,30 @@ function enter_invocation(
     )
     push!(authority._invocation_stack, frame)
     return _RecognitionInvocationFrame(frame)
+end
+
+"""Return detached lineage for one live invocation frame."""
+function invocation_identity(authority::RecognitionTransactionAuthority, frame)
+    state = _frame_for_authority(authority, frame)
+    return RecognitionInvocationIdentity(
+        state.rule,
+        state.invocation,
+        state.parent_invocation,
+    )
+end
+
+"""Reserve monotonic lineage for a recursion rejected before frame entry."""
+function reserve_rejected_invocation!(
+    authority::RecognitionTransactionAuthority,
+    rule::AbstractString,
+)
+    parent_invocation = isempty(authority._invocation_stack) ?
+        nothing : authority._invocation_stack[end].invocation
+    return RecognitionInvocationIdentity(
+        String(rule),
+        _claim_generation!(authority, :_next_invocation),
+        parent_invocation,
+    )
 end
 
 function _frame_for_authority(
