@@ -572,6 +572,21 @@ behavior becomes current in this neutral leaf.
 - The accepted 14-row architecture remains 9 complete / 5 pending: `recursive_observation` stays complete under
   `.14.4`, and combined program-wide `recurring_public_no_drift` stays pending under `.14.8`.
 
+### 29. Freeze the lossless-segmentation cross-tree handoff
+
+- `.14.5.0` changes no behavior. It confirms that numeric `Rule[N]` selection is current, while named
+  declarations, `Rule[name]`, and `@capture_gaps` remain future work owned exclusively by
+  `INTER-MATCH-GAP-CAPTURE.1-.7`.
+- Brackets are the selector namespace. Numeric selectors retain positional compatibility; named selectors retain
+  stable identity across declaration reordering. Both may resolve to one typed slot identity without erasing
+  source provenance or pretending that position and name have identical migration semantics.
+- Dot remains the fluent rule-behavior namespace, including forms such as `Rule.return(...)`. Therefore
+  `Rule.N` and `Rule.name` are not aliases for bracket selectors, and the first dot after an edge target stays
+  mandatory: whitespace-only `-> Rule[name] method(...)` is not a fluent-chain alias.
+- After `INTER-MATCH-GAP-CAPTURE.7` closes its syntax, lifecycle, compatibility, backend, carrier, and public
+  admission, `.14.5.1` may compose that unchanged proof into typed-source `gap_composition`. Final combined
+  no-drift remains owned by `.14.8`.
+
 ## Consequences
 
 - Cursor control, capture, recursion, segmentation, and parser composition share one precise model instead of accumulating pairwise helper semantics.
@@ -583,6 +598,8 @@ behavior becomes current in this neutral leaf.
 - The accepted private recursive-observation spelling, detached carrier, and exact recurrence are current on those
   same six runtimes. Its public documentation/no-drift projection is current without a public API admission.
 - Lossless gap capture gains the common typed representation it anticipated while retaining its separate owner.
+- Stable named and compatible numeric slot selection share a structural target without collapsing identity into
+  position or overloading the fluent dot namespace.
 - This decision and its `.14.3.0` audit amendment change no grammar, helper, parser/compiler/runtime, descriptor,
   generated format, semantic/MCP response, primary CLI, rollout, admission, or current public feature-completeness
   claim.

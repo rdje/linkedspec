@@ -1028,6 +1028,23 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   README, or storage-root behavior changes. Retrieve
   [[recursive-observation-recurring-gate]] before changing this proof.
 
+### 4.9.1.2 Lossless-gap handoff preflight
+
+- **WHAT:** the behavior-free authority audit before activating any named-slot or automatic gap implementation.
+- **WHEN:** changing `Rule[N]`, proposing `Rule[name]`, `@capture_gaps`, split-marker execution, or typed
+  gap composition.
+- **HOW:** retrieve [[lossless-gap-cross-tree-handoff]], then use `LinkedSpec::Get(..., return_descriptor => 1)`
+  to prove current numeric target identity and current named-surface diagnostics. Run
+  `bash tools/check_duplicate_regex_slot_identity_five_backend.sh` and
+  `bash tools/check_typed_source_location_six_runtime.sh` before changing either authority. If a diagnostic
+  Perl probe embeds a spec in `qq{...}`, escape authored marker sigils such as `\@move_pos`; otherwise host
+  interpolation removes the marker and creates false runtime evidence.
+- **BOUNDARY:** `INTER-MATCH-GAP-CAPTURE.1-.7` exclusively owns named-slot grammar, `@capture_gaps` lifecycle,
+  compatibility, backend/carrier implementation, and public admission. `FUTURE-PARITY-BACKLOG.14.5.1` only
+  composes that closed proof into typed-source `gap_composition`. Brackets are selectors—numeric is positional,
+  named is stable identity—and dot remains the fluent rule-behavior namespace. The first fluent dot is mandatory;
+  whitespace-only target-to-method attachment is not an alias.
+
 ### 4.9.2 `tools/check_recognition_transaction_contract.py` — neutral transaction/progress oracle
 
 - **WHAT:** independently interprets `linkedspec-recognition-transaction-v1`: four current authored forms, a linear

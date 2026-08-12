@@ -4,13 +4,13 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `eb8d052c` — clean recursive-observation recurrence base for public closeout atomic 216/300; no push.
-- latest_completed_leaf: `.14.4.8` recursive-observation public projection/no-drift is signoff-complete for intended atomic 216/300 landing.
-- active_work_unit: `.14.4.8` public closeout signoff is complete; this pointer describes the intended committed handoff.
-- next_action: land atomic 216 cleanly, then activate lossless gap-composition activity `.14.5` task-tree-first.
-- in_flight_uncommitted: none in the intended committed handoff; `.14.4.8` owns the atomic staged snapshot until commit.
-- blockers: none. Focused/public/six-runtime proof and canonical CI pass all eight doctrines, containment/relocation,
-  CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 713 seconds, and the opt-in matrix; the task has full evidence.
+- activation_commit: `d26e4d4e` — clean recursive-observation public-closeout base for handoff atomic 217/300; no push.
+- latest_completed_leaf: `.14.5.0` lossless-gap cross-tree handoff is signoff-complete for intended atomic 217/300.
+- active_work_unit: `.14.5.0` behavior-free lossless-gap cross-tree handoff; all focused and canonical proof is complete.
+- next_action: land atomic 217 cleanly, then activate `INTER-MATCH-GAP-CAPTURE.1` task-tree-first from that commit.
+- in_flight_uncommitted: none in the intended handoff; the signoff-complete `.14.5.0` snapshot awaits its atomic commit.
+- blockers: none. All eight doctrines, containment/relocation, CLI 66/66 twice, RAM 68%, Phase 0 1,031/1,031 in
+  771 seconds, duplicate-slot 59, typed-source 9/5/114, Knowledge 829/6,931, and book 79/14,580 KiB pass.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes. Eleven topology mutations advanced governance to 53, four lineage mutations to 57, and executable
@@ -56,5 +56,5 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   policy, and authority-backed carriers at 207/207; exact ordinary/canonical proof is current while the API stays private.
   Lua has one shared Lua-5.1 authority at 187/187 and admitted ActionIR/effect/progress/runtime/carriers at 246/246
   per ABI; ordinary/canonical proof runs once per ABI while facade privacy remains unchanged.
-- current_future_direction: `.14.4.8` is signoff-complete from clean `eb8d052c`; `.14.5` follows only after atomic 216 is clean; closed repeated-action next owner remains `FUTURE-PARITY-BACKLOG.10.1`.
-- latest_bootstrap_read: 2026-08-12 — complete roadmap/codebase/mdBook and continuity/tooling review; pivot guard: do not leave public closeout `.14.4.8` until its owned tree is committed and clean; push lock is 300.
+- current_future_direction: `.14.5.0` freezes `INTER-MATCH-GAP-CAPTURE.1-.7` as sole next named-slot/gap implementation owner; `.14.5.1` composes typed gaps only after `.7`. Brackets select slots; numeric is positional, named is stable identity; dot remains fluent behavior and the first fluent dot is mandatory. Closed repeated-action next owner remains `FUTURE-PARITY-BACKLOG.10.1`.
+- latest_bootstrap_read: 2026-08-13 — complete roadmap/codebase/mdBook and continuity/tooling review; pivot guard: do not leave `.14.5.0` until atomic 217 is committed and clean; push lock is 300.

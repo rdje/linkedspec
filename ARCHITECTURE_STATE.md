@@ -47,6 +47,31 @@ before exact `[ci] local CI gate passed` and exit 0. The first fully staged sand
 gate and stopped only because the outer harness denied nested macOS `sandbox-exec`; the unchanged permission-
 authorized run is authoritative.
 
+## Lossless segmentation has one clean cross-tree implementation owner
+
+Behavior-free `FUTURE-PARITY-BACKLOG.14.5.0` audits the committed named-slot, duplicate-slot, typed-source,
+historical-gap, and marker-divergence authorities without changing grammar, compiler, runtime, carrier, public
+surface, rollout, or current claims. Current descriptors resolve numeric `Rule[N]` targets; named declarations,
+`Rule[name]`, and `@capture_gaps` remain absent. The exact historical Perl probe returns prefix/interstitial
+gap-plus-lifecycle pairs and no automatic tail, while current marker execution remains rule-level in Perl,
+preceding-slot-local in Lua, and absent from native Rust/Dart/Julia execution.
+
+`INTER-MATCH-GAP-CAPTURE.1-.7` is the sole owner of named-slot grammar, gap lifecycle and compatibility policy,
+prefix/interstitial/tail and empty-span behavior, failure/commit/recursion semantics, all six runtime admissions,
+carriers, and public projection. After its clean closeout, `FUTURE-PARITY-BACKLOG.14.5.1` may promote only the
+typed-source `gap_composition` row; combined no-drift stays `.14.8`.
+
+Bracket syntax preserves the semantic distinction: `Rule[N]` is positional compatibility, while `Rule[name]`
+is stable identity across declaration reordering. Both may resolve to one typed slot target while retaining source
+provenance. `Rule.N` and `Rule.name` are deliberately not aliases because dot already owns fluent rule
+behavior. Its first occurrence remains mandatory after an edge target; whitespace-only target-to-method
+attachment is not an alias. The unchanged duplicate-slot and typed-source recurring gates pass at 59 and 114
+rejected mutations.
+
+Signoff preserves that behavior-free boundary. All eight doctrines, six-family repository containment, all-five-
+anchor relocation, CLI 66/66 in both option environments, RAM 68%, and Phase 0 1,031/1,031 in 771 seconds pass.
+The implementation pivot occurs only after the intended `.14.5.0` atomic landing is clean.
+
 ## Recursive source-observation lineage is fail-closed on the existing invocation authority
 
 Behavior-free `FUTURE-PARITY-BACKLOG.14.4.0` audits clean transaction closeout `3ac018f8` across Perl, Rust,

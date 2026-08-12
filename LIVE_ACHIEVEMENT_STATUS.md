@@ -2,24 +2,29 @@
 
 ## Current Activity
 
-- Recursive-observation public closeout `FUTURE-PARITY-BACKLOG.14.4.8` is signoff-complete for atomic 216/300 from
-  clean recurrence commit `eb8d052c`; no push occurs.
-- Exact public-projection RED preceded six current markers, six stale-claim denials, ten surface guards, and 27
-  mutations. Focused six-runtime/support recomposition, Knowledge/book/doctrines, containment/relocation, CLI
-  66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 713 seconds, and definitive canonical signoff are GREEN.
-- Typed-source truth is 9 complete / 5 pending and 114 mutations. Recursive observation remains private; no new
-  rollout row or public/API/schema/semantic/MCP/CLI/README/runtime behavior was admitted, and `.14.8` stays future.
+- Behavior-free lossless-gap handoff `FUTURE-PARITY-BACKLOG.14.5.0` is signoff-complete for intended atomic
+  217/300 from clean recursive-observation closeout `d26e4d4e`; no push occurs.
+- Descriptor and historical probes confirm current numeric slot identity, named-surface absence, exact Perl
+  prefix/interstitial gaps without automatic tail, and the existing marker divergence. Brackets remain selectors;
+  dot remains fluent behavior and its first occurrence after an edge target stays mandatory.
+- `INTER-MATCH-GAP-CAPTURE.1-.7` is frozen as the sole next implementation/admission owner; `.14.5.1` resumes
+  typed composition only after `.7`. Post-edit duplicate-slot 59 and typed-source 9/5/114 compositions, Knowledge
+  829/6,931, the 79-file/14,580-KiB book, and history pressure checks pass without behavior or rollout movement.
+- Definitive canonical CI passes all eight doctrines, repository containment and relocation, CLI 66/66 in both
+  option environments, RAM 68%, and Phase 0 1,031/1,031 in 771 seconds through exact local-CI success.
 
 ## Latest Completed Slice
 
-- `.14.4.8` completed recursive-observation public projection/no-drift and canonical signoff for atomic 216/300.
+- `.14.5.0` completed lossless-gap cross-tree handoff signoff for intended atomic 217/300.
 
 ## Next Action
 
-- Land public-closeout atomic 216 cleanly, then activate lossless gap-composition `.14.5` task-tree-first.
+- Land `.14.5.0` atomic 217 cleanly, then activate `INTER-MATCH-GAP-CAPTURE.1` task-tree-first.
 
 ## Recent Completions
 
+- `2026-08-13` — `.14.5.0` completed behavior-free lossless-gap handoff and canonical signoff for atomic 217/300.
+- `2026-08-12` — `d26e4d4e` landed recursive-observation public closeout `.14.4.8` as atomic 216/300.
 - `2026-08-12` — `.14.4.8` completed recursive-observation public closeout and canonical signoff for atomic 216/300.
 - `2026-08-12` — `eb8d052c` landed recursive-observation recurrence `.14.4.7` as atomic 215/300.
 - `2026-08-12` — `.14.4.7` completed recursive-observation recurrence and canonical signoff for atomic 215/300.
@@ -34,8 +39,6 @@
 - `2026-08-12` — `2d937d83` landed private Perl recursive-observation admission `.14.4.2` as atomic 210/300.
 - `2026-08-12` — `.14.4.2` completed private Perl recursive-observation admission and canonical signoff for atomic 210/300.
 - `2026-08-12` — `6e3b77c0` landed executable neutral recursive observation `.14.4.1` as atomic 209/300.
-- `2026-08-12` — `.14.4.1` completed executable neutral recursive observation and canonical signoff for atomic 209/300.
-- `2026-08-12` — `53c687d3` landed recursive-observation lineage correction `.14.4.0.1` as atomic 208/300.
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source

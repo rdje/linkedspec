@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-12` (recursive-observation public projection `.14.4.8` signoff-complete as intended atomic
-  216/300 from clean recurrence activation `eb8d052c`; no public API or rollout movement; no push)
+- Last updated: `2026-08-13` (behavior-free lossless-gap handoff `.14.5.0` signoff-complete from clean recursive-
+  observation closeout `d26e4d4e`; intended atomic 217/300; no behavior or rollout movement; no push)
 - Owner: repo-local workflow
 
 ## Goal
@@ -103,15 +103,18 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-12):** recursive-observation public projection `.14.4.8` is signoff-complete as
-intended atomic 216/300 from clean recurrence activation `eb8d052c`. Six exact documents, six stale-claim denials,
-and ten facade/API/schema guards add 27 mutations without changing parser/compiler/runtime/storage or exporting a
-helper, authored `Position`/`Span` value, facade, schema, semantic/MCP field, CLI option, or README behavior. The
-accepted 14-row typed-source ledger remains 9 complete / 5 pending while governance advances to 114:
-`recursive_observation` stays complete and combined program-wide `recurring_public_no_drift` stays pending for
-`.14.8`. The unchanged five-source/six-runtime proof passes Perl/Rust/Dart 7 each, Julia 30, Lua 43 per ABI, and
-all support ledgers. Activity `.14.4` is closed; lossless gap composition `.14.5` is the next sequential activity.
-Recognition transaction `.14.3` stays closed at 133/246/58 and rollout 9/9.
+**Authoritative frontier (2026-08-13):** behavior-free lossless-gap handoff `.14.5.0` is signoff-complete from
+clean recursive-observation closeout `d26e4d4e` as intended atomic 217/300. Committed descriptors prove current numeric
+`Rule[N]` identity; current named declarations/`Rule[name]` reject; the historical Perl probe proves exact
+prefix/interstitial gap-plus-lifecycle pairs and no automatic tail; and current marker execution remains divergent.
+The unchanged duplicate-slot and typed-source recurring gates pass at 59 and 114 rejected mutations.
+`INTER-MATCH-GAP-CAPTURE.1-.7` is frozen as the next clean tree and sole syntax, lifecycle, compatibility,
+six-runtime, carrier, and public-admission owner. Brackets remain selectors—numeric positional compatibility,
+named stable identity—while dot remains fluent rule behavior. Only after `.7` does `.14.5.1` promote typed
+`gap_composition`; combined program-wide no-drift stays `.14.8`. This audit changes no grammar, compiler,
+runtime, descriptor, carrier, public surface, rollout, or current claim.
+Canonical proof passes all eight doctrines, six-family containment, all-five-anchor relocation, CLI 66/66 twice,
+RAM 68%, and Phase 0 1,031/1,031 in 771 seconds. Land `.14.5.0` cleanly before activating the next tree.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private

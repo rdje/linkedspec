@@ -10,6 +10,30 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-13 (`FUTURE-PARITY-BACKLOG.14.5.0` — lossless-gap cross-tree handoff): keep this leaf strictly
+  behavior-free. Retrieve committed slot, gap, marker, typed-source, and task authorities before archaeology; use
+  descriptors and live historical probes rather than inferring semantics from source layout.
+- Preserve one implementation owner. `INTER-MATCH-GAP-CAPTURE.1-.7` owns named declarations/selectors,
+  `@capture_gaps`, lifecycle/compatibility, prefix/interstitial/tail and empty spans, failure/commit/recursion,
+  six runtimes, carriers, and public admission. `.14.5.1` only composes its closed proof into typed source.
+- Treat numeric and named selectors as one possible compiled slot type but different authored identities:
+  `Rule[N]` follows position across reordering; `Rule[name]` follows the stable declaration name. Retain source
+  provenance for diagnostics and migration.
+- Do not add `Rule.N` or `Rule.name` aliases. Dot already owns fluent behavior. Likewise, keep the first fluent
+  dot mandatory in `-> Rule[name].method(...)`; whitespace-only attachment saves one character while obscuring
+  receiver binding, making whitespace significant, and treating the first method differently from later calls.
+- A Perl diagnostic spec embedded in `qq{...}` must escape `\@move_pos`; otherwise host interpolation removes
+  the marker and creates false cumulative-gap evidence. The corrected live probe returns exact prefix and
+  interstitial pairs with target lifecycle output and no automatic tail.
+- The unchanged focused gates pass duplicate-slot identity at 59 mutations and typed source at 9/5/114. Land this
+  audit cleanly before pivoting to `INTER-MATCH-GAP-CAPTURE.1`.
+- The first canonical attempt correctly rejected a bounded MEMORY rewrite that dropped the unrelated closed
+  repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1`; restore it and retain the focused 8/10/54 proof.
+- The sandboxed restart passes every gate through tool locality and stops only when the outer harness denies the
+  nested macOS containment sandbox with status 71. The unchanged permission-authorized run is authoritative: all
+  eight doctrines, containment/relocation, CLI 66/66 twice, RAM 68%, and Phase 0 1,031/1,031 in 771 seconds pass
+  through exact local-CI success. This is signoff evidence, not behavior movement.
+
 - 2026-08-12 (`FUTURE-PARITY-BACKLOG.14.4.8` — recursive-observation public closeout): preserve the accepted
   14-row rollout. This leaf governs the observation projection independently; it must neither invent a fifteenth
   row nor consume combined program-wide `recurring_public_no_drift` before `.14.8`.

@@ -10,6 +10,30 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-13 — FUTURE-PARITY-BACKLOG.14.5.0 — freeze lossless gap handoff
+
+- Audited committed duplicate-slot, typed-source, historical-gap, marker-divergence, ADR, Knowledge, task, and
+  recurring-gate authorities from clean recursive-observation closeout `d26e4d4e`.
+- Toolbox-led probes confirm current numeric `Rule[N]` descriptor identity, rejection of both named declaration
+  and `Rule[name]` surfaces, and exact historical Perl prefix/interstitial gap-plus-lifecycle output without an
+  automatic tail. Current markers remain rule-level in Perl, preceding-slot-local in Lua, and non-executing in
+  native Rust/Dart/Julia paths.
+- Froze `INTER-MATCH-GAP-CAPTURE.1-.7` as the sole named-slot/`@capture_gaps` syntax, lifecycle,
+  compatibility, six-runtime, carrier, and public-admission owner. `.14.5.1` may promote only typed-source
+  `gap_composition` after that program closes; combined no-drift remains `.14.8`.
+- Kept brackets as the selector namespace: numeric selectors are positional compatibility and named selectors
+  are stable identity. Dot remains fluent rule behavior, and its first occurrence after an edge target is
+  mandatory; neither selector-dot nor whitespace-only fluent attachment is an alias.
+- Changed no grammar, parser, compiler, runtime, descriptor, generated carrier, helper/value, facade, schema,
+  semantic/MCP, CLI, README, rollout, or current behavior claim. The unchanged duplicate-slot and typed-source
+  six-runtime gates pass at 59 and 114 rejected mutations.
+- The first canonical attempt correctly exposed an omitted unrelated repeated-action next-owner pointer in the
+  bounded MEMORY rewrite; restoring `FUTURE-PARITY-BACKLOG.10.1` made the focused 8-mode / 10-special / 54-mutation
+  contract pass. The fully sandboxed restart then reached only the outer harness's expected nested-sandbox denial.
+- The unchanged permission-authorized canonical run passes all eight doctrines, complete six-family repository
+  containment and all-five-anchor relocation, CLI 66/66 in both option environments, RAM 68%, and Phase 0
+  1,031/1,031 in 771 seconds through exact `[ci] local CI gate passed` and exit 0.
+
 ## 2026-08-12 — FUTURE-PARITY-BACKLOG.14.4.8 — close recursive observation rollout
 
 - Added an independent recursive-observation public projection/no-drift section to the typed-source contract. Six

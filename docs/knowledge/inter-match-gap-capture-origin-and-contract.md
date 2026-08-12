@@ -18,7 +18,7 @@ answers:
   - "is name equals regex implemented yet"
   - "does move_pos currently mean the same thing on every backend"
 date: 2026-07-17
-status: verified historical fact and accepted direction
+status: verified historical fact; accepted direction; clean implementation handoff selected
 tags: [capture, segmentation, super-split, move-pos, or-rule, action-edge, source-span, perl, portability]
 evidence: "Imported baseline cf25bd37 perl/LinkedSpec.pm Split-Like/MOVE_POS/spec_gdata/REP_ACODE and specs/ebnf.spec; documentation drift 8588b07b and 300e6950; current RuleIR relabel/reidx projection; 2026-07-17 live Top::OR to Document[0..2] probe; five-backend marker-scope code audit. ADR 0045."
 reverify: "git show cf25bd37:perl/LinkedSpec.pm | rg -n -C 8 'Split-Like Code|MOVE_POS|spec_gdata|REP_ACODE'"
@@ -86,9 +86,18 @@ only coupling. Numeric/unindexed forms remain compatible. The ratified future sy
 around `=` is insignificant. This source syntax and a lifecycle slot accessor are not implemented;
 the accessor's exact name remains unsettled.
 
+The selector namespace is deliberately bracket-only: `Document[1]` is positional compatibility and
+`Document[header]` is stable identity. They may lower to the same typed slot target, but source provenance is
+retained because declaration reordering changes the numeric form and not the named form. `Document.1` and
+`Document.header` are not aliases; dot already owns fluent rule behavior. Behavior-free
+`FUTURE-PARITY-BACKLOG.14.5.0` freezes the clean handoff to `INTER-MATCH-GAP-CAPTURE.1-.7`, the sole
+syntax/lifecycle/compatibility/backend admission owner. Typed-source composition resumes only afterward in
+`.14.5.1`.
+
 ## Links
 
 - Decision: `docs/decisions/0045-inter-match-gap-capture.md`
 - Task owner: `docs/tasks/INTER-MATCH-GAP-CAPTURE.md`
 - Edge syntax: `docs/knowledge/spec-edge-syntax-contract.md`
 - Current marker divergence: [[split-marker-cross-backend-semantics]]
+- Cross-tree handoff and selector namespaces: [[lossless-gap-cross-tree-handoff]]

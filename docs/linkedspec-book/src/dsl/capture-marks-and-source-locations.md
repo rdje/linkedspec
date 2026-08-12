@@ -548,6 +548,19 @@ declares a stable rule-local slot rather than assigning a variable. Existing uni
 selectors remain compatibility forms. This named-slot syntax, `@capture_gaps`, and the illustrative
 `entry_slot()` accessor are not implemented; the exact lifecycle accessor remains unsettled.
 
+Brackets are the selector namespace. `Document[1]` means positional compatibility, so declaration reordering
+can change its target; `Document[section]` means stable identity and must survive reordering. An implementation
+may resolve both to one typed slot identity, but it retains whether the source used a position or a name for
+diagnostics and migration. Dot is already the fluent rule-behavior namespace, so `Document.1` and
+`Document.section` are not selector aliases. The first fluent dot remains mandatory too:
+`-> Document[section].method(...)` attaches behavior visibly, while
+`-> Document[section] method(...)` is not an alias. This keeps receiver attachment independent of whitespace
+and makes the first method structurally identical to every continuation method.
+
+The implementation order is also explicit. `INTER-MATCH-GAP-CAPTURE.1-.7` owns named-slot syntax,
+`@capture_gaps`, lifecycle and compatibility policy, six-runtime behavior, carriers, and public admission.
+Typed-source composition consumes that completed contract afterward; it does not define a second gap language.
+
 ## `mark_*`: named checkpoints
 
 Marks are named checkpoints.
