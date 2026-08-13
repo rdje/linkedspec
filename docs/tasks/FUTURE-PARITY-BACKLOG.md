@@ -6,8 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-13` (behavior-free lossless-gap handoff `.14.5.0` signoff-complete from clean recursive-
-  observation closeout `d26e4d4e`; intended atomic 217/300; no behavior or rollout movement; no push)
+- Last updated: `2026-08-13` (behavior-free lossless-gap handoff `.14.5.0` landed at `3d0384d1`; separate
+  `INTER-MATCH-GAP-CAPTURE.1.0` executable-neutral audit-plan is signoff-complete and `.1.1` is next; typed
+  composition `.14.5.1` waits)
 - Owner: repo-local workflow
 
 ## Goal
@@ -103,18 +104,13 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-13):** behavior-free lossless-gap handoff `.14.5.0` is signoff-complete from
-clean recursive-observation closeout `d26e4d4e` as intended atomic 217/300. Committed descriptors prove current numeric
-`Rule[N]` identity; current named declarations/`Rule[name]` reject; the historical Perl probe proves exact
-prefix/interstitial gap-plus-lifecycle pairs and no automatic tail; and current marker execution remains divergent.
-The unchanged duplicate-slot and typed-source recurring gates pass at 59 and 114 rejected mutations.
-`INTER-MATCH-GAP-CAPTURE.1-.7` is frozen as the next clean tree and sole syntax, lifecycle, compatibility,
-six-runtime, carrier, and public-admission owner. Brackets remain selectors—numeric positional compatibility,
-named stable identity—while dot remains fluent rule behavior. Only after `.7` does `.14.5.1` promote typed
-`gap_composition`; combined program-wide no-drift stays `.14.8`. This audit changes no grammar, compiler,
-runtime, descriptor, carrier, public surface, rollout, or current claim.
-Canonical proof passes all eight doctrines, six-family containment, all-five-anchor relocation, CLI 66/66 twice,
-RAM 68%, and Phase 0 1,031/1,031 in 771 seconds. Land `.14.5.0` cleanly before activating the next tree.
+**Authoritative frontier (2026-08-13):** behavior-free lossless-gap handoff `.14.5.0` landed cleanly at
+`3d0384d1` as atomic 217/300. It freezes `INTER-MATCH-GAP-CAPTURE.1-.7` as the sole syntax, lifecycle,
+compatibility, six-runtime, carrier, and public-admission owner. That separate tree is now active at behavior-free
+audit-plan `.1.0`, which is signoff-complete for atomic 218 with `.1.1` next; no gap implementation or typed-source
+rollout moves here. Brackets remain selectors—numeric
+positional compatibility, named stable identity—while dot remains fluent rule behavior. Only after gap admission
+`.7` does `.14.5.1` promote typed `gap_composition`; combined program-wide no-drift stays `.14.8`.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private

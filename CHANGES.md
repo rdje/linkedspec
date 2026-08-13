@@ -10,6 +10,35 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-13 — INTER-MATCH-GAP-CAPTURE.1.0 — freeze executable-neutral plan
+
+- Activated from clean cross-tree handoff `3d0384d1` and retrieved ADRs `0045`/`0047`/`0048`/`0051`/`0056`, the owning tasks,
+  Knowledge cards, existing typed-source/transaction/slot contracts, and recurring routes before archaeology.
+- Toolbox probes confirm current `Top::OR` is an action-owned seek repetition; `Document[1]` resolves slot 1;
+  named declaration and selection reject; emitted Perl orders selection, `LS`, action/target, legacy `LE` rolling,
+  then `IT`; the exact historical live result remains `[pre,H]`, `[gap,S]`, `[more,F]` with no automatic tail.
+- Froze planned `linkedspec-inter-match-gap-capture-v1`, its checker/path/sections, Unicode named-slot identity,
+  selector provenance, directive eligibility/legacy conflict, detached `entry_slot()` and gap accessors, exact
+  prefix/interstitial/tail/empty lifecycle, post-`LE` commit, transaction/recursion policy, diagnostics, fixtures,
+  mutations, repository-rooted routes, nine rollout legs, carrier roles, and no-overclaim boundary.
+- Locked existing return authority: repeated edge returns remain per-hit values, while a default-loop edge return
+  unwinds without gap commit or tail fabrication. Corrected ADR `0051`'s stale Lua-pending status from committed
+  dual-ABI closure `b14126a6`; no identifier policy changed.
+- Changed no parser/compiler/runtime/descriptor/generated/helper/value/facade/schema/semantic/MCP/CLI/README,
+  rollout, or current behavior claim. The unchanged duplicate-slot matrix passes 59 mutations and the typed-source
+  six-runtime matrix passes 114 mutations.
+- The first canonical run caught one condensed task-index row omitting the unrelated preserved marker that
+  capability-exclusion public closeout `.24.2` remains closed; restoring that exact marker keeps the capability
+  no-drift checker unchanged.
+- The restarted canonical run passed all runtime gates through typed source, then caught the same condensation
+  class in both roadmap summaries: their closed semantic marker `128 mutations, rollout 9/9` was restored without
+  changing the semantic contract or rollout.
+- The fully corrected sandboxed run reached only the expected outer-harness denial of nested macOS
+  `sandbox-exec` at representative containment. The unchanged permission-authorized retry passed all eight
+  doctrines, six-family containment, all-five-anchor relocation, CLI 66/66 in both option environments, RAM 52%,
+  and Phase 0 1,031/1,031 in 735 seconds through exact `[ci] local CI gate passed` and exit 0. The synchronized
+  rendered book passes 79 files / 14,628 KiB and Knowledge passes 830 facts / 6,950 question keys.
+
 ## 2026-08-13 — FUTURE-PARITY-BACKLOG.14.5.0 — freeze lossless gap handoff
 
 - Audited committed duplicate-slot, typed-source, historical-gap, marker-divergence, ADR, Knowledge, task, and

@@ -485,9 +485,10 @@ before `LE`, matching the timing above. Malformed marker names and trailing mark
 fragments are rejected rather than silently ignored.
 
 Use explicit helper calls such as `start_capture_slice()` and `mark_here(name)` when portable timing
-matters. Marker members remain compatibility surfaces until `INTER-MATCH-GAP-CAPTURE.1` reconciles
-their scope. Historical automatic rule-level gap rolling is documented separately as the future
-`@capture_gaps` contract.
+matters. Marker members remain compatibility surfaces; the behavior-free `INTER-MATCH-GAP-CAPTURE.1.0`
+plan keeps their current scope and forbids combining an anonymous marker member with future
+`@capture_gaps`. Historical automatic rule-level gap rolling has its own typed, invocation-local
+contract plan and does not redefine these markers.
 
 ## Choosing the right placement
 

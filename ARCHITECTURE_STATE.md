@@ -47,7 +47,7 @@ before exact `[ci] local CI gate passed` and exit 0. The first fully staged sand
 gate and stopped only because the outer harness denied nested macOS `sandbox-exec`; the unchanged permission-
 authorized run is authoritative.
 
-## Lossless segmentation has one clean cross-tree implementation owner
+## Lossless segmentation has one clean cross-tree implementation owner and a frozen neutral plan
 
 Behavior-free `FUTURE-PARITY-BACKLOG.14.5.0` audits the committed named-slot, duplicate-slot, typed-source,
 historical-gap, and marker-divergence authorities without changing grammar, compiler, runtime, carrier, public
@@ -70,7 +70,36 @@ rejected mutations.
 
 Signoff preserves that behavior-free boundary. All eight doctrines, six-family repository containment, all-five-
 anchor relocation, CLI 66/66 in both option environments, RAM 68%, and Phase 0 1,031/1,031 in 771 seconds pass.
-The implementation pivot occurs only after the intended `.14.5.0` atomic landing is clean.
+The `.14.5.0` atomic landed cleanly at `3d0384d1`; `INTER-MATCH-GAP-CAPTURE.1.0` then activated task-tree-first
+and is now signoff-complete for atomic 218/300. Canonical proof passes all eight doctrines, six-family repository
+containment, all-five-anchor relocation, CLI 66/66 twice, RAM 52%, and Phase 0 1,031/1,031 in 735 seconds. The
+unchanged named-slot/directive/runtime/rollout absence remains exact; `.1.1` is next after the clean commit.
+
+That audit freezes the planned neutral authority as
+`capability_conformance/inter_match_gap_capture_contract.json`, format 1 / id
+`linkedspec-inter-match-gap-capture-v1`, with independent
+`tools/check_inter_match_gap_capture_contract.py`. Named slots reuse exact pinned Unicode 17 `XID_Continue`
+identity, reserve all-digit ASCII names for positional selectors, permit mixed named/anonymous declaration order,
+and retain selector kind/authored selector/target/index/nullable stable id. `entry_slot()` is planned as a detached
+ordinary harray, not a matcher object or new value kind.
+
+The future directive is valid only on seek-based looping OR/default action ownership. It conflicts with anonymous
+legacy marker members rather than aliasing them. One isolated invocation-local cursor exposes the exact typed
+prefix/interstitial span after selection and before `LS`, keeps it current through edge/target/`LE`, and commits
+only the accepted post-`LE` cursor before `IT`. Successful terminal paths expose the input-end tail to the existing
+`LX`/`EX`/`E` terminal hook; empty gaps remain first-class and no result emission is automatic. Failure, rollback,
+unwind, nested calls, and recursion reuse the existing typed-source/recognition authorities without gaining effect
+rollback or a second invocation stack.
+
+ADR `0048` return channels remain unchanged: repeated action-edge returns complete accepted-hit finalization as
+per-hit values, while an unadorned default-loop edge return is a whole-rule unwind that clears its candidate
+without boundary commit or tail fabrication. Lifecycle returns retain whole-rule authority and exact payloads.
+
+The rollout has nine legs: neutral, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurrence, and public no-drift.
+`.1.1-.1.3` own neutral artifact/governance/recomposition; `.2-.7` own runtime and public movement. Repository-local
+storage, exact routes, lifecycle/segmentation/diagnostic mutations, generated carriers, and no-overclaim are fixed
+before implementation. This is an accepted plan only: current syntax, runtime, descriptor, helper, facade, CLI,
+capability status, and typed-source rollout remain unchanged.
 
 ## Recursive source-observation lineage is fail-closed on the existing invocation authority
 

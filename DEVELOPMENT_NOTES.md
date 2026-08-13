@@ -10,6 +10,35 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-13 (`INTER-MATCH-GAP-CAPTURE.1.0` — executable-neutral plan): activation base is clean `3d0384d1`.
+  Keep `.1.0` behavior-free and make `.1.1` the first artifact/checker mutation.
+- Reuse existing authorities. Named slots use pinned Unicode 17 `XID_Continue`; gap spans use immutable same-source
+  scalar offsets; gap state joins the existing monotonic invocation/transaction snapshot. Do not add a second
+  identifier classifier, cursor, invocation stack, span kind, matcher object, or rollback scope.
+- Keep selection provenance explicit: selector kind + authored selector + target rule + current index + nullable
+  stable slot id. Numeric/name equivalence at one declaration does not make numeric syntax reorder-stable.
+- Keep lifecycle timing exact: select and install candidate before `LS`; expose through edge/target/`LE`; commit
+  accepted post-`LE` cursor; clear before `IT`; expose successful terminal tail to existing `LX`/`EX`/`E` path.
+  Empty gaps and falsey accepted payloads remain first-class.
+- Preserve ADR `0048` return channels: repeated edge return is an accepted per-hit value and finalizes normally;
+  default-loop edge return and lifecycle returns keep whole-rule authority, clear candidates on unwind, and do not
+  manufacture a commit or tail.
+- Preserve compatibility instead of conflating it. Anonymous marker members are not `@capture_gaps` aliases and
+  conflict when mixed; named marks and explicit capture helpers remain independent. No forced gap emission exists.
+- Neutral artifact path/id/checker, nine rollout legs, consumer files, repository-local routing, mutation families,
+  diagnostics, and carrier roles are frozen in the task/ADR/Knowledge/book. Semantic revision requires a new owning
+  leaf and ADR amendment before code.
+- Focused preflight is green unchanged: duplicate-slot five-backend 59 mutations; typed-source six-runtime 114.
+- Preserve the unrelated capability-exclusion closeout marker when condensing the current task index:
+  `capability exclusion public closeout .24.2 remains closed` is a required capability no-drift input.
+- Preserve the semantic no-drift marker verbatim in both roadmaps too: `128 mutations, rollout 9/9` is a required
+  closed-state projection even while the surrounding future-backlog summary advances.
+- Canonical signoff first reached only the outer harness's expected nested-`sandbox-exec` denial at representative
+  containment. The unchanged permission-authorized retry passes all eight doctrines, six-family containment,
+  all-five-anchor relocation, CLI 66/66 twice, RAM 52%, and Phase 0 1,031/1,031 in 735 seconds through exact local-
+  CI success. The book passes 79 files / 14,628 KiB and Knowledge passes 830 facts / 6,950 keys. `.1.1` remains the
+  next owner after the clean atomic-218 commit; no behavior or rollout moved.
+
 - 2026-08-13 (`FUTURE-PARITY-BACKLOG.14.5.0` — lossless-gap cross-tree handoff): keep this leaf strictly
   behavior-free. Retrieve committed slot, gap, marker, typed-source, and task authorities before archaeology; use
   descriptors and live historical probes rather than inferring semantics from source layout.

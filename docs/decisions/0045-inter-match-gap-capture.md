@@ -189,6 +189,62 @@ migration. `.2` implements the Perl reference without overloading `$IPOS` for th
 and public no-drift. No implementation leaf activates until the rule-local cursor program is closed
 and this program is selected at a clean task-tree boundary.
 
+## 2026-08-13 executable-neutral plan amendment
+
+Behavior-free audit `INTER-MATCH-GAP-CAPTURE.1.0` closes the questions deliberately left to the executable
+contract while moving no current syntax, descriptor, helper, runtime, rollout, or public claim.
+
+The neutral authority will be `capability_conformance/inter_match_gap_capture_contract.json`, format 1,
+contract id `linkedspec-inter-match-gap-capture-v1`, with independent checker
+`tools/check_inter_match_gap_capture_contract.py`. It has nine ordered rollout legs: neutral, Perl, Rust, Dart,
+Julia, PUC Lua, LuaJIT, recurring proof, and public no-drift. Neutral `.1.1` promotes only the first. Governance
+`.1.2` fixes repository-rooted storage, exact consumer routes, the opt-in canonical driver, and no-overclaim
+guards without promoting runtime behavior. `.1.3` recomposes the unchanged authority before Perl `.2`.
+
+Named slot declarations reuse pinned Unicode 17.0.0 `XID_Continue` identity exactly, including case and
+normalization sensitivity; all-ASCII-digit names are reserved for positional selectors. Named and anonymous
+declarations may mix in one authored order and names are unique per owning rule. `Rule`, `Rule[N]`, and
+`Rule[name]` are the only selectors. Every resolved edge retains selector kind, authored selector, target rule,
+zero-based regex index, and nullable stable slot id. A numeric and named selector can resolve the same named slot,
+but only named provenance remains identity-stable across declaration reordering. Direct target invocation has no
+edge-slot context; future `entry_slot()` projects an edge entry as one detached ordinary harray rather than a new
+value kind.
+
+`@capture_gaps` is one placement-insensitive rule-level directive for a seek-based looping OR/default rule with
+statically resolved action ownership. It is invalid on AND/consume, blind, mixed, or adjacency-owned shapes and
+cannot coexist with anonymous legacy marker members. The legacy `@capture_slice`, `@capture_from_here`, and
+`@move_pos` behaviors are preserved as compatibility behavior rather than redefined as aliases. Named marks and
+explicit capture helpers remain independent. There is no automatic-emission directive: gap capture supplies
+context and never forces AST/result mutation.
+
+One invocation-local state starts at the rule-entry Unicode-scalar position. After a selected match and before
+enclosing `LS`, it exposes the exact half-open prefix/interstitial span through future `gap_span()`, `gap_text()`,
+and `gap_kind()` context. The candidate remains visible through the edge, target call, and enclosing `LE`; only an
+accepted edge commits the post-`LE` cursor as the next boundary, then clears before `IT`. Falsey action payloads do
+not turn a successful match into failure. Rejection, rollback, or unwind discards the candidate and boundary
+advance. Nested/recursive entries reuse the existing monotonic invocation authority but own isolated gap state.
+
+Return-channel ownership does not change. ADR `0048` repeated action-edge returns remain per-hit values and run
+the successful-iteration finalization path. An unadorned default-loop action return remains a direct whole-rule
+return: it clears the active candidate on unwind without committing a boundary or synthesizing a tail. Lifecycle
+returns likewise retain whole-rule authority and their returned value exactly.
+
+On successful loop termination, the same context exposes the final half-open span from committed boundary to
+input end as kind `tail` before `LX` on a default scan-loop miss, `EX` on satisfied repetition exhaustion, or `E`
+after maximum-count completion. A failed minimum has no tail; a successful zero-match/zero-min invocation sees the
+whole input extent. Prefix, interstitial, tail, and empty gaps are all first-class. Tail observation neither
+consumes input nor appends output. All gap spans use the existing immutable same-source typed-span algebra and
+join the owning invocation's cursor/boundary/mark transaction snapshot; rollback never gains authority over user
+variables, AST, output, external calls, or other effects.
+
+The neutral checker will execute spacing, Unicode-name, mixed-declaration, selector equivalence/reorder,
+duplicate-regex identity, eligibility, exact Unicode/empty prefix-interstitial-tail, target-extended cursor,
+falsey acceptance, maximum/miss termination, failed commit, and recursive-isolation cases. It will reject invalid
+or duplicate names, unknown/out-of-range/malformed selectors, duplicate/ineligible directives, legacy conflicts,
+unavailable gap context, lifecycle reorder, transaction leakage, storage/route drift, premature rollout, and
+public overclaim. Existing source/range/cursor/progress diagnostic codes remain authoritative; nine new exact
+syntax/context diagnostic records cover only the genuinely new boundaries.
+
 ## Consequences
 
 - The director's original concept and target-rule ownership are durable and cannot be reassigned to

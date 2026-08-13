@@ -1,7 +1,7 @@
 # 0051 - Rule labels use pinned Unicode 17 XID_Continue scalars
 
 - Date: 2026-07-21
-- Status: accepted; Rust, Dart, and Julia implemented; PUC Lua/LuaJIT pending
+- Status: accepted; five-backend rollout complete
 - Tags: architecture, grammar, unicode, identifiers, rust, validation, generated-data, portability, parity
 
 ## Context
@@ -39,6 +39,13 @@ The director selected Unicode expansion rather than revising the admitted v1 fix
 7. This prerequisite does not create a semantic-introspection API or advance its rollout/admission ledgers.
    Exhaustive native semantic projection remains owned by `.10.4.1-.10.4.6`.
 
+## 2026-07-26 rollout closure
+
+Commit `b14126a6` recomposed the generated classifier, parser/validator routes, positive/distinct identity, and
+negative/isolation proof on PUC Lua and LuaJIT and closed `FUTURE-PARITY-BACKLOG.10.7.1`. The pinned identifier
+policy is therefore implemented on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. This status correction records
+that already-landed rollout; it changes no identifier membership, generated table, parser, runtime, or admission.
+
 ## Consequences
 
 - The admitted `Töp` fixture becomes valid Rust source without changing its bytes, model, ids, or response digests.
@@ -47,9 +54,8 @@ The director selected Unicode expansion rather than revising the admitted v1 fix
 - Canonically equivalent spellings may coexist as distinct labels. This is deliberate and avoids invisible source
   rewriting; authors who want normalized identity must spell labels consistently.
 - Unicode upgrades are explicit contract changes with regenerated ranges and reviewed fixture deltas.
-- PUC Lua and LuaJIT remain the only backend scanners that must consume this exact universal policy before a future
-  recurring label-syntax admission can claim exhaustive cross-backend membership parity. Their implementation is
-  owned by `FUTURE-PARITY-BACKLOG.10.7.1`.
+- PUC Lua and LuaJIT consume the same generated universal policy; `FUTURE-PARITY-BACKLOG.10.7.1` closed their
+  classifier, parser/validator, identity, negative/isolation, and recomposition proof at `b14126a6`.
 
 ## Links
 

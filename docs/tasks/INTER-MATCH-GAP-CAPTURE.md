@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `INTER-MATCH-GAP-CAPTURE`
-- Status: `proposed` / direction ratified; awaiting explicit activation
+- Status: `active` / neutral-contract audit `.1.0` signoff-complete; `.1.1` is next after clean atomic 218
 - Roadmap lane: `.spec language evolution / lossless segmentation and source preservation`
 - Created: `2026-07-17`
-- Last updated: `2026-07-20`
+- Last updated: `2026-08-13`
 - Owner: repo-local workflow
 
 ## Goal
@@ -20,7 +20,8 @@ orchestration or to raw Perl cursor arithmetic.
 
 - Do not treat blind calls as part of the “super split” contract.
 - Do not change parser/compiler/runtime behavior in the decision-capture leaf.
-- Do not start backend rollout without explicit activation; the rule-local cursor prerequisite is complete.
+- Do not start backend rollout before the neutral contract closes; explicit program activation occurred from
+  clean cross-tree handoff `3d0384d1`, and runtime leaves `.2-.6` remain pending.
 - Do not silently change the existing `@move_pos`, `@capture_from_here`, or `@capture_slice`
   compatibility behavior before a neutral migration contract exists.
 
@@ -44,7 +45,8 @@ orchestration or to raw Perl cursor arithmetic.
 ## Task Tree
 
 - ID: `INTER-MATCH-GAP-CAPTURE`
-  Status: `proposed` / direction ratified; awaiting explicit activation
+  Status: `active` (2026-08-13; `.1.0` signoff-complete from clean `3d0384d1`; atomic 218/300 commit pending;
+    `.1.1` next; no push)
   Goal: Recover and modernize lossless inter-match gap capture without semantic drift.
   Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`
 
@@ -60,8 +62,9 @@ orchestration or to raw Perl cursor arithmetic.
   Commit: `INTER-MATCH-GAP-CAPTURE.0 - ratify inter-match gap capture`
 
 - ID: `INTER-MATCH-GAP-CAPTURE.1`
-  Status: `pending` / awaiting explicit activation
+  Status: `active` (2026-08-13; dependency-split before contract artifacts)
   Goal: Define an executable backend-neutral `@capture_gaps` and typed gap-span contract.
+  Children: `.1.0`, `.1.1`, `.1.2`, `.1.3`
   Acceptance: The contract fixes prefix/interstitial/tail policy, empty-gap preservation, offsets,
     action ordering, tail handling, state commit, recursion scope, compatibility, diagnostics, and
     conformance fixtures before runtime changes. It also fixes named regex-slot declaration/selection
@@ -69,6 +72,55 @@ orchestration or to raw Perl cursor arithmetic.
     starts from the explicit backend matrix recorded in `.0`, not from the later parity claim.
   Verification: `pending`
   Commit: `pending`
+
+- ID: `INTER-MATCH-GAP-CAPTURE.1.0`
+  Status: `done; signoff-complete` (2026-08-13; task-tree-first from clean behavior-free handoff commit
+    `3d0384d1`; atomic 218/300 commit pending; no push)
+  Goal: Audit committed syntax, matcher, action-edge, cursor, marker, typed-source, compatibility, diagnostic,
+    neutral-contract, storage, and recurring-gate authorities and freeze the dependency-complete executable
+    contract plan before adding a schema, fixtures, checker, parser, compiler, or runtime behavior.
+  Depends on: `.0`, `FUTURE-PARITY-BACKLOG.14.5.0`, complete rule-local cursor and duplicate-slot rollouts.
+  Acceptance: prove clean activation; retrieve canonical Knowledge/ADR/task/contracts before archaeology; use
+    LinkedSpec Toolbox probes to verify current numeric/unindexed targets, named-surface absence, historical
+    prefix/interstitial behavior, marker divergence, typed spans, rule-family/action ordering, commit/failure/
+    recursion boundaries, and carriers; specify one exact versioned contract artifact, positive/negative fixtures,
+    declaration/selector grammar, typed target identity, gap event/state model, prefix/interstitial/tail/empty
+    policy, compatibility matrix, diagnostics, mutation classes, checker, storage and canonical routes, and
+    `.1.1-.1.3` ownership; change no grammar, parser/compiler/runtime/descriptor/generated/helper/value/facade/
+    schema/semantic/MCP/CLI/README/rollout/current behavior claim; synchronize task/index, ADR/Knowledge, mdBook,
+    roadmaps, architecture, and live layers; pass focused/book/doctrine/canonical signoff; commit with the leaf id,
+    clear the brief, and land clean before `.1.1`.
+
+  ### Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / OWNERSHIP** — Prove committed handoff `3d0384d1`, empty status/diffs, zero-byte brief,
+    fresh Knowledge Map, absent rendered-book residue, and no background result before this task-tree-first edit.
+  - [x] **RETRIEVE AUTHORITY** — Read the canonical Knowledge cards, ADRs `0045`/`0047`/`0048`/`0051`/`0056`, both handoff
+    tasks, existing neutral contracts/checkers, and committed runtime/recurring owners before re-derivation.
+  - [x] **TOOLBOX-LED CURRENT AUDIT** — Reverify syntax absence and exact historical/current behavior through
+    descriptors, lowering/generated-source probes, direct runtime fixtures, and targeted source locations.
+  - [x] **FREEZE EXECUTABLE PLAN** — Specify exact artifact paths, schema/version, cases, state transitions,
+    diagnostics, mutations, independent validation, storage/canonical routing, and `.1.1-.1.3` boundaries.
+  - [x] **NO OVERCLAIM / LOCKSTEP SIGNOFF** — Move no behavior or rollout; align durable docs and pass the full
+    signoff/commit/brief/clean workflow before the next leaf.
+
+- ID: `INTER-MATCH-GAP-CAPTURE.1.1`
+  Status: `pending`
+  Goal: Add the versioned backend-neutral named-slot and lossless-gap contract, exact positive/negative fixtures,
+    and independent checker with fail-first then passing mutation evidence; change no runtime implementation.
+  Depends on: `.1.0`
+
+- ID: `INTER-MATCH-GAP-CAPTURE.1.2`
+  Status: `pending`
+  Goal: Add storage-rooted recurring/canonical routing, contract topology governance, and public no-overclaim
+    guards for the neutral artifact without admitting any backend runtime.
+  Depends on: `.1.1`
+
+- ID: `INTER-MATCH-GAP-CAPTURE.1.3`
+  Status: `pending`
+  Goal: Recompose the committed neutral contract, fixtures, mutations, routes, documentation, and no-drift
+    boundaries unchanged, close `.1`, and hand off cleanly to Perl implementation `.2`.
+  Depends on: `.1.2`
 
 - ID: `INTER-MATCH-GAP-CAPTURE.2`
   Status: `pending`
@@ -119,7 +171,8 @@ orchestration or to raw Perl cursor arithmetic.
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `INTER-MATCH-GAP-CAPTURE.0` | `done` | History, runtime truth, terminology, ownership, future name, and named-slot syntax are durably ratified without behavior change. |
-| 2 | `INTER-MATCH-GAP-CAPTURE.1` | `pending` / awaiting explicit activation | Cursor rollout is complete at 8/0; activate only when the director selects this program. |
+| 2 | `INTER-MATCH-GAP-CAPTURE.1.0` | `done; signoff-complete` from clean `3d0384d1` | The behavior-free executable neutral-contract plan is frozen and canonically green; atomic 218/300 commit pending. |
+| 3 | `INTER-MATCH-GAP-CAPTURE.1.1` | `pending; next` | Add the versioned neutral artifact, fixtures, independent checker, and fail-first/mutation proof after the clean atomic boundary. |
 
 ## Decisions
 
@@ -148,14 +201,24 @@ orchestration or to raw Perl cursor arithmetic.
 - `2026-07-20`: Rule-local cursor recurring/public rollout closes at 8 complete / 0 pending. The dependency
   prerequisite is satisfied; `.1-.7` remain proposed and require explicit activation rather than starting
   automatically.
+- `2026-08-13`: Behavior-free handoff `FUTURE-PARITY-BACKLOG.14.5.0` closes at `3d0384d1` and selects this tree as
+  the sole implementation/admission owner. `.1` is split into audit, executable artifact, governance/routing, and
+  no-change closeout leaves; `.1.0` activates first and changes no behavior or rollout.
+- `2026-08-13`: `.1.0` freezes one exact v1 neutral artifact/checker, nine-leg rollout, named-slot identity,
+  directive eligibility, detached accessor records, lifecycle/terminal order, transaction/recursion policy,
+  diagnostics, fixtures, mutations, storage routes, and carrier boundaries. It remains a plan only: no authored
+  syntax, helper, descriptor field, runtime, rollout, or public claim becomes current.
+- `2026-08-13`: Return-channel audit adds ADR `0048` as authority: repeated action returns remain accepted per-hit
+  values, while default-loop action returns unwind without a gap commit or synthetic tail. The same retrieval found
+  ADR `0051`'s header still said Lua pending after committed closure `b14126a6`; only that stale status was aligned.
 
 ## Open Questions
 
-- The executable contract must still ratify exact prefix/interstitial/tail defaults and whether a
-  separate automatic-emission surface such as `@emit_gaps` is justified.
-- The compatibility policy must decide whether the later Lua preceding-slot behavior remains a
-  separate marker surface, migrates to explicit helper calls, or is retained behind a distinct name;
-  it must not silently redefine historical rule-level rolling.
+- No semantic question blocks `.1.1`. Exact names, selector provenance, directive eligibility,
+  prefix/interstitial/tail and empty-span policy, lifecycle timing, transaction/recursion behavior, accessors,
+  compatibility, diagnostics, fixtures, mutations, routes, and rollout are frozen below.
+- Implementation discoveries may refine mechanics only. Any semantic change requires a new task-tree leaf and an
+  ADR amendment before changing the contract artifact.
 
 ## Current Legacy-Marker Execution Audit
 
@@ -181,28 +244,242 @@ this finding.
   identity through matcher results. Never recover slot identity from adjacency, regex text, or which
   alternation happened to match; this also addresses the existing identical-regex identity hazard
   tracked by `FUTURE-PARITY-BACKLOG.9.1.8.1`.
-- Consider a neutral `entry_slot()` / `entry_variant()` lifecycle accessor so a multi-regex target rule
-  can distinguish the slot that entered it without pattern inspection or backend-specific state.
+- The frozen neutral plan selects only `entry_slot()` so a multi-regex target can inspect one detached entry
+  identity without pattern inspection, backend state, or an unnecessary alias family.
+
+## Frozen Executable-Neutral Contract Plan (`.1.0`)
+
+This section is the behavior-free implementation specification for `.1.1-.1.3`. None of the authored forms,
+helpers, descriptor fields, diagnostics, or runtime behavior below is current until its owning implementation and
+admission leaves close.
+
+### Exact artifact, checker, routing, and rollout
+
+- `.1.1` creates `capability_conformance/inter_match_gap_capture_contract.json` with `format: 1`,
+  `contract_id: linkedspec-inter-match-gap-capture-v1`, and the independent oracle
+  `tools/check_inter_match_gap_capture_contract.py`. The routed command is
+  `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py`.
+- The artifact sections are exact: `expected_counts`, `policy`, `canonical_execution`, `identifier_policy`,
+  `authored_surfaces`, `selector_resolution_fixtures`, `gap_sources`, `gap_context_schema`,
+  `gap_state_machine`, `segmentation_cases`, `lifecycle_matrix`, `transaction_recursion_cases`,
+  `compatibility_matrix`, `diagnostics`, `mutation_ids`, `recurring_gate`, and `rollout`.
+- `.1.1` count locks are 8 positive selector fixtures, 10 negative selector/directive fixtures, 3 decoded source
+  fixtures, 8 private current-gap fields, 16 ordered main-machine transitions, 10 segmentation cases, 3 terminal
+  lifecycle routes, 7 transaction/recursion/return-channel cases, 6 compatibility rows, 9 new diagnostics, 9
+  rollout legs, and 50 semantic mutations. `.1.2` adds five topology/storage/no-overclaim mutations for 55 total; later runtime
+  admissions append only task-owned implementation/admission mutations and update every earlier consumer snapshot.
+- The nine ordered rollout legs are `neutral_contract`, `perl_runtime`, `rust_runtime`, `dart_runtime`,
+  `julia_runtime`, `puc_lua_runtime`, `luajit_runtime`, `recurring`, and `public_no_drift`. `.1.1` promotes only
+  neutral; `.2-.6` own the six runtime rows; `.7` owns recurrence and public no-drift.
+- `.1.2` adds `tools/check_inter_match_gap_capture_six_runtime.sh`, storage/rooting checks, the canonical opt-in
+  `LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX`, and public no-overclaim guards without promoting a runtime or recurring
+  row. Runtime consumers are fixed at `t/inter_match_gap_capture_perl_contract.t`,
+  `rust/linkedspec-runtime/tests/inter_match_gap_capture_contract.rs`,
+  `dart/test/inter_match_gap_capture_contract_test.dart`,
+  `julia/test/inter_match_gap_capture_contract_test.jl`, and
+  `lua/test/inter_match_gap_capture_contract_test.lua`; shared Lua runs independently on PUC Lua and LuaJIT.
+- All scratch/cache/build state routes through repository-derived project data. No contract command may default
+  to OS temp, home caches, or an off-volume workspace. `.1.3` recomposes the unchanged neutral artifact, fixtures,
+  mutations, routing, and no-overclaim proof, then hands off to Perl `.2` without a behavior change.
+
+### Named declaration and selector grammar
+
+- `REGEX_SLOT_NAME` reuses the pinned Unicode 17.0.0 `XID_Continue` scalar classifier already governing rule
+  labels. Identity is the exact decoded scalar sequence: case-sensitive and normalization-sensitive. A name made
+  only of ASCII decimal digits is reserved for positional selection and is invalid as a declared name; no keyword
+  blacklist is added because rule-paragraph declaration and bracket-selector contexts are structurally distinct.
+- One rule-local declaration is exactly `REGEX_SLOT_NAME HSPACE* = HSPACE* REGEX` on one physical rule-paragraph
+  line outside code. Named and anonymous regex declarations may mix. Every declaration increments the same
+  zero-based `regex_index` in authored order, and a name must be unique within its owning rule.
+- `Rule`, `Rule[N]`, and `Rule[name]` are the only selector forms. Unindexed selection resolves slot zero;
+  `Rule[N]` resolves the written nonnegative index; `Rule[name]` resolves the exact rule-local name. Bracket names
+  never fall back to numbers, regex text, adjacency, or normalization. Dot remains fluent behavior only.
+- Every compiled edge retains exact `{selector_kind, authored_selector, target_rule, regex_index,
+  target_slot_id}` provenance. `selector_kind` is `unindexed`, `numeric`, or `named`; `authored_selector` is null,
+  an integer, or an exact string respectively; `target_slot_id` is the declared name or null for an anonymous
+  slot. Numeric and named forms may resolve the same named slot, but only the named source form survives reorder
+  by identity. Matcher results and descriptor projection carry both resolved index and nullable stable id.
+- Future `entry_slot()` returns a recursively detached ordinary harray with ordered fields `target_rule`,
+  `regex_index`, `slot_id`, `selector_kind`, and `authored_selector` when a target rule is entered from an action
+  edge; direct invocation returns `undef`. It introduces no new value kind or source authority.
+
+### Directive eligibility and compatibility
+
+- `@capture_gaps` is one placement-insensitive rule-level directive, canonically written after `I` and before the
+  first action edge. It is valid exactly when compiled metadata says `family = or_default`, `cursor_policy = seek`,
+  `edge_ownership = action`, `uses_loop = true`, execution shape is `default_scan_loop` or `repeat_loop`, and at
+  least one statically resolved action edge exists. Blind, mixed, AND/consume, and local-adjacency ownership are
+  ineligible.
+- Target rules retain their regexes, entry match, lifecycle, cursor policy, recursion, and result behavior. The
+  enclosing eligible rule alone owns repeated choice and gap state. The directive never turns a target into a
+  passive regex table and never makes a nearby regex trigger a following edge.
+- Legacy member markers `@capture_slice`, `@capture_from_here`, and `@move_pos` retain their current compatibility
+  behavior and are not aliases for `@capture_gaps`. An eligible rule may not combine one of those anonymous member
+  markers with `@capture_gaps`; that conflict is diagnosed instead of choosing backend-dependent timing.
+  `@mark(name)` and explicit capture/mark helper calls remain separate and may coexist; they mutate the existing
+  anonymous boundary/marks, never the new gap cursor. No `@emit_gaps` surface or forced AST emission is introduced.
+
+### Typed gap context, lifecycle order, and tail
+
+- Each activated rule invocation owns `{source_id, invocation_id, committed_gap_cursor, accepted_edge_count,
+  current_gap}`. Entry sets the committed cursor to the rule-entry Unicode-scalar position, count to zero, and
+  current gap to absent. Nested and recursive entries allocate independent state on the existing monotonic
+  invocation authority; a child suspends rather than aliases its parent's candidate.
+- After matcher selection and before enclosing `LS`, form one read-only candidate span
+  `[committed_gap_cursor, selected_match.start)` with `provenance = gap`. Its kind is `prefix` for the first
+  accepted edge and `interstitial` thereafter. The candidate stays current through enclosing `LS`, the selected
+  edge action and any target call, and all enclosing `LE` code. A child sees only its own invocation's gap state.
+- Future `gap_span()` returns a fresh detached `{source_id, start, end, provenance}` harray, `gap_text()`
+  materializes its exact decoded text from the current source authority, and `gap_kind()` returns `prefix`,
+  `interstitial`, or `tail`. Empty spans are first-class and are never trimmed or suppressed. Calling any accessor
+  without an active current gap is a portable diagnostic.
+- On accepted completion of the edge and all `LE` code, require the accepted cursor to be at or after the selected
+  match end, commit it as the next gap cursor, increment the accepted-edge count, and clear the candidate before
+  `IT`. Falsey action payloads remain accepted when match presence says accepted. Reject/rollback/abnormal unwind
+  discards the candidate and does not advance committed gap state; user variables, AST mutation, output, external
+  calls, and other effects remain outside rollback, matching the existing recognition-transaction boundary.
+- A successful terminal loop path installs one read-only `tail` candidate
+  `[committed_gap_cursor, input_end)` before the existing terminal hook: `LX` for a default scan-loop miss, `EX`
+  for repetition exhaustion after its minimum, or `E` after a repetition reaches its maximum. A failed minimum
+  exposes no tail. A successful zero-match/zero-min path exposes the whole entry-to-input-end span. Tail access
+  never consumes input, advances the parser cursor, or appends a result automatically; its candidate clears when
+  the terminal path returns or unwinds.
+- Existing same-source, range, reversed-span, cursor-regression, zero-progress repetition, transaction, and
+  recursive-progress rules remain authoritative. Gap cursor state joins the owning invocation snapshot so
+  backtracking/rollback cannot leak a candidate or committed boundary; detached spans remain immutable data only.
+- Existing return-channel ownership remains exact. In repeated action handlers, an action-edge `return(value)` is
+  the accepted iteration payload defined by ADR `0048`, so gap finalization and the remaining successful-iteration
+  path still run. In the unadorned default scan loop, an action-edge return remains a direct whole-rule return: it
+  unwinds the active candidate without committing a new gap boundary and without fabricating a tail. A return from
+  `LS`, `LE`, `IT`, `LX`, `EX`, or `E` likewise retains whole-rule authority; candidate cleanup follows that
+  terminal unwind and never changes the returned value.
+
+The private current-gap record has exact ordered fields `source_id`, `rule_label`, `invocation_id`, `edge_ordinal`,
+`kind`, `start`, `end`, and `provenance`. `rule_label` is the enclosing gap-owning rule; `edge_ordinal` is the
+zero-based accepted-edge count before a selected candidate and the final accepted-edge count for a tail; and
+`provenance` is exact string `gap`. The main machine uses decoded source `αHβ\nS🙂Fω` (scalar length 8),
+with selected spans `H=[1,2)`, `S=[4,5)`, and `F=[6,7)`, and executes these exact transitions:
+
+1. `enter_root` initializes cursor 0, count 0, and no current gap.
+2. `select_header` installs `prefix=[0,1)` before `LS`.
+3. `enter_header_ls` proves prefix context is current.
+4. `accept_falsey_header_edge` preserves accepted match presence despite false payload.
+5. `enter_header_le` proves the same candidate survives the edge.
+6. `commit_header` advances committed cursor to 2 and count to 1.
+7. `enter_header_it` proves current gap has cleared.
+8. `select_section` installs `interstitial=[2,4)` including the newline.
+9. `suspend_for_section_child` preserves but hides parent context during isolated child entry.
+10. `resume_section_parent` restores the same detached parent candidate.
+11. `commit_section` advances cursor to 5 and count to 2.
+12. `select_footer` installs Unicode `interstitial=[5,6)`.
+13. `commit_footer` advances cursor to 7 and count to 3.
+14. `terminal_miss` installs `tail=[7,8)` without moving the parser cursor.
+15. `enter_terminal_lx` proves exact tail context at the default-loop terminal hook.
+16. `accept_root` clears current state and leaves no retained gap history.
+
+The other source fixtures are `HS` for empty prefix/interstitial/tail and `p{abc}gap!` for an opening match whose
+target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` before `!`.
+
+### Exact fixture and mutation families
+
+- Declaration/selector positives are `spacing_compact`, `spacing_before_equals`, `spacing_after_equals`,
+  `spacing_both`, `unicode_xid_exact`, `mixed_named_anonymous`, `numeric_named_same_target`, and
+  `named_reorder_stable`. Negative cases are `invalid_slot_name`, `numeric_only_name`, `duplicate_slot_name`,
+  `unknown_named_selector`, `selector_index_out_of_range`, `malformed_named_selector`, `duplicate_directive`,
+  `ineligible_and_family`, `ineligible_blind_owner`, and `legacy_marker_conflict`.
+- Segmentation cases are `unicode_prefix_interstitial_tail`, `empty_prefix`, `empty_interstitial`, `empty_tail`,
+  `zero_match_whole_tail`, `child_extended_accepted_exit`, `falsey_action_accepted`, `maximum_exit_tail`,
+  `failed_edge_no_commit`, and `nested_recursive_isolation`. The lifecycle matrix independently proves
+  selection → candidate → `LS` → edge/target → `LE` → commit → `IT`, plus terminal `LX`/`EX`/`E` placement.
+- The seven transaction/recursion/return-channel rows are `accepted_falsey_commits`, `edge_failure_discards`,
+  `recognition_rollback_restores`, `abnormal_unwind_clears`, `nested_child_suspends_parent`, and
+  `recursive_invocation_isolates_state`, plus `default_action_return_unwinds_without_commit_or_tail`. The six
+  compatibility rows are the three anonymous legacy members
+  (retained, not aliases, conflict when mixed), `@mark(name)` (independent and allowed), explicit capture/mark
+  helpers (independent and allowed), and absent `@emit_gaps`/forced emission.
+- Diagnostics are exact records for `regex_slot_name_invalid`, `regex_slot_duplicate_name`,
+  `regex_slot_unknown_name`, `regex_slot_index_out_of_range`, `regex_slot_selector_invalid`,
+  `capture_gaps_duplicate_directive`, `capture_gaps_rule_ineligible`, `capture_gaps_legacy_marker_conflict`, and
+  `gap_capture_context_unavailable`. Cursor/source/range/progress failures reuse the existing typed-source and
+  recognition diagnostic codes rather than inventing aliases. Every record carries rule/source location plus the
+  relevant selector, slot, family, ownership, phase, invocation, or coordinate fields without source-text leakage.
+- The diagnostic schema is `{code, phase, detection, required_context}`. Required contexts are exact:
+  `regex_slot_name_invalid` uses `parse_declaration` / `static` →
+  `{rule_label,source_id,line,slot_name}`;
+  `regex_slot_duplicate_name` uses `resolve_declaration` / `static` →
+  `{rule_label,source_id,line,slot_name,first_line}`;
+  `regex_slot_unknown_name` uses `resolve_selector` / `static` →
+  `{rule_label,source_id,line,target_rule,authored_selector}`;
+  `regex_slot_index_out_of_range` uses `resolve_selector` / `static` →
+  `{rule_label,source_id,line,target_rule,regex_index,regex_count}`;
+  `regex_slot_selector_invalid` uses `parse_selector` / `static` →
+  `{rule_label,source_id,line,target_rule,authored_selector}`;
+  `capture_gaps_duplicate_directive` uses `parse_directive` / `static` →
+  `{rule_label,source_id,line,first_line}`;
+  `capture_gaps_rule_ineligible` uses `validate_directive` / `static` →
+  `{rule_label,source_id,line,family,cursor_policy,edge_ownership,execution_shape}`;
+  `capture_gaps_legacy_marker_conflict` uses `validate_directive` / `static` →
+  `{rule_label,source_id,line,marker,marker_line}`; and `gap_capture_context_unavailable` uses
+  `access_gap_context` / `static_or_runtime` → `{rule_label,source_id,invocation_id,phase,accessor}` so
+  reconstructed/programmatic artifacts cannot bypass it.
+- Checker mutation classes cover contract identity/counts, identifier classification and digit reservation,
+  spacing/uniqueness/mixing/order, selector provenance/equivalence/reorder/duplicate-regex identity, directive
+  cardinality/eligibility/compatibility, typed source/Unicode/empty spans, prefix/interstitial/tail boundaries,
+  lifecycle order, falsey acceptance, commit/rollback/failure/recursion isolation, diagnostics, rollout,
+  storage/routing, and public no-overclaim. `.1.1` proves fail-first absence, passing semantics, and reason-checked
+  in-memory corruptions; `.1.2` adds topology/storage/current-claim corruptions without changing behavior.
+- The 50 `.1.1` semantic mutation ids are `contract_id`, `format`, `task_owner`, `expected_counts`,
+  `required_section`, `identifier_classifier`, `digit_reservation`, `normalization_identity`, `case_identity`,
+  `spacing_compact`, `spacing_before_equals`, `spacing_after_equals`, `spacing_both`, `mixed_declaration_order`,
+  `duplicate_slot_name`, `selector_unindexed`, `selector_numeric`, `selector_named`, `named_reorder_stability`,
+  `numeric_reorder_position`, `selector_provenance`, `duplicate_regex_identity`, `directive_cardinality`,
+  `directive_family`, `directive_cursor_policy`, `directive_edge_ownership`, `directive_loop`,
+  `directive_static_edge`, `legacy_marker_conflict`, `explicit_helper_independence`, `gap_source_identity`,
+  `gap_half_open`, `gap_empty`, `gap_unicode`, `gap_prefix`, `gap_interstitial`, `gap_tail`, `zero_match_tail`,
+  `candidate_before_ls`, `candidate_through_le`, `commit_before_it`, `falsey_acceptance`, `child_extended_exit`,
+  `failure_no_commit`, `rollback_no_commit`, `unwind_clear`, `recursion_isolation`, `nested_suspend_resume`,
+  `action_return_authority`, and `diagnostic_schema`. `.1.2` adds `rollout_sequence`, `runtime_rows_pending`,
+  `storage_paths`, `route_order`, and `public_no_overclaim`.
+
+### Carrier and no-overclaim boundary
+
+- Perl `.2` must prove authored parse, descriptor provenance, live execution, target lifecycle, recursion and
+  rollback, portable diagnostics, emitted-source generation, and independently loaded generated execution.
+- Rust/Dart/Julia `.3-.5` must each prove native, ordinary serialized/normalized reconstruction, descriptor,
+  generated-plan, emitted-source, target-lifecycle, recursion/rollback, portable-diagnostic, and primary-command
+  roles. Shared Lua `.6` proves those roles independently on PUC Lua and LuaJIT from one Lua source.
+- `.7` runs every complete runtime exactly once, all generated/capability/language ledgers, both primary option
+  environments, migration locks, and public/mdBook no-drift before promoting recurrence/public admission.
+  Until then the mdBook must label every planned spelling and helper as not implemented; README, facades,
+  semantic/MCP schemas, CLI, capability status, and typed-source `lossless_gap_composition` do not move.
 
 ## Activation Boundary
 
-- The cursor prerequisite is satisfied. Implementation leaves `.1-.7` remain inactive until explicit selection;
-  no gap-capture implementation is in flight.
+- The cursor and duplicate-slot prerequisites are satisfied. Neutral-contract audit `.1.0` is signoff-complete
+  from clean handoff `3d0384d1`; no contract artifact or gap-capture implementation is current yet. `.1.1` is
+  next after the clean atomic-218 boundary, and runtime leaves `.2-.6` remain pending until `.1.3` closes the
+  complete neutral contract.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-08-13` | `INTER-MATCH-GAP-CAPTURE.1.0` | Clean `3d0384d1` activation; ADR/Knowledge/contract/task retrieval; `LinkedSpec::Get(return_descriptor)` numeric/named probes; generated-source order; corrected historical live fixture; five-backend marker audit; duplicate-slot and typed-source matrices; rendered book; Knowledge Map; doctrines; canonical local CI | Pass: current `Top::OR` is action-owned/seek/repeating; numeric slot 1 resolves; named forms reject; generated order is selection → `LS` → action/target → legacy `LE` → `IT`; historical result is exact `[pre,H]`, `[gap,S]`, `[more,F]` without tail; marker divergence is unchanged; duplicate 59 and typed-source 9/5/114 pass. Rendered book passes 79 files / 14,628 KiB and Knowledge passes 830 facts / 6,950 question keys. Canonical signoff caught and rejected two condensed no-drift projection omissions, then the corrected permission-authorized run passed all eight doctrines, six-family containment, all-five-anchor relocation, CLI 66/66 twice, RAM 52%, and Phase 0 1,031/1,031 in 735 seconds through exact `[ci] local CI gate passed`. The prior status 71 was solely the outer harness denying nested `sandbox-exec`. No behavior or rollout moved. |
 | `2026-07-17` | `INTER-MATCH-GAP-CAPTURE.0` | Baseline `cf25bd37` source/spec audit; drift commits `8588b07b`/`300e6950`; current descriptor `Document[0..2]`; live three-gap/lifecycle probe; five-backend marker-scope code audit; `knowledge-map/scripts/check_knowledge_map.sh`; `mdbook build docs/linkedspec-book`; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git diff --check` | Pass: current code preserves external target-slot ownership and automatic prefix/interstitial rolling; legacy marker divergence is explicit; derived map 583 facts / 4,106 keys; all documentation/governance gates green. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `INTER-MATCH-GAP-CAPTURE.1.0` | `INTER-MATCH-GAP-CAPTURE.1.0 - freeze executable neutral plan` | Signoff-complete behavior-free audit/plan; atomic 218/300 commit pending. |
 | `INTER-MATCH-GAP-CAPTURE.0` | `INTER-MATCH-GAP-CAPTURE.0 - ratify inter-match gap capture` | Historical recovery and design ratification only; no runtime change. |
 
 ## Changelog
 
+- `2026-08-13`: Activated `.1.0` task-tree-first from clean cross-tree handoff `3d0384d1`; dependency-split the
+  neutral contract into audit, artifact, governance/routing, and closeout leaves before any implementation edit.
+- `2026-08-13`: Completed the behavior-free `.1.0` authority audit and froze the dependency-complete executable
+  contract plan for `.1.1-.1.3`; canonical signoff is complete, while implementation and rollout remain pending.
 - `2026-07-17`: Created the task tree before recording the ratified decision or correcting documentation.
 - `2026-07-17`: Completed `.0`: recovered the faithful Perl behavior, corrected blind-call/adjacency drift,
   accepted `@capture_gaps`, and ratified spacing-insensitive `name=/regex/` plus `Rule[name]` as future syntax.

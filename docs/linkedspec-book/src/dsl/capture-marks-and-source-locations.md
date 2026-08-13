@@ -511,15 +511,18 @@ That marker-member behavior is not currently portable. Lua/LuaJIT later attach t
 to the preceding regex slot, while Rust, Dart, and Julia parse marker syntax without executing it in
 their native runtime paths. Explicit capture/mark helper calls are a separate governed surface. The
 future `@capture_gaps` contract must reconcile this matrix rather than silently inheriting Lua's
-positional reinterpretation.
+positional reinterpretation. The behavior-free neutral plan now forbids mixing an anonymous legacy marker member
+with `@capture_gaps`; legacy behavior remains compatibility input, not an alias.
 
 The active baseline leaves storage and AST shape to action code. “Automatic” describes supplying the
 gap and rolling its boundary, not appending a mandatory result node.
 
 ADR `0045` adopts **inter-match gap capture** as the formal name and **lossless segmentation** as the
 broader model. `@capture_gaps` is the accepted future neutral directive, but it is not implemented.
-Its executable contract must decide prefix/tail, empty spans, failure and backtracking, recursion,
-typed source spans, diagnostics, and compatibility before backend work begins.
+`INTER-MATCH-GAP-CAPTURE.1.0` has now frozen its executable-neutral plan: exact prefix/interstitial/tail and empty
+spans, failure and rollback, recursion, typed source records, diagnostics, compatibility, routing, and rollout are
+specified before backend work begins. The JSON artifact and checker remain `.1.1` work, so this is still a planned
+surface rather than current syntax.
 
 The broader manual `capture_*` and `mark_*` APIs remain useful. They do not redefine this original
 automatic repeated-action behavior.
@@ -546,7 +549,7 @@ Top::OR
 Horizontal whitespace around `=` is insignificant. Same-line `name=/regex/` at rule-paragraph level
 declares a stable rule-local slot rather than assigning a variable. Existing unindexed and numeric
 selectors remain compatibility forms. This named-slot syntax, `@capture_gaps`, and the illustrative
-`entry_slot()` accessor are not implemented; the exact lifecycle accessor remains unsettled.
+`entry_slot()` accessor are not implemented; their exact neutral shapes are frozen below.
 
 Brackets are the selector namespace. `Document[1]` means positional compatibility, so declaration reordering
 can change its target; `Document[section]` means stable identity and must survive reordering. An implementation
@@ -560,6 +563,101 @@ and makes the first method structurally identical to every continuation method.
 The implementation order is also explicit. `INTER-MATCH-GAP-CAPTURE.1-.7` owns named-slot syntax,
 `@capture_gaps`, lifecycle and compatibility policy, six-runtime behavior, carriers, and public admission.
 Typed-source composition consumes that completed contract afterward; it does not define a second gap language.
+
+### Frozen neutral plan — not implemented yet
+
+The planned contract will live at `capability_conformance/inter_match_gap_capture_contract.json`, use id
+`linkedspec-inter-match-gap-capture-v1`, and be checked independently by
+`tools/check_inter_match_gap_capture_contract.py`. Its first leaf adds executable fixtures only; it does not make
+the DSL forms below executable.
+
+The neutral artifact locks 8 positive and 10 negative authored fixtures, 3 source fixtures, 8 private gap fields,
+16 main-machine transitions, 10 segmentation cases, 3 terminal routes, 7 transaction/recursion/return-channel
+cases, 6 compatibility rows, 9 diagnostics, 9 rollout legs, and 50 semantic mutations. The governance leaf adds
+5 storage/topology/no-overclaim mutations for 55 total without admitting a runtime.
+
+Named slot rules are exact:
+
+- A name uses the same pinned Unicode 17.0.0 `XID_Continue` scalar class as a rule label. Identity is exact,
+  case-sensitive, and normalization-sensitive.
+- An all-ASCII-digit name is invalid because bracket digits remain the positional selector namespace.
+- Named and anonymous declarations may mix. They share one zero-based declaration order, and a name is unique
+  within its owning rule.
+- `Rule`, `Rule[N]`, and `Rule[name]` are the only selectors. The compiled edge retains the authored selector kind,
+  authored selector, target rule, resolved index, and nullable stable slot id.
+
+For example, this is planned syntax:
+
+```text
+Document:
+ heading = /HEADER[^\n]*/
+ /COMMENT[^\n]*/
+ section = /SECTION[^\n]*/
+
+Top::OR
+ @capture_gaps
+ -> Document[heading] { ... }
+ -> Document[1]       { ... }
+ -> Document[section] { ... }
+```
+
+The two named edges retain stable identity if declarations are reordered. `Document[1]` deliberately remains
+positional. A numeric edge may resolve a named declaration, but that does not turn the numeric source spelling into
+stable named provenance.
+
+Future `entry_slot()` returns `undef` for a direct rule invocation. For an action-edge entry it returns a detached
+ordinary harray with `target_rule`, `regex_index`, `slot_id`, `selector_kind`, and `authored_selector`. It exposes
+identity, not a regex object or matcher authority.
+
+`@capture_gaps` is valid only on a looping, seek-based OR/default rule with statically resolved action edges. It is
+invalid on AND/consume, blind-call, mixed-ownership, or adjacency-owned shapes. Target rules still own their
+regexes and lifecycle. The enclosing rule owns only repeated choice and gap state.
+
+One activated invocation owns an independent committed gap cursor. The planned event order is:
+
+| Boundary | Planned gap behavior |
+| --- | --- |
+| Rule entry | Initialize the committed gap cursor at the Unicode-scalar entry position. |
+| After selection, before enclosing `LS` | Create `[gap_cursor, selected_match.start)` as `prefix` or `interstitial`. |
+| `LS` → edge/target → `LE` | Keep that read-only candidate visible to gap accessors. |
+| Accepted post-`LE` | Commit the accepted cursor, clear current gap, then run `IT`. |
+| Failed/rejected/rolled-back edge | Discard candidate and boundary advance. |
+| Successful default-loop miss | Expose `[gap_cursor, input_end)` as `tail` to `LX`. |
+| Satisfied repetition miss / maximum | Expose the same tail to `EX` / `E`. |
+
+The future accessors are deliberately small:
+
+- `gap_span()` → detached `{source_id, start, end, provenance}` with `provenance = "gap"`;
+- `gap_text()` → exact decoded text materialized from that span;
+- `gap_kind()` → `prefix`, `interstitial`, or `tail`.
+
+Empty prefix, interstitial, and tail spans are observable; none are trimmed or suppressed. A successful
+zero-match/zero-min rule sees the whole input as tail. A failed minimum sees no tail. Tail access never consumes
+input and no gap is appended to an AST or result automatically.
+
+Accepted match presence—not action-payload truthiness—commits an edge. A child that advances beyond its selected
+entry match moves the next committed boundary to its accepted post-`LE` cursor. Rollback restores gap state along
+with the owning invocation's cursor/boundary/marks, but cannot undo variables, AST mutations, diagnostics, output,
+external calls, or host effects. Nested and recursive calls share the existing monotonic invocation authority and
+receive isolated gap state rather than a second stack or an aliased parent cursor.
+
+The directive does not redefine return channels. In repeated action rules, an edge return stays a per-hit value
+and the successful iteration still finalizes its gap. In an unadorned default scan loop, an edge return remains a
+direct whole-rule return: the candidate clears during unwind, no new boundary commits, and no tail is invented.
+Lifecycle returns remain whole-rule returns and preserve their payload.
+
+The planned fixtures cover all four `=` spacing forms, Unicode names, mixed declarations, named reorder,
+duplicate-regex identity, prefix/interstitial/tail, every empty position, child-extended exit, falsey success,
+zero-match and maximum termination, failed commit, and recursive isolation. Negative fixtures cover invalid or
+duplicate names, unknown/out-of-range/malformed selectors, duplicate/ineligible directives, anonymous-marker
+conflict, unavailable gap context, lifecycle reorder, transaction leakage, storage/routing drift, and premature
+public claims.
+
+The rollout has nine ordered legs: neutral, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurring proof, and public
+no-drift. Runtime consumers will cover native/live execution, reconstructed state, descriptors, generated plans
+and independently loaded emitted source, target lifecycle, recursion/rollback, diagnostics, and primary commands.
+Until public closeout, README, facades, semantic/MCP schemas, CLI, capability status, and typed-source
+`lossless_gap_composition` remain unchanged.
 
 ## `mark_*`: named checkpoints
 
