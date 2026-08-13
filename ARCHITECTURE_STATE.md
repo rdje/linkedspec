@@ -89,6 +89,18 @@ containment, all-five-anchor relocation, CLI 66/66 twice, RAM 61%, Phase 0 1,031
 neutral-plus-six-pending route through local-CI exit 0. The prior status 71 was solely the outer harness denying
 the gate's nested macOS containment sandbox.
 
+Neutral closeout `.1.3` starts from clean `0490522b` and independently recomposes the same format-1 identity,
+counts/model, 55 unique mutations, nine-row rollout, exact pending route order, storage routing, five markers, ten
+outward guards, and absent consumers. Duplicate-slot remains 59 and typed source remains 9/5/114 across all six
+runtimes and support ledgers. The activation diff proves the contract/checker/driver, backend code, API/schema/CLI
+surfaces, and README unchanged. Parent `.1` therefore closes without behavior or rollout movement; Perl `.2` is
+the first implementation owner.
+
+Definitive `.1.3` signoff passes the rendered 79-file / 14,632-KiB mdBook, Knowledge Map 832/6,967, all eight
+doctrines, six-family repository containment, all-five-anchor relocation, CLI 66/66 in both option environments,
+RAM 61%, Phase 0 1,031/1,031 in 725 seconds, the exact opt-in neutral-plus-six-pending route, and local-CI exit 0.
+The leaf and parent are signoff-complete for intended atomic 221/300; commit/brief/clean proof precedes `.2`.
+
 The current executable-neutral authority is
 `capability_conformance/inter_match_gap_capture_contract.json`, format 1 / id
 `linkedspec-inter-match-gap-capture-v1`, with independent

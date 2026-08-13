@@ -22,9 +22,9 @@ answers:
   - "what are the capture_gaps rollout legs"
   - "is capture_gaps implemented now"
 date: 2026-08-13
-status: executable-neutral artifact and recurring governance current at 1 complete + 8 pending; authored/runtime implementation pending
+status: executable-neutral parent closed at 1 complete + 8 pending; authored/runtime implementation pending
 tags: [capture, segmentation, named-slots, typed-source, lifecycle, transaction, recursion, contract, plan]
-evidence: "INTER-MATCH-GAP-CAPTURE.1.1 from clean 31f3e664 adds the executable neutral Unicode/empty/child/rollback/nested model and 50 semantic corruptions. INTER-MATCH-GAP-CAPTURE.1.2 from clean f58dfcb3 adds repository-rooted recurrence, exact pending-route order, public no-overclaim, and five governance corruptions for 55 total. Rollout remains 1 complete + 8 pending; no authored or runtime behavior changed."
+evidence: "INTER-MATCH-GAP-CAPTURE.1.1 from clean 31f3e664 adds the executable neutral Unicode/empty/child/rollback/nested model and 50 semantic corruptions. INTER-MATCH-GAP-CAPTURE.1.2 from clean f58dfcb3 adds repository-rooted recurrence, exact pending-route order, public no-overclaim, and five governance corruptions for 55 total. INTER-MATCH-GAP-CAPTURE.1.3 from clean 0490522b independently recomposes those bytes, counts, routes, storage, public absence, duplicate-slot, and typed-source prerequisites before closing neutral parent .1. Rollout remains 1 complete + 8 pending; no authored or runtime behavior changed."
 reverify: "bash tools/check_inter_match_gap_capture_six_runtime.sh"
 ---
 
@@ -35,8 +35,8 @@ reverify: "bash tools/check_inter_match_gap_capture_six_runtime.sh"
 `linkedspec-inter-match-gap-capture-v1`) plus independent
 `tools/check_inter_match_gap_capture_contract.py`. `.1.2` now provides repository-rooted recurring/canonical
 routing and no-overclaim governance through `tools/check_inter_match_gap_capture_six_runtime.sh`; it executes only
-the complete neutral row and explicitly skips all six pending runtime rows. `.1.3` recomposes those committed
-inputs unchanged before Perl implementation starts.
+the complete neutral row and explicitly skips all six pending runtime rows. `.1.3` independently recomposes those
+committed inputs unchanged and closes neutral parent `.1`; Perl `.2` is the first implementation owner.
 
 The nine ordered rollout legs are neutral, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurring proof, and public
 no-drift. Only neutral can become complete in `.1`; runtime rows remain for `.2-.6`, and recurrence/public

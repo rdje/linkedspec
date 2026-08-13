@@ -2,23 +2,26 @@
 
 ## Current Activity
 
-- `INTER-MATCH-GAP-CAPTURE.1.2` is signoff-complete from clean `f58dfcb3` and lands as atomic 220/300 in this
-  commit; no push.
-- One repository-rooted driver executes the neutral contract once and reports the six absent runtime consumers
-  as exact ordered skips. Governance is 55/55 mutations at unchanged 1 complete + 8 pending rollout.
-- Current behavior remains unchanged and absent: named declarations/selectors, `entry_slot()`, `@capture_gaps`,
-  and the three gap accessors still reject or do not exist. Canonical signoff passes through exact local-CI exit 0.
+- `INTER-MATCH-GAP-CAPTURE.1.3` independently recomposes the unchanged neutral authority from clean `0490522b`
+  and lands as atomic 221/300 in this commit; no push.
+- Exact 1/8/55 semantics, six pending skips, storage, public absence, duplicate-slot 59, and typed-source 9/5/114
+  pass while the governed implementation/API bytes remain identical to the activation commit.
+- Rendered book 79/14,632 KiB, Knowledge 832/6,967, all eight doctrines, containment/relocation, CLI 66x2, RAM
+  61%, Phase 0 1,031/1,031 in 725 seconds, exact opt-in routing, and local-CI exit 0 close parent `.1` without
+  behavior or rollout movement; Perl reference implementation `.2` is next after commit/brief/clean proof.
 
 ## Latest Completed Slice
 
-- `.1.2` is the latest completed slice and lands through the current atomic-220 commit.
+- `.1.3` is the latest completed slice and lands through the current atomic-221 commit.
 
 ## Next Action
 
-- From the clean atomic-220 boundary, activate `.1.3` task-tree-first to recompose and close neutral governance.
+- From the clean atomic-221 boundary, activate Perl reference implementation `.2` task-tree-first.
 
 ## Recent Completions
 
+- `2026-08-13` — `.1.3` independently recomposed and closed the unchanged neutral program at 1/8 rollout and 55 mutations.
+- `2026-08-13` — `0490522b` landed recurring-neutral governance `.1.2` as atomic 220/300.
 - `2026-08-13` — `.1.2` completed recurring-neutral routing/no-overclaim governance and canonical signoff at 1/8 rollout and 55 mutations.
 - `2026-08-13` — `.1.1` completed checker-first executable-neutral contract proof and canonical signoff at 1/8 rollout and 50 mutations.
 - `2026-08-13` — `31f3e664` landed executable-neutral plan `.1.0` as atomic 218/300.
@@ -29,8 +32,6 @@
 - `2026-08-12` — `.14.4.8` completed recursive-observation public closeout and canonical signoff for atomic 216/300.
 - `2026-08-12` — `eb8d052c` landed recursive-observation recurrence `.14.4.7` as atomic 215/300.
 - `2026-08-12` — `.14.4.7` completed recursive-observation recurrence and canonical signoff for atomic 215/300.
-- `2026-08-12` — `77806855` landed shared Lua recursive-observation admission `.14.4.6` as atomic 214/300.
-- `2026-08-12` — `.14.4.6` completed shared Lua recursive-observation admission and canonical signoff for atomic 214/300.
 - `2026-08-12` — `4666ae9c` landed private Julia recursive-observation admission `.14.4.5` as atomic 213/300.
 - `2026-08-12` — `.14.4.5` completed private Julia recursive-observation admission and canonical signoff for atomic 213/300.
 - `2026-08-12` — `b1895a05` landed private Dart recursive-observation admission `.14.4.4` as atomic 212/300.

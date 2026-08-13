@@ -278,6 +278,21 @@ This amendment changes no grammar, parser, compiler, runtime, descriptor, genera
 schema, semantic/MCP, CLI, README, capability, or typed-source behavior. Named declarations, named selectors,
 `entry_slot()`, `@capture_gaps`, and the three `gap_*` accessors remain planned and unimplemented.
 
+## 2026-08-13 neutral-closeout amendment
+
+`INTER-MATCH-GAP-CAPTURE.1.3` independently recomposes the committed `.1.1-.1.2` authority before runtime work.
+The format-1 artifact still passes 8 positive + 10 negative fixtures, 3 sources, 16 transitions, 10 segmentation
+cases, 9 diagnostics, rollout 1 complete + 8 pending, and all 55 reason-checked mutations. The rooted driver still
+executes neutral exactly once and reports the six absent Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT consumers as
+ordered skips. Independent JSON, marker, outward-surface, and missing-consumer checks agree.
+
+The activation-commit diff proves the contract, checker, driver, canonical/storage routes, all backend code, ten
+outward API/schema/CLI/README surfaces, and README bytes are unchanged from `0490522b`. Storage/outside-CWD,
+duplicate-slot 59, and typed-source 9/5/114 proofs pass. Therefore parent `.1` closes only the neutral-program
+phase; it admits no grammar, parser, compiler, runtime, descriptor, generated carrier, helper, facade, schema,
+semantic/MCP, CLI, README, capability, typed-source, recurring, or public behavior. Perl reference implementation
+remains exclusively owned by `.2`.
+
 ## Consequences
 
 - The director's original concept and target-rule ownership are durable and cannot be reassigned to

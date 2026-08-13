@@ -219,6 +219,8 @@ The always-on neutral command is
 pending Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT routes in fixed order without invoking their absent consumers.
 Set `LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1` to exercise this governance route in canonical local CI. Rollout
 remains 1 complete / 8 pending, so this switch proves topology and storage locality rather than runtime support.
+The neutral parent is now closeout-recomposed without changing the artifact, driver, guarded public surfaces, or
+rollout. Perl implementation follows separately; this switch still does not execute a backend gap consumer.
 
 Dart's admitted consumer covers its internal value core and all 92+7 helper projections across native,
 reconstructed, generated-plan, and freshly emitted execution. The independent rollout checker requires its

@@ -10,6 +10,22 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-13 (`INTER-MATCH-GAP-CAPTURE.1.3` — unchanged neutral closeout): activation base is clean `0490522b`.
+  A closeout leaf must consume only committed authority: do not edit the JSON/checker/driver to make recomposition
+  pass, and stop for a separately owned correction if their bytes, routes, public guards, or results disagree.
+- Recomposition has two independent layers. The checker executes the full semantic model and 55 corruptions; a
+  separate structural proof locks JSON identity/count/status/order, exact markers, guarded tokens, and absent
+  consumer files. Both agree at 1 complete + 8 pending.
+- Base-relative no-change proof covers the contract/checker/driver, canonical/storage routes, all backend trees,
+  ten outward API/schema/CLI/README surfaces, and README. Closeout docs are the only permitted projection changes.
+- Duplicate-slot 59 and typed-source 9/5/114 are prerequisites rather than gap runtime evidence. Their complete
+  matrices pass unchanged, preventing neutral closeout from hiding selector or source-span regression.
+- Closing `.1` means the specification is implementation-ready; it does not make any planned spelling, accessor,
+  runtime consumer, recurring row, or public no-drift row current. Perl `.2` owns the first behavior change.
+- Canonical closeout passes rendered mdBook 79/14,632 KiB, Knowledge 832/6,967, all eight doctrines,
+  containment/relocation, CLI 66/66 twice, RAM 61%, Phase 0 1,031/1,031 in 725 seconds, exact neutral-plus-six-
+  pending opt-in routing, and local-CI exit 0. Commit/brief/clean proof is the only remaining boundary before `.2`.
+
 - 2026-08-13 (`INTER-MATCH-GAP-CAPTURE.1.2` — recurring neutral governance): activation base is clean `f58dfcb3`.
   A recurring-driver file is not a runtime admission. Until each runtime rollout row becomes complete, execute
   the neutral checker once and emit one exact skip per pending route in the frozen order.

@@ -569,6 +569,8 @@ Typed-source composition consumes that completed contract afterward; it does not
 The behavior-free contract now lives at `capability_conformance/inter_match_gap_capture_contract.json`, uses id
 `linkedspec-inter-match-gap-capture-v1`, and is checked independently by
 `tools/check_inter_match_gap_capture_contract.py`. Inter-match gap-capture recurring governance is current, while every runtime and public surface remains unimplemented.
+The neutral-contract phase is independently recomposed and closed without changing that 1-complete/8-pending
+boundary. Perl reference implementation is the next phase; none of the planned forms below are current yet.
 The recurring driver currently executes that complete neutral row exactly once and emits six ordered pending
 route skips:
 

@@ -10,6 +10,24 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-13 — INTER-MATCH-GAP-CAPTURE.1.3 — close unchanged neutral authority
+
+- Activated task-tree-first from clean recurring-governance commit `0490522b` and retrieved the committed neutral,
+  route/storage, public no-overclaim, ADR, Knowledge, and task authorities before executable recomposition.
+- Independently proved format/id, 55 unique mutations, exact nine-row 1-complete/8-pending status, neutral-plus-six
+  route order, five single current markers, ten outward token guards, and absence of all five planned consumer
+  sources; the existing checker and driver pass unchanged.
+- Replayed repository-volume tool storage, outside-CWD workflow routing, duplicate-slot 59 across five backends,
+  and typed-source 9/5/114 across six runtimes plus their support ledgers.
+- Proved all governed artifact/checker/driver, backend, facade/schema/CLI, and README bytes unchanged from
+  `0490522b`; only closeout documentation and continuity layers move. Parent `.1` closes with no runtime/public
+  promotion, and Perl implementation `.2` is next.
+- Synchronized ADR `0045`, a dedicated Knowledge fact, both roadmaps, architecture, task/index, bounded live
+  layers, and the sole-facing mdBook while retaining all exact no-overclaim markers.
+- Signoff passes rendered mdBook 79 files / 14,632 KiB, Knowledge Map 832 facts / 6,967 keys, all eight doctrines,
+  six-family containment, all-five-anchor relocation, CLI 66/66 in both option environments, RAM 61%, Phase 0
+  1,031/1,031 in 725 seconds, the exact opt-in neutral-plus-six-pending route, and local-CI exit 0.
+
 ## 2026-08-13 — INTER-MATCH-GAP-CAPTURE.1.2 — govern recurring neutral route
 
 - Added `tools/check_inter_match_gap_capture_six_runtime.sh` as one repository-rooted, managed-project-data
