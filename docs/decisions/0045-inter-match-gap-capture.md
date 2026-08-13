@@ -1,7 +1,7 @@
 # 0045 - Inter-match gap capture preserves action-edge target ownership
 
 - Date: 2026-07-17
-- Status: accepted; executable-neutral and private Perl native-live implementation current; carrier/admission pending
+- Status: accepted; executable-neutral and private Perl native/generated implementation current; admission pending
 - Tags: architecture, grammar, capture, segmentation, or-rule, action-edge, source-span, portability, parity
 
 ## Context
@@ -391,6 +391,35 @@ surface. Those boundaries remain `.2.3`, `.2.4`, and final cross-backend closeou
 Signoff passes all eight doctrines, repository containment and relocation, CLI 66/66 twice, RAM 76%, Phase 0
 1,031/1,031 in 756 seconds, and the exact opt-in neutral-plus-six-pending route. The unchanged authorized run
 resolved only the outer harness's nested-`sandbox-exec` denial and exited 0 at the local-CI pass marker.
+
+## 2026-08-13 Perl generated-carrier amendment
+
+`INTER-MATCH-GAP-CAPTURE.2.3` carries the unchanged private Perl contract through emitted and independently
+loaded generated source from clean `34d02e0c`. Emitted source imports `InterMatchGapRuntime`, retains the existing
+five-field named dependency-slot provenance, and leaves generated-plan v2 as ordered `{label,family}` rows.
+Generated `Execute` establishes the same zero input boundary as ordinary `Get`; this preserves historical
+`@move_pos`/`capture_slice()` behavior without turning the legacy marker into a gap alias or adding a cursor.
+
+Generated descriptor `spec` entries are code references, unlike live rule hashes. The private runtime therefore
+uses `dependency_slot_map` as its generated selection authority and consults live `regex_slots` metadata only
+when a live hash entry actually exists. Named selectors retain their stable id; unindexed compatibility rows keep
+their nullable id rather than dereferencing a handler as metadata.
+
+`Execute` and `ExecuteWithTrace` rethrow anything classified by `InterMatchGapRuntime::is_error`, preserving both
+private unavailable-context errors and gap-owned typed source cursor-regression errors instead of wrapping them as
+generic generated failures. The generated consumer now passes five groups / 138 internal assertions against live
+execution over exact Unicode/empty values, detached spans and slot provenance, falsey results, child-extended and
+terminal lifecycle, recursion, rollback, diagnostics, direct entry, and legacy rolling.
+
+This amendment does not register the dormant consumer, promote `perl_runtime`, change gap 1/8/55 plus ten
+dormancy locks, change recognition 137/246/58, change 122 public helpers or typed source 9/5/114, or widen any
+facade/schema/semantic/MCP/CLI/README surface. Those admission boundaries remain `.2.4` and final cross-backend
+closeout.
+
+Definitive signoff passes the rendered mdBook, Knowledge Map 834/6,995, all eight doctrines, containment and
+all-five-anchor relocation, CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 773 seconds, the exact opt-in
+neutral-plus-six-pending route, and local-CI exit 0. The preceding unchanged sandboxed run stopped only at the
+outer harness's nested-`sandbox-exec` status 71; the permission-authorized run resolved that boundary.
 
 ## Consequences
 

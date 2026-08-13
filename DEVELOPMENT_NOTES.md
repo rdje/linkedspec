@@ -10,6 +10,27 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-13 (`INTER-MATCH-GAP-CAPTURE.2.3` — Perl emitted/loaded gap parity): activation base is clean
+  `34d02e0c`. Metadata 110 and all nine native-live groups were GREEN; generated mode failed only at its intended
+  placeholder, so no carrier defect was hidden behind the staged fence.
+- Generated gap execution needs four exact seams: an explicit private-runtime import; typed-error passthrough via
+  `InterMatchGapRuntime::is_error`; a guarded zero input boundary matching ordinary `Get`; and a live-metadata
+  fallback guard because emitted descriptor `spec` entries are code references, not live rule hashes.
+- `dependency_slot_map` remains the generated selection authority. Named rows already preserve five-field
+  provenance. For unindexed compatibility rows, absent generated rule metadata means `slot_id` remains nullable;
+  never dereference a generated handler as though it were a live descriptor record.
+- Do not widen generated plan v2. The exact plan remains ordered `{label,family}` rows; gap policy/state belongs in
+  emitted handler code and the existing private runtime, not serialized plan metadata.
+- The generated consumer now has five groups / 138 internal assertions comparing canonical JSON bytes and cursors
+  against live execution. It covers Unicode/empty spans, provenance, falsey values, lifecycle, recursion,
+  same-token rollback, `Execute`/`ExecuteWithTrace` diagnostics, direct entry, and legacy rolling.
+- This is still private staging. Keep gap 1/8/55 plus ten dormancy locks, recognition 137/246/58, public helpers
+  122, and typed source 9/5/114. `.2.4` alone removes dormancy, registers routes, advances 55→56, and admits Perl.
+- Canonical closeout is green: rendered mdBook, Knowledge 834/6,995, all eight doctrines, containment/relocation,
+  CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 773 seconds, and the exact opt-in gap route all pass with exit
+  0. A prior unchanged sandboxed run reached only nested macOS `sandbox-exec` status 71 at process containment;
+  the authorized run proves that was an outer-harness permission boundary, not a repository failure.
+
 - 2026-08-13 (`INTER-MATCH-GAP-CAPTURE.2.2` — private Perl native-live gap capture): activation base is clean
   `912fc5ed`. The exact RED was the staged live placeholder; metadata 108 and neutral gap 1/8/55 already passed.
 - Reuse `RecognitionTransactionRuntime::_current_guard` as the sole invocation authority. Gap state belongs on

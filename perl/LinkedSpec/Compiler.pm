@@ -160,6 +160,7 @@ sub _generated_source_preamble {
   . "use LinkedSpec::Numeric ();\n"
   . "use LinkedSpec::UnicodeCaseMapping ();\n"
   . "use LinkedSpec::RecognitionTransactionRuntime ();\n"
+  . "use LinkedSpec::InterMatchGapRuntime ();\n"
   . "sub _trace_runtime_mark_event { return LinkedSpec::GeneratedSource::trace_mark_event(\@_) }\n"
   . "our \$LINKEDSPEC_GENERATED_SOURCE_CONTRACT = 'linkedspec-generated-source-v2';\n"
   . "our \$LINKEDSPEC_GENERATED_SOURCE_FORMAT = 2;\n"
@@ -312,6 +313,7 @@ sub ValidateGeneratedPlan {
 sub Execute {
  my (\$input_ref, \$invocation_options) = \@_;
  ValidateGeneratedPlan();
+ pos(\$\$input_ref) = 0 if ref(\$input_ref) eq 'SCALAR';
  my \$diagnostic_sink = LinkedSpec::RuntimeDiagnosticOutput::validate_invocation_options(
   \$invocation_options,
  );
@@ -411,6 +413,7 @@ sub Execute {
   if !\$ok && (
    LinkedSpec::RecognitionTransactionRuntime::is_error(\$execution_error)
    || LinkedSpec::RecognitionTransactionRuntime::is_recursive_observation_error(\$execution_error)
+   || LinkedSpec::InterMatchGapRuntime::is_error(\$execution_error)
   );
  die LinkedSpec::GeneratedSource::new_error(
   stage => 'execute_generated',

@@ -19,10 +19,13 @@ answers:
   - "does Perl gap admission promote typed source gap composition"
   - "how is the Perl gap final consumer staged before admission"
   - "which leaf admits the Perl inter match gap consumer"
+  - "how does generated Perl preserve inter match gap typed errors"
+  - "why does generated Perl gap execution reset the input cursor"
+  - "why can generated Perl gap selection not read live rule metadata"
 date: 2026-08-13
-status: authored/static .2.1 and native live .2.2 complete; emitted/loaded parity and admission remain pending
+status: authored/static .2.1, native live .2.2, and emitted/loaded parity .2.3 complete; admission remains pending
 tags: [capture, segmentation, perl, parser, actionir, lifecycle, transaction, generated-source, admission]
-evidence: "INTER-MATCH-GAP-CAPTURE.2.0 starts from clean db299789 and freezes the .2.1-.2.4 plan. INTER-MATCH-GAP-CAPTURE.2.1 from clean 8f826923 implements permanent grammar/reference-bridge named slots, Unicode 17 identity, exact static diagnostics, directive and five-field edge metadata, generated dependency provenance, and a dormant final-path consumer. INTER-MATCH-GAP-CAPTURE.2.2 from clean 912fc5ed attaches private state to the existing recognition guard, adds exact lifecycle hooks and four source-read nodes, and makes all nine live contract groups pass while retaining generated/loaded execution and admission for .2.3-.2.4."
+evidence: "INTER-MATCH-GAP-CAPTURE.2.0 freezes the .2.1-.2.4 plan. .2.1 implements permanent grammar/reference-bridge named slots, Unicode 17 identity, exact static diagnostics, directive and five-field edge metadata, generated dependency provenance, and a dormant final-path consumer. .2.2 attaches private state to the existing recognition guard, adds exact lifecycle hooks and four source-read nodes, and makes all nine live contract groups pass. .2.3 from clean 34d02e0c imports the private runtime in emitted source, preserves gap-classified typed errors, aligns generated Execute's input boundary with ordinary Get, guards live-only metadata fallback, and makes five independently loaded groups / 138 internal assertions pass without admission."
 reverify: "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/check_inter_match_gap_capture_six_runtime.sh && perl tools/check_language_capability_coverage.pl --report"
 ---
 
@@ -40,7 +43,7 @@ At the `.2.0` baseline, Perl descriptors resolved `Rule` to slot zero and `Rule[
 while the frontend rejected `name=/regex/`, `Rule[name]`, and `@capture_gaps`. At the `.2.1` landing, those
 authored forms parsed and statically resolved, but `entry_slot()`, `gap_span()`, `gap_text()`, and `gap_kind()`
 still lowered to explicit unsupported-helper sentinels. `.2.2` replaces that RED with private native-live
-lowering and typed context diagnostics; independent generated loading remains `.2.3`.
+lowering and typed context diagnostics; `.2.3` now carries that same behavior through independent generated loading.
 
 The corrected legacy runtime probe over `preHgapSmoreFtail` returns
 `[["pre","H"],["gap","S"],["more","F"]]` at cursor 13 and exposes no tail. Generated source proves the
@@ -106,12 +109,26 @@ terminal timing, typed unavailable-context failures, and unchanged legacy-marker
 passes 110 assertions. This is implementation staging only: the consumer remains dormant, the gap rollout stays
 1 complete + 8 pending / 55 mutations, and no facade/schema/CLI/README or cross-backend surface is promoted.
 
-## `.2.3-.2.4`: carrier parity, then admission
+## `.2.3`: emitted and independently loaded parity
 
-Generated source imports the private runtime, keeps exact dependency-slot provenance, and rethrows typed gap
-diagnostics from both generated execution entrypoints. The `generated` consumer phase compares live and loaded
-values, lifecycle order, diagnostics, rollback, recursion, and compatibility without changing plan v2 or any
-outward facade/schema/CLI/README surface.
+Generated source now imports the private runtime, keeps exact dependency-slot provenance, and rethrows typed gap
+diagnostics from both generated execution entrypoints. `Execute` establishes the same guarded zero input boundary
+as ordinary `Get`, preserving legacy `@move_pos` capture slices. Generated `spec` entries are code references, so
+unindexed slot-id fallback consults live `regex_slots` only when the entry is a live hash and otherwise trusts the
+generated dependency row's nullable identity.
+
+The `generated` consumer phase passes five independently loaded groups / 138 internal assertions against live
+execution: byte-identical canonical values and typed diagnostics, Unicode/empty gaps, named selector provenance,
+detached/falsey results, child-extended and LX/EX/E lifecycle, failed minimum, recursive isolation, same-token
+rollback, direct entry, and legacy compatibility. Generated plan v2 remains ordered `{label,family}` rows and no
+outward facade/schema/CLI/README surface changes.
+
+Definitive `.2.3` signoff passes the rendered mdBook, Knowledge 834/6,995, all eight doctrines, containment and
+all-five-anchor relocation, CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 773 seconds, exact opt-in routing,
+and local-CI exit 0. The unchanged sandboxed run's status 71 was solely the outer harness denying nested macOS
+`sandbox-exec`; the permission-authorized run passed without a source change.
+
+## `.2.4`: Perl admission
 
 Admission then runs the full consumer exactly once through canonical CI and the repository-rooted recurring
 driver. Only `perl_runtime` becomes complete, with owner `.2.4`. The existing runtime-status mutation becomes the

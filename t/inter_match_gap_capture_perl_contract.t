@@ -6,6 +6,7 @@ use utf8;
 use File::Spec ();
 use FindBin qw($Bin);
 use JSON::PP ();
+use Scalar::Util qw(blessed reftype);
 use Test::More;
 
 use lib "$Bin/../perl";
@@ -15,6 +16,8 @@ use LinkedSpec ();
 # metadata: prove -Iperl t/inter_match_gap_capture_perl_contract.t
 my $CONTRACT_ID = 'linkedspec-inter-match-gap-capture-v1';
 my $MODE = $ENV{LINKEDSPEC_PERL_INTER_MATCH_GAP_RED_MODE} // 'metadata';
+my $JSON = JSON::PP->new->allow_nonref(1)->canonical(1);
+my $GENERATED_PACKAGE_COUNTER = 0;
 
 sub slurp {
  my ($path) = @_;
@@ -53,6 +56,97 @@ sub semantic_edge {
   regex_index => $edge->{regex_index},
   target_slot_id => $edge->{target_slot_id},
  }
+}
+
+sub load_generated_source {
+ my ($source, $identity) = @_;
+ my $suffix = $identity;
+ $suffix =~ s/[^A-Za-z0-9]+/_/g;
+ my $package = 'LinkedSpec::InterMatchGapGenerated::'.$suffix.'_'.++$GENERATED_PACKAGE_COUNTER;
+ my $loaded = eval "package $package;\n$source\n1;";
+ my $error = $@;
+ ok($loaded, "$identity emitted source loads in an isolated package") or diag($error);
+ return undef unless $loaded;
+ no strict 'refs';
+ return {
+  execute => *{"${package}::Execute"}{CODE},
+  execute_with_trace => *{"${package}::ExecuteWithTrace"}{CODE},
+  metadata => *{"${package}::LinkedSpecGeneratedMetadata"}{CODE},
+  plan => *{"${package}::LinkedSpecGeneratedPlan"}{CODE},
+ }
+}
+
+sub compile_execution_roles {
+ my ($source, $identity) = @_;
+ my %runtime_ctx;
+ my $live = LinkedSpec::Get(
+  \$source,
+  generated_source_identity => $identity,
+  runtime_ctx_ref => \%runtime_ctx,
+ );
+ ok(ref($live) eq 'CODE', "$identity compiles for live execution")
+  or diag($JSON->encode($runtime_ctx{last_error} // {}));
+ my $emitted = LinkedSpec::emit_generated_source(
+  \$source,
+  source_identity => $identity,
+ );
+ ok(defined($emitted) && length($emitted), "$identity emits standalone source");
+ my $generated = load_generated_source($emitted, $identity);
+ return ($live, $generated, $emitted)
+}
+
+sub capture_execution {
+ my ($parser, $input_text, @args) = @_;
+ my $input = $input_text;
+ my $value;
+ my $ok = eval {
+  $value = $parser->(\$input, @args);
+  1
+ };
+ my $error = $@;
+ return {
+  ok => $ok ? 1 : 0,
+  value => $value,
+  error => $error,
+  position => pos($input),
+ }
+}
+
+sub diagnostic_value {
+ my ($value) = @_;
+ return $value unless ref($value);
+ my $type = reftype($value) // '';
+ if ($type eq 'HASH') {
+  my $fields = {map { $_ => diagnostic_value($value->{$_}) } sort keys %$value};
+  return blessed($value)
+   ? {class => blessed($value), text => "$value", fields => $fields}
+   : $fields;
+ }
+ return [map { diagnostic_value($_) } @$value] if $type eq 'ARRAY';
+ return "$value"
+}
+
+sub diagnostic_record {
+ my ($error) = @_;
+ return diagnostic_value($error)
+}
+
+sub assert_success_parity {
+ my (%args) = @_;
+ my $live_result = capture_execution($args{live}, $args{input});
+ my $generated_result = capture_execution($args{generated}{execute}, $args{input});
+ ok($live_result->{ok}, "$args{label} live role succeeds")
+  or diag($JSON->encode(diagnostic_record($live_result->{error})));
+ ok($generated_result->{ok}, "$args{label} generated role succeeds")
+  or diag($JSON->encode(diagnostic_record($generated_result->{error})));
+ is(
+  $JSON->encode($generated_result->{value}),
+  $JSON->encode($live_result->{value}),
+  "$args{label} generated value is byte-identical to live",
+ );
+ is_deeply($generated_result->{value}, $args{expected}, "$args{label} returns the exact contract value");
+ is($generated_result->{position}, $live_result->{position}, "$args{label} preserves the live cursor");
+ return ($live_result, $generated_result)
 }
 
 sub run_metadata_contract {
@@ -220,7 +314,7 @@ SPEC
  like($generated, qr/authored_selector => '\Q$unicode_name\E'/, 'generated dependency slot carries exact authored selector');
  like($generated, qr/target_slot_id => '\Q$unicode_name\E'/, 'generated dependency slot carries exact target-slot identity');
  like($generated, qr/InterMatchGapRuntime::activate/, 'generated source stages the private live gap lifecycle');
- unlike($generated, qr/^use LinkedSpec::InterMatchGapRuntime/m, 'independent runtime import remains owned by the generated-source leaf');
+ like($generated, qr/^use LinkedSpec::InterMatchGapRuntime \(\);/m, 'generated source imports the private gap runtime');
 
  my $self_target_source = <<'SPEC';
 Top::
@@ -657,7 +751,390 @@ SPEC
 }
 
 sub run_generated_contract {
- fail('independently loaded gap execution remains owned by INTER-MATCH-GAP-CAPTURE.2.3');
+ subtest 'generated carrier preserves source identity selector provenance and exact values' => sub {
+  my $source = <<'SPEC';
+Top::
+ I { segments = [] }
+ @capture_gaps
+ -> Part[header]  { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span(), "child", call(Part))) }
+ -> Part[section] { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span(), "child", call(Part))) }
+ -> Part[footer]  { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span(), "child", call(Part))) }
+ LX { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span())); return(copy(segments)) }
+Part:
+ header=/H/
+ section=/S/
+ footer=/F/
+ I { return(hash("slot", entry_slot(), "text", entry_text(), "falsey", 0)) }
+SPEC
+  my ($live, $generated, $emitted) = compile_execution_roles($source, 'generated-unicode.spec');
+  return unless ref($live) eq 'CODE' && ref($generated) eq 'HASH';
+  like(
+   $emitted,
+   qr/^use LinkedSpec::InterMatchGapRuntime \(\);/m,
+   'standalone source imports the private gap runtime explicitly',
+  );
+  like(
+   $emitted,
+   qr/label => 'Part', idx => 0, selector_kind => 'named', authored_selector => 'header', target_slot_id => 'header'/,
+   'generated dependency row retains exact five-field selector provenance',
+  );
+  unlike($emitted, qr/\{\s*label\s*=>[^}]*capture_gaps/s, 'generated plan v2 is not widened with gap policy');
+  is_deeply(
+   $generated->{plan}->(),
+   [
+    {label => 'Top', family => 'default'},
+    {label => 'Part', family => 'default'},
+   ],
+   'generated plan remains exact label/family v2 rows',
+  );
+  is(
+   $generated->{metadata}->()->{source_identity},
+   'generated-unicode.spec',
+   'generated metadata preserves exact source identity',
+  );
+
+  my $input = "\x{03b1}H\x{03b2}\nS\x{1f642}F\x{03c9}";
+  my $expected = [
+   {
+    kind => 'prefix', text => "\x{03b1}",
+    span => {source_id => 'input', start => 0, end => 1, provenance => 'gap'},
+    child => {
+     slot => {
+      target_rule => 'Part', regex_index => 0, slot_id => 'header',
+      selector_kind => 'named', authored_selector => 'header',
+     },
+     text => 'H', falsey => 0,
+    },
+   },
+   {
+    kind => 'interstitial', text => "\x{03b2}\n",
+    span => {source_id => 'input', start => 2, end => 4, provenance => 'gap'},
+    child => {
+     slot => {
+      target_rule => 'Part', regex_index => 1, slot_id => 'section',
+      selector_kind => 'named', authored_selector => 'section',
+     },
+     text => 'S', falsey => 0,
+    },
+   },
+   {
+    kind => 'interstitial', text => "\x{1f642}",
+    span => {source_id => 'input', start => 5, end => 6, provenance => 'gap'},
+    child => {
+     slot => {
+      target_rule => 'Part', regex_index => 2, slot_id => 'footer',
+      selector_kind => 'named', authored_selector => 'footer',
+     },
+     text => 'F', falsey => 0,
+    },
+   },
+   {
+    kind => 'tail', text => "\x{03c9}",
+    span => {source_id => 'input', start => 7, end => 8, provenance => 'gap'},
+   },
+  ];
+  my (undef, $generated_result) = assert_success_parity(
+   live => $live,
+   generated => $generated,
+   input => $input,
+   expected => $expected,
+   label => 'Unicode prefix/interstitial/tail',
+  );
+  $generated_result->{value}[0]{span}{start} = 99;
+  my $again = capture_execution($generated->{execute}, $input);
+  ok($again->{ok}, 'generated source executes again after detached-value mutation');
+  is($again->{value}[0]{span}{start}, 0, 'generated returned span is detached from invocation state');
+
+  my $traced = capture_execution(
+   $generated->{execute_with_trace},
+   $input,
+   {trace_level => 'none'},
+  );
+  ok($traced->{ok}, 'ExecuteWithTrace preserves successful generated gap execution');
+  is(
+   $JSON->encode($traced->{value}),
+   $JSON->encode($expected),
+   'ExecuteWithTrace returns byte-identical gap values',
+  );
+ };
+
+ subtest 'generated lifecycle terminals preserve empty and child-extended boundaries' => sub {
+  my @cases = (
+   {
+    id => 'empty-gaps', input => 'HSF', expected => [
+     ['prefix', '', {source_id => 'input', start => 0, end => 0, provenance => 'gap'}],
+     ['interstitial', '', {source_id => 'input', start => 1, end => 1, provenance => 'gap'}],
+     ['interstitial', '', {source_id => 'input', start => 2, end => 2, provenance => 'gap'}],
+     ['tail', '', {source_id => 'input', start => 3, end => 3, provenance => 'gap'}],
+    ],
+    source => <<'SPEC',
+Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Part[h] { push(gaps, array(gap_kind(), gap_text(), gap_span())) }
+ -> Part[s] { push(gaps, array(gap_kind(), gap_text(), gap_span())) }
+ -> Part[f] { push(gaps, array(gap_kind(), gap_text(), gap_span())) }
+ LX { push(gaps, array(gap_kind(), gap_text(), gap_span())); return(copy(gaps)) }
+Part:
+ h=/H/
+ s=/S/
+ f=/F/
+ I.return(entry_text())
+SPEC
+   },
+   {
+    id => 'child-extended', input => 'p{abc}gap!',
+    expected => [['p', '}'], ['gap', '!'], ['', 'tail']],
+    source => <<'SPEC',
+Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Container[open] { push(gaps, array(gap_text(), call(Container))) }
+ -> Bang { push(gaps, array(gap_text(), call(Bang))) }
+ LX { push(gaps, array(gap_text(), gap_kind())); return(copy(gaps)) }
+Container:
+ open=/\{/
+ -> Close { return(call(Close)) }
+Close:
+ /\}/
+ I.return(entry_text())
+Bang:
+ /!/
+ I.return(entry_text())
+SPEC
+   },
+   {
+    id => 'default-lx-tail', input => 'abc',
+    expected => ['tail', 'abc', {source_id => 'input', start => 0, end => 3, provenance => 'gap'}],
+    source => <<'SPEC',
+Top::
+ @capture_gaps
+ -> Part { return(gap_text()) }
+ LX { return(array(gap_kind(), gap_text(), gap_span())) }
+Part: /H/
+SPEC
+   },
+   {
+    id => 'repeat-ex-tail', input => 'aHtail', expected => ['a', 'tail'],
+    source => <<'SPEC',
+Top::OR{0,2}
+ I { gaps = [] }
+ @capture_gaps
+ -> Part { push(gaps, gap_text()) }
+ EX { push(gaps, gap_text()); return(copy(gaps)) }
+Part: /H/
+SPEC
+   },
+   {
+    id => 'repeat-ex-zero-tail', input => 'whole', expected => ['whole'],
+    source => <<'SPEC',
+Top::OR{0,2}
+ I { gaps = [] }
+ @capture_gaps
+ -> Part { push(gaps, gap_text()) }
+ EX { push(gaps, gap_text()); return(copy(gaps)) }
+Part: /H/
+SPEC
+   },
+   {
+    id => 'maximum-e-tail', input => 'aHtail', expected => ['a', 'tail'],
+    source => <<'SPEC',
+Top::OR{1}
+ I { gaps = [] }
+ @capture_gaps
+ -> Part { push(gaps, gap_text()) }
+ E { push(gaps, gap_text()); return(copy(gaps)) }
+Part: /H/
+SPEC
+   },
+   {
+    id => 'failed-minimum-no-tail', input => 'H', expected => undef,
+    source => <<'SPEC',
+Top::OR{2}
+ @capture_gaps
+ -> Part { return(gap_text()) }
+ EX { return("unexpected-ex") }
+ E { return("unexpected-e") }
+Part: /H/
+SPEC
+   },
+  );
+  for my $case (@cases) {
+   my ($live, $generated) = compile_execution_roles($case->{source}, "$case->{id}.spec");
+   next unless ref($live) eq 'CODE' && ref($generated) eq 'HASH';
+   assert_success_parity(
+    live => $live,
+    generated => $generated,
+    input => $case->{input},
+    expected => $case->{expected},
+    label => $case->{id},
+   );
+  }
+ };
+
+ subtest 'generated recursion and rollback preserve invocation-local state' => sub {
+  my @cases = (
+   {
+    id => 'nested-owner-isolation', input => 'p{axtail', expected => ['p', ['a', 'tail'], 'p'],
+    source => <<'SPEC',
+Top::
+ @capture_gaps
+ -> Container[open] { return(array(gap_text(), call(Container), gap_text())) }
+Container:
+ open=/\{/
+ I { inner = [] }
+ @capture_gaps
+ -> Atom { push(inner, gap_text()) }
+ LX { push(inner, gap_text()); return(copy(inner)) }
+Atom:
+ /x/
+ I.return(entry_text())
+SPEC
+   },
+   {
+    id => 'same-token-rollback', input => 'aHXbS', expected => ['a', 'Xb', ''],
+    source => <<'SPEC',
+Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Part[h] {
+  tx = recognition_checkpoint();
+  matched = recognize_once(tx, call(Probe));
+  recognition_rollback(tx);
+  push(gaps, gap_text())
+ }
+ -> Part[s] { push(gaps, gap_text()) }
+ LX { push(gaps, gap_text()); return(copy(gaps)) }
+Part:
+ h=/H/
+ s=/S/
+ I.return(entry_text())
+Probe:
+ /X/
+ I.return(0)
+SPEC
+   },
+  );
+  for my $case (@cases) {
+   my ($live, $generated) = compile_execution_roles($case->{source}, "$case->{id}.spec");
+   next unless ref($live) eq 'CODE' && ref($generated) eq 'HASH';
+   assert_success_parity(
+    live => $live,
+    generated => $generated,
+    input => $case->{input},
+    expected => $case->{expected},
+    label => $case->{id},
+   );
+  }
+ };
+
+ subtest 'gap-owned diagnostics remain typed and byte-identical through generated entrypoints' => sub {
+  my @cases = (
+   {
+    id => 'outside-context', input => 'H', class => 'LinkedSpec::InterMatchGapRuntime::Error',
+    code => 'gap_capture_context_unavailable',
+    source => <<'SPEC',
+Direct::
+ /H/
+ I { return(gap_text()) }
+SPEC
+   },
+   {
+    id => 'post-commit-it', input => 'H', class => 'LinkedSpec::InterMatchGapRuntime::Error',
+    code => 'gap_capture_context_unavailable',
+    source => <<'SPEC',
+Top::OR{1}
+ @capture_gaps
+ -> Part { return(0) }
+ IT { return(gap_kind()) }
+Part: /H/
+SPEC
+   },
+   {
+    id => 'gap-cursor-regression', input => 'aH', class => 'LinkedSpec::SourceLocation::Error',
+    code => 'source_location_cursor_regression',
+    source => <<'SPEC',
+Top::OR{1}
+ @capture_gaps
+ -> Part { rewind_match_start() }
+Part: /H/
+SPEC
+   },
+  );
+  for my $case (@cases) {
+   my ($live, $generated) = compile_execution_roles($case->{source}, "$case->{id}.spec");
+   next unless ref($live) eq 'CODE' && ref($generated) eq 'HASH';
+   my $live_result = capture_execution($live, $case->{input});
+   my $generated_result = capture_execution($generated->{execute}, $case->{input});
+   ok(!$live_result->{ok}, "$case->{id} live role rejects");
+   ok(!$generated_result->{ok}, "$case->{id} generated Execute rejects");
+   is(ref($generated_result->{error}), $case->{class}, "$case->{id} preserves the typed error class");
+   is($generated_result->{error}{code}, $case->{code}, "$case->{id} preserves the portable code");
+   is(
+    $JSON->encode(diagnostic_record($generated_result->{error})),
+    $JSON->encode(diagnostic_record($live_result->{error})),
+    "$case->{id} generated diagnostic is byte-identical to live",
+   );
+   ok(
+    LinkedSpec::InterMatchGapRuntime::is_error($generated_result->{error}),
+    "$case->{id} remains owned by the private gap error classifier",
+   );
+
+   my $traced = capture_execution(
+    $generated->{execute_with_trace},
+    $case->{input},
+    {trace_level => 'none'},
+   );
+   ok(!$traced->{ok}, "$case->{id} generated ExecuteWithTrace rejects");
+   is(
+    $JSON->encode(diagnostic_record($traced->{error})),
+    $JSON->encode(diagnostic_record($generated_result->{error})),
+    "$case->{id} ExecuteWithTrace preserves the exact typed diagnostic",
+   );
+  }
+ };
+
+ subtest 'direct entry and legacy rolling remain independently compatible' => sub {
+  my @cases = (
+   {
+    id => 'direct-entry-slot', input => 'H', expected => undef,
+    source => <<'SPEC',
+Part::
+ /H/
+ I { return(entry_slot()) }
+SPEC
+   },
+   {
+    id => 'legacy-move-pos', input => 'preHgapSmoreFtail',
+    expected => [['pre', 'H'], ['gap', 'S'], ['more', 'F']],
+    source => <<'SPEC',
+Top::
+ I { gaps = [] }
+ @move_pos
+ -> Part[h] { push(gaps, array(capture_slice(), call(Part))) }
+ -> Part[s] { push(gaps, array(capture_slice(), call(Part))) }
+ -> Part[f] { push(gaps, array(capture_slice(), call(Part))) }
+ LX { return(copy(gaps)) }
+Part:
+ h=/H/
+ s=/S/
+ f=/F/
+ I.return(entry_text())
+SPEC
+   },
+  );
+  for my $case (@cases) {
+   my ($live, $generated) = compile_execution_roles($case->{source}, "$case->{id}.spec");
+   next unless ref($live) eq 'CODE' && ref($generated) eq 'HASH';
+   assert_success_parity(
+    live => $live,
+    generated => $generated,
+    input => $case->{input},
+    expected => $case->{expected},
+    label => $case->{id},
+   );
+  }
+ };
 }
 
 if ($MODE eq 'metadata') {

@@ -4,18 +4,18 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `912fc5ed` — clean atomic-223 base for active Perl live slice `.2.2`; no push.
-- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.2.2 - add Perl native-live gap capture`, signoff-complete for
-  atomic 224/300 from activation commit `912fc5ed`; no push.
-- active_work_unit: none after atomic 224 lands; private native-live `.2.2` is complete and generated loading/
-  admission remain excluded.
-- next_action: activate emitted and independently loaded parity `.2.3` task-tree-first from clean atomic 224.
-- in_flight_uncommitted: none after landing; this pointer describes the intended clean atomic-224 handoff and no
+- activation_commit: `34d02e0c` — clean atomic-224 base for completed Perl generated/loaded slice `.2.3`; no push.
+- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.2.3 - carry Perl gaps through generated execution`,
+  signoff-complete for intended atomic 225/300 from activation commit `34d02e0c`; no push.
+- active_work_unit: none after atomic 225 lands; private live/generated parity is complete and Perl admission
+  remains excluded.
+- next_action: activate Perl-only admission `.2.4` task-tree-first from clean atomic 225.
+- in_flight_uncommitted: none after landing; this pointer describes the intended clean atomic-225 handoff and no
   background job remains.
-- blockers: none. Metadata passes 110 and live passes all nine groups. Recognition is 137/246/58 with 122 public
-  helpers; gap remains 1/8/55 plus ten dormancy locks; typed source remains 9/5/114. Focused matrices, rendered
-  book 79/14,672 KiB, Knowledge 834/6,992, all eight doctrines, canonical containment/relocation, CLI 66/66
-  twice, RAM 76%, Phase 0 1,031/1,031 in 756 seconds, and the opt-in neutral-plus-six-pending gap route pass.
+- blockers: none. Metadata 110, all nine live groups, five generated groups / 138 internal assertions, gap
+  1/8/55 plus ten dormancy locks, recognition 137/246/58, 122 public helpers, and typed source 9/5/114 pass.
+  Canonical signoff passes all eight doctrines, Knowledge 834/6,995, containment/relocation, CLI 66/66 twice,
+  RAM 57%, Phase 0 1,031/1,031 in 773 seconds, and the exact opt-in neutral-plus-six-pending gap route.
 - session_refresh_cadence: proactively recommend `/clear` after at most three completed commits, sooner after a
   large/debug-heavy slice or context compaction, and only at a committed clean handoff boundary.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -46,9 +46,8 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, 9 allowed/11 rejected effects, invocation-framed marks, and cursor-only v1 progress.
   Exact recurrence/public composition is current at rollout 9/9 and 58 mutations; public 3/26/45; guide 1/14/18.
-- current_future_direction: `INTER-MATCH-GAP-CAPTURE.1` is closed at 1/8/55. Perl `.2.1` implements private
-  authored/static named slots and directive provenance; `.2.2` implements native-live same-guard state/accessors
-  without runtime admission; `.2.3` owns loaded parity and `.2.4` admission. Brackets select; dot fluently binds;
-  `.14.5.1` waits for `.7`.
-- latest_bootstrap_read: 2026-08-13 — complete roadmap/codebase/mdBook and continuity/tooling review; `.2.2` is
-  task-tree-first from clean atomic 223 at `912fc5ed`; push lock is 300.
+- current_future_direction: `INTER-MATCH-GAP-CAPTURE.1` is closed at 1/8/55. Perl `.2.1-.2.3` complete private
+  authored/static, native-live, and emitted/loaded parity without runtime admission; `.2.4` alone admits Perl.
+  Brackets select; dot fluently binds; `.14.5.1` waits for `.7`.
+- latest_bootstrap_read: 2026-08-13 — complete roadmap/codebase/mdBook and continuity/tooling review; `.2.3` is
+  task-tree-first from clean atomic 224 at `34d02e0c`; push lock is 300.

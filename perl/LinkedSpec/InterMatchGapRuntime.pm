@@ -242,7 +242,11 @@ sub _selected_slot_record {
  my $regex_index = 0 + $row->{idx};
  my $slot_id = $row->{target_slot_id};
  if (!defined($slot_id)) {
-  my $regex_slots = $descr->{spec}{$target_rule}{meta}{regex_slots};
+  my $target_entry = $descr->{spec}{$target_rule};
+  my $regex_slots = ref($target_entry) eq 'HASH'
+   && ref($target_entry->{meta}) eq 'HASH'
+   ? $target_entry->{meta}{regex_slots}
+   : undef;
   if (ref($regex_slots) eq 'ARRAY' && ref($regex_slots->[$regex_index]) eq 'HASH') {
    $slot_id = $regex_slots->[$regex_index]{slot_id};
   }

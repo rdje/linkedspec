@@ -10,6 +10,30 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-13 — INTER-MATCH-GAP-CAPTURE.2.3 — carry Perl gaps through generated execution
+
+- Started from clean atomic-224 commit `34d02e0c`. Metadata passed 110 assertions, all nine native-live groups
+  passed, and generated mode failed only at its deliberate independently-loaded placeholder before implementation.
+- Emitted source now imports private `InterMatchGapRuntime`, initializes the generated `Execute` input cursor at
+  the same zero boundary as ordinary `Get`, and rethrows every gap-classified typed error through `Execute` and
+  `ExecuteWithTrace` instead of replacing it with a generic generated-execution error.
+- Made unindexed generated selection use its authoritative dependency-slot row without dereferencing live-only
+  rule metadata. Named rows retain exact selector kind, authored selector, target rule/index, and stable slot id;
+  unindexed rows retain their compatible nullable slot id. Generated plan v2 stays exact `{label,family}`.
+- Replaced the generated placeholder with five independently loaded parity groups / 138 internal assertions over
+  Unicode and empty gaps, exact source/slot provenance, falsey values, detached records, child-extended commits,
+  LX/EX/E and failed-minimum lifecycle, recursion isolation, same-token rollback, typed context/cursor diagnostics,
+  direct entry, and historical legacy-marker output.
+- Focused generated-source, rule-local-cursor, typed-source, recognition-transaction, duplicate-slot,
+  repeated-action, and logical-helper suites pass. Gap remains 1 complete + 8 pending / 55 mutations plus ten
+  dormancy locks; recognition remains 137/246/58, public helpers 122, and typed source 9/5/114. `.2.4` alone may
+  register the consumer or admit Perl; facades, schemas, semantic/MCP, CLI, README, and later backends do not move.
+- Final canonical proof passes the rendered mdBook, Knowledge Map 834/6,995, all eight doctrines, six-family
+  containment, all-five-anchor relocation, CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 773 seconds, and the
+  exact opt-in neutral-plus-six-pending gap route with local-CI exit 0. The preceding unchanged sandboxed run
+  reached only the outer harness's nested-`sandbox-exec` status 71; the permission-authorized run resolved that
+  harness boundary without a source change.
+
 ## 2026-08-13 — INTER-MATCH-GAP-CAPTURE.2.2 — add private Perl native-live gap capture
 
 - Started from clean authored-metadata commit `912fc5ed`. The neutral checker remained green at 1/8/55, metadata

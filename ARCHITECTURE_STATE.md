@@ -119,16 +119,30 @@ private source-read ActionIR nodes advance the owned recognition-effect census f
 calls remain 246, public helpers remain 122, typed source remains 9/5/114, and no outward surface is admitted.
 Nine native-live contract groups prove exact Unicode/empty gaps, child-extended commits, recursive isolation,
 rollback, terminal tails, typed contexts, detached slots, falsey values, and legacy compatibility. Independently
-loaded generated execution remains `.2.3`, and `.2.4` alone admits Perl.
+loaded generated execution is now complete under `.2.3`, and `.2.4` alone admits Perl.
+
+Generated carrier `.2.3` starts from clean atomic 224 at `34d02e0c`. Emitted source explicitly imports the private
+gap runtime, initializes `Execute` at the same zero input boundary as ordinary `Get`, and rethrows the runtime's
+classified typed context and gap-owned cursor errors through both generated entrypoints. Generated descriptor
+`spec` entries are handlers rather than live metadata hashes, so unindexed selection trusts the authoritative
+dependency-slot row and consults live `regex_slots` only behind an exact hash guard. Named five-field provenance
+remains intact and generated plan v2 remains ordered `{label,family}` rows. Five independently loaded groups / 138
+internal assertions match live values, cursors, lifecycle, rollback, recursion, diagnostics, direct entry, and
+legacy behavior. Rollout/admission and all outward surfaces remain unchanged.
+
+Definitive `.2.3` signoff passes the rendered mdBook, Knowledge Map 834/6,995, all eight doctrines, six-family
+repository containment, all-five-anchor relocation, CLI 66/66 in both option environments, RAM 57%, Phase 0
+1,031/1,031 in 773 seconds, the exact opt-in neutral-plus-six-pending route, and local-CI exit 0. The outer
+sandbox's first status-71 denial was solely nested `sandbox-exec`; the unchanged authorized run passed.
 
 Definitive `.2.2` signoff passes the rendered 79-file / 14,672-KiB mdBook, Knowledge Map 834/6,992, all eight
 doctrines, six-family repository containment, all-five-anchor relocation, CLI 66/66 in both option environments,
 RAM 76%, Phase 0 1,031/1,031 in 756 seconds, the exact opt-in neutral-plus-six-pending route, and local-CI exit 0.
 The outer sandbox's first status-71 denial was solely nested `sandbox-exec`; the unchanged authorized run passed.
 
-The dormant exact Perl consumer advances metadata, live, then emitted/loaded phases under `.2.1-.2.3`; `.2.4`
-alone registers the full path, promotes only Perl, and advances the gap checker from 55 to 56. This plan is
-durable in ADR `0045` and [[inter-match-gap-perl-implementation-plan]].
+The dormant exact Perl consumer has advanced through metadata, live, and emitted/loaded phases under `.2.1-.2.3`;
+`.2.4` alone registers the full path, promotes only Perl, and advances the gap checker from 55 to 56. This plan
+is durable in ADR `0045` and [[inter-match-gap-perl-implementation-plan]].
 
 Definitive behavior-free `.2.0` signoff preserves gap 1/8/55, recognition 133/246/58, public helper coverage 122,
 and typed source 9/5/114. It passes the rendered 79-file / 14,652-KiB mdBook, Knowledge 833/6,984, all eight

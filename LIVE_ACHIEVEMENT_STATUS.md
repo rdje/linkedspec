@@ -2,29 +2,30 @@
 
 ## Current Activity
 
-- `INTER-MATCH-GAP-CAPTURE.2.2` is signoff-complete from activation commit `912fc5ed` and lands as atomic
-  224/300 with no push; `.2.3` is the next clean task-tree owner.
-- Private `InterMatchGapRuntime` attaches candidate/committed/tail state to the existing recognition invocation
-  guard, shares its checkpoint tokens, and adds no cursor, stack, or `$IPOS` overload. Exact lifecycle placement,
-  rollback, recursive isolation, detached entry-slot identity, and typed context/regression errors are live.
-- Four private source-read ActionIR nodes advance recognition to 137/246/58 while the common call inventory stays
-  246 and public helpers stay 122. Metadata passes 110 assertions and all nine native-live behavior groups pass.
-- Neutral gap truth remains 1/8/55 plus ten dormancy locks, and typed source remains 9/5/114. Recognition, gap,
-  typed-source, and duplicate-slot cross-runtime matrices pass; generated loading, Perl admission, other backends,
-  and every outward facade/schema/semantic/MCP/CLI/README surface remain pending.
-- Rendered book 79/14,672 KiB, Knowledge 834/6,992, all eight doctrines, containment/relocation, CLI 66/66 twice,
-  RAM 76%, Phase 0 1,031/1,031 in 756 seconds, and the opt-in neutral-plus-six-pending gap route pass canonical CI.
+- `INTER-MATCH-GAP-CAPTURE.2.3` is signoff-complete from clean atomic-224 commit `34d02e0c` for intended atomic
+  225/300; no push. `.2.4` is the next clean task-tree owner.
+- Emitted Perl source imports private `InterMatchGapRuntime`, starts `Execute` at the ordinary zero input boundary,
+  consumes generated dependency-slot rows without live-descriptor assumptions, and preserves gap-classified typed
+  errors through both generated entrypoints. Plan v2 remains exact `{label,family}`.
+- Metadata passes 110 assertions, native-live passes all nine groups, and independently loaded generated execution
+  passes five groups / 138 internal assertions covering exact values, lifecycle, rollback, recursion, provenance,
+  typed diagnostics, direct entry, and legacy compatibility.
+- Neutral gap truth remains 1/8/55 plus ten dormancy locks, recognition remains 137/246/58 with 122 public helpers,
+  and typed source remains 9/5/114. Perl admission, other backends, and every outward surface remain pending.
+- All eight doctrines, six-family containment, all-five-anchor relocation, CLI 66/66 twice, RAM 57%, Phase 0
+  1,031/1,031 in 773 seconds, and the exact opt-in neutral-plus-six-pending gap route pass canonical CI.
 
 ## Latest Completed Slice
 
-- `.2.2` lands as signoff-complete atomic 224 from activation commit `912fc5ed`.
+- `.2.3` is signoff-complete for intended atomic 225 from activation commit `34d02e0c`.
 
 ## Next Action
 
-- Activate emitted and independently loaded parity `.2.3` task-tree-first from clean atomic 224.
+- Commit atomic 225, then activate Perl-only admission `.2.4` task-tree-first from that clean boundary.
 
 ## Recent Completions
 
+- `2026-08-13` — `.2.3` completed canonical signoff at RAM 57%, Phase 0 1,031/1,031 in 773 seconds, and exact opt-in gap routing.
 - `2026-08-13` — `.2.2` completed canonical signoff at RAM 76%, Phase 0 1,031/1,031 in 756 seconds, and exact opt-in gap routing.
 - `2026-08-13` — `.2.2` implemented private Perl native-live same-guard gap state/accessors and passed focused cross-runtime proof at recognition 137/246/58.
 - `2026-08-13` — `912fc5ed` landed authored/static Perl metadata `.2.1` as atomic 223/300.
@@ -40,7 +41,6 @@
 - `2026-08-13` — `.1.0` completed the behavior-free executable-neutral audit/plan and canonical signoff for atomic 218/300.
 - `2026-08-13` — `3d0384d1` landed behavior-free lossless-gap handoff `.14.5.0` as atomic 217/300.
 - `2026-08-13` — `.14.5.0` completed behavior-free lossless-gap handoff and canonical signoff for atomic 217/300.
-- `2026-08-12` — `d26e4d4e` landed recursive-observation public closeout `.14.4.8` as atomic 216/300.
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source
