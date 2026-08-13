@@ -1,6 +1,6 @@
 ---
 id: inter-match-gap-executable-contract-plan
-title: Inter-match gap capture has one frozen executable-neutral contract plan before implementation
+title: Inter-match gap capture has a frozen neutral contract and Perl authored-metadata staging
 answers:
   - "where will the inter match gap executable contract live"
   - "what is the inter match gap contract id"
@@ -22,10 +22,10 @@ answers:
   - "what are the capture_gaps rollout legs"
   - "is capture_gaps implemented now"
 date: 2026-08-13
-status: executable-neutral parent closed at 1 complete + 8 pending; authored/runtime implementation pending
+status: neutral parent closed and Perl authored/static staging complete; live runtime remains 1 complete + 8 pending
 tags: [capture, segmentation, named-slots, typed-source, lifecycle, transaction, recursion, contract, plan]
-evidence: "INTER-MATCH-GAP-CAPTURE.1.1 from clean 31f3e664 adds the executable neutral Unicode/empty/child/rollback/nested model and 50 semantic corruptions. INTER-MATCH-GAP-CAPTURE.1.2 from clean f58dfcb3 adds repository-rooted recurrence, exact pending-route order, public no-overclaim, and five governance corruptions for 55 total. INTER-MATCH-GAP-CAPTURE.1.3 from clean 0490522b independently recomposes those bytes, counts, routes, storage, public absence, duplicate-slot, and typed-source prerequisites before closing neutral parent .1. Rollout remains 1 complete + 8 pending; no authored or runtime behavior changed."
-reverify: "bash tools/check_inter_match_gap_capture_six_runtime.sh"
+evidence: "INTER-MATCH-GAP-CAPTURE.1.1 from clean 31f3e664 adds the executable neutral Unicode/empty/child/rollback/nested model and 50 semantic corruptions. INTER-MATCH-GAP-CAPTURE.1.2 from clean f58dfcb3 adds repository-rooted recurrence, exact pending-route order, public no-overclaim, and five governance corruptions for 55 total. INTER-MATCH-GAP-CAPTURE.1.3 from clean 0490522b independently recomposes those bytes, counts, routes, storage, public absence, duplicate-slot, and typed-source prerequisites before closing neutral parent .1. INTER-MATCH-GAP-CAPTURE.2.1 from clean 8f826923 adds Perl named-slot and capture_gaps authored/static metadata behind 10 independent dormancy mutations; it adds no live gap runtime or rollout admission."
+reverify: "bash tools/check_inter_match_gap_capture_six_runtime.sh && prove -Iperl t/inter_match_gap_capture_perl_contract.t"
 ---
 
 # Frozen executable-neutral plan
@@ -101,6 +101,9 @@ AST mutation, diagnostics, output, external calls, registry effects, or host sta
 cursor-regression, repetition-progress, and recursive-progress diagnostics stay authoritative; the new contract
 adds only named-slot, directive, compatibility-conflict, and unavailable-context diagnostics.
 
-This card records a current executable-neutral authority, not current authored syntax or runtime behavior. See ADR `0045` and
+The Perl reference now recognizes the named declaration/selector syntax and `@capture_gaps` directive, validates
+their static contract, and exposes private descriptor/generated dependency provenance. It still has no live gap
+state, lifecycle/accessor behavior, generated/loaded gap execution, recurring runtime route, or public admission.
+See ADR `0045`, `docs/knowledge/perl-inter-match-gap-authored-metadata.md`, and
 `docs/tasks/INTER-MATCH-GAP-CAPTURE.md` for the complete fixtures, mutation classes, storage routes, carrier roles,
-and implementation ownership.
+and remaining implementation ownership.

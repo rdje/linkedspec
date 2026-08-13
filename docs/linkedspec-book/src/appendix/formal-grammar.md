@@ -471,6 +471,18 @@ or a set of alternatives for OR-mode rules. When clusters are combined as
 alternatives, the engine records **which** alternative matched (0-based) and uses
 that to drive dispatch.
 
+The Perl reference also accepts a stable rule-local name on a regex member:
+
+```text
+name=/pattern/
+name = /pattern/
+```
+
+Only horizontal spacing around `=` is insignificant. Every name scalar uses the repository-pinned Unicode 17
+`XID_Continue` class; identity is exact, case-sensitive, and normalization-sensitive. ASCII digit-only names are
+reserved for positional selectors. Named and anonymous regex members may mix in one authored zero-based sequence.
+This is currently Perl authored/static staging; it is not yet a portable public admission.
+
 **Capture groups**: A `(...)` group is a **numbered** capture; a `(?<name>...)`
 group is a **named** capture. Action code reads them with `entry_group(N)` /
 `match_group(N)` (numbered) and `entry_named(name)` / `match_named(name)` (named).
@@ -487,6 +499,7 @@ model with worked examples, and states the regex feature set a backend must supp
 ```
 -> TargetRule       (shorthand for -> TargetRule[0])
 -> TargetRule[N]    (selects regex slot N of TargetRule)
+-> TargetRule[name] (selects the stable named regex slot of TargetRule)
 ```
 
 An action edge binds the current rule to a child rule via an **action code block**.
@@ -497,7 +510,9 @@ its associated action code.
   for readability, but `->Rule` and compact header-rest forms such as
   `Top::->Rule.push` are valid spellings.
 - **Target indexing**: `-> rule` means entry slot `[0]`. `-> rule[N]` selects a
-  later regex slot of the same rule (used for same-rule recursive entry).
+  positional regex slot; `-> rule[name]` selects stable rule-local identity. A numeric selector may resolve a
+  named declaration, but it remains positional provenance. Named selection is currently implemented only in the
+  Perl reference's authored/static path.
 - **Grouped targets**: `-> RuleA | RuleB { ... }` binds one shared action code
   block to multiple target rules.
 - **Grouped-target boundary**: the shared block is mandatory. `-> RuleA | RuleB`

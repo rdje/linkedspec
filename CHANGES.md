@@ -10,6 +10,28 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-13 — INTER-MATCH-GAP-CAPTURE.2.1 — add Perl authored gap metadata
+
+- Started from clean Perl-plan commit `8f826923` and added the dormant final consumer/checker before changing the
+  parser. Its six metadata subtests produced five expected RED failures on absent named/directive support.
+- Permanently extended `specs/spec.spec` and the reference bridge for spacing-insensitive named regex declarations,
+  named/numeric/unindexed selectors, and eligible `@capture_gaps` static metadata. A generated private 806-range
+  Perl classifier makes the pinned Unicode 17 table authoritative and reserves ASCII digit-only selector names.
+- Added ordered `regex_slots`, exact five-field `resolved_slot_edges`, source/line-aware typed diagnostics, and
+  selector provenance in dependency references and generated `dependency_slot_map` rows while preserving legacy
+  anonymous AST, `resolved_edges`, and dependency shapes.
+- The dormant consumer passes 108 metadata assertions, ordinary named selection, self-target expansion, generated
+  provenance, ten exact diagnostics, and unsupported-accessor locks. Its live/generated modes remain deliberately
+  unavailable; 10 independent mutations prevent canonical, recurring, or facade admission.
+- Neutral rollout remains 1 complete + 8 pending / 55 mutations; recognition remains 133/246/58, public helpers
+  122, and typed source 9/5/114. Focused proof passes 108/599 assertions, Unicode regeneration locks 806 ranges,
+  five-backend self-host passes 5x2, Knowledge is 834/6,992, and the rendered mdBook is 79/14,668 KiB.
+- The first staged canonical pass exposed a bounded-memory omission of historical repeated-action owner
+  `FUTURE-PARITY-BACKLOG.10.1`; restoring that exact compact fact fixed the known `.22` marker-anchor coupling
+  without weakening the checker. The sandboxed restart then stopped only at expected nested-sandbox status 71.
+  Its unchanged authorized rerun passes all eight doctrines, containment/relocation, CLI 66/66 twice, RAM 65%,
+  Phase 0 1,031/1,031 in 755 seconds, the exact opt-in gap route, and local-CI exit 0.
+
 ## 2026-08-13 — INTER-MATCH-GAP-CAPTURE.2.0 — freeze Perl implementation dependencies
 
 - Started from clean neutral-closeout commit `db299789` and retrieved the Knowledge/ADR/task/neutral artifact,

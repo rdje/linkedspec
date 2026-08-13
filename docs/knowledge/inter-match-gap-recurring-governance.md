@@ -15,7 +15,7 @@ answers:
 date: 2026-08-13
 status: current governance; rollout remains 1 complete + 8 pending with no runtime or public admission
 tags: [capture, segmentation, recurring-gate, project-data, no-overclaim, local-ci, rollout]
-evidence: "INTER-MATCH-GAP-CAPTURE.1.2 adds one repository-routed driver, canonical always-on neutral checking plus opt-in ordered governance, five topology/storage/public mutations, and exact outward-surface guards. Focused proof passes 55 rejected mutations, one neutral execution, six explicit pending skips, tool-storage locality, and outside-CWD routing. No runtime consumer exists or executes."
+evidence: "INTER-MATCH-GAP-CAPTURE.1.2 adds one repository-routed driver, canonical always-on neutral checking plus opt-in ordered governance, five topology/storage/public mutations, and exact outward-surface guards. Focused proof passes 55 rejected mutations, one neutral execution, six explicit pending skips, tool-storage locality, and outside-CWD routing. Perl .2.1 adds a dormant metadata/live/generated consumer behind 10 independent mutations; no runtime consumer executes canonically or recurrently."
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py"
   - "bash tools/check_inter_match_gap_capture_six_runtime.sh"
@@ -30,6 +30,10 @@ reverify:
 `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py` exactly once. Because only
 `neutral_contract` is complete, it then reports—but does not invoke—the exact pending Perl, Rust, Dart, Julia,
 PUC Lua, and LuaJIT consumer routes.
+
+Perl now has a dormant final-path consumer whose metadata phase passes, while its live/generated gap phases fail
+deliberately. Ten checker-local mutations keep that consumer out of this driver, canonical execution, and the
+public facade until `.2.4`; therefore the six pending skips and neutral ledger do not move.
 
 Canonical `tools/run_ci_local.sh` always executes the neutral checker. Setting
 `LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1` additionally invokes the ordered driver. This switch currently proves

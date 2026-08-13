@@ -10,6 +10,36 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-13 (`INTER-MATCH-GAP-CAPTURE.2.1` — Perl authored/static metadata): activation base is clean
+  `8f826923`. The final consumer/checker came first and failed five of six metadata subtests because named
+  selectors and `@capture_gaps` were not parseable; this is the leaf's exact RED.
+- `specs/spec.spec` remains permanent authority and `BootstrapSpec::Core` is its necessary reference bridge.
+  Anonymous regex AST rows must stay byte-shape compatible. Named and anonymous declarations share one authored
+  zero-based sequence; unindexed legacy selection remains permissive, while explicit numeric selection range-
+  checks and named selection follows exact identity.
+- Never use host Perl Unicode properties for slot names. Regenerate private `UnicodeXIDContinue.pm` from the
+  pinned Unicode 17 table, byte-compare all 806 ranges, and reserve ASCII digit-only bracket text for positions.
+- Keep stable edge identity separate from the legacy projection: `regex_slots` catalogs declarations and
+  `resolved_slot_edges` carries exactly selector kind, authored selector, target rule, resolved index, and nullable
+  slot id. Preserve provenance through ordinary and self-target generated dependency expansion.
+- `@capture_gaps` ends at static eligibility/descriptor metadata in this leaf. Do not add invocation state,
+  lifecycle hooks, transaction snapshots, `entry_slot()`/`gap_*`, tail behavior, or emitted/loaded gap execution.
+  Metadata is green; live/generated modes must remain deliberate failures behind 10 independent dormancy guards.
+- Focused proof is 108 assertions in the dormant consumer and 599 across eight Perl files; neutral remains
+  1/8/55 plus 10 dormancy mutations; Unicode 17 regeneration proves 806 ranges; five-backend self-host is 5x2.
+  Knowledge is 834/6,992 and the rendered mdBook is 79/14,668 KiB.
+- The first fully staged canonical run passed through composed semantic-introspection, then correctly rejected
+  the bounded-memory rewrite for omitting repeated-action historical next owner `FUTURE-PARITY-BACKLOG.10.1`.
+  This is the known `.22` marker-anchor defect: restore the compact memory fact and rerun unchanged; do not weaken
+  the checker or change this leaf's runtime/admission scope.
+- After that exact repair, the staged sandboxed restart reached only the outer harness's expected nested-
+  `sandbox-exec` status 71 at representative-process containment. The unchanged authorized run passes all eight
+  doctrines, six-family containment, all-five-anchor relocation, CLI 66/66 twice, RAM 65%, Phase 0 1,031/1,031
+  in 755 seconds, the exact neutral-plus-six-pending gap route, and local-CI exit 0.
+- Director session-continuity instruction: recommend `/clear` after at most three completed commits and sooner
+  after unusually large/debug-heavy work or context compaction, but only at a verified committed clean boundary.
+  Atomic 223 is an immediate fresh-session handoff; do not activate `.2.2` before the director clears.
+
 - 2026-08-13 (`INTER-MATCH-GAP-CAPTURE.2.0` — Perl dependency freeze): activation base is clean `db299789`.
   This leaf is behavior-free; documentation may freeze exact mechanisms, but grammar/runtime bytes and the
   1-complete/8-pending, 55-mutation gap authority must remain unchanged.

@@ -215,7 +215,19 @@ sub _dependency_slot_map_source_expression {
   }
  }
  if ($use_local_structural_slots) {
-  @dependency_refs = map { {label => $owner_label, idx => $_} } 0 .. $#$regexes;
+  my %authored_by_index = map {
+   my $index = $_->{idx};
+   exists($_->{selector_kind}) ? ($index => $_) : ()
+  } @dependency_refs;
+  @dependency_refs = map {
+   my $dependency_ref = {label => $owner_label, idx => $_};
+   if (my $authored = $authored_by_index{$_}) {
+    $dependency_ref->{selector_kind} = $authored->{selector_kind};
+    $dependency_ref->{authored_selector} = $authored->{authored_selector};
+    $dependency_ref->{target_slot_id} = $authored->{target_slot_id};
+   }
+   $dependency_ref
+  } 0 .. $#$regexes;
  }
  my @slot_exprs;
  foreach my $dependency_ref (@dependency_refs) {
@@ -228,9 +240,25 @@ sub _dependency_slot_map_source_expression {
   next unless ref($dependency_info) eq 'HASH' && ref($dependency_info->{re}) eq 'ARRAY';
   next unless defined($dependency_index) && exists $dependency_info->{re}[$dependency_index];
   my $pattern_literal = _quote_generated_source_string('' . $dependency_info->{re}[$dependency_index]);
+  my $provenance = '';
+  if (exists $dependency_ref->{selector_kind}) {
+   my $authored = !defined($dependency_ref->{authored_selector})
+    ? 'undef'
+    : $dependency_ref->{selector_kind} eq 'numeric'
+     ? 0 + $dependency_ref->{authored_selector}
+     : _quote_generated_source_string($dependency_ref->{authored_selector});
+   my $slot_id = defined($dependency_ref->{target_slot_id})
+    ? _quote_generated_source_string($dependency_ref->{target_slot_id})
+    : 'undef';
+   $provenance = ', selector_kind => '
+    . _quote_generated_source_string($dependency_ref->{selector_kind})
+    . ', authored_selector => ' . $authored
+    . ', target_slot_id => ' . $slot_id;
+  }
   push @slot_exprs,
    '  { label => ' . _quote_generated_source_string($dependency_label)
     . ', idx => ' . (0 + $dependency_index)
+    . $provenance
     . ', re => do { my $linkedspec_pattern = ' . $pattern_literal
     . '; qr/$linkedspec_pattern/ } }';
  }
@@ -493,7 +521,9 @@ sub _portable_diagnostic_fields {
  return () unless ref($diagnostic) eq 'HASH';
  return map {
   exists($diagnostic->{$_}) ? ($_ => $diagnostic->{$_}) : ()
- } qw/code option_name target targets regex_index ownerships expected_contract actual_contract entry_rule/
+ } qw/code option_name target target_rule targets regex_index regex_count ownerships
+      expected_contract actual_contract entry_rule source_id line slot_name first_line
+      authored_selector family cursor_policy edge_ownership execution_shape marker marker_line/
 }
 
 sub _build_action_rewriter_migration_summary {
@@ -617,7 +647,17 @@ sub build_compiled_rule_table {
   my $declared_label = ref($_) eq 'ARRAY' ? _parsed_rule_label($_) : undef;
   defined($declared_label) && length($declared_label) ? ($declared_label => 1) : ()
  } @$specretv;
- my $compile_context = { declared_rule_labels => \%declared_rule_labels };
+ my %declared_rule_slots = map {
+  my $declared_label = ref($_) eq 'ARRAY' ? _parsed_rule_label($_) : undef;
+  defined($declared_label) && length($declared_label)
+   ? ($declared_label => _parsed_rule_regex_slots($_))
+   : ()
+ } @$specretv;
+ my $compile_context = {
+  declared_rule_labels => \%declared_rule_labels,
+  declared_rule_slots => \%declared_rule_slots,
+  source_id => ref($option) eq 'HASH' ? $option->{source_id} : undef,
+ };
  my $compiled_state = _call_compiler_state('new_compiled_spec_state');
  my %redefined_seen;
  for (my $entry_idx = 0; $entry_idx < @$specretv; ++$entry_idx) {
@@ -671,7 +711,9 @@ sub build_compiled_rule_table {
     handler_source_label => $active_handler_source_label,
     (ref($diagnostic) eq 'HASH' ? map {
      exists($diagnostic->{$_}) ? ($_ => $diagnostic->{$_}) : ()
-    } qw/code target targets regex_index ownerships/ : ()),
+    } qw/code target target_rule targets regex_index regex_count ownerships source_id line
+         slot_name first_line authored_selector family cursor_policy edge_ownership
+         execution_shape marker marker_line/ : ()),
    ) if ref($runtime_ctx) eq 'HASH';
    _trace_log_output(DUMP_NONE, "CRITICAL ERROR", $detail);
    _trace_exit($trace_scope, { status => 'error', stage => 'spec_entry' }, DUMP_MEDIUM);
@@ -899,6 +941,27 @@ sub _parsed_rule_label {
  return undef
 }
 
+sub _parsed_rule_regex_slots {
+ my ($parsed_entry) = @_;
+ return [] unless ref($parsed_entry) eq 'ARRAY';
+ my @slots;
+ for my $centry (@$parsed_entry) {
+  next unless ref($centry) eq 'ARRAY' && defined($centry->[0]);
+  if ($centry->[0] eq 'RE') {
+   push @slots, {
+    regex_index => scalar(@slots),
+    slot_id => undef,
+   };
+  } elsif ($centry->[0] eq 'RE_SLOT' && ref($centry->[1]) eq 'HASH') {
+   push @slots, {
+    regex_index => scalar(@slots),
+    slot_id => $centry->[1]{name},
+   };
+  }
+ }
+ return \@slots
+}
+
 sub _parsed_rule_is_top {
  my ($parsed_entry) = @_;
  return 0 unless ref($parsed_entry) eq 'ARRAY';
@@ -1022,6 +1085,8 @@ sub run_get_pipeline {
       runtime_ctx => $runtime_ctx,
       function_registry => $function_registry,
       declared_rule_labels => ref($entry_deps) eq 'HASH' ? $entry_deps->{declared_rule_labels} : undef,
+      declared_rule_slots => ref($entry_deps) eq 'HASH' ? $entry_deps->{declared_rule_slots} : undef,
+      source_id => ref($entry_deps) eq 'HASH' ? $entry_deps->{source_id} : undef,
      },
     )
    };
@@ -1078,6 +1143,7 @@ sub run_get_pipeline {
   LinkedSpec::Validation::validate_spec_content(
    $compile_spec_content_ref,
    {
+    source_id => _generated_source_identity($option, $runtime_ctx),
     on_failure => sub {
      %validate_spec_content_failure = @_;
      return 1;
@@ -1159,7 +1225,8 @@ sub run_get_pipeline {
   my $dsl_valid = eval {
    LinkedSpec::Validation::validate_dsl_syntax(
     $compile_spec_content_ref,
-    {
+   {
+     source_id => _generated_source_identity($option, $runtime_ctx),
      on_failure => sub {
       %validate_dsl_failure = @_;
       return 1;
@@ -1328,7 +1395,10 @@ my $compiled_spec_state = eval {
    my ($entry, $entry_deps) = @_;
    $active_build_compiled_rule_table_rule_label = _parsed_rule_label($entry);
    return $compile_spec_entry->($entry, $entry_deps)
-  }, { return_state => 1 })
+  }, {
+   return_state => 1,
+   source_id => _generated_source_identity($option, $runtime_ctx),
+  })
 };
 my $build_compiled_rule_table_error = $@;
  my $active_build_compiled_rule_table_handler_source_label =
@@ -1366,7 +1436,9 @@ unless (_call_compiler_state('is_compiled_spec_state', $compiled_spec_state)) {
    handler_source_label => $active_build_compiled_rule_table_handler_source_label,
    (ref($diagnostic) eq 'HASH' ? map {
     exists($diagnostic->{$_}) ? ($_ => $diagnostic->{$_}) : ()
-   } qw/code target targets regex_index ownerships/ : ()),
+   } qw/code target target_rule targets regex_index regex_count ownerships source_id line
+        slot_name first_line authored_selector family cursor_policy edge_ownership
+        execution_shape marker marker_line/ : ()),
   );
  _trace_log_output(DUMP_NONE, "CRITICAL ERROR", "Compiled rule-table generation failed");
   _trace_exit($trace_scope, { status => 'error', stage => 'build_compiled_rule_table' }, DUMP_LOW);

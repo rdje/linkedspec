@@ -2,27 +2,30 @@
 
 ## Current Activity
 
-- `INTER-MATCH-GAP-CAPTURE.2.0` is behavior-free and signoff-complete from clean `db299789` for intended atomic
-  222/300; no push.
-- Toolbox-led preflight reproduces current numeric descriptor identity, named/directive/accessor absence, legacy
-  prefix/interstitial behavior without tail, and exact generated lifecycle order before source inspection.
-- `.2.1-.2.4` now have exact grammar/Unicode/static, same-guard runtime/effect-ledger, emitted/loaded, dormancy,
-  mutation, routing, and admission ownership. Current truth remains gap 1/8/55, recognition 133/246/58, public
-  helper coverage 122, and typed source 9/5/114 with no behavior or outward-surface movement.
-- Canonical proof passes containment, relocation, CLI 66/66 twice, RAM 66%, Phase 0 1,031/1,031 in 745 seconds,
-  the exact opt-in neutral-plus-six-pending route, and final local-CI exit 0.
+- `INTER-MATCH-GAP-CAPTURE.2.1` is signoff-complete from clean `8f826923` for intended atomic 223/300; no push.
+- Permanent grammar/reference parsing now accepts four `name=/regex/` spacing forms, exact Unicode-17 names,
+  named selectors, and eligible `@capture_gaps` static metadata. Ordinary named selection executes correctly.
+- RuleIR/descriptors/generated dependencies retain five-field selector provenance; exact typed diagnostics and
+  anonymous compatibility are locked by a 108-assertion dormant consumer. Neutral gap truth remains 1/8/55 plus
+  10 independent dormancy mutations; recognition stays 133/246/58, public helpers 122, typed source 9/5/114.
+- Focused 108/599 proof, Unicode 806-range regeneration, five-backend self-host 5x2, Knowledge 834/6,992,
+  rendered mdBook 79/14,668 KiB, all eight doctrines, containment/relocation, CLI 66x2, RAM 65%, canonical Phase 0
+  1,031/1,031 in 755 seconds, and the exact opt-in gap route pass through local-CI exit 0. Live state/accessors,
+  generated gap execution, and outward admission remain pending.
 
 ## Latest Completed Slice
 
-- `.2.0` is the latest completed slice and is ready to land as atomic 222/300 from `db299789`.
+- `.2.1` implementation and signoff are complete; atomic 223 landing is the fresh-session handoff boundary.
 
 ## Next Action
 
-- Commit/clear/clean `.2.0` as atomic 222, then activate `.2.1` and land authored parsing/static metadata plus the
-  dormant exact Perl consumer without live gap execution.
+- Commit/clear/clean atomic 223, stop for the director's `/clear`, then activate `.2.2` task-tree-first in the fresh
+  session for same-guard live gap state and private accessors.
 
 ## Recent Completions
 
+- `2026-08-13` — `.2.1` implemented Perl authored/static named-slot and `@capture_gaps` metadata with 108 focused assertions and no runtime admission.
+- `2026-08-13` — `8f826923` landed behavior-free Perl implementation freeze `.2.0` as atomic 222/300.
 - `2026-08-13` — `.2.0` completed the behavior-free Perl implementation freeze and canonical signoff for atomic 222/300.
 - `2026-08-13` — `db299789` landed unchanged neutral closeout `.1.3` as atomic 221/300.
 - `2026-08-13` — `.1.3` independently recomposed and closed the unchanged neutral program at 1/8 rollout and 55 mutations.
@@ -37,7 +40,6 @@
 - `2026-08-12` — `.14.4.8` completed recursive-observation public closeout and canonical signoff for atomic 216/300.
 - `2026-08-12` — `eb8d052c` landed recursive-observation recurrence `.14.4.7` as atomic 215/300.
 - `2026-08-12` — `.14.4.7` completed recursive-observation recurrence and canonical signoff for atomic 215/300.
-- `2026-08-12` — `4666ae9c` landed private Julia recursive-observation admission `.14.4.5` as atomic 213/300.
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source

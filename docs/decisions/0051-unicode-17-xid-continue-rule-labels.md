@@ -39,6 +39,14 @@ The director selected Unicode expansion rather than revising the admitted v1 fix
 7. This prerequisite does not create a semantic-introspection API or advance its rollout/admission ledgers.
    Exhaustive native semantic projection remains owned by `.10.4.1-.10.4.6`.
 
+## 2026-08-13 Perl named-slot reuse
+
+`INTER-MATCH-GAP-CAPTURE.2.1` reuses this exact identifier authority for named regex-slot declarations and
+selectors. The generator now emits private `perl/LinkedSpec/UnicodeXIDContinue.pm` beside the existing backend
+artifacts. Its 806-range binary-search classifier is deterministically regenerated and byte-compared by
+`tools/check_unicode_rule_label_contract.py`; host Perl's older Unicode property tables are not consulted.
+Named-slot policy differs only by reserving ASCII digit-only strings for positional bracket selectors.
+
 ## 2026-07-26 rollout closure
 
 Commit `b14126a6` recomposed the generated classifier, parser/validator routes, positive/distinct identity, and

@@ -38,4 +38,8 @@ Closing `.1` therefore does not make `name=/regex/`, `Rule[name]`, `entry_slot()
 Perl implementation begins only under `INTER-MATCH-GAP-CAPTURE.2`; Rust, Dart, Julia, Lua/LuaJIT, and final public
 admission remain `.3-.7`.
 
+That statement describes the `.1` closeout boundary. Perl `.2.1` subsequently made `name=/regex/`, `Rule[name]`,
+and `@capture_gaps` authored/static metadata current in the Perl reference only. It did not implement
+`entry_slot()`, `gap_*`, live gap state, recurring execution, or any public/backend rollout row.
+
 Related: [[inter-match-gap-executable-contract-plan]], [[inter-match-gap-recurring-governance]], and ADR `0045`.

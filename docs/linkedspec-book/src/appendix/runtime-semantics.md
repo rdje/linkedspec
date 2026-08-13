@@ -613,9 +613,9 @@ Top::AND
 The corresponding `OR` rule deterministically chooses slot 0 on every backend.
 Duplicate text remains legal. Choice still evaluates every eligible slot and
 breaks equal-start ties toward the first authored slot. Numeric selectors and
-ADR `0045`'s future named selectors resolve to the same structural identity;
+the Perl-staged ADR `0045` named selectors resolve to the same structural identity;
 pattern text, adjacency, capture text, and alternation guesses never recover
-identity.
+identity. Portable backend and public admission of named selectors remains future work.
 
 Perl and Rust originally exposed the same ordered-only defect: a combined
 alternation reported the earlier duplicate branch, after which the handler

@@ -341,6 +341,34 @@ Definitive `.2.0` signoff preserves gap 1/8/55, recognition 133/246/58, public h
 all-five-anchor relocation, CLI 66/66 twice, RAM 66%, Phase 0 1,031/1,031 in 745 seconds, the exact opt-in pending
 route, and final local-CI exit 0 all pass without implementation movement.
 
+## 2026-08-13 Perl authored-metadata amendment
+
+`INTER-MATCH-GAP-CAPTURE.2.1` implements the authored and static half of the Perl plan from clean `8f826923`.
+The permanent `specs/spec.spec` grammar and the hardcoded reference bridge now recognize spacing-insensitive
+`name=/regex/`, `Rule[name]`, and the rule-level `@capture_gaps` directive. Anonymous regex AST rows keep their
+old shape. Named declarations and selectors use a generated private Perl classifier derived from the same pinned
+Unicode 17.0.0 `XID_Continue` table as rule labels; every scalar position uses that class, identity is exact, and
+ASCII digit-only names remain reserved for positional selectors.
+
+Perl RuleIR now retains one ordered `regex_slots` catalog and projects resolved action selection separately as
+five-field `resolved_slot_edges`: `selector_kind`, `authored_selector`, `target_rule`, `regex_index`, and nullable
+`target_slot_id`. Dependency references and generated `dependency_slot_map` rows retain that provenance whenever
+the selected destination has stable named identity, including self-target local-slot expansion. The legacy
+`resolved_edges` and anonymous dependency shapes remain compatible; generated-source plan v2 does not widen.
+
+Static validation reports exact typed declaration, selector, directive-eligibility, duplicate-directive, and
+legacy-marker-conflict diagnostics with source identity and authored line context. An eligible directive produces
+descriptor metadata only. No gap invocation state, lifecycle placement, transaction snapshot, accessor lowering,
+tail handling, or generated/loaded gap execution exists in this amendment: `entry_slot()` and `gap_*` remain
+unsupported, and `.2.2-.2.4` retain those owners.
+
+The final-path Perl consumer exists in dormant metadata/live/generated modes. Metadata and ordinary named-slot
+selection are green; live and independently loaded gap modes fail deliberately until their owning leaves. Ten
+independent dormancy mutations prevent premature canonical, recurring, or facade admission. Therefore neutral
+rollout stays 1 complete + 8 pending with 55 semantic/governance mutations; recognition remains 133/246/58,
+public helper coverage remains 122, typed source remains 9/5/114, and all outward schema/MCP/CLI/README surfaces
+remain unchanged.
+
 ## Consequences
 
 - The director's original concept and target-rule ownership are durable and cannot be reassigned to

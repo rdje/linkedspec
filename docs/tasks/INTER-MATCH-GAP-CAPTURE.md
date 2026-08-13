@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `INTER-MATCH-GAP-CAPTURE`
-- Status: `active` / Perl preflight `.2.0` active task-tree-first from clean `db299789`
+- Status: `active` / Perl authored/static `.2.1` signoff-complete from clean `8f826923`; atomic 223 ready to land
 - Roadmap lane: `.spec language evolution / lossless segmentation and source preservation`
 - Created: `2026-07-17`
 - Last updated: `2026-08-13`
@@ -45,8 +45,8 @@ orchestration or to raw Perl cursor arithmetic.
 ## Task Tree
 
 - ID: `INTER-MATCH-GAP-CAPTURE`
-  Status: `active` (2026-08-13; neutral parent `.1` landed cleanly at `db299789`; Perl preflight `.2.0` is active
-    task-tree-first for intended atomic 222/300; no push)
+  Status: `active` (2026-08-13; neutral parent `.1` landed cleanly at `db299789`; Perl preflight `.2.0` landed at
+    `8f826923`; authored/static `.2.1` is signoff-complete for intended atomic 223/300; no push)
   Goal: Recover and modernize lossless inter-match gap capture without semantic drift.
   Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`
 
@@ -232,7 +232,8 @@ orchestration or to raw Perl cursor arithmetic.
     atomic landing boundary before `.2` activation.
 
 - ID: `INTER-MATCH-GAP-CAPTURE.2`
-  Status: `active` (2026-08-13; dependency-split under `.2.0-.2.4`; `.2.0` active from clean `db299789`)
+  Status: `active` (2026-08-13; dependency-split under `.2.0-.2.4`; `.2.0` landed clean at `8f826923`; `.2.1`
+    is signoff-complete from that boundary and `.2.2` remains the next unactivated leaf)
   Goal: Implement the neutral contract on the Perl reference without overloading `$IPOS`.
   Children: `.2.0`, `.2.1`, `.2.2`, `.2.3`, `.2.4`
   Acceptance: Per-invocation gap state and typed action context replace implicit arithmetic for the new
@@ -331,12 +332,57 @@ orchestration or to raw Perl cursor arithmetic.
   Commit: `intended atomic 222/300; no push`
 
 - ID: `INTER-MATCH-GAP-CAPTURE.2.1`
-  Status: `pending`
+  Status: `done; signoff-complete` (2026-08-13; task-tree-first from clean Perl-plan commit `8f826923`; intended
+    atomic 223/300; no push; clean fresh-session handoff follows landing)
   Goal: Add exact Perl authored parsing, static validation, resolved named-slot identity, directive metadata, and
     descriptor/generated-carrier provenance without executing gap capture.
   Acceptance: checker-first dormant RED covers accepted/rejected declaration, selector, directive, diagnostics,
     stable identity, duplicate-regex identity, exact Unicode-17 classification, metadata/generated provenance,
     ten dormancy mutations, and no-execution boundaries; runtime/accessor behavior remains pending.
+
+  ### Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / OWNERSHIP** — Prove atomic 222 at `8f826923`, empty staged/unstaged status, zero-byte
+    brief, zero managed-run residue, and no background result before this task-tree-first activation.
+  - [x] **RETRIEVE AUTHORITY / TOOLBOX FIRST** — Read the `.2.0` Knowledge/ADR/task freeze and exact current
+    grammar, BootstrapSpec, descriptor, generated-source, Unicode, duplicate-slot, and dormant-consumer owners;
+    use descriptors/source dumps before source inference.
+  - [x] **CHECKER-FIRST DORMANT RED** — Add the exact full-path Perl consumer and its independent checker-local
+    ten-mutation dormancy contract first. Prove metadata mode fails only for absent named-slot/directive metadata
+    while live/generated modes remain intentionally dormant and canonical/recurring/facade routes stay absent.
+    The checker-first consumer ran six metadata subtests before implementation: five failed, with named selectors
+    rejected as malformed and `@capture_gaps` rejected as malformed, while live/generated remained deliberately
+    fenced rather than being mistaken for implementation failures.
+  - [x] **AUTHORED GRAMMAR / UNICODE IDENTITY** — Add spacing-insensitive named declarations, named selectors,
+    and eligible `@capture_gaps` parsing in `specs/spec.spec` plus the necessary hardcoded reference bridge.
+    Generate and consume pinned Unicode-17 slot identity; reserve all-digit ASCII names for positional selectors.
+  - [x] **STATIC METADATA / DIAGNOSTICS** — Preserve authored declaration order and exact selector provenance in
+    RuleIR, resolved dependencies, descriptors, and generated dependency-slot rows. Reject duplicate/invalid
+    names, unknown named selectors, illegal directives, and legacy-marker conflicts with exact typed diagnostics.
+  - [x] **NO LIVE EXECUTION / NO OVERCLAIM** — Keep gap accessors unsupported and introduce no invocation state,
+    lifecycle placement, transaction/effect-census change, emitted execution, recurring/canonical consumer route,
+    facade/schema/semantic/MCP/CLI/README claim, rollout promotion, or current-count movement.
+  - [x] **LOCKSTEP / SIGNOFF** — Synchronize task/index, ADR/Knowledge, roadmaps, architecture, bounded live layers,
+    and mdBook; pass focused self-host/Phase-0, dormant-contract mutations, duplicate-slot, Unicode, generated-
+    source, storage, Knowledge, doctrine, and canonical proof; commit/clear/clean atomic 223 before `.2.2`. The
+    first fully staged canonical run passed every earlier gate through composed semantic-introspection, then the
+    repeated-action checker rejected the bounded `MEMORY.md` rewrite because it had dropped historical next owner
+    `FUTURE-PARITY-BACKLOG.10.1`. This is the already-known marker-anchor coupling owned by
+    `FUTURE-PARITY-BACKLOG.22`; restore the exact compact fact and rerun unchanged without weakening the checker.
+    The repaired repeated-action check passes 8/0/54. The sandboxed restart then reached only the outer harness's
+    expected nested-`sandbox-exec` status 71 at representative-process containment; the unchanged authorized run
+    passes all eight doctrines, six-family containment, all-five-anchor relocation, CLI 66/66 in both option
+    environments, RAM 65% below the 88% ceiling, Phase 0 1,031/1,031 in 755 seconds, the exact neutral-plus-six-
+    pending opt-in gap route, and `[ci] local CI gate passed`. Knowledge is 834 facts / 6,992 keys and the rendered
+    mdBook is 79 files / 14,668 KiB. Per the director's fresh-session instruction, land/clear/prove clean and stop
+    for `/clear`; do not activate `.2.2` in this session.
+
+  Verification: Dormant Perl consumer 108 assertions; eight focused Perl files 599 assertions; Unicode 17
+    regeneration 806 ranges / 9 semantic groups / 8 invalid cases / 2 drift mutations; gap 1/8/55 plus 10 Perl
+    dormancy mutations; five-backend self-host 5x2; recognition 133/246/58; public helpers 122; typed source
+    9/5/114; Knowledge 834/6,992; rendered mdBook 79/14,668 KiB; eight doctrines; containment/relocation; CLI
+    66/66 twice; RAM 65%; Phase 0 1,031/1,031 in 755 seconds; exact opt-in gap route; local-CI exit 0.
+  Commit: `intended atomic 223/300; no push`
 
 - ID: `INTER-MATCH-GAP-CAPTURE.2.2`
   Status: `pending`
@@ -409,7 +455,7 @@ orchestration or to raw Perl cursor arithmetic.
 | 4 | `INTER-MATCH-GAP-CAPTURE.1.2` | `done; landed at 0490522b` | Storage-rooted routing, topology governance, and public no-overclaim guards pass without runtime admission. |
 | 5 | `INTER-MATCH-GAP-CAPTURE.1.3` | `done; landed at db299789` | The unchanged neutral authority is independently recomposed; parent `.1` closes without behavior movement. |
 | 6 | `INTER-MATCH-GAP-CAPTURE.2.0` | `done; signoff-complete` from clean `db299789` | Exact Perl seams, dormancy, implementation, effect-ledger, carrier, and admission ownership are frozen without behavior changes; canonical proof is green. |
-| 7 | `INTER-MATCH-GAP-CAPTURE.2.1` | `next after atomic 222 lands clean` | Add parsing/static metadata/provenance without live gap execution. |
+| 7 | `INTER-MATCH-GAP-CAPTURE.2.1` | `active` from clean `8f826923` | Add parsing/static metadata/provenance without live gap execution. |
 | 8 | `INTER-MATCH-GAP-CAPTURE.2.2` | `pending` | Implement exact invocation-local live Perl state and accessors. |
 | 9 | `INTER-MATCH-GAP-CAPTURE.2.3` | `pending` | Prove emitted and independently loaded Perl execution parity. |
 | 10 | `INTER-MATCH-GAP-CAPTURE.2.4` | `pending` | Admit Perl only, update the route/ledger, and close `.2` for Rust `.3`. |
@@ -694,21 +740,23 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
   roles. Shared Lua `.6` proves those roles independently on PUC Lua and LuaJIT from one Lua source.
 - `.7` runs every complete runtime exactly once, all generated/capability/language ledgers, both primary option
   environments, migration locks, and public/mdBook no-drift before promoting recurrence/public admission.
-  Until then the mdBook must label every planned spelling and helper as not implemented; README, facades,
-  semantic/MCP schemas, CLI, capability status, and typed-source `lossless_gap_composition` do not move.
+  Until then the mdBook must distinguish Perl-only authored/static staging from unimplemented runtime/helpers and
+  portable/public admission; README, facades, semantic/MCP schemas, CLI, capability status, and typed-source
+  `lossless_gap_composition` do not move.
 
 ## Activation Boundary
 
-- The cursor and duplicate-slot prerequisites are satisfied. Neutral-contract audit `.1.0` landed at `31f3e664`,
-  artifact/checker `.1.1` landed at `f58dfcb3`, and governance/routing `.1.2` landed at `0490522b`. Unchanged
-  recomposition `.1.3` is signoff-complete from that clean activation boundary and closes parent `.1` in intended
-  atomic 221/300. No gap-capture implementation is current; Perl `.2` may activate only after commit/brief/clean
-  proof, while later runtime leaves `.3-.6` remain pending.
+- The cursor and duplicate-slot prerequisites are satisfied. Neutral `.1` landed through `db299789`; behavior-free
+  Perl plan `.2.0` landed at `8f826923`. Perl `.2.1` is task-tree-owned from that exact clean activation boundary:
+  named declarations/selectors and static directive/provenance are now implementation-complete, while live gap
+  state, accessors, generated gap execution, runtime admission, and later backends remain pending until their
+  owning leaves. Atomic 223 commit/brief/clean proof must precede `.2.2` activation.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-08-13` | `INTER-MATCH-GAP-CAPTURE.2.1` | Clean `8f826923` activation; checker-first dormant RED; permanent grammar/reference-bridge self-hosting; private Unicode-17 generation; exact metadata/diagnostics/generated provenance; ordinary named selection; focused compatibility suites; five-backend self-host matrix; Phase 0; neutral and dormancy mutations | Interim pass pending final canonical recomposition: checker-first six-subtest RED failed five expected authored/static cases before implementation. The final dormant consumer passes 108 assertions; neutral proof remains 8+10 fixtures / 3 sources / 16 transitions / 10 segmentations / 9 diagnostics / 1 complete + 8 pending / 55 mutations, plus 10 independent Perl dormancy mutations. Unicode proof passes 806 ranges, 9 positive, 8 negative, and 2 exact-distinct pairs. The five-backend self-host matrix passes in both option environments; focused legacy suites pass; Phase 0 passes 1,031/1,031 in 781 seconds. The first staged canonical run passed through composed semantic-introspection, then correctly rejected omission of repeated-action historical next owner `FUTURE-PARITY-BACKLOG.10.1` from bounded memory; the known `.22`-owned marker coupling was restored without behavior or checker change. No live gap/accessor/generated gap execution or outward admission moved. |
 | `2026-08-13` | `INTER-MATCH-GAP-CAPTURE.1.3` | Clean `0490522b` activation; authority-first retrieval; independent JSON/order/marker/surface/consumer recomposition; exact checker and routed driver; base-relative governed-byte proof; storage and outside-CWD routing; duplicate-slot and typed-source full matrices; rendered mdBook; Knowledge Map; all eight doctrines; permission-authorized canonical local CI with the gap-route opt-in | Pass: exact format/id and 8+10 fixtures / 3 sources / 16 transitions / 10 segmentations / 9 diagnostics remain at rollout 1 complete + 8 pending and 55 rejected mutations. Neutral executes once; Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT skip in exact order because all five planned consumer sources remain absent. Five current markers and ten outward guards are exact. Contract/checker/driver, canonical/storage routes, all backend code, API/schema/CLI surfaces, and README are byte-unchanged from `0490522b`. Storage/outside-CWD, duplicate-slot 59, typed-source 9/5/114, rendered book 79/14,632 KiB, Knowledge 832/6,967, and all eight doctrines pass. Canonical CI passes containment/relocation, CLI 66/66 twice, RAM 61%, Phase 0 1,031/1,031 in 725 seconds, the exact opt-in neutral-plus-six-pending route, `[ci] local CI gate passed`, and exit 0. Parent `.1` closes without authored/runtime/public behavior or rollout movement. |
 | `2026-08-13` | `INTER-MATCH-GAP-CAPTURE.1.2` | Clean `f58dfcb3` activation; checker-first topology RED; focused neutral checker and 55 mutations; rooted recurring route; project-data storage and outside-CWD routing; duplicate-slot five-backend and typed-source six-runtime matrices; rendered mdBook; Knowledge Map; all eight doctrines; staged canonical local CI with the gap-route opt-in | Pass: RED exited 1 with only `inter-match gap capture contract: FAIL: required sections drifted`; GREEN locks 8+10 fixtures / 3 sources / 16 transitions / 10 segmentations / 9 diagnostics / rollout 1 complete + 8 pending / 55 rejected mutations. The driver executes neutral once and skips exactly Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT without invoking absent consumers. Duplicate-slot remains 59; typed-source remains 9/5/114; storage/outside-CWD routing passes; rendered book is 78 files / 14,632 KiB; Knowledge is 831 facts / 6,960 keys; all eight doctrines pass. The sandboxed canonical run passed every earlier gate before the outer harness denied nested `sandbox-exec` with status 71. The unchanged permission-authorized run passed six-family containment, all-five-anchor relocation, CLI 66/66 in both option environments, RAM 61%, Phase 0 1,031/1,031, the exact neutral-plus-six-pending route, and `[ci] local CI gate passed` with exit 0. No authored/runtime/public behavior or rollout row moved. |
 | `2026-08-13` | `INTER-MATCH-GAP-CAPTURE.1.1` | Clean `31f3e664` activation; checker-first governed RED; focused neutral checker; exact 50 deep-copy corruptions; duplicate-slot five-backend matrix; typed-source six-runtime matrix; rendered mdBook; Knowledge Map; all eight doctrines; staged canonical local CI | Pass: exact absence exited 1 with only `inter-match gap capture contract is missing`; GREEN locks 8+10 fixtures / 3 sources / 8 private fields / 16 transitions / 10 segmentations / 3 terminal routes / 7 transaction-recursion-return rows / 6 compatibility rows / 9 diagnostics / rollout 1 complete + 8 pending / 50 rejected semantic mutations. Duplicate-slot remains 59 across five backends and typed-source remains 9/5/114 across six runtimes. Rendered book passes 79 files / 14,628 KiB, Knowledge passes 830 facts / 6,950 keys, and all eight doctrines pass. The first staged gate caught the exact Python-entrypoint census drift at 29 versus 30; after that containment lock was repaired, the sandboxed restart reached only the outer harness's status-71 denial of nested `sandbox-exec`. The unchanged permission-authorized run passed six-family containment, all-five-anchor relocation, CLI 66/66 in both option environments, RAM 55%, and Phase 0 1,031/1,031 in 737 seconds through exact `[ci] local CI gate passed` and exit 0. Exact generated verification residue is removed; no authored or runtime behavior moved. |
@@ -719,6 +767,7 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `INTER-MATCH-GAP-CAPTURE.2.1` | `INTER-MATCH-GAP-CAPTURE.2.1 - add Perl authored gap metadata` | Implementation complete and final signoff active for intended atomic 223/300 from `8f826923`; no push. |
 | `INTER-MATCH-GAP-CAPTURE.1.3` | `INTER-MATCH-GAP-CAPTURE.1.3 - close unchanged neutral authority` | Signoff-complete closeout for intended atomic 221/300; activation pointer must prove `0490522b == HEAD^1`. |
 | `INTER-MATCH-GAP-CAPTURE.1.2` | `0490522b` — `INTER-MATCH-GAP-CAPTURE.1.2 - govern recurring neutral route` | Recurring-neutral governance landed cleanly as atomic 220/300. |
 | `INTER-MATCH-GAP-CAPTURE.1.1` | `f58dfcb3` — `INTER-MATCH-GAP-CAPTURE.1.1 - add executable neutral contract` | Executable-neutral authority landed cleanly as atomic 219/300. |
@@ -727,6 +776,11 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
 
 ## Changelog
 
+- `2026-08-13`: Implemented `.2.1` from clean `8f826923`: permanent grammar and reference bridge accept four
+  declaration spacings, Unicode-17 names, named/numeric/unindexed selectors, and eligible `@capture_gaps` static
+  metadata. RuleIR/descriptors/generated dependency rows retain stable five-field provenance and exact typed
+  diagnostics; the 108-assertion dormant consumer and 10 no-admission mutations pass. Live gap state/accessors,
+  generated gap execution, rollout, recognition, public helpers, typed source, and outward surfaces do not move.
 - `2026-08-13`: Completed `.1.3` and parent `.1` from clean `0490522b`: independent recomposition, governed-byte
   no-change, storage/outside-CWD, duplicate-slot 59, typed-source 9/5/114, rendered book, Knowledge, all doctrines,
   containment/relocation, CLI 66x2, RAM 61%, Phase 0 1,031/1,031 in 725 seconds, and exact opt-in routing pass.

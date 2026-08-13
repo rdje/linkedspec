@@ -15,7 +15,7 @@ Read [Declaration Helper Reference](declaration-helper-reference.md) first if yo
 The short version:
 
 - `I { ... }` is the normal rule-entry setup location.
-- `-> Rule[index] { ... }` is the normal action attached to a matched local slot.
+- `-> Rule[selector] { ... }` is the normal action attached to a matched local slot.
 - `LS { ... }` and `LE { ... }` are advanced local-slot hooks around local-match/action processing in regex-driven handler shapes.
 - `LX { ... }` is the local no-match/failure path hook.
 - `IT { ... }`, `EX { ... }`, and `E { ... }` are advanced iteration/finalization hooks for collection-shaped handlers.
@@ -86,7 +86,7 @@ Token: /[A-Za-z_]+/
 
 `I { ... }` is usually the right place for initialization because it runs before later action-edge logic needs those variables. It is also the right place to transform the entry match of a dispatched child rule, because `entry_text()` and `entry_group(...)` are available there.
 
-## Action edges: `-> Rule[index] { ... }`
+## Action edges: `-> Rule[selector] { ... }`
 
 Action edges attach code to one regex slot declared by their named target rule. The enclosing rule
 owns selection/action orchestration; the target rule owns the regex and retains its lifecycle code.
@@ -104,6 +104,21 @@ Name:AND /name/ /\s*=/ /[A-Za-z_]+/
 ```
 
 Here `Name[2]` refers to the third regex slot in the rule. Slot numbering is zero-based, and `match_text()` reads the current local slot. When the rule is reached through a parent `-> Name` dispatch, the first regex (`/name/`) is the entry match and is available through `entry_text()`.
+
+The Perl reference also accepts a named regex member and selector:
+
+```text
+Name:AND
+ key = /name/
+ separator = /\s*=/
+ value = /[A-Za-z_]+/
+ -> Name[separator] { eq = match_text() }
+ -> Name[value] { return(hash("value", match_text())) }
+```
+
+`Name[2]` follows authored position; `Name[value]` follows stable exact identity if declarations are reordered.
+Both retain their authored selector kind in private Perl metadata. Other backends and public schema admission remain
+pending. The dot before a fluent method chain remains mandatory after every selector form.
 
 Use an action edge when:
 
@@ -498,7 +513,7 @@ Use this as the default decision guide:
 | --- | --- |
 | Initialize state shared by the rule | `I { items = []; retv = undef }` |
 | Initialize metadata shared by return paths | `I { set(meta, { "kind" : "node" }) }` |
-| Transform one matched token | `-> Rule[index] { ... }` |
+| Transform one matched token | `-> Rule[selector] { ... }` |
 | Capture and reshape one child result | `retv = call(Child)` inside an action body |
 | Append repeated child results | `push(items, retv)` inside action/iteration logic |
 | Mark or move a boundary portably | `mark_here(name)` or `start_capture_slice()` inside a block |
@@ -562,7 +577,7 @@ The explicit assignments make the value flow visible. That is usually better tha
 ## Practical guidance
 
 - Put shared state in `I { ... }`.
-- Put entry-match transformation in `I { ... }`; put later local-slot transformation in `-> Rule[index] { ... }`.
+- Put entry-match transformation in `I { ... }`; put later local-slot transformation in `-> Rule[selector] { ... }`.
 - Prefer helper statements inside action bodies; avoid raw Perl in new examples.
 - Use method chains only when the action stays compact and readable.
 - Treat `LS`, `LE`, `LX`, `IT`, `EX`, and `E` as advanced placement hooks, not as the normal way to write every rule.

@@ -15,16 +15,17 @@ answers:
   - "why does an action edge fluent chain keep its first dot"
   - "what happens after FUTURE-PARITY-BACKLOG 14.5.0"
 date: 2026-08-13
-status: behavior-free cross-tree handoff signoff complete; implementation not yet current
+status: cross-tree handoff complete; Perl authored/static leaf complete; live implementation pending
 tags: [architecture, task-tree, gap-capture, named-slots, selectors, typed-source, handoff]
-evidence: "Clean activation d26e4d4e; committed ADR 0045 8cf73db2, ADR 0047 e9edc734, ADR 0056 c37fefb6, duplicate-slot contract ecef5cd5, typed-source contract a9e2ca7, duplicate recurring driver 02ed5e6, typed-source recurring driver f557c14, and INTER-MATCH-GAP-CAPTURE tree 97dfdd6. LinkedSpec::Get descriptor probes confirm current numeric slot 1; current named declaration and selector probes reject both surfaces; an exact historical Perl @move_pos probe returns prefix/interstitial pairs without an automatic tail. The unchanged duplicate-slot and typed-source six-runtime gates pass at 59 and 114 mutations. Canonical signoff passes all eight doctrines, six-family repository containment, all-five-anchor relocation, CLI 66/66 twice, RAM 68%, and Phase 0 1,031/1,031 in 771 seconds."
+evidence: "Clean handoff d26e4d4e and the committed ADR/duplicate-slot/typed-source authorities assign implementation to INTER-MATCH-GAP-CAPTURE. Perl .2.1 from clean 8f826923 now admits named declarations, named selectors, and capture_gaps static metadata while leaving gap runtime, public admission, and typed-source composition pending. The neutral rollout remains 1 complete + 8 pending and 55 mutations, plus 10 independent Perl dormancy mutations."
 reverify: "bash tools/check_duplicate_regex_slot_identity_five_backend.sh && bash tools/check_typed_source_location_six_runtime.sh && perl tools/read_task_tree.pl --tree FUTURE-PARITY-BACKLOG --id FUTURE-PARITY-BACKLOG.14.5.0 && perl tools/read_task_tree.pl --tree INTER-MATCH-GAP-CAPTURE --id INTER-MATCH-GAP-CAPTURE.1"
 ---
 
 # Lossless gap cross-tree handoff
 
-Current LinkedSpec supports positional action-edge targets such as `Rule[1]`. It does not yet accept
-rule-paragraph named regex declarations, `Rule[name]`, or `@capture_gaps`. The historical Perl mechanism
+Current Perl LinkedSpec supports positional action-edge targets such as `Rule[1]`, named regex declarations,
+`Rule[name]`, and static `@capture_gaps` metadata. It does not yet execute gap state or expose the accessors, and
+the forms are not portable/publicly admitted. The historical Perl mechanism
 proves the intended automatic prefix/interstitial behavior, while the current marker implementations prove that
 legacy scope and timing cannot simply be promoted into a portable contract.
 

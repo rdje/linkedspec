@@ -14,6 +14,7 @@ status: current
 tags: [task-tree, doctrine, governance, repeated-action, local-ci, no-drift]
 evidence: docs/TASK_TREE.md; MEMORY.md; capability_conformance/repeated_action_result_contract.json; docs/tasks/FUTURE-PARITY-BACKLOG.md leaves .10.2, .10.3.0, .10.3.2.0, .10.4.0.1, .10.4.1, .10.5.2.3, and .10.5.3.1
 evidence_update_2026_08_12: "FUTURE-PARITY-BACKLOG.14.4.5 repeated the bounded-memory half of this known coupling: its first fully staged canonical run passed every earlier contract, then rejected MEMORY.md because the current rewrite omitted historical next owner FUTURE-PARITY-BACKLOG.10.1. Restoring one compact marker within the unchanged 60-line cap returned the exact repeated-action checker to 8 complete / 0 pending / 54 mutations. The unchanged canonical restart passed that checkpoint; no checker, runtime, public surface, or task-tree ownership changed."
+evidence_update_2026_08_13: "INTER-MATCH-GAP-CAPTURE.2.1 repeated the same bounded-memory omission: its first fully staged gap-opt-in canonical run passed all earlier gates through composed semantic-introspection, then the repeated-action checker rejected the missing historical next owner FUTURE-PARITY-BACKLOG.10.1. The active leaf restored one compact marker within the existing 60-line cap and reruns the unchanged gate; no product behavior, rollout, checker, or ownership boundary changes."
 reverify: "bash tools/run_python_project_data.sh tools/check_repeated_action_result_contract.py; rg -n 'repeated-action recurring/public no-drift is closed' docs/TASK_TREE.md capability_conformance/repeated_action_result_contract.json"
 ---
 
@@ -41,3 +42,8 @@ Julia recursive-observation leaf `.14.4.5` reproduced only the paired `MEMORY.md
 was rewritten for atomic 213. The focused checker proved the root cause, and the same compact historical owner was
 restored without exceeding the 60-line cap. This recurrence reinforces `.22` as the structural owner; it does not
 justify copying more history into layer-A memory or weakening the exact handoff assertion.
+
+Perl authored gap-metadata leaf `INTER-MATCH-GAP-CAPTURE.2.1` reproduced that identical bounded-memory failure on
+2026-08-13 after every earlier canonical family—including composed semantic-introspection—had passed. Restoring
+only the exact compact next-owner fact keeps the current layer within its cap and leaves implementation, rollout,
+and checker semantics untouched; `.22` remains the structural repair owner.

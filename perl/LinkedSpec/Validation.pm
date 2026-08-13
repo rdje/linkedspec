@@ -524,9 +524,310 @@ sub validate_dependency_regex_references {
  return _validate_dependency_regex_validation_view($validation_view, $option);
 }
 
+sub _inter_match_gap_line_failure {
+ my ($spec_content, $position, $option, %args) = @_;
+ return _report_dsl_validation_failure(
+  $spec_content,
+  $position,
+  $args{summary},
+  $args{suggestion},
+  $option,
+  %args,
+  source_id => $option->{source_id},
+ )
+}
+
+sub _inter_match_gap_execution_shape {
+ my ($mode, $action_count, $blind_count) = @_;
+ $mode = '' unless defined $mode;
+ if ($mode =~ /AND/o) {
+  return $blind_count ? 'and_call_loop'
+   : $action_count == 1 ? 'single_match'
+   : 'and_sequence_loop';
+ }
+ if ($mode eq '|') {
+  return $blind_count ? 'or_call_loop' : 'or_choice_dispatch';
+ }
+ if ($mode =~ /\A(?:[+*?]|OR(?:\+|\s*\{|\z))/o) {
+  return 'repeat_loop';
+ }
+ return 'default_scan_loop'
+}
+
+sub _validate_inter_match_gap_authored_metadata {
+ my ($spec_content, $option) = @_;
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::UnicodeXIDContinue');
+
+ my @lines = split(/\n/, $$spec_content, -1);
+ my @positions;
+ my $offset = 0;
+ for my $line (@lines) {
+  push @positions, $offset;
+  $offset += length($line) + 1;
+ }
+
+ my (%rules, @selectors);
+ my $current;
+ my $depth = 0;
+ for my $idx (0 .. $#lines) {
+  my $line = $lines[$idx];
+  my $line_number = $idx + 1;
+  my $position = $positions[$idx];
+  my $fragment = $line;
+
+  if ($depth == 0) {
+   my $header = _parse_rule_label_line($line);
+   if ($header) {
+    $current = {
+     label => $header->{label},
+     mode => $header->{mode},
+     slots => [],
+     slot_first_line => {},
+     directives => [],
+     legacy_markers => [],
+     action_count => 0,
+     blind_count => 0,
+    };
+    $rules{$header->{label}} = $current;
+    $fragment = $header->{rhs};
+   }
+  }
+  next unless $current;
+  next if $depth == 0 && $fragment =~ /^\s*(?:#.*)?$/o;
+
+  if ($depth == 0
+      && $fragment =~ /^\s*(?<NAME>[^\s=]+)\s*=\s*\/(?<PATTERN>(?:\\.|[^\/\\])*?)(?<!\\)\/\s*$/o) {
+   my $name = $+{NAME};
+   my $pattern = $+{PATTERN};
+   unless (LinkedSpec::UnicodeXIDContinue::is_xid_continue_string($name)
+       && $name !~ /\A[0-9]+\z/o) {
+    return _inter_match_gap_line_failure(
+     $spec_content,
+     $position,
+     $option,
+     code => 'regex_slot_name_invalid',
+     stage => 'parse_declaration',
+     summary => 'Invalid named regex-slot declaration',
+     suggestion => 'Use one or more pinned Unicode-17 XID_Continue scalars; ASCII digit-only names are reserved',
+     rule_label => $current->{label},
+     line => $line_number,
+     slot_name => $name,
+    );
+   }
+   if (exists $current->{slot_first_line}{$name}) {
+    return _inter_match_gap_line_failure(
+     $spec_content,
+     $position,
+     $option,
+     code => 'regex_slot_duplicate_name',
+     stage => 'resolve_declaration',
+     summary => 'Duplicate named regex-slot declaration',
+     suggestion => 'Give every named regex slot a unique exact name within its owning rule',
+     rule_label => $current->{label},
+     line => $line_number,
+     slot_name => $name,
+     first_line => $current->{slot_first_line}{$name},
+    );
+   }
+   eval { qr/$pattern/ } or return _inter_match_gap_line_failure(
+    $spec_content,
+    $position,
+    $option,
+    summary => "Invalid regex pattern: /$pattern/",
+    suggestion => 'Check the regex syntax and ensure proper escaping',
+    rule_label => $current->{label},
+    line => $line_number,
+   );
+   $current->{slot_first_line}{$name} = $line_number;
+   push @{$current->{slots}}, {
+    regex_index => scalar(@{$current->{slots}}),
+    slot_id => $name,
+   };
+   next;
+  }
+
+  if ($depth == 0 && $fragment =~ /^\s*\@capture_gaps\s*$/o) {
+   if (@{$current->{directives}}) {
+    return _inter_match_gap_line_failure(
+     $spec_content,
+     $position,
+     $option,
+     code => 'capture_gaps_duplicate_directive',
+     stage => 'parse_directive',
+     summary => 'Duplicate capture-gaps directive',
+     suggestion => 'Keep exactly one capture-gaps directive in the owning rule',
+     rule_label => $current->{label},
+     line => $line_number,
+     first_line => $current->{directives}[0]{line},
+    );
+   }
+   push @{$current->{directives}}, { line => $line_number, position => $position };
+   next;
+  }
+
+  if ($depth == 0
+      && $fragment =~ /^\s*\@\s*(capture_slice|capture_from_here|move_pos)\b/o) {
+   push @{$current->{legacy_markers}}, {
+    marker => '@' . $1,
+    line => $line_number,
+   };
+  }
+
+  if ($depth == 0) {
+   my @anonymous = _extract_leading_regex_literals_from_fragment($fragment);
+   for (@anonymous) {
+    push @{$current->{slots}}, {
+     regex_index => scalar(@{$current->{slots}}),
+     slot_id => undef,
+    };
+   }
+  }
+
+  my $edge_scan = _scan_rule_edges_in_fragment($fragment, $depth);
+  if (!$edge_scan->{error}) {
+   for my $edge (@{$edge_scan->{edges} || []}) {
+    if (($edge->{kind} // '') eq 'action') {
+     ++$current->{action_count};
+     push @selectors, {
+      owner => $current->{label},
+      target_rule => $edge->{label},
+      selector_kind => $edge->{selector_kind},
+      authored_selector => $edge->{authored_selector},
+      line => $line_number,
+      position => $position,
+     };
+    } elsif (($edge->{kind} // '') eq 'blind_call') {
+     ++$current->{blind_count};
+    }
+   }
+   $depth = $edge_scan->{depth} // 0;
+  }
+ }
+
+ for my $selector (@selectors) {
+  my $target = $rules{$selector->{target_rule}};
+  next unless $target;
+  my $slots = $target->{slots};
+  next if ($selector->{selector_kind} // '') eq 'unindexed';
+  if (($selector->{selector_kind} // '') eq 'named') {
+   my $name = $selector->{authored_selector};
+   unless (LinkedSpec::UnicodeXIDContinue::is_xid_continue_string($name)
+       && $name !~ /\A[0-9]+\z/o) {
+    return _inter_match_gap_line_failure(
+     $spec_content,
+     $selector->{position},
+     $option,
+     code => 'regex_slot_selector_invalid',
+     stage => 'parse_selector',
+     summary => 'Invalid named regex-slot selector',
+     suggestion => 'Use one exact pinned Unicode-17 XID_Continue slot name inside brackets',
+     rule_label => $selector->{owner},
+     line => $selector->{line},
+     target_rule => $selector->{target_rule},
+     authored_selector => $name,
+    );
+   }
+   my ($slot) = grep {
+    defined($_->{slot_id}) && $_->{slot_id} eq $name
+   } @$slots;
+   unless ($slot) {
+    return _inter_match_gap_line_failure(
+     $spec_content,
+     $selector->{position},
+     $option,
+     code => 'regex_slot_unknown_name',
+     stage => 'resolve_selector',
+     summary => 'Unknown named regex-slot selector',
+     suggestion => 'Declare the exact named slot in the target rule before selecting it',
+     rule_label => $selector->{owner},
+     line => $selector->{line},
+     target_rule => $selector->{target_rule},
+     authored_selector => $name,
+    );
+   }
+  } else {
+   my $regex_index = ($selector->{selector_kind} // '') eq 'numeric'
+    ? 0 + $selector->{authored_selector}
+    : 0;
+   if ($regex_index >= @$slots) {
+    return _inter_match_gap_line_failure(
+     $spec_content,
+     $selector->{position},
+     $option,
+     code => 'regex_slot_index_out_of_range',
+     stage => 'resolve_selector',
+     summary => 'Regex-slot selector index is out of range',
+     suggestion => 'Select an existing zero-based target regex slot',
+     rule_label => $selector->{owner},
+     line => $selector->{line},
+     target_rule => $selector->{target_rule},
+     regex_index => $regex_index,
+     regex_count => scalar(@$slots),
+    );
+   }
+  }
+ }
+
+ for my $rule (values %rules) {
+  next unless @{$rule->{directives}};
+  my $directive = $rule->{directives}[0];
+  if (@{$rule->{legacy_markers}}) {
+   my $legacy = $rule->{legacy_markers}[0];
+   return _inter_match_gap_line_failure(
+    $spec_content,
+    $directive->{position},
+    $option,
+    code => 'capture_gaps_legacy_marker_conflict',
+    stage => 'validate_directive',
+    summary => 'Capture-gaps directive conflicts with a legacy split marker',
+    suggestion => 'Remove the legacy marker before enabling rule-level gap capture',
+    rule_label => $rule->{label},
+    line => $directive->{line},
+    marker => $legacy->{marker},
+    marker_line => $legacy->{line},
+   );
+  }
+  my $family = ($rule->{mode} // '') =~ /AND/o ? 'and' : 'or_default';
+  my $cursor_policy = $family eq 'and' ? 'consume' : 'seek';
+  my $edge_ownership = $rule->{action_count} && $rule->{blind_count} ? 'mixed'
+   : $rule->{action_count} ? 'action'
+   : $rule->{blind_count} ? 'blind'
+   : 'none';
+  my $execution_shape = _inter_match_gap_execution_shape(
+   $rule->{mode},
+   $rule->{action_count},
+   $rule->{blind_count},
+  );
+  my $eligible = $family eq 'or_default'
+   && $cursor_policy eq 'seek'
+   && $edge_ownership eq 'action'
+   && ($execution_shape eq 'default_scan_loop' || $execution_shape eq 'repeat_loop')
+   && $rule->{action_count} >= 1;
+  next if $eligible;
+  return _inter_match_gap_line_failure(
+   $spec_content,
+   $directive->{position},
+   $option,
+   code => 'capture_gaps_rule_ineligible',
+   stage => 'validate_directive',
+   summary => 'Capture-gaps directive is ineligible for this rule shape',
+   suggestion => 'Use an OR/default seek rule with a loop and at least one static action edge',
+   rule_label => $rule->{label},
+   line => $directive->{line},
+   family => $family,
+   cursor_policy => $cursor_policy,
+   edge_ownership => $edge_ownership,
+   execution_shape => $execution_shape,
+  );
+ }
+ return 1
+}
+
 sub validate_dsl_syntax {
  my ($spec_content, $option) = @_;
  $option = {} unless ref($option) eq 'HASH';
+
+ return 0 unless _validate_inter_match_gap_authored_metadata($spec_content, $option);
 
  my @lines = split(/\n/, $$spec_content);
  my @defined_rules = ();
@@ -760,25 +1061,26 @@ sub _looks_like_supported_rule_paragraph_member_line {
  return 1 if $line =~ /^\s*#/o;
  return 1 if _parse_rule_label_line($line);
  return 1 if $line =~ /^\s*\/(?:\\.|[^\/])*?(?<!\\)\//o;
+ return 1 if $line =~ /^\s*[^\s=]+\s*=\s*\/(?:\\.|[^\/])*?(?<!\\)\/\s*$/o;
  return 1 if $line =~ /^\s*->/o;
  return 1 if $line =~ /^\s*=>/o;
- return 1 if $line =~ /^\s*@\s*(?:(?:capture_slice|capture_from_here|move_pos)\b|mark\s*\(\s*\w+\s*\))/o;
+ return 1 if $line =~ /^\s*@\s*(?:(?:capture_gaps|capture_slice|capture_from_here|move_pos)\b|mark\s*\(\s*\w+\s*\))/o;
  return 1 if $line =~ /^\s*-\?\s+\w+\b/o;
  return 1 if $line =~ /^\s*\.\s*\w/o;
  return 1 if $line =~ /^\s*\w+\s*\(/o;
  return 1 if $line =~ /^\s*\w+\s*\{/o;
  return 1 if $line =~ /^\s*\w+\s*\./o;
- return 1 if $line =~ /^\s*\w+(?:\s*\[\s*\d+\s*\])?\s*$/o;
- return 1 if $line =~ /^\s*\w+(?:\s*\[\s*\d+\s*\])?(?:\s*\|\s*\w+(?:\s*\[\s*\d+\s*\])?)+(?:\s*\{|\s*$)/o;
+ return 1 if $line =~ /^\s*\w+(?:\s*\[\s*[^\]\s]+\s*\])?\s*$/o;
+ return 1 if $line =~ /^\s*\w+(?:\s*\[\s*[^\]\s]+\s*\])?(?:\s*\|\s*\w+(?:\s*\[\s*[^\]\s]+\s*\])?)+(?:\s*\{|\s*$)/o;
  return 0;
 }
 
 sub _bare_group_targets_without_block {
  my ($line) = @_;
  return undef unless defined $line;
- return undef unless $line =~ /^\s*(\w+(?:\s*\[\s*\d+\s*\])?(?:\s*\|\s*\w+(?:\s*\[\s*\d+\s*\])?)+)\s*$/o;
+ return undef unless $line =~ /^\s*(\w+(?:\s*\[\s*[^\]\s]+\s*\])?(?:\s*\|\s*\w+(?:\s*\[\s*[^\]\s]+\s*\])?)+)\s*$/o;
  my $targets_text = $1;
- my @targets = $targets_text =~ /(\w+)\s*(?:\[\s*\d+\s*\])?/go;
+ my @targets = $targets_text =~ /(\w+)\s*(?:\[\s*[^\]\s]+\s*\])?/go;
  return @targets > 1 ? \@targets : undef
 }
 
@@ -807,7 +1109,7 @@ sub _looks_like_split_marker_prefix {
 sub _looks_like_supported_split_marker_start {
  my ($fragment) = @_;
  return 0 unless defined $fragment;
- return $fragment =~ /^\s*@\s*(?:(?:capture_slice|capture_from_here|move_pos)\b|mark\s*\(\s*\w+\s*\))/o ? 1 : 0;
+ return $fragment =~ /^\s*@\s*(?:(?:capture_gaps|capture_slice|capture_from_here|move_pos)\b|mark\s*\(\s*\w+\s*\))/o ? 1 : 0;
 }
 
 sub _trim_leading_rule_header_regex_cluster {
@@ -992,10 +1294,14 @@ sub _scan_rule_edges_in_fragment {
      if ($kind eq 'blind_call') {
       my $index_cursor = $target_cursor + 1;
       ++$index_cursor while $index_cursor < $len && substr($fragment, $index_cursor, 1) =~ /\s/o;
-      my $digit_start = $index_cursor;
-      ++$index_cursor while $index_cursor < $len && substr($fragment, $index_cursor, 1) =~ /\d/o;
-      my $regex_index = $index_cursor > $digit_start
-       ? 0 + substr($fragment, $digit_start, $index_cursor - $digit_start)
+      my $selector_start = $index_cursor;
+      ++$index_cursor while $index_cursor < $len && substr($fragment, $index_cursor, 1) ne ']';
+      my $selector = $index_cursor > $selector_start
+       ? substr($fragment, $selector_start, $index_cursor - $selector_start)
+       : undef;
+      $selector =~ s/^\s+|\s+$//go if defined $selector;
+      my $regex_index = defined($selector) && $selector =~ /\A\d+\z/o
+       ? 0 + $selector
        : undef;
       return {
        error => {
@@ -1009,30 +1315,44 @@ sub _scan_rule_edges_in_fragment {
 
      my $index_cursor = $target_cursor + 1;
      ++$index_cursor while $index_cursor < $len && substr($fragment, $index_cursor, 1) =~ /\s/o;
-     my $digit_start = $index_cursor;
-     ++$index_cursor while $index_cursor < $len && substr($fragment, $index_cursor, 1) =~ /\d/;
-     my $digit_end = $index_cursor;
-     ++$index_cursor while $index_cursor < $len && substr($fragment, $index_cursor, 1) =~ /\s/o;
+     my $selector_start = $index_cursor;
+     ++$index_cursor while $index_cursor < $len
+      && substr($fragment, $index_cursor, 1) ne ']'
+      && substr($fragment, $index_cursor, 1) ne '{';
+     my $selector = substr($fragment, $selector_start, $index_cursor - $selector_start);
+     $selector =~ s/^\s+|\s+$//go;
 
-     if ($digit_end == $digit_start || $index_cursor >= $len || substr($fragment, $index_cursor, 1) ne ']') {
+     if (!length($selector) || $selector =~ /\s/o
+         || $index_cursor >= $len || substr($fragment, $index_cursor, 1) ne ']') {
       return {
        error => {
         kind   => $kind,
-        reason => 'malformed_index',
+        reason => 'malformed_selector',
         label  => $label,
+        authored_selector => $selector,
        },
       };
      }
 
+     my $selector_kind = $selector =~ /\A\d+\z/o ? 'numeric' : 'named';
      $target_cursor = $index_cursor + 1;
      $suffix_cursor = $target_cursor;
      ++$target_cursor while $target_cursor < $len && substr($fragment, $target_cursor, 1) =~ /\s/;
+     return {
+      label => $label,
+      cursor => $target_cursor,
+      suffix_cursor => $suffix_cursor,
+      selector_kind => $selector_kind,
+      authored_selector => $selector_kind eq 'numeric' ? 0 + $selector : $selector,
+     };
     }
 
     return {
      label         => $label,
      cursor        => $target_cursor,
      suffix_cursor => $suffix_cursor,
+     selector_kind => 'unindexed',
+     authored_selector => undef,
     };
    };
 
@@ -1052,7 +1372,12 @@ sub _scan_rule_edges_in_fragment {
      };
     }
    }
-   push @edge_targets, { kind => $kind, label => $first_target->{label} };
+   push @edge_targets, {
+    kind => $kind,
+    label => $first_target->{label},
+    selector_kind => $first_target->{selector_kind},
+    authored_selector => $first_target->{authored_selector},
+   };
    $cursor = $first_target->{cursor};
 
    if ($kind eq 'action') {
@@ -1063,7 +1388,12 @@ sub _scan_rule_edges_in_fragment {
 
      my $next_target = $parse_target->($pipe_cursor + 1);
      return { error => $next_target->{error} } if $next_target->{error};
-     push @edge_targets, { kind => $kind, label => $next_target->{label} };
+     push @edge_targets, {
+      kind => $kind,
+      label => $next_target->{label},
+      selector_kind => $next_target->{selector_kind},
+      authored_selector => $next_target->{authored_selector},
+     };
      $cursor = $next_target->{cursor};
     }
    }
@@ -1339,6 +1669,25 @@ sub _report_edge_target_syntax_error {
   );
  }
 
+ if ($kind eq 'action' && $reason eq 'malformed_selector') {
+  my $context = get_dsl_context($spec_content, $position);
+  return _report_dsl_validation_failure(
+   $spec_content,
+   $position,
+   'Malformed regex-slot selector syntax',
+   "Close the selector for '$error->{label}' with ']' and use one numeric index or exact named slot",
+   $option,
+   summary => 'Malformed regex-slot selector syntax',
+   rule_label => $rule_label,
+   code => 'regex_slot_selector_invalid',
+   stage => 'parse_selector',
+   source_id => $option->{source_id},
+   line => $context->{line_number},
+   target_rule => $error->{label},
+   authored_selector => $error->{authored_selector},
+  );
+ }
+
  return _report_dsl_validation_failure(
   $spec_content,
   $position,
@@ -1356,7 +1705,7 @@ sub _report_split_marker_syntax_error {
   $spec_content,
   $position,
   "Malformed split marker syntax",
-  "Use '@capture_slice', '@mark(name)', or compatibility aliases '@capture_from_here' / '@move_pos' when you need a split-boundary cursor marker",
+  q{Use '@capture_gaps' for eligible rule-level gap capture; use '@capture_slice', '@mark(name)', or compatibility aliases '@capture_from_here' / '@move_pos' for split boundaries},
   $option,
   summary => 'Malformed split marker syntax',
   rule_label => $rule_label,

@@ -4956,7 +4956,14 @@ SPEC
     ok($explicit_ok, 'bootstrap parse succeeds for same-rule explicit zero-index action-edge target');
     is($implicit_err, '', 'implicit zero-index action-edge target parse reports no bootstrap error');
     is($explicit_err, '', 'explicit zero-index action-edge target parse reports no bootstrap error');
-    is_deeply($implicit_parse, $explicit_parse, 'bootstrap parse output for -> A matches -> A[0] on the same recursive rule');
+    is_deeply(
+        [
+            [@{$implicit_parse->[0][2][1]}{qw(selector_kind authored_selector)}],
+            [@{$explicit_parse->[0][2][1]}{qw(selector_kind authored_selector)}],
+        ],
+        [['unindexed', undef], ['numeric', 0]],
+        'bootstrap parse preserves implicit/explicit selector provenance while both resolve regex slot zero',
+    );
     is($implicit_parse->[0][2][1]{reidx}, 0, 'plain -> A lowers to regex slot index 0');
     is($implicit_parse->[0][4][1]{reidx}, 1, '-> A[1] lowers to regex slot index 1');
     is($implicit_parse->[0][2][1]{relabel}, 'A', 'same-rule implicit zero-index edge still targets rule A');
@@ -6117,7 +6124,7 @@ PERL
     unlike($out, qr/Cannot mix ACTION \(\->\) and BLIND CALL \(\=\>\) code blocks/, 'hash rockets inside action code do not trigger mixed-edge diagnostics');
     is($err, '', 'hash-rocket validation subprocess does not emit stderr');
 };
-subtest 'validation_rejects_malformed_action_edge_regex_slot_indexes' => sub {
+subtest 'validation_rejects_empty_action_edge_regex_slot_selectors' => sub {
     plan tests => 4;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
@@ -6131,12 +6138,12 @@ my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
 print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
 PERL
 
-    is($exit_code, 0, 'malformed action-edge index validation subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__INVALID_DSL__/, 'validation rejects malformed action-edge regex-slot indexes before bootstrap parse');
-    like($out, qr/Malformed action-edge target syntax/, 'malformed action-edge regex-slot diagnostic is reported early');
-    is($err, '', 'malformed action-edge index validation subprocess does not emit stderr');
+    is($exit_code, 0, 'empty action-edge selector validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation rejects an empty action-edge regex-slot selector before bootstrap parse');
+    like($out, qr/Malformed regex-slot selector syntax/, 'empty action-edge regex-slot diagnostic is reported early');
+    is($err, '', 'empty action-edge selector validation subprocess does not emit stderr');
 };
-subtest 'validation_rejects_same_line_non_numeric_action_edge_indexes' => sub {
+subtest 'validation_resolves_same_line_named_action_edge_selectors' => sub {
     plan tests => 4;
 
     my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
@@ -6148,10 +6155,10 @@ my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);
 print $ok ? "__VALID_DSL__\n" : "__INVALID_DSL__\n";
 PERL
 
-    is($exit_code, 0, 'same-line malformed action-edge index validation subprocess exits cleanly') or diag($err || $out);
-    like($out, qr/__INVALID_DSL__/, 'validation rejects same-line non-numeric action-edge indexes before bootstrap parse');
-    like($out, qr/Malformed action-edge target syntax/, 'same-line malformed action-edge regex-slot diagnostic is reported early');
-    is($err, '', 'same-line malformed action-edge index validation subprocess does not emit stderr');
+    is($exit_code, 0, 'same-line named action-edge selector validation subprocess exits cleanly') or diag($err || $out);
+    like($out, qr/__INVALID_DSL__/, 'validation resolves a same-line named action-edge selector before bootstrap parse');
+    like($out, qr/Unknown named regex-slot selector/, 'undeclared same-line named selector reports the exact resolution diagnostic');
+    is($err, '', 'same-line named action-edge selector validation subprocess does not emit stderr');
 };
 subtest 'validation_rejects_indexed_blind_call_targets' => sub {
     plan tests => 4;
@@ -6762,7 +6769,8 @@ Top::
  /a/ /b/ -> Child[1].push(item).return_payload() { return(1) }
 
 Child:
- /c/ -> Child { return(1) }
+ /c/
+ /d/ -> Child { return(1) }
 SPEC
 require LinkedSpec::Validation;
 my $ok = LinkedSpec::Validation::validate_dsl_syntax(\$spec_content);

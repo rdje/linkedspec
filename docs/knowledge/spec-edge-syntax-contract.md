@@ -69,4 +69,5 @@ is pending under `FUTURE-PARITY-BACKLOG.9.1.2-.9`.
 
 ADR `0045` additionally fixes historical “super split” as inter-match gap
 capture around these externally resolved action-edge matches. It is unrelated
-to blind calls; the accepted future `@capture_gaps` spelling is not implemented.
+to blind calls. Perl now recognizes named regex selectors and `@capture_gaps`
+static metadata, but live gap execution and portable/public admission remain pending.

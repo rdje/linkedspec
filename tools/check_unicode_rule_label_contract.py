@@ -15,6 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = ROOT / "capability_conformance" / "unicode_rule_label_contract.json"
+PERL_PATH = ROOT / "perl" / "LinkedSpec" / "UnicodeXIDContinue.pm"
 RUST_PATH = ROOT / "rust" / "linkedspec-core" / "src" / "unicode_rule_label.rs"
 DART_PATH = ROOT / "dart" / "lib" / "src" / "parser" / "unicode_rule_label.dart"
 DART_PARSER_PATH = ROOT / "dart" / "lib" / "src" / "parser" / "spec_parser.dart"
@@ -156,6 +157,7 @@ def render_self_hosted_regex_class(ranges: list[tuple[int, int]]) -> str:
 def main() -> None:
     for path in (
         CONTRACT_PATH,
+        PERL_PATH,
         RUST_PATH,
         DART_PATH,
         DART_PARSER_PATH,
@@ -201,6 +203,7 @@ def main() -> None:
         prefix="linkedspec-unicode-label-", dir=managed_temp_root()
     ) as temp:
         generated_contract = Path(temp) / "contract.json"
+        generated_perl = Path(temp) / "UnicodeXIDContinue.pm"
         generated_rust = Path(temp) / "unicode_rule_label.rs"
         generated_dart = Path(temp) / "unicode_rule_label.dart"
         generated_julia = Path(temp) / "UnicodeRuleLabel.jl"
@@ -212,6 +215,8 @@ def main() -> None:
                 str(GENERATOR),
                 "--contract-output",
                 str(generated_contract),
+                "--perl-output",
+                str(generated_perl),
                 "--rust-output",
                 str(generated_rust),
                 "--self-hosted-regex-output",
@@ -228,6 +233,8 @@ def main() -> None:
         )
         if generated_contract.read_bytes() != CONTRACT_PATH.read_bytes():
             fail("contract differs from deterministic regeneration")
+        if generated_perl.read_bytes() != PERL_PATH.read_bytes():
+            fail("Perl classifier differs from deterministic regeneration")
         if generated_rust.read_bytes() != RUST_PATH.read_bytes():
             fail("Rust classifier differs from deterministic regeneration")
         if generated_dart.read_bytes() != DART_PATH.read_bytes():
@@ -285,6 +292,26 @@ def main() -> None:
     counts = contract["counts"]
     if counts["xid_continue_ranges"] != len(ranges):
         fail("range count drifted")
+
+    perl_text = PERL_PATH.read_text(encoding="utf-8")
+    perl_ranges = [
+        (int(start, 16), int(end, 16))
+        for start, end in re.findall(
+            r"\[0x([0-9A-F]{4,6}), 0x([0-9A-F]{4,6})\],",
+            perl_text,
+        )
+    ]
+    if perl_ranges != ranges:
+        fail("Perl range table does not independently encode the contract ranges")
+    for marker in (
+        f"our $RANGE_COUNT = {len(ranges)};",
+        "sub is_xid_continue_codepoint",
+        "sub is_xid_continue_string",
+        "while ($low < $high)",
+        "for my $codepoint (unpack('U*', $value))",
+    ):
+        if marker not in perl_text:
+            fail(f"Perl classifier topology marker missing: {marker}")
 
     dart_text = DART_PATH.read_text(encoding="utf-8")
     dart_ranges = [
@@ -924,6 +951,7 @@ def main() -> None:
         "require_tracked_file tools/check_unicode_rule_label_contract.py",
         "require_tracked_file unicode_case/generate_unicode_rule_label_contract.py",
         "require_tracked_file unicode_case/unicode_rule_label_regex_class.txt",
+        "require_tracked_file perl/LinkedSpec/UnicodeXIDContinue.pm",
         "require_tracked_file rust/linkedspec-core/src/unicode_rule_label.rs",
         "require_tracked_file rust/linkedspec-core/tests/unicode_rule_label_contract.rs",
         "require_tracked_file rust/linkedspec-runtime/tests/unicode_rule_label_routes.rs",

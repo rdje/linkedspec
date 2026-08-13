@@ -17,9 +17,24 @@ UNICODE_CONTRACT_PATH = ROOT / "capability_conformance/unicode_rule_label_contra
 CI_PATH = ROOT / "tools/run_ci_local.sh"
 RECURRING_DRIVER_PATH = ROOT / "tools/check_inter_match_gap_capture_six_runtime.sh"
 PROJECT_DATA_WORKFLOW_ROUTING_PATH = ROOT / "tools/test_project_data_workflow_routing.sh"
+PERL_CONSUMER_PATH = ROOT / "t/inter_match_gap_capture_perl_contract.t"
+PERL_FACADE_PATH = ROOT / "perl/LinkedSpec.pm"
 CONTRACT_ID = "linkedspec-inter-match-gap-capture-v1"
 TASK_OWNER = "INTER-MATCH-GAP-CAPTURE.1.1"
 PINNED_XID_RANGES: tuple[tuple[int, int], ...] = ()
+
+PERL_DORMANCY_MUTATION_IDS = (
+    "perl_consumer_identity",
+    "perl_mode_selector",
+    "perl_metadata_boundary",
+    "perl_live_boundary",
+    "perl_generated_boundary",
+    "perl_diagnostic_contract",
+    "perl_rooted_commands",
+    "perl_canonical_absence",
+    "perl_recurring_absence",
+    "perl_facade_absence",
+)
 
 REQUIRED_SECTIONS = (
     "format",
@@ -930,6 +945,11 @@ def validate_registration(document: dict[str, Any]) -> None:
     validate_public_no_overclaim(document, document_texts, surface_texts)
 
     driver_text = RECURRING_DRIVER_PATH.read_text(encoding="utf-8")
+    require(PERL_CONSUMER_PATH.is_file(), "dormant Perl consumer is missing")
+    perl_consumer_text = PERL_CONSUMER_PATH.read_text(encoding="utf-8")
+    ci_text = CI_PATH.read_text(encoding="utf-8")
+    perl_facade_text = PERL_FACADE_PATH.read_text(encoding="utf-8")
+    validate_perl_dormancy(perl_consumer_text, ci_text, driver_text, perl_facade_text)
     for marker in (
         'source "$REPO_ROOT/tools/project_data_env.sh"',
         'linkedspec_project_data_enter_run "$REPO_ROOT/tools/check_inter_match_gap_capture_six_runtime.sh" "$@"',
@@ -941,14 +961,17 @@ def validate_registration(document: dict[str, Any]) -> None:
     require(len(runtime_ids) == len(recurring["consumers"]), "recurring runtime route cardinality drifted")
     for rollout_id, consumer in zip(runtime_ids, recurring["consumers"], strict=True):
         route_markers.append(f"skipping pending runtime route {rollout_id}: {consumer['path']}")
-        require(not (ROOT / consumer["path"]).exists(), f"pending runtime consumer exists before admission: {consumer['path']}")
+        consumer_path = ROOT / consumer["path"]
+        if rollout_id == "perl_runtime":
+            require(consumer_path == PERL_CONSUMER_PATH, "dormant Perl consumer path drifted")
+        else:
+            require(not consumer_path.exists(), f"pending runtime consumer exists before admission: {consumer['path']}")
     positions: list[int] = []
     for marker in route_markers:
         require(driver_text.count(marker) == 1, f"recurring driver marker must appear exactly once: {marker}")
         positions.append(driver_text.index(marker))
     require(positions == sorted(positions), "recurring driver route order drifted")
 
-    ci_text = CI_PATH.read_text(encoding="utf-8")
     ci_markers = (
         (f"git status --short --untracked-files=all -- {recurring['driver']}", 1),
         (f"require_tracked_file {recurring['driver']}", 2),
@@ -961,6 +984,72 @@ def validate_registration(document: dict[str, Any]) -> None:
 
     workflow_text = PROJECT_DATA_WORKFLOW_ROUTING_PATH.read_text(encoding="utf-8")
     require(workflow_text.count(recurring["driver"]) == 2, "recurring project-data routing registration drifted")
+
+
+def validate_perl_dormancy(consumer_text: str, ci_text: str, driver_text: str, facade_text: str) -> None:
+    consumer_markers = (
+        ("my $CONTRACT_ID = 'linkedspec-inter-match-gap-capture-v1';", "Perl dormant consumer contract drifted"),
+        ("LINKEDSPEC_PERL_INTER_MATCH_GAP_RED_MODE", "Perl dormant mode selector drifted"),
+        ("run_metadata_contract();", "Perl dormant metadata boundary drifted"),
+        ("run_live_contract();", "Perl dormant live boundary drifted"),
+        ("run_generated_contract();", "Perl dormant generated boundary drifted"),
+        ("regex_slot_unknown_name", "Perl dormant diagnostic contract drifted"),
+        ("metadata: prove -Iperl t/inter_match_gap_capture_perl_contract.t", "Perl dormant rooted commands drifted"),
+    )
+    for marker, reason in consumer_markers:
+        require(consumer_text.count(marker) == 1, reason)
+
+    consumer_path = "t/inter_match_gap_capture_perl_contract.t"
+    require(consumer_path not in ci_text, "Perl dormant consumer entered canonical CI prematurely")
+    require(
+        driver_text.count(f"skipping pending runtime route perl_runtime: {consumer_path}") == 1
+        and f"prove -Iperl {consumer_path}" not in driver_text,
+        "Perl dormant consumer entered recurring execution prematurely",
+    )
+    require(
+        "LINKEDSPEC_PERL_INTER_MATCH_GAP_RED_MODE" not in facade_text
+        and "InterMatchGapRuntime" not in facade_text,
+        "Perl dormant consumer widened the public facade prematurely",
+    )
+
+
+DormancyMutation = tuple[str, str, Callable[[dict[str, str]], None]]
+
+
+def perl_dormancy_mutations() -> list[DormancyMutation]:
+    return [
+        ("perl_consumer_identity", "Perl dormant consumer contract drifted", lambda t: t.__setitem__("consumer", t["consumer"].replace("linkedspec-inter-match-gap-capture-v1", "stale", 1))),
+        ("perl_mode_selector", "Perl dormant mode selector drifted", lambda t: t.__setitem__("consumer", t["consumer"].replace("LINKEDSPEC_PERL_INTER_MATCH_GAP_RED_MODE", "STALE_MODE", 1))),
+        ("perl_metadata_boundary", "Perl dormant metadata boundary drifted", lambda t: t.__setitem__("consumer", t["consumer"].replace("run_metadata_contract();", "metadata_missing();", 1))),
+        ("perl_live_boundary", "Perl dormant live boundary drifted", lambda t: t.__setitem__("consumer", t["consumer"].replace("run_live_contract();", "live_missing();", 1))),
+        ("perl_generated_boundary", "Perl dormant generated boundary drifted", lambda t: t.__setitem__("consumer", t["consumer"].replace("run_generated_contract();", "generated_missing();", 1))),
+        ("perl_diagnostic_contract", "Perl dormant diagnostic contract drifted", lambda t: t.__setitem__("consumer", t["consumer"].replace("regex_slot_unknown_name", "stale_diagnostic", 1))),
+        ("perl_rooted_commands", "Perl dormant rooted commands drifted", lambda t: t.__setitem__("consumer", t["consumer"].replace("metadata: prove -Iperl", "metadata: perl", 1))),
+        ("perl_canonical_absence", "Perl dormant consumer entered canonical CI prematurely", lambda t: t.__setitem__("ci", t["ci"] + "\nt/inter_match_gap_capture_perl_contract.t\n")),
+        ("perl_recurring_absence", "Perl dormant consumer entered recurring execution prematurely", lambda t: t.__setitem__("driver", t["driver"] + "\nprove -Iperl t/inter_match_gap_capture_perl_contract.t\n")),
+        ("perl_facade_absence", "Perl dormant consumer widened the public facade prematurely", lambda t: t.__setitem__("facade", t["facade"] + "\nLINKEDSPEC_PERL_INTER_MATCH_GAP_RED_MODE\n")),
+    ]
+
+
+def validate_perl_dormancy_mutations() -> int:
+    texts = {
+        "consumer": PERL_CONSUMER_PATH.read_text(encoding="utf-8"),
+        "ci": CI_PATH.read_text(encoding="utf-8"),
+        "driver": RECURRING_DRIVER_PATH.read_text(encoding="utf-8"),
+        "facade": PERL_FACADE_PATH.read_text(encoding="utf-8"),
+    }
+    checks = perl_dormancy_mutations()
+    require(tuple(name for name, _, _ in checks) == PERL_DORMANCY_MUTATION_IDS, "Perl dormancy mutation identity/order drifted")
+    for name, expected_reason, mutate in checks:
+        candidate = copy.deepcopy(texts)
+        mutate(candidate)
+        try:
+            validate_perl_dormancy(candidate["consumer"], candidate["ci"], candidate["driver"], candidate["facade"])
+        except ContractError as error:
+            require(expected_reason in str(error), f"Perl dormancy mutation {name} failed for unexpected reason: {error}")
+        else:
+            fail(f"Perl dormancy mutation {name} was accepted")
+    return len(checks)
 
 
 def validate_contract(document: dict[str, Any], *, check_registration: bool = True) -> None:
@@ -1099,6 +1188,7 @@ def main() -> int:
         document = load_json(CONTRACT_PATH)
         validate_contract(document)
         mutation_count = validate_mutations(document)
+        dormancy_mutation_count = validate_perl_dormancy_mutations()
     except (json.JSONDecodeError, OSError, ContractError) as error:
         print(f"inter-match gap capture contract: FAIL: {error}", file=sys.stderr)
         return 1
@@ -1108,7 +1198,8 @@ def main() -> int:
         "inter-match gap capture contract: OK "
         f"(8 positive + 10 negative fixtures; 3 sources; 16 transitions; "
         f"10 segmentation cases; 9 diagnostics; {complete} complete + {pending} pending rollout; "
-        f"{mutation_count} rejected semantic mutations)"
+        f"{mutation_count} rejected semantic mutations; "
+        f"{dormancy_mutation_count} rejected Perl dormancy mutations)"
     )
     return 0
 

@@ -1396,7 +1396,18 @@ sub _rewrite_acode_entries {
   my ($rewritten_acode, $diag) = _rewrite_action_code_with_diagnostics($label, $acode_entry->{code}, $rewrite_rules);
   _accumulate_action_rewrite_diagnostics($rewrite_diag_acc, $diag);
   push @ACODEs, $rewritten_acode;
-  push @dependency_refs, {label => $acode_entry->{relabel}, idx => $acode_entry->{reidx}};
+  my $dependency_ref = {
+   label => $acode_entry->{relabel},
+   idx => $acode_entry->{reidx},
+  };
+  if ($acode_entry->{selector_provenance}
+      && (($acode_entry->{selector_kind} // '') eq 'named'
+          || defined($acode_entry->{target_slot_id}))) {
+   $dependency_ref->{selector_kind} = $acode_entry->{selector_kind};
+   $dependency_ref->{authored_selector} = $acode_entry->{authored_selector};
+   $dependency_ref->{target_slot_id} = $acode_entry->{target_slot_id};
+  }
+  push @dependency_refs, $dependency_ref;
  }
 
  return (\@ACODEs, \@dependency_refs)

@@ -4,16 +4,20 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `db299789` — clean neutral-closeout base for intended atomic 222/300; no push.
-- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.2.0 - freeze Perl implementation dependencies`, intended
-  atomic 222/300 from activation commit `db299789`; no push.
-- active_work_unit: none after `.2.0` clean landing; `.2.1` is not active until task-tree-first activation.
-- next_action: verify commit/brief/clean, activate `.2.1`, then implement authored parsing/static metadata plus
-  dormant final-path RED without live gap execution.
-- in_flight_uncommitted: none in the intended post-landing handoff.
-- blockers: none. Toolbox probes freeze current named/directive/accessor absence, exact legacy prefix/interstitial
-  without tail, lifecycle order, Unicode-17 classifier need, same-guard state design, 137/246/58 effect boundary,
-  122 public-helper boundary, typed 9/5/114 no-drift, and `.2.1-.2.4` ownership.
+- activation_commit: `8f826923` — clean Perl-plan base for intended atomic 223/300; no push.
+- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.2.1 - add Perl authored gap metadata`, signoff-complete for
+  intended atomic 223/300 from activation commit `8f826923`; no push.
+- active_work_unit: none at the atomic-223 handoff; `.2.1` is complete and `.2.2` is not activated.
+- next_action: after the director runs `/clear`, verify atomic 223 / clean status / zero-byte brief, then activate
+  `INTER-MATCH-GAP-CAPTURE.2.2` task-tree-first for same-guard live gap state and private accessors.
+- in_flight_uncommitted: none at handoff; no background result remains to consume.
+- blockers: none. Focused proof is green at 108 Perl assertions, Unicode 17 / 806 ranges, neutral 1/8/55 plus 10
+  dormancy mutations, five-backend self-host 5x2, and canonical Phase 0 1,031/1,031 in 755 seconds. Canonical
+  containment/relocation, CLI 66x2, RAM 65%, exact opt-in gap routing, and local-CI exit 0 also pass.
+- session_refresh_cadence: proactively recommend `/clear` after at most three completed commits, sooner after a
+  large/debug-heavy slice or context compaction, and only at a committed clean handoff boundary.
+- historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
+  `FUTURE-PARITY-BACKLOG.22` moves that immutable closeout fact out of bounded current memory.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes. Eleven topology mutations advanced governance to 53, four lineage mutations to 57, and executable
@@ -40,9 +44,9 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, 9 allowed/11 rejected effects, invocation-framed marks, and cursor-only v1 progress.
   Exact recurrence/public composition is current at rollout 9/9 and 58 mutations; public 3/26/45; guide 1/14/18.
-- current_future_direction: `INTER-MATCH-GAP-CAPTURE.1` is closed at 1/8/55. Perl preflight `.2.0` freezes
-  `.2.1` metadata, `.2.2` live same-guard state/accessors, `.2.3` loaded parity, and `.2.4` admission. Brackets
-  select; dot fluently binds; `.14.5.1` waits for `.7`. Closed repeated-action next owner remains
-  `FUTURE-PARITY-BACKLOG.10.1`.
-- latest_bootstrap_read: 2026-08-13 — complete roadmap/codebase/mdBook and continuity/tooling review; `.2.0`
-  canonical signoff is green; commit/clear/clean atomic 222 precedes `.2.1`; push lock is 300.
+- current_future_direction: `INTER-MATCH-GAP-CAPTURE.1` is closed at 1/8/55. Perl `.2.1` implements private
+  authored/static named slots and directive provenance without runtime admission; `.2.2` owns live same-guard
+  state/accessors, `.2.3` loaded parity, and `.2.4` admission. Brackets select; dot fluently binds; `.14.5.1`
+  waits for `.7`.
+- latest_bootstrap_read: 2026-08-13 — complete roadmap/codebase/mdBook and continuity/tooling review; `.2.1` is
+  signoff-complete for atomic 223 and the next session resumes at unactivated `.2.2`; push lock is 300.

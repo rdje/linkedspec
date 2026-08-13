@@ -213,20 +213,22 @@ and this complete matrix through its exact success marker. The combined program-
 remains pending.
 
 Inter-match gap-capture recurring governance runs only the complete neutral row; all six runtime routes remain explicit skips.
-Perl preflight `.2.0` remains behavior-free. Its next three implementation leaves stage the exact Perl consumer
-outside canonical and recurring execution; `.2.4` alone may replace the Perl skip with a rooted `prove -Iperl`
-route after the full metadata/live/generated consumer passes. Until then, the neutral checker remains 55
-mutations at rollout 1 complete / 8 pending and the opt-in driver must retain all six ordered skips.
-Preflight signoff passes containment, all-five-anchor relocation, CLI 66/66 twice, RAM 66%, Phase 0 1,031/1,031
-in 745 seconds, that exact opt-in pending route, and final local-CI exit 0.
+Perl `.2.1` now stages the exact dormant consumer outside canonical and recurring execution. Its metadata mode
+passes 108 assertions for permanent grammar/reference-bridge parity, four declaration spacings, Unicode and mixed
+slots, five-field edge provenance, generated dependency provenance, ordinary named selection, and exact static
+diagnostics. Live and generated gap modes still fail deliberately; 10 independent dormancy mutations enforce
+that boundary. `.2.4` alone may replace the Perl skip with a rooted `prove -Iperl` route after the full
+metadata/live/generated consumer passes. Until then, the neutral checker remains 55 mutations at rollout
+1 complete / 8 pending and the opt-in driver must retain all six ordered skips.
 The always-on neutral command is
 `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py`. The repository-routed
 `tools/check_inter_match_gap_capture_six_runtime.sh` driver repeats that authority exactly once, then reports the
 pending Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT routes in fixed order without invoking their absent consumers.
 Set `LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1` to exercise this governance route in canonical local CI. Rollout
 remains 1 complete / 8 pending, so this switch proves topology and storage locality rather than runtime support.
-The neutral parent is now closeout-recomposed without changing the artifact, driver, guarded public surfaces, or
-rollout. Perl implementation follows separately; this switch still does not execute a backend gap consumer.
+The neutral parent is closeout-recomposed without changing the artifact, driver, guarded public surfaces, or
+rollout. Perl authored/static metadata now exists separately; this switch still does not execute a backend gap
+consumer.
 
 Dart's admitted consumer covers its internal value core and all 92+7 helper projections across native,
 reconstructed, generated-plan, and freshly emitted execution. The independent rollout checker requires its

@@ -317,7 +317,20 @@ target. The semantic fields are exactly `ownership`, `target`, `regex_index`, `b
 - `block` is `0` or `1`, and `fluent` is the normalized method chain or `undef`;
 - optional `source_form` is `bare` or `explicit`, but is provenance only. Perl retains it; Rust and Dart omit it
   because their normalized compiled state does not retain it. Removing it yields identical semantic rows for
-  equivalent bare and explicit spellings, and runtime dispatch never reads it.
+equivalent bare and explicit spellings, and runtime dispatch never reads it.
+
+### Perl named-slot staging metadata
+
+The Perl reference's private `.2.1` staging adds two rule-metadata projections without changing the portable
+descriptor schema. `regex_slots` preserves authored order as `{regex_index, slot_id}` rows, where `slot_id` is
+nullable. `resolved_slot_edges` preserves each action selection as exactly `selector_kind`, `authored_selector`,
+`target_rule`, `regex_index`, and nullable `target_slot_id`. The existing `resolved_edges` projection remains
+unchanged.
+
+Perl dependency references and generated `dependency_slot_map` rows likewise retain named selector/destination
+provenance; legacy anonymous rows keep their old shape. These fields support the dormant inter-match-gap consumer.
+They are not yet semantic-model, MCP, cross-backend descriptor-schema, CLI, or public capability admission, and
+`@capture_gaps` metadata does not imply live gap execution.
 
 ## `dependency_regex_map`
 

@@ -454,9 +454,11 @@ sub compile_spec_entry {
  }
 
  my $rule_ir = LinkedSpec::RuleIR::_collect_rule_ir($einfo);
+ $rule_ir->{source_id} = $deps->{source_id} if defined $deps->{source_id};
  LinkedSpec::RuleIR::_normalize_rule_ir_edges(
   $rule_ir,
   declared_rule_labels => $deps->{declared_rule_labels},
+  declared_rule_slots => $deps->{declared_rule_slots},
  );
  my $rule_meta = LinkedSpec::RuleIR::_plan_rule_ir_meta($rule_ir);
  unless (LinkedSpec::RuleIR::_validate_rule_ir_or_exit($rule_ir, $rule_meta)) {

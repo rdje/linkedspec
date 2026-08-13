@@ -38,6 +38,37 @@ sub _trim_bootstrap_value {
  return $value
 }
 
+sub _line_number_for_match {
+ my ($string, $info) = @_;
+ return undef unless ref($string) eq 'SCALAR' && ref($info) eq 'HASH';
+ my $match = defined($info->{match}) ? $info->{match} : '';
+ my $end = pos($$string);
+ return undef unless defined $end;
+ my $start = $end - length($match);
+ $start = 0 if $start < 0;
+ my $before = substr($$string, 0, $start);
+ return 1 + ($before =~ tr/\n//)
+}
+
+sub _selector_fields {
+ my ($authored) = @_;
+ return {
+  selector_kind => 'unindexed',
+  authored_selector => undef,
+  reidx => 0,
+ } unless defined($authored) && length($authored);
+ return {
+  selector_kind => 'numeric',
+  authored_selector => 0 + $authored,
+  reidx => 0 + $authored,
+ } if $authored =~ /\A\d+\z/o;
+ return {
+  selector_kind => 'named',
+  authored_selector => $authored,
+  reidx => undef,
+ }
+}
+
 sub _looks_like_slash_symbol_call_at {
  my ($source, $idx) = @_;
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
@@ -141,10 +172,11 @@ sub _parse_action_edge_targets {
 
  my @targets;
  pos($trimmed) = 0;
- while ($trimmed =~ /\G\s*(\w+)\s*(?:\[\s*(\d+)\s*\]\s*)?\s*(?:\||\z)/gc) {
+ while ($trimmed =~ /\G\s*(\w+)\s*(?:\[\s*([^\]\s]+)\s*\]\s*)?\s*(?:\||\z)/gc) {
+  my $selector = _selector_fields($2);
   push @targets, {
    label => $1,
-   reidx => defined($2) ? $2 : 0,
+   %$selector,
   };
  }
 
@@ -161,11 +193,16 @@ sub _build_action_edge_entries {
   ['ACODE', {
    relabel => $_->{label},
    reidx => $_->{reidx},
+   selector_kind => $_->{selector_kind},
+   authored_selector => $_->{authored_selector},
+   line => ref($descriptor_edge) eq 'HASH' ? $descriptor_edge->{line} : undef,
    code => $code,
    descriptor_edge => {
     %{ref($descriptor_edge) eq 'HASH' ? $descriptor_edge : {}},
     target => $_->{label},
     regex_index => $_->{reidx},
+    selector_kind => $_->{selector_kind},
+    authored_selector => $_->{authored_selector},
    },
   }]
  } @$targets;
@@ -535,6 +572,22 @@ sub _build_entry_label_rule {
  }
 }
 
+sub _build_named_re_pattern_rule {
+ return {
+  id => 'NAMED_RE_PATTERN',
+  tags => { start_token => 1 },
+  re => [qr/(?m:^[ \t]*(?<NAME>[^ \t=\r\n]+)[ \t]*=[ \t]*\/(?<PATTERN>(?:\\.|[^\/\\])*?)(?<!\\)\/[ \t]*(?=\r?$))/o],
+  handler => sub {
+   my ($info, undef, $string) = @_;
+   return ['RE_SLOT', {
+    name => $$info{match_hash}{NAME},
+    pattern => $$info{match_hash}{PATTERN},
+    line => _line_number_for_match($string, $info),
+   }]
+  },
+ }
+}
+
 sub _build_re_pattern_rule {
  return {
   id => 'RE_PATTERN',
@@ -548,15 +601,30 @@ sub _build_re_pattern_rule {
  }
 }
 
+sub _build_capture_gaps_rule {
+ return {
+  id => 'CAPTURE_GAPS',
+  tags => { start_token => 1 },
+  re => [qr/(?m:^[ \t]*\@capture_gaps[ \t]*(?=\r?$))/o],
+  handler => sub {
+   my ($info, undef, $string) = @_;
+   return ['CAPTURE_GAPS', {
+    line => _line_number_for_match($string, $info),
+   }]
+  },
+ }
+}
+
 sub _build_action_code_block_rule {
  my ($ctx) = @_;
  return {
   id => 'ACTION_CODE_BLOCK',
   tags => { start_token => 1 },
-  re=> [qr/->\s*(?<TARGETS>(?:\w+\s*(?:\[\s*\d+\s*\]\s*)?)(?:\s*\|\s*\w+\s*(?:\[\s*\d+\s*\]\s*)?)*)\s*\{/o, qr/\}/o],
+  re=> [qr/->\s*(?<TARGETS>(?:\w+\s*(?:\[\s*[^\]\s]+\s*\]\s*)?)(?:\s*\|\s*\w+\s*(?:\[\s*[^\]\s]+\s*\]\s*)?)*)\s*\{/o, qr/\}/o],
   handler=> sub {
    my ($info, $rule_descriptors, $string, $dispatch_state) = @_;
 
+   my $line = _line_number_for_match($string, $info);
    my $ipos = pos($$string);
    my $targets = _parse_action_edge_targets($$info{match_hash}{TARGETS});
    return undef unless ref($targets) eq 'ARRAY' && @$targets;
@@ -574,6 +642,7 @@ sub _build_action_code_block_rule {
        block => 1,
        fluent => undef,
        source_form => 'explicit',
+       line => $line,
       },
      )
     } elsif ($$minfo{index} == 0) {
@@ -589,10 +658,12 @@ sub _build_method_empty_action_code_block_rule {
  return {
   id => 'METHOD_EMPTY_ACTION_CODE_BLOCK',
   tags => { start_token => 1 },
-  re=> [qr/->\s*(?<ENTRY_LABEL>\w+)\s*(?:\[\s*(?<INDEX>\d+)\s*\]\s*)?(?<CHAIN>(?:\s*\.\s*\w+(?<PAREN>\s*\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\))?)+)(?<BLOCK>\s*(?<BRACE>\{(?:[^{}\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&BRACE))*\}))?/o],
+  re=> [qr/->\s*(?<ENTRY_LABEL>\w+)\s*(?:\[\s*(?<SELECTOR>[^\]\s]+)\s*\]\s*)?(?<CHAIN>(?:\s*\.\s*\w+(?<PAREN>\s*\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\))?)+)(?<BLOCK>\s*(?<BRACE>\{(?:[^{}\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&BRACE))*\}))?/o],
   handler=> sub {
    my ($info, undef, $string) = @_;
-   my ($entry_label, $reidx, $chain, $block) = @{$$info{match_hash}}{qw/ENTRY_LABEL INDEX CHAIN BLOCK/};
+   my $line = _line_number_for_match($string, $info);
+   my ($entry_label, $authored_selector, $chain, $block) = @{$$info{match_hash}}{qw/ENTRY_LABEL SELECTOR CHAIN BLOCK/};
+   my $selector = _selector_fields($authored_selector);
    my $code = _render_method_call_chain($entry_label, $chain, $block);
    return undef unless defined $code;
    my $calls = _parse_method_call_chain($chain);
@@ -608,15 +679,20 @@ sub _build_method_empty_action_code_block_rule {
    }
    return ['ACODE', {
     relabel => $entry_label,
-    reidx => $reidx // 0,
+    reidx => $selector->{reidx},
+    selector_kind => $selector->{selector_kind},
+    authored_selector => $selector->{authored_selector},
     code => $code,
     descriptor_edge => {
      ownership => 'action',
      target => $entry_label,
-     regex_index => $reidx // 0,
+     regex_index => $selector->{reidx},
+     selector_kind => $selector->{selector_kind},
+     authored_selector => $selector->{authored_selector},
      block => defined($block) && length($block) ? 1 : 0,
      fluent => $chain,
      source_form => 'explicit',
+     line => $line,
     },
    }]
   },
@@ -627,22 +703,28 @@ sub _build_empty_action_code_block_rule {
  return {
   id => 'EMPTY_ACTION_CODE_BLOCK',
   tags => { start_token => 1 },
-  re=> [qr/->\s*\w+(?:\[0\])?/o],
+  re=> [qr/->\s*\w+(?:\s*\[\s*[^\]\s]+\s*\])?/o],
   handler=> sub {
-   my ($info) = @_;
+   my ($info, undef, $string) = @_;
 
-   my ($entry_label) = $$info{match} =~ /(\w+)/o;
+   my ($entry_label, $authored_selector) = $$info{match} =~ /->\s*(\w+)(?:\s*\[\s*([^\]\s]+)\s*\])?/o;
+   my $selector = _selector_fields($authored_selector);
    return ['ACODE', {
     relabel => $entry_label,
-    reidx => 0,
+    reidx => $selector->{reidx},
+    selector_kind => $selector->{selector_kind},
+    authored_selector => $selector->{authored_selector},
     code => "call($entry_label)",
     descriptor_edge => {
      ownership => 'action',
      target => $entry_label,
-     regex_index => 0,
+     regex_index => $selector->{reidx},
+     selector_kind => $selector->{selector_kind},
+     authored_selector => $selector->{authored_selector},
      block => 0,
      fluent => undef,
      source_form => 'explicit',
+     line => _line_number_for_match($string, $info),
     },
    }]
   },
@@ -766,11 +848,11 @@ sub _build_split_like_code_rule {
   tags => { start_token => 1 },
   re=> [qr/@\s*(?:(?:capture_slice|capture_from_here|move_pos)\b|mark\s*\(\s*(?<MARK>\w+)\s*\))/o],
   handler=> sub {
-   my ($info) = @_;
+   my ($info, undef, $string) = @_;
    my $mark = $info->{match_hash}{MARK};
    return (defined($mark) && length($mark))
-    ? ['MARK_POS', {name => $mark}]
-    : ['MOVE_POS']
+    ? ['MARK_POS', {name => $mark, line => _line_number_for_match($string, $info)}]
+    : ['MOVE_POS', {line => _line_number_for_match($string, $info)}]
   },
  }
 }
@@ -844,10 +926,13 @@ sub _bare_edge_targets_from_text {
  return undef unless defined($trimmed) && length($trimmed);
  my @targets;
  pos($trimmed) = 0;
- while ($trimmed =~ /\G\s*(\w+)\s*(?:\[\s*(\d+)\s*\]\s*)?\s*(?:\||\z)/gc) {
+ while ($trimmed =~ /\G\s*(\w+)\s*(?:\[\s*([^\]\s]+)\s*\]\s*)?\s*(?:\||\z)/gc) {
+  my $selector = _selector_fields($2);
   push @targets, {
    label => $1,
-   index => defined($2) ? 0 + $2 : undef,
+   index => $selector->{selector_kind} eq 'unindexed' ? undef : $selector->{reidx},
+   selector_kind => $selector->{selector_kind},
+   authored_selector => $selector->{authored_selector},
   };
  }
  return undef unless @targets;
@@ -859,11 +944,13 @@ sub _build_bare_edge_block_rule {
  return {
   id => 'BARE_EDGE_BLOCK',
   tags => { start_token => 1 },
-  re => [qr/(?m:^[ \t]*(?<TARGETS>\w+[ \t]*(?:\[[ \t]*\d+[ \t]*\][ \t]*)?(?:[ \t]*\|[ \t]*\w+[ \t]*(?:\[[ \t]*\d+[ \t]*\][ \t]*)?)*)[ \t]*(?<BLOCK>(?<BRACE>\{(?:[^{}\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&BRACE))*\}))[ \t]*(?=\r?$))/o],
+  re => [qr/(?m:^[ \t]*(?<TARGETS>\w+[ \t]*(?:\[[ \t]*[^\]\s]+[ \t]*\][ \t]*)?(?:[ \t]*\|[ \t]*\w+[ \t]*(?:\[[ \t]*[^\]\s]+[ \t]*\][ \t]*)?)*)[ \t]*(?<BLOCK>(?<BRACE>\{(?:[^{}\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&BRACE))*\}))[ \t]*(?=\r?$))/o],
   handler => sub {
-   my ($info, undef, undef, $dispatch_state) = @_;
+   my ($info, undef, $string, $dispatch_state) = @_;
    my $targets = _bare_edge_targets_from_text($$info{match_hash}{TARGETS});
    return undef unless ref($targets) eq 'ARRAY' && @$targets;
+   my $line = _line_number_for_match($string, $info);
+   $_->{line} = $line for @$targets;
    my $block = $$info{match_hash}{BLOCK};
    $block =~ s/^\{//o;
    $block =~ s/\}$//o;
@@ -884,15 +971,22 @@ sub _build_bare_edge_fluent_rule {
  return {
   id => 'BARE_EDGE_FLUENT',
   tags => { start_token => 1 },
-  re => [qr/(?m:^[ \t]*(?<TARGET>\w+)[ \t]*(?:\[[ \t]*(?<INDEX>\d+)[ \t]*\][ \t]*)?(?<CHAIN>(?:\s*\.\s*\w+(?<PAREN>\s*\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\))?)+)(?<BLOCK>\s*(?<BRACE>\{(?:[^{}\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&BRACE))*\}))?[ \t]*(?=\r?$))/o],
+  re => [qr/(?m:^[ \t]*(?<TARGET>\w+)[ \t]*(?:\[[ \t]*(?<SELECTOR>[^\]\s]+)[ \t]*\][ \t]*)?(?<CHAIN>(?:\s*\.\s*\w+(?<PAREN>\s*\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\))?)+)(?<BLOCK>\s*(?<BRACE>\{(?:[^{}\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&BRACE))*\}))?[ \t]*(?=\r?$))/o],
   handler => sub {
-   my ($info, undef, undef, $dispatch_state) = @_;
-   my ($target, $index, $chain, $block) = @{$$info{match_hash}}{qw/TARGET INDEX CHAIN BLOCK/};
+   my ($info, undef, $string, $dispatch_state) = @_;
+   my ($target, $authored_selector, $chain, $block) = @{$$info{match_hash}}{qw/TARGET SELECTOR CHAIN BLOCK/};
+   my $selector = _selector_fields($authored_selector);
    my $action_code = _render_method_call_chain($target, $chain, $block);
    my $blind_tail = _render_method_call_chain($dispatch_state->{current_rule_label}, $chain, $block);
    return undef unless defined($action_code) && defined($blind_tail);
    return ['BARE_EDGE', {
-    targets => [{ label => $target, index => defined($index) ? 0 + $index : undef }],
+    targets => [{
+     label => $target,
+     index => $selector->{selector_kind} eq 'unindexed' ? undef : $selector->{reidx},
+     selector_kind => $selector->{selector_kind},
+     authored_selector => $selector->{authored_selector},
+     line => _line_number_for_match($string, $info),
+    }],
     source_form => 'bare',
     has_block => defined($block) && length($block) ? 1 : 0,
     fluent => $chain,
@@ -907,12 +1001,19 @@ sub _build_bare_edge_plain_rule {
  return {
   id => 'BARE_EDGE_PLAIN',
   tags => { start_token => 1 },
-  re => [qr/(?m:^[ \t]*(?<TARGET>\w+)[ \t]*(?:\[[ \t]*(?<INDEX>\d+)[ \t]*\][ \t]*)?[ \t]*(?=\r?$))/o],
+  re => [qr/(?m:^[ \t]*(?<TARGET>\w+)[ \t]*(?:\[[ \t]*(?<SELECTOR>[^\]\s]+)[ \t]*\][ \t]*)?[ \t]*(?=\r?$))/o],
   handler => sub {
-   my ($info, undef, undef, $dispatch_state) = @_;
-   my ($target, $index) = @{$$info{match_hash}}{qw/TARGET INDEX/};
+   my ($info, undef, $string, $dispatch_state) = @_;
+   my ($target, $authored_selector) = @{$$info{match_hash}}{qw/TARGET SELECTOR/};
+   my $selector = _selector_fields($authored_selector);
    return ['BARE_EDGE', {
-    targets => [{ label => $target, index => defined($index) ? 0 + $index : undef }],
+    targets => [{
+     label => $target,
+     index => $selector->{selector_kind} eq 'unindexed' ? undef : $selector->{reidx},
+     selector_kind => $selector->{selector_kind},
+     authored_selector => $selector->{authored_selector},
+     line => _line_number_for_match($string, $info),
+    }],
     source_form => 'bare',
     has_block => 0,
     fluent => undef,
@@ -954,6 +1055,7 @@ sub _build_bootstrap_rule_descriptors {
  return [
   _build_spec_root_rule($ctx),
   _build_entry_label_rule($ctx),
+  _build_named_re_pattern_rule(),
   _build_re_pattern_rule(),
   _build_action_code_block_rule($ctx),
   _build_method_empty_action_code_block_rule(),
@@ -967,6 +1069,7 @@ sub _build_bootstrap_rule_descriptors {
   _build_comment_rule(),
   _build_blind_call_code_block_rule($ctx),
   _build_method_empty_blind_code_block_rule(),
+  _build_capture_gaps_rule(),
   _build_split_like_code_rule(),
   _build_empty_blind_code_block_rule(),
   _build_curly_brace_rule($ctx),

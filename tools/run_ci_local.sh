@@ -400,6 +400,7 @@ require_tracked_file unicode_case/upstream/17.0.0/SpecialCasing.txt.gz
 require_tracked_file unicode_case/upstream/17.0.0/DerivedCoreProperties.txt.gz
 require_tracked_file unicode_case/upstream/17.0.0/LICENSE.txt.gz
 require_tracked_file perl/LinkedSpec/UnicodeCaseMapping.pm
+require_tracked_file perl/LinkedSpec/UnicodeXIDContinue.pm
 require_tracked_file rust/linkedspec-runtime/src/unicode_case_mapping.rs
 require_tracked_file rust/linkedspec-core/src/unicode_rule_label.rs
 require_tracked_file rust/linkedspec-runtime/src/semantic_index.rs
@@ -584,6 +585,7 @@ perl -c -Iperl t/mcp_server_perl_dispatch.t
 perl -c -Iperl t/mcp_server_perl_stdio.t
 perl -c -Iperl t/mcp_server_perl_admission.t
 perl -c -Iperl perl/LinkedSpec/BindingRuntime.pm
+perl -c -Iperl perl/LinkedSpec/UnicodeXIDContinue.pm
 perl -c -Iperl perl/LinkedSpec/RecognitionTransaction.pm
 perl -c -Iperl perl/LinkedSpec/RecognitionTransactionPolicy.pm
 perl -c -Iperl perl/LinkedSpec/RecognitionTransactionRuntime.pm

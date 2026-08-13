@@ -247,6 +247,7 @@ sub _collect_rule_ir {
   is_top        => 0,
   top_rule      => undef,
   REs           => [],
+  regex_slots   => [],
   code_blocks   => {
    ICODE  => [],
    ECODE  => [],
@@ -261,6 +262,8 @@ sub _collect_rule_ir {
   bare_edge_entries => [],
   edge_sequence => [],
   and_icode_entries => [],   # Per-regex I-blocks for AND rules (not acode_entries)
+  capture_gaps_directives => [],
+  legacy_gap_markers => [],
  };
 
  my $last_was_re = 0;
@@ -302,6 +305,10 @@ sub _collect_rule_ir {
    # RE entries checked before code_blocks so per-regex lifecycle code
    # becomes ACODE entries (with return()→assignment handled downstream).
    push @{$rule_ir->{REs}}, qr/$$centry[1]/;
+   push @{$rule_ir->{regex_slots}}, {
+    regex_index => scalar(@{$rule_ir->{REs}}) - 1,
+    slot_id => undef,
+   };
    $last_was_re = 1;
    $pending_reidx = scalar(@{$rule_ir->{REs}}) - 1;
    _trace_rule_ir_decision(
@@ -315,6 +322,19 @@ sub _collect_rule_ir {
      regex_count => scalar(@{$rule_ir->{REs}}),
     },
    );
+   next;
+  }
+  elsif ($entry_type eq 'RE_SLOT') {
+   my $slot = $$centry[1];
+   my $pattern = ref($slot) eq 'HASH' ? $slot->{pattern} : undef;
+   push @{$rule_ir->{REs}}, qr/$pattern/;
+   push @{$rule_ir->{regex_slots}}, {
+    regex_index => scalar(@{$rule_ir->{REs}}) - 1,
+    slot_id => ref($slot) eq 'HASH' ? $slot->{name} : undef,
+    line => ref($slot) eq 'HASH' ? $slot->{line} : undef,
+   };
+   $last_was_re = 1;
+   $pending_reidx = scalar(@{$rule_ir->{REs}}) - 1;
    next;
   }
   elsif ($last_was_re && exists $rule_ir->{code_blocks}{$entry_type}) {
@@ -398,6 +418,10 @@ sub _collect_rule_ir {
    push @{$rule_ir->{acode_entries}}, {
     relabel => $$centry[1]{relabel},
     reidx   => $$centry[1]{reidx},
+    selector_kind => $$centry[1]{selector_kind},
+    authored_selector => $$centry[1]{authored_selector},
+    selector_provenance => exists($$centry[1]{selector_kind}) ? 1 : 0,
+    line => $$centry[1]{line},
     code    => $$centry[1]{code},
    };
    if (ref($$centry[1]{descriptor_edge}) eq 'HASH') {
@@ -452,6 +476,10 @@ sub _collect_rule_ir {
    );
   }
   elsif ($entry_type eq 'MOVE_POS') {
+   push @{$rule_ir->{legacy_gap_markers}}, {
+    marker => '@move_pos',
+    line => ref($$centry[1]) eq 'HASH' ? $$centry[1]{line} : undef,
+   };
    push @{$rule_ir->{code_blocks}{LECODE}},
     '$IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position('.
     '$info, $STRING, pos $$STRING, "rule_move_pos")';
@@ -494,6 +522,11 @@ sub _collect_rule_ir {
     },
    );
   }
+  elsif ($entry_type eq 'CAPTURE_GAPS') {
+   push @{$rule_ir->{capture_gaps_directives}}, {
+    line => ref($$centry[1]) eq 'HASH' ? $$centry[1]{line} : undef,
+   };
+  }
   $last_was_re = 0;
  }
 
@@ -511,7 +544,9 @@ sub _rule_ir_diagnostic {
   summary => $args{summary} // $code,
   detail => $args{detail} // $code,
   map { exists($args{$_}) ? ($_ => $args{$_}) : () }
-   qw/rule_label target targets regex_index ownerships/,
+   qw/rule_label source_id line slot_name first_line target target_rule targets
+      authored_selector regex_index regex_count ownerships family cursor_policy
+      edge_ownership execution_shape marker marker_line/,
  }
 }
 
@@ -523,10 +558,129 @@ sub _normalize_descriptor_edge_fluent {
  return $fluent
 }
 
+sub _validate_rule_regex_slots {
+ my ($rule_ir) = @_;
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::UnicodeXIDContinue');
+ my $label = $rule_ir->{label} // '<undefined>';
+ my %first_line;
+ for my $slot (@{$rule_ir->{regex_slots} || []}) {
+  my $name = $slot->{slot_id};
+  next unless defined $name;
+  my $line = $slot->{line};
+  unless (LinkedSpec::UnicodeXIDContinue::is_xid_continue_string($name)
+      && $name !~ /\A[0-9]+\z/o) {
+   die _rule_ir_diagnostic(
+    code => 'regex_slot_name_invalid',
+    stage => 'parse_declaration',
+    rule_label => $label,
+    source_id => $rule_ir->{source_id},
+    line => $line,
+    slot_name => $name,
+   )
+  }
+  if (exists $first_line{$name}) {
+   die _rule_ir_diagnostic(
+    code => 'regex_slot_duplicate_name',
+    stage => 'resolve_declaration',
+    rule_label => $label,
+    source_id => $rule_ir->{source_id},
+    line => $line,
+    slot_name => $name,
+    first_line => $first_line{$name},
+   )
+  }
+  $first_line{$name} = $line;
+ }
+ return 1
+}
+
+sub _resolve_target_selector {
+ my ($rule_ir, $target, $slot_catalog) = @_;
+ my $label = $rule_ir->{label} // '<undefined>';
+ my $target_rule = $target->{label} // $target->{target};
+ my $kind = $target->{selector_kind};
+ if (!defined($kind) || !length($kind)) {
+  $kind = defined($target->{index}) || defined($target->{regex_index})
+   ? 'numeric'
+   : 'unindexed';
+ }
+ my $authored = exists($target->{authored_selector})
+  ? $target->{authored_selector}
+  : $kind eq 'numeric'
+   ? (defined($target->{index}) ? $target->{index} : $target->{regex_index})
+   : undef;
+ my $slots = ref($slot_catalog->{$target_rule}) eq 'ARRAY'
+  ? $slot_catalog->{$target_rule}
+  : [];
+ my $catalog_authoritative = exists $slot_catalog->{$target_rule};
+ my ($regex_index, $target_slot_id);
+ unless ($catalog_authoritative) {
+  $regex_index = $kind eq 'numeric'
+   ? 0 + $authored
+   : defined($target->{index})
+    ? 0 + $target->{index}
+    : defined($target->{regex_index})
+     ? 0 + $target->{regex_index}
+     : 0;
+  return {
+   selector_kind => $kind,
+   authored_selector => $authored,
+   target_rule => $target_rule,
+   regex_index => $regex_index,
+   target_slot_id => undef,
+  }
+ }
+ if ($kind eq 'named') {
+  my ($slot) = grep {
+   defined($_->{slot_id}) && defined($authored) && $_->{slot_id} eq $authored
+  } @$slots;
+  unless ($slot) {
+   die _rule_ir_diagnostic(
+    code => 'regex_slot_unknown_name',
+    stage => 'resolve_selector',
+    rule_label => $label,
+    source_id => $rule_ir->{source_id},
+    line => $target->{line},
+    target_rule => $target_rule,
+    authored_selector => $authored,
+   )
+  }
+  $regex_index = 0 + $slot->{regex_index};
+  $target_slot_id = $slot->{slot_id};
+ } else {
+  $regex_index = $kind eq 'numeric'
+   ? 0 + $authored
+   : 0;
+  if ($kind ne 'unindexed' && $regex_index >= @$slots) {
+   die _rule_ir_diagnostic(
+    code => 'regex_slot_index_out_of_range',
+    stage => 'resolve_selector',
+    rule_label => $label,
+    source_id => $rule_ir->{source_id},
+    line => $target->{line},
+    target_rule => $target_rule,
+    regex_index => $regex_index,
+    regex_count => scalar(@$slots),
+   )
+  }
+  $target_slot_id = @$slots ? $slots->[$regex_index]{slot_id} : undef;
+ }
+ return {
+  selector_kind => $kind,
+  authored_selector => $authored,
+  target_rule => $target_rule,
+  regex_index => $regex_index,
+  target_slot_id => $target_slot_id,
+ }
+}
+
 sub _normalize_rule_ir_edges {
  my ($rule_ir, %args) = @_;
  my $declared = ref($args{declared_rule_labels}) eq 'HASH'
   ? $args{declared_rule_labels}
+  : {};
+ my $slot_catalog = ref($args{declared_rule_slots}) eq 'HASH'
+  ? $args{declared_rule_slots}
   : {};
  my $label = $rule_ir->{label} // '<undefined>';
  my $family = ($rule_ir->{node_type} // '') =~ /AND/o ? 'and' : 'or_default';
@@ -535,6 +689,7 @@ sub _normalize_rule_ir_edges {
  $rule_ir->{family} = $family;
  $rule_ir->{cursor_policy} = $family eq 'and' ? 'consume' : 'seek';
  $rule_ir->{normalized_edges} = [];
+ _validate_rule_regex_slots($rule_ir);
 
  for my $bare (@{$rule_ir->{bare_edge_entries} || []}) {
   my $targets = ref($bare->{targets}) eq 'ARRAY' ? $bare->{targets} : [];
@@ -583,6 +738,10 @@ sub _normalize_rule_ir_edges {
     push @{$rule_ir->{acode_entries}}, {
      relabel => $target->{label},
      reidx => defined($target->{index}) ? $target->{index} : 0,
+     selector_kind => $target->{selector_kind},
+     authored_selector => $target->{authored_selector},
+     selector_provenance => exists($target->{selector_kind}) ? 1 : 0,
+     line => $target->{line},
      code => $bare->{action_code},
     };
    }
@@ -610,6 +769,24 @@ sub _normalize_rule_ir_edges {
   };
  }
 
+ for my $acode (@{$rule_ir->{acode_entries} || []}) {
+  my $resolved = _resolve_target_selector(
+   $rule_ir,
+   {
+    label => $acode->{relabel},
+    regex_index => $acode->{reidx},
+    selector_kind => $acode->{selector_kind},
+    authored_selector => $acode->{authored_selector},
+    line => $acode->{line},
+   },
+   $slot_catalog,
+  );
+  $acode->{reidx} = $resolved->{regex_index};
+  $acode->{selector_kind} = $resolved->{selector_kind};
+  $acode->{authored_selector} = $resolved->{authored_selector};
+  $acode->{target_slot_id} = $resolved->{target_slot_id};
+ }
+
  my @ownerships;
  push @ownerships, 'action' if @{$rule_ir->{acode_entries}};
  push @ownerships, 'blind' if @{$rule_ir->{bcode_entries}};
@@ -626,34 +803,54 @@ sub _normalize_rule_ir_edges {
 
  $rule_ir->{edge_ownership} = @ownerships ? $ownerships[0] : 'none';
  my @resolved_edges;
+ my @resolved_slot_edges;
  for my $edge (@{$rule_ir->{edge_sequence} || []}) {
   if (ref($edge->{bare_edge}) eq 'HASH') {
    my $bare = $edge->{bare_edge};
    my $targets = ref($bare->{targets}) eq 'ARRAY' ? $bare->{targets} : [];
    for my $target (@$targets) {
+    my $resolved = $ownership eq 'action'
+     ? _resolve_target_selector($rule_ir, $target, $slot_catalog)
+     : undef;
     push @resolved_edges, {
      ownership => $ownership,
      target => $target->{label},
      regex_index => $ownership eq 'action'
-      ? (defined($target->{index}) ? 0 + $target->{index} : 0)
-     : undef,
+      ? $resolved->{regex_index}
+      : undef,
      block => $bare->{has_block} ? 1 : 0,
      fluent => _normalize_descriptor_edge_fluent($bare->{fluent}),
      source_form => 'bare',
     };
+    push @resolved_slot_edges, { %$resolved } if $resolved;
    }
    next;
   }
+  my $resolved = ($edge->{ownership} // '') eq 'action'
+   ? _resolve_target_selector(
+      $rule_ir,
+      {
+       label => $edge->{target},
+       regex_index => $edge->{regex_index},
+       selector_kind => $edge->{selector_kind},
+       authored_selector => $edge->{authored_selector},
+       line => $edge->{line},
+      },
+      $slot_catalog,
+     )
+   : undef;
   push @resolved_edges, {
    ownership => $edge->{ownership},
    target => $edge->{target},
-   regex_index => $edge->{ownership} eq 'action' ? 0 + ($edge->{regex_index} // 0) : undef,
+   regex_index => $resolved ? $resolved->{regex_index} : undef,
    block => $edge->{block} ? 1 : 0,
    fluent => _normalize_descriptor_edge_fluent($edge->{fluent}),
    source_form => $edge->{source_form} // 'explicit',
   };
+  push @resolved_slot_edges, { %$resolved } if $resolved;
  }
  $rule_ir->{resolved_edges} = \@resolved_edges;
+ $rule_ir->{resolved_slot_edges} = \@resolved_slot_edges;
  $rule_ir->{bare_edge_entries} = [];
  return $rule_ir
 }
@@ -675,6 +872,65 @@ sub _plan_rule_ir_meta {
  $meta->{cursor_policy} = $rule_ir->{cursor_policy} if defined $rule_ir->{cursor_policy};
  $meta->{edge_ownership} = $rule_ir->{edge_ownership} if defined $rule_ir->{edge_ownership};
  $meta->{resolved_edges} = [map { { %$_ } } @{$rule_ir->{resolved_edges} || []}];
+ $meta->{resolved_slot_edges} = [map { { %$_ } } @{$rule_ir->{resolved_slot_edges} || []}];
+ $meta->{regex_slots} = [map {
+  {
+   regex_index => 0 + $_->{regex_index},
+   slot_id => $_->{slot_id},
+  }
+ } @{$rule_ir->{regex_slots} || []}];
+
+ my $directives = $rule_ir->{capture_gaps_directives} || [];
+ if (@$directives > 1) {
+  die _rule_ir_diagnostic(
+   code => 'capture_gaps_duplicate_directive',
+   stage => 'parse_directive',
+   rule_label => $rule_ir->{label},
+   source_id => $rule_ir->{source_id},
+   line => $directives->[1]{line},
+   first_line => $directives->[0]{line},
+  )
+ }
+ if (@$directives) {
+  my $directive = $directives->[0];
+  my $legacy = $rule_ir->{legacy_gap_markers}[0];
+  if ($legacy) {
+   die _rule_ir_diagnostic(
+    code => 'capture_gaps_legacy_marker_conflict',
+    stage => 'validate_directive',
+    rule_label => $rule_ir->{label},
+    source_id => $rule_ir->{source_id},
+    line => $directive->{line},
+    marker => $legacy->{marker},
+    marker_line => $legacy->{line},
+   )
+  }
+  my $eligible = $meta->{family} eq 'or_default'
+   && $meta->{cursor_policy} eq 'seek'
+   && $meta->{edge_ownership} eq 'action'
+   && $meta->{uses_loop}
+   && ($meta->{execution_shape} eq 'default_scan_loop'
+       || $meta->{execution_shape} eq 'repeat_loop')
+   && $meta->{acode_count} >= 1;
+  unless ($eligible) {
+   die _rule_ir_diagnostic(
+    code => 'capture_gaps_rule_ineligible',
+    stage => 'validate_directive',
+    rule_label => $rule_ir->{label},
+    source_id => $rule_ir->{source_id},
+    line => $directive->{line},
+    family => $meta->{family},
+    cursor_policy => $meta->{cursor_policy},
+    edge_ownership => $meta->{edge_ownership},
+    execution_shape => $meta->{execution_shape},
+   )
+  }
+  $meta->{capture_gaps} = {
+   enabled => 1,
+   directive => '@capture_gaps',
+   line => $directive->{line},
+  };
+ }
  return $meta
 }
 

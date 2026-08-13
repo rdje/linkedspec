@@ -20,9 +20,9 @@ answers:
   - "how is the Perl gap final consumer staged before admission"
   - "which leaf admits the Perl inter match gap consumer"
 date: 2026-08-13
-status: behavior-free Perl implementation freeze complete; .2.1 next after clean landing
+status: authored/static .2.1 complete; live .2.2 is next after clean landing
 tags: [capture, segmentation, perl, parser, actionir, lifecycle, transaction, generated-source, admission]
-evidence: "INTER-MATCH-GAP-CAPTURE.2.0 starts from clean db299789, retrieves the committed neutral/cursor/slot/source/transaction authorities, and uses descriptors, generated-source dumps, and live probes before source inspection. It reproduces current named-surface absence, unsupported accessors, exact legacy prefix/interstitial behavior without tail, and selection-to-IT source order. The resulting .2.1-.2.4 plan changes no behavior in .2.0."
+evidence: "INTER-MATCH-GAP-CAPTURE.2.0 starts from clean db299789 and freezes the .2.1-.2.4 plan. INTER-MATCH-GAP-CAPTURE.2.1 from clean 8f826923 implements permanent grammar/reference-bridge named slots, Unicode 17 identity, exact static diagnostics, directive and five-field edge metadata, generated dependency provenance, and a dormant final-path consumer. Its metadata mode passes 108 assertions; live/generated gap modes remain deliberately unavailable."
 reverify: "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/check_inter_match_gap_capture_six_runtime.sh && perl tools/check_language_capability_coverage.pl --report"
 ---
 
@@ -36,8 +36,9 @@ recurring execution, the Perl rollout row, mutation advancement, and parent clos
 
 ## Verified baseline
 
-Current Perl descriptors resolve `Rule` to slot zero and `Rule[N]` to the written numeric slot. The frontend
-rejects `name=/regex/`, `Rule[name]`, and `@capture_gaps`. `entry_slot()`, `gap_span()`, `gap_text()`, and
+At the `.2.0` baseline, Perl descriptors resolved `Rule` to slot zero and `Rule[N]` to the written numeric slot,
+while the frontend rejected `name=/regex/`, `Rule[name]`, and `@capture_gaps`. After `.2.1`, those authored forms
+parse and statically resolve, but `entry_slot()`, `gap_span()`, `gap_text()`, and
 `gap_kind()` currently lower to explicit unsupported-helper sentinels and yield `undef`.
 
 The corrected legacy runtime probe over `preHgapSmoreFtail` returns
@@ -47,6 +48,10 @@ current sequence is selection, match extraction, `LS`, edge action, legacy marke
 new insertion seams without redefining legacy markers.
 
 ## `.2.1`: authored metadata, not execution
+
+This leaf is now implementation- and signoff-complete. The permanent and reference grammars agree, ordinary
+named selection executes, descriptor/generated provenance is retained, and the dormant consumer passes 108
+metadata assertions plus 10 independent no-admission mutations. No live gap state is present.
 
 The permanent grammar changes first in `specs/spec.spec`; the required hardcoded reference parser bridge changes
 in lockstep in `perl/LinkedSpec/BootstrapSpec/Core.pm`, with the exception documented in ADR `0045`. Validation,
