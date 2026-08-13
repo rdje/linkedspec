@@ -20,9 +20,9 @@ answers:
   - "how is the Perl gap final consumer staged before admission"
   - "which leaf admits the Perl inter match gap consumer"
 date: 2026-08-13
-status: authored/static .2.1 complete; live .2.2 is next after clean landing
+status: authored/static .2.1 and native live .2.2 complete; emitted/loaded parity and admission remain pending
 tags: [capture, segmentation, perl, parser, actionir, lifecycle, transaction, generated-source, admission]
-evidence: "INTER-MATCH-GAP-CAPTURE.2.0 starts from clean db299789 and freezes the .2.1-.2.4 plan. INTER-MATCH-GAP-CAPTURE.2.1 from clean 8f826923 implements permanent grammar/reference-bridge named slots, Unicode 17 identity, exact static diagnostics, directive and five-field edge metadata, generated dependency provenance, and a dormant final-path consumer. Its metadata mode passes 108 assertions; live/generated gap modes remain deliberately unavailable."
+evidence: "INTER-MATCH-GAP-CAPTURE.2.0 starts from clean db299789 and freezes the .2.1-.2.4 plan. INTER-MATCH-GAP-CAPTURE.2.1 from clean 8f826923 implements permanent grammar/reference-bridge named slots, Unicode 17 identity, exact static diagnostics, directive and five-field edge metadata, generated dependency provenance, and a dormant final-path consumer. INTER-MATCH-GAP-CAPTURE.2.2 from clean 912fc5ed attaches private state to the existing recognition guard, adds exact lifecycle hooks and four source-read nodes, and makes all nine live contract groups pass while retaining generated/loaded execution and admission for .2.3-.2.4."
 reverify: "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/check_inter_match_gap_capture_six_runtime.sh && perl tools/check_language_capability_coverage.pl --report"
 ---
 
@@ -37,9 +37,10 @@ recurring execution, the Perl rollout row, mutation advancement, and parent clos
 ## Verified baseline
 
 At the `.2.0` baseline, Perl descriptors resolved `Rule` to slot zero and `Rule[N]` to the written numeric slot,
-while the frontend rejected `name=/regex/`, `Rule[name]`, and `@capture_gaps`. After `.2.1`, those authored forms
-parse and statically resolve, but `entry_slot()`, `gap_span()`, `gap_text()`, and
-`gap_kind()` currently lower to explicit unsupported-helper sentinels and yield `undef`.
+while the frontend rejected `name=/regex/`, `Rule[name]`, and `@capture_gaps`. At the `.2.1` landing, those
+authored forms parsed and statically resolved, but `entry_slot()`, `gap_span()`, `gap_text()`, and `gap_kind()`
+still lowered to explicit unsupported-helper sentinels. `.2.2` replaces that RED with private native-live
+lowering and typed context diagnostics; independent generated loading remains `.2.3`.
 
 The corrected legacy runtime probe over `preHgapSmoreFtail` returns
 `[["pre","H"],["gap","S"],["more","F"]]` at cursor 13 and exposes no tail. Generated source proves the
@@ -98,6 +99,12 @@ nodes plus four dedicated transaction nodes. The shared canonical-call inventory
 58, and rollout stays 9/9. Language coverage classifies the four staged names as non-public, preserving 122
 public Perl helpers. They also stay outside the current 92+7 typed-source helper algebra; typed
 `gap_composition` remains owned by final gap closeout `.7` and `FUTURE-PARITY-BACKLOG.14.5.1`.
+
+The focused native-live proof covers exact Unicode and empty prefix/interstitial/tail spans, falsey-safe detached
+slot records, post-child commit cursors, recursive owner isolation, same-token rollback restoration, LX/EX/E
+terminal timing, typed unavailable-context failures, and unchanged legacy-marker output. Default metadata mode
+passes 110 assertions. This is implementation staging only: the consumer remains dormant, the gap rollout stays
+1 complete + 8 pending / 55 mutations, and no facade/schema/CLI/README or cross-backend surface is promoted.
 
 ## `.2.3-.2.4`: carrier parity, then admission
 

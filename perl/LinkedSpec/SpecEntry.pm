@@ -18,6 +18,7 @@ use LinkedSpec::HandlerVariantEmitter ();
 use LinkedSpec::RuntimeDiagnosticOutput ();
 use LinkedSpec::RuntimeSemanticObservation ();
 use LinkedSpec::RecognitionTransactionRuntime ();
+use LinkedSpec::InterMatchGapRuntime ();
 
 our $BACKEND;
 
@@ -110,7 +111,10 @@ sub _quote_source_label_for_line_directive {
 }
 
 sub _build_handler_preamble {
- my ($label, $actual_icode) = @_;
+ my ($label, $actual_icode, $capture_gaps) = @_;
+ my $gap_activation = $capture_gaps
+  ? 'LinkedSpec::InterMatchGapRuntime::activate($descr, $STRING, $info, "'.$label.'");' . "\n"
+  : '';
  return
 'my ($descr, $STRING, $info) = @_;
 $info = {} unless ref($info) eq "HASH";
@@ -127,6 +131,7 @@ $$info{marks} = {} unless ref($$info{marks}) eq "HASH";
 my $__ls_recognition_invocation = LinkedSpec::RecognitionTransactionRuntime::enter_invocation(
  $descr, $STRING, $info, \$IPOS, "'.$label.'"
 );
+' . $gap_activation . '
 
 my @'.$label.';
 
@@ -164,6 +169,7 @@ sub _build_handler_variants {
   node_type  => $node_type,
   rep_min    => $args{rep_min},
   rep_max    => $args{rep_max},
+  capture_gaps => $args{capture_gaps} ? 1 : 0,
  );
 
  my %handlers;
@@ -382,6 +388,7 @@ sub _build_runtime_handler {
   delete $__ls_recursion_active{$progress_key} if defined($progress_key);
   unless ($eval_ok) {
    die $eval_error if LinkedSpec::RecognitionTransactionRuntime::is_error($eval_error)
+    || LinkedSpec::InterMatchGapRuntime::is_error($eval_error)
     || LinkedSpec::RecognitionTransactionRuntime::is_recursive_observation_error($eval_error);
    if (LinkedSpec::RuntimeDiagnosticOutput::is_marked_control_error($descr, $eval_error)
     || LinkedSpec::RuntimeSemanticObservation::is_marked_control_error($descr, $eval_error)) {
@@ -510,7 +517,9 @@ sub compile_spec_entry {
  my $actual_excode = $excode && "$excode;" || "";
  my $actual_itcode = $itcode && "$itcode;" || "";
 
- my $handler_preamble = _build_handler_preamble($label, $actual_icode);
+ my $capture_gaps = ref($rule_meta->{capture_gaps}) eq 'HASH'
+  && $rule_meta->{capture_gaps}{enabled} ? 1 : 0;
+ my $handler_preamble = _build_handler_preamble($label, $actual_icode, $capture_gaps);
  my $handler = $handler_preamble;
 
  my $notvalid_lcodes = qr/^\s*$/o;
@@ -536,6 +545,7 @@ sub compile_spec_entry {
    actual_ecode   => $actual_ecode,
    actual_excode  => $actual_excode,
    actual_itcode  => $actual_itcode,
+   capture_gaps   => $capture_gaps,
   );
   my $variants = _build_handler_variants(
    %variant_args,

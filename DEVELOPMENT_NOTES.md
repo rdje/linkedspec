@@ -10,6 +10,33 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-13 (`INTER-MATCH-GAP-CAPTURE.2.2` — private Perl native-live gap capture): activation base is clean
+  `912fc5ed`. The exact RED was the staged live placeholder; metadata 108 and neutral gap 1/8/55 already passed.
+- Reuse `RecognitionTransactionRuntime::_current_guard` as the sole invocation authority. Gap state belongs on
+  that guard; do not create another stack/cursor or overload legacy `$IPOS`. Same-token checkpoint snapshots must
+  contain detached `committed_gap_cursor`, `accepted_edge_count`, and `current_gap` only.
+- Install a candidate after match extraction and before enclosing `LS`; keep it visible through edge/target/`LE`;
+  commit the accepted post-`LE` cursor before `IT`. Install successful tails before default `LX`, satisfied-repeat
+  `EX`, and max `E`; failed minimum and direct default-action unwind synthesize neither commit nor tail.
+- The selected-match carrier is private and owner-checked. Only the direct target child under the candidate's
+  parent guard receives detached `entry_slot()` identity; direct entry is `undef`, and nested/recursive invocations
+  cannot observe or alias parent candidate state.
+- `ENTRY_SLOT_READ`, `GAP_SPAN_READ`, `GAP_TEXT_READ`, and `GAP_KIND_READ` are private `source_read` effects.
+  Recognition moves exactly 133→137 rows while calls remain 246, mutations remain 58, public helpers remain 122,
+  and typed-source remains 9/5/114. Generated-source import/error propagation is still owned by `.2.3`.
+- Default metadata passes 110 and native-live mode passes all nine behavior groups. Recognition, gap, typed-source,
+  and duplicate-slot cross-runtime matrices pass. Gap rollout deliberately remains 1/8/55 plus ten dormancy locks;
+  `.2.4` alone registers the consumer and promotes Perl.
+- The gap no-overclaim marker must evolve with private staging: “every runtime unimplemented” becomes false at
+  `.2.2`, while “every runtime-admission row pending” remains exact. Update the artifact and independent checker
+  together; keep 1/8/55 unchanged and continue forbidding generated/loaded, cross-backend, schema/CLI, and public
+  admission claims.
+- Pre-canonical focused signoff renders 79 book files / 14,672 KiB, regenerates Knowledge at 834/6,992, and
+  passes all eight doctrines. The sandboxed canonical run reaches representative-process containment and stops
+  only because the outer harness denies nested `sandbox-exec` with status 71. Its unchanged authorized rerun
+  passes containment/relocation, CLI 66/66 twice, RAM 76%, Phase 0 1,031/1,031 in 756 seconds, the exact opt-in
+  neutral-plus-six-pending gap route, the local-CI pass marker, and exit 0.
+
 - 2026-08-13 (`INTER-MATCH-GAP-CAPTURE.2.1` — Perl authored/static metadata): activation base is clean
   `8f826923`. The final consumer/checker came first and failed five of six metadata subtests because named
   selectors and `@capture_gaps` were not parseable; this is the leaf's exact RED.

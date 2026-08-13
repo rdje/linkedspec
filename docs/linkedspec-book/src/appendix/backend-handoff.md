@@ -50,7 +50,7 @@
 > treat those compatibility controls as transaction support. The accepted transaction forms are `recognition_checkpoint()`,
 > `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and `recognition_rollback(token)`. The attempt
 > returns a match boolean; commit separately exposes the staged payload. The neutral authority is now executable
-> and fail-closed over 129 current + four dedicated node rows, 246 call rows, and 58 mutations.
+> and fail-closed over 133 current + four dedicated node rows, 246 call rows, and 58 mutations.
 > Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT transaction support is current and canonically admitted.
 > Public no-drift is current and recognition rollout is 9/9 complete. Neutral proof alone is not backend support.
 >

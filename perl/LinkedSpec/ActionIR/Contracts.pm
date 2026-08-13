@@ -88,6 +88,30 @@ sub _build_recursive_observation_contracts {
  ]
 }
 
+sub _build_inter_match_gap_contracts {
+ my ($label) = @_;
+ my @specs = (
+  {name => 'entry_slot', ir_node => 'ENTRY_SLOT_READ'},
+  {name => 'gap_span', ir_node => 'GAP_SPAN_READ'},
+  {name => 'gap_text', ir_node => 'GAP_TEXT_READ'},
+  {name => 'gap_kind', ir_node => 'GAP_KIND_READ'},
+ );
+ return [map {
+  my $name = $_->{name};
+  {
+   id => $name,
+   ir_node => $_->{ir_node},
+   diag_name => $name,
+   unresolved_pattern => qr/\b\Q$name\E\s*\(\s*\)/o,
+   lower => sub {
+    my ($code) = @_;
+    $code =~ s/\b\Q$name\E\s*\(\s*\)/LinkedSpec::InterMatchGapRuntime::$name(\$descr, \$STRING, '\Q$label\E')/g;
+    return $code
+   },
+  }
+ } @specs]
+}
+
 #------------------------------------------------------------------------------
 # Function: _build_recognition_transaction_contracts
 # Purpose : Own the four exact authored transaction statements and preserve
@@ -2469,6 +2493,7 @@ sub build_action_lowering_contracts {
  return [
   @{_build_call_and_dispatch_contracts($label, $deps)},
   @{_build_recursive_observation_contracts($label)},
+  @{_build_inter_match_gap_contracts($label)},
   @{_build_recognition_transaction_contracts($label)},
   @{_build_return_contracts($label, $d)},
   @{_build_capture_and_cursor_contracts($label, $d)},

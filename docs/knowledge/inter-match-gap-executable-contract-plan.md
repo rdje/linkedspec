@@ -1,6 +1,6 @@
 ---
 id: inter-match-gap-executable-contract-plan
-title: Inter-match gap capture has a frozen neutral contract and Perl authored-metadata staging
+title: Inter-match gap capture has a frozen neutral contract and private Perl native-live staging
 answers:
   - "where will the inter match gap executable contract live"
   - "what is the inter match gap contract id"
@@ -22,9 +22,9 @@ answers:
   - "what are the capture_gaps rollout legs"
   - "is capture_gaps implemented now"
 date: 2026-08-13
-status: neutral parent closed and Perl authored/static staging complete; live runtime remains 1 complete + 8 pending
+status: neutral parent closed and Perl native-live staging complete; rollout remains 1 complete + 8 pending
 tags: [capture, segmentation, named-slots, typed-source, lifecycle, transaction, recursion, contract, plan]
-evidence: "INTER-MATCH-GAP-CAPTURE.1.1 from clean 31f3e664 adds the executable neutral Unicode/empty/child/rollback/nested model and 50 semantic corruptions. INTER-MATCH-GAP-CAPTURE.1.2 from clean f58dfcb3 adds repository-rooted recurrence, exact pending-route order, public no-overclaim, and five governance corruptions for 55 total. INTER-MATCH-GAP-CAPTURE.1.3 from clean 0490522b independently recomposes those bytes, counts, routes, storage, public absence, duplicate-slot, and typed-source prerequisites before closing neutral parent .1. INTER-MATCH-GAP-CAPTURE.2.1 from clean 8f826923 adds Perl named-slot and capture_gaps authored/static metadata behind 10 independent dormancy mutations; it adds no live gap runtime or rollout admission."
+evidence: "INTER-MATCH-GAP-CAPTURE.1.1 from clean 31f3e664 adds the executable neutral Unicode/empty/child/rollback/nested model and 50 semantic corruptions. INTER-MATCH-GAP-CAPTURE.1.2 from clean f58dfcb3 adds repository-rooted recurrence, exact pending-route order, public no-overclaim, and five governance corruptions for 55 total. INTER-MATCH-GAP-CAPTURE.1.3 from clean 0490522b independently recomposes those bytes, counts, routes, storage, public absence, duplicate-slot, and typed-source prerequisites before closing neutral parent .1. INTER-MATCH-GAP-CAPTURE.2.1 from clean 8f826923 adds Perl named-slot and capture_gaps authored/static metadata behind 10 independent dormancy mutations. INTER-MATCH-GAP-CAPTURE.2.2 from clean 912fc5ed implements only private native-live state/accessors and 137/246/58 recognition synchronization; generated loading and rollout admission remain later leaves."
 reverify: "bash tools/check_inter_match_gap_capture_six_runtime.sh && prove -Iperl t/inter_match_gap_capture_perl_contract.t"
 ---
 
@@ -102,8 +102,9 @@ cursor-regression, repetition-progress, and recursive-progress diagnostics stay 
 adds only named-slot, directive, compatibility-conflict, and unavailable-context diagnostics.
 
 The Perl reference now recognizes the named declaration/selector syntax and `@capture_gaps` directive, validates
-their static contract, and exposes private descriptor/generated dependency provenance. It still has no live gap
-state, lifecycle/accessor behavior, generated/loaded gap execution, recurring runtime route, or public admission.
+their static contract, exposes private descriptor/generated dependency provenance, and executes private native-live
+gap state/lifecycle/accessors. It still has no independently loaded generated gap execution, recurring runtime
+route, or public admission.
 See ADR `0045`, `docs/knowledge/perl-inter-match-gap-authored-metadata.md`, and
 `docs/tasks/INTER-MATCH-GAP-CAPTURE.md` for the complete fixtures, mutation classes, storage routes, carrier roles,
 and remaining implementation ownership.

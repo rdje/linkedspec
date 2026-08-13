@@ -165,9 +165,9 @@ DEDICATED_NODES = [
     "RECOGNIZE_ONCE",
 ]
 EXPECTED_COUNTS = {
-    "current_action_ir_nodes": 129,
+    "current_action_ir_nodes": 133,
     "dedicated_action_ir_nodes": 4,
-    "all_action_ir_nodes": 133,
+    "all_action_ir_nodes": 137,
     "canonical_call_contracts": 246,
     "allowed_effects": 9,
     "rejected_effects": 11,
@@ -183,7 +183,7 @@ EXPECTED_COUNTS = {
     "mutations": 58,
 }
 EXPECTED_EFFECT_ROW_HASHES = {
-    "action_ir_effect_rows": "fa62b9bb2023fd65be1954fc4466692bc9610d0f4be48eb3c77de51f895bcebf",
+    "action_ir_effect_rows": "84ece426afcfda3778efed068ec9ae0cbcb54222c36b70f4972c6f6fa5abaf9f",
     "canonical_call_effect_rows": "b0e25c4ab45ed53f83e5eaa8a1b2d66ec3ddc5a9cc4764ff031b3903efb64929",
 }
 EXPECTED_SURFACE = {
@@ -440,7 +440,7 @@ PUBLIC_SEQUENCE_CONTRACT = {
             "path": "docs/linkedspec-book/src/overview/project-status.md",
             "required_markers": [
                 (
-                    "Their neutral artifact/checker is executable at 129 current + 4 "
+                    "Their neutral artifact/checker is executable at 133 current + 4 "
                     "dedicated ActionIR rows"
                 ),
                 "recognition rollout 9/9 complete",
@@ -1689,7 +1689,7 @@ MUTATIONS: dict[str, Callable[[dict[str, Any]], None]] = {
     "contract_id": _set(["contract_id"], "changed"),
     "task_owner": _set(["task_owner"], "FUTURE-PARITY-BACKLOG.14.3.2"),
     "status": _set(["status"], "complete"),
-    "count_current_nodes": _set(["expected_counts", "current_action_ir_nodes"], 127),
+    "count_current_nodes": _set(["expected_counts", "current_action_ir_nodes"], 131),
     "count_dedicated_nodes": _set(["expected_counts", "dedicated_action_ir_nodes"], 3),
     "count_calls": _set(["expected_counts", "canonical_call_contracts"], 245),
     "syntax_checkpoint": _set(["authored_surface", "checkpoint"], "tx = save_cursor()"),
@@ -2315,7 +2315,7 @@ def main() -> int:
         return 1
     print(
         "recognition-transaction-contract: OK "
-        "(133 ActionIR rows = 129 current + 4 dedicated; 246 call rows; "
+        "(137 ActionIR rows = 133 current + 4 dedicated; 246 call rows; "
         "token 8 positive/17 negative; effects 6 graphs; marks 6; progress 8; "
         "58 rejected mutations; rollout 9/9 complete; "
         f"public sequence 3 documents/26 forbidden/{public_mutations} mutations; "

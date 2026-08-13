@@ -219,7 +219,8 @@ SPEC
  like($generated, qr/selector_kind => 'named'/, 'generated dependency slot carries named-selector provenance');
  like($generated, qr/authored_selector => '\Q$unicode_name\E'/, 'generated dependency slot carries exact authored selector');
  like($generated, qr/target_slot_id => '\Q$unicode_name\E'/, 'generated dependency slot carries exact target-slot identity');
- unlike($generated, qr/InterMatchGapRuntime/, 'generated metadata introduces no live gap runtime');
+ like($generated, qr/InterMatchGapRuntime::activate/, 'generated source stages the private live gap lifecycle');
+ unlike($generated, qr/^use LinkedSpec::InterMatchGapRuntime/m, 'independent runtime import remains owned by the generated-source leaf');
 
  my $self_target_source = <<'SPEC';
 Top::
@@ -246,8 +247,13 @@ SPEC
  my @unsupported_helpers = sort @{$unsupported->{spec}{Top}{meta}{action_rewriter}{unresolved_helpers} // []};
  is_deeply(
   \@unsupported_helpers,
-  [qw(entry_slot gap_kind gap_span gap_text)],
-  'metadata leaf keeps every future gap accessor unsupported',
+  [],
+  'private gap accessors leave no unsupported-helper residue',
+ );
+ is_deeply(
+  $unsupported->{spec}{Top}{meta}{action_rewriter}{canonical_action_ir_nodes},
+  [qw(ENTRY_SLOT_READ GAP_KIND_READ GAP_SPAN_READ GAP_TEXT_READ RETURN)],
+  'private gap accessors retain their four dedicated ActionIR nodes',
  );
 
  my @negative = (
@@ -314,7 +320,340 @@ SPEC
 }
 
 sub run_live_contract {
- fail('live gap capture remains owned by INTER-MATCH-GAP-CAPTURE.2.2');
+ subtest 'dedicated live accessors lower without public or fallback residue' => sub {
+  my $source = <<'SPEC';
+Top::
+ @capture_gaps
+ -> Part[head] { return(array(gap_span(), gap_text(), gap_kind(), call(Part))) }
+Part:
+ head=/H/
+ I { return(entry_slot()) }
+SPEC
+  my ($descriptor, $runtime_ctx) = compile_descriptor($source, 'live-lowering.spec');
+  ok(ref($descriptor) eq 'HASH', 'live accessor source compiles')
+   or diag(JSON::PP->new->canonical(1)->encode($runtime_ctx->{last_error} // {}));
+  return unless ref($descriptor) eq 'HASH';
+  my @nodes = sort @{$descriptor->{spec}{Top}{meta}{action_rewriter}{canonical_action_ir_nodes} // []};
+  is_deeply(
+   \@nodes,
+   [qw(CALL GAP_KIND_READ GAP_SPAN_READ GAP_TEXT_READ RETURN)],
+   'enclosing action carries the three dedicated gap-read nodes',
+  );
+  is_deeply(
+   $descriptor->{spec}{Part}{meta}{action_rewriter}{canonical_action_ir_nodes},
+   [qw(ENTRY_SLOT_READ RETURN)],
+   'target entry carries the dedicated entry-slot read node',
+  );
+  is_deeply(
+   $descriptor->{spec}{Top}{meta}{action_rewriter}{unresolved_helpers},
+   [],
+   'live gap accessors leave no unsupported helper',
+  );
+ };
+
+ subtest 'unicode prefix interstitial tail and named entry slots are exact' => sub {
+  my $source = <<'SPEC';
+Top::
+ I { segments = [] }
+ @capture_gaps
+ -> Part[header]  { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span(), "child", call(Part))) }
+ -> Part[section] { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span(), "child", call(Part))) }
+ -> Part[footer]  { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span(), "child", call(Part))) }
+ LX { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span())); return(copy(segments)) }
+Part:
+ header=/H/
+ section=/S/
+ footer=/F/
+ I { return(hash("slot", entry_slot(), "text", entry_text(), "falsey", 0)) }
+SPEC
+  my $parser = LinkedSpec::Get(\$source, generated_source_identity => 'unicode-live.spec');
+  ok(ref($parser) eq 'CODE', 'unicode live parser compiles');
+  my $input = "\x{03b1}H\x{03b2}\nS\x{1f642}F\x{03c9}";
+  my $result = $parser->(\$input);
+  my @expected_gap = (
+   ['prefix', "\x{03b1}", 0, 1],
+   ['interstitial', "\x{03b2}\n", 2, 4],
+   ['interstitial', "\x{1f642}", 5, 6],
+   ['tail', "\x{03c9}", 7, 8],
+  );
+  is(scalar(@$result), 4, 'three accepted edges plus one tail are returned');
+  for my $index (0 .. $#expected_gap) {
+   my ($kind, $text, $start, $end) = @{$expected_gap[$index]};
+   is($result->[$index]{kind}, $kind, "gap $index has exact kind");
+   is($result->[$index]{text}, $text, "gap $index materializes exact Unicode text");
+   is_deeply(
+    $result->[$index]{span},
+    { source_id => 'input', start => $start, end => $end, provenance => 'gap' },
+    "gap $index returns a detached typed span record",
+   );
+  }
+  for my $index (0 .. 2) {
+   my $slot_name = (qw(header section footer))[$index];
+   is_deeply(
+    $result->[$index]{child}{slot},
+    {
+     target_rule => 'Part', regex_index => $index, slot_id => $slot_name,
+     selector_kind => 'named', authored_selector => $slot_name,
+    },
+    "target $slot_name receives exact detached entry-slot provenance",
+   );
+   is($result->[$index]{child}{falsey}, 0, "target $slot_name preserves a falsey payload member");
+  }
+  $result->[0]{span}{start} = 99;
+  my $again = $parser->(\$input);
+  is($again->[0]{span}{start}, 0, 'mutating a returned span cannot mutate invocation state');
+ };
+
+ subtest 'empty prefix interstitial and tail spans remain first class' => sub {
+  my $source = <<'SPEC';
+Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Part[h] { push(gaps, array(gap_kind(), gap_text(), gap_span())) }
+ -> Part[s] { push(gaps, array(gap_kind(), gap_text(), gap_span())) }
+ -> Part[f] { push(gaps, array(gap_kind(), gap_text(), gap_span())) }
+ LX { push(gaps, array(gap_kind(), gap_text(), gap_span())); return(copy(gaps)) }
+Part:
+ h=/H/
+ s=/S/
+ f=/F/
+ I.return(entry_text())
+SPEC
+  my $parser = LinkedSpec::Get(\$source);
+  ok(ref($parser) eq 'CODE', 'empty-gap parser compiles');
+  my $input = 'HSF';
+  my $result = $parser->(\$input);
+  is_deeply(
+   [map { [$_->[0], $_->[1], $_->[2]{start}, $_->[2]{end}] } @$result],
+   [
+    ['prefix', '', 0, 0],
+    ['interstitial', '', 1, 1],
+    ['interstitial', '', 2, 2],
+    ['tail', '', 3, 3],
+   ],
+   'all four empty gap records survive without trimming or suppression',
+  );
+ };
+
+ subtest 'child-extended accepted cursor becomes the next committed boundary' => sub {
+  my $source = <<'SPEC';
+Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Container[open] { push(gaps, array(gap_text(), call(Container))) }
+ -> Bang { push(gaps, array(gap_text(), call(Bang))) }
+ LX { push(gaps, array(gap_text(), gap_kind())); return(copy(gaps)) }
+Container:
+ open=/\{/
+ -> Close { return(call(Close)) }
+Close:
+ /\}/
+ I.return(entry_text())
+Bang:
+ /!/
+ I.return(entry_text())
+SPEC
+  my $parser = LinkedSpec::Get(\$source);
+  ok(ref($parser) eq 'CODE', 'child-extended cursor parser compiles');
+  my $input = 'p{abc}gap!';
+  is_deeply(
+   $parser->(\$input),
+   [['p', '}'], ['gap', '!'], ['', 'tail']],
+   'post-child accepted cursor, not selected opening-match end, owns the next gap boundary',
+  );
+ };
+
+ subtest 'parent candidate suspends while a nested gap owner uses isolated state' => sub {
+  my $source = <<'SPEC';
+Top::
+ @capture_gaps
+ -> Container[open] { return(array(gap_text(), call(Container), gap_text())) }
+Container:
+ open=/\{/
+ I { inner = [] }
+ @capture_gaps
+ -> Atom { push(inner, gap_text()) }
+ LX { push(inner, gap_text()); return(copy(inner)) }
+Atom:
+ /x/
+ I.return(entry_text())
+SPEC
+  my $parser = LinkedSpec::Get(\$source);
+  ok(ref($parser) eq 'CODE', 'nested gap-owner parser compiles');
+  my $input = 'p{axtail';
+  is_deeply(
+   $parser->(\$input),
+   ['p', ['a', 'tail'], 'p'],
+   'nested invocation sees only its own gap state and parent resumes the same candidate',
+  );
+ };
+
+ subtest 'recognition rollback restores the same invocation gap snapshot' => sub {
+  my $source = <<'SPEC';
+Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Part[h] {
+   tx = recognition_checkpoint();
+   matched = recognize_once(tx, call(Probe));
+   recognition_rollback(tx);
+   push(gaps, gap_text())
+ }
+ -> Part[s] { push(gaps, gap_text()) }
+ LX { push(gaps, gap_text()); return(copy(gaps)) }
+Part:
+ h=/H/
+ s=/S/
+ I.return(entry_text())
+Probe:
+ /X/
+ I.return(0)
+SPEC
+  my $parser = LinkedSpec::Get(\$source);
+  ok(ref($parser) eq 'CODE', 'same-guard rollback parser compiles');
+  return unless ref($parser) eq 'CODE';
+  my $input = 'aHXbS';
+  is_deeply(
+   $parser->(\$input),
+   ['a', 'Xb', ''],
+   'rollback restores cursor, committed boundary, accepted count, and current candidate together',
+  );
+ };
+
+ subtest 'terminal LX EX and maximum E expose exact tails but failed minimum does not' => sub {
+  my $default_source = <<'SPEC';
+Top::
+ @capture_gaps
+ -> Part { return(gap_text()) }
+ LX { return(array(gap_kind(), gap_text(), gap_span())) }
+Part: /H/
+SPEC
+  my $default = LinkedSpec::Get(\$default_source);
+  my $no_match = 'abc';
+  is_deeply(
+   $default->(\$no_match),
+   ['tail', 'abc', { source_id => 'input', start => 0, end => 3, provenance => 'gap' }],
+   'default miss installs a whole-input LX tail',
+  );
+
+  my $ex_source = <<'SPEC';
+Top::OR{0,2}
+ I { gaps = [] }
+ @capture_gaps
+ -> Part { push(gaps, gap_text()) }
+ EX { push(gaps, gap_text()); return(copy(gaps)) }
+Part: /H/
+SPEC
+  my $ex = LinkedSpec::Get(\$ex_source);
+  my $one = 'aHtail';
+  is_deeply($ex->(\$one), ['a', 'tail'], 'satisfied repetition miss installs tail before EX');
+  my $zero = 'whole';
+  is_deeply($ex->(\$zero), ['whole'], 'zero-match zero-min repetition exposes the whole input as tail');
+
+  my $e_source = <<'SPEC';
+Top::OR{1}
+ I { gaps = [] }
+ @capture_gaps
+ -> Part { push(gaps, gap_text()) }
+ E { push(gaps, gap_text()); return(copy(gaps)) }
+Part: /H/
+SPEC
+  my $maximum = LinkedSpec::Get(\$e_source);
+  my $bounded = 'aHtail';
+  is_deeply($maximum->(\$bounded), ['a', 'tail'], 'maximum completion installs tail before E');
+
+  my $failed_source = <<'SPEC';
+Top::OR{2}
+ @capture_gaps
+ -> Part { return(gap_text()) }
+ EX { return("unexpected-ex") }
+ E { return("unexpected-e") }
+Part: /H/
+SPEC
+  my $failed = LinkedSpec::Get(\$failed_source);
+  my $too_short = 'H';
+  is($failed->(\$too_short), undef, 'failed repetition minimum exposes no tail or terminal lifecycle hook');
+ };
+
+ subtest 'unavailable contexts are typed and IT observes post-commit clearing' => sub {
+  my $direct_source = <<'SPEC';
+Direct::
+ /H/
+ I { return(gap_text()) }
+SPEC
+  my $direct = LinkedSpec::Get(\$direct_source);
+  my $input = 'H';
+  my $ok = eval { $direct->(\$input); 1 };
+  my $error = $@;
+  ok(!$ok, 'gap accessor outside an active candidate throws');
+  ok(LinkedSpec::InterMatchGapRuntime::is_error($error), 'outside-context failure is the private typed error');
+  is($error->{code}, 'gap_capture_context_unavailable', 'outside-context error has the portable code');
+  is($error->{accessor}, 'gap_text', 'outside-context error identifies the accessor');
+
+  my $it_source = <<'SPEC';
+Top::OR{1}
+ @capture_gaps
+ -> Part { return(0) }
+ IT { return(gap_kind()) }
+Part: /H/
+SPEC
+  my $it = LinkedSpec::Get(\$it_source);
+  my $hit = 'H';
+  $ok = eval { $it->(\$hit); 1 };
+  $error = $@;
+  ok(!$ok, 'IT cannot read the candidate after accepted commit');
+  ok(LinkedSpec::InterMatchGapRuntime::is_error($error), 'post-commit IT failure is typed');
+  is($error->{phase}, 'IT', 'post-commit IT failure identifies lifecycle phase');
+
+  my $regression_source = <<'SPEC';
+Top::OR{1}
+ @capture_gaps
+ -> Part { rewind_match_start() }
+Part: /H/
+SPEC
+  my $regression = LinkedSpec::Get(\$regression_source);
+  my $prefixed = 'aH';
+  $ok = eval { $regression->(\$prefixed); 1 };
+  $error = $@;
+  ok(!$ok, 'accepted gap commit rejects cursor regression');
+  isa_ok($error, 'LinkedSpec::SourceLocation::Error');
+  is($error->{code}, 'source_location_cursor_regression', 'cursor regression preserves the source diagnostic');
+  is($error->{originating_edge_or_job}, 'Top:capture_gaps_commit', 'cursor regression identifies gap commit ownership');
+ };
+
+ subtest 'direct entry slot is undef and legacy rolling remains independent' => sub {
+  my $direct_source = <<'SPEC';
+Part::
+ /H/
+ I { return(entry_slot()) }
+SPEC
+  my $direct = LinkedSpec::Get(\$direct_source);
+  my $hit = 'H';
+  is($direct->(\$hit), undef, 'direct target invocation has no entry-slot context');
+
+  my $legacy_source = <<'SPEC';
+Top::
+ I { gaps = [] }
+ @move_pos
+ -> Part[h] { push(gaps, array(capture_slice(), call(Part))) }
+ -> Part[s] { push(gaps, array(capture_slice(), call(Part))) }
+ -> Part[f] { push(gaps, array(capture_slice(), call(Part))) }
+ LX { return(copy(gaps)) }
+Part:
+ h=/H/
+ s=/S/
+ f=/F/
+ I.return(entry_text())
+SPEC
+  my $legacy = LinkedSpec::Get(\$legacy_source);
+  ok(ref($legacy) eq 'CODE', 'legacy marker parser still compiles independently');
+  my $legacy_input = 'preHgapSmoreFtail';
+  is_deeply(
+   $legacy->(\$legacy_input),
+   [['pre', 'H'], ['gap', 'S'], ['more', 'F']],
+   'legacy marker keeps prefix/interstitial output and does not gain a synthetic tail',
+  );
+ };
 }
 
 sub run_generated_contract {

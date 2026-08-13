@@ -301,16 +301,17 @@ mutations. Recursive-observation public projection/no-drift is current without a
 Governance is 114, and the combined program-wide public-no-drift row stays pending for `.14.8`. No public
 helper/value, descriptor/generated schema, semantic/MCP field, CLI, or README behavior moved.
 
-`inter_match_gap_capture_contract.json` is the behavior-free authority for future named regex slots and lossless
+`inter_match_gap_capture_contract.json` is the behavior-free authority for named regex slots and lossless
 prefix/interstitial/tail context. Inter-match gap-capture recurring governance is current without runtime or public admission.
 Run `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py` for the always-on
 neutral proof or `bash tools/check_inter_match_gap_capture_six_runtime.sh` for the repository-routed ordered
 governance route. The latter executes the one complete neutral row and skips all six pending runtime consumers;
 the nine-leg rollout remains 1 complete / 8 pending and the checker rejects 55 semantic/topology corruptions.
-Behavior-free Perl preflight `.2.0` freezes a metadata/live/generated/admission split without changing those
-counts. Four future private Perl accessor nodes will be synchronized as recognition `source_read` effects in
-`.2.2`, while shared calls remain 246, public Perl helper coverage remains 122, and typed-source composition stays
-pending. `.2.4` alone may promote the Perl gap row and replace its rooted skip.
+Perl `.2.1` implements authored/static metadata, and `.2.2` implements private native-live gap behavior without
+changing those rollout counts. Its four private accessor nodes are synchronized as recognition `source_read`
+effects at 137 total rows, while shared calls remain 246, public Perl helper coverage remains 122, and typed-source
+composition stays pending. `.2.3` owns emitted/loaded parity; `.2.4` alone may promote the Perl gap row and replace
+its rooted skip.
 
 No public `Position`/`Span` value, descriptor or generated schema, semantic/MCP projection, or source-authority
 elevation is claimed by these internal typed-source runtime admissions. Recognition transaction spelling and
@@ -329,12 +330,12 @@ LuaJIT + recurring + public no-drift 9/9 complete, rejects twenty-six stale mile
 and executes forty-five public-sequence mutations in memory. That projection is distinct from 58 semantic and
 recurring-topology mutations.
 
-The independent checker derives all 129 current ActionIR node kinds from the Perl contract authority and all 246
+The independent checker derives all 133 current ActionIR node kinds from the Perl contract authority and all 246
 current call names from matching Dart, Julia, and Lua inventories. The artifact assigns one base effect to each
 of those rows plus four dedicated `RECOGNITION_*` nodes under the closed nine-allowed/eleven-rejected
 lattice. It separately executes 8 positive / 17 negative token cases, six recursive fixed-point effect graphs,
 six invocation-mark cases, eight cursor-only progress cases, and fifteen portable diagnostic records, then rejects
-58 exact drift mutations. This 128-node census is distinct from the 122 public identifier-shaped Perl contracts
+58 exact drift mutations. This 133-node census is distinct from the 122 public identifier-shaped Perl contracts
 reported by `tools/check_language_capability_coverage.pl`.
 
 Canonical CI requires the tracked artifact/checker and runs the same project-data-routed command unconditionally.

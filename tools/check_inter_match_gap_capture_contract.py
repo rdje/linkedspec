@@ -835,7 +835,7 @@ def validate_public_no_overclaim(
     expected = {
         "status": "current",
         "owner": "INTER-MATCH-GAP-CAPTURE.1.2",
-        "policy": "document the executable neutral and recurring governance without claiming named regex declarations or selectors, entry_slot(), @capture_gaps, gap_* helpers, backend behavior, schema exposure, CLI exposure, or public admission",
+        "policy": "document the executable neutral, recurring governance, and private Perl native-live staging without claiming generated/loaded execution, a completed runtime rollout row, cross-backend behavior, schema exposure, CLI exposure, or public admission",
         "rollout_assertions": {
             "row_count": 9,
             "neutral_contract": {"status": "complete", "owner": "INTER-MATCH-GAP-CAPTURE.1.1"},
@@ -847,7 +847,7 @@ def validate_public_no_overclaim(
         "documents": [
             {
                 "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
-                "required_marker": "Inter-match gap-capture recurring governance is current, while every runtime and public surface remains unimplemented.",
+                "required_marker": "Inter-match gap-capture recurring governance is current, while every runtime-admission and public-surface row remains pending.",
             },
             {
                 "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",

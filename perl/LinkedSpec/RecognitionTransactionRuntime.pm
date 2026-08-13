@@ -83,6 +83,9 @@ sub enter_invocation {
   accepted => 0,
   selected_match_start => undef,
   selected_match_end => undef,
+  gap_phase => 'I',
+  gap_state => undef,
+  gap_snapshots => {},
   finished => 0,
   had_prior_marks => $had_prior_marks,
   prior_marks => $prior_marks,
@@ -97,10 +100,20 @@ sub begin {
  my ($descr, $string_ref, $info, $boundary_ref, $rule, $token_slot) = @_;
  my $guard = _current_guard($descr, $string_ref, $rule);
  _sync_to_authority($guard);
- return $guard->{authority}->checkpoint(
+ my $token = $guard->{authority}->checkpoint(
   frame => $guard->{frame},
   origin => $rule.':'.$token_slot,
- )
+ );
+ if (ref($guard->{gap_state}) eq 'HASH') {
+  $guard->{gap_snapshots}{refaddr($token)} = {
+   committed_gap_cursor => $guard->{gap_state}{committed_gap_cursor},
+   accepted_edge_count => $guard->{gap_state}{accepted_edge_count},
+   current_gap => ref($guard->{gap_state}{current_gap}) eq 'HASH'
+    ? {%{$guard->{gap_state}{current_gap}}}
+    : undef,
+  };
+ }
+ return $token
 }
 
 sub attempt_static {
@@ -314,6 +327,7 @@ sub finish_commit {
  my $guard = _current_guard($descr, $string_ref, $rule);
  _sync_to_authority($guard);
  my $payload = $guard->{authority}->commit(frame => $guard->{frame}, token => $token);
+ delete $guard->{gap_snapshots}{refaddr($token)};
  _apply_authority_state($guard);
  if (blessed($payload) && $payload->isa('JSON::PP::Boolean')) {
   return $payload ? 1 : 0;
@@ -327,6 +341,16 @@ sub finish_rollback {
  _sync_to_authority($guard);
  $guard->{authority}->rollback(frame => $guard->{frame}, token => $token);
  _apply_authority_state($guard);
+ my $snapshot = delete $guard->{gap_snapshots}{refaddr($token)};
+ if (ref($snapshot) eq 'HASH' && ref($guard->{gap_state}) eq 'HASH') {
+  $guard->{gap_state} = {
+   committed_gap_cursor => $snapshot->{committed_gap_cursor},
+   accepted_edge_count => $snapshot->{accepted_edge_count},
+   current_gap => ref($snapshot->{current_gap}) eq 'HASH'
+    ? {%{$snapshot->{current_gap}}}
+    : undef,
+  };
+ }
  return undef
 }
 

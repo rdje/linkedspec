@@ -10,6 +10,37 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-13 — INTER-MATCH-GAP-CAPTURE.2.2 — add private Perl native-live gap capture
+
+- Started from clean authored-metadata commit `912fc5ed`. The neutral checker remained green at 1/8/55, metadata
+  passed 108, and the deliberately staged live mode failed only at its exact `.2.2` placeholder before runtime
+  implementation.
+- Added private `LinkedSpec::InterMatchGapRuntime` state directly to the existing recognition invocation guard.
+  Candidate gaps install after match extraction, remain visible through `LS`/edge/target/`LE`, commit the accepted
+  post-`LE` cursor before `IT`, and expose successful tails to the existing `LX`/`EX`/`E` hooks.
+- Added detached direct/action-edge entry-slot identity; exact Unicode-scalar prefix/interstitial/tail spans and
+  text/kind reads; falsey-safe accepted edges; child-extended cursor commits; nested/recursive owner isolation;
+  typed unavailable-context/cursor-regression errors; and unchanged legacy-marker and return-channel behavior.
+- Recognition checkpoints now associate token-keyed detached snapshots of exactly `committed_gap_cursor`,
+  `accepted_edge_count`, and `current_gap` on the same guard. Commit discards and rollback restores that snapshot
+  without widening the frozen cursor/boundary/marks transaction state or adding another stack/cursor.
+- Added four private source-read ActionIR nodes and synchronized the neutral recognition artifact, independent
+  checker, policy, and all admitted backend snapshots to 137 rows / 246 calls / 58 mutations. Language coverage
+  keeps the staged names non-public, preserving 122 public Perl helpers and typed source 9/5/114.
+- Metadata now passes 110 assertions and native-live mode passes all nine behavior groups. Recognition, gap,
+  typed-source, and duplicate-slot focused cross-runtime matrices pass. Gap rollout remains 1 complete + 8
+  pending / 55 mutations plus ten dormancy locks; generated loading remains `.2.3`, Perl admission remains `.2.4`,
+  and outward facades/schemas/semantic/MCP/CLI/README surfaces remain unchanged.
+- Updated the gap contract's exact no-overclaim policy/sole-facing marker from “runtime unimplemented” to
+  “runtime-admission pending.” The first phrase became false when private native-live staging landed; the new
+  marker still rejects generated/loaded, rollout, cross-backend, schema, CLI, and public-admission overclaims
+  without changing rollout or mutation counts.
+- Rendered the 79-file / 14,672-KiB mdBook, regenerated Knowledge at 834 facts / 6,992 question keys, and passed
+  all eight doctrines. The staged sandbox run reached only the outer harness's expected nested-`sandbox-exec`
+  status 71 at representative process containment; the unchanged authorized canonical run passed six-family
+  containment, all-five-anchor relocation, CLI 66/66 twice, RAM 76%, Phase 0 1,031/1,031 in 756 seconds, the
+  exact opt-in neutral-plus-six-pending gap route, `[ci] local CI gate passed`, and exit 0.
+
 ## 2026-08-13 — INTER-MATCH-GAP-CAPTURE.2.1 — add Perl authored gap metadata
 
 - Started from clean Perl-plan commit `8f826923` and added the dormant final consumer/checker before changing the

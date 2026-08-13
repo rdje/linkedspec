@@ -29,10 +29,23 @@ sub try_scan_contract_ir_events {
   'next_bare' => \&_scan_contract_next_bare,
   'ref_field_assign' => \&_scan_contract_ref_field_assign,
   'position_tracking' => \&_scan_contract_position_tracking,
+  'entry_slot' => sub { _scan_contract_zero_arg_gap_helper('entry_slot', @_) },
+  'gap_span' => sub { _scan_contract_zero_arg_gap_helper('gap_span', @_) },
+  'gap_text' => sub { _scan_contract_zero_arg_gap_helper('gap_text', @_) },
+  'gap_kind' => sub { _scan_contract_zero_arg_gap_helper('gap_kind', @_) },
  );
  my $handler = $dispatch{$id};
  return undef unless $handler;
  return $handler->($code)
+}
+
+sub _scan_contract_zero_arg_gap_helper {
+ my ($name, $code) = @_;
+ my @events;
+ while ($code =~ /\b(?<expr>\Q$name\E\s*\(\s*\))/g) {
+  push @events, {raw => $+{expr}, args => {}};
+ }
+ return \@events
 }
 
 sub _scan_contract_assign_call_my {

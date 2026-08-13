@@ -230,7 +230,7 @@ output, authored diagnostics, exit/unbounded control, user or callable functions
 external/host work, raw code, and unknown nodes fail closed. Rule calls are classified transitively, and the
 runtime checks the same boundary before performing an effect.
 
-The shared contract now has an executable backend-neutral authority. Its independent checker covers 129 current
+The shared contract now has an executable backend-neutral authority. Its independent checker covers 133 current
 ActionIR node kinds plus four dedicated transaction kinds, all 246 current call contracts, falsey token results,
 recursive effect fixed points, invocation-frame marks, cursor-only progress, fifteen portable diagnostics, and 58
 drift mutations:
@@ -510,7 +510,7 @@ deliver a final unmatched tail after the last selected match.
 That marker-member behavior is not currently portable. Lua/LuaJIT later attach the anonymous marker
 to the preceding regex slot, while Rust, Dart, and Julia parse marker syntax without executing it in
 their native runtime paths. Explicit capture/mark helper calls are a separate governed surface. The
-future `@capture_gaps` contract must reconcile this matrix rather than silently inheriting Lua's
+portable `@capture_gaps` contract reconciles this matrix rather than silently inheriting Lua's
 positional reinterpretation. The behavior-free neutral plan now forbids mixing an anonymous legacy marker member
 with `@capture_gaps`; legacy behavior remains compatibility input, not an alias.
 
@@ -519,7 +519,8 @@ gap and rolling its boundary, not appending a mandatory result node.
 
 ADR `0045` adopts **inter-match gap capture** as the formal name and **lossless segmentation** as the
 broader model. `@capture_gaps` is the accepted neutral directive. The Perl reference now recognizes and
-statically validates it, but does not execute gap capture yet.
+statically validates it and privately executes native-live gap capture. Independently loaded generated execution,
+runtime admission, other backends, and public exposure remain pending.
 `INTER-MATCH-GAP-CAPTURE.1.0` froze its executable-neutral plan: exact prefix/interstitial/tail and empty
 spans, failure and rollback, recursion, typed source records, diagnostics, compatibility, routing, and rollout are
 specified before backend work begins. `.1.1` now makes that neutral JSON artifact and independent checker
@@ -548,9 +549,9 @@ Top::OR
 
 Horizontal whitespace around `=` is insignificant. Same-line `name=/regex/` at rule-paragraph level
 declares a stable rule-local slot rather than assigning a variable. Existing unindexed and numeric
-selectors remain compatibility forms. The Perl reference implements the declaration/selector syntax and
-directive metadata. `entry_slot()` and all live gap behavior remain unimplemented, and the other backends have
-not admitted these forms.
+selectors remain compatibility forms. The Perl reference implements the declaration/selector syntax, directive
+metadata, and private native-live `entry_slot()`/gap-accessor behavior. Independently loaded generated execution
+is not yet proven, and neither Perl nor the other backends have admitted these forms as runtime/public contract.
 
 Brackets are the selector namespace. `Document[1]` means positional compatibility, so declaration reordering
 can change its target; `Document[section]` means stable identity and must survive reordering. An implementation
@@ -565,14 +566,14 @@ The implementation order is also explicit. `INTER-MATCH-GAP-CAPTURE.1-.7` owns n
 `@capture_gaps`, lifecycle and compatibility policy, six-runtime behavior, carriers, and public admission.
 Typed-source composition consumes that completed contract afterward; it does not define a second gap language.
 
-### Executable neutral contract — Perl authored staging only
+### Executable neutral contract — Perl private native-live staging
 
 The behavior-free contract now lives at `capability_conformance/inter_match_gap_capture_contract.json`, uses id
 `linkedspec-inter-match-gap-capture-v1`, and is checked independently by
-`tools/check_inter_match_gap_capture_contract.py`. Inter-match gap-capture recurring governance is current, while every runtime and public surface remains unimplemented.
+`tools/check_inter_match_gap_capture_contract.py`. Inter-match gap-capture recurring governance is current, while every runtime-admission and public-surface row remains pending.
 The neutral-contract phase is independently recomposed and closed without changing that 1-complete/8-pending
-boundary. The Perl reference now implements authored/static metadata only; live execution and public admission
-remain pending.
+boundary. The Perl reference now implements authored/static metadata plus private native-live execution; emitted
+loading and runtime/public admission remain pending.
 The recurring driver currently executes that complete neutral row exactly once and emits six ordered pending
 route skips:
 
@@ -588,34 +589,33 @@ The neutral artifact locks 8 positive and 10 negative authored fixtures, 3 sourc
 cases, 6 compatibility rows, 9 diagnostics, 9 rollout legs, and 50 semantic mutations. The governance leaf adds
 5 storage/topology/no-overclaim mutations for 55 total without admitting a runtime.
 
-### Perl authored metadata — gap behavior still unchanged
+### Perl private native-live implementation — rollout still unchanged
 
 Perl `.2.1` implements exact named declaration/selector parsing, static validation, directive metadata, and
-generated dependency provenance. Ordinary `Rule[name]` selection executes the selected regex correctly, while
-`@capture_gaps` itself remains metadata-only. All four planned accessors still lower to explicit
-unsupported-helper sentinels. The legacy marker behavior remains separate and still produces prefix/interstitial
-pairs but no tail.
+generated dependency provenance. Ordinary `Rule[name]` selection executes the selected regex correctly. `.2.2`
+adds private native-live `@capture_gaps`, `entry_slot()`, and three gap accessors through dedicated source-read
+ActionIR nodes. The legacy marker behavior remains separate and still produces prefix/interstitial pairs but no
+automatic tail.
 
 Implementation is dependency-split:
 
 1. `.2.1` has added exact Unicode-17 named-slot parsing, static diagnostics, directive/edge metadata, generated
    dependency provenance, and a dormant final-path consumer—without live gap capture.
-2. `.2.2` attaches state to the existing recognition invocation guard, adds live lifecycle/accessor behavior, and
-   synchronizes four private source-read ActionIR nodes. It does not create another cursor or invocation stack.
+2. `.2.2` has attached state to the existing recognition invocation guard, added live lifecycle/accessor behavior,
+   and synchronized four private source-read ActionIR nodes. It creates neither another cursor nor invocation stack.
 3. `.2.3` proves emitted and independently loaded execution while retaining generated-source plan v2.
 4. `.2.4` alone registers and admits Perl, advancing the gap rollout and mutation boundary while later runtimes
    and public no-drift remain pending.
 
 Pinned identity is important here: the installed Perl reports Unicode 13, so `.2.1` generates a private
 806-range classifier from the repository's Unicode 17 ranges rather than trusting the host `XID_Continue` table.
-Gap checkpoint state will be indexed by existing recognition tokens on the same invocation guard; the established
+Gap checkpoint state is indexed by existing recognition tokens on the same invocation guard; the established
 cursor/boundary/marks transaction schema remains unchanged.
 
-The four planned accessor nodes will raise the recognition-effect census from 133 to 137 when `.2.2` lands, but
-they remain private Perl staging: the 246 shared call inventory, 122 public-helper inventory, and typed-source
-9-complete/5-pending/114-mutation contract do not move. Current truth after `.2.1` remains the pre-runtime
-133/246/58 recognition census and gap rollout 1 complete / 8 pending / 55 mutations. Ten independent dormant-
-consumer mutations protect this staging boundary without entering the neutral ledger.
+The four accessor nodes raise the recognition-effect census from 133 to 137, but remain private Perl staging: the
+246 shared call inventory, 122 public-helper inventory, and typed-source 9-complete/5-pending/114-mutation contract
+do not move. Current truth is recognition 137/246/58 and gap rollout 1 complete / 8 pending / 55 mutations. Ten
+independent dormant-consumer mutations protect this staging boundary without entering the neutral ledger.
 
 Named slot rules are exact:
 
@@ -646,17 +646,17 @@ The two named edges retain stable identity if declarations are reordered. `Docum
 positional. A numeric edge may resolve a named declaration, but that does not turn the numeric source spelling into
 stable named provenance.
 
-Future `entry_slot()` returns `undef` for a direct rule invocation. For an action-edge entry it returns a detached
-ordinary harray with `target_rule`, `regex_index`, `slot_id`, `selector_kind`, and `authored_selector`. It exposes
-identity, not a regex object or matcher authority.
+Private native-live `entry_slot()` returns `undef` for a direct rule invocation. For an action-edge entry it
+returns a detached ordinary harray with `target_rule`, `regex_index`, `slot_id`, `selector_kind`, and
+`authored_selector`. It exposes identity, not a regex object or matcher authority.
 
 `@capture_gaps` is valid only on a looping, seek-based OR/default rule with statically resolved action edges. It is
 invalid on AND/consume, blind-call, mixed-ownership, or adjacency-owned shapes. Target rules still own their
 regexes and lifecycle. The enclosing rule owns only repeated choice and gap state.
 
-One activated invocation owns an independent committed gap cursor. The planned event order is:
+One activated invocation owns an independent committed gap cursor. The native-live event order is:
 
-| Boundary | Planned gap behavior |
+| Boundary | Private native-live gap behavior |
 | --- | --- |
 | Rule entry | Initialize the committed gap cursor at the Unicode-scalar entry position. |
 | After selection, before enclosing `LS` | Create `[gap_cursor, selected_match.start)` as `prefix` or `interstitial`. |
@@ -666,7 +666,7 @@ One activated invocation owns an independent committed gap cursor. The planned e
 | Successful default-loop miss | Expose `[gap_cursor, input_end)` as `tail` to `LX`. |
 | Satisfied repetition miss / maximum | Expose the same tail to `EX` / `E`. |
 
-The future accessors are deliberately small:
+The private native-live accessors are deliberately small:
 
 - `gap_span()` → detached `{source_id, start, end, provenance}` with `provenance = "gap"`;
 - `gap_text()` → exact decoded text materialized from that span;
@@ -687,12 +687,12 @@ and the successful iteration still finalizes its gap. In an unadorned default sc
 direct whole-rule return: the candidate clears during unwind, no new boundary commits, and no tail is invented.
 Lifecycle returns remain whole-rule returns and preserve their payload.
 
-The planned fixtures cover all four `=` spacing forms, Unicode names, mixed declarations, named reorder,
-duplicate-regex identity, prefix/interstitial/tail, every empty position, child-extended exit, falsey success,
-zero-match and maximum termination, failed commit, and recursive isolation. Negative fixtures cover invalid or
-duplicate names, unknown/out-of-range/malformed selectors, duplicate/ineligible directives, anonymous-marker
-conflict, unavailable gap context, lifecycle reorder, transaction leakage, storage/routing drift, and premature
-public claims.
+The current metadata/native-live fixtures cover all four `=` spacing forms, Unicode names, mixed declarations,
+named reorder, duplicate-regex identity, prefix/interstitial/tail, every empty position, child-extended exit,
+falsey success, zero-match and maximum termination, failed commit, and recursive isolation. Negative fixtures
+cover invalid or duplicate names, unknown/out-of-range/malformed selectors, duplicate/ineligible directives,
+anonymous-marker conflict, unavailable gap context, lifecycle reorder, transaction leakage, storage/routing
+drift, and premature public claims.
 
 The rollout has nine ordered legs: neutral, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurring proof, and public
 no-drift. Runtime consumers will cover native/live execution, reconstructed state, descriptors, generated plans

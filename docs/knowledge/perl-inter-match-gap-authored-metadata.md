@@ -1,6 +1,6 @@
 ---
 id: perl-inter-match-gap-authored-metadata
-title: Perl admits named regex-slot authored identity and dormant capture-gaps metadata
+title: Perl admits named regex-slot identity and stages native-live capture-gaps behavior
 answers:
   - "how does Perl declare a named regex slot"
   - "does Perl support Rule name selectors"
@@ -11,9 +11,10 @@ answers:
   - "does capture_gaps execute in Perl"
   - "how does generated Perl preserve selector provenance"
 date: 2026-08-13
-status: confirmed; authored and static staging complete, live gap runtime pending
+status: confirmed; authored/static and private native-live staging complete, generated loading and admission pending
 tags: [perl, capture, named-slots, unicode, descriptor, generated-source, diagnostics, dormant]
 evidence: "INTER-MATCH-GAP-CAPTURE.2.1 from clean 8f826923 permanently adds named declarations, named selectors, and capture_gaps parsing to specs/spec.spec and the reference bridge. Its 108-assertion dormant Perl consumer proves metadata and ordinary named selection while live and generated gap modes remain deliberately unavailable. The neutral rollout remains 1 complete + 8 pending with 55 mutations, plus 10 independent Perl dormancy mutations."
+evidence_update_2026_08_13_live: "INTER-MATCH-GAP-CAPTURE.2.2 from clean 912fc5ed makes the private native live mode pass all nine lifecycle/accessor groups and advances recognition effects to 137/246/58. Default metadata mode now passes 110 assertions. The exact consumer remains absent from ordinary/canonical/recurring admission, independently loaded generated execution remains .2.3, and gap rollout remains 1 complete + 8 pending / 55 mutations plus the same 10 dormancy locks."
 reverify: "prove -Iperl t/inter_match_gap_capture_perl_contract.t && bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/run_python_project_data.sh tools/check_unicode_rule_label_contract.py"
 ---
 
@@ -34,13 +35,13 @@ Perl RuleIR retains ordered `regex_slots` rows and separate `resolved_slot_edges
 references and generated `dependency_slot_map` rows preserve named provenance, including self-target expansion.
 Legacy `resolved_edges` and anonymous dependency row shapes remain compatible.
 
-An eligible `@capture_gaps` directive currently produces authored/static descriptor metadata only. There is no
-gap invocation state, lifecycle integration, transaction checkpoint, accessor lowering, tail delivery, or
-generated/loaded gap execution. `entry_slot()` and all `gap_*` accessors therefore remain unsupported. The final
-consumer stays outside canonical and recurring runtime routes until the later Perl leaves implement and admit
-those behaviors.
+An eligible `@capture_gaps` directive now activates private native-live invocation state on the existing
+recognition guard. `entry_slot()` and the three `gap_*` accessors lower through dedicated source-read ActionIR
+nodes; candidate, accepted-commit, terminal-tail, rollback, and recursive isolation behavior match the neutral
+contract. Independently loaded generated execution remains `.2.3`. The final consumer stays outside ordinary,
+canonical, and recurring runtime routes until `.2.4` admits the completed Perl path.
 
-Signoff preserves the private/static boundary: eight focused Perl files pass 599 assertions, the Unicode generator
-locks all 806 ranges, and five-backend self-host passes 5x2. The canonical gate passes all eight doctrines,
-repository containment and relocation, CLI 66/66 in both option environments, RAM 65%, Phase 0 1,031/1,031 in
-755 seconds, and the opt-in neutral-plus-six-pending gap route through local-CI exit 0.
+Focused `.2.2` proof preserves the private staging boundary: default metadata passes 110 assertions, native-live
+mode passes all nine behavior groups, recognition is 137/246/58 with 122 public helpers, and gap/typed-source/
+duplicate-slot cross-runtime matrices remain green at 1/8/55, 9/5/114, and 59 mutations respectively. Canonical
+signoff and its exact rendered/Knowledge counts are recorded in the owning task rather than inherited from `.2.1`.

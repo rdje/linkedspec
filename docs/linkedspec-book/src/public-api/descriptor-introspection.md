@@ -328,9 +328,10 @@ nullable. `resolved_slot_edges` preserves each action selection as exactly `sele
 unchanged.
 
 Perl dependency references and generated `dependency_slot_map` rows likewise retain named selector/destination
-provenance; legacy anonymous rows keep their old shape. These fields support the dormant inter-match-gap consumer.
-They are not yet semantic-model, MCP, cross-backend descriptor-schema, CLI, or public capability admission, and
-`@capture_gaps` metadata does not imply live gap execution.
+provenance; legacy anonymous rows keep their old shape. These fields support private native-live inter-match-gap
+execution and the still-dormant emitted/loaded consumer phase. They are not yet semantic-model, MCP, cross-backend
+descriptor-schema, CLI, or public capability admission. Descriptor metadata alone remains evidence, not an
+independently loaded or admitted runtime route.
 
 ## `dependency_regex_map`
 

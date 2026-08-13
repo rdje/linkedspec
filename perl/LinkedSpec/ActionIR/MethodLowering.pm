@@ -61,6 +61,7 @@ sub _method_value_helper_family {
  return 'unknown' unless defined($method) && length($method);
  return 'control' if $method eq 'if' || $method eq 'switch';
  return 'rule_call' if $method eq 'call';
+ return 'inter_match_gap' if $method =~ /^(?:entry_slot|gap_span|gap_text|gap_kind)$/o;
  return 'input' if $method =~ /^input_/o || $method =~ /^cursor_/o;
  return 'entry_match' if $method =~ /^(?:entry_|match_)/o;
  return 'string' if $method =~ /^(?:trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|cat|str_|starts_with|ends_with|contains_substr|matches|coalesce|coalesce_nonempty)$/o;
@@ -1260,6 +1261,7 @@ sub _actionir_ast_known_value_call_method {
   capture_take_between_len
   mark_here mark_input_start mark_input_end mark_entry_start mark_entry_end mark_match_start mark_match_end
   mark_copy mark_capture_slice clear_mark mark_exists mark_pos mark_line mark_col
+  entry_slot gap_span gap_text gap_kind
  );
  return $method if $known{$method};
  return undef
@@ -4753,6 +4755,14 @@ my $lower_numeric_array_reducer_source_expr = sub {
    context => { callee => $callee },
   );
   return '&{$$descr{spec}{'.$callee.'}{handler}}($descr, $STRING, $minfo)';
+ }
+ if ($method_call && $method_call->{method} =~ /^(?:entry_slot|gap_span|gap_text|gap_kind)$/o) {
+  my $helper = $method_call->{method};
+  my $effective_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 0, 0);
+  return undef unless $effective_args;
+  my $rule_label = ref($deps) eq 'HASH' ? ($deps->{rule_label} // '') : '';
+  return 'LinkedSpec::InterMatchGapRuntime::'.$helper
+   .'($descr, $STRING, '._runtime_logical_string_literal($rule_label).')';
  }
  if ($method_call && $method_call->{method} eq 'input_slice') {
   my $input_slice_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 2);

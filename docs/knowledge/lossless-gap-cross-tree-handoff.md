@@ -15,17 +15,17 @@ answers:
   - "why does an action edge fluent chain keep its first dot"
   - "what happens after FUTURE-PARITY-BACKLOG 14.5.0"
 date: 2026-08-13
-status: cross-tree handoff complete; Perl authored/static leaf complete; live implementation pending
+status: cross-tree handoff complete; Perl authored/static and native-live leaves complete; carrier/admission pending
 tags: [architecture, task-tree, gap-capture, named-slots, selectors, typed-source, handoff]
-evidence: "Clean handoff d26e4d4e and the committed ADR/duplicate-slot/typed-source authorities assign implementation to INTER-MATCH-GAP-CAPTURE. Perl .2.1 from clean 8f826923 now admits named declarations, named selectors, and capture_gaps static metadata while leaving gap runtime, public admission, and typed-source composition pending. The neutral rollout remains 1 complete + 8 pending and 55 mutations, plus 10 independent Perl dormancy mutations."
+evidence: "Clean handoff d26e4d4e and the committed ADR/duplicate-slot/typed-source authorities assign implementation to INTER-MATCH-GAP-CAPTURE. Perl .2.1 from clean 8f826923 admits named declarations, named selectors, and capture_gaps static metadata; .2.2 from clean 912fc5ed adds only private native-live state/accessors and synchronizes recognition to 137/246/58. Generated loading, runtime admission, and typed-source composition remain pending. Gap rollout remains 1 complete + 8 pending and 55 mutations, plus 10 independent Perl dormancy mutations."
 reverify: "bash tools/check_duplicate_regex_slot_identity_five_backend.sh && bash tools/check_typed_source_location_six_runtime.sh && perl tools/read_task_tree.pl --tree FUTURE-PARITY-BACKLOG --id FUTURE-PARITY-BACKLOG.14.5.0 && perl tools/read_task_tree.pl --tree INTER-MATCH-GAP-CAPTURE --id INTER-MATCH-GAP-CAPTURE.1"
 ---
 
 # Lossless gap cross-tree handoff
 
 Current Perl LinkedSpec supports positional action-edge targets such as `Rule[1]`, named regex declarations,
-`Rule[name]`, and static `@capture_gaps` metadata. It does not yet execute gap state or expose the accessors, and
-the forms are not portable/publicly admitted. The historical Perl mechanism
+`Rule[name]`, and private native-live `@capture_gaps` state/accessors. It does not yet execute from an
+independently loaded generated carrier, and the forms are not portable/publicly admitted. The historical Perl mechanism
 proves the intended automatic prefix/interstitial behavior, while the current marker implementations prove that
 legacy scope and timing cannot simply be promoted into a portable contract.
 

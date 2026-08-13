@@ -1,7 +1,7 @@
 # 0045 - Inter-match gap capture preserves action-edge target ownership
 
 - Date: 2026-07-17
-- Status: accepted; executable-neutral contract current; runtime implementation pending
+- Status: accepted; executable-neutral and private Perl native-live implementation current; carrier/admission pending
 - Tags: architecture, grammar, capture, segmentation, or-rule, action-edge, source-span, portability, parity
 
 ## Context
@@ -314,7 +314,7 @@ The exact Perl consumer is introduced dormant with metadata/live/generated phase
 mutations protect the staged consumer and prevent canonical, recurring, or facade admission; they are deliberately
 separate from the neutral artifact's 55 mutations and 1-complete/8-pending rollout.
 
-`.2.2` owns the live state. `InterMatchGapRuntime` attaches the five-field state to the existing
+`.2.2` owns the live state. `InterMatchGapRuntime` attaches the three-member state to the existing
 `RecognitionTransactionRuntime::InvocationGuard`; it creates neither another stack nor another cursor. Candidate
 installation is after selected-match extraction and before enclosing `LS`; accepted commit is after authored
 `LE` and before `IT`; successful tails are installed before default `LX`, satisfied-repeat `EX`, and maximum
@@ -368,6 +368,29 @@ independent dormancy mutations prevent premature canonical, recurring, or facade
 rollout stays 1 complete + 8 pending with 55 semantic/governance mutations; recognition remains 133/246/58,
 public helper coverage remains 122, typed source remains 9/5/114, and all outward schema/MCP/CLI/README surfaces
 remain unchanged.
+
+## 2026-08-13 Perl native-live amendment
+
+`INTER-MATCH-GAP-CAPTURE.2.2` implements the already-ratified live half from clean `912fc5ed`. Private
+`InterMatchGapRuntime` attaches candidate state to the active recognition invocation guard and uses that guard's
+monotonic identity and token ownership. It adds neither another invocation stack nor another cursor, and `$IPOS`
+retains its compatibility capture-boundary meaning.
+
+Matcher selection installs exact prefix/interstitial state before `LS`; accepted completion commits the
+post-`LE` cursor and clears before `IT`; successful default/repetition/max terminals install tail before
+`LX`/`EX`/`E`. Child-extended cursors, falsey payloads, empty spans, direct/nested entry, recursion isolation,
+unwind, and legacy markers retain their frozen ownership. Existing recognition checkpoints detach three gap
+members and restore them together on rollback. Four private source-read ActionIR nodes advance the derived
+recognition census to 137/246/58 while language coverage remains 122 public helpers.
+
+The dormant consumer's default metadata mode passes 110 assertions and its private live mode passes all nine
+behavior groups. This amendment does not import the private runtime into independently loaded source, register the
+consumer, promote `perl_runtime`, change gap 1/8/55, or widen any facade/schema/semantic/MCP/CLI/README/typed-source
+surface. Those boundaries remain `.2.3`, `.2.4`, and final cross-backend closeout.
+
+Signoff passes all eight doctrines, repository containment and relocation, CLI 66/66 twice, RAM 76%, Phase 0
+1,031/1,031 in 756 seconds, and the exact opt-in neutral-plus-six-pending route. The unchanged authorized run
+resolved only the outer harness's nested-`sandbox-exec` denial and exited 0 at the local-CI pass marker.
 
 ## Consequences
 

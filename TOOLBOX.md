@@ -1066,8 +1066,8 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 
 ### 4.9.1.4 Perl gap implementation preflight
 
-- **WHAT:** the behavior-free `.2.0` map from current Perl grammar/descriptor/runtime source to the four owned
-  implementation leaves. It records exact current absence, legacy output, generated lifecycle order, dormancy,
+- **WHAT:** the behavior-free `.2.0` map from the audited Perl grammar/descriptor/runtime baseline to four owned
+  implementation leaves. It records exact baseline absence, legacy output, generated lifecycle order, dormancy,
   effect-ledger coupling, carrier seams, and admission boundaries in
   [[inter-match-gap-perl-implementation-plan]].
 - **WHEN:** implementing or reviewing `.2.1-.2.4`, especially before changing bootstrap grammar, ActionIR helper
@@ -1076,7 +1076,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   rule execution metadata; use `call_spec_handler_subst` for helper lowering; dump parser source to locate match
   extraction/`LS`/action/`LE`/`IT`; and use the escaped legacy marker probe for prefix/interstitial truth. Host
   Perl Unicode properties are not the slot-name oracle: generate from the pinned Unicode-17 range artifact.
-- **BOUNDARY:** `.2.1` is metadata-only and keeps the exact consumer dormant; `.2.2` attaches state to the existing
+- **BOUNDARY:** `.2.1` is metadata-only and keeps the exact consumer dormant; `.2.2` now attaches state to the existing
   recognition invocation guard and synchronizes four private source-read nodes; `.2.3` owns emitted/loaded parity;
   `.2.4` alone registers and promotes Perl. No second stack, `$IPOS` overload, plan-v3 change, public-helper
   admission, typed-source promotion, or outward facade/schema/CLI/README surface is permitted.
@@ -1094,7 +1094,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py
   ```
 
-- **OUTPUT:** 133 ActionIR rows (129 live plus four dedicated), 246 live call rows, token 8 positive / 17 negative,
+- **OUTPUT:** 137 ActionIR rows (133 live plus four dedicated), 246 live call rows, token 8 positive / 17 negative,
   six fixed-point graphs, six mark cases, eight progress cases, fifteen diagnostics, and 58 rejected mutations;
   rollout is 9/9 complete. A separate public-sequence projection locks three book
   pages, 26 forbidden claims, and 45 mutations; the guide guard locks one document, 14 stale claims, and 18

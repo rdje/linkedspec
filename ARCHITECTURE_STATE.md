@@ -51,8 +51,8 @@ authorized run is authoritative.
 
 Behavior-free `FUTURE-PARITY-BACKLOG.14.5.0` audits the committed named-slot, duplicate-slot, typed-source,
 historical-gap, and marker-divergence authorities without changing grammar, compiler, runtime, carrier, public
-surface, rollout, or current claims. Current descriptors resolve numeric `Rule[N]` targets; named declarations,
-`Rule[name]`, and `@capture_gaps` remain absent. The exact historical Perl probe returns prefix/interstitial
+surface, rollout, or current claims. At that audit boundary descriptors resolved numeric `Rule[N]` targets while
+named declarations, `Rule[name]`, and `@capture_gaps` remained absent. The exact historical Perl probe returns prefix/interstitial
 gap-plus-lifecycle pairs and no automatic tail, while current marker execution remains rule-level in Perl,
 preceding-slot-local in Lua, and absent from native Rust/Dart/Julia execution.
 
@@ -107,12 +107,24 @@ Pinned Unicode 17 slot identity is generated into a private Perl classifier inst
 Parsed rule metadata carries authored slot order, directive evidence, and exact selector provenance through live
 dependency refs and generated dependency-slot rows without changing generated-plan v2.
 
-Live implementation `.2.2` will attach gap state to the existing recognition invocation guard. It adds no cursor,
+Authored/static `.2.1` landed at `912fc5ed`; permanent and reference grammars now agree on named declarations,
+named/numeric/unindexed selectors, and eligible `@capture_gaps` metadata with pinned Unicode-17 identity and exact
+five-field edge provenance.
+
+Live implementation `.2.2` attaches gap state to the existing recognition invocation guard. It adds no cursor,
 authority, or invocation stack: candidate state is installed after match extraction, committed after `LE`, cleared
 before `IT`, and exposed as tail before existing `LX`/`EX`/`E` terminal hooks. Existing checkpoint tokens index gap
 snapshots on the same guard while the frozen cursor/boundary/marks transaction schema remains unchanged. Four
-private source-read ActionIR nodes require an owned recognition-effect census change from 133 to 137, but shared
+private source-read ActionIR nodes advance the owned recognition-effect census from 133 to 137, but shared
 calls remain 246, public helpers remain 122, typed source remains 9/5/114, and no outward surface is admitted.
+Nine native-live contract groups prove exact Unicode/empty gaps, child-extended commits, recursive isolation,
+rollback, terminal tails, typed contexts, detached slots, falsey values, and legacy compatibility. Independently
+loaded generated execution remains `.2.3`, and `.2.4` alone admits Perl.
+
+Definitive `.2.2` signoff passes the rendered 79-file / 14,672-KiB mdBook, Knowledge Map 834/6,992, all eight
+doctrines, six-family repository containment, all-five-anchor relocation, CLI 66/66 in both option environments,
+RAM 76%, Phase 0 1,031/1,031 in 756 seconds, the exact opt-in neutral-plus-six-pending route, and local-CI exit 0.
+The outer sandbox's first status-71 denial was solely nested `sandbox-exec`; the unchanged authorized run passed.
 
 The dormant exact Perl consumer advances metadata, live, then emitted/loaded phases under `.2.1-.2.3`; `.2.4`
 alone registers the full path, promotes only Perl, and advances the gap checker from 55 to 56. This plan is
@@ -128,10 +140,10 @@ The current executable-neutral authority is
 `linkedspec-inter-match-gap-capture-v1`, with independent
 `tools/check_inter_match_gap_capture_contract.py`. Named slots reuse exact pinned Unicode 17 `XID_Continue`
 identity, reserve all-digit ASCII names for positional selectors, permit mixed named/anonymous declaration order,
-and retain selector kind/authored selector/target/index/nullable stable id. `entry_slot()` is planned as a detached
+and retain selector kind/authored selector/target/index/nullable stable id. `entry_slot()` is a detached
 ordinary harray, not a matcher object or new value kind.
 
-The future directive is valid only on seek-based looping OR/default action ownership. It conflicts with anonymous
+The private-live directive is valid only on seek-based looping OR/default action ownership. It conflicts with anonymous
 legacy marker members rather than aliasing them. One isolated invocation-local cursor exposes the exact typed
 prefix/interstitial span after selection and before `LS`, keeps it current through edge/target/`LE`, and commits
 only the accepted post-`LE` cursor before `IT`. Successful terminal paths expose the input-end tail to the existing

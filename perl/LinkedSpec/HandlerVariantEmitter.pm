@@ -110,6 +110,7 @@ sub _build_default_handler_variant {
         lscode     => $args{lscode}     // '',
         lecode     => $args{lecode}     // '',
         acodes_ref => $acodes_ref,
+        capture_gaps => $args{capture_gaps} ? 1 : 0,
     };
 }
 
@@ -355,6 +356,7 @@ sub _build_rep_acode_variant {
         acodes_ref => $acodes_ref,
         rep_min    => $min,
         rep_max    => $max,
+        capture_gaps => $args{capture_gaps} ? 1 : 0,
     };
 }
 
@@ -681,7 +683,12 @@ sub _emit_default_handler {
     my $handler_kind = $ir->{kind};
     my $trace_enabled = _trace_branches_enabled($ir);
     my $match_expr = _linkedre_or_expr(%$ir, label => $label);
-    my $lxcode     = _recognition_miss_statement($label) . ($ir->{lxcode} || 'return undef');
+    my $gap_tail = $ir->{capture_gaps}
+        ? 'LinkedSpec::InterMatchGapRuntime::install_tail($descr, $STRING, '
+            . _quote_perl_string($label) . ', "LX"); '
+        : '';
+    my $lxcode     = _recognition_miss_statement($label) . $gap_tail
+        . ($ir->{lxcode} || 'return undef');
     my $lscode     = $ir->{lscode} || '';
     my $lecode     = $ir->{lecode} || '';
     my $acodes     = _build_acodes_dispatch_block(
@@ -691,6 +698,26 @@ sub _emit_default_handler {
         trace_enabled => $trace_enabled,
     );
     my $lmatch     = _build_lmatch_extraction(label => $label, handler_kind => $handler_kind);
+    my $gap_candidate = $ir->{capture_gaps}
+        ? 'LinkedSpec::InterMatchGapRuntime::install_candidate($descr, $STRING, $minfo, '
+            . _quote_perl_string($label) . ');'
+        : '';
+    my $gap_ls = $ir->{capture_gaps}
+        ? 'LinkedSpec::InterMatchGapRuntime::set_phase($descr, $STRING, '
+            . _quote_perl_string($label) . ', "LS");'
+        : '';
+    my $gap_edge = $ir->{capture_gaps}
+        ? 'LinkedSpec::InterMatchGapRuntime::set_phase($descr, $STRING, '
+            . _quote_perl_string($label) . ', "edge");'
+        : '';
+    my $gap_le = $ir->{capture_gaps}
+        ? 'LinkedSpec::InterMatchGapRuntime::set_phase($descr, $STRING, '
+            . _quote_perl_string($label) . ', "LE");'
+        : '';
+    my $gap_commit = $ir->{capture_gaps}
+        ? 'LinkedSpec::InterMatchGapRuntime::commit_candidate($descr, $STRING, '
+            . _quote_perl_string($label) . ');'
+        : '';
     my $match_trace = _trace_branch_statement(
         enabled => $trace_enabled,
         indent => '  ',
@@ -735,11 +762,21 @@ sub _emit_default_handler {
 ' . $slot_trace . '
 ' . $lmatch . '
 
+  ' . $gap_candidate . '
+
+  ' . $gap_ls . '
+
   ' . $lscode . '
+
+  ' . $gap_edge . '
 
   ' . $acodes . '
 
+  ' . $gap_le . '
+
   ' . $lecode . '
+
+  ' . $gap_commit . '
 
  }';
 }
@@ -1648,6 +1685,38 @@ sub _emit_rep_acode_handler {
     my $excode     = $ir->{excode} || 'return \@' . $label . '_collect';
     my $ecode      = $ir->{ecode}  || 'return \@' . $label . '_collect';
     my $itcode     = $ir->{itcode} || 'push @' . $label . '_collect, $' . $label . ';';
+    my $gap_ex = $ir->{capture_gaps}
+        ? 'LinkedSpec::InterMatchGapRuntime::install_tail($descr, $STRING, '
+            . _quote_perl_string($label) . ', "EX");'
+        : '';
+    my $gap_e = $ir->{capture_gaps}
+        ? 'LinkedSpec::InterMatchGapRuntime::install_tail($descr, $STRING, '
+            . _quote_perl_string($label) . ', "E");'
+        : '';
+    my $gap_candidate = $ir->{capture_gaps}
+        ? 'LinkedSpec::InterMatchGapRuntime::install_candidate($descr, $STRING, $minfo, '
+            . _quote_perl_string($label) . ');'
+        : '';
+    my $gap_ls = $ir->{capture_gaps}
+        ? 'LinkedSpec::InterMatchGapRuntime::set_phase($descr, $STRING, '
+            . _quote_perl_string($label) . ', "LS");'
+        : '';
+    my $gap_edge = $ir->{capture_gaps}
+        ? 'LinkedSpec::InterMatchGapRuntime::set_phase($descr, $STRING, '
+            . _quote_perl_string($label) . ', "edge");'
+        : '';
+    my $gap_le = $ir->{capture_gaps}
+        ? 'LinkedSpec::InterMatchGapRuntime::set_phase($descr, $STRING, '
+            . _quote_perl_string($label) . ', "LE");'
+        : '';
+    my $gap_commit = $ir->{capture_gaps}
+        ? 'LinkedSpec::InterMatchGapRuntime::commit_candidate($descr, $STRING, '
+            . _quote_perl_string($label) . ');'
+        : '';
+    my $gap_it = $ir->{capture_gaps}
+        ? 'LinkedSpec::InterMatchGapRuntime::set_phase($descr, $STRING, '
+            . _quote_perl_string($label) . ', "IT");'
+        : '';
 
     # REP: replace return with assignment so loop collects
     my $acodes_ref = $ir->{acodes_ref};
@@ -1757,6 +1826,7 @@ sub _emit_rep_acode_handler {
     my $minfo = ' . $match_expr . ';
     unless(' . $match_condition . ') {
      if (' . $miss_min_condition . ') {
+      ' . $gap_ex . '
       ' . $excode . '
      } else {
       return undef
@@ -1765,19 +1835,33 @@ sub _emit_rep_acode_handler {
 ' . $slot_trace . '
 ' . $lmatch . '
 
+    ' . $gap_candidate . '
+
+    ' . $gap_ls . '
+
     ' . $lscode . '
+
+    ' . $gap_edge . '
 
     ' . $acodes . '
 
+    ' . $gap_le . '
+
     ' . $lecode . '
+
+    ' . $gap_commit . '
 ' . $iteration_success_trace . '
 
     ++$ccount;
+
+    ' . $gap_it . '
 
     ' . $itcode . '
 
     last unless ' . $max_continue_condition . '
    }
+
+   ' . $gap_e . '
 
    ' . $ecode . '
  ';
