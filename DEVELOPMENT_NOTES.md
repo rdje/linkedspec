@@ -10,6 +10,35 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-13 (`INTER-MATCH-GAP-CAPTURE.2.0` — Perl dependency freeze): activation base is clean `db299789`.
+  This leaf is behavior-free; documentation may freeze exact mechanisms, but grammar/runtime bytes and the
+  1-complete/8-pending, 55-mutation gap authority must remain unchanged.
+- Use Toolbox evidence before implementation. Current named declaration/selector/directive forms reject; all four
+  accessors lower to unsupported sentinels. The legacy runtime returns three prefix/interstitial pairs and no tail,
+  and generated source fixes the actual hook order needed by the new lifecycle snippets.
+- `.2.1` changes `specs/spec.spec` first and the hardcoded bootstrap bridge in lockstep. Slot identity must use a
+  generated Unicode-17 classifier; host Perl exposes Unicode 13 and is not an acceptable identity authority.
+- Stage the exact final Perl consumer under metadata/live/generated modes. Ten checker-local mutations lock its
+  dormancy and rooted commands separately from the neutral JSON's 55 mutations. Do not execute or register the
+  pending consumer through canonical CI or the recurring driver before `.2.4`.
+- `.2.2` owns one private runtime attached to `RecognitionTransactionRuntime::InvocationGuard`. Do not create a
+  second stack, overload `$IPOS`, or widen `RecognitionTransaction.pm`'s cursor/boundary/marks state. Token-keyed
+  snapshots on the same guard compose rollback.
+- Candidate installation is after match extraction and before `LS`; accepted commit is after authored `LE` and
+  before `IT`; successful tail is before default `LX`, satisfied-repeat `EX`, or maximum `E`. Direct default-action
+  return and failed minimum synthesize neither commit nor tail.
+- Four private source-read ActionIR nodes necessarily advance recognition effect rows 133→137. Update the neutral
+  recognition artifact/checker, policy, all admitted consumer snapshots, current Knowledge/book/guide projections,
+  and keep 246 calls/58 mutations/9-of-9 rollout. Classify the four names non-public so language coverage stays
+  122; do not add them to the typed-source 92+7 helper map before `.7`/`.14.5.1`.
+- `.2.3` owns generated import/error propagation and independently loaded parity without plan-v2 change. `.2.4`
+  alone removes dormancy, runs the full path once canonically and once in the rooted driver, promotes Perl, and
+  adds only the premature-Rust mutation for 56 total.
+- Final behavior-free signoff preserves gap 1/8/55, recognition 133/246/58, public helpers 122, and typed source
+  9/5/114. The rendered book is 79 files / 14,652 KiB; Knowledge is 833/6,984; all eight doctrines, containment,
+  relocation, CLI 66/66 twice, RAM 66%, Phase 0 1,031/1,031 in 745 seconds, the opt-in pending route, and exact
+  local-CI exit 0 pass. Atomic 222 must land and clear cleanly before `.2.1` activation.
+
 - 2026-08-13 (`INTER-MATCH-GAP-CAPTURE.1.3` — unchanged neutral closeout): activation base is clean `0490522b`.
   A closeout leaf must consume only committed authority: do not edit the JSON/checker/driver to make recomposition
   pass, and stop for a separately owned correction if their bytes, routes, public guards, or results disagree.

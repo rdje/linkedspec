@@ -586,6 +586,34 @@ The neutral artifact locks 8 positive and 10 negative authored fixtures, 3 sourc
 cases, 6 compatibility rows, 9 diagnostics, 9 rollout legs, and 50 semantic mutations. The governance leaf adds
 5 storage/topology/no-overclaim mutations for 55 total without admitting a runtime.
 
+### Perl implementation preflight — behavior still unchanged
+
+Perl preflight `.2.0` has now mapped the exact implementation seams without enabling syntax or execution.
+Descriptor probes confirm current `Rule`/`Rule[N]` resolution and the eligible OR/default metadata. The current
+frontend still rejects named declarations, named selectors, and `@capture_gaps`; all four planned accessors still
+lower to explicit unsupported-helper sentinels. The corrected legacy probe produces prefix/interstitial pairs but
+no tail, and generated source confirms selection → match extraction → `LS` → action/target → `LE` → `IT` order.
+
+Implementation is dependency-split:
+
+1. `.2.1` adds exact Unicode-17 named-slot parsing, static diagnostics, directive/edge metadata, generated
+   dependency provenance, and a dormant final-path consumer—without live gap capture.
+2. `.2.2` attaches state to the existing recognition invocation guard, adds live lifecycle/accessor behavior, and
+   synchronizes four private source-read ActionIR nodes. It does not create another cursor or invocation stack.
+3. `.2.3` proves emitted and independently loaded execution while retaining generated-source plan v2.
+4. `.2.4` alone registers and admits Perl, advancing the gap rollout and mutation boundary while later runtimes
+   and public no-drift remain pending.
+
+Pinned identity is important here: the installed Perl reports Unicode 13, so the implementation will generate a
+private classifier from the repository's Unicode 17 ranges rather than trusting the host `XID_Continue` table.
+Gap checkpoint state will be indexed by existing recognition tokens on the same invocation guard; the established
+cursor/boundary/marks transaction schema remains unchanged.
+
+The four planned accessor nodes will raise the recognition-effect census from 133 to 137 when `.2.2` lands, but
+they remain private Perl staging: the 246 shared call inventory, 122 public-helper inventory, and typed-source
+9-complete/5-pending/114-mutation contract do not move. Current truth in `.2.0` remains the pre-implementation
+133/246/58 recognition census and gap rollout 1 complete / 8 pending / 55 mutations.
+
 Named slot rules are exact:
 
 - A name uses the same pinned Unicode 17.0.0 `XID_Continue` scalar class as a rule label. Identity is exact,

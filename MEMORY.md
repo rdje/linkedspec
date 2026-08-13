@@ -4,13 +4,16 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `0490522b` — clean recurring-neutral governance base for intended atomic 221/300; no push.
-- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.1.3 - close unchanged neutral authority`, atomic 221/300.
-- active_work_unit: none after intended `.1.3` landing; Perl implementation `.2` awaits clean task-tree activation.
-- next_action: activate `.2` task-tree-first and implement the Perl reference without overloading `$IPOS`.
-- in_flight_uncommitted: none after intended landing; neutral remains 1 complete + 8 pending / 55 mutations.
-- blockers: none. Recomposition, exact skips/absence, storage/outside-CWD, duplicate 59, typed 9/5/114, book
-  79/14,632 KiB, Knowledge 832/6,967, all doctrines, and canonical Phase 0 1,031/1,031 in 725 seconds pass.
+- activation_commit: `db299789` — clean neutral-closeout base for intended atomic 222/300; no push.
+- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.2.0 - freeze Perl implementation dependencies`, intended
+  atomic 222/300 from activation commit `db299789`; no push.
+- active_work_unit: none after `.2.0` clean landing; `.2.1` is not active until task-tree-first activation.
+- next_action: verify commit/brief/clean, activate `.2.1`, then implement authored parsing/static metadata plus
+  dormant final-path RED without live gap execution.
+- in_flight_uncommitted: none in the intended post-landing handoff.
+- blockers: none. Toolbox probes freeze current named/directive/accessor absence, exact legacy prefix/interstitial
+  without tail, lifecycle order, Unicode-17 classifier need, same-guard state design, 137/246/58 effect boundary,
+  122 public-helper boundary, typed 9/5/114 no-drift, and `.2.1-.2.4` ownership.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes. Eleven topology mutations advanced governance to 53, four lineage mutations to 57, and executable
@@ -20,21 +23,9 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   transactions are current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; recurrence and public no-drift are current at 9/9, closing transaction parent `.14.3` without runtime or public-API movement.
 - recurring_rollout_fact: the original contract combines recurring and public no-drift in one `.14.8` row. Detailed
   plan/history assign `.14.2.6` driver/topology only; do not add a fifteenth row or promote `.14.8` prematurely.
-- rust_audit_fact: all 92 canonical names and seven aliases project through one per-input immutable authority while
-  retaining byte registers and exact external values across native/reconstructed/generated-plan carriers; the
-  exact ordinary four-test consumer is canonically registered and `rust_runtime` is complete.
-- dart_audit_fact: one immutable authority/value core and all 92+7 projections pass the admitted ordinary/canonical
-  4/4 consumer across native/reconstructed/generated/emitted carriers while retaining UTF-16 registers and results.
-- julia_audit_fact: private non-exported `SourceLocation` owns copied text and immutable scalar/code-unit/coordinate
-  tables plus detached values/errors; all 92+7 helpers route through one per-context authority while retaining
-  native code-unit registers/results. Private `RecognitionTransaction` integrates four nodes and effect/progress/
-  runtime/carriers at current 207/207 metadata proof and is ordinarily/canonically admitted without an export; typed source 127 remains current.
-- lua_audit_fact: each runtime input owns one copied private source authority; all exact 92+7 helper routes construct
-  typed positions/spans for validation, coordinates, slicing, materialization, marks, capture boundaries, and cursor
-  control while retaining zero-based UTF-8-byte registers and results. One shared 240-assertion consumer now runs
-  once per ABI ordinarily/canonically. Private transactions pass authority 187/187 and current admission 246/246 per ABI
-  across four nodes, effect/progress, and all carriers; recursive observation adds one dedicated private node and
-  43 assertions per ABI across four carriers while reusing that authority; the modules remain unexported.
+- backend_audit_fact: Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT typed-source authorities and private transactions are
+  admitted without facade exports; exact carrier/register/ABI facts live in their Knowledge cards. Current transaction
+  proofs are Perl 51/51, Rust 12/12, Dart 10/10, Julia 207/207, and Lua 246/246 per ABI; Lua authority is 187/187.
 - current_storage_contract: ADR `0053` keeps all project data on the repository filesystem; use routed wrappers, never OS temp/home caches.
 - current_path_contract: ADR `0052` and `REPO-ROOT-PATHS` require durable root-relative paths and runtime-derived
   absolute roots; moved/outside-CWD execution is canonical.
@@ -46,15 +37,12 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - documentation_debt_owner: ADR `0066` composition-closes all stores. `.1` landed four exact live segments/query/doctrine; `.2` preserves 511 task IDs across seven semantic parts plus history, strict lookup/update,
   26/26 mutations, and eleven-consumer transfer. `.3` adds eleven/six exact change/note segments, bounded roots,
   recoverable rollover and both debt retirements; `.4` recomposes every committed owner unchanged.
-- current_transaction_contract: syntax is exact `recognition_checkpoint`,
-  `recognize_once(token, call(Rule))`, `recognition_commit`, and `recognition_rollback`; match boolean and staged
-  payload are separate. Tokens are linear; effects are closed 9 allowed/11 rejected; marks are invocation-framed;
-  v1 progress is cursor-only. Perl 51/51, Rust 12/12, Dart 10/10, Julia 207/207, and Lua 246/246 per ABI are admitted.
+- current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
+  separate, linear tokens, 9 allowed/11 rejected effects, invocation-framed marks, and cursor-only v1 progress.
   Exact recurrence/public composition is current at rollout 9/9 and 58 mutations; public 3/26/45; guide 1/14/18.
-  Dart retains four private dedicated nodes, recursive effect/progress policy, and authority-backed native/
-  reconstructed/generated-plan/emitted execution without facade exports. Julia has the same four private nodes,
-  policy, and authority-backed carriers at 207/207; exact ordinary/canonical proof is current while the API stays private.
-  Lua has one shared Lua-5.1 authority at 187/187 and admitted ActionIR/effect/progress/runtime/carriers at 246/246
-  per ABI; ordinary/canonical proof runs once per ABI while facade privacy remains unchanged.
-- current_future_direction: `INTER-MATCH-GAP-CAPTURE.1` closes neutral authority at unchanged 1 complete + 8 pending / 55 mutations while every named-slot/directive/accessor/runtime surface remains absent. Perl `.2` is next; `.14.5.1` waits for `.7`. Brackets select; dot fluently binds. Closed repeated-action next owner remains `FUTURE-PARITY-BACKLOG.10.1`.
-- latest_bootstrap_read: 2026-08-13 — complete roadmap/codebase/mdBook and continuity/tooling review; pivot guard: commit/clear/clean atomic 221 before activating `.2`; push lock is 300.
+- current_future_direction: `INTER-MATCH-GAP-CAPTURE.1` is closed at 1/8/55. Perl preflight `.2.0` freezes
+  `.2.1` metadata, `.2.2` live same-guard state/accessors, `.2.3` loaded parity, and `.2.4` admission. Brackets
+  select; dot fluently binds; `.14.5.1` waits for `.7`. Closed repeated-action next owner remains
+  `FUTURE-PARITY-BACKLOG.10.1`.
+- latest_bootstrap_read: 2026-08-13 — complete roadmap/codebase/mdBook and continuity/tooling review; `.2.0`
+  canonical signoff is green; commit/clear/clean atomic 222 precedes `.2.1`; push lock is 300.

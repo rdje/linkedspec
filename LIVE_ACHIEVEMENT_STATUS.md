@@ -2,24 +2,29 @@
 
 ## Current Activity
 
-- `INTER-MATCH-GAP-CAPTURE.1.3` independently recomposes the unchanged neutral authority from clean `0490522b`
-  and lands as atomic 221/300 in this commit; no push.
-- Exact 1/8/55 semantics, six pending skips, storage, public absence, duplicate-slot 59, and typed-source 9/5/114
-  pass while the governed implementation/API bytes remain identical to the activation commit.
-- Rendered book 79/14,632 KiB, Knowledge 832/6,967, all eight doctrines, containment/relocation, CLI 66x2, RAM
-  61%, Phase 0 1,031/1,031 in 725 seconds, exact opt-in routing, and local-CI exit 0 close parent `.1` without
-  behavior or rollout movement; Perl reference implementation `.2` is next after commit/brief/clean proof.
+- `INTER-MATCH-GAP-CAPTURE.2.0` is behavior-free and signoff-complete from clean `db299789` for intended atomic
+  222/300; no push.
+- Toolbox-led preflight reproduces current numeric descriptor identity, named/directive/accessor absence, legacy
+  prefix/interstitial behavior without tail, and exact generated lifecycle order before source inspection.
+- `.2.1-.2.4` now have exact grammar/Unicode/static, same-guard runtime/effect-ledger, emitted/loaded, dormancy,
+  mutation, routing, and admission ownership. Current truth remains gap 1/8/55, recognition 133/246/58, public
+  helper coverage 122, and typed source 9/5/114 with no behavior or outward-surface movement.
+- Canonical proof passes containment, relocation, CLI 66/66 twice, RAM 66%, Phase 0 1,031/1,031 in 745 seconds,
+  the exact opt-in neutral-plus-six-pending route, and final local-CI exit 0.
 
 ## Latest Completed Slice
 
-- `.1.3` is the latest completed slice and lands through the current atomic-221 commit.
+- `.2.0` is the latest completed slice and is ready to land as atomic 222/300 from `db299789`.
 
 ## Next Action
 
-- From the clean atomic-221 boundary, activate Perl reference implementation `.2` task-tree-first.
+- Commit/clear/clean `.2.0` as atomic 222, then activate `.2.1` and land authored parsing/static metadata plus the
+  dormant exact Perl consumer without live gap execution.
 
 ## Recent Completions
 
+- `2026-08-13` — `.2.0` completed the behavior-free Perl implementation freeze and canonical signoff for atomic 222/300.
+- `2026-08-13` — `db299789` landed unchanged neutral closeout `.1.3` as atomic 221/300.
 - `2026-08-13` — `.1.3` independently recomposed and closed the unchanged neutral program at 1/8 rollout and 55 mutations.
 - `2026-08-13` — `0490522b` landed recurring-neutral governance `.1.2` as atomic 220/300.
 - `2026-08-13` — `.1.2` completed recurring-neutral routing/no-overclaim governance and canonical signoff at 1/8 rollout and 55 mutations.
@@ -33,9 +38,6 @@
 - `2026-08-12` — `eb8d052c` landed recursive-observation recurrence `.14.4.7` as atomic 215/300.
 - `2026-08-12` — `.14.4.7` completed recursive-observation recurrence and canonical signoff for atomic 215/300.
 - `2026-08-12` — `4666ae9c` landed private Julia recursive-observation admission `.14.4.5` as atomic 213/300.
-- `2026-08-12` — `.14.4.5` completed private Julia recursive-observation admission and canonical signoff for atomic 213/300.
-- `2026-08-12` — `b1895a05` landed private Dart recursive-observation admission `.14.4.4` as atomic 212/300.
-- `2026-08-12` — `.14.4.4` completed private Dart recursive-observation admission as atomic 212/300.
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source

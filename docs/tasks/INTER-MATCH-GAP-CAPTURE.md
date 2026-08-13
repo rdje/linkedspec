@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `INTER-MATCH-GAP-CAPTURE`
-- Status: `active` / neutral parent `.1` signoff-complete; Perl `.2` next after atomic 221 lands cleanly
+- Status: `active` / Perl preflight `.2.0` active task-tree-first from clean `db299789`
 - Roadmap lane: `.spec language evolution / lossless segmentation and source preservation`
 - Created: `2026-07-17`
 - Last updated: `2026-08-13`
@@ -45,8 +45,8 @@ orchestration or to raw Perl cursor arithmetic.
 ## Task Tree
 
 - ID: `INTER-MATCH-GAP-CAPTURE`
-  Status: `active` (2026-08-13; neutral parent `.1` is signoff-complete in intended atomic 221/300; Perl `.2`
-    follows only after the commit/brief/clean boundary; no push)
+  Status: `active` (2026-08-13; neutral parent `.1` landed cleanly at `db299789`; Perl preflight `.2.0` is active
+    task-tree-first for intended atomic 222/300; no push)
   Goal: Recover and modernize lossless inter-match gap capture without semantic drift.
   Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`
 
@@ -232,12 +232,136 @@ orchestration or to raw Perl cursor arithmetic.
     atomic landing boundary before `.2` activation.
 
 - ID: `INTER-MATCH-GAP-CAPTURE.2`
-  Status: `pending`
+  Status: `active` (2026-08-13; dependency-split under `.2.0-.2.4`; `.2.0` active from clean `db299789`)
   Goal: Implement the neutral contract on the Perl reference without overloading `$IPOS`.
+  Children: `.2.0`, `.2.1`, `.2.2`, `.2.3`, `.2.4`
   Acceptance: Per-invocation gap state and typed action context replace implicit arithmetic for the new
-    surface while legacy spellings retain their governed compatibility behavior.
+    surface while legacy spellings retain their governed compatibility behavior. Parsing/metadata precedes live
+    state/accessors; emitted/loaded execution follows the live path; admission closes only after every exact Perl
+    role, diagnostic, recursion/rollback, legacy-compatibility, and no-overclaim boundary passes.
   Verification: `pending`
   Commit: `pending`
+
+- ID: `INTER-MATCH-GAP-CAPTURE.2.0`
+  Status: `done; signoff-complete` (2026-08-13; task-tree-first from clean neutral-closeout commit `db299789`;
+    lands in intended atomic 222/300; no push; behavior-free audit and dependency plan complete)
+  Goal: Reverify the committed Perl grammar/descriptor/generated/runtime/action/typed-source seams and freeze a
+    dependency-complete Perl implementation/admission plan before changing behavior.
+  Depends on: `.1`, complete rule-local cursor, duplicate-slot identity, typed-source Perl, and recognition
+    transaction Perl admission.
+  Acceptance: prove clean activation and retrieve canonical Knowledge/ADR/task/contract authorities first; use
+    LinkedSpec Toolbox descriptors and generated-source/runtime probes before source inspection; locate exact
+    parsing, RuleIR/metadata, resolved-edge provenance, invocation-state, matcher/action/lifecycle, transaction,
+    recursion, accessor lowering, diagnostic, emitted-source, independently loaded, recurring-driver, storage,
+    and public-no-overclaim seams; reproduce current named declaration/selector/directive/accessor absence and
+    legacy anonymous-marker behavior; specify exact RED fixtures, mutation/rollout increments, consumer roles,
+    `.2.1-.2.4` ownership, canonical/storage routes, and no-change boundaries; change no grammar, parser, compiler,
+    runtime, descriptor, generated carrier, helper, facade, schema, semantic/MCP, CLI, README, capability,
+    typed-source, recurring, public, or current behavior in this leaf; synchronize durable projections; pass
+    focused/book/Knowledge/doctrine/canonical signoff; commit/clear/clean before `.2.1`.
+
+  ### Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / OWNERSHIP** — Proved committed `db299789`, empty status/diffs, absent brief/render,
+    empty managed-run residue, and no background result owned by this work before activation.
+  - [x] **RETRIEVE AUTHORITY** — Queried Knowledge Map first, then read the exact gap contract/checker/driver,
+    ADR `0045`, storage/path decisions, selector/cursor/source/transaction authorities, task plan, and Perl
+    Toolbox owners before re-deriving a fact.
+  - [x] **TOOLBOX-LED PERL AUDIT** — Reproduced current absence and legacy behavior through descriptors,
+    generated source, exact runtime probes, and targeted source locations; do not infer behavior by eyeballing.
+  - [x] **FREEZE DEPENDENCY PLAN** — Assigned exact files, RED/GREEN fixtures, roles, diagnostics, mutations,
+    storage/canonical routes, and `.2.1-.2.4` boundaries with no overlapping owner or premature promotion.
+  - [x] **NO OVERCLAIM / LOCKSTEP SIGNOFF** — Rollout remains 1/8 and every planned public surface remains
+    absent. Task, ADR/Knowledge, roadmaps, architecture, live layers, and mdBook align; focused and canonical
+    proof pass, and the leaf lands clean before `.2.1` activation.
+
+  ### Verified Perl baseline and exact implementation freeze
+
+  - Toolbox descriptors prove unindexed action targets resolve slot zero and `Rule[1]` resolves slot one with
+    `family=or_default`, `cursor_policy=seek`, `edge_ownership=action`, `uses_loop=1`, and `repeat_loop`. The
+    current frontend rejects `name=/regex/`, `Rule[name]`, and `@capture_gaps`; all four planned accessors lower
+    to `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:*` and return `undef` today.
+  - The corrected historical Perl probe over `preHgapSmoreFtail` returns exactly
+    `[["pre","H"],["gap","S"],["more","F"]]` at cursor 13: anonymous `@move_pos` supplies prefix and
+    interstitial text but no tail. Generated source orders selection, match extraction, `LS`, edge action,
+    legacy marker `LECODE`, authored `LE`, then `IT`; repeat exhaustion branches before selection-local data.
+  - `.2.1` changes only authored parsing/static metadata. It updates `specs/spec.spec` first and keeps the
+    necessary hardcoded reference bridge in `perl/LinkedSpec/BootstrapSpec/Core.pm` in lockstep; extends
+    `Validation.pm`, `RuleIR.pm`, `RuleIR/EmitContext.pm`, `SpecEntry.pm`, `Compiler.pm`, `RuntimeContext.pm`, and
+    focused Phase-0/self-host proof. A generated private `perl/LinkedSpec/UnicodeXIDContinue.pm`, owned by the
+    existing Unicode-17 generator/checker, prevents host Perl's Unicode 13 tables from defining slot identity.
+    Parsed declarations populate ordered `regex_slots`; action dependencies and generated `dependency_slot_map`
+    rows carry the five frozen provenance fields. The generated-source v2 plan shape stays unchanged.
+  - `.2.1` creates the exact final consumer path in dormant mode. Environment selector
+    `LINKEDSPEC_PERL_INTER_MATCH_GAP_RED_MODE=metadata|live|generated` defaults to `metadata`; only metadata is
+    GREEN in `.2.1`. Ten checker-local mutations separately lock consumer/mode/three boundaries/diagnostic/
+    rooted commands plus absence from canonical execution, the recurring route, and `LinkedSpec.pm`. They do not
+    alter the JSON's 55 semantic/topology mutations or 1-complete/8-pending rollout.
+  - `.2.2` adds private `perl/LinkedSpec/InterMatchGapRuntime.pm` and threads state through the existing
+    `RecognitionTransactionRuntime::InvocationGuard`; there is no second invocation stack and `$IPOS` remains
+    legacy-only. Candidate install occurs after match extraction and before `LS`; accepted commit is after
+    authored `LE` and before `IT`; successful tails are installed before default `LX`, satisfied-repeat `EX`, or
+    maximum `E`. A target child receives a private, target-checked detached `entry_slot`; direct entry is `undef`
+    and nested children cannot see a parent's gap candidate.
+  - Recognition checkpoints store the three gap snapshot members on the same invocation guard keyed by the
+    existing token identity; commit discards that snapshot and rollback restores it. `RecognitionTransaction.pm`'s
+    frozen cursor/boundary/marks authority schema does not widen. Four private ActionIR nodes
+    `ENTRY_SLOT_READ`, `GAP_SPAN_READ`, `GAP_TEXT_READ`, and `GAP_KIND_READ` classify as `source_read`, so `.2.2`
+    synchronizes the closed recognition-effect authority and admitted consumer snapshots from 133 to 137 rows
+    (133 current + four dedicated) while keeping 246 canonical calls, 58 mutations, rollout 9/9, and the 122
+    public helper inventory unchanged. Language coverage classifies the four staged Perl names non-public;
+    typed-source 9/5/114 and its 92+7 helper algebra do not move before `.7`/`.14.5.1` composition.
+  - `.2.3` adds emitted and independently loaded execution without changing plan v2: generated handler source
+    imports the private runtime, generated dependency rows retain selector provenance, gap errors remain typed
+    across `Execute`/`ExecuteWithTrace`, and the unchanged `generated` consumer mode proves values, diagnostics,
+    recursion, rollback, lifecycle, and legacy compatibility against live execution.
+  - `.2.4` removes dormancy from the already-full consumer, executes it exactly once through canonical CI and
+    the rooted gap driver, and promotes only `perl_runtime` under owner `.2.4`. The JSON checker keeps the existing
+    `runtime_rows_pending` corruption as the Perl complete-to-pending regression and appends one
+    `premature_rust_promotion` corruption, advancing 55 to 56. Public-current markers may teach private Perl
+    implementation while outward facade/schema/semantic/MCP/CLI/README guards remain unchanged; Rust through
+    public no-drift stay pending.
+
+  Verification: Focused proof preserves gap 1/8/55, recognition 133/246/58, language coverage 246 calls / 122
+    public helpers, typed source 9/5/114, duplicate-slot identity, and all six typed-source runtime routes. The
+    rendered mdBook is 79 files / 14,652 KiB; Knowledge is 833 facts / 6,984 keys; all eight doctrines pass;
+    repository containment and all-five-anchor relocation pass; CLI passes 66/66 in both option environments;
+    RAM is 66% below the 88% ceiling; Phase 0 passes 1,031/1,031 in 745 seconds; the opt-in gap route passes the
+    neutral contract and six exact pending skips; local CI exits 0.
+  Commit: `intended atomic 222/300; no push`
+
+- ID: `INTER-MATCH-GAP-CAPTURE.2.1`
+  Status: `pending`
+  Goal: Add exact Perl authored parsing, static validation, resolved named-slot identity, directive metadata, and
+    descriptor/generated-carrier provenance without executing gap capture.
+  Acceptance: checker-first dormant RED covers accepted/rejected declaration, selector, directive, diagnostics,
+    stable identity, duplicate-regex identity, exact Unicode-17 classification, metadata/generated provenance,
+    ten dormancy mutations, and no-execution boundaries; runtime/accessor behavior remains pending.
+
+- ID: `INTER-MATCH-GAP-CAPTURE.2.2`
+  Status: `pending`
+  Goal: Add invocation-local Perl gap state, exact matcher/action/lifecycle/terminal/transaction/recursion behavior,
+    and detached `entry_slot()`/`gap_*` accessors on the live native path without overloading `$IPOS`.
+  Acceptance: prefix/interstitial/tail/empty spans, commit/failure/unwind, falsey results, child-extended exits,
+    recursion isolation, diagnostics, legacy compatibility, same-guard transaction snapshots, and the exact
+    137/246/58 recognition plus 122-public-helper no-drift boundary match the neutral model.
+
+- ID: `INTER-MATCH-GAP-CAPTURE.2.3`
+  Status: `pending`
+  Goal: Carry the admitted Perl metadata/state/accessor behavior through emitted source and independently loaded
+    execution, preserving exact source/slot identity and repository-local storage.
+  Acceptance: live and emitted/loaded roles agree byte-for-byte on values, diagnostics, lifecycle, rollback,
+    recursion, selector provenance, and legacy compatibility without generated-plan-v2 or facade/schema/CLI/
+    README promotion.
+
+- ID: `INTER-MATCH-GAP-CAPTURE.2.4`
+  Status: `pending`
+  Goal: Compose exact Perl admission, mutation/rollout updates, recurring-route activation, ledgers, and unchanged
+    public no-overclaim, then close parent `.2` cleanly for Rust `.3`.
+  Acceptance: the exact Perl consumer runs once ordinarily and canonically; only `perl_runtime` becomes complete
+    and semantic/topology mutation proof advances exactly 55 to 56; remaining runtimes, recurring, public
+    no-drift, capability, typed-source composition, and outward APIs stay pending; all focused and broad gates
+    pass.
 
 - ID: `INTER-MATCH-GAP-CAPTURE.3`
   Status: `pending`
@@ -283,8 +407,12 @@ orchestration or to raw Perl cursor arithmetic.
 | 2 | `INTER-MATCH-GAP-CAPTURE.1.0` | `done; landed at 31f3e664` | The behavior-free executable neutral-contract plan is frozen and canonically green as atomic 218/300. |
 | 3 | `INTER-MATCH-GAP-CAPTURE.1.1` | `done; landed at f58dfcb3` | The versioned neutral artifact, fixtures, independent checker, fail-first proof, and 50 mutations landed as atomic 219/300. |
 | 4 | `INTER-MATCH-GAP-CAPTURE.1.2` | `done; landed at 0490522b` | Storage-rooted routing, topology governance, and public no-overclaim guards pass without runtime admission. |
-| 5 | `INTER-MATCH-GAP-CAPTURE.1.3` | `done; signoff-complete` in intended atomic 221/300 | The unchanged neutral authority is independently recomposed; parent `.1` closes without behavior movement. |
-| 6 | `INTER-MATCH-GAP-CAPTURE.2` | `pending` after the atomic-221 clean boundary | Implement the exact contract on the Perl reference without overloading `$IPOS`. |
+| 5 | `INTER-MATCH-GAP-CAPTURE.1.3` | `done; landed at db299789` | The unchanged neutral authority is independently recomposed; parent `.1` closes without behavior movement. |
+| 6 | `INTER-MATCH-GAP-CAPTURE.2.0` | `done; signoff-complete` from clean `db299789` | Exact Perl seams, dormancy, implementation, effect-ledger, carrier, and admission ownership are frozen without behavior changes; canonical proof is green. |
+| 7 | `INTER-MATCH-GAP-CAPTURE.2.1` | `next after atomic 222 lands clean` | Add parsing/static metadata/provenance without live gap execution. |
+| 8 | `INTER-MATCH-GAP-CAPTURE.2.2` | `pending` | Implement exact invocation-local live Perl state and accessors. |
+| 9 | `INTER-MATCH-GAP-CAPTURE.2.3` | `pending` | Prove emitted and independently loaded Perl execution parity. |
+| 10 | `INTER-MATCH-GAP-CAPTURE.2.4` | `pending` | Admit Perl only, update the route/ledger, and close `.2` for Rust `.3`. |
 
 ## Decisions
 
@@ -323,10 +451,15 @@ orchestration or to raw Perl cursor arithmetic.
 - `2026-08-13`: Return-channel audit adds ADR `0048` as authority: repeated action returns remain accepted per-hit
   values, while default-loop action returns unwind without a gap commit or synthetic tail. The same retrieval found
   ADR `0051`'s header still said Lua pending after committed closure `b14126a6`; only that stale status was aligned.
+- `2026-08-13`: Perl preflight fixes a four-leaf implementation route: `.2.1` parsing/metadata plus dormant
+  final-path RED, `.2.2` same-guard live state/accessors and recognition-effect synchronization, `.2.3` emitted/
+  loaded parity, and `.2.4` Perl-only admission. Host Perl Unicode tables, a second invocation stack, a widened
+  transaction-authority schema, generated-plan v3, public helper admission, and typed-source promotion are all
+  rejected as implementation shortcuts.
 
 ## Open Questions
 
-- No semantic question blocks `.1.3`. Exact names, selector provenance, directive eligibility,
+- No semantic question blocks `.2.1`. Exact names, selector provenance, directive eligibility,
   prefix/interstitial/tail and empty-span policy, lifecycle timing, transaction/recursion behavior, accessors,
   compatibility, diagnostics, fixtures, mutations, routes, and rollout are frozen below.
 - Implementation discoveries may refine mechanics only. Any semantic change requires a new task-tree leaf and an
@@ -339,7 +472,6 @@ orchestration or to raw Perl cursor arithmetic.
 | Perl | `@capture_slice`, `@capture_from_here`, `@move_pos`, `@mark(name)` | Anonymous spellings lower to unconditional rule-level `LECODE` and roll after every successful action; `@mark(name)` is separately guarded by the preceding regex index. |
 | Rust | Same four forms retained in the AST | `CompiledRule` has no marker/body-event field and the compiler drops `SplitMarker`; the native runtime cannot execute it. |
 | Dart | Same four forms retained in AST and compiled `bodyElements` | The compiler creates no event and the native interpreter never reads `bodyElements`; no marker execution. |
-| Julia | Same four forms retained in AST and compiled `body_elements` | The compiler creates no event and the native interpreter never reads `body_elements`; no marker execution. |
 | Lua / LuaJIT | Same four forms | Compiler creates preceding-regex `rule_slot_events`; runtime executes them post-action/pre-`LE`. This is a later positional reinterpretation, not Perl's anonymous rule-level behavior. |
 
 This matrix distinguishes marker members from explicit action helpers such as

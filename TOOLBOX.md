@@ -1064,6 +1064,23 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   routes/topology/no-overclaim; `.1.3` may recompose and hand off. No syntax, helper, descriptor, runtime, rollout,
   README, facade, semantic/MCP, CLI, capability, or typed-source current claim moves in those planning leaves.
 
+### 4.9.1.4 Perl gap implementation preflight
+
+- **WHAT:** the behavior-free `.2.0` map from current Perl grammar/descriptor/runtime source to the four owned
+  implementation leaves. It records exact current absence, legacy output, generated lifecycle order, dormancy,
+  effect-ledger coupling, carrier seams, and admission boundaries in
+  [[inter-match-gap-perl-implementation-plan]].
+- **WHEN:** implementing or reviewing `.2.1-.2.4`, especially before changing bootstrap grammar, ActionIR helper
+  contracts, recognition transaction effect rows, or generated parser source.
+- **HOW:** run the neutral and rooted gap checks first. Probe `return_descriptor` for numeric dependency refs and
+  rule execution metadata; use `call_spec_handler_subst` for helper lowering; dump parser source to locate match
+  extraction/`LS`/action/`LE`/`IT`; and use the escaped legacy marker probe for prefix/interstitial truth. Host
+  Perl Unicode properties are not the slot-name oracle: generate from the pinned Unicode-17 range artifact.
+- **BOUNDARY:** `.2.1` is metadata-only and keeps the exact consumer dormant; `.2.2` attaches state to the existing
+  recognition invocation guard and synchronizes four private source-read nodes; `.2.3` owns emitted/loaded parity;
+  `.2.4` alone registers and promotes Perl. No second stack, `$IPOS` overload, plan-v3 change, public-helper
+  admission, typed-source promotion, or outward facade/schema/CLI/README surface is permitted.
+
 ### 4.9.2 `tools/check_recognition_transaction_contract.py` — neutral transaction/progress oracle
 
 - **WHAT:** independently interprets `linkedspec-recognition-transaction-v1`: four current authored forms, a linear

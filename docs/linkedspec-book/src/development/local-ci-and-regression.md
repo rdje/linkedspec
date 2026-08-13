@@ -213,6 +213,12 @@ and this complete matrix through its exact success marker. The combined program-
 remains pending.
 
 Inter-match gap-capture recurring governance runs only the complete neutral row; all six runtime routes remain explicit skips.
+Perl preflight `.2.0` remains behavior-free. Its next three implementation leaves stage the exact Perl consumer
+outside canonical and recurring execution; `.2.4` alone may replace the Perl skip with a rooted `prove -Iperl`
+route after the full metadata/live/generated consumer passes. Until then, the neutral checker remains 55
+mutations at rollout 1 complete / 8 pending and the opt-in driver must retain all six ordered skips.
+Preflight signoff passes containment, all-five-anchor relocation, CLI 66/66 twice, RAM 66%, Phase 0 1,031/1,031
+in 745 seconds, that exact opt-in pending route, and final local-CI exit 0.
 The always-on neutral command is
 `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py`. The repository-routed
 `tools/check_inter_match_gap_capture_six_runtime.sh` driver repeats that authority exactly once, then reports the

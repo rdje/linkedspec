@@ -99,7 +99,29 @@ the first implementation owner.
 Definitive `.1.3` signoff passes the rendered 79-file / 14,632-KiB mdBook, Knowledge Map 832/6,967, all eight
 doctrines, six-family repository containment, all-five-anchor relocation, CLI 66/66 in both option environments,
 RAM 61%, Phase 0 1,031/1,031 in 725 seconds, the exact opt-in neutral-plus-six-pending route, and local-CI exit 0.
-The leaf and parent are signoff-complete for intended atomic 221/300; commit/brief/clean proof precedes `.2`.
+The leaf and parent landed as atomic 221/300 at `db299789`.
+
+Behavior-free Perl preflight `.2.0` then maps the reference architecture before changes. Permanent syntax belongs
+first in `specs/spec.spec`, with `BootstrapSpec::Core` retained only as the necessary reference-parser bridge.
+Pinned Unicode 17 slot identity is generated into a private Perl classifier instead of using host Unicode 13.
+Parsed rule metadata carries authored slot order, directive evidence, and exact selector provenance through live
+dependency refs and generated dependency-slot rows without changing generated-plan v2.
+
+Live implementation `.2.2` will attach gap state to the existing recognition invocation guard. It adds no cursor,
+authority, or invocation stack: candidate state is installed after match extraction, committed after `LE`, cleared
+before `IT`, and exposed as tail before existing `LX`/`EX`/`E` terminal hooks. Existing checkpoint tokens index gap
+snapshots on the same guard while the frozen cursor/boundary/marks transaction schema remains unchanged. Four
+private source-read ActionIR nodes require an owned recognition-effect census change from 133 to 137, but shared
+calls remain 246, public helpers remain 122, typed source remains 9/5/114, and no outward surface is admitted.
+
+The dormant exact Perl consumer advances metadata, live, then emitted/loaded phases under `.2.1-.2.3`; `.2.4`
+alone registers the full path, promotes only Perl, and advances the gap checker from 55 to 56. This plan is
+durable in ADR `0045` and [[inter-match-gap-perl-implementation-plan]].
+
+Definitive behavior-free `.2.0` signoff preserves gap 1/8/55, recognition 133/246/58, public helper coverage 122,
+and typed source 9/5/114. It passes the rendered 79-file / 14,652-KiB mdBook, Knowledge 833/6,984, all eight
+doctrines, repository containment, all-five-anchor relocation, CLI 66/66 twice, RAM 66%, Phase 0 1,031/1,031 in
+745 seconds, the exact opt-in neutral-plus-six-pending route, and final local-CI exit 0.
 
 The current executable-neutral authority is
 `capability_conformance/inter_match_gap_capture_contract.json`, format 1 / id

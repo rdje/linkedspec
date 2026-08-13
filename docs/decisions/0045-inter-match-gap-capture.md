@@ -293,6 +293,54 @@ phase; it admits no grammar, parser, compiler, runtime, descriptor, generated ca
 semantic/MCP, CLI, README, capability, typed-source, recurring, or public behavior. Perl reference implementation
 remains exclusively owned by `.2`.
 
+## 2026-08-13 Perl implementation-plan amendment
+
+`INTER-MATCH-GAP-CAPTURE.2.0` completes the behavior-free Perl audit from clean `db299789` and dependency-splits
+implementation into `.2.1-.2.4`. Toolbox descriptors prove current numeric slot resolution and eligible execution
+metadata; direct compilation proves named declarations/selectors, `@capture_gaps`, and all four accessors remain
+absent. A generated-source probe fixes the actual selection → match extraction → `LS` → action/target → legacy
+`LECODE` → authored `LE` → `IT` order. The corrected live legacy probe returns prefix/interstitial pairs and no
+tail. These are implementation constraints, not new semantics.
+
+`.2.1` owns grammar and metadata only. `specs/spec.spec` is the permanent language description and changes first;
+the hardcoded `BootstrapSpec::Core` change is the necessary reference-parser bridge and must remain byte-level
+behavioral peers with self-hosted proof. Parsed declarations create one authored `regex_slots` sequence, and
+resolved action dependencies carry the frozen five provenance fields through live descriptor metadata and
+generated `dependency_slot_map` rows. Generated-source plan v2 does not widen. Exact slot identity comes from a
+generated private Perl classifier derived from the repository's pinned Unicode 17 `XID_Continue` ranges; host
+Perl's Unicode 13 property tables are explicitly non-authoritative.
+
+The exact Perl consumer is introduced dormant with metadata/live/generated phase selection. Ten checker-local
+mutations protect the staged consumer and prevent canonical, recurring, or facade admission; they are deliberately
+separate from the neutral artifact's 55 mutations and 1-complete/8-pending rollout.
+
+`.2.2` owns the live state. `InterMatchGapRuntime` attaches the five-field state to the existing
+`RecognitionTransactionRuntime::InvocationGuard`; it creates neither another stack nor another cursor. Candidate
+installation is after selected-match extraction and before enclosing `LS`; accepted commit is after authored
+`LE` and before `IT`; successful tails are installed before default `LX`, satisfied-repeat `EX`, and maximum
+`E`. Target entry metadata is private, parent-guard-checked, and target-rule-checked. `entry_slot()` therefore
+returns a detached record only inside the selected action-edge target; direct entry remains `undef`, and child
+invocations hide parent gap context.
+
+Recognition checkpoint composition stores the three frozen gap snapshot members on that same guard under the
+existing token identity. Commit discards the snapshot and rollback restores it. `RecognitionTransaction.pm`'s
+cursor/boundary/marks authority schema remains unchanged. The four accessor nodes are private `source_read`
+ActionIR nodes. Consequently the closed recognition-effect census must advance from 133 to 137 rows while its
+246 canonical calls, 58 mutations, and 9/9 rollout remain unchanged. The four names are explicitly non-public in
+language coverage, preserving the 122 public-helper census, and they do not enter the typed-source 92+7 helper
+algebra before final composition.
+
+`.2.3` owns emitted/loaded parity and typed-error propagation without a plan-v2 change. `.2.4` removes dormancy,
+executes the same full assertion set once canonically and once through the rooted driver, promotes only
+`perl_runtime`, and advances the neutral checker from 55 to 56 with a premature-Rust corruption. All outward
+facade/schema/semantic/MCP/CLI/README guards, later runtime rows, recurring/public rows, capability admission, and
+typed `gap_composition` stay pending.
+
+Definitive `.2.0` signoff preserves gap 1/8/55, recognition 133/246/58, public helpers 122, and typed source
+9/5/114. The rendered 79-file / 14,652-KiB book, Knowledge 833/6,984, all eight doctrines, containment,
+all-five-anchor relocation, CLI 66/66 twice, RAM 66%, Phase 0 1,031/1,031 in 745 seconds, the exact opt-in pending
+route, and final local-CI exit 0 all pass without implementation movement.
+
 ## Consequences
 
 - The director's original concept and target-rule ownership are durable and cannot be reassigned to

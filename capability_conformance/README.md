@@ -307,6 +307,10 @@ Run `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_c
 neutral proof or `bash tools/check_inter_match_gap_capture_six_runtime.sh` for the repository-routed ordered
 governance route. The latter executes the one complete neutral row and skips all six pending runtime consumers;
 the nine-leg rollout remains 1 complete / 8 pending and the checker rejects 55 semantic/topology corruptions.
+Behavior-free Perl preflight `.2.0` freezes a metadata/live/generated/admission split without changing those
+counts. Four future private Perl accessor nodes will be synchronized as recognition `source_read` effects in
+`.2.2`, while shared calls remain 246, public Perl helper coverage remains 122, and typed-source composition stays
+pending. `.2.4` alone may promote the Perl gap row and replace its rooted skip.
 
 No public `Position`/`Span` value, descriptor or generated schema, semantic/MCP projection, or source-authority
 elevation is claimed by these internal typed-source runtime admissions. Recognition transaction spelling and
