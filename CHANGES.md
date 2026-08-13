@@ -10,6 +10,27 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-13 — INTER-MATCH-GAP-CAPTURE.1.2 — govern recurring neutral route
+
+- Added `tools/check_inter_match_gap_capture_six_runtime.sh` as one repository-rooted, managed-project-data
+  driver. It executes the sole complete neutral route once, then emits exact ordered skips for the pending Perl,
+  Rust, Dart, Julia, PUC Lua, and LuaJIT consumers instead of implying runtime admission.
+- Registered the neutral checker as an always-on canonical input and the ordered driver behind exact opt-in
+  `LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1`, with untracked-input, path-portability, syntax, tracked-file, and
+  outside-CWD project-data routing coverage.
+- Extended the format-1 contract and independent checker with fixed neutral-plus-six route order,
+  repository-volume storage, all-runtime-pending assertions, five current-document markers, and ten outward
+  facade/schema/CLI/README guards. Named slot syntax, `entry_slot()`, `@capture_gaps`, and `gap_*` remain absent.
+- Added checker-first governance before changing the artifact: the committed 50-mutation document failed with
+  exact `inter-match gap capture contract: FAIL: required sections drifted`. GREEN preserves rollout 1 complete +
+  8 pending and rejects all 55 mutations, including the five new topology/storage/no-overclaim corruptions.
+- Synchronized ADR `0045`, architecture, Knowledge, task/index, roadmaps, Toolbox, capability guidance, the
+  bounded live layers, and the sole-facing mdBook without changing README or any parser/runtime/public behavior.
+- Focused proof passes the neutral/recurring routes, repository-volume tool storage, outside-CWD workflow routing,
+  duplicate-slot 59, typed-source 9/5/114, rendered mdBook 78/14,632 KiB, and Knowledge 831/6,960. Canonical
+  signoff passes all eight doctrines, six-family containment, all-five-anchor relocation, CLI 66/66 in both
+  environments, RAM 61%, Phase 0 1,031/1,031, the exact opt-in pending-route matrix, and local-CI exit 0.
+
 ## 2026-08-13 — INTER-MATCH-GAP-CAPTURE.1.1 — add executable-neutral contract
 
 - Added format-1 `linkedspec-inter-match-gap-capture-v1` as the behavior-free authority for named regex-slot

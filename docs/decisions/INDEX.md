@@ -80,6 +80,7 @@ changed* lives in git (layer D), not here.
 | [0067](0067-live-achievement-status-history.md) | Live achievement status is a bounded current view over exact history | 2026-08-09 | accepted and implemented at `99fe03f3` | documentation, history, retrieval, routing, capability-governance, doctrine |
 | [0068](0068-future-parity-task-partitions.md) | Future parity task evidence uses stable semantic partitions | 2026-08-09 | accepted and implemented at `61a52dbd` | documentation, task-tree, retrieval, routing, continuity, doctrine |
 | [0069](0069-bounded-change-and-notes-history.md) | Changes and engineering notes use bounded rollover hot stores | 2026-08-10 | accepted and implemented at `921f0507` | documentation, history, retrieval, rollover, routing, continuity, doctrine |
+| [0070](0070-engineering-notes-eleventh-segment-capacity.md) | Engineering-notes history admits its eleventh bounded member | 2026-08-13 | accepted under `INTER-MATCH-GAP-CAPTURE.1.2` | documentation, history, rollover, routing, pressure, continuity, doctrine |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

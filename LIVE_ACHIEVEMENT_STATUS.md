@@ -2,22 +2,24 @@
 
 ## Current Activity
 
-- `INTER-MATCH-GAP-CAPTURE.1.1` is complete from clean `31f3e664` and lands as atomic 219/300 in this commit; no push.
-- Checker-first RED rejected only the absent contract. The format-1 neutral artifact now passes executable
-  Unicode/empty/child/rollback/nested modeling and 50/50 reason-checked corruptions at 1 complete + 8 pending.
+- `INTER-MATCH-GAP-CAPTURE.1.2` is signoff-complete from clean `f58dfcb3` and lands as atomic 220/300 in this
+  commit; no push.
+- One repository-rooted driver executes the neutral contract once and reports the six absent runtime consumers
+  as exact ordered skips. Governance is 55/55 mutations at unchanged 1 complete + 8 pending rollout.
 - Current behavior remains unchanged and absent: named declarations/selectors, `entry_slot()`, `@capture_gaps`,
-  and the three gap accessors still reject or do not exist. No runtime or public row moved.
+  and the three gap accessors still reject or do not exist. Canonical signoff passes through exact local-CI exit 0.
 
 ## Latest Completed Slice
 
-- `.1.1` is the latest completed slice and lands through the current atomic-219 commit.
+- `.1.2` is the latest completed slice and lands through the current atomic-220 commit.
 
 ## Next Action
 
-- From the clean atomic-219 boundary, activate `.1.2` task-tree-first for routing/topology/no-overclaim governance.
+- From the clean atomic-220 boundary, activate `.1.3` task-tree-first to recompose and close neutral governance.
 
 ## Recent Completions
 
+- `2026-08-13` — `.1.2` completed recurring-neutral routing/no-overclaim governance and canonical signoff at 1/8 rollout and 55 mutations.
 - `2026-08-13` — `.1.1` completed checker-first executable-neutral contract proof and canonical signoff at 1/8 rollout and 50 mutations.
 - `2026-08-13` — `31f3e664` landed executable-neutral plan `.1.0` as atomic 218/300.
 - `2026-08-13` — `.1.0` completed the behavior-free executable-neutral audit/plan and canonical signoff for atomic 218/300.
@@ -33,7 +35,6 @@
 - `2026-08-12` — `.14.4.5` completed private Julia recursive-observation admission and canonical signoff for atomic 213/300.
 - `2026-08-12` — `b1895a05` landed private Dart recursive-observation admission `.14.4.4` as atomic 212/300.
 - `2026-08-12` — `.14.4.4` completed private Dart recursive-observation admission as atomic 212/300.
-- `2026-08-12` — `91a2b05c` landed private Rust recursive-observation admission `.14.4.3` as atomic 211/300.
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source

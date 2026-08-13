@@ -14,7 +14,7 @@
     "compatibility_rows": 6,
     "diagnostics": 9,
     "rollout_legs": 9,
-    "semantic_mutations": 50
+    "semantic_mutations": 55
   },
   "policy": {
     "status": "executable_neutral_behavior_free",
@@ -813,14 +813,24 @@
     "recursion_isolation",
     "nested_suspend_resume",
     "action_return_authority",
-    "diagnostic_schema"
+    "diagnostic_schema",
+    "rollout_sequence",
+    "runtime_rows_pending",
+    "storage_paths",
+    "route_order",
+    "public_no_overclaim"
   ],
   "recurring_gate": {
-    "status": "planned",
+    "status": "governance_current_runtime_admission_pending",
     "owner": "INTER-MATCH-GAP-CAPTURE.1.2",
     "driver": "tools/check_inter_match_gap_capture_six_runtime.sh",
     "local_ci_driver": "tools/run_ci_local.sh",
     "local_ci_switch": "LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX",
+    "neutral_route": {
+      "rollout_id": "neutral_contract",
+      "path": "tools/check_inter_match_gap_capture_contract.py",
+      "command": "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py"
+    },
     "consumer_schema": {
       "fields": [
         "backend",
@@ -927,7 +937,95 @@
         ]
       }
     ],
-    "storage": "repository_derived_project_data_same_volume"
+    "route_order": [
+      "neutral_contract",
+      "perl_runtime",
+      "rust_runtime",
+      "dart_runtime",
+      "julia_runtime",
+      "puc_lua_runtime",
+      "luajit_runtime"
+    ],
+    "execution_policy": "run the neutral route exactly once, then run only complete runtime rows and explicitly skip every pending runtime row in route order",
+    "storage": {
+      "initializer": "tools/project_data_env.sh",
+      "managed_entrypoint": "tools/check_inter_match_gap_capture_six_runtime.sh",
+      "policy": "all temporary, cache, build, native, and test data stays under repository-derived storage on the repository volume"
+    }
+  },
+  "public_no_overclaim": {
+    "status": "current",
+    "owner": "INTER-MATCH-GAP-CAPTURE.1.2",
+    "policy": "document the executable neutral and recurring governance without claiming named regex declarations or selectors, entry_slot(), @capture_gaps, gap_* helpers, backend behavior, schema exposure, CLI exposure, or public admission",
+    "rollout_assertions": {
+      "row_count": 9,
+      "neutral_contract": {
+        "status": "complete",
+        "owner": "INTER-MATCH-GAP-CAPTURE.1.1"
+      },
+      "runtime_ids": [
+        "perl_runtime",
+        "rust_runtime",
+        "dart_runtime",
+        "julia_runtime",
+        "puc_lua_runtime",
+        "luajit_runtime"
+      ],
+      "runtime_status": "pending",
+      "recurring": {
+        "status": "pending",
+        "owner": "INTER-MATCH-GAP-CAPTURE.7"
+      },
+      "public_no_drift": {
+        "status": "pending",
+        "owner": "INTER-MATCH-GAP-CAPTURE.7"
+      }
+    },
+    "documents": [
+      {
+        "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+        "required_marker": "Inter-match gap-capture recurring governance is current, while every runtime and public surface remains unimplemented."
+      },
+      {
+        "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+        "required_marker": "Inter-match gap-capture recurring governance runs only the complete neutral row; all six runtime routes remain explicit skips."
+      },
+      {
+        "path": "docs/linkedspec-book/src/overview/project-status.md",
+        "required_marker": "Inter-match gap-capture governance is current at 1 complete / 8 pending, with no runtime or public admission."
+      },
+      {
+        "path": "capability_conformance/README.md",
+        "required_marker": "Inter-match gap-capture recurring governance is current without runtime or public admission."
+      },
+      {
+        "path": "TOOLBOX.md",
+        "required_marker": "Inter-match gap-capture recurring governance is current and executes only its complete neutral row."
+      }
+    ],
+    "surface_guard": {
+      "paths": [
+        "perl/LinkedSpec.pm",
+        "rust/linkedspec-runtime/src/lib.rs",
+        "dart/lib/linkedspec_dart.dart",
+        "julia/src/LinkedSpecJulia.jl",
+        "lua/src/linkedspec/init.lua",
+        "capability_conformance/outward_descriptor_contract.json",
+        "capability_conformance/semantic_introspection_model.json",
+        "capability_conformance/mcp_semantic_transport/schema.json",
+        "cli_conformance/manifest.json",
+        "README.md"
+      ],
+      "forbidden_tokens": [
+        "@capture_gaps",
+        "entry_slot",
+        "gap_span",
+        "gap_text",
+        "gap_kind",
+        "Rule[name]",
+        "name=/regex/"
+      ]
+    }
   },
   "rollout": [
     {

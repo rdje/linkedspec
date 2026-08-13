@@ -3,7 +3,8 @@
 ## Metadata
 
 - Tree ID: `INTER-MATCH-GAP-CAPTURE`
-- Status: `active` / neutral contract artifact/checker `.1.1` complete from clean `31f3e664`; `.1.2` next
+- Status: `active` / neutral governance/routing `.1.2` signoff-complete from clean `f58dfcb3`; `.1.3` waits for
+  the atomic-220 clean boundary
 - Roadmap lane: `.spec language evolution / lossless segmentation and source preservation`
 - Created: `2026-07-17`
 - Last updated: `2026-08-13`
@@ -45,8 +46,8 @@ orchestration or to raw Perl cursor arithmetic.
 ## Task Tree
 
 - ID: `INTER-MATCH-GAP-CAPTURE`
-  Status: `active` (2026-08-13; `.1.0` landed cleanly at `31f3e664`; `.1.1` neutral artifact/checker completes
-    as atomic 219/300 in this commit, with `.1.2` next after the clean boundary; no push)
+  Status: `active` (2026-08-13; `.1.1` landed cleanly at `f58dfcb3`; `.1.2` is signoff-complete and lands in the
+    intended atomic 220/300 commit; no push)
   Goal: Recover and modernize lossless inter-match gap capture without semantic drift.
   Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`
 
@@ -62,7 +63,8 @@ orchestration or to raw Perl cursor arithmetic.
   Commit: `INTER-MATCH-GAP-CAPTURE.0 - ratify inter-match gap capture`
 
 - ID: `INTER-MATCH-GAP-CAPTURE.1`
-  Status: `active` (2026-08-13; neutral artifact/checker `.1.1` complete; governance/routing `.1.2` next)
+  Status: `active` (2026-08-13; neutral artifact/checker `.1.1` landed; governance/routing `.1.2` is
+    signoff-complete; unchanged recomposition `.1.3` follows after the clean commit)
   Goal: Define an executable backend-neutral `@capture_gaps` and typed gap-span contract.
   Children: `.1.0`, `.1.1`, `.1.2`, `.1.3`
   Acceptance: The contract fixes prefix/interstitial/tail policy, empty-gap preservation, offsets,
@@ -104,8 +106,7 @@ orchestration or to raw Perl cursor arithmetic.
     signoff/commit/brief/clean workflow before the next leaf.
 
 - ID: `INTER-MATCH-GAP-CAPTURE.1.1`
-  Status: `done; signoff-complete` (2026-08-13; task-tree-first from clean executable-plan commit `31f3e664`;
-    lands as atomic 219/300 in this commit; no push)
+  Status: `done; landed at f58dfcb3` (2026-08-13; atomic 219/300; no push)
   Goal: Add the versioned backend-neutral named-slot and lossless-gap contract, exact positive/negative fixtures,
     and independent checker with fail-first then passing mutation evidence; change no runtime implementation.
   Depends on: `.1.0`
@@ -148,10 +149,51 @@ orchestration or to raw Perl cursor arithmetic.
     rendered-book, Knowledge, doctrine, and canonical proof, then commit/clear/clean before `.1.2`.
 
 - ID: `INTER-MATCH-GAP-CAPTURE.1.2`
-  Status: `pending`
+  Status: `done; signoff-complete` (2026-08-13; task-tree-first from clean neutral-contract commit `f58dfcb3`;
+    lands as atomic 220/300 in this commit; no push)
   Goal: Add storage-rooted recurring/canonical routing, contract topology governance, and public no-overclaim
     guards for the neutral artifact without admitting any backend runtime.
   Depends on: `.1.1`
+  Acceptance: prove clean activation; add one ordered six-runtime recurring driver that runs the neutral checker
+    once plus only already-complete runtime consumers, so the current 1-complete/8-pending rollout executes no
+    future consumer; register the driver under repository-rooted storage and canonical opt-in
+    `LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX`; extend exact contract/checker topology, storage, route-order, pending-
+    runtime, and public no-overclaim governance from 50 to 55 reason-checked mutations; guard tracked current
+    public surfaces against claiming named declarations/selectors, `entry_slot()`, `@capture_gaps`, or `gap_*`
+    availability; change no parser/compiler/runtime/descriptor/generated/helper/facade/schema/semantic/MCP/CLI/
+    README/backend behavior or rollout status; synchronize task/ADR/Knowledge/roadmaps/live/mdBook and pass
+    focused/storage/book/doctrine/canonical signoff; commit with this leaf id, clear the brief, and land clean
+    before `.1.3`.
+
+  ### Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / OWNERSHIP** — Prove clean committed `f58dfcb3`, absent brief, no rendered-book or
+    managed-run residue, and no background result before this task-tree-first activation.
+  - [x] **RETRIEVE AUTHORITY** — Read the canonical Knowledge/ADR/task/contract/checker plus analogous recurring,
+    storage, canonical-opt-in, and public no-overclaim owners before changing governed routes. Retrieved ADR
+    `0045`, the executable-contract Knowledge card, typed-source/recursive-observation recurring and public
+    no-drift authorities, both current six-runtime drivers, and the exact canonical/storage/routing registries
+    before changing the checker or any governed route.
+  - [x] **EXACT RED** — Added the final topology/storage/route/public assertions before the artifact or route;
+    the governed checker exited 1 with only
+    `inter-match gap capture contract: FAIL: required sections drifted` against the committed 50-mutation
+    artifact, proving the new public/topology section is required rather than silently ignored.
+  - [x] **ROUTING / TOPOLOGY** — The repository-derived driver enters managed project data, executes the complete
+    neutral row once, reports the six pending consumers in exact order without invoking them, and is always
+    inventoried/syntax-checked plus opt-in executed by canonical CI through the exact switch.
+  - [x] **PUBLIC NO-OVERCLAIM** — Five exact current document markers and ten outward facade/schema/CLI/README
+    surfaces prove that named declarations/selectors, `entry_slot()`, `@capture_gaps`, and `gap_*` remain absent.
+  - [x] **MUTATION PROOF** — `rollout_sequence`, `runtime_rows_pending`, `storage_paths`, `route_order`, and
+    `public_no_overclaim` corruptions are rejected for their exact reasons, advancing neutral governance from 50
+    to 55 mutations.
+  - [x] **BOUNDED HISTORY** — Required engineering-notes rollover created the eleventh controlled member; ADR
+    `0070` reviews only the exact `max_files` 10 → 11 capacity step while every byte/line/member/aggregate limit
+    remains unchanged and the new immutable segment stays queryable.
+  - [x] **NO REGRESSION / LOCKSTEP** — Behavior and rollout remain at 1 complete + 8 pending. Focused neutral,
+    routed-storage, outside-CWD, duplicate-slot 59, typed-source 9/5/114, rendered-book 78/14,632 KiB, Knowledge
+    831/6,960, all eight doctrines, containment/relocation, CLI 66/66 twice, RAM 61%, Phase 0 1,031/1,031, and the
+    opt-in neutral-plus-six-pending route all pass through exact local-CI success; commit/clear/clean precedes
+    `.1.3`.
 
 - ID: `INTER-MATCH-GAP-CAPTURE.1.3`
   Status: `pending`
@@ -209,8 +251,9 @@ orchestration or to raw Perl cursor arithmetic.
 | --- | --- | --- | --- |
 | 1 | `INTER-MATCH-GAP-CAPTURE.0` | `done` | History, runtime truth, terminology, ownership, future name, and named-slot syntax are durably ratified without behavior change. |
 | 2 | `INTER-MATCH-GAP-CAPTURE.1.0` | `done; landed at 31f3e664` | The behavior-free executable neutral-contract plan is frozen and canonically green as atomic 218/300. |
-| 3 | `INTER-MATCH-GAP-CAPTURE.1.1` | `done; atomic 219/300` | The versioned neutral artifact, fixtures, independent checker, fail-first proof, and 50 mutations are canonically green. |
-| 4 | `INTER-MATCH-GAP-CAPTURE.1.2` | `pending; next after clean atomic 219` | Add storage-rooted routing, topology governance, and public no-overclaim guards without runtime admission. |
+| 3 | `INTER-MATCH-GAP-CAPTURE.1.1` | `done; landed at f58dfcb3` | The versioned neutral artifact, fixtures, independent checker, fail-first proof, and 50 mutations landed as atomic 219/300. |
+| 4 | `INTER-MATCH-GAP-CAPTURE.1.2` | `done; signoff-complete` from clean `f58dfcb3` | Storage-rooted routing, topology governance, and public no-overclaim guards pass without runtime admission. |
+| 5 | `INTER-MATCH-GAP-CAPTURE.1.3` | `pending` after atomic-220 clean landing | Recompose the unchanged neutral authority, close `.1`, and hand off to Perl `.2`. |
 
 ## Decisions
 
@@ -252,7 +295,7 @@ orchestration or to raw Perl cursor arithmetic.
 
 ## Open Questions
 
-- No semantic question blocks `.1.2`. Exact names, selector provenance, directive eligibility,
+- No semantic question blocks `.1.3`. Exact names, selector provenance, directive eligibility,
   prefix/interstitial/tail and empty-span policy, lifecycle timing, transaction/recursion behavior, accessors,
   compatibility, diagnostics, fixtures, mutations, routes, and rollout are frozen below.
 - Implementation discoveries may refine mechanics only. Any semantic change requires a new task-tree leaf and an
@@ -493,15 +536,16 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
 
 ## Activation Boundary
 
-- The cursor and duplicate-slot prerequisites are satisfied. Neutral-contract audit `.1.0` landed cleanly at
-  `31f3e664`; artifact/checker `.1.1` is signoff-complete from that boundary and lands as atomic 219/300 in this
-  commit. No gap-capture implementation is current, and runtime leaves `.2-.6` remain pending until `.1.3` closes
-  the complete neutral contract.
+- The cursor and duplicate-slot prerequisites are satisfied. Neutral-contract audit `.1.0` landed at `31f3e664`,
+  and artifact/checker `.1.1` landed at `f58dfcb3`. Governance/routing `.1.2` is signoff-complete from that clean
+  boundary and lands in atomic 220/300; `.1.3` waits for that commit to become clean. No gap-capture implementation
+  is current, and runtime leaves `.2-.6` remain pending until `.1.3` closes the complete neutral contract.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-08-13` | `INTER-MATCH-GAP-CAPTURE.1.2` | Clean `f58dfcb3` activation; checker-first topology RED; focused neutral checker and 55 mutations; rooted recurring route; project-data storage and outside-CWD routing; duplicate-slot five-backend and typed-source six-runtime matrices; rendered mdBook; Knowledge Map; all eight doctrines; staged canonical local CI with the gap-route opt-in | Pass: RED exited 1 with only `inter-match gap capture contract: FAIL: required sections drifted`; GREEN locks 8+10 fixtures / 3 sources / 16 transitions / 10 segmentations / 9 diagnostics / rollout 1 complete + 8 pending / 55 rejected mutations. The driver executes neutral once and skips exactly Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT without invoking absent consumers. Duplicate-slot remains 59; typed-source remains 9/5/114; storage/outside-CWD routing passes; rendered book is 78 files / 14,632 KiB; Knowledge is 831 facts / 6,960 keys; all eight doctrines pass. The sandboxed canonical run passed every earlier gate before the outer harness denied nested `sandbox-exec` with status 71. The unchanged permission-authorized run passed six-family containment, all-five-anchor relocation, CLI 66/66 in both option environments, RAM 61%, Phase 0 1,031/1,031, the exact neutral-plus-six-pending route, and `[ci] local CI gate passed` with exit 0. No authored/runtime/public behavior or rollout row moved. |
 | `2026-08-13` | `INTER-MATCH-GAP-CAPTURE.1.1` | Clean `31f3e664` activation; checker-first governed RED; focused neutral checker; exact 50 deep-copy corruptions; duplicate-slot five-backend matrix; typed-source six-runtime matrix; rendered mdBook; Knowledge Map; all eight doctrines; staged canonical local CI | Pass: exact absence exited 1 with only `inter-match gap capture contract is missing`; GREEN locks 8+10 fixtures / 3 sources / 8 private fields / 16 transitions / 10 segmentations / 3 terminal routes / 7 transaction-recursion-return rows / 6 compatibility rows / 9 diagnostics / rollout 1 complete + 8 pending / 50 rejected semantic mutations. Duplicate-slot remains 59 across five backends and typed-source remains 9/5/114 across six runtimes. Rendered book passes 79 files / 14,628 KiB, Knowledge passes 830 facts / 6,950 keys, and all eight doctrines pass. The first staged gate caught the exact Python-entrypoint census drift at 29 versus 30; after that containment lock was repaired, the sandboxed restart reached only the outer harness's status-71 denial of nested `sandbox-exec`. The unchanged permission-authorized run passed six-family containment, all-five-anchor relocation, CLI 66/66 in both option environments, RAM 55%, and Phase 0 1,031/1,031 in 737 seconds through exact `[ci] local CI gate passed` and exit 0. Exact generated verification residue is removed; no authored or runtime behavior moved. |
 | `2026-08-13` | `INTER-MATCH-GAP-CAPTURE.1.0` | Clean `3d0384d1` activation; ADR/Knowledge/contract/task retrieval; `LinkedSpec::Get(return_descriptor)` numeric/named probes; generated-source order; corrected historical live fixture; five-backend marker audit; duplicate-slot and typed-source matrices; rendered book; Knowledge Map; doctrines; canonical local CI | Pass: current `Top::OR` is action-owned/seek/repeating; numeric slot 1 resolves; named forms reject; generated order is selection → `LS` → action/target → legacy `LE` → `IT`; historical result is exact `[pre,H]`, `[gap,S]`, `[more,F]` without tail; marker divergence is unchanged; duplicate 59 and typed-source 9/5/114 pass. Rendered book passes 79 files / 14,628 KiB and Knowledge passes 830 facts / 6,950 question keys. Canonical signoff caught and rejected two condensed no-drift projection omissions, then the corrected permission-authorized run passed all eight doctrines, six-family containment, all-five-anchor relocation, CLI 66/66 twice, RAM 52%, and Phase 0 1,031/1,031 in 735 seconds through exact `[ci] local CI gate passed`. The prior status 71 was solely the outer harness denying nested `sandbox-exec`. No behavior or rollout moved. |
 | `2026-07-17` | `INTER-MATCH-GAP-CAPTURE.0` | Baseline `cf25bd37` source/spec audit; drift commits `8588b07b`/`300e6950`; current descriptor `Document[0..2]`; live three-gap/lifecycle probe; five-backend marker-scope code audit; `knowledge-map/scripts/check_knowledge_map.sh`; `mdbook build docs/linkedspec-book`; `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git diff --check` | Pass: current code preserves external target-slot ownership and automatic prefix/interstitial rolling; legacy marker divergence is explicit; derived map 583 facts / 4,106 keys; all documentation/governance gates green. |
@@ -510,12 +554,19 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `INTER-MATCH-GAP-CAPTURE.1.1` | `INTER-MATCH-GAP-CAPTURE.1.1 - add executable neutral contract` | Signoff-complete neutral authority landed by this atomic 219/300 commit. |
+| `INTER-MATCH-GAP-CAPTURE.1.2` | `INTER-MATCH-GAP-CAPTURE.1.2 - govern recurring neutral route` | Signoff-complete recurring-neutral governance lands as atomic 220/300 in this commit. |
+| `INTER-MATCH-GAP-CAPTURE.1.1` | `f58dfcb3` — `INTER-MATCH-GAP-CAPTURE.1.1 - add executable neutral contract` | Executable-neutral authority landed cleanly as atomic 219/300. |
 | `INTER-MATCH-GAP-CAPTURE.1.0` | `31f3e664` — `INTER-MATCH-GAP-CAPTURE.1.0 - freeze executable neutral plan` | Behavior-free audit/plan landed cleanly as atomic 218/300. |
 | `INTER-MATCH-GAP-CAPTURE.0` | `INTER-MATCH-GAP-CAPTURE.0 - ratify inter-match gap capture` | Historical recovery and design ratification only; no runtime change. |
 
 ## Changelog
 
+- `2026-08-13`: Completed `.1.2` from clean `f58dfcb3`: one rooted driver executes neutral once and reports six
+  exact pending-runtime skips; five new corruptions lock route/status/storage/public truth at unchanged 1/8
+  rollout and 55 mutations. Focused, storage, outside-CWD, rendered-book, Knowledge, all-doctrine, containment,
+  relocation, CLI 66x2, Phase 0 1,031/1,031, and opt-in canonical signoff pass; only the atomic-220 commit remains.
+- `2026-08-13`: Landed `.1.1` cleanly at `f58dfcb3` as atomic 219/300, then activated `.1.2` task-tree-first from
+  that boundary for routing/topology/storage/public no-overclaim governance only; all runtime rows remain pending.
 - `2026-08-13`: Completed `.1.1` checker-first: its governed route failed exactly on the absent artifact, then
   the format-1 neutral artifact passed executable Unicode/empty/child/transaction modeling and all 50 reason-
   checked corruptions at 1 complete + 8 pending. No parser, compiler, runtime, descriptor, helper, schema, CLI,

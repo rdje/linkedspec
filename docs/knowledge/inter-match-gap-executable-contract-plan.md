@@ -22,10 +22,10 @@ answers:
   - "what are the capture_gaps rollout legs"
   - "is capture_gaps implemented now"
 date: 2026-08-13
-status: executable-neutral artifact current at 1 complete + 8 pending; authored/runtime implementation pending
+status: executable-neutral artifact and recurring governance current at 1 complete + 8 pending; authored/runtime implementation pending
 tags: [capture, segmentation, named-slots, typed-source, lifecycle, transaction, recursion, contract, plan]
-evidence: "INTER-MATCH-GAP-CAPTURE.1.1 from clean 31f3e664; checker-first exact missing-artifact RED; executable neutral Unicode/empty/child/rollback/nested model; 50 reason-checked semantic corruptions; rollout 1 complete + 8 pending. No authored or runtime behavior changed."
-reverify: "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py"
+evidence: "INTER-MATCH-GAP-CAPTURE.1.1 from clean 31f3e664 adds the executable neutral Unicode/empty/child/rollback/nested model and 50 semantic corruptions. INTER-MATCH-GAP-CAPTURE.1.2 from clean f58dfcb3 adds repository-rooted recurrence, exact pending-route order, public no-overclaim, and five governance corruptions for 55 total. Rollout remains 1 complete + 8 pending; no authored or runtime behavior changed."
+reverify: "bash tools/check_inter_match_gap_capture_six_runtime.sh"
 ---
 
 # Frozen executable-neutral plan
@@ -33,8 +33,10 @@ reverify: "bash tools/run_python_project_data.sh tools/check_inter_match_gap_cap
 `INTER-MATCH-GAP-CAPTURE.1.0` specified the artifact before implementation. `.1.1` now provides
 `capability_conformance/inter_match_gap_capture_contract.json` (`format: 1`, contract id
 `linkedspec-inter-match-gap-capture-v1`) plus independent
-`tools/check_inter_match_gap_capture_contract.py`. `.1.2` owns repository-rooted recurring/canonical routing and
-no-overclaim governance. `.1.3` recomposes those committed inputs unchanged before Perl implementation starts.
+`tools/check_inter_match_gap_capture_contract.py`. `.1.2` now provides repository-rooted recurring/canonical
+routing and no-overclaim governance through `tools/check_inter_match_gap_capture_six_runtime.sh`; it executes only
+the complete neutral row and explicitly skips all six pending runtime rows. `.1.3` recomposes those committed
+inputs unchanged before Perl implementation starts.
 
 The nine ordered rollout legs are neutral, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurring proof, and public
 no-drift. Only neutral can become complete in `.1`; runtime rows remain for `.2-.6`, and recurrence/public

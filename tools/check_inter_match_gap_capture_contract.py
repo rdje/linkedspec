@@ -11,8 +11,12 @@ from typing import Any, Callable
 
 
 ROOT = Path(__file__).resolve().parents[1]
+CHECKER_PATH = Path(__file__).resolve()
 CONTRACT_PATH = ROOT / "capability_conformance/inter_match_gap_capture_contract.json"
 UNICODE_CONTRACT_PATH = ROOT / "capability_conformance/unicode_rule_label_contract.json"
+CI_PATH = ROOT / "tools/run_ci_local.sh"
+RECURRING_DRIVER_PATH = ROOT / "tools/check_inter_match_gap_capture_six_runtime.sh"
+PROJECT_DATA_WORKFLOW_ROUTING_PATH = ROOT / "tools/test_project_data_workflow_routing.sh"
 CONTRACT_ID = "linkedspec-inter-match-gap-capture-v1"
 TASK_OWNER = "INTER-MATCH-GAP-CAPTURE.1.1"
 PINNED_XID_RANGES: tuple[tuple[int, int], ...] = ()
@@ -37,6 +41,7 @@ REQUIRED_SECTIONS = (
     "diagnostics",
     "mutation_ids",
     "recurring_gate",
+    "public_no_overclaim",
     "rollout",
 )
 
@@ -52,7 +57,7 @@ EXPECTED_COUNTS = {
     "compatibility_rows": 6,
     "diagnostics": 9,
     "rollout_legs": 9,
-    "semantic_mutations": 50,
+    "semantic_mutations": 55,
 }
 
 MUTATION_IDS = (
@@ -106,6 +111,11 @@ MUTATION_IDS = (
     "nested_suspend_resume",
     "action_return_authority",
     "diagnostic_schema",
+    "rollout_sequence",
+    "runtime_rows_pending",
+    "storage_paths",
+    "route_order",
+    "public_no_overclaim",
 )
 
 POSITIVE_IDS = (
@@ -713,11 +723,16 @@ def validate_diagnostics(document: dict[str, Any]) -> None:
 
 def validate_recurring_gate(document: dict[str, Any]) -> None:
     expected = {
-        "status": "planned",
+        "status": "governance_current_runtime_admission_pending",
         "owner": "INTER-MATCH-GAP-CAPTURE.1.2",
         "driver": "tools/check_inter_match_gap_capture_six_runtime.sh",
         "local_ci_driver": "tools/run_ci_local.sh",
         "local_ci_switch": "LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX",
+        "neutral_route": {
+            "rollout_id": "neutral_contract",
+            "path": "tools/check_inter_match_gap_capture_contract.py",
+            "command": "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py",
+        },
         "consumer_schema": {
             "fields": ["backend", "runtime", "path", "roles"],
             "role_policy": "every admitted carrier role is required and shared Lua runs once per ABI",
@@ -760,9 +775,126 @@ def validate_recurring_gate(document: dict[str, Any]) -> None:
                 "roles": ["native_execution", "ordinary_reconstruction", "descriptor", "generated_plan", "emitted_source", "target_lifecycle", "recursion_and_rollback", "portable_diagnostics", "primary_command"],
             },
         ],
-        "storage": "repository_derived_project_data_same_volume",
+        "route_order": [
+            "neutral_contract",
+            "perl_runtime",
+            "rust_runtime",
+            "dart_runtime",
+            "julia_runtime",
+            "puc_lua_runtime",
+            "luajit_runtime",
+        ],
+        "execution_policy": "run the neutral route exactly once, then run only complete runtime rows and explicitly skip every pending runtime row in route order",
+        "storage": {
+            "initializer": "tools/project_data_env.sh",
+            "managed_entrypoint": "tools/check_inter_match_gap_capture_six_runtime.sh",
+            "policy": "all temporary, cache, build, native, and test data stays under repository-derived storage on the repository volume",
+        },
     }
-    require(document["recurring_gate"] == expected, "planned recurring gate drifted")
+    require(document["recurring_gate"] == expected, "recurring gate topology drifted")
+
+
+def public_no_overclaim_texts(
+    public_contract: dict[str, Any],
+) -> tuple[dict[str, str], dict[str, str]]:
+    document_texts: dict[str, str] = {}
+    for row in public_contract["documents"]:
+        path = row["path"]
+        source = ROOT / path
+        require(source.is_file(), f"public no-overclaim document is missing: {path}")
+        document_texts[path] = source.read_text(encoding="utf-8")
+
+    surface_texts: dict[str, str] = {}
+    for path in public_contract["surface_guard"]["paths"]:
+        source = ROOT / path
+        require(source.is_file(), f"public no-overclaim surface is missing: {path}")
+        surface_texts[path] = source.read_text(encoding="utf-8")
+    return document_texts, surface_texts
+
+
+def validate_public_no_overclaim(
+    document: dict[str, Any],
+    document_texts: dict[str, str] | None = None,
+    surface_texts: dict[str, str] | None = None,
+) -> None:
+    expected = {
+        "status": "current",
+        "owner": "INTER-MATCH-GAP-CAPTURE.1.2",
+        "policy": "document the executable neutral and recurring governance without claiming named regex declarations or selectors, entry_slot(), @capture_gaps, gap_* helpers, backend behavior, schema exposure, CLI exposure, or public admission",
+        "rollout_assertions": {
+            "row_count": 9,
+            "neutral_contract": {"status": "complete", "owner": "INTER-MATCH-GAP-CAPTURE.1.1"},
+            "runtime_ids": ["perl_runtime", "rust_runtime", "dart_runtime", "julia_runtime", "puc_lua_runtime", "luajit_runtime"],
+            "runtime_status": "pending",
+            "recurring": {"status": "pending", "owner": "INTER-MATCH-GAP-CAPTURE.7"},
+            "public_no_drift": {"status": "pending", "owner": "INTER-MATCH-GAP-CAPTURE.7"},
+        },
+        "documents": [
+            {
+                "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+                "required_marker": "Inter-match gap-capture recurring governance is current, while every runtime and public surface remains unimplemented.",
+            },
+            {
+                "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+                "required_marker": "Inter-match gap-capture recurring governance runs only the complete neutral row; all six runtime routes remain explicit skips.",
+            },
+            {
+                "path": "docs/linkedspec-book/src/overview/project-status.md",
+                "required_marker": "Inter-match gap-capture governance is current at 1 complete / 8 pending, with no runtime or public admission.",
+            },
+            {
+                "path": "capability_conformance/README.md",
+                "required_marker": "Inter-match gap-capture recurring governance is current without runtime or public admission.",
+            },
+            {
+                "path": "TOOLBOX.md",
+                "required_marker": "Inter-match gap-capture recurring governance is current and executes only its complete neutral row.",
+            },
+        ],
+        "surface_guard": {
+            "paths": [
+                "perl/LinkedSpec.pm",
+                "rust/linkedspec-runtime/src/lib.rs",
+                "dart/lib/linkedspec_dart.dart",
+                "julia/src/LinkedSpecJulia.jl",
+                "lua/src/linkedspec/init.lua",
+                "capability_conformance/outward_descriptor_contract.json",
+                "capability_conformance/semantic_introspection_model.json",
+                "capability_conformance/mcp_semantic_transport/schema.json",
+                "cli_conformance/manifest.json",
+                "README.md",
+            ],
+            "forbidden_tokens": ["@capture_gaps", "entry_slot", "gap_span", "gap_text", "gap_kind", "Rule[name]", "name=/regex/"],
+        },
+    }
+    public_contract = document["public_no_overclaim"]
+    require(public_contract == expected, "public no-overclaim contract drifted")
+
+    assertions = public_contract["rollout_assertions"]
+    rollout = document["rollout"]
+    require(len(rollout) == assertions["row_count"], "public no-overclaim rollout cardinality drifted")
+    rollout_by_id = {row["id"]: row for row in rollout}
+    for rollout_id in ("neutral_contract", "recurring", "public_no_drift"):
+        expected_row = assertions[rollout_id]
+        actual = rollout_by_id.get(rollout_id)
+        require(
+            actual is not None and {"status": actual["status"], "owner": actual["owner"]} == expected_row,
+            f"public no-overclaim rollout assertion drifted: {rollout_id}",
+        )
+    for rollout_id in assertions["runtime_ids"]:
+        actual = rollout_by_id.get(rollout_id)
+        require(actual is not None and actual["status"] == assertions["runtime_status"], f"runtime rollout promoted prematurely: {rollout_id}")
+
+    if document_texts is None and surface_texts is None:
+        return
+    require(document_texts is not None and surface_texts is not None, "public no-overclaim text inventories must be provided together")
+    require(set(document_texts) == {row["path"] for row in public_contract["documents"]}, "public no-overclaim document inventory drifted")
+    require(set(surface_texts) == set(public_contract["surface_guard"]["paths"]), "public no-overclaim surface inventory drifted")
+    for row in public_contract["documents"]:
+        require(document_texts[row["path"]].count(row["required_marker"]) == 1, f"public no-overclaim marker missing or duplicated: {row['path']}")
+    for path in public_contract["surface_guard"]["paths"]:
+        for token in public_contract["surface_guard"]["forbidden_tokens"]:
+            require(token not in surface_texts[path], f"public surface widened before admission: {path}: {token}")
 
 
 def validate_rollout(document: dict[str, Any]) -> None:
@@ -782,7 +914,56 @@ def validate_rollout(document: dict[str, Any]) -> None:
         require(rows[rollout_id] == {"id": rollout_id, "owner": expected_owner, "status": expected_status}, f"{rollout_id} rollout drifted")
 
 
-def validate_contract(document: dict[str, Any]) -> None:
+def validate_registration(document: dict[str, Any]) -> None:
+    recurring = document["recurring_gate"]
+    for path in (
+        CONTRACT_PATH,
+        CHECKER_PATH,
+        ROOT / "tools/run_python_project_data.sh",
+        CI_PATH,
+        RECURRING_DRIVER_PATH,
+        PROJECT_DATA_WORKFLOW_ROUTING_PATH,
+    ):
+        require(path.is_file(), f"canonical recurring input is missing: {path.relative_to(ROOT)}")
+
+    document_texts, surface_texts = public_no_overclaim_texts(document["public_no_overclaim"])
+    validate_public_no_overclaim(document, document_texts, surface_texts)
+
+    driver_text = RECURRING_DRIVER_PATH.read_text(encoding="utf-8")
+    for marker in (
+        'source "$REPO_ROOT/tools/project_data_env.sh"',
+        'linkedspec_project_data_enter_run "$REPO_ROOT/tools/check_inter_match_gap_capture_six_runtime.sh" "$@"',
+    ):
+        require(driver_text.count(marker) == 1, f"recurring driver is not repository-routed: {marker}")
+
+    route_markers = [recurring["neutral_route"]["command"]]
+    runtime_ids = recurring["route_order"][1:]
+    require(len(runtime_ids) == len(recurring["consumers"]), "recurring runtime route cardinality drifted")
+    for rollout_id, consumer in zip(runtime_ids, recurring["consumers"], strict=True):
+        route_markers.append(f"skipping pending runtime route {rollout_id}: {consumer['path']}")
+        require(not (ROOT / consumer["path"]).exists(), f"pending runtime consumer exists before admission: {consumer['path']}")
+    positions: list[int] = []
+    for marker in route_markers:
+        require(driver_text.count(marker) == 1, f"recurring driver marker must appear exactly once: {marker}")
+        positions.append(driver_text.index(marker))
+    require(positions == sorted(positions), "recurring driver route order drifted")
+
+    ci_text = CI_PATH.read_text(encoding="utf-8")
+    ci_markers = (
+        (f"git status --short --untracked-files=all -- {recurring['driver']}", 1),
+        (f"require_tracked_file {recurring['driver']}", 2),
+        (recurring["neutral_route"]["command"], 1),
+        (f'if [[ "${{{recurring["local_ci_switch"]}:-0}}" == "1" ]]; then', 1),
+        (f'bash "$REPO_ROOT/{recurring["driver"]}"', 1),
+    )
+    for marker, expected_count in ci_markers:
+        require(ci_text.count(marker) == expected_count, f"canonical recurring registration marker count drifted: {marker} expected {expected_count}")
+
+    workflow_text = PROJECT_DATA_WORKFLOW_ROUTING_PATH.read_text(encoding="utf-8")
+    require(workflow_text.count(recurring["driver"]) == 2, "recurring project-data routing registration drifted")
+
+
+def validate_contract(document: dict[str, Any], *, check_registration: bool = True) -> None:
     require(isinstance(document, dict) and set(document) == set(REQUIRED_SECTIONS), "required sections drifted")
     require(type(document["format"]) is int and document["format"] == 1, "format drifted")
     require(document["contract_id"] == CONTRACT_ID, "contract id drifted")
@@ -805,6 +986,7 @@ def validate_contract(document: dict[str, Any]) -> None:
     require(document["mutation_ids"] == list(MUTATION_IDS), "mutation identity/order drifted")
     validate_recurring_gate(document)
     validate_rollout(document)
+    validate_public_no_overclaim(document)
     require(len(document["selector_resolution_fixtures"]["positive"]) == EXPECTED_COUNTS["positive_selector_fixtures"], "positive fixture count drifted")
     require(len(document["selector_resolution_fixtures"]["negative"]) == EXPECTED_COUNTS["negative_selector_directive_fixtures"], "negative fixture count drifted")
     require(len(document["gap_sources"]) == EXPECTED_COUNTS["decoded_source_fixtures"], "source fixture count drifted")
@@ -817,6 +999,8 @@ def validate_contract(document: dict[str, Any]) -> None:
     require(len(document["diagnostics"]) == EXPECTED_COUNTS["diagnostics"], "diagnostic count lock drifted")
     require(len(document["rollout"]) == EXPECTED_COUNTS["rollout_legs"], "rollout count drifted")
     require(len(document["mutation_ids"]) == EXPECTED_COUNTS["semantic_mutations"], "mutation count drifted")
+    if check_registration:
+        validate_registration(document)
 
 
 Mutation = tuple[str, str, Callable[[dict[str, Any]], None]]
@@ -880,6 +1064,11 @@ def mutations() -> list[Mutation]:
             ("nested_suspend_resume", "gap state-machine transitions drifted", lambda d: d["gap_state_machine"]["transitions"][9].__setitem__("effect", "child_candidate_leaks")),
             ("action_return_authority", "lifecycle return authority drifted", lambda d: d["lifecycle_matrix"]["return_authority"].__setitem__("default_scan_action_edge", "accepted_per_hit_payload")),
             ("diagnostic_schema", "diagnostic schema drifted", lambda d: d["diagnostics"][8]["required_context"].pop()),
+            ("rollout_sequence", "rollout identity/order drifted", lambda d: d["rollout"].reverse()),
+            ("runtime_rows_pending", "perl_runtime rollout drifted", lambda d: row(d, "rollout", "perl_runtime").__setitem__("status", "complete")),
+            ("storage_paths", "recurring gate topology drifted", lambda d: d["recurring_gate"]["storage"].__setitem__("initializer", "/tmp/project_data_env.sh")),
+            ("route_order", "recurring gate topology drifted", lambda d: d["recurring_gate"]["route_order"].reverse()),
+            ("public_no_overclaim", "public no-overclaim contract drifted", lambda d: d["public_no_overclaim"].__setitem__("status", "planned")),
         ]
     )
     return values
@@ -892,7 +1081,7 @@ def validate_mutations(document: dict[str, Any]) -> int:
         candidate = copy.deepcopy(document)
         mutate(candidate)
         try:
-            validate_contract(candidate)
+            validate_contract(candidate, check_registration=False)
         except ContractError as error:
             require(expected_reason in str(error), f"mutation {name} failed for unexpected reason: {error}")
         else:

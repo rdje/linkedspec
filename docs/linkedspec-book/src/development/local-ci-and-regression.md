@@ -212,6 +212,14 @@ containment and relocation, CLI 66/66 in both option environments, RAM 62%, Phas
 and this complete matrix through its exact success marker. The combined program-wide `.14.8` public-no-drift row
 remains pending.
 
+Inter-match gap-capture recurring governance runs only the complete neutral row; all six runtime routes remain explicit skips.
+The always-on neutral command is
+`bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py`. The repository-routed
+`tools/check_inter_match_gap_capture_six_runtime.sh` driver repeats that authority exactly once, then reports the
+pending Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT routes in fixed order without invoking their absent consumers.
+Set `LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1` to exercise this governance route in canonical local CI. Rollout
+remains 1 complete / 8 pending, so this switch proves topology and storage locality rather than runtime support.
+
 Dart's admitted consumer covers its internal value core and all 92+7 helper projections across native,
 reconstructed, generated-plan, and freshly emitted execution. The independent rollout checker requires its
 ordinary path and canonical command exactly once, rejects retained dormancy, and rejects any regression of the

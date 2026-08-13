@@ -259,6 +259,25 @@ No compiler, descriptor, generated carrier, helper, facade, schema, semantic/MCP
 typed-source behavior moved. `.1.2` still owns canonical routing, storage/topology governance, and public
 no-overclaim; `.1.3` still owns neutral recomposition before Perl implementation.
 
+## 2026-08-13 recurring-governance amendment
+
+`INTER-MATCH-GAP-CAPTURE.1.2` makes the neutral authority canonically recurring without admitting a runtime.
+`tools/check_inter_match_gap_capture_six_runtime.sh` derives the repository root from its own location, enters the
+existing project-data run boundary, executes the neutral checker exactly once, then emits explicit ordered skips
+for the pending Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT consumers. Canonical local CI always executes the
+neutral checker and exposes that ordered governance route only under `LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1`.
+
+The contract now fixes repository-derived same-volume storage, neutral-plus-six route order, all six runtime rows
+remaining pending, and five exact current-document markers plus ten outward facade/schema/CLI/README guards. The
+checker rejects `rollout_sequence`, `runtime_rows_pending`, `storage_paths`, `route_order`, and
+`public_no_overclaim` corruptions, advancing neutral governance from 50 to 55 mutations. Rollout remains exactly
+1 complete + 8 pending: the `recurring` and `public_no_drift` rows are still owned by `.7`, because a current route
+definition is not proof of admitted six-runtime behavior.
+
+This amendment changes no grammar, parser, compiler, runtime, descriptor, generated carrier, helper, facade,
+schema, semantic/MCP, CLI, README, capability, or typed-source behavior. Named declarations, named selectors,
+`entry_slot()`, `@capture_gaps`, and the three `gap_*` accessors remain planned and unimplemented.
+
 ## Consequences
 
 - The director's original concept and target-rule ownership are durable and cannot be reassigned to

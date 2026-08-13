@@ -4,13 +4,13 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `31f3e664` — clean executable-neutral plan base for intended atomic 219/300; no push.
-- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.1.1 - add executable-neutral contract`, atomic 219/300.
-- active_work_unit: none; `.1.2` awaits task-tree-first activation from the intended clean atomic-219 boundary.
-- next_action: activate `.1.2` task-tree-first for storage-rooted routing, topology, and public no-overclaim only.
-- in_flight_uncommitted: none after intended landing; `.1.1` moves only neutral rollout to complete, with all eight
-  runtime/recurring/public legs pending and no authored or runtime behavior.
-- blockers: none. Focused neutral proof passes 8+10 fixtures / 3 sources / 16 transitions / 10 segmentations / 9 diagnostics / rollout 1+8 / 50 rejected mutations; canonical signoff passes Phase 0 1,031/1,031 in 737 seconds and exact local-CI success.
+- activation_commit: `f58dfcb3` — clean executable-neutral artifact base for intended atomic 220/300; no push.
+- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.1.2 - govern recurring neutral route`, atomic 220/300.
+- active_work_unit: none after intended `.1.2` landing; `.1.3` awaits task-tree-first activation from that boundary.
+- next_action: activate `.1.3` to recompose and close the unchanged neutral authority before Perl implementation.
+- in_flight_uncommitted: none after intended landing; recurrence executes only neutral and skips six pending runtimes.
+- blockers: none. Focused 1/8/55, ordered skips, storage/outside-CWD, duplicate 59, typed 9/5/114, book 78/14,632,
+  and Knowledge 831/6,960 pass; canonical passes 8 doctrines, containment/relocation, CLI 66x2, RAM 61%, Phase 0 1,031/1,031, the opt-in route, and exact local-CI success.
 - current_typed_source: neutral/public structure plus Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT internal
   runtimes are admitted at 8 complete / 6 pending. Five consumer groups now map to six ordered recurring runtime
   routes. Eleven topology mutations advanced governance to 53, four lineage mutations to 57, and executable
@@ -56,5 +56,5 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   policy, and authority-backed carriers at 207/207; exact ordinary/canonical proof is current while the API stays private.
   Lua has one shared Lua-5.1 authority at 187/187 and admitted ActionIR/effect/progress/runtime/carriers at 246/246
   per ABI; ordinary/canonical proof runs once per ABI while facade privacy remains unchanged.
-- current_future_direction: `INTER-MATCH-GAP-CAPTURE.1.1` makes the frozen behavior-free v1 authority executable at 1 complete + 8 pending / 50 mutations while every named-slot/directive/accessor/runtime surface remains absent. `.1.2` is next only after clean atomic 219; `.14.5.1` waits for `.7`. Brackets select; dot fluently binds. Closed repeated-action next owner remains `FUTURE-PARITY-BACKLOG.10.1`.
-- latest_bootstrap_read: 2026-08-13 — complete roadmap/codebase/mdBook and continuity/tooling review; pivot guard: do not leave `.1.1` until atomic 219 is committed and clean; push lock is 300.
+- current_future_direction: `INTER-MATCH-GAP-CAPTURE.1.2` makes neutral recurrence and no-overclaim current at 1 complete + 8 pending / 55 mutations while every named-slot/directive/accessor/runtime surface remains absent. `.1.3` closes neutral governance; `.14.5.1` waits for `.7`. Brackets select; dot fluently binds. Closed repeated-action next owner remains `FUTURE-PARITY-BACKLOG.10.1`.
+- latest_bootstrap_read: 2026-08-13 — complete roadmap/codebase/mdBook and continuity/tooling review; pivot guard: do not leave `.1.2` until atomic 220 is committed and clean; push lock is 300.

@@ -301,6 +301,13 @@ mutations. Recursive-observation public projection/no-drift is current without a
 Governance is 114, and the combined program-wide public-no-drift row stays pending for `.14.8`. No public
 helper/value, descriptor/generated schema, semantic/MCP field, CLI, or README behavior moved.
 
+`inter_match_gap_capture_contract.json` is the behavior-free authority for future named regex slots and lossless
+prefix/interstitial/tail context. Inter-match gap-capture recurring governance is current without runtime or public admission.
+Run `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py` for the always-on
+neutral proof or `bash tools/check_inter_match_gap_capture_six_runtime.sh` for the repository-routed ordered
+governance route. The latter executes the one complete neutral row and skips all six pending runtime consumers;
+the nine-leg rollout remains 1 complete / 8 pending and the checker rejects 55 semantic/topology corruptions.
+
 No public `Position`/`Span` value, descriptor or generated schema, semantic/MCP projection, or source-authority
 elevation is claimed by these internal typed-source runtime admissions. Recognition transaction spelling and
 behavior are current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT under the separate ledger described next.

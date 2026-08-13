@@ -568,8 +568,16 @@ Typed-source composition consumes that completed contract afterward; it does not
 
 The behavior-free contract now lives at `capability_conformance/inter_match_gap_capture_contract.json`, uses id
 `linkedspec-inter-match-gap-capture-v1`, and is checked independently by
-`tools/check_inter_match_gap_capture_contract.py`. Its first artifact leaf adds executable fixtures only; it does not make
-the DSL forms below executable.
+`tools/check_inter_match_gap_capture_contract.py`. Inter-match gap-capture recurring governance is current, while every runtime and public surface remains unimplemented.
+The recurring driver currently executes that complete neutral row exactly once and emits six ordered pending
+route skips:
+
+```bash
+bash tools/check_inter_match_gap_capture_six_runtime.sh
+```
+
+Canonical local CI always runs the neutral checker and exposes the same governance route behind
+`LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1`. Neither route makes the DSL forms below executable.
 
 The neutral artifact locks 8 positive and 10 negative authored fixtures, 3 source fixtures, 8 private gap fields,
 16 main-machine transitions, 10 segmentation cases, 3 terminal routes, 7 transaction/recursion/return-channel

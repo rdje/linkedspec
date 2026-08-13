@@ -78,7 +78,16 @@ artifact and independent executable checker: checker-first RED rejected the abse
 executed the neutral span/state model and rejected all 50 semantic corruptions at 1 complete + 8 pending. Its
 canonical signoff passes the rendered 79-file/14,628-KiB book, Knowledge 830/6,950, all eight doctrines,
 six-family containment, all-five-anchor relocation, CLI 66/66 twice, RAM 55%, and Phase 0 1,031/1,031 in 737
-seconds. `.1.2` owns routing/topology/no-overclaim from the clean atomic-219 boundary.
+seconds. `.1.2` then adds repository-routed recurring governance from the clean atomic-219 boundary. One driver
+executes the neutral row exactly once and emits six ordered pending-runtime skips; canonical CI always runs the
+neutral checker and exposes the driver under `LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1`. Five new corruptions lock
+rollout order, pending runtime status, storage paths, route order, and public no-overclaim, advancing governance to
+55 without moving the exact 1 complete + 8 pending rollout. Five mdBook/capability/Toolbox markers and ten
+outward facade/schema/CLI/README guards prevent planned spellings from becoming current claims.
+Signoff passes the rendered 78-file/14,632-KiB book, Knowledge 831/6,960, all eight doctrines, six-family
+containment, all-five-anchor relocation, CLI 66/66 twice, RAM 61%, Phase 0 1,031/1,031, and the exact opt-in
+neutral-plus-six-pending route through local-CI exit 0. The prior status 71 was solely the outer harness denying
+the gate's nested macOS containment sandbox.
 
 The current executable-neutral authority is
 `capability_conformance/inter_match_gap_capture_contract.json`, format 1 / id
@@ -101,8 +110,8 @@ per-hit values, while an unadorned default-loop edge return is a whole-rule unwi
 without boundary commit or tail fabrication. Lifecycle returns retain whole-rule authority and exact payloads.
 
 The rollout has nine legs: neutral, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurrence, and public no-drift.
-Neutral is now complete while all eight runtime/recurring/public legs remain pending. `.1.2-.1.3` own
-governance/recomposition; `.2-.7` own runtime and public movement. Repository-local
+Neutral is now complete while all eight runtime/recurring/public legs remain pending. `.1.2` owns recurring
+governance, `.1.3` owns unchanged recomposition, and `.2-.7` own runtime and public movement. Repository-local
 storage, exact routes, lifecycle/segmentation/diagnostic mutations, generated carriers, and no-overclaim are fixed
 before implementation. This is an accepted plan only: current syntax, runtime, descriptor, helper, facade, CLI,
 capability status, and typed-source rollout remain unchanged.

@@ -114,6 +114,12 @@ check_no_untracked_ci_inputs() {
   found=1
  fi
 
+ status_line=$(git status --short --untracked-files=all -- tools/check_inter_match_gap_capture_six_runtime.sh)
+ if [[ "$status_line" == '?? '* ]]; then
+  printf '[ci] ERROR: untracked CI input: %s\n' "${status_line#?? }" >&2
+  found=1
+ fi
+
  status_line=$(git status --short --untracked-files=all -- tools/check_recognition_transaction_six_runtime.sh)
  if [[ "$status_line" == '?? '* ]]; then
   printf '[ci] ERROR: untracked CI input: %s\n' "${status_line#?? }" >&2
@@ -246,6 +252,8 @@ require_tracked_file tools/check_rule_local_cursor_five_backend.sh
 require_tracked_file tools/check_typed_source_location_contract.py
 require_tracked_file tools/check_typed_source_location_six_runtime.sh
 require_tracked_file tools/check_recursive_observation_six_runtime.sh
+require_tracked_file tools/check_inter_match_gap_capture_contract.py
+require_tracked_file tools/check_inter_match_gap_capture_six_runtime.sh
 require_tracked_file tools/check_recognition_transaction_six_runtime.sh
 require_tracked_file tools/check_semantic_introspection_contract.py
 require_tracked_file tools/check_semantic_introspection_six_runtime.sh
@@ -373,6 +381,7 @@ require_tracked_file capability_conformance/repeated_action_result/explicit_or_d
 require_tracked_file capability_conformance/root_rule_selection_contract.json
 require_tracked_file capability_conformance/rule_local_cursor_contract.json
 require_tracked_file capability_conformance/typed_source_location_contract.json
+require_tracked_file capability_conformance/inter_match_gap_capture_contract.json
 require_tracked_file capability_conformance/semantic_introspection_contract.json
 require_tracked_file capability_conformance/semantic_introspection_model.json
 require_tracked_file capability_conformance/uniform_binding_contract.json
@@ -501,6 +510,9 @@ $typed_source_driver_matches"
 recursive_observation_driver_matches=$(grep -nE '/(Users|home)/[^[:space:]]*|[[:alpha:]]:\\\\' tools/check_recursive_observation_six_runtime.sh || true)
 [[ -z "$recursive_observation_driver_matches" ]] || fail "machine-specific absolute path(s) in recursive-observation recurring driver:
 $recursive_observation_driver_matches"
+inter_match_gap_driver_matches=$(grep -nE '/(Users|home)/[^[:space:]]*|[[:alpha:]]:\\\\' tools/check_inter_match_gap_capture_six_runtime.sh || true)
+[[ -z "$inter_match_gap_driver_matches" ]] || fail "machine-specific absolute path(s) in inter-match gap-capture recurring driver:
+$inter_match_gap_driver_matches"
 recognition_driver_matches=$(grep -nE '/(Users|home)/[^[:space:]]*|[[:alpha:]]:\\\\' tools/check_recognition_transaction_six_runtime.sh || true)
 [[ -z "$recognition_driver_matches" ]] || fail "machine-specific absolute path(s) in recognition-transaction recurring driver:
 $recognition_driver_matches"
@@ -524,6 +536,7 @@ bash -n tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh \
  tools/check_mcp_six_runtime.sh \
  tools/check_typed_source_location_six_runtime.sh \
  tools/check_recursive_observation_six_runtime.sh \
+ tools/check_inter_match_gap_capture_six_runtime.sh \
  tools/check_recognition_transaction_six_runtime.sh \
  scripts/check_memory_commit_pointer.sh scripts/check_readme_stability.sh \
  tools/test_memory_commit_pointer.sh \
@@ -612,6 +625,9 @@ bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py
 
 log "checking backend-neutral typed source-location algebra contract"
 bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py
+
+log "checking backend-neutral inter-match gap-capture contract and current no-overclaim boundary"
+bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py
 
 log "checking backend-neutral recognition transaction and progress contract"
 bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py
@@ -964,6 +980,14 @@ if [[ "${LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX:-0}" == "1" ]]; then
  bash "$REPO_ROOT/tools/check_recursive_observation_six_runtime.sh"
 else
  log "skipping optional six-runtime recursive-observation matrix (set LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1 when all backend toolchains are available)"
+fi
+
+if [[ "${LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX:-0}" == "1" ]]; then
+ log "running optional inter-match gap-capture six-runtime route (LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1)"
+ require_tracked_file tools/check_inter_match_gap_capture_six_runtime.sh
+ bash "$REPO_ROOT/tools/check_inter_match_gap_capture_six_runtime.sh"
+else
+ log "skipping optional inter-match gap-capture six-runtime route (set LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1; runtime rows are still pending)"
 fi
 
 if [[ "${LINKEDSPEC_RUN_RECOGNITION_TRANSACTION_MATRIX:-0}" == "1" ]]; then
