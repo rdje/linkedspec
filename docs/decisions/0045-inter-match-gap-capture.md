@@ -1,7 +1,7 @@
 # 0045 - Inter-match gap capture preserves action-edge target ownership
 
 - Date: 2026-07-17
-- Status: accepted direction; implementation dependency-gated
+- Status: accepted; executable-neutral contract current; runtime implementation pending
 - Tags: architecture, grammar, capture, segmentation, or-rule, action-edge, source-span, portability, parity
 
 ## Context
@@ -244,6 +244,20 @@ or duplicate names, unknown/out-of-range/malformed selectors, duplicate/ineligib
 unavailable gap context, lifecycle reorder, transaction leakage, storage/route drift, premature rollout, and
 public overclaim. Existing source/range/cursor/progress diagnostic codes remain authoritative; nine new exact
 syntax/context diagnostic records cover only the genuinely new boundaries.
+
+## 2026-08-13 executable-neutral artifact amendment
+
+`INTER-MATCH-GAP-CAPTURE.1.1` now makes the behavior-free authority executable. The format-1 JSON artifact and
+independent checker exist at the ratified root-relative paths. Checker-first RED failed exactly because the
+artifact was absent; after the artifact was added, the checker executed the Unicode, empty-boundary,
+child-extended, falsey-acceptance, rollback, and nested-isolation model and rejected all 50 frozen in-memory
+semantic corruptions for their expected reasons.
+
+The rollout is exactly 1 complete + 8 pending: only `neutral_contract` is complete. The named declaration,
+`Rule[name]`, `entry_slot()`, `@capture_gaps`, and `gap_*` surfaces are still not accepted by any parser or runtime.
+No compiler, descriptor, generated carrier, helper, facade, schema, semantic/MCP, CLI, README, capability, or
+typed-source behavior moved. `.1.2` still owns canonical routing, storage/topology governance, and public
+no-overclaim; `.1.3` still owns neutral recomposition before Perl implementation.
 
 ## Consequences
 

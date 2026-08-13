@@ -22,15 +22,15 @@ answers:
   - "what are the capture_gaps rollout legs"
   - "is capture_gaps implemented now"
 date: 2026-08-13
-status: verified current audit; accepted behavior-free executable plan; implementation pending
+status: executable-neutral artifact current at 1 complete + 8 pending; authored/runtime implementation pending
 tags: [capture, segmentation, named-slots, typed-source, lifecycle, transaction, recursion, contract, plan]
-evidence: "INTER-MATCH-GAP-CAPTURE.1.0 from clean 3d0384d1; ADRs 0045/0047/0051/0056; current LinkedSpec return_descriptor, emitted-source, and live historical probes; duplicate-slot 59-mutation and typed-source 114-mutation six-runtime gates; current Perl/Rust/Dart/Julia/Lua marker sources. No behavior changed."
-reverify: "bash scripts/check_task_tree_metadata.sh && bash tools/check_duplicate_regex_slot_identity_five_backend.sh && bash tools/check_typed_source_location_six_runtime.sh"
+evidence: "INTER-MATCH-GAP-CAPTURE.1.1 from clean 31f3e664; checker-first exact missing-artifact RED; executable neutral Unicode/empty/child/rollback/nested model; 50 reason-checked semantic corruptions; rollout 1 complete + 8 pending. No authored or runtime behavior changed."
+reverify: "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py"
 ---
 
 # Frozen executable-neutral plan
 
-`INTER-MATCH-GAP-CAPTURE.1.0` specifies the next artifact without implementing it. `.1.1` will add
+`INTER-MATCH-GAP-CAPTURE.1.0` specified the artifact before implementation. `.1.1` now provides
 `capability_conformance/inter_match_gap_capture_contract.json` (`format: 1`, contract id
 `linkedspec-inter-match-gap-capture-v1`) plus independent
 `tools/check_inter_match_gap_capture_contract.py`. `.1.2` owns repository-rooted recurring/canonical routing and
@@ -99,6 +99,6 @@ AST mutation, diagnostics, output, external calls, registry effects, or host sta
 cursor-regression, repetition-progress, and recursive-progress diagnostics stay authoritative; the new contract
 adds only named-slot, directive, compatibility-conflict, and unavailable-context diagnostics.
 
-This card records an accepted plan, not current authored syntax or runtime behavior. See ADR `0045` and
+This card records a current executable-neutral authority, not current authored syntax or runtime behavior. See ADR `0045` and
 `docs/tasks/INTER-MATCH-GAP-CAPTURE.md` for the complete fixtures, mutation classes, storage routes, carrier roles,
 and implementation ownership.

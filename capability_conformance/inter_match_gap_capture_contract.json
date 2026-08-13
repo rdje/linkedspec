@@ -1,0 +1,979 @@
+{
+  "format": 1,
+  "contract_id": "linkedspec-inter-match-gap-capture-v1",
+  "task_owner": "INTER-MATCH-GAP-CAPTURE.1.1",
+  "expected_counts": {
+    "positive_selector_fixtures": 8,
+    "negative_selector_directive_fixtures": 10,
+    "decoded_source_fixtures": 3,
+    "private_gap_fields": 8,
+    "main_machine_transitions": 16,
+    "segmentation_cases": 10,
+    "terminal_routes": 3,
+    "transaction_recursion_return_cases": 7,
+    "compatibility_rows": 6,
+    "diagnostics": 9,
+    "rollout_legs": 9,
+    "semantic_mutations": 50
+  },
+  "policy": {
+    "status": "executable_neutral_behavior_free",
+    "current_behavior_claim": false,
+    "semantic_change_rule": "new_task_tree_leaf_and_adr_amendment_before_contract_change",
+    "coordinate_unit": "decoded_unicode_scalar_half_open",
+    "source_authority": "typed_source_identity",
+    "runtime_implementation_owner": "INTER-MATCH-GAP-CAPTURE.2-.7"
+  },
+  "canonical_execution": {
+    "artifact": "capability_conformance/inter_match_gap_capture_contract.json",
+    "checker": "tools/check_inter_match_gap_capture_contract.py",
+    "command": "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py",
+    "project_data_driver": "tools/run_python_project_data.sh",
+    "project_data_policy": "repository_root_relative_same_volume_only",
+    "canonical_routing_owner": "INTER-MATCH-GAP-CAPTURE.1.2"
+  },
+  "identifier_policy": {
+    "unicode_version": "17.0.0",
+    "classifier": "XID_Continue",
+    "positions": "one_or_more_same_class_including_first",
+    "identity": "exact_decoded_unicode_scalar_sequence",
+    "case_sensitive": true,
+    "normalization": "none",
+    "ascii_digit_only": "reserved_for_numeric_selector_and_invalid_as_name",
+    "scope": "unique_within_owning_rule",
+    "declaration_grammar": "REGEX_SLOT_NAME HSPACE* = HSPACE* REGEX",
+    "physical_line": "same_rule_paragraph_line",
+    "context": "outside_code"
+  },
+  "authored_surfaces": {
+    "declarations": [
+      "header=/H/",
+      "header =/H/",
+      "header= /H/",
+      "header = /H/"
+    ],
+    "selectors": [
+      {
+        "form": "Rule",
+        "kind": "unindexed",
+        "authored_selector": null,
+        "resolution": "regex_index_0"
+      },
+      {
+        "form": "Rule[N]",
+        "kind": "numeric",
+        "authored_selector": "nonnegative_integer",
+        "resolution": "written_index"
+      },
+      {
+        "form": "Rule[name]",
+        "kind": "named",
+        "authored_selector": "exact_name",
+        "resolution": "rule_local_name"
+      }
+    ],
+    "resolved_edge_fields": [
+      "selector_kind",
+      "authored_selector",
+      "target_rule",
+      "regex_index",
+      "target_slot_id"
+    ],
+    "entry_slot": {
+      "status": "future",
+      "direct_entry": "undef",
+      "return_kind": "detached_ordinary_harray",
+      "ordered_fields": [
+        "target_rule",
+        "regex_index",
+        "slot_id",
+        "selector_kind",
+        "authored_selector"
+      ]
+    },
+    "directive": {
+      "name": "@capture_gaps",
+      "cardinality": "one_per_rule",
+      "placement": "rule_level_placement_insensitive",
+      "canonical_placement": "after_I_before_first_action_edge",
+      "eligibility": {
+        "family": "or_default",
+        "cursor_policy": "seek",
+        "edge_ownership": "action",
+        "uses_loop": true,
+        "execution_shapes": [
+          "default_scan_loop",
+          "repeat_loop"
+        ],
+        "minimum_static_action_edges": 1,
+        "ineligible": [
+          "and_consume",
+          "blind_owner",
+          "mixed_owner",
+          "local_adjacency_owner"
+        ]
+      }
+    },
+    "accessors": {
+      "gap_span": {
+        "status": "future",
+        "return_kind": "detached_harray",
+        "ordered_fields": [
+          "source_id",
+          "start",
+          "end",
+          "provenance"
+        ]
+      },
+      "gap_text": {
+        "status": "future",
+        "return": "exact_decoded_text_from_current_source"
+      },
+      "gap_kind": {
+        "status": "future",
+        "return": [
+          "prefix",
+          "interstitial",
+          "tail"
+        ]
+      },
+      "unavailable": "gap_capture_context_unavailable"
+    },
+    "forbidden_aliases": [
+      "Rule.N",
+      "Rule.name",
+      "Rule[N] method()",
+      "Rule[name] method()"
+    ],
+    "emission": {
+      "emit_gaps_surface": false,
+      "forced_ast_emission": false
+    }
+  },
+  "selector_resolution_fixtures": {
+    "positive": [
+      {
+        "id": "spacing_compact",
+        "declaration": "header=/H/",
+        "slot_name": "header",
+        "regex_index": 0
+      },
+      {
+        "id": "spacing_before_equals",
+        "declaration": "header =/H/",
+        "slot_name": "header",
+        "regex_index": 0
+      },
+      {
+        "id": "spacing_after_equals",
+        "declaration": "header= /H/",
+        "slot_name": "header",
+        "regex_index": 0
+      },
+      {
+        "id": "spacing_both",
+        "declaration": "header = /H/",
+        "slot_name": "header",
+        "regex_index": 0
+      },
+      {
+        "id": "unicode_xid_exact",
+        "declaration": "é́=/U/",
+        "slot_name": "é́",
+        "identity": "exact_no_normalization",
+        "regex_index": 0
+      },
+      {
+        "id": "mixed_named_anonymous",
+        "declarations": [
+          "head=/H/",
+          "/S/",
+          "foot=/F/"
+        ],
+        "regex_indexes": [
+          0,
+          1,
+          2
+        ],
+        "slot_ids": [
+          "head",
+          null,
+          "foot"
+        ]
+      },
+      {
+        "id": "numeric_named_same_target",
+        "named": {
+          "selector_kind": "named",
+          "authored_selector": "head",
+          "target_rule": "Part",
+          "regex_index": 0,
+          "target_slot_id": "head"
+        },
+        "numeric": {
+          "selector_kind": "numeric",
+          "authored_selector": 0,
+          "target_rule": "Part",
+          "regex_index": 0,
+          "target_slot_id": "head"
+        }
+      },
+      {
+        "id": "named_reorder_stable",
+        "before": {
+          "selector_kind": "named",
+          "authored_selector": "head",
+          "regex_index": 0,
+          "target_slot_id": "head"
+        },
+        "after": {
+          "selector_kind": "named",
+          "authored_selector": "head",
+          "regex_index": 1,
+          "target_slot_id": "head"
+        },
+        "numeric_after_reorder": {
+          "selector_kind": "numeric",
+          "authored_selector": 0,
+          "regex_index": 0,
+          "target_slot_id": "other"
+        },
+        "duplicate_regex_text_preserves_slot_identity": true
+      }
+    ],
+    "negative": [
+      {
+        "id": "invalid_slot_name",
+        "authored": "-bad=/H/",
+        "expected": "reject",
+        "diagnostic": "regex_slot_name_invalid"
+      },
+      {
+        "id": "numeric_only_name",
+        "authored": "123=/H/",
+        "expected": "reject",
+        "diagnostic": "regex_slot_name_invalid"
+      },
+      {
+        "id": "duplicate_slot_name",
+        "authored": "head=/H/\nhead=/S/",
+        "expected": "reject",
+        "diagnostic": "regex_slot_duplicate_name"
+      },
+      {
+        "id": "unknown_named_selector",
+        "authored": "-> Part[missing]",
+        "expected": "reject",
+        "diagnostic": "regex_slot_unknown_name"
+      },
+      {
+        "id": "selector_index_out_of_range",
+        "authored": "-> Part[2]",
+        "expected": "reject",
+        "diagnostic": "regex_slot_index_out_of_range"
+      },
+      {
+        "id": "malformed_named_selector",
+        "authored": "-> Part[head",
+        "expected": "reject",
+        "diagnostic": "regex_slot_selector_invalid"
+      },
+      {
+        "id": "duplicate_directive",
+        "authored": "@capture_gaps\n@capture_gaps",
+        "expected": "reject",
+        "diagnostic": "capture_gaps_duplicate_directive"
+      },
+      {
+        "id": "ineligible_and_family",
+        "authored": "Top::AND\n @capture_gaps",
+        "expected": "reject",
+        "diagnostic": "capture_gaps_rule_ineligible"
+      },
+      {
+        "id": "ineligible_blind_owner",
+        "authored": "Top::OR\n @capture_gaps\n => Part",
+        "expected": "reject",
+        "diagnostic": "capture_gaps_rule_ineligible"
+      },
+      {
+        "id": "legacy_marker_conflict",
+        "authored": "@capture_gaps\n @move_pos",
+        "expected": "reject",
+        "diagnostic": "capture_gaps_legacy_marker_conflict"
+      }
+    ]
+  },
+  "gap_sources": [
+    {
+      "id": "unicode_main",
+      "source_id": "fixture:unicode-main",
+      "decoded_text": "αHβ\nS🙂Fω",
+      "scalar_length": 8,
+      "matches": [
+        {
+          "slot": "header",
+          "span": [
+            1,
+            2
+          ]
+        },
+        {
+          "slot": "section",
+          "span": [
+            4,
+            5
+          ]
+        },
+        {
+          "slot": "footer",
+          "span": [
+            6,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "id": "empty_boundaries",
+      "source_id": "fixture:empty-boundaries",
+      "decoded_text": "HS",
+      "scalar_length": 2,
+      "matches": [
+        {
+          "slot": "header",
+          "span": [
+            0,
+            1
+          ]
+        },
+        {
+          "slot": "section",
+          "span": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "id": "child_extended",
+      "source_id": "fixture:child-extended",
+      "decoded_text": "p{abc}gap!",
+      "scalar_length": 10,
+      "opening_match": [
+        0,
+        1
+      ],
+      "accepted_target_exit": 6,
+      "next_gap": [
+        6,
+        9
+      ],
+      "next_match": [
+        9,
+        10
+      ]
+    }
+  ],
+  "gap_context_schema": {
+    "invocation_state_fields": [
+      "source_id",
+      "invocation_id",
+      "committed_gap_cursor",
+      "accepted_edge_count",
+      "current_gap"
+    ],
+    "private_current_gap_fields": [
+      "source_id",
+      "rule_label",
+      "invocation_id",
+      "edge_ordinal",
+      "kind",
+      "start",
+      "end",
+      "provenance"
+    ],
+    "field_semantics": {
+      "rule_label": "enclosing_gap_owning_rule",
+      "edge_ordinal": "accepted_edge_count_before_candidate_or_final_count_for_tail",
+      "kind": [
+        "prefix",
+        "interstitial",
+        "tail"
+      ]
+    },
+    "interval": "half_open_decoded_unicode_scalar",
+    "provenance": "gap",
+    "history": "none_after_invocation_exit",
+    "detachment": "fresh_recursive_ordinary_data",
+    "transaction": {
+      "snapshot_members": [
+        "committed_gap_cursor",
+        "accepted_edge_count",
+        "current_gap"
+      ],
+      "failure_rollback_unwind": "discard_candidate_and_do_not_advance_committed_gap_state",
+      "effects_outside_rollback": [
+        "user_variables",
+        "ast_mutation",
+        "output",
+        "external_calls",
+        "diagnostics",
+        "registry",
+        "host_state"
+      ]
+    }
+  },
+  "gap_state_machine": {
+    "source": "unicode_main",
+    "rule": "Root",
+    "transitions": [
+      {
+        "id": "enter_root",
+        "effect": "cursor=0,count=0,current_gap=absent"
+      },
+      {
+        "id": "select_header",
+        "effect": "prefix=[0,1),ordinal=0,before_LS"
+      },
+      {
+        "id": "enter_header_ls",
+        "effect": "same_prefix_current"
+      },
+      {
+        "id": "accept_falsey_header_edge",
+        "effect": "match_presence_accepts_false_payload"
+      },
+      {
+        "id": "enter_header_le",
+        "effect": "same_prefix_current"
+      },
+      {
+        "id": "commit_header",
+        "effect": "cursor=2,count=1,current_gap=absent"
+      },
+      {
+        "id": "enter_header_it",
+        "effect": "current_gap=absent"
+      },
+      {
+        "id": "select_section",
+        "effect": "interstitial=[2,4),ordinal=1,before_LS"
+      },
+      {
+        "id": "suspend_for_section_child",
+        "effect": "parent_candidate_preserved_and_hidden"
+      },
+      {
+        "id": "resume_section_parent",
+        "effect": "same_parent_candidate_restored"
+      },
+      {
+        "id": "commit_section",
+        "effect": "cursor=5,count=2,current_gap=absent"
+      },
+      {
+        "id": "select_footer",
+        "effect": "interstitial=[5,6),ordinal=2,before_LS"
+      },
+      {
+        "id": "commit_footer",
+        "effect": "cursor=7,count=3,current_gap=absent"
+      },
+      {
+        "id": "terminal_miss",
+        "effect": "tail=[7,8),ordinal=3,no_cursor_move"
+      },
+      {
+        "id": "enter_terminal_lx",
+        "effect": "same_tail_current"
+      },
+      {
+        "id": "accept_root",
+        "effect": "current_gap=absent,no_retained_history"
+      }
+    ]
+  },
+  "segmentation_cases": [
+    {
+      "id": "unicode_prefix_interstitial_tail",
+      "expected": "prefix=[0,1);interstitial=[2,4);interstitial=[5,6);tail=[7,8)"
+    },
+    {
+      "id": "empty_prefix",
+      "expected": "prefix=[0,0)"
+    },
+    {
+      "id": "empty_interstitial",
+      "expected": "interstitial=[1,1)"
+    },
+    {
+      "id": "empty_tail",
+      "expected": "tail=[2,2)"
+    },
+    {
+      "id": "zero_match_whole_tail",
+      "expected": "tail=[entry,input_end)"
+    },
+    {
+      "id": "child_extended_accepted_exit",
+      "expected": "next_gap=[6,9):gap"
+    },
+    {
+      "id": "falsey_action_accepted",
+      "expected": "commit_selected_match_exit"
+    },
+    {
+      "id": "maximum_exit_tail",
+      "expected": "tail_before_E"
+    },
+    {
+      "id": "failed_edge_no_commit",
+      "expected": "candidate_discarded,cursor_unchanged"
+    },
+    {
+      "id": "nested_recursive_isolation",
+      "expected": "independent_invocation_state"
+    }
+  ],
+  "lifecycle_matrix": {
+    "successful_edge": [
+      "selection",
+      "candidate",
+      "LS",
+      "edge_or_target",
+      "LE",
+      "commit",
+      "IT"
+    ],
+    "terminal_routes": [
+      {
+        "id": "default_miss",
+        "condition": "default_scan_loop_terminal_miss",
+        "hook": "LX",
+        "tail": "before_hook"
+      },
+      {
+        "id": "repeat_exhaustion",
+        "condition": "minimum_satisfied_then_exhausted",
+        "hook": "EX",
+        "tail": "before_hook"
+      },
+      {
+        "id": "repeat_maximum",
+        "condition": "maximum_reached",
+        "hook": "E",
+        "tail": "before_hook"
+      }
+    ],
+    "terminal_policy": {
+      "failed_minimum": "no_tail",
+      "zero_match_zero_minimum": "whole_entry_to_input_end_tail",
+      "tail_access": "no_consume_no_cursor_advance_no_automatic_result",
+      "candidate_exit": "clear_on_terminal_return_or_unwind"
+    },
+    "return_authority": {
+      "repeated_action_edge": "accepted_per_hit_payload_then_finalize_iteration",
+      "default_scan_action_edge": "whole_rule_unwind_clear_candidate_no_commit_no_tail",
+      "lifecycle_hooks": "whole_rule_unwind_preserve_exact_return_value"
+    }
+  },
+  "transaction_recursion_cases": [
+    {
+      "id": "accepted_falsey_commits",
+      "expected": "match_presence_accepts_then_commits"
+    },
+    {
+      "id": "edge_failure_discards",
+      "expected": "candidate_discarded_and_committed_state_unchanged"
+    },
+    {
+      "id": "recognition_rollback_restores",
+      "expected": "candidate_and_committed_gap_state_restored_only"
+    },
+    {
+      "id": "abnormal_unwind_clears",
+      "expected": "candidate_cleared_without_commit_or_tail"
+    },
+    {
+      "id": "nested_child_suspends_parent",
+      "expected": "child_isolated_parent_hidden_then_restored"
+    },
+    {
+      "id": "recursive_invocation_isolates_state",
+      "expected": "fresh_monotonic_invocation_authority"
+    },
+    {
+      "id": "default_action_return_unwinds_without_commit_or_tail",
+      "expected": "whole_rule_return_authority_from_adr_0048"
+    }
+  ],
+  "compatibility_matrix": [
+    {
+      "id": "capture_slice_member",
+      "surface": "@capture_slice",
+      "retained": true,
+      "alias_for_capture_gaps": false,
+      "mixed_with_capture_gaps": "diagnostic"
+    },
+    {
+      "id": "capture_from_here_member",
+      "surface": "@capture_from_here",
+      "retained": true,
+      "alias_for_capture_gaps": false,
+      "mixed_with_capture_gaps": "diagnostic"
+    },
+    {
+      "id": "move_pos_member",
+      "surface": "@move_pos",
+      "retained": true,
+      "alias_for_capture_gaps": false,
+      "mixed_with_capture_gaps": "diagnostic"
+    },
+    {
+      "id": "named_mark_member",
+      "surface": "@mark(name)",
+      "independent": true,
+      "may_coexist": true,
+      "mutates_new_gap_cursor": false
+    },
+    {
+      "id": "explicit_capture_mark_helpers",
+      "surface": "explicit_helpers",
+      "independent": true,
+      "may_coexist": true,
+      "mutates_new_gap_cursor": false
+    },
+    {
+      "id": "no_emit_gaps_surface",
+      "surface": "@emit_gaps",
+      "present": false,
+      "forced_ast_emission": false
+    }
+  ],
+  "diagnostics": [
+    {
+      "code": "regex_slot_name_invalid",
+      "phase": "parse_declaration",
+      "detection": "static",
+      "required_context": [
+        "rule_label",
+        "source_id",
+        "line",
+        "slot_name"
+      ]
+    },
+    {
+      "code": "regex_slot_duplicate_name",
+      "phase": "resolve_declaration",
+      "detection": "static",
+      "required_context": [
+        "rule_label",
+        "source_id",
+        "line",
+        "slot_name",
+        "first_line"
+      ]
+    },
+    {
+      "code": "regex_slot_unknown_name",
+      "phase": "resolve_selector",
+      "detection": "static",
+      "required_context": [
+        "rule_label",
+        "source_id",
+        "line",
+        "target_rule",
+        "authored_selector"
+      ]
+    },
+    {
+      "code": "regex_slot_index_out_of_range",
+      "phase": "resolve_selector",
+      "detection": "static",
+      "required_context": [
+        "rule_label",
+        "source_id",
+        "line",
+        "target_rule",
+        "regex_index",
+        "regex_count"
+      ]
+    },
+    {
+      "code": "regex_slot_selector_invalid",
+      "phase": "parse_selector",
+      "detection": "static",
+      "required_context": [
+        "rule_label",
+        "source_id",
+        "line",
+        "target_rule",
+        "authored_selector"
+      ]
+    },
+    {
+      "code": "capture_gaps_duplicate_directive",
+      "phase": "parse_directive",
+      "detection": "static",
+      "required_context": [
+        "rule_label",
+        "source_id",
+        "line",
+        "first_line"
+      ]
+    },
+    {
+      "code": "capture_gaps_rule_ineligible",
+      "phase": "validate_directive",
+      "detection": "static",
+      "required_context": [
+        "rule_label",
+        "source_id",
+        "line",
+        "family",
+        "cursor_policy",
+        "edge_ownership",
+        "execution_shape"
+      ]
+    },
+    {
+      "code": "capture_gaps_legacy_marker_conflict",
+      "phase": "validate_directive",
+      "detection": "static",
+      "required_context": [
+        "rule_label",
+        "source_id",
+        "line",
+        "marker",
+        "marker_line"
+      ]
+    },
+    {
+      "code": "gap_capture_context_unavailable",
+      "phase": "access_gap_context",
+      "detection": "static_or_runtime",
+      "required_context": [
+        "rule_label",
+        "source_id",
+        "invocation_id",
+        "phase",
+        "accessor"
+      ]
+    }
+  ],
+  "mutation_ids": [
+    "contract_id",
+    "format",
+    "task_owner",
+    "expected_counts",
+    "required_section",
+    "identifier_classifier",
+    "digit_reservation",
+    "normalization_identity",
+    "case_identity",
+    "spacing_compact",
+    "spacing_before_equals",
+    "spacing_after_equals",
+    "spacing_both",
+    "mixed_declaration_order",
+    "duplicate_slot_name",
+    "selector_unindexed",
+    "selector_numeric",
+    "selector_named",
+    "named_reorder_stability",
+    "numeric_reorder_position",
+    "selector_provenance",
+    "duplicate_regex_identity",
+    "directive_cardinality",
+    "directive_family",
+    "directive_cursor_policy",
+    "directive_edge_ownership",
+    "directive_loop",
+    "directive_static_edge",
+    "legacy_marker_conflict",
+    "explicit_helper_independence",
+    "gap_source_identity",
+    "gap_half_open",
+    "gap_empty",
+    "gap_unicode",
+    "gap_prefix",
+    "gap_interstitial",
+    "gap_tail",
+    "zero_match_tail",
+    "candidate_before_ls",
+    "candidate_through_le",
+    "commit_before_it",
+    "falsey_acceptance",
+    "child_extended_exit",
+    "failure_no_commit",
+    "rollback_no_commit",
+    "unwind_clear",
+    "recursion_isolation",
+    "nested_suspend_resume",
+    "action_return_authority",
+    "diagnostic_schema"
+  ],
+  "recurring_gate": {
+    "status": "planned",
+    "owner": "INTER-MATCH-GAP-CAPTURE.1.2",
+    "driver": "tools/check_inter_match_gap_capture_six_runtime.sh",
+    "local_ci_driver": "tools/run_ci_local.sh",
+    "local_ci_switch": "LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX",
+    "consumer_schema": {
+      "fields": [
+        "backend",
+        "runtime",
+        "path",
+        "roles"
+      ],
+      "role_policy": "every admitted carrier role is required and shared Lua runs once per ABI"
+    },
+    "consumers": [
+      {
+        "backend": "perl",
+        "runtime": "perl",
+        "path": "t/inter_match_gap_capture_perl_contract.t",
+        "roles": [
+          "authored_parse",
+          "descriptor_provenance",
+          "live_execution",
+          "target_lifecycle",
+          "recursion_and_rollback",
+          "portable_diagnostics",
+          "emitted_source_generation",
+          "independently_loaded_generated_execution"
+        ]
+      },
+      {
+        "backend": "rust",
+        "runtime": "rust",
+        "path": "rust/linkedspec-runtime/tests/inter_match_gap_capture_contract.rs",
+        "roles": [
+          "native_execution",
+          "ordinary_reconstruction",
+          "descriptor",
+          "generated_plan",
+          "emitted_source",
+          "target_lifecycle",
+          "recursion_and_rollback",
+          "portable_diagnostics",
+          "primary_command"
+        ]
+      },
+      {
+        "backend": "dart",
+        "runtime": "dart",
+        "path": "dart/test/inter_match_gap_capture_contract_test.dart",
+        "roles": [
+          "native_execution",
+          "ordinary_reconstruction",
+          "descriptor",
+          "generated_plan",
+          "emitted_source",
+          "target_lifecycle",
+          "recursion_and_rollback",
+          "portable_diagnostics",
+          "primary_command"
+        ]
+      },
+      {
+        "backend": "julia",
+        "runtime": "julia",
+        "path": "julia/test/inter_match_gap_capture_contract_test.jl",
+        "roles": [
+          "native_execution",
+          "ordinary_reconstruction",
+          "descriptor",
+          "generated_plan",
+          "emitted_source",
+          "target_lifecycle",
+          "recursion_and_rollback",
+          "portable_diagnostics",
+          "primary_command"
+        ]
+      },
+      {
+        "backend": "lua",
+        "runtime": "puc_lua",
+        "path": "lua/test/inter_match_gap_capture_contract_test.lua",
+        "roles": [
+          "native_execution",
+          "ordinary_reconstruction",
+          "descriptor",
+          "generated_plan",
+          "emitted_source",
+          "target_lifecycle",
+          "recursion_and_rollback",
+          "portable_diagnostics",
+          "primary_command"
+        ]
+      },
+      {
+        "backend": "lua",
+        "runtime": "luajit",
+        "path": "lua/test/inter_match_gap_capture_contract_test.lua",
+        "roles": [
+          "native_execution",
+          "ordinary_reconstruction",
+          "descriptor",
+          "generated_plan",
+          "emitted_source",
+          "target_lifecycle",
+          "recursion_and_rollback",
+          "portable_diagnostics",
+          "primary_command"
+        ]
+      }
+    ],
+    "storage": "repository_derived_project_data_same_volume"
+  },
+  "rollout": [
+    {
+      "id": "neutral_contract",
+      "owner": "INTER-MATCH-GAP-CAPTURE.1.1",
+      "status": "complete"
+    },
+    {
+      "id": "perl_runtime",
+      "owner": "INTER-MATCH-GAP-CAPTURE.2",
+      "status": "pending"
+    },
+    {
+      "id": "rust_runtime",
+      "owner": "INTER-MATCH-GAP-CAPTURE.3",
+      "status": "pending"
+    },
+    {
+      "id": "dart_runtime",
+      "owner": "INTER-MATCH-GAP-CAPTURE.4",
+      "status": "pending"
+    },
+    {
+      "id": "julia_runtime",
+      "owner": "INTER-MATCH-GAP-CAPTURE.5",
+      "status": "pending"
+    },
+    {
+      "id": "puc_lua_runtime",
+      "owner": "INTER-MATCH-GAP-CAPTURE.6",
+      "status": "pending"
+    },
+    {
+      "id": "luajit_runtime",
+      "owner": "INTER-MATCH-GAP-CAPTURE.6",
+      "status": "pending"
+    },
+    {
+      "id": "recurring",
+      "owner": "INTER-MATCH-GAP-CAPTURE.7",
+      "status": "pending"
+    },
+    {
+      "id": "public_no_drift",
+      "owner": "INTER-MATCH-GAP-CAPTURE.7",
+      "status": "pending"
+    }
+  ]
+}

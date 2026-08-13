@@ -1045,14 +1045,16 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   named is stable identity—and dot remains the fluent rule-behavior namespace. The first fluent dot is mandatory;
   whitespace-only target-to-method attachment is not an alias.
 
-### 4.9.1.3 Inter-match-gap neutral-plan audit
+### 4.9.1.3 `tools/check_inter_match_gap_capture_contract.py` — executable-neutral gap oracle
 
-- **WHAT:** the behavior-free audit and exact implementation plan for
-  `linkedspec-inter-match-gap-capture-v1`; it is not yet a JSON contract or runtime feature.
-- **WHEN:** implementing `.1.1-.1.3`, named regex declarations/selectors, `entry_slot()`, `@capture_gaps`, the three
+- **WHAT:** the format-1 behavior-free JSON authority for `linkedspec-inter-match-gap-capture-v1`. It executes
+  exact Unicode/empty/child/transaction state and rejects 50 semantic corruptions at rollout 1 complete + 8
+  pending; it is not a parser or runtime feature.
+- **WHEN:** implementing `.1.2-.1.3`, named regex declarations/selectors, `entry_slot()`, `@capture_gaps`, the three
   gap accessors, or any backend/runtime/recurring leg.
-- **HOW:** retrieve [[inter-match-gap-executable-contract-plan]] and the complete frozen section in
-  `docs/tasks/INTER-MATCH-GAP-CAPTURE.md`; then rerun both prerequisite matrices from §4.9.1.2 before changing
+- **HOW:** run `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py`, retrieve
+  [[inter-match-gap-executable-contract-plan]], and read the complete frozen section in
+  `docs/tasks/INTER-MATCH-GAP-CAPTURE.md`; rerun both prerequisite matrices from §4.9.1.2 before changing
   either dependency. For current mechanism evidence, use `return_descriptor` for
   `{family,cursor_policy,edge_ownership,uses_loop,execution_shape,resolved_edges}`, `dump_parser_source` for exact
   selection → `LS` → action/target → `LE` order, and the corrected historical live probe recorded in the task.

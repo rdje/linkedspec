@@ -10,6 +10,31 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-13 — INTER-MATCH-GAP-CAPTURE.1.1 — add executable-neutral contract
+
+- Added format-1 `linkedspec-inter-match-gap-capture-v1` as the behavior-free authority for named regex-slot
+  identity, selector provenance, `@capture_gaps` eligibility, typed gap state, exact lifecycle/terminal placement,
+  compatibility, diagnostics, planned routes, and the nine-leg rollout.
+- Added the independent checker first and proved exact fail-closed absence through the repository-routed command:
+  it exited 1 with only `inter-match gap capture contract is missing` before the artifact existed.
+- The passing checker independently executes decoded Unicode-scalar prefix/interstitial/tail segmentation, every
+  empty boundary, child-extended accepted exit, falsey accepted payload, rollback restoration, and nested-state
+  isolation. It locks 8 positive + 10 negative fixtures, 3 sources, 8 private fields, 16 transitions, 10
+  segmentation cases, 3 terminal routes, 7 transaction/recursion/return cases, 6 compatibility rows, 9
+  diagnostics, and all 50 reason-checked semantic corruptions.
+- Promoted only `neutral_contract`: rollout is exactly 1 complete + 8 pending. Named declarations/selectors,
+  `entry_slot()`, `@capture_gaps`, and `gap_*` remain future surfaces; no parser, compiler, runtime, descriptor,
+  generated carrier, helper, facade, schema, semantic/MCP, CLI, README, capability, or typed-source behavior moved.
+- Advanced the existing project-data test's exact Python-entrypoint inventory from 29 to 30 for the new checker;
+  this preserves repository-volume containment without registering the future six-runtime/canonical matrix.
+- Synchronized ADR `0045`, Knowledge, task/index, roadmaps, architecture, Toolbox, the sole-facing mdBook, and
+  bounded live layers. Focused project-routed proof passes with 50/50 corruptions rejected; broader signoff is
+  recorded in the owning task verification log.
+- Final signoff passes the rendered 79-file/14,628-KiB book, Knowledge 830/6,950, all eight doctrines,
+  six-family containment, all-five-anchor relocation, CLI 66/66 in both option environments, RAM 55%, and
+  canonical Phase 0 1,031/1,031 in 737 seconds through exact `[ci] local CI gate passed` and exit 0. The prior
+  status 71 was solely the outer workspace denying the gate's nested `sandbox-exec`.
+
 ## 2026-08-13 — INTER-MATCH-GAP-CAPTURE.1.0 — freeze executable-neutral plan
 
 - Activated from clean cross-tree handoff `3d0384d1` and retrieved ADRs `0045`/`0047`/`0048`/`0051`/`0056`, the owning tasks,

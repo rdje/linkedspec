@@ -2,26 +2,24 @@
 
 ## Current Activity
 
-- `INTER-MATCH-GAP-CAPTURE.1.0` is signoff-complete from clean handoff `3d0384d1`; atomic 218/300 commit pending;
-  no push.
-- The behavior-free audit freezes the exact future v1 artifact/checker, Unicode named-slot identity and selector
-  provenance, `@capture_gaps` eligibility/compatibility, detached accessors, prefix/interstitial/tail and empty-span
-  lifecycle, post-`LE` commit, transaction/recursion, diagnostics/mutations/routes/rollout, and carrier proof.
-- Current behavior remains unchanged and absent: named declarations/selectors and `@capture_gaps` still reject.
-  Duplicate-slot five-backend proof passes at 59 mutations; typed-source six-runtime proof passes at 9/5/114.
-- Canonical signoff passes all eight doctrines, six-family containment, all-five-anchor relocation, CLI 66/66 in
-  both option environments, RAM 52%, and Phase 0 1,031/1,031 in 735 seconds.
+- `INTER-MATCH-GAP-CAPTURE.1.1` is complete from clean `31f3e664` and lands as atomic 219/300 in this commit; no push.
+- Checker-first RED rejected only the absent contract. The format-1 neutral artifact now passes executable
+  Unicode/empty/child/rollback/nested modeling and 50/50 reason-checked corruptions at 1 complete + 8 pending.
+- Current behavior remains unchanged and absent: named declarations/selectors, `entry_slot()`, `@capture_gaps`,
+  and the three gap accessors still reject or do not exist. No runtime or public row moved.
 
 ## Latest Completed Slice
 
-- `.1.0` completed the behavior-free executable-neutral audit/plan and canonical signoff for atomic 218/300.
+- `.1.1` is the latest completed slice and lands through the current atomic-219 commit.
 
 ## Next Action
 
-- Activate neutral artifact/checker `.1.1` task-tree-first from the clean atomic-218 boundary.
+- From the clean atomic-219 boundary, activate `.1.2` task-tree-first for routing/topology/no-overclaim governance.
 
 ## Recent Completions
 
+- `2026-08-13` — `.1.1` completed checker-first executable-neutral contract proof and canonical signoff at 1/8 rollout and 50 mutations.
+- `2026-08-13` — `31f3e664` landed executable-neutral plan `.1.0` as atomic 218/300.
 - `2026-08-13` — `.1.0` completed the behavior-free executable-neutral audit/plan and canonical signoff for atomic 218/300.
 - `2026-08-13` — `3d0384d1` landed behavior-free lossless-gap handoff `.14.5.0` as atomic 217/300.
 - `2026-08-13` — `.14.5.0` completed behavior-free lossless-gap handoff and canonical signoff for atomic 217/300.
@@ -36,8 +34,6 @@
 - `2026-08-12` — `b1895a05` landed private Dart recursive-observation admission `.14.4.4` as atomic 212/300.
 - `2026-08-12` — `.14.4.4` completed private Dart recursive-observation admission as atomic 212/300.
 - `2026-08-12` — `91a2b05c` landed private Rust recursive-observation admission `.14.4.3` as atomic 211/300.
-- `2026-08-12` — `.14.4.3` completed private Rust recursive-observation admission and canonical signoff for atomic 211/300.
-- `2026-08-12` — `2d937d83` landed private Perl recursive-observation admission `.14.4.2` as atomic 210/300.
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source

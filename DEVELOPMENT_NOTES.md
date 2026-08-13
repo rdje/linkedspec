@@ -10,6 +10,31 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-13 (`INTER-MATCH-GAP-CAPTURE.1.1` — executable-neutral contract): activation base is clean `31f3e664`.
+  The checker must remain independently executable through `bash tools/run_python_project_data.sh
+  tools/check_inter_match_gap_capture_contract.py`; checker-first absence is an intentional hard failure, not an
+  optional fixture state.
+- Keep artifact and checker semantic authorities visibly distinct. The artifact is transport-neutral data; the
+  checker owns exact schema validation, executable scalar-span/state recomposition, and one reason-checked deep-
+  copy corruption for each of the 50 frozen mutation IDs.
+- Python decoded-string indexing is used only as the checker oracle after rejecting surrogate code points. That
+  makes the three source fixtures an executable Unicode-scalar proof while backend implementations remain free to
+  retain byte or UTF-16 registers behind the existing typed-source authority.
+- Preserve the rollout boundary: only `neutral_contract` is complete. All six runtime rows, recurrence, and public
+  no-drift stay pending; recording planned consumer paths and routing owners does not register or execute them.
+- A new `tools/*.py` entrypoint must advance `tools/test_tool_project_data_storage.sh`'s exact census. That census
+  is containment coverage, not `.1.2` canonical feature routing; `.1.1` therefore moves 29 → 30 and nothing else.
+- Do not infer syntax availability from a current JSON contract. Named declarations, named selectors,
+  `entry_slot()`, `@capture_gaps`, and all three gap accessors remain rejected/absent until their implementation
+  leaves. `.1.2` adds topology/storage/no-overclaim governance; it must not promote a runtime row.
+- The exact RED is exit 1 with `inter-match gap capture contract is missing`. GREEN is 8 positive + 10 negative,
+  3 sources, 16 transitions, 10 segmentations, 9 diagnostics, rollout 1/8, and 50 rejected semantic mutations.
+- Canonical signoff first caught the exact Python-tool containment census at stale 29 versus new 30. After the
+  lock moved to 30, the sandboxed restart reached only the expected outer-harness denial of nested macOS
+  `sandbox-exec` at status 71. The unchanged permission-authorized run passes all eight doctrines, six-family
+  containment, all-five-anchor relocation, CLI 66/66 twice, RAM 55%, and Phase 0 1,031/1,031 in 737 seconds
+  through exact local-CI success. The book passes 79 files / 14,628 KiB and Knowledge 830 / 6,950.
+
 - 2026-08-13 (`INTER-MATCH-GAP-CAPTURE.1.0` — executable-neutral plan): activation base is clean `3d0384d1`.
   Keep `.1.0` behavior-free and make `.1.1` the first artifact/checker mutation.
 - Reuse existing authorities. Named slots use pinned Unicode 17 `XID_Continue`; gap spans use immutable same-source

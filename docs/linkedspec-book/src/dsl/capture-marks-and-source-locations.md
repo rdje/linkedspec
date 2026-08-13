@@ -519,10 +519,10 @@ gap and rolling its boundary, not appending a mandatory result node.
 
 ADR `0045` adopts **inter-match gap capture** as the formal name and **lossless segmentation** as the
 broader model. `@capture_gaps` is the accepted future neutral directive, but it is not implemented.
-`INTER-MATCH-GAP-CAPTURE.1.0` has now frozen its executable-neutral plan: exact prefix/interstitial/tail and empty
+`INTER-MATCH-GAP-CAPTURE.1.0` froze its executable-neutral plan: exact prefix/interstitial/tail and empty
 spans, failure and rollback, recursion, typed source records, diagnostics, compatibility, routing, and rollout are
-specified before backend work begins. The JSON artifact and checker remain `.1.1` work, so this is still a planned
-surface rather than current syntax.
+specified before backend work begins. `.1.1` now makes that neutral JSON artifact and independent checker
+executable at 1 complete + 8 pending. This remains a planned surface rather than current syntax.
 
 The broader manual `capture_*` and `mark_*` APIs remain useful. They do not redefine this original
 automatic repeated-action behavior.
@@ -564,11 +564,11 @@ The implementation order is also explicit. `INTER-MATCH-GAP-CAPTURE.1-.7` owns n
 `@capture_gaps`, lifecycle and compatibility policy, six-runtime behavior, carriers, and public admission.
 Typed-source composition consumes that completed contract afterward; it does not define a second gap language.
 
-### Frozen neutral plan — not implemented yet
+### Executable neutral contract — syntax not implemented yet
 
-The planned contract will live at `capability_conformance/inter_match_gap_capture_contract.json`, use id
-`linkedspec-inter-match-gap-capture-v1`, and be checked independently by
-`tools/check_inter_match_gap_capture_contract.py`. Its first leaf adds executable fixtures only; it does not make
+The behavior-free contract now lives at `capability_conformance/inter_match_gap_capture_contract.json`, uses id
+`linkedspec-inter-match-gap-capture-v1`, and is checked independently by
+`tools/check_inter_match_gap_capture_contract.py`. Its first artifact leaf adds executable fixtures only; it does not make
 the DSL forms below executable.
 
 The neutral artifact locks 8 positive and 10 negative authored fixtures, 3 source fixtures, 8 private gap fields,

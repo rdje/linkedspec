@@ -70,12 +70,17 @@ rejected mutations.
 
 Signoff preserves that behavior-free boundary. All eight doctrines, six-family repository containment, all-five-
 anchor relocation, CLI 66/66 in both option environments, RAM 68%, and Phase 0 1,031/1,031 in 771 seconds pass.
-The `.14.5.0` atomic landed cleanly at `3d0384d1`; `INTER-MATCH-GAP-CAPTURE.1.0` then activated task-tree-first
-and is now signoff-complete for atomic 218/300. Canonical proof passes all eight doctrines, six-family repository
+The `.14.5.0` atomic landed cleanly at `3d0384d1`; `INTER-MATCH-GAP-CAPTURE.1.0` then landed its task-tree-first
+behavior-free plan at `31f3e664` as atomic 218/300. Canonical proof passes all eight doctrines, six-family repository
 containment, all-five-anchor relocation, CLI 66/66 twice, RAM 52%, and Phase 0 1,031/1,031 in 735 seconds. The
-unchanged named-slot/directive/runtime/rollout absence remains exact; `.1.1` is next after the clean commit.
+unchanged named-slot/directive/runtime absence remains exact. `.1.1` now provides the behavior-free format-1
+artifact and independent executable checker: checker-first RED rejected the absent artifact exactly, then GREEN
+executed the neutral span/state model and rejected all 50 semantic corruptions at 1 complete + 8 pending. Its
+canonical signoff passes the rendered 79-file/14,628-KiB book, Knowledge 830/6,950, all eight doctrines,
+six-family containment, all-five-anchor relocation, CLI 66/66 twice, RAM 55%, and Phase 0 1,031/1,031 in 737
+seconds. `.1.2` owns routing/topology/no-overclaim from the clean atomic-219 boundary.
 
-That audit freezes the planned neutral authority as
+The current executable-neutral authority is
 `capability_conformance/inter_match_gap_capture_contract.json`, format 1 / id
 `linkedspec-inter-match-gap-capture-v1`, with independent
 `tools/check_inter_match_gap_capture_contract.py`. Named slots reuse exact pinned Unicode 17 `XID_Continue`
@@ -96,7 +101,8 @@ per-hit values, while an unadorned default-loop edge return is a whole-rule unwi
 without boundary commit or tail fabrication. Lifecycle returns retain whole-rule authority and exact payloads.
 
 The rollout has nine legs: neutral, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurrence, and public no-drift.
-`.1.1-.1.3` own neutral artifact/governance/recomposition; `.2-.7` own runtime and public movement. Repository-local
+Neutral is now complete while all eight runtime/recurring/public legs remain pending. `.1.2-.1.3` own
+governance/recomposition; `.2-.7` own runtime and public movement. Repository-local
 storage, exact routes, lifecycle/segmentation/diagnostic mutations, generated carriers, and no-overclaim are fixed
 before implementation. This is an accepted plan only: current syntax, runtime, descriptor, helper, facade, CLI,
 capability status, and typed-source rollout remain unchanged.
