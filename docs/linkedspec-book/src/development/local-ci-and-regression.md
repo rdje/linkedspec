@@ -212,23 +212,22 @@ containment and relocation, CLI 66/66 in both option environments, RAM 62%, Phas
 and this complete matrix through its exact success marker. The combined program-wide `.14.8` public-no-drift row
 remains pending.
 
-Inter-match gap-capture recurring governance runs only the complete neutral row; all six runtime routes remain explicit skips.
-Perl `.2.1` now stages the exact dormant consumer outside canonical and recurring execution. Its metadata mode
-passes 108 assertions for permanent grammar/reference-bridge parity, four declaration spacings, Unicode and mixed
-slots, five-field edge provenance, generated dependency provenance, ordinary named selection, and exact static
-diagnostics. Live and generated gap modes still fail deliberately; 10 independent dormancy mutations enforce
-that boundary. `.2.4` alone may replace the Perl skip with a rooted `prove -Iperl` route after the full
-metadata/live/generated consumer passes. Until then, the neutral checker remains 55 mutations at rollout
-1 complete / 8 pending and the opt-in driver must retain all six ordered skips.
+Inter-match gap-capture recurring governance runs the complete neutral and Perl rows; five later runtime routes remain explicit skips.
+Perl `.2.1-.2.3` established metadata, private live behavior, and independently loaded generated parity. Admission
+`.2.4` makes the full metadata/live/generated consumer the default, registers it once in ordinary canonical CI
+and once in the rooted recurring route, promotes only `perl_runtime`, and retires the obsolete dormancy fence.
+The neutral checker now rejects 56 semantic/topology mutations at rollout 2 complete / 7 pending: Perl regression
+and premature Rust promotion are both locked, while facade/schema/semantic/MCP/CLI/README surfaces remain absent.
 The always-on neutral command is
 `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py`. The repository-routed
-`tools/check_inter_match_gap_capture_six_runtime.sh` driver repeats that authority exactly once, then reports the
-pending Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT routes in fixed order without invoking their absent consumers.
+`tools/check_inter_match_gap_capture_six_runtime.sh` driver repeats that authority exactly once, runs Perl once,
+then reports pending Rust, Dart, Julia, PUC Lua, and LuaJIT routes in fixed order without invoking absent consumers.
 Set `LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1` to exercise this governance route in canonical local CI. Rollout
-remains 1 complete / 8 pending, so this switch proves topology and storage locality rather than runtime support.
-The neutral parent is closeout-recomposed without changing the artifact, driver, guarded public surfaces, or
-rollout. Perl authored/static metadata now exists separately; this switch still does not execute a backend gap
-consumer.
+is 2 complete / 7 pending, so this switch proves the admitted Perl role plus exact later-route topology and storage locality.
+Definitive Perl `.2.4` and parent `.2` signoff passes the full 124-test consumer ordinarily and through this route,
+the rendered mdBook, Knowledge 834/6,995, all eight doctrines, containment/relocation, CLI 66/66 twice, RAM 57%,
+Phase 0 1,031/1,031 in 765 seconds, five ordered later-runtime skips, and `[ci] local CI gate passed`. Rust `.3`
+is the next runtime owner; this switch admits no later runtime or public surface.
 
 Dart's admitted consumer covers its internal value core and all 92+7 helper projections across native,
 reconstructed, generated-plan, and freshly emitted execution. The independent rollout checker requires its

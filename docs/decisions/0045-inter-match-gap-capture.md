@@ -421,6 +421,29 @@ all-five-anchor relocation, CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 773
 neutral-plus-six-pending route, and local-CI exit 0. The preceding unchanged sandboxed run stopped only at the
 outer harness's nested-`sandbox-exec` status 71; the permission-authorized run resolved that boundary.
 
+## 2026-08-13 Perl runtime-admission amendment
+
+`INTER-MATCH-GAP-CAPTURE.2.4` admits the already-complete private Perl path from clean atomic 225 at `45460329`.
+The final consumer defaults to all metadata, live, and independently loaded generated phases and passes 124
+top-level tests. Canonical CI runs it exactly once; the repository-rooted recurring driver runs the neutral
+checker and then the same consumer exactly once before five ordered later-runtime skips.
+
+Only `perl_runtime` becomes complete, owned by `.2.4`. The rollout is 2 complete / 7 pending. The former
+Perl-pending mutation becomes a complete-to-pending regression and a premature-Rust mutation advances exact
+semantic/topology governance from 55 to 56. The ten checker-local dormancy mutations are removed because their
+staging boundary no longer exists; exact admission registration replaces them.
+
+Rust, Dart, Julia, PUC Lua, LuaJIT, recurring, public no-drift, capability admission, and typed
+`gap_composition` remain pending. Public status markers may state private Perl admission, but the same ten
+facade/schema/semantic/MCP/CLI/README surfaces remain forbidden from exposing the feature. Recognition
+137/246/58, public helpers 122, typed source 9/5/114, and generated plan v2 do not move.
+
+Definitive 2026-08-14 signoff passes the rendered mdBook, Knowledge Map 834/6,995, all eight doctrines,
+six-family repository containment, all-five-anchor relocation, CLI 66/66 in both option environments, RAM 57%,
+Phase 0 1,031/1,031 in 765 seconds, the exact opt-in neutral-plus-Perl route with five later-runtime skips, and
+local-CI exit 0. Parent `.2` therefore closes for intended atomic 226 without later-runtime or public promotion;
+Rust `.3` becomes the next eligible implementation leaf only after that landing is clean.
+
 ## Consequences
 
 - The director's original concept and target-rule ownership are durable and cannot be reassigned to

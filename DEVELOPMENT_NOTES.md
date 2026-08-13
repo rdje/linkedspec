@@ -10,6 +10,21 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-13 (`INTER-MATCH-GAP-CAPTURE.2.4` — exact private Perl admission): activation base is clean atomic 225
+  at `45460329`. Keep the neutral model behavior-free; admission changes only rollout truth, execution topology,
+  governed status markers, and the already-complete consumer's default mode.
+- The canonical and recurring command is `PERL5LIB= prove -Iperl t/inter_match_gap_capture_perl_contract.t`.
+  Canonical CI contains it once. The rooted driver runs it once after the neutral checker, then skips exactly five
+  later runtimes in frozen order. The default consumer passes all three phases as 124 top-level tests.
+- Replace dormancy validation rather than preserving dead staging machinery. Registration checks exact phase
+  boundaries, default `all` mode, one canonical command, one recurring command, and continued facade absence.
+  Semantic/topology proof is exactly 56 mutations: Perl complete-to-pending plus premature Rust are both rejected.
+- Current no-drift is gap 2/7/56, recognition 137/246/58, language 246/122, typed source 9/5/114, and duplicate
+  slot 7/0/59. Project-data routing, rendered mdBook, Knowledge 834/6,995, all eight doctrines, containment/
+  relocation, CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 765 seconds, exact neutral-plus-Perl routing, and
+  local-CI exit 0 pass. `.2.4` and parent `.2` are signoff-complete for intended atomic 226; Rust `.3` is next
+  only after commit/brief/clean proof.
+
 - 2026-08-13 (`INTER-MATCH-GAP-CAPTURE.2.3` — Perl emitted/loaded gap parity): activation base is clean
   `34d02e0c`. Metadata 110 and all nine native-live groups were GREEN; generated mode failed only at its intended
   placeholder, so no carrier defect was hidden behind the staged fence.

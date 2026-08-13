@@ -631,6 +631,9 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 log "checking backend-neutral inter-match gap-capture contract and current no-overclaim boundary"
 bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py
 
+log "running exact Perl inter-match gap-capture admission consumer"
+PERL5LIB= prove -Iperl t/inter_match_gap_capture_perl_contract.t
+
 log "checking backend-neutral recognition transaction and progress contract"
 bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py
 

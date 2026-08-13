@@ -301,14 +301,14 @@ mutations. Recursive-observation public projection/no-drift is current without a
 Governance is 114, and the combined program-wide public-no-drift row stays pending for `.14.8`. No public
 helper/value, descriptor/generated schema, semantic/MCP field, CLI, or README behavior moved.
 
-`inter_match_gap_capture_contract.json` is the behavior-free authority for named regex slots and lossless
-prefix/interstitial/tail context. Inter-match gap-capture recurring governance is current without runtime or public admission.
+`inter_match_gap_capture_contract.json` is the neutral authority for named regex slots and lossless
+prefix/interstitial/tail context. Inter-match gap-capture recurring governance now admits only the private Perl runtime; later runtimes and public admission remain pending.
 Run `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py` for the always-on
 neutral proof or `bash tools/check_inter_match_gap_capture_six_runtime.sh` for the repository-routed ordered
-governance route. The latter executes the one complete neutral row and skips all six pending runtime consumers;
-the nine-leg rollout remains 1 complete / 8 pending and the checker rejects 55 semantic/topology corruptions.
-Perl `.2.1` implements authored/static metadata, and `.2.2` implements private native-live gap behavior without
-changing those rollout counts. Its four private accessor nodes are synchronized as recognition `source_read`
+governance route. The latter executes the complete neutral and Perl rows, then skips five pending runtime consumers;
+the nine-leg rollout is 2 complete / 7 pending and the checker rejects 56 semantic/topology corruptions.
+Perl `.2.1-.2.3` implement authored/static metadata, private native-live behavior, and independently loaded
+generated parity; `.2.4` admits that existing consumer without an outward API. Its four private accessor nodes are synchronized as recognition `source_read`
 effects at 137 total rows, while shared calls remain 246, public Perl helper coverage remains 122, and typed-source
 composition stays pending. `.2.3` owns emitted/loaded parity; `.2.4` alone may promote the Perl gap row and replace
 its rooted skip.

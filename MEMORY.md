@@ -4,18 +4,17 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `34d02e0c` — clean atomic-224 base for completed Perl generated/loaded slice `.2.3`; no push.
-- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.2.3 - carry Perl gaps through generated execution`,
-  signoff-complete for intended atomic 225/300 from activation commit `34d02e0c`; no push.
-- active_work_unit: none after atomic 225 lands; private live/generated parity is complete and Perl admission
-  remains excluded.
-- next_action: activate Perl-only admission `.2.4` task-tree-first from clean atomic 225.
-- in_flight_uncommitted: none after landing; this pointer describes the intended clean atomic-225 handoff and no
+- activation_commit: `45460329` — clean atomic-225 base for signoff-complete Perl admission `.2.4`; no push.
+- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.2.4 - admit Perl inter-match gap capture`, signoff-complete with
+  parent `.2` for intended atomic 226/300 from activation commit `45460329`; no push.
+- active_work_unit: none after atomic 226 lands; private Perl implementation/admission is complete.
+- next_action: commit atomic 226, clear/prove the brief and clean tree, then activate Rust `.3` task-tree-first.
+- in_flight_uncommitted: none after landing; this pointer describes the intended clean atomic-226 handoff and no
   background job remains.
-- blockers: none. Metadata 110, all nine live groups, five generated groups / 138 internal assertions, gap
-  1/8/55 plus ten dormancy locks, recognition 137/246/58, 122 public helpers, and typed source 9/5/114 pass.
-  Canonical signoff passes all eight doctrines, Knowledge 834/6,995, containment/relocation, CLI 66/66 twice,
-  RAM 57%, Phase 0 1,031/1,031 in 773 seconds, and the exact opt-in neutral-plus-six-pending gap route.
+- blockers: none. Gap is 2 complete / 7 pending / 56 mutations; the rooted route runs neutral then Perl and skips
+  five later runtimes. Recognition 137/246/58, 122 public helpers, typed source 9/5/114, duplicate-slot 7/0/59,
+  and project-data routing pass. Canonical CI passes containment/relocation, CLI 66/66 twice, RAM 57%, Phase 0
+  1,031/1,031 in 765 seconds, exact neutral-plus-Perl routing, five later-runtime skips, and exit 0.
 - session_refresh_cadence: proactively recommend `/clear` after at most three completed commits, sooner after a
   large/debug-heavy slice or context compaction, and only at a committed clean handoff boundary.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -46,8 +45,8 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, 9 allowed/11 rejected effects, invocation-framed marks, and cursor-only v1 progress.
   Exact recurrence/public composition is current at rollout 9/9 and 58 mutations; public 3/26/45; guide 1/14/18.
-- current_future_direction: `INTER-MATCH-GAP-CAPTURE.1` is closed at 1/8/55. Perl `.2.1-.2.3` complete private
-  authored/static, native-live, and emitted/loaded parity without runtime admission; `.2.4` alone admits Perl.
-  Brackets select; dot fluently binds; `.14.5.1` waits for `.7`.
-- latest_bootstrap_read: 2026-08-13 — complete roadmap/codebase/mdBook and continuity/tooling review; `.2.3` is
-  task-tree-first from clean atomic 224 at `34d02e0c`; push lock is 300.
+- current_future_direction: gap rollout is 2/7/56 with private Perl admitted under `.2.4`; later runtimes and both
+  public rows remain pending. Rust `.3` follows clean parent `.2` closeout. Brackets select; dot fluently binds;
+  `.14.5.1` waits for `.7`.
+- latest_bootstrap_read: 2026-08-14 — complete roadmap/codebase/mdBook and continuity/tooling review; `.2.4` and
+  parent `.2` are signoff-complete from clean atomic 225 at `45460329`; push lock is 300.

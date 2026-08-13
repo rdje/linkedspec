@@ -2,29 +2,29 @@
 
 ## Current Activity
 
-- `INTER-MATCH-GAP-CAPTURE.2.3` is signoff-complete from clean atomic-224 commit `34d02e0c` for intended atomic
-  225/300; no push. `.2.4` is the next clean task-tree owner.
-- Emitted Perl source imports private `InterMatchGapRuntime`, starts `Execute` at the ordinary zero input boundary,
-  consumes generated dependency-slot rows without live-descriptor assumptions, and preserves gap-classified typed
-  errors through both generated entrypoints. Plan v2 remains exact `{label,family}`.
-- Metadata passes 110 assertions, native-live passes all nine groups, and independently loaded generated execution
-  passes five groups / 138 internal assertions covering exact values, lifecycle, rollback, recursion, provenance,
-  typed diagnostics, direct entry, and legacy compatibility.
-- Neutral gap truth remains 1/8/55 plus ten dormancy locks, recognition remains 137/246/58 with 122 public helpers,
-  and typed source remains 9/5/114. Perl admission, other backends, and every outward surface remain pending.
-- All eight doctrines, six-family containment, all-five-anchor relocation, CLI 66/66 twice, RAM 57%, Phase 0
-  1,031/1,031 in 773 seconds, and the exact opt-in neutral-plus-six-pending gap route pass canonical CI.
+- `INTER-MATCH-GAP-CAPTURE.2.4` and parent `.2` are signoff-complete from clean atomic-225 commit `45460329`
+  for intended atomic 226/300; no push. Rust `.3` becomes eligible only after the landing is clean.
+- The full Perl consumer defaults to metadata/live/generated execution and passes 124 top-level tests. Canonical
+  CI registers it once; the rooted route runs neutral then Perl once and skips five later runtimes.
+- Only `perl_runtime` is promoted. Gap governance is 2 complete / 7 pending / 56 mutations; obsolete dormancy
+  enforcement is removed while Perl regression and premature Rust promotion are rejected.
+- Recognition remains 137/246/58 with 122 public helpers, typed source remains 9/5/114, duplicate-slot identity
+  remains 7/0/59, generated plan v2 is unchanged, and all ten outward surfaces remain guarded.
+- Canonical CI passes all eight doctrines, Knowledge 834/6,995, containment/relocation, CLI 66/66 twice, RAM 57%,
+  Phase 0 1,031/1,031 in 765 seconds, exact neutral-plus-Perl routing, five later-runtime skips, and exit 0.
 
 ## Latest Completed Slice
 
-- `.2.3` is signoff-complete for intended atomic 225 from activation commit `34d02e0c`.
+- `.2.4` and Perl parent `.2` are signoff-complete for intended atomic 226 from activation `45460329`.
 
 ## Next Action
 
-- Commit atomic 225, then activate Perl-only admission `.2.4` task-tree-first from that clean boundary.
+- Commit atomic 226, clear/prove the brief and clean tree, then activate Rust `.3` task-tree-first.
 
 ## Recent Completions
 
+- `2026-08-14` — `.2.4` and parent `.2` completed canonical signoff at RAM 57%, Phase 0 1,031/1,031 in 765 seconds, and exact neutral-plus-Perl routing.
+- `2026-08-13` — `.2.4` implemented exact private Perl admission at gap 2/7/56; ordinary and rooted 124-test runs pass.
 - `2026-08-13` — `.2.3` completed canonical signoff at RAM 57%, Phase 0 1,031/1,031 in 773 seconds, and exact opt-in gap routing.
 - `2026-08-13` — `.2.2` completed canonical signoff at RAM 76%, Phase 0 1,031/1,031 in 756 seconds, and exact opt-in gap routing.
 - `2026-08-13` — `.2.2` implemented private Perl native-live same-guard gap state/accessors and passed focused cross-runtime proof at recognition 137/246/58.
@@ -39,8 +39,6 @@
 - `2026-08-13` — `.1.1` completed checker-first executable-neutral contract proof and canonical signoff at 1/8 rollout and 50 mutations.
 - `2026-08-13` — `31f3e664` landed executable-neutral plan `.1.0` as atomic 218/300.
 - `2026-08-13` — `.1.0` completed the behavior-free executable-neutral audit/plan and canonical signoff for atomic 218/300.
-- `2026-08-13` — `3d0384d1` landed behavior-free lossless-gap handoff `.14.5.0` as atomic 217/300.
-- `2026-08-13` — `.14.5.0` completed behavior-free lossless-gap handoff and canonical signoff for atomic 217/300.
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source

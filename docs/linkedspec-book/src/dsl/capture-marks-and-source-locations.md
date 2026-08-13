@@ -566,30 +566,32 @@ The implementation order is also explicit. `INTER-MATCH-GAP-CAPTURE.1-.7` owns n
 `@capture_gaps`, lifecycle and compatibility policy, six-runtime behavior, carriers, and public admission.
 Typed-source composition consumes that completed contract afterward; it does not define a second gap language.
 
-### Executable neutral contract — Perl private live/generated staging
+### Executable neutral contract — private Perl runtime admitted
 
 The behavior-free contract now lives at `capability_conformance/inter_match_gap_capture_contract.json`, uses id
 `linkedspec-inter-match-gap-capture-v1`, and is checked independently by
-`tools/check_inter_match_gap_capture_contract.py`. Inter-match gap-capture recurring governance is current, while every runtime-admission and public-surface row remains pending.
-The neutral-contract phase is independently recomposed and closed without changing that 1-complete/8-pending
-boundary. The Perl reference now implements authored/static metadata plus private native-live execution; emitted
-loading is also implemented, while runtime/public admission remains pending.
-The recurring driver currently executes that complete neutral row exactly once and emits six ordered pending
-route skips:
+`tools/check_inter_match_gap_capture_contract.py`. Inter-match gap-capture recurring governance now executes the complete neutral and Perl rows; five later runtime routes and both public rows remain pending.
+The Perl reference implements authored/static metadata, private native-live behavior, and independently loaded
+generated parity. Admission `.2.4` runs that complete consumer in canonical CI and in the rooted recurring route,
+promotes only `perl_runtime`, and advances the checker to 56 mutations without outward public admission.
+The recurring driver executes the complete neutral row and Perl consumer exactly once each, then emits five
+ordered later-runtime skips:
 
 ```bash
 bash tools/check_inter_match_gap_capture_six_runtime.sh
 ```
 
 Canonical local CI always runs the neutral checker and exposes the same governance route behind
-`LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1`. Neither route admits the dormant Perl consumer as a runtime row.
+`LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1`. Ordinary CI and the opt-in route each execute the admitted Perl
+consumer once; the latter additionally proves neutral-first ordering and five explicit later-runtime skips.
 
 The neutral artifact locks 8 positive and 10 negative authored fixtures, 3 source fixtures, 8 private gap fields,
 16 main-machine transitions, 10 segmentation cases, 3 terminal routes, 7 transaction/recursion/return-channel
-cases, 6 compatibility rows, 9 diagnostics, 9 rollout legs, and 50 semantic mutations. The governance leaf adds
-5 storage/topology/no-overclaim mutations for 55 total without admitting a runtime.
+cases, 6 compatibility rows, 9 diagnostics, 9 rollout legs, and 50 semantic mutations. Governance adds six
+storage/topology/no-overclaim/admission mutations for 56 total: the Perl complete-to-pending regression and
+premature Rust promotion are both rejected.
 
-### Perl private live and generated implementation — rollout still unchanged
+### Perl private live and generated implementation — exact private admission
 
 Perl `.2.1` implements exact named declaration/selector parsing, static validation, directive metadata, and
 generated dependency provenance. Ordinary `Rule[name]` selection executes the selected regex correctly. `.2.2`
@@ -604,23 +606,28 @@ Implementation is dependency-split:
 2. `.2.2` has attached state to the existing recognition invocation guard, added live lifecycle/accessor behavior,
    and synchronized four private source-read ActionIR nodes. It creates neither another cursor nor invocation stack.
 3. `.2.3` has proven emitted and independently loaded execution while retaining generated-source plan v2.
-4. `.2.4` alone registers and admits Perl, advancing the gap rollout and mutation boundary while later runtimes
-   and public no-drift remain pending.
+4. `.2.4` registers and admits Perl, advancing the gap rollout and mutation boundary while later runtimes and
+   public no-drift remain pending.
 
-The `.2.3` boundary is signoff-complete: all eight repository doctrines, containment/relocation, both 66/66 CLI
-environments, Phase 0 at 1,031/1,031, and the exact opt-in neutral-plus-six-pending route pass. This verification
-does not admit the dormant Perl consumer; `.2.4` remains the only admission owner.
+The `.2.3` carrier boundary is signoff-complete. `.2.4` now admits that exact consumer without adding a public
+facade: its ordinary and rooted runs each pass 124 top-level tests, and project-data routing passes outside the
+working directory.
+
+Definitive `.2.4` and parent `.2` signoff also passes the rendered mdBook, Knowledge 834/6,995, all eight
+doctrines, containment/relocation, CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 765 seconds, the exact
+neutral-plus-Perl route with five later-runtime skips, and local-CI exit 0. Rust `.3` is next; portable/public
+admission remains later.
 
 Pinned identity is important here: the installed Perl reports Unicode 13, so `.2.1` generates a private
 806-range classifier from the repository's Unicode 17 ranges rather than trusting the host `XID_Continue` table.
 Gap checkpoint state is indexed by existing recognition tokens on the same invocation guard; the established
 cursor/boundary/marks transaction schema remains unchanged.
 
-The four accessor nodes raise the recognition-effect census from 133 to 137, but remain private Perl staging on
+The four accessor nodes raise the recognition-effect census from 133 to 137, but remain private Perl behavior on
 both live and generated paths: the
 246 shared call inventory, 122 public-helper inventory, and typed-source 9-complete/5-pending/114-mutation contract
-do not move. Current truth is recognition 137/246/58 and gap rollout 1 complete / 8 pending / 55 mutations. Ten
-independent dormant-consumer mutations protect this staging boundary without entering the neutral ledger.
+do not move. Current truth is recognition 137/246/58 and gap rollout 2 complete / 7 pending / 56 mutations. Exact
+registration checks replace the retired dormancy fence.
 
 Named slot rules are exact:
 

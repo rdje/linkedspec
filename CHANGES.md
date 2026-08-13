@@ -10,6 +10,24 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-13 — INTER-MATCH-GAP-CAPTURE.2.4 — admit Perl inter-match gap capture
+
+- Activated task-tree-first from clean atomic-225 commit `45460329`. The existing complete Perl consumer now
+  defaults to all metadata, native-live, and independently loaded generated phases while retaining private
+  phase selection for focused diagnosis; its ordinary run passes 124 top-level tests.
+- Registered the full consumer exactly once in canonical CI and exactly once after the neutral checker in the
+  repository-rooted recurring route. The route then emits five ordered skips for Rust, Dart, Julia, PUC Lua, and
+  LuaJIT; project-data routing passes from outside the working directory.
+- Promoted only `perl_runtime` under owner `.2.4`, advanced the nine-row ledger to 2 complete / 7 pending, replaced
+  the Perl-pending mutation with a complete-to-pending regression, and added one premature-Rust mutation for an
+  exact total of 56. The obsolete ten-mutation Perl dormancy fence is removed.
+- Updated the five governed public-status markers to state private Perl admission while retaining the same ten
+  facade/schema/semantic/MCP/CLI/README token guards. Recognition stays 137/246/58, public helpers stay 122,
+  typed source stays 9/5/114, duplicate-slot identity stays 7/0/59, and generated plan v2 does not move.
+- Closed `.2.4` and parent `.2` after the rendered mdBook, Knowledge 834/6,995, all eight doctrines, containment/
+  relocation, CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 765 seconds, exact neutral-plus-Perl routing with
+  five later-runtime skips, and final local-CI exit 0. Rust `.3` follows only after atomic 226 lands cleanly.
+
 ## 2026-08-13 — INTER-MATCH-GAP-CAPTURE.2.3 — carry Perl gaps through generated execution
 
 - Started from clean atomic-224 commit `34d02e0c`. Metadata passed 110 assertions, all nine native-live groups

@@ -135,14 +135,28 @@ repository containment, all-five-anchor relocation, CLI 66/66 in both option env
 1,031/1,031 in 773 seconds, the exact opt-in neutral-plus-six-pending route, and local-CI exit 0. The outer
 sandbox's first status-71 denial was solely nested `sandbox-exec`; the unchanged authorized run passed.
 
+Perl admission `.2.4` starts task-tree-first from clean atomic 225 at `45460329`. The already-complete consumer
+now defaults to all metadata/live/generated phases and runs exactly once in ordinary canonical CI plus once in
+the repository-rooted recurring route. That route preserves neutral-first order and then emits five ordered
+later-runtime skips. Only `perl_runtime` is complete under owner `.2.4`; the ledger is 2 complete / 7 pending and
+the neutral checker rejects 56 semantic/topology mutations, including Perl regression and premature Rust.
+Obsolete dormancy enforcement is removed. The ten outward token guards, generated plan v2, recognition
+137/246/58, public helpers 122, typed source 9/5/114, and all later runtime/public rows remain unchanged.
+
+Definitive `.2.4` and parent `.2` signoff passes the rendered mdBook, Knowledge Map 834/6,995, all eight
+doctrines, six-family repository containment, all-five-anchor relocation, CLI 66/66 in both option environments,
+RAM 57%, Phase 0 1,031/1,031 in 765 seconds, the exact opt-in neutral-plus-Perl route with five later-runtime
+skips, and local-CI exit 0. The Perl parent is therefore closed for intended atomic 226; Rust `.3` is next only
+after that commit, brief-clear, and clean-tree boundary.
+
 Definitive `.2.2` signoff passes the rendered 79-file / 14,672-KiB mdBook, Knowledge Map 834/6,992, all eight
 doctrines, six-family repository containment, all-five-anchor relocation, CLI 66/66 in both option environments,
 RAM 76%, Phase 0 1,031/1,031 in 756 seconds, the exact opt-in neutral-plus-six-pending route, and local-CI exit 0.
 The outer sandbox's first status-71 denial was solely nested `sandbox-exec`; the unchanged authorized run passed.
 
-The dormant exact Perl consumer has advanced through metadata, live, and emitted/loaded phases under `.2.1-.2.3`;
-`.2.4` alone registers the full path, promotes only Perl, and advances the gap checker from 55 to 56. This plan
-is durable in ADR `0045` and [[inter-match-gap-perl-implementation-plan]].
+The exact Perl consumer advanced through metadata, live, and emitted/loaded phases under `.2.1-.2.3`; `.2.4`
+registers that full path and promotes only Perl. This architecture is durable in ADR `0045` and
+[[inter-match-gap-perl-implementation-plan]].
 
 Definitive behavior-free `.2.0` signoff preserves gap 1/8/55, recognition 133/246/58, public helper coverage 122,
 and typed source 9/5/114. It passes the rendered 79-file / 14,652-KiB mdBook, Knowledge 833/6,984, all eight

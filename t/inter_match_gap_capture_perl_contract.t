@@ -12,10 +12,10 @@ use Test::More;
 use lib "$Bin/../perl";
 use LinkedSpec ();
 
-# Dormant until INTER-MATCH-GAP-CAPTURE.2.4 admits the Perl runtime route.
-# metadata: prove -Iperl t/inter_match_gap_capture_perl_contract.t
+# Admitted by INTER-MATCH-GAP-CAPTURE.2.4; the default executes every Perl role.
+# prove -Iperl t/inter_match_gap_capture_perl_contract.t
 my $CONTRACT_ID = 'linkedspec-inter-match-gap-capture-v1';
-my $MODE = $ENV{LINKEDSPEC_PERL_INTER_MATCH_GAP_RED_MODE} // 'metadata';
+my $MODE = $ENV{LINKEDSPEC_PERL_INTER_MATCH_GAP_MODE} // 'all';
 my $JSON = JSON::PP->new->allow_nonref(1)->canonical(1);
 my $GENERATED_PACKAGE_COUNTER = 0;
 
@@ -270,7 +270,7 @@ SPEC
  is_deeply(
   $descriptor->{spec}{Top}{meta}{capture_gaps},
   { enabled => 1, directive => '@capture_gaps', line => 2 },
-  'eligible default action rule exposes dormant capture-gaps metadata',
+  'eligible default action rule exposes capture-gaps metadata',
  );
 
  my $same_regex_before = <<'SPEC';
@@ -1137,14 +1137,18 @@ SPEC
  };
 }
 
-if ($MODE eq 'metadata') {
+if ($MODE eq 'all') {
+ run_metadata_contract();
+ run_live_contract();
+ run_generated_contract();
+} elsif ($MODE eq 'metadata') {
  run_metadata_contract();
 } elsif ($MODE eq 'live') {
  run_live_contract();
 } elsif ($MODE eq 'generated') {
  run_generated_contract();
 } else {
- BAIL_OUT("unknown inter-match gap Perl RED mode '$MODE'");
+ BAIL_OUT("unknown inter-match gap Perl mode '$MODE'");
 }
 
 done_testing;

@@ -22,10 +22,10 @@ answers:
   - "how does generated Perl preserve inter match gap typed errors"
   - "why does generated Perl gap execution reset the input cursor"
   - "why can generated Perl gap selection not read live rule metadata"
-date: 2026-08-13
-status: authored/static .2.1, native live .2.2, and emitted/loaded parity .2.3 complete; admission remains pending
+date: 2026-08-14
+status: Perl authored/static, native live, emitted/loaded, and private runtime admission complete through .2.4
 tags: [capture, segmentation, perl, parser, actionir, lifecycle, transaction, generated-source, admission]
-evidence: "INTER-MATCH-GAP-CAPTURE.2.0 freezes the .2.1-.2.4 plan. .2.1 implements permanent grammar/reference-bridge named slots, Unicode 17 identity, exact static diagnostics, directive and five-field edge metadata, generated dependency provenance, and a dormant final-path consumer. .2.2 attaches private state to the existing recognition guard, adds exact lifecycle hooks and four source-read nodes, and makes all nine live contract groups pass. .2.3 from clean 34d02e0c imports the private runtime in emitted source, preserves gap-classified typed errors, aligns generated Execute's input boundary with ordinary Get, guards live-only metadata fallback, and makes five independently loaded groups / 138 internal assertions pass without admission."
+evidence: "INTER-MATCH-GAP-CAPTURE.2.0 freezes the .2.1-.2.4 plan. .2.1 implements permanent grammar/reference-bridge named slots, Unicode 17 identity, exact static diagnostics, directive and five-field edge metadata, generated dependency provenance, and the final consumer. .2.2 attaches private state to the existing recognition guard, adds exact lifecycle hooks and four source-read nodes, and makes all nine live contract groups pass. .2.3 from clean 34d02e0c imports the private runtime in emitted source, preserves gap-classified typed errors, aligns generated Execute's input boundary with ordinary Get, guards live-only metadata fallback, and makes five independently loaded groups / 138 internal assertions pass. .2.4 from clean 45460329 runs the full 124-test consumer once ordinarily and once in the rooted route, promotes only perl_runtime, and advances the neutral ledger to 2 complete / 7 pending / 56 mutations without outward admission. Definitive signoff passes Knowledge 834/6995, all eight doctrines, CLI 66/66 twice, Phase 0 1031/1031 in 765 seconds, exact neutral-plus-Perl routing, and local-CI exit 0."
 reverify: "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/check_inter_match_gap_capture_six_runtime.sh && perl tools/check_language_capability_coverage.pl --report"
 ---
 
@@ -130,11 +130,19 @@ and local-CI exit 0. The unchanged sandboxed run's status 71 was solely the oute
 
 ## `.2.4`: Perl admission
 
-Admission then runs the full consumer exactly once through canonical CI and the repository-rooted recurring
-driver. Only `perl_runtime` becomes complete, with owner `.2.4`. The existing runtime-status mutation becomes the
-Perl complete-to-pending regression and one premature-Rust promotion mutation advances the neutral checker from
-55 to 56. Rust, Dart, Julia, both Lua ABIs, recurring proof, public no-drift, capability admission, and typed
-composition remain pending.
+Admission now runs the full 124-test consumer exactly once through ordinary canonical CI and once through the
+repository-rooted recurring driver after the neutral checker. Only `perl_runtime` is complete, with owner `.2.4`.
+The existing runtime-status mutation is the Perl complete-to-pending regression and one premature-Rust promotion
+mutation advances the neutral checker from 55 to 56. The obsolete ten-mutation dormancy fence is removed.
+
+Rust, Dart, Julia, both Lua ABIs, recurring proof, public no-drift, capability admission, and typed composition
+remain pending. The same ten facade/schema/semantic/MCP/CLI/README surfaces remain token-guarded; generated plan
+v2, recognition 137/246/58, public helpers 122, and typed source 9/5/114 are unchanged.
+
+Definitive `.2.4` signoff closes parent `.2` for intended atomic 226. The rendered mdBook, Knowledge 834/6,995,
+all eight doctrines, containment/relocation, CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 765 seconds, exact
+neutral-plus-Perl routing with five later-runtime skips, and local-CI exit 0 pass. Rust `.3` is next only after the
+commit, brief-clear, and clean-tree boundary.
 
 Behavior-free `.2.0` signoff preserves the current gap 1/8/55, recognition 133/246/58, language 246/122, and
 typed-source 9/5/114 boundaries. It passes the rendered 79-file / 14,652-KiB book, Knowledge 833/6,984, all eight
