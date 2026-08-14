@@ -4,17 +4,17 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `45460329` — clean atomic-225 base for signoff-complete Perl admission `.2.4`; no push.
-- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.2.4 - admit Perl inter-match gap capture`, signoff-complete with
-  parent `.2` for intended atomic 226/300 from activation commit `45460329`; no push.
-- active_work_unit: none after atomic 226 lands; private Perl implementation/admission is complete.
-- next_action: commit atomic 226, clear/prove the brief and clean tree, then activate Rust `.3` task-tree-first.
-- in_flight_uncommitted: none after landing; this pointer describes the intended clean atomic-226 handoff and no
-  background job remains.
+- activation_commit: `eceb15ac` — clean atomic-226 base for behavior-free Rust gap preflight `.3.0`; no push.
+- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.3.0 - freeze Rust gap implementation plan`; intended atomic
+  227/300 from `eceb15ac`; no push and no behavior or rollout movement.
+- active_work_unit: none after `.3.0` clean landing; `.3.1` is not activated inside the behavior-free slice.
+- next_action: prove atomic-227 commit, zero-byte brief, and clean tree, then activate `.3.1` task-tree-first.
+- in_flight_uncommitted: none in the intended post-landing handoff; no background job remains.
 - blockers: none. Gap is 2 complete / 7 pending / 56 mutations; the rooted route runs neutral then Perl and skips
   five later runtimes. Recognition 137/246/58, 122 public helpers, typed source 9/5/114, duplicate-slot 7/0/59,
-  and project-data routing pass. Canonical CI passes containment/relocation, CLI 66/66 twice, RAM 57%, Phase 0
-  1,031/1,031 in 765 seconds, exact neutral-plus-Perl routing, five later-runtime skips, and exit 0.
+  and project-data routing pass. Rendered book 79/14,704 KiB, Knowledge 835/7,009, all eight doctrines, and
+  canonical containment/relocation, CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 741 seconds, exact neutral-
+  plus-Perl routing, five later-runtime skips, and exit 0 pass.
 - session_refresh_cadence: proactively recommend `/clear` after at most three completed commits, sooner after a
   large/debug-heavy slice or context compaction, and only at a committed clean handoff boundary.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -45,8 +45,9 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, 9 allowed/11 rejected effects, invocation-framed marks, and cursor-only v1 progress.
   Exact recurrence/public composition is current at rollout 9/9 and 58 mutations; public 3/26/45; guide 1/14/18.
-- current_future_direction: gap rollout is 2/7/56 with private Perl admitted under `.2.4`; later runtimes and both
-  public rows remain pending. Rust `.3` follows clean parent `.2` closeout. Brackets select; dot fluently binds;
-  `.14.5.1` waits for `.7`.
-- latest_bootstrap_read: 2026-08-14 — complete roadmap/codebase/mdBook and continuity/tooling review; `.2.4` and
-  parent `.2` are signoff-complete from clean atomic 225 at `45460329`; push lock is 300.
+- current_future_direction: gap rollout is 2/7/56 with private Perl admitted. Rust `.3.0` signoff-completely
+  freezes `.3.1-.3.5` metadata/native/generated/emitted/admission ownership for intended atomic 227; later
+  runtimes and both public rows remain pending.
+  Brackets select; dot fluently binds; `.14.5.1` waits for `.7`.
+- latest_bootstrap_read: 2026-08-14 — complete roadmap/codebase/mdBook and continuity/tooling review; `.3.0` is
+  task-tree-first from clean atomic 226 at `eceb15ac`; push lock is 300.

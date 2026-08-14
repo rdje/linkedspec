@@ -2,27 +2,35 @@
 
 ## Current Activity
 
-- `INTER-MATCH-GAP-CAPTURE.2.4` and parent `.2` are signoff-complete from clean atomic-225 commit `45460329`
-  for intended atomic 226/300; no push. Rust `.3` becomes eligible only after the landing is clean.
+- Atomic 226 landed cleanly at `eceb15ac`; behavior-free Rust preflight `INTER-MATCH-GAP-CAPTURE.3.0` is signoff-
+  complete for intended atomic 227 from that exact boundary; no push.
+- Exact primary probes and source audit reproduce Rust's numeric-only selector baseline, raw named declarations,
+  named-selector zero fallback, ignored directive, unknown accessors, missing compiled/runtime provenance, and
+  separate native/generated lifecycle loops.
+- `.3.1-.3.5` now own authored/static/compiled metadata, same-recognition-authority native state, reconstruction/
+  descriptor/generated-plan parity, repository-local emitted proof, and final primary/admission respectively.
 - The full Perl consumer defaults to metadata/live/generated execution and passes 124 top-level tests. Canonical
   CI registers it once; the rooted route runs neutral then Perl once and skips five later runtimes.
 - Only `perl_runtime` is promoted. Gap governance is 2 complete / 7 pending / 56 mutations; obsolete dormancy
   enforcement is removed while Perl regression and premature Rust promotion are rejected.
 - Recognition remains 137/246/58 with 122 public helpers, typed source remains 9/5/114, duplicate-slot identity
   remains 7/0/59, generated plan v2 is unchanged, and all ten outward surfaces remain guarded.
-- Canonical CI passes all eight doctrines, Knowledge 834/6,995, containment/relocation, CLI 66/66 twice, RAM 57%,
-  Phase 0 1,031/1,031 in 765 seconds, exact neutral-plus-Perl routing, five later-runtime skips, and exit 0.
+- `.3.0` signoff passes rendered mdBook 79/14,704 KiB, Knowledge 835/7,009, all eight doctrines, focused Rust
+  1/1, containment/relocation, CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 741 seconds, exact neutral-plus-
+  Perl routing, five later-runtime skips, and exit 0. No Rust behavior or rollout moved.
 
 ## Latest Completed Slice
 
-- `.2.4` and Perl parent `.2` are signoff-complete for intended atomic 226 from activation `45460329`.
+- `.3.0` is signoff-complete for intended atomic 227 from clean `eceb15ac`; it changes no Rust behavior or rollout.
 
 ## Next Action
 
-- Commit atomic 226, clear/prove the brief and clean tree, then activate Rust `.3` task-tree-first.
+- Prove the atomic-227 commit, zero-byte brief, and clean tree, then activate `.3.1` task-tree-first.
 
 ## Recent Completions
 
+- `2026-08-14` — `eceb15ac` landed private Perl admission and parent `.2` as atomic 226/300.
+- `2026-08-14` — `.3.0` completed signoff at book 79/14,704 KiB, Knowledge 835/7,009, focused Rust 1/1, all eight doctrines, Phase 0 1,031/1,031 in 741 seconds, and exact routing without behavior movement.
 - `2026-08-14` — `.2.4` and parent `.2` completed canonical signoff at RAM 57%, Phase 0 1,031/1,031 in 765 seconds, and exact neutral-plus-Perl routing.
 - `2026-08-13` — `.2.4` implemented exact private Perl admission at gap 2/7/56; ordinary and rooted 124-test runs pass.
 - `2026-08-13` — `.2.3` completed canonical signoff at RAM 57%, Phase 0 1,031/1,031 in 773 seconds, and exact opt-in gap routing.
@@ -37,8 +45,6 @@
 - `2026-08-13` — `0490522b` landed recurring-neutral governance `.1.2` as atomic 220/300.
 - `2026-08-13` — `.1.2` completed recurring-neutral routing/no-overclaim governance and canonical signoff at 1/8 rollout and 55 mutations.
 - `2026-08-13` — `.1.1` completed checker-first executable-neutral contract proof and canonical signoff at 1/8 rollout and 50 mutations.
-- `2026-08-13` — `31f3e664` landed executable-neutral plan `.1.0` as atomic 218/300.
-- `2026-08-13` — `.1.0` completed the behavior-free executable-neutral audit/plan and canonical signoff for atomic 218/300.
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source

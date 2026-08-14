@@ -1,6 +1,6 @@
 ---
 id: inter-match-gap-executable-contract-plan
-title: Inter-match gap capture has a frozen neutral contract and private Perl native-live staging
+title: Inter-match gap capture has a frozen neutral contract and admitted private Perl runtime
 answers:
   - "where will the inter match gap executable contract live"
   - "what is the inter match gap contract id"
@@ -22,9 +22,9 @@ answers:
   - "what are the capture_gaps rollout legs"
   - "is capture_gaps implemented now"
 date: 2026-08-13
-status: neutral parent closed and Perl native-live staging complete; rollout remains 1 complete + 8 pending
+status: neutral parent closed and private Perl runtime admitted; rollout is 2 complete + 7 pending
 tags: [capture, segmentation, named-slots, typed-source, lifecycle, transaction, recursion, contract, plan]
-evidence: "INTER-MATCH-GAP-CAPTURE.1.1 from clean 31f3e664 adds the executable neutral Unicode/empty/child/rollback/nested model and 50 semantic corruptions. INTER-MATCH-GAP-CAPTURE.1.2 from clean f58dfcb3 adds repository-rooted recurrence, exact pending-route order, public no-overclaim, and five governance corruptions for 55 total. INTER-MATCH-GAP-CAPTURE.1.3 from clean 0490522b independently recomposes those bytes, counts, routes, storage, public absence, duplicate-slot, and typed-source prerequisites before closing neutral parent .1. INTER-MATCH-GAP-CAPTURE.2.1 from clean 8f826923 adds Perl named-slot and capture_gaps authored/static metadata behind 10 independent dormancy mutations. INTER-MATCH-GAP-CAPTURE.2.2 from clean 912fc5ed implements only private native-live state/accessors and 137/246/58 recognition synchronization; generated loading and rollout admission remain later leaves."
+evidence: "INTER-MATCH-GAP-CAPTURE.1.1 from clean 31f3e664 adds the executable neutral Unicode/empty/child/rollback/nested model and 50 semantic corruptions. INTER-MATCH-GAP-CAPTURE.1.2 from clean f58dfcb3 adds repository-rooted recurrence, exact pending-route order, public no-overclaim, and five governance corruptions for 55 total. INTER-MATCH-GAP-CAPTURE.1.3 closes neutral parent .1 unchanged. Perl .2.1 adds authored/static metadata, .2.2 implements same-guard native-live state/accessors with 137/246/58 recognition synchronization, .2.3 carries parity through emitted/loaded source, and .2.4 at eceb15ac admits the full 124-test private Perl consumer. Current gap governance is 2 complete + 7 pending / 56 mutations; Rust .3.0 freezes the next implementation plan without behavior movement."
 reverify: "bash tools/check_inter_match_gap_capture_six_runtime.sh && prove -Iperl t/inter_match_gap_capture_perl_contract.t"
 ---
 
@@ -34,17 +34,18 @@ reverify: "bash tools/check_inter_match_gap_capture_six_runtime.sh && prove -Ipe
 `capability_conformance/inter_match_gap_capture_contract.json` (`format: 1`, contract id
 `linkedspec-inter-match-gap-capture-v1`) plus independent
 `tools/check_inter_match_gap_capture_contract.py`. `.1.2` now provides repository-rooted recurring/canonical
-routing and no-overclaim governance through `tools/check_inter_match_gap_capture_six_runtime.sh`; it executes only
-the complete neutral row and explicitly skips all six pending runtime rows. `.1.3` independently recomposes those
-committed inputs unchanged and closes neutral parent `.1`; Perl `.2` is the first implementation owner.
+routing and no-overclaim governance through `tools/check_inter_match_gap_capture_six_runtime.sh`. `.1.3`
+independently recomposes those committed inputs unchanged and closes neutral parent `.1`; Perl `.2` then completes
+authored, native-live, emitted/loaded, and private admission. The driver now executes neutral and Perl, then skips
+Rust, Dart, Julia, PUC Lua, and LuaJIT.
 
 The nine ordered rollout legs are neutral, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurring proof, and public
-no-drift. Only neutral can become complete in `.1`; runtime rows remain for `.2-.6`, and recurrence/public
-admission remains `.7`. The typed-source `lossless_gap_composition` row does not move until `.7` closes.
+no-drift. Neutral and private Perl are complete; runtime rows remain for `.3-.6`, and recurrence/public admission
+remains `.7`. The typed-source `lossless_gap_composition` row does not move until `.7` closes.
 The neutral count locks are 8 positive and 10 negative authored fixtures, 3 sources, 8 private gap fields, 16
 main-machine transitions, 10 segmentation cases, 3 terminal routes, 7 transaction/recursion/return-channel rows,
-6 compatibility rows, 9 diagnostics, 9 rollout legs, and 50 semantic mutations. Governance adds 5 mutations for
-55 total without promoting runtime behavior.
+6 compatibility rows, 9 diagnostics, 9 rollout legs, and 50 semantic mutations. Recurring governance added five;
+Perl admission replaces dormancy with regression/premature-Rust protection for 56 total.
 
 ## Syntax and identity
 
@@ -102,9 +103,10 @@ cursor-regression, repetition-progress, and recursive-progress diagnostics stay 
 adds only named-slot, directive, compatibility-conflict, and unavailable-context diagnostics.
 
 The Perl reference now recognizes the named declaration/selector syntax and `@capture_gaps` directive, validates
-their static contract, exposes private descriptor/generated dependency provenance, and executes private native-live
-gap state/lifecycle/accessors. It still has no independently loaded generated gap execution, recurring runtime
-route, or public admission.
-See ADR `0045`, `docs/knowledge/perl-inter-match-gap-authored-metadata.md`, and
+their static contract, exposes private descriptor/generated dependency provenance, and executes private native,
+emitted, and independently loaded gap state/lifecycle/accessors. Its full consumer is admitted in ordinary CI and
+the rooted recurring route; no outward public admission has occurred. Rust remains unimplemented at the `.3.0`
+baseline and is dependency-split under `.3.1-.3.5`.
+See ADR `0045`, `docs/knowledge/inter-match-gap-rust-implementation-plan.md`, and
 `docs/tasks/INTER-MATCH-GAP-CAPTURE.md` for the complete fixtures, mutation classes, storage routes, carrier roles,
 and remaining implementation ownership.

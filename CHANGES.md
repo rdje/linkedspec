@@ -10,6 +10,34 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-14 — INTER-MATCH-GAP-CAPTURE.3.0 — freeze Rust gap implementation plan
+
+- Activated task-tree-first from clean atomic-226 commit `eceb15ac`. Retrieved the exact neutral/Perl gap,
+  duplicate-slot, rule-local cursor, typed-source, recognition-transaction, generated-source, primary, storage,
+  path, task, Knowledge, Toolbox, and ADR authorities before behavior inspection.
+- Reproduced current Rust behavior through the committed primary process: numeric selectors succeed; named
+  declarations become raw/no-regex state; named selectors fall back to slot zero with an unconsumed suffix;
+  `@capture_gaps` is ignored; and `entry_slot()`/`gap_*` remain unknown helpers. Targeted source inspection then
+  located the exact parser, AST, compiler, descriptor, native/generated-loop, runtime-frame, accessor, carrier,
+  emitter, and primary mechanisms.
+- Dependency-split Rust implementation under `.3.1-.3.5`: authored/static/compiled metadata; native state on the
+  existing recognition authority; reconstruction/descriptor/generated-plan parity; repository-local independently
+  compiled emitted proof; and final primary/admission/route/ledger closeout. Generated plan v2 remains
+  `{label,family}` and no second cursor, token family, or invocation stack is permitted.
+- Froze final admission at exactly nine once-only roles. Only `.3.5` may promote `rust_runtime` to produce 3/6 and
+  replace `rust_runtime_premature` with `rust_runtime_regression` while preserving 56 mutations. Recognition
+  137/246/58, public helpers 122, typed source 9/5/114, capability/public surfaces, recurring/public rows, and
+  later runtimes remain unchanged or pending.
+- Repaired the executable-contract and recurring-governance Knowledge cards that still reported the pre-Perl
+  1/8/six-skip boundary, and added the Rust implementation card, ADR amendment, Toolbox route, task/index,
+  roadmaps, architecture, bounded live layers, capability guide, and sole-facing mdBook plan. No Rust source,
+  contract, checker, driver, rollout, facade/schema/MCP/CLI, or README behavior changed.
+- Signoff passes exact gap 2/7/56 and rooted Perl 124/five skips, focused Rust 1/1 in 17.61 seconds, recognition
+  137/246/58, typed source 9/5/114, rendered mdBook 79/14,704 KiB, Knowledge 835/7,009, all eight doctrines,
+  containment/relocation, CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 741 seconds, exact opt-in routing,
+  `[ci] local CI gate passed`, and exit 0. The initial sandboxed run stopped only at the outer harness's nested-
+  `sandbox-exec` status 71; the unchanged authorized run is authoritative. Atomic 227 remains before `.3.1`.
+
 ## 2026-08-13 — INTER-MATCH-GAP-CAPTURE.2.4 — admit Perl inter-match gap capture
 
 - Activated task-tree-first from clean atomic-225 commit `45460329`. The existing complete Perl consumer now

@@ -310,8 +310,10 @@ the nine-leg rollout is 2 complete / 7 pending and the checker rejects 56 semant
 Perl `.2.1-.2.3` implement authored/static metadata, private native-live behavior, and independently loaded
 generated parity; `.2.4` admits that existing consumer without an outward API. Its four private accessor nodes are synchronized as recognition `source_read`
 effects at 137 total rows, while shared calls remain 246, public Perl helper coverage remains 122, and typed-source
-composition stays pending. `.2.3` owns emitted/loaded parity; `.2.4` alone may promote the Perl gap row and replace
-its rooted skip.
+composition stays pending. Behavior-free Rust `.3.0` now assigns authored/static, native same-authority,
+reconstruction/generated-plan, repository-local emitted, and final primary/admission work to `.3.1-.3.5` without
+changing the 2/7/56 ledger or the pending Rust skip. Its behavior-free signoff is green for intended atomic 227;
+`.3.1` remains pending until that commit lands cleanly.
 
 No public `Position`/`Span` value, descriptor or generated schema, semantic/MCP projection, or source-authority
 elevation is claimed by these internal typed-source runtime admissions. Recognition transaction spelling and

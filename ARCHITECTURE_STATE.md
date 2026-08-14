@@ -149,6 +149,21 @@ RAM 57%, Phase 0 1,031/1,031 in 765 seconds, the exact opt-in neutral-plus-Perl 
 skips, and local-CI exit 0. The Perl parent is therefore closed for intended atomic 226; Rust `.3` is next only
 after that commit, brief-clear, and clean-tree boundary.
 
+Atomic 226 landed cleanly at `eceb15ac`, and Rust behavior-free preflight `.3.0` activated task-tree-first from
+that exact boundary. Primary-process evidence fixes the current Rust baseline: numeric selectors execute, named
+declarations become raw/no-regex state, named selectors fall back to zero with an unconsumed suffix, the directive
+is ignored, and the accessors remain unknown. `.3.1-.3.5` now separately own authored/static/compiled metadata,
+same-recognition-authority native state, reconstruction/descriptor/generated-plan parity, repository-local emitted
+proof, and primary/admission. No Rust behavior or rollout has moved; generated plan v2, recognition 137/246/58,
+122 public helpers, typed source 9/5/114, gap 2/7/56, and all outward guards remain exact.
+
+Definitive `.3.0` signoff passes focused Rust 1/1, the rendered 79-file / 14,704-KiB mdBook, Knowledge Map
+835/7,009, all eight doctrines, six-family repository containment, all-five-anchor relocation, CLI 66/66 in both
+option environments, RAM 57%, Phase 0 1,031/1,031 in 741 seconds, the exact neutral-plus-Perl route with five
+later-runtime skips, and local-CI exit 0. The unchanged permission-authorized run resolved the outer harness's
+preceding nested-`sandbox-exec` status 71. `.3.0` is signoff-complete for intended atomic 227; `.3.1` remains
+pending until commit, brief-clear, and clean-tree proof.
+
 Definitive `.2.2` signoff passes the rendered 79-file / 14,672-KiB mdBook, Knowledge Map 834/6,992, all eight
 doctrines, six-family repository containment, all-five-anchor relocation, CLI 66/66 in both option environments,
 RAM 76%, Phase 0 1,031/1,031 in 756 seconds, the exact opt-in neutral-plus-six-pending route, and local-CI exit 0.

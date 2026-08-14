@@ -10,6 +10,30 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-14 (`INTER-MATCH-GAP-CAPTURE.3.0` — Rust dependency freeze): activation base is clean atomic 226 at
+  `eceb15ac`. The neutral checker and rooted route are the first runtime truth: 2/7/56, Perl 124, and five exact
+  pending skips. Direct primary probes precede source inspection and prove numeric selection works while named
+  declaration/selection, directive, and accessors are absent or drifted in their exact current ways.
+- Root causes are intentionally narrow: bare-regex and legacy-marker classification in `parser.rs`, digit-only
+  `parse_index_at`, numeric-only AST/compiled edge state, absent compiled slot/directive provenance, two separate
+  native/generated execution loops, and an existing recognition frame with no gap members. `source_emitter.rs`
+  already embeds compiled JSON, so widening its label/family plan would duplicate authority.
+- `.3.1` owns authored/static/compiled provenance; `.3.2` owns native state/lifecycle/accessors on the existing
+  recognition invocation and snapshot; `.3.3` owns reconstruction/descriptor/generated execution; `.3.4` owns
+  offline emitted execution under repository-derived scratch/target storage; `.3.5` alone owns primary/admission.
+- Candidate placement is before capture-enabled `LS`, persistence continues through target/action/`LE`, accepted
+  commit occurs before `IT`, and successful tails precede `LX`/`EX`/`E`. Unflagged ordering, falsey acceptance,
+  return authority, structural slot identity, and public recognition snapshots remain unchanged.
+- Final admission is exactly 3 complete / 6 pending / 56 mutations: replace premature Rust completion with Rust
+  regression, run neutral/Perl/Rust then four skips, and execute the nine declared Rust roles once. Preserve
+  recognition 137/246/58, language 246/122, typed source 9/5/114, generated plan v2, capability/public no-overclaim,
+  and all later owners. The two stale pre-Perl Knowledge cards are corrected in this behavior-free slice.
+- Behavior-free signoff passes exact gap 2/7/56, rooted Perl 124/five skips, focused Rust 1/1 in 17.61 seconds,
+  rendered book 79/14,704 KiB, Knowledge 835/7,009, all eight doctrines, containment/relocation, CLI 66/66 twice,
+  RAM 57%, Phase 0 1,031/1,031 in 741 seconds, exact opt-in routing, and local-CI exit 0. The first sandboxed run
+  stopped only at the outer harness's nested-`sandbox-exec` status 71; the unchanged authorized run is definitive.
+  `.3.0` is signoff-complete for intended atomic 227 and `.3.1` stays pending until commit/brief/clean proof.
+
 - 2026-08-13 (`INTER-MATCH-GAP-CAPTURE.2.4` — exact private Perl admission): activation base is clean atomic 225
   at `45460329`. Keep the neutral model behavior-free; admission changes only rollout truth, execution topology,
   governed status markers, and the already-complete consumer's default mode.

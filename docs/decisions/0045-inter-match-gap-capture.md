@@ -444,6 +444,42 @@ Phase 0 1,031/1,031 in 765 seconds, the exact opt-in neutral-plus-Perl route wit
 local-CI exit 0. Parent `.2` therefore closes for intended atomic 226 without later-runtime or public promotion;
 Rust `.3` becomes the next eligible implementation leaf only after that landing is clean.
 
+## 2026-08-14 Rust implementation-plan amendment
+
+`INTER-MATCH-GAP-CAPTURE.3.0` begins task-tree-first from clean atomic-226 commit `eceb15ac` and freezes the Rust
+implementation before behavior changes. Exact primary-process probes prove numeric `Rule[N]` already works, while
+`name=/regex/` is retained only as raw text, `Rule[name]` falls back to slot zero with an unconsumed suffix,
+`@capture_gaps` is ignored, and all four private accessors reach generic unknown-helper behavior. Targeted source
+inspection locates those results in the digit-only parser/AST, numeric-only compiled edges, missing directive/slot
+metadata, and absent runtime frame fields.
+
+`.3.1` owns authored syntax, exact static diagnostics, Unicode-17 slot identity, selector/directive AST, compiled
+slot rows, five-field resolved provenance, serde-compatible defaults, and dormant final-consumer staging. `.3.2`
+owns native live state: the existing recognition invocation frame and checkpoint snapshot gain the private gap
+members and entry-slot identity; no second cursor, transaction token family, or invocation stack is permitted.
+Candidate state becomes visible before capture-enabled `LS`, persists through action/target/`LE`, commits before
+`IT`, and successful terminal tails appear before `LX`/`EX`/`E`. Unflagged lifecycle order does not move.
+
+`.3.3` owns ordinary reconstruction, descriptor projection, and parity in the separate
+`GeneratedPlanExecutor`. `source_emitter.rs` continues to embed serialized `CompiledSpec`; generated plan v2 stays
+exactly `{label,family}`. `.3.4` owns independently compiled emitted-source direct/traced proof under a
+repository-derived scratch/target workspace, never OS temp or home storage. `.3.5` owns primary proof, exact
+nine-role composition, canonical/recurring registration, Rust-only rollout promotion, mutation replacement, and
+parent closeout.
+
+Rust admission will move only `rust_runtime`, producing 3 complete + 6 pending and an ordered
+neutral/Perl/Rust route followed by four later-runtime skips. The existing `rust_runtime_premature` mutation becomes
+`rust_runtime_regression`; total mutations remain 56. The recognition contract already contains the four private
+gap reads as `source_read`, so 137 rows / 246 calls / 58 mutations, 122 public helpers, typed source 9/5/114,
+capability admission, generated plan v2, public facade/schema/semantic/MCP/CLI/README surfaces, recurring/public
+rows, and later runtimes remain unchanged or pending.
+
+Definitive `.3.0` signoff preserves that boundary. Focused Rust 1/1, rendered mdBook 79/14,704 KiB, Knowledge
+835/7,009, all eight doctrines, containment/relocation, CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 741
+seconds, exact neutral-plus-Perl/five-skip routing, and local-CI exit 0 pass. The unchanged authorized run follows
+the outer harness's expected nested-`sandbox-exec` status 71. `.3.1` may activate only after intended atomic 227,
+brief-clear, and clean-tree proof.
+
 ## Consequences
 
 - The director's original concept and target-rule ownership are durable and cannot be reassigned to

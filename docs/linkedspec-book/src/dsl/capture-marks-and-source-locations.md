@@ -615,8 +615,37 @@ working directory.
 
 Definitive `.2.4` and parent `.2` signoff also passes the rendered mdBook, Knowledge 834/6,995, all eight
 doctrines, containment/relocation, CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 765 seconds, the exact
-neutral-plus-Perl route with five later-runtime skips, and local-CI exit 0. Rust `.3` is next; portable/public
-admission remains later.
+neutral-plus-Perl route with five later-runtime skips, and local-CI exit 0. Atomic 226 landed at `eceb15ac`.
+
+### Rust implementation preflight — audited, behavior unchanged
+
+Rust `.3.0` is the behavior-free implementation map from that clean boundary. Process-level probes establish the
+current baseline: numeric `Rule[N]` succeeds; `name=/regex/` becomes unrecognized raw body text; `Rule[name]`
+falls back to numeric slot zero while leaving the bracket suffix unconsumed; `@capture_gaps` is ignored; and
+`entry_slot()` plus the three gap accessors remain unknown helpers. These are current limitations, not supported
+syntax.
+
+The implementation is dependency-split before any behavior moves:
+
+1. `.3.1` adds Unicode-17 named/anonymous declarations, typed unindexed/numeric/named selectors, exact static
+   diagnostics, directive eligibility, compiled slot rows, and five-field resolved edge provenance.
+2. `.3.2` attaches native gap state and detached entry-slot identity to Rust's existing recognition invocation and
+   checkpoint snapshot. It adds no second cursor, token family, or invocation stack.
+3. `.3.3` proves ordinary reconstruction and descriptors, then applies the same lifecycle in the separate
+   generated-plan executor. Generated plan v2 remains exactly `{label,family}`.
+4. `.3.4` independently compiles emitted Rust source offline in a repository-derived scratch/target workspace.
+5. `.3.5` composes the nine exact Rust roles, primary command, recurring/canonical registration, and Rust-only
+   admission.
+
+The eventual `.3.5` delta is already bounded: only `rust_runtime` may become complete, producing 3 complete / 6
+pending while four later runtime routes remain skips. The premature-Rust mutation becomes a Rust regression
+mutation, leaving the total at 56. Recognition stays 137/246/58, public helpers stay 122, typed source stays
+9/5/114, and facade/schema/semantic/MCP/CLI/README/public admission remains later.
+
+The behavior-free preflight is signoff-complete for intended atomic 227. Focused Rust 1/1, the rendered
+79-file / 14,704-KiB book, Knowledge 835/7,009, all eight doctrines, containment/relocation, CLI 66/66 twice,
+RAM 57%, Phase 0 1,031/1,031 in 741 seconds, exact neutral-plus-Perl routing with five skips, and local-CI exit 0
+pass without moving Rust behavior or rollout. `.3.1` remains pending until commit, brief-clear, and clean proof.
 
 Pinned identity is important here: the installed Perl reports Unicode 13, so `.2.1` generates a private
 806-range classifier from the repository's Unicode 17 ranges rather than trusting the host `XID_Continue` table.

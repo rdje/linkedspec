@@ -1081,6 +1081,28 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   `.2.4` alone registers and promotes Perl. No second stack, `$IPOS` overload, plan-v3 change, public-helper
   admission, typed-source promotion, or outward facade/schema/CLI/README surface is permitted.
 
+### 4.9.1.5 Rust gap implementation preflight
+
+- **WHAT:** the behavior-free `.3.0` map from the audited Rust parser/compiler/runtime baseline to five owned
+  implementation leaves. It records exact process-level absence/drift, source mechanisms, one-authority state,
+  native/generated loop seams, carrier/primary roles, project-local emitted proof, and admission boundaries in
+  [[inter-match-gap-rust-implementation-plan]].
+- **WHEN:** implementing or reviewing `.3.1-.3.5`, especially before changing Rust regex declarations/selectors,
+  compiled edge identity, recognition frames, native/generated lifecycle, descriptors, or emitted source.
+- **HOW:** run the neutral and rooted gap checks first. Use the primary `--inline-spec` route to reproduce numeric,
+  named, directive, and accessor behavior; inspect `parse_single_element`, `parse_action_edge_prefix`,
+  `compile_rule`, both engine loops, `RuntimeContext`, and `source_emitter` only after that reproduction. Reuse the
+  pinned Unicode-17 classifier, structural slot helpers, immutable input source authority, recognition invocation,
+  and repository-derived Cargo/scratch wrappers.
+- **BOUNDARY:** `.3.1` is authored/static/compiled metadata only; `.3.2` is native same-authority state/accessors;
+  `.3.3` is reconstruction/descriptor/generated-plan parity; `.3.4` is independently compiled emitted parity;
+  `.3.5` alone registers and promotes Rust. Generated plan v2, recognition 137/246/58, 122 public helpers, typed
+  source 9/5/114, capability/public surfaces, recurring/public rows, and later runtimes do not move before their
+  explicit owners.
+- **SIGNED OFF:** focused Rust 1/1, gap 2/7/56, rooted Perl 124/five skips, book 79/14,704 KiB, Knowledge 835/7,009,
+  all eight doctrines, containment/relocation, CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 741 seconds, exact
+  opt-in routing, and local-CI exit 0 pass. `.3.0` remains behavior-free and `.3.1` waits for clean atomic 227.
+
 ### 4.9.2 `tools/check_recognition_transaction_contract.py` — neutral transaction/progress oracle
 
 - **WHAT:** independently interprets `linkedspec-recognition-transaction-v1`: four current authored forms, a linear

@@ -218,6 +218,13 @@ Perl `.2.1-.2.3` established metadata, private live behavior, and independently 
 and once in the rooted recurring route, promotes only `perl_runtime`, and retires the obsolete dormancy fence.
 The neutral checker now rejects 56 semantic/topology mutations at rollout 2 complete / 7 pending: Perl regression
 and premature Rust promotion are both locked, while facade/schema/semantic/MCP/CLI/README surfaces remain absent.
+Behavior-free Rust preflight `.3.0` leaves those commands and counts unchanged. It assigns `.3.1-.3.5` to authored
+metadata, same-authority native state, reconstruction/generated-plan parity, repository-local emitted proof, and
+final primary/admission respectively; only `.3.5` may register the Rust consumer or replace the premature-Rust
+guard with a regression guard.
+Definitive behavior-free `.3.0` signoff passes focused Rust 1/1, rendered mdBook 79/14,704 KiB, Knowledge
+835/7,009, all eight doctrines, containment/relocation, CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 741
+seconds, exact neutral-plus-Perl/five-skip routing, and local-CI exit 0. `.3.1` waits for clean atomic 227.
 The always-on neutral command is
 `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py`. The repository-routed
 `tools/check_inter_match_gap_capture_six_runtime.sh` driver repeats that authority exactly once, runs Perl once,
