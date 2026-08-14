@@ -617,13 +617,14 @@ Definitive `.2.4` and parent `.2` signoff also passes the rendered mdBook, Knowl
 doctrines, containment/relocation, CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 765 seconds, the exact
 neutral-plus-Perl route with five later-runtime skips, and local-CI exit 0. Atomic 226 landed at `eceb15ac`.
 
-### Rust private native and generated-plan carriers — implemented, admission still dormant
+### Rust private native, generated-plan, and emitted carriers — implemented, admission still dormant
 
 Rust `.3.0` froze the behavior-free implementation map from that clean boundary. Its process-level probes recorded
 the prior baseline: only numeric `Rule[N]` worked, while named declarations/selectors, `@capture_gaps`,
 `entry_slot()`, and the three gap accessors were absent. `.3.1` has since implemented authored/static/compiled
 metadata, `.3.2` has implemented private native execution, and `.3.3` has carried that exact state through
-ordinary reconstruction, descriptors, and the separate generated-plan executor.
+ordinary reconstruction, descriptors, and the separate generated-plan executor. `.3.4` now proves the same
+payload through independently compiled emitted Rust source.
 
 The implementation is dependency-split before any behavior moves:
 
@@ -633,7 +634,8 @@ The implementation is dependency-split before any behavior moves:
    checkpoint snapshot. It adds no second cursor, token family, or invocation stack.
 3. `.3.3` now proves ordinary reconstruction and descriptors, then applies the same lifecycle in the separate
    generated-plan executor. Generated plan v2 remains exactly `{label,family}`.
-4. `.3.4` independently compiles emitted Rust source offline in a repository-derived scratch/target workspace.
+4. `.3.4` independently compiles emitted Rust source offline in a repository-derived scratch/target workspace
+   and proves paired direct/traced execution without changing the emitter or generated plan.
 5. `.3.5` composes the nine exact Rust roles, primary command, recurring/canonical registration, and Rust-only
    admission.
 
@@ -672,9 +674,21 @@ Unicode and empty gaps, falsey returns, child-extended cursors, nested owners, r
 failed minimums, and direct entry. `source_emitter.rs` needs no new carrier: generated source already embeds the
 serialized compiled payload, while its static plan remains exact v2 `{label,family}`.
 
-This is still **not Rust runtime admission**. Independently compiled emitted and primary execution remain
-`.3.4-.3.5`, and the final consumer stays explicitly ignored until `.3.5`. Ordinary package testing reports
-0 passed / 1 ignored, while focused carrier proof uses `--ignored --exact`. The neutral checker retains the same
+Emitted carrier leaf `.3.4` creates one repository-derived offline crate containing fifteen independently emitted
+modules. Thirteen value cases execute through both `execute(...)` and `execute_with_trace(...)`: mixed list
+separators, Unicode and empty gaps, falsey child values, candidate-before-`LS`, child-extended cursors, nested
+owners, rollback, all terminal routes, failed minimum, direct entry, and unflagged legacy behavior. Two more
+modules prove typed unavailable-context and cursor-regression failures through both roles. Every traced value
+retains its emitted source identity and generated-plan trace role.
+
+The mixed-separator module is executable confirmation of the list use case: matching `[a-z]+` over
+`alpha, beta | gamma\n- delta` returns the items alongside exact gaps `""`, `", "`, `" | "`, and `"\n- "`,
+plus an empty tail. The separator need not be one delimiter regex; it is preserved source text between accepted
+items.
+
+This is still **not Rust runtime admission**. Primary execution and canonical/recurring registration remain
+`.3.5`, and the final consumer stays explicitly ignored until that leaf. Ordinary package testing reports 0
+passed / 1 ignored, while focused carrier proof uses `--ignored --exact`. The neutral checker retains the same
 behavior-free JSON, rollout 2 complete / 7 pending, 56 semantic/governance mutations, and ten local Rust dormancy
 mutations.
 
@@ -684,8 +698,8 @@ Gap checkpoint state is indexed by existing recognition tokens on the same invoc
 cursor/boundary/marks transaction schema remains unchanged.
 
 The four accessor nodes raise the recognition-effect census from 133 to 137 and remain private behavior. Perl
-executes them on live and generated paths; Rust now executes them on native, reconstructed, and generated-plan
-paths. The 246 shared call inventory, 122 public-helper inventory, and typed-source
+executes them on live and generated paths; Rust now executes them on native, reconstructed, generated-plan, and
+independently compiled emitted paths. The 246 shared call inventory, 122 public-helper inventory, and typed-source
 9-complete/5-pending/114-mutation contract do not move. Current truth is recognition 137/246/58 and gap rollout
 2 complete / 7 pending / 56 mutations. Exact registration checks replace the retired Perl dormancy fence while
 the Rust final consumer retains its `.3.5` ignore guard.

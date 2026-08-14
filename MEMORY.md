@@ -4,20 +4,21 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `5c4e9d50` — clean atomic-229 base for Rust reconstruction/descriptor/generated-plan `.3.3`; no push.
-- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.3.3 - carry Rust gap generated execution`; signoff-complete for
-  intended atomic 230/300 from `5c4e9d50`; no emitted/primary execution, admission, or rollout movement.
-- active_work_unit: `INTER-MATCH-GAP-CAPTURE.3.3` — implementation and all signoff gates are green at the atomic
-  commit boundary; `.3.4` is not active while the tree is dirty.
-- next_action: land intended atomic 230, clear the brief, prove the post-commit pointer and clean tree, then
-  activate emitted-source proof `.3.4` only from the clean result.
-- in_flight_uncommitted: signoff-complete `.3.3` code, final ignored-consumer staging, and synchronized durable
-  projections awaiting the atomic commit; no background job.
+- activation_commit: `9e6ade98` — clean atomic-230 base for independently compiled Rust emitted-source proof
+  `.3.4`; no push.
+- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.3.4 - prove Rust emitted gap execution`; signoff-complete for
+  intended atomic 231/300 from `9e6ade98`; no primary execution, admission, or rollout movement.
+- active_work_unit: `INTER-MATCH-GAP-CAPTURE.3.4` — emitted direct/traced proof, focused compatibility, rendered
+  book, Knowledge, 17-owner storage, all doctrines, and canonical local CI are signoff-complete; landing remains
+  before intended atomic 231.
+- next_action: land the complete `.3.4` slice, clear/prove the brief and clean atomic-231 boundary, then activate
+  `.3.5` task-tree-first for Rust primary/canonical/recurring admission.
+- in_flight_uncommitted: none expected after atomic-231 landing; no background job remains.
 - blockers: none. Rust now has exact authored/static/compiled metadata plus private native invocation-local gap
   candidate/commit/tail state, Unicode accessors, detached slots, rollback, nested isolation, ordinary
   reconstruction, compatible descriptor projection, and generated-plan parity on the existing recognition/
   compiled-state authority. The final consumer remains explicitly ignored until `.3.5`; independently compiled
-  emitted/primary execution, canonical/recurring execution, and facades remain pending. Gap stays 2/7/56 plus ten
+  primary execution, canonical/recurring execution, and facades remain pending. Gap stays 2/7/56 plus ten
   reason-checked Rust dormancy mutations; recognition 137/246/58, public helpers 122, typed source 9/5/114,
   duplicate-slot 7/0/59, and generated plan v2 remain unchanged.
 - session_refresh_cadence: proactively recommend `/clear` after at most three completed commits, sooner after a
@@ -51,8 +52,8 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   separate, linear tokens, 9 allowed/11 rejected effects, invocation-framed marks, and cursor-only v1 progress.
   Exact recurrence/public composition is current at rollout 9/9 and 58 mutations; public 3/26/45; guide 1/14/18.
 - current_future_direction: gap rollout is 2/7/56 with private Perl admitted and Rust authored/static/compiled
-  metadata plus private native/reconstructed/generated-plan execution implemented. Rust `.3.4-.3.5` retain emitted/admission ownership; the ignored consumer,
+  metadata plus private native/reconstructed/generated-plan/emitted execution implemented. Rust `.3.4` is signoff-complete awaiting landing and `.3.5` retains admission; the ignored consumer,
   later runtimes, and both public rows remain pending.
   Brackets select; dot fluently binds; `.14.5.1` waits for `.7`.
-- latest_bootstrap_read: 2026-08-14 — complete roadmap/codebase/mdBook and continuity/tooling review; `.3.3` is
-  task-tree-first from clean atomic 229 at `5c4e9d50`; push lock is 300.
+- latest_bootstrap_read: 2026-08-14 — complete roadmap/codebase/mdBook and continuity/tooling review; `.3.4` is
+  task-tree-first from clean atomic 230 at `9e6ade98`; push lock is 300.

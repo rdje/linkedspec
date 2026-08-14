@@ -27,9 +27,9 @@ answers:
   - "what does Rust gap admission change in the rollout mutation ledger"
   - "how can inter match gap capture preserve lists with mixed separators"
 date: 2026-08-14
-status: Rust authored/static/compiled metadata .3.1, private native execution .3.2, and reconstructed/descriptor/generated-plan carrier .3.3 are implemented; emitted proof and admission remain pending
+status: Rust authored/static/compiled metadata .3.1, native execution .3.2, reconstructed/descriptor/generated-plan carrier .3.3, and independently compiled emitted proof .3.4 are implemented; admission remains pending
 tags: [capture, segmentation, rust, parser, lifecycle, transaction, generated-source, emitted-source, admission]
-evidence: "INTER-MATCH-GAP-CAPTURE.3.3 starts from clean atomic-229 commit 5c4e9d50. The ignored final consumer's combined RED proved ordinary reconstructed execution already green, all three descriptor projections null, and generated-plan execution failing with exact gap_capture_context_unavailable. It now passes 1/1 in 5.96 seconds after descriptor.rs projects separate slot/directive/five-field edge values and GeneratedPlanExecutor joins the existing gap frame, lifecycle, and detached entry-slot carrier without changing plan v2. Descriptor tests pass 4/4; runtime units 170/170, recognition 12/12, recursive observation 7/7, cursor 6/6, source emitter 6/6, and duplicate slot 1/1 remain green. Ordinary package execution remains 0/1 ignored; neutral governance remains 2/7/56 plus 10 Rust dormancy mutations; rooted routing remains neutral + Perl 124 + five skips; and the 17-owner Rust storage oracle passes. Final signoff passes rendered book 79/14,720 KiB, Knowledge 835/7,019, all eight doctrines, containment/relocation, CLI 66/66 twice, RAM 69%, Phase 0 1,031/1,031 in 772 seconds, exact opt-in routing, and canonical exit 0. Emitted/primary execution, admission, rollout, and outward surfaces remain pending."
+evidence: "INTER-MATCH-GAP-CAPTURE.3.4 starts from clean atomic-230 commit 9e6ade98. Its exact ignored-consumer RED was the absent independently_compiled_emitted_gap_contract owner. The implemented helper emits fifteen modules with emit_rust_source_v2, writes one offline crate only beneath rust/target/test-workspaces, uses its local target, and removes the workspace on drop. Thirteen value modules and two typed-error modules pass paired direct/traced execution, covering heterogeneous list separators, Unicode/empty gaps, falsey values, selection/lifecycle timing, child cursor extension, nesting, rollback, terminal tails, failed minimum, direct entry, unflagged compatibility, unavailable context, and cursor regression. No runtime or source-emitter code changed: serialized CompiledSpec remains the carrier and generated plan v2 remains {label,family}. Focused proof passes 1/1 in 32.82 seconds; ordinary discovery remains 0/1 ignored; runtime 170/170, recognition 12/12, recursive observation 7/7, duplicate-slot and cursor contracts, and source emitter 6/6 pass. Neutral/rooted governance remains 2/7/56 plus 10 Rust dormancy mutations, Perl 124, and five skips. Rendered book 79/14,724 KiB, Knowledge 835/7,019, all eight doctrines, the 17-owner storage oracle, containment/relocation, CLI 66/66 twice, RAM 60%, Phase 0 1,031/1,031 in 780 seconds, exact opt-in routing, and canonical exit 0 pass. Primary execution, admission, rollout, and outward surfaces remain pending under .3.5."
 reverify: "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract authored_static_compiled_metadata_stage -- --exact --ignored && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract && bash tools/check_inter_match_gap_capture_six_runtime.sh"
 ---
 
@@ -151,6 +151,24 @@ dormancy mutations, and the Rust storage oracle remains 17-owner green.
 The emitted-source role compiles offline and executes in a repository-derived scratch/target workspace. It proves
 direct/traced values, lifecycle, typed diagnostics, rollback, recursion, direct entry, and legacy controls without
 using `std::env::temp_dir()`, `/tmp`, home caches, or off-volume storage.
+
+### Verified `.3.4` state
+
+From clean `9e6ade98`, the final ignored consumer now creates one managed project below
+`rust/target/test-workspaces`, emits fifteen isolated modules through the unchanged v2 emitter, and compiles/tests
+that crate with `cargo test --offline` and a workspace-local target. The workspace is deleted by its scoped drop
+owner.
+
+Thirteen value modules compare direct and traced outputs for heterogeneous list separators, Unicode/empty spans,
+falsey values, selection and terminal lifecycle, child cursor extension, nested isolation, recognition rollback,
+failed minimum, direct entry, and an unflagged legacy control. Two diagnostic modules compare direct and traced
+typed generated-source failures for unavailable gap context and cursor regression. Trace files remain inside the
+managed emitted workspace and prove the generated-plan role plus exact emitted source identity.
+
+No production repair was required: emitted source already reconstructs the serialized `CompiledSpec`, and the
+`.3.3` generated-plan lifecycle was the only missing runtime mechanism. The emitter, generated-source contract,
+and v2 `{label,family}` plan are unchanged. The consumer remains ignored ordinarily and rollout remains 2/7/56;
+`.3.5` alone owns primary execution and admission.
 
 ### List-shaped streams with heterogeneous separators
 

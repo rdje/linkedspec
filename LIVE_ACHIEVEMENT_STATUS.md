@@ -2,8 +2,8 @@
 
 ## Current Activity
 
-- Atomic 229 landed cleanly at `5c4e9d50`; Rust reconstruction/descriptor/generated-plan leaf
-  `INTER-MATCH-GAP-CAPTURE.3.3` is signoff-complete from that exact boundary for intended atomic 230; no push.
+- Atomic 230 landed cleanly at `9e6ade98`; independently compiled Rust emitted-source proof
+  `INTER-MATCH-GAP-CAPTURE.3.4` is signoff-complete and awaiting atomic-231 landing; no push.
 - The existing recognition invocation now owns private gap activation, immutable source/invocation identity,
   detached entry-slot identity, and exactly three checkpointed mutable members. Public cursor/boundary/marks state,
   the invocation stack, and transaction token family remain unchanged.
@@ -19,36 +19,41 @@
 - `GeneratedPlanExecutor` now uses the same recognition frame, detached entry slot, and candidate/commit/tail
   lifecycle. Generated source v2 remains label/family-only because its serialized compiled payload is already the
   single carrier; `source_emitter.rs` does not change.
-- The final consumer remains explicitly ignored until `.3.5`: focused native/reconstructed/descriptor/generated-
-  plan proof passes 1/1 in 5.96 seconds while ordinary package discovery remains 0 passed / 1 ignored. `.3.4-.3.5`
-  retain emitted-source and primary/admission ownership.
+- The final consumer remains explicitly ignored until `.3.5`. Its `.3.4` focused proof passes 1/1 in 32.82
+  seconds and independently compiles fifteen emitted modules through paired direct/traced execution, while
+  ordinary package discovery remains 0 passed / 1 ignored. `.3.5` retains primary/admission ownership.
 - The full Perl consumer defaults to metadata/live/generated execution and passes 124 top-level tests. Canonical
   CI registers it once; the rooted route runs neutral then Perl once and skips five later runtimes.
 - Only `perl_runtime` is promoted. Gap governance is 2 complete / 7 pending / 56 mutations; obsolete dormancy
   enforcement is removed while Perl regression and premature Rust promotion are rejected.
 - Recognition remains 137/246/58 with 122 public helpers, typed source remains 9/5/114, duplicate-slot identity
   remains 7/0/59, generated plan v2 is unchanged, and all ten outward surfaces remain guarded.
-- Current `.3.3` proof passes descriptor 4/4, runtime units 170/170, recognition 12/12, recursive observation 7/7,
-  cursor 6/6, source emitter 6/6, duplicate slot 1/1, neutral 2/7/56 plus ten Rust dormancy mutations, the exact
-  rooted route, and the 17-owner Rust storage oracle.
-- Final signoff passes the rendered book at 79 files / 14,720 KiB, Knowledge at 835 facts / 7,019 keys, the
+- Current `.3.4` proof passes runtime units 170/170, recognition 12/12, recursive observation 7/7, cursor 1/1,
+  source emitter 6/6, duplicate slot 1/1, neutral 2/7/56 plus ten Rust dormancy mutations, the exact rooted route,
+  and the 17-owner Rust storage/relocation oracle.
+- Final signoff passes the rendered book at 79 files / 14,724 KiB, Knowledge at 835 facts / 7,019 keys, the
   17-owner Rust storage oracle, all eight doctrines, six-family containment, all-five-anchor relocation, CLI
-  66/66 twice, RAM 69%, Phase 0 1,031/1,031 in 772 seconds, and
+  66/66 twice, RAM 60%, Phase 0 1,031/1,031 in 780 seconds, and
   the exact opt-in gap route through local-CI exit 0. The unchanged authorized run resolved the outer harness's
   preceding nested-`sandbox-exec` status 71.
 
 ## Latest Completed Slice
 
-- `.3.3` is signoff-complete for intended atomic 230 from clean `5c4e9d50`; ordinary reconstruction, compatible
-  descriptor projection, and generated-plan parity are exact while emitted/primary/admission remain pending.
+- `.3.4` is signoff-complete from clean `9e6ade98`: emitted direct/traced parity is exact while primary/admission
+  remain pending under `.3.5`; atomic-231 landing remains.
 
 ## Next Action
 
-- Land atomic 230, clear the brief, prove the post-commit pointer and clean tree, and activate
-  emitted-source proof `.3.4` only from the resulting clean boundary.
+- Land atomic 231, clear and prove the commit brief plus clean boundary, then activate primary/admission leaf
+  `.3.5` task-tree-first from that exact result.
 
 ## Recent Completions
 
+- `2026-08-14` — `.3.4` signoff is complete: fifteen independently emitted direct/traced modules, storage,
+  rendered book, Knowledge, doctrines, containment/relocation, CLI 66x2, RAM 60%, Phase 0 1,031/1,031 in 780
+  seconds, exact rooted routing, and local-CI exit 0 pass without emitter, plan-v2, primary, or rollout movement.
+- `2026-08-14` — `9e6ade98` landed Rust reconstructed/descriptor/generated-plan gap parity `.3.3` as clean atomic
+  230/300; `.3.4` activated only afterward.
 - `2026-08-14` — `.3.3` completed reconstruction/descriptor/generated-plan signoff at gap 2/7/56, CLI 66x2,
   RAM 69%, Phase 0 1,031/1,031 in 772 seconds, and exact opt-in routing without admission movement.
 - `2026-08-14` — `5c4e9d50` landed Rust private native gap execution `.3.2` as clean atomic 229/300.
@@ -66,8 +71,6 @@
 - `2026-08-13` — `.2.2` implemented private Perl native-live same-guard gap state/accessors and passed focused cross-runtime proof at recognition 137/246/58.
 - `2026-08-13` — `912fc5ed` landed authored/static Perl metadata `.2.1` as atomic 223/300.
 - `2026-08-13` — `.2.1` implemented Perl authored/static named-slot and `@capture_gaps` metadata with 108 focused assertions and no runtime admission.
-- `2026-08-13` — `8f826923` landed behavior-free Perl implementation freeze `.2.0` as atomic 222/300.
-- `2026-08-13` — `.2.0` completed the behavior-free Perl implementation freeze and canonical signoff for atomic 222/300.
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source

@@ -10,6 +10,33 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-14 (`INTER-MATCH-GAP-CAPTURE.3.4` — independently compiled Rust emitted proof): activation base is
+  clean atomic 230 at `9e6ade98`. The deliberate ignored-consumer RED was a missing emitted-proof owner; once the
+  consumer supplied that role, no runtime/emitter defect remained.
+- Keep the carrier singular. `emit_rust_source_v2` embeds serialized `CompiledSpec`; after `.3.3` joined the
+  generated-plan executor to the gap lifecycle, independently compiled source inherited exact behavior without a
+  new plan field, schema version, emitter branch, or second state model.
+- One emitted workspace is enough for broad proof. Generate isolated Rust modules for each fixture, compile the
+  aggregate crate once offline, execute each module through both direct and traced APIs, and retain typed failure
+  comparisons for negative paths. This avoids one expensive child compilation per semantic case.
+- Emitted proof storage is capability-scoped to `rust/target/test-workspaces/inter-match-gap-emitted-probe-*`.
+  Cargo's child target and trace files stay inside that root, and the drop owner removes it on every unwind path.
+- The matrix has thirteen value modules and two error modules. It covers the director-highlighted heterogeneous
+  list use case plus Unicode/empty gaps, falsey values, selection/lifecycle ordering, child cursor extension,
+  nesting, rollback, terminal tails, failed minimum, direct entry, unflagged legacy behavior, unavailable context,
+  and cursor regression.
+- `.3.5` remains the only admission owner. Keep the final test ignored ordinarily, the rooted Rust row skipped,
+  rollout at 2/7/56 plus ten dormancy mutations, and all primary/recurring/facade/public surfaces unchanged.
+- The required `CHANGES.md` rollover adds immutable segment 4996. ADR `0072` reviews the exact 16→17 collection
+  member step while preserving every root, manifest, per-history-file, aggregate, byte, lifecycle, verifier,
+  owner, and storage bound; the next member increase still requires a new exact-limit decision.
+- The full storage oracle independently discovers the new emitted-gap owner and passes all 17 Rust owners, Cargo
+  cache, generated workspaces, traces, and relocation on repository storage. Rendered book is 79/14,724 KiB and
+  Knowledge is synchronized at 835/7,019. All eight doctrines pass. The sandboxed canonical attempt's only stop
+  is the outer harness's nested-`sandbox-exec` status 71; the unchanged authorized run passes containment and
+  relocation, CLI 66/66 twice, RAM 60%, Phase 0 1,031/1,031 in 780 seconds, exact rooted gap routing, and local-CI
+  exit 0.
+
 - 2026-08-14 (`INTER-MATCH-GAP-CAPTURE.3.3` — Rust reconstructed/generated carrier): activation base is clean
   atomic 229 at `5c4e9d50`. The exact RED separated the carriers: ordinary reconstructed native execution already
   worked, descriptors returned null for all new metadata, and generated-plan access failed with typed unavailable

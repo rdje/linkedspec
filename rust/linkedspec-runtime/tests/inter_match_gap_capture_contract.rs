@@ -16,6 +16,10 @@ use linkedspec_runtime::source_emitter::{
 };
 use linkedspec_runtime::{RuntimeDiagnosticOutputExecutionError, RuntimeExecutionError};
 use serde_json::{Value, json};
+use std::fs;
+use std::path::{Path, PathBuf};
+use std::process::Command;
+use std::time::{SystemTime, UNIX_EPOCH};
 
 const CONTRACT_SOURCE: &str =
     include_str!("../../../capability_conformance/inter_match_gap_capture_contract.json");
@@ -95,6 +99,371 @@ fn rule<'a>(compiled: &'a Value, label: &str) -> &'a Value {
         .iter()
         .find(|rule| rule["label"] == label)
         .unwrap_or_else(|| panic!("missing compiled rule {label}"))
+}
+
+struct EmittedProject {
+    root: PathBuf,
+}
+
+impl EmittedProject {
+    fn new() -> Self {
+        let nonce = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .expect("clock after epoch")
+            .as_nanos();
+        let root = Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../target/test-workspaces")
+            .join(format!(
+                "inter-match-gap-emitted-probe-{}-{nonce}",
+                std::process::id()
+            ));
+        fs::create_dir_all(root.join("src")).expect("create emitted gap workspace");
+        Self { root }
+    }
+}
+
+impl Drop for EmittedProject {
+    fn drop(&mut self) {
+        let _ = fs::remove_dir_all(&self.root);
+    }
+}
+
+struct EmittedValueCase {
+    module: &'static str,
+    source: &'static str,
+    input: &'static str,
+    expected: Value,
+}
+
+struct EmittedErrorCase {
+    module: &'static str,
+    source: &'static str,
+    input: &'static str,
+    detail: &'static str,
+}
+
+fn independently_compiled_emitted_gap_contract() {
+    let value_cases = [
+        EmittedValueCase {
+            module: "mixed_list_separators",
+            source: r#"Top::
+ I { segments = [] }
+ @capture_gaps
+ -> Item[word] { push(segments, array(gap_text(), call(Item))) }
+ LX { push(segments, array(gap_text(), gap_kind())); return(copy(segments)) }
+Item:
+ word=/[a-z]+/
+ I.return(entry_text())
+"#,
+            input: "alpha, beta | gamma\n- delta",
+            expected: json!([
+                ["", "alpha"],
+                [", ", "beta"],
+                [" | ", "gamma"],
+                ["\n- ", "delta"],
+                ["", "tail"]
+            ]),
+        },
+        EmittedValueCase {
+            module: "unicode_slots_and_falsey",
+            source: r#"Top::
+ I { segments = [] }
+ @capture_gaps
+ -> Part[header]  { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span(), "child", call(Part))) }
+ -> Part[section] { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span(), "child", call(Part))) }
+ -> Part[footer]  { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span(), "child", call(Part))) }
+ LX { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span())); return(copy(segments)) }
+Part:
+ header=/H/
+ section=/S/
+ footer=/F/
+ I { return(hash("slot", entry_slot(), "text", entry_text(), "falsey", 0)) }
+"#,
+            input: "αHβ\nS🙂Fω",
+            expected: json!([
+                {
+                    "kind":"prefix", "text":"α",
+                    "span":{"source_id":"input", "start":0, "end":1, "provenance":"gap"},
+                    "child":{"slot":{"target_rule":"Part", "regex_index":0, "slot_id":"header", "selector_kind":"named", "authored_selector":"header"}, "text":"H", "falsey":0}
+                },
+                {
+                    "kind":"interstitial", "text":"β\n",
+                    "span":{"source_id":"input", "start":2, "end":4, "provenance":"gap"},
+                    "child":{"slot":{"target_rule":"Part", "regex_index":1, "slot_id":"section", "selector_kind":"named", "authored_selector":"section"}, "text":"S", "falsey":0}
+                },
+                {
+                    "kind":"interstitial", "text":"🙂",
+                    "span":{"source_id":"input", "start":5, "end":6, "provenance":"gap"},
+                    "child":{"slot":{"target_rule":"Part", "regex_index":2, "slot_id":"footer", "selector_kind":"named", "authored_selector":"footer"}, "text":"F", "falsey":0}
+                },
+                {"kind":"tail", "text":"ω", "span":{"source_id":"input", "start":7, "end":8, "provenance":"gap"}}
+            ]),
+        },
+        EmittedValueCase {
+            module: "empty_gaps",
+            source: r#"Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Part[h] { push(gaps, array(gap_kind(), gap_text(), gap_span())) }
+ -> Part[s] { push(gaps, array(gap_kind(), gap_text(), gap_span())) }
+ -> Part[f] { push(gaps, array(gap_kind(), gap_text(), gap_span())) }
+ LX { push(gaps, array(gap_kind(), gap_text(), gap_span())); return(copy(gaps)) }
+Part:
+ h=/H/
+ s=/S/
+ f=/F/
+ I.return(entry_text())
+"#,
+            input: "HSF",
+            expected: json!([
+                ["prefix", "", {"source_id":"input", "start":0, "end":0, "provenance":"gap"}],
+                ["interstitial", "", {"source_id":"input", "start":1, "end":1, "provenance":"gap"}],
+                ["interstitial", "", {"source_id":"input", "start":2, "end":2, "provenance":"gap"}],
+                ["tail", "", {"source_id":"input", "start":3, "end":3, "provenance":"gap"}]
+            ]),
+        },
+        EmittedValueCase {
+            module: "selection_before_ls",
+            source: r#"Top::
+ @capture_gaps
+ -> Part { return("unexpected") }
+ LS { return(array(gap_kind(), gap_text(), match_text())) }
+Part: /H/
+"#,
+            input: "αH",
+            expected: json!(["prefix", "α", "H"]),
+        },
+        EmittedValueCase {
+            module: "child_extended_cursor",
+            source: r#"Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Container[open] { push(gaps, array(gap_text(), call(Container))) }
+ -> Bang { push(gaps, array(gap_text(), call(Bang))) }
+ LX { push(gaps, array(gap_text(), gap_kind())); return(copy(gaps)) }
+Container:
+ open=/\{/
+ -> Close { return(call(Close)) }
+Close:
+ /\}/
+ I.return(entry_text())
+Bang:
+ /!/
+ I.return(entry_text())
+"#,
+            input: "p{abc}gap!",
+            expected: json!([["p", "}"], ["gap", "!"], ["", "tail"]]),
+        },
+        EmittedValueCase {
+            module: "nested_gap_owner",
+            source: r#"Top::
+ @capture_gaps
+ -> Container[open] { return(array(gap_text(), call(Container), gap_text())) }
+Container:
+ open=/\{/
+ I { inner = [] }
+ @capture_gaps
+ -> Atom { push(inner, gap_text()) }
+ LX { push(inner, gap_text()); return(copy(inner)) }
+Atom:
+ /x/
+ I.return(entry_text())
+"#,
+            input: "p{axtail",
+            expected: json!(["p", ["a", "tail"], "p"]),
+        },
+        EmittedValueCase {
+            module: "rollback_snapshot",
+            source: r#"Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Part[h] {
+  tx = recognition_checkpoint();
+  matched = recognize_once(tx, call(Probe));
+  recognition_rollback(tx);
+  push(gaps, gap_text())
+ }
+ -> Part[s] { push(gaps, gap_text()) }
+ LX { push(gaps, gap_text()); return(copy(gaps)) }
+Part:
+ h=/H/
+ s=/S/
+ I.return(entry_text())
+Probe:
+ /X/
+ I.return(0)
+"#,
+            input: "aHXbS",
+            expected: json!(["a", "Xb", ""]),
+        },
+        EmittedValueCase {
+            module: "lx_no_match_tail",
+            source: r#"Top::
+ @capture_gaps
+ -> Part { return(gap_text()) }
+ LX { return(array(gap_kind(), gap_text(), gap_span())) }
+Part: /H/
+"#,
+            input: "abc",
+            expected: json!(["tail", "abc", {"source_id":"input", "start":0, "end":3, "provenance":"gap"}]),
+        },
+        EmittedValueCase {
+            module: "ex_zero_match_tail",
+            source: r#"Top::OR{0,2}
+ I { gaps = [] }
+ @capture_gaps
+ -> Part { push(gaps, gap_text()) }
+ EX { push(gaps, gap_text()); return(copy(gaps)) }
+Part: /H/
+"#,
+            input: "whole",
+            expected: json!(["whole"]),
+        },
+        EmittedValueCase {
+            module: "e_success_tail",
+            source: r#"Top::OR{1}
+ I { gaps = [] }
+ @capture_gaps
+ -> Part { push(gaps, gap_text()) }
+ E { push(gaps, gap_text()); return(copy(gaps)) }
+Part: /H/
+"#,
+            input: "aHtail",
+            expected: json!(["a", "tail"]),
+        },
+        EmittedValueCase {
+            module: "failed_minimum",
+            source: "Top::OR{2}\n @capture_gaps\n -> Part { return(gap_text()) }\n EX { return(\"unexpected-ex\") }\n E { return(\"unexpected-e\") }\nPart: /H/\n",
+            input: "H",
+            expected: Value::Null,
+        },
+        EmittedValueCase {
+            module: "direct_entry",
+            source: "Part::\n /H/\n I { return(entry_slot()) }\n",
+            input: "H",
+            expected: Value::Null,
+        },
+        EmittedValueCase {
+            module: "unflagged_legacy",
+            source: "Top::\n /H/\n E { return(\"legacy\") }\n",
+            input: "H",
+            expected: json!("legacy"),
+        },
+    ];
+    let error_cases = [
+        EmittedErrorCase {
+            module: "unavailable_context",
+            source: "Direct::\n /H/\n I { return(gap_text()) }\n",
+            input: "H",
+            detail: "LINKEDSPEC_INTER_MATCH_GAP_ERROR:gap_capture_context_unavailable",
+        },
+        EmittedErrorCase {
+            module: "cursor_regression",
+            source: "Top::OR{1}\n @capture_gaps\n -> Part { rewind_match_start() }\nPart: /H/\n",
+            input: "aH",
+            detail: "LINKEDSPEC_SOURCE_LOCATION_ERROR:source_location_cursor_regression",
+        },
+    ];
+
+    let project = EmittedProject::new();
+    let mut generated = String::new();
+    let mut generated_tests = String::from(
+        r#"#[cfg(test)]
+mod emitted_gap_contract {
+    use linkedspec_runtime::source_emitter::{GeneratedSourceCode, GeneratedSourceStage};
+    use linkedspec_runtime::trace::{TraceConfig, TraceLevel};
+    use std::fs;
+    use std::path::Path;
+
+"#,
+    );
+    for case in &value_cases {
+        let compiled = compile_metadata(case.source)
+            .unwrap_or_else(|error| panic!("compile emitted {} fixture: {error}", case.module));
+        let identity = format!("inter-match-gap/emitted/{}.spec", case.module);
+        let emitted = emit_rust_source_v2(&compiled, &identity)
+            .unwrap_or_else(|error| panic!("emit {} fixture: {error}", case.module));
+        generated.push_str(&format!("mod {} {{\n{}\n}}\n\n", case.module, emitted));
+
+        let expected_json = serde_json::to_string(&case.expected).expect("encode emitted expected");
+        generated_tests.push_str(&format!(
+            r#"    #[test]
+    fn {module}_direct_and_traced() {{
+        let expected: serde_json::Value = serde_json::from_str({expected_json:?}).unwrap();
+        assert_eq!(super::{module}::execute({input:?}).unwrap(), expected);
+        let trace_path = Path::new(env!("CARGO_MANIFEST_DIR")).join("{module}.trace");
+        let trace = TraceConfig::enabled(TraceLevel::DEBUG)
+            .with_trace_file(trace_path.clone())
+            .with_reset_file(true);
+        assert_eq!(super::{module}::execute_with_trace({input:?}, trace).unwrap(), expected);
+        let trace = fs::read_to_string(trace_path).unwrap();
+        assert!(trace.contains("rust_runtime:generated_plan:"), "{{trace}}");
+        assert!(trace.contains({identity:?}), "{{trace}}");
+    }}
+
+"#,
+            module = case.module,
+            input = case.input,
+        ));
+    }
+    for case in &error_cases {
+        let compiled = compile_metadata(case.source)
+            .unwrap_or_else(|error| panic!("compile emitted {} fixture: {error}", case.module));
+        let identity = format!("inter-match-gap/emitted/{}.spec", case.module);
+        let emitted = emit_rust_source_v2(&compiled, &identity)
+            .unwrap_or_else(|error| panic!("emit {} fixture: {error}", case.module));
+        generated.push_str(&format!("mod {} {{\n{}\n}}\n\n", case.module, emitted));
+        generated_tests.push_str(&format!(
+            r#"    #[test]
+    fn {module}_direct_and_traced_diagnostic() {{
+        let direct = super::{module}::execute({input:?}).unwrap_err();
+        assert_eq!(direct.stage, GeneratedSourceStage::ExecuteGenerated);
+        assert_eq!(direct.code, GeneratedSourceCode::GeneratedExecutionFailed);
+        assert_eq!(direct.detail.as_deref(), Some({detail:?}));
+        let traced = super::{module}::execute_with_trace(
+            {input:?},
+            TraceConfig::disabled(),
+        ).unwrap_err();
+        assert_eq!(traced, direct);
+    }}
+
+"#,
+            module = case.module,
+            input = case.input,
+            detail = case.detail,
+        ));
+    }
+    generated_tests.push_str("}\n");
+    generated.push_str(&generated_tests);
+
+    let runtime_manifest = Path::new(env!("CARGO_MANIFEST_DIR"));
+    fs::write(
+        project.root.join("Cargo.toml"),
+        format!(
+            "[package]\nname = \"inter-match-gap-emitted-probe\"\nversion = \"0.0.0\"\nedition = \"2024\"\n\n[dependencies]\nlinkedspec-runtime = {{ path = {:?} }}\nserde_json = \"1\"\n\n[workspace]\n",
+            runtime_manifest
+        ),
+    )
+    .expect("write emitted gap manifest");
+    fs::write(project.root.join("src/lib.rs"), generated).expect("write emitted gap source");
+
+    let output = Command::new("cargo")
+        .arg("test")
+        .arg("--offline")
+        .arg("--quiet")
+        .arg("--")
+        .arg("--test-threads=1")
+        .env("CARGO_TARGET_DIR", project.root.join("target"))
+        .current_dir(&project.root)
+        .output()
+        .expect("compile and execute emitted gap source");
+    assert!(
+        output.status.success(),
+        "emitted gap project failed\nstatus: {}\nstdout:\n{}\nstderr:\n{}",
+        output.status,
+        String::from_utf8_lossy(&output.stdout),
+        String::from_utf8_lossy(&output.stderr),
+    );
 }
 
 #[test]
@@ -746,4 +1115,6 @@ Part: /H/
         Value::Null,
         "direct entry has no action-edge slot identity",
     );
+
+    independently_compiled_emitted_gap_contract();
 }
