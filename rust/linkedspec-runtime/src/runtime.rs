@@ -9,7 +9,7 @@ use crate::{
     source_location::{Position, SourceAuthority, SourceLocationContext, Span},
 };
 use linkedspec_core::trace::{TraceEmitter, TraceEventKind, TraceLevel, TraceResult, TraceScope};
-use linkedspec_core::types::RuntimeValue;
+use linkedspec_core::types::{AcodeEntry, AuthoredRegexSelector, RegexSelectorKind, RuntimeValue};
 use serde_json::{Value, json};
 use std::sync::Arc;
 
@@ -526,12 +526,23 @@ impl RuntimeContext {
         Ok(())
     }
 
-    pub(crate) fn enter_recognition_invocation(&mut self, rule_label: &str) -> Result<(), String> {
+    pub(crate) fn enter_recognition_invocation(
+        &mut self,
+        rule_label: &str,
+        capture_gaps: bool,
+        entry_slot: Option<crate::recognition_transaction::GapEntrySlot>,
+    ) -> Result<(), String> {
         let prior_marks = self.marks.remove(rule_label);
         self.marks.insert(rule_label.to_owned(), Default::default());
         let state = self.recognition_frame_state(rule_label);
         let recognition = self.recognition_transactions.clone();
-        match recognition.enter(rule_label, state, prior_marks.clone()) {
+        match recognition.enter(
+            rule_label,
+            state,
+            prior_marks.clone(),
+            capture_gaps,
+            entry_slot,
+        ) {
             Ok(()) => Ok(()),
             Err(error) => {
                 if let Some(prior_marks) = prior_marks {
@@ -585,6 +596,131 @@ impl RuntimeContext {
             u64::try_from(start).expect("Rust recognition match start fits u64"),
             u64::try_from(end).expect("Rust recognition match end fits u64"),
         );
+    }
+
+    pub(crate) fn set_gap_phase(&mut self, phase: &str) {
+        self.recognition_transactions.set_gap_phase(phase);
+    }
+
+    pub(crate) fn install_gap_candidate(&mut self, match_start: usize) {
+        self.recognition_transactions.install_gap_candidate(
+            u64::try_from(match_start).expect("Rust gap match start fits u64"),
+        );
+    }
+
+    pub(crate) fn commit_gap_candidate(&mut self, rule_label: &str) -> Result<(), String> {
+        let result = self
+            .recognition_transactions
+            .commit_gap_candidate(u64::try_from(self.pos).expect("Rust gap cursor fits u64"));
+        result.map_err(|error| {
+            self.capture_portable_diagnostic_failure(
+                "advance_gap_context",
+                "source_location_cursor_regression",
+                "Rust inter-match gap cursor regressed before commit",
+                Some(rule_label),
+            );
+            error.to_string()
+        })
+    }
+
+    pub(crate) fn install_gap_tail(&mut self, phase: &str) {
+        self.recognition_transactions.install_gap_tail(
+            u64::try_from(self.input.len()).expect("Rust input byte length fits u64"),
+            phase,
+        );
+    }
+
+    pub(crate) fn gap_entry_slot_for_edge(
+        &self,
+        entry: &AcodeEntry,
+    ) -> Option<crate::recognition_transaction::GapEntrySlot> {
+        let selector_kind = match &entry.selector_kind {
+            RegexSelectorKind::Unindexed => "unindexed",
+            RegexSelectorKind::Numeric => "numeric",
+            RegexSelectorKind::Named => "named",
+        };
+        let authored_selector = entry
+            .authored_selector
+            .as_ref()
+            .map(|selector| match selector {
+                AuthoredRegexSelector::Numeric(index) => json!(index),
+                AuthoredRegexSelector::Named(name) => json!(name),
+            });
+        self.recognition_transactions.gap_entry_slot(
+            &entry.child_label,
+            entry.child_regex_idx,
+            entry.target_slot_id.as_deref(),
+            selector_kind,
+            authored_selector,
+        )
+    }
+
+    pub(crate) fn gap_entry_slot_value(&self) -> RuntimeValue {
+        let Some(slot) = self.recognition_transactions.entry_slot() else {
+            return RuntimeValue::Undef;
+        };
+        RuntimeValue::Hash(vec![
+            (
+                "target_rule".to_owned(),
+                RuntimeValue::Scalar(slot.target_rule),
+            ),
+            (
+                "regex_index".to_owned(),
+                RuntimeValue::Number(slot.regex_index as f64),
+            ),
+            (
+                "slot_id".to_owned(),
+                slot.slot_id
+                    .map(RuntimeValue::Scalar)
+                    .unwrap_or(RuntimeValue::Undef),
+            ),
+            (
+                "selector_kind".to_owned(),
+                RuntimeValue::Scalar(slot.selector_kind),
+            ),
+            (
+                "authored_selector".to_owned(),
+                slot.authored_selector
+                    .map(runtime_value_from_json)
+                    .unwrap_or(RuntimeValue::Undef),
+            ),
+        ])
+    }
+
+    pub(crate) fn gap_span_value(&self, accessor: &str) -> Result<RuntimeValue, String> {
+        let gap = self
+            .recognition_transactions
+            .current_gap(accessor)
+            .map_err(|error| error.to_string())?;
+        let start = usize::try_from(gap.start_byte)
+            .map_err(|_| "Rust gap start does not fit usize".to_owned())?;
+        let end = usize::try_from(gap.end_byte)
+            .map_err(|_| "Rust gap end does not fit usize".to_owned())?;
+        let span = self
+            .typed_span_from_bytes(start, end, &gap.rule_label, "gap")
+            .ok_or_else(|| "Rust gap span boundaries are invalid".to_owned())?;
+        Ok(runtime_value_from_json(span.as_record()))
+    }
+
+    pub(crate) fn gap_text_value(&self, accessor: &str) -> Result<RuntimeValue, String> {
+        let gap = self
+            .recognition_transactions
+            .current_gap(accessor)
+            .map_err(|error| error.to_string())?;
+        let start = usize::try_from(gap.start_byte)
+            .map_err(|_| "Rust gap start does not fit usize".to_owned())?;
+        let end = usize::try_from(gap.end_byte)
+            .map_err(|_| "Rust gap end does not fit usize".to_owned())?;
+        self.typed_span_text_from_bytes(start, end, &gap.rule_label, "gap")
+            .map(RuntimeValue::Scalar)
+            .ok_or_else(|| "Rust gap span boundaries are invalid".to_owned())
+    }
+
+    pub(crate) fn gap_kind_value(&self, accessor: &str) -> Result<RuntimeValue, String> {
+        self.recognition_transactions
+            .current_gap(accessor)
+            .map(|gap| RuntimeValue::Scalar(gap.kind.to_owned()))
+            .map_err(|error| error.to_string())
     }
 
     pub(crate) fn begin_recognition_scope(&mut self) -> usize {

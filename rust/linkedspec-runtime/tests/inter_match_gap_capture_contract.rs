@@ -10,6 +10,7 @@ use linkedspec_core::error::{LinkedSpecError, PortableDiagnostic};
 use linkedspec_core::parser::parse_spec;
 use linkedspec_core::types::{CompiledSpec, RegexSelectorKind};
 use linkedspec_core::validation::validate;
+use linkedspec_runtime::engine::{Engine, ExecutionOptions};
 use serde_json::{Value, json};
 
 const CONTRACT_SOURCE: &str =
@@ -32,6 +33,12 @@ fn diagnostic(source: &str) -> PortableDiagnostic {
         .diagnostic()
         .unwrap_or_else(|| panic!("expected portable diagnostic, got {error}"))
         .clone()
+}
+
+fn native_value(source: &str, input: &str) -> Value {
+    Engine::new(compile_metadata(source).expect("compile native gap fixture"))
+        .execute_value(input, &ExecutionOptions::new())
+        .unwrap_or_else(|error| panic!("execute native gap fixture: {error}"))
 }
 
 fn rule<'a>(compiled: &'a Value, label: &str) -> &'a Value {
@@ -351,4 +358,280 @@ fn authored_static_compiled_metadata_stage() {
             );
         }
     }
+
+    let native = compile_metadata(concat!(
+        "Top::\n",
+        " I { gaps = [] }\n",
+        " @capture_gaps\n",
+        " -> Part[head] { push(gaps, array(gap_kind(), gap_text())) }\n",
+        " LX { push(gaps, array(gap_kind(), gap_text())); return(copy(gaps)) }\n",
+        "Part:\n",
+        " head=/H/\n",
+        " I.return(entry_text())\n",
+    ))
+    .expect("compile native gap RED fixture");
+    assert_eq!(
+        Engine::new(native)
+            .execute_value("αHω", &ExecutionOptions::new())
+            .expect("native gap execution"),
+        json!([["prefix", "α"], ["tail", "ω"]]),
+    );
+
+    assert_eq!(
+        native_value(
+            r#"Top::
+ @capture_gaps
+ -> Part { return("unexpected") }
+ LS { return(array(gap_kind(), gap_text(), match_text())) }
+Part: /H/
+"#,
+            "αH",
+        ),
+        json!(["prefix", "α", "H"]),
+        "capture-enabled selection and local-match extraction precede LS",
+    );
+
+    let unicode_source = r#"Top::
+ I { segments = [] }
+ @capture_gaps
+ -> Part[header]  { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span(), "child", call(Part))) }
+ -> Part[section] { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span(), "child", call(Part))) }
+ -> Part[footer]  { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span(), "child", call(Part))) }
+ LX { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span())); return(copy(segments)) }
+Part:
+ header=/H/
+ section=/S/
+ footer=/F/
+ I { return(hash("slot", entry_slot(), "text", entry_text(), "falsey", 0)) }
+"#;
+    assert_eq!(
+        native_value(unicode_source, "αHβ\nS🙂Fω"),
+        json!([
+            {
+                "kind":"prefix", "text":"α",
+                "span":{"source_id":"input", "start":0, "end":1, "provenance":"gap"},
+                "child":{"slot":{"target_rule":"Part", "regex_index":0, "slot_id":"header", "selector_kind":"named", "authored_selector":"header"}, "text":"H", "falsey":0}
+            },
+            {
+                "kind":"interstitial", "text":"β\n",
+                "span":{"source_id":"input", "start":2, "end":4, "provenance":"gap"},
+                "child":{"slot":{"target_rule":"Part", "regex_index":1, "slot_id":"section", "selector_kind":"named", "authored_selector":"section"}, "text":"S", "falsey":0}
+            },
+            {
+                "kind":"interstitial", "text":"🙂",
+                "span":{"source_id":"input", "start":5, "end":6, "provenance":"gap"},
+                "child":{"slot":{"target_rule":"Part", "regex_index":2, "slot_id":"footer", "selector_kind":"named", "authored_selector":"footer"}, "text":"F", "falsey":0}
+            },
+            {"kind":"tail", "text":"ω", "span":{"source_id":"input", "start":7, "end":8, "provenance":"gap"}}
+        ]),
+        "Unicode gaps, detached spans, falsey values, and named entry slots are exact",
+    );
+
+    assert_eq!(
+        native_value(
+            r#"Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Part[h] { push(gaps, array(gap_kind(), gap_text(), gap_span())) }
+ -> Part[s] { push(gaps, array(gap_kind(), gap_text(), gap_span())) }
+ -> Part[f] { push(gaps, array(gap_kind(), gap_text(), gap_span())) }
+ LX { push(gaps, array(gap_kind(), gap_text(), gap_span())); return(copy(gaps)) }
+Part:
+ h=/H/
+ s=/S/
+ f=/F/
+ I.return(entry_text())
+"#,
+            "HSF",
+        ),
+        json!([
+            ["prefix", "", {"source_id":"input", "start":0, "end":0, "provenance":"gap"}],
+            ["interstitial", "", {"source_id":"input", "start":1, "end":1, "provenance":"gap"}],
+            ["interstitial", "", {"source_id":"input", "start":2, "end":2, "provenance":"gap"}],
+            ["tail", "", {"source_id":"input", "start":3, "end":3, "provenance":"gap"}]
+        ]),
+        "empty prefix, interstitial, and tail gaps remain first class",
+    );
+
+    assert_eq!(
+        native_value(
+            r#"Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Container[open] { push(gaps, array(gap_text(), call(Container))) }
+ -> Bang { push(gaps, array(gap_text(), call(Bang))) }
+ LX { push(gaps, array(gap_text(), gap_kind())); return(copy(gaps)) }
+Container:
+ open=/\{/
+ -> Close { return(call(Close)) }
+Close:
+ /\}/
+ I.return(entry_text())
+Bang:
+ /!/
+ I.return(entry_text())
+"#,
+            "p{abc}gap!",
+        ),
+        json!([["p", "}"], ["gap", "!"], ["", "tail"]]),
+        "the accepted child exit cursor becomes the next committed boundary",
+    );
+
+    assert_eq!(
+        native_value(
+            r#"Top::
+ @capture_gaps
+ -> Container[open] { return(array(gap_text(), call(Container), gap_text())) }
+Container:
+ open=/\{/
+ I { inner = [] }
+ @capture_gaps
+ -> Atom { push(inner, gap_text()) }
+ LX { push(inner, gap_text()); return(copy(inner)) }
+Atom:
+ /x/
+ I.return(entry_text())
+"#,
+            "p{axtail",
+        ),
+        json!(["p", ["a", "tail"], "p"]),
+        "nested gap owners hide and then restore the parent candidate",
+    );
+
+    assert_eq!(
+        native_value(
+            r#"Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Part[h] {
+  tx = recognition_checkpoint();
+  matched = recognize_once(tx, call(Probe));
+  recognition_rollback(tx);
+  push(gaps, gap_text())
+ }
+ -> Part[s] { push(gaps, gap_text()) }
+ LX { push(gaps, gap_text()); return(copy(gaps)) }
+Part:
+ h=/H/
+ s=/S/
+ I.return(entry_text())
+Probe:
+ /X/
+ I.return(0)
+"#,
+            "aHXbS",
+        ),
+        json!(["a", "Xb", ""]),
+        "recognition rollback restores the same invocation gap snapshot",
+    );
+
+    let terminal_cases = [
+        (
+            r#"Top::
+ @capture_gaps
+ -> Part { return(gap_text()) }
+ LX { return(array(gap_kind(), gap_text(), gap_span())) }
+Part: /H/
+"#,
+            "abc",
+            json!(["tail", "abc", {"source_id":"input", "start":0, "end":3, "provenance":"gap"}]),
+        ),
+        (
+            r#"Top::OR{0,2}
+ I { gaps = [] }
+ @capture_gaps
+ -> Part { push(gaps, gap_text()) }
+ EX { push(gaps, gap_text()); return(copy(gaps)) }
+Part: /H/
+"#,
+            "aHtail",
+            json!(["a", "tail"]),
+        ),
+        (
+            r#"Top::OR{0,2}
+ I { gaps = [] }
+ @capture_gaps
+ -> Part { push(gaps, gap_text()) }
+ EX { push(gaps, gap_text()); return(copy(gaps)) }
+Part: /H/
+"#,
+            "whole",
+            json!(["whole"]),
+        ),
+        (
+            r#"Top::OR{1}
+ I { gaps = [] }
+ @capture_gaps
+ -> Part { push(gaps, gap_text()) }
+ E { push(gaps, gap_text()); return(copy(gaps)) }
+Part: /H/
+"#,
+            "aHtail",
+            json!(["a", "tail"]),
+        ),
+    ];
+    for (source, input, expected) in terminal_cases {
+        assert_eq!(native_value(source, input), expected);
+    }
+
+    let unavailable = Engine::new(
+        compile_metadata("Direct::\n /H/\n I { return(gap_text()) }\n")
+            .expect("compile unavailable-context fixture"),
+    )
+    .execute_value_with_diagnostics("H", &ExecutionOptions::new())
+    .expect_err("gap access without a candidate must fail");
+    assert_eq!(
+        unavailable.message,
+        "LINKEDSPEC_INTER_MATCH_GAP_ERROR:gap_capture_context_unavailable",
+    );
+    assert_eq!(
+        unavailable.diagnostic.code.as_deref(),
+        Some("gap_capture_context_unavailable"),
+    );
+    assert_eq!(unavailable.diagnostic.stage, "access_gap_context");
+
+    let post_commit = Engine::new(
+        compile_metadata(
+            "Top::OR{1}\n @capture_gaps\n -> Part { return(0) }\n IT { return(gap_kind()) }\nPart: /H/\n",
+        )
+        .expect("compile post-commit IT fixture"),
+    )
+    .execute_value_with_diagnostics("H", &ExecutionOptions::new())
+    .expect_err("IT must not retain the committed candidate");
+    assert_eq!(
+        post_commit.diagnostic.code.as_deref(),
+        Some("gap_capture_context_unavailable"),
+    );
+
+    let regression = Engine::new(
+        compile_metadata(
+            "Top::OR{1}\n @capture_gaps\n -> Part { rewind_match_start() }\nPart: /H/\n",
+        )
+        .expect("compile cursor-regression fixture"),
+    )
+    .execute_value_with_diagnostics("aH", &ExecutionOptions::new())
+    .expect_err("gap commit must reject cursor regression");
+    assert_eq!(
+        regression.message,
+        "LINKEDSPEC_SOURCE_LOCATION_ERROR:source_location_cursor_regression",
+    );
+    assert_eq!(
+        regression.diagnostic.code.as_deref(),
+        Some("source_location_cursor_regression"),
+    );
+
+    assert_eq!(
+        native_value(
+            "Top::OR{2}\n @capture_gaps\n -> Part { return(gap_text()) }\n EX { return(\"unexpected-ex\") }\n E { return(\"unexpected-e\") }\nPart: /H/\n",
+            "H",
+        ),
+        Value::Null,
+        "failed repetition minimum exposes neither a tail nor terminal hooks",
+    );
+
+    assert_eq!(
+        native_value("Part::\n /H/\n I { return(entry_slot()) }\n", "H"),
+        Value::Null,
+        "direct entry has no action-edge slot identity",
+    );
 }

@@ -12,6 +12,9 @@ answers:
   - "where will Rust inter match gap invocation state live"
   - "does Rust gap capture add a second invocation stack"
   - "how will Rust gap state join recognition rollback"
+  - "is Rust native inter match gap execution implemented"
+  - "what mutable Rust gap state is checkpointed"
+  - "does Rust capture gaps change LS ordering for unflagged rules"
   - "where are Rust gap candidate commit and tail lifecycle hooks inserted"
   - "how does entry_slot reach a Rust action edge target"
   - "does Rust gap capture change generated plan v2"
@@ -21,9 +24,9 @@ answers:
   - "does Rust gap admission change recognition 137 246 58"
   - "what does Rust gap admission change in the rollout mutation ledger"
 date: 2026-08-14
-status: Rust authored/static/compiled metadata .3.1 signoff-complete for intended atomic 228; runtime remains pending
+status: Rust authored/static/compiled metadata .3.1 and private native execution .3.2 are signoff-complete for intended atomic 229; generated and admitted runtime remain pending
 tags: [capture, segmentation, rust, parser, lifecycle, transaction, generated-source, emitted-source, admission]
-evidence: "INTER-MATCH-GAP-CAPTURE.3.1 starts from clean atomic-227 commit 4a95e02a. Its final-path consumer first fails only on absent slot rows, then passes explicitly with --ignored after one typed AST/validation/compiler path adds Unicode-17 named declarations, unindexed/numeric/named selectors, directive eligibility, exact diagnostics, slot/directive rows, and five-field provenance. Full core is 197+4+5+8+5; the 105-source generated manifest catches and then proves the repaired anonymous /=/ priority; the neutral checker stays 2/7/56 and rejects 10 additional Rust dormancy mutations. Ordinary package execution reports the consumer ignored under .3.5, so no canonical/recurring/facade or live execution is admitted."
+evidence: "INTER-MATCH-GAP-CAPTURE.3.2 starts from clean atomic-228 commit 95127e1d. The ignored final consumer first fails on unknown gap_kind/gap_text helpers, then passes 1/1 after the existing recognition invocation gains immutable gap identity plus exactly three checkpointed mutable members, native candidate-before-LS/commit-after-LE/tail lifecycle, detached entry slots, Unicode-scalar source reads, nested isolation, rollback, and typed context/cursor errors. Runtime units pass 170/170, private gap units 3/3, recognition 12/12, recursive observation 7/7, cursor 6+3, and duplicate slot 1/1. Ordinary package execution remains 0/1 ignored; neutral governance remains 2/7/56 plus 10 Rust dormancy mutations; generated/reconstructed/emitted/primary execution and every outward surface remain pending. Final signoff passes rendered book 79/14,708 KiB, Knowledge 835/7,016, all eight doctrines, the 17-owner Rust storage oracle, containment/relocation, CLI 66/66 twice, RAM 49%, and Phase 0 1,031/1,031 in 735 seconds through local-CI exit 0."
 reverify: "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract authored_static_compiled_metadata_stage -- --exact --ignored && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract && bash tools/check_inter_match_gap_capture_six_runtime.sh"
 ---
 
@@ -99,6 +102,24 @@ candidate/commit/tail lifecycle on the native executor without changing falsey a
 The neutral recognition contract already contains the four Perl-established gap nodes as `source_read`; Rust
 private helper handling consumes that authority without adding canonical public call rows. Recognition stays
 137/246/58 and the public helper inventory stays 122.
+
+### Verified `.3.2` state
+
+From clean `95127e1d`, that native layer is now implemented. The existing recognition frame owns gap activation,
+source/invocation identity, and detached entry identity; its token snapshots only committed gap cursor,
+accepted-edge count, and current gap alongside the unchanged public cursor/boundary/marks snapshot. Rollback
+restores both authorities without broadening the public record.
+
+Capture-enabled native rules select and install LMATCH plus the candidate before `LS`, retain it through the
+target/action and `LE`, commit the child-extended cursor before `IT`, and expose successful tails through existing
+`LX`/`EX`/`E` hooks. Unflagged rules preserve LS-before-selection. Private accessors return detached five-field
+entry slots, Unicode-scalar gap spans/text/kind, and typed unavailable-context or cursor-regression errors. Nested
+invocations isolate their state and restore the parent candidate on return.
+
+The final consumer remains explicitly ignored under `.3.5`; focused `--ignored --exact` native proof passes, but
+ordinary package discovery executes 0 tests and reports 1 ignored. `.3.3` still owns reconstruction, descriptors,
+and the separate generated-plan executor. Therefore generated plan v2, rollout 2/7/56, recurring/canonical routes,
+and all facade/schema/semantic/MCP/CLI/README/public surfaces remain unchanged.
 
 ## `.3.3-.3.4`: reconstructed, generated, and emitted carriers
 

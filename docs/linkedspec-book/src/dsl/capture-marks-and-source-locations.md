@@ -617,13 +617,12 @@ Definitive `.2.4` and parent `.2` signoff also passes the rendered mdBook, Knowl
 doctrines, containment/relocation, CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 765 seconds, the exact
 neutral-plus-Perl route with five later-runtime skips, and local-CI exit 0. Atomic 226 landed at `eceb15ac`.
 
-### Rust authored metadata — implemented, runtime still dormant
+### Rust private native execution — implemented, admission still dormant
 
-Rust `.3.0` is the behavior-free implementation map from that clean boundary. Process-level probes establish the
-current baseline: numeric `Rule[N]` succeeds; `name=/regex/` becomes unrecognized raw body text; `Rule[name]`
-falls back to numeric slot zero while leaving the bracket suffix unconsumed; `@capture_gaps` is ignored; and
-`entry_slot()` plus the three gap accessors remain unknown helpers. These are current limitations, not supported
-syntax.
+Rust `.3.0` froze the behavior-free implementation map from that clean boundary. Its process-level probes recorded
+the prior baseline: only numeric `Rule[N]` worked, while named declarations/selectors, `@capture_gaps`,
+`entry_slot()`, and the three gap accessors were absent. `.3.1` has since implemented authored/static/compiled
+metadata, and `.3.2` has implemented the private native execution layer described below.
 
 The implementation is dependency-split before any behavior moves:
 
@@ -647,11 +646,23 @@ spacing forms, mixes named and anonymous rows in one authored order, distinguish
 selectors, reuses exact Unicode-17 identity, validates directive eligibility and the frozen diagnostics, and
 retains source/line-aware slot/directive plus five-field edge provenance in serialized compiled state.
 
-That does **not** make Rust gap capture executable. Descriptor projection remains legacy-shaped until `.3.3`;
-native gap state/accessors remain `.3.2`; generated, emitted, and primary execution remain `.3.3-.3.5`; and the
-final consumer is explicitly ignored until `.3.5`. Ordinary package testing reports it ignored, while focused
-metadata proof uses `--ignored --exact`. The neutral checker adds ten local dormancy mutations but retains the
-same behavior-free JSON, rollout 2 complete / 7 pending, and 56 semantic/governance mutations.
+Private native leaf `.3.2` is now implemented from clean `95127e1d`. Rust attaches gap activation and detached
+entry-slot identity to the existing recognition invocation, and adds only committed gap cursor, accepted-edge
+count, and current gap to that invocation's checkpoint snapshot. Public recognition state stays exactly
+cursor/boundary/marks.
+
+For capture-enabled native rules, Rust selects and installs the local match and gap candidate before `LS`, keeps
+the candidate visible through target/action/`LE`, commits the accepted child-extended cursor before `IT`, and
+exposes successful tails to the existing `LX`/`EX`/`E` hooks. Unflagged rules preserve their historical
+LS-before-selection order. Gap spans cross the existing source authority and therefore expose decoded Unicode-
+scalar half-open offsets rather than byte offsets; nested invocations isolate state and recognition rollback
+restores the same three-member gap snapshot.
+
+This is still **not Rust runtime admission**. Descriptor projection and generated-plan execution remain `.3.3`;
+emitted and primary execution remain `.3.4-.3.5`; and the final consumer stays explicitly ignored until `.3.5`.
+Ordinary package testing reports 0 passed / 1 ignored, while focused native proof uses `--ignored --exact`. The
+neutral checker retains the same behavior-free JSON, rollout 2 complete / 7 pending, 56 semantic/governance
+mutations, and ten local Rust dormancy mutations.
 
 Pinned identity is important here: the installed Perl reports Unicode 13, so `.2.1` generates a private
 806-range classifier from the repository's Unicode 17 ranges rather than trusting the host `XID_Continue` table.

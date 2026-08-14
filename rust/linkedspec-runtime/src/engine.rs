@@ -32,7 +32,7 @@
 //! When `-> child[N]` is used, `child_regex_idx` selects which regex of the
 //! child rule to start with. The default (0) uses the first regex.
 
-use crate::helpers::regex_engine::CompiledAlternation;
+use crate::helpers::regex_engine::{CompiledAlternation, MatchResult};
 use crate::runtime::{CallableCodeblockFailure, RuntimeContext, RuntimeVarKind};
 use crate::source_emitter::{GeneratedRuleFamily, GeneratedRuleSpec};
 use crate::{
@@ -251,7 +251,21 @@ fn validate_eager_helper_arity(
     rule_label: &str,
 ) -> Result<(), String> {
     validate_diagnostic_output_arity(name, raw_args, actual_arity, ctx, rule_label)?;
-    validate_logical_helper_arity(name, raw_args, actual_arity, ctx, rule_label)
+    validate_logical_helper_arity(name, raw_args, actual_arity, ctx, rule_label)?;
+    if matches!(name, "entry_slot" | "gap_span" | "gap_text" | "gap_kind")
+        && (!raw_args.is_empty() || actual_arity != 0)
+    {
+        ctx.capture_helper_arity_failure(
+            name,
+            actual_arity,
+            "exactly 0 positional arguments",
+            rule_label,
+        );
+        return Err(format!(
+            "helper_arity_mismatch helper_name={name} actual_arity={actual_arity} expected_arity=\"exactly 0 positional arguments\" rule_label={rule_label:?}"
+        ));
+    }
+    Ok(())
 }
 
 /// Per-invocation controls for direct effective-entry value execution.
@@ -761,7 +775,7 @@ impl GeneratedPlanExecutor<'_> {
             return Ok(RuntimeValue::Undef);
         }
 
-        if let Err(error) = ctx.enter_recognition_invocation(label) {
+        if let Err(error) = ctx.enter_recognition_invocation(label, false, None) {
             ctx.exit_recursion(label, entry_pos);
             return Err(error);
         }
@@ -1228,7 +1242,7 @@ impl GeneratedPlanExecutor<'_> {
             return Ok(RuntimeValue::Undef);
         }
 
-        if let Err(error) = ctx.enter_recognition_invocation(label) {
+        if let Err(error) = ctx.enter_recognition_invocation(label, false, None) {
             ctx.exit_recursion(label, entry_pos);
             return Err(error);
         }
@@ -2411,6 +2425,16 @@ impl Engine {
         entry_regex_idx: usize,
         ctx: &mut RuntimeContext,
     ) -> Result<RuntimeValue, String> {
+        self.execute_rule_with_entry_slot(label, entry_regex_idx, ctx, None)
+    }
+
+    fn execute_rule_with_entry_slot(
+        &self,
+        label: &str,
+        entry_regex_idx: usize,
+        ctx: &mut RuntimeContext,
+        entry_slot: Option<crate::recognition_transaction::GapEntrySlot>,
+    ) -> Result<RuntimeValue, String> {
         let entry_pos = ctx.pos;
         ctx.trace_enter(
             "rust_runtime:engine:rule",
@@ -2436,7 +2460,12 @@ impl Engine {
             }
             return Ok(RuntimeValue::Undef);
         }
-        if let Err(error) = ctx.enter_recognition_invocation(label) {
+        let capture_gaps = self
+            .spec
+            .find(label)
+            .and_then(|rule| rule.capture_gaps.as_ref())
+            .is_some_and(|directive| directive.enabled);
+        if let Err(error) = ctx.enter_recognition_invocation(label, capture_gaps, entry_slot) {
             ctx.exit_recursion(label, entry_pos);
             return Err(error);
         }
@@ -2512,6 +2541,20 @@ impl Engine {
         child_result
     }
 
+    fn execute_child_rule_with_entry_slot(
+        &self,
+        label: &str,
+        entry_regex_idx: usize,
+        ctx: &mut RuntimeContext,
+        entry_slot: Option<crate::recognition_transaction::GapEntrySlot>,
+    ) -> Result<RuntimeValue, String> {
+        let accumulator_len = ctx.accumulator.len();
+        let child_result =
+            self.execute_rule_with_entry_slot(label, entry_regex_idx, ctx, entry_slot);
+        ctx.accumulator.truncate(accumulator_len);
+        child_result
+    }
+
     fn execute_action_edge_child_rule(
         &self,
         label: &str,
@@ -2531,6 +2574,23 @@ impl Engine {
             return Ok(RuntimeValue::Undef);
         }
         self.execute_child_rule(label, entry_regex_idx, ctx)
+    }
+
+    fn execute_action_edge_child_entry(
+        &self,
+        entry: &linkedspec_core::types::AcodeEntry,
+        ctx: &mut RuntimeContext,
+    ) -> Result<RuntimeValue, String> {
+        if self.is_passive_terminal_rule(&entry.child_label) {
+            return Ok(RuntimeValue::Undef);
+        }
+        let entry_slot = ctx.gap_entry_slot_for_edge(entry);
+        self.execute_child_rule_with_entry_slot(
+            &entry.child_label,
+            entry.child_regex_idx,
+            ctx,
+            entry_slot,
+        )
     }
 
     /// A passive terminal handler has no executable body in the Perl reference:
@@ -2572,6 +2632,110 @@ impl Engine {
         }
 
         Ok(())
+    }
+
+    fn prepare_native_selected_match(
+        &self,
+        rule: &CompiledRule,
+        label: &str,
+        matched: &MatchResult,
+        required_and_idx: Option<usize>,
+        ctx: &mut RuntimeContext,
+    ) -> Result<(), String> {
+        ctx.note_recognition_match(matched.start, matched.end);
+        let dispatch_index = required_and_idx.unwrap_or(matched.index);
+        let (target_rule, target_regex_index) = structural_slot_identity(rule, dispatch_index);
+        let (actual_target_rule, actual_regex_index) =
+            structural_slot_identity(rule, matched.index);
+        if required_and_idx.is_some()
+            && let Err(error) = assert_ordered_regex_slot_identity(
+                label,
+                target_rule,
+                target_regex_index,
+                actual_target_rule,
+                actual_regex_index,
+            )
+        {
+            ctx.capture_ordered_regex_slot_identity_lost(
+                label,
+                target_rule,
+                target_regex_index,
+                actual_regex_index,
+            );
+            return Err(error.to_string());
+        }
+        ctx.trace_decision(
+            "rust_runtime:engine:regex_slot_selected",
+            true,
+            format!(
+                "rule_label={label} selection_role={} target_rule={target_rule} regex_index={target_regex_index}",
+                if rule.mode.is_and() {
+                    "ordered_required"
+                } else {
+                    "choice"
+                }
+            ),
+            TraceLevel::MEDIUM,
+        );
+
+        let entry_was_empty = !ctx.entry_match_present;
+        ctx.set_pos(matched.end);
+        if ctx.semantic_observation_enabled() {
+            ctx.emit_regex_slot_selected(
+                label,
+                target_rule,
+                target_regex_index,
+                byte_to_char_offset(&ctx.input, matched.end),
+            );
+        }
+        ctx.match_groups = matched.captures.clone();
+        ctx.match_named = matched.named.clone();
+        ctx.match_start_byte = matched.start;
+        ctx.match_end_byte = matched.end;
+        ctx.match_present = true;
+        if entry_was_empty {
+            ctx.entry_groups = matched.captures.clone();
+            ctx.entry_named = matched.named.clone();
+            ctx.entry_start_byte = matched.start;
+            ctx.entry_end_byte = matched.end;
+            ctx.entry_match_present = true;
+        }
+        Ok(())
+    }
+
+    fn select_native_match(
+        rule: &CompiledRule,
+        alt: &CompiledAlternation,
+        input: &str,
+        position: usize,
+        parse_mode: ParseMode,
+        required_and_idx: Option<usize>,
+        has_entry_idx: bool,
+        matches: usize,
+        entry_regex_idx: usize,
+    ) -> Result<Option<MatchResult>, String> {
+        if has_entry_idx && matches == 0 {
+            let entry_pat = &rule.regex_patterns[entry_regex_idx];
+            let entry_alt = CompiledAlternation::compile(std::slice::from_ref(entry_pat))?;
+            return Ok(match parse_mode {
+                ParseMode::Consume => entry_alt.consume_match(input, position),
+                ParseMode::Seek => entry_alt.seek_match(input, position),
+            }
+            .map(|mut matched| {
+                matched.index = entry_regex_idx;
+                matched
+            }));
+        }
+        if let Some(required_index) = required_and_idx {
+            return Ok(match parse_mode {
+                ParseMode::Consume => alt.consume_slot_match(input, position, required_index),
+                ParseMode::Seek => alt.seek_slot_match(input, position, required_index),
+            });
+        }
+        Ok(match parse_mode {
+            ParseMode::Consume => alt.consume_match(input, position),
+            ParseMode::Seek => alt.seek_match(input, position),
+        })
     }
 
     /// The rule body, wrapped by [`execute_rule`] (which adds the recursion
@@ -2866,6 +3030,10 @@ impl Engine {
         let mut and_acode_idx: usize = 0;
         let mut rep_and_start_pos = ctx.pos;
         let max_iter = 10_000;
+        let capture_gaps = rule
+            .capture_gaps
+            .as_ref()
+            .is_some_and(|value| value.enabled);
 
         // For non-REP entry-specific dispatch: if entry_regex_idx > 0,
         // try only that specific regex first (for self-recursive rules).
@@ -2876,7 +3044,7 @@ impl Engine {
                 rep_and_start_pos = ctx.pos;
             }
             // Non-REP rules execute once
-            if !is_rep && !is_and_acode_seq && matches > 0 {
+            if !is_rep && !is_and_acode_seq && matches > 0 && !capture_gaps {
                 break;
             }
             if !is_rep && is_and_acode_seq && matches >= and_acode_seq_len {
@@ -2894,12 +3062,6 @@ impl Engine {
             // (Perl: `loop_start_pos`).
             let pos_before = ctx.pos;
 
-            // ── LS-block (loop start, fires before each match attempt) ──
-            if let Some(ref lscode) = rule.lscode {
-                self.execute_lifecycle_block("LS", lscode, ctx, label)?;
-                return_if_rule_returned!();
-            }
-
             // ── Match ──
             let parse_mode = rule.cursor_policy();
             let required_and_idx = is_and_acode_seq.then_some(if is_rep_and_acode_seq {
@@ -2907,132 +3069,101 @@ impl Engine {
             } else {
                 matches
             });
-            let match_result = if has_entry_idx && matches == 0 {
-                // Self-recursive entry: only try the specified regex slot.
-                // Build a single-pattern alternation for this slot.
-                let entry_pat = &rule.regex_patterns[entry_regex_idx];
-                let entry_alt = CompiledAlternation::compile(std::slice::from_ref(entry_pat))?;
-                match parse_mode {
-                    ParseMode::Consume => entry_alt.consume_match(&ctx.input, ctx.pos),
-                    ParseMode::Seek => entry_alt.seek_match(&ctx.input, ctx.pos),
-                }
-                .map(|mut m| {
-                    // Fix up the index to match the real regex position
-                    m.index = entry_regex_idx;
-                    m
-                })
-            } else if let Some(required_index) = required_and_idx {
-                match parse_mode {
-                    ParseMode::Consume => {
-                        alt.consume_slot_match(&ctx.input, ctx.pos, required_index)
+            let match_result;
+
+            if capture_gaps {
+                match_result = Self::select_native_match(
+                    rule,
+                    &alt,
+                    &ctx.input,
+                    ctx.pos,
+                    parse_mode,
+                    required_and_idx,
+                    has_entry_idx,
+                    matches,
+                    entry_regex_idx,
+                )?;
+                match &match_result {
+                    Some(m) => {
+                        ctx.trace_decision(
+                            "rust_runtime:engine:regex_match",
+                            true,
+                            format!(
+                                "rule={label} regex_idx={} start={} end={} pos_before={pos_before} parse_mode={:?} entry_regex_idx={entry_regex_idx}",
+                                m.index, m.start, m.end, parse_mode
+                            ),
+                            TraceLevel::MEDIUM,
+                        );
+                        self.prepare_native_selected_match(rule, label, m, required_and_idx, ctx)?;
+                        ctx.install_gap_candidate(m.start);
                     }
-                    ParseMode::Seek => alt.seek_slot_match(&ctx.input, ctx.pos, required_index),
+                    None => {
+                        ctx.trace_decision(
+                            "rust_runtime:engine:regex_match",
+                            false,
+                            format!(
+                                "rule={label} pos_before={pos_before} parse_mode={:?} entry_regex_idx={entry_regex_idx}",
+                                parse_mode
+                            ),
+                            TraceLevel::MEDIUM,
+                        );
+                    }
+                }
+                if match_result.is_some() {
+                    ctx.set_gap_phase("LS");
+                    if let Some(ref lscode) = rule.lscode {
+                        self.execute_lifecycle_block("LS", lscode, ctx, label)?;
+                        return_if_rule_returned!();
+                    }
                 }
             } else {
-                match parse_mode {
-                    ParseMode::Consume => alt.consume_match(&ctx.input, ctx.pos),
-                    ParseMode::Seek => alt.seek_match(&ctx.input, ctx.pos),
+                // Preserve the historical unflagged order exactly: LS runs
+                // before matcher selection and local-match installation.
+                if let Some(ref lscode) = rule.lscode {
+                    self.execute_lifecycle_block("LS", lscode, ctx, label)?;
+                    return_if_rule_returned!();
                 }
-            };
-
-            match &match_result {
-                Some(m) => {
-                    ctx.trace_decision(
-                        "rust_runtime:engine:regex_match",
-                        true,
-                        format!(
-                            "rule={label} regex_idx={} start={} end={} pos_before={pos_before} parse_mode={:?} entry_regex_idx={entry_regex_idx}",
-                            m.index, m.start, m.end, parse_mode
-                        ),
-                        TraceLevel::MEDIUM,
-                    );
-                }
-                None => {
-                    ctx.trace_decision(
-                        "rust_runtime:engine:regex_match",
-                        false,
-                        format!(
-                            "rule={label} pos_before={pos_before} parse_mode={:?} entry_regex_idx={entry_regex_idx}",
-                            parse_mode
-                        ),
-                        TraceLevel::MEDIUM,
-                    );
+                match_result = Self::select_native_match(
+                    rule,
+                    &alt,
+                    &ctx.input,
+                    ctx.pos,
+                    parse_mode,
+                    required_and_idx,
+                    has_entry_idx,
+                    matches,
+                    entry_regex_idx,
+                )?;
+                match &match_result {
+                    Some(m) => {
+                        ctx.trace_decision(
+                            "rust_runtime:engine:regex_match",
+                            true,
+                            format!(
+                                "rule={label} regex_idx={} start={} end={} pos_before={pos_before} parse_mode={:?} entry_regex_idx={entry_regex_idx}",
+                                m.index, m.start, m.end, parse_mode
+                            ),
+                            TraceLevel::MEDIUM,
+                        );
+                        self.prepare_native_selected_match(rule, label, m, required_and_idx, ctx)?;
+                    }
+                    None => {
+                        ctx.trace_decision(
+                            "rust_runtime:engine:regex_match",
+                            false,
+                            format!(
+                                "rule={label} pos_before={pos_before} parse_mode={:?} entry_regex_idx={entry_regex_idx}",
+                                parse_mode
+                            ),
+                            TraceLevel::MEDIUM,
+                        );
+                    }
                 }
             }
 
             if let Some(m) = match_result {
-                ctx.note_recognition_match(m.start, m.end);
-                let dispatch_index = required_and_idx.unwrap_or(m.index);
-                let (target_rule, target_regex_index) =
-                    structural_slot_identity(rule, dispatch_index);
-                let (actual_target_rule, actual_regex_index) =
-                    structural_slot_identity(rule, m.index);
-                if required_and_idx.is_some()
-                    && let Err(error) = assert_ordered_regex_slot_identity(
-                        label,
-                        target_rule,
-                        target_regex_index,
-                        actual_target_rule,
-                        actual_regex_index,
-                    )
-                {
-                    ctx.capture_ordered_regex_slot_identity_lost(
-                        label,
-                        target_rule,
-                        target_regex_index,
-                        actual_regex_index,
-                    );
-                    return Err(error.to_string());
-                }
-                ctx.trace_decision(
-                    "rust_runtime:engine:regex_slot_selected",
-                    true,
-                    format!(
-                        "rule_label={label} selection_role={} target_rule={target_rule} regex_index={target_regex_index}",
-                        if rule.mode.is_and() {
-                            "ordered_required"
-                        } else {
-                            "choice"
-                        }
-                    ),
-                    TraceLevel::MEDIUM,
-                );
-
-                let entry_was_empty = !ctx.entry_match_present;
-                ctx.set_pos(m.end);
-                if ctx.semantic_observation_enabled() {
-                    ctx.emit_regex_slot_selected(
-                        label,
-                        target_rule,
-                        target_regex_index,
-                        byte_to_char_offset(&ctx.input, m.end),
-                    );
-                }
-                // LOCAL match (`LMATCH`) — the rule's own regex match. This is
-                // what `match_*` helpers read; it must NOT touch the entry match
-                // (Perl keeps `IMATCH` and `LMATCH` separate — only an explicit
-                // I-block bridge copies one to the other). `m.start`/`m.end` are
-                // byte offsets (exposed as char offsets by `match_*_pos`).
-                ctx.match_groups = m.captures.clone();
-                ctx.match_named = m.named.clone();
-                ctx.match_start_byte = m.start;
-                ctx.match_end_byte = m.end;
-                ctx.match_present = true;
-                // Top-rule / dispatcher-less entry: the rule's own first match
-                // is also its entry match (the framework passes the top rule's
-                // own match as `$info`). A dispatched child already carries a
-                // non-empty entry match (the dispatcher's local match) and is
-                // left untouched, so `entry_*` and `match_*` diverge correctly
-                // in nested contexts.
-                if entry_was_empty {
-                    ctx.entry_groups = m.captures.clone();
-                    ctx.entry_named = m.named.clone();
-                    ctx.entry_start_byte = m.start;
-                    ctx.entry_end_byte = m.end;
-                    ctx.entry_match_present = true;
-                }
-
                 // ── Action-edge dispatch ──
+                ctx.set_gap_phase("edge");
                 let mut dispatched_acode = false;
                 for entry in &rule.acode_dispatch {
                     if entry.regex_idx == m.index {
@@ -3067,11 +3198,8 @@ impl Engine {
                                     // A bare `retv` read has the same dependency:
                                     // pre-dispatch once, then let helper
                                     // evaluation read the scoped child result.
-                                    let child_retv = self.execute_action_edge_child_rule(
-                                        &entry.child_label,
-                                        entry.child_regex_idx,
-                                        ctx,
-                                    )?;
+                                    let child_retv =
+                                        self.execute_action_edge_child_entry(entry, ctx)?;
                                     ctx.push_action_edge_call_result(
                                         &entry.child_label,
                                         child_retv.clone(),
@@ -3089,19 +3217,13 @@ impl Engine {
                                     // for later edges / lifecycle blocks.
                                     self.execute_block(block, ctx, label)?;
                                     collect_or_return_action_value!();
-                                    let child_retv = self.execute_action_edge_child_rule(
-                                        &entry.child_label,
-                                        entry.child_regex_idx,
-                                        ctx,
-                                    )?;
+                                    let child_retv =
+                                        self.execute_action_edge_child_entry(entry, ctx)?;
                                     ctx.set_retv(child_retv);
                                 }
                             } else {
-                                let child_retv = self.execute_action_edge_child_rule(
-                                    &entry.child_label,
-                                    entry.child_regex_idx,
-                                    ctx,
-                                )?;
+                                let child_retv =
+                                    self.execute_action_edge_child_entry(entry, ctx)?;
                                 ctx.set_retv(child_retv);
                             }
                         } else if self.execute_action_edge_fluent_chain(entry, ctx, label)?
@@ -3121,10 +3243,12 @@ impl Engine {
                 }
 
                 // ── LE-block (loop end, after successful match) ──
+                ctx.set_gap_phase("LE");
                 if let Some(ref lecode) = rule.lecode {
                     self.execute_lifecycle_block("LE", lecode, ctx, label)?;
                     return_if_rule_returned!();
                 }
+                ctx.commit_gap_candidate(label)?;
 
                 if is_rep_and_acode_seq {
                     and_acode_idx += 1;
@@ -3136,6 +3260,7 @@ impl Engine {
                 matches += 1;
 
                 // ── IT-block (per-iteration, REP only) ──
+                ctx.set_gap_phase("IT");
                 if let Some(ref itcode) = rule.itcode {
                     self.execute_lifecycle_block("IT", itcode, ctx, label)?;
                     return_if_rule_returned!();
@@ -3143,6 +3268,10 @@ impl Engine {
             } else {
                 // No match — exit the matching loop
                 // ── LX-block (no-match exit, fires when loop ends without match) ──
+                if !is_rep || matches >= rep_min {
+                    ctx.install_gap_tail("LX");
+                }
+                ctx.set_gap_phase("LX");
                 if let Some(ref lxcode) = rule.lxcode {
                     self.execute_lifecycle_block("LX", lxcode, ctx, label)?;
                     return_if_rule_returned!();
@@ -3192,12 +3321,20 @@ impl Engine {
         }
 
         // ── EX-block (REP exhaustion, fires after loop completes normally) ──
+        if is_rep {
+            ctx.install_gap_tail("EX");
+        }
+        ctx.set_gap_phase("EX");
         if let Some(ref excode) = rule.excode {
             self.execute_lifecycle_block("EX", excode, ctx, label)?;
             return_if_rule_returned!();
         }
 
         // ── E-block (exit, fires once after all matching/repetition is done) ──
+        if !is_rep {
+            ctx.install_gap_tail("E");
+        }
+        ctx.set_gap_phase("E");
         if let Some(ref ecode) = rule.ecode {
             self.execute_lifecycle_block("E", ecode, ctx, label)?;
             return_if_rule_returned!();
@@ -3528,7 +3665,12 @@ impl Engine {
             }
         };
 
-        let child_retv = self.execute_action_edge_child_rule(&child_label, child_regex_idx, ctx)?;
+        let child_retv =
+            if child_label == entry.child_label && child_regex_idx == entry.child_regex_idx {
+                self.execute_action_edge_child_entry(entry, ctx)?
+            } else {
+                self.execute_action_edge_child_rule(&child_label, child_regex_idx, ctx)?
+            };
         ctx.set_retv(child_retv.clone());
         if bare_target {
             let _ = ctx.push_bare_array_value(&target_label, child_retv)?;
@@ -7046,6 +7188,43 @@ impl Engine {
                 }
             }
             // ── Entry/match ──
+            "entry_slot" => Ok(ctx.gap_entry_slot_value()),
+            "gap_span" => match ctx.gap_span_value(name) {
+                Ok(value) => Ok(value),
+                Err(error) => {
+                    ctx.capture_portable_diagnostic_failure(
+                        "access_gap_context",
+                        "gap_capture_context_unavailable",
+                        "Rust inter-match gap context is unavailable",
+                        Some(rule_label),
+                    );
+                    Err(error)
+                }
+            },
+            "gap_text" => match ctx.gap_text_value(name) {
+                Ok(value) => Ok(value),
+                Err(error) => {
+                    ctx.capture_portable_diagnostic_failure(
+                        "access_gap_context",
+                        "gap_capture_context_unavailable",
+                        "Rust inter-match gap context is unavailable",
+                        Some(rule_label),
+                    );
+                    Err(error)
+                }
+            },
+            "gap_kind" => match ctx.gap_kind_value(name) {
+                Ok(value) => Ok(value),
+                Err(error) => {
+                    ctx.capture_portable_diagnostic_failure(
+                        "access_gap_context",
+                        "gap_capture_context_unavailable",
+                        "Rust inter-match gap context is unavailable",
+                        Some(rule_label),
+                    );
+                    Err(error)
+                }
+            },
             "entry_text" => Ok(RuntimeValue::Scalar(
                 ctx.typed_span_text_from_bytes(
                     ctx.entry_start_byte,
@@ -9022,7 +9201,8 @@ AbortChild:
         validate(&spec).unwrap();
         let engine = Engine::new(compile(&spec).unwrap());
         let mut ctx = RuntimeContext::new("");
-        ctx.enter_recognition_invocation("Top").unwrap();
+        ctx.enter_recognition_invocation("Top", false, None)
+            .unwrap();
         let observation_expr = Expr::ObserveRecognition {
             target: "observation".to_owned(),
             rule: "AbortChild".to_owned(),

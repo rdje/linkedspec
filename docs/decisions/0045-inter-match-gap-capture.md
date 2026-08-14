@@ -496,6 +496,26 @@ consumer is staged at its permanent path under an explicit ignored-until-`.3.5` 
 make that ignored state and canonical/recurring/facade absence executable governance while leaving the neutral
 artifact, rollout 2 complete / 7 pending, and 56 semantic mutations unchanged.
 
+## 2026-08-14 Rust private-native amendment
+
+`INTER-MATCH-GAP-CAPTURE.3.2` activates from clean atomic-228 commit `95127e1d` and implements only the ratified
+private native boundary. The existing recognition invocation remains the sole stack and transaction-token
+authority. Its private frame carries gap activation, immutable source/invocation identity, detached entry-slot
+identity, and exactly three checkpointed mutable members: committed gap cursor, accepted-edge count, and current
+gap. Public cursor/boundary/marks records remain unchanged.
+
+Capture-enabled native rules select and install their local match plus candidate before `LS`, retain it through
+target/action/`LE`, commit the accepted child-extended cursor before `IT`, and expose successful tail context to
+the existing `LX`/`EX`/`E` hooks. Unflagged LS-before-selection order and return authority remain unchanged.
+Authored gap projection passes internal byte boundaries through the existing source authority to yield detached
+Unicode-scalar spans and exact text/kind; child entry identity is accepted only from the active owning candidate.
+Nested invocations isolate their state, and recognition rollback restores the same three-member snapshot.
+
+This amendment does not change descriptor projection, ordinary reconstruction, the separate generated-plan
+executor, emitted source, primary commands, recurring/canonical registration, or any public surface. The final
+consumer remains ignored until `.3.5`, rollout remains 2 complete / 7 pending / 56 mutations, and `.3.3-.3.5`
+retain reconstructed/generated, emitted, and primary/admission ownership.
+
 ## Consequences
 
 - The director's original concept and target-rule ownership are durable and cannot be reassigned to

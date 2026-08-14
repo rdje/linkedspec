@@ -150,11 +150,10 @@ skips, and local-CI exit 0. The Perl parent is therefore closed for intended ato
 after that commit, brief-clear, and clean-tree boundary.
 
 Atomic 226 landed cleanly at `eceb15ac`, and Rust behavior-free preflight `.3.0` activated task-tree-first from
-that exact boundary. Primary-process evidence fixes the current Rust baseline: numeric selectors execute, named
-declarations become raw/no-regex state, named selectors fall back to zero with an unconsumed suffix, the directive
-is ignored, and the accessors remain unknown. `.3.1-.3.5` now separately own authored/static/compiled metadata,
+that exact boundary. Its primary-process evidence fixed the prior Rust baseline: numeric selectors executed while
+named declarations/selectors, the directive, and accessors were absent. `.3.1-.3.5` separately own authored/static/compiled metadata,
 same-recognition-authority native state, reconstruction/descriptor/generated-plan parity, repository-local emitted
-proof, and primary/admission. No Rust behavior or rollout has moved; generated plan v2, recognition 137/246/58,
+proof, and primary/admission. Generated plan v2, recognition 137/246/58,
 122 public helpers, typed source 9/5/114, gap 2/7/56, and all outward guards remain exact.
 
 Definitive `.3.0` signoff passes focused Rust 1/1, the rendered 79-file / 14,704-KiB mdBook, Knowledge Map
@@ -176,8 +175,32 @@ The final consumer exists at its permanent Rust integration-test path but is exp
 This is an execution boundary, not merely a missing named command: the optional package-wide Rust gate would
 otherwise execute every integration test. The neutral checker therefore admits the dormant file only while Rust
 stays pending, requires the ignore owner, rejects ten local dormancy mutations, and continues to require canonical,
-recurring, and facade absence. Gap remains 2/7/56; `.3.2-.3.5` retain native, generated/reconstructed, emitted, and
-admission authority.
+recurring, and facade absence. Gap remains 2/7/56; `.3.3-.3.5` retain generated/reconstructed, emitted, and
+admission authority after private native `.3.2`.
+
+Rust private-native leaf `.3.2` activates from clean atomic 228 `95127e1d`. It extends the existing recognition
+frame with gap activation, immutable source/invocation identity, detached entry-slot identity, and exactly three
+checkpointed mutable members: committed gap cursor, accepted-edge count, and current gap. The public
+cursor/boundary/marks record, invocation stack, and token family do not change.
+
+Only capture-enabled native rules select and install LMATCH plus the candidate before `LS`; they retain it through
+target/action/`LE`, commit the accepted child-extended cursor before `IT`, and install successful tail context for
+`LX`/`EX`/`E`. Unflagged LS-before-selection order remains unchanged. Source projection converts internal byte
+boundaries through the existing `SourceAuthority` to detached Unicode-scalar gap spans/text/kind. Child entry slots
+are accepted only from the active owning candidate, while direct/generic/unrelated entry remains `undef`. Nested
+invocations isolate gap state, and existing recognition rollback restores the three-member snapshot.
+
+Focused ignored execution and private units prove Unicode/empty prefix/interstitial/tail, candidate-before-LS,
+falsey values, child-extended commits, nested isolation, rollback, direct/detached slots, lifecycle tails, failed
+minimum, and typed unavailable-context/cursor-regression paths. This does not admit Rust: ordinary discovery remains
+0 passed / 1 ignored, and `.3.3-.3.5` retain reconstructed/generated, emitted, and primary/admission authority.
+Rollout stays 2/7/56 and all outward guards remain exact.
+
+Definitive `.3.2` signoff passes the rendered 79-file / 14,708-KiB mdBook, Knowledge Map 835/7,016, all eight
+doctrines, the 17-owner Rust storage oracle, six-family repository containment, all-five-anchor relocation, CLI
+66/66 in both option environments, RAM 49%, Phase 0 1,031/1,031 in 735 seconds, the exact neutral-plus-Perl route
+with five later-runtime skips, and local-CI exit 0. The first sandboxed run stopped only because the outer harness
+denied nested macOS `sandbox-exec` with status 71; the unchanged permission-authorized run is authoritative.
 
 Definitive `.2.2` signoff passes the rendered 79-file / 14,672-KiB mdBook, Knowledge Map 834/6,992, all eight
 doctrines, six-family repository containment, all-five-anchor relocation, CLI 66/66 in both option environments,

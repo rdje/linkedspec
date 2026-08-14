@@ -10,6 +10,37 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-14 — INTER-MATCH-GAP-CAPTURE.3.2 — add Rust native gap execution
+
+- Activated task-tree-first from clean atomic-228 commit `95127e1d`. Extending only the ignored final consumer
+  produced the exact native RED: `gap_kind()` and `gap_text()` followed the unknown-helper path and returned no
+  prefix/tail values before runtime changes.
+- Attached private Rust gap activation, source/invocation identity, detached entry-slot identity, and the exact
+  three-member mutable snapshot (`committed_gap_cursor`, `accepted_edge_count`, `current_gap`) to the existing
+  recognition invocation and checkpoint authority. Public cursor/boundary/marks state records remain unchanged.
+- Capture-enabled native rules now select and install the local match plus gap candidate before `LS`, retain it
+  through action/target/`LE`, commit the accepted post-`LE` cursor before `IT`, and expose successful tails to
+  `LX`/`EX`/`E`. Unflagged rules retain the historical LS-before-selection order and existing return authority.
+- Added private zero-argument `entry_slot()`, `gap_span()`, `gap_text()`, and `gap_kind()` evaluation with detached
+  Unicode-scalar spans, exact named/numeric/unindexed slot provenance, typed unavailable-context errors, and typed
+  source-location cursor-regression errors. Nested invocations isolate state and restore the parent candidate;
+  recognition rollback restores the same three-member gap snapshot.
+- The ignored native consumer covers Unicode and empty prefix/interstitial/tail gaps, candidate-before-LS,
+  falsey values, child-extended commits, nested isolation, rollback, lifecycle terminal routes, failed minimum,
+  direct entry, detached named slots, and typed failures. Focused execution passes 1/1; private gap units pass 3/3;
+  all 170 runtime units and recognition/recursion/cursor/duplicate-slot compatibility suites remain green.
+- This is not Rust admission. The ordinary consumer remains 0 passed / 1 ignored; generated plan v2, descriptors,
+  reconstruction, generated/emitted/primary execution, canonical/recurring routes, rollout 2/7/56, recognition
+  137/246/58, public helpers 122, typed source 9/5/114, and every outward surface remain unchanged.
+- The mandatory engineering-notes rollover published content-addressed segment 4996. ADR `0071` reviews only the
+  resulting finite capacity step from 11 to 12 controlled files and 10 to 11 manifest lines; all byte, root,
+  per-history-file, aggregate, owner, lifecycle, and storage controls remain unchanged.
+- Final signoff passes the rendered 79-file / 14,708-KiB mdBook, Knowledge Map 835/7,016, all eight doctrines,
+  the 17-owner Rust storage oracle, six-family containment, all-five-anchor relocation, CLI 66/66 in both option
+  environments, RAM 49%, Phase 0 1,031/1,031 in 735 seconds, and the exact neutral-plus-Perl gap route with five
+  skips through `[ci] local CI gate passed` and exit 0. The first sandboxed run stopped only at the outer harness's
+  expected nested-`sandbox-exec` status 71; the unchanged permission-authorized run is authoritative.
+
 ## 2026-08-14 — INTER-MATCH-GAP-CAPTURE.3.1 — add Rust authored gap metadata
 
 - Activated task-tree-first from clean atomic-227 commit `4a95e02a`. The final-path Rust consumer produced the

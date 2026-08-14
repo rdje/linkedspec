@@ -870,6 +870,132 @@ struct RecognitionRuntimeState {
     frames: Vec<RecognitionLiveFrame>,
 }
 
+/// Detached structural identity carried from one selected action edge into the
+/// target invocation. The owner id prevents a nested or unrelated invocation
+/// from observing a stale parent edge.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct GapEntrySlot {
+    pub(crate) owner_invocation_id: u64,
+    pub(crate) target_rule: String,
+    pub(crate) regex_index: usize,
+    pub(crate) slot_id: Option<String>,
+    pub(crate) selector_kind: String,
+    pub(crate) authored_selector: Option<Value>,
+}
+
+/// Byte-rooted private candidate. Runtime projection converts these boundaries
+/// through the parse-local `SourceAuthority`, so authored values expose decoded
+/// Unicode-scalar offsets rather than host byte offsets.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct GapContext {
+    pub(crate) source_id: String,
+    pub(crate) rule_label: String,
+    pub(crate) invocation_id: u64,
+    pub(crate) edge_ordinal: u64,
+    pub(crate) kind: &'static str,
+    pub(crate) start_byte: u64,
+    pub(crate) end_byte: u64,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct GapMutableState {
+    committed_gap_cursor: u64,
+    accepted_edge_count: u64,
+    current_gap: Option<GapContext>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct GapInvocationState {
+    source_id: String,
+    invocation_id: u64,
+    mutable: GapMutableState,
+}
+
+/// Private typed diagnostic for a gap read outside a live candidate or tail.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct InterMatchGapError {
+    record: Value,
+}
+
+impl InterMatchGapError {
+    fn unavailable(
+        rule_label: &str,
+        source_id: &str,
+        invocation_id: u64,
+        phase: &str,
+        accessor: &str,
+    ) -> Self {
+        Self {
+            record: json!({
+                "code": "gap_capture_context_unavailable",
+                "rule_label": rule_label,
+                "source_id": source_id,
+                "invocation_id": invocation_id,
+                "phase": phase,
+                "accessor": accessor,
+            }),
+        }
+    }
+
+    pub(crate) fn as_record(&self) -> Value {
+        self.record.clone()
+    }
+}
+
+impl fmt::Display for InterMatchGapError {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let code = self
+            .as_record()
+            .get("code")
+            .and_then(Value::as_str)
+            .unwrap_or("inter_match_gap_error")
+            .to_owned();
+        write!(formatter, "LINKEDSPEC_INTER_MATCH_GAP_ERROR:{code}")
+    }
+}
+
+impl std::error::Error for InterMatchGapError {}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct GapCursorRegressionError {
+    record: Value,
+}
+
+impl GapCursorRegressionError {
+    fn new(rule: &str, source_id: &str, selected_end: u64, cursor: u64) -> Self {
+        Self {
+            record: json!({
+                "code": "source_location_cursor_regression",
+                "phase": "advance",
+                "rule_role": rule,
+                "invocation_role": "gap_owner",
+                "source_id": source_id,
+                "start_offset": selected_end,
+                "end_offset": cursor,
+                "originating_edge_or_job": format!("{rule}:capture_gaps_commit"),
+            }),
+        }
+    }
+
+    pub(crate) fn as_record(&self) -> Value {
+        self.record.clone()
+    }
+}
+
+impl fmt::Display for GapCursorRegressionError {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let code = self
+            .as_record()
+            .get("code")
+            .and_then(Value::as_str)
+            .unwrap_or("source_location_error")
+            .to_owned();
+        write!(formatter, "LINKEDSPEC_SOURCE_LOCATION_ERROR:{code}")
+    }
+}
+
+impl std::error::Error for GapCursorRegressionError {}
+
 struct RecognitionLiveFrame {
     rule: String,
     frame: RecognitionInvocationFrame,
@@ -879,11 +1005,15 @@ struct RecognitionLiveFrame {
     entry_cursor: u64,
     selected_match: Option<(u64, u64)>,
     prior_marks: Option<std::collections::HashMap<String, usize>>,
+    gap: Option<GapInvocationState>,
+    gap_phase: String,
+    entry_slot: Option<GapEntrySlot>,
 }
 
 struct RecognitionLiveToken {
     token: RecognitionTransactionToken,
     snapshot: RecognitionFrameState,
+    gap_snapshot: Option<GapMutableState>,
 }
 
 pub(crate) struct RecognitionInvocationExit {
@@ -910,6 +1040,8 @@ impl RecognitionRuntime {
         rule: &str,
         state: RecognitionFrameState,
         prior_marks: Option<std::collections::HashMap<String, usize>>,
+        capture_gaps: bool,
+        entry_slot: Option<GapEntrySlot>,
     ) -> Result<(), RecognitionTransactionError> {
         let mut runtime = self.state.borrow_mut();
         let entry_cursor = state.cursor();
@@ -918,6 +1050,26 @@ impl RecognitionRuntime {
                 .authority
                 .enter_invocation(rule, &format!("{rule}:handler_entry"), state)?;
         let identity = runtime.authority.invocation_identity(&frame)?;
+        let entry_slot = entry_slot.filter(|slot| {
+            runtime.frames.last().is_some_and(|parent| {
+                parent.identity.invocation_id == slot.owner_invocation_id
+                    && parent
+                        .gap
+                        .as_ref()
+                        .and_then(|gap| gap.mutable.current_gap.as_ref())
+                        .is_some()
+                    && slot.target_rule == rule
+            })
+        });
+        let gap = capture_gaps.then(|| GapInvocationState {
+            source_id: runtime.authority.source_identity.to_string(),
+            invocation_id: identity.invocation_id,
+            mutable: GapMutableState {
+                committed_gap_cursor: entry_cursor,
+                accepted_edge_count: 0,
+                current_gap: None,
+            },
+        });
         runtime.frames.push(RecognitionLiveFrame {
             rule: rule.to_owned(),
             frame,
@@ -927,6 +1079,9 @@ impl RecognitionRuntime {
             entry_cursor,
             selected_match: None,
             prior_marks,
+            gap,
+            gap_phase: "I".to_owned(),
+            entry_slot,
         });
         Ok(())
     }
@@ -955,11 +1110,13 @@ impl RecognitionRuntime {
         let frame = frames.last_mut().expect("recognition invocation is active");
         authority.set_frame_state(&frame.frame, actual.clone())?;
         let token = authority.checkpoint(&frame.frame, &format!("{}:{slot}", frame.rule))?;
+        let gap_snapshot = frame.gap.as_ref().map(|gap| gap.mutable.clone());
         frame.tokens.insert(
             slot.to_owned(),
             RecognitionLiveToken {
                 token,
                 snapshot: actual,
+                gap_snapshot,
             },
         );
         Ok(())
@@ -1033,6 +1190,9 @@ impl RecognitionRuntime {
             )
         })?;
         authority.rollback(&frame.frame, &token.token)?;
+        if let (Some(gap), Some(snapshot)) = (&mut frame.gap, token.gap_snapshot) {
+            gap.mutable = snapshot;
+        }
         authority
             .frame_snapshot(&frame.frame)
             .map(|snapshot| snapshot.state())
@@ -1071,6 +1231,148 @@ impl RecognitionRuntime {
             prior_marks: frame.prior_marks.take(),
         };
         (exit, result)
+    }
+
+    pub(crate) fn set_gap_phase(&self, phase: &str) {
+        if let Some(frame) = self.state.borrow_mut().frames.last_mut() {
+            frame.gap_phase = phase.to_owned();
+        }
+    }
+
+    pub(crate) fn install_gap_candidate(&self, match_start: u64) {
+        let mut runtime = self.state.borrow_mut();
+        let Some(frame) = runtime.frames.last_mut() else {
+            return;
+        };
+        let Some(gap) = frame.gap.as_mut() else {
+            return;
+        };
+        let kind = if gap.mutable.accepted_edge_count == 0 {
+            "prefix"
+        } else {
+            "interstitial"
+        };
+        gap.mutable.current_gap = Some(GapContext {
+            source_id: gap.source_id.clone(),
+            rule_label: frame.rule.clone(),
+            invocation_id: gap.invocation_id,
+            edge_ordinal: gap.mutable.accepted_edge_count,
+            kind,
+            start_byte: gap.mutable.committed_gap_cursor,
+            end_byte: match_start,
+        });
+        frame.gap_phase = "selection".to_owned();
+    }
+
+    pub(crate) fn commit_gap_candidate(&self, cursor: u64) -> Result<(), GapCursorRegressionError> {
+        let mut runtime = self.state.borrow_mut();
+        let Some(frame) = runtime.frames.last_mut() else {
+            return Ok(());
+        };
+        let Some(gap) = frame.gap.as_mut() else {
+            return Ok(());
+        };
+        let Some(current) = gap.mutable.current_gap.as_ref() else {
+            return Ok(());
+        };
+        let selected_end = frame
+            .selected_match
+            .map(|(_, end)| end)
+            .unwrap_or(current.end_byte);
+        if cursor < selected_end {
+            return Err(GapCursorRegressionError::new(
+                &frame.rule,
+                &current.source_id,
+                selected_end,
+                cursor,
+            ));
+        }
+        gap.mutable.committed_gap_cursor = cursor;
+        gap.mutable.accepted_edge_count += 1;
+        gap.mutable.current_gap = None;
+        frame.gap_phase = "post_commit".to_owned();
+        Ok(())
+    }
+
+    pub(crate) fn install_gap_tail(&self, input_end: u64, phase: &str) {
+        let mut runtime = self.state.borrow_mut();
+        let Some(frame) = runtime.frames.last_mut() else {
+            return;
+        };
+        let Some(gap) = frame.gap.as_mut() else {
+            return;
+        };
+        gap.mutable.current_gap = Some(GapContext {
+            source_id: gap.source_id.clone(),
+            rule_label: frame.rule.clone(),
+            invocation_id: gap.invocation_id,
+            edge_ordinal: gap.mutable.accepted_edge_count,
+            kind: "tail",
+            start_byte: gap.mutable.committed_gap_cursor,
+            end_byte: input_end,
+        });
+        frame.gap_phase = phase.to_owned();
+    }
+
+    pub(crate) fn current_gap(&self, accessor: &str) -> Result<GapContext, InterMatchGapError> {
+        let runtime = self.state.borrow();
+        let frame = runtime
+            .frames
+            .last()
+            .expect("gap accessor requires an active recognition invocation");
+        if let Some(current) = frame
+            .gap
+            .as_ref()
+            .and_then(|gap| gap.mutable.current_gap.as_ref())
+        {
+            return Ok(current.clone());
+        }
+        let (source_id, invocation_id) = frame
+            .gap
+            .as_ref()
+            .map(|gap| (gap.source_id.as_str(), gap.invocation_id))
+            .unwrap_or_else(|| {
+                (
+                    runtime.authority.source_identity.as_ref(),
+                    frame.identity.invocation_id,
+                )
+            });
+        Err(InterMatchGapError::unavailable(
+            &frame.rule,
+            source_id,
+            invocation_id,
+            &frame.gap_phase,
+            accessor,
+        ))
+    }
+
+    pub(crate) fn entry_slot(&self) -> Option<GapEntrySlot> {
+        self.state
+            .borrow()
+            .frames
+            .last()
+            .and_then(|frame| frame.entry_slot.clone())
+    }
+
+    pub(crate) fn gap_entry_slot(
+        &self,
+        target_rule: &str,
+        regex_index: usize,
+        slot_id: Option<&str>,
+        selector_kind: &str,
+        authored_selector: Option<Value>,
+    ) -> Option<GapEntrySlot> {
+        let runtime = self.state.borrow();
+        let frame = runtime.frames.last()?;
+        frame.gap.as_ref()?.mutable.current_gap.as_ref()?;
+        Some(GapEntrySlot {
+            owner_invocation_id: frame.identity.invocation_id,
+            target_rule: target_rule.to_owned(),
+            regex_index,
+            slot_id: slot_id.map(str::to_owned),
+            selector_kind: selector_kind.to_owned(),
+            authored_selector,
+        })
     }
 }
 
@@ -1140,4 +1442,98 @@ fn take_generation(next: &mut u64, exhaustion_message: &'static str) -> u64 {
     let current = *next;
     *next = current.checked_add(1).expect(exhaustion_message);
     current
+}
+
+#[cfg(test)]
+mod gap_tests {
+    use super::*;
+
+    fn runtime(input: &str) -> RecognitionRuntime {
+        let sources = BTreeMap::from([("input".to_owned(), input.to_owned())]);
+        RecognitionRuntime::new(Arc::new(SourceAuthority::new(&sources)), "input")
+    }
+
+    fn state(cursor: u64) -> RecognitionFrameState {
+        RecognitionFrameState::new(cursor, None, BTreeMap::new())
+    }
+
+    #[test]
+    fn unavailable_gap_error_retains_every_private_context_field() {
+        let runtime = runtime("H");
+        runtime
+            .enter("Top", state(0), None, false, None)
+            .expect("enter ordinary invocation");
+        let error = runtime
+            .current_gap("gap_text")
+            .expect_err("ordinary invocation has no gap candidate");
+        assert_eq!(
+            error.as_record(),
+            json!({
+                "code":"gap_capture_context_unavailable",
+                "rule_label":"Top",
+                "source_id":"input",
+                "invocation_id":1,
+                "phase":"I",
+                "accessor":"gap_text",
+            }),
+        );
+    }
+
+    #[test]
+    fn checkpoint_rollback_restores_only_the_private_mutable_gap_snapshot() {
+        let runtime = runtime("aH!");
+        runtime
+            .enter("Top", state(0), None, true, None)
+            .expect("enter gap invocation");
+        runtime.note_match(1, 2);
+        runtime.install_gap_candidate(1);
+        runtime
+            .checkpoint("tx", state(2))
+            .expect("checkpoint gap candidate");
+        runtime
+            .attempt("tx", true, Some(json!(false)), state(3))
+            .expect("stage recognition attempt");
+        runtime
+            .commit_gap_candidate(3)
+            .expect("advance private gap state before rollback");
+        assert!(runtime.current_gap("gap_text").is_err());
+        let restored = runtime
+            .rollback("tx", state(3))
+            .expect("rollback recognition and gap snapshot");
+        assert_eq!(
+            restored.as_record(),
+            json!({"cursor":2,"boundary":null,"marks":{}})
+        );
+        let gap = runtime
+            .current_gap("gap_text")
+            .expect("candidate restored by rollback");
+        assert_eq!(gap.kind, "prefix");
+        assert_eq!((gap.start_byte, gap.end_byte, gap.edge_ordinal), (0, 1, 0));
+    }
+
+    #[test]
+    fn gap_cursor_regression_is_a_typed_source_error() {
+        let runtime = runtime("aH");
+        runtime
+            .enter("Top", state(0), None, true, None)
+            .expect("enter gap invocation");
+        runtime.note_match(1, 2);
+        runtime.install_gap_candidate(1);
+        let error = runtime
+            .commit_gap_candidate(1)
+            .expect_err("cursor before selected match end must reject");
+        assert_eq!(
+            error.as_record(),
+            json!({
+                "code":"source_location_cursor_regression",
+                "phase":"advance",
+                "rule_role":"Top",
+                "invocation_role":"gap_owner",
+                "source_id":"input",
+                "start_offset":2,
+                "end_offset":1,
+                "originating_edge_or_job":"Top:capture_gaps_commit",
+            }),
+        );
+    }
 }
