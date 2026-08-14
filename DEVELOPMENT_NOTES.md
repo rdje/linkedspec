@@ -10,6 +10,31 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-14 (`INTER-MATCH-GAP-CAPTURE.3.3` — Rust reconstructed/generated carrier): activation base is clean
+  atomic 229 at `5c4e9d50`. The exact RED separated the carriers: ordinary reconstructed native execution already
+  worked, descriptors returned null for all new metadata, and generated-plan access failed with typed unavailable
+  context.
+- Descriptor evolution must preserve older record meanings. Keep semantic `resolved_edges` at its exact five
+  legacy fields and `{label,idx}` dependency references narrow; publish selector provenance separately as
+  `resolved_slot_edges`, alongside cloned `regex_slots` and `capture_gaps` values.
+- Serialized `CompiledSpec` is the sole carrier. Generated source already embeds it, so adding directive/slot
+  fields to plan v2 would duplicate truth. The static plan remains only `{label,family}` and `source_emitter.rs`
+  remains unchanged.
+- Generated action entry must carry the same active parent capability as native execution. Derive the detached
+  slot row only while the parent candidate is active, enter the child on the same recognition stack, and keep
+  direct/blind/unrelated/stale entries slot-free.
+- Capture-enabled generated rules deliberately differ only where the directive requires it: select and install
+  before `LS`, retain through action/target/`LE`, commit before `IT`, and install successful tails before terminal
+  hooks. Every unflagged rule retains historical LS-before-selection order.
+- The final consumer now pairs native and generated results and structured diagnostics over the complete private
+  behavior set. It stays ignored until `.3.5`; `.3.4` still owns independently compiled emitted proof, and `.3.5`
+  owns primary/canonical/recurring admission. Rollout remains 2/7/56 and outward surfaces remain absent.
+- Final signoff passes the 17-owner Rust storage oracle, rendered book at 79 files / 14,720 KiB, synchronized
+  Knowledge at 835 facts / 7,019 keys, all eight doctrines, containment/relocation, CLI 66/66 twice, RAM 69%,
+  Phase 0 1,031/1,031 in 772 seconds, and the exact opt-in gap route through canonical exit 0. The sandboxed run's
+  sole status-71 stop was the outer harness denying nested `sandbox-exec`; the unchanged elevated command passed
+  its own containment proof.
+
 - 2026-08-14 (`INTER-MATCH-GAP-CAPTURE.3.2` — Rust native gap lifecycle): activation base is clean atomic 228 at
   `95127e1d`. The ignored final consumer's exact RED was native unknown-helper behavior, not metadata drift.
 - Keep one authority: `RecognitionRuntime` owns the invocation stack and checkpoint token. Gap state adds immutable

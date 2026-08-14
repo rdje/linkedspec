@@ -313,10 +313,11 @@ effects at 137 total rows, while shared calls remain 246, public Perl helper cov
 composition stays pending. Behavior-free Rust `.3.0` now assigns authored/static, native same-authority,
 reconstruction/generated-plan, repository-local emitted, and final primary/admission work to `.3.1-.3.5` without
 changing the 2/7/56 ledger or the pending Rust skip. Its behavior-free signoff is green for intended atomic 227;
-`.3.1` now implements Rust authored/static/compiled slot and directive metadata from clean `4a95e02a`. Its final
-consumer remains explicitly ignored until `.3.5`, and ten checker-local dormancy mutations reject premature
-canonical/recurring/facade activation. The neutral artifact and 2/7/56 ledger do not move; Rust native gap state,
-generated/emitted/primary behavior, and runtime admission remain pending.
+`.3.1-.3.3` now implement Rust authored/static/compiled metadata, invocation-local native state, ordinary
+reconstruction, compatible descriptor projection, and separate generated-plan parity. The final consumer remains
+explicitly ignored until `.3.5`, and ten checker-local dormancy mutations reject premature canonical/recurring/
+facade activation. The neutral artifact and 2/7/56 ledger do not move; independently compiled emitted,
+primary-command, and runtime admission remain pending, while generated plan v2 stays exact `{label,family}`.
 
 No public `Position`/`Span` value, descriptor or generated schema, semantic/MCP projection, or source-authority
 elevation is claimed by these internal typed-source runtime admissions. Recognition transaction spelling and

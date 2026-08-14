@@ -516,6 +516,30 @@ executor, emitted source, primary commands, recurring/canonical registration, or
 consumer remains ignored until `.3.5`, rollout remains 2 complete / 7 pending / 56 mutations, and `.3.3-.3.5`
 retain reconstructed/generated, emitted, and primary/admission ownership.
 
+## 2026-08-14 Rust reconstructed/generated carrier amendment
+
+`INTER-MATCH-GAP-CAPTURE.3.3` activates from clean atomic-229 commit `5c4e9d50` and carries the already-current
+compiled/native contract through ordinary reconstruction, descriptors, and the separate generated-plan executor.
+Serialized `CompiledSpec` remains the only carrier. Ordinary JSON reconstruction preserves declaration-order slot
+rows, nullable stable ids, directive source/line evidence, and selector provenance, then executes the same native
+gap result.
+
+Descriptor compatibility is additive and separated by meaning. Rule metadata gains `regex_slots`,
+`capture_gaps`, and five-field `resolved_slot_edges`; the established semantic `resolved_edges` remains exactly
+`ownership,target,regex_index,block,fluent`, and legacy dependency references remain `{label,idx}`. This prevents
+selector provenance from silently widening an older outward record while exposing exact detached compiled values.
+
+`GeneratedPlanExecutor` now reads directive activation from the same compiled payload, enters the existing
+recognition invocation with active action-edge slot identity, and mirrors native candidate-before-`LS`,
+commit-after-`LE`, and tail-before-`LX`/`EX`/`E` timing. It adds no cursor, invocation stack, or transaction token.
+Generated source already embeds serialized compiled state, so `source_emitter.rs` and generated-source contract v2
+do not change; its static plan remains exact ordered `{label,family}` rows.
+
+This amendment does not independently compile emitted source, execute a primary command, register the ignored
+consumer, promote `rust_runtime`, or widen a facade/schema/semantic/MCP/CLI/README surface. Rollout remains
+2 complete / 7 pending / 56 mutations plus ten checker-local Rust dormancy mutations; recognition remains
+137/246/58, public helpers 122, and typed source 9/5/114. `.3.4-.3.5` retain emitted proof and admission.
+
 ## Consequences
 
 - The director's original concept and target-rule ownership are durable and cannot be reassigned to

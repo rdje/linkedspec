@@ -10,6 +10,32 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-14 — INTER-MATCH-GAP-CAPTURE.3.3 — carry Rust gap generated execution
+
+- Activated task-tree-first from clean atomic-229 commit `5c4e9d50`. The ignored final consumer's combined RED
+  proved ordinary reconstructed execution already green, all three descriptor projections absent, and generated-
+  plan execution failing with exact `gap_capture_context_unavailable`.
+- Added compatible Rust descriptor metadata for declaration-order `regex_slots`, source/line-aware
+  `capture_gaps`, and separate five-field `resolved_slot_edges`. Existing semantic `resolved_edges` and legacy
+  `{label,idx}` dependency references retain their exact outward shape.
+- Kept serialized `CompiledSpec` as the single carrier. Ordinary JSON reconstruction preserves the exact slot,
+  directive, and selector values and executes current native behavior without a second state model.
+- Joined `GeneratedPlanExecutor` to the existing recognition invocation, candidate/commit/tail lifecycle, and
+  detached action-edge entry-slot authority. Capture-enabled generated rules select before `LS`, commit after
+  `LE` before `IT`, and install successful tails before terminal hooks; unflagged generated behavior is unchanged.
+- Generated source already embeds serialized compiled state, so `source_emitter.rs`, generated-source contract v2,
+  and the exact `{label,family}` static plan need no change. The expanded focused consumer compares native and
+  generated values and structured diagnostics across Unicode/empty spans, falsey results, child cursor extension,
+  nesting, rollback, terminal lifecycle, failed minimums, and direct entry.
+- This remains dormant carrier work, not Rust admission: ordinary discovery is 0 passed / 1 ignored; neutral and
+  rooted governance stay 2/7/56 plus ten Rust dormancy mutations, Perl 124, and five later-runtime skips. Emitted,
+  primary, canonical/recurring admission, outward surfaces, and later runtimes remain pending.
+- Final signoff passes the 17-owner Rust storage oracle, rendered mdBook at 79 files / 14,720 KiB, synchronized
+  Knowledge at 835 facts / 7,019 keys, all eight doctrines, six-family containment, all-five-anchor relocation,
+  CLI 66/66 in both option environments, RAM 69%, Phase 0 1,031/1,031 in 772 seconds, the exact opt-in neutral-plus-
+  Perl route with five skips, and canonical `[ci] local CI gate passed` / exit 0. The preceding sandboxed run
+  stopped only at nested-`sandbox-exec` status 71.
+
 ## 2026-08-14 — INTER-MATCH-GAP-CAPTURE.3.2 — add Rust native gap execution
 
 - Activated task-tree-first from clean atomic-228 commit `95127e1d`. Extending only the ignored final consumer

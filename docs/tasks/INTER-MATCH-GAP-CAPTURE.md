@@ -3,8 +3,8 @@
 ## Metadata
 
 - Tree ID: `INTER-MATCH-GAP-CAPTURE`
-- Status: `active` / Rust authored/static metadata `.3.1` landed cleanly as atomic 228 at `95127e1d`; private
-  invocation-local native behavior `.3.2` is signoff-complete for intended atomic 229 from that boundary
+- Status: `active` / Rust private-native `.3.2` landed cleanly as atomic 229 at `5c4e9d50`; reconstruction,
+  descriptor, and generated-plan leaf `.3.3` is signoff-complete from that boundary for intended atomic 230
 - Roadmap lane: `.spec language evolution / lossless segmentation and source preservation`
 - Created: `2026-07-17`
 - Last updated: `2026-08-14`
@@ -48,8 +48,8 @@ orchestration or to raw Perl cursor arithmetic.
 - ID: `INTER-MATCH-GAP-CAPTURE`
   Status: `active` (2026-08-14; neutral parent `.1` landed cleanly at `db299789`; Perl parent `.2` landed cleanly
     through atomic 226 at `eceb15ac`; Rust `.3.0` landed as atomic 227 at `4a95e02a`; Rust `.3.1` landed as
-    atomic 228 at `95127e1d`; Rust `.3.2` is signoff-complete for intended atomic 229 from that exact boundary;
-    `.3.3` waits for the clean landing; no push)
+    atomic 228 at `95127e1d`; Rust `.3.2` landed as atomic 229 at `5c4e9d50`; `.3.3` is signoff-complete from that
+    exact boundary for intended atomic 230; no push)
   Goal: Recover and modernize lossless inter-match gap capture without semantic drift.
   Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`
 
@@ -741,13 +741,58 @@ orchestration or to raw Perl cursor arithmetic.
     from future review. The next count increase again requires a new staged, indexed, exact old/new ADR.
 
 - ID: `INTER-MATCH-GAP-CAPTURE.3.3`
-  Status: `pending`
+  Status: `done; signoff-complete` (2026-08-14; task-tree-first from clean atomic-229 commit `5c4e9d50`;
+    intended atomic 230/300; reconstruction/descriptor/generated-plan behavior only; no emitted/primary execution
+    or rollout admission)
   Goal: Carry exact Rust gap metadata and execution through ordinary serialization, reconstruction, descriptors,
     and the governed generated-plan carrier.
-  Acceptance: reconstructed and generated-plan roles retain exact slot/source identity and typed diagnostics
-    without premature emitted/primary admission or an unjustified format change.
-  Verification: `pending`
-  Commit: `pending`
+  Depends on: `.3.2`, compiled slot/directive/selector provenance from `.3.1`, the existing serde-compatible
+    `CompiledSpec`, descriptor-state authority, generated plan v2, native gap lifecycle, and source/recognition
+    authorities.
+  Acceptance: prove clean activation and retrieve the exact Rust plan plus compiled/descriptor/generated/runtime
+    authorities before code; extend only the ignored final consumer to produce deliberate RED for ordinary
+    reconstruction, descriptor projection, and generated-plan execution; prove serialized `CompiledSpec`
+    reconstruction retains exact authored slot order, nullable stable ids, directive/source/line evidence, and
+    five-field selector provenance, then executes the already-current native behavior without a second carrier;
+    project those same fields through the existing descriptor-state model with detached values and no runtime
+    object leakage; apply candidate-before-`LS`, commit-after-`LE`, tail-before-terminal, entry-slot, rollback,
+    recursion, Unicode-scalar source, falsey-return, and typed-diagnostic behavior to the separate
+    `GeneratedPlanExecutor`; preserve generated plan v2 exactly `{label,family}`, all unflagged behavior, and the
+    one recognition/source authority; change no source emitter, independently compiled artifact, primary route,
+    ordinary/canonical/recurring consumer registration, rollout 2/7/56, facade/schema/semantic/MCP/CLI/README
+    surface, or later runtime; synchronize durable projections and pass focused Rust/neutral/recognition/source/
+    storage/book/Knowledge/doctrine/canonical signoff before atomic landing.
+
+  ### Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / OWNERSHIP** — Proved committed `5c4e9d50`, empty tracked/untracked status, zero-byte
+    brief, and passing post-commit activation pointer before this task-only edit.
+  - [x] **RETRIEVE AUTHORITY** — Queried Knowledge first and read the exact descriptor, serde reconstruction,
+    generated-plan, native lifecycle, source, recognition, consumer, and no-overclaim owners before code. The
+    established compatible projection is separate `regex_slots`, `capture_gaps`, and five-field
+    `resolved_slot_edges` metadata; legacy `resolved_edges`/`dependency_refs` stay narrow, generated plan v2 stays
+    label/family-only, and serialized `CompiledSpec` remains the single carrier.
+  - [x] **EXACT RED** — Extended only the ignored final consumer with reconstructed/descriptor/generated-plan
+    roles against clean atomic 229. Ordinary reconstructed execution already passed; the combined carrier
+    assertion then observed `null` for all three descriptor fields and
+    `LINKEDSPEC_INTER_MATCH_GAP_ERROR:gap_capture_context_unavailable` from generated-plan execution exactly as
+    expected (1 failed / 0 passed in 1.21 seconds; 345.85 seconds wall including the one-time dependency rebuild).
+  - [x] **CARRIER / EXECUTION GREEN** — Preserved compiled metadata through ordinary reconstruction, projected
+    separate slot/directive/five-field selector metadata without widening legacy edges/references, and joined the
+    separate generated-plan loop to the same frame, entry-slot, and lifecycle authority.
+  - [x] **COMPATIBILITY / NO OVERCLAIM** — Generated plan v2 remains exact `{label,family}` with no emitter change;
+    unflagged source-emitter/cursor/runtime suites pass, the consumer remains 0/1 ignored ordinarily, and neutral/
+    rooted governance remains 2/7/56 plus ten Rust dormancy mutations, Perl 124, and five skips.
+  - [x] **LOCKSTEP SIGNOFF** — Align task/roadmap/live/book/Knowledge projections and pass focused, rendered-book,
+    Knowledge, doctrine, storage, and canonical proof before atomic landing.
+  Verification: Exact combined RED failed 1/1 after 1.21 seconds of test execution: reconstructed native behavior
+    was already green, all three descriptor projections were null, and generated-plan access returned exact typed
+    unavailable context. Focused GREEN passes 1/1 in 5.96 seconds only with `--ignored --exact`; ordinary discovery
+    remains 0 passed / 1 ignored. Descriptor 4/4, runtime units 170/170, recognition 12/12, recursive observation
+    7/7, cursor 6/6, source emitter 6/6, and duplicate slot 1/1 pass. Neutral/rooted proof remains 2/7/56 plus ten
+    Rust dormancy mutations, Perl 124, and five later-runtime skips; the 17-owner Rust storage oracle passes.
+    Rendered-book, Knowledge, doctrine, and canonical results are recorded in the verification log below.
+  Commit: `INTER-MATCH-GAP-CAPTURE.3.3 - carry Rust gap generated execution` (intended atomic 230/300)
 
 - ID: `INTER-MATCH-GAP-CAPTURE.3.4`
   Status: `pending`
@@ -811,8 +856,8 @@ orchestration or to raw Perl cursor arithmetic.
 | 10 | `INTER-MATCH-GAP-CAPTURE.2.4` | `done; signoff-complete from clean 45460329` | Perl alone is admitted at gap 2/7/56; parent `.2` closes for intended atomic 226. |
 | 11 | `INTER-MATCH-GAP-CAPTURE.3.0` | `done; landed at 4a95e02a` | Exact Rust implementation/admission seams are frozen without behavior or rollout movement as atomic 227. |
 | 12 | `INTER-MATCH-GAP-CAPTURE.3.1` | `done; signoff-complete from clean 4a95e02a` | Exact Rust authored/static/compiled provenance plus dormant final-consumer governance are green without live execution or rollout movement as intended atomic 228. |
-| 13 | `INTER-MATCH-GAP-CAPTURE.3.2` | `done; signoff-complete from clean 95127e1d` | Invocation-local native Rust gap state/accessors are exact on the existing recognition authority without generated or rollout movement as intended atomic 229. |
-| 14 | `INTER-MATCH-GAP-CAPTURE.3.3` | `pending` | Carry the exact metadata/native behavior through ordinary reconstruction, descriptors, and the separate generated-plan executor after `.3.2` lands cleanly. |
+| 13 | `INTER-MATCH-GAP-CAPTURE.3.2` | `done; landed at 5c4e9d50` | Invocation-local native Rust gap state/accessors are exact on the existing recognition authority without generated or rollout movement as atomic 229. |
+| 14 | `INTER-MATCH-GAP-CAPTURE.3.3` | `done; signoff-complete from clean 5c4e9d50` | Ordinary reconstruction, compatible descriptors, and separate generated-plan parity are exact without emitted/primary/admission movement for intended atomic 230. |
 
 ## Decisions
 
@@ -1106,12 +1151,14 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
   and parent `.2` landed cleanly as atomic 226 at `eceb15ac`. Rust behavior-free preflight `.3.0` is signoff-
   complete behavior-free `.3.0` landed cleanly as atomic 227 at `4a95e02a`; authored/static `.3.1` landed cleanly
   as atomic 228 at `95127e1d` without live execution or rollout movement. Native runtime `.3.2` is signoff-
-  complete from that exact boundary; `.3.3` activates only after atomic 229 lands cleanly.
+  complete and landed at `5c4e9d50`; reconstructed/generated carrier `.3.3` is signoff-complete from that exact
+  boundary. Emitted proof `.3.4` activates only after atomic 230 lands cleanly.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-08-14` | `INTER-MATCH-GAP-CAPTURE.3.3` | Clean `5c4e9d50` activation; exact ignored-consumer carrier RED/GREEN; ordinary reconstruction; compatible descriptors; generated-plan lifecycle/entry/diagnostics; full runtime unit library; recognition, recursion, cursor, source-emitter, and duplicate-slot compatibility; neutral checker and rooted route; project-data storage; rendered mdBook; Knowledge Map; all doctrines; canonical local CI with opt-in gap route | Pass: serialized `CompiledSpec` remains the single carrier; exact slot/directive/selector metadata survives reconstruction and descriptor projection; native and generated-plan values/diagnostics agree while plan v2 and the emitter stay unchanged. Ordinary discovery remains 0/1 ignored; gap remains 2/7/56 plus ten Rust dormancy mutations; recognition 137/246/58, typed source 9/5/114, emitted/primary/admission roles, and outward surfaces remain unchanged. The focused test is 1/1 in 5.96 seconds; descriptor 4/4, runtime 170/170, recognition 12/12, recursion 7/7, cursor 6/6, emitter 6/6, duplicate slot 1/1, the 17-owner storage oracle, rendered book 79/14,720 KiB, Knowledge 835/7,019, and all eight doctrines pass. The sandboxed canonical run stopped only at the outer harness's nested-`sandbox-exec` status 71; the unchanged elevated run passes six-family containment, all-five-anchor relocation, CLI 66/66 twice, RAM 69%, Phase 0 1,031/1,031 in 772 seconds, exact neutral-plus-Perl routing with five skips, `[ci] local CI gate passed`, and exit 0. |
 | `2026-08-14` | `INTER-MATCH-GAP-CAPTURE.3.2` | Clean `95127e1d` activation; exact ignored-consumer RED/GREEN; native state/lifecycle/accessors; private gap units; full runtime unit library; recognition, recursion, cursor, and duplicate-slot compatibility; neutral checker and rooted route; project-data storage; rendered mdBook; Knowledge Map; all doctrines; canonical local CI with opt-in gap route | Pass: exact private native candidate/commit/tail behavior, Unicode/empty gaps, detached slots, rollback/nesting, lifecycle, and typed failures are green while ordinary discovery remains 0/1 ignored. Gap remains 2/7/56 plus ten Rust dormancy mutations; recognition 137/246/58, typed source 9/5/114, generated plan v2, reconstructed/generated/emitted/primary roles, recurring/facade routes, and outward surfaces remain unchanged. Rendered book is 79 files / 14,708 KiB, Knowledge is 835 facts / 7,016 keys, the 17-owner Rust storage oracle and all eight doctrines pass. The sandboxed canonical run stopped only at the outer harness's nested-`sandbox-exec` status 71; the unchanged authorized run passes containment/relocation, CLI 66/66 twice, RAM 49%, Phase 0 1,031/1,031 in 735 seconds, exact neutral-plus-Perl routing with five skips, `[ci] local CI gate passed`, and exit 0. |
 | `2026-08-14` | `INTER-MATCH-GAP-CAPTURE.3.1` | Clean `4a95e02a` activation; exact consumer RED/GREEN; parser/AST/validation/compiler/serde/descriptor compatibility; full core; 105-source generated manifest; source emitter and rule-local cursor; Unicode and duplicate slot; neutral checker plus ten Rust dormancy mutations; recognition, typed source, project-data storage; rendered mdBook; Knowledge Map; all doctrines; canonical local CI with opt-in gap route | Pass: Rust authored declarations/selectors/directive and compiled provenance are exact while the final consumer is ignored in ordinary package execution and runnable only through focused `--ignored --exact`. Anonymous `/=/` priority and undefined-target precedence have permanent guards. Gap remains 2/7/56; recognition 137/246/58, typed source 9/5/114, duplicate slot 7/0/59, generated plan v2, descriptors, runtime/facade/recurring routes, and outward surfaces remain unchanged. Rendered book is 79/14,704 KiB, Knowledge is 835/7,013, and all eight doctrines pass. The sandboxed canonical attempt stopped only at nested-`sandbox-exec` status 71; the unchanged authorized run passes containment/relocation, CLI 66/66 twice, RAM 55%, Phase 0 1,031/1,031, exact neutral-plus-Perl routing with five skips, `[ci] local CI gate passed`, and exit 0. |
 | `2026-08-14` | `INTER-MATCH-GAP-CAPTURE.3.0` | Clean `eceb15ac` activation; Knowledge-first authority retrieval; exact neutral/rooted route; primary-process baseline probes; parser/AST/compiler/runtime/carrier/emitter/primary source audit; focused duplicate-slot test; recognition, typed-source, storage, rendered mdBook, Knowledge Map, all eight doctrines; permission-authorized canonical local CI with the opt-in gap route | Pass: exact baseline is gap 2/7/56, ordinary/rooted Perl 124, five later-runtime skips, recognition 137/246/58, public helpers 122, typed source 9/5/114, and duplicate slot 7/0/59. The Rust focused test passes 1/1 in 17.61 seconds. The dependency-complete `.3.1-.3.5` plan preserves generated plan v2, one recognition authority, all outward guards, and every rollout row. Rendered book is 79 files / 14,704 KiB, Knowledge is 835/7,009, and all eight doctrines pass. The sandboxed canonical run reached only the outer harness's nested-`sandbox-exec` status 71; the unchanged authorized run passes containment/relocation, CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 741 seconds, exact neutral-plus-Perl routing, `[ci] local CI gate passed`, and exit 0. No Rust behavior or rollout moved. |
@@ -1129,7 +1176,7 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `INTER-MATCH-GAP-CAPTURE.3.2` | `INTER-MATCH-GAP-CAPTURE.3.2 - add Rust native gap execution` | Signoff-complete for intended atomic 229/300 from `95127e1d`; Rust remains generated/admission-pending at 2/7/56; no push. |
+| `INTER-MATCH-GAP-CAPTURE.3.2` | `5c4e9d50` — `INTER-MATCH-GAP-CAPTURE.3.2 - add Rust native gap execution` | Private native gap execution landed cleanly as atomic 229/300; Rust remains generated/admission-pending at 2/7/56; no push. |
 | `INTER-MATCH-GAP-CAPTURE.3.1` | `INTER-MATCH-GAP-CAPTURE.3.1 - add Rust authored gap metadata` | Signoff-complete for intended atomic 228/300 from `4a95e02a`; Rust remains runtime-pending at 2/7/56; no push. |
 | `INTER-MATCH-GAP-CAPTURE.3.0` | `4a95e02a` — `INTER-MATCH-GAP-CAPTURE.3.0 - freeze Rust gap implementation plan` | Behavior-free freeze landed cleanly as atomic 227/300 from `eceb15ac`; no push. |
 | `INTER-MATCH-GAP-CAPTURE.2.4` | `INTER-MATCH-GAP-CAPTURE.2.4 - admit Perl inter-match gap capture` | Signoff-complete Perl-parent closeout for intended atomic 226/300 from `45460329`; no push. |
@@ -1144,6 +1191,12 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
 
 ## Changelog
 
+- `2026-08-14`: Completed `.3.3` implementation and signoff from clean `5c4e9d50`. Ordinary reconstruction,
+  separate compatible descriptor metadata, and generated-plan gap parity are exact; focused proof is 1/1 while
+  ordinary discovery remains 0/1 ignored and rollout remains 2/7/56. The 17-owner storage oracle, rendered book
+  79/14,720 KiB, Knowledge 835/7,019, all eight doctrines, containment/relocation, CLI 66x2, RAM 69%, Phase 0
+  1,031/1,031 in 772 seconds, exact opt-in routing, and local-CI exit 0 pass. Only commit/brief/clean proof remains
+  before `.3.4`.
 - `2026-08-14`: Completed `.3.2` implementation from clean `95127e1d`. The existing recognition authority now
   owns exact private native gap state, accessors, entry identity, lifecycle, rollback, and nested isolation;
   focused ignored proof is 1/1, ordinary discovery remains 0/1 ignored, runtime units are 170/170, and dependent

@@ -617,12 +617,13 @@ Definitive `.2.4` and parent `.2` signoff also passes the rendered mdBook, Knowl
 doctrines, containment/relocation, CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 765 seconds, the exact
 neutral-plus-Perl route with five later-runtime skips, and local-CI exit 0. Atomic 226 landed at `eceb15ac`.
 
-### Rust private native execution — implemented, admission still dormant
+### Rust private native and generated-plan carriers — implemented, admission still dormant
 
 Rust `.3.0` froze the behavior-free implementation map from that clean boundary. Its process-level probes recorded
 the prior baseline: only numeric `Rule[N]` worked, while named declarations/selectors, `@capture_gaps`,
 `entry_slot()`, and the three gap accessors were absent. `.3.1` has since implemented authored/static/compiled
-metadata, and `.3.2` has implemented the private native execution layer described below.
+metadata, `.3.2` has implemented private native execution, and `.3.3` has carried that exact state through
+ordinary reconstruction, descriptors, and the separate generated-plan executor.
 
 The implementation is dependency-split before any behavior moves:
 
@@ -630,7 +631,7 @@ The implementation is dependency-split before any behavior moves:
    diagnostics, directive eligibility, compiled slot rows, and five-field resolved edge provenance.
 2. `.3.2` attaches native gap state and detached entry-slot identity to Rust's existing recognition invocation and
    checkpoint snapshot. It adds no second cursor, token family, or invocation stack.
-3. `.3.3` proves ordinary reconstruction and descriptors, then applies the same lifecycle in the separate
+3. `.3.3` now proves ordinary reconstruction and descriptors, then applies the same lifecycle in the separate
    generated-plan executor. Generated plan v2 remains exactly `{label,family}`.
 4. `.3.4` independently compiles emitted Rust source offline in a repository-derived scratch/target workspace.
 5. `.3.5` composes the nine exact Rust roles, primary command, recurring/canonical registration, and Rust-only
@@ -658,22 +659,36 @@ LS-before-selection order. Gap spans cross the existing source authority and the
 scalar half-open offsets rather than byte offsets; nested invocations isolate state and recognition rollback
 restores the same three-member gap snapshot.
 
-This is still **not Rust runtime admission**. Descriptor projection and generated-plan execution remain `.3.3`;
-emitted and primary execution remain `.3.4-.3.5`; and the final consumer stays explicitly ignored until `.3.5`.
-Ordinary package testing reports 0 passed / 1 ignored, while focused native proof uses `--ignored --exact`. The
-neutral checker retains the same behavior-free JSON, rollout 2 complete / 7 pending, 56 semantic/governance
-mutations, and ten local Rust dormancy mutations.
+Carrier leaf `.3.3` keeps serialized `CompiledSpec` as the single source of runtime truth. An ordinary JSON
+round trip preserves declaration-order slot rows, nullable stable ids, directive source/line evidence, and exact
+selector provenance, then executes the same native result. Descriptor rule metadata now publishes separate
+`regex_slots`, `capture_gaps`, and five-field `resolved_slot_edges` values. Existing five-field semantic
+`resolved_edges` and legacy `{label,idx}` dependency references stay byte-shape compatible.
+
+The generated-plan executor reads capture activation from that reconstructed compiled payload, enters the same
+recognition frame, propagates detached entry-slot identity, and uses candidate-before-`LS`, commit-after-`LE`, and
+tail-before-terminal timing. The focused consumer compares native and generated-plan values and diagnostics over
+Unicode and empty gaps, falsey returns, child-extended cursors, nested owners, rollback, lifecycle terminals,
+failed minimums, and direct entry. `source_emitter.rs` needs no new carrier: generated source already embeds the
+serialized compiled payload, while its static plan remains exact v2 `{label,family}`.
+
+This is still **not Rust runtime admission**. Independently compiled emitted and primary execution remain
+`.3.4-.3.5`, and the final consumer stays explicitly ignored until `.3.5`. Ordinary package testing reports
+0 passed / 1 ignored, while focused carrier proof uses `--ignored --exact`. The neutral checker retains the same
+behavior-free JSON, rollout 2 complete / 7 pending, 56 semantic/governance mutations, and ten local Rust dormancy
+mutations.
 
 Pinned identity is important here: the installed Perl reports Unicode 13, so `.2.1` generates a private
 806-range classifier from the repository's Unicode 17 ranges rather than trusting the host `XID_Continue` table.
 Gap checkpoint state is indexed by existing recognition tokens on the same invocation guard; the established
 cursor/boundary/marks transaction schema remains unchanged.
 
-The four accessor nodes raise the recognition-effect census from 133 to 137, but remain private Perl behavior on
-both live and generated paths: the
-246 shared call inventory, 122 public-helper inventory, and typed-source 9-complete/5-pending/114-mutation contract
-do not move. Current truth is recognition 137/246/58 and gap rollout 2 complete / 7 pending / 56 mutations. Exact
-registration checks replace the retired dormancy fence.
+The four accessor nodes raise the recognition-effect census from 133 to 137 and remain private behavior. Perl
+executes them on live and generated paths; Rust now executes them on native, reconstructed, and generated-plan
+paths. The 246 shared call inventory, 122 public-helper inventory, and typed-source
+9-complete/5-pending/114-mutation contract do not move. Current truth is recognition 137/246/58 and gap rollout
+2 complete / 7 pending / 56 mutations. Exact registration checks replace the retired Perl dormancy fence while
+the Rust final consumer retains its `.3.5` ignore guard.
 
 Named slot rules are exact:
 
@@ -684,6 +699,14 @@ Named slot rules are exact:
   within its owning rule.
 - `Rule`, `Rule[N]`, and `Rule[name]` are the only selectors. The compiled edge retains the authored selector kind,
   authored selector, target rule, resolved index, and nullable stable slot id.
+
+This makes heterogeneous lists a natural use case. The referenced regex slot recognizes each item while the
+enclosing seek loop preserves whatever appeared between accepted items. For input
+`alpha, beta | gamma\n- delta`, an item regex can match `alpha`, `beta`, `gamma`, and `delta`; the corresponding
+interstitial `gap_text()` values are `", "`, `" | "`, and `"\n- "`. The parser can therefore retain exact commas,
+bars, bullets, whitespace, or mixed separators for reconstruction, or normalize them later. The gap mechanism
+does not accept arbitrary items: each next item still has to match its declared target slot, and only an accepted
+edge commits the candidate.
 
 For example, this is current Perl authored/static syntax:
 

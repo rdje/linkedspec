@@ -1,9 +1,9 @@
-//! INTER-MATCH-GAP-CAPTURE.3.1 — dormant Rust authored/static metadata stage.
+//! INTER-MATCH-GAP-CAPTURE.3.1-.3.3 — dormant Rust carrier stage.
 //!
-//! This final consumer path deliberately proves only parsing, validation,
-//! compiled provenance, and serde reconstruction in this leaf. Native gap
-//! state, generated execution, emitted source, primary routing, and admission
-//! remain owned by `.3.2-.3.5`.
+//! This final consumer path now proves authored/static metadata, native
+//! execution, ordinary reconstruction, descriptor projection, and the separate
+//! generated-plan executor. Emitted source, primary routing, and admission
+//! remain owned by `.3.4-.3.5`.
 
 use linkedspec_core::compiler::compile;
 use linkedspec_core::error::{LinkedSpecError, PortableDiagnostic};
@@ -11,6 +11,10 @@ use linkedspec_core::parser::parse_spec;
 use linkedspec_core::types::{CompiledSpec, RegexSelectorKind};
 use linkedspec_core::validation::validate;
 use linkedspec_runtime::engine::{Engine, ExecutionOptions};
+use linkedspec_runtime::source_emitter::{
+    GeneratedRuleSpec, classify_generated_rule_family, emit_rust_source_v2,
+};
+use linkedspec_runtime::{RuntimeDiagnosticOutputExecutionError, RuntimeExecutionError};
 use serde_json::{Value, json};
 
 const CONTRACT_SOURCE: &str =
@@ -35,10 +39,53 @@ fn diagnostic(source: &str) -> PortableDiagnostic {
         .clone()
 }
 
-fn native_value(source: &str, input: &str) -> Value {
-    Engine::new(compile_metadata(source).expect("compile native gap fixture"))
+fn native_and_generated_value(source: &str, input: &str) -> Value {
+    let native = Engine::new(compile_metadata(source).expect("compile native gap fixture"))
         .execute_value(input, &ExecutionOptions::new())
-        .unwrap_or_else(|error| panic!("execute native gap fixture: {error}"))
+        .unwrap_or_else(|error| panic!("execute native gap fixture: {error}"));
+    let generated = generated_value(source, input)
+        .unwrap_or_else(|error| panic!("execute generated-plan gap fixture: {error}"));
+    assert_eq!(generated, native, "native/generated-plan value parity");
+    native
+}
+
+fn generated_plan(compiled: &CompiledSpec) -> Vec<GeneratedRuleSpec> {
+    compiled
+        .rules
+        .iter()
+        .map(|rule| GeneratedRuleSpec {
+            label: match rule.label.as_str() {
+                "Top" => "Top",
+                "Part" => "Part",
+                "Container" => "Container",
+                "Close" => "Close",
+                "Bang" => "Bang",
+                "Atom" => "Atom",
+                "Probe" => "Probe",
+                "Direct" => "Direct",
+                label => panic!("fixture rule needs a stable generated label: {label}"),
+            },
+            family: classify_generated_rule_family(rule),
+        })
+        .collect()
+}
+
+fn generated_value(source: &str, input: &str) -> Result<Value, String> {
+    let compiled = compile_metadata(source).expect("compile generated-plan gap fixture");
+    let plan = generated_plan(&compiled);
+    Engine::new(compiled).execute_generated_value_with_plan(&plan, input)
+}
+
+fn generated_runtime_error(source: &str, input: &str) -> RuntimeExecutionError {
+    let compiled = compile_metadata(source).expect("compile generated-plan diagnostic fixture");
+    let plan = generated_plan(&compiled);
+    match Engine::new(compiled)
+        .execute_generated_value_with_plan_with_diagnostic_output(&plan, input, None)
+        .expect_err("generated-plan diagnostic fixture must fail")
+    {
+        RuntimeDiagnosticOutputExecutionError::Runtime(error) => error,
+        error => panic!("expected generated runtime diagnostic, got {error}"),
+    }
 }
 
 fn rule<'a>(compiled: &'a Value, label: &str) -> &'a Value {
@@ -206,14 +253,15 @@ fn authored_static_compiled_metadata_stage() {
     );
     assert_eq!(located_diagnostic.field("line"), Some(&json!(2)));
 
-    let descriptor = compiled
-        .to_descriptor_json()
-        .expect("project deliberately legacy-shaped descriptor");
-    assert!(
-        descriptor["spec"]["Top"]["meta"]["resolved_edges"][0]
-            .get("selector_kind")
-            .is_none(),
-        "descriptor projection remains owned by INTER-MATCH-GAP-CAPTURE.3.3",
+    let descriptor = compiled.to_descriptor_json().expect("project descriptor");
+    assert_eq!(
+        descriptor["spec"]["Top"]["meta"]["resolved_edges"],
+        json!([
+            {"ownership":"action", "target":"Part", "regex_index":0, "block":true, "fluent":null},
+            {"ownership":"action", "target":"Part", "regex_index":0, "block":true, "fluent":null},
+            {"ownership":"action", "target":"Part", "regex_index":0, "block":true, "fluent":null}
+        ]),
+        "the legacy five-field resolved-edge projection remains unchanged",
     );
     assert_eq!(
         descriptor["spec"]["Top"]["dependency_refs"],
@@ -231,6 +279,65 @@ fn authored_static_compiled_metadata_stage() {
         compiled_json,
         "ordinary serde reconstruction must preserve authored provenance",
     );
+
+    let carrier_source = concat!(
+        "Top::\n",
+        " I { gaps = [] }\n",
+        " @capture_gaps\n",
+        " -> Part[head] { push(gaps, array(gap_kind(), gap_text())) }\n",
+        " LX { push(gaps, array(gap_kind(), gap_text())); return(copy(gaps)) }\n",
+        "Part:\n",
+        " head=/H/\n",
+        " I.return(entry_text())\n",
+    );
+    let carrier = compile_metadata(carrier_source).expect("compile reconstruction carrier");
+    let carrier_json = serde_json::to_value(&carrier).expect("serialize reconstruction carrier");
+    let reconstructed: CompiledSpec =
+        serde_json::from_value(carrier_json).expect("reconstruct executable carrier");
+    assert_eq!(
+        Engine::new(reconstructed)
+            .execute_value("αHω", &ExecutionOptions::new())
+            .expect("execute reconstructed carrier"),
+        json!([["prefix", "α"], ["tail", "ω"]]),
+        "ordinary reconstructed CompiledSpec executes native gap semantics",
+    );
+
+    let generated = generated_value(carrier_source, "αHω")
+        .map_err(|error| json!({"error": error}))
+        .unwrap_or_else(|error| error);
+    assert_eq!(
+        json!({
+            "regex_slots": descriptor["spec"]["Part"]["meta"]["regex_slots"],
+            "capture_gaps": descriptor["spec"]["Top"]["meta"]["capture_gaps"],
+            "resolved_slot_edges": descriptor["spec"]["Top"]["meta"]["resolved_slot_edges"],
+            "generated_plan": generated,
+        }),
+        json!({
+            "regex_slots": [
+                {"regex_index":0, "slot_id":"head", "source_id":"inline", "line":7},
+                {"regex_index":1, "slot_id":null, "source_id":"inline", "line":8},
+                {"regex_index":2, "slot_id":"foot", "source_id":"inline", "line":9},
+                {"regex_index":3, "slot_id":"é́", "source_id":"inline", "line":10}
+            ],
+            "capture_gaps": {
+                "enabled":true, "directive":"@capture_gaps", "source_id":"inline", "line":2
+            },
+            "resolved_slot_edges": [
+                {"selector_kind":"named", "authored_selector":"head", "target_rule":"Part", "regex_index":0, "target_slot_id":"head"},
+                {"selector_kind":"numeric", "authored_selector":0, "target_rule":"Part", "regex_index":0, "target_slot_id":"head"},
+                {"selector_kind":"unindexed", "authored_selector":null, "target_rule":"Part", "regex_index":0, "target_slot_id":"head"}
+            ],
+            "generated_plan": [["prefix", "α"], ["tail", "ω"]],
+        }),
+        "descriptor and generated-plan carriers must expose the current compiled gap contract",
+    );
+
+    let emitted = emit_rust_source_v2(&carrier, "gap-generated-plan-v2.spec")
+        .expect("emit unchanged generated-source v2 carrier");
+    assert!(emitted.contains("linkedspec-generated-source-v2"));
+    assert!(emitted.contains("LINKEDSPEC_GENERATED_SOURCE_FORMAT: u32 = 2"));
+    assert!(!emitted.contains("capture_gaps:"));
+    assert!(!emitted.contains("regex_slots:"));
 
     let mut legacy = serde_json::to_value(
         compile_metadata("Top::\n -> Part[0]\nPart:\n /H/\n")
@@ -378,7 +485,7 @@ fn authored_static_compiled_metadata_stage() {
     );
 
     assert_eq!(
-        native_value(
+        native_and_generated_value(
             r#"Top::
  @capture_gaps
  -> Part { return("unexpected") }
@@ -405,7 +512,7 @@ Part:
  I { return(hash("slot", entry_slot(), "text", entry_text(), "falsey", 0)) }
 "#;
     assert_eq!(
-        native_value(unicode_source, "αHβ\nS🙂Fω"),
+        native_and_generated_value(unicode_source, "αHβ\nS🙂Fω"),
         json!([
             {
                 "kind":"prefix", "text":"α",
@@ -428,7 +535,7 @@ Part:
     );
 
     assert_eq!(
-        native_value(
+        native_and_generated_value(
             r#"Top::
  I { gaps = [] }
  @capture_gaps
@@ -454,7 +561,7 @@ Part:
     );
 
     assert_eq!(
-        native_value(
+        native_and_generated_value(
             r#"Top::
  I { gaps = [] }
  @capture_gaps
@@ -478,7 +585,7 @@ Bang:
     );
 
     assert_eq!(
-        native_value(
+        native_and_generated_value(
             r#"Top::
  @capture_gaps
  -> Container[open] { return(array(gap_text(), call(Container), gap_text())) }
@@ -499,7 +606,7 @@ Atom:
     );
 
     assert_eq!(
-        native_value(
+        native_and_generated_value(
             r#"Top::
  I { gaps = [] }
  @capture_gaps
@@ -571,12 +678,12 @@ Part: /H/
         ),
     ];
     for (source, input, expected) in terminal_cases {
-        assert_eq!(native_value(source, input), expected);
+        assert_eq!(native_and_generated_value(source, input), expected);
     }
 
+    let unavailable_source = "Direct::\n /H/\n I { return(gap_text()) }\n";
     let unavailable = Engine::new(
-        compile_metadata("Direct::\n /H/\n I { return(gap_text()) }\n")
-            .expect("compile unavailable-context fixture"),
+        compile_metadata(unavailable_source).expect("compile unavailable-context fixture"),
     )
     .execute_value_with_diagnostics("H", &ExecutionOptions::new())
     .expect_err("gap access without a candidate must fail");
@@ -589,25 +696,27 @@ Part: /H/
         Some("gap_capture_context_unavailable"),
     );
     assert_eq!(unavailable.diagnostic.stage, "access_gap_context");
+    let generated_unavailable = generated_runtime_error(unavailable_source, "H");
+    assert_eq!(generated_unavailable.message, unavailable.message);
+    assert_eq!(generated_unavailable.diagnostic, unavailable.diagnostic);
 
-    let post_commit = Engine::new(
-        compile_metadata(
-            "Top::OR{1}\n @capture_gaps\n -> Part { return(0) }\n IT { return(gap_kind()) }\nPart: /H/\n",
-        )
-        .expect("compile post-commit IT fixture"),
-    )
-    .execute_value_with_diagnostics("H", &ExecutionOptions::new())
-    .expect_err("IT must not retain the committed candidate");
+    let post_commit_source = "Top::OR{1}\n @capture_gaps\n -> Part { return(0) }\n IT { return(gap_kind()) }\nPart: /H/\n";
+    let post_commit =
+        Engine::new(compile_metadata(post_commit_source).expect("compile post-commit IT fixture"))
+            .execute_value_with_diagnostics("H", &ExecutionOptions::new())
+            .expect_err("IT must not retain the committed candidate");
     assert_eq!(
         post_commit.diagnostic.code.as_deref(),
         Some("gap_capture_context_unavailable"),
     );
+    let generated_post_commit = generated_runtime_error(post_commit_source, "H");
+    assert_eq!(generated_post_commit.message, post_commit.message);
+    assert_eq!(generated_post_commit.diagnostic, post_commit.diagnostic);
 
+    let regression_source =
+        "Top::OR{1}\n @capture_gaps\n -> Part { rewind_match_start() }\nPart: /H/\n";
     let regression = Engine::new(
-        compile_metadata(
-            "Top::OR{1}\n @capture_gaps\n -> Part { rewind_match_start() }\nPart: /H/\n",
-        )
-        .expect("compile cursor-regression fixture"),
+        compile_metadata(regression_source).expect("compile cursor-regression fixture"),
     )
     .execute_value_with_diagnostics("aH", &ExecutionOptions::new())
     .expect_err("gap commit must reject cursor regression");
@@ -619,9 +728,12 @@ Part: /H/
         regression.diagnostic.code.as_deref(),
         Some("source_location_cursor_regression"),
     );
+    let generated_regression = generated_runtime_error(regression_source, "aH");
+    assert_eq!(generated_regression.message, regression.message);
+    assert_eq!(generated_regression.diagnostic, regression.diagnostic);
 
     assert_eq!(
-        native_value(
+        native_and_generated_value(
             "Top::OR{2}\n @capture_gaps\n -> Part { return(gap_text()) }\n EX { return(\"unexpected-ex\") }\n E { return(\"unexpected-e\") }\nPart: /H/\n",
             "H",
         ),
@@ -630,7 +742,7 @@ Part: /H/
     );
 
     assert_eq!(
-        native_value("Part::\n /H/\n I { return(entry_slot()) }\n", "H"),
+        native_and_generated_value("Part::\n /H/\n I { return(entry_slot()) }\n", "H"),
         Value::Null,
         "direct entry has no action-edge slot identity",
     );

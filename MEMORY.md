@@ -4,19 +4,22 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `95127e1d` — clean atomic-228 base for Rust private native gap execution `.3.2`; no push.
-- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.3.2 - add Rust native gap execution`; signoff-complete for
-  intended atomic 229/300 from `95127e1d`; no generated/emitted/primary execution, admission, or rollout movement.
-- active_work_unit: none in the intended post-landing handoff; `.3.3` is not activated inside `.3.2`.
-- next_action: prove the atomic-229 commit, zero-byte brief, and clean tree, then activate `.3.3` task-tree-first.
-- in_flight_uncommitted: none in the intended post-landing handoff; no background job remains.
+- activation_commit: `5c4e9d50` — clean atomic-229 base for Rust reconstruction/descriptor/generated-plan `.3.3`; no push.
+- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.3.3 - carry Rust gap generated execution`; signoff-complete for
+  intended atomic 230/300 from `5c4e9d50`; no emitted/primary execution, admission, or rollout movement.
+- active_work_unit: `INTER-MATCH-GAP-CAPTURE.3.3` — implementation and all signoff gates are green at the atomic
+  commit boundary; `.3.4` is not active while the tree is dirty.
+- next_action: land intended atomic 230, clear the brief, prove the post-commit pointer and clean tree, then
+  activate emitted-source proof `.3.4` only from the clean result.
+- in_flight_uncommitted: signoff-complete `.3.3` code, final ignored-consumer staging, and synchronized durable
+  projections awaiting the atomic commit; no background job.
 - blockers: none. Rust now has exact authored/static/compiled metadata plus private native invocation-local gap
-  candidate/commit/tail state, Unicode accessors, detached slots, rollback, and nested isolation on the existing
-  recognition authority. The final consumer remains explicitly ignored until `.3.5`; descriptors, reconstruction,
-  generated/emitted/primary execution, canonical/recurring execution, and facades remain pending. Gap stays
-  2/7/56 plus ten reason-checked Rust dormancy mutations; recognition 137/246/58, public helpers 122, typed source
-  9/5/114, duplicate-slot 7/0/59, and generated plan v2 remain unchanged. Final canonical metrics are recorded in
-  the owning task leaf and live status.
+  candidate/commit/tail state, Unicode accessors, detached slots, rollback, nested isolation, ordinary
+  reconstruction, compatible descriptor projection, and generated-plan parity on the existing recognition/
+  compiled-state authority. The final consumer remains explicitly ignored until `.3.5`; independently compiled
+  emitted/primary execution, canonical/recurring execution, and facades remain pending. Gap stays 2/7/56 plus ten
+  reason-checked Rust dormancy mutations; recognition 137/246/58, public helpers 122, typed source 9/5/114,
+  duplicate-slot 7/0/59, and generated plan v2 remain unchanged.
 - session_refresh_cadence: proactively recommend `/clear` after at most three completed commits, sooner after a
   large/debug-heavy slice or context compaction, and only at a committed clean handoff boundary.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -48,8 +51,8 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   separate, linear tokens, 9 allowed/11 rejected effects, invocation-framed marks, and cursor-only v1 progress.
   Exact recurrence/public composition is current at rollout 9/9 and 58 mutations; public 3/26/45; guide 1/14/18.
 - current_future_direction: gap rollout is 2/7/56 with private Perl admitted and Rust authored/static/compiled
-  metadata plus private native execution implemented. Rust `.3.3-.3.5` retain generated/emitted/admission ownership; the ignored consumer,
+  metadata plus private native/reconstructed/generated-plan execution implemented. Rust `.3.4-.3.5` retain emitted/admission ownership; the ignored consumer,
   later runtimes, and both public rows remain pending.
   Brackets select; dot fluently binds; `.14.5.1` waits for `.7`.
-- latest_bootstrap_read: 2026-08-14 — complete roadmap/codebase/mdBook and continuity/tooling review; `.3.2` is
-  task-tree-first from clean atomic 228 at `95127e1d`; push lock is 300.
+- latest_bootstrap_read: 2026-08-14 — complete roadmap/codebase/mdBook and continuity/tooling review; `.3.3` is
+  task-tree-first from clean atomic 229 at `5c4e9d50`; push lock is 300.

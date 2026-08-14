@@ -12,7 +12,10 @@ use serde_json::Value;
 use crate::ast::{RuleMode, SourceSpan};
 use crate::compiler::REGEX_SLOT_IDENTITY_CONTRACT;
 use crate::entry_rule::ENTRY_RULE_CONTRACT_ID;
-use crate::types::{CompiledRule, CompiledSpec, DependencyRef, ParseMode};
+use crate::types::{
+    AuthoredRegexSelector, CaptureGapsDirective, CompiledRule, CompiledSpec, DependencyRef,
+    ParseMode, RegexSelectorKind, RegexSlot,
+};
 
 /// Public compiled descriptor returned to Rust tooling.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -57,6 +60,12 @@ pub struct CompiledRuleDescriptorMeta {
     pub cursor_policy: ParseMode,
     pub edge_ownership: String,
     pub resolved_edges: Vec<CompiledResolvedEdgeDescriptor>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub regex_slots: Vec<RegexSlot>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub capture_gaps: Option<CaptureGapsDirective>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub resolved_slot_edges: Vec<CompiledResolvedSlotEdgeDescriptor>,
     pub mode: CompiledRuleModeMetadata,
 }
 
@@ -68,6 +77,20 @@ pub struct CompiledResolvedEdgeDescriptor {
     pub regex_index: Option<usize>,
     pub block: bool,
     pub fluent: Option<String>,
+}
+
+/// Stable selector and resolved target-slot provenance for one action edge.
+///
+/// This remains separate from [`CompiledResolvedEdgeDescriptor`] so the
+/// established five-field semantic-edge projection and legacy dependency
+/// references retain their exact outward shape.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct CompiledResolvedSlotEdgeDescriptor {
+    pub selector_kind: RegexSelectorKind,
+    pub authored_selector: Option<AuthoredRegexSelector>,
+    pub target_rule: String,
+    pub regex_index: usize,
+    pub target_slot_id: Option<String>,
 }
 
 /// Stable rule-mode projection shared with the other native variants.
@@ -275,6 +298,9 @@ fn project_rule(rule: &CompiledRule) -> CompiledRuleDescriptor {
             cursor_policy: rule.cursor_policy(),
             edge_ownership: edge_ownership(rule).to_string(),
             resolved_edges: resolved_edges(rule),
+            regex_slots: rule.regex_slots.clone(),
+            capture_gaps: rule.capture_gaps.clone(),
+            resolved_slot_edges: resolved_slot_edges(rule),
             mode: CompiledRuleModeMetadata {
                 name: rule_mode_name(&rule.mode).to_string(),
                 is_top: rule.is_top,
@@ -324,6 +350,19 @@ fn resolved_edges(rule: &CompiledRule) -> Vec<CompiledResolvedEdgeDescriptor> {
                     fluent: project_fluent(&entry.fluent_chain),
                 }),
         )
+        .collect()
+}
+
+fn resolved_slot_edges(rule: &CompiledRule) -> Vec<CompiledResolvedSlotEdgeDescriptor> {
+    rule.acode_dispatch
+        .iter()
+        .map(|entry| CompiledResolvedSlotEdgeDescriptor {
+            selector_kind: entry.selector_kind.clone(),
+            authored_selector: entry.authored_selector.clone(),
+            target_rule: entry.child_label.clone(),
+            regex_index: entry.child_regex_idx,
+            target_slot_id: entry.target_slot_id.clone(),
+        })
         .collect()
 }
 

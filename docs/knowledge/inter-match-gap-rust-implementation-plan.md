@@ -18,15 +18,18 @@ answers:
   - "where are Rust gap candidate commit and tail lifecycle hooks inserted"
   - "how does entry_slot reach a Rust action edge target"
   - "does Rust gap capture change generated plan v2"
+  - "which Rust descriptor fields expose regex slots capture gaps and resolved slot edges"
+  - "is Rust inter match gap generated plan execution implemented"
   - "how does emitted Rust gap proof keep project data on the repository volume"
   - "which Rust inter match gap roles are required"
   - "which leaf admits the Rust inter match gap consumer"
   - "does Rust gap admission change recognition 137 246 58"
   - "what does Rust gap admission change in the rollout mutation ledger"
+  - "how can inter match gap capture preserve lists with mixed separators"
 date: 2026-08-14
-status: Rust authored/static/compiled metadata .3.1 and private native execution .3.2 are signoff-complete for intended atomic 229; generated and admitted runtime remain pending
+status: Rust authored/static/compiled metadata .3.1, private native execution .3.2, and reconstructed/descriptor/generated-plan carrier .3.3 are implemented; emitted proof and admission remain pending
 tags: [capture, segmentation, rust, parser, lifecycle, transaction, generated-source, emitted-source, admission]
-evidence: "INTER-MATCH-GAP-CAPTURE.3.2 starts from clean atomic-228 commit 95127e1d. The ignored final consumer first fails on unknown gap_kind/gap_text helpers, then passes 1/1 after the existing recognition invocation gains immutable gap identity plus exactly three checkpointed mutable members, native candidate-before-LS/commit-after-LE/tail lifecycle, detached entry slots, Unicode-scalar source reads, nested isolation, rollback, and typed context/cursor errors. Runtime units pass 170/170, private gap units 3/3, recognition 12/12, recursive observation 7/7, cursor 6+3, and duplicate slot 1/1. Ordinary package execution remains 0/1 ignored; neutral governance remains 2/7/56 plus 10 Rust dormancy mutations; generated/reconstructed/emitted/primary execution and every outward surface remain pending. Final signoff passes rendered book 79/14,708 KiB, Knowledge 835/7,016, all eight doctrines, the 17-owner Rust storage oracle, containment/relocation, CLI 66/66 twice, RAM 49%, and Phase 0 1,031/1,031 in 735 seconds through local-CI exit 0."
+evidence: "INTER-MATCH-GAP-CAPTURE.3.3 starts from clean atomic-229 commit 5c4e9d50. The ignored final consumer's combined RED proved ordinary reconstructed execution already green, all three descriptor projections null, and generated-plan execution failing with exact gap_capture_context_unavailable. It now passes 1/1 in 5.96 seconds after descriptor.rs projects separate slot/directive/five-field edge values and GeneratedPlanExecutor joins the existing gap frame, lifecycle, and detached entry-slot carrier without changing plan v2. Descriptor tests pass 4/4; runtime units 170/170, recognition 12/12, recursive observation 7/7, cursor 6/6, source emitter 6/6, and duplicate slot 1/1 remain green. Ordinary package execution remains 0/1 ignored; neutral governance remains 2/7/56 plus 10 Rust dormancy mutations; rooted routing remains neutral + Perl 124 + five skips; and the 17-owner Rust storage oracle passes. Final signoff passes rendered book 79/14,720 KiB, Knowledge 835/7,019, all eight doctrines, containment/relocation, CLI 66/66 twice, RAM 69%, Phase 0 1,031/1,031 in 772 seconds, exact opt-in routing, and canonical exit 0. Emitted/primary execution, admission, rollout, and outward surfaces remain pending."
 reverify: "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract authored_static_compiled_metadata_stage -- --exact --ignored && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract && bash tools/check_inter_match_gap_capture_six_runtime.sh"
 ---
 
@@ -117,9 +120,9 @@ entry slots, Unicode-scalar gap spans/text/kind, and typed unavailable-context o
 invocations isolate their state and restore the parent candidate on return.
 
 The final consumer remains explicitly ignored under `.3.5`; focused `--ignored --exact` native proof passes, but
-ordinary package discovery executes 0 tests and reports 1 ignored. `.3.3` still owns reconstruction, descriptors,
-and the separate generated-plan executor. Therefore generated plan v2, rollout 2/7/56, recurring/canonical routes,
-and all facade/schema/semantic/MCP/CLI/README/public surfaces remain unchanged.
+ordinary package discovery executes 0 tests and reports 1 ignored. At this boundary `.3.3` still owns
+reconstruction, descriptors, and the separate generated-plan executor. Therefore generated plan v2, rollout
+2/7/56, recurring/canonical routes, and all facade/schema/semantic/MCP/CLI/README/public surfaces remain unchanged.
 
 ## `.3.3-.3.4`: reconstructed, generated, and emitted carriers
 
@@ -128,9 +131,36 @@ and all facade/schema/semantic/MCP/CLI/README/public surfaces remain unchanged.
 frame and lifecycle. `source_emitter.rs` already embeds the serialized compiled payload, so the static generated
 plan remains exactly `{label,family}` under `linkedspec-generated-source-v2`.
 
+### Verified `.3.3` state
+
+From clean `5c4e9d50`, the combined RED first proved ordinary reconstructed execution already worked, while all
+three descriptor fields were absent and generated-plan access failed with exact
+`gap_capture_context_unavailable`. Rust now projects declaration-order `regex_slots`, source/line-aware
+`capture_gaps`, and separate five-field `resolved_slot_edges` from the same compiled values. The established
+five-field semantic `resolved_edges` and legacy `{label,idx}` dependency references remain unchanged.
+
+The generated-plan executor now reads capture activation from `CompiledSpec`, enters the same recognition frame,
+propagates active action-edge entry slots, and applies candidate-before-`LS`, commit-after-`LE`, and
+tail-before-terminal timing. Its focused consumer compares native and generated-plan values and structured
+diagnostics across Unicode/empty spans, falsey returns, child-extended cursors, nested invocation isolation,
+rollback, terminal routes, failed minimums, and direct entry. Generated source still embeds serialized compiled
+state; neither `source_emitter.rs` nor the static v2 `{label,family}` plan gains a gap field. Ordinary discovery
+remains 0/1 ignored, rooted governance remains neutral + Perl 124 + five skips at 2/7/56 plus ten local Rust
+dormancy mutations, and the Rust storage oracle remains 17-owner green.
+
 The emitted-source role compiles offline and executes in a repository-derived scratch/target workspace. It proves
 direct/traced values, lifecycle, typed diagnostics, rollback, recursion, direct entry, and legacy controls without
 using `std::env::temp_dir()`, `/tmp`, home caches, or off-volume storage.
+
+### List-shaped streams with heterogeneous separators
+
+Inter-match gap capture is especially useful when one repeated item shape is separated by nonuniform source text.
+The item regex still selects each item; the gap candidate preserves every scalar between the prior accepted item
+boundary and the next match. An input such as `alpha, beta | gamma\n- delta` can therefore yield item matches
+`alpha`, `beta`, `gamma`, and `delta` while retaining `", "`, `" | "`, and `"\n- "` as exact interstitial gaps.
+Nothing is blindly accepted: each next item must match its declared slot, and rollback/lifecycle rules decide
+whether its candidate commits. This separates item recognition from separator preservation and permits exact
+reconstruction or later normalization without inventing a separator grammar.
 
 ## `.3.5`: exact private admission
 

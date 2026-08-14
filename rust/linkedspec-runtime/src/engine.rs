@@ -19,6 +19,10 @@
 //! If no match on first iteration:
 //!   I → LS → no match → LX → E
 //!
+//! Capture-enabled action rules are the deliberate exception: they select the
+//! local match and install the gap candidate before LS, then commit after LE
+//! and install successful tail context before the terminal hook.
+//!
 //! ## Blind-call dispatch
 //!
 //! Blind-call rules (`=> child`) dispatch children from `bcode_dispatch`.
@@ -613,6 +617,16 @@ impl GeneratedPlanExecutor<'_> {
         entry_regex_idx: usize,
         ctx: &mut RuntimeContext,
     ) -> Result<RuntimeValue, String> {
+        self.execute_rule_with_entry_slot(label, entry_regex_idx, ctx, None)
+    }
+
+    fn execute_rule_with_entry_slot(
+        &self,
+        label: &str,
+        entry_regex_idx: usize,
+        ctx: &mut RuntimeContext,
+        entry_slot: Option<crate::recognition_transaction::GapEntrySlot>,
+    ) -> Result<RuntimeValue, String> {
         let entry_pos = ctx.pos;
         if let Some(source_identity) = self.source_identity {
             ctx.trace_mark(
@@ -651,16 +665,16 @@ impl GeneratedPlanExecutor<'_> {
                 | GeneratedRuleFamily::OrAcode
                 | GeneratedRuleFamily::AndSingleAcode
                 | GeneratedRuleFamily::AndAcodeSeq => {
-                    self.execute_direct_acode_rule(label, entry_regex_idx, family, ctx)
+                    self.execute_direct_acode_rule(label, entry_regex_idx, family, ctx, entry_slot)
                 }
                 GeneratedRuleFamily::AndBcode | GeneratedRuleFamily::OrBcode => {
-                    self.execute_direct_bcode_rule(label, entry_regex_idx, family, ctx)
+                    self.execute_direct_bcode_rule(label, entry_regex_idx, family, ctx, entry_slot)
                 }
                 GeneratedRuleFamily::RepAcode | GeneratedRuleFamily::RepAndAcode => {
-                    self.execute_direct_acode_rule(label, entry_regex_idx, family, ctx)
+                    self.execute_direct_acode_rule(label, entry_regex_idx, family, ctx, entry_slot)
                 }
                 GeneratedRuleFamily::RepBcode | GeneratedRuleFamily::RepAndBcode => {
-                    self.execute_direct_bcode_rule(label, entry_regex_idx, family, ctx)
+                    self.execute_direct_bcode_rule(label, entry_regex_idx, family, ctx, entry_slot)
                 }
             }
         })();
@@ -689,6 +703,75 @@ impl GeneratedPlanExecutor<'_> {
             .find(|rule| rule.label == label)
             .map(|rule| rule.family)
             .ok_or_else(|| format!("generated rule plan missing label '{label}'"))
+    }
+
+    fn prepare_selected_acode_match(
+        &self,
+        rule: &CompiledRule,
+        label: &str,
+        matched: &MatchResult,
+        required_and_idx: Option<usize>,
+        ctx: &mut RuntimeContext,
+    ) -> Result<(), String> {
+        ctx.note_recognition_match(matched.start, matched.end);
+        let dispatch_index = required_and_idx.unwrap_or(matched.index);
+        let (target_rule, target_regex_index) = structural_slot_identity(rule, dispatch_index);
+        let (actual_target_rule, actual_regex_index) =
+            structural_slot_identity(rule, matched.index);
+        if required_and_idx.is_some()
+            && let Err(error) = assert_ordered_regex_slot_identity(
+                label,
+                target_rule,
+                target_regex_index,
+                actual_target_rule,
+                actual_regex_index,
+            )
+        {
+            ctx.capture_ordered_regex_slot_identity_lost(
+                label,
+                target_rule,
+                target_regex_index,
+                actual_regex_index,
+            );
+            return Err(error.to_string());
+        }
+        ctx.trace_decision(
+            "rust_runtime:generated_plan:regex_slot_selected",
+            true,
+            format!(
+                "rule_label={label} selection_role={} target_rule={target_rule} regex_index={target_regex_index}",
+                if rule.mode.is_and() {
+                    "ordered_required"
+                } else {
+                    "choice"
+                }
+            ),
+            TraceLevel::MEDIUM,
+        );
+
+        let entry_was_empty = !ctx.entry_match_present;
+        ctx.set_pos(matched.end);
+        if ctx.semantic_observation_enabled() {
+            ctx.emit_regex_slot_selected(
+                label,
+                target_rule,
+                target_regex_index,
+                byte_to_char_offset(&ctx.input, matched.end),
+            );
+        }
+        ctx.match_groups = matched.captures.clone();
+        ctx.match_named = matched.named.clone();
+        ctx.match_start_byte = matched.start;
+        ctx.match_end_byte = matched.end;
+        ctx.match_present = true;
+        if entry_was_empty {
+            ctx.entry_groups = matched.captures.clone();
+            ctx.entry_named = matched.named.clone();
+            ctx.entry_start_byte = matched.start;
+            ctx.entry_end_byte = matched.end;
+            ctx.entry_match_present = true;
+        }
+        Ok(())
     }
 
     fn execute_child_rule(
@@ -733,25 +816,44 @@ impl GeneratedPlanExecutor<'_> {
         child_result
     }
 
-    fn execute_action_edge_child_rule(
+    fn execute_child_rule_with_entry_slot(
         &self,
         label: &str,
         entry_regex_idx: usize,
         ctx: &mut RuntimeContext,
+        entry_slot: Option<crate::recognition_transaction::GapEntrySlot>,
     ) -> Result<RuntimeValue, String> {
-        if self.engine.is_passive_terminal_rule(label) {
+        let accumulator_len = ctx.accumulator.len();
+        let child_result =
+            self.execute_rule_with_entry_slot(label, entry_regex_idx, ctx, entry_slot);
+        ctx.accumulator.truncate(accumulator_len);
+        child_result
+    }
+
+    fn execute_action_edge_child_entry(
+        &self,
+        entry: &linkedspec_core::types::AcodeEntry,
+        ctx: &mut RuntimeContext,
+    ) -> Result<RuntimeValue, String> {
+        if self.engine.is_passive_terminal_rule(&entry.child_label) {
             ctx.trace_decision(
                 "rust_runtime:generated_plan:passive_terminal_dispatch",
                 false,
                 format!(
-                    "label={label} entry_regex_idx={entry_regex_idx} pos={}",
-                    ctx.pos
+                    "label={} entry_regex_idx={} pos={}",
+                    entry.child_label, entry.child_regex_idx, ctx.pos
                 ),
                 TraceLevel::MEDIUM,
             );
             return Ok(RuntimeValue::Undef);
         }
-        self.execute_child_rule(label, entry_regex_idx, ctx)
+        let entry_slot = ctx.gap_entry_slot_for_edge(entry);
+        self.execute_child_rule_with_entry_slot(
+            &entry.child_label,
+            entry.child_regex_idx,
+            ctx,
+            entry_slot,
+        )
     }
 
     fn execute_direct_acode_rule(
@@ -760,6 +862,7 @@ impl GeneratedPlanExecutor<'_> {
         entry_regex_idx: usize,
         family: GeneratedRuleFamily,
         ctx: &mut RuntimeContext,
+        entry_slot: Option<crate::recognition_transaction::GapEntrySlot>,
     ) -> Result<RuntimeValue, String> {
         let entry_pos = ctx.pos;
         if !ctx.enter_recursion(label, entry_pos) {
@@ -775,7 +878,13 @@ impl GeneratedPlanExecutor<'_> {
             return Ok(RuntimeValue::Undef);
         }
 
-        if let Err(error) = ctx.enter_recognition_invocation(label, false, None) {
+        let capture_gaps = self
+            .engine
+            .spec
+            .find(label)
+            .and_then(|rule| rule.capture_gaps.as_ref())
+            .is_some_and(|directive| directive.enabled);
+        if let Err(error) = ctx.enter_recognition_invocation(label, capture_gaps, entry_slot) {
             ctx.exit_recursion(label, entry_pos);
             return Err(error);
         }
@@ -907,13 +1016,17 @@ impl GeneratedPlanExecutor<'_> {
         let mut and_acode_idx: usize = 0;
         let mut rep_and_start_pos = ctx.pos;
         let max_iter = 10_000;
+        let capture_gaps = rule
+            .capture_gaps
+            .as_ref()
+            .is_some_and(|directive| directive.enabled);
         let has_entry_idx = entry_regex_idx > 0 && entry_regex_idx < rule.regex_patterns.len();
 
         for _iter in 0..max_iter {
             if is_rep_and_acode_seq && and_acode_idx == 0 {
                 rep_and_start_pos = ctx.pos;
             }
-            if !is_rep && !is_and_acode_seq && matches > 0 {
+            if !is_rep && !is_and_acode_seq && matches > 0 && !capture_gaps {
                 break;
             }
             if !is_rep && is_and_acode_seq && matches >= and_acode_seq_len {
@@ -927,13 +1040,6 @@ impl GeneratedPlanExecutor<'_> {
             }
 
             let pos_before = ctx.pos;
-
-            if let Some(ref lscode) = rule.lscode {
-                self.engine
-                    .execute_lifecycle_block("LS", lscode, ctx, label)?;
-                return_if_rule_returned!();
-            }
-
             // Generated-source v2 derives cursor spending from the validated
             // family row; no mutable/global cursor field crosses the artifact.
             let cursor_policy = family.cursor_policy();
@@ -942,29 +1048,38 @@ impl GeneratedPlanExecutor<'_> {
             } else {
                 matches
             });
-            let match_result = if has_entry_idx && matches == 0 {
-                let entry_pat = &rule.regex_patterns[entry_regex_idx];
-                let entry_alt = CompiledAlternation::compile(std::slice::from_ref(entry_pat))?;
-                match cursor_policy {
-                    ParseMode::Consume => entry_alt.consume_match(&ctx.input, ctx.pos),
-                    ParseMode::Seek => entry_alt.seek_match(&ctx.input, ctx.pos),
-                }
-                .map(|mut m| {
-                    m.index = entry_regex_idx;
-                    m
-                })
-            } else if let Some(required_index) = required_and_idx {
-                match cursor_policy {
-                    ParseMode::Consume => {
-                        alt.consume_slot_match(&ctx.input, ctx.pos, required_index)
-                    }
-                    ParseMode::Seek => alt.seek_slot_match(&ctx.input, ctx.pos, required_index),
-                }
+            let match_result = if capture_gaps {
+                Engine::select_native_match(
+                    rule,
+                    &alt,
+                    &ctx.input,
+                    ctx.pos,
+                    cursor_policy,
+                    required_and_idx,
+                    has_entry_idx,
+                    matches,
+                    entry_regex_idx,
+                )?
             } else {
-                match cursor_policy {
-                    ParseMode::Consume => alt.consume_match(&ctx.input, ctx.pos),
-                    ParseMode::Seek => alt.seek_match(&ctx.input, ctx.pos),
+                // Preserve historical generated-plan ordering for every
+                // unflagged rule: LS runs before selection and local-match
+                // installation.
+                if let Some(ref lscode) = rule.lscode {
+                    self.engine
+                        .execute_lifecycle_block("LS", lscode, ctx, label)?;
+                    return_if_rule_returned!();
                 }
+                Engine::select_native_match(
+                    rule,
+                    &alt,
+                    &ctx.input,
+                    ctx.pos,
+                    cursor_policy,
+                    required_and_idx,
+                    has_entry_idx,
+                    matches,
+                    entry_regex_idx,
+                )?
             };
 
             match &match_result {
@@ -992,67 +1107,24 @@ impl GeneratedPlanExecutor<'_> {
                 }
             }
 
+            if let Some(matched) = &match_result {
+                self.prepare_selected_acode_match(rule, label, matched, required_and_idx, ctx)?;
+                if capture_gaps {
+                    ctx.install_gap_candidate(matched.start);
+                }
+            }
+
+            if capture_gaps && match_result.is_some() {
+                ctx.set_gap_phase("LS");
+                if let Some(ref lscode) = rule.lscode {
+                    self.engine
+                        .execute_lifecycle_block("LS", lscode, ctx, label)?;
+                    return_if_rule_returned!();
+                }
+            }
+
             if let Some(m) = match_result {
-                ctx.note_recognition_match(m.start, m.end);
-                let dispatch_index = required_and_idx.unwrap_or(m.index);
-                let (target_rule, target_regex_index) =
-                    structural_slot_identity(rule, dispatch_index);
-                let (actual_target_rule, actual_regex_index) =
-                    structural_slot_identity(rule, m.index);
-                if required_and_idx.is_some()
-                    && let Err(error) = assert_ordered_regex_slot_identity(
-                        label,
-                        target_rule,
-                        target_regex_index,
-                        actual_target_rule,
-                        actual_regex_index,
-                    )
-                {
-                    ctx.capture_ordered_regex_slot_identity_lost(
-                        label,
-                        target_rule,
-                        target_regex_index,
-                        actual_regex_index,
-                    );
-                    return Err(error.to_string());
-                }
-                ctx.trace_decision(
-                    "rust_runtime:generated_plan:regex_slot_selected",
-                    true,
-                    format!(
-                        "rule_label={label} selection_role={} target_rule={target_rule} regex_index={target_regex_index}",
-                        if rule.mode.is_and() {
-                            "ordered_required"
-                        } else {
-                            "choice"
-                        }
-                    ),
-                    TraceLevel::MEDIUM,
-                );
-
-                let entry_was_empty = !ctx.entry_match_present;
-                ctx.set_pos(m.end);
-                if ctx.semantic_observation_enabled() {
-                    ctx.emit_regex_slot_selected(
-                        label,
-                        target_rule,
-                        target_regex_index,
-                        byte_to_char_offset(&ctx.input, m.end),
-                    );
-                }
-                ctx.match_groups = m.captures.clone();
-                ctx.match_named = m.named.clone();
-                ctx.match_start_byte = m.start;
-                ctx.match_end_byte = m.end;
-                ctx.match_present = true;
-                if entry_was_empty {
-                    ctx.entry_groups = m.captures.clone();
-                    ctx.entry_named = m.named.clone();
-                    ctx.entry_start_byte = m.start;
-                    ctx.entry_end_byte = m.end;
-                    ctx.entry_match_present = true;
-                }
-
+                ctx.set_gap_phase("edge");
                 let mut dispatched_acode = false;
                 for entry in &rule.acode_dispatch {
                     if entry.regex_idx == m.index {
@@ -1083,11 +1155,8 @@ impl GeneratedPlanExecutor<'_> {
                                     self.engine.execute_block(block, ctx, label)?;
                                     collect_or_return_action_value!();
                                 } else if calls_child || reads_retv {
-                                    let child_retv = self.execute_action_edge_child_rule(
-                                        &entry.child_label,
-                                        entry.child_regex_idx,
-                                        ctx,
-                                    )?;
+                                    let child_retv =
+                                        self.execute_action_edge_child_entry(entry, ctx)?;
                                     ctx.push_action_edge_call_result(
                                         &entry.child_label,
                                         child_retv.clone(),
@@ -1101,19 +1170,13 @@ impl GeneratedPlanExecutor<'_> {
                                 } else {
                                     self.engine.execute_block(block, ctx, label)?;
                                     collect_or_return_action_value!();
-                                    let child_retv = self.execute_action_edge_child_rule(
-                                        &entry.child_label,
-                                        entry.child_regex_idx,
-                                        ctx,
-                                    )?;
+                                    let child_retv =
+                                        self.execute_action_edge_child_entry(entry, ctx)?;
                                     ctx.set_retv(child_retv);
                                 }
                             } else {
-                                let child_retv = self.execute_action_edge_child_rule(
-                                    &entry.child_label,
-                                    entry.child_regex_idx,
-                                    ctx,
-                                )?;
+                                let child_retv =
+                                    self.execute_action_edge_child_entry(entry, ctx)?;
                                 ctx.set_retv(child_retv);
                             }
                         } else if self
@@ -1134,11 +1197,13 @@ impl GeneratedPlanExecutor<'_> {
                     );
                 }
 
+                ctx.set_gap_phase("LE");
                 if let Some(ref lecode) = rule.lecode {
                     self.engine
                         .execute_lifecycle_block("LE", lecode, ctx, label)?;
                     return_if_rule_returned!();
                 }
+                ctx.commit_gap_candidate(label)?;
 
                 if is_rep_and_acode_seq {
                     and_acode_idx += 1;
@@ -1149,12 +1214,17 @@ impl GeneratedPlanExecutor<'_> {
                 }
                 matches += 1;
 
+                ctx.set_gap_phase("IT");
                 if let Some(ref itcode) = rule.itcode {
                     self.engine
                         .execute_lifecycle_block("IT", itcode, ctx, label)?;
                     return_if_rule_returned!();
                 }
             } else {
+                if !is_rep || matches >= rep_min {
+                    ctx.install_gap_tail("LX");
+                }
+                ctx.set_gap_phase("LX");
                 if let Some(ref lxcode) = rule.lxcode {
                     self.engine
                         .execute_lifecycle_block("LX", lxcode, ctx, label)?;
@@ -1197,12 +1267,20 @@ impl GeneratedPlanExecutor<'_> {
             return Ok(RuntimeValue::Undef);
         }
 
+        if is_rep {
+            ctx.install_gap_tail("EX");
+        }
+        ctx.set_gap_phase("EX");
         if let Some(ref excode) = rule.excode {
             self.engine
                 .execute_lifecycle_block("EX", excode, ctx, label)?;
             return_if_rule_returned!();
         }
 
+        if !is_rep {
+            ctx.install_gap_tail("E");
+        }
+        ctx.set_gap_phase("E");
         if let Some(ref ecode) = rule.ecode {
             self.engine
                 .execute_lifecycle_block("E", ecode, ctx, label)?;
@@ -1227,6 +1305,7 @@ impl GeneratedPlanExecutor<'_> {
         entry_regex_idx: usize,
         family: GeneratedRuleFamily,
         ctx: &mut RuntimeContext,
+        entry_slot: Option<crate::recognition_transaction::GapEntrySlot>,
     ) -> Result<RuntimeValue, String> {
         let entry_pos = ctx.pos;
         if !ctx.enter_recursion(label, entry_pos) {
@@ -1242,7 +1321,13 @@ impl GeneratedPlanExecutor<'_> {
             return Ok(RuntimeValue::Undef);
         }
 
-        if let Err(error) = ctx.enter_recognition_invocation(label, false, None) {
+        let capture_gaps = self
+            .engine
+            .spec
+            .find(label)
+            .and_then(|rule| rule.capture_gaps.as_ref())
+            .is_some_and(|directive| directive.enabled);
+        if let Err(error) = ctx.enter_recognition_invocation(label, capture_gaps, entry_slot) {
             ctx.exit_recursion(label, entry_pos);
             return Err(error);
         }

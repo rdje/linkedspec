@@ -408,8 +408,8 @@ pub struct RegexSlot {
     pub line: usize,
 }
 
-/// Exact authored capture-gaps directive evidence. Runtime state remains a
-/// later leaf; this record is inert compiled metadata.
+/// Exact authored capture-gaps directive evidence. Runtime executors consume
+/// this immutable record to activate invocation-local gap state.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct CaptureGapsDirective {
     /// Whether gap capture was explicitly enabled by the authored directive.
@@ -448,8 +448,8 @@ pub struct CompiledRule {
     /// dependency expansion.
     #[serde(default)]
     pub regex_slots: Vec<RegexSlot>,
-    /// Inert rule-level directive evidence; native behavior is not enabled by
-    /// this metadata leaf.
+    /// Rule-level directive evidence consumed by native and generated-plan
+    /// execution without adding fields to the generated family plan.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub capture_gaps: Option<CaptureGapsDirective>,
     /// Ordered child-regex dependencies from action and blind-call edges.
