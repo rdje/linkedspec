@@ -8,8 +8,8 @@
 //! Code blocks (`{ ... }`) are properly captured as multi-line content.
 
 use crate::ast::{
-    BareEdgeTarget, BodyElement, BodyElementKind, EdgeTarget, FluentCall, Rule, RuleHeader,
-    RuleMode, SpecFile,
+    BareEdgeTarget, BodyElement, BodyElementKind, EdgeTarget, FluentCall, RegexSelector, Rule,
+    RuleHeader, RuleMode, SpecFile,
 };
 use crate::error::{LinkedSpecError, Result};
 use crate::trace::{TraceConfig, TraceEmitter, TraceLevel};
@@ -65,6 +65,7 @@ pub fn parse_spec(source: &str) -> Result<SpecFile> {
 
     Ok(SpecFile {
         functions: Vec::new(),
+        source_id: "inline".to_string(),
         rules,
     })
 }
@@ -438,20 +439,39 @@ fn parse_single_element(
     let re_conditional = Regex::compile(r"^-\?[ \t]+\w+").unwrap();
     let re_fluent = Regex::compile(r"^\.[ \t]*\w+").unwrap();
 
-    // 1. Regex literal: `/pattern/`
+    // 1. Named regex declaration: `name HSPACE* = HSPACE* /pattern/`.
+    // Retain invalid non-whitespace names too so validation can issue the
+    // contract diagnostic with exact line/source evidence.
+    if let Some((slot_id, pattern, match_end)) = parse_named_regex_declaration(trimmed) {
+        let remainder = trimmed[match_end..].to_string();
+        let elem = BodyElement::new(
+            BodyElementKind::Regex {
+                pattern,
+                slot_id: Some(slot_id),
+            },
+            &trimmed[..match_end],
+            line_num,
+        );
+        return Some((elem, remainder, false));
+    }
+
+    // 2. Anonymous regex literal: `/pattern/`
     if let Some(caps) = re_regex.captures(trimmed) {
         let full_match = caps.get(0).unwrap();
         let pattern = caps.get(1).unwrap().as_str().to_string();
         let remainder = trimmed[full_match.end()..].to_string();
         let elem = BodyElement::new(
-            BodyElementKind::Regex { pattern },
+            BodyElementKind::Regex {
+                pattern,
+                slot_id: None,
+            },
             full_match.as_str(),
             line_num,
         );
         return Some((elem, remainder, false));
     }
 
-    // 2. Action edge: `-> Target` or `-> Target1 | Target2` optionally with block
+    // 3. Action edge: `-> Target` or `-> Target1 | Target2` optionally with block
     if let Some((targets, match_end)) = parse_action_edge_prefix(trimmed) {
         let full_match = &trimmed[..match_end];
         let rest = trimmed[match_end..].trim_start().to_string();
@@ -499,7 +519,7 @@ fn parse_single_element(
         }
     }
 
-    // 3. Blind-call edge: `=> Target` optionally with block
+    // 4. Blind-call edge: `=> Target` optionally with block
     if let Some((target, index, match_end)) = parse_blind_edge_prefix(trimmed) {
         let full_match = &trimmed[..match_end];
         let rest = trimmed[match_end..].trim_start().to_string();
@@ -526,7 +546,7 @@ fn parse_single_element(
         return Some((elem, remainder, advanced));
     }
 
-    // 4. Lifecycle code block: `I { ... }`, `I.return(...)`, or bare marker
+    // 5. Lifecycle code block: `I { ... }`, `I.return(...)`, or bare marker
     if let Some(caps) = re_lifecycle.captures(trimmed) {
         let full_match = caps.get(0).unwrap();
         let marker = caps.get(1).unwrap().as_str().to_string();
@@ -580,7 +600,25 @@ fn parse_single_element(
         }
     }
 
-    // 5. Split marker
+    // 6. Dedicated inter-match gap directive. The complete static eligibility
+    // and duplicate checks run after whole-spec parsing.
+    if let Some(remainder) = trimmed.strip_prefix("@capture_gaps")
+        && remainder
+            .chars()
+            .next()
+            .is_none_or(|character| character.is_whitespace() || character == '#')
+    {
+        let elem = BodyElement::new(
+            BodyElementKind::CaptureGapsDirective {
+                directive: "@capture_gaps".to_string(),
+            },
+            "@capture_gaps",
+            line_num,
+        );
+        return Some((elem, remainder.to_string(), false));
+    }
+
+    // 7. Legacy split marker
     if let Some(caps) = re_split.captures(trimmed) {
         let full_match = caps.get(0).unwrap();
         let marker = full_match.as_str().to_string();
@@ -593,7 +631,7 @@ fn parse_single_element(
         return Some((elem, remainder, false));
     }
 
-    // 6. Conditional: `-? word`
+    // 8. Conditional: `-? word`
     if let Some(caps) = re_conditional.captures(trimmed) {
         let full_match = caps.get(0).unwrap();
         let word = full_match.as_str()[2..].trim().to_string();
@@ -606,7 +644,7 @@ fn parse_single_element(
         return Some((elem, remainder, false));
     }
 
-    // 7. Fluent chain
+    // 9. Fluent chain
     if let Some(caps) = re_fluent.captures(trimmed) {
         let full_match = caps.get(0).unwrap();
         let calls = parse_fluent_chain(trimmed);
@@ -619,7 +657,7 @@ fn parse_single_element(
         return Some((elem, remainder, false));
     }
 
-    // 8. Plain code block: `{ ... }`
+    // 10. Plain code block: `{ ... }`
     if trimmed.starts_with('{') {
         let saved_i = *i;
         let (code, remainder) = consume_block_from_rest(lines, i, trimmed)?;
@@ -628,15 +666,35 @@ fn parse_single_element(
         return Some((elem, remainder, advanced));
     }
 
-    // 9. Bare rule edge. It is deliberately admitted only for the first
+    // 11. Bare rule edge. It is deliberately admitted only for the first
     // physical-line element; `/regex/ Child` and `I Child` must not turn their
     // suffix into a line-level edge.
     if allow_bare_edge && let Some(parsed) = parse_bare_edge(trimmed, lines, i, line_num) {
         return Some(parsed);
     }
 
-    // 10. Fallback: not a recognized element
+    // 12. Fallback: not a recognized element
     None
+}
+
+fn parse_named_regex_declaration(input: &str) -> Option<(String, String, usize)> {
+    // Anonymous regex syntax has priority. In particular, `/=/ /next/` is two
+    // ordinary regex declarations, not an invalid named declaration whose
+    // supposed name is `/`.
+    if input.starts_with('/') {
+        return None;
+    }
+    let equals = input.find('=')?;
+    let name = input[..equals].trim_end_matches([' ', '\t']);
+    if name.is_empty() || name.chars().any(char::is_whitespace) {
+        return None;
+    }
+    let regex_start = skip_horizontal_space(input, equals + 1);
+    let regex = Regex::compile(r"^/([^/\\]*(?:\\.[^/\\]*)*)/").unwrap();
+    let captures = regex.captures(input.get(regex_start..)?)?;
+    let full_match = captures.get(0)?;
+    let pattern = captures.get(1)?.as_str().to_string();
+    Some((name.to_string(), pattern, regex_start + full_match.end()))
 }
 
 /// Parse one complete-line bare rule edge while retaining unresolved target
@@ -712,10 +770,15 @@ fn parse_action_edge_prefix(input: &str) -> Option<(Vec<EdgeTarget>, usize)> {
 
     // Preserve the established action syntax: `[N]` is adjacent to the final
     // label and applies to every target in the group.
-    let (index, match_end) = parse_index_at(input, offset, false).unwrap_or((0, offset));
+    let (selector, match_end) = parse_selector_at(input, offset, false);
+    let index = selector.compatibility_index();
     let targets = labels
         .into_iter()
-        .map(|label| EdgeTarget { label, index })
+        .map(|label| EdgeTarget {
+            label,
+            index,
+            selector: selector.clone(),
+        })
         .collect();
     Some((targets, match_end))
 }
@@ -740,13 +803,15 @@ fn parse_bare_target_list_prefix(input: &str) -> Option<(Vec<BareEdgeTarget>, us
     let mut targets = Vec::new();
     loop {
         let (label, after_label) = take_rule_label_at(input, offset)?;
-        let (index, after_target) = match parse_index_at(input, after_label, true) {
-            Some((index, end)) => (Some(index), end),
-            None => (None, after_label),
+        let (selector, after_target) = parse_selector_at(input, after_label, true);
+        let index = match selector {
+            RegexSelector::Numeric(index) => Some(index),
+            _ => None,
         };
         targets.push(BareEdgeTarget {
             label: label.to_string(),
             index,
+            selector,
         });
         offset = after_target;
 
@@ -790,6 +855,50 @@ fn parse_index_at(input: &str, offset: usize, allow_space: bool) -> Option<(usiz
     input.get(cursor..)?.strip_prefix(']')?;
     let end = cursor + 1;
     Some((index, end))
+}
+
+/// Parse an optional unindexed/numeric/named selector while retaining malformed
+/// bracket evidence for whole-spec diagnostics.
+fn parse_selector_at(input: &str, offset: usize, allow_space: bool) -> (RegexSelector, usize) {
+    let bracket = if allow_space {
+        skip_horizontal_space(input, offset)
+    } else {
+        offset
+    };
+    if !input
+        .get(bracket..)
+        .is_some_and(|rest| rest.starts_with('['))
+    {
+        return (RegexSelector::Unindexed, offset);
+    }
+
+    let content_start = bracket + 1;
+    if let Some(relative_close) = input[content_start..].find(']') {
+        let close = content_start + relative_close;
+        let authored = input[content_start..close].trim().to_string();
+        let selector = if !authored.is_empty() && authored.bytes().all(|byte| byte.is_ascii_digit())
+        {
+            authored
+                .parse::<usize>()
+                .map(RegexSelector::Numeric)
+                .unwrap_or_else(|_| RegexSelector::Invalid(authored.clone()))
+        } else if crate::unicode_rule_label::is_rule_label(&authored) {
+            RegexSelector::Named(authored)
+        } else {
+            RegexSelector::Invalid(authored)
+        };
+        return (selector, close + 1);
+    }
+
+    let mut end = content_start;
+    for (relative, character) in input[content_start..].char_indices() {
+        if character.is_whitespace() || matches!(character, '{' | '.' | '|') {
+            break;
+        }
+        end = content_start + relative + character.len_utf8();
+    }
+    let authored = input[content_start..end].trim().to_string();
+    (RegexSelector::Invalid(authored), end)
 }
 
 fn skip_horizontal_space(input: &str, mut offset: usize) -> usize {
@@ -1218,6 +1327,20 @@ mod tests {
     }
 
     #[test]
+    fn anonymous_equals_regex_keeps_priority_over_named_declaration() {
+        let spec = parse_spec("Top: /=/ /next/").expect("parse anonymous equals regexes");
+        let patterns = spec.rules[0]
+            .body
+            .iter()
+            .filter_map(|element| match &element.kind {
+                BodyElementKind::Regex { pattern, .. } => Some(pattern.as_str()),
+                _ => None,
+            })
+            .collect::<Vec<_>>();
+        assert_eq!(patterns, ["=", "next"]);
+    }
+
+    #[test]
     fn parse_zero_rule_envelope_for_structural_validation() {
         for source in ["", "\n# no rule declarations\n\n"] {
             let spec = parse_spec(source).unwrap();
@@ -1612,7 +1735,7 @@ Done:
         assert!(
             top.body
                 .iter()
-                .any(|element| matches!(&element.kind, BodyElementKind::Regex { pattern } if pattern == "x")),
+                .any(|element| matches!(&element.kind, BodyElementKind::Regex { pattern, .. } if pattern == "x")),
             "regex after multiline compact lifecycle chain was not parsed"
         );
     }
@@ -1626,7 +1749,7 @@ Done:
 
         assert!(matches!(
             &top.body[0].kind,
-            BodyElementKind::Regex { pattern } if pattern == "x"
+            BodyElementKind::Regex { pattern, .. } if pattern == "x"
         ));
         assert!(matches!(
             &top.body[1].kind,
@@ -1656,7 +1779,7 @@ Done:
         assert_eq!(top.body.len(), 3);
         assert!(matches!(
             &top.body[0].kind,
-            BodyElementKind::Regex { pattern } if pattern == "x"
+            BodyElementKind::Regex { pattern, .. } if pattern == "x"
         ));
         assert!(matches!(
             &top.body[1].kind,
@@ -1688,7 +1811,7 @@ Done:
         );
         assert!(matches!(
             &top.body[0].kind,
-            BodyElementKind::Regex { pattern } if pattern == "x"
+            BodyElementKind::Regex { pattern, .. } if pattern == "x"
         ));
         match &top.body[1].kind {
             BodyElementKind::CodeBlock { lifecycle, code } => {
@@ -1700,7 +1823,7 @@ Done:
         }
         assert!(matches!(
             &top.body[2].kind,
-            BodyElementKind::Regex { pattern } if pattern == "y"
+            BodyElementKind::Regex { pattern, .. } if pattern == "y"
         ));
     }
 
@@ -1734,7 +1857,7 @@ Done:
         }
         assert!(matches!(
             &spec.rules[0].body[2].kind,
-            BodyElementKind::Regex { pattern } if pattern == "b"
+            BodyElementKind::Regex { pattern, .. } if pattern == "b"
         ));
     }
 
@@ -1855,7 +1978,7 @@ Done:
         rule.body
             .iter()
             .filter_map(|e| match &e.kind {
-                BodyElementKind::Regex { pattern } => Some(pattern.clone()),
+                BodyElementKind::Regex { pattern, .. } => Some(pattern.clone()),
                 _ => None,
             })
             .collect()

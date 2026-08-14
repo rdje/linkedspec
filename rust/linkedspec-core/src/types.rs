@@ -308,6 +308,18 @@ pub struct AcodeEntry {
     /// need child-regex resolution during post-processing.
     #[serde(default = "default_has_parent_regex")]
     pub has_parent_regex: bool,
+    /// Exact authored selector provenance retained after static resolution.
+    #[serde(default)]
+    pub selector_kind: RegexSelectorKind,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub authored_selector: Option<AuthoredRegexSelector>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub target_slot_id: Option<String>,
+    /// Source evidence for portable selector diagnostics and descriptors.
+    #[serde(default = "default_inline_source_id")]
+    pub source_id: String,
+    #[serde(default)]
+    pub line: usize,
 }
 
 fn default_has_parent_regex() -> bool {
@@ -337,6 +349,83 @@ pub struct DependencyRef {
     /// Zero-based regex slot in the referenced rule.
     #[serde(rename = "idx")]
     pub index: usize,
+    /// Whether the author omitted a selector, used a numeric index, or used a
+    /// stable slot name.
+    #[serde(default, skip_serializing_if = "RegexSelectorKind::is_unindexed")]
+    pub selector_kind: RegexSelectorKind,
+    /// Exact authored selector value when one was present.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub authored_selector: Option<AuthoredRegexSelector>,
+    /// Resolved stable target identity, if the selected row was named.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub target_slot_id: Option<String>,
+}
+
+/// Stable selector-kind vocabulary shared by compiled dependencies and action
+/// edges. The default preserves legacy unindexed serialized state.
+#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum RegexSelectorKind {
+    /// No bracket selector was authored.
+    #[default]
+    Unindexed,
+    /// A numeric bracket selector was authored.
+    Numeric,
+    /// A named bracket selector was authored.
+    Named,
+}
+
+impl RegexSelectorKind {
+    /// Return whether the selector used the legacy unindexed form.
+    pub fn is_unindexed(&self) -> bool {
+        matches!(self, Self::Unindexed)
+    }
+}
+
+/// Exact authored selector value: JSON number for positional selectors and
+/// JSON string for named selectors.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum AuthoredRegexSelector {
+    /// Exact zero-based numeric selector.
+    Numeric(usize),
+    /// Exact named selector without normalization.
+    Named(String),
+}
+
+/// One declaration-order regex slot row.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct RegexSlot {
+    /// Zero-based position shared by named and anonymous declarations.
+    pub regex_index: usize,
+    /// Stable authored identity, or `None` for an anonymous declaration.
+    pub slot_id: Option<String>,
+    /// Logical source identity for diagnostics and later runtime provenance.
+    #[serde(default = "default_inline_source_id")]
+    pub source_id: String,
+    /// One-based source line containing the declaration.
+    #[serde(default)]
+    pub line: usize,
+}
+
+/// Exact authored capture-gaps directive evidence. Runtime state remains a
+/// later leaf; this record is inert compiled metadata.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct CaptureGapsDirective {
+    /// Whether gap capture was explicitly enabled by the authored directive.
+    pub enabled: bool,
+    /// Exact canonical directive spelling.
+    pub directive: String,
+    /// Logical source identity for diagnostics and later runtime provenance.
+    #[serde(default = "default_inline_source_id")]
+    pub source_id: String,
+    /// One-based source line containing the directive.
+    #[serde(default)]
+    pub line: usize,
+}
+
+fn default_inline_source_id() -> String {
+    "inline".to_string()
 }
 
 /// A compiled rule specification — the output of the compiler, input to the runtime.
@@ -355,6 +444,14 @@ pub struct CompiledRule {
     pub mode: crate::ast::RuleMode,
     /// Regex patterns for this rule (compiled from `/pattern/` body elements).
     pub regex_patterns: Vec<String>,
+    /// Authored declaration rows in the same order as `regex_patterns` before
+    /// dependency expansion.
+    #[serde(default)]
+    pub regex_slots: Vec<RegexSlot>,
+    /// Inert rule-level directive evidence; native behavior is not enabled by
+    /// this metadata leaf.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub capture_gaps: Option<CaptureGapsDirective>,
     /// Ordered child-regex dependencies from action and blind-call edges.
     #[serde(default)]
     pub dependency_refs: Vec<DependencyRef>,

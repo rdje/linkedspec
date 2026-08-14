@@ -4,7 +4,11 @@ title: Rust gap parity is split across authored metadata, native state, generate
 answers:
   - "what is the Rust implementation plan for inter match gap capture"
   - "which Rust files parse named regex slots and capture_gaps"
-  - "why does Rust Rule name selector currently fall back to slot zero"
+  - "does Rust now parse named regex declarations and selectors"
+  - "what Rust gap metadata is current before runtime execution"
+  - "why did the Rust baseline Rule name selector fall back to slot zero"
+  - "why is the Rust inter match gap consumer ignored"
+  - "how is package wide canonical Rust dormancy enforced"
   - "where will Rust inter match gap invocation state live"
   - "does Rust gap capture add a second invocation stack"
   - "how will Rust gap state join recognition rollback"
@@ -17,10 +21,10 @@ answers:
   - "does Rust gap admission change recognition 137 246 58"
   - "what does Rust gap admission change in the rollout mutation ledger"
 date: 2026-08-14
-status: behavior-free Rust implementation freeze signoff-complete for intended atomic 227; .3.1 next after clean landing
+status: Rust authored/static/compiled metadata .3.1 signoff-complete for intended atomic 228; runtime remains pending
 tags: [capture, segmentation, rust, parser, lifecycle, transaction, generated-source, emitted-source, admission]
-evidence: "INTER-MATCH-GAP-CAPTURE.3.0 starts from clean atomic-226 commit eceb15ac, retrieves the committed neutral/Perl/cursor/slot/source/transaction/generated/primary/storage authorities, and uses the exact neutral checker, rooted route, primary-process probes, then targeted source inspection. Numeric selection succeeds; named declarations compile as raw and leave zero patterns; named selectors fall back to slot zero with an unconsumed suffix; capture_gaps is ignored; accessors are unknown. The resulting .3.1-.3.5 plan changes no Rust behavior or rollout in .3.0. Definitive signoff passes focused Rust 1/1, book 79/14704 KiB, Knowledge 835/7009, all eight doctrines, containment/relocation, CLI 66/66 twice, RAM 57%, Phase 0 1031/1031 in 741 seconds, exact gap routing, and local-CI exit 0."
-reverify: "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/check_inter_match_gap_capture_six_runtime.sh && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test duplicate_regex_slot_identity_contract"
+evidence: "INTER-MATCH-GAP-CAPTURE.3.1 starts from clean atomic-227 commit 4a95e02a. Its final-path consumer first fails only on absent slot rows, then passes explicitly with --ignored after one typed AST/validation/compiler path adds Unicode-17 named declarations, unindexed/numeric/named selectors, directive eligibility, exact diagnostics, slot/directive rows, and five-field provenance. Full core is 197+4+5+8+5; the 105-source generated manifest catches and then proves the repaired anonymous /=/ priority; the neutral checker stays 2/7/56 and rejects 10 additional Rust dormancy mutations. Ordinary package execution reports the consumer ignored under .3.5, so no canonical/recurring/facade or live execution is admitted."
+reverify: "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract authored_static_compiled_metadata_stage -- --exact --ignored && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract && bash tools/check_inter_match_gap_capture_six_runtime.sh"
 ---
 
 # Rust implementation freeze
@@ -58,6 +62,26 @@ Unicode names reuse the pinned Unicode-17 rule-label table while rejecting ASCII
 directive record retains source/line identity, duplicate evidence, and legacy-marker evidence; validation enforces
 the exact seek/OR-default/loop/action-owner eligibility matrix. Serde defaults preserve reconstruction compatibility.
 The final consumer path is staged but neither gap execution nor rollout moves.
+
+### Verified `.3.1` state
+
+From clean `4a95e02a`, Rust now implements that authored/static/compiled layer. `SpecFile.source_id` supplies the
+logical diagnostic/provenance identity; every authored regex contributes one `RegexSlot` row; named selectors are
+resolved against those rows before dependency expansion; action/dependency entries retain selector kind, authored
+selector, resolved index, and nullable target slot id; and the directive retains source/line evidence. Validation
+preserves existing undefined-target precedence and emits the frozen ten static diagnostics/controls without
+enabling a runtime accessor.
+
+The 105-source generated manifest exposed one compatibility ambiguity: an anonymous `/=/ /next/` pair was being
+classified as a malformed named declaration. Anonymous slash syntax now has explicit priority and a focused unit
+guard. The complete manifest, source emitter, rule-local cursor, core, Unicode, duplicate-slot, recognition,
+typed-source, and repository-storage proofs pass after that repair.
+
+The final consumer is an explicit ignored integration test until `.3.5`. This matters because
+`tools/run_rust_local.sh` runs the complete runtime package; checking only for an explicit `--test` registration
+would not prevent implicit execution. The checker requires the ignore owner and rejects its deletion as one of ten
+Rust dormancy mutations, while separately rejecting explicit canonical/recurring registration and facade tokens.
+Rollout remains 2/7/56 and no native gap state, generated/emitted/primary execution, or outward surface is current.
 
 ## `.3.2`: one recognition authority and native lifecycle
 

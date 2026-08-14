@@ -10,6 +10,34 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-14 (`INTER-MATCH-GAP-CAPTURE.3.1` — Rust authored/static/compiled metadata): activation base is clean
+  atomic 227 at `4a95e02a`. The exact RED was the final consumer's missing `regex_slots`; no runtime failure or
+  rollout change was hidden behind the staged boundary.
+- `SpecFile` now carries caller-settable logical source identity. Named and anonymous regex rows share authored
+  order; exact Unicode-17 names exclude ASCII digit-only identities; action targets retain explicit
+  unindexed/numeric/named/invalid selector evidence until portable validation resolves the target slot.
+- Validation must preserve established prerequisites: declaration errors precede selector work, but undefined
+  targets retain the older undefined-rule diagnostic. Directive eligibility is exactly looping seek-based
+  OR/default plus at least one action owner; none, blind, mixed, AND/consume, and same-line local adjacency reject.
+- Resolve named selectors before dependency expansion. Keep the authored slot catalog separate from compiler-
+  appended dependency regexes, and retain selector kind, authored value, resolved index, and nullable slot id in
+  compiled dependencies/actions. Strip those new fields from the legacy descriptor until `.3.3` owns projection.
+- The 105-source generated manifest found the classifier regression that unit fixtures missed: `/=/ /next/` was
+  misread as an invalid named declaration. Anonymous slash syntax now has explicit priority, guarded by a parser
+  unit test; full manifest, source-emitter, and rule-local-cursor carriers pass afterward.
+- A named-command absence check is insufficient dormancy because the optional Rust package gate executes every
+  integration test. The single final-path stage is therefore `#[ignore]` under `.3.5`; focused metadata proof uses
+  `--ignored --exact`, ordinary package execution proves 0 passed / 1 ignored, and one of the ten checker-local
+  dormancy mutations deletes that exact owner lock.
+- Do not infer live Rust gap support. `.3.2` still owns invocation state/lifecycle/accessors, `.3.3` descriptors and
+  generated execution, `.3.4` emitted proof, and `.3.5` primary/canonical/recurring admission. Gap stays 2/7/56;
+  generated plan v2, recognition 137/246/58, public helpers 122, typed source 9/5/114, and outward guards do not
+  move.
+- Final canonical proof passes all eight doctrines, containment/relocation, CLI 66/66 twice, RAM 55%, Phase 0
+  1,031/1,031, and the opt-in gap route at neutral 2/7/56 plus Perl 124 and five exact later-runtime skips before
+  `[ci] local CI gate passed` with exit 0. The first invocation reached only the outer harness's status-71 denial
+  of nested `sandbox-exec`; the identical permission-authorized invocation is definitive.
+
 - 2026-08-14 (`INTER-MATCH-GAP-CAPTURE.3.0` — Rust dependency freeze): activation base is clean atomic 226 at
   `eceb15ac`. The neutral checker and rooted route are the first runtime truth: 2/7/56, Perl 124, and five exact
   pending skips. Direct primary probes precede source inspection and prove numeric selection works while named

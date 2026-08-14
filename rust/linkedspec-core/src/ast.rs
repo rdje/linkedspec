@@ -12,7 +12,22 @@ use serde::{Deserialize, Serialize};
 pub struct SpecFile {
     #[serde(default)]
     pub functions: Vec<FunctionDefinition>,
+    /// Logical identity used by source-aware static diagnostics and compiled
+    /// provenance. Ordinary in-memory parsing uses `inline`.
+    #[serde(
+        default = "default_source_id",
+        skip_serializing_if = "is_inline_source_id"
+    )]
+    pub source_id: String,
     pub rules: Vec<Rule>,
+}
+
+fn default_source_id() -> String {
+    "inline".to_string()
+}
+
+fn is_inline_source_id(source_id: &String) -> bool {
+    source_id == "inline"
 }
 
 /// A top-level user-defined function definition.
@@ -173,9 +188,15 @@ pub struct BodyElement {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(tag = "kind")]
 pub enum BodyElementKind {
-    /// A regex literal: `/pattern/`
+    /// A regex literal or named declaration: `/pattern/` / `name=/pattern/`.
     #[serde(rename = "regex")]
-    Regex { pattern: String },
+    Regex {
+        pattern: String,
+        /// Stable rule-local identity for a named declaration. Named and
+        /// anonymous rows share the same authored zero-based order.
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        slot_id: Option<String>,
+    },
     /// An action edge: `-> Target` or `-> Target[N]` or `-> Target1 | Target2 { ... }`
     #[serde(rename = "action_edge")]
     ActionEdge {
@@ -224,6 +245,10 @@ pub enum BodyElementKind {
     /// A split marker: `@capture_slice`, `@mark(name)`, `@capture_from_here`, `@move_pos`
     #[serde(rename = "split_marker")]
     SplitMarker { marker: String },
+    /// The dedicated rule-level `@capture_gaps` directive. It is deliberately
+    /// distinct from backend-specific legacy split markers.
+    #[serde(rename = "capture_gaps_directive")]
+    CaptureGapsDirective { directive: String },
     /// A lifecycle marker without an attached block: bare `I`, `LS`, `LE`, etc.
     #[serde(rename = "lifecycle_marker")]
     LifecycleMarker { marker: String },
@@ -238,11 +263,44 @@ pub enum BodyElementKind {
     Raw { text: String },
 }
 
-/// A single edge target: `RuleName` or `RuleName[N]`.
+/// Authored regex-slot selector provenance.
+#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(tag = "kind", content = "value", rename_all = "snake_case")]
+pub enum RegexSelector {
+    /// No bracket was authored; compatibility selects slot zero.
+    #[default]
+    Unindexed,
+    /// A positional compatibility selector was authored.
+    Numeric(usize),
+    /// A stable rule-local slot name was authored.
+    Named(String),
+    /// A bracket was present but malformed. Validation owns the portable
+    /// diagnostic so parsing can retain source identity and line evidence.
+    Invalid(String),
+}
+
+impl RegexSelector {
+    pub fn is_unindexed(&self) -> bool {
+        matches!(self, Self::Unindexed)
+    }
+
+    pub fn compatibility_index(&self) -> usize {
+        match self {
+            Self::Numeric(index) => *index,
+            Self::Unindexed | Self::Named(_) | Self::Invalid(_) => 0,
+        }
+    }
+}
+
+/// A single edge target: `RuleName`, `RuleName[N]`, or `RuleName[name]`.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct EdgeTarget {
     pub label: String,
+    /// Compatibility mirror for existing numeric consumers. Named resolution
+    /// is performed against the target rule's slot table before compilation.
     pub index: usize,
+    #[serde(default, skip_serializing_if = "RegexSelector::is_unindexed")]
+    pub selector: RegexSelector,
 }
 
 /// A target retained from a bare edge before family-derived normalization.
@@ -253,6 +311,8 @@ pub struct BareEdgeTarget {
     /// Optional child regex index retained until family-sensitive validation.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub index: Option<usize>,
+    #[serde(default, skip_serializing_if = "RegexSelector::is_unindexed")]
+    pub selector: RegexSelector,
 }
 
 /// A single fluent chain method call: `.method(args)`.

@@ -10,6 +10,33 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-14 — INTER-MATCH-GAP-CAPTURE.3.1 — add Rust authored gap metadata
+
+- Activated task-tree-first from clean atomic-227 commit `4a95e02a`. The final-path Rust consumer produced the
+  exact RED on absent declaration-order slot rows before production changes.
+- Added one typed Rust AST/validation/compiler path for spacing-insensitive named regex declarations, mixed named
+  and anonymous authored order, unindexed/numeric/named selectors, pinned Unicode-17 exact identity, the dedicated
+  `@capture_gaps` directive, static eligibility, source/line-aware portable diagnostics, compiled slot/directive
+  rows, and resolved selector provenance.
+- Preserved anonymous and numeric compatibility, undefined-target diagnostic precedence, serde reconstruction,
+  ordinary descriptor shape, generated plan v2, and every runtime carrier. The full 105-source generated manifest
+  exposed one `/=/ /next/` ambiguity; restoring anonymous-regex priority repaired it and a focused parser guard
+  now makes that precedence durable.
+- Staged the final Rust consumer as an explicitly ignored metadata-only test until `.3.5`. The neutral checker
+  admits only that dormant file and rejects ten reason-checked Rust mutations covering identity, metadata lock,
+  source/parser/validator/compiler/diagnostic seams, canonical and recurring absence, and facade absence. Ordinary
+  package execution reports the consumer ignored; focused proof requires `--ignored --exact`.
+- Rollout remains exactly 2 complete / 7 pending / 56 semantic mutations; the ten Rust dormancy mutations are
+  checker-local. Rust native gap state/accessors/lifecycle, descriptors, generated/emitted/primary behavior,
+  canonical/recurring execution, facade/schema/semantic/MCP/CLI/README surfaces, and later runtimes do not move.
+- Focused proof passes the dormant stage 1/1, ordinary dormancy 0/1 ignored, core 197 + 4 + 5 + 8 + 5,
+  generated manifest 105/105, rule-local cursor 6/6, source emitter 6/6, recognition 137/246/58, typed source
+  9/5/114, duplicate slot 7/0/59, and the Rust 17-owner storage/relocation oracle.
+- Definitive canonical proof passes all eight doctrines, six-family containment, all-five-anchor relocation, CLI
+  66/66 in both option environments, RAM 55%, Phase 0 1,031/1,031, and the opt-in neutral-plus-Perl route with
+  five exact pending-runtime skips through `[ci] local CI gate passed` and exit 0. The sandboxed attempt stopped
+  only at the outer harness's nested-`sandbox-exec` status 71; the unchanged authorized run is authoritative.
+
 ## 2026-08-14 — INTER-MATCH-GAP-CAPTURE.3.0 — freeze Rust gap implementation plan
 
 - Activated task-tree-first from clean atomic-226 commit `eceb15ac`. Retrieved the exact neutral/Perl gap,

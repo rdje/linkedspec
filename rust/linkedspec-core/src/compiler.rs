@@ -27,12 +27,13 @@
 //! The `[N]` in `-> rule[N]` is the *child* rule's regex entry slot, preserved
 //! in `AcodeEntry.child_regex_idx` and used during Phase 2 resolution.
 
-use crate::ast::{BodyElementKind, Rule, SpecFile};
+use crate::ast::{BodyElementKind, RegexSelector, Rule, SpecFile};
 use crate::error::{LinkedSpecError, PortableDiagnostic, Result};
 use crate::expr::{AccessSegment, Arg, CodeBlock, Expr, RemovedAggregateSelector};
 use crate::trace::{TraceConfig, TraceEmitter, TraceLevel};
 use crate::types::{
-    AcodeEntry, BcodeEntry, CompiledRule, CompiledSpec, CompiledUserFunction, DependencyRef,
+    AcodeEntry, AuthoredRegexSelector, BcodeEntry, CaptureGapsDirective, CompiledRule,
+    CompiledSpec, CompiledUserFunction, DependencyRef, RegexSelectorKind, RegexSlot,
 };
 
 /// Portable duplicate regex-slot identity contract implemented by compiled
@@ -48,12 +49,13 @@ pub fn compile(spec: &SpecFile) -> Result<CompiledSpec> {
 
     let mut rules = Vec::new();
     for rule in &spec.rules {
-        rules.push(compile_rule(rule)?);
+        rules.push(compile_rule(rule, &spec.source_id)?);
     }
     let mut compiled = CompiledSpec { functions, rules };
     crate::callable_contract::normalize_compiled_spec(&mut compiled)
         .map_err(LinkedSpecError::Compile)?;
     validate_no_removed_aggregate_selectors(&compiled)?;
+    resolve_compiled_regex_selectors(&mut compiled)?;
     build_dependency_regex_map(&mut compiled)?;
     validate_recursive_observation_contract(&compiled)?;
     validate_compiled_regex_slot_identities(&compiled)?;
@@ -126,7 +128,7 @@ fn compile_with_events(spec: &SpecFile, trace: &mut TraceEmitter) -> Result<Comp
 
     let mut rules = Vec::new();
     for (index, rule) in spec.rules.iter().enumerate() {
-        match compile_rule(rule) {
+        match compile_rule(rule, &spec.source_id) {
             Ok(compiled) => {
                 trace.trace_decision(
                     "rust_core:compile:rule",
@@ -163,6 +165,7 @@ fn compile_with_events(spec: &SpecFile, trace: &mut TraceEmitter) -> Result<Comp
     crate::callable_contract::normalize_compiled_spec(&mut compiled)
         .map_err(LinkedSpecError::Compile)?;
     validate_no_removed_aggregate_selectors(&compiled)?;
+    resolve_compiled_regex_selectors(&mut compiled)?;
     let edge_only_entries = compiled
         .rules
         .iter()
@@ -636,8 +639,9 @@ fn is_fail_closed_actionir_error(error: &str) -> bool {
         || error.contains("LINKEDSPEC_RECOGNITION_TRANSACTION_ERROR:")
 }
 
-fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
+fn compile_rule(rule: &Rule, source_id: &str) -> Result<CompiledRule> {
     let mut regex_patterns: Vec<String> = Vec::new();
+    let mut regex_slots: Vec<RegexSlot> = Vec::new();
     let mut dependency_refs: Vec<DependencyRef> = Vec::new();
     let mut acode_dispatch: Vec<AcodeEntry> = Vec::new();
     let mut bcode_dispatch: Vec<BcodeEntry> = Vec::new();
@@ -648,6 +652,7 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
     let mut ecode: Option<CodeBlock> = None;
     let mut excode: Option<CodeBlock> = None;
     let mut itcode: Option<CodeBlock> = None;
+    let mut capture_gaps: Option<CaptureGapsDirective> = None;
 
     // Track the source line of the last `/regex/` element seen.
     // An action edge is "anchored" (has_parent_regex = true) only when it
@@ -659,8 +664,15 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
 
     for element in &rule.body {
         match &element.kind {
-            BodyElementKind::Regex { pattern } => {
+            BodyElementKind::Regex { pattern, slot_id } => {
+                let regex_index = regex_patterns.len();
                 regex_patterns.push(pattern.clone());
+                regex_slots.push(RegexSlot {
+                    regex_index,
+                    slot_id: slot_id.clone(),
+                    source_id: source_id.to_string(),
+                    line: element.line,
+                });
                 current_regex_idx += 1;
                 last_regex_line = Some(element.line);
             }
@@ -690,10 +702,14 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
                     .collect();
 
                 for target in targets {
-                    let child_regex_idx = target.index; // from `-> rule[N]`
+                    let (selector_kind, authored_selector, child_regex_idx) =
+                        compiled_selector(&target.selector);
                     dependency_refs.push(DependencyRef {
                         label: target.label.clone(),
                         index: child_regex_idx,
+                        selector_kind: selector_kind.clone(),
+                        authored_selector: authored_selector.clone(),
+                        target_slot_id: None,
                     });
                     acode_dispatch.push(AcodeEntry {
                         regex_idx: triggering_regex_idx,
@@ -702,6 +718,11 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
                         code: parsed_code.clone(),
                         fluent_chain: fluent.clone(),
                         has_parent_regex: has_parent,
+                        selector_kind,
+                        authored_selector,
+                        target_slot_id: None,
+                        source_id: source_id.to_string(),
+                        line: element.line,
                     });
                 }
 
@@ -718,6 +739,9 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
                 dependency_refs.push(DependencyRef {
                     label: target.clone(),
                     index: 0,
+                    selector_kind: RegexSelectorKind::Unindexed,
+                    authored_selector: None,
+                    target_slot_id: None,
                 });
                 let parsed_code = code
                     .as_deref()
@@ -759,6 +783,9 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
                     dependency_refs.push(DependencyRef {
                         label: target.label.clone(),
                         index: 0,
+                        selector_kind: RegexSelectorKind::Unindexed,
+                        authored_selector: None,
+                        target_slot_id: None,
                     });
                     let parsed_code = code
                         .as_deref()
@@ -779,10 +806,14 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
                         .transpose()?
                         .flatten();
                     for target in targets {
-                        let child_regex_idx = target.index.unwrap_or(0);
+                        let (selector_kind, authored_selector, child_regex_idx) =
+                            compiled_selector(&target.selector);
                         dependency_refs.push(DependencyRef {
                             label: target.label.clone(),
                             index: child_regex_idx,
+                            selector_kind: selector_kind.clone(),
+                            authored_selector: authored_selector.clone(),
+                            target_slot_id: None,
                         });
                         acode_dispatch.push(AcodeEntry {
                             regex_idx: 0,
@@ -791,6 +822,11 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
                             code: parsed_code.clone(),
                             fluent_chain: fluent.clone(),
                             has_parent_regex: false,
+                            selector_kind,
+                            authored_selector,
+                            target_slot_id: None,
+                            source_id: source_id.to_string(),
+                            line: element.line,
                         });
                     }
                 }
@@ -835,6 +871,15 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
             BodyElementKind::SplitMarker { .. } => {
                 last_regex_line = None;
             }
+            BodyElementKind::CaptureGapsDirective { directive } => {
+                last_regex_line = None;
+                capture_gaps = Some(CaptureGapsDirective {
+                    enabled: true,
+                    directive: directive.clone(),
+                    source_id: source_id.to_string(),
+                    line: element.line,
+                });
+            }
             // Plain code blocks and raw text are unexpected at compile time.
             BodyElementKind::PlainBlock { .. } | BodyElementKind::Raw { .. } => {
                 last_regex_line = None;
@@ -850,6 +895,8 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
         is_top: rule.header.is_top,
         mode: rule.header.mode.clone(),
         regex_patterns,
+        regex_slots,
+        capture_gaps,
         dependency_refs,
         acode_dispatch,
         bcode_dispatch,
@@ -863,6 +910,163 @@ fn compile_rule(rule: &Rule) -> Result<CompiledRule> {
         rep_min,
         rep_max,
     })
+}
+
+fn compiled_selector(
+    selector: &RegexSelector,
+) -> (RegexSelectorKind, Option<AuthoredRegexSelector>, usize) {
+    match selector {
+        RegexSelector::Unindexed => (RegexSelectorKind::Unindexed, None, 0),
+        RegexSelector::Numeric(index) => (
+            RegexSelectorKind::Numeric,
+            Some(AuthoredRegexSelector::Numeric(*index)),
+            *index,
+        ),
+        RegexSelector::Named(name) => (
+            RegexSelectorKind::Named,
+            Some(AuthoredRegexSelector::Named(name.clone())),
+            0,
+        ),
+        RegexSelector::Invalid(authored) => (
+            RegexSelectorKind::Named,
+            Some(AuthoredRegexSelector::Named(authored.clone())),
+            0,
+        ),
+    }
+}
+
+/// Resolve every selector against the target rule's authored declaration rows
+/// before dependency regex expansion. Validation has already issued authored
+/// diagnostics; this pass also fails closed for programmatic AST callers.
+fn resolve_compiled_regex_selectors(spec: &mut CompiledSpec) -> Result<()> {
+    struct ActionResolution {
+        rule_index: usize,
+        entry_index: usize,
+        regex_index: usize,
+        slot_id: Option<String>,
+    }
+
+    struct DependencyResolution {
+        rule_index: usize,
+        dependency_index: usize,
+        regex_index: usize,
+        slot_id: Option<String>,
+    }
+
+    fn resolve_selector(
+        source_rule: &str,
+        target: &CompiledRule,
+        selector_kind: &RegexSelectorKind,
+        authored_selector: &Option<AuthoredRegexSelector>,
+        numeric_fallback: usize,
+        source_id: &str,
+        line: usize,
+    ) -> Result<(usize, Option<String>)> {
+        let regex_index = match (selector_kind, authored_selector) {
+            (RegexSelectorKind::Named, Some(AuthoredRegexSelector::Named(name))) => target
+                .regex_slots
+                .iter()
+                .find(|slot| slot.slot_id.as_deref() == Some(name.as_str()))
+                .map(|slot| slot.regex_index)
+                .ok_or_else(|| {
+                    LinkedSpecError::Diagnostic(
+                        PortableDiagnostic::new(
+                            "regex_slot_unknown_name",
+                            "resolve_selector",
+                            format!(
+                                "action edge in rule '{source_rule}' selects unknown slot '{name}' in target '{}'",
+                                target.label
+                            ),
+                        )
+                        .with_field("rule_label", source_rule.to_string())
+                        .with_field("source_id", source_id.to_string())
+                        .with_field("line", line)
+                        .with_field("target_rule", target.label.clone())
+                        .with_field("authored_selector", name.clone()),
+                    )
+                })?,
+            _ => numeric_fallback,
+        };
+        let slot_id = target
+            .regex_slots
+            .get(regex_index)
+            .and_then(|slot| slot.slot_id.clone());
+        Ok((regex_index, slot_id))
+    }
+
+    let mut action_resolutions = Vec::new();
+    for (rule_index, rule) in spec.rules.iter().enumerate() {
+        for (entry_index, entry) in rule.acode_dispatch.iter().enumerate() {
+            let Some(target) = spec.find(&entry.child_label) else {
+                if entry.selector_kind == RegexSelectorKind::Named {
+                    return Err(LinkedSpecError::Compile(format!(
+                        "rule '{}': named-selector target '{}' is not compiled",
+                        rule.label, entry.child_label
+                    )));
+                }
+                continue;
+            };
+            let (regex_index, slot_id) = resolve_selector(
+                &rule.label,
+                target,
+                &entry.selector_kind,
+                &entry.authored_selector,
+                entry.child_regex_idx,
+                &entry.source_id,
+                entry.line,
+            )?;
+            action_resolutions.push(ActionResolution {
+                rule_index,
+                entry_index,
+                regex_index,
+                slot_id,
+            });
+        }
+    }
+
+    let mut dependency_resolutions = Vec::new();
+    for (rule_index, rule) in spec.rules.iter().enumerate() {
+        for (dependency_index, dependency) in rule.dependency_refs.iter().enumerate() {
+            let Some(target) = spec.find(&dependency.label) else {
+                if dependency.selector_kind == RegexSelectorKind::Named {
+                    return Err(LinkedSpecError::Compile(format!(
+                        "rule '{}': named-selector dependency target '{}' is not compiled",
+                        rule.label, dependency.label
+                    )));
+                }
+                continue;
+            };
+            let (regex_index, slot_id) = resolve_selector(
+                &rule.label,
+                target,
+                &dependency.selector_kind,
+                &dependency.authored_selector,
+                dependency.index,
+                "inline",
+                0,
+            )?;
+            dependency_resolutions.push(DependencyResolution {
+                rule_index,
+                dependency_index,
+                regex_index,
+                slot_id,
+            });
+        }
+    }
+
+    for resolution in action_resolutions {
+        let rule = &mut spec.rules[resolution.rule_index];
+        let entry = &mut rule.acode_dispatch[resolution.entry_index];
+        entry.child_regex_idx = resolution.regex_index;
+        entry.target_slot_id = resolution.slot_id;
+    }
+    for resolution in dependency_resolutions {
+        let dependency =
+            &mut spec.rules[resolution.rule_index].dependency_refs[resolution.dependency_index];
+        dependency.index = resolution.regex_index;
+        dependency.target_slot_id = resolution.slot_id;
+    }
+    Ok(())
 }
 
 /// Resolve edge-only action entries by looking up child rules' regex patterns.

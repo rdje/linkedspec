@@ -345,17 +345,33 @@ fn project_fluent(chain: &[(String, String)]) -> Option<String> {
 
 fn dependency_refs(rule: &CompiledRule) -> Vec<DependencyRef> {
     if !rule.dependency_refs.is_empty() {
-        return rule.dependency_refs.clone();
+        return rule
+            .dependency_refs
+            .iter()
+            .map(|entry| DependencyRef {
+                label: entry.label.clone(),
+                index: entry.index,
+                selector_kind: Default::default(),
+                authored_selector: None,
+                target_slot_id: None,
+            })
+            .collect();
     }
     rule.acode_dispatch
         .iter()
         .map(|entry| DependencyRef {
             label: entry.child_label.clone(),
             index: entry.child_regex_idx,
+            selector_kind: Default::default(),
+            authored_selector: None,
+            target_slot_id: None,
         })
         .chain(rule.bcode_dispatch.iter().map(|entry| DependencyRef {
             label: entry.child_label.clone(),
             index: 0,
+            selector_kind: Default::default(),
+            authored_selector: None,
+            target_slot_id: None,
         }))
         .collect()
 }

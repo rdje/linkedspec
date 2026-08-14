@@ -849,7 +849,7 @@ fn scan_member<'a>(
 ) -> ScannedMember<'a> {
     let text = &source[range.start..range.end];
     let regex = elements.iter().find_map(|element| match &element.kind {
-        BodyElementKind::Regex { pattern } => Some(ScannedRegex {
+        BodyElementKind::Regex { pattern, .. } => Some(ScannedRegex {
             pattern,
             flags: leading_regex_flags(text),
         }),

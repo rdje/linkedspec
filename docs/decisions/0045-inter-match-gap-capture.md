@@ -480,6 +480,22 @@ seconds, exact neutral-plus-Perl/five-skip routing, and local-CI exit 0 pass. Th
 the outer harness's expected nested-`sandbox-exec` status 71. `.3.1` may activate only after intended atomic 227,
 brief-clear, and clean-tree proof.
 
+## 2026-08-14 Rust authored-metadata amendment
+
+`INTER-MATCH-GAP-CAPTURE.3.1` activates from clean atomic-227 commit `4a95e02a` and implements the already-ratified
+Rust authored/static boundary. Named and anonymous regex declarations share authored order; named identity uses
+the pinned Unicode-17 rule-label classifier with ASCII digit-only names reserved for positional selectors;
+unindexed, numeric, and named action targets retain exact authored provenance; and `@capture_gaps` is a dedicated
+rule-level directive rather than a legacy marker alias. Validation emits the frozen source/line-aware diagnostic
+records and admits only looping seek-based OR/default action-owner rules. Compilation resolves named identity
+before dependency expansion and retains slot rows, directive evidence, and five-field selector provenance.
+
+This amendment does not activate gap state or an accessor. Descriptor projection, generated plan v2, native and
+generated execution loops, emitted source, primary commands, and public surfaces remain unchanged. The final Rust
+consumer is staged at its permanent path under an explicit ignored-until-`.3.5` owner. Ten checker-local mutations
+make that ignored state and canonical/recurring/facade absence executable governance while leaving the neutral
+artifact, rollout 2 complete / 7 pending, and 56 semantic mutations unchanged.
+
 ## Consequences
 
 - The director's original concept and target-rule ownership are durable and cannot be reassigned to

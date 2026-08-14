@@ -25,13 +25,13 @@
 //! the Perl ordering (undefined reported before unused) is preserved because
 //! check 5 runs before the strict check.
 
-use crate::ast::{BodyElementKind, SpecFile};
+use crate::ast::{BodyElementKind, RegexSelector, RuleMode, SpecFile};
 use crate::entry_rule::no_rules_defined_diagnostic;
 use crate::error::{LinkedSpecError, PortableDiagnostic, Result};
 use crate::trace::{TraceConfig, TraceEmitter, TraceLevel};
 use crate::unicode_rule_label::is_rule_label;
 use rgx_core::Regex;
-use std::collections::HashSet;
+use std::collections::{HashMap, HashSet};
 
 /// Run all (non-strict) validation passes on a parsed spec.
 pub fn validate(spec: &SpecFile) -> Result<()> {
@@ -63,6 +63,8 @@ pub fn validate_with_options(spec: &SpecFile, strict_syntax: bool) -> Result<()>
     check_duplicate_labels(spec)?;
     check_duplicate_function_names(spec)?;
     check_function_registry(spec)?;
+    check_regex_slot_metadata(spec)?;
+    check_capture_gaps_directives(spec)?;
     check_edge_structure(spec)?;
     check_mixed_edges(spec)?;
     check_balanced_braces(spec)?;
@@ -108,6 +110,12 @@ pub fn validate_with_options_with_trace_emitter(
             check_duplicate_function_names(spec)
         })?;
         trace_validation_pass(trace, "function_registry", || check_function_registry(spec))?;
+        trace_validation_pass(trace, "regex_slot_metadata", || {
+            check_regex_slot_metadata(spec)
+        })?;
+        trace_validation_pass(trace, "capture_gaps_directives", || {
+            check_capture_gaps_directives(spec)
+        })?;
         trace_validation_pass(trace, "edge_structure", || check_edge_structure(spec))?;
         trace_validation_pass(trace, "mixed_edges", || check_mixed_edges(spec))?;
         trace_validation_pass(trace, "balanced_braces", || check_balanced_braces(spec))?;
@@ -617,6 +625,273 @@ fn diagnostic(code: &str, stage: &str, message: impl Into<String>) -> PortableDi
     PortableDiagnostic::new(code, stage, message)
 }
 
+fn static_diagnostic(
+    spec: &SpecFile,
+    rule_label: &str,
+    line: usize,
+    code: &str,
+    stage: &str,
+    message: impl Into<String>,
+) -> PortableDiagnostic {
+    diagnostic(code, stage, message)
+        .with_field("rule_label", rule_label)
+        .with_field("source_id", spec.source_id.clone())
+        .with_field("line", line)
+}
+
+/// Validate declaration identity and every authored selector against the
+/// complete target-rule slot table.
+fn check_regex_slot_metadata(spec: &SpecFile) -> Result<()> {
+    let mut slots_by_rule: HashMap<&str, Vec<Option<&str>>> = HashMap::new();
+    for rule in &spec.rules {
+        let mut slots = Vec::new();
+        let mut first_lines: HashMap<&str, usize> = HashMap::new();
+        for element in &rule.body {
+            let BodyElementKind::Regex { slot_id, .. } = &element.kind else {
+                continue;
+            };
+            if let Some(slot_id) = slot_id {
+                let invalid = !crate::unicode_rule_label::is_rule_label(slot_id)
+                    || slot_id.bytes().all(|byte| byte.is_ascii_digit());
+                if invalid {
+                    return Err(LinkedSpecError::Diagnostic(
+                        static_diagnostic(
+                            spec,
+                            &rule.header.label,
+                            element.line,
+                            "regex_slot_name_invalid",
+                            "parse_declaration",
+                            format!("invalid regex slot name '{slot_id}'"),
+                        )
+                        .with_field("slot_name", slot_id.clone()),
+                    ));
+                }
+                if let Some(first_line) = first_lines.insert(slot_id, element.line) {
+                    return Err(LinkedSpecError::Diagnostic(
+                        static_diagnostic(
+                            spec,
+                            &rule.header.label,
+                            element.line,
+                            "regex_slot_duplicate_name",
+                            "resolve_declaration",
+                            format!(
+                                "regex slot name '{slot_id}' is duplicated in rule '{}'",
+                                rule.header.label
+                            ),
+                        )
+                        .with_field("slot_name", slot_id.clone())
+                        .with_field("first_line", first_line),
+                    ));
+                }
+            }
+            slots.push(slot_id.as_deref());
+        }
+        slots_by_rule.insert(&rule.header.label, slots);
+    }
+
+    for rule in &spec.rules {
+        for element in &rule.body {
+            let targets = match &element.kind {
+                BodyElementKind::ActionEdge { targets, .. } => targets
+                    .iter()
+                    .map(|target| (target.label.as_str(), &target.selector))
+                    .collect::<Vec<_>>(),
+                BodyElementKind::BareEdge { targets, .. } if !rule.header.mode.is_and() => targets
+                    .iter()
+                    .map(|target| (target.label.as_str(), &target.selector))
+                    .collect::<Vec<_>>(),
+                _ => continue,
+            };
+            for (target_rule, selector) in targets {
+                // Target existence retains its established validation stage and
+                // message. Slot resolution starts only after that structural
+                // prerequisite is known, matching the Perl authored-metadata
+                // pass and preserving undefined-reference compatibility.
+                let Some(slots) = slots_by_rule.get(target_rule) else {
+                    continue;
+                };
+                match selector {
+                    RegexSelector::Unindexed => {}
+                    RegexSelector::Numeric(regex_index) => {
+                        let regex_count = slots.len();
+                        if *regex_index >= regex_count {
+                            return Err(LinkedSpecError::Diagnostic(
+                                static_diagnostic(
+                                    spec,
+                                    &rule.header.label,
+                                    element.line,
+                                    "regex_slot_index_out_of_range",
+                                    "resolve_selector",
+                                    format!(
+                                        "action edge selects slot {regex_index} from target '{target_rule}' with {regex_count} regexes"
+                                    ),
+                                )
+                                .with_field("target_rule", target_rule)
+                                .with_field("regex_index", *regex_index)
+                                .with_field("regex_count", regex_count),
+                            ));
+                        }
+                    }
+                    RegexSelector::Named(name) => {
+                        if !slots.iter().any(|slot_id| *slot_id == Some(name.as_str())) {
+                            return Err(LinkedSpecError::Diagnostic(
+                                static_diagnostic(
+                                    spec,
+                                    &rule.header.label,
+                                    element.line,
+                                    "regex_slot_unknown_name",
+                                    "resolve_selector",
+                                    format!(
+                                        "action edge selects unknown slot '{name}' from target '{target_rule}'"
+                                    ),
+                                )
+                                .with_field("target_rule", target_rule)
+                                .with_field("authored_selector", name.clone()),
+                            ));
+                        }
+                    }
+                    RegexSelector::Invalid(authored) => {
+                        return Err(LinkedSpecError::Diagnostic(
+                            static_diagnostic(
+                                spec,
+                                &rule.header.label,
+                                element.line,
+                                "regex_slot_selector_invalid",
+                                "parse_selector",
+                                format!(
+                                    "action edge has malformed selector '{authored}' for target '{target_rule}'"
+                                ),
+                            )
+                            .with_field("target_rule", target_rule)
+                            .with_field("authored_selector", authored.clone()),
+                        ));
+                    }
+                }
+            }
+        }
+    }
+    Ok(())
+}
+
+fn check_capture_gaps_directives(spec: &SpecFile) -> Result<()> {
+    for rule in &spec.rules {
+        let directives = rule
+            .body
+            .iter()
+            .filter(|element| matches!(element.kind, BodyElementKind::CaptureGapsDirective { .. }))
+            .collect::<Vec<_>>();
+        let Some(first_directive) = directives.first() else {
+            continue;
+        };
+        if let Some(duplicate) = directives.get(1) {
+            return Err(LinkedSpecError::Diagnostic(
+                static_diagnostic(
+                    spec,
+                    &rule.header.label,
+                    duplicate.line,
+                    "capture_gaps_duplicate_directive",
+                    "parse_directive",
+                    format!("rule '{}' repeats @capture_gaps", rule.header.label),
+                )
+                .with_field("first_line", first_directive.line),
+            ));
+        }
+
+        if let Some(marker) = rule.body.iter().find_map(|element| match &element.kind {
+            BodyElementKind::SplitMarker { marker }
+                if marker.starts_with("@capture_slice")
+                    || marker.starts_with("@capture_from_here")
+                    || marker.starts_with("@move_pos") =>
+            {
+                Some((marker, element.line))
+            }
+            _ => None,
+        }) {
+            return Err(LinkedSpecError::Diagnostic(
+                static_diagnostic(
+                    spec,
+                    &rule.header.label,
+                    first_directive.line,
+                    "capture_gaps_legacy_marker_conflict",
+                    "validate_directive",
+                    format!(
+                        "rule '{}' combines @capture_gaps with legacy marker '{}'",
+                        rule.header.label, marker.0
+                    ),
+                )
+                .with_field("marker", marker.0.clone())
+                .with_field("marker_line", marker.1),
+            ));
+        }
+
+        let has_action = rule.body.iter().any(|element| {
+            matches!(element.kind, BodyElementKind::ActionEdge { .. })
+                || (!rule.header.mode.is_and()
+                    && matches!(element.kind, BodyElementKind::BareEdge { .. }))
+        });
+        let has_blind = rule.body.iter().any(|element| {
+            matches!(element.kind, BodyElementKind::BlindEdge { .. })
+                || (rule.header.mode.is_and()
+                    && matches!(element.kind, BodyElementKind::BareEdge { .. }))
+        });
+        let local_adjacency = rule.body.windows(2).any(|elements| {
+            matches!(elements[0].kind, BodyElementKind::Regex { .. })
+                && matches!(elements[1].kind, BodyElementKind::ActionEdge { .. })
+                && elements[0].line == elements[1].line
+        });
+        let edge_ownership = if local_adjacency {
+            "local_adjacency"
+        } else if has_action && has_blind {
+            "mixed"
+        } else if has_action {
+            "action"
+        } else if has_blind {
+            "blind"
+        } else {
+            "none"
+        };
+        let family = if rule.header.mode.is_and() {
+            "and"
+        } else {
+            "or_default"
+        };
+        let cursor_policy = if rule.header.mode.is_and() {
+            "consume"
+        } else {
+            "seek"
+        };
+        let execution_shape = match rule.header.mode {
+            RuleMode::Default => "default_scan_loop",
+            _ if rule.header.mode.is_repetition() => "repeat_loop",
+            _ => "single_match",
+        };
+        let eligible = family == "or_default"
+            && cursor_policy == "seek"
+            && edge_ownership == "action"
+            && rule.header.mode.is_repetition();
+        if !eligible {
+            return Err(LinkedSpecError::Diagnostic(
+                static_diagnostic(
+                    spec,
+                    &rule.header.label,
+                    first_directive.line,
+                    "capture_gaps_rule_ineligible",
+                    "validate_directive",
+                    format!(
+                        "rule '{}' is ineligible for @capture_gaps",
+                        rule.header.label
+                    ),
+                )
+                .with_field("family", family)
+                .with_field("cursor_policy", cursor_policy)
+                .with_field("edge_ownership", edge_ownership)
+                .with_field("execution_shape", execution_shape),
+            ));
+        }
+    }
+    Ok(())
+}
+
 /// Validate family-sensitive and explicit edge shapes before compilation.
 fn check_edge_structure(spec: &SpecFile) -> Result<()> {
     let labels: HashSet<&str> = spec
@@ -881,7 +1156,7 @@ fn check_edge_targets(spec: &SpecFile) -> Result<()> {
 fn check_regex_syntax(spec: &SpecFile) -> Result<()> {
     for rule in &spec.rules {
         for element in &rule.body {
-            if let BodyElementKind::Regex { pattern } = &element.kind {
+            if let BodyElementKind::Regex { pattern, .. } = &element.kind {
                 Regex::compile(pattern).map_err(|e| {
                     LinkedSpecError::Validation(format!(
                         "rule '{}': invalid regex pattern '/{}/': {}",
@@ -1119,6 +1394,19 @@ mod tests {
                 .to_string()
                 .contains("undefined rule")
         );
+    }
+
+    #[test]
+    fn validate_preserves_undefined_target_precedence_for_slot_selectors() {
+        for selector in ["[2]", "[missing]"] {
+            let spec = parse_spec(&format!("Top::\n /a/ -> Ghost{selector}"))
+                .expect("parse undefined selector fixture");
+            let error = validate(&spec).expect_err("undefined target must be rejected");
+            assert!(
+                error.to_string().contains("undefined rule 'Ghost'"),
+                "selector {selector} changed undefined-target precedence: {error}"
+            );
+        }
     }
 
     #[test]

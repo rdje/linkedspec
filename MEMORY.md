@@ -4,17 +4,19 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `eceb15ac` — clean atomic-226 base for behavior-free Rust gap preflight `.3.0`; no push.
-- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.3.0 - freeze Rust gap implementation plan`; intended atomic
-  227/300 from `eceb15ac`; no push and no behavior or rollout movement.
-- active_work_unit: none after `.3.0` clean landing; `.3.1` is not activated inside the behavior-free slice.
-- next_action: prove atomic-227 commit, zero-byte brief, and clean tree, then activate `.3.1` task-tree-first.
+- activation_commit: `4a95e02a` — clean atomic-227 base for Rust authored gap metadata `.3.1`; no push.
+- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.3.1 - add Rust authored gap metadata`; signoff-complete for
+  intended atomic 228/300 from `4a95e02a`; no live gap execution, runtime admission, or rollout movement.
+- active_work_unit: none in the intended post-landing handoff; `.3.2` is not activated inside `.3.1`.
+- next_action: prove the atomic-228 commit, zero-byte brief, and clean tree, then activate `.3.2` task-tree-first.
 - in_flight_uncommitted: none in the intended post-landing handoff; no background job remains.
-- blockers: none. Gap is 2 complete / 7 pending / 56 mutations; the rooted route runs neutral then Perl and skips
-  five later runtimes. Recognition 137/246/58, 122 public helpers, typed source 9/5/114, duplicate-slot 7/0/59,
-  and project-data routing pass. Rendered book 79/14,704 KiB, Knowledge 835/7,009, all eight doctrines, and
-  canonical containment/relocation, CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 741 seconds, exact neutral-
-  plus-Perl routing, five later-runtime skips, and exit 0 pass.
+- blockers: none. Rust now parses and validates named/anonymous slots, all three selector forms, and
+  `@capture_gaps`, then retains exact slot/directive/source/line and selector provenance in compiled metadata.
+  The final consumer remains explicitly ignored until `.3.5`; native state/accessors, descriptors, generated/
+  emitted/primary execution, canonical/recurring execution, and facades remain absent. Gap stays 2/7/56 plus ten
+  reason-checked Rust dormancy mutations; recognition 137/246/58, public helpers 122, typed source 9/5/114,
+  duplicate-slot 7/0/59, and generated plan v2 remain unchanged. Canonical signoff passes all eight doctrines,
+  containment/relocation, CLI 66/66 twice, RAM 55%, Phase 0 1,031/1,031, exact opt-in routing, and exit 0.
 - session_refresh_cadence: proactively recommend `/clear` after at most three completed commits, sooner after a
   large/debug-heavy slice or context compaction, and only at a committed clean handoff boundary.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -45,9 +47,9 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, 9 allowed/11 rejected effects, invocation-framed marks, and cursor-only v1 progress.
   Exact recurrence/public composition is current at rollout 9/9 and 58 mutations; public 3/26/45; guide 1/14/18.
-- current_future_direction: gap rollout is 2/7/56 with private Perl admitted. Rust `.3.0` signoff-completely
-  freezes `.3.1-.3.5` metadata/native/generated/emitted/admission ownership for intended atomic 227; later
-  runtimes and both public rows remain pending.
+- current_future_direction: gap rollout is 2/7/56 with private Perl admitted and Rust authored/static/compiled
+  metadata staged. Rust `.3.2-.3.5` retain native/generated/emitted/admission ownership; the ignored consumer,
+  later runtimes, and both public rows remain pending.
   Brackets select; dot fluently binds; `.14.5.1` waits for `.7`.
-- latest_bootstrap_read: 2026-08-14 — complete roadmap/codebase/mdBook and continuity/tooling review; `.3.0` is
-  task-tree-first from clean atomic 226 at `eceb15ac`; push lock is 300.
+- latest_bootstrap_read: 2026-08-14 — complete roadmap/codebase/mdBook and continuity/tooling review; `.3.1` is
+  task-tree-first from clean atomic 227 at `4a95e02a`; push lock is 300.

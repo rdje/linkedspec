@@ -617,7 +617,7 @@ Definitive `.2.4` and parent `.2` signoff also passes the rendered mdBook, Knowl
 doctrines, containment/relocation, CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 765 seconds, the exact
 neutral-plus-Perl route with five later-runtime skips, and local-CI exit 0. Atomic 226 landed at `eceb15ac`.
 
-### Rust implementation preflight — audited, behavior unchanged
+### Rust authored metadata — implemented, runtime still dormant
 
 Rust `.3.0` is the behavior-free implementation map from that clean boundary. Process-level probes establish the
 current baseline: numeric `Rule[N]` succeeds; `name=/regex/` becomes unrecognized raw body text; `Rule[name]`
@@ -642,10 +642,16 @@ pending while four later runtime routes remain skips. The premature-Rust mutatio
 mutation, leaving the total at 56. Recognition stays 137/246/58, public helpers stay 122, typed source stays
 9/5/114, and facade/schema/semantic/MCP/CLI/README/public admission remains later.
 
-The behavior-free preflight is signoff-complete for intended atomic 227. Focused Rust 1/1, the rendered
-79-file / 14,704-KiB book, Knowledge 835/7,009, all eight doctrines, containment/relocation, CLI 66/66 twice,
-RAM 57%, Phase 0 1,031/1,031 in 741 seconds, exact neutral-plus-Perl routing with five skips, and local-CI exit 0
-pass without moving Rust behavior or rollout. `.3.1` remains pending until commit, brief-clear, and clean proof.
+Authored/static/compiled leaf `.3.1` is now implemented from clean `4a95e02a`. Rust parses the four declaration
+spacing forms, mixes named and anonymous rows in one authored order, distinguishes unindexed/numeric/named
+selectors, reuses exact Unicode-17 identity, validates directive eligibility and the frozen diagnostics, and
+retains source/line-aware slot/directive plus five-field edge provenance in serialized compiled state.
+
+That does **not** make Rust gap capture executable. Descriptor projection remains legacy-shaped until `.3.3`;
+native gap state/accessors remain `.3.2`; generated, emitted, and primary execution remain `.3.3-.3.5`; and the
+final consumer is explicitly ignored until `.3.5`. Ordinary package testing reports it ignored, while focused
+metadata proof uses `--ignored --exact`. The neutral checker adds ten local dormancy mutations but retains the
+same behavior-free JSON, rollout 2 complete / 7 pending, and 56 semantic/governance mutations.
 
 Pinned identity is important here: the installed Perl reports Unicode 13, so `.2.1` generates a private
 806-range classifier from the repository's Unicode 17 ranges rather than trusting the host `XID_Continue` table.

@@ -164,6 +164,21 @@ later-runtime skips, and local-CI exit 0. The unchanged permission-authorized ru
 preceding nested-`sandbox-exec` status 71. `.3.0` is signoff-complete for intended atomic 227; `.3.1` remains
 pending until commit, brief-clear, and clean-tree proof.
 
+Rust authored/static/compiled leaf `.3.1` activates from clean atomic 227 `4a95e02a` and implements one typed
+metadata path without moving runtime authority. `SpecFile` carries logical source identity; regex declarations
+carry nullable stable slot ids in authored order; action targets retain unindexed/numeric/named selector evidence;
+validation reuses the pinned Unicode-17 rule-label classifier, reserves ASCII digits for positional selectors,
+and enforces exact directive cardinality, eligibility, legacy conflicts, and portable diagnostics. Compilation
+resolves named identity before dependency expansion and retains slot/directive/source/line plus five-field
+selector provenance. Legacy descriptor projection and generated plan v2 deliberately remain unchanged.
+
+The final consumer exists at its permanent Rust integration-test path but is explicitly ignored until `.3.5`.
+This is an execution boundary, not merely a missing named command: the optional package-wide Rust gate would
+otherwise execute every integration test. The neutral checker therefore admits the dormant file only while Rust
+stays pending, requires the ignore owner, rejects ten local dormancy mutations, and continues to require canonical,
+recurring, and facade absence. Gap remains 2/7/56; `.3.2-.3.5` retain native, generated/reconstructed, emitted, and
+admission authority.
+
 Definitive `.2.2` signoff passes the rendered 79-file / 14,672-KiB mdBook, Knowledge Map 834/6,992, all eight
 doctrines, six-family repository containment, all-five-anchor relocation, CLI 66/66 in both option environments,
 RAM 76%, Phase 0 1,031/1,031 in 756 seconds, the exact opt-in neutral-plus-six-pending route, and local-CI exit 0.
