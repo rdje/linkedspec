@@ -1,9 +1,9 @@
-# INTER-MATCH-GAP-CAPTURE.5.1-.5.2 — dormant Julia metadata/native stages.
+# INTER-MATCH-GAP-CAPTURE.5.1-.5.3 — dormant Julia metadata/native/carrier stages.
 #
 # This final consumer path now proves parsing, validation, compiled provenance,
-# source identity, and private native gap execution. Reconstruction/descriptor/
-# generated projection, emitted source, primary execution, and admission remain
-# owned by `.5.3-.5.5`.
+# source identity, private native gap execution, normalized reconstruction,
+# compatible descriptors, and same-engine generated-v2 execution. Emitted source,
+# primary execution, and admission remain owned by `.5.4-.5.5`.
 # DORMANT: INTER-MATCH-GAP-CAPTURE.5.5 owns Julia runtime admission
 
 module JuliaInterMatchGapCaptureContract
@@ -46,6 +46,47 @@ function native_error(source::AbstractString, input::AbstractString)
         return error
     end
     error("fixture must fail during native execution")
+end
+
+function reconstructed_error(compiled::CompiledSpec, input::AbstractString)
+    try
+        runtime_parse(LinkedSpecRuntimeEngine(compiled), input)
+    catch error
+        error isa RuntimeInterpreterException || rethrow()
+        return error
+    end
+    error("fixture must fail during reconstructed execution")
+end
+
+function generated_error(
+    compiled::CompiledSpec,
+    input::AbstractString,
+    source_identity::AbstractString;
+    traced::Bool = false,
+)
+    try
+        if traced
+            execute_generated_parser_with_trace_v2(
+                compiled,
+                build_generated_rule_plan(compiled),
+                input,
+                trace_config_disabled(),
+                source_identity;
+                stdout_io = IOBuffer(),
+            )
+        else
+            execute_generated_parser_v2(
+                compiled,
+                build_generated_rule_plan(compiled),
+                input,
+                source_identity,
+            )
+        end
+    catch error
+        error isa GeneratedSourceException || rethrow()
+        return error
+    end
+    error("fixture must fail during generated execution")
 end
 
 function portable_diagnostic(
@@ -718,6 +759,236 @@ Part: /H/
         "Top::\n /H/\n E { return(\"legacy\") }\n",
         "H",
     ).value == "legacy"
+end
+
+@testset "Julia normalized descriptor and generated gap carriers" begin
+    carrier_source = raw"""Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Part[head] { push(gaps, array(gap_kind(), gap_text())) }
+ LX { push(gaps, array(gap_kind(), gap_text())); return(copy(gaps)) }
+Part:
+ head=/H/
+ I.return(entry_text())
+"""
+    source_identity = "julia-gap-carrier.spec"
+    generated_identity = "julia-gap-generated-v2.spec"
+    expected = Any[
+        Any["prefix", "α"],
+        Any["tail", "ω"],
+    ]
+
+    authored = parse_spec(carrier_source; source_id = source_identity)
+    normalized_json = JSON3.read(JSON3.write(to_json(authored)))
+    reconstructed = from_json(SpecFile, normalized_json)
+    @test to_json(reconstructed) == to_json(authored)
+    @test reconstructed.source_id == source_identity
+    compiled = compile_spec(reconstructed)
+    @test runtime_parse(LinkedSpecRuntimeEngine(compiled), "αHω").value == expected
+
+    descriptor = to_descriptor_json(compiled)
+    top_descriptor = descriptor["spec"]["Top"]
+    part_descriptor = descriptor["spec"]["Part"]
+    top_meta = top_descriptor["meta"]
+    part_meta = part_descriptor["meta"]
+    expected_slot = Dict{String,Any}(
+        "regex_index" => 0,
+        "slot_id" => "head",
+        "source_id" => source_identity,
+        "line" => 7,
+    )
+    expected_capture_gaps = Dict{String,Any}(
+        "enabled" => true,
+        "directive" => "@capture_gaps",
+        "source_id" => source_identity,
+        "line" => 3,
+    )
+    expected_resolved_slot_edge = Dict{String,Any}(
+        "selector_kind" => "named",
+        "authored_selector" => "head",
+        "target_rule" => "Part",
+        "regex_index" => 0,
+        "target_slot_id" => "head",
+    )
+    @test part_meta["regex_slots"] == Any[expected_slot]
+    @test top_meta["capture_gaps"] == expected_capture_gaps
+    @test top_meta["resolved_slot_edges"] == Any[expected_resolved_slot_edge]
+    @test top_meta["resolved_edges"] == Any[Dict{String,Any}(
+        "ownership" => "action",
+        "target" => "Part",
+        "regex_index" => 0,
+        "block" => true,
+        "fluent" => nothing,
+    )]
+    @test top_descriptor["dependency_refs"] == Any[Dict{String,Any}(
+        "label" => "Part",
+        "idx" => 0,
+    )]
+    part_meta["regex_slots"][1]["slot_id"] = "detached-mutation"
+    top_meta["capture_gaps"]["enabled"] = false
+    top_meta["resolved_slot_edges"][1]["target_slot_id"] = "detached-mutation"
+    fresh_descriptor = to_descriptor_json(compiled)
+    @test fresh_descriptor["spec"]["Part"]["meta"]["regex_slots"] ==
+          Any[expected_slot]
+    @test fresh_descriptor["spec"]["Top"]["meta"]["capture_gaps"] ==
+          expected_capture_gaps
+    @test fresh_descriptor["spec"]["Top"]["meta"]["resolved_slot_edges"] ==
+          Any[expected_resolved_slot_edge]
+
+    plan = build_generated_rule_plan(compiled)
+    @test GENERATED_SOURCE_CONTRACT == "linkedspec-generated-source-v2"
+    @test GENERATED_SOURCE_FORMAT == 2
+    @test [to_json(row) for row in plan] == Any[
+        Dict("label" => "Top", "family" => "default"),
+        Dict("label" => "Part", "family" => "default"),
+    ]
+    @test execute_generated_parser_v2(
+        compiled,
+        plan,
+        "αHω",
+        generated_identity,
+    ) == expected
+    @test execute_generated_parser_with_trace_v2(
+        compiled,
+        plan,
+        "αHω",
+        trace_config_disabled(),
+        generated_identity;
+        stdout_io = IOBuffer(),
+    ) == expected
+
+    carrier_cases = (
+        (
+            raw"""Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Container[open] { push(gaps, array(gap_text(), call(Container))) }
+ -> Bang { push(gaps, array(gap_text(), call(Bang))) }
+ LX { push(gaps, array(gap_text(), gap_kind())); return(copy(gaps)) }
+Container:
+ open=/\{/
+ -> Close { return(call(Close)) }
+Close:
+ /\}/
+ I.return(entry_text())
+Bang:
+ /!/
+ I.return(entry_text())
+""",
+            "p{abc}gap!",
+            Any[Any["p", "}"], Any["gap", "!"], Any["", "tail"]],
+        ),
+        (
+            raw"""Top::
+ @capture_gaps
+ -> Container[open] { return(array(gap_text(), call(Container), gap_text())) }
+Container:
+ open=/\{/
+ I { inner = [] }
+ @capture_gaps
+ -> Atom { push(inner, gap_text()) }
+ LX { push(inner, gap_text()); return(copy(inner)) }
+Atom:
+ /x/
+ I.return(entry_text())
+""",
+            "p{axtail",
+            Any["p", Any["a", "tail"], "p"],
+        ),
+        (
+            raw"""Top::
+ @capture_gaps
+ -> Open { opening = call(Open); return(array(gap_text(), call(Top), gap_text())) }
+ -> Atom { return(array(gap_text(), call(Atom))) }
+Open:
+ /\{/
+ I.return(entry_text())
+Atom:
+ /x/
+ I.return(entry_text())
+""",
+            "p{ax",
+            Any["p", Any["a", "x"], "p"],
+        ),
+        (
+            raw"""Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Part[h] {
+  tx = recognition_checkpoint();
+  matched = recognize_once(tx, call(Probe));
+  recognition_rollback(tx);
+  push(gaps, gap_text())
+ }
+ -> Part[s] { push(gaps, gap_text()) }
+ LX { push(gaps, gap_text()); return(copy(gaps)) }
+Part:
+ h=/H/
+ s=/S/
+ I.return(entry_text())
+Probe:
+ /X/
+ I.return(0)
+""",
+            "aHXbS",
+            Any["a", "Xb", ""],
+        ),
+    )
+    for (index, (source, input, case_expected)) in enumerate(carrier_cases)
+        parsed = parse_spec(source; source_id = "carrier-case-$index.spec")
+        normalized = from_json(SpecFile, JSON3.read(JSON3.write(to_json(parsed))))
+        case_compiled = compile_spec(normalized)
+        @test runtime_parse(LinkedSpecRuntimeEngine(case_compiled), input).value ==
+              case_expected
+        @test execute_generated_parser_v2(
+            case_compiled,
+            build_generated_rule_plan(case_compiled),
+            input,
+            generated_identity,
+        ) == case_expected
+        @test execute_generated_parser_with_trace_v2(
+            case_compiled,
+            build_generated_rule_plan(case_compiled),
+            input,
+            trace_config_disabled(),
+            generated_identity;
+            stdout_io = IOBuffer(),
+        ) == case_expected
+    end
+
+    error_cases = (
+        (
+            "Direct::\n /H/\n I { return(gap_text()) }\n",
+            "H",
+            "gap_capture_context_unavailable",
+            "LINKEDSPEC_INTER_MATCH_GAP_ERROR:gap_capture_context_unavailable",
+        ),
+        (
+            "Top::OR{1}\n @capture_gaps\n -> Part { rewind_match_start() }\nPart: /H/\n",
+            "aH",
+            "source_location_cursor_regression",
+            "LINKEDSPEC_SOURCE_LOCATION_ERROR:source_location_cursor_regression",
+        ),
+    )
+    for (source, input, diagnostic_code, generated_detail) in error_cases
+        parsed = parse_spec(source; source_id = source_identity)
+        normalized = from_json(SpecFile, JSON3.read(JSON3.write(to_json(parsed))))
+        error_compiled = compile_spec(normalized)
+        reconstructed_failure = reconstructed_error(error_compiled, input)
+        @test reconstructed_failure.diagnostic.code == diagnostic_code
+        for traced in (false, true)
+            failure = generated_error(
+                error_compiled,
+                input,
+                generated_identity;
+                traced,
+            )
+            @test failure.stage == ExecuteGeneratedStage
+            @test failure.code == GeneratedExecutionFailedCode
+            @test failure.source_identity == generated_identity
+            @test occursin(generated_detail, something(failure.detail, ""))
+        end
+    end
 end
 
 end # module JuliaInterMatchGapCaptureContract

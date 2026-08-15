@@ -2,31 +2,33 @@
 
 ## Current Activity
 
-- Atomic 241 landed cleanly at `3a620ec0`; Julia private native leaf `INTER-MATCH-GAP-CAPTURE.5.2` is focused-
-  signoff-complete from that exact boundary for intended atomic 242; no push.
-- The existing private recognition invocation/token now owns exact gap activation, entry identity, candidate/
-  commit/tail lifecycle, rollback, and nested isolation without widening detached `RecognitionFrameState`.
-- The dormant permanent consumer passes 105 metadata + 33 native assertions. Four zero-argument private accessors
-  retain exact typed diagnostics and remain outside the exact 246-name supported ActionIR inventory.
-- Complete Julia package/primary/storage 19/5 and the cross-runtime matrices pass. Reconstruction/descriptors/
-  generated execution, emitted proof, primary admission, and every outward surface remain `.5.3-.5.5`-owned.
+- Atomic 242 landed cleanly at `73484302`; Julia carrier leaf `INTER-MATCH-GAP-CAPTURE.5.3` is focused-signoff-
+  complete from that exact boundary for intended atomic 243; no push.
+- Normalized `SpecFile` JSON is the sole reconstruction carrier. Fresh detached descriptor metadata exposes slot,
+  directive, and five-field resolved-selector provenance while preserving legacy edges and dependency refs.
+- The dormant permanent consumer passes 105 metadata + 33 native + 46 carrier assertions. Direct/traced
+  generated-v2 execution spends the same runtime and retains format 2, exact plans, typed failures, and identity.
+- Complete Julia package/primary/storage 19/5 and all cross-runtime matrices pass. Emitted proof, primary
+  admission, and every outward surface remain `.5.4-.5.5`-owned.
 - Governance remains 4/5/57 plus ten Rust and ten Dart admission mutations. Julia, both Lua ABIs, recurring/public
   rows, typed composition, and every outward facade/schema/MCP/CLI/README surface remain pending or unchanged.
 
 ## Latest Completed Slice
 
-- `.5.2` is focused-signoff-complete. Deliberate RED reached unsupported `gap_kind`; explicit proof is 105+33.
-  Full Julia package/primary/storage 19/5/corpus, neutral/rooted 4/5/57, recognition 137/246/58, duplicate slot
-  7/0/59, typed source 9/5/114, rendered book 79/14,872, Knowledge 838/7,072, bounded histories, and all nine
-  doctrines pass.
+- `.5.3` is focused-signoff-complete. Deliberate RED reached only the three absent descriptor projections after
+  reconstruction passed; explicit proof is 105+33+46. Full Julia package/primary/storage 19/5, neutral/rooted
+  4/5/57, recognition 137/246/58, duplicate slot 7/0/59, typed source 9/5/114, rendered book 79/14,880,
+  Knowledge 838/7,075, bounded histories, and all nine doctrines pass.
 
 ## Next Action
 
-- Commit intended atomic 242, clear the brief, prove the clean handoff, then activate `.5.3` task-tree-first for
-  normalized reconstruction, compatible descriptors, and same-engine generated-v2 gap execution.
+- Commit intended atomic 243, clear the brief, prove the clean handoff, then activate `.5.4` task-tree-first for
+  independently compiled emitted Julia gap execution and the exact 19→20 temporary-owner transition.
 
 ## Recent Completions
 
+- `2026-08-16` — `.5.3` completed normalized reconstruction, compatible detached descriptors, and same-engine
+  generated-v2 gap execution from clean `73484302`, preserving rollout 4/5/57 and storage 19/5.
 - `2026-08-15` — `.5.2` completed private Julia native gap state/accessors/lifecycle on the existing recognition
   authority from clean `3a620ec0`, preserving rollout 4/5/57 and the 246-name supported ActionIR inventory.
 - `2026-08-15` — `.5.1` completed exact Julia authored/static/compiled metadata and ten dormancy guards from clean

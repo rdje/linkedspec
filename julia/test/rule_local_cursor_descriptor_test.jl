@@ -41,6 +41,20 @@ function _descriptor_validation_failure(spec::SpecFile)
     error("expected portable descriptor validation failure")
 end
 
+function _descriptor_with_source_id(descriptor, source_id::AbstractString)
+    expected = deepcopy(descriptor)
+    for rule in values(expected["spec"])
+        metadata = rule["meta"]
+        for slot in metadata["regex_slots"]
+            slot["source_id"] = String(source_id)
+        end
+        if metadata["capture_gaps"] !== nothing
+            metadata["capture_gaps"]["source_id"] = String(source_id)
+        end
+    end
+    return expected
+end
+
 function _descriptor_expected_root_meta_keys()
     variants = DESCRIPTOR_CONTRACT["meta_contract_variants"]
     legacy = variants["legacy_global_v0"]
@@ -70,6 +84,9 @@ end
             "family",
             "cursor_policy",
             "edge_ownership",
+            "regex_slots",
+            "capture_gaps",
+            "resolved_slot_edges",
             "resolved_edges",
             "mode",
         ])
@@ -101,6 +118,14 @@ end
             @test rule_meta["family"] == row["family"]
             @test rule_meta["cursor_policy"] == row["cursor_policy"]
             @test rule_meta["edge_ownership"] == "none"
+            @test rule_meta["regex_slots"] == Any[Dict{String,Any}(
+                "regex_index" => 0,
+                "slot_id" => nothing,
+                "source_id" => "inline",
+                "line" => 2,
+            )]
+            @test rule_meta["capture_gaps"] === nothing
+            @test isempty(rule_meta["resolved_slot_edges"])
             @test isempty(rule_meta["resolved_edges"])
             @test rule_meta["mode"]["is_and"] == (row["family"] == "and")
             @test !haskey(rule_meta, "parse_mode")
@@ -162,7 +187,8 @@ Top::AND
             write(path, source)
             loaded = load_and_compile_spec(path_spec_request(path), SpecLoadOptions(scratch))
             loaded_descriptor = to_descriptor_json(loaded.compiled)
-            @test JSON3.write(loaded_descriptor) == direct_bytes
+            @test loaded_descriptor ==
+                  _descriptor_with_source_id(direct, "descriptor.spec")
             @test loaded_descriptor["spec"]["Top"]["meta"]["family"] == "and"
             @test loaded_descriptor["spec"]["Top"]["meta"]["cursor_policy"] == "consume"
             @test runtime_parse(create_engine(loaded), "prefix x").value === nothing

@@ -59,6 +59,20 @@ function _root_route_trace_events(call)
     return result, trace_events(trace), String(take!(output))
 end
 
+function _root_route_descriptor_with_source_id(descriptor, source_id::AbstractString)
+    expected = deepcopy(descriptor)
+    for rule in values(expected["spec"])
+        metadata = rule["meta"]
+        for slot in metadata["regex_slots"]
+            slot["source_id"] = String(source_id)
+        end
+        if metadata["capture_gaps"] !== nothing
+            metadata["capture_gaps"]["source_id"] = String(source_id)
+        end
+    end
+    return expected
+end
+
 @testset "Julia root-rule loaded and normalized routes" begin
     routes = (
         (
@@ -91,7 +105,11 @@ end
                 "x";
                 top_rule = route.explicit_label,
             ).value == route.explicit_value
-            @test to_descriptor_json(loaded.compiled) == descriptor_before
+            @test to_descriptor_json(loaded.compiled) ==
+                  _root_route_descriptor_with_source_id(
+                descriptor_before,
+                "$(route.name).spec",
+            )
 
             normalized_json = JSON3.read(JSON3.write(to_json(parse_spec(route.source))))
             normalized = from_json(SpecFile, normalized_json)

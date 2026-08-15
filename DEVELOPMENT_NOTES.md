@@ -10,6 +10,28 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-16 (`INTER-MATCH-GAP-CAPTURE.5.3` — Julia normalized/descriptor/generated carrier): activation base is
+  clean atomic 242 at `73484302`; the explicit carrier group passed reconstruction then reached exact missing
+  descriptor keys `regex_slots`, `capture_gaps`, and `resolved_slot_edges` before production projection existed.
+- Reconstruct only from `to_json(SpecFile)` through `from_json`, then compile normally. Do not introduce a second
+  serialized runtime carrier or copy gap metadata into the static generated plan.
+- Descriptor meanings stay separated. `regex_slots`, nullable `capture_gaps`, and five-field
+  `resolved_slot_edges` are fresh detached authored/resolved provenance; legacy `resolved_edges` remains the
+  execution-semantic row and dependency references remain `{label,idx}`.
+- Logical source provenance is observable descriptor data. Inline parsing truthfully yields `inline`; loaded
+  requests yield their caller-logical basename. Direct-dependent equality tests may rewrite only the expected
+  source ids, never erase that distinction or normalize all descriptors to host paths.
+- Exact descriptor key-set consumers must advance with compatible additive projections. Complete Julia proof
+  caught the stale cursor descriptor inventory, which now requires and value-checks all three fields across every
+  rule family. Root-route and cursor-route loaded comparisons preserve every other byte/value unchanged.
+- Generated-v2 direct/traced entrypoints already spend `CompiledSpec` plus the ordinary runtime. Keep format 2 and
+  ordered `{label,family}` rows unchanged; prove values, lifecycle, nesting, recursion, rollback, typed failure detail, and
+  generated source identity at the wrapper boundary.
+- Focused signoff is explicit 105 metadata + 33 native + 46 carrier, complete Julia package, the 917-assertion
+  cursor descriptor dependent, primary/storage 19/5, neutral/rooted 4/5/57, duplicate-slot 7/0/59, recognition
+  137/246/58, typed-source 9/5/114, rendered book 79/14,880, Knowledge 838/7,075, bounded histories, and all nine doctrines.
+  Emitted proof and admission remain `.5.4-.5.5`, so canonical CI is not triggered.
+
 - 2026-08-15 (`INTER-MATCH-GAP-CAPTURE.5.2` — Julia private native gap execution): activation base is clean
   atomic 241 at `3a620ec0`; the explicit native group first reaches exact unsupported helper `gap_kind`.
 - Put gap state on `_InvocationState` and its existing transaction snapshot. Capture activation, input/invocation

@@ -5,11 +5,12 @@
 - Tree ID: `INTER-MATCH-GAP-CAPTURE`
 - Status: `active` / Dart primary/admission `.4.5` plus parent `.4` landed cleanly as atomic 239 at `43ed1c8f`;
   behavior-free Julia audit/plan `.5.0` landed as atomic 240 at `12a14ed0`; authored/static/compiled metadata leaf
-  `.5.1` landed as atomic 241 at `3a620ec0`; native execution leaf `.5.2` is focused-signoff-complete from that
-  exact clean boundary for intended atomic 242; no push
+  `.5.1` landed as atomic 241 at `3a620ec0`; native execution leaf `.5.2` landed as atomic 242 at `73484302`;
+  reconstruction/descriptor/generated leaf `.5.3` is focused-signoff-complete from that exact clean boundary for
+  intended atomic 243; no push
 - Roadmap lane: `.spec language evolution / lossless segmentation and source preservation`
 - Created: `2026-07-17`
-- Last updated: `2026-08-15`
+- Last updated: `2026-08-16`
 - Owner: repo-local workflow
 
 ## Goal
@@ -53,8 +54,8 @@ orchestration or to raw Perl cursor arithmetic.
     atomic 228 at `95127e1d`; Rust `.3.2` landed as atomic 229 at `5c4e9d50`; Rust `.3.3` landed as atomic 230 at
     `9e6ade98`; Rust `.3.4` landed as atomic 231 at `c3326f6d`; `.3.5` and parent `.3` landed as atomic 232 at
     `2800e7c3`; Dart parent `.4` landed as atomic 239 at `43ed1c8f`; Julia `.5.0` landed as atomic 240 at
-    `12a14ed0`, `.5.1` landed as atomic 241 at `3a620ec0`, and `.5.2` is focused-signoff-complete from that exact
-    clean boundary for intended atomic 242; no push)
+    `12a14ed0`, `.5.1` landed as atomic 241 at `3a620ec0`, `.5.2` landed as atomic 242 at `73484302`, and `.5.3`
+    is focused-signoff-complete from that exact clean boundary for intended atomic 243; no push)
   Goal: Recover and modernize lossless inter-match gap capture without semantic drift.
   Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`
 
@@ -1389,7 +1390,8 @@ orchestration or to raw Perl cursor arithmetic.
 - ID: `INTER-MATCH-GAP-CAPTURE.5`
   Status: `active` (2026-08-15; behavior-free audit/plan child `.5.0` landed as atomic 240 at `12a14ed0`;
     authored/static/compiled metadata child `.5.1` landed as atomic 241 at `3a620ec0`; native execution child
-    `.5.2` is focused-signoff-complete from that exact clean boundary for intended atomic 242)
+    `.5.2` landed as atomic 242 at `73484302`; reconstruction/descriptor/generated child `.5.3` is focused-
+    signoff-complete from that exact clean boundary for intended atomic 243)
   Goal: Implement exact Julia native/generated/primary parity.
   Children: `.5.0`, `.5.1`, `.5.2`, `.5.3`, `.5.4`, `.5.5`
   Acceptance: Julia passes the neutral gap corpus and every admitted execution role through its existing private
@@ -1480,8 +1482,7 @@ orchestration or to raw Perl cursor arithmetic.
   Commit: `INTER-MATCH-GAP-CAPTURE.5.1 - add Julia gap metadata`
 
 - ID: `INTER-MATCH-GAP-CAPTURE.5.2`
-  Status: `done; focused-signoff-complete from clean 3a620ec0` (2026-08-15; intended atomic 242; task-tree-first
-    activation, zero-byte brief, focused proof green, no push)
+  Status: `done; landed at 73484302` (2026-08-15; atomic 242; focused proof green; no push)
   Goal: Add exact private native Julia gap state, lifecycle, accessors, entry identity, rollback, and recursion.
   Depends on: `.5.1`
   Acceptance: prove deliberate RED in the permanent consumer; extend only the existing private recognition
@@ -1511,13 +1512,13 @@ orchestration or to raw Perl cursor arithmetic.
     recognition 137/246/58, and typed-source 9/5/114 matrices pass. The duplicate-slot matrix caught and the slice
     corrected a premature supported-call inventory widening: four gap helpers now resolve as a separate private
     family while supported ActionIR names remain exactly 246. Rendered book 79/14,872 KiB, Knowledge 838/7,072,
-    bounded histories,
-    task metadata, diff checks, and all nine doctrines pass. ADR `0073` correctly excludes canonical CI because
+    bounded histories, task metadata, diff checks, and all nine doctrines pass. ADR `0073` correctly excludes canonical CI because
     admission, format, dependency, infrastructure, and outward surfaces do not move.
   Commit: `INTER-MATCH-GAP-CAPTURE.5.2 - add Julia native gap execution`
 
 - ID: `INTER-MATCH-GAP-CAPTURE.5.3`
-  Status: `pending`
+  Status: `done; focused-signoff-complete from clean 73484302` (2026-08-16; intended atomic 243; task-tree-first
+    activation, zero-byte brief, focused proof green, no push)
   Goal: Carry exact Julia gap metadata and execution through normalized reconstruction, descriptors, and generated plans.
   Depends on: `.5.2`
   Acceptance: use normalized `SpecFile` JSON as the sole reconstruction carrier and recompile normally; add fresh
@@ -1526,12 +1527,26 @@ orchestration or to raw Perl cursor arithmetic.
     execution spends the same engine/state and preserves values, lifecycle, rollback, recursion, diagnostics, and
     source identity; keep generated format 2 and exact ordered `{label,family}` plan rows; keep the final consumer
     dormant and change no production emitter, primary, registration, rollout, public surface, dependency, or format.
-  Planned verification tier: `focused`
-  Planned focused checks: explicit reconstruction/descriptor/generated consumer groups and direct normalized-spec,
+  Verification tier: `focused`
+  Focused checks: explicit reconstruction/descriptor/generated consumer groups and direct normalized-spec,
     descriptor, generated-plan, runtime/source/recognition dependents; neutral/rooted/dormancy, complete Julia,
     primary/storage, cross-runtime ledgers, book, Knowledge, doctrine, history, and diff checks.
-  Planned canonical trigger: `none` — compatible private carriers and same-engine generated execution only.
-  Verification: `pending`
+  Canonical trigger: `none` — compatible private carriers and same-engine generated execution only; no admission,
+    format, dependency, infrastructure, or outward-surface trigger moved.
+  Verification: deliberate RED passed the five reconstruction assertions and then failed only on absent descriptor
+    keys `regex_slots`, `capture_gaps`, and `resolved_slot_edges`. The permanent consumer now passes 105 metadata +
+    33 native + 46 carrier assertions. Normalized `SpecFile` JSON is the sole reconstruction carrier; descriptors
+    return fresh detached provenance and five-field selector rows while legacy resolved edges and dependency refs
+    remain exact; generated format 2 and ordered `{label,family}` plans execute direct/traced through the same
+    runtime with exact values, lifecycle, rollback, nesting, recursion, typed diagnostics, and generated source identity.
+    Complete Julia package, primary process, storage 19 owners / 5 packages, and the 917-assertion cursor-descriptor
+    dependent pass. Full proof found and corrected two exact dependent assumptions: loaded descriptor equality must
+    retain the loaded basename instead of inline logical source identity, and exact rule-meta key inventories must
+    include the three compatible additions. Neutral/rooted governance stays 4/5/57 with Julia still skipped;
+    duplicate-slot 7/0/59, recognition 137/246/58, and typed-source 9/5/114 pass. Rendered mdBook is 79 files /
+    14,880 KiB; Knowledge is 838 facts / 7,075 keys; bounded histories, task metadata, exact ADR pressure, diff
+    checks, and all nine doctrines pass. ADR `0073`
+    correctly excludes canonical CI.
   Commit: `INTER-MATCH-GAP-CAPTURE.5.3 - carry Julia gap generated execution`
 
 - ID: `INTER-MATCH-GAP-CAPTURE.5.4`
@@ -1621,8 +1636,8 @@ orchestration or to raw Perl cursor arithmetic.
 | 22 | `INTER-MATCH-GAP-CAPTURE.4.5` | `done; landed at 43ed1c8f` | Primary parity, exact nine-role admission, Dart-only 4/5/57 promotion, canonical/rooted registration, and exact staged canonical proof closed parent `.4` as atomic 239. |
 | 23 | `INTER-MATCH-GAP-CAPTURE.5.0` | `done; landed at 12a14ed0` | Exact Julia seams and dependency-ordered `.5.1-.5.5` ownership landed without behavior or rollout movement as atomic 240. |
 | 24 | `INTER-MATCH-GAP-CAPTURE.5.1` | `done; landed at 3a620ec0` | Exact Julia authored/static/compiled provenance plus ten dormancy guards landed as atomic 241 without runtime or rollout movement. |
-| 25 | `INTER-MATCH-GAP-CAPTURE.5.2` | `done; focused-signoff-complete from clean 3a620ec0` | Exact private native state/accessors/lifecycle pass for intended atomic 242 without admission, carrier, or outward movement. |
-| 26 | `INTER-MATCH-GAP-CAPTURE.5.3` | `pending` | Prove normalized reconstruction, compatible descriptors, and same-engine generated-v2 execution. |
+| 25 | `INTER-MATCH-GAP-CAPTURE.5.2` | `done; landed at 73484302` | Exact private native state/accessors/lifecycle landed as atomic 242 without admission, carrier, or outward movement. |
+| 26 | `INTER-MATCH-GAP-CAPTURE.5.3` | `done; focused-signoff-complete from clean 73484302` | Exact normalized reconstruction, compatible detached descriptors, and same-engine generated-v2 proof for intended atomic 243. |
 | 27 | `INTER-MATCH-GAP-CAPTURE.5.4` | `pending` | Prove independently loaded emitted Julia modules and advance only the exact local temp-owner oracle. |
 | 28 | `INTER-MATCH-GAP-CAPTURE.5.5` | `pending; canonical tier` | Reuse the primary adapter, admit exactly nine roles, promote Julia only, and close parent `.5`. |
 
@@ -1960,8 +1975,9 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
   `0b074e1c`. Reconstructed/descriptor/generated `.4.3` landed as atomic 237 at `4c8ab7ee`, and independently
   emitted `.4.4` landed as atomic 238 at `6a554312`, and primary/admission/parent-closeout `.4.5` landed as atomic
   239 at `43ed1c8f`. Julia planning `.5.0` landed as atomic 240 at `12a14ed0`, metadata `.5.1` landed as atomic 241
-  at `3a620ec0`, and private native `.5.2` is focused-signoff-complete from that exact clean boundary for intended
-  atomic 242; `.5.3` activates only after commit/brief/clean proof.
+  at `3a620ec0`, and private native `.5.2` landed as atomic 242 at `73484302`. Reconstructed/descriptor/generated
+  `.5.3` is focused-signoff-complete from that exact clean boundary for intended atomic 243; `.5.4` activates only
+  after commit/brief/clean proof.
 
 ## Verification Log
 
@@ -1995,7 +2011,8 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `INTER-MATCH-GAP-CAPTURE.5.2` | `INTER-MATCH-GAP-CAPTURE.5.2 - add Julia native gap execution` | Focused-signoff-complete private native Julia execution for intended atomic 242/300 from `3a620ec0`; final consumer remains dormant and rollout stays 4/5/57; no push. |
+| `INTER-MATCH-GAP-CAPTURE.5.3` | `INTER-MATCH-GAP-CAPTURE.5.3 - carry Julia gap generated execution` | Focused-signoff-complete normalized/descriptor/generated Julia carriers for intended atomic 243/300 from `73484302`; final consumer remains dormant, storage stays 19/5, and rollout stays 4/5/57; no push. |
+| `INTER-MATCH-GAP-CAPTURE.5.2` | `73484302` — `INTER-MATCH-GAP-CAPTURE.5.2 - add Julia native gap execution` | Private native Julia execution landed cleanly as atomic 242/300; final consumer remains dormant and rollout stays 4/5/57; no push. |
 | `INTER-MATCH-GAP-CAPTURE.5.1` | `3a620ec0` — `INTER-MATCH-GAP-CAPTURE.5.1 - add Julia gap metadata` | Julia authored/static/compiled metadata landed cleanly as atomic 241/300; permanent consumer remains dormant and rollout stays 4/5/57; no push. |
 | `INTER-MATCH-GAP-CAPTURE.4.5` | `INTER-MATCH-GAP-CAPTURE.4.5 - admit Dart inter-match gap capture` | Signoff-complete intended atomic 239/300 from `6a554312`; exact private Dart admission is canonical-green at 4/5/57 and closes parent `.4`; commit/brief/clean proof remains; no push. |
 | `INTER-MATCH-GAP-CAPTURE.4.4` | `INTER-MATCH-GAP-CAPTURE.4.4 - prove Dart emitted gap execution` | Signoff-complete independent emitted Dart proof for intended atomic 238/300 from `4c8ab7ee`; focused proof only, final consumer remains dormant, and rollout is unchanged; no push. |
@@ -2020,6 +2037,16 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
 
 ## Changelog
 
+- `2026-08-16`: Completed `.5.3` normalized reconstruction, compatible detached descriptor, and same-engine
+  generated-v2 execution from clean `73484302`. Explicit proof is 105 metadata + 33 native + 46 carrier
+  assertions; complete Julia, primary, storage 19/5, neutral/rooted 4/5/57, duplicate-slot 7/0/59, recognition
+  137/246/58, and typed-source 9/5/114 are green. Complete package proof corrected exact-key and logical-source
+  assumptions in two descriptor dependents without changing runtime semantics. Emitted, primary/admission,
+  rollout, outward, dependency, and format surfaces remain separately owned by `.5.4-.5.5`.
+- `2026-08-15`: Landed `.5.2` cleanly as atomic 242 at `73484302`, cleared the brief to zero bytes, proved the
+  post-commit memory pointer and empty tree, and activated Julia normalized-reconstruction/compatible-descriptor/
+  generated-v2 leaf `.5.3` task-tree-first from that exact boundary. Emitted, primary/admission, rollout, and
+  outward surfaces remain separately owned by `.5.4-.5.5`.
 - `2026-08-15`: Completed `.5.2` private native Julia execution from clean `3a620ec0`. The existing recognition
   invocation/token owns capture activation, detached entry identity, gap cursor/count/current state, rollback, and
   nested isolation without widening `RecognitionFrameState`. Capture-only selection precedes `LS`, candidates

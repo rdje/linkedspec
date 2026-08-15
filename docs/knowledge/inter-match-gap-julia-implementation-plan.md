@@ -19,10 +19,12 @@ answers:
   - "is Julia capture_gaps implemented now"
   - "how does Julia keep loaded gap metadata from leaking absolute paths"
   - "do Julia private gap helpers widen the supported ActionIR call inventory"
-date: 2026-08-15
-status: authored/static/compiled metadata and private native Julia execution implemented behind dormancy; reconstruction, emitted proof, and admission remain pending at gap rollout 4 complete / 5 pending
+  - "how does loaded source identity affect Julia descriptor equality"
+  - "which Julia descriptor tests changed for gap metadata"
+date: 2026-08-16
+status: Julia metadata, private native execution, normalized reconstruction, detached descriptors, and same-engine generated-v2 execution implemented behind dormancy; emitted proof and admission remain pending at gap rollout 4 complete / 5 pending
 tags: [julia, capture, segmentation, named-slots, recognition, source-location, generated-source, emitted-source, primary, plan]
-evidence: "INTER-MATCH-GAP-CAPTURE.5.1 implements defaulted SpecFile.source_id, pinned-Unicode named/anonymous declarations, selector/directive/static diagnostics, and compiled provenance. .5.2 extends only the existing private recognition invocation/token with activation, detached entry identity, committed gap cursor/count/current state, rollback, nested isolation, capture-only preselection, accepted commit, terminal tail, scalar-span projection, and four zero-argument private accessors. Explicit permanent-consumer proof is 105 metadata + 33 native assertions; the complete Julia package and recognition/typed-source/duplicate-slot matrices are green. The matrix exposed and corrected an attempted supported-call inventory widening: the four private helpers resolve separately, so the supported ActionIR inventory remains exactly 246. Ten dormancy mutations, rollout 4/5/57, storage 19/5, generated format 2, and outward surfaces remain unchanged."
+evidence: "INTER-MATCH-GAP-CAPTURE.5.1-.5.3 implement logical source identity and exact authored/static/compiled provenance; existing-recognition-authority native state/accessors/lifecycle; normalized SpecFile JSON reconstruction; fresh detached regex_slots/capture_gaps/five-field resolved_slot_edges descriptors; and direct/traced generated-v2 execution through the same runtime. Explicit permanent-consumer proof is 105 metadata + 33 native + 46 carrier assertions, including recursive invocation isolation and detached mutation guards for all three projections. Complete Julia proof corrected exact-key and loaded-vs-inline logical-source assumptions in cursor/root descriptor dependents; a loaded descriptor truthfully carries its basename where an inline descriptor carries inline. Supported ActionIR remains exactly 246, generated format 2 and ordered {label,family} rows remain unchanged, and storage/rollout/dormancy stay 19/5 and 4/5/57."
 reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'include(\"julia/test/inter_match_gap_capture_contract_test.jl\")' && bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/check_inter_match_gap_capture_six_runtime.sh && bash tools/run_julia_local.sh"
 ---
 
@@ -50,9 +52,8 @@ basename. The complete Julia gate exposed the otherwise-hidden risk that compile
 scratch absolute path; the corrected production loader now keeps the established compiled/descriptor path-opacity
 contract while retaining logical source provenance.
 
-The final consumer is permanent but mechanically dormant. Explicit execution passes 105 metadata and 33 native
-assertions. It is not
-included by ordinary package discovery, canonical CI, or the rooted recurring driver, and the Julia facade gains
+The final consumer is permanent but mechanically dormant. Explicit execution passes 105 metadata, 33 native, and
+46 carrier assertions. It is not included by ordinary package discovery, canonical CI, or the rooted recurring driver, and the Julia facade gains
 no gap token. Ten reason-checked mutations independently reject consumer identity, metadata role, contract source,
 parse/validation/compiler seam, diagnostic, discovery, rooted-execution, and facade drift. Storage stays at the
 pre-emitted boundary of 19 temporary-workspace owners and five locked package trees; `.5.4` still exclusively owns
@@ -78,6 +79,24 @@ the corrected boundary keeps it exactly 246 while retaining exact arity, unavail
 regression diagnostics. UTF-8 code-unit registers cross the existing immutable `SourceAuthority` only when a
 detached zero-based Unicode-scalar span or text value is requested.
 
+## Implemented `.5.3` carrier boundary
+
+Normalized `SpecFile` JSON is the sole reconstruction carrier and recompiles through the ordinary compiler. Rule
+descriptor metadata now returns fresh detached `regex_slots`, nullable `capture_gaps`, and five-field
+`resolved_slot_edges` projections. The pre-existing `resolved_edges` shape and `{label,idx}` dependency references
+remain byte-for-byte compatible; mutating a returned projection cannot alter compiled state or a later descriptor.
+
+Direct and trace-disabled generated-v2 entrypoints receive that reconstructed `CompiledSpec`, build the unchanged
+ordered `{label,family}` plan, and spend the same runtime authority as native execution. The permanent proof covers
+values, child-extended cursors, nesting, rollback, unavailable-context and cursor-regression failures, and exact
+generated source identity while retaining source format 2.
+
+Descriptor provenance is deliberately logical-source-sensitive. A source parsed inline projects `inline`; the same
+text loaded as `descriptor.spec`, `marked.spec`, or `markerless.spec` projects that basename. Complete package proof
+therefore corrected two direct dependents: exact rule-meta key inventories now require the three additive fields,
+and loaded-vs-inline comparisons rewrite only expected logical source IDs instead of erasing provenance. Runtime
+semantics, generated plans, and all legacy descriptor rows remain identical.
+
 ## Five dependency-ordered leaves
 
 1. `.5.1` adds authored/static/compiled identity. `SpecFile` gains a defaulted logical `source_id`; named and
@@ -95,7 +114,7 @@ detached zero-based Unicode-scalar span or text value is requested.
 3. `.5.3` uses normalized `SpecFile` JSON as the sole reconstruction carrier and recompiles normally. Descriptor
    rule metadata adds separate fresh `regex_slots`, `capture_gaps`, and five-field `resolved_slot_edges` values,
    preserving legacy `resolved_edges` and `{label,idx}` references. Direct and traced generated execution spend
-   the same runtime; source format 2 and ordered `{label,family}` plan rows remain exact.
+   the same runtime; source format 2 and ordered `{label,family}` plan rows remain exact. This leaf is complete.
 4. `.5.4` calls `emit_julia_source_v2` and independently loads ten value plus two typed-error modules from one
    repository-routed offline host project. A private writable depot is layered only over the retained repository
    depot and Julia system depots. This exact consumer is expected to advance the Julia temporary-workspace oracle

@@ -12,12 +12,13 @@ answers:
   - "which public surfaces are guarded for inter match gap capture"
   - "how many inter match gap mutations exist after recurring governance"
   - "what is the current inter match gap rollout"
-date: 2026-08-15
+date: 2026-08-16
 status: current governance; rollout is 4 complete + 5 pending with private Perl, Rust, and Dart admitted
 tags: [capture, segmentation, recurring-gate, project-data, no-overclaim, local-ci, rollout]
 evidence: "INTER-MATCH-GAP-CAPTURE.1.2 adds one repository-routed driver, canonical always-on neutral checking plus opt-in ordered governance, five topology/storage/public mutations, and exact outward-surface guards. Perl .2.4, Rust .3.5, and Dart .4.5 admit their complete consumers ordinarily, canonically, and once in rooted order. Current proof is 57 rejected semantic mutations plus ten Rust and ten Dart admission mutations, 4 complete + 5 pending, exact neutral-plus-Perl-plus-Rust-plus-Dart execution, three later-runtime skips, repository-volume storage, and unchanged outward guards."
 evidence_update_2026_08_15_julia_plan: "Behavior-free Julia planning leaf INTER-MATCH-GAP-CAPTURE.5.0 re-verifies this rooted sequence and freezes .5.1-.5.5 while leaving Julia skipped. Governance stays 4 complete + 5 pending / 57 semantic mutations plus ten Rust and ten Dart admission mutations; no driver, checker, contract, canonical registration, or outward guard changes."
 evidence_update_2026_08_15_julia_native: "Julia .5.1-.5.2 now implement dormant metadata and private native execution, but the permanent consumer remains outside ordinary/canonical/rooted discovery. The rooted route still executes neutral, Perl, Rust, and Dart before the exact Julia/PUC-Lua/LuaJIT skips; governance remains 4/5/57 plus ten Julia dormancy mutations."
+evidence_update_2026_08_16_julia_carrier: "Julia .5.3 now also implements normalized reconstruction, detached compatible descriptors, and same-engine generated-v2 execution. The permanent consumer remains dormant, so the rooted route and governance stay exactly neutral, Perl, Rust, Dart, then Julia/PUC-Lua/LuaJIT skips at 4/5/57 plus ten Julia dormancy mutations."
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py"
   - "bash tools/check_inter_match_gap_capture_six_runtime.sh"
@@ -39,7 +40,8 @@ in this rooted route. Rust's exact nine-role consumer adds native/reconstructed/
 lifecycle, recursion/rollback, diagnostic, and primary-command proof; `.3.5` registers it once on both routes.
 Perl, Rust, and Dart regressions are independently rejected. Ten Rust and ten Dart admission mutations lock their
 consumer/role/registration boundaries. Three later runtime routes remain pending and the public facade remains
-guarded; Julia `.5.1-.5.2` provide dormant metadata and private native execution without changing the driver.
+guarded; Julia `.5.1-.5.3` provide dormant metadata, native, reconstruction/descriptor, and generated-v2 proof
+without changing the driver.
 
 Canonical `tools/run_ci_local.sh` always executes the neutral checker. Setting
 `LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1` additionally invokes the ordered driver. This switch currently proves

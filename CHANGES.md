@@ -10,6 +10,30 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-16 — INTER-MATCH-GAP-CAPTURE.5.3 — carry Julia gap generated execution
+
+- Activated task-tree-first from clean atomic-242 commit `73484302`; the permanent consumer's carrier group first
+  passed five reconstruction assertions and then failed only on absent `regex_slots`, `capture_gaps`, and
+  `resolved_slot_edges` descriptor keys.
+- Made normalized `SpecFile` JSON the sole reconstruction carrier. The round trip preserves logical source,
+  declaration/directive provenance, five-field resolved selectors, private native state, and ordinary compilation.
+- Added fresh detached rule-meta `regex_slots`, nullable `capture_gaps`, and five-field `resolved_slot_edges`
+  projections. Legacy `resolved_edges` and `{label,idx}` dependency references remain exact; returned mutations do
+  not affect compiled state or later descriptor calls.
+- Direct and traced generated-v2 entrypoints spend the same compiled runtime. Exact prefix/tail, child-extended,
+  nesting, recursion, rollback, unavailable-context, and cursor-regression cases preserve values, lifecycle, diagnostics,
+  generated source identity, format 2, and ordered `{label,family}` plans.
+- Complete package proof caught two stale direct-dependent assumptions. Exact cursor-descriptor key inventories
+  now require the three additions, and loaded descriptor comparisons preserve basename logical source identity
+  instead of equating it with an inline parse's `inline`; all other descriptor and runtime values remain exact.
+- The dormant permanent consumer now passes 105 metadata + 33 native + 46 carrier assertions. Complete Julia,
+  primary, storage 19/5, neutral/rooted 4/5/57, duplicate-slot 7/0/59, recognition 137/246/58, and typed-source
+  9/5/114 proof pass with Julia still skipped by admission. The rendered book is 79/14,880 KiB and Knowledge is
+  838 facts / 7,075 question keys.
+- Synchronized the decision, roadmaps, task frontier, mdBook, Knowledge Map, and live history. Production emission,
+  primary/admission, rollout, outward surfaces, dependencies, storage ownership, and generated format remain
+  unchanged for `.5.4-.5.5`; ADR `0073` keeps this private carrier slice at focused tier.
+
 ## 2026-08-15 — INTER-MATCH-GAP-CAPTURE.5.2 — add Julia native gap execution
 
 - Activated task-tree-first from clean atomic-241 commit `3a620ec0`; the permanent consumer first failed exactly

@@ -968,6 +968,10 @@ function to_descriptor_json(rule::CompiledRule)
             "family" => rule_family(rule.mode_metadata),
             "cursor_policy" => cursor_policy(rule.mode_metadata),
             "edge_ownership" => _descriptor_edge_ownership(rule),
+            "regex_slots" => [to_json(slot) for slot in rule.regex_slots],
+            "capture_gaps" => rule.capture_gaps === nothing ?
+                nothing : to_json(rule.capture_gaps),
+            "resolved_slot_edges" => _resolved_slot_edge_descriptor_json(rule),
             "resolved_edges" => _resolved_edge_descriptor_json(rule),
             "mode" => to_json(rule.mode_metadata),
         ),
@@ -1010,6 +1014,19 @@ function _resolved_edge_descriptor_json(rule::CompiledRule)
         ))
     end
     return rows
+end
+
+function _resolved_slot_edge_descriptor_json(rule::CompiledRule)
+    return Dict{String,Any}[
+        Dict{String,Any}(
+            "selector_kind" => edge.selector_kind,
+            "authored_selector" => deepcopy(edge.authored_selector),
+            "target_rule" => only(edge.targets).label,
+            "regex_index" => edge.child_regex_index,
+            "target_slot_id" => edge.target_slot_id,
+        )
+        for edge in rule.action_edges
+    ]
 end
 
 function _descriptor_fluent_text(chain)

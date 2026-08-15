@@ -1,7 +1,7 @@
 # 0045 - Inter-match gap capture preserves action-edge target ownership
 
 - Date: 2026-07-17
-- Status: accepted; executable-neutral plus private Perl/Rust/Dart admission and dormant Julia native execution current; later carriers/runtimes/public admission pending
+- Status: accepted; executable-neutral plus private Perl/Rust/Dart admission and dormant Julia native/carrier/generated execution current; emitted/later runtimes/public admission pending
 - Tags: architecture, grammar, capture, segmentation, or-rule, action-edge, source-span, portability, parity
 
 ## Context
@@ -267,14 +267,14 @@ local emitted proof; then primary/nine-role admission. `SpecFile`, `SourceAuthor
 the carrier, scalar bridge, and plan shape. Exact mechanisms and no-change boundaries live in
 [[inter-match-gap-dart-implementation-plan]] and the owning task tree.
 
-## 2026-08-15 Julia implementation-plan amendment
+## 2026-08-16 Julia implementation-plan and carrier amendment
 
-Behavior-free `.5.0` froze `.5.1-.5.5`; `.5.1` now owns exact logical/authored/compiled metadata and dormancy, and
-`.5.2` extends the existing recognition invocation/token with private native gap state/lifecycle/accessors while
-leaving `RecognitionFrameState` exact and the supported ActionIR inventory at 246. Normalized reconstruction,
-compatible descriptors/unchanged-v2 generated execution, repository-local emitted proof, then primary/nine-role
-admission remain `.5.3-.5.5`. Exact mechanisms, storage 19→20, and planned 4/5/57→5/4/58 admission live in
-[[inter-match-gap-julia-implementation-plan]] and the owning task tree; outward surfaces remain unchanged.
+Behavior-free `.5.0` froze `.5.1-.5.5`; `.5.1-.5.3` now own exact logical/authored/compiled metadata, dormant
+native gap state/lifecycle/accessors, normalized reconstruction, detached compatible descriptors, and unchanged-v2
+generated execution through the same runtime. `RecognitionFrameState` and the supported ActionIR inventory remain
+exact; loaded descriptors retain basename logical source identity while inline descriptors retain `inline`.
+Repository-local emitted proof and primary/nine-role admission remain `.5.4-.5.5`; storage stays 19/5 before the
+planned 19→20 owner step and 4/5/57→5/4/58 admission. Outward surfaces and format 2 remain unchanged.
 
 ## 2026-08-13 recurring-governance amendment
 
