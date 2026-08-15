@@ -267,14 +267,14 @@ local emitted proof; then primary/nine-role admission. `SpecFile`, `SourceAuthor
 the carrier, scalar bridge, and plan shape. Exact mechanisms and no-change boundaries live in
 [[inter-match-gap-dart-implementation-plan]] and the owning task tree.
 
-## 2026-08-16 Julia implementation-plan and carrier amendment
+## 2026-08-16 Julia implementation, carrier, and emitted amendment
 
-Behavior-free `.5.0` froze `.5.1-.5.5`; `.5.1-.5.3` now own exact logical/authored/compiled metadata, dormant
-native gap state/lifecycle/accessors, normalized reconstruction, detached compatible descriptors, and unchanged-v2
-generated execution through the same runtime. `RecognitionFrameState` and the supported ActionIR inventory remain
-exact; loaded descriptors retain basename logical source identity while inline descriptors retain `inline`.
-Repository-local emitted proof and primary/nine-role admission remain `.5.4-.5.5`; storage stays 19/5 before the
-planned 19→20 owner step and 4/5/57→5/4/58 admission. Outward surfaces and format 2 remain unchanged.
+Behavior-free `.5.0` froze `.5.1-.5.5`; `.5.1-.5.4` now own exact logical/authored/compiled metadata, dormant native
+state/lifecycle/accessors, normalized reconstruction, detached compatible descriptors, same-runtime generated-v2
+execution, and independently loaded emitted proof. One repository-routed offline host loads ten value and two typed-
+error modules direct/traced against native authority, layers one private writable depot over retained repository/
+system depots, and cleans recursively; storage is exact 20/5. `RecognitionFrameState`, supported ActionIR 246,
+loaded/inline source identity, legacy descriptors/refs, format 2, rollout 4/5/57, and outward surfaces stay exact; primary/nine-role admission plus Julia-only 5/4/58 promotion remain exclusively `.5.5`.
 
 ## 2026-08-13 recurring-governance amendment
 

@@ -812,14 +812,15 @@ missing or duplicate ordinary/canonical/recurring registration, premature later-
 exposure. Rollout is 4 complete / 5 pending / 57 mutations, and generated plan v2 remains exactly
 `{label,family}`.
 
-### Julia metadata, native execution, and generated carriers — current behind dormancy
+### Julia metadata through emitted execution — current behind dormancy
 
 Julia `.5.0` recorded the pre-implementation boundary: numeric selectors compiled; named declarations/selectors
 and `@capture_gaps` were raw invalid body syntax; `entry_slot()` and the three gap accessors failed as structured
 unknown helpers; legacy `@move_pos` had no compiled/native effect; and repeated execution ran enclosing `LS`
 before candidate selection. `.5.1` implemented the authored/static/compiled layer, `.5.2` added private native
-execution, and `.5.3` now carries the same state through normalized reconstruction, compatible descriptors, and
-direct/traced generated-v2 execution without admitting Julia into ordinary or rooted gap rollout.
+execution, `.5.3` carries the same state through normalized reconstruction, compatible descriptors, and
+direct/traced generated-v2 execution, and `.5.4` proves independently loaded emitted execution without admitting
+Julia into ordinary or rooted gap rollout.
 
 Named and anonymous declarations share one authored regex order and use the existing generated Unicode 17.0.0
 rule-label scanner. ASCII-digit-only names are rejected, duplicate names carry their first declaration line, and
@@ -850,23 +851,27 @@ before `LX`/`EX`/`E`. Transaction rollback and nested invocations restore the sa
 `SourceAuthority` projects Julia's UTF-8 code-unit registers to detached scalar spans. `.5.3` now uses normalized
 `SpecFile` JSON as the sole carrier, adds separate compatible descriptor projections, and executes direct/traced
 generated-v2 entrypoints through the same runtime while retaining format 2 and exact `{label,family}` plan rows.
-`.5.4` independently loads ten value and two typed-error emitted
-modules from one repository-routed host, advancing only the exact Julia temporary-workspace inventory from 19 to
-20. `.5.5` alone reuses the primary adapter, admits nine roles exactly once, and advances Julia to 5/4/58.
+`.5.4` independently loads ten value and two typed-error emitted modules from one repository-routed offline host,
+advancing only the exact Julia temporary-workspace inventory from 19 to 20. Each module runs direct and traced
+against native authority with a private writable depot layered over retained repository/system depots; cleanup
+removes the complete host, modules, depot, and traces. `.5.5` alone reuses the primary adapter, admits nine roles
+exactly once, and advances Julia to 5/4/58.
 
 The permanent consumer lives at `julia/test/inter_match_gap_capture_contract_test.jl` and explicitly proves 105
-metadata, 33 native, and 46 carrier assertions, but it is absent from `runtests.jl`, canonical CI, and the rooted
-driver. Its carrier group reconstructs the Unicode prefix/tail example, requires exact detached descriptor rows,
-then runs child-extended, nested-owner, recursive-invocation, and rollback cases through native, direct generated,
-and traced generated paths.
+metadata, 33 native, 46 carrier, and 105 emitted assertions, but it is absent from `runtests.jl`, canonical CI,
+and the rooted driver. Its carrier group reconstructs the Unicode prefix/tail example, requires exact detached
+descriptor rows, then runs child-extended, nested-owner, recursive-invocation, and rollback cases through native,
+direct generated, and traced generated paths. Its emitted group covers Unicode/empty gaps, falsey results,
+lifecycle and child cursor extension, entry identity, nesting, rollback, terminal routes, failed minimum, direct
+entry, legacy behavior, and both typed failures across twelve independently loaded modules.
 Unavailable-context and cursor-regression failures retain generated stage/code/detail and the caller-supplied
 generated source identity. Ten independently reason-checked Julia dormancy mutations guard consumer identity,
 parse/validate/compile seams, discovery absence, rooted absence, and facade absence.
 
 The four private zero-argument gap helpers resolve through a separate private family, so the supported ActionIR
 inventory stays exactly 246; exact arity, unavailable-context, and cursor-regression diagnostics are native.
-Julia rollout therefore stays pending at 4/5/57. Emitted proof, primary execution/admission, outward surfaces,
-dependencies, and toolchain remain unchanged and separately owned by `.5.4-.5.5`.
+Julia rollout therefore stays pending at 4/5/57. Primary execution/admission, outward surfaces, dependencies, and
+toolchain remain unchanged and separately owned by `.5.5`.
 
 Named slot rules are exact:
 

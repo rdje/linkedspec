@@ -251,7 +251,9 @@ ADR `0074` explains the additional Dart regression guard. Maintained Dart comman
 packages on repository storage. Julia and both Lua routes remain explicit skips, and no outward surface moves.
 Behavior-free Julia `.5.0` freezes `.5.1-.5.5` before implementation. Its focused baseline passes duplicate-slot
 121, rule-local cursor 104, recognition transaction 207, typed source 127, and source emitter 65 (624 assertions),
-plus the existing primary process check and exact storage 19 temporary owners / 5 package trees. The plan reuses
+plus the existing primary process check and exact pre-emitted storage 19 temporary owners / 5 package trees. Julia
+`.5.4` now advances that oracle to 20 owners while one offline host proves ten value/two typed-error emitted modules
+direct/traced against native authority and cleans its private depot, generated files, and traces. The plan reuses
 the existing recognition invocation/token, immutable input `SourceAuthority`, normalized `SpecFile` carrier,
 generated format 2 `{label,family}` plan, and primary adapter. It changes no Julia runtime or 4/5/57 rollout state.
 Behavior-free Rust preflight `.3.0` assigns `.3.1-.3.5` to authored metadata, same-authority native state,

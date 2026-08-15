@@ -89,6 +89,7 @@ esac
 expected_temp_owners=(
  julia/test/callable_codeblock_literal_contract_test.jl
  julia/test/duplicate_regex_slot_identity_contract_test.jl
+ julia/test/inter_match_gap_capture_contract_test.jl
  julia/test/logical_helper_contract_test.jl
  julia/test/repeated_action_result_contract_test.jl
  julia/test/root_rule_selection_admission_test.jl
@@ -209,4 +210,4 @@ if find "$TMPDIR" -mindepth 1 -type d -name 'jl_*' -print -quit | grep -q .; the
  fail 'a completed focused Julia workspace remained in managed temporary storage'
 fi
 
-printf '[julia-project-data-test] PASS: 19 Julia owners, 5 locked package trees, generated output, and traces stay on repository storage\n'
+printf '[julia-project-data-test] PASS: 20 Julia owners, 5 locked package trees, generated output, and traces stay on repository storage\n'

@@ -10,6 +10,26 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-16 (`INTER-MATCH-GAP-CAPTURE.5.4` — Julia independently emitted gap proof): activation base is clean
+  atomic 243 at `1f531a5f`; registering the first `mktempdir()` in the dormant consumer deliberately produces the
+  exact storage-owner RED at 19→20 before the sorted inventory advances.
+- Reuse `emit_julia_source_v2` unchanged. One caller-owned offline host is enough for twelve independent modules
+  when each generated parser is included into a distinct fresh `Module`; use `Base.invokelatest` across that
+  world-age boundary for plan, direct, and traced functions.
+- Native authority is computed before emission from the same compiled spec. The child process receives normalized
+  expected values/plans, asserts both emitted routes internally, and returns JSON so the parent independently
+  checks direct, traced, plan, trace identity, and typed generated-error projections.
+- The emitted matrix is ten value modules—Unicode/falsey entry, empty spans, child cursor, nested isolation,
+  rollback, lifecycle order, no-match tail, failed minimum, direct entry, legacy—and two typed-error modules for
+  unavailable context and cursor regression. Every module has a unique logical generated source identity.
+- Layer the host-private writable depot before the already-routed retained repository/system stack; keep
+  `JULIA_PKG_OFFLINE=true` and `--compiled-modules=no`. Modules, runner, manifest, depot, and traces all live below
+  the single routed `mktempdir()` owner and disappear in a `finally` cleanup.
+- Focused signoff is 105 metadata + 33 native + 46 carrier + 105 emitted, complete Julia/primary/storage 20/5/
+  corpus 105, neutral/rooted 4/5/57, duplicate-slot 7/0/59, recognition 137/246/58, typed-source 9/5/114,
+  generated/capability/language ledgers, book 79/14,880, Knowledge 838/7,076, bounded histories, and nine doctrines.
+  Admission `.5.5` remains canonical; this leaf changes no emitter, plan, primary, rollout, or outward surface.
+
 - 2026-08-16 (`INTER-MATCH-GAP-CAPTURE.5.3` — Julia normalized/descriptor/generated carrier): activation base is
   clean atomic 242 at `73484302`; the explicit carrier group passed reconstruction then reached exact missing
   descriptor keys `regex_slots`, `capture_gaps`, and `resolved_slot_edges` before production projection existed.

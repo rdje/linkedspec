@@ -109,7 +109,7 @@ records and their empty shards deleted; residue is zero. Ambiguous shared packag
 unused by supported workflows.
 
 Julia now has equivalent ongoing protection. `tools/run_julia_project_data.sh` is the targeted self-rooted command
-boundary and `tools/test_julia_project_data_storage.sh` locks all 18 tracked temporary owners, filesystem-local
+boundary and `tools/test_julia_project_data_storage.sh` locks all 20 tracked temporary owners, filesystem-local
 managed temp/depot/package files, five locked package trees, offline JSON3 resolution, generated v2 source, traces,
 and cleanup. Both exact old depots were copied and verified on SSD storage before their sources were deleted; the
 exact former-checkout shared-log stanza is gone. The shared developer depot remains untouched and unused. Only

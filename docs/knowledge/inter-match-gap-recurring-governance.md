@@ -19,6 +19,7 @@ evidence: "INTER-MATCH-GAP-CAPTURE.1.2 adds one repository-routed driver, canoni
 evidence_update_2026_08_15_julia_plan: "Behavior-free Julia planning leaf INTER-MATCH-GAP-CAPTURE.5.0 re-verifies this rooted sequence and freezes .5.1-.5.5 while leaving Julia skipped. Governance stays 4 complete + 5 pending / 57 semantic mutations plus ten Rust and ten Dart admission mutations; no driver, checker, contract, canonical registration, or outward guard changes."
 evidence_update_2026_08_15_julia_native: "Julia .5.1-.5.2 now implement dormant metadata and private native execution, but the permanent consumer remains outside ordinary/canonical/rooted discovery. The rooted route still executes neutral, Perl, Rust, and Dart before the exact Julia/PUC-Lua/LuaJIT skips; governance remains 4/5/57 plus ten Julia dormancy mutations."
 evidence_update_2026_08_16_julia_carrier: "Julia .5.3 now also implements normalized reconstruction, detached compatible descriptors, and same-engine generated-v2 execution. The permanent consumer remains dormant, so the rooted route and governance stay exactly neutral, Perl, Rust, Dart, then Julia/PUC-Lua/LuaJIT skips at 4/5/57 plus ten Julia dormancy mutations."
+evidence_update_2026_08_16_julia_emitted: "Julia .5.4 now independently loads ten value/two typed-error emitted modules direct/traced in one repository-routed offline host and advances storage only to 20/5. The permanent consumer remains dormant, so rooted execution still passes neutral, Perl 124, Rust 1, Dart 5, then exact Julia/PUC-Lua/LuaJIT skips at gap 4/5/57 plus ten Julia dormancy mutations."
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py"
   - "bash tools/check_inter_match_gap_capture_six_runtime.sh"
@@ -40,7 +41,7 @@ in this rooted route. Rust's exact nine-role consumer adds native/reconstructed/
 lifecycle, recursion/rollback, diagnostic, and primary-command proof; `.3.5` registers it once on both routes.
 Perl, Rust, and Dart regressions are independently rejected. Ten Rust and ten Dart admission mutations lock their
 consumer/role/registration boundaries. Three later runtime routes remain pending and the public facade remains
-guarded; Julia `.5.1-.5.3` provide dormant metadata, native, reconstruction/descriptor, and generated-v2 proof
+guarded; Julia `.5.1-.5.4` provide dormant metadata, native, reconstruction/descriptor/generated, and emitted proof
 without changing the driver.
 
 Canonical `tools/run_ci_local.sh` always executes the neutral checker. Setting

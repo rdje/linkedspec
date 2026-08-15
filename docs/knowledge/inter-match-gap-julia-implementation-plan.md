@@ -22,9 +22,9 @@ answers:
   - "how does loaded source identity affect Julia descriptor equality"
   - "which Julia descriptor tests changed for gap metadata"
 date: 2026-08-16
-status: Julia metadata, private native execution, normalized reconstruction, detached descriptors, and same-engine generated-v2 execution implemented behind dormancy; emitted proof and admission remain pending at gap rollout 4 complete / 5 pending
+status: Julia metadata, private native, normalized/descriptor/generated carriers, and independently loaded emitted proof implemented behind dormancy; primary admission remains pending at gap rollout 4 complete / 5 pending
 tags: [julia, capture, segmentation, named-slots, recognition, source-location, generated-source, emitted-source, primary, plan]
-evidence: "INTER-MATCH-GAP-CAPTURE.5.1-.5.3 implement logical source identity and exact authored/static/compiled provenance; existing-recognition-authority native state/accessors/lifecycle; normalized SpecFile JSON reconstruction; fresh detached regex_slots/capture_gaps/five-field resolved_slot_edges descriptors; and direct/traced generated-v2 execution through the same runtime. Explicit permanent-consumer proof is 105 metadata + 33 native + 46 carrier assertions, including recursive invocation isolation and detached mutation guards for all three projections. Complete Julia proof corrected exact-key and loaded-vs-inline logical-source assumptions in cursor/root descriptor dependents; a loaded descriptor truthfully carries its basename where an inline descriptor carries inline. Supported ActionIR remains exactly 246, generated format 2 and ordered {label,family} rows remain unchanged, and storage/rollout/dormancy stay 19/5 and 4/5/57."
+evidence: "INTER-MATCH-GAP-CAPTURE.5.1-.5.4 implement logical source identity and exact authored/static/compiled provenance; existing-recognition-authority native state/accessors/lifecycle; normalized SpecFile JSON reconstruction; compatible detached descriptors; same-runtime generated-v2 execution; and independently loaded emitted direct/traced proof. Explicit permanent-consumer proof is 105 metadata + 33 native + 46 carrier + 105 emitted assertions. One repository-routed offline host loads ten value/two typed-error modules against native authority with a private writable depot over retained repository/system depots, then recursively cleans every module, trace, and host artifact. Storage advances exactly 19→20 owners while five package trees, ActionIR 246, format 2 ordered {label,family}, rollout 4/5/57, and dormancy remain exact."
 reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'include(\"julia/test/inter_match_gap_capture_contract_test.jl\")' && bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/check_inter_match_gap_capture_six_runtime.sh && bash tools/run_julia_local.sh"
 ---
 
@@ -52,12 +52,11 @@ basename. The complete Julia gate exposed the otherwise-hidden risk that compile
 scratch absolute path; the corrected production loader now keeps the established compiled/descriptor path-opacity
 contract while retaining logical source provenance.
 
-The final consumer is permanent but mechanically dormant. Explicit execution passes 105 metadata, 33 native, and
-46 carrier assertions. It is not included by ordinary package discovery, canonical CI, or the rooted recurring driver, and the Julia facade gains
+The final consumer is permanent but mechanically dormant. Explicit execution passes 105 metadata, 33 native, 46
+carrier, and 105 emitted assertions. It is not included by ordinary package discovery, canonical CI, or the rooted recurring driver, and the Julia facade gains
 no gap token. Ten reason-checked mutations independently reject consumer identity, metadata role, contract source,
-parse/validation/compiler seam, diagnostic, discovery, rooted-execution, and facade drift. Storage stays at the
-pre-emitted boundary of 19 temporary-workspace owners and five locked package trees; `.5.4` still exclusively owns
-the planned 19→20 transition.
+parse/validation/compiler seam, diagnostic, discovery, rooted-execution, and facade drift. `.5.4` advances storage
+from the pre-emitted 19-owner boundary to exactly 20 temporary-workspace owners while retaining five package trees.
 
 ## Implemented `.5.2` native boundary
 
@@ -97,6 +96,21 @@ therefore corrected two direct dependents: exact rule-meta key inventories now r
 and loaded-vs-inline comparisons rewrite only expected logical source IDs instead of erasing provenance. Runtime
 semantics, generated plans, and all legacy descriptor rows remain identical.
 
+## Implemented `.5.4` emitted boundary
+
+The dormant consumer calls `emit_julia_source_v2` without changing production emission. One caller-owned host is
+created under the repository-routed temporary root; its private writable depot is layered before the retained
+repository depot and Julia system depots, package access is offline, and compiled modules are disabled. Ten value
+modules and two typed-error modules are each included into their own fresh host module, then executed through both
+direct and traced entrypoints against the native result or diagnostic authority.
+
+The value matrix covers Unicode and empty spans, falsey accepted child payloads, child cursor extension, detached
+entry identity, nesting, rollback, exact lifecycle order, terminal/no-match behavior, failed minimum, direct entry,
+and unflagged legacy behavior. The error modules retain generated execute stage/code, their emitted source identity,
+and the exact native unavailable-context or cursor-regression marker. All twelve trace files retain generated rule
+entry and source identity. Recursive cleanup removes the host, private depot, modules, manifest, runner, and traces;
+the storage oracle rejects the unregistered owner at 19→20 before accepting this exact twentieth path.
+
 ## Five dependency-ordered leaves
 
 1. `.5.1` adds authored/static/compiled identity. `SpecFile` gains a defaulted logical `source_id`; named and
@@ -118,7 +132,7 @@ semantics, generated plans, and all legacy descriptor rows remain identical.
 4. `.5.4` calls `emit_julia_source_v2` and independently loads ten value plus two typed-error modules from one
    repository-routed offline host project. A private writable depot is layered only over the retained repository
    depot and Julia system depots. This exact consumer is expected to advance the Julia temporary-workspace oracle
-   from 19 to 20 owners while keeping the five locked package trees and proving complete cleanup.
+   from 19 to 20 owners while keeping the five locked package trees and proving complete cleanup. This leaf is complete.
 5. `.5.5` reuses the existing primary CLI adapter, removes dormancy, and executes the nine contract roles exactly
    once: `native_execution`, `ordinary_reconstruction`, `descriptor`, `generated_plan`, `emitted_source`,
    `target_lifecycle`, `recursion_and_rollback`, `portable_diagnostics`, and `primary_command`. Ordinary,

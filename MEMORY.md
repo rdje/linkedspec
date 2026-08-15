@@ -1,20 +1,19 @@
 # MEMORY
 
-- activation_commit: `73484302372ccea16fdab4b227e4004910030b09` — clean atomic-242 base for Julia carrier leaf
-  `INTER-MATCH-GAP-CAPTURE.5.3`; no push.
-- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.5.3 - carry Julia gap generated execution`; focused-signoff-
-  complete from clean atomic 242 at `73484302` for intended atomic 243.
-- active_work_unit: none at the intended clean post-landing boundary. `.5.3` adds normalized/descriptor/generated-
-  v2 carriers behind the dormant final consumer; parent `.5` remains active and emitted/admission remain pending.
-- next_action: after atomic 243 lands and brief/clean proof completes, activate `.5.4` task-tree-first for
-  independently compiled emitted Julia gap execution and exact storage-owner advancement from 19 to 20.
+- activation_commit: `1f531a5f68e8ce8f9627ec78a165baad548f2e26` — clean atomic-243 base for Julia emitted leaf
+  `INTER-MATCH-GAP-CAPTURE.5.4`; no push.
+- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.5.4 - prove Julia emitted gap execution`; focused-signoff-
+  complete from clean atomic 243 at `1f531a5f` for intended atomic 244.
+- active_work_unit: none at the intended clean post-landing boundary. `.5.4` adds independent emitted proof behind
+  the dormant final consumer; parent `.5` remains active and only primary/admission `.5.5` remains.
+- next_action: after atomic 244 lands and brief/clean proof completes, activate canonical `.5.5` task-tree-first
+  for existing-primary parity, nine-role admission, Julia-only 5/4/58 promotion, and parent `.5` closeout.
 - in_flight_uncommitted: none at the intended clean handoff; no generated artifact, background result, or partial
   implementation remains.
-- blockers: none. Deliberate RED passed reconstruction and reached only the three absent descriptor projections;
-  explicit proof is 105 metadata + 33 native + 46 carrier. Complete Julia package, primary, and storage 19/5
-  pass. Neutral/rooted stays 4/5/57 with ten Julia dormancy mutations; recognition 137/246/58, duplicate slot
-  7/0/59, typed source 9/5/114, rendered book 79/14,880, Knowledge 838/7,075, bounded histories, diff checks, and
-  all nine doctrines pass.
+- blockers: none. Deliberate storage RED rejects only 19→20; explicit proof is 105 metadata + 33 native + 46
+  carrier + 105 emitted. Complete Julia, primary, storage 20/5, and corpus 105 pass. Neutral/rooted stays 4/5/57
+  with ten Julia dormancy mutations; recognition 137/246/58, duplicate slot 7/0/59, typed source 9/5/114,
+  rendered book 79/14,880, Knowledge 838/7,076, bounded histories, diff checks, and all nine doctrines pass.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -42,8 +41,8 @@
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, and recurrence/public no-drift 9/9.
 - current_future_direction: gap is privately admitted on Perl, Rust, and Dart at 4/5/57 plus ten Rust and ten Dart
-  admission mutations. Julia `.5.1-.5.3` now own exact private metadata, native, normalized/descriptor, and
-  generated-v2 execution behind ten dormancy guards; `.5.4-.5.5` own emitted and admission work. Both Lua ABIs
-  and public rows remain pending; `.14.5.1` waits for `.7`.
-- latest_bootstrap_read: 2026-08-16 — roadmap/codebase/mdBook and continuity/tooling review complete; `.5.3` is
-  focused-signoff-complete for intended atomic 243, with commit/brief/clean proof the exact next action.
+  admission mutations. Julia `.5.1-.5.4` now own exact private metadata, native, normalized/descriptor/generated,
+  and independently emitted execution behind ten dormancy guards; `.5.5` alone owns admission. Both Lua ABIs and
+  public rows remain pending; `.14.5.1` waits for `.7`.
+- latest_bootstrap_read: 2026-08-16 — roadmap/codebase/mdBook and continuity/tooling review complete; `.5.4` is
+  focused-signoff-complete for intended atomic 244, with commit/brief/clean proof the exact next action.

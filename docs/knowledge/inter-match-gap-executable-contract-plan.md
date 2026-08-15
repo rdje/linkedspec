@@ -22,12 +22,13 @@ answers:
   - "what are the capture_gaps rollout legs"
   - "is capture_gaps implemented now"
 date: 2026-08-16
-status: neutral parent closed; private Perl/Rust/Dart admitted; Julia metadata, native, reconstruction, descriptor, and generated-v2 execution current behind dormancy
+status: neutral parent closed; private Perl/Rust/Dart admitted; Julia metadata through independent emitted execution current behind dormancy
 tags: [capture, segmentation, named-slots, typed-source, lifecycle, transaction, recursion, contract, plan]
-evidence: "INTER-MATCH-GAP-CAPTURE.1.1-.1.3 establish the executable neutral Unicode/empty/child/rollback/nested model, recurrence, and public no-overclaim. Perl .2, Rust .3, and Dart .4 are privately admitted through authored/static identity, same-authority native state, reconstructed/descriptor/generated carriers, independent emitted proof, existing-primary parity, and exact ordinary/canonical/rooted registration. Julia .5.1-.5.3 implement exact private metadata, same-recognition-authority native execution, normalized reconstruction, compatible descriptors, and same-engine generated-v2 execution behind ten dormancy mutations; emitted/primary admission remain pending. Current governance is 4 complete + 5 pending / 57 semantic mutations plus ten Rust and ten Dart admission mutations. Julia, PUC Lua, LuaJIT, recurring, and public rows remain pending."
+evidence: "INTER-MATCH-GAP-CAPTURE.1.1-.1.3 establish the executable neutral Unicode/empty/child/rollback/nested model, recurrence, and public no-overclaim. Perl .2, Rust .3, and Dart .4 are privately admitted through authored/static identity, same-authority native state, reconstructed/descriptor/generated carriers, independent emitted proof, existing-primary parity, and exact ordinary/canonical/rooted registration. Julia .5.1-.5.4 implement exact private metadata, same-recognition-authority native execution, normalized/descriptor/generated carriers, and independent emitted proof behind ten dormancy mutations; primary admission remains pending. Current governance is 4 complete + 5 pending / 57 semantic mutations plus ten Rust and ten Dart admission mutations. Julia, PUC Lua, LuaJIT, recurring, and public rows remain pending."
 evidence_update_2026_08_15_julia_plan: "Julia audit INTER-MATCH-GAP-CAPTURE.5.0 proves numeric selectors compile, named declarations/selectors/directive are raw invalid syntax, the four accessors are unknown helpers, legacy move_pos has no execution effect, and repeated LS precedes selection. It freezes .5.1-.5.5 across authored/static metadata, same-authority native state, normalized reconstruction/descriptor/generated-plan carriers, independently loaded emitted proof, and primary/nine-role admission. No Julia behavior or 4/5/57 rollout state moves."
 evidence_update_2026_08_15_julia_native: "INTER-MATCH-GAP-CAPTURE.5.1-.5.2 now provide dormant authored/static/compiled metadata and private native gap state/accessors/lifecycle on the existing recognition authority. Explicit proof is 105 metadata + 33 native; supported ActionIR remains exactly 246 because the four accessors resolve through a separate private family. Rollout remains 4/5/57 and the rooted driver still skips Julia."
 evidence_update_2026_08_16_julia_carrier: "INTER-MATCH-GAP-CAPTURE.5.3 adds normalized SpecFile JSON reconstruction, fresh detached regex_slots/capture_gaps/five-field resolved_slot_edges descriptors, and direct/traced generated-v2 proof through the same runtime. Explicit proof composes to 105 metadata + 33 native + 46 carrier assertions, including recursive capture and detached mutation guards for all three projections. Loaded descriptors retain basename logical source identity while inline descriptors retain inline; legacy resolved_edges, dependency refs, format 2, ordered label/family plans, storage 19/5, rollout 4/5/57, and Julia dormancy remain exact."
+evidence_update_2026_08_16_julia_emitted: "INTER-MATCH-GAP-CAPTURE.5.4 adds 105 emitted assertions: one repository-routed offline host independently loads ten value/two typed-error modules direct/traced against native authority. A private writable depot layers over retained repository/system depots, compiled modules stay disabled, traces retain source identity, typed failures retain generated stage/code/native markers, and recursive cleanup is exact. The storage RED rejects only 19→20 before the oracle advances to 20/5. Production emission, format 2 plans, rollout 4/5/57, ten Julia dormancy mutations, primary/admission, and outward surfaces remain unchanged."
 reverify: "bash tools/check_inter_match_gap_capture_six_runtime.sh && prove -Iperl t/inter_match_gap_capture_perl_contract.t && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract"
 ---
 
@@ -40,9 +41,9 @@ reverify: "bash tools/check_inter_match_gap_capture_six_runtime.sh && prove -Ipe
 routing and no-overclaim governance through `tools/check_inter_match_gap_capture_six_runtime.sh`. `.1.3`
 independently recomposes those committed inputs unchanged and closes neutral parent `.1`; Perl `.2` then completes
 authored, native-live, emitted/loaded, and private admission. Rust `.3.1-.3.5` and Dart `.4.1-.4.5` complete the
-equivalent private authored/native/reconstructed/generated/emitted/primary paths. Julia `.5.1-.5.3` now provide
-dormant metadata, private native execution, normalized/descriptor carriers, and same-engine generated-v2 proof;
-`.5.4-.5.5` remain pending. The driver executes neutral, Perl, Rust, and Dart, then skips Julia, PUC Lua, and
+equivalent private authored/native/reconstructed/generated/emitted/primary paths. Julia `.5.1-.5.4` now provide
+dormant metadata, private native execution, normalized/descriptor/generated carriers, and independent emitted proof;
+primary admission `.5.5` remains pending. The driver executes neutral, Perl, Rust, and Dart, then skips Julia, PUC Lua, and
 LuaJIT.
 
 The nine ordered rollout legs are neutral, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurring proof, and public
@@ -114,8 +115,8 @@ Perl, Rust, and Dart recognize the named declaration/selector syntax and `@captu
 contract, retain private descriptor/generated provenance, and execute native, reconstructed/generated, emitted,
 and primary roles through their existing recognition/source authorities. Their full consumers are admitted in
 ordinary CI and the rooted recurring route; no outward public admission has occurred. Julia now implements
-authored, native, normalized/descriptor, and generated-v2 roles behind dormancy; emitted and primary/admission
-remain dependency-frozen as `.5.4-.5.5`.
+authored, native, normalized/descriptor, generated-v2, and independently emitted roles behind dormancy; primary
+admission remains dependency-frozen as `.5.5`.
 See ADR `0045`, `docs/knowledge/inter-match-gap-rust-implementation-plan.md`,
 `docs/knowledge/inter-match-gap-dart-implementation-plan.md`,
 `docs/knowledge/inter-match-gap-julia-implementation-plan.md`, and `docs/tasks/INTER-MATCH-GAP-CAPTURE.md` for

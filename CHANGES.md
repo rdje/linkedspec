@@ -10,6 +10,27 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-16 — INTER-MATCH-GAP-CAPTURE.5.4 — prove Julia emitted gap execution
+
+- Activated task-tree-first from clean atomic-243 commit `1f531a5f`; adding the emitted host produced the planned
+  exact storage RED, which rejected only the unregistered Julia temporary-owner transition from 19 to 20.
+- Extended the mechanically dormant permanent consumer without changing production emission. One repository-
+  routed offline host calls `emit_julia_source_v2` for ten value and two typed-error modules, then loads each in a
+  distinct fresh host module with compiled modules disabled.
+- Direct and traced emitted results equal native authority for Unicode/empty gaps, falsey child payloads, target
+  lifecycle, child cursor extension, detached entry identity, nesting, rollback, terminal/no-match routes, failed
+  minimum, direct entry, and legacy behavior. Both errors retain execute stage/code, emitted source identity, and
+  exact unavailable-context or cursor-regression markers.
+- The host layers one private writable depot over the retained repository/system depot stack, writes every module
+  and trace below one routed scratch owner, and recursively proves cleanup. The storage oracle now locks exactly
+  20 temporary owners and the same five package trees.
+- Explicit proof is 105 metadata + 33 native + 46 carrier + 105 emitted assertions. Complete Julia, primary,
+  storage 20/5, corpus 105, neutral/rooted gap 4/5/57, duplicate-slot 7/0/59, recognition 137/246/58, typed-source
+  9/5/114, generated/capability/language ledgers, rendered book 79/14,880, and Knowledge 838/7,076 pass.
+- Synchronized the decision, task frontier, roadmaps, mdBook, storage authorities, Knowledge Map, and live history.
+  The final consumer remains absent from ordinary/canonical/rooted execution; production emitter, format 2 plan,
+  primary/admission, rollout, outward surfaces, and dependencies remain unchanged for `.5.5`.
+
 ## 2026-08-16 — INTER-MATCH-GAP-CAPTURE.5.3 — carry Julia gap generated execution
 
 - Activated task-tree-first from clean atomic-242 commit `73484302`; the permanent consumer's carrier group first

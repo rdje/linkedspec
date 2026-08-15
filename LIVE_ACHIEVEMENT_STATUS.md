@@ -2,31 +2,33 @@
 
 ## Current Activity
 
-- Atomic 242 landed cleanly at `73484302`; Julia carrier leaf `INTER-MATCH-GAP-CAPTURE.5.3` is focused-signoff-
-  complete from that exact boundary for intended atomic 243; no push.
-- Normalized `SpecFile` JSON is the sole reconstruction carrier. Fresh detached descriptor metadata exposes slot,
-  directive, and five-field resolved-selector provenance while preserving legacy edges and dependency refs.
-- The dormant permanent consumer passes 105 metadata + 33 native + 46 carrier assertions. Direct/traced
-  generated-v2 execution spends the same runtime and retains format 2, exact plans, typed failures, and identity.
-- Complete Julia package/primary/storage 19/5 and all cross-runtime matrices pass. Emitted proof, primary
-  admission, and every outward surface remain `.5.4-.5.5`-owned.
+- Atomic 243 landed cleanly at `1f531a5f`; Julia emitted leaf `INTER-MATCH-GAP-CAPTURE.5.4` is focused-signoff-
+  complete from that exact boundary for intended atomic 244; no push.
+- One repository-routed offline host independently loads ten value and two typed-error emitted modules through
+  direct/traced entrypoints against native authority and recursively cleans modules, private depot, and traces.
+- The dormant permanent consumer passes 105 metadata + 33 native + 46 carrier + 105 emitted assertions. Production
+  emission, format 2 plans, logical identity, legacy descriptors/refs, and the exact 246 call inventory stay exact.
+- Complete Julia package/primary/storage 20/5/corpus 105 and all cross-runtime matrices pass. Primary admission and
+  every outward surface remain `.5.5`-owned.
 - Governance remains 4/5/57 plus ten Rust and ten Dart admission mutations. Julia, both Lua ABIs, recurring/public
   rows, typed composition, and every outward facade/schema/MCP/CLI/README surface remain pending or unchanged.
 
 ## Latest Completed Slice
 
-- `.5.3` is focused-signoff-complete. Deliberate RED reached only the three absent descriptor projections after
-  reconstruction passed; explicit proof is 105+33+46. Full Julia package/primary/storage 19/5, neutral/rooted
-  4/5/57, recognition 137/246/58, duplicate slot 7/0/59, typed source 9/5/114, rendered book 79/14,880,
-  Knowledge 838/7,075, bounded histories, and all nine doctrines pass.
+- `.5.4` is focused-signoff-complete. Deliberate storage RED rejected only 19→20; explicit proof is 105+33+46+105.
+  Full Julia package/primary/storage 20/5/corpus 105, neutral/rooted 4/5/57, recognition 137/246/58, duplicate slot
+  7/0/59, typed source 9/5/114, rendered book 79/14,880, Knowledge 838/7,076, bounded histories, and all nine
+  doctrines pass.
 
 ## Next Action
 
-- Commit intended atomic 243, clear the brief, prove the clean handoff, then activate `.5.4` task-tree-first for
-  independently compiled emitted Julia gap execution and the exact 19→20 temporary-owner transition.
+- Commit intended atomic 244, clear the brief, prove the clean handoff, then activate canonical `.5.5` task-tree-
+  first for existing-primary parity, exact nine-role admission, Julia-only 5/4/58 promotion, and parent closeout.
 
 ## Recent Completions
 
+- `2026-08-16` — `.5.4` proved ten value/two typed-error Julia emitted modules in one offline routed host from
+  clean `1f531a5f`, advancing only storage to 20/5 while preserving gap rollout 4/5/57.
 - `2026-08-16` — `.5.3` completed normalized reconstruction, compatible detached descriptors, and same-engine
   generated-v2 gap execution from clean `73484302`, preserving rollout 4/5/57 and storage 19/5.
 - `2026-08-15` — `.5.2` completed private Julia native gap state/accessors/lifecycle on the existing recognition

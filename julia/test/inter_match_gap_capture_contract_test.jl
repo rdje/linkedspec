@@ -1,9 +1,9 @@
-# INTER-MATCH-GAP-CAPTURE.5.1-.5.3 — dormant Julia metadata/native/carrier stages.
+# INTER-MATCH-GAP-CAPTURE.5.1-.5.4 — dormant Julia metadata/native/carrier/emitted stages.
 #
 # This final consumer path now proves parsing, validation, compiled provenance,
 # source identity, private native gap execution, normalized reconstruction,
-# compatible descriptors, and same-engine generated-v2 execution. Emitted source,
-# primary execution, and admission remain owned by `.5.4-.5.5`.
+# compatible descriptors, same-engine generated-v2 execution, and independently
+# loaded emitted source. Primary execution and admission remain owned by `.5.5`.
 # DORMANT: INTER-MATCH-GAP-CAPTURE.5.5 owns Julia runtime admission
 
 module JuliaInterMatchGapCaptureContract
@@ -87,6 +87,38 @@ function generated_error(
         return error
     end
     error("fixture must fail during generated execution")
+end
+
+function emitted_host_process(
+    scratch::AbstractString,
+    runner::AbstractString,
+    manifest::AbstractString,
+    private_depot::AbstractString,
+)
+    separator = Sys.iswindows() ? ';' : ':'
+    retained_depot = get(ENV, "JULIA_DEPOT_PATH", "")
+    isempty(retained_depot) &&
+        error("emitted gap host requires the repository-routed Julia depot stack")
+    depot_path = string(private_depot, separator, retained_depot)
+    load_path = join(
+        [scratch, normpath(joinpath(@__DIR__, "..")), "@stdlib"],
+        separator,
+    )
+    command = `$(Base.julia_cmd()) --project=$scratch --startup-file=no --history-file=no --compiled-modules=no $runner $manifest`
+    environment = copy(ENV)
+    environment["JULIA_DEPOT_PATH"] = depot_path
+    environment["JULIA_LOAD_PATH"] = load_path
+    environment["JULIA_PKG_OFFLINE"] = "true"
+    output = IOBuffer()
+    errors = IOBuffer()
+    process = run(
+        pipeline(
+            ignorestatus(setenv(command, environment));
+            stdout = output,
+            stderr = errors,
+        ),
+    )
+    return success(process), String(take!(output)), String(take!(errors))
 end
 
 function portable_diagnostic(
@@ -989,6 +1021,381 @@ Probe:
             @test occursin(generated_detail, something(failure.detail, ""))
         end
     end
+end
+
+@testset "Julia independently loaded emitted gap execution" begin
+    value_cases = (
+        (
+            name = "unicode_entry_falsey",
+            source = raw"""Top::
+ I { segments = [] }
+ @capture_gaps
+ -> Part[header]  { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span(), "child", call(Part))) }
+ -> Part[section] { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span(), "child", call(Part))) }
+ -> Part[footer]  { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span(), "child", call(Part))) }
+ LX { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span())); return(copy(segments)) }
+Part:
+ header=/H/
+ section=/S/
+ footer=/F/
+ I { return(hash("slot", entry_slot(), "text", entry_text(), "falsey", 0)) }
+""",
+            input = "αHβ\nS🙂Fω",
+        ),
+        (
+            name = "empty_spans",
+            source = raw"""Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Part[h] { push(gaps, array(gap_kind(), gap_text(), gap_span())) }
+ -> Part[s] { push(gaps, array(gap_kind(), gap_text(), gap_span())) }
+ -> Part[f] { push(gaps, array(gap_kind(), gap_text(), gap_span())) }
+ LX { push(gaps, array(gap_kind(), gap_text(), gap_span())); return(copy(gaps)) }
+Part:
+ h=/H/
+ s=/S/
+ f=/F/
+ I.return(entry_text())
+""",
+            input = "HSF",
+        ),
+        (
+            name = "child_cursor",
+            source = raw"""Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Container[open] { push(gaps, array(gap_text(), call(Container))) }
+ -> Bang { push(gaps, array(gap_text(), call(Bang))) }
+ LX { push(gaps, array(gap_text(), gap_kind())); return(copy(gaps)) }
+Container:
+ open=/\{/
+ -> Close { return(call(Close)) }
+Close:
+ /\}/
+ I.return(entry_text())
+Bang:
+ /!/
+ I.return(entry_text())
+""",
+            input = "p{abc}gap!",
+        ),
+        (
+            name = "nested_isolation",
+            source = raw"""Top::
+ @capture_gaps
+ -> Container[open] { return(array(gap_text(), call(Container), gap_text())) }
+Container:
+ open=/\{/
+ I { inner = [] }
+ @capture_gaps
+ -> Atom { push(inner, gap_text()) }
+ LX { push(inner, gap_text()); return(copy(inner)) }
+Atom:
+ /x/
+ I.return(entry_text())
+""",
+            input = "p{axtail",
+        ),
+        (
+            name = "rollback",
+            source = raw"""Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Part[h] {
+  tx = recognition_checkpoint();
+  matched = recognize_once(tx, call(Probe));
+  recognition_rollback(tx);
+  push(gaps, gap_text())
+ }
+ -> Part[s] { push(gaps, gap_text()) }
+ LX { push(gaps, gap_text()); return(copy(gaps)) }
+Part:
+ h=/H/
+ s=/S/
+ I.return(entry_text())
+Probe:
+ /X/
+ I.return(0)
+""",
+            input = "aHXbS",
+        ),
+        (
+            name = "lifecycle_order",
+            source = raw"""Top::OR{1}
+ I { events = [] }
+ @capture_gaps
+ -> Part { push(events, array("action", gap_kind(), gap_text())) }
+ LS { push(events, array("ls", gap_kind(), gap_text(), match_text())) }
+ LE { push(events, array("le", gap_kind(), gap_text())) }
+ IT { push(events, array("it")) }
+ LX { push(events, array("lx", gap_kind(), gap_text())); return(copy(events)) }
+Part: /H/
+""",
+            input = "aHb",
+        ),
+        (
+            name = "no_match_tail",
+            source = raw"""Top::
+ @capture_gaps
+ -> Part { return(gap_text()) }
+ LX { return(array(gap_kind(), gap_text(), gap_span())) }
+Part: /H/
+""",
+            input = "abc",
+        ),
+        (
+            name = "failed_minimum",
+            source = raw"""Top::OR{2}
+ @capture_gaps
+ -> Part { return(gap_text()) }
+ EX { return("unexpected-ex") }
+ E { return("unexpected-e") }
+Part: /H/
+""",
+            input = "H",
+        ),
+        (
+            name = "direct_entry",
+            source = "Part::\n /H/\n I { return(entry_slot()) }\n",
+            input = "H",
+        ),
+        (
+            name = "legacy",
+            source = "Top::\n /H/\n E { return(\"legacy\") }\n",
+            input = "H",
+        ),
+    )
+    error_cases = (
+        (
+            name = "unavailable",
+            source = "Direct::\n /H/\n I { return(gap_text()) }\n",
+            input = "H",
+            diagnostic_code = "gap_capture_context_unavailable",
+            marker = "LINKEDSPEC_INTER_MATCH_GAP_ERROR:gap_capture_context_unavailable",
+        ),
+        (
+            name = "regression",
+            source = "Top::OR{1}\n @capture_gaps\n -> Part { rewind_match_start() }\nPart: /H/\n",
+            input = "aH",
+            diagnostic_code = "source_location_cursor_regression",
+            marker = "LINKEDSPEC_SOURCE_LOCATION_ERROR:source_location_cursor_regression",
+        ),
+    )
+    @assert (length(value_cases), length(error_cases)) == (10, 2)
+
+    scratch = mktempdir()
+    try
+        private_depot = joinpath(scratch, "depot")
+        traces = joinpath(scratch, "traces")
+        mkpath(private_depot)
+        mkpath(traces)
+        write(
+            joinpath(scratch, "Project.toml"),
+            "name = \"JuliaGapEmittedHost\"\n" *
+            "uuid = \"63544572-c3c1-41fa-a394-809092a9d61d\"\n" *
+            "version = \"0.1.0\"\n",
+        )
+
+        manifest_values = Dict{String,Any}[]
+        expected_values = Dict{String,Any}()
+        for (index, fixture) in enumerate(value_cases)
+            identity = "generated-source/julia-gap/$(fixture.name).spec"
+            compiled = compile_metadata(fixture.source; source_id = identity)
+            expected = runtime_parse(
+                LinkedSpecRuntimeEngine(compiled),
+                fixture.input,
+            ).value
+            generated = emit_julia_source_v2(compiled, identity)
+            @test occursin("linkedspec-generated-source-v2", generated)
+            @test occursin("const LINKEDSPEC_GENERATED_SOURCE_FORMAT = 2", generated)
+            generated_path = joinpath(scratch, "value_$index.jl")
+            trace_path = joinpath(traces, "$(fixture.name).trace")
+            write(generated_path, generated)
+            plan = [to_json(row) for row in build_generated_rule_plan(compiled)]
+            push!(manifest_values, Dict{String,Any}(
+                "name" => fixture.name,
+                "path" => generated_path,
+                "input" => fixture.input,
+                "identity" => identity,
+                "expected" => expected,
+                "plan" => plan,
+                "trace" => trace_path,
+            ))
+            expected_values[fixture.name] = Dict{String,Any}(
+                "direct" => expected,
+                "traced" => expected,
+                "plan" => plan,
+            )
+        end
+
+        manifest_errors = Dict{String,Any}[]
+        for (index, fixture) in enumerate(error_cases)
+            identity = "generated-source/julia-gap/$(fixture.name).spec"
+            compiled = compile_metadata(fixture.source; source_id = identity)
+            native_failure = native_error(fixture.source, fixture.input)
+            @test (
+                native_failure.diagnostic.code,
+                native_failure.message,
+            ) == (fixture.diagnostic_code, fixture.marker)
+            generated_path = joinpath(scratch, "error_$index.jl")
+            trace_path = joinpath(traces, "$(fixture.name)-error.trace")
+            write(generated_path, emit_julia_source_v2(compiled, identity))
+            push!(manifest_errors, Dict{String,Any}(
+                "name" => fixture.name,
+                "path" => generated_path,
+                "input" => fixture.input,
+                "identity" => identity,
+                "diagnostic_code" => fixture.diagnostic_code,
+                "marker" => fixture.marker,
+                "trace" => trace_path,
+            ))
+        end
+
+        manifest_path = joinpath(scratch, "cases.json")
+        write(
+            manifest_path,
+            JSON3.write(Dict(
+                "values" => manifest_values,
+                "errors" => manifest_errors,
+            )),
+        )
+        runner_path = joinpath(scratch, "runner.jl")
+        write(
+            runner_path,
+            """
+import JSON3
+import LinkedSpecJulia
+
+normalize(value) = value
+normalize(value::AbstractVector) = [normalize(item) for item in value]
+normalize(value::AbstractDict) =
+    Dict(String(key) => normalize(item) for (key, item) in value)
+latest_binding(owner::Module, name::Symbol) =
+    Base.invokelatest(() -> Core.getglobal(owner, name))
+
+function load_parser(path::AbstractString, index::Integer, kind::AbstractString)
+    host = Module(Symbol("JuliaGapEmitted", kind, index))
+    Base.include(host, path)
+    return Base.invokelatest(() -> getfield(host, :LinkedSpecGeneratedParser))
+end
+
+function trace_config(path::AbstractString)
+    return LinkedSpecJulia.LinkedSpecTraceConfig(
+        level = LinkedSpecJulia.LinkedSpecTraceLow,
+        trace_file = String(path),
+        sink_mode = LinkedSpecJulia.LinkedSpecTraceRoute,
+        reset_file = true,
+    )
+end
+
+function capture_failure(operation)
+    try
+        operation()
+    catch error
+        error isa LinkedSpecJulia.GeneratedSourceException || rethrow()
+        return LinkedSpecJulia.to_json(error)
+    end
+    error("generated operation unexpectedly succeeded")
+end
+
+manifest = JSON3.read(read(ARGS[1], String))
+values = Dict{String,Any}()
+errors = Dict{String,Any}()
+for (index, fixture) in enumerate(manifest["values"])
+    parser = load_parser(String(fixture["path"]), index, "Value")
+    direct = Base.invokelatest(
+        latest_binding(parser, :execute),
+        String(fixture["input"]),
+    )
+    traced = Base.invokelatest(
+        latest_binding(parser, :execute_with_trace),
+        String(fixture["input"]),
+        trace_config(String(fixture["trace"]));
+        stdout_io = IOBuffer(),
+    )
+    plan = [
+        LinkedSpecJulia.to_json(row) for row in
+        Base.invokelatest(latest_binding(parser, :plan))
+    ]
+    name = String(fixture["name"])
+    values[name] = Dict(
+        "direct" => normalize(direct),
+        "traced" => normalize(traced),
+        "plan" => normalize(plan),
+    )
+    @assert values[name]["direct"] == normalize(fixture["expected"])
+    @assert values[name]["traced"] == normalize(fixture["expected"])
+    @assert values[name]["plan"] == normalize(fixture["plan"])
+end
+for (index, fixture) in enumerate(manifest["errors"])
+    parser = load_parser(String(fixture["path"]), index, "Error")
+    direct = capture_failure() do
+        Base.invokelatest(
+            latest_binding(parser, :execute),
+            String(fixture["input"]),
+        )
+    end
+    traced = capture_failure() do
+        Base.invokelatest(
+            latest_binding(parser, :execute_with_trace),
+            String(fixture["input"]),
+            trace_config(String(fixture["trace"]));
+            stdout_io = IOBuffer(),
+        )
+    end
+    errors[String(fixture["name"])] = Dict(
+        "direct" => direct,
+        "traced" => traced,
+    )
+end
+print(JSON3.write(Dict("values" => values, "errors" => errors)))
+""",
+        )
+
+        passed, output, errors = emitted_host_process(
+            scratch,
+            runner_path,
+            manifest_path,
+            private_depot,
+        )
+        @test passed
+        @test isempty(errors)
+        emitted = passed ? JSON3.read(output, Dict{String,Any}) : Dict{String,Any}()
+        values = get(emitted, "values", Dict{String,Any}())
+        normalized_expected = JSON3.read(
+            JSON3.write(expected_values),
+            Dict{String,Any},
+        )
+        for fixture in value_cases
+            actual = values[fixture.name]
+            expected = normalized_expected[fixture.name]
+            @test actual["direct"] == expected["direct"]
+            @test actual["traced"] == expected["traced"]
+            @test actual["plan"] == expected["plan"]
+            trace = read(joinpath(traces, "$(fixture.name).trace"), String)
+            @test occursin("generated_rule_enter", trace)
+            @test occursin("generated_rule_exit", trace)
+            @test occursin("generated-source/julia-gap/$(fixture.name).spec", trace)
+        end
+        emitted_errors = get(emitted, "errors", Dict{String,Any}())
+        for fixture in error_cases
+            routes = emitted_errors[fixture.name]
+            for route in ("direct", "traced")
+                failure = routes[route]
+                @test failure["stage"] == "execute_generated"
+                @test failure["code"] == "generated_execution_failed"
+                @test failure["source_identity"] ==
+                      "generated-source/julia-gap/$(fixture.name).spec"
+                @test occursin(fixture.marker, failure["detail"])
+            end
+            trace = read(joinpath(traces, "$(fixture.name)-error.trace"), String)
+            @test occursin("generated_rule_enter", trace)
+            @test occursin("generated-source/julia-gap/$(fixture.name).spec", trace)
+        end
+    finally
+        rm(scratch; recursive = true, force = true)
+    end
+    @test !ispath(scratch)
 end
 
 end # module JuliaInterMatchGapCaptureContract
