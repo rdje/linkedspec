@@ -212,29 +212,32 @@ containment and relocation, CLI 66/66 in both option environments, RAM 62%, Phas
 and this complete matrix through its exact success marker. The combined program-wide `.14.8` public-no-drift row
 remains pending.
 
-Inter-match gap-capture recurring governance runs the complete neutral and Perl rows; five later runtime routes remain explicit skips.
+Inter-match gap-capture recurring governance runs the complete neutral, Perl, and Rust rows; four later runtime routes remain explicit skips.
 Perl `.2.1-.2.3` established metadata, private live behavior, and independently loaded generated parity. Admission
 `.2.4` makes the full metadata/live/generated consumer the default, registers it once in ordinary canonical CI
 and once in the rooted recurring route, promotes only `perl_runtime`, and retires the obsolete dormancy fence.
-The neutral checker now rejects 56 semantic/topology mutations at rollout 2 complete / 7 pending: Perl regression
-and premature Rust promotion are both locked, while facade/schema/semantic/MCP/CLI/README surfaces remain absent.
+The neutral checker now rejects 56 semantic/topology mutations at rollout 3 complete / 6 pending: Perl and Rust
+regressions are both locked, while facade/schema/semantic/MCP/CLI/README surfaces remain absent.
 Behavior-free Rust preflight `.3.0` assigns `.3.1-.3.5` to authored metadata, same-authority native state,
 reconstruction/generated-plan parity, repository-local emitted proof, and final primary/admission. `.3.1` now
 implements exact Rust named/anonymous declarations, selectors, directive validation, diagnostics, and compiled
-provenance from clean `4a95e02a` without changing rollout. Its final-path integration test is explicitly ignored
-until `.3.5`, so even the optional package-wide Rust gate cannot execute it implicitly. Ten checker-local Rust
-dormancy mutations lock that owner plus canonical/recurring/facade absence; only `.3.5` may remove the ignore,
-register the consumer, or replace the premature-Rust rollout guard.
+provenance from clean `4a95e02a`. Final `.3.5` adds primary parity, a nine-role once-only runtime ledger, ordinary
+discovery, one canonical registration, and one recurring registration after Perl. Ten checker-local Rust
+admission mutations lock the consumer identity, role ledger, primary role, ordinary/canonical/recurring
+multiplicity, later-runtime skips, and facade absence.
 The always-on neutral command is
 `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py`. The repository-routed
-`tools/check_inter_match_gap_capture_six_runtime.sh` driver repeats that authority exactly once, runs Perl once,
-then reports pending Rust, Dart, Julia, PUC Lua, and LuaJIT routes in fixed order without invoking absent consumers.
+`tools/check_inter_match_gap_capture_six_runtime.sh` driver repeats that authority exactly once, runs Perl and Rust
+once each, then reports pending Dart, Julia, PUC Lua, and LuaJIT routes in fixed order without invoking absent consumers.
 Set `LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1` to exercise this governance route in canonical local CI. Rollout
-is 2 complete / 7 pending, so this switch proves the admitted Perl role plus exact later-route topology and storage locality.
+is 3 complete / 6 pending, so this switch proves the admitted Perl and Rust roles plus exact later-route topology and storage locality.
 Definitive Perl `.2.4` and parent `.2` signoff passes the full 124-test consumer ordinarily and through this route,
 the rendered mdBook, Knowledge 834/6,995, all eight doctrines, containment/relocation, CLI 66/66 twice, RAM 57%,
 Phase 0 1,031/1,031 in 765 seconds, five ordered later-runtime skips, and `[ci] local CI gate passed`. Rust `.3`
-is the next runtime owner; this switch admits no later runtime or public surface.
+has since joined the route. Its definitive `.3.5` gate passes the 17-owner Rust storage oracle, all eight
+doctrines, repository containment and moved-root execution, CLI conformance at 66/66 in both option environments,
+RAM at 73%, Phase 0 at 1,031/1,031, and the exact neutral/Perl/Rust route through local-CI exit 0. This switch still
+admits no later runtime or public surface.
 
 Dart's admitted consumer covers its internal value core and all 92+7 helper projections across native,
 reconstructed, generated-plan, and freshly emitted execution. The independent rollout checker requires its

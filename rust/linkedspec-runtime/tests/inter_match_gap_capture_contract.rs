@@ -1,9 +1,8 @@
-//! INTER-MATCH-GAP-CAPTURE.3.1-.3.3 — dormant Rust carrier stage.
+//! INTER-MATCH-GAP-CAPTURE.3 — admitted private Rust gap contract.
 //!
-//! This final consumer path now proves authored/static metadata, native
-//! execution, ordinary reconstruction, descriptor projection, and the separate
-//! generated-plan executor. Emitted source, primary routing, and admission
-//! remain owned by `.3.4-.3.5`.
+//! The final consumer proves every contract-declared Rust role exactly once:
+//! native, reconstructed, descriptor, generated-plan, emitted, lifecycle,
+//! recursion/rollback, diagnostics, and primary-command execution.
 
 use linkedspec_core::compiler::compile;
 use linkedspec_core::error::{LinkedSpecError, PortableDiagnostic};
@@ -11,11 +10,14 @@ use linkedspec_core::parser::parse_spec;
 use linkedspec_core::types::{CompiledSpec, RegexSelectorKind};
 use linkedspec_core::validation::validate;
 use linkedspec_runtime::engine::{Engine, ExecutionOptions};
+use linkedspec_runtime::primary_cli::run_with_context;
 use linkedspec_runtime::source_emitter::{
     GeneratedRuleSpec, classify_generated_rule_family, emit_rust_source_v2,
 };
 use linkedspec_runtime::{RuntimeDiagnosticOutputExecutionError, RuntimeExecutionError};
 use serde_json::{Value, json};
+use std::collections::{BTreeMap, BTreeSet};
+use std::ffi::OsString;
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::process::Command;
@@ -90,6 +92,98 @@ fn generated_runtime_error(source: &str, input: &str) -> RuntimeExecutionError {
         RuntimeDiagnosticOutputExecutionError::Runtime(error) => error,
         error => panic!("expected generated runtime diagnostic, got {error}"),
     }
+}
+
+#[derive(Default)]
+struct AdmissionLedger {
+    completed: BTreeMap<&'static str, u8>,
+}
+
+impl AdmissionLedger {
+    fn complete(&mut self, role: &'static str) {
+        assert_eq!(
+            self.completed.insert(role, 1),
+            None,
+            "Rust gap admission role {role} executed more than once",
+        );
+    }
+
+    fn assert_exact(self, contract: &Value) {
+        let declared = contract["recurring_gate"]["consumers"][1]["roles"]
+            .as_array()
+            .expect("Rust gap role array")
+            .iter()
+            .map(|role| role.as_str().expect("Rust gap role name"))
+            .collect::<Vec<_>>();
+        assert_eq!(
+            declared,
+            vec![
+                "native_execution",
+                "ordinary_reconstruction",
+                "descriptor",
+                "generated_plan",
+                "emitted_source",
+                "target_lifecycle",
+                "recursion_and_rollback",
+                "portable_diagnostics",
+                "primary_command",
+            ],
+            "Rust consumer role declaration identity/order drifted",
+        );
+        assert_eq!(
+            self.completed.keys().copied().collect::<BTreeSet<_>>(),
+            declared.iter().copied().collect::<BTreeSet<_>>(),
+            "Rust consumer must complete exactly the contract-declared roles",
+        );
+        assert!(
+            self.completed.values().all(|count| *count == 1),
+            "every Rust gap admission role must complete once",
+        );
+    }
+}
+
+fn os_arguments(parts: &[&str]) -> Vec<OsString> {
+    parts.iter().map(OsString::from).collect()
+}
+
+fn primary_command_gap_contract() {
+    let source = concat!(
+        "Top::\n",
+        " I { items = [] }\n",
+        " @capture_gaps\n",
+        " -> Item[word] { push(items, array(call(Item), gap_text())) }\n",
+        " LX { return(copy(items)) }\n",
+        "Item:\n",
+        " word=/[a-z]+/\n",
+        " I.return(entry_text())\n",
+    );
+    let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+    let outcome = run_with_context(
+        os_arguments(&[
+            "--inline-spec",
+            source,
+            "--input",
+            "alpha, beta | gamma\n- delta",
+        ]),
+        &root,
+        &root,
+    );
+    assert_eq!(outcome.exit_code, 0, "Rust gap primary command failed");
+    assert!(
+        outcome.stderr.is_empty(),
+        "Rust gap primary command emitted stderr: {}",
+        String::from_utf8_lossy(&outcome.stderr),
+    );
+    assert_eq!(
+        serde_json::from_slice::<Value>(&outcome.stdout).expect("Rust gap primary JSON"),
+        json!([
+            ["alpha", ""],
+            ["beta", ", "],
+            ["gamma", " | "],
+            ["delta", "\n- "],
+        ]),
+        "the primary command preserves heterogeneous separators independently of item recognition",
+    );
 }
 
 fn rule<'a>(compiled: &'a Value, label: &str) -> &'a Value {
@@ -467,13 +561,13 @@ mod emitted_gap_contract {
 }
 
 #[test]
-#[ignore = "INTER-MATCH-GAP-CAPTURE.3.5 owns Rust runtime admission"]
-fn authored_static_compiled_metadata_stage() {
+fn contract_declared_rust_roles_execute_once_and_only_once() {
     let contract = contract();
+    let mut admission = AdmissionLedger::default();
     assert_eq!(contract["contract_id"], CONTRACT_ID);
     assert_eq!(contract["format"], 1);
     assert_eq!(contract["rollout"][2]["id"], "rust_runtime");
-    assert_eq!(contract["rollout"][2]["status"], "pending");
+    assert_eq!(contract["rollout"][2]["status"], "complete");
 
     let source = concat!(
         "Top::OR\n",
@@ -640,6 +734,7 @@ fn authored_static_compiled_metadata_stage() {
             {"label":"Part", "idx":0}
         ]),
     );
+    admission.complete("descriptor");
 
     let reconstructed: CompiledSpec =
         serde_json::from_value(compiled_json.clone()).expect("reconstruct compiled metadata");
@@ -670,6 +765,7 @@ fn authored_static_compiled_metadata_stage() {
         json!([["prefix", "α"], ["tail", "ω"]]),
         "ordinary reconstructed CompiledSpec executes native gap semantics",
     );
+    admission.complete("ordinary_reconstruction");
 
     let generated = generated_value(carrier_source, "αHω")
         .map_err(|error| json!({"error": error}))
@@ -700,6 +796,7 @@ fn authored_static_compiled_metadata_stage() {
         }),
         "descriptor and generated-plan carriers must expose the current compiled gap contract",
     );
+    admission.complete("generated_plan");
 
     let emitted = emit_rust_source_v2(&carrier, "gap-generated-plan-v2.spec")
         .expect("emit unchanged generated-source v2 carrier");
@@ -952,6 +1049,7 @@ Bang:
         json!([["p", "}"], ["gap", "!"], ["", "tail"]]),
         "the accepted child exit cursor becomes the next committed boundary",
     );
+    admission.complete("native_execution");
 
     assert_eq!(
         native_and_generated_value(
@@ -1000,6 +1098,7 @@ Probe:
         json!(["a", "Xb", ""]),
         "recognition rollback restores the same invocation gap snapshot",
     );
+    admission.complete("recursion_and_rollback");
 
     let terminal_cases = [
         (
@@ -1049,6 +1148,7 @@ Part: /H/
     for (source, input, expected) in terminal_cases {
         assert_eq!(native_and_generated_value(source, input), expected);
     }
+    admission.complete("target_lifecycle");
 
     let unavailable_source = "Direct::\n /H/\n I { return(gap_text()) }\n";
     let unavailable = Engine::new(
@@ -1115,6 +1215,11 @@ Part: /H/
         Value::Null,
         "direct entry has no action-edge slot identity",
     );
+    admission.complete("portable_diagnostics");
 
+    primary_command_gap_contract();
+    admission.complete("primary_command");
     independently_compiled_emitted_gap_contract();
+    admission.complete("emitted_source");
+    admission.assert_exact(&contract);
 }

@@ -23,14 +23,15 @@ answers:
   - "how does emitted Rust gap proof keep project data on the repository volume"
   - "which Rust inter match gap roles are required"
   - "which leaf admits the Rust inter match gap consumer"
+  - "is the Rust inter match gap consumer admitted"
   - "does Rust gap admission change recognition 137 246 58"
   - "what does Rust gap admission change in the rollout mutation ledger"
   - "how can inter match gap capture preserve lists with mixed separators"
-date: 2026-08-14
-status: Rust authored/static/compiled metadata .3.1, native execution .3.2, reconstructed/descriptor/generated-plan carrier .3.3, and independently compiled emitted proof .3.4 are implemented; admission remains pending
+date: 2026-08-15
+status: Rust authored, native, reconstructed, descriptor, generated-plan, emitted, primary-command, and private admission roles are signoff-complete under .3.1-.3.5; parent .3 is closed for intended atomic 232
 tags: [capture, segmentation, rust, parser, lifecycle, transaction, generated-source, emitted-source, admission]
-evidence: "INTER-MATCH-GAP-CAPTURE.3.4 starts from clean atomic-230 commit 9e6ade98. Its exact ignored-consumer RED was the absent independently_compiled_emitted_gap_contract owner. The implemented helper emits fifteen modules with emit_rust_source_v2, writes one offline crate only beneath rust/target/test-workspaces, uses its local target, and removes the workspace on drop. Thirteen value modules and two typed-error modules pass paired direct/traced execution, covering heterogeneous list separators, Unicode/empty gaps, falsey values, selection/lifecycle timing, child cursor extension, nesting, rollback, terminal tails, failed minimum, direct entry, unflagged compatibility, unavailable context, and cursor regression. No runtime or source-emitter code changed: serialized CompiledSpec remains the carrier and generated plan v2 remains {label,family}. Focused proof passes 1/1 in 32.82 seconds; ordinary discovery remains 0/1 ignored; runtime 170/170, recognition 12/12, recursive observation 7/7, duplicate-slot and cursor contracts, and source emitter 6/6 pass. Neutral/rooted governance remains 2/7/56 plus 10 Rust dormancy mutations, Perl 124, and five skips. Rendered book 79/14,724 KiB, Knowledge 835/7,019, all eight doctrines, the 17-owner storage oracle, containment/relocation, CLI 66/66 twice, RAM 60%, Phase 0 1,031/1,031 in 780 seconds, exact opt-in routing, and canonical exit 0 pass. Primary execution, admission, rollout, and outward surfaces remain pending under .3.5."
-reverify: "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract authored_static_compiled_metadata_stage -- --exact --ignored && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract && bash tools/check_inter_match_gap_capture_six_runtime.sh"
+evidence: "INTER-MATCH-GAP-CAPTURE.3.5 starts from clean atomic-231 commit c3326f6d. Primary-first RED is Rust E0425 for the absent primary_command_gap_contract owner; admission RED reports rust_runtime rollout drift before promotion. GREEN uses the existing run_with_context adapter on alpha, beta | gamma\\n- delta and returns exact item/gap pairs for empty prefix, comma, pipe, and bullet/newline separators. The ordinary consumer validates the nine contract roles in declared order and completes each once. Neutral governance passes 3 complete + 6 pending / 56 semantic mutations plus 10 Rust admission mutations; the rooted driver passes neutral, Perl 124, Rust 1/1, then four exact later-runtime skips. Runtime 170/170, recognition 12/12, recursive observation 7/7, cursor, duplicate-slot, source-emitter, typed-source, and recognition ledgers remain green. Generated plan v2, recognition 137/246/58, public helpers 122, typed source 9/5/114, outward surfaces, later runtimes, and recurring/public rows do not move. Definitive signoff passes the 17-owner Rust storage oracle, rendered book 79 files / 14,732 KiB, Knowledge 835 facts / 7,020 keys, all eight doctrines, canonical containment/relocation, CLI 66/66 twice, RAM 73%, Phase 0 1,031/1,031, exact rooted routing, and local-CI exit 0; the sandboxed precursor stops only at expected nested-sandbox status 71."
+reverify: "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract contract_declared_rust_roles_execute_once_and_only_once -- --exact && bash tools/check_inter_match_gap_capture_six_runtime.sh"
 ---
 
 # Rust implementation freeze
@@ -180,13 +181,18 @@ Nothing is blindly accepted: each next item must match its declared slot, and ro
 whether its candidate commits. This separates item recognition from separator preservation and permits exact
 reconstruction or later normalization without inventing a separator grammar.
 
-## `.3.5`: exact private admission
+## Verified `.3.5`: exact private admission
 
 The final consumer executes exactly nine roles once: native execution, ordinary reconstruction, descriptor,
 generated plan, emitted source, target lifecycle, recursion/rollback, portable diagnostics, and primary command.
-Admission registers that consumer ordinarily and after Perl in the rooted route. Only `rust_runtime` becomes
+Admission now registers that consumer ordinarily and after Perl in the rooted route. Only `rust_runtime` becomes
 complete, producing rollout 3 complete + 6 pending; four later runtime routes remain ordered skips.
 `rust_runtime_premature` becomes `rust_runtime_regression`, so the total remains 56 mutations.
+
+The primary role passes `alpha, beta | gamma\n- delta` through the existing primary adapter and returns exact
+item/gap pairs `alpha/""`, `beta/", "`, `gamma/" | "`, and `delta/"\n- "`. The test therefore proves the
+separator-agnostic list use through a real command path, not only an internal engine call. The admission ledger
+also rejects role-order drift, missing roles, undeclared roles, and duplicate completion.
 
 Recurring/public rows, capability admission, typed-source `lossless_gap_composition`, generated plan v2, the Rust
 facade, semantic/MCP schemas, CLI surface, README, and all later runtimes remain unchanged or pending.

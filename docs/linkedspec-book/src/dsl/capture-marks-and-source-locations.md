@@ -566,30 +566,31 @@ The implementation order is also explicit. `INTER-MATCH-GAP-CAPTURE.1-.7` owns n
 `@capture_gaps`, lifecycle and compatibility policy, six-runtime behavior, carriers, and public admission.
 Typed-source composition consumes that completed contract afterward; it does not define a second gap language.
 
-### Executable neutral contract — private Perl runtime admitted
+### Executable neutral contract — private Perl and Rust runtimes admitted
 
 The behavior-free contract now lives at `capability_conformance/inter_match_gap_capture_contract.json`, uses id
 `linkedspec-inter-match-gap-capture-v1`, and is checked independently by
-`tools/check_inter_match_gap_capture_contract.py`. Inter-match gap-capture recurring governance now executes the complete neutral and Perl rows; five later runtime routes and both public rows remain pending.
+`tools/check_inter_match_gap_capture_contract.py`. Inter-match gap-capture recurring governance now executes the complete neutral, Perl, and Rust rows; four later runtime routes and both public rows remain pending.
 The Perl reference implements authored/static metadata, private native-live behavior, and independently loaded
 generated parity. Admission `.2.4` runs that complete consumer in canonical CI and in the rooted recurring route,
 promotes only `perl_runtime`, and advances the checker to 56 mutations without outward public admission.
-The recurring driver executes the complete neutral row and Perl consumer exactly once each, then emits five
-ordered later-runtime skips:
+Rust `.3.5` adds the exact primary-command role, admits the complete nine-role Rust consumer to ordinary and
+canonical execution, and runs it once after Perl in the recurring route. Only `rust_runtime` advances. The
+recurring driver executes neutral, Perl, and Rust exactly once each, then emits four ordered later-runtime skips:
 
 ```bash
 bash tools/check_inter_match_gap_capture_six_runtime.sh
 ```
 
 Canonical local CI always runs the neutral checker and exposes the same governance route behind
-`LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1`. Ordinary CI and the opt-in route each execute the admitted Perl
-consumer once; the latter additionally proves neutral-first ordering and five explicit later-runtime skips.
+`LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1`. Ordinary CI and the opt-in route each execute both admitted consumers
+once; the latter additionally proves neutral-first Perl-then-Rust ordering and four explicit later-runtime skips.
 
 The neutral artifact locks 8 positive and 10 negative authored fixtures, 3 source fixtures, 8 private gap fields,
 16 main-machine transitions, 10 segmentation cases, 3 terminal routes, 7 transaction/recursion/return-channel
 cases, 6 compatibility rows, 9 diagnostics, 9 rollout legs, and 50 semantic mutations. Governance adds six
-storage/topology/no-overclaim/admission mutations for 56 total: the Perl complete-to-pending regression and
-premature Rust promotion are both rejected.
+storage/topology/no-overclaim/admission mutations for 56 total: complete-to-pending regressions for both Perl and
+Rust are rejected.
 
 ### Perl private live and generated implementation — exact private admission
 
@@ -617,7 +618,7 @@ Definitive `.2.4` and parent `.2` signoff also passes the rendered mdBook, Knowl
 doctrines, containment/relocation, CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 765 seconds, the exact
 neutral-plus-Perl route with five later-runtime skips, and local-CI exit 0. Atomic 226 landed at `eceb15ac`.
 
-### Rust private native, generated-plan, and emitted carriers — implemented, admission still dormant
+### Rust private native, generated-plan, emitted, and primary execution — admitted
 
 Rust `.3.0` froze the behavior-free implementation map from that clean boundary. Its process-level probes recorded
 the prior baseline: only numeric `Rule[N]` worked, while named declarations/selectors, `@capture_gaps`,
@@ -639,10 +640,10 @@ The implementation is dependency-split before any behavior moves:
 5. `.3.5` composes the nine exact Rust roles, primary command, recurring/canonical registration, and Rust-only
    admission.
 
-The eventual `.3.5` delta is already bounded: only `rust_runtime` may become complete, producing 3 complete / 6
-pending while four later runtime routes remain skips. The premature-Rust mutation becomes a Rust regression
-mutation, leaving the total at 56. Recognition stays 137/246/58, public helpers stay 122, typed source stays
-9/5/114, and facade/schema/semantic/MCP/CLI/README/public admission remains later.
+Leaf `.3.5` advances only `rust_runtime`, producing 3 complete / 6 pending while four later runtime routes remain
+skips. The former premature-Rust mutation is now a Rust regression mutation, leaving the total at 56. Recognition
+stays 137/246/58, public helpers stay 122, typed source stays 9/5/114, and facade/schema/semantic/MCP/CLI/README/
+public admission remains later.
 
 Authored/static/compiled leaf `.3.1` is now implemented from clean `4a95e02a`. Rust parses the four declaration
 spacing forms, mixes named and anonymous rows in one authored order, distinguishes unindexed/numeric/named
@@ -686,11 +687,12 @@ The mixed-separator module is executable confirmation of the list use case: matc
 plus an empty tail. The separator need not be one delimiter regex; it is preserved source text between accepted
 items.
 
-This is still **not Rust runtime admission**. Primary execution and canonical/recurring registration remain
-`.3.5`, and the final consumer stays explicitly ignored until that leaf. Ordinary package testing reports 0
-passed / 1 ignored, while focused carrier proof uses `--ignored --exact`. The neutral checker retains the same
-behavior-free JSON, rollout 2 complete / 7 pending, 56 semantic/governance mutations, and ten local Rust dormancy
-mutations.
+Rust runtime admission now composes those carriers with the existing primary adapter. The primary proof parses
+`alpha, beta | gamma\n- delta` through an inline spec and returns exact item/gap pairs, independently confirming
+that one item regex can preserve heterogeneous separators. The final consumer is ordinary, canonical, and rooted;
+its runtime ledger rejects any missing, duplicate, or undeclared role across the exact nine-role contract. The
+neutral checker remains behavior-free at rollout 3 complete / 6 pending and 56 semantic/governance mutations,
+plus ten local Rust admission/regression mutations.
 
 Pinned identity is important here: the installed Perl reports Unicode 13, so `.2.1` generates a private
 806-range classifier from the repository's Unicode 17 ranges rather than trusting the host `XID_Continue` table.
@@ -701,8 +703,8 @@ The four accessor nodes raise the recognition-effect census from 133 to 137 and 
 executes them on live and generated paths; Rust now executes them on native, reconstructed, generated-plan, and
 independently compiled emitted paths. The 246 shared call inventory, 122 public-helper inventory, and typed-source
 9-complete/5-pending/114-mutation contract do not move. Current truth is recognition 137/246/58 and gap rollout
-2 complete / 7 pending / 56 mutations. Exact registration checks replace the retired Perl dormancy fence while
-the Rust final consumer retains its `.3.5` ignore guard.
+3 complete / 6 pending / 56 mutations plus ten Rust admission mutations. Exact registration checks replace the retired Perl dormancy fence while
+the admitted Rust consumer is required ordinarily, canonically, and once after Perl in the rooted route.
 
 Named slot rules are exact:
 

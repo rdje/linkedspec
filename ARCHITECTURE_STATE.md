@@ -202,6 +202,28 @@ doctrines, the 17-owner Rust storage oracle, six-family repository containment, 
 with five later-runtime skips, and local-CI exit 0. The first sandboxed run stopped only because the outer harness
 denied nested macOS `sandbox-exec` with status 71; the unchanged permission-authorized run is authoritative.
 
+Rust carrier leaves `.3.3-.3.4` then preserve the same compiled authority through ordinary reconstruction,
+separate compatible descriptor projection, the generated-plan executor, and fifteen independently compiled
+direct/traced emitted modules. Generated source v2 remains exact `{label,family}` because serialized `CompiledSpec`
+is already the single carrier. Every generated workspace, Cargo target, trace, and fixture remains beneath the
+repository-derived Rust project-data roots.
+
+Final private admission `.3.5` starts task-tree-first from clean atomic 231 `c3326f6d`. Its first RED is Rust
+`E0425` for the absent primary-command proof owner; its separate admission RED is the expected pending Rust rollout.
+GREEN sends `alpha, beta | gamma\n- delta` through the existing primary adapter and returns exact item/gap pairs:
+`alpha/""`, `beta/", "`, `gamma/" | "`, and `delta/"\n- "`. One item regex therefore remains authoritative while
+arbitrary heterogeneous separator text is preserved losslessly.
+
+The ordinary consumer validates the exact nine contract roles in declared order and completes each role once.
+Canonical CI registers it once, while the repository-rooted recurring route executes neutral, Perl, and Rust
+before four ordered later-runtime skips. Only `rust_runtime` advances: governance is 3 complete / 6 pending / 56
+semantic mutations plus ten Rust admission/regression mutations. Recognition 137/246/58, public helpers 122,
+typed source 9/5/114, generated plan v2, capability, facade, semantic/MCP, CLI, README, later runtimes, and both
+recurring/public rows remain unchanged or pending. Definitive `.3.5` signoff passes the 17-owner Rust storage
+oracle, rendered book 79/14,732 KiB, Knowledge 835/7,020, all eight doctrines, canonical containment/relocation,
+CLI 66/66 twice, RAM 73%, Phase 0 1,031/1,031, exact neutral/Perl/Rust rooted routing, and local-CI exit 0. Parent
+`.3` is closed for intended atomic 232; Dart `.4` follows only after the clean commit boundary.
+
 Definitive `.2.2` signoff passes the rendered 79-file / 14,672-KiB mdBook, Knowledge Map 834/6,992, all eight
 doctrines, six-family repository containment, all-five-anchor relocation, CLI 66/66 in both option environments,
 RAM 76%, Phase 0 1,031/1,031 in 756 seconds, the exact opt-in neutral-plus-six-pending route, and local-CI exit 0.

@@ -816,13 +816,13 @@
     "diagnostic_schema",
     "rollout_sequence",
     "perl_runtime_regression",
-    "rust_runtime_premature",
+    "rust_runtime_regression",
     "storage_paths",
     "route_order",
     "public_no_overclaim"
   ],
   "recurring_gate": {
-    "status": "governance_current_perl_admitted_later_runtimes_pending",
+    "status": "governance_current_perl_rust_admitted_later_runtimes_pending",
     "owner": "INTER-MATCH-GAP-CAPTURE.1.2",
     "driver": "tools/check_inter_match_gap_capture_six_runtime.sh",
     "local_ci_driver": "tools/run_ci_local.sh",
@@ -957,7 +957,7 @@
   "public_no_overclaim": {
     "status": "current",
     "owner": "INTER-MATCH-GAP-CAPTURE.1.2",
-    "policy": "document the executable neutral and admitted private Perl runtime without claiming later runtimes, recurring/public rollout completion, capability admission, schema exposure, CLI exposure, or outward public admission",
+    "policy": "document the executable neutral and admitted private Perl and Rust runtimes without claiming later runtimes, recurring/public rollout completion, capability admission, schema exposure, CLI exposure, or outward public admission",
     "rollout_assertions": {
       "row_count": 9,
       "neutral_contract": {
@@ -968,8 +968,11 @@
         "status": "complete",
         "owner": "INTER-MATCH-GAP-CAPTURE.2.4"
       },
+      "rust_runtime": {
+        "status": "complete",
+        "owner": "INTER-MATCH-GAP-CAPTURE.3"
+      },
       "pending_runtime_ids": [
-        "rust_runtime",
         "dart_runtime",
         "julia_runtime",
         "puc_lua_runtime",
@@ -988,23 +991,23 @@
     "documents": [
       {
         "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
-        "required_marker": "Inter-match gap-capture recurring governance now executes the complete neutral and Perl rows; five later runtime routes and both public rows remain pending."
+        "required_marker": "Inter-match gap-capture recurring governance now executes the complete neutral, Perl, and Rust rows; four later runtime routes and both public rows remain pending."
       },
       {
         "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
-        "required_marker": "Inter-match gap-capture recurring governance runs the complete neutral and Perl rows; five later runtime routes remain explicit skips."
+        "required_marker": "Inter-match gap-capture recurring governance runs the complete neutral, Perl, and Rust rows; four later runtime routes remain explicit skips."
       },
       {
         "path": "docs/linkedspec-book/src/overview/project-status.md",
-        "required_marker": "Inter-match gap-capture governance is current at 2 complete / 7 pending: Perl is admitted privately, while later runtimes and both public rows remain pending."
+        "required_marker": "Inter-match gap-capture governance is current at 3 complete / 6 pending: Perl and Rust are admitted privately, while later runtimes and both public rows remain pending."
       },
       {
         "path": "capability_conformance/README.md",
-        "required_marker": "Inter-match gap-capture recurring governance now admits only the private Perl runtime; later runtimes and public admission remain pending."
+        "required_marker": "Inter-match gap-capture recurring governance now admits the private Perl and Rust runtimes; later runtimes and public admission remain pending."
       },
       {
         "path": "TOOLBOX.md",
-        "required_marker": "Inter-match gap-capture recurring governance executes its complete neutral and private Perl rows while later runtimes remain pending."
+        "required_marker": "Inter-match gap-capture recurring governance executes its complete neutral, private Perl, and private Rust rows while later runtimes remain pending."
       }
     ],
     "surface_guard": {
@@ -1045,7 +1048,7 @@
     {
       "id": "rust_runtime",
       "owner": "INTER-MATCH-GAP-CAPTURE.3",
-      "status": "pending"
+      "status": "complete"
     },
     {
       "id": "dart_runtime",

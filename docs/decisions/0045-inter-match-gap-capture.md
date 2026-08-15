@@ -1,7 +1,7 @@
 # 0045 - Inter-match gap capture preserves action-edge target ownership
 
 - Date: 2026-07-17
-- Status: accepted; executable-neutral and private Perl native/generated implementation current; admission pending
+- Status: accepted; executable-neutral plus private Perl and Rust admission current; later runtimes/public admission pending
 - Tags: architecture, grammar, capture, segmentation, or-rule, action-edge, source-span, portability, parity
 
 ## Context
@@ -539,6 +539,27 @@ This amendment does not independently compile emitted source, execute a primary 
 consumer, promote `rust_runtime`, or widen a facade/schema/semantic/MCP/CLI/README surface. Rollout remains
 2 complete / 7 pending / 56 mutations plus ten checker-local Rust dormancy mutations; recognition remains
 137/246/58, public helpers 122, and typed source 9/5/114. `.3.4-.3.5` retain emitted proof and admission.
+
+## 2026-08-15 Rust emitted/primary/admission amendment
+
+`INTER-MATCH-GAP-CAPTURE.3.4-.3.5` complete the private Rust carrier and admission from clean atomic-230/231
+boundaries `9e6ade98` and `c3326f6d`. Fifteen independently compiled direct/traced modules prove that the
+unchanged v2 emitter reconstructs the serialized `CompiledSpec` and preserves values, lifecycle, recursion,
+rollback, diagnostics, direct entry, and unflagged behavior on repository-volume storage.
+
+The final primary role uses the existing Rust primary adapter—not a new CLI surface—to parse
+`alpha, beta | gamma\n- delta`. One repeated item regex returns `alpha`, `beta`, `gamma`, and `delta` while
+retaining exact gaps `""`, `", "`, `" | "`, and `"\n- "`. This proves the intended list-shaped use directly:
+item recognition is independent from heterogeneous separator preservation, and every accepted item still passes
+through the declared regex slot and normal commit/rollback lifecycle.
+
+The ordinary consumer validates the contract-declared nine-role identity/order and records each role exactly
+once. Canonical CI registers it once; the repository-rooted recurring driver runs neutral, Perl, and Rust before
+four ordered later-runtime skips. Only `rust_runtime` advances, so governance is 3 complete / 6 pending / 56
+semantic mutations plus ten Rust admission/regression mutations. The old premature-Rust mutation becomes a Rust
+complete-to-pending regression. Generated plan v2, recognition 137/246/58, public helpers 122, typed source
+9/5/114, capability admission, runtime facade, semantic/MCP schemas, CLI/README surfaces, Dart/Julia/Lua routes,
+and recurring/public rollout rows do not move.
 
 ## Consequences
 

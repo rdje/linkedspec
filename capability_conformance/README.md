@@ -302,22 +302,21 @@ Governance is 114, and the combined program-wide public-no-drift row stays pendi
 helper/value, descriptor/generated schema, semantic/MCP field, CLI, or README behavior moved.
 
 `inter_match_gap_capture_contract.json` is the neutral authority for named regex slots and lossless
-prefix/interstitial/tail context. Inter-match gap-capture recurring governance now admits only the private Perl runtime; later runtimes and public admission remain pending.
+prefix/interstitial/tail context. Inter-match gap-capture recurring governance now admits the private Perl and Rust runtimes; later runtimes and public admission remain pending.
 Run `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py` for the always-on
 neutral proof or `bash tools/check_inter_match_gap_capture_six_runtime.sh` for the repository-routed ordered
-governance route. The latter executes the complete neutral and Perl rows, then skips five pending runtime consumers;
-the nine-leg rollout is 2 complete / 7 pending and the checker rejects 56 semantic/topology corruptions.
+governance route. The latter executes the complete neutral, Perl, and Rust rows, then skips four pending runtime
+consumers; the nine-leg rollout is 3 complete / 6 pending and the checker rejects 56 semantic/topology
+corruptions plus ten Rust admission/regression mutations.
 Perl `.2.1-.2.3` implement authored/static metadata, private native-live behavior, and independently loaded
 generated parity; `.2.4` admits that existing consumer without an outward API. Its four private accessor nodes are synchronized as recognition `source_read`
 effects at 137 total rows, while shared calls remain 246, public Perl helper coverage remains 122, and typed-source
-composition stays pending. Behavior-free Rust `.3.0` now assigns authored/static, native same-authority,
-reconstruction/generated-plan, repository-local emitted, and final primary/admission work to `.3.1-.3.5` without
-changing the 2/7/56 ledger or the pending Rust skip. Its behavior-free signoff is green for intended atomic 227;
-`.3.1-.3.3` now implement Rust authored/static/compiled metadata, invocation-local native state, ordinary
-reconstruction, compatible descriptor projection, and separate generated-plan parity. The final consumer remains
-explicitly ignored until `.3.5`, and ten checker-local dormancy mutations reject premature canonical/recurring/
-facade activation. The neutral artifact and 2/7/56 ledger do not move; independently compiled emitted,
-primary-command, and runtime admission remain pending, while generated plan v2 stays exact `{label,family}`.
+composition stays pending. Rust `.3.1-.3.4` implement authored/static/compiled metadata, invocation-local native
+state, ordinary reconstruction, compatible descriptor projection, separate generated-plan parity, and independently
+compiled emitted proof. `.3.5` adds a real primary-command mixed-separator case, requires all nine Rust roles
+exactly once, and admits the consumer ordinarily, canonically, and after Perl in the rooted route. Generated plan
+v2 stays exact `{label,family}`; no public facade, capability, typed-source, semantic/MCP, CLI, README, or later
+runtime surface moves.
 
 No public `Position`/`Span` value, descriptor or generated schema, semantic/MCP projection, or source-authority
 elevation is claimed by these internal typed-source runtime admissions. Recognition transaction spelling and

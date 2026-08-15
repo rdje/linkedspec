@@ -634,6 +634,9 @@ bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contra
 log "running exact Perl inter-match gap-capture admission consumer"
 PERL5LIB= prove -Iperl t/inter_match_gap_capture_perl_contract.t
 
+log "running exact Rust inter-match gap-capture admission consumer"
+cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract
+
 log "checking backend-neutral recognition transaction and progress contract"
 bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py
 
@@ -992,7 +995,7 @@ if [[ "${LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX:-0}" == "1" ]]; then
  require_tracked_file tools/check_inter_match_gap_capture_six_runtime.sh
  bash "$REPO_ROOT/tools/check_inter_match_gap_capture_six_runtime.sh"
 else
- log "skipping optional inter-match gap-capture six-runtime route (set LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1; runtime rows are still pending)"
+ log "skipping optional inter-match gap-capture six-runtime route (set LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1; later runtime rows are still pending)"
 fi
 
 if [[ "${LINKEDSPEC_RUN_RECOGNITION_TRANSACTION_MATRIX:-0}" == "1" ]]; then

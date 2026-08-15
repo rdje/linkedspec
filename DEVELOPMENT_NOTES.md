@@ -10,6 +10,26 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-15 (`INTER-MATCH-GAP-CAPTURE.3.5` — Rust private admission): activation base is clean atomic 231 at
+  `c3326f6d`. Keep the primary proof on the existing `run_with_context` adapter; admission must not create a new
+  CLI option or a second execution path.
+- The director-highlighted list use is now an exact executable contract. With one `[a-z]+` item slot, input
+  `alpha, beta | gamma\n- delta` yields exact item/gap pairs for empty prefix, comma, pipe, and bullet/newline
+  separators. Gap capture preserves unknown separator text; it does not bypass item matching or commit/rollback.
+- Admission composition is executable data, not comments. The Rust test reads the contract's nine-role array,
+  rejects identity/order drift, records every role once, and rejects a duplicate, missing, or undeclared role.
+- Registration is multiplicity-sensitive: one ordinary test, one explicit canonical command, and one rooted
+  command after Perl. The checker also preserves one exact skip for each of Dart, Julia, PUC Lua, and LuaJIT.
+- Promote only `rust_runtime`. Keep the semantic mutation total at 56 by replacing premature promotion with a
+  complete-to-pending regression; replace the ten dormancy checks with ten role/registration/facade admission
+  checks. Recurring/public and all outward ledgers stay pending or unchanged.
+- Focused proof passes admitted Rust 1/1 plus runtime 170/170, recognition 12/12, recursive observation 7/7,
+  cursor, duplicate-slot, source-emitter, neutral/rooted governance, recognition 137/246/58, and typed source
+  9/5/114. Book 79/14,732 KiB, Knowledge 835/7,020, the 17-owner storage/relocation oracle, and all eight doctrines
+  pass. The sandboxed canonical run reaches the expected outer nested-`sandbox-exec` status 71; its unchanged
+  authorized rerun passes containment/relocation, CLI 66/66 twice, RAM 73%, Phase 0 1,031/1,031, the exact rooted
+  neutral/Perl/Rust route, and local-CI exit 0. Parent `.3` is signoff-complete for atomic 232.
+
 - 2026-08-14 (`INTER-MATCH-GAP-CAPTURE.3.4` — independently compiled Rust emitted proof): activation base is
   clean atomic 230 at `9e6ade98`. The deliberate ignored-consumer RED was a missing emitted-proof owner; once the
   consumer supplied that role, no runtime/emitter defect remained.

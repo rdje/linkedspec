@@ -3,11 +3,11 @@
 ## Metadata
 
 - Tree ID: `INTER-MATCH-GAP-CAPTURE`
-- Status: `active` / Rust reconstruction/descriptor/generated-plan `.3.3` landed cleanly as atomic 230 at
-  `9e6ade98`; independently compiled emitted-source proof `.3.4` is active from that boundary
+- Status: `active` / Rust `.3.1-.3.4` landed through atomic 231 at `c3326f6d`; private primary/admission `.3.5`
+  and parent `.3` are signoff-complete for intended atomic 232; Dart `.4` follows after the clean boundary
 - Roadmap lane: `.spec language evolution / lossless segmentation and source preservation`
 - Created: `2026-07-17`
-- Last updated: `2026-08-14`
+- Last updated: `2026-08-15`
 - Owner: repo-local workflow
 
 ## Goal
@@ -46,10 +46,11 @@ orchestration or to raw Perl cursor arithmetic.
 ## Task Tree
 
 - ID: `INTER-MATCH-GAP-CAPTURE`
-  Status: `active` (2026-08-14; neutral parent `.1` landed cleanly at `db299789`; Perl parent `.2` landed cleanly
+  Status: `active` (2026-08-15; neutral parent `.1` landed cleanly at `db299789`; Perl parent `.2` landed cleanly
     through atomic 226 at `eceb15ac`; Rust `.3.0` landed as atomic 227 at `4a95e02a`; Rust `.3.1` landed as
     atomic 228 at `95127e1d`; Rust `.3.2` landed as atomic 229 at `5c4e9d50`; Rust `.3.3` landed as atomic 230 at
-    `9e6ade98`; `.3.4` is task-tree-first from that exact boundary; no push)
+    `9e6ade98`; Rust `.3.4` landed as atomic 231 at `c3326f6d`; `.3.5` and parent `.3` are signoff-complete from
+    that exact boundary for intended atomic 232; no push)
   Goal: Recover and modernize lossless inter-match gap capture without semantic drift.
   Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`
 
@@ -494,14 +495,15 @@ orchestration or to raw Perl cursor arithmetic.
   Commit: `INTER-MATCH-GAP-CAPTURE.2.4 - admit Perl inter-match gap capture` (intended atomic 226/300)
 
 - ID: `INTER-MATCH-GAP-CAPTURE.3`
-  Status: `active` (2026-08-14; dependency-split under `.3.0-.3.5`; behavior-free `.3.0` landed cleanly at
-    `4a95e02a`; authored/static `.3.1` landed cleanly at `95127e1d`; private native runtime `.3.2` is signoff-
-    complete for intended atomic 229 from that boundary; `.3.3` remains pending until the clean landing)
+  Status: `done; signoff-complete` (2026-08-15; `.3.1-.3.4` landed through emitted proof atomic 231 at
+    `c3326f6d`; final private Rust primary/admission `.3.5` closes the parent for intended atomic 232)
   Goal: Implement exact Rust native/generated/primary parity.
   Children: `.3.0`, `.3.1`, `.3.2`, `.3.3`, `.3.4`, `.3.5`
   Acceptance: Rust passes the neutral gap corpus and every admitted execution role.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Rust executes all nine admitted roles once; gap governance is 3/6/56 plus ten Rust admission
+    mutations. Focused, ordinary, rooted, storage, rendered-book, Knowledge, all-doctrine, containment,
+    relocation, CLI 66x2, RAM 73%, Phase 0 1,031/1,031, and canonical local-CI exit-0 proof pass.
+  Commit: `INTER-MATCH-GAP-CAPTURE.3.5 - admit Rust inter-match gap capture` (intended atomic 232/300)
 
 - ID: `INTER-MATCH-GAP-CAPTURE.3.0`
   Status: `done; signoff-complete` (2026-08-14; task-tree-first from clean atomic-226 commit `eceb15ac`; intended
@@ -856,13 +858,51 @@ orchestration or to raw Perl cursor arithmetic.
     member increase again requires a new staged/indexed exact-limit ADR and an independent manifest-limit review.
 
 - ID: `INTER-MATCH-GAP-CAPTURE.3.5`
-  Status: `pending`
+  Status: `done; signoff-complete` (2026-08-15; task-tree-first from clean atomic-231 commit `c3326f6d`; intended
+    atomic 232/300; exact private Rust primary/admission and parent `.3` closeout only)
   Goal: Compose exact Rust primary/admission, mutation/rollout updates, recurring routing, ledgers, and unchanged
     public no-overclaim, then close parent `.3` cleanly for Dart `.4`.
-  Acceptance: every exact Rust role passes once under canonical/recurring governance; only `rust_runtime` advances;
-    later runtimes, recurring/public rows, capability, typed composition, and outward surfaces remain pending.
-  Verification: `pending`
-  Commit: `pending`
+  Acceptance: prove clean activation and retrieve the exact final consumer, primary adapter, contract/checker,
+    canonical CI, recurring driver, storage, role-ledger, rollout/mutation, and public-no-overclaim authorities
+    before code; produce deliberate RED for the absent ninth primary-command role and for the dormant admission
+    topology; extend only the final Rust consumer with primary-command parity, make its one complete test ordinary,
+    register it exactly once in canonical CI and exactly once after Perl in the rooted route, and prove all nine
+    contract roles execute once; promote only `rust_runtime` so rollout becomes 3 complete / 6 pending, replace
+    `rust_runtime_premature` with `rust_runtime_regression` while retaining 56 semantic mutations, and replace the
+    ten Rust dormancy mutations with reason-checked admission/regression mutations; leave Dart, Julia, both Lua
+    ABI rows, recurring, and public-no-drift pending; keep generated plan v2, runtime facade, capability, typed
+    `lossless_gap_composition`, semantic/MCP schemas, CLI surface, README, and every outward token unchanged;
+    synchronize ledgers, live docs, Knowledge, and mdBook; pass focused/ordinary/rooted/storage/book/Knowledge/
+    doctrine/canonical signoff; close parent `.3`, then land/clear/clean before activating Dart `.4`.
+
+  ### Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / OWNERSHIP** — Proved committed `c3326f6d`, empty tracked/untracked status, zero-byte
+    brief, and passing post-commit activation pointer before this task-tree-first edit.
+  - [x] **RETRIEVE AUTHORITY / EXACT RED** — Query Knowledge first; read final consumer, primary adapter, checker,
+    contract, canonical/recurring/storage routes, role and outward ledgers; prove exact primary/admission absence.
+    Primary RED is exact Rust `E0425` for absent `primary_command_gap_contract`; admission RED is exact
+    `rust_runtime rollout drifted` against the pre-promotion checker.
+  - [x] **NINE-ROLE PRIMARY GREEN** — Add primary-command parity and an exact once-only nine-role composition to
+    the final consumer without changing the primary adapter, emitter, generated plan, or runtime facade.
+    The existing primary adapter returns four exact item/gap pairs from heterogeneous separators, and the ledger
+    validates declared role identity/order plus exactly-once completion.
+  - [x] **PRIVATE RUST ADMISSION** — Remove the final consumer's ignore boundary and register it once canonically
+    plus once after Perl in the rooted route; later runtime skips remain ordered and exact.
+  - [x] **ROLLOUT / MUTATION / NO OVERCLAIM** — Advance only Rust to 3/6/56, replace premature/dormancy locks with
+    admitted regression locks, and preserve all recurring/public/capability/typed/schema/CLI/README boundaries.
+  - [x] **PARENT CLOSEOUT / LOCKSTEP SIGNOFF** — Close `.3`, align task/roadmap/live/book/Knowledge projections,
+    and pass focused, ordinary, rooted, storage, rendered-book, doctrine, and canonical proof before landing.
+  Verification: Primary RED exits 101 at exact absent owner; pre-admission focused GREEN passes 1/1; admission RED
+    rejects the pending Rust row; ordinary admitted GREEN passes 1/1 with zero ignored tests. The neutral checker
+    passes exact 3/6/56 plus ten Rust admission mutations; the rooted route passes neutral, Perl 124, Rust 1/1,
+    and four later-runtime skips. Runtime 170/170, recognition 12/12, recursive observation 7/7, cursor,
+    duplicate-slot, source-emitter, recognition 137/246/58, and typed-source 9/5/114 compatibility checks pass.
+    The 17-owner Rust storage oracle, rendered book 79/14,732 KiB, Knowledge 835/7,020, and all eight doctrines
+    pass. The sandboxed canonical run stops only at expected nested-`sandbox-exec` status 71; the unchanged
+    authorized run passes containment/relocation, CLI 66/66 twice, RAM 73%, Phase 0 1,031/1,031, exact rooted
+    neutral/Perl/Rust routing, `[ci] local CI gate passed`, and exit 0.
+  Commit: `INTER-MATCH-GAP-CAPTURE.3.5 - admit Rust inter-match gap capture` (intended atomic 232/300)
 
 - ID: `INTER-MATCH-GAP-CAPTURE.4`
   Status: `pending`
@@ -911,7 +951,8 @@ orchestration or to raw Perl cursor arithmetic.
 | 12 | `INTER-MATCH-GAP-CAPTURE.3.1` | `done; signoff-complete from clean 4a95e02a` | Exact Rust authored/static/compiled provenance plus dormant final-consumer governance are green without live execution or rollout movement as intended atomic 228. |
 | 13 | `INTER-MATCH-GAP-CAPTURE.3.2` | `done; landed at 5c4e9d50` | Invocation-local native Rust gap state/accessors are exact on the existing recognition authority without generated or rollout movement as atomic 229. |
 | 14 | `INTER-MATCH-GAP-CAPTURE.3.3` | `done; landed at 9e6ade98` | Ordinary reconstruction, compatible descriptors, and separate generated-plan parity are exact without emitted/primary/admission movement as atomic 230. |
-| 15 | `INTER-MATCH-GAP-CAPTURE.3.4` | `done; signoff-complete from clean 9e6ade98` | Fifteen independently compiled direct/traced emitted modules, storage, lockstep, and canonical proof are exact for intended atomic 231; landing remains. |
+| 15 | `INTER-MATCH-GAP-CAPTURE.3.4` | `done; landed at c3326f6d` | Fifteen independently compiled direct/traced emitted modules, storage, lockstep, and canonical proof landed as atomic 231. |
+| 16 | `INTER-MATCH-GAP-CAPTURE.3.5` | `done; signoff-complete from clean c3326f6d` | Exact primary parity and private Rust admission pass at 3/6/56 plus ten Rust admission mutations; all signoff is green and parent `.3` closes for intended atomic 232. |
 
 ## Decisions
 
@@ -1206,12 +1247,14 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
   complete behavior-free `.3.0` landed cleanly as atomic 227 at `4a95e02a`; authored/static `.3.1` landed cleanly
   as atomic 228 at `95127e1d` without live execution or rollout movement. Native runtime `.3.2` is signoff-
   complete and landed at `5c4e9d50`; reconstructed/generated carrier `.3.3` is signoff-complete from that exact
-  boundary. Emitted proof `.3.4` activates only after atomic 230 lands cleanly.
+  boundary. Emitted proof `.3.4` landed as atomic 231 at `c3326f6d`; final private admission `.3.5` is signoff-
+  complete from that exact activation boundary and closes parent `.3` for intended atomic 232.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-08-15` | `INTER-MATCH-GAP-CAPTURE.3.5` | Clean `c3326f6d` activation; exact primary/admission RED/GREEN; nine-role once-only consumer; ordinary/canonical/rooted registration; runtime, recognition, recursion, cursor, source-emitter, duplicate-slot, typed-source and neutral ledgers; 17-owner storage; rendered mdBook; Knowledge Map; all eight doctrines; authorized canonical local CI with opt-in gap route | Pass: the existing primary adapter returns exact item/gap pairs for mixed separators; only Rust advances to gap 3/6/56 plus ten admission mutations. Rust admission is 1/1 with zero ignored tests; runtime is 170/170, recognition 12/12, recursion 7/7, and the rooted route runs neutral, Perl 124, Rust 1/1, then four skips. Book is 79/14,732 KiB and Knowledge 835/7,020. The sandboxed precursor stops solely at outer nested-`sandbox-exec` status 71; the unchanged authorized run passes containment/relocation, CLI 66/66 twice, RAM 73%, Phase 0 1,031/1,031, `[ci] local CI gate passed`, and exit 0. Generated plan v2 and every outward/later-runtime row remain unchanged or pending; parent `.3` closes. |
 | `2026-08-14` | `INTER-MATCH-GAP-CAPTURE.3.4` | Clean `9e6ade98` activation; exact ignored-consumer emitted-owner RED/GREEN; fifteen independently compiled direct/traced modules; runtime, recognition, recursion, cursor, source-emitter, and duplicate-slot compatibility; neutral checker and rooted route; project-data storage; rendered mdBook; Knowledge Map; all eight doctrines; canonical local CI with opt-in gap route | Pass: thirteen value and two typed-error modules prove emitted mixed separators, Unicode/empty spans, falsey values, lifecycle, child cursors, nesting, rollback, tails, minimum failure, direct entry, legacy behavior, and exact generated trace identity. Ordinary discovery remains 0/1 ignored; gap remains 2/7/56 plus ten Rust dormancy mutations; generated plan v2, emitter, primary/admission, and outward surfaces remain unchanged. Focused proof is 1/1 in 32.82 seconds; runtime 170/170, recognition 12/12, recursion 7/7, cursor 1/1, emitter 6/6, duplicate slot 1/1, the 17-owner storage oracle, rendered book 79/14,724 KiB, Knowledge 835/7,019, and all doctrines pass. The sandboxed canonical run stopped only at outer nested-`sandbox-exec` status 71; the unchanged authorized run passes containment/relocation, CLI 66/66 twice, RAM 60%, Phase 0 1,031/1,031 in 780 seconds, exact neutral-plus-Perl routing with five skips, `[ci] local CI gate passed`, and exit 0. |
 | `2026-08-14` | `INTER-MATCH-GAP-CAPTURE.3.3` | Clean `5c4e9d50` activation; exact ignored-consumer carrier RED/GREEN; ordinary reconstruction; compatible descriptors; generated-plan lifecycle/entry/diagnostics; full runtime unit library; recognition, recursion, cursor, source-emitter, and duplicate-slot compatibility; neutral checker and rooted route; project-data storage; rendered mdBook; Knowledge Map; all doctrines; canonical local CI with opt-in gap route | Pass: serialized `CompiledSpec` remains the single carrier; exact slot/directive/selector metadata survives reconstruction and descriptor projection; native and generated-plan values/diagnostics agree while plan v2 and the emitter stay unchanged. Ordinary discovery remains 0/1 ignored; gap remains 2/7/56 plus ten Rust dormancy mutations; recognition 137/246/58, typed source 9/5/114, emitted/primary/admission roles, and outward surfaces remain unchanged. The focused test is 1/1 in 5.96 seconds; descriptor 4/4, runtime 170/170, recognition 12/12, recursion 7/7, cursor 6/6, emitter 6/6, duplicate slot 1/1, the 17-owner storage oracle, rendered book 79/14,720 KiB, Knowledge 835/7,019, and all eight doctrines pass. The sandboxed canonical run stopped only at the outer harness's nested-`sandbox-exec` status 71; the unchanged elevated run passes six-family containment, all-five-anchor relocation, CLI 66/66 twice, RAM 69%, Phase 0 1,031/1,031 in 772 seconds, exact neutral-plus-Perl routing with five skips, `[ci] local CI gate passed`, and exit 0. |
 | `2026-08-14` | `INTER-MATCH-GAP-CAPTURE.3.2` | Clean `95127e1d` activation; exact ignored-consumer RED/GREEN; native state/lifecycle/accessors; private gap units; full runtime unit library; recognition, recursion, cursor, and duplicate-slot compatibility; neutral checker and rooted route; project-data storage; rendered mdBook; Knowledge Map; all doctrines; canonical local CI with opt-in gap route | Pass: exact private native candidate/commit/tail behavior, Unicode/empty gaps, detached slots, rollback/nesting, lifecycle, and typed failures are green while ordinary discovery remains 0/1 ignored. Gap remains 2/7/56 plus ten Rust dormancy mutations; recognition 137/246/58, typed source 9/5/114, generated plan v2, reconstructed/generated/emitted/primary roles, recurring/facade routes, and outward surfaces remain unchanged. Rendered book is 79 files / 14,708 KiB, Knowledge is 835 facts / 7,016 keys, the 17-owner Rust storage oracle and all eight doctrines pass. The sandboxed canonical run stopped only at the outer harness's nested-`sandbox-exec` status 71; the unchanged authorized run passes containment/relocation, CLI 66/66 twice, RAM 49%, Phase 0 1,031/1,031 in 735 seconds, exact neutral-plus-Perl routing with five skips, `[ci] local CI gate passed`, and exit 0. |
@@ -1231,7 +1274,8 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
-| `INTER-MATCH-GAP-CAPTURE.3.4` | `INTER-MATCH-GAP-CAPTURE.3.4 - prove Rust emitted gap execution` | Signoff-complete for intended atomic 231/300 from `9e6ade98`; the consumer remains ignored and Rust admission stays `.3.5`; no push. |
+| `INTER-MATCH-GAP-CAPTURE.3.5` | `INTER-MATCH-GAP-CAPTURE.3.5 - admit Rust inter-match gap capture` | Signoff-complete Rust admission and parent `.3` closeout for intended atomic 232/300 from `c3326f6d`; no push. |
+| `INTER-MATCH-GAP-CAPTURE.3.4` | `c3326f6d` — `INTER-MATCH-GAP-CAPTURE.3.4 - prove Rust emitted gap execution` | Emitted proof landed cleanly as atomic 231/300; the consumer remains ignored and Rust admission stays `.3.5`; no push. |
 | `INTER-MATCH-GAP-CAPTURE.3.2` | `5c4e9d50` — `INTER-MATCH-GAP-CAPTURE.3.2 - add Rust native gap execution` | Private native gap execution landed cleanly as atomic 229/300; Rust remains generated/admission-pending at 2/7/56; no push. |
 | `INTER-MATCH-GAP-CAPTURE.3.1` | `INTER-MATCH-GAP-CAPTURE.3.1 - add Rust authored gap metadata` | Signoff-complete for intended atomic 228/300 from `4a95e02a`; Rust remains runtime-pending at 2/7/56; no push. |
 | `INTER-MATCH-GAP-CAPTURE.3.0` | `4a95e02a` — `INTER-MATCH-GAP-CAPTURE.3.0 - freeze Rust gap implementation plan` | Behavior-free freeze landed cleanly as atomic 227/300 from `eceb15ac`; no push. |
@@ -1247,12 +1291,21 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
 
 ## Changelog
 
+- `2026-08-15`: Completed `.3.5` and parent `.3` signoff from clean `c3326f6d`. Exact primary execution, the
+  once-only nine-role consumer, ordinary/canonical/rooted admission, 3/6/56 governance, ten Rust admission
+  mutations, storage, book, Knowledge, all doctrines, containment/relocation, CLI 66x2, RAM 73%, Phase 0
+  1,031/1,031, exact rooted routing, and local-CI exit 0 pass for intended atomic 232. Dart `.4` follows only
+  after commit/brief-clear/clean proof.
+- `2026-08-15`: Landed `.3.4` cleanly as atomic 231 at `c3326f6d`, cleared the commit brief, proved the post-commit
+  pointer and empty tree, and activated final private Rust primary/admission leaf `.3.5` task-tree-first from that
+  exact boundary. Only Rust admission, nine-role composition, 3/6/56 governance, and parent `.3` closeout are in
+  scope; later runtimes and every outward surface remain pending.
 - `2026-08-14`: Completed `.3.4` implementation and signoff from clean `9e6ade98`. Fifteen independently compiled
   emitted modules prove paired direct/traced values, lifecycle, diagnostics, rollback, recursion, source identity,
   and mixed-separator list preservation while ordinary discovery remains 0/1 ignored and rollout remains 2/7/56.
   The 17-owner storage oracle, rendered book 79/14,724 KiB, Knowledge 835/7,019, all eight doctrines, containment/
   relocation, CLI 66x2, RAM 60%, Phase 0 1,031/1,031 in 780 seconds, exact opt-in routing, and local-CI exit 0 pass.
-  Only commit/brief/clean proof remains before `.3.5`.
+  Atomic-231 commit/brief/clean proof then landed at `c3326f6d` before `.3.5` activation.
 - `2026-08-14`: Completed `.3.3` implementation and signoff from clean `5c4e9d50`. Ordinary reconstruction,
   separate compatible descriptor metadata, and generated-plan gap parity are exact; focused proof is 1/1 while
   ordinary discovery remains 0/1 ignored and rollout remains 2/7/56. The 17-owner storage oracle, rendered book

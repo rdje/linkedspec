@@ -25,16 +25,16 @@ CONTRACT_ID = "linkedspec-inter-match-gap-capture-v1"
 TASK_OWNER = "INTER-MATCH-GAP-CAPTURE.1.1"
 PINNED_XID_RANGES: tuple[tuple[int, int], ...] = ()
 
-RUST_DORMANCY_MUTATION_IDS = (
+RUST_ADMISSION_MUTATION_IDS = (
     "rust_consumer_identity",
-    "rust_metadata_stage",
-    "rust_contract_source",
-    "rust_parse_boundary",
-    "rust_validation_boundary",
-    "rust_diagnostic_contract",
-    "rust_compiler_boundary",
-    "rust_canonical_absence",
-    "rust_recurring_absence",
+    "rust_role_ledger",
+    "rust_ordinary_registration",
+    "rust_primary_role",
+    "rust_canonical_registration",
+    "rust_canonical_duplicate",
+    "rust_recurring_registration",
+    "rust_recurring_duplicate",
+    "rust_later_runtime_skip",
     "rust_facade_absence",
 )
 
@@ -130,7 +130,7 @@ MUTATION_IDS = (
     "diagnostic_schema",
     "rollout_sequence",
     "perl_runtime_regression",
-    "rust_runtime_premature",
+    "rust_runtime_regression",
     "storage_paths",
     "route_order",
     "public_no_overclaim",
@@ -741,7 +741,7 @@ def validate_diagnostics(document: dict[str, Any]) -> None:
 
 def validate_recurring_gate(document: dict[str, Any]) -> None:
     expected = {
-        "status": "governance_current_perl_admitted_later_runtimes_pending",
+        "status": "governance_current_perl_rust_admitted_later_runtimes_pending",
         "owner": "INTER-MATCH-GAP-CAPTURE.1.2",
         "driver": "tools/check_inter_match_gap_capture_six_runtime.sh",
         "local_ci_driver": "tools/run_ci_local.sh",
@@ -838,12 +838,13 @@ def validate_public_no_overclaim(
     expected = {
         "status": "current",
         "owner": "INTER-MATCH-GAP-CAPTURE.1.2",
-        "policy": "document the executable neutral and admitted private Perl runtime without claiming later runtimes, recurring/public rollout completion, capability admission, schema exposure, CLI exposure, or outward public admission",
+        "policy": "document the executable neutral and admitted private Perl and Rust runtimes without claiming later runtimes, recurring/public rollout completion, capability admission, schema exposure, CLI exposure, or outward public admission",
         "rollout_assertions": {
             "row_count": 9,
             "neutral_contract": {"status": "complete", "owner": "INTER-MATCH-GAP-CAPTURE.1.1"},
             "perl_runtime": {"status": "complete", "owner": "INTER-MATCH-GAP-CAPTURE.2.4"},
-            "pending_runtime_ids": ["rust_runtime", "dart_runtime", "julia_runtime", "puc_lua_runtime", "luajit_runtime"],
+            "rust_runtime": {"status": "complete", "owner": "INTER-MATCH-GAP-CAPTURE.3"},
+            "pending_runtime_ids": ["dart_runtime", "julia_runtime", "puc_lua_runtime", "luajit_runtime"],
             "runtime_status": "pending",
             "recurring": {"status": "pending", "owner": "INTER-MATCH-GAP-CAPTURE.7"},
             "public_no_drift": {"status": "pending", "owner": "INTER-MATCH-GAP-CAPTURE.7"},
@@ -851,23 +852,23 @@ def validate_public_no_overclaim(
         "documents": [
             {
                 "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
-                "required_marker": "Inter-match gap-capture recurring governance now executes the complete neutral and Perl rows; five later runtime routes and both public rows remain pending.",
+                "required_marker": "Inter-match gap-capture recurring governance now executes the complete neutral, Perl, and Rust rows; four later runtime routes and both public rows remain pending.",
             },
             {
                 "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
-                "required_marker": "Inter-match gap-capture recurring governance runs the complete neutral and Perl rows; five later runtime routes remain explicit skips.",
+                "required_marker": "Inter-match gap-capture recurring governance runs the complete neutral, Perl, and Rust rows; four later runtime routes remain explicit skips.",
             },
             {
                 "path": "docs/linkedspec-book/src/overview/project-status.md",
-                "required_marker": "Inter-match gap-capture governance is current at 2 complete / 7 pending: Perl is admitted privately, while later runtimes and both public rows remain pending.",
+                "required_marker": "Inter-match gap-capture governance is current at 3 complete / 6 pending: Perl and Rust are admitted privately, while later runtimes and both public rows remain pending.",
             },
             {
                 "path": "capability_conformance/README.md",
-                "required_marker": "Inter-match gap-capture recurring governance now admits only the private Perl runtime; later runtimes and public admission remain pending.",
+                "required_marker": "Inter-match gap-capture recurring governance now admits the private Perl and Rust runtimes; later runtimes and public admission remain pending.",
             },
             {
                 "path": "TOOLBOX.md",
-                "required_marker": "Inter-match gap-capture recurring governance executes its complete neutral and private Perl rows while later runtimes remain pending.",
+                "required_marker": "Inter-match gap-capture recurring governance executes its complete neutral, private Perl, and private Rust rows while later runtimes remain pending.",
             },
         ],
         "surface_guard": {
@@ -893,7 +894,7 @@ def validate_public_no_overclaim(
     rollout = document["rollout"]
     require(len(rollout) == assertions["row_count"], "public no-overclaim rollout cardinality drifted")
     rollout_by_id = {row["id"]: row for row in rollout}
-    for rollout_id in ("neutral_contract", "perl_runtime", "recurring", "public_no_drift"):
+    for rollout_id in ("neutral_contract", "perl_runtime", "rust_runtime", "recurring", "public_no_drift"):
         expected_row = assertions[rollout_id]
         actual = rollout_by_id.get(rollout_id)
         require(
@@ -919,7 +920,7 @@ def validate_public_no_overclaim(
 def validate_rollout(document: dict[str, Any]) -> None:
     rows = indexed(document["rollout"], ROLLOUT_IDS, "rollout")
     for index, rollout_id in enumerate(ROLLOUT_IDS):
-        expected_status = "complete" if index <= 1 else "pending"
+        expected_status = "complete" if index <= 2 else "pending"
         expected_owner = TASK_OWNER if index == 0 else {
             "perl_runtime": "INTER-MATCH-GAP-CAPTURE.2.4",
             "rust_runtime": "INTER-MATCH-GAP-CAPTURE.3",
@@ -957,7 +958,7 @@ def validate_registration(document: dict[str, Any]) -> None:
     perl_facade_text = PERL_FACADE_PATH.read_text(encoding="utf-8")
     rust_facade_text = RUST_FACADE_PATH.read_text(encoding="utf-8")
     validate_perl_admission(perl_consumer_text, ci_text, driver_text, perl_facade_text)
-    validate_rust_dormancy(rust_consumer_text, ci_text, driver_text, rust_facade_text)
+    validate_rust_admission(rust_consumer_text, ci_text, driver_text, rust_facade_text)
     for marker in (
         'source "$REPO_ROOT/tools/project_data_env.sh"',
         'linkedspec_project_data_enter_run "$REPO_ROOT/tools/check_inter_match_gap_capture_six_runtime.sh" "$@"',
@@ -975,9 +976,12 @@ def validate_registration(document: dict[str, Any]) -> None:
             require(rollout_by_id[rollout_id]["status"] == "complete", "admitted Perl rollout is not complete")
             route_markers.append(f"PERL5LIB= prove -Iperl {consumer['path']}")
         elif rollout_id == "rust_runtime":
-            require(consumer_path == RUST_CONSUMER_PATH, "dormant Rust consumer path drifted")
-            require(rollout_by_id[rollout_id]["status"] == "pending", "dormant Rust rollout is not pending")
-            route_markers.append(f"skipping pending runtime route {rollout_id}: {consumer['path']}")
+            require(consumer_path == RUST_CONSUMER_PATH, "admitted Rust consumer path drifted")
+            require(rollout_by_id[rollout_id]["status"] == "complete", "admitted Rust rollout is not complete")
+            route_markers.append(
+                "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime "
+                "--test inter_match_gap_capture_contract"
+            )
         else:
             require(rollout_by_id[rollout_id]["status"] == "pending", f"later runtime is not pending: {rollout_id}")
             route_markers.append(f"skipping pending runtime route {rollout_id}: {consumer['path']}")
@@ -1035,50 +1039,79 @@ def validate_perl_admission(consumer_text: str, ci_text: str, driver_text: str, 
     )
 
 
-def validate_rust_dormancy(
+def validate_rust_admission(
     consumer_text: str,
     ci_text: str,
     driver_text: str,
     facade_text: str,
 ) -> None:
     consumer_markers = (
-        ('const CONTRACT_ID: &str = "linkedspec-inter-match-gap-capture-v1";', "Rust dormant consumer contract drifted"),
-        (
-            '#[ignore = "INTER-MATCH-GAP-CAPTURE.3.5 owns Rust runtime admission"]\n'
-            "fn authored_static_compiled_metadata_stage()",
-            "Rust dormant metadata stage drifted",
-        ),
-        ('include_str!("../../../capability_conformance/inter_match_gap_capture_contract.json")', "Rust dormant contract source drifted"),
-        ("let parsed = parse_spec(source)?;", "Rust dormant parse boundary drifted"),
-        ("validate(&parsed)?;", "Rust dormant validation boundary drifted"),
-        ('"regex_slot_unknown_name"', "Rust dormant diagnostic contract drifted"),
-        ("fn compile_metadata(source: &str)", "Rust dormant compiler boundary drifted"),
+        ('const CONTRACT_ID: &str = "linkedspec-inter-match-gap-capture-v1";', "Rust admitted consumer contract drifted"),
+        ("fn contract_declared_rust_roles_execute_once_and_only_once()", "Rust ordinary admission boundary drifted"),
+        ("admission.assert_exact(&contract);", "Rust admitted role ledger drifted"),
+        ("fn primary_command_gap_contract()", "Rust admitted primary role drifted"),
+        ("primary_command_gap_contract();", "Rust admitted primary role drifted"),
     )
     for marker, reason in consumer_markers:
         require(consumer_text.count(marker) == 1, reason)
 
-    consumer_path = "rust/linkedspec-runtime/tests/inter_match_gap_capture_contract.rs"
-    command_marker = "--test inter_match_gap_capture_contract"
-    require(command_marker not in ci_text, "Rust dormant consumer entered canonical CI prematurely")
-    require(
-        driver_text.count(f"skipping pending runtime route rust_runtime: {consumer_path}") == 1
-        and command_marker not in driver_text,
-        "Rust dormant consumer entered recurring execution prematurely",
+    roles = (
+        "native_execution",
+        "ordinary_reconstruction",
+        "descriptor",
+        "generated_plan",
+        "emitted_source",
+        "target_lifecycle",
+        "recursion_and_rollback",
+        "portable_diagnostics",
+        "primary_command",
     )
+    for role in roles:
+        require(
+            consumer_text.count(f'admission.complete("{role}");') == 1,
+            f"Rust admitted role ledger drifted: {role}",
+        )
+
+    consumer_path = "rust/linkedspec-runtime/tests/inter_match_gap_capture_contract.rs"
+    command = (
+        "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime "
+        "--test inter_match_gap_capture_contract"
+    )
+    require("#[ignore" not in consumer_text, "Rust admitted consumer returned to ignored discovery")
+    require(ci_text.count(command) == 1, "Rust admitted consumer is not registered exactly once in canonical CI")
+    require(
+        driver_text.count(command) == 1
+        and f"skipping pending runtime route rust_runtime: {consumer_path}" not in driver_text,
+        "Rust admitted consumer is not registered exactly once in recurring execution",
+    )
+    for rollout_id, path in (
+        ("dart_runtime", "dart/test/inter_match_gap_capture_contract_test.dart"),
+        ("julia_runtime", "julia/test/inter_match_gap_capture_contract_test.jl"),
+        ("puc_lua_runtime", "lua/test/inter_match_gap_capture_contract_test.lua"),
+        ("luajit_runtime", "lua/test/inter_match_gap_capture_contract_test.lua"),
+    ):
+        require(
+            driver_text.count(f"skipping pending runtime route {rollout_id}: {path}") == 1,
+            f"Rust admission disturbed later runtime skip: {rollout_id}",
+        )
     require(
         "inter_match_gap_capture" not in facade_text and "capture_gaps" not in facade_text,
-        "Rust dormant consumer widened the public facade prematurely",
+        "Rust admission widened the public facade",
     )
 
 
-RustDormancyMutation = tuple[str, str, Callable[[dict[str, str]], None]]
+RustAdmissionMutation = tuple[str, str, Callable[[dict[str, str]], None]]
 
 
-def rust_dormancy_mutations() -> list[RustDormancyMutation]:
+def rust_admission_mutations() -> list[RustAdmissionMutation]:
+    command = (
+        "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime "
+        "--test inter_match_gap_capture_contract"
+    )
     return [
         (
             "rust_consumer_identity",
-            "Rust dormant consumer contract drifted",
+            "Rust admitted consumer contract drifted",
             lambda texts: texts.__setitem__(
                 "consumer",
                 texts["consumer"].replace(
@@ -1087,89 +1120,84 @@ def rust_dormancy_mutations() -> list[RustDormancyMutation]:
             ),
         ),
         (
-            "rust_metadata_stage",
-            "Rust dormant metadata stage drifted",
+            "rust_role_ledger",
+            "Rust admitted role ledger drifted",
             lambda texts: texts.__setitem__(
                 "consumer",
                 texts["consumer"].replace(
-                    "INTER-MATCH-GAP-CAPTURE.3.5 owns Rust runtime admission",
-                    "stale admission owner",
+                    "admission.assert_exact(&contract);",
+                    "admission.assert_stale(&contract);",
                     1,
                 ),
             ),
         ),
         (
-            "rust_contract_source",
-            "Rust dormant contract source drifted",
+            "rust_ordinary_registration",
+            "Rust admitted consumer returned to ignored discovery",
             lambda texts: texts.__setitem__(
                 "consumer",
                 texts["consumer"].replace(
-                    "inter_match_gap_capture_contract.json", "stale_contract.json", 1
-                ),
-            ),
-        ),
-        (
-            "rust_parse_boundary",
-            "Rust dormant parse boundary drifted",
-            lambda texts: texts.__setitem__(
-                "consumer",
-                texts["consumer"].replace(
-                    "let parsed = parse_spec(source)?;",
-                    "let parsed = parse_other(source)?;",
+                    "fn contract_declared_rust_roles_execute_once_and_only_once()",
+                    "#[ignore]\nfn contract_declared_rust_roles_execute_once_and_only_once()",
                     1,
                 ),
             ),
         ),
         (
-            "rust_validation_boundary",
-            "Rust dormant validation boundary drifted",
+            "rust_primary_role",
+            "Rust admitted primary role drifted",
             lambda texts: texts.__setitem__(
                 "consumer",
                 texts["consumer"].replace(
-                    "validate(&parsed)?;", "validate_other(&parsed)?;", 1
-                ),
-            ),
-        ),
-        (
-            "rust_diagnostic_contract",
-            "Rust dormant diagnostic contract drifted",
-            lambda texts: texts.__setitem__(
-                "consumer",
-                texts["consumer"].replace(
-                    '"regex_slot_unknown_name"', '"stale_diagnostic"', 1
-                ),
-            ),
-        ),
-        (
-            "rust_compiler_boundary",
-            "Rust dormant compiler boundary drifted",
-            lambda texts: texts.__setitem__(
-                "consumer",
-                texts["consumer"].replace(
-                    "fn compile_metadata(source: &str)",
-                    "fn compile_other(source: &str)",
+                    "primary_command_gap_contract();",
+                    "primary_command_gap_contract_stale();",
                     1,
                 ),
             ),
         ),
         (
-            "rust_canonical_absence",
-            "Rust dormant consumer entered canonical CI prematurely",
+            "rust_canonical_registration",
+            "Rust admitted consumer is not registered exactly once in canonical CI",
             lambda texts: texts.__setitem__(
-                "ci", texts["ci"] + "\n--test inter_match_gap_capture_contract\n"
+                "ci", texts["ci"].replace(command, "stale Rust gap command", 1)
             ),
         ),
         (
-            "rust_recurring_absence",
-            "Rust dormant consumer entered recurring execution prematurely",
+            "rust_canonical_duplicate",
+            "Rust admitted consumer is not registered exactly once in canonical CI",
+            lambda texts: texts.__setitem__(
+                "ci", texts["ci"] + f"\n{command}\n"
+            ),
+        ),
+        (
+            "rust_recurring_registration",
+            "Rust admitted consumer is not registered exactly once in recurring execution",
+            lambda texts: texts.__setitem__(
+                "driver", texts["driver"].replace(command, "stale Rust gap command", 1)
+            ),
+        ),
+        (
+            "rust_recurring_duplicate",
+            "Rust admitted consumer is not registered exactly once in recurring execution",
+            lambda texts: texts.__setitem__(
+                "driver", texts["driver"] + f"\n{command}\n"
+            ),
+        ),
+        (
+            "rust_later_runtime_skip",
+            "Rust admission disturbed later runtime skip: dart_runtime",
             lambda texts: texts.__setitem__(
                 "driver",
-                texts["driver"] + "\n--test inter_match_gap_capture_contract\n",
+                texts["driver"].replace(
+                    "skipping pending runtime route dart_runtime: dart/test/inter_match_gap_capture_contract_test.dart",
+                    "stale later runtime skip",
+                    1,
+                ),
             ),
         ),
         (
             "rust_facade_absence",
-            "Rust dormant consumer widened the public facade prematurely",
+            "Rust admission widened the public facade",
             lambda texts: texts.__setitem__(
                 "facade", texts["facade"] + "\npub mod inter_match_gap_capture;\n"
             ),
@@ -1177,23 +1205,23 @@ def rust_dormancy_mutations() -> list[RustDormancyMutation]:
     ]
 
 
-def validate_rust_dormancy_mutations() -> int:
+def validate_rust_admission_mutations() -> int:
     texts = {
         "consumer": RUST_CONSUMER_PATH.read_text(encoding="utf-8"),
         "ci": CI_PATH.read_text(encoding="utf-8"),
         "driver": RECURRING_DRIVER_PATH.read_text(encoding="utf-8"),
         "facade": RUST_FACADE_PATH.read_text(encoding="utf-8"),
     }
-    checks = rust_dormancy_mutations()
+    checks = rust_admission_mutations()
     require(
-        tuple(name for name, _, _ in checks) == RUST_DORMANCY_MUTATION_IDS,
-        "Rust dormancy mutation identity/order drifted",
+        tuple(name for name, _, _ in checks) == RUST_ADMISSION_MUTATION_IDS,
+        "Rust admission mutation identity/order drifted",
     )
     for name, expected_reason, mutate in checks:
         candidate = copy.deepcopy(texts)
         mutate(candidate)
         try:
-            validate_rust_dormancy(
+            validate_rust_admission(
                 candidate["consumer"],
                 candidate["ci"],
                 candidate["driver"],
@@ -1202,10 +1230,10 @@ def validate_rust_dormancy_mutations() -> int:
         except ContractError as error:
             require(
                 expected_reason in str(error),
-                f"Rust dormancy mutation {name} failed for unexpected reason: {error}",
+                f"Rust admission mutation {name} failed for unexpected reason: {error}",
             )
         else:
-            fail(f"Rust dormancy mutation {name} was accepted")
+            fail(f"Rust admission mutation {name} was accepted")
     return len(checks)
 
 
@@ -1312,7 +1340,7 @@ def mutations() -> list[Mutation]:
             ("diagnostic_schema", "diagnostic schema drifted", lambda d: d["diagnostics"][8]["required_context"].pop()),
             ("rollout_sequence", "rollout identity/order drifted", lambda d: d["rollout"].reverse()),
             ("perl_runtime_regression", "perl_runtime rollout drifted", lambda d: row(d, "rollout", "perl_runtime").__setitem__("status", "pending")),
-            ("rust_runtime_premature", "rust_runtime rollout drifted", lambda d: row(d, "rollout", "rust_runtime").__setitem__("status", "complete")),
+            ("rust_runtime_regression", "rust_runtime rollout drifted", lambda d: row(d, "rollout", "rust_runtime").__setitem__("status", "pending")),
             ("storage_paths", "recurring gate topology drifted", lambda d: d["recurring_gate"]["storage"].__setitem__("initializer", "/tmp/project_data_env.sh")),
             ("route_order", "recurring gate topology drifted", lambda d: d["recurring_gate"]["route_order"].reverse()),
             ("public_no_overclaim", "public no-overclaim contract drifted", lambda d: d["public_no_overclaim"].__setitem__("status", "planned")),
@@ -1346,7 +1374,7 @@ def main() -> int:
         document = load_json(CONTRACT_PATH)
         validate_contract(document)
         mutation_count = validate_mutations(document)
-        rust_dormancy_mutation_count = validate_rust_dormancy_mutations()
+        rust_admission_mutation_count = validate_rust_admission_mutations()
     except (json.JSONDecodeError, OSError, ContractError) as error:
         print(f"inter-match gap capture contract: FAIL: {error}", file=sys.stderr)
         return 1
@@ -1357,7 +1385,7 @@ def main() -> int:
         f"(8 positive + 10 negative fixtures; 3 sources; 16 transitions; "
         f"10 segmentation cases; 9 diagnostics; {complete} complete + {pending} pending rollout; "
         f"{mutation_count} rejected semantic mutations; "
-        f"{rust_dormancy_mutation_count} rejected Rust dormancy mutations)"
+        f"{rust_admission_mutation_count} rejected Rust admission mutations)"
     )
     return 0
 

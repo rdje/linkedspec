@@ -10,6 +10,30 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-15 — INTER-MATCH-GAP-CAPTURE.3.5 — admit Rust inter-match gap capture
+
+- Activated task-tree-first from clean atomic-231 commit `c3326f6d`. Primary-first RED exits 101 with exact Rust
+  `E0425` at the absent `primary_command_gap_contract` owner; admission RED independently rejects the still-pending
+  `rust_runtime` row.
+- Added a real primary-adapter proof for `alpha, beta | gamma\n- delta`. One `[a-z]+` item slot returns `alpha`,
+  `beta`, `gamma`, and `delta` with exact gaps `""`, `", "`, `" | "`, and `"\n- "`, proving that recognition and
+  heterogeneous separator preservation remain independent.
+- Made the final Rust consumer ordinary and required the contract's nine roles in declared order, each completed
+  exactly once: native, reconstructed, descriptor, generated-plan, emitted, lifecycle, recursion/rollback,
+  diagnostics, and primary command.
+- Registered that consumer once in canonical CI and once after Perl in the rooted route. Only `rust_runtime`
+  advances: governance is 3 complete / 6 pending / 56 semantic mutations plus ten Rust admission/regression
+  mutations; the route executes neutral, Perl 124, Rust 1/1, then four exact later-runtime skips.
+- Generated plan v2, recognition 137/246/58, public helpers 122, typed source 9/5/114, capability, facade,
+  semantic/MCP, CLI, README, Dart/Julia/Lua, recurring, and public rows remain unchanged or pending.
+- Focused and compatibility proof passes Rust admission 1/1, runtime 170/170, recognition 12/12, recursive
+  observation 7/7, cursor, duplicate-slot, source-emitter, neutral/rooted governance, and related neutral ledgers.
+  The rendered book passes at 79 files / 14,732 KiB, Knowledge at 835 facts / 7,020 keys, and the 17-owner Rust
+  storage/relocation oracle passes with all Cargo workspaces, caches, traces, and generated output on repository
+  storage. All eight doctrines pass. The sandboxed canonical run stops only at the outer harness's expected
+  nested-`sandbox-exec` status 71; the unchanged authorized run passes containment/relocation, CLI 66/66 twice,
+  RAM 73%, Phase 0 1,031/1,031, the exact neutral/Perl/Rust route, `[ci] local CI gate passed`, and exit 0.
+
 ## 2026-08-14 — INTER-MATCH-GAP-CAPTURE.3.4 — prove Rust emitted gap execution
 
 - Activated task-tree-first from clean atomic-230 commit `9e6ade98`. Extending only the ignored final consumer

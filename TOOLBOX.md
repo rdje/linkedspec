@@ -1048,8 +1048,8 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 ### 4.9.1.3 `tools/check_inter_match_gap_capture_contract.py` — executable-neutral gap oracle
 
 - **WHAT:** the format-1 neutral JSON authority for `linkedspec-inter-match-gap-capture-v1`. It executes exact
-  Unicode/empty/child/transaction state and rejects 56 semantic/topology corruptions at rollout 2 complete + 7
-  pending. Inter-match gap-capture recurring governance executes its complete neutral and private Perl rows while later runtimes remain pending.
+  Unicode/empty/child/transaction state and rejects 56 semantic/topology corruptions at rollout 3 complete + 6
+  pending. Inter-match gap-capture recurring governance executes its complete neutral, private Perl, and private Rust rows while later runtimes remain pending.
 - **WHEN:** implementing `.1.3`, named regex declarations/selectors, `entry_slot()`, `@capture_gaps`, the three
   gap accessors, or any backend/runtime/recurring leg.
 - **HOW:** run `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py`, retrieve
