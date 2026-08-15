@@ -471,7 +471,7 @@ or a set of alternatives for OR-mode rules. When clusters are combined as
 alternatives, the engine records **which** alternative matched (0-based) and uses
 that to drive dispatch.
 
-Perl, Rust, and Dart accept a stable rule-local name on a regex member:
+Perl, Rust, Dart, and Julia accept a stable rule-local name on a regex member:
 
 ```text
 name=/pattern/
@@ -481,8 +481,8 @@ name = /pattern/
 Only horizontal spacing around `=` is insignificant. Every name scalar uses the repository-pinned Unicode 17
 `XID_Continue` class; identity is exact, case-sensitive, and normalization-sensitive. ASCII digit-only names are
 reserved for positional selectors. Named and anonymous regex members may mix in one authored zero-based sequence.
-Perl and Rust privately admit the complete gap runtime. Dart currently carries authored/static/compiled metadata
-only; this is not yet a portable public admission.
+Perl, Rust, and Dart privately admit the complete gap runtime. Julia currently carries authored/static/compiled
+metadata behind a dormant final consumer; this is not yet a portable public admission.
 
 **Capture groups**: A `(...)` group is a **numbered** capture; a `(?<name>...)`
 group is a **named** capture. Action code reads them with `entry_group(N)` /
@@ -512,8 +512,8 @@ its associated action code.
   `Top::->Rule.push` are valid spellings.
 - **Target indexing**: `-> rule` means entry slot `[0]`. `-> rule[N]` selects a
   positional regex slot; `-> rule[name]` selects stable rule-local identity. A numeric selector may resolve a
-  named declaration, but it remains positional provenance. Named selection is implemented by the private Perl
-  and Rust runtimes and by Dart's current authored/static/compiled path.
+  named declaration, but it remains positional provenance. Named selection is implemented by the private Perl,
+  Rust, and Dart runtimes and by Julia's current authored/static/compiled path.
 - **Grouped targets**: `-> RuleA | RuleB { ... }` binds one shared action code
   block to multiple target rules.
 - **Grouped-target boundary**: the shared block is mandatory. `-> RuleA | RuleB`

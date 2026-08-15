@@ -551,8 +551,8 @@ Horizontal whitespace around `=` is insignificant. Same-line `name=/regex/` at r
 declares a stable rule-local slot rather than assigning a variable. Existing unindexed and numeric
 selectors remain compatibility forms. Perl, Rust, and Dart privately admit the declaration/selector syntax,
 directive metadata, and native plus reconstructed/generated/emitted/primary `entry_slot()`/gap-accessor behavior.
-Julia's behavior-free plan is frozen, but its parser/runtime implementation remains pending. No backend exposes
-these forms as a public cross-backend contract yet.
+Julia now implements the authored/static/compiled metadata subset behind a dormant final consumer; its runtime
+state and accessors remain pending. No backend exposes these forms as a public cross-backend contract yet.
 
 Brackets are the selector namespace. `Document[1]` means positional compatibility, so declaration reordering
 can change its target; `Document[section]` means stable identity and must survive reordering. An implementation
@@ -812,15 +812,28 @@ missing or duplicate ordinary/canonical/recurring registration, premature later-
 exposure. Rollout is 4 complete / 5 pending / 57 mutations, and generated plan v2 remains exactly
 `{label,family}`.
 
-### Julia behavior-free implementation plan — runtime still pending
+### Julia authored/static/compiled metadata — current; runtime still pending
 
-Julia `.5.0` confirms the current boundary before code: numeric selectors compile; named declarations/selectors
-and `@capture_gaps` are raw invalid body syntax; `entry_slot()` and the three gap accessors fail as structured
-unknown helpers; legacy `@move_pos` has no compiled/native effect; and repeated execution runs enclosing `LS`
-before candidate selection. The existing primary adapter rejects the complete future syntax at compilation.
+Julia `.5.0` recorded the pre-implementation boundary: numeric selectors compiled; named declarations/selectors
+and `@capture_gaps` were raw invalid body syntax; `entry_slot()` and the three gap accessors failed as structured
+unknown helpers; legacy `@move_pos` had no compiled/native effect; and repeated execution ran enclosing `LS`
+before candidate selection. `.5.1` now implements only the authored/static/compiled layer.
 
-Five dependency-ordered leaves are frozen. `.5.1` owns logical spec identity, authored/static/compiled slot and
-selector provenance, directive diagnostics, and a mechanically dormant permanent consumer. `.5.2` extends only
+Named and anonymous declarations share one authored regex order and use the existing generated Unicode 17.0.0
+rule-label scanner. ASCII-digit-only names are rejected, duplicate names carry their first declaration line, and
+unindexed, numeric, named, or malformed bracket selectors retain their authored identity for exact resolution or
+diagnosis. The dedicated `@capture_gaps` body record validates cardinality, looping seek-family eligibility,
+action ownership, and legacy anonymous-marker conflicts; named `@mark(...)` remains independent.
+
+`SpecFile.source_id` defaults to `inline` and survives ordinary, staged, loaded, reconstructed, and private
+primary parsing. Loaded absolute host paths are reduced to a caller-logical basename before compiled provenance is
+serialized, preserving Julia's existing path-opacity and repository-relocation contract. Compiled rules now carry
+ordered slot rows plus nullable directive evidence, and compiled action edges carry source provenance plus the
+exact five-field resolved selector identity. Descriptor action edges, legacy `resolved_edges`, dependency refs,
+generated format 2, and ordered `{label,family}` plan rows remain unchanged.
+
+Five dependency-ordered leaves remain authoritative. `.5.1` now owns logical spec identity, authored/static/
+compiled slot and selector provenance, directive diagnostics, and a mechanically dormant permanent consumer. `.5.2` extends only
 the existing private recognition invocation/token authority; detached `RecognitionFrameState` remains exactly
 cursor/boundary/marks. Capture-enabled rules alone preselect before `LS`, and the immutable input
 `SourceAuthority` projects Julia's UTF-8 code-unit registers to detached scalar spans. `.5.3` uses normalized
@@ -829,9 +842,12 @@ format 2 with exact `{label,family}` plan rows. `.5.4` independently loads ten v
 modules from one repository-routed host, advancing only the exact Julia temporary-workspace inventory from 19 to
 20. `.5.5` alone reuses the primary adapter, admits nine roles exactly once, and advances Julia to 5/4/58.
 
-This planning leaf changes no Julia behavior, rollout, generated format, descriptor/reference legacy shape,
-facade/schema/semantic/MCP/capability/CLI/README surface, dependency, or toolchain. The exact implementation map is
-recorded in ADR `0045` and `docs/knowledge/inter-match-gap-julia-implementation-plan.md`.
+The permanent consumer lives at `julia/test/inter_match_gap_capture_contract_test.jl` and explicitly proves the
+metadata group, but it is absent from `runtests.jl`, canonical CI, and the rooted driver. Ten independently
+reason-checked Julia dormancy mutations guard its identity, parse/validate/compile seams, discovery absence, rooted
+absence, and facade absence. Julia rollout therefore stays pending at 4/5/57; runtime, accessors, reconstruction/
+descriptor/generated execution, emitted proof, primary execution/admission, outward surfaces, dependencies, and
+toolchain remain unchanged.
 
 Named slot rules are exact:
 

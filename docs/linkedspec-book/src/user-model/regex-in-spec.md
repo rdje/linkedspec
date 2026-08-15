@@ -113,8 +113,9 @@ Top::OR
 Horizontal whitespace around `=` is insignificant. Named and anonymous declarations share one source-ordered,
 zero-based slot list. A slot name uses the pinned Unicode 17.0.0 `XID_Continue` class, with exact case- and
 normalization-sensitive identity; an all-ASCII-digit name is invalid because bracket digits are reserved for
-positional selectors. A name is unique within its rule. Perl and Rust privately admit this surface; Dart now
-parses, validates, and compiles its metadata while its `@capture_gaps` runtime behavior remains pending.
+positional selectors. A name is unique within its rule. Perl, Rust, and Dart privately admit this surface and its
+gap runtime. Julia now parses, validates, and compiles the same metadata behind a dormant consumer; its
+`@capture_gaps` runtime behavior remains pending.
 
 Named selection survives declaration reorder. Positional selection deliberately does not: if another slot is
 inserted before `word`, `Token[word]` follows the name while `Token[0]` continues to mean the first authored slot.

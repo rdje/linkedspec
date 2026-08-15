@@ -10,6 +10,35 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-15 (`INTER-MATCH-GAP-CAPTURE.5.1` — Julia authored/static/compiled metadata): activation base is clean
+  atomic 240 at `12a14ed0`. The permanent consumer is explicit-only; the neutral checker mutation-locks its
+  identity, metadata role, contract source, parse/validate/compile seams, diagnostic token, discovery/rooted
+  absence, and facade absence.
+- Keep authored selector identity separate from resolved execution identity. `EdgeTarget` owns
+  `selector_kind`/`authored_selector`; compilation resolves exact target index and nullable slot name once.
+  Compiled JSON owns the new rows, while descriptor serialization deliberately calls the legacy edge projector.
+- Named regex declarations reuse the generated pinned Unicode-17 rule-label classifier. Anonymous and named rows
+  share one zero-based order; ASCII-digit-only names remain reserved for numeric brackets, and duplicate regex
+  text never substitutes for stable slot identity.
+- Validate slot declarations before generic raw syntax, selectors before directive eligibility, and flagged
+  directive eligibility before generic mixed-edge rejection. Unflagged legacy diagnostics retain their prior
+  route; flagged rules receive exact ownership/mode evidence, and named `@mark(...)` remains independent.
+- `SpecFile.source_id` is logical provenance, never resolved host authority. Preserve it through every parser/
+  stitching copy. Relative loaded requests retain caller spelling; absolute requests reduce to basename. The
+  complete Julia suite caught the first implementation leaking scratch paths into `to_json(compiled)`.
+- Do not claim emitted workspace ownership early. The dormant metadata consumer proves loaded parsing by invoking
+  the production `_parse_loaded_spec` boundary over an in-memory `LoadedSpec`, so storage remains exactly 19
+  owners / 5 packages; `.5.4` still exclusively owns 19→20.
+- The implementation changes no recognition invocation, runtime matcher/interpreter, accessor dispatch,
+  descriptor metadata, generated plan, emitter API, primary command, rollout, dependency, or facade. `.5.2-.5.5`
+  retain those boundaries in dependency order.
+- The mdBook audit repaired two stale Dart metadata-only sentences left after `.4.5`; current teaching now clearly
+  distinguishes admitted Perl/Rust/Dart behavior from dormant Julia metadata.
+- Focused signoff is explicit metadata 105, direct dependents 624, full Julia package plus primary/storage 19/5/
+  corpus 105, rooted neutral/Perl/Rust/Dart with three skips, duplicate-slot 7/0/59, recognition 137/246/58,
+  typed-source 9/5/114, book 79/14,868, Knowledge 838/7,071, bounded histories, and all nine doctrines. ADR `0076`
+  authorizes only the required 18th change-history member / 17th manifest row; aggregate ceilings do not move.
+
 - 2026-08-15 (`INTER-MATCH-GAP-CAPTURE.5.0` — behavior-free Julia gap plan): activation is clean atomic 239
   `43ed1c8f`; the only pre-audit edit was the owning task-tree leaf, and no production/test behavior moves.
 - Process probes are decisive: numeric `Item[1]` parses/compiles; `name=/a/`, `Item[name]`, and `@capture_gaps`

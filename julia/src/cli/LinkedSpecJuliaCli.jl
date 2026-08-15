@@ -550,13 +550,18 @@ end
 
 function _parse_primary_cli_spec(
     source::AbstractString;
+    source_id::AbstractString = "inline",
     trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
 )
     try
-        return parse_spec(source; trace = trace)
+        return parse_spec(source; source_id = source_id, trace = trace)
     catch error
         if error isa SpecParseException
-            return parse_spec_with_staged_user_function_definitions(source; trace = trace)
+            return parse_spec_with_staged_user_function_definitions(
+                source;
+                source_id = source_id,
+                trace = trace,
+            )
         end
         rethrow()
     end
@@ -573,7 +578,11 @@ function _compile_primary_cli_request(
             spec_path = request.spec_path,
         )
     end
-    spec = _parse_primary_cli_spec(request.spec_source; trace = trace)
+    spec = _parse_primary_cli_spec(
+        request.spec_source;
+        source_id = request.spec_name,
+        trace = trace,
+    )
     compiled = compile_spec(spec; trace = trace)
     return LinkedSpecRuntimeEngine(
         compiled;

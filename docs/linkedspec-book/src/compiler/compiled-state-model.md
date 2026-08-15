@@ -126,6 +126,14 @@ The admitted final consumer composes native, reconstructed, descriptor, generate
 lifecycle, recursion/rollback, diagnostic, and existing-primary roles exactly once; this composition adds no
 compiled field or second state authority.
 
+Julia's private inter-match-gap metadata now adds the same authored identities to its compiled state without
+widening the descriptor. `SpecFile.source_id` is a logical caller identity, defaulted to `inline` for legacy
+constructors and JSON. Each compiled regex has an ordered `regex_slots` row with `regex_index`, nullable
+`slot_id`, logical `source_id`, and physical `line`; an authored `@capture_gaps` has one nullable directive
+record. Compiled action edges retain unindexed/numeric/named authorship, resolved target rule/index/slot identity,
+and source provenance. Legacy descriptor action edges, `resolved_edges`, and `{label,idx}` dependency references
+remain unchanged; detached descriptor projections stay owned by `.5.3`.
+
 The Julia backend now implements the same narrow staged provider before compiled state is built. Its public path is:
 
 ```julia

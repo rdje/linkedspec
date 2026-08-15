@@ -1,19 +1,18 @@
 # MEMORY
 
-- activation_commit: `43ed1c8f7a9c388f87314966274b9c05133c632f` — clean atomic-239 base for behavior-free Julia
-  audit/plan leaf `INTER-MATCH-GAP-CAPTURE.5.0`; no push.
-- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.5.0 - freeze Julia gap implementation plan`; focused-signoff-
-  complete from clean atomic 239 at `43ed1c8f` for intended atomic 240.
-- active_work_unit: none at the intended clean post-landing boundary. `.5.0` changes no Julia behavior, rollout,
-  generated format, dependency/toolchain, infrastructure, or outward surface; parent `.5` remains active.
-- next_action: activate `.5.1` task-tree-first from exact clean atomic 240 for Julia authored/static/compiled
-  metadata, logical source identity, diagnostics, and mechanically dormant permanent consumer.
-- in_flight_uncommitted: none at the intended handoff; no production/test change, generated artifact, or background.
-- blockers: none. The Julia audit proves numeric selectors compile; named declarations/selectors/directive are
-  raw invalid syntax; future accessors are structured unknown helpers; legacy `@move_pos` has no runtime effect;
-  capture-relevant `LS` precedes selection. Focused Julia 624, primary, storage 19/5, neutral/rooted 4/5/57,
-  recognition 137/246/58, duplicate slot 7/0/59, typed source 9/5/114, book 79/14,856, Knowledge 838/7,070,
-  bounded histories, exact ADR pressure, and all nine doctrines pass.
+- activation_commit: `12a14ed02e6506915954f493dbd8db8918dc3d57` — clean atomic-240 base for Julia metadata
+  leaf `INTER-MATCH-GAP-CAPTURE.5.1`; no push.
+- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.5.1 - add Julia gap metadata`; focused-signoff-complete from
+  clean atomic 240 at `12a14ed0` for intended atomic 241.
+- active_work_unit: none at the intended clean post-landing boundary. `.5.1` adds private authored/static/compiled
+  metadata and dormant proof only; parent `.5` remains active and Julia runtime admission remains pending.
+- next_action: activate `.5.2` task-tree-first from exact clean atomic 241 for private Julia native gap state,
+  lifecycle, accessors, entry identity, rollback, and recursion on the existing recognition authority.
+- in_flight_uncommitted: none at the intended handoff; no generated artifact, background result, or partial task.
+- blockers: none. Explicit dormant metadata is 105/105; focused Julia direct dependents are 624; full Julia package,
+  primary, storage 19/5, and corpus 105 pass. Neutral/rooted remains 4/5/57 with ten Julia dormancy mutations;
+  recognition 137/246/58, duplicate slot 7/0/59, typed source 9/5/114, book 79/14,868, Knowledge 838/7,071,
+  bounded histories, diff checks, and all nine doctrines pass.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -41,7 +40,7 @@
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, and recurrence/public no-drift 9/9.
 - current_future_direction: gap is privately admitted on Perl, Rust, and Dart at 4/5/57 plus ten Rust and ten Dart
-  admission mutations. Julia `.5.0` freezes `.5.1-.5.5` from clean atomic 239 without movement; `.5.5` alone is
-  planned to promote Julia to 5/4/58. Both Lua ABIs and public rows remain pending; `.14.5.1` waits for `.7`.
-- latest_bootstrap_read: 2026-08-15 — roadmap/codebase/mdBook and continuity/tooling review complete; `.5.0` is
-  focused-signoff-complete for intended atomic 240, with `.5.1` the exact next clean-boundary action.
+  admission mutations. Julia `.5.1` now owns exact private metadata plus ten dormancy guards; `.5.2-.5.5` own native,
+  generated, emitted, and admission work. Both Lua ABIs and public rows remain pending; `.14.5.1` waits for `.7`.
+- latest_bootstrap_read: 2026-08-15 — roadmap/codebase/mdBook and continuity/tooling review complete; `.5.1` is
+  focused-signoff-complete for intended atomic 241, with `.5.2` the exact next clean-boundary action.

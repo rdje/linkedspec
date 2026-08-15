@@ -239,7 +239,7 @@ function load_and_compile_spec(request::SpecRequest, options::SpecLoadOptions)
     end
 
     spec = try
-        parse_spec_with_staged_user_function_definitions(loaded.source_text)
+        _parse_loaded_spec(loaded)
     catch error
         _spec_pipeline_fatal_error(error) && rethrow()
         throw(_spec_pipeline_error(
@@ -284,6 +284,21 @@ function load_and_compile_spec(request::SpecRequest, options::SpecLoadOptions)
         ))
     end
     return LoadedCompiledSpec(loaded, compiled)
+end
+
+function _parse_loaded_spec(loaded::LoadedSpec)
+    return parse_spec_with_staged_user_function_definitions(
+        loaded.source_text;
+        source_id = _logical_spec_source_id(loaded.resolved.request),
+    )
+end
+
+function _logical_spec_source_id(request::SpecRequest)
+    requested = request.requested
+    if request.kind == PathSpecRequest && isabspath(requested)
+        return basename(requested)
+    end
+    return requested
 end
 
 function _validate_named_spec_request(request::SpecRequest)

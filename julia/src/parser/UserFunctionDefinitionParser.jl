@@ -157,6 +157,7 @@ end
 
 function parse_spec_with_staged_user_function_definitions(
     source::AbstractString;
+    source_id::AbstractString = "inline",
     parser_spec_source = nothing,
     trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
 )
@@ -165,7 +166,12 @@ function parse_spec_with_staged_user_function_definitions(
         parser_spec_source = parser_spec_source,
         trace = trace,
     )
-    return parse_spec_with_staged_user_function_definition_asts(source, nodes; trace = trace)
+    return parse_spec_with_staged_user_function_definition_asts(
+        source,
+        nodes;
+        source_id = source_id,
+        trace = trace,
+    )
 end
 
 const _DEFAULT_USER_FUNCTION_DEFINITION_AST_PARSER =

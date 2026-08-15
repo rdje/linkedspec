@@ -169,7 +169,11 @@ function stitch_function_body_ast(spec::SpecFile, job_id::AbstractString, body_a
     if !found
         throw(UserFunctionRegistryException("function body parse job '$job_id' not found"))
     end
-    return SpecFile(functions = functions, rules = spec.rules)
+    return SpecFile(
+        source_id = spec.source_id,
+        functions = functions,
+        rules = spec.rules,
+    )
 end
 
 function to_json(registry::UserFunctionRegistry)

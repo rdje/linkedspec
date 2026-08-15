@@ -2,33 +2,33 @@
 
 ## Current Activity
 
-- Atomic 239 landed cleanly at `43ed1c8f`; behavior-free Julia audit/plan
-  `INTER-MATCH-GAP-CAPTURE.5.0` is focused-signoff-complete from that exact boundary for intended atomic 240;
+- Atomic 240 landed cleanly at `12a14ed0`; Julia authored/static/compiled metadata leaf
+  `INTER-MATCH-GAP-CAPTURE.5.1` is focused-signoff-complete from that exact boundary for intended atomic 241;
   no push.
-- Exact probes prove numeric Julia selectors compile, while named declarations/selectors and `@capture_gaps`
-  remain raw invalid body syntax. `entry_slot()` and the three gap accessors fail as structured unknown helpers;
-  legacy `@move_pos` has no compiled/native effect; repeated execution runs enclosing `LS` before selection.
-- `.5.1-.5.5` are frozen before behavior: authored/static/compiled identity plus dormancy; existing-recognition-
-  authority native state; normalized reconstruction/descriptors/generated-v2 execution; one repository-routed
-  emitted host; and existing-primary exact nine-role admission.
-- Normalized `SpecFile` remains the carrier, detached `RecognitionFrameState` remains cursor/boundary/marks,
-  runtime spans reuse the immutable input `SourceAuthority`, and generated format 2 stays `{label,family}`.
+- Julia now retains logical source identity, pinned-Unicode named/anonymous slots, selector authorship, the dedicated
+  directive, exact source-aware diagnostics, detached compiled rows, and five-field resolved selector provenance.
+- The permanent final consumer passes 105 explicit assertions while ten reason-checked dormancy mutations exclude
+  it from ordinary, canonical, rooted, recurring, and facade admission. Runtime execution remains `.5.2`-owned.
+- Complete proof caught and fixed absolute-path provenance leakage and prevented premature storage-owner growth;
+  Julia remains exactly 19 owners / 5 packages, and legacy descriptors/generated format/outward surfaces do not move.
 - Governance remains 4/5/57 plus ten Rust and ten Dart admission mutations. Julia, both Lua ABIs, recurring/public
   rows, typed composition, and every outward facade/schema/MCP/CLI/README surface remain pending or unchanged.
 
 ## Latest Completed Slice
 
-- `.5.0` is behavior-free focused-signoff-complete. Exact Julia 624, primary, storage 19/5, neutral/rooted 4/5/57,
-  recognition 137/246/58, duplicate slot 7/0/59, typed source 9/5/114, rendered book 79/14,856, Knowledge
-  838/7,070, bounded histories, exact ADR pressure, and all nine doctrines pass.
+- `.5.1` is focused-signoff-complete. Explicit metadata 105, exact Julia direct dependents 624, full package,
+  primary, storage 19/5, corpus 105, neutral/rooted 4/5/57, recognition 137/246/58, duplicate slot 7/0/59,
+  typed source 9/5/114, rendered book 79/14,868, Knowledge 838/7,071, and bounded histories pass.
 
 ## Next Action
 
-- From the clean atomic-240 boundary, activate `.5.1` task-tree-first for Julia authored/static/compiled metadata,
-  logical source identity, exact diagnostics, and dormant-consumer governance.
+- After atomic 241 lands and brief/clean proof completes, activate `.5.2` task-tree-first for private Julia native
+  gap state, lifecycle, accessors, entry identity, rollback, and recursion on the existing recognition authority.
 
 ## Recent Completions
 
+- `2026-08-15` — `.5.1` completed exact Julia authored/static/compiled metadata and ten dormancy guards from clean
+  `12a14ed0` for intended atomic 241 without runtime or rollout movement.
 - `2026-08-15` — `.5.0` froze the behavior-free Julia `.5.1-.5.5` implementation/admission plan from clean
   `43ed1c8f` for intended atomic 240.
 - `2026-08-15` — `.4.5` completed existing-primary parity and exact nine-role private Dart admission; it and

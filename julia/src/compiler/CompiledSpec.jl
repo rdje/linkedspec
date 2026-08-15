@@ -113,6 +113,10 @@ struct CompiledActionEdge
     regex_index::Int
     child_regex_index::Int
     has_parent_regex::Bool
+    selector_kind::String
+    authored_selector::Union{Nothing,Int,String}
+    target_slot_id::Union{Nothing,String}
+    source_id::String
     code::Union{Nothing,String}
     fluent_chain::Vector{FluentCall}
     action_payload::Union{Nothing,CompiledActionPayload}
@@ -125,6 +129,10 @@ function CompiledActionEdge(;
     regex_index,
     child_regex_index,
     has_parent_regex,
+    selector_kind = "unindexed",
+    authored_selector = nothing,
+    target_slot_id = nothing,
+    source_id = "inline",
     code = nothing,
     fluent_chain = FluentCall[],
     action_payload = nothing,
@@ -136,6 +144,10 @@ function CompiledActionEdge(;
         regex_index,
         child_regex_index,
         has_parent_regex,
+        String(selector_kind),
+        authored_selector === nothing ? nothing : authored_selector,
+        target_slot_id === nothing ? nothing : String(target_slot_id),
+        String(source_id),
         code === nothing ? nothing : String(code),
         FluentCall[fluent_chain...],
         action_payload,
@@ -150,10 +162,40 @@ function compiled_action_edge_with(edge::CompiledActionEdge; regex_index = edge.
         regex_index = regex_index,
         child_regex_index = edge.child_regex_index,
         has_parent_regex = edge.has_parent_regex,
+        selector_kind = edge.selector_kind,
+        authored_selector = edge.authored_selector,
+        target_slot_id = edge.target_slot_id,
+        source_id = edge.source_id,
         code = edge.code,
         fluent_chain = edge.fluent_chain,
         action_payload = edge.action_payload,
     )
+end
+
+struct CompiledRegexSlotMetadata
+    regex_index::Int
+    slot_id::Union{Nothing,String}
+    source_id::String
+    line::Int
+end
+
+function CompiledRegexSlotMetadata(; regex_index, slot_id = nothing, source_id, line)
+    return CompiledRegexSlotMetadata(
+        regex_index,
+        slot_id === nothing ? nothing : String(slot_id),
+        String(source_id),
+        line,
+    )
+end
+
+struct CompiledCaptureGapsMetadata
+    directive::String
+    source_id::String
+    line::Int
+end
+
+function CompiledCaptureGapsMetadata(; directive = "@capture_gaps", source_id, line)
+    return CompiledCaptureGapsMetadata(String(directive), String(source_id), line)
 end
 
 struct CompiledBlindEdge
@@ -181,6 +223,8 @@ struct CompiledRule
     header::RuleHeader
     mode_metadata::CompiledRuleModeMetadata
     regex_patterns::Vector{String}
+    regex_slots::Vector{CompiledRegexSlotMetadata}
+    capture_gaps::Union{Nothing,CompiledCaptureGapsMetadata}
     dependency_refs::Vector{DependencyRef}
     action_edges::Vector{CompiledActionEdge}
     blind_edges::Vector{CompiledBlindEdge}
@@ -194,6 +238,8 @@ function CompiledRule(;
     header,
     mode_metadata,
     regex_patterns,
+    regex_slots = CompiledRegexSlotMetadata[],
+    capture_gaps = nothing,
     dependency_refs,
     action_edges,
     blind_edges,
@@ -206,6 +252,8 @@ function CompiledRule(;
         header,
         mode_metadata,
         String[regex_patterns...],
+        CompiledRegexSlotMetadata[regex_slots...],
+        capture_gaps,
         DependencyRef[dependency_refs...],
         CompiledActionEdge[action_edges...],
         CompiledBlindEdge[blind_edges...],
@@ -221,6 +269,8 @@ function compiled_rule_with(rule::CompiledRule; regex_patterns = rule.regex_patt
         header = rule.header,
         mode_metadata = rule.mode_metadata,
         regex_patterns = regex_patterns,
+        regex_slots = rule.regex_slots,
+        capture_gaps = rule.capture_gaps,
         dependency_refs = rule.dependency_refs,
         action_edges = action_edges,
         blind_edges = rule.blind_edges,
@@ -686,6 +736,7 @@ function _compile_spec(
     end
     definition_order = String[]
     rules_by_label = Dict{String,CompiledRule}()
+    source_rules_by_label = Dict(rule.header.label => rule for rule in spec.rules)
     redefined_rule_labels = String[]
     redefined_seen = Set{String}()
 
@@ -697,7 +748,12 @@ function _compile_spec(
             push!(redefined_seen, label)
         end
         try
-            compiled_rule_value = _compile_rule(rule, function_registry)
+            compiled_rule_value = _compile_rule(
+                rule,
+                function_registry;
+                source_id = spec.source_id,
+                source_rules_by_label = source_rules_by_label,
+            )
             rules_by_label[label] = compiled_rule_value
             if trace !== nothing
                 trace_decision!(
@@ -811,6 +867,11 @@ function to_json(edge::CompiledActionEdge)
         "targets" => [to_json(target) for target in edge.targets],
         "regex_index" => edge.regex_index,
         "child_regex_index" => edge.child_regex_index,
+        "selector_kind" => edge.selector_kind,
+        "authored_selector" => edge.authored_selector,
+        "target_rule" => only(edge.targets).label,
+        "target_slot_id" => edge.target_slot_id,
+        "source_id" => edge.source_id,
         "has_parent_regex" => edge.has_parent_regex,
         "fluent_chain" => [to_json(call) for call in edge.fluent_chain],
     )
@@ -819,6 +880,41 @@ function to_json(edge::CompiledActionEdge)
         result["action_payload"] = to_json(edge.action_payload)
     end
     return result
+end
+
+function to_descriptor_json(edge::CompiledActionEdge)
+    result = Dict{String,Any}(
+        "line" => edge.line,
+        "source" => edge.source,
+        "targets" => [to_json(target) for target in edge.targets],
+        "regex_index" => edge.regex_index,
+        "child_regex_index" => edge.child_regex_index,
+        "has_parent_regex" => edge.has_parent_regex,
+        "fluent_chain" => [to_json(call) for call in edge.fluent_chain],
+    )
+    _put_if_present!(result, "code", edge.code)
+    if edge.action_payload !== nothing
+        result["action_payload"] = to_json(edge.action_payload)
+    end
+    return result
+end
+
+function to_json(metadata::CompiledRegexSlotMetadata)
+    return Dict{String,Any}(
+        "regex_index" => metadata.regex_index,
+        "slot_id" => metadata.slot_id,
+        "source_id" => metadata.source_id,
+        "line" => metadata.line,
+    )
+end
+
+function to_json(metadata::CompiledCaptureGapsMetadata)
+    return Dict{String,Any}(
+        "enabled" => true,
+        "directive" => metadata.directive,
+        "source_id" => metadata.source_id,
+        "line" => metadata.line,
+    )
 end
 
 function to_json(edge::CompiledBlindEdge)
@@ -840,6 +936,8 @@ function to_json(rule::CompiledRule)
         "label" => rule.label,
         "header" => to_json(rule.header),
         "re" => rule.regex_patterns,
+        "regex_slots" => [to_json(slot) for slot in rule.regex_slots],
+        "capture_gaps" => rule.capture_gaps === nothing ? nothing : to_json(rule.capture_gaps),
         "dependency_refs" => [to_json(ref) for ref in rule.dependency_refs],
         "mode_metadata" => to_json(rule.mode_metadata),
         "action_edges" => [to_json(edge) for edge in rule.action_edges],
@@ -859,7 +957,7 @@ function to_descriptor_json(rule::CompiledRule)
         ),
         "re" => rule.regex_patterns,
         "dependency_refs" => [to_json(ref) for ref in rule.dependency_refs],
-        "action_edges" => [to_json(edge) for edge in rule.action_edges],
+        "action_edges" => [to_descriptor_json(edge) for edge in rule.action_edges],
         "blind_edges" => [to_json(edge) for edge in rule.blind_edges],
         "lifecycle_action_payloads" => [to_json(payload) for payload in rule.lifecycle_action_payloads],
         "plain_action_payloads" => [to_json(payload) for payload in rule.plain_action_payloads],
@@ -981,13 +1079,20 @@ function to_json(state::CompiledDescriptorState)
     )
 end
 
-function _compile_rule(rule::Rule, function_registry::UserFunctionRegistry)
+function _compile_rule(
+    rule::Rule,
+    function_registry::UserFunctionRegistry;
+    source_id::String,
+    source_rules_by_label::Dict{String,Rule},
+)
     regex_patterns = String[]
+    regex_slots = CompiledRegexSlotMetadata[]
     dependency_refs = DependencyRef[]
     action_edges = CompiledActionEdge[]
     blind_edges = CompiledBlindEdge[]
     lifecycle_action_payloads = CompiledActionPayload[]
     plain_action_payloads = CompiledActionPayload[]
+    capture_gaps = nothing
     current_regex_index = 0
     last_regex_line = nothing
 
@@ -995,6 +1100,12 @@ function _compile_rule(rule::Rule, function_registry::UserFunctionRegistry)
         kind = element.kind
         if kind isa RegexBodyElementKind
             push!(regex_patterns, kind.pattern)
+            push!(regex_slots, CompiledRegexSlotMetadata(
+                regex_index = current_regex_index,
+                slot_id = kind.slot_id,
+                source_id = source_id,
+                line = element.line,
+            ))
             current_regex_index += 1
             last_regex_line = element.line
         elseif kind isa ActionEdgeBodyElementKind
@@ -1008,7 +1119,8 @@ function _compile_rule(rule::Rule, function_registry::UserFunctionRegistry)
                 function_registry = function_registry,
             )
             for target in kind.targets
-                ref = DependencyRef(label = target.label, index = target.index)
+                resolved_target = _resolve_authored_target(target, source_rules_by_label)
+                ref = DependencyRef(label = target.label, index = resolved_target.index)
                 push!(dependency_refs, ref)
                 push!(
                     action_edges,
@@ -1017,8 +1129,12 @@ function _compile_rule(rule::Rule, function_registry::UserFunctionRegistry)
                         source = element.source,
                         targets = [ref],
                         regex_index = regex_index,
-                        child_regex_index = target.index,
+                        child_regex_index = resolved_target.index,
                         has_parent_regex = has_parent_regex,
+                        selector_kind = target.selector_kind,
+                        authored_selector = target.authored_selector,
+                        target_slot_id = resolved_target.slot_id,
+                        source_id = source_id,
                         code = kind.code,
                         fluent_chain = kind.fluent_chain,
                         action_payload = payload,
@@ -1085,9 +1201,16 @@ function _compile_rule(rule::Rule, function_registry::UserFunctionRegistry)
                             source = element.source,
                             targets = [ref],
                             regex_index = 0,
-                            child_regex_index = child_regex_index,
-                            has_parent_regex = false,
-                            code = kind.code,
+                        child_regex_index = child_regex_index,
+                        has_parent_regex = false,
+                        selector_kind = target.index === nothing ? "unindexed" : "numeric",
+                        authored_selector = target.index,
+                        target_slot_id = _slot_id_at(
+                            get(source_rules_by_label, target.label, nothing),
+                            child_regex_index,
+                        ),
+                        source_id = source_id,
+                        code = kind.code,
                             fluent_chain = kind.fluent_chain,
                             action_payload = payload,
                         ),
@@ -1117,6 +1240,13 @@ function _compile_rule(rule::Rule, function_registry::UserFunctionRegistry)
                     function_registry = function_registry,
                 ),
             )
+        elseif kind isa CaptureGapsDirectiveBodyElementKind
+            last_regex_line = nothing
+            capture_gaps = CompiledCaptureGapsMetadata(
+                directive = kind.directive,
+                source_id = source_id,
+                line = element.line,
+            )
         else
             last_regex_line = nothing
         end
@@ -1127,6 +1257,8 @@ function _compile_rule(rule::Rule, function_registry::UserFunctionRegistry)
         header = rule.header,
         mode_metadata = CompiledRuleModeMetadata(rule.header),
         regex_patterns = regex_patterns,
+        regex_slots = regex_slots,
+        capture_gaps = capture_gaps,
         dependency_refs = dependency_refs,
         action_edges = action_edges,
         blind_edges = blind_edges,
@@ -1134,6 +1266,49 @@ function _compile_rule(rule::Rule, function_registry::UserFunctionRegistry)
         plain_action_payloads = plain_action_payloads,
         body_elements = rule.body,
     )
+end
+
+function _resolve_authored_target(
+    target::EdgeTarget,
+    source_rules_by_label::Dict{String,Rule},
+)
+    target_rule = get(source_rules_by_label, target.label, nothing)
+    if target.selector_kind == "named"
+        index = 0
+        if target_rule !== nothing
+            for element in target_rule.body
+                kind = element.kind
+                if !(kind isa RegexBodyElementKind)
+                    continue
+                end
+                if kind.slot_id == target.authored_selector
+                    return (; index, slot_id = kind.slot_id)
+                end
+                index += 1
+            end
+        end
+        return (; index = 0, slot_id = nothing)
+    end
+    return (;
+        index = target.index,
+        slot_id = _slot_id_at(target_rule, target.index),
+    )
+end
+
+function _slot_id_at(rule::Union{Nothing,Rule}, index::Int)
+    if rule === nothing || index < 0
+        return nothing
+    end
+    regex_index = 0
+    for element in rule.body
+        kind = element.kind
+        if !(kind isa RegexBodyElementKind)
+            continue
+        end
+        regex_index == index && return kind.slot_id
+        regex_index += 1
+    end
+    return nothing
 end
 
 function _compile_optional_action_payload(; role, element::BodyElement, source_code, fluent_chain, function_registry)

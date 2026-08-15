@@ -317,7 +317,11 @@ function _dispatch_function_body_parse_jobs(
         end
     end
     return StagedFunctionBodyDispatchResult(
-        SpecFile(functions = functions, rules = spec.rules),
+        SpecFile(
+            source_id = spec.source_id,
+            functions = functions,
+            rules = spec.rules,
+        ),
         results,
     )
 end
@@ -332,9 +336,15 @@ end
 function parse_spec_with_staged_user_function_definition_asts(
     source::AbstractString,
     definition_nodes;
+    source_id::AbstractString = "inline",
     trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
 )
-    spec = parse_spec_with_user_function_definition_asts(source, definition_nodes; trace = trace)
+    spec = parse_spec_with_user_function_definition_asts(
+        source,
+        definition_nodes;
+        source_id = source_id,
+        trace = trace,
+    )
     return stitch_function_body_parse_jobs(spec; trace = trace)
 end
 

@@ -141,8 +141,8 @@ the failure to `GeneratedSourceStage.validateCompiledRule` and
 `ordered_regex_slot_identity_lost` / `execute_rule` with expected and actual
 indices for invariant testing.
 
-Dart's authored gap-metadata layer also reports the neutral source-aware static failures before compiled state is
-accepted:
+Dart's and Julia's authored gap-metadata layers report the neutral source-aware static failures before compiled
+state is accepted:
 
 - `regex_slot_name_invalid` / `parse_declaration`
 - `regex_slot_duplicate_name` / `resolve_declaration`
@@ -152,10 +152,10 @@ accepted:
 - `capture_gaps_rule_ineligible` and `capture_gaps_legacy_marker_conflict` / `validate_directive`
 
 Every row includes `rule_label`, logical `source_id`, and physical `line`, plus its contract-specific selector,
-slot, eligibility, or marker context. Dart `.4.2` now uses `gap_capture_context_unavailable` for a private native
-gap read outside a live candidate/tail and `source_location_cursor_regression` when the accepted cursor would
-commit before the selected match end. These runtime records remain staged behind the final consumer's `.4.5`
-admission skip.
+slot, eligibility, or marker context. Dart uses `gap_capture_context_unavailable` for a private native gap read
+outside a live candidate/tail and `source_location_cursor_regression` when the accepted cursor would commit before
+the selected match end. Julia runtime context and those accessor/runtime failures remain pending `.5.2`; `.5.1`
+does not manufacture a live gap context.
 
 Parser-authored `print`/`say`/`print_each` events use a separate Rust facility. Call
 `execute_with_diagnostic_output(input, sink)` or

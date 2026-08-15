@@ -63,8 +63,10 @@ struct _ScanResult
 end
 
 const _REGEX_PATTERN = r"^/([^/\\]*(?:\\.[^/\\]*)*)/"
+const _NAMED_REGEX_PATTERN = r"^([^/=]+?)[ \t]*=[ \t]*/([^/\\]*(?:\\.[^/\\]*)*)/"
 const _LIFECYCLE_PATTERN = r"^(I|LS|LE|LX|E|EX|IT)\b"
 const _SPLIT_PATTERN = r"^@[ \t]*(capture_slice|capture_from_here|move_pos|mark[ \t]*\([ \t]*\w+[ \t]*\))"
+const _CAPTURE_GAPS_PATTERN = r"^@capture_gaps\b"
 const _CONDITIONAL_PATTERN = r"^-\?[ \t]+\w+"
 const _FLUENT_PATTERN = r"^\.[ \t]*\w+"
 const _BOUNDED_MODE_PATTERN = r"^(AND|OR)\{(\d*)(?:,(\d*))?\}$"
@@ -180,6 +182,47 @@ function _parse_index_at(input::AbstractString, offset::Int; allow_space::Bool)
     return (; index, end_offset = cursor + 1)
 end
 
+function _is_ascii_digits(value::AbstractString)
+    isempty(value) && return false
+    return all(byte -> 0x30 <= byte <= 0x39, codeunits(value))
+end
+
+function _parse_action_selector_at(input::AbstractString, offset::Int)
+    text = String(input)
+    if !_starts_with_at(text, "[", offset)
+        return (; kind = "unindexed", authored = nothing, index = 0, end_offset = offset)
+    end
+
+    close_offset = findnext(']', text, offset + 1)
+    block_offset = findnext('{', text, offset + 1)
+    if close_offset !== nothing &&
+            (block_offset === nothing || close_offset < block_offset)
+        authored = strip(_substring_between(text, offset + 1, close_offset))
+        end_offset = nextind(text, close_offset)
+        if _is_ascii_digits(authored)
+            index = tryparse(Int, authored)
+            if index !== nothing
+                return (; kind = "numeric", authored = index, index, end_offset)
+            end
+        end
+        if is_rule_label(authored)
+            return (; kind = "named", authored, index = 0, end_offset)
+        end
+        return (; kind = "invalid", authored, index = 0, end_offset)
+    end
+
+    end_offset = offset + 1
+    while end_offset <= ncodeunits(text)
+        unit = codeunit(text, end_offset)
+        if unit in (0x20, 0x09, 0x7B)
+            break
+        end
+        end_offset = nextind(text, end_offset)
+    end
+    authored = strip(_substring_between(text, offset + 1, end_offset))
+    return (; kind = "invalid", authored, index = 0, end_offset)
+end
+
 function _has_valid_edge_remainder(input::AbstractString, offset::Int)
     text = String(input)
     if offset > ncodeunits(text)
@@ -198,6 +241,7 @@ function _has_valid_edge_remainder(input::AbstractString, offset::Int)
     return begins_with_space && (
         startswith(trimmed, "/") ||
         match(_LIFECYCLE_PATTERN, trimmed) !== nothing ||
+        match(_CAPTURE_GAPS_PATTERN, trimmed) !== nothing ||
         match(_SPLIT_PATTERN, trimmed) !== nothing ||
         match(_CONDITIONAL_PATTERN, trimmed) !== nothing
     )
@@ -228,14 +272,20 @@ function _parse_action_edge_prefix(input::AbstractString)
         end
     end
 
-    parsed_index = _parse_index_at(text, offset; allow_space = false)
-    index = parsed_index === nothing ? 0 : parsed_index.index
-    end_offset = parsed_index === nothing ? offset : parsed_index.end_offset
+    selector = _parse_action_selector_at(text, offset)
+    end_offset = selector.end_offset
     if !_has_valid_edge_remainder(text, end_offset)
         return nothing
     end
     return (;
-        targets = [EdgeTarget(label = label, index = index) for label in labels],
+        targets = [
+            EdgeTarget(
+                label = label,
+                index = selector.index,
+                selector_kind = selector.kind,
+                authored_selector = selector.authored,
+            ) for label in labels
+        ],
         end_offset,
     )
 end
@@ -296,11 +346,12 @@ _starts_with_edge_token(input::AbstractString) = startswith(input, "->") || star
 
 function parse_spec(
     source::AbstractString;
+    source_id::AbstractString = "inline",
     trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
 )
     source_text = String(source)
     if trace === nothing
-        return _parse_spec(source_text)
+        return _parse_spec(source_text, String(source_id))
     end
 
     scope = enter_trace_scope!(
@@ -311,7 +362,7 @@ function parse_spec(
     )
     exit_details = "status=error error=unknown"
     try
-        spec = _parse_spec(source_text)
+        spec = _parse_spec(source_text, String(source_id))
         trace_decision!(
             trace,
             "julia_frontend:parse_spec:result",
@@ -337,7 +388,7 @@ function parse_spec(
     end
 end
 
-function _parse_spec(source::String)
+function _parse_spec(source::String, source_id::String)
     lines = split(source, '\n'; keepempty = true)
     rules = Rule[]
     index = _skip_blanks_and_comments(lines, 1)
@@ -373,7 +424,7 @@ function _parse_spec(source::String)
         index += 1
     end
 
-    return SpecFile(rules = rules)
+    return SpecFile(source_id = source_id, rules = rules)
 end
 
 function _skip_blanks_and_comments(lines::Vector{SubString{String}}, index::Int)
@@ -625,6 +676,23 @@ function _parse_single_element(
     line_number::Int;
     allow_bare_edge::Bool,
 )
+    named_regex_match = match(_NAMED_REGEX_PATTERN, trimmed)
+    if named_regex_match !== nothing
+        full_match = named_regex_match.match
+        return _ParsedElement(
+            BodyElement(
+                RegexBodyElementKind(
+                    named_regex_match.captures[2];
+                    slot_id = strip(named_regex_match.captures[1]),
+                ),
+                full_match,
+                line_number,
+            ),
+            _drop_prefix(trimmed, full_match),
+            false,
+        )
+    end
+
     regex_match = match(_REGEX_PATTERN, trimmed)
     if regex_match !== nothing
         full_match = regex_match.match
@@ -748,6 +816,16 @@ function _parse_single_element(
         end
 
         return _ParsedElement(BodyElement(LifecycleMarkerBodyElementKind(marker), full_match, line_number), rest, false)
+    end
+
+    capture_gaps_match = match(_CAPTURE_GAPS_PATTERN, trimmed)
+    if capture_gaps_match !== nothing
+        full_match = capture_gaps_match.match
+        return _ParsedElement(
+            BodyElement(CaptureGapsDirectiveBodyElementKind(), full_match, line_number),
+            _drop_prefix(trimmed, full_match),
+            false,
+        )
     end
 
     split_match = match(_SPLIT_PATTERN, trimmed)

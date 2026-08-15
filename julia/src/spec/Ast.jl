@@ -232,14 +232,42 @@ abstract type AbstractBodyElementKind end
 
 struct RegexBodyElementKind <: AbstractBodyElementKind
     pattern::String
+    slot_id::Union{Nothing,String}
 end
+
+RegexBodyElementKind(pattern::AbstractString; slot_id = nothing) =
+    RegexBodyElementKind(
+        String(pattern),
+        slot_id === nothing ? nothing : String(slot_id),
+    )
 
 struct EdgeTarget
     label::String
     index::Int
+    selector_kind::String
+    authored_selector::Union{Nothing,Int,String}
 end
 
-EdgeTarget(; label, index = 0) = EdgeTarget(label, index)
+function EdgeTarget(;
+    label,
+    index = 0,
+    selector_kind = "unindexed",
+    authored_selector = nothing,
+)
+    if authored_selector isa Bool ||
+            !(authored_selector === nothing ||
+              authored_selector isa Integer ||
+              authored_selector isa AbstractString)
+        throw(ArgumentError("authored_selector must be an integer, string, or nothing"))
+    end
+    return EdgeTarget(
+        String(label),
+        Int(index),
+        String(selector_kind),
+        authored_selector === nothing ? nothing :
+            (authored_selector isa Integer ? Int(authored_selector) : String(authored_selector)),
+    )
+end
 
 struct FluentCall
     method::String
@@ -298,6 +326,14 @@ struct SplitMarkerBodyElementKind <: AbstractBodyElementKind
     marker::String
 end
 
+"""Rule-level opt-in marker for private inter-match gap capture."""
+struct CaptureGapsDirectiveBodyElementKind <: AbstractBodyElementKind
+    directive::String
+end
+
+CaptureGapsDirectiveBodyElementKind() =
+    CaptureGapsDirectiveBodyElementKind("@capture_gaps")
+
 struct LifecycleMarkerBodyElementKind <: AbstractBodyElementKind
     marker::String
 end
@@ -334,12 +370,17 @@ function Rule(; header, body)
 end
 
 struct SpecFile
+    source_id::String
     functions::Vector{FunctionDefinition}
     rules::Vector{Rule}
 end
 
-function SpecFile(; functions = FunctionDefinition[], rules)
-    return SpecFile(FunctionDefinition[functions...], Rule[rules...])
+function SpecFile(; source_id = "inline", functions = FunctionDefinition[], rules)
+    return SpecFile(
+        String(source_id),
+        FunctionDefinition[functions...],
+        Rule[rules...],
+    )
 end
 
 function top_rule(spec::SpecFile)
@@ -455,7 +496,11 @@ function to_json(header::RuleHeader)
     )
 end
 
-to_json(kind::RegexBodyElementKind) = Dict("kind" => "regex", "pattern" => kind.pattern)
+to_json(kind::RegexBodyElementKind) = Dict(
+    "kind" => "regex",
+    "pattern" => kind.pattern,
+    "slot_id" => kind.slot_id,
+)
 
 function to_json(kind::ActionEdgeBodyElementKind)
     return Dict(
@@ -489,11 +534,20 @@ end
 to_json(kind::CodeBlockBodyElementKind) = Dict("kind" => "code_block", "lifecycle" => kind.lifecycle, "code" => kind.code)
 to_json(kind::PlainBlockBodyElementKind) = Dict("kind" => "plain_block", "code" => kind.code)
 to_json(kind::SplitMarkerBodyElementKind) = Dict("kind" => "split_marker", "marker" => kind.marker)
+to_json(kind::CaptureGapsDirectiveBodyElementKind) = Dict(
+    "kind" => "capture_gaps_directive",
+    "directive" => kind.directive,
+)
 to_json(kind::LifecycleMarkerBodyElementKind) = Dict("kind" => "lifecycle_marker", "marker" => kind.marker)
 to_json(kind::FluentChainBodyElementKind) = Dict("kind" => "fluent_chain", "calls" => [to_json(call) for call in kind.calls])
 to_json(kind::ConditionalBodyElementKind) = Dict("kind" => "conditional", "word" => kind.word)
 to_json(kind::RawBodyElementKind) = Dict("kind" => "raw", "text" => kind.text)
-to_json(target::EdgeTarget) = Dict("label" => target.label, "index" => target.index)
+to_json(target::EdgeTarget) = Dict(
+    "label" => target.label,
+    "index" => target.index,
+    "selector_kind" => target.selector_kind,
+    "authored_selector" => target.authored_selector,
+)
 function to_json(target::BareEdgeTarget)
     result = Dict{String,Any}("label" => target.label)
     _put_if_present!(result, "index", target.index)
@@ -502,7 +556,11 @@ end
 to_json(call::FluentCall) = Dict("method" => call.method, "args" => call.args)
 to_json(element::BodyElement) = Dict("kind" => to_json(element.kind), "source" => element.source, "line" => element.line)
 to_json(rule::Rule) = Dict("header" => to_json(rule.header), "body" => [to_json(element) for element in rule.body])
-to_json(spec::SpecFile) = Dict("functions" => [to_json(function_definition) for function_definition in spec.functions], "rules" => [to_json(rule) for rule in spec.rules])
+to_json(spec::SpecFile) = Dict(
+    "source_id" => spec.source_id,
+    "functions" => [to_json(function_definition) for function_definition in spec.functions],
+    "rules" => [to_json(rule) for rule in spec.rules],
+)
 
 function from_json(::Type{SourceSpan}, json)
     object = _ast_object(json, "source_span")
@@ -622,7 +680,10 @@ function from_json(::Type{AbstractBodyElementKind}, json)
     object = _ast_object(json, "kind")
     kind = _ast_string(object, "kind")
     if kind == "regex"
-        return RegexBodyElementKind(_ast_string(object, "pattern"))
+        return RegexBodyElementKind(
+            _ast_string(object, "pattern");
+            slot_id = _ast_optional_string(object, "slot_id"),
+        )
     elseif kind == "action_edge"
         return ActionEdgeBodyElementKind(
             targets = _ast_object_list(object, "targets", item -> from_json(EdgeTarget, item)),
@@ -648,6 +709,10 @@ function from_json(::Type{AbstractBodyElementKind}, json)
         return PlainBlockBodyElementKind(_ast_string(object, "code"))
     elseif kind == "split_marker"
         return SplitMarkerBodyElementKind(_ast_string(object, "marker"))
+    elseif kind == "capture_gaps_directive"
+        return CaptureGapsDirectiveBodyElementKind(
+            something(_ast_optional_string(object, "directive"), "@capture_gaps"),
+        )
     elseif kind == "lifecycle_marker"
         return LifecycleMarkerBodyElementKind(_ast_string(object, "marker"))
     elseif kind == "fluent_chain"
@@ -662,7 +727,22 @@ end
 
 function from_json(::Type{EdgeTarget}, json)
     object = _ast_object(json, "edge target")
-    return EdgeTarget(label = _ast_string(object, "label"), index = _ast_int(object, "index"))
+    authored_selector = get(object, "authored_selector", nothing)
+    if authored_selector isa Bool ||
+            (authored_selector !== nothing &&
+             !(authored_selector isa Integer || authored_selector isa AbstractString))
+        throw(SpecAstException("authored_selector must be an integer, string, or null"))
+    end
+    return EdgeTarget(
+        label = _ast_string(object, "label"),
+        index = _ast_int(object, "index"),
+        selector_kind = something(
+            _ast_optional_string(object, "selector_kind"),
+            "unindexed",
+        ),
+        authored_selector = authored_selector === nothing ? nothing :
+            (authored_selector isa Integer ? Int(authored_selector) : String(authored_selector)),
+    )
 end
 
 function from_json(::Type{BareEdgeTarget}, json)
@@ -698,6 +778,7 @@ end
 function from_json(::Type{SpecFile}, json)
     object = _ast_object(json, "spec")
     return SpecFile(
+        source_id = something(_ast_optional_string(object, "source_id"), "inline"),
         functions = _ast_object_list(object, "functions", item -> from_json(FunctionDefinition, item); default = Any[]),
         rules = _ast_object_list(object, "rules", item -> from_json(Rule, item)),
     )

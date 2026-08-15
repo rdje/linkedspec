@@ -17,11 +17,12 @@ answers:
   - "what are the Julia gap admission roles"
   - "how does Julia gap admission change rollout and mutations"
   - "is Julia capture_gaps implemented now"
+  - "how does Julia keep loaded gap metadata from leaking absolute paths"
 date: 2026-08-15
-status: behavior-free implementation plan frozen; Julia runtime remains pending at gap rollout 4 complete / 5 pending
+status: authored/static/compiled Julia metadata implemented behind dormancy; Julia runtime remains pending at gap rollout 4 complete / 5 pending
 tags: [julia, capture, segmentation, named-slots, recognition, source-location, generated-source, emitted-source, primary, plan]
-evidence: "INTER-MATCH-GAP-CAPTURE.5.0 probes current Julia numeric selector success; raw-invalid named declarations/selectors and capture_gaps; unknown-helper entry_slot/gap_span/gap_text/gap_kind failures; LS-before-selection repeated execution; normalized SpecFile JSON, descriptor and generated-v2 seams; the existing recognition invocation/token and immutable SourceAuthority; the existing primary adapter; and repository storage at 19 temp owners / 5 packages. It freezes .5.1-.5.5 without changing code, runtime, rollout 4/5/57, generated format 2, or outward surfaces."
-reverify: "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/check_inter_match_gap_capture_six_runtime.sh && bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/duplicate_regex_slot_identity_contract_test.jl\"); include(\"julia/test/rule_local_cursor_contract_test.jl\"); include(\"julia/test/recognition_transaction_contract_test.jl\"); include(\"julia/test/typed_source_location_contract_test.jl\"); include(\"julia/test/source_emitter_test.jl\")' && bash tools/check_julia_primary_cli.sh && bash tools/test_julia_project_data_storage.sh"
+evidence: "INTER-MATCH-GAP-CAPTURE.5.1 implements defaulted SpecFile.source_id through ordinary/staged/loaded/JSON/private-primary parsing; pinned-Unicode named/anonymous declarations; unindexed/numeric/named selector authorship; dedicated capture_gaps syntax and exact static diagnostics; compiled slot/directive/five-field edge provenance; legacy descriptor non-widening; and a 105-assertion permanent consumer guarded by ten Julia dormancy mutations. The complete Julia package is green, storage remains exactly 19 temp owners / 5 packages, and absolute loaded requests reduce to relocatable logical basenames. Runtime/accessors, rollout 4/5/57, generated format 2, and outward surfaces remain unchanged."
+reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'include(\"julia/test/inter_match_gap_capture_contract_test.jl\")' && bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/check_inter_match_gap_capture_six_runtime.sh && bash tools/run_julia_local.sh"
 ---
 
 # Julia inter-match gap implementation plan
@@ -31,6 +32,29 @@ treats named declarations, named selectors, and `@capture_gaps` as raw invalid r
 accessors parse as ordinary action calls and fail at runtime with structured `unknown_helper` diagnostics. A
 legacy `@move_pos` member survives as a split-marker body element but has no compiled metadata or native execution
 effect. The existing primary adapter likewise reports parser compilation failure for the complete future syntax.
+
+## Implemented `.5.1` metadata boundary
+
+Julia now accepts spacing-insensitive named regex declarations beside anonymous declarations in one authored
+order. Slot identity reuses the generated pinned Unicode-17 scanner without normalization or case folding;
+ASCII-digit-only names remain reserved for numeric selectors. Action-edge AST and compiled state preserve
+unindexed, numeric, named, and malformed authored selectors, while compilation resolves the exact target index
+and nullable stable name. A dedicated directive body kind retains `@capture_gaps` and validates duplicate,
+ineligible ownership/mode, and anonymous legacy-marker boundaries before generic mixed-edge diagnostics.
+
+`SpecFile.source_id` is the single logical static-source carrier. It defaults to `inline` for legacy constructors
+and JSON, survives both staged layers and private primary parsing, and supplies every slot/directive/edge row and
+portable diagnostic. Loaded relative requests retain their caller spelling; absolute host requests reduce to the
+basename. The complete Julia gate exposed the otherwise-hidden risk that compiled metadata would persist a
+scratch absolute path; the corrected production loader now keeps the established compiled/descriptor path-opacity
+contract while retaining logical source provenance.
+
+The final consumer is permanent but mechanically dormant. Explicit execution passes 105 assertions. It is not
+included by ordinary package discovery, canonical CI, or the rooted recurring driver, and the Julia facade gains
+no gap token. Ten reason-checked mutations independently reject consumer identity, metadata role, contract source,
+parse/validation/compiler seam, diagnostic, discovery, rooted-execution, and facade drift. Storage stays at the
+pre-emitted boundary of 19 temporary-workspace owners and five locked package trees; `.5.4` still exclusively owns
+the planned 19→20 transition.
 
 The repeated-rule trace establishes the lifecycle constraint: Julia currently runs enclosing `LS` before it
 selects the next candidate. Capture-enabled rules alone must preselect and install their candidate before `LS` so

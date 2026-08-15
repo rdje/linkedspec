@@ -23,6 +23,9 @@ RUST_CONSUMER_PATH = ROOT / "rust/linkedspec-runtime/tests/inter_match_gap_captu
 RUST_FACADE_PATH = ROOT / "rust/linkedspec-runtime/src/lib.rs"
 DART_CONSUMER_PATH = ROOT / "dart/test/inter_match_gap_capture_contract_test.dart"
 DART_FACADE_PATH = ROOT / "dart/lib/linkedspec_dart.dart"
+JULIA_CONSUMER_PATH = ROOT / "julia/test/inter_match_gap_capture_contract_test.jl"
+JULIA_ORDINARY_PATH = ROOT / "julia/test/runtests.jl"
+JULIA_FACADE_PATH = ROOT / "julia/src/LinkedSpecJulia.jl"
 CONTRACT_ID = "linkedspec-inter-match-gap-capture-v1"
 TASK_OWNER = "INTER-MATCH-GAP-CAPTURE.1.1"
 PINNED_XID_RANGES: tuple[tuple[int, int], ...] = ()
@@ -51,6 +54,19 @@ DART_ADMISSION_MUTATION_IDS = (
     "dart_recurring_duplicate",
     "dart_later_runtime_skip",
     "dart_facade_absence",
+)
+
+JULIA_DORMANCY_MUTATION_IDS = (
+    "julia_consumer_identity",
+    "julia_metadata_stage",
+    "julia_contract_source",
+    "julia_parse_boundary",
+    "julia_validation_boundary",
+    "julia_diagnostic_contract",
+    "julia_compiler_boundary",
+    "julia_canonical_absence",
+    "julia_recurring_absence",
+    "julia_facade_absence",
 )
 
 REQUIRED_SECTIONS = (
@@ -970,16 +986,27 @@ def validate_registration(document: dict[str, Any]) -> None:
     require(PERL_CONSUMER_PATH.is_file(), "admitted Perl consumer is missing")
     require(RUST_CONSUMER_PATH.is_file(), "admitted Rust consumer is missing")
     require(DART_CONSUMER_PATH.is_file(), "admitted Dart consumer is missing")
+    require(JULIA_CONSUMER_PATH.is_file(), "dormant Julia consumer is missing")
     perl_consumer_text = PERL_CONSUMER_PATH.read_text(encoding="utf-8")
     rust_consumer_text = RUST_CONSUMER_PATH.read_text(encoding="utf-8")
     dart_consumer_text = DART_CONSUMER_PATH.read_text(encoding="utf-8")
+    julia_consumer_text = JULIA_CONSUMER_PATH.read_text(encoding="utf-8")
+    julia_ordinary_text = JULIA_ORDINARY_PATH.read_text(encoding="utf-8")
     ci_text = CI_PATH.read_text(encoding="utf-8")
     perl_facade_text = PERL_FACADE_PATH.read_text(encoding="utf-8")
     rust_facade_text = RUST_FACADE_PATH.read_text(encoding="utf-8")
     dart_facade_text = DART_FACADE_PATH.read_text(encoding="utf-8")
+    julia_facade_text = JULIA_FACADE_PATH.read_text(encoding="utf-8")
     validate_perl_admission(perl_consumer_text, ci_text, driver_text, perl_facade_text)
     validate_rust_admission(rust_consumer_text, ci_text, driver_text, rust_facade_text)
     validate_dart_admission(dart_consumer_text, ci_text, driver_text, dart_facade_text)
+    validate_julia_dormancy(
+        julia_consumer_text,
+        julia_ordinary_text,
+        ci_text,
+        driver_text,
+        julia_facade_text,
+    )
     for marker in (
         'source "$REPO_ROOT/tools/project_data_env.sh"',
         'linkedspec_project_data_enter_run "$REPO_ROOT/tools/check_inter_match_gap_capture_six_runtime.sh" "$@"',
@@ -1010,6 +1037,10 @@ def validate_registration(document: dict[str, Any]) -> None:
                 "( cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only "
                 "test/inter_match_gap_capture_contract_test.dart )"
             )
+        elif rollout_id == "julia_runtime":
+            require(consumer_path == JULIA_CONSUMER_PATH, "dormant Julia consumer path drifted")
+            require(rollout_by_id[rollout_id]["status"] == "pending", "dormant Julia rollout is not pending")
+            route_markers.append(f"skipping pending runtime route {rollout_id}: {consumer['path']}")
         else:
             require(rollout_by_id[rollout_id]["status"] == "pending", f"later runtime is not pending: {rollout_id}")
             route_markers.append(f"skipping pending runtime route {rollout_id}: {consumer['path']}")
@@ -1187,6 +1218,196 @@ def validate_dart_admission(
         "inter_match_gap_capture" not in facade_text and "capture_gaps" not in facade_text,
         "Dart admission widened the public facade",
     )
+
+
+def validate_julia_dormancy(
+    consumer_text: str,
+    ordinary_text: str,
+    ci_text: str,
+    driver_text: str,
+    facade_text: str,
+) -> None:
+    consumer_markers = (
+        ('const CONTRACT_ID = "linkedspec-inter-match-gap-capture-v1"', "Julia dormant consumer contract drifted"),
+        (
+            "# DORMANT: INTER-MATCH-GAP-CAPTURE.5.5 owns Julia runtime admission",
+            "Julia dormant metadata stage drifted",
+        ),
+        ("inter_match_gap_capture_contract.json", "Julia dormant contract source drifted"),
+        (
+            "parsed = parse_spec(source; source_id = source_id)",
+            "Julia dormant parse boundary drifted",
+        ),
+        (
+            "validate_spec(parsed)\n    return compile_spec(parsed; validate_source = false)",
+            "Julia dormant validation boundary drifted",
+        ),
+        ('"regex_slot_unknown_name"', "Julia dormant diagnostic contract drifted"),
+        ("function compile_metadata(", "Julia dormant compiler boundary drifted"),
+    )
+    for marker, reason in consumer_markers:
+        require(consumer_text.count(marker) == 1, reason)
+
+    consumer_path = "julia/test/inter_match_gap_capture_contract_test.jl"
+    ordinary_marker = 'include("inter_match_gap_capture_contract_test.jl")'
+    canonical_marker = 'include("julia/test/inter_match_gap_capture_contract_test.jl")'
+    require(
+        ordinary_marker not in ordinary_text and canonical_marker not in ci_text,
+        "Julia dormant consumer entered ordinary/canonical discovery prematurely",
+    )
+    require(
+        driver_text.count(f"skipping pending runtime route julia_runtime: {consumer_path}") == 1
+        and canonical_marker not in driver_text,
+        "Julia dormant consumer entered recurring execution prematurely",
+    )
+    require(
+        "inter_match_gap_capture" not in facade_text and "capture_gaps" not in facade_text,
+        "Julia dormant consumer widened the public facade prematurely",
+    )
+
+
+JuliaDormancyMutation = tuple[str, str, Callable[[dict[str, str]], None]]
+
+
+def julia_dormancy_mutations() -> list[JuliaDormancyMutation]:
+    return [
+        (
+            "julia_consumer_identity",
+            "Julia dormant consumer contract drifted",
+            lambda texts: texts.__setitem__(
+                "consumer",
+                texts["consumer"].replace(
+                    "linkedspec-inter-match-gap-capture-v1", "stale", 1
+                ),
+            ),
+        ),
+        (
+            "julia_metadata_stage",
+            "Julia dormant metadata stage drifted",
+            lambda texts: texts.__setitem__(
+                "consumer",
+                texts["consumer"].replace(
+                    "INTER-MATCH-GAP-CAPTURE.5.5 owns Julia runtime admission",
+                    "stale admission owner",
+                    1,
+                ),
+            ),
+        ),
+        (
+            "julia_contract_source",
+            "Julia dormant contract source drifted",
+            lambda texts: texts.__setitem__(
+                "consumer",
+                texts["consumer"].replace(
+                    "inter_match_gap_capture_contract.json", "stale_contract.json", 1
+                ),
+            ),
+        ),
+        (
+            "julia_parse_boundary",
+            "Julia dormant parse boundary drifted",
+            lambda texts: texts.__setitem__(
+                "consumer",
+                texts["consumer"].replace(
+                    "parsed = parse_spec(source; source_id = source_id)",
+                    "parsed = parse_other(source; source_id = source_id)",
+                    1,
+                ),
+            ),
+        ),
+        (
+            "julia_validation_boundary",
+            "Julia dormant validation boundary drifted",
+            lambda texts: texts.__setitem__(
+                "consumer",
+                texts["consumer"].replace(
+                    "validate_spec(parsed)\n    return compile_spec(parsed; validate_source = false)",
+                    "validate_other(parsed)\n    return compile_spec(parsed; validate_source = false)",
+                    1,
+                ),
+            ),
+        ),
+        (
+            "julia_diagnostic_contract",
+            "Julia dormant diagnostic contract drifted",
+            lambda texts: texts.__setitem__(
+                "consumer",
+                texts["consumer"].replace(
+                    '"regex_slot_unknown_name"', '"stale_diagnostic"', 1
+                ),
+            ),
+        ),
+        (
+            "julia_compiler_boundary",
+            "Julia dormant compiler boundary drifted",
+            lambda texts: texts.__setitem__(
+                "consumer",
+                texts["consumer"].replace(
+                    "function compile_metadata(", "function compile_other(", 1
+                ),
+            ),
+        ),
+        (
+            "julia_canonical_absence",
+            "Julia dormant consumer entered ordinary/canonical discovery prematurely",
+            lambda texts: texts.__setitem__(
+                "ordinary",
+                texts["ordinary"] + '\ninclude("inter_match_gap_capture_contract_test.jl")\n',
+            ),
+        ),
+        (
+            "julia_recurring_absence",
+            "Julia dormant consumer entered recurring execution prematurely",
+            lambda texts: texts.__setitem__(
+                "driver",
+                texts["driver"]
+                + '\ninclude("julia/test/inter_match_gap_capture_contract_test.jl")\n',
+            ),
+        ),
+        (
+            "julia_facade_absence",
+            "Julia dormant consumer widened the public facade prematurely",
+            lambda texts: texts.__setitem__(
+                "facade",
+                texts["facade"]
+                + "\nexport inter_match_gap_capture, capture_gaps\n",
+            ),
+        ),
+    ]
+
+
+def validate_julia_dormancy_mutations() -> int:
+    texts = {
+        "consumer": JULIA_CONSUMER_PATH.read_text(encoding="utf-8"),
+        "ordinary": JULIA_ORDINARY_PATH.read_text(encoding="utf-8"),
+        "ci": CI_PATH.read_text(encoding="utf-8"),
+        "driver": RECURRING_DRIVER_PATH.read_text(encoding="utf-8"),
+        "facade": JULIA_FACADE_PATH.read_text(encoding="utf-8"),
+    }
+    checks = julia_dormancy_mutations()
+    require(
+        tuple(name for name, _, _ in checks) == JULIA_DORMANCY_MUTATION_IDS,
+        "Julia dormancy mutation identity/order drifted",
+    )
+    for name, expected_reason, mutate in checks:
+        candidate = copy.deepcopy(texts)
+        mutate(candidate)
+        try:
+            validate_julia_dormancy(
+                candidate["consumer"],
+                candidate["ordinary"],
+                candidate["ci"],
+                candidate["driver"],
+                candidate["facade"],
+            )
+        except ContractError as error:
+            require(
+                expected_reason in str(error),
+                f"Julia dormancy mutation {name} failed for unexpected reason: {error}",
+            )
+        else:
+            fail(f"Julia dormancy mutation {name} was accepted")
+    return len(checks)
 
 
 DartAdmissionMutation = tuple[str, str, Callable[[dict[str, str]], None]]
@@ -1607,6 +1828,7 @@ def main() -> int:
         mutation_count = validate_mutations(document)
         rust_admission_mutation_count = validate_rust_admission_mutations()
         dart_admission_mutation_count = validate_dart_admission_mutations()
+        julia_dormancy_mutation_count = validate_julia_dormancy_mutations()
     except (json.JSONDecodeError, OSError, ContractError) as error:
         print(f"inter-match gap capture contract: FAIL: {error}", file=sys.stderr)
         return 1
@@ -1618,7 +1840,8 @@ def main() -> int:
         f"10 segmentation cases; 9 diagnostics; {complete} complete + {pending} pending rollout; "
         f"{mutation_count} rejected semantic mutations; "
         f"{rust_admission_mutation_count} rejected Rust admission mutations; "
-        f"{dart_admission_mutation_count} rejected Dart admission mutations)"
+        f"{dart_admission_mutation_count} rejected Dart admission mutations; "
+        f"{julia_dormancy_mutation_count} rejected Julia dormancy mutations)"
     )
     return 0
 

@@ -31,6 +31,7 @@ end
 function parse_spec_with_user_function_definition_asts(
     source::AbstractString,
     definition_nodes;
+    source_id::AbstractString = "inline",
     trace::Union{Nothing,LinkedSpecTraceEmitter} = nothing,
 )
     source_text = String(source)
@@ -48,8 +49,16 @@ function parse_spec_with_user_function_definition_asts(
             nodes;
             trace = trace,
         )
-        rule_spec = parse_spec(projection.stripped_source; trace = trace)
-        spec = SpecFile(functions = projection.functions, rules = rule_spec.rules)
+        rule_spec = parse_spec(
+            projection.stripped_source;
+            source_id = source_id,
+            trace = trace,
+        )
+        spec = SpecFile(
+            source_id = rule_spec.source_id,
+            functions = projection.functions,
+            rules = rule_spec.rules,
+        )
         exit_details =
             "status=ok functions=$(length(spec.functions)) rules=$(length(spec.rules))"
         return spec

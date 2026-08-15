@@ -70,6 +70,9 @@ function validate_spec(
         _trace_validation_check!(trace, "duplicate_rule_labels") do
             _check_duplicate_rule_labels(spec)
         end
+        _trace_validation_check!(trace, "regex_slot_declarations") do
+            _check_regex_slot_declarations(spec)
+        end
         _trace_validation_check!(trace, "duplicate_function_names") do
             _check_duplicate_function_names(spec)
         end
@@ -82,11 +85,14 @@ function validate_spec(
         _trace_validation_check!(trace, "edge_structure") do
             _check_edge_structure(spec)
         end
-        _trace_validation_check!(trace, "mixed_edges") do
-            _check_mixed_edges(spec)
-        end
         _trace_validation_check!(trace, "edge_targets") do
             _check_edge_targets(spec)
+        end
+        _trace_validation_check!(trace, "capture_gaps_directives") do
+            _check_capture_gaps_directives(spec)
+        end
+        _trace_validation_check!(trace, "mixed_edges") do
+            _check_mixed_edges(spec)
         end
         _trace_validation_check!(trace, "regex_syntax") do
             _check_regex_syntax(spec)
@@ -118,12 +124,14 @@ function _validate_spec(spec::SpecFile, strict_syntax::Bool)
     _check_at_least_one_rule(spec)
     _check_rule_labels(spec)
     _check_duplicate_rule_labels(spec)
+    _check_regex_slot_declarations(spec)
     _check_duplicate_function_names(spec)
     _check_function_registry(spec)
     _check_malformed_raw_body_lines(spec)
     _check_edge_structure(spec)
-    _check_mixed_edges(spec)
     _check_edge_targets(spec)
+    _check_capture_gaps_directives(spec)
+    _check_mixed_edges(spec)
     _check_regex_syntax(spec)
     if strict_syntax
         _check_unused_rules(spec)
@@ -245,6 +253,47 @@ function _check_duplicate_rule_labels(spec::SpecFile)
     return nothing
 end
 
+function _check_regex_slot_declarations(spec::SpecFile)
+    for rule in spec.rules
+        first_lines = Dict{String,Int}()
+        for element in rule.body
+            kind = element.kind
+            if !(kind isa RegexBodyElementKind) || kind.slot_id === nothing
+                continue
+            end
+            slot_id = kind.slot_id
+            if !is_rule_label(slot_id) || _is_ascii_digit_only_gap(slot_id)
+                throw(_gap_validation_exception(
+                    code = "regex_slot_name_invalid",
+                    stage = "parse_declaration",
+                    message = "rule '$(rule.header.label)' has invalid regex slot name '$slot_id'",
+                    spec = spec,
+                    rule = rule,
+                    line = element.line,
+                    fields = Dict{String,Any}("slot_name" => slot_id),
+                ))
+            end
+            first_line = get(first_lines, slot_id, nothing)
+            if first_line !== nothing
+                throw(_gap_validation_exception(
+                    code = "regex_slot_duplicate_name",
+                    stage = "resolve_declaration",
+                    message = "rule '$(rule.header.label)' declares regex slot '$slot_id' more than once",
+                    spec = spec,
+                    rule = rule,
+                    line = element.line,
+                    fields = Dict{String,Any}(
+                        "slot_name" => slot_id,
+                        "first_line" => first_line,
+                    ),
+                ))
+            end
+            first_lines[slot_id] = element.line
+        end
+    end
+    return nothing
+end
+
 function _check_duplicate_function_names(spec::SpecFile)
     seen = Set{String}()
     for function_definition in spec.functions
@@ -362,6 +411,153 @@ function _portable_validation_exception(; code, stage, message, fields)
         fields = fields,
     )
     return SpecValidationException(diagnostic.message; diagnostic = diagnostic)
+end
+
+function _gap_validation_exception(;
+    code,
+    stage,
+    message,
+    spec::SpecFile,
+    rule::Rule,
+    line::Int,
+    fields,
+)
+    context = Dict{String,Any}(
+        "rule_label" => rule.header.label,
+        "source_id" => spec.source_id,
+        "line" => line,
+    )
+    merge!(context, fields)
+    return _portable_validation_exception(
+        code = code,
+        stage = stage,
+        message = message,
+        fields = context,
+    )
+end
+
+function _check_capture_gaps_directives(spec::SpecFile)
+    for rule in spec.rules
+        directives = BodyElement[
+            element for element in rule.body
+            if element.kind isa CaptureGapsDirectiveBodyElementKind
+        ]
+        isempty(directives) && continue
+        directive = first(directives)
+        if length(directives) > 1
+            throw(_gap_validation_exception(
+                code = "capture_gaps_duplicate_directive",
+                stage = "parse_directive",
+                message = "rule '$(rule.header.label)' declares @capture_gaps more than once",
+                spec = spec,
+                rule = rule,
+                line = directives[2].line,
+                fields = Dict{String,Any}("first_line" => directive.line),
+            ))
+        end
+
+        for element in rule.body
+            kind = element.kind
+            if !(kind isa SplitMarkerBodyElementKind) || occursin("mark", kind.marker)
+                continue
+            end
+            marker = if occursin("capture_slice", kind.marker)
+                "@capture_slice"
+            elseif occursin("capture_from_here", kind.marker)
+                "@capture_from_here"
+            else
+                "@move_pos"
+            end
+            throw(_gap_validation_exception(
+                code = "capture_gaps_legacy_marker_conflict",
+                stage = "validate_directive",
+                message = "rule '$(rule.header.label)' combines @capture_gaps with legacy marker '$marker'",
+                spec = spec,
+                rule = rule,
+                line = directive.line,
+                fields = Dict{String,Any}(
+                    "marker" => marker,
+                    "marker_line" => element.line,
+                ),
+            ))
+        end
+
+        family = is_and(rule.header.mode) ? "and" : "or_default"
+        cursor = is_and(rule.header.mode) ? "consume" : "seek"
+        execution_shape = _capture_gaps_execution_shape(rule.header.mode)
+        edge_ownership = _capture_gaps_edge_ownership(rule)
+        eligible_mode = rule.header.mode.name in (
+            "Default",
+            "Or",
+            "OrPlus",
+            "OrBounded",
+            "Plus",
+        )
+        if family != "or_default" || cursor != "seek" ||
+                edge_ownership != "action" || !eligible_mode
+            throw(_gap_validation_exception(
+                code = "capture_gaps_rule_ineligible",
+                stage = "validate_directive",
+                message = "rule '$(rule.header.label)' is not eligible for @capture_gaps",
+                spec = spec,
+                rule = rule,
+                line = directive.line,
+                fields = Dict{String,Any}(
+                    "family" => family,
+                    "cursor_policy" => cursor,
+                    "edge_ownership" => edge_ownership,
+                    "execution_shape" => execution_shape,
+                ),
+            ))
+        end
+    end
+    return nothing
+end
+
+function _capture_gaps_execution_shape(mode::RuleMode)
+    if mode.name == "Default"
+        return "default_scan_loop"
+    elseif mode.name in ("Or", "OrPlus", "OrBounded", "Plus")
+        return "repeat_loop"
+    end
+    return "single_match"
+end
+
+function _capture_gaps_edge_ownership(rule::Rule)
+    has_action = false
+    has_blind = false
+    has_local_adjacency = false
+    previous = nothing
+    for element in rule.body
+        kind = element.kind
+        if kind isa ActionEdgeBodyElementKind
+            has_action = true
+            if previous !== nothing &&
+                    previous.kind isa RegexBodyElementKind &&
+                    previous.line == element.line
+                has_local_adjacency = true
+            end
+        elseif kind isa BlindEdgeBodyElementKind
+            has_blind = true
+        elseif kind isa BareEdgeBodyElementKind
+            if is_and(rule.header.mode)
+                has_blind = true
+            else
+                has_action = true
+            end
+        end
+        previous = element
+    end
+    if has_action && has_blind
+        return "mixed"
+    elseif has_local_adjacency
+        return "local_adjacency"
+    elseif has_action
+        return "action"
+    elseif has_blind
+        return "blind"
+    end
+    return "none"
 end
 
 function _grouped_action_exception(rule::Rule, targets)
@@ -488,13 +684,7 @@ function _check_edge_targets(spec::SpecFile)
             kind = element.kind
             if kind isa ActionEdgeBodyElementKind
                 for target in kind.targets
-                    _check_target(
-                        rule,
-                        rules_by_label,
-                        target.label,
-                        target.index;
-                        structural_action = true,
-                    )
+                    _check_action_target(spec, rule, element, rules_by_label, target)
                 end
             elseif kind isa BlindEdgeBodyElementKind
                 _check_target(rule, rules_by_label, kind.target, 0)
@@ -510,6 +700,96 @@ function _check_edge_targets(spec::SpecFile)
                 end
             end
         end
+    end
+    return nothing
+end
+
+function _check_action_target(
+    spec::SpecFile,
+    owner::Rule,
+    element::BodyElement,
+    rules_by_label::Dict{String,Rule},
+    target::EdgeTarget,
+)
+    target_rule = get(rules_by_label, target.label, nothing)
+    if target_rule === nothing
+        return _check_target(
+            owner,
+            rules_by_label,
+            target.label,
+            target.index;
+            structural_action = true,
+        )
+    end
+
+    if target.selector_kind == "invalid" ||
+            !(target.selector_kind in ("named", "numeric", "unindexed"))
+        throw(_gap_validation_exception(
+            code = "regex_slot_selector_invalid",
+            stage = "parse_selector",
+            message = "rule '$(owner.header.label)' has malformed regex selector for '$(target.label)'",
+            spec = spec,
+            rule = owner,
+            line = element.line,
+            fields = Dict{String,Any}(
+                "target_rule" => target.label,
+                "authored_selector" => target.authored_selector,
+            ),
+        ))
+    elseif target.selector_kind == "named"
+        slot_index = _regex_slot_index(target_rule, target.authored_selector)
+        if slot_index === nothing
+            throw(_gap_validation_exception(
+                code = "regex_slot_unknown_name",
+                stage = "resolve_selector",
+                message = "rule '$(owner.header.label)' references unknown regex slot '$(target.authored_selector)' in rule '$(target.label)'",
+                spec = spec,
+                rule = owner,
+                line = element.line,
+                fields = Dict{String,Any}(
+                    "target_rule" => target.label,
+                    "authored_selector" => target.authored_selector,
+                ),
+            ))
+        end
+    elseif target.selector_kind == "numeric"
+        regex_count = _regex_count(target_rule)
+        if target.index < 0 || target.index >= regex_count
+            throw(_gap_validation_exception(
+                code = "regex_slot_index_out_of_range",
+                stage = "resolve_selector",
+                message = "rule '$(owner.header.label)' references rule '$(target.label)' regex slot $(target.index), but that rule has $regex_count regex slot(s)",
+                spec = spec,
+                rule = owner,
+                line = element.line,
+                fields = Dict{String,Any}(
+                    "target_rule" => target.label,
+                    "regex_index" => target.index,
+                    "regex_count" => regex_count,
+                ),
+            ))
+        end
+    else
+        return _check_target(
+            owner,
+            rules_by_label,
+            target.label,
+            target.index;
+            structural_action = true,
+        )
+    end
+    return nothing
+end
+
+function _regex_slot_index(rule::Rule, slot_id)
+    index = 0
+    for element in rule.body
+        kind = element.kind
+        if !(kind isa RegexBodyElementKind)
+            continue
+        end
+        kind.slot_id == slot_id && return index
+        index += 1
     end
     return nothing
 end
@@ -567,6 +847,11 @@ function _regex_count(rule::Rule)
         end
     end
     return count
+end
+
+function _is_ascii_digit_only_gap(value::AbstractString)
+    isempty(value) && return false
+    return all(byte -> 0x30 <= byte <= 0x39, codeunits(value))
 end
 
 function _check_regex_syntax(spec::SpecFile)
