@@ -3,9 +3,9 @@
 ## Metadata
 
 - Tree ID: `INTER-MATCH-GAP-CAPTURE`
-- Status: `active` / reconstructed/descriptor/generated Dart carrier leaf `.4.3` is signoff-complete from clean
-  atomic 236 at `0b074e1c` under focused verification for intended atomic 237; emitted proof `.4.4` follows only
-  after commit/brief-clear/clean handoff; no push
+- Status: `active` / reconstructed/descriptor/generated Dart carrier `.4.3` landed cleanly as atomic 237 at
+  `4c8ab7ee`; independently analyzed/executed emitted-source proof `.4.4` is signoff-complete from that exact
+  clean boundary for intended atomic 238; `.4.5` follows only after commit/brief-clear/clean proof; no push
 - Roadmap lane: `.spec language evolution / lossless segmentation and source preservation`
 - Created: `2026-07-17`
 - Last updated: `2026-08-15`
@@ -1232,10 +1232,68 @@ orchestration or to raw Perl cursor arithmetic.
   Commit: `INTER-MATCH-GAP-CAPTURE.4.3 - carry Dart gap generated execution`
 
 - ID: `INTER-MATCH-GAP-CAPTURE.4.4`
-  Status: `pending`
+  Status: `done; signoff-complete` (2026-08-15; task-tree-first from clean atomic-237 commit `4c8ab7ee`;
+    focused proof; intended atomic 238; no push)
   Goal: Prove independently analyzed/executed emitted Dart gap behavior on repository-local storage.
   Depends on: `.4.3`
-  Verification: `pending`
+  Acceptance: prove clean activation and retrieve the frozen Dart plan plus exact final consumer, source-emitter
+    v2, isolated generated-caller, private gap lifecycle, trace, process, project-data, and Rust `.3.4` precedents
+    before code; extend only the library-skipped final consumer with a deliberate absent emitted-proof-owner RED;
+    emit source through the existing normalized `SpecFile` payload and exact `{label,family}` v2 plan, then place
+    it in one repository-routed caller package with its own managed `PUB_CACHE`; independently run offline package
+    resolution, strict analysis, and direct/traced execution for mixed separators, Unicode/empty spans, falsey
+    values, lifecycle order, child cursor extension, detached entry identity, nested isolation, rollback, terminal
+    tails, failed minimums, direct entry, unflagged legacy behavior, and typed unavailable-context/cursor-regression
+    failures; prove emitted results agree with current native/reconstructed/generated-plan authority; add the exact
+    final-consumer `Directory.systemTemp` owner to the Dart storage oracle and prove all generated workspace,
+    package-cache, output, and trace paths remain under the repository-derived managed run; change no production
+    emitter/generated format unless exact RED exposes a carrier defect, no primary/admission/canonical/recurring
+    route, rollout 3/6/56, checker/contract/driver, facade/schema/semantic/MCP/capability/CLI/README surface,
+    dependency/toolchain, storage/path/doctrine infrastructure, or later runtime; synchronize durable projections
+    and pass the declared focused proof before commit/brief-clear/clean handoff to `.4.5`.
+
+  ### Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / OWNERSHIP** — Proved committed `4c8ab7ee`, empty tracked/untracked status, zero-byte
+    brief, atomic 237 at the durable resume pointer, and activated only this existing task node before code.
+  - [x] **RETRIEVE AUTHORITY** — Queried/read the current Dart implementation Knowledge owner, frozen `.4.4`
+    boundary, Rust emitted precedent, exact v2 emitter/isolated-caller patterns, final consumer, and 22-owner Dart
+    project-data oracle before implementation.
+  - [x] **EXACT EMITTED RED** — Extend only the skipped final consumer and prove exact absence of the dedicated
+    independently emitted contract owner from clean atomic 237 before implementing its generated caller.
+  - [x] **INDEPENDENT EMITTED GREEN** — Analyze and execute one offline managed caller package whose isolated
+    emitted modules cover paired direct/traced values, lifecycle, recursion/rollback, compatibility, and errors.
+  - [x] **STORAGE / COMPATIBILITY / NO OVERCLAIM** — Advance the exact temp-owner inventory to 23; keep the
+    production emitter, plan v2, dormant skip, rollout, primary/admission routes, and outward surfaces unchanged.
+  - [x] **FOCUSED SIGNOFF / CLEAN HANDOFF** — Align task/roadmap/live/book/Knowledge projections, pass selected
+    Dart/emitter/governance/storage/book/doctrine/history/diff proof, and land/clear/clean before `.4.5`.
+
+  ### Implemented Emitted Boundary
+
+  - The deliberate RED extended only the library-skipped final consumer and stopped at the absent
+    `runIndependentlyEmittedGapContract` owner; no production path failed first.
+  - One repository-routed offline caller owns a private `PUB_CACHE`, ten emitted value modules, two emitted typed-
+    error modules, strict analysis, and paired direct/traced generated entrypoints with per-case trace identity.
+  - Exact native agreement covers Unicode/empty gaps, falsey acceptance, child-extended cursors, detached entry
+    identity, lifecycle tails, nested isolation, rollback, failed minimums, direct entry, and unflagged legacy.
+  - `dart/test/inter_match_gap_capture_contract_test.dart` is the exact 23rd `Directory.systemTemp` owner. The
+    managed wrapper proves caller/cache/output/trace residency and cleanup; production emitter/format is unchanged.
+
+  Verification tier: `focused`
+  Focused checks: explicit skipped Dart emitted group; emitted caller offline pub-get, strict analyze, direct and
+    traced execution; final consumer plus source-emitter, compiled-state, runtime/recognition, cursor, duplicate-
+    slot, and typed-source dependents; neutral gap checker and rooted neutral/Perl/Rust route with Dart still
+    skipped; complete Dart local gate and 23-owner storage proof; rendered mdBook, Knowledge regeneration, all
+    doctrines, both bounded history checks, and exact diff checks.
+  Canonical trigger: `none` — this leaf adds only independently compiled proof and one enumerated test temp owner;
+    it changes no production emitter or generated format, admission/promotion/milestone/parent closeout, public or
+    cross-backend contract, dependency/toolchain, CI/hook/gate, storage/path/doctrine infrastructure, or outward
+    surface. Final Dart admission `.4.5` and the clean push boundary retain canonical proof.
+  Verification: pass — RED stops only at missing `runIndependentlyEmittedGapContract`; emitted group 1/1,
+    explicit consumer 4/4, direct dependents 100/100, complete Dart format 102/0 + analyzer + 402/one skip +
+    storage 23/47 + CLI 66x2 + corpus 105, gap 3/6/56 rooted route, recognition 137/246/58, duplicate slot
+    7/0/59, typed source 9/5/114, book 79/14,828, Knowledge 837/7,053, bounded histories, exact diff, and all
+    nine doctrines pass. ADR `0073` correctly excludes canonical CI; `.4.5` retains admission and parent closeout.
   Commit: `INTER-MATCH-GAP-CAPTURE.4.4 - prove Dart emitted gap execution`
 
 - ID: `INTER-MATCH-GAP-CAPTURE.4.5`
@@ -1290,7 +1348,8 @@ orchestration or to raw Perl cursor arithmetic.
 | 17 | `INTER-MATCH-GAP-CAPTURE.4.0` | `done; signoff-complete from clean 2800e7c3` | Exact Dart seams and the behavior-free `.4.1-.4.5` implementation/admission plan are frozen for intended atomic 233 without behavior or rollout movement. |
 | 18 | `INTER-MATCH-GAP-CAPTURE.4.1` | `done; signoff-complete from clean e40de948` | Authored/static/compiled Dart provenance and the mechanically dormant final consumer are exact for intended atomic 234. |
 | 19 | `INTER-MATCH-GAP-CAPTURE.4.2` | `signoff-complete from clean c234ef9f; focused tier` | Private native Dart gap state/accessors/lifecycle are exact for intended atomic 236 with no full CI or rollout movement. |
-| 20 | `INTER-MATCH-GAP-CAPTURE.4.3` | `signoff-complete from clean 0b074e1c; focused tier` | Normalized Dart reconstruction, compatible descriptors, unchanged-v2 generated execution, and the audited stale-summary correction are exact for intended atomic 237; `.4.4` follows after clean handoff. |
+| 20 | `INTER-MATCH-GAP-CAPTURE.4.3` | `done; landed at 4c8ab7ee` | Normalized Dart reconstruction, compatible descriptors, unchanged-v2 generated execution, and the audited stale-summary correction landed as atomic 237. |
+| 21 | `INTER-MATCH-GAP-CAPTURE.4.4` | `done; signoff-complete from clean 4c8ab7ee; focused tier` | One offline managed caller proves ten value and two typed-error emitted modules direct/traced; storage advances only to 23 owners for intended atomic 238. |
 
 ## Decisions
 
@@ -1599,13 +1658,15 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
   boundary. Emitted proof `.3.4` landed as atomic 231 at `c3326f6d`; final private admission `.3.5` closed parent
   `.3` in atomic 232 at `2800e7c3`. Dart planning `.4.0` landed at `e40de948`, authored metadata `.4.1` at
   `1e6d326d`, focused-verification policy atomic 235 at `c234ef9f`, and private native `.4.2` at atomic 236
-  `0b074e1c`. Reconstructed/descriptor/generated `.4.3` is signoff-complete from that exact boundary for intended
-  atomic 237; `.4.4` may activate only after commit/brief-clear/clean proof.
+  `0b074e1c`. Reconstructed/descriptor/generated `.4.3` landed as atomic 237 at `4c8ab7ee`. Independently emitted
+  `.4.4` is signoff-complete from that exact clean boundary for intended atomic 238; primary/admission `.4.5` may
+  activate only after commit/brief-clear/clean proof.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-08-15` | `INTER-MATCH-GAP-CAPTURE.4.4` | Clean `4c8ab7ee` activation; deliberate emitted-owner RED; one offline managed caller; ten value plus two typed-error emitted modules; paired direct/traced execution; final consumer and direct dependents; complete Dart/storage; gap, recognition, duplicate-slot, and typed-source matrices; rendered mdBook; Knowledge Map; bounded history; all nine doctrines; focused tier with no canonical CI | Pass: RED stops only at absent `runIndependentlyEmittedGapContract`; emitted proof is 1/1, explicit consumer 4/4, and direct dependents 100/100. Dart-local is format 102/0, strict analysis, 402 plus one intended skip, storage 23/47, CLI 66x2, and corpus 105. Gap remains 3/6/56 plus ten Rust admission and ten Dart dormancy mutations; recognition 137/246/58, duplicate slot 7/0/59, and typed source 9/5/114 pass. Book is 79/14,828 KiB, Knowledge 837/7,053, bounded histories, exact diff, and all nine doctrines pass. Production emitter/plan v2, primary/admission, rollout, and outward surfaces remain unchanged; ADR `0073` reserves canonical proof for `.4.5`. |
 | `2026-08-15` | `INTER-MATCH-GAP-CAPTURE.4.3` | Clean `0b074e1c` activation; exact carrier RED/GREEN; normalized reconstruction; compatible descriptor metadata; same-engine direct/traced generated execution and typed failures; direct dependents; root-route logical-source correction; neutral/rooted gap, recognition, duplicate-slot, and typed-source matrices; complete Dart/storage; rendered mdBook; Knowledge Map; bounded history; all nine doctrines; focused tier with no canonical CI | Pass: RED stops only at absent descriptor `regex_slots`; explicit proof is 3/3, direct dependents 100/100, and root-route 3/3. Dart-local is format 102/0, strict analysis, 402 plus one intended skip, storage 22/47, CLI 66x2, and corpus 105. Gap remains 3/6/56 plus ten Rust admission and ten Dart dormancy mutations; rooted execution is neutral, Perl 124, Rust 1/1, then four skips. Recognition 137/246/58, duplicate slot 7/0/59, and typed source 9/5/114 pass. Book is 79/14,816 KiB, Knowledge 837/7,052, and all nine doctrines pass. ADR `0073` correctly excludes full CI; emitted/primary/admission, rollout, plan v2, and outward surfaces remain unchanged or pending. |
 | `2026-08-15` | `INTER-MATCH-GAP-CAPTURE.4.2` | Clean `c234ef9f` activation; exact explicit-consumer RED/GREEN; one-authority native state/accessors/lifecycle/entry/rollback/nesting; direct Dart dependents; neutral and rooted gap governance; complete Dart-local/storage gate; rendered mdBook; Knowledge Map; all nine doctrines; focused tier with no canonical CI | Pass: RED reaches exact unknown-helper `gap_kind`; explicit metadata/native proof is 2/2 and direct private-authority proof is 2/2. Dart-local is format 102/0, strict analysis, 402 plus one intended skip, storage 22/47, CLI 66x2, and corpus 105. Gap stays 3/6/56 plus ten Rust admission and ten Dart dormancy mutations; rooted execution is neutral, Perl 124, Rust 1/1, then Dart/Julia/PUC-Lua/LuaJIT skips. Book is 79/14,812 KiB, Knowledge 837/7,052, and all nine doctrines pass. ADR `0073` correctly excludes full CI: reconstructed/generated, emitted/primary/admission, rollout, plan v2, and outward surfaces remain unchanged or pending. |
 | `2026-08-15` | `INTER-MATCH-GAP-CAPTURE.4.1` | Clean `e40de948` activation; checker-first dormant RED/GREEN; authored parser/AST/static/compiler/source-identity proof; complete Dart/storage; neutral, recognition, typed-source, and duplicate-slot matrices; rendered mdBook; Knowledge Map; all eight doctrines; authorized canonical local CI with opt-in gap route | Pass: the final dormant consumer is 1/1 while ordinary Dart remains 400 plus one intended skip. Complete Dart is format 102/0, strict analysis, storage 22 owners / 47 packages, CLI 66/66 twice, and corpus 105/105. Gap remains 3/6/56 plus ten Rust admission and ten Dart dormancy mutations; recognition 137/246/58, typed source 9/5/114, and duplicate-slot 7/0/59 remain unchanged. The book is 79/14,788 KiB, Knowledge is 836/7,039, and all eight doctrines pass. The sandboxed precursor stops solely at outer nested-`sandbox-exec` status 71; the unchanged authorized run passes containment/relocation, CLI 66/66 twice, RAM 56%, Phase 0 1,031/1,031 in 745 seconds, neutral/Perl-124/Rust-1/four-skip routing, `[ci] local CI gate passed`, and exit 0. |
@@ -1630,6 +1691,7 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `INTER-MATCH-GAP-CAPTURE.4.4` | `INTER-MATCH-GAP-CAPTURE.4.4 - prove Dart emitted gap execution` | Signoff-complete independent emitted Dart proof for intended atomic 238/300 from `4c8ab7ee`; focused proof only, final consumer remains dormant, and rollout is unchanged; no push. |
 | `INTER-MATCH-GAP-CAPTURE.4.3` | `INTER-MATCH-GAP-CAPTURE.4.3 - carry Dart gap generated execution` | Signoff-complete reconstructed/descriptor/generated Dart carrier for intended atomic 237/300 from `0b074e1c`; focused proof only, final consumer remains dormant, and rollout is unchanged; no push. |
 | `INTER-MATCH-GAP-CAPTURE.4.2` | `INTER-MATCH-GAP-CAPTURE.4.2 - add Dart native gap execution` | Signoff-complete private native Dart execution for intended atomic 236/300 from `c234ef9f`; focused proof only, final consumer remains dormant, and rollout is unchanged; no push. |
 | `INTER-MATCH-GAP-CAPTURE.4.1` | `1e6d326d` — `INTER-MATCH-GAP-CAPTURE.4.1 - add Dart authored gap metadata` | Authored/static/compiled Dart metadata landed cleanly as atomic 234/300; final consumer remains dormant and rollout unchanged; no push. |
@@ -1651,6 +1713,13 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
 
 ## Changelog
 
+- `2026-08-15`: Completed `.4.4` independent emitted Dart proof from clean `4c8ab7ee`. The deliberate RED stopped
+  only at absent `runIndependentlyEmittedGapContract`; one repository-routed offline caller then strictly analyzed
+  and executed ten value plus two typed-error modules through paired direct/traced entrypoints with exact native
+  agreement. Explicit proof is 4/4, direct dependents 100/100, Dart-local 402 plus one skip/storage 23/47/CLI
+  66x2/corpus 105, and all cross-runtime matrices pass. Book 79/14,828, Knowledge 837/7,053, bounded histories,
+  exact diff, and nine doctrines pass. Production emitter/plan v2, dormant consumer, primary/admission, rollout
+  3/6/56, and outward surfaces remain unchanged; ADR `0073` reserves canonical proof for `.4.5` after atomic 238.
 - `2026-08-15`: Completed `.4.3` reconstructed/descriptor/generated Dart carrier from clean `0b074e1c`.
   Normalized `SpecFile` JSON remains the only carrier; detached descriptor projections add slot/directive/
   selector provenance without changing legacy shapes; direct/traced generated plans retain `{label,family}` and

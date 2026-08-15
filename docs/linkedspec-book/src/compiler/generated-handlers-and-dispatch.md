@@ -256,6 +256,14 @@ selection role, target rule, and regex index. Malformed reconstructed slots fail
 as `regex_slot_identity_invalid` at `validate_compiled_rule` before plan
 execution or source emission; the plan remains exactly `{label, family}`.
 
+Dart inter-match-gap carrier proof keeps the same boundary. A repository-routed offline caller now strictly
+analyzes ten emitted value libraries and two typed-error libraries, then runs every module through `execute(...)`
+and `executeWithTrace(...)`. Normalized `SpecFile` state—not a widened plan—reconstructs named slot provenance,
+the capture directive, and the existing private recognition lifecycle. Values cover Unicode/empty gaps, falsey
+children, lifecycle order, child cursors, nested owners, rollback, terminal behavior, direct entry, and legacy
+compatibility; failures retain typed unavailable-context and cursor-regression detail. The caller's package cache,
+modules, traces, and temporary workspace are all managed repository-local data and are removed after proof.
+
 Dart admission now consumes the contract's exact eight-case list rather than
 copying a backend-local list. Every fixture—including staged user-function
 execution—must first equal its checked-in interpreter result. One isolated

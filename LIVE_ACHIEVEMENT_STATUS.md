@@ -2,65 +2,53 @@
 
 ## Current Activity
 
-- Atomic 236 landed cleanly at `0b074e1c`; `INTER-MATCH-GAP-CAPTURE.4.3` is signoff-complete from that exact
-  boundary for intended atomic 237; no push.
-- Dart normalized `SpecFile` reconstruction, separate compatible descriptor metadata, and direct/traced
-  generated-plan execution now carry the same private native gap state and typed failures.
-- The permanent Dart consumer remains library-skipped until `.4.5`; independently emitted and primary/admission
-  routes plus every outward surface remain pending or unchanged.
-- ADR `0073` classifies this ordinary private carrier leaf as focused. Its declared Dart-local, direct-dependent,
-  neutral/rooted, storage, book, Knowledge, doctrine, history, and diff proof runs without full canonical CI.
-- Gap rollout remains unchanged at 3/6/56 plus ten Rust admission and ten Dart dormancy mutations.
+- Atomic 237 landed cleanly at `4c8ab7ee`; `INTER-MATCH-GAP-CAPTURE.4.4` is signoff-complete from that exact
+  boundary for intended atomic 238; no push.
+- One repository-routed offline caller now strictly analyzes and independently executes ten emitted value
+  modules plus two typed-error modules through paired direct/traced generated entrypoints.
+- Every emitted result agrees with native authority; the storage oracle advances exactly to 23 owners / 47 locked
+  packages and proves caller/cache/output/trace cleanup.
+- The permanent Dart consumer remains library-skipped until `.4.5`; production emitter/plan v2, primary,
+  admission, rollout 3/6/56, and every outward surface remain pending or unchanged.
+- ADR `0073` classifies this proof-only leaf as focused; `.4.5` retains canonical admission and parent closeout.
 
 ## Latest Completed Slice
 
-- `INTER-MATCH-GAP-CAPTURE.4.3` is signoff-complete for intended atomic 237: isolated carrier RED, explicit
-  dormant proof 3/3, direct descriptor/generated dependents 100/100, repaired root-route proof 3/3, complete
-  Dart-local/storage, book/Knowledge/history, and all nine doctrines pass without full CI; rollout and generated
-  plan v2 remain unchanged.
+- `INTER-MATCH-GAP-CAPTURE.4.4` passes deliberate emitted-helper RED, emitted 1/1, explicit consumer 4/4, direct
+  dependents 100/100, Dart 402 plus one skip/storage 23/47/CLI 66x2/corpus 105, all governance matrices, rendered
+  book, Knowledge Map, bounded history, and all nine doctrines without full canonical CI.
 
 ## Next Action
 
-- Commit atomic 237, clear the brief, prove its clean handoff, then activate independently analyzed/executed Dart
-  emitted-source leaf `INTER-MATCH-GAP-CAPTURE.4.4` task-tree-first with its declared tier.
+- Commit atomic 238, clear the brief, prove its clean handoff, then activate Dart primary/admission/parent-closeout
+  leaf `INTER-MATCH-GAP-CAPTURE.4.5` task-tree-first with canonical verification.
 
 ## Recent Completions
 
+- `2026-08-15` — `.4.4` proved ten value and two typed-error emitted Dart modules in one offline managed caller,
+  paired direct/traced, with exact native agreement and repository-local cleanup from clean `4c8ab7ee`.
 - `2026-08-15` — `.4.3` completed normalized reconstruction, detached compatible descriptor projections, and
-  same-engine direct/traced generated gap execution from clean `0b074e1c`; the `.4.2` stale-summary audit is
-  corrected and rollout remains 3/6/56.
-- `2026-08-15` — `.4.2` completed private native Dart gap execution from clean `c234ef9f`: exact candidate/
-  commit/tail timing, Unicode/empty spans, falsey values, entry slots, rollback/nesting, typed failures, focused
-  Dart-local proof, and unchanged 3/6/56 governance pass with no full CI.
+  same-engine direct/traced generated gap execution from clean `0b074e1c`; rollout remains 3/6/56.
+- `2026-08-15` — `.4.2` completed private native Dart gap execution from clean `c234ef9f`: exact lifecycle,
+  Unicode/empty spans, rollback/nesting, entries, and typed failures without rollout movement.
 - `2026-08-15` — `c234ef9f` landed tiered verification policy `.0` as clean atomic 235; focused ordinary commits
   and canonical designated/push boundaries are mechanically enforced.
-- `2026-08-15` — Tiered verification policy `.0` completed from clean `1e6d326d`: exact leaf tier evidence,
-  receipt-bound canonical proof, clean pre-push run/reuse, Knowledge 837/7,049, book 79/14,796, and nine doctrines.
 - `2026-08-15` — `.4.1` completed exact Dart authored/static/compiled gap metadata signoff from clean `e40de948`;
-  final consumer remains dormant, rollout remains 3/6/56, and canonical Phase 0 1,031/1,031 exits 0.
-- `2026-08-15` — `e40de948` landed behavior-free Dart implementation freeze `.4.0` as clean atomic 233; `.4.1`
-  activated only afterward.
-- `2026-08-15` — `.4.0` completed behavior-free Dart audit/planning from clean `2800e7c3`: focused 123, full
-  Dart 400/storage 22/47/CLI 66x2/corpus 105, all doctrines, RAM 59%, Phase 0 1,031/1,031 in 771 seconds, and
-  local-CI exit 0 are green; `.4.1-.4.5` are frozen with rollout unchanged.
-- `2026-08-15` — `.3.5` and parent `.3` completed signoff: exact Rust primary/admission, 3/6/56 plus ten admission
-  mutations, storage, book, Knowledge, all doctrines, canonical containment/relocation, CLI 66x2, RAM 73%, Phase
-  0 1,031/1,031, rooted neutral/Perl/Rust routing, and local-CI exit 0 pass.
-- `2026-08-15` — `c3326f6d` landed `.3.4` as clean atomic 231; the brief is zero, the tree is clean, and `.3.5`
-  activated task-tree-first for private Rust primary/admission only.
-- `2026-08-14` — `.3.4` signoff is complete: fifteen independently emitted direct/traced modules, storage,
-  rendered book, Knowledge, doctrines, containment/relocation, CLI 66x2, RAM 60%, Phase 0 1,031/1,031 in 780
-  seconds, exact rooted routing, and local-CI exit 0 pass without emitter, plan-v2, primary, or rollout movement.
-- `2026-08-14` — `9e6ade98` landed Rust reconstructed/descriptor/generated-plan gap parity `.3.3` as clean atomic
-  230/300; `.3.4` activated only afterward.
-- `2026-08-14` — `.3.3` completed reconstruction/descriptor/generated-plan signoff at gap 2/7/56, CLI 66x2,
-  RAM 69%, Phase 0 1,031/1,031 in 772 seconds, and exact opt-in routing without admission movement.
-- `2026-08-14` — `5c4e9d50` landed Rust private native gap execution `.3.2` as clean atomic 229/300.
-- `2026-08-14` — `.3.2` completed exact private native Rust gap state/lifecycle/accessors from `95127e1d` while
-  ordinary discovery remains ignored and rollout stays 2/7/56.
-- `2026-08-14` — `.3.1` completed canonical signoff for exact Rust authored/static/compiled gap metadata and
-  dormant governance at unchanged rollout 2/7/56.
-- `2026-08-14` — `4a95e02a` landed behavior-free Rust implementation freeze `.3.0` as atomic 227/300.
+  the final consumer remains dormant and rollout unchanged.
+- `2026-08-15` — `e40de948` landed behavior-free Dart implementation freeze `.4.0` as clean atomic 233.
+- `2026-08-15` — `.3.5` and parent `.3` completed exact Rust primary/admission at 3/6/56 and landed cleanly as
+  atomic 232 at `2800e7c3`.
+- `2026-08-14` — `.3.4` proved fifteen independently compiled direct/traced Rust emitted modules and landed as
+  atomic 231 at `c3326f6d`.
+- `2026-08-14` — `.3.3` completed Rust reconstructed/descriptor/generated-plan parity and landed at `9e6ade98`.
+- `2026-08-14` — `.3.2` completed private native Rust gap execution and landed at `5c4e9d50`.
+- `2026-08-14` — `.3.1` completed canonical authored/static/compiled Rust provenance from clean `4a95e02a`.
+- `2026-08-14` — `.3.0` froze the behavior-free Rust implementation plan and landed at `4a95e02a`.
+- `2026-08-13` — `.2.4` admitted Perl alone at gap 2/7/56 and closed parent `.2` at `eceb15ac`.
+- `2026-08-13` — `.2.3` proved emitted/loaded Perl execution and landed at `45460329`.
+- `2026-08-13` — `.2.2` completed private native Perl lifecycle/accessors and landed at `34d02e0c`.
+- `2026-08-13` — `.2.1` completed authored/static Perl metadata and landed at `912fc5ed`.
+
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source

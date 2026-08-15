@@ -10,6 +10,21 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-15 — INTER-MATCH-GAP-CAPTURE.4.4 — prove Dart emitted gap execution
+
+- Activated task-tree-first from clean atomic 237 at `4c8ab7ee`; the deliberate RED stopped only because the
+  dedicated emitted-contract helper did not exist.
+- Added one repository-routed offline caller with a private `PUB_CACHE`. Ten emitted value modules and two typed-
+  error modules pass strict analysis plus paired direct/traced execution against native authority.
+- Coverage includes Unicode and empty gaps, falsey values, child cursors, detached entries, lifecycle tails,
+  nesting, rollback, failed minimums, direct entry, legacy behavior, and exact unavailable/regression failures.
+- Advanced only the exact Dart test temp-owner inventory from 22 to 23 and proved caller, cache, output, and trace
+  cleanup. The production emitter, generated plan v2, dormant consumer, rollout 3/6/56, admission, and outward
+  surfaces remain unchanged.
+- Focused signoff passes emitted 1/1, explicit consumer 4/4, direct dependents 100/100, Dart 402 plus one intended
+  skip, storage 23/47, CLI 66x2, corpus 105, all cross-runtime governance matrices, rendered book, Knowledge Map,
+  bounded history, and all nine doctrines. ADR `0073` reserves canonical proof for `.4.5`.
+
 ## 2026-08-15 — INTER-MATCH-GAP-CAPTURE.4.3 — carry Dart gap generated execution
 
 - Activated task-tree-first from clean atomic 236 at `0b074e1c`. The isolated carrier RED proved normalized

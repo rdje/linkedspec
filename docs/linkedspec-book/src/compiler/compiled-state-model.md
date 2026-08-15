@@ -117,6 +117,11 @@ existing recognition invocation owns capture activation and detached child entry
 only committed gap cursor, accepted-edge count, and current candidate/tail. The observable recognition frame
 remains cursor/boundary/marks. Ordinary normalized JSON reconstruction now preserves and executes that same state,
 and both direct and traced generated-plan routes use the same engine lifecycle and typed failures.
+Independently emitted Dart libraries embed that normalized state unchanged. One managed offline caller package
+now strictly analyzes and executes ten value modules plus two typed-error modules through paired direct/traced
+entrypoints. Exact Unicode/empty gaps, falsey results, lifecycle order, child cursors, entry identity, nesting,
+rollback, terminal tails, failed minimums, direct entry, legacy behavior, and typed errors agree with native
+compiled state. The production emitter and the v2 `{label,family}` plan are unchanged.
 
 The Julia backend now implements the same narrow staged provider before compiled state is built. Its public path is:
 

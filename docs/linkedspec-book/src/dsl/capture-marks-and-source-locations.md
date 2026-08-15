@@ -709,13 +709,14 @@ independently compiled emitted paths. The 246 shared call inventory, 122 public-
 registration checks replace the retired Perl dormancy fence while
 the admitted Rust consumer is required ordinarily, canonically, and once after Perl in the rooted route.
 
-### Dart native and generated carriers — current; emitted/admission pending
+### Dart native, generated, and emitted carriers — current; admission pending
 
 Dart `.4.0` established the behavior-free baseline: numeric selectors worked, named declarations/selectors and
 `@capture_gaps` were raw body syntax, all four gap accessors reached `unknown_helper`, and repeated-rule `LS`
 preceded selection. Dart `.4.1` implemented the authored/static/compiled layer, `.4.2` added private native gap
 context and the four accessors on the same recognition authority, and `.4.3` now carries that state through
-ordinary reconstruction, compatible descriptors, and generated-plan execution. The parser accepts named and anonymous regex
+ordinary reconstruction, compatible descriptors, and generated-plan execution. `.4.4` independently analyzes
+and executes emitted libraries without changing the emitter. The parser accepts named and anonymous regex
 declarations in one order, preserves unindexed/numeric/named selector authorship, and carries one dedicated
 rule-level directive record. This is a staged backend implementation, not ordinary or public admission: the
 permanent consumer remains library-skipped until `.4.5`.
@@ -760,8 +761,8 @@ The implementation is assigned before code:
    no second stack and does not widen observed `RecognitionFrameState`, which remains cursor/boundary/marks.
 3. `.4.3` now proves normalized `SpecFile` reconstruction, compatible descriptor additions, and generated-plan
    execution through the same engine. Static plan v2 remains exactly `{label,family}`.
-4. `.4.4` independently analyzes and executes emitted Dart libraries from a repository-routed caller workspace
-   with its own project-local package cache.
+4. `.4.4` now independently analyzes and executes emitted Dart libraries from one repository-routed caller
+   workspace with its own project-local package cache.
 5. `.4.5` proves the existing primary adapter, requires all nine roles exactly once, registers the consumer, and
    promotes only Dart.
 
@@ -791,9 +792,18 @@ slot, directive, and five-field selector rows. Direct and traced generated-plan 
 values and preserve the exact typed unavailable-context and cursor-regression failures through the generated
 error envelope. No gap field is added to the v2 plan.
 
+The emitted proof creates one managed offline caller package beneath the routed temporary root. It writes ten
+independent value modules and two typed-error modules produced by `emitDartSourceV2`, resolves with a private
+`PUB_CACHE`, runs strict analysis, then executes every module through both direct and traced APIs. The value set
+covers mixed separators, Unicode and empty spans, falsey child values, lifecycle order, child-extended cursors,
+detached named entry slots, nested owners, recognition rollback, terminal tails, failed minimum, direct entry,
+and unflagged legacy behavior. The error modules preserve exact unavailable-context and cursor-regression detail.
+Every trace retains its emitted source identity, and cleanup removes the caller, cache, modules, and traces. The
+Dart storage oracle now accounts for 23 exact `Directory.systemTemp` owners and 47 locked packages.
+
 The final Dart consumer already lives at `dart/test/inter_match_gap_capture_contract_test.dart`, but a
 library-level `.4.5` skip keeps ordinary discovery dormant. Explicit execution now proves the `.4.1` metadata,
-`.4.2` native lifecycle, and `.4.3` carrier groups; ten reason-checked governance mutations reject premature
+`.4.2` native lifecycle, `.4.3` carrier, and `.4.4` emitted groups; ten reason-checked governance mutations reject premature
 canonical execution, recurring execution, or facade exposure. Rollout remains 3 complete / 6 pending until
 `.4.5`, and generated plan v2 remains exactly `{label,family}`.
 

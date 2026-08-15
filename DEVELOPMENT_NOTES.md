@@ -10,6 +10,20 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-15 (`INTER-MATCH-GAP-CAPTURE.4.4` — independent emitted Dart proof): activation base is clean atomic
+  237 at `4c8ab7ee`; the final consumer remains library-skipped and rollout remains 3/6/56.
+- Use one caller package for the emitted stage, with its own repository-routed `PUB_CACHE`, offline resolution,
+  strict analysis, and paired direct/traced entrypoints. This proves isolation without multiplying package state.
+- Ten value modules cover every frozen lifecycle/value/compatibility case; two error modules lock the generated
+  unavailable-context and cursor-regression envelopes. Every result is compared with current native authority.
+- Traced roles must exercise the actual traced generated entrypoint with per-case logical source and trace files;
+  a disabled-trace alias would not prove emitted trace routing.
+- `Directory.systemTemp` is safe only through `run_dart_project_data.sh`; enumerate this consumer as owner 23 and
+  prove complete caller/cache/output/trace cleanup. No production emitter or generated-format repair was needed.
+- Focused signoff is emitted 1/1, explicit consumer 4/4, direct dependents 100/100, Dart 402 plus one skip,
+  storage 23/47, CLI 66x2, corpus 105, gap/recognition/duplicate/typed matrices, rendered book, Knowledge Map,
+  bounded histories, and nine doctrines. Canonical admission remains exclusively `.4.5`.
+
 - 2026-08-15 (`INTER-MATCH-GAP-CAPTURE.4.3` — Dart reconstructed/descriptor/generated carrier): activation base
   is clean atomic 236 at `0b074e1c`; the permanent consumer stays library-skipped and rollout stays 3/6/56.
 - Keep normalized `SpecFile` JSON as the single Dart carrier. Reconstruction must parse that detached value and

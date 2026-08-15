@@ -62,6 +62,7 @@ expected_temp_owners=(
  dart/test/callable_codeblock_literal_contract_test.dart
  dart/test/corpus_manifest_test.dart
  dart/test/duplicate_regex_slot_identity_contract_test.dart
+ dart/test/inter_match_gap_capture_contract_test.dart
  dart/test/logical_helper_contract_test.dart
  dart/test/native_pipeline_trace_test.dart
  dart/test/primary_cli_test.dart
