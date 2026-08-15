@@ -2,36 +2,37 @@
 
 ## Current Activity
 
-- Atomic 238 landed cleanly at `6a554312`; `INTER-MATCH-GAP-CAPTURE.4.5` is task-tree-first active from that exact
-  boundary for intended atomic 239; no push.
-- The final Dart consumer now runs five ordinary groups and one exact nine-role ledger. Its primary role reuses
-  the existing adapter for four items with heterogeneous preserved gaps.
-- Ordinary/canonical registration is exact once; the rooted route executes neutral, Perl, Rust, and Dart before
-  three later-runtime skips. Only Dart advances to gap 4/5/57 plus ten Rust and ten Dart admission mutations.
-- ADR `0074` records the foundational correction: `dart_runtime_premature` never existed, so admission preserves
-  all 56 prior guards and adds `dart_runtime_regression` as mutation 57.
-- The first canonical precursor caught the required segment-4995 rollover exceeding the finite history registry.
-  ADR `0075` raises only file/manifest limits to 13/12; the README pressure doctrine now passes.
-- Generated plan v2, production emitter, primary adapter, facade/schema/MCP/CLI/README, capability, typed
-  composition, recurring/public rows, dependencies, toolchain, and later-runtime behavior remain unchanged.
+- Atomic 239 landed cleanly at `43ed1c8f`; behavior-free Julia audit/plan
+  `INTER-MATCH-GAP-CAPTURE.5.0` is focused-signoff-complete from that exact boundary for intended atomic 240;
+  no push.
+- Exact probes prove numeric Julia selectors compile, while named declarations/selectors and `@capture_gaps`
+  remain raw invalid body syntax. `entry_slot()` and the three gap accessors fail as structured unknown helpers;
+  legacy `@move_pos` has no compiled/native effect; repeated execution runs enclosing `LS` before selection.
+- `.5.1-.5.5` are frozen before behavior: authored/static/compiled identity plus dormancy; existing-recognition-
+  authority native state; normalized reconstruction/descriptors/generated-v2 execution; one repository-routed
+  emitted host; and existing-primary exact nine-role admission.
+- Normalized `SpecFile` remains the carrier, detached `RecognitionFrameState` remains cursor/boundary/marks,
+  runtime spans reuse the immutable input `SourceAuthority`, and generated format 2 stays `{label,family}`.
+- Governance remains 4/5/57 plus ten Rust and ten Dart admission mutations. Julia, both Lua ABIs, recurring/public
+  rows, typed composition, and every outward facade/schema/MCP/CLI/README surface remain pending or unchanged.
 
 ## Latest Completed Slice
 
-- `.4.5` and parent `.4` are signoff-complete. Proof passes primary 1/1, ordinary consumer 5/5, Dart format 102/0
-  plus strict analysis and 407 tests, storage 23/47, CLI 66x2, corpus 105, rooted four-runtime execution, recognition
-  137/246/58, duplicate slot 7/0/59, and typed source 9/5/114. Canonical CI passes all nine doctrines,
-  containment/relocation, CLI 66x2, RAM 57%, Phase 0 1,031/1,031 in 753 seconds, exact gap routing, staged receipt
-  generation, and exit 0.
+- `.5.0` is behavior-free focused-signoff-complete. Exact Julia 624, primary, storage 19/5, neutral/rooted 4/5/57,
+  recognition 137/246/58, duplicate slot 7/0/59, typed source 9/5/114, rendered book 79/14,856, Knowledge
+  838/7,070, bounded histories, exact ADR pressure, and all nine doctrines pass.
 
 ## Next Action
 
-- Commit the exact receipt-bound candidate as atomic 239, clear the brief, prove the tree clean, then activate
-  Julia `.5` task-tree-first from that exact boundary.
+- From the clean atomic-240 boundary, activate `.5.1` task-tree-first for Julia authored/static/compiled metadata,
+  logical source identity, exact diagnostics, and dormant-consumer governance.
 
 ## Recent Completions
 
-- `2026-08-15` — `.4.5` completed existing-primary parity and exact nine-role private Dart admission from clean
-  `6a554312`; canonical signoff closes parent `.4` for intended atomic 239.
+- `2026-08-15` — `.5.0` froze the behavior-free Julia `.5.1-.5.5` implementation/admission plan from clean
+  `43ed1c8f` for intended atomic 240.
+- `2026-08-15` — `.4.5` completed existing-primary parity and exact nine-role private Dart admission; it and
+  parent `.4` landed as atomic 239 at `43ed1c8f`.
 - `2026-08-15` — `.4.4` proved ten value and two typed-error emitted Dart modules in one offline managed caller
   and landed as atomic 238 at `6a554312`.
 - `2026-08-15` — `.4.3` completed normalized reconstruction, compatible descriptors, and same-engine generated

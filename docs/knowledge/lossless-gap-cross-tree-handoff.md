@@ -14,20 +14,20 @@ answers:
   - "is arrow Rule method equivalent to arrow Rule dot method"
   - "why does an action edge fluent chain keep its first dot"
   - "what happens after FUTURE-PARITY-BACKLOG 14.5.0"
-date: 2026-08-13
-status: cross-tree handoff complete; Perl authored/static and native-live leaves complete; carrier/admission pending
+date: 2026-08-15
+status: cross-tree handoff complete; Perl, Rust, and Dart privately admitted; behavior-free Julia plan frozen
 tags: [architecture, task-tree, gap-capture, named-slots, selectors, typed-source, handoff]
-evidence: "Clean handoff d26e4d4e and the committed ADR/duplicate-slot/typed-source authorities assign implementation to INTER-MATCH-GAP-CAPTURE. Perl .2.1 from clean 8f826923 admits named declarations, named selectors, and capture_gaps static metadata; .2.2 from clean 912fc5ed adds only private native-live state/accessors and synchronizes recognition to 137/246/58. Generated loading, runtime admission, and typed-source composition remain pending. Gap rollout remains 1 complete + 8 pending and 55 mutations, plus 10 independent Perl dormancy mutations."
+evidence: "Clean handoff 3d0384d1 and the committed ADR/duplicate-slot/typed-source authorities assign implementation to INTER-MATCH-GAP-CAPTURE. Neutral .1 is closed; Perl .2, Rust .3, and Dart .4 are privately admitted through authored/native/carrier/emitted/primary roles. Gap governance is 4 complete + 5 pending / 57 semantic mutations plus ten Rust and ten Dart admission mutations. Behavior-free Julia .5.0 freezes .5.1-.5.5 from clean 43ed1c8f; Julia/Lua, recurring/public, and typed-source composition remain pending."
 reverify: "bash tools/check_duplicate_regex_slot_identity_five_backend.sh && bash tools/check_typed_source_location_six_runtime.sh && perl tools/read_task_tree.pl --tree FUTURE-PARITY-BACKLOG --id FUTURE-PARITY-BACKLOG.14.5.0 && perl tools/read_task_tree.pl --tree INTER-MATCH-GAP-CAPTURE --id INTER-MATCH-GAP-CAPTURE.1"
 ---
 
 # Lossless gap cross-tree handoff
 
-Current Perl LinkedSpec supports positional action-edge targets such as `Rule[1]`, named regex declarations,
-`Rule[name]`, and private native-live `@capture_gaps` state/accessors. It does not yet execute from an
-independently loaded generated carrier, and the forms are not portable/publicly admitted. The historical Perl mechanism
-proves the intended automatic prefix/interstitial behavior, while the current marker implementations prove that
-legacy scope and timing cannot simply be promoted into a portable contract.
+Current Perl, Rust, and Dart LinkedSpec support positional and named action-edge targets, named regex declarations,
+and privately admitted `@capture_gaps` state/accessors across their native, reconstructed/generated, emitted, and
+primary roles. These forms are not yet portable/publicly admitted because Julia and both Lua ABIs remain pending.
+The historical Perl mechanism proves the intended automatic prefix/interstitial behavior, while the legacy marker
+implementations prove that old scope and timing cannot simply be promoted into a portable contract.
 
 `INTER-MATCH-GAP-CAPTURE.1-.7` is therefore the sole owner of named-slot grammar, selector validation,
 `@capture_gaps` lifecycle semantics, prefix/interstitial/tail and empty spans, failure/commit/recursion policy,
@@ -60,3 +60,4 @@ This separation provides the useful shorthand—stable names—without creating 
 - Typed span algebra: ADR `0056`, [[typed-source-location-cursor-algebra-direction]]
 - Implementation owner: `docs/tasks/INTER-MATCH-GAP-CAPTURE.md`
 - Composition owner: `docs/tasks/FUTURE-PARITY-BACKLOG.14.md`
+- Julia implementation plan: [[inter-match-gap-julia-implementation-plan]]

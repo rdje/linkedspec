@@ -3,9 +3,9 @@
 ## Metadata
 
 - Tree ID: `INTER-MATCH-GAP-CAPTURE`
-- Status: `active` / Dart primary and exact nine-role private admission `.4.5` plus parent `.4` are signoff-
-  complete from clean atomic 238 at `6a554312` for intended atomic 239; Julia `.5` follows only after the
-  commit/brief-clear/clean boundary; no push
+- Status: `active` / Dart primary/admission `.4.5` plus parent `.4` landed cleanly as atomic 239 at `43ed1c8f`;
+  behavior-free Julia audit/plan `.5.0` is focused-signoff-complete from that exact boundary for intended atomic
+  240; no push
 - Roadmap lane: `.spec language evolution / lossless segmentation and source preservation`
 - Created: `2026-07-17`
 - Last updated: `2026-08-15`
@@ -51,8 +51,8 @@ orchestration or to raw Perl cursor arithmetic.
     through atomic 226 at `eceb15ac`; Rust `.3.0` landed as atomic 227 at `4a95e02a`; Rust `.3.1` landed as
     atomic 228 at `95127e1d`; Rust `.3.2` landed as atomic 229 at `5c4e9d50`; Rust `.3.3` landed as atomic 230 at
     `9e6ade98`; Rust `.3.4` landed as atomic 231 at `c3326f6d`; `.3.5` and parent `.3` landed as atomic 232 at
-    `2800e7c3`; Dart behavior-free planning leaf `.4.0` is signoff-complete from that exact clean boundary for
-    intended atomic 233; no push)
+    `2800e7c3`; Dart parent `.4` landed as atomic 239 at `43ed1c8f`; behavior-free Julia audit/plan `.5.0` is
+    active from that exact clean boundary; no push)
   Goal: Recover and modernize lossless inter-match gap capture without semantic drift.
   Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`
 
@@ -907,9 +907,9 @@ orchestration or to raw Perl cursor arithmetic.
   Commit: `INTER-MATCH-GAP-CAPTURE.3.5 - admit Rust inter-match gap capture` (intended atomic 232/300)
 
 - ID: `INTER-MATCH-GAP-CAPTURE.4`
-  Status: `done; signoff-complete` (2026-08-15; `.4.1-.4.4` landed through emitted-proof atomic 238 at
-    `6a554312`; final private primary/admission `.4.5` passes exact staged canonical proof and closes the parent
-    for intended atomic 239)
+  Status: `done; landed at 43ed1c8f` (2026-08-15; `.4.1-.4.4` landed through emitted-proof atomic 238 at
+    `6a554312`; final private primary/admission `.4.5` passed exact staged canonical proof and closed the parent
+    as atomic 239)
   Goal: Implement exact Dart native/reconstructed/generated/primary parity.
   Children: `.4.0`, `.4.1`, `.4.2`, `.4.3`, `.4.4`, `.4.5`
   Acceptance: Dart passes the neutral gap corpus and every admitted execution role.
@@ -1302,8 +1302,8 @@ orchestration or to raw Perl cursor arithmetic.
   Commit: `INTER-MATCH-GAP-CAPTURE.4.4 - prove Dart emitted gap execution`
 
 - ID: `INTER-MATCH-GAP-CAPTURE.4.5`
-  Status: `done; signoff-complete` (2026-08-15; task-tree-first from clean atomic-238 commit `6a554312`; exact
-    staged canonical proof passes for intended atomic 239; zero-byte brief at activation; no push)
+  Status: `done; landed at 43ed1c8f` (2026-08-15; task-tree-first from clean atomic-238 commit `6a554312`; exact
+    staged canonical proof passed for atomic 239; zero-byte brief after landing; no push)
   Goal: Prove primary parity, admit the exact nine-role Dart consumer, and close parent `.4`.
   Depends on: `.4.4`
   Acceptance: prove clean activation and retrieve the frozen Dart plan plus exact final consumer, existing primary
@@ -1385,11 +1385,175 @@ orchestration or to raw Perl cursor arithmetic.
   Commit: `INTER-MATCH-GAP-CAPTURE.4.5 - admit Dart inter-match gap capture`
 
 - ID: `INTER-MATCH-GAP-CAPTURE.5`
-  Status: `pending`
+  Status: `active` (2026-08-15; behavior-free audit/plan child `.5.0` is focused-signoff-complete from clean
+    atomic-239 commit `43ed1c8f` for intended atomic 240; no Julia implementation change preceded activation)
   Goal: Implement exact Julia native/generated/primary parity.
-  Acceptance: Julia passes the neutral gap corpus and every admitted execution role.
+  Children: `.5.0`, `.5.1`, `.5.2`, `.5.3`, `.5.4`, `.5.5`
+  Acceptance: Julia passes the neutral gap corpus and every admitted execution role through its existing private
+    recognition, typed-source, normalized-spec, generated-v2, emitted-source, and primary authorities without a
+    second state stack, generated-format change, or outward API promotion.
   Verification: `pending`
   Commit: `pending`
+
+- ID: `INTER-MATCH-GAP-CAPTURE.5.0`
+  Status: `signoff-complete` (2026-08-15; task-tree-first from clean atomic-239 commit `43ed1c8f`; zero-byte
+    brief; behavior-free focused proof is green for intended atomic 240; no push)
+  Goal: Reverify the committed Julia parser/compiler/runtime/carrier/emitter/primary seams and freeze an exact,
+    dependency-complete implementation/admission plan before changing Julia behavior.
+  Depends on: `.4`, the neutral gap contract, complete Julia duplicate-slot identity, rule-local cursor, typed
+    source, recognition transaction, generated-source, primary-CLI, and emitted-source authorities.
+  Acceptance: prove clean activation and retrieve canonical Knowledge/ADR/task/contract authorities first; use
+    LinkedSpec's contract and Julia source/runtime probes before inference; locate exact named declaration/
+    selector, directive, source-AST, validation, compiled metadata, selected-slot identity, invocation state,
+    matcher/action/lifecycle, transaction/recursion, accessor, diagnostic, serialization/reconstruction,
+    descriptor, generated-plan, emitted-source, primary-command, recurring-driver, storage, and public-no-
+    overclaim seams; reproduce current Julia absence or drift against admitted Perl/Rust/Dart and neutral
+    behavior; specify exact RED/GREEN fixtures, role boundaries, mutation/rollout increments, canonical/storage
+    routes, and non-overlapping `.5.1+` ownership; change no Julia parser/compiler/runtime/carrier/emitter/CLI
+    behavior, gap rollout, public facade/schema/MCP, capability, typed-source composition, README, dependency, or
+    generated format in this leaf; synchronize durable projections and pass focused proof before commit/brief-
+    clear/clean handoff to `.5.1`.
+
+  ### Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / OWNERSHIP** — Proved committed atomic 239 at `43ed1c8f`, empty tracked/untracked
+    status, zero-byte brief, promoted canonical receipt, and no background result before this task-tree edit.
+  - [x] **RETRIEVE AUTHORITY** — Query the Knowledge Map first, then read the exact gap, Julia selector/cursor/
+    transaction/source/generated/primary, storage, path, and public-no-overclaim owners before re-derivation.
+  - [x] **TOOLBOX-LED JULIA AUDIT** — Reproduce current authored/runtime/carrier/primary absence or drift through
+    exact contract, source, descriptor, generated, emitted, and primary probes; record mechanisms and locations.
+  - [x] **FREEZE IMPLEMENTATION PLAN** — Assign dependency-ordered `.5.1+` leaves with exact RED/GREEN, carrier,
+    lifecycle, transaction, diagnostics, primary, admission, mutation, storage, and no-overclaim obligations.
+  - [x] **NO BEHAVIOR / LOCKSTEP SIGNOFF** — Move no code, rollout, generated format, or outward surface; align
+    task/ADR/Knowledge/roadmaps/live/mdBook and pass focused proof before landing.
+
+  Verification tier: `focused`
+  Focused checks: exact neutral and rooted gap governance; repository-routed Julia baseline probes; selected
+    Julia parser/compiler/runtime/generated/emitted/primary/storage dependents; recognition, typed-source, and
+    duplicate-slot matrices; rendered mdBook, Knowledge regeneration, all doctrines, bounded histories, and
+    exact diff checks.
+  Canonical trigger: `none` — this leaf is a behavior-free audit and dependency-plan freeze. It changes no
+    runtime, generated format, admission/promotion, public contract, dependency/toolchain, CI/hook/gate,
+    storage/path/doctrine infrastructure, or outward surface; final Julia admission and the clean push boundary
+    retain canonical proof.
+  Verification: exact neutral 4/5/57 plus ten Rust/ten Dart admission mutations and rooted Perl 124/Rust 1/Dart
+    5/three skips pass; focused Julia duplicate-slot 121 + cursor 104 + recognition 207 + typed-source 127 +
+    source-emitter 65 = 624 assertions, primary process conformance, and storage 19 owners / 5 packages pass;
+    recognition neutral 137/246/58, complete duplicate-slot 7/0/59, and typed-source 9/5/114 matrices pass; rendered
+    mdBook is 79 files / 14,856 KiB; Knowledge is 838 facts / 7,070 keys; task metadata, bounded histories and
+    rollover pressure (changes 444, notes 262), exact 640-line ADR pressure, diff checks, and all nine doctrines
+    pass. ADR `0073` correctly excludes canonical CI because no canonical trigger moved.
+  Commit: `INTER-MATCH-GAP-CAPTURE.5.0 - freeze Julia gap implementation plan`
+
+- ID: `INTER-MATCH-GAP-CAPTURE.5.1`
+  Status: `pending`
+  Goal: Add exact Julia authored/static/compiled gap metadata and a mechanically dormant final consumer.
+  Depends on: `.5.0`
+  Acceptance: prove clean activation; make `SpecFile` retain a backward-compatible logical `source_id` through
+    ordinary, staged, loaded, reconstructed, and primary parsing; recognize named and anonymous regex declarations
+    in one authored order through the existing pinned Unicode-17 label scanner; reject all-ASCII-digit and duplicate
+    names; retain unindexed, numeric, and named selector provenance; recognize one dedicated `@capture_gaps`
+    directive and reject the exact nine neutral static diagnostic boundaries; compile detached declaration rows,
+    directive evidence, and five-field resolved selector identity without live execution; create final consumer
+    `julia/test/inter_match_gap_capture_contract_test.jl` at its permanent path but exclude it mechanically from
+    ordinary, canonical, and rooted discovery through ten checker-local dormancy mutations; change no runtime,
+    rollout, descriptor, generated, emitted, primary, public, facade/schema/MCP/capability, dependency, or format
+    behavior.
+  Planned verification tier: `focused`
+  Planned focused checks: Julia authored/static/compiled consumer groups and direct parser/compiler/descriptor dependents;
+    exact neutral/rooted gap governance and dormancy mutations; complete Julia package/primary/storage proof;
+    duplicate-slot, recognition, typed-source, book, Knowledge, doctrine, history, and diff checks.
+  Planned canonical trigger: `none` — private metadata and dormant proof only; no runtime, registration, promotion, format,
+    outward, dependency/toolchain, or infrastructure change.
+  Verification: `pending`
+  Commit: `INTER-MATCH-GAP-CAPTURE.5.1 - add Julia gap metadata`
+
+- ID: `INTER-MATCH-GAP-CAPTURE.5.2`
+  Status: `pending`
+  Goal: Add exact private native Julia gap state, lifecycle, accessors, entry identity, rollback, and recursion.
+  Depends on: `.5.1`
+  Acceptance: prove deliberate RED in the permanent consumer; extend only the existing private recognition
+    invocation/token authority with activation, immutable input/invocation identity, detached entry-slot identity,
+    committed gap cursor, accepted-edge count, and current gap; keep detached `RecognitionFrameState` exactly
+    cursor/boundary/marks and add no second stack/cursor/token family; preselect/install a candidate before `LS`
+    only on capture-enabled rules, retain it through action/target/`LE`, commit the child-extended post-`LE` cursor
+    before `IT`, and install successful tails before existing `LX`/`EX`/`E`; preserve falsey acceptance,
+    whole-rule returns, rollback, nesting, failed minimum, direct entry, and legacy-marker behavior; add private
+    zero-argument `entry_slot()`, `gap_span()`, `gap_text()`, and `gap_kind()` through existing action dispatch;
+    project zero-based UTF-8 code-unit registers through the current immutable input `SourceAuthority` to scalar
+    spans; preserve exact `gap_capture_context_unavailable` and `source_location_cursor_regression` errors; keep
+    final consumer dormant and change no reconstruction/descriptor/generated/emitted/primary/admission/outward
+    surface.
+  Planned verification tier: `focused`
+  Planned focused checks: explicit native/lifecycle/transaction/recursion consumer groups; direct runtime, recognition,
+    source-location, cursor, slot, action, and diagnostic dependents; neutral/rooted/dormancy, complete Julia,
+    primary/storage, duplicate-slot, typed-source, book, Knowledge, doctrine, history, and diff checks.
+  Planned canonical trigger: `none` — private ordinary runtime leaf with no admission, format, dependency, infrastructure,
+    or outward-surface change.
+  Verification: `pending`
+  Commit: `INTER-MATCH-GAP-CAPTURE.5.2 - add Julia native gap execution`
+
+- ID: `INTER-MATCH-GAP-CAPTURE.5.3`
+  Status: `pending`
+  Goal: Carry exact Julia gap metadata and execution through normalized reconstruction, descriptors, and generated plans.
+  Depends on: `.5.2`
+  Acceptance: use normalized `SpecFile` JSON as the sole reconstruction carrier and recompile normally; add fresh
+    detached descriptor projections `regex_slots`, `capture_gaps`, and five-field `resolved_slot_edges` without
+    widening legacy `resolved_edges` or `{label,idx}` dependency references; prove direct and traced generated-v2
+    execution spends the same engine/state and preserves values, lifecycle, rollback, recursion, diagnostics, and
+    source identity; keep generated format 2 and exact ordered `{label,family}` plan rows; keep the final consumer
+    dormant and change no production emitter, primary, registration, rollout, public surface, dependency, or format.
+  Planned verification tier: `focused`
+  Planned focused checks: explicit reconstruction/descriptor/generated consumer groups and direct normalized-spec,
+    descriptor, generated-plan, runtime/source/recognition dependents; neutral/rooted/dormancy, complete Julia,
+    primary/storage, cross-runtime ledgers, book, Knowledge, doctrine, history, and diff checks.
+  Planned canonical trigger: `none` — compatible private carriers and same-engine generated execution only.
+  Verification: `pending`
+  Commit: `INTER-MATCH-GAP-CAPTURE.5.3 - carry Julia gap generated execution`
+
+- ID: `INTER-MATCH-GAP-CAPTURE.5.4`
+  Status: `pending`
+  Goal: Prove independently compiled emitted Julia gap behavior on repository-local storage.
+  Depends on: `.5.3`
+  Acceptance: call `emit_julia_source_v2` without production-emitter change; build one isolated offline host
+    project under the repository-routed temporary root with a private writable depot layered only over the retained
+    repository depot and Julia system depots; independently load ten value modules and two typed-error modules
+    through direct and traced entrypoints; compare every result/error with native authority; cover Unicode/empty
+    gaps, falsey results, target lifecycle and child cursor extension, detached entry identity, nesting, rollback,
+    terminal routes, failed minimum, direct entry, legacy behavior, and exact typed failures; add this consumer as
+    the twentieth exact Julia temporary-workspace owner, prove cleanup, retain final-consumer dormancy, and change
+    no production emitter, generated format/plan, primary, registration, rollout, or outward surface.
+  Planned verification tier: `focused`
+  Planned focused checks: independent emitted consumer, explicit permanent consumer groups, generated/runtime/source/
+    recognition dependents, exact Julia storage 20 owners / 5 packages, neutral/rooted/dormancy, complete Julia,
+    primary and cross-runtime ledgers, book, Knowledge, doctrine, history, and diff checks.
+  Planned canonical trigger: `none` — independent proof and exact local-owner inventory only; final admission owns canonical.
+  Verification: `pending`
+  Commit: `INTER-MATCH-GAP-CAPTURE.5.4 - prove Julia emitted gap execution`
+
+- ID: `INTER-MATCH-GAP-CAPTURE.5.5`
+  Status: `pending`
+  Goal: Prove primary parity, admit the exact nine-role Julia consumer, and close parent `.5`.
+  Depends on: `.5.4`
+  Acceptance: reuse the existing Julia primary CLI adapter with no new command or option; remove only the final
+    consumer's dormancy exclusion; execute exact contract roles `native_execution`, `ordinary_reconstruction`,
+    `descriptor`, `generated_plan`, `emitted_source`, `target_lifecycle`, `recursion_and_rollback`,
+    `portable_diagnostics`, and `primary_command` once in declared order; register the consumer exactly once in
+    ordinary Julia discovery, canonical CI, and after Dart in the rooted route; promote only `julia_runtime` to
+    5 complete / 4 pending and append only `julia_runtime_regression` as semantic mutation 58; replace the ten
+    Julia dormancy mutations with ten exact admission/role/registration/later-runtime/facade mutations; preserve
+    all 57 current semantic mutations, ten Rust and ten Dart admission mutations, recognition 137/246/58, public
+    helper 122, typed-source 9/5/114, generated format/plan, legacy descriptor/reference shapes, CLI/facade/schema/
+    semantic/MCP/capability/README surfaces, and later-runtime/public rows; close parent `.5` only after exact
+    canonical signoff and commit/brief/clean proof.
+  Planned verification tier: `canonical`
+  Planned focused checks: primary and exact role ledger; ordinary/canonical/rooted multiplicity and order; complete Julia,
+    storage, neutral gap 5/4/58, recognition, duplicate-slot, typed-source, generated/capability/semantic/MCP,
+    primary matrix, book, Knowledge, doctrine, history, and diff checks.
+  Planned canonical trigger: `admission and parent milestone` — runtime rollout, ordinary/canonical/recurring registration,
+    mutation boundary, and parent closeout change.
+  Verification: `pending`
+  Commit: `INTER-MATCH-GAP-CAPTURE.5.5 - admit Julia inter-match gap capture`
 
 - ID: `INTER-MATCH-GAP-CAPTURE.6`
   Status: `pending`
@@ -1431,10 +1595,25 @@ orchestration or to raw Perl cursor arithmetic.
 | 19 | `INTER-MATCH-GAP-CAPTURE.4.2` | `signoff-complete from clean c234ef9f; focused tier` | Private native Dart gap state/accessors/lifecycle are exact for intended atomic 236 with no full CI or rollout movement. |
 | 20 | `INTER-MATCH-GAP-CAPTURE.4.3` | `done; landed at 4c8ab7ee` | Normalized Dart reconstruction, compatible descriptors, unchanged-v2 generated execution, and the audited stale-summary correction landed as atomic 237. |
 | 21 | `INTER-MATCH-GAP-CAPTURE.4.4` | `done; landed at 6a554312` | One offline managed caller proves ten value and two typed-error emitted modules direct/traced; storage advances only to 23 owners as atomic 238. |
-| 22 | `INTER-MATCH-GAP-CAPTURE.4.5` | `done; signoff-complete from clean 6a554312` | Primary parity, exact nine-role admission, Dart-only 4/5/57 promotion, canonical/rooted registration, and exact staged canonical proof close parent `.4` for intended atomic 239; Julia `.5` follows after commit/brief/clean proof. |
+| 22 | `INTER-MATCH-GAP-CAPTURE.4.5` | `done; landed at 43ed1c8f` | Primary parity, exact nine-role admission, Dart-only 4/5/57 promotion, canonical/rooted registration, and exact staged canonical proof closed parent `.4` as atomic 239. |
+| 23 | `INTER-MATCH-GAP-CAPTURE.5.0` | `signoff-complete from clean 43ed1c8f; focused tier` | Exact Julia seams and dependency-ordered `.5.1-.5.5` ownership are frozen without behavior or rollout movement for intended atomic 240. |
+| 24 | `INTER-MATCH-GAP-CAPTURE.5.1` | `pending` | Add Julia authored/static/compiled provenance plus a mechanically dormant permanent consumer. |
+| 25 | `INTER-MATCH-GAP-CAPTURE.5.2` | `pending` | Extend the existing private Julia recognition authority with native gap state/accessors/lifecycle. |
+| 26 | `INTER-MATCH-GAP-CAPTURE.5.3` | `pending` | Prove normalized reconstruction, compatible descriptors, and same-engine generated-v2 execution. |
+| 27 | `INTER-MATCH-GAP-CAPTURE.5.4` | `pending` | Prove independently loaded emitted Julia modules and advance only the exact local temp-owner oracle. |
+| 28 | `INTER-MATCH-GAP-CAPTURE.5.5` | `pending; canonical tier` | Reuse the primary adapter, admit exactly nine roles, promote Julia only, and close parent `.5`. |
 
 ## Decisions
 
+- `2026-08-15`: Julia implementation is split across `.5.1-.5.5` before behavior. `.5.1` owns authored/static/
+  compiled provenance and a permanently located dormant consumer; `.5.2` owns private same-authority native state;
+  `.5.3` owns normalized reconstruction/descriptors/generated-plan; `.5.4` owns repository-routed independently
+  loaded emitted proof; `.5.5` alone owns primary, exact nine-role admission, Julia promotion, and parent closeout.
+- `2026-08-15`: Julia gap state extends the existing private recognition invocation/token authority and leaves
+  detached `RecognitionFrameState` at cursor/boundary/marks. Runtime spans reuse the immutable input
+  `SourceAuthority`; normalized `SpecFile` is the carrier; generated format 2 and `{label,family}` plan rows do not
+  widen. Emitted proof is expected to advance the exact Julia temp-owner oracle from 19 to 20, not add a global or
+  off-volume cache.
 - `2026-08-15`: ADR `0074` corrects the `.4.0` frozen mutation-count premise from exact Git/contract evidence.
   Rust admission consumed `rust_runtime_premature` without creating `dart_runtime_premature`; Dart admission must
   preserve all 56 current guards and add `dart_runtime_regression` as mutation 57, yielding exact 4/5/57.

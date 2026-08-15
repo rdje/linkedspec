@@ -1,5 +1,20 @@
 # ARCHITECTURE STATE
 
+## Julia inter-match-gap capture has a behavior-free five-leaf implementation plan
+
+`INTER-MATCH-GAP-CAPTURE.5.0` confirms numeric selectors compile while named declarations/selectors and
+`@capture_gaps` remain raw invalid Julia body syntax, the four future accessors fail as structured unknown helpers,
+legacy `@move_pos` has no native effect, and repeated execution runs `LS` before selection. It freezes `.5.1-.5.5`
+without changing parser, compiler, runtime, carrier, emitter, primary, rollout, generated format, or outward state.
+
+The plan extends the existing private recognition invocation/token authority; detached `RecognitionFrameState`
+stays cursor/boundary/marks and no second stack or cursor is introduced. The current immutable input
+`SourceAuthority` projects UTF-8 code-unit registers to scalar spans. Normalized `SpecFile` JSON remains the sole
+reconstruction carrier; descriptors gain only separate compatible projections; generated source stays format 2
+with exact `{label,family}` plan rows. One repository-routed emitted host is expected to advance Julia's exact
+temporary-workspace inventory from 19 to 20. Final `.5.5` alone reuses the existing primary adapter, admits the
+nine-role consumer, promotes Julia from 4/5/57 to 5/4/58, and closes parent `.5`.
+
 ## Dart inter-match-gap capture is privately admitted through one nine-role authority
 
 `INTER-MATCH-GAP-CAPTURE.4.1-.4.5` implement, independently prove, and privately admit one Dart gap authority through authored/static metadata, private

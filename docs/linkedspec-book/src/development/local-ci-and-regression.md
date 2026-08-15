@@ -249,6 +249,11 @@ rejects 57 semantic mutations at rollout 4 complete / 5 pending plus ten Rust an
 ADR `0074` explains the additional Dart regression guard. Maintained Dart commands use
 `tools/run_dart_project_data.sh` or `tools/run_dart_local.sh`; the storage oracle locks 23 temporary owners and 47
 packages on repository storage. Julia and both Lua routes remain explicit skips, and no outward surface moves.
+Behavior-free Julia `.5.0` freezes `.5.1-.5.5` before implementation. Its focused baseline passes duplicate-slot
+121, rule-local cursor 104, recognition transaction 207, typed source 127, and source emitter 65 (624 assertions),
+plus the existing primary process check and exact storage 19 temporary owners / 5 package trees. The plan reuses
+the existing recognition invocation/token, immutable input `SourceAuthority`, normalized `SpecFile` carrier,
+generated format 2 `{label,family}` plan, and primary adapter. It changes no Julia runtime or 4/5/57 rollout state.
 Behavior-free Rust preflight `.3.0` assigns `.3.1-.3.5` to authored metadata, same-authority native state,
 reconstruction/generated-plan parity, repository-local emitted proof, and final primary/admission. `.3.1` now
 implements exact Rust named/anonymous declarations, selectors, directive validation, diagnostics, and compiled

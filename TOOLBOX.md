@@ -1052,7 +1052,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 ### 4.9.1.3 `tools/check_inter_match_gap_capture_contract.py` — executable-neutral gap oracle
 
 - **WHAT:** the format-1 neutral JSON authority for `linkedspec-inter-match-gap-capture-v1`. It executes exact
-  Unicode/empty/child/transaction state and rejects 56 semantic/topology corruptions at rollout 3 complete + 6
+  Unicode/empty/child/transaction state and rejects 57 semantic/topology corruptions at rollout 4 complete + 5
   pending. Inter-match gap-capture recurring governance executes its complete neutral, private Perl, private Rust, and private Dart rows while later runtimes remain pending.
 - **WHEN:** implementing `.1.3`, named regex declarations/selectors, `entry_slot()`, `@capture_gaps`, the three
   gap accessors, or any backend/runtime/recurring leg.
@@ -1060,7 +1060,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   [[inter-match-gap-executable-contract-plan]], and read the complete frozen section in
   `docs/tasks/INTER-MATCH-GAP-CAPTURE.md`. Run
   `bash tools/check_inter_match_gap_capture_six_runtime.sh` for the ordered repository-routed governance proof;
-  its five explicit later-runtime skips are required until those rows are admitted. Rerun both prerequisite matrices from §4.9.1.2 before changing
+  its three explicit later-runtime skips are required until those rows are admitted. Rerun both prerequisite matrices from §4.9.1.2 before changing
   either dependency. For current mechanism evidence, use `return_descriptor` for
   `{family,cursor_policy,edge_ownership,uses_loop,execution_shape,resolved_edges}`, `dump_parser_source` for exact
   selection → `LS` → action/target → `LE` order, and the corrected historical live probe recorded in the task.
@@ -1126,6 +1126,28 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   3/6/56 rollout, public surfaces, typed composition, and later runtimes do not move before their owners.
 - **SIGNED OFF:** focused Dart 123/123 and complete format 101/0, analysis, package 400/400, storage 22/47, CLI
   66x2, and corpus 105/105 pass. `.4.0` changes no Dart implementation or rollout; `.4.1` waits for atomic 233.
+
+### 4.9.1.7 Julia gap implementation preflight
+
+- **WHAT:** behavior-free `.5.0` maps Julia's audited AST/parser/compiler/runtime baseline to `.5.1-.5.5`. It
+  records numeric-selector success; raw-invalid named/directive syntax; unknown accessor helpers; inactive legacy
+  markers; `LS`-before-selection order; existing recognition/source/normalized/generated/primary authorities;
+  exact repository storage; and admission boundaries in [[inter-match-gap-julia-implementation-plan]].
+- **WHEN:** implementing or reviewing `.5.1-.5.5`, especially before changing Julia regex declarations/selectors,
+  logical spec identity, compiled edge provenance, recognition invocation/token state, runtime lifecycle,
+  descriptors, normalized reconstruction, generated-v2 execution, emitted modules, or primary routing.
+- **HOW:** run the neutral/rooted checks and all Julia commands through `tools/run_julia_project_data.sh` or
+  `tools/run_julia_local.sh`. Reproduce the surface/runtime/primary boundary first, then follow
+  `RegexBodyElementKind`/`EdgeTarget`, `_parse_index_at`, `validate_spec`, `_compile_rule`,
+  `_execute_runtime_regex_rule!`, `_execute_runtime_regex_once!`, the private recognition invocation/token,
+  normalized `SpecFile` JSON, `SourceEmitter`, and the existing primary adapter. Runtime registers are UTF-8 code
+  units; only the immutable input `SourceAuthority` may project scalar spans.
+- **BOUNDARY:** `.5.1` owns logical source plus authored/static/compiled metadata and dormancy; `.5.2` owns private
+  same-authority native state/accessors without widening `RecognitionFrameState`; `.5.3` owns normalized
+  reconstruction/descriptor/generated-plan proof; `.5.4` owns independently loaded emitted proof and exact
+  storage 19→20; `.5.5` alone registers/promotes Julia and closes parent `.5`. Generated format 2 and
+  `{label,family}` rows, recognition 137/246/58, public helpers 122, typed source 9/5/114, outward surfaces, later
+  runtimes, and recurring/public rows remain unchanged before their owners.
 
 ### 4.9.2 `tools/check_recognition_transaction_contract.py` — neutral transaction/progress oracle
 

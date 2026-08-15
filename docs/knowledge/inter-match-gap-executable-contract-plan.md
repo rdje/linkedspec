@@ -1,6 +1,6 @@
 ---
 id: inter-match-gap-executable-contract-plan
-title: Inter-match gap capture has a frozen neutral contract and admitted private Perl and Rust runtimes
+title: Inter-match gap capture has a frozen neutral contract and admitted private Perl, Rust, and Dart runtimes
 answers:
   - "where will the inter match gap executable contract live"
   - "what is the inter match gap contract id"
@@ -22,10 +22,10 @@ answers:
   - "what are the capture_gaps rollout legs"
   - "is capture_gaps implemented now"
 date: 2026-08-15
-status: neutral parent closed and private Perl and Rust runtimes admitted; rollout is 3 complete + 6 pending
+status: neutral parent closed and private Perl, Rust, and Dart runtimes admitted; Julia implementation plan frozen
 tags: [capture, segmentation, named-slots, typed-source, lifecycle, transaction, recursion, contract, plan]
-evidence: "INTER-MATCH-GAP-CAPTURE.1.1-.1.3 establish the executable neutral Unicode/empty/child/rollback/nested model, recurrence, and public no-overclaim. Perl .2.1-.2.4 implement and admit the full 124-test private consumer. Rust .3.1-.3.5 implement authored/static metadata, same-authority native state, reconstruction/descriptors/generated-plan, fifteen emitted modules, and an existing-adapter primary command before exact ordinary/canonical/rooted admission. Current gap governance is 3 complete + 6 pending / 56 semantic mutations plus 10 Rust admission mutations. Dart, Julia, PUC Lua, LuaJIT, recurring, and public rows remain pending."
-evidence_update_2026_08_15_dart_plan: "Behavior-free Dart audit INTER-MATCH-GAP-CAPTURE.4.0 proves named declarations/selectors/directive are raw invalid syntax, the four accessors are unknown helpers, and repeated LS currently precedes selection. It freezes .4.1-.4.5 across authored/static metadata, same-authority native state, reconstructed/descriptor/generated-plan carriers, independently analyzed emitted proof, and primary/nine-role admission. No Dart behavior or 3/6/56 rollout state moves."
+evidence: "INTER-MATCH-GAP-CAPTURE.1.1-.1.3 establish the executable neutral Unicode/empty/child/rollback/nested model, recurrence, and public no-overclaim. Perl .2, Rust .3, and Dart .4 are privately admitted through authored/static identity, same-authority native state, reconstructed/descriptor/generated carriers, independent emitted proof, existing-primary parity, and exact ordinary/canonical/rooted registration. Current governance is 4 complete + 5 pending / 57 semantic mutations plus ten Rust and ten Dart admission mutations. Behavior-free Julia .5.0 freezes .5.1-.5.5; Julia, PUC Lua, LuaJIT, recurring, and public rows remain pending."
+evidence_update_2026_08_15_julia_plan: "Julia audit INTER-MATCH-GAP-CAPTURE.5.0 proves numeric selectors compile, named declarations/selectors/directive are raw invalid syntax, the four accessors are unknown helpers, legacy move_pos has no execution effect, and repeated LS precedes selection. It freezes .5.1-.5.5 across authored/static metadata, same-authority native state, normalized reconstruction/descriptor/generated-plan carriers, independently loaded emitted proof, and primary/nine-role admission. No Julia behavior or 4/5/57 rollout state moves."
 reverify: "bash tools/check_inter_match_gap_capture_six_runtime.sh && prove -Iperl t/inter_match_gap_capture_perl_contract.t && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract"
 ---
 
@@ -37,18 +37,20 @@ reverify: "bash tools/check_inter_match_gap_capture_six_runtime.sh && prove -Ipe
 `tools/check_inter_match_gap_capture_contract.py`. `.1.2` now provides repository-rooted recurring/canonical
 routing and no-overclaim governance through `tools/check_inter_match_gap_capture_six_runtime.sh`. `.1.3`
 independently recomposes those committed inputs unchanged and closes neutral parent `.1`; Perl `.2` then completes
-authored, native-live, emitted/loaded, and private admission. Rust `.3.1-.3.5` then complete the equivalent private
-authored/native/reconstructed/generated/emitted/primary path. Behavior-free Dart `.4.0` now freezes the equivalent
-`.4.1-.4.5` dependency plan without implementation. The driver executes neutral, Perl, and Rust, then skips Dart,
-Julia, PUC Lua, and LuaJIT.
+authored, native-live, emitted/loaded, and private admission. Rust `.3.1-.3.5` and Dart `.4.1-.4.5` complete the
+equivalent private authored/native/reconstructed/generated/emitted/primary paths. Behavior-free Julia `.5.0`
+freezes `.5.1-.5.5` without implementation. The driver executes neutral, Perl, Rust, and Dart, then skips Julia,
+PUC Lua, and LuaJIT.
 
 The nine ordered rollout legs are neutral, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurring proof, and public
-no-drift. Neutral, private Perl, and private Rust are complete; runtime rows remain for `.4-.6`, and recurrence/public admission
-remains `.7`. The typed-source `lossless_gap_composition` row does not move until `.7` closes.
+no-drift. Neutral, private Perl, private Rust, and private Dart are complete; runtime rows remain for `.5-.6`, and
+recurrence/public admission remains `.7`. The typed-source `lossless_gap_composition` row does not move until `.7`
+closes.
 The neutral count locks are 8 positive and 10 negative authored fixtures, 3 sources, 8 private gap fields, 16
 main-machine transitions, 10 segmentation cases, 3 terminal routes, 7 transaction/recursion/return-channel rows,
 6 compatibility rows, 9 diagnostics, 9 rollout legs, and 50 semantic mutations. Recurring governance added five;
-Perl/Rust admission leaves 56 semantic mutations and adds ten exact Rust registration/role regression mutations.
+Perl/Rust admission produced 56 semantic mutations, and Dart admission appends the missing Dart regression as 57.
+Ten exact Rust and ten exact Dart registration/role regression mutations remain separate.
 
 ## Syntax and identity
 
@@ -105,12 +107,12 @@ AST mutation, diagnostics, output, external calls, registry effects, or host sta
 cursor-regression, repetition-progress, and recursive-progress diagnostics stay authoritative; the new contract
 adds only named-slot, directive, compatibility-conflict, and unavailable-context diagnostics.
 
-The Perl reference recognizes the named declaration/selector syntax and `@capture_gaps` directive, validates
-their static contract, exposes private descriptor/generated dependency provenance, and executes private native,
-emitted, and independently loaded gap state/lifecycle/accessors. Rust now carries the same contract through
-authored/static metadata, native/reconstructed/generated execution, descriptors, independently compiled emitted
-source, and the existing primary adapter. Both full consumers are admitted in ordinary CI and the rooted recurring
-route; no outward public admission has occurred.
-See ADR `0045`, `docs/knowledge/inter-match-gap-rust-implementation-plan.md`, and
-`docs/knowledge/inter-match-gap-dart-implementation-plan.md`, and `docs/tasks/INTER-MATCH-GAP-CAPTURE.md` for the
-complete fixtures, mutation classes, storage routes, carrier roles, and remaining implementation ownership.
+Perl, Rust, and Dart recognize the named declaration/selector syntax and `@capture_gaps`, validate the static
+contract, retain private descriptor/generated provenance, and execute native, reconstructed/generated, emitted,
+and primary roles through their existing recognition/source authorities. Their full consumers are admitted in
+ordinary CI and the rooted recurring route; no outward public admission has occurred. Julia remains at the audited
+absent boundary with `.5.1-.5.5` now dependency-frozen.
+See ADR `0045`, `docs/knowledge/inter-match-gap-rust-implementation-plan.md`,
+`docs/knowledge/inter-match-gap-dart-implementation-plan.md`,
+`docs/knowledge/inter-match-gap-julia-implementation-plan.md`, and `docs/tasks/INTER-MATCH-GAP-CAPTURE.md` for
+the complete fixtures, mutation classes, storage routes, carrier roles, and remaining implementation ownership.

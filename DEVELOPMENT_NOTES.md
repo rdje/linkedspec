@@ -10,6 +10,30 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-15 (`INTER-MATCH-GAP-CAPTURE.5.0` — behavior-free Julia gap plan): activation is clean atomic 239
+  `43ed1c8f`; the only pre-audit edit was the owning task-tree leaf, and no production/test behavior moves.
+- Process probes are decisive: numeric `Item[1]` parses/compiles; `name=/a/`, `Item[name]`, and `@capture_gaps`
+  remain raw invalid body syntax. `entry_slot`, `gap_span`, `gap_text`, and `gap_kind` parse as action calls and
+  fail through the existing structured unknown-helper envelope. Legacy `@move_pos` parses as a split marker but
+  is ignored by compilation/runtime. The primary adapter rejects the complete future source at compilation.
+- A repeated-OR trace runs enclosing `LS` before candidate selection. Preserve that order for unflagged rules;
+  capture-enabled rules alone preselect/install before `LS`, retain through target/`LE`, commit accepted post-`LE`
+  cursor before `IT`, and install successful tails before existing `LX`/`EX`/`E`.
+- Extend the existing private recognition invocation/token; do not widen detached `RecognitionFrameState` or add
+  a parallel cursor/stack. Token rollback owns mutable gap cursor/count/current state. Runtime registers remain
+  zero-based UTF-8 code units and cross the current immutable input `SourceAuthority` only at scalar projection.
+- `.5.1` owns logical source, Unicode-17 declarations, selector/directive/static/compiled provenance, diagnostics,
+  and a permanent dormant consumer. `.5.2` owns native state/accessors. `.5.3` owns normalized reconstruction,
+  compatible descriptor additions, and unchanged-v2 generated execution. `.5.4` owns one repository-routed
+  emitted host with ten value/two typed-error modules and exact storage 19→20. `.5.5` alone owns primary,
+  nine-role admission, Julia 5/4/58 promotion, registration, and parent closeout.
+- Focused baseline is duplicate slot 121, cursor 104, recognition 207, typed source 127, and source emitter 65 =
+  624 assertions, plus existing primary process conformance and storage 19 owners / 5 packages. Gap remains
+  neutral/Perl/Rust/Dart plus three skips at 4/5/57; outward and generated-format surfaces remain unchanged.
+- README pressure correctly rejected the first 663-line ADR projection against its 640-line cap. Compress the
+  adjacent Dart/Julia planning amendments into decision-sized pointers to their canonical Knowledge/task owners;
+  ADR `0045` returns to exact 640 lines and all nine doctrines pass without losing implementation detail.
+
 - 2026-08-15 (`INTER-MATCH-GAP-CAPTURE.4.5` — Dart primary/private admission): activation base is clean atomic
   238 at `6a554312`; no implementation, contract, checker, driver, or roadmap repair preceded task ownership.
 - Primary parity belongs inside the permanent final consumer and must reuse `runLinkedSpecDartPrimaryCli`; no

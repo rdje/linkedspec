@@ -518,13 +518,13 @@ The active baseline leaves storage and AST shape to action code. “Automatic”
 gap and rolling its boundary, not appending a mandatory result node.
 
 ADR `0045` adopts **inter-match gap capture** as the formal name and **lossless segmentation** as the
-broader model. `@capture_gaps` is the accepted neutral directive. The Perl reference now recognizes and
-statically validates it and privately executes both native-live and independently loaded generated gap capture.
-Runtime admission, other backends, and public exposure remain pending.
+broader model. `@capture_gaps` is the accepted neutral directive. Perl, Rust, and Dart now recognize and
+statically validate it and privately execute native, reconstructed/generated, emitted, and primary roles.
+Julia, both Lua ABIs, recurring/public completion, and public exposure remain pending.
 `INTER-MATCH-GAP-CAPTURE.1.0` froze its executable-neutral plan: exact prefix/interstitial/tail and empty
 spans, failure and rollback, recursion, typed source records, diagnostics, compatibility, routing, and rollout are
 specified before backend work begins. `.1.1` now makes that neutral JSON artifact and independent checker
-executable at 1 complete + 8 pending. Perl authored/static staging does not advance that runtime rollout.
+executable. Current private rollout is 4 complete + 5 pending with no outward admission.
 
 The broader manual `capture_*` and `mark_*` APIs remain useful. They do not redefine this original
 automatic repeated-action behavior.
@@ -549,11 +549,10 @@ Top::OR
 
 Horizontal whitespace around `=` is insignificant. Same-line `name=/regex/` at rule-paragraph level
 declares a stable rule-local slot rather than assigning a variable. Existing unindexed and numeric
-selectors remain compatibility forms. Perl and Rust implement and privately admit the declaration/selector
-syntax, directive metadata, and native plus generated `entry_slot()`/gap-accessor behavior. Dart now implements
-the authored/static/compiled layer and private native execution described below, but its reconstructed/generated,
-emitted, primary, and admission routes remain pending. No backend exposes these forms as a public cross-backend
-contract yet.
+selectors remain compatibility forms. Perl, Rust, and Dart privately admit the declaration/selector syntax,
+directive metadata, and native plus reconstructed/generated/emitted/primary `entry_slot()`/gap-accessor behavior.
+Julia's behavior-free plan is frozen, but its parser/runtime implementation remains pending. No backend exposes
+these forms as a public cross-backend contract yet.
 
 Brackets are the selector namespace. `Document[1]` means positional compatibility, so declaration reordering
 can change its target; `Document[section]` means stable identity and must survive reordering. An implementation
@@ -568,7 +567,7 @@ The implementation order is also explicit. `INTER-MATCH-GAP-CAPTURE.1-.7` owns n
 `@capture_gaps`, lifecycle and compatibility policy, six-runtime behavior, carriers, and public admission.
 Typed-source composition consumes that completed contract afterward; it does not define a second gap language.
 
-### Executable neutral contract — private Perl and Rust runtimes admitted
+### Executable neutral contract — private Perl, Rust, and Dart runtimes admitted
 
 The behavior-free contract now lives at `capability_conformance/inter_match_gap_capture_contract.json`, uses id
 `linkedspec-inter-match-gap-capture-v1`, and is checked independently by
@@ -576,23 +575,25 @@ The behavior-free contract now lives at `capability_conformance/inter_match_gap_
 The Perl reference implements authored/static metadata, private native-live behavior, and independently loaded
 generated parity. Admission `.2.4` runs that complete consumer in canonical CI and in the rooted recurring route,
 promotes only `perl_runtime`, and advances the checker to 56 mutations without outward public admission.
-Rust `.3.5` adds the exact primary-command role, admits the complete nine-role Rust consumer to ordinary and
-canonical execution, and runs it once after Perl in the recurring route. Only `rust_runtime` advances. The
-recurring driver executes neutral, Perl, and Rust exactly once each, then emits four ordered later-runtime skips:
+Rust `.3.5` and Dart `.4.5` add the exact primary-command role, admit their complete nine-role consumers to
+ordinary and canonical execution, and run once after Perl and Rust respectively in the rooted route. Only their
+private runtime rows advance. The recurring driver executes neutral, Perl, Rust, and Dart exactly once each, then
+emits three ordered later-runtime skips:
 
 ```bash
 bash tools/check_inter_match_gap_capture_six_runtime.sh
 ```
 
 Canonical local CI always runs the neutral checker and exposes the same governance route behind
-`LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1`. Ordinary CI and the opt-in route each execute both admitted consumers
-once; the latter additionally proves neutral-first Perl-then-Rust ordering and four explicit later-runtime skips.
+`LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1`. Ordinary CI and the opt-in route execute every admitted consumer once;
+the latter additionally proves neutral-first Perl-then-Rust-then-Dart ordering and three explicit later-runtime
+skips.
 
 The neutral artifact locks 8 positive and 10 negative authored fixtures, 3 source fixtures, 8 private gap fields,
 16 main-machine transitions, 10 segmentation cases, 3 terminal routes, 7 transaction/recursion/return-channel
-cases, 6 compatibility rows, 9 diagnostics, 9 rollout legs, and 50 semantic mutations. Governance adds six
-storage/topology/no-overclaim/admission mutations for 56 total: complete-to-pending regressions for both Perl and
-Rust are rejected.
+cases, 6 compatibility rows, 9 diagnostics, 9 rollout legs, and 50 semantic mutations. Recurring topology and
+public-no-overclaim governance raised that base to 55; runtime admission now rejects Perl, Rust, and Dart
+complete-to-pending regressions at 57 total. Ten Rust and ten Dart role/registration mutations are separate.
 
 ### Perl private live and generated implementation — exact private admission
 
@@ -810,6 +811,27 @@ the existing private command adapter. Ten reason-checked admission mutations rej
 missing or duplicate ordinary/canonical/recurring registration, premature later-runtime execution, and facade
 exposure. Rollout is 4 complete / 5 pending / 57 mutations, and generated plan v2 remains exactly
 `{label,family}`.
+
+### Julia behavior-free implementation plan — runtime still pending
+
+Julia `.5.0` confirms the current boundary before code: numeric selectors compile; named declarations/selectors
+and `@capture_gaps` are raw invalid body syntax; `entry_slot()` and the three gap accessors fail as structured
+unknown helpers; legacy `@move_pos` has no compiled/native effect; and repeated execution runs enclosing `LS`
+before candidate selection. The existing primary adapter rejects the complete future syntax at compilation.
+
+Five dependency-ordered leaves are frozen. `.5.1` owns logical spec identity, authored/static/compiled slot and
+selector provenance, directive diagnostics, and a mechanically dormant permanent consumer. `.5.2` extends only
+the existing private recognition invocation/token authority; detached `RecognitionFrameState` remains exactly
+cursor/boundary/marks. Capture-enabled rules alone preselect before `LS`, and the immutable input
+`SourceAuthority` projects Julia's UTF-8 code-unit registers to detached scalar spans. `.5.3` uses normalized
+`SpecFile` JSON as the sole carrier, adds separate compatible descriptor projections, and retains generated
+format 2 with exact `{label,family}` plan rows. `.5.4` independently loads ten value and two typed-error emitted
+modules from one repository-routed host, advancing only the exact Julia temporary-workspace inventory from 19 to
+20. `.5.5` alone reuses the primary adapter, admits nine roles exactly once, and advances Julia to 5/4/58.
+
+This planning leaf changes no Julia behavior, rollout, generated format, descriptor/reference legacy shape,
+facade/schema/semantic/MCP/capability/CLI/README surface, dependency, or toolchain. The exact implementation map is
+recorded in ADR `0045` and `docs/knowledge/inter-match-gap-julia-implementation-plan.md`.
 
 Named slot rules are exact:
 

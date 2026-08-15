@@ -10,6 +10,25 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-15 — INTER-MATCH-GAP-CAPTURE.5.0 — freeze Julia gap implementation plan
+
+- Activated task-tree-first from clean atomic 239 at `43ed1c8f`; changed no Julia production/test behavior,
+  runtime rollout, generated format, dependency/toolchain, or outward surface.
+- Exact probes prove numeric selectors compile; named declarations/selectors and `@capture_gaps` are raw invalid
+  body syntax; the four accessors are structured unknown helpers; legacy `@move_pos` has no native effect; and
+  repeated execution runs enclosing `LS` before selection.
+- Froze `.5.1-.5.5` across authored/static/compiled metadata plus dormancy, existing-recognition-authority native
+  state, normalized reconstruction/compatible descriptors/same-engine generated execution, independently loaded
+  emitted modules, and existing-primary exact nine-role admission.
+- Preserved detached `RecognitionFrameState` as cursor/boundary/marks, normalized `SpecFile` as carrier, immutable
+  input `SourceAuthority` as scalar-span bridge, and generated format 2 `{label,family}` rows. `.5.4` alone may
+  advance Julia storage from 19 to 20 exact temp owners; `.5.5` alone may promote Julia from 4/5/57 to 5/4/58.
+- Corrected ADR `0045` and two Knowledge cards that still described the pre-Dart boundary; added the Julia plan
+  card and synchronized task, roadmap, architecture, live status, Toolbox, and sole-facing mdBook.
+- Focused signoff passes Julia 624, primary, storage 19/5, neutral/rooted 4/5/57, recognition 137/246/58,
+  duplicate slot 7/0/59, typed source 9/5/114, book 79/14,856, Knowledge 838/7,070, bounded histories, exact
+  640-line ADR pressure, diff checks, and all nine doctrines. ADR `0073` requires no canonical run for `.5.0`.
+
 ## 2026-08-15 — INTER-MATCH-GAP-CAPTURE.4.5 — admit Dart inter-match gap capture
 
 - Activated task-tree-first from clean atomic 238 at `6a554312`. Exact primary RED stopped only because
