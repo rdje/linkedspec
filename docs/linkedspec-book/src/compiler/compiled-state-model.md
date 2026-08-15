@@ -103,6 +103,13 @@ function body as an ActionIR value block, returns the final expression or local 
 returned values into compatible receiver chains, discards standalone call results, and diagnoses direct or mutual
 recursion.
 
+Dart's private inter-match-gap metadata extends that internal rule state without widening the outward descriptor.
+Each authored regex has a `regex_slots` row containing `regex_index`, nullable `slot_id`, logical `source_id`, and
+physical `line`; an authored directive has one nullable `capture_gaps` record. Action edges retain selector kind,
+authored selector, target rule, resolved child index, nullable target slot id, and source provenance. Legacy
+`dependency_refs` stay `{label,idx}`, existing descriptor `resolved_edges` stay unchanged, and generated plan v2
+stays `{label,family}`. Descriptor additions and reconstructed/generated runtime proof remain separately owned.
+
 The Julia backend now implements the same narrow staged provider before compiled state is built. Its public path is:
 
 ```julia

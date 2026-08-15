@@ -4,21 +4,20 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `2800e7c3` — clean atomic-232 base for behavior-free Dart implementation/admission plan
-  `INTER-MATCH-GAP-CAPTURE.4.0`; no push.
-- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.4.0 - freeze Dart gap implementation plan`; signoff-complete
-  for intended atomic 233/300 from activation commit `2800e7c3`; no Dart behavior or rollout movement.
-- active_work_unit: `INTER-MATCH-GAP-CAPTURE.4.0` — completed exact Dart absence/mechanism/storage audit and froze
-  dependency-ordered `.4.1-.4.5`; commit pending.
-- next_action: commit/brief-clear/clean atomic 233, then activate authored/static Dart leaf `.4.1` task-tree-first
-  from that new clean boundary.
-- in_flight_uncommitted: behavior-free Dart plan, corrected 22-owner storage Knowledge fact, and synchronized
-  task/roadmap/book/Knowledge/live docs await final signoff and atomic 233 commit; no background job remains.
-- blockers: none. Numeric Dart syntax is healthy; named declaration/selector/directive syntax is raw-invalid and
-  the four accessors are unknown helpers. Focused 123 and complete Dart format 101/0, analysis, 400, storage 22/47,
-  CLI 66x2, corpus 105, Knowledge 836/7,036, doctrines, RAM 59%, and Phase 0 1,031/1,031 in 771 seconds pass with
-  canonical exit 0. Gap stays 3/6/56 plus ten Rust admission mutations; recognition 137/246/58, public helpers
-  122, typed source 9/5/114, generated plan v2, outward surfaces, and later rows remain unchanged.
+- activation_commit: `e40de948` — clean atomic-233 base for Dart authored/static/compiled metadata leaf
+  `INTER-MATCH-GAP-CAPTURE.4.1`; no push.
+- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.4.1 - add Dart authored gap metadata`; signoff-complete for
+  intended atomic 234/300 from clean `e40de948`, with the final consumer still dormant and rollout unchanged.
+- active_work_unit: none after atomic 234; the director requires a task-tree-owned, documented, mechanically
+  enforced tiered verification policy before the next feature slice.
+- next_action: commit/brief-clear/prove clean atomic 234, then create and activate the verification-policy leaf
+  task-tree-first; ordinary commits must use focused proportional checks, while full canonical CI is reserved for
+  batch/push and explicitly designated admission or milestone boundaries.
+- in_flight_uncommitted: none after intended atomic 234; no background job.
+- blockers: none. Explicit dormant Dart metadata 1/1, complete Dart 400 plus one intended skip, storage 22/47,
+  book 79/14,788 KiB, Knowledge 836/7,039, all doctrines, and canonical Phase 0 1,031/1,031 pass. Native gap state/accessors,
+  reconstruction/descriptor/generated execution, emitted/primary proof, rollout, generated plan v2, outward
+  surfaces, recognition 137/246/58, public helpers 122, and typed source 9/5/114 remain unchanged or pending.
 - session_refresh_cadence: proactively recommend `/clear` after at most three completed commits, sooner after a
   large/debug-heavy slice or context compaction, and only at a committed clean handoff boundary.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -49,8 +48,10 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, 9 allowed/11 rejected effects, invocation-framed marks, and cursor-only v1 progress.
   Exact recurrence/public composition is current at rollout 9/9 and 58 mutations; public 3/26/45; guide 1/14/18.
-- current_future_direction: gap stays 3/6/56 with private Perl and Rust admitted. Dart `.4.0` freezes `.4.1-.4.5`
-  for intended atomic 233 from `2800e7c3`; authored/static `.4.1` is next only after commit/clean. Dart, Julia,
-  both Lua ABIs, and both public rows remain pending. Brackets select; dot binds; `.14.5.1` waits for `.7`.
-- latest_bootstrap_read: 2026-08-15 — complete roadmap/codebase/mdBook and continuity/tooling review; `.4.0` is
-  signoff-complete behavior-free from clean atomic 232 at `2800e7c3` and awaits atomic 233; push lock is 300.
+- current_future_direction: gap stays 3/6/56 with private Perl and Rust admitted. Dart `.4.1` has exact
+  authored/static/compiled metadata and remains dormant until `.4.5`; the director-requested tiered-verification
+  policy must land cleanly before private native state `.4.2`. Julia, both Lua ABIs, and both public rows remain
+  pending; `.14.5.1` waits for `.7`.
+- latest_bootstrap_read: 2026-08-15 — complete roadmap/codebase/mdBook and continuity/tooling review; `.4.1` is
+  signoff-complete from clean atomic 233 at `e40de948`; tiered-verification policy is the required next owner;
+  push lock is 300.

@@ -10,6 +10,32 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-15 — INTER-MATCH-GAP-CAPTURE.4.1 — add Dart authored gap metadata
+
+- Activated task-tree-first from clean atomic-233 commit `e40de948`. The final-path Dart consumer and ten
+  reason-checked dormancy mutations produced the exact checker-first RED: only the absent `parseSpec(sourceId:)`
+  and `SpecFile.sourceId` carriers prevented the explicitly unskipped contract from loading.
+- Added spacing-insensitive named regex declarations beside anonymous declarations in one authored order,
+  explicit unindexed/numeric/named selector provenance, pinned Unicode-17 `XID_Continue` identity with the
+  ASCII-digit-only reservation, and a dedicated rule-level `@capture_gaps` AST record.
+- Added exact source-aware static diagnostics for invalid/duplicate names, unknown/out-of-range/malformed
+  selectors, duplicate directives, ineligible rule modes/ownership, and legacy anonymous-marker conflicts.
+  Logical source identity now survives ordinary, staged, loaded, and `SpecFile` JSON paths with legacy `inline`
+  defaults.
+- Compiled rules now retain ordered regex-slot rows and optional directive evidence; compiled action edges retain
+  the exact five-field selector resolution plus source provenance. Existing dependency refs, descriptors,
+  `resolved_edges`, generated plan v2, and anonymous/numeric/unindexed behavior remain compatible.
+- Staged `dart/test/inter_match_gap_capture_contract_test.dart` at its final path with a library-level `.4.5`
+  skip. Ordinary discovery remains skipped; explicit execution proves the complete authored/static/compiled
+  group, while canonical and recurring routes remain absent and the facade remains unchanged.
+- This leaf adds no native gap state, accessor, lifecycle, reconstruction/descriptor/generated projection,
+  emitted or primary route, rollout promotion, or outward claim. Governance remains 3 complete / 6 pending / 56
+  semantic mutations plus ten Rust admission and ten Dart dormancy mutations.
+- Signoff passes the explicit dormant consumer 1/1; complete Dart format 102/0, analysis, 400 plus one intended
+  skip, storage 22/47, CLI 66x2, and corpus 105; recognition 137/246/58, typed source 9/5/114, duplicate slot
+  7/0/59; book 79/14,788 KiB; Knowledge 836/7,039; and all doctrines. The authorized canonical run passes
+  containment/relocation, RAM 56%, Phase 0 1,031/1,031 in 745 seconds, exact rooted routing, and exit 0.
+
 ## 2026-08-15 — INTER-MATCH-GAP-CAPTURE.4.0 — freeze Dart gap implementation plan
 
 - Activated task-tree-first from clean atomic-232 commit `2800e7c3`; changed no Dart implementation before the

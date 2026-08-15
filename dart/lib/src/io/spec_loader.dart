@@ -331,6 +331,7 @@ SpecFile _parseLoadedSpec(
   try {
     return parseSpecWithStagedUserFunctionDefinitions(
       loaded.sourceText,
+      sourceId: request.requested,
       trace: trace,
     );
   } on Object catch (error) {

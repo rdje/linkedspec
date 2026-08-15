@@ -468,6 +468,7 @@ String emitDartSourceV2(CompiledSpec compiled, String sourceIdentity) {
 
   try {
     final normalizedSpec = SpecFile(
+      sourceId: sourceIdentity,
       functions: [
         for (final function in compiled.functions) function.definition,
       ],

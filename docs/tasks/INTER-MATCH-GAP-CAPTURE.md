@@ -906,8 +906,8 @@ orchestration or to raw Perl cursor arithmetic.
   Commit: `INTER-MATCH-GAP-CAPTURE.3.5 - admit Rust inter-match gap capture` (intended atomic 232/300)
 
 - ID: `INTER-MATCH-GAP-CAPTURE.4`
-  Status: `active` (2026-08-15; behavior-free implementation/admission plan `.4.0` is signoff-complete from clean
-    atomic-232 commit `2800e7c3` for intended atomic 233)
+  Status: `active` (2026-08-15; behavior-free implementation/admission plan `.4.0` landed cleanly as atomic 233
+    at `e40de948`; authored/static/compiled metadata leaf `.4.1` is active from that exact boundary)
   Goal: Implement exact Dart native/reconstructed/generated/primary parity.
   Children: `.4.0`, `.4.1`, `.4.2`, `.4.3`, `.4.4`, `.4.5`
   Acceptance: Dart passes the neutral gap corpus and every admitted execution role.
@@ -1042,11 +1042,64 @@ orchestration or to raw Perl cursor arithmetic.
   Commit: `INTER-MATCH-GAP-CAPTURE.4.0 - freeze Dart gap implementation plan` (intended atomic 233/300)
 
 - ID: `INTER-MATCH-GAP-CAPTURE.4.1`
-  Status: `pending`
+  Status: `done; signoff-complete` (2026-08-15; task-tree-first from clean atomic-233 commit `e40de948`; no
+    implementation edit preceded this activation)
   Goal: Add exact Dart authored/static/compiled gap metadata and a mechanically dormant final consumer.
   Depends on: `.4.0`
-  Verification: `pending`
-  Commit: `INTER-MATCH-GAP-CAPTURE.4.1 - add Dart authored gap metadata`
+  Acceptance: prove clean activation and retrieve the frozen Dart plan plus exact neutral/Perl/Rust/Unicode/
+    duplicate-slot/source-identity authorities before code; add spacing-insensitive named declarations, one
+    authored named/anonymous slot sequence, explicit unindexed/numeric/named selectors, dedicated directive
+    evidence, backward-compatible logical spec-source identity, source-aware static diagnostics, compiled slot
+    rows, capture eligibility, and five-field resolved-edge provenance; add the final Dart consumer at its exact
+    contract path with a library-level `.4.5` skip and reason-checked dormancy governance; prove checker-first RED
+    before implementation and focused GREEN afterward; change no private live gap state/accessor/lifecycle,
+    reconstructed descriptor/generated-plan behavior, emitted/primary route, rollout 3/6/56, generated-plan v2,
+    facade/schema/semantic/MCP/CLI/README/public surface, or later runtime; synchronize durable projections and
+    pass focused Dart/neutral/recognition/typed-source/duplicate-slot/storage/book/Knowledge/doctrine/canonical
+    signoff before commit/brief-clear/clean handoff to `.4.2`.
+
+  ### Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / OWNERSHIP** — Proved committed `e40de948`, empty tracked/untracked status, zero-byte
+    brief, passing memory architecture/task metadata, and activated only this task node before implementation.
+  - [x] **RETRIEVE AUTHORITY** — Query Knowledge first and read the Dart plan, neutral artifact/checker, admitted
+    Perl/Rust metadata precedents, pinned Unicode-17 identity, duplicate-slot, source-identity, and exact current
+    Dart tests before implementation.
+  - [x] **EXACT RED** — Add the final-path library-skipped consumer and dormancy governance first; prove only the
+    expected absent named-slot/directive/provenance assertions fail when the owned group is run explicitly.
+  - [x] **AUTHORED / STATIC / COMPILED GREEN** — Implement exact syntax, identity, validation, metadata, source
+    defaults, and five-field provenance through one typed Dart AST/compiler path.
+  - [x] **COMPATIBILITY / NO OVERCLAIM** — Preserve anonymous/numeric/unindexed behavior, normalized JSON
+    compatibility, generated plan v2, ordinary skipped discovery, every outward surface, and rollout 3/6/56.
+  - [x] **LOCKSTEP SIGNOFF** — Align task/roadmap/live/book/Knowledge projections and pass focused, complete Dart,
+    storage, rendered-book, Knowledge, doctrine, and canonical proof before atomic landing.
+
+  ### Implemented Metadata Boundary
+
+  - Checker-first staging created the exact final consumer with a library-level `.4.5` skip and ten independently
+    reason-checked Dart dormancy mutations. Explicit RED failed only on absent `parseSpec(sourceId:)` and
+    `SpecFile.sourceId`; the neutral checker otherwise remained 3/6/56 plus ten Rust admission mutations.
+  - `RegexBodyElementKind` now carries nullable `slotId`; `EdgeTarget` carries exact selector authorship; and a
+    dedicated directive kind preserves `@capture_gaps`. Named/anonymous declarations share authored order and
+    reuse the generated pinned Unicode-17 scanner, with ASCII-digit-only names reserved/rejected.
+  - `SpecFile.sourceId` defaults to `inline` and survives ordinary parsing, both staged layers, logical loaded
+    requests, JSON, validation, and compilation. Static diagnostics carry exact source/line and contract context.
+  - Compiled rules carry ordered slot rows plus nullable directive metadata; action edges carry source identity
+    and five-field resolved provenance. Legacy dependency refs and descriptor action/resolved-edge projections
+    remain unchanged; generated-plan v2 remains `{label,family}`.
+  - Explicit dormant proof passes 1/1; strict Dart analysis and ordinary package discovery pass 400 plus the one
+    intended skip. Native state/accessors, reconstructed/generated/descriptor execution, emitted/primary routes,
+    rollout, facade, README, and later backends did not move.
+  Verification: Checker-first RED isolated the absent `parseSpec(sourceId:)`/`SpecFile.sourceId` carrier; the
+    final dormant consumer then passes 1/1. Complete Dart proof passes format 102/0, strict analysis, package 400
+    plus one intended skip, storage 22 owners / 47 packages, CLI 66/66 twice, corpus 105/105, and its local-gate
+    marker. Neutral governance passes 3/6/56 plus ten Rust admission and ten Dart dormancy mutations;
+    recognition remains 137/246/58, typed source 9/5/114, and duplicate-slot 7/0/59. The book renders 79 files /
+    14,788 KiB; Knowledge is 836 facts / 7,039 keys; all eight doctrines pass. The sandboxed canonical precursor
+    stops solely at outer nested-`sandbox-exec` status 71; the unchanged authorized run passes six-family
+    containment, all-five-anchor relocation, CLI 66/66 twice, RAM 56%, Phase 0 1,031/1,031 in 745 seconds, the
+    rooted neutral/Perl-124/Rust-1/four-skip route, `[ci] local CI gate passed`, and exit 0.
+  Commit: `INTER-MATCH-GAP-CAPTURE.4.1 - add Dart authored gap metadata` (intended atomic 234/300)
 
 - ID: `INTER-MATCH-GAP-CAPTURE.4.2`
   Status: `pending`
@@ -1119,7 +1172,8 @@ orchestration or to raw Perl cursor arithmetic.
 | 15 | `INTER-MATCH-GAP-CAPTURE.3.4` | `done; landed at c3326f6d` | Fifteen independently compiled direct/traced emitted modules, storage, lockstep, and canonical proof landed as atomic 231. |
 | 16 | `INTER-MATCH-GAP-CAPTURE.3.5` | `done; landed at 2800e7c3` | Exact primary parity and private Rust admission landed at 3/6/56 plus ten Rust admission mutations as atomic 232, closing parent `.3`. |
 | 17 | `INTER-MATCH-GAP-CAPTURE.4.0` | `done; signoff-complete from clean 2800e7c3` | Exact Dart seams and the behavior-free `.4.1-.4.5` implementation/admission plan are frozen for intended atomic 233 without behavior or rollout movement. |
-| 18 | `INTER-MATCH-GAP-CAPTURE.4.1` | `pending; next after atomic 233` | Add authored/static/compiled Dart provenance and stage the mechanically dormant final consumer. |
+| 18 | `INTER-MATCH-GAP-CAPTURE.4.1` | `done; signoff-complete from clean e40de948` | Authored/static/compiled Dart provenance and the mechanically dormant final consumer are exact for intended atomic 234. |
+| 19 | `INTER-MATCH-GAP-CAPTURE.4.2` | `pending; next gap leaf after the director-requested verification-policy slice` | Add private native Dart gap state only after the separately owned workflow-policy pivot lands cleanly. |
 
 ## Decisions
 
@@ -1433,6 +1487,7 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-08-15` | `INTER-MATCH-GAP-CAPTURE.4.1` | Clean `e40de948` activation; checker-first dormant RED/GREEN; authored parser/AST/static/compiler/source-identity proof; complete Dart/storage; neutral, recognition, typed-source, and duplicate-slot matrices; rendered mdBook; Knowledge Map; all eight doctrines; authorized canonical local CI with opt-in gap route | Pass: the final dormant consumer is 1/1 while ordinary Dart remains 400 plus one intended skip. Complete Dart is format 102/0, strict analysis, storage 22 owners / 47 packages, CLI 66/66 twice, and corpus 105/105. Gap remains 3/6/56 plus ten Rust admission and ten Dart dormancy mutations; recognition 137/246/58, typed source 9/5/114, and duplicate-slot 7/0/59 remain unchanged. The book is 79/14,788 KiB, Knowledge is 836/7,039, and all eight doctrines pass. The sandboxed precursor stops solely at outer nested-`sandbox-exec` status 71; the unchanged authorized run passes containment/relocation, CLI 66/66 twice, RAM 56%, Phase 0 1,031/1,031 in 745 seconds, neutral/Perl-124/Rust-1/four-skip routing, `[ci] local CI gate passed`, and exit 0. |
 | `2026-08-15` | `INTER-MATCH-GAP-CAPTURE.4.0` | Clean `2800e7c3` activation; Knowledge-first Dart parser/compiler/runtime/carrier/emitter/primary audit; repository-routed authored/accessor/lifecycle/primary probes; neutral and rooted gap governance; focused and complete Dart proof; storage; rendered mdBook; Knowledge Map; all eight doctrines; authorized canonical local CI with opt-in gap route | Pass: exact absence is localized to unimplemented named declaration/selector/directive syntax and four accessors; numeric syntax and the existing primary path remain healthy. The dependency-complete `.4.1-.4.5` plan changes no behavior or rollout. Focused Dart is 123/123; complete Dart is format 101/0, strict analysis, package 400/400, storage 22 owners / 47 packages, CLI 66/66 twice, and corpus 105/105. Gap remains 3/6/56 plus ten Rust admission mutations; the rooted route runs neutral, Perl 124, Rust 1/1, then four skips. Rendered book, Knowledge 836/7,036, and all eight doctrines pass. The sandboxed precursor stops solely at outer nested-`sandbox-exec` status 71; the unchanged authorized run passes six-family containment, all-five-anchor relocation, CLI 66/66 twice, RAM 59%, Phase 0 1,031/1,031 in 771 seconds, the rooted gap route, `[ci] local CI gate passed`, and exit 0. |
 | `2026-08-15` | `INTER-MATCH-GAP-CAPTURE.3.5` | Clean `c3326f6d` activation; exact primary/admission RED/GREEN; nine-role once-only consumer; ordinary/canonical/rooted registration; runtime, recognition, recursion, cursor, source-emitter, duplicate-slot, typed-source and neutral ledgers; 17-owner storage; rendered mdBook; Knowledge Map; all eight doctrines; authorized canonical local CI with opt-in gap route | Pass: the existing primary adapter returns exact item/gap pairs for mixed separators; only Rust advances to gap 3/6/56 plus ten admission mutations. Rust admission is 1/1 with zero ignored tests; runtime is 170/170, recognition 12/12, recursion 7/7, and the rooted route runs neutral, Perl 124, Rust 1/1, then four skips. Book is 79/14,732 KiB and Knowledge 835/7,020. The sandboxed precursor stops solely at outer nested-`sandbox-exec` status 71; the unchanged authorized run passes containment/relocation, CLI 66/66 twice, RAM 73%, Phase 0 1,031/1,031, `[ci] local CI gate passed`, and exit 0. Generated plan v2 and every outward/later-runtime row remain unchanged or pending; parent `.3` closes. |
 | `2026-08-14` | `INTER-MATCH-GAP-CAPTURE.3.4` | Clean `9e6ade98` activation; exact ignored-consumer emitted-owner RED/GREEN; fifteen independently compiled direct/traced modules; runtime, recognition, recursion, cursor, source-emitter, and duplicate-slot compatibility; neutral checker and rooted route; project-data storage; rendered mdBook; Knowledge Map; all eight doctrines; canonical local CI with opt-in gap route | Pass: thirteen value and two typed-error modules prove emitted mixed separators, Unicode/empty spans, falsey values, lifecycle, child cursors, nesting, rollback, tails, minimum failure, direct entry, legacy behavior, and exact generated trace identity. Ordinary discovery remains 0/1 ignored; gap remains 2/7/56 plus ten Rust dormancy mutations; generated plan v2, emitter, primary/admission, and outward surfaces remain unchanged. Focused proof is 1/1 in 32.82 seconds; runtime 170/170, recognition 12/12, recursion 7/7, cursor 1/1, emitter 6/6, duplicate slot 1/1, the 17-owner storage oracle, rendered book 79/14,724 KiB, Knowledge 835/7,019, and all doctrines pass. The sandboxed canonical run stopped only at outer nested-`sandbox-exec` status 71; the unchanged authorized run passes containment/relocation, CLI 66/66 twice, RAM 60%, Phase 0 1,031/1,031 in 780 seconds, exact neutral-plus-Perl routing with five skips, `[ci] local CI gate passed`, and exit 0. |
@@ -1454,6 +1509,7 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `INTER-MATCH-GAP-CAPTURE.4.1` | `INTER-MATCH-GAP-CAPTURE.4.1 - add Dart authored gap metadata` | Signoff-complete authored/static/compiled Dart metadata for intended atomic 234/300 from `e40de948`; final consumer remains dormant and rollout unchanged; no push. |
 | `INTER-MATCH-GAP-CAPTURE.4.0` | `INTER-MATCH-GAP-CAPTURE.4.0 - freeze Dart gap implementation plan` | Signoff-complete behavior-free Dart freeze for intended atomic 233/300 from `2800e7c3`; no push. |
 | `INTER-MATCH-GAP-CAPTURE.3.5` | `2800e7c3` — `INTER-MATCH-GAP-CAPTURE.3.5 - admit Rust inter-match gap capture` | Rust admission and parent `.3` closeout landed cleanly as atomic 232/300; no push. |
 | `INTER-MATCH-GAP-CAPTURE.3.4` | `c3326f6d` — `INTER-MATCH-GAP-CAPTURE.3.4 - prove Rust emitted gap execution` | Emitted proof landed cleanly as atomic 231/300; the consumer remains ignored and Rust admission stays `.3.5`; no push. |
@@ -1472,6 +1528,18 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
 
 ## Changelog
 
+- `2026-08-15`: Implemented `.4.1` Dart authored/static/compiled metadata from clean `e40de948`. The exact
+  final-path consumer remains library-skipped until `.4.5`; ten Dart dormancy mutations join unchanged 3/6/56
+  governance plus ten Rust admission mutations. Pinned-Unicode named slots, selector authorship, logical source
+  identity, static diagnostics, directive eligibility, compiled slot/directive rows, and five-field edge
+  provenance are GREEN. Native gap state, descriptor/generated execution, emitted/primary proof, rollout, and
+  every outward surface remain separately owned by `.4.2-.4.5`. Signoff is complete at dormant 1/1, Dart 400
+  plus one skip, book 79/14,788 KiB, Knowledge 836/7,039, all doctrines, Phase 0 1,031/1,031 in 745 seconds, and
+  canonical exit 0 for intended atomic 234.
+- `2026-08-15`: Landed behavior-free `.4.0` cleanly as atomic 233 at `e40de948`, cleared the commit brief, proved
+  memory/task metadata and an empty tree, and activated authored/static/compiled Dart leaf `.4.1` task-tree-first
+  from that exact boundary. Runtime state, reconstructed/generated execution, emitted proof, primary/admission,
+  and every outward surface remain separately owned by `.4.2-.4.5`.
 - `2026-08-15`: Completed behavior-free Dart planning `.4.0` from clean `2800e7c3`. Exact source and runtime
   probes, focused 123/123, complete Dart format 101/0, strict analysis, package 400/400, storage 22/47, CLI 66x2,
   corpus 105/105, rendered book, Knowledge 836/7,036, and all eight doctrines pass. The sandboxed canonical

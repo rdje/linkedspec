@@ -15,6 +15,7 @@ final class UserFunctionDefinitionProjection {
 SpecFile parseSpecWithUserFunctionDefinitionAsts(
   String source,
   Iterable<Object?> definitionNodes, {
+  String sourceId = 'inline',
   LinkedSpecTraceEmitter? trace,
 }) {
   final traceScope = trace?.enterScope(
@@ -30,7 +31,11 @@ SpecFile parseSpecWithUserFunctionDefinitionAsts(
     );
     final SpecFile ruleSpec;
     try {
-      ruleSpec = parseSpec(projection.strippedSource, trace: trace);
+      ruleSpec = parseSpec(
+        projection.strippedSource,
+        sourceId: sourceId,
+        trace: trace,
+      );
     } on SpecParseException catch (error) {
       throw SpecParseException(
         line: error.line,
@@ -39,6 +44,7 @@ SpecFile parseSpecWithUserFunctionDefinitionAsts(
       );
     }
     final spec = SpecFile(
+      sourceId: sourceId,
       functions: projection.functions,
       rules: ruleSpec.rules,
     );

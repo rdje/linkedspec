@@ -188,6 +188,9 @@ CompiledSpec compileSpec(
     );
     final definitionOrder = <String>[];
     final rulesByLabel = <String, CompiledRule>{};
+    final sourceRulesByLabel = <String, Rule>{
+      for (final rule in spec.rules) rule.header.label: rule,
+    };
     final redefinedRuleLabels = <String>[];
     final redefinedSeen = <String>{};
 
@@ -197,7 +200,12 @@ CompiledSpec compileSpec(
       if (rulesByLabel.containsKey(label) && redefinedSeen.add(label)) {
         redefinedRuleLabels.add(label);
       }
-      rulesByLabel[label] = _compileRule(rule, functionRegistry);
+      rulesByLabel[label] = _compileRule(
+        rule,
+        functionRegistry,
+        sourceId: spec.sourceId,
+        sourceRulesByLabel: sourceRulesByLabel,
+      );
       trace?.traceDecision(
         'dart_compiler:compile_spec:rule',
         true,
@@ -640,12 +648,54 @@ void _validateRecursiveObservationPolicy(CompiledSpec compiled) {
   }
 }
 
+final class CompiledRegexSlotMetadata {
+  const CompiledRegexSlotMetadata({
+    required this.regexIndex,
+    required this.slotId,
+    required this.sourceId,
+    required this.line,
+  });
+
+  final int regexIndex;
+  final String? slotId;
+  final String sourceId;
+  final int line;
+
+  JsonObject toJson() => {
+    'regex_index': regexIndex,
+    'slot_id': slotId,
+    'source_id': sourceId,
+    'line': line,
+  };
+}
+
+final class CompiledCaptureGapsMetadata {
+  const CompiledCaptureGapsMetadata({
+    required this.directive,
+    required this.sourceId,
+    required this.line,
+  });
+
+  final String directive;
+  final String sourceId;
+  final int line;
+
+  JsonObject toJson() => {
+    'enabled': true,
+    'directive': directive,
+    'source_id': sourceId,
+    'line': line,
+  };
+}
+
 final class CompiledRule {
   const CompiledRule({
     required this.label,
     required this.header,
     required this.modeMetadata,
     required this.regexPatterns,
+    this.regexSlots = const [],
+    this.captureGaps,
     required this.dependencyRefs,
     required this.actionEdges,
     required this.blindEdges,
@@ -658,6 +708,8 @@ final class CompiledRule {
   final RuleHeader header;
   final CompiledRuleModeMetadata modeMetadata;
   final List<String> regexPatterns;
+  final List<CompiledRegexSlotMetadata> regexSlots;
+  final CompiledCaptureGapsMetadata? captureGaps;
   final List<DependencyRef> dependencyRefs;
   final List<CompiledActionEdge> actionEdges;
   final List<CompiledBlindEdge> blindEdges;
@@ -674,6 +726,8 @@ final class CompiledRule {
       header: header,
       modeMetadata: modeMetadata,
       regexPatterns: regexPatterns ?? this.regexPatterns,
+      regexSlots: regexSlots,
+      captureGaps: captureGaps,
       dependencyRefs: dependencyRefs,
       actionEdges: actionEdges ?? this.actionEdges,
       blindEdges: blindEdges,
@@ -699,6 +753,8 @@ final class CompiledRule {
       'label': label,
       'header': header.toJson(),
       're': regexPatterns,
+      'regex_slots': [for (final slot in regexSlots) slot.toJson()],
+      'capture_gaps': captureGaps?.toJson(),
       'dependency_refs': [for (final ref in dependencyRefs) ref.toJson()],
       'mode_metadata': modeMetadata.toJson(),
       'action_edges': [for (final edge in actionEdges) edge.toJson()],
@@ -722,7 +778,7 @@ final class CompiledRule {
       },
       're': regexPatterns,
       'dependency_refs': [for (final ref in dependencyRefs) ref.toJson()],
-      'action_edges': [for (final edge in actionEdges) edge.toJson()],
+      'action_edges': [for (final edge in actionEdges) edge.toDescriptorJson()],
       'blind_edges': [for (final edge in blindEdges) edge.toJson()],
       'lifecycle_action_payloads': [
         for (final payload in lifecycleActionPayloads) payload.toJson(),
@@ -837,6 +893,10 @@ final class CompiledActionEdge {
     required this.childRegexIndex,
     required this.hasParentRegex,
     required this.fluentChain,
+    this.selectorKind = 'unindexed',
+    this.authoredSelector,
+    this.targetSlotId,
+    this.sourceId = 'inline',
     this.code,
     this.actionPayload,
   });
@@ -847,6 +907,10 @@ final class CompiledActionEdge {
   final int regexIndex;
   final int childRegexIndex;
   final bool hasParentRegex;
+  final String selectorKind;
+  final Object? authoredSelector;
+  final String? targetSlotId;
+  final String sourceId;
   final String? code;
   final List<FluentCall> fluentChain;
   final CompiledActionPayload? actionPayload;
@@ -859,6 +923,10 @@ final class CompiledActionEdge {
       regexIndex: regexIndex ?? this.regexIndex,
       childRegexIndex: childRegexIndex,
       hasParentRegex: hasParentRegex,
+      selectorKind: selectorKind,
+      authoredSelector: authoredSelector,
+      targetSlotId: targetSlotId,
+      sourceId: sourceId,
       code: code,
       fluentChain: fluentChain,
       actionPayload: actionPayload,
@@ -866,6 +934,25 @@ final class CompiledActionEdge {
   }
 
   JsonObject toJson() {
+    return {
+      'line': line,
+      'source': source,
+      'targets': [for (final target in targets) target.toJson()],
+      'regex_index': regexIndex,
+      'child_regex_index': childRegexIndex,
+      'selector_kind': selectorKind,
+      'authored_selector': authoredSelector,
+      'target_rule': targets.single.label,
+      'target_slot_id': targetSlotId,
+      'source_id': sourceId,
+      'has_parent_regex': hasParentRegex,
+      if (code != null) 'code': code,
+      'fluent_chain': [for (final call in fluentChain) call.toJson()],
+      if (actionPayload != null) 'action_payload': actionPayload!.toJson(),
+    };
+  }
+
+  JsonObject toDescriptorJson() {
     return {
       'line': line,
       'source': source,
@@ -1040,20 +1127,35 @@ String? _descriptorFluentText(List<FluentCall> chain) {
       .join('.');
 }
 
-CompiledRule _compileRule(Rule rule, UserFunctionRegistry functionRegistry) {
+CompiledRule _compileRule(
+  Rule rule,
+  UserFunctionRegistry functionRegistry, {
+  required String sourceId,
+  required Map<String, Rule> sourceRulesByLabel,
+}) {
   final regexPatterns = <String>[];
+  final regexSlots = <CompiledRegexSlotMetadata>[];
   final dependencyRefs = <DependencyRef>[];
   final actionEdges = <CompiledActionEdge>[];
   final blindEdges = <CompiledBlindEdge>[];
   final lifecycleActionPayloads = <CompiledActionPayload>[];
   final plainActionPayloads = <CompiledActionPayload>[];
+  CompiledCaptureGapsMetadata? captureGaps;
   var currentRegexIndex = 0;
   int? lastRegexLine;
 
   for (final element in rule.body) {
     switch (element.kind) {
-      case RegexBodyElementKind(:final pattern):
+      case RegexBodyElementKind(:final pattern, :final slotId):
         regexPatterns.add(pattern);
+        regexSlots.add(
+          CompiledRegexSlotMetadata(
+            regexIndex: currentRegexIndex,
+            slotId: slotId,
+            sourceId: sourceId,
+            line: element.line,
+          ),
+        );
         currentRegexIndex += 1;
         lastRegexLine = element.line;
       case ActionEdgeBodyElementKind(
@@ -1072,7 +1174,14 @@ CompiledRule _compileRule(Rule rule, UserFunctionRegistry functionRegistry) {
           functionRegistry: functionRegistry,
         );
         for (final target in targets) {
-          final ref = DependencyRef(label: target.label, index: target.index);
+          final resolvedTarget = _resolveAuthoredTarget(
+            target,
+            sourceRulesByLabel,
+          );
+          final ref = DependencyRef(
+            label: target.label,
+            index: resolvedTarget.index,
+          );
           dependencyRefs.add(ref);
           actionEdges.add(
             CompiledActionEdge(
@@ -1080,8 +1189,12 @@ CompiledRule _compileRule(Rule rule, UserFunctionRegistry functionRegistry) {
               source: element.source,
               targets: List.unmodifiable([ref]),
               regexIndex: regexIndex,
-              childRegexIndex: target.index,
+              childRegexIndex: resolvedTarget.index,
               hasParentRegex: hasParentRegex,
+              selectorKind: target.selectorKind,
+              authoredSelector: target.authoredSelector,
+              targetSlotId: resolvedTarget.slotId,
+              sourceId: sourceId,
               code: code,
               fluentChain: List.unmodifiable(fluentChain),
               actionPayload: payload,
@@ -1157,6 +1270,13 @@ CompiledRule _compileRule(Rule rule, UserFunctionRegistry functionRegistry) {
                 regexIndex: 0,
                 childRegexIndex: childRegexIndex,
                 hasParentRegex: false,
+                selectorKind: target.index == null ? 'unindexed' : 'numeric',
+                authoredSelector: target.index,
+                targetSlotId: _slotIdAt(
+                  sourceRulesByLabel[target.label],
+                  childRegexIndex,
+                ),
+                sourceId: sourceId,
                 code: code,
                 fluentChain: List.unmodifiable(fluentChain),
                 actionPayload: payload,
@@ -1185,6 +1305,13 @@ CompiledRule _compileRule(Rule rule, UserFunctionRegistry functionRegistry) {
             functionRegistry: functionRegistry,
           ),
         );
+      case CaptureGapsDirectiveBodyElementKind(:final directive):
+        lastRegexLine = null;
+        captureGaps = CompiledCaptureGapsMetadata(
+          directive: directive,
+          sourceId: sourceId,
+          line: element.line,
+        );
       case SplitMarkerBodyElementKind():
       case LifecycleMarkerBodyElementKind():
       case FluentChainBodyElementKind():
@@ -1200,6 +1327,8 @@ CompiledRule _compileRule(Rule rule, UserFunctionRegistry functionRegistry) {
     header: rule.header,
     modeMetadata: CompiledRuleModeMetadata.fromHeader(rule.header),
     regexPatterns: List.unmodifiable(regexPatterns),
+    regexSlots: List.unmodifiable(regexSlots),
+    captureGaps: captureGaps,
     dependencyRefs: List.unmodifiable(dependencyRefs),
     actionEdges: List.unmodifiable(actionEdges),
     blindEdges: List.unmodifiable(blindEdges),
@@ -1207,6 +1336,46 @@ CompiledRule _compileRule(Rule rule, UserFunctionRegistry functionRegistry) {
     plainActionPayloads: List.unmodifiable(plainActionPayloads),
     bodyElements: List.unmodifiable(rule.body),
   );
+}
+
+({int index, String? slotId}) _resolveAuthoredTarget(
+  EdgeTarget target,
+  Map<String, Rule> sourceRulesByLabel,
+) {
+  final targetRule = sourceRulesByLabel[target.label];
+  if (target.selectorKind == 'named') {
+    var index = 0;
+    for (final element in targetRule?.body ?? const <BodyElement>[]) {
+      final kind = element.kind;
+      if (kind is! RegexBodyElementKind) {
+        continue;
+      }
+      if (kind.slotId == target.authoredSelector) {
+        return (index: index, slotId: kind.slotId);
+      }
+      index += 1;
+    }
+    return (index: 0, slotId: null);
+  }
+  return (index: target.index, slotId: _slotIdAt(targetRule, target.index));
+}
+
+String? _slotIdAt(Rule? rule, int index) {
+  if (rule == null || index < 0) {
+    return null;
+  }
+  var regexIndex = 0;
+  for (final element in rule.body) {
+    final kind = element.kind;
+    if (kind is! RegexBodyElementKind) {
+      continue;
+    }
+    if (regexIndex == index) {
+      return kind.slotId;
+    }
+    regexIndex += 1;
+  }
+  return null;
 }
 
 Map<String, CompiledRule> _resolveActionEdgeDependencyRegexes({

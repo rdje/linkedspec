@@ -240,6 +240,7 @@ StagedFunctionBodyDispatchResult dispatchFunctionBodyParseJobs(
 
     final dispatch = StagedFunctionBodyDispatchResult(
       spec: SpecFile(
+        sourceId: spec.sourceId,
         functions: [
           for (var index = 0; index < functions.length; index += 1)
             if (bodyAstByIndex.containsKey(index))
@@ -273,6 +274,7 @@ SpecFile stitchFunctionBodyParseJobs(
 SpecFile parseSpecWithStagedUserFunctionDefinitionAsts(
   String source,
   Iterable<Object?> definitionNodes, {
+  String sourceId = 'inline',
   LinkedSpecTraceEmitter? trace,
 }) {
   final traceScope = trace?.enterScope(
@@ -284,6 +286,7 @@ SpecFile parseSpecWithStagedUserFunctionDefinitionAsts(
     final spec = parseSpecWithUserFunctionDefinitionAsts(
       source,
       definitionNodes,
+      sourceId: sourceId,
       trace: trace,
     );
     final stitched = stitchFunctionBodyParseJobs(spec, trace: trace);

@@ -16,7 +16,11 @@ final class SpecParseException implements Exception {
   }
 }
 
-SpecFile parseSpec(String source, {LinkedSpecTraceEmitter? trace}) {
+SpecFile parseSpec(
+  String source, {
+  String sourceId = 'inline',
+  LinkedSpecTraceEmitter? trace,
+}) {
   final traceScope = trace?.enterScope(
     'dart_frontend:parse_spec',
     'source_code_units=${source.length}',
@@ -78,7 +82,7 @@ SpecFile parseSpec(String source, {LinkedSpecTraceEmitter? trace}) {
     if (traceScope != null) {
       trace?.exitScope(traceScope, 'ok rule_count=${rules.length}');
     }
-    return SpecFile(rules: rules);
+    return SpecFile(sourceId: sourceId, rules: rules);
   } on Object catch (error) {
     if (traceScope != null) {
       trace?.exitScope(traceScope, 'error=$error');
@@ -172,10 +176,14 @@ final class _BoundedMode {
 }
 
 final _regexPattern = RegExp(r'^/([^/\\]*(?:\\.[^/\\]*)*)/');
+final _namedRegexPattern = RegExp(
+  r'^([^/=]+?)[ \t]*=[ \t]*/([^/\\]*(?:\\.[^/\\]*)*)/',
+);
 final _lifecyclePattern = RegExp(r'^(I|LS|LE|LX|E|EX|IT)\b');
 final _splitPattern = RegExp(
   r'^@[ \t]*(capture_slice|capture_from_here|move_pos|mark[ \t]*\([ \t]*\w+[ \t]*\))',
 );
+final _captureGapsPattern = RegExp(r'^@capture_gaps\b');
 final _conditionalPattern = RegExp(r'^-\?[ \t]+\w+');
 final _fluentPattern = RegExp(r'^\.[ \t]*\w+');
 final _boundedModePattern = RegExp(r'^(AND|OR)\{(\d*)(?:,(\d*))?\}$');
@@ -499,6 +507,23 @@ _ParsedElement? _parseSingleElement(
   int lineNumber, {
   required bool allowBareEdge,
 }) {
+  final namedRegexMatch = _namedRegexPattern.firstMatch(trimmed);
+  if (namedRegexMatch != null) {
+    final fullMatch = namedRegexMatch[0]!;
+    return _ParsedElement(
+      element: BodyElement(
+        kind: RegexBodyElementKind(
+          pattern: namedRegexMatch[2]!,
+          slotId: namedRegexMatch[1]!.trim(),
+        ),
+        source: fullMatch,
+        line: lineNumber,
+      ),
+      remainder: trimmed.substring(fullMatch.length),
+      advanced: false,
+    );
+  }
+
   final regexMatch = _regexPattern.firstMatch(trimmed);
   if (regexMatch != null) {
     final fullMatch = regexMatch[0]!;
@@ -671,6 +696,20 @@ _ParsedElement? _parseSingleElement(
     );
   }
 
+  final captureGapsMatch = _captureGapsPattern.firstMatch(trimmed);
+  if (captureGapsMatch != null) {
+    final fullMatch = captureGapsMatch[0]!;
+    return _ParsedElement(
+      element: BodyElement(
+        kind: const CaptureGapsDirectiveBodyElementKind(),
+        source: fullMatch,
+        line: lineNumber,
+      ),
+      remainder: trimmed.substring(fullMatch.length),
+      advanced: false,
+    );
+  }
+
   final splitMatch = _splitPattern.firstMatch(trimmed);
   if (splitMatch != null) {
     final fullMatch = splitMatch[0]!;
@@ -834,18 +873,59 @@ _ParsedElement? _parseBareEdge(
     }
   }
 
-  final parsedIndex = _parseIndexAt(input, offset, allowSpace: false);
-  final index = parsedIndex?.index ?? 0;
-  final end = parsedIndex?.end ?? offset;
+  final selector = _parseActionSelectorAt(input, offset);
+  final end = selector.end;
   if (!_hasValidEdgeRemainder(input, end)) {
     return null;
   }
   return (
     targets: [
-      for (final label in labels) EdgeTarget(label: label, index: index),
+      for (final label in labels)
+        EdgeTarget(
+          label: label,
+          index: selector.index,
+          selectorKind: selector.kind,
+          authoredSelector: selector.authored,
+        ),
     ],
     end: end,
   );
+}
+
+({String kind, Object? authored, int index, int end}) _parseActionSelectorAt(
+  String input,
+  int offset,
+) {
+  if (!input.startsWith('[', offset)) {
+    return (kind: 'unindexed', authored: null, index: 0, end: offset);
+  }
+
+  final close = input.indexOf(']', offset + 1);
+  final blockStart = input.indexOf('{', offset + 1);
+  if (close >= 0 && (blockStart < 0 || close < blockStart)) {
+    final authored = input.substring(offset + 1, close).trim();
+    if (_isAsciiDigits(authored)) {
+      final index = int.tryParse(authored);
+      if (index != null) {
+        return (kind: 'numeric', authored: index, index: index, end: close + 1);
+      }
+    }
+    if (isRuleLabel(authored)) {
+      return (kind: 'named', authored: authored, index: 0, end: close + 1);
+    }
+    return (kind: 'invalid', authored: authored, index: 0, end: close + 1);
+  }
+
+  var end = offset + 1;
+  while (end < input.length) {
+    final code = input.codeUnitAt(end);
+    if (_isHorizontalSpace(code) || code == _openBrace) {
+      break;
+    }
+    end += 1;
+  }
+  final authored = input.substring(offset + 1, end).trim();
+  return (kind: 'invalid', authored: authored, index: 0, end: end);
 }
 
 ({String target, int? index, int end})? _parseBlindEdgePrefix(String input) {
@@ -968,6 +1048,18 @@ int _skipHorizontalSpace(String input, int offset) {
 bool _isHorizontalSpace(int codeUnit) => codeUnit == _space || codeUnit == _tab;
 
 bool _isAsciiDigit(int codeUnit) => codeUnit >= _zero && codeUnit <= _nine;
+
+bool _isAsciiDigits(String value) {
+  if (value.isEmpty) {
+    return false;
+  }
+  for (final code in value.codeUnits) {
+    if (!_isAsciiDigit(code)) {
+      return false;
+    }
+  }
+  return true;
+}
 
 bool _startsWithEdgeToken(String input) =>
     input.startsWith('->') || input.startsWith('=>');

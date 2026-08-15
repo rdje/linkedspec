@@ -2,35 +2,37 @@
 
 ## Current Activity
 
-- Atomic 232 landed cleanly at `2800e7c3`; behavior-free Dart implementation/admission plan
-  `INTER-MATCH-GAP-CAPTURE.4.0` is signoff-complete from that exact boundary for intended atomic 233; no push.
-- Exact probes show numeric declarations/selectors work, while named declarations/selectors and `@capture_gaps`
-  are raw invalid syntax; the four accessors are unknown helpers. Trace proves current repeated `LS` precedes
-  selection, and the existing primary pipeline remains healthy.
-- `.4.1-.4.5` are frozen in authored/static, same-authority native, reconstruction/descriptor/generated-plan,
-  independently analyzed emitted-source, and primary/nine-role admission order. Generated plan v2, observed
-  recognition state, existing CLI shape, and all outward surfaces remain unchanged.
-- Gap governance stays 3 complete / 6 pending / 56 semantic mutations plus ten Rust admission mutations. Dart,
-  Julia, both Lua ABIs, recurring, and public rows remain pending.
-- Focused Dart proof passes 123. Complete Dart proof passes format 101/0, strict analysis, 400 package tests,
-  storage 22 exact temporary owners / 47 packages, CLI 66x2, corpus 105/105, and the exact success marker.
-- Rendered book, Knowledge 836/7,036, and all eight doctrines pass. The unchanged authorized canonical run passes
-  containment/relocation, CLI 66x2, RAM 59%, Phase 0 1,031/1,031 in 771 seconds, exact rooted routing, and local-
-  CI exit 0; its sandboxed precursor stops solely at expected outer status 71.
-- The stale 21-owner Dart Knowledge projection is corrected: semantic-introspection emitted proof is the existing
-  22nd owner. No code, contract, checker, driver, rollout, generated format, or public behavior moves.
+- Atomic 233 landed cleanly at `e40de948`; Dart authored/static/compiled metadata leaf
+  `INTER-MATCH-GAP-CAPTURE.4.1` is signoff-complete from that exact boundary for intended atomic 234; no push.
+- Dart now parses spacing-insensitive named/anonymous regex declarations in one order, unindexed/numeric/named
+  selectors, and dedicated `@capture_gaps` evidence. Pinned Unicode-17 identity, exact source-aware diagnostics,
+  logical source identity, compiled slot/directive rows, and five-field edge provenance are GREEN.
+- The final Dart consumer exists at its exact path with a library-level `.4.5` skip. Explicit execution passes;
+  ordinary discovery remains skipped, and ten reason-checked Dart dormancy mutations prevent premature
+  canonical/recurring/facade admission.
+- Gap governance stays 3 complete / 6 pending / 56 semantic mutations plus ten Rust admission and ten Dart
+  dormancy mutations. Native gap state/accessors/lifecycle remain `.4.2`; reconstructed descriptor/generated
+  behavior, emitted proof, primary/admission, Julia/Lua, recurring, and public rows remain pending.
+- Generated plan v2, existing descriptor and `resolved_edges`, observed recognition state, CLI shape, README,
+  facade/schema/semantic/MCP surfaces, recognition 137/246/58, and typed source 9/5/114 remain unchanged.
 
 ## Latest Completed Slice
 
-- `.4.0` is signoff-complete for atomic 233 from clean `2800e7c3`: exact Dart absence/mechanisms are audited and
-  `.4.1-.4.5` are dependency-frozen without Dart behavior or rollout movement.
+- `.4.1` is signoff-complete for intended atomic 234: dormant 1/1, complete Dart 400 plus one intended skip,
+  storage 22/47, book 79/14,788 KiB, Knowledge 836/7,039, all doctrines, and canonical exit 0 are green.
 
 ## Next Action
 
-- Commit `.4.0`, clear the brief, and prove atomic 233 clean; only then activate Dart `.4.1` task-tree-first.
+- Commit `.4.1` as atomic 234, clear the brief, and prove a clean handoff. Then create and activate the
+  director-requested tiered-verification policy leaf before `.4.2`, storing and mechanically enforcing focused
+  ordinary-commit checks plus full canonical CI at batch/push and designated admission/milestone boundaries.
 
 ## Recent Completions
 
+- `2026-08-15` — `.4.1` completed exact Dart authored/static/compiled gap metadata signoff from clean `e40de948`;
+  final consumer remains dormant, rollout remains 3/6/56, and canonical Phase 0 1,031/1,031 exits 0.
+- `2026-08-15` — `e40de948` landed behavior-free Dart implementation freeze `.4.0` as clean atomic 233; `.4.1`
+  activated only afterward.
 - `2026-08-15` — `.4.0` completed behavior-free Dart audit/planning from clean `2800e7c3`: focused 123, full
   Dart 400/storage 22/47/CLI 66x2/corpus 105, all doctrines, RAM 59%, Phase 0 1,031/1,031 in 771 seconds, and
   local-CI exit 0 are green; `.4.1-.4.5` are frozen with rollout unchanged.
@@ -56,8 +58,6 @@
 - `2026-08-14` — `.3.0` completed signoff at book 79/14,704 KiB, Knowledge 835/7,009, focused Rust 1/1, all eight doctrines, Phase 0 1,031/1,031 in 741 seconds, and exact routing without behavior movement.
 - `2026-08-14` — `.2.4` and parent `.2` completed canonical signoff at RAM 57%, Phase 0 1,031/1,031 in 765 seconds, and exact neutral-plus-Perl routing.
 - `2026-08-13` — `.2.4` implemented exact private Perl admission at gap 2/7/56; ordinary and rooted 124-test runs pass.
-- `2026-08-13` — `.2.3` completed canonical signoff at RAM 57%, Phase 0 1,031/1,031 in 773 seconds, and exact opt-in gap routing.
-- `2026-08-13` — `.2.2` completed canonical signoff at RAM 76%, Phase 0 1,031/1,031 in 756 seconds, and exact opt-in gap routing.
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source

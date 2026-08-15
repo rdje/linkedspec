@@ -1,13 +1,19 @@
 typedef JsonObject = Map<String, Object?>;
 
 final class SpecFile {
-  const SpecFile({this.functions = const [], required this.rules});
+  const SpecFile({
+    this.sourceId = 'inline',
+    this.functions = const [],
+    required this.rules,
+  });
 
+  final String sourceId;
   final List<FunctionDefinition> functions;
   final List<Rule> rules;
 
   factory SpecFile.fromJson(JsonObject json) {
     return SpecFile(
+      sourceId: _optionalStringField(json, 'source_id') ?? 'inline',
       functions: _objectList(
         json,
         'functions',
@@ -20,6 +26,7 @@ final class SpecFile {
 
   JsonObject toJson() {
     return {
+      'source_id': sourceId,
       'functions': [for (final function in functions) function.toJson()],
       'rules': [for (final rule in rules) rule.toJson()],
     };
@@ -526,7 +533,10 @@ sealed class BodyElementKind {
   factory BodyElementKind.fromJson(JsonObject json) {
     final kind = _stringField(json, 'kind');
     return switch (kind) {
-      'regex' => RegexBodyElementKind(pattern: _stringField(json, 'pattern')),
+      'regex' => RegexBodyElementKind(
+        pattern: _stringField(json, 'pattern'),
+        slotId: _optionalStringField(json, 'slot_id'),
+      ),
       'action_edge' => ActionEdgeBodyElementKind(
         targets: _objectList(json, 'targets', EdgeTarget.fromJson),
         code: _optionalStringField(json, 'code'),
@@ -568,6 +578,9 @@ sealed class BodyElementKind {
       'split_marker' => SplitMarkerBodyElementKind(
         marker: _stringField(json, 'marker'),
       ),
+      'capture_gaps_directive' => CaptureGapsDirectiveBodyElementKind(
+        directive: _optionalStringField(json, 'directive') ?? '@capture_gaps',
+      ),
       'lifecycle_marker' => LifecycleMarkerBodyElementKind(
         marker: _stringField(json, 'marker'),
       ),
@@ -586,12 +599,14 @@ sealed class BodyElementKind {
 }
 
 final class RegexBodyElementKind extends BodyElementKind {
-  const RegexBodyElementKind({required this.pattern}) : super('regex');
+  const RegexBodyElementKind({required this.pattern, this.slotId})
+    : super('regex');
 
   final String pattern;
+  final String? slotId;
 
   @override
-  JsonObject toJson() => {'kind': kind, 'pattern': pattern};
+  JsonObject toJson() => {'kind': kind, 'pattern': pattern, 'slot_id': slotId};
 }
 
 final class ActionEdgeBodyElementKind extends BodyElementKind {
@@ -698,6 +713,17 @@ final class SplitMarkerBodyElementKind extends BodyElementKind {
   JsonObject toJson() => {'kind': kind, 'marker': marker};
 }
 
+/// Rule-level opt-in marker for private inter-match gap capture.
+final class CaptureGapsDirectiveBodyElementKind extends BodyElementKind {
+  const CaptureGapsDirectiveBodyElementKind({this.directive = '@capture_gaps'})
+    : super('capture_gaps_directive');
+
+  final String directive;
+
+  @override
+  JsonObject toJson() => {'kind': kind, 'directive': directive};
+}
+
 final class LifecycleMarkerBodyElementKind extends BodyElementKind {
   const LifecycleMarkerBodyElementKind({required this.marker})
     : super('lifecycle_marker');
@@ -742,19 +768,33 @@ final class RawBodyElementKind extends BodyElementKind {
 }
 
 final class EdgeTarget {
-  const EdgeTarget({required this.label, this.index = 0});
+  const EdgeTarget({
+    required this.label,
+    this.index = 0,
+    this.selectorKind = 'unindexed',
+    this.authoredSelector,
+  });
 
   final String label;
   final int index;
+  final String selectorKind;
+  final Object? authoredSelector;
 
   factory EdgeTarget.fromJson(JsonObject json) {
     return EdgeTarget(
       label: _stringField(json, 'label'),
       index: _intField(json, 'index'),
+      selectorKind: _optionalStringField(json, 'selector_kind') ?? 'unindexed',
+      authoredSelector: json['authored_selector'],
     );
   }
 
-  JsonObject toJson() => {'label': label, 'index': index};
+  JsonObject toJson() => {
+    'label': label,
+    'index': index,
+    'selector_kind': selectorKind,
+    'authored_selector': authoredSelector,
+  };
 }
 
 final class BareEdgeTarget {

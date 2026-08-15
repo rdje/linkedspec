@@ -10,6 +10,33 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-15 (`INTER-MATCH-GAP-CAPTURE.4.1` — Dart authored/static/compiled metadata): activation base is clean
+  atomic 233 at `e40de948`. The final consumer is a library-skipped, final-path contract artifact rather than a
+  temporary test; the neutral checker mutation-locks its identity, metadata role, contract source, parse/
+  validation/compiler boundaries, canonical/recurring absence, diagnostic token, and facade absence.
+- Keep selector authorship separate from resolution. `EdgeTarget` retains `selector_kind` and
+  `authored_selector`; compilation resolves the target rule's authored slot order once and records
+  `target_rule`, `child_regex_index`, and nullable `target_slot_id`. Legacy dependency refs remain only
+  `{label,idx}`, and descriptor projection deliberately uses the legacy action-edge shape until `.4.3`.
+- Named regex slots reuse the generated pinned Unicode-17 rule-label classifier without normalizing or folding.
+  All-ASCII digits remain the numeric selector namespace. Anonymous and named regexes share one ordered list,
+  so duplicate regex text never substitutes for slot identity and a named selector survives reordering.
+- `SpecFile.sourceId` is the single logical static-source carrier. It defaults to `inline` for old constructors
+  and JSON, is threaded through ordinary and both staged parser layers, uses the caller's logical request on the
+  loaded path, and supplies every slot/directive/edge diagnostic and compiled row. No resolved host path is
+  persisted as the logical identity.
+- Validate gap directives after selector resolution but before generic mixed-edge rejection. This preserves
+  existing diagnostics for unflagged rules while giving flagged rules exact `none`, `mixed`,
+  `local_adjacency`, `blind`, or `action` eligibility evidence. Anonymous legacy markers conflict; named
+  `@mark(...)` remains independent.
+- `CompiledRule.toJson()` owns private slot/directive metadata and `CompiledActionEdge.toJson()` owns five-field
+  provenance. `toDescriptorRuleJson()` stays deliberately legacy-shaped, generated plan v2 stays
+  `{label,family}`, and no runtime invocation or transaction object changes in this leaf.
+- Final `.4.1` proof is dormant 1/1; complete Dart format 102/0, strict analysis, package 400 plus one intended
+  skip, storage 22/47, CLI 66x2, and corpus 105; neutral 3/6/56 plus ten Rust admission and ten Dart dormancy
+  mutations; book 79/14,788 KiB; Knowledge 836/7,039; all doctrines; and canonical Phase 0 1,031/1,031 in 745
+  seconds with the rooted neutral/Perl/Rust route and exit 0.
+
 - 2026-08-15 (`INTER-MATCH-GAP-CAPTURE.4.0` — Dart behavior-free implementation freeze): activation base is
   clean atomic 232 at `2800e7c3`. Exact probes precede source inference: named declarations/selectors/directive
   are raw-invalid, the four accessors are unknown helpers, and lifecycle trace proves repeated `LS` precedes

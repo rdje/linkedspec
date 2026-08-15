@@ -131,6 +131,7 @@ List<Object?> parseUserFunctionDefinitionAsts(
 SpecFile parseSpecWithStagedUserFunctionDefinitions(
   String source, {
   String? parserSpecSource,
+  String sourceId = 'inline',
   LinkedSpecTraceEmitter? trace,
 }) {
   final traceScope = trace?.enterScope(
@@ -147,6 +148,7 @@ SpecFile parseSpecWithStagedUserFunctionDefinitions(
     final spec = parseSpecWithStagedUserFunctionDefinitionAsts(
       source,
       nodes,
+      sourceId: sourceId,
       trace: trace,
     );
     if (traceScope != null) {

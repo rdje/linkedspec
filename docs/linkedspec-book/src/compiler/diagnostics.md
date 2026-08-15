@@ -141,6 +141,20 @@ the failure to `GeneratedSourceStage.validateCompiledRule` and
 `ordered_regex_slot_identity_lost` / `execute_rule` with expected and actual
 indices for invariant testing.
 
+Dart's authored gap-metadata layer also reports the neutral source-aware static failures before compiled state is
+accepted:
+
+- `regex_slot_name_invalid` / `parse_declaration`
+- `regex_slot_duplicate_name` / `resolve_declaration`
+- `regex_slot_unknown_name` and `regex_slot_index_out_of_range` / `resolve_selector`
+- `regex_slot_selector_invalid` / `parse_selector`
+- `capture_gaps_duplicate_directive` / `parse_directive`
+- `capture_gaps_rule_ineligible` and `capture_gaps_legacy_marker_conflict` / `validate_directive`
+
+Every row includes `rule_label`, logical `source_id`, and physical `line`, plus its contract-specific selector,
+slot, eligibility, or marker context. `gap_capture_context_unavailable` remains a future `.4.2` runtime boundary;
+the metadata leaf does not manufacture a gap context.
+
 Parser-authored `print`/`say`/`print_each` events use a separate Rust facility. Call
 `execute_with_diagnostic_output(input, sink)` or
 `execute_value_with_diagnostic_output(input, options, sink)` with an optional caller-owned

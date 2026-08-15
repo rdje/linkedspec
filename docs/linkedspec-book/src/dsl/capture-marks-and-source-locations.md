@@ -549,9 +549,10 @@ Top::OR
 
 Horizontal whitespace around `=` is insignificant. Same-line `name=/regex/` at rule-paragraph level
 declares a stable rule-local slot rather than assigning a variable. Existing unindexed and numeric
-selectors remain compatibility forms. The Perl reference implements the declaration/selector syntax, directive
-metadata, and private live/generated `entry_slot()`/gap-accessor behavior. Independently loaded source now agrees
-with live execution, but neither Perl nor the other backends have admitted these forms as runtime/public contract.
+selectors remain compatibility forms. Perl and Rust implement and privately admit the declaration/selector
+syntax, directive metadata, and native plus generated `entry_slot()`/gap-accessor behavior. Dart now implements
+the authored/static/compiled metadata subset described below. Dart gap accessors and lifecycle behavior remain
+unavailable, and no backend exposes these forms as a public cross-backend contract yet.
 
 Brackets are the selector namespace. `Document[1]` means positional compatibility, so declaration reordering
 can change its target; `Document[section]` means stable identity and must survive reordering. An implementation
@@ -703,21 +704,55 @@ The four accessor nodes raise the recognition-effect census from 133 to 137 and 
 executes them on live and generated paths; Rust now executes them on native, reconstructed, generated-plan, and
 independently compiled emitted paths. The 246 shared call inventory, 122 public-helper inventory, and typed-source
 9-complete/5-pending/114-mutation contract do not move. Current truth is recognition 137/246/58 and gap rollout
-3 complete / 6 pending / 56 mutations plus ten Rust admission mutations. Exact registration checks replace the retired Perl dormancy fence while
+3 complete / 6 pending / 56 mutations plus ten Rust admission and ten Dart dormancy mutations. Exact
+registration checks replace the retired Perl dormancy fence while
 the admitted Rust consumer is required ordinarily, canonically, and once after Perl in the rooted route.
 
-### Dart implementation boundary — planned, not implemented
+### Dart authored metadata boundary — current; runtime pending
 
-Dart `.4.0` is a behavior-free audit and implementation freeze. Exact repository-routed probes show that numeric
-declarations/selectors still work, while `name=/regex/`, `Rule[name]`, and `@capture_gaps` become raw invalid body
-syntax. `entry_slot()`, `gap_span()`, `gap_text()`, and `gap_kind()` parse as calls but fail through the existing
-unknown-helper boundary. A lifecycle trace also proves the current repeated-rule order is `LS` before regex
-selection. Consequently, none of this section's planned authored or runtime surface is current on Dart yet.
+Dart `.4.0` established the behavior-free baseline: numeric selectors worked, named declarations/selectors and
+`@capture_gaps` were raw body syntax, all four gap accessors reached `unknown_helper`, and repeated-rule `LS`
+preceded selection. Dart `.4.1` now implements only the authored/static/compiled layer. The parser accepts named
+and anonymous regex declarations in one order, preserves unindexed/numeric/named selector authorship, and carries
+one dedicated rule-level directive record. Static validation and compilation are current; native gap context and
+the four accessors remain pending `.4.2`.
+
+For example, this Dart source now parses, validates, and compiles its slot identities:
+
+```text
+Top::OR
+ @capture_gaps
+ -> Part[head] { return("named") }
+ -> Part[0]    { return("numeric") }
+ -> Part       { return("unindexed") }
+
+Part:
+ head = /H/
+ /S/
+ foot=/F/
+```
+
+The `Part` slot rows are `(0, head)`, `(1, null)`, and `(2, foot)`. All three edges retain five distinct resolved
+fields: selector kind, authored selector, target rule, resolved numeric index, and nullable target slot id. Thus
+`Part[head]` remains attached to `head` if another identical regex is inserted before it, while `Part[0]` remains
+positional. This is compiled provenance, not a new descriptor field: existing dependency refs and
+`resolved_edges` stay legacy-shaped until `.4.3`.
+
+Slot names use the same generated, pinned Unicode 17.0.0 `XID_Continue` classifier as rule labels. Identity is
+exact and normalization-sensitive; a name made only of ASCII digits is rejected so `[123]` remains unambiguously
+numeric. Dart reports the neutral source-aware static diagnostics for invalid/duplicate declarations,
+unknown/out-of-range/malformed selectors, duplicate directives, ineligible ownership/modes, and anonymous legacy
+marker conflicts. Named `@mark(...)` remains independent.
+
+`SpecFile` now carries a logical `source_id`, defaulting to `inline` for old constructors and JSON. Ordinary,
+staged, and loaded parsing preserve that identity into diagnostics and compiled slot/directive/edge records. The
+loaded path uses the caller's logical request rather than persisting a resolved host path. This keeps fixtures and
+serialized state relocatable.
 
 The implementation is assigned before code:
 
-1. `.4.1` adds Unicode-17 named/anonymous slot identity, typed selector provenance, logical spec source identity,
-   directive/static diagnostics, compiled metadata, and a mechanically dormant final consumer.
+1. `.4.1` now provides Unicode-17 named/anonymous slot identity, typed selector provenance, logical spec source
+   identity, directive/static diagnostics, compiled metadata, and a mechanically dormant final consumer.
 2. `.4.2` attaches private gap state to Dart's existing recognition invocation and token snapshot. It does not
    add a second stack or widen observed `RecognitionFrameState`, which remains cursor/boundary/marks.
 3. `.4.3` proves normalized `SpecFile` reconstruction, compatible descriptor additions, and generated-plan
@@ -733,10 +768,11 @@ and one private recognition transaction/invocation authority. Runtime gap spans 
 identity. Generated source continues embedding normalized spec state rather than copying gap metadata into the
 static plan.
 
-Complete preflight is green at 123 focused tests and the full Dart gate's format 101/0, strict analysis, 400/400
-package tests, 22 exact temporary-workspace owners / 47 packages, CLI 66/66 twice, and corpus 105/105. Those
-results validate the starting boundary; they do not admit Dart gap behavior. Rollout remains 3 complete / 6
-pending until `.4.5`.
+The final Dart consumer already lives at `dart/test/inter_match_gap_capture_contract_test.dart`, but a
+library-level `.4.5` skip keeps ordinary discovery dormant. Explicit execution proves the `.4.1` metadata group;
+ten reason-checked governance mutations reject premature canonical execution, recurring execution, or facade
+exposure. Rollout remains 3 complete / 6 pending until `.4.5`, and generated plan v2 remains exactly
+`{label,family}`.
 
 Named slot rules are exact:
 

@@ -74,12 +74,14 @@ void validateSpec(
     _checkAtLeastOneRule(spec);
     _checkRuleLabels(spec);
     _checkDuplicateRuleLabels(spec);
+    _checkRegexSlotDeclarations(spec);
     _checkDuplicateFunctionNames(spec);
     _checkFunctionRegistry(spec);
     _checkMalformedRawBodyLines(spec);
     _checkEdgeStructure(spec);
-    _checkMixedEdges(spec);
     _checkEdgeTargets(spec);
+    _checkCaptureGapsDirectives(spec);
+    _checkMixedEdges(spec);
     _checkRegexSyntax(spec);
     if (strictSyntax) {
       _checkUnusedRules(spec);
@@ -175,6 +177,47 @@ void _checkDuplicateRuleLabels(SpecFile spec) {
       throw SpecValidationException(
         "duplicate rule label '${rule.header.label}'",
       );
+    }
+  }
+}
+
+void _checkRegexSlotDeclarations(SpecFile spec) {
+  for (final rule in spec.rules) {
+    final firstLines = <String, int>{};
+    for (final element in rule.body) {
+      final kind = element.kind;
+      if (kind is! RegexBodyElementKind || kind.slotId == null) {
+        continue;
+      }
+      final slotId = kind.slotId!;
+      if (!isRuleLabel(slotId) || _isAsciiDigitOnly(slotId)) {
+        throw _gapDiagnostic(
+          code: 'regex_slot_name_invalid',
+          stage: 'parse_declaration',
+          message:
+              "rule '${rule.header.label}' has invalid regex slot name "
+              "'$slotId'",
+          spec: spec,
+          rule: rule,
+          line: element.line,
+          fields: {'slot_name': slotId},
+        );
+      }
+      final firstLine = firstLines[slotId];
+      if (firstLine != null) {
+        throw _gapDiagnostic(
+          code: 'regex_slot_duplicate_name',
+          stage: 'resolve_declaration',
+          message:
+              "rule '${rule.header.label}' declares regex slot '$slotId' "
+              'more than once',
+          spec: spec,
+          rule: rule,
+          line: element.line,
+          fields: {'slot_name': slotId, 'first_line': firstLine},
+        );
+      }
+      firstLines[slotId] = element.line;
     }
   }
 }
@@ -423,6 +466,156 @@ SpecValidationException _portableDiagnostic({
   );
 }
 
+SpecValidationException _gapDiagnostic({
+  required String code,
+  required String stage,
+  required String message,
+  required SpecFile spec,
+  required Rule rule,
+  required int line,
+  required Map<String, Object?> fields,
+}) {
+  return _portableDiagnostic(
+    code: code,
+    stage: stage,
+    message: message,
+    fields: {
+      'rule_label': rule.header.label,
+      'source_id': spec.sourceId,
+      'line': line,
+      ...fields,
+    },
+  );
+}
+
+void _checkCaptureGapsDirectives(SpecFile spec) {
+  for (final rule in spec.rules) {
+    final directives = [
+      for (final element in rule.body)
+        if (element.kind is CaptureGapsDirectiveBodyElementKind) element,
+    ];
+    if (directives.isEmpty) {
+      continue;
+    }
+    final directive = directives.first;
+    if (directives.length > 1) {
+      throw _gapDiagnostic(
+        code: 'capture_gaps_duplicate_directive',
+        stage: 'parse_directive',
+        message:
+            "rule '${rule.header.label}' declares @capture_gaps more than "
+            'once',
+        spec: spec,
+        rule: rule,
+        line: directives[1].line,
+        fields: {'first_line': directive.line},
+      );
+    }
+
+    for (final element in rule.body) {
+      final kind = element.kind;
+      if (kind is! SplitMarkerBodyElementKind || kind.marker.contains('mark')) {
+        continue;
+      }
+      final marker = switch (kind.marker) {
+        final value when value.contains('capture_slice') => '@capture_slice',
+        final value when value.contains('capture_from_here') =>
+          '@capture_from_here',
+        _ => '@move_pos',
+      };
+      throw _gapDiagnostic(
+        code: 'capture_gaps_legacy_marker_conflict',
+        stage: 'validate_directive',
+        message:
+            "rule '${rule.header.label}' combines @capture_gaps with "
+            "legacy marker '$marker'",
+        spec: spec,
+        rule: rule,
+        line: directive.line,
+        fields: {'marker': marker, 'marker_line': element.line},
+      );
+    }
+
+    final family = rule.header.mode.isAnd ? 'and' : 'or_default';
+    final cursorPolicy = rule.header.mode.isAnd ? 'consume' : 'seek';
+    final executionShape = _captureGapsExecutionShape(rule.header.mode);
+    final edgeOwnership = _captureGapsEdgeOwnership(rule);
+    final eligibleMode = switch (rule.header.mode.name) {
+      'Default' || 'Or' || 'OrPlus' || 'OrBounded' || 'Plus' => true,
+      _ => false,
+    };
+    if (family != 'or_default' ||
+        cursorPolicy != 'seek' ||
+        edgeOwnership != 'action' ||
+        !eligibleMode) {
+      throw _gapDiagnostic(
+        code: 'capture_gaps_rule_ineligible',
+        stage: 'validate_directive',
+        message:
+            "rule '${rule.header.label}' is not eligible for @capture_gaps",
+        spec: spec,
+        rule: rule,
+        line: directive.line,
+        fields: {
+          'family': family,
+          'cursor_policy': cursorPolicy,
+          'edge_ownership': edgeOwnership,
+          'execution_shape': executionShape,
+        },
+      );
+    }
+  }
+}
+
+String _captureGapsExecutionShape(RuleMode mode) {
+  return switch (mode.name) {
+    'Default' => 'default_scan_loop',
+    'Or' || 'OrPlus' || 'OrBounded' || 'Plus' => 'repeat_loop',
+    _ => 'single_match',
+  };
+}
+
+String _captureGapsEdgeOwnership(Rule rule) {
+  var hasAction = false;
+  var hasBlind = false;
+  var hasLocalAdjacency = false;
+  BodyElement? previous;
+  for (final element in rule.body) {
+    switch (element.kind) {
+      case ActionEdgeBodyElementKind():
+        hasAction = true;
+        if (previous?.kind is RegexBodyElementKind &&
+            previous!.line == element.line) {
+          hasLocalAdjacency = true;
+        }
+      case BlindEdgeBodyElementKind():
+        hasBlind = true;
+      case BareEdgeBodyElementKind():
+        if (rule.header.mode.isAnd) {
+          hasBlind = true;
+        } else {
+          hasAction = true;
+        }
+      default:
+        break;
+    }
+    previous = element;
+  }
+  if (hasAction && hasBlind) {
+    return 'mixed';
+  }
+  if (hasLocalAdjacency) {
+    return 'local_adjacency';
+  }
+  if (hasAction) {
+    return 'action';
+  }
+  if (hasBlind) {
+    return 'blind';
+  }
+  return 'none';
+}
+
 void _checkMixedEdges(SpecFile spec) {
   for (final rule in spec.rules) {
     var hasAction = false;
@@ -465,13 +658,7 @@ void _checkEdgeTargets(SpecFile spec) {
       switch (element.kind) {
         case ActionEdgeBodyElementKind(:final targets):
           for (final target in targets) {
-            _checkTarget(
-              rule,
-              rulesByLabel,
-              target.label,
-              target.index,
-              regexSlotIdentity: true,
-            );
+            _checkActionTarget(spec, rule, element, rulesByLabel, target);
           }
         case BlindEdgeBodyElementKind(:final target):
           _checkTarget(rule, rulesByLabel, target, 0);
@@ -490,6 +677,107 @@ void _checkEdgeTargets(SpecFile spec) {
       }
     }
   }
+}
+
+void _checkActionTarget(
+  SpecFile spec,
+  Rule owner,
+  BodyElement element,
+  Map<String, Rule> rulesByLabel,
+  EdgeTarget target,
+) {
+  final targetRule = rulesByLabel[target.label];
+  if (targetRule == null) {
+    _checkTarget(
+      owner,
+      rulesByLabel,
+      target.label,
+      target.index,
+      regexSlotIdentity: true,
+    );
+    return;
+  }
+
+  switch (target.selectorKind) {
+    case 'invalid':
+    case final selectorKind
+        when selectorKind != 'named' &&
+            selectorKind != 'numeric' &&
+            selectorKind != 'unindexed':
+      throw _gapDiagnostic(
+        code: 'regex_slot_selector_invalid',
+        stage: 'parse_selector',
+        message:
+            "rule '${owner.header.label}' has malformed regex selector "
+            "for '${target.label}'",
+        spec: spec,
+        rule: owner,
+        line: element.line,
+        fields: {
+          'target_rule': target.label,
+          'authored_selector': target.authoredSelector,
+        },
+      );
+    case 'named':
+      final authored = target.authoredSelector;
+      final slotIndex = _regexSlotIndex(targetRule, authored);
+      if (slotIndex == null) {
+        throw _gapDiagnostic(
+          code: 'regex_slot_unknown_name',
+          stage: 'resolve_selector',
+          message:
+              "rule '${owner.header.label}' references unknown regex slot "
+              "'$authored' in rule '${target.label}'",
+          spec: spec,
+          rule: owner,
+          line: element.line,
+          fields: {'target_rule': target.label, 'authored_selector': authored},
+        );
+      }
+    case 'numeric':
+      final regexCount = _regexCount(targetRule);
+      if (target.index < 0 || target.index >= regexCount) {
+        throw _gapDiagnostic(
+          code: 'regex_slot_index_out_of_range',
+          stage: 'resolve_selector',
+          message:
+              "rule '${owner.header.label}' references rule "
+              "'${target.label}' regex slot ${target.index}, but that rule "
+              'has $regexCount regex slot(s)',
+          spec: spec,
+          rule: owner,
+          line: element.line,
+          fields: {
+            'target_rule': target.label,
+            'regex_index': target.index,
+            'regex_count': regexCount,
+          },
+        );
+      }
+    case 'unindexed':
+      _checkTarget(
+        owner,
+        rulesByLabel,
+        target.label,
+        target.index,
+        regexSlotIdentity: true,
+      );
+  }
+}
+
+int? _regexSlotIndex(Rule rule, Object? slotId) {
+  var index = 0;
+  for (final element in rule.body) {
+    final kind = element.kind;
+    if (kind is! RegexBodyElementKind) {
+      continue;
+    }
+    if (kind.slotId == slotId) {
+      return index;
+    }
+    index += 1;
+  }
+  return null;
 }
 
 void _checkTarget(
@@ -682,6 +970,18 @@ bool _isReservedRuntimeSymbol(String name) =>
 
 bool _isAsciiAlphaNumeric(int code) {
   return _isAsciiAlphabetic(code) || (code >= _zero && code <= _nine);
+}
+
+bool _isAsciiDigitOnly(String value) {
+  if (value.isEmpty) {
+    return false;
+  }
+  for (final code in value.codeUnits) {
+    if (code < _zero || code > _nine) {
+      return false;
+    }
+  }
+  return true;
 }
 
 bool _isAsciiAlphabetic(int code) {
