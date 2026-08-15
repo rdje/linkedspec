@@ -1,5 +1,20 @@
 # ARCHITECTURE STATE
 
+## Dart inter-match-gap implementation is dependency-frozen without behavior
+
+Behavior-free `INTER-MATCH-GAP-CAPTURE.4.0` starts from clean atomic 232 at `2800e7c3`, reproduces Dart's
+raw-invalid named declaration/selector/directive boundary, exact four-accessor unknown-helper diagnostics,
+repeated `LS`-before-selection trace, normalized-state emitter, and existing primary pipeline. It assigns
+`.4.1-.4.5` to authored/static metadata and dormancy, private native state on the existing recognition authority,
+reconstructed/descriptor/generated carriers, independently analyzed emitted source, and primary/nine-role
+admission.
+
+Runtime input spans retain Unicode-scalar projection; static diagnostics gain logical spec identity only in
+`.4.1`; observed cursor/boundary/marks state and generated plan v2 remain unchanged. Focused Dart passes 123 and
+the complete gate passes format 101/0, analysis, 400 tests, storage 22 owners / 47 packages, CLI 66x2, and corpus
+105/105. Gap remains 3/6/56 plus ten Rust admission mutations; no Dart code, rollout, generated format, outward
+surface, or public claim moves in `.4.0`.
+
 ## Recursive source observation is privately admitted and recurrent on all six runtimes
 
 `FUTURE-PARITY-BACKLOG.14.4.1` selected

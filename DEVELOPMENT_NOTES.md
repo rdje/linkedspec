@@ -10,6 +10,32 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-15 (`INTER-MATCH-GAP-CAPTURE.4.0` — Dart behavior-free implementation freeze): activation base is
+  clean atomic 232 at `2800e7c3`. Exact probes precede source inference: named declarations/selectors/directive
+  are raw-invalid, the four accessors are unknown helpers, and lifecycle trace proves repeated `LS` precedes
+  selection.
+- Dart's split must respect existing authorities. `.4.1` adds source-aware authored/static/compiled metadata and
+  a dormant consumer; `.4.2` adds private state to `_InvocationState` and its existing token snapshot; `.4.3`
+  proves normalized reconstruction/descriptors/generated execution; `.4.4` proves emitted source; `.4.5` alone
+  proves primary, requires all nine roles, registers, promotes Dart, and closes the parent.
+- Do not add gap members to observed `RecognitionFrameState`. Keep its cursor/boundary/marks projection exact;
+  store activation, detached entry identity, immutable source/invocation identity, and the three mutable gap
+  members on the private invocation authority, with those mutable members restored by the existing token.
+- Runtime gaps use the existing immutable `input` `SourceAuthority` and Unicode-scalar projection. Static gap
+  diagnostics need a backward-compatible logical spec source id threaded through ordinary/staged/loaded parsing,
+  `SpecFile` JSON, validation, and compilation.
+- Keep normalized `SpecFile` JSON as the only generated carrier. Descriptor additions are separate from existing
+  `resolved_edges`; generated plan v2 stays `{label,family}` and emitted source must inherit behavior through the
+  same engine rather than a copied gap executor.
+- The emitted consumer must use a repository-routed Dart caller workspace and local package cache, then register
+  that exact temporary owner. The current storage baseline is already 22 owners / 47 packages; the previously
+  documented 21 was stale because semantic-introspection emitted proof is the 22nd owner.
+- Focused 123/123 and complete Dart format 101/0, analysis, 400/400, storage 22/47, CLI 66x2, and corpus 105/105
+  validate the behavior-free baseline. Rendered book, Knowledge 836/7,036, and all eight doctrines pass; the
+  unchanged authorized canonical run passes containment/relocation, CLI 66x2, RAM 59%, Phase 0 1,031/1,031 in
+  771 seconds, exact rooted routing, and local-CI exit 0. Gap remains 3/6/56 plus ten Rust admission mutations
+  until `.4.5`.
+
 - 2026-08-15 (`INTER-MATCH-GAP-CAPTURE.3.5` — Rust private admission): activation base is clean atomic 231 at
   `c3326f6d`. Keep the primary proof on the existing `run_with_context` adapter; admission must not create a new
   CLI option or a second execution path.

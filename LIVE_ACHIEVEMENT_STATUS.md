@@ -2,34 +2,38 @@
 
 ## Current Activity
 
-- Atomic 231 landed cleanly at `c3326f6d`; final private Rust primary/admission and parent closeout
-  `INTER-MATCH-GAP-CAPTURE.3.5` is signoff-complete from that exact boundary and awaits atomic 232; no push.
-- Primary-first RED is exact Rust `E0425` for the absent proof owner; admission RED is the expected pending Rust
-  rollout. GREEN uses the existing primary adapter—no new CLI path—to parse `alpha, beta | gamma\n- delta` and
-  return exact item/gap pairs with empty, comma, pipe, and bullet/newline separators.
-- The final consumer is ordinary and validates the nine declared roles in exact contract order, completing each
-  role once. Canonical CI registers it once; the rooted route executes neutral, Perl 124, and Rust 1/1 before four
-  ordered later-runtime skips.
-- Only `rust_runtime` advances. Gap governance is 3 complete / 6 pending / 56 semantic mutations plus ten Rust
-  admission/regression mutations. Dart, Julia, both Lua ABIs, recurring, and public rows remain pending.
-- Recognition remains 137/246/58 with 122 public helpers, typed source remains 9/5/114, duplicate-slot identity
-  remains 7/0/59, generated plan v2 is unchanged, and all ten outward surfaces remain guarded.
-- Focused/compatibility proof passes ordinary Rust admission, runtime 170/170, recognition 12/12, recursive
-  observation 7/7, cursor, source-emitter, duplicate-slot, neutral governance, rooted routing, and typed-source/
-  recognition ledgers. The 17-owner Rust storage oracle, rendered book 79/14,732 KiB, Knowledge 835/7,020, all
-  eight doctrines, and the authorized canonical gate pass; RAM is 73% and Phase 0 is 1,031/1,031.
+- Atomic 232 landed cleanly at `2800e7c3`; behavior-free Dart implementation/admission plan
+  `INTER-MATCH-GAP-CAPTURE.4.0` is signoff-complete from that exact boundary for intended atomic 233; no push.
+- Exact probes show numeric declarations/selectors work, while named declarations/selectors and `@capture_gaps`
+  are raw invalid syntax; the four accessors are unknown helpers. Trace proves current repeated `LS` precedes
+  selection, and the existing primary pipeline remains healthy.
+- `.4.1-.4.5` are frozen in authored/static, same-authority native, reconstruction/descriptor/generated-plan,
+  independently analyzed emitted-source, and primary/nine-role admission order. Generated plan v2, observed
+  recognition state, existing CLI shape, and all outward surfaces remain unchanged.
+- Gap governance stays 3 complete / 6 pending / 56 semantic mutations plus ten Rust admission mutations. Dart,
+  Julia, both Lua ABIs, recurring, and public rows remain pending.
+- Focused Dart proof passes 123. Complete Dart proof passes format 101/0, strict analysis, 400 package tests,
+  storage 22 exact temporary owners / 47 packages, CLI 66x2, corpus 105/105, and the exact success marker.
+- Rendered book, Knowledge 836/7,036, and all eight doctrines pass. The unchanged authorized canonical run passes
+  containment/relocation, CLI 66x2, RAM 59%, Phase 0 1,031/1,031 in 771 seconds, exact rooted routing, and local-
+  CI exit 0; its sandboxed precursor stops solely at expected outer status 71.
+- The stale 21-owner Dart Knowledge projection is corrected: semantic-introspection emitted proof is the existing
+  22nd owner. No code, contract, checker, driver, rollout, generated format, or public behavior moves.
 
 ## Latest Completed Slice
 
-- `.3.5` is signoff-complete for atomic 232 from clean `c3326f6d`: Rust primary/admission is exact at 3/6/56,
-  the nine-role consumer executes once ordinarily and canonically, and parent `.3` closes.
+- `.4.0` is signoff-complete for atomic 233 from clean `2800e7c3`: exact Dart absence/mechanisms are audited and
+  `.4.1-.4.5` are dependency-frozen without Dart behavior or rollout movement.
 
 ## Next Action
 
-- Commit `.3.5`, clear the brief, and prove atomic 232 clean; only then activate Dart `.4` task-tree-first.
+- Commit `.4.0`, clear the brief, and prove atomic 233 clean; only then activate Dart `.4.1` task-tree-first.
 
 ## Recent Completions
 
+- `2026-08-15` — `.4.0` completed behavior-free Dart audit/planning from clean `2800e7c3`: focused 123, full
+  Dart 400/storage 22/47/CLI 66x2/corpus 105, all doctrines, RAM 59%, Phase 0 1,031/1,031 in 771 seconds, and
+  local-CI exit 0 are green; `.4.1-.4.5` are frozen with rollout unchanged.
 - `2026-08-15` — `.3.5` and parent `.3` completed signoff: exact Rust primary/admission, 3/6/56 plus ten admission
   mutations, storage, book, Knowledge, all doctrines, canonical containment/relocation, CLI 66x2, RAM 73%, Phase
   0 1,031/1,031, rooted neutral/Perl/Rust routing, and local-CI exit 0 pass.
@@ -54,7 +58,6 @@
 - `2026-08-13` — `.2.4` implemented exact private Perl admission at gap 2/7/56; ordinary and rooted 124-test runs pass.
 - `2026-08-13` — `.2.3` completed canonical signoff at RAM 57%, Phase 0 1,031/1,031 in 773 seconds, and exact opt-in gap routing.
 - `2026-08-13` — `.2.2` completed canonical signoff at RAM 76%, Phase 0 1,031/1,031 in 756 seconds, and exact opt-in gap routing.
-- `2026-08-13` — `.2.2` implemented private Perl native-live same-guard gap state/accessors and passed focused cross-runtime proof at recognition 137/246/58.
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source

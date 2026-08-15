@@ -4,21 +4,21 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `c3326f6d` — clean atomic-231 base for final private Rust primary/admission and parent `.3`
-  closeout `.3.5`; no push.
-- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.3.5 - admit Rust inter-match gap capture`; signoff-complete for
-  intended atomic 232/300 from activation commit `c3326f6d`; parent `.3` closes with private Rust admission.
-- active_work_unit: `INTER-MATCH-GAP-CAPTURE.3.5` — completed exact Rust primary command, nine-role composition,
-  canonical/recurring admission, Rust-only rollout promotion, and parent `.3` closeout; commit pending.
-- next_action: commit/brief-clear/clean atomic 232, then activate Dart implementation parent `.4` task-tree-first
+- activation_commit: `2800e7c3` — clean atomic-232 base for behavior-free Dart implementation/admission plan
+  `INTER-MATCH-GAP-CAPTURE.4.0`; no push.
+- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.4.0 - freeze Dart gap implementation plan`; signoff-complete
+  for intended atomic 233/300 from activation commit `2800e7c3`; no Dart behavior or rollout movement.
+- active_work_unit: `INTER-MATCH-GAP-CAPTURE.4.0` — completed exact Dart absence/mechanism/storage audit and froze
+  dependency-ordered `.4.1-.4.5`; commit pending.
+- next_action: commit/brief-clear/clean atomic 233, then activate authored/static Dart leaf `.4.1` task-tree-first
   from that new clean boundary.
-- in_flight_uncommitted: signoff-complete Rust primary/admission, 3/6/56 governance, routes, and synchronized
-  task/roadmap/book/Knowledge/live docs await only atomic 232 commit; no background job remains.
-- blockers: none. The ordinary Rust consumer now validates and completes nine exact roles once, including the
-  existing primary adapter over `alpha, beta | gamma\n- delta`. Canonical and rooted registration are exact;
-  rooted proof passes neutral, Perl, Rust, then four skips. Gap is 3/6/56 plus ten Rust admission mutations;
-  recognition 137/246/58, public helpers 122, typed source 9/5/114, duplicate-slot 7/0/59, generated plan v2, all
-  outward surfaces, later runtimes, and recurring/public rows remain unchanged or pending.
+- in_flight_uncommitted: behavior-free Dart plan, corrected 22-owner storage Knowledge fact, and synchronized
+  task/roadmap/book/Knowledge/live docs await final signoff and atomic 233 commit; no background job remains.
+- blockers: none. Numeric Dart syntax is healthy; named declaration/selector/directive syntax is raw-invalid and
+  the four accessors are unknown helpers. Focused 123 and complete Dart format 101/0, analysis, 400, storage 22/47,
+  CLI 66x2, corpus 105, Knowledge 836/7,036, doctrines, RAM 59%, and Phase 0 1,031/1,031 in 771 seconds pass with
+  canonical exit 0. Gap stays 3/6/56 plus ten Rust admission mutations; recognition 137/246/58, public helpers
+  122, typed source 9/5/114, generated plan v2, outward surfaces, and later rows remain unchanged.
 - session_refresh_cadence: proactively recommend `/clear` after at most three completed commits, sooner after a
   large/debug-heavy slice or context compaction, and only at a committed clean handoff boundary.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -49,9 +49,8 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, 9 allowed/11 rejected effects, invocation-framed marks, and cursor-only v1 progress.
   Exact recurrence/public composition is current at rollout 9/9 and 58 mutations; public 3/26/45; guide 1/14/18.
-- current_future_direction: gap rollout is signoff-complete at 3/6/56 with private Perl and Rust admitted.
-  Rust parent `.3` closes under `.3.5` for intended atomic 232 from `c3326f6d`. Dart, Julia, both Lua ABIs, and
-  both public rows remain pending; Dart parent `.4` is next after the clean commit boundary.
-  Brackets select; dot fluently binds; `.14.5.1` waits for `.7`.
-- latest_bootstrap_read: 2026-08-15 — complete roadmap/codebase/mdBook and continuity/tooling review; `.3.5` is
-  signoff-complete from clean atomic 231 at `c3326f6d` and awaits atomic 232 commit; push lock is 300.
+- current_future_direction: gap stays 3/6/56 with private Perl and Rust admitted. Dart `.4.0` freezes `.4.1-.4.5`
+  for intended atomic 233 from `2800e7c3`; authored/static `.4.1` is next only after commit/clean. Dart, Julia,
+  both Lua ABIs, and both public rows remain pending. Brackets select; dot binds; `.14.5.1` waits for `.7`.
+- latest_bootstrap_read: 2026-08-15 — complete roadmap/codebase/mdBook and continuity/tooling review; `.4.0` is
+  signoff-complete behavior-free from clean atomic 232 at `2800e7c3` and awaits atomic 233; push lock is 300.

@@ -16,6 +16,7 @@ date: 2026-08-15
 status: current governance; rollout is 3 complete + 6 pending with private Perl and Rust admitted and public rows pending
 tags: [capture, segmentation, recurring-gate, project-data, no-overclaim, local-ci, rollout]
 evidence: "INTER-MATCH-GAP-CAPTURE.1.2 adds one repository-routed driver, canonical always-on neutral checking plus opt-in ordered governance, five topology/storage/public mutations, and exact outward-surface guards. Perl .2.4 at eceb15ac admits its complete 124-test private consumer. Rust .3.5 from clean c3326f6d admits its exact nine-role consumer ordinarily and after Perl. Current proof is 56 rejected semantic mutations plus 10 Rust admission mutations, 3 complete + 6 pending, exact neutral-plus-Perl-plus-Rust execution, four later-runtime skips, repository-volume storage, and unchanged outward guards."
+evidence_update_2026_08_15_dart_plan: "Dart planning leaf INTER-MATCH-GAP-CAPTURE.4.0 re-verifies this exact rooted sequence and freezes .4.1-.4.5 while leaving the Dart route skipped. Governance stays 3 complete + 6 pending / 56 semantic mutations plus 10 Rust admission mutations; no driver, checker, contract, canonical registration, or outward guard changes."
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py"
   - "bash tools/check_inter_match_gap_capture_six_runtime.sh"
@@ -51,4 +52,4 @@ facade/schema/CLI/README paths. Those outward paths reject the planned `@capture
 set is 56 semantic mutations plus ten Rust admission mutations and rollout 3 complete + 6 pending.
 
 Related: [[inter-match-gap-executable-contract-plan]], [[inter-match-gap-capture-origin-and-contract]],
-[[lossless-gap-cross-tree-handoff]], and ADR `0045`.
+[[inter-match-gap-dart-implementation-plan]], [[lossless-gap-cross-tree-handoff]], and ADR `0045`.

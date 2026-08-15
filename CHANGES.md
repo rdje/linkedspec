@@ -10,6 +10,31 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-15 — INTER-MATCH-GAP-CAPTURE.4.0 — freeze Dart gap implementation plan
+
+- Activated task-tree-first from clean atomic-232 commit `2800e7c3`; changed no Dart implementation before the
+  owning leaf existed.
+- Repository-routed probes prove numeric declarations/selectors remain healthy while named declarations,
+  named selectors, and `@capture_gaps` are raw invalid syntax; all four planned accessors fail through exact
+  `unknown_helper` diagnostics. Trace proves repeated `LS` currently precedes selection, and the existing primary
+  pipeline returns its valid baseline while the complete planned source fails at compilation.
+- Froze dependency-ordered `.4.1-.4.5`: authored/static/compiled metadata plus dormancy; private same-authority
+  native state; reconstructed/descriptor/generated-plan carriers; independently analyzed/executed emitted Dart;
+  then primary proof, exact nine-role composition, Dart-only admission, and parent closeout.
+- Preserved one private recognition invocation/token authority, cursor/boundary/marks observation shape, Unicode-
+  scalar input `SourceAuthority`, normalized `SpecFile` carrier, generated-plan v2 `{label,family}`, existing
+  primary adapter, and every outward no-overclaim boundary.
+- Corrected the stale Dart storage Knowledge projection from 21 to the current exact 22 `Directory.systemTemp`
+  owners. The 22nd is the already-admitted semantic-introspection emitted workspace; no storage behavior changed.
+- Gap governance remains 3 complete / 6 pending / 56 semantic mutations plus ten Rust admission mutations. Dart,
+  Julia, both Lua runtimes, recurring/public rows, typed composition, capability, facade/schema/semantic/MCP/CLI/
+  README surfaces, and generated format remain pending or unchanged.
+- Focused Dart proof passes 123/123. Complete Dart proof passes format 101/0, strict analysis, 400/400 package
+  tests, storage 22/47, CLI 66x2, corpus 105/105, and its success marker. Rendered-book, Knowledge 836/7,036, and
+  all eight doctrines pass. The sandboxed canonical precursor stops only at outer status 71; the unchanged
+  authorized run passes containment/relocation, CLI 66x2, RAM 59%, Phase 0 1,031/1,031 in 771 seconds, exact
+  rooted routing, `[ci] local CI gate passed`, and exit 0.
+
 ## 2026-08-15 — INTER-MATCH-GAP-CAPTURE.3.5 — admit Rust inter-match gap capture
 
 - Activated task-tree-first from clean atomic-231 commit `c3326f6d`. Primary-first RED exits 101 with exact Rust

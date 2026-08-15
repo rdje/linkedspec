@@ -706,6 +706,38 @@ independently compiled emitted paths. The 246 shared call inventory, 122 public-
 3 complete / 6 pending / 56 mutations plus ten Rust admission mutations. Exact registration checks replace the retired Perl dormancy fence while
 the admitted Rust consumer is required ordinarily, canonically, and once after Perl in the rooted route.
 
+### Dart implementation boundary — planned, not implemented
+
+Dart `.4.0` is a behavior-free audit and implementation freeze. Exact repository-routed probes show that numeric
+declarations/selectors still work, while `name=/regex/`, `Rule[name]`, and `@capture_gaps` become raw invalid body
+syntax. `entry_slot()`, `gap_span()`, `gap_text()`, and `gap_kind()` parse as calls but fail through the existing
+unknown-helper boundary. A lifecycle trace also proves the current repeated-rule order is `LS` before regex
+selection. Consequently, none of this section's planned authored or runtime surface is current on Dart yet.
+
+The implementation is assigned before code:
+
+1. `.4.1` adds Unicode-17 named/anonymous slot identity, typed selector provenance, logical spec source identity,
+   directive/static diagnostics, compiled metadata, and a mechanically dormant final consumer.
+2. `.4.2` attaches private gap state to Dart's existing recognition invocation and token snapshot. It does not
+   add a second stack or widen observed `RecognitionFrameState`, which remains cursor/boundary/marks.
+3. `.4.3` proves normalized `SpecFile` reconstruction, compatible descriptor additions, and generated-plan
+   execution through the same engine. Static plan v2 remains exactly `{label,family}`.
+4. `.4.4` independently analyzes and executes emitted Dart libraries from a repository-routed caller workspace
+   with its own project-local package cache.
+5. `.4.5` proves the existing primary adapter, requires all nine roles exactly once, registers the consumer, and
+   promotes only Dart.
+
+Dart's runtime already has the two foundations this feature needs: immutable decoded input in `SourceAuthority`
+and one private recognition transaction/invocation authority. Runtime gap spans will continue to use source id
+`input` and Unicode-scalar offsets; only static diagnostics need a new backward-compatible logical spec source
+identity. Generated source continues embedding normalized spec state rather than copying gap metadata into the
+static plan.
+
+Complete preflight is green at 123 focused tests and the full Dart gate's format 101/0, strict analysis, 400/400
+package tests, 22 exact temporary-workspace owners / 47 packages, CLI 66/66 twice, and corpus 105/105. Those
+results validate the starting boundary; they do not admit Dart gap behavior. Rollout remains 3 complete / 6
+pending until `.4.5`.
+
 Named slot rules are exact:
 
 - A name uses the same pinned Unicode 17.0.0 `XID_Continue` scalar class as a rule label. Identity is exact,

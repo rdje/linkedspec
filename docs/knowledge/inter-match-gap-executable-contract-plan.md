@@ -25,6 +25,7 @@ date: 2026-08-15
 status: neutral parent closed and private Perl and Rust runtimes admitted; rollout is 3 complete + 6 pending
 tags: [capture, segmentation, named-slots, typed-source, lifecycle, transaction, recursion, contract, plan]
 evidence: "INTER-MATCH-GAP-CAPTURE.1.1-.1.3 establish the executable neutral Unicode/empty/child/rollback/nested model, recurrence, and public no-overclaim. Perl .2.1-.2.4 implement and admit the full 124-test private consumer. Rust .3.1-.3.5 implement authored/static metadata, same-authority native state, reconstruction/descriptors/generated-plan, fifteen emitted modules, and an existing-adapter primary command before exact ordinary/canonical/rooted admission. Current gap governance is 3 complete + 6 pending / 56 semantic mutations plus 10 Rust admission mutations. Dart, Julia, PUC Lua, LuaJIT, recurring, and public rows remain pending."
+evidence_update_2026_08_15_dart_plan: "Behavior-free Dart audit INTER-MATCH-GAP-CAPTURE.4.0 proves named declarations/selectors/directive are raw invalid syntax, the four accessors are unknown helpers, and repeated LS currently precedes selection. It freezes .4.1-.4.5 across authored/static metadata, same-authority native state, reconstructed/descriptor/generated-plan carriers, independently analyzed emitted proof, and primary/nine-role admission. No Dart behavior or 3/6/56 rollout state moves."
 reverify: "bash tools/check_inter_match_gap_capture_six_runtime.sh && prove -Iperl t/inter_match_gap_capture_perl_contract.t && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract"
 ---
 
@@ -37,8 +38,9 @@ reverify: "bash tools/check_inter_match_gap_capture_six_runtime.sh && prove -Ipe
 routing and no-overclaim governance through `tools/check_inter_match_gap_capture_six_runtime.sh`. `.1.3`
 independently recomposes those committed inputs unchanged and closes neutral parent `.1`; Perl `.2` then completes
 authored, native-live, emitted/loaded, and private admission. Rust `.3.1-.3.5` then complete the equivalent private
-authored/native/reconstructed/generated/emitted/primary path. The driver now executes neutral, Perl, and Rust,
-then skips Dart, Julia, PUC Lua, and LuaJIT.
+authored/native/reconstructed/generated/emitted/primary path. Behavior-free Dart `.4.0` now freezes the equivalent
+`.4.1-.4.5` dependency plan without implementation. The driver executes neutral, Perl, and Rust, then skips Dart,
+Julia, PUC Lua, and LuaJIT.
 
 The nine ordered rollout legs are neutral, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurring proof, and public
 no-drift. Neutral, private Perl, and private Rust are complete; runtime rows remain for `.4-.6`, and recurrence/public admission
@@ -110,5 +112,5 @@ authored/static metadata, native/reconstructed/generated execution, descriptors,
 source, and the existing primary adapter. Both full consumers are admitted in ordinary CI and the rooted recurring
 route; no outward public admission has occurred.
 See ADR `0045`, `docs/knowledge/inter-match-gap-rust-implementation-plan.md`, and
-`docs/tasks/INTER-MATCH-GAP-CAPTURE.md` for the complete fixtures, mutation classes, storage routes, carrier roles,
-and remaining implementation ownership.
+`docs/knowledge/inter-match-gap-dart-implementation-plan.md`, and `docs/tasks/INTER-MATCH-GAP-CAPTURE.md` for the
+complete fixtures, mutation classes, storage routes, carrier roles, and remaining implementation ownership.

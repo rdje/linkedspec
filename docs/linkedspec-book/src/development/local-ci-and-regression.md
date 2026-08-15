@@ -218,6 +218,12 @@ Perl `.2.1-.2.3` established metadata, private live behavior, and independently 
 and once in the rooted recurring route, promotes only `perl_runtime`, and retires the obsolete dormancy fence.
 The neutral checker now rejects 56 semantic/topology mutations at rollout 3 complete / 6 pending: Perl and Rust
 regressions are both locked, while facade/schema/semantic/MCP/CLI/README surfaces remain absent.
+Behavior-free Dart `.4.0` re-runs that unchanged route and the complete Dart gate, then freezes `.4.1-.4.5` across
+authored/static metadata, same-authority native execution, reconstructed/descriptor/generated carriers,
+independently analyzed emitted source, and primary/nine-role admission. It neither invokes the skipped Dart row
+nor changes the contract/checker/driver. Maintained Dart commands must use `tools/run_dart_project_data.sh` or
+`tools/run_dart_local.sh`; the current storage oracle locks 22 temporary owners and 47 packages on repository
+storage.
 Behavior-free Rust preflight `.3.0` assigns `.3.1-.3.5` to authored metadata, same-authority native state,
 reconstruction/generated-plan parity, repository-local emitted proof, and final primary/admission. `.3.1` now
 implements exact Rust named/anonymous declarations, selectors, directive validation, diagnostics, and compiled

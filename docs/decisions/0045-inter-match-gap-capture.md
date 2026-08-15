@@ -259,6 +259,23 @@ No compiler, descriptor, generated carrier, helper, facade, schema, semantic/MCP
 typed-source behavior moved. `.1.2` still owns canonical routing, storage/topology governance, and public
 no-overclaim; `.1.3` still owns neutral recomposition before Perl implementation.
 
+## 2026-08-15 Dart implementation-plan amendment
+
+Behavior-free `INTER-MATCH-GAP-CAPTURE.4.0` reproduces Dart's exact absent boundary and freezes five leaves before
+implementation. Named declarations, named selectors, and `@capture_gaps` are raw invalid body syntax; all four
+private accessor spellings are unknown helpers. Repeated execution currently runs `LS` before selection, so only
+capture-enabled rules may install a candidate earlier; unflagged order is invariant.
+
+`.4.1` owns authored/static/compiled identity plus a dormant consumer; `.4.2` extends the existing private
+recognition invocation/token authority without widening observed `RecognitionFrameState`; `.4.3` proves normalized
+`SpecFile` reconstruction, compatible descriptor additions, and the unchanged generated-plan shape; `.4.4` proves
+independently analyzed/executed emitted source from repository-local storage; `.4.5` alone adds primary proof,
+validates nine roles once, registers the consumer, promotes Dart, and closes parent `.4`. Static diagnostics gain
+one backward-compatible logical spec source identity; runtime spans continue to use the existing immutable input
+`SourceAuthority` and Unicode-scalar projection. Generated source v2 remains `{label,family}` plus embedded
+normalized state. This amendment changes no Dart behavior, rollout row, contract, checker, driver, facade/schema/
+MCP/capability/CLI/README surface, or public claim.
+
 ## 2026-08-13 recurring-governance amendment
 
 `INTER-MATCH-GAP-CAPTURE.1.2` makes the neutral authority canonically recurring without admitting a runtime.

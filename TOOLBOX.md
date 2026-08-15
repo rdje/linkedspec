@@ -1103,6 +1103,26 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   all eight doctrines, containment/relocation, CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 741 seconds, exact
   opt-in routing, and local-CI exit 0 pass. `.3.0` remains behavior-free and `.3.1` waits for clean atomic 227.
 
+### 4.9.1.6 Dart gap implementation preflight
+
+- **WHAT:** the behavior-free `.4.0` map from Dart's audited AST/parser/compiler/runtime baseline to five owned
+  implementation leaves. It records exact raw-syntax/unknown-helper absence, current lifecycle order, one private
+  recognition authority, normalized-state/generated/emitted carriers, primary proof, storage, and admission
+  boundaries in [[inter-match-gap-dart-implementation-plan]].
+- **WHEN:** implementing or reviewing `.4.1-.4.5`, especially before changing Dart regex declarations/selectors,
+  logical spec identity, compiled edge provenance, recognition frames, native lifecycle, descriptors, generated
+  execution, or emitted source.
+- **HOW:** run the neutral/rooted checks and `bash tools/run_dart_project_data.sh ...`; never run a bare maintained
+  Dart command. Reproduce the named/directive/accessor boundary before source inspection, then follow
+  `RegexBodyElementKind`/`EdgeTarget`, `_parseSingleElement`/`_parseIndexAt`, `compileSpec`, `_executeRegexRule`,
+  `_executeRegexOnce`, `_InvocationState`, normalized `SpecFile` emission, and the existing primary adapter.
+- **BOUNDARY:** `.4.1` owns authored/static/compiled metadata and dormancy; `.4.2` owns private same-authority
+  native state/accessors; `.4.3` owns reconstruction/descriptor/generated-plan proof; `.4.4` owns independently
+  analyzed emitted proof; `.4.5` alone registers and promotes Dart. `RecognitionFrameState`, generated plan v2,
+  3/6/56 rollout, public surfaces, typed composition, and later runtimes do not move before their owners.
+- **SIGNED OFF:** focused Dart 123/123 and complete format 101/0, analysis, package 400/400, storage 22/47, CLI
+  66x2, and corpus 105/105 pass. `.4.0` changes no Dart implementation or rollout; `.4.1` waits for atomic 233.
+
 ### 4.9.2 `tools/check_recognition_transaction_contract.py` — neutral transaction/progress oracle
 
 - **WHAT:** independently interprets `linkedspec-recognition-transaction-v1`: four current authored forms, a linear
