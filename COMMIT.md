@@ -72,8 +72,46 @@ This document defines the standard commit workflow for this repository so any ne
 - Typical trigger: after implementation + tests are green.
 - For task-tree-managed work: run after each completed leaf; one commit per leaf before selecting another leaf.
 
+## Verification tiers (mandatory from atomic 235 onward)
+
+Every new leaf commit records exactly one `Verification tier`, one `Focused checks` selection, and one
+`Canonical trigger` in its owning task-tree node. The registered `VERIFICATION-CADENCE` doctrine rejects a staged
+slice that omits or duplicates those lines.
+
+### `focused` — ordinary commit default
+
+Use `Verification tier: focused` for an ordinary, bounded implementation or documentation leaf. Run:
+
+- the exact changed-behavior tests, including RED/GREEN proof when behavior is added or corrected;
+- the direct-dependent compatibility matrices and the relevant backend/component local gate;
+- all registered doctrines, Knowledge synchronization, both bounded-history pressure checks, and
+  `git diff --check`;
+- mdBook rendering when the public book changes.
+
+The complete `tools/run_ci_local.sh` gate is not required for an ordinary focused commit. If focused evidence
+exposes cross-cutting uncertainty, escalate that leaf to `canonical` before landing it.
+
+### `canonical` — batch/push and designated boundaries
+
+Use `Verification tier: canonical` for admission/promotion, milestone or parent closeout, public/cross-backend
+contract or generated-format movement, dependency/toolchain changes, CI/hook/gate changes, and storage/path/
+doctrine infrastructure. The checker also forces canonical tier when the staged paths themselves change these
+mechanical owners.
+
+After staging the exact candidate, run `bash tools/run_ci_local.sh`. The gate refuses unstaged tracked or
+untracked non-ignored inputs and writes a project-local receipt bound to base `HEAD` plus a read-only SHA-256 of
+Git's full-index binary staged diff.
+Pre-commit rejects a canonical-tier commit without that exact receipt. Post-commit may promote the receipt to the
+new committed `HEAD`, and `.githooks/pre-push` reuses it only when it matches exactly; otherwise pre-push runs the
+canonical gate once. Any intervening focused commit invalidates the prior receipt by Git identity.
+
+The batch rule therefore becomes: focused validation and one commit per ordinary slice; one canonical run at the
+final clean push boundary, unless a designated canonical leaf required it earlier. Local hooks remain bypassable,
+so a bypass is visible workflow non-compliance, not an enforcement impossibility.
+
 ## Required pre-commit validation
 - Run relevant syntax/tests for the task.
+- Record and run the task-tree leaf's selected `focused` or `canonical` verification tier as defined above.
 - Run both bounded chronology checks on every accepted slice:
   - `perl tools/roll_document_history.pl --surface change_history --check`
   - `perl tools/roll_document_history.pl --surface engineering_notes --check`
@@ -122,6 +160,8 @@ This document defines the standard commit workflow for this repository so any ne
    - Stage source/test/docs for the slice.
    - Do not stage swap/temp files.
    - Ensure the staged `MEMORY.md` is the exact handoff state; staged and unstaged pointer variants are rejected.
+   - For a canonical-tier leaf, stage the complete candidate with no unstaged tracked or untracked non-ignored
+     slice inputs, then run `bash tools/run_ci_local.sh` so its receipt binds the exact staged candidate.
 
 5. **Create commit**
    - Run commit with:
@@ -132,6 +172,8 @@ This document defines the standard commit workflow for this repository so any ne
    - Clear `git_message_brief.txt` (truncate to empty).
    - Verify status is clean except expected untracked local artifacts.
    - Confirm the post-commit activation-boundary check reported success; a warning requires a task-tree-owned correction before another commit.
+   - At the final batch boundary, push only from a clean tree. `.githooks/pre-push` requires or runs canonical
+     proof for exact committed `HEAD`; it safely reuses a matching promoted receipt instead of repeating the gate.
 
 ## Guardrails
 - Do not bundle unrelated changes in the same commit.

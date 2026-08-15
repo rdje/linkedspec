@@ -20,6 +20,28 @@ bash tools/run_ci_local.sh
 
 This is the canonical regression gate for local development.
 
+## Verification tiers
+
+The canonical gate is deliberately not the default after every ordinary commit. LinkedSpec uses two tiers so
+small, coherent slices keep moving without weakening the batch boundary:
+
+- A **focused commit** runs the tests for the changed behavior, its direct dependents, the relevant backend or
+  component gate, all repository doctrines, documentation-history pressure checks, and diff hygiene. Book changes
+  also render the mdBook. This is the normal per-leaf mode.
+- A **canonical boundary** runs `bash tools/run_ci_local.sh`. It is required for runtime admission or promotion,
+  milestone/parent closeout, public or cross-backend contract movement, dependency/toolchain changes, CI/hook/
+  gate changes, storage/path/doctrine infrastructure, and the final clean push boundary.
+
+Each task-tree leaf records its tier and exact focused checks. For canonical work, first stage the exact candidate
+and leave no unstaged tracked or untracked non-ignored files. The gate binds success to base `HEAD` and a read-only
+SHA-256 of Git's full-index binary staged diff in repository-local project data. The pre-commit doctrine rejects a missing or stale canonical
+receipt. After commit, an exact receipt can be promoted to committed `HEAD`; the pre-push hook reuses it only when
+it matches, otherwise it runs the complete gate once.
+
+This means a normal batch pays for focused proof on each commit and full proof once before push. Local Git hooks
+remain bypassable, and hosted CI remains disabled, so this is strong normal-workflow enforcement rather than a
+claim of literal impossibility.
+
 ### README and routed-document pressure
 
 The registered `README-STABILITY` doctrine runs on every doctrine invocation, regardless of which paths changed.

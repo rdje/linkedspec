@@ -10,6 +10,23 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-15 (`VERIFICATION-CADENCE-POLICY.0` — proportional verification): the canonical gate remains the source
+  of truth, but it is no longer an ordinary per-commit tax. Focused leaves must name exact changed behavior,
+  direct dependents, relevant component gates, and the always-on structural/documentation checks. Designated
+  admission, milestone, public/cross-backend, dependency/toolchain, CI/hook/gate, and storage/path/doctrine leaves
+  remain canonical.
+- Canonical evidence is content-addressed. `tools/verification_receipt.sh` fingerprints base `HEAD` plus the
+  SHA-256 of Git's full-index binary staged diff, refuses unstaged/untracked inputs, and writes only after
+  `tools/run_ci_local.sh` succeeds. Pre-commit validates that receipt; post-commit promotes it only when the exact
+  parent-to-commit diff became `HEAD`;
+  pre-push reuses exact committed proof or runs canonical CI once.
+- This avoids both stale-log trust and redundant immediate pre-push reruns. A later focused commit changes the Git
+  identity and naturally invalidates the receipt. Hooks remain bypassable because hosted CI is disabled; the
+  honest guarantee is strong normal-workflow enforcement, not literal impossibility.
+- Focused policy proof is 15 classifier/tier plus nine receipt cases, shell syntax, dirty pre-push rejection,
+  Knowledge 837/7,049, book 79/14,796 KiB, bounded-history/diff checks, and all nine doctrines. This foundational
+  gate/hook leaf also passes the full canonical gate and exact staged-candidate receipt before landing.
+
 - 2026-08-15 (`INTER-MATCH-GAP-CAPTURE.4.1` — Dart authored/static/compiled metadata): activation base is clean
   atomic 233 at `e40de948`. The final consumer is a library-skipped, final-path contract artifact rather than a
   temporary test; the neutral checker mutation-locks its identity, metadata role, contract source, parse/

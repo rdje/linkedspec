@@ -17,6 +17,10 @@ fail() {
  exit 1
 }
 
+CANONICAL_GATE_FINGERPRINT=$("$REPO_ROOT/tools/verification_receipt.sh" fingerprint) ||
+ fail "canonical candidate must be fully staged with no unstaged or untracked inputs"
+export LINKEDSPEC_CANONICAL_GATE_IN_PROGRESS=1
+
 require_command() {
  command -v "$1" >/dev/null 2>&1 || fail "required command not found: $1"
 }
@@ -198,6 +202,7 @@ bash "$REPO_ROOT/scripts/check_doctrines.sh"
 log "auditing git-tracked CI inputs"
 require_tracked_file .github/workflows/ci.yml
 require_tracked_file tools/run_ci_local.sh
+require_tracked_file tools/verification_receipt.sh
 require_tracked_file tools/run_rust_local.sh
 require_tracked_file tools/run_dart_local.sh
 require_tracked_file tools/run_dart_project_data.sh
@@ -1070,4 +1075,5 @@ else
  log "skipping optional five-backend punctuation-light matrix (set LINKEDSPEC_RUN_PUNCTUATION_MATRIX=1 when all backend toolchains are available)"
 fi
 
+"$REPO_ROOT/tools/verification_receipt.sh" write-staged "$CANONICAL_GATE_FINGERPRINT"
 log "local CI gate passed"

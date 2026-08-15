@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Canonical batch/push boundary for the hosted-CI-disabled LinkedSpec repository.
+set -euo pipefail
+
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+
+git diff --quiet --ignore-submodules -- || {
+  printf '%s\n' 'pre-push: unstaged tracked changes exist; finish and commit the active leaf before pushing' >&2
+  exit 1
+}
+git diff --cached --quiet --ignore-submodules -- || {
+  printf '%s\n' 'pre-push: staged uncommitted changes exist; finish and commit the active leaf before pushing' >&2
+  exit 1
+}
+if [[ -n "$(git ls-files --others --exclude-standard)" ]]; then
+  printf '%s\n' 'pre-push: untracked non-ignored files exist; the repository is not handoff-ready' >&2
+  exit 1
+fi
+
+if "$ROOT/tools/verification_receipt.sh" check-head >/dev/null 2>&1; then
+  printf '%s\n' 'pre-push: reusing canonical local-CI receipt for exact committed HEAD'
+else
+  printf '%s\n' 'pre-push: no exact committed receipt; running canonical local CI'
+  bash "$ROOT/tools/run_ci_local.sh"
+fi
+
+"$ROOT/tools/verification_receipt.sh" check-head >/dev/null
+printf '%s\n' 'pre-push: canonical boundary verified'

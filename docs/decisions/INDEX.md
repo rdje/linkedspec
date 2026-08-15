@@ -83,6 +83,7 @@ changed* lives in git (layer D), not here.
 | [0070](0070-engineering-notes-eleventh-segment-capacity.md) | Engineering-notes history admits its eleventh bounded member | 2026-08-13 | accepted under `INTER-MATCH-GAP-CAPTURE.1.2` | documentation, history, rollover, routing, pressure, continuity, doctrine |
 | [0071](0071-engineering-notes-twelfth-segment-capacity.md) | Engineering-notes history admits its twelfth bounded member | 2026-08-14 | accepted under `INTER-MATCH-GAP-CAPTURE.3.2` | documentation, history, rollover, routing, pressure, continuity, doctrine |
 | [0072](0072-change-history-seventeenth-member-capacity.md) | Change history admits its seventeenth bounded member | 2026-08-14 | accepted under `INTER-MATCH-GAP-CAPTURE.3.4` | documentation, history, rollover, routing, pressure, continuity, doctrine |
+| [0073](0073-tiered-verification-cadence.md) | Verification is focused per ordinary commit and canonical at boundaries | 2026-08-15 | accepted; implementation owned by `VERIFICATION-CADENCE-POLICY.0` | verification, testing, local-ci, commit-workflow, hooks, doctrine, productivity, receipts |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

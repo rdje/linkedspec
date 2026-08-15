@@ -1,7 +1,7 @@
 # 0004 — Hosted GitHub Actions CI is disabled; `tools/run_ci_local.sh` is the source of truth
 
 - Date: 2026-06-04
-- Status: accepted
+- Status: accepted; per-ordinary-commit cadence superseded by ADR `0073`
 - Tags: ci, environment
 
 ## Context
@@ -20,7 +20,8 @@ CI runs on push — both wrong. The canonical gate runs locally.
   only, job `if: false`). It exists so the local gate can audit that hosted CI, when
   re-enabled, delegates to the same repo-root script. Do not re-enable it without an
   explicit decision (supersede this record).
-- Run the local gate before committing/pushing; it is the build's source of truth.
+- The local gate remains the build's source of truth. ADR `0073` supersedes only its cadence: ordinary commits
+  use focused proof, while designated canonical leaves and the clean pre-push boundary run the full gate.
 
 ## Consequences
 

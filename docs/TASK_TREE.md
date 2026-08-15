@@ -34,7 +34,8 @@ evidence for one top-level task.
 | `FUTURE-PARITY-BACKLOG` | `active` / lossless-gap handoff `.14.5.0` landed at `3d0384d1`; typed composition waits | `Overall roadmap - future parity backlog` | Recursive observation remains closed at typed-source 9/5/114. `.14.5.0` handed sole named-slot/gap implementation ownership to `INTER-MATCH-GAP-CAPTURE.1-.7`; neutral `.1` landed through `db299789`, Perl `.2` landed through atomic 226 `eceb15ac`, and Rust `.3` landed as atomic 232 at `2800e7c3`. Behavior-free Dart `.4.0` is signoff-complete for intended atomic 233 with `.4.1-.4.5` frozen and rollout unchanged at 3/6/56. `.14.5.1` resumes typed `gap_composition` only after `.7` closes. Final typed-source `.14.8`, task metadata `.5`, and rendered readability remain separately owned. Capability exclusion freshness is public-closed under `FUTURE-PARITY-BACKLOG.24`; exclusion public closeout `.24.2` remains closed. | [docs/tasks/FUTURE-PARITY-BACKLOG.md](docs/tasks/FUTURE-PARITY-BACKLOG.md) |
 | `SPEC-LANGUAGE-SELF-CONTAINMENT` | `proposed` / approved direction; ratification `.0` signoff-complete | `.spec language evolution / expressive self-containment and alternate authoring profiles` | `.0` defines problem-domain closure without ambient effects and accepts an optional honest EBNF-like frontend over one canonical AST/HandlerIR/runtime with lossless source maps and five-backend obligations. KM 762/6,186, mdBook, all seven doctrines, and canonical Phase 0 1,031/1,031 in 641 seconds pass. `.1+` remains unscheduled behind current callable parity. | [docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md](docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md) |
 | `MEMORY-COMMIT-POINTER-ENFORCEMENT` | `done` / `closed` | `Repository continuity and doctrine enforcement` | ADR `0065` replaces the impossible self-hash premise with exact `activation_commit` boundaries. `.1` adds one phase-aware checker, hard staged pre-check, non-mutating committed post-check, E2/E4 composition, and 11 hermetic cases; both landing hooks passed. `.2` independently recomposes the committed rule unchanged, annotates two historical supersessions, and closes with canonical Phase 0 1,031/1,031 in 633 seconds; Dart `.11.5.1` activated from its clean handoff. | [docs/tasks/MEMORY-COMMIT-POINTER-ENFORCEMENT.md](docs/tasks/MEMORY-COMMIT-POINTER-ENFORCEMENT.md) |
-| `INTER-MATCH-GAP-CAPTURE` | `active` / Dart behavior-free plan `.4.0` signoff-complete from clean atomic 232 `2800e7c3` | `.spec language evolution / lossless segmentation and source preservation` | Perl and Rust run ordinarily and in the rooted route at gap 3/6/56 plus ten Rust admission mutations. Dart exact absence/lifecycle/carrier/storage audit and `.4.1-.4.5` ownership are frozen for intended atomic 233 without behavior or rollout movement. Dart `.4.1` follows only after commit/brief-clear/clean proof; Julia/Lua, recurring/public, typed composition, generated-plan v2, and outward surfaces remain pending or unchanged. | [docs/tasks/INTER-MATCH-GAP-CAPTURE.md](docs/tasks/INTER-MATCH-GAP-CAPTURE.md) |
+| `VERIFICATION-CADENCE-POLICY` | `done` / `closed`; `.0` signoff-complete from clean atomic 234 `1e6d326d` | `Repository continuity / verification economics and CI enforcement` | Focused ordinary-commit verification plus canonical designated/batch-push proof are stored and mechanically enforced for intended atomic 235. Tier evidence, exact staged-candidate receipts, clean pre-push routing/reuse, ADR `0073`, Knowledge/book lockstep, and the ninth doctrine are complete. | [docs/tasks/VERIFICATION-CADENCE-POLICY.md](docs/tasks/VERIFICATION-CADENCE-POLICY.md) |
+| `INTER-MATCH-GAP-CAPTURE` | `active` / Dart authored metadata `.4.1` signoff-complete from clean atomic 233 `e40de948` | `.spec language evolution / lossless segmentation and source preservation` | Perl and Rust run ordinarily and in the rooted route at gap 3/6/56 plus ten Rust admission mutations. Dart `.4.1` is signoff-complete for intended atomic 234 with exact authored/static/compiled metadata behind its dormant final consumer and ten Dart dormancy mutations. Native `.4.2` resumes only after `VERIFICATION-CADENCE-POLICY.0` lands cleanly; Julia/Lua, recurring/public, typed composition, generated-plan v2, and outward surfaces remain pending or unchanged. | [docs/tasks/INTER-MATCH-GAP-CAPTURE.md](docs/tasks/INTER-MATCH-GAP-CAPTURE.md) |
 | `LUA-BACKEND-PARITY` | `done` / `closed` | `Overall roadmap - future backend parity (Lua third)` | `.8.4` admits Lua as the fifth exact backend: 16 capabilities, 80/0/0, 177/177 on PUC Lua and LuaJIT, primary 61x2, corpus 105/105, and shared matrix 5x2x61. No Lua frontier remains. | [docs/tasks/LUA-BACKEND-PARITY.md](docs/tasks/LUA-BACKEND-PARITY.md) |
 | `PROJECT-DATA-SSD-ROOTING` | `done` / `closed` | `Repository architecture / project-data storage locality` | Post-closeout `.6` preserves pre-routing host-temp authority so relocated process containment cannot confuse SSD-routed scratch with the external macOS temp root. Focused mutations and complete canonical proof pass; the tree is closed at 41/300 without push. | [docs/tasks/PROJECT-DATA-SSD-ROOTING.md](docs/tasks/PROJECT-DATA-SSD-ROOTING.md) |
 | `REPO-ROOT-PATH-PORTABILITY` | `done` | `Repository architecture / checkout relocation invariance` | Remediation `.1.1-.1.3`, structural doctrine `.2.1`, and recurring moved-process oracle `.2.2` are complete. Rust executable-root precedence plus marker failure and all five outside-cwd primary anchors recur through SSD-routed canonical CI. | [docs/tasks/REPO-ROOT-PATH-PORTABILITY.md](docs/tasks/REPO-ROOT-PATH-PORTABILITY.md) |
@@ -3397,6 +3398,21 @@ Rules:
 - When a leaf completes, remove it from the frontier and add the next eligible
   leaf or leaves.
 
+## Verification Tier Rules
+
+From atomic 235 onward, every newly activated leaf commit adds exactly these three fields to its owning node:
+
+```text
+Verification tier: `focused` or `canonical`
+Focused checks: the exact changed-surface and direct-dependent commands selected for this leaf
+Canonical trigger: `none` for an ordinary focused leaf, or the specific boundary requiring full local CI
+```
+
+`focused` is the ordinary-commit default. `canonical` is required for admission/promotion, milestone or parent
+closeout, public/cross-backend contract or generated-format movement, dependency/toolchain changes, CI/hook/gate
+changes, and storage/path/doctrine infrastructure. A failed focused investigation may be escalated to canonical.
+The complete tier definitions, staged-candidate receipt, and pre-push rules live in `COMMIT.md` and ADR `0073`.
+
 ## PNT Selection Rules
 
 When PNT is asked to continue and at least one active task tree exists:
@@ -3407,7 +3423,8 @@ When PNT is asked to continue and at least one active task tree exists:
 4. Implement only that leaf.
 5. If the leaf is too broad, split it before implementation and commit the
    tree update as the leaf's honest outcome.
-6. Run the required validation for the leaf.
+6. Select and record the leaf's verification tier, then run its required validation. Ordinary leaves use focused
+   proof; canonical leaves run the complete local gate against the exact staged candidate.
 7. Update the task file, live docs, and roadmap if status changed.
 8. Run the full commit workflow before selecting another leaf.
 

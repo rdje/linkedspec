@@ -10,6 +10,26 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-15 — VERIFICATION-CADENCE-POLICY.0 — enforce tiered verification cadence
+
+- Adopted ADR `0073`: ordinary bounded leaves use focused changed-surface, direct-dependent, component, doctrine,
+  Knowledge/history, diff, and applicable book proof. Full canonical CI is reserved for designated admission/
+  milestone/public/infrastructure boundaries and the final clean batch/push boundary.
+- Every new leaf commit must add exactly one verification tier, focused-check selection, and canonical trigger.
+  The ninth registered doctrine rejects missing/duplicate tier evidence and forces canonical tier for staged CI,
+  hook, gate, dependency, storage/path, or doctrine infrastructure.
+- Canonical CI now requires a fully staged candidate and binds success to base `HEAD` plus a read-only SHA-256 of
+  Git's full-index binary staged diff in a repository-local receipt. Pre-commit rejects stale/missing receipts;
+  post-commit may promote an exact
+  receipt; pre-push reuses only exact committed proof or runs the complete gate once from a clean tree.
+- The first real staged check rejected `git write-tree` because it attempted `.git/index.lock` in a read-only
+  sandbox. The final fingerprint avoids that mutation and post-commit verifies the identical parent-to-commit diff.
+- Kept pre-commit fast, hosted Actions disabled, and `tools/run_ci_local.sh` authoritative. No parser, compiler,
+  runtime, backend, DSL, public API, schema, descriptor, or generated-format behavior changed.
+- Focused proof passes shell syntax, 15 path/tier cases, nine receipt cases, dirty pre-push rejection, Knowledge
+  837/7,049, book 79/14,796 KiB, history/diff checks, and all nine doctrines. The full canonical gate writes the
+  exact staged-candidate receipt and exits 0 before intended atomic 235.
+
 ## 2026-08-15 — INTER-MATCH-GAP-CAPTURE.4.1 — add Dart authored gap metadata
 
 - Activated task-tree-first from clean atomic-233 commit `e40de948`. The final-path Dart consumer and ten

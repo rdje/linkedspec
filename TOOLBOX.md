@@ -22,7 +22,9 @@ supporting techniques** that complement them. (Always run with `perl -Iperl …`
   and the engine disagree, the engine's *measured* output is the truth — **dump it with the tools below,
   don't transcribe it** from a triage note.
 - Doctrine compliance runs via [`scripts/check_doctrines.sh`](scripts/check_doctrines.sh) (the registry
-  driver), invoked by [`.githooks/pre-commit`](.githooks/pre-commit) (E3) + `tools/run_ci_local.sh` (E4).
+  driver), invoked by the fast [`.githooks/pre-commit`](.githooks/pre-commit) boundary (E3) and
+  `tools/run_ci_local.sh` (E4). ADR `0073` reserves complete canonical CI for designated leaves and the clean
+  pre-push boundary; ordinary leaf commits run their task-selected focused proof.
   For staged code/spec/test/tooling changes, `TASK-ACCEPTANCE`
   ([`scripts/check_diagnosis_evidence.sh`](scripts/check_diagnosis_evidence.sh)) requires the owning
   task file to carry the checklist below with LinkedSpec-tool evidence signatures. `REPO-ROOT-PATHS`
@@ -417,9 +419,11 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 
 ### 4.4 `tools/run_ci_local.sh` / `tools/ram_guard.sh`
 - **WHAT:** `run_ci_local.sh` = the canonical local CI gate (doctrines + primary CLI conformance in default/POSIX
-  environments + regression, E4);
-  `ram_guard.sh` = a memory guard for heavy runs. **HOW:** `bash tools/run_ci_local.sh`. The gate self-roots and
-  initializes repository-filesystem project data before any language/tool child starts.
+  environments + regression, E4); `verification_receipt.sh` binds a successful run to exact `HEAD` plus staged
+  tree; `ram_guard.sh` = a memory guard for heavy runs. **HOW:** stage the complete canonical candidate with no
+  unstaged/untracked inputs, then run `bash tools/run_ci_local.sh`. The gate self-roots, initializes repository-
+  filesystem project data, and writes the receipt only after every check passes. Ordinary focused commits do not
+  run this complete gate; `.githooks/pre-push` requires or runs it for exact clean `HEAD`.
 
 ### 4.4.1 `tools/project_data_env.sh` — repo-filesystem project state
 

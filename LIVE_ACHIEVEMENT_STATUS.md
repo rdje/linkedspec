@@ -2,33 +2,31 @@
 
 ## Current Activity
 
-- Atomic 233 landed cleanly at `e40de948`; Dart authored/static/compiled metadata leaf
-  `INTER-MATCH-GAP-CAPTURE.4.1` is signoff-complete from that exact boundary for intended atomic 234; no push.
-- Dart now parses spacing-insensitive named/anonymous regex declarations in one order, unindexed/numeric/named
-  selectors, and dedicated `@capture_gaps` evidence. Pinned Unicode-17 identity, exact source-aware diagnostics,
-  logical source identity, compiled slot/directive rows, and five-field edge provenance are GREEN.
-- The final Dart consumer exists at its exact path with a library-level `.4.5` skip. Explicit execution passes;
-  ordinary discovery remains skipped, and ten reason-checked Dart dormancy mutations prevent premature
-  canonical/recurring/facade admission.
-- Gap governance stays 3 complete / 6 pending / 56 semantic mutations plus ten Rust admission and ten Dart
-  dormancy mutations. Native gap state/accessors/lifecycle remain `.4.2`; reconstructed descriptor/generated
-  behavior, emitted proof, primary/admission, Julia/Lua, recurring, and public rows remain pending.
-- Generated plan v2, existing descriptor and `resolved_edges`, observed recognition state, CLI shape, README,
-  facade/schema/semantic/MCP surfaces, recognition 137/246/58, and typed source 9/5/114 remain unchanged.
+- Atomic 234 landed cleanly at `1e6d326d`; director-priority `VERIFICATION-CADENCE-POLICY.0` is signoff-complete
+  from that exact boundary for intended atomic 235; no push.
+- ADR `0073` makes focused changed-surface/direct-dependent proof the ordinary per-leaf default. Canonical CI is
+  reserved for designated admission/milestone/public/infrastructure leaves and the final clean batch/push boundary.
+- Every new leaf adds one tier, focused-check selection, and canonical trigger. The ninth doctrine forces
+  canonical tier for mechanical high-risk paths and rejects missing/duplicate tier evidence.
+- Canonical success is bound to base `HEAD` plus the exact staged-candidate diff in repository-local project data. Pre-commit
+  validates, post-commit promotes only exact proof, and clean pre-push safely reuses or runs the full gate once.
+- Hosted CI remains disabled and `tools/run_ci_local.sh` remains authoritative. Product behavior and gap rollout
+  remain unchanged at 3/6/56 plus ten Rust admission and ten Dart dormancy mutations.
 
 ## Latest Completed Slice
 
-- `.4.1` is signoff-complete for intended atomic 234: dormant 1/1, complete Dart 400 plus one intended skip,
-  storage 22/47, book 79/14,788 KiB, Knowledge 836/7,039, all doctrines, and canonical exit 0 are green.
+- `VERIFICATION-CADENCE-POLICY.0` is signoff-complete for intended atomic 235: 15 path/tier and nine receipt
+  cases, Knowledge 837/7,049, book 79/14,796 KiB, all nine doctrines, and exact receipt-bound canonical CI pass.
 
 ## Next Action
 
-- Commit `.4.1` as atomic 234, clear the brief, and prove a clean handoff. Then create and activate the
-  director-requested tiered-verification policy leaf before `.4.2`, storing and mechanically enforcing focused
-  ordinary-commit checks plus full canonical CI at batch/push and designated admission/milestone boundaries.
+- Commit policy atomic 235, clear the brief, prove its promoted receipt and clean handoff, then activate native
+  Dart gap-state leaf `INTER-MATCH-GAP-CAPTURE.4.2` task-tree-first with the focused tier.
 
 ## Recent Completions
 
+- `2026-08-15` — Tiered verification policy `.0` completed from clean `1e6d326d`: exact leaf tier evidence,
+  receipt-bound canonical proof, clean pre-push run/reuse, Knowledge 837/7,049, book 79/14,796, and nine doctrines.
 - `2026-08-15` — `.4.1` completed exact Dart authored/static/compiled gap metadata signoff from clean `e40de948`;
   final consumer remains dormant, rollout remains 3/6/56, and canonical Phase 0 1,031/1,031 exits 0.
 - `2026-08-15` — `e40de948` landed behavior-free Dart implementation freeze `.4.0` as clean atomic 233; `.4.1`
@@ -56,7 +54,6 @@
 - `2026-08-14` — `4a95e02a` landed behavior-free Rust implementation freeze `.3.0` as atomic 227/300.
 - `2026-08-14` — `eceb15ac` landed private Perl admission and parent `.2` as atomic 226/300.
 - `2026-08-14` — `.3.0` completed signoff at book 79/14,704 KiB, Knowledge 835/7,009, focused Rust 1/1, all eight doctrines, Phase 0 1,031/1,031 in 741 seconds, and exact routing without behavior movement.
-- `2026-08-14` — `.2.4` and parent `.2` completed canonical signoff at RAM 57%, Phase 0 1,031/1,031 in 765 seconds, and exact neutral-plus-Perl routing.
 - `2026-08-13` — `.2.4` implemented exact private Perl admission at gap 2/7/56; ordinary and rooted 124-test runs pass.
 ## History
 

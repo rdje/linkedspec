@@ -165,12 +165,14 @@ Same model as `MEMORY_ARCHITECTURE.md` §9.
   `docs/decisions/`, and the bootstrap pointers (`AGENTS.md`/`CLAUDE.md`). Discovery alone is not
   enforcement.
 - **E2 — Self-check.** Each `check_*.sh` (single source of truth for one doctrine) + the driver.
-- **E3 — Git hook.** `.githooks/pre-commit` runs the driver; a non-compliant tree cannot commit
-  locally. *Honest limit:* a local hook can be `--no-verify`'d or skipped if `core.hooksPath` is not
-  set — it catches the common case cheaply; it is **not** the backstop.
+- **E3 — Git hooks.** `.githooks/pre-commit` runs the fast driver; a non-compliant tree cannot commit
+  locally. `.githooks/pre-push` requires canonical proof for exact clean `HEAD`, running the complete local gate
+  unless an exact promoted receipt already exists. *Honest limit:* local hooks can be bypassed or skipped if
+  `core.hooksPath` is not set — they catch the normal workflow but are not hosted enforcement.
 - **E4 — CI gate.** The **same** driver runs in `tools/run_ci_local.sh`. **LinkedSpec reality:**
   hosted GitHub Actions is disabled to conserve Actions minutes (`docs/decisions/0004`), so the local
-  CI gate is the source of truth — the un-bypassable leg is only as strong as the next local-gate run.
+  CI gate is the source of truth. ADR `0073` runs it at designated canonical leaves and the normal pre-push
+  boundary rather than on every ordinary commit.
   Re-enabling an auto CI doctrine-gate job is the true "no matter what".
 
 To land non-compliant work, an author would have to defeat all four.
@@ -184,7 +186,9 @@ To land non-compliant work, an author would have to defeat all four.
 |---|---|
 | `scripts/check_doctrines.sh` | the registry+driver — runs every check, reports, exits nonzero on any breach |
 | `.githooks/pre-commit` | E3 local gate: regenerate derived artifacts, then run the driver |
+| `.githooks/pre-push` | clean boundary: require or run canonical proof for exact committed `HEAD` |
 | `.githooks/commit-msg` | E3: require a work-unit id in the subject (LinkedSpec scheme — see `COMMIT.md`) |
+| `tools/verification_receipt.sh` | bind canonical success to exact `HEAD` plus staged/committed Git tree |
 | `DOCTRINE_ENFORCEMENT.md` | this standard |
 | `TOOLBOX.md` | the debug-toolbox catalog + the **acceptance-checklist template** a code change should satisfy |
 | `scripts/check_diagnosis_evidence.sh` | reference EVIDENCE check (the task-acceptance gate) |
@@ -241,6 +245,7 @@ Enforced by [`scripts/check_doctrines.sh`](scripts/check_doctrines.sh) via
 | `PROJECT-DATA-STORAGE` | structural | `scripts/check_project_data_storage_locality.sh` | tracked project-storage defaults and current documented output commands stay repository-filesystem rooted while explicit caller/inert/tool/system paths remain legal |
 | `DOCUMENT-HISTORY` | structural | `scripts/check_document_history.sh` | bounded current documentation views/hot shards preserve strict repository-relative manifests, immutable segments, exact clean-Git reconstruction or source slices, queryability, complete-record rollover, and current-view limits |
 | `README-STABILITY` | structural | `scripts/check_readme_stability.sh` | root `README.md` stays within reviewed line/byte budgets and stable landing scope; all 62 reader/overflow routes close across 20 lifecycle-controlled surfaces in the resulting tree; debt growth and threshold increases require their exact owners/decisions |
+| `VERIFICATION-CADENCE` | structural + evidence | `scripts/check_verification_cadence.sh` | every new staged leaf declares one focused/canonical tier and selected checks; high-risk gate/dependency/doctrine paths require canonical tier; canonical claims carry an exact staged-candidate local-CI receipt; pre-commit remains fast and pre-push owns the clean canonical boundary |
 
 Deterministic-oracle doctrine run via the broader gate (`tools/run_ci_local.sh`): the phase0
 regression suite `t/phase0_regression.t` (the cross-variant baseline + the all-spec ActionIR-ready

@@ -31,9 +31,9 @@ point back here. The system of record is **`README.md`** (the project) +
    `LINKEDSPEC_TRACE_LEVEL` trace framework, the `tools/` scripts, the gates). Never eyeball a `.spec`
    or guess a root cause before the toolbox has shown the exact mechanism + source location.
 10. **Doctrines are mechanically enforced** (`DOCTRINE_ENFORCEMENT.md`, the 4th portable architecture):
-   every rule pairs with a `scripts/check_*.sh` run by the registry driver `scripts/check_doctrines.sh`
-   via `.githooks/pre-commit` (E3) + `tools/run_ci_local.sh` (E4). Add a doctrine = a check + one
-   registry line.
+    every rule pairs with a `scripts/check_*.sh` run by the registry driver `scripts/check_doctrines.sh`
+    via fast `.githooks/pre-commit` (E3) + `tools/run_ci_local.sh` (E4); `.githooks/pre-push` requires or runs
+    canonical proof for exact clean `HEAD`. Add a doctrine = a check + one registry line.
 
 ## Non-negotiable working rules
 
@@ -48,6 +48,9 @@ point back here. The system of record is **`README.md`** (the project) +
   conversation.
 - **Commit per `COMMIT.md`** after every slice, with the **task-tree leaf id in the
   subject**; use `git_message_brief.txt` (untracked; cleared to 0 bytes after commit).
+- **Use ADR `0073` verification tiers:** ordinary leaf commits record and run focused changed-surface/direct-
+  dependent proof; designated admission/milestone/public/infrastructure leaves and the final clean push boundary
+  run receipt-bound canonical CI. Do not run the full gate automatically for every ordinary commit.
 - **Before committing, run `scripts/check_memory_architecture.sh`** — git hooks and the
   local CI gate (`tools/run_ci_local.sh`) run it too; a non-compliant change fails and
   cannot land.
@@ -61,7 +64,7 @@ point back here. The system of record is **`README.md`** (the project) +
 ## Enforcement (why this is hard to ignore)
 
 `MEMORY_ARCHITECTURE.md` §9 wires four gates: these bootstrap pointers (E1 discovery),
-`scripts/check_memory_architecture.sh` (E2 invariants), `.githooks/` (E3 local gate —
+`scripts/check_memory_architecture.sh` (E2 invariants), `.githooks/` (E3 fast commit plus canonical push boundary —
 activate once with `git config core.hooksPath .githooks`), and the local CI gate
 `tools/run_ci_local.sh` (E4 backstop, which runs the self-check first). Hosted GitHub
 Actions is disabled (`docs/decisions/0004-hosted-ci-disabled-local-gate.md`), so the

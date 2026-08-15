@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
-# .githooks/pre-commit — local gate (E3 of DOCTRINE_ENFORCEMENT.md §7 / MEMORY_ARCHITECTURE.md §9).
+# .githooks/pre-commit — fast ordinary-commit enforcement boundary (E3 of
+# DOCTRINE_ENFORCEMENT.md §7 / MEMORY_ARCHITECTURE.md §9).
 # Regenerate + stage the derived Knowledge Map (so map drift is structurally impossible), then run
 # the single general doctrine enforcer (scripts/check_doctrines.sh) — the registry/driver that runs
 # every registered check_*.sh (memory-architecture, Knowledge Map, ...) and blocks the commit on any
-# breach. Adding a doctrine = write scripts/check_<id>.sh + one registry line in the driver.
+# breach. It deliberately does not run tools/run_ci_local.sh; canonical proof belongs to designated
+# leaves and .githooks/pre-push. Adding a doctrine = write scripts/check_<id>.sh + one registry line.
 # Activate once per clone: git config core.hooksPath .githooks
 set -euo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"

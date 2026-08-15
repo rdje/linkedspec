@@ -43,6 +43,7 @@ DOCTRINES=(
   "PROJECT-DATA-STORAGE|tracked project-storage defaults and documented outputs stay repository-filesystem rooted|scripts/check_project_data_storage_locality.sh"
   "DOCUMENT-HISTORY|bounded current documentation views preserve exact repository-local queryable history|scripts/check_document_history.sh"
   "README-STABILITY|README and every routed destination retain reviewed resulting-tree pressure controls|scripts/check_readme_stability.sh"
+  "VERIFICATION-CADENCE|ordinary commits declare focused proof while canonical boundaries carry exact staged-tree receipts|scripts/check_verification_cadence.sh"
 )
 
 fail=0

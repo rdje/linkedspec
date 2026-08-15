@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # .githooks/post-commit — verify committed MEMORY.md names the new commit's first-parent activation boundary.
-# This is a verification-only recovery signal; it never modifies the commit or working tree.
+# This verifies recovery state and may promote an untracked project-local canonical receipt from
+# HEAD^1 + committed tree to exact HEAD. It never modifies the commit or working tree.
 # Activate once per clone: git config core.hooksPath .githooks
 set -euo pipefail
 ROOT="$(git rev-parse --show-toplevel)"
@@ -14,3 +15,7 @@ if ! output=$("$ROOT/scripts/check_memory_commit_pointer.sh" \
 fi
 
 printf '%s\n' "$output"
+
+# A canonical-tier pre-commit receipt names the old HEAD and the staged tree. If that tree became
+# the new commit, promote the project-local receipt so an immediate pre-push can reuse the exact run.
+"$ROOT/tools/verification_receipt.sh" promote-post-commit 2>/dev/null || true

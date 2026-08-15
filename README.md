@@ -83,14 +83,15 @@ The governing decisions and verification commands are indexed in the [decision r
 Read [AGENTS.md](AGENTS.md) and [SESSION_BOOTSTRAP.md](SESSION_BOOTSTRAP.md) before changing the repository. Every
 change needs an owning task-tree leaf and follows the per-leaf [commit workflow](COMMIT.md).
 
-Run the canonical local gate from the repository root:
+Ordinary commits use the focused tier in [COMMIT.md](COMMIT.md). At designated and final clean push boundaries,
+run the canonical local gate from the repository root:
 
 ```sh
 bash tools/run_ci_local.sh
 ```
 
-Focused checks and gate composition are documented in [TOOLBOX.md](TOOLBOX.md). Hosted GitHub Actions are
-intentionally disabled; the local gate is authoritative.
+Focused checks, staged-candidate receipts, and gate composition are documented in [TOOLBOX.md](TOOLBOX.md). Hosted
+GitHub Actions are intentionally disabled; the local gate is authoritative.
 
 ## Status and support
 

@@ -71,7 +71,7 @@ required_labels=(
   "LOCKSTEP"
 )
 
-tool_signature_re='(LinkedSpec::Get|LinkedSpec::get_parser|return_descriptor|dump_parser_source|parser_source_ref|parse_only|generate_only|return_state|runtime_ctx_ref|call_spec_handler_subst|LINKEDSPEC_TRACE_LEVEL|bin/linkedspec|tools/(inspect_spec_codegen|cross_check_spec_parsers|gen_oracle_corpus)\.pl|scripts/check_(doctrines|memory_architecture|task_tree_metadata|diagnosis_evidence|repo_root_path_portability)\.sh|knowledge-map/scripts/check_knowledge_map\.sh|perl -Iperl|prove -[A-Za-z0-9 -]*Iperl|cargo test|mdbook build|git diff --check|rg -n)'
+tool_signature_re='(LinkedSpec::Get|LinkedSpec::get_parser|return_descriptor|dump_parser_source|parser_source_ref|parse_only|generate_only|return_state|runtime_ctx_ref|call_spec_handler_subst|LINKEDSPEC_TRACE_LEVEL|bin/linkedspec|tools/(inspect_spec_codegen|cross_check_spec_parsers|gen_oracle_corpus)\.pl|scripts/check_(doctrines|memory_architecture|task_tree_metadata|diagnosis_evidence|repo_root_path_portability|verification_cadence)\.sh|knowledge-map/scripts/check_knowledge_map\.sh|perl -Iperl|prove -[A-Za-z0-9 -]*Iperl|cargo test|mdbook build|git diff --check|rg -n)'
 why_where_re='(WHY|WHERE|root cause|mechanism|source location|file:line|[A-Za-z0-9_./-]+:[0-9]+|last_error|generated-source|generated source|descriptor|staged set|staged task file|tool-backed)'
 verification_re='(PASS|FAIL->PASS|REJECT->PASS|exit 0|0 failures|new failures.*empty|comm -13|comm -23|git diff --check|mdbook build|prove|cargo test|bash scripts/check_doctrines\.sh|bash tools/run_ci_local\.sh|checks pass|Result: PASS|clean)'
 
