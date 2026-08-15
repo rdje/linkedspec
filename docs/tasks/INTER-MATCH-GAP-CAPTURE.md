@@ -3,9 +3,9 @@
 ## Metadata
 
 - Tree ID: `INTER-MATCH-GAP-CAPTURE`
-- Status: `active` / reconstructed/descriptor/generated Dart carrier `.4.3` landed cleanly as atomic 237 at
-  `4c8ab7ee`; independently analyzed/executed emitted-source proof `.4.4` is signoff-complete from that exact
-  clean boundary for intended atomic 238; `.4.5` follows only after commit/brief-clear/clean proof; no push
+- Status: `active` / Dart primary and exact nine-role private admission `.4.5` plus parent `.4` are signoff-
+  complete from clean atomic 238 at `6a554312` for intended atomic 239; Julia `.5` follows only after the
+  commit/brief-clear/clean boundary; no push
 - Roadmap lane: `.spec language evolution / lossless segmentation and source preservation`
 - Created: `2026-07-17`
 - Last updated: `2026-08-15`
@@ -907,14 +907,17 @@ orchestration or to raw Perl cursor arithmetic.
   Commit: `INTER-MATCH-GAP-CAPTURE.3.5 - admit Rust inter-match gap capture` (intended atomic 232/300)
 
 - ID: `INTER-MATCH-GAP-CAPTURE.4`
-  Status: `active` (2026-08-15; behavior-free implementation/admission plan `.4.0` landed cleanly as atomic 233
-    at `e40de948`; authored/static/compiled metadata `.4.1` landed cleanly as atomic 234 at `1e6d326d`; private
-    native runtime leaf `.4.2` is active from clean workflow-policy atomic 235 at `c234ef9f`)
+  Status: `done; signoff-complete` (2026-08-15; `.4.1-.4.4` landed through emitted-proof atomic 238 at
+    `6a554312`; final private primary/admission `.4.5` passes exact staged canonical proof and closes the parent
+    for intended atomic 239)
   Goal: Implement exact Dart native/reconstructed/generated/primary parity.
   Children: `.4.0`, `.4.1`, `.4.2`, `.4.3`, `.4.4`, `.4.5`
   Acceptance: Dart passes the neutral gap corpus and every admitted execution role.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Exact nine-role Dart admission passes ordinarily and canonically at gap 4/5/57. The rooted route
+    executes neutral, Perl 124, Rust 1, and Dart 5 before three exact skips; canonical CI passes all nine
+    doctrines, containment/relocation, CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 753 seconds, the exact
+    opt-in gap route, receipt generation, `[ci] local CI gate passed`, and exit 0.
+  Commit: `INTER-MATCH-GAP-CAPTURE.4.5 - admit Dart inter-match gap capture` (intended atomic 239/300)
 
 - ID: `INTER-MATCH-GAP-CAPTURE.4.0`
   Status: `done; signoff-complete` (2026-08-15; task-tree-first from clean atomic-232 commit `2800e7c3`; intended
@@ -1021,10 +1024,12 @@ orchestration or to raw Perl cursor arithmetic.
   - `.4.5` owns the real primary-command role, exact nine-role once-only composition, ordinary/canonical
     registration, rooted-driver activation, contract/checker admission delta, live ledgers/docs, and parent `.4`
     closeout. Promote only `dart_runtime`: rollout becomes 4 complete + 5 pending; the route executes neutral,
-    Perl, Rust, and Dart before Julia/PUC Lua/LuaJIT skips. Replace `dart_runtime_premature` with
-    `dart_runtime_regression` while retaining 56 semantic mutations, and add ten reason-checked Dart admission
-    mutations. Recurring/public rows, typed `gap_composition`, capability status, facades, schemas, semantic/MCP,
-    CLI shape, README, and later runtimes remain pending or unchanged.
+    Perl, Rust, and Dart before Julia/PUC Lua/LuaJIT skips. The original freeze said to replace
+    `dart_runtime_premature` while retaining 56 semantic mutations; exact implementation-time history proved that
+    row never existed, so ADR `0074` supersedes only that count premise by preserving all 56 and adding
+    `dart_runtime_regression` as 57. Add ten reason-checked Dart admission mutations. Recurring/public rows, typed
+    `gap_composition`, capability status, facades, schemas, semantic/MCP, CLI shape, README, and later runtimes
+    remain pending or unchanged.
 
   ### Role and Verification Boundaries
 
@@ -1297,10 +1302,86 @@ orchestration or to raw Perl cursor arithmetic.
   Commit: `INTER-MATCH-GAP-CAPTURE.4.4 - prove Dart emitted gap execution`
 
 - ID: `INTER-MATCH-GAP-CAPTURE.4.5`
-  Status: `pending`
+  Status: `done; signoff-complete` (2026-08-15; task-tree-first from clean atomic-238 commit `6a554312`; exact
+    staged canonical proof passes for intended atomic 239; zero-byte brief at activation; no push)
   Goal: Prove primary parity, admit the exact nine-role Dart consumer, and close parent `.4`.
   Depends on: `.4.4`
-  Verification: `pending`
+  Acceptance: prove clean activation and retrieve the frozen Dart plan plus exact final consumer, existing primary
+    adapter/CLI, neutral contract/checker, canonical CI, rooted recurring driver, storage, role/rollout/mutation,
+    live-ledger, and public-no-overclaim authorities before code; produce deliberate RED for the absent ninth
+    `primary_command` role and for dormant Dart admission topology; extend only the final Dart consumer with real
+    existing-primary parity, validate the contract-declared nine roles in exact order and exactly once, remove its
+    library skip, register it exactly once in canonical CI and once after Rust in the rooted route, and promote
+    only `dart_runtime` so rollout becomes 4 complete / 5 pending; add exact `dart_runtime_regression` while
+    advancing from 56 to 57 semantic mutations because the frozen plan's presumed `dart_runtime_premature` row
+    never existed, and replace ten Dart dormancy locks with ten reason-checked admission/regression mutations;
+    keep Julia, both Lua ABIs, recurring, and public-no-drift rows
+    pending; keep generated plan v2, runtime facade, capability, typed `lossless_gap_composition`, semantic/MCP
+    schemas, CLI shape, README, dependencies/toolchain, and every outward token unchanged; correct the audited
+    `.4.4`-pending roadmap status omission under this owning leaf; synchronize all ledgers, live docs, Knowledge,
+    and mdBook; pass focused/ordinary/rooted/storage/book/Knowledge/doctrine plus exact staged canonical signoff;
+    close parent `.4`, then land/clear/clean before activating Julia `.5`.
+
+  ### Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / OWNERSHIP** — Proved committed `6a554312`, empty tracked/untracked status, zero-byte
+    brief, atomic 238 at the durable resume pointer, and activated only this existing task node before code.
+  - [x] **RETRIEVE AUTHORITY / PAST-SYNC AUDIT** — Query Knowledge first; read the final consumer, primary adapter,
+    checker, contract, canonical/recurring/storage routes, role/outward ledgers, and exact roadmap omission history.
+  - [x] **EXACT PRIMARY / ADMISSION RED** — Prove the ninth primary role is absent and the pre-promotion checker
+    rejects a Dart-complete topology before implementing either boundary.
+  - [x] **NINE-ROLE PRIMARY GREEN** — Add existing-primary parity and an exact once-only nine-role composition to
+    the final consumer without changing the primary adapter, emitter, generated plan, CLI shape, or runtime facade.
+  - [x] **PRIVATE DART ADMISSION** — Remove the library skip, register the consumer once canonically and once after
+    Rust in the rooted route, promote only Dart to 4/5/57, replace dormancy locks, and add its missing regression.
+  - [x] **ROLLOVER CAPACITY** — The mandatory complete-record engineering-notes rollover created immutable segment
+    4995 and exposed the reviewed finite route cap at 12 files / 11 manifest rows. Add one indexed exact-limit ADR,
+    raise only those two bounds to 13/12, update the existing history fact, and prove the pressure doctrine.
+  - [x] **PARENT CLOSEOUT / CANONICAL SIGNOFF** — Close `.4`, align every roadmap/task/live/book/Knowledge/ledger
+    projection including the audited stale rows, pass focused plus exact staged canonical proof, and land cleanly.
+
+  Verification tier: `canonical`
+  Focused checks: explicit primary role and ordinary nine-role Dart consumer; final consumer plus primary CLI,
+    runtime/recognition/recursion/cursor, source-emitter, duplicate-slot, and typed-source dependents; neutral gap
+    checker and rooted neutral/Perl/Rust/Dart route with three later-runtime skips; complete Dart local gate and
+    23-owner storage proof; contract/role/outward ledgers; rendered mdBook, Knowledge regeneration, all doctrines,
+    bounded histories, and exact staged diff checks.
+  Canonical trigger: `admission/promotion + milestone/parent closeout` — this leaf promotes `dart_runtime`, removes
+    dormant discovery, changes canonical/rooted registration, advances contract governance, and closes parent
+    `.4`; ADR `0073` therefore requires an exact staged-candidate receipt from `tools/run_ci_local.sh`.
+  Retrieved boundary: final consumer has four dormant stage tests and no primary owner/role ledger; the existing
+    private `runLinkedSpecDartPrimaryCli` adapter already accepts inline source/input; contract and checker require
+    nine ordered roles but still validate Dart dormancy, 3/6 rollout, four skips, and ten dormancy mutations;
+    canonical CI registers Perl/Rust only and the rooted driver skips Dart. Git evidence for
+    atomic 238 proves its future-backlog rows advanced `.4.4`, while both dedicated inter-match roadmap rows were
+    omitted and still say `.4.4` pending; `.4.5` owns that exact past-sync repair.
+  Root-cause correction: contract/history evidence proves Perl admission created mutation 56 as
+    `rust_runtime_premature`, then Rust admission replaced it with `rust_runtime_regression` without adding a
+    Dart-premature successor. The `.4.0` freeze therefore named a nonexistent `dart_runtime_premature` replacement.
+    `.4.5` preserves all 56 current guards and adds `dart_runtime_regression` as mutation 57; no existing semantic
+    protection is sacrificed merely to preserve the stale planned count.
+  Implemented admission boundary: the exact primary RED failed only because `runPrimaryCommandGapContract` was
+    absent; the admission RED failed only at pending `dart_runtime`. GREEN reuses
+    `runLinkedSpecDartPrimaryCli` for four items and their heterogeneous gaps, removes the library skip, and
+    executes the contract-declared `native_execution`, `ordinary_reconstruction`, `descriptor`,
+    `generated_plan`, `emitted_source`, `target_lifecycle`, `recursion_and_rollback`, `portable_diagnostics`, and
+    `primary_command` roles in order exactly once. The ordinary and canonical consumers run once, the rooted
+    route runs Dart after Rust and before three later skips, and only Dart advances to 4/5/57. Ten Dart admission
+    mutations lock identity, ledger, ordinary/canonical/recurring multiplicity, later-runtime skip, and facade
+    absence. Production emitter/plan v2, primary adapter, CLI, facade/schema/MCP, README, capability, typed
+    composition, recurring/public rows, dependencies, and toolchain do not move. Both dedicated roadmap rows
+    omitted by atomic 238 are corrected under this owning leaf.
+  Verification: signoff-complete — primary role 1/1, ordinary consumer 5/5,
+    neutral checker 4/5/57 plus ten Rust and ten Dart admission mutations, rooted neutral/Perl-124/Rust-1/Dart-5
+    with three skips, complete Dart format 102/0 + analyzer + 407 tests + storage 23/47 + CLI 66x2 + corpus 105,
+    recognition 137/246/58, duplicate slot 7/0/59, and typed source across all six runtimes pass. The first exact
+    staged canonical precursor failed closed only because immutable history segment 4995 exceeded the reviewed
+    engineering-notes 12-file/11-manifest-row cap. ADR `0075` authorizes only 13/12; the unchanged byte, root,
+    segment, and aggregate limits plus the README pressure doctrine now pass. The unchanged outside-sandbox
+    canonical rerun passes all nine doctrines, six-family containment, all-five-anchor relocation, CLI 66/66
+    twice, RAM 57%, Phase 0 1,031/1,031 in 753 seconds, exact neutral/Perl/Rust/Dart routing, staged receipt
+    generation, `[ci] local CI gate passed`, and exit 0. The final closeout-only staged bytes are re-proved before
+    commit; parent `.4` is closed and Julia `.5` remains next only after commit/brief/clean proof.
   Commit: `INTER-MATCH-GAP-CAPTURE.4.5 - admit Dart inter-match gap capture`
 
 - ID: `INTER-MATCH-GAP-CAPTURE.5`
@@ -1349,10 +1430,14 @@ orchestration or to raw Perl cursor arithmetic.
 | 18 | `INTER-MATCH-GAP-CAPTURE.4.1` | `done; signoff-complete from clean e40de948` | Authored/static/compiled Dart provenance and the mechanically dormant final consumer are exact for intended atomic 234. |
 | 19 | `INTER-MATCH-GAP-CAPTURE.4.2` | `signoff-complete from clean c234ef9f; focused tier` | Private native Dart gap state/accessors/lifecycle are exact for intended atomic 236 with no full CI or rollout movement. |
 | 20 | `INTER-MATCH-GAP-CAPTURE.4.3` | `done; landed at 4c8ab7ee` | Normalized Dart reconstruction, compatible descriptors, unchanged-v2 generated execution, and the audited stale-summary correction landed as atomic 237. |
-| 21 | `INTER-MATCH-GAP-CAPTURE.4.4` | `done; signoff-complete from clean 4c8ab7ee; focused tier` | One offline managed caller proves ten value and two typed-error emitted modules direct/traced; storage advances only to 23 owners for intended atomic 238. |
+| 21 | `INTER-MATCH-GAP-CAPTURE.4.4` | `done; landed at 6a554312` | One offline managed caller proves ten value and two typed-error emitted modules direct/traced; storage advances only to 23 owners as atomic 238. |
+| 22 | `INTER-MATCH-GAP-CAPTURE.4.5` | `done; signoff-complete from clean 6a554312` | Primary parity, exact nine-role admission, Dart-only 4/5/57 promotion, canonical/rooted registration, and exact staged canonical proof close parent `.4` for intended atomic 239; Julia `.5` follows after commit/brief/clean proof. |
 
 ## Decisions
 
+- `2026-08-15`: ADR `0074` corrects the `.4.0` frozen mutation-count premise from exact Git/contract evidence.
+  Rust admission consumed `rust_runtime_premature` without creating `dart_runtime_premature`; Dart admission must
+  preserve all 56 current guards and add `dart_runtime_regression` as mutation 57, yielding exact 4/5/57.
 - `2026-08-15`: Dart implementation is split across `.4.1-.4.5` before behavior. `.4.1` owns authored/static/
   compiled provenance and a library-level skipped final consumer; `.4.2` owns private same-authority native state;
   `.4.3` owns reconstruction/descriptors/generated-plan; `.4.4` owns repository-routed independently analyzed
@@ -1642,8 +1727,8 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
   roles. Shared Lua `.6` proves those roles independently on PUC Lua and LuaJIT from one Lua source.
 - `.7` runs every complete runtime exactly once, all generated/capability/language ledgers, both primary option
   environments, migration locks, and public/mdBook no-drift before promoting recurrence/public admission.
-  Until then the mdBook must distinguish complete private Perl runtime admission from unimplemented later-runtime
-  and portable/public admission; README, facades, semantic/MCP schemas, CLI, capability status, and typed-source
+  The mdBook distinguishes complete private Perl/Rust/Dart runtime admission from unimplemented later-runtime and
+  portable/public admission; README, facades, semantic/MCP schemas, CLI, capability status, and typed-source
   `lossless_gap_composition` do not move.
 
 ## Activation Boundary
@@ -1658,14 +1743,15 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
   boundary. Emitted proof `.3.4` landed as atomic 231 at `c3326f6d`; final private admission `.3.5` closed parent
   `.3` in atomic 232 at `2800e7c3`. Dart planning `.4.0` landed at `e40de948`, authored metadata `.4.1` at
   `1e6d326d`, focused-verification policy atomic 235 at `c234ef9f`, and private native `.4.2` at atomic 236
-  `0b074e1c`. Reconstructed/descriptor/generated `.4.3` landed as atomic 237 at `4c8ab7ee`. Independently emitted
-  `.4.4` is signoff-complete from that exact clean boundary for intended atomic 238; primary/admission `.4.5` may
-  activate only after commit/brief-clear/clean proof.
+  `0b074e1c`. Reconstructed/descriptor/generated `.4.3` landed as atomic 237 at `4c8ab7ee`, and independently
+  emitted `.4.4` landed as atomic 238 at `6a554312`. Primary/admission/parent-closeout `.4.5` is signoff-complete
+  from that exact clean boundary for intended atomic 239; Julia `.5` may activate only after commit/brief/clean proof.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-08-15` | `INTER-MATCH-GAP-CAPTURE.4.5` | Clean `6a554312` activation; exact primary and admission RED/GREEN; once-only nine-role consumer; ordinary/canonical/rooted registration; complete Dart/storage; gap, recognition, duplicate-slot, and typed-source matrices; roadmap omission repair; ADRs `0074`/`0075`; rendered mdBook; Knowledge Map; bounded histories; all nine doctrines; exact staged canonical CI | Pass: primary 1/1 and ordinary consumer 5/5; Dart format 102/0, strict analysis, 407 tests, storage 23/47, CLI 66x2, corpus 105; gap 4/5/57 plus ten Rust and ten Dart admission mutations; rooted neutral/Perl-124/Rust-1/Dart-5 then three skips; recognition 137/246/58; duplicate slot 7/0/59; typed source across all six runtimes. The first precursor rejected the old engineering-notes cap; segment 4995 plus ADR `0075` advance only file/manifest limits to 13/12. The unchanged outside-sandbox rerun passes containment/relocation, CLI 66x2, RAM 57%, Phase 0 1,031/1,031 in 753 seconds, receipt generation, `[ci] local CI gate passed`, and exit 0. Generated plan v2 and every outward surface remain unchanged; parent `.4` closes. |
 | `2026-08-15` | `INTER-MATCH-GAP-CAPTURE.4.4` | Clean `4c8ab7ee` activation; deliberate emitted-owner RED; one offline managed caller; ten value plus two typed-error emitted modules; paired direct/traced execution; final consumer and direct dependents; complete Dart/storage; gap, recognition, duplicate-slot, and typed-source matrices; rendered mdBook; Knowledge Map; bounded history; all nine doctrines; focused tier with no canonical CI | Pass: RED stops only at absent `runIndependentlyEmittedGapContract`; emitted proof is 1/1, explicit consumer 4/4, and direct dependents 100/100. Dart-local is format 102/0, strict analysis, 402 plus one intended skip, storage 23/47, CLI 66x2, and corpus 105. Gap remains 3/6/56 plus ten Rust admission and ten Dart dormancy mutations; recognition 137/246/58, duplicate slot 7/0/59, and typed source 9/5/114 pass. Book is 79/14,828 KiB, Knowledge 837/7,053, bounded histories, exact diff, and all nine doctrines pass. Production emitter/plan v2, primary/admission, rollout, and outward surfaces remain unchanged; ADR `0073` reserves canonical proof for `.4.5`. |
 | `2026-08-15` | `INTER-MATCH-GAP-CAPTURE.4.3` | Clean `0b074e1c` activation; exact carrier RED/GREEN; normalized reconstruction; compatible descriptor metadata; same-engine direct/traced generated execution and typed failures; direct dependents; root-route logical-source correction; neutral/rooted gap, recognition, duplicate-slot, and typed-source matrices; complete Dart/storage; rendered mdBook; Knowledge Map; bounded history; all nine doctrines; focused tier with no canonical CI | Pass: RED stops only at absent descriptor `regex_slots`; explicit proof is 3/3, direct dependents 100/100, and root-route 3/3. Dart-local is format 102/0, strict analysis, 402 plus one intended skip, storage 22/47, CLI 66x2, and corpus 105. Gap remains 3/6/56 plus ten Rust admission and ten Dart dormancy mutations; rooted execution is neutral, Perl 124, Rust 1/1, then four skips. Recognition 137/246/58, duplicate slot 7/0/59, and typed source 9/5/114 pass. Book is 79/14,816 KiB, Knowledge 837/7,052, and all nine doctrines pass. ADR `0073` correctly excludes full CI; emitted/primary/admission, rollout, plan v2, and outward surfaces remain unchanged or pending. |
 | `2026-08-15` | `INTER-MATCH-GAP-CAPTURE.4.2` | Clean `c234ef9f` activation; exact explicit-consumer RED/GREEN; one-authority native state/accessors/lifecycle/entry/rollback/nesting; direct Dart dependents; neutral and rooted gap governance; complete Dart-local/storage gate; rendered mdBook; Knowledge Map; all nine doctrines; focused tier with no canonical CI | Pass: RED reaches exact unknown-helper `gap_kind`; explicit metadata/native proof is 2/2 and direct private-authority proof is 2/2. Dart-local is format 102/0, strict analysis, 402 plus one intended skip, storage 22/47, CLI 66x2, and corpus 105. Gap stays 3/6/56 plus ten Rust admission and ten Dart dormancy mutations; rooted execution is neutral, Perl 124, Rust 1/1, then Dart/Julia/PUC-Lua/LuaJIT skips. Book is 79/14,812 KiB, Knowledge 837/7,052, and all nine doctrines pass. ADR `0073` correctly excludes full CI: reconstructed/generated, emitted/primary/admission, rollout, plan v2, and outward surfaces remain unchanged or pending. |
@@ -1691,6 +1777,7 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `INTER-MATCH-GAP-CAPTURE.4.5` | `INTER-MATCH-GAP-CAPTURE.4.5 - admit Dart inter-match gap capture` | Signoff-complete intended atomic 239/300 from `6a554312`; exact private Dart admission is canonical-green at 4/5/57 and closes parent `.4`; commit/brief/clean proof remains; no push. |
 | `INTER-MATCH-GAP-CAPTURE.4.4` | `INTER-MATCH-GAP-CAPTURE.4.4 - prove Dart emitted gap execution` | Signoff-complete independent emitted Dart proof for intended atomic 238/300 from `4c8ab7ee`; focused proof only, final consumer remains dormant, and rollout is unchanged; no push. |
 | `INTER-MATCH-GAP-CAPTURE.4.3` | `INTER-MATCH-GAP-CAPTURE.4.3 - carry Dart gap generated execution` | Signoff-complete reconstructed/descriptor/generated Dart carrier for intended atomic 237/300 from `0b074e1c`; focused proof only, final consumer remains dormant, and rollout is unchanged; no push. |
 | `INTER-MATCH-GAP-CAPTURE.4.2` | `INTER-MATCH-GAP-CAPTURE.4.2 - add Dart native gap execution` | Signoff-complete private native Dart execution for intended atomic 236/300 from `c234ef9f`; focused proof only, final consumer remains dormant, and rollout is unchanged; no push. |
@@ -1713,6 +1800,16 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
 
 ## Changelog
 
+- `2026-08-15`: Implemented `.4.5` primary parity and exact private Dart admission from clean `6a554312`.
+  Primary RED stopped only at absent `runPrimaryCommandGapContract`; admission RED stopped only at pending Dart.
+  GREEN reuses the existing primary adapter, removes the skip, executes nine contract roles in exact order once,
+  and registers the consumer ordinarily, canonically, and after Rust in the rooted route. Governance advances
+  only Dart to 4/5/57 plus ten Rust and ten Dart admission mutations. ADR `0074` records the evidence-backed 57th
+  regression guard, and the two atomic-238 roadmap omissions are corrected. Focused proof is primary 1/1,
+  consumer 5/5, Dart 407/storage 23/47/CLI 66x2/corpus 105, rooted four-runtime execution, recognition
+  137/246/58, duplicate slot 7/0/59, and typed source 9/5/114. Canonical CI passes all nine doctrines,
+  containment/relocation, CLI 66x2, RAM 57%, Phase 0 1,031/1,031 in 753 seconds, the exact gap route, receipt
+  generation, and exit 0; parent `.4` closes. Generated plan v2 and all outward surfaces remain unchanged.
 - `2026-08-15`: Completed `.4.4` independent emitted Dart proof from clean `4c8ab7ee`. The deliberate RED stopped
   only at absent `runIndependentlyEmittedGapContract`; one repository-routed offline caller then strictly analyzed
   and executed ten value plus two typed-error modules through paired direct/traced entrypoints with exact native

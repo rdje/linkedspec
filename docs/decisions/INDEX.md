@@ -84,6 +84,8 @@ changed* lives in git (layer D), not here.
 | [0071](0071-engineering-notes-twelfth-segment-capacity.md) | Engineering-notes history admits its twelfth bounded member | 2026-08-14 | accepted under `INTER-MATCH-GAP-CAPTURE.3.2` | documentation, history, rollover, routing, pressure, continuity, doctrine |
 | [0072](0072-change-history-seventeenth-member-capacity.md) | Change history admits its seventeenth bounded member | 2026-08-14 | accepted under `INTER-MATCH-GAP-CAPTURE.3.4` | documentation, history, rollover, routing, pressure, continuity, doctrine |
 | [0073](0073-tiered-verification-cadence.md) | Verification is focused per ordinary commit and canonical at boundaries | 2026-08-15 | accepted; implementation owned by `VERIFICATION-CADENCE-POLICY.0` | verification, testing, local-ci, commit-workflow, hooks, doctrine, productivity, receipts |
+| [0074](0074-dart-gap-admission-mutation-correction.md) | Dart gap admission adds a regression mutation instead of replacing a nonexistent one | 2026-08-15 | accepted; implementation owned by `INTER-MATCH-GAP-CAPTURE.4.5` | architecture, capture, dart, admission, mutations, verification, continuity |
+| [0075](0075-engineering-notes-thirteenth-segment-capacity.md) | Engineering-notes history admits its thirteenth bounded member | 2026-08-15 | accepted under `INTER-MATCH-GAP-CAPTURE.4.5` | documentation, history, rollover, routing, pressure, continuity, doctrine |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

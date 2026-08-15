@@ -11,6 +11,8 @@ answers:
   - "does Dart gap capture widen RecognitionFrameState"
   - "when must Dart select a gap candidate relative to LS"
   - "how will Dart preserve Unicode gap spans"
+  - "why does Dart inter match gap governance have 57 mutations"
+  - "where is the Dart inter match gap primary command proved"
   - "how will Dart static gap diagnostics get source identity"
   - "does Dart gap capture change generated source v2"
   - "which Dart descriptor fields will expose gap metadata"
@@ -26,7 +28,7 @@ answers:
   - "how does Dart restore gap state on recognition rollback"
   - "when are Dart gap accessors available"
 date: 2026-08-15
-status: authored/static/compiled, private native, reconstructed, descriptor, generated-plan, and independently emitted execution implemented through INTER-MATCH-GAP-CAPTURE.4.4; primary admission remains pending
+status: private Dart inter-match gap capture admitted through INTER-MATCH-GAP-CAPTURE.4.5 across all nine roles; outward surfaces and later runtimes remain pending
 tags: [capture, segmentation, dart, parser, lifecycle, transaction, generated-source, emitted-source, admission]
 evidence: "INTER-MATCH-GAP-CAPTURE.4.0 starts from clean atomic-232 commit 2800e7c3. Repository-routed probes show numeric syntax works while named declarations, named selectors, and capture_gaps remain raw invalid syntax; all four private accessors reach exact unknown_helper diagnostics. Trace proves repeated Dart rules currently execute LS before regex selection. Focused parser/compiler/runtime/transaction/emitter/primary proof passes 123 tests. The complete Dart gate passes format 101/0, strict analysis, 400/400 tests, storage 22 Directory.systemTemp owners / 47 packages, CLI 66x2, and corpus 105/105. Leaves .4.1-.4.5 separately own authored/static metadata and dormancy, native recognition state, reconstructed/descriptor/generated-plan carriers, independently analyzed emitted source, then primary/nine-role admission. No Dart behavior, rollout, generated format, facade/schema/MCP, capability, README, or public claim moves in .4.0."
 evidence_update_2026_08_15_metadata: "INTER-MATCH-GAP-CAPTURE.4.1 activates from clean atomic-233 commit e40de948. Checker-first final-path RED is exactly absent parseSpec(sourceId:) and SpecFile.sourceId. GREEN adds pinned-Unicode named/anonymous declaration order, unindexed/numeric/named authorship, source-aware static diagnostics, directive eligibility, logical source identity through ordinary/staged/loaded/JSON routes, compiled slot/directive rows, and five-field edge provenance. The explicit dormant consumer passes 1/1; ordinary Dart remains 400 plus one intended skip; neutral governance remains 3/6/56 plus ten Rust admission and ten Dart dormancy mutations. Descriptor resolved_edges, generated plan v2, native state/accessors, facade, canonical/recurring routes, rollout, and outward claims do not move."
@@ -37,9 +39,12 @@ evidence_update_2026_08_15_carrier: "INTER-MATCH-GAP-CAPTURE.4.3 activates task-
 evidence_update_2026_08_15_carrier_signoff: "Carrier leaf .4.3 is signoff-complete for intended atomic 237 from clean 0b074e1c. The complete Dart gate exposed one direct-dependent portability fixture that compared caller-logical normalized source identity with an absolute scratch-path load; the test now uses the same logical request identity on both routes and passes 3/3. Dart-local passes format 102/0, strict analysis, 402 plus one intended skip, storage 22/47, CLI 66x2, and corpus 105. Gap governance stays 3/6/56 plus ten Rust admission and ten Dart dormancy mutations; recognition 137/246/58, duplicate slot 7/0/59, and typed source 9/5/114 pass. The book renders 79 files / 14,816 KiB, Knowledge is 837/7,052, bounded history and all nine doctrines pass, and ADR 0073 excludes full canonical CI."
 evidence_update_2026_08_15_emitted: "INTER-MATCH-GAP-CAPTURE.4.4 activates task-tree-first from clean atomic 237 at 4c8ab7ee. Exact RED is the absent runIndependentlyEmittedGapContract owner. GREEN builds one repository-routed offline caller with a private PUB_CACHE, ten value modules, two typed-error modules, and per-module traces. Strict analysis and paired direct/traced execution prove mixed Unicode/empty gaps, falsey child values, lifecycle order, child cursors, detached entry identity, nested isolation, rollback, terminal tails, failed minimum, direct entry, legacy behavior, and typed unavailable-context/cursor-regression detail. Explicit dormant proof is 4/4, direct dependents are 100/100, and the Dart storage oracle is exact at 23 owners / 47 packages with no residue. Production emitter, generated plan v2, primary/admission, rollout, and outward surfaces do not move."
 evidence_update_2026_08_15_emitted_signoff: "Emitted leaf .4.4 is signoff-complete for intended atomic 238 from clean 4c8ab7ee. Complete Dart passes format 102/0, strict analysis, 402 plus one intended skip, storage 23/47, CLI 66x2, and corpus 105. Gap governance remains 3/6/56 plus ten Rust admission and ten Dart dormancy mutations; recognition 137/246/58, duplicate slot 7/0/59, and typed source 9/5/114 pass. The book renders 79 files / 14,828 KiB, Knowledge is 837/7,053, bounded histories and all nine doctrines pass, and ADR 0073 excludes canonical CI. Primary parity, Dart promotion, exact admission, and parent closeout remain exclusively .4.5."
+evidence_update_2026_08_15_admission: "INTER-MATCH-GAP-CAPTURE.4.5 activates task-tree-first from clean atomic 238 at 6a554312. Exact primary RED stops only at absent runPrimaryCommandGapContract; exact admission RED stops only because dart_runtime is still pending. GREEN reuses runLinkedSpecDartPrimaryCli for heterogeneous item separators, removes the library skip, and executes native, ordinary reconstruction, descriptor, generated plan, emitted source, lifecycle, recursion/rollback, diagnostics, and primary roles in exact contract order once each. Ordinary consumer is 5/5, complete Dart is format 102/0 plus strict analysis, 407 tests, storage 23/47, CLI 66x2, and corpus 105. Rooted governance executes neutral, Perl 124, Rust 1, Dart 5, then three skips at 4/5/57 with ten Rust and ten Dart admission mutations. Recognition 137/246/58, duplicate slot 7/0/59, and typed source six-runtime proof pass. Exact contract/Git history proves dart_runtime_premature never existed, so ADR 0074 preserves all prior 56 mutations and adds dart_runtime_regression as mutation 57. Generated plan v2, primary adapter, facade/schema/MCP/CLI/README, typed composition, and public rows do not move."
+evidence_update_2026_08_15_admission_signoff: "Dart admission .4.5 and parent .4 are signoff-complete for intended atomic 239 from clean 6a554312. The first exact staged canonical precursor rejected only the finite engineering-notes collection cap after segment 4995; ADR 0075 advances only file/manifest bounds to 13/12. The unchanged outside-sandbox rerun passes all nine doctrines, repository containment and relocation, primary CLI 66/66 twice, RAM 57%, Phase 0 1,031/1,031 in 753 seconds, exact neutral/Perl-124/Rust-1/Dart-5 routing plus three skips, staged receipt generation, and local-CI exit 0. Julia .5 remains next only after commit, brief clear, and clean proof."
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py"
   - "bash tools/check_inter_match_gap_capture_six_runtime.sh"
+  - "(cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/inter_match_gap_capture_contract_test.dart)"
   - "bash tools/run_dart_local.sh"
   - "bash tools/test_dart_project_data_storage.sh"
 ---
@@ -56,8 +61,10 @@ live ledgers, and parent closeout.
 
 ## Verified baseline
 
-At clean `2800e7c3`, gap governance is 3 complete + 6 pending / 56 semantic mutations plus ten Rust admission
-mutations. The rooted route runs neutral, Perl 124, and Rust 1/1, then reports Dart and three later-runtime skips.
+At the behavior-free clean `2800e7c3` baseline, gap governance was 3 complete + 6 pending / 56 semantic mutations
+plus ten Rust admission mutations. The rooted route ran neutral, Perl 124, and Rust 1/1, then reported Dart and
+three later-runtime skips. Dart admission now advances that boundary to 4/5/57 plus ten Rust and ten Dart
+admission mutations.
 
 The Dart AST has anonymous regex `pattern` only and edge targets with only `label/index`. The parser accepts only
 slash regexes, four legacy split markers, and digit-only selectors. Exact probes therefore turn
@@ -130,7 +137,7 @@ agrees with the native authority over mixed separators, Unicode/empty spans, fal
 child cursors, entry identity, nesting, rollback, terminal behavior, direct entry, and legacy behavior. Both
 error modules preserve their typed detail. The exact test temp-owner inventory advances from 22 to 23.
 
-## Carrier and admission boundary
+## Carrier and admitted boundary
 
 Normalized `SpecFile` JSON is the implemented generated carrier. Descriptors expose separate `regex_slots`,
 `capture_gaps`, and `resolved_slot_edges` projections without changing existing `resolved_edges`. Generated plans
@@ -138,10 +145,11 @@ contain only `{label,family}` and execute through the same engine. `emitDartSour
 proof without a second gap model or a new generated format.
 
 The emitted proof uses a repository-routed generated caller with its own local package cache and registers its
-exact `Directory.systemTemp` owner in the storage oracle. `.4.5` now validates the contract-declared roles once
-and only once: native execution, ordinary reconstruction, descriptor, generated plan, emitted source, target
-lifecycle, recursion/rollback, portable diagnostics, and primary command. Only then may Dart move to complete;
-Julia, both Lua runtimes, recurring/public rows, typed composition, and every outward surface stay pending.
+exact `Directory.systemTemp` owner in the storage oracle. `.4.5` validates the contract-declared roles once and
+only once: native execution, ordinary reconstruction, descriptor, generated plan, emitted source, target
+lifecycle, recursion/rollback, portable diagnostics, and primary command. The ordinary/canonical consumer and
+rooted route now admit Dart at 4/5/57. Julia, both Lua runtimes, recurring/public rows, typed composition, and every
+outward surface stay pending.
 
 Related: [[inter-match-gap-executable-contract-plan]], [[inter-match-gap-recurring-governance]],
-[[inter-match-gap-rust-implementation-plan]], [[dart-project-data-ssd-storage]], and ADR `0045`.
+[[inter-match-gap-rust-implementation-plan]], [[dart-project-data-ssd-storage]], ADR `0045`, and ADR `0074`.

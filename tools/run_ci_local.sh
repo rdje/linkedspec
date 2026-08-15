@@ -642,6 +642,9 @@ PERL5LIB= prove -Iperl t/inter_match_gap_capture_perl_contract.t
 log "running exact Rust inter-match gap-capture admission consumer"
 cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract
 
+log "running exact Dart inter-match gap-capture admission consumer"
+(cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/inter_match_gap_capture_contract_test.dart)
+
 log "checking backend-neutral recognition transaction and progress contract"
 bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py
 

@@ -122,6 +122,9 @@ now strictly analyzes and executes ten value modules plus two typed-error module
 entrypoints. Exact Unicode/empty gaps, falsey results, lifecycle order, child cursors, entry identity, nesting,
 rollback, terminal tails, failed minimums, direct entry, legacy behavior, and typed errors agree with native
 compiled state. The production emitter and the v2 `{label,family}` plan are unchanged.
+The admitted final consumer composes native, reconstructed, descriptor, generated-plan, emitted-source,
+lifecycle, recursion/rollback, diagnostic, and existing-primary roles exactly once; this composition adds no
+compiled field or second state authority.
 
 The Julia backend now implements the same narrow staged provider before compiled state is built. Its public path is:
 

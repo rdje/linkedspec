@@ -1,18 +1,16 @@
-// INTER-MATCH-GAP-CAPTURE.4.4 — dormant Dart emitted-source stage.
+// INTER-MATCH-GAP-CAPTURE.4.5 — admitted private Dart gap contract.
 //
-// This final consumer path now proves authored/static metadata plus native gap
-// state, lifecycle, entry identity, rollback, recursion, ordinary normalized
-// reconstruction, compatible descriptors, generated-plan execution, and
-// independently analyzed/executed emitted source. Primary routing and admission
-// remain owned by `.4.5`.
+// This ordinary final consumer proves the contract-declared native,
+// reconstructed, descriptor, generated-plan, emitted, lifecycle,
+// recursion/rollback, diagnostics, and primary-command roles exactly once.
 
-@Skip('INTER-MATCH-GAP-CAPTURE.4.5 owns Dart runtime admission')
 library;
 
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:linkedspec_dart/linkedspec_dart.dart';
+import 'package:linkedspec_dart/src/cli/primary_cli.dart';
 import 'package:test/test.dart';
 
 typedef JsonObject = Map<String, Object?>;
@@ -69,7 +67,7 @@ void main() {
     expect(rollout[3], {
       'id': 'dart_runtime',
       'owner': 'INTER-MATCH-GAP-CAPTURE.4',
-      'status': 'pending',
+      'status': 'complete',
     });
 
     const source = '''
@@ -902,6 +900,181 @@ Part:
     'independently analyzed and executed emitted source stage',
     () => runIndependentlyEmittedGapContract(),
     timeout: const Timeout(Duration(minutes: 3)),
+  );
+
+  test(
+    'primary command and exact role ledger stage',
+    () => runExactDartRoleAdmission(),
+    timeout: const Timeout(Duration(minutes: 3)),
+  );
+}
+
+const _admissionSource = '''
+Top::
+ I { items = [] }
+ @capture_gaps
+ -> Item[word] { push(items, array(call(Item), gap_text())) }
+ LX { return(copy(items)) }
+Item:
+ word=/[a-z]+/
+ I.return(entry_text())
+''';
+
+const _admissionInput = 'alpha, beta | gamma\n- delta';
+
+const _admissionExpected = <Object?>[
+  <Object?>['alpha', ''],
+  <Object?>['beta', ', '],
+  <Object?>['gamma', ' | '],
+  <Object?>['delta', '\n- '],
+];
+
+Future<void> runExactDartRoleAdmission() async {
+  final consumers = (contract['recurring_gate']! as JsonObject)['consumers']!;
+  final dartConsumer = (consumers as List).cast<JsonObject>().singleWhere(
+    (row) => row['runtime'] == 'dart',
+  );
+  final declaredRoles = (dartConsumer['roles']! as List).cast<String>();
+  const expectedRoles = <String>[
+    'native_execution',
+    'ordinary_reconstruction',
+    'descriptor',
+    'generated_plan',
+    'emitted_source',
+    'target_lifecycle',
+    'recursion_and_rollback',
+    'portable_diagnostics',
+    'primary_command',
+  ];
+  expect(declaredRoles, expectedRoles);
+
+  final roles = <String, Future<void> Function()>{
+    'native_execution': () async {
+      expect(
+        executeNative(_admissionSource, _admissionInput).value,
+        _admissionExpected,
+      );
+    },
+    'ordinary_reconstruction': () async {
+      final authored = parseSpec(
+        _admissionSource,
+        sourceId: 'dart-gap-admission.spec',
+      );
+      final reconstructed = SpecFile.fromJson(
+        (jsonDecode(jsonEncode(authored.toJson()))! as Map)
+            .cast<String, Object?>(),
+      );
+      expect(reconstructed.toJson(), authored.toJson());
+      expect(
+        LinkedSpecRuntimeEngine(
+          compileSpec(reconstructed),
+        ).parse(_admissionInput).value,
+        _admissionExpected,
+      );
+    },
+    'descriptor': () async {
+      final compiled = compileMetadata(
+        _admissionSource,
+        sourceId: 'dart-gap-admission.spec',
+      );
+      final descriptor = compiled.toDescriptorJson();
+      final rules = descriptor['spec']! as JsonObject;
+      final top = (rules['Top']! as JsonObject)['meta']! as JsonObject;
+      final item = (rules['Item']! as JsonObject)['meta']! as JsonObject;
+      expect(top['capture_gaps'], {
+        'enabled': true,
+        'directive': '@capture_gaps',
+        'source_id': 'dart-gap-admission.spec',
+        'line': 3,
+      });
+      expect(item['regex_slots'], [
+        {
+          'regex_index': 0,
+          'slot_id': 'word',
+          'source_id': 'dart-gap-admission.spec',
+          'line': 7,
+        },
+      ]);
+    },
+    'generated_plan': () async {
+      final compiled = compileMetadata(_admissionSource);
+      final plan = buildGeneratedRulePlan(compiled);
+      expect(plan.map((row) => row.toJson()), [
+        {'label': 'Top', 'family': 'default'},
+        {'label': 'Item', 'family': 'default'},
+      ]);
+      expect(
+        executeGeneratedParserV2(
+          compiled,
+          plan,
+          _admissionInput,
+          'dart-gap-admission.spec',
+        ),
+        _admissionExpected,
+      );
+    },
+    'emitted_source': runIndependentlyEmittedGapContract,
+    'target_lifecycle': () async {
+      final fixture = _emittedValueCases.singleWhere(
+        (row) => row.name == 'lifecycle_order',
+      );
+      expect(
+        executeNative(fixture.source, fixture.input).value,
+        fixture.expected,
+      );
+    },
+    'recursion_and_rollback': () async {
+      for (final name in ['nested_isolation', 'rollback']) {
+        final fixture = _emittedValueCases.singleWhere(
+          (row) => row.name == name,
+        );
+        expect(
+          executeNative(fixture.source, fixture.input).value,
+          fixture.expected,
+          reason: name,
+        );
+      }
+    },
+    'portable_diagnostics': () async {
+      final unavailable = nativeError(
+        'Direct::\n /H/\n I { return(gap_text()) }\n',
+        'H',
+      );
+      expect(unavailable.diagnostic?.code, 'gap_capture_context_unavailable');
+      final regression = nativeError(
+        'Top::OR{1}\n @capture_gaps\n -> Part { rewind_match_start() }\nPart: /H/\n',
+        'aH',
+      );
+      expect(regression.diagnostic?.code, 'source_location_cursor_regression');
+    },
+    'primary_command': () async => runPrimaryCommandGapContract(),
+  };
+  expect(roles.keys.toList(growable: false), declaredRoles);
+
+  final completed = <String>{};
+  for (final role in declaredRoles) {
+    expect(completed.add(role), isTrue, reason: 'role $role repeated');
+    await roles[role]!();
+  }
+  expect(completed, roles.keys.toSet());
+}
+
+void runPrimaryCommandGapContract() {
+  final output = runLinkedSpecDartPrimaryCli(const [
+    '--inline-spec',
+    _admissionSource,
+    '--input',
+    _admissionInput,
+  ]);
+
+  expect(output.exitCode, 0, reason: 'Dart gap primary command exit');
+  expect(output.stderrBytes, isEmpty, reason: 'Dart gap primary stderr');
+  expect(
+    jsonDecode(utf8.decode(output.stdoutBytes)),
+    _admissionExpected,
+    reason:
+        'the primary command preserves heterogeneous separators '
+        'independently of item recognition',
   );
 }
 

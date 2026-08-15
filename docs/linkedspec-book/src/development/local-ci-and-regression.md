@@ -234,24 +234,21 @@ containment and relocation, CLI 66/66 in both option environments, RAM 62%, Phas
 and this complete matrix through its exact success marker. The combined program-wide `.14.8` public-no-drift row
 remains pending.
 
-Inter-match gap-capture recurring governance runs the complete neutral, Perl, and Rust rows; four later runtime routes remain explicit skips.
+Inter-match gap-capture recurring governance runs the complete neutral, Perl, Rust, and Dart rows; three later runtime routes remain explicit skips.
 Perl `.2.1-.2.3` established metadata, private live behavior, and independently loaded generated parity. Admission
 `.2.4` makes the full metadata/live/generated consumer the default, registers it once in ordinary canonical CI
 and once in the rooted recurring route, promotes only `perl_runtime`, and retires the obsolete dormancy fence.
 The neutral checker now rejects 56 semantic/topology mutations at rollout 3 complete / 6 pending: Perl and Rust
 regressions are both locked, while facade/schema/semantic/MCP/CLI/README surfaces remain absent.
-Behavior-free Dart `.4.0` re-runs that unchanged route and the complete Dart gate, then freezes `.4.1-.4.5` across
-authored/static metadata, same-authority native execution, reconstructed/descriptor/generated carriers,
-independently analyzed emitted source, and primary/nine-role admission. It neither invokes the skipped Dart row
-nor changes the contract/checker/driver. Maintained Dart commands must use `tools/run_dart_project_data.sh` or
-`tools/run_dart_local.sh`; the current storage oracle locks 22 temporary owners and 47 packages on repository
-storage.
-Dart `.4.2` now implements the private native stage while deliberately retaining that same skip and rollout.
-Explicit `--run-skipped` proof executes its metadata and native groups 2/2; ordinary package discovery reports
-402 passes plus one intended skip. The backend-local focused gate also passes format 102/0, strict analysis,
-storage 22/47, CLI 66/66 twice, and corpus 105/105. Under ADR `0073`, this ordinary private-runtime leaf uses its
-declared focused tier and does not run canonical CI; the rooted route still executes neutral, Perl, and Rust and
-skips Dart until the admission leaf.
+Behavior-free Dart `.4.0` froze `.4.1-.4.5` across authored/static metadata, same-authority native execution,
+reconstructed/descriptor/generated carriers, independently analyzed emitted source, and primary/nine-role
+admission. `.4.1-.4.4` supplied those private carriers behind a skipped consumer. Admission `.4.5` removes that
+skip, proves the existing primary adapter, executes all nine declared roles exactly once, registers the consumer
+once in canonical CI and once after Rust in the rooted route, and promotes only `dart_runtime`. The checker now
+rejects 57 semantic mutations at rollout 4 complete / 5 pending plus ten Rust and ten Dart admission mutations;
+ADR `0074` explains the additional Dart regression guard. Maintained Dart commands use
+`tools/run_dart_project_data.sh` or `tools/run_dart_local.sh`; the storage oracle locks 23 temporary owners and 47
+packages on repository storage. Julia and both Lua routes remain explicit skips, and no outward surface moves.
 Behavior-free Rust preflight `.3.0` assigns `.3.1-.3.5` to authored metadata, same-authority native state,
 reconstruction/generated-plan parity, repository-local emitted proof, and final primary/admission. `.3.1` now
 implements exact Rust named/anonymous declarations, selectors, directive validation, diagnostics, and compiled

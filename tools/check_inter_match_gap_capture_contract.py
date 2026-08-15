@@ -40,16 +40,16 @@ RUST_ADMISSION_MUTATION_IDS = (
     "rust_facade_absence",
 )
 
-DART_DORMANCY_MUTATION_IDS = (
+DART_ADMISSION_MUTATION_IDS = (
     "dart_consumer_identity",
-    "dart_metadata_stage",
-    "dart_contract_source",
-    "dart_parse_boundary",
-    "dart_validation_boundary",
-    "dart_diagnostic_contract",
-    "dart_compiler_boundary",
-    "dart_canonical_absence",
-    "dart_recurring_absence",
+    "dart_role_ledger",
+    "dart_ordinary_registration",
+    "dart_primary_role",
+    "dart_canonical_registration",
+    "dart_canonical_duplicate",
+    "dart_recurring_registration",
+    "dart_recurring_duplicate",
+    "dart_later_runtime_skip",
     "dart_facade_absence",
 )
 
@@ -89,7 +89,7 @@ EXPECTED_COUNTS = {
     "compatibility_rows": 6,
     "diagnostics": 9,
     "rollout_legs": 9,
-    "semantic_mutations": 56,
+    "semantic_mutations": 57,
 }
 
 MUTATION_IDS = (
@@ -146,6 +146,7 @@ MUTATION_IDS = (
     "rollout_sequence",
     "perl_runtime_regression",
     "rust_runtime_regression",
+    "dart_runtime_regression",
     "storage_paths",
     "route_order",
     "public_no_overclaim",
@@ -756,7 +757,7 @@ def validate_diagnostics(document: dict[str, Any]) -> None:
 
 def validate_recurring_gate(document: dict[str, Any]) -> None:
     expected = {
-        "status": "governance_current_perl_rust_admitted_later_runtimes_pending",
+        "status": "governance_current_perl_rust_dart_admitted_later_runtimes_pending",
         "owner": "INTER-MATCH-GAP-CAPTURE.1.2",
         "driver": "tools/check_inter_match_gap_capture_six_runtime.sh",
         "local_ci_driver": "tools/run_ci_local.sh",
@@ -853,13 +854,14 @@ def validate_public_no_overclaim(
     expected = {
         "status": "current",
         "owner": "INTER-MATCH-GAP-CAPTURE.1.2",
-        "policy": "document the executable neutral and admitted private Perl and Rust runtimes without claiming later runtimes, recurring/public rollout completion, capability admission, schema exposure, CLI exposure, or outward public admission",
+        "policy": "document the executable neutral and admitted private Perl, Rust, and Dart runtimes without claiming later runtimes, recurring/public rollout completion, capability admission, schema exposure, CLI exposure, or outward public admission",
         "rollout_assertions": {
             "row_count": 9,
             "neutral_contract": {"status": "complete", "owner": "INTER-MATCH-GAP-CAPTURE.1.1"},
             "perl_runtime": {"status": "complete", "owner": "INTER-MATCH-GAP-CAPTURE.2.4"},
             "rust_runtime": {"status": "complete", "owner": "INTER-MATCH-GAP-CAPTURE.3"},
-            "pending_runtime_ids": ["dart_runtime", "julia_runtime", "puc_lua_runtime", "luajit_runtime"],
+            "dart_runtime": {"status": "complete", "owner": "INTER-MATCH-GAP-CAPTURE.4"},
+            "pending_runtime_ids": ["julia_runtime", "puc_lua_runtime", "luajit_runtime"],
             "runtime_status": "pending",
             "recurring": {"status": "pending", "owner": "INTER-MATCH-GAP-CAPTURE.7"},
             "public_no_drift": {"status": "pending", "owner": "INTER-MATCH-GAP-CAPTURE.7"},
@@ -867,23 +869,23 @@ def validate_public_no_overclaim(
         "documents": [
             {
                 "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
-                "required_marker": "Inter-match gap-capture recurring governance now executes the complete neutral, Perl, and Rust rows; four later runtime routes and both public rows remain pending.",
+                "required_marker": "Inter-match gap-capture recurring governance now executes the complete neutral, Perl, Rust, and Dart rows; three later runtime routes and both public rows remain pending.",
             },
             {
                 "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
-                "required_marker": "Inter-match gap-capture recurring governance runs the complete neutral, Perl, and Rust rows; four later runtime routes remain explicit skips.",
+                "required_marker": "Inter-match gap-capture recurring governance runs the complete neutral, Perl, Rust, and Dart rows; three later runtime routes remain explicit skips.",
             },
             {
                 "path": "docs/linkedspec-book/src/overview/project-status.md",
-                "required_marker": "Inter-match gap-capture governance is current at 3 complete / 6 pending: Perl and Rust are admitted privately, while later runtimes and both public rows remain pending.",
+                "required_marker": "Inter-match gap-capture governance is current at 4 complete / 5 pending: Perl, Rust, and Dart are admitted privately, while later runtimes and both public rows remain pending.",
             },
             {
                 "path": "capability_conformance/README.md",
-                "required_marker": "Inter-match gap-capture recurring governance now admits the private Perl and Rust runtimes; later runtimes and public admission remain pending.",
+                "required_marker": "Inter-match gap-capture recurring governance now admits the private Perl, Rust, and Dart runtimes; later runtimes and public admission remain pending.",
             },
             {
                 "path": "TOOLBOX.md",
-                "required_marker": "Inter-match gap-capture recurring governance executes its complete neutral, private Perl, and private Rust rows while later runtimes remain pending.",
+                "required_marker": "Inter-match gap-capture recurring governance executes its complete neutral, private Perl, private Rust, and private Dart rows while later runtimes remain pending.",
             },
         ],
         "surface_guard": {
@@ -909,7 +911,7 @@ def validate_public_no_overclaim(
     rollout = document["rollout"]
     require(len(rollout) == assertions["row_count"], "public no-overclaim rollout cardinality drifted")
     rollout_by_id = {row["id"]: row for row in rollout}
-    for rollout_id in ("neutral_contract", "perl_runtime", "rust_runtime", "recurring", "public_no_drift"):
+    for rollout_id in ("neutral_contract", "perl_runtime", "rust_runtime", "dart_runtime", "recurring", "public_no_drift"):
         expected_row = assertions[rollout_id]
         actual = rollout_by_id.get(rollout_id)
         require(
@@ -935,7 +937,7 @@ def validate_public_no_overclaim(
 def validate_rollout(document: dict[str, Any]) -> None:
     rows = indexed(document["rollout"], ROLLOUT_IDS, "rollout")
     for index, rollout_id in enumerate(ROLLOUT_IDS):
-        expected_status = "complete" if index <= 2 else "pending"
+        expected_status = "complete" if index <= 3 else "pending"
         expected_owner = TASK_OWNER if index == 0 else {
             "perl_runtime": "INTER-MATCH-GAP-CAPTURE.2.4",
             "rust_runtime": "INTER-MATCH-GAP-CAPTURE.3",
@@ -967,7 +969,7 @@ def validate_registration(document: dict[str, Any]) -> None:
     driver_text = RECURRING_DRIVER_PATH.read_text(encoding="utf-8")
     require(PERL_CONSUMER_PATH.is_file(), "admitted Perl consumer is missing")
     require(RUST_CONSUMER_PATH.is_file(), "admitted Rust consumer is missing")
-    require(DART_CONSUMER_PATH.is_file(), "dormant Dart consumer is missing")
+    require(DART_CONSUMER_PATH.is_file(), "admitted Dart consumer is missing")
     perl_consumer_text = PERL_CONSUMER_PATH.read_text(encoding="utf-8")
     rust_consumer_text = RUST_CONSUMER_PATH.read_text(encoding="utf-8")
     dart_consumer_text = DART_CONSUMER_PATH.read_text(encoding="utf-8")
@@ -977,7 +979,7 @@ def validate_registration(document: dict[str, Any]) -> None:
     dart_facade_text = DART_FACADE_PATH.read_text(encoding="utf-8")
     validate_perl_admission(perl_consumer_text, ci_text, driver_text, perl_facade_text)
     validate_rust_admission(rust_consumer_text, ci_text, driver_text, rust_facade_text)
-    validate_dart_dormancy(dart_consumer_text, ci_text, driver_text, dart_facade_text)
+    validate_dart_admission(dart_consumer_text, ci_text, driver_text, dart_facade_text)
     for marker in (
         'source "$REPO_ROOT/tools/project_data_env.sh"',
         'linkedspec_project_data_enter_run "$REPO_ROOT/tools/check_inter_match_gap_capture_six_runtime.sh" "$@"',
@@ -1002,9 +1004,12 @@ def validate_registration(document: dict[str, Any]) -> None:
                 "--test inter_match_gap_capture_contract"
             )
         elif rollout_id == "dart_runtime":
-            require(consumer_path == DART_CONSUMER_PATH, "dormant Dart consumer path drifted")
-            require(rollout_by_id[rollout_id]["status"] == "pending", "dormant Dart rollout is not pending")
-            route_markers.append(f"skipping pending runtime route {rollout_id}: {consumer['path']}")
+            require(consumer_path == DART_CONSUMER_PATH, "admitted Dart consumer path drifted")
+            require(rollout_by_id[rollout_id]["status"] == "complete", "admitted Dart rollout is not complete")
+            route_markers.append(
+                "( cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only "
+                "test/inter_match_gap_capture_contract_test.dart )"
+            )
         else:
             require(rollout_by_id[rollout_id]["status"] == "pending", f"later runtime is not pending: {rollout_id}")
             route_markers.append(f"skipping pending runtime route {rollout_id}: {consumer['path']}")
@@ -1108,7 +1113,6 @@ def validate_rust_admission(
         "Rust admitted consumer is not registered exactly once in recurring execution",
     )
     for rollout_id, path in (
-        ("dart_runtime", "dart/test/inter_match_gap_capture_contract_test.dart"),
         ("julia_runtime", "julia/test/inter_match_gap_capture_contract_test.jl"),
         ("puc_lua_runtime", "lua/test/inter_match_gap_capture_contract_test.lua"),
         ("luajit_runtime", "lua/test/inter_match_gap_capture_contract_test.lua"),
@@ -1123,52 +1127,84 @@ def validate_rust_admission(
     )
 
 
-def validate_dart_dormancy(
+def validate_dart_admission(
     consumer_text: str,
     ci_text: str,
     driver_text: str,
     facade_text: str,
 ) -> None:
     consumer_markers = (
-        ("const contractId = 'linkedspec-inter-match-gap-capture-v1';", "Dart dormant consumer contract drifted"),
-        (
-            "@Skip('INTER-MATCH-GAP-CAPTURE.4.5 owns Dart runtime admission')\nlibrary;",
-            "Dart dormant metadata stage drifted",
-        ),
-        ("../capability_conformance/inter_match_gap_capture_contract.json", "Dart dormant contract source drifted"),
-        ("final parsed = parseSpec(source, sourceId: sourceId);", "Dart dormant parse boundary drifted"),
-        (
-            "validateSpec(parsed);\n  return compileSpec(parsed, validateSource: false);",
-            "Dart dormant validation boundary drifted",
-        ),
-        ("'regex_slot_unknown_name'", "Dart dormant diagnostic contract drifted"),
-        ("CompiledSpec compileMetadata(", "Dart dormant compiler boundary drifted"),
+        ("const contractId = 'linkedspec-inter-match-gap-capture-v1';", "Dart admitted consumer contract drifted"),
+        ("Future<void> runExactDartRoleAdmission()", "Dart ordinary admission boundary drifted"),
+        ("expect(roles.keys.toList(growable: false), declaredRoles);", "Dart admitted role ledger drifted"),
+        ("await roles[role]!();", "Dart admitted role ledger drifted"),
+        ("void runPrimaryCommandGapContract()", "Dart admitted primary role drifted"),
+        ("'primary_command': () async => runPrimaryCommandGapContract(),", "Dart admitted primary role drifted"),
     )
     for marker, reason in consumer_markers:
         require(consumer_text.count(marker) == 1, reason)
 
-    consumer_path = "dart/test/inter_match_gap_capture_contract_test.dart"
-    command_marker = "--run-skipped test/inter_match_gap_capture_contract_test.dart"
-    require(command_marker not in ci_text, "Dart dormant consumer entered canonical CI prematurely")
-    require(
-        driver_text.count(f"skipping pending runtime route dart_runtime: {consumer_path}") == 1
-        and command_marker not in driver_text,
-        "Dart dormant consumer entered recurring execution prematurely",
+    role_markers = (
+        "'native_execution': () async {",
+        "'ordinary_reconstruction': () async {",
+        "'descriptor': () async {",
+        "'generated_plan': () async {",
+        "'emitted_source': runIndependentlyEmittedGapContract,",
+        "'target_lifecycle': () async {",
+        "'recursion_and_rollback': () async {",
+        "'portable_diagnostics': () async {",
+        "'primary_command': () async => runPrimaryCommandGapContract(),",
     )
+    for marker in role_markers:
+        require(consumer_text.count(marker) == 1, f"Dart admitted role ledger drifted: {marker}")
+
+    consumer_path = "dart/test/inter_match_gap_capture_contract_test.dart"
+    ci_command = (
+        "(cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only "
+        "test/inter_match_gap_capture_contract_test.dart)"
+    )
+    driver_command = (
+        "( cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only "
+        "test/inter_match_gap_capture_contract_test.dart )"
+    )
+    require("@Skip(" not in consumer_text, "Dart admitted consumer returned to skipped discovery")
+    require(ci_text.count(ci_command) == 1, "Dart admitted consumer is not registered exactly once in canonical CI")
+    require(
+        driver_text.count(driver_command) == 1
+        and f"skipping pending runtime route dart_runtime: {consumer_path}" not in driver_text,
+        "Dart admitted consumer is not registered exactly once in recurring execution",
+    )
+    for rollout_id, path in (
+        ("julia_runtime", "julia/test/inter_match_gap_capture_contract_test.jl"),
+        ("puc_lua_runtime", "lua/test/inter_match_gap_capture_contract_test.lua"),
+        ("luajit_runtime", "lua/test/inter_match_gap_capture_contract_test.lua"),
+    ):
+        require(
+            driver_text.count(f"skipping pending runtime route {rollout_id}: {path}") == 1,
+            f"Dart admission disturbed later runtime skip: {rollout_id}",
+        )
     require(
         "inter_match_gap_capture" not in facade_text and "capture_gaps" not in facade_text,
-        "Dart dormant consumer widened the public facade prematurely",
+        "Dart admission widened the public facade",
     )
 
 
-DartDormancyMutation = tuple[str, str, Callable[[dict[str, str]], None]]
+DartAdmissionMutation = tuple[str, str, Callable[[dict[str, str]], None]]
 
 
-def dart_dormancy_mutations() -> list[DartDormancyMutation]:
+def dart_admission_mutations() -> list[DartAdmissionMutation]:
+    ci_command = (
+        "(cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only "
+        "test/inter_match_gap_capture_contract_test.dart)"
+    )
+    driver_command = (
+        "( cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only "
+        "test/inter_match_gap_capture_contract_test.dart )"
+    )
     return [
         (
             "dart_consumer_identity",
-            "Dart dormant consumer contract drifted",
+            "Dart admitted consumer contract drifted",
             lambda texts: texts.__setitem__(
                 "consumer",
                 texts["consumer"].replace(
@@ -1177,92 +1213,84 @@ def dart_dormancy_mutations() -> list[DartDormancyMutation]:
             ),
         ),
         (
-            "dart_metadata_stage",
-            "Dart dormant metadata stage drifted",
+            "dart_role_ledger",
+            "Dart admitted role ledger drifted",
             lambda texts: texts.__setitem__(
                 "consumer",
                 texts["consumer"].replace(
-                    "INTER-MATCH-GAP-CAPTURE.4.5 owns Dart runtime admission",
-                    "stale admission owner",
+                    "expect(roles.keys.toList(growable: false), declaredRoles);",
+                    "expect(roles.keys, isEmpty);",
                     1,
                 ),
             ),
         ),
         (
-            "dart_contract_source",
-            "Dart dormant contract source drifted",
+            "dart_ordinary_registration",
+            "Dart admitted consumer returned to skipped discovery",
             lambda texts: texts.__setitem__(
                 "consumer",
                 texts["consumer"].replace(
-                    "inter_match_gap_capture_contract.json", "stale_contract.json", 1
-                ),
-            ),
-        ),
-        (
-            "dart_parse_boundary",
-            "Dart dormant parse boundary drifted",
-            lambda texts: texts.__setitem__(
-                "consumer",
-                texts["consumer"].replace(
-                    "final parsed = parseSpec(source, sourceId: sourceId);",
-                    "final parsed = parseOther(source, sourceId: sourceId);",
+                    "library;",
+                    "@Skip('stale')\nlibrary;",
                     1,
                 ),
             ),
         ),
         (
-            "dart_validation_boundary",
-            "Dart dormant validation boundary drifted",
+            "dart_primary_role",
+            "Dart admitted primary role drifted",
             lambda texts: texts.__setitem__(
                 "consumer",
                 texts["consumer"].replace(
-                    "validateSpec(parsed);\n  return compileSpec(parsed, validateSource: false);",
-                    "validateOther(parsed);\n  return compileSpec(parsed, validateSource: false);",
+                    "'primary_command': () async => runPrimaryCommandGapContract(),",
+                    "'primary_command': () async => runStalePrimaryContract(),",
                     1,
                 ),
             ),
         ),
         (
-            "dart_diagnostic_contract",
-            "Dart dormant diagnostic contract drifted",
+            "dart_canonical_registration",
+            "Dart admitted consumer is not registered exactly once in canonical CI",
             lambda texts: texts.__setitem__(
-                "consumer",
-                texts["consumer"].replace(
-                    "'regex_slot_unknown_name'", "'stale_diagnostic'", 1
-                ),
+                "ci", texts["ci"].replace(ci_command, "stale Dart gap command", 1)
             ),
         ),
         (
-            "dart_compiler_boundary",
-            "Dart dormant compiler boundary drifted",
+            "dart_canonical_duplicate",
+            "Dart admitted consumer is not registered exactly once in canonical CI",
             lambda texts: texts.__setitem__(
-                "consumer",
-                texts["consumer"].replace(
-                    "CompiledSpec compileMetadata(", "CompiledSpec compileOther(", 1
-                ),
+                "ci", texts["ci"] + f"\n{ci_command}\n"
             ),
         ),
         (
-            "dart_canonical_absence",
-            "Dart dormant consumer entered canonical CI prematurely",
+            "dart_recurring_registration",
+            "Dart admitted consumer is not registered exactly once in recurring execution",
             lambda texts: texts.__setitem__(
-                "ci",
-                texts["ci"]
-                + "\n--run-skipped test/inter_match_gap_capture_contract_test.dart\n",
+                "driver", texts["driver"].replace(driver_command, "stale Dart gap command", 1)
             ),
         ),
         (
-            "dart_recurring_absence",
-            "Dart dormant consumer entered recurring execution prematurely",
+            "dart_recurring_duplicate",
+            "Dart admitted consumer is not registered exactly once in recurring execution",
+            lambda texts: texts.__setitem__(
+                "driver", texts["driver"] + f"\n{driver_command}\n"
+            ),
+        ),
+        (
+            "dart_later_runtime_skip",
+            "Dart admission disturbed later runtime skip: julia_runtime",
             lambda texts: texts.__setitem__(
                 "driver",
-                texts["driver"]
-                + "\n--run-skipped test/inter_match_gap_capture_contract_test.dart\n",
+                texts["driver"].replace(
+                    "skipping pending runtime route julia_runtime: julia/test/inter_match_gap_capture_contract_test.jl",
+                    "stale later runtime skip",
+                    1,
+                ),
             ),
         ),
         (
             "dart_facade_absence",
-            "Dart dormant consumer widened the public facade prematurely",
+            "Dart admission widened the public facade",
             lambda texts: texts.__setitem__(
                 "facade", texts["facade"] + "\nexport 'src/inter_match_gap_capture.dart';\n"
             ),
@@ -1270,23 +1298,23 @@ def dart_dormancy_mutations() -> list[DartDormancyMutation]:
     ]
 
 
-def validate_dart_dormancy_mutations() -> int:
+def validate_dart_admission_mutations() -> int:
     texts = {
         "consumer": DART_CONSUMER_PATH.read_text(encoding="utf-8"),
         "ci": CI_PATH.read_text(encoding="utf-8"),
         "driver": RECURRING_DRIVER_PATH.read_text(encoding="utf-8"),
         "facade": DART_FACADE_PATH.read_text(encoding="utf-8"),
     }
-    checks = dart_dormancy_mutations()
+    checks = dart_admission_mutations()
     require(
-        tuple(name for name, _, _ in checks) == DART_DORMANCY_MUTATION_IDS,
-        "Dart dormancy mutation identity/order drifted",
+        tuple(name for name, _, _ in checks) == DART_ADMISSION_MUTATION_IDS,
+        "Dart admission mutation identity/order drifted",
     )
     for name, expected_reason, mutate in checks:
         candidate = copy.deepcopy(texts)
         mutate(candidate)
         try:
-            validate_dart_dormancy(
+            validate_dart_admission(
                 candidate["consumer"],
                 candidate["ci"],
                 candidate["driver"],
@@ -1295,10 +1323,10 @@ def validate_dart_dormancy_mutations() -> int:
         except ContractError as error:
             require(
                 expected_reason in str(error),
-                f"Dart dormancy mutation {name} failed for unexpected reason: {error}",
+                f"Dart admission mutation {name} failed for unexpected reason: {error}",
             )
         else:
-            fail(f"Dart dormancy mutation {name} was accepted")
+            fail(f"Dart admission mutation {name} was accepted")
     return len(checks)
 
 
@@ -1387,11 +1415,11 @@ def rust_admission_mutations() -> list[RustAdmissionMutation]:
         ),
         (
             "rust_later_runtime_skip",
-            "Rust admission disturbed later runtime skip: dart_runtime",
+            "Rust admission disturbed later runtime skip: julia_runtime",
             lambda texts: texts.__setitem__(
                 "driver",
                 texts["driver"].replace(
-                    "skipping pending runtime route dart_runtime: dart/test/inter_match_gap_capture_contract_test.dart",
+                    "skipping pending runtime route julia_runtime: julia/test/inter_match_gap_capture_contract_test.jl",
                     "stale later runtime skip",
                     1,
                 ),
@@ -1543,6 +1571,7 @@ def mutations() -> list[Mutation]:
             ("rollout_sequence", "rollout identity/order drifted", lambda d: d["rollout"].reverse()),
             ("perl_runtime_regression", "perl_runtime rollout drifted", lambda d: row(d, "rollout", "perl_runtime").__setitem__("status", "pending")),
             ("rust_runtime_regression", "rust_runtime rollout drifted", lambda d: row(d, "rollout", "rust_runtime").__setitem__("status", "pending")),
+            ("dart_runtime_regression", "dart_runtime rollout drifted", lambda d: row(d, "rollout", "dart_runtime").__setitem__("status", "pending")),
             ("storage_paths", "recurring gate topology drifted", lambda d: d["recurring_gate"]["storage"].__setitem__("initializer", "/tmp/project_data_env.sh")),
             ("route_order", "recurring gate topology drifted", lambda d: d["recurring_gate"]["route_order"].reverse()),
             ("public_no_overclaim", "public no-overclaim contract drifted", lambda d: d["public_no_overclaim"].__setitem__("status", "planned")),
@@ -1577,7 +1606,7 @@ def main() -> int:
         validate_contract(document)
         mutation_count = validate_mutations(document)
         rust_admission_mutation_count = validate_rust_admission_mutations()
-        dart_dormancy_mutation_count = validate_dart_dormancy_mutations()
+        dart_admission_mutation_count = validate_dart_admission_mutations()
     except (json.JSONDecodeError, OSError, ContractError) as error:
         print(f"inter-match gap capture contract: FAIL: {error}", file=sys.stderr)
         return 1
@@ -1589,7 +1618,7 @@ def main() -> int:
         f"10 segmentation cases; 9 diagnostics; {complete} complete + {pending} pending rollout; "
         f"{mutation_count} rejected semantic mutations; "
         f"{rust_admission_mutation_count} rejected Rust admission mutations; "
-        f"{dart_dormancy_mutation_count} rejected Dart dormancy mutations)"
+        f"{dart_admission_mutation_count} rejected Dart admission mutations)"
     )
     return 0
 

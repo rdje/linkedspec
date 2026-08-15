@@ -2,52 +2,46 @@
 
 ## Current Activity
 
-- Atomic 237 landed cleanly at `4c8ab7ee`; `INTER-MATCH-GAP-CAPTURE.4.4` is signoff-complete from that exact
-  boundary for intended atomic 238; no push.
-- One repository-routed offline caller now strictly analyzes and independently executes ten emitted value
-  modules plus two typed-error modules through paired direct/traced generated entrypoints.
-- Every emitted result agrees with native authority; the storage oracle advances exactly to 23 owners / 47 locked
-  packages and proves caller/cache/output/trace cleanup.
-- The permanent Dart consumer remains library-skipped until `.4.5`; production emitter/plan v2, primary,
-  admission, rollout 3/6/56, and every outward surface remain pending or unchanged.
-- ADR `0073` classifies this proof-only leaf as focused; `.4.5` retains canonical admission and parent closeout.
+- Atomic 238 landed cleanly at `6a554312`; `INTER-MATCH-GAP-CAPTURE.4.5` is task-tree-first active from that exact
+  boundary for intended atomic 239; no push.
+- The final Dart consumer now runs five ordinary groups and one exact nine-role ledger. Its primary role reuses
+  the existing adapter for four items with heterogeneous preserved gaps.
+- Ordinary/canonical registration is exact once; the rooted route executes neutral, Perl, Rust, and Dart before
+  three later-runtime skips. Only Dart advances to gap 4/5/57 plus ten Rust and ten Dart admission mutations.
+- ADR `0074` records the foundational correction: `dart_runtime_premature` never existed, so admission preserves
+  all 56 prior guards and adds `dart_runtime_regression` as mutation 57.
+- The first canonical precursor caught the required segment-4995 rollover exceeding the finite history registry.
+  ADR `0075` raises only file/manifest limits to 13/12; the README pressure doctrine now passes.
+- Generated plan v2, production emitter, primary adapter, facade/schema/MCP/CLI/README, capability, typed
+  composition, recurring/public rows, dependencies, toolchain, and later-runtime behavior remain unchanged.
 
 ## Latest Completed Slice
 
-- `INTER-MATCH-GAP-CAPTURE.4.4` passes deliberate emitted-helper RED, emitted 1/1, explicit consumer 4/4, direct
-  dependents 100/100, Dart 402 plus one skip/storage 23/47/CLI 66x2/corpus 105, all governance matrices, rendered
-  book, Knowledge Map, bounded history, and all nine doctrines without full canonical CI.
+- `.4.5` and parent `.4` are signoff-complete. Proof passes primary 1/1, ordinary consumer 5/5, Dart format 102/0
+  plus strict analysis and 407 tests, storage 23/47, CLI 66x2, corpus 105, rooted four-runtime execution, recognition
+  137/246/58, duplicate slot 7/0/59, and typed source 9/5/114. Canonical CI passes all nine doctrines,
+  containment/relocation, CLI 66x2, RAM 57%, Phase 0 1,031/1,031 in 753 seconds, exact gap routing, staged receipt
+  generation, and exit 0.
 
 ## Next Action
 
-- Commit atomic 238, clear the brief, prove its clean handoff, then activate Dart primary/admission/parent-closeout
-  leaf `INTER-MATCH-GAP-CAPTURE.4.5` task-tree-first with canonical verification.
+- Commit the exact receipt-bound candidate as atomic 239, clear the brief, prove the tree clean, then activate
+  Julia `.5` task-tree-first from that exact boundary.
 
 ## Recent Completions
 
-- `2026-08-15` — `.4.4` proved ten value and two typed-error emitted Dart modules in one offline managed caller,
-  paired direct/traced, with exact native agreement and repository-local cleanup from clean `4c8ab7ee`.
-- `2026-08-15` — `.4.3` completed normalized reconstruction, detached compatible descriptor projections, and
-  same-engine direct/traced generated gap execution from clean `0b074e1c`; rollout remains 3/6/56.
-- `2026-08-15` — `.4.2` completed private native Dart gap execution from clean `c234ef9f`: exact lifecycle,
-  Unicode/empty spans, rollback/nesting, entries, and typed failures without rollout movement.
-- `2026-08-15` — `c234ef9f` landed tiered verification policy `.0` as clean atomic 235; focused ordinary commits
-  and canonical designated/push boundaries are mechanically enforced.
-- `2026-08-15` — `.4.1` completed exact Dart authored/static/compiled gap metadata signoff from clean `e40de948`;
-  the final consumer remains dormant and rollout unchanged.
-- `2026-08-15` — `e40de948` landed behavior-free Dart implementation freeze `.4.0` as clean atomic 233.
-- `2026-08-15` — `.3.5` and parent `.3` completed exact Rust primary/admission at 3/6/56 and landed cleanly as
-  atomic 232 at `2800e7c3`.
-- `2026-08-14` — `.3.4` proved fifteen independently compiled direct/traced Rust emitted modules and landed as
-  atomic 231 at `c3326f6d`.
-- `2026-08-14` — `.3.3` completed Rust reconstructed/descriptor/generated-plan parity and landed at `9e6ade98`.
-- `2026-08-14` — `.3.2` completed private native Rust gap execution and landed at `5c4e9d50`.
-- `2026-08-14` — `.3.1` completed canonical authored/static/compiled Rust provenance from clean `4a95e02a`.
-- `2026-08-14` — `.3.0` froze the behavior-free Rust implementation plan and landed at `4a95e02a`.
-- `2026-08-13` — `.2.4` admitted Perl alone at gap 2/7/56 and closed parent `.2` at `eceb15ac`.
-- `2026-08-13` — `.2.3` proved emitted/loaded Perl execution and landed at `45460329`.
-- `2026-08-13` — `.2.2` completed private native Perl lifecycle/accessors and landed at `34d02e0c`.
-- `2026-08-13` — `.2.1` completed authored/static Perl metadata and landed at `912fc5ed`.
+- `2026-08-15` — `.4.5` completed existing-primary parity and exact nine-role private Dart admission from clean
+  `6a554312`; canonical signoff closes parent `.4` for intended atomic 239.
+- `2026-08-15` — `.4.4` proved ten value and two typed-error emitted Dart modules in one offline managed caller
+  and landed as atomic 238 at `6a554312`.
+- `2026-08-15` — `.4.3` completed normalized reconstruction, compatible descriptors, and same-engine generated
+  execution and landed as atomic 237 at `4c8ab7ee`.
+- `2026-08-15` — `.4.2` completed private native Dart gap execution at atomic 236 `0b074e1c`.
+- `2026-08-15` — `c234ef9f` landed tiered verification policy `.0` as atomic 235.
+- `2026-08-15` — `.4.1` completed exact Dart authored/static/compiled gap metadata at `1e6d326d`.
+- `2026-08-15` — `.4.0` landed the behavior-free Dart implementation freeze at `e40de948`.
+- `2026-08-15` — `.3.5` and parent `.3` admitted Rust at 3/6/56 in atomic 232 `2800e7c3`.
+- `2026-08-13` — `.2.4` and parent `.2` admitted Perl at 2/7/56 in atomic 226 `eceb15ac`.
 
 ## History
 

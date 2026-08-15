@@ -1,8 +1,8 @@
 # ARCHITECTURE STATE
 
-## Dart inter-match-gap state now crosses native, generated, and emitted carriers without admission
+## Dart inter-match-gap capture is privately admitted through one nine-role authority
 
-`INTER-MATCH-GAP-CAPTURE.4.1-.4.4` implement and independently prove one Dart gap authority through authored/static metadata, private
+`INTER-MATCH-GAP-CAPTURE.4.1-.4.5` implement, independently prove, and privately admit one Dart gap authority through authored/static metadata, private
 native execution, normalized `SpecFile` reconstruction, compatible descriptors, and generated-plan execution.
 The private recognition invocation remains the sole live state owner; observed cursor/boundary/marks state is
 unchanged. Runtime UTF-16 registers cross `SourceAuthority` to expose Unicode-scalar gap spans, while logical spec
@@ -16,7 +16,12 @@ including typed unavailable-context and cursor-regression failures; the static g
 ten emitted value modules plus two typed-error modules through paired direct/traced entrypoints. Its private
 `PUB_CACHE`, modules, traces, and temporary workspace stay under managed repository storage, advancing the exact
 Dart test-owner inventory to 23 without changing the production emitter or generated format. The permanent
-consumer remains library-skipped until `.4.5`, rollout stays 3/6/56, and `.4.5` retains primary/admission.
+consumer now runs ordinarily, canonically, and exactly once after Rust in the rooted route. Its existing primary
+adapter and all nine contract roles execute exactly once, with no CLI or facade change. Gap governance is
+4 complete / 5 pending / 57 semantic mutations plus ten Rust and ten Dart admission mutations. ADR `0074`
+records why all prior 56 guards remain and the previously missing Dart regression is added as 57. Parent `.4`
+closes at this private boundary; Julia `.5`, both Lua ABIs, recurring/public rows, typed composition, and every
+outward surface remain pending or unchanged.
 
 ## Recursive source observation is privately admitted and recurrent on all six runtimes
 

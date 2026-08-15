@@ -263,6 +263,9 @@ the capture directive, and the existing private recognition lifecycle. Values co
 children, lifecycle order, child cursors, nested owners, rollback, terminal behavior, direct entry, and legacy
 compatibility; failures retain typed unavailable-context and cursor-regression detail. The caller's package cache,
 modules, traces, and temporary workspace are all managed repository-local data and are removed after proof.
+Private Dart admission then composes this emitted role with the other eight contract roles exactly once and runs
+the consumer ordinarily, canonically, and in rooted order after Rust. The primary adapter, emitter, v2 plan, and
+public facade remain unchanged.
 
 Dart admission now consumes the contract's exact eight-case list rather than
 copying a backend-local list. Every fixture—including staged user-function

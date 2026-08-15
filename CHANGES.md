@@ -10,6 +10,27 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-15 — INTER-MATCH-GAP-CAPTURE.4.5 — admit Dart inter-match gap capture
+
+- Activated task-tree-first from clean atomic 238 at `6a554312`. Exact primary RED stopped only because
+  `runPrimaryCommandGapContract` was absent; exact admission RED stopped only because Dart remained pending.
+- Reused the existing private primary adapter for heterogeneous separators, removed the final consumer skip, and
+  execute all nine contract roles in declared order exactly once. No primary, emitter, plan-v2, CLI, or facade
+  implementation changed.
+- Registered the consumer once in canonical CI and once after Rust in the rooted route. Only Dart advances:
+  governance is 4 complete / 5 pending / 57 semantic mutations plus ten Rust and ten Dart admission mutations.
+- Added ADR `0074` after contract/Git evidence proved the frozen `dart_runtime_premature` row never existed;
+  preserving all prior 56 guards and adding `dart_runtime_regression` is the non-weakening correction. Corrected
+  both dedicated roadmap rows omitted from atomic 238.
+- The mandatory engineering-notes rollover published immutable segment 4995. Canonical CI then failed closed at
+  the finite 12-file/11-manifest-row route cap; indexed ADR `0075` raises only those bounds to 13/12, with every
+  byte, root, per-segment, aggregate, lifecycle, storage, and verifier constraint unchanged.
+- Focused proof passes primary 1/1, ordinary consumer 5/5, Dart format 102/0 plus analyzer and 407 tests, storage
+  23/47, CLI 66x2, corpus 105, rooted neutral/Perl/Rust/Dart execution with three skips, recognition 137/246/58,
+  duplicate slot 7/0/59, and typed source 9/5/114. Canonical CI passes all nine doctrines, containment/relocation,
+  CLI 66x2, RAM 57%, Phase 0 1,031/1,031 in 753 seconds, exact gap routing, receipt generation, and exit 0. Parent
+  `.4` closes for intended atomic 239; Julia `.5` follows only after commit/brief/clean proof.
+
 ## 2026-08-15 — INTER-MATCH-GAP-CAPTURE.4.4 — prove Dart emitted gap execution
 
 - Activated task-tree-first from clean atomic 237 at `4c8ab7ee`; the deliberate RED stopped only because the

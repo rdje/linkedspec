@@ -572,7 +572,7 @@ Typed-source composition consumes that completed contract afterward; it does not
 
 The behavior-free contract now lives at `capability_conformance/inter_match_gap_capture_contract.json`, uses id
 `linkedspec-inter-match-gap-capture-v1`, and is checked independently by
-`tools/check_inter_match_gap_capture_contract.py`. Inter-match gap-capture recurring governance now executes the complete neutral, Perl, and Rust rows; four later runtime routes and both public rows remain pending.
+`tools/check_inter_match_gap_capture_contract.py`. Inter-match gap-capture recurring governance now executes the complete neutral, Perl, Rust, and Dart rows; three later runtime routes and both public rows remain pending.
 The Perl reference implements authored/static metadata, private native-live behavior, and independently loaded
 generated parity. Admission `.2.4` runs that complete consumer in canonical CI and in the rooted recurring route,
 promotes only `perl_runtime`, and advances the checker to 56 mutations without outward public admission.
@@ -705,21 +705,22 @@ The four accessor nodes raise the recognition-effect census from 133 to 137 and 
 executes them on live and generated paths; Rust now executes them on native, reconstructed, generated-plan, and
 independently compiled emitted paths. The 246 shared call inventory, 122 public-helper inventory, and typed-source
 9-complete/5-pending/114-mutation contract do not move. Current truth is recognition 137/246/58 and gap rollout
-3 complete / 6 pending / 56 mutations plus ten Rust admission and ten Dart dormancy mutations. Exact
-registration checks replace the retired Perl dormancy fence while
-the admitted Rust consumer is required ordinarily, canonically, and once after Perl in the rooted route.
+4 complete / 5 pending / 57 mutations plus ten Rust and ten Dart admission mutations. Exact registration checks
+require the admitted Rust and Dart consumers ordinarily and canonically, and once each after Perl in the rooted
+route. ADR `0074` preserves every earlier semantic guard and adds the missing Dart rollout regression as mutation
+57 because no `dart_runtime_premature` row ever existed to replace.
 
-### Dart native, generated, and emitted carriers — current; admission pending
+### Dart native, generated, emitted, and primary carriers — privately admitted
 
 Dart `.4.0` established the behavior-free baseline: numeric selectors worked, named declarations/selectors and
 `@capture_gaps` were raw body syntax, all four gap accessors reached `unknown_helper`, and repeated-rule `LS`
 preceded selection. Dart `.4.1` implemented the authored/static/compiled layer, `.4.2` added private native gap
 context and the four accessors on the same recognition authority, and `.4.3` now carries that state through
 ordinary reconstruction, compatible descriptors, and generated-plan execution. `.4.4` independently analyzes
-and executes emitted libraries without changing the emitter. The parser accepts named and anonymous regex
+and executes emitted libraries without changing the emitter. `.4.5` proves the existing primary adapter, removes
+the final consumer skip, and validates every declared role exactly once. The parser accepts named and anonymous regex
 declarations in one order, preserves unindexed/numeric/named selector authorship, and carries one dedicated
-rule-level directive record. This is a staged backend implementation, not ordinary or public admission: the
-permanent consumer remains library-skipped until `.4.5`.
+rule-level directive record. This is private ordinary admission, not a public helper/facade/schema admission.
 
 For example, this Dart source now parses, validates, and compiles its slot identities:
 
@@ -763,8 +764,8 @@ The implementation is assigned before code:
    execution through the same engine. Static plan v2 remains exactly `{label,family}`.
 4. `.4.4` now independently analyzes and executes emitted Dart libraries from one repository-routed caller
    workspace with its own project-local package cache.
-5. `.4.5` proves the existing primary adapter, requires all nine roles exactly once, registers the consumer, and
-   promotes only Dart.
+5. `.4.5` now proves the existing primary adapter, requires all nine roles exactly once, registers the consumer
+   ordinarily, canonically, and after Rust in the rooted route, and promotes only Dart.
 
 Dart's implementation uses immutable decoded input in `SourceAuthority` and the one existing private recognition
 transaction/invocation authority. Runtime gap spans use source id `input`; UTF-16 code-unit registers are
@@ -801,11 +802,14 @@ and unflagged legacy behavior. The error modules preserve exact unavailable-cont
 Every trace retains its emitted source identity, and cleanup removes the caller, cache, modules, and traces. The
 Dart storage oracle now accounts for 23 exact `Directory.systemTemp` owners and 47 locked packages.
 
-The final Dart consumer already lives at `dart/test/inter_match_gap_capture_contract_test.dart`, but a
-library-level `.4.5` skip keeps ordinary discovery dormant. Explicit execution now proves the `.4.1` metadata,
-`.4.2` native lifecycle, `.4.3` carrier, and `.4.4` emitted groups; ten reason-checked governance mutations reject premature
-canonical execution, recurring execution, or facade exposure. Rollout remains 3 complete / 6 pending until
-`.4.5`, and generated plan v2 remains exactly `{label,family}`.
+The final Dart consumer at `dart/test/inter_match_gap_capture_contract_test.dart` now runs five ordinary groups.
+Its last group executes `native_execution`, `ordinary_reconstruction`, `descriptor`, `generated_plan`,
+`emitted_source`, `target_lifecycle`, `recursion_and_rollback`, `portable_diagnostics`, and `primary_command` in
+the contract-declared order, once each. The primary case parses the same heterogeneous separator input through
+the existing private command adapter. Ten reason-checked admission mutations reject consumer/ledger drift,
+missing or duplicate ordinary/canonical/recurring registration, premature later-runtime execution, and facade
+exposure. Rollout is 4 complete / 5 pending / 57 mutations, and generated plan v2 remains exactly
+`{label,family}`.
 
 Named slot rules are exact:
 

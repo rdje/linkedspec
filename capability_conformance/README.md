@@ -302,7 +302,7 @@ Governance is 114, and the combined program-wide public-no-drift row stays pendi
 helper/value, descriptor/generated schema, semantic/MCP field, CLI, or README behavior moved.
 
 `inter_match_gap_capture_contract.json` is the neutral authority for named regex slots and lossless
-prefix/interstitial/tail context. Inter-match gap-capture recurring governance now admits the private Perl and Rust runtimes; later runtimes and public admission remain pending. Behavior-free Dart `.4.0` freezes its `.4.1-.4.5` implementation/admission plan without changing that rollout.
+prefix/interstitial/tail context. Inter-match gap-capture recurring governance now admits the private Perl, Rust, and Dart runtimes; later runtimes and public admission remain pending. Dart `.4.1-.4.5` implement and admit its exact private nine-role path without widening outward surfaces.
 Run `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py` for the always-on
 neutral proof or `bash tools/check_inter_match_gap_capture_six_runtime.sh` for the repository-routed ordered
 governance route. The latter executes the complete neutral, Perl, and Rust rows, then skips four pending runtime
