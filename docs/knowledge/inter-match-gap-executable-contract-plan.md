@@ -22,10 +22,11 @@ answers:
   - "what are the capture_gaps rollout legs"
   - "is capture_gaps implemented now"
 date: 2026-08-15
-status: neutral parent closed and private Perl, Rust, and Dart runtimes admitted; Julia implementation plan frozen
+status: neutral parent closed; private Perl/Rust/Dart admitted; Julia metadata and native execution current behind dormancy
 tags: [capture, segmentation, named-slots, typed-source, lifecycle, transaction, recursion, contract, plan]
-evidence: "INTER-MATCH-GAP-CAPTURE.1.1-.1.3 establish the executable neutral Unicode/empty/child/rollback/nested model, recurrence, and public no-overclaim. Perl .2, Rust .3, and Dart .4 are privately admitted through authored/static identity, same-authority native state, reconstructed/descriptor/generated carriers, independent emitted proof, existing-primary parity, and exact ordinary/canonical/rooted registration. Current governance is 4 complete + 5 pending / 57 semantic mutations plus ten Rust and ten Dart admission mutations. Behavior-free Julia .5.0 freezes .5.1-.5.5; Julia, PUC Lua, LuaJIT, recurring, and public rows remain pending."
+evidence: "INTER-MATCH-GAP-CAPTURE.1.1-.1.3 establish the executable neutral Unicode/empty/child/rollback/nested model, recurrence, and public no-overclaim. Perl .2, Rust .3, and Dart .4 are privately admitted through authored/static identity, same-authority native state, reconstructed/descriptor/generated carriers, independent emitted proof, existing-primary parity, and exact ordinary/canonical/rooted registration. Julia .5.1-.5.2 implement exact private metadata and same-recognition-authority native execution behind ten dormancy mutations; reconstruction/emitted/primary admission remain pending. Current governance is 4 complete + 5 pending / 57 semantic mutations plus ten Rust and ten Dart admission mutations. Julia, PUC Lua, LuaJIT, recurring, and public rows remain pending."
 evidence_update_2026_08_15_julia_plan: "Julia audit INTER-MATCH-GAP-CAPTURE.5.0 proves numeric selectors compile, named declarations/selectors/directive are raw invalid syntax, the four accessors are unknown helpers, legacy move_pos has no execution effect, and repeated LS precedes selection. It freezes .5.1-.5.5 across authored/static metadata, same-authority native state, normalized reconstruction/descriptor/generated-plan carriers, independently loaded emitted proof, and primary/nine-role admission. No Julia behavior or 4/5/57 rollout state moves."
+evidence_update_2026_08_15_julia_native: "INTER-MATCH-GAP-CAPTURE.5.1-.5.2 now provide dormant authored/static/compiled metadata and private native gap state/accessors/lifecycle on the existing recognition authority. Explicit proof is 105 metadata + 33 native; supported ActionIR remains exactly 246 because the four accessors resolve through a separate private family. Rollout remains 4/5/57 and the rooted driver still skips Julia."
 reverify: "bash tools/check_inter_match_gap_capture_six_runtime.sh && prove -Iperl t/inter_match_gap_capture_perl_contract.t && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract"
 ---
 
@@ -38,8 +39,9 @@ reverify: "bash tools/check_inter_match_gap_capture_six_runtime.sh && prove -Ipe
 routing and no-overclaim governance through `tools/check_inter_match_gap_capture_six_runtime.sh`. `.1.3`
 independently recomposes those committed inputs unchanged and closes neutral parent `.1`; Perl `.2` then completes
 authored, native-live, emitted/loaded, and private admission. Rust `.3.1-.3.5` and Dart `.4.1-.4.5` complete the
-equivalent private authored/native/reconstructed/generated/emitted/primary paths. Behavior-free Julia `.5.0`
-freezes `.5.1-.5.5` without implementation. The driver executes neutral, Perl, Rust, and Dart, then skips Julia,
+equivalent private authored/native/reconstructed/generated/emitted/primary paths. Julia `.5.1-.5.2` now provide
+dormant metadata plus private native execution; `.5.3-.5.5` remain pending. The driver executes neutral, Perl,
+Rust, and Dart, then skips Julia,
 PUC Lua, and LuaJIT.
 
 The nine ordered rollout legs are neutral, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurring proof, and public

@@ -1,7 +1,7 @@
 # 0045 - Inter-match gap capture preserves action-edge target ownership
 
 - Date: 2026-07-17
-- Status: accepted; executable-neutral plus private Perl, Rust, and Dart admission current; Julia plan frozen; later runtimes/public admission pending
+- Status: accepted; executable-neutral plus private Perl/Rust/Dart admission and dormant Julia native execution current; later carriers/runtimes/public admission pending
 - Tags: architecture, grammar, capture, segmentation, or-rule, action-edge, source-span, portability, parity
 
 ## Context
@@ -269,12 +269,12 @@ the carrier, scalar bridge, and plan shape. Exact mechanisms and no-change bound
 
 ## 2026-08-15 Julia implementation-plan amendment
 
-Behavior-free `.5.0` freezes `.5.1-.5.5` at the exact numeric-only/raw-invalid/unknown-helper/`LS`-before-selection
-boundary: logical/authored metadata and dormancy; existing-recognition-authority native state; normalized
-reconstruction/compatible descriptors/unchanged-v2 generated execution; repository-local emitted proof; then
-primary/nine-role admission. `RecognitionFrameState`, `SourceAuthority`, normalized `SpecFile`, and format-2
-`{label,family}` retain their authorities. Exact mechanisms, storage 19→20, and planned 4/5/57→5/4/58 admission
-live in [[inter-match-gap-julia-implementation-plan]] and the owning task tree; `.5.0` moves no behavior.
+Behavior-free `.5.0` froze `.5.1-.5.5`; `.5.1` now owns exact logical/authored/compiled metadata and dormancy, and
+`.5.2` extends the existing recognition invocation/token with private native gap state/lifecycle/accessors while
+leaving `RecognitionFrameState` exact and the supported ActionIR inventory at 246. Normalized reconstruction,
+compatible descriptors/unchanged-v2 generated execution, repository-local emitted proof, then primary/nine-role
+admission remain `.5.3-.5.5`. Exact mechanisms, storage 19→20, and planned 4/5/57→5/4/58 admission live in
+[[inter-match-gap-julia-implementation-plan]] and the owning task tree; outward surfaces remain unchanged.
 
 ## 2026-08-13 recurring-governance amendment
 

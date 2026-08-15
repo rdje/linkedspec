@@ -155,6 +155,61 @@ end
     _Invalidated
 end
 
+"""Detached structural identity carried into one selected action-edge child."""
+struct RecognitionGapEntrySlot
+    owner_invocation_id::UInt64
+    target_rule::String
+    regex_index::Int
+    slot_id::Union{Nothing,String}
+    selector_kind::String
+    authored_selector::Any
+end
+
+"""Code-unit-rooted private gap candidate projected through SourceAuthority."""
+struct RecognitionGapContext
+    source_id::String
+    rule_label::String
+    invocation_id::UInt64
+    edge_ordinal::Int
+    kind::String
+    start_codeunit::Int
+    end_codeunit::Int
+end
+
+"""Private typed diagnostic for a gap read without a live candidate or tail."""
+struct InterMatchGapException <: Exception
+    _record::Tuple{Vararg{Pair{String,Any}}}
+end
+
+Base.showerror(io::IO, error::InterMatchGapException) = print(
+    io,
+    "LINKEDSPEC_INTER_MATCH_GAP_ERROR:",
+    first(error._record).second,
+)
+
+"""Private typed diagnostic for a cursor that regresses before gap commit."""
+struct GapCursorRegressionException <: Exception
+    _record::Tuple{Vararg{Pair{String,Any}}}
+end
+
+Base.showerror(io::IO, error::GapCursorRegressionException) = print(
+    io,
+    "LINKEDSPEC_SOURCE_LOCATION_ERROR:",
+    first(error._record).second,
+)
+
+mutable struct _GapMutableState
+    committed_gap_cursor::Int
+    accepted_edge_count::Int
+    current_gap::Union{Nothing,RecognitionGapContext}
+end
+
+_copy_gap_state(state::_GapMutableState) = _GapMutableState(
+    state.committed_gap_cursor,
+    state.accepted_edge_count,
+    state.current_gap,
+)
+
 mutable struct _InvocationState
     authority_id::UInt64
     source_authority::SourceLocation.SourceAuthority
@@ -166,6 +221,9 @@ mutable struct _InvocationState
     generation::UInt64
     active::Bool
     frame_state::RecognitionFrameState
+    gap_state::Union{Nothing,_GapMutableState}
+    gap_phase::String
+    entry_slot::Union{Nothing,RecognitionGapEntrySlot}
     active_token::Any
 end
 
@@ -179,6 +237,7 @@ mutable struct _TransactionState
     generation::UInt64
     transaction::UInt64
     snapshot::RecognitionFrameState
+    gap_snapshot::Union{Nothing,_GapMutableState}
     frame::_InvocationState
     status::_TransactionStatus
     attempt_count::Int
@@ -271,11 +330,24 @@ function enter_invocation(
     rule::AbstractString,
     origin::AbstractString,
     state::RecognitionFrameState,
+    capture_gaps::Bool = false,
+    entry_slot::Union{Nothing,RecognitionGapEntrySlot} = nothing,
 )
     parent_invocation = isempty(authority._invocation_stack) ?
         nothing : authority._invocation_stack[end].invocation
     invocation = _claim_generation!(authority, :_next_invocation)
     generation = _claim_generation!(authority, :_next_generation)
+    parent = isempty(authority._invocation_stack) ? nothing : authority._invocation_stack[end]
+    accepted_entry_slot = if entry_slot !== nothing &&
+            parent !== nothing &&
+            parent.invocation == entry_slot.owner_invocation_id &&
+            parent.gap_state !== nothing &&
+            parent.gap_state.current_gap !== nothing &&
+            entry_slot.target_rule == String(rule)
+        entry_slot
+    else
+        nothing
+    end
     frame = _InvocationState(
         authority._authority_id,
         authority._source_authority,
@@ -287,6 +359,9 @@ function enter_invocation(
         generation,
         true,
         _copy_state(state),
+        capture_gaps ? _GapMutableState(state._cursor, 0, nothing) : nothing,
+        "I",
+        accepted_entry_slot,
         nothing,
     )
     push!(authority._invocation_stack, frame)
@@ -418,6 +493,141 @@ function read_mark(
     return nothing
 end
 
+"""Record the exact private lifecycle phase for typed gap diagnostics."""
+function set_gap_phase!(authority::RecognitionTransactionAuthority, frame, phase::AbstractString)
+    _frame_for_authority(authority, frame).gap_phase = String(phase)
+    return nothing
+end
+
+"""Install one prefix/interstitial candidate before capture-enabled LS."""
+function install_gap_candidate!(
+    authority::RecognitionTransactionAuthority,
+    frame,
+    match_start_codeunit::Int,
+)
+    state = _frame_for_authority(authority, frame)
+    gap = state.gap_state
+    gap === nothing && return nothing
+    gap.current_gap = RecognitionGapContext(
+        state.source_identity,
+        state.rule,
+        state.invocation,
+        gap.accepted_edge_count,
+        gap.accepted_edge_count == 0 ? "prefix" : "interstitial",
+        gap.committed_gap_cursor,
+        match_start_codeunit,
+    )
+    state.gap_phase = "selection"
+    return nothing
+end
+
+"""Commit one accepted edge after LE and clear its candidate before IT."""
+function commit_gap_candidate!(
+    authority::RecognitionTransactionAuthority,
+    frame;
+    cursor_codeunit::Int,
+    selected_end_codeunit::Int,
+)
+    state = _frame_for_authority(authority, frame)
+    gap = state.gap_state
+    current = gap === nothing ? nothing : gap.current_gap
+    (gap === nothing || current === nothing) && return nothing
+    if cursor_codeunit < selected_end_codeunit
+        throw(GapCursorRegressionException((
+            "code" => "source_location_cursor_regression",
+            "phase" => "advance",
+            "rule_role" => state.rule,
+            "invocation_role" => "gap_owner",
+            "source_id" => current.source_id,
+            "start_offset" => selected_end_codeunit,
+            "end_offset" => cursor_codeunit,
+            "originating_edge_or_job" => "$(state.rule):capture_gaps_commit",
+        )))
+    end
+    gap.committed_gap_cursor = cursor_codeunit
+    gap.accepted_edge_count += 1
+    gap.current_gap = nothing
+    state.gap_phase = "post_commit"
+    return nothing
+end
+
+"""Install a successful terminal tail without moving the parse cursor."""
+function install_gap_tail!(
+    authority::RecognitionTransactionAuthority,
+    frame,
+    input_end_codeunit::Int,
+    phase::AbstractString,
+)
+    state = _frame_for_authority(authority, frame)
+    gap = state.gap_state
+    gap === nothing && return nothing
+    gap.current_gap = RecognitionGapContext(
+        state.source_identity,
+        state.rule,
+        state.invocation,
+        gap.accepted_edge_count,
+        "tail",
+        gap.committed_gap_cursor,
+        input_end_codeunit,
+    )
+    state.gap_phase = String(phase)
+    return nothing
+end
+
+"""Return the live candidate/tail or the exact typed private diagnostic."""
+function current_gap(
+    authority::RecognitionTransactionAuthority,
+    frame,
+    accessor::AbstractString,
+)
+    state = _frame_for_authority(authority, frame)
+    current = state.gap_state === nothing ? nothing : state.gap_state.current_gap
+    current !== nothing && return current
+    throw(InterMatchGapException((
+        "code" => "gap_capture_context_unavailable",
+        "rule_label" => state.rule,
+        "source_id" => state.source_identity,
+        "invocation_id" => state.invocation,
+        "phase" => state.gap_phase,
+        "accessor" => String(accessor),
+    )))
+end
+
+"""Return a fresh detached action-edge entry identity, or nothing directly."""
+function entry_slot(authority::RecognitionTransactionAuthority, frame)
+    slot = _frame_for_authority(authority, frame).entry_slot
+    slot === nothing && return nothing
+    return Dict{String,Any}(
+        "target_rule" => slot.target_rule,
+        "regex_index" => slot.regex_index,
+        "slot_id" => slot.slot_id,
+        "selector_kind" => slot.selector_kind,
+        "authored_selector" => deepcopy(slot.authored_selector),
+    )
+end
+
+"""Create a child entry identity only while the owning candidate is live."""
+function gap_entry_slot(
+    authority::RecognitionTransactionAuthority,
+    frame;
+    target_rule::AbstractString,
+    regex_index::Int,
+    slot_id,
+    selector_kind::AbstractString,
+    authored_selector,
+)
+    state = _frame_for_authority(authority, frame)
+    (state.gap_state === nothing || state.gap_state.current_gap === nothing) && return nothing
+    return RecognitionGapEntrySlot(
+        state.invocation,
+        String(target_rule),
+        regex_index,
+        slot_id === nothing ? nothing : String(slot_id),
+        String(selector_kind),
+        deepcopy(authored_selector),
+    )
+end
+
 _token_is_active(token::_TransactionState) = token.status != _Invalidated
 
 function _restore_and_invalidate!(token::_TransactionState)
@@ -425,6 +635,8 @@ function _restore_and_invalidate!(token::_TransactionState)
     frame = token.frame
     if frame.active
         frame.frame_state = _copy_state(token.snapshot)
+        frame.gap_state = token.gap_snapshot === nothing ?
+            nothing : _copy_gap_state(token.gap_snapshot)
     end
     frame.active_token === token && (frame.active_token = nothing)
     token.status = _Invalidated
@@ -474,6 +686,8 @@ function checkpoint(
         frame_state.generation,
         _claim_generation!(authority, :_next_transaction),
         _copy_state(frame_state.frame_state),
+        frame_state.gap_state === nothing ?
+            nothing : _copy_gap_state(frame_state.gap_state),
         frame_state,
         _ActiveUnattempted,
         0,
@@ -833,5 +1047,11 @@ end
 function to_json(error::RecognitionTransactionException)
     return Dict{String,Any}(field.first => field.second for field in error._record)
 end
+
+to_json(error::InterMatchGapException) =
+    Dict{String,Any}(field.first => field.second for field in error._record)
+
+to_json(error::GapCursorRegressionException) =
+    Dict{String,Any}(field.first => field.second for field in error._record)
 
 end

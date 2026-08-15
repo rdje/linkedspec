@@ -10,6 +10,32 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-15 — INTER-MATCH-GAP-CAPTURE.5.2 — add Julia native gap execution
+
+- Activated task-tree-first from clean atomic-241 commit `3a620ec0`; the permanent consumer first failed exactly
+  on unsupported private helper `gap_kind`.
+- Extended the existing private recognition invocation/token with capture activation, immutable invocation/input
+  identity, detached entry-slot identity, committed gap cursor/count/current context, and rollback snapshots.
+  Detached `RecognitionFrameState` remains exactly cursor/boundary/marks; no second state stack or cursor exists.
+- Capture-enabled repetitions alone preselect/install candidates before `LS`, retain them through action/target/
+  `LE`, commit the child-extended accepted cursor before `IT`, and install successful tails before `LX`/`EX`/`E`.
+  Unflagged ordering and legacy marker behavior remain unchanged.
+- Added private zero-argument `entry_slot()`, `gap_span()`, `gap_text()`, and `gap_kind()` dispatch with exact arity,
+  unavailable-context, and cursor-regression diagnostics. Source spans cross the existing immutable input
+  `SourceAuthority` from UTF-8 code-unit registers to zero-based Unicode-scalar coordinates.
+- The duplicate-slot matrix caught an attempted Julia supported-call inventory widening. The corrected resolver
+  gives the four helpers a separate private family, preserving exactly 246 supported ActionIR names and all
+  language-capability ledgers.
+- Expanded the dormant permanent consumer to 105 metadata + 33 native assertions covering Unicode/empty gaps,
+  falsey and whole-rule results, named entry slots, child cursors, nesting, rollback, terminal modes, failed
+  minimums, direct entry, legacy behavior, four-helper arity, and both typed failures.
+- Complete Julia package/primary/storage 19/5 and corpus proof pass. Neutral/rooted governance remains 4/5/57
+  with Julia skipped; duplicate-slot 7/0/59, recognition 137/246/58, and typed-source 9/5/114 matrices pass. The
+  rendered book is 79/14,872 KiB and the Knowledge Map is 838 facts / 7,072 question keys.
+- Synchronized roadmap, task frontier, book, Knowledge Map, and live history without changing normalized
+  reconstruction, descriptors, generated format/plan, emitted source, primary admission, dependencies, storage,
+  rollout, or outward surfaces. ADR `0073` therefore keeps this ordinary private-runtime slice at focused tier.
+
 ## 2026-08-15 — INTER-MATCH-GAP-CAPTURE.5.1 — add Julia gap metadata
 
 - Activated task-tree-first from clean atomic-240 commit `12a14ed0`; no Julia implementation, consumer, checker,

@@ -145,6 +145,16 @@ end
 
 is_known_action_ir_call_name(name::AbstractString) = String(name) in _KNOWN_ACTION_IR_CALL_NAMES
 
+const _INTER_MATCH_GAP_HELPERS = Set{String}([
+    "entry_slot",
+    "gap_kind",
+    "gap_span",
+    "gap_text",
+])
+
+is_private_inter_match_gap_helper_name(name::AbstractString) =
+    String(name) in _INTER_MATCH_GAP_HELPERS
+
 const COMPLETE_NAMED_MARK_ACTION_IR_CALL_NAMES = Set{String}([
     "clear_mark",
     "mark_col",
@@ -953,7 +963,8 @@ function _resolve_helper_call!(
         )
         return nothing
     end
-    if !is_known_action_ir_call_name(name)
+    if !is_known_action_ir_call_name(name) &&
+            !is_private_inter_match_gap_helper_name(name)
         push!(
             resolver.diagnostics,
             ActionContractDiagnostic(
@@ -1068,6 +1079,8 @@ function _family_for_canonical(canonical_name::AbstractString)
         return "capture_mark"
     elseif value in _ENTRY_MATCH_HELPERS
         return "entry_match"
+    elseif value in _INTER_MATCH_GAP_HELPERS
+        return "inter_match_gap"
     elseif value in _INPUT_HELPERS
         return "input_cursor"
     elseif value in _STRING_HELPERS

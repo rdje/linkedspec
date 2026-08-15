@@ -10,6 +10,27 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-15 (`INTER-MATCH-GAP-CAPTURE.5.2` — Julia private native gap execution): activation base is clean
+  atomic 241 at `3a620ec0`; the explicit native group first reaches exact unsupported helper `gap_kind`.
+- Put gap state on `_InvocationState` and its existing transaction snapshot. Capture activation, input/invocation
+  identity, entry slot, committed cursor/count/current context, rollback, and nesting belong there; observed
+  `RecognitionFrameState` remains the exact detached cursor/boundary/marks projection.
+- Only flagged rules may preselect before `LS`. Candidate visibility spans action, child entry, and `LE`; commit
+  uses the child-extended post-`LE` cursor before `IT`. Successful minimum installs a terminal tail before the
+  existing `LX`/`EX`/`E` routes. Failed minimum and whole-rule unwind commit neither match nor synthetic tail.
+- Entry identity is a detached five-field record. Runtime registers remain zero-based UTF-8 code units, and the
+  existing immutable input `SourceAuthority` is the only bridge to detached Unicode-scalar spans and exact text.
+- `entry_slot`, `gap_span`, `gap_text`, and `gap_kind` are resolver-private zero-argument runtime calls. Do not put
+  them in `_SUPPORTED_ACTION_IR_CALL_NAMES`: the duplicate-slot matrix caught that widening because Dart/Julia
+  supported inventories stopped agreeing. The separate `inter_match_gap` family preserves exact inventory 246.
+- Exact diagnostics remain structured runtime envelopes: unavailable context uses stage `access_gap_context` and
+  code `gap_capture_context_unavailable`; cursor regression uses stage `advance_gap_context` and code
+  `source_location_cursor_regression`. All four helpers reject nonzero arity before runtime access.
+- Focused signoff is explicit 105 metadata + 33 native, complete Julia package/primary/storage 19/5/corpus,
+  neutral/rooted 4/5/57, duplicate-slot 7/0/59, recognition 137/246/58, typed-source 9/5/114, rendered book
+  79/14,872, Knowledge 838/7,072, bounded histories, and all nine doctrines. Reconstruction/generated/emitted/primary admission,
+  rollout, and outward surfaces remain `.5.3-.5.5`-owned, so canonical CI is not triggered.
+
 - 2026-08-15 (`INTER-MATCH-GAP-CAPTURE.5.1` — Julia authored/static/compiled metadata): activation base is clean
   atomic 240 at `12a14ed0`. The permanent consumer is explicit-only; the neutral checker mutation-locks its
   identity, metadata role, contract source, parse/validate/compile seams, diagnostic token, discovery/rooted

@@ -812,12 +812,13 @@ missing or duplicate ordinary/canonical/recurring registration, premature later-
 exposure. Rollout is 4 complete / 5 pending / 57 mutations, and generated plan v2 remains exactly
 `{label,family}`.
 
-### Julia authored/static/compiled metadata — current; runtime still pending
+### Julia metadata and private native execution — current behind dormancy
 
 Julia `.5.0` recorded the pre-implementation boundary: numeric selectors compiled; named declarations/selectors
 and `@capture_gaps` were raw invalid body syntax; `entry_slot()` and the three gap accessors failed as structured
 unknown helpers; legacy `@move_pos` had no compiled/native effect; and repeated execution ran enclosing `LS`
-before candidate selection. `.5.1` now implements only the authored/static/compiled layer.
+before candidate selection. `.5.1` implemented the authored/static/compiled layer, and `.5.2` now adds private
+native execution without admitting Julia into ordinary or rooted gap rollout.
 
 Named and anonymous declarations share one authored regex order and use the existing generated Unicode 17.0.0
 rule-label scanner. ASCII-digit-only names are rejected, duplicate names carry their first declaration line, and
@@ -832,22 +833,26 @@ ordered slot rows plus nullable directive evidence, and compiled action edges ca
 exact five-field resolved selector identity. Descriptor action edges, legacy `resolved_edges`, dependency refs,
 generated format 2, and ordered `{label,family}` plan rows remain unchanged.
 
-Five dependency-ordered leaves remain authoritative. `.5.1` now owns logical spec identity, authored/static/
-compiled slot and selector provenance, directive diagnostics, and a mechanically dormant permanent consumer. `.5.2` extends only
-the existing private recognition invocation/token authority; detached `RecognitionFrameState` remains exactly
-cursor/boundary/marks. Capture-enabled rules alone preselect before `LS`, and the immutable input
+Five dependency-ordered leaves remain authoritative. `.5.1` owns logical spec identity, authored/static/compiled
+slot and selector provenance, directive diagnostics, and the mechanically dormant permanent consumer. `.5.2`
+extends only the existing private recognition invocation/token authority; detached `RecognitionFrameState`
+remains exactly cursor/boundary/marks. Capture-enabled rules alone preselect and install candidates before `LS`,
+retain them through action/target/`LE`, commit the child-extended cursor before `IT`, and install successful tails
+before `LX`/`EX`/`E`. Transaction rollback and nested invocations restore the same authority. The immutable input
 `SourceAuthority` projects Julia's UTF-8 code-unit registers to detached scalar spans. `.5.3` uses normalized
 `SpecFile` JSON as the sole carrier, adds separate compatible descriptor projections, and retains generated
 format 2 with exact `{label,family}` plan rows. `.5.4` independently loads ten value and two typed-error emitted
 modules from one repository-routed host, advancing only the exact Julia temporary-workspace inventory from 19 to
 20. `.5.5` alone reuses the primary adapter, admits nine roles exactly once, and advances Julia to 5/4/58.
 
-The permanent consumer lives at `julia/test/inter_match_gap_capture_contract_test.jl` and explicitly proves the
-metadata group, but it is absent from `runtests.jl`, canonical CI, and the rooted driver. Ten independently
+The permanent consumer lives at `julia/test/inter_match_gap_capture_contract_test.jl` and explicitly proves 105
+metadata plus 33 native assertions, but it is absent from `runtests.jl`, canonical CI, and the rooted driver. Ten independently
 reason-checked Julia dormancy mutations guard its identity, parse/validate/compile seams, discovery absence, rooted
-absence, and facade absence. Julia rollout therefore stays pending at 4/5/57; runtime, accessors, reconstruction/
-descriptor/generated execution, emitted proof, primary execution/admission, outward surfaces, dependencies, and
-toolchain remain unchanged.
+absence, and facade absence. The four private zero-argument gap helpers resolve through a separate private family,
+so the supported ActionIR inventory stays exactly 246; exact arity, unavailable-context, and cursor-regression
+diagnostics are native. Julia rollout therefore stays pending at 4/5/57; reconstruction/descriptor/generated
+execution, emitted proof, primary execution/admission, outward surfaces, dependencies, and toolchain remain
+unchanged.
 
 Named slot rules are exact:
 

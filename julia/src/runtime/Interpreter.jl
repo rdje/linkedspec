@@ -419,6 +419,9 @@ end
 function _enter_runtime_recognition_invocation!(
     context::_RuntimeExecutionContext,
     rule_label::String,
+    ;
+    capture_gaps::Bool = false,
+    entry_slot::Union{Nothing,RecognitionTransaction.RecognitionGapEntrySlot} = nothing,
 )
     prior_marks = pop!(context.mark_buckets, rule_label, nothing)
     context.mark_buckets[rule_label] = Dict{String,Int}()
@@ -428,6 +431,8 @@ function _enter_runtime_recognition_invocation!(
             rule = rule_label,
             origin = "$rule_label:handler_entry",
             state = _runtime_recognition_frame_state(context, rule_label),
+            capture_gaps = capture_gaps,
+            entry_slot = entry_slot,
         )
         push!(
             context.recognition_frames,
@@ -595,6 +600,188 @@ function _note_runtime_recognition_match!(
     isempty(context.recognition_frames) ||
         (last(context.recognition_frames).selected_match = one_match)
     return nothing
+end
+
+function _set_runtime_gap_phase!(
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+    phase::String,
+)
+    frame = _runtime_recognition_frame(context, rule_label)
+    RecognitionTransaction.set_gap_phase!(
+        context.recognition_authority,
+        frame.authority_frame,
+        phase,
+    )
+    return nothing
+end
+
+function _install_runtime_gap_candidate!(
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+    one_match::RuntimeRegexMatch,
+)
+    frame = _runtime_recognition_frame(context, rule_label)
+    RecognitionTransaction.install_gap_candidate!(
+        context.recognition_authority,
+        frame.authority_frame,
+        one_match.codeunit_start,
+    )
+    return nothing
+end
+
+function _commit_runtime_gap_candidate!(
+    engine::LinkedSpecRuntimeEngine,
+    rule::CompiledRule,
+    context::_RuntimeExecutionContext,
+)
+    frame = _runtime_recognition_frame(context, rule.label)
+    selected = frame.selected_match
+    selected === nothing && return nothing
+    try
+        RecognitionTransaction.commit_gap_candidate!(
+            context.recognition_authority,
+            frame.authority_frame;
+            cursor_codeunit = context.cursor_codeunit,
+            selected_end_codeunit = selected.codeunit_end,
+        )
+    catch error
+        error isa RecognitionTransaction.GapCursorRegressionException || rethrow()
+        detail = sprint(showerror, error)
+        throw(RuntimeInterpreterException(
+            detail;
+            diagnostic = _runtime_context_diagnostic(
+                engine,
+                context;
+                stage = "advance_gap_context",
+                summary = "Julia inter-match gap cursor regressed before commit",
+                detail,
+                rule_label = rule.label,
+                code = "source_location_cursor_regression",
+            ),
+        ))
+    end
+    return nothing
+end
+
+function _install_runtime_gap_tail!(
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+    phase::String,
+)
+    frame = _runtime_recognition_frame(context, rule_label)
+    RecognitionTransaction.install_gap_tail!(
+        context.recognition_authority,
+        frame.authority_frame,
+        ncodeunits(context.input),
+        phase,
+    )
+    return nothing
+end
+
+function _runtime_gap_entry_slot_for_edge(
+    context::_RuntimeExecutionContext,
+    current_edge,
+)
+    frame = _runtime_recognition_frame(context, current_edge.rule_label)
+    return RecognitionTransaction.gap_entry_slot(
+        context.recognition_authority,
+        frame.authority_frame;
+        target_rule = current_edge.target.label,
+        regex_index = current_edge.edge.child_regex_index,
+        slot_id = current_edge.edge.target_slot_id,
+        selector_kind = current_edge.edge.selector_kind,
+        authored_selector = current_edge.edge.authored_selector,
+    )
+end
+
+function _runtime_gap_entry_slot_value(
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+)
+    frame = _runtime_recognition_frame(context, rule_label)
+    return RecognitionTransaction.entry_slot(
+        context.recognition_authority,
+        frame.authority_frame,
+    )
+end
+
+function _runtime_current_gap(
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+    accessor::String,
+)
+    frame = _runtime_recognition_frame(context, rule_label)
+    return RecognitionTransaction.current_gap(
+        context.recognition_authority,
+        frame.authority_frame,
+        accessor,
+    )
+end
+
+function _runtime_gap_span(
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+    accessor::String,
+)
+    gap = _runtime_current_gap(context, rule_label, accessor)
+    return _typed_span_from_codeunits(
+        context,
+        gap.start_codeunit,
+        gap.end_codeunit,
+        rule_label,
+        "gap",
+    )
+end
+
+function _runtime_gap_text(
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+    accessor::String,
+)
+    gap = _runtime_current_gap(context, rule_label, accessor)
+    return _typed_span_text_from_codeunits(
+        context,
+        gap.start_codeunit,
+        gap.end_codeunit,
+        rule_label,
+        "gap",
+    )
+end
+
+function _read_runtime_gap_context_helper(
+    engine::LinkedSpecRuntimeEngine,
+    helper_name::String,
+    context::_RuntimeExecutionContext,
+    rule_label::String,
+)
+    try
+        if helper_name == "gap_span"
+            span = _runtime_gap_span(context, rule_label, helper_name)
+            return span === nothing ? nothing : SourceLocation.to_json(span)
+        elseif helper_name == "gap_text"
+            return _runtime_gap_text(context, rule_label, helper_name)
+        elseif helper_name == "gap_kind"
+            return _runtime_current_gap(context, rule_label, helper_name).kind
+        end
+        error("unknown private gap helper $helper_name")
+    catch error
+        error isa RecognitionTransaction.InterMatchGapException || rethrow()
+        detail = sprint(showerror, error)
+        throw(RuntimeInterpreterException(
+            detail;
+            diagnostic = _runtime_context_diagnostic(
+                engine,
+                context;
+                stage = "access_gap_context",
+                summary = "Julia inter-match gap context is unavailable",
+                detail,
+                rule_label,
+                code = "gap_capture_context_unavailable",
+                helper_name,
+            ),
+        ))
+    end
 end
 
 function _bind_runtime_recursive_observation!(
@@ -1466,6 +1653,8 @@ function _execute_runtime_rule!(
     label::String,
     entry_regex_index::Int,
     context::_RuntimeExecutionContext,
+    ;
+    entry_slot::Union{Nothing,RecognitionTransaction.RecognitionGapEntrySlot} = nothing,
 )
     rule = compiled_rule(engine.compiled_spec, label)
     if rule === nothing
@@ -1516,7 +1705,12 @@ function _execute_runtime_rule!(
     push!(context.rule_local_binding_scopes, Dict{String,_RuntimeRuleLocalBinding}())
     saved_registers = context.registers
     context.registers = enter_child(saved_registers)
-    _enter_runtime_recognition_invocation!(context, label)
+    _enter_runtime_recognition_invocation!(
+        context,
+        label;
+        capture_gaps = rule.capture_gaps !== nothing,
+        entry_slot = entry_slot,
+    )
     _note_runtime_recursive_observation_entry!(
         context,
         label,
@@ -1875,6 +2069,7 @@ function _execute_runtime_regex_rule!(
     uses_and_execution::Bool,
 )
     minimum = rule.mode_metadata.rep_min
+    capture_gaps = rule.capture_gaps !== nothing
     if minimum === nothing
         matched_any = false
         for _ in 1:engine.max_iterations
@@ -1926,9 +2121,35 @@ function _execute_runtime_regex_rule!(
             break
         end
         before = context.cursor_codeunit
-        loop_start = _execute_runtime_lifecycle!(engine, rule, "LS", context)
-        if loop_start !== nothing
-            return _runtime_returned(loop_start.value)
+        selected_match = nothing
+        if capture_gaps
+            selected_match = _select_runtime_regex_match(
+                rule,
+                context;
+                entry_regex_index = 0,
+                cursor_policy,
+            )
+            _trace_runtime_regex_decision!(
+                context,
+                rule,
+                selected_match,
+                before,
+                "cursor_policy=$(parse_mode_name(cursor_policy)) " *
+                "entry_regex=0 capture_gaps=1",
+            )
+            if selected_match !== nothing
+                _prepare_runtime_gap_candidate!(rule, selected_match, context)
+                _set_runtime_gap_phase!(context, rule.label, "LS")
+                loop_start = _execute_runtime_lifecycle!(engine, rule, "LS", context)
+                if loop_start !== nothing
+                    return _runtime_returned(loop_start.value)
+                end
+            end
+        else
+            loop_start = _execute_runtime_lifecycle!(engine, rule, "LS", context)
+            if loop_start !== nothing
+                return _runtime_returned(loop_start.value)
+            end
         end
 
         matched = _runtime_nextable_bool(() -> _execute_runtime_regex_once!(
@@ -1938,6 +2159,8 @@ function _execute_runtime_regex_rule!(
             cursor_policy = cursor_policy,
             and_sequence = uses_and_execution && length(rule.regex_patterns) > 1,
             action_iteration_values = action_iteration_values,
+            match_preselected = capture_gaps,
+            preselected_match = selected_match,
         ))
         if matched.nexted
             matches += 1
@@ -1951,7 +2174,9 @@ function _execute_runtime_regex_rule!(
             break
         end
 
+        capture_gaps && _commit_runtime_gap_candidate!(engine, rule, context)
         matches += 1
+        _set_runtime_gap_phase!(context, rule.label, "IT")
         iteration_return = _execute_runtime_lifecycle!(engine, rule, "IT", context)
         if iteration_return !== nothing
             return _runtime_returned(iteration_return.value)
@@ -1962,6 +2187,7 @@ function _execute_runtime_regex_rule!(
     end
 
     if matches < minimum
+        _set_runtime_gap_phase!(context, rule.label, "LX")
         loop_exit = _execute_runtime_lifecycle!(engine, rule, "LX", context)
         if loop_exit !== nothing
             return _runtime_returned(loop_exit.value)
@@ -1974,16 +2200,20 @@ function _execute_runtime_regex_rule!(
         ))
     end
 
+    capture_gaps && _install_runtime_gap_tail!(context, rule.label, "EX")
+    _set_runtime_gap_phase!(context, rule.label, "EX")
     extended_exit = _execute_runtime_lifecycle!(engine, rule, "EX", context)
     if extended_exit !== nothing
         return _runtime_returned(extended_exit.value)
     end
     if made_failed_attempt || matches > 0
+        _set_runtime_gap_phase!(context, rule.label, "LX")
         loop_exit = _execute_runtime_lifecycle!(engine, rule, "LX", context)
         if loop_exit !== nothing
             return _runtime_returned(loop_exit.value)
         end
     end
+    _set_runtime_gap_phase!(context, rule.label, "E")
     exit_return = _execute_runtime_lifecycle!(engine, rule, "E", context)
     if exit_return !== nothing
         return _runtime_returned(exit_return.value)
@@ -1991,6 +2221,52 @@ function _execute_runtime_regex_rule!(
     value = action_iteration_values === nothing ?
         nothing : Any[action_iteration_values...]
     return _RuntimeRuleResult(matches > 0, value)
+end
+
+function _select_runtime_regex_match(
+    rule::CompiledRule,
+    context::_RuntimeExecutionContext;
+    entry_regex_index::Int,
+    cursor_policy::LinkedSpecParseMode,
+)
+    isempty(rule.regex_patterns) && return nothing
+    alternation = RuntimeRegexAlternation(rule)
+    return if entry_regex_index > 0 && entry_regex_index < length(rule.regex_patterns)
+        _match_runtime_specific(
+            alternation,
+            entry_regex_index,
+            context,
+            cursor_policy,
+        )
+    else
+        runtime_match(
+            alternation,
+            context.input,
+            context.cursor_codeunit;
+            parse_mode = cursor_policy,
+        )
+    end
+end
+
+function _prepare_runtime_gap_candidate!(
+    rule::CompiledRule,
+    one_match::RuntimeRegexMatch,
+    context::_RuntimeExecutionContext,
+)
+    target_rule, regex_index =
+        _runtime_regex_slot_identity(rule, one_match.alternative_index)
+    _record_runtime_regex_slot_selected!(
+        context,
+        rule.label,
+        "choice",
+        target_rule,
+        regex_index,
+        one_match.codeunit_end,
+    )
+    context.registers = with_local_match(context.registers, one_match)
+    _note_runtime_recognition_match!(context, one_match)
+    _install_runtime_gap_candidate!(context, rule.label, one_match)
+    return nothing
 end
 
 function _execute_runtime_regex_once!(
@@ -2001,9 +2277,11 @@ function _execute_runtime_regex_once!(
     cursor_policy::LinkedSpecParseMode,
     and_sequence::Bool = false,
     action_iteration_values = nothing,
+    match_preselected::Bool = false,
+    preselected_match = nothing,
 )
     cursor_before = context.cursor_codeunit
-    if isempty(rule.regex_patterns)
+    if !match_preselected && isempty(rule.regex_patterns)
         _trace_runtime_regex_decision!(
             context,
             rule,
@@ -2016,7 +2294,7 @@ function _execute_runtime_regex_once!(
 
     alternation = RuntimeRegexAlternation(rule)
 
-    if and_sequence
+    if !match_preselected && and_sequence
         for expected_index in eachindex(rule.regex_patterns)
             zero_based_index = expected_index - 1
             one_match = _match_runtime_specific(
@@ -2055,6 +2333,7 @@ function _execute_runtime_regex_once!(
                 expected_regex_index,
                 one_match.codeunit_end,
             )
+            _set_runtime_gap_phase!(context, rule.label, "edge")
             _accept_runtime_regex_match!(
                 engine,
                 rule,
@@ -2062,6 +2341,7 @@ function _execute_runtime_regex_once!(
                 context;
                 action_iteration_values = action_iteration_values,
             )
+            _set_runtime_gap_phase!(context, rule.label, "LE")
             loop_end = _execute_runtime_lifecycle!(engine, rule, "LE", context)
             if loop_end !== nothing
                 throw(loop_end)
@@ -2070,7 +2350,9 @@ function _execute_runtime_regex_once!(
         return true
     end
 
-    one_match = if entry_regex_index > 0 && entry_regex_index < length(rule.regex_patterns)
+    one_match = if match_preselected
+        preselected_match
+    elseif entry_regex_index > 0 && entry_regex_index < length(rule.regex_patterns)
         _match_runtime_specific(
             alternation,
             entry_regex_index,
@@ -2085,29 +2367,34 @@ function _execute_runtime_regex_once!(
             parse_mode = cursor_policy,
         )
     end
-    _trace_runtime_regex_decision!(
-        context,
-        rule,
-        one_match,
-        cursor_before,
-        "cursor_policy=$(parse_mode_name(cursor_policy)) entry_regex=$entry_regex_index",
-    )
+    if !match_preselected
+        _trace_runtime_regex_decision!(
+            context,
+            rule,
+            one_match,
+            cursor_before,
+            "cursor_policy=$(parse_mode_name(cursor_policy)) entry_regex=$entry_regex_index",
+        )
+    end
     if one_match === nothing
         return false
     end
 
-    target_rule, regex_index =
-        _runtime_regex_slot_identity(rule, one_match.alternative_index)
-    selection_role = rule.mode_metadata.is_and ? "ordered_required" : "choice"
-    _record_runtime_regex_slot_selected!(
-        context,
-        rule.label,
-        selection_role,
-        target_rule,
-        regex_index,
-        one_match.codeunit_end,
-    )
+    if !match_preselected
+        target_rule, regex_index =
+            _runtime_regex_slot_identity(rule, one_match.alternative_index)
+        selection_role = rule.mode_metadata.is_and ? "ordered_required" : "choice"
+        _record_runtime_regex_slot_selected!(
+            context,
+            rule.label,
+            selection_role,
+            target_rule,
+            regex_index,
+            one_match.codeunit_end,
+        )
+    end
 
+    _set_runtime_gap_phase!(context, rule.label, "edge")
     _accept_runtime_regex_match!(
         engine,
         rule,
@@ -2115,6 +2402,7 @@ function _execute_runtime_regex_once!(
         context;
         action_iteration_values = action_iteration_values,
     )
+    _set_runtime_gap_phase!(context, rule.label, "LE")
     loop_end = _execute_runtime_lifecycle!(engine, rule, "LE", context)
     if loop_end !== nothing
         throw(loop_end)
@@ -3498,6 +3786,30 @@ function _evaluate_runtime_call!(
             rule_label,
         )
     end
+    if helper_name in ("entry_slot", "gap_span", "gap_text", "gap_kind")
+        actual_arity = length(args) + keyword_arg_count
+        if actual_arity != 0
+            expected_arity = "exactly 0 arguments"
+            detail = "helper_arity_mismatch: helper_name=$helper_name " *
+                     "actual_arity=$actual_arity expected_arity=$expected_arity " *
+                     "in rule $rule_label"
+            throw(RuntimeInterpreterException(
+                detail;
+                diagnostic = _runtime_context_diagnostic(
+                    engine,
+                    context;
+                    stage = "helper_arity_mismatch",
+                    summary = "Julia inter-match gap helper arity failed",
+                    detail,
+                    rule_label,
+                    code = "helper_arity_mismatch",
+                    helper_name,
+                    actual_arity,
+                    expected_arity,
+                ),
+            ))
+        end
+    end
 
     if statement_context && helper_name == "set_key" && _execute_runtime_set_key_statement!(
             engine,
@@ -3577,6 +3889,15 @@ function _evaluate_runtime_call!(
             context,
             rule_label,
             current_edge,
+        )
+    elseif helper_name == "entry_slot"
+        return _runtime_gap_entry_slot_value(context, rule_label)
+    elseif helper_name in ("gap_span", "gap_text", "gap_kind")
+        return _read_runtime_gap_context_helper(
+            engine,
+            helper_name,
+            context,
+            rule_label,
         )
     elseif helper_name == "entry_text"
         one_match = context.registers.entry_match
@@ -6578,11 +6899,13 @@ function _execute_runtime_action_edge_child!(
         )
         return current_edge.child_result::_RuntimeRuleResult
     end
+    entry_slot = _runtime_gap_entry_slot_for_edge(context, current_edge)
     current_edge.child_result = _execute_runtime_rule!(
         engine,
         current_edge.target.label,
         current_edge.target.index,
         context,
+        entry_slot = entry_slot,
     )
     _trace_runtime_decision!(
         context,

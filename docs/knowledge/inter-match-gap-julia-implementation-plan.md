@@ -18,10 +18,11 @@ answers:
   - "how does Julia gap admission change rollout and mutations"
   - "is Julia capture_gaps implemented now"
   - "how does Julia keep loaded gap metadata from leaking absolute paths"
+  - "do Julia private gap helpers widen the supported ActionIR call inventory"
 date: 2026-08-15
-status: authored/static/compiled Julia metadata implemented behind dormancy; Julia runtime remains pending at gap rollout 4 complete / 5 pending
+status: authored/static/compiled metadata and private native Julia execution implemented behind dormancy; reconstruction, emitted proof, and admission remain pending at gap rollout 4 complete / 5 pending
 tags: [julia, capture, segmentation, named-slots, recognition, source-location, generated-source, emitted-source, primary, plan]
-evidence: "INTER-MATCH-GAP-CAPTURE.5.1 implements defaulted SpecFile.source_id through ordinary/staged/loaded/JSON/private-primary parsing; pinned-Unicode named/anonymous declarations; unindexed/numeric/named selector authorship; dedicated capture_gaps syntax and exact static diagnostics; compiled slot/directive/five-field edge provenance; legacy descriptor non-widening; and a 105-assertion permanent consumer guarded by ten Julia dormancy mutations. The complete Julia package is green, storage remains exactly 19 temp owners / 5 packages, and absolute loaded requests reduce to relocatable logical basenames. Runtime/accessors, rollout 4/5/57, generated format 2, and outward surfaces remain unchanged."
+evidence: "INTER-MATCH-GAP-CAPTURE.5.1 implements defaulted SpecFile.source_id, pinned-Unicode named/anonymous declarations, selector/directive/static diagnostics, and compiled provenance. .5.2 extends only the existing private recognition invocation/token with activation, detached entry identity, committed gap cursor/count/current state, rollback, nested isolation, capture-only preselection, accepted commit, terminal tail, scalar-span projection, and four zero-argument private accessors. Explicit permanent-consumer proof is 105 metadata + 33 native assertions; the complete Julia package and recognition/typed-source/duplicate-slot matrices are green. The matrix exposed and corrected an attempted supported-call inventory widening: the four private helpers resolve separately, so the supported ActionIR inventory remains exactly 246. Ten dormancy mutations, rollout 4/5/57, storage 19/5, generated format 2, and outward surfaces remain unchanged."
 reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'include(\"julia/test/inter_match_gap_capture_contract_test.jl\")' && bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/check_inter_match_gap_capture_six_runtime.sh && bash tools/run_julia_local.sh"
 ---
 
@@ -49,16 +50,33 @@ basename. The complete Julia gate exposed the otherwise-hidden risk that compile
 scratch absolute path; the corrected production loader now keeps the established compiled/descriptor path-opacity
 contract while retaining logical source provenance.
 
-The final consumer is permanent but mechanically dormant. Explicit execution passes 105 assertions. It is not
+The final consumer is permanent but mechanically dormant. Explicit execution passes 105 metadata and 33 native
+assertions. It is not
 included by ordinary package discovery, canonical CI, or the rooted recurring driver, and the Julia facade gains
 no gap token. Ten reason-checked mutations independently reject consumer identity, metadata role, contract source,
 parse/validation/compiler seam, diagnostic, discovery, rooted-execution, and facade drift. Storage stays at the
 pre-emitted boundary of 19 temporary-workspace owners and five locked package trees; `.5.4` still exclusively owns
 the planned 19→20 transition.
 
-The repeated-rule trace establishes the lifecycle constraint: Julia currently runs enclosing `LS` before it
-selects the next candidate. Capture-enabled rules alone must preselect and install their candidate before `LS` so
-that gap context is visible there; unflagged rules retain their current ordering.
+## Implemented `.5.2` native boundary
+
+The existing recognition invocation/token now owns capture activation, immutable input and invocation identity,
+detached selected-entry identity, committed gap cursor, accepted-edge count, and current candidate or tail. Its
+existing transaction snapshot restores every mutable gap field on rollback. Detached `RecognitionFrameState`
+remains exactly cursor/boundary/marks, so Julia gains no parallel stack, cursor, token, or observed-frame field.
+
+Capture-enabled repetitions alone preselect and install the candidate before `LS`. That candidate remains visible
+through the edge action, child target, and `LE`; the child-extended post-`LE` cursor commits before `IT`. Successful
+terminal tails are installed before `LX`, `EX`, or `E`. The permanent consumer proves prefix/interstitial/tail and
+empty gaps, Unicode scalar spans, falsey and whole-rule results, child cursor extension, entry identity, nesting,
+rollback, terminal modes, failed minimums, direct entry, and unchanged legacy behavior.
+
+`entry_slot()`, `gap_span()`, `gap_text()`, and `gap_kind()` are private zero-argument runtime helpers. They are
+accepted by the resolver through a dedicated private family and are deliberately absent from the supported
+ActionIR call-name inventory. The duplicate-slot matrix caught the first implementation widening that inventory;
+the corrected boundary keeps it exactly 246 while retaining exact arity, unavailable-context, and cursor-
+regression diagnostics. UTF-8 code-unit registers cross the existing immutable `SourceAuthority` only when a
+detached zero-based Unicode-scalar span or text value is requested.
 
 ## Five dependency-ordered leaves
 
@@ -68,12 +86,12 @@ that gap context is visible there; unflagged rules retain their current ordering
    exact nine static diagnostics are source-aware. The permanent final consumer is created at
    `julia/test/inter_match_gap_capture_contract_test.jl` but ten checker-local mutations keep it absent from
    ordinary, canonical, and rooted execution.
-2. `.5.2` extends only the private recognition authority. The existing invocation/token owns activation,
+2. `.5.2` extends only the private recognition authority. The existing invocation/token now owns activation,
    immutable input and invocation identity, detached entry identity, committed gap cursor, accepted-edge count,
    and current gap. Token rollback restores mutable gap state. Detached `RecognitionFrameState` remains exactly
    cursor, boundary, and marks; there is no second stack, cursor, or token family. Private zero-argument
-   `entry_slot()`, `gap_span()`, `gap_text()`, and `gap_kind()` use existing action dispatch and retain exact
-   unavailable-context and cursor-regression diagnostics.
+   `entry_slot()`, `gap_span()`, `gap_text()`, and `gap_kind()` use existing action dispatch, remain outside the
+   supported ActionIR inventory, and retain exact arity, unavailable-context, and cursor-regression diagnostics.
 3. `.5.3` uses normalized `SpecFile` JSON as the sole reconstruction carrier and recompiles normally. Descriptor
    rule metadata adds separate fresh `regex_slots`, `capture_gaps`, and five-field `resolved_slot_edges` values,
    preserving legacy `resolved_edges` and `{label,idx}` references. Direct and traced generated execution spend

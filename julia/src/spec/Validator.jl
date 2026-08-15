@@ -323,7 +323,9 @@ function _check_function_registry(spec::SpecFile)
         if _is_lifecycle_marker_name(name)
             throw(SpecValidationException("user function '$name' collides with lifecycle marker '$name'"))
         end
-        if _is_function_keyword(name) || _is_known_action_ir_call_name(name)
+        if _is_function_keyword(name) ||
+                _is_known_action_ir_call_name(name) ||
+                is_private_inter_match_gap_helper_name(name)
             throw(SpecValidationException("user function '$name' collides with built-in helper/control name '$name'"))
         end
         if function_definition.arity != length(function_definition.params)

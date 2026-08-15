@@ -15,9 +15,9 @@ answers:
   - "why does an action edge fluent chain keep its first dot"
   - "what happens after FUTURE-PARITY-BACKLOG 14.5.0"
 date: 2026-08-15
-status: cross-tree handoff complete; Perl, Rust, and Dart privately admitted; behavior-free Julia plan frozen
+status: cross-tree handoff complete; Perl/Rust/Dart privately admitted; Julia metadata and native execution current behind dormancy
 tags: [architecture, task-tree, gap-capture, named-slots, selectors, typed-source, handoff]
-evidence: "Clean handoff 3d0384d1 and the committed ADR/duplicate-slot/typed-source authorities assign implementation to INTER-MATCH-GAP-CAPTURE. Neutral .1 is closed; Perl .2, Rust .3, and Dart .4 are privately admitted through authored/native/carrier/emitted/primary roles. Gap governance is 4 complete + 5 pending / 57 semantic mutations plus ten Rust and ten Dart admission mutations. Behavior-free Julia .5.0 freezes .5.1-.5.5 from clean 43ed1c8f; Julia/Lua, recurring/public, and typed-source composition remain pending."
+evidence: "Clean handoff 3d0384d1 and the committed ADR/duplicate-slot/typed-source authorities assign implementation to INTER-MATCH-GAP-CAPTURE. Neutral .1 is closed; Perl .2, Rust .3, and Dart .4 are privately admitted through authored/native/carrier/emitted/primary roles. Julia .5.1-.5.2 implement exact metadata and private native execution behind dormancy. Gap governance remains 4 complete + 5 pending / 57 semantic mutations plus ten Rust and ten Dart admission mutations; Julia carrier/admission, Lua, recurring/public, and typed-source composition remain pending."
 reverify: "bash tools/check_duplicate_regex_slot_identity_five_backend.sh && bash tools/check_typed_source_location_six_runtime.sh && perl tools/read_task_tree.pl --tree FUTURE-PARITY-BACKLOG --id FUTURE-PARITY-BACKLOG.14.5.0 && perl tools/read_task_tree.pl --tree INTER-MATCH-GAP-CAPTURE --id INTER-MATCH-GAP-CAPTURE.1"
 ---
 
@@ -25,7 +25,8 @@ reverify: "bash tools/check_duplicate_regex_slot_identity_five_backend.sh && bas
 
 Current Perl, Rust, and Dart LinkedSpec support positional and named action-edge targets, named regex declarations,
 and privately admitted `@capture_gaps` state/accessors across their native, reconstructed/generated, emitted, and
-primary roles. These forms are not yet portable/publicly admitted because Julia and both Lua ABIs remain pending.
+primary roles. Julia implements exact metadata plus private native execution behind dormancy. These forms are not
+yet portable/publicly admitted because Julia's carrier/admission work and both Lua ABIs remain pending.
 The historical Perl mechanism proves the intended automatic prefix/interstitial behavior, while the legacy marker
 implementations prove that old scope and timing cannot simply be promoted into a portable contract.
 

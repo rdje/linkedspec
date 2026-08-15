@@ -1,18 +1,19 @@
 # MEMORY
 
-- activation_commit: `12a14ed02e6506915954f493dbd8db8918dc3d57` — clean atomic-240 base for Julia metadata
-  leaf `INTER-MATCH-GAP-CAPTURE.5.1`; no push.
-- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.5.1 - add Julia gap metadata`; focused-signoff-complete from
-  clean atomic 240 at `12a14ed0` for intended atomic 241.
-- active_work_unit: none at the intended clean post-landing boundary. `.5.1` adds private authored/static/compiled
-  metadata and dormant proof only; parent `.5` remains active and Julia runtime admission remains pending.
-- next_action: activate `.5.2` task-tree-first from exact clean atomic 241 for private Julia native gap state,
-  lifecycle, accessors, entry identity, rollback, and recursion on the existing recognition authority.
-- in_flight_uncommitted: none at the intended handoff; no generated artifact, background result, or partial task.
-- blockers: none. Explicit dormant metadata is 105/105; focused Julia direct dependents are 624; full Julia package,
-  primary, storage 19/5, and corpus 105 pass. Neutral/rooted remains 4/5/57 with ten Julia dormancy mutations;
-  recognition 137/246/58, duplicate slot 7/0/59, typed source 9/5/114, book 79/14,868, Knowledge 838/7,071,
-  bounded histories, diff checks, and all nine doctrines pass.
+- activation_commit: `3a620ec05e7ac5200fa4de43f99bec376a9aa999` — clean atomic-241 base for Julia private
+  native leaf `INTER-MATCH-GAP-CAPTURE.5.2`; no push.
+- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.5.2 - add Julia native gap execution`; focused-signoff-complete
+  from clean atomic 241 at `3a620ec0` for intended atomic 242.
+- active_work_unit: none at the intended clean post-landing boundary. `.5.2` adds private native execution behind
+  the dormant final consumer; parent `.5` remains active and Julia reconstruction/admission remain pending.
+- next_action: after atomic 242 lands and brief/clean proof completes, activate `.5.3` task-tree-first for
+  normalized reconstruction, compatible descriptors, and same-engine generated-v2 gap execution.
+- in_flight_uncommitted: none at the intended clean handoff; no generated artifact, background result, or partial
+  implementation remains.
+- blockers: none. Deliberate RED reached unsupported `gap_kind`; explicit proof is 105 metadata + 33 native.
+  Complete Julia package, primary, storage 19/5, and corpus pass. Neutral/rooted stays 4/5/57 with ten Julia
+  dormancy mutations; recognition 137/246/58, duplicate slot 7/0/59, typed source 9/5/114, rendered book
+  79/14,872, Knowledge 838/7,072, bounded histories, diff checks, and all nine doctrines pass.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -40,7 +41,8 @@
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, and recurrence/public no-drift 9/9.
 - current_future_direction: gap is privately admitted on Perl, Rust, and Dart at 4/5/57 plus ten Rust and ten Dart
-  admission mutations. Julia `.5.1` now owns exact private metadata plus ten dormancy guards; `.5.2-.5.5` own native,
-  generated, emitted, and admission work. Both Lua ABIs and public rows remain pending; `.14.5.1` waits for `.7`.
-- latest_bootstrap_read: 2026-08-15 — roadmap/codebase/mdBook and continuity/tooling review complete; `.5.1` is
-  focused-signoff-complete for intended atomic 241, with `.5.2` the exact next clean-boundary action.
+  admission mutations. Julia `.5.1-.5.2` now own exact private metadata and native execution behind ten dormancy
+  guards; `.5.3-.5.5` own generated, emitted, and admission work. Both Lua ABIs and public rows remain pending;
+  `.14.5.1` waits for `.7`.
+- latest_bootstrap_read: 2026-08-15 — roadmap/codebase/mdBook and continuity/tooling review complete; `.5.2` is
+  focused-signoff-complete for intended atomic 242, with commit/brief/clean proof the exact next action.

@@ -18,9 +18,9 @@ answers:
   - "is name equals regex implemented yet"
   - "does move_pos currently mean the same thing on every backend"
 date: 2026-07-17
-status: verified historical fact; Perl authored/static and private native-live behavior implemented; carrier/admission pending
+status: verified historical fact; Perl/Rust/Dart privately admitted and Julia metadata/native execution implemented behind dormancy
 tags: [capture, segmentation, super-split, move-pos, or-rule, action-edge, source-span, perl, portability]
-evidence: "Imported baseline cf25bd37 perl/LinkedSpec.pm Split-Like/MOVE_POS/spec_gdata/REP_ACODE and specs/ebnf.spec; documentation drift 8588b07b and 300e6950; current RuleIR relabel/reidx projection; 2026-07-17 live Top::OR to Document[0..2] probe; five-backend marker-scope code audit; INTER-MATCH-GAP-CAPTURE.2.1 authored/static Perl staging and .2.2 private native-live implementation from clean 912fc5ed. ADR 0045."
+evidence: "Imported baseline cf25bd37 perl/LinkedSpec.pm Split-Like/MOVE_POS/spec_gdata/REP_ACODE and specs/ebnf.spec; documentation drift 8588b07b and 300e6950; current RuleIR relabel/reidx projection; 2026-07-17 live Top::OR to Document[0..2] probe; five-backend marker-scope code audit. INTER-MATCH-GAP-CAPTURE.2-.4 privately admit Perl, Rust, and Dart. Julia .5.1-.5.2 implement exact metadata and same-recognition-authority native execution behind dormancy; Julia carriers/admission, Lua, and public rows remain pending. ADR 0045."
 reverify: "git show cf25bd37:perl/LinkedSpec.pm | rg -n -C 8 'Split-Like Code|MOVE_POS|spec_gdata|REP_ACODE'"
 ---
 
@@ -64,11 +64,12 @@ no next match.
 
 ## Accepted future direction
 
-ADR `0045` reserves **inter-match gap capture** as the formal concept, **lossless segmentation** as the
-broader model, and `@capture_gaps` as the neutral directive. The Perl reference accepts it as static rule
-metadata and privately executes native-live prefix/interstitial/tail behavior. Independently loaded generated
-execution and runtime/public admission remain later leaves. Its executable contract fixes prefix, tail,
-empty-span, failure/backtracking, recursion, typed-span, diagnostics, and compatibility policy.
+ADR `0045` reserves **inter-match gap capture** as the formal concept, **lossless segmentation** as the broader
+model, and `@capture_gaps` as the neutral directive. Perl, Rust, and Dart are privately admitted across their
+available native/generated/emitted/primary roles. Julia accepts exact authored/static/compiled metadata and
+privately executes native prefix/interstitial/tail behavior behind a dormant consumer; its reconstruction,
+emitted proof, and admission remain later leaves. The executable contract fixes prefix, tail, empty-span,
+failure/backtracking, recursion, typed-span, diagnostics, and compatibility policy.
 
 The new representation may replace implicit `$IPOS` arithmetic with invocation-local typed span
 state, but it must preserve external target-rule ownership, target lifecycle behavior, and automatic
@@ -82,10 +83,10 @@ do not execute parsed marker members in their native runtime paths. This does no
 [[split-marker-cross-backend-semantics]] for the exact matrix.
 
 The director also accepts stable named regex-slot identity as the direction for replacing positional-
-only coupling. Numeric/unindexed forms remain compatible. The Perl reference now declares
-`header=/.../` inside the target rule and selects it as `Document[header]`. Horizontal whitespace
-around `=` is insignificant. The source syntax, ordinary named selection, and private native-live `entry_slot()`
-accessor are implemented only in Perl; generated loading, admission, and portable/public support remain pending.
+only coupling. Numeric/unindexed forms remain compatible. The admitted runtimes declare `header=/.../` inside the
+target rule and select it as `Document[header]`; horizontal whitespace around `=` is insignificant. Perl, Rust,
+and Dart expose that syntax through their admitted private routes. Julia implements the syntax and native
+`entry_slot()` behind dormancy. Julia carrier/admission, Lua, and portable/public support remain pending.
 
 The selector namespace is deliberately bracket-only: `Document[1]` is positional compatibility and
 `Document[header]` is stable identity. They may lower to the same typed slot target, but source provenance is
