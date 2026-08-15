@@ -10,6 +10,34 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-15 — INTER-MATCH-GAP-CAPTURE.4.2 — add Dart native gap execution
+
+- Activated task-tree-first from clean workflow-policy atomic 235 at `c234ef9f`. Extending only the permanent
+  library-skipped consumer produced the deliberate focused RED at exact `unknown_helper name="gap_kind"` on its
+  first native assertion.
+- Extended the existing private `RecognitionTransactionAuthority`; no second cursor, invocation stack, or token
+  family was added. Capture activation and detached entry identity join immutable source/invocation identity,
+  while committed gap cursor, accepted-edge count, and current gap are the three token-snapshotted mutable values.
+  Public/observed `RecognitionFrameState` remains cursor/boundary/marks.
+- Capture-enabled native rules now preselect and install Unicode prefix/interstitial candidates before `LS`, keep
+  them visible through edge/target/`LE`, commit the accepted child-extended cursor before `IT`, and install tails
+  for successful terminal hooks. Unflagged `LS`-before-selection behavior remains unchanged.
+- Added private zero-argument `entry_slot()`, `gap_span()`, `gap_text()`, and `gap_kind()` dispatch. Spans project
+  UTF-16 code-unit registers through the existing input `SourceAuthority` to detached Unicode-scalar offsets;
+  exact unavailable-context and cursor-regression failures retain typed records.
+- Added focused native and recognition-authority proof for Unicode/empty gaps, falsey acceptance, child cursor
+  extension, detached named slots, rollback, nested owner restoration, all terminal routes, failed minimum,
+  direct entry, whole-rule unwind, and unflagged compatibility.
+- Kept the final consumer skipped until `.4.5`. Reconstruction, descriptors, generated-plan execution, emitted
+  source, primary/canonical/recurring registration, rollout, generated plan v2, facade/schema/semantic/MCP/CLI/
+  README surfaces, and later runtimes do not move; governance remains 3/6/56 plus ten Rust admission and ten Dart
+  dormancy mutations.
+- Focused proof passes the explicit dormant consumer 2/2, private recognition units 2/2, direct dependents,
+  neutral/rooted governance, and the complete Dart-local gate: format 102/0, strict analysis, 402 tests plus one
+  intended skip, storage 22/47, CLI 66x2, and corpus 105/105. The book renders 79 files / 14,812 KiB, Knowledge
+  is 837/7,052, and all nine doctrines pass. Per ADR `0073`, no full canonical CI runs for this ordinary private-
+  runtime leaf.
+
 ## 2026-08-15 — VERIFICATION-CADENCE-POLICY.0 — enforce tiered verification cadence
 
 - Adopted ADR `0073`: ordinary bounded leaves use focused changed-surface, direct-dependent, component, doctrine,

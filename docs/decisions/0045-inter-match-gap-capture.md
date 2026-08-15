@@ -578,6 +578,35 @@ complete-to-pending regression. Generated plan v2, recognition 137/246/58, publi
 9/5/114, capability admission, runtime facade, semantic/MCP schemas, CLI/README surfaces, Dart/Julia/Lua routes,
 and recurring/public rollout rows do not move.
 
+## 2026-08-15 Dart private-native amendment
+
+`INTER-MATCH-GAP-CAPTURE.4.2` activates from clean workflow-policy atomic 235 at `c234ef9f` and implements only
+the ratified Dart private-native boundary. The existing `RecognitionTransactionAuthority` remains the sole
+recognition stack and token authority. Its private invocation carries capture activation, immutable input-source
+and invocation identity, detached entry-slot identity, and the three checkpointed mutable values: committed gap
+cursor, accepted-edge count, and current gap. Observed `RecognitionFrameState` remains exactly cursor, boundary,
+and marks.
+
+Capture-enabled native rules now select and install the local match plus prefix/interstitial candidate before
+`LS`, retain it through action/target/`LE`, commit the accepted child-extended cursor before `IT`, and install a
+successful tail before the existing terminal hooks. Unflagged rules retain their prior `LS`-before-selection
+order. The private `gap_span()`, `gap_text()`, and `gap_kind()` reads project UTF-16 runtime code-unit boundaries
+through the existing immutable input `SourceAuthority`, so callers observe detached Unicode-scalar spans and
+exact decoded text. `entry_slot()` returns a detached five-field edge identity only to the child entered from the
+active owning candidate. Nested owners isolate and restore parent context; recognition rollback restores the same
+three-member gap snapshot.
+
+Unavailable context and cursor regression remain private typed failures with exact
+`gap_capture_context_unavailable` and `source_location_cursor_regression` records. Falsey action payloads still
+count as accepted matches, whole-rule returns still unwind without committing a new boundary or synthesizing a
+tail, failed minimums expose no tail, and direct entry returns no slot identity.
+
+This amendment does not change ordinary reconstruction, descriptor projection, generated-plan execution,
+emitted source, primary commands, canonical/recurring registration, rollout, generated plan v2, or any facade,
+schema, semantic/MCP, capability, CLI, README, or public surface. The permanent consumer remains library-skipped
+until `.4.5`; governance stays 3 complete / 6 pending / 56 mutations plus ten Rust admission and ten Dart
+dormancy mutations. `.4.3-.4.5` retain reconstructed/generated, emitted, and primary/admission ownership.
+
 ## Consequences
 
 - The director's original concept and target-rule ownership are durable and cannot be reassigned to

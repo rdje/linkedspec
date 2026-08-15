@@ -551,8 +551,9 @@ Horizontal whitespace around `=` is insignificant. Same-line `name=/regex/` at r
 declares a stable rule-local slot rather than assigning a variable. Existing unindexed and numeric
 selectors remain compatibility forms. Perl and Rust implement and privately admit the declaration/selector
 syntax, directive metadata, and native plus generated `entry_slot()`/gap-accessor behavior. Dart now implements
-the authored/static/compiled metadata subset described below. Dart gap accessors and lifecycle behavior remain
-unavailable, and no backend exposes these forms as a public cross-backend contract yet.
+the authored/static/compiled layer and private native execution described below, but its reconstructed/generated,
+emitted, primary, and admission routes remain pending. No backend exposes these forms as a public cross-backend
+contract yet.
 
 Brackets are the selector namespace. `Document[1]` means positional compatibility, so declaration reordering
 can change its target; `Document[section]` means stable identity and must survive reordering. An implementation
@@ -708,14 +709,15 @@ independently compiled emitted paths. The 246 shared call inventory, 122 public-
 registration checks replace the retired Perl dormancy fence while
 the admitted Rust consumer is required ordinarily, canonically, and once after Perl in the rooted route.
 
-### Dart authored metadata boundary — current; runtime pending
+### Dart authored metadata and private native execution — current; admission pending
 
 Dart `.4.0` established the behavior-free baseline: numeric selectors worked, named declarations/selectors and
 `@capture_gaps` were raw body syntax, all four gap accessors reached `unknown_helper`, and repeated-rule `LS`
-preceded selection. Dart `.4.1` now implements only the authored/static/compiled layer. The parser accepts named
-and anonymous regex declarations in one order, preserves unindexed/numeric/named selector authorship, and carries
-one dedicated rule-level directive record. Static validation and compilation are current; native gap context and
-the four accessors remain pending `.4.2`.
+preceded selection. Dart `.4.1` implemented the authored/static/compiled layer. `.4.2` now adds private native gap
+context and the four accessors on the same recognition authority. The parser accepts named and anonymous regex
+declarations in one order, preserves unindexed/numeric/named selector authorship, and carries one dedicated
+rule-level directive record. This is a staged backend implementation, not ordinary or public admission: the
+permanent consumer remains library-skipped until `.4.5`.
 
 For example, this Dart source now parses, validates, and compiles its slot identities:
 
@@ -753,8 +755,8 @@ The implementation is assigned before code:
 
 1. `.4.1` now provides Unicode-17 named/anonymous slot identity, typed selector provenance, logical spec source
    identity, directive/static diagnostics, compiled metadata, and a mechanically dormant final consumer.
-2. `.4.2` attaches private gap state to Dart's existing recognition invocation and token snapshot. It does not
-   add a second stack or widen observed `RecognitionFrameState`, which remains cursor/boundary/marks.
+2. `.4.2` now attaches private gap state to Dart's existing recognition invocation and token snapshot. It adds
+   no second stack and does not widen observed `RecognitionFrameState`, which remains cursor/boundary/marks.
 3. `.4.3` proves normalized `SpecFile` reconstruction, compatible descriptor additions, and generated-plan
    execution through the same engine. Static plan v2 remains exactly `{label,family}`.
 4. `.4.4` independently analyzes and executes emitted Dart libraries from a repository-routed caller workspace
@@ -762,17 +764,31 @@ The implementation is assigned before code:
 5. `.4.5` proves the existing primary adapter, requires all nine roles exactly once, registers the consumer, and
    promotes only Dart.
 
-Dart's runtime already has the two foundations this feature needs: immutable decoded input in `SourceAuthority`
-and one private recognition transaction/invocation authority. Runtime gap spans will continue to use source id
-`input` and Unicode-scalar offsets; only static diagnostics need a new backward-compatible logical spec source
-identity. Generated source continues embedding normalized spec state rather than copying gap metadata into the
-static plan.
+Dart's implementation uses immutable decoded input in `SourceAuthority` and the one existing private recognition
+transaction/invocation authority. Runtime gap spans use source id `input`; UTF-16 code-unit registers are
+projected through that authority to Unicode-scalar offsets. Static diagnostics use the separate logical spec
+source identity introduced by `.4.1`. Generated source continues embedding normalized spec state rather than
+copying gap metadata into the static plan.
+
+For example, explicitly executing the skipped native consumer over `αHω` with a capture-enabled edge targeting
+`H` yields a prefix pair `['prefix', 'α']` and a terminal pair `['tail', 'ω']`. On input `αHβ\nS🙂Fω`, named
+`header`, `section`, and `footer` edges expose scalar spans `[0,1)`, `[2,4)`, and `[5,6)` for the three gaps, then
+the tail `[7,8)`. The emoji occupies two UTF-16 code units internally but one exposed source scalar. Empty gaps
+remain observable, and falsey action values such as `0` still count as accepted matches.
+
+The private lifecycle is exact. Dart selects and installs a candidate before capture-enabled `LS`, keeps it live
+through the edge, child call, and `LE`, commits the accepted child-extended cursor before `IT`, and installs a
+successful tail for existing `LX`/`EX`/`E` hooks. Unflagged rules retain their historical `LS`-before-selection
+order. A nested capture owner hides the parent candidate only for the nested invocation; returning restores the
+parent view. Recognition rollback restores the same committed cursor, accepted count, and current candidate.
+Unavailable reads and cursor regression report the private typed `gap_capture_context_unavailable` and
+`source_location_cursor_regression` diagnostics.
 
 The final Dart consumer already lives at `dart/test/inter_match_gap_capture_contract_test.dart`, but a
-library-level `.4.5` skip keeps ordinary discovery dormant. Explicit execution proves the `.4.1` metadata group;
-ten reason-checked governance mutations reject premature canonical execution, recurring execution, or facade
-exposure. Rollout remains 3 complete / 6 pending until `.4.5`, and generated plan v2 remains exactly
-`{label,family}`.
+library-level `.4.5` skip keeps ordinary discovery dormant. Explicit execution now proves the `.4.1` metadata
+group and `.4.2` native lifecycle group; ten reason-checked governance mutations reject premature canonical
+execution, recurring execution, or facade exposure. Rollout remains 3 complete / 6 pending until `.4.5`, and
+generated plan v2 remains exactly `{label,family}`.
 
 Named slot rules are exact:
 

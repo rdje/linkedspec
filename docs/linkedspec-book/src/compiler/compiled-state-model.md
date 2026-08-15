@@ -110,6 +110,12 @@ authored selector, target rule, resolved child index, nullable target slot id, a
 `dependency_refs` stay `{label,idx}`, existing descriptor `resolved_edges` stay unchanged, and generated plan v2
 stays `{label,family}`. Descriptor additions and reconstructed/generated runtime proof remain separately owned.
 
+Native execution now consumes that private directive metadata without adding another compiled carrier. The
+existing recognition invocation owns capture activation and detached child entry identity; its checkpoint adds
+only committed gap cursor, accepted-edge count, and current candidate/tail. The observable recognition frame
+remains cursor/boundary/marks. Ordinary JSON reconstruction, descriptor additions, and generated-plan parity are
+still owned by the next Dart carrier leaf rather than implied by this native path.
+
 The Julia backend now implements the same narrow staged provider before compiled state is built. Its public path is:
 
 ```julia

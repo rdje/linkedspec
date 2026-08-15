@@ -487,8 +487,9 @@ final class LinkedSpecRuntimeEngine {
   _RuleResult _executeRule(
     String label,
     int entryRegexIndex,
-    _RuntimeExecutionContext context,
-  ) {
+    _RuntimeExecutionContext context, {
+    RecognitionGapEntrySlot? entrySlot,
+  }) {
     final rule = compiledSpec.rule(label);
     if (rule == null) {
       throw RuntimeInterpreterException(
@@ -544,7 +545,11 @@ final class LinkedSpecRuntimeEngine {
     );
     context.enterRule(label);
     context.enterRuleLocalBindingScope();
-    context.enterRecognitionInvocation(label);
+    context.enterRecognitionInvocation(
+      label,
+      captureGaps: rule.captureGaps != null,
+      entrySlot: entrySlot,
+    );
     context.noteRecursiveObservationEntry(label, invocationEntryCodeUnit);
     final generatedIdentity = context.generatedSourceIdentity;
     if (generatedFamily != null && generatedIdentity != null) {
@@ -960,6 +965,7 @@ final class LinkedSpecRuntimeEngine {
     required bool usesAndExecution,
   }) {
     final min = rule.modeMetadata.repMin;
+    final captureGaps = rule.captureGaps != null;
     if (min == null) {
       var matchedAny = false;
       for (
@@ -1018,9 +1024,36 @@ final class LinkedSpecRuntimeEngine {
         break;
       }
       final before = context.cursorCodeUnit;
-      final loopStart = _executeLifecycle(rule, 'LS', context);
-      if (loopStart != null) {
-        return _returned(loopStart.value);
+      RuntimeRegexMatch? selectedMatch;
+      if (captureGaps) {
+        selectedMatch = _selectRegexMatch(
+          rule,
+          context,
+          entryRegexIndex: 0,
+          cursorPolicy: cursorPolicy,
+        );
+        _traceRegexDecision(
+          context,
+          rule,
+          matched: selectedMatch != null,
+          cursorBefore: before,
+          cursorPolicy: cursorPolicy,
+          match: selectedMatch,
+          reason: 'entry_regex=0 capture_gaps=1',
+        );
+        if (selectedMatch != null) {
+          _prepareGapCandidate(rule, selectedMatch, context);
+          context.setGapPhase(rule.label, 'LS');
+          final loopStart = _executeLifecycle(rule, 'LS', context);
+          if (loopStart != null) {
+            return _returned(loopStart.value);
+          }
+        }
+      } else {
+        final loopStart = _executeLifecycle(rule, 'LS', context);
+        if (loopStart != null) {
+          return _returned(loopStart.value);
+        }
       }
 
       final matched = _nextableBool(
@@ -1030,6 +1063,8 @@ final class LinkedSpecRuntimeEngine {
           cursorPolicy: cursorPolicy,
           andSequence: usesAndExecution && rule.regexPatterns.length > 1,
           actionIterationValues: actionIterationValues,
+          matchPreselected: captureGaps,
+          preselectedMatch: selectedMatch,
         ),
       );
       if (matched.nexted) {
@@ -1044,7 +1079,11 @@ final class LinkedSpecRuntimeEngine {
         break;
       }
 
+      if (captureGaps) {
+        _commitGapCandidate(rule, context);
+      }
       matches += 1;
+      context.setGapPhase(rule.label, 'IT');
       final iterationReturn = _executeLifecycle(rule, 'IT', context);
       if (iterationReturn != null) {
         return _returned(iterationReturn.value);
@@ -1055,6 +1094,7 @@ final class LinkedSpecRuntimeEngine {
     }
 
     if (matches < min) {
+      context.setGapPhase(rule.label, 'LX');
       final loopExit = _executeLifecycle(rule, 'LX', context);
       if (loopExit != null) {
         return _returned(loopExit.value);
@@ -1067,16 +1107,22 @@ final class LinkedSpecRuntimeEngine {
       );
     }
 
+    if (captureGaps) {
+      context.installGapTail(rule.label, 'EX');
+    }
+    context.setGapPhase(rule.label, 'EX');
     final extendedExit = _executeLifecycle(rule, 'EX', context);
     if (extendedExit != null) {
       return _returned(extendedExit.value);
     }
     if (madeFailedAttempt || matches > 0) {
+      context.setGapPhase(rule.label, 'LX');
       final loopExit = _executeLifecycle(rule, 'LX', context);
       if (loopExit != null) {
         return _returned(loopExit.value);
       }
     }
+    context.setGapPhase(rule.label, 'E');
     final exitReturn = _executeLifecycle(rule, 'E', context);
     if (exitReturn != null) {
       return _returned(exitReturn.value);
@@ -1089,6 +1135,42 @@ final class LinkedSpecRuntimeEngine {
     );
   }
 
+  RuntimeRegexMatch? _selectRegexMatch(
+    CompiledRule rule,
+    _RuntimeExecutionContext context, {
+    required int entryRegexIndex,
+    required LinkedSpecParseMode cursorPolicy,
+  }) {
+    final plan = _regexPlanFor(rule);
+    if (plan.patterns.isEmpty) {
+      return null;
+    }
+    return entryRegexIndex > 0 && entryRegexIndex < plan.patterns.length
+        ? _matchSpecific(plan, entryRegexIndex, context, cursorPolicy)
+        : plan.matcher.match(
+            context.input,
+            context.cursorCodeUnit,
+            parseMode: cursorPolicy,
+          );
+  }
+
+  void _prepareGapCandidate(
+    CompiledRule rule,
+    RuntimeRegexMatch match,
+    _RuntimeExecutionContext context,
+  ) {
+    _recordRegexSlotSelected(
+      context,
+      rule,
+      match.alternativeIndex,
+      positionCodeUnit: match.codeUnitEnd,
+      selectionRole: 'choice',
+    );
+    context.registers = context.registers.withLocalMatch(match);
+    context.noteRecognitionMatch(match);
+    context.installGapCandidate(rule.label, match);
+  }
+
   bool _executeRegexOnce(
     CompiledRule rule,
     _RuntimeExecutionContext context, {
@@ -1096,10 +1178,12 @@ final class LinkedSpecRuntimeEngine {
     required LinkedSpecParseMode cursorPolicy,
     bool andSequence = false,
     List<Object?>? actionIterationValues,
+    bool matchPreselected = false,
+    RuntimeRegexMatch? preselectedMatch,
   }) {
     final plan = _regexPlanFor(rule);
     final cursorBefore = context.cursorCodeUnit;
-    if (plan.patterns.isEmpty) {
+    if (!matchPreselected && plan.patterns.isEmpty) {
       _traceRegexDecision(
         context,
         rule,
@@ -1111,7 +1195,7 @@ final class LinkedSpecRuntimeEngine {
       return false;
     }
 
-    if (andSequence) {
+    if (!matchPreselected && andSequence) {
       for (
         var expectedIndex = 0;
         expectedIndex < plan.patterns.length;
@@ -1156,12 +1240,14 @@ final class LinkedSpecRuntimeEngine {
           positionCodeUnit: match.codeUnitEnd,
           selectionRole: 'ordered_required',
         );
+        context.setGapPhase(rule.label, 'edge');
         _acceptRegexMatch(
           rule,
           match,
           context,
           actionIterationValues: actionIterationValues,
         );
+        context.setGapPhase(rule.label, 'LE');
         final loopEnd = _executeLifecycle(rule, 'LE', context);
         if (loopEnd != null) {
           throw _ActionReturn(loopEnd.value);
@@ -1170,7 +1256,9 @@ final class LinkedSpecRuntimeEngine {
       return true;
     }
 
-    final match = entryRegexIndex > 0 && entryRegexIndex < plan.patterns.length
+    final match = matchPreselected
+        ? preselectedMatch
+        : entryRegexIndex > 0 && entryRegexIndex < plan.patterns.length
         ? _matchSpecific(plan, entryRegexIndex, context, cursorPolicy)
         : plan.matcher.match(
             context.input,
@@ -1178,48 +1266,54 @@ final class LinkedSpecRuntimeEngine {
             parseMode: cursorPolicy,
           );
     if (match == null) {
-      _traceRegexDecision(
-        context,
-        rule,
-        matched: false,
-        cursorBefore: cursorBefore,
-        cursorPolicy: cursorPolicy,
-        reason: 'entry_regex=$entryRegexIndex',
-      );
+      if (!matchPreselected) {
+        _traceRegexDecision(
+          context,
+          rule,
+          matched: false,
+          cursorBefore: cursorBefore,
+          cursorPolicy: cursorPolicy,
+          reason: 'entry_regex=$entryRegexIndex',
+        );
+      }
       return false;
     }
 
-    _traceRegexDecision(
-      context,
-      rule,
-      matched: true,
-      cursorBefore: cursorBefore,
-      cursorPolicy: cursorPolicy,
-      match: match,
-      reason: 'entry_regex=$entryRegexIndex',
-    );
-    final selectionRole = entryRegexIndex > 0 ? 'ordered_required' : 'choice';
-    if (selectionRole == 'ordered_required') {
-      _assertOrderedRegexMatchIdentity(
+    if (!matchPreselected) {
+      _traceRegexDecision(
         context,
         rule,
-        entryRegexIndex,
+        matched: true,
+        cursorBefore: cursorBefore,
+        cursorPolicy: cursorPolicy,
+        match: match,
+        reason: 'entry_regex=$entryRegexIndex',
+      );
+      final selectionRole = entryRegexIndex > 0 ? 'ordered_required' : 'choice';
+      if (selectionRole == 'ordered_required') {
+        _assertOrderedRegexMatchIdentity(
+          context,
+          rule,
+          entryRegexIndex,
+          match.alternativeIndex,
+        );
+      }
+      _recordRegexSlotSelected(
+        context,
+        rule,
         match.alternativeIndex,
+        positionCodeUnit: match.codeUnitEnd,
+        selectionRole: selectionRole,
       );
     }
-    _recordRegexSlotSelected(
-      context,
-      rule,
-      match.alternativeIndex,
-      positionCodeUnit: match.codeUnitEnd,
-      selectionRole: selectionRole,
-    );
+    context.setGapPhase(rule.label, 'edge');
     _acceptRegexMatch(
       rule,
       match,
       context,
       actionIterationValues: actionIterationValues,
     );
+    context.setGapPhase(rule.label, 'LE');
     final loopEnd = _executeLifecycle(rule, 'LE', context);
     if (loopEnd != null) {
       throw _ActionReturn(loopEnd.value);
@@ -1340,6 +1434,53 @@ final class LinkedSpecRuntimeEngine {
       sink(event);
     } on Object catch (error, stackTrace) {
       throw _RuntimeSemanticObservationSinkFailure(error, stackTrace);
+    }
+  }
+
+  Object? _readGapContextHelper(
+    String helperName,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+  ) {
+    try {
+      return switch (helperName) {
+        'gap_span' => context.gapSpan(ruleLabel, helperName).toJson(),
+        'gap_text' => context.gapText(ruleLabel, helperName),
+        'gap_kind' => context.currentGap(ruleLabel, helperName).kind,
+        _ => throw StateError('unknown private gap helper $helperName'),
+      };
+    } on InterMatchGapException catch (error) {
+      throw RuntimeInterpreterException(
+        error.toString(),
+        diagnostic: context.diagnostic(
+          stage: 'access_gap_context',
+          summary: 'Dart inter-match gap context is unavailable',
+          detail: error.toString(),
+          code: 'gap_capture_context_unavailable',
+          helperName: helperName,
+          ruleLabel: ruleLabel,
+        ),
+      );
+    }
+  }
+
+  void _commitGapCandidate(
+    CompiledRule rule,
+    _RuntimeExecutionContext context,
+  ) {
+    try {
+      context.commitGapCandidate(rule.label);
+    } on GapCursorRegressionException catch (error) {
+      throw RuntimeInterpreterException(
+        error.toString(),
+        diagnostic: context.diagnostic(
+          stage: 'advance_gap_context',
+          summary: 'Dart inter-match gap cursor regressed before commit',
+          detail: error.toString(),
+          code: 'source_location_cursor_regression',
+          ruleLabel: rule.label,
+        ),
+      );
     }
   }
 
@@ -3572,6 +3713,12 @@ final class LinkedSpecRuntimeEngine {
           ruleLabel,
           currentEdge,
         );
+      case 'entry_slot':
+        return context.gapEntrySlotValue(ruleLabel);
+      case 'gap_span':
+      case 'gap_text':
+      case 'gap_kind':
+        return _readGapContextHelper(helperName, context, ruleLabel);
       case 'entry_text':
         final match = context.registers.entryMatch;
         return match == null
@@ -5977,10 +6124,12 @@ final class LinkedSpecRuntimeEngine {
       );
       return _RuleResult(matched: false, value: null);
     }
+    final entrySlot = context.gapEntrySlotForEdge(currentEdge);
     final child = _executeRule(
       currentEdge.target.label,
       currentEdge.target.index,
       context,
+      entrySlot: entrySlot,
     );
     context.trace?.traceDecision(
       'dart_runtime:child_dispatch',
@@ -7317,7 +7466,11 @@ final class _RuntimeExecutionContext {
     markBuckets[ruleLabel] = Map<String, int>.from(state.marks);
   }
 
-  void enterRecognitionInvocation(String ruleLabel) {
+  void enterRecognitionInvocation(
+    String ruleLabel, {
+    required bool captureGaps,
+    required RecognitionGapEntrySlot? entrySlot,
+  }) {
     final priorMarks = markBuckets.remove(ruleLabel);
     markBuckets[ruleLabel] = <String, int>{};
     try {
@@ -7325,6 +7478,8 @@ final class _RuntimeExecutionContext {
         rule: ruleLabel,
         origin: '$ruleLabel:handler_entry',
         state: _recognitionFrameState(ruleLabel),
+        captureGaps: captureGaps,
+        entrySlot: entrySlot,
       );
       final identity = recognitionAuthority.invocationIdentity(frame);
       _recognitionFrames.add(
@@ -7452,6 +7607,99 @@ final class _RuntimeExecutionContext {
     if (_recognitionFrames.isNotEmpty) {
       _recognitionFrames.last.selectedMatch = match;
     }
+  }
+
+  void setGapPhase(String ruleLabel, String phase) {
+    final frame = _recognitionFrame(ruleLabel);
+    recognitionAuthority.setGapPhase(frame.authorityFrame, phase);
+  }
+
+  void installGapCandidate(String ruleLabel, RuntimeRegexMatch match) {
+    final frame = _recognitionFrame(ruleLabel);
+    recognitionAuthority.installGapCandidate(
+      frame.authorityFrame,
+      match.codeUnitStart,
+    );
+  }
+
+  void commitGapCandidate(String ruleLabel) {
+    final frame = _recognitionFrame(ruleLabel);
+    final selected = frame.selectedMatch;
+    if (selected == null) {
+      return;
+    }
+    recognitionAuthority.commitGapCandidate(
+      frame.authorityFrame,
+      cursorCodeUnit: cursorCodeUnit,
+      selectedEndCodeUnit: selected.codeUnitEnd,
+    );
+  }
+
+  void installGapTail(String ruleLabel, String phase) {
+    final frame = _recognitionFrame(ruleLabel);
+    recognitionAuthority.installGapTail(
+      frame.authorityFrame,
+      input.length,
+      phase,
+    );
+  }
+
+  RecognitionGapEntrySlot? gapEntrySlotForEdge(_CurrentActionEdge currentEdge) {
+    final frame = _recognitionFrame(currentEdge.ruleLabel);
+    return recognitionAuthority.gapEntrySlot(
+      frame.authorityFrame,
+      targetRule: currentEdge.target.label,
+      regexIndex: currentEdge.edge.childRegexIndex,
+      slotId: currentEdge.edge.targetSlotId,
+      selectorKind: currentEdge.edge.selectorKind,
+      authoredSelector: currentEdge.edge.authoredSelector,
+    );
+  }
+
+  Map<String, Object?>? gapEntrySlotValue(String ruleLabel) {
+    final frame = _recognitionFrame(ruleLabel);
+    final value = recognitionAuthority.entrySlot(frame.authorityFrame);
+    return value == null ? null : Map<String, Object?>.from(value);
+  }
+
+  RecognitionGapContext currentGap(String ruleLabel, String accessor) {
+    final frame = _recognitionFrame(ruleLabel);
+    return recognitionAuthority.currentGap(frame.authorityFrame, accessor);
+  }
+
+  Span gapSpan(String ruleLabel, String accessor) {
+    final gap = currentGap(ruleLabel, accessor);
+    final sourceContext = SourceLocationContext(
+      ruleRole: '$ruleLabel:gap_context',
+      invocationRole: 'gap_owner',
+    );
+    final start = sourceAuthority.positionFromCodeUnit(
+      sourceId: gap.sourceId,
+      codeUnitOffset: gap.startCodeUnit,
+      context: sourceContext,
+    );
+    final end = sourceAuthority.positionFromCodeUnit(
+      sourceId: gap.sourceId,
+      codeUnitOffset: gap.endCodeUnit,
+      context: sourceContext,
+    );
+    return sourceAuthority.directSpan(
+      start: start,
+      end: end,
+      provenance: 'gap',
+      context: sourceContext,
+    );
+  }
+
+  String gapText(String ruleLabel, String accessor) {
+    final sourceContext = SourceLocationContext(
+      ruleRole: '$ruleLabel:gap_context',
+      invocationRole: 'gap_owner',
+    );
+    return sourceAuthority.materialize(
+      gapSpan(ruleLabel, accessor),
+      context: sourceContext,
+    );
   }
 
   void bindRecursiveObservation(

@@ -277,6 +277,147 @@ void main() {
     }
   });
 
+  test('private gap state is invocation-local and token-restored', () {
+    final authority = _newAuthority('input');
+    final parent = authority.enterInvocation(
+      rule: 'Top',
+      origin: 'gap_parent',
+      state: _state(0, null, const <String, int>{}),
+      captureGaps: true,
+    );
+    authority.installGapCandidate(parent, 1);
+    final prefix = authority.currentGap(parent, 'gap_text');
+    expect(
+      {
+        'source': prefix.sourceId,
+        'rule': prefix.ruleLabel,
+        'kind': prefix.kind,
+        'ordinal': prefix.edgeOrdinal,
+        'start': prefix.startCodeUnit,
+        'end': prefix.endCodeUnit,
+      },
+      {
+        'source': 'input',
+        'rule': 'Top',
+        'kind': 'prefix',
+        'ordinal': 0,
+        'start': 0,
+        'end': 1,
+      },
+    );
+
+    final slot = authority.gapEntrySlot(
+      parent,
+      targetRule: 'Child',
+      regexIndex: 2,
+      slotId: 'named',
+      selectorKind: 'named',
+      authoredSelector: 'named',
+    );
+    final child = authority.enterInvocation(
+      rule: 'Child',
+      origin: 'gap_child',
+      state: _state(1, null, const <String, int>{}),
+      entrySlot: slot,
+    );
+    expect(authority.entrySlot(child), {
+      'target_rule': 'Child',
+      'regex_index': 2,
+      'slot_id': 'named',
+      'selector_kind': 'named',
+      'authored_selector': 'named',
+    });
+    authority.leaveInvocation(child);
+
+    final token = authority.checkpoint(parent, 'gap_snapshot');
+    authority.attempt(
+      parent,
+      token,
+      matched: true,
+      payload: false,
+      state: _state(3, null, const <String, int>{}),
+    );
+    authority.commitGapCandidate(
+      parent,
+      cursorCodeUnit: 3,
+      selectedEndCodeUnit: 2,
+    );
+    expect(
+      () => authority.currentGap(parent, 'gap_text'),
+      throwsA(isA<transaction.InterMatchGapException>()),
+    );
+    authority.rollback(parent, token);
+    final restored = authority.currentGap(parent, 'gap_text');
+    expect(
+      [
+        restored.kind,
+        restored.edgeOrdinal,
+        restored.startCodeUnit,
+        restored.endCodeUnit,
+      ],
+      ['prefix', 0, 0, 1],
+    );
+    authority.leaveInvocation(parent);
+  });
+
+  test('private gap failures retain exact typed records', () {
+    final authority = _newAuthority('input');
+    final frame = authority.enterInvocation(
+      rule: 'Top',
+      origin: 'gap_diagnostics',
+      state: _state(0, null, const <String, int>{}),
+      captureGaps: true,
+    );
+
+    transaction.InterMatchGapException? unavailable;
+    try {
+      authority.currentGap(frame, 'gap_text');
+    } on transaction.InterMatchGapException catch (error) {
+      unavailable = error;
+    }
+    expect(unavailable, isNotNull);
+    expect(unavailable!.toJson(), {
+      'code': 'gap_capture_context_unavailable',
+      'rule_label': 'Top',
+      'source_id': 'input',
+      'invocation_id': 1,
+      'phase': 'I',
+      'accessor': 'gap_text',
+    });
+    expect(
+      unavailable.toString(),
+      'LINKEDSPEC_INTER_MATCH_GAP_ERROR:gap_capture_context_unavailable',
+    );
+
+    authority.installGapCandidate(frame, 1);
+    transaction.GapCursorRegressionException? regression;
+    try {
+      authority.commitGapCandidate(
+        frame,
+        cursorCodeUnit: 1,
+        selectedEndCodeUnit: 2,
+      );
+    } on transaction.GapCursorRegressionException catch (error) {
+      regression = error;
+    }
+    expect(regression, isNotNull);
+    expect(regression!.toJson(), {
+      'code': 'source_location_cursor_regression',
+      'phase': 'advance',
+      'rule_role': 'Top',
+      'invocation_role': 'gap_owner',
+      'source_id': 'input',
+      'start_offset': 2,
+      'end_offset': 1,
+      'originating_edge_or_job': 'Top:capture_gaps_commit',
+    });
+    expect(
+      regression.toString(),
+      'LINKEDSPEC_SOURCE_LOCATION_ERROR:source_location_cursor_regression',
+    );
+    authority.leaveInvocation(frame);
+  });
+
   test('escape and lifecycle failures use exact portable diagnostics', () {
     const escapes = <String>{
       'copy',

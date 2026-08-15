@@ -10,6 +10,31 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-15 (`INTER-MATCH-GAP-CAPTURE.4.2` — Dart private native execution): activation base is clean
+  workflow-policy atomic 235 at `c234ef9f`. The permanent final consumer stays library-skipped; explicit execution
+  is the only pre-admission path. Its deliberate RED reached exact unknown-helper `gap_kind` before runtime work.
+- Keep one authority. `RecognitionTransactionAuthority` now owns capture activation, immutable input/invocation
+  identity, detached entry-slot identity, and a private three-value mutable snapshot. Do not widen
+  `RecognitionFrameState`, create a parallel cursor, or duplicate transaction semantics.
+- Selection must precede `LS` only for capture-enabled rules. Install the candidate after local-match selection,
+  retain it through action/child/`LE`, commit the child-extended cursor before `IT`, and install a tail only for a
+  successful terminal path. The unflagged loop retains its old `LS` ordering.
+- Gap spans originate in Dart code-unit registers but cross `SourceAuthority` before actions observe them. This
+  yields scalar offsets for Unicode input while `gap_text()` materializes exact decoded source. Entry identity is
+  accepted only from the active parent candidate and is returned as a fresh five-field ordinary map.
+- Recognition rollback restores committed cursor, accepted count, and current candidate from the existing token.
+  Nested gap owners temporarily replace only the active invocation view; return restores the parent candidate.
+  Falsey action payloads remain accepted, whole-rule returns do not commit, failed minimums expose no tail, and
+  direct entry has no slot.
+- Exact private errors are `gap_capture_context_unavailable` and `source_location_cursor_regression`; both retain
+  typed records internally and map to the existing runtime diagnostic envelope without a public schema change.
+- Focused signoff is explicit consumer 2/2, private authority 2/2, direct runtime/recognition/source/cursor/slot/
+  recursion dependents, neutral 3/6/56, rooted neutral→Perl 124→Rust 1 with Dart skipped, and complete Dart-local
+  format 102/0, strict analysis, 402 plus one skip, storage 22/47, CLI 66x2, and corpus 105. Book 79/14,812,
+  Knowledge 837/7,052, and all nine doctrines pass. ADR `0073` correctly excludes full canonical CI because
+  `.4.2` changes no admission, public contract, generated format, dependency, toolchain, CI/hook/gate,
+  storage/path, or doctrine infrastructure.
+
 - 2026-08-15 (`VERIFICATION-CADENCE-POLICY.0` — proportional verification): the canonical gate remains the source
   of truth, but it is no longer an ordinary per-commit tax. Focused leaves must name exact changed behavior,
   direct dependents, relevant component gates, and the always-on structural/documentation checks. Designated

@@ -152,8 +152,10 @@ accepted:
 - `capture_gaps_rule_ineligible` and `capture_gaps_legacy_marker_conflict` / `validate_directive`
 
 Every row includes `rule_label`, logical `source_id`, and physical `line`, plus its contract-specific selector,
-slot, eligibility, or marker context. `gap_capture_context_unavailable` remains a future `.4.2` runtime boundary;
-the metadata leaf does not manufacture a gap context.
+slot, eligibility, or marker context. Dart `.4.2` now uses `gap_capture_context_unavailable` for a private native
+gap read outside a live candidate/tail and `source_location_cursor_regression` when the accepted cursor would
+commit before the selected match end. These runtime records remain staged behind the final consumer's `.4.5`
+admission skip.
 
 Parser-authored `print`/`say`/`print_each` events use a separate Rust facility. Call
 `execute_with_diagnostic_output(input, sink)` or

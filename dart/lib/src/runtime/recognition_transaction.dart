@@ -109,6 +109,109 @@ final class RecognitionInvocationIdentity {
   final int? parentInvocationId;
 }
 
+/// Detached structural identity carried by one selected action edge.
+///
+/// This type is package-internal: it is intentionally absent from the public
+/// facade. [ownerInvocationId] prevents a nested or unrelated invocation from
+/// observing a stale parent edge.
+final class RecognitionGapEntrySlot {
+  const RecognitionGapEntrySlot({
+    required this.ownerInvocationId,
+    required this.targetRule,
+    required this.regexIndex,
+    required this.slotId,
+    required this.selectorKind,
+    required this.authoredSelector,
+  });
+
+  final int ownerInvocationId;
+  final String targetRule;
+  final int regexIndex;
+  final String? slotId;
+  final String selectorKind;
+  final Object? authoredSelector;
+
+  Map<String, Object?> detachedRecord() => <String, Object?>{
+    'target_rule': targetRule,
+    'regex_index': regexIndex,
+    'slot_id': slotId,
+    'selector_kind': selectorKind,
+    'authored_selector': authoredSelector,
+  };
+}
+
+/// Code-unit-rooted private candidate projected through [SourceAuthority].
+final class RecognitionGapContext {
+  const RecognitionGapContext({
+    required this.sourceId,
+    required this.ruleLabel,
+    required this.invocationId,
+    required this.edgeOrdinal,
+    required this.kind,
+    required this.startCodeUnit,
+    required this.endCodeUnit,
+  });
+
+  final String sourceId;
+  final String ruleLabel;
+  final int invocationId;
+  final int edgeOrdinal;
+  final String kind;
+  final int startCodeUnit;
+  final int endCodeUnit;
+}
+
+/// Private typed diagnostic for a gap read without a live candidate or tail.
+final class InterMatchGapException implements Exception {
+  InterMatchGapException._({
+    required String ruleLabel,
+    required String sourceId,
+    required int invocationId,
+    required String phase,
+    required String accessor,
+  }) : _record = Map<String, Object?>.unmodifiable(<String, Object?>{
+         'code': 'gap_capture_context_unavailable',
+         'rule_label': ruleLabel,
+         'source_id': sourceId,
+         'invocation_id': invocationId,
+         'phase': phase,
+         'accessor': accessor,
+       });
+
+  final Map<String, Object?> _record;
+
+  Map<String, Object?> toJson() => Map<String, Object?>.from(_record);
+
+  @override
+  String toString() => 'LINKEDSPEC_INTER_MATCH_GAP_ERROR:${_record['code']}';
+}
+
+/// Private typed diagnostic for a cursor that regresses before gap commit.
+final class GapCursorRegressionException implements Exception {
+  GapCursorRegressionException._({
+    required String ruleLabel,
+    required String sourceId,
+    required int selectedEndCodeUnit,
+    required int cursorCodeUnit,
+  }) : _record = Map<String, Object?>.unmodifiable(<String, Object?>{
+         'code': 'source_location_cursor_regression',
+         'phase': 'advance',
+         'rule_role': ruleLabel,
+         'invocation_role': 'gap_owner',
+         'source_id': sourceId,
+         'start_offset': selectedEndCodeUnit,
+         'end_offset': cursorCodeUnit,
+         'originating_edge_or_job': '$ruleLabel:capture_gaps_commit',
+       });
+
+  final Map<String, Object?> _record;
+
+  Map<String, Object?> toJson() => Map<String, Object?>.from(_record);
+
+  @override
+  String toString() => 'LINKEDSPEC_SOURCE_LOCATION_ERROR:${_record['code']}';
+}
+
 /// Portable private recognition-transaction diagnostic.
 final class RecognitionTransactionException implements Exception {
   RecognitionTransactionException._(String code, Map<String, Object?> fields)
@@ -155,8 +258,17 @@ final class _InvocationState {
     required this.invocation,
     required this.parentInvocation,
     required this.generation,
+    required bool captureGaps,
+    required this.entrySlot,
     required RecognitionFrameState frameState,
-  }) : frameState = frameState._copy();
+  }) : frameState = frameState._copy(),
+       gapState = captureGaps
+           ? _GapMutableState(
+               committedGapCursor: frameState.cursor,
+               acceptedEdgeCount: 0,
+               currentGap: null,
+             )
+           : null;
 
   final int authorityId;
   final SourceAuthority sourceAuthority;
@@ -168,7 +280,28 @@ final class _InvocationState {
   final int generation;
   bool active = true;
   RecognitionFrameState frameState;
+  _GapMutableState? gapState;
+  String gapPhase = 'I';
+  final RecognitionGapEntrySlot? entrySlot;
   _TransactionState? activeToken;
+}
+
+final class _GapMutableState {
+  _GapMutableState({
+    required this.committedGapCursor,
+    required this.acceptedEdgeCount,
+    required this.currentGap,
+  });
+
+  int committedGapCursor;
+  int acceptedEdgeCount;
+  RecognitionGapContext? currentGap;
+
+  _GapMutableState _copy() => _GapMutableState(
+    committedGapCursor: committedGapCursor,
+    acceptedEdgeCount: acceptedEdgeCount,
+    currentGap: currentGap,
+  );
 }
 
 enum _TransactionStatus {
@@ -189,8 +322,10 @@ final class _TransactionState {
     required this.generation,
     required this.transaction,
     required RecognitionFrameState snapshot,
+    required _GapMutableState? gapSnapshot,
     required this.frame,
-  }) : snapshot = snapshot._copy();
+  }) : snapshot = snapshot._copy(),
+       gapSnapshot = gapSnapshot?._copy();
 
   final int authorityId;
   final SourceAuthority sourceAuthority;
@@ -201,6 +336,7 @@ final class _TransactionState {
   final int generation;
   final int transaction;
   final RecognitionFrameState snapshot;
+  final _GapMutableState? gapSnapshot;
   final _InvocationState frame;
   _TransactionStatus status = _TransactionStatus.activeUnattempted;
   int attemptCount = 0;
@@ -234,12 +370,23 @@ final class RecognitionTransactionAuthority {
     required String rule,
     required String origin,
     required RecognitionFrameState state,
+    bool captureGaps = false,
+    RecognitionGapEntrySlot? entrySlot,
   }) {
     final invocation = _nextInvocation++;
     final parentInvocation = _invocationStack.isEmpty
         ? null
         : _invocationStack.last.invocation;
     final generation = _nextGeneration++;
+    final parent = _invocationStack.isEmpty ? null : _invocationStack.last;
+    final acceptedEntrySlot =
+        entrySlot != null &&
+            parent != null &&
+            parent.invocation == entrySlot.ownerInvocationId &&
+            parent.gapState?.currentGap != null &&
+            entrySlot.targetRule == rule
+        ? entrySlot
+        : null;
     final frame = _InvocationState(
       authorityId: _authorityId,
       sourceAuthority: _sourceAuthority,
@@ -249,6 +396,8 @@ final class RecognitionTransactionAuthority {
       invocation: invocation,
       parentInvocation: parentInvocation,
       generation: generation,
+      captureGaps: captureGaps,
+      entrySlot: acceptedEntrySlot,
       frameState: state,
     );
     _invocationStack.add(frame);
@@ -362,6 +511,119 @@ final class RecognitionTransactionAuthority {
   int? readMark(Object frame, String name) =>
       _frameForAuthority(frame).frameState.marks[name];
 
+  /// Records the exact private lifecycle phase for typed gap diagnostics.
+  void setGapPhase(Object frame, String phase) {
+    _frameForAuthority(frame).gapPhase = phase;
+  }
+
+  /// Installs one prefix/interstitial candidate before capture-enabled `LS`.
+  void installGapCandidate(Object frame, int matchStartCodeUnit) {
+    final state = _frameForAuthority(frame);
+    final gap = state.gapState;
+    if (gap == null) {
+      return;
+    }
+    gap.currentGap = RecognitionGapContext(
+      sourceId: state.sourceIdentity,
+      ruleLabel: state.rule,
+      invocationId: state.invocation,
+      edgeOrdinal: gap.acceptedEdgeCount,
+      kind: gap.acceptedEdgeCount == 0 ? 'prefix' : 'interstitial',
+      startCodeUnit: gap.committedGapCursor,
+      endCodeUnit: matchStartCodeUnit,
+    );
+    state.gapPhase = 'selection';
+  }
+
+  /// Commits one accepted edge after `LE` and clears it before `IT`.
+  void commitGapCandidate(
+    Object frame, {
+    required int cursorCodeUnit,
+    required int selectedEndCodeUnit,
+  }) {
+    final state = _frameForAuthority(frame);
+    final gap = state.gapState;
+    final current = gap?.currentGap;
+    if (gap == null || current == null) {
+      return;
+    }
+    if (cursorCodeUnit < selectedEndCodeUnit) {
+      throw GapCursorRegressionException._(
+        ruleLabel: state.rule,
+        sourceId: current.sourceId,
+        selectedEndCodeUnit: selectedEndCodeUnit,
+        cursorCodeUnit: cursorCodeUnit,
+      );
+    }
+    gap
+      ..committedGapCursor = cursorCodeUnit
+      ..acceptedEdgeCount += 1
+      ..currentGap = null;
+    state.gapPhase = 'post_commit';
+  }
+
+  /// Installs the successful terminal tail without moving the parse cursor.
+  void installGapTail(Object frame, int inputEndCodeUnit, String phase) {
+    final state = _frameForAuthority(frame);
+    final gap = state.gapState;
+    if (gap == null) {
+      return;
+    }
+    gap.currentGap = RecognitionGapContext(
+      sourceId: state.sourceIdentity,
+      ruleLabel: state.rule,
+      invocationId: state.invocation,
+      edgeOrdinal: gap.acceptedEdgeCount,
+      kind: 'tail',
+      startCodeUnit: gap.committedGapCursor,
+      endCodeUnit: inputEndCodeUnit,
+    );
+    state.gapPhase = phase;
+  }
+
+  /// Returns the live candidate/tail or the exact typed private diagnostic.
+  RecognitionGapContext currentGap(Object frame, String accessor) {
+    final state = _frameForAuthority(frame);
+    final current = state.gapState?.currentGap;
+    if (current != null) {
+      return current;
+    }
+    throw InterMatchGapException._(
+      ruleLabel: state.rule,
+      sourceId: state.sourceIdentity,
+      invocationId: state.invocation,
+      phase: state.gapPhase,
+      accessor: accessor,
+    );
+  }
+
+  /// Returns a fresh detached action-edge entry identity, or null directly.
+  Map<String, Object?>? entrySlot(Object frame) =>
+      _frameForAuthority(frame).entrySlot?.detachedRecord();
+
+  /// Creates a child entry identity only while the owning candidate is live.
+  RecognitionGapEntrySlot? gapEntrySlot(
+    Object frame, {
+    required String targetRule,
+    required int regexIndex,
+    required String? slotId,
+    required String selectorKind,
+    required Object? authoredSelector,
+  }) {
+    final state = _frameForAuthority(frame);
+    if (state.gapState?.currentGap == null) {
+      return null;
+    }
+    return RecognitionGapEntrySlot(
+      ownerInvocationId: state.invocation,
+      targetRule: targetRule,
+      regexIndex: regexIndex,
+      slotId: slotId,
+      selectorKind: selectorKind,
+      authoredSelector: authoredSelector,
+    );
+  }
+
   /// Creates one linear token over the current frame state.
   Object checkpoint(Object frame, String origin) {
     final frameState = _frameForAuthority(frame);
@@ -386,6 +648,7 @@ final class RecognitionTransactionAuthority {
       generation: frameState.generation,
       transaction: _nextTransaction++,
       snapshot: frameState.frameState,
+      gapSnapshot: frameState.gapState,
       frame: frameState,
     );
     frameState.activeToken = tokenState;
@@ -669,6 +932,9 @@ void _restoreAndInvalidate(_TransactionState token) {
   final frame = token.frame;
   if (frame.active) {
     frame.frameState = token.snapshot._copy();
+    if (frame.gapState != null && token.gapSnapshot != null) {
+      frame.gapState = token.gapSnapshot!._copy();
+    }
   }
   if (identical(frame.activeToken, token)) {
     frame.activeToken = null;

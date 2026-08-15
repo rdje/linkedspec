@@ -246,6 +246,12 @@ independently analyzed emitted source, and primary/nine-role admission. It neith
 nor changes the contract/checker/driver. Maintained Dart commands must use `tools/run_dart_project_data.sh` or
 `tools/run_dart_local.sh`; the current storage oracle locks 22 temporary owners and 47 packages on repository
 storage.
+Dart `.4.2` now implements the private native stage while deliberately retaining that same skip and rollout.
+Explicit `--run-skipped` proof executes its metadata and native groups 2/2; ordinary package discovery reports
+402 passes plus one intended skip. The backend-local focused gate also passes format 102/0, strict analysis,
+storage 22/47, CLI 66/66 twice, and corpus 105/105. Under ADR `0073`, this ordinary private-runtime leaf uses its
+declared focused tier and does not run canonical CI; the rooted route still executes neutral, Perl, and Rust and
+skips Dart until the admission leaf.
 Behavior-free Rust preflight `.3.0` assigns `.3.1-.3.5` to authored metadata, same-authority native state,
 reconstruction/generated-plan parity, repository-local emitted proof, and final primary/admission. `.3.1` now
 implements exact Rust named/anonymous declarations, selectors, directive validation, diagnostics, and compiled
