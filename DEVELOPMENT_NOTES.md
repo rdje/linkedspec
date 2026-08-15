@@ -10,6 +10,28 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-15 (`INTER-MATCH-GAP-CAPTURE.4.3` — Dart reconstructed/descriptor/generated carrier): activation base
+  is clean atomic 236 at `0b074e1c`; the permanent consumer stays library-skipped and rollout stays 3/6/56.
+- Keep normalized `SpecFile` JSON as the single Dart carrier. Reconstruction must parse that detached value and
+  compile normally; do not add a descriptor decoder, gap-only payload, or second runtime state model.
+- Add provenance without widening meaning. `regex_slots`, `capture_gaps`, and `resolved_slot_edges` are separate
+  rule-metadata projections; legacy semantic `resolved_edges` and dependency refs remain byte-shape compatible.
+- Generated-plan execution is not a second executor in Dart. Direct and traced generated entrypoints validate the
+  v2 `{label,family}` plan and call `LinkedSpecRuntimeEngine`, so the correct repair is descriptor projection plus
+  proof of the already-shared native lifecycle and typed failure paths—not duplicated gap logic.
+- Loaded descriptor identity tests must use caller-logical repository-relative request names when exact equality
+  includes source provenance. Persisting a resolved scratch/host path would violate the relocatable source model.
+- Complete-Dart proof found this same issue in the root-selection direct dependent; route-relative request names
+  and matching `parseSpec(sourceId:)` identities repair the fixture, and targeted proof passes 3/3.
+- The startup audit found atomic 236 updated the detailed gap chapter but omitted `overview/project-status.md` and
+  the top architecture summary. `.4.3` owns and records that past-sync correction so roadmap, code, and book are
+  locked together rather than merely reporting the drift.
+- Focused signoff is explicit carrier 3/3, direct dependents 100/100, Dart 402 plus one intended skip, storage
+  22/47, CLI 66x2, corpus 105, unchanged gap 3/6/56, recognition 137/246/58, duplicate slot 7/0/59, typed source
+  9/5/114, book 79/14,816, Knowledge 837/7,052, bounded histories, and all nine doctrines. ADR `0073` correctly
+  excludes the canonical gate because this leaf changes no admission, public contract, generated format,
+  dependency/toolchain, CI/hook/gate, storage/path, or doctrine infrastructure.
+
 - 2026-08-15 (`INTER-MATCH-GAP-CAPTURE.4.2` — Dart private native execution): activation base is clean
   workflow-policy atomic 235 at `c234ef9f`. The permanent final consumer stays library-skipped; explicit execution
   is the only pre-admission path. Its deliberate RED reached exact unknown-helper `gap_kind` before runtime work.

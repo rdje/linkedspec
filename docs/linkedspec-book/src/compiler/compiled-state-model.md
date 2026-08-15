@@ -103,18 +103,20 @@ function body as an ActionIR value block, returns the final expression or local 
 returned values into compatible receiver chains, discards standalone call results, and diagnoses direct or mutual
 recursion.
 
-Dart's private inter-match-gap metadata extends that internal rule state without widening the outward descriptor.
+Dart's private inter-match-gap metadata extends that internal rule state and projects separate compatible
+descriptor metadata without widening existing fields.
 Each authored regex has a `regex_slots` row containing `regex_index`, nullable `slot_id`, logical `source_id`, and
 physical `line`; an authored directive has one nullable `capture_gaps` record. Action edges retain selector kind,
 authored selector, target rule, resolved child index, nullable target slot id, and source provenance. Legacy
 `dependency_refs` stay `{label,idx}`, existing descriptor `resolved_edges` stay unchanged, and generated plan v2
-stays `{label,family}`. Descriptor additions and reconstructed/generated runtime proof remain separately owned.
+stays `{label,family}`. Rule metadata separately exposes detached `regex_slots`, `capture_gaps`, and five-field
+`resolved_slot_edges` values.
 
 Native execution now consumes that private directive metadata without adding another compiled carrier. The
 existing recognition invocation owns capture activation and detached child entry identity; its checkpoint adds
 only committed gap cursor, accepted-edge count, and current candidate/tail. The observable recognition frame
-remains cursor/boundary/marks. Ordinary JSON reconstruction, descriptor additions, and generated-plan parity are
-still owned by the next Dart carrier leaf rather than implied by this native path.
+remains cursor/boundary/marks. Ordinary normalized JSON reconstruction now preserves and executes that same state,
+and both direct and traced generated-plan routes use the same engine lifecycle and typed failures.
 
 The Julia backend now implements the same narrow staged provider before compiled state is built. Its public path is:
 

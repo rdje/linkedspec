@@ -4,20 +4,20 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - Read `README.md`, `MEMORY_ARCHITECTURE.md`, and `SESSION_BOOTSTRAP.md`.
 - Track under `docs/tasks/`/`docs/TASK_TREE.md`; follow `COMMIT.md`; use `KNOWLEDGE_MAP.md`/`TOOLBOX.md` first; require an owning leaf and run `scripts/check_memory_architecture.sh` before commit.
 ## Current state (OVERWRITE this block each update — do not append)
-- activation_commit: `c234ef9f` — clean workflow-policy atomic-235 base for focused Dart native gap leaf
-  `INTER-MATCH-GAP-CAPTURE.4.2`; no push.
-- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.4.2 - add Dart native gap execution`; signoff-complete for
-  intended atomic 236/300 from clean `c234ef9f`, without admission or outward-surface movement.
-- active_work_unit: none after intended atomic 236; private Dart native gap state/accessors are implemented behind the permanent `.4.5` consumer skip under ADR `0073` focused tier.
-- next_action: commit/brief-clear/prove clean atomic 236, then activate reconstructed/descriptor/generated Dart
-  carrier leaf `INTER-MATCH-GAP-CAPTURE.4.3` task-tree-first.
-- in_flight_uncommitted: none after intended atomic 236; no background job.
-- blockers: none. Focused proof passes the explicit consumer 2/2, private authority 2/2, Dart-local format 102/0,
-  strict analysis, 402 plus one skip, storage 22/47, CLI 66x2, corpus 105, neutral/rooted governance, book
-  79/14,812, Knowledge 837/7,052, and all nine doctrines. No full CI is required or run. Reconstruction/
-  descriptor/generated execution, emitted/primary proof, rollout, generated plan v2, outward surfaces,
-  recognition 137/246/58, public helpers 122, and typed source 9/5/114 remain
-  unchanged or pending.
+- activation_commit: `0b074e1c` — clean atomic-236 base for focused Dart reconstructed/descriptor/generated
+  carrier leaf `INTER-MATCH-GAP-CAPTURE.4.3`; no push.
+- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.4.3 - carry Dart gap generated execution`; signoff-complete for
+  intended atomic 237/300 from clean `0b074e1c`, without admission or outward-surface movement.
+- active_work_unit: none after intended atomic 237; Dart gap state now crosses authored, private native,
+  normalized reconstruction, compatible descriptor, and generated-plan paths behind the `.4.5` consumer skip.
+- next_action: commit/brief-clear/prove clean atomic 237, then activate independently emitted Dart proof leaf
+  `INTER-MATCH-GAP-CAPTURE.4.4` task-tree-first.
+- in_flight_uncommitted: none after intended atomic 237; no background job.
+- blockers: none. Focused proof records isolated RED, explicit consumer 3/3, direct dependents 100/100, and the
+  repaired logical-source root-route fixture 3/3. Dart-local is 402 plus one skip/storage 22/47/CLI 66x2/corpus
+  105; book 79/14,816, Knowledge 837/7,052, neutral/rooted governance, recognition, typed-source, duplicate-slot,
+  bounded history, all nine doctrines, and diff evidence pass. No full CI runs. Emitted/primary/admission, rollout,
+  generated plan v2, outward surfaces, public helpers 122, and typed source 9/5/114 remain unchanged or pending.
 - session_refresh_cadence: proactively recommend `/clear` after at most three completed commits, sooner after a
   large/debug-heavy slice or context compaction, and only at a committed clean handoff boundary.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -39,7 +39,7 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
   absolute roots; moved/outside-CWD execution is canonical.
 - current_semantic_governance: capability 80/0/0; semantic six groups / 20 responses / 128 mutations, rollout 9/9,
   native admission 6/6; MCP rollout complete/141.
-- current_readme_contract: README stays 106/5,192 under hard 128/6,144 caps. `.4.1` implements 62 routes over 20
+- current_readme_contract: README stays 106/5,197 under hard 128/6,144 caps. `.4.1` implements 62 routes over 20
   surfaces with reader/overflow separation, lifecycle controls, immutable debt, reviewed limits, and 32/32
   mutations. All four debt surfaces are current/bounded through ADRs `0067`-`0069` and composition-closed by `.4`.
 - current_verification_contract: ADR `0073` makes focused proof the ordinary per-leaf default and canonical proof
@@ -52,9 +52,9 @@ LinkedSpec is a progressive-extraction parser DSL. This is the bounded layer-A p
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, 9 allowed/11 rejected effects, invocation-framed marks, and cursor-only v1 progress.
   Exact recurrence/public composition is current at rollout 9/9 and 58 mutations; public 3/26/45; guide 1/14/18.
-- current_future_direction: gap stays 3/6/56 with private Perl and Rust admitted. Dart `.4.1-.4.2` now provide
-  authored/static/compiled metadata and private native execution behind the `.4.5` skip; reconstructed/descriptor/
-  generated `.4.3` is next. Julia, both Lua ABIs, and both public rows remain pending; `.14.5.1` waits for `.7`.
-- latest_bootstrap_read: 2026-08-15 — complete roadmap/codebase/mdBook and continuity/tooling review; Dart private
-  native `.4.2` is signoff-complete from clean atomic 235 at `c234ef9f`; `.4.3` follows after commit; push lock is
-  300.
+- current_future_direction: gap stays 3/6/56 with private Perl and Rust admitted. Dart `.4.1-.4.3` now provide
+  authored/static/compiled metadata, private native execution, reconstruction, compatible descriptors, and
+  generated-plan execution behind the `.4.5` skip; emitted `.4.4` is next. Julia, both Lua ABIs, and both public
+  rows remain pending; `.14.5.1` waits for `.7`.
+- latest_bootstrap_read: 2026-08-15 — complete roadmap/codebase/mdBook and continuity/tooling review; Dart carrier
+  `.4.3` is signoff-complete from clean atomic 236 at `0b074e1c`; `.4.4` follows after commit; push lock is 300.

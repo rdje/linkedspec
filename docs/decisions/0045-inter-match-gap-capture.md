@@ -607,6 +607,12 @@ schema, semantic/MCP, capability, CLI, README, or public surface. The permanent 
 until `.4.5`; governance stays 3 complete / 6 pending / 56 mutations plus ten Rust admission and ten Dart
 dormancy mutations. `.4.3-.4.5` retain reconstructed/generated, emitted, and primary/admission ownership.
 
+## 2026-08-15 Dart reconstructed/generated carrier amendment
+
+`INTER-MATCH-GAP-CAPTURE.4.3` activates task-tree-first from clean atomic 236 at `0b074e1c`. It carries the current Dart compiled/native contract through ordinary reconstruction, compatible descriptors, and the existing same-engine generated-plan route. Normalized `SpecFile` JSON remains the only carrier: its round trip preserves logical source identity, declaration-order slot rows, nullable stable ids, directive evidence, and five-field selector provenance before recompiling the same private lifecycle.
+
+Descriptor compatibility is additive and separated by meaning. Rule metadata gains detached `regex_slots`, `capture_gaps`, and five-field `resolved_slot_edges`; established `resolved_edges` stays exactly `ownership,target,regex_index,block,fluent`, and dependency references stay `{label,idx}`. Direct and traced generated execution enter `LinkedSpecRuntimeEngine`, retaining the same recognition invocation, candidate/commit/tail timing, entry identity, Unicode-scalar projection, and typed failures. Generated plan v2 remains ordered `{label,family}` rows. This amendment does not prove emitted source or a primary command, register the skipped consumer, promote `dart_runtime`, or widen outward surfaces. Rollout remains 3/6/56 plus ten Rust admission and ten Dart dormancy mutations; recognition remains 137/246/58, public helpers 122, and typed source 9/5/114. `.4.4-.4.5` retain emitted proof and primary/admission.
+
 ## Consequences
 
 - The director's original concept and target-rule ownership are durable and cannot be reassigned to

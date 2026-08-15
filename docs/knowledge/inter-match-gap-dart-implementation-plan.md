@@ -25,13 +25,15 @@ answers:
   - "how does Dart restore gap state on recognition rollback"
   - "when are Dart gap accessors available"
 date: 2026-08-15
-status: authored/static/compiled metadata and private native execution implemented through INTER-MATCH-GAP-CAPTURE.4.2; reconstruction, generated, emitted, and admission remain pending
+status: authored/static/compiled, private native, reconstructed, descriptor, and generated-plan execution implemented through INTER-MATCH-GAP-CAPTURE.4.3; emitted and admission remain pending
 tags: [capture, segmentation, dart, parser, lifecycle, transaction, generated-source, emitted-source, admission]
 evidence: "INTER-MATCH-GAP-CAPTURE.4.0 starts from clean atomic-232 commit 2800e7c3. Repository-routed probes show numeric syntax works while named declarations, named selectors, and capture_gaps remain raw invalid syntax; all four private accessors reach exact unknown_helper diagnostics. Trace proves repeated Dart rules currently execute LS before regex selection. Focused parser/compiler/runtime/transaction/emitter/primary proof passes 123 tests. The complete Dart gate passes format 101/0, strict analysis, 400/400 tests, storage 22 Directory.systemTemp owners / 47 packages, CLI 66x2, and corpus 105/105. Leaves .4.1-.4.5 separately own authored/static metadata and dormancy, native recognition state, reconstructed/descriptor/generated-plan carriers, independently analyzed emitted source, then primary/nine-role admission. No Dart behavior, rollout, generated format, facade/schema/MCP, capability, README, or public claim moves in .4.0."
 evidence_update_2026_08_15_metadata: "INTER-MATCH-GAP-CAPTURE.4.1 activates from clean atomic-233 commit e40de948. Checker-first final-path RED is exactly absent parseSpec(sourceId:) and SpecFile.sourceId. GREEN adds pinned-Unicode named/anonymous declaration order, unindexed/numeric/named authorship, source-aware static diagnostics, directive eligibility, logical source identity through ordinary/staged/loaded/JSON routes, compiled slot/directive rows, and five-field edge provenance. The explicit dormant consumer passes 1/1; ordinary Dart remains 400 plus one intended skip; neutral governance remains 3/6/56 plus ten Rust admission and ten Dart dormancy mutations. Descriptor resolved_edges, generated plan v2, native state/accessors, facade, canonical/recurring routes, rollout, and outward claims do not move."
 evidence_update_2026_08_15_metadata_signoff: "The authored/static/compiled leaf is signoff-complete for intended atomic 234. Complete Dart passes format 102/0, strict analysis, package 400 plus one intended skip, storage 22/47, CLI 66x2, and corpus 105; recognition remains 137/246/58, typed source 9/5/114, and duplicate slot 7/0/59. The book renders 79 files / 14,788 KiB, Knowledge is 836/7,039, all eight doctrines pass, and the authorized canonical gate passes Phase 0 1,031/1,031 in 745 seconds plus exact rooted routing and exit 0."
 evidence_update_2026_08_15_native: "INTER-MATCH-GAP-CAPTURE.4.2 activates from clean workflow-policy atomic 235 at c234ef9f. Deliberate focused RED reaches unknown_helper gap_kind at the first owned assertion. GREEN extends the one private recognition authority with activation, detached entry identity, immutable source/invocation identity, and three checkpointed mutable gap values; RecognitionFrameState remains cursor/boundary/marks. Native selection installs Unicode-scalar prefix/interstitial context before LS, commits the child-extended post-LE cursor before IT, and exposes successful tails to terminal hooks. entry_slot and gap_span/text/kind, exact unavailable/regression diagnostics, falsey acceptance, rollback, nested isolation, failed minimum, direct entry, and unflagged compatibility pass. Explicit dormant proof is 2/2; ordinary Dart is 402 plus one intended skip; neutral/rooted governance stays 3/6/56 with Dart skipped. Complete Dart-local focused proof passes format 102/0, strict analysis, storage 22/47, CLI 66x2, and corpus 105/105. No canonical CI was run because ADR 0073 classifies this private native leaf as focused."
 evidence_update_2026_08_15_native_signoff: "Private native leaf .4.2 is signoff-complete for intended atomic 236. The rendered book passes 79 files / 14,812 KiB, Knowledge passes 837 facts / 7,052 keys, and all nine doctrines pass. Reconstruction, descriptors, generated-plan execution, emitted source, primary/admission, rollout, generated plan v2, and outward surfaces remain unchanged or pending."
+evidence_update_2026_08_15_carrier: "INTER-MATCH-GAP-CAPTURE.4.3 activates task-tree-first from clean atomic 236 at 0b074e1c. Deliberate combined RED proves normalized reconstruction already executes while descriptor regex_slots is absent. GREEN adds detached regex_slots, capture_gaps, and five-field resolved_slot_edges rule metadata without changing legacy resolved_edges or dependency refs. Normalized SpecFile JSON round trips exact source-aware metadata and native values. Direct and traced generated execution use the same engine for Unicode prefix/tail values plus typed unavailable-context and cursor-regression failures; plan v2 remains exact label/family. Explicit dormant proof is 3/3 and direct descriptor/generated dependents pass 100/100. The audited stale .4.2 project-status and architecture summaries are corrected under this leaf. Emitted, primary/admission, rollout, outward surfaces, and later runtimes remain pending or unchanged."
+evidence_update_2026_08_15_carrier_signoff: "Carrier leaf .4.3 is signoff-complete for intended atomic 237 from clean 0b074e1c. The complete Dart gate exposed one direct-dependent portability fixture that compared caller-logical normalized source identity with an absolute scratch-path load; the test now uses the same logical request identity on both routes and passes 3/3. Dart-local passes format 102/0, strict analysis, 402 plus one intended skip, storage 22/47, CLI 66x2, and corpus 105. Gap governance stays 3/6/56 plus ten Rust admission and ten Dart dormancy mutations; recognition 137/246/58, duplicate slot 7/0/59, and typed source 9/5/114 pass. The book renders 79 files / 14,816 KiB, Knowledge is 837/7,052, bounded history and all nine doctrines pass, and ADR 0073 excludes full canonical CI."
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py"
   - "bash tools/check_inter_match_gap_capture_six_runtime.sh"
@@ -78,9 +80,9 @@ rows consume that one carrier.
 
 The final-path consumer is deliberately library-skipped until `.4.5`. Ten reason-checked dormancy mutations lock
 its contract, metadata role, source, parser/validator/compiler boundaries, diagnostic, canonical absence,
-recurring absence, and facade absence. This staging is not runtime admission: `.4.2` now supplies private native
-invocation state, accessors, lifecycle, rollback, and recursion; `.4.3` still owns reconstructed descriptor/
-generated proof.
+recurring absence, and facade absence. This staging is not runtime admission: `.4.2` supplies private native
+invocation state, accessors, lifecycle, rollback, and recursion; `.4.3` now supplies reconstructed descriptor/
+generated proof while the final consumer stays dormant.
 
 ## Private native execution now implemented
 
@@ -102,12 +104,25 @@ fresh five-field detached identity only to the child entered from the active own
 raise exact private typed errors. Nested owners isolate context, and recognition rollback restores the same
 three-value gap snapshot.
 
+## Reconstructed, descriptor, and generated carriers now implemented
+
+Normalized `SpecFile` JSON remains Dart's sole serialized carrier. A JSON round trip preserves logical source
+identity, authored slot order, nullable stable ids, directive evidence, and five-field selector provenance;
+normal compilation then executes the same private native result. There is no descriptor-input decoder and no
+second gap serialization model.
+
+Descriptor rule metadata now returns detached `regex_slots`, nullable `capture_gaps`, and five-field
+`resolved_slot_edges` projections. Existing semantic `resolved_edges` and legacy `{label,idx}` dependency
+references keep their prior shapes. Direct and traced generated-plan entrypoints already route through the same
+runtime engine, so they now prove the same Unicode values and typed unavailable-context/cursor-regression
+failures. The static plan remains exact v2 `{label,family}`.
+
 ## Carrier and admission boundary
 
-Normalized `SpecFile` JSON remains the only generated carrier. Descriptors add separate `regex_slots`,
+Normalized `SpecFile` JSON is the implemented generated carrier. Descriptors expose separate `regex_slots`,
 `capture_gaps`, and `resolved_slot_edges` projections without changing existing `resolved_edges`. Generated plans
-continue to contain only `{label,family}` and execute through the same engine. `emitDartSourceV2` requires proof,
-not a second gap model or a new generated format.
+contain only `{label,family}` and execute through the same engine. `emitDartSourceV2` still requires independent
+proof, not a second gap model or a new generated format.
 
 The emitted proof uses a repository-routed generated caller with its own local package cache and registers its
 exact `Directory.systemTemp` owner in the storage oracle. `.4.5` then validates the contract-declared roles once

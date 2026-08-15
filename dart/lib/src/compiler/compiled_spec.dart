@@ -794,6 +794,9 @@ final class CompiledRule {
         'cursor_policy': modeMetadata.cursorPolicy,
         'edge_ownership': _edgeOwnership,
         'resolved_edges': _resolvedEdgeDescriptorJson(),
+        'regex_slots': [for (final slot in regexSlots) slot.toJson()],
+        'capture_gaps': captureGaps?.toJson(),
+        'resolved_slot_edges': _resolvedSlotEdgeDescriptorJson(),
         'mode': modeMetadata.toJson(),
       },
     };
@@ -826,6 +829,19 @@ final class CompiledRule {
           'regex_index': null,
           'block': edge.code != null,
           'fluent': _descriptorFluentText(edge.fluentChain),
+        },
+    ];
+  }
+
+  List<JsonObject> _resolvedSlotEdgeDescriptorJson() {
+    return [
+      for (final edge in actionEdges)
+        {
+          'selector_kind': edge.selectorKind,
+          'authored_selector': edge.authoredSelector,
+          'target_rule': edge.targets.single.label,
+          'regex_index': edge.childRegexIndex,
+          'target_slot_id': edge.targetSlotId,
         },
     ];
   }

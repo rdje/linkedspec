@@ -709,12 +709,13 @@ independently compiled emitted paths. The 246 shared call inventory, 122 public-
 registration checks replace the retired Perl dormancy fence while
 the admitted Rust consumer is required ordinarily, canonically, and once after Perl in the rooted route.
 
-### Dart authored metadata and private native execution — current; admission pending
+### Dart native and generated carriers — current; emitted/admission pending
 
 Dart `.4.0` established the behavior-free baseline: numeric selectors worked, named declarations/selectors and
 `@capture_gaps` were raw body syntax, all four gap accessors reached `unknown_helper`, and repeated-rule `LS`
-preceded selection. Dart `.4.1` implemented the authored/static/compiled layer. `.4.2` now adds private native gap
-context and the four accessors on the same recognition authority. The parser accepts named and anonymous regex
+preceded selection. Dart `.4.1` implemented the authored/static/compiled layer, `.4.2` added private native gap
+context and the four accessors on the same recognition authority, and `.4.3` now carries that state through
+ordinary reconstruction, compatible descriptors, and generated-plan execution. The parser accepts named and anonymous regex
 declarations in one order, preserves unindexed/numeric/named selector authorship, and carries one dedicated
 rule-level directive record. This is a staged backend implementation, not ordinary or public admission: the
 permanent consumer remains library-skipped until `.4.5`.
@@ -737,8 +738,8 @@ Part:
 The `Part` slot rows are `(0, head)`, `(1, null)`, and `(2, foot)`. All three edges retain five distinct resolved
 fields: selector kind, authored selector, target rule, resolved numeric index, and nullable target slot id. Thus
 `Part[head]` remains attached to `head` if another identical regex is inserted before it, while `Part[0]` remains
-positional. This is compiled provenance, not a new descriptor field: existing dependency refs and
-`resolved_edges` stay legacy-shaped until `.4.3`.
+positional. Descriptor metadata now exposes this provenance separately as `regex_slots`, `capture_gaps`, and
+`resolved_slot_edges`; existing dependency refs and `resolved_edges` stay legacy-shaped.
 
 Slot names use the same generated, pinned Unicode 17.0.0 `XID_Continue` classifier as rule labels. Identity is
 exact and normalization-sensitive; a name made only of ASCII digits is rejected so `[123]` remains unambiguously
@@ -757,7 +758,7 @@ The implementation is assigned before code:
    identity, directive/static diagnostics, compiled metadata, and a mechanically dormant final consumer.
 2. `.4.2` now attaches private gap state to Dart's existing recognition invocation and token snapshot. It adds
    no second stack and does not widen observed `RecognitionFrameState`, which remains cursor/boundary/marks.
-3. `.4.3` proves normalized `SpecFile` reconstruction, compatible descriptor additions, and generated-plan
+3. `.4.3` now proves normalized `SpecFile` reconstruction, compatible descriptor additions, and generated-plan
    execution through the same engine. Static plan v2 remains exactly `{label,family}`.
 4. `.4.4` independently analyzes and executes emitted Dart libraries from a repository-routed caller workspace
    with its own project-local package cache.
@@ -784,11 +785,17 @@ parent view. Recognition rollback restores the same committed cursor, accepted c
 Unavailable reads and cursor regression report the private typed `gap_capture_context_unavailable` and
 `source_location_cursor_regression` diagnostics.
 
+Normalized `SpecFile` JSON is the sole Dart carrier. A JSON round trip preserves source-aware slot/directive/edge
+metadata, recompiles, and executes the same prefix/tail result. Descriptor rule metadata returns fresh detached
+slot, directive, and five-field selector rows. Direct and traced generated-plan routes return the same Unicode gap
+values and preserve the exact typed unavailable-context and cursor-regression failures through the generated
+error envelope. No gap field is added to the v2 plan.
+
 The final Dart consumer already lives at `dart/test/inter_match_gap_capture_contract_test.dart`, but a
-library-level `.4.5` skip keeps ordinary discovery dormant. Explicit execution now proves the `.4.1` metadata
-group and `.4.2` native lifecycle group; ten reason-checked governance mutations reject premature canonical
-execution, recurring execution, or facade exposure. Rollout remains 3 complete / 6 pending until `.4.5`, and
-generated plan v2 remains exactly `{label,family}`.
+library-level `.4.5` skip keeps ordinary discovery dormant. Explicit execution now proves the `.4.1` metadata,
+`.4.2` native lifecycle, and `.4.3` carrier groups; ten reason-checked governance mutations reject premature
+canonical execution, recurring execution, or facade exposure. Rollout remains 3 complete / 6 pending until
+`.4.5`, and generated plan v2 remains exactly `{label,family}`.
 
 Named slot rules are exact:
 

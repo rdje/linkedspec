@@ -2,30 +2,33 @@
 
 ## Current Activity
 
-- Workflow-policy atomic 235 landed cleanly at `c234ef9f`; `INTER-MATCH-GAP-CAPTURE.4.2` is signoff-complete from
-  that exact boundary for intended atomic 236; no push.
-- Dart now has private native candidate/commit/tail state, Unicode-scalar gap accessors, detached child entry
-  identity, token rollback, and nested owner isolation on the one existing recognition authority.
-- The permanent Dart consumer remains library-skipped until `.4.5`; reconstruction/descriptors/generated plans,
-  emitted/primary routes, admission, and every outward surface remain pending or unchanged.
-- ADR `0073` classifies this ordinary private-runtime leaf as focused. Its declared Dart-local, direct-dependent,
-  neutral/rooted, storage, book, Knowledge, doctrine, and diff proof runs without full canonical CI.
+- Atomic 236 landed cleanly at `0b074e1c`; `INTER-MATCH-GAP-CAPTURE.4.3` is signoff-complete from that exact
+  boundary for intended atomic 237; no push.
+- Dart normalized `SpecFile` reconstruction, separate compatible descriptor metadata, and direct/traced
+  generated-plan execution now carry the same private native gap state and typed failures.
+- The permanent Dart consumer remains library-skipped until `.4.5`; independently emitted and primary/admission
+  routes plus every outward surface remain pending or unchanged.
+- ADR `0073` classifies this ordinary private carrier leaf as focused. Its declared Dart-local, direct-dependent,
+  neutral/rooted, storage, book, Knowledge, doctrine, history, and diff proof runs without full canonical CI.
 - Gap rollout remains unchanged at 3/6/56 plus ten Rust admission and ten Dart dormancy mutations.
 
 ## Latest Completed Slice
 
-- `INTER-MATCH-GAP-CAPTURE.4.2` is signoff-complete for intended atomic 236: explicit dormant proof 2/2, private
-  authority 2/2, Dart format 102/0, strict analysis, 402 plus one skip, storage 22/47, CLI 66x2, corpus 105, and
-  unchanged neutral/rooted governance pass; book 79/14,812, Knowledge 837/7,052, and all nine doctrines also
-  pass without full CI.
+- `INTER-MATCH-GAP-CAPTURE.4.3` is signoff-complete for intended atomic 237: isolated carrier RED, explicit
+  dormant proof 3/3, direct descriptor/generated dependents 100/100, repaired root-route proof 3/3, complete
+  Dart-local/storage, book/Knowledge/history, and all nine doctrines pass without full CI; rollout and generated
+  plan v2 remain unchanged.
 
 ## Next Action
 
-- Commit atomic 236, clear the brief, prove its clean handoff, then activate Dart reconstructed/descriptor/
-  generated carrier leaf `INTER-MATCH-GAP-CAPTURE.4.3` task-tree-first with its declared tier.
+- Commit atomic 237, clear the brief, prove its clean handoff, then activate independently analyzed/executed Dart
+  emitted-source leaf `INTER-MATCH-GAP-CAPTURE.4.4` task-tree-first with its declared tier.
 
 ## Recent Completions
 
+- `2026-08-15` — `.4.3` completed normalized reconstruction, detached compatible descriptor projections, and
+  same-engine direct/traced generated gap execution from clean `0b074e1c`; the `.4.2` stale-summary audit is
+  corrected and rollout remains 3/6/56.
 - `2026-08-15` — `.4.2` completed private native Dart gap execution from clean `c234ef9f`: exact candidate/
   commit/tail timing, Unicode/empty spans, falsey values, entry slots, rollback/nesting, typed failures, focused
   Dart-local proof, and unchanged 3/6/56 governance pass with no full CI.
@@ -58,7 +61,6 @@
 - `2026-08-14` — `.3.1` completed canonical signoff for exact Rust authored/static/compiled gap metadata and
   dormant governance at unchanged rollout 2/7/56.
 - `2026-08-14` — `4a95e02a` landed behavior-free Rust implementation freeze `.3.0` as atomic 227/300.
-- `2026-08-14` — `eceb15ac` landed private Perl admission and parent `.2` as atomic 226/300.
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source

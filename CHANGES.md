@@ -10,6 +10,27 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-15 — INTER-MATCH-GAP-CAPTURE.4.3 — carry Dart gap generated execution
+
+- Activated task-tree-first from clean atomic 236 at `0b074e1c`. The isolated carrier RED proved normalized
+  reconstruction already executed, then failed exactly because descriptor `regex_slots` was absent.
+- Added detached `regex_slots`, nullable `capture_gaps`, and five-field `resolved_slot_edges` values to Dart rule
+  descriptor metadata. Existing `resolved_edges` and `{label,idx}` dependency refs retain their exact shapes.
+- Proved normalized `SpecFile` JSON preserves logical source, slot/directive/selector metadata and recompiles to
+  the same Unicode prefix/tail result. Direct and disabled-trace generated-plan entrypoints spend the same engine
+  and preserve typed unavailable-context and cursor-regression failures through the generated error envelope.
+- Preserved generated plan v2 as exact ordered `{label,family}` rows and left emitted-source, primary/admission,
+  registration, rollout 3/6/56, outward surfaces, and later runtimes unchanged or pending.
+- Corrected the audited atomic-236 documentation omission: sole-facing project status and the architecture
+  summary now report private native `.4.2` as current rather than pending, alongside this `.4.3` carrier state.
+- The complete Dart gate exposed one direct-dependent fixture comparing logical normalized source identity with
+  an absolute scratch-path load. Its loaded and reconstructed routes now share the caller-logical request name;
+  targeted root-route proof is 3/3 without weakening production identity or descriptor equality.
+- Focused signoff passes explicit carrier 3/3, direct dependents 100/100, Dart 402 plus one intended skip,
+  storage 22/47, CLI 66x2, corpus 105, unchanged neutral/rooted governance, six-runtime recognition and typed
+  source, five-backend duplicate-slot, book 79/14,816, Knowledge 837/7,052, bounded history, and all nine
+  doctrines. ADR `0073` excludes full canonical CI for this ordinary private leaf.
+
 ## 2026-08-15 — INTER-MATCH-GAP-CAPTURE.4.2 — add Dart native gap execution
 
 - Activated task-tree-first from clean workflow-policy atomic 235 at `c234ef9f`. Extending only the permanent

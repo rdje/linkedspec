@@ -1,19 +1,20 @@
 # ARCHITECTURE STATE
 
-## Dart inter-match-gap implementation is dependency-frozen without behavior
+## Dart inter-match-gap state now crosses native and generated carriers without admission
 
-Behavior-free `INTER-MATCH-GAP-CAPTURE.4.0` starts from clean atomic 232 at `2800e7c3`, reproduces Dart's
-raw-invalid named declaration/selector/directive boundary, exact four-accessor unknown-helper diagnostics,
-repeated `LS`-before-selection trace, normalized-state emitter, and existing primary pipeline. It assigns
-`.4.1-.4.5` to authored/static metadata and dormancy, private native state on the existing recognition authority,
-reconstructed/descriptor/generated carriers, independently analyzed emitted source, and primary/nine-role
-admission.
+`INTER-MATCH-GAP-CAPTURE.4.1-.4.3` implement one Dart gap authority through authored/static metadata, private
+native execution, normalized `SpecFile` reconstruction, compatible descriptors, and generated-plan execution.
+The private recognition invocation remains the sole live state owner; observed cursor/boundary/marks state is
+unchanged. Runtime UTF-16 registers cross `SourceAuthority` to expose Unicode-scalar gap spans, while logical spec
+identity supplies relocatable slot/directive/selector provenance.
 
-Runtime input spans retain Unicode-scalar projection; static diagnostics gain logical spec identity only in
-`.4.1`; observed cursor/boundary/marks state and generated plan v2 remain unchanged. Focused Dart passes 123 and
-the complete gate passes format 101/0, analysis, 400 tests, storage 22 owners / 47 packages, CLI 66x2, and corpus
-105/105. Gap remains 3/6/56 plus ten Rust admission mutations; no Dart code, rollout, generated format, outward
-surface, or public claim moves in `.4.0`.
+Descriptor rule metadata now adds detached `regex_slots`, `capture_gaps`, and five-field `resolved_slot_edges`
+values without widening legacy `resolved_edges` or `{label,idx}` dependency references. Ordinary JSON
+reconstruction recompiles and spends the same state. Direct and traced generated execution use the same engine,
+including typed unavailable-context and cursor-regression failures; the static generated plan remains exact v2
+`{label,family}`. The permanent consumer remains library-skipped until `.4.5`, rollout stays 3/6/56 plus ten Rust
+admission and ten Dart dormancy mutations, and `.4.4-.4.5` retain independently emitted and primary/admission
+proof. No facade/schema/semantic/MCP/capability/CLI/README or public claim moves in `.4.3`.
 
 ## Recursive source observation is privately admitted and recurrent on all six runtimes
 

@@ -1,9 +1,9 @@
-// INTER-MATCH-GAP-CAPTURE.4.2 — dormant Dart private-native runtime stage.
+// INTER-MATCH-GAP-CAPTURE.4.3 — dormant Dart generated-carrier stage.
 //
 // This final consumer path now proves authored/static metadata plus native gap
-// state, lifecycle, entry identity, rollback, and recursion. Reconstruction,
-// descriptor/generated projection, emitted source, primary routing, and
-// admission remain owned by `.4.3-.4.5`.
+// state, lifecycle, entry identity, rollback, recursion, ordinary normalized
+// reconstruction, compatible descriptors, and generated-plan execution.
+// Emitted source, primary routing, and admission remain owned by `.4.4-.4.5`.
 
 @Skip('INTER-MATCH-GAP-CAPTURE.4.5 owns Dart runtime admission')
 library;
@@ -730,5 +730,170 @@ Part: /H/
       'legacy',
       reason: 'unflagged lifecycle behavior remains unchanged',
     );
+  });
+
+  test('ordinary reconstruction descriptor and generated plan stage', () {
+    const source = '''
+Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Part[head] { push(gaps, array(gap_kind(), gap_text())) }
+ LX { push(gaps, array(gap_kind(), gap_text())); return(copy(gaps)) }
+Part:
+ head=/H/
+ I.return(entry_text())
+''';
+    const sourceIdentity = 'dart-gap-carrier.spec';
+    const expected = <Object?>[
+      <Object?>['prefix', 'α'],
+      <Object?>['tail', 'ω'],
+    ];
+
+    final authored = parseSpec(source, sourceId: sourceIdentity);
+    final encoded = jsonEncode(authored.toJson());
+    final reconstructed = SpecFile.fromJson(
+      (jsonDecode(encoded)! as Map).cast<String, Object?>(),
+    );
+    expect(reconstructed.toJson(), authored.toJson());
+    final compiled = compileSpec(reconstructed);
+    expect(LinkedSpecRuntimeEngine(compiled).parse('αHω').value, expected);
+
+    final descriptor = compiled.toDescriptorJson();
+    final descriptorSpec = descriptor['spec']! as Map<String, Object?>;
+    final topMeta =
+        (descriptorSpec['Top']! as JsonObject)['meta']! as JsonObject;
+    final partMeta =
+        (descriptorSpec['Part']! as JsonObject)['meta']! as JsonObject;
+    expect(partMeta['regex_slots'], [
+      {
+        'regex_index': 0,
+        'slot_id': 'head',
+        'source_id': sourceIdentity,
+        'line': 7,
+      },
+    ]);
+    expect(topMeta['capture_gaps'], {
+      'enabled': true,
+      'directive': '@capture_gaps',
+      'source_id': sourceIdentity,
+      'line': 3,
+    });
+    expect(topMeta['resolved_slot_edges'], [
+      {
+        'selector_kind': 'named',
+        'authored_selector': 'head',
+        'target_rule': 'Part',
+        'regex_index': 0,
+        'target_slot_id': 'head',
+      },
+    ]);
+    expect(topMeta['resolved_edges'], [
+      {
+        'ownership': 'action',
+        'target': 'Part',
+        'regex_index': 0,
+        'block': true,
+        'fluent': null,
+      },
+    ]);
+    expect((descriptorSpec['Top']! as JsonObject)['dependency_refs'], [
+      {'label': 'Part', 'idx': 0},
+    ]);
+
+    final plan = buildGeneratedRulePlan(compiled);
+    expect(plan.map((row) => row.toJson()), [
+      {'label': 'Top', 'family': 'default'},
+      {'label': 'Part', 'family': 'default'},
+    ]);
+    expect(
+      executeGeneratedParserV2(compiled, plan, 'αHω', sourceIdentity),
+      expected,
+    );
+    expect(
+      executeGeneratedParserWithTraceV2(
+        compiled,
+        plan,
+        'αHω',
+        LinkedSpecTraceConfig.disabled(),
+        sourceIdentity,
+      ),
+      expected,
+    );
+
+    for (final traced in [false, true]) {
+      final unavailable = compileMetadata(
+        'Direct::\n /H/\n I { return(gap_text()) }\n',
+      );
+      final unavailablePlan = buildGeneratedRulePlan(unavailable);
+      expect(
+        () => traced
+            ? executeGeneratedParserWithTraceV2(
+                unavailable,
+                unavailablePlan,
+                'H',
+                LinkedSpecTraceConfig.disabled(),
+                sourceIdentity,
+              )
+            : executeGeneratedParserV2(
+                unavailable,
+                unavailablePlan,
+                'H',
+                sourceIdentity,
+              ),
+        throwsA(
+          isA<GeneratedSourceException>()
+              .having(
+                (error) => error.code.wireName,
+                'portable code',
+                'generated_execution_failed',
+              )
+              .having(
+                (error) => error.detail,
+                'typed detail',
+                contains(
+                  'LINKEDSPEC_INTER_MATCH_GAP_ERROR:'
+                  'gap_capture_context_unavailable',
+                ),
+              ),
+        ),
+        reason: traced
+            ? 'traced unavailable context'
+            : 'direct unavailable context',
+      );
+
+      final regression = compileMetadata(
+        'Top::OR{1}\n @capture_gaps\n -> Part { rewind_match_start() }\nPart: /H/\n',
+      );
+      final regressionPlan = buildGeneratedRulePlan(regression);
+      expect(
+        () => traced
+            ? executeGeneratedParserWithTraceV2(
+                regression,
+                regressionPlan,
+                'aH',
+                LinkedSpecTraceConfig.disabled(),
+                sourceIdentity,
+              )
+            : executeGeneratedParserV2(
+                regression,
+                regressionPlan,
+                'aH',
+                sourceIdentity,
+              ),
+        throwsA(
+          isA<GeneratedSourceException>().having(
+            (error) => error.detail,
+            'typed detail',
+            contains(
+              'LINKEDSPEC_SOURCE_LOCATION_ERROR:'
+              'source_location_cursor_regression',
+            ),
+          ),
+        ),
+        reason: traced
+            ? 'traced cursor regression'
+            : 'direct cursor regression',
+      );
+    }
   });
 }

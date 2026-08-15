@@ -140,15 +140,14 @@ Top::AND
  /x/
  -> Top { return("hit") }
 ''';
-    final direct = compileSpec(parseSpec(source));
+    final direct = compileSpec(parseSpec(source, sourceId: 'descriptor.spec'));
     final scratch = Directory.systemTemp.createTempSync(
       'linkedspec-dart-cursor-descriptor-',
     );
     try {
-      final specFile = File('${scratch.path}/descriptor.spec')
-        ..writeAsStringSync(source);
+      File('${scratch.path}/descriptor.spec').writeAsStringSync(source);
       final loaded = loadAndCompileSpec(
-        SpecRequest.path(specFile.path),
+        const SpecRequest.path('descriptor.spec'),
         SpecLoadOptions(cwd: scratch),
       );
 

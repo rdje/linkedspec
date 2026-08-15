@@ -319,19 +319,24 @@ target. The semantic fields are exactly `ownership`, `target`, `regex_index`, `b
   because their normalized compiled state does not retain it. Removing it yields identical semantic rows for
 equivalent bare and explicit spellings, and runtime dispatch never reads it.
 
-### Perl named-slot staging metadata
+### Private inter-match-gap carrier metadata
 
-The Perl reference's private `.2.1` staging adds two rule-metadata projections without changing the portable
-descriptor schema. `regex_slots` preserves authored order as `{regex_index, slot_id}` rows, where `slot_id` is
-nullable. `resolved_slot_edges` preserves each action selection as exactly `selector_kind`, `authored_selector`,
-`target_rule`, `regex_index`, and nullable `target_slot_id`. The existing `resolved_edges` projection remains
-unchanged.
+Perl, Rust, and Dart now project private rule metadata for inter-match-gap carrier proof without changing the
+portable descriptor schema. `regex_slots` preserves authored order as rows containing `regex_index` and nullable
+`slot_id`; Rust and Dart additionally retain logical `source_id` and physical `line` in that row. Nullable
+`capture_gaps` retains the directive and its available source provenance. `resolved_slot_edges` preserves each action selection as exactly `selector_kind`,
+`authored_selector`, `target_rule`, `regex_index`, and nullable `target_slot_id`. The existing `resolved_edges`
+projection remains unchanged.
 
-Perl dependency references and generated `dependency_slot_map` rows likewise retain named selector/destination
-provenance; legacy anonymous rows keep their old shape. These fields support private native-live inter-match-gap
-execution and the still-dormant emitted/loaded consumer phase. They are not yet semantic-model, MCP, cross-backend
-descriptor-schema, CLI, or public capability admission. Descriptor metadata alone remains evidence, not an
-independently loaded or admitted runtime route.
+The Dart carrier is its normalized `SpecFile` JSON: reconstruction recompiles that value and produces the same
+descriptor and private native behavior. Direct and traced generated-plan execution use the same engine and retain
+the same values and typed failures, while the static plan remains exact `{label,family}`. Legacy Dart dependency
+references remain `{label,idx}`. Perl and Rust retain their backend-native serialized carriers under the same
+semantic boundary.
+
+These additive fields support private inter-match-gap staging. They are not yet semantic-model, MCP,
+cross-backend descriptor-schema, CLI, or public capability admission. Descriptor metadata alone remains evidence,
+not an independently emitted or admitted Dart runtime route; `.4.4-.4.5` still own that proof.
 
 ## `dependency_regex_map`
 

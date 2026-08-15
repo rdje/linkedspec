@@ -41,11 +41,12 @@ void main() {
       ('marked', _markedSource, 'marked', 'Later', 'later'),
       ('markerless', _markerlessSource, 'first', 'Second', 'second'),
     ]) {
-      final file = File(
-        '${scratch.path}${Platform.pathSeparator}${route.$1}.spec',
-      )..writeAsStringSync(route.$2);
+      final logicalPath = '${route.$1}.spec';
+      File(
+        '${scratch.path}${Platform.pathSeparator}$logicalPath',
+      ).writeAsStringSync(route.$2);
       final loaded = loadAndCompileSpec(
-        SpecRequest.path(file.path),
+        SpecRequest.path(logicalPath),
         SpecLoadOptions(cwd: scratch),
       );
       final before = loaded.compiled.toDescriptorJson();
@@ -58,7 +59,10 @@ void main() {
 
       final normalized = SpecFile.fromJson(
         Map<String, Object?>.from(
-          jsonDecode(jsonEncode(parseSpec(route.$2).toJson())) as Map,
+          jsonDecode(
+                jsonEncode(parseSpec(route.$2, sourceId: logicalPath).toJson()),
+              )
+              as Map,
         ),
       );
       final reconstructed = compileSpec(normalized);
