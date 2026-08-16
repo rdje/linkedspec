@@ -1,20 +1,18 @@
 # MEMORY
 
-- activation_commit: `c33f66645f8691da945dd99c364e6e32221c62a5` — clean atomic-251 base for behavior-free
-  recurring/public closeout audit `INTER-MATCH-GAP-CAPTURE.7.0`; no push.
-- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.7.0 - freeze recurring and public closeout plan`; canonical-
-  signoff-complete from atomic-251 activation `c33f6664` for intended atomic 252, without recurring/public rollout
-  or outward movement.
-- active_work_unit: none after the `.7.0` atomic-252 landing; recurring admission `.7.1` is the next leaf and must
-  activate task-tree-first only from the proved clean post-commit boundary.
-- next_action: commit the exact receipt-bound `.7.0` candidate as atomic 252, promote the receipt, clear the brief,
-  prove clean, then activate `INTER-MATCH-GAP-CAPTURE.7.1` and produce its checker-first recurring RED before
-  changing the contract, driver, or rollout row.
-- in_flight_uncommitted: none after the intended atomic-252 landing; no grammar, parser, compiler, runtime,
-  carrier, generated-plan, primary, rollout, facade, schema, semantic/MCP, CLI, README, capability, storage, or
-  typed-source behavior moved in `.7.0`.
-- blockers: none. Focused proof and receipt-bound canonical proof pass, including neutral 7/2/60, rooted all-six-
-  runtime execution, CLI 66x2, RAM 56%, Phase 0 1,031/1,031 in 752 seconds, and Knowledge 840/7,102.
+- activation_commit: `be240c14bcacfaba4ab619f64e2c70e809aabcb0` — clean atomic-252 base for recurring-only
+  admission `INTER-MATCH-GAP-CAPTURE.7.1`; no push.
+- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.7.1 - admit recurring gap proof`; canonical-signoff-complete
+  from atomic-252 activation `be240c14` for intended atomic 253, without public or implementation movement.
+- active_work_unit: none after the intended `.7.1` atomic-253 landing; public language/compatibility/no-drift
+  `.7.2` is next and must activate task-tree-first only from the proved clean post-commit boundary.
+- next_action: commit the exact receipt-bound `.7.1` candidate as atomic 253, promote the receipt, clear the brief,
+  prove clean, then activate `INTER-MATCH-GAP-CAPTURE.7.2` and produce its checker-first public/language RED.
+- in_flight_uncommitted: none after the intended atomic-253 landing; only neutral recurring governance, its rooted
+  success marker, canonical skip text, five current status sentences, and durable records moved in `.7.1`.
+- blockers: none. Focused proof passes neutral 8/1/61, rooted all-six-runtime execution, language 246/122,
+  recognition 137/246/58, generated/capability 80/0/0, typed source 9/5/114, semantic 9/9/128, MCP complete/141,
+  project-data routing, tool storage, and rendered mdBook. Exact finalized canonical proof is receipt-bound.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -40,8 +38,8 @@
   and their rollover/index gates remain current.
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, and recurrence/public no-drift 9/9.
-- current_future_direction: gap is privately admitted on all six runtimes at 7/2/60. Frozen closeout is `.7.1`
-  recurring 8/1/61; `.7.2` public language/compatibility at shared calls 250, public Perl 126, gap 9/0/63 and
+- current_future_direction: gap recurrence is current across all six private runtimes at 8/1/61. Next is `.7.2`
+  public language/compatibility at shared calls 250, public Perl 126, gap 9/0/63 and
   public 6/12/10/29; `.7.3` unchanged closeout; then `.14.5.1` owns typed `gap_composition` only.
 - latest_bootstrap_read: 2026-08-16 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
-  review complete; `.7.0` is canonical-signoff-complete from clean atomic 251 `c33f6664`; `.7.1` is next.
+  review complete; `.7.1` is canonical-signoff-complete from clean atomic 252 `be240c14`; `.7.2` is next.

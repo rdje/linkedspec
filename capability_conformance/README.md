@@ -302,11 +302,11 @@ Governance is 114, and the combined program-wide public-no-drift row stays pendi
 helper/value, descriptor/generated schema, semantic/MCP field, CLI, or README behavior moved.
 
 `inter_match_gap_capture_contract.json` is the neutral authority for named regex slots and lossless
-prefix/interstitial/tail context. Inter-match gap-capture recurring governance now admits all six private runtime rows; recurring and public admission remain pending. Julia `.5.1-.5.5` and shared Lua `.6.1-.6.5` implement and admit their exact private nine-role paths without widening outward surfaces.
+prefix/interstitial/tail context. Inter-match gap-capture recurring governance is current across all six private runtime rows; public admission remains pending. Julia `.5.1-.5.5` and shared Lua `.6.1-.6.5` implement and admit their exact private nine-role paths without widening outward surfaces.
 Run `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py` for the always-on
 neutral proof or `bash tools/check_inter_match_gap_capture_six_runtime.sh` for the repository-routed ordered
 governance route. The latter executes the complete neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT rows;
-the nine-leg rollout is 7 complete / 2 pending and the checker rejects 60 semantic/topology corruptions plus ten
+the nine-leg rollout is 8 complete / 1 pending and the checker rejects 61 semantic/topology corruptions plus ten
 Rust, ten Dart, ten Julia, and sixteen Lua admission/regression mutations.
 Perl `.2.1-.2.3` implement authored/static metadata, private native-live behavior, and independently loaded
 generated parity; `.2.4` admits that existing consumer without an outward API. Its four private accessor nodes are synchronized as recognition `source_read`

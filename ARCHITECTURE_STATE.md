@@ -1,13 +1,15 @@
 # ARCHITECTURE STATE
 
-## Inter-match-gap closeout separates recurrence, public language admission, and typed-source handoff
+## Inter-match-gap recurrence is current without public language admission
 
-Behavior-free `INTER-MATCH-GAP-CAPTURE.7.0` is canonical-signoff-complete from clean atomic 251 `c33f6664` after
-verifying the exact committed private boundary. The neutral checker passes 7 complete / 2 pending / 60 semantic mutations; the rooted driver
-passes neutral, Perl 124, Rust 1, Dart 5, Julia 319, PUC Lua 392, and LuaJIT 392 in order. Existing carriers,
-generated plan v2, primary adapters, runtime implementations, and repository-local storage are sufficient.
+`INTER-MATCH-GAP-CAPTURE.7.1` is canonical-signoff-complete from clean atomic 252 `be240c14`. Checker-first RED
+rejects the target count before the neutral artifact/checker advance only `recurring` from 7/2/60 to 8/1/61 by
+adding `recurring_regression`. The rooted driver remains neutral, Perl 124, Rust 1, Dart 5, Julia 319, PUC Lua
+392, and LuaJIT 392 in exact order; its recurring status/owner and success marker now state recurring current and
+public no-drift pending. Existing carriers, generated plan v2, primary adapters, runtime implementations, and
+repository-local storage are unchanged.
 
-ADR `0079` gives the remaining rows distinct authority. `.7.1` admits recurring topology only and moves 7/2/60→8/1/61.
+ADR `0079` gives the remaining rows distinct authority. `.7.1` now closes recurring topology at 8/1/61.
 `.7.2` promotes `entry_slot`, `gap_span`, `gap_text`, and `gap_kind` from staged-private calls into the shared
 current language inventory, moving 246→250 calls and 122→126 independently derived public Perl contracts while
 recognition retains 137 ActionIR rows. It then ratifies legacy-marker compatibility and closes public no-drift at
@@ -15,11 +17,13 @@ recognition retains 137 ActionIR rows. It then ratifies legacy-marker compatibil
 mutations. `.7.3` changes no executable artifact; it recomposes and hands only typed `gap_composition` to
 `FUTURE-PARITY-BACKLOG.14.5.1`.
 
-The audit caught a marker-only governance defect: exact current status sentences passed while adjacent capture/
+The `.7.0` audit caught a marker-only governance defect: exact current status sentences passed while adjacent capture/
 Toolbox/local-CI prose still described earlier Lua skips and a 3/6 route. `.7.0` corrects those current facts
-without public admission. `.7.2` must add stale-claim denial and in-memory mutation coverage so a correct marker
-cannot mask contradictory surrounding prose again. README, facades, outward schemas, semantic/MCP, CLI,
-capability, storage, and typed-source rollout stay unchanged.
+without public admission; `.7.1` updates all five governed sentences coherently to recurring-current/public-
+pending. `.7.2` must add stale-claim denial and in-memory mutation coverage so a correct marker cannot mask
+contradictory surrounding prose again. Shared calls remain 246, public Perl 122, recognition 137/246/58,
+capability 80/0/0, and typed source 9/5/114; README, facades, outward schemas, semantic/MCP, CLI, storage, and
+runtime behavior stay unchanged.
 
 ## Lua inter-match-gap capture has one behavior-free dual-ABI five-leaf implementation plan
 

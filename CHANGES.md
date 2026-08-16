@@ -10,6 +10,25 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-16 — INTER-MATCH-GAP-CAPTURE.7.1 — admit recurring gap proof
+
+- Activated task-tree-first from clean atomic-252 commit `be240c14`. The unchanged checker rejected the planned
+  transition with exact `expected counts drifted` before any checker, driver, status-marker, or rollout change.
+- Promoted only `recurring` under exact leaf owner `.7.1` and appended only `recurring_regression`, advancing the
+  neutral ledger from 7/2/60 to 8/1/61. The recurring-gate status/owner and rooted success marker now state
+  recurring current while `public_no_drift` remains pending.
+- Preserved the rooted neutral-first route and every consumer/command. It passes Perl 124, Rust 1, Dart 5, Julia
+  319, PUC Lua 392, and LuaJIT 392 in order; ten Rust, ten Dart, ten Julia, and sixteen Lua admission mutations
+  remain exact.
+- Updated the five governed no-overclaim sentences to recurring-current/public-pending. The same ten outward
+  facade/schema/semantic/MCP/CLI/README guards remain closed; the four gap calls stay staged-private.
+- No grammar, parser, compiler, runtime, carrier, emitter, primary adapter, generated format, public API, schema,
+  capability, storage, or typed-source behavior moved. Language remains 246 current calls / 122 public Perl
+  contracts, recognition 137/246/58, capability 80/0/0, typed source 9/5/114, semantic 9/9 with 128 mutations,
+  and MCP complete with 141 mutations.
+- Focused checker/rooted/adjacent/storage proof and the rendered mdBook pass. The finalized staged candidate runs
+  receipt-bound canonical CI with the exact gap matrix before commit; the hook promotes only its matching receipt.
+
 ## 2026-08-16 — INTER-MATCH-GAP-CAPTURE.7.0 — freeze recurring and public closeout plan
 
 - Activated task-tree-first from clean atomic-251 commit `c33f6664`; no grammar, parser, compiler, runtime,

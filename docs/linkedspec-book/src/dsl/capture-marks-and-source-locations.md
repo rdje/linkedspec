@@ -570,7 +570,7 @@ Typed-source composition consumes that completed contract afterward; it does not
 
 The behavior-free contract now lives at `capability_conformance/inter_match_gap_capture_contract.json`, uses id
 `linkedspec-inter-match-gap-capture-v1`, and is checked independently by
-`tools/check_inter_match_gap_capture_contract.py`. Inter-match gap-capture recurring governance now executes the complete neutral and six private runtime rows; both public rows remain pending.
+`tools/check_inter_match_gap_capture_contract.py`. Inter-match gap-capture recurring governance is current across the complete neutral and six private runtime rows; public no-drift remains pending.
 The Perl reference implements authored/static metadata, private native-live behavior, and independently loaded
 generated parity. Admission `.2.4` runs that complete consumer in canonical CI and in the rooted recurring route,
 promotes only `perl_runtime`, and advances the checker to 56 mutations without outward public admission.
@@ -594,9 +594,9 @@ the latter additionally proves neutral-first Perl-then-Rust-then-Dart-then-Julia
 The neutral artifact locks 8 positive and 10 negative authored fixtures, 3 source fixtures, 8 private gap fields,
 16 main-machine transitions, 10 segmentation cases, 3 terminal routes, 7 transaction/recursion/return-channel
 cases, 6 compatibility rows, 9 diagnostics, and 9 rollout legs. Recurring topology and public-no-overclaim
-governance plus all six runtime regression locks now total 60 semantic mutations. Ten Rust, ten Dart, ten Julia,
-and sixteen shared-Lua role/registration mutations are separate. Rollout remains 7 complete / 2 pending until
-the recurring and public closeout leaves move their own rows.
+governance plus all six runtime and recurring regression locks now total 61 semantic mutations. Ten Rust, ten
+Dart, ten Julia, and sixteen shared-Lua role/registration mutations are separate. Rollout is 8 complete / 1
+pending: recurring proof is current, while public no-drift remains the sole closeout row.
 
 ### Perl private live and generated implementation — exact private admission
 

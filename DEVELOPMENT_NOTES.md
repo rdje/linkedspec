@@ -10,6 +10,22 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-16 (`INTER-MATCH-GAP-CAPTURE.7.1` — recurring admission): clean activation is atomic 252
+  `be240c14`. Applying the planned artifact transition before checker changes yielded exact fail-first
+  `expected counts drifted`.
+- The neutral artifact/checker now own 8 complete / 1 pending / 61 semantic mutations. Only `recurring` changes
+  pending→complete, its exact owner becomes `.7.1`, and `recurring_regression` is the sole new semantic mutation.
+- The driver still derives its repository root, enters project-data storage, runs the neutral checker once, then
+  executes Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT once in fixed order. Only its success sentence changes:
+  recurring is current and public no-drift remains pending.
+- The earlier Lua guard named `lua_later_recurring_skip` is reclassified as `lua_recurring_current`; the sixteen-
+  mutation Lua admission cardinality and its separate public-pending guard remain exact.
+- Five current status markers move coherently to recurring-current/public-pending. Marker-only stale-claim denial
+  remains intentionally `.7.2`-owned, as do public call inventories, compatibility teaching, and final 9/0/63.
+- Focused proof passes the checker, complete rooted matrix, language 246/122, recognition 137/246/58,
+  generated/capability 80/0/0, typed source 9/5/114, semantic 9/9/128, MCP complete/141, project-data routing,
+  tool-storage containment, and rendered mdBook. Canonical receipt-bound proof is mandatory for landing.
+
 - 2026-08-16 (`INTER-MATCH-GAP-CAPTURE.7.0` — recurring/public closeout audit): activation base is clean atomic
   251 at `c33f6664`; neutral 7/2/60 and rooted neutral/Perl-124/Rust-1/Dart-5/Julia-319/PUC-Lua-392/LuaJIT-392
   pass without changing an executable authority.

@@ -20,7 +20,7 @@ answers:
 date: 2026-08-16
 status: verified historical fact; all six private runtime routes admitted; recurring/public completion pending
 tags: [capture, segmentation, super-split, move-pos, or-rule, action-edge, source-span, perl, portability]
-evidence: "Imported baseline cf25bd37 perl/LinkedSpec.pm Split-Like/MOVE_POS/spec_gdata/REP_ACODE and specs/ebnf.spec; documentation drift 8588b07b and 300e6950; current RuleIR relabel/reidx projection; 2026-07-17 live Top::OR to Document[0..2] probe; five-backend marker-scope code audit. INTER-MATCH-GAP-CAPTURE.2-.6 privately admit Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT through exact native/carrier/emitted/primary roles; recurring and public rows remain pending for .7. ADR 0045."
+evidence: "Imported baseline cf25bd37 perl/LinkedSpec.pm Split-Like/MOVE_POS/spec_gdata/REP_ACODE and specs/ebnf.spec; documentation drift 8588b07b and 300e6950; current RuleIR relabel/reidx projection; 2026-07-17 live Top::OR to Document[0..2] probe; five-backend marker-scope code audit. INTER-MATCH-GAP-CAPTURE.2-.6 privately admit Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT through exact native/carrier/emitted/primary roles. INTER-MATCH-GAP-CAPTURE.7.1 makes recurring proof current at 8/1/61; public no-drift remains pending for .7.2. ADR 0045."
 reverify: "git show cf25bd37:perl/LinkedSpec.pm | rg -n -C 8 'Split-Like Code|MOVE_POS|spec_gdata|REP_ACODE'"
 ---
 

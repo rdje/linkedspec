@@ -1922,8 +1922,8 @@ orchestration or to raw Perl cursor arithmetic.
     promote the receipt, clear the brief, and land parent `.6` cleanly before `.7`.
 
 - ID: `INTER-MATCH-GAP-CAPTURE.7`
-  Status: `active` (2026-08-16; behavior-free audit/plan `.7.0` is canonical-signoff-complete from clean atomic
-    251 `c33f6664`; recurring admission `.7.1` is next after the atomic-252 clean boundary)
+  Status: `active` (2026-08-16; recurring admission `.7.1` is canonical-signoff-complete from clean atomic 252
+    `be240c14` for intended atomic 253; public language/compatibility/no-drift `.7.2` is next after clean landing)
   Goal: Close cross-backend admission, migration, public documentation, and compatibility policy.
   Children: `.7.0`, `.7.1`, `.7.2`, `.7.3`
   Acceptance: Five backends and all generated/primary roles agree; aliases are retained or retired only
@@ -1932,8 +1932,7 @@ orchestration or to raw Perl cursor arithmetic.
   Commit: `pending`
 
 - ID: `INTER-MATCH-GAP-CAPTURE.7.0`
-  Status: `canonical-signoff-complete from clean c33f6664` (2026-08-16; intended atomic 252; behavior-free
-    planning; no push)
+  Status: `done; landed at be240c14` (2026-08-16; atomic 252; behavior-free planning; no push)
   Goal: Audit the complete committed six-runtime/private-carrier boundary and freeze the exact dependency split
     for recurring admission, compatibility/public teaching, and independent parent closeout before changing
     rollout or public-current claims.
@@ -2004,7 +2003,8 @@ orchestration or to raw Perl cursor arithmetic.
     layers, pass focused planning proof, commit with the leaf id, clear the brief, and land clean before `.7.1`.
 
 - ID: `INTER-MATCH-GAP-CAPTURE.7.1`
-  Status: `pending`
+  Status: `canonical-signoff-complete from clean be240c14` (2026-08-16; intended atomic 253; task-tree-first
+    activation; recurring-only admission tier; public language/compatibility/no-drift remains `.7.2`-owned; no push)
   Goal: Admit the existing neutral-first six-runtime recurring proof and promote only the `recurring` rollout row.
   Depends on: `.7.0`
   Acceptance: start only from clean `.7.0`; write checker-first RED for the still-pending `recurring` row and
@@ -2020,9 +2020,39 @@ orchestration or to raw Perl cursor arithmetic.
     order and once-only registration; driver/CI/project-data topology mutations; public no-overclaim markers and
     ten guards; recognition, language, generated, capability, typed-source, semantic/MCP, primary, storage,
     mdBook, Knowledge, histories, task/memory/doctrines, staged diff and receipt.
-  Planned verification: canonical because cross-backend recurring rollout and canonical-gate governance move.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `canonical`
+  Focused checks: checker-first recurring RED; neutral 8/1/61; rooted neutral/Perl/Rust/Dart/Julia/PUC Lua/LuaJIT
+    order and once-only registration; driver/CI/project-data topology mutations; public no-overclaim markers and
+    ten guards; recognition, language, generated, capability, typed-source, semantic/MCP, primary, storage,
+    mdBook, Knowledge, histories, task/memory/doctrines, staged diff and receipt.
+  Canonical trigger: `yes` — this leaf promotes cross-backend recurring rollout and changes canonical-gate
+    governance; exact staged-candidate local CI and receipt promotion are mandatory before landing.
+  Verification: checker-first target artifact fails exact `expected counts drifted`; neutral passes 8/1/61 plus
+    61 semantic, ten Rust, ten Dart, ten Julia, and sixteen Lua admission mutations. Rooted proof passes neutral,
+    Perl 124, Rust 1, Dart 5, Julia 319, PUC Lua 392, and LuaJIT 392 in unchanged order. Language 246/105+1/122,
+    recognition 137/246/58, generated/capability 80/0/0, typed source 9/5/114, semantic 9/9/128, MCP complete/141,
+    five current markers/ten outward guards, project-data routing, tool storage, rendered mdBook, Knowledge,
+    histories, task/memory/doctrines, and exact diff hygiene pass. The finalized staged candidate runs exact
+    receipt-bound canonical CI plus the gap matrix before commit, and only its matching receipt may be promoted.
+  Commit: `INTER-MATCH-GAP-CAPTURE.7.1 - admit recurring gap proof` (intended atomic 253)
+
+  ### Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / OWNERSHIP** — Prove committed `.7.0` boundary `be240c14`, empty status/diffs,
+    zero-byte brief, promoted canonical receipt, durable next-action pointer, and no background result before this
+    task-tree-first edit.
+  - [x] **RETRIEVE AUTHORITY** — Use Knowledge Map/ADR/task/toolbox pointers first, then inspect only the neutral
+    artifact/checker, rooted driver, recurring card, canonical registration, and five no-overclaim markers needed
+    for recurring admission.
+  - [x] **FAIL FIRST / GOVERNANCE** — Prove the unchanged checker rejects the planned 7/2/60→8/1/61 transition,
+    stale recurring-gate ownership/status, rooted success marker, and five recurring-current/public-pending markers.
+  - [x] **EXACT RECURRING ADMISSION** — Promote only `recurring`, append only `recurring_regression`, preserve the
+    neutral-first seven-route order and commands, and lock the updated gate/driver/marker topology by mutation.
+  - [x] **NO PUBLIC OR IMPLEMENTATION MOVEMENT** — Preserve `public_no_drift` pending, private helper status,
+    246/122 language counts, recognition 137/246/58, format 2, and every implementation/facade/schema/MCP/CLI/
+    README/capability/typed-source/storage boundary for `.7.2`.
+  - [x] **CANONICAL CLOSEOUT** — Synchronize durable layers, pass focused and receipt-bound canonical proof,
+    commit with this leaf id, promote the receipt, clear the brief, and land clean before `.7.2`.
 
 - ID: `INTER-MATCH-GAP-CAPTURE.7.2`
   Status: `pending`
@@ -2111,12 +2141,18 @@ orchestration or to raw Perl cursor arithmetic.
 | 33 | `INTER-MATCH-GAP-CAPTURE.6.3` | `done; landed at b7708cde` | Carrier parity, ADR-0077 capacity closure, and exact canonical proof landed cleanly as atomic 249. |
 | 34 | `INTER-MATCH-GAP-CAPTURE.6.4` | `done; landed at 798aeeee` | Independently loaded emitted-source parity and exact storage owner 19 landed as atomic 250. |
 | 35 | `INTER-MATCH-GAP-CAPTURE.6.5` | `canonical-signoff-complete from clean 798aeeee` | Primary parity, exact dual-ABI admission, and parent `.6` closeout are complete for atomic 251. |
-| 36 | `INTER-MATCH-GAP-CAPTURE.7.0` | `canonical-signoff-complete from clean c33f6664` | Exact 7/2/60 private audit, recurring/public/closeout split, stale-current correction, bounded-history rollover, and final staged proof are complete without behavior or rollout movement. |
-| 37 | `INTER-MATCH-GAP-CAPTURE.7.1` | `pending` | Admit only the existing neutral-first six-runtime recurring route after `.7.0` lands cleanly. |
+| 36 | `INTER-MATCH-GAP-CAPTURE.7.0` | `done; landed at be240c14` | Exact 7/2/60 private audit, recurring/public/closeout split, stale-current correction, bounded-history rollover, and final staged proof landed without behavior or rollout movement as atomic 252. |
+| 37 | `INTER-MATCH-GAP-CAPTURE.7.1` | `canonical-signoff-complete from clean be240c14` | Recurring alone advances to 8/1/61; the exact rooted seven-route proof and every private/no-overclaim boundary remain locked for intended atomic 253. |
 | 38 | `INTER-MATCH-GAP-CAPTURE.7.2` | `pending` | Ratify compatibility projection and complete public lossless-segmentation teaching after recurring admission. |
 | 39 | `INTER-MATCH-GAP-CAPTURE.7.3` | `pending` | Independently recompose, close the tree, and hand off typed gap composition. |
 
 ## Decisions
+
+- `2026-08-16`: recurring admission advances only `recurring` 7/2/60→8/1/61 under exact owner `.7.1` and appends
+  only `recurring_regression`. The rooted neutral/Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT order and commands remain
+  unchanged; five markers now say recurring-current/public-pending. The Lua admission guard formerly named
+  `lua_later_recurring_skip` becomes `lua_recurring_current` without changing its sixteen-mutation cardinality.
+  Calls remain 246/public Perl 122 and all implementation/outward/typed boundaries remain `.7.2`-owned.
 
 - `2026-08-16`: ADR `0079` separates recurring and public closeout into three dependency-complete leaves. `.7.1` changes only
   7/2/60→8/1/61; `.7.2` promotes four implemented calls into shared/public language coverage at 250/126,

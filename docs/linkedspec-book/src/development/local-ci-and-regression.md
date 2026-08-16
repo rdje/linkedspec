@@ -234,23 +234,25 @@ containment and relocation, CLI 66/66 in both option environments, RAM 62%, Phas
 and this complete matrix through its exact success marker. The combined program-wide `.14.8` public-no-drift row
 remains pending.
 
-Inter-match gap-capture recurring governance runs the complete neutral and six private runtime rows; no runtime route remains an explicit skip.
+Inter-match gap-capture recurring governance is current across the complete neutral and six private runtime rows; no runtime route remains an explicit skip and public no-drift remains pending.
 Perl `.2.1-.2.3` established metadata, private live behavior, and independently loaded generated parity. Admission
 `.2.4` makes the full metadata/live/generated consumer the default, registers it once in ordinary canonical CI
 and once in the rooted recurring route, promotes only `perl_runtime`, and retires the obsolete dormancy fence.
-The neutral checker now rejects 60 semantic/topology mutations at rollout 7 complete / 2 pending: all six private
-runtime regressions are locked, while facade/schema/semantic/MCP/CLI/README surfaces remain absent.
+The neutral checker now rejects 61 semantic/topology mutations at rollout 8 complete / 1 pending: all six private
+runtime regressions and recurring composition are locked, while facade/schema/semantic/MCP/CLI/README surfaces
+remain absent.
 Behavior-free Dart `.4.0` froze `.4.1-.4.5` across authored/static metadata, same-authority native execution,
 reconstructed/descriptor/generated carriers, independently analyzed emitted source, and primary/nine-role
 admission. `.4.1-.4.4` supplied those private carriers behind a skipped consumer. Admission `.4.5` removes that
 skip, proves the existing primary adapter, executes all nine declared roles exactly once, registers the consumer
 once in canonical CI and once after Rust in the rooted route, and promotes only `dart_runtime`. The checker now
-rejects 60 semantic mutations at rollout 7 complete / 2 pending plus ten Rust, ten Dart, ten Julia, and sixteen
+rejects 61 semantic mutations at rollout 8 complete / 1 pending plus ten Rust, ten Dart, ten Julia, and sixteen
 Lua admission mutations;
 ADR `0074` explains the additional Dart regression guard. Maintained Dart commands use
 `tools/run_dart_project_data.sh` or `tools/run_dart_local.sh`; the storage oracle locks 23 temporary owners and 47
 packages on repository storage. Shared Lua `.6.5` removes the final runtime skips by executing its same
-392-assertion consumer on PUC Lua and LuaJIT; recurring/public rows remain pending and no outward surface moves.
+392-assertion consumer on PUC Lua and LuaJIT. Recurring proof is now current under `.7.1`; public no-drift remains
+pending and no outward surface moves.
 Behavior-free Julia `.5.0` freezes `.5.1-.5.5` before implementation. Its focused baseline passes duplicate-slot
 121, rule-local cursor 104, recognition transaction 207, typed source 127, and source emitter 65 (624 assertions),
 plus the existing primary process check and exact pre-emitted storage 19 temporary owners / 5 package trees. Julia
@@ -272,9 +274,9 @@ The always-on neutral command is
 `tools/check_inter_match_gap_capture_six_runtime.sh` driver repeats that authority exactly once, then runs Perl,
 Rust, Dart, Julia, PUC Lua, and LuaJIT once each in fixed order. Set
 `LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1` to exercise this governance route in canonical local CI. Rollout is
-7 complete / 2 pending: all private runtime routes are current, while recurring and public no-drift remain the
-two closeout rows. The switch proves exact route topology, role coverage, and storage locality without admitting
-an outward facade or schema.
+8 complete / 1 pending: all private runtime routes and recurring proof are current, while public no-drift remains
+the sole closeout row. The switch proves exact route topology, role coverage, and storage locality without
+admitting an outward facade or schema.
 At Perl `.2.4` and parent `.2`, definitive signoff passed the full 124-test consumer ordinarily and through the then-partial route,
 the rendered mdBook, Knowledge 834/6,995, all eight doctrines, containment/relocation, CLI 66/66 twice, RAM 57%,
 Phase 0 1,031/1,031 in 765 seconds, five ordered later-runtime skips, and `[ci] local CI gate passed`. Rust `.3`

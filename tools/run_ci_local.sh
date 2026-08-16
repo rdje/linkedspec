@@ -1013,7 +1013,7 @@ if [[ "${LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX:-0}" == "1" ]]; then
  require_tracked_file tools/check_inter_match_gap_capture_six_runtime.sh
  bash "$REPO_ROOT/tools/check_inter_match_gap_capture_six_runtime.sh"
 else
- log "skipping optional inter-match gap-capture six-runtime route (set LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1; later runtime rows are still pending)"
+ log "skipping optional inter-match gap-capture six-runtime route (set LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1 to re-run the current neutral plus six-runtime proof)"
 fi
 
 if [[ "${LINKEDSPEC_RUN_RECOGNITION_TRANSACTION_MATRIX:-0}" == "1" ]]; then

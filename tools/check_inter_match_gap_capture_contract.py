@@ -86,7 +86,7 @@ LUA_ADMISSION_MUTATION_IDS = (
     "lua_recurring_luajit_registration",
     "lua_recurring_luajit_duplicate",
     "lua_recurring_order",
-    "lua_later_recurring_skip",
+    "lua_recurring_current",
     "lua_later_public_skip",
     "lua_facade_absence",
 )
@@ -127,7 +127,7 @@ EXPECTED_COUNTS = {
     "compatibility_rows": 6,
     "diagnostics": 9,
     "rollout_legs": 9,
-    "semantic_mutations": 60,
+    "semantic_mutations": 61,
 }
 
 MUTATION_IDS = (
@@ -188,6 +188,7 @@ MUTATION_IDS = (
     "julia_runtime_regression",
     "puc_lua_runtime_regression",
     "luajit_runtime_regression",
+    "recurring_regression",
     "storage_paths",
     "route_order",
     "public_no_overclaim",
@@ -798,8 +799,8 @@ def validate_diagnostics(document: dict[str, Any]) -> None:
 
 def validate_recurring_gate(document: dict[str, Any]) -> None:
     expected = {
-        "status": "governance_current_all_private_runtimes_admitted_public_pending",
-        "owner": "INTER-MATCH-GAP-CAPTURE.1.2",
+        "status": "recurring_current_all_private_runtimes_admitted_public_pending",
+        "owner": "INTER-MATCH-GAP-CAPTURE.7.1",
         "driver": "tools/check_inter_match_gap_capture_six_runtime.sh",
         "local_ci_driver": "tools/run_ci_local.sh",
         "local_ci_switch": "LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX",
@@ -895,7 +896,7 @@ def validate_public_no_overclaim(
     expected = {
         "status": "current",
         "owner": "INTER-MATCH-GAP-CAPTURE.1.2",
-        "policy": "document the executable neutral and all six admitted private runtime rows without claiming recurring/public rollout completion, capability admission, schema exposure, CLI exposure, or outward public admission",
+        "policy": "document the executable neutral, all six admitted private runtime rows, and current recurring proof without claiming public no-drift completion, capability admission, schema exposure, CLI exposure, or outward public admission",
         "rollout_assertions": {
             "row_count": 9,
             "neutral_contract": {"status": "complete", "owner": "INTER-MATCH-GAP-CAPTURE.1.1"},
@@ -905,29 +906,29 @@ def validate_public_no_overclaim(
             "julia_runtime": {"status": "complete", "owner": "INTER-MATCH-GAP-CAPTURE.5"},
             "complete_lua_runtime_ids": ["puc_lua_runtime", "luajit_runtime"],
             "lua_runtime_status": "complete",
-            "recurring": {"status": "pending", "owner": "INTER-MATCH-GAP-CAPTURE.7"},
+            "recurring": {"status": "complete", "owner": "INTER-MATCH-GAP-CAPTURE.7.1"},
             "public_no_drift": {"status": "pending", "owner": "INTER-MATCH-GAP-CAPTURE.7"},
         },
         "documents": [
             {
                 "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
-                "required_marker": "Inter-match gap-capture recurring governance now executes the complete neutral and six private runtime rows; both public rows remain pending.",
+                "required_marker": "Inter-match gap-capture recurring governance is current across the complete neutral and six private runtime rows; public no-drift remains pending.",
             },
             {
                 "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
-                "required_marker": "Inter-match gap-capture recurring governance runs the complete neutral and six private runtime rows; no runtime route remains an explicit skip.",
+                "required_marker": "Inter-match gap-capture recurring governance is current across the complete neutral and six private runtime rows; no runtime route remains an explicit skip and public no-drift remains pending.",
             },
             {
                 "path": "docs/linkedspec-book/src/overview/project-status.md",
-                "required_marker": "Inter-match gap-capture governance is current at 7 complete / 2 pending: all six runtime rows are admitted privately, while recurring and public no-drift remain pending.",
+                "required_marker": "Inter-match gap-capture governance is current at 8 complete / 1 pending: all six runtime rows and recurring proof are complete, while public no-drift remains pending.",
             },
             {
                 "path": "capability_conformance/README.md",
-                "required_marker": "Inter-match gap-capture recurring governance now admits all six private runtime rows; recurring and public admission remain pending.",
+                "required_marker": "Inter-match gap-capture recurring governance is current across all six private runtime rows; public admission remains pending.",
             },
             {
                 "path": "TOOLBOX.md",
-                "required_marker": "Inter-match gap-capture recurring governance executes its complete neutral plus six private runtime rows while recurring and public no-drift remain pending.",
+                "required_marker": "Inter-match gap-capture recurring governance is current across its complete neutral plus six private runtime rows while public no-drift remains pending.",
             },
         ],
         "surface_guard": {
@@ -979,7 +980,7 @@ def validate_public_no_overclaim(
 def validate_rollout(document: dict[str, Any]) -> None:
     rows = indexed(document["rollout"], ROLLOUT_IDS, "rollout")
     for index, rollout_id in enumerate(ROLLOUT_IDS):
-        expected_status = "complete" if index <= 6 else "pending"
+        expected_status = "complete" if index <= 7 else "pending"
         expected_owner = TASK_OWNER if index == 0 else {
             "perl_runtime": "INTER-MATCH-GAP-CAPTURE.2.4",
             "rust_runtime": "INTER-MATCH-GAP-CAPTURE.3",
@@ -987,7 +988,7 @@ def validate_rollout(document: dict[str, Any]) -> None:
             "julia_runtime": "INTER-MATCH-GAP-CAPTURE.5",
             "puc_lua_runtime": "INTER-MATCH-GAP-CAPTURE.6",
             "luajit_runtime": "INTER-MATCH-GAP-CAPTURE.6",
-            "recurring": "INTER-MATCH-GAP-CAPTURE.7",
+            "recurring": "INTER-MATCH-GAP-CAPTURE.7.1",
             "public_no_drift": "INTER-MATCH-GAP-CAPTURE.7",
         }[rollout_id]
         require(rows[rollout_id] == {"id": rollout_id, "owner": expected_owner, "status": expected_status}, f"{rollout_id} rollout drifted")
@@ -1098,6 +1099,14 @@ def validate_registration(document: dict[str, Any]) -> None:
         require(driver_text.count(marker) == 1, f"recurring driver marker must appear exactly once: {marker}")
         positions.append(driver_text.index(marker))
     require(positions == sorted(positions), "recurring driver route order drifted")
+    require(
+        driver_text.count(
+            'log "PASS: neutral and all six private runtime routes complete; recurring current; '
+            'public no-drift remains pending"'
+        )
+        == 1,
+        "recurring driver success marker drifted",
+    )
 
     ci_markers = (
         (f"git status --short --untracked-files=all -- {recurring['driver']}", 1),
@@ -1552,9 +1561,9 @@ def validate_lua_admission(
         )
     final_marker = (
         "PASS: neutral and all six private runtime routes complete; "
-        "recurring and public no-drift remain pending"
+        "recurring current; public no-drift remains pending"
     )
-    require(driver_text.count(final_marker) == 1, "Lua admission disturbed later recurring/public skips")
+    require(driver_text.count(final_marker) == 1, "Lua admission disturbed recurring/public boundary")
     require(
         "capture_gaps" not in facade_text and "inter_match_gap_capture" not in facade_text,
         "Lua admission widened the public facade",
@@ -1570,7 +1579,7 @@ def lua_admission_mutations() -> list[LuaAdmissionMutation]:
     luajit_command = f"bash tools/run_lua_project_data.sh luajit {consumer_path}"
     final_marker = (
         "PASS: neutral and all six private runtime routes complete; "
-        "recurring and public no-drift remain pending"
+        "recurring current; public no-drift remains pending"
     )
     return [
         (
@@ -1683,19 +1692,19 @@ def lua_admission_mutations() -> list[LuaAdmissionMutation]:
             ),
         ),
         (
-            "lua_later_recurring_skip",
-            "Lua admission disturbed later recurring/public skips",
+            "lua_recurring_current",
+            "Lua admission disturbed recurring/public boundary",
             lambda texts: texts.__setitem__(
                 "driver",
-                texts["driver"].replace(final_marker, final_marker.replace("recurring and ", ""), 1),
+                texts["driver"].replace(final_marker, final_marker.replace("recurring current; ", ""), 1),
             ),
         ),
         (
             "lua_later_public_skip",
-            "Lua admission disturbed later recurring/public skips",
+            "Lua admission disturbed recurring/public boundary",
             lambda texts: texts.__setitem__(
                 "driver",
-                texts["driver"].replace(final_marker, final_marker.replace(" and public no-drift", ""), 1),
+                texts["driver"].replace(final_marker, final_marker.replace("; public no-drift remains pending", ""), 1),
             ),
         ),
         (
@@ -2129,6 +2138,7 @@ def mutations() -> list[Mutation]:
             ("julia_runtime_regression", "julia_runtime rollout drifted", lambda d: row(d, "rollout", "julia_runtime").__setitem__("status", "pending")),
             ("puc_lua_runtime_regression", "puc_lua_runtime rollout drifted", lambda d: row(d, "rollout", "puc_lua_runtime").__setitem__("status", "pending")),
             ("luajit_runtime_regression", "luajit_runtime rollout drifted", lambda d: row(d, "rollout", "luajit_runtime").__setitem__("status", "pending")),
+            ("recurring_regression", "recurring rollout drifted", lambda d: row(d, "rollout", "recurring").__setitem__("status", "pending")),
             ("storage_paths", "recurring gate topology drifted", lambda d: d["recurring_gate"]["storage"].__setitem__("initializer", "/tmp/project_data_env.sh")),
             ("route_order", "recurring gate topology drifted", lambda d: d["recurring_gate"]["route_order"].reverse()),
             ("public_no_overclaim", "public no-overclaim contract drifted", lambda d: d["public_no_overclaim"].__setitem__("status", "planned")),

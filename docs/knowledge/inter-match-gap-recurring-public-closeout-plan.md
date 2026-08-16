@@ -11,9 +11,10 @@ answers:
   - "how many public gap documents stale claims guards and mutations are planned"
   - "which leaf hands inter-match gaps to typed source gap composition"
 date: 2026-08-16
-status: verified private boundary and frozen behavior-free closeout plan; implementation pending
+status: recurring admission complete at 8/1/61; public admission and no-change handoff pending
 tags: [capture, segmentation, recurring-gate, public-no-drift, actionir, helpers, documentation, task-tree]
 evidence: "Clean c33f6664 plus the neutral checker proves 7/2/60. The rooted driver executes neutral, Perl 124, Rust 1, Dart 5, Julia 319, PUC Lua 392, and LuaJIT 392 in exact order. Source inspection proves the four implemented gap calls remain deliberately outside the shared 246-name inventory and are classified non-public by the language checker. The existing public_no_overclaim guard requires one marker in each of five documents and scans ten outward surfaces, but denies no stale surrounding prose; therefore obsolete two-Lua-skip and 3/6 claims survived after Lua admission. INTER-MATCH-GAP-CAPTURE.7.0 freezes .7.1 recurring 8/1/61, .7.2 language 250/public Perl 126 plus final 9/0/63 and public 6/12/10/29, and .7.3 unchanged closeout/handoff."
+evidence_update_2026_08_16_recurring_admission: "INTER-MATCH-GAP-CAPTURE.7.1 promotes only recurring after an expected-count RED. Neutral governance is 8/1/61; the rooted neutral/Perl-124/Rust-1/Dart-5/Julia-319/PUC-Lua-392/LuaJIT-392 order and all implementation/carrier commands remain exact. Five governed markers now say recurring current/public pending. Shared language remains 246 calls and 122 public Perl contracts for .7.2."
 reverify: "bash tools/check_inter_match_gap_capture_six_runtime.sh"
 ---
 
@@ -23,7 +24,7 @@ All six private runtime routes are already implemented, admitted, and executable
 different meanings and therefore different owners:
 
 1. `INTER-MATCH-GAP-CAPTURE.7.1` admits the existing rooted proof itself. It promotes only `recurring`, adds one
-   complete-to-pending regression, and leaves the four gap calls staged-private.
+   complete-to-pending regression, and leaves the four gap calls staged-private. This step is complete at 8/1/61.
 2. `.7.2` makes `entry_slot()`, `gap_span()`, `gap_text()`, and `gap_kind()` current cross-backend language calls,
    ratifies the existing compatibility matrix as public migration policy, teaches the complete feature, and
    promotes only `public_no_drift`.

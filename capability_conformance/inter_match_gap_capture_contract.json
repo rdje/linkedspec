@@ -14,7 +14,7 @@
     "compatibility_rows": 6,
     "diagnostics": 9,
     "rollout_legs": 9,
-    "semantic_mutations": 60
+    "semantic_mutations": 61
   },
   "policy": {
     "status": "executable_neutral_behavior_free",
@@ -821,13 +821,14 @@
     "julia_runtime_regression",
     "puc_lua_runtime_regression",
     "luajit_runtime_regression",
+    "recurring_regression",
     "storage_paths",
     "route_order",
     "public_no_overclaim"
   ],
   "recurring_gate": {
-    "status": "governance_current_all_private_runtimes_admitted_public_pending",
-    "owner": "INTER-MATCH-GAP-CAPTURE.1.2",
+    "status": "recurring_current_all_private_runtimes_admitted_public_pending",
+    "owner": "INTER-MATCH-GAP-CAPTURE.7.1",
     "driver": "tools/check_inter_match_gap_capture_six_runtime.sh",
     "local_ci_driver": "tools/run_ci_local.sh",
     "local_ci_switch": "LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX",
@@ -961,7 +962,7 @@
   "public_no_overclaim": {
     "status": "current",
     "owner": "INTER-MATCH-GAP-CAPTURE.1.2",
-    "policy": "document the executable neutral and all six admitted private runtime rows without claiming recurring/public rollout completion, capability admission, schema exposure, CLI exposure, or outward public admission",
+    "policy": "document the executable neutral, all six admitted private runtime rows, and current recurring proof without claiming public no-drift completion, capability admission, schema exposure, CLI exposure, or outward public admission",
     "rollout_assertions": {
       "row_count": 9,
       "neutral_contract": {
@@ -990,8 +991,8 @@
       ],
       "lua_runtime_status": "complete",
       "recurring": {
-        "status": "pending",
-        "owner": "INTER-MATCH-GAP-CAPTURE.7"
+        "status": "complete",
+        "owner": "INTER-MATCH-GAP-CAPTURE.7.1"
       },
       "public_no_drift": {
         "status": "pending",
@@ -1001,23 +1002,23 @@
     "documents": [
       {
         "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
-        "required_marker": "Inter-match gap-capture recurring governance now executes the complete neutral and six private runtime rows; both public rows remain pending."
+        "required_marker": "Inter-match gap-capture recurring governance is current across the complete neutral and six private runtime rows; public no-drift remains pending."
       },
       {
         "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
-        "required_marker": "Inter-match gap-capture recurring governance runs the complete neutral and six private runtime rows; no runtime route remains an explicit skip."
+        "required_marker": "Inter-match gap-capture recurring governance is current across the complete neutral and six private runtime rows; no runtime route remains an explicit skip and public no-drift remains pending."
       },
       {
         "path": "docs/linkedspec-book/src/overview/project-status.md",
-        "required_marker": "Inter-match gap-capture governance is current at 7 complete / 2 pending: all six runtime rows are admitted privately, while recurring and public no-drift remain pending."
+        "required_marker": "Inter-match gap-capture governance is current at 8 complete / 1 pending: all six runtime rows and recurring proof are complete, while public no-drift remains pending."
       },
       {
         "path": "capability_conformance/README.md",
-        "required_marker": "Inter-match gap-capture recurring governance now admits all six private runtime rows; recurring and public admission remain pending."
+        "required_marker": "Inter-match gap-capture recurring governance is current across all six private runtime rows; public admission remains pending."
       },
       {
         "path": "TOOLBOX.md",
-        "required_marker": "Inter-match gap-capture recurring governance executes its complete neutral plus six private runtime rows while recurring and public no-drift remain pending."
+        "required_marker": "Inter-match gap-capture recurring governance is current across its complete neutral plus six private runtime rows while public no-drift remains pending."
       }
     ],
     "surface_guard": {
@@ -1082,8 +1083,8 @@
     },
     {
       "id": "recurring",
-      "owner": "INTER-MATCH-GAP-CAPTURE.7",
-      "status": "pending"
+      "owner": "INTER-MATCH-GAP-CAPTURE.7.1",
+      "status": "complete"
     },
     {
       "id": "public_no_drift",
