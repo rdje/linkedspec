@@ -481,8 +481,8 @@ name = /pattern/
 Only horizontal spacing around `=` is insignificant. Every name scalar uses the repository-pinned Unicode 17
 `XID_Continue` class; identity is exact, case-sensitive, and normalization-sensitive. ASCII digit-only names are
 reserved for positional selectors. Named and anonymous regex members may mix in one authored zero-based sequence.
-Perl, Rust, and Dart privately admit the complete gap runtime. Julia currently carries authored/static/compiled
-metadata behind a dormant final consumer; this is not yet a portable public admission.
+Perl, Rust, Dart, and Julia privately admit the complete gap runtime. Shared PUC Lua/LuaJIT currently carry
+authored/static/compiled metadata behind one dormant final consumer; this is not yet a portable public admission.
 
 **Capture groups**: A `(...)` group is a **numbered** capture; a `(?<name>...)`
 group is a **named** capture. Action code reads them with `entry_group(N)` /
@@ -513,7 +513,7 @@ its associated action code.
 - **Target indexing**: `-> rule` means entry slot `[0]`. `-> rule[N]` selects a
   positional regex slot; `-> rule[name]` selects stable rule-local identity. A numeric selector may resolve a
   named declaration, but it remains positional provenance. Named selection is implemented by the private Perl,
-  Rust, and Dart runtimes and by Julia's current authored/static/compiled path.
+  Rust, Dart, and Julia runtimes and by Lua's current shared authored/static/compiled path.
 - **Grouped targets**: `-> RuleA | RuleB { ... }` binds one shared action code
   block to multiple target rules.
 - **Grouped-target boundary**: the shared block is mandatory. `-> RuleA | RuleB`

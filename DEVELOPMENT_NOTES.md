@@ -10,6 +10,31 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-16 (`INTER-MATCH-GAP-CAPTURE.6.1` — shared Lua authored/static/compiled metadata): activation base is
+  clean atomic 246 at `5089a360`; one implementation is consumed by PUC Lua and LuaJIT.
+- Keep source provenance logical and path-opaque. `SpecFile.source_id` defaults to `inline`, crosses direct and
+  both staged parser paths, survives normalized/effective-emitted reconstruction, retains a relative caller path,
+  and reduces absolute requests to basenames. Never persist the resolved host path as DSL provenance.
+- Parse selector authorship before resolution. `EdgeTarget`/`BareEdgeTarget` retain `selector_kind` and
+  `authored_selector`; validation resolves named targets against one mixed named/anonymous authored sequence;
+  compilation records target rule, resolved child index, and nullable stable slot name without widening legacy
+  dependency refs.
+- Reuse the generated Unicode-17 rule-label scanner for slot names. Reject all-ASCII digits as the numeric
+  selector namespace, reject invalid XID strings and duplicates with first-line evidence, and preserve exact
+  case/normalization identity.
+- Keep `@capture_gaps` out of `rule_slot_events`. Its dedicated AST kind is placement-insensitive; validation owns
+  duplicate/conflict/eligibility evidence. Named `@mark(...)` stays independent, while anonymous legacy markers
+  conflict. Existing split/mark events keep post-action/pre-`LE` timing.
+- Separate compiled and descriptor evolution. Compiled JSON owns `regex_slots`, nullable `capture_gaps`, and
+  five-field selector provenance now; descriptor action edges deliberately call the legacy projector until `.6.3`
+  adds separate detached fields. Generated format 2 and `{label,family}` rows do not change.
+- A dormant test must not become a new temporary owner. The first fixture used routed scratch correctly but moved
+  the exact storage census 18→19 before `.6.4`; replacing it with read-only loading of a tracked spec proves
+  relative/absolute identity while retaining 18 owners and reserving the planned owner transition.
+- Focused proof is explicit 178 assertions per ABI, complete Lua 177 per ABI plus primary 66/corpus 105/storage
+  18/three modules, rooted neutral/Perl/Rust/Dart/Julia plus two Lua skips, and unchanged recognition,
+  duplicate-slot, typed-source, and generated-source ledgers. Live state/accessors remain `.6.2`.
+
 - 2026-08-16 (`INTER-MATCH-GAP-CAPTURE.6.0` — shared Lua behavior-free plan): activation base is clean atomic 245
   at `a6ff2614`; complete PUC-Lua/LuaJIT baseline is 177 package tests per ABI, primary 66, corpus 105, and exact
   storage 18 owners / three dual-ABI native modules.

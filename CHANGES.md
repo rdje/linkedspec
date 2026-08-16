@@ -10,6 +10,30 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-16 — INTER-MATCH-GAP-CAPTURE.6.1 — add shared Lua gap metadata
+
+- Activated task-tree-first from clean atomic-246 commit `5089a360`. The checker-first RED rejected the absent
+  dormant Lua consumer; its first explicit PUC run then reached the absent `SpecFile.source_id` boundary.
+- Added one backward-compatible logical source carrier across direct parsing, both staged parser layers, normalized
+  JSON, loaded compilation, compiled state, and effective emitted state. Inline defaults to `inline`; relative
+  loaded requests retain caller spelling and absolute requests reduce to basenames, never resolved host paths.
+- Added spacing-insensitive named regex declarations through the pinned Unicode-17 label authority, mixed named/
+  anonymous authored order, exact digit-only/invalid/duplicate rejection, and unindexed/numeric/named/malformed
+  selector provenance. `@capture_gaps` is a dedicated rule directive, not a legacy rule-slot event.
+- Validation now reports exact source-aware declaration, selector, directive, eligibility, and legacy-conflict
+  diagnostics. Named marks remain independent; flagged no-edge/mixed/blind/adjacency/AND shapes reject before
+  generic ownership diagnostics, while unflagged legacy behavior stays unchanged.
+- Compiled rule JSON now carries ordered `regex_slots`, nullable directive provenance, and five-field selector
+  identity. Descriptor action edges, `resolved_edges`, `{label,idx}` dependency refs, `rule_slot_events`, format 2
+  `{label,family}` plans, primary behavior, and runtime state remain unchanged.
+- Added the permanent final Lua consumer with 178 authored/static/compiled assertions on each ABI and a future
+  nine-role ledger. Ten checker-local mutations require its contract boundaries and keep ordinary, canonical,
+  rooted, and facade discovery dormant for both pending Lua rows.
+- Full Lua proof passes 177 package tests per ABI, primary 66, corpus 105, and exact storage 18 owners / three
+  dual-ABI native modules. Rooted governance passes neutral, Perl 124, Rust 1, Dart 5, Julia
+  105+33+46+105+30, then two exact Lua skips at 5/4/58. Recognition 137/246/58, duplicate-slot 7/0/59,
+  typed-source 9/5/114, and generated-source 80/0/0 remain exact.
+
 ## 2026-08-16 — INTER-MATCH-GAP-CAPTURE.6.0 — freeze Lua gap implementation plan
 
 - Activated task-tree-first from clean atomic-245 commit `a6ff2614`; changed no Lua production/test behavior,

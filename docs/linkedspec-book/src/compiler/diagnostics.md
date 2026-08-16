@@ -141,8 +141,8 @@ the failure to `GeneratedSourceStage.validateCompiledRule` and
 `ordered_regex_slot_identity_lost` / `execute_rule` with expected and actual
 indices for invariant testing.
 
-Dart's and Julia's authored gap-metadata layers report the neutral source-aware static failures before compiled
-state is accepted:
+Dart's, Julia's, and shared Lua's authored gap-metadata layers report the neutral source-aware static failures
+before compiled state is accepted:
 
 - `regex_slot_name_invalid` / `parse_declaration`
 - `regex_slot_duplicate_name` / `resolve_declaration`
@@ -152,10 +152,12 @@ state is accepted:
 - `capture_gaps_rule_ineligible` and `capture_gaps_legacy_marker_conflict` / `validate_directive`
 
 Every row includes `rule_label`, logical `source_id`, and physical `line`, plus its contract-specific selector,
-slot, eligibility, or marker context. Dart uses `gap_capture_context_unavailable` for a private native gap read
-outside a live candidate/tail and `source_location_cursor_regression` when the accepted cursor would commit before
-the selected match end. Julia runtime context and those accessor/runtime failures remain pending `.5.2`; `.5.1`
-does not manufacture a live gap context.
+slot, eligibility, or marker context. The Lua source id defaults to `inline`; a relative loaded request retains
+its caller spelling, while an absolute loaded request is reduced to its basename so host paths never become
+compiled provenance. Runtime backends use `gap_capture_context_unavailable` for a private gap read outside a live
+candidate/tail and `source_location_cursor_regression` when the accepted cursor would commit before the selected
+match end. Lua runtime context and those accessor/runtime failures remain owned by `.6.2`; `.6.1` does not
+manufacture a live gap context.
 
 Parser-authored `print`/`say`/`print_each` events use a separate Rust facility. Call
 `execute_with_diagnostic_output(input, sink)` or

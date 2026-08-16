@@ -508,7 +508,10 @@ function M.parse_spec_with_staged_user_function_definition_asts(source, definiti
     "lua_staged:parse_spec_with_function_asts",
     "source_bytes=" .. (type(source) == "string" and #source or 0),
     function()
-      local spec = function_shell.parse_spec_with_asts(source, definition_nodes, { trace = emitter })
+      local spec = function_shell.parse_spec_with_asts(source, definition_nodes, {
+        trace = emitter,
+        source_id = options and options.source_id or nil,
+      })
       return M.stitch_function_body_parse_jobs(spec, { trace = emitter })
     end,
     function(spec)

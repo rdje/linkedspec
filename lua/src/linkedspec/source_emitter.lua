@@ -593,7 +593,11 @@ local function effective_spec(compiled)
     local rule = compiled.rules_by_label[label]
     rules[index] = spec_ast.rule({ header = rule.header, body = rule.body_elements })
   end
-  return spec_ast.spec_file({ functions = functions, rules = rules })
+  return spec_ast.spec_file({
+    source_id = compiled.source_id,
+    functions = functions,
+    rules = rules,
+  })
 end
 
 local function emit_failure(source_identity, summary, detail)

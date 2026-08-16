@@ -17,6 +17,7 @@ local SIMPLE_RULE_MODES = {
 }
 local BODY_KIND_TYPES = {
   RegexBodyElementKind = true,
+  CaptureGapsDirectiveBodyElementKind = true,
   ActionEdgeBodyElementKind = true,
   BlindEdgeBodyElementKind = true,
   BareEdgeBodyElementKind = true,
@@ -447,17 +448,40 @@ end
 
 function M.edge_target(options)
   options = options_table(options, "EdgeTarget")
+  local index = options.index == nil and 0 or required_integer(options, "index", "EdgeTarget")
+  local selector_kind = options.selector_kind or "numeric"
+  if type(selector_kind) ~= "string" then
+    fail("EdgeTarget.selector_kind must be a string")
+  end
+  local authored_selector = options.authored_selector
+  if authored_selector ~= nil and type(authored_selector) ~= "string" and
+      type(authored_selector) ~= "number" then
+    fail("EdgeTarget.authored_selector must be a string or number when present")
+  end
   return node("EdgeTarget", {
     label = required_string(options, "label", "EdgeTarget"),
-    index = options.index == nil and 0 or required_integer(options, "index", "EdgeTarget"),
+    index = index,
+    selector_kind = selector_kind,
+    authored_selector = authored_selector,
   })
 end
 
 function M.bare_edge_target(options)
   options = options_table(options, "BareEdgeTarget")
+  local selector_kind = options.selector_kind or (options.index == nil and "unindexed" or "numeric")
+  if type(selector_kind) ~= "string" then
+    fail("BareEdgeTarget.selector_kind must be a string")
+  end
+  local authored_selector = options.authored_selector
+  if authored_selector ~= nil and type(authored_selector) ~= "string" and
+      type(authored_selector) ~= "number" then
+    fail("BareEdgeTarget.authored_selector must be a string or number when present")
+  end
   return node("BareEdgeTarget", {
     label = required_string(options, "label", "BareEdgeTarget"),
     index = optional_integer(options, "index", "BareEdgeTarget"),
+    selector_kind = selector_kind,
+    authored_selector = authored_selector,
   })
 end
 
@@ -473,6 +497,14 @@ function M.regex_body_kind(options)
   options = options_table(options, "RegexBodyElementKind")
   return node("RegexBodyElementKind", {
     pattern = required_string(options, "pattern", "RegexBodyElementKind"),
+    slot_id = optional_string(options, "slot_id", "RegexBodyElementKind"),
+  })
+end
+
+function M.capture_gaps_directive_body_kind(options)
+  options = options_table(options, "CaptureGapsDirectiveBodyElementKind")
+  return node("CaptureGapsDirectiveBodyElementKind", {
+    directive = required_string(options, "directive", "CaptureGapsDirectiveBodyElementKind"),
   })
 end
 
@@ -578,6 +610,8 @@ end
 function M.spec_file(options)
   options = options_table(options, "SpecFile")
   return node("SpecFile", {
+    source_id = options.source_id == nil and "inline" or
+      required_string(options, "source_id", "SpecFile"),
     functions = copy_node_list(options.functions or {}, "FunctionDefinition", "SpecFile.functions"),
     rules = copy_node_list(options.rules, "Rule", "SpecFile.rules"),
   })
@@ -628,6 +662,10 @@ local function project_body_kind(kind)
   if node_type == "RegexBodyElementKind" then
     result.kind = "regex"
     result.pattern = kind.pattern
+    result.slot_id = kind.slot_id == nil and json.null or kind.slot_id
+  elseif node_type == "CaptureGapsDirectiveBodyElementKind" then
+    result.kind = "capture_gaps_directive"
+    result.directive = kind.directive
   elseif node_type == "ActionEdgeBodyElementKind" then
     result.kind = "action_edge"
     result.targets = json_array_of(kind.targets, project)
@@ -757,9 +795,13 @@ project = function(value)
   elseif node_type == "EdgeTarget" then
     result.label = value.label
     result.index = value.index
+    result.selector_kind = value.selector_kind
+    result.authored_selector = value.authored_selector == nil and json.null or value.authored_selector
   elseif node_type == "BareEdgeTarget" then
     result.label = value.label
     put_optional(result, "index", value.index)
+    result.selector_kind = value.selector_kind
+    result.authored_selector = value.authored_selector == nil and json.null or value.authored_selector
   elseif node_type == "FluentCall" then
     result.method = value.method
     result.args = value.args
@@ -771,6 +813,7 @@ project = function(value)
     result.header = project(value.header)
     result.body = json_array_of(value.body, project)
   elseif node_type == "SpecFile" then
+    result.source_id = value.source_id
     result.functions = json_array_of(value.functions, project)
     result.rules = json_array_of(value.rules, project)
   else
@@ -831,6 +874,15 @@ local function json_optional_integer(object, field, context)
   end
   if type(value) ~= "number" or value % 1 ~= 0 then
     fail(context .. "." .. field .. " must be an integer when present")
+  end
+  return value
+end
+
+local function json_optional_scalar(object, field, context)
+  local value = object[field]
+  if value == nil or value == json.null then return nil end
+  if type(value) ~= "string" and type(value) ~= "number" then
+    fail(context .. "." .. field .. " must be a string or number when present")
   end
   return value
 end
@@ -901,7 +953,14 @@ local function build_body_kind(value)
   local object = object_value(value, "BodyElementKind")
   local kind = json_string(object, "kind", "BodyElementKind")
   if kind == "regex" then
-    return M.regex_body_kind({ pattern = json_string(object, "pattern", "BodyElementKind") })
+    return M.regex_body_kind({
+      pattern = json_string(object, "pattern", "BodyElementKind"),
+      slot_id = json_optional_string(object, "slot_id", "BodyElementKind"),
+    })
+  elseif kind == "capture_gaps_directive" then
+    return M.capture_gaps_directive_body_kind({
+      directive = json_string(object, "directive", "BodyElementKind"),
+    })
   elseif kind == "action_edge" then
     return M.action_edge_body_kind({
       targets = json_object_list(object, "targets", "BodyElementKind", function(item)
@@ -1072,11 +1131,15 @@ build = function(node_type, value)
     return M.edge_target({
       label = json_string(object, "label", node_type),
       index = json_integer(object, "index", node_type),
+      selector_kind = json_optional_string(object, "selector_kind", node_type),
+      authored_selector = json_optional_scalar(object, "authored_selector", node_type),
     })
   elseif node_type == "BareEdgeTarget" then
     return M.bare_edge_target({
       label = json_string(object, "label", node_type),
       index = json_optional_integer(object, "index", node_type),
+      selector_kind = json_optional_string(object, "selector_kind", node_type),
+      authored_selector = json_optional_scalar(object, "authored_selector", node_type),
     })
   elseif node_type == "FluentCall" then
     return M.fluent_call({
@@ -1098,6 +1161,7 @@ build = function(node_type, value)
     })
   elseif node_type == "SpecFile" then
     return M.spec_file({
+      source_id = json_optional_string(object, "source_id", node_type),
       functions = json_object_list(object, "functions", node_type, function(item)
         return build("FunctionDefinition", item)
       end, true),

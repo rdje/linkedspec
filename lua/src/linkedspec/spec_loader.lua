@@ -214,6 +214,13 @@ local function is_absolute_path(value)
   return value:match("^[A-Za-z]:[\\/]") ~= nil or value:sub(1, 2) == "\\\\"
 end
 
+local function logical_source_id(request_value)
+  if request_value.kind ~= "path" or not is_absolute_path(request_value.requested) then
+    return request_value.requested
+  end
+  return request_value.requested:match("([^/\\]+)$") or request_value.requested
+end
+
 local function candidates(request_value, options)
   local raw = {}
   if request_value.kind == "path" then
@@ -437,7 +444,7 @@ local function load_and_compile_spec(request_input, options_input, emitter)
       return function_parser.parse_spec_with_staged_user_function_definitions(
         loaded.source_text,
         nil,
-        { trace = emitter }
+        { trace = emitter, source_id = logical_source_id(request_value) }
       )
     end
   )

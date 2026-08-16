@@ -2,32 +2,32 @@
 
 ## Current Activity
 
-- Atomic 245 landed cleanly at `a6ff2614`; behavior-free shared PUC-Lua/LuaJIT planning leaf
-  `INTER-MATCH-GAP-CAPTURE.6.0` is focused-signoff-complete from that exact boundary for intended atomic 246; no push.
-- Exact dual-ABI probes prove numeric-only selector success, raw-invalid named declarations/selectors/directive,
-  unsupported future runtime helpers, `LS` before selection, and legacy rule-slot events after accepted action/
-  target execution before `LE`.
-- The five frozen leaves own authored/static/compiled metadata plus dormancy; one shared recognition-frame/token
-  native path; normalized/descriptor/generated-v2 carriers; independently loaded emitted proof; then existing-
-  primary/nine-role admission.
-- Complete Lua baseline is green at 177 package tests per ABI, primary 66, corpus 105, and storage 18 owners with
-  three dual-ABI native modules. Current gap governance stays 5/4/58 with two exact Lua skips.
-- This leaf moves no Lua behavior, generated format, legacy event semantics, rollout, capability, typed-source,
-  facade/schema/MCP/CLI/README surface, or public claim.
+- Atomic 246 landed cleanly at `5089a360`; shared PUC-Lua/LuaJIT metadata leaf
+  `INTER-MATCH-GAP-CAPTURE.6.1` is focused-signoff-complete from that exact boundary for intended atomic 247; no push.
+- Both ABIs now carry path-opaque logical source identity, pinned-Unicode named/anonymous declarations,
+  selector/directive provenance, exact static diagnostics, and compiled slot/directive/five-field identity.
+- The permanent 178-assertion consumer passes explicitly on PUC Lua and LuaJIT. Ten checker-local dormancy
+  mutations keep ordinary, canonical, rooted, and facade discovery absent for both pending runtime rows.
+- Complete Lua remains green at 177 package tests per ABI, primary 66, corpus 105, and storage 18 owners with
+  three dual-ABI native modules. Rooted governance stays 5/4/58 and ends in two exact Lua skips.
+- Live gap state/accessors, descriptors, generated execution, independently loaded emission, primary proof,
+  admission, and every outward surface remain owned by `.6.2-.6.5`.
 
 ## Latest Completed Slice
 
-- `.6.0` freezes exact shared dual-ABI event/state/carrier/emitted/primary ownership across `.6.1-.6.5` without
-  changing behavior. Complete Lua, rooted gap, recognition, duplicate-slot, typed-source, generated-source,
-  rendered book 79/14,908, Knowledge 839/7,093, bounded histories, and all nine doctrines pass.
+- `.6.1` adds the exact shared Lua authored/static/compiled layer and dormant final consumer without live gap
+  behavior or rollout movement. Explicit 178x2, complete Lua, rooted gap, recognition, duplicate-slot,
+  typed-source, generated-source, storage, rendered book, Knowledge, histories, and doctrines pass.
 
 ## Next Action
 
-- Commit intended atomic 246, clear the brief, prove clean handoff, then
-  activate `.6.1` task-tree-first for shared authored/static/compiled metadata and consumer dormancy.
+- Commit intended atomic 247, clear the brief, prove clean handoff, then activate `.6.2` task-tree-first for one
+  shared recognition-invocation/token native gap state and lifecycle path.
 
 ## Recent Completions
 
+- `2026-08-16` — `.6.1` completed exact shared Lua authored/static/compiled metadata and ten dormancy guards from
+  clean `5089a360` for intended atomic 247 without runtime or rollout movement.
 - `2026-08-16` — `.6.0` froze the behavior-free shared Lua five-leaf plan from clean `a6ff2614` for intended atomic 246.
 - `2026-08-16` — `.5.5` and parent `.5` landed cleanly as atomic 245 at `a6ff2614` with promoted canonical receipt.
 - `2026-08-16` — `.5.5` reused Julia's primary adapter, admitted the exact nine-role consumer at 5/4/58, and
@@ -52,7 +52,6 @@
 - `2026-08-15` — `c234ef9f` landed tiered verification policy `.0` as atomic 235.
 - `2026-08-15` — `.4.1` completed exact Dart authored/static/compiled gap metadata at `1e6d326d`.
 - `2026-08-15` — `.4.0` landed the behavior-free Dart implementation freeze at `e40de948`.
-- `2026-08-15` — `.3.5` and parent `.3` admitted Rust at 3/6/56 in atomic 232 `2800e7c3`.
 
 ## History
 

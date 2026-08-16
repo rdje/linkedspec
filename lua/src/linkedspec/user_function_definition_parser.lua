@@ -223,7 +223,7 @@ function M.parse_spec_with_staged_user_function_definitions(source, parser, opti
       return staged_parser_registry.parse_spec_with_staged_user_function_definition_asts(
         source,
         nodes,
-        { trace = emitter }
+        { trace = emitter, source_id = options and options.source_id or nil }
       )
     end,
     function(spec)

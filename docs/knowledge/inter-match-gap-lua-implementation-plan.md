@@ -20,9 +20,9 @@ answers:
   - "how does Lua gap admission change rollout and mutations"
   - "is Lua capture_gaps implemented now"
 date: 2026-08-16
-status: behavior-free implementation plan frozen; PUC Lua and LuaJIT remain pending at gap rollout 5 complete / 4 pending
+status: authored/static/compiled metadata implemented under .6.1; live PUC Lua and LuaJIT rollout remains pending at 5 complete / 4 pending
 tags: [lua, luajit, capture, segmentation, named-slots, recognition, source-location, generated-source, emitted-source, primary, plan]
-evidence: "INTER-MATCH-GAP-CAPTURE.6.0 proves identical PUC-Lua/LuaJIT baselines: numeric Rule[0] works; named declarations/selectors and capture_gaps are raw invalid body syntax; entry_slot/gap_span/gap_text/gap_kind are unsupported runtime helpers; legacy rule-slot events fire after an accepted edge action and before LE; repeated execution performs LS before selection; normalized SpecFile JSON, descriptors, generated-v2 emission, recognition invocation/token state, immutable input SourceAuthority, primary CLI, and exact 18-owner dual-ABI storage are reusable. It freezes .6.1-.6.5 without changing Lua behavior, gap rollout 5/4/58, generated format 2, or outward surfaces."
+evidence: "INTER-MATCH-GAP-CAPTURE.6.1 implements one shared PUC-Lua/LuaJIT authored/static/compiled path: SpecFile.source_id defaults to inline and retains path-opaque caller identity through direct/staged/loaded/normalized/emitted carriers; named/anonymous declarations reuse the pinned Unicode-17 scanner; selectors and the dedicated directive retain provenance; compiled JSON adds slot/directive/five-field identity while descriptors and legacy refs stay unchanged. The explicit dormant consumer passes 178 assertions per ABI and ten checker mutations keep ordinary/canonical/rooted execution absent. Complete Lua remains 177 tests per ABI, primary 66, corpus 105, storage 18 owners/three native modules; gap stays 5/4/58."
 reverify: "bash tools/run_lua_local.sh && bash tools/check_inter_match_gap_capture_six_runtime.sh && bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && bash tools/run_python_project_data.sh tools/check_duplicate_regex_slot_identity_contract.py && perl tools/check_generated_source_contract.pl && bash tools/test_lua_project_data_storage.sh"
 ---
 
@@ -70,6 +70,26 @@ retain their current `LS`-before-selection order.
    canonical, and rooted registration are each exact once per ABI. Only `puc_lua_runtime` and `luajit_runtime`
    advance, taking governance from 5/4/58 to 7/2/60 by appending their two runtime regressions. Ten dormancy
    mutations become sixteen admission mutations; recurring and public rows remain pending for `.7`.
+
+## Current `.6.1` boundary
+
+The first implementation leaf is complete. `SpecFile.source_id` is the sole logical static-source carrier and
+defaults to `inline` for legacy constructors/JSON. Direct parsing, both staged layers, normalized JSON, and the
+effective spec embedded by source emission retain it. A relative loaded request retains caller spelling; an
+absolute request reduces to its basename, so resolved repository or scratch paths cannot leak into compiled
+provenance.
+
+Named and anonymous regex declarations now share one authored order on both Lua ABIs. The parser retains
+unindexed, numeric, named, and malformed selector authorship; validation resolves names exactly and reports the
+neutral source-aware declaration, selector, directive, eligibility, and legacy-conflict boundaries. Compiled
+rule JSON adds ordered slot rows and nullable directive evidence, while compiled edge JSON adds the five-field
+selector identity. Descriptor action edges, `resolved_edges`, `{label,idx}` dependency refs, rule-slot events,
+generated format 2, and `{label,family}` plans stay byte/shape compatible.
+
+The final consumer exists at its permanent path and passes 178 assertions on both PUC Lua and LuaJIT when called
+explicitly. Ten checker-local dormancy mutations require its identity and metadata boundaries while proving it is
+absent from ordinary Lua discovery, canonical CI, both rooted runtime routes, and the public facade. Live gap
+state and accessors remain unimplemented until `.6.2`; neither Lua rollout row is admitted.
 
 ## Existing authorities to preserve
 

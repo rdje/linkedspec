@@ -50,6 +50,8 @@ local ACTION_EDGE_MT = type_metatable("CompiledActionEdge")
 local BLIND_EDGE_MT = type_metatable("CompiledBlindEdge")
 local ACTION_PAYLOAD_MT = type_metatable("CompiledActionPayload")
 local RULE_SLOT_EVENT_MT = type_metatable("CompiledRuleSlotEvent")
+local REGEX_SLOT_MT = type_metatable("CompiledRegexSlot")
+local CAPTURE_GAPS_MT = type_metatable("CompiledCaptureGaps")
 local DEPENDENCY_ENTRY_MT = type_metatable("CompiledDependencyRegexEntry")
 local DEPENDENCY_STATE_MT = type_metatable("CompiledDependencyRegexState")
 local DESCRIPTOR_STATE_MT = type_metatable("CompiledDescriptorState")
@@ -189,14 +191,29 @@ local function rule_slot_event(rule_label, element, regex_index)
   }, RULE_SLOT_EVENT_MT)
 end
 
-local function compile_rule(rule, registry)
+local function target_slot_id(rules_by_label, label, index)
+  local target_rule = rules_by_label[label]
+  if target_rule == nil then return nil end
+  local regex_index = 0
+  for _, element in ipairs(target_rule.body) do
+    if spec_ast.node_type(element.kind) == "RegexBodyElementKind" then
+      if regex_index == index then return element.kind.slot_id end
+      regex_index = regex_index + 1
+    end
+  end
+  return nil
+end
+
+local function compile_rule(rule, registry, rules_by_label, source_id)
   local regex_patterns = {}
+  local regex_slots = {}
   local dependency_refs = {}
   local action_edges = {}
   local blind_edges = {}
   local lifecycle_action_payloads = {}
   local plain_action_payloads = {}
   local rule_slot_events = {}
+  local capture_gaps = nil
   local last_regex_line = nil
 
   for _, element in ipairs(rule.body) do
@@ -204,7 +221,20 @@ local function compile_rule(rule, registry)
     local node_type = spec_ast.node_type(kind)
     if node_type == "RegexBodyElementKind" then
       regex_patterns[#regex_patterns + 1] = kind.pattern
+      regex_slots[#regex_slots + 1] = setmetatable({
+        regex_index = #regex_slots,
+        slot_id = kind.slot_id,
+        source_id = source_id,
+        line = element.line,
+      }, REGEX_SLOT_MT)
       last_regex_line = element.line
+    elseif node_type == "CaptureGapsDirectiveBodyElementKind" then
+      capture_gaps = setmetatable({
+        enabled = true,
+        directive = kind.directive,
+        source_id = source_id,
+        line = element.line,
+      }, CAPTURE_GAPS_MT)
     elseif node_type == "ActionEdgeBodyElementKind" then
       local has_parent_regex = last_regex_line == element.line and #regex_patterns > 0
       local regex_index = has_parent_regex and (#regex_patterns - 1) or 0
@@ -218,6 +248,9 @@ local function compile_rule(rule, registry)
           targets = { ref },
           regex_index = regex_index,
           child_regex_index = target.index,
+          selector_kind = target.selector_kind,
+          authored_selector = target.authored_selector,
+          target_slot_id = target_slot_id(rules_by_label, target.label, target.index),
           has_parent_regex = has_parent_regex,
           code = kind.code,
           fluent_chain = copy_list(kind.fluent_chain),
@@ -266,6 +299,9 @@ local function compile_rule(rule, registry)
             targets = { ref },
             regex_index = regex_index,
             child_regex_index = child_regex_index,
+            selector_kind = target.selector_kind,
+            authored_selector = target.authored_selector,
+            target_slot_id = target_slot_id(rules_by_label, target.label, child_regex_index),
             has_parent_regex = has_parent_regex,
             code = kind.code,
             fluent_chain = copy_list(kind.fluent_chain),
@@ -307,6 +343,8 @@ local function compile_rule(rule, registry)
     header = rule.header,
     mode_metadata = mode_metadata(rule.header),
     regex_patterns = regex_patterns,
+    regex_slots = regex_slots,
+    capture_gaps = capture_gaps,
     dependency_refs = dependency_refs,
     action_edges = action_edges,
     blind_edges = blind_edges,
@@ -324,6 +362,9 @@ local function copy_action_edge(edge, regex_index)
     targets = copy_list(edge.targets),
     regex_index = regex_index,
     child_regex_index = edge.child_regex_index,
+    selector_kind = edge.selector_kind,
+    authored_selector = edge.authored_selector,
+    target_slot_id = edge.target_slot_id,
     has_parent_regex = edge.has_parent_regex,
     code = edge.code,
     fluent_chain = copy_list(edge.fluent_chain),
@@ -337,6 +378,8 @@ local function copy_compiled_rule(rule, regex_patterns, action_edges)
     header = rule.header,
     mode_metadata = rule.mode_metadata,
     regex_patterns = regex_patterns or copy_list(rule.regex_patterns),
+    regex_slots = copy_list(rule.regex_slots),
+    capture_gaps = rule.capture_gaps,
     dependency_refs = copy_list(rule.dependency_refs),
     action_edges = action_edges or copy_list(rule.action_edges),
     blind_edges = copy_list(rule.blind_edges),
@@ -726,6 +769,8 @@ function M.compile_spec(spec, options)
 
       local registry = user_function_registry.from_spec(source, { trace = options.trace })
       local definition_order = {}
+      local source_rules_by_label = {}
+      for _, rule in ipairs(source.rules) do source_rules_by_label[rule.header.label] = rule end
       local rules_by_label = {}
       local redefined_rule_labels = {}
       local redefined_seen = {}
@@ -736,7 +781,7 @@ function M.compile_spec(spec, options)
           redefined_seen[label] = true
           redefined_rule_labels[#redefined_rule_labels + 1] = label
         end
-        rules_by_label[label] = compile_rule(rule, registry)
+        rules_by_label[label] = compile_rule(rule, registry, source_rules_by_label, source.source_id)
         trace_support.decision(
           options.trace,
           "lua_compiler:compile_spec:rule",
@@ -755,6 +800,7 @@ function M.compile_spec(spec, options)
         "rule_count=" .. #compiled_rule_order
       )
       local compiled = setmetatable({
+        source_id = source.source_id,
         definition_order = definition_order,
         compiled_rule_order = compiled_rule_order,
         rules_by_label = resolved,
@@ -890,7 +936,7 @@ local function payload_to_json(payload)
   return result
 end
 
-local function action_edge_to_json(edge)
+local function action_edge_to_json(edge, include_slot_identity)
   local result = json.harray({
     line = edge.line,
     source = edge.source,
@@ -900,9 +946,33 @@ local function action_edge_to_json(edge)
     has_parent_regex = edge.has_parent_regex,
     fluent_chain = typed_array(edge.fluent_chain, spec_ast.to_json),
   })
+  if include_slot_identity then
+    result.selector_kind = edge.selector_kind
+    result.authored_selector = edge.authored_selector == nil and json.null or edge.authored_selector
+    result.target_rule = edge.targets[1].label
+    result.target_slot_id = edge.target_slot_id == nil and json.null or edge.target_slot_id
+  end
   if edge.code then result.code = edge.code end
   if edge.action_payload then result.action_payload = payload_to_json(edge.action_payload) end
   return result
+end
+
+local function regex_slot_to_json(slot)
+  return json.harray({
+    regex_index = slot.regex_index,
+    slot_id = slot.slot_id == nil and json.null or slot.slot_id,
+    source_id = slot.source_id,
+    line = slot.line,
+  })
+end
+
+local function capture_gaps_to_json(capture_gaps)
+  return json.harray({
+    enabled = capture_gaps.enabled,
+    directive = capture_gaps.directive,
+    source_id = capture_gaps.source_id,
+    line = capture_gaps.line,
+  })
 end
 
 local function blind_edge_to_json(edge)
@@ -936,11 +1006,15 @@ local function rule_to_json(rule)
     re = typed_array(rule.regex_patterns),
     dependency_refs = typed_array(rule.dependency_refs, dependency_ref_to_json),
     mode_metadata = mode_metadata_to_json(rule.mode_metadata),
-    action_edges = typed_array(rule.action_edges, action_edge_to_json),
+    action_edges = typed_array(rule.action_edges, function(edge)
+      return action_edge_to_json(edge, true)
+    end),
     blind_edges = typed_array(rule.blind_edges, blind_edge_to_json),
     lifecycle_action_payloads = typed_array(rule.lifecycle_action_payloads, payload_to_json),
     plain_action_payloads = typed_array(rule.plain_action_payloads, payload_to_json),
     rule_slot_events = typed_array(rule.rule_slot_events, rule_slot_event_to_json),
+    regex_slots = typed_array(rule.regex_slots, regex_slot_to_json),
+    capture_gaps = rule.capture_gaps == nil and json.null or capture_gaps_to_json(rule.capture_gaps),
     body = typed_array(rule.body_elements, spec_ast.to_json),
   })
 end
@@ -1001,7 +1075,9 @@ local function descriptor_rule_to_json(rule)
     handler = json.harray({ kind = "lua_interpreter_rule", label = rule.label, status = "compiled_state_only" }),
     re = typed_array(rule.regex_patterns),
     dependency_refs = typed_array(rule.dependency_refs, dependency_ref_to_json),
-    action_edges = typed_array(rule.action_edges, action_edge_to_json),
+    action_edges = typed_array(rule.action_edges, function(edge)
+      return action_edge_to_json(edge, false)
+    end),
     blind_edges = typed_array(rule.blind_edges, blind_edge_to_json),
     lifecycle_action_payloads = typed_array(rule.lifecycle_action_payloads, payload_to_json),
     plain_action_payloads = typed_array(rule.plain_action_payloads, payload_to_json),
@@ -1050,6 +1126,7 @@ local function compiled_spec_to_json(compiled)
   end
   return json.harray({
     kind = "compiled_spec_state",
+    source_id = compiled.source_id,
     definition_order = typed_array(compiled.definition_order),
     compiled_rule_order = typed_array(compiled.compiled_rule_order),
     rules_by_label = rules,
@@ -1097,10 +1174,12 @@ function M.to_json(value)
   if node_type == "CompiledRule" then return rule_to_json(value) end
   if node_type == "CompiledRuleModeMetadata" then return mode_metadata_to_json(value) end
   if node_type == "DependencyRef" then return dependency_ref_to_json(value) end
-  if node_type == "CompiledActionEdge" then return action_edge_to_json(value) end
+  if node_type == "CompiledActionEdge" then return action_edge_to_json(value, true) end
   if node_type == "CompiledBlindEdge" then return blind_edge_to_json(value) end
   if node_type == "CompiledActionPayload" then return payload_to_json(value) end
   if node_type == "CompiledRuleSlotEvent" then return rule_slot_event_to_json(value) end
+  if node_type == "CompiledRegexSlot" then return regex_slot_to_json(value) end
+  if node_type == "CompiledCaptureGaps" then return capture_gaps_to_json(value) end
   if node_type == "CompiledDependencyRegexEntry" then return dependency_entry_to_json(value) end
   if node_type == "CompiledDependencyRegexState" then
     return json.harray({

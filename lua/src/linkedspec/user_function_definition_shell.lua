@@ -775,7 +775,7 @@ function M.parse_spec_with_asts(source, definition_nodes, options)
       local ok, rule_spec = pcall(
         spec_parser.parse_spec,
         projection.stripped_source,
-        { trace = options.trace }
+        { trace = options.trace, source_id = options.source_id }
       )
       if not ok then
         if spec_parser.is_parse_error(rule_spec) then
@@ -786,7 +786,11 @@ function M.parse_spec_with_asts(source, definition_nodes, options)
         end
         error(rule_spec, 0)
       end
-      return ast.spec_file({ functions = projection.functions, rules = rule_spec.rules })
+      return ast.spec_file({
+        source_id = rule_spec.source_id,
+        functions = projection.functions,
+        rules = rule_spec.rules,
+      })
     end,
     function(spec)
       return "ok functions=" .. #spec.functions .. " rules=" .. #spec.rules

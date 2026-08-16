@@ -519,24 +519,34 @@ local function parse_attached_when(lines, cursor, rest)
 end
 
 local function parse_regex_element(text, line_number)
+  local regex_position = 1
+  local slot_id = nil
   if text:sub(1, 1) ~= "/" then
-    return nil
+    local equals_position = text:find("=", 1, true)
+    if not equals_position then return nil end
+    slot_id = trim(text:sub(1, equals_position - 1))
+    if slot_id == "" then return nil end
+    regex_position = skip_horizontal_spaces(text, equals_position + 1)
+    if text:sub(regex_position, regex_position) ~= "/" then return nil end
   end
-  local close_position = scan_regex(text, 1)
+  local close_position = scan_regex(text, regex_position)
   if not close_position then
     return nil
   end
   local slash_position = close_position - 1
-  while slash_position > 1 and text:sub(slash_position, slash_position):match("[A-Za-z]") do
+  while slash_position > regex_position and text:sub(slash_position, slash_position):match("[A-Za-z]") do
     slash_position = slash_position - 1
   end
-  if text:sub(slash_position, slash_position) ~= "/" then
+  if slash_position <= regex_position or text:sub(slash_position, slash_position) ~= "/" then
     return nil
   end
   local full_match = text:sub(1, slash_position)
   return {
     element = ast.body_element({
-      kind = ast.regex_body_kind({ pattern = text:sub(2, slash_position - 1) }),
+      kind = ast.regex_body_kind({
+        pattern = text:sub(regex_position + 1, slash_position - 1),
+        slot_id = slot_id,
+      }),
       source = full_match,
       line = line_number,
     }),
@@ -556,10 +566,55 @@ local function starts_lifecycle_remainder(text)
 end
 
 local function starts_split_remainder(text)
-  return text:match("^@[ \t]*capture_slice") ~= nil or
+  return text:match("^@[ \t]*capture_gaps") ~= nil or
+    text:match("^@[ \t]*capture_slice") ~= nil or
     text:match("^@[ \t]*capture_from_here") ~= nil or
     text:match("^@[ \t]*move_pos") ~= nil or
     text:match("^@[ \t]*mark[ \t]*%([ \t]*[A-Za-z_][A-Za-z0-9_]*[ \t]*%)") ~= nil
+end
+
+local function parse_selector(text, label_end, unindexed_value)
+  local position = skip_spaces(text, label_end)
+  if text:sub(position, position) ~= "[" then
+    return {
+      index = unindexed_value,
+      selector_kind = "unindexed",
+      authored_selector = nil,
+      position = label_end,
+    }
+  end
+
+  local closing = text:find("]", position + 1, true)
+  if closing then
+    local selector = trim(text:sub(position + 1, closing - 1))
+    if selector:match("^%d+$") then
+      return {
+        index = tonumber(selector),
+        selector_kind = "numeric",
+        authored_selector = tonumber(selector),
+        position = closing + 1,
+      }
+    end
+    return {
+      index = unindexed_value,
+      selector_kind = selector == "" and "invalid" or "named",
+      authored_selector = selector,
+      position = closing + 1,
+    }
+  end
+
+  local selector_end = position + 1
+  while selector_end <= #text do
+    local byte = text:byte(selector_end)
+    if byte == 0x20 or byte == 0x09 or byte == 0x7B or byte == 0x2E then break end
+    selector_end = selector_end + 1
+  end
+  return {
+    index = unindexed_value,
+    selector_kind = "invalid",
+    authored_selector = trim(text:sub(position + 1, selector_end - 1)),
+    position = selector_end,
+  }
 end
 
 local function starts_conditional_remainder(text)
@@ -609,27 +664,17 @@ local function parse_action_prefix(text)
     end
     labels[#labels + 1] = label
   end
-  local label_end = position
-  position = skip_spaces(text, position)
-  local target_index = 0
-  if text:sub(position, position) == "[" then
-    local closing = text:find("]", position + 1, true)
-    if not closing then
-      return nil
-    end
-    local digits = text:sub(position + 1, closing - 1)
-    if not digits:match("^%d+$") then
-      return nil
-    end
-    target_index = tonumber(digits)
-    position = closing + 1
-  else
-    position = label_end
-  end
+  local selector = parse_selector(text, position, 0)
+  position = selector.position
   if not has_valid_edge_remainder(text, position) then return nil end
   local targets = {}
   for index, target_label in ipairs(labels) do
-    targets[index] = ast.edge_target({ label = target_label, index = target_index })
+    targets[index] = ast.edge_target({
+      label = target_label,
+      index = selector.index,
+      selector_kind = selector.selector_kind,
+      authored_selector = selector.authored_selector,
+    })
   end
   return {
     targets = targets,
@@ -658,20 +703,17 @@ local function parse_bare_prefix(text)
     labels[#labels + 1] = label
   end
 
-  position = skip_spaces(text, position)
-  local target_index = nil
-  if text:sub(position, position) == "[" then
-    local closing = text:find("]", position + 1, true)
-    if not closing then return nil end
-    local digits = text:sub(position + 1, closing - 1)
-    if not digits:match("^%d+$") then return nil end
-    target_index = tonumber(digits)
-    position = closing + 1
-  end
+  local selector = parse_selector(text, position, nil)
+  position = selector.position
 
   local targets = {}
   for index, target_label in ipairs(labels) do
-    targets[index] = ast.bare_edge_target({ label = target_label, index = target_index })
+    targets[index] = ast.bare_edge_target({
+      label = target_label,
+      index = selector.index,
+      selector_kind = selector.selector_kind,
+      authored_selector = selector.authored_selector,
+    })
   end
   return {
     targets = targets,
@@ -876,6 +918,20 @@ local function parse_single_element(text, lines, cursor, line_number, allow_bare
         line = line_number,
       }),
       remainder = lifecycle_rest,
+      advanced = false,
+    }
+  end
+
+  local capture_end = text:match("^@[ \t]*capture_gaps()")
+  if capture_end and not is_word_byte(text:byte(capture_end)) then
+    local capture_full = text:sub(1, capture_end - 1)
+    return {
+      element = ast.body_element({
+        kind = ast.capture_gaps_directive_body_kind({ directive = capture_full }),
+        source = capture_full,
+        line = line_number,
+      }),
+      remainder = text:sub(capture_end),
       advanced = false,
     }
   end
@@ -1119,6 +1175,12 @@ function M.parse_spec(source, options)
   end
   options = options or {}
   if type(options) ~= "table" then parse_fail(1, "parse options must be a table") end
+  local source_id = options.source_id == nil and "inline" or options.source_id
+  if type(source_id) ~= "string" or source_id == "" then
+    parse_fail(1, "source_id must be a nonempty string")
+  elseif not json.validate_utf8(source_id) then
+    parse_fail(1, "source_id must be valid UTF-8")
+  end
   if options.trace ~= nil and not trace.is_trace_emitter(options.trace) then
     parse_fail(1, "trace must be a LinkedSpecTraceEmitter")
   end
@@ -1173,7 +1235,7 @@ function M.parse_spec(source, options)
         true,
         "rule_count=" .. #rules
       )
-      return ast.spec_file({ rules = rules })
+      return ast.spec_file({ source_id = source_id, rules = rules })
     end,
     function(spec) return "ok rule_count=" .. #spec.rules end
   )

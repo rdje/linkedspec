@@ -134,6 +134,14 @@ record. Compiled action edges retain unindexed/numeric/named authorship, resolve
 and source provenance. Legacy descriptor action edges, `resolved_edges`, and `{label,idx}` dependency references
 remain unchanged; detached descriptor projections stay owned by `.5.3`.
 
+Shared PUC Lua/LuaJIT compiled state now carries the same authored layer. `SpecFile.source_id` defaults to
+`inline`, survives both staged parser layers and normalized JSON, and uses path-opaque caller identity for loaded
+specs. Each rule owns ordered `regex_slots` rows and a nullable `capture_gaps` record; compiled action-edge JSON
+adds `selector_kind`, `authored_selector`, `target_rule`, resolved `child_regex_index`, and nullable
+`target_slot_id`. The existing descriptor deliberately projects the legacy action-edge shape and unchanged
+`resolved_edges`/`{label,idx}` references until `.6.3`. Emitted source embeds the normalized source id without
+changing format 2 or its `{label,family}` plan.
+
 The Julia backend now implements the same narrow staged provider before compiled state is built. Its public path is:
 
 ```julia

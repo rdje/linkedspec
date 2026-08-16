@@ -404,7 +404,11 @@ function M.stitch_function_body_ast(spec, job_id, body_ast)
     end
   end
   if not found then fail("function body parse job '" .. job_id .. "' not found") end
-  return spec_ast.spec_file({ functions = functions, rules = spec.rules })
+  return spec_ast.spec_file({
+    source_id = spec.source_id,
+    functions = functions,
+    rules = spec.rules,
+  })
 end
 
 local function recursion_cycle(active_names, name)

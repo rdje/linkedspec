@@ -145,6 +145,237 @@ local function check_duplicate_rule_labels(spec)
   end
 end
 
+local function gap_fields(spec, rule, element, extra)
+  local fields = json.harray({
+    rule_label = rule.header.label,
+    source_id = spec.source_id,
+    line = element.line,
+  })
+  for key, value in pairs(extra or {}) do fields[key] = value end
+  return fields
+end
+
+local function check_regex_slot_declarations(spec)
+  for _, rule in ipairs(spec.rules) do
+    local first_lines = {}
+    for _, element in ipairs(rule.body) do
+      local kind = element.kind
+      if ast.node_type(kind) == "RegexBodyElementKind" and kind.slot_id ~= nil then
+        local slot_id = kind.slot_id
+        if not is_rule_label(slot_id) or slot_id:match("^%d+$") then
+          validation_fail(
+            "rule '" .. rule.header.label .. "' has invalid regex slot name '" .. slot_id .. "'",
+            "regex_slot_name_invalid",
+            "parse_declaration",
+            gap_fields(spec, rule, element, { slot_name = slot_id })
+          )
+        elseif first_lines[slot_id] ~= nil then
+          validation_fail(
+            "rule '" .. rule.header.label .. "' duplicates regex slot name '" .. slot_id .. "'",
+            "regex_slot_duplicate_name",
+            "resolve_declaration",
+            gap_fields(spec, rule, element, {
+              slot_name = slot_id,
+              first_line = first_lines[slot_id],
+            })
+          )
+        end
+        first_lines[slot_id] = first_lines[slot_id] or element.line
+      end
+    end
+  end
+end
+
+local function rule_regex_slots(rule)
+  local count = 0
+  local names = {}
+  for _, element in ipairs(rule.body) do
+    if ast.node_type(element.kind) == "RegexBodyElementKind" then
+      if element.kind.slot_id ~= nil then names[element.kind.slot_id] = count end
+      count = count + 1
+    end
+  end
+  return count, names
+end
+
+local function check_selector(spec, owner, element, target, rules_by_label)
+  if target.selector_kind == "invalid" or
+      (target.selector_kind == "named" and not is_rule_label(target.authored_selector)) then
+    validation_fail(
+      "rule '" .. owner.header.label .. "' has malformed selector for rule '" .. target.label .. "'",
+      "regex_slot_selector_invalid",
+      "parse_selector",
+      gap_fields(spec, owner, element, {
+        target_rule = target.label,
+        authored_selector = target.authored_selector or "",
+      })
+    )
+  end
+  local target_rule = rules_by_label[target.label]
+  if target_rule == nil then return end
+  local slot_count, names = rule_regex_slots(target_rule)
+  if target.selector_kind == "named" then
+    local resolved_index = names[target.authored_selector]
+    if resolved_index == nil then
+      validation_fail(
+        "rule '" .. owner.header.label .. "' references unknown regex slot '" ..
+          target.authored_selector .. "' in rule '" .. target.label .. "'",
+        "regex_slot_unknown_name",
+        "resolve_selector",
+        gap_fields(spec, owner, element, {
+          target_rule = target.label,
+          authored_selector = target.authored_selector,
+        })
+      )
+    end
+    target.index = resolved_index
+  elseif target.selector_kind == "unindexed" then
+    target.index = 0
+  end
+  if target.index < 0 or target.index >= slot_count then
+    validation_fail(
+      "rule '" .. owner.header.label .. "' references rule '" .. target.label ..
+        "' regex slot " .. target.index .. ", but that rule has " .. slot_count .. " regex slot(s)",
+      "regex_slot_index_out_of_range",
+      "resolve_selector",
+      gap_fields(spec, owner, element, {
+        target_rule = target.label,
+        regex_index = target.index,
+        regex_count = slot_count,
+      })
+    )
+  end
+end
+
+local function check_and_resolve_selectors(spec)
+  local rules_by_label = {}
+  for _, rule in ipairs(spec.rules) do rules_by_label[rule.header.label] = rule end
+  for _, rule in ipairs(spec.rules) do
+    for _, element in ipairs(rule.body) do
+      local kind = element.kind
+      local node_type = ast.node_type(kind)
+      if node_type == "ActionEdgeBodyElementKind" then
+        for _, target in ipairs(kind.targets) do
+          check_selector(spec, rule, element, target, rules_by_label)
+        end
+      elseif node_type == "BareEdgeBodyElementKind" and not ast.rule_mode_is_and(rule.header.mode) then
+        for _, target in ipairs(kind.targets) do
+          check_selector(spec, rule, element, target, rules_by_label)
+        end
+      end
+    end
+  end
+end
+
+local CAPTURE_GAPS_ELIGIBLE_MODES = {
+  Default = true,
+  Or = true,
+  OrPlus = true,
+  OrBounded = true,
+  Plus = true,
+}
+
+local function capture_execution_shape(mode_name)
+  if mode_name == "Default" then return "default_scan_loop" end
+  if mode_name == "Or" or mode_name == "OrPlus" or mode_name == "OrBounded" or
+      mode_name == "Plus" then
+    return "repeat_loop"
+  end
+  return "single_match"
+end
+
+local function capture_edge_ownership(rule)
+  local has_action = false
+  local has_blind = false
+  local has_local_adjacency = false
+  local last_regex_line = nil
+  for _, element in ipairs(rule.body) do
+    local node_type = ast.node_type(element.kind)
+    if node_type == "RegexBodyElementKind" then
+      last_regex_line = element.line
+    elseif node_type == "ActionEdgeBodyElementKind" then
+      has_action = true
+      if last_regex_line == element.line then has_local_adjacency = true end
+      last_regex_line = nil
+    elseif node_type == "BlindEdgeBodyElementKind" then
+      has_blind = true
+      last_regex_line = nil
+    elseif node_type == "BareEdgeBodyElementKind" then
+      if ast.rule_mode_is_and(rule.header.mode) then
+        has_blind = true
+      else
+        has_action = true
+        if last_regex_line == element.line then has_local_adjacency = true end
+      end
+      last_regex_line = nil
+    elseif node_type ~= "CaptureGapsDirectiveBodyElementKind" and
+        node_type ~= "SplitMarkerBodyElementKind" then
+      last_regex_line = nil
+    end
+  end
+  if has_action and has_blind then return "mixed" end
+  if has_local_adjacency then return "local_adjacency" end
+  if has_action then return "action" end
+  if has_blind then return "blind" end
+  return "none"
+end
+
+local function check_capture_gaps_directives(spec)
+  for _, rule in ipairs(spec.rules) do
+    local first_directive = nil
+    local legacy_marker = nil
+    for _, element in ipairs(rule.body) do
+      local node_type = ast.node_type(element.kind)
+      if node_type == "CaptureGapsDirectiveBodyElementKind" then
+        if first_directive ~= nil then
+          validation_fail(
+            "rule '" .. rule.header.label .. "' contains duplicate @capture_gaps directives",
+            "capture_gaps_duplicate_directive",
+            "parse_directive",
+            gap_fields(spec, rule, element, { first_line = first_directive.line })
+          )
+        end
+        first_directive = element
+      elseif node_type == "SplitMarkerBodyElementKind" and
+          element.kind.marker:match("^@[ \t]*mark") == nil then
+        legacy_marker = legacy_marker or element
+      end
+    end
+    if first_directive ~= nil then
+      if legacy_marker ~= nil then
+        validation_fail(
+          "rule '" .. rule.header.label .. "' mixes @capture_gaps with legacy marker '" ..
+            legacy_marker.kind.marker .. "'",
+          "capture_gaps_legacy_marker_conflict",
+          "validate_directive",
+          gap_fields(spec, rule, first_directive, {
+            marker = legacy_marker.kind.marker,
+            marker_line = legacy_marker.line,
+          })
+        )
+      end
+      local mode_name = rule.header.mode.name
+      local family = ast.rule_mode_is_and(rule.header.mode) and "and" or "or_default"
+      local cursor_policy = family == "and" and "consume" or "seek"
+      local edge_ownership = capture_edge_ownership(rule)
+      local execution_shape = capture_execution_shape(mode_name)
+      if not CAPTURE_GAPS_ELIGIBLE_MODES[mode_name] or edge_ownership ~= "action" then
+        validation_fail(
+          "rule '" .. rule.header.label .. "' is not eligible for @capture_gaps",
+          "capture_gaps_rule_ineligible",
+          "validate_directive",
+          gap_fields(spec, rule, first_directive, {
+            family = family,
+            cursor_policy = cursor_policy,
+            edge_ownership = edge_ownership,
+            execution_shape = execution_shape,
+          })
+        )
+      end
+    end
+  end
+end
+
 local function check_duplicate_function_names(spec)
   local seen = {}
   for _, definition in ipairs(spec.functions) do
@@ -308,7 +539,7 @@ local function check_edge_structure(spec)
         end
         if ast.rule_mode_is_and(rule.header.mode) then
           for _, target in ipairs(kind.targets) do
-            if target.index ~= nil then
+            if target.index ~= nil or target.selector_kind ~= "unindexed" then
               validation_fail(
                 "indexed bare edge in AND rule '" .. rule_label .. "' requires explicit action ownership",
                 "bare_edge_index_requires_action",
@@ -559,9 +790,12 @@ function M.validate_spec(spec, options)
       check_at_least_one_rule(spec)
       check_rule_labels(spec)
       check_duplicate_rule_labels(spec)
+      check_regex_slot_declarations(spec)
       check_duplicate_function_names(spec)
       check_function_registry(spec)
       check_raw_body_lines(spec)
+      check_and_resolve_selectors(spec)
+      check_capture_gaps_directives(spec)
       check_edge_structure(spec)
       check_mixed_edges(spec)
       check_edge_targets(spec)
