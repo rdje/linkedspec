@@ -10,6 +10,23 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-16 (`INTER-MATCH-GAP-CAPTURE.6.5` — exact shared Lua admission): activation base is clean atomic 250
+  at `798aeeee`; advancing the contract to 7/2/60 before its checker produces the intended count-drift RED.
+- Compose authorities; do not add another path. The ninth role invokes unchanged `linkedspec.run_primary_cli`
+  with a four-item heterogeneous-separator source and compares exact items plus prefix/interstitial gap text.
+- Treat the neutral nine-role array as executable order. Require exact equality, unique map coverage, once-only
+  completion, and final-set equality; one shared source must pass unchanged on PUC Lua and LuaJIT.
+- Register the permanent consumer exactly once in `lua/test/run.lua`, explicitly once per ABI in canonical CI,
+  and once each in rooted PUC-Lua/LuaJIT order. Checker mutations lock identity, role map, primary use, every
+  registration and multiplicity, rooted order, later public ownership, and facade absence.
+- Only the two Lua runtime rows move: append `puc_lua_runtime_regression` and `luajit_runtime_regression`, yielding
+  7 complete / 2 pending / 60 semantic mutations and sixteen Lua admission mutations. Recurring/public rows and
+  outward surfaces remain `.7`-owned.
+- Focused proof is explicit 392 assertions per ABI (178 metadata + 33 native + 46 carrier + 105 emitted + 30
+  admission), ordinary Lua 178 per ABI, primary 66x2, corpus 105, storage 19/three modules, and rooted neutral /
+  Perl 124 / Rust 1 / Dart 5 / Julia 319 / PUC Lua 392 / LuaJIT 392. This admission/parent closeout requires the
+  exact staged canonical receipt before atomic 251 lands.
+
 - 2026-08-16 (`INTER-MATCH-GAP-CAPTURE.6.4` — shared Lua independently emitted proof): activation base is clean
   atomic 249 at `b7708cde`; adding the permanent workspace owner before updating the oracle yields the exact
   planned RED at 18→19.

@@ -115,10 +115,11 @@ zero-based slot list. A slot name uses the pinned Unicode 17.0.0 `XID_Continue` 
 normalization-sensitive identity; an all-ASCII-digit name is invalid because bracket digits are reserved for
 positional selectors. A name is unique within its rule. Perl, Rust, Dart, and Julia privately admit this surface
 and its gap runtime. Shared PUC Lua/LuaJIT now parse, validate, normalize, compile, and privately execute the same
-native gap lifecycle behind one dormant consumer. Normalized reconstruction, detached compatible descriptors,
+native gap lifecycle through one shared consumer. Normalized reconstruction, detached compatible descriptors,
 same-engine direct/traced generated-v2 execution, and independently loaded emitted-source parity in fresh
-PUC-Lua/LuaJIT children are also proven. Primary admission remains pending, so neither Lua runtime row is
-promoted yet.
+PUC-Lua/LuaJIT children are also proven. Existing-primary parity and the exact nine-role ledger now run once per
+ABI in ordinary, canonical, and rooted routes, so both Lua private runtime rows are admitted at governance 7/2/60.
+Recurring/public admission remains pending.
 
 Named selection survives declaration reorder. Positional selection deliberately does not: if another slot is
 inserted before `word`, `Token[word]` follows the name while `Token[0]` continues to mean the first authored slot.

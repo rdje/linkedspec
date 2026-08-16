@@ -259,6 +259,7 @@ require_tracked_file tools/check_typed_source_location_six_runtime.sh
 require_tracked_file tools/check_recursive_observation_six_runtime.sh
 require_tracked_file tools/check_inter_match_gap_capture_contract.py
 require_tracked_file tools/check_inter_match_gap_capture_six_runtime.sh
+require_tracked_file lua/test/inter_match_gap_capture_contract_test.lua
 require_tracked_file tools/check_recognition_transaction_six_runtime.sh
 require_tracked_file tools/check_semantic_introspection_contract.py
 require_tracked_file tools/check_semantic_introspection_six_runtime.sh
@@ -647,6 +648,12 @@ log "running exact Dart inter-match gap-capture admission consumer"
 
 log "running exact Julia inter-match gap-capture admission consumer"
 bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include("julia/test/inter_match_gap_capture_contract_test.jl")'
+
+log "running exact Lua inter-match gap-capture admission consumer on PUC Lua"
+bash tools/run_lua_project_data.sh puc lua/test/inter_match_gap_capture_contract_test.lua
+
+log "running exact Lua inter-match gap-capture admission consumer on LuaJIT"
+bash tools/run_lua_project_data.sh luajit lua/test/inter_match_gap_capture_contract_test.lua
 
 log "checking backend-neutral recognition transaction and progress contract"
 bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py

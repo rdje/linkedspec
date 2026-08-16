@@ -11,8 +11,9 @@
   at `a6ff2614`; Lua/LuaJIT behavior-free audit/plan leaf `.6.0` landed as atomic 246 at `5089a360`; authored/
   static/compiled metadata and dormant-consumer leaf `.6.1` landed as atomic 247 at `a94c81ed`; native shared
   recognition-state and lifecycle leaf `.6.2` landed as atomic 248 at `4e625a9f`; normalized/descriptor/generated-
-  v2 carrier leaf `.6.3` landed as atomic 249 at `b7708cde`; emitted-source/storage leaf `.6.4` is active from that
-  exact clean boundary for intended atomic 250; no push
+  v2 carrier leaf `.6.3` landed as atomic 249 at `b7708cde`; emitted-source/storage leaf `.6.4` landed as atomic
+  250 at `798aeeee`; primary/admission/parent-closeout leaf `.6.5` is active from that exact clean boundary for
+  intended atomic 251; no push
 - Roadmap lane: `.spec language evolution / lossless segmentation and source preservation`
 - Created: `2026-07-17`
 - Last updated: `2026-08-16`
@@ -65,8 +66,8 @@ orchestration or to raw Perl cursor arithmetic.
     boundary and landed as atomic 246 at `5089a360`; Lua authored/static/compiled metadata and dormant-consumer
     leaf `.6.1` landed as atomic 247 at `a94c81ed`; native shared recognition-state/lifecycle leaf `.6.2` landed
     as atomic 248 at `4e625a9f`; normalized/descriptor/generated-v2 carrier leaf `.6.3` landed as atomic 249 at
-    `b7708cde`; emitted-source/storage leaf `.6.4` is active from that exact clean boundary for intended atomic 250;
-    no push)
+    `b7708cde`; emitted-source/storage leaf `.6.4` landed as atomic 250 at `798aeeee`; primary/admission/parent-
+    closeout leaf `.6.5` is active from that exact clean boundary for intended atomic 251; no push)
   Goal: Recover and modernize lossless inter-match gap capture without semantic drift.
   Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`
 
@@ -1632,17 +1633,18 @@ orchestration or to raw Perl cursor arithmetic.
   Commit: `INTER-MATCH-GAP-CAPTURE.5.5 - admit Julia inter-match gap capture`
 
 - ID: `INTER-MATCH-GAP-CAPTURE.6`
-  Status: `active via focused-signoff-complete .6.4 from clean b7708cde` (2026-08-16; intended atomic 250;
-    independently loaded dual-ABI emitted proof and exact storage 18→19; commit/brief/clean proof remains; no
-    production emitter, primary/admission, rollout, format/plan, or outward movement; no push)
+  Status: `canonical-signoff-complete from clean 798aeeee via .6.5` (2026-08-16; intended atomic 251; exact
+    primary/admission/parent closeout only; recurring/public and outward movement remain `.7`-owned; no push)
   Goal: Implement exact Lua/LuaJIT native/reconstructed/generated/primary parity.
   Children: `.6.0`, `.6.1`, `.6.2`, `.6.3`, `.6.4`, `.6.5`
   Acceptance: Both Lua ABIs pass the neutral gap corpus and every admitted execution role through one shared
     implementation that preserves the existing preceding-slot event authority and extends recognition,
     normalized-spec, generated-v2, emitted-source, and primary authorities without a second state stack or ABI-
     specific semantic fork.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: explicit/ordinary/canonical/rooted shared consumer passes unchanged on both ABIs; exact nine-role
+    order executes once; governance is 7/2/60 plus sixteen Lua admission mutations; complete Lua, primary, corpus,
+    storage, direct dependents, book, Knowledge, histories, doctrines, and receipt-bound canonical CI pass.
+  Commit: `INTER-MATCH-GAP-CAPTURE.6.5 - admit Lua inter-match gap capture`
 
 - ID: `INTER-MATCH-GAP-CAPTURE.6.0`
   Status: `done; landed at 5089a360` (2026-08-16; atomic 246; behavior-free audit/plan; focused tier; brief cleared;
@@ -1816,9 +1818,9 @@ orchestration or to raw Perl cursor arithmetic.
   Commit: `INTER-MATCH-GAP-CAPTURE.6.3 - carry Lua gap generated execution`
 
 - ID: `INTER-MATCH-GAP-CAPTURE.6.4`
-  Status: `focused-signoff-complete from clean b7708cde` (2026-08-16; intended atomic 250; independently loaded
-    emitted proof and exact storage 18→19; commit/brief/clean proof remains; no production emitter/format/plan/
-    primary/admission/rollout/outward movement; no push)
+  Status: `done; landed at 798aeeee` (2026-08-16; atomic 250; independently loaded emitted proof and exact storage
+    18→19; focused tier; brief cleared; clean handoff; no production emitter/format/plan/primary/admission/rollout/
+    outward movement; no push)
   Goal: Prove independently loaded Lua emitted-source gap execution and repository-local dual-ABI storage.
   Depends on: `.6.3`
   Acceptance: call unchanged `emit_lua_source_v2`; independently load ten value and two typed-error modules in
@@ -1867,7 +1869,8 @@ orchestration or to raw Perl cursor arithmetic.
     clear the brief, and land clean before `.6.5`.
 
 - ID: `INTER-MATCH-GAP-CAPTURE.6.5`
-  Status: `pending; blocked on .6.4`
+  Status: `canonical-signoff-complete from clean 798aeeee` (2026-08-16; intended atomic 251; task-tree-first
+    activation; admission/parent-closeout tier; recurring/public and outward movement remain `.7`-owned; no push)
   Goal: Prove dual-ABI primary parity, admit the exact Lua roles, and close parent `.6`.
   Depends on: `.6.4`
   Acceptance: reuse the existing Lua primary CLI adapter with no command/option/path change; remove only final
@@ -1881,8 +1884,41 @@ orchestration or to raw Perl cursor arithmetic.
     receipt-bound canonical proof and close parent `.6`; keep recurring/public rows, generated format, supported
     calls, legacy events/descriptors/refs, capability, typed-source composition, facade/schema/MCP/CLI/README, and
     all public claims unchanged for `.7`.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `canonical`
+  Focused checks: checker-first rollout/mutation RED; explicit and ordinary shared consumer on PUC Lua and LuaJIT;
+    existing primary adapter under both option environments; exact nine-role once-only ledger; complete shared Lua,
+    storage, and corpus proof; neutral/rooted recurring order; recognition, duplicate-slot, typed-source, generated-
+    source, capability, language, semantic, MCP, and public-no-overclaim ledgers; rendered mdBook, Knowledge,
+    bounded histories, task metadata, memory, doctrines, and exact diff checks.
+  Canonical trigger: `yes` — this leaf admits two runtime rows, changes ordinary/canonical/rooted registration,
+    advances the governed mutation/status ledgers, and closes milestone parent `.6`; exact staged-candidate local CI
+    and receipt promotion are mandatory before landing.
+  Verification: exact checker-first RED rejects 58→60 count drift. Explicit and ordinary PUC-Lua/LuaJIT each pass
+    392 assertions with the nine roles once; unchanged primary passes 66x2; complete Lua passes 178 tests per ABI,
+    corpus 105, and storage 19/three modules. Rooted order passes neutral, Perl 124, Rust 1, Dart 5, Julia 319,
+    PUC Lua 392, and LuaJIT 392 at 7/2/60 plus sixteen admission mutations. Recognition 137/246/58, duplicate
+    7/0/59, typed source 9/5/114, generated/capability 80/0/0, language 246/105+1/122, semantic 6/20/128, MCP
+    complete/141, public no-overclaim, book, Knowledge, bounded histories, task metadata, memory, all nine
+    doctrines, exact production diff, and receipt-bound staged canonical CI pass.
+  Commit: `INTER-MATCH-GAP-CAPTURE.6.5 - admit Lua inter-match gap capture`
+
+  ### Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / OWNERSHIP** — Prove committed atomic-250 boundary `798aeeee`, empty status/diffs,
+    zero-byte brief, post-commit activation pointer, and no background result before this task-tree-first edit.
+  - [x] **RETRIEVE AUTHORITY** — Use Knowledge Map/ADR/task/toolbox pointers first, then inspect the committed Lua
+    consumer ledger, primary adapter/tests, ordinary/canonical/rooted registries, neutral checker, and prior
+    Rust/Dart/Julia exact admissions before changing dormancy or status.
+  - [x] **FAIL FIRST / GOVERNANCE** — Prove the unchanged neutral checker rejects the planned 5/4/58→7/2/60 and
+    ten-dormancy→sixteen-admission transition before updating only the two Lua runtime rows and exact mutations.
+  - [x] **PRIMARY / NINE ROLES** — Reuse the existing primary adapter unchanged, add the primary role, require the
+    exact declared nine-role order and once-only execution on both ABIs, and prove mixed-separator item/gap results.
+  - [x] **EXACT DUAL-ABI ADMISSION** — Remove only final dormancy; register the shared consumer once per ABI in
+    ordinary discovery, explicitly once per ABI in canonical CI, and once each in rooted PUC-Lua/LuaJIT order.
+  - [x] **NO-OVERCLAIM CANONICAL CLOSEOUT** — Keep recurring/public rows, format/plans, 246 supported calls, legacy
+    events/descriptors/refs, storage 19/three modules, facade/schema/MCP/CLI/README/capability/typed composition,
+    and every outward claim unchanged; synchronize durable layers, pass exact staged canonical proof, commit,
+    promote the receipt, clear the brief, and land parent `.6` cleanly before `.7`.
 
 - ID: `INTER-MATCH-GAP-CAPTURE.7`
   Status: `pending`
@@ -1924,15 +1960,21 @@ orchestration or to raw Perl cursor arithmetic.
 | 26 | `INTER-MATCH-GAP-CAPTURE.5.3` | `done; landed at 1f531a5f` | Exact normalized reconstruction, compatible detached descriptors, and same-engine generated-v2 proof landed as atomic 243. |
 | 27 | `INTER-MATCH-GAP-CAPTURE.5.4` | `done; landed at 0a961043` | Ten value/two typed-error emitted modules and exact 20-owner storage proof landed as atomic 244. |
 | 28 | `INTER-MATCH-GAP-CAPTURE.5.5` | `done; landed at a6ff2614` | Exact primary/nine-role admission promoted Julia only to 5/4/58 and closed parent `.5` as clean atomic 245. |
-| 29 | `INTER-MATCH-GAP-CAPTURE.6` | `active via focused-signoff-complete .6.4 from clean b7708cde` | Independently emitted dual-ABI proof and exact storage owner 19 await only atomic-250 commit/brief/clean proof. |
+| 29 | `INTER-MATCH-GAP-CAPTURE.6` | `canonical-signoff-complete from clean 798aeeee via .6.5` | Exact dual-ABI primary/admission and parent closeout are complete for atomic 251. |
 | 30 | `INTER-MATCH-GAP-CAPTURE.6.0` | `done; landed at 5089a360` | Exact dual-ABI seams and dependency-ordered `.6.1-.6.5` ownership landed behavior-free as atomic 246. |
 | 31 | `INTER-MATCH-GAP-CAPTURE.6.1` | `done; landed at a94c81ed` | Exact authored/static/compiled metadata and ten dormancy guards landed without live execution or rollout movement. |
 | 32 | `INTER-MATCH-GAP-CAPTURE.6.2` | `done; landed at 4e625a9f` | One shared invocation-local native state/lifecycle path landed cleanly as atomic 248. |
 | 33 | `INTER-MATCH-GAP-CAPTURE.6.3` | `done; landed at b7708cde` | Carrier parity, ADR-0077 capacity closure, and exact canonical proof landed cleanly as atomic 249. |
-| 34 | `INTER-MATCH-GAP-CAPTURE.6.4` | `focused-signoff-complete from clean b7708cde` | Independently loaded emitted-source parity and exact storage owner 19 await atomic 250 landing. |
-| 35 | `INTER-MATCH-GAP-CAPTURE.6.5` | `pending; blocked on .6.4` | Prove primary parity, admit both ABIs, and close parent `.6`. |
+| 34 | `INTER-MATCH-GAP-CAPTURE.6.4` | `done; landed at 798aeeee` | Independently loaded emitted-source parity and exact storage owner 19 landed as atomic 250. |
+| 35 | `INTER-MATCH-GAP-CAPTURE.6.5` | `canonical-signoff-complete from clean 798aeeee` | Primary parity, exact dual-ABI admission, and parent `.6` closeout are complete for atomic 251. |
 
 ## Decisions
+
+- `2026-08-16`: Lua admission composes existing authorities only. The shared consumer executes the neutral
+  nine-role ledger in exact declared order once on each ABI; `primary_command` spends unchanged
+  `linkedspec.run_primary_cli`. Ordinary, canonical, and rooted registrations are multiplicity-locked. Only PUC
+  Lua and LuaJIT advance 5/4/58→7/2/60, with two appended runtime regressions and sixteen admission mutations;
+  recurring/public and outward authority remain `.7`-owned.
 
 - `2026-08-16`: Lua `@capture_gaps` is a dedicated rule-level directive, not a new `rule_slot_event`. Existing
   anonymous split markers and named marks stay attached to the preceding regex and fire after accepted action/
@@ -2260,9 +2302,8 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
   roles. Shared Lua `.6` proves those roles independently on PUC Lua and LuaJIT from one Lua source.
 - `.7` runs every complete runtime exactly once, all generated/capability/language ledgers, both primary option
   environments, migration locks, and public/mdBook no-drift before promoting recurrence/public admission.
-  The mdBook distinguishes complete private Perl/Rust/Dart runtime admission from Julia's dormant native
-  implementation and still-unimplemented later-runtime/portable/public admission; README, facades, semantic/MCP
-  schemas, CLI, capability status, and typed-source
+  The mdBook distinguishes complete private admission on all six runtimes from still-pending recurring/portable/
+  public admission; README, facades, semantic/MCP schemas, CLI, capability status, and typed-source
   `lossless_gap_composition` do not move.
 
 ## Activation Boundary
@@ -2286,13 +2327,16 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
   as atomic 246 at `5089a360`; authored/static/compiled metadata and dormancy `.6.1` landed as atomic 247 at
   `a94c81ed`; native shared recognition-state/lifecycle `.6.2` landed as atomic 248 at `4e625a9f`; normalized/
   descriptor/generated-v2 carrier `.6.3` landed as atomic 249 at `b7708cde`, with ADR `0077`, the exact canonical
-  receipt, brief clear, and clean proof complete. Emitted-source/storage `.6.4` is focused-signoff-complete from
-  that exact clean boundary for intended atomic 250.
+  receipt, brief clear, and clean proof complete. Emitted-source/storage `.6.4` landed as atomic 250 at
+  `798aeeee`; its brief is clear and post-commit pointer/tree proof is clean. Primary/admission/parent closeout
+  `.6.5` is canonical-signoff-complete from that exact boundary for intended atomic 251. After the atomic-251
+  commit, receipt promotion, brief clear, and clean proof, pause for director instruction without activating `.7`.
 
 ## Verification Log
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-08-16` | `INTER-MATCH-GAP-CAPTURE.6.5` | Clean `798aeeee` activation; contract-first 58→60 RED; unchanged primary adapter; exact nine-role once-only dual-ABI consumer; explicit/ordinary/canonical/rooted registration; complete Lua, primary, corpus, storage; neutral/rooted gap; recognition, duplicate-slot, typed-source, generated-source, capability, language, semantic, MCP; public no-overclaim; rendered mdBook; Knowledge; bounded histories; task metadata; memory; all nine doctrines; exact production diff; receipt-bound staged canonical CI | Pass: checker-first count drift is exact. Explicit and ordinary consumer is 392 assertions per ABI (178+33+46+105+30); complete Lua is 178 tests per ABI, primary 66x2, corpus 105, and storage 19/three modules. Rooted order is neutral/Perl-124/Rust-1/Dart-5/Julia-319/PUC-Lua-392/LuaJIT-392. Only PUC Lua and LuaJIT advance, reaching 7/2/60 plus sixteen Lua admission mutations. Recognition 137/246/58, duplicate 7/0/59, typed source 9/5/114, generated/capability 80/0/0, language 246/105+1/122, semantic 6/20/128, MCP complete/141, book, Knowledge, histories, and doctrines pass. Format 2, plans, 246 calls, storage, legacy events/descriptors/refs, recurring/public rows, and outward surfaces remain exact. The staged canonical gate writes its receipt and exits 0. |
 | `2026-08-16` | `INTER-MATCH-GAP-CAPTURE.6.4` | Clean `b7708cde` activation; exact owner RED; unchanged emitter; ten value/two typed-error independently loaded modules in fresh PUC-Lua/LuaJIT children; native/direct/traced values, errors, plans, trace/source identity, and recursive cleanup; explicit consumer; complete Lua, root-route, cursor-descriptor, primary, corpus, and storage dependents; neutral/rooted gap; recognition, duplicate-slot, typed-source, generated-source; rendered mdBook; Knowledge; task metadata; bounded histories; memory; all doctrines; exact production/diff checks; focused tier with no canonical CI | Pass: storage RED rejects only 18→19. Explicit consumer is 362 assertions per ABI (178+33+46+105). Complete Lua passes 177 package tests per ABI, root 106 per ABI, cursor 912 per ABI, primary 66 per ABI, corpus 105, and storage 19 owners / three native modules. Gap remains 5/4/58 plus ten Lua dormancy mutations; rooted execution passes neutral/Perl-124/Rust-1/Dart-5/Julia-319 then two skips. Recognition 137/246/58, duplicate 7/0/59, typed source 9/5/114, generated 80/0/0, book 79/14,928, and Knowledge 839/7,094 pass. Modules, runner, manifest, child outputs, and traces stay below routed `TMPDIR` and clean recursively. Production emitter, format 2, `{label,family}` plans, primary/admission, rollout, legacy events, and outward surfaces remain unchanged; final `.6.5` retains canonical admission. |
 | `2026-08-16` | `INTER-MATCH-GAP-CAPTURE.6.3` | Clean `4e625a9f` activation; exact descriptor RED; normalized reconstruction; detached compatible descriptor metadata/provenance; same-engine direct/traced generated-v2 values and typed errors; explicit PUC-Lua/LuaJIT consumer; complete Lua and direct descriptor/root-route dependents; neutral/rooted gap; recognition, duplicate-slot, typed-source, generated-source, storage; rendered mdBook; Knowledge; required engineering-notes rollover and exact capacity ADR; task metadata; bounded histories; all doctrines; exact diff; receipt-bound canonical local CI | Pass: explicit consumer is 257 assertions per ABI, including 46 carrier assertions. Complete Lua passes 177 package tests per ABI, root routes 106 per ABI, cursor descriptors 912 per ABI, primary 66 per ABI, corpus 105, and storage 18 owners / three native modules. Gap remains 5/4/58 plus ten Lua dormancy mutations; rooted execution passes neutral/Perl-124/Rust-1/Dart-5/Julia-319 then two skips. Recognition 137/246/58, duplicate 7/0/59, typed source 9/5/114, generated 80/0/0, book 79/14,928, Knowledge 839/7,094, engineering-notes segment 4994, histories, task metadata, and doctrines pass. ADR `0077` changes only collection/member limits 13/12→14/13. Normalized `SpecFile` is the sole carrier; loaded versus inline source identity remains truthful; generated format 2 and `{label,family}` plan remain exact. The exact staged canonical gate writes its receipt and exits 0. Emitter, storage owner, primary/admission, rollout, legacy events, and outward surfaces remain unchanged. |
 | `2026-08-16` | `INTER-MATCH-GAP-CAPTURE.6.2` | Clean `a94c81ed` activation; exact private-helper RED; one shared invocation/token state owner; candidate/entry/lifecycle/nesting/rollback implementation; explicit PUC-Lua/LuaJIT consumer; complete Lua; neutral/rooted gap; recognition, duplicate-slot, typed-source, generated-source, cursor/lifecycle/recursive/descriptor dependents; storage; rendered mdBook; Knowledge; task metadata; bounded histories; all doctrines; exact diff; focused tier with no canonical CI | Pass: explicit consumer is 211 assertions per ABI, including 33 native assertions. Complete Lua passes 177 package tests per ABI, primary 66, corpus 105, and storage 18 owners / three native modules. Gap remains 5/4/58 plus ten Lua dormancy mutations; rooted execution passes neutral/Perl-124/Rust-1/Dart-5/Julia-319 then two skips. Recognition 137/246/58, duplicate 7/0/59, typed source 9/5/114, generated 80/0/0, book 79/14,924, Knowledge 839/7,094, histories, task metadata, and doctrines pass. Source audit adds lifecycle-phase snapshot/restore to the same token; the complete Lua/recognition/neutral proofs pass afterward. Doctrine proof also catches the live-status 17th-row overflow; the oldest current-view row is dropped while remaining queryable in exact history. The supported ActionIR inventory remains 246; reconstruction/descriptors, generated/emitted execution, primary/admission, storage, format, rollout, and outward surfaces remain unchanged. |
@@ -2360,6 +2404,21 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
 
 ## Changelog
 
+- `2026-08-16`: Completed `.6.5` from clean `798aeeee`. One shared source reuses unchanged
+  `linkedspec.run_primary_cli`, executes the exact nine-role ledger once on each ABI, and passes 392 assertions in
+  explicit, ordinary, canonical, and rooted routes. Only PUC Lua and LuaJIT advance to complete, yielding 7/2/60
+  plus sixteen Lua admission mutations; complete Lua 178x2, primary 66x2, corpus 105, storage 19/three modules,
+  rooted neutral/Perl-124/Rust-1/Dart-5/Julia-319/PUC-Lua-392/LuaJIT-392, all direct dependents, book, Knowledge,
+  histories, doctrines, and exact staged canonical CI pass. Parent `.6` closes; recurring/public and outward
+  authority remain `.7`-owned. README routing pressure first exposed ADR `0045` at 644/640 lines; losslessly
+  compacting only the new amendment restored the reviewed 640-line boundary without raising any control. Pause
+  after atomic 251 for director instruction without activating `.7`.
+
+- `2026-08-16`: Landed `.6.4` cleanly as atomic 250 at `798aeeee`, cleared the brief to zero bytes, proved the
+  post-commit activation pointer and empty tree, and activated canonical `.6.5` task-tree-first. This final Lua
+  leaf owns only existing-primary parity, exact nine-role dual-ABI admission, 5/4/58→7/2/60 governance, sixteen
+  admission mutations, ordinary/canonical/rooted registration, and parent `.6` closeout; recurring/public and
+  every outward surface remain `.7`-owned or unchanged.
 - `2026-08-16`: Completed `.6.4` independently emitted proof from clean `b7708cde`. Unchanged
   `emit_lua_source_v2` output runs as ten value/two typed-error modules, independently loaded by fresh PUC-Lua and
   LuaJIT children below repository-routed `TMPDIR`. Explicit 362x2 includes 105 emitted assertions; complete Lua

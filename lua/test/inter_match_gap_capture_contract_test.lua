@@ -1,18 +1,17 @@
--- INTER-MATCH-GAP-CAPTURE.6.4 — dormant shared Lua emitted-execution stage.
+-- INTER-MATCH-GAP-CAPTURE.6.5 — admitted shared Lua primary/composition stage.
 --
 -- This final consumer path now proves parsing, validation, compiled provenance,
 -- source identity, private native state/lifecycle, normalized reconstruction,
 -- compatible descriptors, generated-v2 execution, and independently loaded
--- emitted-source execution on both Lua ABIs. Primary execution and admission
--- remain owned by `.6.5`.
--- DORMANT: INTER-MATCH-GAP-CAPTURE.6.5 owns Lua runtime admission
+-- emitted-source execution, existing-primary parity, and exact nine-role
+-- composition on both Lua ABIs. Recurring/public admission remains owned by `.7`.
 
 local linkedspec = require("linkedspec")
 local json = linkedspec.json
 
 local CONTRACT_ID = "linkedspec-inter-match-gap-capture-v1"
 local CONTRACT_PATH = "capability_conformance/inter_match_gap_capture_contract.json"
-local FUTURE_ROLES = {
+local EXPECTED_ROLES = json.array({
   "native_execution",
   "ordinary_reconstruction",
   "descriptor",
@@ -22,7 +21,7 @@ local FUTURE_ROLES = {
   "recursion_and_rollback",
   "portable_diagnostics",
   "primary_command",
-}
+})
 
 local assertions = 0
 
@@ -69,6 +68,37 @@ local function read_file(path)
   local value = assert(handle:read("*a"))
   assert(handle:close())
   return value
+end
+
+local function write_file(path, value)
+  local handle = assert(io.open(path, "wb"))
+  assert(handle:write(value))
+  assert(handle:close())
+end
+
+local function shell_quote(value)
+  return "'" .. value:gsub("'", "'\\''") .. "'"
+end
+
+local function command_succeeded(command)
+  local first, _, third = os.execute(command)
+  if type(first) == "number" then return first == 0 end
+  return first == true and (third == nil or third == 0)
+end
+
+local function with_temp_directory(operation)
+  local temp_root = assert(os.getenv("TMPDIR"), "TMPDIR is required")
+  assert(temp_root ~= "", "TMPDIR must not be empty")
+  local template = temp_root:gsub("/+$", "") .. "/linkedspec-lua-gap-emitted.XXXXXX"
+  local handle = assert(io.popen("mktemp -d " .. shell_quote(template), "r"))
+  local workspace = assert(handle:read("*l"))
+  assert(handle:close())
+
+  local ok, value = pcall(operation, workspace)
+  local cleaned = command_succeeded("rm -rf -- " .. shell_quote(workspace))
+  if not cleaned then fail("unable to clean emitted gap workspace") end
+  if not ok then error(value, 0) end
+  return value, workspace
 end
 
 local function current_directory()
@@ -136,12 +166,12 @@ local contract = json.decode(read_file(CONTRACT_PATH))
 check_equal(contract.contract_id, CONTRACT_ID, "contract id")
 check_equal(contract.format, 1, "contract format")
 check_equal(contract.rollout[6].id, "puc_lua_runtime", "PUC rollout id")
-check_equal(contract.rollout[6].status, "pending", "PUC rollout status")
+check_equal(contract.rollout[6].status, "complete", "PUC rollout status")
 check_equal(contract.rollout[7].id, "luajit_runtime", "LuaJIT rollout id")
-check_equal(contract.rollout[7].status, "pending", "LuaJIT rollout status")
-check_equal(#FUTURE_ROLES, 9, "future role count")
+check_equal(contract.rollout[7].status, "complete", "LuaJIT rollout status")
+check_equal(#EXPECTED_ROLES, 9, "role count")
 for index, role in ipairs(contract.recurring_gate.consumers[5].roles) do
-  check_equal(FUTURE_ROLES[index], role, "future role " .. index)
+  check_equal(EXPECTED_ROLES[index], role, "role " .. index)
 end
 
 local source = table.concat({
@@ -782,37 +812,6 @@ end
 do
   local emitted_assertions_start = assertions
 
-  local function write_file(path, value)
-    local handle = assert(io.open(path, "wb"))
-    assert(handle:write(value))
-    assert(handle:close())
-  end
-
-  local function shell_quote(value)
-    return "'" .. value:gsub("'", "'\\''") .. "'"
-  end
-
-  local function command_succeeded(command)
-    local first, _, third = os.execute(command)
-    if type(first) == "number" then return first == 0 end
-    return first == true and (third == nil or third == 0)
-  end
-
-  local function with_temp_directory(operation)
-    local temp_root = assert(os.getenv("TMPDIR"), "TMPDIR is required")
-    assert(temp_root ~= "", "TMPDIR must not be empty")
-    local template = temp_root:gsub("/+$", "") .. "/linkedspec-lua-gap-emitted.XXXXXX"
-    local handle = assert(io.popen("mktemp -d " .. shell_quote(template), "r"))
-    local workspace = assert(handle:read("*l"))
-    assert(handle:close())
-
-    local ok, value = pcall(operation, workspace)
-    local cleaned = command_succeeded("rm -rf -- " .. shell_quote(workspace))
-    if not cleaned then fail("unable to clean emitted gap workspace") end
-    if not ok then error(value, 0) end
-    return value, workspace
-  end
-
   local value_cases = {
     {
       name = "unicode_entry_falsey",
@@ -1254,10 +1253,210 @@ for case_index, case in ipairs(cases) do
   end
 end
 
+local ADMISSION_SOURCE = [[Top::
+ I { items = [] }
+ @capture_gaps
+ -> Item[word] { push(items, array(call(Item), gap_text())) }
+ LX { return(copy(items)) }
+Item:
+ word=/[a-z]+/
+ I.return(entry_text())
+]]
+local ADMISSION_INPUT = "alpha, beta | gamma\n- delta"
+local ADMISSION_EXPECTED = json.decode(
+  '[["alpha",""],["beta",", "],["gamma"," | "],["delta","\\n- "]]'
+)
+
+local function role_native_execution()
+  check_json_equal(execute_native(ADMISSION_SOURCE, ADMISSION_INPUT).value,
+    ADMISSION_EXPECTED, "admission native execution")
+end
+
+local function role_ordinary_reconstruction()
+  local authored = linkedspec.parse_spec(
+    ADMISSION_SOURCE,
+    { source_id = "lua-gap-admission.spec" }
+  )
+  local normalized = linkedspec.spec_ast.to_json(authored)
+  local reconstructed = linkedspec.spec_ast.from_json("SpecFile", normalized)
+  check_json_equal(linkedspec.spec_ast.to_json(reconstructed), normalized,
+    "admission reconstruction identity")
+  check_json_equal(linkedspec.runtime_parse(
+    linkedspec.runtime_engine(linkedspec.compile_spec(reconstructed)),
+    ADMISSION_INPUT
+  ).value, ADMISSION_EXPECTED, "admission reconstructed execution")
+end
+
+local function role_descriptor()
+  local compiled = compile_metadata(ADMISSION_SOURCE, "lua-gap-admission.spec")
+  local rules = linkedspec.to_descriptor_json(compiled).spec
+  check_json_equal(rules.Top.meta.capture_gaps, json.decode(
+    '{"enabled":true,"directive":"@capture_gaps","source_id":"lua-gap-admission.spec","line":3}'
+  ), "admission descriptor directive")
+  check_json_equal(rules.Item.meta.regex_slots, json.decode(
+    '[{"regex_index":0,"slot_id":"word","source_id":"lua-gap-admission.spec","line":7}]'
+  ), "admission descriptor slot")
+end
+
+local function role_generated_plan()
+  local compiled = compile_metadata(ADMISSION_SOURCE)
+  local plan = linkedspec.build_generated_rule_plan(compiled)
+  local plan_json = json.array()
+  for index, row in ipairs(plan) do
+    plan_json[index] = linkedspec.generated_plan_row_to_json(row)
+  end
+  check_json_equal(plan_json, json.decode(
+    '[{"label":"Top","family":"default"},{"label":"Item","family":"default"}]'
+  ), "admission generated plan")
+  check_json_equal(linkedspec.execute_generated_parser_v2(
+    compiled,
+    plan,
+    ADMISSION_INPUT,
+    "lua-gap-admission.spec"
+  ), ADMISSION_EXPECTED, "admission generated execution")
+end
+
+local function role_emitted_source()
+  local observed, workspace = with_temp_directory(function(root)
+    local identity = "generated-source/lua-gap/admission.spec"
+    local module_path = root .. "/admission.lua"
+    write_file(module_path, linkedspec.emit_lua_source_v2(
+      compile_metadata(ADMISSION_SOURCE),
+      identity
+    ))
+    local chunk, load_error = loadfile(module_path)
+    if chunk == nil then error(load_error, 0) end
+    return chunk().execute(ADMISSION_INPUT)
+  end)
+  check_json_equal(observed, ADMISSION_EXPECTED, "admission emitted execution")
+  check(command_succeeded("test ! -e " .. shell_quote(workspace)),
+    "admission emitted cleanup")
+end
+
+local function role_target_lifecycle()
+  check_json_equal(execute_native([[Top::OR{1}
+ I { events = [] }
+ @capture_gaps
+ -> Part { push(events, array("action", gap_kind(), gap_text())) }
+ LS { push(events, array("ls", gap_kind(), gap_text(), match_text())) }
+ LE { push(events, array("le", gap_kind(), gap_text())) }
+ IT { push(events, array("it")) }
+ LX { push(events, array("lx", gap_kind(), gap_text())); return(copy(events)) }
+Part: /H/
+]], "aHb").value, json.decode(
+    '[["ls","prefix","a","H"],["action","prefix","a"],["le","prefix","a"],["it"],["lx","tail","b"]]'
+  ), "admission target lifecycle")
+end
+
+local function role_recursion_and_rollback()
+  check_json_equal(execute_native([[Top::
+ @capture_gaps
+ -> Container[open] { return(array(gap_text(), call(Container), gap_text())) }
+Container:
+ open=/\{/
+ I { inner = [] }
+ @capture_gaps
+ -> Atom { push(inner, gap_text()) }
+ LX { push(inner, gap_text()); return(copy(inner)) }
+Atom:
+ /x/
+ I.return(entry_text())
+]], "p{axtail").value, json.decode('["p",["a","tail"],"p"]'),
+    "admission nested execution")
+  check_json_equal(execute_native([[Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Part[h] {
+  tx = recognition_checkpoint();
+  matched = recognize_once(tx, call(Probe));
+  recognition_rollback(tx);
+  push(gaps, gap_text())
+ }
+ -> Part[s] { push(gaps, gap_text()) }
+ LX { push(gaps, gap_text()); return(copy(gaps)) }
+Part:
+ h=/H/
+ s=/S/
+ I.return(entry_text())
+Probe:
+ /X/
+ I.return(0)
+]], "aHXbS").value, json.decode('["a","Xb",""]'),
+    "admission rollback execution")
+end
+
+local function role_portable_diagnostics()
+  check_equal(native_error(
+    "Direct::\n /H/\n I { return(gap_text()) }\n",
+    "H"
+  ).diagnostic.code, "gap_capture_context_unavailable",
+    "admission unavailable diagnostic")
+  check_equal(native_error(
+    "Top::OR{1}\n @capture_gaps\n -> Part { rewind_match_start() }\nPart: /H/\n",
+    "aH"
+  ).diagnostic.code, "source_location_cursor_regression",
+    "admission regression diagnostic")
+end
+
+local function role_primary_command()
+  local result = linkedspec.run_primary_cli({
+    "--inline-spec",
+    ADMISSION_SOURCE,
+    "--input",
+    ADMISSION_INPUT,
+  })
+  check_equal(result.exit_code, 0, "admission primary status")
+  check_equal(result.stdout, json.encode(ADMISSION_EXPECTED) .. "\n",
+    "admission primary stdout")
+  check_equal(result.stderr, "", "admission primary stderr")
+end
+
+do
+  local admission_assertions_start = assertions
+  local role_map = {
+    native_execution = role_native_execution,
+    ordinary_reconstruction = role_ordinary_reconstruction,
+    descriptor = role_descriptor,
+    generated_plan = role_generated_plan,
+    emitted_source = role_emitted_source,
+    target_lifecycle = role_target_lifecycle,
+    recursion_and_rollback = role_recursion_and_rollback,
+    portable_diagnostics = role_portable_diagnostics,
+    primary_command = role_primary_command,
+  }
+  local runtime = linkedspec.runtime_implementation() == "puc-lua" and "puc_lua" or "luajit"
+  local consumer
+  for _, candidate in ipairs(contract.recurring_gate.consumers) do
+    if candidate.backend == "lua" and candidate.runtime == runtime then consumer = candidate end
+  end
+  assert(consumer ~= nil, "admitted Lua consumer row is required")
+  local declared_roles = json.array()
+  for index, role in ipairs(consumer.roles) do declared_roles[index] = role end
+  check_json_equal(declared_roles, EXPECTED_ROLES, "admitted role ledger")
+  check_equal(#declared_roles, #EXPECTED_ROLES, "admitted role cardinality")
+  local role_count = 0
+  for _ in pairs(role_map) do role_count = role_count + 1 end
+  check_equal(role_count, #EXPECTED_ROLES, "admitted role map cardinality")
+
+  local completed = {}
+  local completed_count = 0
+  for _, role in ipairs(declared_roles) do
+    check(not completed[role], "admitted role executes once: " .. role)
+    completed[role] = true
+    completed_count = completed_count + 1
+    role_map[role]()
+  end
+  check_equal(completed_count, role_count, "admitted role completion")
+  if assertions - admission_assertions_start ~= 30 then
+    fail("admission assertion inventory drifted: expected 30, got " ..
+      tostring(assertions - admission_assertions_start))
+  end
+end
+
 io.stdout:write(
   "Lua inter-match gap contract: OK (",
   assertions,
-  " assertions; dormant; runtime=",
+  " assertions; admitted; runtime=",
   linkedspec.runtime_implementation(),
   ")\n"
 )

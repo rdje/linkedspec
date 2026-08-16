@@ -1,6 +1,6 @@
 ---
 id: inter-match-gap-executable-contract-plan
-title: Inter-match gap capture has a frozen neutral contract and four admitted private runtime families
+title: Inter-match gap capture has a frozen neutral contract and all six admitted private runtimes
 answers:
   - "where will the inter match gap executable contract live"
   - "what is the inter match gap contract id"
@@ -22,9 +22,9 @@ answers:
   - "what are the capture_gaps rollout legs"
   - "is capture_gaps implemented now"
 date: 2026-08-16
-status: neutral parent closed; private Perl/Rust/Dart/Julia admitted; shared Lua implementation plan frozen
+status: neutral parent closed; private Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT admitted; recurring and public rows pending
 tags: [capture, segmentation, named-slots, typed-source, lifecycle, transaction, recursion, contract, plan]
-evidence: "INTER-MATCH-GAP-CAPTURE.1.1-.1.3 establish the executable neutral Unicode/empty/child/rollback/nested model, recurrence, and public no-overclaim. Perl .2, Rust .3, Dart .4, and Julia .5 are privately admitted through authored/static identity, same-authority native state, reconstructed/descriptor/generated carriers, independent emitted proof, existing-primary parity, and exact ordinary/canonical/rooted registration. Current governance is 5 complete + 4 pending / 58 semantic mutations plus ten admission mutations for each of Rust, Dart, and Julia. PUC Lua, LuaJIT, recurring, and public rows remain pending; behavior-free Lua .6.0 freezes their shared five-leaf implementation plan."
+evidence: "INTER-MATCH-GAP-CAPTURE.1.1-.1.3 establish the executable neutral Unicode/empty/child/rollback/nested model, recurrence, and public no-overclaim. Perl .2, Rust .3, Dart .4, Julia .5, and shared dual-ABI Lua .6 are privately admitted through authored/static identity, same-authority native state, reconstructed/descriptor/generated carriers, independent emitted proof, existing-primary parity, and exact ordinary/canonical/rooted registration. Current governance is 7 complete + 2 pending / 60 semantic mutations plus ten admission mutations for each of Rust, Dart, and Julia and sixteen for Lua. Recurring and public rows remain pending for .7."
 evidence_update_2026_08_15_julia_plan: "Julia audit INTER-MATCH-GAP-CAPTURE.5.0 proves numeric selectors compile, named declarations/selectors/directive are raw invalid syntax, the four accessors are unknown helpers, legacy move_pos has no execution effect, and repeated LS precedes selection. It freezes .5.1-.5.5 across authored/static metadata, same-authority native state, normalized reconstruction/descriptor/generated-plan carriers, independently loaded emitted proof, and primary/nine-role admission. No Julia behavior or 4/5/57 rollout state moves."
 evidence_update_2026_08_15_julia_native: "INTER-MATCH-GAP-CAPTURE.5.1-.5.2 now provide dormant authored/static/compiled metadata and private native gap state/accessors/lifecycle on the existing recognition authority. Explicit proof is 105 metadata + 33 native; supported ActionIR remains exactly 246 because the four accessors resolve through a separate private family. Rollout remains 4/5/57 and the rooted driver still skips Julia."
 evidence_update_2026_08_16_julia_carrier: "INTER-MATCH-GAP-CAPTURE.5.3 adds normalized SpecFile JSON reconstruction, fresh detached regex_slots/capture_gaps/five-field resolved_slot_edges descriptors, and direct/traced generated-v2 proof through the same runtime. Explicit proof composes to 105 metadata + 33 native + 46 carrier assertions, including recursive capture and detached mutation guards for all three projections. Loaded descriptors retain basename logical source identity while inline descriptors retain inline; legacy resolved_edges, dependency refs, format 2, ordered label/family plans, storage 19/5, rollout 4/5/57, and Julia dormancy remain exact."
@@ -45,11 +45,11 @@ independently recomposes those committed inputs unchanged and closes neutral par
 authored, native-live, emitted/loaded, and private admission. Rust `.3.1-.3.5` and Dart `.4.1-.4.5` complete the
 equivalent private authored/native/reconstructed/generated/emitted/primary paths. Julia `.5.1-.5.5` now provide
 and admit the same path. The driver executes neutral, Perl, Rust, Dart, and Julia, then skips PUC Lua and LuaJIT.
-Behavior-free Lua `.6.0` freezes one shared dual-ABI implementation across `.6.1-.6.5`.
+Lua `.6.1-.6.5` now implement and privately admit one shared dual-ABI path.
 
 The nine ordered rollout legs are neutral, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurring proof, and public
-no-drift. Neutral, private Perl, private Rust, private Dart, and private Julia are complete; runtime rows remain for `.6`, and
-recurrence/public admission remains `.7`. The typed-source `lossless_gap_composition` row does not move until `.7`
+no-drift. Neutral and all six private runtime rows are complete; recurrence/public admission remains `.7`. The
+typed-source `lossless_gap_composition` row does not move until `.7`
 closes.
 The neutral count locks are 8 positive and 10 negative authored fixtures, 3 sources, 8 private gap fields, 16
 main-machine transitions, 10 segmentation cases, 3 terminal routes, 7 transaction/recursion/return-channel rows,

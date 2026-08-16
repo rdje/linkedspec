@@ -234,22 +234,23 @@ containment and relocation, CLI 66/66 in both option environments, RAM 62%, Phas
 and this complete matrix through its exact success marker. The combined program-wide `.14.8` public-no-drift row
 remains pending.
 
-Inter-match gap-capture recurring governance runs the complete neutral, Perl, Rust, Dart, and Julia rows; two later runtime routes remain explicit skips.
+Inter-match gap-capture recurring governance runs the complete neutral and six private runtime rows; no runtime route remains an explicit skip.
 Perl `.2.1-.2.3` established metadata, private live behavior, and independently loaded generated parity. Admission
 `.2.4` makes the full metadata/live/generated consumer the default, registers it once in ordinary canonical CI
 and once in the rooted recurring route, promotes only `perl_runtime`, and retires the obsolete dormancy fence.
-The neutral checker now rejects 58 semantic/topology mutations at rollout 5 complete / 4 pending: Perl, Rust,
-Dart, and Julia regressions are locked, while facade/schema/semantic/MCP/CLI/README surfaces remain absent.
+The neutral checker now rejects 60 semantic/topology mutations at rollout 7 complete / 2 pending: all six private
+runtime regressions are locked, while facade/schema/semantic/MCP/CLI/README surfaces remain absent.
 Behavior-free Dart `.4.0` froze `.4.1-.4.5` across authored/static metadata, same-authority native execution,
 reconstructed/descriptor/generated carriers, independently analyzed emitted source, and primary/nine-role
 admission. `.4.1-.4.4` supplied those private carriers behind a skipped consumer. Admission `.4.5` removes that
 skip, proves the existing primary adapter, executes all nine declared roles exactly once, registers the consumer
 once in canonical CI and once after Rust in the rooted route, and promotes only `dart_runtime`. The checker now
-rejects 58 semantic mutations at rollout 5 complete / 4 pending plus ten Rust, ten Dart, and ten Julia admission
-mutations;
+rejects 60 semantic mutations at rollout 7 complete / 2 pending plus ten Rust, ten Dart, ten Julia, and sixteen
+Lua admission mutations;
 ADR `0074` explains the additional Dart regression guard. Maintained Dart commands use
 `tools/run_dart_project_data.sh` or `tools/run_dart_local.sh`; the storage oracle locks 23 temporary owners and 47
-packages on repository storage. The two Lua routes remain explicit skips, and no outward surface moves.
+packages on repository storage. Shared Lua `.6.5` removes the final runtime skips by executing its same
+392-assertion consumer on PUC Lua and LuaJIT; recurring/public rows remain pending and no outward surface moves.
 Behavior-free Julia `.5.0` freezes `.5.1-.5.5` before implementation. Its focused baseline passes duplicate-slot
 121, rule-local cursor 104, recognition transaction 207, typed source 127, and source emitter 65 (624 assertions),
 plus the existing primary process check and exact pre-emitted storage 19 temporary owners / 5 package trees. Julia

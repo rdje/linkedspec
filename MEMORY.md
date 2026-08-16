@@ -1,18 +1,18 @@
 # MEMORY
 
-- activation_commit: `b7708cde13b08142cf9a7f2083ea000142e198dc` — clean atomic-249 base for shared Lua emitted-
-  source/storage leaf `INTER-MATCH-GAP-CAPTURE.6.4`; no push.
-- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.6.4 - prove Lua emitted gap execution`; focused-signoff-complete
-  from clean atomic 249 at `b7708cde` for intended atomic 250; no admission or rollout movement.
-- active_work_unit: none at the intended clean post-landing boundary; `.6.5` is next but not active until the
-  atomic-250 commit, zero-byte brief, and clean handoff are proven.
-- next_action: land atomic 250, clear the brief, prove clean handoff, then activate `.6.5` task-tree-first for exact
-  existing-primary parity, nine-role dual-ABI admission, and parent `.6` closeout.
-- in_flight_uncommitted: none at the intended clean handoff; no emitted workspace, background result, partial
-  implementation, production emitter/runtime/primary change, admission, rollout, or outward change remains.
-- blockers: none. Explicit proof is 362 assertions per ABI; complete Lua passes 177 package tests per ABI, root
-  routes 106, cursor descriptors 912, primary 66x2, corpus 105, and storage 19 owners / three native modules.
-  Rooted proof stays neutral/Perl/Rust/Dart/Julia plus two Lua skips at 5/4/58 with ten Lua dormancy mutations.
+- activation_commit: `798aeeee472e7670ffc056d76f056e5b43f3ef16` — clean atomic-250 base for shared Lua admission/
+  parent-closeout leaf `INTER-MATCH-GAP-CAPTURE.6.5`; no push.
+- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.6.5 - admit Lua inter-match gap capture`; canonical-signoff-
+  complete from clean atomic 250 at `798aeeee` for intended atomic 251; parent `.6` closes without outward movement.
+- active_work_unit: none at the intended clean post-landing boundary; `.7` is next but not active until atomic 251,
+  receipt promotion, zero-byte brief, and clean handoff are proven.
+- next_action: land atomic 251, promote the canonical receipt, clear the brief, prove clean handoff, then pause for
+  director instruction. Do not activate `.7` until the director resumes work.
+- in_flight_uncommitted: none at the intended clean handoff; no background result, partial implementation,
+  production runtime/emitter/primary change, recurring/public promotion, or outward change remains.
+- blockers: none. Explicit proof is 392 assertions per ABI; complete Lua passes 178 package tests per ABI, primary
+  66x2, corpus 105, and storage 19 owners / three native modules. Rooted proof executes neutral/Perl/Rust/Dart/
+  Julia/PUC-Lua/LuaJIT at 7/2/60 with sixteen Lua admission mutations; recurring/public rows remain pending.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -38,9 +38,8 @@
   and their rollover/index gates remain current.
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, and recurrence/public no-drift 9/9.
-- current_future_direction: gap is privately admitted on Perl, Rust, Dart, and Julia at 5/4/58 plus ten Rust, ten
-  Dart, and ten Julia admission mutations. Lua `.6.1-.6.4` now implement metadata/dormancy, one shared private
-  recognition path, normalized/descriptor/generated-v2 carriers, and independent emitted proof; `.6.5` retains
-  primary/admission. Both Lua ABIs and public rows remain pending; `.14.5.1` waits for `.7`.
-- latest_bootstrap_read: 2026-08-16 — roadmap/codebase/mdBook and continuity/tooling review complete; `.6.4` is
-  focused-signoff-complete from clean atomic 249 at `b7708cde` for intended atomic 250.
+- current_future_direction: gap is privately admitted on all six runtimes at 7/2/60 plus ten Rust, ten Dart, ten
+  Julia, and sixteen Lua admission mutations. `.7` retains recurring/public admission, migration, compatibility,
+  and outward documentation; `.14.5.1` waits for that public closeout.
+- latest_bootstrap_read: 2026-08-16 — roadmap/codebase/mdBook and continuity/tooling review complete; `.6.5` is
+  canonical-signoff-complete from clean atomic 250 at `798aeeee` for intended atomic 251.

@@ -1,7 +1,7 @@
 # 0045 - Inter-match gap capture preserves action-edge target ownership
 
 - Date: 2026-07-17
-- Status: accepted; executable-neutral plus private Perl/Rust/Dart/Julia admission current; Lua implementation plan frozen; public admission pending
+- Status: accepted; executable-neutral plus all six private runtime admissions current; recurring/public admission pending
 - Tags: architecture, grammar, capture, segmentation, or-rule, action-edge, source-span, portability, parity
 
 ## Context
@@ -35,6 +35,9 @@ state; Dart and Julia retain source body elements but their native runtimes do n
 divergence is existing behavior and is not repaired by this decision-only slice.
 
 ## Decision
+
+**Implementation amendment (2026-08-16):** `.6.5` admits the same Lua source on both ABIs through the existing
+primary adapter and exact nine-role ordinary/canonical/rooted ledger, advancing only those rows to 7/2/60; recurring/public, migration, and outward exposure remain `.7`-owned.
 
 ### 1. Fix the concept and vocabulary
 

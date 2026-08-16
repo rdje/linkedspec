@@ -10,6 +10,23 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-16 — INTER-MATCH-GAP-CAPTURE.6.5 — admit Lua inter-match gap capture
+
+- Activated task-tree-first from clean atomic-250 commit `798aeeee`. The checker-first RED rejected exactly the
+  planned 58→60 semantic-mutation and 5/4→7/2 rollout transition before either Lua runtime was admitted.
+- Reused the unchanged `linkedspec.run_primary_cli` adapter for a mixed-separator four-item proof. The shared
+  consumer now executes the neutral contract's nine declared roles in exact order and exactly once on each ABI;
+  its admission group adds 30 assertions for 392 per PUC Lua and LuaJIT run.
+- Registered that same consumer once in ordinary package discovery, once explicitly per ABI in canonical CI, and
+  once per ABI in rooted PUC-Lua-then-LuaJIT order. The complete Lua gate advances only from 177 to 178 package
+  tests per ABI; primary remains 66x2, corpus 105, and storage 19 owners / three native modules.
+- Promoted only `puc_lua_runtime` and `luajit_runtime`, appended only their two regression mutations, and replaced
+  ten Lua dormancy guards with sixteen admission guards. Governance is now 7 complete / 2 pending / 60 semantic
+  mutations plus ten Rust, ten Dart, ten Julia, and sixteen Lua admission mutations.
+- Rooted proof now executes neutral, Perl 124, Rust 1, Dart 5, Julia 319, PUC Lua 392, and LuaJIT 392. Recurring
+  and public no-drift remain pending for `.7`; format 2, `{label,family}` plans, 246 supported calls, legacy event
+  timing/descriptors/refs, facade/schema/MCP/CLI/README, capability 80/0/0, and typed source 9/5/114 do not move.
+
 ## 2026-08-16 — INTER-MATCH-GAP-CAPTURE.6.4 — prove Lua emitted gap execution
 
 - Activated task-tree-first from clean atomic-249 commit `b7708cde`. Adding the permanent emitted workspace

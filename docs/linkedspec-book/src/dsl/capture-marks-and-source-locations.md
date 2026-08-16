@@ -518,13 +518,13 @@ The active baseline leaves storage and AST shape to action code. “Automatic”
 gap and rolling its boundary, not appending a mandatory result node.
 
 ADR `0045` adopts **inter-match gap capture** as the formal name and **lossless segmentation** as the
-broader model. `@capture_gaps` is the accepted neutral directive. Perl, Rust, and Dart now recognize and
-statically validate it and privately execute native, reconstructed/generated, emitted, and primary roles.
-Julia, both Lua ABIs, recurring/public completion, and public exposure remain pending.
+broader model. `@capture_gaps` is the accepted neutral directive. All six private runtimes now recognize,
+statically validate, and execute it through native, reconstructed/generated, emitted, and primary roles.
+Recurring/public completion and public exposure remain pending.
 `INTER-MATCH-GAP-CAPTURE.1.0` froze its executable-neutral plan: exact prefix/interstitial/tail and empty
 spans, failure and rollback, recursion, typed source records, diagnostics, compatibility, routing, and rollout are
 specified before backend work begins. `.1.1` now makes that neutral JSON artifact and independent checker
-executable. Current private rollout is 4 complete + 5 pending with no outward admission.
+executable. Current private rollout is 7 complete + 2 pending with no outward admission.
 
 The broader manual `capture_*` and `mark_*` APIs remain useful. They do not redefine this original
 automatic repeated-action behavior.
@@ -570,7 +570,7 @@ Typed-source composition consumes that completed contract afterward; it does not
 
 The behavior-free contract now lives at `capability_conformance/inter_match_gap_capture_contract.json`, uses id
 `linkedspec-inter-match-gap-capture-v1`, and is checked independently by
-`tools/check_inter_match_gap_capture_contract.py`. Inter-match gap-capture recurring governance now executes the complete neutral, Perl, Rust, Dart, and Julia rows; two later runtime routes and both public rows remain pending.
+`tools/check_inter_match_gap_capture_contract.py`. Inter-match gap-capture recurring governance now executes the complete neutral and six private runtime rows; both public rows remain pending.
 The Perl reference implements authored/static metadata, private native-live behavior, and independently loaded
 generated parity. Admission `.2.4` runs that complete consumer in canonical CI and in the rooted recurring route,
 promotes only `perl_runtime`, and advances the checker to 56 mutations without outward public admission.
@@ -874,19 +874,22 @@ the nine-role ledger, ordinary/canonical/rooted registration, later-runtime skip
 
 The four private zero-argument gap helpers resolve through a separate private family, so the supported ActionIR
 inventory stays exactly 246; exact arity, unavailable-context, and cursor-regression diagnostics are native.
-Julia is privately admitted at 5/4/58. Outward surfaces, dependencies, and toolchain remain unchanged.
+Julia was privately admitted at the 5/4/58 boundary; subsequent Lua admission advances the shared ledger to
+7/2/60. Outward surfaces, dependencies, and toolchain remain unchanged.
 
-### Lua and LuaJIT private carrier execution — admission still pending
+### Lua and LuaJIT private execution — admitted on both ABIs
 
 Lua `.6.0` recorded the same pre-implementation result on both ABIs: numeric `Rule[0]` worked; named declarations,
 named selectors, and `@capture_gaps` were raw invalid body syntax; and the four future accessors reached
 unsupported runtime-helper diagnostics. `.6.1` implements the authored/static/compiled layer once for PUC Lua
 and LuaJIT, and `.6.2` adds private native execution through the existing recognition authority. `.6.3` carries
 the same state through normalized reconstruction, detached compatible descriptors, and direct/traced generated-v2
-execution. `.6.4` adds independently loaded emitted proof without changing the emitter. A 362-assertion consumer
-proves both ABIs explicitly—178 metadata, 33 native, 46 carrier, and 105 emitted assertions—but remains absent
-from ordinary, canonical, and rooted discovery through ten dormancy mutations. Complete package proof stays green
-at 177 tests per ABI, primary 66, corpus 105, and 19 exact temporary owners with three dual-ABI native modules.
+execution. `.6.4` adds independently loaded emitted proof without changing the emitter. `.6.5` composes those
+authorities with the unchanged primary adapter and admits the exact nine-role consumer. It passes 392 assertions
+on each ABI—178 metadata, 33 native, 46 carrier, 105 emitted, and 30 admission assertions—and executes once in
+ordinary discovery, explicitly once in canonical CI, and once in rooted PUC-Lua-then-LuaJIT order. Complete
+package proof is 178 tests per ABI, primary 66x2, corpus 105, and 19 exact temporary owners with three dual-ABI
+native modules.
 
 The audit also fixes the timing boundary. Lua's existing anonymous split markers and named `@mark(...)` compile as
 events attached to the preceding regex slot, then run after accepted action/target execution and before `LE`.
@@ -909,8 +912,10 @@ value set covers Unicode and empty gaps, falsey results, child-extended cursors,
 lifecycle order and terminal tails, failed minimum, direct entry, and unflagged legacy behavior; the error set
 preserves unavailable-context and cursor-regression stage/code/detail/source identity. The child consumes trace
 bytes before recursively cleaning its module, runner, manifest, output, and trace workspace. `.6.5` reuses the
-primary adapter, runs nine roles once per ABI, and alone may advance the two Lua rows from 5/4/58 to 7/2/60. No
-Lua gap admission or public/outward claim is current yet.
+primary adapter, runs nine roles once per ABI, and advances only the two Lua rows from 5/4/58 to 7/2/60. Sixteen
+admission mutations lock consumer identity, role order, primary use, registration multiplicity, rooted ordering,
+later public ownership, and facade absence. Both Lua private rows are current; public/outward claims remain
+pending for `.7`.
 
 The current Lua carrier is deliberately narrow. `SpecFile.source_id` defaults to `inline`, crosses the direct and
 two staged parser layers, survives normalized JSON and effective emitted state, and records caller-logical loaded

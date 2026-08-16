@@ -1061,8 +1061,8 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 ### 4.9.1.3 `tools/check_inter_match_gap_capture_contract.py` — executable-neutral gap oracle
 
 - **WHAT:** the format-1 neutral JSON authority for `linkedspec-inter-match-gap-capture-v1`. It executes exact
-  Unicode/empty/child/transaction state and rejects 58 semantic/topology corruptions at rollout 5 complete + 4
-  pending. Inter-match gap-capture recurring governance executes its complete neutral, private Perl, private Rust, private Dart, and private Julia rows while the two Lua runtimes remain pending.
+  Unicode/empty/child/transaction state and rejects 60 semantic/topology corruptions at rollout 7 complete + 2
+  pending. Inter-match gap-capture recurring governance executes its complete neutral plus six private runtime rows while recurring and public no-drift remain pending.
 - **WHEN:** implementing `.1.3`, named regex declarations/selectors, `entry_slot()`, `@capture_gaps`, the three
   gap accessors, or any backend/runtime/recurring leg.
 - **HOW:** run `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py`, retrieve

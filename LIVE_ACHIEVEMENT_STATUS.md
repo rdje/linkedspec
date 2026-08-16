@@ -2,34 +2,33 @@
 
 ## Current Activity
 
-- Atomic 249 landed cleanly at `b7708cde`; shared PUC-Lua/LuaJIT emitted-source/storage leaf
-  `INTER-MATCH-GAP-CAPTURE.6.4` is focused-signoff-complete from that exact boundary for intended atomic 250;
+- Atomic 250 landed cleanly at `798aeeee`; shared PUC-Lua/LuaJIT primary/admission/parent-closeout leaf
+  `INTER-MATCH-GAP-CAPTURE.6.5` is canonical-signoff-complete from that exact boundary for intended atomic 251;
   no push.
-- Unchanged `emit_lua_source_v2` output now executes as ten value and two typed-error modules independently loaded
-  by fresh PUC-Lua and LuaJIT children. Native/direct/traced values, plans, trace/source identity, lifecycle,
-  nesting, rollback, direct entry, legacy behavior, and typed failures agree.
-- The permanent dormant consumer passes 362 assertions per ABI: 178 metadata + 33 native + 46 carrier + 105
-  emitted. Ten checker-local dormancy mutations keep ordinary, canonical, rooted, and facade discovery absent for
-  both pending runtime rows.
-- Every emitted module, runner, manifest, trace, and child-output file stays below repository-routed `TMPDIR` and
-  is recursively cleaned. Storage is exactly 19 owners with three dual-ABI native modules.
-- Complete Lua passes 177 package tests per ABI, root routes 106, cursor descriptors 912, primary 66x2, and corpus
-  105. Rooted governance stays 5/4/58 and ends in two exact Lua skips.
-- Primary proof, admission, and every outward surface remain solely `.6.5`-owned. Production emitter, format 2,
-  ordered plans, supported ActionIR 246, recognition 137/246/58, and typed source 9/5/114 remain unchanged.
+- The permanent shared consumer passes 392 assertions per ABI: 178 metadata + 33 native + 46 carrier + 105
+  emitted + 30 admission. Its exact nine-role ledger executes once on each ABI in explicit, ordinary, canonical,
+  and rooted routes; `primary_command` reuses unchanged `linkedspec.run_primary_cli`.
+- Complete Lua passes 178 package tests per ABI, primary 66x2, corpus 105, and storage 19 owners / three native
+  modules. Rooted proof executes neutral, Perl 124, Rust 1, Dart 5, Julia 319, PUC Lua 392, and LuaJIT 392.
+- Only the two Lua runtime rows move: governance is 7/2/60 plus sixteen Lua admission mutations. Recurring/public
+  rows remain `.7`-owned. Format 2, ordered plans, supported ActionIR 246, legacy events/descriptors/refs, facade/
+  schema/MCP/CLI/README, capability 80/0/0, recognition 137/246/58, and typed source 9/5/114 remain unchanged.
 
 ## Latest Completed Slice
 
-- `.6.4` proves unchanged emitted source independently in fresh children for both Lua ABIs, advances only the
-  repository-local storage census 18→19, and preserves exact dormancy, rollout, format, plan, primary, and outward
-  boundaries. Explicit 362x2, complete Lua, rooted gap, and direct-dependent checks pass.
+- `.6.5` reuses the unchanged primary adapter, admits the exact nine-role consumer once per ABI in all required
+  routes, promotes only PUC Lua and LuaJIT to reach 7/2/60, and canonical-signoff-closes parent `.6` without
+  recurring/public or outward movement.
 
 ## Next Action
 
-- Finish book/Knowledge/task/live synchronization and focused doctrine signoff, commit intended atomic 250, clear
-  the brief, prove clean handoff, then activate `.6.5` task-tree-first for exact primary/nine-role Lua admission.
+- Finish exact staged canonical proof, commit intended atomic 251, promote its receipt, clear the brief, prove
+  clean handoff, then pause for director instruction without activating `.7`.
 
 ## Recent Completions
+
+- `2026-08-16` — `.6.5` admitted the exact shared nine-role consumer on PUC Lua and LuaJIT from clean `798aeeee`,
+  advancing only the two runtime rows to 7/2/60 and canonical-signoff-closing parent `.6`.
 
 - `2026-08-16` — `.6.4` completed ten value/two typed-error independently emitted modules on fresh PUC-Lua and
   LuaJIT children from clean `b7708cde`, advancing only repository-local storage ownership from 18 to 19.
@@ -59,7 +58,6 @@
   and landed as atomic 238 at `6a554312`.
 - `2026-08-15` — `.4.3` completed normalized reconstruction, compatible descriptors, and same-engine generated
   execution and landed as atomic 237 at `4c8ab7ee`.
-- `2026-08-15` — `.4.2` completed private native Dart gap execution at atomic 236 `0b074e1c`.
 
 ## History
 

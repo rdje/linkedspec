@@ -9473,6 +9473,14 @@ test("generated Unicode 17 casing matches all neutral fixtures and runtime paths
   end
 end)
 
+test("inter-match gap capture runs the admitted contract", function()
+  local gap_chunk, gap_load_error = loadfile(
+    "lua/test/inter_match_gap_capture_contract_test.lua"
+  )
+  if gap_chunk == nil then error(gap_load_error, 0) end
+  gap_chunk()
+end)
+
 io.stdout:write("1..", total, "\n")
 if failed > 0 then
   os.exit(1)

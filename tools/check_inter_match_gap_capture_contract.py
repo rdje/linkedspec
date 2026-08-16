@@ -72,16 +72,22 @@ JULIA_ADMISSION_MUTATION_IDS = (
     "julia_facade_absence",
 )
 
-LUA_DORMANCY_MUTATION_IDS = (
+LUA_ADMISSION_MUTATION_IDS = (
     "lua_consumer_identity",
-    "lua_metadata_stage",
-    "lua_contract_source",
-    "lua_parse_boundary",
-    "lua_validation_boundary",
-    "lua_diagnostic_contract",
-    "lua_compiler_boundary",
-    "lua_ordinary_canonical_absence",
-    "lua_recurring_absence",
+    "lua_role_ledger",
+    "lua_ordinary_registration",
+    "lua_primary_role",
+    "lua_canonical_puc_registration",
+    "lua_canonical_puc_duplicate",
+    "lua_canonical_luajit_registration",
+    "lua_canonical_luajit_duplicate",
+    "lua_recurring_puc_registration",
+    "lua_recurring_puc_duplicate",
+    "lua_recurring_luajit_registration",
+    "lua_recurring_luajit_duplicate",
+    "lua_recurring_order",
+    "lua_later_recurring_skip",
+    "lua_later_public_skip",
     "lua_facade_absence",
 )
 
@@ -121,7 +127,7 @@ EXPECTED_COUNTS = {
     "compatibility_rows": 6,
     "diagnostics": 9,
     "rollout_legs": 9,
-    "semantic_mutations": 58,
+    "semantic_mutations": 60,
 }
 
 MUTATION_IDS = (
@@ -180,6 +186,8 @@ MUTATION_IDS = (
     "rust_runtime_regression",
     "dart_runtime_regression",
     "julia_runtime_regression",
+    "puc_lua_runtime_regression",
+    "luajit_runtime_regression",
     "storage_paths",
     "route_order",
     "public_no_overclaim",
@@ -790,7 +798,7 @@ def validate_diagnostics(document: dict[str, Any]) -> None:
 
 def validate_recurring_gate(document: dict[str, Any]) -> None:
     expected = {
-        "status": "governance_current_perl_rust_dart_julia_admitted_lua_runtimes_pending",
+        "status": "governance_current_all_private_runtimes_admitted_public_pending",
         "owner": "INTER-MATCH-GAP-CAPTURE.1.2",
         "driver": "tools/check_inter_match_gap_capture_six_runtime.sh",
         "local_ci_driver": "tools/run_ci_local.sh",
@@ -887,7 +895,7 @@ def validate_public_no_overclaim(
     expected = {
         "status": "current",
         "owner": "INTER-MATCH-GAP-CAPTURE.1.2",
-        "policy": "document the executable neutral and admitted private Perl, Rust, Dart, and Julia runtimes without claiming later runtimes, recurring/public rollout completion, capability admission, schema exposure, CLI exposure, or outward public admission",
+        "policy": "document the executable neutral and all six admitted private runtime rows without claiming recurring/public rollout completion, capability admission, schema exposure, CLI exposure, or outward public admission",
         "rollout_assertions": {
             "row_count": 9,
             "neutral_contract": {"status": "complete", "owner": "INTER-MATCH-GAP-CAPTURE.1.1"},
@@ -895,31 +903,31 @@ def validate_public_no_overclaim(
             "rust_runtime": {"status": "complete", "owner": "INTER-MATCH-GAP-CAPTURE.3"},
             "dart_runtime": {"status": "complete", "owner": "INTER-MATCH-GAP-CAPTURE.4"},
             "julia_runtime": {"status": "complete", "owner": "INTER-MATCH-GAP-CAPTURE.5"},
-            "pending_runtime_ids": ["puc_lua_runtime", "luajit_runtime"],
-            "runtime_status": "pending",
+            "complete_lua_runtime_ids": ["puc_lua_runtime", "luajit_runtime"],
+            "lua_runtime_status": "complete",
             "recurring": {"status": "pending", "owner": "INTER-MATCH-GAP-CAPTURE.7"},
             "public_no_drift": {"status": "pending", "owner": "INTER-MATCH-GAP-CAPTURE.7"},
         },
         "documents": [
             {
                 "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
-                "required_marker": "Inter-match gap-capture recurring governance now executes the complete neutral, Perl, Rust, Dart, and Julia rows; two later runtime routes and both public rows remain pending.",
+                "required_marker": "Inter-match gap-capture recurring governance now executes the complete neutral and six private runtime rows; both public rows remain pending.",
             },
             {
                 "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
-                "required_marker": "Inter-match gap-capture recurring governance runs the complete neutral, Perl, Rust, Dart, and Julia rows; two later runtime routes remain explicit skips.",
+                "required_marker": "Inter-match gap-capture recurring governance runs the complete neutral and six private runtime rows; no runtime route remains an explicit skip.",
             },
             {
                 "path": "docs/linkedspec-book/src/overview/project-status.md",
-                "required_marker": "Inter-match gap-capture governance is current at 5 complete / 4 pending: Perl, Rust, Dart, and Julia are admitted privately, while the two Lua runtimes and both public rows remain pending.",
+                "required_marker": "Inter-match gap-capture governance is current at 7 complete / 2 pending: all six runtime rows are admitted privately, while recurring and public no-drift remain pending.",
             },
             {
                 "path": "capability_conformance/README.md",
-                "required_marker": "Inter-match gap-capture recurring governance now admits the private Perl, Rust, Dart, and Julia runtimes; the two Lua runtimes and public admission remain pending.",
+                "required_marker": "Inter-match gap-capture recurring governance now admits all six private runtime rows; recurring and public admission remain pending.",
             },
             {
                 "path": "TOOLBOX.md",
-                "required_marker": "Inter-match gap-capture recurring governance executes its complete neutral, private Perl, private Rust, private Dart, and private Julia rows while the two Lua runtimes remain pending.",
+                "required_marker": "Inter-match gap-capture recurring governance executes its complete neutral plus six private runtime rows while recurring and public no-drift remain pending.",
             },
         ],
         "surface_guard": {
@@ -952,9 +960,9 @@ def validate_public_no_overclaim(
             actual is not None and {"status": actual["status"], "owner": actual["owner"]} == expected_row,
             f"public no-overclaim rollout assertion drifted: {rollout_id}",
         )
-    for rollout_id in assertions["pending_runtime_ids"]:
+    for rollout_id in assertions["complete_lua_runtime_ids"]:
         actual = rollout_by_id.get(rollout_id)
-        require(actual is not None and actual["status"] == assertions["runtime_status"], f"later runtime rollout promoted prematurely: {rollout_id}")
+        require(actual is not None and actual["status"] == assertions["lua_runtime_status"], f"Lua runtime rollout drifted: {rollout_id}")
 
     if document_texts is None and surface_texts is None:
         return
@@ -971,7 +979,7 @@ def validate_public_no_overclaim(
 def validate_rollout(document: dict[str, Any]) -> None:
     rows = indexed(document["rollout"], ROLLOUT_IDS, "rollout")
     for index, rollout_id in enumerate(ROLLOUT_IDS):
-        expected_status = "complete" if index <= 4 else "pending"
+        expected_status = "complete" if index <= 6 else "pending"
         expected_owner = TASK_OWNER if index == 0 else {
             "perl_runtime": "INTER-MATCH-GAP-CAPTURE.2.4",
             "rust_runtime": "INTER-MATCH-GAP-CAPTURE.3",
@@ -1005,7 +1013,7 @@ def validate_registration(document: dict[str, Any]) -> None:
     require(RUST_CONSUMER_PATH.is_file(), "admitted Rust consumer is missing")
     require(DART_CONSUMER_PATH.is_file(), "admitted Dart consumer is missing")
     require(JULIA_CONSUMER_PATH.is_file(), "admitted Julia consumer is missing")
-    require(LUA_CONSUMER_PATH.is_file(), "dormant Lua consumer is missing")
+    require(LUA_CONSUMER_PATH.is_file(), "admitted Lua consumer is missing")
     perl_consumer_text = PERL_CONSUMER_PATH.read_text(encoding="utf-8")
     rust_consumer_text = RUST_CONSUMER_PATH.read_text(encoding="utf-8")
     dart_consumer_text = DART_CONSUMER_PATH.read_text(encoding="utf-8")
@@ -1029,7 +1037,7 @@ def validate_registration(document: dict[str, Any]) -> None:
         driver_text,
         julia_facade_text,
     )
-    validate_lua_dormancy(
+    validate_lua_admission(
         lua_consumer_text,
         lua_ordinary_text,
         ci_text,
@@ -1075,9 +1083,12 @@ def validate_registration(document: dict[str, Any]) -> None:
                 "include(\"julia/test/inter_match_gap_capture_contract_test.jl\")'"
             )
         elif rollout_id in ("puc_lua_runtime", "luajit_runtime"):
-            require(consumer_path == LUA_CONSUMER_PATH, "dormant Lua consumer path drifted")
-            require(rollout_by_id[rollout_id]["status"] == "pending", "dormant Lua rollout is not pending")
-            route_markers.append(f"skipping pending runtime route {rollout_id}: {consumer['path']}")
+            require(consumer_path == LUA_CONSUMER_PATH, "admitted Lua consumer path drifted")
+            require(rollout_by_id[rollout_id]["status"] == "complete", "admitted Lua rollout is not complete")
+            runtime = "puc" if rollout_id == "puc_lua_runtime" else "luajit"
+            route_markers.append(
+                f"bash tools/run_lua_project_data.sh {runtime} {consumer['path']}"
+            )
         else:
             require(rollout_by_id[rollout_id]["status"] == "pending", f"later runtime is not pending: {rollout_id}")
             route_markers.append(f"skipping pending runtime route {rollout_id}: {consumer['path']}")
@@ -1180,13 +1191,15 @@ def validate_rust_admission(
         and f"skipping pending runtime route rust_runtime: {consumer_path}" not in driver_text,
         "Rust admitted consumer is not registered exactly once in recurring execution",
     )
-    for rollout_id, path in (
-        ("puc_lua_runtime", "lua/test/inter_match_gap_capture_contract_test.lua"),
-        ("luajit_runtime", "lua/test/inter_match_gap_capture_contract_test.lua"),
+    for rollout_id, runtime in (
+        ("puc_lua_runtime", "puc"),
+        ("luajit_runtime", "luajit"),
     ):
         require(
-            driver_text.count(f"skipping pending runtime route {rollout_id}: {path}") == 1,
-            f"Rust admission disturbed later runtime skip: {rollout_id}",
+            driver_text.count(
+                f"bash tools/run_lua_project_data.sh {runtime} lua/test/inter_match_gap_capture_contract_test.lua"
+            ) == 1,
+            f"Rust admission disturbed later runtime route: {rollout_id}",
         )
     require(
         "inter_match_gap_capture" not in facade_text and "capture_gaps" not in facade_text,
@@ -1241,13 +1254,15 @@ def validate_dart_admission(
         and f"skipping pending runtime route dart_runtime: {consumer_path}" not in driver_text,
         "Dart admitted consumer is not registered exactly once in recurring execution",
     )
-    for rollout_id, path in (
-        ("puc_lua_runtime", "lua/test/inter_match_gap_capture_contract_test.lua"),
-        ("luajit_runtime", "lua/test/inter_match_gap_capture_contract_test.lua"),
+    for rollout_id, runtime in (
+        ("puc_lua_runtime", "puc"),
+        ("luajit_runtime", "luajit"),
     ):
         require(
-            driver_text.count(f"skipping pending runtime route {rollout_id}: {path}") == 1,
-            f"Dart admission disturbed later runtime skip: {rollout_id}",
+            driver_text.count(
+                f"bash tools/run_lua_project_data.sh {runtime} lua/test/inter_match_gap_capture_contract_test.lua"
+            ) == 1,
+            f"Dart admission disturbed later runtime route: {rollout_id}",
         )
     require(
         "inter_match_gap_capture" not in facade_text and "capture_gaps" not in facade_text,
@@ -1310,13 +1325,15 @@ def validate_julia_admission(
         and f"skipping pending runtime route julia_runtime: {consumer_path}" not in driver_text,
         "Julia admitted consumer is not registered exactly once in recurring execution",
     )
-    for rollout_id, path in (
-        ("puc_lua_runtime", "lua/test/inter_match_gap_capture_contract_test.lua"),
-        ("luajit_runtime", "lua/test/inter_match_gap_capture_contract_test.lua"),
+    for rollout_id, runtime in (
+        ("puc_lua_runtime", "puc"),
+        ("luajit_runtime", "luajit"),
     ):
         require(
-            driver_text.count(f"skipping pending runtime route {rollout_id}: {path}") == 1,
-            f"Julia admission disturbed later runtime skip: {rollout_id}",
+            driver_text.count(
+                f"bash tools/run_lua_project_data.sh {runtime} lua/test/inter_match_gap_capture_contract_test.lua"
+            ) == 1,
+            f"Julia admission disturbed later runtime route: {rollout_id}",
         )
     require(
         "inter_match_gap_capture" not in facade_text and "capture_gaps" not in facade_text,
@@ -1410,12 +1427,12 @@ def julia_admission_mutations() -> list[JuliaAdmissionMutation]:
         ),
         (
             "julia_later_runtime_skip",
-            "Julia admission disturbed later runtime skip: puc_lua_runtime",
+            "Julia admission disturbed later runtime route: puc_lua_runtime",
             lambda texts: texts.__setitem__(
                 "driver",
                 texts["driver"].replace(
-                    "skipping pending runtime route puc_lua_runtime: lua/test/inter_match_gap_capture_contract_test.lua",
-                    "stale later runtime skip",
+                    "bash tools/run_lua_project_data.sh puc lua/test/inter_match_gap_capture_contract_test.lua",
+                    "stale later runtime route",
                     1,
                 ),
             ),
@@ -1466,7 +1483,7 @@ def validate_julia_admission_mutations() -> int:
     return len(checks)
 
 
-def validate_lua_dormancy(
+def validate_lua_admission(
     consumer_text: str,
     ordinary_text: str,
     ci_text: str,
@@ -1474,140 +1491,216 @@ def validate_lua_dormancy(
     facade_text: str,
 ) -> None:
     consumer_markers = (
-        ('local CONTRACT_ID = "linkedspec-inter-match-gap-capture-v1"', "Lua dormant consumer contract drifted"),
+        ('local CONTRACT_ID = "linkedspec-inter-match-gap-capture-v1"', "Lua admitted consumer contract drifted"),
         (
-            "-- DORMANT: INTER-MATCH-GAP-CAPTURE.6.5 owns Lua runtime admission",
-            "Lua dormant metadata stage drifted",
-        ),
-        ("inter_match_gap_capture_contract.json", "Lua dormant contract source drifted"),
-        (
-            "local parsed = linkedspec.parse_spec(source, { source_id = source_id })",
-            "Lua dormant parse boundary drifted",
+            "-- INTER-MATCH-GAP-CAPTURE.6.5 — admitted shared Lua primary/composition stage.",
+            "Lua admitted consumer stage drifted",
         ),
         (
-            "linkedspec.validate_spec(parsed)\n  return linkedspec.compile_spec(parsed, { validate_source = false })",
-            "Lua dormant validation boundary drifted",
+            'check_json_equal(declared_roles, EXPECTED_ROLES, "admitted role ledger")',
+            "Lua admitted role ledger drifted",
         ),
-        ('"regex_slot_unknown_name"', "Lua dormant diagnostic contract drifted"),
-        ("local function compile_metadata(", "Lua dormant compiler boundary drifted"),
+        ("role_map[role]()", "Lua admitted role ledger drifted"),
+        ("local function role_primary_command()", "Lua admitted primary role drifted"),
+        ("primary_command = role_primary_command,", "Lua admitted primary role drifted"),
+        ('" assertions; admitted; runtime="', "Lua admitted success marker drifted"),
     )
     for marker, reason in consumer_markers:
         require(consumer_text.count(marker) == 1, reason)
 
+    role_markers = (
+        "native_execution = role_native_execution,",
+        "ordinary_reconstruction = role_ordinary_reconstruction,",
+        "descriptor = role_descriptor,",
+        "generated_plan = role_generated_plan,",
+        "emitted_source = role_emitted_source,",
+        "target_lifecycle = role_target_lifecycle,",
+        "recursion_and_rollback = role_recursion_and_rollback,",
+        "portable_diagnostics = role_portable_diagnostics,",
+        "primary_command = role_primary_command,",
+    )
+    for marker in role_markers:
+        require(consumer_text.count(marker) == 1, f"Lua admitted role ledger drifted: {marker}")
+
     consumer_path = "lua/test/inter_match_gap_capture_contract_test.lua"
-    discovery_marker = "inter_match_gap_capture_contract_test"
+    ordinary_marker = f'"{consumer_path}"'
+    canonical_puc = f"bash tools/run_lua_project_data.sh puc {consumer_path}"
+    canonical_luajit = f"bash tools/run_lua_project_data.sh luajit {consumer_path}"
+    require_marker = f"require_tracked_file {consumer_path}"
     require(
-        discovery_marker not in ordinary_text and consumer_path not in ci_text,
-        "Lua dormant consumer entered ordinary/canonical discovery prematurely",
+        ordinary_text.count(ordinary_marker) == 1,
+        "Lua admitted consumer is not registered exactly once in ordinary discovery",
+    )
+    require(ci_text.count(require_marker) == 1, "Lua admitted consumer canonical input drifted")
+    for runtime, command in (("PUC Lua", canonical_puc), ("LuaJIT", canonical_luajit)):
+        require(
+            ci_text.count(command) == 1,
+            f"Lua admitted consumer is not registered exactly once in canonical CI: {runtime}",
+        )
+        require(
+            driver_text.count(command) == 1,
+            f"Lua admitted consumer is not registered exactly once in recurring execution: {runtime}",
+        )
+    require(
+        driver_text.index(canonical_puc) < driver_text.index(canonical_luajit),
+        "Lua admitted recurring runtime order drifted",
     )
     for rollout_id in ("puc_lua_runtime", "luajit_runtime"):
         require(
-            driver_text.count(f"skipping pending runtime route {rollout_id}: {consumer_path}") == 1,
-            f"Lua dormant consumer entered recurring execution prematurely: {rollout_id}",
+            f"skipping pending runtime route {rollout_id}: {consumer_path}" not in driver_text,
+            f"Lua admitted recurring route remained skipped: {rollout_id}",
         )
+    final_marker = (
+        "PASS: neutral and all six private runtime routes complete; "
+        "recurring and public no-drift remain pending"
+    )
+    require(driver_text.count(final_marker) == 1, "Lua admission disturbed later recurring/public skips")
     require(
         "capture_gaps" not in facade_text and "inter_match_gap_capture" not in facade_text,
-        "Lua dormant consumer widened the public facade prematurely",
+        "Lua admission widened the public facade",
     )
 
 
-LuaDormancyMutation = tuple[str, str, Callable[[dict[str, str]], None]]
+LuaAdmissionMutation = tuple[str, str, Callable[[dict[str, str]], None]]
 
 
-def lua_dormancy_mutations() -> list[LuaDormancyMutation]:
+def lua_admission_mutations() -> list[LuaAdmissionMutation]:
     consumer_path = "lua/test/inter_match_gap_capture_contract_test.lua"
+    puc_command = f"bash tools/run_lua_project_data.sh puc {consumer_path}"
+    luajit_command = f"bash tools/run_lua_project_data.sh luajit {consumer_path}"
+    final_marker = (
+        "PASS: neutral and all six private runtime routes complete; "
+        "recurring and public no-drift remain pending"
+    )
     return [
         (
             "lua_consumer_identity",
-            "Lua dormant consumer contract drifted",
+            "Lua admitted consumer contract drifted",
             lambda texts: texts.__setitem__(
                 "consumer",
                 texts["consumer"].replace("linkedspec-inter-match-gap-capture-v1", "stale", 1),
             ),
         ),
         (
-            "lua_metadata_stage",
-            "Lua dormant metadata stage drifted",
+            "lua_role_ledger",
+            "Lua admitted role ledger drifted",
             lambda texts: texts.__setitem__(
                 "consumer",
                 texts["consumer"].replace(
-                    "INTER-MATCH-GAP-CAPTURE.6.5 owns Lua runtime admission",
-                    "stale admission owner",
+                    'check_json_equal(declared_roles, EXPECTED_ROLES, "admitted role ledger")',
+                    'check_json_equal(declared_roles, json.array(), "admitted role ledger")',
                     1,
                 ),
             ),
         ),
         (
-            "lua_contract_source",
-            "Lua dormant contract source drifted",
-            lambda texts: texts.__setitem__(
-                "consumer",
-                texts["consumer"].replace("inter_match_gap_capture_contract.json", "stale_contract.json", 1),
-            ),
-        ),
-        (
-            "lua_parse_boundary",
-            "Lua dormant parse boundary drifted",
-            lambda texts: texts.__setitem__(
-                "consumer",
-                texts["consumer"].replace(
-                    "local parsed = linkedspec.parse_spec(source, { source_id = source_id })",
-                    "local parsed = linkedspec.parse_other(source, { source_id = source_id })",
-                    1,
-                ),
-            ),
-        ),
-        (
-            "lua_validation_boundary",
-            "Lua dormant validation boundary drifted",
-            lambda texts: texts.__setitem__(
-                "consumer",
-                texts["consumer"].replace(
-                    "linkedspec.validate_spec(parsed)\n  return linkedspec.compile_spec(parsed, { validate_source = false })",
-                    "linkedspec.validate_other(parsed)\n  return linkedspec.compile_spec(parsed, { validate_source = false })",
-                    1,
-                ),
-            ),
-        ),
-        (
-            "lua_diagnostic_contract",
-            "Lua dormant diagnostic contract drifted",
-            lambda texts: texts.__setitem__(
-                "consumer",
-                texts["consumer"].replace('"regex_slot_unknown_name"', '"stale_diagnostic"', 1),
-            ),
-        ),
-        (
-            "lua_compiler_boundary",
-            "Lua dormant compiler boundary drifted",
-            lambda texts: texts.__setitem__(
-                "consumer",
-                texts["consumer"].replace("local function compile_metadata(", "local function compile_other(", 1),
-            ),
-        ),
-        (
-            "lua_ordinary_canonical_absence",
-            "Lua dormant consumer entered ordinary/canonical discovery prematurely",
+            "lua_ordinary_registration",
+            "Lua admitted consumer is not registered exactly once in ordinary discovery",
             lambda texts: texts.__setitem__(
                 "ordinary",
-                texts["ordinary"] + '\nrequire("inter_match_gap_capture_contract_test")\n',
+                texts["ordinary"].replace(consumer_path, "lua/test/stale_gap_contract.lua", 1),
             ),
         ),
         (
-            "lua_recurring_absence",
-            "Lua dormant consumer entered recurring execution prematurely: puc_lua_runtime",
+            "lua_primary_role",
+            "Lua admitted primary role drifted",
             lambda texts: texts.__setitem__(
-                "driver",
-                texts["driver"].replace(
-                    f"skipping pending runtime route puc_lua_runtime: {consumer_path}",
-                    "stale pending Lua route",
+                "consumer",
+                texts["consumer"].replace(
+                    "primary_command = role_primary_command,",
+                    "primary_command = role_native_execution,",
                     1,
                 ),
+            ),
+        ),
+        (
+            "lua_canonical_puc_registration",
+            "Lua admitted consumer is not registered exactly once in canonical CI: PUC Lua",
+            lambda texts: texts.__setitem__(
+                "ci", texts["ci"].replace(puc_command, "stale PUC Lua gap command", 1)
+            ),
+        ),
+        (
+            "lua_canonical_puc_duplicate",
+            "Lua admitted consumer is not registered exactly once in canonical CI: PUC Lua",
+            lambda texts: texts.__setitem__(
+                "ci", texts["ci"] + f"\n{puc_command}\n"
+            ),
+        ),
+        (
+            "lua_canonical_luajit_registration",
+            "Lua admitted consumer is not registered exactly once in canonical CI: LuaJIT",
+            lambda texts: texts.__setitem__(
+                "ci", texts["ci"].replace(luajit_command, "stale LuaJIT gap command", 1)
+            ),
+        ),
+        (
+            "lua_canonical_luajit_duplicate",
+            "Lua admitted consumer is not registered exactly once in canonical CI: LuaJIT",
+            lambda texts: texts.__setitem__(
+                "ci", texts["ci"] + f"\n{luajit_command}\n"
+            ),
+        ),
+        (
+            "lua_recurring_puc_registration",
+            "Lua admitted consumer is not registered exactly once in recurring execution: PUC Lua",
+            lambda texts: texts.__setitem__(
+                "driver",
+                texts["driver"].replace(puc_command, "stale PUC Lua gap command", 1),
+            ),
+        ),
+        (
+            "lua_recurring_puc_duplicate",
+            "Lua admitted consumer is not registered exactly once in recurring execution: PUC Lua",
+            lambda texts: texts.__setitem__(
+                "driver", texts["driver"] + f"\n{puc_command}\n"
+            ),
+        ),
+        (
+            "lua_recurring_luajit_registration",
+            "Lua admitted consumer is not registered exactly once in recurring execution: LuaJIT",
+            lambda texts: texts.__setitem__(
+                "driver",
+                texts["driver"].replace(luajit_command, "stale LuaJIT gap command", 1),
+            ),
+        ),
+        (
+            "lua_recurring_luajit_duplicate",
+            "Lua admitted consumer is not registered exactly once in recurring execution: LuaJIT",
+            lambda texts: texts.__setitem__(
+                "driver", texts["driver"] + f"\n{luajit_command}\n"
+            ),
+        ),
+        (
+            "lua_recurring_order",
+            "Lua admitted recurring runtime order drifted",
+            lambda texts: texts.__setitem__(
+                "driver",
+                texts["driver"]
+                .replace(puc_command, "__PUC_LUA_GAP_COMMAND__", 1)
+                .replace(luajit_command, puc_command, 1)
+                .replace("__PUC_LUA_GAP_COMMAND__", luajit_command, 1),
+            ),
+        ),
+        (
+            "lua_later_recurring_skip",
+            "Lua admission disturbed later recurring/public skips",
+            lambda texts: texts.__setitem__(
+                "driver",
+                texts["driver"].replace(final_marker, final_marker.replace("recurring and ", ""), 1),
+            ),
+        ),
+        (
+            "lua_later_public_skip",
+            "Lua admission disturbed later recurring/public skips",
+            lambda texts: texts.__setitem__(
+                "driver",
+                texts["driver"].replace(final_marker, final_marker.replace(" and public no-drift", ""), 1),
             ),
         ),
         (
             "lua_facade_absence",
-            "Lua dormant consumer widened the public facade prematurely",
+            "Lua admission widened the public facade",
             lambda texts: texts.__setitem__(
                 "facade",
                 texts["facade"] + "\nreturn { capture_gaps = true }\n",
@@ -1616,7 +1709,7 @@ def lua_dormancy_mutations() -> list[LuaDormancyMutation]:
     ]
 
 
-def validate_lua_dormancy_mutations() -> int:
+def validate_lua_admission_mutations() -> int:
     texts = {
         "consumer": LUA_CONSUMER_PATH.read_text(encoding="utf-8"),
         "ordinary": LUA_ORDINARY_PATH.read_text(encoding="utf-8"),
@@ -1624,16 +1717,16 @@ def validate_lua_dormancy_mutations() -> int:
         "driver": RECURRING_DRIVER_PATH.read_text(encoding="utf-8"),
         "facade": LUA_FACADE_PATH.read_text(encoding="utf-8"),
     }
-    checks = lua_dormancy_mutations()
+    checks = lua_admission_mutations()
     require(
-        tuple(name for name, _, _ in checks) == LUA_DORMANCY_MUTATION_IDS,
-        "Lua dormancy mutation identity/order drifted",
+        tuple(name for name, _, _ in checks) == LUA_ADMISSION_MUTATION_IDS,
+        "Lua admission mutation identity/order drifted",
     )
     for name, expected_reason, mutate in checks:
         candidate = copy.deepcopy(texts)
         mutate(candidate)
         try:
-            validate_lua_dormancy(
+            validate_lua_admission(
                 candidate["consumer"],
                 candidate["ordinary"],
                 candidate["ci"],
@@ -1643,10 +1736,10 @@ def validate_lua_dormancy_mutations() -> int:
         except ContractError as error:
             require(
                 expected_reason in str(error),
-                f"Lua dormancy mutation {name} failed for unexpected reason: {error}",
+                f"Lua admission mutation {name} failed for unexpected reason: {error}",
             )
         else:
-            fail(f"Lua dormancy mutation {name} was accepted")
+            fail(f"Lua admission mutation {name} was accepted")
     return len(checks)
 
 
@@ -1739,12 +1832,12 @@ def dart_admission_mutations() -> list[DartAdmissionMutation]:
         ),
         (
             "dart_later_runtime_skip",
-            "Dart admission disturbed later runtime skip: puc_lua_runtime",
+            "Dart admission disturbed later runtime route: puc_lua_runtime",
             lambda texts: texts.__setitem__(
                 "driver",
                 texts["driver"].replace(
-                    "skipping pending runtime route puc_lua_runtime: lua/test/inter_match_gap_capture_contract_test.lua",
-                    "stale later runtime skip",
+                    "bash tools/run_lua_project_data.sh puc lua/test/inter_match_gap_capture_contract_test.lua",
+                    "stale later runtime route",
                     1,
                 ),
             ),
@@ -1876,12 +1969,12 @@ def rust_admission_mutations() -> list[RustAdmissionMutation]:
         ),
         (
             "rust_later_runtime_skip",
-            "Rust admission disturbed later runtime skip: puc_lua_runtime",
+            "Rust admission disturbed later runtime route: puc_lua_runtime",
             lambda texts: texts.__setitem__(
                 "driver",
                 texts["driver"].replace(
-                    "skipping pending runtime route puc_lua_runtime: lua/test/inter_match_gap_capture_contract_test.lua",
-                    "stale later runtime skip",
+                    "bash tools/run_lua_project_data.sh puc lua/test/inter_match_gap_capture_contract_test.lua",
+                    "stale later runtime route",
                     1,
                 ),
             ),
@@ -2034,6 +2127,8 @@ def mutations() -> list[Mutation]:
             ("rust_runtime_regression", "rust_runtime rollout drifted", lambda d: row(d, "rollout", "rust_runtime").__setitem__("status", "pending")),
             ("dart_runtime_regression", "dart_runtime rollout drifted", lambda d: row(d, "rollout", "dart_runtime").__setitem__("status", "pending")),
             ("julia_runtime_regression", "julia_runtime rollout drifted", lambda d: row(d, "rollout", "julia_runtime").__setitem__("status", "pending")),
+            ("puc_lua_runtime_regression", "puc_lua_runtime rollout drifted", lambda d: row(d, "rollout", "puc_lua_runtime").__setitem__("status", "pending")),
+            ("luajit_runtime_regression", "luajit_runtime rollout drifted", lambda d: row(d, "rollout", "luajit_runtime").__setitem__("status", "pending")),
             ("storage_paths", "recurring gate topology drifted", lambda d: d["recurring_gate"]["storage"].__setitem__("initializer", "/tmp/project_data_env.sh")),
             ("route_order", "recurring gate topology drifted", lambda d: d["recurring_gate"]["route_order"].reverse()),
             ("public_no_overclaim", "public no-overclaim contract drifted", lambda d: d["public_no_overclaim"].__setitem__("status", "planned")),
@@ -2070,7 +2165,7 @@ def main() -> int:
         rust_admission_mutation_count = validate_rust_admission_mutations()
         dart_admission_mutation_count = validate_dart_admission_mutations()
         julia_admission_mutation_count = validate_julia_admission_mutations()
-        lua_dormancy_mutation_count = validate_lua_dormancy_mutations()
+        lua_admission_mutation_count = validate_lua_admission_mutations()
     except (json.JSONDecodeError, OSError, ContractError) as error:
         print(f"inter-match gap capture contract: FAIL: {error}", file=sys.stderr)
         return 1
@@ -2084,7 +2179,7 @@ def main() -> int:
         f"{rust_admission_mutation_count} rejected Rust admission mutations; "
         f"{dart_admission_mutation_count} rejected Dart admission mutations; "
         f"{julia_admission_mutation_count} rejected Julia admission mutations; "
-        f"{lua_dormancy_mutation_count} rejected Lua dormancy mutations)"
+        f"{lua_admission_mutation_count} rejected Lua admission mutations)"
     )
     return 0
 
