@@ -10,6 +10,20 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-16 — INTER-MATCH-GAP-CAPTURE.7.3 — close lossless segmentation tree
+
+- Activated task-tree-first from clean public atomic 254 `bb0c3768` with its canonical receipt promoted and
+  commit brief cleared. Recorded committed blob identities before independent recomposition.
+- Reproved gap 9/0/63 plus public 6/12/10/29, language 250/105+1/126, recognition 137/250/58, the exact rooted
+  neutral/Perl-124/Rust-1/Dart-5/Julia-319/PUC-Lua-392/LuaJIT-392 route, and all adjacent ledgers.
+- Reproved capability 80/0/0, generated-source strict Rust 105/105, typed source 9/5/114 across six runtimes,
+  semantic 9/0/128 across six runtimes plus selected CLI 5x2x3, MCP 35/10/10/76, and repository-local storage.
+- Base-relative proof keeps every admitted executable contract, implementation, outward facade/schema/MCP/CLI/
+  README surface, and storage owner byte-identical. Only closeout/handoff durable layers move.
+- Closed parent `.7` and the entire `INTER-MATCH-GAP-CAPTURE` tree. `FUTURE-PARITY-BACKLOG.14.5.1` is unblocked
+  but remains pending until this canonical atomic-255 receipt/commit/brief/clean boundary lands; it owns only
+  typed-source `gap_composition`, while combined program-wide no-drift remains `.14.8`.
+
 ## 2026-08-16 — INTER-MATCH-GAP-CAPTURE.7.2 — admit public lossless segmentation
 
 - Activated task-tree-first from clean recurring commit `d8ed944c`. The shared-inventory change first failed

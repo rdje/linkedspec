@@ -7,8 +7,8 @@
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
 - Last updated: `2026-08-16` (behavior-free lossless-gap handoff `.14.5.0` landed at `3d0384d1`; separate
-  `INTER-MATCH-GAP-CAPTURE.1-.5` is implemented through Julia canonical signoff for intended atomic 245, shared
-  Lua `.6` is next after commit/brief/clean proof, and typed composition `.14.5.1` waits for `.7`)
+  `INTER-MATCH-GAP-CAPTURE.1-.7` is canonical-signoff-complete through no-change closeout `.7.3` from clean
+  `bb0c3768`; typed composition `.14.5.1` is unblocked but awaits the atomic-255 clean boundary)
 - Owner: repo-local workflow
 
 ## Goal
@@ -106,12 +106,12 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 
 **Authoritative frontier (2026-08-16):** behavior-free lossless-gap handoff `.14.5.0` landed cleanly at
 `3d0384d1` as atomic 217/300. It freezes `INTER-MATCH-GAP-CAPTURE.1-.7` as the sole syntax, lifecycle,
-compatibility, six-runtime, carrier, and public-admission owner. That separate tree has closed neutral `.1`, Perl
-`.2`, Rust `.3`, Dart `.4`, and Julia `.5`; Julia primary/admission is canonical-signoff-complete for intended
-atomic 245 from clean `0a961043`, reaching gap 5/4/58 plus ten Rust, ten Dart, and ten Julia admission mutations.
-Shared PUC-Lua/LuaJIT `.6` follows only after commit/brief/clean proof; no typed-source rollout moves here. Brackets remain selectors—numeric
-positional compatibility, named stable identity—while dot remains fluent rule behavior. Only after gap admission
-`.7` does `.14.5.1` promote typed `gap_composition`; combined program-wide no-drift stays `.14.8`.
+compatibility, six-runtime, carrier, and public-admission owner. That separate tree is canonical-signoff-complete
+through no-change closeout `.7.3` from public atomic 254 `bb0c3768`: gap is 9/0/63 plus public 6/12/10/29,
+language is 250/105+1/126, recognition is 137/250/58, and the rooted neutral/Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT
+route is exact. Brackets remain selectors—numeric positional compatibility, named stable identity—while dot
+remains fluent rule behavior. `.14.5.1` is now the sole typed-source `gap_composition` owner but stays pending
+until `.7.3` lands with receipt/brief/clean proof; combined program-wide no-drift stays `.14.8`.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private

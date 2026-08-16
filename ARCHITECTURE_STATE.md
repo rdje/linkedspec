@@ -1,29 +1,24 @@
 # ARCHITECTURE STATE
 
-## Inter-match-gap recurrence is current without public language admission
+## Inter-match-gap capture is closed and handed to typed-source composition
 
-`INTER-MATCH-GAP-CAPTURE.7.1` is canonical-signoff-complete from clean atomic 252 `be240c14`. Checker-first RED
-rejects the target count before the neutral artifact/checker advance only `recurring` from 7/2/60 to 8/1/61 by
-adding `recurring_regression`. The rooted driver remains neutral, Perl 124, Rust 1, Dart 5, Julia 319, PUC Lua
-392, and LuaJIT 392 in exact order; its recurring status/owner and success marker now state recurring current and
-public no-drift pending. Existing carriers, generated plan v2, primary adapters, runtime implementations, and
-repository-local storage are unchanged.
+`INTER-MATCH-GAP-CAPTURE.7.2` landed public admission as atomic 254 at `bb0c3768`. The shared language inventory
+is 250 calls with 126 independently derived public Perl contracts; recognition is 137 ActionIR rows / 250 calls /
+58 mutations; gap governance is 9 complete / 0 pending / 63 mutations plus public 6 documents / 12 stale-current
+denials / 10 outward guards / 29 mutations. Legacy gap markers remain divergent, named marks and explicit helpers
+remain independent, and `@emit_gaps` remains absent.
 
-ADR `0079` gives the remaining rows distinct authority. `.7.1` now closes recurring topology at 8/1/61.
-`.7.2` promotes `entry_slot`, `gap_span`, `gap_text`, and `gap_kind` from staged-private calls into the shared
-current language inventory, moving 246→250 calls and 122→126 independently derived public Perl contracts while
-recognition retains 137 ActionIR rows. It then ratifies legacy-marker compatibility and closes public no-drift at
-9/0/63 with six current documents, twelve stale-current denials, ten unchanged outward guards, and 29 public
-mutations. `.7.3` changes no executable artifact; it recomposes and hands only typed `gap_composition` to
-`FUTURE-PARITY-BACKLOG.14.5.1`.
+No-change `.7.3` independently recomposes neutral, all six runtimes, recurrence, public language, compatibility,
+generated/capability/typed-source/semantic/MCP/CLI/storage, and rendered-book proof from clean `bb0c3768`.
+Base-relative identity covers every admitted executable contract plus grammar/parser/compiler/runtime/emitter/
+primary/facade/schema/README surfaces. It closes parent `.7` and the entire gap tree for intended atomic 255,
+then hands only typed `gap_composition` to `FUTURE-PARITY-BACKLOG.14.5.1`.
 
-The `.7.0` audit caught a marker-only governance defect: exact current status sentences passed while adjacent capture/
-Toolbox/local-CI prose still described earlier Lua skips and a 3/6 route. `.7.0` corrects those current facts
-without public admission; `.7.1` updates all five governed sentences coherently to recurring-current/public-
-pending. `.7.2` must add stale-claim denial and in-memory mutation coverage so a correct marker cannot mask
-contradictory surrounding prose again. Shared calls remain 246, public Perl 122, recognition 137/246/58,
-capability 80/0/0, and typed source 9/5/114; README, facades, outward schemas, semantic/MCP, CLI, storage, and
-runtime behavior stay unchanged.
+The `.7.0` audit caught a marker-only governance defect: exact status sentences could coexist with stale Lua-skip
+and 3/6 prose. `.7.2` replaces that blind spot with omission-sensitive document and surface mutations. Capability
+remains 80/0/0 and typed source remains 9/5/114; README, facades, outward schemas, semantic/MCP, CLI, storage,
+and runtime behavior stay unchanged. `.14.5.1` is unblocked but may activate only after `.7.3` receipt/brief/clean
+proof.
 
 ## Lua inter-match-gap capture has one behavior-free dual-ABI five-leaf implementation plan
 
@@ -136,10 +131,11 @@ named declarations, `Rule[name]`, and `@capture_gaps` remained absent. The exact
 gap-plus-lifecycle pairs and no automatic tail, while current marker execution remains rule-level in Perl,
 preceding-slot-local in Lua, and absent from native Rust/Dart/Julia execution.
 
-`INTER-MATCH-GAP-CAPTURE.1-.7` is the sole owner of named-slot grammar, gap lifecycle and compatibility policy,
+`INTER-MATCH-GAP-CAPTURE.1-.7` is closed and remains the sole owner of named-slot grammar, gap lifecycle and compatibility policy,
 prefix/interstitial/tail and empty-span behavior, failure/commit/recursion semantics, all six runtime admissions,
-carriers, and public projection. After its clean closeout, `FUTURE-PARITY-BACKLOG.14.5.1` may promote only the
-typed-source `gap_composition` row; combined no-drift stays `.14.8`.
+carriers, and public projection. Its `.7.3` closeout is canonical-signoff-complete from clean `bb0c3768`;
+`FUTURE-PARITY-BACKLOG.14.5.1` is the next clean-boundary owner and may promote only typed-source
+`gap_composition`. Combined no-drift stays `.14.8`.
 
 Bracket syntax preserves the semantic distinction: `Rule[N]` is positional compatibility, while `Rule[name]`
 is stable identity across declaration reordering. Both may resolve to one typed slot target while retaining source

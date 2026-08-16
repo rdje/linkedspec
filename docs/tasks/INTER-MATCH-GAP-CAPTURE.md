@@ -3,18 +3,9 @@
 ## Metadata
 
 - Tree ID: `INTER-MATCH-GAP-CAPTURE`
-- Status: `active` / Dart primary/admission `.4.5` plus parent `.4` landed cleanly as atomic 239 at `43ed1c8f`;
-  behavior-free Julia audit/plan `.5.0` landed as atomic 240 at `12a14ed0`; authored/static/compiled metadata leaf
-  `.5.1` landed as atomic 241 at `3a620ec0`; native execution leaf `.5.2` landed as atomic 242 at `73484302`;
-  reconstruction/descriptor/generated leaf `.5.3` landed as atomic 243 at `1f531a5f`; emitted-proof leaf `.5.4`
-  landed as atomic 244 at `0a961043`; primary/admission leaf `.5.5` and parent `.5` landed cleanly as atomic 245
-  at `a6ff2614`; Lua/LuaJIT behavior-free audit/plan leaf `.6.0` landed as atomic 246 at `5089a360`; authored/
-  static/compiled metadata and dormant-consumer leaf `.6.1` landed as atomic 247 at `a94c81ed`; native shared
-  recognition-state and lifecycle leaf `.6.2` landed as atomic 248 at `4e625a9f`; normalized/descriptor/generated-
-  v2 carrier leaf `.6.3` landed as atomic 249 at `b7708cde`; emitted-source/storage leaf `.6.4` landed as atomic
-  250 at `798aeeee`; primary/admission/parent-closeout leaf `.6.5` landed cleanly as atomic 251 at `c33f6664`;
-  behavior-free public/recurring closeout audit and dependency split `.7.0` is active task-tree-first from that
-  exact clean boundary for intended atomic 252; no push
+- Status: `canonical-signoff-complete from clean bb0c3768`; `.7.3` independently recomposes the admitted
+  six-runtime/public authorities, closes this tree for intended atomic 255, and hands only typed-source
+  `gap_composition` to `FUTURE-PARITY-BACKLOG.14.5.1`; no push
 - Roadmap lane: `.spec language evolution / lossless segmentation and source preservation`
 - Created: `2026-07-17`
 - Last updated: `2026-08-16`
@@ -56,19 +47,8 @@ orchestration or to raw Perl cursor arithmetic.
 ## Task Tree
 
 - ID: `INTER-MATCH-GAP-CAPTURE`
-  Status: `active` (2026-08-15; neutral parent `.1` landed cleanly at `db299789`; Perl parent `.2` landed cleanly
-    through atomic 226 at `eceb15ac`; Rust `.3.0` landed as atomic 227 at `4a95e02a`; Rust `.3.1` landed as
-    atomic 228 at `95127e1d`; Rust `.3.2` landed as atomic 229 at `5c4e9d50`; Rust `.3.3` landed as atomic 230 at
-    `9e6ade98`; Rust `.3.4` landed as atomic 231 at `c3326f6d`; `.3.5` and parent `.3` landed as atomic 232 at
-    `2800e7c3`; Dart parent `.4` landed as atomic 239 at `43ed1c8f`; Julia `.5.0` landed as atomic 240 at
-    `12a14ed0`, `.5.1` landed as atomic 241 at `3a620ec0`, `.5.2` landed as atomic 242 at `73484302`, `.5.3`
-    landed as atomic 243 at `1f531a5f`, `.5.4` landed as atomic 244 at `0a961043`, and `.5.5` plus parent `.5`
-    landed as atomic 245 at `a6ff2614`; Lua/LuaJIT behavior-free audit/plan `.6.0` is active from that exact clean
-    boundary and landed as atomic 246 at `5089a360`; Lua authored/static/compiled metadata and dormant-consumer
-    leaf `.6.1` landed as atomic 247 at `a94c81ed`; native shared recognition-state/lifecycle leaf `.6.2` landed
-    as atomic 248 at `4e625a9f`; normalized/descriptor/generated-v2 carrier leaf `.6.3` landed as atomic 249 at
-    `b7708cde`; emitted-source/storage leaf `.6.4` landed as atomic 250 at `798aeeee`; primary/admission/parent-
-    closeout leaf `.6.5` is active from that exact clean boundary for intended atomic 251; no push)
+  Status: `canonical-signoff-complete from clean bb0c3768` (2026-08-16; intended atomic 255; `.1-.7` complete;
+    typed-source composition handed to `FUTURE-PARITY-BACKLOG.14.5.1`; no push)
   Goal: Recover and modernize lossless inter-match gap capture without semantic drift.
   Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`
 
@@ -1922,14 +1902,15 @@ orchestration or to raw Perl cursor arithmetic.
     promote the receipt, clear the brief, and land parent `.6` cleanly before `.7`.
 
 - ID: `INTER-MATCH-GAP-CAPTURE.7`
-  Status: `active` (2026-08-16; recurring admission `.7.1` landed cleanly as atomic 253 at `d8ed944c`;
-    public language/compatibility/no-drift `.7.2` is active task-tree-first from that exact boundary)
+  Status: `canonical-signoff-complete from clean bb0c3768 via .7.3` (2026-08-16; recurring `.7.1` landed at
+    `d8ed944c`, public admission `.7.2` landed at `bb0c3768`, and no-change handoff `.7.3` closes intended atomic 255)
   Goal: Close cross-backend admission, migration, public documentation, and compatibility policy.
   Children: `.7.0`, `.7.1`, `.7.2`, `.7.3`
   Acceptance: Five backends and all generated/primary roles agree; aliases are retained or retired only
     through the ratified migration policy; the mdBook fully teaches lossless segmentation with examples.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: exact recurring, public, six-runtime, adjacent-ledger, storage, book, doctrine, protected-byte,
+    and staged canonical recomposition is complete under `.7.3` without executable or outward movement.
+  Commit: closes with `INTER-MATCH-GAP-CAPTURE.7.3 - close lossless segmentation tree`
 
 - ID: `INTER-MATCH-GAP-CAPTURE.7.0`
   Status: `done; landed at be240c14` (2026-08-16; atomic 252; behavior-free planning; no push)
@@ -2055,8 +2036,8 @@ orchestration or to raw Perl cursor arithmetic.
     commit with this leaf id, promote the receipt, clear the brief, and land clean before `.7.2`.
 
 - ID: `INTER-MATCH-GAP-CAPTURE.7.2`
-  Status: `canonical-signoff-complete from clean d8ed944c` (2026-08-16; intended atomic 254; task-tree-first
-    activation; exact public language/compatibility/no-drift owner; no push)
+  Status: `done; landed at bb0c3768` (2026-08-16; atomic 254; exact public language/compatibility/no-drift owner;
+    canonical receipt promoted; brief cleared; clean handoff proved; no push)
   Goal: Admit the ratified compatibility policy and complete example-rich public lossless-segmentation teaching
     without widening unrelated facades, schemas, MCP, primary CLI, README, or capability census surfaces.
   Depends on: `.7.1`
@@ -2101,7 +2082,7 @@ orchestration or to raw Perl cursor arithmetic.
     nine doctrines pass. Canonical CI passes CLI 66/66 in default and POSIX environments, RAM 59%, Phase 0
     1,031/1,031 in 735 seconds, the exact neutral-plus-six-runtime gap matrix, and receipt generation for staged
     candidate `1440c0b88243e94a1c685bff7fd129c971236144bd79b14eda48dba81120cc1d`.
-  Commit: `pending`
+  Commit: `INTER-MATCH-GAP-CAPTURE.7.2 - admit public lossless segmentation` (`bb0c3768`; atomic 254)
 
   ### Acceptance Checklist
 
@@ -2122,7 +2103,8 @@ orchestration or to raw Perl cursor arithmetic.
     commit with this leaf id, promote the receipt, clear the brief, and land clean before `.7.3`.
 
 - ID: `INTER-MATCH-GAP-CAPTURE.7.3`
-  Status: `pending`
+  Status: `canonical-signoff-complete from clean bb0c3768` (2026-08-16; intended atomic 255; no executable or
+    outward movement; cross-tree typed-composition handoff only; no push)
   Goal: Independently recompose the committed recurring/public authorities, close parent `.7` and this tree,
     and hand typed `gap_composition` back to `FUTURE-PARITY-BACKLOG.14.5.1` at a clean boundary.
   Depends on: `.7.2`
@@ -2134,11 +2116,58 @@ orchestration or to raw Perl cursor arithmetic.
     emitter/primary/facade/schema/README and every admitted contract artifact; close `.7` and this tree, update the
     exact task index/frontier, and activate no other tree until the closeout commit/receipt/brief/clean boundary;
     hand only typed-source `gap_composition` to `FUTURE-PARITY-BACKLOG.14.5.1`.
-  Planned checks: committed-blob inventory; exact no-change/base-relative diff; complete gap and adjacent ledgers;
+  Focused checks: committed-blob inventory; exact no-change/base-relative diff; complete gap and adjacent ledgers;
     rendered book/Knowledge/histories/task/memory/doctrines; staged canonical receipt and clean handoff.
-  Planned verification: canonical because this is a milestone/parent closeout and cross-tree handoff.
-  Verification: `pending`
-  Commit: `pending`
+  Verification tier: `canonical`
+  Canonical trigger: `yes` — this is a milestone/parent closeout and cross-tree handoff; exact staged-candidate
+    local CI, the full gap matrix, and receipt promotion are mandatory.
+  Activation evidence: public admission `.7.2` landed with promoted canonical receipt at clean `bb0c3768`; status,
+    staged diff, unstaged diff, and untracked census were empty; `git_message_brief.txt` was zero bytes; no
+    background result remained before this task-tree-only activation edit.
+  Committed authority inventory: neutral contract/checker `d425a7d5`/`74063d8c`; Perl/Rust/Dart/Julia/shared-Lua
+    consumers `a6f1b653`/`ad9bac69`/`417dc3a8`/`32f5c9aa`/`08e826d6`; rooted driver/CI/storage initializer/wrapper
+    `3a29fbe2`/`6e523f6d`/`a805db24`/`ea064936`; language checker and recognition artifact/checker
+    `95f69398`/`f3679240`/`fb8b468c`; Dart/Julia/Lua current-call inventories
+    `6cc5850e`/`3f53654c`/`f6118b3a`; Perl and Lua compatibility sources `3b8519b8`/`a98713ca`; seven public book
+    pages `dc0bfff2`/`eba0bba8`/`9cf40982`/`4d074ff3`/`a3aec7b4`/`42aec67d`/`c3e18329`; ADRs `0045`/`0079`
+    `e6240240`/`d4c251aa`; recurring/public Knowledge cards `41a7ffd1`/`53f968de`; inter-match/future-parity/index
+    task authorities `f6394eb4`/`c140919d`/`dabd3073`.
+  Focused verification: neutral gap is exact at 9/0/63 plus public 6/12/10/29; the rooted route passes neutral,
+    Perl 124, Rust 1, Dart 5, Julia 319, PUC Lua 392, and LuaJIT 392 in order. Language is 250/105+1/126 and
+    recognition is 137/250/58. Capability is 80/0/0; generated source is Dart/Julia/Lua 8/105 plus strict Rust
+    105/105; typed source is 9/5/114 and its six-runtime route passes Perl 17, Rust observation 7 plus typed 4,
+    Dart 11, Julia 127+30, and PUC Lua/LuaJIT 240+43. Semantic introspection is 9/0/128 and its six-runtime route
+    passes Perl 18, Rust 1, Dart 1, Julia 416, PUC Lua/LuaJIT 408, selected CLI 5x2x3, and support ledgers. MCP is
+    35 frames/10 raw inputs/10 lifecycle cases/76 mutations. Storage locality passes 1,914 governed files /
+    466,397 lines / 28 classifier cases plus outside-CWD and tool-writer routing. The mdBook renders 79 files /
+    14,956 KiB and its generated output is removed.
+  No-change verification: relative to clean `bb0c3768`, every inventoried neutral/checker/runtime consumer,
+    rooted/CI/storage route, language/recognition/public contract, compatibility implementation, parser/compiler/
+    runtime/emitter/primary/facade/schema/README surface, ADR, and admitted executable artifact is byte-identical;
+    only closeout/handoff durable layers move. Final Knowledge/history/task/memory/doctrine and exact staged
+    canonical receipt proof are required against the complete candidate before commit.
+  Verification-cadence evidence: the first staged gate stopped before expensive CI only because this owning node
+    described canonical intent without the doctrine's exact `Verification tier:` field; adding the required
+    tier/focused-check/trigger metadata corrects the task record without changing any executable authority.
+  Public-marker repair evidence: the later staged gate reached semantic-introspection governance and rejected the
+    two roadmap projections because a line wrap split its exact `128 mutations, rollout 9/9` marker; joining that
+    marker in both projections restores the already-closed 9/9 truth without changing behavior or authority.
+  Commit: `INTER-MATCH-GAP-CAPTURE.7.3 - close lossless segmentation tree` (intended atomic 255)
+
+  ### Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / OWNERSHIP** — Activate task-tree-first from committed public admission `bb0c3768`
+    with clean status/diffs, zero-byte brief, promoted receipt, and no background result.
+  - [x] **RETRIEVE COMMITTED AUTHORITIES** — Retrieve Knowledge/ADR/task pointers and record committed blob
+    identities for every required neutral, runtime, routing, public, compatibility, book, and task authority.
+  - [x] **INDEPENDENT RECOMPOSITION** — Rerun exact gap, rooted six-runtime, language, recognition, generated,
+    capability, typed-source, semantic/MCP/CLI, storage, rendered-book, Knowledge, history, and doctrine proof.
+  - [x] **NO-CHANGE PROOF** — Prove base-relative identity for implementation/outward surfaces and every admitted
+    executable contract artifact; allow only closeout/handoff durable-layer edits.
+  - [x] **TREE CLOSEOUT / HANDOFF** — Close `.7`, this tree, and the exact frontier; hand only typed-source
+    `gap_composition` to `FUTURE-PARITY-BACKLOG.14.5.1` without activating that tree while dirty.
+  - [ ] **CANONICAL / CLEAN BOUNDARY** — Pass exact staged canonical proof, commit `.7.3`, promote the receipt,
+    clear the brief, and prove a clean boundary before activating the receiving tree.
 
 ## Current Frontier
 
@@ -2181,8 +2210,8 @@ orchestration or to raw Perl cursor arithmetic.
 | 35 | `INTER-MATCH-GAP-CAPTURE.6.5` | `canonical-signoff-complete from clean 798aeeee` | Primary parity, exact dual-ABI admission, and parent `.6` closeout are complete for atomic 251. |
 | 36 | `INTER-MATCH-GAP-CAPTURE.7.0` | `done; landed at be240c14` | Exact 7/2/60 private audit, recurring/public/closeout split, stale-current correction, bounded-history rollover, and final staged proof landed without behavior or rollout movement as atomic 252. |
 | 37 | `INTER-MATCH-GAP-CAPTURE.7.1` | `done; landed at d8ed944c` | Recurring alone advanced to 8/1/61; exact rooted proof and every private/no-overclaim boundary landed as atomic 253. |
-| 38 | `INTER-MATCH-GAP-CAPTURE.7.2` | `canonical-signoff-complete from clean d8ed944c` | Ratify compatibility projection and complete public lossless-segmentation teaching as intended atomic 254. |
-| 39 | `INTER-MATCH-GAP-CAPTURE.7.3` | `pending` | Independently recompose, close the tree, and hand off typed gap composition. |
+| 38 | `INTER-MATCH-GAP-CAPTURE.7.2` | `done; landed at bb0c3768` | Ratified compatibility projection and completed public lossless-segmentation teaching as atomic 254. |
+| 39 | `INTER-MATCH-GAP-CAPTURE.7.3` | `canonical-signoff-complete from clean bb0c3768` | Independently recomposed and closed the tree; typed gap composition is handed off for intended atomic 255. |
 
 ## Decisions
 
@@ -2565,6 +2594,7 @@ target accepts through `}` at scalar 6, making the next gap exact `[6,9) = gap` 
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-08-16` | `INTER-MATCH-GAP-CAPTURE.7.3` | Clean public atomic 254 `bb0c3768` activation; Knowledge/ADR/task retrieval; committed-blob inventory; base-relative protected identity; neutral/public gap; rooted six-runtime gap; language and recognition; generated/capability; typed-source and semantic six-runtime routes; MCP and selected CLI; storage locality/outside-CWD/tool writers; rendered mdBook and cleanup; Knowledge/histories/task/memory/doctrines; exact staged canonical local CI and receipt | Pass: gap remains 9/0/63 plus public 6/12/10/29; rooted order is neutral/Perl-124/Rust-1/Dart-5/Julia-319/PUC-Lua-392/LuaJIT-392; language is 250/105+1/126; recognition is 137/250/58; generated/capability is 80/0/0 with strict Rust 105/105; typed source is 9/5/114 and semantic is 9/0/128 across all six runtimes; MCP is 35/10/10/76; selected CLI is 5x2x3; storage is 1,914/466,397/28 plus routed writers; book is 79/14,956 KiB and removed. Every admitted executable/implementation/outward surface is byte-identical to `bb0c3768`. The tree closes without behavior movement and hands only typed `gap_composition` to `.14.5.1`; the complete staged candidate must pass canonical receipt proof before landing. |
 | `2026-08-16` | `INTER-MATCH-GAP-CAPTURE.7.0` | Clean `c33f6664` activation; Knowledge/ADR/task/toolbox retrieval; exact neutral and rooted six-runtime audit; consumer/role/compatibility/public seam inspection; language, recognition, generated-source, capability, typed-source, semantic, MCP, storage, and public no-overclaim dependents; stale-current documentation correction; rendered mdBook; Knowledge Map; official change-history rollover plus ADRs `0078`/`0079`; task/memory/history metadata; all nine doctrines; exact staged canonical local CI | Pass: no executable or rollout authority moves. Neutral remains 7/2/60 plus 10 Rust, 10 Dart, 10 Julia, and 16 Lua admission mutations; rooted order is neutral/Perl-124/Rust-1/Dart-5/Julia-319/PUC-Lua-392/LuaJIT-392. Language remains 246/105+1/122, recognition 137/246/58, generated/capability 80/0/0, typed source 9/5/114, semantic 6/20/128, and MCP complete/141. `.7.1` recurring 8/1/61, `.7.2` public 250/126 and 9/0/63 plus 6/12/10/29, and `.7.3` no-change handoff are dependency-frozen. Segment 4994 and the 19-file/18-row route pass. Canonical precursor passes CLI 66x2, RAM 56%, Phase 0 1,031/1,031 in 752 seconds, all six gap runtimes, receipt generation, and exit 0; the final-record candidate is rerun receipt-bound and passes unchanged. |
 | `2026-08-16` | `INTER-MATCH-GAP-CAPTURE.6.5` | Clean `798aeeee` activation; contract-first 58→60 RED; unchanged primary adapter; exact nine-role once-only dual-ABI consumer; explicit/ordinary/canonical/rooted registration; complete Lua, primary, corpus, storage; neutral/rooted gap; recognition, duplicate-slot, typed-source, generated-source, capability, language, semantic, MCP; public no-overclaim; rendered mdBook; Knowledge; bounded histories; task metadata; memory; all nine doctrines; exact production diff; receipt-bound staged canonical CI | Pass: checker-first count drift is exact. Explicit and ordinary consumer is 392 assertions per ABI (178+33+46+105+30); complete Lua is 178 tests per ABI, primary 66x2, corpus 105, and storage 19/three modules. Rooted order is neutral/Perl-124/Rust-1/Dart-5/Julia-319/PUC-Lua-392/LuaJIT-392. Only PUC Lua and LuaJIT advance, reaching 7/2/60 plus sixteen Lua admission mutations. Recognition 137/246/58, duplicate 7/0/59, typed source 9/5/114, generated/capability 80/0/0, language 246/105+1/122, semantic 6/20/128, MCP complete/141, book, Knowledge, histories, and doctrines pass. Format 2, plans, 246 calls, storage, legacy events/descriptors/refs, recurring/public rows, and outward surfaces remain exact. The staged canonical gate writes its receipt and exits 0. |
 | `2026-08-16` | `INTER-MATCH-GAP-CAPTURE.6.4` | Clean `b7708cde` activation; exact owner RED; unchanged emitter; ten value/two typed-error independently loaded modules in fresh PUC-Lua/LuaJIT children; native/direct/traced values, errors, plans, trace/source identity, and recursive cleanup; explicit consumer; complete Lua, root-route, cursor-descriptor, primary, corpus, and storage dependents; neutral/rooted gap; recognition, duplicate-slot, typed-source, generated-source; rendered mdBook; Knowledge; task metadata; bounded histories; memory; all doctrines; exact production/diff checks; focused tier with no canonical CI | Pass: storage RED rejects only 18→19. Explicit consumer is 362 assertions per ABI (178+33+46+105). Complete Lua passes 177 package tests per ABI, root 106 per ABI, cursor 912 per ABI, primary 66 per ABI, corpus 105, and storage 19 owners / three native modules. Gap remains 5/4/58 plus ten Lua dormancy mutations; rooted execution passes neutral/Perl-124/Rust-1/Dart-5/Julia-319 then two skips. Recognition 137/246/58, duplicate 7/0/59, typed source 9/5/114, generated 80/0/0, book 79/14,928, and Knowledge 839/7,094 pass. Modules, runner, manifest, child outputs, and traces stay below routed `TMPDIR` and clean recursively. Production emitter, format 2, `{label,family}` plans, primary/admission, rollout, legacy events, and outward surfaces remain unchanged; final `.6.5` retains canonical admission. |

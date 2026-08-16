@@ -10,6 +10,20 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-16 (`INTER-MATCH-GAP-CAPTURE.7.3` — independent no-change closeout): clean activation is public atomic
+  254 `bb0c3768`. Retrieve and record hashes for the neutral/checker, five distinct six-runtime consumers,
+  routing/storage, language/recognition/public contracts, compatibility, book, ADR/Knowledge, and both trees.
+- Keep the no-change oracle base-relative. Every executable contract, grammar/parser/compiler/runtime/emitter/
+  primary implementation, facade/schema/README surface, and admitted compatibility authority stays identical to
+  `bb0c3768`; the permitted diff is task/roadmap/architecture/book status, Knowledge, live continuity, and handoff.
+- Independent proof passes gap 9/0/63 plus public 6/12/10/29; rooted Perl 124, Rust 1, Dart 5, Julia 319, and Lua
+  392 per ABI; language 250/105+1/126; recognition 137/250/58; capability 80/0/0; generated strict Rust 105/105;
+  typed source 9/5/114; semantic 9/0/128; MCP 35/10/10/76; selected primary CLI 5x2x3; and storage locality
+  1,914 files / 466,397 lines / 28 classifier cases plus outside-CWD/tool-writer routes.
+- The mdBook renders 79 files / 14,956 KiB, and the exact generated directory is removed after inspection.
+  `FUTURE-PARITY-BACKLOG.14.5.1` is only marked dependency-satisfied, never activated while this tree is dirty;
+  it may promote only typed-source `gap_composition` after canonical receipt/commit/brief/clean proof.
+
 - 2026-08-16 (`INTER-MATCH-GAP-CAPTURE.7.2` — public language/no-drift admission): activation base is clean
   recurring atomic 253 `d8ed944c`. Adding the four names to shared backend inventories before reclassification
   produced exact language RED `classified non-public Perl names admitted ... entry_slot, gap_kind, gap_span,

@@ -15,29 +15,27 @@ answers:
   - "why does an action edge fluent chain keep its first dot"
   - "what happens after FUTURE-PARITY-BACKLOG 14.5.0"
 date: 2026-08-16
-status: cross-tree handoff complete; Perl/Rust/Dart/Julia privately admitted; Lua implementation plan frozen
+status: inter-match gap owner closed; typed-source gap_composition handoff unblocked at clean-boundary commit
 tags: [architecture, task-tree, gap-capture, named-slots, selectors, typed-source, handoff]
-evidence: "Clean handoff 3d0384d1 and the committed ADR/duplicate-slot/typed-source authorities assign implementation to INTER-MATCH-GAP-CAPTURE. Neutral .1 is closed; Perl .2, Rust .3, Dart .4, and Julia .5 are privately admitted through authored/native/carrier/emitted/primary roles. Gap governance is 5 complete + 4 pending / 58 semantic mutations plus ten Rust, ten Dart, and ten Julia admission mutations. Behavior-free Lua .6.0 freezes its shared five-leaf implementation; both Lua ABIs, recurring/public, and typed-source composition remain pending."
+evidence: "Clean handoff 3d0384d1 assigned sole syntax/lifecycle/compatibility/runtime/public ownership to INTER-MATCH-GAP-CAPTURE. That tree is canonical-signoff-complete through no-change .7.3 from public atomic 254 bb0c3768: gap is 9/0/63 plus public 6/12/10/29, language is 250/105+1/126, recognition is 137/250/58, and the rooted neutral/Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT authority passes. Base-relative proof keeps executable contracts and outward surfaces unchanged. FUTURE-PARITY-BACKLOG.14.5.1 is unblocked but may activate only after the .7.3 receipt/brief/clean boundary; it owns only typed-source gap_composition."
 reverify: "bash tools/check_duplicate_regex_slot_identity_five_backend.sh && bash tools/check_typed_source_location_six_runtime.sh && perl tools/read_task_tree.pl --tree FUTURE-PARITY-BACKLOG --id FUTURE-PARITY-BACKLOG.14.5.0 && perl tools/read_task_tree.pl --tree INTER-MATCH-GAP-CAPTURE --id INTER-MATCH-GAP-CAPTURE.1"
 ---
 
 # Lossless gap cross-tree handoff
 
-Current Perl, Rust, and Dart LinkedSpec support positional and named action-edge targets, named regex declarations,
-and privately admitted `@capture_gaps` state/accessors across their native, reconstructed/generated, emitted, and
-primary roles. Julia implements exact metadata, private native execution, normalized reconstruction, compatible
-descriptors, same-engine generated-v2 execution, and independently loaded emitted proof behind dormancy. These
-forms are not yet portable/publicly admitted because Julia admission and both Lua ABIs remain pending.
-The historical Perl mechanism proves the intended automatic prefix/interstitial behavior, while the legacy marker
-implementations prove that old scope and timing cannot simply be promoted into a portable contract.
+Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT support positional and named action-edge targets, named regex
+declarations, and admitted `@capture_gaps` state/accessors across native, reconstructed/generated, emitted, and
+primary roles. The public shared inventory contains `entry_slot`, `gap_span`, `gap_text`, and `gap_kind`; exact
+compatibility governance keeps the three legacy markers divergent rather than aliases.
 
 `INTER-MATCH-GAP-CAPTURE.1-.7` is therefore the sole owner of named-slot grammar, selector validation,
 `@capture_gaps` lifecycle semantics, prefix/interstitial/tail and empty spans, failure/commit/recursion policy,
 compatibility migration, six-runtime implementation, carriers, and public admission. Behavior-free
 `FUTURE-PARITY-BACKLOG.14.5.0` selects that clean pivot. It adds no second implementation owner.
 
-After `INTER-MATCH-GAP-CAPTURE.7` closes, `FUTURE-PARITY-BACKLOG.14.5.1` may consume its unchanged evidence
-and promote only the typed-source `gap_composition` row. Program-wide recurring/public no-drift remains
+`INTER-MATCH-GAP-CAPTURE.7.3` independently closes the complete owner without executable movement.
+`FUTURE-PARITY-BACKLOG.14.5.1` may consume that unchanged evidence and promote only the typed-source
+`gap_composition` row after the clean closeout commit. Program-wide recurring/public no-drift remains
 `FUTURE-PARITY-BACKLOG.14.8`.
 
 ## Selector namespaces

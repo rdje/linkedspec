@@ -2,35 +2,36 @@
 
 ## Current Activity
 
-- Atomic 253 landed cleanly at `d8ed944c`; public language/compatibility/no-drift leaf
-  `INTER-MATCH-GAP-CAPTURE.7.2` is canonical-signoff-complete from that exact boundary for intended atomic 254.
-  No parser/compiler/runtime/emitter/primary implementation or guarded outward surface moves.
-- Exact RED proves both seams: language coverage rejected the four shared names while they were still classified
-  staged-private, and the unchanged gap checker rejected the final artifact with `required sections drifted`.
-- Exactly `entry_slot`, `gap_kind`, `gap_span`, and `gap_text` are now current Dart/Julia/Lua calls and public Perl
-  contracts. Language is 250/105+1/126; compatibility aliases remain separate.
-- Recognition remains 137 ActionIR rows / 58 mutations while canonical call effects advance to 250 with all four
-  calls classified `source_read`. Gap governance advances only public no-drift to 9/0/63.
-- Final public governance requires six documents, twelve stale-current denials, the same ten outward guards, and
-  29 reason-checked mutations. Legacy gap markers remain divergent, named marks/helpers remain independent, and
-  `@emit_gaps` remains absent.
-- Rooted proof passes neutral, Perl 124, Rust 1, Dart 5, Julia 319, PUC Lua 392, and LuaJIT 392 in exact order.
-  Focused Dart, Julia, Lua, Rust, language, and recognition consumers are green.
-- The mdBook/user guide now teach the executable feature and migration boundary. The routed book, Knowledge,
-  adjacent ledgers, protected-surface proof, and doctrines pass. Canonical CI passes CLI 66x2, RAM 59%, Phase 0
-  1,031/1,031 in 735 seconds, the exact gap matrix, and staged receipt generation.
+- Public admission landed cleanly as atomic 254 at `bb0c3768`; no-change closeout
+  `INTER-MATCH-GAP-CAPTURE.7.3` is canonical-signoff-complete from that exact boundary for intended atomic 255.
+- Committed blobs were inventoried before recomposition. Gap remains 9/0/63 plus public 6/12/10/29; language is
+  250/105+1/126; recognition is 137/250/58; capability is 80/0/0; typed source remains 9/5/114.
+- The rooted gap driver passes neutral, Perl 124, Rust 1, Dart 5, Julia 319, PUC Lua 392, and LuaJIT 392 in order.
+  Typed-source and semantic six-runtime routes, generated strict Rust 105/105, MCP, and selected CLI 5x2x3 pass.
+- Storage locality passes 1,914 governed files / 466,397 lines / 28 classifier cases plus outside-CWD and tool-
+  writer routing. The mdBook renders 79 files / 14,956 KiB; its exact generated directory is removed.
+- Base-relative proof keeps every admitted executable contract and all grammar/parser/compiler/runtime/emitter/
+  primary/facade/schema/README surfaces byte-identical. Only durable closeout/handoff layers move.
+- Parent `.7` and the entire gap tree close. `FUTURE-PARITY-BACKLOG.14.5.1` is dependency-satisfied but remains
+  pending until the canonical receipt/commit/brief/clean boundary; it owns only typed-source `gap_composition`.
 
 ## Latest Completed Slice
 
-- `.7.2` is canonical-signoff-complete for intended atomic 254: it advances exactly four calls and only public
-  no-drift to 9/0/63, with outward guards and runtime implementation unchanged.
+- `.7.3` is canonical-signoff-complete for intended atomic 255: it changes no executable authority, closes the
+  complete gap tree, and hands only typed-source composition to `.14.5.1`.
 
 ## Next Action
 
-- Restage the finalized signoff record, rerun exact staged canonical CI with the gap matrix, land `.7.2` as atomic
-  254, promote the receipt, clear the brief, prove clean, then activate only `.7.3`.
+- Stage the finalized closeout, run exact receipt-bound canonical CI with the gap matrix, land `.7.3` as atomic
+  255, promote the receipt, clear the brief, prove clean, then activate only `.14.5.1` task-tree-first.
 
 ## Recent Completions
+
+- `2026-08-16` — `.7.3` independently recomposed every admitted gap/adjacent authority from public atomic 254
+  `bb0c3768`, proved exact base-relative executable identity, closed the tree, and unblocked typed composition.
+
+- `2026-08-16` — `.7.2` landed cleanly as atomic 254 at `bb0c3768` with its canonical receipt promoted and brief
+  cleared; four shared calls and public no-drift are current without implementation/outward widening.
 
 - `2026-08-16` — `.7.2` canonical-signoff-completed four shared gap calls and public no-drift at 9/0/63 with
   exact public 6/12/10/29 governance from clean `d8ed944c`; guarded outward surfaces remain unchanged.
@@ -62,10 +63,6 @@
   generated-v2 gap execution from clean `73484302`, preserving rollout 4/5/57 and storage 19/5.
 - `2026-08-15` — `.5.2` completed private Julia native gap state/accessors/lifecycle on the existing recognition
   authority from clean `3a620ec0`, preserving rollout 4/5/57 and the 246-name supported ActionIR inventory.
-- `2026-08-15` — `.5.1` completed exact Julia authored/static/compiled metadata and ten dormancy guards from clean
-  `12a14ed0` for intended atomic 241 without runtime or rollout movement.
-- `2026-08-15` — `.5.0` froze the behavior-free Julia `.5.1-.5.5` implementation/admission plan from clean
-  `43ed1c8f` for intended atomic 240.
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source
