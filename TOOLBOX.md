@@ -1069,13 +1069,14 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   [[inter-match-gap-executable-contract-plan]], and read the complete frozen section in
   `docs/tasks/INTER-MATCH-GAP-CAPTURE.md`. Run
   `bash tools/check_inter_match_gap_capture_six_runtime.sh` for the ordered repository-routed governance proof;
-  its two explicit later-runtime skips are required until those rows are admitted. Rerun both prerequisite matrices from §4.9.1.2 before changing
+  it now executes every admitted private runtime route with no skip. Rerun both prerequisite matrices from §4.9.1.2 before changing
   either dependency. For current mechanism evidence, use `return_descriptor` for
   `{family,cursor_policy,edge_ownership,uses_loop,execution_shape,resolved_edges}`, `dump_parser_source` for exact
   selection → `LS` → action/target → `LE` order, and the corrected historical live probe recorded in the task.
-- **BOUNDARY:** `.1.1` may add only the neutral artifact/checker and fixtures; `.1.2` may add only repository-local
-  routes/topology/no-overclaim; `.1.3` may recompose and hand off. No syntax, helper, descriptor, runtime, rollout,
-  README, facade, semantic/MCP, CLI, capability, or typed-source current claim moves in those planning leaves.
+- **BOUNDARY:** neutral `.1` and private runtime `.2-.6` are complete. Closeout `.7.1` alone owns recurring
+  admission, `.7.2` owns public language/compatibility/no-drift admission, and `.7.3` owns unchanged recomposition
+  plus the typed-source handoff. Do not widen README, facades, semantic/MCP, CLI, capability, or typed-source
+  surfaces implicitly.
 
 ### 4.9.1.4 Perl gap implementation preflight
 

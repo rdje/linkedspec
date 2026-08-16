@@ -566,7 +566,7 @@ The implementation order is also explicit. `INTER-MATCH-GAP-CAPTURE.1-.7` owns n
 `@capture_gaps`, lifecycle and compatibility policy, six-runtime behavior, carriers, and public admission.
 Typed-source composition consumes that completed contract afterward; it does not define a second gap language.
 
-### Executable neutral contract — private Perl, Rust, Dart, and Julia runtimes admitted
+### Executable neutral contract — all six private runtime routes admitted
 
 The behavior-free contract now lives at `capability_conformance/inter_match_gap_capture_contract.json`, uses id
 `linkedspec-inter-match-gap-capture-v1`, and is checked independently by
@@ -574,14 +574,14 @@ The behavior-free contract now lives at `capability_conformance/inter_match_gap_
 The Perl reference implements authored/static metadata, private native-live behavior, and independently loaded
 generated parity. Admission `.2.4` runs that complete consumer in canonical CI and in the rooted recurring route,
 promotes only `perl_runtime`, and advances the checker to 56 mutations without outward public admission.
-Rust `.3.5`, Dart `.4.5`, and Julia `.5.5` add the exact primary-command role, admit their complete nine-role
-consumers to ordinary and canonical execution, and run once after their preceding runtime in the rooted route.
-Only their private runtime rows advance. Julia's admitted ledger exercises native execution, normalized ordinary
+Rust `.3.5`, Dart `.4.5`, Julia `.5.5`, and shared Lua `.6.5` add the exact primary-command role, admit their
+complete nine-role consumers to ordinary and canonical execution, and run once after their preceding runtime in
+the rooted route. Only their private runtime rows advance. Julia's admitted ledger exercises native execution, normalized ordinary
 reconstruction, descriptor provenance, generated-v2 plan execution, independently loaded emitted source,
 target lifecycle, recursion/rollback isolation, portable diagnostics, and the existing primary CLI adapter in
 declared order. Its preceding `.5.1-.5.4` stages retain 105 metadata, 33 native, 46 carrier, and 105 emitted
 assertions across ten value and two typed-error emitted modules. The recurring driver executes neutral, Perl,
-Rust, Dart, and Julia exactly once each, then emits two ordered Lua-runtime skips:
+Rust, Dart, Julia, PUC Lua, and LuaJIT exactly once each:
 
 ```bash
 bash tools/check_inter_match_gap_capture_six_runtime.sh
@@ -589,15 +589,14 @@ bash tools/check_inter_match_gap_capture_six_runtime.sh
 
 Canonical local CI always runs the neutral checker and exposes the same governance route behind
 `LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1`. Ordinary CI and the opt-in route execute every admitted consumer once;
-the latter additionally proves neutral-first Perl-then-Rust-then-Dart-then-Julia ordering and two explicit
-later-runtime skips.
+the latter additionally proves neutral-first Perl-then-Rust-then-Dart-then-Julia-then-PUC-Lua-then-LuaJIT order.
 
 The neutral artifact locks 8 positive and 10 negative authored fixtures, 3 source fixtures, 8 private gap fields,
 16 main-machine transitions, 10 segmentation cases, 3 terminal routes, 7 transaction/recursion/return-channel
-cases, 6 compatibility rows, 9 diagnostics, 9 rollout legs, and 50 semantic mutations. Recurring topology and
-public-no-overclaim governance raised that base to 55; runtime admission now rejects Perl, Rust, Dart, and Julia
-complete-to-pending regressions at 58 total. Ten Rust, ten Dart, and ten Julia role/registration mutations are
-separate.
+cases, 6 compatibility rows, 9 diagnostics, and 9 rollout legs. Recurring topology and public-no-overclaim
+governance plus all six runtime regression locks now total 60 semantic mutations. Ten Rust, ten Dart, ten Julia,
+and sixteen shared-Lua role/registration mutations are separate. Rollout remains 7 complete / 2 pending until
+the recurring and public closeout leaves move their own rows.
 
 ### Perl private live and generated implementation — exact private admission
 

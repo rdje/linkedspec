@@ -1,7 +1,7 @@
 # 0045 - Inter-match gap capture preserves action-edge target ownership
 
 - Date: 2026-07-17
-- Status: accepted; executable-neutral plus all six private runtime admissions current; recurring/public admission pending
+- Status: accepted; six private runtimes current; recurring/public closeout split by ADR `0079`
 - Tags: architecture, grammar, capture, segmentation, or-rule, action-edge, source-span, portability, parity
 
 ## Context

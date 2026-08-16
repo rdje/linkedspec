@@ -102,3 +102,4 @@ syntax/lifecycle/compatibility/backend admission owner. Typed-source composition
 - Edge syntax: `docs/knowledge/spec-edge-syntax-contract.md`
 - Current marker divergence: [[split-marker-cross-backend-semantics]]
 - Cross-tree handoff and selector namespaces: [[lossless-gap-cross-tree-handoff]]
+- Recurring/public closeout plan and stale-guard finding: [[inter-match-gap-recurring-public-closeout-plan]]

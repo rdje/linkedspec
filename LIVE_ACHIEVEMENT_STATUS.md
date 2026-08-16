@@ -2,33 +2,40 @@
 
 ## Current Activity
 
-- Atomic 250 landed cleanly at `798aeeee`; shared PUC-Lua/LuaJIT primary/admission/parent-closeout leaf
-  `INTER-MATCH-GAP-CAPTURE.6.5` is canonical-signoff-complete from that exact boundary for intended atomic 251;
-  no push.
+- Atomic 251 landed cleanly at `c33f6664`; behavior-free recurring/public closeout audit and dependency split
+  `INTER-MATCH-GAP-CAPTURE.7.0` is canonical-signoff-complete from that exact boundary for intended atomic 252;
+  no push and no rollout or outward behavior has moved.
 - The permanent shared consumer passes 392 assertions per ABI: 178 metadata + 33 native + 46 carrier + 105
   emitted + 30 admission. Its exact nine-role ledger executes once on each ABI in explicit, ordinary, canonical,
   and rooted routes; `primary_command` reuses unchanged `linkedspec.run_primary_cli`.
 - Complete Lua passes 178 package tests per ABI, primary 66x2, corpus 105, and storage 19 owners / three native
   modules. Rooted proof executes neutral, Perl 124, Rust 1, Dart 5, Julia 319, PUC Lua 392, and LuaJIT 392.
-- Only the two Lua runtime rows move: governance is 7/2/60 plus sixteen Lua admission mutations. Recurring/public
-  rows remain `.7`-owned. Format 2, ordered plans, supported ActionIR 246, legacy events/descriptors/refs, facade/
-  schema/MCP/CLI/README, capability 80/0/0, recognition 137/246/58, and typed source 9/5/114 remain unchanged.
+- The `.7.0` audit re-runs the exact 7/2/60 neutral/rooted proof and freezes three owners: `.7.1` recurring at
+  8/1/61; `.7.2` public language/compatibility/no-drift at calls 250, public Perl 126, gap 9/0/63 and public
+  6/12/10/29; `.7.3` unchanged closeout/typed-source handoff. Format 2, storage 19/three native modules, facade/
+  schema/MCP/CLI/README, capability 80/0/0, and typed source 9/5/114 remain unchanged in this planning leaf.
+- Exact status markers had not guarded adjacent prose: the capture chapter and Toolbox still claimed Lua skips,
+  and the local-CI chapter still presented the earlier 3/6 route as current. `.7.0` corrects those facts without
+  public admission; `.7.2` owns six-document/twelve-stale-claim mutation proof so the blind spot cannot recur.
+- Focused ledgers, rendered book, Knowledge 840/7,102, official change-history segment 4994, all nine doctrines,
+  and exact staged canonical proof pass. The canonical precursor records CLI 66x2, RAM 56%, Phase 0 1,031/1,031
+  in 752 seconds, and all six gap runtimes; the final-record candidate is rerun receipt-bound before commit.
 
 ## Latest Completed Slice
 
-- `.6.5` reuses the unchanged primary adapter, admits the exact nine-role consumer once per ABI in all required
-  routes, promotes only PUC Lua and LuaJIT to reach 7/2/60, and canonical-signoff-closes parent `.6` without
-  recurring/public or outward movement.
+- `.7.0` is signoff-complete for intended atomic 252: it audits the exact committed 7/2/60 boundary, freezes
+  `.7.1-.7.3`, corrects stale route prose, and rolls bounded change history without behavior or rollout movement.
 
 ## Next Action
 
-- Finish exact staged canonical proof, commit intended atomic 251, promote its receipt, clear the brief, prove
-  clean handoff, then pause for director instruction without activating `.7`.
+- Land `.7.0` as exact receipt-bound atomic 252, promote the receipt, clear the brief, prove clean, then activate
+  recurring admission `.7.1` task-tree-first and produce its checker-first RED.
 
 ## Recent Completions
 
 - `2026-08-16` — `.6.5` admitted the exact shared nine-role consumer on PUC Lua and LuaJIT from clean `798aeeee`,
-  advancing only the two runtime rows to 7/2/60 and canonical-signoff-closing parent `.6`.
+  advanced only the two runtime rows to 7/2/60, closed parent `.6`, and landed cleanly as atomic 251 at
+  `c33f6664`; `.7.0` owns the current behavior-free recurring/public audit from that handoff.
 
 - `2026-08-16` — `.6.4` completed ten value/two typed-error independently emitted modules on fresh PUC-Lua and
   LuaJIT children from clean `b7708cde`, advancing only repository-local storage ownership from 18 to 19.

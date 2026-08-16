@@ -269,17 +269,19 @@ admission mutations lock the consumer identity, role ledger, primary role, ordin
 multiplicity, later-runtime skips, and facade absence.
 The always-on neutral command is
 `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py`. The repository-routed
-`tools/check_inter_match_gap_capture_six_runtime.sh` driver repeats that authority exactly once, runs Perl and Rust
-once each, then reports pending Dart, Julia, PUC Lua, and LuaJIT routes in fixed order without invoking absent consumers.
-Set `LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1` to exercise this governance route in canonical local CI. Rollout
-is 3 complete / 6 pending, so this switch proves the admitted Perl and Rust roles plus exact later-route topology and storage locality.
-Definitive Perl `.2.4` and parent `.2` signoff passes the full 124-test consumer ordinarily and through this route,
+`tools/check_inter_match_gap_capture_six_runtime.sh` driver repeats that authority exactly once, then runs Perl,
+Rust, Dart, Julia, PUC Lua, and LuaJIT once each in fixed order. Set
+`LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1` to exercise this governance route in canonical local CI. Rollout is
+7 complete / 2 pending: all private runtime routes are current, while recurring and public no-drift remain the
+two closeout rows. The switch proves exact route topology, role coverage, and storage locality without admitting
+an outward facade or schema.
+At Perl `.2.4` and parent `.2`, definitive signoff passed the full 124-test consumer ordinarily and through the then-partial route,
 the rendered mdBook, Knowledge 834/6,995, all eight doctrines, containment/relocation, CLI 66/66 twice, RAM 57%,
 Phase 0 1,031/1,031 in 765 seconds, five ordered later-runtime skips, and `[ci] local CI gate passed`. Rust `.3`
-has since joined the route. Its definitive `.3.5` gate passes the 17-owner Rust storage oracle, all eight
+then joined the route. Its definitive `.3.5` gate passed the 17-owner Rust storage oracle, all eight
 doctrines, repository containment and moved-root execution, CLI conformance at 66/66 in both option environments,
-RAM at 73%, Phase 0 at 1,031/1,031, and the exact neutral/Perl/Rust route through local-CI exit 0. This switch still
-admits no later runtime or public surface.
+RAM at 73%, Phase 0 at 1,031/1,031, and the exact neutral/Perl/Rust route through local-CI exit 0. Dart, Julia,
+and both Lua ABIs have since joined that same route; no outward public surface has moved yet.
 
 Dart's admitted consumer covers its internal value core and all 92+7 helper projections across native,
 reconstructed, generated-plan, and freshly emitted execution. The independent rollout checker requires its

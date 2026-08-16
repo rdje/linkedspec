@@ -10,6 +10,29 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-16 (`INTER-MATCH-GAP-CAPTURE.7.0` — recurring/public closeout audit): activation base is clean atomic
+  251 at `c33f6664`; neutral 7/2/60 and rooted neutral/Perl-124/Rust-1/Dart-5/Julia-319/PUC-Lua-392/LuaJIT-392
+  pass without changing an executable authority.
+- ADR `0079`: do not conflate recurrence with public language admission. `.7.1` promotes only recurring and adds one
+  regression (8/1/61). `.7.2` promotes the already-implemented four gap calls into current shared language
+  inventories, moving calls 246→250 and public Perl 122→126; recognition nodes stay 137 while call effects move
+  246→250. Public closeout reaches gap 9/0/63 with an exact 6/12/10/29 document/stale/guard/mutation suite.
+- Preserve compatibility by meaning: `@capture_slice`, `@capture_from_here`, and `@move_pos` remain retained
+  divergent behavior, never `@capture_gaps` aliases; named marks and explicit helpers remain independent; no
+  `@emit_gaps` or forced result emission is admitted.
+- Marker-only no-overclaim guarding missed contradictory surrounding prose after Lua admission. Correct the stale
+  two-Lua-skip and 3/6 current claims now, then make `.7.2` reject twelve exact stale claims in memory so one
+  correct marker cannot hide another contradiction.
+- `.7.3` is no-change recomposition and hands only typed-source `gap_composition` to `.14.5.1`. README, outward
+  facades/schemas, semantic/MCP, CLI, capability census, generated format, storage, and typed-source rollout do
+  not move in this activity's planning slice.
+- The required CHANGES rollover advances only reviewed finite capacity through ADR `0078`: collection files
+  18→19 and manifest lines 17→18; use the official content-addressed tool and preserve every other ceiling.
+- Signoff is neutral 7/2/60, rooted all-six-runtime execution, language 246/122, recognition 137/246/58,
+  generated/capability 80/0/0, typed source 9/5/114, semantic 6/20/128, MCP complete/141, rendered book, Knowledge
+  840/7,102, and all nine doctrines. The canonical precursor passes CLI 66x2, RAM 56%, Phase 0 1,031/1,031 in
+  752 seconds and the exact gap matrix; rerun receipt-bound after writing the final signoff record.
+
 - 2026-08-16 (`INTER-MATCH-GAP-CAPTURE.6.5` — exact shared Lua admission): activation base is clean atomic 250
   at `798aeeee`; advancing the contract to 7/2/60 before its checker produces the intended count-drift RED.
 - Compose authorities; do not add another path. The ninth role invokes unchanged `linkedspec.run_primary_cli`

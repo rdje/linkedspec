@@ -1,18 +1,20 @@
 # MEMORY
 
-- activation_commit: `798aeeee472e7670ffc056d76f056e5b43f3ef16` — clean atomic-250 base for shared Lua admission/
-  parent-closeout leaf `INTER-MATCH-GAP-CAPTURE.6.5`; no push.
-- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.6.5 - admit Lua inter-match gap capture`; canonical-signoff-
-  complete from clean atomic 250 at `798aeeee` for intended atomic 251; parent `.6` closes without outward movement.
-- active_work_unit: none at the intended clean post-landing boundary; `.7` is next but not active until atomic 251,
-  receipt promotion, zero-byte brief, and clean handoff are proven.
-- next_action: land atomic 251, promote the canonical receipt, clear the brief, prove clean handoff, then pause for
-  director instruction. Do not activate `.7` until the director resumes work.
-- in_flight_uncommitted: none at the intended clean handoff; no background result, partial implementation,
-  production runtime/emitter/primary change, recurring/public promotion, or outward change remains.
-- blockers: none. Explicit proof is 392 assertions per ABI; complete Lua passes 178 package tests per ABI, primary
-  66x2, corpus 105, and storage 19 owners / three native modules. Rooted proof executes neutral/Perl/Rust/Dart/
-  Julia/PUC-Lua/LuaJIT at 7/2/60 with sixteen Lua admission mutations; recurring/public rows remain pending.
+- activation_commit: `c33f66645f8691da945dd99c364e6e32221c62a5` — clean atomic-251 base for behavior-free
+  recurring/public closeout audit `INTER-MATCH-GAP-CAPTURE.7.0`; no push.
+- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.7.0 - freeze recurring and public closeout plan`; canonical-
+  signoff-complete from atomic-251 activation `c33f6664` for intended atomic 252, without recurring/public rollout
+  or outward movement.
+- active_work_unit: none after the `.7.0` atomic-252 landing; recurring admission `.7.1` is the next leaf and must
+  activate task-tree-first only from the proved clean post-commit boundary.
+- next_action: commit the exact receipt-bound `.7.0` candidate as atomic 252, promote the receipt, clear the brief,
+  prove clean, then activate `INTER-MATCH-GAP-CAPTURE.7.1` and produce its checker-first recurring RED before
+  changing the contract, driver, or rollout row.
+- in_flight_uncommitted: none after the intended atomic-252 landing; no grammar, parser, compiler, runtime,
+  carrier, generated-plan, primary, rollout, facade, schema, semantic/MCP, CLI, README, capability, storage, or
+  typed-source behavior moved in `.7.0`.
+- blockers: none. Focused proof and receipt-bound canonical proof pass, including neutral 7/2/60, rooted all-six-
+  runtime execution, CLI 66x2, RAM 56%, Phase 0 1,031/1,031 in 752 seconds, and Knowledge 840/7,102.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -38,8 +40,8 @@
   and their rollover/index gates remain current.
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, and recurrence/public no-drift 9/9.
-- current_future_direction: gap is privately admitted on all six runtimes at 7/2/60 plus ten Rust, ten Dart, ten
-  Julia, and sixteen Lua admission mutations. `.7` retains recurring/public admission, migration, compatibility,
-  and outward documentation; `.14.5.1` waits for that public closeout.
-- latest_bootstrap_read: 2026-08-16 — roadmap/codebase/mdBook and continuity/tooling review complete; `.6.5` is
-  canonical-signoff-complete from clean atomic 250 at `798aeeee` for intended atomic 251.
+- current_future_direction: gap is privately admitted on all six runtimes at 7/2/60. Frozen closeout is `.7.1`
+  recurring 8/1/61; `.7.2` public language/compatibility at shared calls 250, public Perl 126, gap 9/0/63 and
+  public 6/12/10/29; `.7.3` unchanged closeout; then `.14.5.1` owns typed `gap_composition` only.
+- latest_bootstrap_read: 2026-08-16 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
+  review complete; `.7.0` is canonical-signoff-complete from clean atomic 251 `c33f6664`; `.7.1` is next.
