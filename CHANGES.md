@@ -10,6 +10,28 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-16 — INTER-MATCH-GAP-CAPTURE.6.3 — carry Lua gap generated execution
+
+- Activated task-tree-first from clean atomic-248 commit `4e625a9f`. The deliberate carrier RED passed normalized
+  native execution and then stopped exactly at absent descriptor `regex_slots`.
+- Kept normalized `SpecFile` JSON as the sole reconstruction carrier. Logical source id and all authored/resolved
+  gap metadata survive a detached round trip and normal recompilation; no parallel runtime or carrier was added.
+- Added fresh rule-meta descriptor projections for ordered `regex_slots`, nullable `capture_gaps`, and five-field
+  `resolved_slot_edges`. Legacy action descriptors, `resolved_edges`, and `{label,idx}` dependency refs remain
+  exact, and repeated descriptor calls return detached values immune to caller mutation.
+- Direct and traced generated-v2 execution reuse the same compiled interpreter and recognition authority. Exact
+  values, child-extended cursors, nested/recursive isolation, rollback, typed errors, and source identity agree
+  with reconstructed native execution while format 2 and ordered `{label,family}` plans stay unchanged.
+- The dormant consumer now passes 257 assertions per ABI: 178 metadata + 33 native + 46 carrier. The complete Lua
+  gate passes 177 package tests per ABI, root routes 106, cursor descriptors 912, primary 66x2, corpus 105, and
+  storage 18 owners / three dual-ABI native modules.
+- Neutral governance remains 5/4/58 with ten Lua dormancy mutations and two rooted Lua skips. Emitted-source proof,
+  storage 18→19, primary/admission, rollout, generated format, facade, and every outward surface remain unchanged.
+- The required engineering-notes rollover publishes immutable segment 4994. ADR `0077` reviews only the exact
+  resulting collection 13→14 file and manifest 12→13 line limits; every byte, aggregate, lifecycle, verifier,
+  storage, and public/runtime control remains unchanged, and this doctrine-infrastructure movement makes the
+  slice canonical.
+
 ## 2026-08-16 — INTER-MATCH-GAP-CAPTURE.6.2 — implement Lua native gap execution
 
 - Activated task-tree-first from clean atomic-247 commit `a94c81ed`. The deliberate native RED reached only the

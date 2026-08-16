@@ -138,16 +138,19 @@ Shared PUC Lua/LuaJIT compiled state now carries the same authored layer. `SpecF
 `inline`, survives both staged parser layers and normalized JSON, and uses path-opaque caller identity for loaded
 specs. Each rule owns ordered `regex_slots` rows and a nullable `capture_gaps` record; compiled action-edge JSON
 adds `selector_kind`, `authored_selector`, `target_rule`, resolved `child_regex_index`, and nullable
-`target_slot_id`. The existing descriptor deliberately projects the legacy action-edge shape and unchanged
-`resolved_edges`/`{label,idx}` references until `.6.3`. Emitted source embeds the normalized source id without
-changing format 2 or its `{label,family}` plan.
+`target_slot_id`. Descriptor rule metadata now adds fresh detached `regex_slots`, nullable `capture_gaps`, and
+five-field `resolved_slot_edges` values while deliberately retaining the legacy action-edge shape and unchanged
+`resolved_edges`/`{label,idx}` references. Loaded projections keep their caller-logical source id, inline
+projections use `inline`, and neither detached result can mutate compiled state. Emitted source embeds the
+normalized source id without changing format 2 or its `{label,family}` plan.
 
 Native Lua execution now consumes that metadata through the existing recognition invocation/checkpoint authority.
 Capture activation, committed gap cursor, accepted count, phase, candidate/tail, and detached child entry identity
 live on that invocation; the detached transaction state remains exactly cursor/boundary/marks. Capture-enabled
 rules alone preselect before `LS`, commit child-extended state before `IT`, and install successful tails before
 `LX`/`EX`/`E`. The four zero-argument helpers resolve privately without entering the 246-name supported ActionIR
-inventory. Normalized reconstruction, compatible descriptor additions, and generated-v2 execution remain `.6.3`.
+inventory. Normalized `SpecFile` JSON is the sole reconstruction carrier, and direct/traced generated-v2
+entrypoints execute the same engine lifecycle and typed failures. Independently emitted execution remains `.6.4`.
 
 The Julia backend now implements the same narrow staged provider before compiled state is built. Its public path is:
 

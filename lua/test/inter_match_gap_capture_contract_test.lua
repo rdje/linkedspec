@@ -1,9 +1,10 @@
--- INTER-MATCH-GAP-CAPTURE.6.2 — dormant shared Lua native-execution stage.
+-- INTER-MATCH-GAP-CAPTURE.6.3 — dormant shared Lua carrier-execution stage.
 --
 -- This final consumer path now proves parsing, validation, compiled provenance,
--- source identity, and private native state/lifecycle on both Lua ABIs.
--- Descriptors, generated execution, independent emitted execution, primary
--- execution, and admission remain owned by `.6.3-.6.5`.
+-- source identity, private native state/lifecycle, normalized reconstruction,
+-- compatible descriptors, and generated-v2 execution on both Lua ABIs.
+-- Independent emitted execution, primary execution, and admission remain
+-- owned by `.6.4-.6.5`.
 -- DORMANT: INTER-MATCH-GAP-CAPTURE.6.5 owns Lua runtime admission
 
 local linkedspec = require("linkedspec")
@@ -48,6 +49,13 @@ end
 
 local function check_json_equal(actual, expected, label)
   assertions = assertions + 1
+  if actual == nil or expected == nil then
+    if actual ~= expected then
+      fail((label or "JSON values differ") .. ": expected " .. tostring(expected) ..
+        ", got " .. tostring(actual))
+    end
+    return
+  end
   local actual_json = json.encode(actual)
   local expected_json = json.encode(expected)
   if actual_json ~= expected_json then
@@ -515,6 +523,261 @@ check(execute_native("Part::\n /H/\n I { return(entry_slot()) }\n", "H").value =
   "direct entry slot is null")
 check_equal(execute_native("Top::\n /H/\n E { return(\"legacy\") }\n", "H").value,
   "legacy", "legacy rule behavior")
+
+do
+  local carrier_source = [[Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Part[head] { push(gaps, array(gap_kind(), gap_text())) }
+ LX { push(gaps, array(gap_kind(), gap_text())); return(copy(gaps)) }
+Part:
+ head=/H/
+ I.return(entry_text())
+]]
+  local source_identity = "lua-gap-carrier.spec"
+  local generated_identity = "lua-gap-generated-v2.spec"
+  local expected = json.decode('[["prefix","α"],["tail","ω"]]')
+  local authored = linkedspec.parse_spec(carrier_source, { source_id = source_identity })
+  local normalized_json = linkedspec.spec_ast.to_json(authored)
+  local reconstructed = linkedspec.spec_ast.from_json("SpecFile", normalized_json)
+  check_json_equal(linkedspec.spec_ast.to_json(reconstructed), normalized_json,
+    "normalized reconstruction identity")
+  check_equal(reconstructed.source_id, source_identity, "reconstructed source identity")
+  local carrier_compiled = linkedspec.compile_spec(reconstructed)
+  check_json_equal(
+    linkedspec.runtime_parse(linkedspec.runtime_engine(carrier_compiled), "αHω").value,
+    expected,
+    "reconstructed native value"
+  )
+
+  local carrier_descriptor = linkedspec.to_descriptor_json(carrier_compiled)
+  local top_meta = carrier_descriptor.spec.Top.meta
+  local part_meta = carrier_descriptor.spec.Part.meta
+  local expected_slot = json.decode(
+    '{"regex_index":0,"slot_id":"head","source_id":"lua-gap-carrier.spec","line":7}'
+  )
+  local expected_capture = json.decode(
+    '{"enabled":true,"directive":"@capture_gaps","source_id":"lua-gap-carrier.spec","line":3}'
+  )
+  local expected_resolved_slot_edge = json.decode(
+    '{"selector_kind":"named","authored_selector":"head","target_rule":"Part","regex_index":0,"target_slot_id":"head"}'
+  )
+  check_json_equal(part_meta.regex_slots, json.array({ expected_slot }), "descriptor regex slots")
+  check_json_equal(top_meta.capture_gaps, expected_capture, "descriptor capture directive")
+  check_json_equal(top_meta.resolved_slot_edges, json.array({ expected_resolved_slot_edge }),
+    "descriptor resolved slot edges")
+  check_json_equal(top_meta.resolved_edges, json.decode(
+    '[{"ownership":"action","target":"Part","regex_index":0,"block":true,"fluent":null}]'
+  ), "legacy resolved edges")
+  check_json_equal(carrier_descriptor.spec.Top.dependency_refs,
+    json.decode('[{"label":"Part","idx":0}]'), "legacy dependency refs")
+
+  part_meta.regex_slots[1].slot_id = "detached-mutation"
+  top_meta.capture_gaps.enabled = false
+  top_meta.resolved_slot_edges[1].target_slot_id = "detached-mutation"
+  local fresh_descriptor = linkedspec.to_descriptor_json(carrier_compiled)
+  check_json_equal(fresh_descriptor.spec.Part.meta.regex_slots, json.array({ expected_slot }),
+    "detached regex slots")
+  check_json_equal(fresh_descriptor.spec.Top.meta.capture_gaps, expected_capture,
+    "detached capture directive")
+  check_json_equal(fresh_descriptor.spec.Top.meta.resolved_slot_edges,
+    json.array({ expected_resolved_slot_edge }), "detached resolved slot edges")
+
+  local plan = linkedspec.build_generated_rule_plan(carrier_compiled)
+  check_equal(linkedspec.GENERATED_SOURCE_CONTRACT, "linkedspec-generated-source-v2",
+    "generated contract")
+  check_equal(linkedspec.GENERATED_SOURCE_FORMAT, 2, "generated format")
+  local plan_json = json.array()
+  for index, row in ipairs(plan) do
+    plan_json[index] = linkedspec.generated_plan_row_to_json(row)
+  end
+  check_json_equal(plan_json, json.decode(
+    '[{"label":"Top","family":"default"},{"label":"Part","family":"default"}]'
+  ), "generated plan rows")
+  check_json_equal(linkedspec.execute_generated_parser_v2(
+    carrier_compiled,
+    plan,
+    "αHω",
+    generated_identity
+  ), expected, "generated direct value")
+  check_json_equal(linkedspec.execute_generated_parser_with_trace_v2(
+    carrier_compiled,
+    plan,
+    "αHω",
+    linkedspec.trace_config_disabled(),
+    generated_identity
+  ), expected, "generated traced value")
+
+  local carrier_cases = {
+    {
+      [[Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Container[open] { push(gaps, array(gap_text(), call(Container))) }
+ -> Bang { push(gaps, array(gap_text(), call(Bang))) }
+ LX { push(gaps, array(gap_text(), gap_kind())); return(copy(gaps)) }
+Container:
+ open=/\{/
+ -> Close { return(call(Close)) }
+Close:
+ /\}/
+ I.return(entry_text())
+Bang:
+ /!/
+ I.return(entry_text())
+]],
+      "p{abc}gap!",
+      '[["p","}"],["gap","!"],["","tail"]]',
+    },
+    {
+      [[Top::
+ @capture_gaps
+ -> Container[open] { return(array(gap_text(), call(Container), gap_text())) }
+Container:
+ open=/\{/
+ I { inner = [] }
+ @capture_gaps
+ -> Atom { push(inner, gap_text()) }
+ LX { push(inner, gap_text()); return(copy(inner)) }
+Atom:
+ /x/
+ I.return(entry_text())
+]],
+      "p{axtail",
+      '["p",["a","tail"],"p"]',
+    },
+    {
+      [[Top::
+ @capture_gaps
+ -> Open { opening = call(Open); return(array(gap_text(), call(Top), gap_text())) }
+ -> Atom { return(array(gap_text(), call(Atom))) }
+Open:
+ /\{/
+ I.return(entry_text())
+Atom:
+ /x/
+ I.return(entry_text())
+]],
+      "p{ax",
+      '["p",["a","x"],"p"]',
+    },
+    {
+      [[Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Part[h] {
+  tx = recognition_checkpoint();
+  matched = recognize_once(tx, call(Probe));
+  recognition_rollback(tx);
+  push(gaps, gap_text())
+ }
+ -> Part[s] { push(gaps, gap_text()) }
+ LX { push(gaps, gap_text()); return(copy(gaps)) }
+Part:
+ h=/H/
+ s=/S/
+ I.return(entry_text())
+Probe:
+ /X/
+ I.return(0)
+]],
+      "aHXbS",
+      '["a","Xb",""]',
+    },
+  }
+  for index, carrier_case in ipairs(carrier_cases) do
+    local parsed_case = linkedspec.parse_spec(
+      carrier_case[1],
+      { source_id = "carrier-case-" .. index .. ".spec" }
+    )
+    local normalized_case = linkedspec.spec_ast.from_json(
+      "SpecFile",
+      linkedspec.spec_ast.to_json(parsed_case)
+    )
+    local compiled_case = linkedspec.compile_spec(normalized_case)
+    local expected_case = json.decode(carrier_case[3])
+    local case_plan = linkedspec.build_generated_rule_plan(compiled_case)
+    check_json_equal(
+      linkedspec.runtime_parse(linkedspec.runtime_engine(compiled_case), carrier_case[2]).value,
+      expected_case,
+      "carrier native case " .. index
+    )
+    check_json_equal(linkedspec.execute_generated_parser_v2(
+      compiled_case,
+      case_plan,
+      carrier_case[2],
+      generated_identity
+    ), expected_case, "carrier generated case " .. index)
+    check_json_equal(linkedspec.execute_generated_parser_with_trace_v2(
+      compiled_case,
+      case_plan,
+      carrier_case[2],
+      linkedspec.trace_config_disabled(),
+      generated_identity
+    ), expected_case, "carrier traced case " .. index)
+  end
+
+  local error_cases = {
+    {
+      "Direct::\n /H/\n I { return(gap_text()) }\n",
+      "H",
+      "gap_capture_context_unavailable",
+      "LINKEDSPEC_INTER_MATCH_GAP_ERROR:gap_capture_context_unavailable",
+    },
+    {
+      "Top::OR{1}\n @capture_gaps\n -> Part { rewind_match_start() }\nPart: /H/\n",
+      "aH",
+      "source_location_cursor_regression",
+      "LINKEDSPEC_SOURCE_LOCATION_ERROR:source_location_cursor_regression",
+    },
+  }
+  for case_index, error_case in ipairs(error_cases) do
+    local parsed_error = linkedspec.parse_spec(error_case[1], { source_id = source_identity })
+    local normalized_error = linkedspec.spec_ast.from_json(
+      "SpecFile",
+      linkedspec.spec_ast.to_json(parsed_error)
+    )
+    local compiled_error = linkedspec.compile_spec(normalized_error)
+    local native_ok, native_failure = pcall(
+      linkedspec.runtime_parse,
+      linkedspec.runtime_engine(compiled_error),
+      error_case[2]
+    )
+    check(not native_ok and linkedspec.is_runtime_interpreter_error(native_failure) and
+      native_failure.diagnostic.code == error_case[3],
+      "reconstructed error " .. case_index)
+    local error_plan = linkedspec.build_generated_rule_plan(compiled_error)
+    for _, traced in ipairs({ false, true }) do
+      local operation = traced and linkedspec.execute_generated_parser_with_trace_v2 or
+        linkedspec.execute_generated_parser_v2
+      local ok, failure
+      if traced then
+        ok, failure = pcall(
+          operation,
+          compiled_error,
+          error_plan,
+          error_case[2],
+          linkedspec.trace_config_disabled(),
+          generated_identity
+        )
+      else
+        ok, failure = pcall(operation, compiled_error, error_plan, error_case[2], generated_identity)
+      end
+      if ok or not linkedspec.is_generated_source_error(failure) then
+        fail("generated error type " .. case_index .. "/" .. tostring(traced))
+      end
+      local projected = linkedspec.generated_source_error_to_json(failure)
+      check_equal(projected.stage, "execute_generated",
+        "generated error stage " .. case_index .. "/" .. tostring(traced))
+      check_equal(projected.code, "generated_execution_failed",
+        "generated error code " .. case_index .. "/" .. tostring(traced))
+      check_equal(projected.source_identity, generated_identity,
+        "generated error identity " .. case_index .. "/" .. tostring(traced))
+      check(projected.detail:find(error_case[4], 1, true) ~= nil,
+        "generated error detail " .. case_index .. "/" .. tostring(traced))
+    end
+  end
+end
 
 local cases = {
   {

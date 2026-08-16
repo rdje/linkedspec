@@ -153,7 +153,7 @@ for _, row in ipairs(contract.family_cases) do
   local meta = projected.meta
   check_equal(
     sorted_keys(meta),
-    "cursor_policy,edge_ownership,family,is_top,label,line,mode,resolved_edges",
+    "capture_gaps,cursor_policy,edge_ownership,family,is_top,label,line,mode,regex_slots,resolved_edges,resolved_slot_edges",
     row.id .. " rule meta fields"
   )
   check_equal(projected.handler.label, "Top", row.id .. " handler label")
@@ -221,7 +221,11 @@ Top::AND
     linkedspec.spec_load_options({ cwd = root, search_roots = {} })
   )
   local loaded_descriptor = linkedspec.to_descriptor_json(loaded.compiled)
-  check_equal(json.encode(loaded_descriptor), direct_bytes, "loaded descriptor bytes")
+  check_equal(loaded_descriptor.spec.Top.meta.regex_slots[1].source_id, "descriptor.spec",
+    "loaded descriptor logical source")
+  loaded_descriptor.spec.Top.meta.regex_slots[1].source_id = "inline"
+  check_equal(json.encode(loaded_descriptor), direct_bytes,
+    "loaded descriptor differs only by logical source")
   check_equal(loaded_descriptor.spec.Top.meta.family, "and", "loaded family")
   check_equal(loaded_descriptor.spec.Top.meta.cursor_policy, "consume", "loaded policy")
   check_same_json(linkedspec.runtime_parse(loaded:create_engine(), "prefix x").value, json.null, "loaded consume")

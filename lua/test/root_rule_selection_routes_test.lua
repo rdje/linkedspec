@@ -139,6 +139,13 @@ with_temp_directory(function(root)
       route.name .. " loaded explicit"
     )
     check_same_json(linkedspec.to_descriptor_json(loaded.compiled), descriptor, route.name .. " loaded descriptor")
+    for rule_label, rule_descriptor in pairs(descriptor.spec) do
+      for slot_index, slot in ipairs(rule_descriptor.meta.regex_slots) do
+        check_equal(slot.source_id, route.name .. ".spec",
+          route.name .. " loaded slot source " .. rule_label .. "/" .. slot_index)
+        slot.source_id = "inline"
+      end
+    end
 
     local normalized_json = json.decode(json.encode(linkedspec.spec_ast.to_json(linkedspec.parse_spec(route.source))))
     local reconstructed = linkedspec.compile_spec(linkedspec.spec_ast.from_json("SpecFile", normalized_json))

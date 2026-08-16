@@ -87,6 +87,7 @@ changed* lives in git (layer D), not here.
 | [0074](0074-dart-gap-admission-mutation-correction.md) | Dart gap admission adds a regression mutation instead of replacing a nonexistent one | 2026-08-15 | accepted; implementation owned by `INTER-MATCH-GAP-CAPTURE.4.5` | architecture, capture, dart, admission, mutations, verification, continuity |
 | [0075](0075-engineering-notes-thirteenth-segment-capacity.md) | Engineering-notes history admits its thirteenth bounded member | 2026-08-15 | accepted under `INTER-MATCH-GAP-CAPTURE.4.5` | documentation, history, rollover, routing, pressure, continuity, doctrine |
 | [0076](0076-change-history-eighteenth-member-capacity.md) | Change history admits its eighteenth bounded member | 2026-08-15 | accepted under `INTER-MATCH-GAP-CAPTURE.5.1` | documentation, history, rollover, routing, pressure, continuity, doctrine |
+| [0077](0077-engineering-notes-fourteenth-member-capacity.md) | Engineering-notes history admits its fourteenth bounded member | 2026-08-16 | accepted under `INTER-MATCH-GAP-CAPTURE.6.3` | documentation, history, rollover, routing, pressure, continuity, doctrine |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

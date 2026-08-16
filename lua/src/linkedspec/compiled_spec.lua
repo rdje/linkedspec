@@ -1070,6 +1070,22 @@ local function resolved_edge_descriptors(rule)
   return result
 end
 
+local function resolved_slot_edge_descriptors(rule)
+  local result = json.array()
+  for _, edge in ipairs(rule.action_edges) do
+    for _, target in ipairs(edge.targets) do
+      result[#result + 1] = json.harray({
+        selector_kind = edge.selector_kind,
+        authored_selector = edge.authored_selector == nil and json.null or edge.authored_selector,
+        target_rule = target.label,
+        regex_index = edge.child_regex_index,
+        target_slot_id = edge.target_slot_id == nil and json.null or edge.target_slot_id,
+      })
+    end
+  end
+  return result
+end
+
 local function descriptor_rule_to_json(rule)
   return json.harray({
     handler = json.harray({ kind = "lua_interpreter_rule", label = rule.label, status = "compiled_state_only" }),
@@ -1090,6 +1106,9 @@ local function descriptor_rule_to_json(rule)
       cursor_policy = descriptor_cursor_policy(rule),
       edge_ownership = descriptor_edge_ownership(rule),
       resolved_edges = resolved_edge_descriptors(rule),
+      regex_slots = typed_array(rule.regex_slots, regex_slot_to_json),
+      capture_gaps = rule.capture_gaps == nil and json.null or capture_gaps_to_json(rule.capture_gaps),
+      resolved_slot_edges = resolved_slot_edge_descriptors(rule),
       mode = mode_metadata_to_json(rule.mode_metadata),
     }),
   })
