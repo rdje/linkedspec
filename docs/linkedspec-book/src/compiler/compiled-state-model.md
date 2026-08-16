@@ -142,6 +142,13 @@ adds `selector_kind`, `authored_selector`, `target_rule`, resolved `child_regex_
 `resolved_edges`/`{label,idx}` references until `.6.3`. Emitted source embeds the normalized source id without
 changing format 2 or its `{label,family}` plan.
 
+Native Lua execution now consumes that metadata through the existing recognition invocation/checkpoint authority.
+Capture activation, committed gap cursor, accepted count, phase, candidate/tail, and detached child entry identity
+live on that invocation; the detached transaction state remains exactly cursor/boundary/marks. Capture-enabled
+rules alone preselect before `LS`, commit child-extended state before `IT`, and install successful tails before
+`LX`/`EX`/`E`. The four zero-argument helpers resolve privately without entering the 246-name supported ActionIR
+inventory. Normalized reconstruction, compatible descriptor additions, and generated-v2 execution remain `.6.3`.
+
 The Julia backend now implements the same narrow staged provider before compiled state is built. Its public path is:
 
 ```julia

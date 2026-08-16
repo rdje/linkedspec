@@ -156,8 +156,9 @@ slot, eligibility, or marker context. The Lua source id defaults to `inline`; a 
 its caller spelling, while an absolute loaded request is reduced to its basename so host paths never become
 compiled provenance. Runtime backends use `gap_capture_context_unavailable` for a private gap read outside a live
 candidate/tail and `source_location_cursor_regression` when the accepted cursor would commit before the selected
-match end. Lua runtime context and those accessor/runtime failures remain owned by `.6.2`; `.6.1` does not
-manufacture a live gap context.
+match end. Lua `.6.2` now emits those accessor/runtime failures from the same invocation-local authority used by
+native candidate and tail execution. The consumer remains dormant from ordinary/admitted routes, so this private
+implementation does not yet promote either Lua runtime row.
 
 Parser-authored `print`/`say`/`print_each` events use a separate Rust facility. Call
 `execute_with_diagnostic_output(input, sink)` or

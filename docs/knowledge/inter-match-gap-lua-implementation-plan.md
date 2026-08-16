@@ -9,6 +9,7 @@ answers:
   - "when must Lua select a match relative to LS for capture_gaps"
   - "where does Lua gap state belong"
   - "does Lua gap capture widen detached recognition frame state"
+  - "why does Lua gap execution use internal module methods instead of more local functions"
   - "how does Lua carry logical spec source identity"
   - "what carries Lua gap metadata through normalized reconstruction"
   - "does the Lua generated plan change for capture_gaps"
@@ -20,9 +21,9 @@ answers:
   - "how does Lua gap admission change rollout and mutations"
   - "is Lua capture_gaps implemented now"
 date: 2026-08-16
-status: authored/static/compiled metadata implemented under .6.1; live PUC Lua and LuaJIT rollout remains pending at 5 complete / 4 pending
+status: authored/static/compiled metadata and private native execution implemented through .6.2; live PUC Lua and LuaJIT rollout remains pending at 5 complete / 4 pending
 tags: [lua, luajit, capture, segmentation, named-slots, recognition, source-location, generated-source, emitted-source, primary, plan]
-evidence: "INTER-MATCH-GAP-CAPTURE.6.1 implements one shared PUC-Lua/LuaJIT authored/static/compiled path: SpecFile.source_id defaults to inline and retains path-opaque caller identity through direct/staged/loaded/normalized/emitted carriers; named/anonymous declarations reuse the pinned Unicode-17 scanner; selectors and the dedicated directive retain provenance; compiled JSON adds slot/directive/five-field identity while descriptors and legacy refs stay unchanged. The explicit dormant consumer passes 178 assertions per ABI and ten checker mutations keep ordinary/canonical/rooted execution absent. Complete Lua remains 177 tests per ABI, primary 66, corpus 105, storage 18 owners/three native modules; gap stays 5/4/58."
+evidence: "INTER-MATCH-GAP-CAPTURE.6.1-.6.2 implement one shared PUC-Lua/LuaJIT authored/static/compiled and private native path. The existing recognition invocation frame/checkpoint owns activation, committed gap cursor, accepted count, phase, candidate/tail, and detached child entry identity while detached frame state stays cursor/boundary/marks. Capture-only preselection precedes LS; child-extended commit precedes IT; successful tails precede LX/EX/E; legacy slot events retain post-action/pre-LE timing. Four private accessors stay outside the 246-name supported inventory. The explicit dormant consumer passes 211 assertions per ABI, including 33 native assertions, and ten checker mutations keep ordinary/canonical/rooted execution absent. Complete Lua remains 177 tests per ABI, primary 66, corpus 105, storage 18 owners/three native modules; gap stays 5/4/58."
 reverify: "bash tools/run_lua_local.sh && bash tools/check_inter_match_gap_capture_six_runtime.sh && bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && bash tools/run_python_project_data.sh tools/check_duplicate_regex_slot_identity_contract.py && perl tools/check_generated_source_contract.pl && bash tools/test_lua_project_data_storage.sh"
 ---
 
@@ -49,13 +50,17 @@ retain their current `LS`-before-selection order.
    directive survive compilation. The exact nine diagnostics become source-aware. The consumer lives at
    `lua/test/inter_match_gap_capture_contract_test.lua`, while ten checker-local mutations keep it absent from
    ordinary, canonical, and rooted execution on both ABIs.
-2. `.6.2` extends only `recognition_transaction_runtime.lua`. Its existing invocation frame owns activation,
+2. `.6.2` extends the existing recognition runtime authority. Its invocation frame owns activation,
    immutable input and invocation identity, detached entry-slot identity, committed gap cursor, accepted-edge
    count, and current gap. Existing token records snapshot the mutable gap members for rollback; the underlying
    detached transaction state remains exactly cursor, boundary, and marks. Private accessors use ordinary action
    dispatch without enlarging the 246-name supported ActionIR inventory. Candidate context spans action/target
    execution and `LE`; child-extended cursor state commits before `IT`; successful tails precede `LX`, `EX`, or
-   `E`. There is no second stack, cursor, token family, or ABI-specific path.
+   `E`. Nested frames hide and restore parent candidates, and rollback restores the same checkpointed owner.
+   There is no second stack, cursor, token family, or ABI-specific path. PUC Lua rejected a first version at its
+   chunk-local-variable ceiling; semantic-slot emission and candidate preparation therefore live as internal
+   module-table methods instead of new top-level locals. They are not facade exports, and this retains Lua-5.1/
+   LuaJIT compatibility without changing authority.
 3. `.6.3` keeps normalized `SpecFile` JSON as the sole reconstruction carrier and recompiles normally. Descriptor
    rule metadata adds fresh detached `regex_slots`, `capture_gaps`, and five-field `resolved_slot_edges` values,
    preserving legacy `resolved_edges` and `{label,idx}` references. Direct and traced generated execution spend
@@ -71,9 +76,9 @@ retain their current `LS`-before-selection order.
    advance, taking governance from 5/4/58 to 7/2/60 by appending their two runtime regressions. Ten dormancy
    mutations become sixteen admission mutations; recurring and public rows remain pending for `.7`.
 
-## Current `.6.1` boundary
+## Current `.6.2` boundary
 
-The first implementation leaf is complete. `SpecFile.source_id` is the sole logical static-source carrier and
+The first two implementation leaves are complete. `SpecFile.source_id` is the sole logical static-source carrier and
 defaults to `inline` for legacy constructors/JSON. Direct parsing, both staged layers, normalized JSON, and the
 effective spec embedded by source emission retain it. A relative loaded request retains caller spelling; an
 absolute request reduces to its basename, so resolved repository or scratch paths cannot leak into compiled
@@ -86,10 +91,12 @@ rule JSON adds ordered slot rows and nullable directive evidence, while compiled
 selector identity. Descriptor action edges, `resolved_edges`, `{label,idx}` dependency refs, rule-slot events,
 generated format 2, and `{label,family}` plans stay byte/shape compatible.
 
-The final consumer exists at its permanent path and passes 178 assertions on both PUC Lua and LuaJIT when called
-explicitly. Ten checker-local dormancy mutations require its identity and metadata boundaries while proving it is
-absent from ordinary Lua discovery, canonical CI, both rooted runtime routes, and the public facade. Live gap
-state and accessors remain unimplemented until `.6.2`; neither Lua rollout row is admitted.
+The final consumer exists at its permanent path and passes 211 assertions on both PUC Lua and LuaJIT when called
+explicitly: 178 metadata assertions plus 33 private native assertions. Ten checker-local dormancy mutations
+require its identity and contract boundaries while proving it is absent from ordinary Lua discovery, canonical
+CI, both rooted runtime routes, and the public facade. Native state/accessors/lifecycle now execute through the
+existing invocation/token authority; normalized/descriptor/generated/emitted/primary composition and both Lua
+rollout rows remain unadmitted.
 
 ## Existing authorities to preserve
 

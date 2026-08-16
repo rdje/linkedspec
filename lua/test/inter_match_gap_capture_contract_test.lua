@@ -1,10 +1,9 @@
--- INTER-MATCH-GAP-CAPTURE.6.1 — dormant shared Lua authored/static metadata stage.
+-- INTER-MATCH-GAP-CAPTURE.6.2 — dormant shared Lua native-execution stage.
 --
--- This final consumer path deliberately proves only parsing, validation,
--- compiled provenance, and direct/staged/loaded/normalized/emitted source
--- identity in this leaf. Native gap state, descriptors, generated execution,
--- independent emitted execution, primary execution, and admission remain
--- owned by `.6.2-.6.5`.
+-- This final consumer path now proves parsing, validation, compiled provenance,
+-- source identity, and private native state/lifecycle on both Lua ABIs.
+-- Descriptors, generated execution, independent emitted execution, primary
+-- execution, and admission remain owned by `.6.3-.6.5`.
 -- DORMANT: INTER-MATCH-GAP-CAPTURE.6.5 owns Lua runtime admission
 
 local linkedspec = require("linkedspec")
@@ -47,6 +46,16 @@ local function check_nil(actual, label)
   check_equal(actual, nil, label)
 end
 
+local function check_json_equal(actual, expected, label)
+  assertions = assertions + 1
+  local actual_json = json.encode(actual)
+  local expected_json = json.encode(expected)
+  if actual_json ~= expected_json then
+    fail((label or "JSON values differ") .. ": expected " .. expected_json ..
+      ", got " .. actual_json)
+  end
+end
+
 local function read_file(path)
   local handle = assert(io.open(path, "rb"))
   local value = assert(handle:read("*a"))
@@ -79,6 +88,20 @@ local function portable_diagnostic(source, source_id)
   if ok then fail("fixture must be rejected statically") end
   if not linkedspec.is_spec_validation_error(result) then error(result, 0) end
   return linkedspec.spec_validation_error_to_json(result)
+end
+
+local function execute_native(source, input)
+  return linkedspec.runtime_parse(
+    linkedspec.runtime_engine(compile_metadata(source)),
+    input
+  )
+end
+
+local function native_error(source, input)
+  local ok, result = pcall(execute_native, source, input)
+  if ok then fail("fixture must fail during native execution") end
+  if not linkedspec.is_runtime_interpreter_error(result) then error(result, 0) end
+  return result
 end
 
 local function compiled_rule_json(compiled, label)
@@ -276,6 +299,223 @@ local emitted = linkedspec.emit_lua_source_v2(compiled, "metadata-emitted")
 check(emitted:find(hex_encode('"source_id":"inline"'), 1, true) ~= nil,
   "emitted normalized carrier retains source id")
 
+check_json_equal(execute_native([[
+Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Part[head] { push(gaps, array(gap_kind(), gap_text())) }
+ LX { push(gaps, array(gap_kind(), gap_text())); return(copy(gaps)) }
+Part:
+ head=/H/
+ I.return(entry_text())
+]], "αHω").value, json.decode('[["prefix","α"],["tail","ω"]]'),
+  "Unicode prefix and tail")
+
+check_json_equal(execute_native([[
+Top::
+ @capture_gaps
+ -> Part { return("unexpected") }
+ LS { return(array(gap_kind(), gap_text(), match_text())) }
+Part: /H/
+]], "αH").value, json.decode('["prefix","α","H"]'),
+  "candidate available before LS")
+
+check_json_equal(execute_native([[
+Top::
+ I { segments = [] }
+ @capture_gaps
+ -> Part[header]  { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span(), "child", call(Part))) }
+ -> Part[section] { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span(), "child", call(Part))) }
+ -> Part[footer]  { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span(), "child", call(Part))) }
+ LX { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span())); return(copy(segments)) }
+Part:
+ header=/H/
+ section=/S/
+ footer=/F/
+ I { return(hash("slot", entry_slot(), "text", entry_text(), "falsey", 0)) }
+]], "αHβ\nS🙂Fω").value, json.decode([[
+[
+ {"kind":"prefix","text":"α","span":{"source_id":"input","start":0,"end":1,"provenance":"gap"},"child":{"slot":{"target_rule":"Part","regex_index":0,"slot_id":"header","selector_kind":"named","authored_selector":"header"},"text":"H","falsey":0}},
+ {"kind":"interstitial","text":"β\n","span":{"source_id":"input","start":2,"end":4,"provenance":"gap"},"child":{"slot":{"target_rule":"Part","regex_index":1,"slot_id":"section","selector_kind":"named","authored_selector":"section"},"text":"S","falsey":0}},
+ {"kind":"interstitial","text":"🙂","span":{"source_id":"input","start":5,"end":6,"provenance":"gap"},"child":{"slot":{"target_rule":"Part","regex_index":2,"slot_id":"footer","selector_kind":"named","authored_selector":"footer"},"text":"F","falsey":0}},
+ {"kind":"tail","text":"ω","span":{"source_id":"input","start":7,"end":8,"provenance":"gap"}}
+]
+]]), "Unicode segmentation and entry-slot identity")
+
+check_json_equal(execute_native([[
+Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Part[h] { push(gaps, array(gap_kind(), gap_text(), gap_span())) }
+ -> Part[s] { push(gaps, array(gap_kind(), gap_text(), gap_span())) }
+ -> Part[f] { push(gaps, array(gap_kind(), gap_text(), gap_span())) }
+ LX { push(gaps, array(gap_kind(), gap_text(), gap_span())); return(copy(gaps)) }
+Part:
+ h=/H/
+ s=/S/
+ f=/F/
+ I.return(entry_text())
+]], "HSF").value, json.decode([[
+[
+ ["prefix","",{"source_id":"input","start":0,"end":0,"provenance":"gap"}],
+ ["interstitial","",{"source_id":"input","start":1,"end":1,"provenance":"gap"}],
+ ["interstitial","",{"source_id":"input","start":2,"end":2,"provenance":"gap"}],
+ ["tail","",{"source_id":"input","start":3,"end":3,"provenance":"gap"}]
+]
+]]), "empty gap boundaries")
+
+check_json_equal(execute_native([[
+Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Container[open] { push(gaps, array(gap_text(), call(Container))) }
+ -> Bang { push(gaps, array(gap_text(), call(Bang))) }
+ LX { push(gaps, array(gap_text(), gap_kind())); return(copy(gaps)) }
+Container:
+ open=/\{/
+ -> Close { return(call(Close)) }
+Close:
+ /\}/
+ I.return(entry_text())
+Bang:
+ /!/
+ I.return(entry_text())
+]], "p{abc}gap!").value, json.decode('[["p","}"],["gap","!"],["","tail"]]'),
+  "child-extended committed cursor")
+
+check_json_equal(execute_native([[
+Top::
+ @capture_gaps
+ -> Container[open] { return(array(gap_text(), call(Container), gap_text())) }
+Container:
+ open=/\{/
+ I { inner = [] }
+ @capture_gaps
+ -> Atom { push(inner, gap_text()) }
+ LX { push(inner, gap_text()); return(copy(inner)) }
+Atom:
+ /x/
+ I.return(entry_text())
+]], "p{axtail").value, json.decode('["p",["a","tail"],"p"]'),
+  "nested invocation isolation")
+
+check_json_equal(execute_native([[
+Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Part[h] {
+  tx = recognition_checkpoint();
+  matched = recognize_once(tx, call(Probe));
+  recognition_rollback(tx);
+  push(gaps, gap_text())
+ }
+ -> Part[s] { push(gaps, gap_text()) }
+ LX { push(gaps, gap_text()); return(copy(gaps)) }
+Part:
+ h=/H/
+ s=/S/
+ I.return(entry_text())
+Probe:
+ /X/
+ I.return(0)
+]], "aHXbS").value, json.decode('["a","Xb",""]'),
+  "recognition rollback restores gap state")
+
+local terminal_cases = {
+  {
+    [[Top::
+ @capture_gaps
+ -> Part { return(gap_text()) }
+ LX { return(array(gap_kind(), gap_text(), gap_span())) }
+Part: /H/
+]],
+    "abc",
+    '["tail","abc",{"source_id":"input","start":0,"end":3,"provenance":"gap"}]',
+  },
+  {
+    [[Top::OR{0,2}
+ I { gaps = [] }
+ @capture_gaps
+ -> Part { push(gaps, gap_text()) }
+ EX { push(gaps, gap_text()); return(copy(gaps)) }
+Part: /H/
+]],
+    "aHtail",
+    '["a","tail"]',
+  },
+  {
+    [[Top::OR{0,2}
+ I { gaps = [] }
+ @capture_gaps
+ -> Part { push(gaps, gap_text()) }
+ EX { push(gaps, gap_text()); return(copy(gaps)) }
+Part: /H/
+]],
+    "whole",
+    '["whole"]',
+  },
+  {
+    [[Top::OR{1}
+ I { gaps = [] }
+ @capture_gaps
+ -> Part { push(gaps, gap_text()) }
+ E { push(gaps, gap_text()); return(copy(gaps)) }
+Part: /H/
+]],
+    "aHtail",
+    '["a","tail"]',
+  },
+}
+for index, case in ipairs(terminal_cases) do
+  check_json_equal(execute_native(case[1], case[2]).value, json.decode(case[3]),
+    "terminal gap case " .. index)
+end
+
+local unavailable = native_error("Direct::\n /H/\n I { return(gap_text()) }\n", "H")
+check_equal(unavailable.message,
+  "LINKEDSPEC_INTER_MATCH_GAP_ERROR:gap_capture_context_unavailable",
+  "unavailable gap message")
+check_equal(unavailable.diagnostic.code, "gap_capture_context_unavailable",
+  "unavailable gap code")
+check_equal(unavailable.diagnostic.stage, "access_gap_context", "unavailable gap stage")
+
+local post_commit = native_error(
+  "Top::OR{1}\n @capture_gaps\n -> Part { return(0) }\n IT { return(gap_kind()) }\nPart: /H/\n",
+  "H"
+)
+check_equal(post_commit.diagnostic.code, "gap_capture_context_unavailable",
+  "post-commit gap unavailable")
+
+local regression = native_error(
+  "Top::OR{1}\n @capture_gaps\n -> Part { rewind_match_start() }\nPart: /H/\n",
+  "aH"
+)
+check_equal(regression.message,
+  "LINKEDSPEC_SOURCE_LOCATION_ERROR:source_location_cursor_regression",
+  "cursor regression message")
+check_equal(regression.diagnostic.code, "source_location_cursor_regression",
+  "cursor regression code")
+check_equal(regression.diagnostic.stage, "advance_gap_context", "cursor regression stage")
+
+for _, helper_name in ipairs({ "entry_slot", "gap_span", "gap_text", "gap_kind" }) do
+  local arity = native_error(
+    "Top::OR{1}\n @capture_gaps\n -> Part { return(" .. helper_name .. "(1)) }\nPart: /H/\n",
+    "H"
+  )
+  check_equal(arity.diagnostic.code, "helper_arity_mismatch", helper_name .. " arity code")
+  check_equal(arity.diagnostic.stage, "helper_arity_mismatch", helper_name .. " arity stage")
+  check_equal(arity.diagnostic.actual_arity, 1, helper_name .. " actual arity")
+end
+
+check(execute_native(
+  "Top::OR{2}\n @capture_gaps\n -> Part { return(gap_text()) }\n EX { return(\"unexpected-ex\") }\n E { return(\"unexpected-e\") }\nPart: /H/\n",
+  "H"
+).value == json.null, "failed minimum returns null")
+check(execute_native("Part::\n /H/\n I { return(entry_slot()) }\n", "H").value == json.null,
+  "direct entry slot is null")
+check_equal(execute_native("Top::\n /H/\n E { return(\"legacy\") }\n", "H").value,
+  "legacy", "legacy rule behavior")
+
 local cases = {
   {
     "Top::\n -bad=/H/\n",
@@ -372,7 +612,7 @@ for case_index, case in ipairs(cases) do
 end
 
 io.stdout:write(
-  "Lua inter-match gap metadata contract: OK (",
+  "Lua inter-match gap contract: OK (",
   assertions,
   " assertions; dormant; runtime=",
   linkedspec.runtime_implementation(),

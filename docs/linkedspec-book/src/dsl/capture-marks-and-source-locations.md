@@ -876,14 +876,15 @@ The four private zero-argument gap helpers resolve through a separate private fa
 inventory stays exactly 246; exact arity, unavailable-context, and cursor-regression diagnostics are native.
 Julia is privately admitted at 5/4/58. Outward surfaces, dependencies, and toolchain remain unchanged.
 
-### Lua and LuaJIT metadata — runtime still pending
+### Lua and LuaJIT metadata and private native execution — admission still pending
 
 Lua `.6.0` recorded the same pre-implementation result on both ABIs: numeric `Rule[0]` worked; named declarations,
 named selectors, and `@capture_gaps` were raw invalid body syntax; and the four future accessors reached
-unsupported runtime-helper diagnostics. `.6.1` now implements the authored/static/compiled layer once for PUC Lua
-and LuaJIT. A 178-assertion consumer proves both ABIs explicitly but remains absent from ordinary, canonical, and
-rooted discovery through ten dormancy mutations. Complete package proof stays green at 177 tests per ABI,
-primary 66, corpus 105, and 18 exact temporary owners with three dual-ABI native modules.
+unsupported runtime-helper diagnostics. `.6.1` implements the authored/static/compiled layer once for PUC Lua
+and LuaJIT, and `.6.2` adds private native execution through the existing recognition authority. A 211-assertion
+consumer proves both ABIs explicitly—178 metadata plus 33 native assertions—but remains absent from ordinary,
+canonical, and rooted discovery through ten dormancy mutations. Complete package proof stays green at 177 tests
+per ABI, primary 66, corpus 105, and 18 exact temporary owners with three dual-ABI native modules.
 
 The audit also fixes the timing boundary. Lua's existing anonymous split markers and named `@mark(...)` compile as
 events attached to the preceding regex slot, then run after accepted action/target execution and before `LE`.
@@ -891,14 +892,17 @@ They are not the new directive authority and will not be retimed. Dedicated `@ca
 preselection before `LS`; rules without it keep their present `LS`-before-selection order.
 
 Five dependency leaves are frozen. Completed `.6.1` owns logical source identity, pinned-Unicode declarations/
-selectors, exact static/compiled metadata, the final consumer, and ten dormancy mutations. `.6.2` extends the existing
-recognition invocation frame/token—never a second stack—with gap cursor, accepted count, current candidate, and
-entry-slot identity; immutable input `SourceAuthority` remains the byte-to-scalar bridge. `.6.3` carries state only
+selectors, exact static/compiled metadata, the final consumer, and ten dormancy mutations. Completed `.6.2`
+extends the existing recognition invocation frame/token—never a second stack—with gap cursor, accepted count,
+current candidate/tail, phase, and entry-slot identity; immutable input `SourceAuthority` remains the byte-to-
+scalar bridge. Capture-enabled rules alone preselect before `LS`, retain the candidate through action/target/`LE`,
+commit a child-extended cursor before `IT`, and install successful tails before `LX`/`EX`/`E`. Existing checkpoint
+rollback and nested frames restore the same owner. `.6.3` carries state only
 through normalized `SpecFile` JSON, compatible descriptor additions, and unchanged format-2 `{label,family}`
 generated execution. `.6.4` independently loads ten value and two typed-error modules in fresh PUC-Lua and LuaJIT
 children below repository-routed storage, advancing exact owners only from 18 to 19. `.6.5` reuses the primary
 adapter, runs nine roles once per ABI, and alone may advance the two Lua rows from 5/4/58 to 7/2/60. No Lua gap
-behavior or public/outward claim is current yet.
+admission or public/outward claim is current yet.
 
 The current Lua carrier is deliberately narrow. `SpecFile.source_id` defaults to `inline`, crosses the direct and
 two staged parser layers, survives normalized JSON and effective emitted state, and records caller-logical loaded

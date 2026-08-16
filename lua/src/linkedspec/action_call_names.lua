@@ -275,10 +275,21 @@ local COMPLETE_NAMED_MARK_CALL_NAMES = {
   ["mark_match_start"] = true,
 }
 
+-- Private rollout-only gap accessors are accepted by the Lua compiler and use
+-- ordinary runtime dispatch, but deliberately stay outside the governed
+-- 246-name shared ActionIR inventory until the outward-surface owner moves.
+local PRIVATE_INTER_MATCH_GAP_CALL_NAMES = {
+  ["entry_slot"] = true,
+  ["gap_span"] = true,
+  ["gap_text"] = true,
+  ["gap_kind"] = true,
+}
+
 function M.is_known(name)
   return CURRENT_CALL_NAMES[name] == true or
     SOURCE_BOUNDARY_COMPATIBILITY_CALL_NAMES[name] == true or
-    COMPLETE_NAMED_MARK_CALL_NAMES[name] == true
+    COMPLETE_NAMED_MARK_CALL_NAMES[name] == true or
+    PRIVATE_INTER_MATCH_GAP_CALL_NAMES[name] == true
 end
 
 function M.is_shared_inventory_name(name)

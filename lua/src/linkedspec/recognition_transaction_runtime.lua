@@ -10,6 +10,51 @@ local typed_source = require("linkedspec.source_location_runtime")
 
 local M = {}
 
+local GAP_ERROR_MT = {
+  __tostring = function(value) return value.prefix .. value.code end,
+}
+
+local function gap_error(prefix, code, fields)
+  fields = fields or {}
+  fields.prefix = prefix
+  fields.code = code
+  error(setmetatable(fields, GAP_ERROR_MT), 0)
+end
+
+local function copy_gap_context(value)
+  if value == nil then return nil end
+  return {
+    source_id = value.source_id,
+    rule_label = value.rule_label,
+    invocation_id = value.invocation_id,
+    edge_ordinal = value.edge_ordinal,
+    kind = value.kind,
+    start_byte = value.start_byte,
+    end_byte = value.end_byte,
+  }
+end
+
+local function copy_gap_state(value)
+  if value == nil then return nil end
+  return {
+    committed_gap_cursor = value.committed_gap_cursor,
+    accepted_edge_count = value.accepted_edge_count,
+    current_gap = copy_gap_context(value.current_gap),
+  }
+end
+
+local function copy_entry_slot(value)
+  if value == nil then return nil end
+  return {
+    owner_invocation_id = value.owner_invocation_id,
+    target_rule = value.target_rule,
+    regex_index = value.regex_index,
+    slot_id = value.slot_id,
+    selector_kind = value.selector_kind,
+    authored_selector = value.authored_selector,
+  }
+end
+
 local function frame_state(ctx, rule_label)
   local marks = ctx.mark_buckets[rule_label]
   if marks == nil then
@@ -68,7 +113,19 @@ function M.context(source_runtime)
   }
 end
 
-function M.enter_invocation(ctx, rule_label)
+function M.enter_invocation(ctx, rule_label, options)
+  options = options or {}
+  if type(options) ~= "table" then error("recognition invocation options must be a table", 0) end
+  local capture_gaps = options.capture_gaps == true
+  local parent = ctx.recognition_frames[#ctx.recognition_frames]
+  local supplied_entry_slot = options.entry_slot
+  local accepted_entry_slot = nil
+  if supplied_entry_slot ~= nil and parent ~= nil and
+      parent.identity.invocation_id == supplied_entry_slot.owner_invocation_id and
+      parent.gap_state ~= nil and parent.gap_state.current_gap ~= nil and
+      supplied_entry_slot.target_rule == rule_label then
+    accepted_entry_slot = copy_entry_slot(supplied_entry_slot)
+  end
   local prior_marks = ctx.mark_buckets[rule_label]
   ctx.mark_buckets[rule_label] = {}
   local ok, authority_frame = pcall(
@@ -84,15 +141,23 @@ function M.enter_invocation(ctx, rule_label)
     ctx.mark_buckets[rule_label] = prior_marks
     error(authority_frame, 0)
   end
+  local identity = transaction.invocation_identity(ctx.recognition_authority, authority_frame)
   ctx.recognition_frames[#ctx.recognition_frames + 1] = {
     rule = rule_label,
     authority_frame = authority_frame,
     prior_marks = prior_marks,
     tokens = {},
-    identity = transaction.invocation_identity(ctx.recognition_authority, authority_frame),
+    identity = identity,
     entry_byte = ctx.cursor_byte,
     selected_match = nil,
     observation_scope = nil,
+    gap_state = capture_gaps and {
+      committed_gap_cursor = ctx.cursor_byte,
+      accepted_edge_count = 0,
+      current_gap = nil,
+    } or nil,
+    gap_phase = "I",
+    entry_slot = accepted_entry_slot,
   }
 end
 
@@ -181,6 +246,106 @@ function M.note_match(ctx, one)
   if frame ~= nil then frame.selected_match = one end
 end
 
+function M.is_gap_error(value)
+  return type(value) == "table" and getmetatable(value) == GAP_ERROR_MT
+end
+
+function M.set_gap_phase(ctx, rule_label, phase)
+  active_frame(ctx, rule_label).gap_phase = phase
+end
+
+function M.install_gap_candidate(ctx, rule_label, match_start_byte)
+  local frame = active_frame(ctx, rule_label)
+  local gap = frame.gap_state
+  if gap == nil then return end
+  gap.current_gap = {
+    source_id = "input",
+    rule_label = rule_label,
+    invocation_id = frame.identity.invocation_id,
+    edge_ordinal = gap.accepted_edge_count,
+    kind = gap.accepted_edge_count == 0 and "prefix" or "interstitial",
+    start_byte = gap.committed_gap_cursor,
+    end_byte = match_start_byte,
+  }
+  frame.gap_phase = "selection"
+end
+
+function M.commit_gap_candidate(ctx, rule_label)
+  local frame = active_frame(ctx, rule_label)
+  local gap = frame.gap_state
+  local current = gap and gap.current_gap or nil
+  local selected = frame.selected_match
+  if current == nil or selected == nil then return end
+  if ctx.cursor_byte < selected.byte_end then
+    gap_error("LINKEDSPEC_SOURCE_LOCATION_ERROR:", "source_location_cursor_regression", {
+      phase = "advance",
+      rule_label = rule_label,
+      source_id = current.source_id,
+      start_offset = selected.byte_end,
+      end_offset = ctx.cursor_byte,
+      originating_edge_or_job = rule_label .. ":capture_gaps_commit",
+    })
+  end
+  gap.committed_gap_cursor = ctx.cursor_byte
+  gap.accepted_edge_count = gap.accepted_edge_count + 1
+  gap.current_gap = nil
+  frame.gap_phase = "post_commit"
+end
+
+function M.install_gap_tail(ctx, rule_label, phase)
+  local frame = active_frame(ctx, rule_label)
+  local gap = frame.gap_state
+  if gap == nil then return end
+  gap.current_gap = {
+    source_id = "input",
+    rule_label = rule_label,
+    invocation_id = frame.identity.invocation_id,
+    edge_ordinal = gap.accepted_edge_count,
+    kind = "tail",
+    start_byte = gap.committed_gap_cursor,
+    end_byte = #ctx.input,
+  }
+  frame.gap_phase = phase
+end
+
+function M.current_gap(ctx, rule_label, accessor)
+  local frame = active_frame(ctx, rule_label)
+  local current = frame.gap_state and frame.gap_state.current_gap or nil
+  if current ~= nil then return copy_gap_context(current) end
+  gap_error("LINKEDSPEC_INTER_MATCH_GAP_ERROR:", "gap_capture_context_unavailable", {
+    rule_label = rule_label,
+    source_id = "input",
+    invocation_id = frame.identity.invocation_id,
+    phase = frame.gap_phase,
+    accessor = accessor,
+  })
+end
+
+function M.entry_slot(ctx, rule_label)
+  local slot = active_frame(ctx, rule_label).entry_slot
+  if slot == nil then return json.null end
+  return json.harray({
+    target_rule = slot.target_rule,
+    regex_index = slot.regex_index,
+    slot_id = slot.slot_id == nil and json.null or slot.slot_id,
+    selector_kind = slot.selector_kind,
+    authored_selector = slot.authored_selector == nil and json.null or slot.authored_selector,
+  })
+end
+
+function M.gap_entry_slot(ctx, rule_label, edge)
+  local frame = active_frame(ctx, rule_label)
+  if frame.gap_state == nil or frame.gap_state.current_gap == nil then return nil end
+  return {
+    owner_invocation_id = frame.identity.invocation_id,
+    target_rule = edge.targets[1].label,
+    regex_index = edge.child_regex_index,
+    slot_id = edge.target_slot_id,
+    selector_kind = edge.selector_kind,
+    authored_selector = edge.authored_selector,
+  }
+end
+
 function M.observation_scope_is_active(ctx, scope)
   return ctx.recursive_observation_scopes[#ctx.recursive_observation_scopes] == scope
 end
@@ -244,6 +409,8 @@ function M.checkpoint(ctx, rule_label, slot)
       rule_label .. ":" .. slot
     ),
     snapshot = actual,
+    gap_snapshot = copy_gap_state(frame.gap_state),
+    gap_phase_snapshot = frame.gap_phase,
   }
 end
 
@@ -297,6 +464,8 @@ function M.rollback(ctx, rule_label, slot)
     rule_label,
     transaction.frame_state(ctx.recognition_authority, frame.authority_frame)
   )
+  frame.gap_state = copy_gap_state(token.gap_snapshot)
+  frame.gap_phase = token.gap_phase_snapshot
   frame.tokens[slot] = nil
 end
 

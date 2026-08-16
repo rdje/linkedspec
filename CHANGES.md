@@ -10,6 +10,27 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-16 — INTER-MATCH-GAP-CAPTURE.6.2 — implement Lua native gap execution
+
+- Activated task-tree-first from clean atomic-247 commit `a94c81ed`. The deliberate native RED reached only the
+  previously unsupported private `gap_kind` helper after the complete `.6.1` metadata group passed.
+- Extended the existing recognition invocation frame and checkpoint token with capture activation, committed gap
+  cursor, accepted-edge count, current candidate/tail, and detached child entry-slot identity. The underlying
+  detached recognition state remains exactly cursor/boundary/marks; no second stack, cursor, or token exists.
+- Capture-enabled repeated/default rules alone preselect a candidate before `LS`, expose it through action/target/
+  `LE`, commit a child-extended cursor before `IT`, and install a successful tail before `LX`/`EX`/`E`. Existing
+  anonymous and named rule-slot events retain their post-action/pre-`LE` timing.
+- Added four private zero-argument accessors through ordinary interpreter dispatch without widening the 246-name
+  supported ActionIR inventory or the root facade. Reads project UTF-8 byte offsets through immutable input source
+  authority and retain exact unavailable-context, arity, and cursor-regression diagnostics.
+- The permanent dormant consumer now passes 211 assertions per ABI: its 33 native assertions cover Unicode and
+  empty gaps, entry identity, falsey/child-extended commits, lifecycle tails, nesting, rollback, terminal routes,
+  failed minimum, direct entry, typed failures, helper arity, and legacy behavior.
+- Complete Lua remains green at 177 package tests per ABI, primary 66, corpus 105, and storage 18 owners / three
+  dual-ABI native modules. Gap governance stays 5/4/58 with ten Lua dormancy mutations and two rooted Lua skips;
+  recognition remains 137/246/58. Reconstruction/descriptors, generated/emitted execution, primary/admission,
+  rollout, format 2, storage ownership, and outward surfaces remain unchanged.
+
 ## 2026-08-16 — INTER-MATCH-GAP-CAPTURE.6.1 — add shared Lua gap metadata
 
 - Activated task-tree-first from clean atomic-246 commit `5089a360`. The checker-first RED rejected the absent

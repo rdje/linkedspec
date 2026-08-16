@@ -114,8 +114,9 @@ Horizontal whitespace around `=` is insignificant. Named and anonymous declarati
 zero-based slot list. A slot name uses the pinned Unicode 17.0.0 `XID_Continue` class, with exact case- and
 normalization-sensitive identity; an all-ASCII-digit name is invalid because bracket digits are reserved for
 positional selectors. A name is unique within its rule. Perl, Rust, Dart, and Julia privately admit this surface
-and its gap runtime. Shared PUC Lua/LuaJIT now parse, validate, normalize, and compile the same authored metadata
-behind one dormant consumer; Lua `@capture_gaps` runtime behavior remains pending.
+and its gap runtime. Shared PUC Lua/LuaJIT now parse, validate, normalize, compile, and privately execute the same
+native gap lifecycle behind one dormant consumer; reconstruction/generated/emitted/primary admission remains
+pending, so neither Lua runtime row is promoted yet.
 
 Named selection survives declaration reorder. Positional selection deliberately does not: if another slot is
 inserted before `word`, `Token[word]` follows the name while `Token[0]` continues to mean the first authored slot.

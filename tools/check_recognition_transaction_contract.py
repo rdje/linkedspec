@@ -105,7 +105,11 @@ LUA_INTEGRATION_MARKERS = (
     (LUA_AUTHORITY_PATH, "function M.validate_progress(", "cursor-only progress"),
     (LUA_SOURCE_RUNTIME_PATH, "function M.source_authority(adapter)", "source authority adapter"),
     (LUA_RUNTIME_ADAPTER_PATH, "function M.context(source_runtime)", "runtime context"),
-    (LUA_RUNTIME_ADAPTER_PATH, "function M.enter_invocation(ctx, rule_label)", "runtime entry"),
+    (
+        LUA_RUNTIME_ADAPTER_PATH,
+        "function M.enter_invocation(ctx, rule_label, options)",
+        "runtime entry",
+    ),
     (LUA_RUNTIME_ADAPTER_PATH, "function M.leave_invocation(ctx, rule_label)", "runtime exit"),
     (LUA_RUNTIME_ADAPTER_PATH, "function M.checkpoint(ctx, rule_label, slot)", "runtime checkpoint"),
     (LUA_RUNTIME_ADAPTER_PATH, "function M.attempt(ctx, rule_label, slot, matched, payload)", "runtime attempt"),

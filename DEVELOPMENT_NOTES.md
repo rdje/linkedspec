@@ -10,6 +10,27 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-16 (`INTER-MATCH-GAP-CAPTURE.6.2` — shared Lua private native execution): activation base is clean
+  atomic 247 at `a94c81ed`; one recognition/interpreter implementation serves PUC Lua and LuaJIT.
+- Extend `recognition_transaction_runtime.lua` rather than the detached recognition state. Invocation frames own
+  capture activation, entry-slot identity, committed gap cursor, accepted count, phase, and current candidate or
+  tail; existing checkpoints copy and restore those mutable members alongside the unchanged cursor/boundary/marks
+  token. Nested frames hide parent candidates and naturally restore them on return.
+- Preserve the old event clock. Only capture-enabled repeated/default rules preselect through the existing
+  alternation authority before `LS`; action, selected child, and `LE` see the live candidate; post-child cursor is
+  committed before `IT`; successful terminal tails exist before `LX`, `EX`, or `E`. Legacy rule-slot events still
+  execute after action/target and before `LE`.
+- Keep the accessors private. `entry_slot`, `gap_span`, `gap_text`, and `gap_kind` are recognized by ordinary call
+  dispatch but remain outside `CURRENT_CALL_NAMES`, so the governed shared inventory stays exactly 246 and the
+  facade remains unchanged. Exact zero arity and typed context/cursor failures share one runtime authority.
+- Do not spend new top-level locals in `interpreter.lua` casually. PUC Lua's chunk compilation rejected the first
+  implementation at its local-variable ceiling; moving the new semantic-slot and candidate-preparation helpers
+  onto the internal module table restored Lua-5.1 compatibility without exporting them through `linkedspec`.
+- Focused proof is explicit 211 assertions per ABI, including 33 native cases, plus complete Lua 177 per ABI,
+  primary 66, corpus 105, storage 18/three modules, neutral/rooted dormancy, and recognition 137/246/58. Normalized
+  reconstruction, descriptors, generated/emitted proof, primary admission, rollout, and outward surfaces remain
+  `.6.3-.6.5`-owned.
+
 - 2026-08-16 (`INTER-MATCH-GAP-CAPTURE.6.1` — shared Lua authored/static/compiled metadata): activation base is
   clean atomic 246 at `5089a360`; one implementation is consumed by PUC Lua and LuaJIT.
 - Keep source provenance logical and path-opaque. `SpecFile.source_id` defaults to `inline`, crosses direct and

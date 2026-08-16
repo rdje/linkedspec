@@ -2,30 +2,33 @@
 
 ## Current Activity
 
-- Atomic 246 landed cleanly at `5089a360`; shared PUC-Lua/LuaJIT metadata leaf
-  `INTER-MATCH-GAP-CAPTURE.6.1` is focused-signoff-complete from that exact boundary for intended atomic 247; no push.
-- Both ABIs now carry path-opaque logical source identity, pinned-Unicode named/anonymous declarations,
-  selector/directive provenance, exact static diagnostics, and compiled slot/directive/five-field identity.
-- The permanent 178-assertion consumer passes explicitly on PUC Lua and LuaJIT. Ten checker-local dormancy
+- Atomic 247 landed cleanly at `a94c81ed`; shared PUC-Lua/LuaJIT native leaf
+  `INTER-MATCH-GAP-CAPTURE.6.2` is focused-signoff-complete from that exact boundary for intended atomic 248; no push.
+- Both ABIs now share one invocation-local recognition/token authority for candidate/tail state, detached entry
+  identity, private accessors, lifecycle timing, nesting, and rollback; detached state stays cursor/boundary/marks.
+- The permanent 211-assertion consumer passes explicitly on PUC Lua and LuaJIT, including 33 native assertions.
+  Ten checker-local dormancy
   mutations keep ordinary, canonical, rooted, and facade discovery absent for both pending runtime rows.
 - Complete Lua remains green at 177 package tests per ABI, primary 66, corpus 105, and storage 18 owners with
   three dual-ABI native modules. Rooted governance stays 5/4/58 and ends in two exact Lua skips.
-- Live gap state/accessors, descriptors, generated execution, independently loaded emission, primary proof,
-  admission, and every outward surface remain owned by `.6.2-.6.5`.
+- Normalized reconstruction, descriptors, generated execution, independently loaded emission, primary proof,
+  admission, and every outward surface remain owned by `.6.3-.6.5`.
 
 ## Latest Completed Slice
 
-- `.6.1` adds the exact shared Lua authored/static/compiled layer and dormant final consumer without live gap
-  behavior or rollout movement. Explicit 178x2, complete Lua, rooted gap, recognition, duplicate-slot,
+- `.6.2` adds exact private native gap state/accessors/lifecycle to the existing shared recognition authority
+  without carrier, admission, or rollout movement. Explicit 211x2, complete Lua, rooted gap, recognition, duplicate-slot,
   typed-source, generated-source, storage, rendered book, Knowledge, histories, and doctrines pass.
 
 ## Next Action
 
-- Commit intended atomic 247, clear the brief, prove clean handoff, then activate `.6.2` task-tree-first for one
-  shared recognition-invocation/token native gap state and lifecycle path.
+- Commit intended atomic 248, clear the brief, prove clean handoff, then activate `.6.3` task-tree-first for
+  normalized reconstruction, compatible descriptors, and unchanged-v2 generated-plan parity.
 
 ## Recent Completions
 
+- `2026-08-16` — `.6.2` completed exact shared Lua private native state/accessors/lifecycle from clean `a94c81ed`
+  for intended atomic 248 without descriptor, generated/emitted, admission, rollout, or outward movement.
 - `2026-08-16` — `.6.1` completed exact shared Lua authored/static/compiled metadata and ten dormancy guards from
   clean `5089a360` for intended atomic 247 without runtime or rollout movement.
 - `2026-08-16` — `.6.0` froze the behavior-free shared Lua five-leaf plan from clean `a6ff2614` for intended atomic 246.
@@ -51,8 +54,6 @@
 - `2026-08-15` — `.4.2` completed private native Dart gap execution at atomic 236 `0b074e1c`.
 - `2026-08-15` — `c234ef9f` landed tiered verification policy `.0` as atomic 235.
 - `2026-08-15` — `.4.1` completed exact Dart authored/static/compiled gap metadata at `1e6d326d`.
-- `2026-08-15` — `.4.0` landed the behavior-free Dart implementation freeze at `e40de948`.
-
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source

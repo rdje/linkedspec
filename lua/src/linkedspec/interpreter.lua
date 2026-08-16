@@ -542,7 +542,18 @@ local function dispatch_edge_child(engine, edge_state, ctx)
   if passive and not typed_source.recognition.expects_observation(ctx, edge_state.target.label) then
     edge_state.child_result = rule_result(false, json.null)
   else
-    edge_state.child_result = execute_rule(engine, edge_state.target.label, edge_state.target.index, ctx)
+    local entry_slot = typed_source.recognition.gap_entry_slot(
+      ctx,
+      edge_state.rule_label,
+      edge_state.edge
+    )
+    edge_state.child_result = execute_rule(
+      engine,
+      edge_state.target.label,
+      edge_state.target.index,
+      ctx,
+      entry_slot
+    )
   end
   runtime_trace_decision(
     ctx,
@@ -2764,6 +2775,71 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
     fail("unsupported runtime helper '" .. expr.name .. "'", { helper_name = expr.name })
   end
   local name = action_contracts.canonical_action_helper_name(expr.name)
+  if name == "entry_slot" or name == "gap_span" or name == "gap_text" or name == "gap_kind" then
+    local rule_label = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule
+    local positional_only = true
+    for _, argument in ipairs(expr.args) do
+      if argument.argument_kind ~= "positional" then positional_only = false end
+    end
+    if #expr.args ~= 0 or not positional_only then
+      local expected = "exactly 0 arguments"
+      local detail = "helper_arity_mismatch: helper_name=" .. name ..
+        " actual_arity=" .. #expr.args .. " expected_arity=" .. expected ..
+        " in rule " .. rule_label
+      fail(detail, {
+        code = "helper_arity_mismatch",
+        helper_name = name,
+        actual_arity = #expr.args,
+        expected_arity = expected,
+        diagnostic = runtime_diagnostic(engine, {
+          stage = "helper_arity_mismatch",
+          summary = "Lua inter-match gap helper arity failed",
+          detail = detail,
+          top_rule = ctx.top_rule,
+          rule_label = rule_label,
+          code = "helper_arity_mismatch",
+          helper_name = name,
+          actual_arity = #expr.args,
+          expected_arity = expected,
+        }),
+      })
+    end
+    if name == "entry_slot" then return typed_source.recognition.entry_slot(ctx, rule_label) end
+    local ok, gap = pcall(typed_source.recognition.current_gap, ctx, rule_label, name)
+    if not ok then
+      if not typed_source.recognition.is_gap_error(gap) then error(gap, 0) end
+      local detail = tostring(gap)
+      fail(detail, {
+        code = "gap_capture_context_unavailable",
+        helper_name = name,
+        diagnostic = runtime_diagnostic(engine, {
+          stage = "access_gap_context",
+          summary = "Lua inter-match gap context is unavailable",
+          detail = detail,
+          top_rule = ctx.top_rule,
+          rule_label = rule_label,
+          code = "gap_capture_context_unavailable",
+          helper_name = name,
+        }),
+      })
+    end
+    if name == "gap_kind" then return gap.kind end
+    if name == "gap_text" then
+      return ctx.source_location:span_text_from_bytes(
+        gap.start_byte,
+        gap.end_byte,
+        rule_label,
+        "gap"
+      ) or json.null
+    end
+    local span = ctx.source_location:span_from_bytes(
+      gap.start_byte,
+      gap.end_byte,
+      rule_label,
+      "gap"
+    )
+    return span == nil and json.null or require("linkedspec.source_location").to_json(span)
+  end
   if name == "with" then
     local block_expr, before_count = final_codeblock_argument(name, "helper", expr.args)
     local scoped_value = json.null
@@ -4127,6 +4203,7 @@ local function accept_match(engine, rule, one, ctx, accumulator, action_iteratio
   ctx.cursor_byte = one.byte_end
   ctx.registers = ctx.registers:with_local_match(one)
   typed_source.recognition.note_match(ctx, one)
+  typed_source.recognition.set_gap_phase(ctx, rule.label, "edge")
   for _, edge in ipairs(rule.action_edges) do
     if edge.regex_index == one.alternative_index then
       local edge_state = {
@@ -4161,7 +4238,35 @@ local function accept_match(engine, rule, one, ctx, accumulator, action_iteratio
     end
   end
   execute_rule_slot_events(rule, one.alternative_index, ctx)
+  typed_source.recognition.set_gap_phase(ctx, rule.label, "LE")
   lifecycle(engine, rule, "LE", ctx, accumulator)
+end
+
+function M.emit_semantic_regex_slot(ctx, rule, one)
+  if ctx.semantic_observation_sink == nil then return end
+  local semantic_observation = require("linkedspec.semantic_observation")
+  local position = one:char_end()
+  for _, identity in ipairs(
+    compiled_spec.compiled_regex_slot_identities_for(rule, one.alternative_index)
+  ) do
+    semantic_observation.deliver(
+      ctx.semantic_observation_sink,
+      semantic_observation.regex_slot_selected(
+        rule.label,
+        identity.target_rule,
+        identity.regex_index,
+        position
+      )
+    )
+  end
+end
+
+function M.prepare_gap_candidate(rule, one, ctx)
+  M.trace_regex_slot_selected(ctx, rule, one.alternative_index, "choice")
+  M.emit_semantic_regex_slot(ctx, rule, one)
+  ctx.registers = ctx.registers:with_local_match(one)
+  typed_source.recognition.note_match(ctx, one)
+  typed_source.recognition.install_gap_candidate(ctx, rule.label, one.byte_start)
 end
 
 local function regex_once(
@@ -4171,30 +4276,12 @@ local function regex_once(
     ctx,
     accumulator,
     execution_policy,
-    action_iteration_values
+    action_iteration_values,
+    match_preselected,
+    preselected_match
   )
-  local emit_semantic_slot
-  if ctx.semantic_observation_sink ~= nil then
-    local observation = require("linkedspec.semantic_observation")
-    emit_semantic_slot = function(one)
-      local position = one:char_end()
-      for _, identity in ipairs(
-        compiled_spec.compiled_regex_slot_identities_for(rule, one.alternative_index)
-      ) do
-        observation.deliver(
-          ctx.semantic_observation_sink,
-          observation.regex_slot_selected(
-            rule.label,
-            identity.target_rule,
-            identity.regex_index,
-            position
-          )
-        )
-      end
-    end
-  end
   local cursor_before = ctx.cursor_byte
-  if #rule.regex_patterns == 0 then
+  if not match_preselected and #rule.regex_patterns == 0 then
     trace_regex_decision(
       ctx,
       rule,
@@ -4227,13 +4314,15 @@ local function regex_once(
         actual.regex_index
       )
       M.trace_regex_slot_selected(ctx, rule, index, "ordered_required")
-      if emit_semantic_slot ~= nil then emit_semantic_slot(one) end
+      M.emit_semantic_regex_slot(ctx, rule, one)
       accept_match(engine, rule, one, ctx, accumulator, action_iteration_values)
     end
     return true
   end
   local one
-  if entry_index > 0 and entry_index < #rule.regex_patterns then
+  if match_preselected then
+    one = preselected_match
+  elseif entry_index > 0 and entry_index < #rule.regex_patterns then
     one = match_specific(engine, rule, entry_index, ctx, execution_policy)
   else
     local alternation = engine.regex_cache[rule.label]
@@ -4243,33 +4332,37 @@ local function regex_once(
     end
     one = alternation:match(ctx.input, ctx.cursor_byte, execution_policy.cursor_policy)
   end
-  trace_regex_decision(
-    ctx,
-    rule,
-    one,
-    cursor_before,
-    "cursor_policy=" .. execution_policy.cursor_policy .. " entry_regex=" .. tostring(entry_index)
-  )
-  if not one then return false end
-  local selection_role = entry_index > 0 and "ordered_required" or "choice"
-  if selection_role == "ordered_required" then
-    local expected = compiled_spec.compiled_regex_slot_identities_for(rule, entry_index)[1]
-    local actual = compiled_spec.compiled_regex_slot_identities_for(rule, one.alternative_index)[1]
-    M.assert_ordered_regex_slot_identity(
-      rule.label,
-      expected.target_rule,
-      expected.regex_index,
-      actual.target_rule,
-      actual.regex_index
+  if not match_preselected then
+    trace_regex_decision(
+      ctx,
+      rule,
+      one,
+      cursor_before,
+      "cursor_policy=" .. execution_policy.cursor_policy .. " entry_regex=" .. tostring(entry_index)
     )
   end
-  M.trace_regex_slot_selected(
-    ctx,
-    rule,
-    one.alternative_index,
-    selection_role
-  )
-  if emit_semantic_slot ~= nil then emit_semantic_slot(one) end
+  if not one then return false end
+  if not match_preselected then
+    local selection_role = entry_index > 0 and "ordered_required" or "choice"
+    if selection_role == "ordered_required" then
+      local expected = compiled_spec.compiled_regex_slot_identities_for(rule, entry_index)[1]
+      local actual = compiled_spec.compiled_regex_slot_identities_for(rule, one.alternative_index)[1]
+      M.assert_ordered_regex_slot_identity(
+        rule.label,
+        expected.target_rule,
+        expected.regex_index,
+        actual.target_rule,
+        actual.regex_index
+      )
+    end
+    M.trace_regex_slot_selected(
+      ctx,
+      rule,
+      one.alternative_index,
+      selection_role
+    )
+    M.emit_semantic_regex_slot(ctx, rule, one)
+  end
   accept_match(engine, rule, one, ctx, accumulator, action_iteration_values)
   return true
 end
@@ -4332,7 +4425,7 @@ function M.generated_family_execution_policy(family)
   }
 end
 
-execute_rule = function(engine, label, entry_index, ctx)
+execute_rule = function(engine, label, entry_index, ctx, entry_slot)
   local rule = engine.compiled_spec.rules_by_label[label]
   if not rule then
     local detail = "rule '" .. label .. "' is not compiled"
@@ -4407,7 +4500,11 @@ execute_rule = function(engine, label, entry_index, ctx)
   local recognition_ok, recognition_error = pcall(
     typed_source.recognition.enter_invocation,
     ctx,
-    label
+    label,
+    {
+      capture_gaps = rule.capture_gaps ~= nil,
+      entry_slot = entry_slot,
+    }
   )
   if not recognition_ok then
     ctx.rule_stack[#ctx.rule_stack] = nil
@@ -4484,10 +4581,37 @@ execute_rule = function(engine, label, entry_index, ctx)
 
     local count = 0
     local failed = false
+    local capture_gaps = rule.capture_gaps ~= nil
     for _ = 1, engine.max_iterations do
       if rule.mode_metadata.rep_max and count >= rule.mode_metadata.rep_max then break end
       local before = ctx.cursor_byte
-      lifecycle(engine, rule, "LS", ctx, accumulator)
+      local selected_match = nil
+      if capture_gaps then
+        local alternation = engine.regex_cache[rule.label]
+        if not alternation then
+          alternation = matching.compile_runtime_regex_alternation(rule)
+          engine.regex_cache[rule.label] = alternation
+        end
+        selected_match = alternation:match(
+          ctx.input,
+          ctx.cursor_byte,
+          execution_policy.cursor_policy
+        )
+        trace_regex_decision(
+          ctx,
+          rule,
+          selected_match,
+          before,
+          "cursor_policy=" .. execution_policy.cursor_policy .. " entry_regex=0 capture_gaps=1"
+        )
+        if selected_match ~= nil then
+          M.prepare_gap_candidate(rule, selected_match, ctx)
+          typed_source.recognition.set_gap_phase(ctx, rule.label, "LS")
+          lifecycle(engine, rule, "LS", ctx, accumulator)
+        end
+      else
+        lifecycle(engine, rule, "LS", ctx, accumulator)
+      end
       local attempt = nextable(function()
         if execution_policy.uses_blind_dispatch then
           return blind_once(engine, rule, ctx, accumulator, execution_policy)
@@ -4499,7 +4623,9 @@ execute_rule = function(engine, label, entry_index, ctx)
           ctx,
           accumulator,
           execution_policy,
-          action_iteration_values
+          action_iteration_values,
+          capture_gaps,
+          selected_match
         )
       end)
       if attempt.nexted then
@@ -4507,20 +4633,50 @@ execute_rule = function(engine, label, entry_index, ctx)
         if ctx.cursor_byte == before then break end
       else
         if not attempt.value then failed = true; break end
+        if capture_gaps then
+          local committed, commit_error = pcall(
+            typed_source.recognition.commit_gap_candidate,
+            ctx,
+            rule.label
+          )
+          if not committed then
+            if not typed_source.recognition.is_gap_error(commit_error) then error(commit_error, 0) end
+            local detail = tostring(commit_error)
+            fail(detail, {
+              code = "source_location_cursor_regression",
+              diagnostic = runtime_diagnostic(engine, {
+                stage = "advance_gap_context",
+                summary = "Lua inter-match gap cursor regressed before commit",
+                detail = detail,
+                top_rule = ctx.top_rule,
+                rule_label = rule.label,
+                code = "source_location_cursor_regression",
+              }),
+            })
+          end
+        end
         count = count + 1
+        typed_source.recognition.set_gap_phase(ctx, rule.label, "IT")
         lifecycle(engine, rule, "IT", ctx, accumulator)
         if ctx.cursor_byte == before then break end
       end
     end
     if count < minimum then
+      typed_source.recognition.set_gap_phase(ctx, rule.label, "LX")
       lifecycle(engine, rule, "LX", ctx, accumulator)
       if action_iteration_values ~= nil then return rule_result(false, json.null) end
       fail("rule '" .. label .. "' expected at least " .. minimum .. " matches, got " .. count, {
         rule_label = label,
       })
     end
+    if capture_gaps then typed_source.recognition.install_gap_tail(ctx, rule.label, "EX") end
+    typed_source.recognition.set_gap_phase(ctx, rule.label, "EX")
     lifecycle(engine, rule, "EX", ctx, accumulator)
-    if failed or count > 0 then lifecycle(engine, rule, "LX", ctx, accumulator) end
+    if failed or count > 0 then
+      typed_source.recognition.set_gap_phase(ctx, rule.label, "LX")
+      lifecycle(engine, rule, "LX", ctx, accumulator)
+    end
+    typed_source.recognition.set_gap_phase(ctx, rule.label, "E")
     lifecycle(engine, rule, "E", ctx, accumulator)
     local value = action_iteration_values ~= nil and action_iteration_values or finish_value(accumulator, ctx.retv)
     return rule_result(count > 0, value)

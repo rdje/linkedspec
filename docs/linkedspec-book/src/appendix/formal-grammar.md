@@ -482,7 +482,8 @@ Only horizontal spacing around `=` is insignificant. Every name scalar uses the 
 `XID_Continue` class; identity is exact, case-sensitive, and normalization-sensitive. ASCII digit-only names are
 reserved for positional selectors. Named and anonymous regex members may mix in one authored zero-based sequence.
 Perl, Rust, Dart, and Julia privately admit the complete gap runtime. Shared PUC Lua/LuaJIT currently carry
-authored/static/compiled metadata behind one dormant final consumer; this is not yet a portable public admission.
+authored/static/compiled metadata plus private native gap execution behind one dormant final consumer; this is not
+yet a portable public admission.
 
 **Capture groups**: A `(...)` group is a **numbered** capture; a `(?<name>...)`
 group is a **named** capture. Action code reads them with `entry_group(N)` /
