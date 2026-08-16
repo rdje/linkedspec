@@ -1566,7 +1566,7 @@ The recurring process oracle is:
 $ bash tools/test_lua_project_data_storage.sh
 ```
 
-It freezes the exact 17 Lua-family allocation owners, requires every Lua owner to read routed `TMPDIR`, rejects
+It freezes the exact 18 Lua-family allocation owners, requires every Lua owner to read routed `TMPDIR`, rejects
 hard-coded operating-system temporary templates and anonymous `io.tmpfile()`, and builds both three-module ABI sets
 below a managed path containing a space. It checks actual filesystem identity and non-symlink module files, runs a
 real native parse, writes generated-source v2 and trace output, rejects an other-filesystem builder destination,
@@ -1574,6 +1574,11 @@ and proves exact cleanup. The complete `tools/run_lua_local.sh` gate reuses its 
 after the standalone MCP 111 + 210 proofs and both 177-test suites per ABI, primary 66/66 twice, and corpus
 105/105. Three new self-rooted boundaries raise the
 hostile outside-cwd routing proof from 30 to 33.
+
+Behavior-free gap planning `.6.0` leaves that oracle at 18 owners and the three dual-ABI native modules unchanged.
+The frozen emitted-proof leaf `.6.4` will add one permanent consumer-owned workspace, execute ten value and two
+typed-error modules in fresh PUC-Lua and LuaJIT children below routed `TMPDIR`, prove cleanup, and advance only the
+exact owner count to 19. No operating-system temporary or user-home cache is permitted.
 
 Both initial old-root censuses contained zero exact `linkedspec-lua-*` directories, and the complete proof leaves
 them at zero. There was therefore no retained Lua payload to copy or delete. The installed Lua interpreters,

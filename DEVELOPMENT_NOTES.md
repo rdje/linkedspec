@@ -10,6 +10,26 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-16 (`INTER-MATCH-GAP-CAPTURE.6.0` — shared Lua behavior-free plan): activation base is clean atomic 245
+  at `a6ff2614`; complete PUC-Lua/LuaJIT baseline is 177 package tests per ABI, primary 66, corpus 105, and exact
+  storage 18 owners / three dual-ABI native modules.
+- Do not implement `@capture_gaps` as `rule_slot_events`. Those existing events belong to the preceding regex and
+  run after accepted action/target execution before `LE`; retiming them would change legacy behavior and still
+  would not expose the candidate during `LS`. Add a dedicated rule directive and capture-only preselection seam.
+- Extend `recognition_transaction_runtime.lua` rather than adding state. The existing invocation frame owns
+  activation, source/invocation/entry identity, committed gap cursor, accepted count, and current gap; the existing
+  token snapshot restores mutable gap members. Detached cursor/boundary/marks state stays exact.
+- Keep normalized `SpecFile` JSON as the only reconstruction/emission carrier. Add defaulted logical `source_id`,
+  preserve caller-logical loaded identity, project runtime UTF-8 byte offsets only through immutable input
+  `SourceAuthority`, and preserve format-2 `{label,family}` generated plans.
+- Keep descriptor meanings separate: add fresh detached `regex_slots`, `capture_gaps`, and five-field
+  `resolved_slot_edges`; do not widen legacy `resolved_edges` or `{label,idx}` dependency references.
+- Emitted proof uses unchanged `emit_lua_source_v2`, ten value/two typed-error modules, and fresh PUC-Lua/LuaJIT
+  children below repository-routed `TMPDIR`; this advances only the exact temporary-owner oracle 18→19.
+- Final `.6.5` executes the same nine-role consumer once per ABI in ordinary/canonical/rooted routes. Only the two
+  Lua rows advance 5/4/58→7/2/60; ten dormancy mutations become sixteen admission mutations. Public/outward state
+  remains owned by `.7`.
+
 - 2026-08-16 (`INTER-MATCH-GAP-CAPTURE.5.5` — Julia primary and exact private admission): activation base is
   clean atomic 244 at `0a961043`; checker-first proof rejects the prior 57-mutation boundary before admission.
 - Admission composes existing authorities. Keep `run_cli`, normalized `SpecFile`, descriptor projection,

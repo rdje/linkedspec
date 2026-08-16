@@ -10,6 +10,26 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-16 — INTER-MATCH-GAP-CAPTURE.6.0 — freeze Lua gap implementation plan
+
+- Activated task-tree-first from clean atomic-245 commit `a6ff2614`; changed no Lua production/test behavior,
+  generated format, rollout, admission, legacy event semantics, or outward surface.
+- Repository-routed probes agree byte-for-behavior on PUC Lua and LuaJIT: numeric `Rule[0]` works; named regex
+  declarations/selectors and `@capture_gaps` are raw invalid body syntax; the four future accessors reach
+  unsupported runtime-helper diagnostics; the existing primary route fails compilation for the future syntax.
+- Located the decisive timing seam: existing anonymous/named rule-slot events attach to the preceding regex and
+  run after accepted action/target execution before `LE`. The new directive is therefore separate, and only
+  capture-enabled rules may preselect a candidate before `LS`; unflagged and legacy ordering stays exact.
+- Froze `.6.1-.6.5`: authored/static/compiled metadata plus ten dormancy mutations; shared recognition-frame/
+  token native execution; normalized reconstruction/compatible descriptors/unchanged-v2 generation; ten value/
+  two typed-error fresh-process emitted modules on both ABIs with storage 18→19; then primary/nine-role admission.
+- Final admission alone may advance PUC Lua and LuaJIT from 5/4/58 to 7/2/60 by appending two runtime regressions
+  and replacing ten dormancy mutations with sixteen exact dual-ABI admission mutations. Recurring/public rows and
+  all facade/schema/MCP/capability/CLI/README/typed-source surfaces remain pending or unchanged.
+- Complete Lua baseline passes 177 package tests per ABI, primary 66, corpus 105, and storage 18 owners / three
+  dual-ABI native modules. Focused neutral/rooted, recognition, duplicate-slot, generated-source, Knowledge,
+  rendered-book, bounded-history, doctrine, and exact-diff proof records the behavior-free boundary.
+
 ## 2026-08-16 — INTER-MATCH-GAP-CAPTURE.5.5 — admit Julia inter-match gap capture
 
 - Activated task-tree-first from clean atomic-244 commit `0a961043`. The checker-first RED rejected the old

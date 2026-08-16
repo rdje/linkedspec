@@ -2,33 +2,36 @@
 
 ## Current Activity
 
-- Atomic 244 landed cleanly at `0a961043`; Julia primary/admission leaf `INTER-MATCH-GAP-CAPTURE.5.5` and parent
-  `.5` are canonical-signoff-complete from that exact boundary for intended atomic 245; no push.
-- The admitted permanent consumer retains 105 metadata + 33 native + 46 carrier + 105 emitted assertions and adds
-  30 exact nine-role admission assertions through the existing primary adapter.
-- Ordinary, canonical, and rooted registrations are exact once. The rooted route executes neutral, Perl, Rust,
-  Dart, and Julia, then preserves exact PUC-Lua and LuaJIT skips.
-- Governance is 5/4/58 plus ten Rust, ten Dart, and ten Julia admission mutations. Complete Julia package/primary/
-  storage 20/5/corpus 105 and all direct cross-runtime ledgers pass.
-- Generated format/plan, supported calls 246, legacy descriptors/refs, public helpers 122, later/public rows, typed
-  composition, and every outward facade/schema/MCP/CLI/README surface remain pending or unchanged.
+- Atomic 245 landed cleanly at `a6ff2614`; behavior-free shared PUC-Lua/LuaJIT planning leaf
+  `INTER-MATCH-GAP-CAPTURE.6.0` is focused-signoff-complete from that exact boundary for intended atomic 246; no push.
+- Exact dual-ABI probes prove numeric-only selector success, raw-invalid named declarations/selectors/directive,
+  unsupported future runtime helpers, `LS` before selection, and legacy rule-slot events after accepted action/
+  target execution before `LE`.
+- The five frozen leaves own authored/static/compiled metadata plus dormancy; one shared recognition-frame/token
+  native path; normalized/descriptor/generated-v2 carriers; independently loaded emitted proof; then existing-
+  primary/nine-role admission.
+- Complete Lua baseline is green at 177 package tests per ABI, primary 66, corpus 105, and storage 18 owners with
+  three dual-ABI native modules. Current gap governance stays 5/4/58 with two exact Lua skips.
+- This leaf moves no Lua behavior, generated format, legacy event semantics, rollout, capability, typed-source,
+  facade/schema/MCP/CLI/README surface, or public claim.
 
 ## Latest Completed Slice
 
-- `.5.5` and parent `.5` are canonical-signoff-complete. Checker-first RED rejected the old 57-mutation boundary;
-  exact primary/nine-role GREEN advances only Julia to 5/4/58. Complete Julia, rooted execution, duplicate
-  7/0/59, recognition 137/246/58, typed source 9/5/114, generated/capability/language, semantic/MCP, rendered book
-  79/14,884, Knowledge 838/7,076, bounded histories, doctrines, and exact staged canonical proof pass.
+- `.6.0` freezes exact shared dual-ABI event/state/carrier/emitted/primary ownership across `.6.1-.6.5` without
+  changing behavior. Complete Lua, rooted gap, recognition, duplicate-slot, typed-source, generated-source,
+  rendered book 79/14,908, Knowledge 839/7,093, bounded histories, and all nine doctrines pass.
 
 ## Next Action
 
-- Commit intended atomic 245, clear the brief, prove the clean handoff, then expand and activate behavior-free
-  shared PUC-Lua/LuaJIT implementation planning under `.6` task-tree-first before any Lua behavior changes.
+- Commit intended atomic 246, clear the brief, prove clean handoff, then
+  activate `.6.1` task-tree-first for shared authored/static/compiled metadata and consumer dormancy.
 
 ## Recent Completions
 
+- `2026-08-16` — `.6.0` froze the behavior-free shared Lua five-leaf plan from clean `a6ff2614` for intended atomic 246.
+- `2026-08-16` — `.5.5` and parent `.5` landed cleanly as atomic 245 at `a6ff2614` with promoted canonical receipt.
 - `2026-08-16` — `.5.5` reused Julia's primary adapter, admitted the exact nine-role consumer at 5/4/58, and
-  canonical-signoff-completed parent `.5` from clean `0a961043` for intended atomic 245.
+  canonical-signoff-completed parent `.5` from clean `0a961043`.
 - `2026-08-16` — `.5.4` proved ten value/two typed-error Julia emitted modules in one offline routed host from
   clean `1f531a5f`, advancing only storage to 20/5 while preserving gap rollout 4/5/57.
 - `2026-08-16` — `.5.3` completed normalized reconstruction, compatible detached descriptors, and same-engine
@@ -50,7 +53,6 @@
 - `2026-08-15` — `.4.1` completed exact Dart authored/static/compiled gap metadata at `1e6d326d`.
 - `2026-08-15` — `.4.0` landed the behavior-free Dart implementation freeze at `e40de948`.
 - `2026-08-15` — `.3.5` and parent `.3` admitted Rust at 3/6/56 in atomic 232 `2800e7c3`.
-- `2026-08-13` — `.2.4` and parent `.2` admitted Perl at 2/7/56 in atomic 226 `eceb15ac`.
 
 ## History
 

@@ -15,9 +15,9 @@ answers:
   - "why does an action edge fluent chain keep its first dot"
   - "what happens after FUTURE-PARITY-BACKLOG 14.5.0"
 date: 2026-08-16
-status: cross-tree handoff complete; Perl/Rust/Dart privately admitted; Julia metadata, native, reconstruction/descriptor, and generated-v2 execution current behind dormancy
+status: cross-tree handoff complete; Perl/Rust/Dart/Julia privately admitted; Lua implementation plan frozen
 tags: [architecture, task-tree, gap-capture, named-slots, selectors, typed-source, handoff]
-evidence: "Clean handoff 3d0384d1 and the committed ADR/duplicate-slot/typed-source authorities assign implementation to INTER-MATCH-GAP-CAPTURE. Neutral .1 is closed; Perl .2, Rust .3, and Dart .4 are privately admitted through authored/native/carrier/emitted/primary roles. Julia .5.1-.5.4 implement exact metadata, private native execution, normalized/descriptor/generated carriers, and independently loaded emitted proof behind dormancy with storage 20/5. Gap governance remains 4 complete + 5 pending / 57 semantic mutations plus ten Rust and ten Dart admission mutations; Julia admission, Lua, recurring/public, and typed-source composition remain pending."
+evidence: "Clean handoff 3d0384d1 and the committed ADR/duplicate-slot/typed-source authorities assign implementation to INTER-MATCH-GAP-CAPTURE. Neutral .1 is closed; Perl .2, Rust .3, Dart .4, and Julia .5 are privately admitted through authored/native/carrier/emitted/primary roles. Gap governance is 5 complete + 4 pending / 58 semantic mutations plus ten Rust, ten Dart, and ten Julia admission mutations. Behavior-free Lua .6.0 freezes its shared five-leaf implementation; both Lua ABIs, recurring/public, and typed-source composition remain pending."
 reverify: "bash tools/check_duplicate_regex_slot_identity_five_backend.sh && bash tools/check_typed_source_location_six_runtime.sh && perl tools/read_task_tree.pl --tree FUTURE-PARITY-BACKLOG --id FUTURE-PARITY-BACKLOG.14.5.0 && perl tools/read_task_tree.pl --tree INTER-MATCH-GAP-CAPTURE --id INTER-MATCH-GAP-CAPTURE.1"
 ---
 

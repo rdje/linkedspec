@@ -816,15 +816,15 @@ missing or duplicate ordinary/canonical/recurring registration, premature later-
 exposure. Rollout is 4 complete / 5 pending / 57 mutations, and generated plan v2 remains exactly
 `{label,family}`.
 
-### Julia metadata through emitted execution — current behind dormancy
+### Julia native, generated, emitted, and primary carriers — privately admitted
 
 Julia `.5.0` recorded the pre-implementation boundary: numeric selectors compiled; named declarations/selectors
 and `@capture_gaps` were raw invalid body syntax; `entry_slot()` and the three gap accessors failed as structured
 unknown helpers; legacy `@move_pos` had no compiled/native effect; and repeated execution ran enclosing `LS`
 before candidate selection. `.5.1` implemented the authored/static/compiled layer, `.5.2` added private native
 execution, `.5.3` carries the same state through normalized reconstruction, compatible descriptors, and
-direct/traced generated-v2 execution, and `.5.4` proves independently loaded emitted execution without admitting
-Julia into ordinary or rooted gap rollout.
+direct/traced generated-v2 execution, `.5.4` proves independently loaded emitted execution, and `.5.5` reuses the
+existing primary adapter and admits the exact nine-role consumer in ordinary, canonical, and rooted execution.
 
 Named and anonymous declarations share one authored regex order and use the existing generated Unicode 17.0.0
 rule-label scanner. ASCII-digit-only names are rejected, duplicate names carry their first declaration line, and
@@ -858,24 +858,46 @@ generated-v2 entrypoints through the same runtime while retaining format 2 and e
 `.5.4` independently loads ten value and two typed-error emitted modules from one repository-routed offline host,
 advancing only the exact Julia temporary-workspace inventory from 19 to 20. Each module runs direct and traced
 against native authority with a private writable depot layered over retained repository/system depots; cleanup
-removes the complete host, modules, depot, and traces. `.5.5` alone reuses the primary adapter, admits nine roles
-exactly once, and advances Julia to 5/4/58.
+removes the complete host, modules, depot, and traces. `.5.5` reuses the primary adapter, admits nine roles exactly
+once, and advances Julia to 5/4/58.
 
 The permanent consumer lives at `julia/test/inter_match_gap_capture_contract_test.jl` and explicitly proves 105
-metadata, 33 native, 46 carrier, and 105 emitted assertions, but it is absent from `runtests.jl`, canonical CI,
-and the rooted driver. Its carrier group reconstructs the Unicode prefix/tail example, requires exact detached
+metadata, 33 native, 46 carrier, 105 emitted, and 30 admission assertions. It runs once in ordinary Julia, once
+explicitly in canonical CI, and once in the rooted driver. Its carrier group reconstructs the Unicode prefix/tail example, requires exact detached
 descriptor rows, then runs child-extended, nested-owner, recursive-invocation, and rollback cases through native,
 direct generated, and traced generated paths. Its emitted group covers Unicode/empty gaps, falsey results,
 lifecycle and child cursor extension, entry identity, nesting, rollback, terminal routes, failed minimum, direct
 entry, legacy behavior, and both typed failures across twelve independently loaded modules.
 Unavailable-context and cursor-regression failures retain generated stage/code/detail and the caller-supplied
-generated source identity. Ten independently reason-checked Julia dormancy mutations guard consumer identity,
-parse/validate/compile seams, discovery absence, rooted absence, and facade absence.
+generated source identity. Ten independently reason-checked Julia admission mutations guard consumer identity,
+the nine-role ledger, ordinary/canonical/rooted registration, later-runtime skips, and facade absence.
 
 The four private zero-argument gap helpers resolve through a separate private family, so the supported ActionIR
 inventory stays exactly 246; exact arity, unavailable-context, and cursor-regression diagnostics are native.
-Julia rollout therefore stays pending at 4/5/57. Primary execution/admission, outward surfaces, dependencies, and
-toolchain remain unchanged and separately owned by `.5.5`.
+Julia is privately admitted at 5/4/58. Outward surfaces, dependencies, and toolchain remain unchanged.
+
+### Lua and LuaJIT implementation plan — behavior-free
+
+Lua `.6.0` records the same pre-implementation result on both ABIs: numeric `Rule[0]` works; named declarations,
+named selectors, and `@capture_gaps` are raw invalid body syntax; and the four future accessors reach unsupported
+runtime-helper diagnostics. The existing primary route likewise reports compilation failure for the future
+syntax. Complete baseline proof stays green at 177 package tests per ABI, primary 66, corpus 105, and 18 exact
+temporary owners with three dual-ABI native modules.
+
+The audit also fixes the timing boundary. Lua's existing anonymous split markers and named `@mark(...)` compile as
+events attached to the preceding regex slot, then run after accepted action/target execution and before `LE`.
+They are not the new directive authority and will not be retimed. Dedicated `@capture_gaps` alone enables candidate
+preselection before `LS`; rules without it keep their present `LS`-before-selection order.
+
+Five dependency leaves are frozen. `.6.1` owns logical source identity, pinned-Unicode declarations/selectors,
+exact static/compiled metadata, the final consumer, and ten dormancy mutations. `.6.2` extends the existing
+recognition invocation frame/token—never a second stack—with gap cursor, accepted count, current candidate, and
+entry-slot identity; immutable input `SourceAuthority` remains the byte-to-scalar bridge. `.6.3` carries state only
+through normalized `SpecFile` JSON, compatible descriptor additions, and unchanged format-2 `{label,family}`
+generated execution. `.6.4` independently loads ten value and two typed-error modules in fresh PUC-Lua and LuaJIT
+children below repository-routed storage, advancing exact owners only from 18 to 19. `.6.5` reuses the primary
+adapter, runs nine roles once per ABI, and alone may advance the two Lua rows from 5/4/58 to 7/2/60. No Lua gap
+behavior or public/outward claim is current yet.
 
 Named slot rules are exact:
 

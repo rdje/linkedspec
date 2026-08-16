@@ -1,18 +1,35 @@
 # ARCHITECTURE STATE
 
-## Julia inter-match-gap capture has a behavior-free five-leaf implementation plan
+## Lua inter-match-gap capture has one behavior-free dual-ABI five-leaf implementation plan
 
-`INTER-MATCH-GAP-CAPTURE.5.0` confirms numeric selectors compile while named declarations/selectors and
-`@capture_gaps` remain raw invalid Julia body syntax, the four future accessors fail as structured unknown helpers,
-legacy `@move_pos` has no native effect, and repeated execution runs `LS` before selection. It freezes `.5.1-.5.5`
-without changing parser, compiler, runtime, carrier, emitter, primary, rollout, generated format, or outward state.
+`INTER-MATCH-GAP-CAPTURE.6.0` re-verifies an identical PUC-Lua/LuaJIT boundary before behavior changes. Numeric
+`Rule[0]` works; named declarations/selectors and `@capture_gaps` are raw invalid body syntax; the four future
+accessors reach unsupported runtime-helper diagnostics; and repeated execution runs `LS` before selection.
+Existing preceding-slot events fire after accepted action/target execution and before `LE`, so the new directive
+must not reuse or retime them. Capture-enabled rules alone gain a preselection seam before `LS`.
+
+The frozen `.6.1-.6.5` dependency order is authored/static/compiled metadata plus consumer dormancy; one shared
+private recognition-frame/token state and lifecycle path; normalized reconstruction, compatible descriptors, and
+unchanged-v2 generated execution; independently loaded dual-ABI emitted proof; then existing-primary/nine-role
+admission. Normalized `SpecFile` JSON remains the reconstruction and emission carrier. Immutable input
+`SourceAuthority` remains the UTF-8-byte-to-scalar bridge. Generated source stays format 2 with exact
+`{label,family}` rows. Emitted proof advances the Lua storage oracle only from 18 to 19 owners; final admission
+alone advances PUC Lua and LuaJIT from governance 5/4/58 to 7/2/60. No behavior, rollout, format, legacy event,
+facade/schema/MCP/capability/CLI/README, public, or typed-source authority moves in `.6.0`.
+
+## Julia inter-match-gap capture is privately admitted through one nine-role authority
+
+`INTER-MATCH-GAP-CAPTURE.5.0` confirmed numeric selectors compiled while named declarations/selectors and
+`@capture_gaps` were raw invalid Julia body syntax, the four future accessors failed as structured unknown helpers,
+legacy `@move_pos` had no native effect, and repeated execution ran `LS` before selection. `.5.1-.5.5` now
+implement and privately admit the exact language and runtime path.
 
 The plan extends the existing private recognition invocation/token authority; detached `RecognitionFrameState`
 stays cursor/boundary/marks and no second stack or cursor is introduced. The current immutable input
 `SourceAuthority` projects UTF-8 code-unit registers to scalar spans. Normalized `SpecFile` JSON remains the sole
 reconstruction carrier; descriptors gain only separate compatible projections; generated source stays format 2
 with exact `{label,family}` plan rows. One repository-routed emitted host is expected to advance Julia's exact
-temporary-workspace inventory from 19 to 20. Final `.5.5` alone reuses the existing primary adapter, admits the
+temporary-workspace inventory from 19 to 20. Final `.5.5` reuses the existing primary adapter, admits the
 nine-role consumer, promotes Julia from 4/5/57 to 5/4/58, and closes parent `.5`.
 
 ## Dart inter-match-gap capture is privately admitted through one nine-role authority

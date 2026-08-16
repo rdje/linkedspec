@@ -1,7 +1,7 @@
 # 0045 - Inter-match gap capture preserves action-edge target ownership
 
 - Date: 2026-07-17
-- Status: accepted; executable-neutral plus private Perl/Rust/Dart admission and dormant Julia native/carrier/generated execution current; emitted/later runtimes/public admission pending
+- Status: accepted; executable-neutral plus private Perl/Rust/Dart/Julia admission current; Lua implementation plan frozen; public admission pending
 - Tags: architecture, grammar, capture, segmentation, or-rule, action-edge, source-span, portability, parity
 
 ## Context
@@ -261,20 +261,17 @@ no-overclaim; `.1.3` still owns neutral recomposition before Perl implementation
 
 ## 2026-08-15 Dart implementation-plan amendment
 
-Behavior-free `.4.0` freezes `.4.1-.4.5`: authored/static identity and dormancy; existing-recognition-authority
-native state; normalized reconstruction/compatible descriptors/unchanged-v2 generated execution; repository-
-local emitted proof; then primary/nine-role admission. `SpecFile`, `SourceAuthority`, and `{label,family}` remain
-the carrier, scalar bridge, and plan shape. Exact mechanisms and no-change boundaries live in
-[[inter-match-gap-dart-implementation-plan]] and the owning task tree.
+Behavior-free `.4.0` froze `.4.1-.4.5`: authored identity; existing-recognition native state; normalized/
+descriptor/generated-v2 carriers; local emitted proof; then primary/nine-role admission. Exact authorities and
+no-change boundaries live in [[inter-match-gap-dart-implementation-plan]].
 
-## 2026-08-16 Julia implementation, carrier, and emitted amendment
+## 2026-08-16 Julia implementation and admission amendment
 
-Behavior-free `.5.0` froze `.5.1-.5.5`; `.5.1-.5.4` now own exact logical/authored/compiled metadata, dormant native
-state/lifecycle/accessors, normalized reconstruction, detached compatible descriptors, same-runtime generated-v2
-execution, and independently loaded emitted proof. One repository-routed offline host loads ten value and two typed-
-error modules direct/traced against native authority, layers one private writable depot over retained repository/
-system depots, and cleans recursively; storage is exact 20/5. `RecognitionFrameState`, supported ActionIR 246,
-loaded/inline source identity, legacy descriptors/refs, format 2, rollout 4/5/57, and outward surfaces stay exact; primary/nine-role admission plus Julia-only 5/4/58 promotion remain exclusively `.5.5`.
+`.5.1-.5.5` now admit logical/authored metadata, same-recognition native state, normalized/descriptor/generated-v2 carriers, emitted proof, and existing-primary parity. Julia alone advanced to 5/4/58; exact authorities and unchanged surfaces live in [[inter-match-gap-julia-implementation-plan]].
+
+## 2026-08-16 Lua implementation-plan amendment
+
+Behavior-free `.6.0` freezes metadata/dormancy, existing-recognition native state, normalized/descriptor/generated-v2 carriers, dual-ABI emitted proof with storage 18→19, then existing-primary/nine-role admission at 7/2/60. `@capture_gaps` is not a preceding-slot event: those retain post-action/pre-`LE` timing, while dedicated capture preselection precedes `LS`. Exact authorities and unchanged surfaces live in [[inter-match-gap-lua-implementation-plan]].
 
 ## 2026-08-13 recurring-governance amendment
 

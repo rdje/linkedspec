@@ -1,20 +1,18 @@
 # MEMORY
 
-- activation_commit: `0a961043d5429e985f9a952d6123d34e895cf5b2` — clean atomic-244 base for Julia admission leaf
-  `INTER-MATCH-GAP-CAPTURE.5.5`; no push.
-- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.5.5 - admit Julia inter-match gap capture`; canonical-signoff-
-  complete from clean atomic 244 at `0a961043` for intended atomic 245; parent `.5` closes with this commit.
-- active_work_unit: none at the intended clean post-landing boundary. Julia is privately admitted at 5/4/58;
-  shared PUC-Lua/LuaJIT parent `.6` remains pending and no Lua planning leaf is active yet.
-- next_action: after atomic 245 lands and brief/clean proof completes, expand and activate a behavior-free shared
-  PUC-Lua/LuaJIT audit/plan leaf under `.6` task-tree-first before any Lua behavior change.
-- in_flight_uncommitted: none at the intended clean handoff; no generated artifact, background result, or partial
-  implementation remains.
-- blockers: none. Checker-first RED rejects 57; admitted GREEN is 105 metadata + 33 native + 46 carrier + 105
-  emitted + 30 admission assertions. Complete Julia/primary/storage 20/5/corpus 105 and rooted neutral/Perl/Rust/
-  Dart/Julia plus two Lua skips pass at 5/4/58 with ten Julia admission mutations. Recognition 137/246/58,
-  duplicate 7/0/59, typed 9/5/114, book 79/14,884, Knowledge 838/7,076, histories, doctrines, and exact staged
-  canonical proof pass.
+- activation_commit: `a6ff261499cd10138aa6e19c7bcbbf1d8cc15e3f` — clean atomic-245 base for behavior-free shared Lua planning leaf
+  `INTER-MATCH-GAP-CAPTURE.6.0`; no push.
+- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.6.0 - freeze Lua gap implementation plan`; focused-signoff-
+  complete from clean atomic 245 at `a6ff2614` for intended atomic 246; no behavior or rollout movement.
+- active_work_unit: none at the intended clean post-landing boundary; `.6.1` is next but not active until the
+  atomic-246 commit, zero-byte brief, and clean handoff are proven.
+- next_action: land atomic 246, clear the brief, prove clean handoff, then activate `.6.1` task-tree-first to add
+  shared PUC-Lua/LuaJIT authored/static/compiled metadata and the mechanically dormant final consumer.
+- in_flight_uncommitted: none at the intended clean handoff; no generated artifact, background result, partial
+  implementation, Lua source/test behavior, generated-format, admission, or outward-surface change remains.
+- blockers: none. Complete Lua baseline passes 177 package tests per ABI, primary 66, corpus 105, and exact storage
+  18 owners / three dual-ABI native modules. Rooted proof passes neutral/Perl/Rust/Dart/Julia plus two Lua skips at
+  5/4/58 with 58 semantic mutations and ten each Rust/Dart/Julia admission mutations.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -41,8 +39,8 @@
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, and recurrence/public no-drift 9/9.
 - current_future_direction: gap is privately admitted on Perl, Rust, Dart, and Julia at 5/4/58 plus ten Rust, ten
-  Dart, and ten Julia admission mutations. Julia `.5.1-.5.5` owns exact metadata, native, normalized/descriptor/
-  generated, independently emitted, existing-primary, and nine-role admission. Both Lua ABIs and public rows
-  remain pending; `.14.5.1` waits for `.7`.
-- latest_bootstrap_read: 2026-08-16 — roadmap/codebase/mdBook and continuity/tooling review complete; `.5.5` plus
-  parent `.5` are canonical-signoff-complete for intended atomic 245, with commit/brief/clean proof next.
+  Dart, and ten Julia admission mutations. Lua `.6.0` freezes `.6.1-.6.5`: metadata/dormancy, one shared private
+  recognition path, normalized/descriptor/generated-v2 carriers, emitted dual-ABI proof, and primary/admission.
+  Both Lua ABIs and public rows remain pending; `.14.5.1` waits for `.7`.
+- latest_bootstrap_read: 2026-08-16 — roadmap/codebase/mdBook and continuity/tooling review complete; `.6.0` is
+  focused-signoff-complete from clean atomic 245 at `a6ff2614` for intended atomic 246.
