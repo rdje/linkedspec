@@ -1,10 +1,8 @@
-# INTER-MATCH-GAP-CAPTURE.5.1-.5.4 — dormant Julia metadata/native/carrier/emitted stages.
+# INTER-MATCH-GAP-CAPTURE.5.5 — admitted private Julia gap contract.
 #
-# This final consumer path now proves parsing, validation, compiled provenance,
-# source identity, private native gap execution, normalized reconstruction,
-# compatible descriptors, same-engine generated-v2 execution, and independently
-# loaded emitted source. Primary execution and admission remain owned by `.5.5`.
-# DORMANT: INTER-MATCH-GAP-CAPTURE.5.5 owns Julia runtime admission
+# This ordinary final consumer proves the contract-declared native,
+# reconstructed, descriptor, generated-plan, emitted, lifecycle,
+# recursion/rollback, diagnostics, and primary-command roles exactly once.
 
 module JuliaInterMatchGapCaptureContract
 
@@ -149,13 +147,13 @@ function selector_identity(edge)
     )
 end
 
-@testset "Julia dormant authored/static/compiled gap metadata" begin
+@testset "Julia authored/static/compiled gap metadata" begin
     @test CONTRACT["contract_id"] == CONTRACT_ID
     @test CONTRACT["format"] == 1
     @test CONTRACT["rollout"][5] == Dict{String,Any}(
         "id" => "julia_runtime",
         "owner" => "INTER-MATCH-GAP-CAPTURE.5",
-        "status" => "pending",
+        "status" => "complete",
     )
 
     source = """Top::OR
@@ -1396,6 +1394,230 @@ print(JSON3.write(Dict("values" => values, "errors" => errors)))
         rm(scratch; recursive = true, force = true)
     end
     @test !ispath(scratch)
+end
+
+const ADMISSION_SOURCE = raw"""Top::
+ I { items = [] }
+ @capture_gaps
+ -> Item[word] { push(items, array(call(Item), gap_text())) }
+ LX { return(copy(items)) }
+Item:
+ word=/[a-z]+/
+ I.return(entry_text())
+"""
+const ADMISSION_INPUT = "alpha, beta | gamma\n- delta"
+const ADMISSION_EXPECTED = Any[
+    Any["alpha", ""],
+    Any["beta", ", "],
+    Any["gamma", " | "],
+    Any["delta", "\n- "],
+]
+
+function role_native_execution()
+    @test execute_native(ADMISSION_SOURCE, ADMISSION_INPUT).value == ADMISSION_EXPECTED
+end
+
+function role_ordinary_reconstruction()
+    authored = parse_spec(ADMISSION_SOURCE; source_id = "julia-gap-admission.spec")
+    reconstructed = from_json(
+        SpecFile,
+        JSON3.read(JSON3.write(to_json(authored)), Dict{String,Any}),
+    )
+    @test to_json(reconstructed) == to_json(authored)
+    @test runtime_parse(
+        LinkedSpecRuntimeEngine(compile_spec(reconstructed)),
+        ADMISSION_INPUT,
+    ).value == ADMISSION_EXPECTED
+end
+
+function role_descriptor()
+    compiled = compile_metadata(
+        ADMISSION_SOURCE;
+        source_id = "julia-gap-admission.spec",
+    )
+    rules = to_descriptor_json(compiled)["spec"]
+    @test rules["Top"]["meta"]["capture_gaps"] == Dict{String,Any}(
+        "enabled" => true,
+        "directive" => "@capture_gaps",
+        "source_id" => "julia-gap-admission.spec",
+        "line" => 3,
+    )
+    @test rules["Item"]["meta"]["regex_slots"] == Any[
+        Dict{String,Any}(
+            "regex_index" => 0,
+            "slot_id" => "word",
+            "source_id" => "julia-gap-admission.spec",
+            "line" => 7,
+        ),
+    ]
+end
+
+function role_generated_plan()
+    compiled = compile_metadata(ADMISSION_SOURCE)
+    plan = build_generated_rule_plan(compiled)
+    @test [to_json(row) for row in plan] == Any[
+        Dict{String,Any}("label" => "Top", "family" => "default"),
+        Dict{String,Any}("label" => "Item", "family" => "default"),
+    ]
+    @test execute_generated_parser_v2(
+        compiled,
+        plan,
+        ADMISSION_INPUT,
+        "julia-gap-admission.spec",
+    ) == ADMISSION_EXPECTED
+end
+
+function role_emitted_source()
+    scratch = mktempdir()
+    try
+        identity = "generated-source/julia-gap/admission.spec"
+        generated_path = joinpath(scratch, "admission.jl")
+        write(
+            generated_path,
+            emit_julia_source_v2(compile_metadata(ADMISSION_SOURCE), identity),
+        )
+        host = Module(gensym(:JuliaGapAdmission))
+        Base.include(host, generated_path)
+        parser = Base.invokelatest(() -> getfield(host, :LinkedSpecGeneratedParser))
+        execute = Base.invokelatest(() -> Core.getglobal(parser, :execute))
+        @test Base.invokelatest(execute, ADMISSION_INPUT) == ADMISSION_EXPECTED
+    finally
+        rm(scratch; recursive = true, force = true)
+    end
+    @test !ispath(scratch)
+end
+
+function role_target_lifecycle()
+    source = raw"""Top::OR{1}
+ I { events = [] }
+ @capture_gaps
+ -> Part { push(events, array("action", gap_kind(), gap_text())) }
+ LS { push(events, array("ls", gap_kind(), gap_text(), match_text())) }
+ LE { push(events, array("le", gap_kind(), gap_text())) }
+ IT { push(events, array("it")) }
+ LX { push(events, array("lx", gap_kind(), gap_text())); return(copy(events)) }
+Part: /H/
+"""
+    @test execute_native(source, "aHb").value == Any[
+        Any["ls", "prefix", "a", "H"],
+        Any["action", "prefix", "a"],
+        Any["le", "prefix", "a"],
+        Any["it"],
+        Any["lx", "tail", "b"],
+    ]
+end
+
+function role_recursion_and_rollback()
+    nested = raw"""Top::
+ @capture_gaps
+ -> Container[open] { return(array(gap_text(), call(Container), gap_text())) }
+Container:
+ open=/\{/
+ I { inner = [] }
+ @capture_gaps
+ -> Atom { push(inner, gap_text()) }
+ LX { push(inner, gap_text()); return(copy(inner)) }
+Atom:
+ /x/
+ I.return(entry_text())
+"""
+    @test execute_native(nested, "p{axtail").value == Any[
+        "p",
+        Any["a", "tail"],
+        "p",
+    ]
+
+    rollback = raw"""Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Part[h] {
+  tx = recognition_checkpoint();
+  matched = recognize_once(tx, call(Probe));
+  recognition_rollback(tx);
+  push(gaps, gap_text())
+ }
+ -> Part[s] { push(gaps, gap_text()) }
+ LX { push(gaps, gap_text()); return(copy(gaps)) }
+Part:
+ h=/H/
+ s=/S/
+ I.return(entry_text())
+Probe:
+ /X/
+ I.return(0)
+"""
+    @test execute_native(rollback, "aHXbS").value == Any["a", "Xb", ""]
+end
+
+function role_portable_diagnostics()
+    unavailable = native_error(
+        "Direct::\n /H/\n I { return(gap_text()) }\n",
+        "H",
+    )
+    @test unavailable.diagnostic.code == "gap_capture_context_unavailable"
+    regression = native_error(
+        "Top::OR{1}\n @capture_gaps\n -> Part { rewind_match_start() }\nPart: /H/\n",
+        "aH",
+    )
+    @test regression.diagnostic.code == "source_location_cursor_regression"
+end
+
+function role_primary_command()
+    output = IOBuffer()
+    errors = IOBuffer()
+    @test run_cli(
+        [
+            "--inline-spec",
+            ADMISSION_SOURCE,
+            "--input",
+            ADMISSION_INPUT,
+        ];
+        io = output,
+        err = errors,
+    ) == 0
+    @test String(take!(output)) == String(JSON3.write(ADMISSION_EXPECTED)) * "\n"
+    @test isempty(String(take!(errors)))
+end
+
+@testset "Contract-declared Julia inter-match gap roles execute once and only once" begin
+    role_map = Dict{String,Function}(
+        "native_execution" => role_native_execution,
+        "ordinary_reconstruction" => role_ordinary_reconstruction,
+        "descriptor" => role_descriptor,
+        "generated_plan" => role_generated_plan,
+        "emitted_source" => role_emitted_source,
+        "target_lifecycle" => role_target_lifecycle,
+        "recursion_and_rollback" => role_recursion_and_rollback,
+        "portable_diagnostics" => role_portable_diagnostics,
+        "primary_command" => role_primary_command,
+    )
+    consumer = only(
+        row for row in CONTRACT["recurring_gate"]["consumers"]
+        if row["runtime"] == "julia"
+    )
+    declared_roles = String[String(role) for role in consumer["roles"]]
+    expected_roles = String[
+        "native_execution",
+        "ordinary_reconstruction",
+        "descriptor",
+        "generated_plan",
+        "emitted_source",
+        "target_lifecycle",
+        "recursion_and_rollback",
+        "portable_diagnostics",
+        "primary_command",
+    ]
+    @test declared_roles == expected_roles
+    @test length(declared_roles) == length(Set(declared_roles))
+    @test Set(declared_roles) == Set(keys(role_map))
+
+    completed = Set{String}()
+    for role in declared_roles
+        @test role ∉ completed
+        push!(completed, role)
+        role_map[role]()
+    end
+    @test completed == Set(keys(role_map))
 end
 
 end # module JuliaInterMatchGapCaptureContract

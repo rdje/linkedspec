@@ -22,8 +22,9 @@ log "checking complete runtime route rust_runtime: rust/linkedspec-runtime/tests
 cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract
 log "checking complete runtime route dart_runtime: dart/test/inter_match_gap_capture_contract_test.dart"
 ( cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/inter_match_gap_capture_contract_test.dart )
-log "skipping pending runtime route julia_runtime: julia/test/inter_match_gap_capture_contract_test.jl"
+log "checking complete runtime route julia_runtime: julia/test/inter_match_gap_capture_contract_test.jl"
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include("julia/test/inter_match_gap_capture_contract_test.jl")'
 log "skipping pending runtime route puc_lua_runtime: lua/test/inter_match_gap_capture_contract_test.lua"
 log "skipping pending runtime route luajit_runtime: lua/test/inter_match_gap_capture_contract_test.lua"
 
-log "PASS: neutral, Perl, Rust, and Dart runtime routes complete; three later runtime routes remain pending"
+log "PASS: neutral, Perl, Rust, Dart, and Julia runtime routes complete; two later runtime routes remain pending"

@@ -10,6 +10,31 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-16 — INTER-MATCH-GAP-CAPTURE.5.5 — admit Julia inter-match gap capture
+
+- Activated task-tree-first from clean atomic-244 commit `0a961043`. The checker-first RED rejected the old
+  57-mutation expected count before any consumer or route was admitted.
+- Reused Julia's existing `run_cli` adapter and ordinary `--inline-spec` / `--input` options. The admission
+  example recognizes `alpha`, `beta`, `gamma`, and `delta` while returning exact separators `""`, `", "`,
+  `" | "`, and `"\n- "`; no command, option, or secondary execution path was added.
+- Removed only the final consumer dormancy fence. Its contract-read ledger requires the exact nine-role order,
+  rejects duplicates or map drift, and executes native, normalized reconstruction, descriptor, generated-plan,
+  independently loaded emitted, lifecycle, recursion/rollback, portable-diagnostic, and primary roles once each.
+- Registered the consumer once in ordinary Julia discovery, once explicitly in canonical CI, and once after Dart
+  in the rooted route. Only `julia_runtime` advances: governance is 5 complete / 4 pending / 58 mutations, and
+  ten Julia admission mutations replace the former ten dormancy mutations.
+- Explicit and ordinary proof each pass 105 metadata + 33 native + 46 carrier + 105 emitted + 30 admission
+  assertions. Complete Julia passes package, primary, storage 20 owners / 5 packages, corpus 105/105, and its
+  success marker. The rooted route passes neutral, Perl 124, Rust 1, Dart 5, Julia, then two exact Lua skips.
+- Duplicate-slot 7/0/59, recognition 137/246/58, typed-source 9/5/114, generated-source/capability 80/0/0,
+  language 246/105+1/122, semantic 6/20/128, and MCP complete/141 remain green. The rendered book is 79 files /
+  14,884 KiB and Knowledge remains 838 facts / 7,076 keys. Exact staged canonical CI is the receipt-bound final
+  proof for this admission/parent milestone.
+- Closed parent `.5` without changing generated format 2, `{label,family}` plan rows, storage ownership, legacy
+  descriptors/references, supported ActionIR 246, public helpers 122, CLI/facade/schema/semantic/MCP/capability/
+  README surfaces, or the two Lua and two public rows. Shared Lua implementation `.6` is next only after the
+  atomic-245 commit, zero-byte brief, and clean boundary.
+
 ## 2026-08-16 — INTER-MATCH-GAP-CAPTURE.5.4 — prove Julia emitted gap execution
 
 - Activated task-tree-first from clean atomic-243 commit `1f531a5f`; adding the emitted host produced the planned

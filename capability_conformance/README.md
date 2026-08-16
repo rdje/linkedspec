@@ -302,12 +302,12 @@ Governance is 114, and the combined program-wide public-no-drift row stays pendi
 helper/value, descriptor/generated schema, semantic/MCP field, CLI, or README behavior moved.
 
 `inter_match_gap_capture_contract.json` is the neutral authority for named regex slots and lossless
-prefix/interstitial/tail context. Inter-match gap-capture recurring governance now admits the private Perl, Rust, and Dart runtimes; later runtimes and public admission remain pending. Dart `.4.1-.4.5` implement and admit its exact private nine-role path without widening outward surfaces.
+prefix/interstitial/tail context. Inter-match gap-capture recurring governance now admits the private Perl, Rust, Dart, and Julia runtimes; the two Lua runtimes and public admission remain pending. Julia `.5.1-.5.5` implement and admit its exact private nine-role path without widening outward surfaces.
 Run `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py` for the always-on
 neutral proof or `bash tools/check_inter_match_gap_capture_six_runtime.sh` for the repository-routed ordered
-governance route. The latter executes the complete neutral, Perl, and Rust rows, then skips four pending runtime
-consumers; the nine-leg rollout is 3 complete / 6 pending and the checker rejects 56 semantic/topology
-corruptions plus ten Rust admission/regression mutations.
+governance route. The latter executes the complete neutral, Perl, Rust, Dart, and Julia rows, then skips the two
+pending Lua runtime consumers; the nine-leg rollout is 5 complete / 4 pending and the checker rejects 58
+semantic/topology corruptions plus ten Rust, ten Dart, and ten Julia admission/regression mutations.
 Perl `.2.1-.2.3` implement authored/static metadata, private native-live behavior, and independently loaded
 generated parity; `.2.4` admits that existing consumer without an outward API. Its four private accessor nodes are synchronized as recognition `source_read`
 effects at 137 total rows, while shared calls remain 246, public Perl helper coverage remains 122, and typed-source

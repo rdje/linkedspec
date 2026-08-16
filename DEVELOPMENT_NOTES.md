@@ -10,6 +10,28 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-16 (`INTER-MATCH-GAP-CAPTURE.5.5` — Julia primary and exact private admission): activation base is
+  clean atomic 244 at `0a961043`; checker-first proof rejects the prior 57-mutation boundary before admission.
+- Admission composes existing authorities. Keep `run_cli`, normalized `SpecFile`, descriptor projection,
+  generated-v2 execution, emitted-source loading, recognition invocation/token state, and portable diagnostics;
+  do not add a command, option, format field, plan field, or parallel runtime path.
+- Treat the neutral consumer role array as executable order. Require exact equality with the nine expected roles,
+  unique declarations, exact map identity, once-only completion, and final set equality; invoke the map only by
+  iterating the declared array.
+- The heterogeneous-separator primary fixture is the compact user contract: `[a-z]+` recognizes only the four
+  items, while capture state independently returns empty prefix, comma-space, pipe-space, and newline-bullet
+  gaps. This locks recognition and source preservation as separate concerns.
+- Registration is multiplicity-sensitive. Include once in `julia/test/runtests.jl`, execute once explicitly in
+  canonical CI, and execute once after Dart in the rooted route. Preserve exact PUC-Lua and LuaJIT skips.
+- Only Julia rollout authority moves. Append solely `julia_runtime_regression` as mutation 58 and replace the ten
+  dormancy mutations with consumer/ledger/ordinary/primary/canonical/recurring/later-skip/facade admission
+  guards. Rust and Dart admission mutation identities remain intact.
+- Focused signoff passes explicit and ordinary 105+33+46+105+30, complete Julia/primary/storage 20/5/corpus 105,
+  rooted neutral/Perl/Rust/Dart/Julia plus two Lua skips, all exact dependent ledgers, book 79/14,884, Knowledge
+  838/7,076, histories, and doctrines. Exact staged canonical CI remains the receipt-bound admission proof.
+- Two stale storage sentences were corrected from historical 17/18 counts to the already-measured 20-owner
+  authority; the oracle itself and storage ownership did not change in this leaf.
+
 - 2026-08-16 (`INTER-MATCH-GAP-CAPTURE.5.4` — Julia independently emitted gap proof): activation base is clean
   atomic 243 at `1f531a5f`; registering the first `mktempdir()` in the dormant consumer deliberately produces the
   exact storage-owner RED at 19→20 before the sorted inventory advances.

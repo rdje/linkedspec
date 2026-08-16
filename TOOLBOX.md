@@ -371,7 +371,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 ### 4.3.5 Julia targeted commands and SSD-local storage oracle
 
 - **WHAT:** `tools/run_julia_project_data.sh` executes one Julia command with repository-derived managed temp and
-  retained depot storage; `tools/test_julia_project_data_storage.sh` locks all 18 tracked temporary owners, the
+  retained depot storage; `tools/test_julia_project_data_storage.sh` locks all 20 tracked temporary owners, the
   five external Manifest package trees, actual filesystem devices, offline source resolution, generated v2 source,
   trace output, cleanup, and absence of disposable machine-path usage metadata.
 - **WHEN:** use the targeted wrapper for every Julia command that bypasses `tools/run_julia_local.sh`; run the oracle
@@ -1052,15 +1052,15 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 ### 4.9.1.3 `tools/check_inter_match_gap_capture_contract.py` — executable-neutral gap oracle
 
 - **WHAT:** the format-1 neutral JSON authority for `linkedspec-inter-match-gap-capture-v1`. It executes exact
-  Unicode/empty/child/transaction state and rejects 57 semantic/topology corruptions at rollout 4 complete + 5
-  pending. Inter-match gap-capture recurring governance executes its complete neutral, private Perl, private Rust, and private Dart rows while later runtimes remain pending.
+  Unicode/empty/child/transaction state and rejects 58 semantic/topology corruptions at rollout 5 complete + 4
+  pending. Inter-match gap-capture recurring governance executes its complete neutral, private Perl, private Rust, private Dart, and private Julia rows while the two Lua runtimes remain pending.
 - **WHEN:** implementing `.1.3`, named regex declarations/selectors, `entry_slot()`, `@capture_gaps`, the three
   gap accessors, or any backend/runtime/recurring leg.
 - **HOW:** run `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py`, retrieve
   [[inter-match-gap-executable-contract-plan]], and read the complete frozen section in
   `docs/tasks/INTER-MATCH-GAP-CAPTURE.md`. Run
   `bash tools/check_inter_match_gap_capture_six_runtime.sh` for the ordered repository-routed governance proof;
-  its three explicit later-runtime skips are required until those rows are admitted. Rerun both prerequisite matrices from §4.9.1.2 before changing
+  its two explicit later-runtime skips are required until those rows are admitted. Rerun both prerequisite matrices from §4.9.1.2 before changing
   either dependency. For current mechanism evidence, use `return_descriptor` for
   `{family,cursor_policy,edge_ownership,uses_loop,execution_shape,resolved_edges}`, `dump_parser_source` for exact
   selection → `LS` → action/target → `LE` order, and the corrected historical live probe recorded in the task.

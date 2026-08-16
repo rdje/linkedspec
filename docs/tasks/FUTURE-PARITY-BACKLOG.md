@@ -6,9 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-13` (behavior-free lossless-gap handoff `.14.5.0` landed at `3d0384d1`; separate
-  `INTER-MATCH-GAP-CAPTURE.1.0` executable-neutral audit-plan is signoff-complete and `.1.1` is next; typed
-  composition `.14.5.1` waits)
+- Last updated: `2026-08-16` (behavior-free lossless-gap handoff `.14.5.0` landed at `3d0384d1`; separate
+  `INTER-MATCH-GAP-CAPTURE.1-.5` is implemented through Julia canonical signoff for intended atomic 245, shared
+  Lua `.6` is next after commit/brief/clean proof, and typed composition `.14.5.1` waits for `.7`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -104,11 +104,12 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-13):** behavior-free lossless-gap handoff `.14.5.0` landed cleanly at
+**Authoritative frontier (2026-08-16):** behavior-free lossless-gap handoff `.14.5.0` landed cleanly at
 `3d0384d1` as atomic 217/300. It freezes `INTER-MATCH-GAP-CAPTURE.1-.7` as the sole syntax, lifecycle,
-compatibility, six-runtime, carrier, and public-admission owner. That separate tree is now active at behavior-free
-audit-plan `.1.0`, which is signoff-complete for atomic 218 with `.1.1` next; no gap implementation or typed-source
-rollout moves here. Brackets remain selectors—numeric
+compatibility, six-runtime, carrier, and public-admission owner. That separate tree has closed neutral `.1`, Perl
+`.2`, Rust `.3`, Dart `.4`, and Julia `.5`; Julia primary/admission is canonical-signoff-complete for intended
+atomic 245 from clean `0a961043`, reaching gap 5/4/58 plus ten Rust, ten Dart, and ten Julia admission mutations.
+Shared PUC-Lua/LuaJIT `.6` follows only after commit/brief/clean proof; no typed-source rollout moves here. Brackets remain selectors—numeric
 positional compatibility, named stable identity—while dot remains fluent rule behavior. Only after gap admission
 `.7` does `.14.5.1` promote typed `gap_composition`; combined program-wide no-drift stays `.14.8`.
 

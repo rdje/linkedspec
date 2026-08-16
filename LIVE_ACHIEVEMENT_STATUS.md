@@ -2,31 +2,33 @@
 
 ## Current Activity
 
-- Atomic 243 landed cleanly at `1f531a5f`; Julia emitted leaf `INTER-MATCH-GAP-CAPTURE.5.4` is focused-signoff-
-  complete from that exact boundary for intended atomic 244; no push.
-- One repository-routed offline host independently loads ten value and two typed-error emitted modules through
-  direct/traced entrypoints against native authority and recursively cleans modules, private depot, and traces.
-- The dormant permanent consumer passes 105 metadata + 33 native + 46 carrier + 105 emitted assertions. Production
-  emission, format 2 plans, logical identity, legacy descriptors/refs, and the exact 246 call inventory stay exact.
-- Complete Julia package/primary/storage 20/5/corpus 105 and all cross-runtime matrices pass. Primary admission and
-  every outward surface remain `.5.5`-owned.
-- Governance remains 4/5/57 plus ten Rust and ten Dart admission mutations. Julia, both Lua ABIs, recurring/public
-  rows, typed composition, and every outward facade/schema/MCP/CLI/README surface remain pending or unchanged.
+- Atomic 244 landed cleanly at `0a961043`; Julia primary/admission leaf `INTER-MATCH-GAP-CAPTURE.5.5` and parent
+  `.5` are canonical-signoff-complete from that exact boundary for intended atomic 245; no push.
+- The admitted permanent consumer retains 105 metadata + 33 native + 46 carrier + 105 emitted assertions and adds
+  30 exact nine-role admission assertions through the existing primary adapter.
+- Ordinary, canonical, and rooted registrations are exact once. The rooted route executes neutral, Perl, Rust,
+  Dart, and Julia, then preserves exact PUC-Lua and LuaJIT skips.
+- Governance is 5/4/58 plus ten Rust, ten Dart, and ten Julia admission mutations. Complete Julia package/primary/
+  storage 20/5/corpus 105 and all direct cross-runtime ledgers pass.
+- Generated format/plan, supported calls 246, legacy descriptors/refs, public helpers 122, later/public rows, typed
+  composition, and every outward facade/schema/MCP/CLI/README surface remain pending or unchanged.
 
 ## Latest Completed Slice
 
-- `.5.4` is focused-signoff-complete. Deliberate storage RED rejected only 19→20; explicit proof is 105+33+46+105.
-  Full Julia package/primary/storage 20/5/corpus 105, neutral/rooted 4/5/57, recognition 137/246/58, duplicate slot
-  7/0/59, typed source 9/5/114, rendered book 79/14,880, Knowledge 838/7,076, bounded histories, and all nine
-  doctrines pass.
+- `.5.5` and parent `.5` are canonical-signoff-complete. Checker-first RED rejected the old 57-mutation boundary;
+  exact primary/nine-role GREEN advances only Julia to 5/4/58. Complete Julia, rooted execution, duplicate
+  7/0/59, recognition 137/246/58, typed source 9/5/114, generated/capability/language, semantic/MCP, rendered book
+  79/14,884, Knowledge 838/7,076, bounded histories, doctrines, and exact staged canonical proof pass.
 
 ## Next Action
 
-- Commit intended atomic 244, clear the brief, prove the clean handoff, then activate canonical `.5.5` task-tree-
-  first for existing-primary parity, exact nine-role admission, Julia-only 5/4/58 promotion, and parent closeout.
+- Commit intended atomic 245, clear the brief, prove the clean handoff, then expand and activate behavior-free
+  shared PUC-Lua/LuaJIT implementation planning under `.6` task-tree-first before any Lua behavior changes.
 
 ## Recent Completions
 
+- `2026-08-16` — `.5.5` reused Julia's primary adapter, admitted the exact nine-role consumer at 5/4/58, and
+  canonical-signoff-completed parent `.5` from clean `0a961043` for intended atomic 245.
 - `2026-08-16` — `.5.4` proved ten value/two typed-error Julia emitted modules in one offline routed host from
   clean `1f531a5f`, advancing only storage to 20/5 while preserving gap rollout 4/5/57.
 - `2026-08-16` — `.5.3` completed normalized reconstruction, compatible detached descriptors, and same-engine

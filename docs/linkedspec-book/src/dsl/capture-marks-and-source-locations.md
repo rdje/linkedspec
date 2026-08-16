@@ -549,10 +549,9 @@ Top::OR
 
 Horizontal whitespace around `=` is insignificant. Same-line `name=/regex/` at rule-paragraph level
 declares a stable rule-local slot rather than assigning a variable. Existing unindexed and numeric
-selectors remain compatibility forms. Perl, Rust, and Dart privately admit the declaration/selector syntax,
-directive metadata, and native plus reconstructed/generated/emitted/primary `entry_slot()`/gap-accessor behavior.
-Julia now implements the authored/static/compiled metadata subset behind a dormant final consumer; its runtime
-state and accessors remain pending. No backend exposes these forms as a public cross-backend contract yet.
+selectors remain compatibility forms. Perl, Rust, Dart, and Julia privately admit the declaration/selector
+syntax, directive metadata, and native plus reconstructed/generated/emitted/primary
+`entry_slot()`/gap-accessor behavior. No backend exposes these forms as a public cross-backend contract yet.
 
 Brackets are the selector namespace. `Document[1]` means positional compatibility, so declaration reordering
 can change its target; `Document[section]` means stable identity and must survive reordering. An implementation
@@ -567,18 +566,22 @@ The implementation order is also explicit. `INTER-MATCH-GAP-CAPTURE.1-.7` owns n
 `@capture_gaps`, lifecycle and compatibility policy, six-runtime behavior, carriers, and public admission.
 Typed-source composition consumes that completed contract afterward; it does not define a second gap language.
 
-### Executable neutral contract — private Perl, Rust, and Dart runtimes admitted
+### Executable neutral contract — private Perl, Rust, Dart, and Julia runtimes admitted
 
 The behavior-free contract now lives at `capability_conformance/inter_match_gap_capture_contract.json`, uses id
 `linkedspec-inter-match-gap-capture-v1`, and is checked independently by
-`tools/check_inter_match_gap_capture_contract.py`. Inter-match gap-capture recurring governance now executes the complete neutral, Perl, Rust, and Dart rows; three later runtime routes and both public rows remain pending.
+`tools/check_inter_match_gap_capture_contract.py`. Inter-match gap-capture recurring governance now executes the complete neutral, Perl, Rust, Dart, and Julia rows; two later runtime routes and both public rows remain pending.
 The Perl reference implements authored/static metadata, private native-live behavior, and independently loaded
 generated parity. Admission `.2.4` runs that complete consumer in canonical CI and in the rooted recurring route,
 promotes only `perl_runtime`, and advances the checker to 56 mutations without outward public admission.
-Rust `.3.5` and Dart `.4.5` add the exact primary-command role, admit their complete nine-role consumers to
-ordinary and canonical execution, and run once after Perl and Rust respectively in the rooted route. Only their
-private runtime rows advance. The recurring driver executes neutral, Perl, Rust, and Dart exactly once each, then
-emits three ordered later-runtime skips:
+Rust `.3.5`, Dart `.4.5`, and Julia `.5.5` add the exact primary-command role, admit their complete nine-role
+consumers to ordinary and canonical execution, and run once after their preceding runtime in the rooted route.
+Only their private runtime rows advance. Julia's admitted ledger exercises native execution, normalized ordinary
+reconstruction, descriptor provenance, generated-v2 plan execution, independently loaded emitted source,
+target lifecycle, recursion/rollback isolation, portable diagnostics, and the existing primary CLI adapter in
+declared order. Its preceding `.5.1-.5.4` stages retain 105 metadata, 33 native, 46 carrier, and 105 emitted
+assertions across ten value and two typed-error emitted modules. The recurring driver executes neutral, Perl,
+Rust, Dart, and Julia exactly once each, then emits two ordered Lua-runtime skips:
 
 ```bash
 bash tools/check_inter_match_gap_capture_six_runtime.sh
@@ -586,14 +589,15 @@ bash tools/check_inter_match_gap_capture_six_runtime.sh
 
 Canonical local CI always runs the neutral checker and exposes the same governance route behind
 `LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1`. Ordinary CI and the opt-in route execute every admitted consumer once;
-the latter additionally proves neutral-first Perl-then-Rust-then-Dart ordering and three explicit later-runtime
-skips.
+the latter additionally proves neutral-first Perl-then-Rust-then-Dart-then-Julia ordering and two explicit
+later-runtime skips.
 
 The neutral artifact locks 8 positive and 10 negative authored fixtures, 3 source fixtures, 8 private gap fields,
 16 main-machine transitions, 10 segmentation cases, 3 terminal routes, 7 transaction/recursion/return-channel
 cases, 6 compatibility rows, 9 diagnostics, 9 rollout legs, and 50 semantic mutations. Recurring topology and
-public-no-overclaim governance raised that base to 55; runtime admission now rejects Perl, Rust, and Dart
-complete-to-pending regressions at 57 total. Ten Rust and ten Dart role/registration mutations are separate.
+public-no-overclaim governance raised that base to 55; runtime admission now rejects Perl, Rust, Dart, and Julia
+complete-to-pending regressions at 58 total. Ten Rust, ten Dart, and ten Julia role/registration mutations are
+separate.
 
 ### Perl private live and generated implementation — exact private admission
 

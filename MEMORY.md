@@ -1,19 +1,20 @@
 # MEMORY
 
-- activation_commit: `1f531a5f68e8ce8f9627ec78a165baad548f2e26` — clean atomic-243 base for Julia emitted leaf
-  `INTER-MATCH-GAP-CAPTURE.5.4`; no push.
-- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.5.4 - prove Julia emitted gap execution`; focused-signoff-
-  complete from clean atomic 243 at `1f531a5f` for intended atomic 244.
-- active_work_unit: none at the intended clean post-landing boundary. `.5.4` adds independent emitted proof behind
-  the dormant final consumer; parent `.5` remains active and only primary/admission `.5.5` remains.
-- next_action: after atomic 244 lands and brief/clean proof completes, activate canonical `.5.5` task-tree-first
-  for existing-primary parity, nine-role admission, Julia-only 5/4/58 promotion, and parent `.5` closeout.
+- activation_commit: `0a961043d5429e985f9a952d6123d34e895cf5b2` — clean atomic-244 base for Julia admission leaf
+  `INTER-MATCH-GAP-CAPTURE.5.5`; no push.
+- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.5.5 - admit Julia inter-match gap capture`; canonical-signoff-
+  complete from clean atomic 244 at `0a961043` for intended atomic 245; parent `.5` closes with this commit.
+- active_work_unit: none at the intended clean post-landing boundary. Julia is privately admitted at 5/4/58;
+  shared PUC-Lua/LuaJIT parent `.6` remains pending and no Lua planning leaf is active yet.
+- next_action: after atomic 245 lands and brief/clean proof completes, expand and activate a behavior-free shared
+  PUC-Lua/LuaJIT audit/plan leaf under `.6` task-tree-first before any Lua behavior change.
 - in_flight_uncommitted: none at the intended clean handoff; no generated artifact, background result, or partial
   implementation remains.
-- blockers: none. Deliberate storage RED rejects only 19→20; explicit proof is 105 metadata + 33 native + 46
-  carrier + 105 emitted. Complete Julia, primary, storage 20/5, and corpus 105 pass. Neutral/rooted stays 4/5/57
-  with ten Julia dormancy mutations; recognition 137/246/58, duplicate slot 7/0/59, typed source 9/5/114,
-  rendered book 79/14,880, Knowledge 838/7,076, bounded histories, diff checks, and all nine doctrines pass.
+- blockers: none. Checker-first RED rejects 57; admitted GREEN is 105 metadata + 33 native + 46 carrier + 105
+  emitted + 30 admission assertions. Complete Julia/primary/storage 20/5/corpus 105 and rooted neutral/Perl/Rust/
+  Dart/Julia plus two Lua skips pass at 5/4/58 with ten Julia admission mutations. Recognition 137/246/58,
+  duplicate 7/0/59, typed 9/5/114, book 79/14,884, Knowledge 838/7,076, histories, doctrines, and exact staged
+  canonical proof pass.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -26,8 +27,7 @@
 - backend_audit_fact: Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT typed-source authorities and private transactions are
   admitted without facade exports; exact carriers/registers/ABIs live in their Knowledge cards.
 - current_storage_contract: ADR `0053` keeps all project data on the repository filesystem; use routed wrappers,
-  never OS temp/home caches. Dart is 23 temp owners / 47 packages; Julia is 19 temp owners / 5 packages and `.5.4`
-  alone is expected to advance the exact Julia owner inventory to 20.
+  never OS temp/home caches. Dart is 23 temp owners / 47 packages; Julia is exactly 20 temp owners / 5 packages.
 - current_path_contract: ADR `0052` and `REPO-ROOT-PATHS` require durable root-relative paths and runtime-derived
   absolute roots; moved/outside-CWD execution is canonical.
 - current_semantic_governance: capability 80/0/0; semantic six groups / 20 responses / 128 mutations, rollout 9/9,
@@ -40,9 +40,9 @@
   and their rollover/index gates remain current.
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, and recurrence/public no-drift 9/9.
-- current_future_direction: gap is privately admitted on Perl, Rust, and Dart at 4/5/57 plus ten Rust and ten Dart
-  admission mutations. Julia `.5.1-.5.4` now own exact private metadata, native, normalized/descriptor/generated,
-  and independently emitted execution behind ten dormancy guards; `.5.5` alone owns admission. Both Lua ABIs and
-  public rows remain pending; `.14.5.1` waits for `.7`.
-- latest_bootstrap_read: 2026-08-16 — roadmap/codebase/mdBook and continuity/tooling review complete; `.5.4` is
-  focused-signoff-complete for intended atomic 244, with commit/brief/clean proof the exact next action.
+- current_future_direction: gap is privately admitted on Perl, Rust, Dart, and Julia at 5/4/58 plus ten Rust, ten
+  Dart, and ten Julia admission mutations. Julia `.5.1-.5.5` owns exact metadata, native, normalized/descriptor/
+  generated, independently emitted, existing-primary, and nine-role admission. Both Lua ABIs and public rows
+  remain pending; `.14.5.1` waits for `.7`.
+- latest_bootstrap_read: 2026-08-16 — roadmap/codebase/mdBook and continuity/tooling review complete; `.5.5` plus
+  parent `.5` are canonical-signoff-complete for intended atomic 245, with commit/brief/clean proof next.

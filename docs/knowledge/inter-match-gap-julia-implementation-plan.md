@@ -22,9 +22,9 @@ answers:
   - "how does loaded source identity affect Julia descriptor equality"
   - "which Julia descriptor tests changed for gap metadata"
 date: 2026-08-16
-status: Julia metadata, private native, normalized/descriptor/generated carriers, and independently loaded emitted proof implemented behind dormancy; primary admission remains pending at gap rollout 4 complete / 5 pending
+status: Julia private gap path admitted through exact nine-role primary composition at gap rollout 5 complete / 4 pending; Lua and public rows remain pending
 tags: [julia, capture, segmentation, named-slots, recognition, source-location, generated-source, emitted-source, primary, plan]
-evidence: "INTER-MATCH-GAP-CAPTURE.5.1-.5.4 implement logical source identity and exact authored/static/compiled provenance; existing-recognition-authority native state/accessors/lifecycle; normalized SpecFile JSON reconstruction; compatible detached descriptors; same-runtime generated-v2 execution; and independently loaded emitted direct/traced proof. Explicit permanent-consumer proof is 105 metadata + 33 native + 46 carrier + 105 emitted assertions. One repository-routed offline host loads ten value/two typed-error modules against native authority with a private writable depot over retained repository/system depots, then recursively cleans every module, trace, and host artifact. Storage advances exactly 19→20 owners while five package trees, ActionIR 246, format 2 ordered {label,family}, rollout 4/5/57, and dormancy remain exact."
+evidence: "INTER-MATCH-GAP-CAPTURE.5.1-.5.5 implement and privately admit logical source identity and exact authored/static/compiled provenance; existing-recognition-authority native state/accessors/lifecycle; normalized SpecFile JSON reconstruction; compatible detached descriptors; same-runtime generated-v2 execution; independently loaded emitted direct/traced proof; and the existing primary CLI adapter. The permanent consumer retains 105 metadata + 33 native + 46 carrier + 105 emitted assertions and adds 30 exact admission assertions. Its nine declared roles execute once in order and register once in ordinary Julia discovery, canonical CI, and the rooted route after Dart. Julia alone advances to rollout 5/4/58; ten dormancy mutations become ten admission mutations. Storage stays 20 owners / 5 packages, ActionIR stays 246, and generated format 2 ordered {label,family} remains exact."
 reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'include(\"julia/test/inter_match_gap_capture_contract_test.jl\")' && bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/check_inter_match_gap_capture_six_runtime.sh && bash tools/run_julia_local.sh"
 ---
 
@@ -52,11 +52,13 @@ basename. The complete Julia gate exposed the otherwise-hidden risk that compile
 scratch absolute path; the corrected production loader now keeps the established compiled/descriptor path-opacity
 contract while retaining logical source provenance.
 
-The final consumer is permanent but mechanically dormant. Explicit execution passes 105 metadata, 33 native, 46
-carrier, and 105 emitted assertions. It is not included by ordinary package discovery, canonical CI, or the rooted recurring driver, and the Julia facade gains
-no gap token. Ten reason-checked mutations independently reject consumer identity, metadata role, contract source,
-parse/validation/compiler seam, diagnostic, discovery, rooted-execution, and facade drift. `.5.4` advances storage
-from the pre-emitted 19-owner boundary to exactly 20 temporary-workspace owners while retaining five package trees.
+The final consumer is permanent and admitted. Its retained stages pass 105 metadata, 33 native, 46 carrier, and
+105 emitted assertions; its final role ledger adds 30 admission assertions. Ordinary package discovery includes it
+once, canonical CI executes it once explicitly, and the rooted recurring driver runs it once after Dart. The Julia
+facade still gains no gap token. Ten reason-checked mutations independently reject consumer identity, role-ledger
+order, ordinary/canonical/rooted omission or duplication, primary ownership, later-runtime skips, and facade drift.
+`.5.4` advanced storage from the pre-emitted 19-owner boundary to exactly 20 temporary-workspace owners while
+retaining five package trees; `.5.5` adds no new storage owner.
 
 ## Implemented `.5.2` native boundary
 
@@ -111,6 +113,20 @@ and the exact native unavailable-context or cursor-regression marker. All twelve
 entry and source identity. Recursive cleanup removes the host, private depot, modules, manifest, runner, and traces;
 the storage oracle rejects the unregistered owner at 19→20 before accepting this exact twentieth path.
 
+## Implemented `.5.5` primary and admission boundary
+
+The admitted consumer reads Julia's nine-role array from the neutral contract, requires exact declared order and
+unique identity, dispatches each role once, and requires the completed set to equal the declared map. The primary
+role reuses `run_cli` with the ordinary `--inline-spec` and `--input` options. Input
+`alpha, beta | gamma\n- delta` returns four recognized words paired with exact separators `""`, `", "`,
+`" | "`, and `"\n- "`; no new command or secondary execution path exists.
+
+Ordinary `julia/test/runtests.jl`, canonical `tools/run_ci_local.sh`, and the rooted recurring driver each register
+the consumer exactly once. The rooted order is neutral, Perl, Rust, Dart, Julia, then explicit PUC Lua and LuaJIT
+skips. Only `julia_runtime` becomes complete. The semantic ledger appends only
+`julia_runtime_regression`, reaching 58; ten Julia admission mutations replace the former ten dormancy mutations.
+All facade, schema, semantic/MCP, capability, CLI-manifest, README, later-runtime, and public rows remain unchanged.
+
 ## Five dependency-ordered leaves
 
 1. `.5.1` adds authored/static/compiled identity. `SpecFile` gains a defaulted logical `source_id`; named and
@@ -137,7 +153,8 @@ the storage oracle rejects the unregistered owner at 19→20 before accepting th
    once: `native_execution`, `ordinary_reconstruction`, `descriptor`, `generated_plan`, `emitted_source`,
    `target_lifecycle`, `recursion_and_rollback`, `portable_diagnostics`, and `primary_command`. Ordinary,
    canonical, and rooted registration are each exact once. Only `julia_runtime` advances, from 4/5/57 to
-   5/4/58 by appending `julia_runtime_regression`; ten dormancy mutations become ten admission mutations.
+   5/4/58 by appending `julia_runtime_regression`; ten dormancy mutations become ten admission mutations. This
+   leaf is complete.
 
 ## Existing authorities to preserve
 

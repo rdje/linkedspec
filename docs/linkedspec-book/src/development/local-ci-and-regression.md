@@ -234,28 +234,31 @@ containment and relocation, CLI 66/66 in both option environments, RAM 62%, Phas
 and this complete matrix through its exact success marker. The combined program-wide `.14.8` public-no-drift row
 remains pending.
 
-Inter-match gap-capture recurring governance runs the complete neutral, Perl, Rust, and Dart rows; three later runtime routes remain explicit skips.
+Inter-match gap-capture recurring governance runs the complete neutral, Perl, Rust, Dart, and Julia rows; two later runtime routes remain explicit skips.
 Perl `.2.1-.2.3` established metadata, private live behavior, and independently loaded generated parity. Admission
 `.2.4` makes the full metadata/live/generated consumer the default, registers it once in ordinary canonical CI
 and once in the rooted recurring route, promotes only `perl_runtime`, and retires the obsolete dormancy fence.
-The neutral checker now rejects 56 semantic/topology mutations at rollout 3 complete / 6 pending: Perl and Rust
-regressions are both locked, while facade/schema/semantic/MCP/CLI/README surfaces remain absent.
+The neutral checker now rejects 58 semantic/topology mutations at rollout 5 complete / 4 pending: Perl, Rust,
+Dart, and Julia regressions are locked, while facade/schema/semantic/MCP/CLI/README surfaces remain absent.
 Behavior-free Dart `.4.0` froze `.4.1-.4.5` across authored/static metadata, same-authority native execution,
 reconstructed/descriptor/generated carriers, independently analyzed emitted source, and primary/nine-role
 admission. `.4.1-.4.4` supplied those private carriers behind a skipped consumer. Admission `.4.5` removes that
 skip, proves the existing primary adapter, executes all nine declared roles exactly once, registers the consumer
 once in canonical CI and once after Rust in the rooted route, and promotes only `dart_runtime`. The checker now
-rejects 57 semantic mutations at rollout 4 complete / 5 pending plus ten Rust and ten Dart admission mutations;
+rejects 58 semantic mutations at rollout 5 complete / 4 pending plus ten Rust, ten Dart, and ten Julia admission
+mutations;
 ADR `0074` explains the additional Dart regression guard. Maintained Dart commands use
 `tools/run_dart_project_data.sh` or `tools/run_dart_local.sh`; the storage oracle locks 23 temporary owners and 47
-packages on repository storage. Julia and both Lua routes remain explicit skips, and no outward surface moves.
+packages on repository storage. The two Lua routes remain explicit skips, and no outward surface moves.
 Behavior-free Julia `.5.0` freezes `.5.1-.5.5` before implementation. Its focused baseline passes duplicate-slot
 121, rule-local cursor 104, recognition transaction 207, typed source 127, and source emitter 65 (624 assertions),
 plus the existing primary process check and exact pre-emitted storage 19 temporary owners / 5 package trees. Julia
-`.5.4` now advances that oracle to 20 owners while one offline host proves ten value/two typed-error emitted modules
-direct/traced against native authority and cleans its private depot, generated files, and traces. The plan reuses
-the existing recognition invocation/token, immutable input `SourceAuthority`, normalized `SpecFile` carrier,
-generated format 2 `{label,family}` plan, and primary adapter. It changes no Julia runtime or 4/5/57 rollout state.
+`.5.4` advances that oracle to 20 owners while one offline host proves ten value/two typed-error emitted modules
+direct/traced against native authority and cleans its private depot, generated files, and traces. Admission `.5.5`
+reuses the primary adapter, executes the nine declared roles once in order, registers ordinary and canonical
+discovery plus the rooted route after Dart, and promotes only `julia_runtime`. The implementation continues to
+reuse the existing recognition invocation/token, immutable input `SourceAuthority`, normalized `SpecFile`
+carrier, and generated format 2 `{label,family}` plan.
 Behavior-free Rust preflight `.3.0` assigns `.3.1-.3.5` to authored metadata, same-authority native state,
 reconstruction/generated-plan parity, repository-local emitted proof, and final primary/admission. `.3.1` now
 implements exact Rust named/anonymous declarations, selectors, directive validation, diagnostics, and compiled
@@ -1519,7 +1522,7 @@ The recurring process oracle is:
 $ bash tools/test_julia_project_data_storage.sh
 ```
 
-It freezes all 17 tracked `mktempdir()`/`tempdir()` owners, checks filesystem-device identity for the managed run,
+It freezes all 20 tracked `mktempdir()`/`tempdir()` owners, checks filesystem-device identity for the managed run,
 `TMPDIR`, writable depot, and every package file, rejects package symlinks and an explicit external depot entry,
 and proves JSON3 loads from the first depot. Its Julia probe requires `tempdir()` to equal routed `TMPDIR`, writes
 generated v2 source and a trace beneath `mktempdir()`, and leaves no completed `jl_*` workspace.

@@ -14,7 +14,7 @@
     "compatibility_rows": 6,
     "diagnostics": 9,
     "rollout_legs": 9,
-    "semantic_mutations": 57
+    "semantic_mutations": 58
   },
   "policy": {
     "status": "executable_neutral_behavior_free",
@@ -818,12 +818,13 @@
     "perl_runtime_regression",
     "rust_runtime_regression",
     "dart_runtime_regression",
+    "julia_runtime_regression",
     "storage_paths",
     "route_order",
     "public_no_overclaim"
   ],
   "recurring_gate": {
-    "status": "governance_current_perl_rust_dart_admitted_later_runtimes_pending",
+    "status": "governance_current_perl_rust_dart_julia_admitted_lua_runtimes_pending",
     "owner": "INTER-MATCH-GAP-CAPTURE.1.2",
     "driver": "tools/check_inter_match_gap_capture_six_runtime.sh",
     "local_ci_driver": "tools/run_ci_local.sh",
@@ -958,7 +959,7 @@
   "public_no_overclaim": {
     "status": "current",
     "owner": "INTER-MATCH-GAP-CAPTURE.1.2",
-    "policy": "document the executable neutral and admitted private Perl, Rust, and Dart runtimes without claiming later runtimes, recurring/public rollout completion, capability admission, schema exposure, CLI exposure, or outward public admission",
+    "policy": "document the executable neutral and admitted private Perl, Rust, Dart, and Julia runtimes without claiming later runtimes, recurring/public rollout completion, capability admission, schema exposure, CLI exposure, or outward public admission",
     "rollout_assertions": {
       "row_count": 9,
       "neutral_contract": {
@@ -977,8 +978,11 @@
         "status": "complete",
         "owner": "INTER-MATCH-GAP-CAPTURE.4"
       },
+      "julia_runtime": {
+        "status": "complete",
+        "owner": "INTER-MATCH-GAP-CAPTURE.5"
+      },
       "pending_runtime_ids": [
-        "julia_runtime",
         "puc_lua_runtime",
         "luajit_runtime"
       ],
@@ -995,23 +999,23 @@
     "documents": [
       {
         "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
-        "required_marker": "Inter-match gap-capture recurring governance now executes the complete neutral, Perl, Rust, and Dart rows; three later runtime routes and both public rows remain pending."
+        "required_marker": "Inter-match gap-capture recurring governance now executes the complete neutral, Perl, Rust, Dart, and Julia rows; two later runtime routes and both public rows remain pending."
       },
       {
         "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
-        "required_marker": "Inter-match gap-capture recurring governance runs the complete neutral, Perl, Rust, and Dart rows; three later runtime routes remain explicit skips."
+        "required_marker": "Inter-match gap-capture recurring governance runs the complete neutral, Perl, Rust, Dart, and Julia rows; two later runtime routes remain explicit skips."
       },
       {
         "path": "docs/linkedspec-book/src/overview/project-status.md",
-        "required_marker": "Inter-match gap-capture governance is current at 4 complete / 5 pending: Perl, Rust, and Dart are admitted privately, while later runtimes and both public rows remain pending."
+        "required_marker": "Inter-match gap-capture governance is current at 5 complete / 4 pending: Perl, Rust, Dart, and Julia are admitted privately, while the two Lua runtimes and both public rows remain pending."
       },
       {
         "path": "capability_conformance/README.md",
-        "required_marker": "Inter-match gap-capture recurring governance now admits the private Perl, Rust, and Dart runtimes; later runtimes and public admission remain pending."
+        "required_marker": "Inter-match gap-capture recurring governance now admits the private Perl, Rust, Dart, and Julia runtimes; the two Lua runtimes and public admission remain pending."
       },
       {
         "path": "TOOLBOX.md",
-        "required_marker": "Inter-match gap-capture recurring governance executes its complete neutral, private Perl, private Rust, and private Dart rows while later runtimes remain pending."
+        "required_marker": "Inter-match gap-capture recurring governance executes its complete neutral, private Perl, private Rust, private Dart, and private Julia rows while the two Lua runtimes remain pending."
       }
     ],
     "surface_guard": {
@@ -1062,7 +1066,7 @@
     {
       "id": "julia_runtime",
       "owner": "INTER-MATCH-GAP-CAPTURE.5",
-      "status": "pending"
+      "status": "complete"
     },
     {
       "id": "puc_lua_runtime",
