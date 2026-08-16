@@ -483,8 +483,8 @@ Only horizontal spacing around `=` is insignificant. Every name scalar uses the 
 reserved for positional selectors. Named and anonymous regex members may mix in one authored zero-based sequence.
 Perl, Rust, Dart, and Julia privately admit the complete gap runtime. Shared PUC Lua/LuaJIT currently carry
 authored/static/compiled metadata, private native gap execution, normalized reconstruction, compatible descriptor
-projections, and same-engine direct/traced generated-v2 execution behind one dormant final consumer; this is not
-yet a portable public admission.
+projections, same-engine direct/traced generated-v2 execution, and independently loaded emitted-source proof
+behind one dormant final consumer; this is not yet a portable public admission.
 
 **Capture groups**: A `(...)` group is a **numbered** capture; a `(?<name>...)`
 group is a **named** capture. Action code reads them with `entry_group(N)` /

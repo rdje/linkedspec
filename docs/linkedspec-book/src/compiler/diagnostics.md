@@ -158,8 +158,10 @@ compiled provenance. Runtime backends use `gap_capture_context_unavailable` for 
 candidate/tail and `source_location_cursor_regression` when the accepted cursor would commit before the selected
 match end. Lua `.6.2` now emits those accessor/runtime failures from the same invocation-local authority used by
 native candidate and tail execution. `.6.3` proves the same stage/code/source/detail projection through direct
-and traced generated-v2 entrypoints on the shared engine. The consumer remains dormant from ordinary/admitted
-routes, so this private implementation does not yet promote either Lua runtime row.
+and traced generated-v2 entrypoints on the shared engine. `.6.4` independently loads emitted unavailable-context
+and cursor-regression modules in fresh PUC-Lua and LuaJIT children and preserves those generated error fields and
+source identity. The consumer remains dormant from ordinary/admitted routes, so this private implementation does
+not yet promote either Lua runtime row.
 
 Parser-authored `print`/`say`/`print_each` events use a separate Rust facility. Call
 `execute_with_diagnostic_output(input, sink)` or

@@ -883,10 +883,10 @@ named selectors, and `@capture_gaps` were raw invalid body syntax; and the four 
 unsupported runtime-helper diagnostics. `.6.1` implements the authored/static/compiled layer once for PUC Lua
 and LuaJIT, and `.6.2` adds private native execution through the existing recognition authority. `.6.3` carries
 the same state through normalized reconstruction, detached compatible descriptors, and direct/traced generated-v2
-execution. A 257-assertion consumer proves both ABIs explicitly—178 metadata, 33 native, and 46 carrier
-assertions—but remains absent from ordinary, canonical, and rooted discovery through ten dormancy mutations.
-Complete package proof stays green at 177 tests
-per ABI, primary 66, corpus 105, and 18 exact temporary owners with three dual-ABI native modules.
+execution. `.6.4` adds independently loaded emitted proof without changing the emitter. A 362-assertion consumer
+proves both ABIs explicitly—178 metadata, 33 native, 46 carrier, and 105 emitted assertions—but remains absent
+from ordinary, canonical, and rooted discovery through ten dormancy mutations. Complete package proof stays green
+at 177 tests per ABI, primary 66, corpus 105, and 19 exact temporary owners with three dual-ABI native modules.
 
 The audit also fixes the timing boundary. Lua's existing anonymous split markers and named `@mark(...)` compile as
 events attached to the preceding regex slot, then run after accepted action/target execution and before `LE`.
@@ -902,11 +902,15 @@ commit a child-extended cursor before `IT`, and install successful tails before 
 rollback and nested frames restore the same owner. Completed `.6.3` carries state only through normalized
 `SpecFile` JSON, compatible descriptor additions, and unchanged format-2 `{label,family}` generated execution.
 Its direct/traced entrypoints reuse the same engine for value and typed-error cases; loaded descriptor source ids
-remain caller-logical while inline projections use `inline`. `.6.4` independently loads ten value and two
-typed-error modules in fresh PUC-Lua and LuaJIT
-children below repository-routed storage, advancing exact owners only from 18 to 19. `.6.5` reuses the primary
-adapter, runs nine roles once per ABI, and alone may advance the two Lua rows from 5/4/58 to 7/2/60. No Lua gap
-admission or public/outward claim is current yet.
+remain caller-logical while inline projections use `inline`. Completed `.6.4` independently loads ten value and
+two typed-error modules in fresh PUC-Lua and LuaJIT children below repository-routed storage, advancing exact
+owners only from 18 to 19. Each module is loaded separately and compares native, direct, and traced behavior. The
+value set covers Unicode and empty gaps, falsey results, child-extended cursors, nested isolation, rollback,
+lifecycle order and terminal tails, failed minimum, direct entry, and unflagged legacy behavior; the error set
+preserves unavailable-context and cursor-regression stage/code/detail/source identity. The child consumes trace
+bytes before recursively cleaning its module, runner, manifest, output, and trace workspace. `.6.5` reuses the
+primary adapter, runs nine roles once per ABI, and alone may advance the two Lua rows from 5/4/58 to 7/2/60. No
+Lua gap admission or public/outward claim is current yet.
 
 The current Lua carrier is deliberately narrow. `SpecFile.source_id` defaults to `inline`, crosses the direct and
 two staged parser layers, survives normalized JSON and effective emitted state, and records caller-logical loaded

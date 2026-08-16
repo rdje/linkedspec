@@ -1,19 +1,18 @@
 # MEMORY
 
-- activation_commit: `4e625a9fef8a8f06e801f225f23481f396bea929` — clean atomic-248 base for shared Lua carrier leaf
-  `INTER-MATCH-GAP-CAPTURE.6.3`; no push.
-- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.6.3 - carry Lua gap generated execution`; canonical-signoff-
-  complete from clean atomic 248 at `4e625a9f` for intended atomic 249; no admission or rollout movement.
-- active_work_unit: none at the intended clean post-landing boundary; `.6.4` is next but not active until the
-  atomic-249 commit, zero-byte brief, and clean handoff are proven.
-- next_action: land atomic 249, clear the brief, prove clean handoff, then activate `.6.4` task-tree-first to prove
-  independently loaded emitted-source parity in fresh PUC-Lua/LuaJIT hosts and advance storage 18→19 exactly.
-- in_flight_uncommitted: none at the intended clean handoff; no generated artifact, background result, partial
-  implementation, runtime state/accessor, descriptor, generated execution, admission, or outward change remains.
-- blockers: none. The dormant metadata/native/carrier consumer passes 257 assertions per ABI; complete Lua passes
-  177 package tests per ABI, primary 66, corpus 105, and exact storage 18 owners / three dual-ABI native modules.
-  Rooted proof passes neutral/Perl/Rust/Dart/Julia plus two Lua skips at 5/4/58 with ten Lua dormancy mutations.
-  ADR `0077` closes exact engineering-notes capacity 14/13 and receipt-bound canonical CI passes.
+- activation_commit: `b7708cde13b08142cf9a7f2083ea000142e198dc` — clean atomic-249 base for shared Lua emitted-
+  source/storage leaf `INTER-MATCH-GAP-CAPTURE.6.4`; no push.
+- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.6.4 - prove Lua emitted gap execution`; focused-signoff-complete
+  from clean atomic 249 at `b7708cde` for intended atomic 250; no admission or rollout movement.
+- active_work_unit: none at the intended clean post-landing boundary; `.6.5` is next but not active until the
+  atomic-250 commit, zero-byte brief, and clean handoff are proven.
+- next_action: land atomic 250, clear the brief, prove clean handoff, then activate `.6.5` task-tree-first for exact
+  existing-primary parity, nine-role dual-ABI admission, and parent `.6` closeout.
+- in_flight_uncommitted: none at the intended clean handoff; no emitted workspace, background result, partial
+  implementation, production emitter/runtime/primary change, admission, rollout, or outward change remains.
+- blockers: none. Explicit proof is 362 assertions per ABI; complete Lua passes 177 package tests per ABI, root
+  routes 106, cursor descriptors 912, primary 66x2, corpus 105, and storage 19 owners / three native modules.
+  Rooted proof stays neutral/Perl/Rust/Dart/Julia plus two Lua skips at 5/4/58 with ten Lua dormancy mutations.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -40,8 +39,8 @@
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, and recurrence/public no-drift 9/9.
 - current_future_direction: gap is privately admitted on Perl, Rust, Dart, and Julia at 5/4/58 plus ten Rust, ten
-  Dart, and ten Julia admission mutations. Lua `.6.1-.6.3` now implement metadata/dormancy, one shared private
-  recognition path, and normalized/descriptor/generated-v2 carriers; `.6.4-.6.5` retain emitted dual-ABI proof and
+  Dart, and ten Julia admission mutations. Lua `.6.1-.6.4` now implement metadata/dormancy, one shared private
+  recognition path, normalized/descriptor/generated-v2 carriers, and independent emitted proof; `.6.5` retains
   primary/admission. Both Lua ABIs and public rows remain pending; `.14.5.1` waits for `.7`.
-- latest_bootstrap_read: 2026-08-16 — roadmap/codebase/mdBook and continuity/tooling review complete; `.6.3` is
-  canonical-signoff-complete from clean atomic 248 at `4e625a9f` for intended atomic 249.
+- latest_bootstrap_read: 2026-08-16 — roadmap/codebase/mdBook and continuity/tooling review complete; `.6.4` is
+  focused-signoff-complete from clean atomic 249 at `b7708cde` for intended atomic 250.

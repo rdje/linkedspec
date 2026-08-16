@@ -1,10 +1,10 @@
--- INTER-MATCH-GAP-CAPTURE.6.3 — dormant shared Lua carrier-execution stage.
+-- INTER-MATCH-GAP-CAPTURE.6.4 — dormant shared Lua emitted-execution stage.
 --
 -- This final consumer path now proves parsing, validation, compiled provenance,
 -- source identity, private native state/lifecycle, normalized reconstruction,
--- compatible descriptors, and generated-v2 execution on both Lua ABIs.
--- Independent emitted execution, primary execution, and admission remain
--- owned by `.6.4-.6.5`.
+-- compatible descriptors, generated-v2 execution, and independently loaded
+-- emitted-source execution on both Lua ABIs. Primary execution and admission
+-- remain owned by `.6.5`.
 -- DORMANT: INTER-MATCH-GAP-CAPTURE.6.5 owns Lua runtime admission
 
 local linkedspec = require("linkedspec")
@@ -776,6 +776,386 @@ Probe:
       check(projected.detail:find(error_case[4], 1, true) ~= nil,
         "generated error detail " .. case_index .. "/" .. tostring(traced))
     end
+  end
+end
+
+do
+  local emitted_assertions_start = assertions
+
+  local function write_file(path, value)
+    local handle = assert(io.open(path, "wb"))
+    assert(handle:write(value))
+    assert(handle:close())
+  end
+
+  local function shell_quote(value)
+    return "'" .. value:gsub("'", "'\\''") .. "'"
+  end
+
+  local function command_succeeded(command)
+    local first, _, third = os.execute(command)
+    if type(first) == "number" then return first == 0 end
+    return first == true and (third == nil or third == 0)
+  end
+
+  local function with_temp_directory(operation)
+    local temp_root = assert(os.getenv("TMPDIR"), "TMPDIR is required")
+    assert(temp_root ~= "", "TMPDIR must not be empty")
+    local template = temp_root:gsub("/+$", "") .. "/linkedspec-lua-gap-emitted.XXXXXX"
+    local handle = assert(io.popen("mktemp -d " .. shell_quote(template), "r"))
+    local workspace = assert(handle:read("*l"))
+    assert(handle:close())
+
+    local ok, value = pcall(operation, workspace)
+    local cleaned = command_succeeded("rm -rf -- " .. shell_quote(workspace))
+    if not cleaned then fail("unable to clean emitted gap workspace") end
+    if not ok then error(value, 0) end
+    return value, workspace
+  end
+
+  local value_cases = {
+    {
+      name = "unicode_entry_falsey",
+      source = [[Top::
+ I { segments = [] }
+ @capture_gaps
+ -> Part[header]  { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span(), "child", call(Part))) }
+ -> Part[section] { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span(), "child", call(Part))) }
+ -> Part[footer]  { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span(), "child", call(Part))) }
+ LX { push(segments, hash("kind", gap_kind(), "text", gap_text(), "span", gap_span())); return(copy(segments)) }
+Part:
+ header=/H/
+ section=/S/
+ footer=/F/
+ I { return(hash("slot", entry_slot(), "text", entry_text(), "falsey", 0)) }
+]],
+      input = "αHβ\nS🙂Fω",
+    },
+    {
+      name = "empty_spans",
+      source = [[Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Part[h] { push(gaps, array(gap_kind(), gap_text(), gap_span())) }
+ -> Part[s] { push(gaps, array(gap_kind(), gap_text(), gap_span())) }
+ -> Part[f] { push(gaps, array(gap_kind(), gap_text(), gap_span())) }
+ LX { push(gaps, array(gap_kind(), gap_text(), gap_span())); return(copy(gaps)) }
+Part:
+ h=/H/
+ s=/S/
+ f=/F/
+ I.return(entry_text())
+]],
+      input = "HSF",
+    },
+    {
+      name = "child_cursor",
+      source = [[Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Container[open] { push(gaps, array(gap_text(), call(Container))) }
+ -> Bang { push(gaps, array(gap_text(), call(Bang))) }
+ LX { push(gaps, array(gap_text(), gap_kind())); return(copy(gaps)) }
+Container:
+ open=/\{/
+ -> Close { return(call(Close)) }
+Close:
+ /\}/
+ I.return(entry_text())
+Bang:
+ /!/
+ I.return(entry_text())
+]],
+      input = "p{abc}gap!",
+    },
+    {
+      name = "nested_isolation",
+      source = [[Top::
+ @capture_gaps
+ -> Container[open] { return(array(gap_text(), call(Container), gap_text())) }
+Container:
+ open=/\{/
+ I { inner = [] }
+ @capture_gaps
+ -> Atom { push(inner, gap_text()) }
+ LX { push(inner, gap_text()); return(copy(inner)) }
+Atom:
+ /x/
+ I.return(entry_text())
+]],
+      input = "p{axtail",
+    },
+    {
+      name = "rollback",
+      source = [[Top::
+ I { gaps = [] }
+ @capture_gaps
+ -> Part[h] {
+  tx = recognition_checkpoint();
+  matched = recognize_once(tx, call(Probe));
+  recognition_rollback(tx);
+  push(gaps, gap_text())
+ }
+ -> Part[s] { push(gaps, gap_text()) }
+ LX { push(gaps, gap_text()); return(copy(gaps)) }
+Part:
+ h=/H/
+ s=/S/
+ I.return(entry_text())
+Probe:
+ /X/
+ I.return(0)
+]],
+      input = "aHXbS",
+    },
+    {
+      name = "lifecycle_order",
+      source = [[Top::OR{1}
+ I { events = [] }
+ @capture_gaps
+ -> Part { push(events, array("action", gap_kind(), gap_text())) }
+ LS { push(events, array("ls", gap_kind(), gap_text(), match_text())) }
+ LE { push(events, array("le", gap_kind(), gap_text())) }
+ IT { push(events, array("it")) }
+ LX { push(events, array("lx", gap_kind(), gap_text())); return(copy(events)) }
+Part: /H/
+]],
+      input = "aHb",
+    },
+    {
+      name = "no_match_tail",
+      source = [[Top::
+ @capture_gaps
+ -> Part { return(gap_text()) }
+ LX { return(array(gap_kind(), gap_text(), gap_span())) }
+Part: /H/
+]],
+      input = "abc",
+    },
+    {
+      name = "failed_minimum",
+      source = [[Top::OR{2}
+ @capture_gaps
+ -> Part { return(gap_text()) }
+ EX { return("unexpected-ex") }
+ E { return("unexpected-e") }
+Part: /H/
+]],
+      input = "H",
+    },
+    {
+      name = "direct_entry",
+      source = "Part::\n /H/\n I { return(entry_slot()) }\n",
+      input = "H",
+    },
+    {
+      name = "legacy",
+      source = "Top::\n /H/\n E { return(\"legacy\") }\n",
+      input = "H",
+    },
+  }
+  local error_cases = {
+    {
+      name = "unavailable",
+      source = "Direct::\n /H/\n I { return(gap_text()) }\n",
+      input = "H",
+      diagnostic_code = "gap_capture_context_unavailable",
+      marker = "LINKEDSPEC_INTER_MATCH_GAP_ERROR:gap_capture_context_unavailable",
+    },
+    {
+      name = "regression",
+      source = "Top::OR{1}\n @capture_gaps\n -> Part { rewind_match_start() }\nPart: /H/\n",
+      input = "aH",
+      diagnostic_code = "source_location_cursor_regression",
+      marker = "LINKEDSPEC_SOURCE_LOCATION_ERROR:source_location_cursor_regression",
+    },
+  }
+  assert(#value_cases == 10 and #error_cases == 2, "emitted gap case inventory drifted")
+
+  local expected_values = json.harray()
+  local emitted_observation, emitted_root = with_temp_directory(function(workspace)
+    local traces = workspace .. "/traces"
+    assert(command_succeeded("mkdir -p -- " .. shell_quote(traces)),
+      "unable to create emitted gap trace directory")
+    local manifest_values = json.array()
+    for index, fixture in ipairs(value_cases) do
+      local identity = "generated-source/lua-gap/" .. fixture.name .. ".spec"
+      local fixture_compiled = compile_metadata(fixture.source, identity)
+      local expected = linkedspec.runtime_parse(
+        linkedspec.runtime_engine(fixture_compiled),
+        fixture.input
+      ).value
+      local plan = linkedspec.build_generated_rule_plan(fixture_compiled)
+      local plan_json = json.array()
+      for plan_index, row in ipairs(plan) do
+        plan_json[plan_index] = linkedspec.generated_plan_row_to_json(row)
+      end
+      expected_values[fixture.name] = json.harray({ value = expected, plan = plan_json })
+
+      local emitted_source = linkedspec.emit_lua_source_v2(fixture_compiled, identity)
+      check(emitted_source:find("linkedspec-generated-source-v2", 1, true) ~= nil,
+        fixture.name .. " emitted contract")
+      check(emitted_source:find("LINKEDSPEC_GENERATED_SOURCE_FORMAT = 2", 1, true) ~= nil,
+        fixture.name .. " emitted format")
+      local module_path = workspace .. "/value_" .. index .. ".lua"
+      local trace_path = traces .. "/" .. fixture.name .. ".trace"
+      write_file(module_path, emitted_source)
+      manifest_values[index] = json.harray({
+        name = fixture.name,
+        path = module_path,
+        input = fixture.input,
+        trace = trace_path,
+      })
+    end
+
+    local manifest_errors = json.array()
+    for index, fixture in ipairs(error_cases) do
+      local identity = "generated-source/lua-gap/" .. fixture.name .. ".spec"
+      local native_failure = native_error(fixture.source, fixture.input)
+      check(native_failure.diagnostic.code == fixture.diagnostic_code and
+        native_failure.message == fixture.marker,
+        fixture.name .. " native typed error")
+      local module_path = workspace .. "/error_" .. index .. ".lua"
+      local trace_path = traces .. "/" .. fixture.name .. "-error.trace"
+      write_file(module_path, linkedspec.emit_lua_source_v2(
+        compile_metadata(fixture.source, identity),
+        identity
+      ))
+      manifest_errors[index] = json.harray({
+        name = fixture.name,
+        path = module_path,
+        input = fixture.input,
+        trace = trace_path,
+      })
+    end
+
+    local manifest_path = workspace .. "/manifest.json"
+    local runner_path = workspace .. "/runner.lua"
+    local stdout_path = workspace .. "/stdout.json"
+    local stderr_path = workspace .. "/stderr.txt"
+    write_file(manifest_path, json.encode(json.harray({
+      values = manifest_values,
+      errors = manifest_errors,
+    })))
+    write_file(runner_path, [[
+local linkedspec = require("linkedspec")
+local json = linkedspec.json
+
+local function load_module(path)
+  local chunk, failure = loadfile(path)
+  if chunk == nil then error(failure, 0) end
+  return chunk()
+end
+
+local function read_file(path)
+  local handle = assert(io.open(path, "rb"))
+  local value = assert(handle:read("*a"))
+  assert(handle:close())
+  return value
+end
+
+local function trace_config(path)
+  return linkedspec.with_trace_reset_file(linkedspec.with_trace_file(
+    linkedspec.trace_config_enabled(linkedspec.TRACE_DEBUG),
+    path
+  ))
+end
+
+local function capture_failure(operation)
+  local ok, value = pcall(operation)
+  assert(not ok, "generated operation unexpectedly succeeded")
+  assert(linkedspec.is_generated_source_error(value), tostring(value))
+  return linkedspec.generated_source_error_to_json(value)
+end
+
+local manifest_file = assert(io.open(assert(arg[1]), "rb"))
+local manifest = json.decode(assert(manifest_file:read("*a")))
+assert(manifest_file:close())
+local result = json.harray({ values = json.harray(), errors = json.harray() })
+for _, fixture in ipairs(manifest.values) do
+  local generated = load_module(fixture.path)
+  local plan = json.array()
+  for index, row in ipairs(generated.plan()) do
+    plan[index] = linkedspec.generated_plan_row_to_json(row)
+  end
+  local direct = generated.execute(fixture.input)
+  local traced = generated.execute_with_trace(fixture.input, trace_config(fixture.trace))
+  result.values[fixture.name] = json.harray({
+    direct = direct,
+    traced = traced,
+    plan = plan,
+    trace = read_file(fixture.trace),
+  })
+end
+for _, fixture in ipairs(manifest.errors) do
+  local generated = load_module(fixture.path)
+  local direct = capture_failure(function() return generated.execute(fixture.input) end)
+  local traced = capture_failure(function()
+    return generated.execute_with_trace(fixture.input, trace_config(fixture.trace))
+  end)
+  result.errors[fixture.name] = json.harray({
+    direct = direct,
+    traced = traced,
+    trace = read_file(fixture.trace),
+  })
+end
+io.write(json.encode(result), "\n")
+]])
+
+    local runtime = os.getenv("LINKEDSPEC_LUA_TEST_RUNTIME") or
+      (type(jit) == "table" and "luajit" or "lua")
+    local command = table.concat({
+      "env",
+      shell_quote("LUA_PATH=" .. (os.getenv("LUA_PATH") or package.path)),
+      shell_quote("LUA_CPATH=" .. (os.getenv("LUA_CPATH") or package.cpath)),
+      shell_quote(runtime),
+      shell_quote(runner_path),
+      shell_quote(manifest_path),
+      ">" .. shell_quote(stdout_path),
+      "2>" .. shell_quote(stderr_path),
+    }, " ")
+    check(command_succeeded(command), "fresh emitted gap host status")
+    check_equal(read_file(stderr_path), "", "fresh emitted gap host stderr")
+    return json.decode(read_file(stdout_path))
+  end)
+
+  for _, fixture in ipairs(value_cases) do
+    local actual = emitted_observation.values[fixture.name]
+    local expected = expected_values[fixture.name]
+    check_json_equal(actual.direct, expected.value, fixture.name .. " emitted direct value")
+    check_json_equal(actual.traced, expected.value, fixture.name .. " emitted traced value")
+    check_json_equal(actual.plan, expected.plan, fixture.name .. " emitted plan")
+    local trace = actual.trace
+    check(trace:find("generated_rule_enter", 1, true) ~= nil,
+      fixture.name .. " emitted enter trace")
+    check(trace:find("generated_rule_exit", 1, true) ~= nil,
+      fixture.name .. " emitted exit trace")
+    check(trace:find("generated-source/lua-gap/" .. fixture.name .. ".spec", 1, true) ~= nil,
+      fixture.name .. " emitted trace identity")
+  end
+  for _, fixture in ipairs(error_cases) do
+    local routes = emitted_observation.errors[fixture.name]
+    for _, route in ipairs({ "direct", "traced" }) do
+      local failure = routes[route]
+      check_equal(failure.stage, "execute_generated", fixture.name .. " " .. route .. " stage")
+      check_equal(failure.code, "generated_execution_failed", fixture.name .. " " .. route .. " code")
+      check_equal(failure.source_identity,
+        "generated-source/lua-gap/" .. fixture.name .. ".spec",
+        fixture.name .. " " .. route .. " identity")
+      check(failure.detail:find(fixture.marker, 1, true) ~= nil,
+        fixture.name .. " " .. route .. " detail")
+    end
+    local trace = routes.trace
+    check(trace:find("generated_rule_enter", 1, true) ~= nil,
+      fixture.name .. " emitted error enter trace")
+    check(trace:find("generated-source/lua-gap/" .. fixture.name .. ".spec", 1, true) ~= nil,
+      fixture.name .. " emitted error trace identity")
+  end
+  check(command_succeeded("test ! -e " .. shell_quote(emitted_root)),
+    "fresh emitted gap workspace cleanup")
+  if assertions - emitted_assertions_start ~= 105 then
+    fail("emitted gap assertion inventory drifted: expected 105, got " ..
+      tostring(assertions - emitted_assertions_start))
   end
 end
 

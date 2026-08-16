@@ -10,6 +10,23 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-16 (`INTER-MATCH-GAP-CAPTURE.6.4` — shared Lua independently emitted proof): activation base is clean
+  atomic 249 at `b7708cde`; adding the permanent workspace owner before updating the oracle yields the exact
+  planned RED at 18→19.
+- Do not add an emitted execution engine. `emit_lua_source_v2` already embeds normalized `SpecFile` JSON and
+  reconstructs the shared compiler/interpreter; emit ten value and two typed-error modules unchanged, then load
+  each module independently in a fresh child for the selected ABI.
+- Compare emitted direct/traced results against native authority, including exact plans and generated trace/source
+  identity. The value matrix spans Unicode/empty gaps, falsey values, child cursors, nesting, rollback, lifecycle,
+  tails, minimum failure, direct entry, and legacy behavior; typed cases preserve unavailable/regression details.
+- Trace files belong to the emitted workspace. Consume their bytes inside the fresh child before recursive cleanup,
+  return those bytes in the child JSON envelope, and compare them in the parent only after the workspace is gone.
+- Route module, runner, manifest, stdout/stderr, and traces below repository-managed `TMPDIR`. Register only the
+  permanent consumer as owner 19; the three PUC-Lua/LuaJIT native modules and every cleanup guard remain exact.
+- Focused proof is explicit 362 assertions per ABI (178 metadata + 33 native + 46 carrier + 105 emitted), complete
+  Lua 177 per ABI, root 106, cursor 912, primary 66x2, corpus 105, storage 19/three modules, rooted dormancy, and
+  unchanged recognition/duplicate/typed/generated ledgers. Primary admission and rollout remain `.6.5`-owned.
+
 - 2026-08-16 (`INTER-MATCH-GAP-CAPTURE.6.3` — shared Lua normalized/descriptor/generated carrier): activation base
   is clean atomic 248 at `4e625a9f`; the explicit carrier RED passes reconstruction and stops at missing descriptor
   `regex_slots` before production movement.

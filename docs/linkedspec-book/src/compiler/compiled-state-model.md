@@ -150,7 +150,8 @@ live on that invocation; the detached transaction state remains exactly cursor/b
 rules alone preselect before `LS`, commit child-extended state before `IT`, and install successful tails before
 `LX`/`EX`/`E`. The four zero-argument helpers resolve privately without entering the 246-name supported ActionIR
 inventory. Normalized `SpecFile` JSON is the sole reconstruction carrier, and direct/traced generated-v2
-entrypoints execute the same engine lifecycle and typed failures. Independently emitted execution remains `.6.4`.
+entrypoints execute the same engine lifecycle and typed failures. Independently emitted modules now reconstruct
+that same state in fresh PUC-Lua and LuaJIT children without changing the emitter, compiled shape, or plan.
 
 The Julia backend now implements the same narrow staged provider before compiled state is built. Its public path is:
 

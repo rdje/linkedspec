@@ -10,6 +10,26 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-16 — INTER-MATCH-GAP-CAPTURE.6.4 — prove Lua emitted gap execution
+
+- Activated task-tree-first from clean atomic-249 commit `b7708cde`. Adding the permanent emitted workspace
+  owner first produced the exact expected storage RED: the unchanged oracle rejected only owner count 18→19.
+- Kept `emit_lua_source_v2` unchanged. Ten value modules and two typed-error modules are independently loaded by
+  fresh PUC-Lua and LuaJIT children; every module compares direct/traced values or errors with native authority,
+  retains the exact generated plan, and proves trace/source identity.
+- The emitted matrix covers Unicode and empty spans, falsey payloads, child-extended cursors, nested isolation,
+  rollback, lifecycle order and terminal tails, failed minimum, direct entry, legacy behavior, unavailable context,
+  and cursor regression. It adds 105 assertions to the permanent dormant consumer for 362 per ABI.
+- Modules, runner, manifest, stdout/stderr, and trace bytes live below repository-routed `TMPDIR`. The child returns
+  trace bytes before recursive workspace cleanup; the exact executable owner census is now 19 while all three
+  dual-ABI native modules remain exact.
+- Complete Lua passes 177 package tests per ABI, root routes 106, cursor descriptors 912, primary 66x2, corpus
+  105, and storage 19/three modules. Neutral/rooted governance remains 5/4/58 with ten Lua dormancy mutations and
+  two exact Lua skips; recognition 137/246/58, duplicate-slot 7/0/59, typed-source 9/5/114, and generated-source
+  80/0/0 remain unchanged.
+- No production emitter, generated format 2 or `{label,family}` plan, primary/admission route, rollout row, legacy
+  event timing, facade, or outward surface moves. Final Lua admission remains solely `.6.5`-owned.
+
 ## 2026-08-16 — INTER-MATCH-GAP-CAPTURE.6.3 — carry Lua gap generated execution
 
 - Activated task-tree-first from clean atomic-248 commit `4e625a9f`. The deliberate carrier RED passed normalized

@@ -116,8 +116,9 @@ normalization-sensitive identity; an all-ASCII-digit name is invalid because bra
 positional selectors. A name is unique within its rule. Perl, Rust, Dart, and Julia privately admit this surface
 and its gap runtime. Shared PUC Lua/LuaJIT now parse, validate, normalize, compile, and privately execute the same
 native gap lifecycle behind one dormant consumer. Normalized reconstruction, detached compatible descriptors,
-and same-engine direct/traced generated-v2 execution are also proven; independently emitted and primary
-admission remain pending, so neither Lua runtime row is promoted yet.
+same-engine direct/traced generated-v2 execution, and independently loaded emitted-source parity in fresh
+PUC-Lua/LuaJIT children are also proven. Primary admission remains pending, so neither Lua runtime row is
+promoted yet.
 
 Named selection survives declaration reorder. Positional selection deliberately does not: if another slot is
 inserted before `word`, `Token[word]` follows the name while `Token[0]` continues to mean the first authored slot.
