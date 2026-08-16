@@ -1061,22 +1061,22 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 ### 4.9.1.3 `tools/check_inter_match_gap_capture_contract.py` — executable-neutral gap oracle
 
 - **WHAT:** the format-1 neutral JSON authority for `linkedspec-inter-match-gap-capture-v1`. It executes exact
-  Unicode/empty/child/transaction state and rejects 61 semantic/topology corruptions at rollout 8 complete + 1
-  pending. Inter-match gap-capture recurring governance is current across its complete neutral plus six private runtime rows while public no-drift remains pending.
+  Unicode/empty/child/transaction state and rejects 63 semantic/topology corruptions at rollout 9 complete + 0
+  pending. Inter-match gap public no-drift is current: six documents, twelve stale-current denials, ten outward guards, and twenty-nine reason-checked mutations.
 - **WHEN:** implementing `.1.3`, named regex declarations/selectors, `entry_slot()`, `@capture_gaps`, the three
   gap accessors, or any backend/runtime/recurring leg.
 - **HOW:** run `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py`, retrieve
   [[inter-match-gap-executable-contract-plan]], and read the complete frozen section in
   `docs/tasks/INTER-MATCH-GAP-CAPTURE.md`. Run
   `bash tools/check_inter_match_gap_capture_six_runtime.sh` for the ordered repository-routed governance proof;
-  it now executes every admitted private runtime route with no skip. Rerun both prerequisite matrices from §4.9.1.2 before changing
+  it executes every admitted runtime route with no skip. Rerun both prerequisite matrices from §4.9.1.2 before changing
   either dependency. For current mechanism evidence, use `return_descriptor` for
   `{family,cursor_policy,edge_ownership,uses_loop,execution_shape,resolved_edges}`, `dump_parser_source` for exact
   selection → `LS` → action/target → `LE` order, and the corrected historical live probe recorded in the task.
-- **BOUNDARY:** neutral `.1` and private runtime `.2-.6` are complete. Closeout `.7.1` alone owns recurring
-  admission, `.7.2` owns public language/compatibility/no-drift admission, and `.7.3` owns unchanged recomposition
-  plus the typed-source handoff. Do not widen README, facades, semantic/MCP, CLI, capability, or typed-source
-  surfaces implicitly.
+- **BOUNDARY:** neutral `.1`, runtime `.2-.6`, recurring `.7.1`, and public language/compatibility/no-drift `.7.2`
+  are complete. Shared calls are exactly `entry_slot`, `gap_span`, `gap_text`, and `gap_kind`; the outward guards
+  remain unchanged. `.7.3` owns unchanged recomposition plus the typed-source handoff. Do not widen README,
+  facades, semantic/MCP, CLI, capability, or typed-source surfaces implicitly.
 
 ### 4.9.1.4 Perl gap implementation preflight
 
@@ -1172,7 +1172,7 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py
   ```
 
-- **OUTPUT:** 137 ActionIR rows (133 live plus four dedicated), 246 live call rows, token 8 positive / 17 negative,
+- **OUTPUT:** 137 ActionIR rows (133 live plus four dedicated), 250 live call rows, token 8 positive / 17 negative,
   six fixed-point graphs, six mark cases, eight progress cases, fifteen diagnostics, and 58 rejected mutations;
   rollout is 9/9 complete. A separate public-sequence projection locks three book
   pages, 26 forbidden claims, and 45 mutations; the guide guard locks one document, 14 stale claims, and 18

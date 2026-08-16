@@ -122,6 +122,26 @@ void main() {
     );
   });
 
+  test('classifies the four current inter-match gap calls exactly', () {
+    const gapCalls = {'entry_slot', 'gap_kind', 'gap_span', 'gap_text'};
+    expect(supportedActionIrCallNames.intersection(gapCalls), gapCalls);
+
+    final resolution = resolveActionBlockContracts(
+      parseActionBlock('entry_slot(); gap_kind(); gap_span(); gap_text()'),
+    );
+    expect(resolution.ok, isTrue);
+    expect(
+      resolution.contracts.map((contract) => contract.canonicalName).toSet(),
+      gapCalls,
+    );
+    expect(
+      resolution.contracts.every(
+        (contract) => contract.family == 'inter_match_gap',
+      ),
+      isTrue,
+    );
+  });
+
   test('resolves exact-arity user calls before helper fallback', () {
     final registry = UserFunctionRegistry.fromFunctions([
       _function('normalize', const ['value']),

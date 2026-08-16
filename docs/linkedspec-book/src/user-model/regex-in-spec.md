@@ -113,13 +113,13 @@ Top::OR
 Horizontal whitespace around `=` is insignificant. Named and anonymous declarations share one source-ordered,
 zero-based slot list. A slot name uses the pinned Unicode 17.0.0 `XID_Continue` class, with exact case- and
 normalization-sensitive identity; an all-ASCII-digit name is invalid because bracket digits are reserved for
-positional selectors. A name is unique within its rule. Perl, Rust, Dart, and Julia privately admit this surface
-and its gap runtime. Shared PUC Lua/LuaJIT now parse, validate, normalize, compile, and privately execute the same
-native gap lifecycle through one shared consumer. Normalized reconstruction, detached compatible descriptors,
+positional selectors. A name is unique within its rule. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT admit this
+surface and its gap runtime as one current cross-backend language contract. Shared PUC Lua/LuaJIT parse, validate,
+normalize, compile, and execute the same native gap lifecycle through one shared consumer. Normalized reconstruction, detached compatible descriptors,
 same-engine direct/traced generated-v2 execution, and independently loaded emitted-source parity in fresh
 PUC-Lua/LuaJIT children are also proven. Existing-primary parity and the exact nine-role ledger now run once per
-ABI in ordinary, canonical, and rooted routes, so both Lua private runtime rows are admitted at governance 7/2/60.
-Recurring/public admission remains pending.
+ABI in ordinary, canonical, and rooted routes. Recurring and public no-drift are complete at governance 9/0/63;
+the four gap calls are members of the 250-name shared inventory without widening outward facades or schemas.
 
 Named selection survives declaration reorder. Positional selection deliberately does not: if another slot is
 inserted before `word`, `Token[word]` follows the name while `Token[0]` continues to mean the first authored slot.

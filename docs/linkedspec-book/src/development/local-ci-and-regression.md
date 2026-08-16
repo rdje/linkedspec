@@ -234,25 +234,26 @@ containment and relocation, CLI 66/66 in both option environments, RAM 62%, Phas
 and this complete matrix through its exact success marker. The combined program-wide `.14.8` public-no-drift row
 remains pending.
 
-Inter-match gap-capture recurring governance is current across the complete neutral and six private runtime rows; no runtime route remains an explicit skip and public no-drift remains pending.
+Inter-match gap public governance is current at 9 complete / 0 pending with 63 neutral mutations and exact public no-drift proof.
 Perl `.2.1-.2.3` established metadata, private live behavior, and independently loaded generated parity. Admission
 `.2.4` makes the full metadata/live/generated consumer the default, registers it once in ordinary canonical CI
 and once in the rooted recurring route, promotes only `perl_runtime`, and retires the obsolete dormancy fence.
-The neutral checker now rejects 61 semantic/topology mutations at rollout 8 complete / 1 pending: all six private
-runtime regressions and recurring composition are locked, while facade/schema/semantic/MCP/CLI/README surfaces
-remain absent.
+The neutral checker now rejects 63 semantic/topology mutations: all six runtime regressions, recurring
+composition, current accessor status, and final public no-drift are locked. Its separate public suite requires
+six documents, twelve stale-current denials, ten outward guards, and 29 reason-checked mutations; facade,
+descriptor, semantic, MCP, CLI, README, and result-schema surfaces remain unchanged.
 Behavior-free Dart `.4.0` froze `.4.1-.4.5` across authored/static metadata, same-authority native execution,
 reconstructed/descriptor/generated carriers, independently analyzed emitted source, and primary/nine-role
 admission. `.4.1-.4.4` supplied those private carriers behind a skipped consumer. Admission `.4.5` removes that
 skip, proves the existing primary adapter, executes all nine declared roles exactly once, registers the consumer
 once in canonical CI and once after Rust in the rooted route, and promotes only `dart_runtime`. The checker now
-rejects 61 semantic mutations at rollout 8 complete / 1 pending plus ten Rust, ten Dart, ten Julia, and sixteen
+rejects 63 semantic mutations at rollout 9 complete / 0 pending plus ten Rust, ten Dart, ten Julia, and sixteen
 Lua admission mutations;
 ADR `0074` explains the additional Dart regression guard. Maintained Dart commands use
 `tools/run_dart_project_data.sh` or `tools/run_dart_local.sh`; the storage oracle locks 23 temporary owners and 47
 packages on repository storage. Shared Lua `.6.5` removes the final runtime skips by executing its same
-392-assertion consumer on PUC Lua and LuaJIT. Recurring proof is now current under `.7.1`; public no-drift remains
-pending and no outward surface moves.
+392-assertion consumer on PUC Lua and LuaJIT. Recurring proof is current under `.7.1`; `.7.2` admits public
+no-drift and exactly four shared gap calls without moving any outward surface.
 Behavior-free Julia `.5.0` freezes `.5.1-.5.5` before implementation. Its focused baseline passes duplicate-slot
 121, rule-local cursor 104, recognition transaction 207, typed source 127, and source emitter 65 (624 assertions),
 plus the existing primary process check and exact pre-emitted storage 19 temporary owners / 5 package trees. Julia
@@ -274,16 +275,16 @@ The always-on neutral command is
 `tools/check_inter_match_gap_capture_six_runtime.sh` driver repeats that authority exactly once, then runs Perl,
 Rust, Dart, Julia, PUC Lua, and LuaJIT once each in fixed order. Set
 `LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1` to exercise this governance route in canonical local CI. Rollout is
-8 complete / 1 pending: all private runtime routes and recurring proof are current, while public no-drift remains
-the sole closeout row. The switch proves exact route topology, role coverage, and storage locality without
-admitting an outward facade or schema.
+9 complete / 0 pending: all runtime routes, recurring proof, and public no-drift are current. The switch proves
+exact route topology, role coverage, and storage locality without admitting an outward facade or schema.
 At Perl `.2.4` and parent `.2`, definitive signoff passed the full 124-test consumer ordinarily and through the then-partial route,
 the rendered mdBook, Knowledge 834/6,995, all eight doctrines, containment/relocation, CLI 66/66 twice, RAM 57%,
 Phase 0 1,031/1,031 in 765 seconds, five ordered later-runtime skips, and `[ci] local CI gate passed`. Rust `.3`
 then joined the route. Its definitive `.3.5` gate passed the 17-owner Rust storage oracle, all eight
 doctrines, repository containment and moved-root execution, CLI conformance at 66/66 in both option environments,
 RAM at 73%, Phase 0 at 1,031/1,031, and the exact neutral/Perl/Rust route through local-CI exit 0. Dart, Julia,
-and both Lua ABIs have since joined that same route; no outward public surface has moved yet.
+and both Lua ABIs have since joined that same route; public call admission leaves the outward guarded surfaces
+unchanged.
 
 Dart's admitted consumer covers its internal value core and all 92+7 helper projections across native,
 reconstructed, generated-plan, and freshly emitted execution. The independent rollout checker requires its
@@ -870,13 +871,13 @@ The same gate also enforces exhaustive current ActionIR coverage:
 perl tools/check_language_capability_coverage.pl
 ```
 
-That checker requires exact Dart/Julia/Lua inventory identity at 246 current names, occurrence across the mdBook
-and governed 105-case corpus plus exact named-mark fixture, every one of 122 independently derived public Perl
+That checker requires exact Dart/Julia/Lua inventory identity at 250 current names, occurrence across the mdBook
+and governed 105-case corpus plus exact named-mark fixture and the public gap-contract example, every one of 126 independently derived public Perl
 contracts in each backend inventory, and rejection of fourteen classified non-public names: nine compatibility,
 legacy, or internal lowering contracts plus four grammar-owned recognition-transaction intrinsics and the
 grammar-owned recursive-observation intrinsic. It separately
 requires Dart's, Julia's, and Lua's seven source-boundary compatibility aliases and canonical targets to match the neutral
-typed-source contract without inflating the common 246-name inventory. Lua's focused consumer executes those
+typed-source contract without inflating the common 250-name inventory. Lua's focused consumer executes those
 mappings through native, loaded, reconstructed, generated-plan, and emitted routes on both PUC Lua and LuaJIT.
 
 ## Focused Rust Gate

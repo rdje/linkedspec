@@ -219,7 +219,7 @@ matched or unmatched attempt may be rolled back explicitly.
 The token cannot be copied, compared, returned, put in an array or harray, passed to a function/codeblock, retried,
 or used by another invocation or source. Every path performs one attempt and one commit or rollback before ordinary
 effects. The four forms are dedicated ActionIR nodes, not ordinary helpers, host exception syntax, or aliases for
-the compatibility cursor stack. Consequently they are not added to the aligned 246-name ordinary helper-call
+the compatibility cursor stack. Consequently they are not added to the aligned 250-name ordinary helper-call
 inventory; exhaustive coverage classifies the four exact intrinsic names separately while still requiring all 122
 ordinary public Perl calls in every backend inventory.
 
@@ -231,7 +231,7 @@ external/host work, raw code, and unknown nodes fail closed. Rule calls are clas
 runtime checks the same boundary before performing an effect.
 
 The shared contract now has an executable backend-neutral authority. Its independent checker covers 133 current
-ActionIR node kinds plus four dedicated transaction kinds, all 246 current call contracts, falsey token results,
+ActionIR node kinds plus four dedicated transaction kinds, all 250 current call contracts, falsey token results,
 recursive effect fixed points, invocation-frame marks, cursor-only progress, fifteen portable diagnostics, and 58
 drift mutations:
 
@@ -518,13 +518,13 @@ The active baseline leaves storage and AST shape to action code. “Automatic”
 gap and rolling its boundary, not appending a mandatory result node.
 
 ADR `0045` adopts **inter-match gap capture** as the formal name and **lossless segmentation** as the
-broader model. `@capture_gaps` is the accepted neutral directive. All six private runtimes now recognize,
-statically validate, and execute it through native, reconstructed/generated, emitted, and primary roles.
-Recurring/public completion and public exposure remain pending.
+broader model. `@capture_gaps` is the accepted directive. All six runtimes recognize, statically validate, and
+execute it through native, reconstructed/generated, emitted, and primary roles.
+Inter-match gap capture is public and current: all nine rollout rows are complete, and its four shared accessors preserve exact source segmentation.
 `INTER-MATCH-GAP-CAPTURE.1.0` froze its executable-neutral plan: exact prefix/interstitial/tail and empty
 spans, failure and rollback, recursion, typed source records, diagnostics, compatibility, routing, and rollout are
 specified before backend work begins. `.1.1` now makes that neutral JSON artifact and independent checker
-executable. Current private rollout is 7 complete + 2 pending with no outward admission.
+executable; `.7.2` completes the public language and documentation projection at 9 complete + 0 pending.
 
 The broader manual `capture_*` and `mark_*` APIs remain useful. They do not redefine this original
 automatic repeated-action behavior.
@@ -548,10 +548,10 @@ Top::OR
 ```
 
 Horizontal whitespace around `=` is insignificant. Same-line `name=/regex/` at rule-paragraph level
-declares a stable rule-local slot rather than assigning a variable. Existing unindexed and numeric
-selectors remain compatibility forms. Perl, Rust, Dart, and Julia privately admit the declaration/selector
-syntax, directive metadata, and native plus reconstructed/generated/emitted/primary
-`entry_slot()`/gap-accessor behavior. No backend exposes these forms as a public cross-backend contract yet.
+declares a stable rule-local slot rather than assigning a variable. Existing unindexed and numeric selectors
+remain compatibility forms. Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT share the declaration/selector syntax,
+directive metadata, and native plus reconstructed/generated/emitted/primary `entry_slot()`/gap-accessor behavior
+as one current cross-backend language contract.
 
 Brackets are the selector namespace. `Document[1]` means positional compatibility, so declaration reordering
 can change its target; `Document[section]` means stable identity and must survive reordering. An implementation
@@ -566,11 +566,14 @@ The implementation order is also explicit. `INTER-MATCH-GAP-CAPTURE.1-.7` owns n
 `@capture_gaps`, lifecycle and compatibility policy, six-runtime behavior, carriers, and public admission.
 Typed-source composition consumes that completed contract afterward; it does not define a second gap language.
 
-### Executable neutral contract — all six private runtime routes admitted
+### Executable public contract — all six runtime routes admitted
 
 The behavior-free contract now lives at `capability_conformance/inter_match_gap_capture_contract.json`, uses id
 `linkedspec-inter-match-gap-capture-v1`, and is checked independently by
-`tools/check_inter_match_gap_capture_contract.py`. Inter-match gap-capture recurring governance is current across the complete neutral and six private runtime rows; public no-drift remains pending.
+`tools/check_inter_match_gap_capture_contract.py`. Its rollout is complete across the neutral contract, Perl,
+Rust, Dart, Julia, PUC Lua, LuaJIT, recurring proof, and public no-drift. The language projection contains exactly
+the four current `source_read` calls `entry_slot`, `gap_kind`, `gap_span`, and `gap_text`; this does not turn them
+into facade methods or widen outward descriptor, semantic, MCP, CLI, capability, README, or result schemas.
 The Perl reference implements authored/static metadata, private native-live behavior, and independently loaded
 generated parity. Admission `.2.4` runs that complete consumer in canonical CI and in the rooted recurring route,
 promotes only `perl_runtime`, and advances the checker to 56 mutations without outward public admission.
@@ -591,12 +594,67 @@ Canonical local CI always runs the neutral checker and exposes the same governan
 `LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1`. Ordinary CI and the opt-in route execute every admitted consumer once;
 the latter additionally proves neutral-first Perl-then-Rust-then-Dart-then-Julia-then-PUC-Lua-then-LuaJIT order.
 
-The neutral artifact locks 8 positive and 10 negative authored fixtures, 3 source fixtures, 8 private gap fields,
+The neutral artifact locks 8 positive and 10 negative authored fixtures, 3 source fixtures, 8 internal gap fields,
 16 main-machine transitions, 10 segmentation cases, 3 terminal routes, 7 transaction/recursion/return-channel
-cases, 6 compatibility rows, 9 diagnostics, and 9 rollout legs. Recurring topology and public-no-overclaim
-governance plus all six runtime and recurring regression locks now total 61 semantic mutations. Ten Rust, ten
-Dart, ten Julia, and sixteen shared-Lua role/registration mutations are separate. Rollout is 8 complete / 1
-pending: recurring proof is current, while public no-drift remains the sole closeout row.
+cases, 6 compatibility rows, 9 diagnostics, and 9 rollout legs. The neutral checker rejects 63 semantic/topology
+mutations. Public no-drift separately requires exactly six documents, twelve stale-current denials, ten outward
+guards, and 29 reason-checked omission/injection mutations. Ten Rust, ten Dart, ten Julia, and sixteen shared-Lua
+role/registration mutations remain separate.
+
+### Current lossless-segmentation example
+
+The target rule owns item recognition and exposes the exact slot through `entry_slot()`. The enclosing seek loop
+owns only the gaps between accepted items:
+
+```text
+Item:
+ word=/[A-Za-z]+/
+ I {
+   return(hash("slot", entry_slot(), "text", entry_text()))
+ }
+
+List::OR
+ @capture_gaps
+ I { set(parts, array()) }
+ -> Item[word] {
+   push(parts, hash(
+     "kind", gap_kind(),
+     "span", gap_span(),
+     "text", gap_text(),
+     "item", call(Item)
+   ))
+ }
+ LX {
+   push(parts, hash("kind", gap_kind(), "span", gap_span(), "text", gap_text()))
+   return(copy(parts))
+ }
+```
+
+For `αalpha, beta | gamma\n- deltaω`, the item slot remains `word`; the decoded-scalar gaps are prefix `α`,
+interstitial `, `, ` | `, and `\n- `, then tail `ω`. The same model preserves empty prefix, interstitial, and tail
+spans rather than suppressing them. A numeric `Item[0]` edge can reach the same regex position but deliberately
+retains numeric provenance; `Item[word]` retains stable slot identity across declaration reordering. A direct
+call of `Item` has no incoming edge, so `entry_slot()` returns `undef`.
+
+`LX` exposes a successful default-loop tail as shown. Satisfied repetition exposes the tail to `EX` or `E` by
+the same rule. An accepted child may consume beyond its selected entry match; only its post-`LE` exit commits the
+next boundary. A failed edge, recognition rollback, or abnormal unwind commits nothing. Nested and recursive
+invocations suspend and restore the parent candidate on the existing invocation authority.
+
+Static diagnostics reject invalid or duplicate slot names, unknown/out-of-range/malformed selectors, duplicate
+or ineligible `@capture_gaps`, and conflicts with anonymous legacy markers. Reading a gap accessor outside its
+candidate or terminal phase raises `gap_capture_context_unavailable` with rule, source, invocation, phase, and
+accessor context. A backwards child exit raises the existing source-location cursor-regression diagnostic.
+
+Migration is intentionally non-aliasing:
+
+| Existing surface | Current relationship |
+| --- | --- |
+| `@capture_slice`, `@capture_from_here`, `@move_pos` | Retained divergent behavior; none aliases `@capture_gaps`. |
+| `Rule[N]` | Retained positional selector; reordering may change the selected declaration. |
+| `Rule[name]` | Stable rule-local slot identity with exact authored provenance. |
+| Named marks and explicit capture helpers | Independent and valid alongside lossless segmentation. |
+| `@emit_gaps` | Absent; gaps are available to actions and are never appended automatically. |
 
 ### Perl private live and generated implementation — exact private admission
 
@@ -961,7 +1019,7 @@ The two named edges retain stable identity if declarations are reordered. `Docum
 positional. A numeric edge may resolve a named declaration, but that does not turn the numeric source spelling into
 stable named provenance.
 
-Private live/generated `entry_slot()` returns `undef` for a direct rule invocation. For an action-edge entry it
+Current `entry_slot()` returns `undef` for a direct rule invocation. For an action-edge entry it
 returns a detached ordinary harray with `target_rule`, `regex_index`, `slot_id`, `selector_kind`, and
 `authored_selector`. It exposes identity, not a regex object or matcher authority.
 
@@ -971,7 +1029,7 @@ regexes and lifecycle. The enclosing rule owns only repeated choice and gap stat
 
 One activated invocation owns an independent committed gap cursor. The live/generated event order is:
 
-| Boundary | Private live/generated gap behavior |
+| Boundary | Current gap behavior |
 | --- | --- |
 | Rule entry | Initialize the committed gap cursor at the Unicode-scalar entry position. |
 | After selection, before enclosing `LS` | Create `[gap_cursor, selected_match.start)` as `prefix` or `interstitial`. |
@@ -981,7 +1039,7 @@ One activated invocation owns an independent committed gap cursor. The live/gene
 | Successful default-loop miss | Expose `[gap_cursor, input_end)` as `tail` to `LX`. |
 | Satisfied repetition miss / maximum | Expose the same tail to `EX` / `E`. |
 
-The private live/generated accessors are deliberately small:
+The current shared accessors are deliberately small:
 
 - `gap_span()` → detached `{source_id, start, end, provenance}` with `provenance = "gap"`;
 - `gap_text()` → exact decoded text materialized from that span;
@@ -1016,11 +1074,11 @@ metadata; and both generated entrypoints preserve private context and gap-owned 
 original typed errors. Five independently loaded groups / 138 internal assertions compare canonical values,
 cursors, lifecycle, recursion, rollback, diagnostics, direct entry, and legacy rolling against live execution.
 
-The rollout has nine ordered legs: neutral, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurring proof, and public
-no-drift. Runtime consumers will cover native/live execution, reconstructed state, descriptors, generated plans
-and independently loaded emitted source, target lifecycle, recursion/rollback, diagnostics, and primary commands.
-Until public closeout, README, facades, semantic/MCP schemas, CLI, capability status, and typed-source
-`lossless_gap_composition` remain unchanged.
+The rollout has nine complete ordered legs: neutral, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurring proof,
+and public no-drift. Runtime consumers cover native/live execution, reconstructed state, descriptors, generated
+plans and independently loaded emitted source, target lifecycle, recursion/rollback, diagnostics, and primary
+commands. Public language admission deliberately leaves README, facades, semantic/MCP schemas, CLI, capability
+status, and typed-source `lossless_gap_composition` unchanged.
 
 ## `mark_*`: named checkpoints
 

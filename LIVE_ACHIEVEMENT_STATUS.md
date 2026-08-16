@@ -2,38 +2,40 @@
 
 ## Current Activity
 
-- Atomic 252 landed cleanly at `be240c14`; recurring-only admission `INTER-MATCH-GAP-CAPTURE.7.1` is canonical-
-  signoff-complete from that exact boundary for intended atomic 253; no push and no public or implementation
-  behavior has moved.
-- The permanent shared consumer passes 392 assertions per ABI: 178 metadata + 33 native + 46 carrier + 105
-  emitted + 30 admission. Its exact nine-role ledger executes once on each ABI in explicit, ordinary, canonical,
-  and rooted routes; `primary_command` reuses unchanged `linkedspec.run_primary_cli`.
-- Complete Lua passes 178 package tests per ABI, primary 66x2, corpus 105, and storage 19 owners / three native
-  modules. Rooted proof executes neutral, Perl 124, Rust 1, Dart 5, Julia 319, PUC Lua 392, and LuaJIT 392.
-- Checker-first proof rejects the target artifact with exact `expected counts drifted`. The synchronized neutral
-  authority promotes only `recurring`, appends only `recurring_regression`, and passes at 8/1/61. Its rooted
-  route remains neutral, Perl 124, Rust 1, Dart 5, Julia 319, PUC Lua 392, and LuaJIT 392 in exact order.
-- Five governed status sentences now say recurring-current/public-pending. The same ten outward guards remain
-  closed; calls stay 246/public Perl 122, recognition 137/246/58, generated/capability 80/0/0, semantic 9/9/128,
-  MCP complete/141, storage 19/three native modules, and typed source 9/5/114.
-- Exact status markers had not guarded adjacent prose: the capture chapter and Toolbox still claimed Lua skips,
-  and the local-CI chapter still presented the earlier 3/6 route as current. `.7.0` corrects those facts without
-  public admission; `.7.2` owns six-document/twelve-stale-claim mutation proof so the blind spot cannot recur.
-- Focused ledgers, complete rooted proof, project-data routing, tool-storage containment, and rendered book pass.
-  The finalized staged candidate is run receipt-bound through canonical CI plus the exact gap matrix before
-  commit; `.7.2` remains the sole owner of public language, compatibility, stale-claim, and no-drift admission.
+- Atomic 253 landed cleanly at `d8ed944c`; public language/compatibility/no-drift leaf
+  `INTER-MATCH-GAP-CAPTURE.7.2` is canonical-signoff-complete from that exact boundary for intended atomic 254.
+  No parser/compiler/runtime/emitter/primary implementation or guarded outward surface moves.
+- Exact RED proves both seams: language coverage rejected the four shared names while they were still classified
+  staged-private, and the unchanged gap checker rejected the final artifact with `required sections drifted`.
+- Exactly `entry_slot`, `gap_kind`, `gap_span`, and `gap_text` are now current Dart/Julia/Lua calls and public Perl
+  contracts. Language is 250/105+1/126; compatibility aliases remain separate.
+- Recognition remains 137 ActionIR rows / 58 mutations while canonical call effects advance to 250 with all four
+  calls classified `source_read`. Gap governance advances only public no-drift to 9/0/63.
+- Final public governance requires six documents, twelve stale-current denials, the same ten outward guards, and
+  29 reason-checked mutations. Legacy gap markers remain divergent, named marks/helpers remain independent, and
+  `@emit_gaps` remains absent.
+- Rooted proof passes neutral, Perl 124, Rust 1, Dart 5, Julia 319, PUC Lua 392, and LuaJIT 392 in exact order.
+  Focused Dart, Julia, Lua, Rust, language, and recognition consumers are green.
+- The mdBook/user guide now teach the executable feature and migration boundary. The routed book, Knowledge,
+  adjacent ledgers, protected-surface proof, and doctrines pass. Canonical CI passes CLI 66x2, RAM 59%, Phase 0
+  1,031/1,031 in 735 seconds, the exact gap matrix, and staged receipt generation.
 
 ## Latest Completed Slice
 
-- `.7.1` is signoff-complete for intended atomic 253: it advances only recurring to 8/1/61 and leaves every
-  implementation, helper inventory, outward surface, and public-no-drift claim unchanged.
+- `.7.2` is canonical-signoff-complete for intended atomic 254: it advances exactly four calls and only public
+  no-drift to 9/0/63, with outward guards and runtime implementation unchanged.
 
 ## Next Action
 
-- Land `.7.1` as exact receipt-bound atomic 253, promote the receipt, clear the brief, prove clean, then activate
-  public language/compatibility/no-drift `.7.2` task-tree-first and produce its checker-first public/language RED.
+- Restage the finalized signoff record, rerun exact staged canonical CI with the gap matrix, land `.7.2` as atomic
+  254, promote the receipt, clear the brief, prove clean, then activate only `.7.3`.
 
 ## Recent Completions
+
+- `2026-08-16` — `.7.2` canonical-signoff-completed four shared gap calls and public no-drift at 9/0/63 with
+  exact public 6/12/10/29 governance from clean `d8ed944c`; guarded outward surfaces remain unchanged.
+
+- `2026-08-16` — `.7.1` admitted only recurring proof at 8/1/61 and landed cleanly as atomic 253 at `d8ed944c`.
 
 - `2026-08-16` — `.7.0` froze the exact recurring/public/closeout split, corrected stale current route prose,
   and landed cleanly as atomic 252 at `be240c14` with its canonical receipt promoted.
@@ -64,10 +66,6 @@
   `12a14ed0` for intended atomic 241 without runtime or rollout movement.
 - `2026-08-15` — `.5.0` froze the behavior-free Julia `.5.1-.5.5` implementation/admission plan from clean
   `43ed1c8f` for intended atomic 240.
-- `2026-08-15` — `.4.5` completed existing-primary parity and exact nine-role private Dart admission; it and
-  parent `.4` landed as atomic 239 at `43ed1c8f`.
-- `2026-08-15` — `.4.4` proved ten value and two typed-error emitted Dart modules in one offline managed caller
-  and landed as atomic 238 at `6a554312`.
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source

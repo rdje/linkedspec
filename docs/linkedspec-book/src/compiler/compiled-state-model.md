@@ -148,7 +148,7 @@ Native Lua execution now consumes that metadata through the existing recognition
 Capture activation, committed gap cursor, accepted count, phase, candidate/tail, and detached child entry identity
 live on that invocation; the detached transaction state remains exactly cursor/boundary/marks. Capture-enabled
 rules alone preselect before `LS`, commit child-extended state before `IT`, and install successful tails before
-`LX`/`EX`/`E`. The four zero-argument helpers resolve privately without entering the 246-name supported ActionIR
+`LX`/`EX`/`E`. The four zero-argument helpers are current members of the 250-name supported ActionIR call
 inventory. Normalized `SpecFile` JSON is the sole reconstruction carrier, and direct/traced generated-v2
 entrypoints execute the same engine lifecycle and typed failures. Independently emitted modules now reconstruct
 that same state in fresh PUC-Lua and LuaJIT children without changing the emitter, compiled shape, or plan.

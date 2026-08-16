@@ -213,6 +213,7 @@ const supportedActionIrCallNames = <String>{
   'entry_line',
   'entry_map',
   'entry_named',
+  'entry_slot',
   'entry_start_col',
   'entry_start_line',
   'entry_start_pos',
@@ -224,6 +225,9 @@ const supportedActionIrCallNames = <String>{
   'flat',
   'flat_array',
   'flat_hash',
+  'gap_kind',
+  'gap_span',
+  'gap_text',
   'has_key',
   'hash',
   'if',
@@ -639,6 +643,13 @@ const _entryMatchHelpers = <String>{
   'match_text',
 };
 
+const _interMatchGapHelpers = <String>{
+  'entry_slot',
+  'gap_kind',
+  'gap_span',
+  'gap_text',
+};
+
 const _inputHelpers = <String>{
   'cursor_col',
   'cursor_line',
@@ -677,6 +688,9 @@ String _familyForCanonical(String canonicalName) {
   }
   if (_entryMatchHelpers.contains(canonicalName)) {
     return 'entry_match';
+  }
+  if (_interMatchGapHelpers.contains(canonicalName)) {
+    return 'inter_match_gap';
   }
   if (_inputHelpers.contains(canonicalName)) {
     return 'input_cursor';

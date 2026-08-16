@@ -172,7 +172,7 @@ EXPECTED_COUNTS = {
     "current_action_ir_nodes": 133,
     "dedicated_action_ir_nodes": 4,
     "all_action_ir_nodes": 137,
-    "canonical_call_contracts": 246,
+    "canonical_call_contracts": 250,
     "allowed_effects": 9,
     "rejected_effects": 11,
     "token_positive_cases": 8,
@@ -188,7 +188,7 @@ EXPECTED_COUNTS = {
 }
 EXPECTED_EFFECT_ROW_HASHES = {
     "action_ir_effect_rows": "84ece426afcfda3778efed068ec9ae0cbcb54222c36b70f4972c6f6fa5abaf9f",
-    "canonical_call_effect_rows": "b0e25c4ab45ed53f83e5eaa8a1b2d66ec3ddc5a9cc4764ff031b3903efb64929",
+    "canonical_call_effect_rows": "7ea6cc4adae1559b722ff68dbd4c97816d03cf0d0590349b2af776859e85ae3f",
 }
 EXPECTED_SURFACE = {
     "checkpoint": "tx = recognition_checkpoint()",
@@ -1695,7 +1695,7 @@ MUTATIONS: dict[str, Callable[[dict[str, Any]], None]] = {
     "status": _set(["status"], "complete"),
     "count_current_nodes": _set(["expected_counts", "current_action_ir_nodes"], 131),
     "count_dedicated_nodes": _set(["expected_counts", "dedicated_action_ir_nodes"], 3),
-    "count_calls": _set(["expected_counts", "canonical_call_contracts"], 245),
+    "count_calls": _set(["expected_counts", "canonical_call_contracts"], 249),
     "syntax_checkpoint": _set(["authored_surface", "checkpoint"], "tx = save_cursor()"),
     "syntax_attempt": _set(["authored_surface", "attempt"], "matched = call(Child)"),
     "syntax_commit": _set(["authored_surface", "commit"], "payload = restore_cursor(tx)"),
@@ -2319,7 +2319,7 @@ def main() -> int:
         return 1
     print(
         "recognition-transaction-contract: OK "
-        "(137 ActionIR rows = 133 current + 4 dedicated; 246 call rows; "
+        "(137 ActionIR rows = 133 current + 4 dedicated; 250 call rows; "
         "token 8 positive/17 negative; effects 6 graphs; marks 6; progress 8; "
         "58 rejected mutations; rollout 9/9 complete; "
         f"public sequence 3 documents/26 forbidden/{public_mutations} mutations; "

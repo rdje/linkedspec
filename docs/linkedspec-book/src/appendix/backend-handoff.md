@@ -50,7 +50,7 @@
 > treat those compatibility controls as transaction support. The accepted transaction forms are `recognition_checkpoint()`,
 > `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and `recognition_rollback(token)`. The attempt
 > returns a match boolean; commit separately exposes the staged payload. The neutral authority is now executable
-> and fail-closed over 133 current + four dedicated node rows, 246 call rows, and 58 mutations.
+> and fail-closed over 133 current + four dedicated node rows, 250 call rows, and 58 mutations.
 > Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT transaction support is current and canonically admitted.
 > Public no-drift is current and recognition rollout is 9/9 complete. Neutral proof alone is not backend support.
 >
@@ -315,14 +315,15 @@ same driver to Lua and 5x2x61.
 
 ### Call-name coverage versus executable parity
 
-The capability audit now derives the same 246 current ActionIR call names from Dart, Julia, and Lua. Every name
-appears in this book and in the governed occurrence sources: the 105-fixture neutral corpus plus the exact
-complete-named-mark fixture. The strict checker independently derives 122 public identifier-shaped calls from the
-Perl ActionIR contract registry, requires every one in each backend inventory, and rejects thirteen classified
-names: nine compatibility/legacy/internal contracts plus the four grammar-owned recognition intrinsics that lower
-to dedicated nodes rather than shared helper calls. Dart's, Julia's, and Lua's separately rolled-out seven
+The capability audit now derives the same 250 current ActionIR call names from Dart, Julia, and Lua. Every name
+appears in this book and in the governed occurrence sources: the 105-fixture neutral corpus, the exact
+complete-named-mark fixture, and the public gap-contract example. The strict checker independently derives 126
+public identifier-shaped calls from the Perl ActionIR contract registry, requires every one in each backend
+inventory, and rejects fourteen classified names: nine compatibility/legacy/internal contracts plus five
+grammar-owned recognition intrinsics that lower to dedicated nodes rather than shared helper calls. Dart's,
+Julia's, and Lua's separately rolled-out seven
 source-boundary compatibility aliases are checked with their canonical targets against the neutral typed-source contract; they do
-not silently widen the shared 246-name inventory. Lua executes the mappings through one shared runtime on PUC Lua
+not silently widen the shared 250-name inventory. Lua executes the mappings through one shared runtime on PUC Lua
 and LuaJIT across native, loaded, reconstructed, generated-plan, and emitted carriers. This supersedes two
 historical blind spots: aligned lists first omitted
 `mark_capture_slice(...)` and `start_capture_slice_from(...)` at 237 names, then all inventories omitted seven
@@ -1529,7 +1530,7 @@ same fields as Dart and Julia.
 
 `canonical_action_helper_name(name)` covers the current numeric, symbol, and
 control aliases, including `=(target, value)` to `set`. The resolver and source
-validator share the exact 246-name `action_call_names` inventory. Unknown or
+validator share the exact 250-name `action_call_names` inventory. Unknown or
 non-current calls produce generic `unknown_helper`; structural fallback
 produces `raw_perl`. Neither can fall through to a Lua global.
 

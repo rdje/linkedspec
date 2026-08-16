@@ -2043,10 +2043,10 @@ test("source validator supports strict unused-rule behavior", function()
   )
 end)
 
-test("source validator locks all 246 helper and control names", function()
+test("source validator locks all 250 helper and control names", function()
   local action_names = require("linkedspec.action_call_names")
-  assert_equal(action_names.count(), 246, "current call-name count")
-  assert_equal(#action_names.current_names(), 246, "current call-name list count")
+  assert_equal(action_names.count(), 250, "current call-name count")
+  assert_equal(#action_names.current_names(), 250, "current call-name list count")
   assert_equal(action_names.current_names()[1], "!=", "current call-name list is sorted")
   assert_equal(action_names.is_known("trim"), true, "trim reservation")
   assert_equal(action_names.is_known("with"), true, "with reservation")
@@ -2074,7 +2074,7 @@ test("complete named marks admit exactly seven names into the shared inventory",
   for _ in pairs(staged) do staged_count = staged_count + 1 end
   assert_equal(count, 7, "contract helper count")
   assert_equal(staged_count, 7, "complete named-mark helper count")
-  assert_equal(action_names.count(), 246, "shared inventory includes complete named marks")
+  assert_equal(action_names.count(), 250, "shared inventory includes complete named marks and gap accessors")
 end)
 
 test("source validator checks function registry records", function()

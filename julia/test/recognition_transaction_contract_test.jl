@@ -201,7 +201,7 @@ end
         @test counts["current_action_ir_nodes"] == 133
         @test counts["dedicated_action_ir_nodes"] == 4
         @test counts["all_action_ir_nodes"] == 137
-        @test counts["canonical_call_contracts"] == 246
+        @test counts["canonical_call_contracts"] == 250
         @test counts["token_positive_cases"] == 8
         @test counts["token_negative_cases"] == 17
         @test counts["effect_graph_cases"] == 6

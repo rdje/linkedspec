@@ -29,4 +29,4 @@ bash tools/run_lua_project_data.sh puc lua/test/inter_match_gap_capture_contract
 log "checking complete runtime route luajit_runtime: lua/test/inter_match_gap_capture_contract_test.lua"
 bash tools/run_lua_project_data.sh luajit lua/test/inter_match_gap_capture_contract_test.lua
 
-log "PASS: neutral and all six private runtime routes complete; recurring current; public no-drift remains pending"
+log "PASS: neutral and all six runtime routes complete; recurring and public no-drift current"

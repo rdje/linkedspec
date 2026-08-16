@@ -111,7 +111,7 @@ REQUIRED_SECTIONS = (
     "diagnostics",
     "mutation_ids",
     "recurring_gate",
-    "public_no_overclaim",
+    "public_contract",
     "rollout",
 )
 
@@ -127,7 +127,7 @@ EXPECTED_COUNTS = {
     "compatibility_rows": 6,
     "diagnostics": 9,
     "rollout_legs": 9,
-    "semantic_mutations": 61,
+    "semantic_mutations": 63,
 }
 
 MUTATION_IDS = (
@@ -192,6 +192,8 @@ MUTATION_IDS = (
     "storage_paths",
     "route_order",
     "public_no_overclaim",
+    "public_accessor_status",
+    "public_no_drift_regression",
 )
 
 POSITIVE_IDS = (
@@ -255,6 +257,38 @@ ROLLOUT_IDS = (
     "luajit_runtime",
     "recurring",
     "public_no_drift",
+)
+
+PUBLIC_CONTRACT_MUTATION_IDS = (
+    "public_contract_status",
+    "document_marker_capture_chapter",
+    "document_marker_local_ci",
+    "document_marker_project_status",
+    "document_marker_capability_readme",
+    "document_marker_toolbox",
+    "document_marker_user_guide",
+    "stale_current_claim_01",
+    "stale_current_claim_02",
+    "stale_current_claim_03",
+    "stale_current_claim_04",
+    "stale_current_claim_05",
+    "stale_current_claim_06",
+    "stale_current_claim_07",
+    "stale_current_claim_08",
+    "stale_current_claim_09",
+    "stale_current_claim_10",
+    "stale_current_claim_11",
+    "stale_current_claim_12",
+    "outward_guard_perl",
+    "outward_guard_rust",
+    "outward_guard_dart",
+    "outward_guard_julia",
+    "outward_guard_lua",
+    "outward_guard_descriptor",
+    "outward_guard_semantic",
+    "outward_guard_mcp",
+    "outward_guard_cli",
+    "outward_guard_readme",
 )
 
 EXPECTED_DIAGNOSTICS = (
@@ -427,7 +461,7 @@ def validate_authored_surfaces(document: dict[str, Any]) -> None:
     require(
         surface["entry_slot"]
         == {
-            "status": "future",
+            "status": "current",
             "direct_entry": "undef",
             "return_kind": "detached_ordinary_harray",
             "ordered_fields": ["target_rule", "regex_index", "slot_id", "selector_kind", "authored_selector"],
@@ -458,9 +492,9 @@ def validate_authored_surfaces(document: dict[str, Any]) -> None:
     require(
         surface["accessors"]
         == {
-            "gap_span": {"status": "future", "return_kind": "detached_harray", "ordered_fields": ["source_id", "start", "end", "provenance"]},
-            "gap_text": {"status": "future", "return": "exact_decoded_text_from_current_source"},
-            "gap_kind": {"status": "future", "return": ["prefix", "interstitial", "tail"]},
+            "gap_span": {"status": "current", "return_kind": "detached_harray", "ordered_fields": ["source_id", "start", "end", "provenance"]},
+            "gap_text": {"status": "current", "return": "exact_decoded_text_from_current_source"},
+            "gap_kind": {"status": "current", "return": ["prefix", "interstitial", "tail"]},
             "unavailable": "gap_capture_context_unavailable",
         },
         "gap accessor surface drifted",
@@ -799,7 +833,7 @@ def validate_diagnostics(document: dict[str, Any]) -> None:
 
 def validate_recurring_gate(document: dict[str, Any]) -> None:
     expected = {
-        "status": "recurring_current_all_private_runtimes_admitted_public_pending",
+        "status": "recurring_current_all_runtimes_admitted_public_current",
         "owner": "INTER-MATCH-GAP-CAPTURE.7.1",
         "driver": "tools/check_inter_match_gap_capture_six_runtime.sh",
         "local_ci_driver": "tools/run_ci_local.sh",
@@ -870,33 +904,33 @@ def validate_recurring_gate(document: dict[str, Any]) -> None:
     require(document["recurring_gate"] == expected, "recurring gate topology drifted")
 
 
-def public_no_overclaim_texts(
+def public_contract_texts(
     public_contract: dict[str, Any],
 ) -> tuple[dict[str, str], dict[str, str]]:
     document_texts: dict[str, str] = {}
     for row in public_contract["documents"]:
         path = row["path"]
         source = ROOT / path
-        require(source.is_file(), f"public no-overclaim document is missing: {path}")
+        require(source.is_file(), f"public contract document is missing: {path}")
         document_texts[path] = source.read_text(encoding="utf-8")
 
     surface_texts: dict[str, str] = {}
     for path in public_contract["surface_guard"]["paths"]:
         source = ROOT / path
-        require(source.is_file(), f"public no-overclaim surface is missing: {path}")
+        require(source.is_file(), f"public contract surface is missing: {path}")
         surface_texts[path] = source.read_text(encoding="utf-8")
     return document_texts, surface_texts
 
 
-def validate_public_no_overclaim(
+def validate_public_contract(
     document: dict[str, Any],
     document_texts: dict[str, str] | None = None,
     surface_texts: dict[str, str] | None = None,
 ) -> None:
     expected = {
         "status": "current",
-        "owner": "INTER-MATCH-GAP-CAPTURE.1.2",
-        "policy": "document the executable neutral, all six admitted private runtime rows, and current recurring proof without claiming public no-drift completion, capability admission, schema exposure, CLI exposure, or outward public admission",
+        "owner": "INTER-MATCH-GAP-CAPTURE.7.2",
+        "policy": "admit exactly entry_slot, gap_span, gap_text, and gap_kind as current shared ActionIR calls while preserving legacy divergence, independent marks and helpers, absent emit_gaps, and unchanged outward facades and schemas",
         "rollout_assertions": {
             "row_count": 9,
             "neutral_contract": {"status": "complete", "owner": "INTER-MATCH-GAP-CAPTURE.1.1"},
@@ -907,28 +941,99 @@ def validate_public_no_overclaim(
             "complete_lua_runtime_ids": ["puc_lua_runtime", "luajit_runtime"],
             "lua_runtime_status": "complete",
             "recurring": {"status": "complete", "owner": "INTER-MATCH-GAP-CAPTURE.7.1"},
-            "public_no_drift": {"status": "pending", "owner": "INTER-MATCH-GAP-CAPTURE.7"},
+            "public_no_drift": {"status": "complete", "owner": "INTER-MATCH-GAP-CAPTURE.7.2"},
+        },
+        "current_calls": [
+            {"name": "entry_slot", "status": "current", "effect": "source_read"},
+            {"name": "gap_kind", "status": "current", "effect": "source_read"},
+            {"name": "gap_span", "status": "current", "effect": "source_read"},
+            {"name": "gap_text", "status": "current", "effect": "source_read"},
+        ],
+        "compatibility": {
+            "legacy_markers": ["@capture_slice", "@capture_from_here", "@move_pos"],
+            "legacy_relationship": "retained_divergent_never_aliases_for_capture_gaps",
+            "named_mark_relationship": "independent_and_coexistent",
+            "explicit_helper_relationship": "independent_and_coexistent",
+            "emit_gaps_surface": False,
+        },
+        "executable_example": {
+            "required_calls": ["entry_slot", "gap_kind", "gap_span", "gap_text"],
+            "spec_source": "List::OR\n @capture_gaps\n I { set(rows, array()) }\n -> Item[word] { push(rows, hash(\"gap_kind\", gap_kind(), \"gap_span\", gap_span(), \"gap_text\", gap_text(), \"item\", call(Item))) }\n LX { return(copy(rows)) }\n E { return(copy(rows)) }\n\nItem:\n word=/[^,;]+/\n I { return(hash(\"slot\", entry_slot(), \"text\", entry_text())) }\n",
         },
         "documents": [
             {
                 "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
-                "required_marker": "Inter-match gap-capture recurring governance is current across the complete neutral and six private runtime rows; public no-drift remains pending.",
+                "required_marker": "Inter-match gap capture is public and current: all nine rollout rows are complete, and its four shared accessors preserve exact source segmentation.",
             },
             {
                 "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
-                "required_marker": "Inter-match gap-capture recurring governance is current across the complete neutral and six private runtime rows; no runtime route remains an explicit skip and public no-drift remains pending.",
+                "required_marker": "Inter-match gap public governance is current at 9 complete / 0 pending with 63 neutral mutations and exact public no-drift proof.",
             },
             {
                 "path": "docs/linkedspec-book/src/overview/project-status.md",
-                "required_marker": "Inter-match gap-capture governance is current at 8 complete / 1 pending: all six runtime rows and recurring proof are complete, while public no-drift remains pending.",
+                "required_marker": "Inter-match gap capture is fully admitted at 9 complete / 0 pending across the neutral contract, six runtimes, recurring proof, and public no-drift.",
             },
             {
                 "path": "capability_conformance/README.md",
-                "required_marker": "Inter-match gap-capture recurring governance is current across all six private runtime rows; public admission remains pending.",
+                "required_marker": "Inter-match gap public admission is current with four shared calls and unchanged outward facade, descriptor, semantic, MCP, CLI, and README surfaces.",
             },
             {
                 "path": "TOOLBOX.md",
-                "required_marker": "Inter-match gap-capture recurring governance is current across its complete neutral plus six private runtime rows while public no-drift remains pending.",
+                "required_marker": "Inter-match gap public no-drift is current: six documents, twelve stale-current denials, ten outward guards, and twenty-nine reason-checked mutations.",
+            },
+            {
+                "path": "USER_GUIDE.md",
+                "required_marker": "Lossless inter-match segmentation is current through @capture_gaps, entry_slot(), gap_span(), gap_text(), and gap_kind().",
+            },
+        ],
+        "forbidden_current_claims": [
+            {
+                "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+                "text": "Recurring/public completion and public exposure remain pending.",
+            },
+            {
+                "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+                "text": "No backend exposes these forms as a public cross-backend contract yet.",
+            },
+            {
+                "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+                "text": "Rollout is 8 complete / 1 pending: recurring proof is current, while public no-drift remains the sole closeout row.",
+            },
+            {
+                "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+                "text": "Private live/generated `entry_slot()` returns",
+            },
+            {
+                "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+                "text": "Inter-match gap-capture recurring governance is current across the complete neutral and six private runtime rows; no runtime route remains an explicit skip and public no-drift remains pending.",
+            },
+            {
+                "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+                "text": "The neutral checker now rejects 61 semantic/topology mutations at rollout 8 complete / 1 pending",
+            },
+            {
+                "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+                "text": "Recurring proof is now current under `.7.1`; public no-drift remains pending",
+            },
+            {
+                "path": "docs/linkedspec-book/src/overview/project-status.md",
+                "text": "Inter-match gap-capture governance is current at 8 complete / 1 pending: all six runtime rows and recurring proof are complete, while public no-drift remains pending.",
+            },
+            {
+                "path": "docs/linkedspec-book/src/overview/project-status.md",
+                "text": "246 supported ActionIR names",
+            },
+            {
+                "path": "docs/linkedspec-book/src/overview/project-status.md",
+                "text": "122 public helpers",
+            },
+            {
+                "path": "capability_conformance/README.md",
+                "text": "Inter-match gap-capture recurring governance is current across all six private runtime rows; public admission remains pending.",
+            },
+            {
+                "path": "TOOLBOX.md",
+                "text": "Inter-match gap-capture recurring governance is current across its complete neutral plus six private runtime rows while public no-drift remains pending.",
             },
         ],
         "surface_guard": {
@@ -947,19 +1052,19 @@ def validate_public_no_overclaim(
             "forbidden_tokens": ["@capture_gaps", "entry_slot", "gap_span", "gap_text", "gap_kind", "Rule[name]", "name=/regex/"],
         },
     }
-    public_contract = document["public_no_overclaim"]
-    require(public_contract == expected, "public no-overclaim contract drifted")
+    public_contract = document["public_contract"]
+    require(public_contract == expected, "public contract drifted")
 
     assertions = public_contract["rollout_assertions"]
     rollout = document["rollout"]
-    require(len(rollout) == assertions["row_count"], "public no-overclaim rollout cardinality drifted")
+    require(len(rollout) == assertions["row_count"], "public contract rollout cardinality drifted")
     rollout_by_id = {row["id"]: row for row in rollout}
     for rollout_id in ("neutral_contract", "perl_runtime", "rust_runtime", "dart_runtime", "julia_runtime", "recurring", "public_no_drift"):
         expected_row = assertions[rollout_id]
         actual = rollout_by_id.get(rollout_id)
         require(
             actual is not None and {"status": actual["status"], "owner": actual["owner"]} == expected_row,
-            f"public no-overclaim rollout assertion drifted: {rollout_id}",
+            f"public contract rollout assertion drifted: {rollout_id}",
         )
     for rollout_id in assertions["complete_lua_runtime_ids"]:
         actual = rollout_by_id.get(rollout_id)
@@ -967,20 +1072,108 @@ def validate_public_no_overclaim(
 
     if document_texts is None and surface_texts is None:
         return
-    require(document_texts is not None and surface_texts is not None, "public no-overclaim text inventories must be provided together")
-    require(set(document_texts) == {row["path"] for row in public_contract["documents"]}, "public no-overclaim document inventory drifted")
-    require(set(surface_texts) == set(public_contract["surface_guard"]["paths"]), "public no-overclaim surface inventory drifted")
+    require(document_texts is not None and surface_texts is not None, "public contract text inventories must be provided together")
+    require(set(document_texts) == {row["path"] for row in public_contract["documents"]}, "public contract document inventory drifted")
+    require(set(surface_texts) == set(public_contract["surface_guard"]["paths"]), "public contract surface inventory drifted")
     for row in public_contract["documents"]:
-        require(document_texts[row["path"]].count(row["required_marker"]) == 1, f"public no-overclaim marker missing or duplicated: {row['path']}")
+        require(document_texts[row["path"]].count(row["required_marker"]) == 1, f"public contract marker missing or duplicated: {row['path']}")
+    for row in public_contract["forbidden_current_claims"]:
+        require(row["text"] not in document_texts[row["path"]], f"stale current public claim remains: {row['path']}")
     for path in public_contract["surface_guard"]["paths"]:
         for token in public_contract["surface_guard"]["forbidden_tokens"]:
-            require(token not in surface_texts[path], f"public surface widened before admission: {path}: {token}")
+            require(token not in surface_texts[path], f"public surface widened: {path}: {token}")
+
+
+def validate_public_contract_mutations(document: dict[str, Any]) -> int:
+    public_contract = document["public_contract"]
+    document_texts, surface_texts = public_contract_texts(public_contract)
+    observed_ids: list[str] = []
+
+    def reject(
+        mutation_id: str,
+        expected_reason: str,
+        candidate_document: dict[str, Any],
+        candidate_document_texts: dict[str, str],
+        candidate_surface_texts: dict[str, str],
+    ) -> None:
+        observed_ids.append(mutation_id)
+        try:
+            validate_public_contract(
+                candidate_document,
+                candidate_document_texts,
+                candidate_surface_texts,
+            )
+        except ContractError as error:
+            require(
+                expected_reason in str(error),
+                f"public contract mutation {mutation_id} failed for unexpected reason: {error}",
+            )
+        else:
+            fail(f"public contract mutation {mutation_id} was accepted")
+
+    candidate = copy.deepcopy(document)
+    candidate["public_contract"]["status"] = "staged"
+    reject(
+        "public_contract_status",
+        "public contract drifted",
+        candidate,
+        document_texts,
+        surface_texts,
+    )
+
+    marker_ids = PUBLIC_CONTRACT_MUTATION_IDS[1:7]
+    for mutation_id, row in zip(marker_ids, public_contract["documents"], strict=True):
+        candidate_texts = copy.deepcopy(document_texts)
+        candidate_texts[row["path"]] = candidate_texts[row["path"]].replace(
+            row["required_marker"], "", 1
+        )
+        reject(
+            mutation_id,
+            f"public contract marker missing or duplicated: {row['path']}",
+            document,
+            candidate_texts,
+            surface_texts,
+        )
+
+    stale_ids = PUBLIC_CONTRACT_MUTATION_IDS[7:19]
+    for mutation_id, row in zip(stale_ids, public_contract["forbidden_current_claims"], strict=True):
+        candidate_texts = copy.deepcopy(document_texts)
+        candidate_texts[row["path"]] += f"\n{row['text']}\n"
+        reject(
+            mutation_id,
+            f"stale current public claim remains: {row['path']}",
+            document,
+            candidate_texts,
+            surface_texts,
+        )
+
+    guard_ids = PUBLIC_CONTRACT_MUTATION_IDS[19:]
+    tokens = public_contract["surface_guard"]["forbidden_tokens"]
+    for index, (mutation_id, path) in enumerate(
+        zip(guard_ids, public_contract["surface_guard"]["paths"], strict=True)
+    ):
+        token = tokens[index % len(tokens)]
+        candidate_surfaces = copy.deepcopy(surface_texts)
+        candidate_surfaces[path] += f"\n{token}\n"
+        reject(
+            mutation_id,
+            f"public surface widened: {path}: {token}",
+            document,
+            document_texts,
+            candidate_surfaces,
+        )
+
+    require(
+        tuple(observed_ids) == PUBLIC_CONTRACT_MUTATION_IDS,
+        "public contract mutation identity/order drifted",
+    )
+    return len(observed_ids)
 
 
 def validate_rollout(document: dict[str, Any]) -> None:
     rows = indexed(document["rollout"], ROLLOUT_IDS, "rollout")
     for index, rollout_id in enumerate(ROLLOUT_IDS):
-        expected_status = "complete" if index <= 7 else "pending"
+        expected_status = "complete"
         expected_owner = TASK_OWNER if index == 0 else {
             "perl_runtime": "INTER-MATCH-GAP-CAPTURE.2.4",
             "rust_runtime": "INTER-MATCH-GAP-CAPTURE.3",
@@ -989,7 +1182,7 @@ def validate_rollout(document: dict[str, Any]) -> None:
             "puc_lua_runtime": "INTER-MATCH-GAP-CAPTURE.6",
             "luajit_runtime": "INTER-MATCH-GAP-CAPTURE.6",
             "recurring": "INTER-MATCH-GAP-CAPTURE.7.1",
-            "public_no_drift": "INTER-MATCH-GAP-CAPTURE.7",
+            "public_no_drift": "INTER-MATCH-GAP-CAPTURE.7.2",
         }[rollout_id]
         require(rows[rollout_id] == {"id": rollout_id, "owner": expected_owner, "status": expected_status}, f"{rollout_id} rollout drifted")
 
@@ -1006,8 +1199,8 @@ def validate_registration(document: dict[str, Any]) -> None:
     ):
         require(path.is_file(), f"canonical recurring input is missing: {path.relative_to(ROOT)}")
 
-    document_texts, surface_texts = public_no_overclaim_texts(document["public_no_overclaim"])
-    validate_public_no_overclaim(document, document_texts, surface_texts)
+    document_texts, surface_texts = public_contract_texts(document["public_contract"])
+    validate_public_contract(document, document_texts, surface_texts)
 
     driver_text = RECURRING_DRIVER_PATH.read_text(encoding="utf-8")
     require(PERL_CONSUMER_PATH.is_file(), "admitted Perl consumer is missing")
@@ -1101,8 +1294,8 @@ def validate_registration(document: dict[str, Any]) -> None:
     require(positions == sorted(positions), "recurring driver route order drifted")
     require(
         driver_text.count(
-            'log "PASS: neutral and all six private runtime routes complete; recurring current; '
-            'public no-drift remains pending"'
+            'log "PASS: neutral and all six runtime routes complete; '
+            'recurring and public no-drift current"'
         )
         == 1,
         "recurring driver success marker drifted",
@@ -1560,8 +1753,8 @@ def validate_lua_admission(
             f"Lua admitted recurring route remained skipped: {rollout_id}",
         )
     final_marker = (
-        "PASS: neutral and all six private runtime routes complete; "
-        "recurring current; public no-drift remains pending"
+        "PASS: neutral and all six runtime routes complete; "
+        "recurring and public no-drift current"
     )
     require(driver_text.count(final_marker) == 1, "Lua admission disturbed recurring/public boundary")
     require(
@@ -1578,8 +1771,8 @@ def lua_admission_mutations() -> list[LuaAdmissionMutation]:
     puc_command = f"bash tools/run_lua_project_data.sh puc {consumer_path}"
     luajit_command = f"bash tools/run_lua_project_data.sh luajit {consumer_path}"
     final_marker = (
-        "PASS: neutral and all six private runtime routes complete; "
-        "recurring current; public no-drift remains pending"
+        "PASS: neutral and all six runtime routes complete; "
+        "recurring and public no-drift current"
     )
     return [
         (
@@ -1696,7 +1889,11 @@ def lua_admission_mutations() -> list[LuaAdmissionMutation]:
             "Lua admission disturbed recurring/public boundary",
             lambda texts: texts.__setitem__(
                 "driver",
-                texts["driver"].replace(final_marker, final_marker.replace("recurring current; ", ""), 1),
+                texts["driver"].replace(
+                    final_marker,
+                    final_marker.replace("recurring and public no-drift current", "public no-drift current"),
+                    1,
+                ),
             ),
         ),
         (
@@ -1704,7 +1901,11 @@ def lua_admission_mutations() -> list[LuaAdmissionMutation]:
             "Lua admission disturbed recurring/public boundary",
             lambda texts: texts.__setitem__(
                 "driver",
-                texts["driver"].replace(final_marker, final_marker.replace("; public no-drift remains pending", ""), 1),
+                texts["driver"].replace(
+                    final_marker,
+                    final_marker.replace(" and public no-drift current", " current"),
+                    1,
+                ),
             ),
         ),
         (
@@ -2053,7 +2254,7 @@ def validate_contract(document: dict[str, Any], *, check_registration: bool = Tr
     require(document["mutation_ids"] == list(MUTATION_IDS), "mutation identity/order drifted")
     validate_recurring_gate(document)
     validate_rollout(document)
-    validate_public_no_overclaim(document)
+    validate_public_contract(document)
     require(len(document["selector_resolution_fixtures"]["positive"]) == EXPECTED_COUNTS["positive_selector_fixtures"], "positive fixture count drifted")
     require(len(document["selector_resolution_fixtures"]["negative"]) == EXPECTED_COUNTS["negative_selector_directive_fixtures"], "negative fixture count drifted")
     require(len(document["gap_sources"]) == EXPECTED_COUNTS["decoded_source_fixtures"], "source fixture count drifted")
@@ -2141,7 +2342,9 @@ def mutations() -> list[Mutation]:
             ("recurring_regression", "recurring rollout drifted", lambda d: row(d, "rollout", "recurring").__setitem__("status", "pending")),
             ("storage_paths", "recurring gate topology drifted", lambda d: d["recurring_gate"]["storage"].__setitem__("initializer", "/tmp/project_data_env.sh")),
             ("route_order", "recurring gate topology drifted", lambda d: d["recurring_gate"]["route_order"].reverse()),
-            ("public_no_overclaim", "public no-overclaim contract drifted", lambda d: d["public_no_overclaim"].__setitem__("status", "planned")),
+            ("public_no_overclaim", "public contract drifted", lambda d: d["public_contract"].__setitem__("policy", "stale")),
+            ("public_accessor_status", "public contract drifted", lambda d: d["public_contract"]["current_calls"][0].__setitem__("status", "pending")),
+            ("public_no_drift_regression", "public_no_drift rollout drifted", lambda d: row(d, "rollout", "public_no_drift").__setitem__("status", "pending")),
         ]
     )
     return values
@@ -2172,6 +2375,7 @@ def main() -> int:
         document = load_json(CONTRACT_PATH)
         validate_contract(document)
         mutation_count = validate_mutations(document)
+        public_contract_mutation_count = validate_public_contract_mutations(document)
         rust_admission_mutation_count = validate_rust_admission_mutations()
         dart_admission_mutation_count = validate_dart_admission_mutations()
         julia_admission_mutation_count = validate_julia_admission_mutations()
@@ -2186,6 +2390,8 @@ def main() -> int:
         f"(8 positive + 10 negative fixtures; 3 sources; 16 transitions; "
         f"10 segmentation cases; 9 diagnostics; {complete} complete + {pending} pending rollout; "
         f"{mutation_count} rejected semantic mutations; "
+        f"6 public documents; 12 stale-current denials; 10 outward guards; "
+        f"{public_contract_mutation_count} rejected public mutations; "
         f"{rust_admission_mutation_count} rejected Rust admission mutations; "
         f"{dart_admission_mutation_count} rejected Dart admission mutations; "
         f"{julia_admission_mutation_count} rejected Julia admission mutations; "

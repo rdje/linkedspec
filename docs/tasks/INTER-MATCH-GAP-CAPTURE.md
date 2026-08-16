@@ -1922,8 +1922,8 @@ orchestration or to raw Perl cursor arithmetic.
     promote the receipt, clear the brief, and land parent `.6` cleanly before `.7`.
 
 - ID: `INTER-MATCH-GAP-CAPTURE.7`
-  Status: `active` (2026-08-16; recurring admission `.7.1` is canonical-signoff-complete from clean atomic 252
-    `be240c14` for intended atomic 253; public language/compatibility/no-drift `.7.2` is next after clean landing)
+  Status: `active` (2026-08-16; recurring admission `.7.1` landed cleanly as atomic 253 at `d8ed944c`;
+    public language/compatibility/no-drift `.7.2` is active task-tree-first from that exact boundary)
   Goal: Close cross-backend admission, migration, public documentation, and compatibility policy.
   Children: `.7.0`, `.7.1`, `.7.2`, `.7.3`
   Acceptance: Five backends and all generated/primary roles agree; aliases are retained or retired only
@@ -2003,8 +2003,8 @@ orchestration or to raw Perl cursor arithmetic.
     layers, pass focused planning proof, commit with the leaf id, clear the brief, and land clean before `.7.1`.
 
 - ID: `INTER-MATCH-GAP-CAPTURE.7.1`
-  Status: `canonical-signoff-complete from clean be240c14` (2026-08-16; intended atomic 253; task-tree-first
-    activation; recurring-only admission tier; public language/compatibility/no-drift remains `.7.2`-owned; no push)
+  Status: `done; landed at d8ed944c` (2026-08-16; atomic 253; recurring-only canonical admission; receipt
+    promoted, brief cleared, clean handoff proved; public language/compatibility/no-drift remains `.7.2`-owned)
   Goal: Admit the existing neutral-first six-runtime recurring proof and promote only the `recurring` rollout row.
   Depends on: `.7.0`
   Acceptance: start only from clean `.7.0`; write checker-first RED for the still-pending `recurring` row and
@@ -2034,7 +2034,7 @@ orchestration or to raw Perl cursor arithmetic.
     five current markers/ten outward guards, project-data routing, tool storage, rendered mdBook, Knowledge,
     histories, task/memory/doctrines, and exact diff hygiene pass. The finalized staged candidate runs exact
     receipt-bound canonical CI plus the gap matrix before commit, and only its matching receipt may be promoted.
-  Commit: `INTER-MATCH-GAP-CAPTURE.7.1 - admit recurring gap proof` (intended atomic 253)
+  Commit: `INTER-MATCH-GAP-CAPTURE.7.1 - admit recurring gap proof` (`d8ed944c`; atomic 253)
 
   ### Acceptance Checklist
 
@@ -2055,7 +2055,8 @@ orchestration or to raw Perl cursor arithmetic.
     commit with this leaf id, promote the receipt, clear the brief, and land clean before `.7.2`.
 
 - ID: `INTER-MATCH-GAP-CAPTURE.7.2`
-  Status: `pending`
+  Status: `canonical-signoff-complete from clean d8ed944c` (2026-08-16; intended atomic 254; task-tree-first
+    activation; exact public language/compatibility/no-drift owner; no push)
   Goal: Admit the ratified compatibility policy and complete example-rich public lossless-segmentation teaching
     without widening unrelated facades, schemas, MCP, primary CLI, README, or capability census surfaces.
   Depends on: `.7.1`
@@ -2079,9 +2080,46 @@ orchestration or to raw Perl cursor arithmetic.
     recognition 137/250/58; all six gap consumers and rooted order; legacy matrix and forbidden aliases; generated
     format/primary/capability/typed-source/semantic/MCP/CLI/README/storage no-drift; rendered example checks;
     Knowledge, histories, task/memory/doctrines, staged diff and receipt.
+  Verification tier: `canonical`
+  Focused checks: checker-first public/language RED; neutral 9/0/63 plus public 6/12/10/29; language
+    250/105+1/126; recognition 137/250/58; all six gap consumers and rooted order; legacy matrix and forbidden
+    aliases; generated format/primary/capability/typed-source/semantic/MCP/CLI/README/storage no-drift; rendered
+    example checks; Knowledge, histories, task/memory/doctrines, staged diff and receipt.
+  Canonical trigger: `yes` — this leaf promotes the public cross-backend language contract and final
+    `public_no_drift` rollout row; exact staged-candidate local CI and receipt promotion are mandatory.
   Planned verification: canonical because the public/cross-backend contract and `public_no_drift` rollout move.
-  Verification: `pending`
+  Fail-first evidence: adding the four shared names before reclassification made language coverage fail only with
+    `classified non-public Perl names admitted by backend inventories: entry_slot, gap_kind, gap_span, gap_text`.
+    Applying the final public artifact before checker support then failed only with `required sections drifted`.
+  Verification: focused/rooted GREEN — neutral gap passes 9/0/63 plus public 6/12/10/29 and unchanged admission
+    mutations; language passes 250 current / 105 corpus + 1 exact named-mark fixture / 126 public Perl contracts;
+    recognition passes 137 ActionIR / 250 calls / 58 mutations. Dart passes 26 selected tests; Julia passes
+    recognition 207, named marks 13, and gap 319; PUC Lua and LuaJIT each pass aliases 638, recognition 246, and
+    gap 392; Rust passes gap 1 and recognition 12. The rooted driver passes neutral, Perl 124, Rust 1, Dart 5,
+    Julia 319, PUC Lua 392, and LuaJIT 392 in exact order. The repository-routed mdBook renders 78 files / 14,956
+    KiB; Knowledge, adjacent ledgers, bounded histories, task/memory metadata, protected-surface diff, and all
+    nine doctrines pass. Canonical CI passes CLI 66/66 in default and POSIX environments, RAM 59%, Phase 0
+    1,031/1,031 in 735 seconds, the exact neutral-plus-six-runtime gap matrix, and receipt generation for staged
+    candidate `1440c0b88243e94a1c685bff7fd129c971236144bd79b14eda48dba81120cc1d`.
   Commit: `pending`
+
+  ### Acceptance Checklist
+
+  - [x] **CLEAN ACTIVATION / OWNERSHIP** — Prove committed recurring boundary `d8ed944c`, empty status/diffs,
+    zero-byte brief, promoted canonical receipt, durable `.7.2` next-action pointer, and no background result
+    before this task-tree-first edit.
+  - [x] **RETRIEVE AUTHORITY** — Use Knowledge Map card, ADR `0079`, this task node, and existing checker/contract
+    pointers before inspecting the exact language, recognition, public-document, compatibility, and no-drift seams.
+  - [x] **FAIL FIRST / PUBLIC GOVERNANCE** — Prove unchanged checkers reject only the planned four-call
+    staged-private→current movement, absent six-document public contract, stale prose, and pending rollout row.
+  - [x] **EXACT PUBLIC ADMISSION** — Promote only four current calls and `public_no_drift`; add exactly two
+    semantic mutations and the six-document/twelve-denial/ten-guard/29-mutation public contract.
+  - [x] **COMPATIBILITY / TEACHING** — Preserve divergent legacy aliases, independent marks/helpers, absent
+    `@emit_gaps`, and add complete executable public examples for the ratified lossless-segmentation behavior.
+  - [x] **NO IMPLEMENTATION OR OUTWARD WIDENING** — Keep parser/compiler/runtime/emitter/primary, generated format,
+    facades, schemas, semantic/MCP, CLI, README, capability census, storage, and typed-source rollout unchanged.
+  - [x] **CANONICAL CLOSEOUT** — Synchronize durable layers, pass focused and receipt-bound canonical proof,
+    commit with this leaf id, promote the receipt, clear the brief, and land clean before `.7.3`.
 
 - ID: `INTER-MATCH-GAP-CAPTURE.7.3`
   Status: `pending`
@@ -2142,8 +2180,8 @@ orchestration or to raw Perl cursor arithmetic.
 | 34 | `INTER-MATCH-GAP-CAPTURE.6.4` | `done; landed at 798aeeee` | Independently loaded emitted-source parity and exact storage owner 19 landed as atomic 250. |
 | 35 | `INTER-MATCH-GAP-CAPTURE.6.5` | `canonical-signoff-complete from clean 798aeeee` | Primary parity, exact dual-ABI admission, and parent `.6` closeout are complete for atomic 251. |
 | 36 | `INTER-MATCH-GAP-CAPTURE.7.0` | `done; landed at be240c14` | Exact 7/2/60 private audit, recurring/public/closeout split, stale-current correction, bounded-history rollover, and final staged proof landed without behavior or rollout movement as atomic 252. |
-| 37 | `INTER-MATCH-GAP-CAPTURE.7.1` | `canonical-signoff-complete from clean be240c14` | Recurring alone advances to 8/1/61; the exact rooted seven-route proof and every private/no-overclaim boundary remain locked for intended atomic 253. |
-| 38 | `INTER-MATCH-GAP-CAPTURE.7.2` | `pending` | Ratify compatibility projection and complete public lossless-segmentation teaching after recurring admission. |
+| 37 | `INTER-MATCH-GAP-CAPTURE.7.1` | `done; landed at d8ed944c` | Recurring alone advanced to 8/1/61; exact rooted proof and every private/no-overclaim boundary landed as atomic 253. |
+| 38 | `INTER-MATCH-GAP-CAPTURE.7.2` | `canonical-signoff-complete from clean d8ed944c` | Ratify compatibility projection and complete public lossless-segmentation teaching as intended atomic 254. |
 | 39 | `INTER-MATCH-GAP-CAPTURE.7.3` | `pending` | Independently recompose, close the tree, and hand off typed gap composition. |
 
 ## Decisions

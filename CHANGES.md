@@ -10,6 +10,32 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-16 — INTER-MATCH-GAP-CAPTURE.7.2 — admit public lossless segmentation
+
+- Activated task-tree-first from clean recurring commit `d8ed944c`. The shared-inventory change first failed
+  exactly because `entry_slot`, `gap_kind`, `gap_span`, and `gap_text` were still classified staged-private; the
+  final public artifact then failed the unchanged gap checker with exact `required sections drifted`.
+- Promoted exactly those four calls into equal Dart/Julia/Lua current inventories and the independently derived
+  Perl public projection. Language coverage is 250 current calls / 105 corpus + 1 exact named-mark fixture / 126
+  public Perl contracts; the final gap contract's executable example governs the four added occurrences.
+- Added all four calls as canonical recognition `source_read` effects. Recognition remains 137 ActionIR rows and
+  58 mutations while its call projection advances 246→250 with a newly pinned exact effect-row hash.
+- Promoted only `public_no_drift`, set the four accessor statuses current, and appended only
+  `public_accessor_status` and `public_no_drift_regression`. Gap governance is exactly 9 complete / 0 pending / 63
+  semantic mutations.
+- Replaced marker-only no-overclaim with a final contract over exactly six documents, twelve stale-current
+  denials, the same ten outward guards, and 29 reason-checked in-memory mutations: one contract corruption, six
+  marker omissions, twelve stale injections, and ten outward injections.
+- Ratified compatibility without aliases: `@capture_slice`, `@capture_from_here`, and `@move_pos` remain
+  divergent; named marks and explicit helpers remain independent/coexistent; `@emit_gaps` remains absent.
+- The mdBook and user guide now teach executable named/numeric identity, heterogeneous separators, Unicode/empty
+  prefix/interstitial/tail spans, child-extended commits, rollback/recursion, terminal access, diagnostics, and
+  migration. README and all guarded facades/descriptors/schemas/semantic/MCP/CLI surfaces remain unchanged.
+- Focused cross-backend proof and the rooted matrix pass neutral 9/0/63, Perl 124, Rust 1, Dart 5, Julia 319, PUC
+  Lua 392, and LuaJIT 392. The repository-routed book renders 78 files / 14,956 KiB; Knowledge, adjacent ledgers,
+  protected-surface proof, and all nine doctrines pass. Canonical CI passes CLI 66x2, RAM 59%, Phase 0
+  1,031/1,031 in 735 seconds, the exact gap matrix, and staged-candidate receipt generation.
+
 ## 2026-08-16 — INTER-MATCH-GAP-CAPTURE.7.1 — admit recurring gap proof
 
 - Activated task-tree-first from clean atomic-252 commit `be240c14`. The unchanged checker rejected the planned

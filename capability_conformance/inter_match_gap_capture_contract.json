@@ -14,7 +14,7 @@
     "compatibility_rows": 6,
     "diagnostics": 9,
     "rollout_legs": 9,
-    "semantic_mutations": 61
+    "semantic_mutations": 63
   },
   "policy": {
     "status": "executable_neutral_behavior_free",
@@ -80,7 +80,7 @@
       "target_slot_id"
     ],
     "entry_slot": {
-      "status": "future",
+      "status": "current",
       "direct_entry": "undef",
       "return_kind": "detached_ordinary_harray",
       "ordered_fields": [
@@ -116,7 +116,7 @@
     },
     "accessors": {
       "gap_span": {
-        "status": "future",
+        "status": "current",
         "return_kind": "detached_harray",
         "ordered_fields": [
           "source_id",
@@ -126,11 +126,11 @@
         ]
       },
       "gap_text": {
-        "status": "future",
+        "status": "current",
         "return": "exact_decoded_text_from_current_source"
       },
       "gap_kind": {
-        "status": "future",
+        "status": "current",
         "return": [
           "prefix",
           "interstitial",
@@ -824,10 +824,12 @@
     "recurring_regression",
     "storage_paths",
     "route_order",
-    "public_no_overclaim"
+    "public_no_overclaim",
+    "public_accessor_status",
+    "public_no_drift_regression"
   ],
   "recurring_gate": {
-    "status": "recurring_current_all_private_runtimes_admitted_public_pending",
+    "status": "recurring_current_all_runtimes_admitted_public_current",
     "owner": "INTER-MATCH-GAP-CAPTURE.7.1",
     "driver": "tools/check_inter_match_gap_capture_six_runtime.sh",
     "local_ci_driver": "tools/run_ci_local.sh",
@@ -959,10 +961,10 @@
       "policy": "all temporary, cache, build, native, and test data stays under repository-derived storage on the repository volume"
     }
   },
-  "public_no_overclaim": {
+  "public_contract": {
     "status": "current",
-    "owner": "INTER-MATCH-GAP-CAPTURE.1.2",
-    "policy": "document the executable neutral, all six admitted private runtime rows, and current recurring proof without claiming public no-drift completion, capability admission, schema exposure, CLI exposure, or outward public admission",
+    "owner": "INTER-MATCH-GAP-CAPTURE.7.2",
+    "policy": "admit exactly entry_slot, gap_span, gap_text, and gap_kind as current shared ActionIR calls while preserving legacy divergence, independent marks and helpers, absent emit_gaps, and unchanged outward facades and schemas",
     "rollout_assertions": {
       "row_count": 9,
       "neutral_contract": {
@@ -995,30 +997,126 @@
         "owner": "INTER-MATCH-GAP-CAPTURE.7.1"
       },
       "public_no_drift": {
-        "status": "pending",
-        "owner": "INTER-MATCH-GAP-CAPTURE.7"
+        "status": "complete",
+        "owner": "INTER-MATCH-GAP-CAPTURE.7.2"
       }
+    },
+    "current_calls": [
+      {
+        "name": "entry_slot",
+        "status": "current",
+        "effect": "source_read"
+      },
+      {
+        "name": "gap_kind",
+        "status": "current",
+        "effect": "source_read"
+      },
+      {
+        "name": "gap_span",
+        "status": "current",
+        "effect": "source_read"
+      },
+      {
+        "name": "gap_text",
+        "status": "current",
+        "effect": "source_read"
+      }
+    ],
+    "compatibility": {
+      "legacy_markers": [
+        "@capture_slice",
+        "@capture_from_here",
+        "@move_pos"
+      ],
+      "legacy_relationship": "retained_divergent_never_aliases_for_capture_gaps",
+      "named_mark_relationship": "independent_and_coexistent",
+      "explicit_helper_relationship": "independent_and_coexistent",
+      "emit_gaps_surface": false
+    },
+    "executable_example": {
+      "required_calls": [
+        "entry_slot",
+        "gap_kind",
+        "gap_span",
+        "gap_text"
+      ],
+      "spec_source": "List::OR\n @capture_gaps\n I { set(rows, array()) }\n -> Item[word] { push(rows, hash(\"gap_kind\", gap_kind(), \"gap_span\", gap_span(), \"gap_text\", gap_text(), \"item\", call(Item))) }\n LX { return(copy(rows)) }\n E { return(copy(rows)) }\n\nItem:\n word=/[^,;]+/\n I { return(hash(\"slot\", entry_slot(), \"text\", entry_text())) }\n"
     },
     "documents": [
       {
         "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
-        "required_marker": "Inter-match gap-capture recurring governance is current across the complete neutral and six private runtime rows; public no-drift remains pending."
+        "required_marker": "Inter-match gap capture is public and current: all nine rollout rows are complete, and its four shared accessors preserve exact source segmentation."
       },
       {
         "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
-        "required_marker": "Inter-match gap-capture recurring governance is current across the complete neutral and six private runtime rows; no runtime route remains an explicit skip and public no-drift remains pending."
+        "required_marker": "Inter-match gap public governance is current at 9 complete / 0 pending with 63 neutral mutations and exact public no-drift proof."
       },
       {
         "path": "docs/linkedspec-book/src/overview/project-status.md",
-        "required_marker": "Inter-match gap-capture governance is current at 8 complete / 1 pending: all six runtime rows and recurring proof are complete, while public no-drift remains pending."
+        "required_marker": "Inter-match gap capture is fully admitted at 9 complete / 0 pending across the neutral contract, six runtimes, recurring proof, and public no-drift."
       },
       {
         "path": "capability_conformance/README.md",
-        "required_marker": "Inter-match gap-capture recurring governance is current across all six private runtime rows; public admission remains pending."
+        "required_marker": "Inter-match gap public admission is current with four shared calls and unchanged outward facade, descriptor, semantic, MCP, CLI, and README surfaces."
       },
       {
         "path": "TOOLBOX.md",
-        "required_marker": "Inter-match gap-capture recurring governance is current across its complete neutral plus six private runtime rows while public no-drift remains pending."
+        "required_marker": "Inter-match gap public no-drift is current: six documents, twelve stale-current denials, ten outward guards, and twenty-nine reason-checked mutations."
+      },
+      {
+        "path": "USER_GUIDE.md",
+        "required_marker": "Lossless inter-match segmentation is current through @capture_gaps, entry_slot(), gap_span(), gap_text(), and gap_kind()."
+      }
+    ],
+    "forbidden_current_claims": [
+      {
+        "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+        "text": "Recurring/public completion and public exposure remain pending."
+      },
+      {
+        "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+        "text": "No backend exposes these forms as a public cross-backend contract yet."
+      },
+      {
+        "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+        "text": "Rollout is 8 complete / 1 pending: recurring proof is current, while public no-drift remains the sole closeout row."
+      },
+      {
+        "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+        "text": "Private live/generated `entry_slot()` returns"
+      },
+      {
+        "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+        "text": "Inter-match gap-capture recurring governance is current across the complete neutral and six private runtime rows; no runtime route remains an explicit skip and public no-drift remains pending."
+      },
+      {
+        "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+        "text": "The neutral checker now rejects 61 semantic/topology mutations at rollout 8 complete / 1 pending"
+      },
+      {
+        "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+        "text": "Recurring proof is now current under `.7.1`; public no-drift remains pending"
+      },
+      {
+        "path": "docs/linkedspec-book/src/overview/project-status.md",
+        "text": "Inter-match gap-capture governance is current at 8 complete / 1 pending: all six runtime rows and recurring proof are complete, while public no-drift remains pending."
+      },
+      {
+        "path": "docs/linkedspec-book/src/overview/project-status.md",
+        "text": "246 supported ActionIR names"
+      },
+      {
+        "path": "docs/linkedspec-book/src/overview/project-status.md",
+        "text": "122 public helpers"
+      },
+      {
+        "path": "capability_conformance/README.md",
+        "text": "Inter-match gap-capture recurring governance is current across all six private runtime rows; public admission remains pending."
+      },
+      {
+        "path": "TOOLBOX.md",
+        "text": "Inter-match gap-capture recurring governance is current across its complete neutral plus six private runtime rows while public no-drift remains pending."
       }
     ],
     "surface_guard": {
@@ -1088,8 +1186,8 @@
     },
     {
       "id": "public_no_drift",
-      "owner": "INTER-MATCH-GAP-CAPTURE.7",
-      "status": "pending"
+      "owner": "INTER-MATCH-GAP-CAPTURE.7.2",
+      "status": "complete"
     }
   ]
 }

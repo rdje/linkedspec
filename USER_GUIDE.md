@@ -389,6 +389,51 @@ Use `entry_groups()` when the rule should snapshot the whole immediate-match cap
 
 Documentation style note: the user guides should prefer backend-neutral helper syntax in code blocks where possible. Perl-specific lowering is still documented, but it belongs in the emitted-reference guides rather than being the default teaching surface for normal usage examples.
 
+### Lossless segmentation between repeated matches
+
+Lossless inter-match segmentation is current through @capture_gaps, entry_slot(), gap_span(), gap_text(), and gap_kind().
+
+Use a named regex slot on the target rule and enable gap capture on the enclosing repeated seek rule:
+
+```text
+Item:
+ word=/[A-Za-z]+/
+ I { return(hash("slot", entry_slot(), "text", entry_text())) }
+
+List::OR
+ @capture_gaps
+ I { set(parts, array()) }
+ -> Item[word] {
+   push(parts, hash(
+     "kind", gap_kind(),
+     "span", gap_span(),
+     "text", gap_text(),
+     "item", call(Item)
+   ))
+ }
+ LX {
+   push(parts, hash("kind", gap_kind(), "span", gap_span(), "text", gap_text()))
+   return(copy(parts))
+ }
+```
+
+For input such as `αalpha, beta | gamma\n- deltaω`, this preserves the Unicode prefix `α`, heterogeneous
+interstitial separators `, `, ` | `, and `\n- `, and tail `ω`. Empty spans are returned too. `gap_span()` is a
+detached `{source_id,start,end,provenance}` record over decoded Unicode-scalar half-open coordinates;
+`gap_text()` is its exact source text; `gap_kind()` is `prefix`, `interstitial`, or `tail`.
+
+`Item[word]` is stable named identity. `Item[0]` remains a positional compatibility spelling and can change when
+declarations are reordered. `entry_slot()` returns detached incoming selector identity for an action-edge target
+and `undef` for a direct invocation. A child that consumes beyond its entry match commits the later accepted exit;
+failure and recognition rollback commit nothing, while recursion and nesting keep invocation-local gap state.
+Successful default-loop tails are visible at `LX`; satisfied repetition tails are visible at `EX` or `E`.
+
+The legacy `@capture_slice`, `@capture_from_here`, and `@move_pos` markers remain supported but deliberately do
+not alias `@capture_gaps`. Named marks and explicit capture helpers remain independent and may coexist with it.
+There is no `@emit_gaps`: action code decides whether to retain, transform, or discard each gap. Invalid or
+duplicate slots, bad selectors, duplicate/ineligible directives, legacy-marker conflicts, unavailable access,
+and backwards source cursors produce the typed diagnostics documented in the mdBook capture chapter.
+
 ### Action-edge target indexing
 One important rule-body detail is that action edges target regex slots by index.
 

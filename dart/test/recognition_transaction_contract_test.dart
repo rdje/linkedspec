@@ -67,7 +67,7 @@ void main() {
     expect(counts, containsPair('current_action_ir_nodes', 133));
     expect(counts, containsPair('dedicated_action_ir_nodes', 4));
     expect(counts, containsPair('all_action_ir_nodes', 137));
-    expect(counts, containsPair('canonical_call_contracts', 246));
+    expect(counts, containsPair('canonical_call_contracts', 250));
     expect(counts, containsPair('token_positive_cases', 8));
     expect(counts, containsPair('token_negative_cases', 17));
     expect(counts, containsPair('effect_graph_cases', 6));

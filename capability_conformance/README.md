@@ -302,16 +302,17 @@ Governance is 114, and the combined program-wide public-no-drift row stays pendi
 helper/value, descriptor/generated schema, semantic/MCP field, CLI, or README behavior moved.
 
 `inter_match_gap_capture_contract.json` is the neutral authority for named regex slots and lossless
-prefix/interstitial/tail context. Inter-match gap-capture recurring governance is current across all six private runtime rows; public admission remains pending. Julia `.5.1-.5.5` and shared Lua `.6.1-.6.5` implement and admit their exact private nine-role paths without widening outward surfaces.
+prefix/interstitial/tail context. Inter-match gap public admission is current with four shared calls and unchanged outward facade, descriptor, semantic, MCP, CLI, and README surfaces. Julia `.5.1-.5.5` and shared Lua `.6.1-.6.5` implement and admit their exact nine-role paths without widening those guarded surfaces.
 Run `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py` for the always-on
 neutral proof or `bash tools/check_inter_match_gap_capture_six_runtime.sh` for the repository-routed ordered
 governance route. The latter executes the complete neutral, Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT rows;
-the nine-leg rollout is 8 complete / 1 pending and the checker rejects 61 semantic/topology corruptions plus ten
-Rust, ten Dart, ten Julia, and sixteen Lua admission/regression mutations.
+the nine-leg rollout is 9 complete / 0 pending and the checker rejects 63 semantic/topology corruptions plus ten
+Rust, ten Dart, ten Julia, and sixteen Lua admission/regression mutations. Public no-drift binds exactly six
+documents, twelve stale-current denials, ten outward guards, and 29 reason-checked text/surface mutations.
 Perl `.2.1-.2.3` implement authored/static metadata, private native-live behavior, and independently loaded
 generated parity; `.2.4` admits that existing consumer without an outward API. Its four private accessor nodes are synchronized as recognition `source_read`
-effects at 137 total rows, while shared calls remain 246, public Perl helper coverage remains 122, and typed-source
-composition stays pending. Rust `.3.1-.3.4` implement authored/static/compiled metadata, invocation-local native
+effects at 137 total rows; `.7.2` admits their call names at 250 shared calls and 126 public Perl contracts while
+typed-source composition stays pending. Rust `.3.1-.3.4` implement authored/static/compiled metadata, invocation-local native
 state, ordinary reconstruction, compatible descriptor projection, separate generated-plan parity, and independently
 compiled emitted proof. `.3.5` adds a real primary-command mixed-separator case, requires all nine Rust roles
 exactly once, and admits the consumer ordinarily, canonically, and after Perl in the rooted route. Generated plan
@@ -335,12 +336,12 @@ LuaJIT + recurring + public no-drift 9/9 complete, rejects twenty-six stale mile
 and executes forty-five public-sequence mutations in memory. That projection is distinct from 58 semantic and
 recurring-topology mutations.
 
-The independent checker derives all 133 current ActionIR node kinds from the Perl contract authority and all 246
+The independent checker derives all 133 current ActionIR node kinds from the Perl contract authority and all 250
 current call names from matching Dart, Julia, and Lua inventories. The artifact assigns one base effect to each
 of those rows plus four dedicated `RECOGNITION_*` nodes under the closed nine-allowed/eleven-rejected
 lattice. It separately executes 8 positive / 17 negative token cases, six recursive fixed-point effect graphs,
 six invocation-mark cases, eight cursor-only progress cases, and fifteen portable diagnostic records, then rejects
-58 exact drift mutations. This 133-node census is distinct from the 122 public identifier-shaped Perl contracts
+58 exact drift mutations. This 133-node census is distinct from the 126 public identifier-shaped Perl contracts
 reported by `tools/check_language_capability_coverage.pl`.
 
 Canonical CI requires the tracked artifact/checker and runs the same project-data-routed command unconditionally.
@@ -602,13 +603,14 @@ standalone generated execution. Rust consumes it through
 native, serialized, emitted-plan, and generated execution. Dart consumes the same artifact through
 `cd dart && dart test test/complete_named_mark_contract_test.dart`, including native, generated-plan,
 emitted-state reconstruction, and primary-CLI execution. Its seven-name exact family view is retained after all
-seven names join the aligned 246-name shared inventory. Julia consumes the same artifact through
+seven names join the aligned 250-name shared inventory. Julia consumes the same artifact through
 `LINKEDSPEC_JULIA_CMD=/opt/homebrew/bin/julia bash tools/run_julia_local.sh` plus its focused exact contract. Lua
 consumes it through `bash tools/run_lua_local.sh`, including native and serialized `SpecFile` reconstruction on
 PUC Lua and LuaJIT. All five backends therefore resolve the seven helpers, and `.17.5` admits them into the shared
-inventory. `tools/check_language_capability_coverage.pl` now supplements the 105 corpus fixtures with this exact
-fixture, independently checks all 122 public identifier-shaped Perl contracts, and rejects nine explicitly
-classified compatibility, legacy, and internal names so a symmetric omission cannot remain invisible.
+inventory. `tools/check_language_capability_coverage.pl` supplements the 105 corpus fixtures with this exact
+fixture and the executable public gap example, independently checks all 126 public identifier-shaped Perl
+contracts, and rejects fourteen explicitly classified compatibility, legacy, internal, and grammar-owned names
+so a symmetric omission cannot remain invisible.
 
 `punctuation_light_zero_arg_contract.json` adopts ADR `0033`'s narrow syntax aliases without turning LinkedSpec
 into a general parenthesis-free call language. It locks six standalone bare zero-argument markers, generic bare

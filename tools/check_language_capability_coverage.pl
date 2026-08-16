@@ -180,11 +180,11 @@ for my $contract (@{$perl_contracts}) {
  $perl_current_contract{$name} = 1 if defined($name) && $name =~ /^[A-Za-z_]\w*\z/;
 }
 
-# These eighteen identifier-shaped diagnostics are deliberately not ordinary
+# These fourteen identifier-shaped diagnostics are deliberately not ordinary
 # public current calls. Keeping the classification next to the independent
 # reverse check means a newly added Perl current contract cannot disappear
 # symmetrically from every backend inventory merely because no corpus fixture
-# happens to call it. The four recognition forms are grammar-owned intrinsics
+# happens to call it. The five recognition forms are grammar-owned intrinsics
 # with dedicated ActionIR nodes, not members of the shared helper-call surface.
 my %classified_non_public_perl_contract = (
  array_append_operator => 'internal lowering operation',
@@ -192,10 +192,6 @@ my %classified_non_public_perl_contract = (
  capture => 'legacy capture surface',
  capture_macro => 'legacy capture surface',
  entry_named_map => 'documented compatibility alias',
- entry_slot => 'staged private inter-match gap intrinsic',
- gap_kind => 'staged private inter-match gap intrinsic',
- gap_span => 'staged private inter-match gap intrinsic',
- gap_text => 'staged private inter-match gap intrinsic',
  hash_index_assignment_operator => 'internal lowering operation',
  match_named_map => 'documented compatibility alias',
  observe_recognition => 'grammar-owned dedicated intrinsic',
@@ -245,7 +241,22 @@ fail('complete named-mark fixture must be an object')
 my $complete_mark_source = $complete_mark_contract->{fixture}{spec_source};
 fail('complete named-mark fixture spec_source must be a non-empty string')
  if !defined($complete_mark_source) || ref($complete_mark_source) || $complete_mark_source eq '';
-my $governed_fixture_source = $corpus_source . $complete_mark_source . "\n";
+my $gap_contract = decode_json(read_text('capability_conformance/inter_match_gap_capture_contract.json'));
+fail('inter-match gap public contract must be current')
+ unless ref($gap_contract->{public_contract}) eq 'HASH'
+  && $gap_contract->{public_contract}{status} eq 'current';
+my @gap_public_names = map {
+ fail('inter-match gap public call row must be current')
+  unless ref($_) eq 'HASH' && $_->{status} eq 'current' && defined($_->{name}) && !ref($_->{name});
+ $_->{name};
+} @{$gap_contract->{public_contract}{current_calls} // []};
+fail('inter-match gap public call inventory drifted')
+ unless join("\0", @gap_public_names) eq join("\0", qw(entry_slot gap_kind gap_span gap_text));
+my $gap_public_source = $gap_contract->{public_contract}{executable_example}{spec_source};
+fail('inter-match gap public fixture spec_source must be a non-empty string')
+ if !defined($gap_public_source) || ref($gap_public_source) || $gap_public_source eq '';
+my $governed_fixture_source =
+ $corpus_source . $complete_mark_source . "\n" . $gap_public_source . "\n";
 
 my (@missing_book, @missing_governed_fixture);
 for my $name (@dart) {

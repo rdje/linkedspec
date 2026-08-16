@@ -964,16 +964,16 @@ The statement and expression resolver entrypoints are
 `resolve_action_statement_contracts` and
 `resolve_action_expression_contracts`. `canonical_action_helper_name(name)`
 canonicalizes current aliases, and `is_known_action_ir_call_name(name)` shares
-the same exact 246-name source used by function validation. Resolution walks
+the same exact 250-name source used by function validation. Resolution walks
 nested arguments, shapes, blocks, access indexes, controls, assignments, and
 receiver methods. Unknown calls produce `unknown_helper`; structural parser
 fallback produces `raw_perl`. Neither path invokes a Lua global.
 
-That 246-name table is the governed public-current cross-backend inventory; it is intentionally narrower than
+That 250-name table is the governed public-current cross-backend inventory; it is intentionally narrower than
 every historical Perl diagnostic contract mentioned by the public helper reference. Lua resolves the seven
 documented complete-mark helpers—`mark_entry_start/end`, `mark_match_start/end`, `mark_line`, `mark_col`, and
 `clear_mark`—through the shared inventory while retaining a separate exact family view, as Dart and Julia do.
-Coverage independently checks all 122 public Perl contracts and rejects nine classified non-public names.
+Coverage independently checks all 126 public Perl contracts and rejects fourteen classified non-public names.
 The closed native capture/cursor family comprises 62 unique call names; all 62 are classified, dispatched, and
 present in focused execution sources. Placement-sensitive markers remain a separate four-spelling grammar surface.
 

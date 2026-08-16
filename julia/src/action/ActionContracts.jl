@@ -152,9 +152,6 @@ const _INTER_MATCH_GAP_HELPERS = Set{String}([
     "gap_text",
 ])
 
-is_private_inter_match_gap_helper_name(name::AbstractString) =
-    String(name) in _INTER_MATCH_GAP_HELPERS
-
 const COMPLETE_NAMED_MARK_ACTION_IR_CALL_NAMES = Set{String}([
     "clear_mark",
     "mark_col",
@@ -237,6 +234,7 @@ const _SUPPORTED_ACTION_IR_CALL_NAMES = Set{String}([
     "entry_line",
     "entry_map",
     "entry_named",
+    "entry_slot",
     "entry_start_col",
     "entry_start_line",
     "entry_start_pos",
@@ -248,6 +246,9 @@ const _SUPPORTED_ACTION_IR_CALL_NAMES = Set{String}([
     "flat",
     "flat_array",
     "flat_hash",
+    "gap_kind",
+    "gap_span",
+    "gap_text",
     "has_key",
     "hash",
     "if",
@@ -963,8 +964,7 @@ function _resolve_helper_call!(
         )
         return nothing
     end
-    if !is_known_action_ir_call_name(name) &&
-            !is_private_inter_match_gap_helper_name(name)
+    if !is_known_action_ir_call_name(name)
         push!(
             resolver.diagnostics,
             ActionContractDiagnostic(

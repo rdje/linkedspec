@@ -237,7 +237,7 @@ local function check_runtime_carriers(source, identity, expected)
 end
 
 check_same_json(aliases, expected_aliases, "neutral aliases are exact")
-check_equal(action_call_names.count(), 246, "common current-name inventory stays fixed")
+check_equal(action_call_names.count(), 250, "common current-name inventory stays fixed")
 
 local canonical_count = 0
 for _, family in ipairs(contract.helper_projection_schema.families) do

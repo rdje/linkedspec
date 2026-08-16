@@ -105,7 +105,7 @@ fn neutral_authority_and_rust_admission_are_exact() {
     assert_eq!(contract["format"], 1);
     assert_eq!(contract["expected_counts"]["current_action_ir_nodes"], 133);
     assert_eq!(contract["expected_counts"]["dedicated_action_ir_nodes"], 4);
-    assert_eq!(contract["expected_counts"]["canonical_call_contracts"], 246);
+    assert_eq!(contract["expected_counts"]["canonical_call_contracts"], 250);
     assert_eq!(contract["expected_counts"]["token_positive_cases"], 8);
     assert_eq!(contract["expected_counts"]["token_negative_cases"], 17);
     assert_eq!(contract["expected_counts"]["effect_graph_cases"], 6);

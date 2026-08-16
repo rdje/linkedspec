@@ -10,6 +10,33 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-16 (`INTER-MATCH-GAP-CAPTURE.7.2` — public language/no-drift admission): activation base is clean
+  recurring atomic 253 `d8ed944c`. Adding the four names to shared backend inventories before reclassification
+  produced exact language RED `classified non-public Perl names admitted ... entry_slot, gap_kind, gap_span,
+  gap_text`; replacing the marker-only artifact before checker support produced exact `required sections drifted`.
+- Remove only those four entries from the independent non-public Perl classification. Load the final gap public
+  contract and append its executable example to governed occurrence source, preserving the reported
+  250 current / 105 corpus + 1 exact named-mark / 126 independently derived public Perl boundary.
+- Keep runtime behavior singular and unchanged. Dart adds one `inter_match_gap` family classification; Julia and
+  Lua delete their private-known bypasses because the current inventories are now sole name authority. Parser,
+  compiler, runtime, emitter, primary, generated-plan, and outward facade/schema code do not move.
+- Recognition changes only canonical call projection: add the four names to `source_read` and pin hash
+  `7ea6cc4adae1559b722ff68dbd4c97816d03cf0d0590349b2af776859e85ae3f`. ActionIR rows remain 137 and semantic
+  mutations remain 58.
+- The final gap public contract is exact, not marker-only: six required markers, twelve forbidden stale claims,
+  ten unchanged outward path/token guards, and 29 reason-checked mutations composed as 1 structural + 6 omission
+  + 12 stale-injection + 10 outward-injection cases. Neutral mutations append only two ids for 9/0/63.
+- Public language does not mean outward facade exposure. The same ten paths still reject directive, accessor,
+  named-selector, and named-declaration tokens; README remains untouched and typed-source `gap_composition`
+  remains `.14.5.1`-owned after independent `.7.3` closeout.
+- Focused GREEN is gap 9/0/63 plus public 6/12/10/29, language 250/105+1/126, recognition 137/250/58, Dart 26,
+  Julia recognition 207 + named marks 13 + gap 319, Lua aliases 638 + recognition 246 + gap 392 per ABI, Rust
+  gap 1 + recognition 12, and rooted neutral/Perl-124/Rust-1/Dart-5/Julia-319/PUC-Lua-392/LuaJIT-392. The routed
+  mdBook renders 78 files / 14,956 KiB; exact protected-surface diff, adjacent ledgers, Knowledge, histories,
+  task/memory checks, and all nine doctrines pass before canonical staging. Canonical CI passes CLI 66/66 twice,
+  RAM 59%, Phase 0 1,031/1,031 in 735 seconds, the exact gap matrix, and receipt generation for candidate
+  `1440c0b88243e94a1c685bff7fd129c971236144bd79b14eda48dba81120cc1d`.
+
 - 2026-08-16 (`INTER-MATCH-GAP-CAPTURE.7.1` — recurring admission): clean activation is atomic 252
   `be240c14`. Applying the planned artifact transition before checker changes yielded exact fail-first
   `expected counts drifted`.

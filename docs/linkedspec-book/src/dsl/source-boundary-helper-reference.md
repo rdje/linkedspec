@@ -108,7 +108,7 @@ compatibility aliases. The aliases do not select a legacy coordinate model: text
 reversed spans, boundary mutation, named-map shapes, and generated-parser behavior are the same as the preferred
 spelling.
 
-Lua keeps the aliases outside the shared 246-name current inventory and canonicalizes them before the
+Lua keeps the aliases outside the shared 250-name current inventory and canonicalizes them before the
 existing preferred runtime branches. Those branches now cross Lua's private immutable typed boundary, exactly like
 their preferred spellings, while retaining byte registers and external values. The shared consumer is admitted
 once on each ABI in ordinary and canonical typed-source discovery. Portable new code should still use the preferred
@@ -226,8 +226,9 @@ The four entry/local writers, both location readers, and `clear_mark` have one e
 Dart, Julia, and Lua consume that contract through their native and available generated or serialized routes.
 Lua keeps marks as UTF-8 byte offsets in parse-scoped rule-label buckets, then converts only public positions and
 locations to Unicode characters; PUC Lua and LuaJIT pass the unchanged fixture at 119/119. The seven names are
-admitted into the aligned 246-name backend inventories. Canonical coverage combines the 105-case corpus with the
-exact named-mark fixture and independently requires all 122 public identifier-shaped Perl contracts.
+admitted into the aligned 250-name backend inventories. Canonical coverage combines the 105-case corpus with the
+exact named-mark fixture and the public gap-contract example, and independently requires all 126 public
+identifier-shaped Perl contracts.
 
 Lua also executes the complete governed writer/span/bridge family through that same store on PUC Lua and LuaJIT.
 The unchanged exhaustive named fixture passes both native execution and reconstruction from public serialized
