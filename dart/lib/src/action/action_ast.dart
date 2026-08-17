@@ -133,6 +133,35 @@ final class ActionCallExpr extends ActionExpr {
   }
 }
 
+/// Executes one host-authorized child parser over a direct span binding.
+///
+/// This node owns the complete scalar assignment. A generic `dispatch_span`
+/// call is never an executable fallback.
+final class ActionProgressiveDispatchSpanExpr extends ActionExpr {
+  const ActionProgressiveDispatchSpanExpr({
+    required super.source,
+    required super.sourceSpan,
+    required this.target,
+    required this.parserId,
+    required this.topRule,
+    required this.span,
+  }) : super(kind: 'progressive_dispatch_span');
+
+  final String target;
+  final String parserId;
+  final String topRule;
+  final String span;
+
+  @override
+  ActionJsonObject toJson() => {
+    ...baseJson(),
+    'target': target,
+    'parser_id': parserId,
+    'top_rule': topRule,
+    'span': span,
+  };
+}
+
 /// Creates one rule-local opaque recognition-transaction token.
 final class ActionRecognitionCheckpointExpr extends ActionExpr {
   const ActionRecognitionCheckpointExpr({
@@ -1039,6 +1068,7 @@ RemovedAggregateSelector? findRemovedAggregateSelectorInExpr(ActionExpr expr) {
       }
       return inArgs(args);
     case ActionRecognitionCheckpointExpr():
+    case ActionProgressiveDispatchSpanExpr():
     case ActionRecognizeOnceExpr():
     case ActionRecognitionCommitExpr():
     case ActionRecognitionRollbackExpr():

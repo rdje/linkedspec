@@ -10,6 +10,32 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.4.2` — dormant Dart progressive carriers): exact clean activation is
+  private-authority atomic 269 `e6968b7b`; this focused leaf changes ActionIR/static/runtime/generated carriers,
+  the exact dormant consumer, neutral governance, and durable synchronization without admission.
+- `ActionProgressiveDispatchSpanExpr` owns the complete scalar assignment. The compiler stores only target,
+  normalized literal parser id, literal top rule, and one bare span binding; generic `dispatch_span` never becomes
+  an executable helper fallback.
+- The assignment parser emits the five reserved static operand diagnostics. A compiled-tree walk rejects any
+  residual generic call in rules or user functions, and runtime retains the same rejection for constructed state.
+- Recognition analysis closes `parser_registry_or_staged_dispatch` through ordinary rule and user-function calls
+  and rejects any `recognize_once` target that can reach it. `_RuntimeExecutionContext` independently reports live
+  token maps so authority dispatch rejects precompiled or dynamically composed transaction overlap.
+- The first live-defense proof exposed error masking: `leaveRecognitionInvocation` restored and invalidated the
+  unfinished token but rethrew `recognition_terminal_required`, replacing the primary progressive denial. Cleanup
+  now preserves an existing error after safe restoration and throws terminal-required only on otherwise normal exit.
+- `ProgressiveExecutionSeed` is an opaque unexported host recipe. Each top-level native or generated execution calls
+  `start()` for fresh steps/chain/call state; the invocation still shares the caller's cancellation identity and
+  delegates to the `.4.1` callback-scoped authority.
+- Native, `SpecFile`-JSON reconstructed, generated-plan, and independently analyzed/executed emitted source return
+  `{kind: identifier, text: a}`. The emitted adapter accepts the seed as a host argument while serialized/generated
+  data exclude callbacks, registry entries, source snapshots, cancellation tokens, fingerprints, and mutable state.
+- The exact historical consumer is now 7/7 GREEN but stays under `test_dormant/`; ordinary discovery and canonical
+  CI remain unchanged. Governance records 9 Rust + 8 Dart carrier paths, 2 Julia/Lua guards/8 paths, 10 outward
+  guards, 26 diagnostics, rollout 3/9, and 100 rejected mutations. `.4.3` alone owns admission and Dart rollout.
+- Focused carrier/authority consumers, fatal package analysis, and 408 ordinary tests pass. Direct-dependent and
+  doctrine evidence is recorded in the task-tree leaf before atomic 270.
+
 - 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.4.1` — private Dart progressive authority): exact clean activation is
   dormant-RED atomic 268 `bab4fda6`; the leaf changes one private runtime module plus one dormant focused consumer.
 - `bounded_child_parse_authority.dart` imports only the existing typed `source_location.dart`; it is absent from the

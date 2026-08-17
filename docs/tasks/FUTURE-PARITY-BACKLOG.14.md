@@ -91,13 +91,11 @@
   - [x] **NO BEHAVIOR / VERIFY / COMMIT / CLEAN** — Change only task/live/roadmap/KM/book status needed to preserve
     the audit plan; pass focused/book/doctrine/canonical gates, commit, clear the brief, and prove clean before
     neutral artifact implementation `.14.1.1`.
-
   Activation evidence 2026-08-01: exclusion public no-drift `.24.2` landed at `24770ade` as commit 131/300 with no
   push. Exact post-commit proof found empty status and staged/unstaged diffs, zero-byte brief, synchronized
   Knowledge Map 783/6,348, no rendered book or Python bytecode, and no background result. ADR `0056` and the
   Knowledge Map route the next PNT work to `.14.1`; this first child owns only behavior-free audit and executable
   plan refinement.
-
   Authority and TOOLBOX audit 2026-08-01: ADR `0056`, its canonical Knowledge card, ADRs `0010`, `0012`, `0014`,
   `0015`, `0044`, `0045`, the structural/capture/mark/top-rule Knowledge cards, and the existing rule-local cursor,
   duplicate-slot, callable, semantic, CI, and project-data contracts were retrieved before runtime probing.
@@ -112,7 +110,6 @@
   still host `pos`/`length`/`substr` lowering rather than typed public values. Direct and mutual no-consume
   recursion terminate at the existing `(rule, position)` guard with `undef` and a trace decision, but no structured
   `last_error`; the future portable non-progress diagnostics therefore remain target contract, not current claims.
-
   Helper and documentation audit 2026-08-01, corrected by executable `.14.1.1` source proof: the aligned modern
   projection inventory is exactly 92 canonical calls: 47 capture/mark, 30 entry/match, 11 input/cursor, and four
   explicit cursor-control calls. Perl retains seven callable compatibility aliases (`capture_from_rule_start`,
@@ -128,7 +125,6 @@
   style: `portmap-spec-walkthrough.md` (three passages), `ebnf-spec-walkthrough.md` (one passage), and
   `shipped-specs-and-corpora.md` (one reading-order description). They are current shipped-code descriptions, not
   false behavior claims, but `.14.1.2` must reframe them as compatibility examples rather than general guidance.
-
   Frozen executable plan 2026-08-01: `.14.1.1` creates
   `capability_conformance/typed_source_location_contract.json` with contract id
   `linkedspec-typed-source-location-v1` and independent validator
@@ -143,7 +139,6 @@
   ambiguous/stale regex-slot identity; and four source/registry/capability/policy span-dispatch denials. No source
   spelling is selected. Thirty-six independent mutations cover envelope, coordinate, span/provenance, state,
   transaction, recursion, helper/alias, diagnostic, rollout, tracked-input, and canonical-registration drift.
-
   Storage and rollout plan 2026-08-01: the neutral checker runs only through
   `bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py`; `tools/run_ci_local.sh`
   requires both files as tracked inputs and runs that routed command as an ordinary canonical check. No new shell
@@ -4963,7 +4958,7 @@
   Canonical trigger: `the canonical CI trust boundary and executable Rust rollout/admission truth move together; exact staged receipt-bound local CI is required before landing and closing the Rust parent`.
   Checklist: [x] clean activation/task ownership [x] ADR/Knowledge/committed-carrier retrieval [x] exact stable-identity Rust consumer registration [x] Rust-only neutral rollout/current-boundary promotion [x] direct-dependent/live-doc recomposition [x] focused proof [x] staged canonical receipt [x] atomic commit/brief/clean handoff. Evidence: neutral 3/9/95; Perl 126/126; exact cfg Rust 1/1 in 141.85s and ordinary 0/0; typed 11/3/152, recognition 138/250/58, generated strict Rust 105/105, capability 80/0/0, language 250/126, Cargo format, shell syntax, Knowledge Map, mdBook, histories, task/index, README/memory, nine doctrines, exact canonical-route counts, and receipt-bound staged local CI pass; only Rust admission/rollout moves; consumer identity/cfg/fixture/four routes, production/generated behavior, later backends, typed recurrence, and public/outward surfaces remain exact; Commit: `FUTURE-PARITY-BACKLOG.14.6.3.3 - admit private Rust progressive dispatch`.
 - ID: `FUTURE-PARITY-BACKLOG.14.6.4`
-  Status: `active` (2026-08-17; dormant RED `.0` committed at `bab4fda686eef8e4ab2ec1f4c79f53b15d715393`; private authority `.1` focused-signoff-complete from that exact clean atomic-268 base for intended atomic 269; dedicated-node/four-carrier `.2` next; no push); Goal: Split, implement, and privately admit Dart parity across native, reconstructed, generated-plan, and independently analyzed emitted carriers; Depends on: `.14.6.3`; Children: `.14.6.4.0-.14.6.4.3`.
+  Status: `active` (2026-08-17; authority `.1` committed at `e6968b7bb9eb3ad2fc44cbba60e676d8f6eca249`; dedicated-node/four-carrier `.2` focused-signoff-complete for intended atomic 270; admission `.3` is next; no push); Goal: Split, implement, and privately admit Dart parity across native, reconstructed, generated-plan, and independently analyzed emitted carriers; Depends on: `.14.6.3`; Children: `.14.6.4.0-.14.6.4.3`.
 - ID: `FUTURE-PARITY-BACKLOG.14.6.4.0`
   Status: `done; focused-signoff-complete` (2026-08-17; task-tree-first from exact clean Rust admission atomic 267 `5c4d4218`; intended atomic 268; no push); Goal: Establish one exact dormant final-path Dart RED and freeze disjoint authority/core, carrier-integration, and admission leaves without production behavior; Depends on: `.14.6.3.3`.
   Acceptance: retrieve ADR `0080`, committed progressive/Dart typed/staged/generated authorities, the neutral checker/current boundary, and Toolbox routes before code archaeology; prove the current staged registry rejects `expr-v1`, authored syntax stays generic/unsupported, and native, reconstructed, generated-plan, and independently analyzed emitted carriers converge on the same missing dedicated-node boundary; keep the consumer outside ordinary/canonical discovery; synchronize task/index, Knowledge, book, live histories, and memory without moving production, rollout, generated format, outward surfaces, or typed recurrence.
@@ -4982,7 +4977,12 @@
   Checklist: [x] clean activation/task ownership [x] ADR/Knowledge/neutral retrieval [x] private immutable authority [x] complete dormant focused consumer [x] exact RED/no-carrier boundary [x] durable synchronization [x] focused signoff [x] atomic commit/brief/clean handoff.
   Evidence: private registry/invocation/source-view core and dormant authority 4/4 pass; callback-scoped nested authority expires with its view; fatal full Dart analysis, ordinary 408, staged registry 5, and exact historical +4/-1 missing-node RED pass; progressive 3/9/95, typed 11/3/152, recognition 138/250/58, generated strict Rust 105/105, capability 80/0/0, language 250/126, Knowledge 854/7,222, rendered book 79 files/15,112 KiB then removed, bounded histories/task/index/memory/nine doctrines/no-carrier/no-route/exact-diff proof pass; no syntax/ActionIR/interpreter/emitter/generated-format/CI/rollout/typed/public/outward movement; Commit: `FUTURE-PARITY-BACKLOG.14.6.4.1 - add private Dart progressive dispatch authority`.
 - ID: `FUTURE-PARITY-BACKLOG.14.6.4.2`
-  Status: `pending`; Goal: Add the dedicated Dart node and native, reconstructed, generated-plan, and independently analyzed emitted-source carriers through fresh opaque execution authority while retaining dormancy and rollout RED; Depends on: `.14.6.4.1`.
+  Status: `done; focused-signoff-complete` (2026-08-17; task-tree-first from exact clean Dart-authority atomic 269 `e6968b7b`; intended atomic 270; no push); Goal: Add the dedicated Dart node and native, reconstructed, generated-plan, and independently analyzed emitted-source carriers through fresh opaque execution authority while retaining dormancy and rollout RED; Depends on: `.14.6.4.1`.
+  Acceptance: retrieve ADR `0080`, committed Dart authority/RED, Perl/Rust carrier precedents, ActionIR/static recognition, runtime transaction, generated-v2, and neutral-governance authorities before implementation; add one exclusive logical-only node with literal parser/top identities and one bare span binding, fail closed on malformed/residual generic forms, reject the non-rollbackable effect statically and defensively at runtime, and delegate native/reconstructed/generated-plan/independently analyzed emitted execution through fresh opaque host authority without serializing callbacks, registry/source/cancellation handles, fingerprints, or mutable state; make the exact historical final-path consumer GREEN but keep it outside ordinary/canonical discovery and leave Dart rollout pending.
+  Verification tier: `focused`.
+  Focused checks: unchanged authority consumer; exact four-carrier final-path GREEN and ordinary/canonical absence; ActionIR/static operand/transaction/runtime/generated-source proof; progressive, typed-source, recognition, generated, capability, and language direct dependents; Knowledge, mdBook, bounded histories, task/index, README/memory, nine doctrines, no-admission/no-public boundary, and exact diff.
+  Canonical trigger: `none` — dormant private syntax/carriers and governance markers move without ordinary/canonical admission, rollout promotion, generated format version, dependency/toolchain, storage/path/doctrine infrastructure, or public behavior; `.4.3` owns the trust-boundary change.
+  Checklist: [x] clean activation/task ownership [x] ADR/Knowledge/authority/carrier retrieval [x] exclusive node/static policy [x] four fresh-authority carriers [x] exact consumer GREEN/dormancy [x] neutral/direct-dependent recomposition [x] durable synchronization [x] focused signoff [x] atomic commit/brief/clean handoff. Evidence: one exclusive logical-only node plus exact malformed/residual-generic and static/live transaction rejection pass; cleanup preserves the primary denial after safe unfinished-token invalidation; native/reconstructed/generated-plan/independently analyzed emitted routes return the same detached value through fresh opaque seeds with no serialized callback/registry/source/cancellation/fingerprint/mutable authority; carrier 7/7, authority 4/4, fatal analysis, and ordinary Dart 408 pass; progressive 3/9/100 with 9 Rust + 8 Dart carrier paths and 2 Julia/Lua guards/8 paths, typed 11/3/152, recognition 138/250/58, generated strict Rust 105/105, capability 80/0/0, language 250/126, Knowledge 855/7,231, rendered book 79/15,116 KiB then removed, bounded histories/task/index/memory/nine doctrines/no-admission/no-public/exact-diff proof pass; Commit: `FUTURE-PARITY-BACKLOG.14.6.4.2 - add dormant Dart progressive dispatch carriers`.
 - ID: `FUTURE-PARITY-BACKLOG.14.6.4.3`
   Status: `pending`; Goal: Admit the unchanged Dart consumer exactly once in ordinary/canonical proof, promote only Dart rollout, recompose direct dependents, and close `.14.6.4`; Depends on: `.14.6.4.2`.
 - ID: `FUTURE-PARITY-BACKLOG.14.6.5`

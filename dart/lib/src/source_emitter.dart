@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'ast/spec_ast.dart';
 import 'compiler/compiled_spec.dart';
+import 'runtime/bounded_child_parse_authority.dart';
 import 'runtime/generated_plan.dart';
 import 'runtime/interpreter.dart';
 import 'runtime/semantic_observation.dart';
@@ -322,6 +323,7 @@ Object? executeGeneratedParserV2(
   String actualContract = linkedSpecGeneratedSourceContract,
   RuntimeDiagnosticOutputSink? diagnosticOutputSink,
   RuntimeSemanticObservationSink? semanticObservationSink,
+  ProgressiveExecutionSeed? boundedChildParseAuthority,
 }) {
   validateGeneratedSourceContractV2(actualContract, sourceIdentity);
   final validated = _validatedGeneratedRulePlanV2(
@@ -330,7 +332,11 @@ Object? executeGeneratedParserV2(
     sourceIdentity,
   );
   try {
-    return LinkedSpecRuntimeEngine(compiled)
+    final engine = LinkedSpecRuntimeEngine(
+      compiled,
+      boundedChildParseAuthority: boundedChildParseAuthority,
+    );
+    return engine
         .executeGeneratedWithPlan(
           input,
           validated,
@@ -456,6 +462,7 @@ String emitDartSourceV2(CompiledSpec compiled, String sourceIdentity) {
   try {
     validateCompiledRegexSlotIdentities(compiled);
     validateNoRemovedAggregateSelectors(compiled);
+    validateProgressiveSpanDispatchContract(compiled);
   } on SpecValidationException catch (error) {
     throw _generatedRegexSlotIdentityInvalid(sourceIdentity, error);
   } on CompiledSpecException catch (error) {
@@ -501,6 +508,7 @@ String emitDartSourceV2(CompiledSpec compiled, String sourceIdentity) {
 import 'dart:convert';
 
 import 'package:linkedspec_dart/linkedspec_dart.dart';
+import 'package:linkedspec_dart/src/runtime/bounded_child_parse_authority.dart';
 
 const linkedspecGeneratedSourceContract =
     'linkedspec-generated-source-v2';
@@ -566,6 +574,7 @@ Object? execute(
   String? topRule,
   RuntimeDiagnosticOutputSink? diagnosticOutputSink,
   RuntimeSemanticObservationSink? semanticObservationSink,
+  ProgressiveExecutionSeed? boundedChildParseAuthority,
 }) {
   validateGeneratedSourceContractV2(
     linkedspecGeneratedSourceContract,
@@ -580,6 +589,7 @@ Object? execute(
     actualContract: linkedspecGeneratedSourceContract,
     diagnosticOutputSink: diagnosticOutputSink,
     semanticObservationSink: semanticObservationSink,
+    boundedChildParseAuthority: boundedChildParseAuthority,
   );
 }
 
@@ -626,6 +636,7 @@ Map<String, GeneratedRuleFamily> _validatedGeneratedRulePlanV2(
   try {
     validateCompiledRegexSlotIdentities(compiled);
     validateNoRemovedAggregateSelectors(compiled);
+    validateProgressiveSpanDispatchContract(compiled);
   } on SpecValidationException catch (error) {
     throw _generatedRegexSlotIdentityInvalid(sourceIdentity, error);
   } on CompiledSpecException catch (error) {

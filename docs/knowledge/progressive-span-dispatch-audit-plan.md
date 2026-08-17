@@ -17,7 +17,7 @@ answers:
   - "is the neutral progressive span dispatch contract executable"
   - "how does typed transaction safety compose with progressive dispatch"
 date: 2026-08-17
-status: executable neutral authority and private Perl/Rust admissions current; other backends and typed progressive admission pending
+status: executable neutral authority, private Perl/Rust admissions, and dormant Dart carriers current; Dart admission, later backends, and typed progressive admission pending
 tags: [progressive-parsing, source-location, span, registry, authority, cancellation, diagnostics, task-tree]
 evidence: "FUTURE-PARITY-BACKLOG.14.6.0 retrieves ADRs 0012-0016 and 0056, the typed/staged/loader authorities, and the five backend registries before probing. LinkedSpec::call_spec_handler_subst lowers both parse_job(...) and dispatch_span(...) to LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER. The Perl registry executes only actionir-body.spec/action_block through builtin:actionir-body.spec and rejects specs/json.spec at resolve; Rust, Dart, Julia, and Lua have the same narrow identity. Their job spans are legacy start/end/line shells rather than typed source-authority spans, and none carries cancellation or a policy ceiling. Native spec loaders resolve/read/compile filesystem inputs before execution and therefore are not safe in-parse registry authority. The typed checker is 10 complete / 4 pending / 126 while the independently closed recognition transaction contract is 9/9; git history proves owner .14.3 never promoted typed transaction_safety, so corrective prerequisite .14.6.0.1 owns that missed composition and stale-current governance before progressive behavior."
 evidence_update_2026_08_17_neutral: "Corrective .14.6.0.1 landed at 27f9c87f with typed transaction safety current at 11/3/152. FUTURE-PARITY-BACKLOG.14.6.1 selects value = dispatch_span(\"expr-v1\", \"Expr\", span) and adds linkedspec-progressive-span-dispatch-v1 plus its independent checker: 2 immutable registry entries, 2 sources/8 views, 6 authority, 6 cancellation, 8 chain, 4 execution cases, 5 backend guard groups/17 paths plus 10 outward guards, 26 diagnostics, rollout 1/9, and 86 mutations. Canonical registration is current while every backend and the typed progressive row remain pending; the recognition effect has no current node/call rows, guarded backend paths omit both future tokens, ten facade/schema/semantic/MCP/CLI/README paths deny premature exposure, and the Perl lowering probe retains the unsupported-helper sentinel."
@@ -29,6 +29,7 @@ evidence_update_2026_08_17_rust_carriers: "FUTURE-PARITY-BACKLOG.14.6.3.2 adds o
 evidence_update_2026_08_17_rust_admission: "FUTURE-PARITY-BACKLOG.14.6.3.3 preserves the historical consumer identity/cfg, exact fixture, and four carrier behaviors while requiring it as a tracked canonical input and executing its cfg-enabled target exactly once. Only Rust rollout advances: governance is 3/9 complete, 3 pending-backend groups/11 paths, 9 governed Rust carrier paths, 10 outward guards, 26 diagnostics, and 95 mutations. Ordinary Rust discovery still executes zero tests; Dart/Julia/Lua, typed recurrence, generated format, public inventory, facades, schemas, MCP, CLI, README, and outward surfaces remain pending or unchanged."
 evidence_update_2026_08_17_dart_red: "FUTURE-PARITY-BACKLOG.14.6.4.0 freezes dart/test_dormant/progressive_span_dispatch_contract_test.dart. The exact consumer derives neutral 3/9/95 truth, rejects expr-v1 through the separate staged function-body registry, and proves native, SpecFile-JSON reconstructed, generated-plan, and independently analyzed/executed emitted-source routes preserve one generic ActionCallExpr and the same structured unknown_helper dispatch_span failure. Four groups pass and only the missing progressive_dispatch_span / PROGRESSIVE_DISPATCH_SPAN assertion fails. Ordinary/canonical discovery, production, rollout, generated format, typed recurrence, and outward surfaces do not move; .4.1-.3 exclusively own Dart authority, carriers, and admission."
 evidence_update_2026_08_17_dart_authority: "FUTURE-PARITY-BACKLOG.14.6.4.1 adds a private ActionIR-independent Dart authority over already-compiled callbacks and the existing typed SourceAuthority. Immutable logical registry entries, capability/policy intersections, ceiling minima, shared identity-bearing cancellation/deadline/steps, decreasing same-identity spans, independent depth/call limits, expiring bounded views, global scalar rebasing, callback containment, and deeply detached node-bounded results enforce the neutral contract and all 26 diagnostics. Because Dart callbacks cannot borrow a mutable invocation, nested dispatch is available only through the callback-scoped request and fails after its shared view expires; retained callbacks therefore gain no lasting dispatch authority. The analyzed-but-undiscovered four-test consumer covers every neutral row plus adversaries. Full analysis and 408 ordinary tests pass, while the original +4/-1 missing-node RED, 3/9/95 rollout, generated format, CI topology, and outward surfaces stay exact for .4.2-.3."
+evidence_update_2026_08_17_dart_carriers: "FUTURE-PARITY-BACKLOG.14.6.4.2 adds one exclusive logical-only Dart node, five static operand/residual-generic denials, recognition graph effect rejection plus live-token defense, a fresh opaque execution seed, and equal native/reconstructed/generated-plan/independently analyzed emitted-source results. Generated data excludes callbacks, registry, source snapshots, cancellation, fingerprints, and mutable authority. The exact consumer is GREEN but dormant; governance is 9 Rust + 8 Dart carrier paths, 2 Julia/Lua guard groups/8 paths, 10 outward guards, 26 diagnostics, rollout 3/9, and 100 mutations. Dart admission remains owned by .4.3."
 reverify:
   - "perl -Iperl -MLinkedSpec -e 'print LinkedSpec::call_spec_handler_subst(\"Top\", q{return(parse_job(\"child.spec\", \"payload\"));})'"
   - "bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py"
@@ -45,10 +46,10 @@ Progressive dispatch is synchronous child-parser invocation while a parent parse
 post-AST work: collect parse jobs, order them, run later parsers, and stitch results. They share provenance and
 registry principles but not execution state or scheduling.
 
-Private Perl and Rust progressive behavior is current, while Dart, Julia, and Lua remain pending. Both admitted
-backends recognize
-`dispatch_span(...)` as one dedicated intrinsic, while `parse_job(...)` and every other progressive path remain
-unsupported. The five backend staged registries still implement only one function-body
+Private Perl and Rust progressive behavior is admitted, and Dart's equivalent four carriers are current but
+dormant. Julia and Lua remain pending. All three implemented backends recognize `dispatch_span(...)` as one
+dedicated intrinsic, while `parse_job(...)` and every other progressive path remain unsupported. The five backend
+staged registries still implement only one function-body
 adapter only: `actionir-body.spec` resolves to `builtin:actionir-body.spec`, compiles top rule `action_block`, and
 parses ActionIR body text. Passing an ordinary `.spec` path fails at resolve. The existing `source_span` is an
 offset/line shell copied beside text; it is not the typed same-source span plus source authority required by ADR
@@ -60,16 +61,20 @@ execution must never call them from authored recognition. A host or already-auth
 compiles first, then registers an opaque logical identity. Authored code may look up that identity only; a span is
 data and provenance, never loader authority.
 
-Rust's exact historical final-path RED is now GREEN under the same explicit outer cfg. The consumer derives the
+Rust's exact historical final-path RED is GREEN under the same explicit outer cfg. The consumer derives the
 neutral contract, rejects `expr-v1` through the unrelated staged registry, then proves native, reconstructed,
 generated-plan, and independently compiled emitted-source routes against one dedicated logical-only node. Without
-the cfg, Cargo discovers zero tests; the target is not routed by canonical CI. This is implemented but dormant
-private behavior, not admitted Rust rollout.
+the cfg, Cargo discovers zero tests; canonical CI supplies the cfg once and owns admitted Rust rollout.
 
-The separate Rust `.14.6.3.1` authority is now executable behind its own outer cfg. It mirrors the immutable
+The separate Rust `.14.6.3.1` authority is executable behind its own outer cfg. It mirrors the immutable
 registry, bounded view, narrowing authority, shared safe-point, decreasing-chain, detached-result, and typed
 diagnostic model. `.14.6.3.2` now attaches the four carriers through a fresh opaque execution seed. Neither focused
-target promotes Rust rollout; `.14.6.3.3` remains the admission owner.
+target alone promotes rollout; `.14.6.3.3` admits the exact carrier consumer.
+
+Dart `.14.6.4.2` now provides the same logical-only shape through `ActionProgressiveDispatchSpanExpr`, an opaque
+host seed, static recognition-effect closure, and live-token defense. Native, reconstructed, generated-plan, and
+independently analyzed emitted source agree, while the exact consumer remains outside ordinary and canonical
+discovery for `.14.6.4.3`.
 
 ## Frozen authority and source-view model
 

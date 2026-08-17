@@ -2,38 +2,40 @@
 
 ## Current Activity
 
-- Dart private-authority `.14.6.4.1` is focused-signoff-complete from exact clean dormant-RED atomic 268
-  `bab4fda6`; intended atomic 269 has no canonical trigger.
-- One unexported ActionIR-independent module owns immutable already-compiled registry entries, fresh invocation
-  authority, typed same-source bounded views, narrowing grants/ceilings, shared cancellation/deadline/steps,
-  decreasing chain/depth/call limits, callback containment, and detached bounded results with all 26 diagnostics.
-- Nested dispatch is available only through the callback-scoped request and expires with its source view; retained
-  Dart callbacks cannot preserve the live invocation authority that Rust's borrow checker prevents statically.
-- Its analyzed-but-undiscovered four-test consumer is GREEN; fatal package analysis and 408 ordinary tests pass.
-- The historical final-path consumer remains exactly +4/-1 at the missing dedicated node. One generic
-  `ActionCallExpr` still reaches structured `unknown_helper` through native, reconstructed, generated-plan, and
-  independently analyzed/executed emitted-source routes.
-- `.14.6.4.2` alone owns the dedicated node/four carriers; `.4.3` alone owns exact ordinary/canonical admission and
-  Dart-only rollout promotion.
-- Progressive rollout is neutral + Perl + Rust at 3/9; governance is 95 mutations with 9 governed Rust carrier
-  paths, 3 remaining backend guard groups/11 paths, 10 outward guards, and 26 diagnostics;
+- Dart dormant-carrier `.14.6.4.2` is focused-signoff-complete from exact clean private-authority atomic 269
+  `e6968b7b`; intended atomic 270 has no canonical trigger.
+- One exclusive `ActionProgressiveDispatchSpanExpr` owns the complete assignment and serializes only target,
+  literal parser/top identities, and one bare span binding. Malformed or residual generic forms fail closed.
+- Static recognition closure classifies the node as `parser_registry_or_staged_dispatch`; live token maps provide a
+  defensive runtime check. Recognition cleanup now preserves an existing primary error after safe token restore/
+  invalidation instead of masking it with `recognition_terminal_required`.
+- An opaque host seed starts fresh execution state for native, `SpecFile`-JSON reconstructed, generated-plan, and
+  independently analyzed/executed emitted source. All four return the same detached result without serializing
+  callbacks, registry/source/cancellation authority, fingerprints, budgets, or mutable state.
+- The exact historical consumer is 7/7 GREEN but remains under `test_dormant/`; its authority companion is 4/4,
+  fatal analysis and 408 ordinary tests pass, and ordinary/canonical discovery remains unchanged.
+- `.14.6.4.3` alone owns exact ordinary/canonical admission and Dart-only rollout promotion.
+- Progressive rollout is neutral + Perl + Rust at 3/9; governance is 100 mutations with 9 Rust + 8 dormant Dart
+  carrier paths, 2 remaining Julia/Lua guard groups/8 paths, 10 outward guards, and 26 diagnostics;
   recognition stays 138 node rows (134 current + four dedicated) / 250 calls / 58 mutations.
-- Typed remains 11/3/152 and generated format is unchanged; Dart/Julia/Lua, recurrence, public projection, and
+- Typed remains 11/3/152 and generated format is unchanged; Dart admission, Julia/Lua, recurrence, public projection, and
   outward surfaces remain pending.
-- Parser/compiler/interpreter/emitter and generated format, storage census, CI topology, rollout, typed recurrence,
-  public inventory, and outward surfaces are unchanged.
+- Storage census, CI topology, rollout, typed recurrence, public inventory, and outward surfaces are unchanged.
 
 ## Latest Completed Slice
 
-- `.14.6.4.1` implements Dart's private authority and complete dormant focused proof while preserving the exact
-  final-path RED, 3/9/95, and every carrier/admission boundary; focused signoff is complete.
+- `.14.6.4.2` implements Dart's exclusive node, static/runtime policy, fresh opaque seed, and four dormant carriers;
+  exact focused proof passes while admission and rollout remain owned by `.4.3`.
 
 ## Next Action
 
-- Commit atomic 269, clear the brief, then activate dedicated-node and four-carrier leaf `.14.6.4.2` only from the
-  verified clean boundary.
+- Commit atomic 270, clear the brief, then activate admission leaf `.14.6.4.3` only from the verified clean boundary.
 
 ## Recent Completions
+
+- `2026-08-17` — `.14.6.4.2` adds one logical-only Dart node and four fresh-authority dormant carriers, closes
+  static/live transaction seams, and advances governance to 9 Rust + 8 Dart carrier paths / 100 mutations without
+  admission or rollout movement.
 
 - `2026-08-17` — `.14.6.4.1` adds unexported Dart registry/invocation/source-view authority with a complete dormant
   GREEN consumer; carrier behavior, final-path RED, rollout, and public surfaces remain unchanged.
@@ -80,8 +82,6 @@
 
 - `2026-08-16` — `.7.2` canonical-signoff-completed four shared gap calls and public no-drift at 9/0/63 with
   exact public 6/12/10/29 governance from clean `d8ed944c`; guarded outward surfaces remain unchanged.
-
-- `2026-08-16` — `.7.1` admitted only recurring proof at 8/1/61 and landed cleanly as atomic 253 at `d8ed944c`.
 
 ## History
 

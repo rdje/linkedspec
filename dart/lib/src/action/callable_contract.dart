@@ -201,6 +201,7 @@ void _normalizeExpr(ActionExpr expr, UserFunctionRegistry registry) {
     case ActionCallExpr(:final name, :final args):
       _normalizeArgs(CallableSurface.helper, name, args, registry);
     case ActionRecognitionCheckpointExpr():
+    case ActionProgressiveDispatchSpanExpr():
     case ActionRecognizeOnceExpr():
     case ActionRecognitionCommitExpr():
     case ActionRecognitionRollbackExpr():

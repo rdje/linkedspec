@@ -171,12 +171,12 @@ RUSTFLAGS='--cfg linkedspec_progressive_span_dispatch_red' cargo test \
 It validates the reserved private `dispatch_span("logical-parser-id", "Top", span)` expression without enabling
 backend syntax. The checker independently executes 2 sources/8 rebased views, 6 authority-minimum cases, 6
 cancellation/deadline/budget cases, 8 decreasing-chain/bound cases, and 4 isolation/detachment cases; locks 26
-diagnostics and neutral + Perl + Rust 3/9 rollout; guards 11 implementation paths across the three still-pending
-backend groups, 9 Rust carrier paths, and 10 outward paths; and rejects 95 mutations. A passing check proves no path loader,
+diagnostics and neutral + Perl + Rust 3/9 rollout; guards 8 implementation paths across the two still-pending
+Julia/Lua groups, 9 Rust carrier paths, 8 dormant Dart carrier paths, and 10 outward paths; and rejects 100 mutations. A passing check proves no path loader,
 registry mutation, capability/policy elevation, cancellation reset, non-decreasing cycle, parent-state leak,
 uncommitted recognition effect, live result handle, fallback, or premature backend/typed rollout claim. It also
 requires the typed row to remain pending, the rejected effect to own exactly current node
-`PROGRESSIVE_DISPATCH_SPAN` and no call row, both tokens to remain absent from guarded Dart/Julia/Lua paths,
+`PROGRESSIVE_DISPATCH_SPAN` and no call row, both tokens to remain absent from guarded Julia/Lua paths,
 and private spelling/node/rollout tokens to remain absent from ten facade/schema/semantic/MCP/CLI/README paths.
 
 Perl carrier integration and admission now prove
@@ -226,7 +226,7 @@ cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only 
 cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test_dormant/progressive_span_dispatch_contract_test.dart
 ```
 
-The authority command passes four groups: every neutral view/authority/cancellation/chain/execution row and all 26 diagnostic contexts, then nested rebasing/shared limits, callback-view and retained-request expiry, immutable registry inputs, callback containment, UTF-8 diagnostic bounding, and cyclic/live/oversized result rejection. The final-path command still passes its first four groups and fails only at the absent `progressive_dispatch_span` / `PROGRESSIVE_DISPATCH_SPAN` node. All four carrier routes retain structured `unknown_helper`; ordinary/canonical discovery omit both consumers. Carrier `.14.6.4.2` and admission `.14.6.4.3` remain separate.
+The authority command passes four groups: every neutral view/authority/cancellation/chain/execution row and all 26 diagnostic contexts, then nested rebasing/shared limits, callback-view and retained-request expiry, immutable registry inputs, callback containment, UTF-8 diagnostic bounding, and cyclic/live/oversized result rejection. The final-path command now passes seven groups: one exclusive logical-only node, static malformed/residual-generic rejection, static and live transaction defense, native/reconstructed/generated-plan equality, fresh execution state, and independently analyzed/executed emitted-source equality without serialized authority. Ordinary/canonical discovery still omit both consumers. Admission `.14.6.4.3` remains separate.
 
 The `.14.4.0` audit found one contradiction in that baseline: `direct_nonprogress` used the same textual identity for invocation and parent. Corrective `.14.4.0.1` changes all six observation identities to positive unique
 monotonic numbers and validates lineage before exact fixture comparison. Four reason-checked regressions prove

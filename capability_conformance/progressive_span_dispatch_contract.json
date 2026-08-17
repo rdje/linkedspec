@@ -2,7 +2,7 @@
   "format": 1,
   "contract_id": "linkedspec-progressive-span-dispatch-v1",
   "task_owner": "FUTURE-PARITY-BACKLOG.14.6.1",
-  "status": "perl_and_rust_complete_other_backends_pending",
+  "status": "perl_rust_and_dart_carriers_complete_other_backends_pending",
   "expected_counts": {
     "registry_entries": 2,
     "sources": 2,
@@ -12,12 +12,13 @@
     "chain_cases": 8,
     "execution_cases": 4,
     "rust_carrier_paths": 9,
-    "backend_guard_groups": 3,
-    "backend_guard_paths": 11,
+    "dart_carrier_paths": 8,
+    "backend_guard_groups": 2,
+    "backend_guard_paths": 8,
     "outward_guard_paths": 10,
     "diagnostics": 26,
     "rollout_legs": 9,
-    "mutations": 95
+    "mutations": 100
   },
   "authored_surface": {
     "example": "value = dispatch_span(\"expr-v1\", \"Expr\", span)",
@@ -31,7 +32,7 @@
     ],
     "result": "one detached child payload returned as the expression value",
     "failure_policy": "fail_only; every dispatch or child failure propagates unchanged and no null, fallback, retry, or alternate parser is implied",
-    "availability": "private Perl and Rust runtimes admitted; every other backend remains unavailable until its independent rollout row completes"
+    "availability": "private Perl and Rust runtimes admitted; Dart carriers are complete but dormant; every remaining backend remains unavailable until its independent rollout row completes"
   },
   "policy": {
     "registry": "the host seeds immutable logical entries containing already compiled parser authority; authored execution may look up an identity but cannot resolve, load, compile, mutate, or enumerate",
@@ -865,7 +866,7 @@
     }
   ],
   "current_boundary": {
-    "status": "perl_and_rust_admitted_other_backend_rows_pending",
+    "status": "perl_rust_admitted_dart_carriers_complete_other_backend_rows_pending",
     "typed_rollout": {
       "path": "capability_conformance/typed_source_location_contract.json",
       "leg": "progressive_span_dispatch",
@@ -932,19 +933,45 @@
         }
       ]
     },
+    "dart_carriers": {
+      "consumer_path": "dart/test_dormant/progressive_span_dispatch_contract_test.dart",
+      "canonical_discovery": "absent_dormant",
+      "marker_rows": [
+        {
+          "path": "dart/lib/src/action/action_ast.dart",
+          "tokens": ["ActionProgressiveDispatchSpanExpr", "progressive_dispatch_span"]
+        },
+        {
+          "path": "dart/lib/src/action/action_parser.dart",
+          "tokens": ["dispatch_span", "progressive_parser_identity_literal_required"]
+        },
+        {
+          "path": "dart/lib/src/action/action_contracts.dart",
+          "tokens": ["ActionProgressiveDispatchSpanExpr"]
+        },
+        {
+          "path": "dart/lib/src/compiler/compiled_spec.dart",
+          "tokens": ["validateProgressiveSpanDispatchContract", "parser_registry_or_staged_dispatch"]
+        },
+        {
+          "path": "dart/lib/src/runtime/bounded_child_parse_authority.dart",
+          "tokens": ["ProgressiveExecutionSeed", "ProgressiveExecutionState"]
+        },
+        {
+          "path": "dart/lib/src/runtime/interpreter.dart",
+          "tokens": ["boundedChildParseAuthority", "hasActiveRecognitionTransaction"]
+        },
+        {
+          "path": "dart/lib/src/source_emitter.dart",
+          "tokens": ["boundedChildParseAuthority", "ProgressiveExecutionSeed"]
+        },
+        {
+          "path": "dart/test_dormant/progressive_span_dispatch_contract_test.dart",
+          "tokens": ["four_routes", "independently analyzed emitted source", "progressive_dispatch_span"]
+        }
+      ]
+    },
     "backend_guard_groups": [
-      {
-        "backend": "dart",
-        "paths": [
-          "dart/lib/src/action/action_contracts.dart",
-          "dart/lib/src/action/action_parser.dart",
-          "dart/lib/src/runtime/interpreter.dart"
-        ],
-        "forbidden_tokens": [
-          "dispatch_span",
-          "PROGRESSIVE_DISPATCH_SPAN"
-        ]
-      },
       {
         "backend": "julia",
         "paths": [
@@ -1391,6 +1418,11 @@
     "current_rust_node_marker",
     "current_rust_authority_marker",
     "current_rust_generated_options_marker",
+    "current_dart_consumer",
+    "current_dart_discovery",
+    "current_dart_node_marker",
+    "current_dart_authority_marker",
+    "current_dart_generated_marker",
     "current_backend_guard_path",
     "current_backend_guard_token",
     "current_outward_guard_path",

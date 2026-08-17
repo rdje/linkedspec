@@ -240,6 +240,7 @@ CompiledSpec compileSpec(
     );
     validateCompiledRegexSlotIdentities(compiled);
     validateNoRemovedAggregateSelectors(compiled);
+    validateProgressiveSpanDispatchContract(compiled);
     _validateRecursiveObservationPolicy(compiled);
     if (traceScope != null) {
       trace?.exitScope(
@@ -491,8 +492,44 @@ void validateNoRemovedAggregateSelectors(CompiledSpec compiled) {
   }
 }
 
+/// Reject every generic spelling that escaped the exclusive assignment parser.
+void validateProgressiveSpanDispatchContract(CompiledSpec compiled) {
+  void validate(Object? value) {
+    if (value is List) {
+      for (final child in value) {
+        validate(child);
+      }
+      return;
+    }
+    if (value is! Map) {
+      return;
+    }
+    final object = value.cast<String, Object?>();
+    if (object['kind'] == 'call' && object['name'] == 'dispatch_span') {
+      throw const CompiledSpecException(
+        'LINKEDSPEC_PROGRESSIVE_SPAN_DISPATCH_ERROR:'
+        'progressive_span_binding_required',
+      );
+    }
+    for (final child in object.values) {
+      validate(child);
+    }
+  }
+
+  for (final label in compiled.compiledRuleOrder) {
+    final rule = compiled.rulesByLabel[label]!;
+    for (final payload in rule.actionPayloads) {
+      validate(payload.actionAst.toJson());
+    }
+  }
+  for (final function in compiled.functions) {
+    validate(parseActionBlock(function.bodySource).toJson());
+  }
+}
+
 final class _RecursiveObservationEffects {
   bool writesObservation = false;
+  bool usesProgressiveDispatch = false;
   final Set<String> ruleCalls = <String>{};
   final Set<String> functionCalls = <String>{};
   final Set<String> recognitionAttempts = <String>{};
@@ -531,6 +568,8 @@ void _validateRecursiveObservationPolicy(CompiledSpec compiled) {
         if (rule is String) {
           effects.observedRules.add(rule);
         }
+      } else if (kind == 'progressive_dispatch_span') {
+        effects.usesProgressiveDispatch = true;
       } else if (kind == 'recognize_once') {
         final rule = object['rule'];
         if (rule is String) {
@@ -578,6 +617,8 @@ void _validateRecursiveObservationPolicy(CompiledSpec compiled) {
     current
       ..writesObservation =
           current.writesObservation || discovered.writesObservation
+      ..usesProgressiveDispatch =
+          current.usesProgressiveDispatch || discovered.usesProgressiveDispatch
       ..ruleCalls.addAll(discovered.ruleCalls)
       ..functionCalls.addAll(discovered.functionCalls)
       ..recognitionAttempts.addAll(discovered.recognitionAttempts)
@@ -606,6 +647,14 @@ void _validateRecursiveObservationPolicy(CompiledSpec compiled) {
     for (final entry in functionEffects.entries)
       entry.key: entry.value.writesObservation,
   };
+  final ruleDispatches = <String, bool>{
+    for (final entry in ruleEffects.entries)
+      entry.key: entry.value.usesProgressiveDispatch,
+  };
+  final functionDispatches = <String, bool>{
+    for (final entry in functionEffects.entries)
+      entry.key: entry.value.usesProgressiveDispatch,
+  };
   var changed = true;
   while (changed) {
     changed = false;
@@ -619,6 +668,17 @@ void _validateRecursiveObservationPolicy(CompiledSpec compiled) {
         ruleWrites[entry.key] = true;
         changed = true;
       }
+      final inheritedDispatch =
+          entry.value.ruleCalls.any(
+            (callee) => ruleDispatches[callee] ?? false,
+          ) ||
+          entry.value.functionCalls.any(
+            (callee) => functionDispatches[callee] ?? false,
+          );
+      if (inheritedDispatch && !(ruleDispatches[entry.key] ?? false)) {
+        ruleDispatches[entry.key] = true;
+        changed = true;
+      }
     }
     for (final entry in functionEffects.entries) {
       final inherited =
@@ -630,6 +690,17 @@ void _validateRecursiveObservationPolicy(CompiledSpec compiled) {
         functionWrites[entry.key] = true;
         changed = true;
       }
+      final inheritedDispatch =
+          entry.value.ruleCalls.any(
+            (callee) => ruleDispatches[callee] ?? false,
+          ) ||
+          entry.value.functionCalls.any(
+            (callee) => functionDispatches[callee] ?? false,
+          );
+      if (inheritedDispatch && !(functionDispatches[entry.key] ?? false)) {
+        functionDispatches[entry.key] = true;
+        changed = true;
+      }
     }
   }
 
@@ -638,6 +709,12 @@ void _validateRecursiveObservationPolicy(CompiledSpec compiled) {
     ...functionEffects.entries,
   ]) {
     for (final target in entry.value.recognitionAttempts) {
+      if (ruleDispatches[target] ?? false) {
+        throw CompiledSpecException(
+          'recognition_effect_forbidden:parser_registry_or_staged_dispatch '
+          'owner=${entry.key} target=$target',
+        );
+      }
       if (ruleWrites[target] ?? false) {
         throw CompiledSpecException(
           'recognition_effect_forbidden:binding_write '

@@ -459,10 +459,10 @@ Recognition effect analysis rejects any attempted rule/function graph that reach
 live tokens defensively. The exact outer-cfg consumer is GREEN and canonically routed once under that cfg, while
 ordinary Cargo still executes zero tests. Only Rust rollout advances; later backends and typed/public rows remain pending.
 
-Dart remains frozen at the same pre-carrier boundary. Its final-path consumer lives outside ordinary discovery
-and passes four groups before one exact missing-node RED. The reserved assignment is still one generic
-`ActionCallExpr`; native, `SpecFile`-JSON reconstructed, generated-plan, and fresh emitted-source routes all reject
-it with structured `unknown_helper`, and the staged function-body registry still rejects `expr-v1` at resolve.
+Dart's historical pre-carrier boundary remains preserved by the same final-path consumer outside ordinary
+discovery, but `.14.6.4.2` turns it GREEN. The reserved assignment is now one exclusive
+`ActionProgressiveDispatchSpanExpr`; malformed direct operands and residual generic calls reject statically, and
+the separate staged function-body registry still rejects `expr-v1` at resolve.
 
 Private authority leaf `.14.6.4.1` is now executable beneath that boundary. A host constructs immutable entries
 from already-compiled callbacks and creates a fresh invocation over decoded source snapshots. The existing Dart
@@ -472,7 +472,10 @@ deadline/steps are shared, repeated identities must shrink, and depth/call/resul
 The child receives no parent registers. Its bounded view and nested-dispatch request expire together after return
 or failure, closing Dart's callback-retention seam; only deeply detached plain data can return. A separate dormant
 four-test consumer executes every neutral row, all 26 diagnostics, and retention/rebasing/detachment adversaries.
-Carrier `.14.6.4.2` and admission `.4.3` remain pending, so rollout stays 3/9.
+An opaque execution seed now carries native, `SpecFile`-JSON reconstructed, generated-plan, and independently
+analyzed emitted-source execution to the same detached child result. Static recognition closure and a live-token
+check forbid non-rollbackable dispatch, and generated data contains only logical operands. The seven-group carrier
+consumer remains dormant; admission `.4.3` is pending, so rollout stays 3/9.
 
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions or
 typed spans are authored values. The `recognition_*` operations are current across all six runtime routes, while

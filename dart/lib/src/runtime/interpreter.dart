@@ -9,6 +9,7 @@ import '../ast/spec_ast.dart';
 import '../compiler/compiled_spec.dart';
 import '../trace/trace.dart';
 import '../validation/spec_validator.dart';
+import 'bounded_child_parse_authority.dart';
 import 'generated_plan.dart';
 import 'matching.dart';
 import 'recognition_transaction.dart';
@@ -220,12 +221,14 @@ final class LinkedSpecRuntimeEngine {
     this.maxIterations = 10000,
     this.specName,
     this.specPath,
+    this.boundedChildParseAuthority,
   });
 
   final CompiledSpec compiledSpec;
   final int maxIterations;
   final String? specName;
   final String? specPath;
+  final ProgressiveExecutionSeed? boundedChildParseAuthority;
   final Map<int, ActionBlock> _userFunctionBodyCache = <int, ActionBlock>{};
   final Map<String, ActionBlock> _codeblockBodyCache = <String, ActionBlock>{};
 
@@ -1576,6 +1579,11 @@ final class LinkedSpecRuntimeEngine {
         for (final statement in payload.actionAst.statements) {
           if (statement.expr case ActionAssignScalarExpr(:final name)) {
             context.recordRuleLocalBinding(name);
+          }
+          if (statement.expr case ActionProgressiveDispatchSpanExpr(
+            :final target,
+          )) {
+            context.recordRuleLocalBinding(target);
           }
           if (statement.expr case ActionAssignScalarExpr(
             value: ActionObserveRecognitionExpr(:final target),
@@ -3430,6 +3438,31 @@ final class LinkedSpecRuntimeEngine {
           'recognition_checkpoint must be assigned to a rule-local token '
           "in rule '$ruleLabel'",
         );
+      case ActionProgressiveDispatchSpanExpr(
+        :final target,
+        :final parserId,
+        :final topRule,
+        :final span,
+      ):
+        final authority = context.progressiveExecution;
+        if (authority == null) {
+          throw ProgressiveDispatchException.missingRegistry(
+            origin: '$ruleLabel:dispatch_span',
+            parserId: parserId,
+          );
+        }
+        final value = authority.dispatch(
+          origin: '$ruleLabel:dispatch_span',
+          parserId: parserId,
+          topRule: topRule,
+          span: _copyValue(_bindingValueFor(context, span)),
+          transactionActive: context.hasActiveRecognitionTransaction,
+        );
+        final stored = _copyValue(value);
+        context.variables[target] = stored;
+        context.arrays.remove(target);
+        context.hashes.remove(target);
+        return _copyValue(stored);
       case ActionRecognizeOnceExpr(:final token, :final rule):
         final child = currentEdge != null && currentEdge.target.label == rule
             ? _executeActionEdgeChild(currentEdge, context)
@@ -3464,7 +3497,13 @@ final class LinkedSpecRuntimeEngine {
           );
           Error.throwWithStackTrace(error, stackTrace);
         }
-      case ActionCallExpr():
+      case ActionCallExpr(:final name):
+        if (name == 'dispatch_span') {
+          throw RuntimeInterpreterException(
+            'LINKEDSPEC_PROGRESSIVE_SPAN_DISPATCH_ERROR:'
+            'progressive_span_binding_required',
+          );
+        }
         return _evaluateCall(
           expr,
           context,
@@ -7377,7 +7416,8 @@ final class _RuntimeExecutionContext {
     this.generatedPlan,
     this.generatedSourceIdentity,
   }) : registers = RuntimeMatchRegisters.empty(input),
-       sourceAuthority = SourceAuthority(sources: {'input': input}) {
+       sourceAuthority = SourceAuthority(sources: {'input': input}),
+       progressiveExecution = engine.boundedChildParseAuthority?.start() {
     recognitionAuthority = RecognitionTransactionAuthority(
       sourceAuthority: sourceAuthority,
       sourceIdentity: 'input',
@@ -7394,6 +7434,7 @@ final class _RuntimeExecutionContext {
   final Map<String, GeneratedRuleFamily>? generatedPlan;
   final String? generatedSourceIdentity;
   final SourceAuthority sourceAuthority;
+  final ProgressiveExecutionState? progressiveExecution;
   late final RecognitionTransactionAuthority recognitionAuthority;
   final Map<String, Object?> variables = <String, Object?>{};
   final Map<String, List<Object?>> arrays = <String, List<Object?>>{};
@@ -7422,6 +7463,9 @@ final class _RuntimeExecutionContext {
   String? get currentRuleLabel {
     return _ruleStack.isEmpty ? null : _ruleStack.last;
   }
+
+  bool get hasActiveRecognitionTransaction =>
+      _recognitionFrames.any((frame) => frame.tokens.isNotEmpty);
 
   int get cursorCharOffset {
     return codeUnitOffsetToCharOffset(input, cursorCodeUnit);
@@ -7516,7 +7560,9 @@ final class _RuntimeExecutionContext {
       recognitionAuthority.leaveInvocation(frame.authorityFrame);
     } on Object catch (caught) {
       leaveError = caught;
-      rethrow;
+      if (error == null) {
+        rethrow;
+      }
     } finally {
       final observation = frame.observationScope;
       if (observation != null) {

@@ -326,7 +326,117 @@ final class ProgressiveInvocationConfig {
   final int totalCalls;
 }
 
-/// Dynamic defensive arguments accepted before a static ActionIR carrier exists.
+/// Opaque host-only recipe for one fresh progressive authority per execution.
+///
+/// The recipe is deliberately absent from specifications and generated plans.
+/// Its identity is the object identity; none of its callbacks or policy state
+/// is serializable or introspectable by authored code.
+final class ProgressiveExecutionSeed {
+  ProgressiveExecutionSeed({
+    required ProgressiveRegistry registry,
+    required ProgressiveInvocationConfig invocation,
+    required Iterable<String> callerCapabilities,
+    required Iterable<String> requiredCapabilities,
+    required ProgressiveCeilings callerCeilings,
+    required ProgressiveSourceDetail requiredSourceDetail,
+    required int dispatchCost,
+  }) : _registry = registry,
+       _invocation = invocation,
+       _callerCapabilities = _validatedStrings(
+         callerCapabilities,
+         context: 'progressive caller capabilities',
+       ),
+       _requiredCapabilities = _validatedStrings(
+         requiredCapabilities,
+         context: 'progressive required capabilities',
+       ),
+       _callerCeilings = callerCeilings,
+       _requiredSourceDetail = requiredSourceDetail,
+       _dispatchCost = dispatchCost {
+    if (dispatchCost < 0) {
+      throw ProgressiveConfigurationException(
+        'progressive dispatch cost must be nonnegative',
+      );
+    }
+  }
+
+  final ProgressiveRegistry _registry;
+  final ProgressiveInvocationConfig _invocation;
+  final List<String> _callerCapabilities;
+  final List<String> _requiredCapabilities;
+  final ProgressiveCeilings _callerCeilings;
+  final ProgressiveSourceDetail _requiredSourceDetail;
+  final int _dispatchCost;
+
+  /// Starts one execution-local state with fresh budgets and call accounting.
+  ProgressiveExecutionState start() => ProgressiveExecutionState._(
+    invocation: _registry.startInvocation(_invocation),
+    callerCapabilities: _callerCapabilities,
+    requiredCapabilities: _requiredCapabilities,
+    callerCeilings: _callerCeilings,
+    requiredSourceDetail: _requiredSourceDetail,
+    childToken: _invocation.cancellationToken,
+    dispatchCost: _dispatchCost,
+  );
+
+  @override
+  String toString() => 'ProgressiveExecutionSeed(<opaque>)';
+}
+
+/// One execution-local authority shared by every nested runtime context.
+final class ProgressiveExecutionState {
+  const ProgressiveExecutionState._({
+    required ProgressiveInvocation invocation,
+    required List<String> callerCapabilities,
+    required List<String> requiredCapabilities,
+    required ProgressiveCeilings callerCeilings,
+    required ProgressiveSourceDetail requiredSourceDetail,
+    required ProgressiveCancellationToken childToken,
+    required int dispatchCost,
+  }) : _invocation = invocation,
+       _callerCapabilities = callerCapabilities,
+       _requiredCapabilities = requiredCapabilities,
+       _callerCeilings = callerCeilings,
+       _requiredSourceDetail = requiredSourceDetail,
+       _childToken = childToken,
+       _dispatchCost = dispatchCost;
+
+  final ProgressiveInvocation _invocation;
+  final List<String> _callerCapabilities;
+  final List<String> _requiredCapabilities;
+  final ProgressiveCeilings _callerCeilings;
+  final ProgressiveSourceDetail _requiredSourceDetail;
+  final ProgressiveCancellationToken _childToken;
+  final int _dispatchCost;
+
+  /// Executes one statically carried child parse through the private authority.
+  Object? dispatch({
+    required String origin,
+    required String parserId,
+    required String topRule,
+    required Object? span,
+    required bool transactionActive,
+  }) => _invocation.dispatch(
+    ProgressiveDispatchArguments(
+      origin: origin,
+      parserId: parserId,
+      topRule: topRule,
+      span: span,
+      callerCapabilities: _callerCapabilities,
+      requiredCapabilities: _requiredCapabilities,
+      callerCeilings: _callerCeilings,
+      requiredSourceDetail: _requiredSourceDetail,
+      childToken: _childToken,
+      cost: _dispatchCost,
+      transactionActive: transactionActive,
+    ),
+  );
+
+  @override
+  String toString() => 'ProgressiveExecutionState(<opaque>)';
+}
+
+/// Dynamic defensive arguments accepted by the private authority boundary.
 final class ProgressiveDispatchArguments {
   const ProgressiveDispatchArguments({
     required this.origin,
@@ -961,6 +1071,14 @@ final class ProgressiveInvocation {
 
 /// Portable progressive-dispatch diagnostic.
 final class ProgressiveDispatchException implements Exception {
+  factory ProgressiveDispatchException.missingRegistry({
+    required String origin,
+    required String parserId,
+  }) => ProgressiveDispatchException._(
+    'progressive_registry_missing',
+    <String, Object?>{'origin': origin, 'parser_id': parserId},
+  );
+
   ProgressiveDispatchException._(String code, Map<String, Object?> fields)
     : _record = Map<String, Object?>.unmodifiable(<String, Object?>{
         'code': code,

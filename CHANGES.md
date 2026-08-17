@@ -10,6 +10,28 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.4.2 — add dormant Dart progressive dispatch carriers
+
+- Activated task-tree-first from exact clean Dart-authority atomic 269 `e6968b7b`; retrieved ADR `0080`, the
+  committed Dart RED/authority, Perl/Rust carrier precedents, ActionIR/effect/runtime/generated seams, and neutral
+  governance before implementation.
+- Added one exclusive `ActionProgressiveDispatchSpanExpr` whole-assignment node. Literal parser/top identities and
+  one bare span binding are mandatory; malformed direct operands and residual generic calls fail during compile,
+  with a runtime generic-call defense retained for precompiled state.
+- Added static `parser_registry_or_staged_dispatch` closure through rule and user-function calls plus a live-token
+  runtime check. Corrected recognition cleanup so an already-raised runtime error survives unfinished-token
+  restoration/invalidation; `recognition_terminal_required` remains authoritative when there is no prior error.
+- Added opaque `ProgressiveExecutionSeed`/fresh execution state and carried native, `SpecFile`-JSON reconstructed,
+  generated-plan, and independently analyzed/executed emitted source to the same detached child value. Compiled and
+  generated data contain only target/parser/top/span, never callback, registry, source, cancellation, fingerprint,
+  budget, or mutable invocation authority.
+- Converted the exact historical dormant consumer to seven GREEN groups without changing its path or adding an
+  ordinary/canonical route. Neutral governance now locks 9 Rust + 8 Dart carrier paths, 2 Julia/Lua pending guard
+  groups/8 paths, 10 outward guards, 26 diagnostics, rollout 3/9, and 100 mutations; `.14.6.4.3` owns admission.
+- Fatal Dart analysis, the authority 4/4 consumer, exact carrier 7/7 consumer, and all 408 ordinary Dart tests pass.
+  Generated format version, staged registry, typed rollout, public helper inventory, canonical CI, and outward
+  surfaces remain unchanged.
+
 ## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.4.1 — add private Dart progressive dispatch authority
 
 - Activated from exact clean Dart-RED atomic 268 `bab4fda6`; retrieved ADR `0080`, the neutral contract, typed

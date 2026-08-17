@@ -1,4 +1,4 @@
-// FUTURE-PARITY-BACKLOG.14.6.4.0 — dormant Dart progressive-dispatch RED.
+// FUTURE-PARITY-BACKLOG.14.6.4.2 — dormant Dart progressive carriers.
 //
 // Ordinary `dart test` discovery ignores test_dormant/. Before admission, run
 // this exact final-path consumer through repository-local project data:
@@ -7,13 +7,14 @@
 //   bash ../tools/run_dart_project_data.sh test --reporter failures-only \
 //     test_dormant/progressive_span_dispatch_contract_test.dart
 //
-// The sole intentional failure is the absent dedicated progressive ActionIR
-// node. Generic unknown-helper fallback is not an implementation.
+// The carrier is complete here, but canonical discovery and the Dart rollout
+// row remain owned by FUTURE-PARITY-BACKLOG.14.6.4.3.
 
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:linkedspec_dart/linkedspec_dart.dart';
+import 'package:linkedspec_dart/src/runtime/bounded_child_parse_authority.dart';
 import 'package:test/test.dart';
 
 typedef _JsonObject = Map<String, Object?>;
@@ -23,6 +24,8 @@ const _contractPath =
 const _ciDriverPath = '../tools/run_ci_local.sh';
 const _contractId = 'linkedspec-progressive-span-dispatch-v1';
 const _sourceIdentity = 'progressive-span-dispatch/dart-red.spec';
+const _fingerprint =
+    'sha256:1111111111111111111111111111111111111111111111111111111111111111';
 const _authoredSource = r'''
 Top::
  I {
@@ -32,6 +35,7 @@ Top::
  }
  /never/
 ''';
+const _expectedValue = <String, Object?>{'kind': 'identifier', 'text': 'a'};
 
 void main() {
   final contract = _object(jsonDecode(File(_contractPath).readAsStringSync()));
@@ -43,7 +47,7 @@ void main() {
       expect(contract['format'], 1);
       expect(
         contract['status'],
-        'perl_and_rust_complete_other_backends_pending',
+        'perl_rust_and_dart_carriers_complete_other_backends_pending',
       );
       expect(contract['expected_counts'], <String, Object?>{
         'registry_entries': 2,
@@ -54,12 +58,13 @@ void main() {
         'chain_cases': 8,
         'execution_cases': 4,
         'rust_carrier_paths': 9,
-        'backend_guard_groups': 3,
-        'backend_guard_paths': 11,
+        'dart_carrier_paths': 8,
+        'backend_guard_groups': 2,
+        'backend_guard_paths': 8,
         'outward_guard_paths': 10,
         'diagnostics': 26,
         'rollout_legs': 9,
-        'mutations': 95,
+        'mutations': 100,
       });
       expect(_ids(contract, 'view_cases'), <String>[
         'unicode_middle',
@@ -205,102 +210,198 @@ void main() {
     },
   );
 
-  test('authored syntax remains one generic call in compiled state', () {
-    final compiled = _compile(_authoredSource);
-    final encoded = jsonEncode(compiled.toJson());
-    final calls = _allMaps(compiled.toJson())
-        .where(
-          (node) => node['kind'] == 'call' && node['name'] == 'dispatch_span',
-        )
-        .toList(growable: false);
-    expect(calls, hasLength(1));
-    expect(_list(calls.single['args']), hasLength(3));
-    expect(
-      _allMaps(
-        compiled.toJson(),
-      ).where((node) => node['kind'] == 'progressive_dispatch_span'),
-      isEmpty,
-    );
-    expect(_occurrences(encoded, '"name":"dispatch_span"'), 1);
-    expect(encoded, isNot(contains('PROGRESSIVE_DISPATCH_SPAN')));
-  });
-
   test(
-    'native reconstructed and generated-plan carriers share unknown-helper RED',
+    'authored syntax compiles to one exclusive logical-only ActionIR node',
     () {
-      final parsed = parseSpecWithStagedUserFunctionDefinitions(
-        _authoredSource,
-      );
-      final compiled = compileSpec(parsed);
-      _expectUnknownHelper(
-        () => LinkedSpecRuntimeEngine(compiled).parse('abc'),
-        'native',
-      );
-
-      final reconstructed = SpecFile.fromJson(
-        _object(jsonDecode(jsonEncode(parsed.toJson()))),
-      );
-      validateSpec(reconstructed);
-      _expectUnknownHelper(
-        () => LinkedSpecRuntimeEngine(compileSpec(reconstructed)).parse('abc'),
-        'reconstructed',
-      );
-
-      _expectUnknownHelper(
-        () => executeGeneratedParserV2(
-          compiled,
-          buildGeneratedRulePlan(compiled),
-          'abc',
-          _sourceIdentity,
-        ),
-        'generated-plan',
-      );
+      final compiled = _compile(_authoredSource);
+      final encoded = jsonEncode(compiled.toJson());
+      final calls = _allMaps(compiled.toJson())
+          .where(
+            (node) => node['kind'] == 'call' && node['name'] == 'dispatch_span',
+          )
+          .toList(growable: false);
+      final progressiveNodes = _allMaps(compiled.toJson())
+          .where((node) => node['kind'] == 'progressive_dispatch_span')
+          .toList(growable: false);
+      expect(calls, isEmpty);
+      expect(progressiveNodes, hasLength(1));
+      expect(progressiveNodes.single, containsPair('target', 'value'));
+      expect(progressiveNodes.single, containsPair('parser_id', 'expr-v1'));
+      expect(progressiveNodes.single, containsPair('top_rule', 'Expr'));
+      expect(progressiveNodes.single, containsPair('span', 'span'));
+      expect(_occurrences(encoded, '"name":"dispatch_span"'), 0);
+      expect(_occurrences(encoded, '"kind":"progressive_dispatch_span"'), 1);
+      expect(encoded, isNot(contains('PROGRESSIVE_DISPATCH_SPAN')));
+      expect(encoded, isNot(contains(_fingerprint)));
+      expect(encoded, isNot(contains('ProgressiveExecutionSeed')));
+      expect(encoded, isNot(contains('ProgressiveRegistryEntry')));
     },
   );
 
-  test('independently analyzed emitted source reaches the same RED', () async {
-    final compiled = _compile(_authoredSource);
-    final emitted = emitDartSourceV2(compiled, _sourceIdentity);
-    final packageRoot = Directory.current.absolute;
-    final scratch = Directory(
-      '${packageRoot.path}/.dart_tool/linkedspec-dart-progressive-red-'
-      '${pid}-${DateTime.now().microsecondsSinceEpoch}',
-    )..createSync(recursive: true);
-    try {
-      final generatedPath = '${scratch.path}/generated.dart';
-      final mainPath = '${scratch.path}/main.dart';
-      File(generatedPath).writeAsStringSync(emitted);
-      File(mainPath).writeAsStringSync(r'''
-import 'dart:convert';
-
-import 'generated.dart' as generated;
-
-void main() {
-  print(jsonEncode(generated.execute('abc')));
-}
-''');
-      await _expectProcessSuccess(packageRoot, Platform.environment, <String>[
-        'analyze',
-        '--fatal-infos',
-        '--fatal-warnings',
-        generatedPath,
-        mainPath,
-      ]);
-      final run = await Process.run(
-        Platform.resolvedExecutable,
-        <String>['run', mainPath],
-        workingDirectory: packageRoot.path,
-        environment: Platform.environment,
+  test('malformed and residual generic dispatch forms fail statically', () {
+    for (final (source, code) in <(String, String)>[
+      (
+        r'''Top:: I { span = hash("source_id", "input", "start", 0, "end", 1, "provenance", "authored"); value = dispatch_span(parser_id, "Expr", span) } /never/''',
+        'progressive_parser_identity_literal_required',
+      ),
+      (
+        r'''Top:: I { span = hash("source_id", "input", "start", 0, "end", 1, "provenance", "authored"); value = dispatch_span("Expr/V1", "Expr", span) } /never/''',
+        'progressive_parser_identity_invalid',
+      ),
+      (
+        r'''Top:: I { span = hash("source_id", "input", "start", 0, "end", 1, "provenance", "authored"); value = dispatch_span("expr-v1", top_rule, span) } /never/''',
+        'progressive_top_rule_literal_required',
+      ),
+      (
+        r'''Top:: I { span = hash("source_id", "input", "start", 0, "end", 1, "provenance", "authored"); value = dispatch_span("expr-v1", "Bad-Rule", span) } /never/''',
+        'progressive_top_rule_invalid',
+      ),
+      (
+        r'''Top:: I { value = dispatch_span("expr-v1", "Expr", hash("source_id", "input")) } /never/''',
+        'progressive_span_binding_required',
+      ),
+      (
+        r'''Top:: I { span = hash("source_id", "input", "start", 0, "end", 1, "provenance", "authored"); return(cat(dispatch_span("expr-v1", "Expr", span))) } /never/''',
+        'progressive_span_binding_required',
+      ),
+      (
+        r'''Top:: I { tx = recognition_checkpoint(); matched = recognize_once(tx, call(Child)); recognition_rollback(tx); return(matched) }
+Child:: I { span = hash("source_id", "input", "start", 0, "end", 1, "provenance", "authored"); value = dispatch_span("expr-v1", "Expr", span); return(value) } /never/''',
+        'recognition_effect_forbidden:parser_registry_or_staged_dispatch',
+      ),
+    ]) {
+      expect(
+        () => _compile(source),
+        throwsA(predicate((error) => '$error'.contains(code), code)),
       );
-      expect(run.exitCode, isNot(0));
-      expect('${run.stdout}\n${run.stderr}', contains('unknown_helper'));
-      expect('${run.stdout}\n${run.stderr}', contains('dispatch_span'));
-    } finally {
-      scratch.deleteSync(recursive: true);
     }
   });
 
-  test('final path stops only at the missing dedicated node', () {
+  test('live recognition transaction is rejected defensively', () {
+    const source = r'''
+Top:: I {
+ tx = recognition_checkpoint()
+ span = hash("source_id", "input", "start", 0, "end", 1, "provenance", "authored")
+ value = dispatch_span("expr-v1", "Expr", span)
+ recognition_rollback(tx)
+ return(value)
+}
+/never/
+''';
+    expect(
+      () => LinkedSpecRuntimeEngine(
+        _compile(source),
+        boundedChildParseAuthority: _executionSeed('abc'),
+      ).parse('abc'),
+      throwsA(
+        predicate(
+          (error) => '$error'.contains('progressive_transaction_forbidden'),
+          'live recognition transaction rejection',
+        ),
+      ),
+    );
+  });
+
+  test('four_routes share one carrier and fresh opaque host authority', () {
+    final parsed = parseSpecWithStagedUserFunctionDefinitions(_authoredSource);
+    final compiled = compileSpec(parsed);
+    final seed = _executionSeed('abc');
+    expect(seed.toString(), 'ProgressiveExecutionSeed(<opaque>)');
+    expect(identical(seed.start(), seed.start()), isFalse);
+    expect(
+      () => LinkedSpecRuntimeEngine(compiled).parse('abc'),
+      throwsA(
+        predicate(
+          (error) => '$error'.contains('progressive_registry_missing'),
+          'missing private authority rejection',
+        ),
+      ),
+    );
+
+    final native = LinkedSpecRuntimeEngine(
+      compiled,
+      boundedChildParseAuthority: seed,
+    );
+    final nativeResult = native.parse('abc');
+    expect(nativeResult.value, _expectedValue);
+    expect(nativeResult.cursorCharOffset, 0);
+    expect(
+      native.parse('abc').value,
+      _expectedValue,
+      reason: 'each top-level parse must start a fresh invocation budget',
+    );
+
+    final reconstructed = SpecFile.fromJson(
+      _object(jsonDecode(jsonEncode(parsed.toJson()))),
+    );
+    validateSpec(reconstructed);
+    expect(
+      LinkedSpecRuntimeEngine(
+        compileSpec(reconstructed),
+        boundedChildParseAuthority: _executionSeed('abc'),
+      ).parse('abc').value,
+      _expectedValue,
+    );
+
+    expect(
+      executeGeneratedParserV2(
+        compiled,
+        buildGeneratedRulePlan(compiled),
+        'abc',
+        _sourceIdentity,
+        boundedChildParseAuthority: _executionSeed('abc'),
+      ),
+      _expectedValue,
+    );
+  });
+
+  test(
+    'independently analyzed emitted source carries only logical state',
+    () async {
+      final compiled = _compile(_authoredSource);
+      final emitted = emitDartSourceV2(compiled, _sourceIdentity);
+      expect(emitted, isNot(contains(_fingerprint)));
+      expect(emitted, isNot(contains('ProgressiveCompiledAuthority')));
+      expect(emitted, isNot(contains('ProgressiveRegistryEntry(')));
+      expect(emitted, isNot(contains('ProgressiveCancellationToken(')));
+      expect(emitted, isNot(contains('PROGRESSIVE_DISPATCH_SPAN')));
+
+      final packageRoot = Directory.current.absolute;
+      final scratch = Directory(
+        '${packageRoot.path}/.dart_tool/linkedspec-dart-progressive-carrier-'
+        '$pid-${DateTime.now().microsecondsSinceEpoch}',
+      )..createSync(recursive: true);
+      try {
+        final generatedPath = '${scratch.path}/generated.dart';
+        final mainPath = '${scratch.path}/main.dart';
+        File(generatedPath).writeAsStringSync(emitted);
+        File(mainPath).writeAsStringSync(_emittedMain);
+        await _expectProcessSuccess(packageRoot, Platform.environment, <String>[
+          'analyze',
+          '--fatal-infos',
+          '--fatal-warnings',
+          generatedPath,
+          mainPath,
+        ]);
+        final run = await Process.run(
+          Platform.resolvedExecutable,
+          <String>['run', mainPath],
+          workingDirectory: packageRoot.path,
+          environment: Platform.environment,
+        );
+        expect(
+          run.exitCode,
+          0,
+          reason: 'emitted progressive carrier failed:\n${run.stderr}',
+        );
+        expect(_object(jsonDecode('${run.stdout}'.trim())), _expectedValue);
+      } finally {
+        scratch.deleteSync(recursive: true);
+      }
+    },
+  );
+
+  test('carrier remains dormant and absent from the public umbrella', () {
     expect(
       File('test/progressive_span_dispatch_contract_test.dart').existsSync(),
       isFalse,
@@ -315,20 +416,126 @@ void main() {
       ),
       reason: 'the dormant Dart consumer must remain absent from canonical CI',
     );
-
-    final progressiveNodes = _allMaps(_compile(_authoredSource).toJson())
-        .where((node) => node['kind'] == 'progressive_dispatch_span')
-        .toList(growable: false);
-    expect(
-      progressiveNodes,
-      hasLength(1),
-      reason:
-          'LINKEDSPEC_PROGRESSIVE_SPAN_DISPATCH_RED: missing dedicated '
-          'node=[PROGRESSIVE_DISPATCH_SPAN]; generic dispatch_span '
-          'unknown-helper fallback is not an implementation',
-    );
+    final umbrella = File('lib/linkedspec_dart.dart').readAsStringSync();
+    for (final token in <String>[
+      'dispatch_span',
+      'PROGRESSIVE_DISPATCH_SPAN',
+      'progressive_span_dispatch',
+      'ProgressiveExecutionSeed',
+    ]) {
+      expect(umbrella, isNot(contains(token)));
+    }
   });
 }
+
+ProgressiveExecutionSeed _executionSeed(String input) {
+  final ceilings = ProgressiveCeilings(
+    sourceDetail: ProgressiveSourceDetail.text,
+    policyModes: const <String>['deterministic', 'fail-only'],
+    maxSteps: 100,
+    maxResultNodes: 100,
+    maxDiagnosticBytes: 4096,
+  );
+  final registry = ProgressiveRegistry(
+    entries: <ProgressiveRegistryEntry>[
+      ProgressiveRegistryEntry(
+        parserId: 'expr-v1',
+        compiledAuthority: (request) => <String, Object?>{
+          'kind': 'identifier',
+          'text': request.sourceView.text,
+        },
+        fingerprint: _fingerprint,
+        allowedTopRules: const <String>['Expr'],
+        capabilities: const <String>['parse'],
+        ceilings: ceilings,
+      ),
+    ],
+  );
+  return ProgressiveExecutionSeed(
+    registry: registry,
+    invocation: ProgressiveInvocationConfig(
+      sources: <String, String>{'input': input},
+      sourceId: 'input',
+      cancellationToken: ProgressiveCancellationToken(),
+      clock: const ProgressiveClock(_zeroClock),
+      deadlineTick: 100,
+      remainingSteps: 100,
+      maxDepth: 8,
+      maxCalls: 16,
+    ),
+    callerCapabilities: const <String>['parse'],
+    requiredCapabilities: const <String>['parse'],
+    callerCeilings: ceilings,
+    requiredSourceDetail: ProgressiveSourceDetail.none,
+    dispatchCost: 1,
+  );
+}
+
+int _zeroClock() => 0;
+
+const _emittedMain = r'''
+import 'dart:convert';
+
+import 'package:linkedspec_dart/src/runtime/bounded_child_parse_authority.dart';
+
+import 'generated.dart' as generated;
+
+int zeroClock() => 0;
+
+ProgressiveExecutionSeed executionSeed(String input) {
+  final ceilings = ProgressiveCeilings(
+    sourceDetail: ProgressiveSourceDetail.text,
+    policyModes: const <String>['deterministic', 'fail-only'],
+    maxSteps: 100,
+    maxResultNodes: 100,
+    maxDiagnosticBytes: 4096,
+  );
+  return ProgressiveExecutionSeed(
+    registry: ProgressiveRegistry(
+      entries: <ProgressiveRegistryEntry>[
+        ProgressiveRegistryEntry(
+          parserId: 'expr-v1',
+          compiledAuthority: (request) => <String, Object?>{
+            'kind': 'identifier',
+            'text': request.sourceView.text,
+          },
+          fingerprint:
+              'sha256:1111111111111111111111111111111111111111111111111111111111111111',
+          allowedTopRules: const <String>['Expr'],
+          capabilities: const <String>['parse'],
+          ceilings: ceilings,
+        ),
+      ],
+    ),
+    invocation: ProgressiveInvocationConfig(
+      sources: <String, String>{'input': input},
+      sourceId: 'input',
+      cancellationToken: ProgressiveCancellationToken(),
+      clock: const ProgressiveClock(zeroClock),
+      deadlineTick: 100,
+      remainingSteps: 100,
+      maxDepth: 8,
+      maxCalls: 16,
+    ),
+    callerCapabilities: const <String>['parse'],
+    requiredCapabilities: const <String>['parse'],
+    callerCeilings: ceilings,
+    requiredSourceDetail: ProgressiveSourceDetail.none,
+    dispatchCost: 1,
+  );
+}
+
+void main() {
+  print(
+    jsonEncode(
+      generated.execute(
+        'abc',
+        boundedChildParseAuthority: executionSeed('abc'),
+      ),
+    ),
+  );
+}
+''';
 
 CompiledSpec _compile(String source) =>
     compileSpec(parseSpecWithStagedUserFunctionDefinitions(source));
@@ -349,20 +556,6 @@ Iterable<_JsonObject> _allMaps(Object? value) sync* {
       yield* _allMaps(child);
     }
   }
-}
-
-void _expectUnknownHelper(Object? Function() operation, String carrier) {
-  expect(
-    operation,
-    throwsA(
-      predicate(
-        (error) =>
-            '$error'.contains('unknown_helper') &&
-            '$error'.contains('dispatch_span'),
-        '$carrier carrier must reject only generic dispatch_span fallback',
-      ),
-    ),
-  );
 }
 
 Future<ProcessResult> _expectProcessSuccess(

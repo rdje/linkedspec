@@ -883,6 +883,52 @@ final class _ActionParser {
     );
     final value = _child(right.text, right.start).parseExpression();
     if (_isIdentifier(left.text)) {
+      if (value case ActionCallExpr(
+        name: 'dispatch_span',
+        sourceMethod: 'dispatch_span',
+        :final args,
+      )) {
+        Never invalid(String code) => throw FormatException(
+          'LINKEDSPEC_PROGRESSIVE_SPAN_DISPATCH_ERROR:$code',
+        );
+
+        final parserId = switch (args.firstOrNull) {
+          ActionPositionalArgument(
+            value: ActionStringLiteralExpr(:final value),
+          ) =>
+            value,
+          _ => invalid('progressive_parser_identity_literal_required'),
+        };
+        if (!RegExp(
+          r'^[a-z][a-z0-9]*(?:[._:-][a-z0-9]+)*$',
+        ).hasMatch(parserId)) {
+          invalid('progressive_parser_identity_invalid');
+        }
+        final topRule = switch (args.length > 1 ? args[1] : null) {
+          ActionPositionalArgument(
+            value: ActionStringLiteralExpr(:final value),
+          ) =>
+            value,
+          _ => invalid('progressive_top_rule_literal_required'),
+        };
+        if (!RegExp(r'^[A-Za-z_][A-Za-z0-9_]*$').hasMatch(topRule)) {
+          invalid('progressive_top_rule_invalid');
+        }
+        final span = switch (args.length > 2 ? args[2] : null) {
+          ActionPositionalArgument(value: ActionVariableExpr(:final name))
+              when args.length == 3 =>
+            name,
+          _ => invalid('progressive_span_binding_required'),
+        };
+        return ActionProgressiveDispatchSpanExpr(
+          source: text,
+          sourceSpan: _span(start, start + text.length),
+          target: left.text,
+          parserId: parserId,
+          topRule: topRule,
+          span: span,
+        );
+      }
       return ActionAssignScalarExpr(
         source: text,
         sourceSpan: _span(start, start + text.length),

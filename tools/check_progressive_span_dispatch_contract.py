@@ -32,7 +32,7 @@ AUTHORED_SURFACE = {
     ],
     "result": "one detached child payload returned as the expression value",
     "failure_policy": "fail_only; every dispatch or child failure propagates unchanged and no null, fallback, retry, or alternate parser is implied",
-    "availability": "private Perl and Rust runtimes admitted; every other backend remains unavailable until its independent rollout row completes",
+    "availability": "private Perl and Rust runtimes admitted; Dart carriers are complete but dormant; every remaining backend remains unavailable until its independent rollout row completes",
 }
 
 POLICY = {
@@ -337,7 +337,7 @@ EXECUTION_CASES = [
 ]
 
 CURRENT_BOUNDARY = {
-    "status": "perl_and_rust_admitted_other_backend_rows_pending",
+    "status": "perl_rust_admitted_dart_carriers_complete_other_backend_rows_pending",
     "typed_rollout": {
         "path": "capability_conformance/typed_source_location_contract.json",
         "leg": "progressive_span_dispatch",
@@ -402,16 +402,45 @@ CURRENT_BOUNDARY = {
             },
         ],
     },
+    "dart_carriers": {
+        "consumer_path": "dart/test_dormant/progressive_span_dispatch_contract_test.dart",
+        "canonical_discovery": "absent_dormant",
+        "marker_rows": [
+            {
+                "path": "dart/lib/src/action/action_ast.dart",
+                "tokens": ["ActionProgressiveDispatchSpanExpr", "progressive_dispatch_span"],
+            },
+            {
+                "path": "dart/lib/src/action/action_parser.dart",
+                "tokens": ["dispatch_span", "progressive_parser_identity_literal_required"],
+            },
+            {
+                "path": "dart/lib/src/action/action_contracts.dart",
+                "tokens": ["ActionProgressiveDispatchSpanExpr"],
+            },
+            {
+                "path": "dart/lib/src/compiler/compiled_spec.dart",
+                "tokens": ["validateProgressiveSpanDispatchContract", "parser_registry_or_staged_dispatch"],
+            },
+            {
+                "path": "dart/lib/src/runtime/bounded_child_parse_authority.dart",
+                "tokens": ["ProgressiveExecutionSeed", "ProgressiveExecutionState"],
+            },
+            {
+                "path": "dart/lib/src/runtime/interpreter.dart",
+                "tokens": ["boundedChildParseAuthority", "hasActiveRecognitionTransaction"],
+            },
+            {
+                "path": "dart/lib/src/source_emitter.dart",
+                "tokens": ["boundedChildParseAuthority", "ProgressiveExecutionSeed"],
+            },
+            {
+                "path": "dart/test_dormant/progressive_span_dispatch_contract_test.dart",
+                "tokens": ["four_routes", "independently analyzed emitted source", "progressive_dispatch_span"],
+            },
+        ],
+    },
     "backend_guard_groups": [
-        {
-            "backend": "dart",
-            "paths": [
-                "dart/lib/src/action/action_contracts.dart",
-                "dart/lib/src/action/action_parser.dart",
-                "dart/lib/src/runtime/interpreter.dart",
-            ],
-            "forbidden_tokens": ["dispatch_span", "PROGRESSIVE_DISPATCH_SPAN"],
-        },
         {
             "backend": "julia",
             "paths": [
@@ -645,7 +674,7 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
     require(document["format"] == 1, "format drifted")
     require(document["contract_id"] == "linkedspec-progressive-span-dispatch-v1", "contract id drifted")
     require(document["task_owner"] == "FUTURE-PARITY-BACKLOG.14.6.1", "task owner drifted")
-    require(document["status"] == "perl_and_rust_complete_other_backends_pending", "status drifted")
+    require(document["status"] == "perl_rust_and_dart_carriers_complete_other_backends_pending", "status drifted")
     expected_counts = {
         "registry_entries": len(REGISTRY_ENTRIES),
         "sources": len(SOURCES),
@@ -655,6 +684,7 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
         "chain_cases": len(CHAIN_CASES),
         "execution_cases": len(EXECUTION_CASES),
         "rust_carrier_paths": len(CURRENT_BOUNDARY["rust_carriers"]["marker_rows"]),
+        "dart_carrier_paths": len(CURRENT_BOUNDARY["dart_carriers"]["marker_rows"]),
         "backend_guard_groups": len(CURRENT_BOUNDARY["backend_guard_groups"]),
         "backend_guard_paths": sum(len(group["paths"]) for group in CURRENT_BOUNDARY["backend_guard_groups"]),
         "outward_guard_paths": len(CURRENT_BOUNDARY["outward_guard"]["paths"]),
@@ -759,6 +789,14 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
             for token in marker_row["tokens"]:
                 require(token in carrier, f"Rust carrier is missing {token}: {marker_row['path']}")
 
+        dart_carriers = CURRENT_BOUNDARY["dart_carriers"]
+        for marker_row in dart_carriers["marker_rows"]:
+            carrier_path = ROOT / marker_row["path"]
+            require(carrier_path.is_file(), f"Dart carrier path is missing: {marker_row['path']}")
+            carrier = carrier_path.read_text(encoding="utf-8")
+            for token in marker_row["tokens"]:
+                require(token in carrier, f"Dart carrier is missing {token}: {marker_row['path']}")
+
         for group in CURRENT_BOUNDARY["backend_guard_groups"]:
             for relative_path in group["paths"]:
                 guarded_path = ROOT / relative_path
@@ -807,6 +845,14 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
         require(
             rust_consumer.count(f"cfg({rust_carriers['cfg']})") == 1,
             "Rust progressive carrier cfg is missing or duplicated",
+        )
+        require(
+            (ROOT / dart_carriers["consumer_path"]).is_file(),
+            "dormant Dart progressive consumer is missing",
+        )
+        require(
+            ci.count(dart_carriers["consumer_path"]) == 0,
+            "dormant Dart progressive consumer entered canonical CI before admission",
         )
 
 
@@ -912,6 +958,11 @@ MUTATIONS: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
     ("current_rust_node_marker", set_value(["current_boundary", "rust_carriers", "marker_rows", 0, "tokens", 0], "WrongNode")),
     ("current_rust_authority_marker", set_value(["current_boundary", "rust_carriers", "marker_rows", 3, "tokens", 0], "WrongAuthority")),
     ("current_rust_generated_options_marker", set_value(["current_boundary", "rust_carriers", "marker_rows", 7, "tokens", 0], "wrong_options")),
+    ("current_dart_consumer", set_value(["current_boundary", "dart_carriers", "consumer_path"], "dart/wrong.dart")),
+    ("current_dart_discovery", set_value(["current_boundary", "dart_carriers", "canonical_discovery"], "canonical")),
+    ("current_dart_node_marker", set_value(["current_boundary", "dart_carriers", "marker_rows", 0, "tokens", 0], "WrongNode")),
+    ("current_dart_authority_marker", set_value(["current_boundary", "dart_carriers", "marker_rows", 4, "tokens", 0], "WrongAuthority")),
+    ("current_dart_generated_marker", set_value(["current_boundary", "dart_carriers", "marker_rows", 6, "tokens", 0], "wrong_options")),
     ("current_backend_guard_path", set_value(["current_boundary", "backend_guard_groups", 0, "paths", 0], "wrong.pm")),
     ("current_backend_guard_token", set_value(["current_boundary", "backend_guard_groups", 0, "forbidden_tokens", 0], "parse_job")),
     ("current_outward_guard_path", set_value(["current_boundary", "outward_guard", "paths", 0], "wrong.pm")),
@@ -955,6 +1006,8 @@ def main() -> int:
         f"{len(document['cancellation_cases'])} cancellation + "
         f"{len(document['chain_cases'])} chain + "
         f"{len(document['execution_cases'])} execution cases; "
+        f"{len(document['current_boundary']['rust_carriers']['marker_rows'])} Rust + "
+        f"{len(document['current_boundary']['dart_carriers']['marker_rows'])} Dart carrier paths; "
         f"{len(document['current_boundary']['backend_guard_groups'])} backend guards/"
         f"{sum(len(group['paths']) for group in document['current_boundary']['backend_guard_groups'])} paths; "
         f"{len(document['current_boundary']['outward_guard']['paths'])} outward guards; "
