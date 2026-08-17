@@ -1,15 +1,15 @@
 # MEMORY
 
-- activation_commit: `5c4d4218589cf39012a7c9e40e50752ea398a296` — exact clean Rust-admission atomic-267 base
-  for task-tree-first `FUTURE-PARITY-BACKLOG.14.6.4.0`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.4.0 - freeze Dart progressive dispatch RED`;
-  focused-signoff-complete for intended atomic 268 with one analyzed dormant consumer and no production movement.
-- active_work_unit: none at the intended clean atomic-268 handoff; Dart parent `.14.6.4` remains active at `.4.1`.
-- next_action: from exact clean atomic 268, activate `.14.6.4.1` task-tree-first, retrieve the committed Dart RED,
-  typed-source, recognition, and prior authority facts, then implement only private authority/core.
+- activation_commit: `bab4fda686eef8e4ab2ec1f4c79f53b15d715393` — exact clean Dart-RED atomic-268 base
+  for task-tree-first `FUTURE-PARITY-BACKLOG.14.6.4.1`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.4.1 - add private Dart progressive dispatch authority`;
+  focused-signoff-complete for intended atomic 269 with one private core and one dormant GREEN consumer.
+- active_work_unit: none at the intended clean atomic-269 handoff; Dart parent `.14.6.4` remains active at `.4.2`.
+- next_action: from exact clean atomic 269, activate `.14.6.4.2` task-tree-first, retrieve the committed Dart
+  authority/RED plus prior carrier facts, then implement only the dedicated node and four dormant carriers.
 - in_flight_uncommitted: none at the intended postcommit boundary; no background job remains to consume.
-- blockers: none. Dart analysis passes; the exact dormant consumer is 4-pass/1-intentional-missing-node RED;
-  ordinary/canonical discovery is inert; production bytes, rollout 3/9/95, typed 11/3/152, and outward state stay fixed.
+- blockers: none. The authority consumer passes 4/4, full Dart analysis and 408 ordinary tests pass, and the exact
+  final-path consumer remains 4-pass/1-intentional-missing-node RED; rollout 3/9/95 and outward state stay fixed.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -38,8 +38,8 @@
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, recurrence/public no-drift 9/9, and
   classifies private progressive dispatch fail-closed at 138 ActionIR rows / 250 calls / 58 mutations.
 - current_future_direction: neutral `.14.6.1` plus admitted Perl `.2` and Rust `.3` are 3/9/95; Dart `.4.0` freezes
-  the exact dormant RED and `.4.1-.3` own authority/carriers/admission; Julia/Lua `.5-.6`, staged `.14.7`, and
-  combined `.14.8` remain separate owners.
+  the exact dormant RED and `.4.1` now implements private authority without carriers; `.4.2-.3` own carriers and
+  admission. Julia/Lua `.5-.6`, staged `.14.7`, and combined `.14.8` remain separate owners.
 - latest_bootstrap_read: 2026-08-17 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
-  review complete; Dart `.14.6.4.0` starts task-tree-first from clean Rust atomic 267 and freezes authority/core,
-  four-carrier, and admission leaves after exact Knowledge/ADR/Toolbox retrieval.
+  review complete; Dart `.14.6.4.1` is focused-signoff-complete from clean Dart RED atomic 268 after retrieving ADR
+  `0080`, neutral/typed-source authority, and committed Perl/Rust precedents; `.4.2` is next after clean commit.

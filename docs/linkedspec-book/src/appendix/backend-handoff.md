@@ -745,13 +745,21 @@ effect closure plus a live-token runtime check forbid dispatch in uncommitted at
 callback or authority. Rust `.14.6.3.3` canonically routes that same cfg-enabled consumer once and promotes only
 Rust, while ordinary discovery remains zero tests.
 
-Dart `.14.6.4.0` freezes the corresponding next boundary under
+Dart `.14.6.4.0` freezes the corresponding final-path boundary under
 `dart/test_dormant/progressive_span_dispatch_contract_test.dart`. Fatal analysis passes; an explicit routed test
 passes neutral/staged/shape/four-carrier groups and fails only at the missing dedicated-node assertion. Current
 Dart preserves one generic `ActionCallExpr`; native, `SpecFile`-JSON reconstructed, generated-plan, and
-independently analyzed/executed emitted source all report the same structured `unknown_helper` for
-`dispatch_span`. Keep it undiscovered and unrouted while `.14.6.4.1` builds authority, `.2` integrates the node and
-four carriers, and `.3` alone admits the unchanged consumer and promotes Dart.
+independently analyzed/executed emitted source all report structured `unknown_helper` for `dispatch_span`.
+
+Dart `.14.6.4.1` now provides `lib/src/runtime/bounded_child_parse_authority.dart` without exporting or carrying
+it. The module owns immutable logical entries with already-compiled callbacks; fresh invocation-local source,
+cancellation, deadline, budget, chain, depth, and call authority; typed bounded views over the existing
+`SourceAuthority`; narrowing grants/ceilings; and deeply detached node-bounded results. Callbacks receive no live
+invocation object. Legitimate nesting uses `request.dispatchNested(...)`, which shares invocation state only while
+the source view is active; a retained request fails after callback return. The separate dormant authority consumer
+passes every neutral case and all 26 diagnostics while ordinary/canonical discovery remains inert. Keep the
+historical final-path RED unchanged until `.14.6.4.2` integrates the node and four fresh-authority carriers;
+`.14.6.4.3` alone admits that consumer and promotes Dart.
 
 The spec's body shell is a
 linked opener/closer parse: `body_brace`

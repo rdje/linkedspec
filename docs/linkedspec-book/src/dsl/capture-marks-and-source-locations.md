@@ -459,12 +459,20 @@ Recognition effect analysis rejects any attempted rule/function graph that reach
 live tokens defensively. The exact outer-cfg consumer is GREEN and canonically routed once under that cfg, while
 ordinary Cargo still executes zero tests. Only Rust rollout advances; later backends and typed/public rows remain pending.
 
-Dart is now frozen at the equivalent pre-implementation boundary. Its analyzed consumer lives outside ordinary
-test discovery and passes four groups before one exact missing-node RED. The reserved assignment is still one
-generic `ActionCallExpr`; native, `SpecFile`-JSON reconstructed, generated-plan, and fresh emitted-source routes
-all reject it with the same structured `unknown_helper` diagnostic. The existing staged function-body registry
-rejects `expr-v1` at resolve and grants no substitute parser authority. Dart authority, carrier integration, and
-admission remain separately owned by `.14.6.4.1-.3`; rollout stays 3/9.
+Dart remains frozen at the same pre-carrier boundary. Its final-path consumer lives outside ordinary discovery
+and passes four groups before one exact missing-node RED. The reserved assignment is still one generic
+`ActionCallExpr`; native, `SpecFile`-JSON reconstructed, generated-plan, and fresh emitted-source routes all reject
+it with structured `unknown_helper`, and the staged function-body registry still rejects `expr-v1` at resolve.
+
+Private authority leaf `.14.6.4.1` is now executable beneath that boundary. A host constructs immutable entries
+from already-compiled callbacks and creates a fresh invocation over decoded source snapshots. The existing Dart
+typed `SourceAuthority` materializes only the selected direct span; child-local scalar positions, spans, and
+diagnostics rebase to the original source identity. Grants intersect, ceilings take minima, cancellation identity/
+deadline/steps are shared, repeated identities must shrink, and depth/call/result-node limits remain independent.
+The child receives no parent registers. Its bounded view and nested-dispatch request expire together after return
+or failure, closing Dart's callback-retention seam; only deeply detached plain data can return. A separate dormant
+four-test consumer executes every neutral row, all 26 diagnostics, and retention/rebasing/detachment adversaries.
+Carrier `.14.6.4.2` and admission `.4.3` remain pending, so rollout stays 3/9.
 
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions or
 typed spans are authored values. The `recognition_*` operations are current across all six runtime routes, while

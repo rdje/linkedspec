@@ -11,7 +11,7 @@ answers:
   - "does canonical CI run the Dart progressive dispatch consumer"
   - "which leaves implement Dart progressive span dispatch"
 date: 2026-08-17
-status: dormant RED current; Dart authority, carriers, admission, and rollout pending
+status: dormant RED and private authority current; Dart carriers, admission, and rollout pending
 tags: [dart, progressive-parsing, red-test, generated-source, staged-registry, task-tree]
 evidence: "FUTURE-PARITY-BACKLOG.14.6.4.0 adds dart/test_dormant/progressive_span_dispatch_contract_test.dart outside ordinary and canonical discovery. The consumer derives neutral 3/9/95 truth, proves the unrelated staged function-body registry rejects expr-v1 at resolve, and compiles the exact reserved assignment. Current Dart retains one generic ActionCallExpr named dispatch_span and no progressive_dispatch_span / PROGRESSIVE_DISPATCH_SPAN node. Native, SpecFile-JSON reconstructed, validated generated-plan, and independently analyzed/executed emitted-source routes all reach the same structured unknown_helper diagnostic for dispatch_span. The explicit repository-routed run passes four test groups and fails only at the dedicated-node assertion. Production sources retain committed blobs action_ast d424a4c0, action_parser 099ec90c, action_contracts 6cc5850e, interpreter 2c962b54, staged registry 8eb8b7e1, source emitter 6fd55f4f, and source-location authority 40d1e318. Leaf .14.6.4.1 owns authority/core, .2 owns the node and four carriers, and .3 alone owns ordinary/canonical admission plus Dart rollout."
 reverify:
@@ -35,3 +35,8 @@ loading a path.
 The split is strict: `.14.6.4.1` adds only immutable registry/invocation/source-view authority; `.14.6.4.2` adds
 static syntax, the dedicated node, and authority plumbing across the four carriers; `.14.6.4.3` moves the unchanged
 consumer into ordinary/canonical discovery and promotes only Dart.
+
+Authority leaf `.14.6.4.1` is now implemented independently under
+`dart/lib/src/runtime/bounded_child_parse_authority.dart`; its separate dormant consumer is GREEN. This historical
+final-path consumer remains unchanged at four passing groups plus the sole missing-node RED because `.4.1` adds no
+ActionIR node, interpreter plumbing, execution seed, generated carrier, discovery route, or rollout movement.

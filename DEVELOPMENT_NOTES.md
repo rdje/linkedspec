@@ -10,6 +10,31 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.4.1` — private Dart progressive authority): exact clean activation is
+  dormant-RED atomic 268 `bab4fda6`; the leaf changes one private runtime module plus one dormant focused consumer.
+- `bounded_child_parse_authority.dart` imports only the existing typed `source_location.dart`; it is absent from the
+  public umbrella, action AST/parser/contracts, interpreter, emitter, generated plan, and canonical driver.
+- Registry entries copy and freeze logical identity, SHA-256 fingerprint, allowed top rules, capabilities, and
+  ceilings around one already-compiled synchronous callback. No path/provider/loader/compiler/source-text field
+  exists; runtime `register` and `load` produce two of the exact portable diagnostics.
+- Each fresh invocation creates one existing `SourceAuthority` over copied decoded snapshots and owns the only
+  active source id, cancellation-token object, monotonic clock/deadline, remaining steps, active global-span chain,
+  depth bound, call bound, and total-call count. It contains no parent cursor/mark/capture/variable/transaction state.
+- A bounded view materializes one validated direct span through `SourceAuthority`; local scalar offsets rebase to
+  typed global positions/spans and diagnostic fields. Callback completion or failure invalidates the shared view.
+- Rust passes a borrowed mutable invocation to its callback, but Dart has no borrow checker. The first Dart draft's
+  equivalent object argument would have been retainable after return. The final API instead provides
+  `request.dispatchNested(...)`; it checks the same active view before delegating, so retained requests fail closed.
+- Effective capability and policy sets intersect and sort; source-detail and numeric ceilings take minima. Dispatch
+  checks token identity, cancellation, deadline, budget, repeated-span decrease, depth, and calls before charging;
+  cancellation/deadline are checked again after the child. Null/throwing children normalize to bounded failure.
+- Result detachment recursively copies plain JSON-like data, counts nodes, detects cycles by object identity, rejects
+  non-string keys/non-plain objects and live-looking authority fields, preserves `false`, and never returns handles.
+- The dormant four-test consumer covers 8 views, 6 authority, 6 cancellation, 8 chain, 4 execution, all 26
+  diagnostics, nested global rebasing/shared budgets, view/request expiry, mutable seed isolation, and result bounds.
+- Focused authority proof, fatal full-package analysis, and 408 ordinary tests pass. The final-path +4/-1 RED remains
+  exact; `.4.2` alone owns the node/four carriers and `.4.3` alone owns canonical admission plus Dart rollout.
+
 - 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.4.0` — Dart progressive dormant RED): exact clean activation is Rust
   admission atomic 267 `5c4d4218`; this leaf changes only one dormant test plus durable plan/status surfaces.
 - The action parser currently returns ordinary `ActionCallExpr(kind: call, name: dispatch_span)` because only

@@ -2,33 +2,41 @@
 
 ## Current Activity
 
-- Dart audit `.14.6.4.0` is focused-signoff-complete from exact clean Rust admission atomic 267 `5c4d4218`.
-- One analyzed consumer under `dart/test_dormant/` derives current neutral truth, proves staged `expr-v1` rejection,
-  and keeps ordinary/canonical discovery inert.
-- Dart currently retains one generic `ActionCallExpr` for `dispatch_span`. Native, `SpecFile`-JSON reconstructed,
-  generated-plan, and independently analyzed/executed emitted-source routes all reach the same structured
-  `unknown_helper` failure; four test groups pass before one exact missing-dedicated-node RED.
-- `.14.6.4.1-.3` separately own private authority/core, dedicated-node/four-carrier integration, and exact
-  ordinary/canonical admission plus Dart-only rollout promotion.
+- Dart private-authority `.14.6.4.1` is focused-signoff-complete from exact clean dormant-RED atomic 268
+  `bab4fda6`; intended atomic 269 has no canonical trigger.
+- One unexported ActionIR-independent module owns immutable already-compiled registry entries, fresh invocation
+  authority, typed same-source bounded views, narrowing grants/ceilings, shared cancellation/deadline/steps,
+  decreasing chain/depth/call limits, callback containment, and detached bounded results with all 26 diagnostics.
+- Nested dispatch is available only through the callback-scoped request and expires with its source view; retained
+  Dart callbacks cannot preserve the live invocation authority that Rust's borrow checker prevents statically.
+- Its analyzed-but-undiscovered four-test consumer is GREEN; fatal package analysis and 408 ordinary tests pass.
+- The historical final-path consumer remains exactly +4/-1 at the missing dedicated node. One generic
+  `ActionCallExpr` still reaches structured `unknown_helper` through native, reconstructed, generated-plan, and
+  independently analyzed/executed emitted-source routes.
+- `.14.6.4.2` alone owns the dedicated node/four carriers; `.4.3` alone owns exact ordinary/canonical admission and
+  Dart-only rollout promotion.
 - Progressive rollout is neutral + Perl + Rust at 3/9; governance is 95 mutations with 9 governed Rust carrier
   paths, 3 remaining backend guard groups/11 paths, 10 outward guards, and 26 diagnostics;
   recognition stays 138 node rows (134 current + four dedicated) / 250 calls / 58 mutations.
 - Typed remains 11/3/152 and generated format is unchanged; Dart/Julia/Lua, recurrence, public projection, and
   outward surfaces remain pending.
-- The production parser/compiler/runtime/emitter, generated format, storage census, CI topology, rollout, typed
-  recurrence, and outward surfaces are unchanged. Stale roadmap/book frontier prose is corrected.
+- Parser/compiler/interpreter/emitter and generated format, storage census, CI topology, rollout, typed recurrence,
+  public inventory, and outward surfaces are unchanged.
 
 ## Latest Completed Slice
 
-- `.14.6.4.0` freezes Dart's exact five-test dormant RED at 4-pass/1-missing-node while preserving 3/9/95 and
-  every production/admission boundary.
+- `.14.6.4.1` implements Dart's private authority and complete dormant focused proof while preserving the exact
+  final-path RED, 3/9/95, and every carrier/admission boundary; focused signoff is complete.
 
 ## Next Action
 
-- From clean atomic 268, activate `.14.6.4.1` task-tree-first and implement only the independent private Dart
-  registry/invocation/rebased-view authority while preserving the exact final-path missing-node RED.
+- Commit atomic 269, clear the brief, then activate dedicated-node and four-carrier leaf `.14.6.4.2` only from the
+  verified clean boundary.
 
 ## Recent Completions
+
+- `2026-08-17` — `.14.6.4.1` adds unexported Dart registry/invocation/source-view authority with a complete dormant
+  GREEN consumer; carrier behavior, final-path RED, rollout, and public surfaces remain unchanged.
 
 - `2026-08-17` — `.14.6.4.0` freezes Dart's generic-call/four-carrier dormant RED, splits `.4.1-.3`, and corrects
   stale roadmap/book frontier prose without production, rollout, storage, CI, typed, or outward movement.
@@ -74,9 +82,6 @@
   exact public 6/12/10/29 governance from clean `d8ed944c`; guarded outward surfaces remain unchanged.
 
 - `2026-08-16` — `.7.1` admitted only recurring proof at 8/1/61 and landed cleanly as atomic 253 at `d8ed944c`.
-
-- `2026-08-16` — `.7.0` froze the exact recurring/public/closeout split, corrected stale current route prose,
-  and landed cleanly as atomic 252 at `be240c14` with its canonical receipt promoted.
 
 ## History
 

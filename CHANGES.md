@@ -10,6 +10,22 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.4.1 — add private Dart progressive dispatch authority
+
+- Activated from exact clean Dart-RED atomic 268 `bab4fda6`; retrieved ADR `0080`, the neutral contract, typed
+  source authority, committed Perl/Rust precedents, and the dormant final-path boundary before production code.
+- Added one unexported Dart registry/invocation core over already-compiled callbacks. Logical ids, fingerprints,
+  allowed top rules, grants, and ceilings are immutable; registration and implicit loading fail with typed denials.
+- Added typed same-source bounded views with global Unicode-scalar rebasing, capability/policy intersections,
+  ceiling minima, shared cancellation/deadline/steps, decreasing-span/depth/call limits, and detached bounded results.
+- Closed a Dart-specific retention seam: callbacks never receive the mutable invocation. Nested dispatch is
+  callback-scoped through the request and expires with its source view, so a retained request has no live authority.
+- Added one analyzed-but-undiscovered four-test authority consumer covering every neutral row, all 26 diagnostics,
+  nesting/rebasing/expiry, input isolation, callback containment, UTF-8 diagnostic bounds, and detachment adversaries.
+- Full Dart analysis and all 408 ordinary tests pass. The unchanged final-path consumer remains exactly +4/-1 at
+  the missing node; syntax, ActionIR, interpreter/generated carriers, CI topology, rollout 3/9/95, typed recurrence,
+  public inventory, and outward surfaces remain unchanged for `.14.6.4.2-.3`.
+
 ## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.4.0 — freeze Dart progressive dispatch RED
 
 - Activated Dart parent `.14.6.4` task-tree-first from exact clean Rust admission `5c4d4218` and split authority,

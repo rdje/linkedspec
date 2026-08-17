@@ -219,16 +219,16 @@ callback-scoped view expiry, seed mutation isolation, false payload preservation
 Passing this target proves the doc-hidden immutable registry/invocation/source-view core independently from the
 carrier consumer. Neither focused target proves CI admission or Rust rollout.
 
-Dart's next backend slice is one analyzed but undiscovered RED consumer:
+Dart has separate analyzed but undiscovered authority and final-path consumers:
 
 ```bash
+cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test_dormant/progressive_span_dispatch_authority_test.dart
 cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test_dormant/progressive_span_dispatch_contract_test.dart
 ```
 
-Its first four groups prove neutral metadata, staged-registry rejection, generic shape, and all four carriers; only the absent `progressive_dispatch_span` / `PROGRESSIVE_DISPATCH_SPAN` assertion fails. All routes retain structured `unknown_helper`; ordinary/canonical discovery omit it. Dart authority `.14.6.4.1`, carriers `.14.6.4.2`, and admission `.14.6.4.3` remain separate.
+The authority command passes four groups: every neutral view/authority/cancellation/chain/execution row and all 26 diagnostic contexts, then nested rebasing/shared limits, callback-view and retained-request expiry, immutable registry inputs, callback containment, UTF-8 diagnostic bounding, and cyclic/live/oversized result rejection. The final-path command still passes its first four groups and fails only at the absent `progressive_dispatch_span` / `PROGRESSIVE_DISPATCH_SPAN` node. All four carrier routes retain structured `unknown_helper`; ordinary/canonical discovery omit both consumers. Carrier `.14.6.4.2` and admission `.14.6.4.3` remain separate.
 
-The `.14.4.0` audit found one contradiction in that baseline: `direct_nonprogress` used the same textual identity
-for invocation and parent. Corrective `.14.4.0.1` changes all six observation identities to positive unique
+The `.14.4.0` audit found one contradiction in that baseline: `direct_nonprogress` used the same textual identity for invocation and parent. Corrective `.14.4.0.1` changes all six observation identities to positive unique
 monotonic numbers and validates lineage before exact fixture comparison. Four reason-checked regressions prove
 self-parent, reused identity, invalid parent order, and cyclic-lineage rejection. The gate therefore proves the
 monotonic/acyclic neutral contract now. Executable `.14.4.1` plus Perl `.14.4.2`, Rust `.14.4.3`, Dart `.14.4.4`,

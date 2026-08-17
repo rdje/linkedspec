@@ -31,9 +31,7 @@
   Acceptance: Adopt one immutable source-location algebra rather than another flat helper expansion; define exact architectural invariants for source identity, half-open Unicode-scalar positions/spans, provenance, extraction,
     bounded checkpoint/try/commit/rollback, progress, recursive observation, span-native composition, lossless named-slot segmentation, and static safety diagnostics. Preserve compatibility projections, rule-local cursor ownership,
     invocation-local authority, and `INTER-MATCH-GAP-CAPTURE` ownership; split contract, neutral fixtures, implementation, six-runtime admission, recurring proof, public examples, and no-drift before behavior code.
-
   #### Acceptance Checklist
-
   - [x] **CLEAN OWNED BASE** — Prove clean MCP-validator commit `283dc841`, zero-byte message brief, absent generated residue, and `.14.0.1` ownership before changing an ADR, roadmap, Knowledge Map card, or public documentation.
   - [x] **CANONICAL RECONCILIATION** — Retrieve and reconcile ADRs `0012`, `0044`, `0045`, Phase 4 capture/mark taxonomy, structural/progressive/staged doctrine, current backend cursor/capture facts, and queued gap capture.
   - [x] **SOTA ARCHITECTURE** — Freeze minimal immutable value types, provenance and coordinate rules, bounded transaction/progress semantics, recursive observation, span-native composition, lossless segmentation, and static error classes without choosing convenience syntax prematurely or adding hidden authority.
@@ -41,7 +39,6 @@
   - [x] **NO-OVERCLAIM** — Change no grammar, helper, parser/compiler/runtime, descriptor, generated format,
     semantic response, MCP surface, primary CLI, rollout, admission, or current feature-completeness claim.
   - [x] **LOCKSTEP SIGNOFF** — Synchronize ADR/index, task/index/frontier, roadmaps, architecture, Knowledge Map, mdBook, changes/development/live/memory; pass focused and canonical gates, exact cleanup, commit/brief/clean workflow, and do not push.
-
   Verification: **PASS 2026-07-29.** Clean base `283dc841`, zero-byte brief, absent generated residue, and owning
     leaf were proved before the ADR or public documentation moved. ADRs `0012`, `0014`, `0015`, `0044`, and `0045`,
     the Phase 3/4 contracts, current implementation, Knowledge Map, and mdBook were reconciled. ADR `0056` now
@@ -67,7 +64,6 @@
     schema, positive/negative fixtures, conversions, provenance/state-machine/current-helper projections,
     diagnostics, and mutation boundary; teach zero/one/two-regex linked structure and graph-owned recursion only
     from current proof; close through unchanged recomposition before `.14.2` backend implementation.
-
 - ID: `FUTURE-PARITY-BACKLOG.14.1.0`
   Status: `done` (2026-08-01; signoff-complete from clean `24770ade`, intended 132/300, no push)
   Goal: Audit and freeze the dependency-complete executable neutral-contract plan before creating artifacts or
@@ -79,9 +75,7 @@
     use LinkedSpec toolbox/runtime evidence for behavioral claims; freeze exact `.1-.3` artifact/teaching/closeout
     boundaries without changing grammar, parser/compiler/runtime/emitter, fixtures, public claims, capability,
     semantic/MCP, root README, or mdBook source.
-
   ### `FUTURE-PARITY-BACKLOG.14.1.0` Acceptance Checklist
-
   - [x] **CLEAN ACTIVATION / TASK OWNERSHIP** — Prove clean exclusion-public-closeout commit `24770ade`, zero-byte
     brief, synchronized Knowledge Map, absent rendered-book/bytecode/background residue, and activate this leaf
     task-tree-first before any implementation or other documentation change.
@@ -4969,7 +4963,7 @@
   Canonical trigger: `the canonical CI trust boundary and executable Rust rollout/admission truth move together; exact staged receipt-bound local CI is required before landing and closing the Rust parent`.
   Checklist: [x] clean activation/task ownership [x] ADR/Knowledge/committed-carrier retrieval [x] exact stable-identity Rust consumer registration [x] Rust-only neutral rollout/current-boundary promotion [x] direct-dependent/live-doc recomposition [x] focused proof [x] staged canonical receipt [x] atomic commit/brief/clean handoff. Evidence: neutral 3/9/95; Perl 126/126; exact cfg Rust 1/1 in 141.85s and ordinary 0/0; typed 11/3/152, recognition 138/250/58, generated strict Rust 105/105, capability 80/0/0, language 250/126, Cargo format, shell syntax, Knowledge Map, mdBook, histories, task/index, README/memory, nine doctrines, exact canonical-route counts, and receipt-bound staged local CI pass; only Rust admission/rollout moves; consumer identity/cfg/fixture/four routes, production/generated behavior, later backends, typed recurrence, and public/outward surfaces remain exact; Commit: `FUTURE-PARITY-BACKLOG.14.6.3.3 - admit private Rust progressive dispatch`.
 - ID: `FUTURE-PARITY-BACKLOG.14.6.4`
-  Status: `active` (2026-08-17; dormant RED `.0` focused-signoff-complete from exact clean Rust admission `5c4d4218589cf39012a7c9e40e50752ea398a296`; intended atomic 268; private authority `.1` next; no push); Goal: Split, implement, and privately admit Dart parity across native, reconstructed, generated-plan, and independently analyzed emitted carriers; Depends on: `.14.6.3`; Children: `.14.6.4.0-.14.6.4.3`.
+  Status: `active` (2026-08-17; dormant RED `.0` committed at `bab4fda686eef8e4ab2ec1f4c79f53b15d715393`; private authority `.1` focused-signoff-complete from that exact clean atomic-268 base for intended atomic 269; dedicated-node/four-carrier `.2` next; no push); Goal: Split, implement, and privately admit Dart parity across native, reconstructed, generated-plan, and independently analyzed emitted carriers; Depends on: `.14.6.3`; Children: `.14.6.4.0-.14.6.4.3`.
 - ID: `FUTURE-PARITY-BACKLOG.14.6.4.0`
   Status: `done; focused-signoff-complete` (2026-08-17; task-tree-first from exact clean Rust admission atomic 267 `5c4d4218`; intended atomic 268; no push); Goal: Establish one exact dormant final-path Dart RED and freeze disjoint authority/core, carrier-integration, and admission leaves without production behavior; Depends on: `.14.6.3.3`.
   Acceptance: retrieve ADR `0080`, committed progressive/Dart typed/staged/generated authorities, the neutral checker/current boundary, and Toolbox routes before code archaeology; prove the current staged registry rejects `expr-v1`, authored syntax stays generic/unsupported, and native, reconstructed, generated-plan, and independently analyzed emitted carriers converge on the same missing dedicated-node boundary; keep the consumer outside ordinary/canonical discovery; synchronize task/index, Knowledge, book, live histories, and memory without moving production, rollout, generated format, outward surfaces, or typed recurrence.
@@ -4980,7 +4974,13 @@
   Checklist: [x] clean activation/task ownership [x] ADR/Knowledge/Toolbox retrieval [x] exact final-path RED [x] dormancy [x] four-carrier audit [x] durable synchronization [x] focused signoff [x] atomic commit/clean handoff.
   Evidence: exact consumer analysis GREEN and explicit 4-pass/1-missing-node RED; ordinary Dart 408 and staged registry 5 pass; neutral 3/9/95, typed 11/3/152, recognition 138/250/58, generated strict Rust 105/105, capability 80/0/0, language 250/126, Knowledge 853/7,212, rendered book 79 files/15,092 KiB then removed, histories/task/memory/nine doctrines/no-production-diff/exact diff pass; one generic `ActionCallExpr` and native/reconstructed/generated-plan/independently analyzed/executed emitted routes preserve structured `unknown_helper`; no production/generated-format/storage/CI/rollout/typed/outward movement; Commit: `FUTURE-PARITY-BACKLOG.14.6.4.0 - freeze Dart progressive dispatch RED`.
 - ID: `FUTURE-PARITY-BACKLOG.14.6.4.1`
-  Status: `pending`; Goal: Add the private immutable Dart registry, invocation, same-source rebased view, narrowing authority, shared cancellation/budgets, chain limits, detachment, and exact diagnostics while preserving the final-path missing-node RED; Depends on: `.14.6.4.0`.
+  Status: `done; focused-signoff-complete` (2026-08-17; task-tree-first from exact clean Dart RED atomic 268 `bab4fda6`; intended atomic 269; no push); Goal: Add the private immutable Dart registry, invocation, same-source rebased view, narrowing authority, shared cancellation/budgets, chain limits, detachment, and exact diagnostics while preserving the final-path missing-node RED; Depends on: `.14.6.4.0`.
+  Acceptance: retrieve ADR `0080`, the committed Dart RED, typed-source/runtime authority, neutral matrix/current boundary, and Perl/Rust authority precedents before implementation; add one private Dart authority module and one analyzed-but-undiscovered focused consumer covering immutable already-compiled entries, same-source Unicode-scalar views/rebasing, narrowing grants and ceilings, shared cancellation/deadline/steps, decreasing chains/depth/calls, callback containment, expiry, and deep detached results with all 26 diagnostics; preserve the exact final-path missing-node RED and change no syntax, ActionIR, execution carrier, generated format, rollout, canonical route, or outward surface.
+  Verification tier: `focused`.
+  Focused checks: exact authority consumer and fatal Dart analysis; original final-path 4-pass/1-missing-node RED and ordinary/canonical absence; neutral progressive, typed-source, recognition, generated, capability, and language direct dependents; Knowledge, mdBook, bounded histories, task/index, README/memory, nine doctrines, no-carrier/no-rollout boundary, and exact diff.
+  Canonical trigger: `none` — private unrouted authority and its dormant consumer move without syntax, ActionIR, execution carriers, generated format, admission/rollout, dependency/toolchain, storage/path/doctrine infrastructure, or public behavior.
+  Checklist: [x] clean activation/task ownership [x] ADR/Knowledge/neutral retrieval [x] private immutable authority [x] complete dormant focused consumer [x] exact RED/no-carrier boundary [x] durable synchronization [x] focused signoff [x] atomic commit/brief/clean handoff.
+  Evidence: private registry/invocation/source-view core and dormant authority 4/4 pass; callback-scoped nested authority expires with its view; fatal full Dart analysis, ordinary 408, staged registry 5, and exact historical +4/-1 missing-node RED pass; progressive 3/9/95, typed 11/3/152, recognition 138/250/58, generated strict Rust 105/105, capability 80/0/0, language 250/126, Knowledge 854/7,222, rendered book 79 files/15,112 KiB then removed, bounded histories/task/index/memory/nine doctrines/no-carrier/no-route/exact-diff proof pass; no syntax/ActionIR/interpreter/emitter/generated-format/CI/rollout/typed/public/outward movement; Commit: `FUTURE-PARITY-BACKLOG.14.6.4.1 - add private Dart progressive dispatch authority`.
 - ID: `FUTURE-PARITY-BACKLOG.14.6.4.2`
   Status: `pending`; Goal: Add the dedicated Dart node and native, reconstructed, generated-plan, and independently analyzed emitted-source carriers through fresh opaque execution authority while retaining dormancy and rollout RED; Depends on: `.14.6.4.1`.
 - ID: `FUTURE-PARITY-BACKLOG.14.6.4.3`

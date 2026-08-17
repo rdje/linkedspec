@@ -206,13 +206,18 @@ is now used by `.14.6.3.2`: one exclusive `ProgressiveDispatchSpan` node validat
 span, static recognition closure rejects its non-rollbackable effect, and native/reconstructed/generated-plan/
 independently compiled emitted-source routes all return the same detached payload. Only logical operands serialize.
 The exact consumer is GREEN and canonically routed once under its historical cfg; ordinary discovery stays zero tests.
-Dart `.14.6.4.0` now provides the next exact boundary without changing production. Its analyzed
-`test_dormant/progressive_span_dispatch_contract_test.dart` consumer derives current 3/9/95 governance, proves the
-separate staged registry rejects `expr-v1`, retains one generic `ActionCallExpr`, and follows native,
-`SpecFile`-JSON reconstructed, generated-plan, and independently analyzed/executed emitted-source routes to the
-same structured `unknown_helper` result. Four test groups pass and only the absent
-`progressive_dispatch_span` / `PROGRESSIVE_DISPATCH_SPAN` assertion fails. Ordinary and canonical discovery omit
-the consumer; `.14.6.4.1-.3` exclusively own Dart authority, carrier integration, and admission.
+Dart `.14.6.4.0` provides the next exact final-path boundary. Its analyzed dormant consumer derives current
+3/9/95 governance, proves the separate staged registry rejects `expr-v1`, retains one generic `ActionCallExpr`,
+and follows native, `SpecFile`-JSON reconstructed, generated-plan, and independently analyzed/executed emitted
+source to the same structured `unknown_helper`. Four groups pass and only the absent dedicated-node assertion
+fails. Dart `.14.6.4.1` now adds the independent private authority beneath that boundary: immutable already-
+compiled logical entries, existing typed `SourceAuthority` views, intersected grants, ceiling minima, shared
+cancellation/deadline/steps, decreasing spans plus depth/call bounds, callback containment, and detached bounded
+results with all 26 diagnostics. Because Dart has no Rust-style borrowed callback argument, nested dispatch is
+available only through the callback-scoped request and expires with its view; retaining the request preserves no
+live invocation authority. Its separate four-test dormant consumer is GREEN and all 408 ordinary tests remain
+GREEN. The final-path consumer stays exactly +4/-1 because `.14.6.4.2` alone owns the node and four carriers;
+`.14.6.4.3` alone owns admission and Dart rollout.
 Derived text/AST stitching remains staged `.14.7`; combined program-wide no-drift remains `.14.8`.
 Perl planning child `.14.6.2.0` freezes the final-path dormant consumer without enabling the form. It derives
 the full neutral inventory, passes 83 assertions, and fails once because `PROGRESSIVE_DISPATCH_SPAN` is absent.
