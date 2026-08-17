@@ -175,7 +175,8 @@ Recursive-observation public no-drift is current under `.14.4.8`, while the comb
 No public helper, facade, descriptor/generated version, result schema, semantic/MCP field, CLI, or README behavior
 is current. Canonical `.14.5.1` signoff passes nine doctrines, repository containment and relocation, both
 66-case CLI environments, RAM at 51%, Phase 0 at 1,031/1,031 in 729 seconds, and the exact six-runtime opt-in;
-parent `.14.5` is closed; progressive span dispatch `.14.6` is active with private Perl admitted and Rust next.
+parent `.14.5` is closed; progressive span dispatch `.14.6` is active with private Perl admitted and Rust's exact
+dormant four-carrier RED frozen at the dedicated-node boundary. Private Rust authority/core `.14.6.3.1` is next.
 
 Behavior-free audit `.14.6.0` and ADR `0080` fix that boundary exactly. `parse_job(...)` remains unavailable and
 `dispatch_span(...)` is admitted only as a private Perl intrinsic, not a shared helper. Each backend's current staged registry accepts
@@ -193,6 +194,12 @@ governance passes 2 registry entries, 2 sources/8 views, 6 authority, 6 cancella
 mutations. The typed row remains pending; the rejected effect owns current node `PROGRESSIVE_DISPATCH_SPAN` and no
 call row; guarded Rust/Dart/Julia/Lua paths omit both tokens; and outward guards deny exposure. Backend `.3-.6`,
 recurrence `.7`, and public no-drift `.8` follow.
+
+Rust `.14.6.3.0` is deliberately RED and dormant. With its explicit test cfg, one consumer verifies the neutral
+inventory and staged-registry rejection, then runs the authored assignment through native, reconstructed,
+generated-plan, and independently compiled emitted-source carriers. Current Rust preserves a generic
+`dispatch_span` call and returns `null` on every route; the only failing assertion requires the missing dedicated
+node. Ordinary Cargo runs zero tests and canonical CI does not route this target, so no Rust behavior is admitted.
 Derived text/AST stitching remains staged `.14.7`; combined program-wide no-drift remains `.14.8`.
 Perl planning child `.14.6.2.0` freezes the final-path dormant consumer without enabling the form. It derives
 the full neutral inventory, passes 83 assertions, and fails once because `PROGRESSIVE_DISPATCH_SPAN` is absent.

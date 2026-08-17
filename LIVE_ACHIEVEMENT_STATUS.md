@@ -2,16 +2,16 @@
 
 ## Current Activity
 
-- Perl lane `.14.6.2` is canonical-signoff-complete from exact clean carrier commit `075cb7b8`; `.14.6.2.3`
-  requires, syntax-checks, and executes the unchanged 125-assertion consumer once in canonical CI.
-- One exclusive ActionIR contract emits exactly `PROGRESSIVE_DISPATCH_SPAN`, preserves static logical operands, and
-  prevents a duplicate assignment event; compile policy rejects dynamic/invalid identities and non-bare spans.
-- Fresh authority enters only through invocation options. Live, reconstructed descriptor, generated-plan, and
-  independently loaded emitted-source routes return the same detached child result without serializing authority.
-- Recognition effect propagation and runtime token visibility forbid uncommitted dispatch. Progressive governance
-  is neutral + Perl 2/9/86 with four pending-backend groups/14 paths and ten unchanged outward guards.
-- Recognition is 138 node rows (134 current + four dedicated) / 250 calls / 58 mutations. `dispatch_span` remains
-  outside the shared helper inventory because Perl-only intrinsic admission does not prove other backend support.
+- Rust dormant RED `.14.6.3.0` is focused-signoff-complete from exact clean Perl admission `78bc66e1`; private
+  authority/core `.14.6.3.1` is the next implementation slice.
+- One explicit outer-cfg consumer derives neutral 2/2+8/6/6/8/4/26 and rollout 2/9/86, then traverses native,
+  reconstructed, generated-plan, and independently compiled emitted-source Rust carriers.
+- Current Rust preserves exactly one generic `dispatch_span` call and all four routes return `null` through
+  unknown-helper fallback. The opt-in consumer fails only on missing dedicated `PROGRESSIVE_DISPATCH_SPAN`.
+- Ordinary Cargo discovers zero tests and canonical CI omits the target. No production behavior, rollout,
+  generated format, typed, recognition, other-backend, or outward surface moved.
+- Perl remains the sole private backend implementation. Progressive governance stays neutral + Perl 2/9/86;
+  recognition stays 138 node rows (134 current + four dedicated) / 250 calls / 58 mutations.
 - Typed remains 11/3/152; generated format, Rust/Dart/Julia/Lua, recurrence, public projection, and outward surfaces
   remain unchanged or pending.
 - Mandatory change-history rollover publishes immutable segment 4993; ADR `0082` increases only its finite
@@ -21,15 +21,18 @@
 
 ## Latest Completed Slice
 
-- `.14.6.2.3` admits only private Perl, advances progressive governance to 2/9/86 and recognition to 138/250/58,
-  preserves shared-helper/outward closure, and closes parent `.14.6.2` for intended atomic 263.
+- `.14.6.3.0` freezes the exact Rust four-carrier dormant RED at one missing-node failure, proves ordinary/canonical
+  dormancy, and assigns private authority, carrier integration, and admission exclusively to `.14.6.3.1-.3`.
 
 ## Next Action
 
-- Commit/clear/prove clean atomic 263, then split and activate Rust `.14.6.3` task-tree-first from that exact
-  handoff; do not move Dart/Julia/Lua, recurrence, typed, public, or outward rows.
+- Commit/clear/prove clean atomic 264, then activate Rust private authority `.14.6.3.1` task-tree-first; do not
+  move carriers, admission, Dart/Julia/Lua, recurrence, typed, public, or outward rows.
 
 ## Recent Completions
+
+- `2026-08-17` — `.14.6.3.0` freezes Rust's exact four-carrier dormant RED at the dedicated-node boundary while
+  ordinary/canonical discovery stays inert and all production/governance state remains unchanged.
 
 - `2026-08-17` — `.14.6.2.3` canonically routes the exact 125-assertion Perl consumer, promotes only Perl to
   progressive 2/9/86, recomposes recognition to 138/250/58, and closes `.14.6.2` without outward movement.
@@ -74,8 +77,6 @@
   generated-v2 gap execution from clean `4e625a9f` for intended atomic 249 without rollout or outward movement.
 - `2026-08-16` — `.6.2` completed exact shared Lua private native state/accessors/lifecycle from clean `a94c81ed`
   for intended atomic 248 without descriptor, generated/emitted, admission, rollout, or outward movement.
-- `2026-08-16` — `.6.1` completed exact shared Lua authored/static/compiled metadata and ten dormancy guards from
-  clean `5089a360` for intended atomic 247 without runtime or rollout movement.
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source

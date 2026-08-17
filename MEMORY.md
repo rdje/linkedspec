@@ -1,15 +1,15 @@
 # MEMORY
 
-- activation_commit: `075cb7b8188c9cfd8ce56fbfa55f2474efe2499d` — exact clean carrier atomic-262 base for
-  task-tree-first `FUTURE-PARITY-BACKLOG.14.6.2.3`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.2.3 - admit private Perl progressive dispatch`;
-  canonical-signoff-complete for intended atomic 263 with parent `.14.6.2` closed.
-- active_work_unit: none at the intended clean post-commit Perl-admission handoff; Rust split `.14.6.3` is next.
-- next_action: split and activate Rust `.14.6.3` task-tree-first from exact clean atomic 263, then freeze its
-  final-path RED/authority/carrier/admission children before implementation.
+- activation_commit: `78bc66e10066d27ffb93197b8b88e3e9af1d4aa4` — exact clean Perl-admission atomic-263 base
+  for task-tree-first `FUTURE-PARITY-BACKLOG.14.6.3.0`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.3.0 - freeze Rust progressive dispatch RED`;
+  focused-signoff-complete for intended atomic 264 without production or rollout movement.
+- active_work_unit: none at the intended clean post-commit dormant-RED handoff; Rust authority `.14.6.3.1` is next.
+- next_action: activate `FUTURE-PARITY-BACKLOG.14.6.3.1` task-tree-first from exact clean atomic 264, then add only
+  the private immutable Rust registry/invocation/rebased-view/cancellation/policy/cycle/diagnostic authority.
 - in_flight_uncommitted: none at the intended post-commit boundary; no background result remains to consume.
-- blockers: none. The exact consumer passes 125 assertions; progressive is 2/9/86, typed 11/3/152, recognition
-  138/250/58, language 250/126, and every non-Perl/outward boundary remains closed.
+- blockers: none. The explicit-cfg Rust consumer passes every pre-boundary assertion then fails only on the missing
+  dedicated node; ordinary discovery runs zero tests and progressive remains 2/9/86.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -37,9 +37,9 @@
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, recurrence/public no-drift 9/9, and
   classifies private progressive dispatch fail-closed at 138 ActionIR rows / 250 calls / 58 mutations.
-- current_future_direction: neutral `.14.6.1` freezes authority; Perl `.2.0` froze the historical 83/1 RED, `.2.1`
-  implements its private core, `.2.2` integrates four carriers, and `.2.3` admits only Perl at 2/9/86;
-  other backends `.3-.6`, staged
+- current_future_direction: neutral `.14.6.1` freezes authority; Perl `.2` is admitted at 2/9/86; Rust `.3.0`
+  freezes the exact four-carrier dormant RED and `.3.1-.3` own private authority, carriers, and admission;
+  other backends `.4-.6`, staged
   `.14.7`, and combined `.14.8` remain separate pending owners.
 - latest_bootstrap_read: 2026-08-17 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
-  review complete; `.14.6.2.3` is canonical-signoff-complete for intended atomic 263 and Rust split `.14.6.3` is next.
+  review complete; Rust dormant RED `.14.6.3.0` is focused-signoff-complete and private authority `.3.1` is next.

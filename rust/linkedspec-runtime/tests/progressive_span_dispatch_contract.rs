@@ -1,0 +1,385 @@
+#![allow(unexpected_cfgs)]
+#![cfg(linkedspec_progressive_span_dispatch_red)]
+
+//! FUTURE-PARITY-BACKLOG.14.6.3.0 — dormant Rust progressive-dispatch contract.
+//!
+//! Ordinary Cargo discovery compiles this target with zero active tests. Before admission, run
+//! the exact final-path RED with:
+//!
+//! `RUSTFLAGS='--cfg linkedspec_progressive_span_dispatch_red' bash tools/run_cargo_local.sh test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test progressive_span_dispatch_contract`.
+//!
+//! This consumer freezes the neutral inventory and all four final Rust carriers, but changes no
+//! production behavior or canonical route. The sole intentional failure is the missing dedicated
+//! `progressive_dispatch_span` expression node; generic helper fallback is not an implementation.
+
+use linkedspec_core::compiler::compile;
+use linkedspec_core::expr::{Arg, Expr};
+use linkedspec_core::types::CompiledSpec;
+use linkedspec_core::validation::validate;
+use linkedspec_runtime::engine::{Engine, ExecutionOptions};
+use linkedspec_runtime::source_emitter::{
+    GENERATED_SOURCE_CONTRACT, GeneratedPlanRow, emit_rust_source_v2, execute_generated_parser_v2,
+};
+use linkedspec_runtime::spec_parser::parse_spec_with_user_functions;
+use linkedspec_runtime::staged_parser_registry::execute_parse_job;
+use serde_json::{Value, json};
+use std::fs;
+use std::path::{Path, PathBuf};
+use std::process::Command;
+use std::time::{SystemTime, UNIX_EPOCH};
+
+const CONTRACT_SOURCE: &str = include_str!(concat!(
+    env!("CARGO_MANIFEST_DIR"),
+    "/../../capability_conformance/progressive_span_dispatch_contract.json"
+));
+const CI_DRIVER_SOURCE: &str = include_str!(concat!(
+    env!("CARGO_MANIFEST_DIR"),
+    "/../../tools/run_ci_local.sh"
+));
+const CONTRACT_ID: &str = "linkedspec-progressive-span-dispatch-v1";
+const GENERATED_IDENTITY: &str = "progressive-span-dispatch/rust-red.spec";
+const AUTHORED_SOURCE: &str = r#"Top::
+ I {
+  span = hash("source_id", "input", "start", 0, "end", 1, "provenance", "authored")
+  value = dispatch_span("expr-v1", "Expr", span)
+  return(value)
+ }
+ /never/
+"#;
+const PLAN: &[GeneratedPlanRow] = &[GeneratedPlanRow {
+    label: "Top",
+    family: "default",
+}];
+
+fn contract() -> Value {
+    serde_json::from_str(CONTRACT_SOURCE).expect("progressive span-dispatch contract JSON")
+}
+
+fn ids(value: &Value, field: &str) -> Vec<String> {
+    value[field]
+        .as_array()
+        .unwrap_or_else(|| panic!("{field} array"))
+        .iter()
+        .map(|row| {
+            row["id"]
+                .as_str()
+                .unwrap_or_else(|| panic!("{field} row id"))
+                .to_owned()
+        })
+        .collect()
+}
+
+fn compile_source() -> CompiledSpec {
+    let parsed = parse_spec_with_user_functions(AUTHORED_SOURCE)
+        .expect("parse exact progressive span-dispatch fixture");
+    validate(&parsed).expect("validate exact progressive span-dispatch fixture");
+    compile(&parsed).expect("compile exact progressive span-dispatch fixture")
+}
+
+fn occurrences(haystack: &str, needle: &str) -> usize {
+    haystack.match_indices(needle).count()
+}
+
+struct EmittedProject {
+    root: PathBuf,
+}
+
+impl EmittedProject {
+    fn new() -> Self {
+        let nonce = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .expect("clock after epoch")
+            .as_nanos();
+        let root = Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../target/test-workspaces")
+            .join(format!(
+                "progressive-span-dispatch-red-{}-{nonce}",
+                std::process::id()
+            ));
+        fs::create_dir_all(root.join("src")).expect("create emitted progressive workspace");
+        Self { root }
+    }
+}
+
+impl Drop for EmittedProject {
+    fn drop(&mut self) {
+        let _ = fs::remove_dir_all(&self.root);
+    }
+}
+
+#[test]
+fn final_path_reaches_only_the_missing_dedicated_progressive_node() {
+    let neutral = contract();
+    assert_eq!(neutral["contract_id"], CONTRACT_ID);
+    assert_eq!(neutral["format"], 1);
+    assert_eq!(neutral["status"], "perl_complete_other_backends_pending");
+    assert_eq!(
+        neutral["expected_counts"],
+        json!({
+            "registry_entries": 2,
+            "sources": 2,
+            "view_cases": 8,
+            "authority_cases": 6,
+            "cancellation_cases": 6,
+            "chain_cases": 8,
+            "execution_cases": 4,
+            "backend_guard_groups": 4,
+            "backend_guard_paths": 14,
+            "outward_guard_paths": 10,
+            "diagnostics": 26,
+            "rollout_legs": 9,
+            "mutations": 86,
+        })
+    );
+    assert_eq!(
+        ids(&neutral, "view_cases"),
+        [
+            "unicode_middle",
+            "empty_direct_span",
+            "ascii_full",
+            "source_mismatch",
+            "reversed",
+            "outside_source",
+            "copied_text_smuggling",
+            "noninteger_offset",
+        ]
+    );
+    assert_eq!(
+        ids(&neutral, "authority_cases"),
+        [
+            "intersection_and_minima",
+            "entry_cannot_elevate_caller",
+            "required_capability_missing",
+            "policy_intersection_empty",
+            "source_detail_cannot_elevate",
+            "caller_numeric_minimum",
+        ]
+    );
+    assert_eq!(
+        ids(&neutral, "cancellation_cases"),
+        [
+            "fresh_budget",
+            "already_cancelled",
+            "deadline_reached",
+            "budget_empty",
+            "cost_exceeds_remaining",
+            "token_replacement",
+        ]
+    );
+    assert_eq!(
+        ids(&neutral, "chain_cases"),
+        [
+            "root",
+            "strictly_smaller",
+            "exact_repeat",
+            "shifted_equal_length",
+            "larger_repeat",
+            "different_identity",
+            "depth_limit",
+            "call_limit",
+        ]
+    );
+    assert_eq!(
+        ids(&neutral, "execution_cases"),
+        [
+            "detached_success",
+            "false_payload",
+            "child_failure_propagates",
+            "live_handle_rejected",
+        ]
+    );
+    let diagnostic_codes = neutral["diagnostics"]
+        .as_array()
+        .expect("diagnostic rows")
+        .iter()
+        .map(|row| row["code"].as_str().expect("diagnostic code"))
+        .collect::<Vec<_>>();
+    assert_eq!(
+        diagnostic_codes,
+        [
+            "progressive_parser_identity_literal_required",
+            "progressive_parser_identity_invalid",
+            "progressive_top_rule_literal_required",
+            "progressive_top_rule_invalid",
+            "progressive_span_binding_required",
+            "progressive_span_shape_invalid",
+            "progressive_span_source_mismatch",
+            "progressive_span_out_of_bounds",
+            "progressive_span_reversed",
+            "progressive_registry_missing",
+            "progressive_registry_mutation_forbidden",
+            "progressive_implicit_load_forbidden",
+            "progressive_top_rule_forbidden",
+            "progressive_capability_denied",
+            "progressive_policy_denied",
+            "progressive_source_detail_denied",
+            "progressive_cancelled",
+            "progressive_deadline_exceeded",
+            "progressive_budget_exhausted",
+            "progressive_cancellation_authority_mismatch",
+            "progressive_cycle_non_decreasing",
+            "progressive_depth_exceeded",
+            "progressive_call_limit_exceeded",
+            "progressive_child_failed",
+            "progressive_transaction_forbidden",
+            "progressive_result_not_detached",
+        ]
+    );
+    let rollout = neutral["rollout"].as_array().expect("rollout rows");
+    assert_eq!(
+        rollout
+            .iter()
+            .map(|row| row["leg"].as_str().expect("rollout leg"))
+            .collect::<Vec<_>>(),
+        [
+            "neutral",
+            "perl",
+            "rust",
+            "dart",
+            "julia",
+            "puc_lua",
+            "luajit",
+            "recurring",
+            "public_no_drift",
+        ]
+    );
+    assert_eq!(
+        rollout
+            .iter()
+            .map(|row| row["status"].as_str().expect("rollout status"))
+            .collect::<Vec<_>>(),
+        [
+            "complete", "complete", "pending", "pending", "pending", "pending", "pending",
+            "pending", "pending",
+        ]
+    );
+    assert_eq!(rollout[2]["paths"], json!([]));
+
+    let staged_job = json!({
+        "kind": "parse_job",
+        "job_id": "progressive-rust-red",
+        "parent_ast_path": ["Top"],
+        "node_kind": "progressive_span_dispatch",
+        "payload_kind": "source_span",
+        "text": "a",
+        "source_span": {"start": 0, "end": 1, "line_start": 1, "line_end": 1},
+        "parser_spec_id": "expr-v1",
+        "top_rule": "Expr",
+        "result_policy": "replace_field",
+        "result_field": "value",
+        "failure_policy": "fail_only",
+    });
+    let staged_error = execute_parse_job(&staged_job)
+        .expect_err("the function-body staged registry must reject expr-v1");
+    assert!(staged_error.contains("phase=resolve"));
+    assert!(staged_error.contains("parser_spec_id=expr-v1"));
+    assert!(staged_error.contains("unsupported parser spec id 'expr-v1'"));
+
+    let compiled = compile_source();
+    let top = compiled.find("Top").expect("compiled Top rule");
+    let preamble = top.preamble.as_ref().expect("progressive preamble");
+    let Expr::AssignScalar { name, value } = &preamble.statements[1].expr else {
+        panic!("dispatch_span must currently remain one generic scalar assignment");
+    };
+    assert_eq!(name, "value");
+    let Expr::Call { name, args } = value.as_ref() else {
+        panic!("dispatch_span must currently remain one generic helper call");
+    };
+    assert_eq!(name, "dispatch_span");
+    assert_eq!(args.len(), 3);
+    assert!(matches!(
+        &args[0],
+        Arg::Positional(Expr::StringLiteral { value }) if value == "expr-v1"
+    ));
+    assert!(matches!(
+        &args[1],
+        Arg::Positional(Expr::StringLiteral { value }) if value == "Expr"
+    ));
+    assert!(matches!(
+        &args[2],
+        Arg::Positional(Expr::Variable { name }) if name == "span"
+    ));
+
+    let encoded = serde_json::to_string(&compiled).expect("serialize progressive fixture");
+    assert_eq!(occurrences(&encoded, r#""name":"dispatch_span""#), 1);
+    assert!(!encoded.contains("progressive_dispatch_span"));
+    assert!(!encoded.contains("PROGRESSIVE_DISPATCH_SPAN"));
+
+    assert_eq!(
+        Engine::new(compiled.clone())
+            .execute_value("abc", &ExecutionOptions::new())
+            .expect("native generic-fallback execution"),
+        Value::Null
+    );
+    let reconstructed: CompiledSpec =
+        serde_json::from_str(&encoded).expect("reconstruct progressive fixture");
+    assert_eq!(
+        Engine::new(reconstructed)
+            .execute_value("abc", &ExecutionOptions::new())
+            .expect("reconstructed generic-fallback execution"),
+        Value::Null
+    );
+    assert_eq!(
+        execute_generated_parser_v2(
+            &encoded,
+            PLAN,
+            "abc",
+            GENERATED_IDENTITY,
+            GENERATED_SOURCE_CONTRACT,
+        )
+        .expect("generated-plan generic-fallback execution"),
+        Value::Null
+    );
+
+    let emitted = emit_rust_source_v2(&compiled, GENERATED_IDENTITY)
+        .expect("emit progressive fixture source");
+    assert_eq!(occurrences(&emitted, r#"\"name\":\"dispatch_span\""#), 1);
+    assert!(!emitted.contains("progressive_dispatch_span"));
+    assert!(!emitted.contains("PROGRESSIVE_DISPATCH_SPAN"));
+    let project = EmittedProject::new();
+    fs::write(
+        project.root.join("Cargo.toml"),
+        format!(
+            "[package]\nname = \"progressive-span-dispatch-red\"\nversion = \"0.0.0\"\nedition = \"2024\"\n\n[dependencies]\nlinkedspec-runtime = {{ path = {:?} }}\nserde_json = \"1\"\n\n[workspace]\n",
+            Path::new(env!("CARGO_MANIFEST_DIR"))
+        ),
+    )
+    .expect("write emitted progressive manifest");
+    fs::write(
+        project.root.join("src/main.rs"),
+        format!(
+            "mod generated {{\n{emitted}\n}}\nfn main() {{ let value = generated::execute(\"abc\").expect(\"generated progressive RED\"); println!(\"{{}}\", value); }}\n"
+        ),
+    )
+    .expect("write emitted progressive main");
+    let shared_target = Path::new(env!("CARGO_MANIFEST_DIR")).join("../target");
+    let child = Command::new("cargo")
+        .arg("run")
+        .arg("--offline")
+        .arg("--quiet")
+        .env("CARGO_TARGET_DIR", shared_target)
+        .current_dir(&project.root)
+        .output()
+        .expect("run independently compiled progressive fixture");
+    assert!(
+        child.status.success(),
+        "emitted progressive fixture failed:\n{}",
+        String::from_utf8_lossy(&child.stderr)
+    );
+    assert_eq!(
+        String::from_utf8(child.stdout)
+            .expect("UTF-8 emitted stdout")
+            .trim(),
+        "null"
+    );
+
+    assert!(
+        !CI_DRIVER_SOURCE.contains("progressive_span_dispatch_contract.rs"),
+        "the dormant Rust consumer must remain absent from canonical CI"
+    );
+
+    assert!(
+        encoded.contains(r#""kind":"progressive_dispatch_span""#),
+        "LINKEDSPEC_PROGRESSIVE_SPAN_DISPATCH_RED: missing dedicated node=[PROGRESSIVE_DISPATCH_SPAN]; generic dispatch_span helper fallback is not an implementation"
+    );
+}

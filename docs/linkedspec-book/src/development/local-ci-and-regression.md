@@ -184,6 +184,21 @@ consumer once; the neutral checker rejects regression of the Perl row and promot
 Its transaction-state query loads the recognition runtime only when a dispatch executes, preserving the existing
 require-only Compiler guarantee that `LinkedRE` stays lazy until the parser pipeline actually needs it.
 
+Rust's next-backend proof is intentionally outside ordinary and canonical discovery. The ordinary target compiles
+with zero tests; the explicit cfg activates the exact final-path RED:
+
+```bash
+bash tools/run_cargo_local.sh test --offline --manifest-path rust/Cargo.toml \
+  -p linkedspec-runtime --test progressive_span_dispatch_contract
+RUSTFLAGS='--cfg linkedspec_progressive_span_dispatch_red' \
+  bash tools/run_cargo_local.sh test --offline --manifest-path rust/Cargo.toml \
+  -p linkedspec-runtime --test progressive_span_dispatch_contract -- --nocapture
+```
+
+The second command passes the neutral inventory, narrow staged-registry rejection, and native/reconstructed/
+generated-plan/independently compiled emitted-carrier checks, then fails only because the dedicated progressive
+node is absent. A generic helper fallback returning `null` is evidence of the missing implementation, not GREEN.
+
 The `.14.4.0` audit found one contradiction in that baseline: `direct_nonprogress` used the same textual identity
 for invocation and parent. Corrective `.14.4.0.1` changes all six observation identities to positive unique
 monotonic numbers and validates lineage before exact fixture comparison. Four reason-checked regressions prove

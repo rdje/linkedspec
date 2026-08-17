@@ -445,6 +445,12 @@ through live, reconstructed, generated-plan, and independently loaded emitted ro
 contain no registry callback or mutable authority. Canonical CI requires and runs its exact 125-case consumer once;
 only the private Perl rollout row is promoted.
 
+Rust remains pending, but its implementation boundary is now executable and exact. A dormant outer-cfg consumer
+passes the neutral inventory and proves all four existing Rust carriers preserve the authored call generically;
+each returns `null` because no dedicated progressive node exists. Its only RED assertion demands that node.
+Ordinary Cargo discovers zero tests and canonical CI omits the target, so this proof changes neither behavior nor
+rollout. Rust authority, carrier integration, and admission are separately owned by `.14.6.3.1-.3`.
+
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions or
 typed spans are authored values. The `recognition_*` operations are current across all six runtime routes, while
 their exact recurring composition and public no-drift projection are both current.

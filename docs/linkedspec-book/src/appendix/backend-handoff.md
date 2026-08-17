@@ -724,12 +724,18 @@ is isolated; capabilities intersect; policy/resource/source-detail ceilings only
 and repeated parser/top/source dispatch must strictly shrink the span. Never route an authored parser id to the
 filesystem. Derived text, deterministic parse-job queues, and AST stitching remain staged `.14.7` work.
 
-Perl `.14.6.2.1-.2` provide the current private reference seam. One exclusive ActionIR contract claims the whole
+Perl `.14.6.2.1-.3` provide the current admitted private reference seam. One exclusive ActionIR contract claims the whole
 reserved assignment, static policy validates its two literals and bare span, and each wrapper constructs a fresh
 invocation from a host-only option. Live, reconstructed descriptor, validated generated-plan, and independently
 loaded generated-v2 packages agree; emitted source preserves logical operands only. Recognition transactions
-reject the effect. The consumer is green but deliberately unrouted, so this is implementation guidance rather
-than public admission; `.14.6.2.3` owns that boundary.
+reject the effect. Canonical CI runs the exact green consumer once, but no public surface is admitted.
+
+Rust `.14.6.3.0` freezes the corresponding final-path boundary without implementing it. Its explicit outer-cfg
+consumer proves the current staged registry rejects `expr-v1`, while native, reconstructed, generated-plan, and
+independently compiled emitted-source routes preserve one generic `dispatch_span` call and return `null` through
+unknown-helper fallback. The sole final failure requires the missing dedicated node. Ordinary discovery executes
+zero tests and canonical CI omits this target. Implement `.14.6.3.1` authority first, `.3.2` carriers second, and
+`.3.3` admission last; do not treat generic fallback consistency as progressive support.
 
 The spec's body shell is a
 linked opener/closer parse: `body_brace`

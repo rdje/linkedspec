@@ -10,6 +10,22 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.3.0 — freeze Rust progressive dispatch RED
+
+- Activated Rust task-tree-first from exact clean Perl admission atomic 263 `78bc66e1`; retrieved ADR `0080`, the
+  neutral/Perl/typed/recognition/generated authorities, Toolbox, and current Rust registry and carrier seams.
+- Added one file-level outer-cfg dormant consumer that derives the full neutral inventory and verifies staged
+  `expr-v1` rejection before following the exact reserved assignment through all four final Rust carriers.
+- Proved current native, reconstructed, generated-plan, and independently compiled emitted-source execution all
+  return `null` through the same generic unknown-helper fallback. Serialized forms retain one generic
+  `dispatch_span` call and no `progressive_dispatch_span` / `PROGRESSIVE_DISPATCH_SPAN` node.
+- The explicit cfg run passes every pre-boundary assertion and fails only at that missing dedicated-node boundary;
+  the ordinary target runs zero tests, canonical CI omits it, and no production source changes.
+- Froze `.14.6.3.1-.3` as disjoint authority/core, four-carrier integration, and admission leaves. Progressive
+  stays 2/9/86, typed 11/3/152, recognition 138/250/58, and generated/other-backend/outward state remains fixed.
+- Focused Rust and direct-dependent governance, Knowledge, mdBook, bounded-history, task/memory/doctrine,
+  no-production-diff, and exact-diff checks pass; canonical CI is intentionally not triggered for dormant RED.
+
 ## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.2.3 — admit private Perl progressive dispatch
 
 - Activated admission task-tree-first from exact clean carrier atomic 262 `075cb7b8`; retrieved the neutral,

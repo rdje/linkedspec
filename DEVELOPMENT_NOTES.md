@@ -10,6 +10,23 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.3.0` — Rust progressive dormant RED): exact clean activation is Perl
+  admission atomic 263 `78bc66e1`; this slice changes only one outer-cfg test plus durable plan/status surfaces.
+- The real Rust parser accepts the reserved source but lowers it as `Expr::Call { name: "dispatch_span" }` under
+  an ordinary scalar assignment. JSON reconstruction and emitted source preserve that same generic shape.
+- Native, reconstructed, generated-plan, and separately compiled emitted execution all reach the generic
+  unknown-helper fallback and return `null`. That consistency is carrier plumbing, not progressive behavior.
+- The sole RED assertion requires serialized kind `progressive_dispatch_span` and names the neutral node
+  `PROGRESSIVE_DISPATCH_SPAN`; every preceding registry/inventory/shape/execution assertion passes.
+- File-level `cfg(linkedspec_progressive_span_dispatch_red)` makes ordinary Cargo execute zero tests. The target
+  name is absent from `tools/run_ci_local.sh`, so only an explicit `RUSTFLAGS=--cfg ...` invocation activates RED.
+- The independent emitted fixture lives under repository-derived `rust/target/test-workspaces` and shares the
+  repository-local Cargo target, preserving same-volume project-data ownership and automatic teardown.
+- `.14.6.3.1` owns immutable authority/core only, `.3.2` owns the dedicated node/four carriers, and `.3.3` owns
+  CI routing plus Rust-only rollout. No later boundary is smuggled into the dormant proof.
+- Focused truth remains progressive 2/9/86, typed 11/3/152, recognition 138/250/58, with no generated-format,
+  dependency, production, other-backend, outward, storage, path, or doctrine movement.
+
 - 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.2.3` — private Perl progressive admission): exact clean activation is
   carrier atomic 262 `075cb7b8`; only the unchanged final-path consumer, Perl rollout row, and direct projections move.
 - Canonical CI now requires and syntax-checks `t/progressive_span_dispatch_perl_contract.t`, emits one exact route
