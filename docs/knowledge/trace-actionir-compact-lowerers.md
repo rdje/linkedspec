@@ -14,6 +14,7 @@ date: 2026-07-04
 status: current
 tags: [trace, observability, actionir, flow-expr, value-expr, array-pipeline, declare-method, control-flow, perl, task-tree, mdbook]
 evidence: "perl/LinkedSpec/ActionIR/{FlowExpr.pm,ValueExpr.pm,ArrayPipeline.pm,DeclareMethod.pm,ControlFlow.pm}; t/trace_actionir_compact_lowerers.t; docs/linkedspec-book/src/public-api/trace-api.md; docs/tasks/TRACE-OBSERVABILITY.md .3.4.4"
+evidence_update_2026_08_17: "FUTURE-PARITY-BACKLOG.14.6.2.2 focused ActionIR proof exposed three assertions that still expected pre-ADR-0043 raw Perl truthiness and logical-and text. The tests now assert RuntimeLogical::truthy, eager RuntimeLogical::evaluate('and', ...), preserved defined($name), and typed_logical_and trace naming. Production lowering was already correct and did not change."
 reverify: "perl -c -Iperl perl/LinkedSpec/ActionIR/FlowExpr.pm && perl -c -Iperl perl/LinkedSpec/ActionIR/ValueExpr.pm && perl -c -Iperl perl/LinkedSpec/ActionIR/ArrayPipeline.pm && perl -c -Iperl perl/LinkedSpec/ActionIR/DeclareMethod.pm && perl -c -Iperl perl/LinkedSpec/ActionIR/ControlFlow.pm && perl -c -Iperl t/trace_actionir_compact_lowerers.t && prove -v -Iperl t/trace_actionir_compact_lowerers.t && rg -n 'actionir:(flow_expr|value_expr|array_pipeline|declare_method|control_flow)|trace_actionir_compact_lowerers|compact ActionIR lowerer' perl/LinkedSpec/ActionIR t/trace_actionir_compact_lowerers.t docs/linkedspec-book/src/public-api/trace-api.md TOOLBOX.md docs/tasks/TRACE-OBSERVABILITY.md"
 ---
 

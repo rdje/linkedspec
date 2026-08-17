@@ -27,7 +27,7 @@ my %NODES_BY_EFFECT = (
  authored_diagnostic => [],
  exit_or_unbounded_control => [qw(EXIT NEXT WHILE)],
  dynamic_callable => [],
- parser_registry_or_staged_dispatch => [],
+ parser_registry_or_staged_dispatch => [qw(PROGRESSIVE_DISPATCH_SPAN)],
  external_or_host => [],
  unknown_or_raw => [],
 );

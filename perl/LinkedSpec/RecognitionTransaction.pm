@@ -141,6 +141,26 @@ sub frame_snapshot {
  return _detached_frame_snapshot($frame_state)
 }
 
+sub has_active_transaction {
+ my ($self, %args) = @_;
+ my $authority = _authority_state($self);
+ my @frame_addresses;
+ if (exists $args{frame}) {
+  _frame_for_authority($self, $args{frame}, require_active => 1);
+  @frame_addresses = (refaddr($args{frame}));
+ } else {
+  @frame_addresses = @{$authority->{invocation_stack}};
+ }
+ for my $frame_address (@frame_addresses) {
+  my $token_address = $authority->{active_token_by_frame}{$frame_address};
+  next unless defined $token_address;
+  my $token_state = $TOKEN_STATE_BY_ADDRESS{$token_address};
+  return 1 if ref($token_state) eq 'HASH'
+   && ($token_state->{state} // 'invalidated') ne 'invalidated';
+ }
+ return 0
+}
+
 sub set_frame_state {
  my ($self, %args) = @_;
  my $frame_state = _frame_for_authority($self, $args{frame}, require_active => 1);

@@ -205,13 +205,15 @@ sub canonicalize_helper_action_ir_event {
  my $ir_node = $event->{ir_node};
  my %base_args = _event_args_hash($event);
 
- return {
+ my $canonical = {
   kind        => _canonical_kind($contract_id, $ir_node),
   source      => 'helper_contract',
   contract_id => $contract_id,
   raw         => $event->{raw},
   args        => _normalize_canonical_args($contract_id, $label, \%base_args),
- }
+ };
+ $canonical->{_exclusive_statement} = 1 if $event->{exclusive_statement};
+ return $canonical
 }
 
 1;

@@ -17,6 +17,7 @@ use LinkedSpec::OwnerDispatch ();
 use LinkedSpec::RuntimeDiagnosticOutput ();
 use LinkedSpec::RuntimeSemanticObservation ();
 use LinkedSpec::EntryRuleSelection ();
+use LinkedSpec::ProgressiveSpanDispatchRuntime ();
 
 use constant {
  DUMP_NONE   => 0,
@@ -161,6 +162,7 @@ sub _generated_source_preamble {
   . "use LinkedSpec::UnicodeCaseMapping ();\n"
   . "use LinkedSpec::RecognitionTransactionRuntime ();\n"
   . "use LinkedSpec::InterMatchGapRuntime ();\n"
+  . "use LinkedSpec::ProgressiveSpanDispatchRuntime ();\n"
   . "sub _trace_runtime_mark_event { return LinkedSpec::GeneratedSource::trace_mark_event(\@_) }\n"
   . "our \$LINKEDSPEC_GENERATED_SOURCE_CONTRACT = 'linkedspec-generated-source-v2';\n"
   . "our \$LINKEDSPEC_GENERATED_SOURCE_FORMAT = 2;\n"
@@ -320,6 +322,10 @@ sub Execute {
  my \$semantic_observation_sink = LinkedSpec::RuntimeSemanticObservation::validate_invocation_options(
   \$invocation_options,
  );
+ my \$progressive_dispatch_state = LinkedSpec::ProgressiveSpanDispatchRuntime::begin_invocation(
+  \$input_ref,
+  \$invocation_options,
+ );
  my \$explicit_entry_rule = \$LINKEDSPEC_GENERATED_CONFIGURED_ENTRY_RULE;
  if (ref(\$invocation_options) eq 'HASH'
   && defined(\$invocation_options->{top_rule})
@@ -358,10 +364,12 @@ sub Execute {
  my \$control_error_slot = LinkedSpec::RuntimeDiagnosticOutput::control_error_slot_name();
  my \$semantic_sink_slot = LinkedSpec::RuntimeSemanticObservation::sink_slot_name();
  my \$semantic_control_error_slot = LinkedSpec::RuntimeSemanticObservation::control_error_slot_name();
+ my \$progressive_dispatch_slot = LinkedSpec::ProgressiveSpanDispatchRuntime::descriptor_slot_name();
  local \$descr->{\$sink_slot} = \$diagnostic_sink;
  local \$descr->{\$control_error_slot} = undef;
  local \$descr->{\$semantic_sink_slot} = \$semantic_observation_sink;
  local \$descr->{\$semantic_control_error_slot} = undef;
+ local \$descr->{\$progressive_dispatch_slot} = \$progressive_dispatch_state;
  my \$semantic_input_identity = defined(\$semantic_observation_sink)
   ? LinkedSpec::RuntimeSemanticObservation::input_identity(\$input_ref)
   : undef;
@@ -414,6 +422,7 @@ sub Execute {
    LinkedSpec::RecognitionTransactionRuntime::is_error(\$execution_error)
    || LinkedSpec::RecognitionTransactionRuntime::is_recursive_observation_error(\$execution_error)
    || LinkedSpec::InterMatchGapRuntime::is_error(\$execution_error)
+   || LinkedSpec::ProgressiveSpanDispatchRuntime::is_error(\$execution_error)
   );
  die LinkedSpec::GeneratedSource::new_error(
   stage => 'execute_generated',
@@ -1570,6 +1579,34 @@ if ($validate_dependency_regex_references_error) {
  return undef;
 }
 
+my $progressive_span_dispatch_diagnostic = eval {
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ProgressiveSpanDispatchPolicy');
+ LinkedSpec::ProgressiveSpanDispatchPolicy::validate_rule_rows(
+  _call_compiler_state('compiled_spec_state_rule_rows', $compiled_spec_state),
+ )
+};
+my $progressive_span_dispatch_policy_error = $@;
+if ($progressive_span_dispatch_policy_error || ref($progressive_span_dispatch_diagnostic) eq 'HASH') {
+ my $diagnostic = ref($progressive_span_dispatch_diagnostic) eq 'HASH'
+  ? $progressive_span_dispatch_diagnostic
+  : {};
+ my $detail = $progressive_span_dispatch_policy_error
+  || ($diagnostic->{code} // 'progressive span dispatch policy rejected');
+ _call_runtime_ctx(
+  'set_runtime_ctx_last_error_for_owner',
+  $runtime_ctx,
+  'compiler_pipeline',
+  stage => 'progressive_span_dispatch_policy',
+  summary => 'Progressive span dispatch policy rejected the compiled rule table',
+  detail => $detail,
+  (map { exists($diagnostic->{$_}) ? ($_ => $diagnostic->{$_}) : () }
+   qw/code rule origin operand parser_id top_rule/),
+ );
+ _trace_log_output(DUMP_NONE, 'CRITICAL ERROR', 'Progressive span dispatch policy rejected the compiled rule table');
+ _trace_exit($trace_scope, { status => 'error', stage => 'progressive_span_dispatch_policy' }, DUMP_LOW);
+ return undef;
+}
+
 my $recognition_transaction_diagnostic = eval {
  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::RecursiveObservationPolicy');
  LinkedSpec::RecursiveObservationPolicy::validate_rule_rows(
@@ -1838,14 +1875,17 @@ if ($recognition_transaction_policy_error || ref($recognition_transaction_diagno
  _trace_decision('validate_input_ref', 1, 'Top-level parser received SCALAR reference input', DUMP_DEBUG);
  my $diagnostic_sink = LinkedSpec::RuntimeDiagnosticOutput::validate_invocation_options($_[1]);
  my $semantic_observation_sink = LinkedSpec::RuntimeSemanticObservation::validate_invocation_options($_[1]);
+ my $progressive_dispatch_state = LinkedSpec::ProgressiveSpanDispatchRuntime::begin_invocation($input_ref, $_[1]);
  my $sink_slot = LinkedSpec::RuntimeDiagnosticOutput::sink_slot_name();
  my $control_error_slot = LinkedSpec::RuntimeDiagnosticOutput::control_error_slot_name();
  my $semantic_sink_slot = LinkedSpec::RuntimeSemanticObservation::sink_slot_name();
  my $semantic_control_error_slot = LinkedSpec::RuntimeSemanticObservation::control_error_slot_name();
+ my $progressive_dispatch_slot = LinkedSpec::ProgressiveSpanDispatchRuntime::descriptor_slot_name();
  local $final_descriptor->{$sink_slot} = $diagnostic_sink;
  local $final_descriptor->{$control_error_slot} = undef;
  local $final_descriptor->{$semantic_sink_slot} = $semantic_observation_sink;
  local $final_descriptor->{$semantic_control_error_slot} = undef;
+ local $final_descriptor->{$progressive_dispatch_slot} = $progressive_dispatch_state;
  my $semantic_input_identity = defined($semantic_observation_sink)
   ? LinkedSpec::RuntimeSemanticObservation::input_identity($input_ref)
   : undef;

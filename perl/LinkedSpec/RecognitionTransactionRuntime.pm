@@ -540,6 +540,15 @@ sub _context {
  return $CONTEXT_BY_KEY{refaddr($descr).':'.refaddr($string_ref)}
 }
 
+sub transaction_active {
+ my ($descr, $string_ref) = @_;
+ my $context = _context($descr, $string_ref);
+ return 0 unless ref($context) eq 'HASH'
+  && blessed($context->{authority})
+  && $context->{authority}->isa('LinkedSpec::RecognitionTransaction');
+ return $context->{authority}->has_active_transaction() ? 1 : 0
+}
+
 sub _current_guard {
  my ($descr, $string_ref, $rule) = @_;
  my $context = _context($descr, $string_ref);

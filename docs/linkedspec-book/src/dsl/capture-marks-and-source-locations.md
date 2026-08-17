@@ -436,9 +436,13 @@ cursor/marks/transactions stay isolated; capability and policy ceilings only nar
 budget propagate; and repeated parser/top/source dispatch must strictly shrink the span. The existing staged
 function-body adapter does not satisfy this contract. The neutral checker passes 2 registry entries, 2 sources/8
 views, 6 authority, 6 cancellation, 8 chain, and 4 execution cases, 5 backend guards/17 implementation paths plus
-10 outward guards, 26 diagnostics, rollout 1/9, and 86 mutations. All backend rows and the typed progressive row
-remain pending; the dispatch effect owns no current node/call rows, every guarded backend path omits the future
-tokens, outward guards deny premature exposure, and authored Perl execution still diagnoses the form as unsupported today.
+10 outward guards, 26 diagnostics, rollout 1/9, and 86 mutations. All admitted backend rows and the typed
+progressive row remain pending; the neutral dispatch effect owns no admitted node/call rows, every guarded backend
+path omits the future tokens, and outward guards deny premature exposure. Perl has private carrier integration
+behind host-supplied invocation options: the exact assignment lowers to one dedicated node and works identically
+through live, reconstructed, generated-plan, and independently loaded emitted routes, while generated artifacts
+contain no registry callback or mutable authority. Its 125-case consumer remains outside CI until the separate
+Perl admission leaf.
 
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions or
 typed spans are authored values. The `recognition_*` operations are current across all six runtime routes, while

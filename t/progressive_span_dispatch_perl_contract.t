@@ -10,6 +10,8 @@ use JSON::PP ();
 use Test::More;
 
 use LinkedSpec ();
+use LinkedSpec::ProgressiveSpanDispatch ();
+use LinkedSpec::ProgressiveSpanDispatchRuntime ();
 use LinkedSpec::StagedParserRegistry ();
 
 sub slurp_json {
@@ -35,6 +37,71 @@ sub occurrences {
   $offset += length($needle);
  }
  return $count
+}
+
+sub clone_plain {
+ my ($value) = @_;
+ return JSON::PP->new->decode(JSON::PP->new->canonical(1)->encode($value))
+}
+
+sub progressive_options {
+ my ($contract) = @_;
+ my @entries = map {
+  my $entry = clone_plain($_);
+  $entry->{compiled_authority} = sub {
+   my ($request) = @_;
+   my $view = $request->{source_view};
+   return {
+    kind => 'expr',
+    text => $view->text,
+    span => $view->rebase_span({
+     source_id => $view->source_id,
+     start => 0,
+     end => length($view->text),
+     provenance => 'child-match',
+    }),
+   };
+  };
+  $entry
+ } @{$contract->{registry_entries}};
+ my $registry = LinkedSpec::ProgressiveSpanDispatch->new(entries => \@entries);
+ return {
+  progressive_span_dispatch => {
+   registry => $registry,
+   source_id => 'input',
+   cancellation_token => 'contract-token',
+   cancelled => sub { return 0 },
+   clock => sub { return 1 },
+   deadline_tick => 100,
+   remaining_steps => 100,
+   max_depth => 4,
+   max_calls => 8,
+   caller_capabilities => [qw(actionir-v1 structured-result-v1 typed-source-location-v1)],
+   required_capabilities => [qw(actionir-v1 typed-source-location-v1)],
+   caller_ceilings => {
+    source_detail => 'text',
+    policy_modes => [qw(deterministic fail-only strict-json)],
+    max_steps => 100,
+    max_result_nodes => 64,
+    max_diagnostic_bytes => 4096,
+   },
+   required_source_detail => 'span',
+   dispatch_cost => 1,
+  },
+ }
+}
+
+sub expected_child_result {
+ return {
+  kind => 'expr',
+  text => 'a',
+  span => {
+   source_id => 'input',
+   start => 0,
+   end => 1,
+   provenance => 'child-match',
+  },
+ }
 }
 
 my $contract_path = File::Spec->catfile(
@@ -271,6 +338,61 @@ ok(ref($descriptor) eq 'HASH', 'the exact future authored surface reaches descri
 my $rewriter = ref($descriptor) eq 'HASH'
  ? $descriptor->{spec}{Top}{meta}{action_rewriter}
  : {};
+my @progressive_events = grep {
+ ($_->{kind} // '') eq 'PROGRESSIVE_DISPATCH_SPAN'
+} @{$rewriter->{canonical_action_ir_events} // []};
+is(scalar(@progressive_events), 1, 'the exact assignment produces one dedicated progressive node');
+is_deeply(
+ $progressive_events[0]{args},
+ {
+  result => 'value',
+  argument_count => 3,
+  parser_operand => '"expr-v1"',
+  top_rule_operand => '"Expr"',
+  span_operand => 'span',
+  parser_id => 'expr-v1',
+  top_rule => 'Expr',
+  span_binding => 'span',
+ },
+ 'the dedicated node preserves only static logical operands and the result binding',
+);
+ok(
+ !grep({
+  ($_->{kind} // '') eq 'ASSIGN'
+   && (($_->{args}{target} // '') eq 'value')
+ } @{$rewriter->{canonical_action_ir_events} // []}),
+ 'the exclusive progressive statement is not duplicated as a generic assignment',
+);
+
+my %live_ctx;
+my $live_parser = LinkedSpec::Get(
+ \$authored_source,
+ generated_source_identity => 'progressive-span-dispatch-perl-live.spec',
+ runtime_ctx_ref => \%live_ctx,
+);
+ok(ref($live_parser) eq 'CODE', 'the live carrier compiles the private progressive node')
+ or diag(JSON::PP->new->canonical(1)->encode($live_ctx{last_error} // {}));
+my $live_input = 'abc';
+my $live_value = ref($live_parser) eq 'CODE'
+ ? $live_parser->(\$live_input, progressive_options($contract))
+ : undef;
+is_deeply($live_value, expected_child_result(), 'the live carrier returns the detached child payload');
+
+my $reconstructed_input = 'abc';
+my $reconstructed_value = LinkedSpec::ProgressiveSpanDispatchRuntime::with_invocation(
+ $descriptor,
+ \$reconstructed_input,
+ progressive_options($contract),
+ sub {
+  return $descriptor->{spec}{Top}{handler}->($descriptor, \$reconstructed_input, {})
+ },
+);
+is_deeply(
+ $reconstructed_value,
+ expected_child_result(),
+ 'the reconstructed descriptor carrier returns the same detached child payload',
+);
+
 my $generated_source = LinkedSpec::emit_generated_source(
  \$authored_source,
  source_identity => 'progressive-span-dispatch-perl-red.spec',
@@ -282,27 +404,206 @@ ok(
 is(
  occurrences($generated_source, 'dispatch_span'),
  1,
- 'generated-v2 retains one logical dispatch marker before integration',
+ 'generated-v2 serializes one logical dispatch origin marker',
 );
 is(
  occurrences($generated_source, 'LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER'),
- 1,
- 'generated-v2 retains one unsupported-helper sentinel before integration',
+ 0,
+ 'generated-v2 contains no unsupported-helper sentinel after private lowering',
 );
-my $generated_package = 'LinkedSpec::ProgressiveSpanDispatchPerlRedGenerated';
-my $generated_loaded = eval "package $generated_package; $generated_source; 1";
-ok($generated_loaded, 'the current unsupported generated-v2 source loads') or diag($@);
-my ($generated_value, $generated_execute_ok);
-if ($generated_loaded) {
+unlike(
+ $generated_source,
+ qr/(?:compiled_authority|contract-token|opaque:compiled|cancellation_token\s*=>)/,
+ 'generated-v2 serializes no registry callback, fingerprint authority, or cancellation token',
+);
+
+my $load_generated = sub {
+ my ($package) = @_;
+ my $loaded = eval "package $package; $generated_source; 1";
+ my $error = $@;
+ ok($loaded, "$package loads the emitted source in an isolated namespace") or diag($error);
  no strict 'refs';
- my $generated_input = 'abc';
- $generated_execute_ok = eval {
-  $generated_value = &{"${generated_package}::Execute"}(\$generated_input);
+ return {
+  execute => *{"${package}::Execute"}{CODE},
+  plan => *{"${package}::LinkedSpecGeneratedPlan"}{CODE},
+  validate_plan => *{"${package}::ValidateGeneratedPlan"}{CODE},
+ }
+};
+
+my $plan_carrier = $load_generated->('LinkedSpec::ProgressiveSpanDispatchPerlPlanGenerated');
+my $generated_plan = $plan_carrier->{plan}->();
+ok($plan_carrier->{validate_plan}->($generated_plan), 'the generated-plan carrier validates its logical plan');
+ok(
+ !grep({ exists($_->{registry}) || exists($_->{compiled_authority}) } @$generated_plan),
+ 'the generated plan contains no registry or compiled authority',
+);
+my $plan_input = 'abc';
+is_deeply(
+ $plan_carrier->{execute}->(\$plan_input, progressive_options($contract)),
+ expected_child_result(),
+ 'the generated-plan carrier receives fresh authority only through invocation options',
+);
+
+my $emitted_carrier = $load_generated->('LinkedSpec::ProgressiveSpanDispatchPerlFreshGenerated');
+my $emitted_input = 'abc';
+is_deeply(
+ $emitted_carrier->{execute}->(\$emitted_input, progressive_options($contract)),
+ expected_child_result(),
+ 'an independently compiled emitted-source carrier returns the same child payload',
+);
+
+for my $missing_case (
+ ['live', sub {
+  my $input = 'abc';
+  return $live_parser->(\$input)
+ }],
+ ['generated', sub {
+  my $input = 'abc';
+  return $emitted_carrier->{execute}->(\$input)
+ }],
+) {
+ my ($label, $callback) = @$missing_case;
+ my $ok = eval {
+  $callback->();
   1
  };
+ my $error = $@;
+ ok(!$ok, "$label carrier rejects a missing host registry authority");
+ ok(
+  LinkedSpec::ProgressiveSpanDispatchRuntime::is_error($error)
+   && ($error->{code} // '') eq 'progressive_registry_missing',
+  "$label carrier preserves the typed missing-registry diagnostic unchanged",
+ );
 }
-ok($generated_execute_ok, 'the current unsupported generated-v2 source executes') or diag($@);
-ok(!defined($generated_value), 'the unsupported generated-v2 dispatch result remains null');
+
+my @static_rejections = (
+ {
+  id => 'dynamic parser identity',
+  call => 'dispatch_span(parser_id, "Expr", span)',
+  code => 'progressive_parser_identity_literal_required',
+  field => 'operand',
+  value => 'parser_id',
+ },
+ {
+  id => 'invalid parser identity',
+  call => 'dispatch_span("../expr", "Expr", span)',
+  code => 'progressive_parser_identity_invalid',
+  field => 'parser_id',
+  value => '../expr',
+ },
+ {
+  id => 'dynamic top rule',
+  call => 'dispatch_span("expr-v1", top_rule, span)',
+  code => 'progressive_top_rule_literal_required',
+  field => 'operand',
+  value => 'top_rule',
+ },
+ {
+  id => 'invalid top rule',
+  call => 'dispatch_span("expr-v1", "Expr/Bad", span)',
+  code => 'progressive_top_rule_invalid',
+  field => 'top_rule',
+  value => 'Expr/Bad',
+ },
+ {
+  id => 'non-bare span',
+  call => 'dispatch_span("expr-v1", "Expr", hash("source_id", "input"))',
+  code => 'progressive_span_binding_required',
+  field => 'operand',
+  value => 'hash("source_id", "input")',
+ },
+);
+for my $case (@static_rejections) {
+ my $source = $authored_source;
+ $source =~ s/dispatch_span\("expr-v1", "Expr", span\)/$case->{call}/;
+ my %ctx;
+ my $bad_descriptor = LinkedSpec::Get(\$source, return_descriptor => 1, runtime_ctx_ref => \%ctx);
+ ok(!defined($bad_descriptor), "$case->{id} rejects before a parser carrier exists");
+ is($ctx{last_error}{stage}, 'progressive_span_dispatch_policy', "$case->{id} uses the static progressive policy stage");
+ is($ctx{last_error}{code}, $case->{code}, "$case->{id} uses the portable diagnostic code");
+ is($ctx{last_error}{$case->{field}}, $case->{value}, "$case->{id} preserves its portable diagnostic operand");
+}
+
+my $transaction_source = <<'SPEC';
+Top::
+ I {
+  token = recognition_checkpoint()
+  matched = recognize_once(token, call(Child))
+  if(matched)
+   value = recognition_commit(token)
+  else()
+   recognition_rollback(token)
+  endif()
+  return(value)
+ }
+ /never/
+Child:
+ I {
+  value = dispatch_span("expr-v1", "Expr", span)
+  return(value)
+ }
+ /never/
+SPEC
+my %transaction_ctx;
+my $transaction_descriptor = LinkedSpec::Get(
+ \$transaction_source,
+ return_descriptor => 1,
+ runtime_ctx_ref => \%transaction_ctx,
+);
+ok(!defined($transaction_descriptor), 'an uncommitted recognition effect graph rejects progressive dispatch statically');
+is($transaction_ctx{last_error}{stage}, 'recognition_transaction_policy', 'transaction rejection uses the recognition policy stage');
+is($transaction_ctx{last_error}{code}, 'recognition_effect_forbidden', 'transaction rejection uses the portable forbidden-effect code');
+is($transaction_ctx{last_error}{effect}, 'parser_registry_or_staged_dispatch', 'transaction rejection preserves the progressive effect class');
+
+{
+ my $runtime_descriptor = {spec => {}};
+ my $runtime_input = 'abc';
+ pos($runtime_input) = 0;
+ my $runtime_info = {marks => {}};
+ my $runtime_boundary = 0;
+ my $guard = LinkedSpec::RecognitionTransactionRuntime::enter_invocation(
+  $runtime_descriptor,
+  \$runtime_input,
+  $runtime_info,
+  \$runtime_boundary,
+  'Top',
+ );
+ ok(
+  !LinkedSpec::RecognitionTransactionRuntime::transaction_active($runtime_descriptor, \$runtime_input),
+  'runtime transaction visibility starts inactive',
+ );
+ my $token = LinkedSpec::RecognitionTransactionRuntime::begin(
+  $runtime_descriptor,
+  \$runtime_input,
+  $runtime_info,
+  \$runtime_boundary,
+  'Top',
+  'token',
+ );
+ ok(
+  LinkedSpec::RecognitionTransactionRuntime::transaction_active($runtime_descriptor, \$runtime_input),
+  'runtime transaction visibility detects an active uncommitted token',
+ );
+ $guard->{authority}->attempt(
+  frame => $guard->{frame},
+  token => $token,
+  matched => 0,
+  state => {cursor => 0, boundary => 0, marks => {}},
+ );
+ LinkedSpec::RecognitionTransactionRuntime::finish_rollback(
+  $runtime_descriptor,
+  \$runtime_input,
+  $runtime_info,
+  \$runtime_boundary,
+  $token,
+  'Top',
+ );
+ ok(
+  !LinkedSpec::RecognitionTransactionRuntime::transaction_active($runtime_descriptor, \$runtime_input),
+  'runtime transaction visibility clears after rollback',
+ );
+ undef $guard;
+}
 
 my %observed_node = map { ($_ => 1) } @{$rewriter->{canonical_action_ir_nodes} // []};
 my @unresolved_helpers = @{$rewriter->{unresolved_helpers} // []};
@@ -315,10 +616,10 @@ my $descriptor_ready =
 
 ok(
  $descriptor_ready,
- 'Perl lowers dispatch_span to dedicated language-agnostic progressive ActionIR',
+ 'Perl privately lowers the assignment to dedicated language-agnostic progressive ActionIR',
 );
 diag(
- 'expected RED: missing node=[PROGRESSIVE_DISPATCH_SPAN]'
+ 'missing node=[PROGRESSIVE_DISPATCH_SPAN]'
  . '; unresolved helpers=[' . join(',', @unresolved_helpers) . ']'
  . "; raw dependencies=$raw_dependency_count",
 ) unless $descriptor_ready;

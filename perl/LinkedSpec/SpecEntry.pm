@@ -19,6 +19,7 @@ use LinkedSpec::RuntimeDiagnosticOutput ();
 use LinkedSpec::RuntimeSemanticObservation ();
 use LinkedSpec::RecognitionTransactionRuntime ();
 use LinkedSpec::InterMatchGapRuntime ();
+use LinkedSpec::ProgressiveSpanDispatchRuntime ();
 
 our $BACKEND;
 
@@ -389,6 +390,7 @@ sub _build_runtime_handler {
   unless ($eval_ok) {
    die $eval_error if LinkedSpec::RecognitionTransactionRuntime::is_error($eval_error)
     || LinkedSpec::InterMatchGapRuntime::is_error($eval_error)
+    || LinkedSpec::ProgressiveSpanDispatchRuntime::is_error($eval_error)
     || LinkedSpec::RecognitionTransactionRuntime::is_recursive_observation_error($eval_error);
    if (LinkedSpec::RuntimeDiagnosticOutput::is_marked_control_error($descr, $eval_error)
     || LinkedSpec::RuntimeSemanticObservation::is_marked_control_error($descr, $eval_error)) {

@@ -104,6 +104,9 @@ root limit, requires action at 90%, and archives the oldest complete clean-HEAD 
 It refuses to archive uncommitted records or rewritten/reordered HEAD content. Change boundaries are `## `
 headings; engineering-note boundaries are dated entries or `## ` headings. New content-addressed segments use IDs
 below the initial `5000` reserve, so manifest order remains newest-to-oldest without renaming immutable files.
+Engineering-notes segment 4993 advances only the finite collection capacity to fifteen files and fourteen
+manifest lines under ADR `0081`; all aggregate, per-file, byte, lifecycle, owner, and verifier controls remain
+unchanged.
 Publication is recoverable: segment first, manifest second, bounded root last; rerun reuses an exact orphan segment
 or completes an exact pending manifest generation, while any conflict fails closed. `COMMIT.md` requires both
 pressure checks on every accepted slice. Unchanged registry recomposition passes 20 surfaces / 62 routes / 32/32
@@ -170,6 +173,14 @@ uncommitted recognition effect, live result handle, fallback, or premature backe
 requires the typed row to remain pending, the rejected effect to have no current node/call rows, both future tokens
 to remain absent from guarded backend paths, private spelling/node/rollout tokens to remain absent from ten
 facade/schema/semantic/MCP/CLI/README paths, and Perl lowering to retain its unsupported-helper sentinel.
+
+Perl carrier integration is intentionally one leaf ahead of admission. Its final-path focused consumer now proves
+one exclusive dedicated node, static operands, fresh invocation authority, live/reconstructed/generated-plan/
+independently loaded emitted execution, logical-only serialization, typed missing-authority failure, and
+transaction rejection in 125 assertions. That consumer remains absent from `tools/run_ci_local.sh`; the neutral
+checker continues proving the unchanged admitted/public boundary until `.14.6.2.3` promotes only the Perl row.
+Its transaction-state query loads the recognition runtime only when a dispatch executes, preserving the existing
+require-only Compiler guarantee that `LinkedRE` stays lazy until the parser pipeline actually needs it.
 
 The `.14.4.0` audit found one contradiction in that baseline: `direct_nonprogress` used the same textual identity
 for invocation and parent. Corrective `.14.4.0.1` changes all six observation identities to positive unique
@@ -910,9 +921,9 @@ perl tools/check_language_capability_coverage.pl
 
 That checker requires exact Dart/Julia/Lua inventory identity at 250 current names, occurrence across the mdBook
 and governed 105-case corpus plus exact named-mark fixture and the public gap-contract example, every one of 126 independently derived public Perl
-contracts in each backend inventory, and rejection of fourteen classified non-public names: nine compatibility,
-legacy, or internal lowering contracts plus four grammar-owned recognition-transaction intrinsics and the
-grammar-owned recursive-observation intrinsic. It separately
+contracts in each backend inventory, and rejection of fifteen classified non-public names: nine compatibility,
+legacy, or internal lowering contracts; four grammar-owned recognition-transaction intrinsics; the grammar-owned
+recursive-observation intrinsic; and private progressive `dispatch_span` until its Perl admission leaf. It separately
 requires Dart's, Julia's, and Lua's seven source-boundary compatibility aliases and canonical targets to match the neutral
 typed-source contract without inflating the common 250-name inventory. Lua's focused consumer executes those
 mappings through native, loaded, reconstructed, generated-plan, and emitted routes on both PUC Lua and LuaJIT.

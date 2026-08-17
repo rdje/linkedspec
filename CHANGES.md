@@ -10,6 +10,38 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.2.2 — integrate private Perl progressive dispatch carriers
+
+- Activated carrier integration task-tree-first from clean authority atomic 261 `e185b352`; retrieved the neutral,
+  authority, dormant-RED, ActionIR, generated-v2, invocation-options, typed-source, and recognition owners first.
+- Added one exclusive `PROGRESSIVE_DISPATCH_SPAN` assignment contract. It preserves only the result binding,
+  decoded logical parser id/top rule, and bare span binding, and suppresses a duplicate generic `ASSIGN` event.
+- Added compile-time literal/identity/top-rule/bare-span policy diagnostics and classified the node as rejected
+  `parser_registry_or_staged_dispatch` throughout recognition effect graphs.
+- Added a host-only runtime carrier that starts a fresh copied-source invocation from parser options, localizes it
+  in a private descriptor slot, preserves typed failures, and defensively observes active recognition tokens.
+- Proved identical detached results through live, reconstructed descriptor, validated generated-plan, and fresh
+  independently loaded generated-v2 routes. Emitted source serializes logical operands only and no callback,
+  registry, source/cancellation authority, fingerprint authority, or mutable budget.
+- Superseded the final-path 83/1 RED with 125 green assertions while keeping the consumer absent from ordinary and
+  canonical CI. Neutral/typed rollout, generated format v2, staged registry, outward surfaces, and admission do not
+  move; `.14.6.2.3` alone owns registration and Perl promotion.
+- The focused ActionIR direct check exposed three pre-existing trace expectations for pre-ADR-0043 raw truthiness.
+  Tests now assert the already-current typed `RuntimeLogical` lowering; production logical behavior did not change.
+- Broader focused governance exposed two latent boundary defects. The language checker now classifies private
+  `dispatch_span` as the fifteenth non-public Perl diagnostic, preserving 250 shared names / 126 public Perl calls
+  until `.14.6.2.3`; the capability checker again passes after its erased closed `.24.2` marker was restored in
+  the stable closed-capability section instead of another mutable frontier cell.
+- Phase 0 exposed an eager-load regression: the new runtime's static recognition-transaction import pulled
+  `LinkedRE` into a require-only Compiler process. Transaction visibility now resolves lazily only at an actual
+  progressive dispatch; direct runtime and Compiler probes retain the established require-time boundary.
+- Mandatory engineering-notes rollover created immutable segment 4993 and exposed the prior finite 14-file /
+  13-manifest-line routing cap. ADR `0081` authorizes only 15 files / 14 manifest lines; aggregate, per-file, byte,
+  lifecycle, owner, and verifier controls stay fixed. This executable governance movement escalates the leaf from
+  focused to receipt-bound canonical verification under ADR `0073`.
+- The corrected full Phase 0 gate passes 1,031/1,031 in 769 seconds; exact staged canonical CI binds final signoff
+  to the complete carrier, governance, documentation, and continuity candidate.
+
 ## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.2.1 — add private Perl progressive dispatch authority
 
 - Activated the authority/core leaf task-tree-first from clean dormant-RED atomic 260 `191465f4`; retrieved the

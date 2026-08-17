@@ -362,7 +362,8 @@ sub set_runtime_ctx_last_error {
                    expected_contract actual_contract entry_rule rule origin effect operand escape
                    operation count cycle start_offset end_offset rule_role source_id line slot_name
                    first_line authored_selector family cursor_policy edge_ownership execution_shape
-                   marker marker_line binding_name operand_kind originating_edge_or_job/) {
+                   marker marker_line binding_name operand_kind originating_edge_or_job
+                   parser_id top_rule/) {
   $error->{$field} = $args{$field} if exists $args{$field};
  }
  $runtime_ctx->{last_error} = $error;

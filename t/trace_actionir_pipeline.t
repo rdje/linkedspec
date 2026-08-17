@@ -94,7 +94,11 @@ subtest 'attached if traces unmatched helper events and implicit closure inserti
  my $code = qq{if(true) { return("yes") }\nreturn("no")};
  my ($rewritten, $diag, $trace) = _rewrite_with_trace($code);
 
- is($rewritten, qq{if (1) { return "yes";\n} return "no"}, 'attached if still inserts the implicit close before the next statement');
+ is(
+  $rewritten,
+  qq{if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(1) }) { return "yes";\n} return "no"},
+  'attached if uses typed truthiness and still inserts the implicit close before the next statement',
+ );
  is($diag->{canonical_action_ir_fallback_count}, 0, 'attached if has no raw fallback');
  is($diag->{unresolved_helper_count}, 0, 'attached if has no unresolved helpers');
  like($trace, qr/DECISION actionir:canonical_events:build_canonical_action_ir_events:Top:unmatched_helper_event => TAKEN/, 'trace reports unmatched nested helper events');

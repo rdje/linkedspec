@@ -333,8 +333,9 @@ The capability audit now derives the same 250 current ActionIR call names from D
 appears in this book and in the governed occurrence sources: the 105-fixture neutral corpus, the exact
 complete-named-mark fixture, and the public gap-contract example. The strict checker independently derives 126
 public identifier-shaped calls from the Perl ActionIR contract registry, requires every one in each backend
-inventory, and rejects fourteen classified names: nine compatibility/legacy/internal contracts plus five
-grammar-owned recognition intrinsics that lower to dedicated nodes rather than shared helper calls. Dart's,
+inventory, and currently rejects fifteen classified names: nine compatibility/legacy/internal contracts, five
+grammar-owned recognition intrinsics, and private progressive `dispatch_span`; all lower to dedicated nodes
+rather than shared helper calls. Its separate Perl admission leaf will remove the progressive exclusion. Dart's,
 Julia's, and Lua's separately rolled-out seven
 source-boundary compatibility aliases are checked with their canonical targets against the neutral typed-source contract; they do
 not silently widen the shared 250-name inventory. Lua executes the mappings through one shared runtime on PUC Lua
@@ -719,6 +720,13 @@ span. Child registers are bounded-view-local while typed coordinates rebase to t
 is isolated; capabilities intersect; policy/resource/source-detail ceilings only narrow; cancellation propagates;
 and repeated parser/top/source dispatch must strictly shrink the span. Never route an authored parser id to the
 filesystem. Derived text, deterministic parse-job queues, and AST stitching remain staged `.14.7` work.
+
+Perl `.14.6.2.1-.2` provide the current private reference seam. One exclusive ActionIR contract claims the whole
+reserved assignment, static policy validates its two literals and bare span, and each wrapper constructs a fresh
+invocation from a host-only option. Live, reconstructed descriptor, validated generated-plan, and independently
+loaded generated-v2 packages agree; emitted source preserves logical operands only. Recognition transactions
+reject the effect. The consumer is green but deliberately unrouted, so this is implementation guidance rather
+than public admission; `.14.6.2.3` owns that boundary.
 
 The spec's body shell is a
 linked opener/closer parse: `body_brace`

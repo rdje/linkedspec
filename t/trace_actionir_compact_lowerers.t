@@ -66,9 +66,13 @@ subtest 'FlowExpr and ValueExpr trace compact expression decisions' => sub {
 	  q{name},
  );
 
- like($flow, qr/\A\(\(defined\(\$name\)\) && /, 'flow composite still lowers logical defined/string comparison expression');
- like($flow_trace, qr/DECISION actionir:flow_expr:lower_flow_composite_expr:expr:is_defined => TAKEN/, 'trace reports is_defined branch');
- like($flow_trace, qr/DECISION actionir:flow_expr:lower_flow_composite_expr:expr:logical_and => TAKEN/, 'trace reports logical and branch');
+ like(
+  $flow,
+  qr/\Ado \{ require LinkedSpec::RuntimeLogical;.*LinkedSpec::RuntimeLogical::evaluate\('and',/,
+  'flow composite uses the typed eager logical runtime',
+ );
+ like($flow, qr/scalar\(defined\(\$name\)\)/, 'flow composite preserves the inner defined predicate');
+ like($flow_trace, qr/DECISION actionir:flow_expr:lower_flow_composite_expr:expr:typed_logical_and => TAKEN/, 'trace reports the typed logical-and branch');
  is($direct, '$items->[0]->[$idx]->{"name"}', 'direct nested access still lowers array index and literal key segments');
  like($direct_trace, qr/DECISION actionir:value_expr:lower_direct_nested_access_value_expr:expr:bare_index_segment => TAKEN/, 'trace reports bare index segment');
  like($direct_trace, qr/DECISION actionir:value_expr:lower_direct_nested_access_value_expr:expr:literal_key_segment => TAKEN/, 'trace reports literal key segment');
@@ -117,7 +121,11 @@ subtest 'ControlFlow traces attached if and inline switch decisions' => sub {
   \%switch_ctx,
  );
 
- is($if_stmt, 'if (1) { return("yes")', 'attached if lowering is unchanged');
+ is(
+  $if_stmt,
+  'if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(1) }) { return("yes")',
+  'attached if lowers through the typed truthiness seam',
+ );
  like($if_trace, qr/DECISION actionir:control_flow:lower_if_flow_statement:if:attached_if => TAKEN/, 'trace reports attached if branch');
  like($if_trace, qr/DECISION actionir:control_flow:lower_flow_branch_single_statement:branch:passthrough_no_rule_match => TAKEN/, 'trace reports branch statement passthrough');
  like($switch_stmt, qr/\Ado \{ my \$__ls_switch_value_1 = \$name; my \$__ls_switch_hit_1 = 0;/, 'inline switch lowering is unchanged');

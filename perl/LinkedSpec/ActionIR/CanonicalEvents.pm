@@ -163,6 +163,8 @@ sub _build_canonical_action_ir_events {
  foreach my $statement (@{$split_action_ir_statements->($code)}) {
   if (exists $helper_event_queue{$statement} && @{$helper_event_queue{$statement}}) {
    my $event = shift @{$helper_event_queue{$statement}};
+   my $exclusive_statement = delete $event->{_exclusive_statement};
+   delete $helper_event_queue{$statement} if $exclusive_statement;
    push @canonical_events, $event;
    LinkedSpec::ActionIR::Trace::decision(
     owner => 'canonical_events',
@@ -225,6 +227,7 @@ sub _build_canonical_action_ir_events {
  foreach my $raw_key (keys %helper_event_queue) {
   while (@{$helper_event_queue{$raw_key}}) {
    my $event = shift @{$helper_event_queue{$raw_key}};
+   delete $event->{_exclusive_statement};
    $event->{source} = 'unmatched_helper_scan_event';
    push @canonical_events, $event;
    LinkedSpec::ActionIR::Trace::decision(

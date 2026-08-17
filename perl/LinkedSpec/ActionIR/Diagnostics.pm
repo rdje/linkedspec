@@ -182,6 +182,7 @@ sub _collect_action_helper_ir_nodes {
     contract_id => $rule->{id},
     raw         => $event->{raw},
     args        => $event->{args} || {},
+    exclusive_statement => $rule->{exclusive_statement} ? 1 : 0,
    };
    $hits{$ir_node} += 1;
    $total += 1;
