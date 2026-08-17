@@ -10,6 +10,22 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.2.0 — freeze Perl progressive dispatch RED
+
+- Split the Perl parent task-tree-first from clean neutral atomic 259 `a0a33c32`, then retrieved ADR `0080`, the
+  neutral contract, Knowledge, Toolbox, source-location/recognition/runtime, ActionIR, staged-registry, live-wrapper,
+  and generated-v2 authorities before selecting an implementation seam.
+- Added the final-path dormant `t/progressive_span_dispatch_perl_contract.t`. It consumes the complete neutral
+  inventory and deterministically passes 83 assertions before one exact missing-`PROGRESSIVE_DISPATCH_SPAN` RED.
+- Proved the current boundary with production probes: `dispatch_span` becomes one unsupported-helper sentinel;
+  descriptors retain ordinary `ASSIGN`/`RETURN` plus one unresolved helper and zero raw dependencies; standalone
+  source loads but returns null; the separate staged function-body registry rejects `expr-v1` at resolve.
+- Froze private carrier ownership: `.1` builds authority/core independent of ActionIR; `.2` attaches one fresh
+  per-invocation authority through the existing live/generated invocation-options seam and integrates all four
+  carriers without serializing live handles; `.3` alone registers the unchanged consumer and promotes Perl.
+- The RED remains absent from ordinary/canonical routes. No production, generated-format, neutral/typed rollout,
+  facade/schema/semantic/MCP/CLI/README, registry-loader, or public behavior changes in this leaf.
+
 ## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.1 — add neutral progressive span dispatch authority
 
 - Activated task-tree-first from clean corrective atomic 258 `27f9c87f` and retrieved the progressive audit,

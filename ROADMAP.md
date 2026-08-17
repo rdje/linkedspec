@@ -10,16 +10,15 @@ Duplicate-slot rollout is closed at 7 complete / 0 pending; recurring proof rema
 Repeated-action rollout is closed at 8 complete / 0 pending; recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh`.
 
-Progressive span-dispatch audit `.14.6.0` is focused-signoff-complete for intended atomic 257 from clean atomic
-256 `8880d1b6`. Current ActionIR has no
-progressive form; the five staged registries are limited to the built-in function-body adapter, and filesystem
-spec loaders are pre-parse authorities rather than in-parse registries. The frozen order is corrective typed
-transaction composition `.0.1`, executable neutral contract `.1`, Perl/Rust/Dart/Julia/shared-Lua `.2-.6`, exact
-six-runtime recurrence `.7`, and public projection/no-drift `.8`. A child receives a rebased bounded view of one
-direct span plus an explicitly pre-registered compiled parser identity; capability/policy/cancellation authority
-can only narrow, parent state stays isolated, cycles require a decreasing span, and no authored path can load.
-Staged AST enrichment remains `.14.7`; combined program-wide no-drift remains `.14.8`. Corrective `.14.6.0.1`
-is the next task-tree-owned leaf.
+Progressive span-dispatch audit `.14.6.0`, corrective typed composition `.0.1`, and executable neutral contract
+`.1` are complete through clean atomic 259 `a0a33c32`. Perl parent `.2` is split into dormant RED `.0`, private
+authority/core `.1`, four-carrier integration `.2`, and admission `.3`. The dormant final-path consumer passes 83
+assertions then fails only because `PROGRESSIVE_DISPATCH_SPAN` is absent; it is not registered in ordinary or
+canonical routes. Current ActionIR still emits one unsupported sentinel, and the copied-text staged function-body
+registry rejects `expr-v1` at resolve. The selected carrier seam is the existing live/generated invocation-options
+hash, so a fresh private authority can attach without serializing parser, registry, source, or cancellation handles.
+After Perl, Rust/Dart/Julia/shared-Lua `.3-.6`, recurrence `.7`, and public no-drift `.8` follow. Staged AST
+enrichment remains `.14.7`; combined program-wide no-drift remains `.14.8`. Perl authority/core `.14.6.2.1` is next.
 
 Expressive `.spec` self-containment and an optional EBNF-like authoring profile are an accepted long-horizon
 direction under ADR `0064` and `SPEC-LANGUAGE-SELF-CONTAINMENT`. Self-containment means portable closure for

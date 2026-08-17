@@ -193,6 +193,13 @@ governance passes 2 registry entries, 2 sources/8 views, 6 authority, 6 cancella
 pending, the rejected effect owns no current node/call rows, guarded paths omit both future tokens, outward guards deny exposure, and Perl
 lowering remains unsupported. Backend `.2-.6`, recurrence `.7`, and public no-drift `.8` follow.
 Derived text/AST stitching remains staged `.14.7`; combined program-wide no-drift remains `.14.8`.
+Perl planning child `.14.6.2.0` now freezes the final-path dormant consumer without enabling the form. It derives
+the full neutral inventory, passes 83 assertions, and fails once because `PROGRESSIVE_DISPATCH_SPAN` is absent.
+The test is not in ordinary or canonical routes. Current descriptors contain ordinary assignment/return metadata
+plus one unresolved helper and zero raw dependencies; generated-v2 preserves one unsupported sentinel; the
+separate staged function-body registry rejects `expr-v1` at resolve. Private authority/core `.2.1` is next,
+carrier integration `.2.2` will use the live/generated invocation-options seam without serializing live authority,
+and admission `.2.3` alone will register the unchanged consumer and promote Perl.
 The behavior-free audit is focused-signoff-complete for atomic 257: exact Perl rejection probes, Rust 1/1, Dart
 5/5, typed 11/3/152, recognition 137/250/58, capability 80/0/0, language 250/105+1/126, Knowledge, the rendered
 book, bounded documentation, and all nine doctrines pass without production or public-surface movement.

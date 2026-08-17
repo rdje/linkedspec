@@ -10,6 +10,20 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.2.0` — dormant Perl progressive RED): clean activation is neutral
+  atomic 259 `a0a33c32`; the final-path consumer is deliberately absent from all ordinary/canonical routes.
+- The exact authored assignment reaches a descriptor. Current metadata has `ASSIGN`/`RETURN`, unresolved
+  `dispatch_span`, no raw Perl dependency, no `PROGRESSIVE_DISPATCH_SPAN`, and language-agnostic readiness false.
+- Generated-v2 retains the same one-marker/one-sentinel lowering and independently loads to a null result. The
+  existing `StagedParserRegistry` rejects `expr-v1` at resolve, so progressive execution must not widen that
+  copied-text function-body job adapter or inherit its legacy span shape.
+- Use the existing second parser argument—the invocation-options hash—as the private host attachment seam. Both
+  live and emitted wrappers already receive it immediately above descriptor execution. Enter a fresh progressive
+  authority there; generated artifacts retain logical metadata only and never serialize registry/parser/source/
+  cancellation/transaction handles. `.1` owns authority/core, `.2` carriers, and `.3` registration/promotion.
+- Exact RED is 83 pass / 1 fail at the dedicated node. Production behavior, generated contract v2, all rollout
+  rows, outward surfaces, and CI topology remain unchanged, so ADR `0073` keeps this leaf focused.
+
 - 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.1` — executable neutral progressive span dispatch): clean activation
   is corrective atomic 258 `27f9c87f`. Checker-first RED is exact `progressive span-dispatch contract is missing`.
 - Reserve only private `value = dispatch_span("expr-v1", "Expr", span)`. The first two operands are normalized

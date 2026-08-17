@@ -1,15 +1,15 @@
 # MEMORY
 
-- activation_commit: `27f9c87f4f3494c340ee96a6bd08d998d30a2d95` — clean corrective atomic-258 base for task-tree-first
-  `FUTURE-PARITY-BACKLOG.14.6.1`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.1 - add neutral progressive span dispatch authority`;
-  canonical-signoff-complete and landed by intended atomic 259 without backend, typed, or outward behavior.
-- active_work_unit: none at the intended clean post-commit neutral handoff; Perl parent `.14.6.2` is next.
-- next_action: activate `.14.6.2` task-tree-first from exact clean atomic 259, split it into bounded RED,
-  authority/core, carrier-integration, and admission children, then implement only its first eligible child.
+- activation_commit: `a0a33c323ae8cbb0bc9495f080e9b9be5be72e3a` — clean neutral atomic-259 base for task-tree-first
+  `FUTURE-PARITY-BACKLOG.14.6.2.0`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.2.0 - freeze Perl progressive dispatch RED`;
+  focused-signoff-complete for intended atomic 260 without production, rollout, CI-route, or outward behavior.
+- active_work_unit: none at the intended clean post-commit RED handoff; Perl authority/core `.14.6.2.1` is next.
+- next_action: activate `.14.6.2.1` task-tree-first from exact clean atomic 260, then implement only immutable
+  registry/source-view/cancellation/budget/chain/isolation/detachment authority independent of ActionIR.
 - in_flight_uncommitted: none at the intended post-commit boundary; no background result remains to consume.
-- blockers: none. Neutral proof is 1/9/86 with 5 backend guards/17 paths plus 10 outward guards; typed is 11/3/152; recognition is 137/250/58;
-  capability/language, book 79/15,024 KiB, Knowledge 842/7,124, task 535, histories, doctrines, and canonical pass.
+- blockers: none. Dormant Perl RED is exact 83 pass / one missing-node failure and absent from CI; neutral stays
+  1/9/86, typed 11/3/152, recognition 137/250/58, and no production/outward boundary moves.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -36,8 +36,8 @@
   and their rollover/index gates remain current.
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, and recurrence/public no-drift 9/9.
-- current_future_direction: neutral `.14.6.1` freezes executable pre-registered, same-source rebased, ceiling- and
-  cancellation-preserving dispatch at 1/9/86; backend `.2-.6` remain pending. Staged enrichment `.14.7` and
-  combined program-wide no-drift `.14.8` remain separate pending owners.
+- current_future_direction: neutral `.14.6.1` freezes executable authority at 1/9/86; Perl `.2.0` freezes the
+  unrouted 83/1 RED and `.2.1-.3` own core/carriers/admission. Other backends `.3-.6`, staged `.14.7`, and combined
+  `.14.8` remain separate pending owners.
 - latest_bootstrap_read: 2026-08-17 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
-  review complete; `.14.6.1` is canonical-signoff-complete for atomic 259 and `.14.6.2` is the next parent.
+  review complete; `.14.6.2.0` is focused-signoff-complete for atomic 260 and `.14.6.2.1` is next.

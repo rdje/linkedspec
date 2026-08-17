@@ -8,13 +8,13 @@ Duplicate-slot rollout is closed at 7 complete / 0 pending; recurring proof rema
 Repeated-action rollout is closed at 8 complete / 0 pending; recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh`.
 
-Behavior-free `.14.6.0` is focused-signoff-complete for intended atomic 257 from clean atomic 256 `8880d1b6`. It proves
-no current in-parse form, five action-body-only staged registries, and path-reading loaders that must stay outside
-recognition. Dependency order is typed transaction-ledger correction `.0.1`, neutral contract `.1`, five backend/
-six runtime admissions `.2-.6`, recurrence `.7`, and public no-drift `.8`. Progressive v1 must use a contiguous
-typed span, rebased same-source view, explicitly pre-registered compiled identity/top rule, narrowing capability/
-policy/cancellation ceilings, isolated parent state, decreasing-span cycle proof, and zero implicit loading.
-Corrective `.14.6.0.1` is next; staged enrichment `.14.7` and final combined `.14.8` remain separate.
+Progressive audit `.14.6.0`, typed correction `.0.1`, and neutral `.1` are complete through atomic 259
+`a0a33c32`. Perl `.2` is split into dormant RED/core/carriers/admission `.0-.3`; the final-path RED passes 83 then
+fails only on absent `PROGRESSIVE_DISPATCH_SPAN` and remains unrouted. `.1` next builds the immutable registry,
+rebased same-source view, narrowing authority, cancellation/budget, decreasing-chain, isolation, detachment, and
+diagnostics independent of ActionIR. `.2` attaches it through existing live/generated invocation options across
+four carriers; `.3` alone admits Perl. Backends `.3-.6`, recurrence `.7`, public `.8`, staged `.14.7`, and final
+combined `.14.8` retain their order.
 
 Accepted long-horizon direction: ADR `0064` plus `SPEC-LANGUAGE-SELF-CONTAINMENT` define portable `.spec`
 problem-domain closure without ambient effects and an optional honest EBNF-like frontend over the same canonical

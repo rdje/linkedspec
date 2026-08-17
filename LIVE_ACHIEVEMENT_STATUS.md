@@ -2,36 +2,33 @@
 
 ## Current Activity
 
-- No leaf is active at the intended clean post-atomic-259 handoff. `FUTURE-PARITY-BACKLOG.14.6.1` completes from
-  corrective atomic 258 `27f9c87f`; no backend implementation or typed progressive rollout moves.
-- Toolbox probes prove no current in-parse parser invocation: both `parse_job(...)` and `dispatch_span(...)` lower
-  to unsupported ActionIR helpers. All five staged registries are narrow function-body adapters, and a normal
-  `.spec` path fails at resolve.
-- Neutral v1 reserves `value = dispatch_span("expr-v1", "Expr", span)` as a dedicated fail-only future expression
-  over an immutable pre-registered parser. Source views rebase globally; ceilings narrow; cancellation/budget
-  propagate; non-decreasing cycles fail; parent state stays isolated; results detach; no path can load.
-- Correction `.0.1` is clean; neutral `.1` passes 2 registries, 2 sources/8 views, 6 authority, 6 cancellation,
-  8 chain, 4 execution, 5 backend guards/17 paths plus 10 outward guards, 26 diagnostics, rollout 1/9, and 86 mutations. Perl/Rust/Dart/Julia/shared-Lua `.2-.6`, recurrence `.7`,
-  and public projection/no-drift `.8`. Staged AST enrichment remains `.14.7`; combined no-drift remains `.14.8`.
-- Audit found one pre-existing typed-ledger defect: `.14.3` is closed at recognition 9/9, but its owned typed
-  `transaction_safety` row was never promoted. `.14.6.0.1` now projects the exact recognition authority into that
-  row at typed 11/3/152 and rejects stale Knowledge/book claims without progressive, runtime, or public behavior.
-- Checker-first proof failed exactly at missing progressive span-dispatch contract; the artifact/checker and
-  canonical registration are complete. The typed row remains pending, the effect remains rejected with no current
-  node/call rows, all 17 backend implementation paths omit the future tokens, ten outward paths deny exposure,
-  and Perl lowering returns the unsupported-helper sentinel.
+- Perl dormant-RED `.14.6.2.0` is focused-signoff-complete from clean neutral atomic 259 `a0a33c32`; private
+  authority/core `.14.6.2.1` is the next leaf after atomic commit/brief-clear/clean proof.
+- The final-path consumer derives all neutral inventories, passes 83 assertions, and fails only on missing
+  `PROGRESSIVE_DISPATCH_SPAN`. It is absent from ordinary/canonical routes and changes no production behavior.
+- Toolbox proof fixes the current seam: descriptors carry `ASSIGN`/`RETURN`, one unresolved `dispatch_span`, zero
+  raw dependencies, and no dedicated node; generated-v2 carries one sentinel and loads to null; the separate
+  copied-text staged function-body adapter rejects `expr-v1` at resolve.
+- `.2.1` owns immutable registry/source-view/capability/policy/ceiling/cancellation/budget/chain/isolation/
+  detachment authority independent of ActionIR. `.2.2` owns all four carriers through the existing live/generated
+  invocation-options seam; `.2.3` alone registers the unchanged consumer and promotes Perl.
+- Neutral remains 2 entries, 2 sources/8 views, 6 authority, 6 cancellation, 8 chain, 4 execution, 26 diagnostics,
+  rollout 1/9 and 86 mutations. Typed remains 11/3/152; all non-Perl and outward boundaries remain pending/closed.
 
 ## Latest Completed Slice
 
-- `.14.6.1` adds the executable neutral progressive authority/checker at 1/9/86 plus exact current-backend
-  absence proof and always-on canonical registration without enabling syntax, runtime, typed, or outward behavior.
+- `.14.6.2.0` freezes an unrouted 83/1 final-path Perl RED plus exact authority/core, carrier, and admission
+  ownership without enabling syntax, runtime, typed rollout, or outward behavior.
 
 ## Next Action
 
-- Activate `.14.6.2` task-tree-first from exact clean atomic 259, split the Perl parent into bounded RED,
-  authority/core, carrier-integration, and admission leaves, then implement only the first eligible child.
+- Commit/clear/prove clean atomic 260, then activate `.14.6.2.1` task-tree-first and implement only the private
+  registry/source-view/cancellation/budget/chain/isolation/detachment authority independent of ActionIR.
 
 ## Recent Completions
+
+- `2026-08-17` — `.14.6.2.0` freezes the final-path Perl progressive RED at 83 pass / one missing-node failure,
+  keeps it unrouted, and assigns core/carriers/admission to `.1-.3` without production movement.
 
 - `2026-08-17` — `.14.6.1` freezes executable neutral `dispatch_span` authority at 1/9/86, proves current backend/
   outward absence across 17+10 paths, and registers its always-on canonical checker.
@@ -69,8 +66,6 @@
 - `2026-08-16` — `.5.5` and parent `.5` landed cleanly as atomic 245 at `a6ff2614` with promoted canonical receipt.
 - `2026-08-16` — `.5.5` reused Julia's primary adapter, admitted the exact nine-role consumer at 5/4/58, and
   canonical-signoff-completed parent `.5` from clean `0a961043`.
-- `2026-08-16` — `.5.4` proved ten value/two typed-error Julia emitted modules in one offline routed host from
-  clean `1f531a5f`, advancing only storage to 20/5 while preserving gap rollout 4/5/57.
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source

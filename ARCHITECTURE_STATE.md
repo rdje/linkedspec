@@ -51,6 +51,16 @@ authority/core, carrier integration, and admission before behavior. Recurrence a
 `progressive_span_dispatch`; `.8` exports no facade/schema/CLI/README behavior and does not consume combined
 program-wide `.14.8`.
 
+Perl `.14.6.2.0` freezes that split at the executable boundary. The final-path dormant consumer derives the full
+neutral inventory and passes 83 assertions before one missing-node failure. The exact authored assignment reaches
+a descriptor with ordinary `ASSIGN`/`RETURN`, one unresolved `dispatch_span`, zero raw dependencies, no dedicated
+node, and language-agnostic readiness false. Generated-v2 source carries the same one sentinel and loads without
+gaining progressive authority; the separate copied-text staged registry rejects `expr-v1` at resolve. Private
+authority/core `.2.1` therefore stays independent of ActionIR. Carrier `.2.2` will attach a fresh per-invocation
+authority through the invocation-options hash already accepted by both live and generated wrappers, keeping live
+registry/parser/source/cancellation state out of emitted bytes. Admission `.2.3` alone registers the unchanged
+consumer and promotes Perl.
+
 ## Lossless gaps are current in the typed algebra without a second behavior owner
 
 `INTER-MATCH-GAP-CAPTURE.7.2` landed public admission as atomic 254 at `bb0c3768`. The shared language inventory
