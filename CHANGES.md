@@ -10,6 +10,25 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.3.3 — admit private Rust progressive dispatch
+
+- Activated task-tree-first from exact clean carrier atomic 266 `eecacead`; retrieved ADR `0080`, the neutral
+  checker, committed Rust authority/carrier facts, exact cfg consumer, Perl admission precedent, CI topology,
+  Knowledge Map, and mdBook before changing the canonical route.
+- Required the existing Rust consumer as a tracked canonical input and added one exact admission marker plus one
+  `linkedspec_progressive_span_dispatch_red` cfg-enabled Cargo invocation. The historical cfg and test identity stay
+  fixed; ordinary Cargo still executes zero tests.
+- Promoted only the Rust rollout row and current admission truth. Governance is now 3/9 rollout, 95 rejected
+  mutations, 3 pending Dart/Julia/Lua guard groups/11 paths, 9 governed Rust carrier paths, 10 outward guards, and
+  26 diagnostics. Typed recurrence and every later/public row remain pending.
+- Updated only admission/governance snapshots in the exact Rust and admitted Perl consumers. Rust remains one test
+  over native, reconstructed, generated-plan, and independently compiled emitted-source routes; Perl remains
+  behavior-identical at 126 assertions.
+- Changed no parser/compiler/runtime authority, ActionIR behavior, generated format, dependency, public inventory,
+  facade, descriptor/schema, semantic/MCP field, CLI, README, or outward surface.
+- Focused direct dependents, mdBook, Knowledge Map, bounded histories, task/index, memory, all nine doctrines, and
+  exact staged receipt-bound canonical local CI pass before the atomic-267 commit.
+
 ## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.3.2 — add dormant Rust progressive dispatch carriers
 
 - Activated task-tree-first from exact clean private-authority atomic 265 `58d39fe5`; retrieved the neutral,

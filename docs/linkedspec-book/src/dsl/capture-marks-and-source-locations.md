@@ -423,7 +423,7 @@ recurring/public-no-drift row remains pending for final program-wide closeout `F
 typed-source composition is 11 complete / 3 pending with 152 mutations. The transaction row is an authority
 projection of the separately complete 9/9 recognition program: it changes no syntax, runtime, or public API.
 
-Progressive span dispatch is current as private Perl behavior; its executable neutral authority remains the
+Progressive span dispatch is current as private Perl and Rust behavior; its executable neutral authority remains the
 cross-backend source of truth. The
 reserved private expression is:
 
@@ -437,16 +437,15 @@ cursor/marks/transactions stay isolated; capability and policy ceilings only nar
 budget propagate; and repeated parser/top/source dispatch must strictly shrink the span. The existing staged
 function-body adapter does not satisfy this contract. The neutral checker passes 2 registry entries, 2 sources/8
 views, 6 authority, 6 cancellation, 8 chain, and 4 execution cases, 3 pending-backend guards/11 implementation
-paths plus 9 governed Rust carrier paths and 10 outward guards, 26 diagnostics, rollout 2/9, and 91 mutations. The
+paths plus 9 governed Rust carrier paths and 10 outward guards, 26 diagnostics, rollout 3/9, and 95 mutations. The
 typed progressive row remains pending; the rejected dispatch effect owns current node
 `PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded Dart, Julia, and Lua paths omit the tokens; and outward guards
 deny premature exposure. Perl has private carrier integration
 behind host-supplied invocation options: the exact assignment lowers to one dedicated node and works identically
 through live, reconstructed, generated-plan, and independently loaded emitted routes, while generated artifacts
-contain no registry callback or mutable authority. Canonical CI requires and runs its exact 125-case consumer once;
-only the private Perl rollout row is promoted.
+contain no registry callback or mutable authority. Canonical CI requires and runs its exact 126-case consumer once.
 
-Rust's private authority/core and four carrier routes are now executable, but admission remains pending. A doc-hidden immutable
+Rust's private authority/core and four carrier routes are executable and privately admitted. A doc-hidden immutable
 registry accepts only already compiled callbacks; each fresh invocation carries one typed source authority,
 original source id, shared cancellation/deadline/remaining steps, active global-span chain, depth, and call count.
 Callback-scoped views expose bounded decoded text while rebasing local scalar positions/spans/diagnostics through
@@ -457,8 +456,8 @@ and a bare span binding; generic or malformed forms fail statically. Native, ser
 plan, and independently compiled emitted source delegate to one fresh opaque execution seed and return the same
 detached child payload. Generated data contains only target/id/top/span operands, never callbacks or authority.
 Recognition effect analysis rejects any attempted rule/function graph that reaches the node, and runtime checks
-live tokens defensively. The exact outer-cfg consumer is GREEN, but ordinary Cargo and canonical CI remain inert.
-`.14.6.3.3` alone owns admission and Rust rollout, so governance intentionally remains 2/9/91.
+live tokens defensively. The exact outer-cfg consumer is GREEN and canonically routed once under that cfg, while
+ordinary Cargo still executes zero tests. Only Rust rollout advances; later backends and typed/public rows remain pending.
 
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions or
 typed spans are authored values. The `recognition_*` operations are current across all six runtime routes, while

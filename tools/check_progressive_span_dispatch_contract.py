@@ -32,7 +32,7 @@ AUTHORED_SURFACE = {
     ],
     "result": "one detached child payload returned as the expression value",
     "failure_policy": "fail_only; every dispatch or child failure propagates unchanged and no null, fallback, retry, or alternate parser is implied",
-    "availability": "private Perl runtime admitted; private Rust carriers implemented but dormant; every other backend remains unavailable until its independent rollout row completes",
+    "availability": "private Perl and Rust runtimes admitted; every other backend remains unavailable until its independent rollout row completes",
 }
 
 POLICY = {
@@ -337,7 +337,7 @@ EXECUTION_CASES = [
 ]
 
 CURRENT_BOUNDARY = {
-    "status": "perl_admitted_rust_carriers_dormant_other_backend_rows_pending",
+    "status": "perl_and_rust_admitted_other_backend_rows_pending",
     "typed_rollout": {
         "path": "capability_conformance/typed_source_location_contract.json",
         "leg": "progressive_span_dispatch",
@@ -360,7 +360,9 @@ CURRENT_BOUNDARY = {
     "rust_carriers": {
         "consumer_path": "rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs",
         "cfg": "linkedspec_progressive_span_dispatch_red",
-        "canonical_discovery": "absent",
+        "canonical_discovery": "exact_cfg_route",
+        "registration_marker": "running exact Rust progressive span-dispatch admission consumer",
+        "invocation": "RUSTFLAGS='--cfg linkedspec_progressive_span_dispatch_red' cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test progressive_span_dispatch_contract",
         "marker_rows": [
             {
                 "path": "rust/linkedspec-core/src/expr.rs",
@@ -480,7 +482,7 @@ DIAGNOSTICS = [
 ROLLOUT = [
     (1, "FUTURE-PARITY-BACKLOG.14.6.1", "neutral", "complete", ["capability_conformance/progressive_span_dispatch_contract.json", "tools/check_progressive_span_dispatch_contract.py"]),
     (2, "FUTURE-PARITY-BACKLOG.14.6.2", "perl", "complete", ["t/progressive_span_dispatch_perl_contract.t"]),
-    (3, "FUTURE-PARITY-BACKLOG.14.6.3", "rust", "pending", []),
+    (3, "FUTURE-PARITY-BACKLOG.14.6.3", "rust", "complete", ["rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs"]),
     (4, "FUTURE-PARITY-BACKLOG.14.6.4", "dart", "pending", []),
     (5, "FUTURE-PARITY-BACKLOG.14.6.5", "julia", "pending", []),
     (6, "FUTURE-PARITY-BACKLOG.14.6.6", "puc_lua", "pending", []),
@@ -643,7 +645,7 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
     require(document["format"] == 1, "format drifted")
     require(document["contract_id"] == "linkedspec-progressive-span-dispatch-v1", "contract id drifted")
     require(document["task_owner"] == "FUTURE-PARITY-BACKLOG.14.6.1", "task owner drifted")
-    require(document["status"] == "perl_complete_rust_carriers_dormant_other_backends_pending", "status drifted")
+    require(document["status"] == "perl_and_rust_complete_other_backends_pending", "status drifted")
     expected_counts = {
         "registry_entries": len(REGISTRY_ENTRIES),
         "sources": len(SOURCES),
@@ -790,13 +792,21 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
         require(ci.count(f'log "{admission["registration_marker"]}"') == 1, "canonical Perl progressive admission marker missing or duplicated")
         require(ci.count(admission["invocation"]) == 1, "canonical Perl progressive admission invocation missing or duplicated")
         require(
-            ci.count(rust_carriers["consumer_path"]) == 0,
-            "dormant Rust progressive carrier consumer entered canonical discovery prematurely",
+            ci.count(f"require_tracked_file {rust_carriers['consumer_path']}") == 1,
+            "canonical CI must require the Rust progressive consumer exactly once",
+        )
+        require(
+            ci.count(f'log "{rust_carriers["registration_marker"]}"') == 1,
+            "canonical Rust progressive admission marker missing or duplicated",
+        )
+        require(
+            ci.count(rust_carriers["invocation"]) == 1,
+            "canonical Rust progressive admission invocation missing or duplicated",
         )
         rust_consumer = (ROOT / rust_carriers["consumer_path"]).read_text(encoding="utf-8")
         require(
             rust_consumer.count(f"cfg({rust_carriers['cfg']})") == 1,
-            "dormant Rust progressive carrier cfg is missing or duplicated",
+            "Rust progressive carrier cfg is missing or duplicated",
         )
 
 
@@ -896,6 +906,9 @@ MUTATIONS: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
     ("current_perl_admission_marker", set_value(["current_boundary", "perl_admission", "registration_marker"], "wrong")),
     ("current_rust_consumer", set_value(["current_boundary", "rust_carriers", "consumer_path"], "rust/wrong.rs")),
     ("current_rust_cfg", set_value(["current_boundary", "rust_carriers", "cfg"], "wrong_cfg")),
+    ("current_rust_discovery", set_value(["current_boundary", "rust_carriers", "canonical_discovery"], "absent")),
+    ("current_rust_marker", set_value(["current_boundary", "rust_carriers", "registration_marker"], "wrong")),
+    ("current_rust_invocation", set_value(["current_boundary", "rust_carriers", "invocation"], "cargo test")),
     ("current_rust_node_marker", set_value(["current_boundary", "rust_carriers", "marker_rows", 0, "tokens", 0], "WrongNode")),
     ("current_rust_authority_marker", set_value(["current_boundary", "rust_carriers", "marker_rows", 3, "tokens", 0], "WrongAuthority")),
     ("current_rust_generated_options_marker", set_value(["current_boundary", "rust_carriers", "marker_rows", 7, "tokens", 0], "wrong_options")),
@@ -908,6 +921,7 @@ MUTATIONS: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
     ("diagnostic_context", pop_value(["diagnostics", 0, "required_context"])),
     ("rollout_removed", pop_value(["rollout"])),
     ("rollout_perl_regressed", set_value(["rollout", 1, "status"], "pending")),
+    ("rollout_rust_regressed", set_value(["rollout", 2, "status"], "pending")),
     ("canonical_checker", set_value(["canonical_execution", "checker_path"], "tools/wrong.py")),
     ("canonical_storage", set_value(["canonical_execution", "storage_policy"], "/tmp")),
 ]

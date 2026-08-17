@@ -2,19 +2,18 @@
 
 ## Current Activity
 
-- Rust private carrier `.14.6.3.2` is signoff-complete from exact clean authority atomic 265 `58d39fe5`; admission
-  `.14.6.3.3` is the next slice.
+- Rust admission `.14.6.3.3` is signoff-complete from exact clean private-carrier atomic 266 `eecacead`.
 - One exclusive `ProgressiveDispatchSpan` node carries only target/parser/top/span. Static malformed/generic forms
   fail closed, and recognize-once effect closure plus a defensive live-token check reject uncommitted dispatch.
 - A doc-hidden opaque seed starts fresh authority per Engine execution; native, reconstructed, generated-plan, and
   independently compiled emitted source return the same detached payload without serializing host authority.
-- The exact historical outer-cfg consumer is GREEN while ordinary discovery executes zero tests and canonical CI
-  still omits it. Rust rollout remains pending until `.3.3` routes that exact consumer.
-- Progressive rollout remains neutral + Perl at 2/9; governance is 91 mutations with 9 governed Rust carrier
+- The exact historical outer-cfg consumer is GREEN and canonical CI requires/runs that exact cfg-
+  enabled target once, while ordinary discovery remains zero tests.
+- Progressive rollout is neutral + Perl + Rust at 3/9; governance is 95 mutations with 9 governed Rust carrier
   paths, 3 remaining backend guard groups/11 paths, 10 outward guards, and 26 diagnostics;
   recognition stays 138 node rows (134 current + four dedicated) / 250 calls / 58 mutations.
-- Typed remains 11/3/152 and generated format is unchanged; Rust admission/rollout plus Dart/Julia/Lua,
-  recurrence, public projection, and outward surfaces remain pending.
+- Typed remains 11/3/152 and generated format is unchanged; Dart/Julia/Lua, recurrence, public projection, and
+  outward surfaces remain pending.
 - Mandatory change-history rollover publishes immutable segment 4993; ADR `0082` increases only its finite
   capacity to 20 files / 19 manifest lines while every root, byte, per-segment, and aggregate ceiling stays fixed.
 - Corrected Phase 0 passes 1,031/1,031 after preserving require-time LinkedRE laziness; language is 250/126,
@@ -22,15 +21,17 @@
 
 ## Latest Completed Slice
 
-- `.14.6.3.2` adds the exclusive logical node and four authority-delegating Rust carriers, promotes the exact
-  dormant consumer to GREEN, and leaves ordinary/canonical admission plus rollout pending.
+- `.14.6.3.3` canonically routes the unchanged exact cfg-enabled Rust consumer, promotes only Rust to 3/9/95,
+  and closes parent `.14.6.3` after focused and receipt-bound canonical proof.
 
 ## Next Action
 
-- Commit/clear/prove clean atomic 266, then activate Rust admission `.14.6.3.3` task-tree-first; route only the exact
-  unchanged consumer and promote only Rust, without Dart/Julia/Lua, recurrence, typed, public, or outward movement.
+- Commit atomic 267, clear the brief, prove the exact clean handoff, then activate Dart `.14.6.4` task-tree-first.
 
 ## Recent Completions
+
+- `2026-08-17` — `.14.6.3.3` requires and canonically runs the unchanged cfg-enabled Rust consumer once, advances
+  only Rust to progressive 3/9/95, and closes `.14.6.3` without typed, later-backend, format, or outward movement.
 
 - `2026-08-17` — `.14.6.3.2` adds one logical-only Rust node and four dormant authority-delegating carriers with
   exact static/transaction boundaries while rollout remains 2/9.
@@ -77,9 +78,6 @@
 - `2026-08-16` — `.6.5` admitted the exact shared nine-role consumer on PUC Lua and LuaJIT from clean `798aeeee`,
   advanced only the two runtime rows to 7/2/60, closed parent `.6`, and landed cleanly as atomic 251 at
   `c33f6664`; `.7.0` owns the current behavior-free recurring/public audit from that handoff.
-
-- `2026-08-16` — `.6.4` completed ten value/two typed-error independently emitted modules on fresh PUC-Lua and
-  LuaJIT children from clean `b7708cde`, advancing only repository-local storage ownership from 18 to 19.
 
 ## History
 

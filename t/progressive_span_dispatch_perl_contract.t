@@ -120,8 +120,8 @@ is(
 is($contract->{format}, 1, 'loads contract format 1');
 is(
  $contract->{status},
- 'perl_complete_rust_carriers_dormant_other_backends_pending',
- 'loads the Perl-complete, Rust-carrier-dormant, and other-backend-pending state',
+ 'perl_and_rust_complete_other_backends_pending',
+ 'loads the Perl-and-Rust-complete and other-backend-pending state',
 );
 is(
  $contract->{task_owner},
@@ -143,7 +143,7 @@ is_deeply(
   ],
   result => 'one detached child payload returned as the expression value',
   failure_policy => 'fail_only; every dispatch or child failure propagates unchanged and no null, fallback, retry, or alternate parser is implied',
-  availability => 'private Perl runtime admitted; private Rust carriers implemented but dormant; every other backend remains unavailable until its independent rollout row completes',
+  availability => 'private Perl and Rust runtimes admitted; every other backend remains unavailable until its independent rollout row completes',
  },
  'freezes the dedicated authored expression, operands, result, and fail-only boundary',
 );
@@ -257,7 +257,7 @@ is_deeply(
   outward_guard_paths => 10,
   diagnostics => 26,
   rollout_legs => 9,
-  mutations => 91,
+  mutations => 95,
  },
  'freezes every neutral inventory count',
 );
@@ -268,13 +268,18 @@ is_deeply(
 );
 is_deeply(
  [map { $_->{status} } @{$contract->{rollout}}],
- ['complete', 'complete', ('pending') x 7],
- 'keeps exactly the neutral and Perl rollout legs complete',
+ ['complete', 'complete', 'complete', ('pending') x 6],
+ 'keeps exactly the neutral, Perl, and Rust rollout legs complete',
 );
 is_deeply(
  $contract->{rollout}[1]{paths},
  ['t/progressive_span_dispatch_perl_contract.t'],
  'binds the Perl rollout leg to this exact admission consumer',
+);
+is_deeply(
+ $contract->{rollout}[2]{paths},
+ ['rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs'],
+ 'binds the Rust rollout leg to its exact cfg-enabled admission consumer',
 );
 
 my $probe = 'return(dispatch_span("expr-v1", "Expr", span));';

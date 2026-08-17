@@ -163,9 +163,9 @@
 > `value = dispatch_span("expr-v1", "Expr", span)` as a dedicated fail-only future expression. Its checker passes
 > 2 immutable registry entries, 2 sources/8 rebased views, 6 authority, 6 cancellation, 8 chain, 4 execution
 > cases, 3 pending-backend guards/11 implementation paths plus 9 governed Rust carrier paths and 10 outward
-> guards, 26 diagnostics, 2/9 rollout, and 91 mutations. Private Perl admission is current through one exact
-> canonical 125-assertion consumer; Rust carrier implementation is current but dormant; Rust admission,
-> Dart, Julia, Lua, recurrence, public no-drift, and the typed row remain pending. The rejected effect owns exactly
+> guards, 26 diagnostics, 3/9 rollout, and 95 mutations. Private Perl admission is current through one exact
+> canonical 126-assertion consumer; Rust is admitted through one exact cfg-enabled canonical carrier consumer while
+> ordinary discovery remains zero tests. Dart, Julia, Lua, recurrence, public no-drift, and the typed row remain pending. The rejected effect owns exactly
 > current node `PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded pending-backend paths omit both tokens and
 > outward guards deny exposure. No path loader, public facade/schema/semantic/MCP/CLI/README surface, shared helper
 > inventory, generated format, or typed rollout row moves.

@@ -1,15 +1,15 @@
 # MEMORY
 
-- activation_commit: `58d39fe5cf481cee6fba9d3bb38ea0e1094fb569` — exact clean private-authority atomic-265 base
-  for task-tree-first `FUTURE-PARITY-BACKLOG.14.6.3.2`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.3.2 - add dormant Rust progressive dispatch carriers`;
-  canonical-signoff-complete for intended atomic 266 without admission, rollout, format, or outward movement.
-- active_work_unit: none at the intended clean post-commit carrier handoff; Rust admission `.14.6.3.3` is next.
-- next_action: activate `FUTURE-PARITY-BACKLOG.14.6.3.3` task-tree-first from exact clean atomic 266, then route the
-  exact unchanged consumer in canonical CI and promote only the Rust rollout row.
-- in_flight_uncommitted: none at the intended post-commit boundary; no background result remains to consume.
-- blockers: none. The exact four-route consumer is opt-in GREEN; ordinary/canonical discovery remains inert and
-  rollout is intentionally 2/9/91 until `.14.6.3.3` admission.
+- activation_commit: `eecacead04a9313339b7237547024b82a8ccbc3d` — exact clean private-carrier atomic-266 base
+  for task-tree-first `FUTURE-PARITY-BACKLOG.14.6.3.3`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.3.3 - admit private Rust progressive dispatch`;
+  canonical-signoff-complete for intended atomic 267 with only exact Rust admission and rollout movement.
+- active_work_unit: none at the intended clean atomic-267 handoff; Rust parent `.14.6.3` is composition-closed.
+- next_action: from exact clean atomic 267, activate Dart progressive parity `.14.6.4` task-tree-first, retrieve its
+  committed authority/carrier seams through the Knowledge Map and Toolbox, and split safe implementation leaves.
+- in_flight_uncommitted: none at the intended postcommit boundary; no background job remains to consume.
+- blockers: none. Neutral 3/9/95, Perl 126/126, exact Rust 1/1, ordinary Rust 0/0, direct dependents, book,
+  Knowledge, doctrines, and receipt-bound canonical local CI pass.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -37,9 +37,8 @@
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, recurrence/public no-drift 9/9, and
   classifies private progressive dispatch fail-closed at 138 ActionIR rows / 250 calls / 58 mutations.
-- current_future_direction: neutral `.14.6.1` freezes authority; Perl `.2` is admitted; Rust `.3.1-.2` have private
-  authority plus four dormant carriers, while `.3.3` exclusively owns exact consumer admission and Rust rollout;
-  other backends `.4-.6`, staged
-  `.14.7`, and combined `.14.8` remain separate pending owners.
+- current_future_direction: neutral `.14.6.1` freezes authority; Perl `.2` and Rust `.3` are privately admitted at
+  3/9/95; Dart `.4` is next, while Julia/Lua `.5-.6`, staged `.14.7`, and combined `.14.8` remain separate owners.
 - latest_bootstrap_read: 2026-08-17 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
-  review complete; Rust carrier integration `.14.6.3.2` is canonical-signoff-complete and admission `.3.3` is next.
+  review complete; Rust admission `.14.6.3.3` signoff is complete from clean carrier atomic 266 and Dart `.14.6.4`
+  is the next task-tree-first activation after intended clean atomic 267.

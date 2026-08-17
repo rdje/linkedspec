@@ -175,36 +175,36 @@ Recursive-observation public no-drift is current under `.14.4.8`, while the comb
 No public helper, facade, descriptor/generated version, result schema, semantic/MCP field, CLI, or README behavior
 is current. Canonical `.14.5.1` signoff passes nine doctrines, repository containment and relocation, both
 66-case CLI environments, RAM at 51%, Phase 0 at 1,031/1,031 in 729 seconds, and the exact six-runtime opt-in;
-parent `.14.5` is closed; progressive span dispatch `.14.6` is active with private Perl admitted and Rust's private
-authority plus four carrier routes current but dormant. The exact outer-cfg Rust consumer is GREEN while ordinary
-and canonical discovery remain inert. Private Rust admission `.14.6.3.3` is next.
+parent `.14.5` is closed; progressive span dispatch `.14.6` is active with private Perl and Rust admitted. Rust's
+exact outer-cfg consumer is canonically routed once while ordinary discovery remains zero tests; governance is
+3/9 rollout and 95 mutations. Dart implementation `.14.6.4` is next.
 
 Behavior-free audit `.14.6.0` and ADR `0080` fix that boundary exactly. `parse_job(...)` remains unavailable and
-`dispatch_span(...)` is admitted only as a private Perl intrinsic, not a shared helper. Each backend's current staged registry accepts
+`dispatch_span(...)` is admitted only as a private Perl/Rust intrinsic, not a shared helper. Each backend's current staged registry accepts
 only the built-in `actionir-body.spec` / `action_block` function-body adapter; a normal `.spec` path is rejected,
 and the legacy job span carries neither typed source authority nor cancellation/policy ceilings. Progressive work
 therefore starts with an immutable host-seeded entry for an already compiled parser, never an in-parse loader.
 
 Neutral `.14.6.1` reserved `value = dispatch_span("expr-v1", "Expr", span)` as one dedicated fail-only expression;
-Perl `.14.6.2` now admits it privately. The child runs synchronously over one contiguous direct span. Its internal registers are view-local, but typed
+Perl `.14.6.2` and Rust `.14.6.3` now admit it privately. The child runs synchronously over one contiguous direct span. Its internal registers are view-local, but typed
 positions/spans and diagnostics rebase to the original source identity and global scalar offsets. Parent state is
 isolated, capabilities intersect, ceilings only narrow, cancellation/budget cannot reset, and a repeated parser/
 top/source chain must strictly shrink its span. Correction `.14.6.0.1` repaired the typed transaction row; neutral
 governance passes 2 registry entries, 2 sources/8 views, 6 authority, 6 cancellation, 8 chain, 4 execution cases,
 3 pending-backend guards/11 implementation paths plus 9 governed Rust carrier paths and 10 outward guards, 26
-diagnostics, rollout 2/9, and 91 mutations. The typed row remains pending; the rejected effect owns current node
-`PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded Dart/Julia/Lua paths omit both tokens; and outward guards deny exposure. Rust admission `.3.3`,
-backends `.4-.6`, recurrence `.7`, and public no-drift `.8` follow.
+diagnostics, rollout 3/9, and 95 mutations. The typed row remains pending; the rejected effect owns current node
+`PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded Dart/Julia/Lua paths omit both tokens; and outward guards deny exposure. Backends `.4-.6`,
+recurrence `.7`, and public no-drift `.8` follow.
 
 Rust `.14.6.3.0` historically froze the dedicated-node RED behind one explicit cfg. Rust `.14.6.3.1` supplies the independent private authority beneath that boundary: immutable precompiled
 callbacks, caller-owned decoded sources, typed globally rebased bounded views, intersected grants and minimum
 ceilings, shared cancellation/deadline/steps, decreasing repeated spans plus depth/call bounds, callback/view
 lifetime containment, and detached node-bounded results with all 26 diagnostics. A separate outer-cfg consumer
-proves the complete neutral matrix and adversaries while ordinary and canonical discovery remain inert. This core
+proves the complete neutral matrix and adversaries while ordinary discovery remains inert. This core
 is now used by `.14.6.3.2`: one exclusive `ProgressiveDispatchSpan` node validates literal identities and a bare
 span, static recognition closure rejects its non-rollbackable effect, and native/reconstructed/generated-plan/
 independently compiled emitted-source routes all return the same detached payload. Only logical operands serialize.
-The exact consumer is GREEN but remains dormant, so `.14.6.3.3` still owns admission and rollout stays 2/9.
+The exact consumer is GREEN and canonically routed once under its historical cfg; ordinary discovery stays zero tests.
 Derived text/AST stitching remains staged `.14.7`; combined program-wide no-drift remains `.14.8`.
 Perl planning child `.14.6.2.0` freezes the final-path dormant consumer without enabling the form. It derives
 the full neutral inventory, passes 83 assertions, and fails once because `PROGRESSIVE_DISPATCH_SPAN` is absent.

@@ -10,6 +10,27 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.3.3` — Rust progressive admission): exact clean activation is carrier
+  atomic 266 `eecacead`; this leaf changes canonical trust/governance only.
+- The consumer retains file-level `cfg(linkedspec_progressive_span_dispatch_red)`. Canonical CI supplies that cfg
+  on one exact Cargo command; the ordinary target therefore continues to prove zero-test dormancy without a
+  second test identity or unconditional discovery route.
+- `tools/run_ci_local.sh` now requires the exact tracked test path, emits one exact Rust admission marker, and runs
+  one cfg-enabled `--test progressive_span_dispatch_contract` command immediately after the neutral checker and
+  admitted Perl consumer.
+- The neutral checker binds the tracked requirement, marker, invocation, cfg, nine carrier files, Rust rollout
+  path, and unchanged pending/outward boundaries. Four added mutations cover discovery, marker, invocation, and
+  Rust rollout regression, raising governance from 91 to 95.
+- The Rust consumer changes only contract/admission snapshots and its canonical-route assertion; its fixture,
+  authority setup, exact static failures, staged-registry denial, serialization checks, and four carrier
+  executions stay unchanged. The cfg-enabled focused test passes 1/1 in 141.85 seconds; ordinary discovery is 0/0.
+- The admitted Perl consumer advances only its shared neutral snapshots and Rust path assertion, passing 126/126.
+  No Perl behavior, ActionIR node, recognition count, generated format, or rollout identity moves.
+- The resulting boundary is neutral + Perl + Rust 3/9 complete, with Dart/Julia/Lua, recurring, typed progressive,
+  and public no-drift pending; public calls/facades/schemas/semantic/MCP/CLI/README stay guarded.
+- Focused direct dependents, mdBook, Knowledge Map, bounded histories, task/index, memory, all nine doctrines, and
+  the exact staged receipt-bound canonical local gate pass before landing atomic 267.
+
 - 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.3.2` — dormant Rust progressive carriers): exact clean activation is
   private-authority atomic 265 `58d39fe5`; `.3.3` remains the sole admission/rollout owner.
 - `Expr::ProgressiveDispatchSpan` is an exclusive statement node, not a helper call. Its serialized fields are only

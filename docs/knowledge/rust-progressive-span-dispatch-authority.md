@@ -12,7 +12,7 @@ answers:
   - "does Rust progressive dispatch have ActionIR carriers"
   - "does the Rust progressive authority test run in CI"
 date: 2026-08-17
-status: private authority/core and four carriers current; admission and rollout pending
+status: private authority/core, four carriers, and canonical Rust admission current
 tags: [rust, progressive-parsing, registry, source-location, cancellation, diagnostics, task-tree]
 evidence: "FUTURE-PARITY-BACKLOG.14.6.3.1 adds rust/linkedspec-runtime/src/bounded_child_parse_authority.rs and exposes it only through the neutral doc-hidden bounded_child_parse_authority module, because outward guards reserve the progressive syntax/node terminology for later carrier admission. ProgressiveRegistry deeply owns validated logical ids, sha256 fingerprints, allowed top rules, capabilities, policy/resource ceilings, and already-compiled callbacks; register/load return typed denials and no path/provider/compiler authority exists. ProgressiveInvocation owns one SourceAuthority over caller-provided decoded snapshots plus the sole source id, Arc-identity cancellation token, monotonic deadline, shared remaining steps, active global-span chain, depth limit, and total-call limit. Dispatch derives capability/policy intersections and ceiling minima, requires the exact shared token, charges cost before synchronous child execution, enforces pre/post safe points, permits repeated identity/top/source only on a contained strictly smaller span, invalidates every cloned bounded view after the callback, and deeply detaches node-bounded serde_json results while rejecting live-looking fields. rust/linkedspec-runtime/tests/progressive_span_dispatch_authority.rs is file-level cfg linkedspec_progressive_span_dispatch_authority: ordinary discovery runs zero tests and canonical CI omits it; the opt-in proof covers all neutral cases and 26 diagnostics plus nesting, typed rebasing, expiry, mutation isolation, false payloads, and detachment. No dedicated expression node, engine/descriptor/generated carrier, format, rollout row, or outward surface moves; .14.6.3.2 and .3 own those later boundaries."
 evidence_update_2026_08_17_carriers: "FUTURE-PARITY-BACKLOG.14.6.3.2 makes ProgressiveInvocation own a cloned immutable registry so one opaque ProgressiveExecutionSeed can create fresh execution-local authority without a self-reference. RuntimeContext clones share that invocation through one opaque mutex-backed state, preserving budget/call/cancellation identity. This is the host seam used by the four dormant carriers; authority semantics and the separate .3.1 consumer remain exact."
@@ -42,6 +42,6 @@ The explicit authority consumer passes four tests covering the complete neutral 
 adversaries. Its ordinary invocation executes zero tests. The separate final-path consumer is now GREEN across
 four dormant carriers.
 
-The dedicated node and native/reconstructed/generated-plan/independently compiled emitted-source carriers now use
-this authority through a fresh opaque execution seed. `.14.6.3.3` alone may route the unchanged consumer and
-promote Rust rollout.
+The dedicated node and native/reconstructed/generated-plan/independently compiled emitted-source carriers use
+this authority through a fresh opaque execution seed. `.14.6.3.3` routes the exact cfg-enabled consumer once in
+canonical CI and promotes only Rust rollout; the separate authority consumer remains focused and dormant.

@@ -2,7 +2,7 @@
   "format": 1,
   "contract_id": "linkedspec-progressive-span-dispatch-v1",
   "task_owner": "FUTURE-PARITY-BACKLOG.14.6.1",
-  "status": "perl_complete_rust_carriers_dormant_other_backends_pending",
+  "status": "perl_and_rust_complete_other_backends_pending",
   "expected_counts": {
     "registry_entries": 2,
     "sources": 2,
@@ -17,7 +17,7 @@
     "outward_guard_paths": 10,
     "diagnostics": 26,
     "rollout_legs": 9,
-    "mutations": 91
+    "mutations": 95
   },
   "authored_surface": {
     "example": "value = dispatch_span(\"expr-v1\", \"Expr\", span)",
@@ -31,7 +31,7 @@
     ],
     "result": "one detached child payload returned as the expression value",
     "failure_policy": "fail_only; every dispatch or child failure propagates unchanged and no null, fallback, retry, or alternate parser is implied",
-    "availability": "private Perl runtime admitted; private Rust carriers implemented but dormant; every other backend remains unavailable until its independent rollout row completes"
+    "availability": "private Perl and Rust runtimes admitted; every other backend remains unavailable until its independent rollout row completes"
   },
   "policy": {
     "registry": "the host seeds immutable logical entries containing already compiled parser authority; authored execution may look up an identity but cannot resolve, load, compile, mutate, or enumerate",
@@ -865,7 +865,7 @@
     }
   ],
   "current_boundary": {
-    "status": "perl_admitted_rust_carriers_dormant_other_backend_rows_pending",
+    "status": "perl_and_rust_admitted_other_backend_rows_pending",
     "typed_rollout": {
       "path": "capability_conformance/typed_source_location_contract.json",
       "leg": "progressive_span_dispatch",
@@ -890,7 +890,9 @@
     "rust_carriers": {
       "consumer_path": "rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs",
       "cfg": "linkedspec_progressive_span_dispatch_red",
-      "canonical_discovery": "absent",
+      "canonical_discovery": "exact_cfg_route",
+      "registration_marker": "running exact Rust progressive span-dispatch admission consumer",
+      "invocation": "RUSTFLAGS='--cfg linkedspec_progressive_span_dispatch_red' cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test progressive_span_dispatch_contract",
       "marker_rows": [
         {
           "path": "rust/linkedspec-core/src/expr.rs",
@@ -1247,8 +1249,10 @@
       "order": 3,
       "owner": "FUTURE-PARITY-BACKLOG.14.6.3",
       "leg": "rust",
-      "status": "pending",
-      "paths": []
+      "status": "complete",
+      "paths": [
+        "rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs"
+      ]
     },
     {
       "order": 4,
@@ -1381,6 +1385,9 @@
     "current_perl_admission_marker",
     "current_rust_consumer",
     "current_rust_cfg",
+    "current_rust_discovery",
+    "current_rust_marker",
+    "current_rust_invocation",
     "current_rust_node_marker",
     "current_rust_authority_marker",
     "current_rust_generated_options_marker",
@@ -1393,6 +1400,7 @@
     "diagnostic_context",
     "rollout_removed",
     "rollout_perl_regressed",
+    "rollout_rust_regressed",
     "canonical_checker",
     "canonical_storage"
   ]

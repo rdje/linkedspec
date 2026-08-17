@@ -158,18 +158,21 @@ that same proof pass. A RED result is therefore planned evidence, not a claim th
 ### Neutral progressive span-dispatch contract
 
 Canonical CI now requires and always runs the repository-routed neutral progressive checker plus the admitted
-private Perl consumer:
+private Perl and Rust consumers:
 
 ```bash
 bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_contract.py
 PERL5LIB= prove -Iperl t/progressive_span_dispatch_perl_contract.t
+RUSTFLAGS='--cfg linkedspec_progressive_span_dispatch_red' cargo test \
+  --manifest-path rust/Cargo.toml -p linkedspec-runtime \
+  --test progressive_span_dispatch_contract
 ```
 
 It validates the reserved private `dispatch_span("logical-parser-id", "Top", span)` expression without enabling
 backend syntax. The checker independently executes 2 sources/8 rebased views, 6 authority-minimum cases, 6
 cancellation/deadline/budget cases, 8 decreasing-chain/bound cases, and 4 isolation/detachment cases; locks 26
-diagnostics and neutral + Perl 2/9 rollout; guards 11 implementation paths across the three still-pending backend
-groups, 9 Rust carrier paths, and 10 outward paths; and rejects 91 mutations. A passing check proves no path loader,
+diagnostics and neutral + Perl + Rust 3/9 rollout; guards 11 implementation paths across the three still-pending
+backend groups, 9 Rust carrier paths, and 10 outward paths; and rejects 95 mutations. A passing check proves no path loader,
 registry mutation, capability/policy elevation, cancellation reset, non-decreasing cycle, parent-state leak,
 uncommitted recognition effect, live result handle, fallback, or premature backend/typed rollout claim. It also
 requires the typed row to remain pending, the rejected effect to own exactly current node
@@ -179,13 +182,13 @@ and private spelling/node/rollout tokens to remain absent from ten facade/schema
 Perl carrier integration and admission now prove
 one exclusive dedicated node, static operands, fresh invocation authority, live/reconstructed/generated-plan/
 independently loaded emitted execution, logical-only serialization, typed missing-authority failure, and
-transaction rejection in 125 assertions. `tools/run_ci_local.sh` requires, syntax-checks, and executes that exact
-consumer once; the neutral checker rejects regression of the Perl row and promotion of any later row.
+transaction rejection in 126 assertions. `tools/run_ci_local.sh` requires, syntax-checks, and executes that exact
+consumer once; the neutral checker rejects regression of the Perl row and premature later-backend promotion.
 Its transaction-state query loads the recognition runtime only when a dispatch executes, preserving the existing
 require-only Compiler guarantee that `LinkedRE` stays lazy until the parser pipeline actually needs it.
 
-Rust's carrier proof is intentionally outside ordinary and canonical discovery. The ordinary target compiles
-with zero tests; the historical RED cfg now activates the exact GREEN four-route consumer:
+Rust's ordinary target intentionally compiles with zero tests. Canonical CI preserves the historical RED cfg as
+the stable identity that activates the exact GREEN four-route consumer:
 
 ```bash
 bash tools/run_cargo_local.sh test --offline --manifest-path rust/Cargo.toml \
@@ -195,10 +198,10 @@ RUSTFLAGS='--cfg linkedspec_progressive_span_dispatch_red' \
   -p linkedspec-runtime --test progressive_span_dispatch_contract -- --nocapture
 ```
 
-The second command passes the neutral inventory, narrow staged-registry rejection, exact static-operand and
+The cfg-enabled command passes the neutral inventory, narrow staged-registry rejection, exact static-operand and
 recognition-effect denials, defensive live-transaction rejection, and native/reconstructed/generated-plan/
 independently compiled emitted-carrier equality. Serialized/generated data carries only the dedicated node's
-logical operands. The test remains absent from canonical CI until `.14.6.3.3` admits the exact consumer.
+logical operands. Canonical CI requires and executes that exact target once; ordinary discovery remains dormant.
 
 Rust authority/core has a separate focused proof, also intentionally outside ordinary and canonical discovery:
 

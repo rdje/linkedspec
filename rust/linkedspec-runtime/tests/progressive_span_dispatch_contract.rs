@@ -1,15 +1,15 @@
 #![allow(unexpected_cfgs)]
 #![cfg(linkedspec_progressive_span_dispatch_red)]
 
-//! FUTURE-PARITY-BACKLOG.14.6.3.2 — dormant Rust progressive-dispatch carrier contract.
+//! FUTURE-PARITY-BACKLOG.14.6.3.3 — admitted Rust progressive-dispatch carrier contract.
 //!
-//! Ordinary Cargo discovery compiles this target with zero active tests. Before admission, run
-//! the exact dormant GREEN with:
+//! Ordinary Cargo discovery compiles this target with zero active tests. Canonical admission runs
+//! the exact cfg-enabled consumer with:
 //!
 //! `RUSTFLAGS='--cfg linkedspec_progressive_span_dispatch_red' bash tools/run_cargo_local.sh test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test progressive_span_dispatch_contract`.
 //!
-//! This consumer freezes the neutral inventory and proves all four final Rust carriers, while
-//! remaining absent from ordinary and canonical discovery until the admission leaf.
+//! This consumer freezes the neutral inventory and proves all four final Rust carriers. Its
+//! historical outer cfg remains the exact admission identity; ordinary discovery stays dormant.
 
 use linkedspec_core::compiler::compile;
 use linkedspec_core::expr::{Expr, Stmt};
@@ -241,7 +241,7 @@ fn final_path_uses_one_dedicated_progressive_node_across_four_routes() {
     assert_eq!(neutral["format"], 1);
     assert_eq!(
         neutral["status"],
-        "perl_complete_rust_carriers_dormant_other_backends_pending"
+        "perl_and_rust_complete_other_backends_pending"
     );
     assert_eq!(
         neutral["expected_counts"],
@@ -259,7 +259,7 @@ fn final_path_uses_one_dedicated_progressive_node_across_four_routes() {
             "outward_guard_paths": 10,
             "diagnostics": 26,
             "rollout_legs": 9,
-            "mutations": 91,
+            "mutations": 95,
         })
     );
     assert_eq!(
@@ -380,11 +380,14 @@ fn final_path_uses_one_dedicated_progressive_node_across_four_routes() {
             .map(|row| row["status"].as_str().expect("rollout status"))
             .collect::<Vec<_>>(),
         [
-            "complete", "complete", "pending", "pending", "pending", "pending", "pending",
+            "complete", "complete", "complete", "pending", "pending", "pending", "pending",
             "pending", "pending",
         ]
     );
-    assert_eq!(rollout[2]["paths"], json!([]));
+    assert_eq!(
+        rollout[2]["paths"],
+        json!(["rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs"])
+    );
 
     let staged_job = json!({
         "kind": "parse_job",
@@ -571,9 +574,29 @@ Child:: I { span = hash("source_id", "input", "start", 0, "end", 1, "provenance"
         EXPECTED_VALUE
     );
 
-    assert!(
-        !CI_DRIVER_SOURCE.contains("progressive_span_dispatch_contract.rs"),
-        "the dormant Rust consumer must remain absent from canonical CI"
+    assert_eq!(
+        occurrences(
+            CI_DRIVER_SOURCE,
+            "require_tracked_file rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs"
+        ),
+        1,
+        "canonical CI must require this exact Rust consumer once"
+    );
+    assert_eq!(
+        occurrences(
+            CI_DRIVER_SOURCE,
+            "running exact Rust progressive span-dispatch admission consumer"
+        ),
+        1,
+        "canonical CI must carry one exact Rust admission marker"
+    );
+    assert_eq!(
+        occurrences(
+            CI_DRIVER_SOURCE,
+            "RUSTFLAGS='--cfg linkedspec_progressive_span_dispatch_red' cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test progressive_span_dispatch_contract"
+        ),
+        1,
+        "canonical CI must execute this exact cfg-enabled Rust consumer once"
     );
 
     assert!(encoded.contains(r#""kind":"progressive_dispatch_span""#));
