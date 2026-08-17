@@ -459,6 +459,13 @@ Recognition effect analysis rejects any attempted rule/function graph that reach
 live tokens defensively. The exact outer-cfg consumer is GREEN and canonically routed once under that cfg, while
 ordinary Cargo still executes zero tests. Only Rust rollout advances; later backends and typed/public rows remain pending.
 
+Dart is now frozen at the equivalent pre-implementation boundary. Its analyzed consumer lives outside ordinary
+test discovery and passes four groups before one exact missing-node RED. The reserved assignment is still one
+generic `ActionCallExpr`; native, `SpecFile`-JSON reconstructed, generated-plan, and fresh emitted-source routes
+all reject it with the same structured `unknown_helper` diagnostic. The existing staged function-body registry
+rejects `expr-v1` at resolve and grants no substitute parser authority. Dart authority, carrier integration, and
+admission remain separately owned by `.14.6.4.1-.3`; rollout stays 3/9.
+
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions or
 typed spans are authored values. The `recognition_*` operations are current across all six runtime routes, while
 their exact recurring composition and public no-drift projection are both current.

@@ -219,6 +219,14 @@ callback-scoped view expiry, seed mutation isolation, false payload preservation
 Passing this target proves the doc-hidden immutable registry/invocation/source-view core independently from the
 carrier consumer. Neither focused target proves CI admission or Rust rollout.
 
+Dart's next backend slice is one analyzed but undiscovered RED consumer:
+
+```bash
+cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test_dormant/progressive_span_dispatch_contract_test.dart
+```
+
+Its first four groups prove neutral metadata, staged-registry rejection, generic shape, and all four carriers; only the absent `progressive_dispatch_span` / `PROGRESSIVE_DISPATCH_SPAN` assertion fails. All routes retain structured `unknown_helper`; ordinary/canonical discovery omit it. Dart authority `.14.6.4.1`, carriers `.14.6.4.2`, and admission `.14.6.4.3` remain separate.
+
 The `.14.4.0` audit found one contradiction in that baseline: `direct_nonprogress` used the same textual identity
 for invocation and parent. Corrective `.14.4.0.1` changes all six observation identities to positive unique
 monotonic numbers and validates lineage before exact fixture comparison. Four reason-checked regressions prove

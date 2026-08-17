@@ -742,7 +742,16 @@ outer-cfg consumer proves the neutral matrix and all diagnostics but runs zero t
 canonical route. Rust `.14.6.3.2` now adds one exclusive logical-only node and delegates native, reconstructed,
 generated-plan, and independently compiled emitted-source execution to a fresh host seed. Static recognition
 effect closure plus a live-token runtime check forbid dispatch in uncommitted attempts; generated data contains no
-callback or authority. The same consumer is GREEN but still dormant. Implement `.3.3` admission last.
+callback or authority. Rust `.14.6.3.3` canonically routes that same cfg-enabled consumer once and promotes only
+Rust, while ordinary discovery remains zero tests.
+
+Dart `.14.6.4.0` freezes the corresponding next boundary under
+`dart/test_dormant/progressive_span_dispatch_contract_test.dart`. Fatal analysis passes; an explicit routed test
+passes neutral/staged/shape/four-carrier groups and fails only at the missing dedicated-node assertion. Current
+Dart preserves one generic `ActionCallExpr`; native, `SpecFile`-JSON reconstructed, generated-plan, and
+independently analyzed/executed emitted source all report the same structured `unknown_helper` for
+`dispatch_span`. Keep it undiscovered and unrouted while `.14.6.4.1` builds authority, `.2` integrates the node and
+four carriers, and `.3` alone admits the unchanged consumer and promotes Dart.
 
 The spec's body shell is a
 linked opener/closer parse: `body_brace`

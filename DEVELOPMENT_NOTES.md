@@ -10,6 +10,27 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.4.0` — Dart progressive dormant RED): exact clean activation is Rust
+  admission atomic 267 `5c4d4218`; this leaf changes only one dormant test plus durable plan/status surfaces.
+- The action parser currently returns ordinary `ActionCallExpr(kind: call, name: dispatch_span)` because only
+  recognition-transaction/observation names have dedicated parsing. Compiled state is rebuilt from retained action
+  source, so `SpecFile` JSON reconstruction preserves that generic shape without a separate decoder seam.
+- Runtime helper resolution fails closed with structured `unknown_helper` for `dispatch_span`; unlike Rust's
+  historical null fallback, Dart throws. Native, reconstructed, generated-plan, and emitted execution agree.
+- `executeGeneratedParserV2` constructs a fresh `LinkedSpecRuntimeEngine`; emitted v2 reconstructs `SpecFile`,
+  compiles it, and calls the same generated-plan entrypoint. `.14.6.4.2` must supply fresh host authority through
+  these routes without serializing callbacks, registry/cancellation handles, source text, or mutable invocation.
+- The existing `_RuntimeExecutionContext` already creates one copied-input `SourceAuthority` with UTF-16 register
+  conversion at typed boundaries. `.14.6.4.1` must build its independent registry/invocation/view core over that
+  authority without importing ActionIR or changing current registers.
+- The emitted proof uses one unique workspace directly under repository-local `.dart_tool`, analyzes and runs from
+  the package root, and removes the exact workspace in `finally`; it adds no `Directory.systemTemp` owner or caller
+  package and leaves the governed 23-owner / 47-package storage census unchanged.
+- Committed production blobs at activation are action AST `d424a4c0`, parser `099ec90c`, contracts `6cc5850e`,
+  interpreter `2c962b54`, staged registry `8eb8b7e1`, emitter `6fd55f4f`, and source authority `40d1e318`.
+- The audit also caught stale sole-facing handoff prose saying Rust `.3.3` was still future and roadmap prose frozen
+  at Perl `.2.1`; both are corrected to current 3/9/95 truth and the Dart `.4.0-.3` frontier in this owned slice.
+
 - 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.3.3` — Rust progressive admission): exact clean activation is carrier
   atomic 266 `eecacead`; this leaf changes canonical trust/governance only.
 - The consumer retains file-level `cfg(linkedspec_progressive_span_dispatch_red)`. Canonical CI supplies that cfg

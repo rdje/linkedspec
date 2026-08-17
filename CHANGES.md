@@ -10,6 +10,20 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.4.0 — freeze Dart progressive dispatch RED
+
+- Activated Dart parent `.14.6.4` task-tree-first from exact clean Rust admission `5c4d4218` and split authority,
+  four-carrier integration, and admission into `.4.1-.3` before changing production behavior.
+- Added one analyzed `dart/test_dormant/progressive_span_dispatch_contract_test.dart` consumer outside ordinary and
+  canonical discovery. It derives current neutral 3/9/95 truth and proves the staged function-body registry rejects
+  logical parser `expr-v1` at resolve without path loading.
+- Proved current Dart retains one generic `ActionCallExpr` named `dispatch_span`. Native, `SpecFile`-JSON
+  reconstructed, generated-plan, and independently analyzed/executed emitted-source routes all report the same
+  structured `unknown_helper`; four groups pass before the sole missing-`PROGRESSIVE_DISPATCH_SPAN` RED.
+- Kept production/parser/compiler/runtime/emitter bytes, generated format, rollout, typed recurrence, CI topology,
+  storage-owner census, and outward surfaces unchanged. Corrected stale roadmap and mdBook frontier prose that
+  still described pre-Perl-carrier or pre-Rust-admission state.
+
 ## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.3.3 — admit private Rust progressive dispatch
 
 - Activated task-tree-first from exact clean carrier atomic 266 `eecacead`; retrieved ADR `0080`, the neutral

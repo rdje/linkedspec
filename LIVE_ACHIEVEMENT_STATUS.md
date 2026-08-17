@@ -2,33 +2,36 @@
 
 ## Current Activity
 
-- Rust admission `.14.6.3.3` is signoff-complete from exact clean private-carrier atomic 266 `eecacead`.
-- One exclusive `ProgressiveDispatchSpan` node carries only target/parser/top/span. Static malformed/generic forms
-  fail closed, and recognize-once effect closure plus a defensive live-token check reject uncommitted dispatch.
-- A doc-hidden opaque seed starts fresh authority per Engine execution; native, reconstructed, generated-plan, and
-  independently compiled emitted source return the same detached payload without serializing host authority.
-- The exact historical outer-cfg consumer is GREEN and canonical CI requires/runs that exact cfg-
-  enabled target once, while ordinary discovery remains zero tests.
+- Dart audit `.14.6.4.0` is focused-signoff-complete from exact clean Rust admission atomic 267 `5c4d4218`.
+- One analyzed consumer under `dart/test_dormant/` derives current neutral truth, proves staged `expr-v1` rejection,
+  and keeps ordinary/canonical discovery inert.
+- Dart currently retains one generic `ActionCallExpr` for `dispatch_span`. Native, `SpecFile`-JSON reconstructed,
+  generated-plan, and independently analyzed/executed emitted-source routes all reach the same structured
+  `unknown_helper` failure; four test groups pass before one exact missing-dedicated-node RED.
+- `.14.6.4.1-.3` separately own private authority/core, dedicated-node/four-carrier integration, and exact
+  ordinary/canonical admission plus Dart-only rollout promotion.
 - Progressive rollout is neutral + Perl + Rust at 3/9; governance is 95 mutations with 9 governed Rust carrier
   paths, 3 remaining backend guard groups/11 paths, 10 outward guards, and 26 diagnostics;
   recognition stays 138 node rows (134 current + four dedicated) / 250 calls / 58 mutations.
 - Typed remains 11/3/152 and generated format is unchanged; Dart/Julia/Lua, recurrence, public projection, and
   outward surfaces remain pending.
-- Mandatory change-history rollover publishes immutable segment 4993; ADR `0082` increases only its finite
-  capacity to 20 files / 19 manifest lines while every root, byte, per-segment, and aggregate ceiling stays fixed.
-- Corrected Phase 0 passes 1,031/1,031 after preserving require-time LinkedRE laziness; language is 250/126,
-  capability is 80/0/0, and ADR `0081` admits only the finite 15-file / 14-manifest-line notes capacity.
+- The production parser/compiler/runtime/emitter, generated format, storage census, CI topology, rollout, typed
+  recurrence, and outward surfaces are unchanged. Stale roadmap/book frontier prose is corrected.
 
 ## Latest Completed Slice
 
-- `.14.6.3.3` canonically routes the unchanged exact cfg-enabled Rust consumer, promotes only Rust to 3/9/95,
-  and closes parent `.14.6.3` after focused and receipt-bound canonical proof.
+- `.14.6.4.0` freezes Dart's exact five-test dormant RED at 4-pass/1-missing-node while preserving 3/9/95 and
+  every production/admission boundary.
 
 ## Next Action
 
-- Commit atomic 267, clear the brief, prove the exact clean handoff, then activate Dart `.14.6.4` task-tree-first.
+- From clean atomic 268, activate `.14.6.4.1` task-tree-first and implement only the independent private Dart
+  registry/invocation/rebased-view authority while preserving the exact final-path missing-node RED.
 
 ## Recent Completions
+
+- `2026-08-17` — `.14.6.4.0` freezes Dart's generic-call/four-carrier dormant RED, splits `.4.1-.3`, and corrects
+  stale roadmap/book frontier prose without production, rollout, storage, CI, typed, or outward movement.
 
 - `2026-08-17` — `.14.6.3.3` requires and canonically runs the unchanged cfg-enabled Rust consumer once, advances
   only Rust to progressive 3/9/95, and closes `.14.6.3` without typed, later-backend, format, or outward movement.
@@ -74,10 +77,6 @@
 
 - `2026-08-16` — `.7.0` froze the exact recurring/public/closeout split, corrected stale current route prose,
   and landed cleanly as atomic 252 at `be240c14` with its canonical receipt promoted.
-
-- `2026-08-16` — `.6.5` admitted the exact shared nine-role consumer on PUC Lua and LuaJIT from clean `798aeeee`,
-  advanced only the two runtime rows to 7/2/60, closed parent `.6`, and landed cleanly as atomic 251 at
-  `c33f6664`; `.7.0` owns the current behavior-free recurring/public audit from that handoff.
 
 ## History
 

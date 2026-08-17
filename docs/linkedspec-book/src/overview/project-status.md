@@ -177,7 +177,8 @@ is current. Canonical `.14.5.1` signoff passes nine doctrines, repository contai
 66-case CLI environments, RAM at 51%, Phase 0 at 1,031/1,031 in 729 seconds, and the exact six-runtime opt-in;
 parent `.14.5` is closed; progressive span dispatch `.14.6` is active with private Perl and Rust admitted. Rust's
 exact outer-cfg consumer is canonically routed once while ordinary discovery remains zero tests; governance is
-3/9 rollout and 95 mutations. Dart implementation `.14.6.4` is next.
+3/9 rollout and 95 mutations. Dart parent `.14.6.4` is active; audit child `.14.6.4.0` freezes its exact dormant
+RED before private authority, carriers, and admission move independently.
 
 Behavior-free audit `.14.6.0` and ADR `0080` fix that boundary exactly. `parse_job(...)` remains unavailable and
 `dispatch_span(...)` is admitted only as a private Perl/Rust intrinsic, not a shared helper. Each backend's current staged registry accepts
@@ -205,6 +206,13 @@ is now used by `.14.6.3.2`: one exclusive `ProgressiveDispatchSpan` node validat
 span, static recognition closure rejects its non-rollbackable effect, and native/reconstructed/generated-plan/
 independently compiled emitted-source routes all return the same detached payload. Only logical operands serialize.
 The exact consumer is GREEN and canonically routed once under its historical cfg; ordinary discovery stays zero tests.
+Dart `.14.6.4.0` now provides the next exact boundary without changing production. Its analyzed
+`test_dormant/progressive_span_dispatch_contract_test.dart` consumer derives current 3/9/95 governance, proves the
+separate staged registry rejects `expr-v1`, retains one generic `ActionCallExpr`, and follows native,
+`SpecFile`-JSON reconstructed, generated-plan, and independently analyzed/executed emitted-source routes to the
+same structured `unknown_helper` result. Four test groups pass and only the absent
+`progressive_dispatch_span` / `PROGRESSIVE_DISPATCH_SPAN` assertion fails. Ordinary and canonical discovery omit
+the consumer; `.14.6.4.1-.3` exclusively own Dart authority, carrier integration, and admission.
 Derived text/AST stitching remains staged `.14.7`; combined program-wide no-drift remains `.14.8`.
 Perl planning child `.14.6.2.0` freezes the final-path dormant consumer without enabling the form. It derives
 the full neutral inventory, passes 83 assertions, and fails once because `PROGRESSIVE_DISPATCH_SPAN` is absent.
