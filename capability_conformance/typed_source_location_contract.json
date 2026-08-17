@@ -2,7 +2,7 @@
   "format": 1,
   "contract_id": "linkedspec-typed-source-location-v1",
   "task_owner": "FUTURE-PARITY-BACKLOG.14.1.1",
-  "status": "neutral_contract_with_recursive_observation_public_no_drift_and_lossless_gap_composition",
+  "status": "neutral_contract_with_transaction_safety_recursive_observation_public_no_drift_and_lossless_gap_composition",
   "expected_counts": {
     "sources": 3,
     "position_conversions": 7,
@@ -25,7 +25,7 @@
     "recursive_observation_public_documents": 6,
     "recursive_observation_public_forbidden_claims": 6,
     "recursive_observation_public_surface_guard_paths": 10,
-    "mutations": 126
+    "mutations": 152
   },
   "policy": {
     "source_identity": "caller-authorized decoded input identity; never a path, backend object, or implicit read authority",
@@ -41,7 +41,7 @@
     "progress": "repetition, recursion, and staged queues must advance the cursor or prove a well-founded decreasing measure",
     "dispatch_authority": "a span conveys data and provenance only; source, registry, capability, and policy authority remain independently required",
     "source_spelling": "observe_recognition(observation, call(Child)) is current in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; Position and Span remain private architectural values projected as detached records",
-    "implementation_boundary": "the recursive-observation spelling, dedicated private node, detached carrier, parser behavior, exact six-runtime recurring composition, public projection/no-drift proof, and lossless-gap typed composition are current; this is not a second gap syntax, lifecycle, implementation, compatibility, or migration owner, the combined program-wide public-no-drift row remains pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted"
+    "implementation_boundary": "recognition transaction safety, recursive-observation spelling, dedicated private node, detached carrier, parser behavior, exact six-runtime recurring composition, public projection/no-drift proof, and lossless-gap typed composition are current; this is not a second transaction or gap syntax, lifecycle, implementation, compatibility, or migration owner, progressive dispatch, staged dispatch, and combined program-wide public-no-drift remain pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted"
   },
   "canonical_execution": {
     "contract_path": "capability_conformance/typed_source_location_contract.json",
@@ -371,7 +371,7 @@
       {
         "path": "capability_conformance/README.md",
         "required_markers": [
-          "Recursive-observation public projection/no-drift is current without a new public API; after lossless-gap typed composition the 14-row rollout is 10 complete / 4 pending."
+          "Recursive-observation public projection/no-drift is current without a new public API; its own rollout row remains complete."
         ]
       },
       {
@@ -429,6 +429,86 @@
       ]
     }
   },
+  "transaction_safety_composition": {
+    "owner": "FUTURE-PARITY-BACKLOG.14.6.0.1",
+    "status": "complete",
+    "policy": "project the separately owned current recognition-transaction authority into the typed cursor algebra without duplicating syntax, runtime behavior, recurrence, or public admission",
+    "upstream_recognition_authority": {
+      "contract_id": "linkedspec-recognition-transaction-v1",
+      "contract_path": "capability_conformance/recognition_transaction_contract.json",
+      "checker_path": "tools/check_recognition_transaction_contract.py",
+      "driver_path": "tools/check_recognition_transaction_six_runtime.sh",
+      "status": "neutral_runtime_recurring_and_public_no_drift_complete",
+      "rollout": {"complete": 9, "pending": 0, "semantic_mutations": 58},
+      "topology": {"source_groups": 5, "runtime_routes": 6},
+      "effects": {"allowed": 9, "rejected": 11, "uncommitted_dispatch_effect": "parser_registry_or_staged_dispatch"},
+      "progress": {
+        "cases": 8,
+        "policy": "every accepted repetition iteration and accepted direct or mutual recursive cycle edge requires end_offset greater than start_offset"
+      },
+      "public_no_drift": {"documents": 3, "forbidden_claims": 26, "mutations": 45},
+      "capability_guide_no_drift": {"documents": 1, "forbidden_claims": 14, "mutations": 18}
+    },
+    "typed_projection": {
+      "leg": "transaction_safety",
+      "representation": "one opaque linear recognition token snapshots and may restore only the owning invocation cursor, anonymous boundary, and named marks",
+      "effect_boundary": "uncommitted recognition rejects registry or staged dispatch and every other non-recognition effect before commit",
+      "progress_boundary": "rolled-back work does not establish progress; accepted repetition and recursive-cycle edges require cursor advance",
+      "runtimes": ["perl", "rust", "dart", "julia", "puc_lua", "luajit"],
+      "behavior_owner": "FUTURE-PARITY-BACKLOG.14.3 owns syntax, runtime behavior, recurrence, and public no-drift"
+    },
+    "current_projection_no_drift": {
+      "documents": [
+        {
+          "path": "docs/knowledge/cursor-transaction-authored-contract.md",
+          "required_markers": [
+            "Recognition transactions are current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; the exact recurring and public no-drift rollout is 9/9 complete."
+          ]
+        },
+        {
+          "path": "docs/knowledge/cursor-transaction-safety-audit-plan.md",
+          "required_markers": [
+            "The implementation program is complete across neutral authority, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurrence, and public no-drift."
+          ]
+        },
+        {
+          "path": "docs/knowledge/typed-source-location-cursor-algebra-direction.md",
+          "required_markers": [
+            "Typed transaction composition is current at six runtimes and the typed rollout is 11 complete / 3 pending."
+          ]
+        },
+        {
+          "path": "docs/linkedspec-book/src/overview/project-status.md",
+          "required_markers": [
+            "Typed transaction composition is now current at 11 complete / 3 pending; progressive dispatch, staged dispatch, and combined program-wide no-drift remain pending."
+          ]
+        },
+        {
+          "path": "capability_conformance/README.md",
+          "required_markers": [
+            "Typed transaction composition is current and promotes only `transaction_safety`; the typed rollout is 11 complete / 3 pending."
+          ]
+        }
+      ],
+      "forbidden_claims": [
+        {"path": "docs/knowledge/cursor-transaction-authored-contract.md", "text": "status: accepted authored/static contract; current on Perl and Rust; other runtime support pending"},
+        {"path": "docs/knowledge/cursor-transaction-authored-contract.md", "text": "current on Perl and Rust and future on the other runtimes"},
+        {"path": "docs/knowledge/cursor-transaction-authored-contract.md", "text": "These spellings and rules are current executable syntax on the independently admitted Perl and Rust backends."},
+        {"path": "docs/knowledge/cursor-transaction-safety-audit-plan.md", "text": "status: behavior-free audit frozen; exact future authored/static contract ratified; executable implementation pending"},
+        {"path": "docs/knowledge/typed-source-location-cursor-algebra-direction.md", "text": "lossless-gap handoff frozen"},
+        {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "Ten of 14 rollout legs are complete and 4 remain pending."},
+        {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "their rollout is 10 complete / 4 pending"},
+        {"path": "capability_conformance/README.md", "text": "Current governance is 126 mutations and rollout is 10 complete / 4 pending across 14 legs:"}
+      ]
+    },
+    "rollout_assertions": {
+      "row_count": 14,
+      "transaction_safety": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.3"},
+      "progressive_span_dispatch": {"status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.6"},
+      "staged_span_dispatch": {"status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.7"},
+      "recurring_public_no_drift": {"status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.8"}
+    }
+  },
   "lossless_gap_composition": {
     "owner": "FUTURE-PARITY-BACKLOG.14.5.1",
     "status": "complete",
@@ -484,7 +564,7 @@
     {"leg": "dart_runtime", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.2.3.3", "runtimes": ["dart"]},
     {"leg": "julia_runtime", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.2.4.3", "runtimes": ["julia"]},
     {"leg": "lua_dual_abi", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.2.5.3", "runtimes": ["puc_lua", "luajit"]},
-    {"leg": "transaction_safety", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.3", "runtimes": []},
+    {"leg": "transaction_safety", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.3", "runtimes": ["perl", "rust", "dart", "julia", "puc_lua", "luajit"]},
     {"leg": "recursive_observation", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.4", "runtimes": ["perl", "rust", "dart", "julia", "puc_lua", "luajit"]},
     {"leg": "lossless_gap_composition", "status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.5", "runtimes": ["perl", "rust", "dart", "julia", "puc_lua", "luajit"]},
     {"leg": "progressive_span_dispatch", "status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.6", "runtimes": []},

@@ -1005,7 +1005,7 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   canonical gate.
 - **OUTPUT:** neutral governance reports 3 sources, 7 positions, 6 direct spans, 3 derived texts, 8+8+33 state
   transitions, 6 recursive observations, 4 structural cases, 92 helper projections + 7 aliases + 2 internal ids,
-  33 diagnostics, 10 complete / 4 pending rollout, and 126 rejected drift mutations. The driver then reports each
+  33 diagnostics, 11 complete / 3 pending rollout, and 152 rejected drift mutations. The driver then reports each
   of the six ordered runtime routes and three support ledgers before its exact success marker.
 - **BOUNDARY:** this is orchestration over existing internal consumers, not a new public typed-value surface. The
   combined recurring/public no-drift row remains pending for `FUTURE-PARITY-BACKLOG.14.8`. Retrieve
@@ -1033,14 +1033,28 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   machine-path-audits, and syntax-checks the driver; use
   `LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1 bash tools/run_ci_local.sh` for its all-toolchain route.
 - **OUTPUT:** Perl 7, Rust 7, Dart 7, Julia 30, PUC Lua 43, and LuaJIT 43 pass before the three support ledgers and
-  exact success marker. Current neutral truth, including the later lossless-gap composition row, is 10 complete /
-  4 pending / 126 mutations.
+  exact success marker. Current neutral truth, including lossless-gap and transaction-safety composition, is
+  11 complete / 3 pending / 152 mutations.
 - **BOUNDARY:** five backend sources form six routes because one shared Lua source executes independently on both
   ABIs. Twelve regressions lock topology/storage and recurrence-only promotion; 27 more lock six public documents,
   six stale-claim denials, and ten surface guards without changing the 14-row rollout. Recursive-observation public projection/no-drift is current without moving any public or runtime surface.
   The combined program-wide `.14.8` row remains pending; no parser, runtime, facade, schema, semantic/MCP, CLI,
   README, or storage-root behavior changes. Retrieve
   [[recursive-observation-recurring-gate]] before changing this proof.
+
+### 4.9.1.1.1 Typed transaction-composition correction
+
+- **WHAT:** `transaction_safety` in the typed ledger is a projection of the separately owned current recognition
+  authority, not a second transaction implementation. Current typed truth is 11 complete / 3 pending / 152
+  mutations; recognition remains 9/9/58 over five backend sources and six runtime routes.
+- **WHEN:** changing typed transaction status/runtimes, transaction effect or progress language, recognition
+  contract/checker/driver identity, stale Knowledge/book claims, or the progressive-dispatch transaction fence.
+- **HOW:** run `bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py`, then
+  `bash tools/check_recognition_transaction_six_runtime.sh`. The typed checker cross-checks upstream identity,
+  rollout, topology, 9/11 effect counts, eight progress cases, public 3/26/45, and guide 1/14/18.
+- **BOUNDARY:** only `transaction_safety` is complete here. `parser_registry_or_staged_dispatch` remains rejected
+  inside uncommitted recognition. Progressive dispatch, staged dispatch, and combined program-wide no-drift stay
+  pending, and no parser/runtime/facade/schema/semantic/MCP/CLI/README behavior changes.
 
 ### 4.9.1.2 Lossless-gap handoff preflight
 
@@ -1089,7 +1103,7 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 - **HOW:** run `bash tools/check_typed_gap_composition_six_runtime.sh`. Canonical CI inventories, machine-path
   audits, syntax-checks, and outside-CWD routes the driver; use
   `LINKEDSPEC_RUN_TYPED_GAP_COMPOSITION_MATRIX=1 bash tools/run_ci_local.sh` for its full all-toolchain route.
-- **OUTPUT:** typed governance reports 10 complete / 4 pending / 126 mutations; gap governance reports 9/0/63
+- **OUTPUT:** typed governance reports 11 complete / 3 pending / 152 mutations; gap governance reports 9/0/63
   plus public 6/12/10/29; then Perl 124, Rust 1, Dart 5, Julia 319, PUC Lua 392, LuaJIT 392, recognition
   137/250/58, strict generated Rust 105/105, capability 80/0/0, and language 250/105+1/126 pass before exact
   `[typed-gap-composition] PASS: typed lossless-gap composition, all six gap runtimes, and support ledgers complete`.

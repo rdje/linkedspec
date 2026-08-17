@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-17` (progressive audit `.14.6.0` is focused-signoff-complete for intended atomic 257
-  from clean `8880d1b6`; corrective prerequisite `.14.6.0.1` is the next owned leaf)
+- Last updated: `2026-08-17` (corrective typed transaction composition `.14.6.0.1` is focused-signoff-complete for
+  intended atomic 258 from clean `1a6e0b1f`; neutral progressive contract `.14.6.1` is next)
 - Owner: repo-local workflow
 
 ## Goal
@@ -103,12 +103,12 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-17):** behavior-free progressive audit `.14.6.0` is focused-signoff-complete
-for intended atomic 257 from clean atomic-256 `8880d1b6`. It proves active dispatch absent, freezes the exact
-pre-registered same-source child authority, and splits `.0.1` typed transaction-composition correction; `.1`
-neutral contract; `.2-.6` Perl/Rust/Dart/Julia/shared-Lua; `.7` recurrence; and `.8` public no-drift. The audit
-also proves `.14.3`'s closed 9/9 transaction authority was never promoted in the typed ledger; `.14.6.0.1` is the
-next owned leaf and must repair that current truth before executable progressive work.
+**Authoritative frontier (2026-08-17):** corrective `.14.6.0.1` is focused-signoff-complete for intended atomic
+258 from clean audit atomic 257 `1a6e0b1f`. It projects the independently complete 9/9 recognition authority into
+typed `transaction_safety`, locks stale Knowledge/book claims, and advances only typed truth to 11/3/152 without
+runtime, public, or CI-topology movement. Neutral progressive contract `.14.6.1` is next; `.2-.6` retain the
+Perl/Rust/Dart/Julia/shared-Lua implementation order, `.7` recurrence, `.8` public no-drift, staged `.14.7`, and
+combined program-wide `.14.8` remain separate owners.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private

@@ -271,10 +271,11 @@ bash tools/check_typed_source_location_six_runtime.sh
 ```
 
 Canonical local CI requires and syntax-checks that driver; `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1` opts into its
-all-toolchain execution. Current governance is 126 mutations and rollout is 10 complete / 4 pending across 14 legs:
+all-toolchain execution. Current governance is 152 mutations and rollout is 11 complete / 3 pending across 14 legs:
 the neutral contract, public structure, unchanged neutral/public recomposition, and the Perl, Rust, Dart, Julia,
 PUC Lua, and LuaJIT internal
-runtime admissions are complete. The two Lua ABIs share one rollout leg because they execute the same consumer
+runtime admissions are complete. Transaction safety projects the separately owned complete recognition authority;
+the two Lua ABIs share one rollout leg because they execute the same consumer
 source independently through distinct runtimes. The combined `recurring_public_no_drift` row remains pending for
 final program-wide owner `FUTURE-PARITY-BACKLOG.14.8`; recurring composition does not promote it early.
 
@@ -297,8 +298,10 @@ bash tools/check_recursive_observation_six_runtime.sh
 Canonical CI exposes the same route behind `LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1`. Eleven topology/storage
 regressions plus one recurrence regression promote only `recursive_observation`. The public closeout then binds
 six current projections, rejects six stale claims, and guards ten facade/API/schema surfaces through 27 further
-mutations. Recursive-observation public projection/no-drift is current without a new public API; after lossless-gap typed composition the 14-row rollout is 10 complete / 4 pending.
-Governance is 126, and the combined program-wide public-no-drift row stays pending for `.14.8`. No public
+mutations. Recursive-observation public projection/no-drift is current without a new public API; its own rollout row remains complete.
+Typed transaction composition is current and promotes only `transaction_safety`; the typed rollout is 11 complete / 3 pending.
+Governance is 152, and progressive dispatch, staged dispatch, and combined program-wide public no-drift stay
+pending under `.14.6`, `.14.7`, and `.14.8`. No public
 helper/value, descriptor/generated schema, semantic/MCP field, CLI, or README behavior moved.
 
 `inter_match_gap_capture_contract.json` is the neutral authority for named regex slots and lossless

@@ -56,12 +56,15 @@ general style. This documentation-only slice changes no parser or runtime behavi
 The backend-neutral typed source-location contract is complete under `FUTURE-PARITY-BACKLOG.14.1.1`. Its
 independent checker passes 3 sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation,
 8 transaction, and 33 recursive-observation transitions, 6 detached recursive observations, 4 structural cases,
-92 current helper projections, 33 diagnostics, and 126 rejected mutations.
+92 current helper projections, 33 diagnostics, and 152 rejected mutations.
 
-Ten of 14 rollout legs are complete and 4 remain pending. The neutral contract, public linked-rule structure,
+Eleven of 14 rollout legs are complete and 3 remain pending. The neutral contract, public linked-rule structure,
 unchanged neutral/public recomposition, and all six runtime targets are complete. Their internal authorities and
 all 92 helper projections plus 7 aliases are admitted without changing public results or their established scalar,
-byte, or code-unit mark and cursor behavior. Exact recursive observation and lossless-gap composition are complete.
+byte, or code-unit mark and cursor behavior. Exact transaction safety, recursive observation, and lossless-gap
+composition are complete.
+
+Typed transaction composition is now current at 11 complete / 3 pending; progressive dispatch, staged dispatch, and combined program-wide no-drift remain pending.
 
 Rust's exact four-test consumer now runs under ordinary Cargo discovery and as a required canonical-CI leg. It
 proves the immutable value core and projection boundary across native, reconstructed, and generated-plan execution;
@@ -117,8 +120,9 @@ rejected mutations, with recognition rollout 9/9 complete. The authored forms an
 current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; public no-drift is current and transaction activity
 `.14.3` is closed. The separate typed-
 source admissions do not add an authored `Position` or `Span` value, schema version, or new helper result. After
-lossless-gap typed composition, their rollout is 10 complete / 4 pending because the combined recurring/
-public no-drift row remains owned by final program-wide closeout `FUTURE-PARITY-BACKLOG.14.8`.
+lossless-gap and transaction-safety composition, their rollout is 11 complete / 3 pending. The transaction row
+projects the separately owned 9/9 six-runtime recognition authority; progressive dispatch, staged dispatch, and
+combined public no-drift retain their existing owners.
 
 Recursive observation now has a behavior-free six-runtime audit under `.14.4.0`. The frozen record is detached and
 immutable: source/rule identity, a fresh monotonic invocation id, nullable distinct direct-parent id, entry
@@ -163,7 +167,10 @@ new regressions promote only the observation row. Public closeout `.14.4.8` adds
 stale-claim denials, ten surface guards, and 27 mutations, advancing typed-source truth to 9/5/114 without a
 rollout change. Lossless-gap composition `.14.5.1` then binds the separately owned 9/0/63 plus public 6/12/10/29
 gap authority to the already-detached same-source half-open `gap_span`, adds one rooted composed route and twelve
-drift mutations, and advances only `lossless_gap_composition` for current truth 10/4/126.
+drift mutations, and advances only `lossless_gap_composition`. Corrective `.14.6.0.1` then binds the independently
+complete recognition authority—9/9 rollout, 58 mutations, five backend sources over six runtime routes, closed
+effects and cursor-progress proof—into `transaction_safety` for current typed truth 11/3/152 without behavior or
+public-surface movement.
 Recursive-observation public no-drift is current under `.14.4.8`, while the combined program-wide `.14.8` row remains pending.
 No public helper, facade, descriptor/generated version, result schema, semantic/MCP field, CLI, or README behavior
 is current. Canonical `.14.5.1` signoff passes nine doctrines, repository containment and relocation, both
@@ -183,7 +190,7 @@ top/source chain must strictly shrink its span. Correction `.14.6.0.1` first rep
 transaction-safety promotion; neutral `.1`, backend `.2-.6`, recurrence `.7`, and public no-drift `.8` follow.
 Derived text/AST stitching remains staged `.14.7`; combined program-wide no-drift remains `.14.8`.
 The behavior-free audit is focused-signoff-complete for atomic 257: exact Perl rejection probes, Rust 1/1, Dart
-5/5, typed 10/4/126, recognition 137/250/58, capability 80/0/0, language 250/105+1/126, Knowledge, the rendered
+5/5, typed 11/3/152, recognition 137/250/58, capability 80/0/0, language 250/105+1/126, Knowledge, the rendered
 book, bounded documentation, and all nine doctrines pass without production or public-surface movement.
 Definitive recurrence signoff passes all eight doctrines, repository containment/relocation, CLI 66/66 in both
 option environments, RAM 62%, Phase 0 1,031/1,031 in 723 seconds, and Perl/Rust/Dart 7 each, Julia 30, and Lua
@@ -636,7 +643,7 @@ Three backbone items tracked major structural modernization — all done:
 
 - **Documentation and book sync** — the book is kept aligned with the codebase as features land and surfaces evolve.
 - **Variant-agnostic documentation** — this book is being aligned so it describes the `.spec` contract, DSL, and helper semantics backend-neutrally, with the Perl implementation shown as the reference backend rather than as "the" implementation.
-- **Inter-match gap capture direction** — ADR `0045` recovers historical “super split” as automatic prefix/interstitial source-gap access around repeated OR/default action edges. Inter-match gap capture is fully admitted at 9 complete / 0 pending across the neutral contract, six runtimes, recurring proof, and public no-drift. Target rules own referenced regex slots and lifecycle code; the enclosing rule owns selection and gap orchestration. Shared Lua `.6.1-.6.5` implements logical authored/compiled metadata; invocation-local candidate/tail state, detached child entry identity, four accessors, lifecycle timing, nesting, and rollback on the existing recognition frame/token; normalized reconstruction; detached compatible descriptor projections; same-engine direct/traced generated-v2 execution; independently loaded emitted proof; existing-primary parity; and exact nine-role PUC-Lua/LuaJIT admission. Existing rule-slot events remain post-action/pre-`LE`; dedicated capture-enabled preselection alone precedes `LS`. The checker is 63 semantic mutations plus ten Rust, ten Dart, ten Julia, and sixteen Lua admission mutations, with public governance at six documents / twelve stale denials / ten outward guards / 29 mutations. Legacy descriptor fields/refs, format 2 `{label,family}` plans, storage 19/three native modules, and every guarded outward surface remain unchanged. The shared language inventory is 250 supported ActionIR names with 126 public Perl helpers; recognition is 137/250/58. Independent no-change closeout `.7.3` handed only typed `gap_composition` to `.14.5.1`; that leaf is now current at typed source 10/4/126 through the existing `gap_span` carrier and adds no second behavior owner.
+- **Inter-match gap capture direction** — ADR `0045` recovers historical “super split” as automatic prefix/interstitial source-gap access around repeated OR/default action edges. Inter-match gap capture is fully admitted at 9 complete / 0 pending across the neutral contract, six runtimes, recurring proof, and public no-drift. Target rules own referenced regex slots and lifecycle code; the enclosing rule owns selection and gap orchestration. Shared Lua `.6.1-.6.5` implements logical authored/compiled metadata; invocation-local candidate/tail state, detached child entry identity, four accessors, lifecycle timing, nesting, and rollback on the existing recognition frame/token; normalized reconstruction; detached compatible descriptor projections; same-engine direct/traced generated-v2 execution; independently loaded emitted proof; existing-primary parity; and exact nine-role PUC-Lua/LuaJIT admission. Existing rule-slot events remain post-action/pre-`LE`; dedicated capture-enabled preselection alone precedes `LS`. The checker is 63 semantic mutations plus ten Rust, ten Dart, ten Julia, and sixteen Lua admission mutations, with public governance at six documents / twelve stale denials / ten outward guards / 29 mutations. Legacy descriptor fields/refs, format 2 `{label,family}` plans, storage 19/three native modules, and every guarded outward surface remain unchanged. The shared language inventory is 250 supported ActionIR names with 126 public Perl helpers; recognition is 137/250/58. Independent no-change closeout `.7.3` handed only typed `gap_composition` to `.14.5.1`; that leaf is current through the existing `gap_span` carrier and adds no second behavior owner. Corrective typed transaction composition then advances aggregate typed-source governance to 11/3/152 without changing this gap behavior.
 - **Future backend parity backlog** - `FUTURE-PARITY-BACKLOG` owns deferred/future work. Lua input/live-cursor
   controls `.4.3.7.1` pass 115/115, all 16 anonymous capture calls `.4.3.7.2` pass 116/116, and non-consuming
   earliest-boundary `.4.3.7.5` passes 117/117 on PUC Lua and LuaJIT. Complete named-mark `.17.1-.17.5` align and

@@ -10,6 +10,18 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.0.1` — typed transaction-composition correction): clean activation is
+  audit atomic 257 `1a6e0b1f`. Checker-first RED is exact `transaction-safety composition contract is missing`.
+- The typed contract now cross-checks recognition contract/checker/driver identity, closed 9-allowed/11-rejected
+  effects including uncommitted `parser_registry_or_staged_dispatch`, eight cursor-progress fixtures, five source
+  groups/six runtime routes, 9/9/58 rollout, public 3/26/45, and capability-guide 1/14/18.
+- Promote only pre-owned `transaction_safety` with exact Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT coverage. New static
+  and in-memory document mutations make typed governance 11/3/152 and prevent obsolete two-runtime, pending-
+  implementation, 10/4/126, or unstable observation-aggregate claims from returning.
+- Existing recognition recurrence passes Perl 51, Rust 12, Dart, Julia 207, PUC Lua 246, LuaJIT 246, generated
+  strict Rust 105/105, capability 80/0/0, and language 250/105+1/126. Book proof is 79 files / 15,004 KiB with
+  inspected current HTML and removed output; no behavior, outward surface, CI topology, or storage owner changes.
+
 - 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.0` — progressive span-dispatch audit): clean activation is atomic 256
   `8880d1b6`. Committed staged registry blobs are Perl `09e5008e`, Rust `b9033595`, Dart `8eb8b7e1`, Julia
   `c6c7b10f`, and Lua `b128a9f8`; each implements only `actionir-body.spec` / `action_block`.

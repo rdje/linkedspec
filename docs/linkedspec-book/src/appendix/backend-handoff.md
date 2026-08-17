@@ -37,8 +37,9 @@
 > and LuaJIT in exact order, then generated-source, capability, and language-coverage ledgers. Run
 > `bash tools/check_typed_source_location_six_runtime.sh`; canonical CI exposes the same all-toolchain proof behind
 > `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1`. Five backend source groups map to six runtime routes because the shared
-> Lua source executes on both ABIs. Governance is now 10 complete / 4 pending with 126 drift mutations after the
-> independently governed recursive-observation public projection/no-drift and lossless-gap composition closeouts.
+> Lua source executes on both ABIs. Governance is now 11 complete / 3 pending with 152 drift mutations after the
+> independently governed transaction-safety projection, recursive-observation public projection/no-drift, and
+> lossless-gap composition closeouts.
 >
 > No-change recomposition `.14.2.7` reruns that exact authority and closes the internal value/helper implementation
 > parent `.14.2`. It adds no replacement backend surface and does not promote the combined final `.14.8` row.
@@ -153,7 +154,9 @@
 > observation row. Twenty-seven further public-projection mutations reject stale prose and premature surface
 > widening without adding a rollout row, producing 9/5/114 while the combined program-wide `.14.8` row remains pending.
 > Lossless-gap composition subsequently binds the unchanged 9/0/63 plus public 6/12/10/29 gap authority through
-> existing `gap_span`, adds twelve drift mutations, and promotes only its row for current truth 10/4/126. Run
+> existing `gap_span`, adds twelve drift mutations, and promotes only its row. Corrective transaction composition
+> then binds the independently complete 9/9 recognition authority into `transaction_safety`, producing current
+> typed truth 11/3/152 without behavior or outward-surface movement. Run
 > `bash tools/check_typed_gap_composition_six_runtime.sh`; no second gap behavior owner or outward surface exists.
 >
 > Definitive neutral signoff passes the exact six-runtime composition and support ledgers, all eight doctrines,

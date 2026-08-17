@@ -1,21 +1,22 @@
 # MEMORY
 
-- activation_commit: `8880d1b6919f235d2dd52fb6d0a45cd71906a854` — clean atomic-256 typed-gap base for task-tree-first
-  `FUTURE-PARITY-BACKLOG.14.6.0`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.0 - audit progressive span dispatch`; focused-signoff-
-  complete and landed by this intended atomic-257 commit without executable or public movement.
-- active_work_unit: none at the intended clean post-commit audit handoff; corrective `.14.6.0.1` is next.
-- next_action: activate `.14.6.0.1` task-tree-first from exact clean atomic 257, then repair typed transaction
-  composition and stale-current governance before neutral progressive contract `.14.6.1`.
+- activation_commit: `1a6e0b1f3ce76e855b12e5b701e5d6f6988abb58` — clean atomic-257 progressive-audit base for task-tree-first
+  `FUTURE-PARITY-BACKLOG.14.6.0.1`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.0.1 - correct typed transaction composition`; focused-
+  signoff-complete and landed by this intended atomic-258 commit without executable or public movement.
+- active_work_unit: none at the intended clean post-commit correction handoff; neutral `.14.6.1` is next.
+- next_action: activate `.14.6.1` task-tree-first from exact clean atomic 258, then select and encode the neutral
+  progressive authored form, authority contract, checker-first RED/GREEN, and safe backend split.
 - in_flight_uncommitted: none at the intended post-commit boundary; no background result remains to consume.
-- blockers: none. Focused audit proof passes exact Perl/Rust/Dart staged boundaries, typed 10/4/126, recognition
-  9/9, capability/language, book, Knowledge, histories, memory, task metadata, and all nine doctrines.
+- blockers: none. Focused correction proof passes typed 11/3/152; recognition Perl/Rust/Dart/Julia/PUC-Lua/
+  LuaJIT plus generated/capability/language; book 79/15,004 KiB; Knowledge; histories; task metadata; and doctrines.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
   `FUTURE-PARITY-BACKLOG.22` moves that immutable closeout fact out of bounded current memory.
-- current_typed_source: neutral/public structure, all six internal runtimes, recursive observation, and lossless-
-  gap composition are admitted at 10/4/126; no public typed value is admitted and combined program-wide `.14.8` remains future. Recognition transactions are current
+- current_typed_source: neutral/public structure, all six internal runtimes, transaction safety, recursive
+  observation, and lossless-gap composition are admitted at 11/3/152; no public typed value is admitted and
+  progressive/staged/combined program-wide rows remain future. Recognition transactions are current
   on all six runtimes at 137/250/58; recurrence and public no-drift are current at 9/9.
 - recurring_rollout_fact: the original contract combines recurring and public no-drift in one `.14.8` row.
   Detailed plan/history assign `.14.2.6` driver/topology only; do not add a fifteenth row or promote `.14.8`.
@@ -36,7 +37,7 @@
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, and recurrence/public no-drift 9/9.
 - current_future_direction: progressive audit `.14.6.0` freezes pre-registered, same-source rebased, ceiling- and
-  cancellation-preserving dispatch; corrective `.0.1` precedes neutral `.1` and backend `.2-.6`. Staged enrichment
+  cancellation-preserving dispatch; corrective `.0.1` is complete before neutral `.1` and backend `.2-.6`. Staged enrichment
   `.14.7` and combined program-wide no-drift `.14.8` remain separate pending owners.
 - latest_bootstrap_read: 2026-08-17 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
-  review complete; `.14.6.0` is focused-signoff-complete for atomic 257 and `.14.6.0.1` is the next owned leaf.
+  review complete; `.14.6.0.1` is focused-signoff-complete for atomic 258 and `.14.6.1` is the next leaf.

@@ -10,6 +10,23 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.0.1 — correct typed transaction composition
+
+- Activated task-tree-first from clean audit atomic 257 `1a6e0b1f` and retrieved the typed, recognition,
+  progressive-authority, public-no-drift, Knowledge, Toolbox, book, and task authorities before correction.
+- Added a checker-first oracle and proved exact RED at `ContractError: transaction-safety composition contract is
+  missing` before changing the typed contract.
+- Bound the independently complete recognition authority—9/9 rollout, 58 mutations, five sources/six runtime
+  routes, 9 allowed/11 rejected effects, eight progress cases, public 3/26/45, and guide 1/14/18—into typed
+  `transaction_safety`. Only that row moves, producing 11 complete / 3 pending / 152 mutations.
+- Added exact contract and in-memory stale-projection regressions; corrected obsolete Knowledge and book claims;
+  and kept progressive dispatch, staged dispatch, and combined public no-drift pending under their existing owners.
+- Focused proof passes typed 11/3/152; recognition Perl 51, Rust 12, Dart, Julia 207, PUC Lua 246, LuaJIT 246;
+  generated-source strict Rust 105/105; capability 80/0/0; and language 250/105+1/126 through the exact recurring
+  success marker. The book renders 79 files / 15,004 KiB with inspected current markers and removed output.
+- No parser, compiler, runtime, facade, descriptor/schema, semantic/MCP, CLI, README, storage, or public behavior
+  changes; this is an authority projection and stale-current governance correction only.
+
 ## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.0 — audit progressive span dispatch
 
 - Activated task-tree-first from clean atomic 256 `8880d1b6` and retrieved ADR, Knowledge, typed-source,

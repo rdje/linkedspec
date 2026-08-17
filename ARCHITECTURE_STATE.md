@@ -1,5 +1,20 @@
 # ARCHITECTURE STATE
 
+## Typed transaction safety now composes the complete recognition authority
+
+Corrective `FUTURE-PARITY-BACKLOG.14.6.0.1` starts from clean audit atomic 257 `1a6e0b1f`. The typed ledger had
+left `transaction_safety` pending even though the separately owned recognition program is closed at 9/9 with 58
+mutations, five immutable backend sources over six runtime routes, nine allowed and eleven rejected effects,
+eight progress fixtures, public no-drift 3/26/45, and capability-guide no-drift 1/14/18.
+
+The typed contract now binds that committed authority instead of duplicating transaction behavior. One opaque
+linear token snapshots only the owning invocation cursor, anonymous boundary, and named marks. Uncommitted
+recognition rejects `parser_registry_or_staged_dispatch`; rolled-back work cannot establish progress. The
+`transaction_safety` row alone becomes complete on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Progressive
+dispatch, staged dispatch, and combined program-wide no-drift remain pending under `.14.6`, `.14.7`, and `.14.8`.
+Typed governance is 11 complete / 3 pending / 152 mutations with no parser, compiler, runtime, facade, schema,
+semantic/MCP, CLI, README, storage, or public behavior change.
+
 ## Progressive span dispatch has a behavior-free authority and implementation split
 
 ADR `0080` records the accepted architecture. `FUTURE-PARITY-BACKLOG.14.6.0` starts from clean atomic 256
@@ -52,8 +67,8 @@ remains 80/0/0; README, facades, outward schemas, semantic/MCP, CLI, storage, an
 the typed contract. The representation is the already-current detached `gap_span`: one source identity, half-open
 Unicode-scalar offsets, and gap provenance. Prefix/interstitial/tail are segment positions; `gap_text` materializes
 on demand and `entry_slot` independently retains named/positional provenance. Twelve new drift mutations and one
-repository-routed composed driver promote only `lossless_gap_composition`, so typed source is 10 complete / 4
-pending / 126. The driver recomposes the complete neutral and six-runtime gap route plus recognition, generated-
+repository-routed composed driver promote only `lossless_gap_composition`. Corrective transaction composition
+subsequently makes current typed source 11 complete / 3 pending / 152. The driver recomposes the complete neutral and six-runtime gap route plus recognition, generated-
 source, capability, and language ledgers. `INTER-MATCH-GAP-CAPTURE.1-.7` remains the exclusive behavior owner,
 and combined program-wide no-drift remains `.14.8`-owned. Canonical signoff passes nine doctrines, repository
 containment/relocation, CLI 66/66 twice, RAM 51%, Phase 0 1,031/1,031 in 729 seconds, and the exact opt-in route.
@@ -145,7 +160,7 @@ topology/storage regressions plus one recurrence regression promote only `recurs
 source rollout to 9 complete / 5 pending. Public closeout `.14.4.8` governs six current projections, denies six
 stale claims, and scans ten public surfaces through 27 additional mutations, advancing governance to 114 without
 changing the 14-row rollout. Later lossless-gap typed composition adds twelve regressions and promotes only its
-row, making current aggregate truth 10/4/126. The combined final `.14.8` row remains pending. No public helper/value, facade,
+row. Corrective transaction composition later makes current aggregate truth 11/3/152. The combined final `.14.8` row remains pending. No public helper/value, facade,
 descriptor/generated schema, result schema, semantic/MCP projection, CLI, README, parser, compiler, or runtime
 behavior becomes current.
 

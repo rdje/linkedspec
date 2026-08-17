@@ -18,9 +18,9 @@ answers:
   - "which diagnostics protect cursor and span safety"
   - "what owns the typed cursor span implementation program"
 date: 2026-08-12
-status: accepted architecture; internal values, transactions, and recursive observation complete; lossless-gap handoff frozen
+status: accepted architecture; internal values, transaction composition, recursive observation, and lossless-gap composition complete
 tags: [architecture, cursor, source-location, spans, capture, recursion, parser-composition, diagnostics, portability]
-evidence: "Director approval on 2026-07-29 plus ADR 0056. FUTURE-PARITY-BACKLOG.14.1 completed the executable base model and structural teaching; .14.2 completed the internal immutable value/projection layer on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; .14.3 closed exact six-runtime recognition transactions at rollout 9/9; .14.4.0-.7 froze, admitted, and recurred recursive observation on all six runtimes; .14.4.8 closed its public projection at typed-source 9 complete / 5 pending / 114 mutations; and behavior-free .14.5.0 freezes the clean handoff to the separate lossless-gap implementation tree."
+evidence: "Director approval on 2026-07-29 plus ADR 0056. FUTURE-PARITY-BACKLOG.14.1 completed the executable base model and structural teaching; .14.2 completed the internal immutable value/projection layer on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; .14.3 closed exact six-runtime recognition transactions at rollout 9/9; .14.4 closed recursive-observation recurrence and public projection; .14.5.1 composed the complete separate lossless-gap authority; and .14.6.0.1 corrects the typed transaction projection to 11 complete / 3 pending / 152 mutations."
 reverify: "rg -n 'source-location algebra|Cursor transactions|Progressive and staged parsing consume spans|Lossless segmentation|FUTURE-PARITY-BACKLOG[.]14[.]0[.]1' docs/decisions/0056-typed-source-location-and-cursor-algebra.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
@@ -53,9 +53,11 @@ ADR `0056` ratified `recognition_checkpoint()` / `recognize_once(token, call(Rul
 child payload remains staged until commit, so falsey successful values are not collapsed into failure. Neutral,
 six-runtime transaction admission, recurrence, and public no-drift are complete. Recursive observation is also
 privately admitted, recurrent, and publicly projected without public API admission on all six runtimes. Lossless
-gap syntax and runtime admission remain exclusively owned by `INTER-MATCH-GAP-CAPTURE.1-.7`; post-admission
-typed composition, progressive/staged dispatch, and final typed-source no-drift continue under
-`FUTURE-PARITY-BACKLOG.14.5.1-.14.8`.
+gap syntax and runtime admission remain exclusively owned by `INTER-MATCH-GAP-CAPTURE.1-.7`; gap and transaction
+composition are current, while progressive/staged dispatch and final typed-source no-drift continue under
+`FUTURE-PARITY-BACKLOG.14.6.1-.14.8`.
+
+Typed transaction composition is current at six runtimes and the typed rollout is 11 complete / 3 pending.
 
 Related records: [[cursor-transaction-safety-audit-plan]], [[recursive-source-observation-audit]],
 [[lossless-gap-cross-tree-handoff]].

@@ -13,18 +13,20 @@
 - The exact split is corrective `.0.1`, neutral `.1`, Perl/Rust/Dart/Julia/shared-Lua `.2-.6`, recurrence `.7`,
   and public projection/no-drift `.8`. Staged AST enrichment remains `.14.7`; combined no-drift remains `.14.8`.
 - Audit found one pre-existing typed-ledger defect: `.14.3` is closed at recognition 9/9, but its owned typed
-  `transaction_safety` row was never promoted. `.14.6.0.1` now owns the executable correction and stale-current
-  public guard before any progressive contract or behavior.
+  `transaction_safety` row was never promoted. `.14.6.0.1` now projects the exact recognition authority into that
+  row at typed 11/3/152 and rejects stale Knowledge/book claims without progressive, runtime, or public behavior.
+- Checker-first proof failed exactly at missing transaction composition; the corrected checker is GREEN and the
+  existing recognition five-source/six-runtime route plus support ledgers pass through its exact success marker.
 
 ## Latest Completed Slice
 
-- `.14.6.0` behavior-free audit freezes authority-preserving progressive span dispatch, records the missed typed
-  transaction promotion under `.0.1`, and passes focused proof without executable or public movement.
+- `.14.6.0.1` corrects typed transaction composition to 11/3/152, locks stale-current projection, and passes the
+  existing six-runtime recognition route without parser, runtime, CI-topology, or public behavior movement.
 
 ## Next Action
 
-- After the clean atomic-257 audit commit, activate corrective prerequisite `.14.6.0.1` task-tree-first and repair
-  typed transaction composition before neutral progressive contract `.14.6.1`.
+- Finish focused doctrine/memory checks, commit `.14.6.0.1` as atomic 258, clear the brief, and activate neutral
+  progressive contract `.14.6.1` task-tree-first from the clean handoff.
 
 ## Recent Completions
 

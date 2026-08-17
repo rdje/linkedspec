@@ -58,6 +58,15 @@ LOSSLESS_GAP_DRIVER_PATH = ROOT / "tools" / "check_inter_match_gap_capture_six_r
 TYPED_GAP_COMPOSITION_DRIVER_PATH = (
     ROOT / "tools" / "check_typed_gap_composition_six_runtime.sh"
 )
+RECOGNITION_TRANSACTION_CONTRACT_PATH = (
+    ROOT / "capability_conformance" / "recognition_transaction_contract.json"
+)
+RECOGNITION_TRANSACTION_CHECKER_PATH = (
+    ROOT / "tools" / "check_recognition_transaction_contract.py"
+)
+RECOGNITION_TRANSACTION_DRIVER_PATH = (
+    ROOT / "tools" / "check_recognition_transaction_six_runtime.sh"
+)
 PROJECT_DATA_WORKFLOW_ROUTING_PATH = ROOT / "tools" / "test_project_data_workflow_routing.sh"
 
 EXPECTED_COUNTS = {
@@ -82,7 +91,7 @@ EXPECTED_COUNTS = {
     "recursive_observation_public_documents": 6,
     "recursive_observation_public_forbidden_claims": 6,
     "recursive_observation_public_surface_guard_paths": 10,
-    "mutations": 126,
+    "mutations": 152,
 }
 
 POLICY = {
@@ -99,7 +108,7 @@ POLICY = {
     "progress": "repetition, recursion, and staged queues must advance the cursor or prove a well-founded decreasing measure",
     "dispatch_authority": "a span conveys data and provenance only; source, registry, capability, and policy authority remain independently required",
     "source_spelling": "observe_recognition(observation, call(Child)) is current in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; Position and Span remain private architectural values projected as detached records",
-    "implementation_boundary": "the recursive-observation spelling, dedicated private node, detached carrier, parser behavior, exact six-runtime recurring composition, public projection/no-drift proof, and lossless-gap typed composition are current; this is not a second gap syntax, lifecycle, implementation, compatibility, or migration owner, the combined program-wide public-no-drift row remains pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted",
+    "implementation_boundary": "recognition transaction safety, recursive-observation spelling, dedicated private node, detached carrier, parser behavior, exact six-runtime recurring composition, public projection/no-drift proof, and lossless-gap typed composition are current; this is not a second transaction or gap syntax, lifecycle, implementation, compatibility, or migration owner, progressive dispatch, staged dispatch, and combined program-wide public-no-drift remain pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted",
 }
 
 CANONICAL_EXECUTION = {
@@ -324,7 +333,7 @@ RECURSIVE_OBSERVATION_PUBLIC_NO_DRIFT = {
         {
             "path": "capability_conformance/README.md",
             "required_markers": [
-                "Recursive-observation public projection/no-drift is current without a new public API; after lossless-gap typed composition the 14-row rollout is 10 complete / 4 pending."
+                "Recursive-observation public projection/no-drift is current without a new public API; its own rollout row remains complete."
             ],
         },
         {
@@ -384,6 +393,93 @@ RECURSIVE_OBSERVATION_PUBLIC_NO_DRIFT = {
 }
 
 RECURSIVE_OBSERVATION_PUBLIC_MUTATION_COUNT = 18
+
+TRANSACTION_SAFETY_COMPOSITION = {
+    "owner": "FUTURE-PARITY-BACKLOG.14.6.0.1",
+    "status": "complete",
+    "policy": "project the separately owned current recognition-transaction authority into the typed cursor algebra without duplicating syntax, runtime behavior, recurrence, or public admission",
+    "upstream_recognition_authority": {
+        "contract_id": "linkedspec-recognition-transaction-v1",
+        "contract_path": "capability_conformance/recognition_transaction_contract.json",
+        "checker_path": "tools/check_recognition_transaction_contract.py",
+        "driver_path": "tools/check_recognition_transaction_six_runtime.sh",
+        "status": "neutral_runtime_recurring_and_public_no_drift_complete",
+        "rollout": {"complete": 9, "pending": 0, "semantic_mutations": 58},
+        "topology": {"source_groups": 5, "runtime_routes": 6},
+        "effects": {
+            "allowed": 9,
+            "rejected": 11,
+            "uncommitted_dispatch_effect": "parser_registry_or_staged_dispatch",
+        },
+        "progress": {
+            "cases": 8,
+            "policy": "every accepted repetition iteration and accepted direct or mutual recursive cycle edge requires end_offset greater than start_offset",
+        },
+        "public_no_drift": {"documents": 3, "forbidden_claims": 26, "mutations": 45},
+        "capability_guide_no_drift": {"documents": 1, "forbidden_claims": 14, "mutations": 18},
+    },
+    "typed_projection": {
+        "leg": "transaction_safety",
+        "representation": "one opaque linear recognition token snapshots and may restore only the owning invocation cursor, anonymous boundary, and named marks",
+        "effect_boundary": "uncommitted recognition rejects registry or staged dispatch and every other non-recognition effect before commit",
+        "progress_boundary": "rolled-back work does not establish progress; accepted repetition and recursive-cycle edges require cursor advance",
+        "runtimes": ["perl", "rust", "dart", "julia", "puc_lua", "luajit"],
+        "behavior_owner": "FUTURE-PARITY-BACKLOG.14.3 owns syntax, runtime behavior, recurrence, and public no-drift",
+    },
+    "current_projection_no_drift": {
+        "documents": [
+            {
+                "path": "docs/knowledge/cursor-transaction-authored-contract.md",
+                "required_markers": [
+                    "Recognition transactions are current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; the exact recurring and public no-drift rollout is 9/9 complete."
+                ],
+            },
+            {
+                "path": "docs/knowledge/cursor-transaction-safety-audit-plan.md",
+                "required_markers": [
+                    "The implementation program is complete across neutral authority, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurrence, and public no-drift."
+                ],
+            },
+            {
+                "path": "docs/knowledge/typed-source-location-cursor-algebra-direction.md",
+                "required_markers": [
+                    "Typed transaction composition is current at six runtimes and the typed rollout is 11 complete / 3 pending."
+                ],
+            },
+            {
+                "path": "docs/linkedspec-book/src/overview/project-status.md",
+                "required_markers": [
+                    "Typed transaction composition is now current at 11 complete / 3 pending; progressive dispatch, staged dispatch, and combined program-wide no-drift remain pending."
+                ],
+            },
+            {
+                "path": "capability_conformance/README.md",
+                "required_markers": [
+                    "Typed transaction composition is current and promotes only `transaction_safety`; the typed rollout is 11 complete / 3 pending."
+                ],
+            },
+        ],
+        "forbidden_claims": [
+            {"path": "docs/knowledge/cursor-transaction-authored-contract.md", "text": "status: accepted authored/static contract; current on Perl and Rust; other runtime support pending"},
+            {"path": "docs/knowledge/cursor-transaction-authored-contract.md", "text": "current on Perl and Rust and future on the other runtimes"},
+            {"path": "docs/knowledge/cursor-transaction-authored-contract.md", "text": "These spellings and rules are current executable syntax on the independently admitted Perl and Rust backends."},
+            {"path": "docs/knowledge/cursor-transaction-safety-audit-plan.md", "text": "status: behavior-free audit frozen; exact future authored/static contract ratified; executable implementation pending"},
+            {"path": "docs/knowledge/typed-source-location-cursor-algebra-direction.md", "text": "lossless-gap handoff frozen"},
+            {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "Ten of 14 rollout legs are complete and 4 remain pending."},
+            {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "their rollout is 10 complete / 4 pending"},
+            {"path": "capability_conformance/README.md", "text": "Current governance is 126 mutations and rollout is 10 complete / 4 pending across 14 legs:"},
+        ],
+    },
+    "rollout_assertions": {
+        "row_count": 14,
+        "transaction_safety": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.3"},
+        "progressive_span_dispatch": {"status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.6"},
+        "staged_span_dispatch": {"status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.7"},
+        "recurring_public_no_drift": {"status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.8"},
+    },
+}
+
+TRANSACTION_SAFETY_COMPOSITION_PUBLIC_MUTATION_COUNT = 10
 
 LOSSLESS_GAP_COMPOSITION = {
     "owner": "FUTURE-PARITY-BACKLOG.14.5.1",
@@ -875,7 +971,12 @@ ROLLOUT = [
     ("dart_runtime", "complete", "FUTURE-PARITY-BACKLOG.14.2.3.3", ["dart"]),
     ("julia_runtime", "complete", "FUTURE-PARITY-BACKLOG.14.2.4.3", ["julia"]),
     ("lua_dual_abi", "complete", "FUTURE-PARITY-BACKLOG.14.2.5.3", ["puc_lua", "luajit"]),
-    ("transaction_safety", "pending", "FUTURE-PARITY-BACKLOG.14.3", []),
+    (
+        "transaction_safety",
+        "complete",
+        "FUTURE-PARITY-BACKLOG.14.3",
+        ["perl", "rust", "dart", "julia", "puc_lua", "luajit"],
+    ),
     (
         "recursive_observation",
         "complete",
@@ -919,6 +1020,79 @@ def require_list(value: Any, context: str, length: int | None = None) -> list[An
     if length is not None and len(value) != length:
         fail(f"{context} count drifted")
     return value
+
+
+def transaction_safety_composition_texts(
+    composition: dict[str, Any],
+) -> dict[str, str]:
+    document_texts: dict[str, str] = {}
+    for row in composition["current_projection_no_drift"]["documents"]:
+        path = row["path"]
+        source = ROOT / path
+        if not source.is_file():
+            fail(f"transaction-safety composition document is missing: {path}")
+        document_texts[path] = source.read_text(encoding="utf-8")
+    return document_texts
+
+
+def validate_transaction_safety_composition(
+    composition: dict[str, Any],
+    rollout: list[dict[str, Any]],
+    document_texts: dict[str, str] | None = None,
+) -> None:
+    if composition != TRANSACTION_SAFETY_COMPOSITION:
+        fail("transaction-safety composition contract drifted")
+
+    projection = composition["current_projection_no_drift"]
+    documents = projection["documents"]
+    document_paths = [row["path"] for row in documents]
+    if len(document_paths) != len(set(document_paths)):
+        fail("transaction-safety composition document inventory drifted")
+    forbidden_claims = projection["forbidden_claims"]
+    forbidden_pairs = [(row["path"], row["text"]) for row in forbidden_claims]
+    if len(forbidden_pairs) != len(set(forbidden_pairs)):
+        fail("transaction-safety composition forbidden-claim inventory drifted")
+    if any(path not in document_paths for path, _text in forbidden_pairs):
+        fail("transaction-safety composition forbidden claim has an unmanaged path")
+
+    assertions = composition["rollout_assertions"]
+    if assertions["row_count"] != len(rollout):
+        fail("transaction-safety composition changed rollout cardinality")
+    rollout_by_leg = {row["leg"]: row for row in rollout}
+    for leg in (
+        "transaction_safety",
+        "progressive_span_dispatch",
+        "staged_span_dispatch",
+        "recurring_public_no_drift",
+    ):
+        actual = rollout_by_leg.get(leg)
+        expected = assertions[leg]
+        if actual is None or {
+            "status": actual["status"],
+            "owner": actual["owner"],
+        } != expected:
+            fail(f"transaction-safety composition rollout assertion drifted: {leg}")
+
+    if document_texts is None:
+        return
+    if set(document_texts) != set(document_paths):
+        fail("transaction-safety composition document text inventory drifted")
+    for row in documents:
+        path = row["path"]
+        markers = row["required_markers"]
+        if not markers or len(markers) != len(set(markers)):
+            fail(f"transaction-safety composition marker inventory drifted: {path}")
+        for marker in markers:
+            if document_texts[path].count(marker) != 1:
+                fail(
+                    "transaction-safety composition marker missing or duplicated: "
+                    f"{path}: {marker}"
+                )
+    for row in forbidden_claims:
+        path = row["path"]
+        claim = row["text"]
+        if claim in document_texts[path]:
+            fail(f"stale transaction-safety composition claim remains: {path}: {claim}")
 
 
 def recursive_observation_public_texts(
@@ -1537,6 +1711,8 @@ def apply_recursive_observation_transition(
 
 
 def validate_contract(contract: dict[str, Any], *, check_registration: bool = True) -> None:
+    if "transaction_safety_composition" not in contract:
+        fail("transaction-safety composition contract is missing")
     if "lossless_gap_composition" not in contract:
         fail("lossless-gap composition contract is missing")
     if "recursive_observation_recurring_gate" not in contract:
@@ -1569,6 +1745,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         "recurring_gate",
         "recursive_observation_recurring_gate",
         "recursive_observation_public_no_drift",
+        "transaction_safety_composition",
         "lossless_gap_composition",
         "rollout",
     ]
@@ -1579,7 +1756,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         fail("contract id drifted")
     if contract["task_owner"] != "FUTURE-PARITY-BACKLOG.14.1.1":
         fail("task owner drifted")
-    if contract["status"] != "neutral_contract_with_recursive_observation_public_no_drift_and_lossless_gap_composition":
+    if contract["status"] != "neutral_contract_with_transaction_safety_recursive_observation_public_no_drift_and_lossless_gap_composition":
         fail("typed source-location status drifted")
     if contract["expected_counts"] != EXPECTED_COUNTS:
         fail("expected counts drifted")
@@ -2212,6 +2389,11 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         recursive_observation_public,
         rollout,
     )
+    transaction_safety_composition = contract["transaction_safety_composition"]
+    validate_transaction_safety_composition(
+        transaction_safety_composition,
+        rollout,
+    )
     lossless_gap_composition = contract["lossless_gap_composition"]
     if lossless_gap_composition != LOSSLESS_GAP_COMPOSITION:
         fail("lossless-gap composition contract drifted")
@@ -2289,6 +2471,9 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             LOSSLESS_GAP_CHECKER_PATH,
             LOSSLESS_GAP_DRIVER_PATH,
             TYPED_GAP_COMPOSITION_DRIVER_PATH,
+            RECOGNITION_TRANSACTION_CONTRACT_PATH,
+            RECOGNITION_TRANSACTION_CHECKER_PATH,
+            RECOGNITION_TRANSACTION_DRIVER_PATH,
             PROJECT_DATA_WORKFLOW_ROUTING_PATH,
         ):
             if not path.is_file():
@@ -2302,6 +2487,52 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             public_document_texts,
             public_surface_texts,
         )
+        transaction_document_texts = transaction_safety_composition_texts(
+            transaction_safety_composition
+        )
+        validate_transaction_safety_composition(
+            transaction_safety_composition,
+            rollout,
+            transaction_document_texts,
+        )
+        recognition_contract = json.loads(
+            RECOGNITION_TRANSACTION_CONTRACT_PATH.read_text(encoding="utf-8")
+        )
+        recognition_authority = transaction_safety_composition[
+            "upstream_recognition_authority"
+        ]
+        recognition_counts = recognition_contract.get("expected_counts", {})
+        recognition_rollout = recognition_contract.get("rollout", [])
+        if recognition_contract.get("contract_id") != recognition_authority["contract_id"]:
+            fail("transaction-safety upstream recognition contract identity drifted")
+        if recognition_contract.get("status") != recognition_authority["status"]:
+            fail("transaction-safety upstream recognition status drifted")
+        if {
+            "complete": sum(row.get("status") == "complete" for row in recognition_rollout),
+            "pending": sum(row.get("status") == "pending" for row in recognition_rollout),
+            "semantic_mutations": recognition_counts.get("mutations"),
+        } != recognition_authority["rollout"]:
+            fail("transaction-safety upstream rollout or mutation authority drifted")
+        recurring_gate = recognition_contract.get("recurring_gate", {})
+        if {
+            "source_groups": len(recurring_gate.get("consumer_sources", [])),
+            "runtime_routes": len(recurring_gate.get("runtime_routes", [])),
+        } != recognition_authority["topology"]:
+            fail("transaction-safety upstream recurring topology drifted")
+        effect_model = recognition_contract.get("effect_model", {})
+        if {
+            "allowed": len(effect_model.get("allowed", [])),
+            "rejected": len(effect_model.get("rejected", [])),
+            "uncommitted_dispatch_effect": "parser_registry_or_staged_dispatch",
+        } != recognition_authority["effects"]:
+            fail("transaction-safety upstream effect authority drifted")
+        if "parser_registry_or_staged_dispatch" not in effect_model.get("rejected", []):
+            fail("transaction-safety upstream uncommitted-dispatch rejection drifted")
+        progress_cases = recognition_contract.get("fixtures", {}).get("progress", [])
+        if len(progress_cases) != recognition_authority["progress"]["cases"]:
+            fail("transaction-safety upstream progress fixture authority drifted")
+        if recognition_contract.get("policy", {}).get("progress") != recognition_authority["progress"]["policy"]:
+            fail("transaction-safety upstream progress policy drifted")
         gap_contract = json.loads(LOSSLESS_GAP_CONTRACT_PATH.read_text(encoding="utf-8"))
         upstream = lossless_gap_composition["upstream_gap_authority"]
         if gap_contract.get("contract_id") != upstream["contract_id"]:
@@ -2925,6 +3156,96 @@ def mutation_checks(contract: dict[str, Any]) -> int:
             ]["recurring_public_no_drift"].__setitem__("status", "complete"),
         ),
         (
+            "transaction-safety composition owner",
+            lambda c: c["transaction_safety_composition"].__setitem__(
+                "owner", "FUTURE-PARITY-BACKLOG.14.6"
+            ),
+        ),
+        (
+            "transaction-safety composition status",
+            lambda c: c["transaction_safety_composition"].__setitem__(
+                "status", "pending"
+            ),
+        ),
+        (
+            "transaction-safety upstream contract identity",
+            lambda c: c["transaction_safety_composition"][
+                "upstream_recognition_authority"
+            ].__setitem__("contract_id", "wrong"),
+        ),
+        (
+            "transaction-safety upstream contract path",
+            lambda c: c["transaction_safety_composition"][
+                "upstream_recognition_authority"
+            ].__setitem__("contract_path", "capability_conformance/wrong.json"),
+        ),
+        (
+            "transaction-safety upstream checker path",
+            lambda c: c["transaction_safety_composition"][
+                "upstream_recognition_authority"
+            ].__setitem__("checker_path", "tools/wrong.py"),
+        ),
+        (
+            "transaction-safety upstream driver path",
+            lambda c: c["transaction_safety_composition"][
+                "upstream_recognition_authority"
+            ].__setitem__("driver_path", "tools/wrong.sh"),
+        ),
+        (
+            "transaction-safety upstream status",
+            lambda c: c["transaction_safety_composition"][
+                "upstream_recognition_authority"
+            ].__setitem__("status", "pending"),
+        ),
+        (
+            "transaction-safety upstream mutation count",
+            lambda c: c["transaction_safety_composition"][
+                "upstream_recognition_authority"
+            ]["rollout"].__setitem__("semantic_mutations", 57),
+        ),
+        (
+            "transaction-safety upstream allowed-effect count",
+            lambda c: c["transaction_safety_composition"][
+                "upstream_recognition_authority"
+            ]["effects"].__setitem__("allowed", 8),
+        ),
+        (
+            "transaction-safety upstream rejected-effect count",
+            lambda c: c["transaction_safety_composition"][
+                "upstream_recognition_authority"
+            ]["effects"].__setitem__("rejected", 10),
+        ),
+        (
+            "transaction-safety upstream progress count",
+            lambda c: c["transaction_safety_composition"][
+                "upstream_recognition_authority"
+            ]["progress"].__setitem__("cases", 7),
+        ),
+        (
+            "transaction-safety upstream public count",
+            lambda c: c["transaction_safety_composition"][
+                "upstream_recognition_authority"
+            ]["public_no_drift"].__setitem__("documents", 2),
+        ),
+        (
+            "transaction-safety upstream guide count",
+            lambda c: c["transaction_safety_composition"][
+                "upstream_recognition_authority"
+            ]["capability_guide_no_drift"].__setitem__("forbidden_claims", 13),
+        ),
+        (
+            "transaction-safety typed representation",
+            lambda c: c["transaction_safety_composition"][
+                "typed_projection"
+            ].__setitem__("representation", "cursor only"),
+        ),
+        (
+            "transaction-safety progressive row promoted",
+            lambda c: c["transaction_safety_composition"][
+                "rollout_assertions"
+            ]["progressive_span_dispatch"].__setitem__("status", "complete"),
+        ),
+        (
             "lossless-gap composition owner",
             lambda c: c["lossless_gap_composition"].__setitem__(
                 "owner", "FUTURE-PARITY-BACKLOG.14.8"
@@ -3106,6 +3427,10 @@ def mutation_checks(contract: dict[str, Any]) -> int:
             lambda c: c["rollout"][7].__setitem__("status", "pending"),
         ),
         (
+            "transaction-safety composition regressed to pending",
+            lambda c: c["rollout"][8].__setitem__("status", "pending"),
+        ),
+        (
             "recursive-observation recurrence regressed to pending",
             lambda c: c["rollout"][9].__setitem__("status", "pending"),
         ),
@@ -3117,6 +3442,7 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         + len(rollout_regressions)
         != EXPECTED_COUNTS["mutations"]
         - RECURSIVE_OBSERVATION_PUBLIC_MUTATION_COUNT
+        - TRANSACTION_SAFETY_COMPOSITION_PUBLIC_MUTATION_COUNT
     ):
         fail("checker mutation inventory count drifted")
     for name, mutate in mutations:
@@ -3205,11 +3531,52 @@ def recursive_observation_public_mutation_checks(contract: dict[str, Any]) -> in
     return len(mutations)
 
 
+def transaction_safety_composition_public_mutation_checks(
+    contract: dict[str, Any],
+) -> int:
+    composition = contract["transaction_safety_composition"]
+    projection = composition["current_projection_no_drift"]
+    document_texts = transaction_safety_composition_texts(composition)
+    first_document = projection["documents"][0]
+    first_path = first_document["path"]
+    first_marker = first_document["required_markers"][0]
+    mutations: list[tuple[str, str, str, str]] = [
+        ("required marker deleted", "replace", first_path, first_marker),
+        ("required marker duplicated", "append", first_path, first_marker),
+    ]
+    mutations.extend(
+        (f"stale claim {index}", "append", row["path"], row["text"])
+        for index, row in enumerate(projection["forbidden_claims"], 1)
+    )
+    if len(mutations) != TRANSACTION_SAFETY_COMPOSITION_PUBLIC_MUTATION_COUNT:
+        fail("transaction-safety composition public mutation inventory count drifted")
+
+    for name, operation, path, value in mutations:
+        candidate_texts = dict(document_texts)
+        if operation == "replace":
+            candidate_texts[path] = candidate_texts[path].replace(value, "", 1)
+        elif operation == "append":
+            candidate_texts[path] += "\n" + value
+        else:
+            fail(f"unknown transaction-safety composition mutation operation: {operation}")
+        try:
+            validate_transaction_safety_composition(
+                composition,
+                contract["rollout"],
+                candidate_texts,
+            )
+        except ContractError:
+            continue
+        fail(f"transaction-safety composition public mutation {name!r} was not rejected")
+    return len(mutations)
+
+
 def main() -> int:
     contract = json.loads(CONTRACT_PATH.read_text(encoding="utf-8"))
     validate_contract(contract)
     mutation_count = mutation_checks(contract)
     mutation_count += recursive_observation_public_mutation_checks(contract)
+    mutation_count += transaction_safety_composition_public_mutation_checks(contract)
     complete = sum(leg["status"] == "complete" for leg in contract["rollout"])
     pending = len(contract["rollout"]) - complete
     print(

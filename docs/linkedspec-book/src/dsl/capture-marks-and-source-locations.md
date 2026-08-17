@@ -142,7 +142,7 @@ capability, and language-coverage ledgers. Canonical CI exposes the same route b
 `LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1`. Twelve new regressions lock topology, repository-local storage,
 canonical registration, and recurrence-only promotion. Twenty-seven public-contract, document, stale-claim, and
 surface-guard mutations close the observation projection without changing that row. The recursive-observation
-row remains complete; lossless-gap typed composition now makes overall typed-source rollout 10 complete / 4 pending with 126 mutations. There is still no public helper, authored
+row remains complete; lossless-gap and transaction-safety composition now make overall typed-source rollout 11 complete / 3 pending with 152 mutations. There is still no public helper, authored
 `Position`/`Span` value, descriptor/generated version, result-schema field, semantic/MCP projection, CLI option,
 or README behavior; the combined program-wide public-no-drift row remains pending for `.14.8`. Definitive local CI passes containment/relocation, CLI
 66/66 twice, RAM 62%, Phase 0 1,031/1,031 in 723 seconds, and the complete observation matrix.
@@ -358,12 +358,13 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 
 The checker covers 3 decoded sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation,
 8 transaction, and 33 recursive-observation transitions, 6 detached observations, 4 structural cases,
-33 diagnostics, and 126 mutations.
+33 diagnostics, and 152 mutations.
 It also proves that all 92 current source-boundary helpers project onto the algebra.
 
-This is rollout status, not authored-value status. Ten of 14 rollout legs are complete: the neutral contract,
+This is rollout status, not authored-value status. Eleven of 14 rollout legs are complete: the neutral contract,
 public linked-rule structure, unchanged neutral/public recomposition, and the Perl, Rust, Dart, Julia, PUC Lua,
-and LuaJIT runtime targets, plus recursive-observation recurrence and lossless-gap composition. The other four remain pending.
+and LuaJIT runtime targets, plus transaction safety, recursive-observation recurrence, and lossless-gap composition.
+Progressive dispatch, staged dispatch, and combined program-wide no-drift remain pending.
 
 Perl now uses an internal decoded-source authority plus immutable position/span values beneath every governed
 helper projection. Exact Unicode execution is admitted on live and independently emitted/loaded generated routes.
@@ -419,7 +420,8 @@ nodes, recursive effect/progress policy, and all four runtime carriers after rec
 while the consumer is ordinarily and canonically discovered once per ABI. Transaction rollout is complete at
 9/9 under `.14.3.8`; the unchanged recurring authority and all six admissions remain exact. The separate typed-source combined
 recurring/public-no-drift row remains pending for final program-wide closeout `FUTURE-PARITY-BACKLOG.14.8`, so
-typed-source composition is 10 complete / 4 pending with 126 mutations.
+typed-source composition is 11 complete / 3 pending with 152 mutations. The transaction row is an authority
+projection of the separately complete 9/9 recognition program: it changes no syntax, runtime, or public API.
 
 Progressive span dispatch is still future behavior, but `.14.6.0` now fixes its authority boundary. It will accept
 one contiguous direct span plus an explicitly pre-registered, already compiled parser identity—not a path. The
@@ -1115,8 +1117,9 @@ It validates typed-source governance, then the complete neutral/Perl/Rust/Dart/J
 then recognition, generated-source, capability, and language ledgers. Canonical CI exposes the same rooted route
 behind `LINKEDSPEC_RUN_TYPED_GAP_COMPOSITION_MATRIX=1`. Twelve new mutations reject a changed upstream contract,
 count, projection, ordering, storage route, canonical switch, or completion regression. Overall typed-source
-truth is 10 complete / 4 pending / 126 mutations; only `lossless_gap_composition` moved. Final combined public
-no-drift remains owned by `.14.8`.
+truth after this gap slice was 10 complete / 4 pending / 126 mutations; only `lossless_gap_composition` moved.
+Corrective `.14.6.0.1` subsequently projects the complete recognition authority into `transaction_safety`, making
+current typed truth 11 complete / 3 pending / 152 mutations. Final combined public no-drift remains owned by `.14.8`.
 
 This composition creates no new grammar, lifecycle, runtime state, compatibility rule, migration, facade,
 descriptor schema, semantic/MCP field, CLI option, README surface, or implicit parser authority.

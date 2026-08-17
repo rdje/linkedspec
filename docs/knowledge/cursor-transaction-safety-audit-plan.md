@@ -14,13 +14,15 @@ answers:
   - "has LinkedSpec selected checkpoint transaction syntax"
   - "what is the FUTURE PARITY BACKLOG 14.3 implementation split"
 date: 2026-08-09
-status: behavior-free audit frozen; exact future authored/static contract ratified; executable implementation pending under FUTURE-PARITY-BACKLOG.14.3.1.1-.14.3.8
+status: audit complete; exact authored/static contract and six-runtime implementation, recurrence, and public no-drift current
 tags: [architecture, cursor, transactions, marks, invocation, progress, effects, diagnostics, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.14.3.0 retrieves ADR 0056 and uses LinkedSpec::call_spec_handler_subst, LinkedSpec::Get, runtime_ctx_ref, trace output, and return_descriptor before source inspection. save_cursor lowers to cursor_checkpoint_compatibility and restore_cursor pops one execution-context cursor_stack entry. Same-label recursive input aa returns mark_pos(shared)=2, proving the child overwrites the parent bucket. Direct no-consume recursion returns undef, emits the rule_handler_forward_progress cutoff, and leaves last_error null. OR{,3} over /x*/ returns one Z and stops without a diagnostic. Backend source confirms rule-label mark maps, execution-context cursor stacks, saved child match/capture registers, and no closed ActionIR effect taxonomy. Git blame proves the stale reversed-span parent phrase predates the .14.2.0 diagnostic-owner amendment."
 reverify: "perl -Iperl -MLinkedSpec -e 'print LinkedSpec::call_spec_handler_subst(\"Top\", q{save_cursor(); restore_cursor()})' && rg -n 'marks|markBuckets|mark_buckets|cursor_stack|cursorStack|activeRuleEntries|active_rule_entries|recursion_active' perl/LinkedSpec/SpecEntry.pm rust/linkedspec-runtime/src/runtime.rs dart/lib/src/runtime/interpreter.dart julia/src/runtime/Interpreter.jl lua/src/linkedspec/interpreter.lua && rg -n 'Cursor transactions|transaction-safety implementation boundary|FUTURE-PARITY-BACKLOG[.]14[.]3' docs/decisions/0056-typed-source-location-and-cursor-algebra.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
 ---
 
 # Cursor transaction safety audit and implementation plan
+
+The implementation program is complete across neutral authority, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurrence, and public no-drift.
 
 ## Current mechanisms are compatibility state, not transactions
 
@@ -68,11 +70,11 @@ callable/user-function invocation, binding/aggregate/AST mutation, compatibility
 authored diagnostics, exit, parser/registry/external work, and host effects fail closed. Static proof is primary;
 a runtime barrier catches dynamic violations.
 
-V1 proves cursor advance only and selects no authored decreasing-measure API. Behavior-free `.14.3.1.0` ratifies
+V1 proves cursor advance only and selects no authored decreasing-measure API. Behavior-free `.14.3.1.0` ratified
 `recognition_checkpoint()`, `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and
 `recognition_rollback(token)` as accepted future special forms. `recognize_once` exposes a strict match boolean;
 commit separately exposes the staged child payload, preserving falsey successful results and the exact explicit
-meaning of `call(Rule)`. The forms remain unavailable until their neutral and backend behavior owners land.
+meaning of `call(Rule)`. Their neutral and six-runtime behavior owners are now complete.
 
 ## Ownership and rollout
 
@@ -81,10 +83,9 @@ The parent task's `reversed-span` phrase was older than the `.14.2.0` ownership 
 state. `.14.3` owns mark lifetime, token validity/lifecycle, effect-before-commit, cross-rule/source restoration,
 nullable repetition, and direct/mutual recursion. `.14.7` retains staged-dispatch cycles.
 
-Neutral syntax/effects and executable conformance precede backend code. Perl, Rust, Dart, Julia, and one shared Lua
-implementation are then admitted independently; the Lua consumer runs separately on PUC Lua and LuaJIT. A final
-six-runtime recurring route promotes only transaction safety, and no-change `.14.3.8` closes the parent before
-recursive observation `.14.4`.
+Neutral syntax/effects and executable conformance preceded backend code. Perl, Rust, Dart, Julia, and one shared Lua
+implementation were admitted independently; the Lua consumer runs separately on PUC Lua and LuaJIT. The final
+six-runtime recurring route and `.14.3.8` public no-drift closeout completed the nine-row recognition rollout.
 
 Related: [[typed-source-location-cursor-algebra-direction]], [[complete-named-mark-perl-rust-parity]],
 [[top-rule-recursion-forward-progress-guard]], and [[rule-local-cursor-ownership-decision]].

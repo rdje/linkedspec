@@ -4884,24 +4884,9 @@
     absent effect/progress/runtime routes. Julia 127/19/5/66x2/105, book 79/14,404 KiB, eight doctrines, RAM 68%,
     and canonical Phase 0 1,031/1,031 in 747 sec pass with recognition 132/246/43 and rollout 4/9 unchanged.
 - ID: `FUTURE-PARITY-BACKLOG.14.3.5.2`
-  Status: `complete` (2026-08-11; atomic 199/300 from clean activation `923285aa`; no push)
-  Goal: Integrate exact Julia syntax/runtime/effect/progress parity through all required carriers.
-  Depends on: `.14.3.5.1`
-  Commit: `FUTURE-PARITY-BACKLOG.14.3.5.2 - integrate Julia recognition transactions`
-  Evidence: four private non-eager nodes plus recursive effect/cursor-progress policy and one authority-backed
-    native/reconstructed/generated-plan/emitted adapter pass integration 203/203 and authority 155/155. Julia
-    typed source 127/storage 19/5/CLI/corpus 105, book 79/14,404 KiB, eight doctrines, CLI 66x2, RAM 65%, and
-    canonical Phase 0 1,031/1,031 in 731 sec pass; rollout stays 4/9 and discovery/export remain dormant.
+  Status: `complete` (2026-08-11; atomic 199/300 from clean activation `923285aa`; no push); Goal: Integrate exact Julia syntax/runtime/effect/progress parity through all required carriers; Depends on: `.14.3.5.1`; Commit: `FUTURE-PARITY-BACKLOG.14.3.5.2 - integrate Julia recognition transactions`; Evidence: four private non-eager nodes plus recursive effect/cursor-progress policy and one authority-backed native/reconstructed/generated-plan/emitted adapter pass integration 203/203 and authority 155/155. Julia typed source 127/storage 19/5/CLI/corpus 105, book 79/14,404 KiB, eight doctrines, CLI 66x2, RAM 65%, and canonical Phase 0 1,031/1,031 in 731 sec pass; rollout stays 4/9 and discovery/export remain dormant.
 - ID: `FUTURE-PARITY-BACKLOG.14.3.5.3`
-  Status: `complete` (2026-08-11; definitive signoff complete and commit-ready as atomic 200/300 from clean
-    activation `0d15f8c2`; no push)
-  Goal: Remove Julia dormancy, register ordinary/canonical proof, and promote only Julia transaction admission.
-  Depends on: `.14.3.5.2`
-  Commit: `FUTURE-PARITY-BACKLOG.14.3.5.3 - admit Julia recognition transactions`
-  Evidence: exact Julia 203/203 is ordinary/canonical once without selector/conditional dormancy; the namespace
-    remains private/unexported. Neutral 132/246/44 at rollout 5/9, public 3/17/33, guide 1/8/12, Perl 51/51, Rust
-    12/12, Dart 10/10, complete Julia package/primary/corpus 105, book 79/14,404 KiB, all eight doctrines, CLI 66x2,
-    RAM 69%, and canonical Phase 0 1,031/1,031 in 738 sec pass through the exact success marker; Lua/later remain RED.
+  Status: `complete` (2026-08-11; definitive signoff complete and commit-ready as atomic 200/300 from clean activation `0d15f8c2`; no push); Goal: Remove Julia dormancy, register ordinary/canonical proof, and promote only Julia transaction admission; Depends on: `.14.3.5.2`; Commit: `FUTURE-PARITY-BACKLOG.14.3.5.3 - admit Julia recognition transactions`; Evidence: exact Julia 203/203 is ordinary/canonical once without selector/conditional dormancy; the namespace remains private/unexported. Neutral 132/246/44 at rollout 5/9, public 3/17/33, guide 1/8/12, Perl 51/51, Rust 12/12, Dart 10/10, complete Julia package/primary/corpus 105, book 79/14,404 KiB, all eight doctrines, CLI 66x2, RAM 69%, and canonical Phase 0 1,031/1,031 in 738 sec pass through the exact success marker; Lua/later remain RED.
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6`
   Status: `complete` (2026-08-11; admission `.3` signoff-complete as atomic 204/300 from `70b4ed04`; no push); Goal: Implement one shared Lua transaction/progress core and independently admit it on PUC Lua and LuaJIT; Depends on: `.14.3.5`; Children: `.14.3.6.0-.14.3.6.3`.
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6.0`
@@ -4954,7 +4939,7 @@
   - [x] **NO REGRESSION** — `recurring_public_no_drift` stays incomplete under `.14.8`; exact gap/language/recognition, implementations/compatibility, generated/capability/semantic/MCP/CLI/README, storage, and separate owners stay unchanged.
   - [x] **LOCKSTEP** — Task/index, ADR/Knowledge, TOOLBOX/capability, roadmaps/architecture/live/history/memory, and example-rich mdBook are synchronized; rendered output is inspected/removed and the leaf-id commit/brief-clear/clean handoff workflow is selected.
 - ID: `FUTURE-PARITY-BACKLOG.14.6`
-  Status: `active` (2026-08-17; audit `.14.6.0` signoff-complete for intended atomic 257; corrective `.14.6.0.1` next); Goal: Specify and implement authority-preserving span-native progressive in-parse dispatch; Children: audit `.0`, corrective prerequisite `.0.1`, neutral `.1`, Perl `.2`, Rust `.3`, Dart `.4`, Julia `.5`, shared-Lua `.6`, recurrence `.7`, and public closeout `.8`.
+  Status: `active` (2026-08-17; audit `.0` landed at `1a6e0b1f`; corrective `.0.1` focused-signoff-complete for intended atomic 258; neutral `.1` next); Goal: Specify and implement authority-preserving span-native progressive in-parse dispatch; Children: audit `.0`, corrective prerequisite `.0.1`, neutral `.1`, Perl `.2`, Rust `.3`, Dart `.4`, Julia `.5`, shared-Lua `.6`, recurrence `.7`, and public closeout `.8`.
 - ID: `FUTURE-PARITY-BACKLOG.14.6.0`
   Status: `done; focused-signoff-complete` (2026-08-17; behavior-free audit from clean `8880d1b6`; intended atomic 257; no push)
   Goal: Audit committed loaded-spec, typed-span, registry/dispatch, policy, cancellation, diagnostics, and backend authorities; prove current versus future in-parse composition; freeze source-view rebasing, pre-registration, top-rule/capability/policy/cancellation/cycle/progress/transaction semantics, zero implicit paths, neutral/backend/recurring/public ownership, and safe leaf sizes before behavior.
@@ -4967,7 +4952,19 @@
   Evidence: committed registry blobs Perl `09e5008e`, Rust `b9033595`, Dart `8eb8b7e1`, Julia `c6c7b10f`, Lua `b128a9f8`; exact Perl unsupported-helper/ordinary-spec rejection probes; Rust staged registry 1/1 and Dart 5/5; typed 10/4/126, recognition 137/250/58, capability 80/0/0, language 250/105+1/126; task 535 IDs, book 78/15,000 KiB, Knowledge 842/7,124, bounded histories, README/memory, all nine doctrines, no production diff, no managed-run residue, and exact diff checks pass.
   Commit: `FUTURE-PARITY-BACKLOG.14.6.0 - audit progressive span dispatch`
 - ID: `FUTURE-PARITY-BACKLOG.14.6.0.1`
-  Status: `pending`; Goal: Correct the typed-source transaction-composition ledger and reject the stale project-status transaction/observation projection without changing transaction or progressive behavior; Depends on: `.14.6.0`; Verification tier: focused.
+  Status: `done; focused-signoff-complete` (2026-08-17; task-tree-first from clean audit commit `1a6e0b1f`; intended atomic 258; no push)
+  Goal: Correct the typed-source transaction-composition ledger and reject stale transaction/observation current-state projection without changing transaction or progressive behavior.
+  Depends on: `.14.6.0`, completed recognition-transaction `.14.3` authority.
+  Acceptance: write checker-first RED for the missing typed transaction-composition authority; bind the committed recognition 9/9 contract, exact six-runtime recurring driver, effect/progress semantics, and public-no-drift boundary; promote only typed `transaction_safety` to complete with its six runtimes; add stale-current and regression mutations; keep progressive/staged/combined rows pending and change no parser/compiler/runtime/facade/schema/semantic/MCP/CLI/README behavior.
+  Verification tier: `focused`
+  Focused checks: exact missing-composition RED; typed and recognition neutral checkers; existing recognition six-runtime route plus generated/capability/language support ledgers; stale-current mutations; mdBook, Knowledge, task metadata, bounded histories, README, memory, all doctrines, no-production-diff, and exact diff checks.
+  Canonical trigger: `none` — correction projects an already complete private six-runtime authority into its pre-owned typed row; it adds no runtime admission, public contract, CI topology, dependency/toolchain, generated format, storage/path/doctrine infrastructure, or outward behavior.
+  Checklist: [x] clean activation/task ownership; [x] committed authority retrieval; [x] checker-first RED; [x] contract/checker correction; [x] stale-current/regression mutations; [x] focused six-runtime proof; [x] roadmap/Knowledge/book/live synchronization; [x] atomic commit/clean handoff.
+  RED evidence: after the complete checker oracle but before the typed contract changed, the repository-routed checker exited 1 only at exact `ContractError: transaction-safety composition contract is missing`.
+  GREEN evidence: the typed contract binds recognition 9/9/58, five source groups/six runtime routes, 9 allowed/11 rejected effects including uncommitted dispatch rejection, eight progress cases, public 3/26/45, and capability guide 1/14/18; promotes only `transaction_safety`; keeps progressive/staged/combined rows pending; and passes 11/3/152 with ten in-memory stale-projection mutations and no runtime/public change.
+  Focused evidence: the existing recurring route passes Perl 51, Rust 12, Dart, Julia 207, PUC Lua 246, LuaJIT 246, generated-source strict Rust 105/105, capability 80/0/0, and language 250/105+1/126 through its exact success marker. Knowledge passes 842 facts / 7,122 question keys; task metadata passes 535 stable IDs; the rendered book passes 79 files / 15,004 KiB with inspected 11/3/152 markers and removed output.
+  Signoff evidence: README remains 106/5,197; memory pointer resolves activation `1a6e0b1f` to the pre-commit HEAD; bounded history, no-production-diff, repository-local storage, and all nine doctrines pass; the leaf-id focused commit, brief-clear, and clean handoff are selected before `.14.6.1` activation.
+  Commit: `FUTURE-PARITY-BACKLOG.14.6.0.1 - correct typed transaction composition`
 - ID: `FUTURE-PARITY-BACKLOG.14.6.1`
   Status: `pending`; Goal: Select the private authored progressive form and add an executable backend-neutral contract/checker for contiguous direct-span dispatch, source-view rebasing, pre-registered identity/top rule, isolated child state, detached result, ceilings, cancellation, cycle/progress, transaction-effect rejection, diagnostics, and no implicit loading; Depends on: `.14.6.0.1`.
 - ID: `FUTURE-PARITY-BACKLOG.14.6.2`
