@@ -2,31 +2,31 @@
 
 ## Current Activity
 
-- Dart admission `.14.6.4.3` is canonical-signoff-complete from exact clean carrier atomic 270 `5b4d9c2d` for
-  intended atomic 271; parent `.14.6.4` is composition-closed.
-- The unchanged seven-group carrier consumer now lives at `dart/test/progressive_span_dispatch_contract_test.dart`;
-  ordinary discovery and one exact canonical requirement/marker/invocation run it, with no dormant duplicate.
-- Dart production behavior is unchanged: one exclusive logical-only node, static/live transaction defense, fresh
-  opaque authority, and native/reconstructed/generated-plan/independently analyzed emitted routes remain exact.
-- The authority-only consumer stays focused and dormant at 4/4. Fatal analysis and all 415 ordinary Dart tests pass.
-- Progressive rollout is neutral + Perl + Rust + Dart at 4/9; governance is 103 mutations with 9 Rust + 8 Dart
-  carrier paths, 2 remaining Julia/Lua guard groups/8 paths, 10 outward guards, and 26 diagnostics.
-- Typed remains 11/3/152 and recognition remains 138/250/58; generated format, recurrence, public projection,
-  facade/schema/MCP/CLI/README, and outward surfaces are unchanged.
-- Required note rollover creates segment 4992; ADR `0083` advances only finite engineering-history capacity to
-  16 files / 15 manifest lines while every aggregate, per-file, byte, lifecycle, owner, and verifier limit stays fixed.
-- Julia parent `.14.6.5` is the next task-tree-first frontier from the clean atomic-271 boundary.
+- Clean Dart closeout `3ccaf7c3` is current at progressive 4/9/103 and parent `.14.6.4` composition-closed.
+- Stable lookup places pending Julia `.14.6.5` in `.14.md`, which is exactly at its enforced 5,000-line ceiling;
+  Julia task expansion is paused before behavior rather than weakening task-tree-first or bounded storage.
+- Independent `FUTURE-PARITY-PARTITION-CAPACITY.0` freezes ADR `0084`: keep schema v1 and every pressure ceiling,
+  add one bounded `.14.6.5-.14.8` semantic member, and preserve every stable ID and evidence byte.
+- The exact moved pending block is 12 lines / 1,379 bytes. Original source provenance splits at `21064/21065` with
+  separately fixed line, byte, and SHA-256 accounting.
+- Canonical `.1` owns the atomic index/member/navigation/read/update/build/check/route/capability-consumer change;
+  focused `.2` independently recomposes it before returning the frontier to Julia.
+- No parser, compiler, runtime, backend, generated format, progressive rollout, typed row, public surface, README,
+  or immutable history byte changes in `.0`.
 
 ## Latest Completed Slice
 
-- `.14.6.4.3` admits the unchanged Dart carrier consumer ordinarily and canonically, promotes only Dart to 4/9/103,
-  and closes parent `.14.6.4` without production, generated-format, typed, public, or outward movement.
+- Capacity `.0` freezes exact saturation, source split, ADR `0084`, all topology consumers, rollback, and
+  no-behavior boundaries; focused task/route/capability/Knowledge/book/history/memory/doctrine proof passes.
 
 ## Next Action
 
-- Commit atomic 271, clear the brief, verify the clean boundary, then activate Julia parent `.14.6.5` task-tree-first.
+- Land focused capacity plan `.0`, then canonically implement the new bounded member in `.1` from that clean commit.
 
 ## Recent Completions
+
+- `2026-08-18` — capacity `.0` preserves every pressure ceiling and stable ID while freezing one bounded
+  `.14.6.5-.14.8` semantic member for canonical implementation and independent recomposition before Julia.
 
 - `2026-08-17` — `.14.6.4.3` moves the unchanged seven-group Dart consumer into ordinary discovery and one exact
   canonical route, advances only Dart to progressive 4/9/103, and composition-closes `.14.6.4`.
@@ -74,9 +74,6 @@
 
 - `2026-08-16` — `.7.3` independently recomposed every admitted gap/adjacent authority from public atomic 254
   `bb0c3768`, proved exact base-relative executable identity, closed the tree, and unblocked typed composition.
-
-- `2026-08-16` — `.7.2` landed cleanly as atomic 254 at `bb0c3768` with its canonical receipt promoted and brief
-  cleared; four shared calls and public no-drift are current without implementation/outward widening.
 
 ## History
 

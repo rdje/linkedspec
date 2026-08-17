@@ -13,7 +13,10 @@ The plan keeps `LIVE_ACHIEVEMENT_STATUS.md`, `CHANGES.md`, `DEVELOPMENT_NOTES.md
 repository-relative manifest records their clean Git source, line/byte counts, digest, immutable segments, and
 reconstruction query. Live status is a bounded overwrite view; changes and notes are bounded hot shards; the
 former oversized future tree is a 381-line live index over seven stable semantic parts and one immutable history
-part.
+part. After Dart progressive closeout, the `.14` member reached its exact 5,000-line ceiling before Julia planning
+could add required child leaves. ADR `0084` therefore freezes a behavior-free capacity extension: one new equally
+bounded `.14.6.5-.14.8` semantic member, unchanged stable IDs and aggregate/member ceilings, canonical atomic
+implementation, then independent recomposition. Until those leaves close, `.14.6.5` remains in its current owner.
 
 This is consumer-aware work. The six live JSON projections and seven executable checkers now use stable decision
 authority ADR `0067`, and the chronology root contains no capability marker authority. Nine executable checkers
@@ -178,7 +181,8 @@ is current. Canonical `.14.5.1` signoff passes nine doctrines, repository contai
 parent `.14.5` is closed; progressive span dispatch `.14.6` is active with private Perl, Rust, and Dart admitted. Rust's
 exact outer-cfg consumer is canonically routed once while ordinary discovery remains zero tests; governance is
 4/9 rollout and 103 mutations. Dart parent `.14.6.4` is closed after its exact carrier consumer became ordinary
-and gained one canonical route; Julia `.14.6.5` is next.
+and gained one canonical route. Julia `.14.6.5` remains the next behavior leaf, after the independent bounded task-
+partition capacity tree adds and recomposes its new semantic owner without changing backend behavior.
 
 Behavior-free audit `.14.6.0` and ADR `0080` fix that boundary exactly. `parse_job(...)` remains unavailable and
 `dispatch_span(...)` is admitted only as a private Perl/Rust/Dart intrinsic, not a shared helper. Each backend's current staged registry accepts

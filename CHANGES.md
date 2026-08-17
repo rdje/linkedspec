@@ -10,6 +10,19 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-18 — FUTURE-PARITY-PARTITION-CAPACITY.0 — freeze bounded future-task split plan
+
+- Activated an independent infrastructure tree task-tree-first from exact clean Dart closeout `3ccaf7c3` after
+  stable lookup returned pending Julia `.14.6.5` from `.14.md` at exactly 5,000 lines / 544,542 bytes.
+- Root-caused the blocker as fixed partition topology, not backend behavior: schema v1 has seven mutable semantic
+  parts, one immutable history part, nine total JSONL records, and no post-`.14.6.4` growth member.
+- ADR `0084` preserves every pressure ceiling and stable ID while authorizing one bounded
+  `.14.6.5-.14.8` member. It freezes the exact 12-line / 1,379-byte pending move, original source ranges/digests,
+  unique ownership boundary, complete lookup/update/build/check/route/consumer inventory, and atomic rollback.
+- Added a Knowledge fact, aligned both roadmaps, the sole-facing mdBook, central task index, and live continuity,
+  and left the index, tools, route registry, task members, capability consumer, and every backend byte unchanged.
+  Canonical `.1` implements the topology; focused `.2` independently recomposes it before Julia task splitting.
+
 ## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.4.3 — admit private Dart progressive dispatch
 
 - Activated task-tree-first from exact clean Dart-carrier atomic 270 `5b4d9c2d`; retrieved ADR `0080`, committed

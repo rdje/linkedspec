@@ -10,6 +10,19 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-18 (`FUTURE-PARITY-PARTITION-CAPACITY.0` — bounded future-task split plan): exact clean activation is
+  Dart closeout `3ccaf7c3`; this focused leaf changes only durable planning/status authorities.
+- Stable lookup still resolves `.14.6.5` uniquely to `.14.md`, which is exactly 5,000 lines / 544,542 bytes. The
+  update/check bounds correctly prevent the Julia RED/authority/carrier/admission child split from adding a line.
+- The current strict schema-v1 index is metadata plus eight part records: seven mutable semantic members and one
+  immutable history member. Appending to history or raising the member limit would violate the bounded-store
+  contract; the first real unstarted boundary is `.14.6.5`.
+- ADR `0084` freezes one new 5,000-line / 786,432-byte member for `.14.6.5-.14.8`, exact current and original-source
+  move accounting, unchanged stable IDs and collection/member ceilings, and the complete atomic consumer set.
+- `.1` alone will change the index, two task members, root navigation, read/update/build tools, checker mutations,
+  route registry, and capability all-parts census under canonical proof. `.2` then independently recomposes the
+  committed topology. No Julia or other parser/compiler/runtime/generated/outward behavior moves in `.0`.
+
 - 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.4.3` — Dart progressive admission): exact clean activation is carrier
   atomic 270 `5b4d9c2d`; this canonical leaf changes discovery, CI topology, rollout truth, dependent snapshots,
   and durable synchronization without production or generated-format changes.
