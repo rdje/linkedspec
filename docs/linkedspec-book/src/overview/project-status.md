@@ -175,26 +175,26 @@ Recursive-observation public no-drift is current under `.14.4.8`, while the comb
 No public helper, facade, descriptor/generated version, result schema, semantic/MCP field, CLI, or README behavior
 is current. Canonical `.14.5.1` signoff passes nine doctrines, repository containment and relocation, both
 66-case CLI environments, RAM at 51%, Phase 0 at 1,031/1,031 in 729 seconds, and the exact six-runtime opt-in;
-parent `.14.5` is closed; progressive span dispatch `.14.6` is active with private Perl and Rust admitted. Rust's
+parent `.14.5` is closed; progressive span dispatch `.14.6` is active with private Perl, Rust, and Dart admitted. Rust's
 exact outer-cfg consumer is canonically routed once while ordinary discovery remains zero tests; governance is
-3/9 rollout and 95 mutations. Dart parent `.14.6.4` is active; audit child `.14.6.4.0` freezes its exact dormant
-RED before private authority, carriers, and admission move independently.
+4/9 rollout and 103 mutations. Dart parent `.14.6.4` is closed after its exact carrier consumer became ordinary
+and gained one canonical route; Julia `.14.6.5` is next.
 
 Behavior-free audit `.14.6.0` and ADR `0080` fix that boundary exactly. `parse_job(...)` remains unavailable and
-`dispatch_span(...)` is admitted only as a private Perl/Rust intrinsic, not a shared helper. Each backend's current staged registry accepts
+`dispatch_span(...)` is admitted only as a private Perl/Rust/Dart intrinsic, not a shared helper. Each backend's current staged registry accepts
 only the built-in `actionir-body.spec` / `action_block` function-body adapter; a normal `.spec` path is rejected,
 and the legacy job span carries neither typed source authority nor cancellation/policy ceilings. Progressive work
 therefore starts with an immutable host-seeded entry for an already compiled parser, never an in-parse loader.
 
 Neutral `.14.6.1` reserved `value = dispatch_span("expr-v1", "Expr", span)` as one dedicated fail-only expression;
-Perl `.14.6.2` and Rust `.14.6.3` now admit it privately. The child runs synchronously over one contiguous direct span. Its internal registers are view-local, but typed
+Perl `.14.6.2`, Rust `.14.6.3`, and Dart `.14.6.4` admit it privately. The child runs synchronously over one contiguous direct span. Its internal registers are view-local, but typed
 positions/spans and diagnostics rebase to the original source identity and global scalar offsets. Parent state is
 isolated, capabilities intersect, ceilings only narrow, cancellation/budget cannot reset, and a repeated parser/
 top/source chain must strictly shrink its span. Correction `.14.6.0.1` repaired the typed transaction row; neutral
 governance passes 2 registry entries, 2 sources/8 views, 6 authority, 6 cancellation, 8 chain, 4 execution cases,
-3 pending-backend guards/11 implementation paths plus 9 governed Rust carrier paths and 10 outward guards, 26
-diagnostics, rollout 3/9, and 95 mutations. The typed row remains pending; the rejected effect owns current node
-`PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded Dart/Julia/Lua paths omit both tokens; and outward guards deny exposure. Backends `.4-.6`,
+2 pending-backend guards/8 implementation paths plus 9 Rust + 8 Dart carrier paths and 10 outward guards, 26
+diagnostics, rollout 4/9, and 103 mutations. The typed row remains pending; the rejected effect owns current node
+`PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded Julia/Lua paths omit both tokens; and outward guards deny exposure. Backends `.5-.6`,
 recurrence `.7`, and public no-drift `.8` follow.
 
 Rust `.14.6.3.0` historically froze the dedicated-node RED behind one explicit cfg. Rust `.14.6.3.1` supplies the independent private authority beneath that boundary: immutable precompiled
@@ -216,9 +216,9 @@ available only through the callback-scoped request and expires with its view; re
 live invocation authority. Its separate four-test dormant consumer is GREEN and all 408 ordinary tests remain
 GREEN. `.14.6.4.2` now preserves the final-path identity while adding one exclusive logical-only node, exact static
 and recognition-transaction rejection, plus native/reconstructed/generated-plan/independently analyzed emitted
-carriers through a fresh opaque seed. The exact consumer passes seven groups but remains dormant; governance is
-9 Rust + 8 Dart carrier paths, 2 pending guard groups/8 paths, rollout 3/9, and 100 mutations. `.14.6.4.3` alone
-owns admission and Dart rollout.
+carriers through a fresh opaque seed. `.14.6.4.3` moves that unchanged seven-group consumer into ordinary discovery
+and one exact canonical route; governance is 9 Rust + 8 Dart carrier paths, 2 pending guard groups/8 paths,
+rollout 4/9, and 103 mutations. Dart parent `.14.6.4` is closed.
 Derived text/AST stitching remains staged `.14.7`; combined program-wide no-drift remains `.14.8`.
 Perl planning child `.14.6.2.0` freezes the final-path dormant consumer without enabling the form. It derives
 the full neutral inventory, passes 83 assertions, and fails once because `PROGRESSIVE_DISPATCH_SPAN` is absent.

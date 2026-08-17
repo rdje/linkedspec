@@ -10,6 +10,29 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.4.3 — admit private Dart progressive dispatch
+
+- Activated task-tree-first from exact clean Dart-carrier atomic 270 `5b4d9c2d`; retrieved ADR `0080`, committed
+  Dart authority/carrier facts, the exact dormant consumer, Perl/Rust admissions, neutral governance, CI topology,
+  direct dependents, Knowledge, and book before changing discovery.
+- Moved the unchanged seven-group consumer to `dart/test/progressive_span_dispatch_contract_test.dart`, making it
+  ordinary, removed the dormant duplicate by identity-preserving rename, and added exactly one tracked requirement,
+  admission marker, and repository-routed invocation to canonical CI.
+- Promoted only Dart's rollout/current-boundary truth. The neutral checker now passes 4/9 rollout and rejects 103
+  mutations while retaining 9 Rust + 8 Dart carrier paths, 2 Julia/Lua guard groups/8 paths, 10 outward guards,
+  26 diagnostics, the pending typed row, and closed public/outward surfaces.
+- Recomposed the Perl consumer to 127 assertions and Rust's cfg-enabled snapshot; narrowed the dormant Dart
+  authority consumer's route assertion to its own identity. Runtime behavior and the authority-only focused route
+  remain unchanged.
+- Fatal Dart analysis, all 415 ordinary tests, authority 4/4, exact carrier 7/7, Perl 127/127, exact cfg Rust 1/1,
+  progressive 4/9/103, typed 11/3/152, and recognition 138/250/58 pass. Exact staged canonical CI provides final
+  admission proof and closes parent `.14.6.4` without generated-format, typed, recurrence, public, or outward movement.
+  Its first attempt passed Rust then caught the Dart command's root working directory; the exact route now enters
+  `dart/` before using the repository-managed wrapper and consumer-relative path.
+- The mandatory engineering-notes rollover created immutable segment 4992 and exposed the prior finite 15-file /
+  14-manifest-line capacity. ADR `0083` authorizes only 16 files / 15 manifest lines; aggregate, per-file, byte,
+  lifecycle, owner, and verifier controls remain unchanged.
+
 ## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.4.2 — add dormant Dart progressive dispatch carriers
 
 - Activated task-tree-first from exact clean Dart-authority atomic 269 `e6968b7b`; retrieved ADR `0080`, the

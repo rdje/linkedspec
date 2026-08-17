@@ -1,7 +1,7 @@
 # ADR 0080: Progressive span dispatch uses pre-registered same-source child authority
 
 - Date: 2026-08-17
-- Status: accepted architecture; executable neutral authority and private Perl/Rust admissions current; other backends pending
+- Status: accepted architecture; executable neutral authority and private Perl/Rust/Dart admissions current; Julia/Lua and recurrence pending
 - Tags: architecture, parser-composition, progressive-parsing, spans, source-location, registry, authority, cancellation, portability
 
 ## Context

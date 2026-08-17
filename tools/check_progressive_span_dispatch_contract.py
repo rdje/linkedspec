@@ -32,7 +32,7 @@ AUTHORED_SURFACE = {
     ],
     "result": "one detached child payload returned as the expression value",
     "failure_policy": "fail_only; every dispatch or child failure propagates unchanged and no null, fallback, retry, or alternate parser is implied",
-    "availability": "private Perl and Rust runtimes admitted; Dart carriers are complete but dormant; every remaining backend remains unavailable until its independent rollout row completes",
+    "availability": "private Perl, Rust, and Dart runtimes admitted; every remaining backend remains unavailable until its independent rollout row completes",
 }
 
 POLICY = {
@@ -337,7 +337,7 @@ EXECUTION_CASES = [
 ]
 
 CURRENT_BOUNDARY = {
-    "status": "perl_rust_admitted_dart_carriers_complete_other_backend_rows_pending",
+    "status": "perl_rust_and_dart_admitted_other_backend_rows_pending",
     "typed_rollout": {
         "path": "capability_conformance/typed_source_location_contract.json",
         "leg": "progressive_span_dispatch",
@@ -403,8 +403,10 @@ CURRENT_BOUNDARY = {
         ],
     },
     "dart_carriers": {
-        "consumer_path": "dart/test_dormant/progressive_span_dispatch_contract_test.dart",
-        "canonical_discovery": "absent_dormant",
+        "consumer_path": "dart/test/progressive_span_dispatch_contract_test.dart",
+        "canonical_discovery": "ordinary_and_exact_canonical",
+        "registration_marker": "running exact Dart progressive span-dispatch admission consumer",
+        "invocation": "(cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/progressive_span_dispatch_contract_test.dart)",
         "marker_rows": [
             {
                 "path": "dart/lib/src/action/action_ast.dart",
@@ -435,7 +437,7 @@ CURRENT_BOUNDARY = {
                 "tokens": ["boundedChildParseAuthority", "ProgressiveExecutionSeed"],
             },
             {
-                "path": "dart/test_dormant/progressive_span_dispatch_contract_test.dart",
+                "path": "dart/test/progressive_span_dispatch_contract_test.dart",
                 "tokens": ["four_routes", "independently analyzed emitted source", "progressive_dispatch_span"],
             },
         ],
@@ -512,7 +514,7 @@ ROLLOUT = [
     (1, "FUTURE-PARITY-BACKLOG.14.6.1", "neutral", "complete", ["capability_conformance/progressive_span_dispatch_contract.json", "tools/check_progressive_span_dispatch_contract.py"]),
     (2, "FUTURE-PARITY-BACKLOG.14.6.2", "perl", "complete", ["t/progressive_span_dispatch_perl_contract.t"]),
     (3, "FUTURE-PARITY-BACKLOG.14.6.3", "rust", "complete", ["rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs"]),
-    (4, "FUTURE-PARITY-BACKLOG.14.6.4", "dart", "pending", []),
+    (4, "FUTURE-PARITY-BACKLOG.14.6.4", "dart", "complete", ["dart/test/progressive_span_dispatch_contract_test.dart"]),
     (5, "FUTURE-PARITY-BACKLOG.14.6.5", "julia", "pending", []),
     (6, "FUTURE-PARITY-BACKLOG.14.6.6", "puc_lua", "pending", []),
     (7, "FUTURE-PARITY-BACKLOG.14.6.6", "luajit", "pending", []),
@@ -674,7 +676,7 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
     require(document["format"] == 1, "format drifted")
     require(document["contract_id"] == "linkedspec-progressive-span-dispatch-v1", "contract id drifted")
     require(document["task_owner"] == "FUTURE-PARITY-BACKLOG.14.6.1", "task owner drifted")
-    require(document["status"] == "perl_rust_and_dart_carriers_complete_other_backends_pending", "status drifted")
+    require(document["status"] == "perl_rust_and_dart_complete_other_backends_pending", "status drifted")
     expected_counts = {
         "registry_entries": len(REGISTRY_ENTRIES),
         "sources": len(SOURCES),
@@ -846,13 +848,22 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
             rust_consumer.count(f"cfg({rust_carriers['cfg']})") == 1,
             "Rust progressive carrier cfg is missing or duplicated",
         )
+        require((ROOT / dart_carriers["consumer_path"]).is_file(), "admitted Dart progressive consumer is missing")
         require(
-            (ROOT / dart_carriers["consumer_path"]).is_file(),
-            "dormant Dart progressive consumer is missing",
+            not (ROOT / "dart/test_dormant/progressive_span_dispatch_contract_test.dart").exists(),
+            "admitted Dart progressive consumer retains a dormant duplicate",
         )
         require(
-            ci.count(dart_carriers["consumer_path"]) == 0,
-            "dormant Dart progressive consumer entered canonical CI before admission",
+            ci.count(f"require_tracked_file {dart_carriers['consumer_path']}") == 1,
+            "canonical CI must require the Dart progressive consumer exactly once",
+        )
+        require(
+            ci.count(f'log "{dart_carriers["registration_marker"]}"') == 1,
+            "canonical Dart progressive admission marker missing or duplicated",
+        )
+        require(
+            ci.count(dart_carriers["invocation"]) == 1,
+            "canonical Dart progressive admission invocation missing or duplicated",
         )
 
 
@@ -963,6 +974,8 @@ MUTATIONS: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
     ("current_dart_node_marker", set_value(["current_boundary", "dart_carriers", "marker_rows", 0, "tokens", 0], "WrongNode")),
     ("current_dart_authority_marker", set_value(["current_boundary", "dart_carriers", "marker_rows", 4, "tokens", 0], "WrongAuthority")),
     ("current_dart_generated_marker", set_value(["current_boundary", "dart_carriers", "marker_rows", 6, "tokens", 0], "wrong_options")),
+    ("current_dart_marker", set_value(["current_boundary", "dart_carriers", "registration_marker"], "wrong")),
+    ("current_dart_invocation", set_value(["current_boundary", "dart_carriers", "invocation"], "dart test")),
     ("current_backend_guard_path", set_value(["current_boundary", "backend_guard_groups", 0, "paths", 0], "wrong.pm")),
     ("current_backend_guard_token", set_value(["current_boundary", "backend_guard_groups", 0, "forbidden_tokens", 0], "parse_job")),
     ("current_outward_guard_path", set_value(["current_boundary", "outward_guard", "paths", 0], "wrong.pm")),
@@ -973,6 +986,7 @@ MUTATIONS: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
     ("rollout_removed", pop_value(["rollout"])),
     ("rollout_perl_regressed", set_value(["rollout", 1, "status"], "pending")),
     ("rollout_rust_regressed", set_value(["rollout", 2, "status"], "pending")),
+    ("rollout_dart_regressed", set_value(["rollout", 3, "status"], "pending")),
     ("canonical_checker", set_value(["canonical_execution", "checker_path"], "tools/wrong.py")),
     ("canonical_storage", set_value(["canonical_execution", "storage_policy"], "/tmp")),
 ]

@@ -441,6 +441,7 @@ require_tracked_file t/recognition_transaction_perl_authority.t
 require_tracked_file t/recognition_transaction_perl_contract.t
 require_tracked_file t/progressive_span_dispatch_perl_contract.t
 require_tracked_file rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs
+require_tracked_file dart/test/progressive_span_dispatch_contract_test.dart
 require_tracked_file rust/linkedspec-runtime/tests/recognition_transaction_contract.rs
 require_tracked_file dart/test/recognition_transaction_contract_test.dart
 require_tracked_file julia/test/recognition_transaction_contract_test.jl
@@ -658,6 +659,9 @@ PERL5LIB= prove -Iperl t/progressive_span_dispatch_perl_contract.t
 
 log "running exact Rust progressive span-dispatch admission consumer"
 RUSTFLAGS='--cfg linkedspec_progressive_span_dispatch_red' cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test progressive_span_dispatch_contract
+
+log "running exact Dart progressive span-dispatch admission consumer"
+(cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/progressive_span_dispatch_contract_test.dart)
 
 log "checking backend-neutral inter-match gap-capture contract and current no-overclaim boundary"
 bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py

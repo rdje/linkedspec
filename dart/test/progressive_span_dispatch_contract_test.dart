@@ -1,14 +1,11 @@
-// FUTURE-PARITY-BACKLOG.14.6.4.2 — dormant Dart progressive carriers.
+// FUTURE-PARITY-BACKLOG.14.6.4.3 — admitted Dart progressive carriers.
 //
-// Ordinary `dart test` discovery ignores test_dormant/. Before admission, run
-// this exact final-path consumer through repository-local project data:
+// Ordinary `dart test` discovery and canonical CI both run this exact
+// final-path consumer. Its focused repository-local command is:
 //
 //   cd dart
 //   bash ../tools/run_dart_project_data.sh test --reporter failures-only \
-//     test_dormant/progressive_span_dispatch_contract_test.dart
-//
-// The carrier is complete here, but canonical discovery and the Dart rollout
-// row remain owned by FUTURE-PARITY-BACKLOG.14.6.4.3.
+//     test/progressive_span_dispatch_contract_test.dart
 
 import 'dart:convert';
 import 'dart:io';
@@ -47,7 +44,7 @@ void main() {
       expect(contract['format'], 1);
       expect(
         contract['status'],
-        'perl_rust_and_dart_carriers_complete_other_backends_pending',
+        'perl_rust_and_dart_complete_other_backends_pending',
       );
       expect(contract['expected_counts'], <String, Object?>{
         'registry_entries': 2,
@@ -64,7 +61,7 @@ void main() {
         'outward_guard_paths': 10,
         'diagnostics': 26,
         'rollout_legs': 9,
-        'mutations': 100,
+        'mutations': 103,
       });
       expect(_ids(contract, 'view_cases'), <String>[
         'unicode_middle',
@@ -157,14 +154,16 @@ void main() {
         'complete',
         'complete',
         'complete',
-        'pending',
+        'complete',
         'pending',
         'pending',
         'pending',
         'pending',
         'pending',
       ]);
-      expect(rollout[3]['paths'], isEmpty);
+      expect(rollout[3]['paths'], <String>[
+        'dart/test/progressive_span_dispatch_contract_test.dart',
+      ]);
 
       final stagedJob = StagedParseJob(
         version: 1,
@@ -401,20 +400,43 @@ Top:: I {
     },
   );
 
-  test('carrier remains dormant and absent from the public umbrella', () {
+  test('consumer is admitted once while the authority stays private', () {
     expect(
       File('test/progressive_span_dispatch_contract_test.dart').existsSync(),
-      isFalse,
-      reason: 'the Dart consumer must remain outside ordinary discovery',
+      isTrue,
+      reason: 'ordinary discovery must own the exact admitted consumer',
     );
     expect(
-      File(_ciDriverPath).readAsStringSync(),
-      isNot(
-        contains(
-          'dart/test_dormant/progressive_span_dispatch_contract_test.dart',
-        ),
+      File(
+        'test_dormant/progressive_span_dispatch_contract_test.dart',
+      ).existsSync(),
+      isFalse,
+      reason: 'admission must not retain a duplicate dormant consumer',
+    );
+    final ci = File(_ciDriverPath).readAsStringSync();
+    expect(
+      _occurrences(
+        ci,
+        'require_tracked_file '
+        'dart/test/progressive_span_dispatch_contract_test.dart',
       ),
-      reason: 'the dormant Dart consumer must remain absent from canonical CI',
+      1,
+    );
+    expect(
+      _occurrences(
+        ci,
+        'running exact Dart progressive span-dispatch admission consumer',
+      ),
+      1,
+    );
+    expect(
+      _occurrences(
+        ci,
+        '(cd dart && bash ../tools/run_dart_project_data.sh test '
+        '--reporter failures-only '
+        'test/progressive_span_dispatch_contract_test.dart)',
+      ),
+      1,
     );
     final umbrella = File('lib/linkedspec_dart.dart').readAsStringSync();
     for (final token in <String>[

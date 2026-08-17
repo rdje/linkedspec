@@ -611,7 +611,7 @@ void main() {
   });
 
   test(
-    'private authority has no ActionIR, ordinary, canonical, or public route',
+    'private authority has no standalone ordinary, canonical, or public route',
     () {
       final ciDriver = File(_ciDriverPath).readAsStringSync();
       final publicUmbrella = File(
@@ -627,10 +627,14 @@ void main() {
       );
       expect(publicUmbrella, isNot(contains('bounded_child_parse_authority')));
       expect(
+        File('test/progressive_span_dispatch_contract_test.dart').existsSync(),
+        isTrue,
+      );
+      expect(
         File(
           'test_dormant/progressive_span_dispatch_contract_test.dart',
         ).existsSync(),
-        isTrue,
+        isFalse,
       );
       expect(
         File('lib/src/runtime/interpreter.dart').readAsStringSync(),

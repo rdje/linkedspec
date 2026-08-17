@@ -436,14 +436,14 @@ child will use a bounded source view whose typed positions and diagnostics rebas
 cursor/marks/transactions stay isolated; capability and policy ceilings only narrow; cancellation and remaining
 budget propagate; and repeated parser/top/source dispatch must strictly shrink the span. The existing staged
 function-body adapter does not satisfy this contract. The neutral checker passes 2 registry entries, 2 sources/8
-views, 6 authority, 6 cancellation, 8 chain, and 4 execution cases, 3 pending-backend guards/11 implementation
-paths plus 9 governed Rust carrier paths and 10 outward guards, 26 diagnostics, rollout 3/9, and 95 mutations. The
+views, 6 authority, 6 cancellation, 8 chain, and 4 execution cases, 2 pending-backend guards/8 implementation
+paths plus 9 Rust + 8 Dart carrier paths and 10 outward guards, 26 diagnostics, rollout 4/9, and 103 mutations. The
 typed progressive row remains pending; the rejected dispatch effect owns current node
-`PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded Dart, Julia, and Lua paths omit the tokens; and outward guards
+`PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded Julia and Lua paths omit the tokens; and outward guards
 deny premature exposure. Perl has private carrier integration
 behind host-supplied invocation options: the exact assignment lowers to one dedicated node and works identically
 through live, reconstructed, generated-plan, and independently loaded emitted routes, while generated artifacts
-contain no registry callback or mutable authority. Canonical CI requires and runs its exact 126-case consumer once.
+contain no registry callback or mutable authority. Canonical CI requires and runs its exact 127-case consumer once.
 
 Rust's private authority/core and four carrier routes are executable and privately admitted. A doc-hidden immutable
 registry accepts only already compiled callbacks; each fresh invocation carries one typed source authority,
@@ -457,10 +457,10 @@ plan, and independently compiled emitted source delegate to one fresh opaque exe
 detached child payload. Generated data contains only target/id/top/span operands, never callbacks or authority.
 Recognition effect analysis rejects any attempted rule/function graph that reaches the node, and runtime checks
 live tokens defensively. The exact outer-cfg consumer is GREEN and canonically routed once under that cfg, while
-ordinary Cargo still executes zero tests. Only Rust rollout advances; later backends and typed/public rows remain pending.
+ordinary Cargo still executes zero tests. Dart is also admitted; later backends and typed/public rows remain pending.
 
-Dart's historical pre-carrier boundary remains preserved by the same final-path consumer outside ordinary
-discovery, but `.14.6.4.2` turns it GREEN. The reserved assignment is now one exclusive
+Dart's historical pre-carrier boundary remains preserved by the same final-path fixture; `.14.6.4.2` turns it
+GREEN and `.14.6.4.3` admits it without changing behavior. The reserved assignment is now one exclusive
 `ActionProgressiveDispatchSpanExpr`; malformed direct operands and residual generic calls reject statically, and
 the separate staged function-body registry still rejects `expr-v1` at resolve.
 
@@ -475,7 +475,7 @@ four-test consumer executes every neutral row, all 26 diagnostics, and retention
 An opaque execution seed now carries native, `SpecFile`-JSON reconstructed, generated-plan, and independently
 analyzed emitted-source execution to the same detached child result. Static recognition closure and a live-token
 check forbid non-rollbackable dispatch, and generated data contains only logical operands. The seven-group carrier
-consumer remains dormant; admission `.4.3` is pending, so rollout stays 3/9.
+consumer is ordinary and has one exact canonical route, advancing only Dart to rollout 4/9.
 
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions or
 typed spans are authored values. The `recognition_*` operations are current across all six runtime routes, while

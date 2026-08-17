@@ -2,36 +2,34 @@
 
 ## Current Activity
 
-- Dart dormant-carrier `.14.6.4.2` is focused-signoff-complete from exact clean private-authority atomic 269
-  `e6968b7b`; intended atomic 270 has no canonical trigger.
-- One exclusive `ActionProgressiveDispatchSpanExpr` owns the complete assignment and serializes only target,
-  literal parser/top identities, and one bare span binding. Malformed or residual generic forms fail closed.
-- Static recognition closure classifies the node as `parser_registry_or_staged_dispatch`; live token maps provide a
-  defensive runtime check. Recognition cleanup now preserves an existing primary error after safe token restore/
-  invalidation instead of masking it with `recognition_terminal_required`.
-- An opaque host seed starts fresh execution state for native, `SpecFile`-JSON reconstructed, generated-plan, and
-  independently analyzed/executed emitted source. All four return the same detached result without serializing
-  callbacks, registry/source/cancellation authority, fingerprints, budgets, or mutable state.
-- The exact historical consumer is 7/7 GREEN but remains under `test_dormant/`; its authority companion is 4/4,
-  fatal analysis and 408 ordinary tests pass, and ordinary/canonical discovery remains unchanged.
-- `.14.6.4.3` alone owns exact ordinary/canonical admission and Dart-only rollout promotion.
-- Progressive rollout is neutral + Perl + Rust at 3/9; governance is 100 mutations with 9 Rust + 8 dormant Dart
-  carrier paths, 2 remaining Julia/Lua guard groups/8 paths, 10 outward guards, and 26 diagnostics;
-  recognition stays 138 node rows (134 current + four dedicated) / 250 calls / 58 mutations.
-- Typed remains 11/3/152 and generated format is unchanged; Dart admission, Julia/Lua, recurrence, public projection, and
-  outward surfaces remain pending.
-- Storage census, CI topology, rollout, typed recurrence, public inventory, and outward surfaces are unchanged.
+- Dart admission `.14.6.4.3` is canonical-signoff-complete from exact clean carrier atomic 270 `5b4d9c2d` for
+  intended atomic 271; parent `.14.6.4` is composition-closed.
+- The unchanged seven-group carrier consumer now lives at `dart/test/progressive_span_dispatch_contract_test.dart`;
+  ordinary discovery and one exact canonical requirement/marker/invocation run it, with no dormant duplicate.
+- Dart production behavior is unchanged: one exclusive logical-only node, static/live transaction defense, fresh
+  opaque authority, and native/reconstructed/generated-plan/independently analyzed emitted routes remain exact.
+- The authority-only consumer stays focused and dormant at 4/4. Fatal analysis and all 415 ordinary Dart tests pass.
+- Progressive rollout is neutral + Perl + Rust + Dart at 4/9; governance is 103 mutations with 9 Rust + 8 Dart
+  carrier paths, 2 remaining Julia/Lua guard groups/8 paths, 10 outward guards, and 26 diagnostics.
+- Typed remains 11/3/152 and recognition remains 138/250/58; generated format, recurrence, public projection,
+  facade/schema/MCP/CLI/README, and outward surfaces are unchanged.
+- Required note rollover creates segment 4992; ADR `0083` advances only finite engineering-history capacity to
+  16 files / 15 manifest lines while every aggregate, per-file, byte, lifecycle, owner, and verifier limit stays fixed.
+- Julia parent `.14.6.5` is the next task-tree-first frontier from the clean atomic-271 boundary.
 
 ## Latest Completed Slice
 
-- `.14.6.4.2` implements Dart's exclusive node, static/runtime policy, fresh opaque seed, and four dormant carriers;
-  exact focused proof passes while admission and rollout remain owned by `.4.3`.
+- `.14.6.4.3` admits the unchanged Dart carrier consumer ordinarily and canonically, promotes only Dart to 4/9/103,
+  and closes parent `.14.6.4` without production, generated-format, typed, public, or outward movement.
 
 ## Next Action
 
-- Commit atomic 270, clear the brief, then activate admission leaf `.14.6.4.3` only from the verified clean boundary.
+- Commit atomic 271, clear the brief, verify the clean boundary, then activate Julia parent `.14.6.5` task-tree-first.
 
 ## Recent Completions
+
+- `2026-08-17` — `.14.6.4.3` moves the unchanged seven-group Dart consumer into ordinary discovery and one exact
+  canonical route, advances only Dart to progressive 4/9/103, and composition-closes `.14.6.4`.
 
 - `2026-08-17` — `.14.6.4.2` adds one logical-only Dart node and four fresh-authority dormant carriers, closes
   static/live transaction seams, and advances governance to 9 Rust + 8 Dart carrier paths / 100 mutations without
@@ -79,9 +77,6 @@
 
 - `2026-08-16` — `.7.2` landed cleanly as atomic 254 at `bb0c3768` with its canonical receipt promoted and brief
   cleared; four shared calls and public no-drift are current without implementation/outward widening.
-
-- `2026-08-16` — `.7.2` canonical-signoff-completed four shared gap calls and public no-drift at 9/0/63 with
-  exact public 6/12/10/29 governance from clean `d8ed944c`; guarded outward surfaces remain unchanged.
 
 ## History
 

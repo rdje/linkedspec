@@ -162,10 +162,10 @@
 > Progressive neutral `.14.6.1` reserves
 > `value = dispatch_span("expr-v1", "Expr", span)` as a dedicated fail-only future expression. Its checker passes
 > 2 immutable registry entries, 2 sources/8 rebased views, 6 authority, 6 cancellation, 8 chain, 4 execution
-> cases, 2 pending-backend guards/8 implementation paths plus 9 governed Rust and 8 dormant Dart carrier paths
-> and 10 outward guards, 26 diagnostics, 3/9 rollout, and 100 mutations. Private Perl admission is current through one exact
-> canonical 126-assertion consumer; Rust is admitted through one exact cfg-enabled canonical carrier consumer while
-> ordinary discovery remains zero tests. Dart's equivalent four carriers are GREEN but dormant; Dart admission,
+> cases, 2 pending-backend guards/8 implementation paths plus 9 Rust and 8 Dart carrier paths
+> and 10 outward guards, 26 diagnostics, 4/9 rollout, and 103 mutations. Private Perl admission is current through one exact
+> canonical 127-assertion consumer; Rust is admitted through one exact cfg-enabled canonical carrier consumer while
+> ordinary discovery remains zero tests. Dart's equivalent four carriers are ordinary and canonically admitted;
 > Julia, Lua, recurrence, public no-drift, and the typed row remain pending. The rejected effect owns exactly
 > current node `PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded Julia/Lua paths omit both tokens and
 > outward guards deny exposure. No path loader, public facade/schema/semantic/MCP/CLI/README surface, shared helper
@@ -746,8 +746,8 @@ effect closure plus a live-token runtime check forbid dispatch in uncommitted at
 callback or authority. Rust `.14.6.3.3` canonically routes that same cfg-enabled consumer once and promotes only
 Rust, while ordinary discovery remains zero tests.
 
-Dart `.14.6.4.0` froze the corresponding final-path boundary under
-`dart/test_dormant/progressive_span_dispatch_contract_test.dart`; `.14.6.4.2` preserves that identity and fixture
+Dart `.14.6.4.0` froze the corresponding final-path boundary under the historical dormant path;
+`.14.6.4.2` preserves that identity and fixture
 while turning it GREEN through one exclusive `ActionProgressiveDispatchSpanExpr`. Exact malformed operands,
 residual generic calls, recognition-effect composition, and live transactions fail closed.
 
@@ -760,8 +760,9 @@ the source view is active; a retained request fails after callback return. The s
 passes every neutral case and all 26 diagnostics while ordinary/canonical discovery remains inert. An opaque seed
 now starts fresh authority for native, reconstructed, generated-plan, and independently analyzed emitted-source
 execution; generated data carries only target/parser/top/span and no callback, registry, source snapshot,
-cancellation, fingerprint, or mutable state. The exact seven-group carrier consumer is GREEN but remains dormant;
-`.14.6.4.3` alone admits it and promotes Dart.
+cancellation, fingerprint, or mutable state. `.14.6.4.3` moves the unchanged seven-group consumer to
+`dart/test/progressive_span_dispatch_contract_test.dart`; ordinary discovery and one exact canonical route admit
+it and promote only Dart to rollout 4/9/103.
 
 The spec's body shell is a
 linked opener/closer parse: `body_brace`

@@ -241,7 +241,7 @@ fn final_path_uses_one_dedicated_progressive_node_across_four_routes() {
     assert_eq!(neutral["format"], 1);
     assert_eq!(
         neutral["status"],
-        "perl_and_rust_complete_other_backends_pending"
+        "perl_rust_and_dart_complete_other_backends_pending"
     );
     assert_eq!(
         neutral["expected_counts"],
@@ -254,12 +254,13 @@ fn final_path_uses_one_dedicated_progressive_node_across_four_routes() {
             "chain_cases": 8,
             "execution_cases": 4,
             "rust_carrier_paths": 9,
-            "backend_guard_groups": 3,
-            "backend_guard_paths": 11,
+            "dart_carrier_paths": 8,
+            "backend_guard_groups": 2,
+            "backend_guard_paths": 8,
             "outward_guard_paths": 10,
             "diagnostics": 26,
             "rollout_legs": 9,
-            "mutations": 95,
+            "mutations": 103,
         })
     );
     assert_eq!(
@@ -380,7 +381,7 @@ fn final_path_uses_one_dedicated_progressive_node_across_four_routes() {
             .map(|row| row["status"].as_str().expect("rollout status"))
             .collect::<Vec<_>>(),
         [
-            "complete", "complete", "complete", "pending", "pending", "pending", "pending",
+            "complete", "complete", "complete", "complete", "pending", "pending", "pending",
             "pending", "pending",
         ]
     );

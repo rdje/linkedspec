@@ -120,8 +120,8 @@ is(
 is($contract->{format}, 1, 'loads contract format 1');
 is(
  $contract->{status},
- 'perl_and_rust_complete_other_backends_pending',
- 'loads the Perl-and-Rust-complete and other-backend-pending state',
+ 'perl_rust_and_dart_complete_other_backends_pending',
+ 'loads the Perl-Rust-Dart-complete and other-backend-pending state',
 );
 is(
  $contract->{task_owner},
@@ -143,7 +143,7 @@ is_deeply(
   ],
   result => 'one detached child payload returned as the expression value',
   failure_policy => 'fail_only; every dispatch or child failure propagates unchanged and no null, fallback, retry, or alternate parser is implied',
-  availability => 'private Perl and Rust runtimes admitted; every other backend remains unavailable until its independent rollout row completes',
+  availability => 'private Perl, Rust, and Dart runtimes admitted; every remaining backend remains unavailable until its independent rollout row completes',
  },
  'freezes the dedicated authored expression, operands, result, and fail-only boundary',
 );
@@ -252,12 +252,13 @@ is_deeply(
   chain_cases => 8,
   execution_cases => 4,
   rust_carrier_paths => 9,
-  backend_guard_groups => 3,
-  backend_guard_paths => 11,
+  dart_carrier_paths => 8,
+  backend_guard_groups => 2,
+  backend_guard_paths => 8,
   outward_guard_paths => 10,
   diagnostics => 26,
   rollout_legs => 9,
-  mutations => 95,
+  mutations => 103,
  },
  'freezes every neutral inventory count',
 );
@@ -268,8 +269,8 @@ is_deeply(
 );
 is_deeply(
  [map { $_->{status} } @{$contract->{rollout}}],
- ['complete', 'complete', 'complete', ('pending') x 6],
- 'keeps exactly the neutral, Perl, and Rust rollout legs complete',
+ ['complete', 'complete', 'complete', 'complete', ('pending') x 5],
+ 'keeps exactly the neutral, Perl, Rust, and Dart rollout legs complete',
 );
 is_deeply(
  $contract->{rollout}[1]{paths},
@@ -280,6 +281,11 @@ is_deeply(
  $contract->{rollout}[2]{paths},
  ['rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs'],
  'binds the Rust rollout leg to its exact cfg-enabled admission consumer',
+);
+is_deeply(
+ $contract->{rollout}[3]{paths},
+ ['dart/test/progressive_span_dispatch_contract_test.dart'],
+ 'binds the Dart rollout leg to its ordinary and exact canonical consumer',
 );
 
 my $probe = 'return(dispatch_span("expr-v1", "Expr", span));';

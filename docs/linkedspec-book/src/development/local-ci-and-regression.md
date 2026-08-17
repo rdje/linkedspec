@@ -104,9 +104,9 @@ root limit, requires action at 90%, and archives the oldest complete clean-HEAD 
 It refuses to archive uncommitted records or rewritten/reordered HEAD content. Change boundaries are `## `
 headings; engineering-note boundaries are dated entries or `## ` headings. New content-addressed segments use IDs
 below the initial `5000` reserve, so manifest order remains newest-to-oldest without renaming immutable files.
-Engineering-notes segment 4993 advances only the finite collection capacity to fifteen files and fourteen
-manifest lines under ADR `0081`; all aggregate, per-file, byte, lifecycle, owner, and verifier controls remain
-unchanged.
+Engineering-notes segment 4992 advances only the finite collection capacity to sixteen files and fifteen
+manifest lines under ADR `0083`; all aggregate, per-file, byte, lifecycle, owner, and verifier controls remain
+unchanged. ADR `0081` remains the exact prior fifteen-member step.
 Publication is recoverable: segment first, manifest second, bounded root last; rerun reuses an exact orphan segment
 or completes an exact pending manifest generation, while any conflict fails closed. `COMMIT.md` requires both
 pressure checks on every accepted slice. Unchanged registry recomposition passes 20 surfaces / 62 routes / 32/32
@@ -157,8 +157,7 @@ that same proof pass. A RED result is therefore planned evidence, not a claim th
 
 ### Neutral progressive span-dispatch contract
 
-Canonical CI now requires and always runs the repository-routed neutral progressive checker plus the admitted
-private Perl and Rust consumers:
+Canonical CI always runs the repository-routed neutral checker plus the admitted private Perl, Rust, and Dart consumers:
 
 ```bash
 bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_contract.py
@@ -166,13 +165,14 @@ PERL5LIB= prove -Iperl t/progressive_span_dispatch_perl_contract.t
 RUSTFLAGS='--cfg linkedspec_progressive_span_dispatch_red' cargo test \
   --manifest-path rust/Cargo.toml -p linkedspec-runtime \
   --test progressive_span_dispatch_contract
+(cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/progressive_span_dispatch_contract_test.dart)
 ```
 
 It validates the reserved private `dispatch_span("logical-parser-id", "Top", span)` expression without enabling
 backend syntax. The checker independently executes 2 sources/8 rebased views, 6 authority-minimum cases, 6
 cancellation/deadline/budget cases, 8 decreasing-chain/bound cases, and 4 isolation/detachment cases; locks 26
-diagnostics and neutral + Perl + Rust 3/9 rollout; guards 8 implementation paths across the two still-pending
-Julia/Lua groups, 9 Rust carrier paths, 8 dormant Dart carrier paths, and 10 outward paths; and rejects 100 mutations. A passing check proves no path loader,
+diagnostics and neutral + Perl + Rust + Dart 4/9 rollout; guards 8 implementation paths across the two still-pending
+Julia/Lua groups, 9 Rust carrier paths, 8 Dart carrier paths, and 10 outward paths; and rejects 103 mutations. A passing check proves no path loader,
 registry mutation, capability/policy elevation, cancellation reset, non-decreasing cycle, parent-state leak,
 uncommitted recognition effect, live result handle, fallback, or premature backend/typed rollout claim. It also
 requires the typed row to remain pending, the rejected effect to own exactly current node
@@ -182,7 +182,7 @@ and private spelling/node/rollout tokens to remain absent from ten facade/schema
 Perl carrier integration and admission now prove
 one exclusive dedicated node, static operands, fresh invocation authority, live/reconstructed/generated-plan/
 independently loaded emitted execution, logical-only serialization, typed missing-authority failure, and
-transaction rejection in 126 assertions. `tools/run_ci_local.sh` requires, syntax-checks, and executes that exact
+transaction rejection in 127 assertions. `tools/run_ci_local.sh` requires, syntax-checks, and executes that exact
 consumer once; the neutral checker rejects regression of the Perl row and premature later-backend promotion.
 Its transaction-state query loads the recognition runtime only when a dispatch executes, preserving the existing
 require-only Compiler guarantee that `LinkedRE` stays lazy until the parser pipeline actually needs it.
@@ -219,14 +219,14 @@ callback-scoped view expiry, seed mutation isolation, false payload preservation
 Passing this target proves the doc-hidden immutable registry/invocation/source-view core independently from the
 carrier consumer. Neither focused target proves CI admission or Rust rollout.
 
-Dart has separate analyzed but undiscovered authority and final-path consumers:
+Dart keeps its authority-only consumer focused and dormant, while the carrier consumer is ordinary and canonical:
 
 ```bash
 cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test_dormant/progressive_span_dispatch_authority_test.dart
-cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test_dormant/progressive_span_dispatch_contract_test.dart
+cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/progressive_span_dispatch_contract_test.dart
 ```
 
-The authority command passes four groups: every neutral view/authority/cancellation/chain/execution row and all 26 diagnostic contexts, then nested rebasing/shared limits, callback-view and retained-request expiry, immutable registry inputs, callback containment, UTF-8 diagnostic bounding, and cyclic/live/oversized result rejection. The final-path command now passes seven groups: one exclusive logical-only node, static malformed/residual-generic rejection, static and live transaction defense, native/reconstructed/generated-plan equality, fresh execution state, and independently analyzed/executed emitted-source equality without serialized authority. Ordinary/canonical discovery still omit both consumers. Admission `.14.6.4.3` remains separate.
+The authority command passes four groups: every neutral view/authority/cancellation/chain/execution row and all 26 diagnostic contexts, then nested rebasing/shared limits, callback-view and retained-request expiry, immutable registry inputs, callback containment, UTF-8 diagnostic bounding, and cyclic/live/oversized result rejection. The carrier command passes seven groups: one exclusive logical-only node, static malformed/residual-generic rejection, static and live transaction defense, native/reconstructed/generated-plan equality, fresh execution state, and independently analyzed/executed emitted-source equality without serialized authority. Ordinary discovery runs it, and canonical CI requires and invokes that exact path once.
 
 The `.14.4.0` audit found one contradiction in that baseline: `direct_nonprogress` used the same textual identity for invocation and parent. Corrective `.14.4.0.1` changes all six observation identities to positive unique
 monotonic numbers and validates lineage before exact fixture comparison. Four reason-checked regressions prove

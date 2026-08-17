@@ -1,15 +1,16 @@
 # MEMORY
 
-- activation_commit: `e6968b7bb9eb3ad2fc44cbba60e676d8f6eca249` — exact clean Dart-authority atomic-269 base
-  for task-tree-first `FUTURE-PARITY-BACKLOG.14.6.4.2`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.4.2 - add dormant Dart progressive dispatch carriers`;
-  focused-signoff-complete for intended atomic 270 with one logical node and four fresh-authority routes.
-- active_work_unit: none at the intended clean atomic-270 handoff; Dart parent `.14.6.4` remains active at `.4.3`.
-- next_action: from exact clean atomic 270, activate `.14.6.4.3` task-tree-first, retrieve the unchanged dormant
-  consumer and admission precedents, then admit exactly that consumer and promote only Dart rollout.
-- in_flight_uncommitted: none at the intended postcommit boundary; no background job remains to consume.
-- blockers: none. Carrier 7/7, authority 4/4, fatal Dart analysis, and 408 ordinary tests pass; neutral governance
-  is 3/9/100 with 9 Rust + 8 dormant Dart carrier paths and no admission/outward movement.
+- activation_commit: `5b4d9c2d185dcdea35a9d0798afc8c09737d9ed7` — exact clean Dart-carrier atomic-270 base
+  for task-tree-first `FUTURE-PARITY-BACKLOG.14.6.4.3`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.4.3 - admit private Dart progressive dispatch`;
+  canonical-signoff-complete for intended atomic 271; parent `.14.6.4` composition-closed.
+- active_work_unit: none after committed `.14.6.4.3`; Dart parent `.14.6.4` is closed at atomic 271.
+- next_action: after commit/brief/clean verification, activate Julia parent `FUTURE-PARITY-BACKLOG.14.6.5`
+  task-tree-first and split its RED, authority/core, carrier, and admission leaves before behavior.
+- in_flight_uncommitted: none after atomic 271; canonical receipt is committed, brief cleared, no background job
+  remains to consume, and Julia `.14.6.5` is not yet activated.
+- blockers: none. Carrier 7/7, authority 4/4, fatal Dart analysis, 415 ordinary tests, and Perl 127 pass; neutral
+  governance is 4/9/103 with 9 Rust + 8 Dart carrier paths and no typed/public/outward movement.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -29,7 +30,8 @@
 - current_semantic_governance: capability 80/0/0; semantic six groups / 20 responses / 128 mutations, rollout 9/9,
   native admission 6/6; MCP rollout complete/141.
 - current_readme_contract: README stays 106/5,197 under hard 128/6,144 caps; route changeable detail to its
-  registry-owned destinations. ADR `0082` admits exact change-history capacity 20 files / 19 manifest lines.
+  registry-owned destinations. ADR `0082` admits change history at 20 files / 19 manifest lines; ADR `0083`
+  admits engineering notes at 16 files / 15 manifest lines without changing aggregate/per-file/byte ceilings.
 - current_verification_contract: ADR `0073` makes focused proof the ordinary per-leaf default and canonical proof
   mandatory at admission/milestone/public/infrastructure and final clean push boundaries.
 - documentation_debt_owner: ADR `0066` composition-closes all stores; bounded live/history/task/Knowledge owners
@@ -37,9 +39,9 @@
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, recurrence/public no-drift 9/9, and
   classifies private progressive dispatch fail-closed at 138 ActionIR rows / 250 calls / 58 mutations.
-- current_future_direction: neutral `.14.6.1` plus admitted Perl `.2` and Rust `.3` are rollout 3/9; Dart `.4.0-.2`
-  now preserve the historical RED, private authority, and four dormant GREEN carriers at governance 100 mutations;
-  `.4.3` alone owns admission. Julia/Lua `.5-.6`, staged `.14.7`, and combined `.14.8` remain separate owners.
+- current_future_direction: neutral `.14.6.1` plus admitted Perl `.2`, Rust `.3`, and Dart `.4` are rollout 4/9/103;
+  Dart's unchanged carrier proof is ordinary and canonically routed while its authority-only proof stays dormant.
+  Julia/Lua `.5-.6`, recurrence `.7`, public `.8`, staged `.14.7`, and combined `.14.8` remain separate owners.
 - latest_bootstrap_read: 2026-08-17 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
-  review complete; Dart `.14.6.4.2` completes task-tree-first from clean authority atomic 269 after retrieving ADR
-  `0080`, Dart RED/authority, and committed Perl/Rust carrier precedents; `.4.3` is the next clean frontier.
+  review complete; Dart `.14.6.4.3` closes from clean carrier atomic 270 after exact consumer/authority,
+  Perl/Rust admission, neutral governance, CI topology, Knowledge, book, and direct-dependent retrieval.
