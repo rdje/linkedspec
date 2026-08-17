@@ -9,6 +9,8 @@
 //! The Perl reference implementation lives at `perl/LinkedSpec.pm`.
 //! The Rust implementation is idiomatic Rust — no code generation, no eval.
 
+#[doc(hidden)]
+pub mod bounded_child_parse_authority;
 pub mod diagnostic;
 pub mod diagnostic_output;
 pub mod engine;

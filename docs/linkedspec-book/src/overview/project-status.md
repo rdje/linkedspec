@@ -175,8 +175,9 @@ Recursive-observation public no-drift is current under `.14.4.8`, while the comb
 No public helper, facade, descriptor/generated version, result schema, semantic/MCP field, CLI, or README behavior
 is current. Canonical `.14.5.1` signoff passes nine doctrines, repository containment and relocation, both
 66-case CLI environments, RAM at 51%, Phase 0 at 1,031/1,031 in 729 seconds, and the exact six-runtime opt-in;
-parent `.14.5` is closed; progressive span dispatch `.14.6` is active with private Perl admitted and Rust's exact
-dormant four-carrier RED frozen at the dedicated-node boundary. Private Rust authority/core `.14.6.3.1` is next.
+parent `.14.5` is closed; progressive span dispatch `.14.6` is active with private Perl admitted, Rust's private
+authority/core current, and Rust's exact dormant four-carrier RED still frozen at the dedicated-node boundary.
+Private Rust carrier integration `.14.6.3.2` is next.
 
 Behavior-free audit `.14.6.0` and ADR `0080` fix that boundary exactly. `parse_job(...)` remains unavailable and
 `dispatch_span(...)` is admitted only as a private Perl intrinsic, not a shared helper. Each backend's current staged registry accepts
@@ -200,6 +201,12 @@ inventory and staged-registry rejection, then runs the authored assignment throu
 generated-plan, and independently compiled emitted-source carriers. Current Rust preserves a generic
 `dispatch_span` call and returns `null` on every route; the only failing assertion requires the missing dedicated
 node. Ordinary Cargo runs zero tests and canonical CI does not route this target, so no Rust behavior is admitted.
+Rust `.14.6.3.1` now supplies the independent private authority beneath that boundary: immutable precompiled
+callbacks, caller-owned decoded sources, typed globally rebased bounded views, intersected grants and minimum
+ceilings, shared cancellation/deadline/steps, decreasing repeated spans plus depth/call bounds, callback/view
+lifetime containment, and detached node-bounded results with all 26 diagnostics. A separate outer-cfg consumer
+proves the complete neutral matrix and adversaries while ordinary and canonical discovery remain inert. This core
+adds no ActionIR node or carrier and therefore leaves the final-path RED and rollout 2/9 unchanged.
 Derived text/AST stitching remains staged `.14.7`; combined program-wide no-drift remains `.14.8`.
 Perl planning child `.14.6.2.0` freezes the final-path dormant consumer without enabling the form. It derives
 the full neutral inventory, passes 83 assertions, and fails once because `PROGRESSIVE_DISPATCH_SPAN` is absent.

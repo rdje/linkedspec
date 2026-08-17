@@ -734,8 +734,15 @@ Rust `.14.6.3.0` freezes the corresponding final-path boundary without implement
 consumer proves the current staged registry rejects `expr-v1`, while native, reconstructed, generated-plan, and
 independently compiled emitted-source routes preserve one generic `dispatch_span` call and return `null` through
 unknown-helper fallback. The sole final failure requires the missing dedicated node. Ordinary discovery executes
-zero tests and canonical CI omits this target. Implement `.14.6.3.1` authority first, `.3.2` carriers second, and
-`.3.3` admission last; do not treat generic fallback consistency as progressive support.
+zero tests and canonical CI omits this target.
+
+Rust `.14.6.3.1` now supplies only the underlying private authority. A doc-hidden module owns immutable logical
+entries with already compiled callbacks, fresh invocation state, typed same-source bounded views, global scalar/
+line/column/UTF-8 rebasing, intersected grants and ceiling minima, shared cancellation/deadline/steps, decreasing
+span/depth/call guards, callback containment, expiring views, and detached node-bounded JSON results. Its separate
+outer-cfg consumer proves the neutral matrix and all diagnostics but runs zero tests ordinarily and has no
+canonical route. Implement `.3.2` carriers next and `.3.3` admission last; neither private authority nor generic
+fallback consistency is progressive carrier support.
 
 The spec's body shell is a
 linked opener/closer parse: `body_brace`

@@ -2,14 +2,16 @@
 
 ## Current Activity
 
-- Rust dormant RED `.14.6.3.0` is focused-signoff-complete from exact clean Perl admission `78bc66e1`; private
-  authority/core `.14.6.3.1` is the next implementation slice.
-- One explicit outer-cfg consumer derives neutral 2/2+8/6/6/8/4/26 and rollout 2/9/86, then traverses native,
-  reconstructed, generated-plan, and independently compiled emitted-source Rust carriers.
-- Current Rust preserves exactly one generic `dispatch_span` call and all four routes return `null` through
-  unknown-helper fallback. The opt-in consumer fails only on missing dedicated `PROGRESSIVE_DISPATCH_SPAN`.
-- Ordinary Cargo discovers zero tests and canonical CI omits the target. No production behavior, rollout,
-  generated format, typed, recognition, other-backend, or outward surface moved.
+- Rust private authority `.14.6.3.1` is focused-signoff-complete from exact clean dormant-RED atomic 264
+  `511865bc`; dedicated-node/four-carrier integration `.14.6.3.2` is the next implementation slice.
+- The immutable host-seeded registry accepts only already compiled callbacks and validated logical identities,
+  top rules, grants, and ceilings; runtime registration, implicit loading, paths, providers, and compilers fail closed.
+- Invocation-local bounded source views retain original typed source authority, rebase Unicode-scalar positions,
+  expire after callbacks, and share cancellation identity, deadline, step budget, depth, and total-call bounds.
+- The opt-in authority proof passes 4/4 across the complete neutral matrix, all 26 diagnostics, nesting, rebasing,
+  expiry, mutation isolation, false payloads, cycle/progress, and deep-detachment adversaries.
+- Ordinary authority/final-path targets discover zero tests and canonical CI omits them. The explicit final-path
+  consumer still fails only on missing `PROGRESSIVE_DISPATCH_SPAN`, so no node or carrier moved early.
 - Perl remains the sole private backend implementation. Progressive governance stays neutral + Perl 2/9/86;
   recognition stays 138 node rows (134 current + four dedicated) / 250 calls / 58 mutations.
 - Typed remains 11/3/152; generated format, Rust/Dart/Julia/Lua, recurrence, public projection, and outward surfaces
@@ -21,15 +23,18 @@
 
 ## Latest Completed Slice
 
-- `.14.6.3.0` freezes the exact Rust four-carrier dormant RED at one missing-node failure, proves ordinary/canonical
-  dormancy, and assigns private authority, carrier integration, and admission exclusively to `.14.6.3.1-.3`.
+- `.14.6.3.1` adds the private immutable Rust registry/invocation/rebased-view authority, passes the exact neutral
+  and adversarial focused proof, and leaves the dedicated node, four carriers, admission, and rollout pending.
 
 ## Next Action
 
-- Commit/clear/prove clean atomic 264, then activate Rust private authority `.14.6.3.1` task-tree-first; do not
-  move carriers, admission, Dart/Julia/Lua, recurrence, typed, public, or outward rows.
+- Commit/clear/prove clean atomic 265, then activate Rust four-carrier integration `.14.6.3.2` task-tree-first; do
+  not move admission, Dart/Julia/Lua, recurrence, typed, public, or outward rows.
 
 ## Recent Completions
+
+- `2026-08-17` — `.14.6.3.1` adds private immutable Rust authority with exact rebasing, narrowing, shared limits,
+  detachment, and 26 diagnostics while the four-carrier RED and rollout boundary remain unchanged.
 
 - `2026-08-17` — `.14.6.3.0` freezes Rust's exact four-carrier dormant RED at the dedicated-node boundary while
   ordinary/canonical discovery stays inert and all production/governance state remains unchanged.
@@ -75,8 +80,6 @@
   LuaJIT children from clean `b7708cde`, advancing only repository-local storage ownership from 18 to 19.
 - `2026-08-16` — `.6.3` completed normalized reconstruction, compatible detached descriptors, and same-engine
   generated-v2 gap execution from clean `4e625a9f` for intended atomic 249 without rollout or outward movement.
-- `2026-08-16` — `.6.2` completed exact shared Lua private native state/accessors/lifecycle from clean `a94c81ed`
-  for intended atomic 248 without descriptor, generated/emitted, admission, rollout, or outward movement.
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source

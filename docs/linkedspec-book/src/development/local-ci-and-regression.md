@@ -199,6 +199,22 @@ The second command passes the neutral inventory, narrow staged-registry rejectio
 generated-plan/independently compiled emitted-carrier checks, then fails only because the dedicated progressive
 node is absent. A generic helper fallback returning `null` is evidence of the missing implementation, not GREEN.
 
+Rust authority/core has a separate focused proof, also intentionally outside ordinary and canonical discovery:
+
+```bash
+bash tools/run_cargo_local.sh test --offline --jobs 1 --manifest-path rust/Cargo.toml \
+  -p linkedspec-runtime --test progressive_span_dispatch_authority
+RUSTFLAGS='--cfg linkedspec_progressive_span_dispatch_authority' \
+  bash tools/run_cargo_local.sh test --offline --jobs 1 --manifest-path rust/Cargo.toml \
+  -p linkedspec-runtime --test progressive_span_dispatch_authority
+```
+
+The first command runs zero tests. The opt-in command executes all neutral view/authority/cancellation/chain/
+execution rows and all 26 diagnostic-context seams, then proves nested shared limits, typed global rebasing,
+callback-scoped view expiry, seed mutation isolation, false payload preservation, and deep result detachment.
+Passing this target proves only the doc-hidden immutable registry/invocation/source-view core. It does not prove a
+dedicated expression, Engine/descriptor/generated carrier, final-path GREEN, CI admission, or Rust rollout.
+
 The `.14.4.0` audit found one contradiction in that baseline: `direct_nonprogress` used the same textual identity
 for invocation and parent. Corrective `.14.4.0.1` changes all six observation identities to positive unique
 monotonic numbers and validates lineage before exact fixture comparison. Four reason-checked regressions prove

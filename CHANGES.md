@@ -10,6 +10,28 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.3.1 — add private Rust progressive dispatch authority
+
+- Activated task-tree-first from exact clean dormant-RED atomic 264 `511865bc`; retrieved ADR `0080`, neutral,
+  Perl-reference, typed-source, recognition, generated-v2, Toolbox, task, Knowledge, and book authorities first.
+- Added a private immutable Rust registry over already compiled callbacks and fresh invocation authority over
+  caller-owned decoded sources. Runtime registration, implicit loading, paths, compilation, providers, ActionIR,
+  engine state, generated carriers, and outward exports are absent or fail closed.
+- Added callback-scoped bounded source views with Unicode-scalar global rebasing through the existing typed-source
+  authority, immutable fingerprints/top rules/grants, capability/policy intersections, ceiling minima, shared
+  cancellation/deadline/step budgets, strictly decreasing repeated spans, and independent depth/call bounds.
+- Child callbacks execute synchronously behind panic/failure containment; parent parser registers are never
+  present; views expire after the callback; results are deeply detached, node-bounded, and reject live-looking
+  authority/handle/parser/registry/transaction/path/source-text/host fields. All 26 diagnostics stay exact.
+- Added one outer-cfg focused consumer covering every neutral 8-view, 6-authority, 6-cancellation, 8-chain, and
+  4-execution case plus nesting, rebasing, expiry, mutation isolation, false payloads, and detachment adversaries.
+  Ordinary discovery executes zero tests and canonical CI does not route it.
+- Kept the dormant final-path RED exact at the missing dedicated node. Progressive rollout remains 2/9/86 and
+  `.14.6.3.2` alone owns ActionIR/static recognition and all four Rust carriers; admission remains `.3.3`.
+- Focused proof passes authority 4/4, ordinary discovery 0/0, package check/format, staged registry 1/1, neutral
+  progressive 2/9/86, typed 11/3/152, recognition 138/250/58, generated strict Rust 105/105, capability 80/0/0,
+  language 250/126, Knowledge 850/7,190, mdBook 79/15,076 KiB, bounded histories, task/memory, and doctrines.
+
 ## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.3.0 — freeze Rust progressive dispatch RED
 
 - Activated Rust task-tree-first from exact clean Perl admission atomic 263 `78bc66e1`; retrieved ADR `0080`, the

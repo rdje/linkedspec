@@ -10,6 +10,37 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.3.1` — private Rust progressive authority): exact clean activation is
+  dormant-RED atomic 264 `511865bc`; the leaf adds authority/core plus one dormant focused consumer only.
+- `bounded_child_parse_authority.rs` deliberately depends on the existing `SourceAuthority`, not Engine or ActionIR.
+  `#[doc(hidden)] pub mod` matches the private integration-test seam already used by recognition transactions;
+  no facade, descriptor, schema, generated-v2 format, CLI, README, or shared helper inventory moves.
+- Registry construction validates and owns logical ids, content fingerprints, allowed top rules, capabilities,
+  and ceilings once. `register` and `load` are typed denials. Entries contain compiled callbacks, never paths,
+  providers, loaders, compilers, mutable registries, source text, or invocation state.
+- Each invocation creates one typed source authority from caller-owned decoded snapshots and carries the sole
+  source identity, cancellation-token identity, monotonic deadline, remaining steps, active chain, depth bound,
+  and total-call bound. A child token must be the same `Arc` authority; it cannot merely copy a token spelling.
+- Dispatch validates exact dynamic literal/string and four-field span inputs before lookup. Effective capabilities
+  and policies intersect; source-detail and numeric ceilings take minima; cost is charged before the child; both
+  pre- and post-child cancellation/deadline safe points run; nested calls share budget and call count.
+- `ProgressiveSourceView` exposes bounded decoded text and maps local scalar boundaries, typed positions/spans,
+  and diagnostic offsets to the original source. Every clone shares one invalidation bit and becomes unusable as
+  soon as its callback returns, errors, or panics.
+- Child output crosses only owned `serde_json::Value`. Recursive detachment enforces the effective node ceiling
+  and rejects field names that look like live authority, handle, parser, registry, transaction, cancellation,
+  path, source-text, or host state. JSON `false` is valid; JSON `null`, callback errors, and panics are failures.
+- The outer-cfg authority target exercises the complete neutral matrix and all 26 required-context diagnostics,
+  then proves nested decreasing dispatch, global rebasing, shared 20→15 budget and two calls, view expiry, seed
+  mutation isolation, and ordinary/canonical absence. `.3.2` remains the sole carrier owner.
+- The initial parallel Cargo check was diagnosed at a repository-local build lock with memory-stalled compiler
+  children; exact duplicate waiters were stopped and the proof reran successfully with `--jobs 1`. macOS
+  `sample` necessarily wrote one 958-byte OS diagnostic to `/tmp`; its exact file was immediately deleted and
+  `test ! -e` proved no residue, so no off-volume project data remains.
+- Final focused proof is authority 4/4, ordinary authority/final-path discovery 0/0, package check and format,
+  staged registry 1/1, exact dormant RED at only `PROGRESSIVE_DISPATCH_SPAN`, progressive 2/9/86, typed
+  11/3/152, recognition 138/250/58, generated strict Rust 105/105, capability 80/0/0, and language 250/126.
+
 - 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.3.0` — Rust progressive dormant RED): exact clean activation is Perl
   admission atomic 263 `78bc66e1`; this slice changes only one outer-cfg test plus durable plan/status surfaces.
 - The real Rust parser accepts the reserved source but lowers it as `Expr::Call { name: "dispatch_span" }` under

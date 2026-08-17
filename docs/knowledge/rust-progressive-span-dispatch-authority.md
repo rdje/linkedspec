@@ -1,0 +1,46 @@
+---
+id: rust-progressive-span-dispatch-authority
+title: Rust progressive span dispatch has a private immutable authority core
+answers:
+  - "where is the Rust progressive span dispatch authority"
+  - "how does Rust progressive dispatch register child parsers"
+  - "can Rust progressive dispatch load parser paths"
+  - "how does Rust progressive dispatch rebase source locations"
+  - "how does Rust progressive dispatch share cancellation and budgets"
+  - "how does Rust progressive dispatch prevent cycles"
+  - "how are Rust progressive child results detached"
+  - "does Rust progressive dispatch have ActionIR carriers"
+  - "does the Rust progressive authority test run in CI"
+date: 2026-08-17
+status: private authority/core current; dedicated node, four carriers, admission, and rollout pending
+tags: [rust, progressive-parsing, registry, source-location, cancellation, diagnostics, task-tree]
+evidence: "FUTURE-PARITY-BACKLOG.14.6.3.1 adds rust/linkedspec-runtime/src/bounded_child_parse_authority.rs and exposes it only through the neutral doc-hidden bounded_child_parse_authority module, because outward guards reserve the progressive syntax/node terminology for later carrier admission. ProgressiveRegistry deeply owns validated logical ids, sha256 fingerprints, allowed top rules, capabilities, policy/resource ceilings, and already-compiled callbacks; register/load return typed denials and no path/provider/compiler authority exists. ProgressiveInvocation owns one SourceAuthority over caller-provided decoded snapshots plus the sole source id, Arc-identity cancellation token, monotonic deadline, shared remaining steps, active global-span chain, depth limit, and total-call limit. Dispatch derives capability/policy intersections and ceiling minima, requires the exact shared token, charges cost before synchronous child execution, enforces pre/post safe points, permits repeated identity/top/source only on a contained strictly smaller span, invalidates every cloned bounded view after the callback, and deeply detaches node-bounded serde_json results while rejecting live-looking fields. rust/linkedspec-runtime/tests/progressive_span_dispatch_authority.rs is file-level cfg linkedspec_progressive_span_dispatch_authority: ordinary discovery runs zero tests and canonical CI omits it; the opt-in proof covers all neutral cases and 26 diagnostics plus nesting, typed rebasing, expiry, mutation isolation, false payloads, and detachment. No dedicated expression node, engine/descriptor/generated carrier, format, rollout row, or outward surface moves; .14.6.3.2 and .3 own those later boundaries."
+reverify:
+  - "bash tools/run_cargo_local.sh check --offline --jobs 1 --manifest-path rust/Cargo.toml -p linkedspec-runtime"
+  - "bash tools/run_cargo_local.sh test --offline --jobs 1 --manifest-path rust/Cargo.toml -p linkedspec-runtime --test progressive_span_dispatch_authority"
+  - "RUSTFLAGS='--cfg linkedspec_progressive_span_dispatch_authority' bash tools/run_cargo_local.sh test --offline --jobs 1 --manifest-path rust/Cargo.toml -p linkedspec-runtime --test progressive_span_dispatch_authority"
+  - "if rg -n 'progressive_span_dispatch_authority\\.rs|--test progressive_span_dispatch_authority' tools/run_ci_local.sh; then exit 1; fi"
+---
+
+# Private Rust progressive authority
+
+This core is executable host authority, not authored Rust progressive behavior. A trusted outer host supplies
+already compiled callbacks and decoded source snapshots. Authored execution can select only a validated logical
+identity, allowed top rule, and one exact same-source direct span; it cannot resolve or load a parser path.
+
+The bounded view retains the original `SourceAuthority`. Child offsets are local Unicode-scalar boundaries, while
+rebased typed positions/spans and diagnostics carry the original source identity and global scalar/line/column/
+UTF-8 coordinates. All view clones share one validity bit and expire when the callback finishes.
+
+Authority only narrows: capabilities and policy modes intersect, detail/resource ceilings take minima, and nested
+dispatch shares cancellation identity, deadline, remaining steps, active chain, depth, and call count. Callback
+failure and panic are contained; `false` remains a valid detached payload, while `null`, live-looking fields, and
+over-ceiling structures fail closed.
+
+The explicit authority consumer passes four tests covering the complete neutral matrix and the nested/mutation
+adversaries. Its ordinary invocation executes zero tests, and the separate final-path consumer remains RED only at
+the missing dedicated node.
+
+The dedicated `PROGRESSIVE_DISPATCH_SPAN` node and native/reconstructed/generated-plan/independently compiled
+emitted-source carriers do not exist yet. The dormant final-path RED therefore remains intentionally RED until
+`.14.6.3.2`; `.14.6.3.3` alone may route that consumer and promote Rust rollout.

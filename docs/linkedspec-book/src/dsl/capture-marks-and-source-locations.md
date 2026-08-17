@@ -445,11 +445,19 @@ through live, reconstructed, generated-plan, and independently loaded emitted ro
 contain no registry callback or mutable authority. Canonical CI requires and runs its exact 125-case consumer once;
 only the private Perl rollout row is promoted.
 
-Rust remains pending, but its implementation boundary is now executable and exact. A dormant outer-cfg consumer
-passes the neutral inventory and proves all four existing Rust carriers preserve the authored call generically;
-each returns `null` because no dedicated progressive node exists. Its only RED assertion demands that node.
-Ordinary Cargo discovers zero tests and canonical CI omits the target, so this proof changes neither behavior nor
-rollout. Rust authority, carrier integration, and admission are separately owned by `.14.6.3.1-.3`.
+Rust's private authority/core is now executable, but authored behavior remains pending. A doc-hidden immutable
+registry accepts only already compiled callbacks; each fresh invocation carries one typed source authority,
+original source id, shared cancellation/deadline/remaining steps, active global-span chain, depth, and call count.
+Callback-scoped views expose bounded decoded text while rebasing local scalar positions/spans/diagnostics through
+the original source authority, then expire on callback return, error, or panic. Capabilities/policies intersect,
+ceilings take minima, repeated identities must use contained strictly smaller spans, and results are deeply
+detached and node-bounded. Its separate outer-cfg proof executes the full neutral matrix and all 26 diagnostics;
+ordinary Cargo and canonical CI remain inert.
+
+The earlier dormant final-path consumer is intentionally unchanged: all four existing carriers still preserve
+the authored call generically and return `null` because no dedicated progressive node exists. Its only RED
+assertion demands that node. `.14.6.3.2` owns the dedicated node and native/reconstructed/generated-plan/emitted
+carriers; `.3.3` alone owns admission and Rust rollout. Private authority alone therefore does not move 2/9/86.
 
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions or
 typed spans are authored values. The `recognition_*` operations are current across all six runtime routes, while

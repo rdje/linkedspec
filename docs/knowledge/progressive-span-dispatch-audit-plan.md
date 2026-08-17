@@ -17,13 +17,14 @@ answers:
   - "is the neutral progressive span dispatch contract executable"
   - "how does typed transaction safety compose with progressive dispatch"
 date: 2026-08-17
-status: executable neutral authority and private Perl admission current; Rust dormant RED frozen; other backends and typed progressive admission pending
+status: executable neutral authority and private Perl admission current; Rust private authority/core current with carriers pending; other backends and typed progressive admission pending
 tags: [progressive-parsing, source-location, span, registry, authority, cancellation, diagnostics, task-tree]
 evidence: "FUTURE-PARITY-BACKLOG.14.6.0 retrieves ADRs 0012-0016 and 0056, the typed/staged/loader authorities, and the five backend registries before probing. LinkedSpec::call_spec_handler_subst lowers both parse_job(...) and dispatch_span(...) to LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER. The Perl registry executes only actionir-body.spec/action_block through builtin:actionir-body.spec and rejects specs/json.spec at resolve; Rust, Dart, Julia, and Lua have the same narrow identity. Their job spans are legacy start/end/line shells rather than typed source-authority spans, and none carries cancellation or a policy ceiling. Native spec loaders resolve/read/compile filesystem inputs before execution and therefore are not safe in-parse registry authority. The typed checker is 10 complete / 4 pending / 126 while the independently closed recognition transaction contract is 9/9; git history proves owner .14.3 never promoted typed transaction_safety, so corrective prerequisite .14.6.0.1 owns that missed composition and stale-current governance before progressive behavior."
 evidence_update_2026_08_17_neutral: "Corrective .14.6.0.1 landed at 27f9c87f with typed transaction safety current at 11/3/152. FUTURE-PARITY-BACKLOG.14.6.1 selects value = dispatch_span(\"expr-v1\", \"Expr\", span) and adds linkedspec-progressive-span-dispatch-v1 plus its independent checker: 2 immutable registry entries, 2 sources/8 views, 6 authority, 6 cancellation, 8 chain, 4 execution cases, 5 backend guard groups/17 paths plus 10 outward guards, 26 diagnostics, rollout 1/9, and 86 mutations. Canonical registration is current while every backend and the typed progressive row remain pending; the recognition effect has no current node/call rows, guarded backend paths omit both future tokens, ten facade/schema/semantic/MCP/CLI/README paths deny premature exposure, and the Perl lowering probe retains the unsupported-helper sentinel."
 evidence_update_2026_08_17_perl_carriers: "Perl .14.6.2.1 adds the immutable private core; .14.6.2.2 adds one exclusive PROGRESSIVE_DISPATCH_SPAN assignment and live/reconstructed/generated-plan/independently-loaded emitted carriers through fresh invocation options. The 125-assertion consumer is green but remains outside CI; neutral/typed/outward rollout and Perl admission stay pending for .14.6.2.3."
 evidence_update_2026_08_17_perl_admission: "FUTURE-PARITY-BACKLOG.14.6.2.3 requires, syntax-checks, and executes the unchanged 125-assertion consumer exactly once in canonical CI; promotes only Perl to make rollout neutral + Perl 2/9; removes the obsolete Perl absence group while retaining four pending-backend groups/14 paths and ten outward guards; and recomposes recognition to 134 current + 4 dedicated node rows with PROGRESSIVE_DISPATCH_SPAN as the sole parser_registry_or_staged_dispatch node and no call row. Typed progressive, Rust/Dart/Julia/Lua, recurring, public no-drift, generated format, shared helper inventory, and outward surfaces remain pending or unchanged."
 evidence_update_2026_08_17_rust_red: "FUTURE-PARITY-BACKLOG.14.6.3.0 adds one outer-cfg Rust consumer that derives the exact neutral inventories and proves the existing staged registry rejects expr-v1 at resolve. The exact authored assignment stays a generic Expr::Call through serialized, native, reconstructed, generated-plan, and independently compiled emitted-source routes; every execution returns null through generic unknown-helper fallback, and neither serialized carrier contains progressive_dispatch_span or PROGRESSIVE_DISPATCH_SPAN. The opt-in test passes every earlier assertion and fails only at the dedicated-node boundary; ordinary discovery runs zero tests and canonical CI omits it. Rust authority/core, carriers, and admission are exclusively assigned to .14.6.3.1-.3."
+evidence_update_2026_08_17_rust_authority: "FUTURE-PARITY-BACKLOG.14.6.3.1 adds a doc-hidden Rust authority independent of ActionIR and Engine: immutable host-seeded already-compiled callbacks, SourceAuthority-backed bounded views/global scalar rebasing, narrowing grants/ceilings, Arc-identity cancellation plus deadline/shared steps, decreasing-span/depth/call bounds, callback containment, expiry, deep detached results, and all 26 diagnostics. Its separate outer-cfg focused consumer executes the complete neutral matrix plus nesting/rebase/expiry/mutation/detachment adversaries; ordinary and canonical discovery remain inert. The original four-carrier final-path RED stays exact because .3.2 alone owns the dedicated node and carriers; rollout stays 2/9 until .3.3."
 reverify:
   - "perl -Iperl -MLinkedSpec -e 'print LinkedSpec::call_spec_handler_subst(\"Top\", q{return(parse_job(\"child.spec\", \"payload\"));})'"
   - "bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py"
@@ -40,7 +41,8 @@ Progressive dispatch is synchronous child-parser invocation while a parent parse
 post-AST work: collect parse jobs, order them, run later parsers, and stitch results. They share provenance and
 registry principles but not execution state or scheduling.
 
-Private Perl progressive behavior is current; Rust, Dart, Julia, and Lua remain pending. Perl recognizes
+Private Perl progressive behavior is current; Rust now has authority/core but no authored carriers, while Dart,
+Julia, and Lua remain pending. Perl recognizes
 `dispatch_span(...)` as one dedicated intrinsic, while `parse_job(...)` and every non-Perl progressive path remain
 unsupported. The five backend staged registries still implement only one function-body
 adapter only: `actionir-body.spec` resolves to `builtin:actionir-body.spec`, compiles top rule `action_block`, and
@@ -54,12 +56,17 @@ execution must never call them from authored recognition. A host or already-auth
 compiles first, then registers an opaque logical identity. Authored code may look up that identity only; a span is
 data and provenance, never loader authority.
 
-Rust now has an exact dormant final-path RED. Under its explicit outer cfg, the consumer derives the neutral
+Rust also has an exact dormant final-path RED. Under its explicit outer cfg, the consumer derives the neutral
 contract, rejects `expr-v1` through the existing staged registry, then follows native, reconstructed descriptor,
 generated-plan, and independently compiled emitted-source routes. The current compiler preserves
 `dispatch_span(...)` only as a generic call, all four routes return `null` through unknown-helper fallback, and
 the sole final failure demands a dedicated progressive node. Without the cfg, Cargo discovers zero tests; the
 target is not routed by canonical CI. This is frozen evidence, not admitted Rust behavior.
+
+The separate Rust `.14.6.3.1` authority is now executable behind its own outer cfg. It mirrors the immutable
+registry, bounded view, narrowing authority, shared safe-point, decreasing-chain, detached-result, and typed
+diagnostic model without adding an ActionIR node or Engine/generated carrier. Consequently this private core does
+not make the final-path RED green and does not promote Rust rollout.
 
 ## Frozen authority and source-view model
 
