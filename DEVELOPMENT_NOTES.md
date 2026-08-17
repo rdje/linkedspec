@@ -10,6 +10,21 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.2.1` — private Perl progressive authority): clean activation is dormant-
+  RED atomic 260 `191465f4`; this leaf deliberately does not touch ActionIR, wrappers, generated source, or rollout.
+- `LinkedSpec::ProgressiveSpanDispatch` owns registry/invocation/view state behind opaque scalar objects. Registry
+  input is validated, deep-copied, recursively locked, and keyed only by normalized logical identity. Runtime
+  `register` and `load` always fail with their exact portable typed diagnostics.
+- A fresh invocation copies decoded source text and owns the caller's cancellation token/check, absolute deadline,
+  remaining step budget, maximum depth/calls, total calls, and active chain. Nested dispatch reuses that authority;
+  repeated parser/top/source identity must be contained and strictly smaller.
+- A callback-scoped `SourceView` exposes only bounded decoded text and rebases local positions, spans, and
+  diagnostics to the original source's Unicode-scalar coordinates. It is invalid after callback return/failure.
+- Callbacks receive no parent parser state. Undefined results become typed child failure; false remains valid;
+  aggregates deep-copy; cycles, references, and live-looking authority keys fail detachment.
+- Focused proof executes every neutral behavior/diagnostic case plus nested, mutation, expiry, rebase, cyclic, and
+  detach adversaries. The final-path consumer remains intentionally 83/1 RED and unrouted until `.2.2-.3`.
+
 - 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.2.0` — dormant Perl progressive RED): clean activation is neutral
   atomic 259 `a0a33c32`; the final-path consumer is deliberately absent from all ordinary/canonical routes.
 - The exact authored assignment reaches a descriptor. Current metadata has `ASSIGN`/`RETURN`, unresolved

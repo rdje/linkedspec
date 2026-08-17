@@ -2,30 +2,32 @@
 
 ## Current Activity
 
-- Perl dormant-RED `.14.6.2.0` is focused-signoff-complete from clean neutral atomic 259 `a0a33c32`; private
-  authority/core `.14.6.2.1` is the next leaf after atomic commit/brief-clear/clean proof.
-- The final-path consumer derives all neutral inventories, passes 83 assertions, and fails only on missing
-  `PROGRESSIVE_DISPATCH_SPAN`. It is absent from ordinary/canonical routes and changes no production behavior.
-- Toolbox proof fixes the current seam: descriptors carry `ASSIGN`/`RETURN`, one unresolved `dispatch_span`, zero
-  raw dependencies, and no dedicated node; generated-v2 carries one sentinel and loads to null; the separate
-  copied-text staged function-body adapter rejects `expr-v1` at resolve.
-- `.2.1` owns immutable registry/source-view/capability/policy/ceiling/cancellation/budget/chain/isolation/
-  detachment authority independent of ActionIR. `.2.2` owns all four carriers through the existing live/generated
-  invocation-options seam; `.2.3` alone registers the unchanged consumer and promotes Perl.
+- Perl authority/core `.14.6.2.1` is focused-signoff-complete from clean dormant-RED atomic 260 `191465f4`;
+  carrier integration `.14.6.2.2` is next after atomic commit/brief-clear/clean proof.
+- The private module owns an immutable logical registry, callback-scoped same-source views with global rebasing,
+  narrowing capabilities/policies/ceilings, shared cancellation/deadline/budget, decreasing-span plus depth/call
+  bounds, isolated fail-only children, detached results, and all 26 diagnostics independently of ActionIR.
+- Its focused consumer executes every neutral view/authority/cancellation/chain/execution/diagnostic case plus
+  nested shared-authority, seed mutation, view expiry, diagnostic rebase, cyclic result, and detach adversaries.
+- The final-path consumer remains absent from CI and exact at 83 pass / one missing `PROGRESSIVE_DISPATCH_SPAN`
+  failure. `.2.2` owns native/reconstructed/generated-plan/emitted carriers; `.2.3` alone admits Perl.
 - Neutral remains 2 entries, 2 sources/8 views, 6 authority, 6 cancellation, 8 chain, 4 execution, 26 diagnostics,
   rollout 1/9 and 86 mutations. Typed remains 11/3/152; all non-Perl and outward boundaries remain pending/closed.
 
 ## Latest Completed Slice
 
-- `.14.6.2.0` freezes an unrouted 83/1 final-path Perl RED plus exact authority/core, carrier, and admission
-  ownership without enabling syntax, runtime, typed rollout, or outward behavior.
+- `.14.6.2.1` adds the independent private Perl authority core and focused exhaustive consumer without enabling
+  syntax, ActionIR, execution carriers, CI admission, typed rollout, or outward behavior.
 
 ## Next Action
 
-- Commit/clear/prove clean atomic 260, then activate `.14.6.2.1` task-tree-first and implement only the private
-  registry/source-view/cancellation/budget/chain/isolation/detachment authority independent of ActionIR.
+- Commit/clear/prove clean atomic 261, then activate `.14.6.2.2` task-tree-first and integrate only the dedicated
+  node plus fresh invocation authority across the four existing Perl execution carriers.
 
 ## Recent Completions
+
+- `2026-08-17` — `.14.6.2.1` adds the private immutable Perl registry/invocation/source-view authority and executes
+  every neutral case plus mutation/nesting/rebase/detachment adversaries while leaving the 83/1 RED unrouted.
 
 - `2026-08-17` — `.14.6.2.0` freezes the final-path Perl progressive RED at 83 pass / one missing-node failure,
   keeps it unrouted, and assigns core/carriers/admission to `.1-.3` without production movement.
@@ -64,8 +66,6 @@
   clean `5089a360` for intended atomic 247 without runtime or rollout movement.
 - `2026-08-16` — `.6.0` froze the behavior-free shared Lua five-leaf plan from clean `a6ff2614` for intended atomic 246.
 - `2026-08-16` — `.5.5` and parent `.5` landed cleanly as atomic 245 at `a6ff2614` with promoted canonical receipt.
-- `2026-08-16` — `.5.5` reused Julia's primary adapter, admitted the exact nine-role consumer at 5/4/58, and
-  canonical-signoff-completed parent `.5` from clean `0a961043`.
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source

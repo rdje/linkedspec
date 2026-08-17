@@ -8,13 +8,12 @@ Duplicate-slot rollout is closed at 7 complete / 0 pending; recurring proof rema
 Repeated-action rollout is closed at 8 complete / 0 pending; recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh`.
 
-Progressive audit `.14.6.0`, typed correction `.0.1`, and neutral `.1` are complete through atomic 259
-`a0a33c32`. Perl `.2` is split into dormant RED/core/carriers/admission `.0-.3`; the final-path RED passes 83 then
-fails only on absent `PROGRESSIVE_DISPATCH_SPAN` and remains unrouted. `.1` next builds the immutable registry,
-rebased same-source view, narrowing authority, cancellation/budget, decreasing-chain, isolation, detachment, and
-diagnostics independent of ActionIR. `.2` attaches it through existing live/generated invocation options across
-four carriers; `.3` alone admits Perl. Backends `.3-.6`, recurrence `.7`, public `.8`, staged `.14.7`, and final
-combined `.14.8` retain their order.
+Progressive `.14.6.0-.1`, dormant Perl RED `.2.0`, and private authority/core `.2.1` are complete through intended
+atomic 261. The private module executes exact immutable-registry, rebased-view, narrowing authority, shared
+cancellation/budget, decreasing-chain, isolation/detachment, and 26-diagnostic contracts without ActionIR. The
+final-path consumer stays unrouted at 83/1. Carrier leaf `.2.2` next attaches one fresh authority through existing
+live/generated invocation options across native, reconstructed, generated-plan, and emitted-source routes; `.2.3`
+alone admits Perl. Backends `.3-.6`, recurrence `.7`, public `.8`, staged `.14.7`, and combined `.14.8` follow.
 
 Accepted long-horizon direction: ADR `0064` plus `SPEC-LANGUAGE-SELF-CONTAINMENT` define portable `.spec`
 problem-domain closure without ambient effects and an optional honest EBNF-like frontend over the same canonical

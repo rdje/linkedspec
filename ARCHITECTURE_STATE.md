@@ -61,6 +61,17 @@ authority through the invocation-options hash already accepted by both live and 
 registry/parser/source/cancellation state out of emitted bytes. Admission `.2.3` alone registers the unchanged
 consumer and promotes Perl.
 
+Private authority/core `.14.6.2.1` implements that boundary without exposing it to ActionIR. A host constructs
+`LinkedSpec::ProgressiveSpanDispatch` from exact immutable logical entries whose compiled authority is already a
+callback; runtime mutation and implicit loading fail typed. Each invocation copies its decoded source authority
+and shares one cancellation token/check, deadline, remaining budget, depth, total-call count, and active chain.
+Callback-scoped views expose bounded text and globally rebase positions, spans, and diagnostics in Unicode-scalar
+coordinates. Capabilities/policies intersect, ceilings take minima, repeated identities strictly shrink, and
+child callbacks see no parent registers. Results preserve false, deep-detach aggregates, and reject undefined,
+cyclic, reference-bearing, or live-authority-shaped payloads. The focused consumer executes all neutral cases and
+diagnostics plus nested-authority/mutation/expiry/rebase/detachment adversaries. The 83/1 final-path RED, rollout,
+typed status, carriers, generated contract, and outward surfaces stay unchanged for `.2.2-.3`.
+
 ## Lossless gaps are current in the typed algebra without a second behavior owner
 
 `INTER-MATCH-GAP-CAPTURE.7.2` landed public admission as atomic 254 at `bb0c3768`. The shared language inventory

@@ -10,6 +10,22 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.2.1 — add private Perl progressive dispatch authority
+
+- Activated the authority/core leaf task-tree-first from clean dormant-RED atomic 260 `191465f4`; retrieved the
+  neutral/typed/recognition/ADR/Knowledge/Toolbox authorities before implementing the independent private seam.
+- Added `LinkedSpec::ProgressiveSpanDispatch`: an immutable, host-seeded logical registry over already compiled
+  callbacks, with no mutation, path resolution, provider lookup, compilation, ActionIR, or wrapper dependency.
+- Added invocation-local copied decoded sources, bounded callback-scoped views, Unicode-scalar global rebasing,
+  capability/policy intersections, ceiling minima, shared cancellation/deadline/step authority, decreasing-span
+  cycle proof, independent depth/call bounds, fail-only child execution, and deep detached results.
+- Added the focused authority consumer. It executes every neutral 8-view, 6-authority, 6-cancellation, 8-chain,
+  4-execution, and 26-diagnostic row, then proves seed mutation isolation, shared nested budgets/call counts,
+  transient-view invalidation, rebased diagnostics, false payloads, cyclic-result rejection, and deep detachment.
+- Kept the final-path consumer dormant and exact at 83 pass / one missing-node RED. Syntax, ActionIR, execution
+  carriers, generated-source format, CI routing, rollout, typed status, and outward behavior remain unchanged;
+  `.14.6.2.2` exclusively owns carrier integration.
+
 ## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.2.0 — freeze Perl progressive dispatch RED
 
 - Split the Perl parent task-tree-first from clean neutral atomic 259 `a0a33c32`, then retrieved ADR `0080`, the
