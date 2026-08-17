@@ -2,7 +2,7 @@
   "format": 1,
   "contract_id": "linkedspec-progressive-span-dispatch-v1",
   "task_owner": "FUTURE-PARITY-BACKLOG.14.6.1",
-  "status": "neutral_complete_backends_pending",
+  "status": "perl_complete_other_backends_pending",
   "expected_counts": {
     "registry_entries": 2,
     "sources": 2,
@@ -11,8 +11,8 @@
     "cancellation_cases": 6,
     "chain_cases": 8,
     "execution_cases": 4,
-    "backend_guard_groups": 5,
-    "backend_guard_paths": 17,
+    "backend_guard_groups": 4,
+    "backend_guard_paths": 14,
     "outward_guard_paths": 10,
     "diagnostics": 26,
     "rollout_legs": 9,
@@ -30,7 +30,7 @@
     ],
     "result": "one detached child payload returned as the expression value",
     "failure_policy": "fail_only; every dispatch or child failure propagates unchanged and no null, fallback, retry, or alternate parser is implied",
-    "availability": "neutral authority only; no backend admits the spelling until its independent rollout row completes"
+    "availability": "private Perl runtime admitted; every other backend remains unavailable until its independent rollout row completes"
   },
   "policy": {
     "registry": "the host seeds immutable logical entries containing already compiled parser authority; authored execution may look up an identity but cannot resolve, load, compile, mutate, or enumerate",
@@ -864,7 +864,7 @@
     }
   ],
   "current_boundary": {
-    "status": "all_backend_rows_pending_and_unavailable",
+    "status": "perl_admitted_other_backend_rows_pending",
     "typed_rollout": {
       "path": "capability_conformance/typed_source_location_contract.json",
       "leg": "progressive_span_dispatch",
@@ -875,28 +875,18 @@
       "path": "capability_conformance/recognition_transaction_contract.json",
       "effect": "parser_registry_or_staged_dispatch",
       "classification": "rejected",
-      "action_ir_rows": [],
+      "action_ir_rows": [
+        "PROGRESSIVE_DISPATCH_SPAN"
+      ],
       "canonical_call_rows": []
     },
-    "perl_lowering_probe": {
-      "source": "return(dispatch_span(\"expr-v1\", \"Expr\", span));",
-      "callee_marker": "dispatch_span",
-      "unsupported_marker": "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER",
-      "expected_occurrences": 1
+    "perl_admission": {
+      "consumer_path": "t/progressive_span_dispatch_perl_contract.t",
+      "syntax_invocation": "perl -c -Iperl t/progressive_span_dispatch_perl_contract.t",
+      "registration_marker": "running exact Perl progressive span-dispatch admission consumer",
+      "invocation": "PERL5LIB= prove -Iperl t/progressive_span_dispatch_perl_contract.t"
     },
     "backend_guard_groups": [
-      {
-        "backend": "perl",
-        "paths": [
-          "perl/LinkedSpec/ActionIR/Contracts.pm",
-          "perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm",
-          "perl/LinkedSpec/ActionIR/ValueExpr.pm"
-        ],
-        "forbidden_tokens": [
-          "dispatch_span",
-          "PROGRESSIVE_DISPATCH_SPAN"
-        ]
-      },
       {
         "backend": "rust",
         "paths": [
@@ -1216,8 +1206,10 @@
       "order": 2,
       "owner": "FUTURE-PARITY-BACKLOG.14.6.2",
       "leg": "perl",
-      "status": "pending",
-      "paths": []
+      "status": "complete",
+      "paths": [
+        "t/progressive_span_dispatch_perl_contract.t"
+      ]
     },
     {
       "order": 3,
@@ -1353,8 +1345,8 @@
     "current_recognition_path",
     "current_recognition_effect",
     "current_recognition_classification",
-    "current_perl_probe_marker",
-    "current_perl_probe_callee",
+    "current_perl_admission_consumer",
+    "current_perl_admission_marker",
     "current_backend_guard_path",
     "current_backend_guard_token",
     "current_outward_guard_path",
@@ -1363,7 +1355,7 @@
     "diagnostic_removed",
     "diagnostic_context",
     "rollout_removed",
-    "rollout_perl_promoted",
+    "rollout_perl_regressed",
     "canonical_checker",
     "canonical_storage"
   ]

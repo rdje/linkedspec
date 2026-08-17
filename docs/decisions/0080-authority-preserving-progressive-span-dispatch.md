@@ -1,7 +1,7 @@
 # ADR 0080: Progressive span dispatch uses pre-registered same-source child authority
 
 - Date: 2026-08-17
-- Status: accepted architecture; executable neutral authority current under `.14.6.1`; backend implementation pending
+- Status: accepted architecture; executable neutral authority and private Perl admission current; other backends pending
 - Tags: architecture, parser-composition, progressive-parsing, spans, source-location, registry, authority, cancellation, portability
 
 ## Context
@@ -54,11 +54,12 @@ transaction-composition projection before neutral progressive behavior.
 - A parser id or span cannot smuggle filesystem, compilation, registry, capability, policy, source-detail, or
   renewed cancellation authority into active recognition.
 - The executable neutral artifact/checker is current at 2 registry entries, 2 sources/8 view cases, 6 authority,
-  6 cancellation, 8 chain, and 4 execution cases, 5 backend guards/17 paths plus 10 outward guards, 26 diagnostics, 1/9 rollout, and 86
-  rejected mutations.
-- Its current-boundary proof keeps the typed row pending, requires the dispatch effect to remain rejected with no
-  current ActionIR/call rows, denies both future tokens in the guarded backend paths, denies private spelling/
-  node/rollout exposure in ten outward paths, and observes the Perl unsupported-helper sentinel.
+  6 cancellation, 8 chain, and 4 execution cases, 4 pending-backend guards/14 paths plus 10 outward guards,
+  26 diagnostics, 2/9 rollout, and 86 rejected mutations.
+- Its current-boundary proof admits only the exact private Perl consumer, keeps the typed row pending, requires the
+  dispatch effect to remain rejected with `PROGRESSIVE_DISPATCH_SPAN` as its sole current node and no call row,
+  denies both tokens in the four pending backend groups, and denies private spelling/node/rollout exposure in ten
+  outward paths.
 - Backends must preserve one source identity and detached child results despite different native register units.
 - Neutral `.14.6.1`, backend `.2-.6`, recurrence `.7`, and public no-drift `.8` can be verified independently.
 - This audit changes no grammar, parser/compiler/runtime, facade, schema, semantic/MCP, CLI, or README behavior.

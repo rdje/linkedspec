@@ -2,29 +2,37 @@
 
 ## Current Activity
 
-- Perl carrier integration `.14.6.2.2` is canonical-signoff-complete from clean authority atomic 261 `e185b352`;
-  admission `.14.6.2.3` is next after atomic commit/brief-clear/clean proof.
+- Perl lane `.14.6.2` is canonical-signoff-complete from exact clean carrier commit `075cb7b8`; `.14.6.2.3`
+  requires, syntax-checks, and executes the unchanged 125-assertion consumer once in canonical CI.
 - One exclusive ActionIR contract emits exactly `PROGRESSIVE_DISPATCH_SPAN`, preserves static logical operands, and
   prevents a duplicate assignment event; compile policy rejects dynamic/invalid identities and non-bare spans.
 - Fresh authority enters only through invocation options. Live, reconstructed descriptor, generated-plan, and
   independently loaded emitted-source routes return the same detached child result without serializing authority.
-- Recognition effect propagation and runtime token visibility forbid uncommitted dispatch. The final-path consumer
-  is green at 125 assertions but remains absent from ordinary/canonical CI; `.2.3` alone admits Perl.
-- Neutral remains 1/9/86, typed 11/3/152, recognition 137/250/58, and all outward/non-Perl boundaries remain closed.
+- Recognition effect propagation and runtime token visibility forbid uncommitted dispatch. Progressive governance
+  is neutral + Perl 2/9/86 with four pending-backend groups/14 paths and ten unchanged outward guards.
+- Recognition is 138 node rows (134 current + four dedicated) / 250 calls / 58 mutations. `dispatch_span` remains
+  outside the shared helper inventory because Perl-only intrinsic admission does not prove other backend support.
+- Typed remains 11/3/152; generated format, Rust/Dart/Julia/Lua, recurrence, public projection, and outward surfaces
+  remain unchanged or pending.
+- Mandatory change-history rollover publishes immutable segment 4993; ADR `0082` increases only its finite
+  capacity to 20 files / 19 manifest lines while every root, byte, per-segment, and aggregate ceiling stays fixed.
 - Corrected Phase 0 passes 1,031/1,031 after preserving require-time LinkedRE laziness; language is 250/126,
   capability is 80/0/0, and ADR `0081` admits only the finite 15-file / 14-manifest-line notes capacity.
 
 ## Latest Completed Slice
 
-- `.14.6.2.2` adds the private dedicated node and four fresh invocation-options carriers without CI admission,
-  neutral/typed rollout, generated-format, staged-registry, or outward movement.
+- `.14.6.2.3` admits only private Perl, advances progressive governance to 2/9/86 and recognition to 138/250/58,
+  preserves shared-helper/outward closure, and closes parent `.14.6.2` for intended atomic 263.
 
 ## Next Action
 
-- Commit/clear/prove clean atomic 262, then activate `.14.6.2.3` task-tree-first and admit only the unchanged Perl
-  consumer/rollout leg with its designated canonical proof.
+- Commit/clear/prove clean atomic 263, then split and activate Rust `.14.6.3` task-tree-first from that exact
+  handoff; do not move Dart/Julia/Lua, recurrence, typed, public, or outward rows.
 
 ## Recent Completions
+
+- `2026-08-17` — `.14.6.2.3` canonically routes the exact 125-assertion Perl consumer, promotes only Perl to
+  progressive 2/9/86, recomposes recognition to 138/250/58, and closes `.14.6.2` without outward movement.
 
 - `2026-08-17` — `.14.6.2.2` privately integrates one exclusive dedicated node and four fresh-authority carriers;
   125 focused assertions plus canonical signoff pass while CI routing, rollout, generated format, staged registry,
@@ -68,7 +76,6 @@
   for intended atomic 248 without descriptor, generated/emitted, admission, rollout, or outward movement.
 - `2026-08-16` — `.6.1` completed exact shared Lua authored/static/compiled metadata and ten dormancy guards from
   clean `5089a360` for intended atomic 247 without runtime or rollout movement.
-- `2026-08-16` — `.6.0` froze the behavior-free shared Lua five-leaf plan from clean `a6ff2614` for intended atomic 246.
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source

@@ -51,7 +51,7 @@
 > treat those compatibility controls as transaction support. The accepted transaction forms are `recognition_checkpoint()`,
 > `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and `recognition_rollback(token)`. The attempt
 > returns a match boolean; commit separately exposes the staged payload. The neutral authority is now executable
-> and fail-closed over 133 current + four dedicated node rows, 250 call rows, and 58 mutations.
+> and fail-closed over 134 current + four dedicated node rows, 250 call rows, and 58 mutations.
 > Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT transaction support is current and canonically admitted.
 > Public no-drift is current and recognition rollout is 9/9 complete. Neutral proof alone is not backend support.
 >
@@ -162,10 +162,12 @@
 > Progressive neutral `.14.6.1` reserves
 > `value = dispatch_span("expr-v1", "Expr", span)` as a dedicated fail-only future expression. Its checker passes
 > 2 immutable registry entries, 2 sources/8 rebased views, 6 authority, 6 cancellation, 8 chain, 4 execution
-> cases, 5 backend guards/17 implementation paths plus 10 outward guards, 26 diagnostics, 1/9 rollout, and 86 mutations. Every backend
-> remains pending; the typed row is pending, the rejected effect has no current node/call rows, guarded paths omit
-> both future tokens, outward guards deny premature exposure, and Perl lowering stays unsupported. No path loader, public facade/schema/semantic/MCP/CLI/
-> README surface, or typed rollout row moves.
+> cases, 4 pending-backend guards/14 implementation paths plus 10 outward guards, 26 diagnostics, 2/9 rollout,
+> and 86 mutations. Private Perl admission is current through one exact canonical 125-assertion consumer; Rust,
+> Dart, Julia, Lua, recurrence, public no-drift, and the typed row remain pending. The rejected effect owns exactly
+> current node `PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded pending-backend paths omit both tokens and
+> outward guards deny exposure. No path loader, public facade/schema/semantic/MCP/CLI/README surface, shared helper
+> inventory, generated format, or typed rollout row moves.
 >
 > Definitive neutral signoff passes the exact six-runtime composition and support ledgers, all eight doctrines,
 > six-family containment, repository relocation, CLI 66x2, RAM 35%, and canonical Phase 0 1,031/1,031 in 714
@@ -334,8 +336,9 @@ appears in this book and in the governed occurrence sources: the 105-fixture neu
 complete-named-mark fixture, and the public gap-contract example. The strict checker independently derives 126
 public identifier-shaped calls from the Perl ActionIR contract registry, requires every one in each backend
 inventory, and currently rejects fifteen classified names: nine compatibility/legacy/internal contracts, five
-grammar-owned recognition intrinsics, and private progressive `dispatch_span`; all lower to dedicated nodes
-rather than shared helper calls. Its separate Perl admission leaf will remove the progressive exclusion. Dart's,
+grammar-owned recognition intrinsics, and private Perl-only progressive `dispatch_span`; all lower to dedicated
+nodes rather than shared helper calls. The progressive exclusion remains until exact shared-backend recurrence;
+Perl admission alone does not claim Dart/Julia/Lua helper support. Dart's,
 Julia's, and Lua's separately rolled-out seven
 source-boundary compatibility aliases are checked with their canonical targets against the neutral typed-source contract; they do
 not silently widen the shared 250-name inventory. Lua executes the mappings through one shared runtime on PUC Lua

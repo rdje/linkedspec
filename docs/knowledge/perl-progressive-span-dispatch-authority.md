@@ -14,16 +14,17 @@ answers:
   - "does Perl progressive span dispatch have public syntax"
   - "is Perl progressive span dispatch admitted"
 date: 2026-08-17
-status: private authority and ActionIR carriers current; Perl admission pending
+status: private authority, four ActionIR carriers, and canonical Perl admission current
 tags: [perl, progressive, dispatch, registry, source-span, authority, cancellation, isolation, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.14.6.2.1 adds perl/LinkedSpec/ProgressiveSpanDispatch.pm and its focused independent consumer t/progressive_span_dispatch_perl_authority.t. The registry deep-copies, validates, and recursively locks exact logical entries whose compiled authority is already a CODE reference; register and load always return the frozen mutation/implicit-load diagnostics. Each invocation owns copied decoded sources, one source identity, the shared cancellation token/callback, clock/deadline, remaining step budget, depth/call bounds, and active chain. A dispatch creates a callback-scoped SourceView, rebases local Unicode-scalar positions/spans/diagnostics to the original source, intersects capabilities/policies, takes ceiling minima, requires same cancellation authority and decreasing same-identity spans, spends the shared budget, invalidates the view, and deep-detaches the result while rejecting cycles, live-looking keys, and other references. The child receives no parent cursor/mark/capture/variable/transaction state. The consumer executes all 8 view, 6 authority, 6 cancellation, 8 chain, 4 execution, and 26 diagnostic rows, plus nested shared-authority, expired-view, rebased-diagnostic, cyclic-result, seed-mutation, and aggregate-detachment proofs. The dormant final-path consumer remains exactly 83 pass / one missing PROGRESSIVE_DISPATCH_SPAN failure and stays outside CI; no syntax, ActionIR, wrapper, generated-source, rollout, or outward behavior is enabled."
 evidence_update_2026_08_17_carriers: "FUTURE-PARITY-BACKLOG.14.6.2.2 now binds this unchanged core through private ActionIR and four invocation-options carriers. The final-path consumer passes 125 assertions and stays outside CI; admission and outward rollout remain pending."
+evidence_update_2026_08_17_admission: "FUTURE-PARITY-BACKLOG.14.6.2.3 admits the unchanged 125-assertion final-path consumer exactly once in canonical CI and promotes only the Perl rollout row. Neutral + Perl is 2/9; typed progressive, other runtimes, recurrence, public no-drift, generated format, shared helper inventories, and outward surfaces remain unchanged or pending."
 reverify:
   - "perl -Iperl -c perl/LinkedSpec/ProgressiveSpanDispatch.pm"
   - "PERL5LIB= prove -q -Iperl t/progressive_span_dispatch_perl_authority.t"
   - "bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_contract.py"
   - "PERL5LIB= prove -q -Iperl t/progressive_span_dispatch_perl_contract.t"
-  - "! rg -q 'progressive_span_dispatch_perl_contract[.]t' tools/run_ci_local.sh"
+  - "test \"$(rg -c 'PERL5LIB= prove -Iperl t/progressive_span_dispatch_perl_contract[.]t' tools/run_ci_local.sh)\" -eq 1"
 ---
 
 # Perl progressive span-dispatch authority
@@ -54,8 +55,8 @@ Transient source views are invalidated even when the callback fails.
 
 Carrier leaf `.14.6.2.2` attaches this private authority through the existing
 invocation-options seam and adds the dedicated ActionIR node across four tested
-routes without serializing live authority. Admission leaf `.14.6.2.3` alone may
-route the final-path consumer and promote the Perl rollout row.
+routes without serializing live authority. Admission leaf `.14.6.2.3` now routes
+the unchanged final-path consumer and promotes only the Perl rollout row.
 
 ## Links
 

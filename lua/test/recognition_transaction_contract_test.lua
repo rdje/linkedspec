@@ -184,9 +184,9 @@ check_equal(
   "admitted Lua status"
 )
 for name, expected in pairs({
-  current_action_ir_nodes = 133,
+  current_action_ir_nodes = 134,
   dedicated_action_ir_nodes = 4,
-  all_action_ir_nodes = 137,
+  all_action_ir_nodes = 138,
   canonical_call_contracts = 250,
   token_positive_cases = 8,
   token_negative_cases = 17,

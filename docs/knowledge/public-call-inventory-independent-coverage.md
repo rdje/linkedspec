@@ -14,7 +14,7 @@ status: current
 tags: [actionir, inventory, coverage, parity, marks, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.17.5 admits the exact seven complete named-mark helpers into equal 246-name Dart/Julia/Lua inventories. FUTURE-PARITY-BACKLOG.14.3.2.2 advances the Perl lowering registry to 135 identifier-shaped diagnostics by adding five grammar-owned recognition intrinsics with dedicated ActionIR nodes. At that boundary tools/check_language_capability_coverage.pl combined 105 corpus sources with complete_named_mark_contract.json, subtracted fourteen exact compatibility/legacy/internal/intrinsic classifications, and required the remaining public calls in every inventory. A simultaneous clear_mark deletion from all three inventories is reported by the exact-family and independent-public checks."
 evidence_update_2026_08_07_dart_source_aliases: "FUTURE-PARITY-BACKLOG.14.2.3.0.1 keeps Dart's seven source-boundary compatibility spellings in a separate private inventory instead of widening the 246 names shared with Julia/Lua. The same checker derives their canonical targets from Dart and requires the exact seven name/target pairs to equal typed_source_location_contract.json."
-evidence_update_2026_08_17_gap_and_progressive: "INTER-MATCH-GAP-CAPTURE.7.2 admitted entry_slot, gap_kind, gap_span, and gap_text, advancing the shared backend inventory to 250 and the independently derived public Perl set to 126. FUTURE-PARITY-BACKLOG.14.6.2.2 then added private dedicated dispatch_span recognition; the checker classifies that fifteenth exact non-public diagnostic until `.14.6.2.3`, keeping the public 250/126 boundary unchanged and making premature helper admission fail."
+evidence_update_2026_08_17_gap_and_progressive: "INTER-MATCH-GAP-CAPTURE.7.2 admitted entry_slot, gap_kind, gap_span, and gap_text, advancing the shared backend inventory to 250 and the independently derived public Perl set to 126. FUTURE-PARITY-BACKLOG.14.6.2.2 then added private dedicated dispatch_span recognition, and `.14.6.2.3` canonically admits that Perl-only intrinsic. The checker retains it as the fifteenth exact non-public diagnostic until exact shared-backend recurrence, keeping 250/126 unchanged and preventing Perl admission from falsely claiming Dart/Julia/Lua helper support."
 reverify: "perl tools/check_language_capability_coverage.pl --report && bash tools/run_python_project_data.sh tools/check_complete_named_mark_contract.py"
 ---
 
@@ -46,8 +46,9 @@ remain present in Perl and absent from backend public helper inventories. The re
 intrinsics with dedicated ActionIR nodes, not ordinary calls; disappearance or accidental helper admission fails
 loudly.
 
-The fifteenth exclusion is private `dispatch_span`, also represented by a dedicated ActionIR node. It remains out
-of the ordinary public-call inventory until the separately owned Perl admission leaf removes that classification.
+The fifteenth exclusion is private Perl-only `dispatch_span`, also represented by a dedicated ActionIR node. It
+remains out of the ordinary shared call inventory until exact backend recurrence proves Dart, Julia, and Lua
+support; Perl admission alone does not remove that classification.
 
 Mutation proof removes `clear_mark` from all three backend inventories simultaneously while retaining their exact
 seven-name family views. Backend equality still holds, but the report identifies `clear_mark` through both the

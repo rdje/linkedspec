@@ -115,7 +115,7 @@ future work; recursive-observation public projection/no-drift is current without
 syntax is ratified:
 `recognition_checkpoint()`, `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and
 `recognition_rollback(token)`. Match is a strict boolean and the falsey-safe payload remains staged until commit.
-Their neutral artifact/checker is executable at 133 current + 4 dedicated ActionIR rows, 250 call rows, and 58
+Their neutral artifact/checker is executable at 134 current + 4 dedicated ActionIR rows, 250 call rows, and 58
 rejected mutations, with recognition rollout 9/9 complete. The authored forms and their exact recurring proof are
 current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; public no-drift is current and transaction activity
 `.14.3` is closed. The separate typed-
@@ -175,23 +175,24 @@ Recursive-observation public no-drift is current under `.14.4.8`, while the comb
 No public helper, facade, descriptor/generated version, result schema, semantic/MCP field, CLI, or README behavior
 is current. Canonical `.14.5.1` signoff passes nine doctrines, repository containment and relocation, both
 66-case CLI environments, RAM at 51%, Phase 0 at 1,031/1,031 in 729 seconds, and the exact six-runtime opt-in;
-parent `.14.5` is closed and progressive span dispatch `.14.6` is next.
+parent `.14.5` is closed; progressive span dispatch `.14.6` is active with private Perl admitted and Rust next.
 
-Behavior-free audit `.14.6.0` and ADR `0080` fix that boundary exactly. The admitted backend boundary still treats
-both `parse_job(...)` and `dispatch_span(...)` as unavailable helpers. Each backend's current staged registry accepts
+Behavior-free audit `.14.6.0` and ADR `0080` fix that boundary exactly. `parse_job(...)` remains unavailable and
+`dispatch_span(...)` is admitted only as a private Perl intrinsic, not a shared helper. Each backend's current staged registry accepts
 only the built-in `actionir-body.spec` / `action_block` function-body adapter; a normal `.spec` path is rejected,
 and the legacy job span carries neither typed source authority nor cancellation/policy ceilings. Progressive work
 therefore starts with an immutable host-seeded entry for an already compiled parser, never an in-parse loader.
 
-Neutral `.14.6.1` now reserves `value = dispatch_span("expr-v1", "Expr", span)` as one dedicated fail-only
-expression without enabling a backend. The child will run synchronously over one contiguous direct span. Its internal registers are view-local, but typed
+Neutral `.14.6.1` reserved `value = dispatch_span("expr-v1", "Expr", span)` as one dedicated fail-only expression;
+Perl `.14.6.2` now admits it privately. The child runs synchronously over one contiguous direct span. Its internal registers are view-local, but typed
 positions/spans and diagnostics rebase to the original source identity and global scalar offsets. Parent state is
 isolated, capabilities intersect, ceilings only narrow, cancellation/budget cannot reset, and a repeated parser/
 top/source chain must strictly shrink its span. Correction `.14.6.0.1` repaired the typed transaction row; neutral
 governance passes 2 registry entries, 2 sources/8 views, 6 authority, 6 cancellation, 8 chain, 4 execution cases,
-5 backend guards/17 implementation paths plus 10 outward guards, 26 diagnostics, rollout 1/9, and 86 mutations. The typed row remains
-pending, the rejected effect owns no admitted node/call rows, guarded paths omit both future tokens, and outward
-guards deny exposure. Backend `.2-.6`, recurrence `.7`, and public no-drift `.8` follow.
+4 pending-backend guards/14 implementation paths plus 10 outward guards, 26 diagnostics, rollout 2/9, and 86
+mutations. The typed row remains pending; the rejected effect owns current node `PROGRESSIVE_DISPATCH_SPAN` and no
+call row; guarded Rust/Dart/Julia/Lua paths omit both tokens; and outward guards deny exposure. Backend `.3-.6`,
+recurrence `.7`, and public no-drift `.8` follow.
 Derived text/AST stitching remains staged `.14.7`; combined program-wide no-drift remains `.14.8`.
 Perl planning child `.14.6.2.0` freezes the final-path dormant consumer without enabling the form. It derives
 the full neutral inventory, passes 83 assertions, and fails once because `PROGRESSIVE_DISPATCH_SPAN` is absent.
@@ -206,7 +207,8 @@ identity/top rule plus one bare span binding, and starts fresh authority only fr
 reconstructed descriptor, validated generated-plan, and independently loaded emitted-source routes return the
 same detached child payload. Generated-v2 serializes logical operands only, missing authority remains a typed
 failure, and uncommitted recognition graphs reject the effect statically plus defensively at runtime. The consumer
-passes 125 assertions but stays outside CI; admission `.2.3` alone registers it and promotes Perl.
+passes 125 assertions and now runs once in canonical CI; admission `.2.3` promotes only Perl while generated
+format, typed rollout, shared helper inventories, recurrence, and outward surfaces remain unchanged.
 The behavior-free audit is focused-signoff-complete for atomic 257: exact Perl rejection probes, Rust 1/1, Dart
 5/5, typed 11/3/152, recognition 137/250/58, capability 80/0/0, language 250/105+1/126, Knowledge, the rendered
 book, bounded documentation, and all nine doctrines pass without production or public-surface movement.

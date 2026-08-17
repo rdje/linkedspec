@@ -14,14 +14,15 @@ answers:
   - "is Perl progressive span dispatch admitted in CI"
   - "does requiring the Perl Compiler for progressive dispatch eagerly load LinkedRE"
 date: 2026-08-17
-status: private ActionIR and four carriers current; Perl admission pending
+status: private ActionIR, four carriers, and canonical Perl admission current
 tags: [perl, progressive, dispatch, ActionIR, generated-source, invocation-options, transaction, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.14.6.2.2 adds the exclusive progressive_span_dispatch ActionIR contract/scanner and exactly one PROGRESSIVE_DISPATCH_SPAN event for value = dispatch_span(\"expr-v1\", \"Expr\", span). Static policy requires normalized string-literal parser/top identities and one bare span binding. Runtime wrappers create a fresh invocation from the host-only progressive_span_dispatch option, localize it on the descriptor, and preserve typed failures. Live, reconstructed descriptor, validated generated-plan, and independently eval-loaded generated-v2 source all return the same detached child payload. Generated source contains logical operands/origin only and no registry callback, cancellation token, or compiled authority. RecognitionTransactionPolicy classifies the node as rejected parser_registry_or_staged_dispatch, while runtime transaction visibility supplies a defensive rejection. The runtime resolves RecognitionTransactionRuntime only on an actual dispatch, preserving Compiler require-time LinkedRE laziness. Exclusive statement ownership removes the generic ASSIGN duplicate. The language gate classifies dispatch_span as the fifteenth exact non-public Perl diagnostic, preserving 250 shared names / 126 public Perl calls. The focused consumer passes 125 assertions but remains absent from ordinary/canonical CI; neutral rollout, typed rollout, public/outward surfaces, and Perl admission remain pending for .14.6.2.3."
+evidence_update_2026_08_17_admission: "FUTURE-PARITY-BACKLOG.14.6.2.3 requires, syntax-checks, and runs the exact unchanged 125-assertion consumer once in canonical CI and promotes only Perl. Progressive governance is 2/9/86 with four pending-backend guard groups/14 paths plus ten outward guards. Recognition is 134 current + 4 dedicated nodes / 250 calls / 58 mutations. dispatch_span remains the fifteenth non-public classification because Perl-only intrinsic admission does not establish Dart/Julia/Lua shared-helper support."
 reverify:
   - "prove -q -Iperl t/progressive_span_dispatch_perl_authority.t t/progressive_span_dispatch_perl_contract.t"
   - "prove -q -Iperl t/recognition_transaction_perl_authority.t t/recognition_transaction_perl_contract.t t/generated_source_contract.t"
   - "bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_contract.py"
-  - "! rg -q 'progressive_span_dispatch_perl_contract[.]t' tools/run_ci_local.sh"
+  - "test \"$(rg -c 'PERL5LIB= prove -Iperl t/progressive_span_dispatch_perl_contract[.]t' tools/run_ci_local.sh)\" -eq 1"
 ---
 
 # Perl progressive span-dispatch carriers
@@ -48,9 +49,10 @@ result remains the core's deep-detached child payload in every route.
 The node is statically classified as the rejected recognition effect
 `parser_registry_or_staged_dispatch`; runtime transaction visibility is a second
 defense. Recognition-transaction runtime loading is deferred until that dispatch
-path, so a require-only Compiler process does not load `LinkedRE`. This is still private integration. The final-path consumer is green but
-unrouted, and the public-call inventory explicitly excludes `dispatch_span`.
-`.14.6.2.3` alone may register it and promote the Perl rollout row.
+path, so a require-only Compiler process does not load `LinkedRE`. The final-path
+consumer is canonically routed once and the Perl row is complete. The public-call
+inventory still excludes `dispatch_span`: this is a Perl-only dedicated intrinsic,
+not proof of shared Dart/Julia/Lua helper support.
 
 ## Links
 

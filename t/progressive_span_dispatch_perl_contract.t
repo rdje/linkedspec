@@ -120,8 +120,8 @@ is(
 is($contract->{format}, 1, 'loads contract format 1');
 is(
  $contract->{status},
- 'neutral_complete_backends_pending',
- 'loads the neutral-complete and backend-pending rollout state',
+ 'perl_complete_other_backends_pending',
+ 'loads the Perl-complete and other-backend-pending rollout state',
 );
 is(
  $contract->{task_owner},
@@ -143,7 +143,7 @@ is_deeply(
   ],
   result => 'one detached child payload returned as the expression value',
   failure_policy => 'fail_only; every dispatch or child failure propagates unchanged and no null, fallback, retry, or alternate parser is implied',
-  availability => 'neutral authority only; no backend admits the spelling until its independent rollout row completes',
+  availability => 'private Perl runtime admitted; every other backend remains unavailable until its independent rollout row completes',
  },
  'freezes the dedicated authored expression, operands, result, and fail-only boundary',
 );
@@ -251,8 +251,8 @@ is_deeply(
   cancellation_cases => 6,
   chain_cases => 8,
   execution_cases => 4,
-  backend_guard_groups => 5,
-  backend_guard_paths => 17,
+  backend_guard_groups => 4,
+  backend_guard_paths => 14,
   outward_guard_paths => 10,
   diagnostics => 26,
   rollout_legs => 9,
@@ -267,13 +267,13 @@ is_deeply(
 );
 is_deeply(
  [map { $_->{status} } @{$contract->{rollout}}],
- ['complete', ('pending') x 8],
- 'keeps only the neutral rollout leg complete',
+ ['complete', 'complete', ('pending') x 7],
+ 'keeps exactly the neutral and Perl rollout legs complete',
 );
 is_deeply(
  $contract->{rollout}[1]{paths},
- [],
- 'keeps the Perl rollout path list empty before admission',
+ ['t/progressive_span_dispatch_perl_contract.t'],
+ 'binds the Perl rollout leg to this exact admission consumer',
 );
 
 my $probe = 'return(dispatch_span("expr-v1", "Expr", span));';
@@ -281,12 +281,12 @@ my $lowered = LinkedSpec::call_spec_handler_subst('Top', $probe);
 is(
  occurrences($lowered, 'dispatch_span'),
  1,
- 'current lowering retains one logical dispatch marker',
+ 'a non-assignment dispatch form retains one logical marker for rejection',
 );
 is(
  occurrences($lowered, 'LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER'),
  1,
- 'current lowering emits exactly one unsupported-helper sentinel',
+ 'a non-assignment dispatch form remains outside the admitted exact assignment',
 );
 
 my $staged_job = {

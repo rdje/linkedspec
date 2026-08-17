@@ -16,6 +16,9 @@ from typing import Any, Callable
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = ROOT / "capability_conformance" / "recognition_transaction_contract.json"
 PERL_CONTRACTS_PATH = ROOT / "perl" / "LinkedSpec" / "ActionIR" / "Contracts.pm"
+PERL_PROGRESSIVE_CONTRACTS_PATH = (
+    ROOT / "perl" / "LinkedSpec" / "ActionIR" / "ProgressiveSpanDispatch.pm"
+)
 DART_CONTRACTS_PATH = ROOT / "dart" / "lib" / "src" / "action" / "action_contracts.dart"
 JULIA_CONTRACTS_PATH = ROOT / "julia" / "src" / "action" / "ActionContracts.jl"
 LUA_CALL_NAMES_PATH = ROOT / "lua" / "src" / "linkedspec" / "action_call_names.lua"
@@ -169,9 +172,9 @@ DEDICATED_NODES = [
     "RECOGNIZE_ONCE",
 ]
 EXPECTED_COUNTS = {
-    "current_action_ir_nodes": 133,
+    "current_action_ir_nodes": 134,
     "dedicated_action_ir_nodes": 4,
-    "all_action_ir_nodes": 137,
+    "all_action_ir_nodes": 138,
     "canonical_call_contracts": 250,
     "allowed_effects": 9,
     "rejected_effects": 11,
@@ -187,7 +190,7 @@ EXPECTED_COUNTS = {
     "mutations": 58,
 }
 EXPECTED_EFFECT_ROW_HASHES = {
-    "action_ir_effect_rows": "84ece426afcfda3778efed068ec9ae0cbcb54222c36b70f4972c6f6fa5abaf9f",
+    "action_ir_effect_rows": "e8ebdeffaa104b3f3c9e2bc4a5192f2c5dcb2b933e00c2e00813a793f4973e3c",
     "canonical_call_effect_rows": "7ea6cc4adae1559b722ff68dbd4c97816d03cf0d0590349b2af776859e85ae3f",
 }
 EXPECTED_SURFACE = {
@@ -266,6 +269,7 @@ EXPECTED_EXECUTION = {
     "tracked_required": True,
     "freshness_sources": [
         "perl/LinkedSpec/ActionIR/Contracts.pm",
+        "perl/LinkedSpec/ActionIR/ProgressiveSpanDispatch.pm",
         "dart/lib/src/action/action_contracts.dart",
         "julia/src/action/ActionContracts.jl",
         "lua/src/linkedspec/action_call_names.lua",
@@ -444,7 +448,7 @@ PUBLIC_SEQUENCE_CONTRACT = {
             "path": "docs/linkedspec-book/src/overview/project-status.md",
             "required_markers": [
                 (
-                    "Their neutral artifact/checker is executable at 133 current + 4 "
+                    "Their neutral artifact/checker is executable at 134 current + 4 "
                     "dedicated ActionIR rows"
                 ),
                 "recognition rollout 9/9 complete",
@@ -1065,7 +1069,10 @@ def load_contract() -> dict[str, Any]:
 
 def current_action_ir_nodes() -> list[str]:
     discovered = set(
-        re.findall(r"ir_node\s*=>\s*'([^']+)'", read_text(PERL_CONTRACTS_PATH))
+        re.findall(
+            r"ir_node\s*=>\s*'([^']+)'",
+            read_text(PERL_CONTRACTS_PATH) + read_text(PERL_PROGRESSIVE_CONTRACTS_PATH),
+        )
     )
     require(
         set(DEDICATED_NODES).issubset(discovered),
@@ -2319,7 +2326,7 @@ def main() -> int:
         return 1
     print(
         "recognition-transaction-contract: OK "
-        "(137 ActionIR rows = 133 current + 4 dedicated; 250 call rows; "
+        "(138 ActionIR rows = 134 current + 4 dedicated; 250 call rows; "
         "token 8 positive/17 negative; effects 6 graphs; marks 6; progress 8; "
         "58 rejected mutations; rollout 9/9 complete; "
         f"public sequence 3 documents/26 forbidden/{public_mutations} mutations; "

@@ -6,7 +6,6 @@ from __future__ import annotations
 import copy
 import json
 import re
-import subprocess
 from pathlib import Path
 from typing import Any, Callable
 
@@ -15,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = ROOT / "capability_conformance" / "progressive_span_dispatch_contract.json"
 CHECKER_PATH = ROOT / "tools" / "check_progressive_span_dispatch_contract.py"
 CI_PATH = ROOT / "tools" / "run_ci_local.sh"
+PERL_CONSUMER_PATH = ROOT / "t" / "progressive_span_dispatch_perl_contract.t"
 
 PARSER_ID_PATTERN = r"^[a-z][a-z0-9]*(?:[._:-][a-z0-9]+)*$"
 TOP_RULE_PATTERN = r"^[A-Za-z_][A-Za-z0-9_]*$"
@@ -32,7 +32,7 @@ AUTHORED_SURFACE = {
     ],
     "result": "one detached child payload returned as the expression value",
     "failure_policy": "fail_only; every dispatch or child failure propagates unchanged and no null, fallback, retry, or alternate parser is implied",
-    "availability": "neutral authority only; no backend admits the spelling until its independent rollout row completes",
+    "availability": "private Perl runtime admitted; every other backend remains unavailable until its independent rollout row completes",
 }
 
 POLICY = {
@@ -337,7 +337,7 @@ EXECUTION_CASES = [
 ]
 
 CURRENT_BOUNDARY = {
-    "status": "all_backend_rows_pending_and_unavailable",
+    "status": "perl_admitted_other_backend_rows_pending",
     "typed_rollout": {
         "path": "capability_conformance/typed_source_location_contract.json",
         "leg": "progressive_span_dispatch",
@@ -348,25 +348,16 @@ CURRENT_BOUNDARY = {
         "path": "capability_conformance/recognition_transaction_contract.json",
         "effect": "parser_registry_or_staged_dispatch",
         "classification": "rejected",
-        "action_ir_rows": [],
+        "action_ir_rows": ["PROGRESSIVE_DISPATCH_SPAN"],
         "canonical_call_rows": [],
     },
-    "perl_lowering_probe": {
-        "source": 'return(dispatch_span("expr-v1", "Expr", span));',
-        "callee_marker": "dispatch_span",
-        "unsupported_marker": "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER",
-        "expected_occurrences": 1,
+    "perl_admission": {
+        "consumer_path": "t/progressive_span_dispatch_perl_contract.t",
+        "syntax_invocation": "perl -c -Iperl t/progressive_span_dispatch_perl_contract.t",
+        "registration_marker": "running exact Perl progressive span-dispatch admission consumer",
+        "invocation": "PERL5LIB= prove -Iperl t/progressive_span_dispatch_perl_contract.t",
     },
     "backend_guard_groups": [
-        {
-            "backend": "perl",
-            "paths": [
-                "perl/LinkedSpec/ActionIR/Contracts.pm",
-                "perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm",
-                "perl/LinkedSpec/ActionIR/ValueExpr.pm",
-            ],
-            "forbidden_tokens": ["dispatch_span", "PROGRESSIVE_DISPATCH_SPAN"],
-        },
         {
             "backend": "rust",
             "paths": [
@@ -454,7 +445,7 @@ DIAGNOSTICS = [
 
 ROLLOUT = [
     (1, "FUTURE-PARITY-BACKLOG.14.6.1", "neutral", "complete", ["capability_conformance/progressive_span_dispatch_contract.json", "tools/check_progressive_span_dispatch_contract.py"]),
-    (2, "FUTURE-PARITY-BACKLOG.14.6.2", "perl", "pending", []),
+    (2, "FUTURE-PARITY-BACKLOG.14.6.2", "perl", "complete", ["t/progressive_span_dispatch_perl_contract.t"]),
     (3, "FUTURE-PARITY-BACKLOG.14.6.3", "rust", "pending", []),
     (4, "FUTURE-PARITY-BACKLOG.14.6.4", "dart", "pending", []),
     (5, "FUTURE-PARITY-BACKLOG.14.6.5", "julia", "pending", []),
@@ -618,7 +609,7 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
     require(document["format"] == 1, "format drifted")
     require(document["contract_id"] == "linkedspec-progressive-span-dispatch-v1", "contract id drifted")
     require(document["task_owner"] == "FUTURE-PARITY-BACKLOG.14.6.1", "task owner drifted")
-    require(document["status"] == "neutral_complete_backends_pending", "status drifted")
+    require(document["status"] == "perl_complete_other_backends_pending", "status drifted")
     expected_counts = {
         "registry_entries": len(REGISTRY_ENTRIES),
         "sources": len(SOURCES),
@@ -739,25 +730,6 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
             for token in outward_guard["forbidden_tokens"]:
                 require(token not in content, f"premature outward progressive surface in {relative_path}: {token}")
 
-        probe_assertion = CURRENT_BOUNDARY["perl_lowering_probe"]
-        probe = subprocess.run(
-            [
-                "perl",
-                "-Iperl",
-                "-MLinkedSpec",
-                "-e",
-                f'print LinkedSpec::call_spec_handler_subst("Top", q{{{probe_assertion["source"]}}})',
-            ],
-            cwd=ROOT,
-            check=False,
-            capture_output=True,
-            text=True,
-        )
-        probe_output = probe.stdout + probe.stderr
-        require(probe.returncode == 0, "current Perl lowering probe failed to execute")
-        require(probe_output.count(probe_assertion["callee_marker"]) == probe_assertion["expected_occurrences"], "current Perl lowering probe callee evidence drifted")
-        require(probe_output.count(probe_assertion["unsupported_marker"]) == probe_assertion["expected_occurrences"], "current Perl lowering no-support evidence drifted")
-
         require(CI_PATH.is_file(), "canonical CI driver is missing")
         ci = CI_PATH.read_text(encoding="utf-8")
         require(ci.count(f"require_tracked_file {CANONICAL_EXECUTION['contract_path']}") == 1, "canonical CI must require the progressive contract exactly once")
@@ -765,6 +737,15 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
         require(ci.count(f'log "{CANONICAL_EXECUTION["registration_marker"]}"') == 1, "canonical registration marker missing or duplicated")
         require(ci.count(CANONICAL_EXECUTION["invocation"]) == 1, "canonical invocation missing or duplicated")
         require(ci.count("tools/check_progressive_span_dispatch_contract.py") == 4, "progressive checker inventory/require/invocation topology drifted")
+        admission = CURRENT_BOUNDARY["perl_admission"]
+        require(PERL_CONSUMER_PATH.is_file(), "admitted Perl progressive consumer is missing")
+        consumer = PERL_CONSUMER_PATH.read_text(encoding="utf-8")
+        for token in ("PROGRESSIVE_DISPATCH_SPAN", "with_invocation", "generated-plan carrier", "emitted-source carrier"):
+            require(token in consumer, f"admitted Perl progressive consumer is missing {token}")
+        require(ci.count(f"require_tracked_file {admission['consumer_path']}") == 1, "canonical CI must require the Perl progressive consumer exactly once")
+        require(ci.count(admission["syntax_invocation"]) == 1, "canonical CI must syntax-check the Perl progressive consumer exactly once")
+        require(ci.count(f'log "{admission["registration_marker"]}"') == 1, "canonical Perl progressive admission marker missing or duplicated")
+        require(ci.count(admission["invocation"]) == 1, "canonical Perl progressive admission invocation missing or duplicated")
 
 
 def set_value(path: list[Any], value: Any) -> Callable[[dict[str, Any]], None]:
@@ -859,8 +840,8 @@ MUTATIONS: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
     ("current_recognition_path", set_value(["current_boundary", "recognition_effect", "path"], "wrong.json")),
     ("current_recognition_effect", set_value(["current_boundary", "recognition_effect", "effect"], "pure_value")),
     ("current_recognition_classification", set_value(["current_boundary", "recognition_effect", "classification"], "allowed")),
-    ("current_perl_probe_marker", set_value(["current_boundary", "perl_lowering_probe", "unsupported_marker"], "supported")),
-    ("current_perl_probe_callee", set_value(["current_boundary", "perl_lowering_probe", "callee_marker"], "parse_job")),
+    ("current_perl_admission_consumer", set_value(["current_boundary", "perl_admission", "consumer_path"], "t/wrong.t")),
+    ("current_perl_admission_marker", set_value(["current_boundary", "perl_admission", "registration_marker"], "wrong")),
     ("current_backend_guard_path", set_value(["current_boundary", "backend_guard_groups", 0, "paths", 0], "wrong.pm")),
     ("current_backend_guard_token", set_value(["current_boundary", "backend_guard_groups", 0, "forbidden_tokens", 0], "parse_job")),
     ("current_outward_guard_path", set_value(["current_boundary", "outward_guard", "paths", 0], "wrong.pm")),
@@ -869,7 +850,7 @@ MUTATIONS: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
     ("diagnostic_removed", pop_value(["diagnostics"])),
     ("diagnostic_context", pop_value(["diagnostics", 0, "required_context"])),
     ("rollout_removed", pop_value(["rollout"])),
-    ("rollout_perl_promoted", set_value(["rollout", 1, "status"], "complete")),
+    ("rollout_perl_regressed", set_value(["rollout", 1, "status"], "pending")),
     ("canonical_checker", set_value(["canonical_execution", "checker_path"], "tools/wrong.py")),
     ("canonical_storage", set_value(["canonical_execution", "storage_policy"], "/tmp")),
 ]

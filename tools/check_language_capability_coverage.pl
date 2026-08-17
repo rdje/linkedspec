@@ -184,14 +184,15 @@ for my $contract (@{$perl_contracts}) {
 # public current calls. Keeping the classification next to the independent
 # reverse check means a newly added Perl current contract cannot disappear
 # symmetrically from every backend inventory merely because no corpus fixture
-# happens to call it. The five recognition forms are grammar-owned intrinsics
-# with dedicated ActionIR nodes, not members of the shared helper-call surface.
+# happens to call it. The five recognition forms and Perl-only progressive
+# dispatch are dedicated intrinsics with ActionIR nodes, not members of the
+# shared helper-call surface.
 my %classified_non_public_perl_contract = (
  array_append_operator => 'internal lowering operation',
  array_end_mutation_method => 'internal lowering operation',
  capture => 'legacy capture surface',
  capture_macro => 'legacy capture surface',
- dispatch_span => 'private dedicated intrinsic pending Perl admission',
+ dispatch_span => 'Perl-only dedicated intrinsic pending shared backend recurrence',
  entry_named_map => 'documented compatibility alias',
  hash_index_assignment_operator => 'internal lowering operation',
  match_named_map => 'documented compatibility alias',

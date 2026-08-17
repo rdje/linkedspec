@@ -157,28 +157,30 @@ that same proof pass. A RED result is therefore planned evidence, not a claim th
 
 ### Neutral progressive span-dispatch contract
 
-Canonical CI now requires and always runs the repository-routed neutral progressive checker:
+Canonical CI now requires and always runs the repository-routed neutral progressive checker plus the admitted
+private Perl consumer:
 
 ```bash
 bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_contract.py
+PERL5LIB= prove -Iperl t/progressive_span_dispatch_perl_contract.t
 ```
 
 It validates the reserved private `dispatch_span("logical-parser-id", "Top", span)` expression without enabling
 backend syntax. The checker independently executes 2 sources/8 rebased views, 6 authority-minimum cases, 6
 cancellation/deadline/budget cases, 8 decreasing-chain/bound cases, and 4 isolation/detachment cases; locks 26
-diagnostics and neutral-first 1/9 rollout; guards 17 implementation paths across five backend groups plus 10
-outward paths; and rejects 86 mutations. A passing neutral check proves no path loader,
+diagnostics and neutral + Perl 2/9 rollout; guards 14 implementation paths across the four still-pending backend
+groups plus 10 outward paths; and rejects 86 mutations. A passing check proves no path loader,
 registry mutation, capability/policy elevation, cancellation reset, non-decreasing cycle, parent-state leak,
 uncommitted recognition effect, live result handle, fallback, or premature backend/typed rollout claim. It also
-requires the typed row to remain pending, the rejected effect to have no current node/call rows, both future tokens
-to remain absent from guarded backend paths, private spelling/node/rollout tokens to remain absent from ten
-facade/schema/semantic/MCP/CLI/README paths, and Perl lowering to retain its unsupported-helper sentinel.
+requires the typed row to remain pending, the rejected effect to own exactly current node
+`PROGRESSIVE_DISPATCH_SPAN` and no call row, both tokens to remain absent from guarded Rust/Dart/Julia/Lua paths,
+and private spelling/node/rollout tokens to remain absent from ten facade/schema/semantic/MCP/CLI/README paths.
 
-Perl carrier integration is intentionally one leaf ahead of admission. Its final-path focused consumer now proves
+Perl carrier integration and admission now prove
 one exclusive dedicated node, static operands, fresh invocation authority, live/reconstructed/generated-plan/
 independently loaded emitted execution, logical-only serialization, typed missing-authority failure, and
-transaction rejection in 125 assertions. That consumer remains absent from `tools/run_ci_local.sh`; the neutral
-checker continues proving the unchanged admitted/public boundary until `.14.6.2.3` promotes only the Perl row.
+transaction rejection in 125 assertions. `tools/run_ci_local.sh` requires, syntax-checks, and executes that exact
+consumer once; the neutral checker rejects regression of the Perl row and promotion of any later row.
 Its transaction-state query loads the recognition runtime only when a dispatch executes, preserving the existing
 require-only Compiler guarantee that `LinkedRE` stays lazy until the parser pipeline actually needs it.
 
@@ -923,7 +925,8 @@ That checker requires exact Dart/Julia/Lua inventory identity at 250 current nam
 and governed 105-case corpus plus exact named-mark fixture and the public gap-contract example, every one of 126 independently derived public Perl
 contracts in each backend inventory, and rejection of fifteen classified non-public names: nine compatibility,
 legacy, or internal lowering contracts; four grammar-owned recognition-transaction intrinsics; the grammar-owned
-recursive-observation intrinsic; and private progressive `dispatch_span` until its Perl admission leaf. It separately
+recursive-observation intrinsic; and private Perl-only progressive `dispatch_span` until exact shared-backend
+recurrence. It separately
 requires Dart's, Julia's, and Lua's seven source-boundary compatibility aliases and canonical targets to match the neutral
 typed-source contract without inflating the common 250-name inventory. Lua's focused consumer executes those
 mappings through native, loaded, reconstructed, generated-plan, and emitted routes on both PUC Lua and LuaJIT.

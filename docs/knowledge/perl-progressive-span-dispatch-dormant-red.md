@@ -13,18 +13,18 @@ answers:
   - "which leaf owns Perl progressive authority and carrier integration"
   - "does the Perl progressive RED change production behavior"
 date: 2026-08-17
-status: historical dormant RED superseded by private carrier integration; admission pending
+status: historical dormant RED superseded by private carrier integration and admission
 tags: [perl, progressive, dispatch, source-span, ActionIR, RED, generated-source, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.14.6.2.0 adds t/progressive_span_dispatch_perl_contract.t at its final path without ordinary or canonical registration. LinkedSpec::call_spec_handler_subst produces one dispatch_span marker inside one LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER sentinel. The exact authored assignment reaches return_descriptor, records ordinary ASSIGN/RETURN nodes, reports dispatch_span unresolved, and omits PROGRESSIVE_DISPATCH_SPAN. The consumer proves emit_generated_source produces independently loadable source with the same single sentinel and a null result. LinkedSpec::StagedParserRegistry rejects expr-v1 at resolve, proving the existing function-body adapter is not the progressive registry. The live and generated execution wrappers already accept one invocation-options hash immediately above descriptor execution; .14.6.2.2 can attach a private per-invocation progressive authority there without serializing parser coderefs, registry handles, source authority, or mutable execution state. Eighty-three assertions pass before the sole missing-node RED. Production parser/compiler/runtime/generated-source behavior and every ordinary/canonical route remain unchanged."
 evidence_update_2026_08_17_carriers: "FUTURE-PARITY-BACKLOG.14.6.2.2 supersedes this RED with one dedicated node and four green private carriers. The consumer now passes 125 assertions but remains absent from CI until .14.6.2.3; this card retains only the historical failure boundary."
-reverify: "prove -q -Iperl t/progressive_span_dispatch_perl_contract.t && ! rg -q 'progressive_span_dispatch_perl_contract[.]t' tools/run_ci_local.sh"
+evidence_update_2026_08_17_admission: "FUTURE-PARITY-BACKLOG.14.6.2.3 canonically routes the unchanged green 125-assertion consumer and promotes only Perl. This card remains the historical pre-carrier RED record."
+reverify: "PERL5LIB= prove -q -Iperl t/progressive_span_dispatch_perl_contract.t && test \"$(rg -c 'PERL5LIB= prove -Iperl t/progressive_span_dispatch_perl_contract[.]t' tools/run_ci_local.sh)\" -eq 1"
 ---
 
 # Historical Perl progressive span-dispatch dormant RED
 
-The final-path consumer is t/progressive_span_dispatch_perl_contract.t. It remains
-tracked for the Perl lane but deliberately absent from the explicit commands
-and tracked-file list in tools/run_ci_local.sh; `.14.6.2.3` owns admission. The
+The final-path consumer is t/progressive_span_dispatch_perl_contract.t. It is now
+required, syntax-checked, and executed once in canonical CI by `.14.6.2.3`. The
 missing-node RED described below was superseded by private carrier integration
 in `.14.6.2.2`; see [[perl-progressive-span-dispatch-carriers]] for current facts.
 

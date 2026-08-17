@@ -10,6 +10,32 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.2.3` — private Perl progressive admission): exact clean activation is
+  carrier atomic 262 `075cb7b8`; only the unchanged final-path consumer, Perl rollout row, and direct projections move.
+- Canonical CI now requires and syntax-checks `t/progressive_span_dispatch_perl_contract.t`, emits one exact route
+  marker, and runs `PERL5LIB= prove -Iperl t/progressive_span_dispatch_perl_contract.t` exactly once.
+- Removing the Perl absence guard advances progressive truth from 1/9 to 2/9 while retaining Rust/Dart/Julia/Lua
+  absence as four groups/14 paths. Typed progressive, recurrence, public no-drift, and ten outward guards do not move.
+- Recognition's scanner must compose both `ActionIR/Contracts.pm` and the separately owned progressive contract
+  module. `PROGRESSIVE_DISPATCH_SPAN` raises live nodes 133→134 and total rows 137→138 under rejected
+  `parser_registry_or_staged_dispatch`; calls remain 250 and mutations remain 58.
+- The first canonical attempt proved admitted consumers are mutable-neutral-metadata dependents: Rust failed only
+  its 133-node snapshot while 11 behavior tests passed. Exhaustive review advances Rust, Dart, Julia, and shared
+  Lua snapshots together to 134 current / 138 total before rerunning the exact gate.
+- Do not remove `dispatch_span` from language coverage merely because Perl is admitted. The shared 250-name
+  inventory asserts equal Dart/Julia/Lua helper support, whereas Perl progressive syntax is a dedicated intrinsic;
+  the exact non-public classification remains until shared-backend recurrence proves reclassification safe.
+- Recognition capability-guide governance globally forbids the historical phrase `neutral + Perl 2/9 complete`.
+  Progressive prose initially collided with it despite describing a different contract; the exact progressive
+  wording is now `2/9 complete (neutral and Perl)`, preserving the older stale-claim detector without weakening it.
+- Change-history pressure crossed its 90% line threshold; the canonical rollover tool archives 244 clean-HEAD
+  lines as immutable change segment 4993 and leaves the new admission record in the bounded hot shard.
+- That exact segment exceeds only `change_history` file-count 19→20 and manifest-line 18→19 controls. ADR `0082`
+  owns those finite increments; aggregate 55,000-line/4,194,304-byte and every member/root ceiling stay fixed.
+- Focused proof is 193 authority/carrier/transaction assertions, 6 generated assertions, progressive 2/9/86,
+  typed 11/3/152, recognition 138/250/58, generated strict Rust 105/105, capability 80/0/0, language 250/126,
+  Knowledge 847/7,169, and a clean mdBook render; admission requires exact staged canonical receipt proof.
+
 - 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.2.2` — private Perl progressive carriers): clean activation is authority
   atomic 261 `e185b352`; the neutral contract, generated-v2 format, staged registry, CI routing, and rollout stay fixed.
 - `LinkedSpec::ActionIR::ProgressiveSpanDispatch` owns the exact whole assignment and sets exclusive statement

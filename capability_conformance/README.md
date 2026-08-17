@@ -318,13 +318,13 @@ bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_cont
 ```
 
 The checker executes 2 sources / 8 view cases, 6 authority, 6 cancellation, 8 chain, and 4 execution cases; guards
-17 implementation paths across five backend groups plus 10 outward paths; locks 26 diagnostics; and rejects 86 mutations. Its own
-rollout is neutral 1/9 complete with Perl, Rust, Dart, Julia,
-PUC Lua, LuaJIT, recurring, and public-no-drift rows pending. The typed `progressive_span_dispatch` row likewise
-remains pending until the exact six-runtime recurrence owner `.14.6.7`; the recognition effect owns no current
-node/call rows, all guarded backend paths omit the tokens, ten facade/schema/semantic/MCP/CLI/README paths deny
-private spelling/node/rollout exposure, and Perl lowering remains unsupported. No backend or outward capability
-is claimed by neutral canonical registration.
+14 implementation paths across the four still-pending backend groups plus 10 outward paths; locks 26 diagnostics;
+and rejects 86 mutations. Its rollout is 2/9 complete (neutral and Perl), with Rust, Dart, Julia, PUC Lua, LuaJIT,
+recurring, and public-no-drift rows pending. Canonical CI syntax-checks and runs the exact 125-assertion Perl
+consumer once. The typed `progressive_span_dispatch` row remains pending until exact six-runtime recurrence owner
+`.14.6.7`; the rejected recognition effect now owns current node `PROGRESSIVE_DISPATCH_SPAN` but no call row, the
+four guarded backend groups omit both tokens, and ten facade/schema/semantic/MCP/CLI/README paths deny outward
+exposure. This admission claims only private Perl runtime behavior.
 
 `inter_match_gap_capture_contract.json` is the neutral authority for named regex slots and lossless
 prefix/interstitial/tail context. Inter-match gap public admission is current with four shared calls and unchanged outward facade, descriptor, semantic, MCP, CLI, and README surfaces. Julia `.5.1-.5.5` and shared Lua `.6.1-.6.5` implement and admit their exact nine-role paths without widening those guarded surfaces.
@@ -342,7 +342,8 @@ language ledgers in order. Canonical CI exposes the exact route behind
 projection, storage, route, canonical registration, and completion of only `lossless_gap_composition`.
 Perl `.2.1-.2.3` implement authored/static metadata, private native-live behavior, and independently loaded
 generated parity; `.2.4` admits that existing consumer without an outward API. Its four private accessor nodes are synchronized as recognition `source_read`
-effects at 137 total rows; `.7.2` admits their call names at 250 shared calls and 126 public Perl contracts.
+effects at 138 total rows after private Perl progressive admission; `.7.2` admits their call names at 250 shared
+calls and 126 public Perl contracts.
 Typed-source composition is current without a second implementation owner. Rust `.3.1-.3.4` implement authored/static/compiled metadata, invocation-local native
 state, ordinary reconstruction, compatible descriptor projection, separate generated-plan parity, and independently
 compiled emitted proof. `.3.5` adds a real primary-command mixed-separator case, requires all nine Rust roles
@@ -367,12 +368,12 @@ LuaJIT + recurring + public no-drift 9/9 complete, rejects twenty-six stale mile
 and executes forty-five public-sequence mutations in memory. That projection is distinct from 58 semantic and
 recurring-topology mutations.
 
-The independent checker derives all 133 current ActionIR node kinds from the Perl contract authority and all 250
+The independent checker derives all 134 current ActionIR node kinds from the Perl contract authority and all 250
 current call names from matching Dart, Julia, and Lua inventories. The artifact assigns one base effect to each
 of those rows plus four dedicated `RECOGNITION_*` nodes under the closed nine-allowed/eleven-rejected
 lattice. It separately executes 8 positive / 17 negative token cases, six recursive fixed-point effect graphs,
 six invocation-mark cases, eight cursor-only progress cases, and fifteen portable diagnostic records, then rejects
-58 exact drift mutations. This 133-node census is distinct from the 126 public identifier-shaped Perl contracts
+58 exact drift mutations. This 134-node census is distinct from the 126 public identifier-shaped Perl contracts
 reported by `tools/check_language_capability_coverage.pl`.
 
 Canonical CI requires the tracked artifact/checker and runs the same project-data-routed command unconditionally.

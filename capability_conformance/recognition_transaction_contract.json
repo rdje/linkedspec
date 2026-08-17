@@ -4,9 +4,9 @@
   "task_owner": "FUTURE-PARITY-BACKLOG.14.3.1.1",
   "status": "neutral_runtime_recurring_and_public_no_drift_complete",
   "expected_counts": {
-    "current_action_ir_nodes": 133,
+    "current_action_ir_nodes": 134,
     "dedicated_action_ir_nodes": 4,
-    "all_action_ir_nodes": 137,
+    "all_action_ir_nodes": 138,
     "canonical_call_contracts": 250,
     "allowed_effects": 9,
     "rejected_effects": 11,
@@ -89,7 +89,7 @@
     "authored_diagnostic": [],
     "exit_or_unbounded_control": ["EXIT", "NEXT", "WHILE"],
     "dynamic_callable": [],
-    "parser_registry_or_staged_dispatch": [],
+    "parser_registry_or_staged_dispatch": ["PROGRESSIVE_DISPATCH_SPAN"],
     "external_or_host": [],
     "unknown_or_raw": []
   },
@@ -263,7 +263,7 @@
     "invocation": "bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py",
     "registration_marker": "checking backend-neutral recognition transaction and progress contract",
     "tracked_required": true,
-    "freshness_sources": ["perl/LinkedSpec/ActionIR/Contracts.pm", "dart/lib/src/action/action_contracts.dart", "julia/src/action/ActionContracts.jl", "lua/src/linkedspec/action_call_names.lua"]
+    "freshness_sources": ["perl/LinkedSpec/ActionIR/Contracts.pm", "perl/LinkedSpec/ActionIR/ProgressiveSpanDispatch.pm", "dart/lib/src/action/action_contracts.dart", "julia/src/action/ActionContracts.jl", "lua/src/linkedspec/action_call_names.lua"]
   },
   "mutation_ids": [
     "format", "contract_id", "task_owner", "status", "count_current_nodes", "count_dedicated_nodes", "count_calls", "syntax_checkpoint", "syntax_attempt", "syntax_commit", "syntax_rollback", "result_separation", "token_state", "token_transition", "token_payload", "token_positive", "token_negative", "effect_allowed", "effect_rejected", "action_row_missing", "action_row_duplicate", "action_row_unknown", "call_row_missing", "call_row_duplicate", "call_row_unknown", "effect_graph", "mark_fixture", "progress_fixture", "diagnostic", "recurring_source_group_missing", "recurring_source_path_missing", "recurring_route_missing", "recurring_route_order", "recurring_route_duplicate", "recurring_command", "recurring_source_binding", "recurring_support_missing", "recurring_storage_initializer", "recurring_driver", "recurring_ci_switch", "rollout_order", "rollout_owner", "rollout_status", "rollout_perl_regression", "rollout_dart_regression", "rollout_julia_regression", "rollout_puc_lua_regression", "rollout_luajit_regression", "rollout_recurring_regression", "rollout_public_regression", "canonical_contract_path", "canonical_checker_path", "canonical_invocation", "canonical_registration", "tracked_required", "freshness_source", "policy_fail_closed", "current_boundary"

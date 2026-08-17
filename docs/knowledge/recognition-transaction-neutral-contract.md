@@ -1,12 +1,12 @@
 ---
 id: recognition-transaction-neutral-contract
-title: The recognition-transaction contract covers 137 node rows, 246 call rows, and 58 mutations
+title: The recognition-transaction contract covers 138 node rows, 250 call rows, and 58 mutations
 answers:
   - "where is the executable neutral recognition transaction contract"
   - "how do I run the recognition transaction checker"
   - "how many ActionIR node effects does the transaction contract classify"
   - "how many current ActionIR node kinds are there"
-  - "why are there 133 ActionIR nodes but 122 public Perl contracts"
+  - "why are there 134 ActionIR nodes but 126 public Perl contracts"
   - "how many canonical call effects does the recognition transaction contract classify"
   - "what recognition transaction fixtures are executable"
   - "how are recursive rule effects checked for transactions"
@@ -32,6 +32,8 @@ evidence_update_2026_08_11_public_closeout: "FUTURE-PARITY-BACKLOG.14.3.8 promot
 evidence_update_2026_08_11_cross_consumer_metadata: "The first atomic-196 canonical run proved that every admitted consumer snapshots mutable neutral metadata as well as backend behavior: Perl retained the pre-Dart status/availability and Rust retained the pre-Dart mutation/rollout/availability assertions. Updating both consumers closes that coupling without runtime changes; each later admission must update all earlier admitted consumer metadata assertions."
 evidence_update_2026_08_12_recursive_observation: "FUTURE-PARITY-BACKLOG.14.4.2 adds OBSERVE_RECOGNITION as the 129th live ActionIR node and retains the four dedicated transaction nodes, so the recognition contract covers 133 node rows without changing its 246 calls, 58 mutations, or complete 9/9 rollout. Canonical proof caught stale 128/132 live/aggregate snapshots in the admitted consumers; exhaustive review updated Rust's live count and Dart, Julia, and Lua live plus aggregate counts while leaving their transaction behavior unchanged."
 evidence_update_2026_08_13_inter_match_gap_live: "INTER-MATCH-GAP-CAPTURE.2.2 adds private ENTRY_SLOT_READ, GAP_KIND_READ, GAP_SPAN_READ, and GAP_TEXT_READ nodes as immutable source_read effects. The derived live census advances from 129 to 133 and the aggregate census from 133 to 137; the 246 calls, 58 mutations, closed effect vocabulary, transaction behavior, and 9/9 recognition rollout do not move. Rust, Dart, Julia, and Lua admitted consumer metadata snapshots advance in lockstep."
+evidence_update_2026_08_17_progressive_perl_admission: "After gap public admission advanced canonical calls to 250 and public Perl contracts to 126, FUTURE-PARITY-BACKLOG.14.6.2.3 admits private Perl PROGRESSIVE_DISPATCH_SPAN as the sole parser_registry_or_staged_dispatch node. The derived current node census advances from 133 to 134 and aggregate rows from 137 to 138; calls stay 250, mutations stay 58, the effect remains rejected in uncommitted recognition, and recognition rollout remains 9/9."
+evidence_update_2026_08_17_progressive_consumer_sync: "The first .14.6.2.3 canonical run stops at Rust's stale 133-current-node assertion after its other 11 recognition tests pass. Exhaustive direct-dependent review updates Rust current count plus Dart, Julia, PUC Lua, and LuaJIT current/aggregate snapshots to 134/138 in lockstep; no recognition runtime behavior changes."
 reverify: "bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && perl tools/check_language_capability_coverage.pl --report"
 ---
 
@@ -43,13 +45,14 @@ checker through repository-local project data:
 bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py
 ```
 
-The checker derives 133 unique current canonical ActionIR node kinds from
-`perl/LinkedSpec/ActionIR/Contracts.pm`. It requires one base-effect row for each plus the four dedicated
-transaction nodes, for 137 total. This is a different census from the 122 public identifier-shaped Perl contracts
+The checker derives 134 unique current canonical ActionIR node kinds from
+`perl/LinkedSpec/ActionIR/Contracts.pm` and `perl/LinkedSpec/ActionIR/ProgressiveSpanDispatch.pm`. It requires one
+base-effect row for each plus the four dedicated transaction nodes, for 138 total. This is a different census from
+the 126 public identifier-shaped Perl contracts
 reported by `tools/check_language_capability_coverage.pl`: the latter counts public call-contract names after
 classifying internal/compatibility names, not unique ActionIR node kinds.
 
-The call-effect side derives the exact 246-name inventories independently from Dart, Julia, and Lua and requires
+The call-effect side derives the exact 250-name inventories independently from Dart, Julia, and Lua and requires
 them to agree before comparing all rows. Both surfaces use the closed nine-allowed/eleven-rejected vocabulary and
 fail on missing, duplicate, unknown, stale, or reclassified rows. Six call graphs—including direct and mutual
 recursion—are evaluated to a fixed point so a transitive forbidden effect cannot hide behind a callee.
