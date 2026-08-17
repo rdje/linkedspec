@@ -50,6 +50,14 @@ RECURRING_DRIVER_PATH = ROOT / "tools" / "check_typed_source_location_six_runtim
 RECURSIVE_OBSERVATION_RECURRING_DRIVER_PATH = (
     ROOT / "tools" / "check_recursive_observation_six_runtime.sh"
 )
+LOSSLESS_GAP_CONTRACT_PATH = (
+    ROOT / "capability_conformance" / "inter_match_gap_capture_contract.json"
+)
+LOSSLESS_GAP_CHECKER_PATH = ROOT / "tools" / "check_inter_match_gap_capture_contract.py"
+LOSSLESS_GAP_DRIVER_PATH = ROOT / "tools" / "check_inter_match_gap_capture_six_runtime.sh"
+TYPED_GAP_COMPOSITION_DRIVER_PATH = (
+    ROOT / "tools" / "check_typed_gap_composition_six_runtime.sh"
+)
 PROJECT_DATA_WORKFLOW_ROUTING_PATH = ROOT / "tools" / "test_project_data_workflow_routing.sh"
 
 EXPECTED_COUNTS = {
@@ -74,7 +82,7 @@ EXPECTED_COUNTS = {
     "recursive_observation_public_documents": 6,
     "recursive_observation_public_forbidden_claims": 6,
     "recursive_observation_public_surface_guard_paths": 10,
-    "mutations": 114,
+    "mutations": 126,
 }
 
 POLICY = {
@@ -91,7 +99,7 @@ POLICY = {
     "progress": "repetition, recursion, and staged queues must advance the cursor or prove a well-founded decreasing measure",
     "dispatch_authority": "a span conveys data and provenance only; source, registry, capability, and policy authority remain independently required",
     "source_spelling": "observe_recognition(observation, call(Child)) is current in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; Position and Span remain private architectural values projected as detached records",
-    "implementation_boundary": "the recursive-observation spelling, dedicated private node, detached carrier, parser behavior, exact six-runtime recurring composition, and public projection/no-drift proof are current; this is not a public API admission, the combined program-wide public-no-drift row remains pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted",
+    "implementation_boundary": "the recursive-observation spelling, dedicated private node, detached carrier, parser behavior, exact six-runtime recurring composition, public projection/no-drift proof, and lossless-gap typed composition are current; this is not a second gap syntax, lifecycle, implementation, compatibility, or migration owner, the combined program-wide public-no-drift row remains pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted",
 }
 
 CANONICAL_EXECUTION = {
@@ -316,7 +324,7 @@ RECURSIVE_OBSERVATION_PUBLIC_NO_DRIFT = {
         {
             "path": "capability_conformance/README.md",
             "required_markers": [
-                "Recursive-observation public projection/no-drift is current without a new public API; the 14-row rollout remains 9 complete / 5 pending."
+                "Recursive-observation public projection/no-drift is current without a new public API; after lossless-gap typed composition the 14-row rollout is 10 complete / 4 pending."
             ],
         },
         {
@@ -376,6 +384,64 @@ RECURSIVE_OBSERVATION_PUBLIC_NO_DRIFT = {
 }
 
 RECURSIVE_OBSERVATION_PUBLIC_MUTATION_COUNT = 18
+
+LOSSLESS_GAP_COMPOSITION = {
+    "owner": "FUTURE-PARITY-BACKLOG.14.5.1",
+    "status": "complete",
+    "policy": "compose the separately owned current gap-span carrier with the typed same-source half-open algebra; do not duplicate gap syntax, lifecycle, implementation, compatibility, migration, or public-admission ownership",
+    "upstream_gap_authority": {
+        "contract_id": "linkedspec-inter-match-gap-capture-v1",
+        "contract_path": "capability_conformance/inter_match_gap_capture_contract.json",
+        "checker_path": "tools/check_inter_match_gap_capture_contract.py",
+        "driver_path": "tools/check_inter_match_gap_capture_six_runtime.sh",
+        "rollout": {"complete": 9, "pending": 0, "semantic_mutations": 63},
+        "public": {
+            "documents": 6,
+            "forbidden_current_claims": 12,
+            "surface_guard_paths": 10,
+            "mutations": 29,
+        },
+    },
+    "typed_projection": {
+        "call": "gap_span",
+        "representation": "detached typed same-source half-open Unicode-scalar span with source identity and gap provenance",
+        "segment_kinds": ["prefix", "interstitial", "tail"],
+        "slot_identity": "entry_slot preserves named or positional target-slot provenance independently of the gap span",
+        "text_materialization": "gap_text materializes on demand; gap_span never embeds copied text",
+        "behavior_owner": "INTER-MATCH-GAP-CAPTURE.1-.7 owns syntax, lifecycle, implementation, compatibility, migration, and public admission",
+    },
+    "recurring_gate": {
+        "driver": "tools/check_typed_gap_composition_six_runtime.sh",
+        "ordered_checks": [
+            "bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py",
+            "bash tools/check_inter_match_gap_capture_six_runtime.sh",
+            "bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py",
+            "perl tools/check_generated_source_contract.pl",
+            "perl tools/check_capability_conformance.pl",
+            "perl tools/check_language_capability_coverage.pl",
+        ],
+        "storage": {
+            "initializer": "tools/project_data_env.sh",
+            "managed_entrypoint": "tools/check_typed_gap_composition_six_runtime.sh",
+            "policy": "all temporary, cache, build, native, and test data stays under repository-derived storage",
+        },
+        "local_ci": {
+            "driver": "tools/run_ci_local.sh",
+            "switch": "LINKEDSPEC_RUN_TYPED_GAP_COMPOSITION_MATRIX",
+        },
+    },
+    "rollout_assertions": {
+        "row_count": 14,
+        "lossless_gap_composition": {
+            "status": "complete",
+            "owner": "FUTURE-PARITY-BACKLOG.14.5",
+        },
+        "recurring_public_no_drift": {
+            "status": "pending",
+            "owner": "FUTURE-PARITY-BACKLOG.14.8",
+        },
+    },
+}
 
 HELPER_GROUPS = {
     "capture_mark": "CAPTURE_MARK_HELPERS",
@@ -816,7 +882,12 @@ ROLLOUT = [
         "FUTURE-PARITY-BACKLOG.14.4",
         ["perl", "rust", "dart", "julia", "puc_lua", "luajit"],
     ),
-    ("lossless_gap_composition", "pending", "FUTURE-PARITY-BACKLOG.14.5", []),
+    (
+        "lossless_gap_composition",
+        "complete",
+        "FUTURE-PARITY-BACKLOG.14.5",
+        ["perl", "rust", "dart", "julia", "puc_lua", "luajit"],
+    ),
     ("progressive_span_dispatch", "pending", "FUTURE-PARITY-BACKLOG.14.6", []),
     ("staged_span_dispatch", "pending", "FUTURE-PARITY-BACKLOG.14.7", []),
     (
@@ -1466,6 +1537,8 @@ def apply_recursive_observation_transition(
 
 
 def validate_contract(contract: dict[str, Any], *, check_registration: bool = True) -> None:
+    if "lossless_gap_composition" not in contract:
+        fail("lossless-gap composition contract is missing")
     if "recursive_observation_recurring_gate" not in contract:
         fail("recursive-observation recurring gate is missing")
     if "recursive_observation_public_no_drift" not in contract:
@@ -1496,6 +1569,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         "recurring_gate",
         "recursive_observation_recurring_gate",
         "recursive_observation_public_no_drift",
+        "lossless_gap_composition",
         "rollout",
     ]
     require_fields(contract, top_fields, "contract")
@@ -1505,7 +1579,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         fail("contract id drifted")
     if contract["task_owner"] != "FUTURE-PARITY-BACKLOG.14.1.1":
         fail("task owner drifted")
-    if contract["status"] != "neutral_contract_with_recursive_observation_public_no_drift":
+    if contract["status"] != "neutral_contract_with_recursive_observation_public_no_drift_and_lossless_gap_composition":
         fail("typed source-location status drifted")
     if contract["expected_counts"] != EXPECTED_COUNTS:
         fail("expected counts drifted")
@@ -2138,6 +2212,21 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         recursive_observation_public,
         rollout,
     )
+    lossless_gap_composition = contract["lossless_gap_composition"]
+    if lossless_gap_composition != LOSSLESS_GAP_COMPOSITION:
+        fail("lossless-gap composition contract drifted")
+    gap_assertions = lossless_gap_composition["rollout_assertions"]
+    if gap_assertions["row_count"] != len(rollout):
+        fail("lossless-gap composition changed rollout cardinality")
+    rollout_by_leg = {row["leg"]: row for row in rollout}
+    for leg in ("lossless_gap_composition", "recurring_public_no_drift"):
+        actual = rollout_by_leg.get(leg)
+        expected = gap_assertions[leg]
+        if actual is None or {
+            "status": actual["status"],
+            "owner": actual["owner"],
+        } != expected:
+            fail(f"lossless-gap composition rollout assertion drifted: {leg}")
 
     actual_counts = {
         "sources": len(sources),
@@ -2196,6 +2285,10 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             LUA_ORDINARY_DRIVER_PATH,
             RECURRING_DRIVER_PATH,
             RECURSIVE_OBSERVATION_RECURRING_DRIVER_PATH,
+            LOSSLESS_GAP_CONTRACT_PATH,
+            LOSSLESS_GAP_CHECKER_PATH,
+            LOSSLESS_GAP_DRIVER_PATH,
+            TYPED_GAP_COMPOSITION_DRIVER_PATH,
             PROJECT_DATA_WORKFLOW_ROUTING_PATH,
         ):
             if not path.is_file():
@@ -2209,6 +2302,31 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             public_document_texts,
             public_surface_texts,
         )
+        gap_contract = json.loads(LOSSLESS_GAP_CONTRACT_PATH.read_text(encoding="utf-8"))
+        upstream = lossless_gap_composition["upstream_gap_authority"]
+        if gap_contract.get("contract_id") != upstream["contract_id"]:
+            fail("lossless-gap upstream contract identity drifted")
+        gap_counts = gap_contract.get("expected_counts", {})
+        gap_rollout = gap_contract.get("rollout", [])
+        if {
+            "complete": sum(row.get("status") == "complete" for row in gap_rollout),
+            "pending": sum(row.get("status") == "pending" for row in gap_rollout),
+            "semantic_mutations": gap_counts.get("semantic_mutations"),
+        } != upstream["rollout"]:
+            fail("lossless-gap upstream rollout or mutation authority drifted")
+        gap_public = gap_contract.get("public_contract", {})
+        expected_gap_public = upstream["public"]
+        if {
+            "documents": len(gap_public.get("documents", [])),
+            "forbidden_current_claims": len(
+                gap_public.get("forbidden_current_claims", [])
+            ),
+            "surface_guard_paths": len(
+                gap_public.get("surface_guard", {}).get("paths", [])
+            ),
+            "mutations": expected_gap_public["mutations"],
+        } != expected_gap_public:
+            fail("lossless-gap upstream public authority drifted")
         ci_text = CI_PATH.read_text(encoding="utf-8")
         required_markers = [
             f"require_tracked_file {CANONICAL_EXECUTION['contract_path']}",
@@ -2355,6 +2473,45 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             "tools/check_recursive_observation_six_runtime.sh"
         ) != 1:
             fail("recursive-observation recurring project-data routing registration drifted")
+        composition_gate = lossless_gap_composition["recurring_gate"]
+        composition_driver_text = TYPED_GAP_COMPOSITION_DRIVER_PATH.read_text(
+            encoding="utf-8"
+        )
+        if not TYPED_GAP_COMPOSITION_DRIVER_PATH.stat().st_mode & 0o111:
+            fail("typed gap-composition driver is not executable")
+        composition_positions: list[int] = []
+        for marker in composition_gate["ordered_checks"]:
+            if composition_driver_text.count(marker) != 1:
+                fail(
+                    "typed gap-composition driver marker must appear exactly once: "
+                    f"{marker}"
+                )
+            composition_positions.append(composition_driver_text.index(marker))
+        if composition_positions != sorted(composition_positions):
+            fail("typed gap-composition driver check order drifted")
+        composition_storage = composition_gate["storage"]
+        for marker in (
+            f'source "$REPO_ROOT/{composition_storage["initializer"]}"',
+            f'linkedspec_project_data_enter_run "$REPO_ROOT/{composition_storage["managed_entrypoint"]}" "$@"',
+        ):
+            if composition_driver_text.count(marker) != 1:
+                fail(f"typed gap-composition driver is not repository-routed: {marker}")
+        composition_ci = composition_gate["local_ci"]
+        composition_ci_markers = (
+            f"require_tracked_file {composition_gate['driver']}",
+            f'if [[ "${{{composition_ci["switch"]}:-0}}" == "1" ]]; then',
+            f'bash "$REPO_ROOT/{composition_gate["driver"]}"',
+        )
+        for marker, expected_count in zip(
+            composition_ci_markers, (2, 1, 1), strict=True
+        ):
+            if ci_text.count(marker) != expected_count:
+                fail(
+                    "typed gap-composition canonical registration marker count drifted: "
+                    f"{marker} expected {expected_count}"
+                )
+        if workflow_routing_text.count(composition_gate["driver"]) != 2:
+            fail("typed gap-composition project-data routing registration drifted")
         rust_consumer_text = RUST_CONSUMER_PATH.read_text(encoding="utf-8")
         for dormant_marker in (
             "linkedspec_typed_source_red",
@@ -2766,6 +2923,76 @@ def mutation_checks(contract: dict[str, Any]) -> int:
             lambda c: c["recursive_observation_public_no_drift"][
                 "rollout_assertions"
             ]["recurring_public_no_drift"].__setitem__("status", "complete"),
+        ),
+        (
+            "lossless-gap composition owner",
+            lambda c: c["lossless_gap_composition"].__setitem__(
+                "owner", "FUTURE-PARITY-BACKLOG.14.8"
+            ),
+        ),
+        (
+            "lossless-gap upstream contract path",
+            lambda c: c["lossless_gap_composition"][
+                "upstream_gap_authority"
+            ].__setitem__("contract_path", "capability_conformance/wrong.json"),
+        ),
+        (
+            "lossless-gap upstream checker path",
+            lambda c: c["lossless_gap_composition"][
+                "upstream_gap_authority"
+            ].__setitem__("checker_path", "tools/wrong.py"),
+        ),
+        (
+            "lossless-gap upstream driver path",
+            lambda c: c["lossless_gap_composition"][
+                "upstream_gap_authority"
+            ].__setitem__("driver_path", "tools/wrong.sh"),
+        ),
+        (
+            "lossless-gap upstream rollout mutations",
+            lambda c: c["lossless_gap_composition"]["upstream_gap_authority"][
+                "rollout"
+            ].__setitem__("semantic_mutations", 62),
+        ),
+        (
+            "lossless-gap upstream public mutations",
+            lambda c: c["lossless_gap_composition"]["upstream_gap_authority"][
+                "public"
+            ].__setitem__("mutations", 28),
+        ),
+        (
+            "lossless-gap typed representation",
+            lambda c: c["lossless_gap_composition"]["typed_projection"].__setitem__(
+                "representation", "copied text"
+            ),
+        ),
+        (
+            "lossless-gap recurring check omitted",
+            lambda c: c["lossless_gap_composition"]["recurring_gate"][
+                "ordered_checks"
+            ].pop(),
+        ),
+        (
+            "lossless-gap storage initializer",
+            lambda c: c["lossless_gap_composition"]["recurring_gate"][
+                "storage"
+            ].__setitem__("initializer", "/tmp/project_data_env.sh"),
+        ),
+        (
+            "lossless-gap managed entrypoint",
+            lambda c: c["lossless_gap_composition"]["recurring_gate"][
+                "storage"
+            ].__setitem__("managed_entrypoint", "tools/wrong.sh"),
+        ),
+        (
+            "lossless-gap canonical switch",
+            lambda c: c["lossless_gap_composition"]["recurring_gate"][
+                "local_ci"
+            ].__setitem__("switch", "LINKEDSPEC_RUN_WRONG_MATRIX"),
+        ),
+        (
+            "lossless-gap composition regressed to pending",
+            lambda c: c["rollout"][10].__setitem__("status", "pending"),
         ),
         (
             "recursive observation Perl admission omitted",

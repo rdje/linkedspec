@@ -10,6 +10,28 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.5.1 — compose typed lossless gaps
+
+- Activated task-tree-first from clean atomic 255 `5b9c343a`. The complete checker oracle then failed the
+  unchanged typed contract at exact `ContractError: lossless-gap composition contract is missing` before any
+  contract, driver, or CI-route edit.
+- Added one exact composition section binding the separately owned gap contract/checker/driver, rollout 9/0/63,
+  and public 6 documents / 12 stale denials / 10 outward guards / 29 mutations. The typed projection is the
+  already-current detached same-source half-open Unicode-scalar `gap_span`; no copied text or second owner exists.
+- Added twelve drift corruptions for upstream identity/counts, projection, order, project-local storage, canonical
+  registration, and complete-to-pending regression. Promoted only `lossless_gap_composition`, advancing typed
+  governance from 9 complete / 5 pending / 114 to 10 complete / 4 pending / 126.
+- Added rooted `tools/check_typed_gap_composition_six_runtime.sh`, outside-CWD routing, and canonical opt-in
+  `LINKEDSPEC_RUN_TYPED_GAP_COMPOSITION_MATRIX`. Focused proof passes typed governance; gap neutral, Perl 124,
+  Rust 1, Dart 5, Julia 319, PUC Lua 392, and LuaJIT 392; recognition 137/250/58; generated-source strict Rust
+  105/105; capability 80/0/0; and language 250/105+1/126 through the exact success marker.
+- Kept `INTER-MATCH-GAP-CAPTURE.1-.7` as sole syntax/lifecycle/implementation/compatibility/migration/public
+  owner. Parser/compiler/runtime behavior, facades, descriptors, schemas, semantic/MCP, CLI, README, storage
+  ownership, and final combined `.14.8` no-drift remain unchanged.
+- Canonical signoff passes nine doctrines, repository containment/relocation, CLI 66/66 in both option
+  environments, RAM 51%, Phase 0 1,031/1,031 in 729 seconds, and the complete six-runtime opt-in through its exact
+  success marker. Parent `.14.5` closes; `.14.6` is the next task-tree-first frontier.
+
 ## 2026-08-16 — INTER-MATCH-GAP-CAPTURE.7.3 — close lossless segmentation tree
 
 - Activated task-tree-first from clean public atomic 254 `bb0c3768` with its canonical receipt promoted and

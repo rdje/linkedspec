@@ -141,8 +141,8 @@ It executes neutral first; Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT in order
 capability, and language-coverage ledgers. Canonical CI exposes the same route behind
 `LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1`. Twelve new regressions lock topology, repository-local storage,
 canonical registration, and recurrence-only promotion. Twenty-seven public-contract, document, stale-claim, and
-surface-guard mutations close the observation projection without changing the ledger. The recursive-observation
-row remains complete, so typed-source rollout is 9 complete / 5 pending with 114 mutations. There is still no public helper, authored
+surface-guard mutations close the observation projection without changing that row. The recursive-observation
+row remains complete; lossless-gap typed composition now makes overall typed-source rollout 10 complete / 4 pending with 126 mutations. There is still no public helper, authored
 `Position`/`Span` value, descriptor/generated version, result-schema field, semantic/MCP projection, CLI option,
 or README behavior; the combined program-wide public-no-drift row remains pending for `.14.8`. Definitive local CI passes containment/relocation, CLI
 66/66 twice, RAM 62%, Phase 0 1,031/1,031 in 723 seconds, and the complete observation matrix.
@@ -342,7 +342,7 @@ position and derives seek/consume from its own authored family.
 
 Progressive and staged parsing can then pass a span directly to another explicitly registered parser. The child
 receives the exact text slice while its diagnostics map back to the original source. A span grants no implicit file
-read, parser lookup, compilation, execution, or policy elevation. Lossless `@capture_gaps` segmentation will use the
+read, parser lookup, compilation, execution, or policy elevation. Lossless `@capture_gaps` segmentation uses the
 same span representation, but ADR `0045` and the separate inter-match-gap task remain the sole owners of its syntax,
 prefix/tail policy, lifecycle behavior, and compatibility migration.
 
@@ -358,12 +358,12 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 
 The checker covers 3 decoded sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation,
 8 transaction, and 33 recursive-observation transitions, 6 detached observations, 4 structural cases,
-33 diagnostics, and 114 mutations.
+33 diagnostics, and 126 mutations.
 It also proves that all 92 current source-boundary helpers project onto the algebra.
 
-This is rollout status, not authored-value status. Nine of 14 rollout legs are complete: the neutral contract,
+This is rollout status, not authored-value status. Ten of 14 rollout legs are complete: the neutral contract,
 public linked-rule structure, unchanged neutral/public recomposition, and the Perl, Rust, Dart, Julia, PUC Lua,
-and LuaJIT runtime targets, plus recursive-observation recurrence. The other 5 remain pending.
+and LuaJIT runtime targets, plus recursive-observation recurrence and lossless-gap composition. The other four remain pending.
 
 Perl now uses an internal decoded-source authority plus immutable position/span values beneath every governed
 helper projection. Exact Unicode execution is admitted on live and independently emitted/loaded generated routes.
@@ -419,7 +419,7 @@ nodes, recursive effect/progress policy, and all four runtime carriers after rec
 while the consumer is ordinarily and canonically discovered once per ABI. Transaction rollout is complete at
 9/9 under `.14.3.8`; the unchanged recurring authority and all six admissions remain exact. The separate typed-source combined
 recurring/public-no-drift row remains pending for final program-wide closeout `FUTURE-PARITY-BACKLOG.14.8`, so
-typed-source composition is 9 complete / 5 pending.
+typed-source composition is 10 complete / 4 pending with 126 mutations.
 
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions or
 typed spans are authored values. The `recognition_*` operations are current across all six runtime routes, while
@@ -1074,11 +1074,46 @@ metadata; and both generated entrypoints preserve private context and gap-owned 
 original typed errors. Five independently loaded groups / 138 internal assertions compare canonical values,
 cursors, lifecycle, recursion, rollback, diagnostics, direct entry, and legacy rolling against live execution.
 
-The rollout has nine complete ordered legs: neutral, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurring proof,
+The gap rollout has nine complete ordered legs: neutral, Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurring proof,
 and public no-drift. Runtime consumers cover native/live execution, reconstructed state, descriptors, generated
 plans and independently loaded emitted source, target lifecycle, recursion/rollback, diagnostics, and primary
-commands. Public language admission deliberately leaves README, facades, semantic/MCP schemas, CLI, capability
-status, and typed-source `lossless_gap_composition` unchanged.
+commands. Public language admission deliberately leaves README, facades, semantic/MCP schemas, CLI, and capability
+status unchanged; typed-source `lossless_gap_composition` is now a separately governed current composition.
+
+### Typed lossless-gap composition
+
+`gap_span()` did not need a second runtime representation. On every admitted backend it already returns a
+detached typed span with one source identity, Unicode-scalar `start` and `end`, and `provenance = "gap"`. The
+typed-source composition row now records that existing carrier as the common representation for all three
+segment positions:
+
+| Gap kind | Example input boundary | Typed span |
+| --- | --- | --- |
+| `prefix` | text before the first selected match | `[entry, first_match.start)` |
+| `interstitial` | separator between two accepted matches | `[previous_accepted_exit, next_match.start)` |
+| `tail` | text after the final accepted match | `[previous_accepted_exit, input_end)` |
+
+For example, parsing `  alpha, βeta ; ` can expose `"  "`, `", "`, and `" ; "` as separate gap texts while
+their spans retain exact offsets into the same decoded source. `entry_slot()` independently retains whether the
+selected target used named or positional slot provenance. `gap_text()` materializes text on demand; it is not
+embedded in or used as the authority for `gap_span()`.
+
+Run the composed proof from the repository root:
+
+```bash
+bash tools/check_typed_gap_composition_six_runtime.sh
+```
+
+It validates typed-source governance, then the complete neutral/Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT gap route,
+then recognition, generated-source, capability, and language ledgers. Canonical CI exposes the same rooted route
+behind `LINKEDSPEC_RUN_TYPED_GAP_COMPOSITION_MATRIX=1`. Twelve new mutations reject a changed upstream contract,
+count, projection, ordering, storage route, canonical switch, or completion regression. Overall typed-source
+truth is 10 complete / 4 pending / 126 mutations; only `lossless_gap_composition` moved. Final combined public
+no-drift remains owned by `.14.8`.
+
+This composition creates no new grammar, lifecycle, runtime state, compatibility rule, migration, facade,
+descriptor schema, semantic/MCP field, CLI option, README surface, or implicit parser authority.
+`INTER-MATCH-GAP-CAPTURE.1-.7` remains the sole owner of gap behavior and public admission.
 
 ## `mark_*`: named checkpoints
 

@@ -271,7 +271,7 @@ bash tools/check_typed_source_location_six_runtime.sh
 ```
 
 Canonical local CI requires and syntax-checks that driver; `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1` opts into its
-all-toolchain execution. Current governance is 114 mutations and rollout is 9 complete / 5 pending across 14 legs:
+all-toolchain execution. Current governance is 126 mutations and rollout is 10 complete / 4 pending across 14 legs:
 the neutral contract, public structure, unchanged neutral/public recomposition, and the Perl, Rust, Dart, Julia,
 PUC Lua, and LuaJIT internal
 runtime admissions are complete. The two Lua ABIs share one rollout leg because they execute the same consumer
@@ -297,8 +297,8 @@ bash tools/check_recursive_observation_six_runtime.sh
 Canonical CI exposes the same route behind `LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1`. Eleven topology/storage
 regressions plus one recurrence regression promote only `recursive_observation`. The public closeout then binds
 six current projections, rejects six stale claims, and guards ten facade/API/schema surfaces through 27 further
-mutations. Recursive-observation public projection/no-drift is current without a new public API; the 14-row rollout remains 9 complete / 5 pending.
-Governance is 114, and the combined program-wide public-no-drift row stays pending for `.14.8`. No public
+mutations. Recursive-observation public projection/no-drift is current without a new public API; after lossless-gap typed composition the 14-row rollout is 10 complete / 4 pending.
+Governance is 126, and the combined program-wide public-no-drift row stays pending for `.14.8`. No public
 helper/value, descriptor/generated schema, semantic/MCP field, CLI, or README behavior moved.
 
 `inter_match_gap_capture_contract.json` is the neutral authority for named regex slots and lossless
@@ -309,10 +309,16 @@ governance route. The latter executes the complete neutral, Perl, Rust, Dart, Ju
 the nine-leg rollout is 9 complete / 0 pending and the checker rejects 63 semantic/topology corruptions plus ten
 Rust, ten Dart, ten Julia, and sixteen Lua admission/regression mutations. Public no-drift binds exactly six
 documents, twelve stale-current denials, ten outward guards, and 29 reason-checked text/surface mutations.
+`FUTURE-PARITY-BACKLOG.14.5.1` binds that unchanged 9/0/63 plus 6/12/10/29 authority to the existing detached
+same-source half-open `gap_span` representation. Run `bash tools/check_typed_gap_composition_six_runtime.sh` to
+check the typed contract, the complete six-runtime gap route, recognition ownership, and generated/capability/
+language ledgers in order. Canonical CI exposes the exact route behind
+`LINKEDSPEC_RUN_TYPED_GAP_COMPOSITION_MATRIX=1`. Twelve new mutations lock cross-contract identity, counts,
+projection, storage, route, canonical registration, and completion of only `lossless_gap_composition`.
 Perl `.2.1-.2.3` implement authored/static metadata, private native-live behavior, and independently loaded
 generated parity; `.2.4` admits that existing consumer without an outward API. Its four private accessor nodes are synchronized as recognition `source_read`
-effects at 137 total rows; `.7.2` admits their call names at 250 shared calls and 126 public Perl contracts while
-typed-source composition stays pending. Rust `.3.1-.3.4` implement authored/static/compiled metadata, invocation-local native
+effects at 137 total rows; `.7.2` admits their call names at 250 shared calls and 126 public Perl contracts.
+Typed-source composition is current without a second implementation owner. Rust `.3.1-.3.4` implement authored/static/compiled metadata, invocation-local native
 state, ordinary reconstruction, compatible descriptor projection, separate generated-plan parity, and independently
 compiled emitted proof. `.3.5` adds a real primary-command mixed-separator case, requires all nine Rust roles
 exactly once, and admits the consumer ordinarily, canonically, and after Perl in the rooted route. Generated plan

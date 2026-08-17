@@ -37,8 +37,8 @@
 > and LuaJIT in exact order, then generated-source, capability, and language-coverage ledgers. Run
 > `bash tools/check_typed_source_location_six_runtime.sh`; canonical CI exposes the same all-toolchain proof behind
 > `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1`. Five backend source groups map to six runtime routes because the shared
-> Lua source executes on both ABIs. Governance is now 9 complete / 5 pending with 114 drift mutations after the
-> independently governed recursive-observation public projection/no-drift closeout.
+> Lua source executes on both ABIs. Governance is now 10 complete / 4 pending with 126 drift mutations after the
+> independently governed recursive-observation public projection/no-drift and lossless-gap composition closeouts.
 >
 > No-change recomposition `.14.2.7` reruns that exact authority and closes the internal value/helper implementation
 > parent `.14.2`. It adds no replacement backend surface and does not promote the combined final `.14.8` row.
@@ -152,6 +152,9 @@
 > `LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1`. Twelve topology/storage/rollout regressions promote only the
 > observation row. Twenty-seven further public-projection mutations reject stale prose and premature surface
 > widening without adding a rollout row, producing 9/5/114 while the combined program-wide `.14.8` row remains pending.
+> Lossless-gap composition subsequently binds the unchanged 9/0/63 plus public 6/12/10/29 gap authority through
+> existing `gap_span`, adds twelve drift mutations, and promotes only its row for current truth 10/4/126. Run
+> `bash tools/check_typed_gap_composition_six_runtime.sh`; no second gap behavior owner or outward surface exists.
 >
 > Definitive neutral signoff passes the exact six-runtime composition and support ledgers, all eight doctrines,
 > six-family containment, repository relocation, CLI 66x2, RAM 35%, and canonical Phase 0 1,031/1,031 in 714

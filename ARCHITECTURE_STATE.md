@@ -1,6 +1,6 @@
 # ARCHITECTURE STATE
 
-## Inter-match-gap capture is closed and handed to typed-source composition
+## Lossless gaps are current in the typed algebra without a second behavior owner
 
 `INTER-MATCH-GAP-CAPTURE.7.2` landed public admission as atomic 254 at `bb0c3768`. The shared language inventory
 is 250 calls with 126 independently derived public Perl contracts; recognition is 137 ActionIR rows / 250 calls /
@@ -8,17 +8,25 @@ is 250 calls with 126 independently derived public Perl contracts; recognition i
 denials / 10 outward guards / 29 mutations. Legacy gap markers remain divergent, named marks and explicit helpers
 remain independent, and `@emit_gaps` remains absent.
 
-No-change `.7.3` independently recomposes neutral, all six runtimes, recurrence, public language, compatibility,
+No-change `.7.3` independently recomposed neutral, all six runtimes, recurrence, public language, compatibility,
 generated/capability/typed-source/semantic/MCP/CLI/storage, and rendered-book proof from clean `bb0c3768`.
 Base-relative identity covers every admitted executable contract plus grammar/parser/compiler/runtime/emitter/
-primary/facade/schema/README surfaces. It closes parent `.7` and the entire gap tree for intended atomic 255,
-then hands only typed `gap_composition` to `FUTURE-PARITY-BACKLOG.14.5.1`.
+primary/facade/schema/README surfaces. It closed parent `.7` and the entire gap tree as atomic 255 `5b9c343a`,
+then handed only typed `gap_composition` to `FUTURE-PARITY-BACKLOG.14.5.1`.
 
 The `.7.0` audit caught a marker-only governance defect: exact status sentences could coexist with stale Lua-skip
 and 3/6 prose. `.7.2` replaces that blind spot with omission-sensitive document and surface mutations. Capability
-remains 80/0/0 and typed source remains 9/5/114; README, facades, outward schemas, semantic/MCP, CLI, storage,
-and runtime behavior stay unchanged. `.14.5.1` is unblocked but may activate only after `.7.3` receipt/brief/clean
-proof.
+remains 80/0/0; README, facades, outward schemas, semantic/MCP, CLI, storage, and runtime behavior stay unchanged.
+
+`.14.5.1` binds the current gap contract/checker/driver and exact 9/0/63 plus public 6/12/10/29 authority into
+the typed contract. The representation is the already-current detached `gap_span`: one source identity, half-open
+Unicode-scalar offsets, and gap provenance. Prefix/interstitial/tail are segment positions; `gap_text` materializes
+on demand and `entry_slot` independently retains named/positional provenance. Twelve new drift mutations and one
+repository-routed composed driver promote only `lossless_gap_composition`, so typed source is 10 complete / 4
+pending / 126. The driver recomposes the complete neutral and six-runtime gap route plus recognition, generated-
+source, capability, and language ledgers. `INTER-MATCH-GAP-CAPTURE.1-.7` remains the exclusive behavior owner,
+and combined program-wide no-drift remains `.14.8`-owned. Canonical signoff passes nine doctrines, repository
+containment/relocation, CLI 66/66 twice, RAM 51%, Phase 0 1,031/1,031 in 729 seconds, and the exact opt-in route.
 
 ## Lua inter-match-gap capture has one behavior-free dual-ABI five-leaf implementation plan
 
@@ -106,7 +114,8 @@ coverage ledgers. Five sources form six routes because one shared Lua source exe
 topology/storage regressions plus one recurrence regression promote only `recursive_observation`, advancing typed-
 source rollout to 9 complete / 5 pending. Public closeout `.14.4.8` governs six current projections, denies six
 stale claims, and scans ten public surfaces through 27 additional mutations, advancing governance to 114 without
-changing the 14-row rollout. The combined final `.14.8` row remains pending. No public helper/value, facade,
+changing the 14-row rollout. Later lossless-gap typed composition adds twelve regressions and promotes only its
+row, making current aggregate truth 10/4/126. The combined final `.14.8` row remains pending. No public helper/value, facade,
 descriptor/generated schema, result schema, semantic/MCP projection, CLI, README, parser, compiler, or runtime
 behavior becomes current.
 
@@ -134,8 +143,8 @@ preceding-slot-local in Lua, and absent from native Rust/Dart/Julia execution.
 `INTER-MATCH-GAP-CAPTURE.1-.7` is closed and remains the sole owner of named-slot grammar, gap lifecycle and compatibility policy,
 prefix/interstitial/tail and empty-span behavior, failure/commit/recursion semantics, all six runtime admissions,
 carriers, and public projection. Its `.7.3` closeout is canonical-signoff-complete from clean `bb0c3768`;
-`FUTURE-PARITY-BACKLOG.14.5.1` is the next clean-boundary owner and may promote only typed-source
-`gap_composition`. Combined no-drift stays `.14.8`.
+`FUTURE-PARITY-BACKLOG.14.5.1` has now promoted only typed-source `gap_composition` and closed `.14.5`.
+Progressive span dispatch `.14.6` is next; combined no-drift stays `.14.8`.
 
 Bracket syntax preserves the semantic distinction: `Rule[N]` is positional compatibility, while `Rule[name]`
 is stable identity across declaration reordering. Both may resolve to one typed slot target while retaining source

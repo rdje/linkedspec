@@ -10,6 +10,24 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.5.1` — typed lossless-gap composition): clean activation is atomic 255
+  `5b9c343a`. Knowledge/ADR/Toolbox and both executable contracts prove `gap_span` already supplies the detached
+  typed same-source half-open Unicode-scalar carrier on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT.
+- Preserve ownership. `INTER-MATCH-GAP-CAPTURE.1-.7` remains sole owner of named-slot and directive syntax,
+  lifecycle, state, backend implementation, compatibility, migration, and public admission. This leaf owns only
+  typed cross-contract binding, recurrence, rollout, and durable projection teaching.
+- Checker-first RED is exact `ContractError: lossless-gap composition contract is missing`. GREEN binds upstream
+  gap 9/0/63 plus public 6/12/10/29; adds twelve reasoned corruptions; promotes only
+  `lossless_gap_composition`; and makes typed truth 10/4/126 while final combined `.14.8` stays pending.
+- Rooted `tools/check_typed_gap_composition_six_runtime.sh` enters project-data storage, validates typed truth,
+  runs the complete gap neutral/Perl-124/Rust-1/Dart-5/Julia-319/PUC-Lua-392/LuaJIT-392 route, then recognition
+  137/250/58, generated-source strict Rust 105/105, capability 80/0/0, and language 250/105+1/126. Its canonical
+  switch is `LINKEDSPEC_RUN_TYPED_GAP_COMPOSITION_MATRIX=1`; default CI still inventories/audits/syntax-checks it.
+- No grammar/parser/compiler/runtime/carrier/facade/descriptor/schema/semantic/MCP/CLI/README or storage-owner
+  change occurs. Book/Knowledge/live synchronization, outside-CWD routing, and nine doctrines pass. The
+  receipt-bound canonical gate passes containment/relocation, CLI 66/66 twice, RAM 51%, Phase 0 1,031/1,031 in
+  729 seconds, and the complete opt-in route; `.14.5` closes and `.14.6` is next.
+
 - 2026-08-16 (`INTER-MATCH-GAP-CAPTURE.7.3` — independent no-change closeout): clean activation is public atomic
   254 `bb0c3768`. Retrieve and record hashes for the neutral/checker, five distinct six-runtime consumers,
   routing/storage, language/recognition/public contracts, compatibility, book, ADR/Knowledge, and both trees.

@@ -146,7 +146,7 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 
 The check is unconditional. It independently derives Unicode-scalar, line/column, and UTF-8 coordinates;
 materializes direct and derived spans; executes invocation and bounded-transaction state transitions; validates
-recursive and zero/one/two-regex structural cases; and rejects all 114 registered mutations.
+recursive and zero/one/two-regex structural cases; and rejects all 126 registered mutations.
 
 In the test-first workflow used here, **RED** means writing the exact contract or consumer first and proving that
 it fails for the intended missing capability. **GREEN** means implementing the smallest owned change that makes
@@ -210,7 +210,7 @@ bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contrac
 bash tools/run_lua_project_data.sh luajit lua/test/recursive_observation_contract_test.lua
 ```
 
-Its current rollout result is 9 complete / 5 pending with 114 registered mutations. Passing this gate proves the
+Its current rollout result is 10 complete / 4 pending with 126 registered mutations. Passing this gate proves the
 neutral contract, both completed public-structure rows, and all six internal runtime targets across their exact
 value/helper carriers. Rust and Lua retain UTF-8-byte registers, Dart retains UTF-16 code-unit registers, and Julia
 retains zero-based UTF-8 code-unit registers while each converts at its immutable typed boundary. This does not
@@ -233,6 +233,22 @@ surfaces through 27 mutations. Definitive local CI passes repository
 containment and relocation, CLI 66/66 in both option environments, RAM 62%, Phase 0 1,031/1,031 in 723 seconds,
 and this complete matrix through its exact success marker. The combined program-wide `.14.8` public-no-drift row
 remains pending.
+
+The typed lossless-gap composition has one narrower rooted route over already-admitted authorities:
+
+```bash
+bash tools/check_typed_gap_composition_six_runtime.sh
+```
+
+It runs the typed checker, the complete neutral plus six-runtime gap driver, recognition ownership, and the
+generated-source, capability, and language ledgers in that exact order. The driver is inventoried, machine-path
+audited, syntax-checked, and outside-CWD routed by default; set
+`LINKEDSPEC_RUN_TYPED_GAP_COMPOSITION_MATRIX=1` to include the full route in canonical CI. Twelve new mutations
+lock upstream gap 9/0/63, public 6/12/10/29, the detached same-source half-open `gap_span` projection, storage,
+registration, and completion of only `lossless_gap_composition`. Typed source is now 10 complete / 4 pending /
+126; no gap implementation or outward surface is duplicated. Its canonical signoff passes nine doctrines,
+repository containment/relocation, CLI 66/66 in both option environments, RAM 51%, Phase 0 1,031/1,031 in 729
+seconds, and the exact typed-gap success marker.
 
 Inter-match gap public governance is current at 9 complete / 0 pending with 63 neutral mutations and exact public no-drift proof.
 Perl `.2.1-.2.3` established metadata, private live behavior, and independently loaded generated parity. Admission

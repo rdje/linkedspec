@@ -1005,7 +1005,7 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   canonical gate.
 - **OUTPUT:** neutral governance reports 3 sources, 7 positions, 6 direct spans, 3 derived texts, 8+8+33 state
   transitions, 6 recursive observations, 4 structural cases, 92 helper projections + 7 aliases + 2 internal ids,
-  33 diagnostics, 9 complete / 5 pending rollout, and 114 rejected drift mutations. The driver then reports each
+  33 diagnostics, 10 complete / 4 pending rollout, and 126 rejected drift mutations. The driver then reports each
   of the six ordered runtime routes and three support ledgers before its exact success marker.
 - **BOUNDARY:** this is orchestration over existing internal consumers, not a new public typed-value surface. The
   combined recurring/public no-drift row remains pending for `FUTURE-PARITY-BACKLOG.14.8`. Retrieve
@@ -1033,7 +1033,8 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   machine-path-audits, and syntax-checks the driver; use
   `LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1 bash tools/run_ci_local.sh` for its all-toolchain route.
 - **OUTPUT:** Perl 7, Rust 7, Dart 7, Julia 30, PUC Lua 43, and LuaJIT 43 pass before the three support ledgers and
-  exact success marker. Neutral truth is 9 complete / 5 pending / 114 mutations.
+  exact success marker. Current neutral truth, including the later lossless-gap composition row, is 10 complete /
+  4 pending / 126 mutations.
 - **BOUNDARY:** five backend sources form six routes because one shared Lua source executes independently on both
   ABIs. Twelve regressions lock topology/storage and recurrence-only promotion; 27 more lock six public documents,
   six stale-claim denials, and ten surface guards without changing the 14-row rollout. Recursive-observation public projection/no-drift is current without moving any public or runtime surface.
@@ -1077,6 +1078,24 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   are complete. Shared calls are exactly `entry_slot`, `gap_span`, `gap_text`, and `gap_kind`; the outward guards
   remain unchanged. `.7.3` owns unchanged recomposition plus the typed-source handoff. Do not widen README,
   facades, semantic/MCP, CLI, capability, or typed-source surfaces implicitly.
+
+### 4.9.1.3.1 `tools/check_typed_gap_composition_six_runtime.sh` — typed lossless-gap composition
+
+- **WHAT:** one repository-routed fail-fast composition of the typed-source checker, the separately owned complete
+  neutral plus six-runtime gap route, recognition ownership, and generated-source/capability/language ledgers.
+- **WHEN:** changing `gap_span` projection, named/positional slot provenance, the typed
+  `lossless_gap_composition` row, either contract's cross-reference, repository storage routing, or canonical
+  registration. Retrieve [[typed-lossless-gap-composition]] first.
+- **HOW:** run `bash tools/check_typed_gap_composition_six_runtime.sh`. Canonical CI inventories, machine-path
+  audits, syntax-checks, and outside-CWD routes the driver; use
+  `LINKEDSPEC_RUN_TYPED_GAP_COMPOSITION_MATRIX=1 bash tools/run_ci_local.sh` for its full all-toolchain route.
+- **OUTPUT:** typed governance reports 10 complete / 4 pending / 126 mutations; gap governance reports 9/0/63
+  plus public 6/12/10/29; then Perl 124, Rust 1, Dart 5, Julia 319, PUC Lua 392, LuaJIT 392, recognition
+  137/250/58, strict generated Rust 105/105, capability 80/0/0, and language 250/105+1/126 pass before exact
+  `[typed-gap-composition] PASS: typed lossless-gap composition, all six gap runtimes, and support ledgers complete`.
+- **BOUNDARY:** `gap_span` was already the detached typed same-source half-open Unicode-scalar carrier on all six
+  runtimes. This route promotes only composition; it does not own or change grammar, lifecycle, implementation,
+  compatibility, migration, public facade/schema/semantic/MCP/CLI/README surface, or final `.14.8` no-drift.
 
 ### 4.9.1.4 Perl gap implementation preflight
 

@@ -587,6 +587,17 @@ behavior becomes current in this neutral leaf.
   admission, `.14.5.1` may compose that unchanged proof into typed-source `gap_composition`. Final combined
   no-drift remains owned by `.14.8`.
 
+### 30. Compose the admitted lossless gaps through the existing typed span
+
+- `.14.5.1` adds no grammar/parser/compiler/runtime/carrier/compatibility/migration/public-admission behavior;
+  `INTER-MATCH-GAP-CAPTURE.1-.7` remains their exclusive owner.
+- `gap_span()` is already one detached same-source half-open Unicode-scalar span with source identity and gap
+  provenance; segment kind and independent named/positional `entry_slot()` provenance do not create new span types.
+- The typed contract binds gap 9/0/63 plus public 6/12/10/29. Twelve corruptions lock identity/counts, projection,
+  rooted order, project storage, canonical registration, and regression; one rooted driver composes all ledgers.
+- Only `lossless_gap_composition` advances, making typed truth 10/4/126. CI opt-in is
+  `LINKEDSPEC_RUN_TYPED_GAP_COMPOSITION_MATRIX=1`; combined `.14.8` no-drift remains pending.
+
 ## Consequences
 
 - Cursor control, capture, recursion, segmentation, and parser composition share one precise model instead of accumulating pairwise helper semantics.
@@ -597,7 +608,8 @@ behavior becomes current in this neutral leaf.
 - The accepted `recognition_*` spellings are deliberately verbose enough to distinguish bounded recognition from compatibility cursor stacks, host exception handling, and systemic backtracking. Their neutral authority is executable, and the spellings plus exact recurring proof are current on independently admitted Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT runtimes.
 - The accepted private recursive-observation spelling, detached carrier, and exact recurrence are current on those
   same six runtimes. Its public documentation/no-drift projection is current without a public API admission.
-- Lossless gap capture gains the common typed representation it anticipated while retaining its separate owner.
+- Lossless gap capture uses the common typed representation it anticipated while retaining its separate owner;
+  the composed proof is current on all six runtimes.
 - Stable named and compatible numeric slot selection share a structural target without collapsing identity into
   position or overloading the fluent dot namespace.
 - This decision and its `.14.3.0` audit amendment change no grammar, helper, parser/compiler/runtime, descriptor,
@@ -613,7 +625,8 @@ behavior becomes current in this neutral leaf.
   capability guide is 1/14/18.
 - Amendments `.14.4.0-.1` freeze the behavior-free boundary and correct lineage; `.14.4.1` selects the private form and makes its detached state machine executable without backend admission.
 - Amendments `.14.4.2-.6` admit every runtime in order; `.14.4.7` promotes only recurrence; `.14.4.8` closes the
-  public projection without changing the 14-row rollout. The combined program-wide `.14.8` row remains pending.
+  observation public projection without changing the 14-row rollout; `.14.5.1` promotes only lossless-gap typed
+  composition. The combined program-wide `.14.8` row remains pending.
 
 ## Links
 

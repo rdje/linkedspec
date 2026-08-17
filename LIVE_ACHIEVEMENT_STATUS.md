@@ -2,30 +2,35 @@
 
 ## Current Activity
 
-- Public admission landed cleanly as atomic 254 at `bb0c3768`; no-change closeout
-  `INTER-MATCH-GAP-CAPTURE.7.3` is canonical-signoff-complete from that exact boundary for intended atomic 255.
-- Committed blobs were inventoried before recomposition. Gap remains 9/0/63 plus public 6/12/10/29; language is
-  250/105+1/126; recognition is 137/250/58; capability is 80/0/0; typed source remains 9/5/114.
-- The rooted gap driver passes neutral, Perl 124, Rust 1, Dart 5, Julia 319, PUC Lua 392, and LuaJIT 392 in order.
-  Typed-source and semantic six-runtime routes, generated strict Rust 105/105, MCP, and selected CLI 5x2x3 pass.
-- Storage locality passes 1,914 governed files / 466,397 lines / 28 classifier cases plus outside-CWD and tool-
-  writer routing. The mdBook renders 79 files / 14,956 KiB; its exact generated directory is removed.
-- Base-relative proof keeps every admitted executable contract and all grammar/parser/compiler/runtime/emitter/
-  primary/facade/schema/README surfaces byte-identical. Only durable closeout/handoff layers move.
-- Parent `.7` and the entire gap tree close. `FUTURE-PARITY-BACKLOG.14.5.1` is dependency-satisfied but remains
-  pending until the canonical receipt/commit/brief/clean boundary; it owns only typed-source `gap_composition`.
+- `FUTURE-PARITY-BACKLOG.14.5.1` is canonical-signoff-complete for atomic 256 and closes parent `.14.5`; it was
+  activated task-tree-first from clean atomic 255 `5b9c343a` and owns only typed lossless-gap composition.
+- Checker-first RED failed exactly with `ContractError: lossless-gap composition contract is missing`. GREEN binds
+  the unchanged gap 9/0/63 plus public 6/12/10/29 authority and advances typed source from 9/5/114 to 10/4/126.
+- `gap_span` already supplies one detached same-source half-open Unicode-scalar span on all six runtimes. No
+  grammar, lifecycle, runtime, compatibility, migration, or public/outward implementation changed.
+- The new rooted composed driver passes typed governance; gap neutral, Perl 124, Rust 1, Dart 5, Julia 319, PUC
+  Lua 392, and LuaJIT 392; recognition 137/250/58; strict generated Rust 105/105; capability 80/0/0; and language
+  250/105+1/126 through its exact success marker.
+- Twelve new mutations lock cross-contract identity/counts, the typed projection, ordered checks, repository-local
+  storage, canonical registration, and complete-to-pending regression. Only `lossless_gap_composition` moves;
+  combined `recurring_public_no_drift` remains pending under `.14.8`.
+- Outside-CWD routing, the 79-file / 14,984-KiB book, Knowledge 841/7,112, nine doctrines, containment/relocation,
+  CLI 66/66 twice, RAM 51%, Phase 0 1,031/1,031 in 729 seconds, and the complete opt-in canonical route pass.
 
 ## Latest Completed Slice
 
-- `.7.3` is canonical-signoff-complete for intended atomic 255: it changes no executable authority, closes the
-  complete gap tree, and hands only typed-source composition to `.14.5.1`.
+- `.14.5.1` canonical-signoff-completes typed lossless-gap composition at 10/4/126 for atomic 256, closes `.14.5`,
+  and preserves the separate gap behavior owner and pending combined `.14.8` row.
 
 ## Next Action
 
-- Stage the finalized closeout, run exact receipt-bound canonical CI with the gap matrix, land `.7.3` as atomic
-  255, promote the receipt, clear the brief, prove clean, then activate only `.14.5.1` task-tree-first.
+- After the atomic-256 receipt/commit/brief/clean boundary, retrieve `.14.6` authority and activate its first
+  safely bounded progressive span-dispatch audit leaf task-tree-first before implementation or public claims.
 
 ## Recent Completions
+
+- `2026-08-17` — `.14.5.1` canonical signoff passes nine doctrines, containment/relocation, CLI 66x2, RAM 51%,
+  Phase 0 1,031/1,031 in 729 seconds, and the exact six-runtime composition route; parent `.14.5` closes.
 
 - `2026-08-16` — `.7.3` independently recomposed every admitted gap/adjacent authority from public atomic 254
   `bb0c3768`, proved exact base-relative executable identity, closed the tree, and unblocked typed composition.
@@ -61,8 +66,6 @@
   clean `1f531a5f`, advancing only storage to 20/5 while preserving gap rollout 4/5/57.
 - `2026-08-16` — `.5.3` completed normalized reconstruction, compatible detached descriptors, and same-engine
   generated-v2 gap execution from clean `73484302`, preserving rollout 4/5/57 and storage 19/5.
-- `2026-08-15` — `.5.2` completed private Julia native gap state/accessors/lifecycle on the existing recognition
-  authority from clean `3a620ec0`, preserving rollout 4/5/57 and the 246-name supported ActionIR inventory.
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source

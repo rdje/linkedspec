@@ -1,25 +1,23 @@
 # MEMORY
 
-- activation_commit: `bb0c3768b164c70ae31ae2adad26379157b13f0a` — clean public atomic-254 base for independent
-  no-change closeout `INTER-MATCH-GAP-CAPTURE.7.3`; canonical receipt promoted; brief cleared; no push.
-- latest_completed_leaf: `INTER-MATCH-GAP-CAPTURE.7.3 - close lossless segmentation tree`; canonical signoff
-  complete from atomic-254 activation `bb0c3768` for intended atomic 255.
-- active_work_unit: none after intended atomic-255 landing; the gap tree is closed and
-  `FUTURE-PARITY-BACKLOG.14.5.1` is the next task-tree-first owner from the proved clean boundary.
-- next_action: stage the finalized `.7.3` closeout, run receipt-bound canonical CI with the exact gap matrix,
-  commit atomic 255, promote the receipt, clear the brief, prove clean, then activate only `.14.5.1`.
-- in_flight_uncommitted: none after intended atomic-255 landing; only task/roadmap/architecture/book status,
-  Knowledge, live continuity, and cross-tree handoff move; every admitted executable and outward surface does not.
-- blockers: none. Independent proof passes gap 9/0/63 plus public 6/12/10/29, language 250/105+1/126,
-  recognition 137/250/58, rooted neutral/Perl-124/Rust-1/Dart-5/Julia-319/PUC-Lua-392/LuaJIT-392, typed-source
-  and semantic six-runtime routes, selected CLI 5x2x3, MCP, storage, book, and exact base-relative identity.
-  Final Knowledge/history/task/memory/doctrine and staged canonical receipt proof remain the landing boundary.
+- activation_commit: `5b9c343a343b85b6f1c30b23c155ec40f04329a5` — clean atomic-255 gap-tree closeout base for
+  task-tree-first `FUTURE-PARITY-BACKLOG.14.5.1`; canonical receipt promoted; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.5.1 - compose typed lossless gaps`; canonical-signoff-complete
+  and landed by this atomic-256 commit, closing parent `.14.5` without changing parser/runtime/outward behavior.
+- active_work_unit: none after the atomic-256 handoff; `.14.6` is pending and must be activated task-tree-first.
+- next_action: from exact clean atomic 256, retrieve the `.14.6` authority and relevant Knowledge/ADR/Toolbox
+  pointers, then activate its first safely bounded progressive span-dispatch audit leaf before any other change.
+- in_flight_uncommitted: none at the intended post-commit boundary; no background result remains to consume.
+- blockers: none. Canonical proof passes nine doctrines, containment/relocation, CLI 66/66 twice, RAM 51%, Phase 0
+  1,031/1,031 in 729 seconds, and the opt-in neutral/Perl-124/Rust-1/Dart-5/Julia-319/PUC-Lua-392/LuaJIT-392
+  composition plus recognition 137/250/58, strict generated Rust 105/105, capability 80/0/0, and language
+  250/105+1/126 through the exact local-CI marker.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
   `FUTURE-PARITY-BACKLOG.22` moves that immutable closeout fact out of bounded current memory.
-- current_typed_source: neutral/public structure plus all six internal runtimes are admitted at 9/5/114; no
-  public API is admitted and combined program-wide `.14.8` remains future. Recognition transactions are current
+- current_typed_source: neutral/public structure, all six internal runtimes, recursive observation, and lossless-
+  gap composition are admitted at 10/4/126; no public typed value is admitted and combined program-wide `.14.8` remains future. Recognition transactions are current
   on all six runtimes at 137/250/58; recurrence and public no-drift are current at 9/9.
 - recurring_rollout_fact: the original contract combines recurring and public no-drift in one `.14.8` row.
   Detailed plan/history assign `.14.2.6` driver/topology only; do not add a fifteenth row or promote `.14.8`.
@@ -39,9 +37,8 @@
   and their rollover/index gates remain current.
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, and recurrence/public no-drift 9/9.
-- current_future_direction: the gap tree is canonical-signoff-complete at shared calls 250, public Perl 126,
-  gap 9/0/63, and public 6/12/10/29. After atomic-255 receipt/brief/clean proof, `.14.5.1` owns only typed
-  `gap_composition`; combined program-wide no-drift remains `.14.8`.
-- latest_bootstrap_read: 2026-08-16 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
-  review complete; `.7.3` is canonical-signoff-complete from clean public atomic 254 `bb0c3768`; `.14.5.1` is next
-  only after the exact staged atomic-255 landing boundary.
+- current_future_direction: `.14.5.1` closed typed gap composition at 10/4/126 without a second behavior owner.
+  Progressive span dispatch `.14.6` is the next frontier; staged enrichment `.14.7` and combined program-wide
+  no-drift `.14.8` remain separate pending owners.
+- latest_bootstrap_read: 2026-08-17 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
+  review complete; `.14.5.1` is canonical-signoff-complete for atomic 256 and `.14.6` is the next clean frontier.

@@ -124,6 +124,12 @@ check_no_untracked_ci_inputs() {
   found=1
  fi
 
+ status_line=$(git status --short --untracked-files=all -- tools/check_typed_gap_composition_six_runtime.sh)
+ if [[ "$status_line" == '?? '* ]]; then
+  printf '[ci] ERROR: untracked CI input: %s\n' "${status_line#?? }" >&2
+  found=1
+ fi
+
  status_line=$(git status --short --untracked-files=all -- tools/check_recognition_transaction_six_runtime.sh)
  if [[ "$status_line" == '?? '* ]]; then
   printf '[ci] ERROR: untracked CI input: %s\n' "${status_line#?? }" >&2
@@ -259,6 +265,7 @@ require_tracked_file tools/check_typed_source_location_six_runtime.sh
 require_tracked_file tools/check_recursive_observation_six_runtime.sh
 require_tracked_file tools/check_inter_match_gap_capture_contract.py
 require_tracked_file tools/check_inter_match_gap_capture_six_runtime.sh
+require_tracked_file tools/check_typed_gap_composition_six_runtime.sh
 require_tracked_file lua/test/inter_match_gap_capture_contract_test.lua
 require_tracked_file tools/check_recognition_transaction_six_runtime.sh
 require_tracked_file tools/check_semantic_introspection_contract.py
@@ -520,6 +527,9 @@ $recursive_observation_driver_matches"
 inter_match_gap_driver_matches=$(grep -nE '/(Users|home)/[^[:space:]]*|[[:alpha:]]:\\\\' tools/check_inter_match_gap_capture_six_runtime.sh || true)
 [[ -z "$inter_match_gap_driver_matches" ]] || fail "machine-specific absolute path(s) in inter-match gap-capture recurring driver:
 $inter_match_gap_driver_matches"
+typed_gap_composition_driver_matches=$(grep -nE '/(Users|home)/[^[:space:]]*|[[:alpha:]]:\\\\' tools/check_typed_gap_composition_six_runtime.sh || true)
+[[ -z "$typed_gap_composition_driver_matches" ]] || fail "machine-specific absolute path(s) in typed gap-composition driver:
+$typed_gap_composition_driver_matches"
 recognition_driver_matches=$(grep -nE '/(Users|home)/[^[:space:]]*|[[:alpha:]]:\\\\' tools/check_recognition_transaction_six_runtime.sh || true)
 [[ -z "$recognition_driver_matches" ]] || fail "machine-specific absolute path(s) in recognition-transaction recurring driver:
 $recognition_driver_matches"
@@ -544,6 +554,7 @@ bash -n tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh \
  tools/check_typed_source_location_six_runtime.sh \
  tools/check_recursive_observation_six_runtime.sh \
  tools/check_inter_match_gap_capture_six_runtime.sh \
+ tools/check_typed_gap_composition_six_runtime.sh \
  tools/check_recognition_transaction_six_runtime.sh \
  scripts/check_memory_commit_pointer.sh scripts/check_readme_stability.sh \
  tools/test_memory_commit_pointer.sh \
@@ -1014,6 +1025,14 @@ if [[ "${LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX:-0}" == "1" ]]; then
  bash "$REPO_ROOT/tools/check_inter_match_gap_capture_six_runtime.sh"
 else
  log "skipping optional inter-match gap-capture six-runtime route (set LINKEDSPEC_RUN_INTER_MATCH_GAP_MATRIX=1 to re-run the current neutral plus six-runtime proof)"
+fi
+
+if [[ "${LINKEDSPEC_RUN_TYPED_GAP_COMPOSITION_MATRIX:-0}" == "1" ]]; then
+ log "running optional typed lossless-gap composition route (LINKEDSPEC_RUN_TYPED_GAP_COMPOSITION_MATRIX=1)"
+ require_tracked_file tools/check_typed_gap_composition_six_runtime.sh
+ bash "$REPO_ROOT/tools/check_typed_gap_composition_six_runtime.sh"
+else
+ log "skipping optional typed lossless-gap composition route (set LINKEDSPEC_RUN_TYPED_GAP_COMPOSITION_MATRIX=1 to recompose the current typed contract, six gap runtimes, and support ledgers)"
 fi
 
 if [[ "${LINKEDSPEC_RUN_RECOGNITION_TRANSACTION_MATRIX:-0}" == "1" ]]; then
