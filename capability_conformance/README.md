@@ -304,6 +304,28 @@ Governance is 152, and progressive dispatch, staged dispatch, and combined progr
 pending under `.14.6`, `.14.7`, and `.14.8`. No public
 helper/value, descriptor/generated schema, semantic/MCP field, CLI, or README behavior moved.
 
+`progressive_span_dispatch_contract.json` (`linkedspec-progressive-span-dispatch-v1`) is the executable neutral
+authority for the reserved private expression
+`value = dispatch_span("expr-v1", "Expr", span)`. Two normalized string literals select one immutable
+pre-registered compiled parser and allowed top rule; one bare local four-field harray supplies a direct
+same-source span. The child uses a globally rebased bounded view, receives intersected capabilities and stricter
+ceilings plus the same cancellation/deadline/remaining budget, cannot mutate parent semantic state or establish
+parent progress, and returns only a detached payload. Exact/non-decreasing same-identity cycles, uncommitted
+recognition, implicit loading, live handles, and every fallback/retry path fail closed. Run:
+
+```bash
+bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_contract.py
+```
+
+The checker executes 2 sources / 8 view cases, 6 authority, 6 cancellation, 8 chain, and 4 execution cases; guards
+17 implementation paths across five backend groups plus 10 outward paths; locks 26 diagnostics; and rejects 86 mutations. Its own
+rollout is neutral 1/9 complete with Perl, Rust, Dart, Julia,
+PUC Lua, LuaJIT, recurring, and public-no-drift rows pending. The typed `progressive_span_dispatch` row likewise
+remains pending until the exact six-runtime recurrence owner `.14.6.7`; the recognition effect owns no current
+node/call rows, all guarded backend paths omit the tokens, ten facade/schema/semantic/MCP/CLI/README paths deny
+private spelling/node/rollout exposure, and Perl lowering remains unsupported. No backend or outward capability
+is claimed by neutral canonical registration.
+
 `inter_match_gap_capture_contract.json` is the neutral authority for named regex slots and lossless
 prefix/interstitial/tail context. Inter-match gap public admission is current with four shared calls and unchanged outward facade, descriptor, semantic, MCP, CLI, and README surfaces. Julia `.5.1-.5.5` and shared Lua `.6.1-.6.5` implement and admit their exact nine-role paths without widening those guarded surfaces.
 Run `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py` for the always-on

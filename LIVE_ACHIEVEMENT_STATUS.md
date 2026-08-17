@@ -2,33 +2,39 @@
 
 ## Current Activity
 
-- `FUTURE-PARITY-BACKLOG.14.6.0` is focused-signoff-complete for intended atomic 257 from clean atomic 256
-  `8880d1b6`; task-tree ownership preceded every architecture, Knowledge, roadmap, live, and mdBook edit.
+- No leaf is active at the intended clean post-atomic-259 handoff. `FUTURE-PARITY-BACKLOG.14.6.1` completes from
+  corrective atomic 258 `27f9c87f`; no backend implementation or typed progressive rollout moves.
 - Toolbox probes prove no current in-parse parser invocation: both `parse_job(...)` and `dispatch_span(...)` lower
   to unsupported ActionIR helpers. All five staged registries are narrow function-body adapters, and a normal
   `.spec` path fails at resolve.
-- Progressive v1 is frozen as an isolated synchronous child over one contiguous typed span and an explicitly
-  pre-registered compiled parser identity. Source views rebase diagnostics globally; ceilings only narrow;
-  cancellation/budget propagate; non-decreasing cycles fail; and authored execution can never load a path.
-- The exact split is corrective `.0.1`, neutral `.1`, Perl/Rust/Dart/Julia/shared-Lua `.2-.6`, recurrence `.7`,
+- Neutral v1 reserves `value = dispatch_span("expr-v1", "Expr", span)` as a dedicated fail-only future expression
+  over an immutable pre-registered parser. Source views rebase globally; ceilings narrow; cancellation/budget
+  propagate; non-decreasing cycles fail; parent state stays isolated; results detach; no path can load.
+- Correction `.0.1` is clean; neutral `.1` passes 2 registries, 2 sources/8 views, 6 authority, 6 cancellation,
+  8 chain, 4 execution, 5 backend guards/17 paths plus 10 outward guards, 26 diagnostics, rollout 1/9, and 86 mutations. Perl/Rust/Dart/Julia/shared-Lua `.2-.6`, recurrence `.7`,
   and public projection/no-drift `.8`. Staged AST enrichment remains `.14.7`; combined no-drift remains `.14.8`.
 - Audit found one pre-existing typed-ledger defect: `.14.3` is closed at recognition 9/9, but its owned typed
   `transaction_safety` row was never promoted. `.14.6.0.1` now projects the exact recognition authority into that
   row at typed 11/3/152 and rejects stale Knowledge/book claims without progressive, runtime, or public behavior.
-- Checker-first proof failed exactly at missing transaction composition; the corrected checker is GREEN and the
-  existing recognition five-source/six-runtime route plus support ledgers pass through its exact success marker.
+- Checker-first proof failed exactly at missing progressive span-dispatch contract; the artifact/checker and
+  canonical registration are complete. The typed row remains pending, the effect remains rejected with no current
+  node/call rows, all 17 backend implementation paths omit the future tokens, ten outward paths deny exposure,
+  and Perl lowering returns the unsupported-helper sentinel.
 
 ## Latest Completed Slice
 
-- `.14.6.0.1` corrects typed transaction composition to 11/3/152, locks stale-current projection, and passes the
-  existing six-runtime recognition route without parser, runtime, CI-topology, or public behavior movement.
+- `.14.6.1` adds the executable neutral progressive authority/checker at 1/9/86 plus exact current-backend
+  absence proof and always-on canonical registration without enabling syntax, runtime, typed, or outward behavior.
 
 ## Next Action
 
-- Finish focused doctrine/memory checks, commit `.14.6.0.1` as atomic 258, clear the brief, and activate neutral
-  progressive contract `.14.6.1` task-tree-first from the clean handoff.
+- Activate `.14.6.2` task-tree-first from exact clean atomic 259, split the Perl parent into bounded RED,
+  authority/core, carrier-integration, and admission leaves, then implement only the first eligible child.
 
 ## Recent Completions
+
+- `2026-08-17` — `.14.6.1` freezes executable neutral `dispatch_span` authority at 1/9/86, proves current backend/
+  outward absence across 17+10 paths, and registers its always-on canonical checker.
 
 - `2026-08-17` — `.14.5.1` canonical signoff passes nine doctrines, containment/relocation, CLI 66x2, RAM 51%,
   Phase 0 1,031/1,031 in 729 seconds, and the exact six-runtime composition route; parent `.14.5` closes.
@@ -65,8 +71,6 @@
   canonical-signoff-completed parent `.5` from clean `0a961043`.
 - `2026-08-16` — `.5.4` proved ten value/two typed-error Julia emitted modules in one offline routed host from
   clean `1f531a5f`, advancing only storage to 20/5 while preserving gap rollout 4/5/57.
-- `2026-08-16` — `.5.3` completed normalized reconstruction, compatible detached descriptors, and same-engine
-  generated-v2 gap execution from clean `73484302`, preserving rollout 4/5/57 and storage 19/5.
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source

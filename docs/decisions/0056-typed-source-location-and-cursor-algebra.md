@@ -626,7 +626,8 @@ behavior becomes current in this neutral leaf.
 - Amendments `.14.4.0-.1` freeze the behavior-free boundary and correct lineage; `.14.4.1` selects the private form and makes its detached state machine executable without backend admission.
 - Amendments `.14.4.2-.6` admit every runtime in order; `.14.4.7` promotes only recurrence; `.14.4.8` closes the
   observation public projection without changing the 14-row rollout; `.14.5.1` promotes only lossless-gap typed
-  composition. The combined program-wide `.14.8` row remains pending.
+  composition. `.14.6.0.1` corrects transaction composition, and `.14.6.1` selects `dispatch_span("logical-parser-id", "Top", span)` plus its executable neutral authority without backend or typed
+  progressive-row admission. The combined program-wide `.14.8` row remains pending.
 
 ## Links
 

@@ -404,7 +404,7 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 
 - **WHAT:** `tools/run_python_project_data.sh` runs one repository-relative Python checker with managed scratch and
   retained `PYTHONPYCACHEPREFIX`; `tools/test_tool_project_data_storage.sh` freezes three Python temporary owners,
-  14 shell allocator owners, and 29 Python tool entrypoints while exercising Python bytecode, Unicode-generator
+  14 shell allocator owners, and 31 Python tool entrypoints while exercising Python bytecode, Unicode-generator
   scratch, Knowledge Map output, mdBook destinations, CLI workspaces, TAP, and oracle capture boundaries.
 - **WHEN:** use the targeted wrapper for every maintained Python checker command; run the oracle when changing
   Python imports/tempfiles, shell allocation, Knowledge Map configuration/output, mdBook output, conformance,
@@ -1055,6 +1055,25 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 - **BOUNDARY:** only `transaction_safety` is complete here. `parser_registry_or_staged_dispatch` remains rejected
   inside uncommitted recognition. Progressive dispatch, staged dispatch, and combined program-wide no-drift stay
   pending, and no parser/runtime/facade/schema/semantic/MCP/CLI/README behavior changes.
+
+### 4.9.1.1.2 `tools/check_progressive_span_dispatch_contract.py` — neutral progressive oracle
+
+- **WHAT:** the backend-independent authority for reserved private
+  `value = dispatch_span("expr-v1", "Expr", span)` syntax. It models immutable pre-registration, direct typed
+  spans, rebased views, isolation/detachment, authority minima, cancellation/budgets, decreasing cycles, bounds,
+  transaction rejection, diagnostics, and exact neutral-first rollout.
+- **WHEN:** changing progressive syntax, parser identity/top-rule policy, span carriers, registry fields, ceilings,
+  cancellation or cycle rules, portable diagnostics, neutral rollout, or canonical registration.
+- **HOW:** run `bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_contract.py`.
+  The independent checker is repository-routed and always registered in canonical local CI.
+- **OUTPUT:** 2 immutable registry entries; 2 sources/8 views; 6 authority + 6 cancellation + 8 chain + 4
+  execution cases; 5 backend guards/17 implementation paths plus 10 outward guards; 26 diagnostics; rollout 1/9
+  complete with 8 pending; and 86 rejected mutations.
+- **BOUNDARY:** this reserves a dedicated future ActionIR expression but enables no backend. Current lowering still
+  returns the unsupported-helper sentinel; the typed row stays pending, and the rejected effect owns no current
+  ActionIR or callable rows, and ten facade/schema/semantic/MCP/CLI/README paths deny premature exposure. Typed
+  `progressive_span_dispatch` remains pending until `.14.6.7`;
+  there is no path loader, public facade/schema/semantic/MCP/CLI/README behavior, fallback, or staged AST stitching.
 
 ### 4.9.1.2 Lossless-gap handoff preflight
 

@@ -1,7 +1,7 @@
 # ADR 0080: Progressive span dispatch uses pre-registered same-source child authority
 
 - Date: 2026-08-17
-- Status: accepted architecture under `FUTURE-PARITY-BACKLOG.14.6.0`; implementation pending
+- Status: accepted architecture; executable neutral authority current under `.14.6.1`; backend implementation pending
 - Tags: architecture, parser-composition, progressive-parsing, spans, source-location, registry, authority, cancellation, portability
 
 ## Context
@@ -16,6 +16,19 @@ authorities but cannot safely become authored in-parse lookup. ADRs `0012`, `001
 parser identity, provenance, bounded effects, and typed same-source coordinates without ambient authority.
 
 ## Decision
+
+The private v1 authored expression is:
+
+```text
+value = dispatch_span("expr-v1", "Expr", span)
+```
+
+`dispatch_span` is a dedicated `PROGRESSIVE_DISPATCH_SPAN` expression with the non-rollbackable
+`parser_registry_or_staged_dispatch` effect. The first two operands are nonempty normalized string literals for
+the logical parser identity and allowed top rule. The third is one bare rule-local harray binding with exact
+`source_id`, `start`, `end`, and `provenance` fields. It returns one deeply detached child payload. V1 is fail-only:
+lookup, policy, child, cancellation, cycle, and result-detachment failures propagate; no null, fallback, retry,
+alternate parser, or failure-policy operand is implied.
 
 Progressive v1 is synchronous child execution over one contiguous direct span. The host seeds an immutable entry
 containing a logical parser identity, already compiled parser, content/import fingerprint, allowed top rules,
@@ -40,6 +53,12 @@ transaction-composition projection before neutral progressive behavior.
 
 - A parser id or span cannot smuggle filesystem, compilation, registry, capability, policy, source-detail, or
   renewed cancellation authority into active recognition.
+- The executable neutral artifact/checker is current at 2 registry entries, 2 sources/8 view cases, 6 authority,
+  6 cancellation, 8 chain, and 4 execution cases, 5 backend guards/17 paths plus 10 outward guards, 26 diagnostics, 1/9 rollout, and 86
+  rejected mutations.
+- Its current-boundary proof keeps the typed row pending, requires the dispatch effect to remain rejected with no
+  current ActionIR/call rows, denies both future tokens in the guarded backend paths, denies private spelling/
+  node/rollout exposure in ten outward paths, and observes the Perl unsupported-helper sentinel.
 - Backends must preserve one source identity and detached child results despite different native register units.
 - Neutral `.14.6.1`, backend `.2-.6`, recurrence `.7`, and public no-drift `.8` can be verified independently.
 - This audit changes no grammar, parser/compiler/runtime, facade, schema, semantic/MCP, CLI, or README behavior.
@@ -50,3 +69,5 @@ transaction-composition projection before neutral progressive behavior.
 - Typed source algebra: `docs/decisions/0056-typed-source-location-and-cursor-algebra.md`
 - Staged architecture and registry: `docs/decisions/0012-staged-linked-parsing-architecture.md`, `docs/decisions/0015-staged-parser-registry-dispatch-contract.md`
 - Knowledge card: `docs/knowledge/progressive-span-dispatch-audit-plan.md`
+- Neutral artifact/checker: `capability_conformance/progressive_span_dispatch_contract.json`,
+  `tools/check_progressive_span_dispatch_contract.py`

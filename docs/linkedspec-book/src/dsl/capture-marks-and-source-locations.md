@@ -423,12 +423,22 @@ recurring/public-no-drift row remains pending for final program-wide closeout `F
 typed-source composition is 11 complete / 3 pending with 152 mutations. The transaction row is an authority
 projection of the separately complete 9/9 recognition program: it changes no syntax, runtime, or public API.
 
-Progressive span dispatch is still future behavior, but `.14.6.0` now fixes its authority boundary. It will accept
-one contiguous direct span plus an explicitly pre-registered, already compiled parser identity—not a path. The
-child uses a bounded source view whose typed positions and diagnostics rebase to the original source; parent
+Progressive span dispatch is still future backend behavior, but its executable neutral authority is current. The
+reserved private expression is:
+
+```text
+value = dispatch_span("expr-v1", "Expr", span)
+```
+
+The parser identity and top rule are static normalized literals; `span` is one bare local direct-span harray. The
+child will use a bounded source view whose typed positions and diagnostics rebase to the original source; parent
 cursor/marks/transactions stay isolated; capability and policy ceilings only narrow; cancellation and remaining
 budget propagate; and repeated parser/top/source dispatch must strictly shrink the span. The existing staged
-function-body adapter does not satisfy this contract.
+function-body adapter does not satisfy this contract. The neutral checker passes 2 registry entries, 2 sources/8
+views, 6 authority, 6 cancellation, 8 chain, and 4 execution cases, 5 backend guards/17 implementation paths plus
+10 outward guards, 26 diagnostics, rollout 1/9, and 86 mutations. All backend rows and the typed progressive row
+remain pending; the dispatch effect owns no current node/call rows, every guarded backend path omits the future
+tokens, outward guards deny premature exposure, and authored Perl execution still diagnoses the form as unsupported today.
 
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions or
 typed spans are authored values. The `recognition_*` operations are current across all six runtime routes, while

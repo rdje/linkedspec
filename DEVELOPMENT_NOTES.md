@@ -10,6 +10,29 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.1` — executable neutral progressive span dispatch): clean activation
+  is corrective atomic 258 `27f9c87f`. Checker-first RED is exact `progressive span-dispatch contract is missing`.
+- Reserve only private `value = dispatch_span("expr-v1", "Expr", span)`. The first two operands are normalized
+  static literals naming one immutable pre-registered compiled parser and allowed top rule; the third is one bare
+  local exact `{source_id,start,end,provenance}` direct span. The dedicated result is detached and failure-only.
+- A bounded view uses local child registers but globally rebased typed positions, spans, and diagnostics. Effective
+  capabilities/policy modes intersect; source-detail and numeric ceilings take minima; cancellation token,
+  absolute deadline, and remaining budget propagate without reset or extension.
+- Preserve all parent cursor, boundary, marks, variables, transactions, captures, and invocation state. Dispatch
+  never establishes parent progress. Repeated parser/top/source identity must use a contained strictly smaller
+  global span, and total depth/calls are bounded across changing identities.
+- The neutral checker independently executes 2 registry entries, 2 sources/8 views, 6 authority, 6 cancellation,
+  8 chain, and 4 execution cases; locks 26 diagnostics and 1/9 rollout; and rejects 86 corruptions.
+- Current-boundary validation is executable rather than prose: typed `progressive_span_dispatch` stays pending;
+  `parser_registry_or_staged_dispatch` remains rejected with empty current ActionIR/call rows; 17 implementation
+  paths across five backend groups omit `dispatch_span` and `PROGRESSIVE_DISPATCH_SPAN`; and the Perl Toolbox
+  probe retains `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER`. Ten outward facade/schema/semantic/MCP/CLI/README
+  paths additionally reject private spelling, node, or rollout-token exposure.
+- Canonical CI requires and runs both tracked artifact and checker. Its direct tool-storage dependent now freezes
+  3 Python temporary owners / 14 shell allocators / 31 Python entrypoints. No backend, typed rollout, facade,
+  descriptor, schema, semantic/MCP, CLI, README, loader, or staged-AST behavior moves; backend `.2-.6` must
+  replace its own pending guard only through exact split RED, authority/core, carrier integration, and admission.
+
 - 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.0.1` — typed transaction-composition correction): clean activation is
   audit atomic 257 `1a6e0b1f`. Checker-first RED is exact `transaction-safety composition contract is missing`.
 - The typed contract now cross-checks recognition contract/checker/driver identity, closed 9-allowed/11-rejected

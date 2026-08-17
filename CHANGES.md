@@ -10,6 +10,29 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.1 — add neutral progressive span dispatch authority
+
+- Activated task-tree-first from clean corrective atomic 258 `27f9c87f` and retrieved the progressive audit,
+  typed/recognition contracts, staged registries, loading/capability/cancellation precedents, canonical neutral
+  authorities, Toolbox routes, capability guidance, and sole-facing mdBook pages before artifact design.
+- Selected reserved private `value = dispatch_span("expr-v1", "Expr", span)` as one dedicated
+  `PROGRESSIVE_DISPATCH_SPAN` fail-only expression. Static logical parser identity/top rule and one bare exact
+  four-field same-source span grant no path, loading, registry mutation, compilation, or provider authority.
+- Added checker-first RED at exact `ContractError: progressive span-dispatch contract is missing`, then added the
+  executable neutral contract/checker: 2 immutable registry entries, 2 sources/8 rebased views, 6 authority, 6
+  cancellation, 8 decreasing-chain, and 4 isolation/detachment cases, plus 26 typed diagnostics.
+- Locked capability/policy/source-detail/resource minima, shared cancellation/deadline/remaining budget, global
+  source rebasing, isolated parent state, detached results, fail-only child errors, bounded calls/depth, strictly
+  decreasing repeated identity/top/source spans, no parent progress, and uncommitted-recognition rejection.
+- Added 86 reasoned mutations and an explicit current-boundary proof: typed rollout remains pending; the rejected
+  dispatch effect owns no current ActionIR/call rows; 17 paths across five backend groups omit both future tokens;
+  the live Perl lowering probe returns the unsupported-helper sentinel; and ten outward facade/schema/semantic/
+  MCP/CLI/README paths deny any premature progressive surface.
+- Registered the repository-routed checker as tracked always-on canonical CI input. Focused direct proof passes
+  progressive 1/9/86, typed 11/3/152, recognition 137/250/58, capability 80/0/0, language 250/105+1/126, and
+  project-data tool locality at 3 temporary owners / 14 shell allocators / 31 Python entrypoints, plus CI syntax,
+  JSON, and exact diff checks without parser/compiler/runtime/outward behavior or typed-row movement.
+
 ## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.0.1 — correct typed transaction composition
 
 - Activated task-tree-first from clean audit atomic 257 `1a6e0b1f` and retrieved the typed, recognition,

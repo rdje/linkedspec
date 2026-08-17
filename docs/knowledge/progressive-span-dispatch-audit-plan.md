@@ -13,15 +13,19 @@ answers:
   - "how are progressive dispatch cycles and progress checked"
   - "can progressive dispatch run inside recognition transactions"
   - "what leaves implement FUTURE-PARITY-BACKLOG.14.6"
-  - "why is typed transaction safety still pending"
+  - "what is the accepted dispatch_span syntax"
+  - "is the neutral progressive span dispatch contract executable"
+  - "how does typed transaction safety compose with progressive dispatch"
 date: 2026-08-17
-status: current behavior-free audit; implementation remains pending
+status: executable neutral authority current; backend implementation and typed progressive admission pending
 tags: [progressive-parsing, source-location, span, registry, authority, cancellation, diagnostics, task-tree]
 evidence: "FUTURE-PARITY-BACKLOG.14.6.0 retrieves ADRs 0012-0016 and 0056, the typed/staged/loader authorities, and the five backend registries before probing. LinkedSpec::call_spec_handler_subst lowers both parse_job(...) and dispatch_span(...) to LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER. The Perl registry executes only actionir-body.spec/action_block through builtin:actionir-body.spec and rejects specs/json.spec at resolve; Rust, Dart, Julia, and Lua have the same narrow identity. Their job spans are legacy start/end/line shells rather than typed source-authority spans, and none carries cancellation or a policy ceiling. Native spec loaders resolve/read/compile filesystem inputs before execution and therefore are not safe in-parse registry authority. The typed checker is 10 complete / 4 pending / 126 while the independently closed recognition transaction contract is 9/9; git history proves owner .14.3 never promoted typed transaction_safety, so corrective prerequisite .14.6.0.1 owns that missed composition and stale-current governance before progressive behavior."
+evidence_update_2026_08_17_neutral: "Corrective .14.6.0.1 landed at 27f9c87f with typed transaction safety current at 11/3/152. FUTURE-PARITY-BACKLOG.14.6.1 selects value = dispatch_span(\"expr-v1\", \"Expr\", span) and adds linkedspec-progressive-span-dispatch-v1 plus its independent checker: 2 immutable registry entries, 2 sources/8 views, 6 authority, 6 cancellation, 8 chain, 4 execution cases, 5 backend guard groups/17 paths plus 10 outward guards, 26 diagnostics, rollout 1/9, and 86 mutations. Canonical registration is current while every backend and the typed progressive row remain pending; the recognition effect has no current node/call rows, guarded backend paths omit both future tokens, ten facade/schema/semantic/MCP/CLI/README paths deny premature exposure, and the Perl lowering probe retains the unsupported-helper sentinel."
 reverify:
   - "perl -Iperl -MLinkedSpec -e 'print LinkedSpec::call_spec_handler_subst(\"Top\", q{return(parse_job(\"child.spec\", \"payload\"));})'"
   - "bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py"
   - "bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py"
+  - "bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_contract.py"
   - "rg -n 'ACTION.?IR.?BODY.?SPEC|unsupported parser spec id|source_span|capability_set' perl/LinkedSpec/StagedParserRegistry.pm rust/linkedspec-runtime/src/staged_parser_registry.rs dart/lib/src/parser/staged_parser_registry.dart julia/src/parser/StagedParserRegistry.jl lua/src/linkedspec/staged_parser_registry.lua"
 ---
 
@@ -33,8 +37,9 @@ Progressive dispatch is synchronous child-parser invocation while a parent parse
 post-AST work: collect parse jobs, order them, run later parsers, and stitch results. They share provenance and
 registry principles but not execution state or scheduling.
 
-No progressive authored form exists today. Active ActionIR treats both `parse_job(...)` and a plausible
-`dispatch_span(...)` as unsupported helpers. The five backend staged registries implement one function-body
+No backend progressive behavior exists today. Active ActionIR still treats both `parse_job(...)` and
+`dispatch_span(...)` as unsupported helpers. The neutral authority now reserves `dispatch_span` as one dedicated
+future expression; the five backend staged registries still implement only one function-body
 adapter only: `actionir-body.spec` resolves to `builtin:actionir-body.spec`, compiles top rule `action_block`, and
 parses ActionIR body text. Passing an ordinary `.spec` path fails at resolve. The existing `source_span` is an
 offset/line shell copied beside text; it is not the typed same-source span plus source authority required by ADR
@@ -48,10 +53,11 @@ data and provenance, never loader authority.
 
 ## Frozen authority and source-view model
 
-The neutral contract leaf selects the exact private source spelling. It must encode one dedicated, statically
-classifiable action expression with a contiguous direct-span operand, an explicit pre-registered parser identity,
-an allowed top rule, and fail-only v1 propagation. Derived multi-span text and AST stitching remain staged `.14.7`
-work. The returned child payload is detached; parent cursor, boundaries, marks, variables, transactions, and
+The selected private spelling is `value = dispatch_span("expr-v1", "Expr", span)`. The first two operands are
+static normalized literals and the third is one bare local exact four-field span binding. The dedicated node is
+`PROGRESSIVE_DISPATCH_SPAN`, its effect is `parser_registry_or_staged_dispatch`, and v1 propagation is fail-only.
+Derived multi-span text and AST stitching remain staged `.14.7` work. The returned child payload is detached;
+parent cursor, boundaries, marks, variables, transactions, and
 capture state remain isolated and unchanged except for the explicit result binding performed by ordinary action
 semantics.
 
@@ -86,8 +92,8 @@ source-text-safe.
 
 ## Dependency order
 
-`.14.6.0.1` first repairs the missed typed transaction-safety composition and stale-current guard. `.14.6.1`
-selects syntax and creates the executable neutral contract/checker. `.2-.6` admit Perl, Rust, Dart, Julia, and one
+`.14.6.0.1` repaired the missed typed transaction-safety composition and stale-current guard. `.14.6.1` now
+owns the executable neutral contract/checker at rollout 1/9 without backend admission. `.2-.6` admit Perl, Rust, Dart, Julia, and one
 shared Lua implementation independently on PUC Lua and LuaJIT; each backend parent must split RED, authority/core,
 carrier integration, and admission before behavior. `.7` binds five source groups to six runtime routes and alone
 promotes typed `progressive_span_dispatch`. `.8` closes public projection/no-drift without exporting a facade or

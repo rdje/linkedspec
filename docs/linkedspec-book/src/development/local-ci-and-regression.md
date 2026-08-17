@@ -152,6 +152,25 @@ In the test-first workflow used here, **RED** means writing the exact contract o
 it fails for the intended missing capability. **GREEN** means implementing the smallest owned change that makes
 that same proof pass. A RED result is therefore planned evidence, not a claim that the committed project is broken.
 
+### Neutral progressive span-dispatch contract
+
+Canonical CI now requires and always runs the repository-routed neutral progressive checker:
+
+```bash
+bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_contract.py
+```
+
+It validates the reserved private `dispatch_span("logical-parser-id", "Top", span)` expression without enabling
+backend syntax. The checker independently executes 2 sources/8 rebased views, 6 authority-minimum cases, 6
+cancellation/deadline/budget cases, 8 decreasing-chain/bound cases, and 4 isolation/detachment cases; locks 26
+diagnostics and neutral-first 1/9 rollout; guards 17 implementation paths across five backend groups plus 10
+outward paths; and rejects 86 mutations. A passing neutral check proves no path loader,
+registry mutation, capability/policy elevation, cancellation reset, non-decreasing cycle, parent-state leak,
+uncommitted recognition effect, live result handle, fallback, or premature backend/typed rollout claim. It also
+requires the typed row to remain pending, the rejected effect to have no current node/call rows, both future tokens
+to remain absent from guarded backend paths, private spelling/node/rollout tokens to remain absent from ten
+facade/schema/semantic/MCP/CLI/README paths, and Perl lowering to retain its unsupported-helper sentinel.
+
 The `.14.4.0` audit found one contradiction in that baseline: `direct_nonprogress` used the same textual identity
 for invocation and parent. Corrective `.14.4.0.1` changes all six observation identities to positive unique
 monotonic numbers and validates lineage before exact fixture comparison. Four reason-checked regressions prove
@@ -1647,7 +1666,7 @@ The recurring proof is:
 $ bash tools/test_tool_project_data_storage.sh
 ```
 
-It freezes three Python temporary owners, 13 shell allocator owners, and 19 Python checker entrypoints. It creates
+It freezes three Python temporary owners, 14 shell allocator owners, and 31 Python checker entrypoints. It creates
 real retained bytecode, Knowledge Map, fake-mdBook HTML, CLI workspace, and TAP artifacts on the repository device;
 locks both oracle subprocess captures to initialized `TMPDIR`; proves hostile Python, Knowledge Map, and mdBook
 destinations are rejected without creation; and works through the outside-cwd routing oracle. The only deliberate

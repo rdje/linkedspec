@@ -1,15 +1,15 @@
 # MEMORY
 
-- activation_commit: `1a6e0b1f3ce76e855b12e5b701e5d6f6988abb58` — clean atomic-257 progressive-audit base for task-tree-first
-  `FUTURE-PARITY-BACKLOG.14.6.0.1`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.0.1 - correct typed transaction composition`; focused-
-  signoff-complete and landed by this intended atomic-258 commit without executable or public movement.
-- active_work_unit: none at the intended clean post-commit correction handoff; neutral `.14.6.1` is next.
-- next_action: activate `.14.6.1` task-tree-first from exact clean atomic 258, then select and encode the neutral
-  progressive authored form, authority contract, checker-first RED/GREEN, and safe backend split.
+- activation_commit: `27f9c87f4f3494c340ee96a6bd08d998d30a2d95` — clean corrective atomic-258 base for task-tree-first
+  `FUTURE-PARITY-BACKLOG.14.6.1`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.1 - add neutral progressive span dispatch authority`;
+  canonical-signoff-complete and landed by intended atomic 259 without backend, typed, or outward behavior.
+- active_work_unit: none at the intended clean post-commit neutral handoff; Perl parent `.14.6.2` is next.
+- next_action: activate `.14.6.2` task-tree-first from exact clean atomic 259, split it into bounded RED,
+  authority/core, carrier-integration, and admission children, then implement only its first eligible child.
 - in_flight_uncommitted: none at the intended post-commit boundary; no background result remains to consume.
-- blockers: none. Focused correction proof passes typed 11/3/152; recognition Perl/Rust/Dart/Julia/PUC-Lua/
-  LuaJIT plus generated/capability/language; book 79/15,004 KiB; Knowledge; histories; task metadata; and doctrines.
+- blockers: none. Neutral proof is 1/9/86 with 5 backend guards/17 paths plus 10 outward guards; typed is 11/3/152; recognition is 137/250/58;
+  capability/language, book 79/15,024 KiB, Knowledge 842/7,124, task 535, histories, doctrines, and canonical pass.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -36,8 +36,8 @@
   and their rollover/index gates remain current.
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, and recurrence/public no-drift 9/9.
-- current_future_direction: progressive audit `.14.6.0` freezes pre-registered, same-source rebased, ceiling- and
-  cancellation-preserving dispatch; corrective `.0.1` is complete before neutral `.1` and backend `.2-.6`. Staged enrichment
-  `.14.7` and combined program-wide no-drift `.14.8` remain separate pending owners.
+- current_future_direction: neutral `.14.6.1` freezes executable pre-registered, same-source rebased, ceiling- and
+  cancellation-preserving dispatch at 1/9/86; backend `.2-.6` remain pending. Staged enrichment `.14.7` and
+  combined program-wide no-drift `.14.8` remain separate pending owners.
 - latest_bootstrap_read: 2026-08-17 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
-  review complete; `.14.6.0.1` is focused-signoff-complete for atomic 258 and `.14.6.1` is the next leaf.
+  review complete; `.14.6.1` is canonical-signoff-complete for atomic 259 and `.14.6.2` is the next parent.

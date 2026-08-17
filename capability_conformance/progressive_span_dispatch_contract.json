@@ -1,0 +1,1370 @@
+{
+  "format": 1,
+  "contract_id": "linkedspec-progressive-span-dispatch-v1",
+  "task_owner": "FUTURE-PARITY-BACKLOG.14.6.1",
+  "status": "neutral_complete_backends_pending",
+  "expected_counts": {
+    "registry_entries": 2,
+    "sources": 2,
+    "view_cases": 8,
+    "authority_cases": 6,
+    "cancellation_cases": 6,
+    "chain_cases": 8,
+    "execution_cases": 4,
+    "backend_guard_groups": 5,
+    "backend_guard_paths": 17,
+    "outward_guard_paths": 10,
+    "diagnostics": 26,
+    "rollout_legs": 9,
+    "mutations": 86
+  },
+  "authored_surface": {
+    "example": "value = dispatch_span(\"expr-v1\", \"Expr\", span)",
+    "callee": "dispatch_span",
+    "node_kind": "PROGRESSIVE_DISPATCH_SPAN",
+    "effect": "parser_registry_or_staged_dispatch",
+    "operands": [
+      "one nonempty normalized logical parser identity string literal",
+      "one nonempty allowed top-rule string literal",
+      "one bare rule-local harray binding with exact source_id/start/end/provenance fields"
+    ],
+    "result": "one detached child payload returned as the expression value",
+    "failure_policy": "fail_only; every dispatch or child failure propagates unchanged and no null, fallback, retry, or alternate parser is implied",
+    "availability": "neutral authority only; no backend admits the spelling until its independent rollout row completes"
+  },
+  "policy": {
+    "registry": "the host seeds immutable logical entries containing already compiled parser authority; authored execution may look up an identity but cannot resolve, load, compile, mutate, or enumerate",
+    "identity": "parser identity and top rule are static normalized literals; neither is a path, URI, module name, import request, or provider query",
+    "span": "one exact four-field direct same-source half-open Unicode-scalar span is data and provenance only; copied text, derived multi-span text, paths, and authority handles reject",
+    "source_view": "child registers are zero-based within the bounded view while every typed position, span, and diagnostic rebases to the original source identity and global scalar offsets",
+    "state": "parent cursor, anonymous boundary, marks, variables, transactions, captures, and invocation state remain unchanged; shared cancellation and budget authority may only become more restrictive",
+    "result": "the child result is deeply detached and contains no parser, registry, source, frame, transaction, cancellation, host, path, or live authority handle",
+    "capabilities": "effective capabilities and policy modes are sorted intersections; all required capabilities must remain present and an empty required policy intersection rejects",
+    "ceilings": "source detail and every numeric resource ceiling take the stricter minimum; a child cannot request or observe detail above the effective ceiling",
+    "cancellation": "the same cancellation token and absolute deadline propagate; entry and child safe points observe cancellation, deadline, and remaining budget without reset or extension",
+    "cycles": "repeating parser identity, top rule, and source requires a contained strictly smaller global span; exact, shifted equal-length, larger, or non-contained repeats reject",
+    "bounds": "depth and total dispatch calls remain bounded across all parser identities; successful child work spends the shared remaining budget",
+    "progress": "dispatch never advances the parent cursor and never satisfies parent repetition or recursion progress",
+    "transactions": "dispatch is non-rollbackable and statically rejected anywhere inside an uncommitted recognition effect graph",
+    "loading": "no operand or registry entry grants filesystem, import, search-root, provider, compilation, network, environment, or host-module authority"
+  },
+  "registry_schema": {
+    "fields": [
+      "parser_id",
+      "compiled_authority",
+      "fingerprint",
+      "allowed_top_rules",
+      "capabilities",
+      "ceilings"
+    ],
+    "identity_pattern": "^[a-z][a-z0-9]*(?:[._:-][a-z0-9]+)*$",
+    "top_rule_pattern": "^[A-Za-z_][A-Za-z0-9_]*$",
+    "fingerprint_pattern": "^sha256:[0-9a-f]{64}$",
+    "immutable_during_execution": true,
+    "forbidden_fields": [
+      "path",
+      "spec_path",
+      "search_roots",
+      "provider_query",
+      "source_text",
+      "compile_request"
+    ]
+  },
+  "registry_entries": [
+    {
+      "parser_id": "expr-v1",
+      "compiled_authority": "opaque:compiled-expr-v1",
+      "fingerprint": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "allowed_top_rules": [
+        "Expr",
+        "Value"
+      ],
+      "capabilities": [
+        "actionir-v1",
+        "typed-source-location-v1"
+      ],
+      "ceilings": {
+        "source_detail": "span",
+        "policy_modes": [
+          "deterministic",
+          "fail-only"
+        ],
+        "max_steps": 100,
+        "max_result_nodes": 64,
+        "max_diagnostic_bytes": 4096
+      }
+    },
+    {
+      "parser_id": "json-v1",
+      "compiled_authority": "opaque:compiled-json-v1",
+      "fingerprint": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "allowed_top_rules": [
+        "Document"
+      ],
+      "capabilities": [
+        "structured-result-v1",
+        "typed-source-location-v1"
+      ],
+      "ceilings": {
+        "source_detail": "identity",
+        "policy_modes": [
+          "deterministic",
+          "fail-only",
+          "strict-json"
+        ],
+        "max_steps": 80,
+        "max_result_nodes": 32,
+        "max_diagnostic_bytes": 1024
+      }
+    }
+  ],
+  "sources": [
+    {
+      "id": "unicode",
+      "text": "Aé🙂BC",
+      "scalar_length": 5,
+      "utf8_offsets": [
+        0,
+        1,
+        3,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "id": "ascii",
+      "text": "abcdef",
+      "scalar_length": 6,
+      "utf8_offsets": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    }
+  ],
+  "view_cases": [
+    {
+      "id": "unicode_middle",
+      "authority_source_id": "unicode",
+      "span": {
+        "source_id": "unicode",
+        "start": 1,
+        "end": 4,
+        "provenance": "gap"
+      },
+      "accepted": true,
+      "view_text": "é🙂B",
+      "local_to_global": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "diagnostic": null
+    },
+    {
+      "id": "empty_direct_span",
+      "authority_source_id": "unicode",
+      "span": {
+        "source_id": "unicode",
+        "start": 2,
+        "end": 2,
+        "provenance": "match"
+      },
+      "accepted": true,
+      "view_text": "",
+      "local_to_global": [
+        2
+      ],
+      "diagnostic": null
+    },
+    {
+      "id": "ascii_full",
+      "authority_source_id": "ascii",
+      "span": {
+        "source_id": "ascii",
+        "start": 0,
+        "end": 6,
+        "provenance": "capture"
+      },
+      "accepted": true,
+      "view_text": "abcdef",
+      "local_to_global": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "diagnostic": null
+    },
+    {
+      "id": "source_mismatch",
+      "authority_source_id": "unicode",
+      "span": {
+        "source_id": "ascii",
+        "start": 0,
+        "end": 1,
+        "provenance": "capture"
+      },
+      "accepted": false,
+      "view_text": null,
+      "local_to_global": null,
+      "diagnostic": "progressive_span_source_mismatch"
+    },
+    {
+      "id": "reversed",
+      "authority_source_id": "unicode",
+      "span": {
+        "source_id": "unicode",
+        "start": 4,
+        "end": 2,
+        "provenance": "capture"
+      },
+      "accepted": false,
+      "view_text": null,
+      "local_to_global": null,
+      "diagnostic": "progressive_span_reversed"
+    },
+    {
+      "id": "outside_source",
+      "authority_source_id": "unicode",
+      "span": {
+        "source_id": "unicode",
+        "start": 0,
+        "end": 6,
+        "provenance": "capture"
+      },
+      "accepted": false,
+      "view_text": null,
+      "local_to_global": null,
+      "diagnostic": "progressive_span_out_of_bounds"
+    },
+    {
+      "id": "copied_text_smuggling",
+      "authority_source_id": "unicode",
+      "span": {
+        "source_id": "unicode",
+        "start": 1,
+        "end": 2,
+        "provenance": "capture",
+        "text": "é"
+      },
+      "accepted": false,
+      "view_text": null,
+      "local_to_global": null,
+      "diagnostic": "progressive_span_shape_invalid"
+    },
+    {
+      "id": "noninteger_offset",
+      "authority_source_id": "unicode",
+      "span": {
+        "source_id": "unicode",
+        "start": "1",
+        "end": 2,
+        "provenance": "capture"
+      },
+      "accepted": false,
+      "view_text": null,
+      "local_to_global": null,
+      "diagnostic": "progressive_span_shape_invalid"
+    }
+  ],
+  "authority_cases": [
+    {
+      "id": "intersection_and_minima",
+      "entry_id": "expr-v1",
+      "caller_capabilities": [
+        "actionir-v1",
+        "caller-only",
+        "typed-source-location-v1"
+      ],
+      "required_capabilities": [
+        "actionir-v1",
+        "typed-source-location-v1"
+      ],
+      "caller_ceilings": {
+        "source_detail": "text",
+        "policy_modes": [
+          "deterministic",
+          "fail-only",
+          "trace"
+        ],
+        "max_steps": 60,
+        "max_result_nodes": 128,
+        "max_diagnostic_bytes": 2048
+      },
+      "required_source_detail": "span",
+      "accepted": true,
+      "effective": {
+        "capabilities": [
+          "actionir-v1",
+          "typed-source-location-v1"
+        ],
+        "source_detail": "span",
+        "policy_modes": [
+          "deterministic",
+          "fail-only"
+        ],
+        "max_steps": 60,
+        "max_result_nodes": 64,
+        "max_diagnostic_bytes": 2048
+      },
+      "diagnostic": null
+    },
+    {
+      "id": "entry_cannot_elevate_caller",
+      "entry_id": "json-v1",
+      "caller_capabilities": [
+        "typed-source-location-v1"
+      ],
+      "required_capabilities": [
+        "typed-source-location-v1"
+      ],
+      "caller_ceilings": {
+        "source_detail": "identity",
+        "policy_modes": [
+          "deterministic",
+          "fail-only"
+        ],
+        "max_steps": 200,
+        "max_result_nodes": 16,
+        "max_diagnostic_bytes": 2048
+      },
+      "required_source_detail": "identity",
+      "accepted": true,
+      "effective": {
+        "capabilities": [
+          "typed-source-location-v1"
+        ],
+        "source_detail": "identity",
+        "policy_modes": [
+          "deterministic",
+          "fail-only"
+        ],
+        "max_steps": 80,
+        "max_result_nodes": 16,
+        "max_diagnostic_bytes": 1024
+      },
+      "diagnostic": null
+    },
+    {
+      "id": "required_capability_missing",
+      "entry_id": "expr-v1",
+      "caller_capabilities": [
+        "typed-source-location-v1"
+      ],
+      "required_capabilities": [
+        "actionir-v1"
+      ],
+      "caller_ceilings": {
+        "source_detail": "span",
+        "policy_modes": [
+          "deterministic",
+          "fail-only"
+        ],
+        "max_steps": 100,
+        "max_result_nodes": 64,
+        "max_diagnostic_bytes": 4096
+      },
+      "required_source_detail": "identity",
+      "accepted": false,
+      "effective": null,
+      "diagnostic": "progressive_capability_denied"
+    },
+    {
+      "id": "policy_intersection_empty",
+      "entry_id": "expr-v1",
+      "caller_capabilities": [
+        "actionir-v1",
+        "typed-source-location-v1"
+      ],
+      "required_capabilities": [],
+      "caller_ceilings": {
+        "source_detail": "span",
+        "policy_modes": [
+          "trace"
+        ],
+        "max_steps": 100,
+        "max_result_nodes": 64,
+        "max_diagnostic_bytes": 4096
+      },
+      "required_source_detail": "identity",
+      "accepted": false,
+      "effective": null,
+      "diagnostic": "progressive_policy_denied"
+    },
+    {
+      "id": "source_detail_cannot_elevate",
+      "entry_id": "json-v1",
+      "caller_capabilities": [
+        "structured-result-v1",
+        "typed-source-location-v1"
+      ],
+      "required_capabilities": [
+        "structured-result-v1"
+      ],
+      "caller_ceilings": {
+        "source_detail": "span",
+        "policy_modes": [
+          "deterministic",
+          "fail-only",
+          "strict-json"
+        ],
+        "max_steps": 80,
+        "max_result_nodes": 32,
+        "max_diagnostic_bytes": 1024
+      },
+      "required_source_detail": "span",
+      "accepted": false,
+      "effective": null,
+      "diagnostic": "progressive_source_detail_denied"
+    },
+    {
+      "id": "caller_numeric_minimum",
+      "entry_id": "expr-v1",
+      "caller_capabilities": [
+        "actionir-v1",
+        "typed-source-location-v1"
+      ],
+      "required_capabilities": [],
+      "caller_ceilings": {
+        "source_detail": "identity",
+        "policy_modes": [
+          "deterministic",
+          "fail-only"
+        ],
+        "max_steps": 3,
+        "max_result_nodes": 2,
+        "max_diagnostic_bytes": 128
+      },
+      "required_source_detail": "none",
+      "accepted": true,
+      "effective": {
+        "capabilities": [
+          "actionir-v1",
+          "typed-source-location-v1"
+        ],
+        "source_detail": "identity",
+        "policy_modes": [
+          "deterministic",
+          "fail-only"
+        ],
+        "max_steps": 3,
+        "max_result_nodes": 2,
+        "max_diagnostic_bytes": 128
+      },
+      "diagnostic": null
+    }
+  ],
+  "cancellation_cases": [
+    {
+      "id": "fresh_budget",
+      "token": "cancel-1",
+      "child_token": "cancel-1",
+      "cancelled": false,
+      "now_tick": 10,
+      "deadline_tick": 20,
+      "remaining_steps": 12,
+      "cost": 5,
+      "accepted": true,
+      "remaining_after": 7,
+      "diagnostic": null
+    },
+    {
+      "id": "already_cancelled",
+      "token": "cancel-2",
+      "child_token": "cancel-2",
+      "cancelled": true,
+      "now_tick": 10,
+      "deadline_tick": 20,
+      "remaining_steps": 12,
+      "cost": 1,
+      "accepted": false,
+      "remaining_after": 12,
+      "diagnostic": "progressive_cancelled"
+    },
+    {
+      "id": "deadline_reached",
+      "token": "cancel-3",
+      "child_token": "cancel-3",
+      "cancelled": false,
+      "now_tick": 20,
+      "deadline_tick": 20,
+      "remaining_steps": 12,
+      "cost": 1,
+      "accepted": false,
+      "remaining_after": 12,
+      "diagnostic": "progressive_deadline_exceeded"
+    },
+    {
+      "id": "budget_empty",
+      "token": "cancel-4",
+      "child_token": "cancel-4",
+      "cancelled": false,
+      "now_tick": 1,
+      "deadline_tick": 20,
+      "remaining_steps": 0,
+      "cost": 0,
+      "accepted": false,
+      "remaining_after": 0,
+      "diagnostic": "progressive_budget_exhausted"
+    },
+    {
+      "id": "cost_exceeds_remaining",
+      "token": "cancel-5",
+      "child_token": "cancel-5",
+      "cancelled": false,
+      "now_tick": 1,
+      "deadline_tick": 20,
+      "remaining_steps": 4,
+      "cost": 5,
+      "accepted": false,
+      "remaining_after": 4,
+      "diagnostic": "progressive_budget_exhausted"
+    },
+    {
+      "id": "token_replacement",
+      "token": "cancel-6",
+      "child_token": "renewed-6",
+      "cancelled": false,
+      "now_tick": 1,
+      "deadline_tick": 20,
+      "remaining_steps": 10,
+      "cost": 1,
+      "accepted": false,
+      "remaining_after": 10,
+      "diagnostic": "progressive_cancellation_authority_mismatch"
+    }
+  ],
+  "chain_cases": [
+    {
+      "id": "root",
+      "active": [],
+      "candidate": [
+        "expr-v1",
+        "Expr",
+        "unicode",
+        0,
+        5
+      ],
+      "max_depth": 4,
+      "total_calls": 0,
+      "max_calls": 8,
+      "accepted": true,
+      "diagnostic": null
+    },
+    {
+      "id": "strictly_smaller",
+      "active": [
+        [
+          "expr-v1",
+          "Expr",
+          "unicode",
+          0,
+          5
+        ]
+      ],
+      "candidate": [
+        "expr-v1",
+        "Expr",
+        "unicode",
+        1,
+        4
+      ],
+      "max_depth": 4,
+      "total_calls": 1,
+      "max_calls": 8,
+      "accepted": true,
+      "diagnostic": null
+    },
+    {
+      "id": "exact_repeat",
+      "active": [
+        [
+          "expr-v1",
+          "Expr",
+          "unicode",
+          1,
+          4
+        ]
+      ],
+      "candidate": [
+        "expr-v1",
+        "Expr",
+        "unicode",
+        1,
+        4
+      ],
+      "max_depth": 4,
+      "total_calls": 1,
+      "max_calls": 8,
+      "accepted": false,
+      "diagnostic": "progressive_cycle_non_decreasing"
+    },
+    {
+      "id": "shifted_equal_length",
+      "active": [
+        [
+          "expr-v1",
+          "Expr",
+          "unicode",
+          0,
+          3
+        ]
+      ],
+      "candidate": [
+        "expr-v1",
+        "Expr",
+        "unicode",
+        1,
+        4
+      ],
+      "max_depth": 4,
+      "total_calls": 1,
+      "max_calls": 8,
+      "accepted": false,
+      "diagnostic": "progressive_cycle_non_decreasing"
+    },
+    {
+      "id": "larger_repeat",
+      "active": [
+        [
+          "expr-v1",
+          "Expr",
+          "unicode",
+          1,
+          3
+        ]
+      ],
+      "candidate": [
+        "expr-v1",
+        "Expr",
+        "unicode",
+        0,
+        5
+      ],
+      "max_depth": 4,
+      "total_calls": 1,
+      "max_calls": 8,
+      "accepted": false,
+      "diagnostic": "progressive_cycle_non_decreasing"
+    },
+    {
+      "id": "different_identity",
+      "active": [
+        [
+          "expr-v1",
+          "Expr",
+          "unicode",
+          0,
+          5
+        ]
+      ],
+      "candidate": [
+        "json-v1",
+        "Document",
+        "unicode",
+        0,
+        5
+      ],
+      "max_depth": 4,
+      "total_calls": 1,
+      "max_calls": 8,
+      "accepted": true,
+      "diagnostic": null
+    },
+    {
+      "id": "depth_limit",
+      "active": [
+        [
+          "expr-v1",
+          "Expr",
+          "unicode",
+          0,
+          5
+        ],
+        [
+          "json-v1",
+          "Document",
+          "unicode",
+          0,
+          5
+        ]
+      ],
+      "candidate": [
+        "expr-v1",
+        "Value",
+        "unicode",
+        1,
+        4
+      ],
+      "max_depth": 2,
+      "total_calls": 2,
+      "max_calls": 8,
+      "accepted": false,
+      "diagnostic": "progressive_depth_exceeded"
+    },
+    {
+      "id": "call_limit",
+      "active": [],
+      "candidate": [
+        "expr-v1",
+        "Expr",
+        "unicode",
+        0,
+        5
+      ],
+      "max_depth": 4,
+      "total_calls": 8,
+      "max_calls": 8,
+      "accepted": false,
+      "diagnostic": "progressive_call_limit_exceeded"
+    }
+  ],
+  "execution_cases": [
+    {
+      "id": "detached_success",
+      "parent_before": {
+        "cursor": 4,
+        "boundary": 2,
+        "marks": [
+          [
+            "m",
+            3
+          ]
+        ],
+        "variables": {
+          "x": 1
+        },
+        "transactions": [],
+        "captures": [
+          "a"
+        ]
+      },
+      "parent_after": {
+        "cursor": 4,
+        "boundary": 2,
+        "marks": [
+          [
+            "m",
+            3
+          ]
+        ],
+        "variables": {
+          "x": 1
+        },
+        "transactions": [],
+        "captures": [
+          "a"
+        ]
+      },
+      "budget_before": 20,
+      "child_cost": 5,
+      "budget_after": 15,
+      "child_result": {
+        "kind": "expr",
+        "span": {
+          "source_id": "unicode",
+          "start": 1,
+          "end": 4,
+          "provenance": "child-match"
+        }
+      },
+      "accepted": true,
+      "diagnostic": null,
+      "parent_progress": false
+    },
+    {
+      "id": "false_payload",
+      "parent_before": {
+        "cursor": 0,
+        "boundary": 0,
+        "marks": [],
+        "variables": {},
+        "transactions": [],
+        "captures": []
+      },
+      "parent_after": {
+        "cursor": 0,
+        "boundary": 0,
+        "marks": [],
+        "variables": {},
+        "transactions": [],
+        "captures": []
+      },
+      "budget_before": 4,
+      "child_cost": 1,
+      "budget_after": 3,
+      "child_result": false,
+      "accepted": true,
+      "diagnostic": null,
+      "parent_progress": false
+    },
+    {
+      "id": "child_failure_propagates",
+      "parent_before": {
+        "cursor": 2,
+        "boundary": 1,
+        "marks": [],
+        "variables": {},
+        "transactions": [],
+        "captures": []
+      },
+      "parent_after": {
+        "cursor": 2,
+        "boundary": 1,
+        "marks": [],
+        "variables": {},
+        "transactions": [],
+        "captures": []
+      },
+      "budget_before": 7,
+      "child_cost": 2,
+      "budget_after": 5,
+      "child_result": null,
+      "accepted": false,
+      "diagnostic": "progressive_child_failed",
+      "parent_progress": false
+    },
+    {
+      "id": "live_handle_rejected",
+      "parent_before": {
+        "cursor": 1,
+        "boundary": 1,
+        "marks": [],
+        "variables": {},
+        "transactions": [],
+        "captures": []
+      },
+      "parent_after": {
+        "cursor": 1,
+        "boundary": 1,
+        "marks": [],
+        "variables": {},
+        "transactions": [],
+        "captures": []
+      },
+      "budget_before": 5,
+      "child_cost": 1,
+      "budget_after": 4,
+      "child_result": {
+        "parser_handle": "opaque:live"
+      },
+      "accepted": false,
+      "diagnostic": "progressive_result_not_detached",
+      "parent_progress": false
+    }
+  ],
+  "current_boundary": {
+    "status": "all_backend_rows_pending_and_unavailable",
+    "typed_rollout": {
+      "path": "capability_conformance/typed_source_location_contract.json",
+      "leg": "progressive_span_dispatch",
+      "status": "pending",
+      "owner": "FUTURE-PARITY-BACKLOG.14.6"
+    },
+    "recognition_effect": {
+      "path": "capability_conformance/recognition_transaction_contract.json",
+      "effect": "parser_registry_or_staged_dispatch",
+      "classification": "rejected",
+      "action_ir_rows": [],
+      "canonical_call_rows": []
+    },
+    "perl_lowering_probe": {
+      "source": "return(dispatch_span(\"expr-v1\", \"Expr\", span));",
+      "callee_marker": "dispatch_span",
+      "unsupported_marker": "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER",
+      "expected_occurrences": 1
+    },
+    "backend_guard_groups": [
+      {
+        "backend": "perl",
+        "paths": [
+          "perl/LinkedSpec/ActionIR/Contracts.pm",
+          "perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm",
+          "perl/LinkedSpec/ActionIR/ValueExpr.pm"
+        ],
+        "forbidden_tokens": [
+          "dispatch_span",
+          "PROGRESSIVE_DISPATCH_SPAN"
+        ]
+      },
+      {
+        "backend": "rust",
+        "paths": [
+          "rust/linkedspec-core/src/callable_contract.rs",
+          "rust/linkedspec-core/src/expr.rs",
+          "rust/linkedspec-runtime/src/engine.rs"
+        ],
+        "forbidden_tokens": [
+          "dispatch_span",
+          "PROGRESSIVE_DISPATCH_SPAN"
+        ]
+      },
+      {
+        "backend": "dart",
+        "paths": [
+          "dart/lib/src/action/action_contracts.dart",
+          "dart/lib/src/action/action_parser.dart",
+          "dart/lib/src/runtime/interpreter.dart"
+        ],
+        "forbidden_tokens": [
+          "dispatch_span",
+          "PROGRESSIVE_DISPATCH_SPAN"
+        ]
+      },
+      {
+        "backend": "julia",
+        "paths": [
+          "julia/src/action/ActionContracts.jl",
+          "julia/src/action/ActionParser.jl",
+          "julia/src/runtime/Interpreter.jl"
+        ],
+        "forbidden_tokens": [
+          "dispatch_span",
+          "PROGRESSIVE_DISPATCH_SPAN"
+        ]
+      },
+      {
+        "backend": "lua",
+        "paths": [
+          "lua/src/linkedspec/action_ast.lua",
+          "lua/src/linkedspec/action_call_names.lua",
+          "lua/src/linkedspec/action_contracts.lua",
+          "lua/src/linkedspec/action_parser.lua",
+          "lua/src/linkedspec/interpreter.lua"
+        ],
+        "forbidden_tokens": [
+          "dispatch_span",
+          "PROGRESSIVE_DISPATCH_SPAN"
+        ]
+      }
+    ],
+    "outward_guard": {
+      "paths": [
+        "perl/LinkedSpec.pm",
+        "rust/linkedspec-runtime/src/lib.rs",
+        "dart/lib/linkedspec_dart.dart",
+        "julia/src/LinkedSpecJulia.jl",
+        "lua/src/linkedspec/init.lua",
+        "capability_conformance/outward_descriptor_contract.json",
+        "capability_conformance/semantic_introspection_model.json",
+        "capability_conformance/mcp_semantic_transport/schema.json",
+        "cli_conformance/manifest.json",
+        "README.md"
+      ],
+      "forbidden_tokens": [
+        "dispatch_span",
+        "PROGRESSIVE_DISPATCH_SPAN",
+        "progressive_span_dispatch"
+      ]
+    }
+  },
+  "diagnostics": [
+    {
+      "code": "progressive_parser_identity_literal_required",
+      "required_context": [
+        "code",
+        "origin",
+        "operand"
+      ]
+    },
+    {
+      "code": "progressive_parser_identity_invalid",
+      "required_context": [
+        "code",
+        "origin",
+        "parser_id"
+      ]
+    },
+    {
+      "code": "progressive_top_rule_literal_required",
+      "required_context": [
+        "code",
+        "origin",
+        "operand"
+      ]
+    },
+    {
+      "code": "progressive_top_rule_invalid",
+      "required_context": [
+        "code",
+        "origin",
+        "top_rule"
+      ]
+    },
+    {
+      "code": "progressive_span_binding_required",
+      "required_context": [
+        "code",
+        "origin",
+        "operand"
+      ]
+    },
+    {
+      "code": "progressive_span_shape_invalid",
+      "required_context": [
+        "code",
+        "origin",
+        "fields"
+      ]
+    },
+    {
+      "code": "progressive_span_source_mismatch",
+      "required_context": [
+        "code",
+        "origin",
+        "expected_source_id",
+        "actual_source_id"
+      ]
+    },
+    {
+      "code": "progressive_span_out_of_bounds",
+      "required_context": [
+        "code",
+        "origin",
+        "source_id",
+        "start",
+        "end",
+        "source_length"
+      ]
+    },
+    {
+      "code": "progressive_span_reversed",
+      "required_context": [
+        "code",
+        "origin",
+        "source_id",
+        "start",
+        "end"
+      ]
+    },
+    {
+      "code": "progressive_registry_missing",
+      "required_context": [
+        "code",
+        "origin",
+        "parser_id"
+      ]
+    },
+    {
+      "code": "progressive_registry_mutation_forbidden",
+      "required_context": [
+        "code",
+        "origin",
+        "parser_id"
+      ]
+    },
+    {
+      "code": "progressive_implicit_load_forbidden",
+      "required_context": [
+        "code",
+        "origin",
+        "parser_id"
+      ]
+    },
+    {
+      "code": "progressive_top_rule_forbidden",
+      "required_context": [
+        "code",
+        "origin",
+        "parser_id",
+        "top_rule"
+      ]
+    },
+    {
+      "code": "progressive_capability_denied",
+      "required_context": [
+        "code",
+        "origin",
+        "parser_id",
+        "capability"
+      ]
+    },
+    {
+      "code": "progressive_policy_denied",
+      "required_context": [
+        "code",
+        "origin",
+        "parser_id",
+        "policy"
+      ]
+    },
+    {
+      "code": "progressive_source_detail_denied",
+      "required_context": [
+        "code",
+        "origin",
+        "required",
+        "effective"
+      ]
+    },
+    {
+      "code": "progressive_cancelled",
+      "required_context": [
+        "code",
+        "origin",
+        "parser_id"
+      ]
+    },
+    {
+      "code": "progressive_deadline_exceeded",
+      "required_context": [
+        "code",
+        "origin",
+        "parser_id",
+        "deadline"
+      ]
+    },
+    {
+      "code": "progressive_budget_exhausted",
+      "required_context": [
+        "code",
+        "origin",
+        "parser_id",
+        "remaining"
+      ]
+    },
+    {
+      "code": "progressive_cancellation_authority_mismatch",
+      "required_context": [
+        "code",
+        "origin",
+        "parser_id"
+      ]
+    },
+    {
+      "code": "progressive_cycle_non_decreasing",
+      "required_context": [
+        "code",
+        "origin",
+        "parser_id",
+        "top_rule",
+        "source_id",
+        "span",
+        "active_span"
+      ]
+    },
+    {
+      "code": "progressive_depth_exceeded",
+      "required_context": [
+        "code",
+        "origin",
+        "depth",
+        "maximum"
+      ]
+    },
+    {
+      "code": "progressive_call_limit_exceeded",
+      "required_context": [
+        "code",
+        "origin",
+        "calls",
+        "maximum"
+      ]
+    },
+    {
+      "code": "progressive_child_failed",
+      "required_context": [
+        "code",
+        "origin",
+        "parser_id",
+        "top_rule",
+        "source_id",
+        "span",
+        "child_diagnostic"
+      ]
+    },
+    {
+      "code": "progressive_transaction_forbidden",
+      "required_context": [
+        "code",
+        "origin",
+        "effect"
+      ]
+    },
+    {
+      "code": "progressive_result_not_detached",
+      "required_context": [
+        "code",
+        "origin",
+        "parser_id",
+        "field"
+      ]
+    }
+  ],
+  "rollout": [
+    {
+      "order": 1,
+      "owner": "FUTURE-PARITY-BACKLOG.14.6.1",
+      "leg": "neutral",
+      "status": "complete",
+      "paths": [
+        "capability_conformance/progressive_span_dispatch_contract.json",
+        "tools/check_progressive_span_dispatch_contract.py"
+      ]
+    },
+    {
+      "order": 2,
+      "owner": "FUTURE-PARITY-BACKLOG.14.6.2",
+      "leg": "perl",
+      "status": "pending",
+      "paths": []
+    },
+    {
+      "order": 3,
+      "owner": "FUTURE-PARITY-BACKLOG.14.6.3",
+      "leg": "rust",
+      "status": "pending",
+      "paths": []
+    },
+    {
+      "order": 4,
+      "owner": "FUTURE-PARITY-BACKLOG.14.6.4",
+      "leg": "dart",
+      "status": "pending",
+      "paths": []
+    },
+    {
+      "order": 5,
+      "owner": "FUTURE-PARITY-BACKLOG.14.6.5",
+      "leg": "julia",
+      "status": "pending",
+      "paths": []
+    },
+    {
+      "order": 6,
+      "owner": "FUTURE-PARITY-BACKLOG.14.6.6",
+      "leg": "puc_lua",
+      "status": "pending",
+      "paths": []
+    },
+    {
+      "order": 7,
+      "owner": "FUTURE-PARITY-BACKLOG.14.6.6",
+      "leg": "luajit",
+      "status": "pending",
+      "paths": []
+    },
+    {
+      "order": 8,
+      "owner": "FUTURE-PARITY-BACKLOG.14.6.7",
+      "leg": "recurring",
+      "status": "pending",
+      "paths": []
+    },
+    {
+      "order": 9,
+      "owner": "FUTURE-PARITY-BACKLOG.14.6.8",
+      "leg": "public_no_drift",
+      "status": "pending",
+      "paths": []
+    }
+  ],
+  "canonical_execution": {
+    "contract_path": "capability_conformance/progressive_span_dispatch_contract.json",
+    "checker_path": "tools/check_progressive_span_dispatch_contract.py",
+    "project_data_runner": "tools/run_python_project_data.sh",
+    "canonical_driver": "tools/run_ci_local.sh",
+    "registration_marker": "checking backend-neutral progressive span-dispatch contract",
+    "invocation": "bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_contract.py",
+    "storage_policy": "all Python cache, temporary, and process data stays under repository-derived project storage",
+    "tracked_required": true
+  },
+  "mutation_ids": [
+    "format",
+    "contract_id",
+    "task_owner",
+    "status",
+    "count_registry",
+    "count_mutations",
+    "authored_example",
+    "authored_callee",
+    "authored_node",
+    "authored_effect",
+    "authored_operand",
+    "authored_result",
+    "authored_failure",
+    "authored_availability",
+    "policy_registry",
+    "policy_identity",
+    "policy_span",
+    "policy_source_view",
+    "policy_state",
+    "policy_result",
+    "policy_capabilities",
+    "policy_ceilings",
+    "policy_cancellation",
+    "policy_cycles",
+    "policy_bounds",
+    "policy_progress",
+    "policy_transactions",
+    "policy_loading",
+    "registry_schema_field",
+    "registry_identity_pattern",
+    "registry_mutable",
+    "registry_forbidden_fields",
+    "registry_entry_removed",
+    "registry_parser_id",
+    "registry_compiled_authority",
+    "registry_fingerprint",
+    "registry_top_rule",
+    "registry_capability_order",
+    "registry_source_ceiling",
+    "registry_numeric_ceiling",
+    "source_removed",
+    "source_scalar_length",
+    "source_utf8_map",
+    "view_removed",
+    "view_text",
+    "view_global_map",
+    "view_reversed_accepted",
+    "authority_removed",
+    "authority_intersection",
+    "authority_source_minimum",
+    "authority_resource_minimum",
+    "authority_missing_capability",
+    "cancellation_removed",
+    "cancellation_token_reset",
+    "cancellation_deadline",
+    "cancellation_budget",
+    "chain_removed",
+    "chain_exact_repeat",
+    "chain_depth",
+    "chain_call_limit",
+    "execution_removed",
+    "execution_parent_cursor",
+    "execution_budget",
+    "execution_progress",
+    "execution_live_result",
+    "current_status",
+    "current_typed_path",
+    "current_typed_leg",
+    "current_typed_status",
+    "current_typed_owner",
+    "current_recognition_path",
+    "current_recognition_effect",
+    "current_recognition_classification",
+    "current_perl_probe_marker",
+    "current_perl_probe_callee",
+    "current_backend_guard_path",
+    "current_backend_guard_token",
+    "current_outward_guard_path",
+    "current_outward_guard_dispatch",
+    "current_outward_guard_rollout",
+    "diagnostic_removed",
+    "diagnostic_context",
+    "rollout_removed",
+    "rollout_perl_promoted",
+    "canonical_checker",
+    "canonical_storage"
+  ]
+}

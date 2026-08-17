@@ -17,10 +17,11 @@ answers:
   - how many Python checker entrypoints exist
   - where do TAP and oracle capture artifacts go
   - what old tool data was deleted from private tmp
-date: 2026-07-26
+date: 2026-08-17
 status: current
 tags: [storage, ssd, python, bytecode, knowledge-map, mdbook, tap, oracle, temporary-data, portability]
 evidence: "PROJECT-DATA-SSD-ROOTING.2.6 adds tools/run_python_project_data.sh and tools/test_tool_project_data_storage.sh; exports retained PYTHONPYCACHEPREFIX from tools/project_data_env.sh; gives both Unicode generators explicit validated scratch; configures generic KM_OUTPUT_VALIDATOR in .knowledge_map.conf; validates Knowledge Map output before/after generation and mdBook output before/after build; routes canonical/current checker commands; and deletes the exact unreferenced 88-line /private/tmp/linkedspec-julia-reverify-cards.txt after classification. MDBOOK-DESTINATION-ROOT-ALIGNMENT.1 runs mdBook from BOOK_ROOT as build ., and its argument-aware fake proves split, equals, compact, environment, and absolute destinations plus pre-launch hostile/symlink rejection. Real default and relative builds each produce 79 files / 14,120 KiB on the repository volume."
+evidence_update_2026_08_17: "FUTURE-PARITY-BACKLOG.14.6.1 adds the repository-routed progressive span-dispatch checker. Canonical tool-storage proof freezes the resulting 31 Python tool entrypoints together with the unchanged three Python temporary owners and 14 shell allocator owners."
 reverify: "bash tools/test_tool_project_data_storage.sh; bash knowledge-map/scripts/check_knowledge_map.sh; bash tools/run_mdbook_local.sh"
 ---
 
@@ -39,7 +40,7 @@ same root and verifies created output. Relative split, equals, and compact CLI f
 path that validation approved, independently of the caller's current working directory.
 
 `tools/test_tool_project_data_storage.sh` freezes three Python temporary owners, 14 actual shell allocator owners,
-and 28 Python checker entrypoints. It proves real bytecode, map, HTML, CLI workspace, TAP, and oracle capture paths
+and 31 Python checker entrypoints. It proves real bytecode, map, HTML, CLI workspace, TAP, and oracle capture paths
 use the repository device and hostile external destinations remain absent. Its deliberate cross-volume reads are
 limited to device and exact-path absence checks required for that rejection proof.
 

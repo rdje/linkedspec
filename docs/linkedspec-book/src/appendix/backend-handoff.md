@@ -159,6 +159,14 @@
 > typed truth 11/3/152 without behavior or outward-surface movement. Run
 > `bash tools/check_typed_gap_composition_six_runtime.sh`; no second gap behavior owner or outward surface exists.
 >
+> Progressive neutral `.14.6.1` reserves
+> `value = dispatch_span("expr-v1", "Expr", span)` as a dedicated fail-only future expression. Its checker passes
+> 2 immutable registry entries, 2 sources/8 rebased views, 6 authority, 6 cancellation, 8 chain, 4 execution
+> cases, 5 backend guards/17 implementation paths plus 10 outward guards, 26 diagnostics, 1/9 rollout, and 86 mutations. Every backend
+> remains pending; the typed row is pending, the rejected effect has no current node/call rows, guarded paths omit
+> both future tokens, outward guards deny premature exposure, and Perl lowering stays unsupported. No path loader, public facade/schema/semantic/MCP/CLI/
+> README surface, or typed rollout row moves.
+>
 > Definitive neutral signoff passes the exact six-runtime composition and support ledgers, all eight doctrines,
 > six-family containment, repository relocation, CLI 66x2, RAM 35%, and canonical Phase 0 1,031/1,031 in 714
 > seconds through the exact local-CI success marker. No runtime or public admission moved.

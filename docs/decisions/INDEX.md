@@ -90,7 +90,7 @@ changed* lives in git (layer D), not here.
 | [0077](0077-engineering-notes-fourteenth-member-capacity.md) | Engineering-notes history admits its fourteenth bounded member | 2026-08-16 | accepted under `INTER-MATCH-GAP-CAPTURE.6.3` | documentation, history, rollover, routing, pressure, continuity, doctrine |
 | [0078](0078-change-history-nineteenth-member-capacity.md) | Change history admits its nineteenth bounded member | 2026-08-16 | accepted under `INTER-MATCH-GAP-CAPTURE.7.0` | documentation, history, rollover, routing, pressure, continuity, doctrine |
 | [0079](0079-inter-match-gap-recurring-public-closeout.md) | Inter-match-gap recurrence and public language admission close separately | 2026-08-16 | accepted under `INTER-MATCH-GAP-CAPTURE.7.0` | architecture, capture, segmentation, recurring-gate, public-no-drift, actionir, documentation, parity |
-| [0080](0080-authority-preserving-progressive-span-dispatch.md) | Progressive span dispatch uses pre-registered same-source child authority | 2026-08-17 | accepted architecture under `FUTURE-PARITY-BACKLOG.14.6.0`; implementation pending | architecture, parser-composition, progressive-parsing, spans, source-location, registry, authority, cancellation, portability |
+| [0080](0080-authority-preserving-progressive-span-dispatch.md) | Progressive span dispatch uses pre-registered same-source child authority | 2026-08-17 | executable neutral authority current; backend implementation pending | architecture, parser-composition, progressive-parsing, spans, source-location, registry, authority, cancellation, portability |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

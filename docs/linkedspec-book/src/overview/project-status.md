@@ -177,17 +177,21 @@ is current. Canonical `.14.5.1` signoff passes nine doctrines, repository contai
 66-case CLI environments, RAM at 51%, Phase 0 at 1,031/1,031 in 729 seconds, and the exact six-runtime opt-in;
 parent `.14.5` is closed and progressive span dispatch `.14.6` is next.
 
-Behavior-free audit `.14.6.0` and ADR `0080` now fix that “next” boundary exactly. Active ActionIR lowers both
+Behavior-free audit `.14.6.0` and ADR `0080` fix that boundary exactly. Active backend ActionIR still lowers both
 `parse_job(...)` and `dispatch_span(...)` as unsupported helpers. Each backend's current staged registry accepts
 only the built-in `actionir-body.spec` / `action_block` function-body adapter; a normal `.spec` path is rejected,
 and the legacy job span carries neither typed source authority nor cancellation/policy ceilings. Progressive work
 therefore starts with an immutable host-seeded entry for an already compiled parser, never an in-parse loader.
 
-The child will run synchronously over one contiguous direct span. Its internal registers are view-local, but typed
+Neutral `.14.6.1` now reserves `value = dispatch_span("expr-v1", "Expr", span)` as one dedicated fail-only
+expression without enabling a backend. The child will run synchronously over one contiguous direct span. Its internal registers are view-local, but typed
 positions/spans and diagnostics rebase to the original source identity and global scalar offsets. Parent state is
 isolated, capabilities intersect, ceilings only narrow, cancellation/budget cannot reset, and a repeated parser/
-top/source chain must strictly shrink its span. Correction `.14.6.0.1` first repairs the typed ledger's missed
-transaction-safety promotion; neutral `.1`, backend `.2-.6`, recurrence `.7`, and public no-drift `.8` follow.
+top/source chain must strictly shrink its span. Correction `.14.6.0.1` repaired the typed transaction row; neutral
+governance passes 2 registry entries, 2 sources/8 views, 6 authority, 6 cancellation, 8 chain, 4 execution cases,
+5 backend guards/17 implementation paths plus 10 outward guards, 26 diagnostics, rollout 1/9, and 86 mutations. The typed row remains
+pending, the rejected effect owns no current node/call rows, guarded paths omit both future tokens, outward guards deny exposure, and Perl
+lowering remains unsupported. Backend `.2-.6`, recurrence `.7`, and public no-drift `.8` follow.
 Derived text/AST stitching remains staged `.14.7`; combined program-wide no-drift remains `.14.8`.
 The behavior-free audit is focused-signoff-complete for atomic 257: exact Perl rejection probes, Rust 1/1, Dart
 5/5, typed 11/3/152, recognition 137/250/58, capability 80/0/0, language 250/105+1/126, Knowledge, the rendered

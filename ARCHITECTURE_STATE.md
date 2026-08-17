@@ -15,7 +15,7 @@ dispatch, staged dispatch, and combined program-wide no-drift remain pending und
 Typed governance is 11 complete / 3 pending / 152 mutations with no parser, compiler, runtime, facade, schema,
 semantic/MCP, CLI, README, storage, or public behavior change.
 
-## Progressive span dispatch has a behavior-free authority and implementation split
+## Progressive span dispatch has an executable neutral authority and pending backends
 
 ADR `0080` records the accepted architecture. `FUTURE-PARITY-BACKLOG.14.6.0` starts from clean atomic 256
 `8880d1b6`. Toolbox lowering proves active ActionIR
@@ -36,11 +36,17 @@ Capabilities intersect and policy/source-detail/resource ceilings take the stric
 deadline, and remaining budget propagate without reset or extension. Repeated parser/top/source dispatch requires
 a strictly smaller span; exact/non-decreasing cycles and bounded-depth/call exhaustion fail closed. Dispatch is a
 non-rollbackable `parser_registry_or_staged_dispatch` effect and is forbidden in uncommitted recognition attempts.
-The neutral leaf selects exact private syntax and fail-only v1 behavior; derived multi-span text and AST stitching
+Neutral `.14.6.1` selects `value = dispatch_span("expr-v1", "Expr", span)` as one dedicated
+`PROGRESSIVE_DISPATCH_SPAN` expression. Parser identity/top rule are static literals; the span is one bare local
+four-field direct carrier; the result is detached; failure is fail-only. Its executable checker passes 2 immutable
+registry entries, 2 sources/8 views, 6 authority, 6 cancellation, 8 chain, and 4 execution cases, 5 backend
+guards/17 implementation paths plus 10 outward guards, 26 diagnostics, rollout 1/9, and 86 mutations. Canonical registration is always
+on, but the typed row remains pending, the recognition effect has no current node/call rows, every guarded backend
+path omits the future tokens, ten facade/schema/semantic/MCP/CLI/README paths deny premature exposure, and Perl lowering remains unsupported. Derived multi-span text and AST stitching
 remain staged `.14.7` work.
 
-The dependency order is corrective typed transaction composition `.14.6.0.1`; neutral `.1`; Perl/Rust/Dart/
-Julia/shared-Lua `.2-.6`; recurring `.7`; public projection/no-drift `.8`. Backend parents must split RED,
+Corrective typed transaction composition `.14.6.0.1` and neutral `.1` are complete. The remaining dependency order
+is Perl/Rust/Dart/Julia/shared-Lua `.2-.6`; recurring `.7`; public projection/no-drift `.8`. Backend parents must split RED,
 authority/core, carrier integration, and admission before behavior. Recurrence alone promotes typed
 `progressive_span_dispatch`; `.8` exports no facade/schema/CLI/README behavior and does not consume combined
 program-wide `.14.8`.
