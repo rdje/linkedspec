@@ -6,9 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-16` (behavior-free lossless-gap handoff `.14.5.0` landed at `3d0384d1`; separate
-  `INTER-MATCH-GAP-CAPTURE.1-.7` is canonical-signoff-complete through no-change closeout `.7.3` from clean
-  `bb0c3768`; typed composition `.14.5.1` is unblocked but awaits the atomic-255 clean boundary)
+- Last updated: `2026-08-17` (progressive audit `.14.6.0` is focused-signoff-complete for intended atomic 257
+  from clean `8880d1b6`; corrective prerequisite `.14.6.0.1` is the next owned leaf)
 - Owner: repo-local workflow
 
 ## Goal
@@ -104,14 +103,12 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-16):** behavior-free lossless-gap handoff `.14.5.0` landed cleanly at
-`3d0384d1` as atomic 217/300. It freezes `INTER-MATCH-GAP-CAPTURE.1-.7` as the sole syntax, lifecycle,
-compatibility, six-runtime, carrier, and public-admission owner. That separate tree is canonical-signoff-complete
-through no-change closeout `.7.3` from public atomic 254 `bb0c3768`: gap is 9/0/63 plus public 6/12/10/29,
-language is 250/105+1/126, recognition is 137/250/58, and the rooted neutral/Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT
-route is exact. Brackets remain selectors—numeric positional compatibility, named stable identity—while dot
-remains fluent rule behavior. `.14.5.1` is now the sole typed-source `gap_composition` owner but stays pending
-until `.7.3` lands with receipt/brief/clean proof; combined program-wide no-drift stays `.14.8`.
+**Authoritative frontier (2026-08-17):** behavior-free progressive audit `.14.6.0` is focused-signoff-complete
+for intended atomic 257 from clean atomic-256 `8880d1b6`. It proves active dispatch absent, freezes the exact
+pre-registered same-source child authority, and splits `.0.1` typed transaction-composition correction; `.1`
+neutral contract; `.2-.6` Perl/Rust/Dart/Julia/shared-Lua; `.7` recurrence; and `.8` public no-drift. The audit
+also proves `.14.3`'s closed 9/9 transaction authority was never promoted in the typed ledger; `.14.6.0.1` is the
+next owned leaf and must repair that current truth before executable progressive work.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private

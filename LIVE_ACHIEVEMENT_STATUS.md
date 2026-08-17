@@ -2,30 +2,29 @@
 
 ## Current Activity
 
-- `FUTURE-PARITY-BACKLOG.14.5.1` is canonical-signoff-complete for atomic 256 and closes parent `.14.5`; it was
-  activated task-tree-first from clean atomic 255 `5b9c343a` and owns only typed lossless-gap composition.
-- Checker-first RED failed exactly with `ContractError: lossless-gap composition contract is missing`. GREEN binds
-  the unchanged gap 9/0/63 plus public 6/12/10/29 authority and advances typed source from 9/5/114 to 10/4/126.
-- `gap_span` already supplies one detached same-source half-open Unicode-scalar span on all six runtimes. No
-  grammar, lifecycle, runtime, compatibility, migration, or public/outward implementation changed.
-- The new rooted composed driver passes typed governance; gap neutral, Perl 124, Rust 1, Dart 5, Julia 319, PUC
-  Lua 392, and LuaJIT 392; recognition 137/250/58; strict generated Rust 105/105; capability 80/0/0; and language
-  250/105+1/126 through its exact success marker.
-- Twelve new mutations lock cross-contract identity/counts, the typed projection, ordered checks, repository-local
-  storage, canonical registration, and complete-to-pending regression. Only `lossless_gap_composition` moves;
-  combined `recurring_public_no_drift` remains pending under `.14.8`.
-- Outside-CWD routing, the 79-file / 14,984-KiB book, Knowledge 841/7,112, nine doctrines, containment/relocation,
-  CLI 66/66 twice, RAM 51%, Phase 0 1,031/1,031 in 729 seconds, and the complete opt-in canonical route pass.
+- `FUTURE-PARITY-BACKLOG.14.6.0` is focused-signoff-complete for intended atomic 257 from clean atomic 256
+  `8880d1b6`; task-tree ownership preceded every architecture, Knowledge, roadmap, live, and mdBook edit.
+- Toolbox probes prove no current in-parse parser invocation: both `parse_job(...)` and `dispatch_span(...)` lower
+  to unsupported ActionIR helpers. All five staged registries are narrow function-body adapters, and a normal
+  `.spec` path fails at resolve.
+- Progressive v1 is frozen as an isolated synchronous child over one contiguous typed span and an explicitly
+  pre-registered compiled parser identity. Source views rebase diagnostics globally; ceilings only narrow;
+  cancellation/budget propagate; non-decreasing cycles fail; and authored execution can never load a path.
+- The exact split is corrective `.0.1`, neutral `.1`, Perl/Rust/Dart/Julia/shared-Lua `.2-.6`, recurrence `.7`,
+  and public projection/no-drift `.8`. Staged AST enrichment remains `.14.7`; combined no-drift remains `.14.8`.
+- Audit found one pre-existing typed-ledger defect: `.14.3` is closed at recognition 9/9, but its owned typed
+  `transaction_safety` row was never promoted. `.14.6.0.1` now owns the executable correction and stale-current
+  public guard before any progressive contract or behavior.
 
 ## Latest Completed Slice
 
-- `.14.5.1` canonical-signoff-completes typed lossless-gap composition at 10/4/126 for atomic 256, closes `.14.5`,
-  and preserves the separate gap behavior owner and pending combined `.14.8` row.
+- `.14.6.0` behavior-free audit freezes authority-preserving progressive span dispatch, records the missed typed
+  transaction promotion under `.0.1`, and passes focused proof without executable or public movement.
 
 ## Next Action
 
-- After the atomic-256 receipt/commit/brief/clean boundary, retrieve `.14.6` authority and activate its first
-  safely bounded progressive span-dispatch audit leaf task-tree-first before implementation or public claims.
+- After the clean atomic-257 audit commit, activate corrective prerequisite `.14.6.0.1` task-tree-first and repair
+  typed transaction composition before neutral progressive contract `.14.6.1`.
 
 ## Recent Completions
 

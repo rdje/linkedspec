@@ -10,6 +10,24 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.0` — progressive span-dispatch audit): clean activation is atomic 256
+  `8880d1b6`. Committed staged registry blobs are Perl `09e5008e`, Rust `b9033595`, Dart `8eb8b7e1`, Julia
+  `c6c7b10f`, and Lua `b128a9f8`; each implements only `actionir-body.spec` / `action_block`.
+- ADR `0080` keeps loading outside recognition. Native loader APIs may resolve/read/compile before execution, but an active
+  parser receives only an immutable logical registry entry for an already compiled parser. A typed span grants
+  no filesystem, resolution, registry mutation, compilation, capability, policy, or source-detail authority.
+- Use one bounded source view: child registers are slice-local; typed positions/spans and diagnostics add the
+  parent span base and retain original source identity. Preserve parent cursor/boundary/marks/variables/
+  transactions/captures; return one detached child payload through ordinary action binding.
+- Effective grants intersect, ceilings take the stricter minimum, and cancellation/deadline/budget cannot reset or
+  expand. Repeated identity/top/source dispatch must strictly shrink the span; bound depth/calls across all ids.
+  Classify dispatch as rejected `parser_registry_or_staged_dispatch` inside uncommitted recognition attempts.
+- Before syntax/behavior, `.0.1` corrects typed transaction truth: recognition is 9/9 but typed row owner `.14.3`
+  remained pending. Then neutral `.1`, backends `.2-.6`, recurrence `.7`, and public no-drift `.8` proceed.
+- Focused audit signoff changes no production source or public surface. Exact Perl lowering/resolve probes, Rust
+  staged registry 1/1, Dart 5/5, typed/transaction/capability/language ledgers, book, Knowledge, bounded histories,
+  task metadata, memory, README, and all nine doctrines pass; project-data managed-run residue is zero.
+
 - 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.5.1` — typed lossless-gap composition): clean activation is atomic 255
   `5b9c343a`. Knowledge/ADR/Toolbox and both executable contracts prove `gap_span` already supplies the detached
   typed same-source half-open Unicode-scalar carrier on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT.

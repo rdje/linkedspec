@@ -699,7 +699,17 @@ ordinal is known. They dispatch that job through the minimal staged parser regis
 `resolve` maps `actionir-body.spec` to a built-in provider identity, `load` records the
 adapter contract digest, `compile` selects top rule `action_block`, and `execute` returns
 the body `action_block` AST stitched into `body_ast`. General provider search roots,
-imports, and recursive staged queues remain future work. The spec's body shell is a
+imports, and recursive staged queues remain future work.
+
+Progressive dispatch is a separate synchronous path under `FUTURE-PARITY-BACKLOG.14.6`. Audit `.14.6.0` proves
+that none of these registries can invoke a normal loaded spec while a parser is active. The portable design uses
+an immutable host-seeded entry for an already compiled logical parser identity and one contiguous typed source
+span. Child registers are bounded-view-local while typed coordinates rebase to the original source; parent state
+is isolated; capabilities intersect; policy/resource/source-detail ceilings only narrow; cancellation propagates;
+and repeated parser/top/source dispatch must strictly shrink the span. Never route an authored parser id to the
+filesystem. Derived text, deterministic parse-job queues, and AST stitching remain staged `.14.7` work.
+
+The spec's body shell is a
 linked opener/closer parse: `body_brace`
 handles nested brace islands, quoted strings, comments, and regex literals are protected
 before brace dispatch, and the outer close is matched by `function_definition[1]`.

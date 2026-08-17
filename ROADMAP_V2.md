@@ -8,6 +8,14 @@ Duplicate-slot rollout is closed at 7 complete / 0 pending; recurring proof rema
 Repeated-action rollout is closed at 8 complete / 0 pending; recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh`.
 
+Behavior-free `.14.6.0` is focused-signoff-complete for intended atomic 257 from clean atomic 256 `8880d1b6`. It proves
+no current in-parse form, five action-body-only staged registries, and path-reading loaders that must stay outside
+recognition. Dependency order is typed transaction-ledger correction `.0.1`, neutral contract `.1`, five backend/
+six runtime admissions `.2-.6`, recurrence `.7`, and public no-drift `.8`. Progressive v1 must use a contiguous
+typed span, rebased same-source view, explicitly pre-registered compiled identity/top rule, narrowing capability/
+policy/cancellation ceilings, isolated parent state, decreasing-span cycle proof, and zero implicit loading.
+Corrective `.14.6.0.1` is next; staged enrichment `.14.7` and final combined `.14.8` remain separate.
+
 Accepted long-horizon direction: ADR `0064` plus `SPEC-LANGUAGE-SELF-CONTAINMENT` define portable `.spec`
 problem-domain closure without ambient effects and an optional honest EBNF-like frontend over the same canonical
 AST/HandlerIR/runtime. Lossless authored source maps, explicit semantic differences/extensions, realistic trials,

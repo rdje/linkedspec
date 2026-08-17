@@ -1,17 +1,15 @@
 # MEMORY
 
-- activation_commit: `5b9c343a343b85b6f1c30b23c155ec40f04329a5` — clean atomic-255 gap-tree closeout base for
-  task-tree-first `FUTURE-PARITY-BACKLOG.14.5.1`; canonical receipt promoted; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.5.1 - compose typed lossless gaps`; canonical-signoff-complete
-  and landed by this atomic-256 commit, closing parent `.14.5` without changing parser/runtime/outward behavior.
-- active_work_unit: none after the atomic-256 handoff; `.14.6` is pending and must be activated task-tree-first.
-- next_action: from exact clean atomic 256, retrieve the `.14.6` authority and relevant Knowledge/ADR/Toolbox
-  pointers, then activate its first safely bounded progressive span-dispatch audit leaf before any other change.
+- activation_commit: `8880d1b6919f235d2dd52fb6d0a45cd71906a854` — clean atomic-256 typed-gap base for task-tree-first
+  `FUTURE-PARITY-BACKLOG.14.6.0`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.0 - audit progressive span dispatch`; focused-signoff-
+  complete and landed by this intended atomic-257 commit without executable or public movement.
+- active_work_unit: none at the intended clean post-commit audit handoff; corrective `.14.6.0.1` is next.
+- next_action: activate `.14.6.0.1` task-tree-first from exact clean atomic 257, then repair typed transaction
+  composition and stale-current governance before neutral progressive contract `.14.6.1`.
 - in_flight_uncommitted: none at the intended post-commit boundary; no background result remains to consume.
-- blockers: none. Canonical proof passes nine doctrines, containment/relocation, CLI 66/66 twice, RAM 51%, Phase 0
-  1,031/1,031 in 729 seconds, and the opt-in neutral/Perl-124/Rust-1/Dart-5/Julia-319/PUC-Lua-392/LuaJIT-392
-  composition plus recognition 137/250/58, strict generated Rust 105/105, capability 80/0/0, and language
-  250/105+1/126 through the exact local-CI marker.
+- blockers: none. Focused audit proof passes exact Perl/Rust/Dart staged boundaries, typed 10/4/126, recognition
+  9/9, capability/language, book, Knowledge, histories, memory, task metadata, and all nine doctrines.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -37,8 +35,8 @@
   and their rollover/index gates remain current.
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, and recurrence/public no-drift 9/9.
-- current_future_direction: `.14.5.1` closed typed gap composition at 10/4/126 without a second behavior owner.
-  Progressive span dispatch `.14.6` is the next frontier; staged enrichment `.14.7` and combined program-wide
-  no-drift `.14.8` remain separate pending owners.
+- current_future_direction: progressive audit `.14.6.0` freezes pre-registered, same-source rebased, ceiling- and
+  cancellation-preserving dispatch; corrective `.0.1` precedes neutral `.1` and backend `.2-.6`. Staged enrichment
+  `.14.7` and combined program-wide no-drift `.14.8` remain separate pending owners.
 - latest_bootstrap_read: 2026-08-17 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
-  review complete; `.14.5.1` is canonical-signoff-complete for atomic 256 and `.14.6` is the next clean frontier.
+  review complete; `.14.6.0` is focused-signoff-complete for atomic 257 and `.14.6.0.1` is the next owned leaf.

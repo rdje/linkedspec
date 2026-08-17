@@ -1,5 +1,35 @@
 # ARCHITECTURE STATE
 
+## Progressive span dispatch has a behavior-free authority and implementation split
+
+ADR `0080` records the accepted architecture. `FUTURE-PARITY-BACKLOG.14.6.0` starts from clean atomic 256
+`8880d1b6`. Toolbox lowering proves active ActionIR
+has no progressive parser-composition form: `parse_job(...)` and `dispatch_span(...)` both become the unsupported-
+helper sentinel. Perl, Rust, Dart, Julia, and Lua do have deterministic staged registries, but each resolves only
+`actionir-body.spec` to the built-in `action_block` adapter. Their parse jobs carry copied text beside legacy
+offset/line spans; they do not carry the typed source authority, caller policy ceiling, or cancellation authority.
+An ordinary `.spec` path is rejected at resolve.
+
+The existing native spec loaders remain the pre-parse source of compiled parser authority. Progressive execution
+uses an immutable host-seeded registry entry—logical identity, compiled parser, fingerprint, allowed top rules,
+capabilities, and policy ceilings—and never calls a resolver or filesystem loader from authored recognition. A
+contiguous direct span becomes a bounded source view: child registers are view-local, while typed positions,
+spans, and diagnostics rebase to the original source identity and global Unicode-scalar offsets. Child payloads
+detach; parent cursor/boundaries/marks/variables/transactions/captures stay isolated.
+
+Capabilities intersect and policy/source-detail/resource ceilings take the stricter minimum. Parent cancellation,
+deadline, and remaining budget propagate without reset or extension. Repeated parser/top/source dispatch requires
+a strictly smaller span; exact/non-decreasing cycles and bounded-depth/call exhaustion fail closed. Dispatch is a
+non-rollbackable `parser_registry_or_staged_dispatch` effect and is forbidden in uncommitted recognition attempts.
+The neutral leaf selects exact private syntax and fail-only v1 behavior; derived multi-span text and AST stitching
+remain staged `.14.7` work.
+
+The dependency order is corrective typed transaction composition `.14.6.0.1`; neutral `.1`; Perl/Rust/Dart/
+Julia/shared-Lua `.2-.6`; recurring `.7`; public projection/no-drift `.8`. Backend parents must split RED,
+authority/core, carrier integration, and admission before behavior. Recurrence alone promotes typed
+`progressive_span_dispatch`; `.8` exports no facade/schema/CLI/README behavior and does not consume combined
+program-wide `.14.8`.
+
 ## Lossless gaps are current in the typed algebra without a second behavior owner
 
 `INTER-MATCH-GAP-CAPTURE.7.2` landed public admission as atomic 254 at `bb0c3768`. The shared language inventory

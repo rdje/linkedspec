@@ -421,6 +421,13 @@ while the consumer is ordinarily and canonically discovered once per ABI. Transa
 recurring/public-no-drift row remains pending for final program-wide closeout `FUTURE-PARITY-BACKLOG.14.8`, so
 typed-source composition is 10 complete / 4 pending with 126 mutations.
 
+Progressive span dispatch is still future behavior, but `.14.6.0` now fixes its authority boundary. It will accept
+one contiguous direct span plus an explicitly pre-registered, already compiled parser identity—not a path. The
+child uses a bounded source view whose typed positions and diagnostics rebase to the original source; parent
+cursor/marks/transactions stay isolated; capability and policy ceilings only narrow; cancellation and remaining
+budget propagate; and repeated parser/top/source dispatch must strictly shrink the span. The existing staged
+function-body adapter does not satisfy this contract.
+
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions or
 typed spans are authored values. The `recognition_*` operations are current across all six runtime routes, while
 their exact recurring composition and public no-drift projection are both current.

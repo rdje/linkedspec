@@ -1,0 +1,97 @@
+---
+id: progressive-span-dispatch-audit-plan
+title: Progressive span dispatch requires a pre-registered parser and a rebased source view
+answers:
+  - "what is progressive span dispatch"
+  - "is progressive parser composition implemented"
+  - "what is the difference between progressive dispatch and staged parse jobs"
+  - "can progressive dispatch load a spec path"
+  - "how does a child parser preserve parent source coordinates"
+  - "what parser registry authority may an active parse use"
+  - "how do capability and policy ceilings compose across progressive dispatch"
+  - "how is cancellation inherited by a progressively invoked parser"
+  - "how are progressive dispatch cycles and progress checked"
+  - "can progressive dispatch run inside recognition transactions"
+  - "what leaves implement FUTURE-PARITY-BACKLOG.14.6"
+  - "why is typed transaction safety still pending"
+date: 2026-08-17
+status: current behavior-free audit; implementation remains pending
+tags: [progressive-parsing, source-location, span, registry, authority, cancellation, diagnostics, task-tree]
+evidence: "FUTURE-PARITY-BACKLOG.14.6.0 retrieves ADRs 0012-0016 and 0056, the typed/staged/loader authorities, and the five backend registries before probing. LinkedSpec::call_spec_handler_subst lowers both parse_job(...) and dispatch_span(...) to LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER. The Perl registry executes only actionir-body.spec/action_block through builtin:actionir-body.spec and rejects specs/json.spec at resolve; Rust, Dart, Julia, and Lua have the same narrow identity. Their job spans are legacy start/end/line shells rather than typed source-authority spans, and none carries cancellation or a policy ceiling. Native spec loaders resolve/read/compile filesystem inputs before execution and therefore are not safe in-parse registry authority. The typed checker is 10 complete / 4 pending / 126 while the independently closed recognition transaction contract is 9/9; git history proves owner .14.3 never promoted typed transaction_safety, so corrective prerequisite .14.6.0.1 owns that missed composition and stale-current governance before progressive behavior."
+reverify:
+  - "perl -Iperl -MLinkedSpec -e 'print LinkedSpec::call_spec_handler_subst(\"Top\", q{return(parse_job(\"child.spec\", \"payload\"));})'"
+  - "bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py"
+  - "bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py"
+  - "rg -n 'ACTION.?IR.?BODY.?SPEC|unsupported parser spec id|source_span|capability_set' perl/LinkedSpec/StagedParserRegistry.pm rust/linkedspec-runtime/src/staged_parser_registry.rs dart/lib/src/parser/staged_parser_registry.dart julia/src/parser/StagedParserRegistry.jl lua/src/linkedspec/staged_parser_registry.lua"
+---
+
+# Progressive span-dispatch audit and implementation plan
+
+## Current code proves a narrower staged prototype
+
+Progressive dispatch is synchronous child-parser invocation while a parent parser is active. Staged dispatch is
+post-AST work: collect parse jobs, order them, run later parsers, and stitch results. They share provenance and
+registry principles but not execution state or scheduling.
+
+No progressive authored form exists today. Active ActionIR treats both `parse_job(...)` and a plausible
+`dispatch_span(...)` as unsupported helpers. The five backend staged registries implement one function-body
+adapter only: `actionir-body.spec` resolves to `builtin:actionir-body.spec`, compiles top rule `action_block`, and
+parses ActionIR body text. Passing an ordinary `.spec` path fails at resolve. The existing `source_span` is an
+offset/line shell copied beside text; it is not the typed same-source span plus source authority required by ADR
+`0056`. Existing capability lists affect only the adapter cache key, and the registries carry no caller policy
+ceiling or cancellation authority.
+
+Native `load_and_compile_spec` APIs are useful pre-parse authorities, but they resolve and read paths. Progressive
+execution must never call them from authored recognition. A host or already-authorized outer pipeline loads and
+compiles first, then registers an opaque logical identity. Authored code may look up that identity only; a span is
+data and provenance, never loader authority.
+
+## Frozen authority and source-view model
+
+The neutral contract leaf selects the exact private source spelling. It must encode one dedicated, statically
+classifiable action expression with a contiguous direct-span operand, an explicit pre-registered parser identity,
+an allowed top rule, and fail-only v1 propagation. Derived multi-span text and AST stitching remain staged `.14.7`
+work. The returned child payload is detached; parent cursor, boundaries, marks, variables, transactions, and
+capture state remain isolated and unchanged except for the explicit result binding performed by ordinary action
+semantics.
+
+Each registry entry is immutable during execution and contains a normalized logical identity, already compiled
+parser authority, content/import fingerprint, allowed top rules, capabilities, and policy ceilings. It contains no
+authored path-resolution permission. Effective capabilities are the intersection of caller and entry grants;
+effective resource/source-detail policies are the stricter minima. A child cannot elevate either ceiling.
+
+A direct parent span becomes a bounded source view over the same caller-authorized source. Child matching uses
+view-local registers, while typed positions/spans and diagnostics add the view base and retain the original source
+identity. Thus the child's input start/end positions are the parent span boundaries in global Unicode-scalar
+coordinates, and no copied string becomes a second provenance authority. Diagnostics never expose source text
+above the effective source-detail ceiling.
+
+## Frozen execution-safety model
+
+The parent invocation supplies one cancellation/deadline/budget authority. The child receives only the remaining,
+stricter budget and cannot replace, reset, extend, or ignore it. Checks occur at dispatch entry and child execution
+safe points. Existing per-engine iteration limits become one subordinate ceiling rather than a substitute for
+shared cancellation.
+
+The synchronous active chain records normalized parser identity, top rule, source identity, and global span.
+Repeating an identity/top/source requires a strictly smaller nested span; an exact repeat or non-decreasing cycle
+is rejected. Dispatch depth and total-call budgets remain bounded even across distinct identities. The parent
+cursor does not advance merely because a child parse ran, so dispatch itself cannot satisfy the parent's
+recognition progress obligation.
+
+Progressive dispatch is classified as `parser_registry_or_staged_dispatch`. It is forbidden inside an uncommitted
+`recognize_once` effect graph because lookup/execution/diagnostics cannot be rolled back. Parser lookup, source,
+top-rule, capability, policy, cancellation, cycle/progress, and child failure diagnostics are typed and
+source-text-safe.
+
+## Dependency order
+
+`.14.6.0.1` first repairs the missed typed transaction-safety composition and stale-current guard. `.14.6.1`
+selects syntax and creates the executable neutral contract/checker. `.2-.6` admit Perl, Rust, Dart, Julia, and one
+shared Lua implementation independently on PUC Lua and LuaJIT; each backend parent must split RED, authority/core,
+carrier integration, and admission before behavior. `.7` binds five source groups to six runtime routes and alone
+promotes typed `progressive_span_dispatch`. `.8` closes public projection/no-drift without exporting a facade or
+consuming combined final row `.14.8`.
+
+Accepted architecture: ADR `0080`. Related: [[staged-linked-parsing-architecture]], [[staged-parser-registry-dispatch-contract]],
+[[typed-source-location-cursor-algebra-direction]], and [[recognition-transaction-public-closeout]].

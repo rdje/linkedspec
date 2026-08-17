@@ -10,6 +10,17 @@ Duplicate-slot rollout is closed at 7 complete / 0 pending; recurring proof rema
 Repeated-action rollout is closed at 8 complete / 0 pending; recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh`.
 
+Progressive span-dispatch audit `.14.6.0` is focused-signoff-complete for intended atomic 257 from clean atomic
+256 `8880d1b6`. Current ActionIR has no
+progressive form; the five staged registries are limited to the built-in function-body adapter, and filesystem
+spec loaders are pre-parse authorities rather than in-parse registries. The frozen order is corrective typed
+transaction composition `.0.1`, executable neutral contract `.1`, Perl/Rust/Dart/Julia/shared-Lua `.2-.6`, exact
+six-runtime recurrence `.7`, and public projection/no-drift `.8`. A child receives a rebased bounded view of one
+direct span plus an explicitly pre-registered compiled parser identity; capability/policy/cancellation authority
+can only narrow, parent state stays isolated, cycles require a decreasing span, and no authored path can load.
+Staged AST enrichment remains `.14.7`; combined program-wide no-drift remains `.14.8`. Corrective `.14.6.0.1`
+is the next task-tree-owned leaf.
+
 Expressive `.spec` self-containment and an optional EBNF-like authoring profile are an accepted long-horizon
 direction under ADR `0064` and `SPEC-LANGUAGE-SELF-CONTAINMENT`. Self-containment means portable closure for
 grammar, recursion, cursor/capture/state, callable/control, transformation, and result objectives—not ambient

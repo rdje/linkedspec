@@ -10,6 +10,23 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.0 — audit progressive span dispatch
+
+- Activated task-tree-first from clean atomic 256 `8880d1b6` and retrieved ADR, Knowledge, typed-source,
+  transaction, staged-registry, loader, runtime-policy, mdBook, and task authorities before code archaeology.
+- Proved active ActionIR has no progressive form: `parse_job(...)` and `dispatch_span(...)` lower to unsupported
+  helpers. All five registries accept only the built-in action-body adapter; an ordinary `.spec` path is rejected.
+- Froze preloaded/pre-registered logical parser authority, a rebased same-source bounded view, isolated parent
+  state, detached result, narrowing capability/policy/source-detail/resource ceilings, inherited cancellation,
+  decreasing-span cycle/progress proof, transaction-effect rejection, and zero implicit path access in ADR `0080`.
+- Split correction `.0.1`, neutral `.1`, Perl/Rust/Dart/Julia/shared-Lua `.2-.6`, recurrence `.7`, and public
+  closeout `.8`; staged derived-text/AST stitching remains `.14.7`, and final combined no-drift remains `.14.8`.
+- Root-caused a missed rollover: typed `transaction_safety` is still pending although its sole owner `.14.3` is
+  recognition 9/9 complete. Corrective `.0.1` owns executable composition and stale-current governance first.
+- Focused proof passes exact Perl unsupported-helper/ordinary-spec rejection, Rust 1/1, Dart 5/5, typed
+  10/4/126, recognition 137/250/58, capability 80/0/0, language 250/105+1/126, rendered mdBook 78/15,000 KiB,
+  Knowledge 842/7,124, bounded docs, task metadata, memory, README, all nine doctrines, and no production diff.
+
 ## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.5.1 — compose typed lossless gaps
 
 - Activated task-tree-first from clean atomic 255 `5b9c343a`. The complete checker oracle then failed the

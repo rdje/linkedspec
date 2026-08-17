@@ -4903,54 +4903,19 @@
     12/12, Dart 10/10, complete Julia package/primary/corpus 105, book 79/14,404 KiB, all eight doctrines, CLI 66x2,
     RAM 69%, and canonical Phase 0 1,031/1,031 in 738 sec pass through the exact success marker; Lua/later remain RED.
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6`
-  Status: `complete` (2026-08-11; admission `.3` signoff-complete as atomic 204/300 from `70b4ed04`; no push)
-  Goal: Implement one shared Lua transaction/progress core and independently admit it on PUC Lua and LuaJIT.
-  Depends on: `.14.3.5`
-  Children: `.14.3.6.0-.14.3.6.3`
+  Status: `complete` (2026-08-11; admission `.3` signoff-complete as atomic 204/300 from `70b4ed04`; no push); Goal: Implement one shared Lua transaction/progress core and independently admit it on PUC Lua and LuaJIT; Depends on: `.14.3.5`; Children: `.14.3.6.0-.14.3.6.3`.
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6.0`
-  Status: `complete` (2026-08-11; clean atomic 201/300 `6a8ec091`; no push)
-  Goal: Freeze one shared dual-ABI dormant final-path RED.
-  Depends on: `.14.3.5.3`
-  Commit: `FUTURE-PARITY-BACKLOG.14.3.6.0 - freeze Lua transaction RED`
-  Evidence: four modes stopped at missing authority; 12 mutations and full signoff passed; clean `6a8ec091`.
+  Status: `complete` (2026-08-11; clean atomic 201/300 `6a8ec091`; no push); Goal: Freeze one shared dual-ABI dormant final-path RED; Depends on: `.14.3.5.3`; Commit: `FUTURE-PARITY-BACKLOG.14.3.6.0 - freeze Lua transaction RED`; Evidence: four modes stopped at missing authority; 12 mutations and full signoff passed; clean `6a8ec091`.
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6.1`
-  Status: `complete` (2026-08-11; clean atomic 202/300 `d87dcac3`; no push)
-  Goal: Add one shared private Lua invocation/mark/snapshot/linear-token authority.
-  Depends on: `.14.3.6.0`
-  Commit: `FUTURE-PARITY-BACKLOG.14.3.6.1 - add private Lua transaction authority`
-  Evidence: authority 187x2, 22+12 mutations, and full signoff passed; clean `d87dcac3`.
+  Status: `complete` (2026-08-11; clean atomic 202/300 `d87dcac3`; no push); Goal: Add one shared private Lua invocation/mark/snapshot/linear-token authority; Depends on: `.14.3.6.0`; Commit: `FUTURE-PARITY-BACKLOG.14.3.6.1 - add private Lua transaction authority`; Evidence: authority 187x2, 22+12 mutations, and full signoff passed; clean `d87dcac3`.
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6.2`
-  Status: `complete` (2026-08-11; clean atomic 203/300 `70b4ed04`; no push)
-  Goal: Integrate syntax/runtime/effect/progress parity across all carriers on both Lua ABIs.
-  Depends on: `.14.3.6.1`
-  Commit: `FUTURE-PARITY-BACKLOG.14.3.6.2 - integrate Lua recognition transactions`
-  Evidence: authority 187x2, integration 243x2, 22+19+12 mutations, full signoff, and clean `70b4ed04`.
+  Status: `complete` (2026-08-11; clean atomic 203/300 `70b4ed04`; no push); Goal: Integrate syntax/runtime/effect/progress parity across all carriers on both Lua ABIs; Depends on: `.14.3.6.1`; Commit: `FUTURE-PARITY-BACKLOG.14.3.6.2 - integrate Lua recognition transactions`; Evidence: authority 187x2, integration 243x2, 22+19+12 mutations, full signoff, and clean `70b4ed04`.
 - ID: `FUTURE-PARITY-BACKLOG.14.3.6.3`
-  Status: `complete` (2026-08-11; signoff-complete atomic 204/300 from clean `70b4ed04`; no push)
-  Goal: Remove Lua dormancy, register one consumer exactly once per ABI in ordinary/canonical proof, and promote PUC Lua plus LuaJIT transaction admission independently.
-  Depends on: `.14.3.6.2`
-  Acceptance: Retrieve the Lua integration and admitted backend authorities before edits; remove only RED selector/dormancy scaffolding; register the unchanged consumer exactly once per ABI in ordinary/canonical routes; promote only those two rollout legs and exact ledgers while keeping the API private.
-  Commit: `FUTURE-PARITY-BACKLOG.14.3.6.3 - admit Lua recognition transactions`
-  Checklist: [x] clean activation/task ownership; [x] authority/predecessor audit; [x] remove dormancy; [x] ordinary
-    dual-ABI registration; [x] canonical registration; [x] governance/mutations; [x] no-drift; [x] docs/signoff.
-  Evidence: PUC/LuaJIT 243x2, Lua package 177x2, CLI 66x2, corpus 105, checker 46/38/14 + Lua 22, book
-    79 files/14,412 KiB, Knowledge 818/6,792, all eight doctrines, RAM 65%, and Phase 0 1,031/1,031 in 758 sec pass.
+  Status: `complete` (2026-08-11; signoff-complete atomic 204/300 from clean `70b4ed04`; no push); Goal: Remove Lua dormancy, register one consumer exactly once per ABI in ordinary/canonical proof, and promote PUC Lua plus LuaJIT transaction admission independently; Depends on: `.14.3.6.2`; Acceptance: Retrieve the Lua integration and admitted backend authorities before edits; remove only RED selector/dormancy scaffolding; register the unchanged consumer exactly once per ABI in ordinary/canonical routes; promote only those two rollout legs and exact ledgers while keeping the API private; Commit: `FUTURE-PARITY-BACKLOG.14.3.6.3 - admit Lua recognition transactions`; Checklist: [x] clean activation/task ownership; [x] authority/predecessor audit; [x] remove dormancy; [x] ordinary dual-ABI registration; [x] canonical registration; [x] governance/mutations; [x] no-drift; [x] docs/signoff; Evidence: PUC/LuaJIT 243x2, Lua package 177x2, CLI 66x2, corpus 105, checker 46/38/14 + Lua 22, book 79 files/14,412 KiB, Knowledge 818/6,792, all eight doctrines, RAM 65%, and Phase 0 1,031/1,031 in 758 sec pass.
 - ID: `FUTURE-PARITY-BACKLOG.14.3.7`
-  Status: `done` (2026-08-11; signoff-complete atomic 205/300 from clean `1aedfe98`; no push)
-  Goal: Bind the unchanged neutral and five-backend/six-runtime consumers into one exact repository-routed recurring proof with omission/order/multiplicity/storage/canonical governance.
-  Depends on: `.14.3.6`
-  Acceptance: Add one fail-fast project-data-routed driver over the neutral checker, exact Perl/Rust/Dart/Julia/PUC Lua/LuaJIT consumers, and support ledgers; lock driver/CI/order/path/multiplicity/storage topology, promote only recurring, preserve public no-drift RED and every runtime/API/schema/CLI/README boundary, then pass focused/book/doctrine/canonical signoff.
-  Commit: `FUTURE-PARITY-BACKLOG.14.3.7 - compose recognition transaction proof`
-  Checklist: [x] clean activation/task ownership; [x] authority/topology audit; [x] driver/CI route; [x] governance/mutations; [x] focused six-runtime proof; [x] no-drift/docs/book; [x] doctrine/canonical signoff.
-  Evidence: driver passes Perl 51, Rust 12, Dart 10, Julia 207, Lua 246x2, support ledgers, and routing; checker 58 at rollout 8/9, public 3/23/42, guide 1/12/16; book 79/14,428, Knowledge 819/6,803, eight doctrines, CLI 66x2, RAM 62%, and canonical Phase 0 1,031/1,031 in 745 seconds pass. No runtime/API/schema/CLI/README behavior changes; `.14.3.8` follows only after clean atomic 205.
+  Status: `done` (2026-08-11; signoff-complete atomic 205/300 from clean `1aedfe98`; no push); Goal: Bind the unchanged neutral and five-backend/six-runtime consumers into one exact repository-routed recurring proof with omission/order/multiplicity/storage/canonical governance; Depends on: `.14.3.6`; Acceptance: Add one fail-fast project-data-routed driver over the neutral checker, exact Perl/Rust/Dart/Julia/PUC Lua/LuaJIT consumers, and support ledgers; lock driver/CI/order/path/multiplicity/storage topology, promote only recurring, preserve public no-drift RED and every runtime/API/schema/CLI/README boundary, then pass focused/book/doctrine/canonical signoff; Commit: `FUTURE-PARITY-BACKLOG.14.3.7 - compose recognition transaction proof`; Checklist: [x] clean activation/task ownership; [x] authority/topology audit; [x] driver/CI route; [x] governance/mutations; [x] focused six-runtime proof; [x] no-drift/docs/book; [x] doctrine/canonical signoff; Evidence: driver passes Perl 51, Rust 12, Dart 10, Julia 207, Lua 246x2, support ledgers, and routing; checker 58 at rollout 8/9, public 3/23/42, guide 1/12/16; book 79/14,428, Knowledge 819/6,803, eight doctrines, CLI 66x2, RAM 62%, and canonical Phase 0 1,031/1,031 in 745 seconds pass. No runtime/API/schema/CLI/README behavior changes; `.14.3.8` follows only after clean atomic 205.
 - ID: `FUTURE-PARITY-BACKLOG.14.3.8`
-  Status: `done; signoff-complete` (2026-08-11; atomic 206/300 from clean recurring commit `e6893fd4`; no push)
-  Goal: Recompose the committed contract, six runtime admissions, recurring authority, support ledgers, and public boundary unchanged; close `.14.3` and hand off cleanly to recursive observation `.14.4`.
-  Depends on: `.14.3.7`
-  Acceptance: Retrieve and hash the committed authorities first; promote only final public no-drift, reject stale/current projection drift, re-run the exact six-runtime/support composition and broader gates, close `.14.3`, and preserve parser/runtime/facade/schema/CLI/README behavior.
-  Commit: `FUTURE-PARITY-BACKLOG.14.3.8 - close recognition transaction rollout`
-  Checklist: [x] clean activation/task ownership; [x] committed-authority retrieval; [x] public no-drift governance; [x] exact recomposition; [x] activity/roadmap/book/live closeout; [x] doctrine/canonical signoff.
-  Evidence: committed hashes retained; driver passes Perl 51, Rust 12, Dart 10, Julia 207, Lua 246x2 plus support ledgers; checker 132/246/58 at 9/9, public 3/26/45, guide 1/14/18; book 79/14,428, Knowledge 820/6,813, eight doctrines, CLI 66x2, RAM 60%, and Phase 0 1,031/1,031 in 722 seconds pass without runtime/API/CLI/README movement.
+  Status: `done; signoff-complete` (2026-08-11; atomic 206/300 from clean recurring commit `e6893fd4`; no push); Goal: Recompose the committed contract, six runtime admissions, recurring authority, support ledgers, and public boundary unchanged; close `.14.3` and hand off cleanly to recursive observation `.14.4`; Depends on: `.14.3.7`; Acceptance: Retrieve and hash the committed authorities first; promote only final public no-drift, reject stale/current projection drift, re-run the exact six-runtime/support composition and broader gates, close `.14.3`, and preserve parser/runtime/facade/schema/CLI/README behavior; Commit: `FUTURE-PARITY-BACKLOG.14.3.8 - close recognition transaction rollout`; Checklist: [x] clean activation/task ownership; [x] committed-authority retrieval; [x] public no-drift governance; [x] exact recomposition; [x] activity/roadmap/book/live closeout; [x] doctrine/canonical signoff; Evidence: committed hashes retained; driver passes Perl 51, Rust 12, Dart 10, Julia 207, Lua 246x2 plus support ledgers; checker 132/246/58 at 9/9, public 3/26/45, guide 1/14/18; book 79/14,428, Knowledge 820/6,813, eight doctrines, CLI 66x2, RAM 60%, and Phase 0 1,031/1,031 in 722 seconds pass without runtime/API/CLI/README movement.
 - ID: `FUTURE-PARITY-BACKLOG.14.4`
   Status: `done; signoff-complete` (2026-08-12; closed by public projection/no-drift `.14.4.8` from clean recurrence base `eb8d052c`; no public API or rollout movement); Goal: Expose immutable recursive rule entry/match/accepted-exit positions and bounded parent/child provenance without allowing a parent to override the child's intrinsic cursor policy or retaining backend/runtime objects; Children: `.14.4.0`, corrective prerequisite `.14.4.0.1`, then `.14.4.1-.14.4.8` in neutral, Perl, Rust, Dart, Julia, shared-Lua, recurring, and public order.
 - ID: `FUTURE-PARITY-BACKLOG.14.4.0`
@@ -4989,8 +4954,36 @@
   - [x] **NO REGRESSION** — `recurring_public_no_drift` stays incomplete under `.14.8`; exact gap/language/recognition, implementations/compatibility, generated/capability/semantic/MCP/CLI/README, storage, and separate owners stay unchanged.
   - [x] **LOCKSTEP** — Task/index, ADR/Knowledge, TOOLBOX/capability, roadmaps/architecture/live/history/memory, and example-rich mdBook are synchronized; rendered output is inspected/removed and the leaf-id commit/brief-clear/clean handoff workflow is selected.
 - ID: `FUTURE-PARITY-BACKLOG.14.6`
-  Status: `pending`
-  Goal: Specify and implement span-native progressive in-parse invocation of loaded specs at arbitrary safe points, preserving source provenance, diagnostic coordinates, policy ceilings, cancellation, and zero implicit paths.
+  Status: `active` (2026-08-17; audit `.14.6.0` signoff-complete for intended atomic 257; corrective `.14.6.0.1` next); Goal: Specify and implement authority-preserving span-native progressive in-parse dispatch; Children: audit `.0`, corrective prerequisite `.0.1`, neutral `.1`, Perl `.2`, Rust `.3`, Dart `.4`, Julia `.5`, shared-Lua `.6`, recurrence `.7`, and public closeout `.8`.
+- ID: `FUTURE-PARITY-BACKLOG.14.6.0`
+  Status: `done; focused-signoff-complete` (2026-08-17; behavior-free audit from clean `8880d1b6`; intended atomic 257; no push)
+  Goal: Audit committed loaded-spec, typed-span, registry/dispatch, policy, cancellation, diagnostics, and backend authorities; prove current versus future in-parse composition; freeze source-view rebasing, pre-registration, top-rule/capability/policy/cancellation/cycle/progress/transaction semantics, zero implicit paths, neutral/backend/recurring/public ownership, and safe leaf sizes before behavior.
+  Depends on: `.14.5.1`, ADRs `0012`, `0015`, `0056`; Decision: ADR `0080`; Finding owner: `.0.1` must correct the missed typed `transaction_safety` promotion and its stale-current governance before `.1`.
+  Acceptance: retrieve committed authorities and use Toolbox probes before archaeology; distinguish synchronous progressive execution from staged jobs; freeze registry, source-view, isolation, ceiling, cancellation, cycle/progress, transaction, diagnostic, and no-path invariants; split safe implementation leaves; synchronize roadmap, architecture, Knowledge, live docs, and mdBook without changing executable or public behavior.
+  Verification tier: `focused`
+  Focused checks: exact Perl lowering/resolve probes; focused Rust and Dart staged-registry consumers; typed-source, recognition-transaction, capability, language, task metadata, Knowledge, mdBook, bounded-history, README, memory, all doctrines, no-production-diff, and exact diff checks.
+  Canonical trigger: `none` — behavior-free audit and documentation/task split only; no executable governance, CI topology, runtime, format, admission, dependency/toolchain, storage/path/doctrine infrastructure, or public surface changes.
+  Checklist: [x] clean activation/task ownership; [x] Knowledge/ADR/Toolbox retrieval; [x] five-registry/loader/runtime audit; [x] progressive/staged and authority freeze; [x] corrective/neutral/backend/recurring/public split; [x] roadmap/ADR/architecture/Knowledge/book/live synchronization; [x] focused verification; [x] atomic commit/clean handoff.
+  Evidence: committed registry blobs Perl `09e5008e`, Rust `b9033595`, Dart `8eb8b7e1`, Julia `c6c7b10f`, Lua `b128a9f8`; exact Perl unsupported-helper/ordinary-spec rejection probes; Rust staged registry 1/1 and Dart 5/5; typed 10/4/126, recognition 137/250/58, capability 80/0/0, language 250/105+1/126; task 535 IDs, book 78/15,000 KiB, Knowledge 842/7,124, bounded histories, README/memory, all nine doctrines, no production diff, no managed-run residue, and exact diff checks pass.
+  Commit: `FUTURE-PARITY-BACKLOG.14.6.0 - audit progressive span dispatch`
+- ID: `FUTURE-PARITY-BACKLOG.14.6.0.1`
+  Status: `pending`; Goal: Correct the typed-source transaction-composition ledger and reject the stale project-status transaction/observation projection without changing transaction or progressive behavior; Depends on: `.14.6.0`; Verification tier: focused.
+- ID: `FUTURE-PARITY-BACKLOG.14.6.1`
+  Status: `pending`; Goal: Select the private authored progressive form and add an executable backend-neutral contract/checker for contiguous direct-span dispatch, source-view rebasing, pre-registered identity/top rule, isolated child state, detached result, ceilings, cancellation, cycle/progress, transaction-effect rejection, diagnostics, and no implicit loading; Depends on: `.14.6.0.1`.
+- ID: `FUTURE-PARITY-BACKLOG.14.6.2`
+  Status: `pending`; Goal: Split, implement, and privately admit the Perl reference through exact RED, registry/source-view authority, live/generated carriers, and ordinary/canonical admission; Depends on: `.14.6.1`.
+- ID: `FUTURE-PARITY-BACKLOG.14.6.3`
+  Status: `pending`; Goal: Split, implement, and privately admit Rust parity across native, reconstructed, generated-plan, and independently compiled emitted carriers; Depends on: `.14.6.2`.
+- ID: `FUTURE-PARITY-BACKLOG.14.6.4`
+  Status: `pending`; Goal: Split, implement, and privately admit Dart parity across native, reconstructed, generated-plan, and independently analyzed emitted carriers; Depends on: `.14.6.3`.
+- ID: `FUTURE-PARITY-BACKLOG.14.6.5`
+  Status: `pending`; Goal: Split, implement, and privately admit Julia parity across native, reconstructed, generated-plan, and independently loaded emitted-module carriers; Depends on: `.14.6.4`.
+- ID: `FUTURE-PARITY-BACKLOG.14.6.6`
+  Status: `pending`; Goal: Split one Lua-5.1-compatible implementation and admit it independently on PUC Lua and LuaJIT across all four carriers; Depends on: `.14.6.5`.
+- ID: `FUTURE-PARITY-BACKLOG.14.6.7`
+  Status: `pending`; Goal: Bind one exact five-source/six-runtime recurring proof and promote only typed `progressive_span_dispatch`; Depends on: `.14.6.6`.
+- ID: `FUTURE-PARITY-BACKLOG.14.6.8`
+  Status: `pending`; Goal: Close progressive public projection/no-drift without a public facade/schema/CLI/README admission or consuming combined `.14.8`; Depends on: `.14.6.7`.
 - ID: `FUTURE-PARITY-BACKLOG.14.7`
   Status: `pending`
   Goal: Specify and implement staged AST enrichment where later loaded specs parse selected exact spans returned by an earlier AST level and stitch typed results through deterministic parse jobs.

@@ -56,12 +56,12 @@ general style. This documentation-only slice changes no parser or runtime behavi
 The backend-neutral typed source-location contract is complete under `FUTURE-PARITY-BACKLOG.14.1.1`. Its
 independent checker passes 3 sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation,
 8 transaction, and 33 recursive-observation transitions, 6 detached recursive observations, 4 structural cases,
-92 current helper projections, 33 diagnostics, and 114 rejected mutations.
+92 current helper projections, 33 diagnostics, and 126 rejected mutations.
 
-Nine of 14 rollout legs are complete and 5 remain pending. The neutral contract, public linked-rule structure,
+Ten of 14 rollout legs are complete and 4 remain pending. The neutral contract, public linked-rule structure,
 unchanged neutral/public recomposition, and all six runtime targets are complete. Their internal authorities and
 all 92 helper projections plus 7 aliases are admitted without changing public results or their established scalar,
-byte, or code-unit mark and cursor behavior. Exact recursive-observation recurrence is also complete.
+byte, or code-unit mark and cursor behavior. Exact recursive observation and lossless-gap composition are complete.
 
 Rust's exact four-test consumer now runs under ordinary Cargo discovery and as a required canonical-CI leg. It
 proves the immutable value core and projection boundary across native, reconstructed, and generated-plan execution;
@@ -107,8 +107,9 @@ An unchanged `FUTURE-PARITY-BACKLOG.14.2.7` recomposition reruns that complete a
 value/helper implementation slice `.14.2`. This is a project-state closure, not a new language surface: the six
 admitted runtimes, helper results, schemas, and 8-complete/6-pending rollout remain unchanged.
 
-Public typed values, recursive-observation public no-drift, span-native progressive/staged dispatch, and the
-remaining public authored surfaces remain future work. Exact transaction syntax is ratified:
+Public typed values, span-native progressive/staged dispatch, and the remaining public authored surfaces remain
+future work; recursive-observation public projection/no-drift is current without a public API. Exact transaction
+syntax is ratified:
 `recognition_checkpoint()`, `recognize_once(token, call(Rule))`, `recognition_commit(token)`, and
 `recognition_rollback(token)`. Match is a strict boolean and the falsey-safe payload remains staged until commit.
 Their neutral artifact/checker is executable at 133 current + 4 dedicated ActionIR rows, 250 call rows, and 58
@@ -168,6 +169,22 @@ No public helper, facade, descriptor/generated version, result schema, semantic/
 is current. Canonical `.14.5.1` signoff passes nine doctrines, repository containment and relocation, both
 66-case CLI environments, RAM at 51%, Phase 0 at 1,031/1,031 in 729 seconds, and the exact six-runtime opt-in;
 parent `.14.5` is closed and progressive span dispatch `.14.6` is next.
+
+Behavior-free audit `.14.6.0` and ADR `0080` now fix that “next” boundary exactly. Active ActionIR lowers both
+`parse_job(...)` and `dispatch_span(...)` as unsupported helpers. Each backend's current staged registry accepts
+only the built-in `actionir-body.spec` / `action_block` function-body adapter; a normal `.spec` path is rejected,
+and the legacy job span carries neither typed source authority nor cancellation/policy ceilings. Progressive work
+therefore starts with an immutable host-seeded entry for an already compiled parser, never an in-parse loader.
+
+The child will run synchronously over one contiguous direct span. Its internal registers are view-local, but typed
+positions/spans and diagnostics rebase to the original source identity and global scalar offsets. Parent state is
+isolated, capabilities intersect, ceilings only narrow, cancellation/budget cannot reset, and a repeated parser/
+top/source chain must strictly shrink its span. Correction `.14.6.0.1` first repairs the typed ledger's missed
+transaction-safety promotion; neutral `.1`, backend `.2-.6`, recurrence `.7`, and public no-drift `.8` follow.
+Derived text/AST stitching remains staged `.14.7`; combined program-wide no-drift remains `.14.8`.
+The behavior-free audit is focused-signoff-complete for atomic 257: exact Perl rejection probes, Rust 1/1, Dart
+5/5, typed 10/4/126, recognition 137/250/58, capability 80/0/0, language 250/105+1/126, Knowledge, the rendered
+book, bounded documentation, and all nine doctrines pass without production or public-surface movement.
 Definitive recurrence signoff passes all eight doctrines, repository containment/relocation, CLI 66/66 in both
 option environments, RAM 62%, Phase 0 1,031/1,031 in 723 seconds, and Perl/Rust/Dart 7 each, Julia 30, and Lua
 43 per ABI plus all support ledgers through the exact local-CI success marker.
