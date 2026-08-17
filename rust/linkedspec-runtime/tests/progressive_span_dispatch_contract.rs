@@ -1,31 +1,38 @@
 #![allow(unexpected_cfgs)]
 #![cfg(linkedspec_progressive_span_dispatch_red)]
 
-//! FUTURE-PARITY-BACKLOG.14.6.3.0 — dormant Rust progressive-dispatch contract.
+//! FUTURE-PARITY-BACKLOG.14.6.3.2 — dormant Rust progressive-dispatch carrier contract.
 //!
 //! Ordinary Cargo discovery compiles this target with zero active tests. Before admission, run
-//! the exact final-path RED with:
+//! the exact dormant GREEN with:
 //!
 //! `RUSTFLAGS='--cfg linkedspec_progressive_span_dispatch_red' bash tools/run_cargo_local.sh test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test progressive_span_dispatch_contract`.
 //!
-//! This consumer freezes the neutral inventory and all four final Rust carriers, but changes no
-//! production behavior or canonical route. The sole intentional failure is the missing dedicated
-//! `progressive_dispatch_span` expression node; generic helper fallback is not an implementation.
+//! This consumer freezes the neutral inventory and proves all four final Rust carriers, while
+//! remaining absent from ordinary and canonical discovery until the admission leaf.
 
 use linkedspec_core::compiler::compile;
-use linkedspec_core::expr::{Arg, Expr};
+use linkedspec_core::expr::{Expr, Stmt};
 use linkedspec_core::types::CompiledSpec;
 use linkedspec_core::validation::validate;
+use linkedspec_runtime::bounded_child_parse_authority::{
+    ProgressiveCancellationToken, ProgressiveCeilings, ProgressiveClock,
+    ProgressiveCompiledAuthority, ProgressiveExecutionSeed, ProgressiveInvocationConfig,
+    ProgressiveRegistry, ProgressiveRegistryEntry, ProgressiveSourceDetail,
+};
 use linkedspec_runtime::engine::{Engine, ExecutionOptions};
 use linkedspec_runtime::source_emitter::{
-    GENERATED_SOURCE_CONTRACT, GeneratedPlanRow, emit_rust_source_v2, execute_generated_parser_v2,
+    GENERATED_SOURCE_CONTRACT, GeneratedPlanRow, emit_rust_source_v2,
+    execute_generated_parser_v2_with_options,
 };
 use linkedspec_runtime::spec_parser::parse_spec_with_user_functions;
 use linkedspec_runtime::staged_parser_registry::execute_parse_job;
 use serde_json::{Value, json};
+use std::collections::BTreeMap;
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::process::Command;
+use std::sync::Arc;
 use std::time::{SystemTime, UNIX_EPOCH};
 
 const CONTRACT_SOURCE: &str = include_str!(concat!(
@@ -50,6 +57,65 @@ const PLAN: &[GeneratedPlanRow] = &[GeneratedPlanRow {
     label: "Top",
     family: "default",
 }];
+const EXPECTED_VALUE: &str = r#"{"kind":"identifier","text":"a"}"#;
+const EMITTED_AUTHORITY_SETUP: &str = r#"
+use linkedspec_runtime::bounded_child_parse_authority::{ProgressiveCancellationToken, ProgressiveCeilings, ProgressiveClock, ProgressiveCompiledAuthority, ProgressiveExecutionSeed, ProgressiveInvocationConfig, ProgressiveRegistry, ProgressiveRegistryEntry, ProgressiveSourceDetail};
+use linkedspec_runtime::engine::ExecutionOptions;
+use serde_json::json;
+use std::collections::BTreeMap;
+use std::sync::Arc;
+
+fn execution_options(input: &str) -> ExecutionOptions {
+    let callback: ProgressiveCompiledAuthority = Arc::new(|request, _invocation| {
+        assert_eq!(request.parser_id(), "expr-v1");
+        assert_eq!(request.top_rule(), "Expr");
+        assert_eq!(request.fingerprint(), "sha256:1111111111111111111111111111111111111111111111111111111111111111");
+        Ok(json!({
+            "kind": "identifier",
+            "text": request.source_view().text().expect("live source view"),
+        }))
+    });
+    let ceilings = ProgressiveCeilings::new(
+        ProgressiveSourceDetail::Text,
+        vec!["deterministic".to_owned(), "fail-only".to_owned()],
+        100,
+        100,
+        4096,
+    ).expect("progressive ceilings");
+    let entry = ProgressiveRegistryEntry::new(
+        "expr-v1",
+        callback,
+        "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        vec!["Expr".to_owned()],
+        vec!["parse".to_owned()],
+        ceilings.clone(),
+    ).expect("progressive entry");
+    let registry = ProgressiveRegistry::new(vec![entry]).expect("progressive registry");
+    let token = ProgressiveCancellationToken::new();
+    let invocation = ProgressiveInvocationConfig {
+        sources: BTreeMap::from([("input".to_owned(), input.to_owned())]),
+        source_id: "input".to_owned(),
+        cancellation_token: token,
+        clock: ProgressiveClock::new(|| 0),
+        deadline_tick: 100,
+        remaining_steps: 100,
+        max_depth: 8,
+        max_calls: 16,
+        active_chain: Vec::new(),
+        total_calls: 0,
+    };
+    let seed = ProgressiveExecutionSeed::new(
+        registry,
+        invocation,
+        vec!["parse".to_owned()],
+        vec!["parse".to_owned()],
+        ceilings,
+        ProgressiveSourceDetail::None,
+        1,
+    );
+    ExecutionOptions::new().with_bounded_child_parse_authority(seed)
+}
+"#;
 
 fn contract() -> Value {
     serde_json::from_str(CONTRACT_SOURCE).expect("progressive span-dispatch contract JSON")
@@ -76,8 +142,69 @@ fn compile_source() -> CompiledSpec {
     compile(&parsed).expect("compile exact progressive span-dispatch fixture")
 }
 
+fn try_compile_source(source: &str) -> Result<CompiledSpec, String> {
+    let parsed = parse_spec_with_user_functions(source).map_err(|error| error.to_string())?;
+    validate(&parsed).map_err(|error| error.to_string())?;
+    compile(&parsed).map_err(|error| error.to_string())
+}
+
 fn occurrences(haystack: &str, needle: &str) -> usize {
     haystack.match_indices(needle).count()
+}
+
+fn execution_options(input: &str) -> ExecutionOptions {
+    let callback: ProgressiveCompiledAuthority = Arc::new(|request, _invocation| {
+        assert_eq!(request.parser_id(), "expr-v1");
+        assert_eq!(request.top_rule(), "Expr");
+        assert_eq!(
+            request.fingerprint(),
+            "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        );
+        Ok(json!({
+            "kind": "identifier",
+            "text": request.source_view().text().expect("live source view"),
+        }))
+    });
+    let ceilings = ProgressiveCeilings::new(
+        ProgressiveSourceDetail::Text,
+        vec!["deterministic".to_owned(), "fail-only".to_owned()],
+        100,
+        100,
+        4096,
+    )
+    .expect("progressive ceilings");
+    let entry = ProgressiveRegistryEntry::new(
+        "expr-v1",
+        callback,
+        "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        vec!["Expr".to_owned()],
+        vec!["parse".to_owned()],
+        ceilings.clone(),
+    )
+    .expect("progressive entry");
+    let registry = ProgressiveRegistry::new(vec![entry]).expect("progressive registry");
+    let invocation = ProgressiveInvocationConfig {
+        sources: BTreeMap::from([("input".to_owned(), input.to_owned())]),
+        source_id: "input".to_owned(),
+        cancellation_token: ProgressiveCancellationToken::new(),
+        clock: ProgressiveClock::new(|| 0),
+        deadline_tick: 100,
+        remaining_steps: 100,
+        max_depth: 8,
+        max_calls: 16,
+        active_chain: Vec::new(),
+        total_calls: 0,
+    };
+    let seed = ProgressiveExecutionSeed::new(
+        registry,
+        invocation,
+        vec!["parse".to_owned()],
+        vec!["parse".to_owned()],
+        ceilings,
+        ProgressiveSourceDetail::None,
+        1,
+    );
+    ExecutionOptions::new().with_bounded_child_parse_authority(seed)
 }
 
 struct EmittedProject {
@@ -108,11 +235,14 @@ impl Drop for EmittedProject {
 }
 
 #[test]
-fn final_path_reaches_only_the_missing_dedicated_progressive_node() {
+fn final_path_uses_one_dedicated_progressive_node_across_four_routes() {
     let neutral = contract();
     assert_eq!(neutral["contract_id"], CONTRACT_ID);
     assert_eq!(neutral["format"], 1);
-    assert_eq!(neutral["status"], "perl_complete_other_backends_pending");
+    assert_eq!(
+        neutral["status"],
+        "perl_complete_rust_carriers_dormant_other_backends_pending"
+    );
     assert_eq!(
         neutral["expected_counts"],
         json!({
@@ -123,12 +253,13 @@ fn final_path_reaches_only_the_missing_dedicated_progressive_node() {
             "cancellation_cases": 6,
             "chain_cases": 8,
             "execution_cases": 4,
-            "backend_guard_groups": 4,
-            "backend_guard_paths": 14,
+            "rust_carrier_paths": 9,
+            "backend_guard_groups": 3,
+            "backend_guard_paths": 11,
             "outward_guard_paths": 10,
             "diagnostics": 26,
             "rollout_legs": 9,
-            "mutations": 86,
+            "mutations": 91,
         })
     );
     assert_eq!(
@@ -275,67 +406,131 @@ fn final_path_reaches_only_the_missing_dedicated_progressive_node() {
     assert!(staged_error.contains("parser_spec_id=expr-v1"));
     assert!(staged_error.contains("unsupported parser spec id 'expr-v1'"));
 
+    for (source, code) in [
+        (
+            r#"Top:: I { span = hash("source_id", "input", "start", 0, "end", 1, "provenance", "authored"); value = dispatch_span(parser_id, "Expr", span) } /never/"#,
+            "progressive_parser_identity_literal_required",
+        ),
+        (
+            r#"Top:: I { span = hash("source_id", "input", "start", 0, "end", 1, "provenance", "authored"); value = dispatch_span("Expr/V1", "Expr", span) } /never/"#,
+            "progressive_parser_identity_invalid",
+        ),
+        (
+            r#"Top:: I { span = hash("source_id", "input", "start", 0, "end", 1, "provenance", "authored"); value = dispatch_span("expr-v1", top_rule, span) } /never/"#,
+            "progressive_top_rule_literal_required",
+        ),
+        (
+            r#"Top:: I { span = hash("source_id", "input", "start", 0, "end", 1, "provenance", "authored"); value = dispatch_span("expr-v1", "Bad-Rule", span) } /never/"#,
+            "progressive_top_rule_invalid",
+        ),
+        (
+            r#"Top:: I { value = dispatch_span("expr-v1", "Expr", hash("source_id", "input")) } /never/"#,
+            "progressive_span_binding_required",
+        ),
+        (
+            r#"Top:: I { span = hash("source_id", "input", "start", 0, "end", 1, "provenance", "authored"); return(cat(dispatch_span("expr-v1", "Expr", span))) } /never/"#,
+            "progressive_span_binding_required",
+        ),
+        (
+            r#"Top:: I { tx = recognition_checkpoint(); matched = recognize_once(tx, call(Child)); recognition_rollback(tx); return(matched) }
+Child:: I { span = hash("source_id", "input", "start", 0, "end", 1, "provenance", "authored"); value = dispatch_span("expr-v1", "Expr", span); return(value) } /never/"#,
+            "recognition_effect_forbidden:parser_registry_or_staged_dispatch",
+        ),
+    ] {
+        let error = try_compile_source(source).expect_err("invalid progressive form must reject");
+        assert!(error.contains(code), "expected {code}, got {error}");
+    }
+
     let compiled = compile_source();
     let top = compiled.find("Top").expect("compiled Top rule");
     let preamble = top.preamble.as_ref().expect("progressive preamble");
-    let Expr::AssignScalar { name, value } = &preamble.statements[1].expr else {
-        panic!("dispatch_span must currently remain one generic scalar assignment");
+    let Expr::ProgressiveDispatchSpan {
+        target,
+        parser_id,
+        top_rule,
+        span,
+    } = &preamble.statements[1].expr
+    else {
+        panic!("dispatch_span must compile to one dedicated expression");
     };
-    assert_eq!(name, "value");
-    let Expr::Call { name, args } = value.as_ref() else {
-        panic!("dispatch_span must currently remain one generic helper call");
-    };
-    assert_eq!(name, "dispatch_span");
-    assert_eq!(args.len(), 3);
-    assert!(matches!(
-        &args[0],
-        Arg::Positional(Expr::StringLiteral { value }) if value == "expr-v1"
-    ));
-    assert!(matches!(
-        &args[1],
-        Arg::Positional(Expr::StringLiteral { value }) if value == "Expr"
-    ));
-    assert!(matches!(
-        &args[2],
-        Arg::Positional(Expr::Variable { name }) if name == "span"
-    ));
+    assert_eq!(target, "value");
+    assert_eq!(parser_id, "expr-v1");
+    assert_eq!(top_rule, "Expr");
+    assert_eq!(span, "span");
 
     let encoded = serde_json::to_string(&compiled).expect("serialize progressive fixture");
-    assert_eq!(occurrences(&encoded, r#""name":"dispatch_span""#), 1);
-    assert!(!encoded.contains("progressive_dispatch_span"));
+    assert_eq!(occurrences(&encoded, r#""name":"dispatch_span""#), 0);
+    assert_eq!(
+        occurrences(&encoded, r#""kind":"progressive_dispatch_span""#),
+        1
+    );
     assert!(!encoded.contains("PROGRESSIVE_DISPATCH_SPAN"));
 
+    let mut defensive = compiled.clone();
+    defensive
+        .rules
+        .iter_mut()
+        .find(|rule| rule.label == "Top")
+        .expect("defensive Top rule")
+        .preamble
+        .as_mut()
+        .expect("defensive preamble")
+        .statements
+        .insert(
+            0,
+            Stmt {
+                expr: Expr::AssignScalar {
+                    name: "tx".to_owned(),
+                    value: Box::new(Expr::RecognitionCheckpoint),
+                },
+            },
+        );
+    let defensive_error = Engine::new(defensive)
+        .execute_value("abc", &execution_options("abc"))
+        .expect_err("live recognition transaction must reject progressive dispatch");
+    assert!(defensive_error.contains("progressive_transaction_forbidden"));
+
+    let expected: Value = serde_json::from_str(EXPECTED_VALUE).expect("expected child value");
     assert_eq!(
         Engine::new(compiled.clone())
-            .execute_value("abc", &ExecutionOptions::new())
-            .expect("native generic-fallback execution"),
-        Value::Null
+            .execute_value("abc", &execution_options("abc"))
+            .expect("native progressive execution"),
+        expected
     );
     let reconstructed: CompiledSpec =
         serde_json::from_str(&encoded).expect("reconstruct progressive fixture");
     assert_eq!(
         Engine::new(reconstructed)
-            .execute_value("abc", &ExecutionOptions::new())
-            .expect("reconstructed generic-fallback execution"),
-        Value::Null
+            .execute_value("abc", &execution_options("abc"))
+            .expect("reconstructed progressive execution"),
+        expected
     );
     assert_eq!(
-        execute_generated_parser_v2(
+        execute_generated_parser_v2_with_options(
             &encoded,
             PLAN,
             "abc",
             GENERATED_IDENTITY,
             GENERATED_SOURCE_CONTRACT,
+            &execution_options("abc"),
         )
-        .expect("generated-plan generic-fallback execution"),
-        Value::Null
+        .expect("generated-plan progressive execution"),
+        expected
     );
 
     let emitted = emit_rust_source_v2(&compiled, GENERATED_IDENTITY)
         .expect("emit progressive fixture source");
-    assert_eq!(occurrences(&emitted, r#"\"name\":\"dispatch_span\""#), 1);
-    assert!(!emitted.contains("progressive_dispatch_span"));
+    assert_eq!(occurrences(&emitted, r#"\"name\":\"dispatch_span\""#), 0);
+    assert_eq!(
+        occurrences(&emitted, r#"\"kind\":\"progressive_dispatch_span\""#),
+        1
+    );
     assert!(!emitted.contains("PROGRESSIVE_DISPATCH_SPAN"));
+    assert!(
+        !emitted
+            .contains("sha256:1111111111111111111111111111111111111111111111111111111111111111")
+    );
+    assert!(!emitted.contains("ProgressiveCompiledAuthority"));
     let project = EmittedProject::new();
     fs::write(
         project.root.join("Cargo.toml"),
@@ -347,9 +542,12 @@ fn final_path_reaches_only_the_missing_dedicated_progressive_node() {
     .expect("write emitted progressive manifest");
     fs::write(
         project.root.join("src/main.rs"),
-        format!(
-            "mod generated {{\n{emitted}\n}}\nfn main() {{ let value = generated::execute(\"abc\").expect(\"generated progressive RED\"); println!(\"{{}}\", value); }}\n"
-        ),
+        [
+            format!("mod generated {{\n{emitted}\n}}\n"),
+            EMITTED_AUTHORITY_SETUP.to_owned(),
+            "\nfn main() { let options = execution_options(\"abc\"); let value = generated::execute_with_options(\"abc\", &options).expect(\"generated progressive dispatch\"); println!(\"{}\", value); }\n".to_owned(),
+        ]
+        .concat(),
     )
     .expect("write emitted progressive main");
     let shared_target = Path::new(env!("CARGO_MANIFEST_DIR")).join("../target");
@@ -370,7 +568,7 @@ fn final_path_reaches_only_the_missing_dedicated_progressive_node() {
         String::from_utf8(child.stdout)
             .expect("UTF-8 emitted stdout")
             .trim(),
-        "null"
+        EXPECTED_VALUE
     );
 
     assert!(
@@ -378,8 +576,5 @@ fn final_path_reaches_only_the_missing_dedicated_progressive_node() {
         "the dormant Rust consumer must remain absent from canonical CI"
     );
 
-    assert!(
-        encoded.contains(r#""kind":"progressive_dispatch_span""#),
-        "LINKEDSPEC_PROGRESSIVE_SPAN_DISPATCH_RED: missing dedicated node=[PROGRESSIVE_DISPATCH_SPAN]; generic dispatch_span helper fallback is not an implementation"
-    );
+    assert!(encoded.contains(r#""kind":"progressive_dispatch_span""#));
 }

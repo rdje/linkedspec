@@ -1,15 +1,15 @@
 # MEMORY
 
-- activation_commit: `511865bc8055074ee4a2a7d019bb2712ec1517c0` — exact clean dormant-RED atomic-264 base
-  for task-tree-first `FUTURE-PARITY-BACKLOG.14.6.3.1`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.3.1 - add private Rust progressive dispatch authority`;
-  focused-signoff-complete for intended atomic 265 without node, carrier, rollout, or outward movement.
-- active_work_unit: none at the intended clean post-commit authority handoff; Rust carrier integration `.14.6.3.2` is next.
-- next_action: activate `FUTURE-PARITY-BACKLOG.14.6.3.2` task-tree-first from exact clean atomic 265, then integrate
-  only the dedicated private node and native, reconstructed, generated-plan, and compiled emitted-source carriers.
+- activation_commit: `58d39fe5cf481cee6fba9d3bb38ea0e1094fb569` — exact clean private-authority atomic-265 base
+  for task-tree-first `FUTURE-PARITY-BACKLOG.14.6.3.2`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.3.2 - add dormant Rust progressive dispatch carriers`;
+  canonical-signoff-complete for intended atomic 266 without admission, rollout, format, or outward movement.
+- active_work_unit: none at the intended clean post-commit carrier handoff; Rust admission `.14.6.3.3` is next.
+- next_action: activate `FUTURE-PARITY-BACKLOG.14.6.3.3` task-tree-first from exact clean atomic 266, then route the
+  exact unchanged consumer in canonical CI and promote only the Rust rollout row.
 - in_flight_uncommitted: none at the intended post-commit boundary; no background result remains to consume.
-- blockers: none. The private authority passes 4/4 opt-in tests over the exact neutral matrix and adversaries; the
-  final-path RED still fails only on the missing dedicated node, ordinary discovery is inert, and rollout is 2/9/86.
+- blockers: none. The exact four-route consumer is opt-in GREEN; ordinary/canonical discovery remains inert and
+  rollout is intentionally 2/9/91 until `.14.6.3.3` admission.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -37,9 +37,9 @@
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, recurrence/public no-drift 9/9, and
   classifies private progressive dispatch fail-closed at 138 ActionIR rows / 250 calls / 58 mutations.
-- current_future_direction: neutral `.14.6.1` freezes authority; Perl `.2` is admitted at 2/9/86; Rust `.3.1`
-  has private authority/core, while `.3.2-.3` exclusively own the exact four carriers and admission;
+- current_future_direction: neutral `.14.6.1` freezes authority; Perl `.2` is admitted; Rust `.3.1-.2` have private
+  authority plus four dormant carriers, while `.3.3` exclusively owns exact consumer admission and Rust rollout;
   other backends `.4-.6`, staged
   `.14.7`, and combined `.14.8` remain separate pending owners.
 - latest_bootstrap_read: 2026-08-17 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
-  review complete; Rust private authority `.14.6.3.1` is focused-signoff-complete and carrier integration `.3.2` is next.
+  review complete; Rust carrier integration `.14.6.3.2` is canonical-signoff-complete and admission `.3.3` is next.

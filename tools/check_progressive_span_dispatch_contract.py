@@ -32,7 +32,7 @@ AUTHORED_SURFACE = {
     ],
     "result": "one detached child payload returned as the expression value",
     "failure_policy": "fail_only; every dispatch or child failure propagates unchanged and no null, fallback, retry, or alternate parser is implied",
-    "availability": "private Perl runtime admitted; every other backend remains unavailable until its independent rollout row completes",
+    "availability": "private Perl runtime admitted; private Rust carriers implemented but dormant; every other backend remains unavailable until its independent rollout row completes",
 }
 
 POLICY = {
@@ -337,7 +337,7 @@ EXECUTION_CASES = [
 ]
 
 CURRENT_BOUNDARY = {
-    "status": "perl_admitted_other_backend_rows_pending",
+    "status": "perl_admitted_rust_carriers_dormant_other_backend_rows_pending",
     "typed_rollout": {
         "path": "capability_conformance/typed_source_location_contract.json",
         "leg": "progressive_span_dispatch",
@@ -357,16 +357,50 @@ CURRENT_BOUNDARY = {
         "registration_marker": "running exact Perl progressive span-dispatch admission consumer",
         "invocation": "PERL5LIB= prove -Iperl t/progressive_span_dispatch_perl_contract.t",
     },
+    "rust_carriers": {
+        "consumer_path": "rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs",
+        "cfg": "linkedspec_progressive_span_dispatch_red",
+        "canonical_discovery": "absent",
+        "marker_rows": [
+            {
+                "path": "rust/linkedspec-core/src/expr.rs",
+                "tokens": ["ProgressiveDispatchSpan", "progressive_dispatch_span", "dispatch_span"],
+            },
+            {
+                "path": "rust/linkedspec-core/src/compiler.rs",
+                "tokens": ["parser_registry_or_staged_dispatch", "validate_progressive_span_dispatch_contract"],
+            },
+            {
+                "path": "rust/linkedspec-core/src/callable_contract.rs",
+                "tokens": ["ProgressiveDispatchSpan"],
+            },
+            {
+                "path": "rust/linkedspec-runtime/src/bounded_child_parse_authority.rs",
+                "tokens": ["ProgressiveExecutionSeed", "ProgressiveExecutionState"],
+            },
+            {
+                "path": "rust/linkedspec-runtime/src/runtime.rs",
+                "tokens": ["dispatch_bounded_child_parse", "has_active_transaction"],
+            },
+            {
+                "path": "rust/linkedspec-runtime/src/recognition_transaction.rs",
+                "tokens": ["has_active_transaction"],
+            },
+            {
+                "path": "rust/linkedspec-runtime/src/engine.rs",
+                "tokens": ["with_bounded_child_parse_authority", "ProgressiveDispatchSpan"],
+            },
+            {
+                "path": "rust/linkedspec-runtime/src/source_emitter.rs",
+                "tokens": ["execute_generated_parser_v2_with_options", "execute_with_options"],
+            },
+            {
+                "path": "rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs",
+                "tokens": ["four_routes", "independently compiled", "progressive_dispatch_span"],
+            },
+        ],
+    },
     "backend_guard_groups": [
-        {
-            "backend": "rust",
-            "paths": [
-                "rust/linkedspec-core/src/callable_contract.rs",
-                "rust/linkedspec-core/src/expr.rs",
-                "rust/linkedspec-runtime/src/engine.rs",
-            ],
-            "forbidden_tokens": ["dispatch_span", "PROGRESSIVE_DISPATCH_SPAN"],
-        },
         {
             "backend": "dart",
             "paths": [
@@ -609,7 +643,7 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
     require(document["format"] == 1, "format drifted")
     require(document["contract_id"] == "linkedspec-progressive-span-dispatch-v1", "contract id drifted")
     require(document["task_owner"] == "FUTURE-PARITY-BACKLOG.14.6.1", "task owner drifted")
-    require(document["status"] == "perl_complete_other_backends_pending", "status drifted")
+    require(document["status"] == "perl_complete_rust_carriers_dormant_other_backends_pending", "status drifted")
     expected_counts = {
         "registry_entries": len(REGISTRY_ENTRIES),
         "sources": len(SOURCES),
@@ -618,6 +652,7 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
         "cancellation_cases": len(CANCELLATION_CASES),
         "chain_cases": len(CHAIN_CASES),
         "execution_cases": len(EXECUTION_CASES),
+        "rust_carrier_paths": len(CURRENT_BOUNDARY["rust_carriers"]["marker_rows"]),
         "backend_guard_groups": len(CURRENT_BOUNDARY["backend_guard_groups"]),
         "backend_guard_paths": sum(len(group["paths"]) for group in CURRENT_BOUNDARY["backend_guard_groups"]),
         "outward_guard_paths": len(CURRENT_BOUNDARY["outward_guard"]["paths"]),
@@ -714,6 +749,14 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
         require(recognition["action_ir_effect_rows"][effect] == effect_assertion["action_ir_rows"], "current ActionIR dispatch rows drifted")
         require(recognition["canonical_call_effect_rows"][effect] == effect_assertion["canonical_call_rows"], "current callable dispatch rows drifted")
 
+        rust_carriers = CURRENT_BOUNDARY["rust_carriers"]
+        for marker_row in rust_carriers["marker_rows"]:
+            carrier_path = ROOT / marker_row["path"]
+            require(carrier_path.is_file(), f"Rust carrier path is missing: {marker_row['path']}")
+            carrier = carrier_path.read_text(encoding="utf-8")
+            for token in marker_row["tokens"]:
+                require(token in carrier, f"Rust carrier is missing {token}: {marker_row['path']}")
+
         for group in CURRENT_BOUNDARY["backend_guard_groups"]:
             for relative_path in group["paths"]:
                 guarded_path = ROOT / relative_path
@@ -746,6 +789,15 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
         require(ci.count(admission["syntax_invocation"]) == 1, "canonical CI must syntax-check the Perl progressive consumer exactly once")
         require(ci.count(f'log "{admission["registration_marker"]}"') == 1, "canonical Perl progressive admission marker missing or duplicated")
         require(ci.count(admission["invocation"]) == 1, "canonical Perl progressive admission invocation missing or duplicated")
+        require(
+            ci.count(rust_carriers["consumer_path"]) == 0,
+            "dormant Rust progressive carrier consumer entered canonical discovery prematurely",
+        )
+        rust_consumer = (ROOT / rust_carriers["consumer_path"]).read_text(encoding="utf-8")
+        require(
+            rust_consumer.count(f"cfg({rust_carriers['cfg']})") == 1,
+            "dormant Rust progressive carrier cfg is missing or duplicated",
+        )
 
 
 def set_value(path: list[Any], value: Any) -> Callable[[dict[str, Any]], None]:
@@ -842,6 +894,11 @@ MUTATIONS: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
     ("current_recognition_classification", set_value(["current_boundary", "recognition_effect", "classification"], "allowed")),
     ("current_perl_admission_consumer", set_value(["current_boundary", "perl_admission", "consumer_path"], "t/wrong.t")),
     ("current_perl_admission_marker", set_value(["current_boundary", "perl_admission", "registration_marker"], "wrong")),
+    ("current_rust_consumer", set_value(["current_boundary", "rust_carriers", "consumer_path"], "rust/wrong.rs")),
+    ("current_rust_cfg", set_value(["current_boundary", "rust_carriers", "cfg"], "wrong_cfg")),
+    ("current_rust_node_marker", set_value(["current_boundary", "rust_carriers", "marker_rows", 0, "tokens", 0], "WrongNode")),
+    ("current_rust_authority_marker", set_value(["current_boundary", "rust_carriers", "marker_rows", 3, "tokens", 0], "WrongAuthority")),
+    ("current_rust_generated_options_marker", set_value(["current_boundary", "rust_carriers", "marker_rows", 7, "tokens", 0], "wrong_options")),
     ("current_backend_guard_path", set_value(["current_boundary", "backend_guard_groups", 0, "paths", 0], "wrong.pm")),
     ("current_backend_guard_token", set_value(["current_boundary", "backend_guard_groups", 0, "forbidden_tokens", 0], "parse_job")),
     ("current_outward_guard_path", set_value(["current_boundary", "outward_guard", "paths", 0], "wrong.pm")),

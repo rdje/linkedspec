@@ -128,6 +128,14 @@ pub enum Expr {
     /// A helper function call: `push(results, retv)`
     #[serde(rename = "call")]
     Call { name: String, args: Vec<Arg> },
+    /// Execute one host-authorized child parser over a direct span binding.
+    #[serde(rename = "progressive_dispatch_span")]
+    ProgressiveDispatchSpan {
+        target: String,
+        parser_id: String,
+        top_rule: String,
+        span: String,
+    },
     /// Create one rule-local recognition transaction token.
     #[serde(rename = "recognition_checkpoint")]
     RecognitionCheckpoint,
@@ -307,6 +315,7 @@ impl Expr {
                 in_args(args)
             }
             Expr::RecognitionCheckpoint
+            | Expr::ProgressiveDispatchSpan { .. }
             | Expr::RecognizeOnce { .. }
             | Expr::ObserveRecognition { .. }
             | Expr::RecognitionCommit { .. }
@@ -372,6 +381,7 @@ impl Expr {
         };
         match self {
             Expr::RecognitionCheckpoint
+            | Expr::ProgressiveDispatchSpan { .. }
             | Expr::RecognizeOnce { .. }
             | Expr::ObserveRecognition { .. }
             | Expr::RecognitionCommit { .. }
@@ -453,6 +463,15 @@ impl std::fmt::Display for Expr {
                 write!(f, ")")
             }
             Expr::RecognitionCheckpoint => f.write_str("recognition_checkpoint()"),
+            Expr::ProgressiveDispatchSpan {
+                target,
+                parser_id,
+                top_rule,
+                span,
+            } => write!(
+                f,
+                "{target} = dispatch_span({parser_id:?}, {top_rule:?}, {span})"
+            ),
             Expr::RecognizeOnce { token, rule } => {
                 write!(f, "recognize_once({token}, call({rule}))")
             }
@@ -726,6 +745,24 @@ fn is_reserved_callable_parameter(name: &str) -> bool {
 }
 
 // ── Recursive-descent parser ──
+
+fn valid_progressive_parser_id(value: &str) -> bool {
+    value.as_bytes().first().is_some_and(u8::is_ascii_lowercase)
+        && value.split(['.', '_', ':', '-']).all(|segment| {
+            !segment.is_empty()
+                && segment
+                    .bytes()
+                    .all(|byte| byte.is_ascii_lowercase() || byte.is_ascii_digit())
+        })
+}
+
+fn valid_progressive_top_rule(value: &str) -> bool {
+    let mut bytes = value.bytes();
+    bytes
+        .next()
+        .is_some_and(|byte| byte.is_ascii_alphabetic() || byte == b'_')
+        && bytes.all(|byte| byte.is_ascii_alphanumeric() || byte == b'_')
+}
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum BlockParseMode {
@@ -1429,6 +1466,55 @@ impl<'a> Parser<'a> {
             return Ok(None);
         }
         let value = self.parse_expr()?;
+        if let Expr::Call { name: helper, args } = &value
+            && helper == "dispatch_span"
+        {
+            let parser_id = match args.first() {
+                Some(Arg::Positional(Expr::StringLiteral { value })) => value.clone(),
+                _ => {
+                    return Err(
+                        "LINKEDSPEC_PROGRESSIVE_SPAN_DISPATCH_ERROR:progressive_parser_identity_literal_required"
+                            .to_owned(),
+                    );
+                }
+            };
+            if !valid_progressive_parser_id(&parser_id) {
+                return Err(
+                    "LINKEDSPEC_PROGRESSIVE_SPAN_DISPATCH_ERROR:progressive_parser_identity_invalid"
+                        .to_owned(),
+                );
+            }
+            let top_rule = match args.get(1) {
+                Some(Arg::Positional(Expr::StringLiteral { value })) => value.clone(),
+                _ => {
+                    return Err(
+                        "LINKEDSPEC_PROGRESSIVE_SPAN_DISPATCH_ERROR:progressive_top_rule_literal_required"
+                            .to_owned(),
+                    );
+                }
+            };
+            if !valid_progressive_top_rule(&top_rule) {
+                return Err(
+                    "LINKEDSPEC_PROGRESSIVE_SPAN_DISPATCH_ERROR:progressive_top_rule_invalid"
+                        .to_owned(),
+                );
+            }
+            let span = match args.get(2) {
+                Some(Arg::Positional(Expr::Variable { name })) if args.len() == 3 => name.clone(),
+                _ => {
+                    return Err(
+                        "LINKEDSPEC_PROGRESSIVE_SPAN_DISPATCH_ERROR:progressive_span_binding_required"
+                            .to_owned(),
+                    );
+                }
+            };
+            return Ok(Some(Expr::ProgressiveDispatchSpan {
+                target: name,
+                parser_id,
+                top_rule,
+                span,
+            }));
+        }
         Ok(Some(Expr::AssignScalar {
             name,
             value: Box::new(value),

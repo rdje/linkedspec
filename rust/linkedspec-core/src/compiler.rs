@@ -58,6 +58,7 @@ pub fn compile(spec: &SpecFile) -> Result<CompiledSpec> {
     resolve_compiled_regex_selectors(&mut compiled)?;
     build_dependency_regex_map(&mut compiled)?;
     validate_recursive_observation_contract(&compiled)?;
+    validate_progressive_span_dispatch_contract(&compiled)?;
     validate_compiled_regex_slot_identities(&compiled)?;
     Ok(compiled)
 }
@@ -233,6 +234,7 @@ fn compile_with_events(spec: &SpecFile, trace: &mut TraceEmitter) -> Result<Comp
 #[derive(Default)]
 struct RecognitionEffectFacts {
     observes: bool,
+    progressive_dispatch: bool,
     calls: Vec<String>,
     attempts: Vec<String>,
 }
@@ -291,6 +293,7 @@ fn visit_expr(
             Ok(())
         }
         Expr::RecognitionCheckpoint
+        | Expr::ProgressiveDispatchSpan { .. }
         | Expr::RecognizeOnce { .. }
         | Expr::ObserveRecognition { .. }
         | Expr::RecognitionCommit { .. }
@@ -302,6 +305,28 @@ fn visit_expr(
         | Expr::RegexLiteral { .. }
         | Expr::Undef => Ok(()),
     }
+}
+
+/// Reject every generic spelling that escaped the exclusive statement parser.
+fn validate_progressive_span_dispatch_contract(spec: &CompiledSpec) -> Result<()> {
+    let mut validate = |expr: &Expr| {
+        if matches!(expr, Expr::Call { name, .. } if name == "dispatch_span") {
+            return Err(LinkedSpecError::Compile(
+                "LINKEDSPEC_PROGRESSIVE_SPAN_DISPATCH_ERROR:progressive_span_binding_required"
+                    .to_owned(),
+            ));
+        }
+        Ok(())
+    };
+    for rule in &spec.rules {
+        for block in rule_blocks(rule) {
+            visit_block(block, &mut validate)?;
+        }
+    }
+    for function in &spec.functions {
+        visit_block(&function.body, &mut validate)?;
+    }
+    Ok(())
 }
 
 fn visit_expr_args(
@@ -367,22 +392,27 @@ fn rule_blocks(rule: &CompiledRule) -> impl Iterator<Item = &CodeBlock> {
     )
 }
 
-fn rule_reaches_observation(
+fn rule_reaches_forbidden_transaction_effect(
     node: &str,
     facts: &std::collections::BTreeMap<String, RecognitionEffectFacts>,
     visited: &mut std::collections::BTreeSet<String>,
-) -> bool {
+) -> Option<&'static str> {
     if !visited.insert(node.to_owned()) {
-        return false;
+        return None;
     }
     let Some(current) = facts.get(node) else {
-        return false;
+        return None;
     };
-    current.observes
-        || current
-            .calls
-            .iter()
-            .any(|callee| rule_reaches_observation(callee, facts, visited))
+    if current.observes {
+        return Some("binding_write");
+    }
+    if current.progressive_dispatch {
+        return Some("parser_registry_or_staged_dispatch");
+    }
+    current
+        .calls
+        .iter()
+        .find_map(|callee| rule_reaches_forbidden_transaction_effect(callee, facts, visited))
 }
 
 /// Validate the dedicated static observation operand and its closed transaction effect.
@@ -412,6 +442,9 @@ fn validate_recursive_observation_contract(spec: &CompiledSpec) -> Result<()> {
                             ));
                         }
                         current.observes = true;
+                    }
+                    Expr::ProgressiveDispatchSpan { .. } => {
+                        current.progressive_dispatch = true;
                     }
                     Expr::RecognizeOnce { rule: callee, .. } => {
                         current.attempts.push(format!("rule:{callee}"));
@@ -448,15 +481,14 @@ fn validate_recursive_observation_contract(spec: &CompiledSpec) -> Result<()> {
 
     for current in facts.values() {
         for attempted_node in &current.attempts {
-            if rule_reaches_observation(
+            if let Some(effect) = rule_reaches_forbidden_transaction_effect(
                 attempted_node,
                 &facts,
                 &mut std::collections::BTreeSet::new(),
             ) {
-                return Err(LinkedSpecError::Compile(
-                    "LINKEDSPEC_RECOGNITION_TRANSACTION_ERROR:recognition_effect_forbidden:binding_write"
-                        .to_owned(),
-                ));
+                return Err(LinkedSpecError::Compile(format!(
+                    "LINKEDSPEC_RECOGNITION_TRANSACTION_ERROR:recognition_effect_forbidden:{effect}"
+                )));
             }
         }
     }
@@ -637,6 +669,7 @@ fn is_fail_closed_actionir_error(error: &str) -> bool {
     error.contains("LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:")
         || error.contains("LINKEDSPEC_SOURCE_LOCATION_ERROR:")
         || error.contains("LINKEDSPEC_RECOGNITION_TRANSACTION_ERROR:")
+        || error.contains("LINKEDSPEC_PROGRESSIVE_SPAN_DISPATCH_ERROR:")
 }
 
 fn compile_rule(rule: &Rule, source_id: &str) -> Result<CompiledRule> {

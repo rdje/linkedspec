@@ -1035,6 +1035,14 @@ impl RecognitionRuntime {
         }
     }
 
+    pub(crate) fn has_active_transaction(&self) -> bool {
+        self.state
+            .borrow()
+            .frames
+            .iter()
+            .any(|frame| !frame.tokens.is_empty())
+    }
+
     pub(crate) fn enter(
         &self,
         rule: &str,

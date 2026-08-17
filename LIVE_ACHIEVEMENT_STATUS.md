@@ -2,20 +2,19 @@
 
 ## Current Activity
 
-- Rust private authority `.14.6.3.1` is focused-signoff-complete from exact clean dormant-RED atomic 264
-  `511865bc`; dedicated-node/four-carrier integration `.14.6.3.2` is the next implementation slice.
-- The immutable host-seeded registry accepts only already compiled callbacks and validated logical identities,
-  top rules, grants, and ceilings; runtime registration, implicit loading, paths, providers, and compilers fail closed.
-- Invocation-local bounded source views retain original typed source authority, rebase Unicode-scalar positions,
-  expire after callbacks, and share cancellation identity, deadline, step budget, depth, and total-call bounds.
-- The opt-in authority proof passes 4/4 across the complete neutral matrix, all 26 diagnostics, nesting, rebasing,
-  expiry, mutation isolation, false payloads, cycle/progress, and deep-detachment adversaries.
-- Ordinary authority/final-path targets discover zero tests and canonical CI omits them. The explicit final-path
-  consumer still fails only on missing `PROGRESSIVE_DISPATCH_SPAN`, so no node or carrier moved early.
-- Perl remains the sole private backend implementation. Progressive governance stays neutral + Perl 2/9/86;
+- Rust private carrier `.14.6.3.2` is signoff-complete from exact clean authority atomic 265 `58d39fe5`; admission
+  `.14.6.3.3` is the next slice.
+- One exclusive `ProgressiveDispatchSpan` node carries only target/parser/top/span. Static malformed/generic forms
+  fail closed, and recognize-once effect closure plus a defensive live-token check reject uncommitted dispatch.
+- A doc-hidden opaque seed starts fresh authority per Engine execution; native, reconstructed, generated-plan, and
+  independently compiled emitted source return the same detached payload without serializing host authority.
+- The exact historical outer-cfg consumer is GREEN while ordinary discovery executes zero tests and canonical CI
+  still omits it. Rust rollout remains pending until `.3.3` routes that exact consumer.
+- Progressive rollout remains neutral + Perl at 2/9; governance is 91 mutations with 9 governed Rust carrier
+  paths, 3 remaining backend guard groups/11 paths, 10 outward guards, and 26 diagnostics;
   recognition stays 138 node rows (134 current + four dedicated) / 250 calls / 58 mutations.
-- Typed remains 11/3/152; generated format, Rust/Dart/Julia/Lua, recurrence, public projection, and outward surfaces
-  remain unchanged or pending.
+- Typed remains 11/3/152 and generated format is unchanged; Rust admission/rollout plus Dart/Julia/Lua,
+  recurrence, public projection, and outward surfaces remain pending.
 - Mandatory change-history rollover publishes immutable segment 4993; ADR `0082` increases only its finite
   capacity to 20 files / 19 manifest lines while every root, byte, per-segment, and aggregate ceiling stays fixed.
 - Corrected Phase 0 passes 1,031/1,031 after preserving require-time LinkedRE laziness; language is 250/126,
@@ -23,15 +22,18 @@
 
 ## Latest Completed Slice
 
-- `.14.6.3.1` adds the private immutable Rust registry/invocation/rebased-view authority, passes the exact neutral
-  and adversarial focused proof, and leaves the dedicated node, four carriers, admission, and rollout pending.
+- `.14.6.3.2` adds the exclusive logical node and four authority-delegating Rust carriers, promotes the exact
+  dormant consumer to GREEN, and leaves ordinary/canonical admission plus rollout pending.
 
 ## Next Action
 
-- Commit/clear/prove clean atomic 265, then activate Rust four-carrier integration `.14.6.3.2` task-tree-first; do
-  not move admission, Dart/Julia/Lua, recurrence, typed, public, or outward rows.
+- Commit/clear/prove clean atomic 266, then activate Rust admission `.14.6.3.3` task-tree-first; route only the exact
+  unchanged consumer and promote only Rust, without Dart/Julia/Lua, recurrence, typed, public, or outward movement.
 
 ## Recent Completions
+
+- `2026-08-17` — `.14.6.3.2` adds one logical-only Rust node and four dormant authority-delegating carriers with
+  exact static/transaction boundaries while rollout remains 2/9.
 
 - `2026-08-17` — `.14.6.3.1` adds private immutable Rust authority with exact rebasing, narrowing, shared limits,
   detachment, and 26 diagnostics while the four-carrier RED and rollout boundary remain unchanged.
@@ -78,8 +80,7 @@
 
 - `2026-08-16` — `.6.4` completed ten value/two typed-error independently emitted modules on fresh PUC-Lua and
   LuaJIT children from clean `b7708cde`, advancing only repository-local storage ownership from 18 to 19.
-- `2026-08-16` — `.6.3` completed normalized reconstruction, compatible detached descriptors, and same-engine
-  generated-v2 gap execution from clean `4e625a9f` for intended atomic 249 without rollout or outward movement.
+
 ## History
 
 Exact prior chronology is immutable, repository-local, byte-reconstructable from clean Git source

@@ -134,7 +134,7 @@ pub fn typed_source_compatibility_aliases() -> Value {
     ])
 }
 
-fn runtime_value_from_json(value: Value) -> RuntimeValue {
+pub(crate) fn runtime_value_from_json(value: Value) -> RuntimeValue {
     match value {
         Value::Null => RuntimeValue::Undef,
         Value::Bool(value) => RuntimeValue::Bool(value),
@@ -206,6 +206,8 @@ pub struct RuntimeContext {
     source_authority: RuntimeSourceAuthority,
     /// Internal authority binding for recognition transactions.
     recognition_transactions: crate::recognition_transaction::RecognitionRuntime,
+    /// Optional host-seeded progressive child-parse authority for this execution.
+    progressive_dispatch: Option<crate::bounded_child_parse_authority::ProgressiveExecutionState>,
     /// Active non-eager recognition scopes publish explicit child acceptance.
     recognition_scope_depth: usize,
     recognition_completions: Vec<RecognitionInvocationCompletion>,
@@ -409,6 +411,7 @@ impl RuntimeContext {
                 source_authority.authority(),
                 INPUT_SOURCE_ID,
             ),
+            progressive_dispatch: None,
             recognition_scope_depth: 0,
             recognition_completions: Vec::new(),
             recursive_observation_scopes: Vec::new(),
@@ -449,6 +452,44 @@ impl RuntimeContext {
             diagnostic_top_rule: None,
             diagnostic_failure: None,
         }
+    }
+
+    pub(crate) fn install_bounded_child_parse_authority(
+        &mut self,
+        seed: Option<&crate::bounded_child_parse_authority::ProgressiveExecutionSeed>,
+    ) -> Result<(), String> {
+        self.progressive_dispatch = seed
+            .map(crate::bounded_child_parse_authority::ProgressiveExecutionSeed::start)
+            .transpose()
+            .map_err(|error| error.to_string())?;
+        Ok(())
+    }
+
+    pub(crate) fn dispatch_bounded_child_parse(
+        &mut self,
+        target: &str,
+        parser_id: &str,
+        top_rule: &str,
+        span_binding: &str,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        let authority = self.progressive_dispatch.clone().ok_or_else(|| {
+            "LINKEDSPEC_PROGRESSIVE_SPAN_DISPATCH_ERROR:progressive_registry_missing".to_owned()
+        })?;
+        let span = self.get_bare_value(span_binding).to_json();
+        let transaction_active = self.recognition_transactions.has_active_transaction();
+        let value = authority
+            .dispatch(
+                format!("{rule_label}:dispatch_span"),
+                parser_id.to_owned(),
+                top_rule.to_owned(),
+                span,
+                transaction_active,
+            )
+            .map_err(|error| error.to_string())?;
+        let value = runtime_value_from_json(value);
+        self.set_scalar(target, value.clone());
+        Ok(value)
     }
 
     pub(crate) fn mark_get(&self, rule_label: &str, name: &str) -> Option<usize> {

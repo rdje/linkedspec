@@ -168,12 +168,12 @@ PERL5LIB= prove -Iperl t/progressive_span_dispatch_perl_contract.t
 It validates the reserved private `dispatch_span("logical-parser-id", "Top", span)` expression without enabling
 backend syntax. The checker independently executes 2 sources/8 rebased views, 6 authority-minimum cases, 6
 cancellation/deadline/budget cases, 8 decreasing-chain/bound cases, and 4 isolation/detachment cases; locks 26
-diagnostics and neutral + Perl 2/9 rollout; guards 14 implementation paths across the four still-pending backend
-groups plus 10 outward paths; and rejects 86 mutations. A passing check proves no path loader,
+diagnostics and neutral + Perl 2/9 rollout; guards 11 implementation paths across the three still-pending backend
+groups, 9 Rust carrier paths, and 10 outward paths; and rejects 91 mutations. A passing check proves no path loader,
 registry mutation, capability/policy elevation, cancellation reset, non-decreasing cycle, parent-state leak,
 uncommitted recognition effect, live result handle, fallback, or premature backend/typed rollout claim. It also
 requires the typed row to remain pending, the rejected effect to own exactly current node
-`PROGRESSIVE_DISPATCH_SPAN` and no call row, both tokens to remain absent from guarded Rust/Dart/Julia/Lua paths,
+`PROGRESSIVE_DISPATCH_SPAN` and no call row, both tokens to remain absent from guarded Dart/Julia/Lua paths,
 and private spelling/node/rollout tokens to remain absent from ten facade/schema/semantic/MCP/CLI/README paths.
 
 Perl carrier integration and admission now prove
@@ -184,8 +184,8 @@ consumer once; the neutral checker rejects regression of the Perl row and promot
 Its transaction-state query loads the recognition runtime only when a dispatch executes, preserving the existing
 require-only Compiler guarantee that `LinkedRE` stays lazy until the parser pipeline actually needs it.
 
-Rust's next-backend proof is intentionally outside ordinary and canonical discovery. The ordinary target compiles
-with zero tests; the explicit cfg activates the exact final-path RED:
+Rust's carrier proof is intentionally outside ordinary and canonical discovery. The ordinary target compiles
+with zero tests; the historical RED cfg now activates the exact GREEN four-route consumer:
 
 ```bash
 bash tools/run_cargo_local.sh test --offline --manifest-path rust/Cargo.toml \
@@ -195,9 +195,10 @@ RUSTFLAGS='--cfg linkedspec_progressive_span_dispatch_red' \
   -p linkedspec-runtime --test progressive_span_dispatch_contract -- --nocapture
 ```
 
-The second command passes the neutral inventory, narrow staged-registry rejection, and native/reconstructed/
-generated-plan/independently compiled emitted-carrier checks, then fails only because the dedicated progressive
-node is absent. A generic helper fallback returning `null` is evidence of the missing implementation, not GREEN.
+The second command passes the neutral inventory, narrow staged-registry rejection, exact static-operand and
+recognition-effect denials, defensive live-transaction rejection, and native/reconstructed/generated-plan/
+independently compiled emitted-carrier equality. Serialized/generated data carries only the dedicated node's
+logical operands. The test remains absent from canonical CI until `.14.6.3.3` admits the exact consumer.
 
 Rust authority/core has a separate focused proof, also intentionally outside ordinary and canonical discovery:
 
@@ -212,8 +213,8 @@ RUSTFLAGS='--cfg linkedspec_progressive_span_dispatch_authority' \
 The first command runs zero tests. The opt-in command executes all neutral view/authority/cancellation/chain/
 execution rows and all 26 diagnostic-context seams, then proves nested shared limits, typed global rebasing,
 callback-scoped view expiry, seed mutation isolation, false payload preservation, and deep result detachment.
-Passing this target proves only the doc-hidden immutable registry/invocation/source-view core. It does not prove a
-dedicated expression, Engine/descriptor/generated carrier, final-path GREEN, CI admission, or Rust rollout.
+Passing this target proves the doc-hidden immutable registry/invocation/source-view core independently from the
+carrier consumer. Neither focused target proves CI admission or Rust rollout.
 
 The `.14.4.0` audit found one contradiction in that baseline: `direct_nonprogress` used the same textual identity
 for invocation and parent. Corrective `.14.4.0.1` changes all six observation identities to positive unique

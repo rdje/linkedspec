@@ -10,6 +10,27 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.3.2 — add dormant Rust progressive dispatch carriers
+
+- Activated task-tree-first from exact clean private-authority atomic 265 `58d39fe5`; retrieved the neutral,
+  ADR, Knowledge, Perl reference, Rust authority/RED, ActionIR, recognition, generated-v2, Toolbox, and book owners.
+- Added one exclusive serde-tagged Rust `ProgressiveDispatchSpan` expression carrying only target, normalized
+  literal parser identity, literal top rule, and bare span binding. Malformed direct forms and every residual
+  generic call fail closed with the reserved static diagnostics.
+- Added recognition-effect closure for the non-rollbackable registry/staged-dispatch effect and retained a live-
+  token runtime rejection for defensive reconstructed-input enforcement.
+- Added an opaque host-only execution seed that starts fresh authority for each Engine route while cloned contexts
+  share one invocation's cancellation, budget, and call authority. The seed remains absent from compiled plans.
+- Native, serialized reconstruction, generated-plan, and independently compiled emitted-source execution now
+  delegate to the private authority and return the same detached child payload. Generated data contains one
+  logical node and no callback, registry, fingerprint, cancellation token, or authority.
+- Promoted the exact historical outer-cfg consumer from RED to GREEN while preserving its cfg, fixture, four-route
+  scope, ordinary zero-test discovery, and canonical absence. Rust admission and rollout remain `.14.6.3.3` work.
+- Progressive governance now records 9 Rust carrier paths, 3 pending-backend groups/11 paths, 10 outward guards,
+  26 diagnostics, rollout 2/9, and 91 rejected mutations without typed, format, dependency, public, or outward movement.
+- Synchronized the admitted Perl consumer's frozen neutral status, availability, and count snapshot with that carrier-
+  only movement; its unchanged exact behavior remains 125/125 and no Perl rollout or runtime behavior moved.
+
 ## 2026-08-17 — FUTURE-PARITY-BACKLOG.14.6.3.1 — add private Rust progressive dispatch authority
 
 - Activated task-tree-first from exact clean dormant-RED atomic 264 `511865bc`; retrieved ADR `0080`, neutral,

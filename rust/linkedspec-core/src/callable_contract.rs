@@ -319,6 +319,7 @@ fn normalize_expr(
             Ok(())
         }
         Expr::RecognitionCheckpoint
+        | Expr::ProgressiveDispatchSpan { .. }
         | Expr::RecognizeOnce { .. }
         | Expr::ObserveRecognition { .. }
         | Expr::RecognitionCommit { .. }

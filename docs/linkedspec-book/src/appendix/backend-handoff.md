@@ -162,8 +162,9 @@
 > Progressive neutral `.14.6.1` reserves
 > `value = dispatch_span("expr-v1", "Expr", span)` as a dedicated fail-only future expression. Its checker passes
 > 2 immutable registry entries, 2 sources/8 rebased views, 6 authority, 6 cancellation, 8 chain, 4 execution
-> cases, 4 pending-backend guards/14 implementation paths plus 10 outward guards, 26 diagnostics, 2/9 rollout,
-> and 86 mutations. Private Perl admission is current through one exact canonical 125-assertion consumer; Rust,
+> cases, 3 pending-backend guards/11 implementation paths plus 9 governed Rust carrier paths and 10 outward
+> guards, 26 diagnostics, 2/9 rollout, and 91 mutations. Private Perl admission is current through one exact
+> canonical 125-assertion consumer; Rust carrier implementation is current but dormant; Rust admission,
 > Dart, Julia, Lua, recurrence, public no-drift, and the typed row remain pending. The rejected effect owns exactly
 > current node `PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded pending-backend paths omit both tokens and
 > outward guards deny exposure. No path loader, public facade/schema/semantic/MCP/CLI/README surface, shared helper
@@ -730,19 +731,18 @@ invocation from a host-only option. Live, reconstructed descriptor, validated ge
 loaded generated-v2 packages agree; emitted source preserves logical operands only. Recognition transactions
 reject the effect. Canonical CI runs the exact green consumer once, but no public surface is admitted.
 
-Rust `.14.6.3.0` freezes the corresponding final-path boundary without implementing it. Its explicit outer-cfg
-consumer proves the current staged registry rejects `expr-v1`, while native, reconstructed, generated-plan, and
-independently compiled emitted-source routes preserve one generic `dispatch_span` call and return `null` through
-unknown-helper fallback. The sole final failure requires the missing dedicated node. Ordinary discovery executes
-zero tests and canonical CI omits this target.
+Rust `.14.6.3.0` historically froze the corresponding final-path boundary at one missing dedicated node. Its exact
+outer-cfg consumer and four-route identity remain the continuity proof.
 
 Rust `.14.6.3.1` now supplies only the underlying private authority. A doc-hidden module owns immutable logical
 entries with already compiled callbacks, fresh invocation state, typed same-source bounded views, global scalar/
 line/column/UTF-8 rebasing, intersected grants and ceiling minima, shared cancellation/deadline/steps, decreasing
 span/depth/call guards, callback containment, expiring views, and detached node-bounded JSON results. Its separate
 outer-cfg consumer proves the neutral matrix and all diagnostics but runs zero tests ordinarily and has no
-canonical route. Implement `.3.2` carriers next and `.3.3` admission last; neither private authority nor generic
-fallback consistency is progressive carrier support.
+canonical route. Rust `.14.6.3.2` now adds one exclusive logical-only node and delegates native, reconstructed,
+generated-plan, and independently compiled emitted-source execution to a fresh host seed. Static recognition
+effect closure plus a live-token runtime check forbid dispatch in uncommitted attempts; generated data contains no
+callback or authority. The same consumer is GREEN but still dormant. Implement `.3.3` admission last.
 
 The spec's body shell is a
 linked opener/closer parse: `body_brace`

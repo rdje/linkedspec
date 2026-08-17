@@ -10,6 +10,32 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.3.2` — dormant Rust progressive carriers): exact clean activation is
+  private-authority atomic 265 `58d39fe5`; `.3.3` remains the sole admission/rollout owner.
+- `Expr::ProgressiveDispatchSpan` is an exclusive statement node, not a helper call. Its serialized fields are only
+  `target`, `parser_id`, `top_rule`, and `span`; direct parser/top literals and the bare span operand are normalized
+  before construction. The compiler rejects any generic `dispatch_span` that escapes that statement topology.
+- Progressive parse errors join the existing fail-closed ActionIR prefixes so malformed reserved syntax cannot be
+  downgraded to an omitted lifecycle block. The exact five static operand diagnostics stay aligned with Perl.
+- Recognition compiler facts now propagate `parser_registry_or_staged_dispatch` through static rule/function call
+  graphs and reject a `recognize_once` target that can reach progressive dispatch. `RecognitionRuntime` separately
+  reports any live token, protecting reconstructed/precompiled inputs that bypass compilation.
+- `ProgressiveInvocation` owns a cloned immutable registry rather than borrowing it. This permits an opaque
+  `ProgressiveExecutionSeed` to hold the host recipe and create one fresh invocation at each Engine execution.
+  `RuntimeContext` clones share its mutex-backed invocation, so budget, total calls, and cancellation never fork.
+- `ExecutionOptions::with_bounded_child_parse_authority` is doc-hidden host plumbing. Native and generated-value
+  contexts install the seed before entering the rule. Node evaluation reads the bare direct-span value, checks live
+  transaction state, delegates to the authority, converts detached JSON back to the runtime value, and binds target.
+- Generated-v2 requires no format change: the existing compiled-spec JSON carrier serializes the new logical node,
+  and emitted modules already expose `execute_with_options`. The independent Cargo fixture supplies host authority
+  in its main module, while the emitted parser source contains no callback or mutable/live authority.
+- The neutral checker removes Rust from pending-backend denial and instead locks nine private carrier paths plus
+  exact consumer/cfg/canonical absence. Counts are now 3 pending groups/11 paths, 9 Rust carrier paths, 10 outward
+  guards, 26 diagnostics, 2/9 rollout, and 91 mutations. Rust rollout intentionally remains pending.
+- The first receipt-bound gate exposed the admitted Perl consumer's stale frozen view of that neutral metadata.
+  Updating its status, availability, Rust-carrier count, guard counts, and mutation count restores 125/125 while
+  leaving every Perl execution assertion and the neutral rollout rows unchanged.
+
 - 2026-08-17 (`FUTURE-PARITY-BACKLOG.14.6.3.1` — private Rust progressive authority): exact clean activation is
   dormant-RED atomic 264 `511865bc`; the leaf adds authority/core plus one dormant focused consumer only.
 - `bounded_child_parse_authority.rs` deliberately depends on the existing `SourceAuthority`, not Engine or ActionIR.

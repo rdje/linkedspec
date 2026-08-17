@@ -10,8 +10,8 @@ use serde_json::{Map, Value, json};
 use std::collections::{BTreeMap, BTreeSet};
 use std::fmt;
 use std::panic::{AssertUnwindSafe, catch_unwind};
-use std::sync::Arc;
 use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::{Arc, Mutex};
 
 const EFFECT: &str = "parser_registry_or_staged_dispatch";
 const LIVE_RESULT_FIELD_TOKENS: &[&str] = &[
@@ -109,10 +109,7 @@ pub type ProgressiveChildResult = Result<Value, String>;
 
 /// Immutable already-compiled child-parser callback.
 pub type ProgressiveCompiledAuthority = Arc<
-    dyn for<'registry> Fn(
-            &ProgressiveDispatchRequest,
-            &mut ProgressiveInvocation<'registry>,
-        ) -> ProgressiveChildResult
+    dyn Fn(&ProgressiveDispatchRequest, &mut ProgressiveInvocation) -> ProgressiveChildResult
         + Send
         + Sync,
 >;
@@ -170,6 +167,7 @@ impl ProgressiveRegistryEntry {
 }
 
 /// Immutable logical registry over already-compiled parsers.
+#[derive(Clone)]
 pub struct ProgressiveRegistry {
     entries: BTreeMap<Box<str>, ProgressiveRegistryEntry>,
 }
@@ -224,8 +222,8 @@ impl ProgressiveRegistry {
     pub fn start_invocation(
         &self,
         config: ProgressiveInvocationConfig,
-    ) -> Result<ProgressiveInvocation<'_>, ProgressiveConfigurationError> {
-        ProgressiveInvocation::new(self, config)
+    ) -> Result<ProgressiveInvocation, ProgressiveConfigurationError> {
+        ProgressiveInvocation::new(self.clone(), config)
     }
 }
 
@@ -318,6 +316,7 @@ impl ProgressiveChainFrame {
 }
 
 /// Complete fresh-invocation authority supplied by the host.
+#[derive(Clone)]
 pub struct ProgressiveInvocationConfig {
     /// Decoded source snapshots keyed by opaque source identity.
     pub sources: BTreeMap<String, String>,
@@ -339,6 +338,128 @@ pub struct ProgressiveInvocationConfig {
     pub active_chain: Vec<ProgressiveChainFrame>,
     /// Existing total call count when composing an already-running authority.
     pub total_calls: u64,
+}
+
+/// Opaque host-only recipe for one fresh progressive authority per execution.
+///
+/// The recipe is deliberately absent from compiled specifications and generated
+/// plans. Equality is authority identity, not callback or source introspection.
+#[derive(Clone)]
+pub struct ProgressiveExecutionSeed {
+    state: Arc<ProgressiveExecutionSeedState>,
+}
+
+struct ProgressiveExecutionSeedState {
+    registry: ProgressiveRegistry,
+    invocation: ProgressiveInvocationConfig,
+    caller_capabilities: Vec<String>,
+    required_capabilities: Vec<String>,
+    caller_ceilings: ProgressiveCeilings,
+    required_source_detail: ProgressiveSourceDetail,
+    dispatch_cost: u64,
+}
+
+impl ProgressiveExecutionSeed {
+    /// Bind immutable host authority and invocation-local policy inputs.
+    #[allow(clippy::too_many_arguments)]
+    pub fn new(
+        registry: ProgressiveRegistry,
+        invocation: ProgressiveInvocationConfig,
+        caller_capabilities: Vec<String>,
+        required_capabilities: Vec<String>,
+        caller_ceilings: ProgressiveCeilings,
+        required_source_detail: ProgressiveSourceDetail,
+        dispatch_cost: u64,
+    ) -> Self {
+        Self {
+            state: Arc::new(ProgressiveExecutionSeedState {
+                registry,
+                invocation,
+                caller_capabilities,
+                required_capabilities,
+                caller_ceilings,
+                required_source_detail,
+                dispatch_cost,
+            }),
+        }
+    }
+
+    pub(crate) fn start(&self) -> Result<ProgressiveExecutionState, ProgressiveConfigurationError> {
+        let invocation = self
+            .state
+            .registry
+            .start_invocation(self.state.invocation.clone())?;
+        Ok(ProgressiveExecutionState {
+            invocation: Arc::new(Mutex::new(invocation)),
+            caller_capabilities: self.state.caller_capabilities.clone(),
+            required_capabilities: self.state.required_capabilities.clone(),
+            caller_ceilings: self.state.caller_ceilings.clone(),
+            required_source_detail: self.state.required_source_detail,
+            child_token: self.state.invocation.cancellation_token.clone(),
+            dispatch_cost: self.state.dispatch_cost,
+        })
+    }
+}
+
+impl fmt::Debug for ProgressiveExecutionSeed {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        formatter.write_str("ProgressiveExecutionSeed(<opaque>)")
+    }
+}
+
+impl PartialEq for ProgressiveExecutionSeed {
+    fn eq(&self, other: &Self) -> bool {
+        Arc::ptr_eq(&self.state, &other.state)
+    }
+}
+
+impl Eq for ProgressiveExecutionSeed {}
+
+/// One execution-local authority shared by cloned runtime contexts.
+#[derive(Clone)]
+pub(crate) struct ProgressiveExecutionState {
+    invocation: Arc<Mutex<ProgressiveInvocation>>,
+    caller_capabilities: Vec<String>,
+    required_capabilities: Vec<String>,
+    caller_ceilings: ProgressiveCeilings,
+    required_source_detail: ProgressiveSourceDetail,
+    child_token: ProgressiveCancellationToken,
+    dispatch_cost: u64,
+}
+
+impl fmt::Debug for ProgressiveExecutionState {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        formatter.write_str("ProgressiveExecutionState(<opaque>)")
+    }
+}
+
+impl ProgressiveExecutionState {
+    pub(crate) fn dispatch(
+        &self,
+        origin: String,
+        parser_id: String,
+        top_rule: String,
+        span: Value,
+        transaction_active: bool,
+    ) -> Result<Value, ProgressiveDispatchError> {
+        let mut invocation = self
+            .invocation
+            .lock()
+            .unwrap_or_else(std::sync::PoisonError::into_inner);
+        invocation.dispatch(ProgressiveDispatchArguments {
+            origin,
+            parser_id: json!(parser_id),
+            top_rule: json!(top_rule),
+            span,
+            caller_capabilities: self.caller_capabilities.clone(),
+            required_capabilities: self.required_capabilities.clone(),
+            caller_ceilings: self.caller_ceilings.clone(),
+            required_source_detail: self.required_source_detail,
+            child_token: self.child_token.clone(),
+            cost: self.dispatch_cost,
+            transaction_active,
+        })
+    }
 }
 
 /// One runtime dispatch request before static ActionIR carriers exist.
@@ -641,8 +762,8 @@ impl fmt::Display for ProgressiveSourceViewError {
 impl std::error::Error for ProgressiveSourceViewError {}
 
 /// One shared invocation authority. It contains no parent parser registers.
-pub struct ProgressiveInvocation<'registry> {
-    registry: &'registry ProgressiveRegistry,
+pub struct ProgressiveInvocation {
+    registry: ProgressiveRegistry,
     source_authority: Arc<SourceAuthority>,
     source_id: Box<str>,
     cancellation_token: ProgressiveCancellationToken,
@@ -655,9 +776,9 @@ pub struct ProgressiveInvocation<'registry> {
     active_chain: Vec<ProgressiveChainFrame>,
 }
 
-impl<'registry> ProgressiveInvocation<'registry> {
+impl ProgressiveInvocation {
     fn new(
-        registry: &'registry ProgressiveRegistry,
+        registry: ProgressiveRegistry,
         config: ProgressiveInvocationConfig,
     ) -> Result<Self, ProgressiveConfigurationError> {
         if config.sources.is_empty() || config.source_id.is_empty() {

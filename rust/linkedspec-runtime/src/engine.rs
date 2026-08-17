@@ -281,6 +281,8 @@ fn validate_eager_helper_arity(
 pub struct ExecutionOptions {
     entry_rule: Option<String>,
     semantic_observation_sink: Option<RuntimeSemanticObservationSink>,
+    bounded_child_parse_authority:
+        Option<crate::bounded_child_parse_authority::ProgressiveExecutionSeed>,
 }
 
 impl ExecutionOptions {
@@ -309,6 +311,22 @@ impl ExecutionOptions {
     /// Return the invocation-local semantic sink, if one was selected.
     pub fn semantic_observation_sink(&self) -> Option<&RuntimeSemanticObservationSink> {
         self.semantic_observation_sink.as_ref()
+    }
+
+    /// Install one opaque host authority for private bounded child parsing.
+    #[doc(hidden)]
+    pub fn with_bounded_child_parse_authority(
+        mut self,
+        seed: crate::bounded_child_parse_authority::ProgressiveExecutionSeed,
+    ) -> Self {
+        self.bounded_child_parse_authority = Some(seed);
+        self
+    }
+
+    pub(crate) fn bounded_child_parse_authority(
+        &self,
+    ) -> Option<&crate::bounded_child_parse_authority::ProgressiveExecutionSeed> {
+        self.bounded_child_parse_authority.as_ref()
     }
 }
 
@@ -2408,6 +2426,7 @@ impl Engine {
         options: &ExecutionOptions,
     ) -> Result<Value, String> {
         ctx.install_semantic_observation_sink(options.semantic_observation_sink());
+        ctx.install_bounded_child_parse_authority(options.bounded_child_parse_authority())?;
         self.validate_compiled_slot_identities(ctx)?;
         let (label, basis) = self.resolve_entry_rule_label(ctx, options.entry_rule())?;
         ctx.trace_decision(
@@ -2434,6 +2453,7 @@ impl Engine {
         options: &ExecutionOptions,
     ) -> Result<Value, String> {
         ctx.install_semantic_observation_sink(options.semantic_observation_sink());
+        ctx.install_bounded_child_parse_authority(options.bounded_child_parse_authority())?;
         self.validate_compiled_slot_identities(ctx)?;
         let (label, basis) = self.resolve_entry_rule_label(ctx, options.entry_rule())?;
         ctx.trace_decision(
@@ -2466,6 +2486,7 @@ impl Engine {
         options: &ExecutionOptions,
     ) -> Result<Value, String> {
         ctx.install_semantic_observation_sink(options.semantic_observation_sink());
+        ctx.install_bounded_child_parse_authority(options.bounded_child_parse_authority())?;
         self.validate_compiled_slot_identities(ctx)?;
         let (label, basis) = self.resolve_entry_rule_label(ctx, options.entry_rule())?;
         ctx.trace_decision(
@@ -3470,6 +3491,7 @@ impl Engine {
                 rule == rule_label
             }
             Expr::RecognitionCheckpoint
+            | Expr::ProgressiveDispatchSpan { .. }
             | Expr::RecognitionCommit { .. }
             | Expr::RecognitionRollback { .. } => false,
             Expr::AssignScalar { value, .. } => Self::expr_calls_rule(value, rule_label),
@@ -3541,6 +3563,7 @@ impl Engine {
         match expr {
             Expr::Call { args, .. } => args.iter().any(Self::arg_reads_retv),
             Expr::RecognitionCheckpoint
+            | Expr::ProgressiveDispatchSpan { .. }
             | Expr::RecognizeOnce { .. }
             | Expr::ObserveRecognition { .. }
             | Expr::RecognitionCommit { .. }
@@ -4824,6 +4847,12 @@ impl Engine {
         use linkedspec_core::expr::Expr;
         match expr {
             Expr::Call { name, args } => {
+                if name == "dispatch_span" {
+                    return Err(
+                        "LINKEDSPEC_PROGRESSIVE_SPAN_DISPATCH_ERROR:progressive_span_binding_required"
+                            .to_owned(),
+                    );
+                }
                 validate_eager_helper_arity(name, args, args.len(), ctx, rule_label)?;
                 // Lazy-evaluation calls: if/switch/while/with/elseif/else/case/default
                 // Branch bodies must NOT be evaluated eagerly — they are
@@ -4903,6 +4932,12 @@ impl Engine {
                     .collect::<Result<Vec<_>, _>>()?;
                 self.call_helper_with_args(name, args, &evaluated, ctx, rule_label)
             }
+            Expr::ProgressiveDispatchSpan {
+                target,
+                parser_id,
+                top_rule,
+                span,
+            } => ctx.dispatch_bounded_child_parse(target, parser_id, top_rule, span, rule_label),
             Expr::RecognitionCheckpoint => Err(format!(
                 "recognition_checkpoint must be assigned to a rule-local token in rule '{rule_label}'"
             )),

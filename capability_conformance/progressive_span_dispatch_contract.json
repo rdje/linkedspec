@@ -2,7 +2,7 @@
   "format": 1,
   "contract_id": "linkedspec-progressive-span-dispatch-v1",
   "task_owner": "FUTURE-PARITY-BACKLOG.14.6.1",
-  "status": "perl_complete_other_backends_pending",
+  "status": "perl_complete_rust_carriers_dormant_other_backends_pending",
   "expected_counts": {
     "registry_entries": 2,
     "sources": 2,
@@ -11,12 +11,13 @@
     "cancellation_cases": 6,
     "chain_cases": 8,
     "execution_cases": 4,
-    "backend_guard_groups": 4,
-    "backend_guard_paths": 14,
+    "rust_carrier_paths": 9,
+    "backend_guard_groups": 3,
+    "backend_guard_paths": 11,
     "outward_guard_paths": 10,
     "diagnostics": 26,
     "rollout_legs": 9,
-    "mutations": 86
+    "mutations": 91
   },
   "authored_surface": {
     "example": "value = dispatch_span(\"expr-v1\", \"Expr\", span)",
@@ -30,7 +31,7 @@
     ],
     "result": "one detached child payload returned as the expression value",
     "failure_policy": "fail_only; every dispatch or child failure propagates unchanged and no null, fallback, retry, or alternate parser is implied",
-    "availability": "private Perl runtime admitted; every other backend remains unavailable until its independent rollout row completes"
+    "availability": "private Perl runtime admitted; private Rust carriers implemented but dormant; every other backend remains unavailable until its independent rollout row completes"
   },
   "policy": {
     "registry": "the host seeds immutable logical entries containing already compiled parser authority; authored execution may look up an identity but cannot resolve, load, compile, mutate, or enumerate",
@@ -864,7 +865,7 @@
     }
   ],
   "current_boundary": {
-    "status": "perl_admitted_other_backend_rows_pending",
+    "status": "perl_admitted_rust_carriers_dormant_other_backend_rows_pending",
     "typed_rollout": {
       "path": "capability_conformance/typed_source_location_contract.json",
       "leg": "progressive_span_dispatch",
@@ -886,19 +887,50 @@
       "registration_marker": "running exact Perl progressive span-dispatch admission consumer",
       "invocation": "PERL5LIB= prove -Iperl t/progressive_span_dispatch_perl_contract.t"
     },
+    "rust_carriers": {
+      "consumer_path": "rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs",
+      "cfg": "linkedspec_progressive_span_dispatch_red",
+      "canonical_discovery": "absent",
+      "marker_rows": [
+        {
+          "path": "rust/linkedspec-core/src/expr.rs",
+          "tokens": ["ProgressiveDispatchSpan", "progressive_dispatch_span", "dispatch_span"]
+        },
+        {
+          "path": "rust/linkedspec-core/src/compiler.rs",
+          "tokens": ["parser_registry_or_staged_dispatch", "validate_progressive_span_dispatch_contract"]
+        },
+        {
+          "path": "rust/linkedspec-core/src/callable_contract.rs",
+          "tokens": ["ProgressiveDispatchSpan"]
+        },
+        {
+          "path": "rust/linkedspec-runtime/src/bounded_child_parse_authority.rs",
+          "tokens": ["ProgressiveExecutionSeed", "ProgressiveExecutionState"]
+        },
+        {
+          "path": "rust/linkedspec-runtime/src/runtime.rs",
+          "tokens": ["dispatch_bounded_child_parse", "has_active_transaction"]
+        },
+        {
+          "path": "rust/linkedspec-runtime/src/recognition_transaction.rs",
+          "tokens": ["has_active_transaction"]
+        },
+        {
+          "path": "rust/linkedspec-runtime/src/engine.rs",
+          "tokens": ["with_bounded_child_parse_authority", "ProgressiveDispatchSpan"]
+        },
+        {
+          "path": "rust/linkedspec-runtime/src/source_emitter.rs",
+          "tokens": ["execute_generated_parser_v2_with_options", "execute_with_options"]
+        },
+        {
+          "path": "rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs",
+          "tokens": ["four_routes", "independently compiled", "progressive_dispatch_span"]
+        }
+      ]
+    },
     "backend_guard_groups": [
-      {
-        "backend": "rust",
-        "paths": [
-          "rust/linkedspec-core/src/callable_contract.rs",
-          "rust/linkedspec-core/src/expr.rs",
-          "rust/linkedspec-runtime/src/engine.rs"
-        ],
-        "forbidden_tokens": [
-          "dispatch_span",
-          "PROGRESSIVE_DISPATCH_SPAN"
-        ]
-      },
       {
         "backend": "dart",
         "paths": [
@@ -1347,6 +1379,11 @@
     "current_recognition_classification",
     "current_perl_admission_consumer",
     "current_perl_admission_marker",
+    "current_rust_consumer",
+    "current_rust_cfg",
+    "current_rust_node_marker",
+    "current_rust_authority_marker",
+    "current_rust_generated_options_marker",
     "current_backend_guard_path",
     "current_backend_guard_token",
     "current_outward_guard_path",

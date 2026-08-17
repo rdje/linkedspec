@@ -436,28 +436,29 @@ child will use a bounded source view whose typed positions and diagnostics rebas
 cursor/marks/transactions stay isolated; capability and policy ceilings only narrow; cancellation and remaining
 budget propagate; and repeated parser/top/source dispatch must strictly shrink the span. The existing staged
 function-body adapter does not satisfy this contract. The neutral checker passes 2 registry entries, 2 sources/8
-views, 6 authority, 6 cancellation, 8 chain, and 4 execution cases, 4 pending-backend guards/14 implementation
-paths plus 10 outward guards, 26 diagnostics, rollout 2/9, and 86 mutations. The typed progressive row remains
-pending; the rejected dispatch effect owns current node `PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded Rust,
-Dart, Julia, and Lua paths omit the tokens; and outward guards deny premature exposure. Perl has private carrier integration
+views, 6 authority, 6 cancellation, 8 chain, and 4 execution cases, 3 pending-backend guards/11 implementation
+paths plus 9 governed Rust carrier paths and 10 outward guards, 26 diagnostics, rollout 2/9, and 91 mutations. The
+typed progressive row remains pending; the rejected dispatch effect owns current node
+`PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded Dart, Julia, and Lua paths omit the tokens; and outward guards
+deny premature exposure. Perl has private carrier integration
 behind host-supplied invocation options: the exact assignment lowers to one dedicated node and works identically
 through live, reconstructed, generated-plan, and independently loaded emitted routes, while generated artifacts
 contain no registry callback or mutable authority. Canonical CI requires and runs its exact 125-case consumer once;
 only the private Perl rollout row is promoted.
 
-Rust's private authority/core is now executable, but authored behavior remains pending. A doc-hidden immutable
+Rust's private authority/core and four carrier routes are now executable, but admission remains pending. A doc-hidden immutable
 registry accepts only already compiled callbacks; each fresh invocation carries one typed source authority,
 original source id, shared cancellation/deadline/remaining steps, active global-span chain, depth, and call count.
 Callback-scoped views expose bounded decoded text while rebasing local scalar positions/spans/diagnostics through
 the original source authority, then expire on callback return, error, or panic. Capabilities/policies intersect,
 ceilings take minima, repeated identities must use contained strictly smaller spans, and results are deeply
-detached and node-bounded. Its separate outer-cfg proof executes the full neutral matrix and all 26 diagnostics;
-ordinary Cargo and canonical CI remain inert.
-
-The earlier dormant final-path consumer is intentionally unchanged: all four existing carriers still preserve
-the authored call generically and return `null` because no dedicated progressive node exists. Its only RED
-assertion demands that node. `.14.6.3.2` owns the dedicated node and native/reconstructed/generated-plan/emitted
-carriers; `.3.3` alone owns admission and Rust rollout. Private authority alone therefore does not move 2/9/86.
+detached and node-bounded. One exclusive `ProgressiveDispatchSpan` node accepts only literal parser/top identities
+and a bare span binding; generic or malformed forms fail statically. Native, serialized reconstruction, generated-
+plan, and independently compiled emitted source delegate to one fresh opaque execution seed and return the same
+detached child payload. Generated data contains only target/id/top/span operands, never callbacks or authority.
+Recognition effect analysis rejects any attempted rule/function graph that reaches the node, and runtime checks
+live tokens defensively. The exact outer-cfg consumer is GREEN, but ordinary Cargo and canonical CI remain inert.
+`.14.6.3.3` alone owns admission and Rust rollout, so governance intentionally remains 2/9/91.
 
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions or
 typed spans are authored values. The `recognition_*` operations are current across all six runtime routes, while

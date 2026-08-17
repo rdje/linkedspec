@@ -120,8 +120,8 @@ is(
 is($contract->{format}, 1, 'loads contract format 1');
 is(
  $contract->{status},
- 'perl_complete_other_backends_pending',
- 'loads the Perl-complete and other-backend-pending rollout state',
+ 'perl_complete_rust_carriers_dormant_other_backends_pending',
+ 'loads the Perl-complete, Rust-carrier-dormant, and other-backend-pending state',
 );
 is(
  $contract->{task_owner},
@@ -143,7 +143,7 @@ is_deeply(
   ],
   result => 'one detached child payload returned as the expression value',
   failure_policy => 'fail_only; every dispatch or child failure propagates unchanged and no null, fallback, retry, or alternate parser is implied',
-  availability => 'private Perl runtime admitted; every other backend remains unavailable until its independent rollout row completes',
+  availability => 'private Perl runtime admitted; private Rust carriers implemented but dormant; every other backend remains unavailable until its independent rollout row completes',
  },
  'freezes the dedicated authored expression, operands, result, and fail-only boundary',
 );
@@ -251,12 +251,13 @@ is_deeply(
   cancellation_cases => 6,
   chain_cases => 8,
   execution_cases => 4,
-  backend_guard_groups => 4,
-  backend_guard_paths => 14,
+  rust_carrier_paths => 9,
+  backend_guard_groups => 3,
+  backend_guard_paths => 11,
   outward_guard_paths => 10,
   diagnostics => 26,
   rollout_legs => 9,
-  mutations => 86,
+  mutations => 91,
  },
  'freezes every neutral inventory count',
 );
