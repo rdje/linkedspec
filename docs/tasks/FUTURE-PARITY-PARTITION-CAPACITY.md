@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `FUTURE-PARITY-PARTITION-CAPACITY`
-- Status: `active` / audit-and-plan leaf `.0` focused-signoff-complete; canonical `.1` next
+- Status: `active` / `.1` canonical-signoff-complete; `.2` pending independent recomposition
 - Roadmap lane: `Repository continuity / bounded task evidence`
 - Created: `2026-08-18`
-- Last updated: `2026-08-18`
+- Last updated: `2026-08-24`
 - Owner: repo-local workflow
 
 ## Goal
@@ -124,7 +124,8 @@ reason to enlarge a bounded member or weaken task-tree-first doctrine.
   Commit: `FUTURE-PARITY-PARTITION-CAPACITY.0 - freeze bounded split plan`.
 
 - ID: `FUTURE-PARITY-PARTITION-CAPACITY.1`
-  Status: `pending`
+  Status: `done; canonical-signoff-complete` (2026-08-24; task-tree-first from exact clean planning commit
+  `2cf4c9dd`; intended implementation commit; no topology change preceded activation)
   Goal: Implement the additional bounded semantic member and atomically migrate `.14.6.5-.14.8` with every
   index/tool/checker/consumer/route authority updated.
   Depends on: `.0`
@@ -133,12 +134,52 @@ reason to enlarge a bounded member or weaken task-tree-first doctrine.
   contract, capability all-parts census, ADR/Knowledge/book/live docs, and no-drift proof; preserve exact unique
   stable IDs and all committed evidence; pass focused direct dependents plus receipt-bound canonical CI; commit,
   clear the brief, and prove clean before `.2`.
-  Planned verification tier: `canonical`.
-  Planned focused checks: exact pre/post source accounting and ID uniqueness; lookup on both sides of the boundary; update
+  Verification tier: `canonical`.
+  Focused checks: exact pre/post source accounting and ID uniqueness; lookup on both sides of the boundary; update
   index freshness; task metadata mutation suite; route pressure; capability conformance; every direct consumer;
   Knowledge, mdBook, bounded histories, memory architecture, doctrines, exact staged diff.
-  Planned canonical trigger: `task-tree schema, doctrine checker, repository tools, bounded-route controls, and a canonical
+  Canonical trigger: `task-tree schema, doctrine checker, repository tools, bounded-route controls, and a canonical
   capability consumer change atomically with the partition topology`.
+
+  ### Acceptance checklist
+
+  - [x] **CLEAN ACTIVATION / OWNERSHIP** — Prove exact clean planning commit `2cf4c9dd`, zero-byte brief, absent
+    generated book, no background job, and `.1` activation as the first new mutation.
+  - [x] **EXACT MOVE / SOURCE ACCOUNTING** — Move only the frozen 12-line / 1,379-byte pending block; preserve both
+    source comments; prove old/new current and original-source counts, bytes, digests, unique IDs, and history bytes.
+  - [x] **INDEX / RANGE TOOLS** — Retain schema v1 while changing to ten records / eight semantic parts; make
+    `.14/.14.6/.14.6.4.3` and `.14.6.5/.14.8` resolve exactly once through read/update/build authorities.
+  - [x] **CHECKER / CONSUMERS** — Extend partition contract/mutations/root navigation and require the capability
+    census to enumerate all eight semantic members; preserve all other exact machine-consumer routes.
+  - [x] **BOUNDED ROUTE** — Apply ADR `0084` through newly staged exact-route ADR `0085`; add one member limit and
+    one index-record line only while every collection/per-file/aggregate/member ceiling stays fixed.
+  - [x] **LOCKSTEP / NO BEHAVIOR** — Align ADRs, Knowledge, roadmaps, book, tasks, live docs, and memory without
+    parser/compiler/runtime/backend/generated/progressive/typed/public/README/outward movement.
+  - [x] **FOCUSED + CANONICAL / COMMIT / CLEAN** — Pass all direct dependents, real builder and book render,
+    doctrines/histories/exact diff, staged receipt-bound canonical CI, commit, clear the brief, and prove clean.
+
+  ### TOOLBOX task-acceptance checklist
+
+  - [x] **REPRODUCE / ISSUE** — Committed `.0` evidence and repository tools reproduce the exact saturation.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Schema/range functions and route oracle locate every fixed-topology seam.
+  - [x] **FIX** — One bounded member plus exact index/tool/checker/route/consumer changes implement ADRs `0084/0085`.
+  - [x] **ADDRESSED (verified)** — Both boundary lookups, source accounting, builder, refresh, route, and census pass.
+  - [x] **NO REGRESSION** — All 547 IDs, immutable history, pressure ceilings, behavior, rollout, and public guards hold.
+  - [x] **LOCKSTEP** — Task, ADR, Knowledge, book, roadmaps, continuity, receipt, commit, brief, and `.2` agree.
+
+  Evidence: the new member is the byte-exact prior 12-line block plus source comment; prefix reconstruction proves
+  the old member changed only by that move, and immutable history SHA-256 is unchanged. Current old/new measures are
+  4,988/543,163/`d7d6f8c5...` and 13/1,501/`5e2762a3...`; original ranges retain exact 3,942/357,142/
+  `6f04e2a0...` and 10/542/`a2b84198...`. Schema-v1 refresh is byte-idempotent at ten records; old, parent,
+  boundary, new, and outside-CWD lookups pass while `.14.9` fails unowned. The repository-local clean-source
+  builder writes 8 semantic + 1 immutable part and the ten-record index. Task metadata passes 27/27 over 547 IDs
+  and 97 task files; route pressure passes 20/62/32 with exact staged ADR `0085`; capability remains 80/0/0;
+  Knowledge Map is 858/7,247; the book renders and is removed; both histories, memory, exact staged/worktree diff,
+  and all nine doctrines pass. The host-authorized representative process-locality proof passes. Exact staged
+  canonical CI passes every required group, including Rust semantic admission 1/1 in 81.27s, Julia semantic
+  admission 416/416 in 32.7s, primary CLI 66x2, RAM 37%, and Phase 0 1,031/1,031 in 801 seconds, and writes the
+  staged candidate receipt. No product/runtime/generated/public behavior changes.
+  Intended commit: `FUTURE-PARITY-PARTITION-CAPACITY.1 - implement eighth bounded semantic member`.
 
 - ID: `FUTURE-PARITY-PARTITION-CAPACITY.2`
   Status: `pending`
@@ -158,7 +199,8 @@ reason to enlarge a bounded member or weaken task-tree-first doctrine.
 
 ## Current frontier
 
-`FUTURE-PARITY-PARTITION-CAPACITY.1` — after the clean `.0` commit, atomically implement the new bounded member.
+`FUTURE-PARITY-PARTITION-CAPACITY.2` — from the clean `.1` implementation commit, activate the focused leaf and
+independently recompose every committed topology, lookup, route, and consumer invariant.
 
 ## Decisions
 
@@ -169,7 +211,7 @@ reason to enlarge a bounded member or weaken task-tree-first doctrine.
 
 ## Blockers
 
-- Julia `.14.6.5` task splitting is blocked until `.0-.2` land cleanly.
+- Julia `.14.6.5` task splitting remains sequenced behind clean independent `.2`; no environmental blocker remains.
 
 ## Change log
 
@@ -177,3 +219,11 @@ reason to enlarge a bounded member or weaken task-tree-first doctrine.
   roadmap leaf.
 - `2026-08-18`: `.0` freezes the exact bounded split, consumer inventory, rollback, and no-behavior boundary;
   focused gates pass and canonical `.1` is the next clean frontier.
+- `2026-08-18`: `.1` activated task-tree-first from clean planning commit `2cf4c9dd`; topology remains unchanged
+  at activation.
+- `2026-08-18`: `.1` atomically implements the eighth semantic member and exact route/tool/checker/consumer
+  updates without product behavior. Focused proof passes; canonical CI reaches the process-locality proof after
+  all preceding groups pass, but the outer sandbox denies nested `sandbox-exec`. Host-authorized rerun is blocked
+  by the approval service usage limit, so `.1` remains active and `.2` is not eligible.
+- `2026-08-24`: Host-authorized locality and exact staged canonical CI pass through primary CLI 66x2 and Phase 0
+  1,031/1,031 in 801 seconds; `.1` is canonical-signoff-complete for its intended commit and `.2` is next.

@@ -55,7 +55,7 @@ sub read_index {
         push @records, $record;
     }
     close $fh or die "cannot close $path: $!\n";
-    die "task-tree index must contain metadata plus eight parts\n" if @records != 9;
+    die "task-tree index must contain metadata plus nine parts\n" if @records != 10;
     return \@records;
 }
 

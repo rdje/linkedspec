@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-17` (corrective typed transaction composition `.14.6.0.1` is focused-signoff-complete for
-  intended atomic 258 from clean `1a6e0b1f`; neutral progressive contract `.14.6.1` is next)
+- Last updated: `2026-08-18` (Dart `.14.6.4` is closed; the eighth bounded semantic member now owns pending Julia
+  `.14.6.5` through combined `.14.8`; independent capacity recomposition precedes Julia task splitting)
 - Owner: repo-local workflow
 
 ## Goal
@@ -85,7 +85,8 @@ immutable history part. The strict machine index is `docs/tasks/FUTURE-PARITY-BA
 | `.10`, `.10.0-.6` | [`FUTURE-PARITY-BACKLOG.10.0-6.md`](FUTURE-PARITY-BACKLOG.10.0-6.md) |
 | `.10.7-.10` | [`FUTURE-PARITY-BACKLOG.10.7-10.md`](FUTURE-PARITY-BACKLOG.10.7-10.md) |
 | `.11-.13` | [`FUTURE-PARITY-BACKLOG.11-13.md`](FUTURE-PARITY-BACKLOG.11-13.md) |
-| `.14` | [`FUTURE-PARITY-BACKLOG.14.md`](FUTURE-PARITY-BACKLOG.14.md) |
+| `.14`, `.14.0-.14.6.4` | [`FUTURE-PARITY-BACKLOG.14.md`](FUTURE-PARITY-BACKLOG.14.md) |
+| `.14.6.5-.14.8` | [`FUTURE-PARITY-BACKLOG.14.6.5-8.md`](FUTURE-PARITY-BACKLOG.14.6.5-8.md) |
 | `.15-.24` | [`FUTURE-PARITY-BACKLOG.15-24.md`](FUTURE-PARITY-BACKLOG.15-24.md) |
 | Legacy global history | [`FUTURE-PARITY-BACKLOG.history.md`](FUTURE-PARITY-BACKLOG.history.md) |
 

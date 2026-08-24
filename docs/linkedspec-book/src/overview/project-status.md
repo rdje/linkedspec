@@ -12,17 +12,16 @@ The plan keeps `LIVE_ACHIEVEMENT_STATUS.md`, `CHANGES.md`, `DEVELOPMENT_NOTES.md
 `docs/tasks/FUTURE-PARITY-BACKLOG.md` as stable entry points. Exact historical bytes move only after a strict
 repository-relative manifest records their clean Git source, line/byte counts, digest, immutable segments, and
 reconstruction query. Live status is a bounded overwrite view; changes and notes are bounded hot shards; the
-former oversized future tree is a 381-line live index over seven stable semantic parts and one immutable history
-part. After Dart progressive closeout, the `.14` member reached its exact 5,000-line ceiling before Julia planning
-could add required child leaves. ADR `0084` therefore freezes a behavior-free capacity extension: one new equally
-bounded `.14.6.5-.14.8` semantic member, unchanged stable IDs and aggregate/member ceilings, canonical atomic
-implementation, then independent recomposition. Until those leaves close, `.14.6.5` remains in its current owner.
+former oversized future tree is a 379-line live index over eight stable semantic parts and one immutable history
+part. After Dart progressive closeout, ADRs `0084` and `0085` add one equally bounded `.14.6.5-.14.8` member at
+the exact pending boundary. The schema-v1 index now has ten records, lookup preserves all 547 current stable IDs,
+and every aggregate/member ceiling is unchanged. Independent recomposition remains before Julia task expansion.
 
 This is consumer-aware work. The six live JSON projections and seven executable checkers now use stable decision
 authority ADR `0067`, and the chronology root contains no capability marker authority. Nine executable checkers
 and two contract projections now read their bounded task owners instead of the future monolith. Strict metadata
-preserves all 510 stable IDs, clean-source coverage, current digests, immutable history, bounded lookup, and
-26/26 rejected mutation classes. The changes/notes migration preserves the clean 44,270-line and 21,308-line
+preserves all 547 current stable IDs, clean-source coverage, current digests, immutable history, bounded lookup,
+and 27/27 rejected mutation classes. The changes/notes migration preserves the clean 44,270-line and 21,308-line
 sources in eleven and six immutable segments, respectively. Both roots are capped at 512 lines / 64 KiB, and the
 commit workflow now requires both rollover checks. Closeout independently passes history 34/34 across three
 surfaces / 21 segments, task metadata 26/26 over 510 IDs, rollover recovery 12/12, all eleven transferred task

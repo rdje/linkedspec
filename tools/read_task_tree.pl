@@ -50,7 +50,13 @@ sub owns_id {
     return $top == 10 && (!defined($numbers[1]) || $numbers[1] <= 6) if $partition eq '10.0-6';
     return $top == 10 && defined($numbers[1]) && $numbers[1] >= 7 if $partition eq '10.7-10';
     return $top >= 11 && $top <= 13 if $partition eq '11-13';
-    return $top == 14 if $partition eq '14';
+    return $top == 14 && (!defined($numbers[1]) || $numbers[1] <= 5
+        || ($numbers[1] == 6 && (!defined($numbers[2]) || $numbers[2] <= 4)))
+        if $partition eq '14.0-6.4';
+    return $top == 14 && defined($numbers[1])
+        && (($numbers[1] >= 7 && $numbers[1] <= 8)
+            || ($numbers[1] == 6 && defined($numbers[2]) && $numbers[2] >= 5))
+        if $partition eq '14.6.5-8';
     return $top >= 15 && $top <= 24 if $partition eq '15-24';
     return 0;
 }
@@ -70,7 +76,7 @@ sub read_index {
         push @records, $record;
     }
     close $fh or die "cannot close $path: $!\n";
-    die "task-tree index must contain metadata plus eight parts\n" if @records != 9;
+    die "task-tree index must contain metadata plus nine parts\n" if @records != 10;
     return \@records;
 }
 

@@ -10,6 +10,24 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-24 — FUTURE-PARITY-PARTITION-CAPACITY.1 — implement eighth bounded semantic member
+
+- Activated canonically from exact clean planning commit `2cf4c9dd`; moved only the unchanged 12-line / 1,379-byte
+  pending `.14.6.5-.14.8` block into `docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md` plus its source comment.
+- Preserved schema v1 and all 547 stable IDs while splitting original source ownership exactly at `21064/21065`.
+  The old part is 4,988 lines / 543,163 bytes; the new part is 13 / 1,501; immutable history is byte-identical.
+- Extended the strict index to ten records, two-sided range lookup, index refresh, migration builder, partition
+  checker, root navigation, bounded route, and capability all-semantic-parts census. The checker now rejects 27/27
+  mutation classes, including omission of any semantic part from that census.
+- ADR `0084` becomes the topology/route authority; newly staged ADR `0085` records the exact canonical old/new
+  route objects required by the pressure oracle. Only the new member limit and index 9→10 line allowance change;
+  collection, per-file, aggregate, member-byte, and 5,000-line semantic ceilings remain fixed.
+- Updated Knowledge, both roadmaps, the sole-facing mdBook, task index, and continuity. No backend, parser,
+  compiler, runtime, generated format, progressive rollout, typed row, public API, README, or outward behavior
+  moves. Focused direct dependents pass. The host-authorized locality proof and exact staged canonical CI pass,
+  including primary CLI 66x2 and Phase 0 1,031/1,031 in 801 seconds; `.2` independently recomposes the committed
+  topology next.
+
 ## 2026-08-18 — FUTURE-PARITY-PARTITION-CAPACITY.0 — freeze bounded future-task split plan
 
 - Activated an independent infrastructure tree task-tree-first from exact clean Dart closeout `3ccaf7c3` after

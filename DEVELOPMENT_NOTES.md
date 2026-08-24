@@ -10,6 +10,23 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-24 (`FUTURE-PARITY-PARTITION-CAPACITY.1` — eighth bounded semantic member): exact clean activation is
+  planning commit `2cf4c9dd`; this canonical leaf changes task storage/tooling/governance without behavior.
+- The exact 12-line / 1,379-byte pending block moves unchanged. The old `.14` member keeps the root through
+  `.14.6.4.3` plus its source comment at 4,988 lines / 543,163 bytes; the new `.14.6.5-.14.8` member is 13 lines /
+  1,501 bytes. Original source ranges/digests remain `17123-21064` and `21065-21074` exactly.
+- Range ownership treats `.14`, `.14.0-.5`, the `.14.6` parent, and `.14.6.0-.4` as old-part IDs; `.14.6.5-.8`
+  plus `.14.7-.8` resolve to the new part. Boundary lookup is exact and cannot overlap or gap.
+- Schema v1 now has metadata plus nine part records: eight mutable semantic members and immutable history. Read,
+  update, original-source builder, root navigation, checker, and route/capability consumers agree on that topology.
+- Checker mutation 27 enforces that capability exclusion enumerates every semantic member. ADR `0085` supplies
+  the exact newly staged old/new canonical route objects required to apply ADR `0084`; no pressure ceiling rises.
+- Focused proof passes. The host-authorized process-locality proof passes, and exact staged canonical CI completes
+  every required group through Rust semantic admission 1/1 in 81.27s, Julia semantic admission 416/416 in 32.7s,
+  primary CLI 66x2, RAM 37%, and Phase 0 1,031/1,031 in 801 seconds with a candidate-bound receipt.
+- `.2` must independently recompose committed IDs, ranges, digests, lookup, tools, route, and consumer coverage
+  before Julia `.14.6.5` can gain child tasks. Backend/generated/public behavior stays at progressive 4/9/103.
+
 - 2026-08-18 (`FUTURE-PARITY-PARTITION-CAPACITY.0` — bounded future-task split plan): exact clean activation is
   Dart closeout `3ccaf7c3`; this focused leaf changes only durable planning/status authorities.
 - Stable lookup still resolves `.14.6.5` uniquely to `.14.md`, which is exactly 5,000 lines / 544,542 bytes. The

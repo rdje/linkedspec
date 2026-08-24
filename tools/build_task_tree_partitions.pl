@@ -12,7 +12,7 @@ my $TREE = 'FUTURE-PARITY-BACKLOG';
 my $SOURCE_PATH = 'docs/tasks/FUTURE-PARITY-BACKLOG.md';
 my $INDEX_PATH = 'docs/tasks/FUTURE-PARITY-BACKLOG.index.jsonl';
 my $HISTORY_PATH = 'docs/tasks/FUTURE-PARITY-BACKLOG.history.md';
-my $AUTHORITY = 'docs/decisions/0068-future-parity-task-partitions.md';
+my $AUTHORITY = 'docs/decisions/0084-future-parity-task-partition-capacity.md';
 my $JSON = JSON::PP->new->canonical(1)->utf8(1);
 
 my $source_commit;
@@ -25,7 +25,8 @@ my @PARTS = (
     ['10.0-6',   'docs/tasks/FUTURE-PARITY-BACKLOG.10.0-6.md',  '10',   '10.6', 1, ['6780-10967']],
     ['10.7-10',  'docs/tasks/FUTURE-PARITY-BACKLOG.10.7-10.md', '10.7', '10.10',1, ['10968-15106']],
     ['11-13',    'docs/tasks/FUTURE-PARITY-BACKLOG.11-13.md',   '11',   '13',   1, ['15107-17122']],
-    ['14',       'docs/tasks/FUTURE-PARITY-BACKLOG.14.md',      '14',   '14',   1, ['17123-21074']],
+    ['14.0-6.4', 'docs/tasks/FUTURE-PARITY-BACKLOG.14.md',      '14',   '14.6.4', 1, ['17123-21064']],
+    ['14.6.5-8', 'docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md','14.6.5','14.8', 1, ['21065-21074']],
     ['15-24',    'docs/tasks/FUTURE-PARITY-BACKLOG.15-24.md',   '15',   '24',   1, ['21075-22878']],
     ['history',  $HISTORY_PATH,                                  undef,  undef,   0, ['22955-23622', '24308-26979']],
 );
@@ -88,13 +89,13 @@ my $metadata = {
     history_path         => $HISTORY_PATH,
     max_member_bytes     => 786_432,
     max_member_lines     => 5_000,
-    part_count           => 8,
+    part_count           => 9,
     retrieval_command    => "perl tools/read_task_tree.pl --tree $TREE --id <stable-id>",
     root_path            => $SOURCE_PATH,
     root_source_ranges   => \@ROOT_SOURCE_RANGES,
     root_source_sha256   => sha256_hex($root_source),
     schema_version       => 1,
-    semantic_part_count  => 7,
+    semantic_part_count  => 8,
     source_blob          => $source_blob,
     source_byte_count    => length($source),
     source_commit        => $source_commit,
@@ -113,7 +114,7 @@ for my $path (sort grep { $_ ne $SOURCE_PATH } keys %output) {
 }
 write_atomic($SOURCE_PATH, $output{$SOURCE_PATH});
 
-print "task-tree-partitions: wrote bounded $TREE root, 7 semantic parts, 1 immutable history part, and schema-v1 index\n";
+print "task-tree-partitions: wrote bounded $TREE root, 8 semantic parts, 1 immutable history part, and schema-v1 index\n";
 
 sub usage {
     return "usage: perl tools/build_task_tree_partitions.pl --source-commit 40HEX\n";
@@ -126,7 +127,8 @@ sub lookup_example {
     return '10.2' if $id eq '10.0-6';
     return '10.10' if $id eq '10.7-10';
     return '11' if $id eq '11-13';
-    return '14' if $id eq '14';
+    return '14' if $id eq '14.0-6.4';
+    return '14.6.5' if $id eq '14.6.5-8';
     return '24' if $id eq '15-24';
     die "no lookup example for $id\n";
 }
@@ -146,7 +148,8 @@ immutable history part. The strict machine index is `docs/tasks/FUTURE-PARITY-BA
 | `.10`, `.10.0-.6` | [`FUTURE-PARITY-BACKLOG.10.0-6.md`](FUTURE-PARITY-BACKLOG.10.0-6.md) |
 | `.10.7-.10` | [`FUTURE-PARITY-BACKLOG.10.7-10.md`](FUTURE-PARITY-BACKLOG.10.7-10.md) |
 | `.11-.13` | [`FUTURE-PARITY-BACKLOG.11-13.md`](FUTURE-PARITY-BACKLOG.11-13.md) |
-| `.14` | [`FUTURE-PARITY-BACKLOG.14.md`](FUTURE-PARITY-BACKLOG.14.md) |
+| `.14`, `.14.0-.14.6.4` | [`FUTURE-PARITY-BACKLOG.14.md`](FUTURE-PARITY-BACKLOG.14.md) |
+| `.14.6.5-.14.8` | [`FUTURE-PARITY-BACKLOG.14.6.5-8.md`](FUTURE-PARITY-BACKLOG.14.6.5-8.md) |
 | `.15-.24` | [`FUTURE-PARITY-BACKLOG.15-24.md`](FUTURE-PARITY-BACKLOG.15-24.md) |
 | Legacy global history | [`FUTURE-PARITY-BACKLOG.history.md`](FUTURE-PARITY-BACKLOG.history.md) |
 
@@ -188,8 +191,8 @@ sub line_count {
 
 sub validate_output {
     my ($output, $records) = @_;
-    die "unexpected task-tree output count\n" if keys(%$output) != 10;
-    die "unexpected task-tree part count\n" if @$records != 8;
+    die "unexpected task-tree output count\n" if keys(%$output) != 11;
+    die "unexpected task-tree part count\n" if @$records != 9;
     for my $record (@$records) {
         die "$record->{partition_id} exceeds 5,000 lines\n" if $record->{line_count} > 5_000;
         die "$record->{partition_id} exceeds 786,432 bytes\n" if $record->{byte_count} > 786_432;

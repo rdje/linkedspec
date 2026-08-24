@@ -8,10 +8,10 @@ answers:
   - "how many future parity semantic task parts will exist after the capacity extension"
   - "does the future parity partition capacity fix raise task evidence limits"
   - "which consumers must change for the future parity .14.6.5 partition"
-date: 2026-08-18
-status: accepted plan under FUTURE-PARITY-PARTITION-CAPACITY.0; canonical implementation and recomposition pending
+date: 2026-08-24
+status: implemented and canonical-verified under FUTURE-PARITY-PARTITION-CAPACITY.1; independent recomposition pending
 tags: [task-tree, partition, retrieval, routing, pressure, continuity, doctrine]
-evidence: "At clean 3ccaf7c3, docs/tasks/FUTURE-PARITY-BACKLOG.14.md is exactly 5,000 lines / 544,542 bytes and still uniquely owns pending FUTURE-PARITY-BACKLOG.14.6.5. ADR 0084 preserves every pressure ceiling and splits at the first unstarted boundary: the old member will own .14 through .14.6.4, while new bounded member docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md will own .14.6.5-.14.8. Schema v1 remains; semantic members increase 7→8, total part records 8→9, and index records 9→10. Canonical implementation must atomically update the index, lookup/update/build tools, partition checker/mutations, root navigation, route registry, and capability all-parts census before Julia behavior planning resumes."
+evidence: "At clean 3ccaf7c3, docs/tasks/FUTURE-PARITY-BACKLOG.14.md was exactly 5,000 lines / 544,542 bytes and uniquely owned pending FUTURE-PARITY-BACKLOG.14.6.5. ADR 0084 preserves every pressure ceiling and splits at the first unstarted boundary: the old member now owns .14 through .14.6.4 at 4,988 lines / 543,163 bytes, while new bounded member docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md owns .14.6.5-.14.8 at 13 lines / 1,501 bytes. Schema v1 remains; semantic members are 8, total part records 9, and index records 10. Index, lookup/update/build tools, 27 checker mutations, root navigation, ADR-0085 route authorization, and capability all-parts census move atomically; stable IDs remain 547 and Julia behavior remains pending until independent .2 recomposition."
 reverify:
   - "wc -lc docs/tasks/FUTURE-PARITY-BACKLOG.14.md docs/tasks/FUTURE-PARITY-BACKLOG.index.jsonl"
   - "perl tools/read_task_tree.pl --tree FUTURE-PARITY-BACKLOG --id FUTURE-PARITY-BACKLOG.14.6.5"
@@ -30,6 +30,7 @@ ADR `0084` adds one equally bounded mutable semantic member at the first unstart
 member. Stable IDs remain unchanged and unique, immutable history remains untouched, aggregate limits remain
 fixed, and lookup continues through the same repository-relative command.
 
-The plan is not implementation evidence. Until canonical leaf `.1` updates and verifies every authority and
-consumer, `.14.6.5` remains in the original owner and Julia task expansion remains blocked. Leaf `.2` then
-independently recomposes the committed topology before returning the frontier to Julia.
+Canonical leaf `.1` implements every authority and consumer, including the exact ADR `0085` route transition,
+and focused proof resolves `.14.6.5` uniquely to the new member. Host-authorized locality and exact staged
+canonical CI pass through primary CLI 66x2 and Phase 0 1,031/1,031 in 801 seconds. Julia task expansion remains
+sequenced behind leaf `.2`, which independently recomposes the committed topology.

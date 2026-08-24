@@ -1,7 +1,7 @@
 # ADR 0084: Future parity task evidence adds one bounded semantic member
 
 - Date: 2026-08-18
-- Status: accepted direction under `FUTURE-PARITY-PARTITION-CAPACITY.0`; implementation pending in `.1`
+- Status: accepted under `.0`; implemented and canonical-verified under `.1`; independent `.2` pending
 - Tags: documentation, task-tree, partition, retrieval, routing, pressure, continuity, doctrine
 
 ## Routing-contract authorization

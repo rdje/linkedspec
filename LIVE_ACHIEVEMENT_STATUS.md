@@ -2,28 +2,31 @@
 
 ## Current Activity
 
-- Clean Dart closeout `3ccaf7c3` is current at progressive 4/9/103 and parent `.14.6.4` composition-closed.
-- Stable lookup places pending Julia `.14.6.5` in `.14.md`, which is exactly at its enforced 5,000-line ceiling;
-  Julia task expansion is paused before behavior rather than weakening task-tree-first or bounded storage.
-- Independent `FUTURE-PARITY-PARTITION-CAPACITY.0` freezes ADR `0084`: keep schema v1 and every pressure ceiling,
-  add one bounded `.14.6.5-.14.8` semantic member, and preserve every stable ID and evidence byte.
-- The exact moved pending block is 12 lines / 1,379 bytes. Original source provenance splits at `21064/21065` with
-  separately fixed line, byte, and SHA-256 accounting.
-- Canonical `.1` owns the atomic index/member/navigation/read/update/build/check/route/capability-consumer change;
-  focused `.2` independently recomposes it before returning the frontier to Julia.
-- No parser, compiler, runtime, backend, generated format, progressive rollout, typed row, public surface, README,
-  or immutable history byte changes in `.0`.
+- Capacity `.1` implements the exact eighth bounded member from clean plan `2cf4c9dd`; focused and canonical
+  signoff are complete for the intended commit, and independent focused `.2` is next.
+- The unchanged `.14.6.5-.14.8` block moves at exact source boundary `21064/21065`; old/new members are
+  4,988/543,163 and 13/1,501 lines/bytes, with immutable history untouched.
+- Strict schema v1 now has ten records over eight semantic members plus history and preserves all 547 stable IDs.
+  Lookup resolves `.14.6.4.3` to the old part and `.14.6.5` to the new part exactly once.
+- Read/update/build tools, root navigation, 27/27 checker mutations, bounded route, and capability all-parts census
+  agree. ADRs `0084`/`0085` preserve all pressure ceilings while authorizing the exact route transition.
+- Progressive behavior remains neutral + Perl + Rust + Dart 4/9/103; no backend, generated format, typed row,
+  public API, README, or outward surface moves.
 
 ## Latest Completed Slice
 
-- Capacity `.0` freezes exact saturation, source split, ADR `0084`, all topology consumers, rollback, and
-  no-behavior boundaries; focused task/route/capability/Knowledge/book/history/memory/doctrine proof passes.
+- Capacity `.1` moves only the frozen pending block, preserves all 547 IDs and pressure ceilings, extends every
+  exact tool/route/consumer, and passes canonical locality, primary CLI 66x2, and Phase 0 1,031/1,031 in 801s.
 
 ## Next Action
 
-- Land focused capacity plan `.0`, then canonically implement the new bounded member in `.1` from that clean commit.
+- From the clean `.1` commit, activate and run independent no-change recomposition `.2`, then return the clean
+  frontier to Julia `FUTURE-PARITY-BACKLOG.14.6.5`.
 
 ## Recent Completions
+
+- `2026-08-24` — capacity `.1` canonically lands the eighth bounded semantic member and every exact index,
+  lookup/update/build/check/route/consumer change without backend, generated-format, or outward behavior movement.
 
 - `2026-08-18` — capacity `.0` preserves every pressure ceiling and stable ID while freezing one bounded
   `.14.6.5-.14.8` semantic member for canonical implementation and independent recomposition before Julia.
@@ -71,9 +74,6 @@
 
 - `2026-08-17` — `.14.5.1` canonical signoff passes nine doctrines, containment/relocation, CLI 66x2, RAM 51%,
   Phase 0 1,031/1,031 in 729 seconds, and the exact six-runtime composition route; parent `.14.5` closes.
-
-- `2026-08-16` — `.7.3` independently recomposed every admitted gap/adjacent authority from public atomic 254
-  `bb0c3768`, proved exact base-relative executable identity, closed the tree, and unblocked typed composition.
 
 ## History
 

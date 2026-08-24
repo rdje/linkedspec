@@ -94,7 +94,8 @@ changed* lives in git (layer D), not here.
 | [0081](0081-engineering-notes-fifteenth-member-capacity.md) | Engineering-notes history admits its fifteenth bounded member | 2026-08-17 | accepted under `FUTURE-PARITY-BACKLOG.14.6.2.2` | documentation, history, rollover, routing, pressure, continuity, doctrine |
 | [0082](0082-change-history-twentieth-member-capacity.md) | Change history admits its twentieth bounded member | 2026-08-17 | accepted under `FUTURE-PARITY-BACKLOG.14.6.2.3` | documentation, history, rollover, routing, pressure, continuity, doctrine |
 | [0083](0083-engineering-notes-sixteenth-member-capacity.md) | Engineering-notes history admits its sixteenth bounded member | 2026-08-17 | accepted under `FUTURE-PARITY-BACKLOG.14.6.4.3` | documentation, history, rollover, routing, pressure, continuity, doctrine |
-| [0084](0084-future-parity-task-partition-capacity.md) | Future parity task evidence adds one bounded semantic member | 2026-08-18 | accepted direction under `FUTURE-PARITY-PARTITION-CAPACITY.0`; implementation pending in `.1` | documentation, task-tree, partition, retrieval, routing, pressure, continuity, doctrine |
+| [0084](0084-future-parity-task-partition-capacity.md) | Future parity task evidence adds one bounded semantic member | 2026-08-18 | accepted under `.0`; implemented under `FUTURE-PARITY-PARTITION-CAPACITY.1`; recomposition pending | documentation, task-tree, partition, retrieval, routing, pressure, continuity, doctrine |
+| [0085](0085-future-parity-task-partition-route-implementation.md) | Future parity task route implements the eighth semantic member | 2026-08-18 | accepted and implemented under `FUTURE-PARITY-PARTITION-CAPACITY.1` | documentation, task-tree, partition, routing, pressure, continuity, doctrine |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

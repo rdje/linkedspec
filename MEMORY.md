@@ -1,15 +1,14 @@
 # MEMORY
 
-- activation_commit: `3ccaf7c3ab1be95bf427818414f6aa5c83e22836` — exact clean Dart-admission atomic-271
-  base for task-tree-first `FUTURE-PARITY-PARTITION-CAPACITY.0`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-PARTITION-CAPACITY.0 - freeze bounded split plan`; focused signoff
-  complete for the intended planning commit; Dart closeout remains committed at `3ccaf7c3` and 4/9/103.
-- active_work_unit: none after the intended `.0` commit; no partition or executable authority has moved.
-- next_action: after `.0` commit/brief/clean verification, activate canonical `.1` and atomically add the bounded
-  `.14.6.5-.14.8` task member plus every index/tool/checker/route/consumer authority.
-- in_flight_uncommitted: none after intended `.0` commit; `.1` has not changed task members or executable tooling.
-- blockers: Julia `FUTURE-PARITY-BACKLOG.14.6.5` task splitting waits for capacity `.0-.2`; `.14.md` is exactly
-  5,000 lines. This is a bounded storage-topology prerequisite, not a backend behavior defect.
+- activation_commit: `2cf4c9dd27e40f2ea527c003d050ff2a0a2add3a` — exact clean capacity-plan base for
+  task-tree-first canonical `FUTURE-PARITY-PARTITION-CAPACITY.1`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-PARTITION-CAPACITY.1 - implement eighth bounded semantic member`;
+  canonical signoff is complete from exact clean activation `2cf4c9dd`.
+- active_work_unit: none after the intended `.1` commit; focused `.2` is pending and not yet activated.
+- next_action: from the clean `.1` commit, activate `FUTURE-PARITY-PARTITION-CAPACITY.2` task-tree-first and
+  independently recompose the committed topology before returning the frontier to Julia `.14.6.5`.
+- in_flight_uncommitted: none after the intended `.1` commit; no background job remains.
+- blockers: Julia splitting remains sequenced behind independent focused `.2`; no environmental blocker remains.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -28,9 +27,9 @@
   absolute roots; moved/outside-CWD execution is canonical.
 - current_semantic_governance: capability 80/0/0; semantic six groups / 20 responses / 128 mutations, rollout 9/9,
   native admission 6/6; MCP rollout complete/141.
-- current_readme_contract: README stays 106/5,197 under hard 128/6,144 caps; route changeable detail to its
-  registry-owned destinations. ADR `0084` plans one additional bounded future-task semantic member and a 10-line
-  strict index without changing any collection, per-file, aggregate, or member ceiling; `.1` implements it.
+- current_readme_contract: README stays 106/5,197 under hard 128/6,144 caps; ADRs `0084`/`0085` implement one
+  additional bounded future-task semantic member and a ten-line strict index without changing any collection,
+  per-file, aggregate, member-byte, or 5,000-line semantic-member ceiling.
 - current_verification_contract: ADR `0073` makes focused proof the ordinary per-leaf default and canonical proof
   mandatory at admission/milestone/public/infrastructure and final clean push boundaries.
 - documentation_debt_owner: ADR `0066` composition-closes all stores; bounded live/history/task/Knowledge owners
@@ -39,7 +38,8 @@
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, recurrence/public no-drift 9/9, and
   classifies private progressive dispatch fail-closed at 138 ActionIR rows / 250 calls / 58 mutations.
 - current_future_direction: neutral `.14.6.1` plus admitted Perl `.2`, Rust `.3`, and Dart `.4` are rollout 4/9/103;
-  Julia `.5` remains next after independent partition-capacity `.0-.2`; Lua `.6`, recurrence `.7`, public `.8`,
-  staged `.14.7`, and combined `.14.8` retain separate owners.
-- latest_bootstrap_read: 2026-08-18 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
-  review complete; capacity `.0` retrieves ADR `0068`, exact index/route/tools/consumers, and clean `3ccaf7c3`.
+  Julia `.5` has a bounded owner and follows capacity `.2`; Lua `.6`, recurrence `.7`, public `.8`, staged `.14.7`,
+  and combined `.14.8` retain separate owners.
+- latest_bootstrap_read: 2026-08-24 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
+  review complete; capacity `.1` implements ADRs `0084`/`0085` from clean `2cf4c9dd`, and exact canonical signoff
+  passes through repository locality, primary CLI 66x2, and Phase 0 1,031/1,031 in 801 seconds.
