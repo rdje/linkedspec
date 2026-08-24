@@ -2,33 +2,31 @@
 
 ## Current Activity
 
-- Julia `.14.6.5.2` is canonical-signoff-complete from clean `bb34a85e`. One exclusive logical-only node plus opaque
-  fresh execution seeds carry private dispatch through native, reconstructed, generated-plan, and independently
-  included emitted-module routes with equal detached results and no parent-cursor movement.
-- The dormant carrier consumer passes 62/62 and the authority consumer remains 210/210. Static malformed,
-  residual-generic, and recognition-effect boundaries plus live-token defense pass; generated data excludes every
-  callback, registry, fingerprint, source snapshot, cancellation token, and mutable authority.
-- Governance now records 9 dormant Julia carrier paths and one Lua guard/5 paths while rollout remains 4/9/103.
-  Ordinary/canonical discovery, generated format, typed recurrence, public, and outward surfaces do not move.
-- Mandatory change-history rollover publishes segment `4992`; the doctrine gate catches finite 20-file/19-line
-  capacity exactly. ADR `0086` raises only those controls to 21/20 and upgrades this leaf to canonical proof.
-- Complete ordinary Julia and direct governance proof pass. Typed source remains 11/3/152, recognition
-  138/250/58, generated/capability 80/0/0, and language 250/126.
-- Corrected Perl 127/127, Dart 7/7, and cfg-enabled Rust 1/1 lockstep consumers plus exact receipt-bound canonical
-  CI pass; Julia remains dormant at rollout 4/9/103 and `.14.6.5.3` alone owns admission.
+- Julia `.14.6.5.3` is canonical-signoff-complete from clean `35a2b56c`. The unchanged 62-assertion carrier moves
+  from `test_dormant` to ordinary discovery and one exact canonical route; no dormant duplicate remains.
+- Ordinary Julia and canonical CI each discover the same carrier exactly once. The separate unexported authority
+  matrix remains dormant, directly runnable, and GREEN at 210/210; production and generated format do not change.
+- Governance promotes only Julia to 5/9/106 and records 9 Rust + 8 Dart + 9 Julia carrier paths, one Lua guard/5
+  paths, ten outward guards, and 26 diagnostics. Typed recurrence, public inventory, and outward surfaces stay fixed.
+- Complete ordinary Julia, Perl 128/128, Dart 7/7, cfg Rust 1/1, typed 11/3/152, recognition 138/250/58,
+  generated/capability 80/0/0, language 250/126, and exact receipt-bound canonical CI pass.
+- Behavioral Julia `.14.6.5.0-.3` is complete. Independent topology/continuity recomposition `.14.6.5.4` is next;
+  Lua `.6`, recurrence `.7`, public `.8`, staged `.14.7`, and combined `.14.8` retain separate ownership.
 
 ## Latest Completed Slice
 
-- Julia `.14.6.5.2` turns the unchanged historical final path GREEN at 62/62 through four fresh-authority carriers
-  while retaining dormant discovery and every admission/rollout exclusion; ADR `0086` owns its mandatory finite
-  history-capacity step, and receipt-bound canonical proof closes the leaf.
+- Julia `.14.6.5.3` admits the unchanged 62-assertion carrier once through ordinary/canonical discovery, advances
+  only Julia to 5/9/106, and preserves the dormant 210-assertion authority plus every later/public boundary.
 
 ## Next Action
 
-- From the clean `.14.6.5.2` commit, activate `FUTURE-PARITY-BACKLOG.14.6.5.3` task-tree-first and admit the
-  unchanged Julia carrier consumer through ordinary/canonical proof while promoting only Julia rollout.
+- From the clean `.14.6.5.3` commit, activate `FUTURE-PARITY-BACKLOG.14.6.5.4` task-tree-first and independently
+  recompose the admitted Julia topology, generated/emitted invariants, neutral governance, and continuity state.
 
 ## Recent Completions
+
+- `2026-08-24` — `.14.6.5.3` moves the exact Julia carrier into ordinary discovery and one canonical route,
+  promotes only Julia to progressive 5/9/106, and leaves authority, format, typed, and outward boundaries fixed.
 
 - `2026-08-24` — `.14.6.5.2` adds Julia's exclusive logical node plus four fresh-authority carriers, makes the
   exact dormant consumer GREEN at 62/62, finitely admits history segment `4992` under ADR `0086`, and keeps
@@ -76,10 +74,6 @@
 
 - `2026-08-17` — `.14.6.2.3` canonically routes the exact 125-assertion Perl consumer, promotes only Perl to
   progressive 2/9/86, recomposes recognition to 138/250/58, and closes `.14.6.2` without outward movement.
-
-- `2026-08-17` — `.14.6.2.2` privately integrates one exclusive dedicated node and four fresh-authority carriers;
-  125 focused assertions plus canonical signoff pass while CI routing, rollout, generated format, staged registry,
-  and outward surfaces stay fixed.
 
 ## History
 

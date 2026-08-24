@@ -10,8 +10,8 @@ Duplicate-slot rollout is closed at 7 complete / 0 pending; recurring proof rema
 Repeated-action rollout is closed at 8 complete / 0 pending; recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh`.
 
-Progressive audit/correction/neutral `.14.6.0-.1`, Perl `.2`, Rust `.3`, and Dart `.4` are complete through
-intended atomic 271. Neutral + Perl + Rust + Dart rollout is 4/9 with 103 mutations; all three admitted backends preserve private immutable
+Progressive audit/correction/neutral `.14.6.0-.1`, Perl `.2`, Rust `.3`, Dart `.4`, and Julia behavioral `.5.0-.3`
+are complete. Neutral + Perl + Rust + Dart + Julia rollout is 5/9 with 106 mutations; all four admitted backends preserve private immutable
 pre-registered authority, same-source globally rebased views, narrowing grants/ceilings, shared cancellation and
 budgets, decreasing bounded chains, detached results, and one dedicated non-rollbackable node without outward or
 typed-row movement. Dart `.4.0-.2` preserve the historical RED, private authority, and four carriers; `.4.3`
@@ -23,7 +23,9 @@ dormant RED `.0`, private authority/core `.1`, dormant carriers `.2`, canonical 
 recomposition `.4`; `.1` provides the unexported immutable registry/invocation/rebased-view core, and `.2` makes
 the unchanged final-path fixture GREEN at 62/62 through four fresh-authority routes while retaining dormancy.
 Its mandatory change-history rollover creates content-addressed segment `4992`; ADR `0086` raises only finite
-collection/manifest capacity to 21/20, and `.2` is canonical-signoff-complete. Admission `.3` is next.
+collection/manifest capacity to 21/20, and `.2` is canonical-signoff-complete. Admission `.3` moves that same
+62-assertion carrier into ordinary discovery and one exact canonical route, advances only Julia, and closes the
+behavioral parent while leaving the 210-assertion authority matrix dormant. Independent recomposition `.4` is next.
 
 Expressive `.spec` self-containment and an optional EBNF-like authoring profile are an accepted long-horizon
 direction under ADR `0064` and `SPEC-LANGUAGE-SELF-CONTAINMENT`. Self-containment means portable closure for

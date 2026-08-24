@@ -44,7 +44,7 @@ void main() {
       expect(contract['format'], 1);
       expect(
         contract['status'],
-        'perl_rust_and_dart_complete_other_backends_pending',
+        'perl_rust_dart_and_julia_complete_other_backends_pending',
       );
       expect(contract['expected_counts'], <String, Object?>{
         'registry_entries': 2,
@@ -56,13 +56,13 @@ void main() {
         'execution_cases': 4,
         'rust_carrier_paths': 9,
         'dart_carrier_paths': 8,
-        'julia_dormant_carrier_paths': 9,
+        'julia_carrier_paths': 9,
         'backend_guard_groups': 1,
         'backend_guard_paths': 5,
         'outward_guard_paths': 10,
         'diagnostics': 26,
         'rollout_legs': 9,
-        'mutations': 103,
+        'mutations': 106,
       });
       expect(_ids(contract, 'view_cases'), <String>[
         'unicode_middle',
@@ -156,7 +156,7 @@ void main() {
         'complete',
         'complete',
         'complete',
-        'pending',
+        'complete',
         'pending',
         'pending',
         'pending',
@@ -164,6 +164,9 @@ void main() {
       ]);
       expect(rollout[3]['paths'], <String>[
         'dart/test/progressive_span_dispatch_contract_test.dart',
+      ]);
+      expect(rollout[4]['paths'], <String>[
+        'julia/test/progressive_span_dispatch_contract_test.jl',
       ]);
 
       final stagedJob = StagedParseJob(

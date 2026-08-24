@@ -1,13 +1,11 @@
-# FUTURE-PARITY-BACKLOG.14.6.5.2 — dormant Julia progressive carriers.
+# FUTURE-PARITY-BACKLOG.14.6.5.3 — admitted Julia progressive carriers.
 #
-# This exact final-path consumer remains outside ordinary Julia and canonical
-# CI discovery. Its focused repository-local command is:
+# Ordinary `Pkg.test()` discovery and canonical CI both run this exact
+# final-path consumer. Its focused repository-local command is:
 #
 #   bash tools/run_julia_project_data.sh --project=julia --startup-file=no \
 #     --history-file=no -e \
-#     'using Test; include("julia/test_dormant/progressive_span_dispatch_contract_test.jl")'
-#
-# Owner `.14.6.5.3` alone may admit this unchanged consumer and promote Julia.
+#     'using LinkedSpecJulia, JSON3, Test; include("julia/test/progressive_span_dispatch_contract_test.jl")'
 
 using JSON3
 using LinkedSpecJulia
@@ -162,14 +160,14 @@ function _julia_progressive_execute_emitted(
     return value, emitted, source_identity
 end
 
-@testset "Dormant Julia progressive span-dispatch carriers" begin
+@testset "Admitted Julia progressive span-dispatch carriers" begin
     @testset "neutral inventory and unrelated staged registry are exact" begin
         contract = JULIA_PROGRESSIVE_CONTRACT
         @test contract["contract_id"] ==
               "linkedspec-progressive-span-dispatch-v1"
         @test contract["format"] == 1
         @test contract["status"] ==
-              "perl_rust_and_dart_complete_other_backends_pending"
+              "perl_rust_dart_and_julia_complete_other_backends_pending"
         @test contract["expected_counts"] == Dict{String,Any}(
             "registry_entries" => 2,
             "sources" => 2,
@@ -180,13 +178,13 @@ end
             "execution_cases" => 4,
             "rust_carrier_paths" => 9,
             "dart_carrier_paths" => 8,
-            "julia_dormant_carrier_paths" => 9,
+            "julia_carrier_paths" => 9,
             "backend_guard_groups" => 1,
             "backend_guard_paths" => 5,
             "outward_guard_paths" => 10,
             "diagnostics" => 26,
             "rollout_legs" => 9,
-            "mutations" => 103,
+            "mutations" => 106,
         )
         rollout = contract["rollout"]
         @test [row["status"] for row in rollout] == [
@@ -194,14 +192,15 @@ end
             "complete",
             "complete",
             "complete",
-            "pending",
+            "complete",
             "pending",
             "pending",
             "pending",
             "pending",
         ]
         @test rollout[5]["owner"] == "FUTURE-PARITY-BACKLOG.14.6.5"
-        @test isempty(rollout[5]["paths"])
+        @test rollout[5]["paths"] ==
+              ["julia/test/progressive_span_dispatch_contract_test.jl"]
 
         staged_job = StagedParseJob(
             version = 1,
@@ -391,7 +390,7 @@ Child:: I { span = hash("source_id", "input", "start", 0, "end", 1, "provenance"
         @test count("progressive_dispatch_span", emitted) == 0
     end
 
-    @testset "consumer and rollout stay dormant after carrier GREEN" begin
+    @testset "consumer is admitted once while authority stays private" begin
         ordinary = read(
             joinpath(JULIA_PROGRESSIVE_REPO_ROOT, "julia", "test", "runtests.jl"),
             String,
@@ -400,14 +399,38 @@ Child:: I { span = hash("source_id", "input", "start", 0, "end", 1, "provenance"
             joinpath(JULIA_PROGRESSIVE_REPO_ROOT, "tools", "run_ci_local.sh"),
             String,
         )
-        @test !occursin("progressive_span_dispatch_contract_test.jl", ordinary)
-        @test !occursin(
-            "julia/test_dormant/progressive_span_dispatch_contract_test.jl",
-            canonical,
-        )
-        @test :ActionProgressiveDispatchSpanExpr ∉ names(LinkedSpecJulia)
-        @test isempty(generic_calls)
+        @test isfile(joinpath(@__DIR__, "progressive_span_dispatch_contract_test.jl")) &&
+              !isfile(
+                  joinpath(
+                      JULIA_PROGRESSIVE_REPO_ROOT,
+                      "julia",
+                      "test_dormant",
+                      "progressive_span_dispatch_contract_test.jl",
+                  ),
+              )
+        @test count(
+            ==("include(\"progressive_span_dispatch_contract_test.jl\")"),
+            split(ordinary, '\n'),
+        ) == 1
+        @test [
+            count(
+                "require_tracked_file julia/test/progressive_span_dispatch_contract_test.jl",
+                canonical,
+            ),
+            count(
+                "running exact Julia progressive span-dispatch admission consumer",
+                canonical,
+            ),
+            count(
+                "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/progressive_span_dispatch_contract_test.jl\")'",
+                canonical,
+            ),
+        ] == fill(1, 3)
+        @test :ActionProgressiveDispatchSpanExpr ∉ names(LinkedSpecJulia) &&
+              isempty(generic_calls)
         @test length(progressive_nodes) == 1
-        @test JULIA_PROGRESSIVE_CONTRACT["rollout"][5]["status"] == "pending"
+        @test JULIA_PROGRESSIVE_CONTRACT["rollout"][5]["status"] == "complete" &&
+              JULIA_PROGRESSIVE_CONTRACT["rollout"][5]["paths"] ==
+              ["julia/test/progressive_span_dispatch_contract_test.jl"]
     end
 end

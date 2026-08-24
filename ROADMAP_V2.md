@@ -8,8 +8,8 @@ Duplicate-slot rollout is closed at 7 complete / 0 pending; recurring proof rema
 Repeated-action rollout is closed at 8 complete / 0 pending; recurring proof remains
 `tools/check_repeated_action_result_five_backend.sh`.
 
-Progressive `.14.6.0-.1`, Perl `.2`, Rust `.3`, and Dart `.4` are complete through intended atomic 271 at
-neutral + Perl + Rust + Dart 4/9/103. Private pre-registered authority, globally rebased same-source views, narrowing ceilings, shared
+Progressive `.14.6.0-.1`, Perl `.2`, Rust `.3`, Dart `.4`, and Julia behavioral `.5.0-.3` are complete at
+neutral + Perl + Rust + Dart + Julia 5/9/106. Private pre-registered authority, globally rebased same-source views, narrowing ceilings, shared
 cancellation/budgets, bounded decreasing chains, detached results, dedicated nodes, four carriers, and exact
 admissions are current on those three backends without outward or typed-row movement. Dart `.4.0-.2` preserve its
 historical RED, authority, and four carriers; `.4.3` admits the unchanged seven-group consumer ordinarily and
@@ -18,9 +18,10 @@ combined `.14.8` follow. Capacity `.0` freezes, canonical `.1` implements, and f
 recomposes one equally bounded `.14.6.5-.14.8` semantic task member without changing stable IDs, pressure ceilings,
 or backend behavior. Capacity is composition-closed. Julia `.14.6.5.0` freezes an exact historical 55-pass/one-
 RED consumer; `.1` adds private immutable authority and `.2` makes the unchanged consumer GREEN at 62/62 through
-four fresh-authority routes while retaining dormant discovery. Canonical admission `.3` and independent
-recomposition `.4` remain disjoint. Mandatory history segment `4992` advances only finite capacity to 21 files /
-20 manifest lines under ADR `0086`; `.2` is canonical-signoff-complete and `.3` is next.
+four fresh-authority routes while retaining dormant discovery. Canonical admission `.3` moves that exact
+62-assertion carrier into ordinary discovery and one canonical route, promotes only Julia, and leaves the separate
+210-assertion authority matrix dormant. Independent recomposition `.4` remains disjoint and is next. Mandatory
+history segment `4992` advances only finite capacity to 21 files / 20 manifest lines under ADR `0086`.
 
 Accepted long-horizon direction: ADR `0064` plus `SPEC-LANGUAGE-SELF-CONTAINMENT` define portable `.spec`
 problem-domain closure without ambient effects and an optional honest EBNF-like frontend over the same canonical

@@ -157,7 +157,7 @@ that same proof pass. A RED result is therefore planned evidence, not a claim th
 
 ### Neutral progressive span-dispatch contract
 
-Canonical CI always runs the repository-routed neutral checker plus the admitted private Perl, Rust, and Dart consumers:
+Canonical CI always runs the repository-routed neutral checker plus the admitted private Perl, Rust, Dart, and Julia consumers:
 
 ```bash
 bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_contract.py
@@ -166,18 +166,15 @@ RUSTFLAGS='--cfg linkedspec_progressive_span_dispatch_red' cargo test \
   --manifest-path rust/Cargo.toml -p linkedspec-runtime \
   --test progressive_span_dispatch_contract
 (cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/progressive_span_dispatch_contract_test.dart)
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include("julia/test/progressive_span_dispatch_contract_test.jl")'
 ```
 
-It validates the reserved private `dispatch_span("logical-parser-id", "Top", span)` expression without enabling
-backend syntax. The checker independently executes 2 sources/8 rebased views, 6 authority-minimum cases, 6
-cancellation/deadline/budget cases, 8 decreasing-chain/bound cases, and 4 isolation/detachment cases; locks 26
-diagnostics and neutral + Perl + Rust + Dart 4/9 rollout; guards 8 implementation paths across the two still-pending
-Julia/Lua groups, 9 Rust carrier paths, 8 Dart carrier paths, and 10 outward paths; and rejects 103 mutations. A passing check proves no path loader,
-registry mutation, capability/policy elevation, cancellation reset, non-decreasing cycle, parent-state leak,
-uncommitted recognition effect, live result handle, fallback, or premature backend/typed rollout claim. It also
-requires the typed row to remain pending, the rejected effect to own exactly current node
-`PROGRESSIVE_DISPATCH_SPAN` and no call row, both tokens to remain absent from guarded Julia/Lua paths,
-and private spelling/node/rollout tokens to remain absent from ten facade/schema/semantic/MCP/CLI/README paths.
+It validates the reserved private `dispatch_span("logical-parser-id", "Top", span)` expression without enabling backend syntax.
+The checker executes 2 sources/8 views, 6 authority, 6 cancellation, 8 chain/bound, and 4 isolation/detachment cases;
+locks 26 diagnostics and 5/9 rollout; guards 5 Lua, 9 Rust, 8 Dart, 9 Julia, and 10 outward paths; and rejects 106 mutations.
+A pass excludes path loading, authority elevation, cancellation reset, non-decreasing cycles, parent-state leaks, live handles, fallback, and premature rollout.
+It also keeps the typed row pending, gives rejected effect `parser_registry_or_staged_dispatch` exactly current node
+`PROGRESSIVE_DISPATCH_SPAN` and no call row, guards Lua tokens, and denies private exposure in ten facade/schema/semantic/MCP/CLI/README paths.
 
 Perl carrier integration and admission now prove
 one exclusive dedicated node, static operands, fresh invocation authority, live/reconstructed/generated-plan/
@@ -226,8 +223,11 @@ cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only 
 cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/progressive_span_dispatch_contract_test.dart
 ```
 
-The authority command passes four groups: every neutral view/authority/cancellation/chain/execution row and all 26 diagnostic contexts, then nested rebasing/shared limits, callback-view and retained-request expiry, immutable registry inputs, callback containment, UTF-8 diagnostic bounding, and cyclic/live/oversized result rejection. The seven-group carrier proves the dedicated node, static/live transaction defense, four fresh-authority routes, and emitted-source equality; admission `.14.6.5.3` will move that unchanged consumer into ordinary discovery and one exact canonical route.
-Julia keeps both proofs directly runnable and dormant: `bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using Test; include("julia/test_dormant/progressive_span_dispatch_authority_test.jl")'` passes 210 assertions across the private authority matrix, and the same command with `progressive_span_dispatch_contract_test.jl` passes 62/62 across the dedicated node plus native, reconstructed, generated-plan, and independently included emitted-module carriers. Carrier `.14.6.5.2` has exact receipt-bound signoff, but ordinary/canonical discovery still omit both; `.14.6.5.3-.4` separately own admission and recomposition.
+The Dart authority command passes four groups: every neutral view/authority/cancellation/chain/execution row and all 26 diagnostic contexts, then nested rebasing/shared limits, callback-view and retained-request expiry, immutable registry inputs, callback containment, UTF-8 diagnostic bounding, and cyclic/live/oversized result rejection. Its seven-group carrier proves the dedicated node, static/live transaction defense, four fresh-authority routes, and emitted-source equality.
+
+Julia admits only the carrier: the command above passes 62/62 across its four routes, and ordinary `Pkg.test()` includes it once.
+The directly runnable authority command with `julia/test_dormant/progressive_span_dispatch_authority_test.jl` passes 210 assertions but stays dormant; `.14.6.5.3` admits without duplicating it, and `.14.6.5.4` recomposes independently.
+
 The `.14.4.0` audit found one contradiction in that baseline: `direct_nonprogress` used the same textual identity for invocation and parent. Corrective `.14.4.0.1` changes all six observation identities to positive unique
 monotonic numbers and validates lineage before exact fixture comparison. Four reason-checked regressions prove
 self-parent, reused identity, invalid parent order, and cyclic-lineage rejection. The gate therefore proves the

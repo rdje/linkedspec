@@ -442,6 +442,7 @@ require_tracked_file t/recognition_transaction_perl_contract.t
 require_tracked_file t/progressive_span_dispatch_perl_contract.t
 require_tracked_file rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs
 require_tracked_file dart/test/progressive_span_dispatch_contract_test.dart
+require_tracked_file julia/test/progressive_span_dispatch_contract_test.jl
 require_tracked_file rust/linkedspec-runtime/tests/recognition_transaction_contract.rs
 require_tracked_file dart/test/recognition_transaction_contract_test.dart
 require_tracked_file julia/test/recognition_transaction_contract_test.jl
@@ -662,6 +663,9 @@ RUSTFLAGS='--cfg linkedspec_progressive_span_dispatch_red' cargo test --manifest
 
 log "running exact Dart progressive span-dispatch admission consumer"
 (cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/progressive_span_dispatch_contract_test.dart)
+
+log "running exact Julia progressive span-dispatch admission consumer"
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include("julia/test/progressive_span_dispatch_contract_test.jl")'
 
 log "checking backend-neutral inter-match gap-capture contract and current no-overclaim boundary"
 bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py

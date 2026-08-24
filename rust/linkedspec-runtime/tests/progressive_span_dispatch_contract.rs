@@ -241,7 +241,7 @@ fn final_path_uses_one_dedicated_progressive_node_across_four_routes() {
     assert_eq!(neutral["format"], 1);
     assert_eq!(
         neutral["status"],
-        "perl_rust_and_dart_complete_other_backends_pending"
+        "perl_rust_dart_and_julia_complete_other_backends_pending"
     );
     assert_eq!(
         neutral["expected_counts"],
@@ -255,13 +255,13 @@ fn final_path_uses_one_dedicated_progressive_node_across_four_routes() {
             "execution_cases": 4,
             "rust_carrier_paths": 9,
             "dart_carrier_paths": 8,
-            "julia_dormant_carrier_paths": 9,
+            "julia_carrier_paths": 9,
             "backend_guard_groups": 1,
             "backend_guard_paths": 5,
             "outward_guard_paths": 10,
             "diagnostics": 26,
             "rollout_legs": 9,
-            "mutations": 103,
+            "mutations": 106,
         })
     );
     assert_eq!(
@@ -382,13 +382,17 @@ fn final_path_uses_one_dedicated_progressive_node_across_four_routes() {
             .map(|row| row["status"].as_str().expect("rollout status"))
             .collect::<Vec<_>>(),
         [
-            "complete", "complete", "complete", "complete", "pending", "pending", "pending",
+            "complete", "complete", "complete", "complete", "complete", "pending", "pending",
             "pending", "pending",
         ]
     );
     assert_eq!(
         rollout[2]["paths"],
         json!(["rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs"])
+    );
+    assert_eq!(
+        rollout[4]["paths"],
+        json!(["julia/test/progressive_span_dispatch_contract_test.jl"])
     );
 
     let staged_job = json!({

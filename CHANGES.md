@@ -10,6 +10,24 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-24 — FUTURE-PARITY-BACKLOG.14.6.5.3 — admit private Julia progressive dispatch
+
+- Activated task-tree-first from exact clean Julia-carrier commit `35a2b56c`; moved the same Git blob from
+  `julia/test_dormant` to `julia/test`, changing only its admission-owned header, neutral snapshot, and discovery
+  assertions while preserving all seven groups and 62 assertions.
+- Ordinary `Pkg.test()` includes the carrier exactly once. Canonical CI requires its tracked path, logs one exact
+  Julia admission marker, and invokes the same repository-routed consumer once; no dormant carrier duplicate
+  remains, while the separate 210-assertion authority consumer stays dormant and directly runnable.
+- Promoted only Julia's neutral current-boundary and rollout truth. Governance is 5/9/106 with 9 Rust + 8 Dart +
+  9 Julia carrier paths, one Lua guard/5 paths, ten outward guards, and 26 diagnostics; typed progressive,
+  recurrence, public inventory, facades, schemas, MCP, CLI, README, and outward surfaces remain pending/closed.
+- The exact Julia carrier 62/62, dormant authority 210/210, complete ordinary Julia package, Perl 128/128, Dart
+  7/7, cfg-enabled Rust consumer, progressive 5/9/106, typed 11/3/152, recognition 138/250/58, generated and
+  capability 80/0/0, and language 250/126 pass. Julia production and generated-format sources are unchanged.
+- Knowledge, sole-facing mdBook, bounded histories, task/index, README/memory, nine doctrines, exact staged diff,
+  and receipt-bound canonical CI provide final admission proof. Behavioral Julia work closes; independent
+  topology/continuity recomposition `.14.6.5.4` remains next.
+
 ## 2026-08-24 — FUTURE-PARITY-BACKLOG.14.6.5.2 — implement dormant Julia progressive carriers
 
 - Activated from exact clean `bb34a85e` and replaced only the reserved literal-id/literal-top/bare-span assignment

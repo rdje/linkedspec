@@ -22,7 +22,9 @@ admission, and independent recomposition leaves. `.14.6.5.1` adds the unexported
 210-assertion dormant proof; `.14.6.5.2` makes the unchanged final-path fixture GREEN at 62/62 across four fresh-
 authority routes while preserving dormant discovery. Its mandatory bounded-history rollover creates immutable
 segment `4992`; ADR `0086` raises only finite collection/manifest capacity to 21/20 and makes `.2` a canonical
-boundary. Exact receipt-bound proof closes `.2`; admission `.3` is next.
+boundary. Exact receipt-bound proof closes `.2`; `.3` moves the same 62-assertion carrier into ordinary discovery
+and one exact canonical route while retaining the dormant 210-assertion authority proof. Only Julia advances, to
+rollout 5/9/106; independent recomposition `.4` is next.
 
 This is consumer-aware work. The six live JSON projections and seven executable checkers now use stable decision
 authority ADR `0067`, and the chronology root contains no capability marker authority. Nine executable checkers
@@ -184,30 +186,30 @@ Recursive-observation public no-drift is current under `.14.4.8`, while the comb
 No public helper, facade, descriptor/generated version, result schema, semantic/MCP field, CLI, or README behavior
 is current. Canonical `.14.5.1` signoff passes nine doctrines, repository containment and relocation, both
 66-case CLI environments, RAM at 51%, Phase 0 at 1,031/1,031 in 729 seconds, and the exact six-runtime opt-in;
-parent `.14.5` is closed; progressive span dispatch `.14.6` is active with private Perl, Rust, and Dart admitted. Rust's
+parent `.14.5` is closed; progressive span dispatch `.14.6` is active with private Perl, Rust, Dart, and Julia admitted. Rust's
 exact outer-cfg consumer is canonically routed once while ordinary discovery remains zero tests; governance is
-4/9 rollout and 103 mutations. Dart parent `.14.6.4` is closed after its exact carrier consumer became ordinary
+5/9 rollout and 106 mutations. Dart parent `.14.6.4` is closed after its exact carrier consumer became ordinary
 and gained one canonical route. The bounded capacity tree adds and recomposes Julia's semantic owner without
 changing backend behavior. Julia `.14.6.5.0` freezes the exact generic-call/four-carrier historical dormant RED,
-`.14.6.5.1` supplies its private immutable authority, and `.14.6.5.2` adds the dedicated node plus four dormant
-fresh-authority carriers under exact canonical signoff; `.14.6.5.3-.4` separately own admission and independent
-recomposition.
+`.14.6.5.1` supplies its private immutable authority, `.14.6.5.2` adds the dedicated node plus four dormant fresh-
+authority carriers, and `.14.6.5.3` admits the unchanged carrier proof ordinarily and canonically; `.14.6.5.4`
+separately owns independent recomposition.
 
 Behavior-free audit `.14.6.0` and ADR `0080` fix that boundary exactly. `parse_job(...)` remains unavailable and
-`dispatch_span(...)` is admitted only as a private Perl/Rust/Dart intrinsic, not a shared helper. Each backend's current staged registry accepts
+`dispatch_span(...)` is admitted only as a private Perl/Rust/Dart/Julia intrinsic, not a shared helper. Each backend's current staged registry accepts
 only the built-in `actionir-body.spec` / `action_block` function-body adapter; a normal `.spec` path is rejected,
 and the legacy job span carries neither typed source authority nor cancellation/policy ceilings. Progressive work
 therefore starts with an immutable host-seeded entry for an already compiled parser, never an in-parse loader.
 
 Neutral `.14.6.1` reserved `value = dispatch_span("expr-v1", "Expr", span)` as one dedicated fail-only expression;
-Perl `.14.6.2`, Rust `.14.6.3`, and Dart `.14.6.4` admit it privately. The child runs synchronously over one contiguous direct span. Its internal registers are view-local, but typed
+Perl `.14.6.2`, Rust `.14.6.3`, Dart `.14.6.4`, and Julia `.14.6.5` admit it privately. The child runs synchronously over one contiguous direct span. Its internal registers are view-local, but typed
 positions/spans and diagnostics rebase to the original source identity and global scalar offsets. Parent state is
 isolated, capabilities intersect, ceilings only narrow, cancellation/budget cannot reset, and a repeated parser/
 top/source chain must strictly shrink its span. Correction `.14.6.0.1` repaired the typed transaction row; neutral
 governance passes 2 registry entries, 2 sources/8 views, 6 authority, 6 cancellation, 8 chain, 4 execution cases,
-one Lua guard/5 paths plus 9 Rust + 8 Dart + 9 dormant Julia carrier paths and 10 outward guards, 26
-diagnostics, rollout 4/9, and 103 mutations. The typed row remains pending; the rejected effect owns current node
-`PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded Julia/Lua paths omit both tokens; and outward guards deny exposure. Backends `.5-.6`,
+one Lua guard/5 paths plus 9 Rust + 8 Dart + 9 Julia carrier paths and 10 outward guards, 26
+diagnostics, rollout 5/9, and 106 mutations. The typed row remains pending; the rejected effect owns current node
+`PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded Lua paths omit both tokens; and outward guards deny exposure. Backend `.6`,
 recurrence `.7`, and public no-drift `.8` follow.
 
 Rust `.14.6.3.0` historically froze the dedicated-node RED behind one explicit cfg. Rust `.14.6.3.1` supplies the independent private authority beneath that boundary: immutable precompiled

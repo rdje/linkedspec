@@ -2,7 +2,7 @@
   "format": 1,
   "contract_id": "linkedspec-progressive-span-dispatch-v1",
   "task_owner": "FUTURE-PARITY-BACKLOG.14.6.1",
-  "status": "perl_rust_and_dart_complete_other_backends_pending",
+  "status": "perl_rust_dart_and_julia_complete_other_backends_pending",
   "expected_counts": {
     "registry_entries": 2,
     "sources": 2,
@@ -13,13 +13,13 @@
     "execution_cases": 4,
     "rust_carrier_paths": 9,
     "dart_carrier_paths": 8,
-    "julia_dormant_carrier_paths": 9,
+    "julia_carrier_paths": 9,
     "backend_guard_groups": 1,
     "backend_guard_paths": 5,
     "outward_guard_paths": 10,
     "diagnostics": 26,
     "rollout_legs": 9,
-    "mutations": 103
+    "mutations": 106
   },
   "authored_surface": {
     "example": "value = dispatch_span(\"expr-v1\", \"Expr\", span)",
@@ -33,7 +33,7 @@
     ],
     "result": "one detached child payload returned as the expression value",
     "failure_policy": "fail_only; every dispatch or child failure propagates unchanged and no null, fallback, retry, or alternate parser is implied",
-    "availability": "private Perl, Rust, and Dart runtimes admitted; every remaining backend remains unavailable until its independent rollout row completes"
+    "availability": "private Perl, Rust, Dart, and Julia runtimes admitted; every remaining backend remains unavailable until its independent rollout row completes"
   },
   "policy": {
     "registry": "the host seeds immutable logical entries containing already compiled parser authority; authored execution may look up an identity but cannot resolve, load, compile, mutate, or enumerate",
@@ -867,7 +867,7 @@
     }
   ],
   "current_boundary": {
-    "status": "perl_rust_and_dart_admitted_other_backend_rows_pending",
+    "status": "perl_rust_dart_and_julia_admitted_other_backend_rows_pending",
     "typed_rollout": {
       "path": "capability_conformance/typed_source_location_contract.json",
       "leg": "progressive_span_dispatch",
@@ -974,9 +974,11 @@
         }
       ]
     },
-    "julia_dormant_carriers": {
-      "consumer_path": "julia/test_dormant/progressive_span_dispatch_contract_test.jl",
-      "canonical_discovery": "dormant_only",
+    "julia_carriers": {
+      "consumer_path": "julia/test/progressive_span_dispatch_contract_test.jl",
+      "canonical_discovery": "ordinary_and_exact_canonical",
+      "registration_marker": "running exact Julia progressive span-dispatch admission consumer",
+      "invocation": "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/progressive_span_dispatch_contract_test.jl\")'",
       "marker_rows": [
         {
           "path": "julia/src/action/ActionAst.jl",
@@ -1011,7 +1013,7 @@
           "tokens": ["bounded_child_parse_authority", "execute_generated_parser_v2"]
         },
         {
-          "path": "julia/test_dormant/progressive_span_dispatch_contract_test.jl",
+          "path": "julia/test/progressive_span_dispatch_contract_test.jl",
           "tokens": ["native reconstructed and generated routes use fresh authority", "independently included emitted", "progressive_dispatch_span"]
         }
       ]
@@ -1327,8 +1329,10 @@
       "order": 5,
       "owner": "FUTURE-PARITY-BACKLOG.14.6.5",
       "leg": "julia",
-      "status": "pending",
-      "paths": []
+      "status": "complete",
+      "paths": [
+        "julia/test/progressive_span_dispatch_contract_test.jl"
+      ]
     },
     {
       "order": 6,
@@ -1460,6 +1464,8 @@
     "current_dart_generated_marker",
     "current_dart_marker",
     "current_dart_invocation",
+    "current_julia_marker",
+    "current_julia_invocation",
     "current_backend_guard_path",
     "current_backend_guard_token",
     "current_outward_guard_path",
@@ -1471,6 +1477,7 @@
     "rollout_perl_regressed",
     "rollout_rust_regressed",
     "rollout_dart_regressed",
+    "rollout_julia_regressed",
     "canonical_checker",
     "canonical_storage"
   ]

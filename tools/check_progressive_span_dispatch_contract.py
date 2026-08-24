@@ -32,7 +32,7 @@ AUTHORED_SURFACE = {
     ],
     "result": "one detached child payload returned as the expression value",
     "failure_policy": "fail_only; every dispatch or child failure propagates unchanged and no null, fallback, retry, or alternate parser is implied",
-    "availability": "private Perl, Rust, and Dart runtimes admitted; every remaining backend remains unavailable until its independent rollout row completes",
+    "availability": "private Perl, Rust, Dart, and Julia runtimes admitted; every remaining backend remains unavailable until its independent rollout row completes",
 }
 
 POLICY = {
@@ -337,7 +337,7 @@ EXECUTION_CASES = [
 ]
 
 CURRENT_BOUNDARY = {
-    "status": "perl_rust_and_dart_admitted_other_backend_rows_pending",
+    "status": "perl_rust_dart_and_julia_admitted_other_backend_rows_pending",
     "typed_rollout": {
         "path": "capability_conformance/typed_source_location_contract.json",
         "leg": "progressive_span_dispatch",
@@ -442,9 +442,11 @@ CURRENT_BOUNDARY = {
             },
         ],
     },
-    "julia_dormant_carriers": {
-        "consumer_path": "julia/test_dormant/progressive_span_dispatch_contract_test.jl",
-        "canonical_discovery": "dormant_only",
+    "julia_carriers": {
+        "consumer_path": "julia/test/progressive_span_dispatch_contract_test.jl",
+        "canonical_discovery": "ordinary_and_exact_canonical",
+        "registration_marker": "running exact Julia progressive span-dispatch admission consumer",
+        "invocation": "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/progressive_span_dispatch_contract_test.jl\")'",
         "marker_rows": [
             {
                 "path": "julia/src/action/ActionAst.jl",
@@ -479,7 +481,7 @@ CURRENT_BOUNDARY = {
                 "tokens": ["bounded_child_parse_authority", "execute_generated_parser_v2"],
             },
             {
-                "path": "julia/test_dormant/progressive_span_dispatch_contract_test.jl",
+                "path": "julia/test/progressive_span_dispatch_contract_test.jl",
                 "tokens": ["native reconstructed and generated routes use fresh authority", "independently included emitted", "progressive_dispatch_span"],
             },
         ],
@@ -548,7 +550,7 @@ ROLLOUT = [
     (2, "FUTURE-PARITY-BACKLOG.14.6.2", "perl", "complete", ["t/progressive_span_dispatch_perl_contract.t"]),
     (3, "FUTURE-PARITY-BACKLOG.14.6.3", "rust", "complete", ["rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs"]),
     (4, "FUTURE-PARITY-BACKLOG.14.6.4", "dart", "complete", ["dart/test/progressive_span_dispatch_contract_test.dart"]),
-    (5, "FUTURE-PARITY-BACKLOG.14.6.5", "julia", "pending", []),
+    (5, "FUTURE-PARITY-BACKLOG.14.6.5", "julia", "complete", ["julia/test/progressive_span_dispatch_contract_test.jl"]),
     (6, "FUTURE-PARITY-BACKLOG.14.6.6", "puc_lua", "pending", []),
     (7, "FUTURE-PARITY-BACKLOG.14.6.6", "luajit", "pending", []),
     (8, "FUTURE-PARITY-BACKLOG.14.6.7", "recurring", "pending", []),
@@ -709,7 +711,7 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
     require(document["format"] == 1, "format drifted")
     require(document["contract_id"] == "linkedspec-progressive-span-dispatch-v1", "contract id drifted")
     require(document["task_owner"] == "FUTURE-PARITY-BACKLOG.14.6.1", "task owner drifted")
-    require(document["status"] == "perl_rust_and_dart_complete_other_backends_pending", "status drifted")
+    require(document["status"] == "perl_rust_dart_and_julia_complete_other_backends_pending", "status drifted")
     expected_counts = {
         "registry_entries": len(REGISTRY_ENTRIES),
         "sources": len(SOURCES),
@@ -720,7 +722,7 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
         "execution_cases": len(EXECUTION_CASES),
         "rust_carrier_paths": len(CURRENT_BOUNDARY["rust_carriers"]["marker_rows"]),
         "dart_carrier_paths": len(CURRENT_BOUNDARY["dart_carriers"]["marker_rows"]),
-        "julia_dormant_carrier_paths": len(CURRENT_BOUNDARY["julia_dormant_carriers"]["marker_rows"]),
+        "julia_carrier_paths": len(CURRENT_BOUNDARY["julia_carriers"]["marker_rows"]),
         "backend_guard_groups": len(CURRENT_BOUNDARY["backend_guard_groups"]),
         "backend_guard_paths": sum(len(group["paths"]) for group in CURRENT_BOUNDARY["backend_guard_groups"]),
         "outward_guard_paths": len(CURRENT_BOUNDARY["outward_guard"]["paths"]),
@@ -833,13 +835,13 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
             for token in marker_row["tokens"]:
                 require(token in carrier, f"Dart carrier is missing {token}: {marker_row['path']}")
 
-        julia_carriers = CURRENT_BOUNDARY["julia_dormant_carriers"]
+        julia_carriers = CURRENT_BOUNDARY["julia_carriers"]
         for marker_row in julia_carriers["marker_rows"]:
             carrier_path = ROOT / marker_row["path"]
-            require(carrier_path.is_file(), f"Julia dormant carrier path is missing: {marker_row['path']}")
+            require(carrier_path.is_file(), f"Julia carrier path is missing: {marker_row['path']}")
             carrier = carrier_path.read_text(encoding="utf-8")
             for token in marker_row["tokens"]:
-                require(token in carrier, f"Julia dormant carrier is missing {token}: {marker_row['path']}")
+                require(token in carrier, f"Julia carrier is missing {token}: {marker_row['path']}")
 
         for group in CURRENT_BOUNDARY["backend_guard_groups"]:
             for relative_path in group["paths"]:
@@ -909,20 +911,28 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
         )
         require(
             (ROOT / julia_carriers["consumer_path"]).is_file(),
-            "dormant Julia progressive consumer is missing",
+            "admitted Julia progressive consumer is missing",
         )
         require(
-            not (ROOT / "julia/test/progressive_span_dispatch_contract_test.jl").exists(),
-            "dormant Julia progressive consumer entered ordinary discovery",
+            not (ROOT / "julia/test_dormant/progressive_span_dispatch_contract_test.jl").exists(),
+            "admitted Julia progressive consumer retains a dormant duplicate",
         )
         julia_runtests = (ROOT / "julia/test/runtests.jl").read_text(encoding="utf-8")
         require(
-            "progressive_span_dispatch_contract_test" not in julia_runtests,
-            "dormant Julia progressive consumer entered the ordinary Julia driver",
+            julia_runtests.count('include("progressive_span_dispatch_contract_test.jl")') == 1,
+            "ordinary Julia discovery must include the progressive consumer exactly once",
         )
         require(
-            julia_carriers["consumer_path"] not in ci,
-            "dormant Julia progressive consumer entered canonical CI",
+            ci.count(f"require_tracked_file {julia_carriers['consumer_path']}") == 1,
+            "canonical CI must require the Julia progressive consumer exactly once",
+        )
+        require(
+            ci.count(f'log "{julia_carriers["registration_marker"]}"') == 1,
+            "canonical Julia progressive admission marker missing or duplicated",
+        )
+        require(
+            ci.count(julia_carriers["invocation"]) == 1,
+            "canonical Julia progressive admission invocation missing or duplicated",
         )
 
 
@@ -1035,6 +1045,8 @@ MUTATIONS: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
     ("current_dart_generated_marker", set_value(["current_boundary", "dart_carriers", "marker_rows", 6, "tokens", 0], "wrong_options")),
     ("current_dart_marker", set_value(["current_boundary", "dart_carriers", "registration_marker"], "wrong")),
     ("current_dart_invocation", set_value(["current_boundary", "dart_carriers", "invocation"], "dart test")),
+    ("current_julia_marker", set_value(["current_boundary", "julia_carriers", "registration_marker"], "wrong")),
+    ("current_julia_invocation", set_value(["current_boundary", "julia_carriers", "invocation"], "julia test")),
     ("current_backend_guard_path", set_value(["current_boundary", "backend_guard_groups", 0, "paths", 0], "wrong.pm")),
     ("current_backend_guard_token", set_value(["current_boundary", "backend_guard_groups", 0, "forbidden_tokens", 0], "parse_job")),
     ("current_outward_guard_path", set_value(["current_boundary", "outward_guard", "paths", 0], "wrong.pm")),
@@ -1046,6 +1058,7 @@ MUTATIONS: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
     ("rollout_perl_regressed", set_value(["rollout", 1, "status"], "pending")),
     ("rollout_rust_regressed", set_value(["rollout", 2, "status"], "pending")),
     ("rollout_dart_regressed", set_value(["rollout", 3, "status"], "pending")),
+    ("rollout_julia_regressed", set_value(["rollout", 4, "status"], "pending")),
     ("canonical_checker", set_value(["canonical_execution", "checker_path"], "tools/wrong.py")),
     ("canonical_storage", set_value(["canonical_execution", "storage_policy"], "/tmp")),
 ]
@@ -1081,7 +1094,7 @@ def main() -> int:
         f"{len(document['execution_cases'])} execution cases; "
         f"{len(document['current_boundary']['rust_carriers']['marker_rows'])} Rust + "
         f"{len(document['current_boundary']['dart_carriers']['marker_rows'])} Dart carrier paths; "
-        f"{len(document['current_boundary']['julia_dormant_carriers']['marker_rows'])} dormant Julia carrier paths; "
+        f"{len(document['current_boundary']['julia_carriers']['marker_rows'])} Julia carrier paths; "
         f"{len(document['current_boundary']['backend_guard_groups'])} backend guards/"
         f"{sum(len(group['paths']) for group in document['current_boundary']['backend_guard_groups'])} paths; "
         f"{len(document['current_boundary']['outward_guard']['paths'])} outward guards; "

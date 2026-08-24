@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-24` (Julia `.14.6.5.2` canonically closes all four dormant carrier routes plus exact
-  mandatory history capacity; `.14.6.5.3` admission is next)
+- Last updated: `2026-08-24` (Julia `.14.6.5.3` canonically admits the unchanged four-route carrier and promotes
+  only Julia; `.14.6.5.4` independent recomposition is next)
 - Owner: repo-local workflow
 
 ## Goal
@@ -104,13 +104,15 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-24):** progressive neutral `.14.6.1` and private Perl `.2`, Rust `.3`, and Dart
-`.4` admissions are current at rollout 4/9/103. Capacity tree `FUTURE-PARITY-PARTITION-CAPACITY.0-.2` adds and
+**Authoritative frontier (2026-08-24):** progressive neutral `.14.6.1` and private Perl `.2`, Rust `.3`, Dart
+`.4`, and Julia `.5` behavioral admissions are current at rollout 5/9/106. Capacity tree `FUTURE-PARITY-PARTITION-CAPACITY.0-.2` adds and
 independently recomposes the bounded `.14.6.5-.14.8` owner without changing behavior. Julia `.14.6.5.0` splits
 the parent into historical dormant RED `.0`, private authority/core `.1`, dormant carriers `.2`, canonical
 admission `.3`, and independent recomposition `.4`; `.1` supplies the private immutable authority, and `.2` makes
 the unchanged consumer GREEN at 62/62 through all four fresh-authority routes while discovery and rollout stay
-dormant under canonical signoff. `.14.6.5.3` is next. Shared Lua `.6`, recurrence `.7`, public no-drift `.8`, staged `.14.7`, and combined
+dormant under canonical signoff. `.14.6.5.3` then admits the same carrier through one ordinary and one exact
+canonical route, promoting only Julia while the 210-assertion authority proof stays dormant. Independent
+recomposition `.14.6.5.4` is next. Shared Lua `.6`, recurrence `.7`, public no-drift `.8`, staged `.14.7`, and combined
 program-wide `.14.8` remain separate owners. Mandatory segment `4992` is finitely authorized by ADR `0086` at
 21 change-history files / 20 manifest lines and makes `.14.6.5.2` a canonical boundary.
 

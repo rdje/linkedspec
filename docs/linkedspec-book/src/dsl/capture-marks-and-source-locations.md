@@ -438,7 +438,7 @@ cursor/marks/transactions stay isolated; capability and policy ceilings only nar
 budget propagate; and repeated parser/top/source dispatch must strictly shrink the span. The existing staged
 function-body adapter does not satisfy this contract. The neutral checker passes 2 registry entries, 2 sources/8
 views, 6 authority, 6 cancellation, 8 chain, and 4 execution cases, one Lua absence guard/5 paths plus 9 Rust +
-8 Dart + 9 dormant Julia carrier paths and 10 outward guards, 26 diagnostics, rollout 4/9, and 103 mutations. The
+8 Dart + 9 Julia carrier paths and 10 outward guards, 26 diagnostics, rollout 5/9, and 106 mutations. The
 typed progressive row remains pending; the rejected dispatch effect owns current node
 `PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded Lua paths omit the tokens; and outward guards
 deny premature exposure. Perl has private carrier integration
@@ -458,7 +458,7 @@ plan, and independently compiled emitted source delegate to one fresh opaque exe
 detached child payload. Generated data contains only target/id/top/span operands, never callbacks or authority.
 Recognition effect analysis rejects any attempted rule/function graph that reaches the node, and runtime checks
 live tokens defensively. The exact outer-cfg consumer is GREEN and canonically routed once under that cfg, while
-ordinary Cargo still executes zero tests. Dart is also admitted; later backends and typed/public rows remain pending.
+ordinary Cargo still executes zero tests. Dart and Julia are also admitted; Lua and typed/public rows remain pending.
 
 Dart's historical pre-carrier boundary remains preserved by the same final-path fixture; `.14.6.4.2` turns it
 GREEN and `.14.6.4.3` admits it without changing behavior. The reserved assignment is now one exclusive
@@ -504,11 +504,11 @@ still reports when no prior error exists. Native, `SpecFile`-JSON
 reconstructed, generated-plan, and independently included emitted-module routes start fresh opaque execution
 state and return the same detached child value without advancing the parent cursor. Generated data carries only
 target/id/top/span operands—not callbacks, registry, fingerprint, source snapshots, cancellation, or mutable
-authority. The seven-group consumer passes 62/62 but remains under `julia/test_dormant/`; ordinary/canonical
-discovery and rollout stay unchanged after exact receipt-bound signoff. Admission `.3` follows, then independent
-recomposition `.4`.
+authority. Carrier admission `.14.6.5.3` moves the same seven-group, 62-assertion consumer into ordinary discovery
+and one exact canonical route, with no dormant duplicate. Only Julia rollout advances to 5/9/106; the separate
+210-assertion authority matrix remains dormant. Independent recomposition `.4` follows.
 
-Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions or
+Until the later public leaves land, use the current helpers documented in this chapter. Do not assume typed positions or
 typed spans are authored values. The `recognition_*` operations are current across all six runtime routes, while
 their exact recurring composition and public no-drift projection are both current.
 

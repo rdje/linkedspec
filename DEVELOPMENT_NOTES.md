@@ -10,6 +10,23 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-24 (`FUTURE-PARITY-BACKLOG.14.6.5.3` — Julia progressive admission): exact clean activation is
+  carrier commit `35a2b56c`; this canonical leaf changes only discovery, trust-boundary routing, Julia rollout
+  truth, dependent snapshots, and durable projections.
+- Git blob `0794a062` moves from `julia/test_dormant/progressive_span_dispatch_contract_test.jl` to the ordinary
+  `julia/test` path. Admission-owned header/snapshot/discovery assertions change, while the fixture, seven groups,
+  dedicated node, static/live transaction policy, four fresh-authority carriers, and total 62 assertions remain.
+- `julia/test/runtests.jl` includes the carrier once. Canonical CI contains exactly one tracked requirement, exact
+  marker, and repository-routed include invocation. The dormant carrier path is absent; the 210-assertion authority
+  matrix remains deliberately dormant and unexported.
+- Neutral governance renames only the admitted Julia inventory, promotes rollout to 5/9, and adds marker,
+  invocation, and completed-to-pending regression mutations for 106 total. Nine Rust, eight Dart, and nine Julia
+  carriers, the one Lua guard/five paths, ten outward guards, 26 diagnostics, and the pending typed row stay exact.
+- Focused proof passes carrier 62, authority 210, complete ordinary Julia, Perl 128, Dart 7, cfg Rust, typed
+  11/3/152, recognition 138/250/58, generated/capability 80/0/0, language 250/126, exact discovery counts, and no
+  Julia production diff. Knowledge, mdBook, bounded histories, task/index, nine doctrines, and exact staged
+  receipt-bound canonical CI close behavioral `.14.6.5`; `.14.6.5.4` independently recomposes next.
+
 - 2026-08-24 (`FUTURE-PARITY-BACKLOG.14.6.5.2` — dormant Julia progressive carriers): exact clean activation is
   Julia authority commit `bb34a85e`; the focused slice connects the private authority without admission.
 - The assignment parser owns the entire reserved form as `ActionProgressiveDispatchSpanExpr`, leaving only target,

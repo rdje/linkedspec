@@ -1,13 +1,13 @@
 # MEMORY
 
-- activation_commit: `bb34a85e6fe6ee43408721141309261c9e83bd00` — exact clean Julia-authority base for
-  task-tree-first focused `FUTURE-PARITY-BACKLOG.14.6.5.2`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.5.2 - implement dormant Julia progressive carriers`;
-  carrier consumer is 62/62 and private authority consumer remains 210/210 while admission stays pending.
-- active_work_unit: none after the intended `.14.6.5.2` commit; Julia admission `.14.6.5.3` is pending.
-- next_action: from the clean `.14.6.5.2` commit, activate `FUTURE-PARITY-BACKLOG.14.6.5.3` task-tree-first,
-  then admit the unchanged carrier consumer and promote only Julia rollout through canonical proof.
-- in_flight_uncommitted: none after the intended `.14.6.5.2` commit; no background job remains.
+- activation_commit: `35a2b56c95a49270f39ace43d436ffd1330296d6` — exact clean Julia-carrier base for
+  task-tree-first canonical `FUTURE-PARITY-BACKLOG.14.6.5.3`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.5.3 - admit private Julia progressive dispatch`;
+  unchanged carrier is ordinary/canonical at 62/62 while private authority remains dormant at 210/210.
+- active_work_unit: none after the intended `.14.6.5.3` commit; independent Julia recomposition `.14.6.5.4` is pending.
+- next_action: from the clean `.14.6.5.3` commit, activate `FUTURE-PARITY-BACKLOG.14.6.5.4` task-tree-first,
+  then independently recompose the admitted Julia topology and continuity surfaces without behavior.
+- in_flight_uncommitted: none after the intended `.14.6.5.3` commit; no background job remains.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
@@ -33,18 +33,17 @@
   mandatory change-history segment `4992`, advancing finite collection/manifest controls to 21/20 while retaining
   every byte, root, segment, aggregate, owner, lifecycle, verifier, and storage control.
 - current_verification_contract: ADR `0073` makes focused proof the ordinary per-leaf default and canonical proof
-  mandatory at admission/milestone/public/infrastructure and final clean push boundaries; `.14.6.5.2` upgrades to
-  canonical because its mandatory history rollover changes finite resulting-tree infrastructure, and its exact
-  staged receipt-bound proof passes before the intended commit.
+  mandatory at admission/milestone/public/infrastructure and final clean push boundaries; `.14.6.5.3` is an
+  admission/trust-boundary leaf and its exact staged receipt-bound proof passes before the intended commit.
 - documentation_debt_owner: ADR `0066` composition-closes all stores; bounded live/history/task/Knowledge owners
   and their rollover/index gates remain current.
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, recurrence/public no-drift 9/9, and
   classifies private progressive dispatch fail-closed at 138 ActionIR rows / 250 calls / 58 mutations.
-- current_future_direction: neutral `.14.6.1` plus admitted Perl `.2`, Rust `.3`, and Dart `.4` are rollout 4/9/103;
-  Julia historical dormant RED `.5.0`, private authority `.1`, and four dormant carriers `.2` are current, with
-  admission `.3` and recomposition `.4` separately pending; Lua `.6`, recurrence `.7`, public `.8`, staged `.14.7`, and combined
+- current_future_direction: neutral `.14.6.1` plus admitted Perl `.2`, Rust `.3`, Dart `.4`, and Julia `.5.0-.3`
+  are rollout 5/9/106; Julia's 62-assertion carrier is ordinary/canonical while its 210-assertion authority matrix
+  stays dormant, with recomposition `.5.4` pending; Lua `.6`, recurrence `.7`, public `.8`, staged `.14.7`, and combined
   `.14.8` follow.
 - latest_bootstrap_read: 2026-08-24 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
-  review complete; Julia `.14.6.5.2` makes four fresh-authority routes GREEN at 62/62 while preserving dormant
-  discovery, rollout 4/9/103, generated format, typed recurrence, and outward boundaries.
+  review complete; Julia `.14.6.5.3` admits the same 62-assertion carrier once ordinarily/canonically and promotes
+  only Julia to 5/9/106 while preserving authority dormancy, generated format, typed recurrence, and outward bounds.

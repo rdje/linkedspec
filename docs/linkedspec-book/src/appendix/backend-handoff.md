@@ -162,12 +162,12 @@
 > Progressive neutral `.14.6.1` reserves
 > `value = dispatch_span("expr-v1", "Expr", span)` as a dedicated fail-only future expression. Its checker passes
 > 2 immutable registry entries, 2 sources/8 rebased views, 6 authority, 6 cancellation, 8 chain, 4 execution
-> cases, 2 pending-backend guards/8 implementation paths plus 9 Rust and 8 Dart carrier paths
-> and 10 outward guards, 26 diagnostics, 4/9 rollout, and 103 mutations. Private Perl admission is current through one exact
+> cases, one pending-backend guard/5 implementation paths plus 9 Rust, 8 Dart, and 9 Julia carrier paths
+> and 10 outward guards, 26 diagnostics, 5/9 rollout, and 106 mutations. Private Perl admission is current through one exact
 > canonical 127-assertion consumer; Rust is admitted through one exact cfg-enabled canonical carrier consumer while
-> ordinary discovery remains zero tests. Dart's equivalent four carriers are ordinary and canonically admitted;
-> Julia, Lua, recurrence, public no-drift, and the typed row remain pending. The rejected effect owns exactly
-> current node `PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded Julia/Lua paths omit both tokens and
+> ordinary discovery remains zero tests. Dart's and Julia's equivalent four carriers are ordinary and canonically
+> admitted; Lua, recurrence, public no-drift, and the typed row remain pending. The rejected effect owns exactly
+> current node `PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded Lua paths omit both tokens and
 > outward guards deny exposure. No path loader, public facade/schema/semantic/MCP/CLI/README surface, shared helper
 > inventory, generated format, or typed rollout row moves.
 >
@@ -763,6 +763,16 @@ execution; generated data carries only target/parser/top/span and no callback, r
 cancellation, fingerprint, or mutable state. `.14.6.4.3` moves the unchanged seven-group consumer to
 `dart/test/progressive_span_dispatch_contract_test.dart`; ordinary discovery and one exact canonical route admit
 it and promote only Dart to rollout 4/9/103.
+
+Julia `.14.6.5.1` owns the corresponding unexported `BoundedChildParseAuthority`: immutable logical entries with
+already-compiled callbacks, fresh invocation-local source and limits, typed globally rebased bounded views,
+narrowing grants/ceilings, shared cancellation/deadline/steps, decreasing spans, callback/request expiry, and
+detached node-bounded results. `.14.6.5.2` adds one exclusive `ActionProgressiveDispatchSpanExpr` plus native,
+`SpecFile`-JSON reconstructed, generated-plan, and independently included emitted-module carriers through a fresh
+opaque seed. Generated data carries no callback or authority. `.14.6.5.3` moves the same 62-assertion carrier to
+`julia/test/progressive_span_dispatch_contract_test.jl`, includes it once in ordinary discovery, and registers one
+exact canonical route. It promotes only Julia to rollout 5/9/106; the separate 210-assertion authority consumer
+remains dormant and directly runnable.
 
 The spec's body shell is a
 linked opener/closer parse: `body_brace`
