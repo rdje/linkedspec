@@ -163,6 +163,36 @@ function ActionRecognitionRollbackExpr(; source, source_span, token)
     )
 end
 
+"""Assign one bounded child parse selected by logical identity and direct span."""
+struct ActionProgressiveDispatchSpanExpr <: ActionExpr
+    kind::String
+    source::String
+    source_span::ActionSourceSpan
+    target::String
+    parser_id::String
+    top_rule::String
+    span::String
+end
+
+function ActionProgressiveDispatchSpanExpr(;
+    source,
+    source_span,
+    target,
+    parser_id,
+    top_rule,
+    span,
+)
+    return ActionProgressiveDispatchSpanExpr(
+        "progressive_dispatch_span",
+        String(source),
+        source_span,
+        String(target),
+        String(parser_id),
+        String(top_rule),
+        String(span),
+    )
+end
+
 struct ActionVariableExpr <: ActionExpr
     kind::String
     source::String
@@ -844,7 +874,8 @@ function find_removed_aggregate_selector(expr::ActionExpr)
            expr isa ActionRecognizeOnceExpr ||
            expr isa ActionObserveRecognitionExpr ||
            expr isa ActionRecognitionCommitExpr ||
-           expr isa ActionRecognitionRollbackExpr
+           expr isa ActionRecognitionRollbackExpr ||
+           expr isa ActionProgressiveDispatchSpanExpr
         return nothing
     elseif expr isa ActionFluentChainExpr
         selector = find_removed_aggregate_selector(expr.receiver)
@@ -1002,6 +1033,15 @@ end
 function to_json(expr::ActionRecognitionRollbackExpr)
     result = _action_base_json(expr)
     result["token"] = expr.token
+    return result
+end
+
+function to_json(expr::ActionProgressiveDispatchSpanExpr)
+    result = _action_base_json(expr)
+    result["target"] = expr.target
+    result["parser_id"] = expr.parser_id
+    result["top_rule"] = expr.top_rule
+    result["span"] = expr.span
     return result
 end
 

@@ -559,6 +559,17 @@ Base.showerror(io::IO, error::ProgressiveDispatchException) = print(
     diagnostic_code(error),
 )
 
+function missing_registry_exception(;
+    origin::AbstractString,
+    parser_id::AbstractString,
+)
+    return ProgressiveDispatchException((
+        "code" => "progressive_registry_missing",
+        "origin" => String(origin),
+        "parser_id" => String(parser_id),
+    ))
+end
+
 """Invalid trusted-host authority construction."""
 struct ProgressiveConfigurationException <: Exception
     message::String
@@ -646,6 +657,104 @@ end
 
 remaining_steps(invocation::ProgressiveInvocation) = invocation._remaining_steps
 total_calls(invocation::ProgressiveInvocation) = invocation._total_calls
+
+"""Opaque host-only recipe for one fresh progressive state per execution."""
+struct ProgressiveExecutionSeed
+    _registry::ProgressiveRegistry
+    _invocation::ProgressiveInvocationConfig
+    _caller_capabilities::Tuple{Vararg{String}}
+    _required_capabilities::Tuple{Vararg{String}}
+    _caller_ceilings::ProgressiveCeilings
+    _required_source_detail::ProgressiveSourceDetail
+    _dispatch_cost::Int
+end
+
+function ProgressiveExecutionSeed(;
+    registry::ProgressiveRegistry,
+    invocation::ProgressiveInvocationConfig,
+    caller_capabilities,
+    required_capabilities,
+    caller_ceilings::ProgressiveCeilings,
+    required_source_detail::ProgressiveSourceDetail,
+    dispatch_cost::Int,
+)
+    dispatch_cost >= 0 || throw(
+        ProgressiveConfigurationException(
+            "progressive dispatch cost must be nonnegative",
+        ),
+    )
+    return ProgressiveExecutionSeed(
+        registry,
+        invocation,
+        _validated_strings(
+            caller_capabilities,
+            "progressive caller capabilities",
+        ),
+        _validated_strings(
+            required_capabilities,
+            "progressive required capabilities";
+            allow_empty = true,
+        ),
+        caller_ceilings,
+        required_source_detail,
+        dispatch_cost,
+    )
+end
+
+Base.show(io::IO, ::ProgressiveExecutionSeed) =
+    print(io, "ProgressiveExecutionSeed(<opaque>)")
+
+"""One execution-local authority shared by every nested runtime context."""
+struct ProgressiveExecutionState
+    _invocation::ProgressiveInvocation
+    _caller_capabilities::Tuple{Vararg{String}}
+    _required_capabilities::Tuple{Vararg{String}}
+    _caller_ceilings::ProgressiveCeilings
+    _required_source_detail::ProgressiveSourceDetail
+    _child_token::ProgressiveCancellationToken
+    _dispatch_cost::Int
+end
+
+function start(seed::ProgressiveExecutionSeed)
+    return ProgressiveExecutionState(
+        start_invocation(seed._registry, seed._invocation),
+        seed._caller_capabilities,
+        seed._required_capabilities,
+        seed._caller_ceilings,
+        seed._required_source_detail,
+        seed._invocation.cancellation_token,
+        seed._dispatch_cost,
+    )
+end
+
+Base.show(io::IO, ::ProgressiveExecutionState) =
+    print(io, "ProgressiveExecutionState(<opaque>)")
+
+function dispatch(
+    state::ProgressiveExecutionState;
+    origin::AbstractString,
+    parser_id::AbstractString,
+    top_rule::AbstractString,
+    span,
+    transaction_active::Bool,
+)
+    return dispatch(
+        state._invocation,
+        ProgressiveDispatchArguments(
+            origin = origin,
+            parser_id = String(parser_id),
+            top_rule = String(top_rule),
+            span = span,
+            caller_capabilities = state._caller_capabilities,
+            required_capabilities = state._required_capabilities,
+            caller_ceilings = state._caller_ceilings,
+            required_source_detail = state._required_source_detail,
+            child_token = state._child_token,
+            cost = state._dispatch_cost,
+            transaction_active = transaction_active,
+        ),
+    )
+end
 
 """Execute one synchronous isolated child dispatch."""
 function dispatch(

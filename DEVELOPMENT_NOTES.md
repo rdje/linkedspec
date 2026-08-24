@@ -10,6 +10,34 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-24 (`FUTURE-PARITY-BACKLOG.14.6.5.2` — dormant Julia progressive carriers): exact clean activation is
+  Julia authority commit `bb34a85e`; the focused slice connects the private authority without admission.
+- The assignment parser owns the entire reserved form as `ActionProgressiveDispatchSpanExpr`, leaving only target,
+  literal logical parser identity, literal top rule, and bare span binding in compiled/generated state. The compiler
+  rejects malformed and residual generic forms and closes the non-rollbackable effect through rule/function calls.
+- `ProgressiveExecutionSeed` is host-only and opaque. Every native or generated top-level execution calls `start`,
+  so budget/call state is fresh while cancellation/deadline/step authority remains shared and narrowing.
+- Native, reconstructed, generated-plan, and independently included emitted-module routes return the same detached
+  child payload at parent cursor zero. Emitted adapters accept authority as a runtime argument but serialize none.
+- A live recognition checkpoint first masked `progressive_transaction_forbidden` with
+  `recognition_terminal_required`; explicitly rolling it back then masked with `recognition_attempt_count`. The
+  general fix stays in invocation teardown: the authority restores and invalidates the unfinished token, but its
+  secondary terminal error is suppressed when a primary error is already propagating. This also covers tokens in
+  parent frames and still reports terminal-required when no prior error exists.
+- Carrier 62/62, authority 210/210, complete ordinary Julia, and all direct dependents pass. Neutral governance
+  records 9 dormant Julia carrier paths and one Lua guard/5 paths while rollout remains 4/9/103; `.5.3` alone owns
+  ordinary/canonical admission and Julia promotion.
+- Change-history pressure crosses 90%; the repository rollover tool archives 226 complete clean-HEAD lines as
+  immutable segment `4992` and retains the new `.5.2` record in the bounded hot shard. The resulting-tree doctrine
+  then rejects exact 20-file/19-manifest-line finite capacity while all other eight doctrines pass. ADR `0086`
+  reviews only 20→21 files and 19→20 manifest lines, so `.5.2` upgrades to canonical verification.
+- Canonical attempt one clears all nine doctrines, then the exact Perl admission catches its stale two-guard/eight-
+  path neutral snapshot. Exhaustive search finds the same count tuple in Rust and Dart; all three admitted consumers
+  move in lockstep to 9 dormant Julia carrier paths and one Lua guard/5 paths without behavior or rollout movement.
+- Corrected consumers pass Perl 127/127, Dart 7/7, and cfg-enabled Rust 1/1. The Rust consumer's cold build plus
+  independently compiled emitted module completes in 1,427.16 seconds; the final exact staged candidate clears
+  receipt-bound canonical CI and preserves dormant Julia discovery plus rollout 4/9/103.
+
 - 2026-08-24 (`FUTURE-PARITY-BACKLOG.14.6.5.1` — Julia progressive authority): exact clean activation is
   Julia dormant-RED commit `94e37e83`; the focused slice adds one private module and one unrouted consumer.
 - The immutable registry stores only validated logical IDs, fingerprints, top rules, ceilings, capabilities, and

@@ -17,7 +17,7 @@ answers:
   - "is the neutral progressive span dispatch contract executable"
   - "how does typed transaction safety compose with progressive dispatch"
 date: 2026-08-17
-status: executable neutral authority and private Perl/Rust/Dart admissions current; later backends and typed progressive admission pending
+status: executable neutral authority and private Perl/Rust/Dart admissions current; Julia carriers dormant; later admissions and typed progressive pending
 tags: [progressive-parsing, source-location, span, registry, authority, cancellation, diagnostics, task-tree]
 evidence: "FUTURE-PARITY-BACKLOG.14.6.0 retrieves ADRs 0012-0016 and 0056, the typed/staged/loader authorities, and the five backend registries before probing. LinkedSpec::call_spec_handler_subst lowers both parse_job(...) and dispatch_span(...) to LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER. The Perl registry executes only actionir-body.spec/action_block through builtin:actionir-body.spec and rejects specs/json.spec at resolve; Rust, Dart, Julia, and Lua have the same narrow identity. Their job spans are legacy start/end/line shells rather than typed source-authority spans, and none carries cancellation or a policy ceiling. Native spec loaders resolve/read/compile filesystem inputs before execution and therefore are not safe in-parse registry authority. The typed checker is 10 complete / 4 pending / 126 while the independently closed recognition transaction contract is 9/9; git history proves owner .14.3 never promoted typed transaction_safety, so corrective prerequisite .14.6.0.1 owns that missed composition and stale-current governance before progressive behavior."
 evidence_update_2026_08_17_neutral: "Corrective .14.6.0.1 landed at 27f9c87f with typed transaction safety current at 11/3/152. FUTURE-PARITY-BACKLOG.14.6.1 selects value = dispatch_span(\"expr-v1\", \"Expr\", span) and adds linkedspec-progressive-span-dispatch-v1 plus its independent checker: 2 immutable registry entries, 2 sources/8 views, 6 authority, 6 cancellation, 8 chain, 4 execution cases, 5 backend guard groups/17 paths plus 10 outward guards, 26 diagnostics, rollout 1/9, and 86 mutations. Canonical registration is current while every backend and the typed progressive row remain pending; the recognition effect has no current node/call rows, guarded backend paths omit both future tokens, ten facade/schema/semantic/MCP/CLI/README paths deny premature exposure, and the Perl lowering probe retains the unsupported-helper sentinel."
@@ -33,6 +33,7 @@ evidence_update_2026_08_17_dart_carriers: "FUTURE-PARITY-BACKLOG.14.6.4.2 adds o
 evidence_update_2026_08_17_dart_admission: "FUTURE-PARITY-BACKLOG.14.6.4.3 moves the unchanged seven-group carrier consumer to ordinary Dart discovery and registers its exact tracked path, log marker, and invocation once in canonical CI. Only Dart admission and rollout advance. Governance is 4/9 complete with 103 mutations, 9 Rust + 8 Dart carrier paths, 2 Julia/Lua guard groups/8 paths, 10 outward guards, and 26 diagnostics. The authority-only consumer remains dormant; typed progressive, Julia/Lua, recurrence, generated format, public inventory, and outward surfaces stay pending or unchanged."
 evidence_update_2026_08_24_julia_red: "FUTURE-PARITY-BACKLOG.14.6.5.0 splits Julia into RED, private authority/core, dormant carrier, canonical admission, and independent recomposition leaves. The exact dormant consumer passes 55 assertions and fails only one dedicated-node assertion. Julia's unrelated staged registry rejects expr-v1 at resolve; the reserved assignment remains one generic ActionCallExpr; native, SpecFile-JSON reconstructed, generated-plan, and independently included emitted-module routes converge on the same unsupported dispatch_span helper boundary. Ordinary/canonical discovery, production, neutral 4/9/103 governance, generated format, typed recurrence, and outward surfaces remain unchanged."
 evidence_update_2026_08_24_julia_authority: "FUTURE-PARITY-BACKLOG.14.6.5.1 adds one unexported ActionIR-independent BoundedChildParseAuthority module immediately after Julia SourceLocation. Immutable entries contain already-compiled callbacks only; fresh invocations own copied decoded sources, logical source identity, cancellation/deadline/steps, decreasing global-span chains, and depth/call bounds. Callback-scoped views rebase Unicode-scalar positions/spans/diagnostics through the original SourceAuthority, then expire with retained nested-dispatch requests. Grants intersect, ceilings take minima, costs spend before contained child work, and deeply copied node-bounded JSON-like results reject cycles, live-looking fields, nonfinite values, and null child failure. The dormant authority consumer passes 210 assertions across every neutral row/all 26 diagnostics plus adversaries; the original final path remains exact at 55-pass/one-RED, with no node, carrier, generated-format, rollout, canonical, or outward movement."
+evidence_update_2026_08_24_julia_carriers: "FUTURE-PARITY-BACKLOG.14.6.5.2 adds one exclusive logical-only Julia node, exact malformed/residual/static recognition denials, live-token defense, and native/reconstructed/generated-plan/independently included emitted-module delegation through a fresh opaque execution seed. Generated data excludes callbacks, registry, fingerprint, source snapshots, cancellation, and mutable authority. Julia invocation teardown preserves an already-propagating live-transaction denial while the existing recognition authority restores and invalidates unfinished tokens; secondary terminal-required errors still report when no primary error exists. The exact carrier consumer is GREEN at 62 assertions but remains dormant. Governance records 9 Rust + 8 Dart + 9 dormant Julia carrier paths, one Lua guard/5 paths, 10 outward guards, 26 diagnostics, and unchanged rollout 4/9/103; .5.3 alone owns Julia admission."
 reverify:
   - "perl -Iperl -MLinkedSpec -e 'print LinkedSpec::call_spec_handler_subst(\"Top\", q{return(parse_job(\"child.spec\", \"payload\"));})'"
   - "bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py"
@@ -49,7 +50,8 @@ Progressive dispatch is synchronous child-parser invocation while a parent parse
 post-AST work: collect parse jobs, order them, run later parsers, and stitch results. They share provenance and
 registry principles but not execution state or scheduling.
 
-Private Perl, Rust, and Dart progressive behavior is admitted. Julia and Lua remain pending. All three implemented backends recognize `dispatch_span(...)` as one
+Private Perl, Rust, and Dart progressive behavior is admitted. Julia's four carrier routes are implemented but
+remain dormant; Julia admission and Lua implementation remain pending. All four implemented backends recognize `dispatch_span(...)` as one
 dedicated intrinsic, while `parse_job(...)` and every other progressive path remain unsupported. The five backend
 staged registries still implement only one function-body
 adapter only: `actionir-body.spec` resolves to `builtin:actionir-body.spec`, compiles top rule `action_block`, and
@@ -77,6 +79,12 @@ Dart `.14.6.4.2` provides the same logical-only shape through `ActionProgressive
 seed, static recognition-effect closure, and live-token defense. Native, reconstructed, generated-plan, and
 independently analyzed emitted source agree. `.14.6.4.3` admits that unchanged consumer through ordinary discovery
 and one exact canonical route.
+
+Julia `.14.6.5.2` now supplies the corresponding logical-only node and fresh-seed carrier through native,
+`SpecFile`-JSON reconstructed, generated-plan, and independently included emitted-module execution. Static effect
+closure and a live-token defense forbid recognition transactions; the existing authority restores and invalidates
+unfinished tokens while teardown preserves the primary progressive denial. The exact
+62-assertion consumer remains dormant, so rollout stays 4/9/103 until `.14.6.5.3` admits it.
 
 ## Frozen authority and source-view model
 
@@ -121,8 +129,9 @@ source-text-safe.
 
 `.14.6.0.1` repaired the missed typed transaction-safety composition and stale-current guard. `.14.6.1` owns the
 executable neutral contract/checker; Perl `.2`, Rust `.3`, and Dart `.4` are admitted at rollout 4/9. Julia `.5`
-is split into exact dormant RED `.0`, private authority/core `.1`, dormant carriers `.2`, canonical admission `.3`,
-and independent recomposition `.4`; the RED is current and later leaves remain pending. Shared Lua `.6` must split
+is split into exact historical dormant RED `.0`, private authority/core `.1`, dormant carriers `.2`, canonical
+admission `.3`, and independent recomposition `.4`; carriers are current while admission/recomposition remain
+pending. Shared Lua `.6` must split
 one implementation for independent PUC Lua/LuaJIT admission. `.7` binds five source groups to six runtime routes and alone
 promotes typed `progressive_span_dispatch`. `.8` closes public projection/no-drift without exporting a facade or
 consuming combined final row `.14.8`.

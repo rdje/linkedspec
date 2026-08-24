@@ -271,6 +271,7 @@ function execute_generated_parser_v2(
     diagnostic_output_sink::Union{Nothing,RuntimeDiagnosticOutputSink} = nothing,
     semantic_observation_sink::Union{Nothing,RuntimeSemanticObservationSink} = nothing,
     actual_contract::AbstractString = GENERATED_SOURCE_CONTRACT,
+    bounded_child_parse_authority = nothing,
 )
     families = validate_generated_rule_plan_v2(
         compiled,
@@ -282,7 +283,10 @@ function execute_generated_parser_v2(
         nothing : _RuntimeSemanticObservationFailure()
     try
         return runtime_parse(
-            LinkedSpecRuntimeEngine(compiled),
+            LinkedSpecRuntimeEngine(
+                compiled;
+                bounded_child_parse_authority = bounded_child_parse_authority,
+            ),
             input;
             top_rule = top_rule,
             trace = trace,
@@ -330,6 +334,7 @@ function execute_generated_parser_with_trace_v2(
     diagnostic_output_sink::Union{Nothing,RuntimeDiagnosticOutputSink} = nothing,
     semantic_observation_sink::Union{Nothing,RuntimeSemanticObservationSink} = nothing,
     actual_contract::AbstractString = GENERATED_SOURCE_CONTRACT,
+    bounded_child_parse_authority = nothing,
 )
     return execute_generated_parser_v2(
         compiled,
@@ -341,6 +346,7 @@ function execute_generated_parser_with_trace_v2(
         diagnostic_output_sink = diagnostic_output_sink,
         semantic_observation_sink = semantic_observation_sink,
         actual_contract = actual_contract,
+        bounded_child_parse_authority = bounded_child_parse_authority,
     )
 end
 
@@ -688,6 +694,7 @@ function execute(
     top_rule = nothing,
     diagnostic_output_sink = nothing,
     semantic_observation_sink = nothing,
+    bounded_child_parse_authority = nothing,
 )
     return LinkedSpecJulia.execute_generated_parser_v2(
         _COMPILED_SPEC,
@@ -698,6 +705,7 @@ function execute(
         diagnostic_output_sink = diagnostic_output_sink,
         semantic_observation_sink = semantic_observation_sink,
         actual_contract = LINKEDSPEC_GENERATED_SOURCE_CONTRACT,
+        bounded_child_parse_authority = bounded_child_parse_authority,
     )
 end
 
@@ -708,6 +716,7 @@ function execute_with_trace(
     stdout_io::IO = stdout,
     diagnostic_output_sink = nothing,
     semantic_observation_sink = nothing,
+    bounded_child_parse_authority = nothing,
 )
     return LinkedSpecJulia.execute_generated_parser_with_trace_v2(
         _COMPILED_SPEC,
@@ -720,6 +729,7 @@ function execute_with_trace(
         diagnostic_output_sink = diagnostic_output_sink,
         semantic_observation_sink = semantic_observation_sink,
         actual_contract = LINKEDSPEC_GENERATED_SOURCE_CONTRACT,
+        bounded_child_parse_authority = bounded_child_parse_authority,
     )
 end
 

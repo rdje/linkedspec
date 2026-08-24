@@ -174,6 +174,10 @@ struct LinkedSpecRuntimeEngine
     max_iterations::Int
     spec_name::Union{Nothing,String}
     spec_path::Union{Nothing,String}
+    bounded_child_parse_authority::Union{
+        Nothing,
+        BoundedChildParseAuthority.ProgressiveExecutionSeed,
+    }
 end
 
 """Return a fresh detached catalog for all 92 source-boundary projections."""
@@ -224,14 +228,23 @@ function LinkedSpecRuntimeEngine(
     max_iterations::Int = 10_000,
     spec_name = nothing,
     spec_path = nothing,
+    bounded_child_parse_authority = nothing,
     kwargs...,
 )
     _reject_removed_runtime_options(kwargs; spec_name = spec_name, spec_path = spec_path)
     if max_iterations <= 0
         throw(ArgumentError("max_iterations must be positive"))
     end
+    if bounded_child_parse_authority !== nothing &&
+            !(bounded_child_parse_authority isa
+              BoundedChildParseAuthority.ProgressiveExecutionSeed)
+        throw(ArgumentError(
+            "bounded_child_parse_authority must be a private progressive execution seed",
+        ))
+    end
     try
         validate_compiled_regex_slot_identities(compiled_spec)
+        validate_progressive_dispatch_policy(compiled_spec)
     catch error
         if error isa SpecValidationException && error.diagnostic !== nothing &&
                 error.diagnostic.code == "regex_slot_identity_invalid"
@@ -259,6 +272,7 @@ function LinkedSpecRuntimeEngine(
         max_iterations,
         spec_name === nothing ? nothing : String(spec_name),
         spec_path === nothing ? nothing : String(spec_path),
+        bounded_child_parse_authority,
     )
 end
 
@@ -306,6 +320,10 @@ mutable struct _RuntimeExecutionContext
     input::String
     source_authority::SourceLocation.SourceAuthority
     recognition_authority::RecognitionTransaction.RecognitionTransactionAuthority
+    progressive_dispatch_state::Union{
+        Nothing,
+        BoundedChildParseAuthority.ProgressiveExecutionState,
+    }
     cursor_codeunit::Int
     registers::RuntimeMatchRegisters
     retv::Any
@@ -342,6 +360,7 @@ function _RuntimeExecutionContext(
     semantic_observation_failure::Union{Nothing,_RuntimeSemanticObservationFailure} = nothing,
     generated_families = nothing,
     generated_source_identity = nothing,
+    progressive_dispatch_state = nothing,
 )
     input_text = String(input)
     source_authority = SourceLocation.SourceAuthority(
@@ -354,6 +373,7 @@ function _RuntimeExecutionContext(
             source_authority = source_authority,
             source_identity = "input",
         ),
+        progressive_dispatch_state,
         0,
         RuntimeMatchRegisters(input_text),
         nothing,
@@ -497,7 +517,7 @@ function _leave_runtime_recognition_invocation!(
         )
     catch caught
         leave_error = caught
-        rethrow()
+        error === nothing && rethrow()
     finally
         if frame.observation_scope !== nothing
             terminal_error = error === nothing ? leave_error : error
@@ -1496,6 +1516,11 @@ function runtime_parse(
         semantic_observation_failure = semantic_observation_failure,
         generated_families = _generated_families,
         generated_source_identity = _generated_source_identity,
+        progressive_dispatch_state =
+            engine.bounded_child_parse_authority === nothing ? nothing :
+            BoundedChildParseAuthority.start(
+                engine.bounded_child_parse_authority,
+            ),
     )
     _set_runtime_cursor!(context, _runtime_public_parser_start_codeunit(context.input))
     trace_scope = trace === nothing ? nothing : enter_trace_scope!(
@@ -2602,6 +2627,11 @@ function _execute_runtime_lifecycle!(
             for statement in payload.action_ast.statements
                 if statement.expr isa ActionAssignScalarExpr
                     _record_runtime_rule_local_binding!(context, statement.expr.name)
+                elseif statement.expr isa ActionProgressiveDispatchSpanExpr
+                    _record_runtime_rule_local_binding!(
+                        context,
+                        statement.expr.target,
+                    )
                 elseif statement.expr isa ActionCallExpr &&
                         statement.expr.name == "set" &&
                         !isempty(statement.expr.args)
@@ -2671,7 +2701,8 @@ function _execute_runtime_action_block!(
         if error isa _RuntimeActionReturn
             return error
         elseif error isa _RuntimeActionNext || error isa RuntimeInterpreterException ||
-               error isa RuntimeExitNow || error isa _RuntimeDiagnosticOutputSinkFailure
+               error isa RuntimeExitNow || error isa _RuntimeDiagnosticOutputSinkFailure ||
+               error isa BoundedChildParseAuthority.ProgressiveDispatchException
             rethrow()
         end
         throw(RuntimeInterpreterException(
@@ -3461,6 +3492,31 @@ function _evaluate_runtime_action_expr!(
             ))
         end
         return result
+    elseif expr isa ActionProgressiveDispatchSpanExpr
+        state = context.progressive_dispatch_state
+        state === nothing && throw(
+            BoundedChildParseAuthority.missing_registry_exception(
+                origin = "$rule_label:dispatch_span",
+                parser_id = expr.parser_id,
+            ),
+        )
+        span_value = _runtime_copy(_read_runtime_store(context, expr.span))
+        transaction_active = any(
+            !isempty(frame.tokens) for frame in context.recognition_frames
+        )
+        result = BoundedChildParseAuthority.dispatch(
+            state;
+            origin = "$rule_label:dispatch_span",
+            parser_id = expr.parser_id,
+            top_rule = expr.top_rule,
+            span = span_value,
+            transaction_active = transaction_active,
+        )
+        return _store_runtime_bare_binding!(
+            context,
+            expr.target,
+            _runtime_copy(result),
+        )
     elseif expr isa ActionAssignScalarExpr
         if expr.value isa ActionRecognitionCheckpointExpr
             _runtime_recognition_checkpoint!(context, rule_label, expr.name)

@@ -592,6 +592,145 @@ function validate_recursive_observation_policy(compiled::CompiledSpec)
     return nothing
 end
 
+mutable struct _ProgressiveDispatchEffects
+    dispatches::Bool
+    rule_calls::Set{String}
+    function_calls::Set{String}
+    recognition_attempts::Set{String}
+end
+
+_ProgressiveDispatchEffects() = _ProgressiveDispatchEffects(
+    false,
+    Set{String}(),
+    Set{String}(),
+    Set{String}(),
+)
+
+function _progressive_dispatch_effects(value, function_names::Set{String})
+    effects = _ProgressiveDispatchEffects()
+
+    function visit(node)
+        if node isa AbstractVector
+            foreach(visit, node)
+            return nothing
+        elseif !(node isa AbstractDict)
+            return nothing
+        end
+        kind = get(node, "kind", nothing)
+        if kind == "progressive_dispatch_span"
+            effects.dispatches = true
+        elseif kind == "recognize_once"
+            rule = get(node, "rule", nothing)
+            rule isa AbstractString && push!(
+                effects.recognition_attempts,
+                String(rule),
+            )
+        elseif kind == "call"
+            name = get(node, "name", nothing)
+            name == "dispatch_span" && throw(
+                CompiledSpecException("progressive_span_binding_required"),
+            )
+            if name == "call"
+                args = get(node, "args", nothing)
+                if args isa AbstractVector && length(args) == 1
+                    argument = only(args)
+                    if argument isa AbstractDict &&
+                            get(argument, "kind", nothing) == "variable"
+                        rule = get(argument, "name", nothing)
+                        rule isa AbstractString && push!(
+                            effects.rule_calls,
+                            String(rule),
+                        )
+                    end
+                end
+            elseif name isa AbstractString && String(name) in function_names
+                push!(effects.function_calls, String(name))
+            end
+        end
+        foreach(visit, values(node))
+        return nothing
+    end
+
+    visit(value)
+    return effects
+end
+
+"""Reject generic residual calls and progressive effects under recognition."""
+function validate_progressive_dispatch_policy(compiled::CompiledSpec)
+    function_names = Set{String}(
+        entry.definition.name for entry in compiled.function_registry.entries
+    )
+    rule_effects = Dict{String,_ProgressiveDispatchEffects}()
+    for label in compiled.compiled_rule_order
+        rule = compiled.rules_by_label[label]
+        rule_effects[label] = _progressive_dispatch_effects(
+            Any[to_json(payload.action_ast) for payload in action_payloads(rule)],
+            function_names,
+        )
+    end
+    function_effects = Dict{String,_ProgressiveDispatchEffects}()
+    for entry in compiled.function_registry.entries
+        definition = entry.definition
+        block = parse_action_block(definition.body_source)
+        normalize_action_block_final_codeblocks!(block, compiled.function_registry)
+        function_effects[definition.name] = _progressive_dispatch_effects(
+            to_json(block),
+            function_names,
+        )
+    end
+
+    rule_dispatches = Dict(
+        name => effects.dispatches for (name, effects) in pairs(rule_effects)
+    )
+    function_dispatches = Dict(
+        name => effects.dispatches for (name, effects) in pairs(function_effects)
+    )
+    changed = true
+    while changed
+        changed = false
+        for (owner, effects) in pairs(rule_effects)
+            inherited = any(
+                get(rule_dispatches, callee, false)
+                for callee in effects.rule_calls
+            ) || any(
+                get(function_dispatches, callee, false)
+                for callee in effects.function_calls
+            )
+            if inherited && !rule_dispatches[owner]
+                rule_dispatches[owner] = true
+                changed = true
+            end
+        end
+        for (owner, effects) in pairs(function_effects)
+            inherited = any(
+                get(rule_dispatches, callee, false)
+                for callee in effects.rule_calls
+            ) || any(
+                get(function_dispatches, callee, false)
+                for callee in effects.function_calls
+            )
+            if inherited && !function_dispatches[owner]
+                function_dispatches[owner] = true
+                changed = true
+            end
+        end
+    end
+
+    for (owner, effects) in Iterators.flatten((
+        pairs(rule_effects),
+        pairs(function_effects),
+    ))
+        for target in effects.recognition_attempts
+            get(rule_dispatches, target, false) || continue
+            throw(CompiledSpecException(
+                "recognition_effect_forbidden:" *
+                "parser_registry_or_staged_dispatch owner=$owner target=$target",
+            ))
+        end
+    end
+    return nothing
+end
+
 function _compiled_regex_slot_identity_exception(
     rule_label::AbstractString,
     target_rule::AbstractString,
@@ -822,6 +961,7 @@ function _compile_spec(
     validate_compiled_regex_slot_identities(compiled)
     validate_no_removed_aggregate_selectors(compiled)
     validate_recursive_observation_policy(compiled)
+    validate_progressive_dispatch_policy(compiled)
     return compiled
 end
 

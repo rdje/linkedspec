@@ -2,26 +2,37 @@
 
 ## Current Activity
 
-- Julia `.14.6.5.1` is focused-signoff-complete from clean `94e37e83`. One unexported ActionIR-independent module
-  owns immutable already-compiled entries, fresh invocation state, typed rebased views, narrowing grants/ceilings,
-  shared cancellation/deadline/steps, decreasing chains, callback expiry, and detached bounded results.
-- Its dormant consumer passes 210 assertions across every neutral row, all 26 diagnostics, and nested/rebase/
-  expiry/detachment adversaries. The separate final-path consumer remains exactly 55-pass/one-RED at the missing
-  dedicated node; ordinary/canonical discovery, carriers, rollout 4/9/103, and outward surfaces do not move.
+- Julia `.14.6.5.2` is canonical-signoff-complete from clean `bb34a85e`. One exclusive logical-only node plus opaque
+  fresh execution seeds carry private dispatch through native, reconstructed, generated-plan, and independently
+  included emitted-module routes with equal detached results and no parent-cursor movement.
+- The dormant carrier consumer passes 62/62 and the authority consumer remains 210/210. Static malformed,
+  residual-generic, and recognition-effect boundaries plus live-token defense pass; generated data excludes every
+  callback, registry, fingerprint, source snapshot, cancellation token, and mutable authority.
+- Governance now records 9 dormant Julia carrier paths and one Lua guard/5 paths while rollout remains 4/9/103.
+  Ordinary/canonical discovery, generated format, typed recurrence, public, and outward surfaces do not move.
+- Mandatory change-history rollover publishes segment `4992`; the doctrine gate catches finite 20-file/19-line
+  capacity exactly. ADR `0086` raises only those controls to 21/20 and upgrades this leaf to canonical proof.
 - Complete ordinary Julia and direct governance proof pass. Typed source remains 11/3/152, recognition
   138/250/58, generated/capability 80/0/0, and language 250/126.
+- Corrected Perl 127/127, Dart 7/7, and cfg-enabled Rust 1/1 lockstep consumers plus exact receipt-bound canonical
+  CI pass; Julia remains dormant at rollout 4/9/103 and `.14.6.5.3` alone owns admission.
 
 ## Latest Completed Slice
 
-- Julia `.14.6.5.1` adds the private immutable authority plus complete dormant proof while preserving the exact
-  generic-call/four-carrier 55-pass/one-RED boundary and every carrier/admission/rollout exclusion.
+- Julia `.14.6.5.2` turns the unchanged historical final path GREEN at 62/62 through four fresh-authority carriers
+  while retaining dormant discovery and every admission/rollout exclusion; ADR `0086` owns its mandatory finite
+  history-capacity step, and receipt-bound canonical proof closes the leaf.
 
 ## Next Action
 
-- From the clean `.14.6.5.1` commit, activate `FUTURE-PARITY-BACKLOG.14.6.5.2` task-tree-first and add only the
-  dedicated Julia node plus four dormant fresh-authority carriers while retaining admission/rollout RED.
+- From the clean `.14.6.5.2` commit, activate `FUTURE-PARITY-BACKLOG.14.6.5.3` task-tree-first and admit the
+  unchanged Julia carrier consumer through ordinary/canonical proof while promoting only Julia rollout.
 
 ## Recent Completions
+
+- `2026-08-24` — `.14.6.5.2` adds Julia's exclusive logical node plus four fresh-authority carriers, makes the
+  exact dormant consumer GREEN at 62/62, finitely admits history segment `4992` under ADR `0086`, and keeps
+  admission, rollout, format, typed, and outward boundaries fixed.
 
 - `2026-08-24` — `.14.6.5.1` adds Julia's unexported immutable authority and 210-assertion dormant consumer while
   preserving the separate 55-pass/one-RED final path, rollout, canonical topology, and outward boundaries.
@@ -69,9 +80,6 @@
 - `2026-08-17` — `.14.6.2.2` privately integrates one exclusive dedicated node and four fresh-authority carriers;
   125 focused assertions plus canonical signoff pass while CI routing, rollout, generated format, staged registry,
   and outward surfaces stay fixed.
-
-- `2026-08-17` — `.14.6.2.1` adds the private immutable Perl registry/invocation/source-view authority and executes
-  every neutral case plus mutation/nesting/rebase/detachment adversaries while leaving the 83/1 RED unrouted.
 
 ## History
 

@@ -442,16 +442,49 @@ CURRENT_BOUNDARY = {
             },
         ],
     },
+    "julia_dormant_carriers": {
+        "consumer_path": "julia/test_dormant/progressive_span_dispatch_contract_test.jl",
+        "canonical_discovery": "dormant_only",
+        "marker_rows": [
+            {
+                "path": "julia/src/action/ActionAst.jl",
+                "tokens": ["ActionProgressiveDispatchSpanExpr", "progressive_dispatch_span"],
+            },
+            {
+                "path": "julia/src/action/ActionParser.jl",
+                "tokens": ["dispatch_span", "progressive_parser_identity_literal_required"],
+            },
+            {
+                "path": "julia/src/action/ActionContracts.jl",
+                "tokens": ["ActionProgressiveDispatchSpanExpr"],
+            },
+            {
+                "path": "julia/src/action/CallableContract.jl",
+                "tokens": ["ActionProgressiveDispatchSpanExpr"],
+            },
+            {
+                "path": "julia/src/compiler/CompiledSpec.jl",
+                "tokens": ["validate_progressive_dispatch_policy", "parser_registry_or_staged_dispatch"],
+            },
+            {
+                "path": "julia/src/runtime/BoundedChildParseAuthority.jl",
+                "tokens": ["ProgressiveExecutionSeed", "ProgressiveExecutionState"],
+            },
+            {
+                "path": "julia/src/runtime/Interpreter.jl",
+                "tokens": ["bounded_child_parse_authority", "ActionProgressiveDispatchSpanExpr"],
+            },
+            {
+                "path": "julia/src/source/SourceEmitter.jl",
+                "tokens": ["bounded_child_parse_authority", "execute_generated_parser_v2"],
+            },
+            {
+                "path": "julia/test_dormant/progressive_span_dispatch_contract_test.jl",
+                "tokens": ["native reconstructed and generated routes use fresh authority", "independently included emitted", "progressive_dispatch_span"],
+            },
+        ],
+    },
     "backend_guard_groups": [
-        {
-            "backend": "julia",
-            "paths": [
-                "julia/src/action/ActionContracts.jl",
-                "julia/src/action/ActionParser.jl",
-                "julia/src/runtime/Interpreter.jl",
-            ],
-            "forbidden_tokens": ["dispatch_span", "PROGRESSIVE_DISPATCH_SPAN"],
-        },
         {
             "backend": "lua",
             "paths": [
@@ -687,6 +720,7 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
         "execution_cases": len(EXECUTION_CASES),
         "rust_carrier_paths": len(CURRENT_BOUNDARY["rust_carriers"]["marker_rows"]),
         "dart_carrier_paths": len(CURRENT_BOUNDARY["dart_carriers"]["marker_rows"]),
+        "julia_dormant_carrier_paths": len(CURRENT_BOUNDARY["julia_dormant_carriers"]["marker_rows"]),
         "backend_guard_groups": len(CURRENT_BOUNDARY["backend_guard_groups"]),
         "backend_guard_paths": sum(len(group["paths"]) for group in CURRENT_BOUNDARY["backend_guard_groups"]),
         "outward_guard_paths": len(CURRENT_BOUNDARY["outward_guard"]["paths"]),
@@ -799,6 +833,14 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
             for token in marker_row["tokens"]:
                 require(token in carrier, f"Dart carrier is missing {token}: {marker_row['path']}")
 
+        julia_carriers = CURRENT_BOUNDARY["julia_dormant_carriers"]
+        for marker_row in julia_carriers["marker_rows"]:
+            carrier_path = ROOT / marker_row["path"]
+            require(carrier_path.is_file(), f"Julia dormant carrier path is missing: {marker_row['path']}")
+            carrier = carrier_path.read_text(encoding="utf-8")
+            for token in marker_row["tokens"]:
+                require(token in carrier, f"Julia dormant carrier is missing {token}: {marker_row['path']}")
+
         for group in CURRENT_BOUNDARY["backend_guard_groups"]:
             for relative_path in group["paths"]:
                 guarded_path = ROOT / relative_path
@@ -864,6 +906,23 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
         require(
             ci.count(dart_carriers["invocation"]) == 1,
             "canonical Dart progressive admission invocation missing or duplicated",
+        )
+        require(
+            (ROOT / julia_carriers["consumer_path"]).is_file(),
+            "dormant Julia progressive consumer is missing",
+        )
+        require(
+            not (ROOT / "julia/test/progressive_span_dispatch_contract_test.jl").exists(),
+            "dormant Julia progressive consumer entered ordinary discovery",
+        )
+        julia_runtests = (ROOT / "julia/test/runtests.jl").read_text(encoding="utf-8")
+        require(
+            "progressive_span_dispatch_contract_test" not in julia_runtests,
+            "dormant Julia progressive consumer entered the ordinary Julia driver",
+        )
+        require(
+            julia_carriers["consumer_path"] not in ci,
+            "dormant Julia progressive consumer entered canonical CI",
         )
 
 
@@ -1022,6 +1081,7 @@ def main() -> int:
         f"{len(document['execution_cases'])} execution cases; "
         f"{len(document['current_boundary']['rust_carriers']['marker_rows'])} Rust + "
         f"{len(document['current_boundary']['dart_carriers']['marker_rows'])} Dart carrier paths; "
+        f"{len(document['current_boundary']['julia_dormant_carriers']['marker_rows'])} dormant Julia carrier paths; "
         f"{len(document['current_boundary']['backend_guard_groups'])} backend guards/"
         f"{sum(len(group['paths']) for group in document['current_boundary']['backend_guard_groups'])} paths; "
         f"{len(document['current_boundary']['outward_guard']['paths'])} outward guards; "

@@ -895,6 +895,49 @@ function _action_parse_access_segments(text::String, pos::Int, start::Int)
     return segments
 end
 
+function _action_progressive_dispatch_assignment(
+    text::String,
+    start::Int,
+    target::String,
+    value::ActionExpr,
+)
+    value isa ActionCallExpr && value.name == "dispatch_span" || return nothing
+    length(value.args) == 3 || throw(
+        ArgumentError("progressive_span_binding_required"),
+    )
+    all(argument -> argument isa ActionPositionalArgument, value.args) || throw(
+        ArgumentError("progressive_span_binding_required"),
+    )
+    parser_operand = value.args[1].value
+    parser_operand isa ActionStringLiteralExpr || throw(
+        ArgumentError("progressive_parser_identity_literal_required"),
+    )
+    parser_id = parser_operand.value
+    occursin(r"^[a-z][a-z0-9]*(?:[._:-][a-z0-9]+)*$", parser_id) || throw(
+        ArgumentError("progressive_parser_identity_invalid"),
+    )
+    top_operand = value.args[2].value
+    top_operand isa ActionStringLiteralExpr || throw(
+        ArgumentError("progressive_top_rule_literal_required"),
+    )
+    top_rule = top_operand.value
+    occursin(r"^[A-Za-z_][A-Za-z0-9_]*$", top_rule) || throw(
+        ArgumentError("progressive_top_rule_invalid"),
+    )
+    span_operand = value.args[3].value
+    span_operand isa ActionVariableExpr || throw(
+        ArgumentError("progressive_span_binding_required"),
+    )
+    return ActionProgressiveDispatchSpanExpr(
+        source = text,
+        source_span = ActionSourceSpan(start, start + _action_len(text)),
+        target = target,
+        parser_id = parser_id,
+        top_rule = top_rule,
+        span = span_operand.name,
+    )
+end
+
 function _action_parse_assignment(text::String, start::Int)
     append_index = _action_find_top_level_token(text, "+=")
     if append_index !== nothing
@@ -928,6 +971,13 @@ function _action_parse_assignment(text::String, start::Int)
     )
     value = parse_action_expression(right.text, right.start)
     if _action_is_identifier(left.text)
+        progressive = _action_progressive_dispatch_assignment(
+            text,
+            start,
+            left.text,
+            value,
+        )
+        progressive !== nothing && return progressive
         return ActionAssignScalarExpr(
             source = text,
             source_span = ActionSourceSpan(start, start + _action_len(text)),

@@ -822,7 +822,7 @@ end
               "progressive_result_not_detached"
     end
 
-    @testset "authority remains private, dormant, and carrier-free" begin
+    @testset "authority remains private, dormant, and carrier-scoped" begin
         @test :BoundedChildParseAuthority ∉ names(LinkedSpecJulia)
         @test !isfile(
             joinpath(
@@ -848,6 +848,6 @@ end
             String,
         )
         @test !occursin("dispatch_bounded_child_parse", interpreter)
-        @test !occursin("ProgressiveExecutionSeed", interpreter)
+        @test occursin("ProgressiveExecutionSeed", interpreter)
     end
 end

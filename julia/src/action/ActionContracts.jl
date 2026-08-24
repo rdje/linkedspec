@@ -733,7 +733,8 @@ function _visit_expr!(resolver::_ActionContractResolver, expr::ActionExpr)
            expr isa ActionRecognizeOnceExpr ||
            expr isa ActionObserveRecognitionExpr ||
            expr isa ActionRecognitionCommitExpr ||
-           expr isa ActionRecognitionRollbackExpr
+           expr isa ActionRecognitionRollbackExpr ||
+           expr isa ActionProgressiveDispatchSpanExpr
         # Grammar-owned recognition intrinsics are dedicated ActionIR nodes,
         # not entries in the ordinary callable-helper registry.
         return nothing

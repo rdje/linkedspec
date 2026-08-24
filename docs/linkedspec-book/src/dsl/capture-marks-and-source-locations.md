@@ -423,8 +423,9 @@ recurring/public-no-drift row remains pending for final program-wide closeout `F
 typed-source composition is 11 complete / 3 pending with 152 mutations. The transaction row is an authority
 projection of the separately complete 9/9 recognition program: it changes no syntax, runtime, or public API.
 
-Progressive span dispatch is current as private Perl, Rust, and Dart behavior; its executable neutral authority remains the
-cross-backend source of truth. The
+Progressive span dispatch is admitted as private Perl, Rust, and Dart behavior; Julia's corresponding private
+carriers are executable but intentionally dormant. Its executable neutral authority remains the cross-backend
+source of truth. The
 reserved private expression is:
 
 ```text
@@ -436,10 +437,10 @@ child uses a bounded source view whose typed positions and diagnostics rebase to
 cursor/marks/transactions stay isolated; capability and policy ceilings only narrow; cancellation and remaining
 budget propagate; and repeated parser/top/source dispatch must strictly shrink the span. The existing staged
 function-body adapter does not satisfy this contract. The neutral checker passes 2 registry entries, 2 sources/8
-views, 6 authority, 6 cancellation, 8 chain, and 4 execution cases, 2 pending-backend guards/8 implementation
-paths plus 9 Rust + 8 Dart carrier paths and 10 outward guards, 26 diagnostics, rollout 4/9, and 103 mutations. The
+views, 6 authority, 6 cancellation, 8 chain, and 4 execution cases, one Lua absence guard/5 paths plus 9 Rust +
+8 Dart + 9 dormant Julia carrier paths and 10 outward guards, 26 diagnostics, rollout 4/9, and 103 mutations. The
 typed progressive row remains pending; the rejected dispatch effect owns current node
-`PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded Julia and Lua paths omit the tokens; and outward guards
+`PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded Lua paths omit the tokens; and outward guards
 deny premature exposure. Perl has private carrier integration
 behind host-supplied invocation options: the exact assignment lowers to one dedicated node and works identically
 through live, reconstructed, generated-plan, and independently loaded emitted routes, while generated artifacts
@@ -484,7 +485,7 @@ generated-plan, and independently included emitted-module routes all preserve th
 `dispatch_span` helper outcome. Fifty-five assertions pass; one final assertion deliberately requires the
 generic call to become exactly one `progressive_dispatch_span` node.
 
-Private authority/core `.14.6.5.1` is now executable below that unchanged RED. One unexported module owns
+Private authority/core `.14.6.5.1` is executable below that historical RED. One unexported module owns
 immutable logical entries containing already-compiled callbacks, then starts a fresh invocation over copied
 decoded sources and Julia's existing typed `SourceAuthority`. A callback sees only one bounded direct-span view:
 local Unicode-scalar boundaries rebase to the original source identity, and the view plus its nested-dispatch
@@ -493,7 +494,19 @@ cancellation identity, absolute deadline, remaining steps, active decreasing glo
 calls remain shared. Results are deeply copied, JSON-like, and node-bounded; callback/null failure, cycles,
 live-looking fields, nonfinite values, and retained authority fail closed. The dormant 210-assertion consumer
 covers every neutral row and all 26 diagnostic contexts plus nesting/rebasing/expiry/detachment adversaries.
-Dedicated node/carriers `.2`, canonical admission `.3`, and independent recomposition `.4` remain separate.
+
+Carrier leaf `.14.6.5.2` replaces the generic helper with one exclusive logical-only
+`ActionProgressiveDispatchSpanExpr`. Malformed operands, residual generic calls, and recognition-reachable effect
+graphs reject statically; a live-token defense covers externally reconstructed compiled input. Julia invocation
+teardown would otherwise mask that denial. The existing authority still restores and invalidates the unfinished
+token, while teardown preserves an already-propagating `progressive_transaction_forbidden`; terminal-required
+still reports when no prior error exists. Native, `SpecFile`-JSON
+reconstructed, generated-plan, and independently included emitted-module routes start fresh opaque execution
+state and return the same detached child value without advancing the parent cursor. Generated data carries only
+target/id/top/span operands—not callbacks, registry, fingerprint, source snapshots, cancellation, or mutable
+authority. The seven-group consumer passes 62/62 but remains under `julia/test_dormant/`; ordinary/canonical
+discovery and rollout stay unchanged after exact receipt-bound signoff. Admission `.3` follows, then independent
+recomposition `.4`.
 
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions or
 typed spans are authored values. The `recognition_*` operations are current across all six runtime routes, while

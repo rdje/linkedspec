@@ -1,6 +1,6 @@
 ---
 id: julia-progressive-span-dispatch-dormant-red
-title: Julia progressive span dispatch has a dormant RED at the dedicated-node boundary
+title: Julia progressive span dispatch preserves its historical dormant RED boundary
 answers:
   - "is progressive span dispatch implemented in Julia"
   - "where is the dormant Julia progressive span dispatch RED consumer"
@@ -11,14 +11,15 @@ answers:
   - "does canonical CI run the Julia progressive dispatch consumer"
   - "which leaves implement Julia progressive span dispatch"
 date: 2026-08-24
-status: exact dormant RED and private authority current; Julia carriers, admission, and recomposition pending
+status: historical RED preserved; private authority and dormant carrier GREEN current; admission and recomposition pending
 tags: [julia, progressive-parsing, red-test, generated-source, staged-registry, task-tree]
 evidence: "FUTURE-PARITY-BACKLOG.14.6.5.0 adds julia/test_dormant/progressive_span_dispatch_contract_test.jl outside ordinary and canonical discovery. The consumer derives neutral 4/9/103 truth, proves the unrelated staged function-body registry rejects expr-v1 at resolve, and compiles the exact reserved assignment. Current Julia retains one generic ActionCallExpr named dispatch_span and no progressive_dispatch_span / PROGRESSIVE_DISPATCH_SPAN node. Native, SpecFile-JSON reconstructed, generated-plan, and independently included emitted-module routes all reach the same unsupported runtime helper 'dispatch_span' in rule Top boundary; the generated routes preserve exact execute_generated/generated_execution_failed identity. The explicit repository-routed run passes 55 assertions and fails only its one dedicated-node assertion. Production sources retain committed SHA-256 identities ActionAst 9f74d633, ActionParser 8b31a114, ActionContracts c0ab5f28, CompiledSpec 7176052c, Interpreter 57c1bd1a, staged registry 211bad8b, and SourceEmitter 8a835429. Leaf .14.6.5.1 owns authority/core, .2 owns the node and four carriers, .3 alone owns ordinary/canonical admission plus Julia rollout, and .4 independently recomposes the admitted topology without behavior."
 evidence_update_2026_08_24_authority: "FUTURE-PARITY-BACKLOG.14.6.5.1 adds the unexported private authority and its 210-assertion dormant consumer without touching this final path. The exact consumer remains 55-pass/one-RED at the same generic-call/missing-dedicated-node assertion. Leaf .14.6.5.2 now exclusively owns the node and four carriers."
+evidence_update_2026_08_24_carriers: "FUTURE-PARITY-BACKLOG.14.6.5.2 promotes this exact consumer from its historical 55-pass/one-RED boundary to 62/62 GREEN without moving it from julia/test_dormant or routing it through ordinary/canonical discovery. The generic call becomes one exclusive logical-only node; all four routes delegate through fresh private authority and return the same detached value. The current implementation fact is julia-progressive-span-dispatch-carriers; this card retains the exact historical boundary."
 reverify:
   - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using Test; include(\"julia/test_dormant/progressive_span_dispatch_authority_test.jl\")'"
   - "bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_contract.py"
-  - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using Test; include(\"julia/test_dormant/progressive_span_dispatch_contract_test.jl\")' 2>&1 | rg '55 +1 +56'"
+  - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using Test; include(\"julia/test_dormant/progressive_span_dispatch_contract_test.jl\")'"
   - "! rg -q 'progressive_span_dispatch_contract_test[.]jl' julia/test/runtests.jl tools/run_ci_local.sh"
 ---
 
@@ -34,10 +35,10 @@ generated failure records the emitted source identity, `execute_generated` stage
 code, `Top` rule, `default` family, and the same unsupported-helper detail. The generated source contains no
 progressive authority, registry, or dedicated-node token.
 
-The consumer lives under `julia/test_dormant/`, is absent from `julia/test/runtests.jl`, and has no route in
-`tools/run_ci_local.sh`. Its neutral/staged, generic-AST, and four-carrier groups are GREEN at 55 assertions. One
-final assertion deliberately requires the generic call to disappear and exactly one
-`progressive_dispatch_span` node to exist; that is the sole RED.
+The consumer still lives under `julia/test_dormant/`, is absent from `julia/test/runtests.jl`, and has no route in
+`tools/run_ci_local.sh`. At this historical boundary its neutral/staged, generic-AST, and four-carrier groups were
+GREEN at 55 assertions while the dedicated-node assertion was the sole RED. `.14.6.5.2` preserves the same
+fixture and discovery boundary while making all seven groups GREEN at 62 assertions.
 
 The implementation split is deliberately disjoint: `.14.6.5.1` adds private immutable authority without touching
 the final path; `.2` adds the dedicated logical node and four dormant carriers; `.3` admits the unchanged consumer
@@ -46,4 +47,5 @@ continuity state.
 
 Related facts: [[progressive-span-dispatch-audit-plan]], [[julia-staged-function-body-registry]],
 [[julia-generated-source-v2-rule-local-cursor]], [[julia-recognition-transaction-integration]],
-[[dart-progressive-span-dispatch-dormant-red]], and [[rust-progressive-span-dispatch-admission]].
+[[julia-progressive-span-dispatch-carriers]], [[dart-progressive-span-dispatch-dormant-red]], and
+[[rust-progressive-span-dispatch-admission]].

@@ -17,9 +17,12 @@ part. After Dart progressive closeout, ADRs `0084` and `0085` add one equally bo
 the exact pending boundary. The schema-v1 index has ten records; capacity preserved the then-current 547 IDs,
 and Julia's five committed `.14.6.5.0-.4` children bring the current total to 552 without changing any stable ID
 or aggregate/member ceiling. Independent recomposition proves exact committed agreement.
-Julia `.14.6.5` is split into dormant RED, private authority/core, dormant carriers, canonical admission, and
-independent recomposition leaves. The exact 55-pass/one-RED final path remains current; `.14.6.5.1` adds the
-unexported immutable authority plus a 210-assertion dormant proof, and carrier leaf `.14.6.5.2` is next.
+Julia `.14.6.5` is split into historical dormant RED, private authority/core, dormant carriers, canonical
+admission, and independent recomposition leaves. `.14.6.5.1` adds the unexported immutable authority plus a
+210-assertion dormant proof; `.14.6.5.2` makes the unchanged final-path fixture GREEN at 62/62 across four fresh-
+authority routes while preserving dormant discovery. Its mandatory bounded-history rollover creates immutable
+segment `4992`; ADR `0086` raises only finite collection/manifest capacity to 21/20 and makes `.2` a canonical
+boundary. Exact receipt-bound proof closes `.2`; admission `.3` is next.
 
 This is consumer-aware work. The six live JSON projections and seven executable checkers now use stable decision
 authority ADR `0067`, and the chronology root contains no capability marker authority. Nine executable checkers
@@ -185,9 +188,10 @@ parent `.14.5` is closed; progressive span dispatch `.14.6` is active with priva
 exact outer-cfg consumer is canonically routed once while ordinary discovery remains zero tests; governance is
 4/9 rollout and 103 mutations. Dart parent `.14.6.4` is closed after its exact carrier consumer became ordinary
 and gained one canonical route. The bounded capacity tree adds and recomposes Julia's semantic owner without
-changing backend behavior. Julia `.14.6.5.0` freezes the exact generic-call/four-carrier dormant RED and
-`.14.6.5.1` supplies its private immutable authority without moving that final path; `.14.6.5.2-.4` separately
-own carriers, admission, and independent recomposition.
+changing backend behavior. Julia `.14.6.5.0` freezes the exact generic-call/four-carrier historical dormant RED,
+`.14.6.5.1` supplies its private immutable authority, and `.14.6.5.2` adds the dedicated node plus four dormant
+fresh-authority carriers under exact canonical signoff; `.14.6.5.3-.4` separately own admission and independent
+recomposition.
 
 Behavior-free audit `.14.6.0` and ADR `0080` fix that boundary exactly. `parse_job(...)` remains unavailable and
 `dispatch_span(...)` is admitted only as a private Perl/Rust/Dart intrinsic, not a shared helper. Each backend's current staged registry accepts
@@ -201,7 +205,7 @@ positions/spans and diagnostics rebase to the original source identity and globa
 isolated, capabilities intersect, ceilings only narrow, cancellation/budget cannot reset, and a repeated parser/
 top/source chain must strictly shrink its span. Correction `.14.6.0.1` repaired the typed transaction row; neutral
 governance passes 2 registry entries, 2 sources/8 views, 6 authority, 6 cancellation, 8 chain, 4 execution cases,
-2 pending-backend guards/8 implementation paths plus 9 Rust + 8 Dart carrier paths and 10 outward guards, 26
+one Lua guard/5 paths plus 9 Rust + 8 Dart + 9 dormant Julia carrier paths and 10 outward guards, 26
 diagnostics, rollout 4/9, and 103 mutations. The typed row remains pending; the rejected effect owns current node
 `PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded Julia/Lua paths omit both tokens; and outward guards deny exposure. Backends `.5-.6`,
 recurrence `.7`, and public no-drift `.8` follow.

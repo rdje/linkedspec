@@ -1,13 +1,13 @@
 # MEMORY
 
-- activation_commit: `94e37e83adda097f63c3bb7d6aa9cdaca533fa2b` — exact clean Julia-RED base for
-  task-tree-first focused `FUTURE-PARITY-BACKLOG.14.6.5.1`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.5.1 - implement Julia progressive dispatch authority`;
-  private authority consumer is 210/210 while the separate final path remains exact at 55-pass/one-RED.
-- active_work_unit: none after the intended `.14.6.5.1` commit; dormant Julia carrier `.14.6.5.2` is pending.
-- next_action: from the clean `.14.6.5.1` commit, activate `FUTURE-PARITY-BACKLOG.14.6.5.2` task-tree-first,
-  then add only the dedicated logical node and four fresh-authority dormant carriers without admission/rollout.
-- in_flight_uncommitted: none after the intended `.14.6.5.1` commit; no background job remains.
+- activation_commit: `bb34a85e6fe6ee43408721141309261c9e83bd00` — exact clean Julia-authority base for
+  task-tree-first focused `FUTURE-PARITY-BACKLOG.14.6.5.2`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.5.2 - implement dormant Julia progressive carriers`;
+  carrier consumer is 62/62 and private authority consumer remains 210/210 while admission stays pending.
+- active_work_unit: none after the intended `.14.6.5.2` commit; Julia admission `.14.6.5.3` is pending.
+- next_action: from the clean `.14.6.5.2` commit, activate `FUTURE-PARITY-BACKLOG.14.6.5.3` task-tree-first,
+  then admit the unchanged carrier consumer and promote only Julia rollout through canonical proof.
+- in_flight_uncommitted: none after the intended `.14.6.5.2` commit; no background job remains.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
@@ -29,18 +29,22 @@
   native admission 6/6; MCP rollout complete/141.
 - current_readme_contract: README stays 106/5,197 under hard 128/6,144 caps; ADRs `0084`/`0085` implement one
   additional bounded future-task semantic member and a ten-line strict index without changing any collection,
-  per-file, aggregate, member-byte, or 5,000-line semantic-member ceiling.
+  per-file, aggregate, member-byte, or 5,000-line semantic-member ceiling. ADR `0086` separately admits only
+  mandatory change-history segment `4992`, advancing finite collection/manifest controls to 21/20 while retaining
+  every byte, root, segment, aggregate, owner, lifecycle, verifier, and storage control.
 - current_verification_contract: ADR `0073` makes focused proof the ordinary per-leaf default and canonical proof
-  mandatory at admission/milestone/public/infrastructure and final clean push boundaries.
+  mandatory at admission/milestone/public/infrastructure and final clean push boundaries; `.14.6.5.2` upgrades to
+  canonical because its mandatory history rollover changes finite resulting-tree infrastructure, and its exact
+  staged receipt-bound proof passes before the intended commit.
 - documentation_debt_owner: ADR `0066` composition-closes all stores; bounded live/history/task/Knowledge owners
   and their rollover/index gates remain current.
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, recurrence/public no-drift 9/9, and
   classifies private progressive dispatch fail-closed at 138 ActionIR rows / 250 calls / 58 mutations.
 - current_future_direction: neutral `.14.6.1` plus admitted Perl `.2`, Rust `.3`, and Dart `.4` are rollout 4/9/103;
-  Julia dormant RED `.5.0` and private authority `.1` are current, with carriers `.2`, admission `.3`, and
-  recomposition `.4` separately pending; Lua `.6`, recurrence `.7`, public `.8`, staged `.14.7`, and combined
+  Julia historical dormant RED `.5.0`, private authority `.1`, and four dormant carriers `.2` are current, with
+  admission `.3` and recomposition `.4` separately pending; Lua `.6`, recurrence `.7`, public `.8`, staged `.14.7`, and combined
   `.14.8` follow.
 - latest_bootstrap_read: 2026-08-24 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
-  review complete; Julia `.14.6.5.1` adds private immutable authority with complete dormant proof while preserving
-  the exact historical generic-call/four-carrier RED before carrier work.
+  review complete; Julia `.14.6.5.2` makes four fresh-authority routes GREEN at 62/62 while preserving dormant
+  discovery, rollout 4/9/103, generated format, typed recurrence, and outward boundaries.
