@@ -423,7 +423,7 @@ recurring/public-no-drift row remains pending for final program-wide closeout `F
 typed-source composition is 11 complete / 3 pending with 152 mutations. The transaction row is an authority
 projection of the separately complete 9/9 recognition program: it changes no syntax, runtime, or public API.
 
-Progressive span dispatch is current as private Perl and Rust behavior; its executable neutral authority remains the
+Progressive span dispatch is current as private Perl, Rust, and Dart behavior; its executable neutral authority remains the
 cross-backend source of truth. The
 reserved private expression is:
 
@@ -432,7 +432,7 @@ value = dispatch_span("expr-v1", "Expr", span)
 ```
 
 The parser identity and top rule are static normalized literals; `span` is one bare local direct-span harray. The
-child will use a bounded source view whose typed positions and diagnostics rebase to the original source; parent
+child uses a bounded source view whose typed positions and diagnostics rebase to the original source; parent
 cursor/marks/transactions stay isolated; capability and policy ceilings only narrow; cancellation and remaining
 budget propagate; and repeated parser/top/source dispatch must strictly shrink the span. The existing staged
 function-body adapter does not satisfy this contract. The neutral checker passes 2 registry entries, 2 sources/8
@@ -476,6 +476,14 @@ An opaque execution seed now carries native, `SpecFile`-JSON reconstructed, gene
 analyzed emitted-source execution to the same detached child result. Static recognition closure and a live-token
 check forbid non-rollbackable dispatch, and generated data contains only logical operands. The seven-group carrier
 consumer is ordinary and has one exact canonical route, advancing only Dart to rollout 4/9.
+
+Julia `.14.6.5.0` now freezes its corresponding final-path boundary without production behavior. The exact
+dormant consumer derives neutral 4/9/103 truth, proves the separate staged registry rejects `expr-v1`, and shows
+that the reserved assignment remains one generic `ActionCallExpr`. Native, `SpecFile`-JSON reconstructed,
+generated-plan, and independently included emitted-module routes all preserve the same unsupported
+`dispatch_span` helper outcome. Fifty-five assertions pass; one final assertion deliberately requires the
+generic call to become exactly one `progressive_dispatch_span` node. Authority/core `.1`, dormant carriers `.2`,
+canonical admission `.3`, and independent recomposition `.4` remain separate pending owners.
 
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions or
 typed spans are authored values. The `recognition_*` operations are current across all six runtime routes, while

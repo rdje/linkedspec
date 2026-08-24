@@ -10,6 +10,19 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-24 — FUTURE-PARITY-BACKLOG.14.6.5.0 — freeze Julia progressive dispatch RED
+
+- Activated from exact clean `c56a36fd` and split Julia into dormant RED, private authority/core, dormant carrier,
+  canonical admission, and independent recomposition leaves before production behavior.
+- Added one dormant Julia consumer outside ordinary/canonical discovery. It passes 55 assertions and fails only
+  the final dedicated-node boundary after proving staged `expr-v1` rejection, one generic `dispatch_span` call,
+  and equal native/reconstructed/generated-plan/independently included emitted-module unsupported-helper outcomes.
+- Corrected ADR `0080`'s stale pre-Dart 3/9/95 prose to executable 4/9/103 truth; added the canonical Knowledge
+  fact and synchronized roadmaps, book, task frontier, and continuity without changing the neutral artifact.
+- Complete ordinary Julia and direct progressive/typed/recognition/generated/capability/language proof pass. No
+  production, generated-format, CI-topology, rollout, typed-recurring, README, or outward surface moves; `.5.1`
+  owns private authority/core next.
+
 ## 2026-08-24 — FUTURE-PARITY-PARTITION-CAPACITY.2 — recompose bounded semantic topology
 
 - Activated task-tree-first from exact clean canonical `.1` commit `0a8accb3`; changed no executable topology,

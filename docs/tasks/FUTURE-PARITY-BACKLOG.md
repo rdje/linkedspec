@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-24` (Dart `.14.6.4` is closed; capacity `.0-.2` composition-close the eighth bounded
-  semantic member; Julia `.14.6.5` task splitting is the next clean frontier)
+- Last updated: `2026-08-24` (capacity `.0-.2` composition-close the eighth bounded semantic member; Julia
+  `.14.6.5.0` freezes the exact dormant RED and `.14.6.5.1` is the next clean frontier)
 - Owner: repo-local workflow
 
 ## Goal
@@ -104,12 +104,13 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 
 ## Current Frontier
 
-**Authoritative frontier (2026-08-17):** corrective `.14.6.0.1` is focused-signoff-complete for intended atomic
-258 from clean audit atomic 257 `1a6e0b1f`. It projects the independently complete 9/9 recognition authority into
-typed `transaction_safety`, locks stale Knowledge/book claims, and advances only typed truth to 11/3/152 without
-runtime, public, or CI-topology movement. Neutral progressive contract `.14.6.1` is next; `.2-.6` retain the
-Perl/Rust/Dart/Julia/shared-Lua implementation order, `.7` recurrence, `.8` public no-drift, staged `.14.7`, and
-combined program-wide `.14.8` remain separate owners.
+**Authoritative frontier (2026-08-24):** progressive neutral `.14.6.1` and private Perl `.2`, Rust `.3`, and Dart
+`.4` admissions are current at rollout 4/9/103. Capacity tree `FUTURE-PARITY-PARTITION-CAPACITY.0-.2` adds and
+independently recomposes the bounded `.14.6.5-.14.8` owner without changing behavior. Julia `.14.6.5.0` splits
+the parent into exact dormant RED `.0`, private authority/core `.1`, dormant carriers `.2`, canonical admission
+`.3`, and independent recomposition `.4`; its 55-pass/one-RED consumer changes no production or governance truth.
+`.14.6.5.1` is next. Shared Lua `.6`, recurrence `.7`, public no-drift `.8`, staged `.14.7`, and combined
+program-wide `.14.8` remain separate owners.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent
 `.10.7.2` are composition-closed. The root constructor owns strict copied UTF-8, portable SHA-256, exact private

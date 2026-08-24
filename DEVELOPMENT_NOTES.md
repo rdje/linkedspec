@@ -10,6 +10,21 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-24 (`FUTURE-PARITY-BACKLOG.14.6.5.0` — Julia progressive dormant RED): exact clean activation is
+  capacity closeout `c56a36fd`; the focused slice adds one unrouted test plus durable planning/status only.
+- Julia keeps the reserved assignment as one `ActionCallExpr` named `dispatch_span`; no
+  `progressive_dispatch_span` / `PROGRESSIVE_DISPATCH_SPAN` node exists. The unrelated staged registry rejects
+  `expr-v1` during resolve with no loader or compiler access.
+- Native and `SpecFile`-JSON reconstruction throw the same `RuntimeInterpreterException`; generated-plan and an
+  independently included emitted module preserve the same detail under `execute_generated` /
+  `generated_execution_failed` with their exact source identities. Emitted source carries no progressive authority.
+- The consumer is exactly 55-pass/one-RED and absent from ordinary/canonical discovery. Committed production
+  digests remain ActionAst `9f74d633`, ActionParser `8b31a114`, ActionContracts `c0ab5f28`, CompiledSpec
+  `7176052c`, Interpreter `57c1bd1a`, staged registry `211bad8b`, and SourceEmitter `8a835429`.
+- Complete ordinary Julia and all direct governance checks pass unchanged at progressive 4/9/103, typed 11/3/152,
+  recognition 138/250/58, generated/capability 80/0/0, and language 250/126. `.5.1-.4` exclusively own private
+  authority, dormant carriers, canonical admission, and independent recomposition.
+
 - 2026-08-24 (`FUTURE-PARITY-PARTITION-CAPACITY.2` — bounded-topology recomposition): exact clean activation is
   canonical implementation commit `0a8accb3`; this focused leaf changes continuity/status only.
 - Index refresh retains SHA-256 `74221f0e...`. Stable lookup resolves `.14`, `.14.6`, `.14.6.4.3`, `.14.6.5`, and

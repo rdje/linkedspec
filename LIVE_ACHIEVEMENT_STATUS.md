@@ -2,28 +2,30 @@
 
 ## Current Activity
 
-- Capacity `.2` independently recomposes the committed eighth-member topology from clean `0a8accb3`; focused
-  signoff closes the capacity tree and returns the next clean frontier to Julia `.14.6.5` task splitting.
-- The unchanged `.14.6.5-.14.8` block moves at exact source boundary `21064/21065`; old/new members are
-  4,988/543,163 and 13/1,501 lines/bytes, with immutable history untouched.
-- Strict schema v1 now has ten records over eight semantic members plus history and preserves all 547 stable IDs.
-  Lookup resolves `.14.6.4.3` to the old part and `.14.6.5` to the new part exactly once.
-- Read/update/build tools, root navigation, 27/27 checker mutations, bounded route, and capability all-parts census
-  agree. ADRs `0084`/`0085` preserve all pressure ceilings while authorizing the exact route transition.
-- Progressive behavior remains neutral + Perl + Rust + Dart 4/9/103; no backend, generated format, typed row,
-  public API, README, or outward surface moves.
+- Julia `.14.6.5.0` is focused-signoff-complete from clean `c56a36fd`. The parent is split into exact dormant RED,
+  private authority/core, dormant carriers, canonical admission, and independent recomposition leaves.
+- The unrouted consumer passes 55 assertions and fails only its final dedicated-node assertion. Staged `expr-v1`
+  resolution rejects; the reserved assignment remains one generic `ActionCallExpr`; native, reconstructed,
+  generated-plan, and independently included emitted-module routes preserve one unsupported-helper boundary.
+- Complete ordinary Julia and direct governance proof pass. Progressive truth remains 4/9/103, typed source
+  11/3/152, recognition 138/250/58, generated/capability 80/0/0, and language 250/126.
+- No production, generated-format, CI-topology, rollout, typed recurrence, README, public, or outward surface
+  moves. ADR `0080` now reflects the already-executable post-Dart 4/9/103 boundary rather than stale 3/9/95 prose.
 
 ## Latest Completed Slice
 
-- Capacity `.2` proves byte-idempotent index refresh, exact old/new/outside/unowned lookup, clean-source records
-  10/10, immutable-history identity, task mutations 27/27 over 547 IDs, route 20/62/32, and capability 80/0/0.
+- Julia `.14.6.5.0` freezes the generic-call/four-carrier historical boundary at 55-pass/one-RED, preserves
+  ordinary/canonical dormancy, and assigns exact `.1-.4` owners without production behavior.
 
 ## Next Action
 
-- From the clean `.2` commit, activate `FUTURE-PARITY-BACKLOG.14.6.5` task-tree-first and split its broad Julia
-  goal into bounded RED, authority/core, carrier, admission, and recomposition leaves before behavior changes.
+- From the clean `.14.6.5.0` commit, activate `FUTURE-PARITY-BACKLOG.14.6.5.1` task-tree-first and add only the
+  private immutable Julia authority/core while preserving the exact final-path RED and all carrier/rollout bounds.
 
 ## Recent Completions
+
+- `2026-08-24` — `.14.6.5.0` freezes Julia's exact 55-pass/one-RED generic-call/four-carrier boundary, keeps it
+  outside ordinary/canonical discovery, and splits authority, carriers, admission, and recomposition.
 
 - `2026-08-24` — capacity `.2` independently recomposes every committed topology, source, lookup, route, and
   consumer invariant without replacement behavior and closes the infrastructure tree.
@@ -71,9 +73,6 @@
 
 - `2026-08-17` — `.14.6.2.0` freezes the final-path Perl progressive RED at 83 pass / one missing-node failure,
   keeps it unrouted, and assigns core/carriers/admission to `.1-.3` without production movement.
-
-- `2026-08-17` — `.14.6.1` freezes executable neutral `dispatch_span` authority at 1/9/86, proves current backend/
-  outward absence across 17+10 paths, and registers its always-on canonical checker.
 
 ## History
 

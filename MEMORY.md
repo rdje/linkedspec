@@ -1,13 +1,13 @@
 # MEMORY
 
-- activation_commit: `0a8accb3d6ad9397aa0f0d716f2c5e387e7f6f4e` — exact clean canonical `.1` base for
-  task-tree-first focused `FUTURE-PARITY-PARTITION-CAPACITY.2`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-PARTITION-CAPACITY.2 - recompose bounded semantic topology`; focused
-  signoff closes the capacity tree without topology or behavior movement.
-- active_work_unit: none after the intended `.2` commit; Julia `.14.6.5` task splitting is not yet activated.
-- next_action: from the clean `.2` commit, retrieve `FUTURE-PARITY-BACKLOG.14.6.5`, activate it task-tree-first,
-  and split the broad Julia parent into bounded RED, authority/core, carrier, admission, and recomposition leaves.
-- in_flight_uncommitted: none after the intended `.2` commit; no background job remains.
+- activation_commit: `c56a36fd0315b754d5310c9fd56641aae902fafc` — exact clean capacity-closeout base for
+  task-tree-first focused `FUTURE-PARITY-BACKLOG.14.6.5.0`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.5.0 - freeze Julia progressive dispatch RED`; exact dormant
+  consumer is 55-pass/one-RED with no production, rollout, generated-format, or canonical-topology movement.
+- active_work_unit: none after the intended `.14.6.5.0` commit; Julia private authority `.14.6.5.1` is pending.
+- next_action: from the clean `.14.6.5.0` commit, retrieve and activate `FUTURE-PARITY-BACKLOG.14.6.5.1`
+  task-tree-first, then implement only the private immutable Julia authority/core while preserving final-path RED.
+- in_flight_uncommitted: none after the intended `.14.6.5.0` commit; no background job remains.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
@@ -38,8 +38,8 @@
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, recurrence/public no-drift 9/9, and
   classifies private progressive dispatch fail-closed at 138 ActionIR rows / 250 calls / 58 mutations.
 - current_future_direction: neutral `.14.6.1` plus admitted Perl `.2`, Rust `.3`, and Dart `.4` are rollout 4/9/103;
-  capacity is composition-closed and Julia `.5` task splitting is next; Lua `.6`, recurrence `.7`, public `.8`,
-  staged `.14.7`, and combined `.14.8` retain separate owners.
+  Julia dormant RED `.5.0` is current, with private authority `.1`, carriers `.2`, admission `.3`, and recomposition
+  `.4` separately pending; Lua `.6`, recurrence `.7`, public `.8`, staged `.14.7`, and combined `.14.8` follow.
 - latest_bootstrap_read: 2026-08-24 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
-  review complete; capacity `.1` implements ADRs `0084`/`0085` at `0a8accb3`, and focused `.2` independently
-  recomposes the exact committed topology before the Julia handoff.
+  review complete; capacity `.0-.2` is composition-closed and Julia `.14.6.5.0` freezes the exact historical
+  generic-call/four-carrier RED before private authority work.
