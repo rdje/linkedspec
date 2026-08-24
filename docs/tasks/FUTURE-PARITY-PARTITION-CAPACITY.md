@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `FUTURE-PARITY-PARTITION-CAPACITY`
-- Status: `active` / `.1` canonical-signoff-complete; `.2` pending independent recomposition
+- Status: `done` / `closed`; `.2` focused-signoff-complete from clean `0a8accb3`
 - Roadmap lane: `Repository continuity / bounded task evidence`
 - Created: `2026-08-18`
 - Last updated: `2026-08-24`
@@ -64,7 +64,7 @@ reason to enlarge a bounded member or weaken task-tree-first doctrine.
 ## Task tree
 
 - ID: `FUTURE-PARITY-PARTITION-CAPACITY`
-  Status: `active` (2026-08-18; `.0` task-tree-first from clean `3ccaf7c3`)
+  Status: `done; closed` (2026-08-24; `.2` independently recomposes the committed topology)
   Goal: Extend bounded future-parity task storage at a stable semantic boundary and restore the Julia frontier.
   Depends on: `FUTURE-PARITY-BACKLOG.14.6.4.3`
   Children: `.0-.2`
@@ -125,7 +125,7 @@ reason to enlarge a bounded member or weaken task-tree-first doctrine.
 
 - ID: `FUTURE-PARITY-PARTITION-CAPACITY.1`
   Status: `done; canonical-signoff-complete` (2026-08-24; task-tree-first from exact clean planning commit
-  `2cf4c9dd`; intended implementation commit; no topology change preceded activation)
+  `2cf4c9dd`; committed at `0a8accb3`; no topology change preceded activation)
   Goal: Implement the additional bounded semantic member and atomically migrate `.14.6.5-.14.8` with every
   index/tool/checker/consumer/route authority updated.
   Depends on: `.0`
@@ -182,7 +182,8 @@ reason to enlarge a bounded member or weaken task-tree-first doctrine.
   Intended commit: `FUTURE-PARITY-PARTITION-CAPACITY.1 - implement eighth bounded semantic member`.
 
 - ID: `FUTURE-PARITY-PARTITION-CAPACITY.2`
-  Status: `pending`
+  Status: `done; focused-signoff-complete` (2026-08-24; task-tree-first from exact clean `.1` commit `0a8accb3`;
+  intended recomposition commit; no topology or continuity change preceded activation)
   Goal: Independently recompose the committed extended topology and hand the clean frontier back to Julia
   `FUTURE-PARITY-BACKLOG.14.6.5`.
   Depends on: `.1`
@@ -190,17 +191,41 @@ reason to enlarge a bounded member or weaken task-tree-first doctrine.
   lookups across every part, metadata mutations, route pressure, all direct consumers, capability census,
   Knowledge/book/live continuity, and required focused checks; close this tree only on exact committed agreement;
   commit, clear the brief, and prove clean before activating Julia task children.
-  Planned verification tier: `focused`.
-  Planned focused checks: committed topology/source/ID/digest recomposition; all task consumers; task metadata and route
+  Verification tier: `focused`.
+  Focused checks: committed topology/source/ID/digest recomposition; all task consumers; task metadata and route
   pressure; capability conformance; Knowledge, mdBook, bounded histories, memory architecture, doctrines, exact
   diff and clean handoff.
-  Planned canonical trigger: `none when the committed topology recomposes exactly; escalate only if .2 must change an
+  Canonical trigger: `none because the committed topology recomposes exactly; escalate only if .2 must change an
   executable authority or exposes cross-cutting uncertainty`.
+
+  ### Acceptance checklist
+
+  - [x] **CLEAN ACTIVATION / OWNERSHIP** — Prove clean `.1` commit `0a8accb3`, matching promoted receipt,
+    zero-byte brief, absent rendered book, no background job, and `.2` activation as the first mutation.
+  - [x] **SOURCE / ID RECOMPOSITION** — Independently prove every committed source range/count/byte/digest,
+    immutable history byte, all 547 unique IDs, and exact old/new/outside ownership.
+  - [x] **LOOKUP / TOOL / CONSUMER RECOMPOSITION** — Exercise old, boundary, new, outside-CWD, and unowned lookups;
+    rerun update/build/check/root/route/capability consumers without changing committed topology.
+  - [x] **LOCKSTEP / NO BEHAVIOR** — Close task/ADR/Knowledge/roadmap/book/live continuity while keeping every
+    parser/compiler/runtime/backend/generated/progressive/typed/public/README/outward byte and status unchanged.
+  - [x] **FOCUSED / COMMIT / CLEAN HANDOFF** — Pass focused direct dependents, Knowledge/book/history/memory,
+    all doctrines and exact diff; commit, clear the brief, prove clean, then return the frontier to Julia `.14.6.5`.
+
+  Evidence: exact clean `0a8accb3`, its promoted canonical receipt, zero-byte brief, absent rendered book, and
+  task-tree-first activation pass. Index refresh preserves SHA-256 `74221f0e...` byte-for-byte. Stable lookups
+  resolve `.14`, `.14.6`, `.14.6.4.3`, `.14.6.5`, and `.14.8` to the exact old/new owners; outside-CWD `.14.6.5`
+  agrees and `.14.9` fails unowned. A repository-local clean-source build emits 8 semantic + 1 immutable parts
+  and a ten-record index; all 10 generated source-range/digest/topology records match, and immutable history is
+  byte-identical. Task metadata passes 27/27 over 547 IDs and 97 task files, route pressure remains 20/62/32,
+  capability remains 80/0/0, and no tracked topology/tool/route/backend/generated/public byte changes. Knowledge,
+  real mdBook render, both bounded histories, memory, all nine doctrines, and exact diff pass; generated scratch
+  and book output are removed.
+  Intended commit: `FUTURE-PARITY-PARTITION-CAPACITY.2 - recompose bounded semantic topology`.
 
 ## Current frontier
 
-`FUTURE-PARITY-PARTITION-CAPACITY.2` — from the clean `.1` implementation commit, activate the focused leaf and
-independently recompose every committed topology, lookup, route, and consumer invariant.
+Tree closed. From its clean `.2` commit, return to `FUTURE-PARITY-BACKLOG.14.6.5` and split the broad Julia parent
+into bounded RED, authority/core, carrier, admission, and recomposition children before behavior changes.
 
 ## Decisions
 
@@ -211,7 +236,7 @@ independently recompose every committed topology, lookup, route, and consumer in
 
 ## Blockers
 
-- Julia `.14.6.5` task splitting remains sequenced behind clean independent `.2`; no environmental blocker remains.
+- None. Julia `.14.6.5` task splitting is the next clean roadmap action.
 
 ## Change log
 
@@ -227,3 +252,7 @@ independently recompose every committed topology, lookup, route, and consumer in
   by the approval service usage limit, so `.1` remains active and `.2` is not eligible.
 - `2026-08-24`: Host-authorized locality and exact staged canonical CI pass through primary CLI 66x2 and Phase 0
   1,031/1,031 in 801 seconds; `.1` is canonical-signoff-complete for its intended commit and `.2` is next.
+- `2026-08-24`: `.1` lands clean at `0a8accb3` with its canonical receipt promoted; `.2` activates task-tree-first
+  from that exact clean boundary for independent focused recomposition.
+- `2026-08-24`: `.2` independently recomposes source/index/topology, stable lookup, tools, mutations, routing, and
+  consumers without changing them; focused signoff closes the capacity tree and returns the frontier to Julia.

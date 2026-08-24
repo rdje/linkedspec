@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-18` (Dart `.14.6.4` is closed; the eighth bounded semantic member now owns pending Julia
-  `.14.6.5` through combined `.14.8`; independent capacity recomposition precedes Julia task splitting)
+- Last updated: `2026-08-24` (Dart `.14.6.4` is closed; capacity `.0-.2` composition-close the eighth bounded
+  semantic member; Julia `.14.6.5` task splitting is the next clean frontier)
 - Owner: repo-local workflow
 
 ## Goal

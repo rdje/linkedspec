@@ -10,6 +10,16 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-24 (`FUTURE-PARITY-PARTITION-CAPACITY.2` — bounded-topology recomposition): exact clean activation is
+  canonical implementation commit `0a8accb3`; this focused leaf changes continuity/status only.
+- Index refresh retains SHA-256 `74221f0e...`. Stable lookup resolves `.14`, `.14.6`, `.14.6.4.3`, `.14.6.5`, and
+  `.14.8` exactly; outside-CWD agrees, while `.14.9` fails unowned.
+- A repository-local clean-source build emits eight semantic plus one immutable part and ten index records. All
+  generated source ranges/digests/topology match the committed index; immutable history is byte-identical. Live
+  mutable task evidence is intentionally checked by current digest/ID/mutation oracles, not source byte identity.
+- Metadata 27/27 over 547 IDs, route 20/62/32, capability 80/0/0, book/Knowledge/histories/memory/doctrines, and
+  exact diff pass. The capacity tree closes without replacement topology or behavior; Julia `.14.6.5` splits next.
+
 - 2026-08-24 (`FUTURE-PARITY-PARTITION-CAPACITY.1` — eighth bounded semantic member): exact clean activation is
   planning commit `2cf4c9dd`; this canonical leaf changes task storage/tooling/governance without behavior.
 - The exact 12-line / 1,379-byte pending block moves unchanged. The old `.14` member keeps the root through

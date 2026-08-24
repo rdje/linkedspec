@@ -15,7 +15,8 @@ reconstruction query. Live status is a bounded overwrite view; changes and notes
 former oversized future tree is a 379-line live index over eight stable semantic parts and one immutable history
 part. After Dart progressive closeout, ADRs `0084` and `0085` add one equally bounded `.14.6.5-.14.8` member at
 the exact pending boundary. The schema-v1 index now has ten records, lookup preserves all 547 current stable IDs,
-and every aggregate/member ceiling is unchanged. Independent recomposition remains before Julia task expansion.
+and every aggregate/member ceiling is unchanged. Independent recomposition proves exact committed agreement;
+Julia `.14.6.5` task splitting is the next clean frontier.
 
 This is consumer-aware work. The six live JSON projections and seven executable checkers now use stable decision
 authority ADR `0067`, and the chronology root contains no capability marker authority. Nine executable checkers

@@ -10,6 +10,16 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-24 — FUTURE-PARITY-PARTITION-CAPACITY.2 — recompose bounded semantic topology
+
+- Activated task-tree-first from exact clean canonical `.1` commit `0a8accb3`; changed no executable topology,
+  task partition, route, capability, backend, generated format, public surface, or README byte.
+- Proved byte-idempotent index refresh; exact old/parent/boundary/new/outside-CWD ownership; `.14.9` rejection;
+  clean-source range/digest/topology agreement 10/10; and byte-identical immutable history.
+- Reconfirmed task metadata 27/27 over 547 IDs, bounded routing 20/62/32, capability 80/0/0, Knowledge, real
+  mdBook rendering, bounded histories, memory, all nine doctrines, and exact diff. Capacity is closed; Julia
+  `.14.6.5` task splitting is the next clean roadmap action.
+
 ## 2026-08-24 — FUTURE-PARITY-PARTITION-CAPACITY.1 — implement eighth bounded semantic member
 
 - Activated canonically from exact clean planning commit `2cf4c9dd`; moved only the unchanged 12-line / 1,379-byte

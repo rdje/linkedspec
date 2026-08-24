@@ -1,7 +1,7 @@
 # ADR 0085: Future parity task route implements the eighth semantic member
 
 - Date: 2026-08-18
-- Status: accepted and implemented under `FUTURE-PARITY-PARTITION-CAPACITY.1`
+- Status: accepted/implemented under `.1`; independently recomposed under `FUTURE-PARITY-PARTITION-CAPACITY.2`
 - Tags: documentation, task-tree, partition, routing, pressure, continuity, doctrine
 
 ## Routing-contract authorization

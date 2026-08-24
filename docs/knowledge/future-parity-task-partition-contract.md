@@ -13,10 +13,11 @@ answers:
   - what enforces future parity task partition bounds and digests
   - what is the clean source identity for the future parity partition
 date: 2026-08-09
-status: accepted under LIVE-DOCUMENT-PRESSURE-CONTAINMENT.2; eighth semantic member implemented under FUTURE-PARITY-PARTITION-CAPACITY.1
+status: accepted under LIVE-DOCUMENT-PRESSURE-CONTAINMENT.2; eighth member implemented under capacity .1 and recomposed under .2
 tags: [task-tree, partition, retrieval, continuity, routing, doctrine]
 evidence: "Clean 99fe03f3:docs/tasks/FUTURE-PARITY-BACKLOG.md is 26,979 lines / 2,720,175 bytes, blob f3b59f72..., SHA-256 48de44a5.... Exact source ranges now route once into a bounded root, eight mutable semantic parts, and one byte-exact 3,340-line immutable history part. The strict ten-record schema-v1 index preserves 547 unique stable IDs. Nine executable and two JSON consumers use bounded owners; capability exclusion reads all eight semantic parts. The initial audit history remains preserved, while the current metadata gate guards all consumers, passes 27/27 mutations, and proves the task collection remains within 128 files / 80,000 lines / 8 MiB."
-last_verified: 2026-08-18
+evidence_update_2026_08_24_capacity_recomposition: "FUTURE-PARITY-PARTITION-CAPACITY.2 independently proves byte-idempotent index refresh at SHA-256 74221f0e..., exact old/new/outside-CWD range lookup, unowned .14.9 rejection, generated clean-source record agreement 10/10, byte-identical immutable history, task metadata 27/27 over 547 IDs, bounded routing 20/62/32, and capability 80/0/0."
+last_verified: 2026-08-24
 reverify:
   - "bash scripts/check_task_tree_metadata.sh"
   - "perl tools/read_task_tree.pl --tree FUTURE-PARITY-BACKLOG --id FUTURE-PARITY-BACKLOG.14.3.1.1"

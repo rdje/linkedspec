@@ -1,14 +1,14 @@
 # MEMORY
 
-- activation_commit: `2cf4c9dd27e40f2ea527c003d050ff2a0a2add3a` — exact clean capacity-plan base for
-  task-tree-first canonical `FUTURE-PARITY-PARTITION-CAPACITY.1`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-PARTITION-CAPACITY.1 - implement eighth bounded semantic member`;
-  canonical signoff is complete from exact clean activation `2cf4c9dd`.
-- active_work_unit: none after the intended `.1` commit; focused `.2` is pending and not yet activated.
-- next_action: from the clean `.1` commit, activate `FUTURE-PARITY-PARTITION-CAPACITY.2` task-tree-first and
-  independently recompose the committed topology before returning the frontier to Julia `.14.6.5`.
-- in_flight_uncommitted: none after the intended `.1` commit; no background job remains.
-- blockers: Julia splitting remains sequenced behind independent focused `.2`; no environmental blocker remains.
+- activation_commit: `0a8accb3d6ad9397aa0f0d716f2c5e387e7f6f4e` — exact clean canonical `.1` base for
+  task-tree-first focused `FUTURE-PARITY-PARTITION-CAPACITY.2`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-PARTITION-CAPACITY.2 - recompose bounded semantic topology`; focused
+  signoff closes the capacity tree without topology or behavior movement.
+- active_work_unit: none after the intended `.2` commit; Julia `.14.6.5` task splitting is not yet activated.
+- next_action: from the clean `.2` commit, retrieve `FUTURE-PARITY-BACKLOG.14.6.5`, activate it task-tree-first,
+  and split the broad Julia parent into bounded RED, authority/core, carrier, admission, and recomposition leaves.
+- in_flight_uncommitted: none after the intended `.2` commit; no background job remains.
+- blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -38,8 +38,8 @@
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, recurrence/public no-drift 9/9, and
   classifies private progressive dispatch fail-closed at 138 ActionIR rows / 250 calls / 58 mutations.
 - current_future_direction: neutral `.14.6.1` plus admitted Perl `.2`, Rust `.3`, and Dart `.4` are rollout 4/9/103;
-  Julia `.5` has a bounded owner and follows capacity `.2`; Lua `.6`, recurrence `.7`, public `.8`, staged `.14.7`,
-  and combined `.14.8` retain separate owners.
+  capacity is composition-closed and Julia `.5` task splitting is next; Lua `.6`, recurrence `.7`, public `.8`,
+  staged `.14.7`, and combined `.14.8` retain separate owners.
 - latest_bootstrap_read: 2026-08-24 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
-  review complete; capacity `.1` implements ADRs `0084`/`0085` from clean `2cf4c9dd`, and exact canonical signoff
-  passes through repository locality, primary CLI 66x2, and Phase 0 1,031/1,031 in 801 seconds.
+  review complete; capacity `.1` implements ADRs `0084`/`0085` at `0a8accb3`, and focused `.2` independently
+  recomposes the exact committed topology before the Julia handoff.

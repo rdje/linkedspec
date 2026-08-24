@@ -2,8 +2,8 @@
 
 ## Current Activity
 
-- Capacity `.1` implements the exact eighth bounded member from clean plan `2cf4c9dd`; focused and canonical
-  signoff are complete for the intended commit, and independent focused `.2` is next.
+- Capacity `.2` independently recomposes the committed eighth-member topology from clean `0a8accb3`; focused
+  signoff closes the capacity tree and returns the next clean frontier to Julia `.14.6.5` task splitting.
 - The unchanged `.14.6.5-.14.8` block moves at exact source boundary `21064/21065`; old/new members are
   4,988/543,163 and 13/1,501 lines/bytes, with immutable history untouched.
 - Strict schema v1 now has ten records over eight semantic members plus history and preserves all 547 stable IDs.
@@ -15,15 +15,18 @@
 
 ## Latest Completed Slice
 
-- Capacity `.1` moves only the frozen pending block, preserves all 547 IDs and pressure ceilings, extends every
-  exact tool/route/consumer, and passes canonical locality, primary CLI 66x2, and Phase 0 1,031/1,031 in 801s.
+- Capacity `.2` proves byte-idempotent index refresh, exact old/new/outside/unowned lookup, clean-source records
+  10/10, immutable-history identity, task mutations 27/27 over 547 IDs, route 20/62/32, and capability 80/0/0.
 
 ## Next Action
 
-- From the clean `.1` commit, activate and run independent no-change recomposition `.2`, then return the clean
-  frontier to Julia `FUTURE-PARITY-BACKLOG.14.6.5`.
+- From the clean `.2` commit, activate `FUTURE-PARITY-BACKLOG.14.6.5` task-tree-first and split its broad Julia
+  goal into bounded RED, authority/core, carrier, admission, and recomposition leaves before behavior changes.
 
 ## Recent Completions
+
+- `2026-08-24` — capacity `.2` independently recomposes every committed topology, source, lookup, route, and
+  consumer invariant without replacement behavior and closes the infrastructure tree.
 
 - `2026-08-24` — capacity `.1` canonically lands the eighth bounded semantic member and every exact index,
   lookup/update/build/check/route/consumer change without backend, generated-format, or outward behavior movement.
@@ -71,9 +74,6 @@
 
 - `2026-08-17` — `.14.6.1` freezes executable neutral `dispatch_span` authority at 1/9/86, proves current backend/
   outward absence across 17+10 paths, and registers its always-on canonical checker.
-
-- `2026-08-17` — `.14.5.1` canonical signoff passes nine doctrines, containment/relocation, CLI 66x2, RAM 51%,
-  Phase 0 1,031/1,031 in 729 seconds, and the exact six-runtime composition route; parent `.14.5` closes.
 
 ## History
 
