@@ -477,13 +477,23 @@ analyzed emitted-source execution to the same detached child result. Static reco
 check forbid non-rollbackable dispatch, and generated data contains only logical operands. The seven-group carrier
 consumer is ordinary and has one exact canonical route, advancing only Dart to rollout 4/9.
 
-Julia `.14.6.5.0` now freezes its corresponding final-path boundary without production behavior. The exact
+Julia `.14.6.5.0` freezes its corresponding final-path boundary without production behavior. The exact
 dormant consumer derives neutral 4/9/103 truth, proves the separate staged registry rejects `expr-v1`, and shows
 that the reserved assignment remains one generic `ActionCallExpr`. Native, `SpecFile`-JSON reconstructed,
 generated-plan, and independently included emitted-module routes all preserve the same unsupported
 `dispatch_span` helper outcome. Fifty-five assertions pass; one final assertion deliberately requires the
-generic call to become exactly one `progressive_dispatch_span` node. Authority/core `.1`, dormant carriers `.2`,
-canonical admission `.3`, and independent recomposition `.4` remain separate pending owners.
+generic call to become exactly one `progressive_dispatch_span` node.
+
+Private authority/core `.14.6.5.1` is now executable below that unchanged RED. One unexported module owns
+immutable logical entries containing already-compiled callbacks, then starts a fresh invocation over copied
+decoded sources and Julia's existing typed `SourceAuthority`. A callback sees only one bounded direct-span view:
+local Unicode-scalar boundaries rebase to the original source identity, and the view plus its nested-dispatch
+request expire in a `finally` block. Capability/policy intersections and ceiling minima can only narrow;
+cancellation identity, absolute deadline, remaining steps, active decreasing global-span chain, depth, and total
+calls remain shared. Results are deeply copied, JSON-like, and node-bounded; callback/null failure, cycles,
+live-looking fields, nonfinite values, and retained authority fail closed. The dormant 210-assertion consumer
+covers every neutral row and all 26 diagnostic contexts plus nesting/rebasing/expiry/detachment adversaries.
+Dedicated node/carriers `.2`, canonical admission `.3`, and independent recomposition `.4` remain separate.
 
 Until those later leaves land, use the current helpers documented in this chapter. Do not assume typed positions or
 typed spans are authored values. The `recognition_*` operations are current across all six runtime routes, while

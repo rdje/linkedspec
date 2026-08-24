@@ -1,13 +1,13 @@
 # MEMORY
 
-- activation_commit: `c56a36fd0315b754d5310c9fd56641aae902fafc` — exact clean capacity-closeout base for
-  task-tree-first focused `FUTURE-PARITY-BACKLOG.14.6.5.0`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.5.0 - freeze Julia progressive dispatch RED`; exact dormant
-  consumer is 55-pass/one-RED with no production, rollout, generated-format, or canonical-topology movement.
-- active_work_unit: none after the intended `.14.6.5.0` commit; Julia private authority `.14.6.5.1` is pending.
-- next_action: from the clean `.14.6.5.0` commit, retrieve and activate `FUTURE-PARITY-BACKLOG.14.6.5.1`
-  task-tree-first, then implement only the private immutable Julia authority/core while preserving final-path RED.
-- in_flight_uncommitted: none after the intended `.14.6.5.0` commit; no background job remains.
+- activation_commit: `94e37e83adda097f63c3bb7d6aa9cdaca533fa2b` — exact clean Julia-RED base for
+  task-tree-first focused `FUTURE-PARITY-BACKLOG.14.6.5.1`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.5.1 - implement Julia progressive dispatch authority`;
+  private authority consumer is 210/210 while the separate final path remains exact at 55-pass/one-RED.
+- active_work_unit: none after the intended `.14.6.5.1` commit; dormant Julia carrier `.14.6.5.2` is pending.
+- next_action: from the clean `.14.6.5.1` commit, activate `FUTURE-PARITY-BACKLOG.14.6.5.2` task-tree-first,
+  then add only the dedicated logical node and four fresh-authority dormant carriers without admission/rollout.
+- in_flight_uncommitted: none after the intended `.14.6.5.1` commit; no background job remains.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
@@ -38,8 +38,9 @@
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, recurrence/public no-drift 9/9, and
   classifies private progressive dispatch fail-closed at 138 ActionIR rows / 250 calls / 58 mutations.
 - current_future_direction: neutral `.14.6.1` plus admitted Perl `.2`, Rust `.3`, and Dart `.4` are rollout 4/9/103;
-  Julia dormant RED `.5.0` is current, with private authority `.1`, carriers `.2`, admission `.3`, and recomposition
-  `.4` separately pending; Lua `.6`, recurrence `.7`, public `.8`, staged `.14.7`, and combined `.14.8` follow.
+  Julia dormant RED `.5.0` and private authority `.1` are current, with carriers `.2`, admission `.3`, and
+  recomposition `.4` separately pending; Lua `.6`, recurrence `.7`, public `.8`, staged `.14.7`, and combined
+  `.14.8` follow.
 - latest_bootstrap_read: 2026-08-24 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
-  review complete; capacity `.0-.2` is composition-closed and Julia `.14.6.5.0` freezes the exact historical
-  generic-call/four-carrier RED before private authority work.
+  review complete; Julia `.14.6.5.1` adds private immutable authority with complete dormant proof while preserving
+  the exact historical generic-call/four-carrier RED before carrier work.

@@ -11,10 +11,12 @@ answers:
   - "does canonical CI run the Julia progressive dispatch consumer"
   - "which leaves implement Julia progressive span dispatch"
 date: 2026-08-24
-status: exact dormant RED current; Julia authority, carriers, admission, and recomposition pending
+status: exact dormant RED and private authority current; Julia carriers, admission, and recomposition pending
 tags: [julia, progressive-parsing, red-test, generated-source, staged-registry, task-tree]
 evidence: "FUTURE-PARITY-BACKLOG.14.6.5.0 adds julia/test_dormant/progressive_span_dispatch_contract_test.jl outside ordinary and canonical discovery. The consumer derives neutral 4/9/103 truth, proves the unrelated staged function-body registry rejects expr-v1 at resolve, and compiles the exact reserved assignment. Current Julia retains one generic ActionCallExpr named dispatch_span and no progressive_dispatch_span / PROGRESSIVE_DISPATCH_SPAN node. Native, SpecFile-JSON reconstructed, generated-plan, and independently included emitted-module routes all reach the same unsupported runtime helper 'dispatch_span' in rule Top boundary; the generated routes preserve exact execute_generated/generated_execution_failed identity. The explicit repository-routed run passes 55 assertions and fails only its one dedicated-node assertion. Production sources retain committed SHA-256 identities ActionAst 9f74d633, ActionParser 8b31a114, ActionContracts c0ab5f28, CompiledSpec 7176052c, Interpreter 57c1bd1a, staged registry 211bad8b, and SourceEmitter 8a835429. Leaf .14.6.5.1 owns authority/core, .2 owns the node and four carriers, .3 alone owns ordinary/canonical admission plus Julia rollout, and .4 independently recomposes the admitted topology without behavior."
+evidence_update_2026_08_24_authority: "FUTURE-PARITY-BACKLOG.14.6.5.1 adds the unexported private authority and its 210-assertion dormant consumer without touching this final path. The exact consumer remains 55-pass/one-RED at the same generic-call/missing-dedicated-node assertion. Leaf .14.6.5.2 now exclusively owns the node and four carriers."
 reverify:
+  - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using Test; include(\"julia/test_dormant/progressive_span_dispatch_authority_test.jl\")'"
   - "bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_contract.py"
   - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using Test; include(\"julia/test_dormant/progressive_span_dispatch_contract_test.jl\")' 2>&1 | rg '55 +1 +56'"
   - "! rg -q 'progressive_span_dispatch_contract_test[.]jl' julia/test/runtests.jl tools/run_ci_local.sh"

@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-24` (capacity `.0-.2` composition-close the eighth bounded semantic member; Julia
-  `.14.6.5.0` freezes the exact dormant RED and `.14.6.5.1` is the next clean frontier)
+- Last updated: `2026-08-24` (Julia `.14.6.5.1` adds private immutable authority while preserving the exact
+  dormant RED; `.14.6.5.2` is the next clean frontier)
 - Owner: repo-local workflow
 
 ## Goal
@@ -108,8 +108,9 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 `.4` admissions are current at rollout 4/9/103. Capacity tree `FUTURE-PARITY-PARTITION-CAPACITY.0-.2` adds and
 independently recomposes the bounded `.14.6.5-.14.8` owner without changing behavior. Julia `.14.6.5.0` splits
 the parent into exact dormant RED `.0`, private authority/core `.1`, dormant carriers `.2`, canonical admission
-`.3`, and independent recomposition `.4`; its 55-pass/one-RED consumer changes no production or governance truth.
-`.14.6.5.1` is next. Shared Lua `.6`, recurrence `.7`, public no-drift `.8`, staged `.14.7`, and combined
+`.3`, and independent recomposition `.4`; `.1` now supplies the private immutable registry/invocation/rebased-view
+core and a complete dormant consumer while the 55-pass/one-RED final path and governance stay exact.
+`.14.6.5.2` is next. Shared Lua `.6`, recurrence `.7`, public no-drift `.8`, staged `.14.7`, and combined
 program-wide `.14.8` remain separate owners.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent

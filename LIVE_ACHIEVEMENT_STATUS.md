@@ -2,27 +2,29 @@
 
 ## Current Activity
 
-- Julia `.14.6.5.0` is focused-signoff-complete from clean `c56a36fd`. The parent is split into exact dormant RED,
-  private authority/core, dormant carriers, canonical admission, and independent recomposition leaves.
-- The unrouted consumer passes 55 assertions and fails only its final dedicated-node assertion. Staged `expr-v1`
-  resolution rejects; the reserved assignment remains one generic `ActionCallExpr`; native, reconstructed,
-  generated-plan, and independently included emitted-module routes preserve one unsupported-helper boundary.
-- Complete ordinary Julia and direct governance proof pass. Progressive truth remains 4/9/103, typed source
-  11/3/152, recognition 138/250/58, generated/capability 80/0/0, and language 250/126.
-- No production, generated-format, CI-topology, rollout, typed recurrence, README, public, or outward surface
-  moves. ADR `0080` now reflects the already-executable post-Dart 4/9/103 boundary rather than stale 3/9/95 prose.
+- Julia `.14.6.5.1` is focused-signoff-complete from clean `94e37e83`. One unexported ActionIR-independent module
+  owns immutable already-compiled entries, fresh invocation state, typed rebased views, narrowing grants/ceilings,
+  shared cancellation/deadline/steps, decreasing chains, callback expiry, and detached bounded results.
+- Its dormant consumer passes 210 assertions across every neutral row, all 26 diagnostics, and nested/rebase/
+  expiry/detachment adversaries. The separate final-path consumer remains exactly 55-pass/one-RED at the missing
+  dedicated node; ordinary/canonical discovery, carriers, rollout 4/9/103, and outward surfaces do not move.
+- Complete ordinary Julia and direct governance proof pass. Typed source remains 11/3/152, recognition
+  138/250/58, generated/capability 80/0/0, and language 250/126.
 
 ## Latest Completed Slice
 
-- Julia `.14.6.5.0` freezes the generic-call/four-carrier historical boundary at 55-pass/one-RED, preserves
-  ordinary/canonical dormancy, and assigns exact `.1-.4` owners without production behavior.
+- Julia `.14.6.5.1` adds the private immutable authority plus complete dormant proof while preserving the exact
+  generic-call/four-carrier 55-pass/one-RED boundary and every carrier/admission/rollout exclusion.
 
 ## Next Action
 
-- From the clean `.14.6.5.0` commit, activate `FUTURE-PARITY-BACKLOG.14.6.5.1` task-tree-first and add only the
-  private immutable Julia authority/core while preserving the exact final-path RED and all carrier/rollout bounds.
+- From the clean `.14.6.5.1` commit, activate `FUTURE-PARITY-BACKLOG.14.6.5.2` task-tree-first and add only the
+  dedicated Julia node plus four dormant fresh-authority carriers while retaining admission/rollout RED.
 
 ## Recent Completions
+
+- `2026-08-24` — `.14.6.5.1` adds Julia's unexported immutable authority and 210-assertion dormant consumer while
+  preserving the separate 55-pass/one-RED final path, rollout, canonical topology, and outward boundaries.
 
 - `2026-08-24` — `.14.6.5.0` freezes Julia's exact 55-pass/one-RED generic-call/four-carrier boundary, keeps it
   outside ordinary/canonical discovery, and splits authority, carriers, admission, and recomposition.
@@ -70,9 +72,6 @@
 
 - `2026-08-17` — `.14.6.2.1` adds the private immutable Perl registry/invocation/source-view authority and executes
   every neutral case plus mutation/nesting/rebase/detachment adversaries while leaving the 83/1 RED unrouted.
-
-- `2026-08-17` — `.14.6.2.0` freezes the final-path Perl progressive RED at 83 pass / one missing-node failure,
-  keeps it unrouted, and assigns core/carriers/admission to `.1-.3` without production movement.
 
 ## History
 

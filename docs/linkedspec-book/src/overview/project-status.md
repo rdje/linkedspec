@@ -14,15 +14,17 @@ repository-relative manifest records their clean Git source, line/byte counts, d
 reconstruction query. Live status is a bounded overwrite view; changes and notes are bounded hot shards; the
 former oversized future tree is a 379-line live index over eight stable semantic parts and one immutable history
 part. After Dart progressive closeout, ADRs `0084` and `0085` add one equally bounded `.14.6.5-.14.8` member at
-the exact pending boundary. The schema-v1 index now has ten records, lookup preserves all 547 current stable IDs,
-and every aggregate/member ceiling is unchanged. Independent recomposition proves exact committed agreement.
-Julia `.14.6.5` is now split into dormant RED, private authority/core, dormant carriers, canonical admission, and
-independent recomposition leaves; the exact 55-pass/one-RED consumer is current and authority `.14.6.5.1` is next.
+the exact pending boundary. The schema-v1 index has ten records; capacity preserved the then-current 547 IDs,
+and Julia's five committed `.14.6.5.0-.4` children bring the current total to 552 without changing any stable ID
+or aggregate/member ceiling. Independent recomposition proves exact committed agreement.
+Julia `.14.6.5` is split into dormant RED, private authority/core, dormant carriers, canonical admission, and
+independent recomposition leaves. The exact 55-pass/one-RED final path remains current; `.14.6.5.1` adds the
+unexported immutable authority plus a 210-assertion dormant proof, and carrier leaf `.14.6.5.2` is next.
 
 This is consumer-aware work. The six live JSON projections and seven executable checkers now use stable decision
 authority ADR `0067`, and the chronology root contains no capability marker authority. Nine executable checkers
 and two contract projections now read their bounded task owners instead of the future monolith. Strict metadata
-preserves all 547 current stable IDs, clean-source coverage, current digests, immutable history, bounded lookup,
+preserves all 552 current stable IDs, clean-source coverage, current digests, immutable history, bounded lookup,
 and 27/27 rejected mutation classes. The changes/notes migration preserves the clean 44,270-line and 21,308-line
 sources in eleven and six immutable segments, respectively. Both roots are capped at 512 lines / 64 KiB, and the
 commit workflow now requires both rollover checks. Closeout independently passes history 34/34 across three
@@ -183,8 +185,9 @@ parent `.14.5` is closed; progressive span dispatch `.14.6` is active with priva
 exact outer-cfg consumer is canonically routed once while ordinary discovery remains zero tests; governance is
 4/9 rollout and 103 mutations. Dart parent `.14.6.4` is closed after its exact carrier consumer became ordinary
 and gained one canonical route. The bounded capacity tree adds and recomposes Julia's semantic owner without
-changing backend behavior. Julia `.14.6.5.0` now freezes the exact generic-call/four-carrier dormant RED;
-`.14.6.5.1-.4` separately own authority/core, carriers, admission, and independent recomposition.
+changing backend behavior. Julia `.14.6.5.0` freezes the exact generic-call/four-carrier dormant RED and
+`.14.6.5.1` supplies its private immutable authority without moving that final path; `.14.6.5.2-.4` separately
+own carriers, admission, and independent recomposition.
 
 Behavior-free audit `.14.6.0` and ADR `0080` fix that boundary exactly. `parse_job(...)` remains unavailable and
 `dispatch_span(...)` is admitted only as a private Perl/Rust/Dart intrinsic, not a shared helper. Each backend's current staged registry accepts

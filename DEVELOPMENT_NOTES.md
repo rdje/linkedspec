@@ -10,6 +10,21 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-24 (`FUTURE-PARITY-BACKLOG.14.6.5.1` — Julia progressive authority): exact clean activation is
+  Julia dormant-RED commit `94e37e83`; the focused slice adds one private module and one unrouted consumer.
+- The immutable registry stores only validated logical IDs, fingerprints, top rules, ceilings, capabilities, and
+  already-compiled callbacks. `register!`/`load` are typed denials; sources are copied into existing typed
+  `SourceAuthority`; no path/provider/compiler or parent parser register enters an invocation.
+- Dispatch intersects grants/policies, takes numeric/detail minima, preserves cancellation token identity and an
+  absolute caller clock/deadline, spends shared steps before child work, and bounds decreasing repeated spans,
+  total depth/calls, diagnostic bytes, and deeply detached result nodes.
+- Julia callbacks can retain objects, so the callback receives a scoped request whose nested-dispatch path first
+  checks the same view validity bit; `finally` invalidation closes retained view and request authority after every
+  return/failure. Results reject null/throws, cycles, live-looking fields, nonfinite values, and nonplain objects.
+- The authority consumer passes 210/210; the separate final-path consumer remains exact at 55-pass/one-RED.
+  Ordinary/canonical discovery, node/carriers, generated format, rollout 4/9/103, typed recurrence, and outward
+  surfaces remain fixed for `.5.2-.4`.
+
 - 2026-08-24 (`FUTURE-PARITY-BACKLOG.14.6.5.0` — Julia progressive dormant RED): exact clean activation is
   capacity closeout `c56a36fd`; the focused slice adds one unrouted test plus durable planning/status only.
 - Julia keeps the reserved assignment as one `ActionCallExpr` named `dispatch_span`; no

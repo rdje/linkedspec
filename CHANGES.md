@@ -10,6 +10,18 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-24 — FUTURE-PARITY-BACKLOG.14.6.5.1 — implement Julia progressive dispatch authority
+
+- Activated from exact clean `94e37e83` and added one unexported ActionIR-independent authority module after the
+  existing typed `SourceLocation`; no syntax, node, interpreter/generated carrier, format, route, or rollout moved.
+- Immutable already-compiled entries and fresh invocations now enforce exact logical identity/top/span shape,
+  same-source scalar rebasing, narrowing grants/ceilings, shared cancellation/deadline/steps, decreasing chains,
+  depth/call limits, callback/request expiry, and deeply detached node-bounded JSON-like results.
+- The dormant authority consumer passes 210 assertions across every neutral row/all 26 diagnostics plus nesting,
+  rebasing, expiry, immutable-input, containment, diagnostic-bound, cycle/live/nonfinite/oversized adversaries.
+- The independent final path remains exactly 55-pass/one-RED at its missing dedicated node. Complete ordinary
+  Julia and direct progressive/typed/recognition/generated/capability/language proof pass; rollout stays 4/9/103.
+
 ## 2026-08-24 — FUTURE-PARITY-BACKLOG.14.6.5.0 — freeze Julia progressive dispatch RED
 
 - Activated from exact clean `c56a36fd` and split Julia into dormant RED, private authority/core, dormant carrier,
