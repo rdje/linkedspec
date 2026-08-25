@@ -868,12 +868,13 @@
     }
   ],
   "current_boundary": {
-    "status": "all_private_backends_admitted_recurring_and_public_pending",
+    "status": "all_private_backends_and_typed_recurrence_admitted_public_pending",
     "typed_rollout": {
       "path": "capability_conformance/typed_source_location_contract.json",
       "leg": "progressive_span_dispatch",
-      "status": "pending",
-      "owner": "FUTURE-PARITY-BACKLOG.14.6"
+      "status": "complete",
+      "owner": "FUTURE-PARITY-BACKLOG.14.6",
+      "runtimes": ["perl", "rust", "dart", "julia", "puc_lua", "luajit"]
     },
     "recognition_effect": {
       "path": "capability_conformance/recognition_transaction_contract.json",

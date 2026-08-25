@@ -1,7 +1,7 @@
 # ADR 0080: Progressive span dispatch uses pre-registered same-source child authority
 
 - Date: 2026-08-17
-- Status: accepted architecture; executable neutral authority and all six private runtime admissions independently recomposed; recurrence and public no-drift pending
+- Status: accepted architecture; executable neutral authority, all six private runtime admissions, and typed recurrence complete; public no-drift pending
 - Tags: architecture, parser-composition, progressive-parsing, spans, source-location, registry, authority, cancellation, portability
 
 ## Context
@@ -57,12 +57,13 @@ transaction-composition projection before neutral progressive behavior.
   6 cancellation, 8 chain, and 4 execution cases, zero backend guards, 9 governed Rust plus 8 Dart plus 9 Julia
   plus 9 Lua carrier paths, 10 outward guards, 26 diagnostics, 7/9 rollout, and 112 rejected mutations.
 - Its current-boundary proof admits the exact private Perl, cfg-enabled Rust, ordinary/canonical Dart and Julia,
-  and ordinary plus exact-canonical dual-ABI Lua consumers; keeps the typed row pending; requires the
+  and ordinary plus exact-canonical dual-ABI Lua consumers; requires the typed row to be complete over all six
+  runtimes after `.14.6.7`; requires the
   dispatch effect to remain rejected with `PROGRESSIVE_DISPATCH_SPAN` as its sole current node and no call row,
   and denies private spelling/node/rollout exposure in ten outward paths. Julia's separate 210-assertion and
   Lua's separate 273-assertion-per-ABI authority consumers remain dormant and directly runnable.
 - Backends must preserve one source identity and detached child results despite different native register units.
-- Neutral `.14.6.1`, backend `.2-.6`, recurrence `.7`, and public no-drift `.8` can be verified independently.
+- Neutral `.14.6.1`, backend `.2-.6`, typed recurrence `.7`, and public no-drift `.8` can be verified independently.
 - Julia closeout `.14.6.5.4` independently reruns its admitted 62-assertion carrier, separate 210-assertion
   authority, complete ordinary discovery, neutral governance, and direct dependents without executable movement.
   It closes Julia at unchanged 5/9/106 and hands off shared Lua `.14.6.6`.
@@ -86,6 +87,11 @@ transaction-composition projection before neutral progressive behavior.
   complete ordinary Lua, all admitted peer consumers, neutral governance, and direct dependents without
   executable movement. It closes the private backend parent at unchanged 7/9/112 and hands off typed recurring
   proof `.14.6.7`.
+- Typed recurrence `.14.6.7` binds five immutable backend source groups to six ordered runtime routes because the
+  shared Lua consumer runs once per ABI. One repository-routed driver executes neutral, Perl, cfg-enabled Rust,
+  Dart, Julia, PUC Lua, LuaJIT, and all four support ledgers. It promotes only typed
+  `progressive_span_dispatch`, advancing typed governance to 12/2/170 while behavioral governance remains
+  7/9/112 and public no-drift stays `.14.6.8`-owned.
 - Private rollout changes no generated format, typed recurrence, facade, schema, semantic/MCP, CLI, README, or
   outward behavior.
 

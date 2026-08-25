@@ -142,7 +142,8 @@ capability, and language-coverage ledgers. Canonical CI exposes the same route b
 `LINKEDSPEC_RUN_RECURSIVE_OBSERVATION_MATRIX=1`. Twelve new regressions lock topology, repository-local storage,
 canonical registration, and recurrence-only promotion. Twenty-seven public-contract, document, stale-claim, and
 surface-guard mutations close the observation projection without changing that row. The recursive-observation
-row remains complete; lossless-gap and transaction-safety composition now make overall typed-source rollout 11 complete / 3 pending with 152 mutations. There is still no public helper, authored
+row remains complete; lossless-gap, transaction-safety, and progressive recurrence now make overall typed-source
+rollout 12 complete / 2 pending with 170 mutations. There is still no public helper, authored
 `Position`/`Span` value, descriptor/generated version, result-schema field, semantic/MCP projection, CLI option,
 or README behavior; the combined program-wide public-no-drift row remains pending for `.14.8`. Definitive local CI passes containment/relocation, CLI
 66/66 twice, RAM 62%, Phase 0 1,031/1,031 in 723 seconds, and the complete observation matrix.
@@ -420,7 +421,7 @@ nodes, recursive effect/progress policy, and all four runtime carriers after rec
 while the consumer is ordinarily and canonically discovered once per ABI. Transaction rollout is complete at
 9/9 under `.14.3.8`; the unchanged recurring authority and all six admissions remain exact. The separate typed-source combined
 recurring/public-no-drift row remains pending for final program-wide closeout `FUTURE-PARITY-BACKLOG.14.8`, so
-typed-source composition is 11 complete / 3 pending with 152 mutations. The transaction row is an authority
+typed-source composition is 12 complete / 2 pending with 170 mutations. The transaction row is an authority
 projection of the separately complete 9/9 recognition program: it changes no syntax, runtime, or public API.
 
 Progressive span dispatch is admitted as private Perl, Rust, Dart, and Julia behavior. Lua now has the same
@@ -438,8 +439,16 @@ cursor/marks/transactions stay isolated; capability and policy ceilings only nar
 budget propagate; and repeated parser/top/source dispatch must strictly shrink the span. The existing staged
 function-body adapter does not satisfy this contract. The neutral checker passes 2 registry entries, 2 sources/8
 views, 6 authority, 6 cancellation, 8 chain, and 4 execution cases, 9 Rust + 8 Dart + 9 Julia + 9 Lua carrier
-paths, zero backend guards, and 10 outward guards, 26 diagnostics, rollout 7/9, and 112 mutations. The
-typed progressive row remains pending; the rejected dispatch effect owns current node
+paths, zero backend guards, and 10 outward guards, 26 diagnostics, rollout 7/9, and 112 mutations. One separate
+repository-routed recurrence driver runs neutral plus all six runtimes and four support ledgers:
+
+```bash
+bash tools/check_progressive_span_dispatch_six_runtime.sh
+```
+
+Five immutable backend source groups map to six routes because shared Lua runs once per ABI. Canonical CI exposes
+the exact matrix behind `LINKEDSPEC_RUN_PROGRESSIVE_SPAN_MATRIX=1`. The typed progressive row is current, making
+typed governance 12/2/170; the rejected dispatch effect owns current node
 `PROGRESSIVE_DISPATCH_SPAN` and no call row; outward guards
 deny premature exposure. Perl has private carrier integration
 behind host-supplied invocation options: the exact assignment lowers to one dedicated node and works identically
@@ -458,8 +467,8 @@ plan, and independently compiled emitted source delegate to one fresh opaque exe
 detached child payload. Generated data contains only target/id/top/span operands, never callbacks or authority.
 Recognition effect analysis rejects any attempted rule/function graph that reaches the node, and runtime checks
 live tokens defensively. The exact outer-cfg consumer is GREEN and canonically routed once under that cfg, while
-ordinary Cargo still executes zero tests. Dart, Julia, PUC Lua, and LuaJIT are also admitted; typed recurrence and
-public no-drift remain pending.
+ordinary Cargo still executes zero tests. Dart, Julia, PUC Lua, and LuaJIT are also admitted; typed recurrence is
+complete and progressive public no-drift remains pending.
 
 Dart's historical pre-carrier boundary remains preserved by the same final-path fixture; `.14.6.4.2` turns it
 GREEN and `.14.6.4.3` admits it without changing behavior. The reserved assignment is now one exclusive
@@ -1243,7 +1252,8 @@ behind `LINKEDSPEC_RUN_TYPED_GAP_COMPOSITION_MATRIX=1`. Twelve new mutations rej
 count, projection, ordering, storage route, canonical switch, or completion regression. Overall typed-source
 truth after this gap slice was 10 complete / 4 pending / 126 mutations; only `lossless_gap_composition` moved.
 Corrective `.14.6.0.1` subsequently projects the complete recognition authority into `transaction_safety`, making
-current typed truth 11 complete / 3 pending / 152 mutations. Final combined public no-drift remains owned by `.14.8`.
+typed truth 11/3/152 at that boundary. Progressive recurrence `.14.6.7` now makes current typed truth 12 complete /
+2 pending / 170 mutations. Final combined public no-drift remains owned by `.14.8`.
 
 This composition creates no new grammar, lifecycle, runtime state, compatibility rule, migration, facade,
 descriptor schema, semantic/MCP field, CLI option, README surface, or implicit parser authority.

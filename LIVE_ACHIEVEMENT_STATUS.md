@@ -2,26 +2,29 @@
 
 ## Current Activity
 
-- Shared Lua recomposition `.14.6.6.4` independently reruns the admitted carrier at 178/178 and separate dormant
-  authority at 273/273 on PUC Lua and LuaJIT from exact clean admission commit `e5c66c4`.
-- Neutral governance remains rollout 7/9/112 with all six private runtime rows current, 9 Lua carrier paths, zero
-  backend guards, and exact ordinary/canonical dual-ABI discovery.
-- Complete Lua passes on both ABIs; Perl 129, cfg-enabled Rust 1/1, Dart 7/7, Julia 62/62, progressive 7/9/112,
-  typed 11/3/152, recognition 138/250/58, generated/capability 80/0/0, and language 250/126 pass.
-- No production, test, fixture, executable contract, generated v2, CI topology, rollout, typed recurrence,
-  facade/schema/MCP/CLI/README, or outward surface moves. Parent `.14.6.6` closes; `.14.6.7` is next.
+- Typed recurrence `.14.6.7` binds five immutable progressive source groups to six ordered runtime routes through
+  one repository-routed driver from exact clean shared-Lua closeout `872ea8ba`.
+- Neutral, Perl 129, cfg-enabled Rust 1/1, Dart 7, Julia 62, PUC Lua 178, LuaJIT 178, typed, generated-source,
+  capability 80/0/0, and language 250/126 pass in one fail-fast composition.
+- Only typed `progressive_span_dispatch` moves: typed governance is 12/2/170 while progressive behavioral
+  governance stays 7/9/112 and public no-drift remains `.14.6.8`-owned.
+- The stale capability-guide 2/9/pending paragraph is root-caused to Perl admission `78bc66e1`, corrected, and
+  protected by two reason-checked mutations. No runtime, consumer, generated format, or outward surface moves.
 
 ## Latest Completed Slice
 
-- Lua `.14.6.6.4` independently proves both committed ABI owners, all peer carriers, governance, Knowledge,
-  roadmaps, continuity, and sole-facing book truth unchanged, then closes the shared Lua parent at 7/9/112.
+- Typed recurrence `.14.6.7` proves the exact five-source/six-runtime topology, promotes only its typed row, and
+  synchronizes current governance, Knowledge, roadmaps, continuity, capability guide, and sole-facing book.
 
 ## Next Action
 
-- From the clean `.14.6.6.4` commit, activate `FUTURE-PARITY-BACKLOG.14.6.7` task-tree-first and bind one exact
-  recurring proof over five backend sources/six runtime routes before promoting only typed progressive dispatch.
+- From the clean `.14.6.7` commit, activate `FUTURE-PARITY-BACKLOG.14.6.8` task-tree-first and close progressive
+  public projection/no-drift without exporting a facade, schema, semantic/MCP field, CLI, or README behavior.
 
 ## Recent Completions
+
+- `2026-08-25` — `.14.6.7` binds neutral plus six private runtime routes and four support ledgers, advances only
+  typed `progressive_span_dispatch` to 12/2/170, and keeps behavioral governance at 7/9/112.
 
 - `2026-08-25` — `.14.6.6.4` independently recomposes carrier 178/178 and authority 273/273 on both Lua ABIs,
   all admitted peers and governance unchanged, repairs bounded current projections, and closes `.14.6.6`.
@@ -69,9 +72,6 @@
 - `2026-08-17` — `.14.6.4.2` adds one logical-only Dart node and four fresh-authority dormant carriers, closes
   static/live transaction seams, and advances governance to 9 Rust + 8 Dart carrier paths / 100 mutations without
   admission or rollout movement.
-
-- `2026-08-17` — `.14.6.4.1` adds unexported Dart registry/invocation/source-view authority with a complete dormant
-  GREEN consumer; carrier behavior, final-path RED, rollout, and public surfaces remain unchanged.
 
 ## History
 

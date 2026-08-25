@@ -337,12 +337,13 @@ EXECUTION_CASES = [
 ]
 
 CURRENT_BOUNDARY = {
-    "status": "all_private_backends_admitted_recurring_and_public_pending",
+    "status": "all_private_backends_and_typed_recurrence_admitted_public_pending",
     "typed_rollout": {
         "path": "capability_conformance/typed_source_location_contract.json",
         "leg": "progressive_span_dispatch",
-        "status": "pending",
+        "status": "complete",
         "owner": "FUTURE-PARITY-BACKLOG.14.6",
+        "runtimes": ["perl", "rust", "dart", "julia", "puc_lua", "luajit"],
     },
     "recognition_effect": {
         "path": "capability_conformance/recognition_transaction_contract.json",
@@ -841,7 +842,7 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
         require(
             typed_row["status"] == typed_assertion["status"]
             and typed_row["owner"] == typed_assertion["owner"]
-            and typed_row["runtimes"] == [],
+            and typed_row["runtimes"] == typed_assertion["runtimes"],
             "typed progressive rollout boundary drifted",
         )
 
@@ -1105,7 +1106,7 @@ MUTATIONS: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
     ("current_status", set_value(["current_boundary", "status"], "current")),
     ("current_typed_path", set_value(["current_boundary", "typed_rollout", "path"], "wrong.json")),
     ("current_typed_leg", set_value(["current_boundary", "typed_rollout", "leg"], "staged_span_dispatch")),
-    ("current_typed_status", set_value(["current_boundary", "typed_rollout", "status"], "complete")),
+    ("current_typed_status", set_value(["current_boundary", "typed_rollout", "status"], "pending")),
     ("current_typed_owner", set_value(["current_boundary", "typed_rollout", "owner"], "FUTURE-PARITY-BACKLOG.14.6.1")),
     ("current_recognition_path", set_value(["current_boundary", "recognition_effect", "path"], "wrong.json")),
     ("current_recognition_effect", set_value(["current_boundary", "recognition_effect", "effect"], "pure_value")),

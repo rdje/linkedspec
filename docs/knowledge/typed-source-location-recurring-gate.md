@@ -14,7 +14,7 @@ answers:
   - "why is recurring_public_no_drift still pending for typed source location"
   - "does typed source recurrence add a storage root or public behavior"
 date: 2026-08-09
-status: current; broad typed-source and dedicated recursive-observation recurrence complete while final public no-drift remains owned by FUTURE-PARITY-BACKLOG.14.8
+status: current; broad typed-source, recursive-observation, and progressive-span recurrence complete while final public no-drift remains owned by FUTURE-PARITY-BACKLOG.14.8
 tags: [source-location, spans, recurring-gate, perl, rust, dart, julia, lua, luajit, conformance, local-ci]
 evidence: "FUTURE-PARITY-BACKLOG.14.2.6 adds tools/check_typed_source_location_six_runtime.sh as one repository-routed fail-fast driver. It runs the neutral checker, then the admitted Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT consumers in exact order, then generated-source, capability, and language-coverage ledgers. The artifact binds five backend consumer groups to six runtime routes because Perl consumes two complementary test files and the single shared Lua consumer runs once on each ABI. Eleven independent topology mutations advance the checker from 42 to 53 mutations while rollout deliberately remains 8 complete / 6 pending. Canonical CI always requires and syntax-checks the driver; LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1 opts into its all-toolchain execution. Existing project-data routing supplies the only run scratch; no runtime/helper/register/schema/DSL/result behavior, root README, hosted workflow, CLI option, or storage root changes."
 evidence_update_2026_08_09_combined_rollout_owner: "The contract has one combined recurring_public_no_drift row owned by FUTURE-PARITY-BACKLOG.14.8 and no separate .14.2.6 rollout leg. History proves this is deliberate: neutral commit e8f6198b introduced the combined row, detailed plan 5a294f39 assigned .14.2.6 only driver/topology binding and .14.8 final examples/tooling/no-drift, and correction bd777ee8 changed only stale public and runtime owners. Creating a fifteenth row or completing the combined row here would consume .14.8 prematurely."
@@ -24,9 +24,11 @@ evidence_update_2026_08_12_recursive_observation: "Executable neutral FUTURE-PAR
 evidence_update_2026_08_12_runtime_observation_admissions: "Perl .14.4.2, Rust .14.4.3, and Dart .14.4.4 add their exact recursive-observation consumers to the established backend groups and commands. Three omission regressions advance current truth to 8 complete / 6 pending / 73 while the recurring source/runtime topology and combined .14.8 owner remain unchanged."
 evidence_update_2026_08_12_all_runtime_observation_admissions: "Julia .14.4.5 and shared Lua .14.4.6 add their exact recursive-observation consumers to the established backend groups and commands. The shared Lua source executes once per ABI, preserving the five-group/six-route topology. Two omission regressions advance current truth to 8 complete / 6 pending / 75 while recurrence and the combined .14.8 owner remain unchanged."
 evidence_update_2026_08_12_observation_recurrence: "FUTURE-PARITY-BACKLOG.14.4.7 adds a dedicated observation-only five-source/six-route driver and canonical opt-in without replacing this broader typed-source driver. Eleven topology/storage regressions plus one recurrence regression advance current truth to 9 complete / 5 pending / 87 and promote only recursive_observation. The combined recurring_public_no_drift row remains pending for final .14.8."
-last_verified: 2026-08-12
+evidence_update_2026_08_25_progressive_recurrence: "FUTURE-PARITY-BACKLOG.14.6.7 adds a dedicated progressive-only five-source/six-route driver and explicit canonical opt-in without replacing the broader typed-source or observation drivers. Twelve topology/storage/rollout regressions bind neutral plus Perl, cfg-enabled Rust, Dart, Julia, PUC Lua, and LuaJIT followed by typed/generated/capability/language ledgers. Two additional stale-guide denials lock the current projection. Only progressive_span_dispatch moves, making typed truth 12/2/170; the combined recurring_public_no_drift row stays pending for .14.8."
+last_verified: 2026-08-25
 reverify:
   - "bash tools/check_typed_source_location_six_runtime.sh"
+  - "bash tools/check_progressive_span_dispatch_six_runtime.sh"
   - "bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py"
   - "bash tools/test_project_data_workflow_routing.sh"
   - "LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1 bash tools/run_ci_local.sh"
@@ -52,9 +54,9 @@ from the repository.
 Eleven mutations independently reject missing consumer groups or paths, missing/reordered/duplicated runtime
 routes, command drift, incorrect source binding, missing support checks, driver or CI-switch drift, and premature
 completion of the combined final row. That original recurring proof advanced governance from 42 to 53 without
-promoting a row. Later lineage, neutral observation, and backend admission work reached 75. The dedicated
-observation recurrence now brings the executable ledger to 9 complete / 5 pending and 87 mutations while
-`FUTURE-PARITY-BACKLOG.14.8` still owns final public no-drift.
+promoting a row. Later lineage, observation, public closeout, gap, and transaction composition reached 11/3/152.
+The dedicated progressive recurrence now brings the executable typed ledger to 12 complete / 2 pending and 170
+mutations while `FUTURE-PARITY-BACKLOG.14.8` still owns final public no-drift.
 
 Related: [[recursive-observation-recurring-gate]], [[typed-source-location-runtime-rollout-plan]],
 [[typed-source-location-neutral-contract-plan]], and [[rule-local-cursor-five-backend-admission]].

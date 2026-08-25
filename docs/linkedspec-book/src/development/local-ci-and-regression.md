@@ -149,7 +149,7 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 
 The check is unconditional. It independently derives Unicode-scalar, line/column, and UTF-8 coordinates;
 materializes direct and derived spans; executes invocation and bounded-transaction state transitions; validates
-recursive and zero/one/two-regex structural cases; and rejects all 152 registered mutations.
+recursive and zero/one/two-regex structural cases; and rejects all 170 registered mutations.
 
 In the test-first workflow used here, **RED** means writing the exact contract or consumer first and proving that
 it fails for the intended missing capability. **GREEN** means implementing the smallest owned change that makes
@@ -168,13 +168,16 @@ RUSTFLAGS='--cfg linkedspec_progressive_span_dispatch_red' \
 (cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/progressive_span_dispatch_contract_test.dart)
 bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include("julia/test/progressive_span_dispatch_contract_test.jl")'
 for abi in puc luajit; do bash tools/run_lua_project_data.sh "$abi" lua/test/progressive_span_dispatch_contract_test.lua; done
+bash tools/check_progressive_span_dispatch_six_runtime.sh
 ```
 
 It validates the reserved private `dispatch_span("logical-parser-id", "Top", span)` expression without enabling backend syntax.
 The checker executes 2 sources/8 views, 6 authority, 6 cancellation, 8 chain/bound, and 4 isolation/detachment cases; locks 26 diagnostics and 7/9 rollout; governs 9 Rust, 8 Dart, 9 Julia, and 9 Lua carrier paths plus 10 outward paths with zero backend guards; and rejects 112 mutations.
 A pass excludes path loading, authority elevation, cancellation reset, non-decreasing cycles, parent-state leaks, live handles, fallback, and premature rollout.
-It also keeps the typed row pending, gives rejected effect `parser_registry_or_staged_dispatch` exactly current node
-`PROGRESSIVE_DISPATCH_SPAN` and no call row, and denies private exposure in ten facade/schema/semantic/MCP/CLI/README paths.
+The final command is the typed recurrence authority: five backend sources form six routes because shared Lua runs once per ABI, followed by typed-source, generated-source, capability, and language ledgers. Canonical CI always
+audits it; `LINKEDSPEC_RUN_PROGRESSIVE_SPAN_MATRIX=1` executes it. It promotes only typed
+`progressive_span_dispatch`; rejected effect `parser_registry_or_staged_dispatch` retains exactly current node
+`PROGRESSIVE_DISPATCH_SPAN`, no call row, and ten facade/schema/semantic/MCP/CLI/README exposure denials.
 
 Perl carrier integration and admission prove one exclusive dedicated node, static operands, fresh invocation authority, live/reconstructed/generated-plan/independently loaded emitted execution, logical-only serialization, typed missing-authority failure, and transaction rejection in 129 assertions. `tools/run_ci_local.sh` requires, syntax-checks, and executes that exact consumer once; the neutral checker rejects regression of the Perl row and premature later-backend promotion. Its transaction-state query loads the recognition runtime only when a dispatch executes, preserving the require-only Compiler guarantee that `LinkedRE` stays lazy until the parser pipeline actually needs it.
 
@@ -281,7 +284,7 @@ bash tools/run_lua_project_data.sh luajit lua/test/typed_source_location_contrac
 bash tools/run_lua_project_data.sh luajit lua/test/recursive_observation_contract_test.lua
 ```
 
-Its current rollout result is 11 complete / 3 pending with 152 registered mutations. Passing this gate proves the
+Its current rollout result is 12 complete / 2 pending with 170 registered mutations. Passing this gate proves the
 neutral contract, both completed public-structure rows, and all six internal runtime targets across their exact
 value/helper carriers. Rust and Lua retain UTF-8-byte registers, Dart retains UTF-16 code-unit registers, and Julia
 retains zero-based UTF-8 code-unit registers while each converts at its immutable typed boundary. Transaction
@@ -318,7 +321,8 @@ audited, syntax-checked, and outside-CWD routed by default; set
 `LINKEDSPEC_RUN_TYPED_GAP_COMPOSITION_MATRIX=1` to include the full route in canonical CI. Twelve new mutations
 lock upstream gap 9/0/63, public 6/12/10/29, the detached same-source half-open `gap_span` projection, storage,
 registration, and completion of only `lossless_gap_composition`. The gap slice completed at typed source 10/4/126;
-corrective transaction composition subsequently makes current typed truth 11/3/152. No gap implementation or
+corrective transaction composition subsequently made typed truth 11/3/152; progressive recurrence now makes
+current typed truth 12/2/170. No gap implementation or
 outward surface is duplicated. Its canonical signoff passes nine doctrines,
 repository containment/relocation, CLI 66/66 in both option environments, RAM 51%, Phase 0 1,031/1,031 in 729
 seconds, and the exact typed-gap success marker.

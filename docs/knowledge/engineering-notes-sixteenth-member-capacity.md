@@ -8,9 +8,10 @@ answers:
   - "which ADR authorizes engineering notes segment 4992"
   - "did the engineering notes aggregate pressure limits increase for segment 4992"
 date: 2026-08-17
-status: current
+status: former finite capacity; superseded by ADR 0087 seventeenth-member step
 tags: [documentation, history, rollover, routing, pressure, doctrine, continuity]
 evidence: "FUTURE-PARITY-BACKLOG.14.6.4.3 mandatory rollover creates immutable engineering-notes segment 4992. The exact resulting collection is 16 files / 23,365 lines / 2,504,500 bytes, with a 15-line manifest, while root, per-history-file, aggregate-line, aggregate-byte, and manifest-byte controls remain below their existing ceilings. ADR 0083 authorizes only max_files 15→16 and manifest max_lines 14→15; owner, lifecycle, verifier, patterns, and ADR 0069 storage authority do not change."
+evidence_update_2026_08_25: "FUTURE-PARITY-BACKLOG.14.6.7 mandatory rollover creates segment 4991. ADR 0087 advances only finite file/manifest-line capacity to 17/16. This card preserves the exact historical sixteenth-member boundary; engineering-notes-seventeenth-member-capacity owns current limits."
 reverify: "perl tools/roll_document_history.pl --surface engineering_notes --check && bash scripts/check_readme_stability.sh && wc -lc DEVELOPMENT_NOTES.md docs/history/development-notes/manifest.jsonl docs/history/development-notes/*.md"
 ---
 
@@ -30,3 +31,4 @@ bytes; and the manifest remains capped at 16,384 bytes. Any seventeenth member r
 - Prior finite step: [[engineering-notes-fifteenth-member-capacity]].
 - Store authority: [ADR 0069](../decisions/0069-bounded-change-and-notes-history.md).
 - Owner: [FUTURE-PARITY-BACKLOG.14](../tasks/FUTURE-PARITY-BACKLOG.14.md) `.14.6.4.3`.
+- Current capacity: [[engineering-notes-seventeenth-member-capacity]].

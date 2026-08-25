@@ -8,10 +8,11 @@ answers:
   - "why did predecessor progressive admission cards stay stale after Julia admission"
   - "does the progressive neutral checker validate Knowledge card freshness"
 date: 2026-08-25
-status: current Julia parent closeout; shared Lua parent also closed and typed recurring proof next
+status: current Julia parent closeout; shared Lua and typed recurring proof also complete
 tags: [julia, progressive-parsing, recomposition, knowledge-map, task-tree, verification]
 evidence: "FUTURE-PARITY-BACKLOG.14.6.5.4 starts from clean Julia-admission commit 7823f6fc and reruns the committed Julia carrier 62/62, dormant authority 210/210, complete ordinary Julia, Perl 128/128, cfg-enabled Rust 1/1, Dart 7/7, progressive 5/9/106, typed 11/3/152, recognition 138/250/58, generated/capability 80/0/0, and language 250/126 without production, test, fixture, executable-contract, generated-format, or CI-topology changes. The carrier itself proves native/reconstructed/generated-plan/independently included emitted-module equality and absence of serialized callbacks, registries, fingerprints, source snapshots, cancellation, and mutable authority. Recomposition finds that current front matter/body in the earlier Perl/Rust/Dart admission cards still called Julia pending even though their dated evidence and executable neutral governance were exact. The neutral checker governs runtime/contract/outward paths, while Knowledge Map enforcement verifies derived-index freshness rather than semantic agreement across predecessor cards; .4 corrects those bounded current projections and records the gap without rewriting historical evidence. Parent .14.6.5 closes at unchanged rollout 5/9/106; shared Lua .14.6.6 is next."
 evidence_update_2026_08_25_lua_recomposition: "FUTURE-PARITY-BACKLOG.14.6.6.4 applies the same current-projection audit after admitting PUC Lua and LuaJIT. Julia remains unchanged at 62/62 while all six private rows are independently recomposed at 7/9/112; typed recurring proof .14.6.7 is next."
+evidence_update_2026_08_25_typed_recurrence: "FUTURE-PARITY-BACKLOG.14.6.7 binds the unchanged Julia carrier with four peer backend source groups over six ordered runtime routes and promotes only typed progressive_span_dispatch. Julia remains 62/62 and behavioral governance remains 7/9/112; typed governance becomes 12/2/170 and public no-drift .14.6.8 is next."
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_contract.py"
   - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/progressive_span_dispatch_contract_test.jl\")'"
@@ -29,8 +30,8 @@ while predecessor Knowledge cards retain stale current prose. Knowledge Map gene
 indexed exactly; it does not infer cross-card semantic updates. Independent recomposition therefore includes an
 explicit current-projection review while preserving dated historical evidence.
 
-Shared Lua `.14.6.6.4` later applies the same boundary, closes the last two private runtime rows unchanged, and
-hands off typed recurring proof `.14.6.7`.
+Shared Lua `.14.6.6.4` later applies the same boundary and closes the last two private runtime rows unchanged.
+Typed recurrence `.14.6.7` then binds all five source groups/six routes without changing Julia behavior.
 
 Related facts: [[julia-progressive-span-dispatch-admission]],
 [[julia-progressive-span-dispatch-carriers]], [[julia-progressive-span-dispatch-authority]], and

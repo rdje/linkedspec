@@ -10,12 +10,12 @@ eight progress fixtures, public no-drift 3/26/45, and capability-guide no-drift 
 The typed contract now binds that committed authority instead of duplicating transaction behavior. One opaque
 linear token snapshots only the owning invocation cursor, anonymous boundary, and named marks. Uncommitted
 recognition rejects `parser_registry_or_staged_dispatch`; rolled-back work cannot establish progress. The
-`transaction_safety` row alone becomes complete on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Progressive
-dispatch, staged dispatch, and combined program-wide no-drift remain pending under `.14.6`, `.14.7`, and `.14.8`.
-Typed governance is 11 complete / 3 pending / 152 mutations with no parser, compiler, runtime, facade, schema,
-semantic/MCP, CLI, README, storage, or public behavior change.
+`transaction_safety` becomes complete on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Later progressive
+recurrence promotes only `progressive_span_dispatch`; staged dispatch and combined program-wide no-drift remain
+pending under `.14.7` and `.14.8`. Typed governance is now 12 complete / 2 pending / 170 mutations with no parser,
+compiler, runtime, facade, schema, semantic/MCP, CLI, README, storage, or public behavior change.
 
-## Progressive span dispatch has an executable neutral authority and pending backends
+## Progressive span dispatch has six private runtimes and exact typed recurrence
 
 ADR `0080` records the accepted architecture. `FUTURE-PARITY-BACKLOG.14.6.0` starts from clean atomic 256
 `8880d1b6`. Toolbox lowering proves active ActionIR
@@ -40,16 +40,22 @@ Neutral `.14.6.1` selects `value = dispatch_span("expr-v1", "Expr", span)` as on
 `PROGRESSIVE_DISPATCH_SPAN` expression. Parser identity/top rule are static literals; the span is one bare local
 four-field direct carrier; the result is detached; failure is fail-only. Its executable checker passes 2 immutable
 registry entries, 2 sources/8 views, 6 authority, 6 cancellation, 8 chain, and 4 execution cases, 5 backend
-guards/17 implementation paths plus 10 outward guards, 26 diagnostics, rollout 1/9, and 86 mutations. Canonical registration is always
-on, but the typed row remains pending, the recognition effect has no current node/call rows, every guarded backend
-path omits the future tokens, ten facade/schema/semantic/MCP/CLI/README paths deny premature exposure, and Perl lowering remains unsupported. Derived multi-span text and AST stitching
+guards/17 implementation paths plus 10 outward guards, 26 diagnostics, rollout 1/9, and 86 mutations at that
+neutral boundary. Canonical registration was on while the typed row and all backends remained pending, the
+recognition effect had no current node/call rows, every guarded backend path omitted the future tokens, and Perl
+lowering stayed unsupported. Ten facade/schema/semantic/MCP/CLI/README paths still deny exposure. Derived multi-span text and AST stitching
 remain staged `.14.7` work.
 
-Corrective typed transaction composition `.14.6.0.1` and neutral `.1` are complete. The remaining dependency order
-is Perl/Rust/Dart/Julia/shared-Lua `.2-.6`; recurring `.7`; public projection/no-drift `.8`. Backend parents must split RED,
-authority/core, carrier integration, and admission before behavior. Recurrence alone promotes typed
-`progressive_span_dispatch`; `.8` exports no facade/schema/CLI/README behavior and does not consume combined
-program-wide `.14.8`.
+Corrective typed transaction composition `.14.6.0.1`, neutral `.1`, Perl/Rust/Dart/Julia/shared-Lua `.2-.6`, and
+typed recurrence `.7` are complete. The exact recurring driver runs the neutral checker, five immutable backend
+source groups over six ordered runtime routes, and typed/generated/capability/language support ledgers; shared Lua
+runs once per ABI. It promotes only typed `progressive_span_dispatch`, making typed governance 12/2/170 while
+progressive behavioral governance remains 7/9/112. Public projection/no-drift `.8` exports no
+facade/schema/CLI/README behavior and does not consume combined program-wide `.14.8`.
+
+The required engineering-notes rollover at this canonical boundary publishes immutable segment `4991`. ADR
+`0087` advances only the finite routed collection from 16 to 17 files and manifest from 15 to 16 lines; root,
+segment, aggregate, byte, ownership, lifecycle, verifier, and repository-storage controls remain unchanged.
 
 Perl `.14.6.2.0` freezes that split at the executable boundary. The final-path dormant consumer derives the full
 neutral inventory and passes 83 assertions before one missing-node failure. The exact authored assignment reaches
@@ -95,7 +101,8 @@ the typed contract. The representation is the already-current detached `gap_span
 Unicode-scalar offsets, and gap provenance. Prefix/interstitial/tail are segment positions; `gap_text` materializes
 on demand and `entry_slot` independently retains named/positional provenance. Twelve new drift mutations and one
 repository-routed composed driver promote only `lossless_gap_composition`. Corrective transaction composition
-subsequently makes current typed source 11 complete / 3 pending / 152. The driver recomposes the complete neutral and six-runtime gap route plus recognition, generated-
+subsequently made typed source 11 complete / 3 pending / 152; progressive recurrence now makes current typed
+source 12 complete / 2 pending / 170. The driver recomposes the complete neutral and six-runtime gap route plus recognition, generated-
 source, capability, and language ledgers. `INTER-MATCH-GAP-CAPTURE.1-.7` remains the exclusive behavior owner,
 and combined program-wide no-drift remains `.14.8`-owned. Canonical signoff passes nine doctrines, repository
 containment/relocation, CLI 66/66 twice, RAM 51%, Phase 0 1,031/1,031 in 729 seconds, and the exact opt-in route.
@@ -187,7 +194,8 @@ topology/storage regressions plus one recurrence regression promote only `recurs
 source rollout to 9 complete / 5 pending. Public closeout `.14.4.8` governs six current projections, denies six
 stale claims, and scans ten public surfaces through 27 additional mutations, advancing governance to 114 without
 changing the 14-row rollout. Later lossless-gap typed composition adds twelve regressions and promotes only its
-row. Corrective transaction composition later makes current aggregate truth 11/3/152. The combined final `.14.8` row remains pending. No public helper/value, facade,
+row. Corrective transaction composition later made aggregate truth 11/3/152; progressive recurrence now makes
+current aggregate truth 12/2/170. The combined final `.14.8` row remains pending. No public helper/value, facade,
 descriptor/generated schema, result schema, semantic/MCP projection, CLI, README, parser, compiler, or runtime
 behavior becomes current.
 

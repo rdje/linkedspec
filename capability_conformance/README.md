@@ -271,7 +271,7 @@ bash tools/check_typed_source_location_six_runtime.sh
 ```
 
 Canonical local CI requires and syntax-checks that driver; `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1` opts into its
-all-toolchain execution. Current governance is 152 mutations and rollout is 11 complete / 3 pending across 14 legs:
+all-toolchain execution. Current governance is 170 mutations and rollout is 12 complete / 2 pending across 14 legs:
 the neutral contract, public structure, unchanged neutral/public recomposition, and the Perl, Rust, Dart, Julia,
 PUC Lua, and LuaJIT internal
 runtime admissions are complete. Transaction safety projects the separately owned complete recognition authority;
@@ -299,9 +299,9 @@ Canonical CI exposes the same route behind `LINKEDSPEC_RUN_RECURSIVE_OBSERVATION
 regressions plus one recurrence regression promote only `recursive_observation`. The public closeout then binds
 six current projections, rejects six stale claims, and guards ten facade/API/schema surfaces through 27 further
 mutations. Recursive-observation public projection/no-drift is current without a new public API; its own rollout row remains complete.
-Typed transaction composition is current and promotes only `transaction_safety`; the typed rollout is 11 complete / 3 pending.
-Governance is 152, and progressive dispatch, staged dispatch, and combined program-wide public no-drift stay
-pending under `.14.6`, `.14.7`, and `.14.8`. No public
+Typed transaction composition and progressive span dispatch are current; the typed rollout is 12 complete / 2 pending.
+Governance is 170, and staged dispatch plus combined program-wide public no-drift stay pending under `.14.7`
+and `.14.8`. No public
 helper/value, descriptor/generated schema, semantic/MCP field, CLI, or README behavior moved.
 
 `progressive_span_dispatch_contract.json` (`linkedspec-progressive-span-dispatch-v1`) is the executable neutral
@@ -315,16 +315,19 @@ recognition, implicit loading, live handles, and every fallback/retry path fail 
 
 ```bash
 bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_contract.py
+bash tools/check_progressive_span_dispatch_six_runtime.sh
 ```
 
 The checker executes 2 sources / 8 view cases, 6 authority, 6 cancellation, 8 chain, and 4 execution cases; guards
-14 implementation paths across the four still-pending backend groups plus 10 outward paths; locks 26 diagnostics;
-and rejects 86 mutations. Its rollout is 2/9 complete (neutral and Perl), with Rust, Dart, Julia, PUC Lua, LuaJIT,
-recurring, and public-no-drift rows pending. Canonical CI syntax-checks and runs the exact 125-assertion Perl
-consumer once. The typed `progressive_span_dispatch` row remains pending until exact six-runtime recurrence owner
-`.14.6.7`; the rejected recognition effect now owns current node `PROGRESSIVE_DISPATCH_SPAN` but no call row, the
-four guarded backend groups omit both tokens, and ten facade/schema/semantic/MCP/CLI/README paths deny outward
-exposure. This admission claims only private Perl runtime behavior.
+9 Rust, 8 Dart, 9 Julia, and 9 Lua implementation paths plus 10 outward paths with zero backend guards; locks 26
+diagnostics; and rejects 112 mutations. Its private behavioral rollout is 7/9 complete across neutral, Perl,
+Rust, Dart, Julia, PUC Lua, and LuaJIT, with behavioral recurrence and public no-drift still pending. The separate
+typed recurrence driver binds five immutable backend source groups to six ordered runtime routes because the
+shared Lua consumer runs independently on both ABIs, then executes typed-source, generated-source, capability,
+and language support ledgers. Canonical CI requires, path-audits, syntax-checks, and exposes that driver only
+through `LINKEDSPEC_RUN_PROGRESSIVE_SPAN_MATRIX=1`. This promotes only typed `progressive_span_dispatch`;
+the rejected recognition effect retains current node `PROGRESSIVE_DISPATCH_SPAN` and no call row, while ten
+facade/schema/semantic/MCP/CLI/README paths continue to deny outward exposure.
 
 `inter_match_gap_capture_contract.json` is the neutral authority for named regex slots and lossless
 prefix/interstitial/tail context. Inter-match gap public admission is current with four shared calls and unchanged outward facade, descriptor, semantic, MCP, CLI, and README surfaces. Julia `.5.1-.5.5` and shared Lua `.6.1-.6.5` implement and admit their exact nine-role paths without widening those guarded surfaces.

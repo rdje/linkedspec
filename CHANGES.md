@@ -10,6 +10,29 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-25 — FUTURE-PARITY-BACKLOG.14.6.7 — bind progressive recurring proof
+
+- Added `tools/check_progressive_span_dispatch_six_runtime.sh`, one repository-routed fail-fast composition of
+  neutral, Perl 129, cfg-enabled Rust 1/1, Dart 7, Julia 62, PUC Lua 178, LuaJIT 178, then typed-source,
+  generated-source, capability, and language support ledgers.
+- Bound five immutable backend consumer source groups to six ordered runtime routes because one shared Lua source
+  executes independently on both ABIs. Canonical CI always requires, machine-path-audits, and syntax-checks the
+  driver; `LINKEDSPEC_RUN_PROGRESSIVE_SPAN_MATRIX=1` opts into its exact all-toolchain execution.
+- Promoted only typed `progressive_span_dispatch`, advancing typed governance from 11/3/152 to 12/2/170 through
+  twelve topology/storage/rollout mutations plus two stale-guide denials. Progressive behavioral governance
+  remains 7/9/112; staged dispatch, progressive public no-drift, and combined final no-drift retain their owners.
+- Corrected the progressive neutral current-boundary assertion from typed-pending to typed-complete over all six
+  runtimes without changing its fixtures, behavioral rollout, carrier inventories, diagnostics, or 112 mutations.
+- Root-caused the capability guide's stale 2/9/pending paragraph to Perl admission commit `78bc66e1`; later
+  runtime admissions omitted that current projection. The exact stale claims are now mutation-locked and the
+  Knowledge Map records the defect while dated evidence remains unchanged.
+- Git proves no runtime, consumer, generated-format, facade/schema/semantic/MCP/CLI/README outward, or public
+  behavior movement. Focused matrix, rendered mdBook, Knowledge, bounded histories, nine doctrines, exact staged
+  diff, and receipt-bound canonical CI pass; progressive public no-drift `.14.6.8` is next.
+- Mandatory engineering-notes rollover publishes immutable segment `4991`. ADR `0087` increases only exact finite
+  collection/manifest-line capacity from 16/15 to 17/16; every root, segment, aggregate, byte, owner, lifecycle,
+  verifier, and repository-storage control remains unchanged.
+
 ## 2026-08-25 — FUTURE-PARITY-BACKLOG.14.6.6.4 — close shared Lua progressive dispatch
 
 - Activated task-tree-first from exact clean Lua-admission commit `e5c66c4`; changed no production, test, fixture,

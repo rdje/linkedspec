@@ -37,9 +37,9 @@
 > and LuaJIT in exact order, then generated-source, capability, and language-coverage ledgers. Run
 > `bash tools/check_typed_source_location_six_runtime.sh`; canonical CI exposes the same all-toolchain proof behind
 > `LINKEDSPEC_RUN_TYPED_SOURCE_MATRIX=1`. Five backend source groups map to six runtime routes because the shared
-> Lua source executes on both ABIs. Governance is now 11 complete / 3 pending with 152 drift mutations after the
+> Lua source executes on both ABIs. Governance is now 12 complete / 2 pending with 170 drift mutations after the
 > independently governed transaction-safety projection, recursive-observation public projection/no-drift, and
-> lossless-gap composition closeouts.
+> lossless-gap plus progressive-recurrence closeouts.
 >
 > No-change recomposition `.14.2.7` reruns that exact authority and closes the internal value/helper implementation
 > parent `.14.2`. It adds no replacement backend surface and does not promote the combined final `.14.8` row.
@@ -155,20 +155,20 @@
 > widening without adding a rollout row, producing 9/5/114 while the combined program-wide `.14.8` row remains pending.
 > Lossless-gap composition subsequently binds the unchanged 9/0/63 plus public 6/12/10/29 gap authority through
 > existing `gap_span`, adds twelve drift mutations, and promotes only its row. Corrective transaction composition
-> then binds the independently complete 9/9 recognition authority into `transaction_safety`, producing current
-> typed truth 11/3/152 without behavior or outward-surface movement. Run
+> then binds the independently complete 9/9 recognition authority into `transaction_safety`, producing 11/3/152
+> at that boundary without behavior or outward-surface movement. Progressive recurrence now runs
+> `bash tools/check_progressive_span_dispatch_six_runtime.sh`, binds five sources to six runtime routes, and
+> promotes only its typed row for current 12/2/170 truth. Run
 > `bash tools/check_typed_gap_composition_six_runtime.sh`; no second gap behavior owner or outward surface exists.
 >
 > Progressive neutral `.14.6.1` reserves
 > `value = dispatch_span("expr-v1", "Expr", span)` as a dedicated fail-only future expression. Its checker passes
 > 2 immutable registry entries, 2 sources/8 rebased views, 6 authority, 6 cancellation, 8 chain, 4 execution
-> cases, one pending-backend guard/5 implementation paths plus 9 Rust, 8 Dart, and 9 Julia carrier paths
-> and 10 outward guards, 26 diagnostics, 5/9 rollout, and 106 mutations. Private Perl admission is current through one exact
-> canonical 127-assertion consumer; Rust is admitted through one exact cfg-enabled canonical carrier consumer while
-> ordinary discovery remains zero tests. Dart's and Julia's equivalent four carriers are ordinary and canonically
-> admitted; Lua's exact dual-ABI RED is frozen while its implementation, recurrence, public no-drift, and the
-> typed row remain pending. The rejected effect owns exactly
-> current node `PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded Lua paths omit both tokens and
+> cases, 9 Rust + 8 Dart + 9 Julia + 9 Lua carrier paths and 10 outward guards with zero backend guards, 26
+> diagnostics, 7/9 rollout, and 112 mutations. Perl, exact cfg-enabled Rust, Dart, Julia, PUC Lua, and LuaJIT are
+> privately admitted. The exact five-source/six-route recurrence driver plus four support ledgers promotes only
+> typed `progressive_span_dispatch`, producing 12/2/170 typed truth while behavioral recurrence and public
+> no-drift remain pending. The rejected effect owns exactly current node `PROGRESSIVE_DISPATCH_SPAN` and no call row;
 > outward guards deny exposure. No path loader, public facade/schema/semantic/MCP/CLI/README surface, shared helper
 > inventory, generated format, or typed rollout row moves. Lua `.14.6.6.0` runs one shared dormant Lua-5.1-
 > compatible consumer on PUC Lua and LuaJIT: each passes 85 of 86 assertions and fails only because the generic

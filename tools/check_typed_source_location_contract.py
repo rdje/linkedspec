@@ -50,6 +50,9 @@ RECURRING_DRIVER_PATH = ROOT / "tools" / "check_typed_source_location_six_runtim
 RECURSIVE_OBSERVATION_RECURRING_DRIVER_PATH = (
     ROOT / "tools" / "check_recursive_observation_six_runtime.sh"
 )
+PROGRESSIVE_SPAN_DISPATCH_RECURRING_DRIVER_PATH = (
+    ROOT / "tools" / "check_progressive_span_dispatch_six_runtime.sh"
+)
 LOSSLESS_GAP_CONTRACT_PATH = (
     ROOT / "capability_conformance" / "inter_match_gap_capture_contract.json"
 )
@@ -88,10 +91,12 @@ EXPECTED_COUNTS = {
     "recurring_runtime_routes": 6,
     "recursive_observation_recurring_source_groups": 5,
     "recursive_observation_recurring_runtime_routes": 6,
+    "progressive_span_dispatch_recurring_source_groups": 5,
+    "progressive_span_dispatch_recurring_runtime_routes": 6,
     "recursive_observation_public_documents": 6,
     "recursive_observation_public_forbidden_claims": 6,
     "recursive_observation_public_surface_guard_paths": 10,
-    "mutations": 152,
+    "mutations": 170,
 }
 
 POLICY = {
@@ -107,8 +112,8 @@ POLICY = {
     "recursion": "entry, selected-match, and accepted-exit observations are read-only; invocation ids are positive, unique, and monotonic; nullable parents are distinct earlier same-authority ids with bounded acyclic links",
     "progress": "repetition, recursion, and staged queues must advance the cursor or prove a well-founded decreasing measure",
     "dispatch_authority": "a span conveys data and provenance only; source, registry, capability, and policy authority remain independently required",
-    "source_spelling": "observe_recognition(observation, call(Child)) is current in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; Position and Span remain private architectural values projected as detached records",
-    "implementation_boundary": "recognition transaction safety, recursive-observation spelling, dedicated private node, detached carrier, parser behavior, exact six-runtime recurring composition, public projection/no-drift proof, and lossless-gap typed composition are current; this is not a second transaction or gap syntax, lifecycle, implementation, compatibility, or migration owner, progressive dispatch, staged dispatch, and combined program-wide public-no-drift remain pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted",
+    "source_spelling": "observe_recognition(observation, call(Child)) and private value = dispatch_span(\"expr-v1\", \"Expr\", span) are current in Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; Position and Span remain private architectural values projected as detached records",
+    "implementation_boundary": "recognition transaction safety, recursive-observation spelling, dedicated private nodes, detached carriers, parser behavior, exact recursive-observation and progressive-span six-runtime recurring composition, public recursive-observation projection/no-drift proof, and lossless-gap typed composition are current; this is not a second transaction, gap, or progressive syntax, lifecycle, implementation, compatibility, or migration owner, staged dispatch and combined program-wide public-no-drift remain pending, and no public helper, descriptor/schema version, or semantic/MCP projection is admitted",
 }
 
 CANONICAL_EXECUTION = {
@@ -290,6 +295,102 @@ RECURSIVE_OBSERVATION_RECURRING_GATE = {
     },
 }
 
+PROGRESSIVE_SPAN_DISPATCH_RECURRING_GATE = {
+    "driver": "tools/check_progressive_span_dispatch_six_runtime.sh",
+    "neutral_check": "bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_contract.py",
+    "source_schema": {
+        "fields": ["backend", "paths"],
+        "policy": "five admitted progressive span-dispatch source groups are immutable; one shared Lua source executes independently on both ABIs",
+    },
+    "consumer_sources": [
+        {"backend": "perl", "paths": ["t/progressive_span_dispatch_perl_contract.t"]},
+        {
+            "backend": "rust",
+            "paths": [
+                "rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs"
+            ],
+        },
+        {
+            "backend": "dart",
+            "paths": ["dart/test/progressive_span_dispatch_contract_test.dart"],
+        },
+        {
+            "backend": "julia",
+            "paths": ["julia/test/progressive_span_dispatch_contract_test.jl"],
+        },
+        {
+            "backend": "lua",
+            "paths": ["lua/test/progressive_span_dispatch_contract_test.lua"],
+        },
+    ],
+    "route_schema": {
+        "fields": ["runtime", "source_backend", "command"],
+        "policy": "neutral runs first; Perl, cfg-enabled Rust, Dart, Julia, PUC Lua, and LuaJIT then run exactly once in order",
+    },
+    "runtime_routes": [
+        {
+            "runtime": "perl",
+            "source_backend": "perl",
+            "command": "PERL5LIB= prove -Iperl t/progressive_span_dispatch_perl_contract.t",
+        },
+        {
+            "runtime": "rust",
+            "source_backend": "rust",
+            "command": "RUSTFLAGS='--cfg linkedspec_progressive_span_dispatch_red' \"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test progressive_span_dispatch_contract",
+        },
+        {
+            "runtime": "dart",
+            "source_backend": "dart",
+            "command": "cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/progressive_span_dispatch_contract_test.dart",
+        },
+        {
+            "runtime": "julia",
+            "source_backend": "julia",
+            "command": "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/progressive_span_dispatch_contract_test.jl\")'",
+        },
+        {
+            "runtime": "puc_lua",
+            "source_backend": "lua",
+            "command": "bash tools/run_lua_project_data.sh puc lua/test/progressive_span_dispatch_contract_test.lua",
+        },
+        {
+            "runtime": "luajit",
+            "source_backend": "lua",
+            "command": "bash tools/run_lua_project_data.sh luajit lua/test/progressive_span_dispatch_contract_test.lua",
+        },
+    ],
+    "support_checks": [
+        "bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py",
+        "perl tools/check_generated_source_contract.pl",
+        "perl tools/check_capability_conformance.pl",
+        "perl tools/check_language_capability_coverage.pl",
+    ],
+    "storage": {
+        "initializer": "tools/project_data_env.sh",
+        "managed_entrypoint": "tools/check_progressive_span_dispatch_six_runtime.sh",
+        "policy": "all temporary, cache, build, native, and test data stays under repository-derived storage",
+    },
+    "local_ci": {
+        "driver": "tools/run_ci_local.sh",
+        "switch": "LINKEDSPEC_RUN_PROGRESSIVE_SPAN_MATRIX",
+    },
+    "rollout_assertions": {
+        "row_count": 14,
+        "progressive_span_dispatch": {
+            "status": "complete",
+            "owner": "FUTURE-PARITY-BACKLOG.14.6",
+        },
+        "staged_span_dispatch": {
+            "status": "pending",
+            "owner": "FUTURE-PARITY-BACKLOG.14.7",
+        },
+        "recurring_public_no_drift": {
+            "status": "pending",
+            "owner": "FUTURE-PARITY-BACKLOG.14.8",
+        },
+    },
+}
+
 RECURSIVE_OBSERVATION_PUBLIC_NO_DRIFT = {
     "owner": "FUTURE-PARITY-BACKLOG.14.4.8",
     "status": "complete",
@@ -443,19 +544,19 @@ TRANSACTION_SAFETY_COMPOSITION = {
             {
                 "path": "docs/knowledge/typed-source-location-cursor-algebra-direction.md",
                 "required_markers": [
-                    "Typed transaction composition is current at six runtimes and the typed rollout is 11 complete / 3 pending."
+                    "Typed transaction composition is current at six runtimes and the typed rollout is 12 complete / 2 pending."
                 ],
             },
             {
                 "path": "docs/linkedspec-book/src/overview/project-status.md",
                 "required_markers": [
-                    "Typed transaction composition is now current at 11 complete / 3 pending; progressive dispatch, staged dispatch, and combined program-wide no-drift remain pending."
+                    "Typed transaction composition and progressive span dispatch are now current at 12 complete / 2 pending; staged dispatch and combined program-wide no-drift remain pending."
                 ],
             },
             {
                 "path": "capability_conformance/README.md",
                 "required_markers": [
-                    "Typed transaction composition is current and promotes only `transaction_safety`; the typed rollout is 11 complete / 3 pending."
+                    "Typed transaction composition and progressive span dispatch are current; the typed rollout is 12 complete / 2 pending."
                 ],
             },
         ],
@@ -468,18 +569,23 @@ TRANSACTION_SAFETY_COMPOSITION = {
             {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "Ten of 14 rollout legs are complete and 4 remain pending."},
             {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "their rollout is 10 complete / 4 pending"},
             {"path": "capability_conformance/README.md", "text": "Current governance is 126 mutations and rollout is 10 complete / 4 pending across 14 legs:"},
+            {"path": "docs/knowledge/typed-source-location-cursor-algebra-direction.md", "text": "Typed transaction composition is current at six runtimes and the typed rollout is 11 complete / 3 pending."},
+            {"path": "docs/linkedspec-book/src/overview/project-status.md", "text": "Typed transaction composition is now current at 11 complete / 3 pending; progressive dispatch, staged dispatch, and combined program-wide no-drift remain pending."},
+            {"path": "capability_conformance/README.md", "text": "Typed transaction composition is current and promotes only `transaction_safety`; the typed rollout is 11 complete / 3 pending."},
+            {"path": "capability_conformance/README.md", "text": "Its rollout is 2/9 complete (neutral and Perl), with Rust, Dart, Julia, PUC Lua, LuaJIT,"},
+            {"path": "capability_conformance/README.md", "text": "The typed `progressive_span_dispatch` row remains pending until exact six-runtime recurrence owner"},
         ],
     },
     "rollout_assertions": {
         "row_count": 14,
         "transaction_safety": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.3"},
-        "progressive_span_dispatch": {"status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.6"},
+        "progressive_span_dispatch": {"status": "complete", "owner": "FUTURE-PARITY-BACKLOG.14.6"},
         "staged_span_dispatch": {"status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.7"},
         "recurring_public_no_drift": {"status": "pending", "owner": "FUTURE-PARITY-BACKLOG.14.8"},
     },
 }
 
-TRANSACTION_SAFETY_COMPOSITION_PUBLIC_MUTATION_COUNT = 10
+TRANSACTION_SAFETY_COMPOSITION_PUBLIC_MUTATION_COUNT = 15
 
 LOSSLESS_GAP_COMPOSITION = {
     "owner": "FUTURE-PARITY-BACKLOG.14.5.1",
@@ -989,7 +1095,12 @@ ROLLOUT = [
         "FUTURE-PARITY-BACKLOG.14.5",
         ["perl", "rust", "dart", "julia", "puc_lua", "luajit"],
     ),
-    ("progressive_span_dispatch", "pending", "FUTURE-PARITY-BACKLOG.14.6", []),
+    (
+        "progressive_span_dispatch",
+        "complete",
+        "FUTURE-PARITY-BACKLOG.14.6",
+        ["perl", "rust", "dart", "julia", "puc_lua", "luajit"],
+    ),
     ("staged_span_dispatch", "pending", "FUTURE-PARITY-BACKLOG.14.7", []),
     (
         "recurring_public_no_drift",
@@ -1717,6 +1828,8 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         fail("lossless-gap composition contract is missing")
     if "recursive_observation_recurring_gate" not in contract:
         fail("recursive-observation recurring gate is missing")
+    if "progressive_span_dispatch_recurring_gate" not in contract:
+        fail("progressive span-dispatch recurring gate is missing")
     if "recursive_observation_public_no_drift" not in contract:
         fail("recursive-observation public no-drift contract is missing")
     top_fields = [
@@ -1744,6 +1857,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         "diagnostics",
         "recurring_gate",
         "recursive_observation_recurring_gate",
+        "progressive_span_dispatch_recurring_gate",
         "recursive_observation_public_no_drift",
         "transaction_safety_composition",
         "lossless_gap_composition",
@@ -1756,7 +1870,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         fail("contract id drifted")
     if contract["task_owner"] != "FUTURE-PARITY-BACKLOG.14.1.1":
         fail("task owner drifted")
-    if contract["status"] != "neutral_contract_with_transaction_safety_recursive_observation_public_no_drift_and_lossless_gap_composition":
+    if contract["status"] != "neutral_contract_with_transaction_safety_recursive_observation_public_no_drift_lossless_gap_and_progressive_dispatch_composition":
         fail("typed source-location status drifted")
     if contract["expected_counts"] != EXPECTED_COUNTS:
         fail("expected counts drifted")
@@ -2373,6 +2487,30 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             "recursive-observation recurring source, route, command, support, storage, or canonical topology drifted"
         )
 
+    progressive_span_dispatch_recurring = require_fields(
+        contract["progressive_span_dispatch_recurring_gate"],
+        [
+            "driver",
+            "neutral_check",
+            "source_schema",
+            "consumer_sources",
+            "route_schema",
+            "runtime_routes",
+            "support_checks",
+            "storage",
+            "local_ci",
+            "rollout_assertions",
+        ],
+        "progressive span-dispatch recurring gate",
+    )
+    if (
+        progressive_span_dispatch_recurring
+        != PROGRESSIVE_SPAN_DISPATCH_RECURRING_GATE
+    ):
+        fail(
+            "progressive span-dispatch recurring neutral, source, route, command, support, storage, rollout, or canonical topology drifted"
+        )
+
     rollout = require_list(contract["rollout"], "rollout", EXPECTED_COUNTS["rollout_legs"])
     observed_rollout: list[tuple[Any, ...]] = []
     for leg in rollout:
@@ -2410,6 +2548,24 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         } != expected:
             fail(f"lossless-gap composition rollout assertion drifted: {leg}")
 
+    progressive_assertions = progressive_span_dispatch_recurring[
+        "rollout_assertions"
+    ]
+    if progressive_assertions["row_count"] != len(rollout):
+        fail("progressive span-dispatch recurrence changed rollout cardinality")
+    for leg in (
+        "progressive_span_dispatch",
+        "staged_span_dispatch",
+        "recurring_public_no_drift",
+    ):
+        actual = rollout_by_leg.get(leg)
+        expected = progressive_assertions[leg]
+        if actual is None or {
+            "status": actual["status"],
+            "owner": actual["owner"],
+        } != expected:
+            fail(f"progressive span-dispatch rollout assertion drifted: {leg}")
+
     actual_counts = {
         "sources": len(sources),
         "position_conversions": len(positions),
@@ -2432,6 +2588,12 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
         ),
         "recursive_observation_recurring_runtime_routes": len(
             recursive_observation_recurring["runtime_routes"]
+        ),
+        "progressive_span_dispatch_recurring_source_groups": len(
+            progressive_span_dispatch_recurring["consumer_sources"]
+        ),
+        "progressive_span_dispatch_recurring_runtime_routes": len(
+            progressive_span_dispatch_recurring["runtime_routes"]
         ),
         "recursive_observation_public_documents": len(
             recursive_observation_public["documents"]
@@ -2467,6 +2629,7 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             LUA_ORDINARY_DRIVER_PATH,
             RECURRING_DRIVER_PATH,
             RECURSIVE_OBSERVATION_RECURRING_DRIVER_PATH,
+            PROGRESSIVE_SPAN_DISPATCH_RECURRING_DRIVER_PATH,
             LOSSLESS_GAP_CONTRACT_PATH,
             LOSSLESS_GAP_CHECKER_PATH,
             LOSSLESS_GAP_DRIVER_PATH,
@@ -2704,6 +2867,98 @@ def validate_contract(contract: dict[str, Any], *, check_registration: bool = Tr
             "tools/check_recursive_observation_six_runtime.sh"
         ) != 1:
             fail("recursive-observation recurring project-data routing registration drifted")
+        progressive_driver_text = (
+            PROGRESSIVE_SPAN_DISPATCH_RECURRING_DRIVER_PATH.read_text(
+                encoding="utf-8"
+            )
+        )
+        if not PROGRESSIVE_SPAN_DISPATCH_RECURRING_DRIVER_PATH.stat().st_mode & 0o111:
+            fail("progressive span-dispatch recurring driver is not executable")
+        progressive_storage = PROGRESSIVE_SPAN_DISPATCH_RECURRING_GATE["storage"]
+        if progressive_storage != {
+            "initializer": "tools/project_data_env.sh",
+            "managed_entrypoint": "tools/check_progressive_span_dispatch_six_runtime.sh",
+            "policy": "all temporary, cache, build, native, and test data stays under repository-derived storage",
+        }:
+            fail("progressive span-dispatch recurring storage topology drifted")
+        for marker in (
+            'source "$REPO_ROOT/tools/project_data_env.sh"',
+            'linkedspec_project_data_enter_run "$REPO_ROOT/tools/check_progressive_span_dispatch_six_runtime.sh" "$@"',
+        ):
+            if progressive_driver_text.count(marker) != 1:
+                fail(
+                    "progressive span-dispatch recurring driver is not repository-routed: "
+                    f"{marker}"
+                )
+        progressive_markers = [
+            PROGRESSIVE_SPAN_DISPATCH_RECURRING_GATE["neutral_check"],
+            *[
+                route["command"]
+                for route in PROGRESSIVE_SPAN_DISPATCH_RECURRING_GATE[
+                    "runtime_routes"
+                ]
+            ],
+            *PROGRESSIVE_SPAN_DISPATCH_RECURRING_GATE["support_checks"],
+        ]
+        progressive_positions: list[int] = []
+        for marker in progressive_markers:
+            if progressive_driver_text.count(marker) != 1:
+                fail(
+                    "progressive span-dispatch recurring driver marker must appear exactly once: "
+                    f"{marker}"
+                )
+            progressive_positions.append(progressive_driver_text.index(marker))
+        if progressive_positions != sorted(progressive_positions):
+            fail(
+                "progressive span-dispatch recurring neutral/runtime/support order drifted"
+            )
+        progressive_sources = PROGRESSIVE_SPAN_DISPATCH_RECURRING_GATE[
+            "consumer_sources"
+        ]
+        progressive_source_paths = [
+            relative_path
+            for source in progressive_sources
+            for relative_path in source["paths"]
+        ]
+        if len(progressive_source_paths) != len(set(progressive_source_paths)):
+            fail("progressive span-dispatch recurring consumer source duplication drifted")
+        for relative_path in progressive_source_paths:
+            if not (ROOT / relative_path).is_file():
+                fail(
+                    "progressive span-dispatch recurring consumer source is missing: "
+                    f"{relative_path}"
+                )
+        progressive_route_backends = {
+            row["source_backend"]
+            for row in PROGRESSIVE_SPAN_DISPATCH_RECURRING_GATE["runtime_routes"]
+        }
+        progressive_source_backends = {
+            row["backend"] for row in progressive_sources
+        }
+        if progressive_route_backends != progressive_source_backends:
+            fail("progressive span-dispatch recurring route/source binding drifted")
+        progressive_ci = PROGRESSIVE_SPAN_DISPATCH_RECURRING_GATE["local_ci"]
+        if progressive_ci["driver"] != CI_PATH.relative_to(ROOT).as_posix():
+            fail("progressive span-dispatch recurring canonical driver identity drifted")
+        progressive_ci_markers = (
+            f"require_tracked_file {PROGRESSIVE_SPAN_DISPATCH_RECURRING_GATE['driver']}",
+            f'if [[ "${{{progressive_ci["switch"]}:-0}}" == "1" ]]; then',
+            f'bash "$REPO_ROOT/{PROGRESSIVE_SPAN_DISPATCH_RECURRING_GATE["driver"]}"',
+        )
+        for marker, expected_count in zip(
+            progressive_ci_markers, (2, 1, 1), strict=True
+        ):
+            if ci_text.count(marker) != expected_count:
+                fail(
+                    "progressive span-dispatch recurring canonical registration marker count drifted: "
+                    f"{marker} expected {expected_count}"
+                )
+        if workflow_routing_text.count(
+            "tools/check_progressive_span_dispatch_six_runtime.sh"
+        ) != 2:
+            fail(
+                "progressive span-dispatch recurring project-data routing registration drifted"
+            )
         composition_gate = lossless_gap_composition["recurring_gate"]
         composition_driver_text = TYPED_GAP_COMPOSITION_DRIVER_PATH.read_text(
             encoding="utf-8"
@@ -2849,6 +3104,14 @@ def mutation_checks(contract: dict[str, Any]) -> int:
 
     def swap_recursive_observation_recurring_routes(candidate: dict[str, Any]) -> None:
         routes = candidate["recursive_observation_recurring_gate"]["runtime_routes"]
+        routes[0], routes[1] = routes[1], routes[0]
+
+    def swap_progressive_span_dispatch_recurring_routes(
+        candidate: dict[str, Any],
+    ) -> None:
+        routes = candidate["progressive_span_dispatch_recurring_gate"][
+            "runtime_routes"
+        ]
         routes[0], routes[1] = routes[1], routes[0]
 
     def recursive_self_parent(candidate: dict[str, Any]) -> None:
@@ -3104,6 +3367,82 @@ def mutation_checks(contract: dict[str, Any]) -> int:
             ),
         ),
         (
+            "progressive span-dispatch recurring source group omitted",
+            lambda c: c["progressive_span_dispatch_recurring_gate"][
+                "consumer_sources"
+            ].pop(),
+        ),
+        (
+            "progressive span-dispatch recurring source path omitted",
+            lambda c: c["progressive_span_dispatch_recurring_gate"][
+                "consumer_sources"
+            ][0]["paths"].pop(),
+        ),
+        (
+            "progressive span-dispatch recurring runtime route omitted",
+            lambda c: c["progressive_span_dispatch_recurring_gate"][
+                "runtime_routes"
+            ].pop(),
+        ),
+        (
+            "progressive span-dispatch recurring runtime route order",
+            swap_progressive_span_dispatch_recurring_routes,
+        ),
+        (
+            "progressive span-dispatch recurring runtime route duplicated",
+            lambda c: c["progressive_span_dispatch_recurring_gate"][
+                "runtime_routes"
+            ].append(
+                copy.deepcopy(
+                    c["progressive_span_dispatch_recurring_gate"]["runtime_routes"][
+                        0
+                    ]
+                )
+            ),
+        ),
+        (
+            "progressive span-dispatch recurring runtime command",
+            lambda c: c["progressive_span_dispatch_recurring_gate"][
+                "runtime_routes"
+            ][1].__setitem__("command", "cargo test --wrong"),
+        ),
+        (
+            "progressive span-dispatch recurring runtime source binding",
+            lambda c: c["progressive_span_dispatch_recurring_gate"][
+                "runtime_routes"
+            ][5].__setitem__("source_backend", "rust"),
+        ),
+        (
+            "progressive span-dispatch recurring neutral check",
+            lambda c: c["progressive_span_dispatch_recurring_gate"].__setitem__(
+                "neutral_check", "bash tools/run_python_project_data.sh tools/wrong.py"
+            ),
+        ),
+        (
+            "progressive span-dispatch recurring support check omitted",
+            lambda c: c["progressive_span_dispatch_recurring_gate"][
+                "support_checks"
+            ].pop(),
+        ),
+        (
+            "progressive span-dispatch recurring storage initializer",
+            lambda c: c["progressive_span_dispatch_recurring_gate"][
+                "storage"
+            ].__setitem__("initializer", "/tmp/project_data_env.sh"),
+        ),
+        (
+            "progressive span-dispatch recurring driver",
+            lambda c: c["progressive_span_dispatch_recurring_gate"].__setitem__(
+                "driver", "tools/missing.sh"
+            ),
+        ),
+        (
+            "progressive span-dispatch recurring canonical switch",
+            lambda c: c["progressive_span_dispatch_recurring_gate"][
+                "local_ci"
+            ].__setitem__("switch", "LINKEDSPEC_RUN_WRONG_MATRIX"),
+        ),
+        (
             "recursive-observation public owner",
             lambda c: c["recursive_observation_public_no_drift"].__setitem__(
                 "owner", "FUTURE-PARITY-BACKLOG.14.8"
@@ -3240,10 +3579,10 @@ def mutation_checks(contract: dict[str, Any]) -> int:
             ].__setitem__("representation", "cursor only"),
         ),
         (
-            "transaction-safety progressive row promoted",
+            "transaction-safety progressive row regressed",
             lambda c: c["transaction_safety_composition"][
                 "rollout_assertions"
-            ]["progressive_span_dispatch"].__setitem__("status", "complete"),
+            ]["progressive_span_dispatch"].__setitem__("status", "pending"),
         ),
         (
             "lossless-gap composition owner",
@@ -3433,6 +3772,10 @@ def mutation_checks(contract: dict[str, Any]) -> int:
         (
             "recursive-observation recurrence regressed to pending",
             lambda c: c["rollout"][9].__setitem__("status", "pending"),
+        ),
+        (
+            "progressive span-dispatch recurrence regressed to pending",
+            lambda c: c["rollout"][11].__setitem__("status", "pending"),
         ),
     ]
     if (

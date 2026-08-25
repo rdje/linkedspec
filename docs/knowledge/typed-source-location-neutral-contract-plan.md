@@ -27,7 +27,7 @@ answers:
   - "how many typed source location mutations exist after recurring composition"
   - "how many typed source location mutations exist after executable recursive observation"
 date: 2026-08-01
-status: neutral artifact including executable recursive observation, public teaching/recomposition, and all six internal runtime targets complete; 8 of 14 rollout legs complete
+status: neutral artifact, all six internal runtimes, transaction/lossless-gap composition, recursive observation, and progressive recurrence complete; 12 of 14 rollout legs complete
 tags: [architecture, source-location, spans, cursor, helpers, recursion, conformance, mdbook, portability]
 evidence: "FUTURE-PARITY-BACKLOG.14.1.0 retrieved ADR 0056 and adjacent contracts before using LinkedSpec::Get, return_descriptor, and call_spec_handler_subst. Live decoded Unicode input é\\n🙂x is four scalar positions over eight UTF-8 bytes; direct/mutual non-progress recursion returns undef through the current guard without structured last_error. The modern helper inventory is 47 capture/mark + 30 entry/match + 11 input/cursor + 4 cursor-control = 92 canonical calls. Executable .14.1.1 proof corrects the preliminary alias classification to seven callable compatibility aliases plus two internal contract/scanner ids whose recognized spellings are canonical capture_take and capture_take_len. The task tree freezes the exact v1 contract/checker paths, fixture/diagnostic/mutation counts, CI routing, rollout order, and public page set."
 evidence_update_2026_08_01_public_rollout: "Public structure .14.1.2 and unchanged recomposition .14.1.3 are complete. Correction .14.2.0.1 promotes both live rows, advances current truth to 3 complete / 11 pending, and protects each with an independent completed-to-pending regression among 37 mutations. Runtime values remain future."
@@ -46,6 +46,7 @@ evidence_update_2026_08_12_recursive_observation: "Corrective .14.4.0.1 advances
 evidence_update_2026_08_12_observation_admissions: "Perl .14.4.2, Rust .14.4.3, Dart .14.4.4, Julia .14.4.5, and shared Lua .14.4.6 admit the neutral observation boundary privately on all six runtimes without promoting the parent row. One omission regression per backend implementation advances governance to 75 while rollout stays 8 complete / 6 pending; recurring observation composition and public closeout remain future."
 evidence_update_2026_08_12_observation_recurrence: "FUTURE-PARITY-BACKLOG.14.4.7 adds the exact observation-only five-source/six-runtime repository-routed proof plus three support ledgers. Eleven topology/storage regressions and one recurrence regression promote only recursive_observation, advancing current neutral truth to 9 complete / 5 pending / 87. Public no-drift remains future."
 evidence_update_2026_08_12_recursive_observation_signoff: "Complete signoff passes the exact six-runtime typed-source composition, strict generated Rust 105/105, capability 80/0/0, language 246/105+1/122, rendered book, Knowledge 821/6831, all eight doctrines, six-family process containment, repository relocation, CLI 66x2, RAM 35%, and canonical Phase 0 1031/1031 in 714 seconds through the exact local-CI marker and exit 0."
+evidence_update_2026_08_25_progressive_recurrence: "After recursive-observation public closeout, lossless-gap composition, and corrective transaction composition reached 11/3/152, FUTURE-PARITY-BACKLOG.14.6.7 adds the exact progressive-only five-source/six-runtime recurring driver plus four support ledgers. Twelve topology/storage/rollout mutations and two stale-guide denials promote only progressive_span_dispatch for current 12/2/170 truth. Staged dispatch and combined program-wide no-drift remain pending."
 reverify: "bash tools/check_typed_source_location_six_runtime.sh && rg -n 'complex regex|Single regex|recursive regex|single-regex multi-classification' docs/linkedspec-book/src/specs-and-corpora"
 ---
 
@@ -91,5 +92,6 @@ call, and the unchanged ordinary child payload as expression result. The separat
 ordinary harray field access and retains no parse-wide history. Thirteen new mutations advance the checker to 70;
 this is neutral authority rather than backend admission, so rollout remained 8 complete / 6 pending. Subsequent
 private Perl, Rust, Dart, Julia, and shared-Lua admissions add one omission regression each for 75 total mutations.
-Dedicated observation recurrence adds twelve more regressions and promotes only that parent row, making current
-truth 9 complete / 5 pending / 87 while final public no-drift remains pending.
+Dedicated observation recurrence added twelve regressions and promoted only that parent row, reaching 9/5/87.
+Recursive-observation public no-drift, lossless-gap and transaction composition, then progressive recurrence make
+current truth 12 complete / 2 pending / 170. Staged dispatch and combined program-wide no-drift remain pending.
