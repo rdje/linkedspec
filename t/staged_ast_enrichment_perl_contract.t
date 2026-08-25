@@ -7,13 +7,17 @@ use FindBin qw($Bin);
 use lib "$Bin/../perl";
 use File::Spec ();
 use JSON::PP ();
+use Scalar::Util qw(refaddr);
 use Test::More;
 
 use LinkedSpec ();
 use LinkedSpec::ActionIR::StagedParseJob ();
 use LinkedSpec::SourceLocation ();
+use LinkedSpec::StagedASTEnrichment ();
 use LinkedSpec::StagedParseJob ();
 use LinkedSpec::StagedParserRegistry ();
+
+my $JSON = JSON::PP->new->canonical(1)->allow_nonref(1);
 
 sub slurp_json {
  my ($path) = @_;
@@ -57,6 +61,25 @@ sub forbidden_key_hits {
  return @hits
 }
 
+sub clone_plain {
+ my ($value) = @_;
+ return JSON::PP->new->decode($JSON->encode($value))
+}
+
+sub capture_enrichment_error {
+ my ($code, $callback, $label) = @_;
+ my $ok = eval { $callback->(); 1 };
+ my $error = $@;
+ ok(!$ok, "$label rejects");
+ ok(
+  LinkedSpec::StagedASTEnrichment::is_error($error),
+  "$label returns the private staged-enrichment error",
+ );
+ is($error->{code}, $code, "$label uses $code")
+  if LinkedSpec::StagedASTEnrichment::is_error($error);
+ return $error
+}
+
 my $contract_path = File::Spec->catfile(
  $Bin,
  '..',
@@ -64,6 +87,84 @@ my $contract_path = File::Spec->catfile(
  'staged_ast_enrichment_contract.json',
 );
 my $contract = slurp_json($contract_path);
+
+sub build_enrichment_authority {
+ my (%args) = @_;
+ my $snapshot = clone_plain($contract->{resolution_snapshot});
+ my $executor = $args{executor} // sub {
+  my ($request) = @_;
+  return {
+   kind => 'parsed',
+   text => $request->{text},
+  }
+ };
+ for my $entry (@{$snapshot->{entries}}) {
+  my $resolved_spec_id = $entry->{resolved_spec_id};
+  $entry->{compiled_authority} = sub {
+   return $executor->($_[0], $resolved_spec_id)
+  };
+ }
+ my $authority = LinkedSpec::StagedASTEnrichment->new(snapshot => $snapshot);
+ return wantarray ? ($authority, $snapshot) : $authority
+}
+
+sub make_inert_marker {
+ my (%args) = @_;
+ my $text = defined($args{text}) ? "$args{text}" : 'abc';
+ my %options = (
+  node_kind => $args{node_kind} // 'expression',
+  payload_kind => $args{payload_kind} // 'embedded_expression',
+  spec => $args{spec} // 'expr',
+  result_policy => $args{result_policy} // 'replace_marker',
+  on_error => $args{on_error} // 'fail',
+  required_capabilities => clone_plain(
+   $args{required_capabilities} // [qw(staged-parse-job-v2 typed-source-location-v1)],
+  ),
+ );
+ $options{top} = $args{top} if exists $args{top};
+ $options{into} = $args{into} if exists $args{into};
+ my $input = $text;
+ my $entry_info = {
+  match_span => {start => 0, end => length($text)},
+  match_spans => [{start => 0, end => length($text)}],
+ };
+ return LinkedSpec::StagedParseJob::construct_marker(
+  \$input,
+  $entry_info,
+  undef,
+  $args{origin} // 'contract:parse_job',
+  $JSON->encode({
+   text_plan => {kind => 'direct_span', source => 'entry_text'},
+   options => \%options,
+  }),
+ )
+}
+
+sub enrichment_args {
+ return (
+  declaring_spec_id => 'grammar/main.spec',
+  caller_capabilities => [qw(
+   caller-only staged-parse-job-v2 structured-result-v1
+   typed-source-location-v1 xml-v1 yaml-v1
+  )],
+  caller_policy_modes => [qw(
+   append_child diagnostic_node fail keep_text replace_field replace_marker
+   sibling_field trace
+  )],
+  caller_ceilings => {
+   source_detail => 'text',
+   max_steps => 500,
+   max_result_nodes => 256,
+   max_diagnostic_bytes => 8192,
+  },
+  required_source_detail => 'span',
+  required_versions => {
+   spec_language_version => 2,
+   helper_contract_version => 'actionir-v3',
+   staged_contract_version => 2,
+  },
+ )
+}
 
 is(
  $contract->{contract_id},
@@ -691,17 +792,512 @@ is($transaction_ctx{last_error}{stage}, 'recognition_transaction_policy', 'trans
 is($transaction_ctx{last_error}{code}, 'recognition_effect_forbidden', 'transaction rejection stays fail-closed');
 is($transaction_ctx{last_error}{effect}, 'parser_registry_or_staged_dispatch', 'the dedicated marker has the staged-dispatch effect');
 
-my $scheduler_interface = eval {
- require LinkedSpec::StagedASTEnrichment;
- LinkedSpec::StagedASTEnrichment->can('enrich_ast')
-};
 ok(
- $scheduler_interface,
- 'Perl applies pre-registered resolution/cache and result/failure policies after the complete AST returns',
+ LinkedSpec::StagedASTEnrichment->can('enrich_ast'),
+ 'Perl exposes one private post-AST current-depth enrichment seam',
+);
+
+subtest 'pre-registered resolution is pure, prioritized, and diagnostic-exact' => sub {
+ my $authority = build_enrichment_authority();
+ for my $case (@{$contract->{resolution_cases}}) {
+  my ($resolved, $error);
+  my $ok = eval {
+   $resolved = $authority->resolve_pre_registered(
+    declaring_spec_id => $case->{declaring_spec_id},
+    parser_spec_id => $case->{parser_spec_id},
+    job_id => 'parse_job:v2:resolution-contract',
+   );
+   1
+  };
+  if (defined($case->{diagnostic})) {
+   ok(!$ok, "$case->{id} rejects during pure frozen selection");
+   ok(
+    LinkedSpec::StagedASTEnrichment::is_error($@),
+    "$case->{id} returns a typed resolution diagnostic",
+   );
+   is($@->{code}, $case->{diagnostic}, "$case->{id} preserves the neutral diagnostic code")
+    if LinkedSpec::StagedASTEnrichment::is_error($@);
+   is($@->{phase}, 'resolve', "$case->{id} stays in the pure resolve phase")
+    if LinkedSpec::StagedASTEnrichment::is_error($@);
+  } else {
+   ok($ok, "$case->{id} resolves from the frozen snapshot") or diag($@);
+   is($resolved, $case->{resolved_spec_id}, "$case->{id} selects the exact normalized identity");
+  }
+ }
+};
+
+subtest 'caller and entry authority intersect and every ceiling narrows' => sub {
+ my $authority = build_enrichment_authority();
+ for my $case (@{$contract->{authority_cases}}) {
+  my ($effective, $error);
+  my $ok = eval {
+   $effective = $authority->effective_authority(
+    entry_id => $case->{entry_id},
+    job_id => 'parse_job:v2:authority-contract',
+    top_rule => $case->{top_rule},
+    caller_capabilities => clone_plain($case->{caller_capabilities}),
+    required_capabilities => clone_plain($case->{required_capabilities}),
+    caller_policy_modes => clone_plain($case->{caller_policy_modes}),
+    required_policy_modes => clone_plain($case->{required_policy_modes}),
+    caller_ceilings => clone_plain($case->{caller_ceilings}),
+    required_source_detail => $case->{required_source_detail},
+    required_versions => clone_plain($case->{required_versions}),
+   );
+   1
+  };
+  if ($case->{accepted}) {
+   ok($ok, "$case->{id} accepts strictly narrowed authority") or diag($@);
+   is_deeply($effective, $case->{effective}, "$case->{id} computes exact intersections and minima");
+  } else {
+   ok(!$ok, "$case->{id} rejects authority elevation");
+   ok(
+    LinkedSpec::StagedASTEnrichment::is_error($@),
+    "$case->{id} returns a typed authority diagnostic",
+   );
+   is($@->{code}, $case->{diagnostic}, "$case->{id} preserves the neutral diagnostic code")
+   if LinkedSpec::StagedASTEnrichment::is_error($@);
+  }
+ }
+ capture_enrichment_error(
+  'staged_top_rule_forbidden',
+  sub {
+   $authority->effective_authority(
+    entry_id => 'registry:expr-v2',
+    job_id => 'parse_job:v2:wrong-top',
+    top_rule => 'MissingTop',
+    caller_capabilities => [qw(staged-parse-job-v2 typed-source-location-v1)],
+    required_capabilities => [qw(typed-source-location-v1)],
+    caller_policy_modes => [qw(fail replace_marker)],
+    required_policy_modes => [qw(fail)],
+    caller_ceilings => {
+     source_detail => 'span',
+     max_steps => 100,
+     max_result_nodes => 64,
+     max_diagnostic_bytes => 4096,
+    },
+    required_source_detail => 'identity',
+    required_versions => {
+     spec_language_version => 2,
+     helper_contract_version => 'actionir-v3',
+     staged_contract_version => 2,
+    },
+   )
+  },
+  'entry-forbidden top rule',
+ );
+};
+
+subtest 'v2 job identity and immutable cache identity are exact' => sub {
+ for my $case (@{$contract->{job_id_cases}}) {
+  my $fields = clone_plain($case);
+  delete @{$fields}{qw(id expected_job_id)};
+  is(
+   LinkedSpec::StagedASTEnrichment->job_identity($fields),
+   $case->{expected_job_id},
+   "$case->{id} matches the cross-backend canonical job digest",
+  );
+ }
+ my $base;
+ for my $case (@{$contract->{cache_cases}}) {
+  my $identity = LinkedSpec::StagedASTEnrichment->cache_identity(
+   clone_plain($case->{fields}),
+  );
+  $base = $identity if $case->{id} eq 'base';
+  is(
+   $identity eq $base ? 1 : 0,
+   $case->{same_as_base} ? 1 : 0,
+   "$case->{id} preserves exact cache hit/invalidation identity",
+  );
+ }
+ my $invalid_cache = clone_plain($contract->{cache_cases}[0]{fields});
+ $invalid_cache->{content_digest} = 'sha256:not-a-digest';
+ my $cache_error = capture_enrichment_error(
+  'staged_cache_identity_invalid',
+  sub { LinkedSpec::StagedASTEnrichment->cache_identity($invalid_cache) },
+  'malformed cache content digest',
+ );
+ is($cache_error->{cache_component}, 'content_digest', 'cache diagnostics name the exact invalid component');
+};
+
+subtest 'registry seeds freeze callbacks and grant no mutation or implicit load' => sub {
+ my @observed_requests;
+ my ($authority, $seed) = build_enrichment_authority(
+  executor => sub {
+   my ($request) = @_;
+   push @observed_requests, $request;
+   return {kind => 'frozen_callback'};
+  },
+ );
+ $seed->{aliases}[0]{resolved_spec_id} = 'registry:yaml-v1';
+ $seed->{entries}[0]{compiled_authority} = sub { return {kind => 'mutated_callback'} };
+ is(
+  $authority->resolve_pre_registered(
+   declaring_spec_id => 'grammar/main.spec',
+   parser_spec_id => 'expr',
+   job_id => 'parse_job:v2:frozen-seed',
+  ),
+  'registry:expr-v2',
+  'caller mutation of candidate seed rows cannot alter frozen resolution',
+ );
+ capture_enrichment_error(
+  'staged_registry_mutation_forbidden',
+  sub { $authority->register(parser_spec_id => 'later-v1') },
+  'post-construction registry mutation',
+ );
+ capture_enrichment_error(
+  'staged_implicit_load_forbidden',
+  sub { $authority->load(parser_spec_id => 'expr') },
+  'dispatch-time path/provider loading',
+ );
+
+ my $marker = make_inert_marker(result_policy => 'replace_marker');
+ my $output = $authority->enrich_ast(
+  {payload => $marker},
+  enrichment_args(),
+ );
+ is($output->{ast}{payload}{kind}, 'frozen_callback', 'execution retains the already-compiled frozen callback');
+ is(scalar(@observed_requests), 1, 'exactly one callback executes for one current-depth marker');
+ my %forbidden_request_key = map { ($_ => 1) } qw(
+  path spec_path source_authority match match_object parser registry
+  compiled_authority provider filesystem environment network loader compiler
+  cancellation deadline mutable_queue
+ );
+ is_deeply(
+  [forbidden_key_hits($observed_requests[0], \%forbidden_request_key)],
+  [],
+  'the child request carries no registry, callback, loader, path, or ambient authority',
+ );
+ is_deeply(
+  $observed_requests[0]{runtime_context},
+  {cursor => 0, marks => {}, captures => {}, variables => {}},
+  'the child begins with a fresh isolated parser runtime context',
+ );
+
+ my $invalid_snapshot = clone_plain($contract->{resolution_snapshot});
+ my $invalid_ok = eval {
+  LinkedSpec::StagedASTEnrichment->new(snapshot => $invalid_snapshot);
+  1
+ };
+ ok(!$invalid_ok, 'opaque strings cannot impersonate already-compiled callback authority');
+ like($@, qr/already-compiled callback/, 'invalid registry construction fails at the caller-preparation boundary');
+};
+
+subtest 'all four result policies stitch detached child data' => sub {
+ for my $case (@{$contract->{stitch_cases}}) {
+  my $child_result = clone_plain($case->{result});
+  my $authority = build_enrichment_authority(
+   executor => sub { return $child_result },
+  );
+  my %marker_args = (
+   text => $case->{text},
+   result_policy => $case->{result_policy},
+   on_error => 'fail',
+  );
+  $marker_args{into} = $case->{into} if defined($case->{into});
+  my $marker = make_inert_marker(%marker_args);
+  my $input = clone_plain($case->{parent});
+  $input->{$case->{marker_field}} = $marker;
+  my $output = $authority->enrich_ast($input, enrichment_args());
+  is_deeply(
+   $output->{ast},
+   $case->{expected_parent},
+   "$case->{id} applies the exact neutral stitch operation",
+  );
+  ok(
+   LinkedSpec::StagedParseJob::is_marker($input->{$case->{marker_field}}),
+   "$case->{id} does not mutate the caller's parent AST",
+  );
+  is($output->{sidecars}[0]{state}, 'succeeded', "$case->{id} settles its scheduler sidecar");
+  like(
+   $output->{sidecars}[0]{job_id},
+   qr/\Aparse_job:v2:sha256:[0-9a-f]{64}\z/,
+   "$case->{id} receives a deterministic v2 job id",
+  );
+  is($output->{sidecars}[0]{top_rule}, 'Expr', "$case->{id} normalizes the default top before identity");
+  $child_result->{kind} = 'mutated_after_return';
+  my $stitched_result = $case->{result_policy} eq 'replace_marker'
+   ? $output->{ast}{$case->{marker_field}}
+   : $case->{result_policy} eq 'append_child'
+    ? $output->{ast}{$case->{into}}[0]
+    : $output->{ast}{$case->{into}};
+  isnt(
+   $stitched_result->{kind},
+   'mutated_after_return',
+   "$case->{id} retains no mutable child aggregate",
+  );
+ }
+};
+
+subtest 'all three failure policies are atomic and retain portable diagnostics' => sub {
+ for my $case (@{$contract->{failure_cases}}) {
+  my $authority = build_enrichment_authority(
+   executor => sub { die {code => 'child_syntax'} },
+  );
+  my %marker_args = (
+   text => $case->{text},
+   result_policy => $case->{result_policy},
+   on_error => $case->{failure_policy},
+  );
+  $marker_args{into} = $case->{into} if defined($case->{into});
+  my $marker = make_inert_marker(%marker_args);
+  my $input = clone_plain($case->{parent});
+  $input->{$case->{marker_field}} = $marker;
+  if ($case->{failure_policy} eq 'fail') {
+   my $error = capture_enrichment_error(
+    'staged_child_failed',
+    sub { $authority->enrich_ast($input, enrichment_args()) },
+    $case->{id},
+   );
+   is($error->{phase}, 'execute', "$case->{id} aborts in execute");
+   is($error->{child_diagnostic}{code}, 'child_syntax', "$case->{id} preserves the child diagnostic");
+   ok(
+    LinkedSpec::StagedParseJob::is_marker($input->{$case->{marker_field}}),
+    "$case->{id} publishes no partial parent AST",
+   );
+   next
+  }
+  my $output = $authority->enrich_ast($input, enrichment_args());
+  is($output->{ast}{$case->{marker_field}}, $case->{text}, "$case->{id} materializes original exact text");
+  is(scalar(@{$output->{diagnostics}}), 1, "$case->{id} retains one scheduler diagnostic");
+  is($output->{diagnostics}[0]{code}, 'staged_child_failed', "$case->{id} keeps the portable failure code");
+  is_deeply(
+   $output->{sidecars}[0]{diagnostic},
+   $output->{diagnostics}[0],
+   "$case->{id} retains the same detached sidecar diagnostic",
+  );
+  if ($case->{failure_policy} eq 'keep_text') {
+   is_deeply($output->{ast}{$case->{into}}, [], "$case->{id} leaves the result target unchanged");
+   is($output->{sidecars}[0]{state}, 'failed_keep_text', "$case->{id} records continued text state");
+  } else {
+   is($output->{ast}{$case->{into}}{kind}, 'staged_parse_diagnostic', "$case->{id} stitches one diagnostic node");
+   is(
+    $output->{ast}{$case->{into}}{diagnostic}{code},
+    'staged_child_failed',
+    "$case->{id} uses the selected result target for its diagnostic",
+   );
+   is($output->{sidecars}[0]{state}, 'failed_diagnostic_node', "$case->{id} records continued diagnostic state");
+  }
+ }
+};
+
+subtest 'current-depth order, sibling isolation, and cache hit behavior are deterministic' => sub {
+ my @requests;
+ my $authority = build_enrichment_authority(
+  executor => sub {
+   my ($request) = @_;
+   push @requests, {
+    path => clone_plain($request->{parent_ast_path}),
+    context_address => refaddr($request->{runtime_context}),
+    initial_context => clone_plain($request->{runtime_context}),
+   };
+   $request->{runtime_context}{cursor} = 99;
+   return {kind => 'parsed', text => $request->{text}};
+  },
+ );
+ my @nodes = map { ({kind => 'plain', index => $_}) } 0 .. 10;
+ $nodes[10] = make_inert_marker(text => 'ten', result_policy => 'replace_marker');
+ $nodes[2] = make_inert_marker(text => 'two', result_policy => 'replace_marker');
+ my $output = $authority->enrich_ast({nodes => \@nodes}, enrichment_args());
+ is_deeply(
+  [map { $_->{path} } @requests],
+  [['nodes', 2], ['nodes', 10]],
+  'numeric typed path order places index 2 before index 10',
+ );
+ isnt($requests[0]{context_address}, $requests[1]{context_address}, 'siblings receive distinct runtime contexts');
+ is_deeply(
+  [map { $_->{initial_context} } @requests],
+  [map { +{cursor => 0, marks => {}, captures => {}, variables => {}} } 1 .. 2],
+  'one sibling cannot leak cursor, mark, capture, or variable state to another',
+ );
+ is($output->{ast}{nodes}[2]{text}, 'two', 'first ordered child result stitches at its exact path');
+ is($output->{ast}{nodes}[10]{text}, 'ten', 'second ordered child result stitches at its exact path');
+ is_deeply(
+  {map { ($_ => $output->{cache}{$_}) } qw(entries hits misses)},
+  {entries => 1, hits => 1, misses => 1},
+  'two jobs with one immutable execution identity produce one miss then one hit',
+ );
+
+ my $third = make_inert_marker(text => 'again', result_policy => 'replace_marker');
+ my $third_output = $authority->enrich_ast({payload => $third}, enrichment_args());
+ is($third_output->{ast}{payload}{text}, 'again', 'a cache hit still executes the callback on fresh text');
+ is(scalar(@requests), 3, 'the cache stores no child result');
+ is($third_output->{cache}{hits}, 2, 'the later invocation records a second plan hit');
+
+ my $isolated = build_enrichment_authority();
+ is_deeply(
+  {map { ($_ => $isolated->cache_stats->{$_}) } qw(entries hits misses)},
+  {entries => 0, hits => 0, misses => 0},
+  'a separately prepared registry owns an isolated empty cache',
+ );
+};
+
+subtest 'failed child executions never poison cache results' => sub {
+ my $calls = 0;
+ my $authority = build_enrichment_authority(
+  executor => sub {
+   ++$calls;
+   die {code => 'transient_child_failure'} if $calls == 1;
+   return {kind => 'retry_success'};
+  },
+ );
+ my $failed = make_inert_marker(
+  text => 'same-cache-key',
+  result_policy => 'replace_marker',
+  on_error => 'keep_text',
+ );
+ my $failed_output = $authority->enrich_ast({payload => $failed}, enrichment_args());
+ is($failed_output->{ast}{payload}, 'same-cache-key', 'the first failed execution keeps exact text');
+ my $retry = make_inert_marker(
+  text => 'same-cache-key',
+  result_policy => 'replace_marker',
+  on_error => 'keep_text',
+ );
+ my $retry_output = $authority->enrich_ast({payload => $retry}, enrichment_args());
+ is($retry_output->{ast}{payload}{kind}, 'retry_success', 'a cache hit retries rather than replaying failure state');
+ is($calls, 2, 'failed and successful jobs both invoke fresh child execution');
+ is_deeply(
+  {map { ($_ => $retry_output->{cache}{$_}) } qw(entries hits misses)},
+  {entries => 1, hits => 1, misses => 1},
+  'only the immutable execution plan is cached across failure and retry',
+ );
+};
+
+subtest 'detachment contract rejects live, cyclic, and over-limit results' => sub {
+ for my $case (@{$contract->{detachment_cases}}) {
+  my $returned = clone_plain($case->{value});
+  my $authority = build_enrichment_authority(
+   executor => sub { return $returned },
+  );
+  my $marker = make_inert_marker(result_policy => 'replace_marker', on_error => 'fail');
+  my %args = enrichment_args();
+  $args{caller_ceilings}{max_result_nodes} = $case->{max_nodes};
+  if ($case->{accepted}) {
+   my $output = $authority->enrich_ast({payload => $marker}, %args);
+   is_deeply($output->{ast}{payload}, $case->{value}, "$case->{id} accepts exact detached plain data");
+   if (ref($returned) eq 'HASH') {
+    $returned->{kind} = 'mutated';
+    isnt($output->{ast}{payload}{kind}, 'mutated', "$case->{id} does not retain a child aggregate");
+   }
+  } else {
+   capture_enrichment_error(
+    $case->{diagnostic},
+    sub { $authority->enrich_ast({payload => $marker}, %args) },
+    $case->{id},
+   );
+  }
+ }
+
+ my $cycle = {};
+ $cycle->{self} = $cycle;
+ my $cycle_authority = build_enrichment_authority(executor => sub { return $cycle });
+ capture_enrichment_error(
+  'staged_result_not_detached',
+  sub {
+   $cycle_authority->enrich_ast(
+    {payload => make_inert_marker(result_policy => 'replace_marker')},
+    enrichment_args(),
+   )
+  },
+  'actual cyclic child aggregate',
+ );
+
+ my $live_token = bless {}, 'StagedASTEnrichmentTest::LiveToken';
+ my $live_authority = build_enrichment_authority(executor => sub { return $live_token });
+ capture_enrichment_error(
+  'staged_result_not_detached',
+  sub {
+   $live_authority->enrich_ast(
+    {payload => make_inert_marker(result_policy => 'replace_marker')},
+    enrichment_args(),
+   )
+  },
+  'blessed live child token',
+ );
+};
+
+subtest 'marker and result-target diagnostics fail before unsafe publication' => sub {
+ my @cases = (
+  {
+   id => 'missing replace target',
+   code => 'staged_stitch_target_missing',
+   marker => {result_policy => 'replace_field', into => 'ast'},
+   parent => sub { return {payload => $_[0]} },
+  },
+  {
+   id => 'sibling collision',
+   code => 'staged_stitch_target_collision',
+   marker => {result_policy => 'sibling_field', into => 'ast'},
+   parent => sub { return {payload => $_[0], ast => {kind => 'existing'}} },
+  },
+  {
+   id => 'append target wrong kind',
+   code => 'staged_append_target_invalid',
+   marker => {result_policy => 'append_child', into => 'children'},
+   parent => sub { return {payload => $_[0], children => {}} },
+  },
+ );
+ for my $case (@cases) {
+  my $calls = 0;
+  my $authority = build_enrichment_authority(executor => sub { ++$calls; return {kind => 'parsed'} });
+  my $marker = make_inert_marker(%{$case->{marker}});
+  my $parent = $case->{parent}->($marker);
+  capture_enrichment_error(
+   $case->{code},
+   sub { $authority->enrich_ast($parent, enrichment_args()) },
+   $case->{id},
+  );
+  is($calls, 0, "$case->{id} is rejected while validating the complete depth");
+  ok(LinkedSpec::StagedParseJob::is_marker($parent->{payload}), "$case->{id} leaves the caller AST untouched");
+ }
+
+ my $calls = 0;
+ my $stale_authority = build_enrichment_authority(
+  executor => sub { ++$calls; return {kind => 'parsed'} },
+ );
+ my $first = make_inert_marker(result_policy => 'replace_field', into => 'second');
+ my $second = make_inert_marker(result_policy => 'replace_marker');
+ my $stale_error = capture_enrichment_error(
+  'staged_marker_mismatch',
+  sub {
+   $stale_authority->enrich_ast(
+    {first => $first, second => $second},
+    enrichment_args(),
+   )
+  },
+  'stale marker after an earlier ordered stitch',
+ );
+ is($stale_error->{phase}, 'stitch', 'stale marker identity fails in the stitch phase');
+ is($calls, 1, 'the stale later marker is rejected before its child callback executes');
+};
+
+my $nested_callback_calls = 0;
+my $nested_marker = make_inert_marker(text => 'inner', result_policy => 'replace_marker');
+my $current_depth_authority = build_enrichment_authority(
+ executor => sub {
+  ++$nested_callback_calls;
+  return {kind => 'outer_result', child => $nested_marker};
+ },
+);
+my $outer_marker = make_inert_marker(text => 'outer', result_policy => 'replace_marker');
+my $current_depth_output = $current_depth_authority->enrich_ast(
+ {payload => $outer_marker},
+ enrichment_args(),
+);
+is($nested_callback_calls, 1, 'current-depth execution does not rescan a newly stitched result');
+ok(
+ LinkedSpec::StagedParseJob::is_marker($current_depth_output->{ast}{payload}{child}),
+ 'a newly stitched inert marker remains intact for the future next depth',
+);
+
+my $recursive_interface = LinkedSpec::StagedASTEnrichment->can('enrich_recursively');
+ok(
+ $recursive_interface,
+ 'Perl schedules newly stitched markers breadth-first with bounded decreasing chains and rebased diagnostics',
 );
 diag(
- 'expected RED: missing authority=[pre_registered_resolution,immutable_cache,result_failure_policies]'
- . '; marker=STAGED_PARSE_JOB_MARKER; sidecar=staged_parse_job_v2',
-) unless $scheduler_interface;
+ 'expected RED: missing authority=[breadth_first_recursive_scheduling,decreasing_chain_bounds,'
+ .'cancellation_resource_limits,source_rebased_diagnostics]'
+ .'; current_depth=complete; marker=STAGED_PARSE_JOB_MARKER; sidecar=staged_parse_job_v2',
+) unless $recursive_interface;
 
 done_testing();

@@ -2,7 +2,8 @@
 
 - Date: 2026-08-25
 - Status: accepted architecture; executable neutral authority complete under `FUTURE-PARITY-BACKLOG.14.7.2`;
-  backend behavior, recurrence, and public authoring remain pending
+  Perl private current-depth authority complete through `.14.7.3.2`; recurrence, admission, later backends, and
+  public authoring remain pending
 - Tags: architecture, staged-parsing, parse-job, source-location, registry, queue, policies, diagnostics, portability
 
 ## Context
@@ -163,6 +164,26 @@ source/match/parser/registry/path/callback/scheduler authority. Function-body v1
 now passes 120 assertions and fails only on `.14.7.3.2`'s absent caller-pre-registered resolution/cache plus result/
 failure-policy authority. No recursive queue, carrier reconstruction/generation, route, rollout, public inventory,
 or outward surface moves.
+
+Perl current-depth leaf `FUTURE-PARITY-BACKLOG.14.7.3.2` adds the separate unexported
+`LinkedSpec::StagedASTEnrichment` authority. Its constructor accepts only caller-completed candidate outcomes and
+immutable entries whose execution authority is an already-compiled callback; it copies and freezes alias,
+declaring-relative, ordered-root, ordered-provider, digest, top, version, capability, policy, and ceiling state.
+Post-AST resolution is pure and emits the exact missing/ambiguity/collision/top/version/capability/policy/source-
+detail denials. Default top selection precedes canonical v2 identity. Cache identity exactly covers the neutral
+content/import/top/version/sorted-effective-capability tuple and retains only locked execution plans, never child
+results or failures.
+
+The private engine discovers the complete initial marker depth, prepares every job before executing one, orders
+typed paths numerically and provenance/job identity deterministically, and gives every already-compiled callback a
+fresh cursor/mark/capture/variable request. It stitches detached node-bounded results through `replace_marker`,
+`replace_field`, `sibling_field`, or `append_child`; `fail` publishes no AST, while `keep_text` and
+`diagnostic_node` preserve one detached scheduler-sidecar diagnostic. Exact missing/collision/wrong-kind/stale-
+marker and live/cyclic/over-limit result denials are implemented. A newly returned inert marker is preserved but
+not rescanned. The dormant consumer now has 133 GREEN top-level checks and one `.14.7.3.3` RED for breadth-first
+recurrence, decreasing-chain/cycle and cancellation/resource bounds, and original-source diagnostic rebasing.
+Function-body v1, ordinary/canonical discovery, rollout, carriers, generated format, public inventory, outward
+surfaces, and other backends remain unchanged.
 
 ## Links
 

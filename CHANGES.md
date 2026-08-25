@@ -10,6 +10,26 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-26 — FUTURE-PARITY-BACKLOG.14.7.3.2 — add Perl staged current-depth authority
+
+- Added private `LinkedSpec::StagedASTEnrichment` over caller-prepared immutable candidate outcomes and logical
+  entries whose opaque execution authority is already a compiled callback. Runtime registry mutation, implicit
+  loading, and filesystem/provider/import/environment/network/compiler authority remain impossible.
+- Implemented pure alias/declaring-relative/ordered-root/ordered-provider selection with exact missing,
+  ambiguity, collision, top, version, capability, policy, source-detail, and cache-component diagnostics. Default
+  top selection now precedes the canonical v2 job digest.
+- Added the neutral immutable cache identity and isolated current-depth execution. The cache retains only locked
+  execution plans; every job runs on fresh cursor/mark/capture/variable inputs, and child results or failures are
+  never replayed from cache.
+- Implemented `replace_marker`, `replace_field`, `sibling_field`, `append_child`, `fail`, `keep_text`, and
+  `diagnostic_node` over an unpublished AST copy with detached node-bounded results and exact marker/target errors.
+- Advanced the same unrouted consumer to 133 GREEN top-level checks and one expected `.14.7.3.3` RED for
+  breadth-first recurrence, decreasing-chain/cancellation/resource bounds, and source-rebased diagnostics.
+  Function-body v1, recursive scanning, carriers, discovery, rollout, generated format, public inventory, outward
+  surfaces, and other backends remain unchanged.
+- Focused Perl and neutral direct-dependent checks pass at their exact prior counts; Knowledge, rendered mdBook,
+  continuity, doctrine, and exact no-scope-expansion proof accompany the atomic commit without a canonical trigger.
+
 ## 2026-08-26 — FUTURE-PARITY-BACKLOG.14.7.3.1 — add Perl staged annotation provenance
 
 - Added one private exclusive `STAGED_PARSE_JOB_MARKER` contract for exact assignment-form

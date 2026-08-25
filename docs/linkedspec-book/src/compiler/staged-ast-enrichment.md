@@ -1,7 +1,8 @@
 # Staged AST Enrichment Contract
 
 > Status: executable backend-neutral design. General `parse_job(...)` authoring is not yet available in shipped
-> parsers. Perl now has a deliberately dormant private marker/provenance carrier with a 120-pass/one-RED oracle;
+> parsers. Perl now has a deliberately dormant private marker plus caller-frozen current-depth authority with a
+> 133-pass/one-RED oracle;
 > the current shipped five-backend/six-runtime implementation still supports only the narrow function-body v1
 > adapter described below.
 
@@ -184,7 +185,7 @@ shared Lua source must run independently on PUC Lua and LuaJIT. The exact Perl c
 `dormant_red`, but it is not part of ordinary or canonical discovery. Perl, Rust, Dart, Julia, both Lua routes,
 six-runtime recurrence, public authoring/no-drift, and final recomposition retain their `.14.7.3-.10` owners.
 
-## Current private Perl declaration boundary
+## Current private Perl boundary
 
 The direct Perl oracle is:
 
@@ -192,14 +193,16 @@ The direct Perl oracle is:
 PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract.t
 ```
 
-It intentionally does not return success yet. The first 120 assertions prove the complete neutral inventory,
+It intentionally does not return success yet. The first 133 top-level checks prove the complete neutral inventory,
 unchanged function-body-v1 resolution/cache/compile/execute behavior, original wrong-top diagnostic context,
 exclusive marker lowering, strict literal options, typed direct/ordered-derived provenance, detached opaque
-sidecars, malformed/smuggled-text rejection, residual-helper closure, and recognition-transaction denial. The
-final assertion is the only failure:
+sidecars, malformed/smuggled-text rejection, residual-helper closure, recognition-transaction denial, frozen
+resolution, authority narrowing, v2 job/cache identity, current-depth typed ordering, sibling isolation, all seven
+policies, and detached result/diagnostic behavior. The final check is the only failure:
 
 ```text
-expected RED: missing authority=[pre_registered_resolution,immutable_cache,result_failure_policies];
+expected RED: missing authority=[breadth_first_recursive_scheduling,decreasing_chain_bounds,
+cancellation_resource_limits,source_rebased_diagnostics]; current_depth=complete;
 marker=STAGED_PARSE_JOB_MARKER; sidecar=staged_parse_job_v2
 ```
 
@@ -211,10 +214,45 @@ The sidecar contains exact materialized text and normalized options, but no sour
 registry, callback, path, queue, cancellation, deadline, or host handle. Detached snapshots cannot mutate marker
 state.
 
-The v1 registry still rejects `expr-v1` at `resolve`, so the new declaration does not load or execute a parser.
-Pre-registered resolution/cache and all result/failure policies belong to `.14.7.3.2`; recursive scheduling/bounds/
-diagnostics and fresh carrier admission remain `.3` and `.4`. The consumer stays outside ordinary and canonical
-discovery, and the language ledger classifies `parse_job` as private until the separately owned public closeout.
+The v1 registry still rejects `expr-v1` at `resolve`, so the new v2 path does not widen that adapter. Instead, the
+separate unexported `LinkedSpec::StagedASTEnrichment` module accepts only caller-completed candidate outcomes and
+entries whose opaque execution authority is an already-compiled callback. It freezes its own copy. Later calls to
+`register` or `load` are typed denials, and authored state cannot add a path, provider, import, environment,
+network, loading, or compilation operation.
+
+The private test exercises a shape equivalent to:
+
+```text
+trusted caller before authored execution
+  -> freeze aliases + relative candidates + ordered roots + ordered providers
+  -> freeze logical entry metadata + already-compiled callback
+
+complete stage-N AST
+  -> discover only its existing STAGED_PARSE_JOB_MARKER values
+  -> resolve and validate the whole current depth
+  -> normalize default top, then compute v2 job id and cache identity
+  -> execute by typed path/provenance/job id with a fresh child runtime context
+  -> detach and stitch success, or apply fail/keep_text/diagnostic_node
+  -> leave any newly returned marker untouched
+```
+
+For example, markers at `nodes[2]` and `nodes[10]` execute in that numeric order. Both may hit the same immutable
+compiled-plan cache key, but both callbacks still run on their own text and fresh cursor/mark/capture/variable
+maps. A failed first callback cannot poison a later hit. Parent input is never passed to a callback, and no partial
+working copy is published if `fail` or a stitch diagnostic aborts.
+
+All four success targets are active privately. `replace_marker` replaces only the opaque marker. The other three
+first restore its exact text, then replace an existing field, create an absent sibling, or append to an existing
+list. Missing replacement fields, sibling collisions, wrong-kind append targets, and a marker made stale by an
+earlier ordered stitch have distinct portable diagnostics. Live/cyclic/over-limit results reject before stitching;
+`keep_text` and `diagnostic_node` retain the same detached diagnostic in scheduler-sidecar output.
+
+This implementation intentionally stops after one complete depth. A detached child AST may contain another inert
+marker, but it is not rescanned. Recursive breadth-first scheduling, decreasing provenance and cycle checks,
+shared cancellation/deadline/step/call/depth/diagnostic bounds, and original-source diagnostic rebasing belong to
+`.14.7.3.3`; fresh native/reconstructed/generated/emitted carrier authority and admission remain `.4`. The
+consumer stays outside ordinary and canonical discovery, and the language ledger classifies `parse_job` as private
+until the separately owned public closeout.
 
 Publishing this boundary crossed the bounded `CHANGES.md` rollover threshold. The repository archived one complete
 218-line record set as immutable segment `4991`; ADR `0089` advances only the finite change-history collection and

@@ -15,9 +15,9 @@ answers:
   - "what did FUTURE-PARITY-BACKLOG.14.7.0 audit"
   - "what must happen before general staged AST enrichment"
 date: 2026-08-25
-status: current runtime audit; neutral authority complete; Perl private marker/provenance complete at .14.7.3.1; resolution through public implementation remains .14.7.3.2-.10
+status: current runtime audit; neutral authority and Perl private current-depth authority complete through .14.7.3.2; recursion through public implementation remains .14.7.3.3-.10
 tags: [staged-parsing, parse-job, diagnostics, registry, policies, recursive-queue, source-location, backend-parity]
-evidence: "Toolbox-first source/runtime proof establishes the shipped boundary: five source backends/six runtimes implement only actionir-body.spec/action_block, one-depth ordering, fixed cache identity, and function-specific replace_field/body_ast/fail. FUTURE-PARITY-BACKLOG.14.7.1 repairs wrong-top diagnostic parity. FUTURE-PARITY-BACKLOG.14.7.2 adds the separate executable neutral v2 authority. Perl .14.7.3.1 now adds only a dormant private marker/provenance declaration carrier; it performs no resolution, cache, policy stitch, scheduling, admission, or public authoring. Those remain .14.7.3.2-.10-owned."
+evidence: "Toolbox-first source/runtime proof establishes the shipped boundary: five source backends/six runtimes implement only actionir-body.spec/action_block, one-depth ordering, fixed cache identity, and function-specific replace_field/body_ast/fail. FUTURE-PARITY-BACKLOG.14.7.1 repairs wrong-top diagnostic parity. FUTURE-PARITY-BACKLOG.14.7.2 adds the separate executable neutral v2 authority. Perl .14.7.3.1-.2 now add a dormant private marker/provenance carrier plus caller-frozen pure resolution/cache, current-depth execution, all result/failure policies, and detachment. They perform no recursive scheduling/bounds/rebased diagnostics, carrier admission, or public authoring. Those remain .14.7.3.3-.10-owned."
 root_cause: "The first prototype deliberately separated a generic-looking registry record from a narrow trusted function-body integration. Compile helpers in Perl, Rust, and Dart were shaped around loaded parser identity plus top rule, so they synthesized a placeholder diagnostic record; Julia and Lua were implemented later with the complete job parameter but their formatter omitted payload_kind. Success-path and resolve-phase tests covered real context, but no cross-backend compile-phase assertion locked the ADR 0015 fields. Leaf .14.7.1 passes the normalized job through the three compile boundaries, adds payload_kind to the two later formatters, and locks all five source routes/six runtimes without expanding staged behavior."
 last_verified: 2026-08-25
 reverify:
@@ -59,11 +59,12 @@ real job context. `.14.7.1` now makes all five source backends/six runtimes repo
 `job_id`, parent path, parser and resolved identities, rejected top rule, payload kind, source span, and failure
 policy. This is diagnostic parity only. `.14.7.2` subsequently completes the separate executable neutral contract;
 runtime behavior still begins with the backend-owned `.14.7.3+` leaves. Perl `.14.7.3.0` froze the exact original
-missing-marker boundary. Perl `.14.7.3.1` now advances that same dormant test to 120 GREEN assertions and one
-missing-authority RED: the private exclusive marker, opaque sidecar, literal-option normalization, typed direct/
-ordered-derived provenance, detachment, malformed/smuggling rejection, and transaction closure exist, but no
-general parser is resolved, cached, run, or stitched. The consumer remains absent from ordinary and canonical
-discovery, so this is not admitted public `parse_job(...)` behavior.
+missing-marker boundary. Perl `.14.7.3.1-.2` now advance that same dormant test to 133 GREEN top-level checks and
+one recursive-authority RED. The private exclusive marker, opaque sidecar, literal-option normalization, typed
+direct/ordered-derived provenance, caller-frozen pure resolution, exact job/cache identity, current-depth isolated
+execution, all result/failure policies, detachment, malformed/smuggling rejection, and transaction closure exist.
+No stitched marker is rescanned; active-chain/resource bounds and source-rebased diagnostics remain `.3`. The
+consumer remains absent from ordinary and canonical discovery, so this is not admitted public behavior.
 
 The dependency plan then separates neutral contract, each backend, exact five-source/six-runtime recurrence,
 public `parse_job(...)` authoring, and independent recomposition. General staged dispatch reuses the typed source
@@ -78,4 +79,5 @@ no capacity or partition architecture changes. A raw grep also sees the root tre
 
 Related: [[function-body-staged-registry-dispatch]], [[staged-parser-registry-dispatch-contract]],
 [[staged-parse-job-annotation-contract]], [[general-staged-ast-enrichment-neutral-contract]],
+[[perl-staged-ast-enrichment-current-depth-authority]],
 [[progressive-span-dispatch-audit-plan]], and ADRs `0012`, `0014`, `0015`, `0016`, `0056`, and `0088`.

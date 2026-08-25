@@ -10,6 +10,29 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.3.2` — Perl staged current-depth authority): exact clean activation is
+  private-carrier commit `3a99202e`; this focused leaf owns only dormant native resolution/cache/current-depth
+  policy behavior.
+- ADR/Knowledge/Toolbox retrieval fixes the seam at post-AST pure selection. The new unexported authority freezes
+  caller-completed alias, relative, ordered-root/provider, entry, digest, top, version, capability, policy, ceiling,
+  and already-compiled callback data; there is no loader, compiler, path, provider, environment, or network path.
+- Resolution emits exact missing/ambiguity/collision denials. Version, top, capability, policy, and source-detail
+  checks only narrow caller authority. Default top is selected before the canonical v2 job digest, and exact cache
+  identity covers content/import/top/version plus sorted effective capabilities.
+- The cache stores only locked callback plans. A failed child and a successful retry share one plan key but both
+  execute; sibling requests have fresh cursor/mark/capture/variable aggregates and cannot reach the parent AST or
+  registry authority.
+- One complete discovered depth validates before callback execution and sorts array indices numerically. All four
+  success targets and three failure policies operate on an unpublished copy; results/diagnostics are detached and
+  node-bounded, and missing/colliding/wrong-kind/stale targets fail with portable codes.
+- A returned inert marker is accepted as logical detached data but deliberately not rescanned. The dormant oracle
+  has 133 GREEN top-level checks and one RED naming `.3` recurrence, chain/cancellation/resource bounds, and source-
+  rebased diagnostics. V1, carriers, discovery, rollout, format, public/outward surfaces, and other backends do not
+  move.
+- Seven direct-dependent Perl files pass 213 tests. Neutral staged 4/8/8+6/10/4+3/4+3/10/5/37/72, semantic
+  6/20/128, typed 12/2/170, progressive 9/9/116, recognition 138/250/58, generated/capability 80/0/0, and language
+  250/126 remain exact. Focused continuity/book/doctrine/no-drift proof completes before the atomic commit.
+
 - 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.3.1` — Perl staged annotation provenance): exact clean activation is
   dormant-boundary commit `4a982f21`; this focused leaf owns only the private marker/provenance declaration seam.
 - Toolbox lowering and descriptor probes locate the exact generic-assignment boundary. Runtime probes show that

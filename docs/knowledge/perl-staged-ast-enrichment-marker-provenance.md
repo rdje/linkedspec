@@ -13,12 +13,13 @@ answers:
   - "why is parse_job absent from the public language inventory"
   - "what is FUTURE-PARITY-BACKLOG 14.7.3.1"
 date: 2026-08-26
-status: current private dormant carrier; resolution/cache/policies pending FUTURE-PARITY-BACKLOG.14.7.3.2
+status: current private dormant carrier; consumed by current-depth authority in FUTURE-PARITY-BACKLOG.14.7.3.2
 tags: [perl, staged-parsing, parse-job, ActionIR, source-provenance, private, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.3.1 adds ActionIR::StagedParseJob, StagedParseJob, and StagedParseJobPolicy; privately retains regex match/capture offsets in LinkedRE; composes one exclusive STAGED_PARSE_JOB_MARKER into Contracts/ScannerCore; validates before execution; and classifies its recognition effect as parser_registry_or_staged_dispatch. The dormant consumer passes 120 assertions over exact lowering, opaque/detached sidecars, Unicode-scalar direct and ordered-derived spans, all eight neutral provenance cases, malformed/dynamic/smuggled rejection, unchanged function-body v1, and transaction denial, then fails only on missing pre-registered resolution/cache/result/failure authority. The neutral checker, language 250/126, rollout, discovery, carriers, formats, and outward guards remain unchanged."
+evidence_update_2026_08_26_current_depth: "FUTURE-PARITY-BACKLOG.14.7.3.2 consumes this unchanged inert carrier only after the complete AST returns. Private caller-prepared resolution/cache plus current-depth execution and all result/failure policies are now present; the same consumer advances to 133 GREEN top-level checks and one recursion/bounds/rebased-diagnostics RED. Declaration bytes, provenance rules, v1, discovery, carriers, rollout, generated format, and public/outward boundaries remain unchanged."
 reverify:
   - "perl -Iperl -c perl/LinkedSpec/ActionIR/StagedParseJob.pm && perl -Iperl -c perl/LinkedSpec/StagedParseJob.pm && perl -Iperl -c perl/LinkedSpec/StagedParseJobPolicy.pm"
-  - "test \"$(PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract.t 2>&1 | rg -c 'Failed 1/121 subtests|expected RED: missing authority=\\[pre_registered_resolution,immutable_cache,result_failure_policies\\]')\" -eq 2"
+  - "test \"$(PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract.t 2>&1 | rg -c 'Failed 1/134 subtests|expected RED: missing authority=\\[breadth_first_recursive_scheduling,decreasing_chain_bounds,cancellation_resource_limits,source_rebased_diagnostics\\]')\" -eq 2"
   - "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py && perl tools/check_language_capability_coverage.pl"
 ---
 
@@ -41,9 +42,12 @@ composition of those direct plans. Private match-info capture offsets are conver
 `concatenate_in_order`. Literal copied text, transformations, dynamic capture indices, copied-text fields inside
 provenance, reversed/out-of-range spans, and empty derived provenance fail closed.
 
-This carrier declares intent only. It does not resolve `expr-v1`, prepare immutable entries, cache, execute, stitch,
-or schedule recursively. It remains absent from ordinary/canonical discovery and explicitly non-public in the
-language inventory. Those next authorities belong to `.14.7.3.2-.4`.
+This carrier itself still declares intent only. Private `LinkedSpec::StagedASTEnrichment` now consumes it after a
+complete AST through caller-prepared resolution/cache, one current depth, and all stitch/failure policies. The
+carrier still owns no parser or authority and remains absent from ordinary/canonical discovery and explicitly
+non-public in the language inventory. Recursive scheduling/bounds/rebased diagnostics and fresh carrier admission
+remain `.14.7.3.3-.4`.
 
-Related: [[perl-staged-ast-enrichment-dormant-red]], [[general-staged-ast-enrichment-neutral-contract]],
+Related: [[perl-staged-ast-enrichment-dormant-red]], [[perl-staged-ast-enrichment-current-depth-authority]],
+[[general-staged-ast-enrichment-neutral-contract]],
 [[typed-source-location-cursor-algebra-direction]], and ADR `0088`.
