@@ -10,6 +10,21 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-25 (`FUTURE-PARITY-BACKLOG.14.6.5.4` — Julia progressive recomposition): exact clean activation is
+  Julia admission commit `7823f6fc`; this designated canonical closeout changes continuity, Knowledge, ADR, and
+  sole-facing book projections only.
+- The committed carrier remains 62/62 and independently proves native/reconstructed/generated-plan/included
+  emitted-module equality. Generated logical state still omits callbacks, registries, fingerprints, source
+  snapshots, cancellation, and mutable authority; the separate dormant authority remains 210/210.
+- Ordinary Julia and unchanged Perl 128/128, Dart 7/7, and cfg-enabled Rust 1/1 consumers agree with neutral
+  rollout 5/9/106. Typed 11/3/152, recognition 138/250/58, generated/capability 80/0/0, and language 250/126 pass.
+- The recomposition audit catches stale current Julia-pending prose in predecessor Perl/Rust/Dart admission cards.
+  This escaped because the neutral checker owns executable and outward paths, while the Knowledge Map gate proves
+  card/index freshness rather than cross-card semantic agreement. Correct current projections and a new causal
+  fact preserve the historical dated evidence and make the distinction retrievable.
+- Exact staged canonical proof closes `.14.6.5` without executable movement. Shared Lua `.14.6.6` is the next
+  task-tree-first frontier.
+
 - 2026-08-24 (`FUTURE-PARITY-BACKLOG.14.6.5.3` — Julia progressive admission): exact clean activation is
   carrier commit `35a2b56c`; this canonical leaf changes only discovery, trust-boundary routing, Julia rollout
   truth, dependent snapshots, and durable projections.

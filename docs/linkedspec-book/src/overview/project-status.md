@@ -24,7 +24,8 @@ authority routes while preserving dormant discovery. Its mandatory bounded-histo
 segment `4992`; ADR `0086` raises only finite collection/manifest capacity to 21/20 and makes `.2` a canonical
 boundary. Exact receipt-bound proof closes `.2`; `.3` moves the same 62-assertion carrier into ordinary discovery
 and one exact canonical route while retaining the dormant 210-assertion authority proof. Only Julia advances, to
-rollout 5/9/106; independent recomposition `.4` is next.
+rollout 5/9/106. Independent recomposition `.4` proves those committed owners unchanged, closes `.14.6.5`, and
+hands off shared Lua `.14.6.6`.
 
 This is consumer-aware work. The six live JSON projections and seven executable checkers now use stable decision
 authority ADR `0067`, and the chronology root contains no capability marker authority. Nine executable checkers
@@ -192,8 +193,14 @@ exact outer-cfg consumer is canonically routed once while ordinary discovery rem
 and gained one canonical route. The bounded capacity tree adds and recomposes Julia's semantic owner without
 changing backend behavior. Julia `.14.6.5.0` freezes the exact generic-call/four-carrier historical dormant RED,
 `.14.6.5.1` supplies its private immutable authority, `.14.6.5.2` adds the dedicated node plus four dormant fresh-
-authority carriers, and `.14.6.5.3` admits the unchanged carrier proof ordinarily and canonically; `.14.6.5.4`
-separately owns independent recomposition.
+authority carriers, and `.14.6.5.3` admits the unchanged carrier proof ordinarily and canonically. `.14.6.5.4`
+then independently reruns carrier 62/62, authority 210/210, ordinary Julia, and all direct dependents unchanged;
+it closes the Julia parent without behavior and hands off shared Lua.
+
+That recomposition also corrects stale current Julia-pending prose in the predecessor Perl, Rust, and Dart
+Knowledge cards. The executable neutral checker already governed runtime, contract, and outward paths exactly;
+Knowledge Map generation guarantees card/index freshness but does not infer semantic agreement across cards.
+The correction preserves dated historical evidence and records this retrieval-layer boundary explicitly.
 
 Behavior-free audit `.14.6.0` and ADR `0080` fix that boundary exactly. `parse_job(...)` remains unavailable and
 `dispatch_span(...)` is admitted only as a private Perl/Rust/Dart/Julia intrinsic, not a shared helper. Each backend's current staged registry accepts

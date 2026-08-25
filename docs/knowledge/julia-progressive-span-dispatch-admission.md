@@ -12,6 +12,7 @@ date: 2026-08-24
 status: current private Julia admission; Lua, recurrence, typed projection, and public no-drift pending
 tags: [julia, progressive-parsing, admission, ci, actionir, generated-source, task-tree]
 evidence: "FUTURE-PARITY-BACKLOG.14.6.5.3 moves the same seven-group, 62-assertion consumer to julia/test/progressive_span_dispatch_contract_test.jl and includes it exactly once from julia/test/runtests.jl. Canonical CI requires that tracked path, logs running exact Julia progressive span-dispatch admission consumer, and invokes its repository-routed include command exactly once. No dormant carrier duplicate remains. The fixture, private authority, dedicated node, and native/reconstructed/generated-plan/independently included emitted-module behavior are unchanged. Neutral governance promotes only Julia to 5/9 rollout and 106 mutations with 9 Rust + 8 Dart + 9 Julia carrier paths, one Lua guard/5 paths, 10 outward guards, and 26 diagnostics. The separate 210-assertion authority consumer remains under julia/test_dormant and outside ordinary/canonical discovery. Generated format, typed recurrence, public inventory, facade/schema/MCP/CLI/README, and outward surfaces do not move."
+evidence_update_2026_08_25_recomposition: "FUTURE-PARITY-BACKLOG.14.6.5.4 independently reruns the admitted 62-assertion carrier, separate 210-assertion authority matrix, complete ordinary Julia suite, and direct dependents without source or executable-contract changes. It closes Julia parent .14.6.5 at unchanged rollout 5/9/106 and hands off shared Lua .14.6.6."
 reverify:
   - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/progressive_span_dispatch_contract_test.jl\")'"
   - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using Pkg; Pkg.test()'"
@@ -32,6 +33,10 @@ This leaf changes no parser, compiler, runtime, generated format, registry autho
 only Julia's private rollout row. The authority matrix remains a separate dormant proof because ordinary carrier
 admission must not duplicate its 210 exhaustive core assertions. Shared Lua, recurring six-runtime composition,
 typed progressive projection, and public no-drift retain their separate owners.
+
+Independent recomposition under `.14.6.5.4` proves the admitted routes and authority boundary unchanged, closes
+the Julia parent, and repairs only stale current projections in the earlier Perl, Rust, and Dart admission cards.
+Their dated historical evidence remains intact.
 
 ## Links
 

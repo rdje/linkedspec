@@ -62,6 +62,9 @@ transaction-composition projection before neutral progressive behavior.
   outward paths. Julia's separate 210-assertion authority consumer remains dormant and directly runnable.
 - Backends must preserve one source identity and detached child results despite different native register units.
 - Neutral `.14.6.1`, backend `.2-.6`, recurrence `.7`, and public no-drift `.8` can be verified independently.
+- Julia closeout `.14.6.5.4` independently reruns its admitted 62-assertion carrier, separate 210-assertion
+  authority, complete ordinary discovery, neutral governance, and direct dependents without executable movement.
+  It closes Julia at unchanged 5/9/106 and hands off shared Lua `.14.6.6`.
 - This audit changes no grammar, parser/compiler/runtime, facade, schema, semantic/MCP, CLI, or README behavior.
 
 ## Links

@@ -10,6 +10,22 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-25 — FUTURE-PARITY-BACKLOG.14.6.5.4 — close Julia progressive dispatch
+
+- Activated task-tree-first from exact clean Julia-admission commit `7823f6fc`; changed no production, test,
+  fixture, executable contract, generated format, CI topology, rollout, typed recurrence, or outward surface.
+- Independently reran the committed Julia carrier at 62/62 and separate dormant authority at 210/210. Native,
+  reconstructed, generated-plan, and independently included emitted-module routes remain equal; serialized and
+  emitted state carries no callback, registry, fingerprint, source snapshot, cancellation, or mutable authority.
+- Complete ordinary Julia, Perl 128/128, Dart 7/7, cfg-enabled Rust 1/1, progressive 5/9/106, typed 11/3/152,
+  recognition 138/250/58, generated/capability 80/0/0, and language 250/126 all pass unchanged.
+- Independent review found stale current Julia-pending prose in the earlier Perl/Rust/Dart admission cards. The
+  executable neutral checker governs runtime/contract/outward paths, while Knowledge Map enforcement proves
+  derived-index freshness rather than semantic agreement across predecessor cards. Their bounded current
+  projections are corrected and a causal fact card is added without rewriting dated historical evidence.
+- ADR `0080`, Knowledge, sole-facing mdBook, bounded histories, task/index, README/memory, nine doctrines, exact
+  staged diff, and receipt-bound canonical CI close Julia parent `.14.6.5`. Shared Lua `.14.6.6` is next.
+
 ## 2026-08-24 — FUTURE-PARITY-BACKLOG.14.6.5.3 — admit private Julia progressive dispatch
 
 - Activated task-tree-first from exact clean Julia-carrier commit `35a2b56c`; moved the same Git blob from
