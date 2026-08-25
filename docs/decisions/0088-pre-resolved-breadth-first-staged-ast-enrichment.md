@@ -2,8 +2,8 @@
 
 - Date: 2026-08-25
 - Status: accepted architecture; executable neutral authority complete under `FUTURE-PARITY-BACKLOG.14.7.2`;
-  Perl private current-depth authority complete through `.14.7.3.2`; recurrence, admission, later backends, and
-  public authoring remain pending
+  Perl private recursive authority complete through `.14.7.3.3`; carriers/admission, later backends, and public
+  authoring remain pending
 - Tags: architecture, staged-parsing, parse-job, source-location, registry, queue, policies, diagnostics, portability
 
 ## Context
@@ -185,6 +185,21 @@ recurrence, decreasing-chain/cycle and cancellation/resource bounds, and origina
 Function-body v1, ordinary/canonical discovery, rollout, carriers, generated format, public inventory, outward
 surfaces, and other backends remain unchanged.
 
+Perl recursive leaf `FUTURE-PARITY-BACKLOG.14.7.3.3` adds `enrich_recursively` over the same private preparation,
+cache, stitch, and failure engine while preserving `enrich_ast` as one depth. Every complete depth resolves and
+validates before callbacks, then settles by typed path/provenance/job id; returned markers wait for the next depth.
+Private lineage frames bind normalized parser, top, exact-text SHA-256, full typed provenance, and job id. Exact
+tuple repeats fail as `staged_cycle`; same-parser/top recurrence requires every child segment be contained and
+total Unicode-scalar extent strictly decrease.
+
+One invocation narrows and spends caller/entry steps, calls, depth, cumulative result nodes, diagnostic bytes,
+cancellation identity, and absolute deadline without reset. Ephemeral callback contexts provide safe points and
+original-source position/span/diagnostic projection, then expire. Cross-segment derived spans remain ordered
+`concatenate_in_order` provenance. The dormant consumer now has 141 GREEN top-level checks and one `.14.7.3.4`
+RED for native/reconstructed/generated-plan/emitted fresh-authority carriers, admission, and Perl rollout.
+Function-body v1, neutral lifecycle/rollout, ordinary/canonical discovery, generated format, public inventory,
+outward surfaces, and other backends remain unchanged.
+
 ## Links
 
 - Owning task: `docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md`
@@ -192,4 +207,5 @@ surfaces, and other backends remain unchanged.
 - Typed source and bounded authority: ADRs `0056`, `0080`
 - Neutral artifact/checker: `capability_conformance/staged_ast_enrichment_contract.json`,
   `tools/check_staged_ast_enrichment_contract.py`
-- Knowledge: `docs/knowledge/general-staged-ast-enrichment-neutral-contract.md`
+- Knowledge: `docs/knowledge/general-staged-ast-enrichment-neutral-contract.md` and
+  `docs/knowledge/perl-staged-ast-enrichment-recursive-authority.md`

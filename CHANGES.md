@@ -10,6 +10,27 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-26 — FUTURE-PARITY-BACKLOG.14.7.3.3 — add Perl staged recursive authority
+
+- Added private `enrich_recursively` over the existing caller-frozen resolution/cache/policy engine. Every complete
+  depth resolves and validates before callbacks, settles in typed path/provenance/job-id order, and queues newly
+  returned markers only after all producing-depth siblings settle.
+- Added active lineage frames over normalized parser identity, selected top, SHA-256 of exact UTF-8 payload text,
+  and full typed provenance. Exact repeats are cycles; same-parser/top recurrence requires every child segment be
+  contained and total Unicode-scalar extent strictly decrease.
+- Added one shared invocation authority for cancellation identity/callback, absolute deadline, remaining steps,
+  total calls, maximum depth/calls, cumulative result nodes, and diagnostic bytes. Caller and entry ceilings only
+  narrow; ephemeral callback contexts provide safe points and expire at settlement.
+- Added original-source projection for child-local positions, spans, and nested diagnostics. Direct ranges remain
+  direct; cross-segment ranges remain ordered `concatenate_in_order` provenance; oversized diagnostics become the
+  exact bounded truncation sentinel.
+- Advanced the same unrouted consumer to 141 GREEN top-level checks and one expected `.14.7.3.4` RED for native,
+  reconstructed, generated-plan, and emitted fresh-authority carriers, ordinary/canonical admission, and Perl
+  rollout. Function-body v1, neutral lifecycle/rollout, generated format, public/outward surfaces, and other
+  backends remain unchanged.
+- Focused Perl and neutral direct-dependent checks pass; Knowledge, rendered mdBook, continuity, doctrine, and
+  exact no-carrier/no-admission/no-rollout proof accompany the atomic commit without a canonical trigger.
+
 ## 2026-08-26 — FUTURE-PARITY-BACKLOG.14.7.3.2 — add Perl staged current-depth authority
 
 - Added private `LinkedSpec::StagedASTEnrichment` over caller-prepared immutable candidate outcomes and logical

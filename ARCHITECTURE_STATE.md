@@ -21,7 +21,7 @@ checker passes 4 registry entries, 8 provenance, 8 resolution/6 authority, 10 ca
 reason-checked mutations. It reuses ADR `0056`'s source algebra and progressive authority narrowing without
 reusing `dispatch_span` syntax or elevating an authored parser id into filesystem authority.
 
-Perl private leaves `FUTURE-PARITY-BACKLOG.14.7.3.1-.2` now advance that same dormant final path without
+Perl private leaves `FUTURE-PARITY-BACKLOG.14.7.3.1-.3` now advance that same dormant final path without
 admission. `.1` makes exact assignment-form `parse_job(text_expr, literal_options)` one exclusive
 `STAGED_PARSE_JOB_MARKER`; malformed, dynamic, transformed, literal-copied, and non-annotation forms remain
 fail-closed. The opaque marker owns a detached `staged_parse_job_v2` sidecar containing normalized literal options,
@@ -32,11 +32,14 @@ the declaration effect. `.2` adds one unexported caller-frozen authority that re
 ordered-root/provider outcomes, validates top/version/capability/policy ceilings, normalizes the default top before
 the v2 digest, and caches only immutable compiled-callback plans under the exact neutral identity. One complete
 initial depth orders numeric paths correctly, gives siblings fresh runtime state, detaches/node-bounds results, and
-implements all four result plus three failure policies on an unpublished AST copy. Failures/results never poison
-the cache; missing/colliding/wrong-kind/stale targets and live/cyclic results reject. The final-path consumer now has
-133 GREEN top-level checks and one `.14.7.3.3` RED for recursive queue/decreasing-chain/cancellation-resource/
-rebased-diagnostic authority. It remains absent from ordinary/canonical discovery, and rollout, generated carriers/
-formats, language inventory, outward surfaces, and function-body v1 remain unchanged.
+implements all four result plus three failure policies on an unpublished AST copy. `.3` adds complete-depth
+breadth-first recurrence, exact-text/full-provenance chain tuples, strict lineage decrease/cycle checks, shared
+cancellation/deadline/step/call/depth/result/diagnostic authority, expiring callback safe points, and direct or
+ordered-derived original-source diagnostic rebasing. Failures/results never poison the cache; missing/colliding/
+wrong-kind/stale targets and live/cyclic results reject. The final-path consumer now has 141 GREEN top-level checks
+and one `.14.7.3.4` RED for fresh carriers/admission/Perl rollout. It remains absent from ordinary/canonical
+discovery, and rollout, generated carriers/formats, language inventory, outward surfaces, and function-body v1
+remain unchanged.
 
 The same slice's mandatory complete-record rollover publishes immutable change-history segment `4991`. ADR `0089`
 advances only finite route controls from 21/20 to 22 files / 21 manifest lines; the measured collection remains
@@ -49,7 +52,7 @@ id/path/parser/top/payload/span/failure context plus resolved built-in identity.
 diagnostics: success, resolution, execution, stitching, policies, queue depth, formats, capabilities, and outward
 surfaces stay fixed. Executable neutral contract `.2` is complete; backend parents `.3-.7`, recurrence `.8`,
 public authoring/closeout `.9`, and independent recomposition `.10` remain dependency-frozen behind it. Every
-runtime rollout leg and public/outward surface therefore remains pending; Perl recursive authority `.3.3` is next.
+runtime rollout leg and public/outward surface therefore remains pending; Perl carriers/admission `.3.4` are next.
 
 ## Typed transaction safety now composes the complete recognition authority
 

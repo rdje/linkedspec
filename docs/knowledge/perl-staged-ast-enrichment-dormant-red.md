@@ -1,6 +1,6 @@
 ---
 id: perl-staged-ast-enrichment-dormant-red
-title: Perl general staged-AST enrichment has private current-depth authority and stops before recursion
+title: Perl general staged-AST enrichment has private recursive authority and stops before carriers
 answers:
   - "where is the Perl staged AST enrichment dormant RED"
   - "what is the first Perl general parse_job failure"
@@ -15,13 +15,14 @@ answers:
   - "does the Perl dormant RED change function-body v1"
   - "which task adds Perl staged parse-job provenance"
 date: 2026-08-25
-status: current dormant RED at recursive queue/bounds/rebased diagnostics; private marker and current-depth authority complete
+status: current dormant RED at carriers/admission; private marker and recursive authority complete
 tags: [perl, staged-parsing, parse-job, ActionIR, source-provenance, RED, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.3.0 adds t/staged_ast_enrichment_perl_contract.t at its final path without phase-0 or canonical registration. The consumer passes 60 assertions over all neutral inventories, exact v1 registry phases/diagnostics, and descriptor body_ast stitching, then fails only because assignment-form parse_job remains ordinary ASSIGN with one unsupported-helper sentinel, zero raw dependencies, and no STAGED_PARSE_JOB_MARKER. LinkedSpec::StagedParserRegistry separately rejects expr-v1 at resolve. The neutral checker advances only this planned consumer from pending_absent to dormant_red; all semantic counts, 72 mutations, rollout, production, generated, and outward boundaries remain unchanged."
 evidence_update_2026_08_26_private_carrier: "FUTURE-PARITY-BACKLOG.14.7.3.1 advances the same consumer to 120 GREEN assertions and one RED for missing pre-registered resolution/cache/result/failure authority. Perl now owns one exclusive STAGED_PARSE_JOB_MARKER, an opaque detached staged_parse_job_v2 declaration sidecar, strict literal options, and ADR-0056 direct/ordered-derived provenance. Malformed/dynamic/smuggled forms and recognition-transaction reachability reject; v1 stays unchanged; ordinary/canonical discovery, carriers, rollout, generated format, public inventory, and outward surfaces remain fixed."
 evidence_update_2026_08_26_current_depth: "FUTURE-PARITY-BACKLOG.14.7.3.2 advances the same consumer to 133 GREEN top-level checks and one RED for missing breadth-first recurrence, decreasing-chain/cancellation/resource bounds, and source-rebased diagnostics. Perl now privately owns caller-frozen pure resolution, deterministic v2/cache identities, current-depth typed ordering, fresh sibling contexts, all four result and three failure policies, and detached results without adding a route or public behavior."
+evidence_update_2026_08_26_recursive: "FUTURE-PARITY-BACKLOG.14.7.3.3 advances the same consumer to 141 GREEN top-level checks and one RED for native/reconstructed/generated-plan/emitted fresh-authority carriers, ordinary/canonical admission, and Perl rollout promotion. Breadth-first recurrence, exact-text/full-provenance tuples, decreasing chains, shared cancellation/deadline/steps/calls/depth/result/diagnostic limits, ephemeral safe points, direct/derived source rebasing, and transaction closure are private and complete without a route or public behavior."
 reverify:
-  - "test \"$(PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract.t 2>&1 | rg -c 'Failed 1/134 subtests|expected RED: missing authority=\\[breadth_first_recursive_scheduling,decreasing_chain_bounds,cancellation_resource_limits,source_rebased_diagnostics\\]')\" -eq 2"
+  - "test \"$(PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract.t 2>&1 | rg -c 'Failed 1/142 subtests|expected RED: missing authority=\\[native_fresh_authority,reconstructed_fresh_authority,generated_plan_fresh_authority,emitted_module_fresh_authority,ordinary_canonical_admission,perl_rollout_promotion\\]')\" -eq 2"
   - "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py"
   - "test \"$(rg -c 't/staged_ast_enrichment_perl_contract[.]t' tools/run_ci_local.sh t/phase0_regression.t || true)\" -eq 0"
 ---
@@ -46,10 +47,12 @@ Malformed/dynamic options, transformed/literal copied text, copied-text smugglin
 generic calls, and uncommitted-recognition reachability fail closed. The narrow v1 registry still rejects
 `expr-v1`, so no accidental resolution or parser authority exists.
 
-The consumer's sole RED now requires `.14.7.3.3`'s breadth-first recursive queue, decreasing-chain/cycle and shared
-cancellation/resource limits, plus original-source diagnostic rebasing. Caller-prepared resolution/cache, one
-current depth, all result/failure policies, and detachment are GREEN. Fresh carriers/admission remain `.4`.
+The consumer's sole RED now requires `.14.7.3.4`'s native, reconstructed, generated-plan, and independently loaded
+emitted fresh-authority carriers plus ordinary/canonical admission and Perl rollout promotion. Caller-prepared
+resolution/cache, breadth-first recurrence, chain/resource bounds, source rebasing, all policies, and detachment
+are GREEN.
 
 Related: [[general-staged-ast-enrichment-neutral-contract]], [[general-staged-ast-current-boundary]],
 [[perl-staged-ast-enrichment-marker-provenance]], [[perl-staged-ast-enrichment-current-depth-authority]],
+[[perl-staged-ast-enrichment-recursive-authority]],
 [[function-body-staged-registry-dispatch]], and ADR `0088`.

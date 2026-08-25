@@ -1,8 +1,8 @@
 #------------------------------------------------------------------------------
 # Package: LinkedSpec::StagedASTEnrichment
-# Purpose: Apply one complete depth of dormant general staged-AST parse jobs
-#          through caller-prepared immutable parser authority. Recursive queue
-#          ownership deliberately remains outside this module's current API.
+# Purpose: Apply dormant general staged-AST parse jobs through caller-prepared
+#          immutable parser authority, either at one complete depth or through
+#          a bounded breadth-first recursive invocation.
 #------------------------------------------------------------------------------
 package LinkedSpec::StagedASTEnrichment;
 
@@ -12,12 +12,14 @@ use warnings;
 use utf8;
 
 use Digest::SHA qw(sha256_hex);
+use Encode qw(encode_utf8);
 use Hash::Util ();
 use JSON::PP ();
 use Scalar::Util qw(blessed refaddr);
 use LinkedSpec::StagedParseJob ();
 
 my %STATE_BY_ADDRESS;
+my %EXECUTION_CONTEXT_BY_ADDRESS;
 
 my $PARSER_ID_RE = qr/\A[a-z][a-z0-9]*(?:[._:\/-][a-z0-9]+)*\z/o;
 my $TOP_RULE_RE = qr/\A[A-Za-z_][A-Za-z0-9_]*\z/o;
@@ -119,9 +121,128 @@ sub new {
 
 sub enrich_ast {
  my ($self, $ast, %args) = @_;
- my $state = _state($self);
+ my $common = _validated_enrichment_args(\%args);
+ my $working = _clone_ast($ast);
+ my @discovered;
+ _discover_current_depth($working, [], \@discovered);
+ my $plans = _prepare_depth(
+  $self,
+  $working,
+  \@discovered,
+  $common,
+  1,
+  {},
+ );
+ my $settled = _execute_depth(
+  $self,
+  $working,
+  $plans,
+  undef,
+  {},
+ );
+ return {
+  ast => $working,
+  sidecars => [map { _clone_plain($_->{sidecar}) } @$plans],
+  diagnostics => $settled->{diagnostics},
+  cache => $self->cache_stats,
+ }
+}
+
+sub enrich_recursively {
+ my ($self, $ast, %args) = @_;
+ my $common = _validated_enrichment_args(\%args);
+ my $invocation = _validated_recursive_invocation(\%args, $common);
+ my $working = _clone_ast($ast);
+ my %processed_marker;
+ my %lineage_by_marker;
+ my @sidecars;
+ my @diagnostics;
+ my $depth = 1;
+
+ while (1) {
+  my @all_discovered;
+  _discover_current_depth($working, [], \@all_discovered);
+  my @discovered = grep {
+   !$processed_marker{refaddr($_->{marker})}
+  } @all_discovered;
+  last unless @discovered;
+
+  my $plans = _prepare_depth(
+   $self,
+   $working,
+   \@discovered,
+   $common,
+   $depth,
+   \%lineage_by_marker,
+  );
+  my $settled = _execute_depth(
+   $self,
+   $working,
+   $plans,
+   $invocation,
+   \%processed_marker,
+  );
+  $processed_marker{refaddr($_->{marker})} = 1 for @$plans;
+  @lineage_by_marker{keys %{$settled->{lineage_by_marker}}}
+   = values %{$settled->{lineage_by_marker}};
+  push @sidecars, map { _clone_plain($_->{sidecar}) } @$plans;
+  push @diagnostics, @{$settled->{diagnostics}};
+  ++$depth;
+ }
+
+ return {
+  ast => $working,
+  sidecars => \@sidecars,
+  diagnostics => \@diagnostics,
+  cache => $self->cache_stats,
+  resources => {
+   remaining_steps => $invocation->{remaining_steps},
+   total_calls => $invocation->{total_calls},
+   remaining_result_nodes => $invocation->{remaining_result_nodes},
+   remaining_diagnostic_bytes => $invocation->{remaining_diagnostic_bytes},
+  },
+ }
+}
+
+sub _evaluate_chain_case {
+ my ($case) = @_;
+ _internal_error('chain case must be a hash reference') unless ref($case) eq 'HASH';
+ for my $field (qw(
+  cancelled now deadline remaining_steps required_steps depth max_depth calls
+  max_calls active_tuple candidate_tuple same_parser_top_lineage
+  active_provenance candidate_provenance
+ )) {
+  _internal_error("chain case is missing $field") unless exists $case->{$field}
+ }
+ return {accepted => 0, diagnostic => 'staged_cancelled'} if $case->{cancelled};
+ return {accepted => 0, diagnostic => 'staged_deadline_exceeded'}
+  if $case->{now} > $case->{deadline};
+ return {accepted => 0, diagnostic => 'staged_budget_exhausted'}
+  if $case->{remaining_steps} < $case->{required_steps};
+ return {accepted => 0, diagnostic => 'staged_depth_exceeded'}
+  if $case->{depth} > $case->{max_depth};
+ return {accepted => 0, diagnostic => 'staged_call_limit_exceeded'}
+  if $case->{calls} > $case->{max_calls};
+ return {accepted => 0, diagnostic => 'staged_cycle'}
+  if $JSON->encode($case->{active_tuple}) eq $JSON->encode($case->{candidate_tuple});
+ return {accepted => 0, diagnostic => 'staged_chain_non_decreasing'}
+  if $case->{same_parser_top_lineage}
+   && !_strictly_decreases($case->{active_provenance}, $case->{candidate_provenance});
+ return {accepted => 1, diagnostic => undef}
+}
+
+sub _validated_enrichment_args {
+ my ($args) = @_;
+ if ($args->{transaction_active}) {
+  _throw(
+   code => 'staged_transaction_forbidden',
+   phase => 'execute',
+   origin => 'post_ast',
+   effect => 'parser_registry_or_staged_dispatch',
+  )
+ }
  my $declaring_spec_id = _required_scalar(
-  $args{declaring_spec_id},
+  $args->{declaring_spec_id},
   'declaring_spec_id',
  );
  _internal_error("invalid declaring_spec_id '$declaring_spec_id'")
@@ -129,33 +250,83 @@ sub enrich_ast {
    && index($declaring_spec_id, '..') < 0
    && substr($declaring_spec_id, 0, 1) ne '/';
  my $caller_capabilities = _normalized_string_set(
-  $args{caller_capabilities},
+  $args->{caller_capabilities},
   'caller_capabilities',
  );
  my $caller_policy_modes = _normalized_string_set(
-  $args{caller_policy_modes},
+  $args->{caller_policy_modes},
   'caller_policy_modes',
  );
  my $caller_ceilings = _validated_ceilings(
-  $args{caller_ceilings},
+  $args->{caller_ceilings},
   'caller_ceilings',
  );
  my $required_versions = _validated_versions(
-  $args{required_versions},
+  $args->{required_versions},
   'required_versions',
  );
  my $required_source_detail = _required_scalar(
-  $args{required_source_detail},
+  $args->{required_source_detail},
   'required_source_detail',
  );
  _internal_error("invalid required_source_detail '$required_source_detail'")
   unless exists $SOURCE_DETAIL_RANK{$required_source_detail};
+ return {
+  declaring_spec_id => $declaring_spec_id,
+  caller_capabilities => $caller_capabilities,
+  caller_policy_modes => $caller_policy_modes,
+  caller_ceilings => $caller_ceilings,
+  required_versions => $required_versions,
+  required_source_detail => $required_source_detail,
+ }
+}
 
- my $working = _clone_ast($ast);
- my @discovered;
- _discover_current_depth($working, [], \@discovered);
+sub _validated_recursive_invocation {
+ my ($args, $common) = @_;
+ my $cancelled = $args->{cancelled};
+ my $clock = $args->{clock};
+ _internal_error('cancelled must be a callback') unless ref($cancelled) eq 'CODE';
+ _internal_error('clock must be a callback') unless ref($clock) eq 'CODE';
+ _internal_error('cancellation_token must be defined')
+  unless exists($args->{cancellation_token}) && defined($args->{cancellation_token});
+ my $deadline = _nonnegative_number($args->{deadline}, 'deadline');
+ my $remaining_steps = _nonnegative_integer_value(
+  $args->{remaining_steps},
+  'remaining_steps',
+ );
+ $remaining_steps = $common->{caller_ceilings}{max_steps}
+  if $remaining_steps > $common->{caller_ceilings}{max_steps};
+ my $required_steps = _nonnegative_integer_value(
+  $args->{required_steps},
+  'required_steps',
+ );
+ my $max_depth = _positive_integer($args->{max_depth}, 'max_depth');
+ my $max_calls = _positive_integer($args->{max_calls}, 'max_calls');
+ my $total_calls = exists($args->{total_calls})
+  ? _nonnegative_integer_value($args->{total_calls}, 'total_calls')
+  : 0;
+ return {
+  cancellation_token => $args->{cancellation_token},
+  cancelled => $cancelled,
+  clock => $clock,
+  deadline => $deadline,
+  remaining_steps => $remaining_steps,
+  required_steps => $required_steps,
+  max_depth => $max_depth,
+  max_calls => $max_calls,
+  total_calls => $total_calls,
+  remaining_result_nodes => $common->{caller_ceilings}{max_result_nodes},
+  remaining_diagnostic_bytes => $common->{caller_ceilings}{max_diagnostic_bytes},
+ }
+}
+
+sub _prepare_depth {
+ my ($self, $working, $discovered, $common, $stage_depth, $lineage_by_marker) = @_;
+ my $state = _state($self);
+ my $declaring_spec_id = $common->{declaring_spec_id};
+
  my @plans;
- for my $row (@discovered) {
+ for my $row (@$discovered) {
   my $sidecar = LinkedSpec::StagedParseJob::sidecar_record($row->{marker});
   _internal_error('only declared staged_parse_job_v2 markers may be enriched')
    unless ($sidecar->{kind} // '') eq 'staged_parse_job_v2'
@@ -195,16 +366,16 @@ sub enrich_ast {
    entry_id => $resolved_spec_id,
    job_id => $job_id,
    top_rule => $top_rule,
-   caller_capabilities => $caller_capabilities,
+   caller_capabilities => $common->{caller_capabilities},
    required_capabilities => $sidecar->{required_capabilities},
-   caller_policy_modes => $caller_policy_modes,
+   caller_policy_modes => $common->{caller_policy_modes},
    required_policy_modes => [
     $sidecar->{result_policy},
     $sidecar->{failure_policy},
    ],
-   caller_ceilings => $caller_ceilings,
-   required_source_detail => $required_source_detail,
-   required_versions => $required_versions,
+   caller_ceilings => $common->{caller_ceilings},
+   required_source_detail => $common->{required_source_detail},
+   required_versions => $common->{required_versions},
   );
   my $cache_fields = {
    normalized_spec_id => $resolved_spec_id,
@@ -217,6 +388,13 @@ sub enrich_ast {
    backend_capabilities => $effective->{capabilities},
   };
   my $cache_key = cache_identity(__PACKAGE__, $cache_fields);
+  my $marker_address = refaddr($row->{marker});
+  my $stage_chain = $stage_depth == 1
+   ? []
+   : $lineage_by_marker->{$marker_address};
+  _internal_error('a recursively discovered marker has no immutable lineage')
+   unless ref($stage_chain) eq 'ARRAY';
+  my $payload_digest = _payload_digest($sidecar->{text});
   my $scheduler_sidecar = {
    %$sidecar,
    state => 'prepared',
@@ -226,8 +404,17 @@ sub enrich_ast {
    top_rule => $top_rule,
    job_id => $job_id,
    cache_key => $cache_key,
+   stage_depth => $stage_depth,
+   stage_chain => [map { _clone_plain($_->{tuple}) } @$stage_chain],
+   payload_digest => $payload_digest,
    effective => _clone_plain($effective),
   };
+  my $active_tuple = [
+   $resolved_spec_id,
+   $top_rule,
+   $payload_digest,
+   _clone_plain($sidecar->{provenance}),
+  ];
   push @plans, {
    marker => $row->{marker},
    path => _clone_plain($row->{path}),
@@ -235,6 +422,8 @@ sub enrich_ast {
    entry => $entry,
    cache_fields => $cache_fields,
    provenance_order => _provenance_order($sidecar->{provenance}),
+   active_tuple => $active_tuple,
+   active_frames => _clone_plain($stage_chain),
   };
  }
 
@@ -242,71 +431,109 @@ sub enrich_ast {
  for my $plan (@plans) {
   _validate_stitch_target($working, $plan)
  }
-
- my @diagnostics;
  for my $plan (@plans) {
+  $plan->{preflight_diagnostic} = _static_chain_diagnostic($plan)
+ }
+ for my $plan (@plans) {
+  next unless defined($plan->{preflight_diagnostic})
+   && $plan->{sidecar}{failure_policy} eq 'fail';
+  _throw(%{_bounded_diagnostic(undef, $plan, $plan->{preflight_diagnostic})})
+ }
+ return \@plans
+}
+
+sub _execute_depth {
+ my ($self, $working, $plans, $invocation, $processed_marker) = @_;
+ my $state = _state($self);
+ my @diagnostics;
+ my %lineage_by_marker;
+ for my $plan (@$plans) {
   _validate_stitch_target($working, $plan);
   my $sidecar = $plan->{sidecar};
-  my $cached = _cached_execution_plan($state, $plan);
-  my $request = {
-   stage_depth => 1,
-   stage_chain => [],
-   job_id => $sidecar->{job_id},
-   parent_ast_path => _clone_plain($sidecar->{parent_ast_path}),
-   node_kind => $sidecar->{node_kind},
-   payload_kind => $sidecar->{payload_kind},
-   parser_spec_id => $sidecar->{parser_spec_id},
-   resolved_spec_id => $sidecar->{resolved_spec_id},
-   top_rule => $sidecar->{top_rule},
-   text => $sidecar->{text},
-   source_provenance => _clone_plain($sidecar->{provenance}),
-   result_policy => $sidecar->{result_policy},
-   failure_policy => $sidecar->{failure_policy},
-   effective => _clone_plain($sidecar->{effective}),
-   runtime_context => {
-    cursor => 0,
-    marks => {},
-    captures => {},
-    variables => {},
-   },
-  };
+  my $diagnostic = $plan->{preflight_diagnostic};
   my ($returned, $callback_error);
-  {
-   local $@;
-   my $ok = eval {
-    $returned = $cached->{compiled_authority}->($request);
-    1
-   };
-   $callback_error = $@ unless $ok;
+  my $context;
+  unless (defined($diagnostic)) {
+   $diagnostic = _dispatch_resource_diagnostic($invocation, $plan, 1)
+    if defined($invocation);
+  }
+  unless (defined($diagnostic)) {
+   my $cached = _cached_execution_plan($state, $plan);
+   my $request = _child_request($plan, $invocation);
+   $context = _new_execution_context($invocation, $plan)
+    if defined($invocation);
+   {
+    local $@;
+    my $ok = eval {
+     $returned = defined($context)
+      ? $cached->{compiled_authority}->($request, $context)
+      : $cached->{compiled_authority}->($request);
+     1
+    };
+    $callback_error = $@ unless $ok;
+   }
+   _invalidate_execution_context($context) if defined($context);
+   if (!defined($callback_error) && defined($invocation)) {
+    $diagnostic = _dispatch_resource_diagnostic($invocation, $plan, 0)
+   }
   }
 
-  my ($result, $diagnostic);
-  if (defined($callback_error) && length("$callback_error")) {
-   $diagnostic = _child_failure_diagnostic($sidecar, $callback_error)
+  my ($result, $result_nodes);
+  if (!defined($diagnostic) && defined($callback_error) && length("$callback_error")) {
+   $diagnostic = is_error($callback_error)
+    && ($callback_error->{phase} // '') eq 'execute'
+    && ($callback_error->{job_id} // '') eq $sidecar->{job_id}
+    ? _clone_plain({%$callback_error})
+    : _child_failure_diagnostic($sidecar, $callback_error)
   } elsif (!defined($returned)) {
    $diagnostic = _child_failure_diagnostic(
     $sidecar,
     {code => 'staged_child_returned_undefined'},
-   )
-  } else {
-   my ($accepted, $detached, $failure) = _detach_result(
+   ) unless defined($diagnostic)
+  }
+  if (!defined($diagnostic)) {
+   my $maximum = $sidecar->{effective}{max_result_nodes};
+   $maximum = $invocation->{remaining_result_nodes}
+    if defined($invocation) && $invocation->{remaining_result_nodes} < $maximum;
+   my ($accepted, $detached, $failure, $nodes) = _detach_result(
     $returned,
-    $sidecar->{effective}{max_result_nodes},
+    $maximum,
     $sidecar,
    );
    if ($accepted) {
-    $result = $detached
+    $result = $detached;
+    $result_nodes = $nodes;
    } else {
     $diagnostic = $failure
    }
   }
 
   if (!defined($diagnostic)) {
+   $invocation->{remaining_result_nodes} -= $result_nodes
+    if defined($invocation);
+   my $child_chain = [
+    @{$plan->{active_frames}},
+    {
+     tuple => _clone_plain($plan->{active_tuple}),
+     resolved_spec_id => $sidecar->{resolved_spec_id},
+     top_rule => $sidecar->{top_rule},
+     payload_digest => $sidecar->{payload_digest},
+     provenance => _clone_plain($sidecar->{provenance}),
+     job_id => $sidecar->{job_id},
+    },
+   ];
+   _collect_new_marker_lineage(
+    $result,
+    $child_chain,
+    $processed_marker,
+    \%lineage_by_marker,
+   );
    _stitch_value($working, $plan, $result);
    $sidecar->{state} = 'succeeded';
    next
   }
 
+  $diagnostic = _bounded_diagnostic($invocation, $plan, $diagnostic);
   push @diagnostics, _clone_plain($diagnostic);
   $sidecar->{diagnostic} = _clone_plain($diagnostic);
   if ($sidecar->{failure_policy} eq 'fail') {
@@ -330,11 +557,402 @@ sub enrich_ast {
  }
 
  return {
-  ast => $working,
-  sidecars => [map { _clone_plain($_->{sidecar}) } @plans],
   diagnostics => \@diagnostics,
-  cache => $self->cache_stats,
+  lineage_by_marker => \%lineage_by_marker,
  }
+}
+
+sub _child_request {
+ my ($plan, $invocation) = @_;
+ my $sidecar = $plan->{sidecar};
+ my $request = {
+  stage_depth => $sidecar->{stage_depth},
+  stage_chain => _clone_plain($sidecar->{stage_chain}),
+  job_id => $sidecar->{job_id},
+  parent_ast_path => _clone_plain($sidecar->{parent_ast_path}),
+  node_kind => $sidecar->{node_kind},
+  payload_kind => $sidecar->{payload_kind},
+  parser_spec_id => $sidecar->{parser_spec_id},
+  resolved_spec_id => $sidecar->{resolved_spec_id},
+  top_rule => $sidecar->{top_rule},
+  text => $sidecar->{text},
+  source_provenance => _clone_plain($sidecar->{provenance}),
+  result_policy => $sidecar->{result_policy},
+  failure_policy => $sidecar->{failure_policy},
+  effective => _clone_plain($sidecar->{effective}),
+  runtime_context => {
+   cursor => 0,
+   marks => {},
+   captures => {},
+   variables => {},
+  },
+ };
+ if (defined($invocation)) {
+  $request->{stage_chain} = [
+   @{$request->{stage_chain}},
+   _clone_plain($plan->{active_tuple}),
+  ];
+  $request->{cancellation_token} = $invocation->{cancellation_token};
+  $request->{deadline} = $invocation->{deadline};
+  $request->{remaining_steps} = $plan->{job_remaining_steps};
+ }
+ return $request
+}
+
+sub _static_chain_diagnostic {
+ my ($plan) = @_;
+ my $sidecar = $plan->{sidecar};
+ for my $active (@{$plan->{active_frames}}) {
+  next unless ref($active) eq 'HASH' && ref($active->{tuple}) eq 'ARRAY';
+  if ($JSON->encode($active->{tuple}) eq $JSON->encode($plan->{active_tuple})) {
+   return {
+    code => 'staged_cycle',
+    phase => 'execute',
+    stage_chain => _clone_plain($sidecar->{stage_chain}),
+    job_id => $sidecar->{job_id},
+    active_tuple => _clone_plain($active->{tuple}),
+   }
+  }
+ }
+ for my $active (@{$plan->{active_frames}}) {
+  next unless ref($active) eq 'HASH'
+   && ($active->{resolved_spec_id} // '') eq $sidecar->{resolved_spec_id}
+   && ($active->{top_rule} // '') eq $sidecar->{top_rule};
+  next if _strictly_decreases($active->{provenance}, $sidecar->{provenance});
+  return {
+   code => 'staged_chain_non_decreasing',
+   phase => 'execute',
+   stage_chain => _clone_plain($sidecar->{stage_chain}),
+   job_id => $sidecar->{job_id},
+   provenance => _clone_plain($sidecar->{provenance}),
+   active_provenance => _clone_plain($active->{provenance}),
+  }
+ }
+ return undef
+}
+
+sub _strictly_decreases {
+ my ($parent, $child) = @_;
+ my $parent_segments = _provenance_segments($parent);
+ my $child_segments = _provenance_segments($child);
+ return 0 unless @$parent_segments && @$child_segments;
+ my $parent_extent = 0;
+ $parent_extent += $_->{end} - $_->{start} for @$parent_segments;
+ my $child_extent = 0;
+ $child_extent += $_->{end} - $_->{start} for @$child_segments;
+ return 0 unless $child_extent < $parent_extent;
+ for my $candidate (@$child_segments) {
+  my $contained = grep {
+   $_->{source_id} eq $candidate->{source_id}
+    && $_->{start} <= $candidate->{start}
+    && $candidate->{end} <= $_->{end}
+  } @$parent_segments;
+  return 0 unless $contained
+ }
+ return 1
+}
+
+sub _provenance_segments {
+ my ($provenance) = @_;
+ return [] unless ref($provenance) eq 'HASH';
+ return [$provenance] if ($provenance->{kind} // '') eq 'direct_span';
+ return $provenance->{segments}
+  if ($provenance->{kind} // '') eq 'derived_text'
+   && ref($provenance->{segments}) eq 'ARRAY';
+ return []
+}
+
+sub _dispatch_resource_diagnostic {
+ my ($invocation, $plan, $spend) = @_;
+ my $sidecar = $plan->{sidecar};
+ my $base = {
+  phase => 'execute',
+  stage_chain => _clone_plain($sidecar->{stage_chain}),
+  job_id => $sidecar->{job_id},
+ };
+ my $cancelled = eval { $invocation->{cancelled}->($invocation->{cancellation_token}) };
+ _internal_error('cancelled callback failed') if $@;
+ if ($cancelled) {
+  return {
+   %$base,
+   code => 'staged_cancelled',
+   resolved_spec_id => $sidecar->{resolved_spec_id},
+  }
+ }
+ my $now = eval { $invocation->{clock}->() };
+ _internal_error('clock callback failed') if $@;
+ _internal_error('clock callback returned an invalid tick')
+  unless _is_nonnegative_number($now);
+ if ($now > $invocation->{deadline}) {
+  return {
+   %$base,
+   code => 'staged_deadline_exceeded',
+   deadline => $invocation->{deadline},
+  }
+ }
+ if ($spend) {
+  my $cost = $invocation->{required_steps};
+  my $effective_remaining = $invocation->{remaining_steps};
+  $effective_remaining = $sidecar->{effective}{max_steps}
+   if $sidecar->{effective}{max_steps} < $effective_remaining;
+  if ($effective_remaining < $cost) {
+   return {
+    %$base,
+    code => 'staged_budget_exhausted',
+    remaining => $effective_remaining,
+   }
+  }
+  if ($sidecar->{stage_depth} > $invocation->{max_depth}) {
+   return {
+    %$base,
+    code => 'staged_depth_exceeded',
+    depth => $sidecar->{stage_depth},
+    maximum => $invocation->{max_depth},
+   }
+  }
+  my $candidate_calls = $invocation->{total_calls} + 1;
+  if ($candidate_calls > $invocation->{max_calls}) {
+   return {
+    %$base,
+    code => 'staged_call_limit_exceeded',
+    calls => $candidate_calls,
+    maximum => $invocation->{max_calls},
+   }
+  }
+  $invocation->{remaining_steps} -= $cost;
+  $invocation->{total_calls} = $candidate_calls;
+  $plan->{job_remaining_steps} = $effective_remaining - $cost;
+ }
+ return undef
+}
+
+sub _new_execution_context {
+ my ($invocation, $plan) = @_;
+ my $token = 0;
+ my $context = bless \$token, 'LinkedSpec::StagedASTEnrichment::ExecutionContext';
+ $EXECUTION_CONTEXT_BY_ADDRESS{refaddr($context)} = {
+  invocation => $invocation,
+  plan => $plan,
+  job_remaining_steps => $plan->{job_remaining_steps},
+  active => 1,
+ };
+ return $context
+}
+
+sub _execution_context_state {
+ my ($context) = @_;
+ my $state = blessed($context)
+  ? $EXECUTION_CONTEXT_BY_ADDRESS{refaddr($context)}
+  : undef;
+ _internal_error('staged execution context is invalid or expired')
+  unless ref($state) eq 'HASH' && $state->{active};
+ return $state
+}
+
+sub _invalidate_execution_context {
+ my ($context) = @_;
+ my $address = refaddr($context);
+ my $state = $EXECUTION_CONTEXT_BY_ADDRESS{$address};
+ $state->{active} = 0 if ref($state) eq 'HASH';
+ delete $EXECUTION_CONTEXT_BY_ADDRESS{$address};
+ return
+}
+
+sub _execution_safe_point {
+ my ($context, $cost) = @_;
+ my $state = _execution_context_state($context);
+ $cost = 0 unless defined $cost;
+ $cost = _nonnegative_integer_value($cost, 'safe-point cost');
+ my $diagnostic = _dispatch_resource_diagnostic(
+  $state->{invocation},
+  $state->{plan},
+  0,
+ );
+ _throw(%$diagnostic) if defined $diagnostic;
+ my $effective_remaining = $state->{invocation}{remaining_steps};
+ $effective_remaining = $state->{job_remaining_steps}
+  if $state->{job_remaining_steps} < $effective_remaining;
+ if ($effective_remaining < $cost) {
+  my $sidecar = $state->{plan}{sidecar};
+  _throw(
+   code => 'staged_budget_exhausted',
+   phase => 'execute',
+   stage_chain => _clone_plain($sidecar->{stage_chain}),
+   job_id => $sidecar->{job_id},
+   remaining => $effective_remaining,
+  )
+ }
+ $state->{invocation}{remaining_steps} -= $cost;
+ $state->{job_remaining_steps} -= $cost;
+ return $state->{invocation}{remaining_steps} < $state->{job_remaining_steps}
+  ? $state->{invocation}{remaining_steps}
+  : $state->{job_remaining_steps}
+}
+
+sub _collect_new_marker_lineage {
+ my ($value, $chain, $processed_marker, $out) = @_;
+ if (LinkedSpec::StagedParseJob::is_marker($value)) {
+  my $address = refaddr($value);
+  return if $processed_marker->{$address};
+  if (exists($out->{$address})) {
+   _internal_error('one returned marker acquired conflicting recursive lineages')
+    unless $JSON->encode($out->{$address}) eq $JSON->encode($chain);
+  } else {
+   $out->{$address} = _clone_plain($chain)
+  }
+  return
+ }
+ if (ref($value) eq 'HASH') {
+  _collect_new_marker_lineage($_, $chain, $processed_marker, $out)
+   for values %$value;
+ } elsif (ref($value) eq 'ARRAY') {
+  _collect_new_marker_lineage($_, $chain, $processed_marker, $out) for @$value;
+ }
+ return
+}
+
+sub _bounded_diagnostic {
+ my ($invocation, $plan, $diagnostic) = @_;
+ my $owned = _clone_plain($diagnostic);
+ return $owned unless defined $invocation;
+ my $maximum = $plan->{sidecar}{effective}{max_diagnostic_bytes};
+ $maximum = $invocation->{remaining_diagnostic_bytes}
+  if $invocation->{remaining_diagnostic_bytes} < $maximum;
+ my $bytes = length($JSON_UTF8->encode($owned));
+ if ($bytes > $maximum) {
+  $owned = {
+   code => 'staged_diagnostic_truncated',
+   phase => 'execute',
+   stage_chain => _clone_plain($plan->{sidecar}{stage_chain}),
+   job_id => $plan->{sidecar}{job_id},
+   maximum_bytes => $maximum,
+  };
+  $bytes = length($JSON_UTF8->encode($owned));
+ }
+ $invocation->{remaining_diagnostic_bytes} -= $bytes;
+ $invocation->{remaining_diagnostic_bytes} = 0
+  if $invocation->{remaining_diagnostic_bytes} < 0;
+ return $owned
+}
+
+sub _rebase_position {
+ my ($provenance, $offset) = @_;
+ $offset = _nonnegative_integer_value($offset, 'local source offset');
+ my $segments = _provenance_segments($provenance);
+ my $total = 0;
+ $total += $_->{end} - $_->{start} for @$segments;
+ _internal_error('local source offset is out of bounds') if $offset > $total;
+ if (@$segments == 1) {
+  return {
+   source_id => $segments->[0]{source_id},
+   offset => $segments->[0]{start} + $offset,
+  }
+ }
+ my $cursor = 0;
+ for my $segment (@$segments) {
+  my $length = $segment->{end} - $segment->{start};
+  if ($offset < $cursor + $length) {
+   return {
+    source_id => $segment->{source_id},
+    offset => $segment->{start} + $offset - $cursor,
+   }
+  }
+  $cursor += $length;
+ }
+ my $last = $segments->[-1];
+ return {source_id => $last->{source_id}, offset => $last->{end}}
+}
+
+sub _rebase_span {
+ my ($provenance, $span) = @_;
+ _internal_error('local source span must be a hash reference')
+  unless ref($span) eq 'HASH';
+ my $start = _nonnegative_integer_value($span->{start}, 'local source span start');
+ my $end = _nonnegative_integer_value($span->{end}, 'local source span end');
+ _internal_error('local source span is reversed') if $start > $end;
+ my $segments = _provenance_segments($provenance);
+ my $total = 0;
+ $total += $_->{end} - $_->{start} for @$segments;
+ _internal_error('local source span is out of bounds') if $end > $total;
+ if ($start == $end) {
+  my $position = _rebase_position($provenance, $start);
+  return {
+   kind => 'direct_span',
+   source_id => $position->{source_id},
+   start => $position->{offset},
+   end => $position->{offset},
+   provenance => 'staged_child_diagnostic',
+  }
+ }
+ my @rebased;
+ my $cursor = 0;
+ for my $segment (@$segments) {
+  my $length = $segment->{end} - $segment->{start};
+  my $segment_local_end = $cursor + $length;
+  my $overlap_start = $start > $cursor ? $start : $cursor;
+  my $overlap_end = $end < $segment_local_end ? $end : $segment_local_end;
+  if ($overlap_start < $overlap_end) {
+   push @rebased, {
+    kind => 'direct_span',
+    source_id => $segment->{source_id},
+    start => $segment->{start} + $overlap_start - $cursor,
+    end => $segment->{start} + $overlap_end - $cursor,
+    provenance => $segment->{provenance},
+   }
+  }
+  $cursor = $segment_local_end;
+ }
+ return $rebased[0] if @rebased == 1;
+ return {
+  kind => 'derived_text',
+  policy => 'concatenate_in_order',
+  segments => \@rebased,
+ }
+}
+
+sub _rebase_diagnostic {
+ my ($provenance, $diagnostic) = @_;
+ _internal_error('child diagnostic must be a hash reference')
+  unless ref($diagnostic) eq 'HASH';
+ return _clone_plain($diagnostic)
+  if (exists($diagnostic->{source_id}) && exists($diagnostic->{offset}))
+   || (($diagnostic->{kind} // '') eq 'direct_span')
+   || (($diagnostic->{kind} // '') eq 'derived_text');
+ my %copy;
+ for my $key (keys %$diagnostic) {
+  my $value = $diagnostic->{$key};
+  if ($key eq 'span' && ref($value) eq 'HASH'
+   && exists($value->{start}) && exists($value->{end})
+   && !exists($value->{kind})) {
+   $copy{$key} = _rebase_span($provenance, $value)
+  } elsif ($key eq 'position' && ref($value) eq 'HASH'
+   && exists($value->{offset}) && !exists($value->{source_id})) {
+   $copy{$key} = _rebase_position($provenance, $value->{offset})
+  } elsif ($key =~ /(?:\A|_)(?:offset)\z/
+   && _is_nonnegative_integer($value)) {
+   $copy{$key} = _rebase_position($provenance, $value)
+  } elsif (ref($value) eq 'HASH') {
+   $copy{$key} = _rebase_diagnostic($provenance, $value)
+  } elsif (ref($value) eq 'ARRAY') {
+   $copy{$key} = [map {
+    ref($_) eq 'HASH'
+     ? _rebase_diagnostic($provenance, $_)
+     : ref($_) ? _clone_plain($_) : $_
+   } @$value]
+  } elsif (ref($value)) {
+   $copy{$key} = _clone_plain($value)
+  } else {
+   $copy{$key} = $value
+  }
+ }
+ return \%copy
+}
+
+sub _payload_digest {
+ my ($text) = @_;
+ _internal_error('staged payload text must be a decoded scalar')
+  unless defined($text) && !ref($text);
+ return 'sha256:' . sha256_hex(encode_utf8($text))
 }
 
 sub resolve_pre_registered {
@@ -987,11 +1605,11 @@ sub _set_slot {
 
 sub _child_failure_diagnostic {
  my ($sidecar, $child_error) = @_;
- my $child = _portable_child_diagnostic($child_error);
+ my $child = _portable_child_diagnostic($child_error, $sidecar->{provenance});
  return {
   code => 'staged_child_failed',
   phase => 'execute',
-  stage_chain => [],
+  stage_chain => _clone_plain($sidecar->{stage_chain}),
   job_id => $sidecar->{job_id},
   parent_ast_path => _clone_plain($sidecar->{parent_ast_path}),
   node_kind => $sidecar->{node_kind},
@@ -1008,10 +1626,17 @@ sub _child_failure_diagnostic {
 }
 
 sub _portable_child_diagnostic {
- my ($value) = @_;
+ my ($value, $provenance) = @_;
  if (ref($value) eq 'HASH') {
   my ($accepted, $copy) = _detach_plain($value, 256, 0);
-  return $copy if $accepted
+  if ($accepted) {
+   my $rebased = eval { _rebase_diagnostic($provenance, $copy) };
+   return $rebased if ref($rebased) eq 'HASH' && !$@;
+   return {
+    code => _diagnostic_scalar($copy->{code}),
+    source_projection => 'invalid_local_range',
+   }
+  }
  }
  if (blessed($value) && eval { exists $value->{code} }) {
   return {code => _diagnostic_scalar($value->{code})}
@@ -1022,24 +1647,24 @@ sub _portable_child_diagnostic {
 sub _detach_result {
  my ($value, $maximum, $sidecar) = @_;
  my ($accepted, $copy, $nodes, $reason) = _detach_plain($value, $maximum, 1);
- return (1, $copy, undef) if $accepted;
+ return (1, $copy, undef, $nodes) if $accepted;
  if ($reason eq 'node_limit') {
   return (0, undef, {
    code => 'staged_result_node_limit_exceeded',
    phase => 'execute',
-   stage_chain => [],
+   stage_chain => _clone_plain($sidecar->{stage_chain}),
    job_id => $sidecar->{job_id},
    nodes => $nodes,
    maximum => $maximum,
-  })
+  }, $nodes)
  }
  return (0, undef, {
   code => 'staged_result_not_detached',
   phase => 'execute',
-  stage_chain => [],
+  stage_chain => _clone_plain($sidecar->{stage_chain}),
   job_id => $sidecar->{job_id},
   field => defined($reason) ? $reason : '<result>',
- })
+ }, $nodes)
 }
 
 sub _detach_plain {
@@ -1107,7 +1732,7 @@ sub _stitch_error {
  _throw(
   code => $code,
   phase => 'stitch',
-  stage_chain => [],
+  stage_chain => _clone_plain($plan->{sidecar}{stage_chain}),
   job_id => $plan->{sidecar}{job_id},
   parent_ast_path => _clone_plain($plan->{path}),
   %extra,
@@ -1228,6 +1853,36 @@ sub _is_nonnegative_integer {
  return defined($encoded) && $encoded =~ /\A(?:0|[1-9][0-9]*)\z/o ? 1 : 0
 }
 
+sub _nonnegative_integer_value {
+ my ($value, $context) = @_;
+ _internal_error("$context must be a nonnegative integer")
+  unless _is_nonnegative_integer($value);
+ return 0 + $value
+}
+
+sub _positive_integer {
+ my ($value, $context) = @_;
+ _internal_error("$context must be a positive integer")
+  unless _is_nonnegative_integer($value) && $value > 0;
+ return 0 + $value
+}
+
+sub _nonnegative_number {
+ my ($value, $context) = @_;
+ _internal_error("$context must be a nonnegative number")
+  unless _is_nonnegative_number($value);
+ return 0 + $value
+}
+
+sub _is_nonnegative_number {
+ my ($value) = @_;
+ return 0 unless defined($value) && !ref($value);
+ my $encoded = eval { $JSON->encode($value) };
+ return 0 unless defined($encoded)
+  && $encoded =~ /\A(?:0|[1-9][0-9]*)(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?\z/o;
+ return $value >= 0 ? 1 : 0
+}
+
 sub _has_exact_keys {
  my ($value, $fields) = @_;
  return 0 unless ref($value) eq 'HASH';
@@ -1259,6 +1914,67 @@ sub _internal_error {
 sub DESTROY {
  my ($self) = @_;
  delete $STATE_BY_ADDRESS{refaddr($self)} if ref $self;
+ return
+}
+
+#------------------------------------------------------------------------------
+# Package: LinkedSpec::StagedASTEnrichment::ExecutionContext
+# Purpose: Ephemeral callback-safe resource and original-source projection view.
+#------------------------------------------------------------------------------
+package LinkedSpec::StagedASTEnrichment::ExecutionContext;
+
+use 5.010;
+use strict;
+use warnings;
+
+sub safe_point {
+ my ($self, %args) = @_;
+ LinkedSpec::StagedASTEnrichment::_internal_error('safe_point fields drifted')
+  if grep { $_ ne 'cost' } keys %args;
+ return LinkedSpec::StagedASTEnrichment::_execution_safe_point(
+  $self,
+  exists($args{cost}) ? $args{cost} : 0,
+ )
+}
+
+sub remaining_steps {
+ my ($self) = @_;
+ my $state = LinkedSpec::StagedASTEnrichment::_execution_context_state($self);
+ return $state->{invocation}{remaining_steps} < $state->{job_remaining_steps}
+  ? $state->{invocation}{remaining_steps}
+  : $state->{job_remaining_steps}
+}
+
+sub rebase_position {
+ my ($self, $offset) = @_;
+ my $state = LinkedSpec::StagedASTEnrichment::_execution_context_state($self);
+ return LinkedSpec::StagedASTEnrichment::_rebase_position(
+  $state->{plan}{sidecar}{provenance},
+  $offset,
+ )
+}
+
+sub rebase_span {
+ my ($self, $span) = @_;
+ my $state = LinkedSpec::StagedASTEnrichment::_execution_context_state($self);
+ return LinkedSpec::StagedASTEnrichment::_rebase_span(
+  $state->{plan}{sidecar}{provenance},
+  $span,
+ )
+}
+
+sub rebase_diagnostic {
+ my ($self, $diagnostic) = @_;
+ my $state = LinkedSpec::StagedASTEnrichment::_execution_context_state($self);
+ return LinkedSpec::StagedASTEnrichment::_rebase_diagnostic(
+  $state->{plan}{sidecar}{provenance},
+  $diagnostic,
+ )
+}
+
+sub DESTROY {
+ my ($self) = @_;
+ delete $EXECUTION_CONTEXT_BY_ADDRESS{Scalar::Util::refaddr($self)} if ref $self;
  return
 }
 

@@ -5,6 +5,8 @@ use utf8;
 
 use FindBin qw($Bin);
 use lib "$Bin/../perl";
+use Digest::SHA qw(sha256_hex);
+use Encode qw(encode_utf8);
 use File::Spec ();
 use JSON::PP ();
 use Scalar::Util qw(refaddr);
@@ -101,7 +103,7 @@ sub build_enrichment_authority {
  for my $entry (@{$snapshot->{entries}}) {
   my $resolved_spec_id = $entry->{resolved_spec_id};
   $entry->{compiled_authority} = sub {
-   return $executor->($_[0], $resolved_spec_id)
+   return $executor->($_[0], $resolved_spec_id, $_[1])
   };
  }
  my $authority = LinkedSpec::StagedASTEnrichment->new(snapshot => $snapshot);
@@ -163,6 +165,61 @@ sub enrichment_args {
    helper_contract_version => 'actionir-v3',
    staged_contract_version => 2,
   },
+ )
+}
+
+sub recursive_args {
+ my (%overrides) = @_;
+ my %args = (
+  enrichment_args(),
+  cancellation_token => 'cancel:staged-contract',
+  cancelled => sub { return 0 },
+  clock => sub { return 0 },
+  deadline => 100,
+  remaining_steps => 100,
+  required_steps => 1,
+  max_depth => 8,
+  max_calls => 32,
+ );
+ $args{$_} = $overrides{$_} for keys %overrides;
+ return %args
+}
+
+sub make_derived_marker {
+ my (%args) = @_;
+ my $input = defined($args{input}) ? "$args{input}" : 'axb';
+ my $segments = $args{segments} // [[0, 1], [2, 3]];
+ my $options = {
+  node_kind => $args{node_kind} // 'expression',
+  payload_kind => $args{payload_kind} // 'embedded_expression',
+  spec => $args{spec} // 'expr',
+  result_policy => $args{result_policy} // 'replace_marker',
+  on_error => $args{on_error} // 'fail',
+  required_capabilities => clone_plain(
+   $args{required_capabilities} // [qw(staged-parse-job-v2 typed-source-location-v1)],
+  ),
+ };
+ $options->{top} = $args{top} if exists $args{top};
+ $options->{into} = $args{into} if exists $args{into};
+ my $entry_info = {
+  match_span => {start => 0, end => length($input)},
+  match_spans => [map { +{start => $_->[0], end => $_->[1]} } @$segments],
+ };
+ return LinkedSpec::StagedParseJob::construct_marker(
+  \$input,
+  $entry_info,
+  undef,
+  $args{origin} // 'contract:derived_parse_job',
+  $JSON->encode({
+   text_plan => {
+    kind => 'derived_text',
+    policy => 'concatenate_in_order',
+    segments => [map {
+     +{kind => 'direct_span', source => 'entry_group', index => $_}
+    } 0 .. $#$segments],
+   },
+   options => $options,
+  }),
  )
 }
 
@@ -1289,15 +1346,517 @@ ok(
  'a newly stitched inert marker remains intact for the future next depth',
 );
 
-my $recursive_interface = LinkedSpec::StagedASTEnrichment->can('enrich_recursively');
+subtest 'all ten neutral chain and resource rows are exact' => sub {
+ for my $case (@{$contract->{chain_cases}}) {
+  my $actual = LinkedSpec::StagedASTEnrichment::_evaluate_chain_case($case);
+  is(
+   $actual->{accepted} ? 1 : 0,
+   $case->{accepted} ? 1 : 0,
+   "$case->{id} preserves neutral chain acceptance",
+  );
+  is(
+   $actual->{diagnostic},
+   $case->{diagnostic},
+   "$case->{id} preserves the exact neutral diagnostic",
+  );
+ }
+};
+
+subtest 'recursive scheduling is breadth-first with one shared authority' => sub {
+ my %child = (
+  aaaa => make_inert_marker(text => 'a', result_policy => 'replace_marker'),
+  bbbb => make_inert_marker(text => 'b', result_policy => 'replace_marker'),
+ );
+ my @requests;
+ my @contexts;
+ my $authority = build_enrichment_authority(
+  executor => sub {
+   my ($request, $resolved_spec_id) = @_;
+   push @requests, clone_plain({
+    depth => $request->{stage_depth},
+    path => $request->{parent_ast_path},
+    stage_chain => $request->{stage_chain},
+    text => $request->{text},
+    token => $request->{cancellation_token},
+    remaining => $request->{remaining_steps},
+   });
+   push @{$request->{stage_chain}}, ['callback-local-tamper']
+    if $request->{text} eq 'aaaa';
+   push @contexts, $_[2] if defined $_[2];
+   return {kind => 'branch', child => $child{$request->{text}}}
+    if exists $child{$request->{text}};
+   return {kind => 'leaf', text => $request->{text}};
+  },
+ );
+ my $output = $authority->enrich_recursively(
+  {nodes => [
+   make_inert_marker(text => 'aaaa', result_policy => 'replace_marker'),
+   make_inert_marker(text => 'bbbb', result_policy => 'replace_marker'),
+  ]},
+  recursive_args(remaining_steps => 10),
+ );
+ is_deeply(
+  [map { [$_->{depth}, $_->{path}] } @requests],
+  [
+   [1, ['nodes', 0]],
+   [1, ['nodes', 1]],
+   [2, ['nodes', 0, 'child']],
+   [2, ['nodes', 1, 'child']],
+  ],
+  'all depth-one siblings settle before either newly stitched child executes',
+ );
+ is_deeply(
+  [map { scalar(@{$_->{stage_chain}}) } @requests],
+  [1, 1, 2, 2],
+  'callback-local chain mutation cannot alter scheduler lineage or later views',
+ );
+ is_deeply(
+  [map { scalar(@{$_->{stage_chain}[-1]}) } @requests],
+  [4, 4, 4, 4],
+  'every active-chain row is the exact parser/top/payload/provenance tuple',
+ );
+ is_deeply(
+  [map { $_->{token} } @requests],
+  [('cancel:staged-contract') x 4],
+  'one caller cancellation identity spans every depth',
+ );
+ is(scalar(@contexts), 4, 'every recursive callback receives one execution context');
+ is(
+  scalar(keys %{+{map { (refaddr($_) => 1) } @contexts}}),
+  4,
+  'sibling and child contexts are all fresh',
+ );
+ is($output->{resources}{total_calls}, 4, 'the shared total-call counter advances monotonically');
+ is($output->{resources}{remaining_steps}, 6, 'the shared step budget does not reset at a new depth');
+ is($output->{ast}{nodes}[0]{child}{text}, 'a', 'the first depth-two result stitches at its final path');
+ is($output->{ast}{nodes}[1]{child}{text}, 'b', 'the second depth-two result stitches at its final path');
+};
+
+subtest 'payload identity includes exact text and full typed provenance' => sub {
+ my $derived = make_derived_marker(
+  input => 'axb',
+  segments => [[0, 1], [2, 3]],
+  spec => 'xml.spec',
+  top => 'Document',
+ );
+ my $authority = build_enrichment_authority(
+  executor => sub {
+   my ($request, $resolved_spec_id) = @_;
+   return {kind => 'branch', child => $derived}
+    if $resolved_spec_id eq 'registry:expr-v2';
+   return {kind => 'leaf', text => $request->{text}};
+  },
+ );
+ my $output = $authority->enrich_recursively(
+  {payload => make_inert_marker(text => 'ab', result_policy => 'replace_marker')},
+  recursive_args(),
+ );
+ is(scalar(@{$output->{sidecars}}), 2, 'same text under a different parser and provenance schedules twice');
+ is(
+  $output->{sidecars}[0]{payload_digest},
+  'sha256:' . sha256_hex(encode_utf8('ab')),
+  'payload digest hashes the exact decoded text bytes',
+ );
+ is(
+  $output->{sidecars}[0]{payload_digest},
+  $output->{sidecars}[1]{payload_digest},
+  'equal exact text produces the same payload digest',
+ );
+ is($output->{sidecars}[0]{provenance}{kind}, 'direct_span', 'the parent retains direct provenance');
+ is($output->{sidecars}[1]{provenance}{kind}, 'derived_text', 'the child retains distinct ordered provenance');
+
+ my $smaller = make_derived_marker(
+  input => 'abcdef',
+  segments => [[1, 2], [4, 5]],
+  result_policy => 'replace_marker',
+ );
+ my $derived_calls = 0;
+ my $decreasing_authority = build_enrichment_authority(
+  executor => sub {
+   my ($request) = @_;
+   ++$derived_calls;
+   return {kind => 'branch', child => $smaller} if $request->{stage_depth} == 1;
+   return {kind => 'leaf', text => $request->{text}};
+  },
+ );
+ my $decreasing = $decreasing_authority->enrich_recursively(
+  {payload => make_derived_marker(
+   input => 'abcdef',
+   segments => [[0, 3], [3, 6]],
+   result_policy => 'replace_marker',
+  )},
+  recursive_args(),
+ );
+ is($derived_calls, 2, 'an actually contained smaller ordered-derived lineage executes at depth two');
+ is($decreasing->{ast}{payload}{child}{text}, 'be', 'the decreasing derived child stitches normally');
+};
+
+subtest 'actual recursive cycle and resource diagnostics are bounded and exact' => sub {
+ my @cases = (
+  {
+   id => 'exact tuple cycle',
+   code => 'staged_cycle',
+   outer => 'abc',
+   child => sub { make_inert_marker(text => 'abc', result_policy => 'replace_marker') },
+   overrides => {},
+  },
+  {
+   id => 'same parser/top non-decreasing lineage',
+   code => 'staged_chain_non_decreasing',
+   outer => 'abc',
+   child => sub { make_inert_marker(text => 'xyz', result_policy => 'replace_marker') },
+   overrides => {},
+  },
+  {
+   id => 'maximum depth',
+   code => 'staged_depth_exceeded',
+   outer => 'abcd',
+   child => sub { make_inert_marker(text => 'a', result_policy => 'replace_marker') },
+   overrides => {max_depth => 1},
+  },
+  {
+   id => 'maximum calls',
+   code => 'staged_call_limit_exceeded',
+   outer => 'abcd',
+   child => sub { make_inert_marker(text => 'a', result_policy => 'replace_marker') },
+   overrides => {max_calls => 1},
+  },
+  {
+   id => 'shared step budget',
+   code => 'staged_budget_exhausted',
+   outer => 'abcd',
+   child => sub { make_inert_marker(text => 'a', result_policy => 'replace_marker') },
+   overrides => {remaining_steps => 1},
+  },
+ );
+ for my $case (@cases) {
+  my $child = $case->{child}->();
+  my $calls = 0;
+  my $authority = build_enrichment_authority(
+   executor => sub {
+    my ($request) = @_;
+    ++$calls;
+    return {kind => 'branch', child => $child} if $request->{stage_depth} == 1;
+    return {kind => 'leaf'};
+   },
+  );
+  my $error = capture_enrichment_error(
+   $case->{code},
+   sub {
+    $authority->enrich_recursively(
+     {payload => make_inert_marker(text => $case->{outer}, result_policy => 'replace_marker')},
+     recursive_args(%{$case->{overrides}}),
+    )
+   },
+   $case->{id},
+  );
+  ok(ref($error->{stage_chain}) eq 'ARRAY', "$case->{id} retains a detached stage chain");
+  is($calls, 1, "$case->{id} never invokes the rejected depth-two child");
+ }
+
+ my $cancelled = 0;
+ my $cancel_authority = build_enrichment_authority(
+  executor => sub {
+   my ($request, $resolved, $context) = @_;
+   $cancelled = 1;
+   $context->safe_point(cost => 0);
+   return {kind => 'unreachable'};
+  },
+ );
+ capture_enrichment_error(
+  'staged_cancelled',
+  sub {
+   $cancel_authority->enrich_recursively(
+    {payload => make_inert_marker(result_policy => 'replace_marker')},
+    recursive_args(cancelled => sub { return $cancelled }),
+   )
+  },
+  'child cancellation safe point',
+ );
+
+ my $now = 0;
+ my $deadline_authority = build_enrichment_authority(
+  executor => sub {
+   my ($request, $resolved, $context) = @_;
+   $now = 11;
+   $context->safe_point(cost => 0);
+   return {kind => 'unreachable'};
+  },
+ );
+ capture_enrichment_error(
+  'staged_deadline_exceeded',
+  sub {
+   $deadline_authority->enrich_recursively(
+    {payload => make_inert_marker(result_policy => 'replace_marker')},
+    recursive_args(clock => sub { return $now }, deadline => 10),
+   )
+  },
+  'child deadline safe point',
+ );
+
+ my $dispatch_calls = 0;
+ my $dispatch_authority = build_enrichment_authority(
+  executor => sub { ++$dispatch_calls; return {kind => 'unreachable'} },
+ );
+ capture_enrichment_error(
+  'staged_cancelled',
+  sub {
+   $dispatch_authority->enrich_recursively(
+    {payload => make_inert_marker(result_policy => 'replace_marker')},
+    recursive_args(cancelled => sub { return 1 }),
+   )
+  },
+  'dispatch-entry cancellation',
+ );
+ capture_enrichment_error(
+  'staged_deadline_exceeded',
+  sub {
+   $dispatch_authority->enrich_recursively(
+    {payload => make_inert_marker(result_policy => 'replace_marker')},
+    recursive_args(clock => sub { return 11 }, deadline => 10),
+   )
+  },
+  'dispatch-entry deadline',
+ );
+ is($dispatch_calls, 0, 'dispatch-entry cancellation and deadline checks run before callbacks');
+};
+
+subtest 'result nodes and diagnostic bytes remain shared across depths' => sub {
+ my $child = make_inert_marker(text => 'a', result_policy => 'replace_marker');
+ my $node_authority = build_enrichment_authority(
+  executor => sub {
+   my ($request) = @_;
+   return {kind => 'branch', child => $child} if $request->{stage_depth} == 1;
+   return {kind => 'leaf'};
+  },
+ );
+ my %node_args = recursive_args();
+ $node_args{caller_ceilings}{max_result_nodes} = 4;
+ my $node_error = capture_enrichment_error(
+  'staged_result_node_limit_exceeded',
+  sub {
+   $node_authority->enrich_recursively(
+    {payload => make_inert_marker(text => 'abcd', result_policy => 'replace_marker')},
+    %node_args,
+   )
+  },
+  'cumulative result node ceiling',
+ );
+ is($node_error->{maximum}, 1, 'the next depth sees only the unspent result-node authority');
+
+ my $diagnostic_authority = build_enrichment_authority(
+  executor => sub {
+   die {
+    code => 'child_syntax_error',
+    detail => 'x' x 2_000,
+    span => {start => 0, end => 1},
+   }
+  },
+ );
+ my %diagnostic_args = recursive_args();
+ $diagnostic_args{caller_ceilings}{max_diagnostic_bytes} = 250;
+ my $diagnostic_output = $diagnostic_authority->enrich_recursively(
+  {payload => make_inert_marker(
+   text => 'abc',
+   result_policy => 'replace_marker',
+   on_error => 'diagnostic_node',
+  )},
+  %diagnostic_args,
+ );
+ is(
+  $diagnostic_output->{diagnostics}[0]{code},
+  'staged_diagnostic_truncated',
+  'an oversized detached child diagnostic becomes the exact bounded sentinel',
+ );
+ is(
+  $diagnostic_output->{diagnostics}[0]{maximum_bytes},
+  250,
+  'the truncation sentinel records the effective remaining byte ceiling',
+ );
+ ok(
+  $diagnostic_output->{resources}{remaining_diagnostic_bytes} < 250,
+  'the shared diagnostic-byte authority is monotonically spent',
+ );
+
+ my $observed_remaining;
+ my $narrow_authority = build_enrichment_authority(
+  executor => sub {
+   my ($request) = @_;
+   $observed_remaining = $request->{remaining_steps};
+   return {kind => 'parsed'};
+  },
+ );
+ my $narrow_output = $narrow_authority->enrich_recursively(
+  {payload => make_inert_marker(result_policy => 'replace_marker')},
+  recursive_args(remaining_steps => 1_000, required_steps => 0),
+ );
+ is($observed_remaining, 100, 'the entry max-steps ceiling narrows the child request');
+ is($narrow_output->{resources}{remaining_steps}, 500, 'the caller max-steps ceiling narrows shared authority');
+};
+
+subtest 'child-local positions, spans, and diagnostics rebase to original sources' => sub {
+ my $direct_authority = build_enrichment_authority(
+  executor => sub {
+   my ($request, $resolved, $context) = @_;
+   return {
+    kind => 'rebased',
+    position => $context->rebase_position(2),
+    span => $context->rebase_span({start => 1, end => 3}),
+    diagnostic => $context->rebase_diagnostic({
+     code => 'child_note',
+     position => {offset => 2},
+     span => {start => 1, end => 3},
+    }),
+   };
+  },
+ );
+ my $direct = $direct_authority->enrich_recursively(
+  {payload => make_inert_marker(text => 'abcd', result_policy => 'replace_marker')},
+  recursive_args(),
+ );
+ is_deeply($direct->{ast}{payload}{position}, {source_id => 'input', offset => 2}, 'direct local position rebases');
+ is_deeply(
+  $direct->{ast}{payload}{span},
+  {kind => 'direct_span', source_id => 'input', start => 1, end => 3, provenance => 'entry_text'},
+  'direct local span rebases without copied text',
+ );
+ is_deeply(
+  $direct->{ast}{payload}{diagnostic}{position},
+  {source_id => 'input', offset => 2},
+  'diagnostic position uses the same typed source projection',
+ );
+
+ my $derived_authority = build_enrichment_authority(
+  executor => sub {
+   my ($request, $resolved, $context) = @_;
+   return {
+    kind => 'rebased',
+    span => $context->rebase_span({start => 1, end => 3}),
+   };
+  },
+ );
+ my $derived = $derived_authority->enrich_recursively(
+  {payload => make_derived_marker(
+   input => 'abXYef',
+   segments => [[0, 2], [4, 6]],
+   result_policy => 'replace_marker',
+  )},
+  recursive_args(),
+ );
+ is_deeply(
+  $derived->{ast}{payload}{span},
+  {
+   kind => 'derived_text',
+   policy => 'concatenate_in_order',
+   segments => [
+    {kind => 'direct_span', source_id => 'input', start => 1, end => 2, provenance => 'entry_group'},
+    {kind => 'direct_span', source_id => 'input', start => 4, end => 5, provenance => 'entry_group'},
+   ],
+  },
+  'a cross-segment local span remains ordered derived provenance rather than a fake contiguous span',
+ );
+
+ my $failure_authority = build_enrichment_authority(
+  executor => sub {
+   die {
+    code => 'child_syntax_error',
+    position => {offset => 2},
+    span => {start => 1, end => 3},
+    related => [{position => {offset => 1}}],
+   }
+  },
+ );
+ my $failure = $failure_authority->enrich_recursively(
+  {payload => make_inert_marker(
+   text => 'abcd',
+   result_policy => 'replace_marker',
+   on_error => 'diagnostic_node',
+  )},
+  recursive_args(),
+ );
+ is_deeply(
+  $failure->{diagnostics}[0]{child_diagnostic}{span},
+  {kind => 'direct_span', source_id => 'input', start => 1, end => 3, provenance => 'entry_text'},
+  'automatic child-failure transport rebases local spans before scheduler retention',
+ );
+ is_deeply(
+  $failure->{diagnostics}[0]{child_diagnostic}{related}[0]{position},
+  {source_id => 'input', offset => 1},
+  'nested child-diagnostic positions rebase before detached retention',
+ );
+
+ my $invalid_local_authority = build_enrichment_authority(
+  executor => sub {
+   die {code => 'child_bad_range', span => {start => 0, end => 99}}
+  },
+ );
+ my $invalid_local = $invalid_local_authority->enrich_recursively(
+  {payload => make_inert_marker(
+   text => 'abcd',
+   result_policy => 'replace_marker',
+   on_error => 'diagnostic_node',
+  )},
+  recursive_args(),
+ );
+ is(
+  $invalid_local->{diagnostics}[0]{child_diagnostic}{code},
+  'child_bad_range',
+  'an invalid child-local range retains the portable child code',
+ );
+ is(
+  $invalid_local->{diagnostics}[0]{child_diagnostic}{source_projection},
+  'invalid_local_range',
+  'an invalid child-local range cannot escape as an untyped scheduler failure',
+ );
+};
+
+subtest 'recursive dispatch remains closed during recognition transactions' => sub {
+ my $authority = build_enrichment_authority();
+ my $error = capture_enrichment_error(
+  'staged_transaction_forbidden',
+  sub {
+   $authority->enrich_recursively(
+    {payload => make_inert_marker(result_policy => 'replace_marker')},
+    recursive_args(transaction_active => 1),
+   )
+  },
+  'live recognition transaction',
+ );
+ is($error->{origin}, 'post_ast', 'transaction closure names the post-AST dispatch boundary');
+ is($error->{effect}, 'parser_registry_or_staged_dispatch', 'transaction closure preserves the effect class');
+};
+
+subtest 'callback execution contexts expire after the callback boundary' => sub {
+ my $escaped;
+ my $authority = build_enrichment_authority(
+  executor => sub {
+   my ($request, $resolved, $context) = @_;
+   $escaped = $context;
+   return {kind => 'parsed'};
+  },
+ );
+ $authority->enrich_recursively(
+  {payload => make_inert_marker(result_policy => 'replace_marker')},
+  recursive_args(),
+ );
+ my $ok = eval { $escaped->remaining_steps; 1 };
+ ok(!$ok, 'an escaped callback context is unusable after callback settlement');
+ like($@, qr/invalid or expired/, 'expired context failure names the exact lifecycle boundary');
+};
+
+my $perl_admitted = $contract->{backend_consumers}[0]{status} eq 'complete'
+ && grep {
+  $_->{leg} eq 'perl_runtime' && $_->{status} eq 'complete'
+ } @{$contract->{rollout}};
 ok(
- $recursive_interface,
- 'Perl schedules newly stitched markers breadth-first with bounded decreasing chains and rebased diagnostics',
+ $perl_admitted,
+ 'Perl native, reconstructed, generated-plan, and emitted carriers run through fresh admitted authority',
 );
 diag(
- 'expected RED: missing authority=[breadth_first_recursive_scheduling,decreasing_chain_bounds,'
- .'cancellation_resource_limits,source_rebased_diagnostics]'
- .'; current_depth=complete; marker=STAGED_PARSE_JOB_MARKER; sidecar=staged_parse_job_v2',
-) unless $recursive_interface;
+ 'expected RED: missing authority=[native_fresh_authority,reconstructed_fresh_authority,'
+ .'generated_plan_fresh_authority,emitted_module_fresh_authority,ordinary_canonical_admission,'
+ .'perl_rollout_promotion]'
+ .'; recursive_queue=complete; chain_bounds=complete; resource_authority=complete; source_rebasing=complete',
+) unless $perl_admitted;
 
 done_testing();

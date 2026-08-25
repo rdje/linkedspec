@@ -744,11 +744,12 @@ fresh-authority carrier routes. Perl `.14.7.3.1-.2` now provide the dormant decl
 exact literal-option assignment annotations become one exclusive opaque marker with detached direct/ordered-
 derived typed provenance; one unexported authority accepts caller-frozen candidate outcomes and already-compiled
 callbacks, then performs pure resolution/cache, deterministic identity, isolated one-depth execution, every
-result/failure policy, and detached stitching. Malformed, smuggled, residual, recognition-reachable, ambiguous,
-authority-elevating, stale-target, live-result, and over-limit forms fail closed. Newly stitched markers are not
-rescanned. The final-path oracle has 133 GREEN top-level checks and fails only at `.14.7.3.3`'s recursive queue/
-bounds/rebased-diagnostic boundary. All discovery, rollout, generated carriers/formats, public inventory, and
-other backend consumers remain pending under their `.14.7.3-.7` owners.
+result/failure policy, detached stitching, breadth-first recurrence, exact-text/full-provenance chains, shared
+limits, callback safe points, and direct/ordered-derived source rebasing. Malformed, smuggled, residual,
+recognition-reachable, ambiguous, authority-elevating, stale-target, live-result, and over-limit forms fail closed.
+The final-path oracle has 141 GREEN top-level checks and fails only at `.14.7.3.4`'s fresh-carrier/admission/Perl-
+rollout boundary. All discovery, rollout, generated carriers/formats, public inventory, and other backend consumers
+remain pending under their `.14.7.3-.7` owners.
 
 Progressive dispatch is a separate synchronous path under `FUTURE-PARITY-BACKLOG.14.6`. Audit `.14.6.0` proves
 that none of these registries can invoke a normal loaded spec while a parser is active. The portable design uses

@@ -2,24 +2,28 @@
 
 ## Current Activity
 
-- Perl `.14.7.3.1-.2` implement the private dormant staged-parse declaration and current-depth authority boundary.
-- One exclusive marker carries typed provenance; one caller-frozen post-AST authority performs pure resolution/
-  cache, isolated one-depth callback execution, all four result and three failure policies, and detachment.
-- The same final-path oracle has 133 GREEN top-level checks and one RED for recursive queues, chain/cancellation/
-  resource bounds, and source-rebased diagnostics. Every ordinary/canonical/generated/public route stays pending.
+- Perl `.14.7.3.1-.3` implement the private dormant staged-parse declaration through recursive authority boundary.
+- One caller-frozen post-AST authority performs pure resolution/cache, breadth-first complete-depth execution, all
+  policies, decreasing chains, shared limits, callback safe points, source rebasing, and detachment.
+- The same final-path oracle has 141 GREEN top-level checks and one RED for fresh carriers, admission, and Perl
+  rollout. Every ordinary/canonical/generated/public route stays pending.
 
 ## Latest Completed Slice
 
-- `.14.7.3.2` adds caller-frozen pure resolution/cache, deterministic identity, current-depth isolated execution,
-  all result/failure policies, and detached stitching. It advances the unrouted consumer to 133-pass/one-RED while
-  preserving function-body v1 and every recursive/carrier/route/rollout/format/public boundary.
+- `.14.7.3.3` adds breadth-first recursive scheduling, exact-text/full-provenance chains, shared cancellation and
+  resource bounds, expiring safe-point contexts, and direct/derived source rebasing. It advances the unrouted
+  consumer to 141-pass/one-RED while preserving function-body v1 and every carrier/route/rollout/format/public
+  boundary.
 
 ## Next Action
 
-- Commit `.14.7.3.2` through the focused workflow, clear the brief, verify the clean handoff, then activate
-  `.14.7.3.3` task-tree-first for recursive scheduling, bounds, and source-rebased diagnostics.
+- Commit `.14.7.3.3` through the focused workflow, clear the brief, verify the clean handoff, then activate
+  `.14.7.3.4` task-tree-first for fresh carriers, ordinary/canonical admission, and Perl rollout promotion.
 
 ## Recent Completions
+
+- `2026-08-26` — `.14.7.3.3` adds Perl's private breadth-first recursive queue, decreasing chains, shared
+  cancellation/resources, safe points, and source rebasing; 141 top-level checks pass and only `.4` remains RED.
 
 - `2026-08-26` — `.14.7.3.2` adds Perl's private caller-frozen resolution/cache and all current-depth result/
   failure policies; 133 top-level checks pass and only `.3` recursive authority remains RED.
@@ -65,10 +69,6 @@
 
 - `2026-08-24` — `.14.6.5.3` moves the exact Julia carrier into ordinary discovery and one canonical route,
   promotes only Julia to progressive 5/9/106, and leaves authority, format, typed, and outward boundaries fixed.
-
-- `2026-08-24` — `.14.6.5.2` adds Julia's exclusive logical node plus four fresh-authority carriers, makes the
-  exact dormant consumer GREEN at 62/62, finitely admits history segment `4992` under ADR `0086`, and keeps
-  admission, rollout, format, typed, and outward boundaries fixed.
 
 ## History
 

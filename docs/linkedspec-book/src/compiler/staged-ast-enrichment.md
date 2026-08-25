@@ -1,8 +1,8 @@
 # Staged AST Enrichment Contract
 
 > Status: executable backend-neutral design. General `parse_job(...)` authoring is not yet available in shipped
-> parsers. Perl now has a deliberately dormant private marker plus caller-frozen current-depth authority with a
-> 133-pass/one-RED oracle;
+> parsers. Perl now has a deliberately dormant private marker plus caller-frozen recursive authority with a
+> 141-pass/one-RED oracle;
 > the current shipped five-backend/six-runtime implementation still supports only the narrow function-body v1
 > adapter described below.
 
@@ -193,17 +193,19 @@ The direct Perl oracle is:
 PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract.t
 ```
 
-It intentionally does not return success yet. The first 133 top-level checks prove the complete neutral inventory,
+It intentionally does not return success yet. The first 141 top-level checks prove the complete neutral inventory,
 unchanged function-body-v1 resolution/cache/compile/execute behavior, original wrong-top diagnostic context,
 exclusive marker lowering, strict literal options, typed direct/ordered-derived provenance, detached opaque
 sidecars, malformed/smuggled-text rejection, residual-helper closure, recognition-transaction denial, frozen
-resolution, authority narrowing, v2 job/cache identity, current-depth typed ordering, sibling isolation, all seven
-policies, and detached result/diagnostic behavior. The final check is the only failure:
+resolution, authority narrowing, v2 job/cache identity, complete-depth breadth-first ordering, sibling isolation,
+all seven policies, active-chain decrease/cycle checks, shared resources, child safe points, direct/derived source
+rebasing, and detached result/diagnostic behavior. The final check is the only failure:
 
 ```text
-expected RED: missing authority=[breadth_first_recursive_scheduling,decreasing_chain_bounds,
-cancellation_resource_limits,source_rebased_diagnostics]; current_depth=complete;
-marker=STAGED_PARSE_JOB_MARKER; sidecar=staged_parse_job_v2
+expected RED: missing authority=[native_fresh_authority,reconstructed_fresh_authority,
+generated_plan_fresh_authority,emitted_module_fresh_authority,ordinary_canonical_admission,
+perl_rollout_promotion]; recursive_queue=complete; chain_bounds=complete;
+resource_authority=complete; source_rebasing=complete
 ```
 
 That is an implementation boundary, not a user-facing defect. Perl recognizes only exact assignment annotations
@@ -220,7 +222,8 @@ entries whose opaque execution authority is an already-compiled callback. It fre
 `register` or `load` are typed denials, and authored state cannot add a path, provider, import, environment,
 network, loading, or compilation operation.
 
-The private test exercises a shape equivalent to:
+The private test exercises two entrypoints over one preparation/stitch engine. `enrich_ast(...)` preserves the
+completed one-depth boundary. `enrich_recursively(...)` owns the bounded queue:
 
 ```text
 trusted caller before authored execution
@@ -228,12 +231,13 @@ trusted caller before authored execution
   -> freeze logical entry metadata + already-compiled callback
 
 complete stage-N AST
-  -> discover only its existing STAGED_PARSE_JOB_MARKER values
-  -> resolve and validate the whole current depth
+  -> discover its current STAGED_PARSE_JOB_MARKER values
+  -> resolve and validate the complete depth before callbacks
   -> normalize default top, then compute v2 job id and cache identity
-  -> execute by typed path/provenance/job id with a fresh child runtime context
+  -> execute by typed path/provenance/job id with fresh child runtime state
   -> detach and stitch success, or apply fail/keep_text/diagnostic_node
-  -> leave any newly returned marker untouched
+  -> collect only newly returned markers for depth N+1
+  -> settle every depth-N sibling before starting depth N+1
 ```
 
 For example, markers at `nodes[2]` and `nodes[10]` execute in that numeric order. Both may hit the same immutable
@@ -247,12 +251,38 @@ list. Missing replacement fields, sibling collisions, wrong-kind append targets,
 earlier ordered stitch have distinct portable diagnostics. Live/cyclic/over-limit results reject before stitching;
 `keep_text` and `diagnostic_node` retain the same detached diagnostic in scheduler-sidecar output.
 
-This implementation intentionally stops after one complete depth. A detached child AST may contain another inert
-marker, but it is not rescanned. Recursive breadth-first scheduling, decreasing provenance and cycle checks,
-shared cancellation/deadline/step/call/depth/diagnostic bounds, and original-source diagnostic rebasing belong to
-`.14.7.3.3`; fresh native/reconstructed/generated/emitted carrier authority and admission remain `.4`. The
-consumer stays outside ordinary and canonical discovery, and the language ledger classifies `parse_job` as private
-until the separately owned public closeout.
+The callback-visible active chain contains one detached tuple per active job:
+
+```text
+[normalized parser id, selected top rule, SHA-256(exact UTF-8 text), full typed provenance]
+```
+
+An exact tuple repeat is `staged_cycle`. Merely changing text is not enough to make same-parser/top recursion safe:
+every child segment must be contained by an active segment, and the total Unicode-scalar extent must be smaller.
+This applies identically to one direct span and to an ordered derived segment list.
+
+One invocation shares cancellation identity/callback, absolute deadline, remaining steps, total calls, maximum
+depth/calls, cumulative result nodes, and diagnostic bytes across every depth. The caller ceiling and selected
+entry ceiling can only narrow the callback's view. An ephemeral second callback argument provides
+`safe_point(cost => N)`, `rebase_position`, `rebase_span`, and `rebase_diagnostic`; it expires as soon as the
+callback settles.
+
+For a derived payload formed from original spans `[0,2)` and `[4,6)`, child-local span `[1,3)` rebases as:
+
+```text
+derived concatenate_in_order [
+  { source_id: "input", start: 1, end: 2 },
+  { source_id: "input", start: 4, end: 5 }
+]
+```
+
+It never becomes the false contiguous span `[1,5)`. Oversized child diagnostics become the exact
+`staged_diagnostic_truncated` sentinel under the remaining byte authority; callback results consume the cumulative
+node authority only after detachment succeeds.
+
+Fresh native/reconstructed/generated/emitted carrier authority and admission remain `.14.7.3.4`. The consumer
+stays outside ordinary and canonical discovery, Perl rollout remains pending, and the language ledger classifies
+`parse_job` as private until the separately owned public closeout.
 
 Publishing this boundary crossed the bounded `CHANGES.md` rollover threshold. The repository archived one complete
 218-line record set as immutable segment `4991`; ADR `0089` advances only the finite change-history collection and

@@ -1,14 +1,14 @@
 # MEMORY
 
-- activation_commit: `3a99202ece0cf0c942d38aa7d8789a5690e76df3` — exact clean private-carrier base for
-  task-tree-first Perl current-depth authority `FUTURE-PARITY-BACKLOG.14.7.3.2`; brief cleared; no push.
-- latest_completed_leaf: intended `FUTURE-PARITY-BACKLOG.14.7.3.2 - add Perl staged current-depth authority`;
-  133 top-level checks are GREEN and the sole intentional RED is recursive queue/bounds/rebased diagnostics.
-- active_work_unit: none after the intended `.14.7.3.2` commit; Perl recursive authority `.14.7.3.3` follows the
+- activation_commit: `26809fe85337efca55fd2970cc4de2d1ca353232` — exact clean current-depth base for
+  task-tree-first Perl recursive authority `FUTURE-PARITY-BACKLOG.14.7.3.3`; brief cleared; no push.
+- latest_completed_leaf: intended `FUTURE-PARITY-BACKLOG.14.7.3.3 - add Perl staged recursive authority`;
+  141 top-level checks are GREEN and the sole intentional RED is fresh carriers/admission/Perl rollout.
+- active_work_unit: none after the intended `.14.7.3.3` commit; Perl carriers/admission `.14.7.3.4` follows the
   clean handoff.
-- next_action: from the exact clean `.14.7.3.2` commit, activate `FUTURE-PARITY-BACKLOG.14.7.3.3` task-tree-first
-  and add only breadth-first recurrence, decreasing-chain/resource limits, and source-rebased diagnostics.
-- in_flight_uncommitted: none after the intended `.14.7.3.2` commit; no background job remains.
+- next_action: from the exact clean `.14.7.3.3` commit, activate `FUTURE-PARITY-BACKLOG.14.7.3.4` task-tree-first
+  and add only fresh carriers, ordinary/canonical admission, Perl rollout promotion, and parent closure.
+- in_flight_uncommitted: none after the intended `.14.7.3.3` commit; no background job remains.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
@@ -50,11 +50,11 @@
   parents `.3-.7`, recurrence `.8`, public authored closeout `.9`, and recomposition `.10` are frozen in order.
   Diagnostic `.14.7.1` is complete; neutral `.14.7.2` freezes 4 registry entries, 8 provenance, 8 resolution/6
   authority, 10 cache, 4 queue/3 isolation, 4 result/3 failure policies, 10 chain, 5 detachment, 37 diagnostics,
-  9 rollout legs, 35 owners, and 72 mutations. Perl `.14.7.3.1-.2` now provide the private marker/provenance plus
-  caller-frozen resolution/cache/current-depth policy authority at 133 GREEN/one RED, with no recursive queue,
-  carrier, route, format, rollout, or public movement; recursive authority `.3.3` is next.
-- latest_bootstrap_read: 2026-08-26 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
-  review complete. `.14.7.3.2` uses the same final-path dormant consumer to preserve function-body v1 and prove
-  only private current-depth authority/policy behavior; recursion, carriers, generated formats, rollout, and
-  outward surfaces do not move. Intended commit: `FUTURE-PARITY-BACKLOG.14.7.3.2 - add Perl staged current-depth
-  authority`; `.3.3` is next.
+  9 rollout legs, 35 owners, and 72 mutations. Perl `.14.7.3.1-.3` now provide the private marker/provenance,
+  caller-frozen resolution/cache/policies, breadth-first recurrence, strict chains/shared resources, and source
+  rebasing at 141 GREEN/one RED, with no carrier, route, format, rollout, or public movement; carriers/admission
+  `.3.4` are next.
+- latest_bootstrap_read: 2026-08-26 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox are
+  reviewed. `.14.7.3.3` preserves v1 and adds only private recursive authority; carriers, formats, rollout, and
+  outward surfaces do not move. Intended commit: `FUTURE-PARITY-BACKLOG.14.7.3.3 - add Perl staged recursive
+  authority`; `.3.4` is next.

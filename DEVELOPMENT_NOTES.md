@@ -10,6 +10,25 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.3.3` — Perl staged recursive authority): exact clean activation is
+  current-depth commit `26809fe8`; this focused leaf owns only dormant native recurrence, bounds, and rebasing.
+- The existing preparation/stitch engine now serves unchanged `enrich_ast` and bounded `enrich_recursively`.
+  Recursive discovery completes one depth at a time; all jobs resolve, narrow authority, and validate targets before
+  callbacks; typed path/provenance/job ordering settles every sibling before next-depth work.
+- Private lineage frames bind parser, top, exact-text digest, full typed provenance, and job id. Callback-visible
+  tuples are detached. Exact repeats fail as `staged_cycle`; same-parser/top children must have every segment
+  contained in an active segment and strictly smaller total scalar extent.
+- One invocation narrows caller steps to caller and entry maxima, shares cancellation/deadline/steps/calls/depth,
+  cumulatively spends result nodes and diagnostic bytes, and never resets at a new parser or depth. Ephemeral
+  contexts support safe points and expire after callbacks.
+- Child-local positions/spans/nested diagnostics rebase through direct or ordered-derived provenance. A range that
+  crosses segments retains `concatenate_in_order`; oversized diagnostics become `staged_diagnostic_truncated`.
+  Recognition transactions remain closed, and fail paths publish no parent AST.
+- The dormant oracle has 141 GREEN top-level checks and one exact `.4` carrier/admission RED. Seven adjacent Perl
+  files pass 230 tests. Neutral staged 4/8/8+6/10/4+3/4+3/10/5/37/72, semantic 6/20/128, typed 12/2/170,
+  progressive 9/9/116, recognition 138/250/58, generated/capability 80/0/0, and language 250/126 remain exact.
+  Focused continuity/book/doctrine/no-drift proof completes before the atomic commit; no canonical trigger exists.
+
 - 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.3.2` — Perl staged current-depth authority): exact clean activation is
   private-carrier commit `3a99202e`; this focused leaf owns only dormant native resolution/cache/current-depth
   policy behavior.
