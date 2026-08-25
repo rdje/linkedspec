@@ -6,8 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-25` (progressive `.14.6` and staged `.14.7.0-.2` are committed through exact clean
-  `ab8802c94f3a0b65fc4d1e44f9a960e3c5b0c69c`; Perl dormant-boundary `.14.7.3.0` is task-tree-active)
+- Last updated: `2026-08-26` (progressive `.14.6` and staged `.14.7.0-.3.0` are committed through exact clean
+  `4a982f21a2980c1235da772d3396749f7aaed516`; Perl private-node/provenance `.14.7.3.1` is focused-signoff-complete
+  and `.14.7.3.2` follows its atomic clean handoff)
 - Owner: repo-local workflow
 
 ## Goal
@@ -117,7 +118,9 @@ preserves its historical 85-pass/one-RED boundary, `.1` supplies private authori
 four dormant carriers GREEN at 178/178 per ABI, and `.3` admits that same consumer once per ABI through ordinary
 and exact canonical routes without production, format, typed, or outward movement. Recomposition `.6.4`, recurrence
 `.7`, and public no-drift `.8` are committed. Staged `.14.7.0-.2` are committed through neutral executable
-authority at `ab8802c9`; Perl dormant-boundary `.14.7.3.0` is the active task-tree-first frontier, while combined
+authority at `ab8802c9`; Perl dormant-boundary `.14.7.3.0` is committed at `4a982f21`, and private dedicated
+annotation/typed-provenance `.14.7.3.1` is focused-signoff-complete with resolution/cache/policies `.14.7.3.2`
+next after its atomic clean handoff, while combined
 program-wide `.14.8` remains a separate owner. Mandatory segment `4992` is finitely authorized by ADR `0086` at
 21 change-history files / 20 manifest lines and makes `.14.6.5.2` a canonical boundary.
 

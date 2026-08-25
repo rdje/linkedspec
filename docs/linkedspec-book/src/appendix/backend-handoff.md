@@ -740,8 +740,13 @@ That oracle is now executable. ADR `0088`, `capability_conformance/staged_ast_en
 authority, typed direct/ordered-derived provenance, deterministic v2 ids, breadth-first depth/path/provenance/id
 ordering, fresh sibling contexts, all four result and three failure policies, decreasing provenance chains,
 shared cancellation/resources, detached results, 37 portable diagnostics, explicit v1 compatibility, and four
-fresh-authority carrier routes. Only neutral rollout is complete; backend consumers remain absent until their
-`.14.7.3-.7` RED owners activate.
+fresh-authority carrier routes. Perl `.14.7.3.1` now provides only the dormant declaration boundary: exact literal-
+option assignment annotations become one exclusive opaque marker with detached direct/ordered-derived typed
+provenance; malformed, smuggled, residual, and recognition-reachable forms fail closed. It does not resolve,
+cache, execute, stitch, schedule recursively, or serialize authority. Its final-path oracle passes 120 assertions
+and fails only at `.14.7.3.2`'s missing pre-registered resolution/cache/result/failure authority. All discovery,
+rollout, generated carriers/formats, public inventory, and other backend consumers remain pending under their
+`.14.7.3-.7` owners.
 
 Progressive dispatch is a separate synchronous path under `FUTURE-PARITY-BACKLOG.14.6`. Audit `.14.6.0` proves
 that none of these registries can invoke a normal loaded spec while a parser is active. The portable design uses

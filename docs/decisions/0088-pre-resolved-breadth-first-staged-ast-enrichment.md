@@ -153,6 +153,17 @@ shipping behavior. Sixty neutral/v1 assertions pass; the sole intentional RED pr
 The consumer is absent from ordinary and canonical discovery, the Perl rollout remains pending, and `.14.7.3.1`
 retains exclusive ownership of the private marker/sidecar plus typed provenance carrier.
 
+Perl private-carrier leaf `FUTURE-PARITY-BACKLOG.14.7.3.1` now implements exactly that owned boundary while the
+same consumer remains dormant. One exclusive assignment annotation lowers to `STAGED_PARSE_JOB_MARKER`; its opaque
+marker owns a detached `staged_parse_job_v2` declaration sidecar with normalized literal options, exact materialized
+text, and typed direct or ordered-derived provenance. The carrier validates through ADR `0056`'s existing source
+algebra, rejects malformed/dynamic options, transformed or literal copied text, copied-text smuggling, invalid
+spans, empty derived provenance, residual generic calls, and recognition-transaction reachability, and retains no
+source/match/parser/registry/path/callback/scheduler authority. Function-body v1 is unchanged. The dormant consumer
+now passes 120 assertions and fails only on `.14.7.3.2`'s absent caller-pre-registered resolution/cache plus result/
+failure-policy authority. No recursive queue, carrier reconstruction/generation, route, rollout, public inventory,
+or outward surface moves.
+
 ## Links
 
 - Owning task: `docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md`

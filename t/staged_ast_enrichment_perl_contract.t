@@ -10,6 +10,9 @@ use JSON::PP ();
 use Test::More;
 
 use LinkedSpec ();
+use LinkedSpec::ActionIR::StagedParseJob ();
+use LinkedSpec::SourceLocation ();
+use LinkedSpec::StagedParseJob ();
 use LinkedSpec::StagedParserRegistry ();
 
 sub slurp_json {
@@ -35,6 +38,23 @@ sub occurrences {
   $offset += length($needle);
  }
  return $count
+}
+
+sub forbidden_key_hits {
+ my ($value, $forbidden, $path) = @_;
+ $path = '$' unless defined($path);
+ my @hits;
+ if (ref($value) eq 'HASH') {
+  for my $key (sort keys %$value) {
+   push @hits, "$path.$key" if $forbidden->{$key};
+   push @hits, forbidden_key_hits($value->{$key}, $forbidden, "$path.$key");
+  }
+ } elsif (ref($value) eq 'ARRAY') {
+  for my $index (0 .. $#$value) {
+   push @hits, forbidden_key_hits($value->[$index], $forbidden, "$path\[$index\]");
+  }
+ }
+ return @hits
 }
 
 my $contract_path = File::Spec->catfile(
@@ -297,11 +317,15 @@ my $annotation_options = 'hash("node_kind", "expression", "payload_kind", "embed
 my $annotation_call = 'parse_job(entry_group(0), ' . $annotation_options . ')';
 my $annotation_statement = 'job_marker = ' . $annotation_call;
 my $lowered = LinkedSpec::call_spec_handler_subst('Top', $annotation_statement);
-is(occurrences($lowered, 'parse_job'), 1, 'current lowering retains one logical parse_job marker');
+is(
+ occurrences($lowered, 'LinkedSpec::StagedParseJob::construct_marker'),
+ 1,
+ 'private lowering constructs exactly one inert staged marker',
+);
 is(
  occurrences($lowered, 'LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:parse_job'),
- 1,
- 'current lowering emits exactly one parse_job unsupported-helper sentinel',
+ 0,
+ 'the exact annotation no longer emits an unsupported-helper sentinel',
 );
 
 my $general_job = {
@@ -364,10 +388,320 @@ ok(
  $annotation_ready,
  'Perl lowers parse_job to one dedicated inert marker with no unresolved or raw dependency',
 );
+
+is_deeply(
+ {
+  target => $marker_events[0]{args}{target},
+  text_plan => $marker_events[0]{args}{text_plan},
+  options => $marker_events[0]{args}{options},
+ },
+ {
+  target => 'job_marker',
+  text_plan => {
+   kind => 'direct_span',
+   source => 'entry_group',
+   index => 0,
+  },
+  options => {
+   node_kind => 'expression',
+   payload_kind => 'embedded_expression',
+   spec => 'expr-v1',
+   top => 'Expr',
+   result_policy => 'sibling_field',
+   into => 'expression_ast',
+   on_error => 'fail',
+   required_capabilities => [],
+  },
+ },
+ 'the dedicated node preserves only one typed text plan and normalized literal options',
+);
+ok(
+ !grep({
+  ($_->{kind} // '') eq 'ASSIGN'
+   && (($_->{args}{target} // '') eq 'job_marker')
+ } @{$rewriter->{canonical_action_ir_events} // []}),
+ 'the exclusive parse-job annotation is not duplicated as a generic assignment',
+);
+
+my %decoded_sources = map {
+ ($_->{source_id} => $_->{text})
+} @{$contract->{sources}};
+my $source_authority = LinkedSpec::SourceLocation->new(
+ sources => \%decoded_sources,
+);
+subtest 'all neutral provenance cases use the existing typed source algebra' => sub {
+ for my $case (@{$contract->{provenance_cases}}) {
+  my $result;
+  my $ok = eval {
+   $result = LinkedSpec::StagedParseJob::validate_and_materialize_provenance(
+    $source_authority,
+    $case->{provenance},
+    origin => 'contract:parse_job',
+   );
+   1
+  };
+  if ($case->{accepted}) {
+   ok($ok, "$case->{id} accepts typed provenance") or diag($@);
+   is($result->{text}, $case->{materialized_text}, "$case->{id} materializes exact text");
+   is_deeply($result->{provenance}, $case->{provenance}, "$case->{id} preserves exact provenance");
+  } else {
+   ok(!$ok, "$case->{id} rejects invalid provenance");
+   ok(
+    LinkedSpec::StagedParseJob::is_error($@),
+    "$case->{id} returns the private typed staged error",
+   );
+   is($@->{code}, $case->{diagnostic}, "$case->{id} uses the neutral diagnostic code");
+   is($@->{phase}, 'declare', "$case->{id} fails during inert declaration");
+  }
+ }
+};
+
+my $direct_source = <<'SPEC';
+Top::
+ /(é🙂)(B);/ -> Top { job_marker = parse_job(match_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "top", "Expr", "result_policy", "sibling_field", "into", "expression_ast", "on_error", "fail")); return(job_marker) }
+SPEC
+my %direct_ctx;
+my $direct_parser = LinkedSpec::Get(
+ \$direct_source,
+ generated_source_identity => 'staged-ast-enrichment-perl-direct.spec',
+ runtime_ctx_ref => \%direct_ctx,
+);
+ok(ref($direct_parser) eq 'CODE', 'the private direct-provenance carrier compiles')
+ or diag(JSON::PP->new->canonical(1)->encode($direct_ctx{last_error} // {}));
+my $direct_input = 'Aé🙂B;C';
+my $direct_marker = ref($direct_parser) eq 'CODE'
+ ? $direct_parser->(\$direct_input)
+ : undef;
+ok(LinkedSpec::StagedParseJob::is_marker($direct_marker), 'direct authored text returns one opaque marker');
+is_deeply(
+ LinkedSpec::StagedParseJob::marker_record($direct_marker),
+ {
+  kind => 'STAGED_PARSE_JOB_MARKER',
+  version => 2,
+  sidecar_kind => 'staged_parse_job_v2',
+  effect => 'staged_parse_job_declaration',
+ },
+ 'the marker exposes only its neutral logical identity',
+);
+my $direct_sidecar = LinkedSpec::StagedParseJob::sidecar_record($direct_marker);
+is_deeply(
+ $direct_sidecar,
+ {
+  kind => 'staged_parse_job_v2',
+  version => 2,
+  state => 'declared',
+  effect => 'staged_parse_job_declaration',
+  node_kind => 'expression',
+  payload_kind => 'embedded_expression',
+  parser_spec_id => 'expr-v1',
+  top_rule => 'Expr',
+  result_policy => 'sibling_field',
+  into => 'expression_ast',
+  failure_policy => 'fail',
+  required_capabilities => [],
+  text => 'é🙂',
+  provenance => {
+   kind => 'direct_span',
+   source_id => 'input',
+   start => 1,
+   end => 3,
+   provenance => 'match_group',
+  },
+  origin => 'Top:parse_job',
+ },
+ 'the private sidecar carries exact materialized text and one Unicode-scalar direct span',
+);
+$direct_sidecar->{provenance}{start} = 99;
+is(
+ LinkedSpec::StagedParseJob::sidecar_record($direct_marker)->{provenance}{start},
+ 1,
+ 'sidecar snapshots cannot mutate opaque marker state',
+);
+
+my $derived_options = 'hash("node_kind", "expression", "payload_kind", "embedded_expression", '
+ .'"spec", "expr-v1", "result_policy", "replace_marker", "on_error", "keep_text", '
+ .'"required_capabilities", array("typed-source-location-v1", "actionir-v1"))';
+my $derived_source = 'Top::' . "\n"
+ .' /(a)(a);/ -> Top { job_marker = parse_job(cat(match_group(0), match_group(1)), '
+ .$derived_options . '); return(job_marker) }' . "\n";
+my %derived_ctx;
+my $derived_parser = LinkedSpec::Get(
+ \$derived_source,
+ generated_source_identity => 'staged-ast-enrichment-perl-derived.spec',
+ runtime_ctx_ref => \%derived_ctx,
+);
+ok(ref($derived_parser) eq 'CODE', 'the private ordered-derived carrier compiles')
+ or diag(JSON::PP->new->canonical(1)->encode($derived_ctx{last_error} // {}));
+my $derived_input = 'aa;';
+my $derived_marker = ref($derived_parser) eq 'CODE'
+ ? $derived_parser->(\$derived_input)
+ : undef;
+ok(LinkedSpec::StagedParseJob::is_marker($derived_marker), 'composed authored text returns one opaque marker');
+my $derived_sidecar = LinkedSpec::StagedParseJob::sidecar_record($derived_marker);
+is($derived_sidecar->{text}, 'aa', 'ordered-derived text materializes in authored order');
+is_deeply(
+ $derived_sidecar->{provenance},
+ {
+  kind => 'derived_text',
+  policy => 'concatenate_in_order',
+  segments => [
+   {kind => 'direct_span', source_id => 'input', start => 0, end => 1, provenance => 'match_group'},
+   {kind => 'direct_span', source_id => 'input', start => 1, end => 2, provenance => 'match_group'},
+  ],
+ },
+ 'identical copied capture text retains two distinct ordered source spans',
+);
+is_deeply(
+ $derived_sidecar->{required_capabilities},
+ [qw(actionir-v1 typed-source-location-v1)],
+ 'literal capability options normalize deterministically before scheduling',
+);
+my %forbidden_sidecar_key = map { ($_ => 1) } qw(
+ path spec_path source_authority match match_object parser registry compiled_authority
+ callback host_handle cancellation_token deadline mutable_queue
+);
+is_deeply(
+ [forbidden_key_hits($derived_sidecar, \%forbidden_sidecar_key)],
+ [],
+ 'marker and sidecar serialize no source, parser, path, callback, or scheduler authority',
+);
+
+my @static_rejections = (
+ {
+  id => 'dynamic options',
+  call => 'parse_job(match_group(0), options)',
+  code => 'staged_parse_job_options_required',
+ },
+ {
+  id => 'unknown option',
+  call => 'parse_job(match_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "result_policy", "replace_marker", "on_error", "fail", "loader", "ambient"))',
+  code => 'staged_parse_job_option_unknown',
+ },
+ {
+  id => 'missing required option',
+  call => 'parse_job(match_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "result_policy", "replace_marker"))',
+  code => 'staged_parse_job_options_required',
+ },
+ {
+  id => 'dynamic node kind',
+  call => 'parse_job(match_group(0), hash("node_kind", node_kind, "payload_kind", "embedded_expression", "spec", "expr-v1", "result_policy", "replace_marker", "on_error", "fail"))',
+  code => 'staged_parse_job_options_required',
+ },
+ {
+  id => 'path-like parser identity',
+  call => 'parse_job(match_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "../expr", "result_policy", "replace_marker", "on_error", "fail"))',
+  code => 'staged_parser_identity_invalid',
+ },
+ {
+  id => 'invalid top rule',
+  call => 'parse_job(match_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "top", "Expr/Bad", "result_policy", "replace_marker", "on_error", "fail"))',
+  code => 'staged_top_rule_invalid',
+ },
+ {
+  id => 'invalid result policy',
+  call => 'parse_job(match_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "result_policy", "replace", "on_error", "fail"))',
+  code => 'staged_result_policy_invalid',
+ },
+ {
+  id => 'invalid failure policy',
+  call => 'parse_job(match_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "result_policy", "replace_marker", "on_error", "retry"))',
+  code => 'staged_failure_policy_invalid',
+ },
+ {
+  id => 'replace marker with target',
+  call => 'parse_job(match_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "result_policy", "replace_marker", "into", "wrong", "on_error", "fail"))',
+  code => 'staged_result_target_invalid',
+ },
+ {
+  id => 'sibling without target',
+  call => 'parse_job(match_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "result_policy", "sibling_field", "on_error", "fail"))',
+  code => 'staged_result_target_invalid',
+ },
+ {
+  id => 'transformed copied text',
+  call => 'parse_job(trim(match_group(0)), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "result_policy", "replace_marker", "on_error", "fail"))',
+  code => 'staged_source_provenance_invalid',
+ },
+ {
+  id => 'literal copied text',
+  call => 'parse_job("copied", hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "result_policy", "replace_marker", "on_error", "fail"))',
+  code => 'staged_source_provenance_invalid',
+ },
+ {
+  id => 'dynamic capture index',
+  call => 'parse_job(match_group(index), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "result_policy", "replace_marker", "on_error", "fail"))',
+  code => 'staged_source_provenance_invalid',
+ },
+);
+for my $case (@static_rejections) {
+ my $source = "Top::\n /(x);/ -> Top { job_marker = $case->{call}; return(job_marker) }\n";
+ my %ctx;
+ my $bad_descriptor = LinkedSpec::Get(
+  \$source,
+  return_descriptor => 1,
+  runtime_ctx_ref => \%ctx,
+ );
+ ok(!defined($bad_descriptor), "$case->{id} rejects before authored execution");
+ is($ctx{last_error}{stage}, 'staged_parse_job_policy', "$case->{id} uses the static annotation policy");
+ is($ctx{last_error}{code}, $case->{code}, "$case->{id} uses its neutral diagnostic code");
+}
+
+my $generic_return_source = "Top::\n /(x);/ -> Top { return($annotation_call) }\n";
+my $generic_return_descriptor = LinkedSpec::Get(
+ \$generic_return_source,
+ return_descriptor => 1,
+);
+my $generic_return_rewriter = $generic_return_descriptor->{spec}{Top}{meta}{action_rewriter};
+ok(
+ !grep({ ($_->{kind} // '') eq 'STAGED_PARSE_JOB_MARKER' }
+  @{$generic_return_rewriter->{canonical_action_ir_events} // []}),
+ 'a non-annotation parse_job call cannot acquire the dedicated node',
+);
+is_deeply(
+ $generic_return_rewriter->{unresolved_helpers},
+ ['parse_job'],
+ 'a residual generic parse_job call remains fail-closed as an unresolved helper',
+);
+
+my $transaction_source = <<'SPEC';
+Top::
+ I {
+  token = recognition_checkpoint()
+  matched = recognize_once(token, call(Child))
+  if(matched)
+   value = recognition_commit(token)
+  else()
+   recognition_rollback(token)
+  endif()
+  return(value)
+ }
+ /never/
+Child:
+ I { marker = parse_job(entry_text(), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "result_policy", "replace_marker", "on_error", "fail")); return(marker) }
+ /never/
+SPEC
+my %transaction_ctx;
+my $transaction_descriptor = LinkedSpec::Get(
+ \$transaction_source,
+ return_descriptor => 1,
+ runtime_ctx_ref => \%transaction_ctx,
+);
+ok(!defined($transaction_descriptor), 'uncommitted recognition rejects inert staged declaration statically');
+is($transaction_ctx{last_error}{stage}, 'recognition_transaction_policy', 'transaction rejection uses the recognition policy');
+is($transaction_ctx{last_error}{code}, 'recognition_effect_forbidden', 'transaction rejection stays fail-closed');
+is($transaction_ctx{last_error}{effect}, 'parser_registry_or_staged_dispatch', 'the dedicated marker has the staged-dispatch effect');
+
+my $scheduler_interface = eval {
+ require LinkedSpec::StagedASTEnrichment;
+ LinkedSpec::StagedASTEnrichment->can('enrich_ast')
+};
+ok(
+ $scheduler_interface,
+ 'Perl applies pre-registered resolution/cache and result/failure policies after the complete AST returns',
+);
 diag(
- 'expected RED: missing node=[STAGED_PARSE_JOB_MARKER]'
- . '; unresolved helpers=[' . join(',', @unresolved_helpers) . ']'
- . "; raw dependencies=$raw_dependency_count",
-) unless $annotation_ready;
+ 'expected RED: missing authority=[pre_registered_resolution,immutable_cache,result_failure_policies]'
+ . '; marker=STAGED_PARSE_JOB_MARKER; sidecar=staged_parse_job_v2',
+) unless $scheduler_interface;
 
 done_testing();

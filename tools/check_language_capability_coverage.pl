@@ -180,7 +180,7 @@ for my $contract (@{$perl_contracts}) {
  $perl_current_contract{$name} = 1 if defined($name) && $name =~ /^[A-Za-z_]\w*\z/;
 }
 
-# These fifteen identifier-shaped diagnostics are deliberately not ordinary
+# These sixteen identifier-shaped diagnostics are deliberately not ordinary
 # public current calls. Keeping the classification next to the independent
 # reverse check means a newly added Perl current contract cannot disappear
 # symmetrically from every backend inventory merely because no corpus fixture
@@ -197,6 +197,7 @@ my %classified_non_public_perl_contract = (
  hash_index_assignment_operator => 'internal lowering operation',
  match_named_map => 'documented compatibility alias',
  observe_recognition => 'grammar-owned dedicated intrinsic',
+ parse_job => 'Perl-only private staged annotation pending shared backend recurrence and public admission',
  recognition_checkpoint => 'grammar-owned dedicated intrinsic',
  recognition_commit => 'grammar-owned dedicated intrinsic',
  recognition_rollback => 'grammar-owned dedicated intrinsic',

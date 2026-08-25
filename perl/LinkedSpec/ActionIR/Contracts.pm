@@ -16,6 +16,7 @@ BEGIN {
 
 use LinkedSpec::OwnerDispatch ();
 use LinkedSpec::ActionIR::ProgressiveSpanDispatch ();
+use LinkedSpec::ActionIR::StagedParseJob ();
 
 sub _is_primitive_literal_token {
  my ($expr) = @_;
@@ -2496,6 +2497,7 @@ sub build_action_lowering_contracts {
   @{_build_recursive_observation_contracts($label)},
   @{_build_inter_match_gap_contracts($label)},
   @{_build_recognition_transaction_contracts($label)},
+  @{LinkedSpec::ActionIR::StagedParseJob::build_contracts($label)},
   @{LinkedSpec::ActionIR::ProgressiveSpanDispatch::build_contracts($label)},
   @{_build_return_contracts($label, $d)},
   @{_build_capture_and_cursor_contracts($label, $d)},

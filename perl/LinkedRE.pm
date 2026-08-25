@@ -15,12 +15,20 @@ sub _build_match_info {
      match      => $match_snapshot->{match},
      match_list => [@{$match_snapshot->{match_list} // []}],
      match_hash => {%{$match_snapshot->{match_hash} // {}}},
+     match_span => ref($match_snapshot->{match_span}) eq 'HASH'
+      ? {%{$match_snapshot->{match_span}}} : undef,
+     match_spans => [map { ref($_) eq 'HASH' ? {%$_} : undef }
+      @{$match_snapshot->{match_spans} // []}],
     }
   : {
      index      => $pos,
      match      => ${^MATCH},
      match_list => [grep {defined} map {eval "\$$_"} 1 .. scalar @+],
      match_hash => {%+},
+     match_span => {start => $-[0], end => $+[0]},
+     match_spans => [map { +{start => $-[$_], end => $+[$_]} }
+      grep { defined($-[$_]) && $-[$_] >= 0 && defined($+[$_]) && $+[$_] >= 0 }
+      1 .. $#-],
     };
  if (ref($parent_info) eq 'HASH') {
   $info->{marks} = $parent_info->{marks} if ref($parent_info->{marks}) eq 'HASH';
@@ -82,6 +90,10 @@ sub match_slot {
    match => ${^MATCH},
    match_list => [grep { defined } map { eval "\$$_" } 1 .. scalar @+],
    match_hash => {%+},
+   match_span => {start => $-[0], end => $+[0]},
+   match_spans => [map { +{start => $-[$_], end => $+[$_]} }
+    grep { defined($-[$_]) && $-[$_] >= 0 && defined($+[$_]) && $+[$_] >= 0 }
+    1 .. $#-],
   };
  } elsif ($mode eq 'consume') {
   pos($$stref) = 0 unless defined(pos($$stref));
@@ -90,6 +102,10 @@ sub match_slot {
    match => ${^MATCH},
    match_list => [grep { defined } map { eval "\$$_" } 1 .. scalar @+],
    match_hash => {%+},
+   match_span => {start => $-[0], end => $+[0]},
+   match_spans => [map { +{start => $-[$_], end => $+[$_]} }
+    grep { defined($-[$_]) && $-[$_] >= 0 && defined($+[$_]) && $+[$_] >= 0 }
+    1 .. $#-],
   };
  } else {
   die "(LinkedRE::match_slot) -E- unsupported parse mode '$mode'"

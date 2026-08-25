@@ -10,6 +10,27 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-26 — FUTURE-PARITY-BACKLOG.14.7.3.1 — add Perl staged annotation provenance
+
+- Added one private exclusive `STAGED_PARSE_JOB_MARKER` contract for exact assignment-form
+  `parse_job(text_expr, literal_options)` annotations. Non-assignment calls remain unresolved; malformed/dynamic
+  options and invalid parser/top/result/failure/target identities reject before authored execution.
+- Added an opaque inert marker with a detached `staged_parse_job_v2` declaration sidecar. It carries normalized
+  literal options, exact materialized text, and typed direct or ordered-derived provenance, but no source/match/
+  parser/registry/path/callback/scheduler authority.
+- Preserved private regex match/capture offsets long enough to construct Unicode-scalar spans through the existing
+  `LinkedSpec::SourceLocation` algebra. Reversed/out-of-range, empty-derived, transformed/literal copied text,
+  copied-text smuggling, and dynamic capture indices fail closed.
+- Classified the declaration as a forbidden staged-dispatch effect inside uncommitted recognition, kept the
+  current function-body-v1 adapter unchanged, and retained `parse_job` outside the public language inventory.
+- Advanced the same dormant final-path consumer from 60 GREEN/missing-marker to 120 GREEN and one expected RED for
+  `.14.7.3.2`'s missing pre-registered resolution/cache/result/failure authority. Ordinary/canonical discovery,
+  recursive queues, reconstructed/generated/emitted carriers, rollout, format, capability, and outward surfaces
+  remain unchanged.
+- Focused ActionIR, typed-source, semantic, progressive, recognition, generated-source, capability, language,
+  neutral staged, Knowledge, rendered-book, continuity, doctrine, and exact no-drift proof pass; no canonical
+  trigger is crossed.
+
 ## 2026-08-25 — FUTURE-PARITY-BACKLOG.14.7.3.0 — freeze Perl staged-AST dormant RED
 
 - Added the exact final-path Perl general staged-AST consumer with 60 GREEN assertions and one intentional RED at

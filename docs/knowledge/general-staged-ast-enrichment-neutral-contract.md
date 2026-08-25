@@ -17,9 +17,9 @@ answers:
   - "which staged AST backend consumers are planned"
   - "is general parse_job authoring public"
 date: 2026-08-25
-status: executable neutral authority complete; five backend implementations, six runtime admissions, recurrence, and public authoring pending
+status: executable neutral authority complete; Perl private marker/provenance carrier complete; resolution, admissions, recurrence, and public authoring pending
 tags: [staged-parsing, parse-job, source-location, registry, queue, policies, diagnostics, portability]
-evidence: "FUTURE-PARITY-BACKLOG.14.7.2 adds capability_conformance/staged_ast_enrichment_contract.json plus tools/check_staged_ast_enrichment_contract.py and ADR 0088. The independent oracle executes 4 immutable registry entries; 2 sources; 8 provenance, 3 deterministic-id, 8 resolution, 6 authority, 10 cache, 4 breadth-first queue, 3 sibling-isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; five planned backend consumers over six routes; four carrier requirements; ten outward guards; nine rollout legs; 35 exact owners; and 72 reason-checked corruptions. FUTURE-PARITY-BACKLOG.14.7.3.0 advances only the Perl planned consumer to dormant_red at 60 GREEN assertions/one missing-marker RED; four later consumers remain absent, only neutral rollout is complete, and outward surfaces remain absent."
+evidence: "FUTURE-PARITY-BACKLOG.14.7.2 adds capability_conformance/staged_ast_enrichment_contract.json plus tools/check_staged_ast_enrichment_contract.py and ADR 0088. The independent oracle executes 4 immutable registry entries; 2 sources; 8 provenance, 3 deterministic-id, 8 resolution, 6 authority, 10 cache, 4 breadth-first queue, 3 sibling-isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; five planned backend consumers over six routes; four carrier requirements; ten outward guards; nine rollout legs; 35 exact owners; and 72 reason-checked corruptions. FUTURE-PARITY-BACKLOG.14.7.3.1 advances only the dormant Perl consumer to 120 GREEN assertions/one missing-authority RED by implementing the private marker/provenance declaration boundary; four later consumers remain absent, only neutral rollout is complete, and outward surfaces remain absent."
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py"
   - "rg -n 'staged-AST enrichment|STAGED_PARSE_JOB_MARKER|staged_parse_job_v2|neutral_complete_backends_pending' docs/decisions/0088-pre-resolved-breadth-first-staged-ast-enrichment.md capability_conformance/staged_ast_enrichment_contract.json tools/check_staged_ast_enrichment_contract.py"
@@ -52,12 +52,13 @@ are `fail`, `keep_text`, and `diagnostic_node`. Exact tuple repeats are cycles; 
 strictly contained provenance with smaller scalar extent. Depth, calls, work, cancellation, deadline, result
 nodes, and diagnostic bytes remain shared bounded authority. Results are detached plain data.
 
-The existing v1 function-body adapter remains unchanged and explicit. Perl's exact final-path consumer is now
-present but dormant: it proves v1 and the neutral inventory GREEN, then fails only because Perl has no dedicated
-`STAGED_PARSE_JOB_MARKER` and still reports one unresolved `parse_job`. This is a test boundary, not backend
-admission. Perl, Rust, Dart, Julia, shared Lua over PUC Lua/LuaJIT, recurrence, and public closeout retain their
-exact `.14.7.3-.10` owners.
+The existing v1 function-body adapter remains unchanged and explicit. Perl's exact final-path consumer is present
+but dormant. Its private declaration carrier now creates one exclusive opaque marker/sidecar with strict literal
+options and typed direct/ordered-derived provenance, while refusing all resolution, cache, scheduling, stitch, and
+ambient authority. The test passes 120 assertions and fails only at the next missing resolution/cache/policy
+boundary. This is not backend admission. Perl's later slices, Rust, Dart, Julia, shared Lua over PUC Lua/LuaJIT,
+recurrence, and public closeout retain their exact `.14.7.3.2-.10` owners.
 
 Related: [[general-staged-ast-current-boundary]], [[staged-parse-job-annotation-contract]],
 [[staged-parser-registry-dispatch-contract]], [[typed-source-location-cursor-algebra-direction]], and
-[[progressive-span-dispatch-audit-plan]].
+[[progressive-span-dispatch-audit-plan]], plus [[perl-staged-ast-enrichment-marker-provenance]].

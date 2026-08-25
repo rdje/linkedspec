@@ -21,14 +21,18 @@ checker passes 4 registry entries, 8 provenance, 8 resolution/6 authority, 10 ca
 reason-checked mutations. It reuses ADR `0056`'s source algebra and progressive authority narrowing without
 reusing `dispatch_span` syntax or elevating an authored parser id into filesystem authority.
 
-Perl dormant boundary `FUTURE-PARITY-BACKLOG.14.7.3.0` now binds the first planned backend consumer without
-shipping behavior. Toolbox lowering proves assignment-form `parse_job(...)` remains ordinary `ASSIGN` plus one
-unsupported-helper sentinel, zero raw dependencies, and no `STAGED_PARSE_JOB_MARKER`. The final-path consumer
-passes 60 assertions over every neutral inventory, unchanged function-body-v1 resolve/load/compile/execute,
-diagnostic context, and stitched `body_ast`, then fails only the dedicated-marker assertion. The checker accepts
-that one exact `dormant_red` path while requiring zero ordinary/canonical registration; all semantic counts,
-mutations, rollout rows, generated carriers, and outward guards remain unchanged. `.14.7.3.1` alone owns the
-private marker/sidecar plus typed direct/derived provenance carrier.
+Perl private-carrier leaf `FUTURE-PARITY-BACKLOG.14.7.3.1` now advances that same dormant final path without
+admission. Exact assignment-form `parse_job(text_expr, literal_options)` becomes one exclusive
+`STAGED_PARSE_JOB_MARKER`; malformed, dynamic, transformed, literal-copied, and non-annotation forms remain
+fail-closed. The opaque marker owns a detached `staged_parse_job_v2` sidecar containing normalized literal options,
+exact materialized text, and either one typed Unicode-scalar direct span or a nonempty ordered-derived span list.
+Private regex match-info retains capture offsets only long enough to construct that provenance; marker/carrier data
+contains no source, match, parser, registry, callback, path, or scheduler authority. Uncommitted recognition rejects
+the declaration effect. The final-path consumer now passes 120 assertions over neutral inventory, unchanged v1,
+exclusive lowering, direct/derived provenance, malformed/smuggling rejection, detachment, and transaction closure,
+then fails only `.14.7.3.2`'s missing pre-registered resolution/cache/result/failure-policy authority. It remains
+absent from ordinary/canonical discovery, and rollout, generated carriers/formats, language inventory, and outward
+surfaces remain unchanged.
 
 The same slice's mandatory complete-record rollover publishes immutable change-history segment `4991`. ADR `0089`
 advances only finite route controls from 21/20 to 22 files / 21 manifest lines; the measured collection remains

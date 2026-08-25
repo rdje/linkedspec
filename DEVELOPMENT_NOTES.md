@@ -10,6 +10,24 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.3.1` — Perl staged annotation provenance): exact clean activation is
+  dormant-boundary commit `4a982f21`; this focused leaf owns only the private marker/provenance declaration seam.
+- Toolbox lowering and descriptor probes locate the exact generic-assignment boundary. Runtime probes show that
+  capture provenance needs regex offsets, so `LinkedRE` privately retains full-match and defined-capture spans;
+  existing text/hash/list projections remain unchanged.
+- One exclusive annotation contract parses exact assignment-form `parse_job(text, hash(...))`, validates required
+  and optional literal options, and lowers to an opaque declaration marker. Residual generic calls remain
+  unresolved; malformed, dynamic, path-like, transformed-text, copied-text, and invalid-target forms fail closed.
+- The private sidecar materializes text only through `SourceLocation` direct or ordered-derived spans and returns
+  detached snapshots. It retains no source/match/parser/registry/path/callback/scheduler authority and cannot run,
+  resolve, cache, stitch, or enqueue a parser.
+- Recognition effect closure rejects staged declarations in uncommitted attempts. The language ledger initially
+  caught the new private contract as a public helper; explicit non-public classification restores exact 250/126
+  truth without adding a backend inventory or outward surface.
+- The dormant oracle now passes 120 assertions and fails only the final resolution/cache/result/failure authority
+  assertion. Function-body v1, neutral 72-mutation governance, every direct-dependent ledger, discovery, rollout,
+  carrier/format, capability, and public boundaries remain unchanged; `.14.7.3.2` is next.
+
 - 2026-08-25 (`FUTURE-PARITY-BACKLOG.14.7.3.0` — Perl staged-AST dormant RED): exact clean activation is neutral-
   authority commit `ab8802c9`; this focused leaf owns only the final-path test, its lifecycle snapshot, and boundary
   truth.

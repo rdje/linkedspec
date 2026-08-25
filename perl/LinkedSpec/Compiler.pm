@@ -1579,6 +1579,34 @@ if ($validate_dependency_regex_references_error) {
  return undef;
 }
 
+my $staged_parse_job_diagnostic = eval {
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::StagedParseJobPolicy');
+ LinkedSpec::StagedParseJobPolicy::validate_rule_rows(
+  _call_compiler_state('compiled_spec_state_rule_rows', $compiled_spec_state),
+ )
+};
+my $staged_parse_job_policy_error = $@;
+if ($staged_parse_job_policy_error || ref($staged_parse_job_diagnostic) eq 'HASH') {
+ my $diagnostic = ref($staged_parse_job_diagnostic) eq 'HASH'
+  ? $staged_parse_job_diagnostic
+  : {};
+ my $detail = $staged_parse_job_policy_error
+  || ($diagnostic->{code} // 'staged parse-job policy rejected');
+ _call_runtime_ctx(
+  'set_runtime_ctx_last_error_for_owner',
+  $runtime_ctx,
+  'compiler_pipeline',
+  stage => 'staged_parse_job_policy',
+  summary => 'Staged parse-job policy rejected the compiled rule table',
+  detail => $detail,
+  (map { exists($diagnostic->{$_}) ? ($_ => $diagnostic->{$_}) : () }
+   qw/code phase rule origin operand option parser_spec_id top_rule result_policy failure_policy into source_id provenance/),
+ );
+ _trace_log_output(DUMP_NONE, 'CRITICAL ERROR', 'Staged parse-job policy rejected the compiled rule table');
+ _trace_exit($trace_scope, { status => 'error', stage => 'staged_parse_job_policy' }, DUMP_LOW);
+ return undef;
+}
+
 my $progressive_span_dispatch_diagnostic = eval {
  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ProgressiveSpanDispatchPolicy');
  LinkedSpec::ProgressiveSpanDispatchPolicy::validate_rule_rows(

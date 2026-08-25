@@ -26,6 +26,7 @@ use LinkedSpec::ActionIR::Trace ();
 #------------------------------------------------------------------------------
 sub _scanner_rule_family_packages {
  return (
+  'LinkedSpec::ActionIR::StagedParseJob',
   'LinkedSpec::ActionIR::ProgressiveSpanDispatch',
   'LinkedSpec::ActionIR::Scanner::RecognitionTransactionRules',
   'LinkedSpec::ActionIR::Scanner::PrimitiveBasicRules',

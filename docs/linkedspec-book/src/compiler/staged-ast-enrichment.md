@@ -1,8 +1,9 @@
 # Staged AST Enrichment Contract
 
 > Status: executable backend-neutral design. General `parse_job(...)` authoring is not yet available in shipped
-> parsers. Perl now has one deliberately dormant 60-pass/one-RED implementation oracle; the current shipped
-> five-backend/six-runtime implementation still supports only the narrow function-body v1 adapter described below.
+> parsers. Perl now has a deliberately dormant private marker/provenance carrier with a 120-pass/one-RED oracle;
+> the current shipped five-backend/six-runtime implementation still supports only the narrow function-body v1
+> adapter described below.
 
 LinkedSpec's staged model lets one completed parse return bounded text islands for later parsers to refine. The
 neutral general contract is now executable and mutation-checked before any backend implements it. Its artifact
@@ -183,7 +184,7 @@ shared Lua source must run independently on PUC Lua and LuaJIT. The exact Perl c
 `dormant_red`, but it is not part of ordinary or canonical discovery. Perl, Rust, Dart, Julia, both Lua routes,
 six-runtime recurrence, public authoring/no-drift, and final recomposition retain their `.14.7.3-.10` owners.
 
-## Current Perl dormant boundary
+## Current private Perl declaration boundary
 
 The direct Perl oracle is:
 
@@ -191,21 +192,29 @@ The direct Perl oracle is:
 PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract.t
 ```
 
-It intentionally does not return success yet. Assertions 1–60 prove the complete neutral inventory, unchanged
-function-body-v1 resolution/cache/compile/execute behavior, original wrong-top diagnostic context, and actual
-`body_ast` stitching. Assertion 61 is the only failure:
+It intentionally does not return success yet. The first 120 assertions prove the complete neutral inventory,
+unchanged function-body-v1 resolution/cache/compile/execute behavior, original wrong-top diagnostic context,
+exclusive marker lowering, strict literal options, typed direct/ordered-derived provenance, detached opaque
+sidecars, malformed/smuggled-text rejection, residual-helper closure, and recognition-transaction denial. The
+final assertion is the only failure:
 
 ```text
-expected RED: missing node=[STAGED_PARSE_JOB_MARKER];
-unresolved helpers=[parse_job]; raw dependencies=0
+expected RED: missing authority=[pre_registered_resolution,immutable_cache,result_failure_policies];
+marker=STAGED_PARSE_JOB_MARKER; sidecar=staged_parse_job_v2
 ```
 
-That is the first implementation boundary, not a user-facing defect. Perl still lowers the future annotation as
-an ordinary assignment with one unsupported-helper sentinel; the v1 registry separately rejects `expr-v1` at
-`resolve`, so no parser path is loaded and no general authority leaks through the compatibility adapter. The next
-Perl slice adds only the private marker/sidecar and typed direct/ordered-derived provenance, then advances the same
-consumer to its next owned RED. Resolution/cache/policies, recursive scheduling/bounds/diagnostics, and fresh
-carrier admission remain later independent slices.
+That is an implementation boundary, not a user-facing defect. Perl recognizes only exact assignment annotations
+with literal options. It lowers one exclusive `STAGED_PARSE_JOB_MARKER` and constructs an opaque
+`staged_parse_job_v2` declaration sidecar from current match/capture offsets through the existing source-location
+algebra. Direct text keeps one Unicode-scalar span; composed `cat(...)` text keeps nonempty ordered direct spans.
+The sidecar contains exact materialized text and normalized options, but no source authority, match object, parser,
+registry, callback, path, queue, cancellation, deadline, or host handle. Detached snapshots cannot mutate marker
+state.
+
+The v1 registry still rejects `expr-v1` at `resolve`, so the new declaration does not load or execute a parser.
+Pre-registered resolution/cache and all result/failure policies belong to `.14.7.3.2`; recursive scheduling/bounds/
+diagnostics and fresh carrier admission remain `.3` and `.4`. The consumer stays outside ordinary and canonical
+discovery, and the language ledger classifies `parse_job` as private until the separately owned public closeout.
 
 Publishing this boundary crossed the bounded `CHANGES.md` rollover threshold. The repository archived one complete
 218-line record set as immutable segment `4991`; ADR `0089` advances only the finite change-history collection and

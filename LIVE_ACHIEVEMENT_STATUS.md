@@ -2,24 +2,27 @@
 
 ## Current Activity
 
-- Perl `.14.7.3.0` freezes the first backend's final-path general staged-AST boundary without production behavior.
-- Sixty assertions are GREEN: the complete neutral inventory, unchanged function-body-v1 resolve/load/compile/
-  execute/stitch path, exact wrong-top context, explicit v1 compatibility, dormancy, and child ownership.
-- The sole RED is the measured missing `STAGED_PARSE_JOB_MARKER`: current lowering retains one unresolved
-  `parse_job` helper and zero raw dependencies. Perl rollout and every ordinary/canonical/public route stay pending.
+- Perl `.14.7.3.1` implements only the private dormant staged-parse declaration/provenance boundary.
+- One exclusive `STAGED_PARSE_JOB_MARKER` owns an opaque detached v2 sidecar with strict literal options and typed
+  direct/ordered-derived source provenance; malformed, smuggled, residual, and transaction-reachable forms reject.
+- The same final-path oracle has 120 GREEN assertions and one RED for missing pre-registered resolution/cache/
+  result/failure authority. Perl rollout and every ordinary/canonical/generated/public route stay pending.
 
 ## Latest Completed Slice
 
-- `.14.7.3.0` adds one unrouted 60-pass/one-RED Perl consumer and changes only its predeclared lifecycle from absent
-  to dormant. Production code, neutral semantics/counts/mutations, generated format, rollout, and public behavior
-  do not move.
+- `.14.7.3.1` adds one private marker/provenance declaration carrier, advances the unrouted consumer to 120-pass/
+  one-RED, preserves function-body v1, and moves no resolution, cache, queue, carrier, route, rollout, format, or
+  public behavior.
 
 ## Next Action
 
-- Commit `.14.7.3.0` through the focused workflow, clear the brief, verify the clean handoff, then activate
-  `.14.7.3.1` task-tree-first for Perl's private marker/sidecar and typed direct/derived provenance carrier.
+- Commit `.14.7.3.1` through the focused workflow, clear the brief, verify the clean handoff, then activate
+  `.14.7.3.2` task-tree-first for caller-pre-registered resolution/cache and result/failure policy authority.
 
 ## Recent Completions
+
+- `2026-08-26` — `.14.7.3.1` adds Perl's private exclusive marker, opaque v2 declaration sidecar, strict literal
+  options, and typed direct/ordered-derived provenance; 120 assertions pass and only `.2` authority remains RED.
 
 - `2026-08-25` — `.14.7.3.0` freezes Perl's exact 60-pass/one-RED marker boundary while preserving function-body
   v1, production behavior, discovery, rollout, generated format, and all outward surfaces.
@@ -66,9 +69,6 @@
 
 - `2026-08-24` — `.14.6.5.1` adds Julia's unexported immutable authority and 210-assertion dormant consumer while
   preserving the separate 55-pass/one-RED final path, rollout, canonical topology, and outward boundaries.
-
-- `2026-08-24` — `.14.6.5.0` freezes Julia's exact 55-pass/one-RED generic-call/four-carrier boundary, keeps it
-  outside ordinary/canonical discovery, and splits authority, carriers, admission, and recomposition.
 
 ## History
 
