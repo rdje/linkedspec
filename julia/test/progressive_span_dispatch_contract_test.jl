@@ -167,7 +167,7 @@ end
               "linkedspec-progressive-span-dispatch-v1"
         @test contract["format"] == 1
         @test contract["status"] ==
-              "all_private_backends_complete_recurring_and_public_pending"
+              "private_six_runtime_recurring_and_public_no_drift_complete"
         @test contract["expected_counts"] == Dict{String,Any}(
             "registry_entries" => 2,
             "sources" => 2,
@@ -185,7 +185,7 @@ end
             "outward_guard_paths" => 10,
             "diagnostics" => 26,
             "rollout_legs" => 9,
-            "mutations" => 112,
+            "mutations" => 116,
         )
         rollout = contract["rollout"]
         @test [row["status"] for row in rollout] == [
@@ -196,8 +196,8 @@ end
             "complete",
             "complete",
             "complete",
-            "pending",
-            "pending",
+            "complete",
+            "complete",
         ]
         @test rollout[5]["owner"] == "FUTURE-PARITY-BACKLOG.14.6.5"
         @test rollout[5]["paths"] ==

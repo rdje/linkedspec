@@ -171,12 +171,12 @@ for abi in puc luajit; do bash tools/run_lua_project_data.sh "$abi" lua/test/pro
 bash tools/check_progressive_span_dispatch_six_runtime.sh
 ```
 
-It validates the reserved private `dispatch_span("logical-parser-id", "Top", span)` expression without enabling backend syntax.
-The checker executes 2 sources/8 views, 6 authority, 6 cancellation, 8 chain/bound, and 4 isolation/detachment cases; locks 26 diagnostics and 7/9 rollout; governs 9 Rust, 8 Dart, 9 Julia, and 9 Lua carrier paths plus 10 outward paths with zero backend guards; and rejects 112 mutations.
+The progressive span-dispatch contract is 9/9 complete: all six private runtime routes, exact recurrence, and public no-drift are current while the ten outward surfaces remain absent.
+It validates the reserved private `dispatch_span("logical-parser-id", "Top", span)` expression on every backend without adding it to the public helper inventory.
+The checker executes 2 sources/8 views, 6 authority, 6 cancellation, 8 chain/bound, and 4 isolation/detachment cases; locks 26 diagnostics and 9/9 rollout; governs 9 Rust, 8 Dart, 9 Julia, and 9 Lua carrier paths plus 10 outward paths with zero backend guards; and rejects 116 contract mutations plus 60 public omission/injection mutations over six current documents and twelve stale claims.
 A pass excludes path loading, authority elevation, cancellation reset, non-decreasing cycles, parent-state leaks, live handles, fallback, and premature rollout.
-The final command is the typed recurrence authority: five backend sources form six routes because shared Lua runs once per ABI, followed by typed-source, generated-source, capability, and language ledgers. Canonical CI always
-audits it; `LINKEDSPEC_RUN_PROGRESSIVE_SPAN_MATRIX=1` executes it. It promotes only typed
-`progressive_span_dispatch`; rejected effect `parser_registry_or_staged_dispatch` retains exactly current node
+The final command is the typed recurrence authority: five backend sources form six routes because shared Lua runs once per ABI, followed by typed-source, generated-source, capability, and language ledgers. Canonical CI always audits it; `LINKEDSPEC_RUN_PROGRESSIVE_SPAN_MATRIX=1` executes it. It promotes only typed
+`progressive_span_dispatch`; public closeout separately binds the committed driver to the behavioral recurring row and completes public no-drift. Rejected effect `parser_registry_or_staged_dispatch` retains exactly current node
 `PROGRESSIVE_DISPATCH_SPAN`, no call row, and ten facade/schema/semantic/MCP/CLI/README exposure denials.
 
 Perl carrier integration and admission prove one exclusive dedicated node, static operands, fresh invocation authority, live/reconstructed/generated-plan/independently loaded emitted execution, logical-only serialization, typed missing-authority failure, and transaction rejection in 129 assertions. `tools/run_ci_local.sh` requires, syntax-checks, and executes that exact consumer once; the neutral checker rejects regression of the Perl row and premature later-backend promotion. Its transaction-state query loads the recognition runtime only when a dispatch executes, preserving the require-only Compiler guarantee that `LinkedRE` stays lazy until the parser pipeline actually needs it.
@@ -968,8 +968,8 @@ That checker requires exact Dart/Julia/Lua inventory identity at 250 current nam
 and governed 105-case corpus plus exact named-mark fixture and the public gap-contract example, every one of 126 independently derived public Perl
 contracts in each backend inventory, and rejection of fifteen classified non-public names: nine compatibility,
 legacy, or internal lowering contracts; four grammar-owned recognition-transaction intrinsics; the grammar-owned
-recursive-observation intrinsic; and private Perl-only progressive `dispatch_span` until exact shared-backend
-recurrence. It separately
+recursive-observation intrinsic; and private cross-backend progressive `dispatch_span`. Exact shared-backend
+recurrence is current, but it does not convert the dedicated intrinsic into a public shared helper. It separately
 requires Dart's, Julia's, and Lua's seven source-boundary compatibility aliases and canonical targets to match the neutral
 typed-source contract without inflating the common 250-name inventory. Lua's focused consumer executes those
 mappings through native, loaded, reconstructed, generated-plan, and emitted routes on both PUC Lua and LuaJIT.

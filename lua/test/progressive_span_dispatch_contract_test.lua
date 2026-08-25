@@ -108,7 +108,7 @@ check_equal(contract.contract_id, "linkedspec-progressive-span-dispatch-v1", "ne
 check_equal(contract.format, 1, "neutral contract format")
 check_equal(
   contract.status,
-  "all_private_backends_complete_recurring_and_public_pending",
+  "private_six_runtime_recurring_and_public_no_drift_complete",
   "neutral rollout status"
 )
 for name, expected in pairs({
@@ -128,16 +128,13 @@ for name, expected in pairs({
   outward_guard_paths = 10,
   diagnostics = 26,
   rollout_legs = 9,
-  mutations = 112,
+  mutations = 116,
 }) do
   check_equal(contract.expected_counts[name], expected, "neutral count " .. name)
 end
 check_equal(#contract.rollout, 9, "neutral rollout row count")
-for index = 1, 7 do
+for index = 1, 9 do
   check_equal(contract.rollout[index].status, "complete", "complete rollout " .. index)
-end
-for index = 8, 9 do
-  check_equal(contract.rollout[index].status, "pending", "pending rollout " .. index)
 end
 check_equal(contract.rollout[6].owner, "FUTURE-PARITY-BACKLOG.14.6.6", "PUC Lua owner")
 check_equal(contract.rollout[7].owner, "FUTURE-PARITY-BACKLOG.14.6.6", "LuaJIT owner")

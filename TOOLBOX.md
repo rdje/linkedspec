@@ -1070,11 +1070,12 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   The independent checker is repository-routed and always registered in canonical local CI.
 - **OUTPUT:** 2 immutable registry entries; 2 sources/8 views; 6 authority + 6 cancellation + 8 chain + 4
   execution cases; 9 Rust + 8 Dart + 9 Julia + 9 Lua implementation paths with zero backend guards plus 10
-  outward guards; 26 diagnostics; behavioral rollout 7/9; and 112 rejected mutations.
+  outward guards; 26 diagnostics; behavioral rollout 9/9; 116 contract mutations; and public
+  6-document/12-stale/10-outward/60-mutation governance.
 - **BOUNDARY:** all six private runtimes are admitted, the rejected effect owns exactly current node
   `PROGRESSIVE_DISPATCH_SPAN` and no call row, and ten facade/schema/semantic/MCP/CLI/README paths deny exposure.
-  Typed recurrence is separately current; there is no path loader, public behavior, fallback, or staged AST
-  stitching.
+  Progressive behavioral governance is 9/9 complete; the exact six-runtime recurrence and public no-drift proof are current while all ten outward surfaces remain absent.
+  Typed recurrence is separately current; there is no path loader, public API behavior, fallback, or staged AST stitching.
 
 ### 4.9.1.1.3 `tools/check_progressive_span_dispatch_six_runtime.sh` — exact typed recurrence proof
 
@@ -1089,9 +1090,10 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 - **OUTPUT:** five immutable backend source groups form six runtime routes because shared Lua executes once on PUC
   Lua and once on LuaJIT. Twelve topology/storage/rollout regressions plus two stale-guide denials promote only
   typed `progressive_span_dispatch`, making typed truth 12 complete / 2 pending / 170 mutations.
-- **BOUNDARY:** progressive behavioral governance remains 7/9/112; public no-drift remains `.14.6.8`-owned,
-  staged dispatch `.14.7`-owned, and combined program-wide no-drift `.14.8`-owned. No runtime, consumer, generated
-  format, facade, schema, semantic/MCP, CLI, README, or public behavior moves. Retrieve
+- **BOUNDARY:** `.14.6.8` binds this committed driver to the corrected behavioral recurring row and closes
+  progressive public no-drift at 9/9/116 plus public 6/12/10/60 governance. Staged dispatch remains `.14.7`-owned
+  and combined program-wide no-drift `.14.8`-owned. No runtime, consumer, generated format, facade, schema,
+  semantic/MCP, CLI, README, or public behavior moves. Retrieve
   [[progressive-span-dispatch-recurring-gate]] before changing this proof.
 
 ### 4.9.1.2 Lossless-gap handoff preflight

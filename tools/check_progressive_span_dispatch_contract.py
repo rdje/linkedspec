@@ -6,6 +6,7 @@ from __future__ import annotations
 import copy
 import json
 import re
+import subprocess
 from pathlib import Path
 from typing import Any, Callable
 
@@ -15,6 +16,16 @@ CONTRACT_PATH = ROOT / "capability_conformance" / "progressive_span_dispatch_con
 CHECKER_PATH = ROOT / "tools" / "check_progressive_span_dispatch_contract.py"
 CI_PATH = ROOT / "tools" / "run_ci_local.sh"
 PERL_CONSUMER_PATH = ROOT / "t" / "progressive_span_dispatch_perl_contract.t"
+RECURRING_DRIVER_PATH = "tools/check_progressive_span_dispatch_six_runtime.sh"
+
+PUBLIC_NO_DRIFT_PATHS = [
+    "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+    "docs/linkedspec-book/src/appendix/backend-handoff.md",
+    "docs/linkedspec-book/src/overview/project-status.md",
+    "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+    "capability_conformance/README.md",
+    "TOOLBOX.md",
+]
 
 PARSER_ID_PATTERN = r"^[a-z][a-z0-9]*(?:[._:-][a-z0-9]+)*$"
 TOP_RULE_PATTERN = r"^[A-Za-z_][A-Za-z0-9_]*$"
@@ -32,7 +43,7 @@ AUTHORED_SURFACE = {
     ],
     "result": "one detached child payload returned as the expression value",
     "failure_policy": "fail_only; every dispatch or child failure propagates unchanged and no null, fallback, retry, or alternate parser is implied",
-    "availability": "private Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT runtimes admitted; recurring and public no-drift rows remain pending",
+    "availability": "private Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT runtimes admitted; exact recurring and public no-drift proof is complete without an outward API",
 }
 
 POLICY = {
@@ -337,7 +348,7 @@ EXECUTION_CASES = [
 ]
 
 CURRENT_BOUNDARY = {
-    "status": "all_private_backends_and_typed_recurrence_admitted_public_pending",
+    "status": "private_six_runtime_recurring_and_public_no_drift_complete",
     "typed_rollout": {
         "path": "capability_conformance/typed_source_location_contract.json",
         "leg": "progressive_span_dispatch",
@@ -551,6 +562,52 @@ CURRENT_BOUNDARY = {
     },
 }
 
+PUBLIC_PROJECTION_CONTRACT = {
+    "documents": [
+        {
+            "path": PUBLIC_NO_DRIFT_PATHS[0],
+            "marker": "Progressive span dispatch is current as one private intrinsic on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; its exact recurring proof and public no-drift contract are complete at 9/9 without exporting a public facade, schema, semantic/MCP, CLI, or README surface.",
+        },
+        {
+            "path": PUBLIC_NO_DRIFT_PATHS[1],
+            "marker": "Progressive span dispatch is private and current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; recurring proof and public no-drift are complete at 9/9, while every guarded outward surface remains absent.",
+        },
+        {
+            "path": PUBLIC_NO_DRIFT_PATHS[2],
+            "marker": "Progressive span dispatch is closed at 9/9 as private six-runtime behavior with exact recurring and public no-drift proof; it adds no public facade, schema, semantic/MCP, CLI, or README behavior.",
+        },
+        {
+            "path": PUBLIC_NO_DRIFT_PATHS[3],
+            "marker": "The progressive span-dispatch contract is 9/9 complete: all six private runtime routes, exact recurrence, and public no-drift are current while the ten outward surfaces remain absent.",
+        },
+        {
+            "path": PUBLIC_NO_DRIFT_PATHS[4],
+            "marker": "Rollout is neutral + Perl + Rust + Dart + Julia + PUC Lua + LuaJIT + recurring + public no-drift: 9/9 complete, with the intrinsic still private and all ten outward surfaces absent.",
+        },
+        {
+            "path": PUBLIC_NO_DRIFT_PATHS[5],
+            "marker": "Progressive behavioral governance is 9/9 complete; the exact six-runtime recurrence and public no-drift proof are current while all ten outward surfaces remain absent.",
+        },
+    ],
+    "forbidden_claims": [
+        {"path": PUBLIC_NO_DRIFT_PATHS[0], "text": "private Perl, Rust, Dart, and Julia behavior. Lua now has the same"},
+        {"path": PUBLIC_NO_DRIFT_PATHS[0], "text": "consumer remains intentionally dormant until the"},
+        {"path": PUBLIC_NO_DRIFT_PATHS[0], "text": "rollout 7/9, and 112 mutations"},
+        {"path": PUBLIC_NO_DRIFT_PATHS[1], "text": "dedicated fail-only future expression"},
+        {"path": PUBLIC_NO_DRIFT_PATHS[1], "text": "behavioral recurrence and public"},
+        {"path": PUBLIC_NO_DRIFT_PATHS[1], "text": "private Perl-only progressive `dispatch_span`"},
+        {"path": PUBLIC_NO_DRIFT_PATHS[1], "text": "The progressive exclusion remains until exact shared-backend recurrence"},
+        {"path": PUBLIC_NO_DRIFT_PATHS[2], "text": "7/9 rollout and 112 mutations"},
+        {"path": PUBLIC_NO_DRIFT_PATHS[2], "text": "public no-drift `.8` follows"},
+        {"path": PUBLIC_NO_DRIFT_PATHS[3], "text": "locks 26 diagnostics and 7/9 rollout"},
+        {"path": PUBLIC_NO_DRIFT_PATHS[3], "text": "private Perl-only progressive `dispatch_span` until exact shared-backend"},
+        {"path": PUBLIC_NO_DRIFT_PATHS[4], "text": "with behavioral recurrence and public no-drift still pending"},
+    ],
+    "outward_guard": CURRENT_BOUNDARY["outward_guard"],
+}
+
+PUBLIC_PROJECTION_MUTATION_COUNT = 60
+
 DIAGNOSTICS = [
     ("progressive_parser_identity_literal_required", ["code", "origin", "operand"]),
     ("progressive_parser_identity_invalid", ["code", "origin", "parser_id"]),
@@ -588,8 +645,8 @@ ROLLOUT = [
     (5, "FUTURE-PARITY-BACKLOG.14.6.5", "julia", "complete", ["julia/test/progressive_span_dispatch_contract_test.jl"]),
     (6, "FUTURE-PARITY-BACKLOG.14.6.6", "puc_lua", "complete", ["lua/test/progressive_span_dispatch_contract_test.lua"]),
     (7, "FUTURE-PARITY-BACKLOG.14.6.6", "luajit", "complete", ["lua/test/progressive_span_dispatch_contract_test.lua"]),
-    (8, "FUTURE-PARITY-BACKLOG.14.6.7", "recurring", "pending", []),
-    (9, "FUTURE-PARITY-BACKLOG.14.6.8", "public_no_drift", "pending", []),
+    (8, "FUTURE-PARITY-BACKLOG.14.6.7", "recurring", "complete", [RECURRING_DRIVER_PATH]),
+    (9, "FUTURE-PARITY-BACKLOG.14.6.8", "public_no_drift", "complete", PUBLIC_NO_DRIFT_PATHS),
 ]
 
 CANONICAL_EXECUTION = {
@@ -746,7 +803,7 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
     require(document["format"] == 1, "format drifted")
     require(document["contract_id"] == "linkedspec-progressive-span-dispatch-v1", "contract id drifted")
     require(document["task_owner"] == "FUTURE-PARITY-BACKLOG.14.6.1", "task owner drifted")
-    require(document["status"] == "all_private_backends_complete_recurring_and_public_pending", "status drifted")
+    require(document["status"] == "private_six_runtime_recurring_and_public_no_drift_complete", "status drifted")
     expected_counts = {
         "registry_entries": len(REGISTRY_ENTRIES),
         "sources": len(SOURCES),
@@ -826,6 +883,12 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
     observed_diagnostics = [(row["code"], row["required_context"]) for row in document["diagnostics"]]
     require(observed_diagnostics == DIAGNOSTICS, "diagnostic membership/order/context drifted")
     require(len({code for code, _context in observed_diagnostics}) == len(DIAGNOSTICS), "diagnostic codes duplicated")
+    recurring_row = document["rollout"][7]
+    require(
+        recurring_row["status"] == "complete"
+        and recurring_row["paths"] == [RECURRING_DRIVER_PATH],
+        "completed recurring owner remains pending or is not bound to its committed driver",
+    )
     observed_rollout = [(row["order"], row["owner"], row["leg"], row["status"], row["paths"]) for row in document["rollout"]]
     require(observed_rollout == ROLLOUT, "rollout order/owner/status/path drifted")
     require(document["canonical_execution"] == CANONICAL_EXECUTION, "canonical execution drifted")
@@ -1148,6 +1211,10 @@ MUTATIONS: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
     ("rollout_julia_regressed", set_value(["rollout", 4, "status"], "pending")),
     ("rollout_puc_lua_regressed", set_value(["rollout", 5, "status"], "pending")),
     ("rollout_luajit_regressed", set_value(["rollout", 6, "status"], "pending")),
+    ("rollout_recurring_regressed", set_value(["rollout", 7, "status"], "pending")),
+    ("rollout_recurring_path", set_value(["rollout", 7, "paths", 0], "tools/wrong.sh")),
+    ("rollout_public_regressed", set_value(["rollout", 8, "status"], "pending")),
+    ("rollout_public_path", set_value(["rollout", 8, "paths", 0], "docs/wrong.md")),
     ("canonical_checker", set_value(["canonical_execution", "checker_path"], "tools/wrong.py")),
     ("canonical_storage", set_value(["canonical_execution", "storage_policy"], "/tmp")),
 ]
@@ -1165,12 +1232,211 @@ def mutation_checks(document: dict[str, Any]) -> int:
     return len(MUTATIONS)
 
 
+def read_public_projection_texts() -> tuple[dict[str, str], dict[str, str]]:
+    documents = {
+        row["path"]: (ROOT / row["path"]).read_text(encoding="utf-8")
+        for row in PUBLIC_PROJECTION_CONTRACT["documents"]
+    }
+    outward = {
+        path: (ROOT / path).read_text(encoding="utf-8")
+        for path in PUBLIC_PROJECTION_CONTRACT["outward_guard"]["paths"]
+    }
+    return documents, outward
+
+
+def validate_public_projection(
+    document: dict[str, Any],
+    contract: dict[str, Any],
+    document_texts: dict[str, str],
+    outward_texts: dict[str, str],
+    *,
+    check_tracked: bool,
+) -> None:
+    require(contract == PUBLIC_PROJECTION_CONTRACT, "public projection contract drifted")
+    documents = contract.get("documents")
+    forbidden = contract.get("forbidden_claims")
+    outward = contract.get("outward_guard")
+    require(isinstance(documents, list), "public document inventory is not an array")
+    require(isinstance(forbidden, list), "public forbidden-claim inventory is not an array")
+    paths = [row.get("path") for row in documents]
+    require(paths == PUBLIC_NO_DRIFT_PATHS, "public document order/path inventory drifted")
+    require(len(paths) == len(set(paths)) == 6, "public document inventory is not six unique paths")
+    require(set(document_texts) == set(paths), "public document text inventory drifted")
+
+    rollout = document.get("rollout")
+    require(isinstance(rollout, list) and len(rollout) == 9, "public projection requires nine rollout rows")
+    require(
+        all(row.get("status") == "complete" for row in rollout),
+        "public projection requires all nine progressive rollout legs complete",
+    )
+    require(
+        rollout[7].get("paths") == [RECURRING_DRIVER_PATH]
+        and rollout[8].get("paths") == PUBLIC_NO_DRIFT_PATHS,
+        "public projection rollout paths drifted",
+    )
+
+    for row in documents:
+        path = row.get("path")
+        marker = row.get("marker")
+        require(isinstance(path, str) and path in document_texts, "public document path drifted")
+        require(isinstance(marker, str) and marker, f"public marker invalid for {path}")
+        require(
+            document_texts[path].count(marker) == 1,
+            f"public marker missing or duplicated in {path}: {marker}",
+        )
+
+    require(len(forbidden) == 12, "public forbidden-claim inventory drifted")
+    for row in forbidden:
+        path = row.get("path")
+        claim = row.get("text")
+        require(isinstance(path, str) and path in document_texts, "forbidden public path drifted")
+        require(isinstance(claim, str) and claim, f"forbidden public claim invalid for {path}")
+        require(claim not in document_texts[path], f"stale public claim remains in {path}: {claim}")
+
+    require(outward == CURRENT_BOUNDARY["outward_guard"], "public outward guard drifted")
+    outward_paths = outward.get("paths")
+    forbidden_tokens = outward.get("forbidden_tokens")
+    require(
+        isinstance(outward_paths, list)
+        and len(outward_paths) == len(set(outward_paths)) == 10,
+        "public outward path inventory drifted",
+    )
+    require(
+        isinstance(forbidden_tokens, list)
+        and len(forbidden_tokens) == len(set(forbidden_tokens)) == 3,
+        "public outward token inventory drifted",
+    )
+    require(set(outward_texts) == set(outward_paths), "public outward text inventory drifted")
+    for path in outward_paths:
+        for token in forbidden_tokens:
+            require(token not in outward_texts[path], f"private progressive token escaped into {path}: {token}")
+
+    if check_tracked:
+        for path in paths + outward_paths:
+            tracked = subprocess.run(
+                ["git", "ls-files", "--error-unmatch", "--", path],
+                cwd=ROOT,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                check=False,
+            )
+            require(tracked.returncode == 0, f"governed public/outward path is not tracked: {path}")
+
+
+def public_claim_mutation(
+    path: str,
+    claim: str,
+) -> Callable[[dict[str, Any], dict[str, Any], dict[str, str], dict[str, str]], None]:
+    def mutate(
+        _document: dict[str, Any],
+        _contract: dict[str, Any],
+        document_texts: dict[str, str],
+        _outward_texts: dict[str, str],
+    ) -> None:
+        document_texts[path] += "\n" + claim
+
+    return mutate
+
+
+def outward_token_mutation(
+    path: str,
+    token: str,
+) -> Callable[[dict[str, Any], dict[str, Any], dict[str, str], dict[str, str]], None]:
+    def mutate(
+        _document: dict[str, Any],
+        _contract: dict[str, Any],
+        _document_texts: dict[str, str],
+        outward_texts: dict[str, str],
+    ) -> None:
+        outward_texts[path] += "\n" + token
+
+    return mutate
+
+
+def public_projection_mutation_checks(document: dict[str, Any]) -> int:
+    document_texts, outward_texts = read_public_projection_texts()
+    mutations: list[
+        tuple[
+            str,
+            Callable[[dict[str, Any], dict[str, Any], dict[str, str], dict[str, str]], None],
+        ]
+    ] = [
+        ("public document omission", lambda _doc, contract, _texts, _outward: contract["documents"].pop()),
+        ("public document duplication", lambda _doc, contract, _texts, _outward: contract["documents"].append(copy.deepcopy(contract["documents"][0]))),
+        ("public document path drift", lambda _doc, contract, _texts, _outward: contract["documents"][0].__setitem__("path", "docs/wrong.md")),
+        ("public marker omission", lambda _doc, contract, _texts, _outward: contract["documents"][0].pop("marker")),
+        ("public marker drift", lambda _doc, contract, _texts, _outward: contract["documents"][0].__setitem__("marker", "wrong marker")),
+        ("forbidden claim omission", lambda _doc, contract, _texts, _outward: contract["forbidden_claims"].pop()),
+        ("forbidden claim path drift", lambda _doc, contract, _texts, _outward: contract["forbidden_claims"][0].__setitem__("path", "docs/wrong.md")),
+        ("forbidden claim text drift", lambda _doc, contract, _texts, _outward: contract["forbidden_claims"][0].__setitem__("text", "wrong stale claim")),
+        ("outward path omission", lambda _doc, contract, _texts, _outward: contract["outward_guard"]["paths"].pop()),
+        ("outward token omission", lambda _doc, contract, _texts, _outward: contract["outward_guard"]["forbidden_tokens"].pop()),
+        ("recurring rollout regression", lambda candidate, _contract, _texts, _outward: candidate["rollout"][7].__setitem__("status", "pending")),
+        ("public rollout regression", lambda candidate, _contract, _texts, _outward: candidate["rollout"][8].__setitem__("status", "pending")),
+    ]
+    for index, row in enumerate(PUBLIC_PROJECTION_CONTRACT["documents"], 1):
+        path = row["path"]
+        marker = row["marker"]
+        mutations.append(
+            (
+                f"required public marker deletion {index}",
+                lambda _doc, _contract, texts, _outward, path=path, marker=marker: texts.__setitem__(path, texts[path].replace(marker, "", 1)),
+            )
+        )
+    for index, row in enumerate(PUBLIC_PROJECTION_CONTRACT["forbidden_claims"], 1):
+        mutations.append(
+            (
+                f"stale public claim injection {index}",
+                public_claim_mutation(row["path"], row["text"]),
+            )
+        )
+    for path in PUBLIC_PROJECTION_CONTRACT["outward_guard"]["paths"]:
+        for token in PUBLIC_PROJECTION_CONTRACT["outward_guard"]["forbidden_tokens"]:
+            mutations.append(
+                (
+                    f"outward token injection {path} {token}",
+                    outward_token_mutation(path, token),
+                )
+            )
+    require(
+        len(mutations) == PUBLIC_PROJECTION_MUTATION_COUNT,
+        "public projection mutation count drifted",
+    )
+    for name, mutate in mutations:
+        candidate_document = copy.deepcopy(document)
+        candidate_contract = copy.deepcopy(PUBLIC_PROJECTION_CONTRACT)
+        candidate_document_texts = dict(document_texts)
+        candidate_outward_texts = dict(outward_texts)
+        mutate(candidate_document, candidate_contract, candidate_document_texts, candidate_outward_texts)
+        try:
+            validate_public_projection(
+                candidate_document,
+                candidate_contract,
+                candidate_document_texts,
+                candidate_outward_texts,
+                check_tracked=False,
+            )
+        except ContractError:
+            continue
+        fail(f"public projection mutation was not rejected: {name}")
+    return len(mutations)
+
+
 def main() -> int:
     if not CONTRACT_PATH.is_file():
         fail("progressive span-dispatch contract is missing")
     document = json.loads(CONTRACT_PATH.read_text(encoding="utf-8"))
     validate_contract(document)
     mutations = mutation_checks(document)
+    document_texts, outward_texts = read_public_projection_texts()
+    validate_public_projection(
+        document,
+        PUBLIC_PROJECTION_CONTRACT,
+        document_texts,
+        outward_texts,
+        check_tracked=True,
+    )
+    public_mutations = public_projection_mutation_checks(document)
     complete = sum(row["status"] == "complete" for row in document["rollout"])
     pending = len(document["rollout"]) - complete
     print(
@@ -1190,7 +1456,11 @@ def main() -> int:
         f"{len(document['current_boundary']['outward_guard']['paths'])} outward guards; "
         f"{len(document['diagnostics'])} diagnostics; "
         f"rollout {complete}/{len(document['rollout'])} complete, {pending} pending; "
-        f"{mutations} rejected mutations)"
+        f"{mutations} contract mutations; "
+        f"public {len(PUBLIC_PROJECTION_CONTRACT['documents'])} documents/"
+        f"{len(PUBLIC_PROJECTION_CONTRACT['forbidden_claims'])} forbidden/"
+        f"{len(PUBLIC_PROJECTION_CONTRACT['outward_guard']['paths'])} outward/"
+        f"{public_mutations} mutations)"
     )
     return 0
 

@@ -359,13 +359,13 @@ bash tools/run_python_project_data.sh tools/check_typed_source_location_contract
 
 The checker covers 3 decoded sources, 7 coordinate conversions, 6 direct spans, 3 derived-text cases, 8 invocation,
 8 transaction, and 33 recursive-observation transitions, 6 detached observations, 4 structural cases,
-33 diagnostics, and 152 mutations.
+33 diagnostics, and 170 mutations.
 It also proves that all 92 current source-boundary helpers project onto the algebra.
 
-This is rollout status, not authored-value status. Eleven of 14 rollout legs are complete: the neutral contract,
+This is rollout status, not authored-value status. Twelve of 14 rollout legs are complete: the neutral contract,
 public linked-rule structure, unchanged neutral/public recomposition, and the Perl, Rust, Dart, Julia, PUC Lua,
 and LuaJIT runtime targets, plus transaction safety, recursive-observation recurrence, and lossless-gap composition.
-Progressive dispatch, staged dispatch, and combined program-wide no-drift remain pending.
+Progressive recurrence is also complete. Staged dispatch and combined program-wide no-drift remain pending.
 
 Perl now uses an internal decoded-source authority plus immutable position/span values beneath every governed
 helper projection. Exact Unicode execution is admitted on live and independently emitted/loaded generated routes.
@@ -424,10 +424,8 @@ recurring/public-no-drift row remains pending for final program-wide closeout `F
 typed-source composition is 12 complete / 2 pending with 170 mutations. The transaction row is an authority
 projection of the separately complete 9/9 recognition program: it changes no syntax, runtime, or public API.
 
-Progressive span dispatch is admitted as private Perl, Rust, Dart, and Julia behavior. Lua now has the same
-private carrier behavior on PUC Lua and LuaJIT, but its shared consumer remains intentionally dormant until the
-separate dual-ABI admission leaf. The executable neutral authority remains the cross-backend source of truth. The
-reserved private expression is:
+Progressive span dispatch is current as one private intrinsic on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; its exact recurring proof and public no-drift contract are complete at 9/9 without exporting a public facade, schema, semantic/MCP, CLI, or README surface.
+The executable neutral authority remains the cross-backend source of truth. The reserved private expression is:
 
 ```text
 value = dispatch_span("expr-v1", "Expr", span)
@@ -439,18 +437,19 @@ cursor/marks/transactions stay isolated; capability and policy ceilings only nar
 budget propagate; and repeated parser/top/source dispatch must strictly shrink the span. The existing staged
 function-body adapter does not satisfy this contract. The neutral checker passes 2 registry entries, 2 sources/8
 views, 6 authority, 6 cancellation, 8 chain, and 4 execution cases, 9 Rust + 8 Dart + 9 Julia + 9 Lua carrier
-paths, zero backend guards, and 10 outward guards, 26 diagnostics, rollout 7/9, and 112 mutations. One separate
-repository-routed recurrence driver runs neutral plus all six runtimes and four support ledgers:
+paths, zero backend guards, and 10 outward guards, 26 diagnostics, rollout 9/9, and 116 contract mutations. Its
+public projection additionally governs six current documents, rejects twelve stale claims, scans the same ten
+outward paths, and rejects sixty omission/injection mutations. One repository-routed recurrence driver runs
+neutral plus all six runtimes and four support ledgers:
 
 ```bash
 bash tools/check_progressive_span_dispatch_six_runtime.sh
 ```
 
 Five immutable backend source groups map to six routes because shared Lua runs once per ABI. Canonical CI exposes
-the exact matrix behind `LINKEDSPEC_RUN_PROGRESSIVE_SPAN_MATRIX=1`. The typed progressive row is current, making
-typed governance 12/2/170; the rejected dispatch effect owns current node
-`PROGRESSIVE_DISPATCH_SPAN` and no call row; outward guards
-deny premature exposure. Perl has private carrier integration
+the exact matrix behind `LINKEDSPEC_RUN_PROGRESSIVE_SPAN_MATRIX=1`. That committed driver owns the corrected
+behavioral recurring row, while the typed progressive row remains current at 12/2/170. The rejected dispatch
+effect owns current node `PROGRESSIVE_DISPATCH_SPAN` and no call row; outward guards deny exposure. Perl has private carrier integration
 behind host-supplied invocation options: the exact assignment lowers to one dedicated node and works identically
 through live, reconstructed, generated-plan, and independently loaded emitted routes, while generated artifacts
 contain no registry callback or mutable authority. Canonical CI requires and runs its exact 127-case consumer once.
@@ -468,7 +467,7 @@ detached child payload. Generated data contains only target/id/top/span operands
 Recognition effect analysis rejects any attempted rule/function graph that reaches the node, and runtime checks
 live tokens defensively. The exact outer-cfg consumer is GREEN and canonically routed once under that cfg, while
 ordinary Cargo still executes zero tests. Dart, Julia, PUC Lua, and LuaJIT are also admitted; typed recurrence is
-complete and progressive public no-drift remains pending.
+complete and progressive public no-drift is current without exporting an outward API.
 
 Dart's historical pre-carrier boundary remains preserved by the same final-path fixture; `.14.6.4.2` turns it
 GREEN and `.14.6.4.3` admits it without changing behavior. The reserved assignment is now one exclusive

@@ -241,7 +241,7 @@ fn final_path_uses_one_dedicated_progressive_node_across_four_routes() {
     assert_eq!(neutral["format"], 1);
     assert_eq!(
         neutral["status"],
-        "all_private_backends_complete_recurring_and_public_pending"
+        "private_six_runtime_recurring_and_public_no_drift_complete"
     );
     assert_eq!(
         neutral["expected_counts"],
@@ -262,7 +262,7 @@ fn final_path_uses_one_dedicated_progressive_node_across_four_routes() {
             "outward_guard_paths": 10,
             "diagnostics": 26,
             "rollout_legs": 9,
-            "mutations": 112,
+            "mutations": 116,
         })
     );
     assert_eq!(
@@ -384,7 +384,7 @@ fn final_path_uses_one_dedicated_progressive_node_across_four_routes() {
             .collect::<Vec<_>>(),
         [
             "complete", "complete", "complete", "complete", "complete", "complete", "complete",
-            "pending", "pending",
+            "complete", "complete",
         ]
     );
     assert_eq!(

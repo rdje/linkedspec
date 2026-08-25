@@ -161,14 +161,17 @@
 > promotes only its typed row for current 12/2/170 truth. Run
 > `bash tools/check_typed_gap_composition_six_runtime.sh`; no second gap behavior owner or outward surface exists.
 >
+> Progressive span dispatch is private and current on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; recurring proof and public no-drift are complete at 9/9, while every guarded outward surface remains absent.
+>
 > Progressive neutral `.14.6.1` reserves
-> `value = dispatch_span("expr-v1", "Expr", span)` as a dedicated fail-only future expression. Its checker passes
+> `value = dispatch_span("expr-v1", "Expr", span)` as a dedicated fail-only private expression. Its checker passes
 > 2 immutable registry entries, 2 sources/8 rebased views, 6 authority, 6 cancellation, 8 chain, 4 execution
 > cases, 9 Rust + 8 Dart + 9 Julia + 9 Lua carrier paths and 10 outward guards with zero backend guards, 26
-> diagnostics, 7/9 rollout, and 112 mutations. Perl, exact cfg-enabled Rust, Dart, Julia, PUC Lua, and LuaJIT are
-> privately admitted. The exact five-source/six-route recurrence driver plus four support ledgers promotes only
-> typed `progressive_span_dispatch`, producing 12/2/170 typed truth while behavioral recurrence and public
-> no-drift remain pending. The rejected effect owns exactly current node `PROGRESSIVE_DISPATCH_SPAN` and no call row;
+> diagnostics, 9/9 rollout, 116 contract mutations, and public governance over six documents / twelve stale
+> denials / ten outward guards / sixty mutations. Perl, exact cfg-enabled Rust, Dart, Julia, PUC Lua, and LuaJIT
+> are privately admitted. The exact five-source/six-route recurrence driver plus four support ledgers owns the
+> corrected behavioral recurring row and retains typed `progressive_span_dispatch` at 12/2/170. The rejected
+> effect owns exactly current node `PROGRESSIVE_DISPATCH_SPAN` and no call row;
 > outward guards deny exposure. No path loader, public facade/schema/semantic/MCP/CLI/README surface, shared helper
 > inventory, generated format, or typed rollout row moves. Lua `.14.6.6.0` runs one shared dormant Lua-5.1-
 > compatible consumer on PUC Lua and LuaJIT: each passes 85 of 86 assertions and fails only because the generic
@@ -342,9 +345,9 @@ appears in this book and in the governed occurrence sources: the 105-fixture neu
 complete-named-mark fixture, and the public gap-contract example. The strict checker independently derives 126
 public identifier-shaped calls from the Perl ActionIR contract registry, requires every one in each backend
 inventory, and currently rejects fifteen classified names: nine compatibility/legacy/internal contracts, five
-grammar-owned recognition intrinsics, and private Perl-only progressive `dispatch_span`; all lower to dedicated
-nodes rather than shared helper calls. The progressive exclusion remains until exact shared-backend recurrence;
-Perl admission alone does not claim Dart/Julia/Lua helper support. Dart's,
+grammar-owned recognition intrinsics, and private cross-backend progressive `dispatch_span`; all lower to
+dedicated nodes rather than shared helper calls. The progressive exclusion remains because the intrinsic is
+private even though exact shared-backend recurrence is current. Dart's,
 Julia's, and Lua's separately rolled-out seven
 source-boundary compatibility aliases are checked with their canonical targets against the neutral typed-source contract; they do
 not silently widen the shared 250-name inventory. Lua executes the mappings through one shared runtime on PUC Lua

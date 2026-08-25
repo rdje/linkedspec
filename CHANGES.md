@@ -10,6 +10,23 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-25 — FUTURE-PARITY-BACKLOG.14.6.8 — close progressive public no-drift
+
+- Root-caused a governance mismatch left by `.14.6.7`: its completed five-source/six-runtime driver promoted the
+  typed recurring row, but the independently defined progressive behavioral `recurring` row still said pending.
+  No product behavior was missing; the exact defect and prevention rule now have a Knowledge Map fact card.
+- Corrected that row to its committed driver and promoted only `public_no_drift`, closing progressive governance
+  at 9/9/116. The neutral checker now governs six current documents, 12 stale claims, 10 outward paths, and 60
+  reason-checked omission/injection mutations while requiring the private-intrinsic/no-public-API boundary.
+- Updated only the five immutable consumer groups' status/count/rollout snapshots. Their fixtures, behavioral
+  assertions, runtime sources, carriers, generated format, typed 12/2/170 contract, and six-runtime route remain
+  unchanged.
+- Synchronized ADR `0080`, Knowledge, capability guidance, roadmaps, architecture, Toolbox, task/frontier,
+  continuity, and the sole-facing mdBook. Root README, facade/schema/semantic/MCP/CLI surfaces, staged `.14.7`,
+  and combined `.14.8` do not move.
+- Focused no-drift proof, the exact six-runtime driver, rendered mdBook, Knowledge, bounded histories, all nine
+  doctrines, exact staged diff, and receipt-bound canonical CI pass. Parent `.14.6` closes; staged `.14.7` is next.
+
 ## 2026-08-25 — FUTURE-PARITY-BACKLOG.14.6.7 — bind progressive recurring proof
 
 - Added `tools/check_progressive_span_dispatch_six_runtime.sh`, one repository-routed fail-fast composition of

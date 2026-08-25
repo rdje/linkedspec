@@ -1,13 +1,13 @@
 # MEMORY
 
-- activation_commit: `872ea8ba4410b24c174c8c280a893592c8eb911e` — exact clean shared-Lua-closeout base for
-  task-tree-first canonical recurrence `FUTURE-PARITY-BACKLOG.14.6.7`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.7 - bind progressive recurring proof`; exact five-source/
-  six-runtime recurrence promotes only typed `progressive_span_dispatch` to current 12/2/170 truth.
-- active_work_unit: none after the intended `.14.6.7` commit; progressive public no-drift `.14.6.8` is pending.
-- next_action: from the clean `.14.6.7` commit, retrieve and activate `FUTURE-PARITY-BACKLOG.14.6.8`
-  task-tree-first; close progressive public projection/no-drift without exporting an outward surface.
-- in_flight_uncommitted: none after the intended `.14.6.7` commit; no background job remains.
+- activation_commit: `b7c613be6ced8827271056950a85b77933733f9f` — exact clean progressive-recurring base for
+  task-tree-first canonical public closeout `FUTURE-PARITY-BACKLOG.14.6.8`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.8 - close progressive public no-drift`; behavioral
+  recurrence/public governance closes at 9/9/116 plus public 6/12/10/60 without an outward API.
+- active_work_unit: none after the intended `.14.6.8` commit; staged AST enrichment `.14.7` is pending.
+- next_action: from the clean `.14.6.8` commit, retrieve and activate `FUTURE-PARITY-BACKLOG.14.7`
+  task-tree-first; audit and split staged AST enrichment before behavior or public claims.
+- in_flight_uncommitted: none after the intended `.14.6.8` commit; no background job remains.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
@@ -17,8 +17,9 @@
   observation, lossless-gap composition, and progressive recurrence are admitted at 12/2/170; no public typed
   value is admitted and staged/combined program-wide rows remain future. Recognition transactions are current
   on all six runtimes at 138/250/58; recurrence and public no-drift are current at 9/9.
-- recurring_rollout_fact: the original contract combines recurring and public no-drift in one `.14.8` row.
-  Detailed plan/history assign `.14.2.6` driver/topology only; do not add a fifteenth row or promote `.14.8`.
+- recurring_rollout_fact: the original roadmap combines final program-wide recurrence/public no-drift in `.14.8`.
+  Progressive independently defines and now completes `recurring` plus `public_no_drift` at 9/9/116; do not add
+  another row or consume staged `.14.7` / combined `.14.8` ownership.
 - backend_audit_fact: Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT typed-source authorities and private transactions are
   admitted without facade exports; exact carriers/registers/ABIs live in their Knowledge cards.
 - current_storage_contract: ADR `0053` keeps all project data on the repository filesystem; use routed wrappers,
@@ -35,19 +36,19 @@
   admits only mandatory engineering-notes segment `4991`, advancing that finite route to 17 files / 16 manifest
   lines without changing any other pressure control.
 - current_verification_contract: ADR `0073` makes focused proof the ordinary per-leaf default and canonical proof
-  mandatory at admission/milestone/public/infrastructure and final clean push boundaries; typed recurrence
-  `.14.6.7` changes executable/canonical topology and therefore has exact staged receipt-bound proof.
+  mandatory at admission/milestone/public/infrastructure and final clean push boundaries; progressive public
+  closeout `.14.6.8` changes final executable governance and has exact staged receipt-bound proof.
 - documentation_debt_owner: ADR `0066` composition-closes all stores; bounded live/history/task/Knowledge owners
   and their rollover/index gates remain current.
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, recurrence/public no-drift 9/9, and
   classifies private progressive dispatch fail-closed at 138 ActionIR rows / 250 calls / 58 mutations.
-- current_future_direction: neutral `.14.6.1` plus admitted Perl `.2`, Rust `.3`, Dart `.4`, Julia `.5.0-.4`, PUC
-  Lua, and LuaJIT remain behavioral rollout 7/9/112. Typed recurrence `.7` runs five immutable sources over six
-  routes plus four support ledgers and is complete at typed 12/2/170. Public `.8`, staged `.14.7`, and combined
-  `.14.8` follow without outward admission from `.7`.
+- current_future_direction: progressive neutral `.14.6.1`, Perl `.2`, Rust `.3`, Dart `.4`, Julia `.5.0-.4`,
+  shared Lua `.6.0-.4`, typed recurrence `.7`, and public closeout `.8` are complete. Behavioral governance is
+  9/9/116, typed is 12/2/170, and public is 6/12/10/60 without outward admission. Staged `.14.7` follows; combined
+  program-wide `.14.8` remains later.
 - latest_bootstrap_read: 2026-08-25 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
-  review complete; `.14.6.7` adds exact neutral/Perl-129/Rust-1/Dart-7/Julia-62/PUC-Lua-178/LuaJIT-178 recurrence
-  plus typed/generated/capability/language support proof. Typed truth is 12/2/170; progressive behavioral truth
-  stays 7/9/112. The capability-guide 2/9 omission is root-caused to `78bc66e1`, repaired, and mutation-locked.
-  Commit: `FUTURE-PARITY-BACKLOG.14.6.7 - bind progressive recurring proof`; `.14.6.8` is next.
+  review complete; `.14.6.8` binds behavioral recurrence to the committed five-source/six-runtime driver and
+  closes progressive governance at 9/9/116 plus public 6/12/10/60. Consumer changes are snapshot-only; runtime,
+  fixture, generated-format, outward API, and typed 12/2/170 truth remain exact. Commit:
+  `FUTURE-PARITY-BACKLOG.14.6.8 - close progressive public no-drift`; staged `.14.7` is next.

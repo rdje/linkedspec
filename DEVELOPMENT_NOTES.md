@@ -10,6 +10,24 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-25 (`FUTURE-PARITY-BACKLOG.14.6.8` — progressive public no-drift): exact clean activation is recurring-
+  proof commit `b7c613be`; this canonical leaf owns the missed behavioral recurring projection, independent public
+  no-drift governance, current projections, and parent closure without product or outward behavior.
+- Checker-first RED proved the exact seam: `.14.6.7` and its committed driver were complete while the progressive
+  contract still described `recurring` as pending with no path. The typed-only precedent was inapplicable because
+  this contract independently models behavioral recurrence; the durable Knowledge fact records that distinction.
+- Behavioral governance now closes at 9/9/116. Public projection governance binds six current documents, rejects
+  12 stale claims and 10 outward paths, and exercises 60 reason-checked marker-deletion, stale-claim, and private-
+  token/outward-path injection mutations.
+- The first composed run reached Perl and failed only four governance snapshots. Updating the same exact
+  status/availability/mutation/rollout snapshots across Perl, Rust, Dart, Julia, and shared Lua preserves every
+  consumer fixture and assertion while restoring five-source/six-runtime lockstep.
+- Exact Git review contains no parser, compiler, runtime, carrier, fixture, generated-format, public-call,
+  facade/schema/semantic/MCP/CLI, or root-README behavior movement. Typed governance remains 12/2/170; staged
+  `.14.7` and combined `.14.8` retain their separate owners.
+- The recurring driver, focused ledgers, rendered book, Knowledge, bounded histories, task/index, nine doctrines,
+  exact staged diff, and receipt-bound progressive canonical run are the landing authority.
+
 - 2026-08-25 (`FUTURE-PARITY-BACKLOG.14.6.7` — progressive typed recurrence): exact clean activation is shared-
   Lua closeout `872ea8ba`; this canonical leaf owns only recurrence orchestration, project-data/canonical routing,
   typed-row promotion, reason-checked mutations, and synchronized current projections.

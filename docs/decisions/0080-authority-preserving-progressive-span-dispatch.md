@@ -1,7 +1,7 @@
 # ADR 0080: Progressive span dispatch uses pre-registered same-source child authority
 
 - Date: 2026-08-17
-- Status: accepted architecture; executable neutral authority, all six private runtime admissions, and typed recurrence complete; public no-drift pending
+- Status: accepted architecture; private six-runtime admission, exact recurrence, and public no-drift complete without an outward API
 - Tags: architecture, parser-composition, progressive-parsing, spans, source-location, registry, authority, cancellation, portability
 
 ## Context
@@ -55,7 +55,9 @@ transaction-composition projection before neutral progressive behavior.
   renewed cancellation authority into active recognition.
 - The executable neutral artifact/checker is current at 2 registry entries, 2 sources/8 view cases, 6 authority,
   6 cancellation, 8 chain, and 4 execution cases, zero backend guards, 9 governed Rust plus 8 Dart plus 9 Julia
-  plus 9 Lua carrier paths, 10 outward guards, 26 diagnostics, 7/9 rollout, and 112 rejected mutations.
+  plus 9 Lua carrier paths, 10 outward guards, 26 diagnostics, 9/9 rollout, and 116 rejected contract mutations.
+  Public projection separately governs 6 documents, 12 stale-current denials, the same 10 outward paths, and 60
+  omission/injection mutations.
 - Its current-boundary proof admits the exact private Perl, cfg-enabled Rust, ordinary/canonical Dart and Julia,
   and ordinary plus exact-canonical dual-ABI Lua consumers; requires the typed row to be complete over all six
   runtimes after `.14.6.7`; requires the
@@ -92,6 +94,10 @@ transaction-composition projection before neutral progressive behavior.
   Dart, Julia, PUC Lua, LuaJIT, and all four support ledgers. It promotes only typed
   `progressive_span_dispatch`, advancing typed governance to 12/2/170 while behavioral governance remains
   7/9/112 and public no-drift stays `.14.6.8`-owned.
+- Public closeout `.14.6.8` corrects that completed driver's still-pending behavioral recurring row, binds the
+  driver path, and promotes only `public_no_drift`. Progressive governance is 9/9/116 plus public 6/12/10/60.
+  The ten outward paths still reject all private spellings, so this is projection/no-drift rather than a public
+  facade, schema, semantic/MCP, CLI, README, or shared-helper admission.
 - Private rollout changes no generated format, typed recurrence, facade, schema, semantic/MCP, CLI, README, or
   outward behavior.
 

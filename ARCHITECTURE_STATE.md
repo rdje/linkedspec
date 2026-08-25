@@ -49,9 +49,10 @@ remain staged `.14.7` work.
 Corrective typed transaction composition `.14.6.0.1`, neutral `.1`, Perl/Rust/Dart/Julia/shared-Lua `.2-.6`, and
 typed recurrence `.7` are complete. The exact recurring driver runs the neutral checker, five immutable backend
 source groups over six ordered runtime routes, and typed/generated/capability/language support ledgers; shared Lua
-runs once per ABI. It promotes only typed `progressive_span_dispatch`, making typed governance 12/2/170 while
-progressive behavioral governance remains 7/9/112. Public projection/no-drift `.8` exports no
-facade/schema/CLI/README behavior and does not consume combined program-wide `.14.8`.
+runs once per ABI. It promotes only typed `progressive_span_dispatch`, making typed governance 12/2/170. Public
+projection/no-drift `.8` binds that committed driver to the corrected behavioral recurring row and closes
+progressive governance at 9/9/116 plus public 6/12/10/60. It exports no facade/schema/semantic/MCP/CLI/README
+behavior and does not consume combined program-wide `.14.8`.
 
 The required engineering-notes rollover at this canonical boundary publishes immutable segment `4991`. ADR
 `0087` advances only the finite routed collection from 16 to 17 files and manifest from 15 to 16 lines; root,

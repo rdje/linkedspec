@@ -320,13 +320,15 @@ bash tools/check_progressive_span_dispatch_six_runtime.sh
 
 The checker executes 2 sources / 8 view cases, 6 authority, 6 cancellation, 8 chain, and 4 execution cases; guards
 9 Rust, 8 Dart, 9 Julia, and 9 Lua implementation paths plus 10 outward paths with zero backend guards; locks 26
-diagnostics; and rejects 112 mutations. Its private behavioral rollout is 7/9 complete across neutral, Perl,
-Rust, Dart, Julia, PUC Lua, and LuaJIT, with behavioral recurrence and public no-drift still pending. The separate
+diagnostics; and rejects 116 contract mutations plus 60 public omission/injection mutations over six documents,
+12 stale-current denials, and the same 10 outward paths. Rollout is neutral + Perl + Rust + Dart + Julia + PUC Lua + LuaJIT + recurring + public no-drift: 9/9 complete, with the intrinsic still private and all ten outward surfaces absent.
+The separate
 typed recurrence driver binds five immutable backend source groups to six ordered runtime routes because the
 shared Lua consumer runs independently on both ABIs, then executes typed-source, generated-source, capability,
 and language support ledgers. Canonical CI requires, path-audits, syntax-checks, and exposes that driver only
 through `LINKEDSPEC_RUN_PROGRESSIVE_SPAN_MATRIX=1`. This promotes only typed `progressive_span_dispatch`;
-the rejected recognition effect retains current node `PROGRESSIVE_DISPATCH_SPAN` and no call row, while ten
+the public closeout binds that committed driver to behavioral recurrence and completes public no-drift. The
+rejected recognition effect retains current node `PROGRESSIVE_DISPATCH_SPAN` and no call row, while ten
 facade/schema/semantic/MCP/CLI/README paths continue to deny outward exposure.
 
 `inter_match_gap_capture_contract.json` is the neutral authority for named regex slots and lossless

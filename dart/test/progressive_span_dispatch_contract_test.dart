@@ -44,7 +44,7 @@ void main() {
       expect(contract['format'], 1);
       expect(
         contract['status'],
-        'all_private_backends_complete_recurring_and_public_pending',
+        'private_six_runtime_recurring_and_public_no_drift_complete',
       );
       expect(contract['expected_counts'], <String, Object?>{
         'registry_entries': 2,
@@ -63,7 +63,7 @@ void main() {
         'outward_guard_paths': 10,
         'diagnostics': 26,
         'rollout_legs': 9,
-        'mutations': 112,
+        'mutations': 116,
       });
       expect(_ids(contract, 'view_cases'), <String>[
         'unicode_middle',
@@ -160,8 +160,8 @@ void main() {
         'complete',
         'complete',
         'complete',
-        'pending',
-        'pending',
+        'complete',
+        'complete',
       ]);
       expect(rollout[3]['paths'], <String>[
         'dart/test/progressive_span_dispatch_contract_test.dart',

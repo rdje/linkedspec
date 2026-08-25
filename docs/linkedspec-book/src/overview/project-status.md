@@ -34,7 +34,8 @@ generated-plan, and independently loaded emitted-module routes. Admission `.3` m
 ordinary discovery once per ABI and one exact canonical route per ABI, advancing only PUC Lua and LuaJIT to
 rollout 7/9/112 while the authority matrix stays dormant. Independent recomposition `.4` reruns both committed
 ABI owners unchanged and closes shared Lua. Typed recurrence `.14.6.7` then binds five immutable backend source
-groups to six ordered runtime routes and hands off progressive public no-drift `.14.6.8`.
+groups to six ordered runtime routes. Public closeout `.14.6.8` corrects the behavioral recurring projection and
+closes progressive governance at 9/9/116 plus public 6/12/10/60 without an outward API.
 Its mandatory engineering-notes rollover publishes immutable segment `4991`; ADR `0087` advances only finite
 engineering-notes collection/manifest capacity to 17 files / 16 lines without weakening any other pressure bound.
 
@@ -195,13 +196,14 @@ complete recognition authority—9/9 rollout, 58 mutations, five backend sources
 effects and cursor-progress proof—into `transaction_safety` for 11/3/152 truth at that boundary. Progressive
 recurrence `.14.6.7` now binds five sources to six routes plus four support ledgers, promotes only
 `progressive_span_dispatch`, and makes current typed truth 12/2/170 without behavior or public-surface movement.
+Progressive span dispatch is closed at 9/9 as private six-runtime behavior with exact recurring and public no-drift proof; it adds no public facade, schema, semantic/MCP, CLI, or README behavior.
 Recursive-observation public no-drift is current under `.14.4.8`, while the combined program-wide `.14.8` row remains pending.
 No public helper, facade, descriptor/generated version, result schema, semantic/MCP field, CLI, or README behavior
 is current. Canonical `.14.5.1` signoff passes nine doctrines, repository containment and relocation, both
 66-case CLI environments, RAM at 51%, Phase 0 at 1,031/1,031 in 729 seconds, and the exact six-runtime opt-in;
-parent `.14.5` is closed; progressive span dispatch `.14.6` is active with all six private runtime rows admitted. Rust's
+parent `.14.5` is closed; progressive span dispatch `.14.6` is closed with all six private runtime rows admitted. Rust's
 exact outer-cfg consumer is canonically routed once while ordinary discovery remains zero tests; governance is
-7/9 rollout and 112 mutations. Dart parent `.14.6.4` is closed after its exact carrier consumer became ordinary
+9/9 rollout, 116 contract mutations, and public 6/12/10/60 governance. Dart parent `.14.6.4` is closed after its exact carrier consumer became ordinary
 and gained one canonical route. The bounded capacity tree adds and recomposes Julia's semantic owner without
 changing backend behavior. Julia `.14.6.5.0` freezes the exact generic-call/four-carrier historical dormant RED,
 `.14.6.5.1` supplies its private immutable authority, `.14.6.5.2` adds the dedicated node plus four dormant fresh-
@@ -232,7 +234,8 @@ Independent recomposition `.14.6.6.4` directly reruns carrier 178/178 and dorman
 and LuaJIT, complete ordinary Lua, admitted Perl/Rust/Dart/Julia consumers, and every neutral/direct-dependent
 checker without changing a production, test, fixture, contract, generated-format, or CI-topology byte. It closes
 the shared Lua parent at unchanged 7/9/112. Typed recurrence `.14.6.7` now binds the exact five-source/six-runtime
-proof and promotes only the typed progressive row; `.14.6.8` owns public projection/no-drift next.
+proof and promotes only the typed progressive row; `.14.6.8` corrects its behavioral recurring projection and
+closes progressive public no-drift without exposing a public API.
 
 Julia recomposition corrected stale current Julia-pending prose in the predecessor Perl, Rust, and Dart
 Knowledge cards. The executable neutral checker already governed runtime, contract, and outward paths exactly;
@@ -257,10 +260,11 @@ isolated, capabilities intersect, ceilings only narrow, cancellation/budget cann
 top/source chain must strictly shrink its span. Correction `.14.6.0.1` repaired the typed transaction row; neutral
 governance passes 2 registry entries, 2 sources/8 views, 6 authority, 6 cancellation, 8 chain, 4 execution cases,
 9 Rust + 8 Dart + 9 Julia + 9 Lua carrier paths, zero backend guards, and 10 outward guards, 26 diagnostics,
-rollout 7/9, and 112 mutations. The typed row is complete after exact recurrence; the rejected effect owns current node
-`PROGRESSIVE_DISPATCH_SPAN` and no call row; outward guards deny exposure. Lua private authority/core `.14.6.6.1`
-and carriers `.2` are current; admission `.3` and typed recurrence `.7` are complete while public no-drift `.8` follows.
-Independent Lua recomposition `.4` next closes the
+rollout 9/9, and 116 contract mutations. Public projection is current across six documents, twelve stale-current
+denials, ten outward guards, and sixty omission/injection mutations. The typed row is complete after exact recurrence;
+the rejected effect owns current node `PROGRESSIVE_DISPATCH_SPAN` and no call row; outward guards deny exposure.
+Lua private authority/core `.14.6.6.1` and carriers `.2` are current; admission `.3`, typed recurrence `.7`, and
+private public-no-drift closeout `.8` are complete. Independent Lua recomposition `.4` closed the
 backend parent after admission.
 
 Rust `.14.6.3.0` historically froze the dedicated-node RED behind one explicit cfg. Rust `.14.6.3.1` supplies the independent private authority beneath that boundary: immutable precompiled

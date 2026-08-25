@@ -2,26 +2,28 @@
 
 ## Current Activity
 
-- Typed recurrence `.14.6.7` binds five immutable progressive source groups to six ordered runtime routes through
-  one repository-routed driver from exact clean shared-Lua closeout `872ea8ba`.
-- Neutral, Perl 129, cfg-enabled Rust 1/1, Dart 7, Julia 62, PUC Lua 178, LuaJIT 178, typed, generated-source,
-  capability 80/0/0, and language 250/126 pass in one fail-fast composition.
-- Only typed `progressive_span_dispatch` moves: typed governance is 12/2/170 while progressive behavioral
-  governance stays 7/9/112 and public no-drift remains `.14.6.8`-owned.
-- The stale capability-guide 2/9/pending paragraph is root-caused to Perl admission `78bc66e1`, corrected, and
-  protected by two reason-checked mutations. No runtime, consumer, generated format, or outward surface moves.
+- Progressive public closeout `.14.6.8` corrects the completed-driver/pending-recurring mismatch and closes parent
+  `.14.6` at behavioral 9/9/116 plus public 6 documents / 12 stale claims / 10 outward paths / 60 mutations.
+- The exact five-source/six-runtime driver remains neutral, Perl 129, cfg-enabled Rust 1/1, Dart 7, Julia 62,
+  PUC Lua 178, LuaJIT 178, then typed, generated-source, capability 80/0/0, and language 250/126.
+- Only consumer governance snapshots move with the behavioral ledger. Typed governance remains 12/2/170; runtime,
+  fixtures, generated format, facade/schema/semantic/MCP/CLI/README behavior, staged `.14.7`, and combined `.14.8`
+  remain unchanged.
 
 ## Latest Completed Slice
 
-- Typed recurrence `.14.6.7` proves the exact five-source/six-runtime topology, promotes only its typed row, and
-  synchronizes current governance, Knowledge, roadmaps, continuity, capability guide, and sole-facing book.
+- Progressive public closeout `.14.6.8` binds behavioral recurrence to the committed driver, mutation-locks six
+  current projections, records the missed-governance root cause, and closes `.14.6` without an outward API.
 
 ## Next Action
 
-- From the clean `.14.6.7` commit, activate `FUTURE-PARITY-BACKLOG.14.6.8` task-tree-first and close progressive
-  public projection/no-drift without exporting a facade, schema, semantic/MCP field, CLI, or README behavior.
+- From the clean `.14.6.8` commit, retrieve and activate `FUTURE-PARITY-BACKLOG.14.7` task-tree-first; audit and
+  split staged AST enrichment before any implementation or public claim.
 
 ## Recent Completions
+
+- `2026-08-25` — `.14.6.8` corrects the behavioral recurring projection, closes progressive at 9/9/116 plus
+  public 6/12/10/60, and preserves every runtime, fixture, outward API, and typed 12/2/170 boundary.
 
 - `2026-08-25` — `.14.6.7` binds neutral plus six private runtime routes and four support ledgers, advances only
   typed `progressive_span_dispatch` to 12/2/170, and keeps behavioral governance at 7/9/112.
@@ -68,10 +70,6 @@
 
 - `2026-08-17` — `.14.6.4.3` moves the unchanged seven-group Dart consumer into ordinary discovery and one exact
   canonical route, advances only Dart to progressive 4/9/103, and composition-closes `.14.6.4`.
-
-- `2026-08-17` — `.14.6.4.2` adds one logical-only Dart node and four fresh-authority dormant carriers, closes
-  static/live transaction seams, and advances governance to 9 Rust + 8 Dart carrier paths / 100 mutations without
-  admission or rollout movement.
 
 ## History
 

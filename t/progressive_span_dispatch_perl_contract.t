@@ -120,8 +120,8 @@ is(
 is($contract->{format}, 1, 'loads contract format 1');
 is(
  $contract->{status},
- 'all_private_backends_complete_recurring_and_public_pending',
- 'loads the all-private-backends-complete and recurring/public-pending state',
+ 'private_six_runtime_recurring_and_public_no_drift_complete',
+ 'loads the private six-runtime recurring/public-complete state',
 );
 is(
  $contract->{task_owner},
@@ -143,7 +143,7 @@ is_deeply(
   ],
   result => 'one detached child payload returned as the expression value',
   failure_policy => 'fail_only; every dispatch or child failure propagates unchanged and no null, fallback, retry, or alternate parser is implied',
-  availability => 'private Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT runtimes admitted; recurring and public no-drift rows remain pending',
+  availability => 'private Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT runtimes admitted; exact recurring and public no-drift proof is complete without an outward API',
  },
  'freezes the dedicated authored expression, operands, result, and fail-only boundary',
 );
@@ -260,7 +260,7 @@ is_deeply(
   outward_guard_paths => 10,
   diagnostics => 26,
   rollout_legs => 9,
-  mutations => 112,
+  mutations => 116,
  },
  'freezes every neutral inventory count',
 );
@@ -271,8 +271,8 @@ is_deeply(
 );
 is_deeply(
  [map { $_->{status} } @{$contract->{rollout}}],
- [('complete') x 7, ('pending') x 2],
- 'keeps all private runtime legs complete while recurring and public remain pending',
+ [('complete') x 9],
+ 'keeps all private runtime, recurring, and public-no-drift legs complete',
 );
 is_deeply(
  $contract->{rollout}[1]{paths},
