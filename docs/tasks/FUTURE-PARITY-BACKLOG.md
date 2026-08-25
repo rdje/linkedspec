@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-25` (shared Lua `.14.6.6.3` admits the unchanged 178-assertion carrier once per ABI in
-  ordinary and exact canonical proof, advancing only PUC Lua/LuaJIT to 7/9/112; recomposition `.4` is next)
+- Last updated: `2026-08-25` (shared Lua `.14.6.6.4` independently recomposes all committed dual-ABI owners,
+  closes `.14.6.6` unchanged at 7/9/112, and hands off typed recurring proof `.14.6.7`)
 - Owner: repo-local workflow
 
 ## Goal

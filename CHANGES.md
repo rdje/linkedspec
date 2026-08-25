@@ -10,6 +10,21 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-25 — FUTURE-PARITY-BACKLOG.14.6.6.4 — close shared Lua progressive dispatch
+
+- Activated task-tree-first from exact clean Lua-admission commit `e5c66c4`; changed no production, test, fixture,
+  executable contract, generated format, CI topology, rollout, typed recurrence, or outward surface.
+- Independently reran the committed shared carrier at 178/178 and separate dormant authority at 273/273 on PUC
+  Lua and LuaJIT. Native, normalized-JSON reconstructed, generated-plan, and independently loaded emitted-module
+  routes remain equal; serialized/emitted state carries no live authority.
+- Complete ordinary Lua, Perl 129/129, cfg-enabled Rust 1/1, Dart 7/7, Julia 62/62, progressive 7/9/112, typed
+  11/3/152, recognition 138/250/58, generated/capability 80/0/0, and language 250/126 pass unchanged.
+- The current-projection audit corrects stale Lua-pending prose in predecessor admission/closeout Knowledge cards
+  while preserving dated evidence. ADR `0080`, roadmaps, task/frontier, bounded continuity, and the sole-facing
+  mdBook now agree that all six private runtime rows are independently recomposed.
+- Exact staged receipt-bound canonical CI closes shared Lua parent `.14.6.6` at unchanged rollout 7/9/112 and
+  hands off typed recurring five-source/six-runtime proof `.14.6.7`.
+
 ## 2026-08-25 — FUTURE-PARITY-BACKLOG.14.6.6.3 — admit private Lua progressive dispatch
 
 - Activated task-tree-first from exact clean Lua-carrier commit `4f6173d0`; moved the same 178-assertion

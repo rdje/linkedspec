@@ -32,7 +32,8 @@ PUC Lua and LuaJIT: its historical 85-pass/one-RED boundary records the former g
 `progressive_dispatch_span` node and passes 178/178 per ABI through native, normalized-JSON reconstructed,
 generated-plan, and independently loaded emitted-module routes. Admission `.3` moves the same consumer into
 ordinary discovery once per ABI and one exact canonical route per ABI, advancing only PUC Lua and LuaJIT to
-rollout 7/9/112 while the authority matrix stays dormant. Independent recomposition `.4` is next.
+rollout 7/9/112 while the authority matrix stays dormant. Independent recomposition `.4` reruns both committed
+ABI owners unchanged, closes shared Lua, and hands off typed recurring proof `.14.6.7`.
 
 This is consumer-aware work. The six live JSON projections and seven executable checkers now use stable decision
 authority ADR `0067`, and the chronology root contains no capability marker authority. Nine executable checkers
@@ -223,10 +224,19 @@ serialized/generated data omit callbacks, registry entries, fingerprints, decode
 and mutable execution state. Admission `.3` runs that same source once per ABI through ordinary discovery and
 once per ABI through exact canonical routes. Only the PUC Lua and LuaJIT rows advance; authority remains dormant.
 
-That recomposition also corrects stale current Julia-pending prose in the predecessor Perl, Rust, and Dart
+Independent recomposition `.14.6.6.4` directly reruns carrier 178/178 and dormant authority 273/273 on PUC Lua
+and LuaJIT, complete ordinary Lua, admitted Perl/Rust/Dart/Julia consumers, and every neutral/direct-dependent
+checker without changing a production, test, fixture, contract, generated-format, or CI-topology byte. It closes
+the shared Lua parent at unchanged 7/9/112; `.14.6.7` alone owns typed recurring five-source/six-runtime proof.
+
+Julia recomposition corrected stale current Julia-pending prose in the predecessor Perl, Rust, and Dart
 Knowledge cards. The executable neutral checker already governed runtime, contract, and outward paths exactly;
 Knowledge Map generation guarantees card/index freshness but does not infer semantic agreement across cards.
 The correction preserves dated historical evidence and records this retrieval-layer boundary explicitly.
+
+The Lua closeout applies the same audit: bounded current status/body text in the Perl, Rust, Dart, Julia, and
+Julia-closeout cards still called shared Lua pending or next after the executable admission was current. Their
+current projections now name all six private rows as admitted and recomposed, while dated evidence remains intact.
 
 Behavior-free audit `.14.6.0` and ADR `0080` fix that boundary exactly. `parse_job(...)` remains unavailable and
 `dispatch_span(...)` is admitted as a private intrinsic on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT—not as a

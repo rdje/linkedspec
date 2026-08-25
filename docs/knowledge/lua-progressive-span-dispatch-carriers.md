@@ -12,10 +12,11 @@ answers:
   - "is the Lua progressive dispatch consumer admitted in CI"
   - "how do I run the admitted Lua progressive carriers on both ABIs"
 date: 2026-08-25
-status: private carriers admitted on PUC Lua and LuaJIT; recurrence and public no-drift pending
+status: private carriers admitted and independently recomposed on PUC Lua and LuaJIT; recurrence and public no-drift pending
 tags: [lua, PUC-Lua, LuaJIT, progressive-parsing, actionir, generated-source, recognition-transaction, private]
 evidence: "FUTURE-PARITY-BACKLOG.14.6.6.2 replaces only the exact literal-id/literal-top/bare-span assignment with one progressive_dispatch_span node carrying target/parser_id/top_rule/span. Malformed assignments and residual generic calls reject; compile-time rule/function closure forbids recognize_once targets that can reach parser_registry_or_staged_dispatch. A live-token defense discards the unfinished private token during unwind so progressive_transaction_forbidden remains primary while authority state restores. ProgressiveExecutionSeed owns a copied decoded-source recipe and starts fresh invocation budget/call state for every execution while retaining shared cancellation/deadline/steps. Native, normalized SpecFile-JSON reconstructed, generated-plan, and independently loaded emitted-module routes return the same detached payload without advancing the parent cursor. Serialized/emitted data contain no callback, registry entry, fingerprint, decoded input snapshot, cancellation token, or mutable execution state. The same dormant Lua-5.1 consumer passes 178/178 on PUC Lua and LuaJIT; the separate authority stays 273/273. Neutral governance records 9 dormant Lua carrier paths, zero backend guards, rollout 5/9, and 106 mutations. Ordinary/canonical discovery, rollout rows, generated-v2 format, typed recurrence, package facade, and outward surfaces do not move."
 evidence_update_2026_08_25_admission: "FUTURE-PARITY-BACKLOG.14.6.6.3 moves the unchanged 178-assertion consumer to lua/test/progressive_span_dispatch_contract_test.lua. Ordinary discovery runs it exactly once per ABI; canonical CI requires the path once and invokes one exact PUC Lua plus one exact LuaJIT route. Only those two rollout rows advance, making governance 7/9/112 with 9 admitted Lua carrier paths and no dormant duplicate. The separate authority remains dormant at 273/273 per ABI; production, generated format, typed recurrence, facade, and outward surfaces stay unchanged."
+evidence_update_2026_08_25_recomposition: "FUTURE-PARITY-BACKLOG.14.6.6.4 reruns the committed 178-assertion carrier and 273-assertion authority consumers on both ABIs, plus complete ordinary Lua and all neutral/direct-dependent proofs, without production, test, fixture, executable-contract, generated-format, or CI-topology changes. Shared Lua parent .14.6.6 closes unchanged at 7/9/112."
 reverify:
   - "bash tools/run_lua_project_data.sh puc lua/test/progressive_span_dispatch_contract_test.lua"
   - "bash tools/run_lua_project_data.sh luajit lua/test/progressive_span_dispatch_contract_test.lua"
@@ -51,8 +52,13 @@ serializes it. Admission `.14.6.6.3` runs the same Lua-5.1-compatible consumer
 once per ABI in ordinary discovery and once per ABI through exact canonical
 routes without changing these behaviors.
 
+Independent recomposition `.14.6.6.4` repeats both ABI executions and the
+separate authority proof unchanged, closes the parent, and hands off only the
+typed recurring projection.
+
 Related facts: [[lua-progressive-span-dispatch-private-authority]],
 [[lua-progressive-span-dispatch-dormant-red]],
 [[lua-progressive-span-dispatch-admission]],
+[[lua-progressive-span-dispatch-recomposition]],
 [[lua-recognition-transaction-integration]], and
 [[progressive-span-dispatch-audit-plan]].

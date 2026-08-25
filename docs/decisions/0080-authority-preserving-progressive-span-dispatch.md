@@ -1,7 +1,7 @@
 # ADR 0080: Progressive span dispatch uses pre-registered same-source child authority
 
 - Date: 2026-08-17
-- Status: accepted architecture; executable neutral authority and all six private runtime admissions current; recurrence and public no-drift pending
+- Status: accepted architecture; executable neutral authority and all six private runtime admissions independently recomposed; recurrence and public no-drift pending
 - Tags: architecture, parser-composition, progressive-parsing, spans, source-location, registry, authority, cancellation, portability
 
 ## Context
@@ -82,6 +82,10 @@ transaction-composition projection before neutral progressive behavior.
   ordinary dual-ABI gate and one exact canonical route per ABI, promoting only PUC Lua and LuaJIT. Governance is
   now 9 Rust + 8 Dart + 9 Julia + 9 Lua carrier paths, zero backend guards, 10 outward guards, 26 diagnostics,
   rollout 7/9, and 112 rejected mutations.
+- Lua closeout `.14.6.6.4` independently reruns carrier 178/178 and authority 273/273 on PUC Lua and LuaJIT,
+  complete ordinary Lua, all admitted peer consumers, neutral governance, and direct dependents without
+  executable movement. It closes the private backend parent at unchanged 7/9/112 and hands off typed recurring
+  proof `.14.6.7`.
 - Private rollout changes no generated format, typed recurrence, facade, schema, semantic/MCP, CLI, README, or
   outward behavior.
 

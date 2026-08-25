@@ -2,26 +2,29 @@
 
 ## Current Activity
 
-- Shared Lua admission `.14.6.6.3` is canonical-signoff-complete from exact clean carrier commit `4f6173d0`. The
-  unchanged 178-assertion source is ordinary once per ABI and has one exact canonical route per ABI.
-- Neutral governance promotes only PUC Lua and LuaJIT to rollout 7/9/112, with 9 Lua carrier paths and zero backend
-  guards. The separate authority remains dormant and passes 273/273 per ABI.
+- Shared Lua recomposition `.14.6.6.4` independently reruns the admitted carrier at 178/178 and separate dormant
+  authority at 273/273 on PUC Lua and LuaJIT from exact clean admission commit `e5c66c4`.
+- Neutral governance remains rollout 7/9/112 with all six private runtime rows current, 9 Lua carrier paths, zero
+  backend guards, and exact ordinary/canonical dual-ABI discovery.
 - Complete Lua passes on both ABIs; Perl 129, cfg-enabled Rust 1/1, Dart 7/7, Julia 62/62, progressive 7/9/112,
   typed 11/3/152, recognition 138/250/58, generated/capability 80/0/0, and language 250/126 pass.
-- Production, generated v2, typed recurrence, facade/schema/MCP/CLI/README, and outward surfaces remain unchanged.
-- Independent recomposition `.14.6.6.4` is next.
+- No production, test, fixture, executable contract, generated v2, CI topology, rollout, typed recurrence,
+  facade/schema/MCP/CLI/README, or outward surface moves. Parent `.14.6.6` closes; `.14.6.7` is next.
 
 ## Latest Completed Slice
 
-- Lua `.14.6.6.3` moves the unchanged 178-assertion carrier into ordinary and exact canonical discovery once per
-  ABI, promotes only PUC Lua/LuaJIT to 7/9/112, and leaves authority, format, typed, and outward boundaries fixed.
+- Lua `.14.6.6.4` independently proves both committed ABI owners, all peer carriers, governance, Knowledge,
+  roadmaps, continuity, and sole-facing book truth unchanged, then closes the shared Lua parent at 7/9/112.
 
 ## Next Action
 
-- From the clean `.14.6.6.3` commit, activate `FUTURE-PARITY-BACKLOG.14.6.6.4` task-tree-first and independently
-  recompose the committed dual-ABI carriers, authority, topology, governance, and continuity surfaces unchanged.
+- From the clean `.14.6.6.4` commit, activate `FUTURE-PARITY-BACKLOG.14.6.7` task-tree-first and bind one exact
+  recurring proof over five backend sources/six runtime routes before promoting only typed progressive dispatch.
 
 ## Recent Completions
+
+- `2026-08-25` — `.14.6.6.4` independently recomposes carrier 178/178 and authority 273/273 on both Lua ABIs,
+  all admitted peers and governance unchanged, repairs bounded current projections, and closes `.14.6.6`.
 
 - `2026-08-25` — `.14.6.6.3` admits the same 178-assertion carrier exactly once per ABI in ordinary and canonical
   proof, advances only PUC Lua/LuaJIT to 7/9/112, and leaves the 273-assertion-per-ABI authority dormant.
@@ -69,9 +72,6 @@
 
 - `2026-08-17` — `.14.6.4.1` adds unexported Dart registry/invocation/source-view authority with a complete dormant
   GREEN consumer; carrier behavior, final-path RED, rollout, and public surfaces remain unchanged.
-
-- `2026-08-17` — `.14.6.4.0` freezes Dart's generic-call/four-carrier dormant RED, splits `.4.1-.3`, and corrects
-  stale roadmap/book frontier prose without production, rollout, storage, CI, typed, or outward movement.
 
 ## History
 

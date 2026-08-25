@@ -10,6 +10,23 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-25 (`FUTURE-PARITY-BACKLOG.14.6.6.4` — shared Lua progressive recomposition): exact clean activation
+  is Lua admission commit `e5c66c4`; this designated canonical closeout permits continuity, Knowledge, ADR,
+  roadmap, and sole-facing book projections only.
+- Direct carrier execution remains 178/178 on PUC Lua and LuaJIT; the separate dormant authority remains 273/273
+  on each host. The carrier proves native/reconstructed/generated-plan/loaded-emitted equality and generated/
+  emitted absence of callbacks, registries, fingerprints, source snapshots, cancellation, and mutable authority.
+- Complete ordinary Lua and unchanged Perl 129/129, cfg-enabled Rust 1/1, Dart 7/7, and Julia 62/62 agree with
+  neutral 7/9/112. Typed 11/3/152, recognition 138/250/58, generated/capability 80/0/0, and language 250/126 pass.
+- Exact Git comparison with `e5c66c4` proves zero production, test, fixture, executable-contract, generated-format,
+  or CI-topology diff. Ordinary discovery remains two ABI invocations; canonical CI retains one tracked source and
+  one exact invocation per ABI; the authority consumer remains absent from both drivers.
+- The repeated retrieval-layer seam is bounded current prose, not executable governance: earlier admission cards
+  remained indexed exactly but still called shared Lua pending. Update only current status/body projections and
+  add one recomposition fact; preserve every dated evidence field verbatim.
+- Parent `.14.6.6` closes unchanged at 7/9/112 after exact staged canonical proof. `.14.6.7` alone owns recurring
+  five-source/six-runtime proof and promotion of typed `progressive_span_dispatch`.
+
 - 2026-08-25 (`FUTURE-PARITY-BACKLOG.14.6.6.3` — dual-ABI Lua progressive admission): exact clean activation is
   carrier commit `4f6173d0`. This leaf changes discovery, canonical topology, rollout governance, and durable
   projections only; production, authority behavior, and generated format are byte-unchanged.
