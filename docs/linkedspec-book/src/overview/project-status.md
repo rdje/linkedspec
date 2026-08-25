@@ -99,8 +99,10 @@ families, recursive scheduling, alternate policies, and public closeout remain p
 makes wrong-top compile diagnostics preserve the same original job context and resolved identity on all five
 source backends/six runtimes. Neutral `.14.7.2` now adds the executable general authority at 4 registry entries,
 8 provenance, 8 resolution/6 authority, 10 cache, 4 queue/3 isolation, all result/failure policies, 10 chain,
-5 detachment, 37 diagnostic, 35-owner, and 72-mutation proof. No backend or public `parse_job(...)` behavior moves;
-Perl implementation starts at `.14.7.3`.
+5 detachment, 37 diagnostic, 35-owner, and 72-mutation proof. Perl dormant `.14.7.3.0` now passes 60 neutral/v1
+assertions and fails only on the missing dedicated marker; it has zero ordinary/canonical registration and changes
+no production or public `parse_job(...)` behavior. Mandatory history segment `4991` is finitely authorized by ADR
+`0089` at 22 files / 21 manifest records. Private marker/provenance `.14.7.3.1` is next.
 
 Rust's exact four-test consumer now runs under ordinary Cargo discovery and as a required canonical-CI leg. It
 proves the immutable value core and projection boundary across native, reconstructed, and generated-plan execution;

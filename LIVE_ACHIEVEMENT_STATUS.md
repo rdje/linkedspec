@@ -2,24 +2,27 @@
 
 ## Current Activity
 
-- Neutral `.14.7.2` makes the complete general staged-AST design executable through one independent
-  repository-routed contract checker and 72 reason-checked mutations.
-- Authored syntax/sidecar, typed provenance, pre-resolution, immutable registry/cache authority, breadth-first
-  scheduling, policies, bounds, detachment, diagnostics, carriers, dormant routes, rollout, and 35 owners are fixed.
-- All backend consumers and nine rollout legs remain dormant/pending; no parser/compiler/runtime/generated-format,
-  capability, public API, facade/schema/semantic/MCP/CLI/README, or existing function-body-v1 behavior moves.
+- Perl `.14.7.3.0` freezes the first backend's final-path general staged-AST boundary without production behavior.
+- Sixty assertions are GREEN: the complete neutral inventory, unchanged function-body-v1 resolve/load/compile/
+  execute/stitch path, exact wrong-top context, explicit v1 compatibility, dormancy, and child ownership.
+- The sole RED is the measured missing `STAGED_PARSE_JOB_MARKER`: current lowering retains one unresolved
+  `parse_job` helper and zero raw dependencies. Perl rollout and every ordinary/canonical/public route stay pending.
 
 ## Latest Completed Slice
 
-- `.14.7.2` adds the neutral executable design authority that every later backend admission must consume without
-  shipping the future authored form or runtime behavior.
+- `.14.7.3.0` adds one unrouted 60-pass/one-RED Perl consumer and changes only its predeclared lifecycle from absent
+  to dormant. Production code, neutral semantics/counts/mutations, generated format, rollout, and public behavior
+  do not move.
 
 ## Next Action
 
-- Complete exact staged-candidate canonical proof, commit `.14.7.2`, clear the brief, verify the clean handoff,
-  then activate Perl dormant-boundary `.14.7.3.0` task-tree-first.
+- Commit `.14.7.3.0` through the focused workflow, clear the brief, verify the clean handoff, then activate
+  `.14.7.3.1` task-tree-first for Perl's private marker/sidecar and typed direct/derived provenance carrier.
 
 ## Recent Completions
+
+- `2026-08-25` — `.14.7.3.0` freezes Perl's exact 60-pass/one-RED marker boundary while preserving function-body
+  v1, production behavior, discovery, rollout, generated format, and all outward surfaces.
 
 - `2026-08-25` — `.14.7.2` freezes general staged-AST enrichment as executable neutral authority with 72
   mutations while retaining dormant backends, pending rollout, unchanged v1 behavior, and no outward API.
@@ -66,9 +69,6 @@
 
 - `2026-08-24` — `.14.6.5.0` freezes Julia's exact 55-pass/one-RED generic-call/four-carrier boundary, keeps it
   outside ordinary/canonical discovery, and splits authority, carriers, admission, and recomposition.
-
-- `2026-08-24` — capacity `.2` independently recomposes every committed topology, source, lookup, route, and
-  consumer invariant without replacement behavior and closes the infrastructure tree.
 
 ## History
 

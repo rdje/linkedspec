@@ -299,6 +299,12 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   `FUTURE-PARITY-BACKLOG.14.7.1` repairs wrong-top compile context: all five source backends/six runtimes now
   preserve job id/path/parser/top/payload/span/failure plus the resolved built-in identity. Reverify with the exact
   five registry paths and focused tests in the fact card before touching general `.14.7.2+` behavior.
+- **Perl general-staged dormant boundary:** `FUTURE-PARITY-BACKLOG.14.7.3.0` adds the deliberately unrouted
+  `t/staged_ast_enrichment_perl_contract.t`. Run it directly with
+  `PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract.t`: 60 assertions pass and the sole expected RED
+  names missing `STAGED_PARSE_JOB_MARKER`, unresolved `parse_job`, and zero raw dependencies. Then run
+  `bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py` to prove exact dormancy,
+  unchanged neutral inventories/mutations, four absent later consumers, and zero ordinary/canonical registration.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.

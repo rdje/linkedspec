@@ -99,6 +99,7 @@ changed* lives in git (layer D), not here.
 | [0086](0086-change-history-twenty-first-member-capacity.md) | Change history admits its twenty-first bounded member | 2026-08-24 | accepted under `FUTURE-PARITY-BACKLOG.14.6.5.2` | documentation, history, rollover, routing, pressure, continuity, doctrine |
 | [0087](0087-engineering-notes-seventeenth-member-capacity.md) | Engineering-notes history admits its seventeenth bounded member | 2026-08-25 | accepted under `FUTURE-PARITY-BACKLOG.14.6.7` | documentation, history, rollover, routing, pressure, continuity, doctrine |
 | [0088](0088-pre-resolved-breadth-first-staged-ast-enrichment.md) | General staged-AST enrichment uses pre-resolved immutable authority and breadth-first typed jobs | 2026-08-25 | executable neutral authority complete under `FUTURE-PARITY-BACKLOG.14.7.2`; backends and public authoring pending | architecture, staged-parsing, parse-job, source-location, registry, queue, policies, diagnostics, portability |
+| [0089](0089-change-history-twenty-second-member-capacity.md) | Change history admits its twenty-second bounded member | 2026-08-25 | accepted under `FUTURE-PARITY-BACKLOG.14.7.3.0` | documentation, history, rollover, routing, pressure, continuity, doctrine |
 
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /

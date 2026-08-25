@@ -788,7 +788,7 @@
     {"order": 4, "carrier": "independently_loaded_emitted", "requirement": "preserve the logical marker/sidecar, typed provenance, deterministic identity, and cache inputs; obtain a fresh caller-supplied registry/runtime authority per execution; serialize no callback, compiled parser, registry snapshot, source authority, cancellation token, deadline, budget, mutable queue, or host handle"}
   ],
   "backend_consumers": [
-    {"backend": "perl", "owner": "FUTURE-PARITY-BACKLOG.14.7.3.0", "path": "t/staged_ast_enrichment_perl_contract.t", "status": "pending_absent"},
+    {"backend": "perl", "owner": "FUTURE-PARITY-BACKLOG.14.7.3.0", "path": "t/staged_ast_enrichment_perl_contract.t", "status": "dormant_red"},
     {"backend": "rust", "owner": "FUTURE-PARITY-BACKLOG.14.7.4.0", "path": "rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs", "status": "pending_absent"},
     {"backend": "dart", "owner": "FUTURE-PARITY-BACKLOG.14.7.5.0", "path": "dart/test/staged_ast_enrichment_contract_test.dart", "status": "pending_absent"},
     {"backend": "julia", "owner": "FUTURE-PARITY-BACKLOG.14.7.6.0", "path": "julia/test/staged_ast_enrichment_contract_test.jl", "status": "pending_absent"},

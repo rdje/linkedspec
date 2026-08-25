@@ -132,7 +132,7 @@ BACKEND_CONSUMERS = [
         "backend": "perl",
         "owner": "FUTURE-PARITY-BACKLOG.14.7.3.0",
         "path": "t/staged_ast_enrichment_perl_contract.t",
-        "status": "pending_absent",
+        "status": "dormant_red",
     },
     {
         "backend": "rust",
@@ -730,9 +730,26 @@ def validate_semantic_cases(contract: dict[str, Any]) -> None:
 
 
 def validate_environment(contract: dict[str, Any]) -> None:
+    ci_text = CI_PATH.read_text(encoding="utf-8")
+    perl_ordinary_text = (ROOT / "t/phase0_regression.t").read_text(encoding="utf-8")
     for row in contract["backend_consumers"]:
         require(safe_relative_path(row["path"]), "backend consumer path is unsafe")
-        require(not (ROOT / row["path"]).exists(), f"pending backend consumer unexpectedly exists: {row['path']}")
+        consumer_path = ROOT / row["path"]
+        if row["status"] == "pending_absent":
+            require(not consumer_path.exists(), f"pending backend consumer unexpectedly exists: {row['path']}")
+        elif row["status"] == "dormant_red":
+            require(row["backend"] == "perl", "only the Perl dormant consumer is currently activated")
+            require(
+                consumer_path.is_file() and not consumer_path.is_symlink(),
+                f"dormant backend consumer is missing or symbolic: {row['path']}",
+            )
+            require(row["path"] not in ci_text, f"dormant backend consumer is registered in canonical CI: {row['path']}")
+            require(
+                row["path"] not in perl_ordinary_text,
+                f"dormant backend consumer is registered in ordinary Perl discovery: {row['path']}",
+            )
+        else:
+            raise ContractError(f"unsupported backend consumer status: {row['status']}")
     outward = contract["outward_guard"]
     for relative in outward["paths"]:
         require(safe_relative_path(relative), "outward guard path is unsafe")
@@ -741,7 +758,6 @@ def validate_environment(contract: dict[str, Any]) -> None:
         text = path.read_text(encoding="utf-8")
         for token in outward["forbidden_tokens"]:
             require(token not in text, f"private staged-AST token leaked into outward path {relative}: {token}")
-    ci_text = CI_PATH.read_text(encoding="utf-8")
     canonical = contract["canonical_execution"]
     require(canonical["registration_marker"] in ci_text, "canonical registration marker is missing")
     require(canonical["invocation"] in ci_text, "canonical checker invocation is missing")

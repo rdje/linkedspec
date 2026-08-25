@@ -145,6 +145,14 @@ exposure and requires all five planned backend consumer files to remain absent u
 - This neutral leaf changes no shipped parser/compiler/runtime behavior, generated format, admission, typed or
   capability rollout, facade/schema/semantic/MCP/CLI/README surface, or public `parse_job(...)` availability.
 
+## Implementation note (2026-08-25)
+
+Perl dormant-boundary leaf `FUTURE-PARITY-BACKLOG.14.7.3.0` creates the predeclared final-path consumer without
+shipping behavior. Sixty neutral/v1 assertions pass; the sole intentional RED proves current assignment-form
+`parse_job(...)` has one unresolved helper, zero raw dependencies, and no dedicated `STAGED_PARSE_JOB_MARKER`.
+The consumer is absent from ordinary and canonical discovery, the Perl rollout remains pending, and `.14.7.3.1`
+retains exclusive ownership of the private marker/sidecar plus typed provenance carrier.
+
 ## Links
 
 - Owning task: `docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md`

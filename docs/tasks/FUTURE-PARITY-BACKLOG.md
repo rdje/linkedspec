@@ -6,9 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-25` (progressive `.14.6`, staged audit `.14.7.0`, and diagnostic `.1` are committed;
-  neutral `.14.7.2` has executable design authority and canonical signoff complete from exact clean `54c65df8`;
-  Perl dormant-boundary `.14.7.3.0` follows its atomic commit)
+- Last updated: `2026-08-25` (progressive `.14.6` and staged `.14.7.0-.2` are committed through exact clean
+  `ab8802c94f3a0b65fc4d1e44f9a960e3c5b0c69c`; Perl dormant-boundary `.14.7.3.0` is task-tree-active)
 - Owner: repo-local workflow
 
 ## Goal
@@ -116,9 +115,10 @@ canonical route, promoting only Julia while the 210-assertion authority proof st
 recomposition `.14.6.5.4` proves those committed owners unchanged and closes the Julia parent. Shared Lua `.6.0`
 preserves its historical 85-pass/one-RED boundary, `.1` supplies private authority at 273/273 per ABI, `.2` makes
 four dormant carriers GREEN at 178/178 per ABI, and `.3` admits that same consumer once per ABI through ordinary
-and exact canonical routes without production, format, typed, or outward movement. Recomposition `.6.4` is next;
-recurrence `.7`, public no-drift `.8`, staged `.14.7`, and combined
-program-wide `.14.8` remain separate owners. Mandatory segment `4992` is finitely authorized by ADR `0086` at
+and exact canonical routes without production, format, typed, or outward movement. Recomposition `.6.4`, recurrence
+`.7`, and public no-drift `.8` are committed. Staged `.14.7.0-.2` are committed through neutral executable
+authority at `ab8802c9`; Perl dormant-boundary `.14.7.3.0` is the active task-tree-first frontier, while combined
+program-wide `.14.8` remains a separate owner. Mandatory segment `4992` is finitely authorized by ADR `0086` at
 21 change-history files / 20 manifest lines and makes `.14.6.5.2` a canonical boundary.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent

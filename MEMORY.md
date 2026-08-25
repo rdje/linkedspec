@@ -1,13 +1,14 @@
 # MEMORY
 
-- activation_commit: `54c65df82800080a0cedf6b159f49b06aceb01af` — exact clean diagnostic-parity base for
-  task-tree-first neutral contract `FUTURE-PARITY-BACKLOG.14.7.2`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.7.2 - add neutral staged AST enrichment authority`; executable
-  design governance is complete without backend/runtime/public behavior.
-- active_work_unit: none after the intended `.14.7.2` commit; Perl dormant boundary `.14.7.3.0` is pending.
-- next_action: from the exact clean `.14.7.2` commit, activate `FUTURE-PARITY-BACKLOG.14.7.3.0` task-tree-first and
-  freeze Perl's dormant general-staged RED plus existing function-body compatibility boundary.
-- in_flight_uncommitted: none after the intended `.14.7.2` commit; no background job remains.
+- activation_commit: `ab8802c94f3a0b65fc4d1e44f9a960e3c5b0c69c` — exact clean neutral-authority base for
+  task-tree-first Perl dormant boundary `FUTURE-PARITY-BACKLOG.14.7.3.0`; brief cleared; no push.
+- latest_completed_leaf: intended `FUTURE-PARITY-BACKLOG.14.7.3.0 - freeze Perl staged AST enrichment RED`;
+  60 assertions are GREEN and the sole intentional RED is the missing dedicated marker.
+- active_work_unit: none after the intended `.14.7.3.0` commit; private Perl annotation/provenance `.14.7.3.1`
+  follows the clean handoff.
+- next_action: from the exact clean `.14.7.3.0` commit, activate `FUTURE-PARITY-BACKLOG.14.7.3.1` task-tree-first
+  and add only Perl's private dedicated marker/sidecar plus typed direct/derived provenance carrier.
+- in_flight_uncommitted: none after the intended `.14.7.3.0` commit; no background job remains.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
@@ -30,11 +31,10 @@
   native admission 6/6; MCP rollout complete/141.
 - current_readme_contract: README stays 106/5,197 under hard 128/6,144 caps; ADRs `0084`/`0085` implement one
   additional bounded future-task semantic member and a ten-line strict index without changing any collection,
-  per-file, aggregate, member-byte, or 5,000-line semantic-member ceiling. ADR `0086` separately admits only
-  mandatory change-history segment `4992`, advancing finite collection/manifest controls to 21/20 while retaining
-  every byte, root, segment, aggregate, owner, lifecycle, verifier, and storage control. ADR `0087` likewise
-  admits only mandatory engineering-notes segment `4991`, advancing that finite route to 17 files / 16 manifest
-  lines without changing any other pressure control.
+  per-file, aggregate, member-byte, or 5,000-line semantic-member ceiling. ADR `0087` admits only the earlier
+  engineering-notes segment `4991` at 17 files / 16 manifest lines. ADR `0089` now admits only mandatory change-
+  history segment `4991`, advancing that separate route from 21/20 to 22 files / 21 manifest lines while retaining
+  every byte, root, segment, aggregate, owner, lifecycle, verifier, storage, and all other pressure controls.
 - current_verification_contract: ADR `0073` makes focused proof the ordinary per-leaf default and canonical proof
   mandatory at admission/milestone/public/infrastructure and final clean push boundaries; progressive public
   closeout `.14.6.8` changes final executable governance and has exact staged receipt-bound proof.
@@ -50,8 +50,9 @@
   parents `.3-.7`, recurrence `.8`, public authored closeout `.9`, and recomposition `.10` are frozen in order.
   Diagnostic `.14.7.1` is complete; neutral `.14.7.2` freezes 4 registry entries, 8 provenance, 8 resolution/6
   authority, 10 cache, 4 queue/3 isolation, 4 result/3 failure policies, 10 chain, 5 detachment, 37 diagnostics,
-  9 pending rollout legs, 35 owners, and 72 mutations. Perl dormant boundary `.14.7.3.0` is next.
+  9 rollout legs, 35 owners, and 72 mutations. Perl `.14.7.3.0` freezes 60 GREEN assertions and one missing-marker
+  RED with no behavior or route movement; private annotation/provenance `.14.7.3.1` is next.
 - latest_bootstrap_read: 2026-08-25 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
-  review complete. `.14.7.2` makes the general staged-AST contract executable without changing the narrow
-  function-body runtime, generated formats, rollout, or outward surfaces. Intended commit:
-  `FUTURE-PARITY-BACKLOG.14.7.2 - add neutral staged AST enrichment authority`; Perl `.14.7.3.0` is next.
+  review complete. `.14.7.3.0` uses the exact final-path dormant consumer to preserve function-body v1 and expose
+  only the missing dedicated general marker; production, generated formats, rollout, and outward surfaces do not
+  move. Intended commit: `FUTURE-PARITY-BACKLOG.14.7.3.0 - freeze Perl staged AST enrichment RED`; `.3.1` is next.

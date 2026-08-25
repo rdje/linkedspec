@@ -1,8 +1,8 @@
 # Staged AST Enrichment Contract
 
 > Status: executable backend-neutral design. General `parse_job(...)` authoring is not yet available in shipped
-> parsers. The current five-backend/six-runtime implementation still supports only the narrow function-body v1
-> adapter described below.
+> parsers. Perl now has one deliberately dormant 60-pass/one-RED implementation oracle; the current shipped
+> five-backend/six-runtime implementation still supports only the narrow function-body v1 adapter described below.
 
 LinkedSpec's staged model lets one completed parse return bounded text islands for later parsers to refine. The
 neutral general contract is now executable and mutation-checked before any backend implements it. Its artifact
@@ -179,8 +179,38 @@ generated data contains no callback, compiled parser, registry snapshot, source 
 deadline, budget, mutable queue, or host handle.
 
 Only the neutral rollout leg is complete. Five planned backend consumers map to six runtime routes because one
-shared Lua source must run independently on PUC Lua and LuaJIT. Perl, Rust, Dart, Julia, both Lua routes,
+shared Lua source must run independently on PUC Lua and LuaJIT. The exact Perl consumer now exists with lifecycle
+`dormant_red`, but it is not part of ordinary or canonical discovery. Perl, Rust, Dart, Julia, both Lua routes,
 six-runtime recurrence, public authoring/no-drift, and final recomposition retain their `.14.7.3-.10` owners.
+
+## Current Perl dormant boundary
+
+The direct Perl oracle is:
+
+```bash
+PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract.t
+```
+
+It intentionally does not return success yet. Assertions 1–60 prove the complete neutral inventory, unchanged
+function-body-v1 resolution/cache/compile/execute behavior, original wrong-top diagnostic context, and actual
+`body_ast` stitching. Assertion 61 is the only failure:
+
+```text
+expected RED: missing node=[STAGED_PARSE_JOB_MARKER];
+unresolved helpers=[parse_job]; raw dependencies=0
+```
+
+That is the first implementation boundary, not a user-facing defect. Perl still lowers the future annotation as
+an ordinary assignment with one unsupported-helper sentinel; the v1 registry separately rejects `expr-v1` at
+`resolve`, so no parser path is loaded and no general authority leaks through the compatibility adapter. The next
+Perl slice adds only the private marker/sidecar and typed direct/ordered-derived provenance, then advances the same
+consumer to its next owned RED. Resolution/cache/policies, recursive scheduling/bounds/diagnostics, and fresh
+carrier admission remain later independent slices.
+
+Publishing this boundary crossed the bounded `CHANGES.md` rollover threshold. The repository archived one complete
+218-line record set as immutable segment `4991`; ADR `0089` advances only the finite change-history collection and
+manifest controls to 22 files / 21 records. No byte, per-file, aggregate, route, storage, or product boundary was
+weakened.
 
 Run the neutral proof with:
 

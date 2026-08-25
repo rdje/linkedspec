@@ -10,6 +10,21 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-25 (`FUTURE-PARITY-BACKLOG.14.7.3.0` — Perl staged-AST dormant RED): exact clean activation is neutral-
+  authority commit `ab8802c9`; this focused leaf owns only the final-path test, its lifecycle snapshot, and boundary
+  truth.
+- Knowledge/ADR retrieval plus `call_spec_handler_subst` and `return_descriptor` establish the measured cause:
+  assignment-form `parse_job(...)` becomes ordinary `ASSIGN` plus one unsupported-helper sentinel, zero raw-Perl
+  dependencies, and no `STAGED_PARSE_JOB_MARKER`. The separate v1 registry rejects `expr-v1` at resolve.
+- The new consumer derives every neutral inventory/count, proves function-body v1 resolve/load/compile/execute,
+  compile diagnostics, and stitched `body_ast`, then fails only assertion 61 on the missing dedicated marker.
+- The neutral checker now accepts exactly this one `dormant_red` file while requiring zero phase-0/canonical route
+  references; four later backend consumers remain absent, only neutral rollout is complete, and all 72 mutations
+  still pass. `.14.7.3.1` owns the private annotation/provenance implementation and the next sole RED.
+- Mandatory history rollover publishes immutable 218-line segment `4991` from clean `ab8802c9`. Exact resulting-
+  tree measurement is 22 files / 21 manifest lines, 46,587/55,000 total lines, and 3,328,651/4,194,304 bytes.
+  ADR `0089` changes only those two +1 finite controls, so the leaf upgrades to canonical verification.
+
 - 2026-08-25 (`FUTURE-PARITY-BACKLOG.14.7.2` — neutral staged-AST authority): exact clean activation is
   diagnostic-parity commit `54c65df8`; this canonical leaf owns executable design/topology authority only.
 - Checker-first RED proved the contract was absent. Schema completion then exposed two initially omitted dimensions:

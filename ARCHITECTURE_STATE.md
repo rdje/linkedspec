@@ -21,6 +21,19 @@ checker passes 4 registry entries, 8 provenance, 8 resolution/6 authority, 10 ca
 reason-checked mutations. It reuses ADR `0056`'s source algebra and progressive authority narrowing without
 reusing `dispatch_span` syntax or elevating an authored parser id into filesystem authority.
 
+Perl dormant boundary `FUTURE-PARITY-BACKLOG.14.7.3.0` now binds the first planned backend consumer without
+shipping behavior. Toolbox lowering proves assignment-form `parse_job(...)` remains ordinary `ASSIGN` plus one
+unsupported-helper sentinel, zero raw dependencies, and no `STAGED_PARSE_JOB_MARKER`. The final-path consumer
+passes 60 assertions over every neutral inventory, unchanged function-body-v1 resolve/load/compile/execute,
+diagnostic context, and stitched `body_ast`, then fails only the dedicated-marker assertion. The checker accepts
+that one exact `dormant_red` path while requiring zero ordinary/canonical registration; all semantic counts,
+mutations, rollout rows, generated carriers, and outward guards remain unchanged. `.14.7.3.1` alone owns the
+private marker/sidecar plus typed direct/derived provenance carrier.
+
+The same slice's mandatory complete-record rollover publishes immutable change-history segment `4991`. ADR `0089`
+advances only finite route controls from 21/20 to 22 files / 21 manifest lines; the measured collection remains
+46,587/55,000 lines and 3,328,651/4,194,304 bytes, and every other bounded-history control remains unchanged.
+
 Corrective `.14.7.1` closes the audit's one diagnostic parity defect before feature work. Perl, Rust, and Dart now
 pass the normalized job through compile instead of constructing placeholders; Julia and shared Lua retain their
 existing job propagation and add the missing payload kind. Every wrong-top error reports the original
