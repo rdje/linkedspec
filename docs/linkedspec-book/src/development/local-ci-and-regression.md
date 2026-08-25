@@ -157,7 +157,7 @@ that same proof pass. A RED result is therefore planned evidence, not a claim th
 
 ### Neutral progressive span-dispatch contract
 
-Canonical CI always runs the repository-routed neutral checker plus the admitted private Perl, Rust, Dart, and Julia consumers; Lua's historical RED remains focused and dormant:
+Canonical CI always runs the repository-routed neutral checker plus the admitted private Perl, Rust, Dart, and Julia consumers; Lua's RED and authority proofs remain focused and dormant:
 
 ```bash
 bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_contract.py

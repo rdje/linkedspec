@@ -1,7 +1,7 @@
 # ADR 0080: Progressive span dispatch uses pre-registered same-source child authority
 
 - Date: 2026-08-17
-- Status: accepted architecture; executable neutral authority and private Perl/Rust/Dart/Julia admissions current; exact shared Lua dual-ABI RED frozen, implementation and recurrence pending
+- Status: accepted architecture; executable neutral authority and private Perl/Rust/Dart/Julia admissions current; shared Lua RED plus private dual-ABI authority current, carriers and recurrence pending
 - Tags: architecture, parser-composition, progressive-parsing, spans, source-location, registry, authority, cancellation, portability
 
 ## Context
@@ -70,6 +70,11 @@ transaction-composition projection before neutral progressive behavior.
   normalized-JSON reconstructed, generated-plan, and independently loaded emitted-module carriers preserve one
   unsupported-helper boundary. `.1-.4` separately own shared private authority, dormant carriers, dual-ABI
   admission, and independent recomposition; neutral rollout remains 5/9/106.
+- Lua authority `.14.6.6.1` adds one unexported ActionIR-independent module shared unchanged by both hosts. Opaque
+  registry/invocation/view/request state admits already-compiled callbacks only, reuses the private typed-source
+  authority for global Unicode-scalar rebasing, intersects capabilities/policies, takes ceiling minima, shares
+  cancellation/deadline/steps/chain/depth/calls, expires callback views, and detaches bounded child results. Its
+  dormant consumer passes 273/273 per ABI while the exact final-path RED and all five Lua carrier guards remain.
 - This audit changes no grammar, parser/compiler/runtime, facade, schema, semantic/MCP, CLI, or README behavior.
 
 ## Links

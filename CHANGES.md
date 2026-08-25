@@ -10,6 +10,21 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-25 — FUTURE-PARITY-BACKLOG.14.6.6.1 — implement shared Lua progressive authority
+
+- Activated task-tree-first from exact clean Lua-RED commit `84178bd8`; added one direct Lua-5.1-compatible
+  `bounded_child_parse_authority` module and one dormant consumer, with no package-facade or carrier registration.
+- Module-private opaque state owns immutable already-compiled entries, copied-source fresh invocations, typed
+  globally rebased callback views, narrowing capabilities/policies/ceilings, shared cancellation/deadline/steps,
+  decreasing-span/depth/call limits, callback/request expiry, and deeply detached node-bounded child results.
+- The same consumer passes 273/273 on PUC Lua and LuaJIT across all neutral rows and 26 diagnostic contexts plus
+  nesting, rebasing, expiry, isolation, cycle/nonfinite/live-field/node bounds, and UTF-8 truncation adversaries.
+  The separate final-path consumer remains exactly 85-pass/one-RED per ABI; all five carriers stay absent.
+- Complete Lua remains 178/178 per ABI, CLI 66/66 in both environments, corpus 105, and storage 19/3. Progressive
+  5/9/106, typed 11/3/152, recognition 138/250/58, generated/capability 80/0/0, and language 250/126 pass.
+- Task/index, ADR `0080`, Knowledge, sole-facing mdBook, bounded histories, README/memory, and nine doctrines are
+  synchronized without generated-format, discovery, rollout, typed-recurring, or outward movement. Carriers `.2` next.
+
 ## 2026-08-25 — FUTURE-PARITY-BACKLOG.14.6.6.0 — freeze shared Lua progressive dispatch RED
 
 - Activated task-tree-first from exact clean Julia-closeout commit `e25791e`; split Lua `.14.6.6` into RED,

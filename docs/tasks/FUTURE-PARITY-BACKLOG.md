@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-25` (shared Lua `.14.6.6.0` freezes one exact 85-pass/one-RED consumer on PUC Lua and
-  LuaJIT, splits `.1-.4`, and hands off the private authority without production or rollout movement)
+- Last updated: `2026-08-25` (shared Lua `.14.6.6.1` adds one private Lua-5.1 authority proven at 273/273 on both
+  ABIs while preserving the exact 85-pass/one-RED final path; dormant carriers `.2` are next)
 - Owner: repo-local workflow
 
 ## Goal

@@ -10,6 +10,22 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-25 (`FUTURE-PARITY-BACKLOG.14.6.6.1` — Lua progressive authority): exact clean activation is the
+  committed dual-ABI RED `84178bd8`; this focused leaf owns one unexported module and dormant proof only.
+- `lua/src/linkedspec/bounded_child_parse_authority.lua` follows the existing Lua private-token pattern: weak-key
+  state hides ceilings, entries, registries, chain frames, invocations, cancellation, effective authority,
+  callback-scoped views/requests, and typed configuration/view/dispatch failures from authored values.
+- Registry entries accept already-compiled callbacks only. Each fresh invocation copies decoded strings into the
+  existing typed `source_location` core; views materialize only the selected direct span and rebase local scalar
+  positions/spans/diagnostics to the original identity. Grants intersect and all resource/detail ceilings narrow.
+- The cancellation-token object, absolute deadline, remaining steps, active global-span chain, depth, and call
+  count are shared across nested dispatch. Callback views and retained nested requests expire on all exits; result
+  detachment rejects non-JSON values, nonfinite numbers, cycles, live-looking fields, and node-ceiling excess.
+- A first GREEN run exposed a test-harness-only Lua `nil and/or` pitfall when mapping JSON null to a child failure;
+  an explicit branch preserves nil and proves the intended typed `progressive_child_failed` row on both ABIs.
+- The dormant consumer is 273/273 per host; the separate final path remains 85-pass/one-RED. Complete Lua and all
+  direct dependents pass unchanged at rollout 5/9/106. `.14.6.6.2` alone owns the node and four carriers next.
+
 - 2026-08-25 (`FUTURE-PARITY-BACKLOG.14.6.6.0` — Lua progressive RED): exact clean activation is Julia closeout
   `e25791e`; the task tree first partitions `.14.6.6` into five bounded RED-to-recomposition children.
 - One shared Lua-5.1-compatible dormant consumer executes on PUC Lua and LuaJIT. Both report 85 passing assertions

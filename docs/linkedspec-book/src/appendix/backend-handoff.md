@@ -172,7 +172,8 @@
 > outward guards deny exposure. No path loader, public facade/schema/semantic/MCP/CLI/README surface, shared helper
 > inventory, generated format, or typed rollout row moves. Lua `.14.6.6.0` runs one shared dormant Lua-5.1-
 > compatible consumer on PUC Lua and LuaJIT: each passes 85 of 86 assertions and fails only because the generic
-> call is not yet one exclusive `progressive_dispatch_span` node. Ordinary and canonical discovery remain inert.
+> call is not yet one exclusive `progressive_dispatch_span` node. Private authority `.14.6.6.1` now passes
+> 273/273 on both hosts while remaining unexported and carrier-free. Ordinary and canonical discovery remain inert.
 >
 > Definitive neutral signoff passes the exact six-runtime composition and support ledgers, all eight doctrines,
 > six-family containment, repository relocation, CLI 66x2, RAM 35%, and canonical Phase 0 1,031/1,031 in 714
@@ -780,7 +781,10 @@ remains dormant and directly runnable. `.14.6.5.4` independently recomposes thos
 Lua `.14.6.6.0` then freezes one dual-ABI dormant RED before any production implementation. Both Lua hosts prove
 the reserved form is still a generic call and that all four carrier shapes preserve the typed unsupported-helper
 failure; 85 assertions pass and the sole deliberate failure requires the missing dedicated node. Private shared
-authority `.14.6.6.1`, dormant carrier integration `.2`, canonical admission `.3`, and recomposition `.4` follow.
+authority `.14.6.6.1` is now current as one Lua-5.1-compatible direct module. Its opaque immutable entries,
+copied-source invocations, typed rebased callback views, narrowing grants/ceilings, shared cancellation and limits,
+expiring requests, and detached bounded results pass 273 assertions per ABI. Dormant carrier integration `.2`,
+canonical admission `.3`, and recomposition `.4` follow.
 
 The spec's body shell is a
 linked opener/closer parse: `body_brace`

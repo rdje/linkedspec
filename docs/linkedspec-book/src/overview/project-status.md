@@ -26,9 +26,10 @@ segment `4992`; ADR `0086` raises only finite collection/manifest capacity to 21
 boundary. Exact receipt-bound proof closes `.2`; `.3` moves the same 62-assertion carrier into ordinary discovery
 and one exact canonical route while retaining the dormant 210-assertion authority proof. Only Julia advances, to
 rollout 5/9/106. Independent recomposition `.4` proves those committed owners unchanged, closes `.14.6.5`, and
-hands off shared Lua `.14.6.6`. Lua `.14.6.6.0` now freezes one shared, Lua-5.1-compatible dormant consumer on
-both PUC Lua and LuaJIT: 85 assertions pass and one deliberate assertion fails because the generic call has not
-yet become one exclusive `progressive_dispatch_span` node. Private authority `.14.6.6.1` is the next leaf.
+hands off shared Lua `.14.6.6`. Lua `.14.6.6.0` freezes one shared, Lua-5.1-compatible dormant consumer on both
+PUC Lua and LuaJIT: 85 assertions pass and one deliberate assertion fails because the generic call has not yet
+become one exclusive `progressive_dispatch_span` node. Private authority `.14.6.6.1` now passes 273/273 on each
+host while staying unexported, ActionIR-independent, and carrier-free; dormant carrier `.2` is next.
 
 This is consumer-aware work. The six live JSON projections and seven executable checkers now use stable decision
 authority ADR `0067`, and the chronology root contains no capability marker authority. Nine executable checkers
@@ -204,6 +205,15 @@ dual-ABI boundary: the separate staged registry rejects `expr-v1`, the assignmen
 the same typed unsupported-helper result. Both hosts pass 85 assertions and fail only the intended missing-node
 assertion; the consumer remains absent from ordinary and canonical discovery.
 
+Private authority `.14.6.6.1` adds one direct Lua-5.1-compatible module shared unchanged by both hosts. Opaque
+immutable entries accept already-compiled callbacks only; fresh invocations copy decoded sources into Lua's
+existing typed source authority. Callback-scoped views rebase local Unicode-scalar positions, spans, and
+diagnostics to the original source; capabilities and policies intersect, all ceilings take minima, and the same
+cancellation/deadline/remaining steps plus decreasing chain/depth/call authority span nested dispatch. Views and
+retained requests expire after callback return or failure, and only finite, deeply detached, node-bounded JSON
+results cross back. Its dormant 273-assertion consumer covers every neutral row and all 26 diagnostic contexts on
+both ABIs plus nesting, expiry, input/result isolation, bounds, and UTF-8 truncation adversaries.
+
 That recomposition also corrects stale current Julia-pending prose in the predecessor Perl, Rust, and Dart
 Knowledge cards. The executable neutral checker already governed runtime, contract, and outward paths exactly;
 Knowledge Map generation guarantees card/index freshness but does not infer semantic agreement across cards.
@@ -224,8 +234,9 @@ governance passes 2 registry entries, 2 sources/8 views, 6 authority, 6 cancella
 one Lua guard/5 paths plus 9 Rust + 8 Dart + 9 Julia carrier paths and 10 outward guards, 26
 diagnostics, rollout 5/9, and 106 mutations. The typed row remains pending; the rejected effect owns current node
 `PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded Lua production paths omit both tokens; and outward guards deny
-exposure. Lua private authority/core `.14.6.6.1`, dormant carriers `.2`, admission `.3`, recurrence `.7`, and
-public no-drift `.8` follow; independent Lua recomposition `.4` closes the backend parent after admission.
+exposure. Lua private authority/core `.14.6.6.1` is current without carrier movement; dormant carriers `.2`,
+admission `.3`, recurrence `.7`, and public no-drift `.8` follow. Independent Lua recomposition `.4` closes the
+backend parent after admission.
 
 Rust `.14.6.3.0` historically froze the dedicated-node RED behind one explicit cfg. Rust `.14.6.3.1` supplies the independent private authority beneath that boundary: immutable precompiled
 callbacks, caller-owned decoded sources, typed globally rebased bounded views, intersected grants and minimum

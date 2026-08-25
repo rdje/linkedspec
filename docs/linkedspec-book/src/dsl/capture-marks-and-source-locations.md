@@ -458,8 +458,8 @@ plan, and independently compiled emitted source delegate to one fresh opaque exe
 detached child payload. Generated data contains only target/id/top/span operands, never callbacks or authority.
 Recognition effect analysis rejects any attempted rule/function graph that reaches the node, and runtime checks
 live tokens defensively. The exact outer-cfg consumer is GREEN and canonically routed once under that cfg, while
-ordinary Cargo still executes zero tests. Dart and Julia are also admitted; Lua's exact historical RED is frozen,
-while its private implementation and the typed/public rows remain pending.
+ordinary Cargo still executes zero tests. Dart and Julia are also admitted; Lua's exact historical RED and
+private authority are current, while its dedicated carriers and the typed/public rows remain pending.
 
 Dart's historical pre-carrier boundary remains preserved by the same final-path fixture; `.14.6.4.2` turns it
 GREEN and `.14.6.4.3` admits it without changing behavior. The reserved assignment is now one exclusive
@@ -515,7 +515,7 @@ dormant consumer runs unchanged on PUC Lua and LuaJIT. It proves the separate st
 the reserved assignment remains one generic `dispatch_span` call, and native, normalized-JSON reconstructed,
 generated-plan, and independently loaded emitted-module routes all return the same typed unsupported-helper
 failure. On each ABI, 85 of 86 assertions pass and only the deliberate exclusive-node assertion fails. The test
-is absent from ordinary and canonical discovery; `.14.6.6.1` owns the private authority beneath this RED.
+is absent from ordinary and canonical discovery. `.14.6.6.1` now supplies the private authority beneath this RED.
 
 Run the same intentional RED on both admitted hosts:
 
@@ -526,6 +526,25 @@ bash tools/run_lua_project_data.sh luajit lua/test_dormant/progressive_span_disp
 
 Both commands must fail only with `missing exclusive progressive_dispatch_span node`; a pass would be premature
 until carrier leaf `.14.6.6.2` owns the GREEN transition.
+
+The authority is a separate direct module and remains outside ActionIR. It accepts immutable logical entries
+containing already-compiled callbacks, starts fresh copied-source invocations, and creates callback-scoped bounded
+views through Lua's existing private typed-source core. Local scalar positions/spans/diagnostics rebase globally;
+capabilities/policies intersect; ceilings take minima; cancellation/deadline/steps and decreasing chain/depth/call
+limits remain shared. Views and retained nested requests expire after callback return or failure. Results must be
+finite, deeply detached, JSON-shaped, live-field-free, cycle-free, and within the effective node ceiling.
+
+Run the same dormant authority matrix on both hosts:
+
+```bash
+bash tools/run_lua_project_data.sh puc lua/test_dormant/progressive_span_dispatch_authority_test.lua
+bash tools/run_lua_project_data.sh luajit lua/test_dormant/progressive_span_dispatch_authority_test.lua
+```
+
+Each command passes 273 assertions across the complete neutral matrix, all 26 diagnostic contexts, nested
+rebasing/shared limits, callback/request expiry, immutable inputs, result detachment, bounds, and UTF-8 diagnostic
+truncation. The module is unexported and none of the five Lua carrier paths references it; `.14.6.6.2` alone owns
+that integration.
 
 Until the later public leaves land, use the current helpers documented in this chapter. Do not assume typed positions or
 typed spans are authored values. The `recognition_*` operations are current across all six runtime routes, while
