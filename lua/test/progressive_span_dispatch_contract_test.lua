@@ -1,10 +1,10 @@
--- FUTURE-PARITY-BACKLOG.14.6.6.2 — dormant shared Lua progressive carriers.
+-- FUTURE-PARITY-BACKLOG.14.6.6.3 — admitted shared Lua progressive carriers.
 --
--- This exact final-path consumer remains outside ordinary Lua and canonical
--- CI discovery. Run the same Lua-5.1-compatible source on both admitted hosts:
+-- Ordinary Lua discovery and canonical CI both run this exact Lua-5.1-
+-- compatible final-path consumer on the two admitted hosts:
 --
---   bash tools/run_lua_project_data.sh puc lua/test_dormant/progressive_span_dispatch_contract_test.lua
---   bash tools/run_lua_project_data.sh luajit lua/test_dormant/progressive_span_dispatch_contract_test.lua
+--   bash tools/run_lua_project_data.sh puc lua/test/progressive_span_dispatch_contract_test.lua
+--   bash tools/run_lua_project_data.sh luajit lua/test/progressive_span_dispatch_contract_test.lua
 
 local authority = require("linkedspec.bounded_child_parse_authority")
 local json = require("linkedspec.json")
@@ -108,7 +108,7 @@ check_equal(contract.contract_id, "linkedspec-progressive-span-dispatch-v1", "ne
 check_equal(contract.format, 1, "neutral contract format")
 check_equal(
   contract.status,
-  "perl_rust_dart_and_julia_complete_other_backends_pending",
+  "all_private_backends_complete_recurring_and_public_pending",
   "neutral rollout status"
 )
 for name, expected in pairs({
@@ -122,27 +122,27 @@ for name, expected in pairs({
   rust_carrier_paths = 9,
   dart_carrier_paths = 8,
   julia_carrier_paths = 9,
-  lua_dormant_carrier_paths = 9,
+  lua_carrier_paths = 9,
   backend_guard_groups = 0,
   backend_guard_paths = 0,
   outward_guard_paths = 10,
   diagnostics = 26,
   rollout_legs = 9,
-  mutations = 106,
+  mutations = 112,
 }) do
   check_equal(contract.expected_counts[name], expected, "neutral count " .. name)
 end
 check_equal(#contract.rollout, 9, "neutral rollout row count")
-for index = 1, 5 do
+for index = 1, 7 do
   check_equal(contract.rollout[index].status, "complete", "complete rollout " .. index)
 end
-for index = 6, 9 do
+for index = 8, 9 do
   check_equal(contract.rollout[index].status, "pending", "pending rollout " .. index)
 end
 check_equal(contract.rollout[6].owner, "FUTURE-PARITY-BACKLOG.14.6.6", "PUC Lua owner")
 check_equal(contract.rollout[7].owner, "FUTURE-PARITY-BACKLOG.14.6.6", "LuaJIT owner")
-local lua_carriers = contract.current_boundary.lua_dormant_carriers
-check_equal(lua_carriers.canonical_discovery, "dormant_only", "Lua carrier discovery state")
+local lua_carriers = contract.current_boundary.lua_carriers
+check_equal(lua_carriers.canonical_discovery, "ordinary_and_exact_canonical_dual_abi", "Lua carrier discovery state")
 check_equal(#lua_carriers.marker_rows, 9, "Lua carrier marker count")
 check_equal(#contract.current_boundary.backend_guard_groups, 0, "Lua pending guard retired")
 
@@ -411,17 +411,32 @@ check_equal(child_result.text, "a", "all carrier results remain detached")
 
 local dormant_path = "lua/test_dormant/progressive_span_dispatch_contract_test.lua"
 local ordinary_path = "lua/test/progressive_span_dispatch_contract_test.lua"
-check_equal(file_exists(dormant_path), true, "dormant consumer exists")
-check_equal(file_exists(ordinary_path), false, "ordinary consumer remains absent")
-check_equal(
-  count_literal(read_file("tools/run_lua_local.sh"), "progressive_span_dispatch_contract_test.lua"),
-  0,
-  "ordinary discovery remains absent"
+check(
+  file_exists(ordinary_path) and not file_exists(dormant_path),
+  "ordinary consumer exists without dormant duplicate"
 )
-check_equal(
-  count_literal(read_file("tools/run_ci_local.sh"), dormant_path),
-  0,
-  "canonical discovery remains absent"
+local ordinary_driver = read_file("tools/run_lua_local.sh")
+check(
+  count_literal(ordinary_driver, ordinary_path) == 2 and
+    count_literal(ordinary_driver, '"$LUA_CMD" ' .. ordinary_path) == 1 and
+    count_literal(ordinary_driver, '"$LUAJIT_CMD" ' .. ordinary_path) == 1,
+  "ordinary discovery runs the consumer exactly once per ABI"
+)
+local canonical_driver = read_file("tools/run_ci_local.sh")
+check(
+  count_literal(canonical_driver, "require_tracked_file " .. ordinary_path) == 1 and
+    count_literal(canonical_driver, lua_carriers.puc_registration_marker) == 1 and
+    count_literal(canonical_driver, lua_carriers.puc_invocation) == 1 and
+    count_literal(canonical_driver, lua_carriers.luajit_registration_marker) == 1 and
+    count_literal(canonical_driver, lua_carriers.luajit_invocation) == 1,
+  "canonical discovery requires and runs one exact route per ABI"
+)
+check(
+  contract.rollout[6].status == "complete" and
+    contract.rollout[6].paths[1] == ordinary_path and #contract.rollout[6].paths == 1 and
+    contract.rollout[7].status == "complete" and
+    contract.rollout[7].paths[1] == ordinary_path and #contract.rollout[7].paths == 1,
+  "both Lua rollout rows bind the one admitted consumer"
 )
 for _, row in ipairs(lua_carriers.marker_rows) do
   local source = read_file(row.path)

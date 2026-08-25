@@ -783,8 +783,10 @@ the reserved form is still a generic call and that all four carrier shapes prese
 failure; 85 assertions pass and the sole deliberate failure requires the missing dedicated node. Private shared
 authority `.14.6.6.1` is now current as one Lua-5.1-compatible direct module. Its opaque immutable entries,
 copied-source invocations, typed rebased callback views, narrowing grants/ceilings, shared cancellation and limits,
-expiring requests, and detached bounded results pass 273 assertions per ABI. Dormant carrier integration `.2`,
-canonical admission `.3`, and recomposition `.4` follow.
+expiring requests, and detached bounded results pass 273 assertions per ABI. Carrier `.2` adds one exclusive node
+and four fresh-authority routes, making the shared consumer GREEN at 178/178 per ABI while dormant. Admission `.3`
+moves that same source into ordinary discovery once per ABI and one exact canonical route per ABI, promoting only
+PUC Lua and LuaJIT to rollout 7/9/112. The authority proof remains dormant; recomposition `.4` follows.
 
 The spec's body shell is a
 linked opener/closer parse: `body_brace`

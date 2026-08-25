@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-25` (shared Lua `.14.6.6.1` adds one private Lua-5.1 authority proven at 273/273 on both
-  ABIs while preserving the exact 85-pass/one-RED final path; dormant carriers `.2` are next)
+- Last updated: `2026-08-25` (shared Lua `.14.6.6.3` admits the unchanged 178-assertion carrier once per ABI in
+  ordinary and exact canonical proof, advancing only PUC Lua/LuaJIT to 7/9/112; recomposition `.4` is next)
 - Owner: repo-local workflow
 
 ## Goal
@@ -105,15 +105,18 @@ perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
 ## Current Frontier
 
 **Authoritative frontier (2026-08-25):** progressive neutral `.14.6.1` and private Perl `.2`, Rust `.3`, Dart
-`.4`, and Julia `.5` behavioral admissions are current at rollout 5/9/106. Capacity tree `FUTURE-PARITY-PARTITION-CAPACITY.0-.2` adds and
+`.4`, Julia `.5`, PUC Lua `.6`, and LuaJIT `.6` behavioral admissions are current at rollout 7/9/112. Capacity tree `FUTURE-PARITY-PARTITION-CAPACITY.0-.2` adds and
 independently recomposes the bounded `.14.6.5-.14.8` owner without changing behavior. Julia `.14.6.5.0` splits
 the parent into historical dormant RED `.0`, private authority/core `.1`, dormant carriers `.2`, canonical
 admission `.3`, and independent recomposition `.4`; `.1` supplies the private immutable authority, and `.2` makes
 the unchanged consumer GREEN at 62/62 through all four fresh-authority routes while discovery and rollout stay
 dormant under canonical signoff. `.14.6.5.3` then admits the same carrier through one ordinary and one exact
 canonical route, promoting only Julia while the 210-assertion authority proof stays dormant. Independent
-recomposition `.14.6.5.4` proves those committed owners unchanged and closes the Julia parent. Shared Lua `.6` is
-next; recurrence `.7`, public no-drift `.8`, staged `.14.7`, and combined
+recomposition `.14.6.5.4` proves those committed owners unchanged and closes the Julia parent. Shared Lua `.6.0`
+preserves its historical 85-pass/one-RED boundary, `.1` supplies private authority at 273/273 per ABI, `.2` makes
+four dormant carriers GREEN at 178/178 per ABI, and `.3` admits that same consumer once per ABI through ordinary
+and exact canonical routes without production, format, typed, or outward movement. Recomposition `.6.4` is next;
+recurrence `.7`, public no-drift `.8`, staged `.14.7`, and combined
 program-wide `.14.8` remain separate owners. Mandatory segment `4992` is finitely authorized by ADR `0086` at
 21 change-history files / 20 manifest lines and makes `.14.6.5.2` a canonical boundary.
 

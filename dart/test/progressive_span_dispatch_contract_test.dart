@@ -44,7 +44,7 @@ void main() {
       expect(contract['format'], 1);
       expect(
         contract['status'],
-        'perl_rust_dart_and_julia_complete_other_backends_pending',
+        'all_private_backends_complete_recurring_and_public_pending',
       );
       expect(contract['expected_counts'], <String, Object?>{
         'registry_entries': 2,
@@ -57,13 +57,13 @@ void main() {
         'rust_carrier_paths': 9,
         'dart_carrier_paths': 8,
         'julia_carrier_paths': 9,
-        'lua_dormant_carrier_paths': 9,
+        'lua_carrier_paths': 9,
         'backend_guard_groups': 0,
         'backend_guard_paths': 0,
         'outward_guard_paths': 10,
         'diagnostics': 26,
         'rollout_legs': 9,
-        'mutations': 106,
+        'mutations': 112,
       });
       expect(_ids(contract, 'view_cases'), <String>[
         'unicode_middle',
@@ -158,8 +158,8 @@ void main() {
         'complete',
         'complete',
         'complete',
-        'pending',
-        'pending',
+        'complete',
+        'complete',
         'pending',
         'pending',
       ]);

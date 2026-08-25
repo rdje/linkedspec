@@ -10,6 +10,22 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-25 — FUTURE-PARITY-BACKLOG.14.6.6.3 — admit private Lua progressive dispatch
+
+- Activated task-tree-first from exact clean Lua-carrier commit `4f6173d0`; moved the same 178-assertion
+  Lua-5.1-compatible consumer from `lua/test_dormant/` to `lua/test/` with only header, neutral snapshot, and
+  discovery assertions changed.
+- `tools/run_lua_local.sh` executes that shared source exactly once on PUC Lua and once on LuaJIT. Canonical CI
+  requires the tracked path once, then registers and invokes one exact repository-routed route per ABI.
+- Neutral governance promotes only PUC Lua and LuaJIT: rollout advances from 5/9/106 to 7/9/112 with 9 Rust,
+  8 Dart, 9 Julia, and 9 Lua carrier paths, zero backend guards, 10 outward guards, and 26 diagnostics.
+- The carrier remains 178/178 and the separate dormant authority remains 273/273 on both ABIs. Complete ordinary
+  Lua, admitted Perl/Rust/Dart/Julia consumers, and progressive/typed/recognition/generated/capability/language
+  direct dependents pass.
+- Production, private authority, generated-v2 format, typed recurrence, public inventory, facade/schema/MCP/CLI/
+  README, and outward surfaces do not move. Exact staged receipt-bound canonical CI admits the topology;
+  independent recomposition `.14.6.6.4` is next.
+
 ## 2026-08-25 — FUTURE-PARITY-BACKLOG.14.6.6.2 — implement dormant Lua progressive carriers
 
 - Activated task-tree-first from exact clean Lua-authority commit `6cbf8fdf`; the reserved literal-id/literal-top/

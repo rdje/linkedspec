@@ -32,7 +32,7 @@ AUTHORED_SURFACE = {
     ],
     "result": "one detached child payload returned as the expression value",
     "failure_policy": "fail_only; every dispatch or child failure propagates unchanged and no null, fallback, retry, or alternate parser is implied",
-    "availability": "private Perl, Rust, Dart, and Julia runtimes admitted; every remaining backend remains unavailable until its independent rollout row completes",
+    "availability": "private Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT runtimes admitted; recurring and public no-drift rows remain pending",
 }
 
 POLICY = {
@@ -337,7 +337,7 @@ EXECUTION_CASES = [
 ]
 
 CURRENT_BOUNDARY = {
-    "status": "perl_rust_dart_and_julia_admitted_other_backend_rows_pending",
+    "status": "all_private_backends_admitted_recurring_and_public_pending",
     "typed_rollout": {
         "path": "capability_conformance/typed_source_location_contract.json",
         "leg": "progressive_span_dispatch",
@@ -486,9 +486,13 @@ CURRENT_BOUNDARY = {
             },
         ],
     },
-    "lua_dormant_carriers": {
-        "consumer_path": "lua/test_dormant/progressive_span_dispatch_contract_test.lua",
-        "canonical_discovery": "dormant_only",
+    "lua_carriers": {
+        "consumer_path": "lua/test/progressive_span_dispatch_contract_test.lua",
+        "canonical_discovery": "ordinary_and_exact_canonical_dual_abi",
+        "puc_registration_marker": "running exact Lua progressive span-dispatch admission consumer on PUC Lua",
+        "puc_invocation": "bash tools/run_lua_project_data.sh puc lua/test/progressive_span_dispatch_contract_test.lua",
+        "luajit_registration_marker": "running exact Lua progressive span-dispatch admission consumer on LuaJIT",
+        "luajit_invocation": "bash tools/run_lua_project_data.sh luajit lua/test/progressive_span_dispatch_contract_test.lua",
         "marker_rows": [
             {
                 "path": "lua/src/linkedspec/action_ast.lua",
@@ -523,7 +527,7 @@ CURRENT_BOUNDARY = {
                 "tokens": ["bounded_child_parse_authority", "execute_generated_parser_v2"],
             },
             {
-                "path": "lua/test_dormant/progressive_span_dispatch_contract_test.lua",
+                "path": "lua/test/progressive_span_dispatch_contract_test.lua",
                 "tokens": ["four routes use fresh authority", "independently loaded emitted", "progressive_dispatch_span"],
             },
         ],
@@ -581,8 +585,8 @@ ROLLOUT = [
     (3, "FUTURE-PARITY-BACKLOG.14.6.3", "rust", "complete", ["rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs"]),
     (4, "FUTURE-PARITY-BACKLOG.14.6.4", "dart", "complete", ["dart/test/progressive_span_dispatch_contract_test.dart"]),
     (5, "FUTURE-PARITY-BACKLOG.14.6.5", "julia", "complete", ["julia/test/progressive_span_dispatch_contract_test.jl"]),
-    (6, "FUTURE-PARITY-BACKLOG.14.6.6", "puc_lua", "pending", []),
-    (7, "FUTURE-PARITY-BACKLOG.14.6.6", "luajit", "pending", []),
+    (6, "FUTURE-PARITY-BACKLOG.14.6.6", "puc_lua", "complete", ["lua/test/progressive_span_dispatch_contract_test.lua"]),
+    (7, "FUTURE-PARITY-BACKLOG.14.6.6", "luajit", "complete", ["lua/test/progressive_span_dispatch_contract_test.lua"]),
     (8, "FUTURE-PARITY-BACKLOG.14.6.7", "recurring", "pending", []),
     (9, "FUTURE-PARITY-BACKLOG.14.6.8", "public_no_drift", "pending", []),
 ]
@@ -741,7 +745,7 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
     require(document["format"] == 1, "format drifted")
     require(document["contract_id"] == "linkedspec-progressive-span-dispatch-v1", "contract id drifted")
     require(document["task_owner"] == "FUTURE-PARITY-BACKLOG.14.6.1", "task owner drifted")
-    require(document["status"] == "perl_rust_dart_and_julia_complete_other_backends_pending", "status drifted")
+    require(document["status"] == "all_private_backends_complete_recurring_and_public_pending", "status drifted")
     expected_counts = {
         "registry_entries": len(REGISTRY_ENTRIES),
         "sources": len(SOURCES),
@@ -753,7 +757,7 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
         "rust_carrier_paths": len(CURRENT_BOUNDARY["rust_carriers"]["marker_rows"]),
         "dart_carrier_paths": len(CURRENT_BOUNDARY["dart_carriers"]["marker_rows"]),
         "julia_carrier_paths": len(CURRENT_BOUNDARY["julia_carriers"]["marker_rows"]),
-        "lua_dormant_carrier_paths": len(CURRENT_BOUNDARY["lua_dormant_carriers"]["marker_rows"]),
+        "lua_carrier_paths": len(CURRENT_BOUNDARY["lua_carriers"]["marker_rows"]),
         "backend_guard_groups": len(CURRENT_BOUNDARY["backend_guard_groups"]),
         "backend_guard_paths": sum(len(group["paths"]) for group in CURRENT_BOUNDARY["backend_guard_groups"]),
         "outward_guard_paths": len(CURRENT_BOUNDARY["outward_guard"]["paths"]),
@@ -874,13 +878,13 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
             for token in marker_row["tokens"]:
                 require(token in carrier, f"Julia carrier is missing {token}: {marker_row['path']}")
 
-        lua_carriers = CURRENT_BOUNDARY["lua_dormant_carriers"]
+        lua_carriers = CURRENT_BOUNDARY["lua_carriers"]
         for marker_row in lua_carriers["marker_rows"]:
             carrier_path = ROOT / marker_row["path"]
-            require(carrier_path.is_file(), f"Lua dormant carrier path is missing: {marker_row['path']}")
+            require(carrier_path.is_file(), f"Lua carrier path is missing: {marker_row['path']}")
             carrier = carrier_path.read_text(encoding="utf-8")
             for token in marker_row["tokens"]:
-                require(token in carrier, f"Lua dormant carrier is missing {token}: {marker_row['path']}")
+                require(token in carrier, f"Lua carrier is missing {token}: {marker_row['path']}")
 
         for group in CURRENT_BOUNDARY["backend_guard_groups"]:
             for relative_path in group["paths"]:
@@ -975,20 +979,42 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
         )
         require(
             (ROOT / lua_carriers["consumer_path"]).is_file(),
-            "dormant Lua progressive consumer is missing",
+            "admitted Lua progressive consumer is missing",
         )
         require(
-            not (ROOT / "lua/test/progressive_span_dispatch_contract_test.lua").exists(),
-            "dormant Lua progressive consumer entered ordinary discovery",
+            not (ROOT / "lua/test_dormant/progressive_span_dispatch_contract_test.lua").exists(),
+            "admitted Lua progressive consumer retains a dormant duplicate",
         )
         lua_driver = (ROOT / "tools/run_lua_local.sh").read_text(encoding="utf-8")
         require(
-            "progressive_span_dispatch_contract_test.lua" not in lua_driver,
-            "dormant Lua progressive consumer entered the ordinary Lua driver",
+            lua_driver.count(lua_carriers["consumer_path"]) == 2,
+            "ordinary Lua discovery must run the progressive consumer exactly once per ABI",
         )
         require(
-            lua_carriers["consumer_path"] not in ci,
-            "dormant Lua progressive consumer entered canonical CI",
+            lua_driver.count(f'"$LUA_CMD" {lua_carriers["consumer_path"]}') == 1,
+            "ordinary Lua discovery must run the progressive consumer once on PUC Lua",
+        )
+        require(
+            lua_driver.count(f'"$LUAJIT_CMD" {lua_carriers["consumer_path"]}') == 1,
+            "ordinary Lua discovery must run the progressive consumer once on LuaJIT",
+        )
+        require(
+            ci.count(f"require_tracked_file {lua_carriers['consumer_path']}") == 1,
+            "canonical CI must require the Lua progressive consumer exactly once",
+        )
+        for runtime in ("puc", "luajit"):
+            require(
+                ci.count(f'log "{lua_carriers[f"{runtime}_registration_marker"]}"') == 1,
+                f"canonical {runtime} Lua progressive admission marker missing or duplicated",
+            )
+            require(
+                ci.count(lua_carriers[f"{runtime}_invocation"]) == 1,
+                f"canonical {runtime} Lua progressive admission invocation missing or duplicated",
+            )
+        require(
+            ROLLOUT[5][4] == [lua_carriers["consumer_path"]] and
+            ROLLOUT[6][4] == [lua_carriers["consumer_path"]],
+            "both Lua runtime rows must bind the admitted consumer",
         )
 
 
@@ -1103,8 +1129,12 @@ MUTATIONS: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
     ("current_dart_invocation", set_value(["current_boundary", "dart_carriers", "invocation"], "dart test")),
     ("current_julia_marker", set_value(["current_boundary", "julia_carriers", "registration_marker"], "wrong")),
     ("current_julia_invocation", set_value(["current_boundary", "julia_carriers", "invocation"], "julia test")),
-    ("current_lua_consumer", set_value(["current_boundary", "lua_dormant_carriers", "consumer_path"], "lua/wrong.lua")),
-    ("current_lua_node_marker", set_value(["current_boundary", "lua_dormant_carriers", "marker_rows", 0, "tokens", 0], "WrongNode")),
+    ("current_lua_consumer", set_value(["current_boundary", "lua_carriers", "consumer_path"], "lua/wrong.lua")),
+    ("current_lua_node_marker", set_value(["current_boundary", "lua_carriers", "marker_rows", 0, "tokens", 0], "WrongNode")),
+    ("current_lua_puc_marker", set_value(["current_boundary", "lua_carriers", "puc_registration_marker"], "wrong")),
+    ("current_lua_puc_invocation", set_value(["current_boundary", "lua_carriers", "puc_invocation"], "lua test")),
+    ("current_lua_luajit_marker", set_value(["current_boundary", "lua_carriers", "luajit_registration_marker"], "wrong")),
+    ("current_lua_luajit_invocation", set_value(["current_boundary", "lua_carriers", "luajit_invocation"], "luajit test")),
     ("current_outward_guard_path", set_value(["current_boundary", "outward_guard", "paths", 0], "wrong.pm")),
     ("current_outward_guard_dispatch", set_value(["current_boundary", "outward_guard", "forbidden_tokens", 0], "parse_job")),
     ("current_outward_guard_rollout", set_value(["current_boundary", "outward_guard", "forbidden_tokens", 2], "staged_span_dispatch")),
@@ -1115,6 +1145,8 @@ MUTATIONS: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
     ("rollout_rust_regressed", set_value(["rollout", 2, "status"], "pending")),
     ("rollout_dart_regressed", set_value(["rollout", 3, "status"], "pending")),
     ("rollout_julia_regressed", set_value(["rollout", 4, "status"], "pending")),
+    ("rollout_puc_lua_regressed", set_value(["rollout", 5, "status"], "pending")),
+    ("rollout_luajit_regressed", set_value(["rollout", 6, "status"], "pending")),
     ("canonical_checker", set_value(["canonical_execution", "checker_path"], "tools/wrong.py")),
     ("canonical_storage", set_value(["canonical_execution", "storage_policy"], "/tmp")),
 ]
@@ -1151,7 +1183,7 @@ def main() -> int:
         f"{len(document['current_boundary']['rust_carriers']['marker_rows'])} Rust + "
         f"{len(document['current_boundary']['dart_carriers']['marker_rows'])} Dart carrier paths; "
         f"{len(document['current_boundary']['julia_carriers']['marker_rows'])} Julia carrier paths; "
-        f"{len(document['current_boundary']['lua_dormant_carriers']['marker_rows'])} dormant Lua carrier paths; "
+        f"{len(document['current_boundary']['lua_carriers']['marker_rows'])} Lua carrier paths; "
         f"{len(document['current_boundary']['backend_guard_groups'])} backend guards/"
         f"{sum(len(group['paths']) for group in document['current_boundary']['backend_guard_groups'])} paths; "
         f"{len(document['current_boundary']['outward_guard']['paths'])} outward guards; "

@@ -2,7 +2,7 @@
   "format": 1,
   "contract_id": "linkedspec-progressive-span-dispatch-v1",
   "task_owner": "FUTURE-PARITY-BACKLOG.14.6.1",
-  "status": "perl_rust_dart_and_julia_complete_other_backends_pending",
+  "status": "all_private_backends_complete_recurring_and_public_pending",
   "expected_counts": {
     "registry_entries": 2,
     "sources": 2,
@@ -14,13 +14,13 @@
     "rust_carrier_paths": 9,
     "dart_carrier_paths": 8,
     "julia_carrier_paths": 9,
-    "lua_dormant_carrier_paths": 9,
+    "lua_carrier_paths": 9,
     "backend_guard_groups": 0,
     "backend_guard_paths": 0,
     "outward_guard_paths": 10,
     "diagnostics": 26,
     "rollout_legs": 9,
-    "mutations": 106
+    "mutations": 112
   },
   "authored_surface": {
     "example": "value = dispatch_span(\"expr-v1\", \"Expr\", span)",
@@ -34,7 +34,7 @@
     ],
     "result": "one detached child payload returned as the expression value",
     "failure_policy": "fail_only; every dispatch or child failure propagates unchanged and no null, fallback, retry, or alternate parser is implied",
-    "availability": "private Perl, Rust, Dart, and Julia runtimes admitted; every remaining backend remains unavailable until its independent rollout row completes"
+    "availability": "private Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT runtimes admitted; recurring and public no-drift rows remain pending"
   },
   "policy": {
     "registry": "the host seeds immutable logical entries containing already compiled parser authority; authored execution may look up an identity but cannot resolve, load, compile, mutate, or enumerate",
@@ -868,7 +868,7 @@
     }
   ],
   "current_boundary": {
-    "status": "perl_rust_dart_and_julia_admitted_other_backend_rows_pending",
+    "status": "all_private_backends_admitted_recurring_and_public_pending",
     "typed_rollout": {
       "path": "capability_conformance/typed_source_location_contract.json",
       "leg": "progressive_span_dispatch",
@@ -1019,9 +1019,13 @@
         }
       ]
     },
-    "lua_dormant_carriers": {
-      "consumer_path": "lua/test_dormant/progressive_span_dispatch_contract_test.lua",
-      "canonical_discovery": "dormant_only",
+    "lua_carriers": {
+      "consumer_path": "lua/test/progressive_span_dispatch_contract_test.lua",
+      "canonical_discovery": "ordinary_and_exact_canonical_dual_abi",
+      "puc_registration_marker": "running exact Lua progressive span-dispatch admission consumer on PUC Lua",
+      "puc_invocation": "bash tools/run_lua_project_data.sh puc lua/test/progressive_span_dispatch_contract_test.lua",
+      "luajit_registration_marker": "running exact Lua progressive span-dispatch admission consumer on LuaJIT",
+      "luajit_invocation": "bash tools/run_lua_project_data.sh luajit lua/test/progressive_span_dispatch_contract_test.lua",
       "marker_rows": [
         {
           "path": "lua/src/linkedspec/action_ast.lua",
@@ -1056,7 +1060,7 @@
           "tokens": ["bounded_child_parse_authority", "execute_generated_parser_v2"]
         },
         {
-          "path": "lua/test_dormant/progressive_span_dispatch_contract_test.lua",
+          "path": "lua/test/progressive_span_dispatch_contract_test.lua",
           "tokens": ["four routes use fresh authority", "independently loaded emitted", "progressive_dispatch_span"]
         }
       ]
@@ -1366,15 +1370,19 @@
       "order": 6,
       "owner": "FUTURE-PARITY-BACKLOG.14.6.6",
       "leg": "puc_lua",
-      "status": "pending",
-      "paths": []
+      "status": "complete",
+      "paths": [
+        "lua/test/progressive_span_dispatch_contract_test.lua"
+      ]
     },
     {
       "order": 7,
       "owner": "FUTURE-PARITY-BACKLOG.14.6.6",
       "leg": "luajit",
-      "status": "pending",
-      "paths": []
+      "status": "complete",
+      "paths": [
+        "lua/test/progressive_span_dispatch_contract_test.lua"
+      ]
     },
     {
       "order": 8,
@@ -1496,6 +1504,10 @@
     "current_julia_invocation",
     "current_lua_consumer",
     "current_lua_node_marker",
+    "current_lua_puc_marker",
+    "current_lua_puc_invocation",
+    "current_lua_luajit_marker",
+    "current_lua_luajit_invocation",
     "current_outward_guard_path",
     "current_outward_guard_dispatch",
     "current_outward_guard_rollout",
@@ -1506,6 +1518,8 @@
     "rollout_rust_regressed",
     "rollout_dart_regressed",
     "rollout_julia_regressed",
+    "rollout_puc_lua_regressed",
+    "rollout_luajit_regressed",
     "canonical_checker",
     "canonical_storage"
   ]

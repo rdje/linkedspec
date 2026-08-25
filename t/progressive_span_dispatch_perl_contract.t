@@ -120,8 +120,8 @@ is(
 is($contract->{format}, 1, 'loads contract format 1');
 is(
  $contract->{status},
- 'perl_rust_dart_and_julia_complete_other_backends_pending',
- 'loads the Perl-Rust-Dart-Julia-complete and other-backend-pending state',
+ 'all_private_backends_complete_recurring_and_public_pending',
+ 'loads the all-private-backends-complete and recurring/public-pending state',
 );
 is(
  $contract->{task_owner},
@@ -143,7 +143,7 @@ is_deeply(
   ],
   result => 'one detached child payload returned as the expression value',
   failure_policy => 'fail_only; every dispatch or child failure propagates unchanged and no null, fallback, retry, or alternate parser is implied',
-  availability => 'private Perl, Rust, Dart, and Julia runtimes admitted; every remaining backend remains unavailable until its independent rollout row completes',
+  availability => 'private Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT runtimes admitted; recurring and public no-drift rows remain pending',
  },
  'freezes the dedicated authored expression, operands, result, and fail-only boundary',
 );
@@ -254,13 +254,13 @@ is_deeply(
   rust_carrier_paths => 9,
   dart_carrier_paths => 8,
   julia_carrier_paths => 9,
-  lua_dormant_carrier_paths => 9,
+  lua_carrier_paths => 9,
   backend_guard_groups => 0,
   backend_guard_paths => 0,
   outward_guard_paths => 10,
   diagnostics => 26,
   rollout_legs => 9,
-  mutations => 106,
+  mutations => 112,
  },
  'freezes every neutral inventory count',
 );
@@ -271,8 +271,8 @@ is_deeply(
 );
 is_deeply(
  [map { $_->{status} } @{$contract->{rollout}}],
- ['complete', 'complete', 'complete', 'complete', 'complete', ('pending') x 4],
- 'keeps exactly the neutral, Perl, Rust, Dart, and Julia rollout legs complete',
+ [('complete') x 7, ('pending') x 2],
+ 'keeps all private runtime legs complete while recurring and public remain pending',
 );
 is_deeply(
  $contract->{rollout}[1]{paths},
@@ -293,6 +293,14 @@ is_deeply(
  $contract->{rollout}[4]{paths},
  ['julia/test/progressive_span_dispatch_contract_test.jl'],
  'binds the Julia rollout leg to its ordinary and exact canonical consumer',
+);
+is_deeply(
+ [$contract->{rollout}[5]{paths}, $contract->{rollout}[6]{paths}],
+ [
+  ['lua/test/progressive_span_dispatch_contract_test.lua'],
+  ['lua/test/progressive_span_dispatch_contract_test.lua'],
+ ],
+ 'binds both Lua runtime legs to the shared ordinary and exact canonical consumer',
 );
 
 my $probe = 'return(dispatch_span("expr-v1", "Expr", span));';

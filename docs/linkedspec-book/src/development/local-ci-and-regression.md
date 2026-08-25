@@ -157,32 +157,26 @@ that same proof pass. A RED result is therefore planned evidence, not a claim th
 
 ### Neutral progressive span-dispatch contract
 
-Canonical CI always runs the repository-routed neutral checker plus the admitted private Perl, Rust, Dart, and Julia consumers; Lua's RED and authority proofs remain focused and dormant:
+Canonical CI always runs the repository-routed neutral checker plus every admitted private runtime consumer; the shared Lua carrier runs once per ABI, while its separate authority proof remains focused and dormant:
 
 ```bash
 bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_contract.py
 PERL5LIB= prove -Iperl t/progressive_span_dispatch_perl_contract.t
-RUSTFLAGS='--cfg linkedspec_progressive_span_dispatch_red' cargo test \
-  --manifest-path rust/Cargo.toml -p linkedspec-runtime \
+RUSTFLAGS='--cfg linkedspec_progressive_span_dispatch_red' \
+  bash tools/run_cargo_local.sh test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime \
   --test progressive_span_dispatch_contract
 (cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/progressive_span_dispatch_contract_test.dart)
 bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include("julia/test/progressive_span_dispatch_contract_test.jl")'
+for abi in puc luajit; do bash tools/run_lua_project_data.sh "$abi" lua/test/progressive_span_dispatch_contract_test.lua; done
 ```
 
 It validates the reserved private `dispatch_span("logical-parser-id", "Top", span)` expression without enabling backend syntax.
-The checker executes 2 sources/8 views, 6 authority, 6 cancellation, 8 chain/bound, and 4 isolation/detachment cases;
-locks 26 diagnostics and 5/9 rollout; guards 5 Lua, 9 Rust, 8 Dart, 9 Julia, and 10 outward paths; and rejects 106 mutations.
+The checker executes 2 sources/8 views, 6 authority, 6 cancellation, 8 chain/bound, and 4 isolation/detachment cases; locks 26 diagnostics and 7/9 rollout; governs 9 Rust, 8 Dart, 9 Julia, and 9 Lua carrier paths plus 10 outward paths with zero backend guards; and rejects 112 mutations.
 A pass excludes path loading, authority elevation, cancellation reset, non-decreasing cycles, parent-state leaks, live handles, fallback, and premature rollout.
 It also keeps the typed row pending, gives rejected effect `parser_registry_or_staged_dispatch` exactly current node
-`PROGRESSIVE_DISPATCH_SPAN` and no call row, guards Lua tokens, and denies private exposure in ten facade/schema/semantic/MCP/CLI/README paths.
+`PROGRESSIVE_DISPATCH_SPAN` and no call row, and denies private exposure in ten facade/schema/semantic/MCP/CLI/README paths.
 
-Perl carrier integration and admission now prove
-one exclusive dedicated node, static operands, fresh invocation authority, live/reconstructed/generated-plan/
-independently loaded emitted execution, logical-only serialization, typed missing-authority failure, and
-transaction rejection in 127 assertions. `tools/run_ci_local.sh` requires, syntax-checks, and executes that exact
-consumer once; the neutral checker rejects regression of the Perl row and premature later-backend promotion.
-Its transaction-state query loads the recognition runtime only when a dispatch executes, preserving the existing
-require-only Compiler guarantee that `LinkedRE` stays lazy until the parser pipeline actually needs it.
+Perl carrier integration and admission prove one exclusive dedicated node, static operands, fresh invocation authority, live/reconstructed/generated-plan/independently loaded emitted execution, logical-only serialization, typed missing-authority failure, and transaction rejection in 129 assertions. `tools/run_ci_local.sh` requires, syntax-checks, and executes that exact consumer once; the neutral checker rejects regression of the Perl row and premature later-backend promotion. Its transaction-state query loads the recognition runtime only when a dispatch executes, preserving the require-only Compiler guarantee that `LinkedRE` stays lazy until the parser pipeline actually needs it.
 
 Rust's ordinary target intentionally compiles with zero tests. Canonical CI preserves the historical RED cfg as
 the stable identity that activates the exact GREEN four-route consumer:
@@ -227,6 +221,8 @@ The Dart authority command passes four groups: every neutral view/authority/canc
 
 Julia admits only the carrier: the command above passes 62/62 across its four routes, and ordinary `Pkg.test()` includes it once.
 The directly runnable authority command with `julia/test_dormant/progressive_span_dispatch_authority_test.jl` passes 210 assertions but stays dormant; `.14.6.5.3` admits without duplicating it, and `.14.6.5.4` recomposes independently.
+
+Lua likewise admits only the carrier. `tools/run_lua_local.sh` executes the same 178-assertion source exactly once under `$LUA_CMD` and once under `$LUAJIT_CMD`; canonical CI independently requires the tracked path and repeats one exact repository-routed command per ABI. The directly runnable `lua/test_dormant/progressive_span_dispatch_authority_test.lua` remains outside ordinary/canonical discovery and passes 273 assertions on each ABI.
 
 The `.14.4.0` audit found one contradiction in that baseline: `direct_nonprogress` used the same textual identity for invocation and parent. Corrective `.14.4.0.1` changes all six observation identities to positive unique
 monotonic numbers and validates lineage before exact fixture comparison. Four reason-checked regressions prove

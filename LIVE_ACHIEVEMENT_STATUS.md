@@ -2,28 +2,29 @@
 
 ## Current Activity
 
-- Shared Lua `.14.6.6.2` is focused-signoff-complete from exact clean `6cbf8fdf`. One exclusive dedicated node and
-  four fresh-authority carriers are shared unchanged by PUC Lua and LuaJIT.
-- The exact dormant carrier passes 178/178 per ABI; the separate authority remains 273/273. Malformed/residual and
-  static/live recognition paths reject, results detach, the parent cursor stays fixed, and generated data omit
-  callbacks, registries, fingerprints, decoded snapshots, cancellation, and mutable state.
-- Neutral governance records 9 dormant Lua carrier paths and zero backend guards at unchanged rollout 5/9/106.
-  Generated v2, ordinary/canonical discovery, typed recurrence, package facade, and outward surfaces do not move.
-- Complete Lua passes 178/178 per ABI, CLI 66/66 in both option environments, corpus 105, and storage 19/3.
-  Progressive 5/9/106, typed 11/3/152, recognition 138/250/58, generated/capability 80/0/0, and language 250/126 pass.
-- Canonical dual-ABI admission `.14.6.6.3` is next.
+- Shared Lua admission `.14.6.6.3` is canonical-signoff-complete from exact clean carrier commit `4f6173d0`. The
+  unchanged 178-assertion source is ordinary once per ABI and has one exact canonical route per ABI.
+- Neutral governance promotes only PUC Lua and LuaJIT to rollout 7/9/112, with 9 Lua carrier paths and zero backend
+  guards. The separate authority remains dormant and passes 273/273 per ABI.
+- Complete Lua passes on both ABIs; Perl 129, cfg-enabled Rust 1/1, Dart 7/7, Julia 62/62, progressive 7/9/112,
+  typed 11/3/152, recognition 138/250/58, generated/capability 80/0/0, and language 250/126 pass.
+- Production, generated v2, typed recurrence, facade/schema/MCP/CLI/README, and outward surfaces remain unchanged.
+- Independent recomposition `.14.6.6.4` is next.
 
 ## Latest Completed Slice
 
-- Lua `.14.6.6.2` adds one exclusive node plus native, normalized-JSON reconstructed, generated-plan, and
-  independently loaded emitted-module carriers, passing 178/178 on both ABIs while retaining dormancy and rollout.
+- Lua `.14.6.6.3` moves the unchanged 178-assertion carrier into ordinary and exact canonical discovery once per
+  ABI, promotes only PUC Lua/LuaJIT to 7/9/112, and leaves authority, format, typed, and outward boundaries fixed.
 
 ## Next Action
 
-- From the clean `.14.6.6.2` commit, activate `FUTURE-PARITY-BACKLOG.14.6.6.3` task-tree-first, preserve the
-  committed carrier behavior, and add only exact ordinary/canonical PUC Lua and LuaJIT admission plus rollout.
+- From the clean `.14.6.6.3` commit, activate `FUTURE-PARITY-BACKLOG.14.6.6.4` task-tree-first and independently
+  recompose the committed dual-ABI carriers, authority, topology, governance, and continuity surfaces unchanged.
 
 ## Recent Completions
+
+- `2026-08-25` — `.14.6.6.3` admits the same 178-assertion carrier exactly once per ABI in ordinary and canonical
+  proof, advances only PUC Lua/LuaJIT to 7/9/112, and leaves the 273-assertion-per-ABI authority dormant.
 
 - `2026-08-25` — `.14.6.6.2` makes the dual-ABI final path GREEN at 178/178 through one exclusive node and four
   fresh-authority carriers, retains authority 273/273 and rollout 5/9/106, and keeps the consumer dormant.
@@ -71,9 +72,6 @@
 
 - `2026-08-17` — `.14.6.4.0` freezes Dart's generic-call/four-carrier dormant RED, splits `.4.1-.3`, and corrects
   stale roadmap/book frontier prose without production, rollout, storage, CI, typed, or outward movement.
-
-- `2026-08-17` — `.14.6.3.3` requires and canonically runs the unchanged cfg-enabled Rust consumer once, advances
-  only Rust to progressive 3/9/95, and closes `.14.6.3` without typed, later-backend, format, or outward movement.
 
 ## History
 

@@ -443,6 +443,7 @@ require_tracked_file t/progressive_span_dispatch_perl_contract.t
 require_tracked_file rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs
 require_tracked_file dart/test/progressive_span_dispatch_contract_test.dart
 require_tracked_file julia/test/progressive_span_dispatch_contract_test.jl
+require_tracked_file lua/test/progressive_span_dispatch_contract_test.lua
 require_tracked_file rust/linkedspec-runtime/tests/recognition_transaction_contract.rs
 require_tracked_file dart/test/recognition_transaction_contract_test.dart
 require_tracked_file julia/test/recognition_transaction_contract_test.jl
@@ -666,6 +667,12 @@ log "running exact Dart progressive span-dispatch admission consumer"
 
 log "running exact Julia progressive span-dispatch admission consumer"
 bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include("julia/test/progressive_span_dispatch_contract_test.jl")'
+
+log "running exact Lua progressive span-dispatch admission consumer on PUC Lua"
+bash tools/run_lua_project_data.sh puc lua/test/progressive_span_dispatch_contract_test.lua
+
+log "running exact Lua progressive span-dispatch admission consumer on LuaJIT"
+bash tools/run_lua_project_data.sh luajit lua/test/progressive_span_dispatch_contract_test.lua
 
 log "checking backend-neutral inter-match gap-capture contract and current no-overclaim boundary"
 bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py

@@ -7,7 +7,8 @@
 --   bash tools/run_lua_project_data.sh luajit lua/test_dormant/progressive_span_dispatch_authority_test.lua
 --
 -- Carrier leaf `.14.6.6.2` adds the dedicated node and private interpreter
--- seam while this authority proof remains independently runnable.
+-- seam; admission `.14.6.6.3` routes only that carrier consumer while this
+-- authority proof remains independently runnable.
 
 local json = require("linkedspec.json")
 local linkedspec = require("linkedspec")
@@ -534,7 +535,8 @@ check(authority.is_dispatch_error(diagnostic_failure), "child diagnostic returns
 check_equal(authority.diagnostic_code(diagnostic_failure), "progressive_child_failed", "child diagnostic code")
 check_equal(authority.to_json(diagnostic_failure).child_diagnostic, "?", "child diagnostic UTF-8 truncation")
 
--- The new authority stays private, dormant, ActionIR-independent, and carrier-free.
+-- The authority stays private, dormant, and ActionIR-independent while the
+-- separate carrier consumer is admitted on both ABIs.
 check(linkedspec.bounded_child_parse_authority == nil, "private authority absent from package facade")
 local ordinary_driver = read_all("tools/run_lua_local.sh")
 local canonical_driver = read_all("tools/run_ci_local.sh")

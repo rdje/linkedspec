@@ -1,7 +1,7 @@
 # ADR 0080: Progressive span dispatch uses pre-registered same-source child authority
 
 - Date: 2026-08-17
-- Status: accepted architecture; executable neutral authority and private Perl/Rust/Dart/Julia admissions current; shared Lua RED plus private dual-ABI authority current, carriers and recurrence pending
+- Status: accepted architecture; executable neutral authority and all six private runtime admissions current; recurrence and public no-drift pending
 - Tags: architecture, parser-composition, progressive-parsing, spans, source-location, registry, authority, cancellation, portability
 
 ## Context
@@ -54,12 +54,13 @@ transaction-composition projection before neutral progressive behavior.
 - A parser id or span cannot smuggle filesystem, compilation, registry, capability, policy, source-detail, or
   renewed cancellation authority into active recognition.
 - The executable neutral artifact/checker is current at 2 registry entries, 2 sources/8 view cases, 6 authority,
-  6 cancellation, 8 chain, and 4 execution cases, one pending-backend guard/5 paths, 9 governed Rust plus 8 Dart
-  plus 9 Julia carrier paths, 10 outward guards, 26 diagnostics, 5/9 rollout, and 106 rejected mutations.
-- Its current-boundary proof admits the exact private Perl, cfg-enabled Rust, and ordinary/canonical Dart and Julia consumers, keeps the typed row pending, requires the
+  6 cancellation, 8 chain, and 4 execution cases, zero backend guards, 9 governed Rust plus 8 Dart plus 9 Julia
+  plus 9 Lua carrier paths, 10 outward guards, 26 diagnostics, 7/9 rollout, and 112 rejected mutations.
+- Its current-boundary proof admits the exact private Perl, cfg-enabled Rust, ordinary/canonical Dart and Julia,
+  and ordinary plus exact-canonical dual-ABI Lua consumers; keeps the typed row pending; requires the
   dispatch effect to remain rejected with `PROGRESSIVE_DISPATCH_SPAN` as its sole current node and no call row,
-  denies both tokens in the Lua pending backend group, and denies private spelling/node/rollout exposure in ten
-  outward paths. Julia's separate 210-assertion authority consumer remains dormant and directly runnable.
+  and denies private spelling/node/rollout exposure in ten outward paths. Julia's separate 210-assertion and
+  Lua's separate 273-assertion-per-ABI authority consumers remain dormant and directly runnable.
 - Backends must preserve one source identity and detached child results despite different native register units.
 - Neutral `.14.6.1`, backend `.2-.6`, recurrence `.7`, and public no-drift `.8` can be verified independently.
 - Julia closeout `.14.6.5.4` independently reruns its admitted 62-assertion carrier, separate 210-assertion
@@ -75,7 +76,14 @@ transaction-composition projection before neutral progressive behavior.
   authority for global Unicode-scalar rebasing, intersects capabilities/policies, takes ceiling minima, shares
   cancellation/deadline/steps/chain/depth/calls, expires callback views, and detaches bounded child results. Its
   dormant consumer passes 273/273 per ABI while the exact final-path RED and all five Lua carrier guards remain.
-- This audit changes no grammar, parser/compiler/runtime, facade, schema, semantic/MCP, CLI, or README behavior.
+- Lua carrier `.14.6.6.2` adds one exclusive node plus native, normalized-JSON reconstructed, generated-plan,
+  and independently loaded emitted-module routes through fresh opaque authority. The shared carrier passes
+  178/178 per ABI while remaining dormant. Admission `.14.6.6.3` moves that same behavioral consumer into the
+  ordinary dual-ABI gate and one exact canonical route per ABI, promoting only PUC Lua and LuaJIT. Governance is
+  now 9 Rust + 8 Dart + 9 Julia + 9 Lua carrier paths, zero backend guards, 10 outward guards, 26 diagnostics,
+  rollout 7/9, and 112 rejected mutations.
+- Private rollout changes no generated format, typed recurrence, facade, schema, semantic/MCP, CLI, README, or
+  outward behavior.
 
 ## Links
 

@@ -10,6 +10,28 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-25 (`FUTURE-PARITY-BACKLOG.14.6.6.3` — dual-ABI Lua progressive admission): exact clean activation is
+  carrier commit `4f6173d0`. This leaf changes discovery, canonical topology, rollout governance, and durable
+  projections only; production, authority behavior, and generated format are byte-unchanged.
+- Git preserves the consumer's stable identity across `lua/test_dormant/` to `lua/test/`. Its behavior body is
+  unchanged; admission-owned header, 7/9/112 inventory, and exact ordinary/canonical topology assertions retain
+  the same total 178 assertions on both Lua ABIs.
+- Ordinary discovery contains the tracked consumer path twice—once beside `$LUA_CMD` and once beside
+  `$LUAJIT_CMD`. Canonical CI contains one tracked requirement, one marker/invocation pair for PUC Lua, and one
+  marker/invocation pair for LuaJIT. The neutral checker rejects duplication, omission, stale dormancy, and either
+  runtime-row regression.
+- Each single-runtime admission historically adds marker, invocation, and rollout mutations; admitting the two
+  Lua runtime rows therefore adds six governed mutations, advancing 106 to 112 without changing fixtures,
+  diagnostics, backend carrier inventories, generated format, typed recurrence, or outward guards.
+- The complete Lua gate executes the admitted consumer on both ABIs; focused carrier 178/178, authority 273/273,
+  Perl 129, Rust cfg 1/1, Dart 7/7, and Julia 62/62 agree before exact staged receipt-bound canonical CI.
+- The first focused Rust invocation used raw `cargo` without entering the project-data initializer. It was stopped
+  before completion and replaced by `tools/run_cargo_local.sh --offline`; tracked outputs remained repository-local,
+  and the accepted verification command no longer consults the shared home cache.
+- Recognition's direct-dependent checker caught a one-space LuaJIT continuation-indent drift at the adjacent
+  driver insertion point. Restoring the canonical two-space continuation makes its exact 22-mutation Lua
+  admission topology pass again; runtime behavior was already green.
+
 - 2026-08-25 (`FUTURE-PARITY-BACKLOG.14.6.6.2` — Lua progressive carriers): exact clean activation is the
   `6cbf8fdf` Lua-authority commit. The task tree owned syntax/ActionIR/interpreter/emitter and neutral-governance
   movement before production edits.

@@ -437,8 +437,8 @@ child uses a bounded source view whose typed positions and diagnostics rebase to
 cursor/marks/transactions stay isolated; capability and policy ceilings only narrow; cancellation and remaining
 budget propagate; and repeated parser/top/source dispatch must strictly shrink the span. The existing staged
 function-body adapter does not satisfy this contract. The neutral checker passes 2 registry entries, 2 sources/8
-views, 6 authority, 6 cancellation, 8 chain, and 4 execution cases, 9 Rust + 8 Dart + 9 Julia + 9 dormant Lua
-carrier paths, zero backend guards, and 10 outward guards, 26 diagnostics, rollout 5/9, and 106 mutations. The
+views, 6 authority, 6 cancellation, 8 chain, and 4 execution cases, 9 Rust + 8 Dart + 9 Julia + 9 Lua carrier
+paths, zero backend guards, and 10 outward guards, 26 diagnostics, rollout 7/9, and 112 mutations. The
 typed progressive row remains pending; the rejected dispatch effect owns current node
 `PROGRESSIVE_DISPATCH_SPAN` and no call row; outward guards
 deny premature exposure. Perl has private carrier integration
@@ -458,8 +458,8 @@ plan, and independently compiled emitted source delegate to one fresh opaque exe
 detached child payload. Generated data contains only target/id/top/span operands, never callbacks or authority.
 Recognition effect analysis rejects any attempted rule/function graph that reaches the node, and runtime checks
 live tokens defensively. The exact outer-cfg consumer is GREEN and canonically routed once under that cfg, while
-ordinary Cargo still executes zero tests. Dart and Julia are also admitted; Lua's exact historical RED, private
-authority, and dedicated dormant carriers are current, while Lua admission and the typed/public rows remain pending.
+ordinary Cargo still executes zero tests. Dart, Julia, PUC Lua, and LuaJIT are also admitted; typed recurrence and
+public no-drift remain pending.
 
 Dart's historical pre-carrier boundary remains preserved by the same final-path fixture; `.14.6.4.2` turns it
 GREEN and `.14.6.4.3` admits it without changing behavior. The reserved assignment is now one exclusive
@@ -521,14 +521,15 @@ progressive denial while restoring and invalidating the unfinished token. Every 
 run starts fresh opaque execution state over copied decoded sources. Native, normalized-JSON reconstructed,
 generated-plan, and independently loaded emitted-module routes return the same detached value without advancing
 the parent cursor. Serialized and emitted data contain no callback, registry entry, fingerprint, decoded input
-snapshot, cancellation token, or mutable authority. The same dormant consumer now passes 178/178 on each ABI;
-ordinary/canonical discovery and rollout remain unchanged for `.14.6.6.3`.
+snapshot, cancellation token, or mutable authority. The same consumer passes 178/178 on each ABI. Admission
+`.14.6.6.3` moves it into ordinary discovery once per ABI and one exact canonical route per ABI, promoting only
+PUC Lua and LuaJIT to 7/9/112 while keeping the authority matrix dormant.
 
-Run the same dormant GREEN carrier proof on both hosts:
+Run the same admitted carrier proof on both hosts:
 
 ```bash
-bash tools/run_lua_project_data.sh puc lua/test_dormant/progressive_span_dispatch_contract_test.lua
-bash tools/run_lua_project_data.sh luajit lua/test_dormant/progressive_span_dispatch_contract_test.lua
+bash tools/run_lua_project_data.sh puc lua/test/progressive_span_dispatch_contract_test.lua
+bash tools/run_lua_project_data.sh luajit lua/test/progressive_span_dispatch_contract_test.lua
 ```
 
 Both commands pass 178 assertions and execute the same source unchanged on PUC Lua and LuaJIT.
@@ -550,8 +551,8 @@ bash tools/run_lua_project_data.sh luajit lua/test_dormant/progressive_span_disp
 
 Each command passes 273 assertions across the complete neutral matrix, all 26 diagnostic contexts, nested
 rebasing/shared limits, callback/request expiry, immutable inputs, result detachment, bounds, and UTF-8 diagnostic
-truncation. The module is unexported and none of the five Lua carrier paths references it; `.14.6.6.2` alone owns
-that integration.
+truncation. The module is unexported; carriers receive only its opaque live seed, and no serialized or emitted
+artifact contains it. Admission routes only the carrier consumer; the authority proof remains dormant.
 
 Until the later public leaves land, use the current helpers documented in this chapter. Do not assume typed positions or
 typed spans are authored values. The `recognition_*` operations are current across all six runtime routes, while

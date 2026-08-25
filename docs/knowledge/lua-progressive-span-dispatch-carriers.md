@@ -1,6 +1,6 @@
 ---
 id: lua-progressive-span-dispatch-carriers
-title: Lua privately carries progressive span dispatch through four dormant dual-ABI routes
+title: Lua privately carries progressive span dispatch through four admitted dual-ABI routes
 answers:
   - "does Lua progressive span dispatch use a dedicated node"
   - "how does Lua compile dispatch_span"
@@ -10,21 +10,22 @@ answers:
   - "does Lua reject progressive dispatch in recognition transactions"
   - "why does Lua discard live recognition tokens during progressive error unwind"
   - "is the Lua progressive dispatch consumer admitted in CI"
-  - "how do I run the dormant Lua progressive carriers on both ABIs"
+  - "how do I run the admitted Lua progressive carriers on both ABIs"
 date: 2026-08-25
-status: private dormant carriers current on PUC Lua and LuaJIT; dual-ABI admission next
+status: private carriers admitted on PUC Lua and LuaJIT; recurrence and public no-drift pending
 tags: [lua, PUC-Lua, LuaJIT, progressive-parsing, actionir, generated-source, recognition-transaction, private]
 evidence: "FUTURE-PARITY-BACKLOG.14.6.6.2 replaces only the exact literal-id/literal-top/bare-span assignment with one progressive_dispatch_span node carrying target/parser_id/top_rule/span. Malformed assignments and residual generic calls reject; compile-time rule/function closure forbids recognize_once targets that can reach parser_registry_or_staged_dispatch. A live-token defense discards the unfinished private token during unwind so progressive_transaction_forbidden remains primary while authority state restores. ProgressiveExecutionSeed owns a copied decoded-source recipe and starts fresh invocation budget/call state for every execution while retaining shared cancellation/deadline/steps. Native, normalized SpecFile-JSON reconstructed, generated-plan, and independently loaded emitted-module routes return the same detached payload without advancing the parent cursor. Serialized/emitted data contain no callback, registry entry, fingerprint, decoded input snapshot, cancellation token, or mutable execution state. The same dormant Lua-5.1 consumer passes 178/178 on PUC Lua and LuaJIT; the separate authority stays 273/273. Neutral governance records 9 dormant Lua carrier paths, zero backend guards, rollout 5/9, and 106 mutations. Ordinary/canonical discovery, rollout rows, generated-v2 format, typed recurrence, package facade, and outward surfaces do not move."
+evidence_update_2026_08_25_admission: "FUTURE-PARITY-BACKLOG.14.6.6.3 moves the unchanged 178-assertion consumer to lua/test/progressive_span_dispatch_contract_test.lua. Ordinary discovery runs it exactly once per ABI; canonical CI requires the path once and invokes one exact PUC Lua plus one exact LuaJIT route. Only those two rollout rows advance, making governance 7/9/112 with 9 admitted Lua carrier paths and no dormant duplicate. The separate authority remains dormant at 273/273 per ABI; production, generated format, typed recurrence, facade, and outward surfaces stay unchanged."
 reverify:
-  - "bash tools/run_lua_project_data.sh puc lua/test_dormant/progressive_span_dispatch_contract_test.lua"
-  - "bash tools/run_lua_project_data.sh luajit lua/test_dormant/progressive_span_dispatch_contract_test.lua"
+  - "bash tools/run_lua_project_data.sh puc lua/test/progressive_span_dispatch_contract_test.lua"
+  - "bash tools/run_lua_project_data.sh luajit lua/test/progressive_span_dispatch_contract_test.lua"
   - "bash tools/run_lua_project_data.sh puc lua/test_dormant/progressive_span_dispatch_authority_test.lua"
   - "bash tools/run_lua_project_data.sh luajit lua/test_dormant/progressive_span_dispatch_authority_test.lua"
   - "bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_contract.py"
-  - "test ! -e lua/test/progressive_span_dispatch_contract_test.lua && ! rg -q 'lua/test_dormant/progressive_span_dispatch_contract_test[.]lua' tools/run_lua_local.sh tools/run_ci_local.sh"
+  - "test ! -e lua/test_dormant/progressive_span_dispatch_contract_test.lua && test \"$(rg -c 'lua/test/progressive_span_dispatch_contract_test[.]lua' tools/run_lua_local.sh)\" -eq 2"
 ---
 
-# Private dormant Lua progressive carriers
+# Private admitted Lua progressive carriers
 
 The exact assignment is one whole-statement logical node:
 
@@ -46,10 +47,12 @@ recognition authority restores and invalidates the unfinished token.
 Native, normalized-JSON reconstructed, generated-plan, and independently
 loaded emitted-module routes all delegate to the same private carrier. The
 generated adapter accepts a live seed only as an execution option and never
-serializes it. Both ABIs run the same Lua-5.1-compatible consumer, which remains
-dormant until `.14.6.6.3` owns ordinary and canonical dual-ABI admission.
+serializes it. Admission `.14.6.6.3` runs the same Lua-5.1-compatible consumer
+once per ABI in ordinary discovery and once per ABI through exact canonical
+routes without changing these behaviors.
 
 Related facts: [[lua-progressive-span-dispatch-private-authority]],
 [[lua-progressive-span-dispatch-dormant-red]],
+[[lua-progressive-span-dispatch-admission]],
 [[lua-recognition-transaction-integration]], and
 [[progressive-span-dispatch-audit-plan]].
