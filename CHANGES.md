@@ -10,6 +10,22 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-25 — FUTURE-PARITY-BACKLOG.14.6.6.0 — freeze shared Lua progressive dispatch RED
+
+- Activated task-tree-first from exact clean Julia-closeout commit `e25791e`; split Lua `.14.6.6` into RED,
+  private authority, dormant carriers, admission, and recomposition leaves before adding one shared dormant test.
+- The Lua-5.1-compatible consumer runs unchanged on PUC Lua and LuaJIT. Each host passes 85 of 86 assertions and
+  fails only the intentional missing-exclusive-node assertion; the test is absent from ordinary and canonical
+  discovery and no production, generated-format, public, rollout, or CI behavior moves.
+- The proof locks the separate staged-registry rejection, one generic authored `dispatch_span` call, and equal
+  typed unsupported-helper outcomes through native, normalized-JSON reconstructed, generated-plan, and
+  independently loaded emitted-module routes. Complete Lua and all progressive direct dependents pass unchanged.
+- Synchronization found the roadmap's compact current summary still projected pre-admission Julia 4/9/103 truth
+  despite correct lead prose. Root cause is an ungated manually repeated current projection; both roadmaps are
+  corrected and a causal Knowledge card makes this exact retrieval/gating seam durable.
+- The sole-facing mdBook, ADR `0080`, Knowledge, task/index, bounded histories, README/memory, and nine doctrines
+  are synchronized. Private shared Lua authority `.14.6.6.1` is next.
+
 ## 2026-08-25 — FUTURE-PARITY-BACKLOG.14.6.5.4 — close Julia progressive dispatch
 
 - Activated task-tree-first from exact clean Julia-admission commit `7823f6fc`; changed no production, test,

@@ -10,6 +10,23 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-25 (`FUTURE-PARITY-BACKLOG.14.6.6.0` — Lua progressive RED): exact clean activation is Julia closeout
+  `e25791e`; the task tree first partitions `.14.6.6` into five bounded RED-to-recomposition children.
+- One shared Lua-5.1-compatible dormant consumer executes on PUC Lua and LuaJIT. Both report 85 passing assertions
+  and exactly one intended failure, `missing exclusive progressive_dispatch_span node`; neither ordinary Lua nor
+  canonical CI discovers the file.
+- The final-path boundary independently derives neutral 5/9/106 truth, proves the unrelated staged function-body
+  registry rejects `expr-v1`, observes one generic `dispatch_span` call, and holds native/reconstructed/generated-
+  plan/independently loaded emitted-module execution to the same typed unsupported-helper result. Generated source
+  exposes neither dispatch token.
+- Complete dual-ABI Lua is 178/178 per host, CLI is 66/66 in both option environments, corpus is 105, and storage
+  remains 19 owners/three native modules. Progressive 5/9/106, typed 11/3/152, recognition 138/250/58,
+  generated/capability 80/0/0, and language 250/126 pass unchanged.
+- A roadmap synchronization audit finds its compact current row stale at Julia-pending 4/9/103 although the lead
+  projection was current. Git history localizes the omission to Julia admission/recomposition updates; current
+  checks do not compare repeated semantic roadmap projections. Correct both current rows and record a causal card.
+- No production or trust-boundary surface moves. `.14.6.6.1` next owns the private shared Lua authority/core.
+
 - 2026-08-25 (`FUTURE-PARITY-BACKLOG.14.6.5.4` — Julia progressive recomposition): exact clean activation is
   Julia admission commit `7823f6fc`; this designated canonical closeout changes continuity, Knowledge, ADR, and
   sole-facing book projections only.

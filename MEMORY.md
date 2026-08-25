@@ -1,13 +1,13 @@
 # MEMORY
 
-- activation_commit: `7823f6fc7a7bd80e327921d8e0317fe343660375` — exact clean Julia-admission base for
-  task-tree-first canonical `FUTURE-PARITY-BACKLOG.14.6.5.4`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.5.4 - close Julia progressive dispatch`; admitted carrier,
-  dormant authority, neutral governance, generated/emitted boundaries, and direct dependents recompose unchanged.
-- active_work_unit: none after the intended `.14.6.5.4` commit; Julia parent `.14.6.5` is closed.
-- next_action: from the clean `.14.6.5.4` commit, activate and split `FUTURE-PARITY-BACKLOG.14.6.6`
-  task-tree-first for shared Lua implementation and independent PUC Lua/LuaJIT admission.
-- in_flight_uncommitted: none after the intended `.14.6.5.4` commit; no background job remains.
+- activation_commit: `e25791e549865ff6624e9e026c3c64060a9b30e6` — exact clean Julia-closeout base for
+  task-tree-first focused `FUTURE-PARITY-BACKLOG.14.6.6.0`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.6.0 - freeze Lua progressive dispatch RED`; one shared
+  consumer is exact at 85-pass/one-RED on both ABIs without production, rollout, format, or discovery movement.
+- active_work_unit: none after the intended `.14.6.6.0` commit; Lua private authority `.14.6.6.1` is pending.
+- next_action: from the clean `.14.6.6.0` commit, retrieve and activate `FUTURE-PARITY-BACKLOG.14.6.6.1`
+  task-tree-first, then implement only the private shared Lua-5.1 authority while preserving final-path RED.
+- in_flight_uncommitted: none after the intended `.14.6.6.0` commit; no background job remains.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
@@ -33,17 +33,17 @@
   mandatory change-history segment `4992`, advancing finite collection/manifest controls to 21/20 while retaining
   every byte, root, segment, aggregate, owner, lifecycle, verifier, and storage control.
 - current_verification_contract: ADR `0073` makes focused proof the ordinary per-leaf default and canonical proof
-  mandatory at admission/milestone/public/infrastructure and final clean push boundaries; `.14.6.5.4` is a
-  designated independent closeout and its exact staged receipt-bound proof passes before the intended commit.
+  mandatory at admission/milestone/public/infrastructure and final clean push boundaries; Lua RED `.14.6.6.0`
+  changes only one unrouted consumer and durable projections, so focused proof is exact and canonical is not triggered.
 - documentation_debt_owner: ADR `0066` composition-closes all stores; bounded live/history/task/Knowledge owners
   and their rollover/index gates remain current.
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, recurrence/public no-drift 9/9, and
   classifies private progressive dispatch fail-closed at 138 ActionIR rows / 250 calls / 58 mutations.
 - current_future_direction: neutral `.14.6.1` plus admitted Perl `.2`, Rust `.3`, Dart `.4`, and Julia `.5.0-.4`
-  are rollout 5/9/106; Julia's 62-assertion carrier is ordinary/canonical while its 210-assertion authority matrix
-  stays dormant, with the Julia parent independently recomposed and closed; Lua `.6` is next, then recurrence `.7`, public `.8`, staged `.14.7`, and combined
-  `.14.8` follow.
+  remain rollout 5/9/106; Lua `.6.0` freezes one shared 85-pass/one-RED final path and `.6.1-.4` separately own
+  private authority, dormant carriers, dual-ABI admission, and recomposition; recurrence `.7`, public `.8`, staged
+  `.14.7`, and combined `.14.8` follow.
 - latest_bootstrap_read: 2026-08-25 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
-  review complete; Julia `.14.6.5.4` independently recomposes all committed owners unchanged at 5/9/106, repairs
-  stale predecessor-card current projections, closes `.14.6.5`, and hands off shared Lua `.14.6.6`.
+  review complete; Lua `.14.6.6.0` freezes the exact shared dual-ABI generic-call/four-carrier RED, repairs two
+  stale compact roadmap projections, and hands off private authority `.14.6.6.1` without behavior movement.

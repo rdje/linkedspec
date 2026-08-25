@@ -166,10 +166,13 @@
 > and 10 outward guards, 26 diagnostics, 5/9 rollout, and 106 mutations. Private Perl admission is current through one exact
 > canonical 127-assertion consumer; Rust is admitted through one exact cfg-enabled canonical carrier consumer while
 > ordinary discovery remains zero tests. Dart's and Julia's equivalent four carriers are ordinary and canonically
-> admitted; Lua, recurrence, public no-drift, and the typed row remain pending. The rejected effect owns exactly
+> admitted; Lua's exact dual-ABI RED is frozen while its implementation, recurrence, public no-drift, and the
+> typed row remain pending. The rejected effect owns exactly
 > current node `PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded Lua paths omit both tokens and
 > outward guards deny exposure. No path loader, public facade/schema/semantic/MCP/CLI/README surface, shared helper
-> inventory, generated format, or typed rollout row moves.
+> inventory, generated format, or typed rollout row moves. Lua `.14.6.6.0` runs one shared dormant Lua-5.1-
+> compatible consumer on PUC Lua and LuaJIT: each passes 85 of 86 assertions and fails only because the generic
+> call is not yet one exclusive `progressive_dispatch_span` node. Ordinary and canonical discovery remain inert.
 >
 > Definitive neutral signoff passes the exact six-runtime composition and support ledgers, all eight doctrines,
 > six-family containment, repository relocation, CLI 66x2, RAM 35%, and canonical Phase 0 1,031/1,031 in 714
@@ -772,7 +775,12 @@ detached node-bounded results. `.14.6.5.2` adds one exclusive `ActionProgressive
 opaque seed. Generated data carries no callback or authority. `.14.6.5.3` moves the same 62-assertion carrier to
 `julia/test/progressive_span_dispatch_contract_test.jl`, includes it once in ordinary discovery, and registers one
 exact canonical route. It promotes only Julia to rollout 5/9/106; the separate 210-assertion authority consumer
-remains dormant and directly runnable.
+remains dormant and directly runnable. `.14.6.5.4` independently recomposes those owners and closes Julia.
+
+Lua `.14.6.6.0` then freezes one dual-ABI dormant RED before any production implementation. Both Lua hosts prove
+the reserved form is still a generic call and that all four carrier shapes preserve the typed unsupported-helper
+failure; 85 assertions pass and the sole deliberate failure requires the missing dedicated node. Private shared
+authority `.14.6.6.1`, dormant carrier integration `.2`, canonical admission `.3`, and recomposition `.4` follow.
 
 The spec's body shell is a
 linked opener/closer parse: `body_brace`

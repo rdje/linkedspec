@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-25` (Julia `.14.6.5.4` independently recomposes the unchanged admitted four-route carrier,
-  closes parent `.14.6.5`, and hands off shared Lua `.14.6.6`)
+- Last updated: `2026-08-25` (shared Lua `.14.6.6.0` freezes one exact 85-pass/one-RED consumer on PUC Lua and
+  LuaJIT, splits `.1-.4`, and hands off the private authority without production or rollout movement)
 - Owner: repo-local workflow
 
 ## Goal

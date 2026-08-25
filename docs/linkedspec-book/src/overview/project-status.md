@@ -15,8 +15,9 @@ reconstruction query. Live status is a bounded overwrite view; changes and notes
 former oversized future tree is a 379-line live index over eight stable semantic parts and one immutable history
 part. After Dart progressive closeout, ADRs `0084` and `0085` add one equally bounded `.14.6.5-.14.8` member at
 the exact pending boundary. The schema-v1 index has ten records; capacity preserved the then-current 547 IDs,
-and Julia's five committed `.14.6.5.0-.4` children bring the current total to 552 without changing any stable ID
-or aggregate/member ceiling. Independent recomposition proves exact committed agreement.
+and Julia's five committed `.14.6.5.0-.4` children brought the total to 552 without changing any stable ID or
+aggregate/member ceiling. Lua's five owned `.14.6.6.0-.4` children now bring the current total to 557.
+Independent recomposition proves exact committed Julia agreement.
 Julia `.14.6.5` is split into historical dormant RED, private authority/core, dormant carriers, canonical
 admission, and independent recomposition leaves. `.14.6.5.1` adds the unexported immutable authority plus a
 210-assertion dormant proof; `.14.6.5.2` makes the unchanged final-path fixture GREEN at 62/62 across four fresh-
@@ -25,12 +26,14 @@ segment `4992`; ADR `0086` raises only finite collection/manifest capacity to 21
 boundary. Exact receipt-bound proof closes `.2`; `.3` moves the same 62-assertion carrier into ordinary discovery
 and one exact canonical route while retaining the dormant 210-assertion authority proof. Only Julia advances, to
 rollout 5/9/106. Independent recomposition `.4` proves those committed owners unchanged, closes `.14.6.5`, and
-hands off shared Lua `.14.6.6`.
+hands off shared Lua `.14.6.6`. Lua `.14.6.6.0` now freezes one shared, Lua-5.1-compatible dormant consumer on
+both PUC Lua and LuaJIT: 85 assertions pass and one deliberate assertion fails because the generic call has not
+yet become one exclusive `progressive_dispatch_span` node. Private authority `.14.6.6.1` is the next leaf.
 
 This is consumer-aware work. The six live JSON projections and seven executable checkers now use stable decision
 authority ADR `0067`, and the chronology root contains no capability marker authority. Nine executable checkers
 and two contract projections now read their bounded task owners instead of the future monolith. Strict metadata
-preserves all 552 current stable IDs, clean-source coverage, current digests, immutable history, bounded lookup,
+preserves all 557 current stable IDs, clean-source coverage, current digests, immutable history, bounded lookup,
 and 27/27 rejected mutation classes. The changes/notes migration preserves the clean 44,270-line and 21,308-line
 sources in eleven and six immutable segments, respectively. Both roots are capped at 512 lines / 64 KiB, and the
 commit workflow now requires both rollover checks. Closeout independently passes history 34/34 across three
@@ -195,7 +198,11 @@ changing backend behavior. Julia `.14.6.5.0` freezes the exact generic-call/four
 `.14.6.5.1` supplies its private immutable authority, `.14.6.5.2` adds the dedicated node plus four dormant fresh-
 authority carriers, and `.14.6.5.3` admits the unchanged carrier proof ordinarily and canonically. `.14.6.5.4`
 then independently reruns carrier 62/62, authority 210/210, ordinary Julia, and all direct dependents unchanged;
-it closes the Julia parent without behavior and hands off shared Lua.
+it closes the Julia parent without behavior and hands off shared Lua. Lua `.14.6.6.0` freezes the exact shared
+dual-ABI boundary: the separate staged registry rejects `expr-v1`, the assignment remains one generic
+`dispatch_span` call, and native, reconstructed, generated-plan, and independently loaded emitted routes preserve
+the same typed unsupported-helper result. Both hosts pass 85 assertions and fail only the intended missing-node
+assertion; the consumer remains absent from ordinary and canonical discovery.
 
 That recomposition also corrects stale current Julia-pending prose in the predecessor Perl, Rust, and Dart
 Knowledge cards. The executable neutral checker already governed runtime, contract, and outward paths exactly;
@@ -216,8 +223,9 @@ top/source chain must strictly shrink its span. Correction `.14.6.0.1` repaired 
 governance passes 2 registry entries, 2 sources/8 views, 6 authority, 6 cancellation, 8 chain, 4 execution cases,
 one Lua guard/5 paths plus 9 Rust + 8 Dart + 9 Julia carrier paths and 10 outward guards, 26
 diagnostics, rollout 5/9, and 106 mutations. The typed row remains pending; the rejected effect owns current node
-`PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded Lua paths omit both tokens; and outward guards deny exposure. Backend `.6`,
-recurrence `.7`, and public no-drift `.8` follow.
+`PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded Lua production paths omit both tokens; and outward guards deny
+exposure. Lua private authority/core `.14.6.6.1`, dormant carriers `.2`, admission `.3`, recurrence `.7`, and
+public no-drift `.8` follow; independent Lua recomposition `.4` closes the backend parent after admission.
 
 Rust `.14.6.3.0` historically froze the dedicated-node RED behind one explicit cfg. Rust `.14.6.3.1` supplies the independent private authority beneath that boundary: immutable precompiled
 callbacks, caller-owned decoded sources, typed globally rebased bounded views, intersected grants and minimum

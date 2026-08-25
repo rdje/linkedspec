@@ -2,28 +2,31 @@
 
 ## Current Activity
 
-- Julia `.14.6.5.4` independently recomposes the admitted topology from clean `7823f6fc` without changing
-  production, tests, fixtures, executable contracts, generated format, CI topology, rollout, or outward surfaces.
-- The committed carrier passes 62/62 and proves native, reconstructed, generated-plan, and independently included
-  emitted-module equality plus serialized callback/registry/fingerprint/source/cancellation/mutable-authority absence.
-- The separate dormant authority stays 210/210. Complete ordinary Julia, Perl 128/128, Dart 7/7, cfg Rust 1/1,
-  typed 11/3/152, recognition 138/250/58, generated/capability 80/0/0, and language 250/126 pass unchanged.
-- Neutral governance remains 5/9/106. Independent current-projection review repairs stale Julia-pending prose in
-  the earlier Perl/Rust/Dart admission cards while preserving their dated historical evidence.
-- Julia `.14.6.5.0-.4` is closed. Shared Lua `.14.6.6` is next; recurrence `.7`, public `.8`, staged `.14.7`, and
-  combined `.14.8` retain separate ownership.
+- Shared Lua `.14.6.6.0` is focused-signoff-complete from clean `e25791e5`; `.6` is split into exact dormant RED,
+  private authority, dormant carriers, dual-ABI admission, and independent recomposition leaves.
+- One Lua-5.1-compatible consumer runs 86 assertions on PUC Lua and LuaJIT: 85 pass and only the final exclusive-
+  node invariant fails. Staged `expr-v1` resolution rejects; the assignment stays one generic `dispatch_span` call.
+- Native, normalized-JSON reconstructed, generated-plan, and independently loaded emitted-module routes preserve
+  the same unsupported-helper boundary. Ordinary/canonical discovery, production, generated format, and rollout stay fixed.
+- Complete Lua passes 178/178 per ABI, CLI 66/66 in both option environments, corpus 105, and storage 19/3.
+  Progressive 5/9/106, typed 11/3/152, recognition 138/250/58, generated/capability 80/0/0, and language 250/126 pass.
+- Synchronization repairs both roadmap compact rows left at pre-Julia-admission 4/9/103 and records the repeated-
+  projection enforcement gap. Lua private authority `.14.6.6.1` is next.
 
 ## Latest Completed Slice
 
-- Julia `.14.6.5.4` independently proves the admitted carrier/authority/governance unchanged, corrects bounded
-  Knowledge projections, closes parent `.14.6.5`, and hands off shared Lua without executable movement.
+- Lua `.14.6.6.0` freezes the exact shared 85-pass/one-RED generic-call/four-carrier boundary on both ABIs, keeps
+  it unrouted, and assigns authority, carriers, admission, and recomposition without production behavior.
 
 ## Next Action
 
-- From the clean `.14.6.5.4` commit, activate and split `FUTURE-PARITY-BACKLOG.14.6.6` task-tree-first for one
-  Lua-5.1-compatible implementation and independent PUC Lua/LuaJIT admission across all four carriers.
+- From the clean `.14.6.6.0` commit, activate `FUTURE-PARITY-BACKLOG.14.6.6.1` task-tree-first and implement only
+  the private shared Lua-5.1 immutable authority while preserving the exact dual-ABI final-path RED.
 
 ## Recent Completions
+
+- `2026-08-25` — `.14.6.6.0` freezes one shared Lua 85-pass/one-RED consumer on PUC Lua and LuaJIT, keeps all
+  four carriers dormant, repairs stale compact roadmap projections, and splits `.1-.4` without behavior movement.
 
 - `2026-08-25` — `.14.6.5.4` independently recomposes Julia carrier 62/62, authority 210/210, ordinary and direct
   dependents unchanged at 5/9/106, repairs bounded Knowledge projections, and closes `.14.6.5` without behavior.
@@ -71,9 +74,6 @@
 
 - `2026-08-17` — `.14.6.3.1` adds private immutable Rust authority with exact rebasing, narrowing, shared limits,
   detachment, and 26 diagnostics while the four-carrier RED and rollout boundary remain unchanged.
-
-- `2026-08-17` — `.14.6.3.0` freezes Rust's exact four-carrier dormant RED at the dedicated-node boundary while
-  ordinary/canonical discovery stays inert and all production/governance state remains unchanged.
 
 ## History
 
