@@ -2,24 +2,27 @@
 
 ## Current Activity
 
-- Diagnostic prerequisite `.14.7.1` is focused-signoff-complete: wrong-top compile failures preserve the original
-  job context and resolved built-in identity on all five source backends/six runtimes.
-- Only compile diagnostic plumbing/formatting and exact regressions move; the one-depth function-body path,
-  policies, queue, generated format, capability 80/0/0, typed 12/2/170, progressive 9/9/116, and outward surfaces
-  remain unchanged.
-- Neutral general staged-AST contract `.14.7.2` is next after the atomic diagnostic commit.
+- Neutral `.14.7.2` makes the complete general staged-AST design executable through one independent
+  repository-routed contract checker and 72 reason-checked mutations.
+- Authored syntax/sidecar, typed provenance, pre-resolution, immutable registry/cache authority, breadth-first
+  scheduling, policies, bounds, detachment, diagnostics, carriers, dormant routes, rollout, and 35 owners are fixed.
+- All backend consumers and nine rollout legs remain dormant/pending; no parser/compiler/runtime/generated-format,
+  capability, public API, facade/schema/semantic/MCP/CLI/README, or existing function-body-v1 behavior moves.
 
 ## Latest Completed Slice
 
-- `.14.7.1` replaces Perl/Rust/Dart compile placeholders with the normalized job, adds the missing Julia/shared-Lua
-  payload field, and locks exact diagnostic parity without expanding general staged behavior.
+- `.14.7.2` adds the neutral executable design authority that every later backend admission must consume without
+  shipping the future authored form or runtime behavior.
 
 ## Next Action
 
-- Commit `.14.7.1` atomically, clear the brief, verify the exact clean handoff, then activate neutral contract
-  `.14.7.2` task-tree-first.
+- Complete exact staged-candidate canonical proof, commit `.14.7.2`, clear the brief, verify the clean handoff,
+  then activate Perl dormant-boundary `.14.7.3.0` task-tree-first.
 
 ## Recent Completions
+
+- `2026-08-25` — `.14.7.2` freezes general staged-AST enrichment as executable neutral authority with 72
+  mutations while retaining dormant backends, pending rollout, unchanged v1 behavior, and no outward API.
 
 - `2026-08-25` — `.14.7.1` closes wrong-top compile diagnostic parity across all six runtime routes while
   preserving the narrow registry and every general/public boundary.
@@ -66,9 +69,6 @@
 
 - `2026-08-24` — capacity `.2` independently recomposes every committed topology, source, lookup, route, and
   consumer invariant without replacement behavior and closes the infrastructure tree.
-
-- `2026-08-24` — capacity `.1` canonically lands the eighth bounded semantic member and every exact index,
-  lookup/update/build/check/route/consumer change without backend, generated-format, or outward behavior movement.
 
 ## History
 

@@ -100,6 +100,12 @@ boundary between that typed authority and the existing v1 function sidecar befor
 authoring. Merely transporting another policy string in a raw registry record does not
 count as implementing its stitch or failure semantics.
 
+`FUTURE-PARITY-BACKLOG.14.7.2` and ADR `0088` now make the general v2 marker/sidecar target executable without
+making it shipped syntax: `STAGED_PARSE_JOB_MARKER` plus `staged_parse_job_v2`, direct/ordered-derived typed
+provenance, deterministic digest identity, all four result policies, all three failure policies, and explicit v1
+compatibility are governed by `capability_conformance/staged_ast_enrichment_contract.json`. Backend and public
+admission remain pending under `.14.7.3-.9`.
+
 ## Links
 
 - Task tree: `docs/tasks/STAGED-LINKED-PARSING.md`

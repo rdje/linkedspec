@@ -1104,6 +1104,25 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   semantic/MCP, CLI, README, or public behavior moves. Retrieve
   [[progressive-span-dispatch-recurring-gate]] before changing this proof.
 
+### 4.9.1.1.4 `tools/check_staged_ast_enrichment_contract.py` — neutral staged-enrichment oracle
+
+- **WHAT:** the backend-independent authority for future authored `parse_job(text_expr, options)`, its inert
+  `STAGED_PARSE_JOB_MARKER` plus `staged_parse_job_v2` sidecar, typed direct/derived provenance, pre-resolved
+  registry/cache authority, deterministic breadth-first scheduling, result/failure policies, recursive bounds,
+  detachment, diagnostics, carrier obligations, dormant backend routes, rollout, and exact downstream ownership.
+- **WHEN:** changing general returned-AST enrichment syntax or metadata; parser aliases/providers/search roots;
+  registry/cache keys; queue ordering; stitching/failure/cycle/resource semantics; generated carriers; diagnostics;
+  staged rollout/topology; or the function-body-v1 compatibility adapter.
+- **HOW:** run `bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py`. The checker
+  is repository-routed, rejects reason-checked schema/behavior/topology mutations in memory, and is registered
+  unconditionally in canonical local CI.
+- **OUTPUT:** 4 registry entries; 8 provenance; 8 resolution/6 authority; 10 cache; 4 queue/3 isolation;
+  4 result plus 3 failure policies; 10 recursive-chain and 5 detachment cases; five dormant backend consumers
+  over six runtime routes; 37 diagnostics; 9 rollout legs; 35 exact owners; and 72 mutations.
+- **BOUNDARY:** this is executable design authority, not shipped syntax or runtime behavior. All backend consumers
+  must remain dormant, every rollout leg remains pending, and outward facade/schema/semantic/MCP/CLI/README
+  tokens remain absent until their separately owned leaves. The existing function-body v1 adapter stays current.
+
 ### 4.9.1.2 Lossless-gap handoff preflight
 
 - **WHAT:** the behavior-free authority audit before activating any named-slot or automatic gap implementation.

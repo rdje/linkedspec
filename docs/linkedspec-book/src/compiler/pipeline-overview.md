@@ -254,6 +254,13 @@ For example, rejecting `top_rule = missing_top` for the current function-body jo
 Backend punctuation may differ, but none of those values may degrade to an unknown
 placeholder.
 
+The backend-neutral general target is now executable even though no shipped backend accepts general
+`parse_job(...)` yet. ADR `0088` and the [Staged AST Enrichment Contract](staged-ast-enrichment.md) define an inert
+marker/sidecar, pre-resolved immutable parser authority, typed direct/derived provenance, breadth-first recursive
+queues, all four result and three failure policies, isolated child contexts, shared bounded cancellation/resources,
+detached results, portable diagnostics, v1 compatibility, carrier obligations, and exact backend rollout owners.
+This authority prevents backend drift; it does not expand the current one-depth function-body behavior.
+
 Prototype tests should prove AST shape, not only behavior. Before the function-body
 prototype changes runtime behavior, the seam audit must predict the returned
 `function_definition` AST shape, and the implementation proof must assert that exact

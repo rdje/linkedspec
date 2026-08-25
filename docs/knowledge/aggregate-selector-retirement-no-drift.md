@@ -20,6 +20,7 @@ evidence_update_2026_07_15_native_loading_page: "The discovered public inventory
 evidence_update_2026_07_20_semantic_introspection_page: "FUTURE-PARITY-BACKLOG.10.2 adds the semantic-introspection mdBook page. The public no-drift checker reviews it and advances the exact discovered inventory to 59 files while classified/current selector counts stay 27/0."
 evidence_update_2026_07_22_untracked_discovery: "FUTURE-PARITY-BACKLOG.10.5.1.3.0 found that a new untracked Dart semantic test could embed a retired selector without appearing in the pre-staging git-ls-files scan. tools/check_executable_aggregate_selector_sources.py now enumerates cached plus nonignored untracked files and self-proves discovery/rejection with a temporary untracked source whose cleanup is guaranteed. The semantic compile-failure test loads the canonical neutral invalid case instead of duplicating retired executable source."
 evidence_update_2026_07_29_readme_routing: "README-STABILITY-POLICY.1 keeps all 59 public files in discovery while removing two duplicate historical selector mentions from the bounded root landing page. The current classified/current counts become 25/0; runtime/source retirement, backend anchors, and untracked discovery remain unchanged."
+evidence_update_2026_08_25_staged_ast_enrichment_page: "FUTURE-PARITY-BACKLOG.14.7.2 adds compiler/staged-ast-enrichment.md. The exact discovered public inventory becomes 60 files while classified/current selector counts remain 25/0; runtime/source retirement, backend anchors, and untracked discovery remain unchanged."
 reverify: "bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py"
 ---
 
@@ -47,7 +48,7 @@ every invocation and removes the probe in a `finally` block. Tests that need ret
 canonical neutral JSON invalid fixtures rather than embedding a second positive spelling.
 
 `tools/check_public_aggregate_selector_surface.py` also discovers every immediate component README and requires
-bare-binding anchors in the Rust, Dart, Julia, and Lua documents. Its exact 59-file inventory prevents a backend
+bare-binding anchors in the Rust, Dart, Julia, and Lua documents. Its exact 60-file inventory prevents a backend
 entry document from falling outside the public zero-current-example claim.
 
 Related facts: [[spec-facing-aggregate-selector-retirement-inventory]],

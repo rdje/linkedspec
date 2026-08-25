@@ -48,6 +48,14 @@ terms:
 - Documentation, Knowledge Map cards, and roadmap entries must use backend-neutral
   vocabulary for staged parsing. Perl/Rust examples are evidence, not doctrine.
 
+## Current implementation note (2026-08-25)
+
+ADR `0088` and `FUTURE-PARITY-BACKLOG.14.7.2` now provide the first executable general neutral authority:
+`capability_conformance/staged_ast_enrichment_contract.json` plus an independently implemented checker. It fixes
+typed direct/derived provenance, pre-resolved immutable authority, breadth-first recursive scheduling, complete
+policy semantics, isolation/bounds/detachment, diagnostics, carriers, rollout, and exact backend ownership before
+any backend implements the form. Neutral completion is not runtime or public `parse_job(...)` admission.
+
 ## Links
 
 - Task tree: `docs/tasks/STAGED-LINKED-PARSING.md`

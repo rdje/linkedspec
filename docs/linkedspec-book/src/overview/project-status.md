@@ -97,7 +97,10 @@ is one stable function-body queue depth through `actionir-body.spec` / `action_b
 implements only `replace_field` / `body_ast` / `fail`. General authored parse jobs, typed provenance, several parser
 families, recursive scheduling, alternate policies, and public closeout remain planned. Corrective `.14.7.1` now
 makes wrong-top compile diagnostics preserve the same original job context and resolved identity on all five
-source backends/six runtimes. Neutral executable contract and backend admission work resumes at `.14.7.2`.
+source backends/six runtimes. Neutral `.14.7.2` now adds the executable general authority at 4 registry entries,
+8 provenance, 8 resolution/6 authority, 10 cache, 4 queue/3 isolation, all result/failure policies, 10 chain,
+5 detachment, 37 diagnostic, 35-owner, and 72-mutation proof. No backend or public `parse_job(...)` behavior moves;
+Perl implementation starts at `.14.7.3`.
 
 Rust's exact four-test consumer now runs under ordinary Cargo discovery and as a required canonical-CI leg. It
 proves the immutable value core and projection boundary across native, reconstructed, and generated-plan execution;

@@ -1,6 +1,6 @@
 # ARCHITECTURE STATE
 
-## General staged-AST enrichment is split from the current function-body prototype
+## General staged-AST enrichment now has executable neutral authority
 
 Behavior-free audit `FUTURE-PARITY-BACKLOG.14.7.0` starts from exact clean progressive-closeout commit
 `fbcdedb6`. Toolbox-first descriptor, runtime, registry, source, and focused-test probes establish one precise
@@ -10,19 +10,25 @@ current boundary across five backend sources/six runtime routes. The spec-return
 `body_ast`. Function-specific validation implements only `replace_field` / `body_ast` / `fail`; the raw registry
 merely transports other policy strings.
 
-General authored `parse_job(...)`, typed direct/derived source provenance, several registered parser families,
-deterministic recursive queues, alternate result/failure policies, cycle/depth/call/cancellation/resource guards,
-general generated carriers, recurrence, and public closure remain future behavior. They must reuse ADR `0056`'s
-source algebra and authority-narrowing principles without reusing progressive `dispatch_span` syntax or treating
-an authored parser id as filesystem authority.
+Neutral `FUTURE-PARITY-BACKLOG.14.7.2` now makes the complete future behavior design executable without shipping
+it. `linkedspec-staged-ast-enrichment-v1` freezes authored `parse_job(text_expr, options)`, one inert
+`STAGED_PARSE_JOB_MARKER` plus sidecar, typed direct and ordered-derived provenance, caller-completed deterministic
+resolution, immutable pre-registered parser/cache authority, breadth-first recursive scheduling, all result and
+failure policies, strict decreasing/cycle/depth/call/cancellation/resource bounds, detached results, diagnostics,
+carrier obligations, dormant routes, rollout, exact ownership, and the unchanged function-body-v1 adapter. The
+checker passes 4 registry entries, 8 provenance, 8 resolution/6 authority, 10 cache, 4 queue/3 isolation,
+4 result plus 3 failure policies, 10 chain, 5 detachment, 37 diagnostics, 9 rollout legs, 35 owners, and 72
+reason-checked mutations. It reuses ADR `0056`'s source algebra and progressive authority narrowing without
+reusing `dispatch_span` syntax or elevating an authored parser id into filesystem authority.
 
 Corrective `.14.7.1` closes the audit's one diagnostic parity defect before feature work. Perl, Rust, and Dart now
 pass the normalized job through compile instead of constructing placeholders; Julia and shared Lua retain their
 existing job propagation and add the missing payload kind. Every wrong-top error reports the original
 id/path/parser/top/payload/span/failure context plus resolved built-in identity. This changes only compile-failure
 diagnostics: success, resolution, execution, stitching, policies, queue depth, formats, capabilities, and outward
-surfaces stay fixed. Executable neutral contract `.2`; backend parents `.3-.7`; recurrence `.8`; public
-authoring/closeout `.9`; and independent recomposition `.10` remain dependency-frozen behind it.
+surfaces stay fixed. Executable neutral contract `.2` is complete; backend parents `.3-.7`, recurrence `.8`,
+public authoring/closeout `.9`, and independent recomposition `.10` remain dependency-frozen behind it. Every
+runtime rollout leg and public/outward surface therefore remains pending; Perl dormant-boundary `.3.0` is next.
 
 ## Typed transaction safety now composes the complete recognition authority
 

@@ -11,7 +11,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-EXPECTED_PUBLIC_FILE_COUNT = 59
+EXPECTED_PUBLIC_FILE_COUNT = 60
 EXPECTED_CLASSIFIED_REFERENCE_COUNT = 25
 EXACT_SELECTOR = re.compile(
     r"(?<![A-Za-z0-9_])(?:array|hash)\([ \t]*[A-Za-z_][A-Za-z0-9_]*[ \t]*\)"

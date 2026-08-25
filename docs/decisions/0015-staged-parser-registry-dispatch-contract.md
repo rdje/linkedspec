@@ -97,6 +97,13 @@ original id/path/parser/top/payload/span/failure context and resolved built-in i
 on all five source backends/six runtimes. `.14.7.2` still owns the general executable
 contract and the remaining clause-9 fields outside this narrow path.
 
+`.14.7.2` and ADR `0088` now complete that neutral authority without changing a backend. All external
+alias/declaring-relative/search-root/provider discovery and compilation completes before authored execution; the
+post-AST resolve/load/compile phases are pure selection/validation over the frozen snapshot and cache. The
+executable queue is breadth-first by depth/path/provenance/job id, isolates sibling runtime state, applies all
+four result and three failure policies, enforces decreasing provenance plus shared resource authority, and retains
+the explicit v1 function-body adapter. Backend implementation begins at `.14.7.3`.
+
 ## Links
 
 - Task tree: `docs/tasks/STAGED-LINKED-PARSING.md`

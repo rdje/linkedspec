@@ -6,9 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-25` (progressive `.14.6` is closed; staged audit `.14.7.0` is committed and diagnostic
-  prerequisite `.14.7.1` is focused-signoff-complete from exact clean `e50965b0`; neutral contract `.14.7.2`
-  follows after the atomic diagnostic commit)
+- Last updated: `2026-08-25` (progressive `.14.6`, staged audit `.14.7.0`, and diagnostic `.1` are committed;
+  neutral `.14.7.2` has executable design authority and canonical signoff complete from exact clean `54c65df8`;
+  Perl dormant-boundary `.14.7.3.0` follows its atomic commit)
 - Owner: repo-local workflow
 
 ## Goal

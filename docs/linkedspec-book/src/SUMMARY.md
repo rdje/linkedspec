@@ -42,6 +42,7 @@
 # Compiler and Runtime
 
 - [Pipeline Overview](compiler/pipeline-overview.md)
+- [Staged AST Enrichment Contract](compiler/staged-ast-enrichment.md)
 - [Compiled State Model](compiler/compiled-state-model.md)
 - [Generated Handlers and Dispatch](compiler/generated-handlers-and-dispatch.md)
 - [Diagnostics](compiler/diagnostics.md)

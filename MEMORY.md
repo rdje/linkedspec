@@ -1,13 +1,13 @@
 # MEMORY
 
-- activation_commit: `e50965b03a3e3b927516d9ddeb2a6a4c95a0fc37` — exact clean staged-audit base for
-  task-tree-first diagnostic repair `FUTURE-PARITY-BACKLOG.14.7.1`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.7.1 - preserve staged compile diagnostic context`; all six
-  runtime routes preserve exact wrong-top job context without general staged behavior.
-- active_work_unit: none after the intended `.14.7.1` commit; neutral contract `.14.7.2` is pending.
-- next_action: from the exact clean `.14.7.1` commit, activate `FUTURE-PARITY-BACKLOG.14.7.2` task-tree-first and
-  ratify the executable backend-neutral general staged-AST contract before backend behavior.
-- in_flight_uncommitted: none after the intended `.14.7.1` commit; no background job remains.
+- activation_commit: `54c65df82800080a0cedf6b159f49b06aceb01af` — exact clean diagnostic-parity base for
+  task-tree-first neutral contract `FUTURE-PARITY-BACKLOG.14.7.2`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.7.2 - add neutral staged AST enrichment authority`; executable
+  design governance is complete without backend/runtime/public behavior.
+- active_work_unit: none after the intended `.14.7.2` commit; Perl dormant boundary `.14.7.3.0` is pending.
+- next_action: from the exact clean `.14.7.2` commit, activate `FUTURE-PARITY-BACKLOG.14.7.3.0` task-tree-first and
+  freeze Perl's dormant general-staged RED plus existing function-body compatibility boundary.
+- in_flight_uncommitted: none after the intended `.14.7.2` commit; no background job remains.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
@@ -48,8 +48,10 @@
   9/9/116, typed is 12/2/170, and public is 6/12/10/60 without outward admission. Staged `.14.7` follows; combined
   program-wide `.14.8` remains later. Staged audit `.14.7.0` is complete: diagnostic `.1`, neutral `.2`, backend
   parents `.3-.7`, recurrence `.8`, public authored closeout `.9`, and recomposition `.10` are frozen in order.
-  Diagnostic `.14.7.1` is focused-signoff-complete; neutral `.14.7.2` is next.
+  Diagnostic `.14.7.1` is complete; neutral `.14.7.2` freezes 4 registry entries, 8 provenance, 8 resolution/6
+  authority, 10 cache, 4 queue/3 isolation, 4 result/3 failure policies, 10 chain, 5 detachment, 37 diagnostics,
+  9 pending rollout legs, 35 owners, and 72 mutations. Perl dormant boundary `.14.7.3.0` is next.
 - latest_bootstrap_read: 2026-08-25 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
-  review complete. `.14.7.1` closes the audited compile-context defect across Perl/Rust/Dart/Julia/PUC Lua/LuaJIT
-  while preserving the one-depth registry and general `.2-.10` boundaries. Intended commit:
-  `FUTURE-PARITY-BACKLOG.14.7.1 - preserve staged compile diagnostic context`; neutral `.14.7.2` is next.
+  review complete. `.14.7.2` makes the general staged-AST contract executable without changing the narrow
+  function-body runtime, generated formats, rollout, or outward surfaces. Intended commit:
+  `FUTURE-PARITY-BACKLOG.14.7.2 - add neutral staged AST enrichment authority`; Perl `.14.7.3.0` is next.

@@ -10,6 +10,27 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-25 (`FUTURE-PARITY-BACKLOG.14.7.2` — neutral staged-AST authority): exact clean activation is
+  diagnostic-parity commit `54c65df8`; this canonical leaf owns executable design/topology authority only.
+- Checker-first RED proved the contract was absent. Schema completion then exposed two initially omitted dimensions:
+  authored authority rejection and fresh sibling/parent isolation. Adding both to expected counts plus mutation
+  proof made the oracle complete instead of merely descriptive.
+- The selected design pre-resolves every alias, relative request, search root, and provider before authored
+  execution. Post-AST scheduling performs immutable lookup/validation only; authored parser ids never become path
+  authority. Jobs are deterministic SHA identities and run breadth-first by depth/path/provenance/id.
+- Direct spans retain one source identity; derived text records ordered provenance. Children receive fresh parser
+  state and narrowing cancellation/deadline/budget/call authority, must strictly decrease recurring provenance,
+  and return detached plain data. All four result and three failure policies are explicit.
+- The existing function-body v1 adapter is unchanged. Five backend consumers over six runtime routes remain
+  dormant, all rollout is pending, and no parser/compiler/runtime/generated-format/capability/public surface moves.
+- The first canonical composition correctly stopped when the added mdBook chapter grew aggregate-selector public
+  discovery from 59 to 60 files. The exact checker count and its three canonical Knowledge owners now lock 60/25/0;
+  the focused composed checker passes without weakening discovery, classification, or executable retirement.
+- The corrected canonical composition then reached the project-data census and caught the new checker as a 32nd
+  Python entrypoint. Its canonical Knowledge owner and exact storage oracle now freeze 32 entrypoints while the
+  three Python temporary owners and 14 shell allocator owners remain unchanged.
+  Exact staged receipt-bound canonical proof passes; Perl dormant-boundary `.14.7.3.0` follows the atomic commit.
+
 - 2026-08-25 (`FUTURE-PARITY-BACKLOG.14.7.1` — staged compile diagnostic parity): exact clean activation is
   audit commit `e50965b0`; this focused leaf owns only wrong-top compile context and its cross-backend assertions.
 - RED separated two causes: Perl/Rust/Dart discarded the normalized job at compile and synthesized placeholders;

@@ -306,8 +306,8 @@ regressions plus one recurrence regression promote only `recursive_observation`.
 six current projections, rejects six stale claims, and guards ten facade/API/schema surfaces through 27 further
 mutations. Recursive-observation public projection/no-drift is current without a new public API; its own rollout row remains complete.
 Typed transaction composition and progressive span dispatch are current; the typed rollout is 12 complete / 2 pending.
-Governance is 170, and staged dispatch plus combined program-wide public no-drift stay pending under `.14.7`
-and `.14.8`. No public
+Governance is 170, and staged runtime admission plus combined program-wide public no-drift stay pending under
+`.14.7.3+` and `.14.8`. No public
 helper/value, descriptor/generated schema, semantic/MCP field, CLI, or README behavior moved.
 
 `progressive_span_dispatch_contract.json` (`linkedspec-progressive-span-dispatch-v1`) is the executable neutral
@@ -336,6 +336,25 @@ through `LINKEDSPEC_RUN_PROGRESSIVE_SPAN_MATRIX=1`. This promotes only typed `pr
 the public closeout binds that committed driver to behavioral recurrence and completes public no-drift. The
 rejected recognition effect retains current node `PROGRESSIVE_DISPATCH_SPAN` and no call row, while ten
 facade/schema/semantic/MCP/CLI/README paths continue to deny outward exposure.
+
+`staged_ast_enrichment_contract.json` (`linkedspec-staged-ast-enrichment-v1`) is the executable neutral authority
+for future returned-AST enrichment through authored `parse_job(text_expr, options)`. It freezes one inert
+`STAGED_PARSE_JOB_MARKER` plus `staged_parse_job_v2` sidecar, typed direct and ordered-derived source provenance,
+caller-completed alias/provider/search-root resolution, immutable pre-registered parser/cache authority,
+deterministic breadth-first recursive scheduling, four result policies, three failure policies, strict
+decreasing-chain and resource ceilings, detached results, portable diagnostics, carrier obligations, dormant
+backend routes, rollout, exact downstream ownership, and the unchanged function-body-v1 adapter. Run:
+
+```bash
+bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py
+```
+
+The independent checker executes 4 registry entries, 8 provenance, 8 resolution/6 authority, 10 cache,
+4 queue/3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases. It locks five dormant
+backend consumers over six runtime routes, 37 diagnostics, 9 rollout legs, and 35 exact owners, then rejects
+72 reason-checked mutations. This neutral contract is current design authority only: all rollout legs remain
+pending, no dormant consumer contains the future implementation tokens, and no parser/compiler/runtime,
+generated format, capability, facade/schema/semantic/MCP/CLI/README, or public behavior has moved.
 
 `inter_match_gap_capture_contract.json` is the neutral authority for named regex slots and lossless
 prefix/interstitial/tail context. Inter-match gap public admission is current with four shared calls and unchanged outward facade, descriptor, semantic, MCP, CLI, and README surfaces. Julia `.5.1-.5.5` and shared Lua `.6.1-.6.5` implement and admit their exact nine-role paths without widening those guarded surfaces.

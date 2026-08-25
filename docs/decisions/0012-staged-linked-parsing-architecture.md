@@ -68,9 +68,11 @@ The first narrow function-body parse-job family is current on Perl, Rust, Dart, 
 PUC Lua, and LuaJIT. It preserves exact body text plus its legacy numeric span, dispatches
 one stable queue depth through the built-in `actionir-body.spec` / `action_block` adapter,
 and stitches `body_ast`. General authored `parse_job(...)`, typed direct/derived source
-provenance, several parser families, complete policy semantics, and recursive queues
-remain owned by `FUTURE-PARITY-BACKLOG.14.7`; the prototype is evidence for this decision,
-not completion of the whole architecture.
+provenance, several parser families, complete policy semantics, and recursive queues remain absent from shipped
+backends. `FUTURE-PARITY-BACKLOG.14.7.2` and ADR `0088` now make their exact neutral target executable before
+backend behavior: pre-resolved immutable authority, typed provenance, breadth-first queues, all result/failure
+policies, bounded recursive chains, detached results, and portable diagnostics. The prototype remains evidence for
+this decision, not completion of the whole architecture.
 
 ## Links
 

@@ -735,6 +735,14 @@ the resolved built-in identity across Perl, Rust, Dart, Julia, PUC Lua, and LuaJ
 Backend implementation must consume the neutral `.14.7.2` oracle, not extend these
 narrow adapters independently.
 
+That oracle is now executable. ADR `0088`, `capability_conformance/staged_ast_enrichment_contract.json`, and the
+[Staged AST Enrichment Contract](../compiler/staged-ast-enrichment.md) require pre-resolved/precompiled immutable
+authority, typed direct/ordered-derived provenance, deterministic v2 ids, breadth-first depth/path/provenance/id
+ordering, fresh sibling contexts, all four result and three failure policies, decreasing provenance chains,
+shared cancellation/resources, detached results, 37 portable diagnostics, explicit v1 compatibility, and four
+fresh-authority carrier routes. Only neutral rollout is complete; backend consumers remain absent until their
+`.14.7.3-.7` RED owners activate.
+
 Progressive dispatch is a separate synchronous path under `FUTURE-PARITY-BACKLOG.14.6`. Audit `.14.6.0` proves
 that none of these registries can invoke a normal loaded spec while a parser is active. The portable design uses
 an immutable host-seeded entry for an already compiled logical parser identity and one contiguous typed source

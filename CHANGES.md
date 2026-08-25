@@ -10,6 +10,23 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-25 — FUTURE-PARITY-BACKLOG.14.7.2 — add neutral staged-AST enrichment authority
+
+- Added `linkedspec-staged-ast-enrichment-v1`, the checker-first executable neutral contract for authored
+  `parse_job(text_expr, options)` and its inert marker/sidecar boundary without enabling backend behavior.
+- Froze typed direct/derived provenance, caller-completed deterministic resolution, immutable registry/cache
+  authority, breadth-first recursive queues, four result policies, three failure policies, strict bounds,
+  detachment, diagnostics, carriers, dormant routes, rollout, compatibility, and 35 exact downstream owners.
+- Added an independent repository-routed checker that executes the contract and rejects 72 reason-checked
+  schema, semantic, authority, isolation, topology, public-boundary, and ownership mutations.
+- Registered the checker unconditionally in canonical local CI while keeping all five backend consumer sources
+  dormant, all nine rollout legs pending, and facade/schema/semantic/MCP/CLI/README surfaces absent.
+- Recorded ADR `0088`, a Knowledge Map fact card, updated staged-architecture decisions, and synchronized the
+  roadmaps, architecture, capability guidance, Toolbox, sole-facing mdBook, task/frontier, and continuity truth.
+- Focused contract/direct-dependent proof, rendered book, 60-file aggregate-selector public admission, and the
+  32-entrypoint project-data census pass together with Knowledge, bounded histories, all nine doctrines, exact
+  staged diff, and receipt-bound canonical local CI before the atomic commit.
+
 ## 2026-08-25 — FUTURE-PARITY-BACKLOG.14.7.1 — preserve staged compile diagnostic context
 
 - Added exact wrong-top compile assertions across Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT for the original

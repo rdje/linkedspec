@@ -1,0 +1,997 @@
+{
+  "format": 1,
+  "contract_id": "linkedspec-staged-ast-enrichment-v1",
+  "task_owner": "FUTURE-PARITY-BACKLOG.14.7.2",
+  "status": "neutral_complete_backends_pending",
+  "expected_counts": {
+    "registry_entries": 4,
+    "sources": 2,
+    "provenance_cases": 8,
+    "job_id_cases": 3,
+    "resolution_cases": 8,
+    "authority_cases": 6,
+    "cache_cases": 10,
+    "queue_cases": 4,
+    "isolation_cases": 3,
+    "stitch_cases": 4,
+    "failure_cases": 3,
+    "chain_cases": 10,
+    "detachment_cases": 5,
+    "carrier_requirements": 4,
+    "backend_consumers": 5,
+    "runtime_routes": 6,
+    "outward_guard_paths": 10,
+    "diagnostics": 37,
+    "rollout_legs": 9,
+    "ownership_rows": 35,
+    "mutations": 72
+  },
+  "authored_surface": {
+    "example": "job_marker = parse_job(text_expr, hash(\"node_kind\", \"expression\", \"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", \"top\", \"Expr\", \"result_policy\", \"sibling_field\", \"into\", \"expression_ast\", \"on_error\", \"fail\"))",
+    "callee": "parse_job",
+    "node_kind": "STAGED_PARSE_JOB_MARKER",
+    "sidecar_kind": "staged_parse_job_v2",
+    "effect": "staged_parse_job_declaration",
+    "evaluation": "construct one inert marker plus scheduler-owned sidecar during stage-N authored execution; select pre-resolved and precompiled authority, execute, and stitch only after the complete stage-N AST returns",
+    "required_options": [
+      "node_kind",
+      "payload_kind",
+      "spec",
+      "result_policy",
+      "on_error"
+    ],
+    "optional_options": [
+      "top",
+      "into",
+      "required_capabilities"
+    ],
+    "availability": "neutral executable authority only; Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurring, and public authoring remain pending under FUTURE-PARITY-BACKLOG.14.7.3-.10"
+  },
+  "policy": {
+    "authority": "the caller freezes aliases, declaring-spec-relative candidates, ordered search-root candidates, ordered provider candidates, resolves every statically declared selector, and freezes immutable already-compiled registry entries before authored execution",
+    "resolution": "all alias, declaring-spec-relative, search-root, and provider discovery completes before authored execution; the post-AST resolve phase is a pure frozen-map selection in that priority order, with missing, same-priority ambiguity, and alias-relative collision as hard diagnostics",
+    "loading": "authored parser identity, text, provenance, marker, and sidecar grant no filesystem, path, URI, network, environment, import enumeration, provider query, compilation, or registry mutation authority",
+    "provenance": "direct text carries one same-source half-open Unicode-scalar span; derived text carries a nonempty ordered list of direct spans under concatenate_in_order and never claims one synthetic contiguous span",
+    "job_id": "parse_job:v2:sha256 over canonical UTF-8 JSON containing contract version, declaring spec identity, parent AST path, node kind, payload kind, parser identity, selected top rule, and typed provenance",
+    "queue": "validate and resolve the complete stage before executing any job; process breadth-first by stage depth, then typed parent AST path (field names by Unicode scalar value and nonnegative indices numerically), typed provenance order under the same component ordering, and job id; stitch each settled result in that order and collect newly stitched markers only for the next depth",
+    "cache": "cache identity includes normalized parser identity, content digest, import graph fingerprint, selected top rule, spec language version, helper/action contract version, staged contract version, and sorted effective backend capabilities",
+    "state": "each job receives a fresh parser runtime context and immutable stage-chain view; siblings share only the caller cancellation, absolute deadline, remaining work budget, total-call counter, and registry snapshot",
+    "capabilities": "effective capabilities and policy modes are intersections and every source-detail or numeric resource ceiling is the stricter minimum; no child may elevate caller authority",
+    "cycles": "an exact active-chain parser/top/payload-digest/provenance tuple is a cycle; repeated parser/top over the same provenance lineage must be strictly contained with smaller total scalar extent",
+    "bounds": "stage depth, total calls, shared steps, result nodes, diagnostic bytes, cancellation, and deadline are checked at dispatch entry and child safe points without reset or extension",
+    "result": "replace_marker, replace_field, sibling_field, and append_child stitch into a detached AST copy; non-marker policies materialize the original exact text where the marker stood",
+    "failure": "fail aborts the composed parse; keep_text materializes original text and records a scheduler-sidecar diagnostic; diagnostic_node applies the selected target policy with one detached portable diagnostic node",
+    "detachment": "results and diagnostics are finite acyclic node-bounded plain data with no parser, registry, source authority, frame, transaction, cancellation, callback, host, path, or live handle",
+    "transactions": "parse-job declaration and staged dispatch are forbidden in uncommitted recognition; staged execution never supplies cursor progress to the completed parent parse",
+    "compatibility": "the existing function-body v1 sidecar remains actionir-body.spec/action_block/replace_field/body_ast/fail with legacy copied-text spans; it is accepted by an explicit adapter and cannot be emitted by parse_job v2"
+  },
+  "result_policies": [
+    "replace_marker",
+    "replace_field",
+    "sibling_field",
+    "append_child"
+  ],
+  "failure_policies": [
+    "fail",
+    "keep_text",
+    "diagnostic_node"
+  ],
+  "sources": [
+    {
+      "source_id": "unicode",
+      "text": "Aé🙂BC",
+      "scalar_length": 5
+    },
+    {
+      "source_id": "ascii",
+      "text": "abcdef",
+      "scalar_length": 6
+    }
+  ],
+  "provenance_cases": [
+    {
+      "id": "direct_unicode",
+      "provenance": {
+        "kind": "direct_span",
+        "source_id": "unicode",
+        "start": 1,
+        "end": 4,
+        "provenance": "capture"
+      },
+      "accepted": true,
+      "materialized_text": "é🙂B",
+      "diagnostic": null
+    },
+    {
+      "id": "direct_empty",
+      "provenance": {
+        "kind": "direct_span",
+        "source_id": "unicode",
+        "start": 2,
+        "end": 2,
+        "provenance": "match"
+      },
+      "accepted": true,
+      "materialized_text": "",
+      "diagnostic": null
+    },
+    {
+      "id": "derived_ordered",
+      "provenance": {
+        "kind": "derived_text",
+        "policy": "concatenate_in_order",
+        "segments": [
+          {
+            "kind": "direct_span",
+            "source_id": "unicode",
+            "start": 1,
+            "end": 3,
+            "provenance": "capture"
+          },
+          {
+            "kind": "direct_span",
+            "source_id": "ascii",
+            "start": 4,
+            "end": 6,
+            "provenance": "capture"
+          }
+        ]
+      },
+      "accepted": true,
+      "materialized_text": "é🙂ef",
+      "diagnostic": null
+    },
+    {
+      "id": "direct_reversed",
+      "provenance": {
+        "kind": "direct_span",
+        "source_id": "unicode",
+        "start": 4,
+        "end": 2,
+        "provenance": "capture"
+      },
+      "accepted": false,
+      "materialized_text": null,
+      "diagnostic": "staged_source_provenance_invalid"
+    },
+    {
+      "id": "direct_out_of_bounds",
+      "provenance": {
+        "kind": "direct_span",
+        "source_id": "unicode",
+        "start": 0,
+        "end": 6,
+        "provenance": "capture"
+      },
+      "accepted": false,
+      "materialized_text": null,
+      "diagnostic": "staged_source_provenance_invalid"
+    },
+    {
+      "id": "derived_empty",
+      "provenance": {
+        "kind": "derived_text",
+        "policy": "concatenate_in_order",
+        "segments": []
+      },
+      "accepted": false,
+      "materialized_text": null,
+      "diagnostic": "staged_source_provenance_invalid"
+    },
+    {
+      "id": "derived_segment_invalid",
+      "provenance": {
+        "kind": "derived_text",
+        "policy": "concatenate_in_order",
+        "segments": [
+          {
+            "kind": "direct_span",
+            "source_id": "missing",
+            "start": 0,
+            "end": 1,
+            "provenance": "capture"
+          }
+        ]
+      },
+      "accepted": false,
+      "materialized_text": null,
+      "diagnostic": "staged_source_provenance_invalid"
+    },
+    {
+      "id": "copied_text_smuggling",
+      "provenance": {
+        "kind": "direct_span",
+        "source_id": "unicode",
+        "start": 1,
+        "end": 2,
+        "provenance": "capture",
+        "text": "é"
+      },
+      "accepted": false,
+      "materialized_text": null,
+      "diagnostic": "staged_source_provenance_invalid"
+    }
+  ],
+  "job_id_cases": [
+    {
+      "id": "direct_identity",
+      "declaring_spec_id": "grammar/main.spec",
+      "parent_ast_path": ["nodes", 0, "payload"],
+      "node_kind": "expression",
+      "payload_kind": "embedded_expression",
+      "parser_spec_id": "expr-v1",
+      "top_rule": "Expr",
+      "provenance": {
+        "kind": "direct_span",
+        "source_id": "ascii",
+        "start": 1,
+        "end": 4,
+        "provenance": "capture"
+      },
+      "expected_job_id": "parse_job:v2:sha256:548dac4aa32e8e8971905e5ce8dfd328d1b5dc583a6326aac982f8908b8f29be"
+    },
+    {
+      "id": "derived_identity",
+      "declaring_spec_id": "grammar/main.spec",
+      "parent_ast_path": ["nodes", 1, "payload"],
+      "node_kind": "template",
+      "payload_kind": "interpolation",
+      "parser_spec_id": "expr-v1",
+      "top_rule": "Expr",
+      "provenance": {
+        "kind": "derived_text",
+        "policy": "concatenate_in_order",
+        "segments": [
+          {
+            "kind": "direct_span",
+            "source_id": "unicode",
+            "start": 1,
+            "end": 3,
+            "provenance": "capture"
+          },
+          {
+            "kind": "direct_span",
+            "source_id": "ascii",
+            "start": 4,
+            "end": 6,
+            "provenance": "capture"
+          }
+        ]
+      },
+      "expected_job_id": "parse_job:v2:sha256:2c73a2c5d23925f23ccc812142997b0fb47372b330ff6b829799bf150a6c92fe"
+    },
+    {
+      "id": "default_top_normalized_before_identity",
+      "declaring_spec_id": "grammar/main.spec",
+      "parent_ast_path": ["document"],
+      "node_kind": "document",
+      "payload_kind": "json",
+      "parser_spec_id": "json-v1",
+      "top_rule": "Document",
+      "provenance": {
+        "kind": "direct_span",
+        "source_id": "ascii",
+        "start": 0,
+        "end": 6,
+        "provenance": "match"
+      },
+      "expected_job_id": "parse_job:v2:sha256:dbd80487a7673d9988b3911b1a74a91d5fe845612cb2783f0e421c0588e42523"
+    }
+  ],
+  "resolution_snapshot": {
+    "immutable": true,
+    "prepared_before_authored_execution": true,
+    "filesystem_access_during_dispatch": false,
+    "aliases": [
+      {"declaring_spec_id": "grammar/main.spec", "authored_id": "expr", "resolved_spec_id": "registry:expr-v2"},
+      {"declaring_spec_id": "grammar/main.spec", "authored_id": "collision", "resolved_spec_id": "registry:expr-v2"}
+    ],
+    "declaring_relative": [
+      {"declaring_spec_id": "grammar/main.spec", "authored_id": "json.spec", "resolved_spec_id": "registry:json-v1"},
+      {"declaring_spec_id": "grammar/main.spec", "authored_id": "collision", "resolved_spec_id": "registry:json-v1"}
+    ],
+    "search_roots": [
+      {
+        "root_id": "root:stdlib",
+        "order": 1,
+        "candidates": [
+          {"authored_id": "xml.spec", "resolved_spec_id": "registry:xml-v1"},
+          {"authored_id": "ambiguous.spec", "resolved_spec_id": "registry:expr-v2"},
+          {"authored_id": "ambiguous.spec", "resolved_spec_id": "registry:xml-v1"}
+        ]
+      },
+      {
+        "root_id": "root:vendor",
+        "order": 2,
+        "candidates": [
+          {"authored_id": "xml.spec", "resolved_spec_id": "registry:yaml-v1"}
+        ]
+      }
+    ],
+    "providers": [
+      {
+        "provider_id": "provider:primary",
+        "order": 1,
+        "candidates": [
+          {"authored_id": "yaml-v1", "resolved_spec_id": "registry:yaml-v1"}
+        ]
+      },
+      {
+        "provider_id": "provider:fallback",
+        "order": 2,
+        "candidates": []
+      }
+    ],
+    "entries": [
+      {
+        "resolved_spec_id": "registry:expr-v2",
+        "compiled_authority": "opaque:compiled:expr-v2",
+        "content_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "import_graph_fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "default_top_rule": "Expr",
+        "allowed_top_rules": ["Expr", "Value"],
+        "spec_language_version": 2,
+        "helper_contract_version": "actionir-v3",
+        "staged_contract_version": 2,
+        "capabilities": ["staged-parse-job-v2", "typed-source-location-v1"],
+        "policy_modes": ["append_child", "diagnostic_node", "fail", "keep_text", "replace_field", "replace_marker", "sibling_field"],
+        "ceilings": {"source_detail": "span", "max_steps": 100, "max_result_nodes": 64, "max_diagnostic_bytes": 4096}
+      },
+      {
+        "resolved_spec_id": "registry:json-v1",
+        "compiled_authority": "opaque:compiled:json-v1",
+        "content_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "import_graph_fingerprint": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "default_top_rule": "Document",
+        "allowed_top_rules": ["Document"],
+        "spec_language_version": 2,
+        "helper_contract_version": "actionir-v3",
+        "staged_contract_version": 2,
+        "capabilities": ["structured-result-v1", "typed-source-location-v1"],
+        "policy_modes": ["diagnostic_node", "fail", "keep_text", "replace_marker"],
+        "ceilings": {"source_detail": "identity", "max_steps": 80, "max_result_nodes": 32, "max_diagnostic_bytes": 1024}
+      },
+      {
+        "resolved_spec_id": "registry:xml-v1",
+        "compiled_authority": "opaque:compiled:xml-v1",
+        "content_digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "import_graph_fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "default_top_rule": "Document",
+        "allowed_top_rules": ["Document", "Element"],
+        "spec_language_version": 2,
+        "helper_contract_version": "actionir-v3",
+        "staged_contract_version": 2,
+        "capabilities": ["staged-parse-job-v2", "typed-source-location-v1", "xml-v1"],
+        "policy_modes": ["append_child", "fail", "replace_marker"],
+        "ceilings": {"source_detail": "span", "max_steps": 120, "max_result_nodes": 80, "max_diagnostic_bytes": 4096}
+      },
+      {
+        "resolved_spec_id": "registry:yaml-v1",
+        "compiled_authority": "opaque:compiled:yaml-v1",
+        "content_digest": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+        "import_graph_fingerprint": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "default_top_rule": "Document",
+        "allowed_top_rules": ["Document"],
+        "spec_language_version": 2,
+        "helper_contract_version": "actionir-v3",
+        "staged_contract_version": 2,
+        "capabilities": ["staged-parse-job-v2", "typed-source-location-v1", "yaml-v1"],
+        "policy_modes": ["fail", "replace_marker"],
+        "ceilings": {"source_detail": "identity", "max_steps": 60, "max_result_nodes": 40, "max_diagnostic_bytes": 2048}
+      }
+    ]
+  },
+  "resolution_cases": [
+    {"id": "alias_first", "declaring_spec_id": "grammar/main.spec", "parser_spec_id": "expr", "resolved_spec_id": "registry:expr-v2", "diagnostic": null},
+    {"id": "declaring_relative_second", "declaring_spec_id": "grammar/main.spec", "parser_spec_id": "json.spec", "resolved_spec_id": "registry:json-v1", "diagnostic": null},
+    {"id": "search_root_order", "declaring_spec_id": "grammar/main.spec", "parser_spec_id": "xml.spec", "resolved_spec_id": "registry:xml-v1", "diagnostic": null},
+    {"id": "provider_order", "declaring_spec_id": "grammar/main.spec", "parser_spec_id": "yaml-v1", "resolved_spec_id": "registry:yaml-v1", "diagnostic": null},
+    {"id": "missing", "declaring_spec_id": "grammar/main.spec", "parser_spec_id": "missing-v1", "resolved_spec_id": null, "diagnostic": "staged_registry_missing"},
+    {"id": "same_priority_ambiguous", "declaring_spec_id": "grammar/main.spec", "parser_spec_id": "ambiguous.spec", "resolved_spec_id": null, "diagnostic": "staged_registry_ambiguous"},
+    {"id": "alias_relative_collision", "declaring_spec_id": "grammar/main.spec", "parser_spec_id": "collision", "resolved_spec_id": null, "diagnostic": "staged_registry_collision"},
+    {"id": "path_traversal_rejected", "declaring_spec_id": "grammar/main.spec", "parser_spec_id": "../secret.spec", "resolved_spec_id": null, "diagnostic": "staged_parser_identity_invalid"}
+  ],
+  "authority_cases": [
+    {
+      "id": "intersection_and_minima",
+      "entry_id": "registry:expr-v2",
+      "top_rule": "Expr",
+      "caller_capabilities": ["caller-only", "staged-parse-job-v2", "typed-source-location-v1"],
+      "required_capabilities": ["staged-parse-job-v2", "typed-source-location-v1"],
+      "caller_policy_modes": ["fail", "sibling_field", "trace"],
+      "required_policy_modes": ["fail", "sibling_field"],
+      "caller_ceilings": {"source_detail": "text", "max_steps": 60, "max_result_nodes": 128, "max_diagnostic_bytes": 2048},
+      "required_source_detail": "span",
+      "required_versions": {"spec_language_version": 2, "helper_contract_version": "actionir-v3", "staged_contract_version": 2},
+      "accepted": true,
+      "effective": {"capabilities": ["staged-parse-job-v2", "typed-source-location-v1"], "policy_modes": ["fail", "sibling_field"], "source_detail": "span", "max_steps": 60, "max_result_nodes": 64, "max_diagnostic_bytes": 2048},
+      "diagnostic": null
+    },
+    {
+      "id": "entry_cannot_elevate_caller",
+      "entry_id": "registry:json-v1",
+      "top_rule": "Document",
+      "caller_capabilities": ["caller-only", "structured-result-v1", "typed-source-location-v1"],
+      "required_capabilities": ["structured-result-v1", "typed-source-location-v1"],
+      "caller_policy_modes": ["diagnostic_node", "fail", "trace"],
+      "required_policy_modes": ["diagnostic_node", "fail"],
+      "caller_ceilings": {"source_detail": "span", "max_steps": 200, "max_result_nodes": 16, "max_diagnostic_bytes": 2048},
+      "required_source_detail": "identity",
+      "required_versions": {"spec_language_version": 2, "helper_contract_version": "actionir-v3", "staged_contract_version": 2},
+      "accepted": true,
+      "effective": {"capabilities": ["structured-result-v1", "typed-source-location-v1"], "policy_modes": ["diagnostic_node", "fail"], "source_detail": "identity", "max_steps": 80, "max_result_nodes": 16, "max_diagnostic_bytes": 1024},
+      "diagnostic": null
+    },
+    {
+      "id": "required_capability_missing",
+      "entry_id": "registry:expr-v2",
+      "top_rule": "Expr",
+      "caller_capabilities": ["typed-source-location-v1"],
+      "required_capabilities": ["staged-parse-job-v2"],
+      "caller_policy_modes": ["fail"],
+      "required_policy_modes": ["fail"],
+      "caller_ceilings": {"source_detail": "span", "max_steps": 100, "max_result_nodes": 64, "max_diagnostic_bytes": 4096},
+      "required_source_detail": "identity",
+      "required_versions": {"spec_language_version": 2, "helper_contract_version": "actionir-v3", "staged_contract_version": 2},
+      "accepted": false,
+      "effective": null,
+      "diagnostic": "staged_capability_denied"
+    },
+    {
+      "id": "policy_denied",
+      "entry_id": "registry:json-v1",
+      "top_rule": "Document",
+      "caller_capabilities": ["structured-result-v1", "typed-source-location-v1"],
+      "required_capabilities": ["typed-source-location-v1"],
+      "caller_policy_modes": ["append_child", "fail"],
+      "required_policy_modes": ["append_child"],
+      "caller_ceilings": {"source_detail": "identity", "max_steps": 80, "max_result_nodes": 32, "max_diagnostic_bytes": 1024},
+      "required_source_detail": "identity",
+      "required_versions": {"spec_language_version": 2, "helper_contract_version": "actionir-v3", "staged_contract_version": 2},
+      "accepted": false,
+      "effective": null,
+      "diagnostic": "staged_policy_denied"
+    },
+    {
+      "id": "source_detail_denied",
+      "entry_id": "registry:json-v1",
+      "top_rule": "Document",
+      "caller_capabilities": ["structured-result-v1", "typed-source-location-v1"],
+      "required_capabilities": ["typed-source-location-v1"],
+      "caller_policy_modes": ["fail"],
+      "required_policy_modes": ["fail"],
+      "caller_ceilings": {"source_detail": "text", "max_steps": 80, "max_result_nodes": 32, "max_diagnostic_bytes": 1024},
+      "required_source_detail": "span",
+      "required_versions": {"spec_language_version": 2, "helper_contract_version": "actionir-v3", "staged_contract_version": 2},
+      "accepted": false,
+      "effective": null,
+      "diagnostic": "staged_source_detail_denied"
+    },
+    {
+      "id": "helper_version_mismatch",
+      "entry_id": "registry:expr-v2",
+      "top_rule": "Expr",
+      "caller_capabilities": ["staged-parse-job-v2", "typed-source-location-v1"],
+      "required_capabilities": ["typed-source-location-v1"],
+      "caller_policy_modes": ["fail"],
+      "required_policy_modes": ["fail"],
+      "caller_ceilings": {"source_detail": "span", "max_steps": 100, "max_result_nodes": 64, "max_diagnostic_bytes": 4096},
+      "required_source_detail": "identity",
+      "required_versions": {"spec_language_version": 2, "helper_contract_version": "actionir-v4", "staged_contract_version": 2},
+      "accepted": false,
+      "effective": null,
+      "diagnostic": "staged_version_mismatch"
+    }
+  ],
+  "cache_cases": [
+    {
+      "id": "base",
+      "fields": {"normalized_spec_id": "registry:expr-v2", "content_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111", "import_graph_fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "top_rule": "Expr", "spec_language_version": 2, "helper_contract_version": "actionir-v3", "staged_contract_version": 2, "backend_capabilities": ["staged-parse-job-v2", "typed-source-location-v1"]},
+      "same_as_base": true
+    },
+    {
+      "id": "identical",
+      "fields": {"normalized_spec_id": "registry:expr-v2", "content_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111", "import_graph_fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "top_rule": "Expr", "spec_language_version": 2, "helper_contract_version": "actionir-v3", "staged_contract_version": 2, "backend_capabilities": ["staged-parse-job-v2", "typed-source-location-v1"]},
+      "same_as_base": true
+    },
+    {
+      "id": "content_changed",
+      "fields": {"normalized_spec_id": "registry:expr-v2", "content_digest": "sha256:9999999999999999999999999999999999999999999999999999999999999999", "import_graph_fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "top_rule": "Expr", "spec_language_version": 2, "helper_contract_version": "actionir-v3", "staged_contract_version": 2, "backend_capabilities": ["staged-parse-job-v2", "typed-source-location-v1"]},
+      "same_as_base": false
+    },
+    {
+      "id": "graph_changed",
+      "fields": {"normalized_spec_id": "registry:expr-v2", "content_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111", "import_graph_fingerprint": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", "top_rule": "Expr", "spec_language_version": 2, "helper_contract_version": "actionir-v3", "staged_contract_version": 2, "backend_capabilities": ["staged-parse-job-v2", "typed-source-location-v1"]},
+      "same_as_base": false
+    },
+    {
+      "id": "top_changed",
+      "fields": {"normalized_spec_id": "registry:expr-v2", "content_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111", "import_graph_fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "top_rule": "Value", "spec_language_version": 2, "helper_contract_version": "actionir-v3", "staged_contract_version": 2, "backend_capabilities": ["staged-parse-job-v2", "typed-source-location-v1"]},
+      "same_as_base": false
+    },
+    {
+      "id": "spec_version_changed",
+      "fields": {"normalized_spec_id": "registry:expr-v2", "content_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111", "import_graph_fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "top_rule": "Expr", "spec_language_version": 3, "helper_contract_version": "actionir-v3", "staged_contract_version": 2, "backend_capabilities": ["staged-parse-job-v2", "typed-source-location-v1"]},
+      "same_as_base": false
+    },
+    {
+      "id": "helper_version_changed",
+      "fields": {"normalized_spec_id": "registry:expr-v2", "content_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111", "import_graph_fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "top_rule": "Expr", "spec_language_version": 2, "helper_contract_version": "actionir-v4", "staged_contract_version": 2, "backend_capabilities": ["staged-parse-job-v2", "typed-source-location-v1"]},
+      "same_as_base": false
+    },
+    {
+      "id": "staged_version_changed",
+      "fields": {"normalized_spec_id": "registry:expr-v2", "content_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111", "import_graph_fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "top_rule": "Expr", "spec_language_version": 2, "helper_contract_version": "actionir-v3", "staged_contract_version": 3, "backend_capabilities": ["staged-parse-job-v2", "typed-source-location-v1"]},
+      "same_as_base": false
+    },
+    {
+      "id": "capability_order_normalized",
+      "fields": {"normalized_spec_id": "registry:expr-v2", "content_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111", "import_graph_fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "top_rule": "Expr", "spec_language_version": 2, "helper_contract_version": "actionir-v3", "staged_contract_version": 2, "backend_capabilities": ["typed-source-location-v1", "staged-parse-job-v2"]},
+      "same_as_base": true
+    },
+    {
+      "id": "capability_set_changed",
+      "fields": {"normalized_spec_id": "registry:expr-v2", "content_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111", "import_graph_fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "top_rule": "Expr", "spec_language_version": 2, "helper_contract_version": "actionir-v3", "staged_contract_version": 2, "backend_capabilities": ["staged-parse-job-v2", "trace-v1", "typed-source-location-v1"]},
+      "same_as_base": false
+    }
+  ],
+  "queue_cases": [
+    {
+      "id": "parent_then_provenance",
+      "jobs": [
+        {"job_id": "job-c", "stage_depth": 1, "parent_ast_path": ["nodes", 10], "provenance_order": ["ascii", 0, 1]},
+        {"job_id": "job-d", "stage_depth": 1, "parent_ast_path": ["nodes", 2], "provenance_order": ["ascii", 0, 1]},
+        {"job_id": "job-a", "stage_depth": 1, "parent_ast_path": ["nodes", 0], "provenance_order": ["ascii", 4, 5]},
+        {"job_id": "job-b", "stage_depth": 1, "parent_ast_path": ["nodes", 0], "provenance_order": ["ascii", 1, 2]}
+      ],
+      "expected_order": ["job-b", "job-a", "job-d", "job-c"]
+    },
+    {
+      "id": "job_id_tie_break",
+      "jobs": [
+        {"job_id": "job-z", "stage_depth": 1, "parent_ast_path": ["node"], "provenance_order": ["ascii", 1, 2]},
+        {"job_id": "job-a", "stage_depth": 1, "parent_ast_path": ["node"], "provenance_order": ["ascii", 1, 2]}
+      ],
+      "expected_order": ["job-a", "job-z"]
+    },
+    {
+      "id": "derived_order_key",
+      "jobs": [
+        {"job_id": "job-unicode", "stage_depth": 1, "parent_ast_path": ["node"], "provenance_order": ["unicode", 1, 3, "capture"]},
+        {"job_id": "job-ascii", "stage_depth": 1, "parent_ast_path": ["node"], "provenance_order": ["ascii", 4, 6, "capture"]}
+      ],
+      "expected_order": ["job-ascii", "job-unicode"]
+    },
+    {
+      "id": "breadth_first_recursive_enqueue",
+      "jobs": [
+        {"job_id": "depth-two-child", "stage_depth": 2, "parent_ast_path": ["nodes", 0, "ast", "child"], "provenance_order": ["ascii", 2, 3]},
+        {"job_id": "depth-one-later", "stage_depth": 1, "parent_ast_path": ["nodes", 1], "provenance_order": ["ascii", 4, 5]},
+        {"job_id": "depth-one-first", "stage_depth": 1, "parent_ast_path": ["nodes", 0], "provenance_order": ["ascii", 0, 4]}
+      ],
+      "expected_order": ["depth-one-first", "depth-one-later", "depth-two-child"]
+    }
+  ],
+  "isolation_cases": [
+    {
+      "id": "siblings_receive_fresh_runtime_contexts",
+      "parent_state": {"cursor": 17, "marks": {"m": 3}, "variables": {"parent": "kept"}},
+      "child_mutations": [
+        {"cursor": 4, "marks": {"child": 1}, "variables": {"x": 1}},
+        {"cursor": 2, "marks": {"other": 2}, "variables": {"y": 2}}
+      ],
+      "shared_authority": {"cancellation_token": "cancel:1", "deadline": 100, "remaining_steps": 20, "child_costs": [3, 4], "registry_snapshot_id": "registry-snapshot:1"},
+      "expected": {"parent_state": {"cursor": 17, "marks": {"m": 3}, "variables": {"parent": "kept"}}, "child_initial_contexts": [{"cursor": 0, "marks": {}, "variables": {}}, {"cursor": 0, "marks": {}, "variables": {}}], "cancellation_tokens": ["cancel:1", "cancel:1"], "deadline_values": [100, 100], "remaining_steps": 13, "registry_snapshot_id": "registry-snapshot:1"}
+    },
+    {
+      "id": "falsey_child_state_does_not_escape",
+      "parent_state": {"cursor": 0, "marks": {}, "variables": {"value": false}},
+      "child_mutations": [
+        {"cursor": 0, "marks": {"zero": 0}, "variables": {"value": true}}
+      ],
+      "shared_authority": {"cancellation_token": "cancel:2", "deadline": 50, "remaining_steps": 5, "child_costs": [0], "registry_snapshot_id": "registry-snapshot:2"},
+      "expected": {"parent_state": {"cursor": 0, "marks": {}, "variables": {"value": false}}, "child_initial_contexts": [{"cursor": 0, "marks": {}, "variables": {}}], "cancellation_tokens": ["cancel:2"], "deadline_values": [50], "remaining_steps": 5, "registry_snapshot_id": "registry-snapshot:2"}
+    },
+    {
+      "id": "shared_budget_spans_next_depth",
+      "parent_state": {"cursor": 9, "marks": {"root": 0}, "variables": {}},
+      "child_mutations": [{"cursor": 1}, {"cursor": 2}, {"cursor": 3}],
+      "shared_authority": {"cancellation_token": "cancel:3", "deadline": 75, "remaining_steps": 10, "child_costs": [2, 2, 1], "registry_snapshot_id": "registry-snapshot:3"},
+      "expected": {"parent_state": {"cursor": 9, "marks": {"root": 0}, "variables": {}}, "child_initial_contexts": [{"cursor": 0, "marks": {}, "variables": {}}, {"cursor": 0, "marks": {}, "variables": {}}, {"cursor": 0, "marks": {}, "variables": {}}], "cancellation_tokens": ["cancel:3", "cancel:3", "cancel:3"], "deadline_values": [75, 75, 75], "remaining_steps": 5, "registry_snapshot_id": "registry-snapshot:3"}
+    }
+  ],
+  "stitch_cases": [
+    {
+      "id": "replace_marker",
+      "job_id": "job-1",
+      "text": "abc",
+      "parent": {"payload": {"kind": "staged_parse_job_marker", "version": 2, "job_id": "job-1", "text": "abc"}, "children": []},
+      "marker_field": "payload",
+      "result_policy": "replace_marker",
+      "into": null,
+      "result": {"kind": "expr", "value": 1},
+      "expected_parent": {"payload": {"kind": "expr", "value": 1}, "children": []}
+    },
+    {
+      "id": "replace_field",
+      "job_id": "job-2",
+      "text": "abc",
+      "parent": {"payload": {"kind": "staged_parse_job_marker", "version": 2, "job_id": "job-2", "text": "abc"}, "ast": null},
+      "marker_field": "payload",
+      "result_policy": "replace_field",
+      "into": "ast",
+      "result": {"kind": "expr", "value": 2},
+      "expected_parent": {"payload": "abc", "ast": {"kind": "expr", "value": 2}}
+    },
+    {
+      "id": "sibling_field",
+      "job_id": "job-3",
+      "text": "abc",
+      "parent": {"payload": {"kind": "staged_parse_job_marker", "version": 2, "job_id": "job-3", "text": "abc"}},
+      "marker_field": "payload",
+      "result_policy": "sibling_field",
+      "into": "ast",
+      "result": {"kind": "expr", "value": 3},
+      "expected_parent": {"payload": "abc", "ast": {"kind": "expr", "value": 3}}
+    },
+    {
+      "id": "append_child",
+      "job_id": "job-4",
+      "text": "abc",
+      "parent": {"payload": {"kind": "staged_parse_job_marker", "version": 2, "job_id": "job-4", "text": "abc"}, "children": []},
+      "marker_field": "payload",
+      "result_policy": "append_child",
+      "into": "children",
+      "result": {"kind": "expr", "value": 4},
+      "expected_parent": {"payload": "abc", "children": [{"kind": "expr", "value": 4}]}
+    }
+  ],
+  "failure_cases": [
+    {
+      "id": "fail_aborts_composed_parse",
+      "job_id": "job-fail",
+      "text": "bad",
+      "parent": {"payload": {"kind": "staged_parse_job_marker", "version": 2, "job_id": "job-fail", "text": "bad"}},
+      "marker_field": "payload",
+      "result_policy": "replace_marker",
+      "into": null,
+      "failure_policy": "fail",
+      "diagnostic": {"code": "staged_child_failed", "job_id": "job-fail"},
+      "expected": {"outcome": "aborted", "parent": null, "sidecar_diagnostics": [{"code": "staged_child_failed", "job_id": "job-fail"}]}
+    },
+    {
+      "id": "keep_text_continues",
+      "job_id": "job-keep",
+      "text": "bad",
+      "parent": {"payload": {"kind": "staged_parse_job_marker", "version": 2, "job_id": "job-keep", "text": "bad"}, "children": []},
+      "marker_field": "payload",
+      "result_policy": "append_child",
+      "into": "children",
+      "failure_policy": "keep_text",
+      "diagnostic": {"code": "staged_child_failed", "job_id": "job-keep"},
+      "expected": {"outcome": "continued", "parent": {"payload": "bad", "children": []}, "sidecar_diagnostics": [{"code": "staged_child_failed", "job_id": "job-keep"}]}
+    },
+    {
+      "id": "diagnostic_node_uses_result_target",
+      "job_id": "job-diagnostic",
+      "text": "bad",
+      "parent": {"payload": {"kind": "staged_parse_job_marker", "version": 2, "job_id": "job-diagnostic", "text": "bad"}},
+      "marker_field": "payload",
+      "result_policy": "sibling_field",
+      "into": "ast",
+      "failure_policy": "diagnostic_node",
+      "diagnostic": {"code": "staged_child_failed", "job_id": "job-diagnostic"},
+      "expected": {"outcome": "continued", "parent": {"payload": "bad", "ast": {"kind": "staged_parse_diagnostic", "diagnostic": {"code": "staged_child_failed", "job_id": "job-diagnostic"}}}, "sidecar_diagnostics": [{"code": "staged_child_failed", "job_id": "job-diagnostic"}]}
+    }
+  ],
+  "chain_cases": [
+    {
+      "id": "direct_strictly_smaller",
+      "cancelled": false, "now": 1, "deadline": 10, "remaining_steps": 10, "required_steps": 1, "depth": 2, "max_depth": 4, "calls": 2, "max_calls": 10,
+      "active_tuple": ["registry:expr-v2", "Expr", "sha256:parent", "ascii:0-6"], "candidate_tuple": ["registry:expr-v2", "Expr", "sha256:child", "ascii:1-5"], "same_parser_top_lineage": true,
+      "active_provenance": {"kind": "direct_span", "source_id": "ascii", "start": 0, "end": 6, "provenance": "capture"},
+      "candidate_provenance": {"kind": "direct_span", "source_id": "ascii", "start": 1, "end": 5, "provenance": "capture"},
+      "accepted": true, "diagnostic": null
+    },
+    {
+      "id": "derived_strictly_smaller",
+      "cancelled": false, "now": 1, "deadline": 10, "remaining_steps": 10, "required_steps": 1, "depth": 2, "max_depth": 4, "calls": 2, "max_calls": 10,
+      "active_tuple": ["registry:expr-v2", "Expr", "sha256:parent", "derived:parent"], "candidate_tuple": ["registry:expr-v2", "Expr", "sha256:child", "derived:child"], "same_parser_top_lineage": true,
+      "active_provenance": {"kind": "derived_text", "policy": "concatenate_in_order", "segments": [{"kind": "direct_span", "source_id": "ascii", "start": 0, "end": 3, "provenance": "capture"}, {"kind": "direct_span", "source_id": "unicode", "start": 0, "end": 3, "provenance": "capture"}]},
+      "candidate_provenance": {"kind": "derived_text", "policy": "concatenate_in_order", "segments": [{"kind": "direct_span", "source_id": "ascii", "start": 1, "end": 2, "provenance": "capture"}, {"kind": "direct_span", "source_id": "unicode", "start": 1, "end": 2, "provenance": "capture"}]},
+      "accepted": true, "diagnostic": null
+    },
+    {
+      "id": "exact_tuple_cycle",
+      "cancelled": false, "now": 1, "deadline": 10, "remaining_steps": 10, "required_steps": 1, "depth": 2, "max_depth": 4, "calls": 2, "max_calls": 10,
+      "active_tuple": ["registry:expr-v2", "Expr", "sha256:same", "ascii:0-6"], "candidate_tuple": ["registry:expr-v2", "Expr", "sha256:same", "ascii:0-6"], "same_parser_top_lineage": true,
+      "active_provenance": {"kind": "direct_span", "source_id": "ascii", "start": 0, "end": 6, "provenance": "capture"},
+      "candidate_provenance": {"kind": "direct_span", "source_id": "ascii", "start": 0, "end": 6, "provenance": "capture"},
+      "accepted": false, "diagnostic": "staged_cycle"
+    },
+    {
+      "id": "same_extent_non_decreasing",
+      "cancelled": false, "now": 1, "deadline": 10, "remaining_steps": 10, "required_steps": 1, "depth": 2, "max_depth": 4, "calls": 2, "max_calls": 10,
+      "active_tuple": ["registry:expr-v2", "Expr", "sha256:parent", "ascii:0-5"], "candidate_tuple": ["registry:expr-v2", "Expr", "sha256:child", "ascii:1-6"], "same_parser_top_lineage": true,
+      "active_provenance": {"kind": "direct_span", "source_id": "ascii", "start": 0, "end": 5, "provenance": "capture"},
+      "candidate_provenance": {"kind": "direct_span", "source_id": "ascii", "start": 1, "end": 6, "provenance": "capture"},
+      "accepted": false, "diagnostic": "staged_chain_non_decreasing"
+    },
+    {
+      "id": "derived_not_contained",
+      "cancelled": false, "now": 1, "deadline": 10, "remaining_steps": 10, "required_steps": 1, "depth": 2, "max_depth": 4, "calls": 2, "max_calls": 10,
+      "active_tuple": ["registry:expr-v2", "Expr", "sha256:parent", "derived:parent"], "candidate_tuple": ["registry:expr-v2", "Expr", "sha256:child", "derived:child"], "same_parser_top_lineage": true,
+      "active_provenance": {"kind": "derived_text", "policy": "concatenate_in_order", "segments": [{"kind": "direct_span", "source_id": "ascii", "start": 0, "end": 3, "provenance": "capture"}]},
+      "candidate_provenance": {"kind": "derived_text", "policy": "concatenate_in_order", "segments": [{"kind": "direct_span", "source_id": "unicode", "start": 1, "end": 2, "provenance": "capture"}]},
+      "accepted": false, "diagnostic": "staged_chain_non_decreasing"
+    },
+    {
+      "id": "depth_exceeded",
+      "cancelled": false, "now": 1, "deadline": 10, "remaining_steps": 10, "required_steps": 1, "depth": 5, "max_depth": 4, "calls": 2, "max_calls": 10,
+      "active_tuple": ["a"], "candidate_tuple": ["b"], "same_parser_top_lineage": false,
+      "active_provenance": {"kind": "direct_span", "source_id": "ascii", "start": 0, "end": 6, "provenance": "capture"}, "candidate_provenance": {"kind": "direct_span", "source_id": "ascii", "start": 1, "end": 2, "provenance": "capture"},
+      "accepted": false, "diagnostic": "staged_depth_exceeded"
+    },
+    {
+      "id": "call_limit_exceeded",
+      "cancelled": false, "now": 1, "deadline": 10, "remaining_steps": 10, "required_steps": 1, "depth": 2, "max_depth": 4, "calls": 11, "max_calls": 10,
+      "active_tuple": ["a"], "candidate_tuple": ["b"], "same_parser_top_lineage": false,
+      "active_provenance": {"kind": "direct_span", "source_id": "ascii", "start": 0, "end": 6, "provenance": "capture"}, "candidate_provenance": {"kind": "direct_span", "source_id": "ascii", "start": 1, "end": 2, "provenance": "capture"},
+      "accepted": false, "diagnostic": "staged_call_limit_exceeded"
+    },
+    {
+      "id": "cancelled",
+      "cancelled": true, "now": 1, "deadline": 10, "remaining_steps": 10, "required_steps": 1, "depth": 2, "max_depth": 4, "calls": 2, "max_calls": 10,
+      "active_tuple": ["a"], "candidate_tuple": ["b"], "same_parser_top_lineage": false,
+      "active_provenance": {"kind": "direct_span", "source_id": "ascii", "start": 0, "end": 6, "provenance": "capture"}, "candidate_provenance": {"kind": "direct_span", "source_id": "ascii", "start": 1, "end": 2, "provenance": "capture"},
+      "accepted": false, "diagnostic": "staged_cancelled"
+    },
+    {
+      "id": "deadline_exceeded",
+      "cancelled": false, "now": 11, "deadline": 10, "remaining_steps": 10, "required_steps": 1, "depth": 2, "max_depth": 4, "calls": 2, "max_calls": 10,
+      "active_tuple": ["a"], "candidate_tuple": ["b"], "same_parser_top_lineage": false,
+      "active_provenance": {"kind": "direct_span", "source_id": "ascii", "start": 0, "end": 6, "provenance": "capture"}, "candidate_provenance": {"kind": "direct_span", "source_id": "ascii", "start": 1, "end": 2, "provenance": "capture"},
+      "accepted": false, "diagnostic": "staged_deadline_exceeded"
+    },
+    {
+      "id": "budget_exhausted",
+      "cancelled": false, "now": 1, "deadline": 10, "remaining_steps": 0, "required_steps": 1, "depth": 2, "max_depth": 4, "calls": 2, "max_calls": 10,
+      "active_tuple": ["a"], "candidate_tuple": ["b"], "same_parser_top_lineage": false,
+      "active_provenance": {"kind": "direct_span", "source_id": "ascii", "start": 0, "end": 6, "provenance": "capture"}, "candidate_provenance": {"kind": "direct_span", "source_id": "ascii", "start": 1, "end": 2, "provenance": "capture"},
+      "accepted": false, "diagnostic": "staged_budget_exhausted"
+    }
+  ],
+  "detachment_cases": [
+    {"id": "plain_nested", "value": {"kind": "expr", "children": [1, false, null]}, "max_nodes": 20, "accepted": true, "diagnostic": null, "visited_nodes": 6},
+    {"id": "falsey_scalar", "value": 0, "max_nodes": 2, "accepted": true, "diagnostic": null, "visited_nodes": 1},
+    {"id": "live_parser_handle", "value": {"parser_handle": "opaque:live"}, "max_nodes": 10, "accepted": false, "diagnostic": "staged_result_not_detached", "visited_nodes": 1},
+    {"id": "reference_cycle_marker", "value": {"$ref": "self"}, "max_nodes": 10, "accepted": false, "diagnostic": "staged_result_not_detached", "visited_nodes": 1},
+    {"id": "node_limit", "value": [1, 2, 3], "max_nodes": 3, "accepted": false, "diagnostic": "staged_result_node_limit_exceeded", "visited_nodes": 4}
+  ],
+  "compatibility_v1": {
+    "status": "current_unchanged",
+    "record_version": 1,
+    "parser_spec_id": "actionir-body.spec",
+    "resolved_spec_id": "builtin:actionir-body.spec",
+    "top_rule": "action_block",
+    "result_policy": "replace_field",
+    "result_field": "body_ast",
+    "failure_policy": "fail",
+    "source_provenance": "legacy copied exact text plus numeric offset and line span",
+    "general_authoring": false,
+    "upgrade_to_v2": "explicit_only"
+  },
+  "carrier_requirements": [
+    {"order": 1, "carrier": "native", "requirement": "preserve the logical marker/sidecar, typed provenance, deterministic identity, and cache inputs; obtain a fresh caller-supplied registry/runtime authority per execution; serialize no callback, compiled parser, registry snapshot, source authority, cancellation token, deadline, budget, mutable queue, or host handle"},
+    {"order": 2, "carrier": "normalized_reconstructed", "requirement": "preserve the logical marker/sidecar, typed provenance, deterministic identity, and cache inputs; obtain a fresh caller-supplied registry/runtime authority per execution; serialize no callback, compiled parser, registry snapshot, source authority, cancellation token, deadline, budget, mutable queue, or host handle"},
+    {"order": 3, "carrier": "generated_plan", "requirement": "preserve the logical marker/sidecar, typed provenance, deterministic identity, and cache inputs; obtain a fresh caller-supplied registry/runtime authority per execution; serialize no callback, compiled parser, registry snapshot, source authority, cancellation token, deadline, budget, mutable queue, or host handle"},
+    {"order": 4, "carrier": "independently_loaded_emitted", "requirement": "preserve the logical marker/sidecar, typed provenance, deterministic identity, and cache inputs; obtain a fresh caller-supplied registry/runtime authority per execution; serialize no callback, compiled parser, registry snapshot, source authority, cancellation token, deadline, budget, mutable queue, or host handle"}
+  ],
+  "backend_consumers": [
+    {"backend": "perl", "owner": "FUTURE-PARITY-BACKLOG.14.7.3.0", "path": "t/staged_ast_enrichment_perl_contract.t", "status": "pending_absent"},
+    {"backend": "rust", "owner": "FUTURE-PARITY-BACKLOG.14.7.4.0", "path": "rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs", "status": "pending_absent"},
+    {"backend": "dart", "owner": "FUTURE-PARITY-BACKLOG.14.7.5.0", "path": "dart/test/staged_ast_enrichment_contract_test.dart", "status": "pending_absent"},
+    {"backend": "julia", "owner": "FUTURE-PARITY-BACKLOG.14.7.6.0", "path": "julia/test/staged_ast_enrichment_contract_test.jl", "status": "pending_absent"},
+    {"backend": "lua", "owner": "FUTURE-PARITY-BACKLOG.14.7.7.0", "path": "lua/test/staged_ast_enrichment_contract_test.lua", "status": "pending_absent"}
+  ],
+  "runtime_routes": [
+    {"order": 1, "runtime": "perl", "consumer_backend": "perl", "command": "PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract.t"},
+    {"order": 2, "runtime": "rust", "consumer_backend": "rust", "command": "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract"},
+    {"order": 3, "runtime": "dart", "consumer_backend": "dart", "command": "bash tools/run_dart_project_data.sh test --reporter failures-only dart/test/staged_ast_enrichment_contract_test.dart"},
+    {"order": 4, "runtime": "julia", "consumer_backend": "julia", "command": "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no julia/test/staged_ast_enrichment_contract_test.jl"},
+    {"order": 5, "runtime": "puc_lua", "consumer_backend": "lua", "command": "bash tools/run_lua_project_data.sh puc lua/test/staged_ast_enrichment_contract_test.lua"},
+    {"order": 6, "runtime": "luajit", "consumer_backend": "lua", "command": "bash tools/run_lua_project_data.sh luajit lua/test/staged_ast_enrichment_contract_test.lua"}
+  ],
+  "outward_guard": {
+    "paths": [
+      "perl/LinkedSpec.pm",
+      "rust/linkedspec-runtime/src/lib.rs",
+      "dart/lib/linkedspec_dart.dart",
+      "julia/src/LinkedSpecJulia.jl",
+      "lua/src/linkedspec/init.lua",
+      "capability_conformance/outward_descriptor_contract.json",
+      "capability_conformance/semantic_introspection_model.json",
+      "capability_conformance/mcp_semantic_transport/schema.json",
+      "cli_conformance/manifest.json",
+      "README.md"
+    ],
+    "forbidden_tokens": [
+      "parse_job(text_expr",
+      "STAGED_PARSE_JOB_MARKER",
+      "linkedspec-staged-ast-enrichment-v1"
+    ],
+    "status": "no_public_or_outward_admission",
+    "owner": "FUTURE-PARITY-BACKLOG.14.7.9"
+  },
+  "diagnostics": [
+    {"code": "staged_parse_job_options_required", "required_context": ["code", "phase", "origin", "operand"]},
+    {"code": "staged_parse_job_option_unknown", "required_context": ["code", "phase", "origin", "option"]},
+    {"code": "staged_parser_identity_invalid", "required_context": ["code", "phase", "origin", "parser_spec_id"]},
+    {"code": "staged_top_rule_invalid", "required_context": ["code", "phase", "origin", "top_rule"]},
+    {"code": "staged_result_policy_invalid", "required_context": ["code", "phase", "origin", "result_policy"]},
+    {"code": "staged_failure_policy_invalid", "required_context": ["code", "phase", "origin", "failure_policy"]},
+    {"code": "staged_result_target_invalid", "required_context": ["code", "phase", "origin", "result_policy", "into"]},
+    {"code": "staged_source_provenance_invalid", "required_context": ["code", "phase", "origin", "source_id", "provenance"]},
+    {"code": "staged_job_id_mismatch", "required_context": ["code", "phase", "job_id", "expected_job_id"]},
+    {"code": "staged_duplicate_job_id", "required_context": ["code", "phase", "job_id", "parent_ast_path"]},
+    {"code": "staged_registry_missing", "required_context": ["code", "phase", "job_id", "parser_spec_id", "declaring_spec_id"]},
+    {"code": "staged_registry_ambiguous", "required_context": ["code", "phase", "job_id", "parser_spec_id", "priority", "candidates"]},
+    {"code": "staged_registry_collision", "required_context": ["code", "phase", "job_id", "parser_spec_id", "aliases", "relative_candidates"]},
+    {"code": "staged_implicit_load_forbidden", "required_context": ["code", "phase", "job_id", "parser_spec_id", "operation"]},
+    {"code": "staged_registry_mutation_forbidden", "required_context": ["code", "phase", "job_id", "parser_spec_id", "operation"]},
+    {"code": "staged_top_rule_forbidden", "required_context": ["code", "phase", "job_id", "resolved_spec_id", "top_rule"]},
+    {"code": "staged_capability_denied", "required_context": ["code", "phase", "job_id", "resolved_spec_id", "capability"]},
+    {"code": "staged_policy_denied", "required_context": ["code", "phase", "job_id", "resolved_spec_id", "policy"]},
+    {"code": "staged_source_detail_denied", "required_context": ["code", "phase", "job_id", "resolved_spec_id", "required", "effective"]},
+    {"code": "staged_version_mismatch", "required_context": ["code", "phase", "job_id", "resolved_spec_id", "version_kind", "required", "actual"]},
+    {"code": "staged_cache_identity_invalid", "required_context": ["code", "phase", "job_id", "resolved_spec_id", "cache_component"]},
+    {"code": "staged_cancelled", "required_context": ["code", "phase", "stage_chain", "job_id", "resolved_spec_id"]},
+    {"code": "staged_deadline_exceeded", "required_context": ["code", "phase", "stage_chain", "job_id", "deadline"]},
+    {"code": "staged_budget_exhausted", "required_context": ["code", "phase", "stage_chain", "job_id", "remaining"]},
+    {"code": "staged_cycle", "required_context": ["code", "phase", "stage_chain", "job_id", "active_tuple"]},
+    {"code": "staged_chain_non_decreasing", "required_context": ["code", "phase", "stage_chain", "job_id", "provenance", "active_provenance"]},
+    {"code": "staged_depth_exceeded", "required_context": ["code", "phase", "stage_chain", "job_id", "depth", "maximum"]},
+    {"code": "staged_call_limit_exceeded", "required_context": ["code", "phase", "stage_chain", "job_id", "calls", "maximum"]},
+    {"code": "staged_child_failed", "required_context": ["code", "phase", "stage_chain", "job_id", "parent_ast_path", "node_kind", "payload_kind", "parser_spec_id", "resolved_spec_id", "top_rule", "cache_key", "source_provenance", "result_policy", "failure_policy", "child_diagnostic"]},
+    {"code": "staged_stitch_target_missing", "required_context": ["code", "phase", "stage_chain", "job_id", "parent_ast_path", "into"]},
+    {"code": "staged_stitch_target_collision", "required_context": ["code", "phase", "stage_chain", "job_id", "parent_ast_path", "into"]},
+    {"code": "staged_append_target_invalid", "required_context": ["code", "phase", "stage_chain", "job_id", "parent_ast_path", "into"]},
+    {"code": "staged_marker_mismatch", "required_context": ["code", "phase", "stage_chain", "job_id", "parent_ast_path", "actual_marker"]},
+    {"code": "staged_result_not_detached", "required_context": ["code", "phase", "stage_chain", "job_id", "field"]},
+    {"code": "staged_result_node_limit_exceeded", "required_context": ["code", "phase", "stage_chain", "job_id", "nodes", "maximum"]},
+    {"code": "staged_transaction_forbidden", "required_context": ["code", "phase", "origin", "effect"]},
+    {"code": "staged_diagnostic_truncated", "required_context": ["code", "phase", "stage_chain", "job_id", "maximum_bytes"]}
+  ],
+  "rollout": [
+    {"order": 1, "leg": "neutral", "owner": "FUTURE-PARITY-BACKLOG.14.7.2", "status": "complete", "paths": ["capability_conformance/staged_ast_enrichment_contract.json", "tools/check_staged_ast_enrichment_contract.py"]},
+    {"order": 2, "leg": "perl", "owner": "FUTURE-PARITY-BACKLOG.14.7.3", "status": "pending", "paths": ["t/staged_ast_enrichment_perl_contract.t"]},
+    {"order": 3, "leg": "rust", "owner": "FUTURE-PARITY-BACKLOG.14.7.4", "status": "pending", "paths": ["rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs"]},
+    {"order": 4, "leg": "dart", "owner": "FUTURE-PARITY-BACKLOG.14.7.5", "status": "pending", "paths": ["dart/test/staged_ast_enrichment_contract_test.dart"]},
+    {"order": 5, "leg": "julia", "owner": "FUTURE-PARITY-BACKLOG.14.7.6", "status": "pending", "paths": ["julia/test/staged_ast_enrichment_contract_test.jl"]},
+    {"order": 6, "leg": "puc_lua", "owner": "FUTURE-PARITY-BACKLOG.14.7.7", "status": "pending", "paths": ["lua/test/staged_ast_enrichment_contract_test.lua"]},
+    {"order": 7, "leg": "luajit", "owner": "FUTURE-PARITY-BACKLOG.14.7.7", "status": "pending", "paths": ["lua/test/staged_ast_enrichment_contract_test.lua"]},
+    {"order": 8, "leg": "recurring", "owner": "FUTURE-PARITY-BACKLOG.14.7.8", "status": "pending", "paths": ["tools/check_staged_ast_enrichment_six_runtime.sh"]},
+    {"order": 9, "leg": "public_no_drift", "owner": "FUTURE-PARITY-BACKLOG.14.7.9", "status": "pending", "paths": ["docs/linkedspec-book/src/dsl/staged-ast-enrichment.md", "docs/linkedspec-book/src/appendix/backend-handoff.md", "docs/linkedspec-book/src/overview/project-status.md", "capability_conformance/README.md", "TOOLBOX.md", "ROADMAP.md"]}
+  ],
+  "canonical_execution": {
+    "contract_path": "capability_conformance/staged_ast_enrichment_contract.json",
+    "checker_path": "tools/check_staged_ast_enrichment_contract.py",
+    "project_data_runner": "tools/run_python_project_data.sh",
+    "canonical_driver": "tools/run_ci_local.sh",
+    "registration_marker": "checking backend-neutral staged-AST enrichment contract",
+    "invocation": "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py",
+    "storage_policy": "all Python cache, temporary, and process data stays under repository-derived project storage",
+    "tracked_required": true
+  },
+  "ownership": [
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.2", "responsibility": "neutral_contract"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.3", "responsibility": "perl_parent"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.4", "responsibility": "rust_parent"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.5", "responsibility": "dart_parent"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.6", "responsibility": "julia_parent"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.7", "responsibility": "lua_parent"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.3.0", "responsibility": "perl_dormant_red"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.3.1", "responsibility": "perl_annotation_and_provenance"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.3.2", "responsibility": "perl_resolution_cache_and_policies"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.3.3", "responsibility": "perl_recursive_queue_bounds_diagnostics"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.3.4", "responsibility": "perl_carriers_and_admission"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.4.0", "responsibility": "rust_dormant_red"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.4.1", "responsibility": "rust_annotation_and_provenance"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.4.2", "responsibility": "rust_resolution_cache_and_policies"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.4.3", "responsibility": "rust_recursive_queue_bounds_diagnostics"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.4.4", "responsibility": "rust_carriers_and_admission"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.5.0", "responsibility": "dart_dormant_red"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.5.1", "responsibility": "dart_annotation_and_provenance"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.5.2", "responsibility": "dart_resolution_cache_and_policies"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.5.3", "responsibility": "dart_recursive_queue_bounds_diagnostics"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.5.4", "responsibility": "dart_carriers_and_admission"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.6.0", "responsibility": "julia_dormant_red"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.6.1", "responsibility": "julia_annotation_and_provenance"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.6.2", "responsibility": "julia_resolution_cache_and_policies"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.6.3", "responsibility": "julia_recursive_queue_bounds_diagnostics"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.6.4", "responsibility": "julia_carriers_and_admission"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.7.0", "responsibility": "lua_dormant_red"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.7.1", "responsibility": "lua_annotation_and_provenance"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.7.2", "responsibility": "lua_resolution_cache_and_policies"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.7.3", "responsibility": "lua_recursive_queue_bounds_diagnostics"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.7.4", "responsibility": "lua_carriers_and_admission"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.7.5", "responsibility": "lua_dual_abi_recomposition"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.8", "responsibility": "six_runtime_recurrence"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.9", "responsibility": "public_authoring_and_no_drift"},
+    {"owner": "FUTURE-PARITY-BACKLOG.14.7.10", "responsibility": "independent_recomposition"}
+  ],
+  "mutation_ids": [
+    "format",
+    "contract_id",
+    "task_owner",
+    "status",
+    "topology_extra",
+    "counts",
+    "authored_example",
+    "authored_node",
+    "authored_sidecar",
+    "authored_effect",
+    "authored_timing",
+    "authored_options",
+    "policy_authority",
+    "policy_resolution",
+    "policy_loading",
+    "policy_provenance",
+    "policy_job_id",
+    "policy_queue",
+    "policy_cache",
+    "policy_state",
+    "policy_capabilities",
+    "policy_cycles",
+    "policy_bounds",
+    "policy_result",
+    "policy_failure",
+    "policy_detachment",
+    "policy_transactions",
+    "policy_compatibility",
+    "result_policy",
+    "failure_policy",
+    "source_length",
+    "provenance_result",
+    "provenance_acceptance",
+    "job_id",
+    "registry_immutable",
+    "registry_prepared",
+    "registry_filesystem",
+    "registry_entry_shape",
+    "registry_compiled",
+    "registry_content",
+    "registry_graph",
+    "registry_top",
+    "registry_version",
+    "resolution_result",
+    "resolution_diagnostic",
+    "authority_result",
+    "cache_relation",
+    "queue_order",
+    "isolation_result",
+    "stitch_result",
+    "failure_result",
+    "chain_result",
+    "detachment_result",
+    "compatibility_status",
+    "compatibility_parser",
+    "compatibility_policy",
+    "compatibility_upgrade",
+    "carrier_kind",
+    "consumer_path",
+    "runtime_route",
+    "outward_path",
+    "outward_token",
+    "diagnostic_code",
+    "diagnostic_context",
+    "rollout_neutral",
+    "rollout_backend",
+    "rollout_public",
+    "canonical_contract",
+    "canonical_checker",
+    "canonical_runner",
+    "canonical_invocation",
+    "ownership"
+  ]
+}

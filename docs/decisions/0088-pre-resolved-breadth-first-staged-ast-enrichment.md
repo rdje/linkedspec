@@ -1,0 +1,155 @@
+# ADR 0088: General staged-AST enrichment uses pre-resolved immutable authority and breadth-first typed jobs
+
+- Date: 2026-08-25
+- Status: accepted architecture; executable neutral authority complete under `FUTURE-PARITY-BACKLOG.14.7.2`;
+  backend behavior, recurrence, and public authoring remain pending
+- Tags: architecture, staged-parsing, parse-job, source-location, registry, queue, policies, diagnostics, portability
+
+## Context
+
+ADRs `0012`, `0014`, `0015`, and `0016` accept language-neutral staged parsing, the future
+`parse_job(text_expr, options)` marker/sidecar, deterministic registry dispatch, and portable artifacts. ADR `0056`
+later makes source identity, Unicode-scalar direct spans, and ordered derived provenance mandatory. ADR `0080`
+proves that parser composition must use caller-pre-registered already-compiled authority rather than turning an
+authored parser id or span into path, loading, compilation, or policy authority.
+
+The shipped function-body prototype is intentionally narrower. It executes one queue depth through the built-in
+`actionir-body.spec` / `action_block` adapter, transports copied text with a legacy numeric span, and applies only
+function-specific `replace_field` / `body_ast` / `fail`. It does not define the portable general scheduler. The
+general contract therefore needs executable authority before any backend selects syntax, data shape, lookup,
+stitch, recursion, carrier, or diagnostic behavior independently.
+
+## Decision
+
+### 1. `parse_job(...)` constructs an inert neutral marker and sidecar
+
+The future authored form is `parse_job(text_expr, hash(...))`. It lowers to dedicated neutral marker kind
+`STAGED_PARSE_JOB_MARKER` and scheduler-owned sidecar kind `staged_parse_job_v2`, with effect
+`staged_parse_job_declaration`. It does not resolve, load, compile, or execute a parser during stage-N authored
+execution. The scheduler begins only after the complete stage-N AST returns.
+
+Required authored options are `node_kind`, `payload_kind`, `spec`, `result_policy`, and `on_error`. Optional
+options are `top`, `into`, and `required_capabilities`. The sidecar adds declaring-spec identity, parent AST path,
+exact materialized text, typed provenance, normalized selected top rule, deterministic job id, and scheduler state.
+Unknown options and invalid policy/target combinations fail closed.
+
+### 2. Direct and derived text use ADR `0056` provenance
+
+A direct payload carries one same-source half-open Unicode-scalar span. Derived text carries a nonempty ordered
+list of direct spans under `concatenate_in_order`; it never claims a synthetic contiguous span. Text is
+materialized from caller-authorized sources. Marker, sidecar, and serialized carriers contain no source authority,
+path, match object, or backend reference.
+
+V2 job ids are `parse_job:v2:sha256:<digest>`. The digest covers canonical UTF-8 JSON containing contract version,
+declaring spec identity, parent path, node/payload kinds, authored parser identity, selected top rule, and complete
+typed provenance. Default top-rule selection occurs before id construction.
+
+### 3. All discovery and compilation authority is prepared before authored execution
+
+The caller freezes imported aliases, declaring-spec-relative candidates, configured search-root candidates in
+declared order, explicit provider candidates in declared order, and immutable already-compiled entries before
+authored execution begins. All filesystem/provider discovery, ambiguity detection, loading, and compilation occur
+there. The scheduler's later `resolve`, `load`, and `compile` phases are pure validation/selection over that frozen
+snapshot and cache; they perform no path read, provider call, import enumeration, or compilation.
+
+Selection priority is alias, declaring-spec-relative, ordered search root, then ordered provider. Missing identity,
+multiple candidates at one priority, and an alias-relative collision are hard diagnostics. Authored text, parser
+id, provenance, marker, and sidecar grant no registry mutation or ambient authority.
+
+Each immutable entry contains normalized identity, opaque already-compiled authority, content digest, import-graph
+fingerprint, default/allowed top rules, spec/helper/staged contract versions, capabilities, policy modes, and
+resource/source-detail ceilings. Cache identity covers those digests and versions, selected top rule, and the
+sorted effective backend capability set.
+
+### 4. Scheduling is breadth-first and deterministic
+
+The scheduler validates and resolves every job in a completed stage before executing any of them. It processes
+jobs by stage depth, typed parent AST path, typed provenance order, then job id. Path and provenance components
+order field/source strings by Unicode scalar value and nonnegative indices numerically, so index `2` precedes
+index `10` on every backend rather than depending on serialized lexical order. Each settled result is stitched in
+that order. Markers discovered in a stitched result enter the next depth; no depth-N+1 job runs until every
+depth-N job has settled. This makes recursive enrichment breadth-first and prevents a first child from starving
+or reordering its siblings.
+
+Each job receives a fresh parser runtime context and immutable stage-chain view. Siblings cannot share cursor,
+marks, captures, variables, or parser runtime state. They share only the caller's registry snapshot, cancellation
+identity, absolute deadline, remaining work budget, and total-call counter, all of which may become stricter but
+cannot reset or expand.
+
+### 5. All result and failure policies are exact
+
+The four result policies are:
+
+- `replace_marker`: replace the exact marker with the detached result; `into` is absent.
+- `replace_field`: materialize original text at the marker and replace the existing parent field named by `into`.
+- `sibling_field`: materialize original text at the marker and create the absent sibling field named by `into`.
+- `append_child`: materialize original text at the marker and append to the existing child list named by `into`.
+
+The three failure policies are:
+
+- `fail`: abort the composed parse; no partial parent AST is published.
+- `keep_text`: materialize original text and retain the portable diagnostic in scheduler-owned sidecar state.
+- `diagnostic_node`: apply the selected result target with one detached `staged_parse_diagnostic` node and retain
+  the same sidecar diagnostic.
+
+Target absence, collision, wrong collection kind, stale marker identity, and non-detached child results fail with
+portable stitch diagnostics.
+
+### 6. Recursive work is bounded, decreasing, cancellable, and detached
+
+The active chain records normalized parser identity, top rule, payload digest, and full typed provenance. An exact
+tuple repeat is a cycle. Repeating a parser/top pair on the same provenance lineage is allowed only when every
+child segment is contained and the total Unicode-scalar extent is strictly smaller. Direct and ordered-derived
+payloads use the same rule.
+
+Stage depth, total calls, shared remaining steps, result nodes, diagnostic bytes, cancellation, and absolute
+deadline are checked at dispatch entry and child safe points. Neither a new parser identity nor a new depth resets
+them. Results and diagnostic nodes are finite acyclic node-bounded plain data with no parser, registry, source,
+frame, transaction, cancellation, callback, host, path, or other live handle. Declaration/dispatch remains
+forbidden in uncommitted recognition and never supplies parent cursor progress.
+
+### 7. V1 compatibility and carriers remain explicit
+
+The current function-body record remains version 1 and unchanged:
+`actionir-body.spec` / `builtin:actionir-body.spec` / `action_block` /
+`replace_field` / `body_ast` / `fail`, with copied exact text and legacy offset/line span. An explicit adapter may
+consume it. `parse_job(...)` v2 never silently emits or upgrades it.
+
+Native, normalized-reconstructed, generated-plan, and independently loaded emitted carriers must preserve only
+the logical marker/sidecar, provenance, job identity inputs, and cache inputs. Every execution receives fresh
+caller-supplied authority. No carrier serializes callbacks, compiled parsers, registry/source authority,
+cancellation/deadline/budget state, mutable queues, or host handles.
+
+### 8. One executable neutral artifact governs rollout and ownership
+
+`capability_conformance/staged_ast_enrichment_contract.json` and independent checker
+`tools/check_staged_ast_enrichment_contract.py` govern the selected v1 contract. The current neutral boundary is
+4 registry entries; 2 sources; 8 provenance, 3 deterministic-id, 8 resolution, 6 authority, 10 cache, 4 queue,
+3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; 5 future backend
+consumers over 6 runtime routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 exact owners; and
+72 reason-checked mutations.
+
+Only neutral rollout is complete. Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, six-runtime recurrence, and public
+authoring/no-drift remain pending under `.14.7.3-.9`; `.14.7.10` owns independent recomposition. The checker is an
+always-on canonical-CI input. It guards ten facades/schema/semantic/MCP/CLI/README paths against premature public
+exposure and requires all five planned backend consumer files to remain absent until their RED owners activate.
+
+## Consequences
+
+- Backend leaves consume one executable oracle rather than using an earlier backend as semantic authority.
+- Pre-registration preserves project-data locality and prevents authored path or provider access.
+- Breadth-first ordering, fresh sibling contexts, strict provenance decrease, and shared resource authority make
+  recursive staged work deterministic and bounded.
+- Derived text and direct spans share the typed source algebra without reusing progressive `dispatch_span(...)`
+  syntax or synchronous parent-parser state.
+- This neutral leaf changes no shipped parser/compiler/runtime behavior, generated format, admission, typed or
+  capability rollout, facade/schema/semantic/MCP/CLI/README surface, or public `parse_job(...)` availability.
+
+## Links
+
+- Owning task: `docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md`
+- Base architecture: ADRs `0012`, `0014`, `0015`, `0016`
+- Typed source and bounded authority: ADRs `0056`, `0080`
+- Neutral artifact/checker: `capability_conformance/staged_ast_enrichment_contract.json`,
+  `tools/check_staged_ast_enrichment_contract.py`
+- Knowledge: `docs/knowledge/general-staged-ast-enrichment-neutral-contract.md`
