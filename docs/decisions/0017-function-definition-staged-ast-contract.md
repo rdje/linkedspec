@@ -98,6 +98,15 @@ The staged function-definition prototype must use this neutral AST contract:
 - Existing Perl/Rust bridge shapes are evidence only. They do not define the portable
   AST contract.
 
+## Current implementation note (2026-08-25)
+
+The predicted function-definition shell, `body_payload`, `body_parse_job`, stitched
+`body_ast`, descriptor projection, and runtime behavior are now current on Perl, Rust,
+Dart, Julia, PUC Lua, and LuaJIT. The exact current registry/policy/diagnostic boundary is
+recorded by `FUTURE-PARITY-BACKLOG.14.7.0` and
+`docs/knowledge/general-staged-ast-current-boundary.md`; it must remain compatible while
+the separate general authored/recursive contract lands.
+
 ## Links
 
 - Task tree: `docs/tasks/STAGED-LINKED-PARSING.md`

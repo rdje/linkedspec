@@ -291,6 +291,14 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   `rust_runtime:generated_plan:*` for generated family-plan dispatch and generated direct acode/bcode execution.
   `TRACE-OBSERVABILITY.4.5` closes the parity proof: Rust can claim parity for the documented external capability
   contract, while future variants must pass the mdBook checklist before making the same claim.
+- **Staged-registry boundary audit:** before changing general staged AST behavior, retrieve
+  [[general-staged-ast-current-boundary]] and probe the registry rather than inferring policy semantics from its
+  JSON fields. The five current registries execute only the one-depth
+  `actionir-body.spec` / `action_block` family. Raw `execute*_parse_jobs` carries arbitrary result/failure strings;
+  function-specific dispatch/stitch validators alone make `replace_field` / `body_ast` / `fail` executable.
+  Wrong-top compile diagnostics preserve the job in Julia/shared Lua but use placeholders in Perl/Rust/Dart;
+  `FUTURE-PARITY-BACKLOG.14.7.1` owns that repair. Reverify with the exact five registry paths and focused tests in
+  the fact card before touching general `.14.7.2+` behavior.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.

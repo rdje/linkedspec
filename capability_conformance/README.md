@@ -189,6 +189,12 @@ and recursive staged queues remain `future` under active structural/progressive/
 an open legacy owner does not need one. A legacy record whose owner is completed is legal only when a tracked,
 repository-relative durable authority explicitly retains it.
 
+Behavior-free audit `.14.7.0` leaves that exclusion and the 80/0/0 census unchanged. It separates the current
+one-depth function-body adapter from general authoring, typed provenance, several parser families, policy
+semantics, and recursive queues, then assigns those exact capabilities to `.14.7.1-.10`. The exclusion remains
+truthful until public authored closeout `.14.7.9`; backend implementation or typed recurrence alone must not remove
+it early.
+
 The checker derives unique task ids and leading status enums from tracked task sources, requires future owners to
 be proposed/pending/active, locks the exact two records and order, and rejects schema/classification/retention/
 status/content/resurrection drift through 24 in-memory mutations. Completed semantic-introspection/MCP and

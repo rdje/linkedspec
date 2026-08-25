@@ -10,6 +10,21 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-25 (`FUTURE-PARITY-BACKLOG.14.7.0` — general staged-AST audit): exact clean activation is progressive-
+  closeout commit `fbcdedb6`; this behavior-free leaf owns retrieval, toolbox-led current-state proof, durable facts,
+  contradiction corrections, and the dependency-complete split only.
+- All five registry sources implement one built-in function-body provider and stable one-depth queue. The raw
+  registry transports declared policy strings; function-specific validators/stitchers alone make
+  `replace_field` / `body_ast` / `fail` executable. No recursive rescan or general typed authority exists.
+- Wrong-top compile failures reveal a real current parity defect. Perl creates a two-field synthetic hash; Rust and
+  Dart use explicit placeholder constructors; Julia and Lua pass the normalized job. `.14.7.1` owns RED plus the
+  bounded three-backend repair before neutral contract `.2`.
+- Detailed owners are frozen through `.14.7.10`: neutral contract, Perl/Rust/Dart/Julia/shared-Lua RED/authority/
+  policy/queue/carrier/admission slices, exact recurrence, public `parse_job(...)` authoring, and independent
+  recomposition. ADR `0056` typed spans and progressive authority principles are dependencies, not duplicate syntax.
+- Direct Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT proofs and every neutral/support ledger pass; durable surfaces and all
+  nine doctrines are aligned. Exact diff is documentation/task/Knowledge only and does not trigger canonical CI.
+
 - 2026-08-25 (`FUTURE-PARITY-BACKLOG.14.6.8` — progressive public no-drift): exact clean activation is recurring-
   proof commit `b7c613be`; this canonical leaf owns the missed behavioral recurring projection, independent public
   no-drift governance, current projections, and parent closure without product or outward behavior.

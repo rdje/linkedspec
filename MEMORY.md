@@ -1,13 +1,13 @@
 # MEMORY
 
-- activation_commit: `b7c613be6ced8827271056950a85b77933733f9f` — exact clean progressive-recurring base for
-  task-tree-first canonical public closeout `FUTURE-PARITY-BACKLOG.14.6.8`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.8 - close progressive public no-drift`; behavioral
-  recurrence/public governance closes at 9/9/116 plus public 6/12/10/60 without an outward API.
-- active_work_unit: none after the intended `.14.6.8` commit; staged AST enrichment `.14.7` is pending.
-- next_action: from the clean `.14.6.8` commit, retrieve and activate `FUTURE-PARITY-BACKLOG.14.7`
-  task-tree-first; audit and split staged AST enrichment before behavior or public claims.
-- in_flight_uncommitted: none after the intended `.14.6.8` commit; no background job remains.
+- activation_commit: `fbcdedb6c79a20f232b5e77ee24a6e0cd57a7111` — exact clean progressive-closeout base for
+  task-tree-first behavior-free staged audit `FUTURE-PARITY-BACKLOG.14.7.0`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.7.0 - audit general staged AST boundary`; current narrow
+  behavior, one diagnostic defect, and dependency-complete general implementation ownership are durable.
+- active_work_unit: none after the intended `.14.7.0` commit; corrective diagnostic leaf `.14.7.1` is pending.
+- next_action: from the clean `.14.7.0` commit, activate `FUTURE-PARITY-BACKLOG.14.7.1` task-tree-first and add
+  cross-backend RED assertions before repairing Perl/Rust/Dart compile-phase job context.
+- in_flight_uncommitted: none after the intended `.14.7.0` commit; no background job remains.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
@@ -46,9 +46,10 @@
 - current_future_direction: progressive neutral `.14.6.1`, Perl `.2`, Rust `.3`, Dart `.4`, Julia `.5.0-.4`,
   shared Lua `.6.0-.4`, typed recurrence `.7`, and public closeout `.8` are complete. Behavioral governance is
   9/9/116, typed is 12/2/170, and public is 6/12/10/60 without outward admission. Staged `.14.7` follows; combined
-  program-wide `.14.8` remains later.
+  program-wide `.14.8` remains later. Staged audit `.14.7.0` is complete: diagnostic `.1`, neutral `.2`, backend
+  parents `.3-.7`, recurrence `.8`, public authored closeout `.9`, and recomposition `.10` are frozen in order.
 - latest_bootstrap_read: 2026-08-25 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
-  review complete; `.14.6.8` binds behavioral recurrence to the committed five-source/six-runtime driver and
-  closes progressive governance at 9/9/116 plus public 6/12/10/60. Consumer changes are snapshot-only; runtime,
-  fixture, generated-format, outward API, and typed 12/2/170 truth remain exact. Commit:
-  `FUTURE-PARITY-BACKLOG.14.6.8 - close progressive public no-drift`; staged `.14.7` is next.
+  review complete. `.14.7.0` proves the current one-depth function-body registry boundary across five backend
+  sources/six runtimes, records inert-versus-implemented policy semantics, assigns Perl/Rust/Dart compile-context
+  loss to `.1`, and freezes the complete `.1-.10` plan without behavior. Commit:
+  `FUTURE-PARITY-BACKLOG.14.7.0 - audit general staged AST boundary`; corrective `.14.7.1` is next.

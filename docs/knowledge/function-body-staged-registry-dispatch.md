@@ -54,5 +54,13 @@ execution has since landed under `DART-BACKEND-PARITY.5.2`; Lua fixed-v1 runtime
 `LUA-BACKEND-PARITY.5.1.2`, variadic/contextual runtime follows through `.5.1.4.2`, and no-drift `.5.1.5` closes
 the Lua staged-function parent.
 
+Audit `FUTURE-PARITY-BACKLOG.14.7.0` additionally proves that the raw registry only
+transports alternate result/failure policy strings; the current function-specific stitch
+path alone implements and enforces `replace_field` / `body_ast` / `fail`. Compile-phase
+wrong-top diagnostics preserve the original job context in Julia and shared Lua, but the
+Perl, Rust, and Dart compile helpers currently substitute placeholder jobs. Corrective
+leaf `.14.7.1` owns that parity defect before the general contract expands.
+
 Related backend facts: [[julia-staged-function-body-registry]],
-[[lua-staged-function-body-registry]], [[lua-fixed-v1-user-function-runtime]].
+[[lua-staged-function-body-registry]], [[lua-fixed-v1-user-function-runtime]], and
+[[general-staged-ast-current-boundary]].

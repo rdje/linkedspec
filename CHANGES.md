@@ -10,6 +10,24 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-25 — FUTURE-PARITY-BACKLOG.14.7.0 — audit general staged AST boundary
+
+- Used descriptor/runtime/registry probes and exact five-backend source/test comparison to prove the current
+  one-depth `body_parse_job` / `actionir-body.spec` / `action_block` path on six runtime routes.
+- Distinguished raw registry metadata transport from executable semantics: only the function-specific integration
+  implements and enforces `replace_field` / `body_ast` / `fail`; alternate policy names remain future behavior.
+- Found and task-owned one current parity defect: wrong-top compile diagnostics keep real job context in
+  Julia/shared Lua but substitute placeholders in Perl/Rust/Dart. Corrective `.14.7.1` precedes feature work.
+- Froze 37 stable children for diagnostic repair, one executable neutral contract, five backend parents with
+  per-slice RED/authority/policy/queue/carrier admissions, recurrence, public authoring, and recomposition. The
+  authoritative task census is 594 under unchanged partition pressure controls.
+- Added dated ADR current notes and synchronized Knowledge, capability guidance, roadmaps, architecture, Toolbox,
+  sole-facing mdBook, task/frontier, bounded continuity, memory, and live status. No product/test/fixture/contract/
+  format/CI/outward behavior changed.
+- Focused registry proofs plus capability 80/0/0, generated 80/0/0, language 250/126, semantic 6/20/128, typed
+  12/2/170, progressive 9/9/116, Knowledge, rendered book, histories, task/index, README/memory, and all nine
+  doctrines pass. Canonical CI is not triggered for this behavior-free ordinary audit.
+
 ## 2026-08-25 — FUTURE-PARITY-BACKLOG.14.6.8 — close progressive public no-drift
 
 - Root-caused a governance mismatch left by `.14.6.7`: its completed five-source/six-runtime driver promoted the

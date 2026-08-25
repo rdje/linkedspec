@@ -80,6 +80,21 @@ Adopt this parser registry and dynamic dispatch contract before implementation:
 - The same `.spec` and parse-job graph must dispatch the same way on Perl5, Raku, Rust,
   Julia, Lua, Dart, Zig, Go, or future backends.
 
+## Current implementation note (2026-08-25)
+
+Clause 10 is the original pre-prototype baseline. The shipped five-backend/six-runtime
+function-body path now implements `resolve`, `load`, `compile`, and `execute`; one fixed
+built-in parser identity and cache fingerprint; stable one-depth queue ordering; and
+function-specific `replace_field` / `body_ast` / `fail` stitching. It does not yet
+implement the general resolution order, several parser families, alternate policy
+semantics, recursive enqueue, active-chain cycles, or bounded stage/call resources.
+
+Audit `FUTURE-PARITY-BACKLOG.14.7.0` also finds a current clause-9 diagnostic defect:
+wrong-top compile failures retain the real job context in Julia and shared Lua, while
+Perl, Rust, and Dart synthesize placeholder jobs and lose id/path/payload/span/failure
+fields. Corrective `.14.7.1` owns that parity repair before `.14.7.2` encodes the general
+executable contract.
+
 ## Links
 
 - Task tree: `docs/tasks/STAGED-LINKED-PARSING.md`

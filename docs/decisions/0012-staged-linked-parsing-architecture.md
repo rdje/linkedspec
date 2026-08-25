@@ -62,6 +62,16 @@ Adopt **staged linked parsing** as a core LinkedSpec architecture:
   must report the parent node, payload kind, selected next spec/top rule, and original
   source span.
 
+## Current implementation note (2026-08-25)
+
+The first narrow function-body parse-job family is current on Perl, Rust, Dart, Julia,
+PUC Lua, and LuaJIT. It preserves exact body text plus its legacy numeric span, dispatches
+one stable queue depth through the built-in `actionir-body.spec` / `action_block` adapter,
+and stitches `body_ast`. General authored `parse_job(...)`, typed direct/derived source
+provenance, several parser families, complete policy semantics, and recursive queues
+remain owned by `FUTURE-PARITY-BACKLOG.14.7`; the prototype is evidence for this decision,
+not completion of the whole architecture.
+
 ## Links
 
 - Task tree: `docs/tasks/STAGED-LINKED-PARSING.md`

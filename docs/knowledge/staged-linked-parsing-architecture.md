@@ -44,9 +44,10 @@ A parse job should carry at least:
 - result insertion policy
 - failure/diagnostic policy
 
-The accepted design-only authoring marker is `parse_job(text_expr, options)`. It creates
-a marker value in the AST and a backend-neutral metadata sidecar. Current shipped parsers
-do not yet accept or execute that helper.
+The accepted general authoring marker is `parse_job(text_expr, options)`. It creates a
+marker value in the AST and a backend-neutral metadata sidecar. Current shipped parsers
+do not accept that authored helper, although they do execute the spec-returned narrow
+function-body `body_parse_job` sidecar through a built-in provider.
 
 The accepted dispatch design resolves parse jobs through a neutral registry, orders them
 by parent AST path, source span, and job id, caches compiled parsers by content and
@@ -78,4 +79,6 @@ level and refines them through later spec parsers. ADR 0012's parse graph remain
 neutral umbrella, but the current implementation proves only the narrow function-body
 `body_parse_job` family; arbitrary in-parse composition, multiple public parser families,
 and recursive queues remain future work under parent `FUTURE-PARITY-BACKLOG.14`, specifically
-progressive in-parse composition `.14.6` and staged AST enrichment `.14.7`.
+progressive in-parse composition `.14.6` and staged AST enrichment `.14.7`. The current
+narrow/general boundary and its compile-diagnostic prerequisite are recorded in
+[[general-staged-ast-current-boundary]].

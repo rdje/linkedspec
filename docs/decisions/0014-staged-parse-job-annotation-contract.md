@@ -85,6 +85,21 @@ Adopt this design contract before implementation:
 - Future implementation must add source-span plumbing for group/text helper results
   before parse jobs can be signoff-level.
 
+## Current implementation note (2026-08-25)
+
+Clause 9 remains true for the general authored `parse_job(...)` helper. The shipped
+function-definition grammar does, however, return one narrow neutral `body_parse_job`
+sidecar that all five backend sources/six runtimes execute. That v1 record carries copied
+exact body text plus legacy offset/line span and is restricted to
+`actionir-body.spec` / `action_block` / `replace_field` / `body_ast` / `fail`.
+
+ADR `0056` subsequently requires direct source spans to carry source identity and
+Unicode-scalar coordinates, and derived text to carry ordered provenance. General
+implementation under `FUTURE-PARITY-BACKLOG.14.7` must ratify the compatibility/version
+boundary between that typed authority and the existing v1 function sidecar before public
+authoring. Merely transporting another policy string in a raw registry record does not
+count as implementing its stitch or failure semantics.
+
 ## Links
 
 - Task tree: `docs/tasks/STAGED-LINKED-PARSING.md`

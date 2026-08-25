@@ -17,7 +17,10 @@ historical RED, authority, and four carriers; `.4.3` admits the unchanged seven-
 canonically. Typed recurrence `.7` binds five immutable backend source groups to six ordered runtime routes,
 promotes only typed `progressive_span_dispatch`, and makes typed governance 12/2/170. Public `.8` corrects the
 behavioral recurring projection and closes no-drift without an outward API. Staged `.14.7` follows; combined
-`.14.8` retains its later owner. Capacity `.0` freezes,
+`.14.8` retains its later owner. Behavior-free staged audit `.14.7.0` is now active from clean `fbcdedb6`: the
+current one-depth function-body adapter is separated from general authored/typed-provenance/multi-family/recursive
+behavior, compile-diagnostic context parity repair `.1` is first, and neutral `.2`, backend parents `.3-.7`,
+recurrence `.8`, public authored closeout `.9`, and independent recomposition `.10` are dependency-frozen. Capacity `.0` freezes,
 canonical `.1` implements, and focused `.2` independently
 recomposes one equally bounded `.14.6.5-.14.8` semantic task member without changing stable IDs, pressure ceilings,
 or backend behavior. Capacity is composition-closed. Julia `.14.6.5.0` freezes an exact historical 55-pass/one-
@@ -358,7 +361,10 @@ This file exists to make the active plan easier to follow without replacing the 
   dispatch. Existing helpers project that core; gap syntax/lifecycle stays separately
   owned by ADR `0045`. `FUTURE-PARITY-BACKLOG.14.1-.14.8` owns complete contract,
   implementation, admission, documentation, and proof beyond the current narrow
-  function-body prototype.
+  function-body prototype. Audit `.14.7.0` proves that the raw registry transports
+  policy strings while function-specific stitching alone implements
+  `replace_field` / `body_ast` / `fail`; it assigns the Perl/Rust/Dart compile-context
+  placeholder defect to `.14.7.1` before general behavior.
 - Documentation is a product contract:
   - optimize for readability,
   - remove ambiguity directly,

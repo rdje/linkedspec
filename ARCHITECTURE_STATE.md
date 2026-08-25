@@ -1,5 +1,28 @@
 # ARCHITECTURE STATE
 
+## General staged-AST enrichment is split from the current function-body prototype
+
+Behavior-free audit `FUTURE-PARITY-BACKLOG.14.7.0` starts from exact clean progressive-closeout commit
+`fbcdedb6`. Toolbox-first descriptor, runtime, registry, source, and focused-test probes establish one precise
+current boundary across five backend sources/six runtime routes. The spec-returned `body_payload` and
+`body_parse_job` are normalized, stable-sorted at one depth, resolved only through the fixed
+`actionir-body.spec` / `action_block` built-in adapter, cached under the fixed digest, parsed, and stitched into
+`body_ast`. Function-specific validation implements only `replace_field` / `body_ast` / `fail`; the raw registry
+merely transports other policy strings.
+
+General authored `parse_job(...)`, typed direct/derived source provenance, several registered parser families,
+deterministic recursive queues, alternate result/failure policies, cycle/depth/call/cancellation/resource guards,
+general generated carriers, recurrence, and public closure remain future behavior. They must reuse ADR `0056`'s
+source algebra and authority-narrowing principles without reusing progressive `dispatch_span` syntax or treating
+an authored parser id as filesystem authority.
+
+The audit also finds one current diagnostic parity defect: wrong-top compile failures keep the original job on
+Julia and shared Lua but replace id/path/payload/span/failure context with placeholders on Perl, Rust, and Dart.
+Corrective `.14.7.1` precedes executable neutral contract `.2`; backend parents `.3-.7`, recurrence `.8`, public
+authoring/closeout `.9`, and independent recomposition `.10` are dependency-frozen behind it. No parser, compiler,
+runtime, test, fixture, generated format, registry behavior, capability census, public/outward surface, or CI
+topology changes in the audit.
+
 ## Typed transaction safety now composes the complete recognition authority
 
 Corrective `FUTURE-PARITY-BACKLOG.14.6.0.1` starts from clean audit atomic 257 `1a6e0b1f`. The typed ledger had

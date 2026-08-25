@@ -6,8 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-25` (shared Lua `.14.6.6.4` independently recomposes all committed dual-ABI owners,
-  closes `.14.6.6` unchanged at 7/9/112, and hands off typed recurring proof `.14.6.7`)
+- Last updated: `2026-08-25` (progressive `.14.6` is closed; behavior-free staged audit `.14.7.0` freezes the
+  diagnostic prerequisite, neutral contract, five backend parents, recurrence, public closeout, and independent
+  recomposition from exact clean `fbcdedb6`)
 - Owner: repo-local workflow
 
 ## Goal

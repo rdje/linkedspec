@@ -239,6 +239,12 @@ order, and stitches the returned `action_block` AST into `body_ast`. General pub
 `parse_job(...)` authoring, filesystem/import resolution, multiple provider search, and
 recursive staged queues remain future work.
 
+The `.14.7.0` audit confirms that this current registry is one-depth metadata dispatch,
+not the general queue: alternate policy strings are transported but not applied, and
+stitched results are not scanned for new jobs. General typed provenance, multiple
+registered families, policy application, recursive bounds, and public authoring remain
+separately task-owned. Compile-phase diagnostic context parity is repaired first.
+
 Prototype tests should prove AST shape, not only behavior. Before the function-body
 prototype changes runtime behavior, the seam audit must predict the returned
 `function_definition` AST shape, and the implementation proof must assert that exact

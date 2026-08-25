@@ -725,6 +725,15 @@ adapter contract digest, `compile` selects top rule `action_block`, and `execute
 the body `action_block` AST stitched into `body_ast`. General provider search roots,
 imports, and recursive staged queues remain future work.
 
+Audit `.14.7.0` sharpens this boundary. Calling the raw registry with another
+`result_policy` or `failure_policy` proves only that the record transports that string;
+the current function-specific validator/stitch path is the owner that implements and
+enforces `replace_field` / `body_ast` / `fail`. The current queue executes one depth and
+does not rescan stitched results. Julia and shared Lua retain the full original job in a
+wrong-top compile diagnostic; Perl, Rust, and Dart currently substitute placeholder
+context, with repair owned before the general contract. Backend implementation must
+consume the neutral `.14.7.2` oracle, not extend these narrow adapters independently.
+
 Progressive dispatch is a separate synchronous path under `FUTURE-PARITY-BACKLOG.14.6`. Audit `.14.6.0` proves
 that none of these registries can invoke a normal loaded spec while a parser is active. The portable design uses
 an immutable host-seeded entry for an already compiled logical parser identity and one contiguous typed source

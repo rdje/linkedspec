@@ -2,25 +2,27 @@
 
 ## Current Activity
 
-- Progressive public closeout `.14.6.8` corrects the completed-driver/pending-recurring mismatch and closes parent
-  `.14.6` at behavioral 9/9/116 plus public 6 documents / 12 stale claims / 10 outward paths / 60 mutations.
-- The exact five-source/six-runtime driver remains neutral, Perl 129, cfg-enabled Rust 1/1, Dart 7, Julia 62,
-  PUC Lua 178, LuaJIT 178, then typed, generated-source, capability 80/0/0, and language 250/126.
-- Only consumer governance snapshots move with the behavioral ledger. Typed governance remains 12/2/170; runtime,
-  fixtures, generated format, facade/schema/semantic/MCP/CLI/README behavior, staged `.14.7`, and combined `.14.8`
-  remain unchanged.
+- Behavior-free staged audit `.14.7.0` separates the current one-depth function-body registry from the general
+  authored/typed-provenance/multi-family/policy/recursive-queue program and freezes 37 exact follow-up owners.
+- It records one current defect: compile rejection preserves job context on Julia/shared Lua but substitutes
+  placeholders on Perl/Rust/Dart. Corrective `.14.7.1` is the next clean frontier.
+- Runtime, tests, fixtures, executable contracts, generated format, CI topology, capability 80/0/0, typed
+  12/2/170, progressive 9/9/116, and every outward surface remain unchanged.
 
 ## Latest Completed Slice
 
-- Progressive public closeout `.14.6.8` binds behavioral recurrence to the committed driver, mutation-locks six
-  current projections, records the missed-governance root cause, and closes `.14.6` without an outward API.
+- Staged audit `.14.7.0` proves the exact current boundary across all five source backends/six runtimes, corrects
+  stale pre-prototype decision prose with dated current notes, and dependency-splits `.14.7.1-.10` before behavior.
 
 ## Next Action
 
-- From the clean `.14.6.8` commit, retrieve and activate `FUTURE-PARITY-BACKLOG.14.7` task-tree-first; audit and
-  split staged AST enrichment before any implementation or public claim.
+- From the clean `.14.7.0` commit, activate `.14.7.1` task-tree-first, add wrong-top compile-context RED assertions,
+  and repair only Perl/Rust/Dart while proving Julia/shared Lua unchanged.
 
 ## Recent Completions
+
+- `2026-08-25` — `.14.7.0` audits one-depth function-body staged dispatch, assigns the three-backend compile-
+  context defect, freezes 37 detailed implementation owners, and preserves all runtime/public/governance behavior.
 
 - `2026-08-25` — `.14.6.8` corrects the behavioral recurring projection, closes progressive at 9/9/116 plus
   public 6/12/10/60, and preserves every runtime, fixture, outward API, and typed 12/2/170 boundary.
@@ -67,9 +69,6 @@
 
 - `2026-08-18` — capacity `.0` preserves every pressure ceiling and stable ID while freezing one bounded
   `.14.6.5-.14.8` semantic member for canonical implementation and independent recomposition before Julia.
-
-- `2026-08-17` — `.14.6.4.3` moves the unchanged seven-group Dart consumer into ordinary discovery and one exact
-  canonical route, advances only Dart to progressive 4/9/103, and composition-closes `.14.6.4`.
 
 ## History
 

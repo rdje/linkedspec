@@ -809,7 +809,11 @@ admission `.9.1.1.2.5.3` task-tree-first.
      the Dart staged-dispatch API.
      Public `parse_job(...)` authoring, import/provider search roots, multiple
      payload parser families, recursive staged queues, and cycle diagnostics
-     remain future work. Director clarification `.14.0` now distinguishes active
+     remain future work. Behavior-free audit `.14.7.0` now freezes their dependency
+     plan after proving the exact narrow boundary across all five source backends/six
+     runtimes. It also assigns a current compile-diagnostic context mismatch—Perl,
+     Rust, and Dart use placeholders where Julia/shared Lua retain the real job—to
+     corrective `.14.7.1` before the general executable contract. Director clarification `.14.0` now distinguishes active
      in-parse progressive composition from later returned-AST staged enrichment.
      Director-approved ADR `0056` additionally makes source identity, immutable
      Unicode-scalar positions/spans, bounded effect-safe cursor transactions,

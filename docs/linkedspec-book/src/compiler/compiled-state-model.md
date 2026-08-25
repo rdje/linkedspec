@@ -169,6 +169,12 @@ JSON `action_block` values in `body_ast`. The original spec and its `body_parse_
 `parse_spec_with_staged_user_function_definition_asts(...)` is the composed projection-plus-dispatch convenience
 API. General provider search and recursive staged queues remain future work.
 
+This narrow compiled state does not imply general policy support. The raw registry can
+echo alternate result/failure policy names, but the function registry accepts only
+`replace_field` / `body_ast` / `fail`, and no recursive stage is enqueued. Audit `.14.7.0`
+freezes the compatibility boundary before the general staged contract changes compiled
+or generated carriers.
+
 Julia's runtime now consumes the same compiled registry. Registered calls resolve before ordinary helper fallback;
 arguments evaluate eagerly in caller scope; params bind into fresh scalar, array, and hash stores; and the body runs
 as a cached ActionIR value block. The returned value is the final expression or first local `return(...)` payload.

@@ -1,5 +1,5 @@
 - ID: `FUTURE-PARITY-BACKLOG.14`
-  Status: `active` (2026-08-17; `.14.5` canonical-signoff-complete for atomic 256; `.14.6` is the next pending frontier)
+  Status: `active` (2026-08-25; progressive `.14.6` and behavior-free staged audit `.14.7.0` are signoff-complete; compile-diagnostic parity repair `.14.7.1` is next)
   Goal: Ratify, document, and implementation-audit LinkedSpec's structural linked-rule, typed source-location,
     transactional cursor, lossless segmentation, and progressive/staged parser-composition authoring model.
   Children: `.14.0`, `.14.0.1`, `.14.1`, `.14.2`, `.14.3`, `.14.4`, `.14.5`, `.14.6`, `.14.7`, `.14.8`

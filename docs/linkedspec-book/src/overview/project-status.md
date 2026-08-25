@@ -16,7 +16,9 @@ former oversized future tree is a 379-line live index over eight stable semantic
 part. After Dart progressive closeout, ADRs `0084` and `0085` add one equally bounded `.14.6.5-.14.8` member at
 the exact pending boundary. The schema-v1 index has ten records; capacity preserved the then-current 547 IDs,
 and Julia's five committed `.14.6.5.0-.4` children brought the total to 552 without changing any stable ID or
-aggregate/member ceiling. Lua's five owned `.14.6.6.0-.4` children now bring the current total to 557.
+aggregate/member ceiling. Lua's five owned `.14.6.6.0-.4` children brought that total to 557. Staged audit
+`.14.7.0` freezes 37 further diagnostic/neutral/backend/recurrence/public/recomposition owners, making the current
+authoritative partition-checker total 594 without changing a partition or pressure ceiling.
 Independent recomposition proves exact committed Julia agreement.
 Julia `.14.6.5` is split into historical dormant RED, private authority/core, dormant carriers, canonical
 admission, and independent recomposition leaves. `.14.6.5.1` adds the unexported immutable authority plus a
@@ -42,7 +44,7 @@ engineering-notes collection/manifest capacity to 17 files / 16 lines without we
 This is consumer-aware work. The six live JSON projections and seven executable checkers now use stable decision
 authority ADR `0067`, and the chronology root contains no capability marker authority. Nine executable checkers
 and two contract projections now read their bounded task owners instead of the future monolith. Strict metadata
-preserves all 557 current stable IDs, clean-source coverage, current digests, immutable history, bounded lookup,
+preserves all 594 current stable IDs, clean-source coverage, current digests, immutable history, bounded lookup,
 and 27/27 rejected mutation classes. The changes/notes migration preserves the clean 44,270-line and 21,308-line
 sources in eleven and six immutable segments, respectively. Both roots are capped at 512 lines / 64 KiB, and the
 commit workflow now requires both rollover checks. Closeout independently passes history 34/34 across three
@@ -89,6 +91,13 @@ byte, or code-unit mark and cursor behavior. Exact transaction safety, recursive
 composition, and progressive recurrence are complete.
 
 Typed transaction composition and progressive span dispatch are now current at 12 complete / 2 pending; staged dispatch and combined program-wide no-drift remain pending.
+
+Staged audit `.14.7.0` is behavior-free and now owns the exact handoff. The current five-backend/six-runtime path
+is one stable function-body queue depth through `actionir-body.spec` / `action_block`; function-specific stitching
+implements only `replace_field` / `body_ast` / `fail`. General authored parse jobs, typed provenance, several parser
+families, recursive scheduling, alternate policies, and public closeout remain planned. A current wrong-top
+compile diagnostic loses original job context on Perl, Rust, and Dart but not Julia/shared Lua; corrective `.14.7.1`
+precedes the neutral executable contract and backend admissions.
 
 Rust's exact four-test consumer now runs under ordinary Cargo discovery and as a required canonical-CI leg. It
 proves the immutable value core and projection boundary across native, reconstructed, and generated-plan execution;
