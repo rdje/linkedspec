@@ -174,6 +174,45 @@ void main() {
     );
   });
 
+  test('preserves normalized job context in compile diagnostics', () {
+    final wrongTop = _job(
+      index: 0,
+      name: 'wrong-top',
+      bodySource: 'return("a")',
+      start: 10,
+      end: 21,
+      line: 1,
+      topRule: 'missing_top',
+    );
+
+    late StagedParserRegistryException error;
+    try {
+      executeStagedParseJobs([wrongTop]);
+      fail('wrong staged top rule should fail');
+    } on StagedParserRegistryException catch (caught) {
+      error = caught;
+    }
+
+    expect(error.message, contains('phase=compile'));
+    expect(
+      error.message,
+      contains(
+        'job_id=parse_job:function_body:functions.0.body_source:'
+        'actionir-body.spec:action_block:10-21',
+      ),
+    );
+    expect(error.message, contains('parent_ast_path=functions.0.body_source'));
+    expect(error.message, contains('parser_spec_id=actionir-body.spec'));
+    expect(
+      error.message,
+      contains('resolved_spec_id=builtin:actionir-body.spec'),
+    );
+    expect(error.message, contains('top_rule=missing_top'));
+    expect(error.message, contains('payload_kind=function_body'));
+    expect(error.message, contains('source_span=10-21'));
+    expect(error.message, contains('failure_policy=fail'));
+  });
+
   test('diagnoses function-body stitching contract drift', () {
     final function = _function(
       index: 0,
@@ -260,6 +299,7 @@ StagedParseJob _job({
   required int end,
   required int line,
   String parserSpecId = actionIrBodySpecId,
+  String topRule = actionIrBodyTopRule,
   String resultField = 'body_ast',
 }) {
   return StagedParseJob(
@@ -281,7 +321,7 @@ StagedParseJob _job({
       lineEnd: line,
     ),
     parserSpecId: parserSpecId,
-    topRule: actionIrBodyTopRule,
+    topRule: topRule,
     resultPolicy: 'replace_field',
     resultField: resultField,
     failurePolicy: 'fail',

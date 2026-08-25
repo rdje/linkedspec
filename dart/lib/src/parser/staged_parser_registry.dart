@@ -144,7 +144,7 @@ List<StagedParseResult> executeStagedParseJobs(
           'job_id=${job.jobId} source_kind=${loaded.sourceKind}',
           LinkedSpecTraceLevel.medium,
         );
-        final compiled = _compile(loaded, job.topRule);
+        final compiled = _compile(loaded, job);
         trace?.traceDecision(
           'dart_staged:job:compile',
           true,
@@ -446,13 +446,13 @@ _LoadedParser _load(_ResolvedParser resolved) {
   );
 }
 
-_CompiledParser _compile(_LoadedParser loaded, String topRule) {
-  final placeholder = _placeholderJob(loaded.parserSpecId, topRule);
+_CompiledParser _compile(_LoadedParser loaded, StagedParseJob job) {
+  final topRule = job.topRule;
   if (loaded.resolvedSpecId != actionIrBodyResolvedSpecId) {
     throw StagedParserRegistryException(
       _dispatchError(
         phase: 'compile',
-        job: placeholder,
+        job: job,
         resolvedSpecId: loaded.resolvedSpecId,
         detail: "unsupported resolved spec id '${loaded.resolvedSpecId}'",
       ),
@@ -462,7 +462,7 @@ _CompiledParser _compile(_LoadedParser loaded, String topRule) {
     throw StagedParserRegistryException(
       _dispatchError(
         phase: 'compile',
-        job: placeholder,
+        job: job,
         resolvedSpecId: loaded.resolvedSpecId,
         detail: "unsupported top rule '$topRule'",
       ),
@@ -736,27 +736,6 @@ bool _callableSignaturesEqual(CallableSignature left, CallableSignature right) {
       left.restParam == right.restParam &&
       left.minArity == right.minArity &&
       left.maxArity == right.maxArity;
-}
-
-StagedParseJob _placeholderJob(String parserSpecId, String topRule) {
-  return StagedParseJob(
-    jobId: '<unknown>',
-    parentAstPath: const [],
-    nodeKind: '<unknown>',
-    payloadKind: '<unknown>',
-    text: '',
-    sourceSpan: const StagedSourceSpan(
-      start: 0,
-      end: 0,
-      lineStart: 1,
-      lineEnd: 1,
-    ),
-    parserSpecId: parserSpecId,
-    topRule: topRule,
-    resultPolicy: '<unknown>',
-    resultField: '<unknown>',
-    failurePolicy: '<unknown>',
-  );
 }
 
 String _dispatchError({

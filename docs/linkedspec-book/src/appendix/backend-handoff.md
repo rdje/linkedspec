@@ -729,10 +729,11 @@ Audit `.14.7.0` sharpens this boundary. Calling the raw registry with another
 `result_policy` or `failure_policy` proves only that the record transports that string;
 the current function-specific validator/stitch path is the owner that implements and
 enforces `replace_field` / `body_ast` / `fail`. The current queue executes one depth and
-does not rescan stitched results. Julia and shared Lua retain the full original job in a
-wrong-top compile diagnostic; Perl, Rust, and Dart currently substitute placeholder
-context, with repair owned before the general contract. Backend implementation must
-consume the neutral `.14.7.2` oracle, not extend these narrow adapters independently.
+does not rescan stitched results. Corrective `.14.7.1` makes every wrong-top compile
+diagnostic retain the original job id/path/parser/top/payload/span/failure context plus
+the resolved built-in identity across Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT.
+Backend implementation must consume the neutral `.14.7.2` oracle, not extend these
+narrow adapters independently.
 
 Progressive dispatch is a separate synchronous path under `FUTURE-PARITY-BACKLOG.14.6`. Audit `.14.6.0` proves
 that none of these registries can invoke a normal loaded spec while a parser is active. The portable design uses

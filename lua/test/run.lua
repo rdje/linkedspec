@@ -3418,6 +3418,41 @@ test("staged parser registry orders dispatches stitches and diagnoses sidecar dr
   assert_contains(unsupported_error.message, "phase=resolve", "unsupported staged phase")
   assert_contains(unsupported_error.message, "parser_spec_id=missing.spec", "unsupported staged identity")
 
+  local wrong_top_json = ast.to_json(earlier.body_parse_job)
+  wrong_top_json.top_rule = "missing_top"
+  local wrong_top_job = ast.from_json("StagedParseJob", wrong_top_json)
+  local wrong_top_ok, wrong_top_error = pcall(
+    linkedspec.execute_staged_parse_job,
+    wrong_top_job
+  )
+  assert_equal(wrong_top_ok, false, "unsupported staged top rule rejects")
+  assert_equal(
+    linkedspec.is_staged_parser_registry_error(wrong_top_error),
+    true,
+    "wrong-top staged error type"
+  )
+  assert_contains(wrong_top_error.message, "phase=compile", "wrong-top staged phase")
+  assert_contains(
+    wrong_top_error.message,
+    "job_id=" .. earlier.body_parse_job.job_id,
+    "wrong-top staged job id"
+  )
+  assert_contains(
+    wrong_top_error.message,
+    "parent_ast_path=functions.0.body_source",
+    "wrong-top staged parent path"
+  )
+  assert_contains(wrong_top_error.message, "parser_spec_id=actionir-body.spec", "wrong-top staged parser")
+  assert_contains(
+    wrong_top_error.message,
+    "resolved_spec_id=builtin:actionir-body.spec",
+    "wrong-top staged resolution"
+  )
+  assert_contains(wrong_top_error.message, "top_rule=missing_top", "wrong-top staged top rule")
+  assert_contains(wrong_top_error.message, "payload_kind=function_body", "wrong-top staged payload")
+  assert_contains(wrong_top_error.message, "source_span=0-11", "wrong-top staged source span")
+  assert_contains(wrong_top_error.message, "failure_policy=fail", "wrong-top staged policy")
+
   local drifted = registry_function("drifted", {}, 0, nil, 'return("x")')
   drifted.body_parse_job.result_field = "wrong_field"
   local drift_ok, drift_error = pcall(function()

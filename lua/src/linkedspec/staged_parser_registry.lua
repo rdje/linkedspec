@@ -149,6 +149,7 @@ local function dispatch_error(phase, job, detail, resolved_spec_id)
     " parent_ast_path=" .. table.concat(job.parent_ast_path, ".") ..
     " parser_spec_id=" .. job.parser_spec_id .. resolved ..
     " top_rule=" .. job.top_rule ..
+    " payload_kind=" .. job.payload_kind ..
     " source_span=" .. job.source_span.start .. "-" .. job.source_span["end"] ..
     " failure_policy=" .. job.failure_policy ..
     " detail=" .. detail

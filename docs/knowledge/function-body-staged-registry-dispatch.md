@@ -56,10 +56,11 @@ the Lua staged-function parent.
 
 Audit `FUTURE-PARITY-BACKLOG.14.7.0` additionally proves that the raw registry only
 transports alternate result/failure policy strings; the current function-specific stitch
-path alone implements and enforces `replace_field` / `body_ast` / `fail`. Compile-phase
-wrong-top diagnostics preserve the original job context in Julia and shared Lua, but the
-Perl, Rust, and Dart compile helpers currently substitute placeholder jobs. Corrective
-leaf `.14.7.1` owns that parity defect before the general contract expands.
+path alone implements and enforces `replace_field` / `body_ast` / `fail`. Corrective
+leaf `.14.7.1` now locks wrong-top compile diagnostics across all five source backends and
+both Lua ABIs: each preserves the original job id/path/parser/top/payload/span/failure
+context and the resolved built-in identity. The repair changes no success, policy, queue,
+generated-format, or public behavior before the general contract expands.
 
 Related backend facts: [[julia-staged-function-body-registry]],
 [[lua-staged-function-body-registry]], [[lua-fixed-v1-user-function-runtime]], and

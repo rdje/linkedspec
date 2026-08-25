@@ -1488,6 +1488,14 @@ end
     end
     @test wrong_top_error isa StagedParserRegistryException
     @test occursin("phase=compile", wrong_top_error.message)
+    @test occursin("job_id=$(earlier.body_parse_job.job_id)", wrong_top_error.message)
+    @test occursin("parent_ast_path=functions.0.body_source", wrong_top_error.message)
+    @test occursin("parser_spec_id=actionir-body.spec", wrong_top_error.message)
+    @test occursin("resolved_spec_id=builtin:actionir-body.spec", wrong_top_error.message)
+    @test occursin("top_rule=missing_top", wrong_top_error.message)
+    @test occursin("payload_kind=function_body", wrong_top_error.message)
+    @test occursin("source_span=0-1", wrong_top_error.message)
+    @test occursin("failure_policy=fail", wrong_top_error.message)
 
     wrong_field = _staged_job_with(earlier.body_parse_job; result_field = "wrong_field")
     drifted = _function_with_parse_job(earlier, wrong_field)

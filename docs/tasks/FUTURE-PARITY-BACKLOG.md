@@ -6,9 +6,9 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-25` (progressive `.14.6` is closed; behavior-free staged audit `.14.7.0` freezes the
-  diagnostic prerequisite, neutral contract, five backend parents, recurrence, public closeout, and independent
-  recomposition from exact clean `fbcdedb6`)
+- Last updated: `2026-08-25` (progressive `.14.6` is closed; staged audit `.14.7.0` is committed and diagnostic
+  prerequisite `.14.7.1` is focused-signoff-complete from exact clean `e50965b0`; neutral contract `.14.7.2`
+  follows after the atomic diagnostic commit)
 - Owner: repo-local workflow
 
 ## Goal

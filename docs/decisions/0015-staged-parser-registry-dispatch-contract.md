@@ -89,11 +89,13 @@ function-specific `replace_field` / `body_ast` / `fail` stitching. It does not y
 implement the general resolution order, several parser families, alternate policy
 semantics, recursive enqueue, active-chain cycles, or bounded stage/call resources.
 
-Audit `FUTURE-PARITY-BACKLOG.14.7.0` also finds a current clause-9 diagnostic defect:
-wrong-top compile failures retain the real job context in Julia and shared Lua, while
-Perl, Rust, and Dart synthesize placeholder jobs and lose id/path/payload/span/failure
-fields. Corrective `.14.7.1` owns that parity repair before `.14.7.2` encodes the general
-executable contract.
+Audit `FUTURE-PARITY-BACKLOG.14.7.0` found a clause-9 diagnostic defect, now repaired by
+`FUTURE-PARITY-BACKLOG.14.7.1`: Perl, Rust, and Dart pass the normalized job through the
+compile boundary instead of synthesizing placeholders, while Julia and shared Lua add
+the previously omitted payload kind. A wrong-top compile failure therefore retains the
+original id/path/parser/top/payload/span/failure context and resolved built-in identity
+on all five source backends/six runtimes. `.14.7.2` still owns the general executable
+contract and the remaining clause-9 fields outside this narrow path.
 
 ## Links
 

@@ -16,12 +16,13 @@ general generated carriers, recurrence, and public closure remain future behavio
 source algebra and authority-narrowing principles without reusing progressive `dispatch_span` syntax or treating
 an authored parser id as filesystem authority.
 
-The audit also finds one current diagnostic parity defect: wrong-top compile failures keep the original job on
-Julia and shared Lua but replace id/path/payload/span/failure context with placeholders on Perl, Rust, and Dart.
-Corrective `.14.7.1` precedes executable neutral contract `.2`; backend parents `.3-.7`, recurrence `.8`, public
-authoring/closeout `.9`, and independent recomposition `.10` are dependency-frozen behind it. No parser, compiler,
-runtime, test, fixture, generated format, registry behavior, capability census, public/outward surface, or CI
-topology changes in the audit.
+Corrective `.14.7.1` closes the audit's one diagnostic parity defect before feature work. Perl, Rust, and Dart now
+pass the normalized job through compile instead of constructing placeholders; Julia and shared Lua retain their
+existing job propagation and add the missing payload kind. Every wrong-top error reports the original
+id/path/parser/top/payload/span/failure context plus resolved built-in identity. This changes only compile-failure
+diagnostics: success, resolution, execution, stitching, policies, queue depth, formats, capabilities, and outward
+surfaces stay fixed. Executable neutral contract `.2`; backend parents `.3-.7`; recurrence `.8`; public
+authoring/closeout `.9`; and independent recomposition `.10` remain dependency-frozen behind it.
 
 ## Typed transaction safety now composes the complete recognition authority
 

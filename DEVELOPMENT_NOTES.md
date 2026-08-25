@@ -10,6 +10,18 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-25 (`FUTURE-PARITY-BACKLOG.14.7.1` — staged compile diagnostic parity): exact clean activation is
+  audit commit `e50965b0`; this focused leaf owns only wrong-top compile context and its cross-backend assertions.
+- RED separated two causes: Perl/Rust/Dart discarded the normalized job at compile and synthesized placeholders;
+  Julia/shared Lua kept the job but their shared formatter omitted `payload_kind`. Success and resolve coverage had
+  hidden the compile-only mismatch.
+- The repair changes three compile boundaries and two formatter fields only. All six routes now retain phase,
+  original id/path/parser/top/payload/span/failure, and resolved built-in identity. Rust's unrelated load-only
+  placeholder remains unreachable on the fixed current provider and belongs to the general `.14.7.2+` contract.
+- Exact backend suites and all declared direct dependents pass; no parser family, policy semantics, recursive
+  queue, format, rollout, facade/schema/semantic/MCP/CLI/README, or public behavior moves. Neutral `.14.7.2` is
+  the next clean frontier after the atomic commit.
+
 - 2026-08-25 (`FUTURE-PARITY-BACKLOG.14.7.0` — general staged-AST audit): exact clean activation is progressive-
   closeout commit `fbcdedb6`; this behavior-free leaf owns retrieval, toolbox-led current-state proof, durable facts,
   contradiction corrections, and the dependency-complete split only.

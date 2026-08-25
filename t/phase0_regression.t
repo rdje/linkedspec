@@ -44251,6 +44251,23 @@ subtest 'staged_parser_registry_dispatches_function_body_jobs' => sub {
     like($bad_err, qr/source_span=10-21/, 'unsupported parser diagnostic preserves the original source span');
     like($bad_err, qr/failure_policy=fail/, 'unsupported parser diagnostic preserves failure policy');
 
+    my $wrong_top_job = {
+        %$job_earlier,
+        top_rule => 'missing_top',
+    };
+    my $wrong_top_ok = eval { LinkedSpec::StagedParserRegistry::execute_parse_jobs([$wrong_top_job]); 1 };
+    my $wrong_top_err = $@;
+    ok(!$wrong_top_ok, 'unsupported staged top rule is rejected during compile');
+    like($wrong_top_err, qr/phase=compile/, 'wrong-top diagnostic names compile phase');
+    like($wrong_top_err, qr/\Qjob_id=$job_earlier->{job_id}\E/, 'wrong-top diagnostic preserves job id');
+    like($wrong_top_err, qr/parent_ast_path=functions\.0\.body_source/, 'wrong-top diagnostic preserves parent AST path');
+    like($wrong_top_err, qr/parser_spec_id=actionir-body\.spec/, 'wrong-top diagnostic preserves parser spec id');
+    like($wrong_top_err, qr/resolved_spec_id=builtin:actionir-body\.spec/, 'wrong-top diagnostic preserves resolved spec id');
+    like($wrong_top_err, qr/top_rule=missing_top/, 'wrong-top diagnostic preserves top rule');
+    like($wrong_top_err, qr/payload_kind=function_body/, 'wrong-top diagnostic preserves payload kind');
+    like($wrong_top_err, qr/source_span=10-21/, 'wrong-top diagnostic preserves source span');
+    like($wrong_top_err, qr/failure_policy=fail/, 'wrong-top diagnostic preserves failure policy');
+
     done_testing();
 };
 

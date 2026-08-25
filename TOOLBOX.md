@@ -296,9 +296,9 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   JSON fields. The five current registries execute only the one-depth
   `actionir-body.spec` / `action_block` family. Raw `execute*_parse_jobs` carries arbitrary result/failure strings;
   function-specific dispatch/stitch validators alone make `replace_field` / `body_ast` / `fail` executable.
-  Wrong-top compile diagnostics preserve the job in Julia/shared Lua but use placeholders in Perl/Rust/Dart;
-  `FUTURE-PARITY-BACKLOG.14.7.1` owns that repair. Reverify with the exact five registry paths and focused tests in
-  the fact card before touching general `.14.7.2+` behavior.
+  `FUTURE-PARITY-BACKLOG.14.7.1` repairs wrong-top compile context: all five source backends/six runtimes now
+  preserve job id/path/parser/top/payload/span/failure plus the resolved built-in identity. Reverify with the exact
+  five registry paths and focused tests in the fact card before touching general `.14.7.2+` behavior.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.

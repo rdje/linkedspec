@@ -130,6 +130,9 @@ fn staged_parser_registry_dispatches_function_body_jobs() {
         "diagnostic_owner": "function_body",
     });
 
+    let mut wrong_top = job_earlier.clone();
+    wrong_top["top_rule"] = serde_json::json!("missing_top");
+
     let results = execute_parse_jobs(&[job_later, job_earlier]).expect("staged parse dispatch");
     assert_eq!(results.len(), 2);
     assert_eq!(
@@ -206,6 +209,28 @@ fn staged_parser_registry_dispatches_function_body_jobs() {
         "{err}"
     );
     assert!(err.contains("parser_spec_id=missing.spec"), "{err}");
+    assert!(err.contains("source_span=10-21"), "{err}");
+    assert!(err.contains("failure_policy=fail"), "{err}");
+
+    let err = execute_parse_jobs(&[wrong_top]).expect_err("missing top rule should fail");
+    assert!(err.contains("phase=compile"), "{err}");
+    assert!(
+        err.contains(
+            "job_id=parse_job:function_body:functions.0.body_source:actionir-body.spec:action_block:10-21"
+        ),
+        "{err}"
+    );
+    assert!(
+        err.contains("parent_ast_path=functions.0.body_source"),
+        "{err}"
+    );
+    assert!(err.contains("parser_spec_id=actionir-body.spec"), "{err}");
+    assert!(
+        err.contains("resolved_spec_id=builtin:actionir-body.spec"),
+        "{err}"
+    );
+    assert!(err.contains("top_rule=missing_top"), "{err}");
+    assert!(err.contains("payload_kind=function_body"), "{err}");
     assert!(err.contains("source_span=10-21"), "{err}");
     assert!(err.contains("failure_policy=fail"), "{err}");
 }

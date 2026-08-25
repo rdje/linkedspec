@@ -646,6 +646,7 @@ function _staged_dispatch_error(
     return "staged parse dispatch failed: phase=$phase job_id=$(job.job_id) " *
         "parent_ast_path=$(join(job.parent_ast_path, '.')) " *
         "parser_spec_id=$(job.parser_spec_id)$resolved top_rule=$(job.top_rule) " *
+        "payload_kind=$(job.payload_kind) " *
         "source_span=$(job.source_span.start)-$(job.source_span.stop) " *
         "failure_policy=$(job.failure_policy) detail=$detail"
 end

@@ -1,13 +1,13 @@
 # MEMORY
 
-- activation_commit: `fbcdedb6c79a20f232b5e77ee24a6e0cd57a7111` — exact clean progressive-closeout base for
-  task-tree-first behavior-free staged audit `FUTURE-PARITY-BACKLOG.14.7.0`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.7.0 - audit general staged AST boundary`; current narrow
-  behavior, one diagnostic defect, and dependency-complete general implementation ownership are durable.
-- active_work_unit: none after the intended `.14.7.0` commit; corrective diagnostic leaf `.14.7.1` is pending.
-- next_action: from the clean `.14.7.0` commit, activate `FUTURE-PARITY-BACKLOG.14.7.1` task-tree-first and add
-  cross-backend RED assertions before repairing Perl/Rust/Dart compile-phase job context.
-- in_flight_uncommitted: none after the intended `.14.7.0` commit; no background job remains.
+- activation_commit: `e50965b03a3e3b927516d9ddeb2a6a4c95a0fc37` — exact clean staged-audit base for
+  task-tree-first diagnostic repair `FUTURE-PARITY-BACKLOG.14.7.1`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.7.1 - preserve staged compile diagnostic context`; all six
+  runtime routes preserve exact wrong-top job context without general staged behavior.
+- active_work_unit: none after the intended `.14.7.1` commit; neutral contract `.14.7.2` is pending.
+- next_action: from the exact clean `.14.7.1` commit, activate `FUTURE-PARITY-BACKLOG.14.7.2` task-tree-first and
+  ratify the executable backend-neutral general staged-AST contract before backend behavior.
+- in_flight_uncommitted: none after the intended `.14.7.1` commit; no background job remains.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
@@ -48,8 +48,8 @@
   9/9/116, typed is 12/2/170, and public is 6/12/10/60 without outward admission. Staged `.14.7` follows; combined
   program-wide `.14.8` remains later. Staged audit `.14.7.0` is complete: diagnostic `.1`, neutral `.2`, backend
   parents `.3-.7`, recurrence `.8`, public authored closeout `.9`, and recomposition `.10` are frozen in order.
+  Diagnostic `.14.7.1` is focused-signoff-complete; neutral `.14.7.2` is next.
 - latest_bootstrap_read: 2026-08-25 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
-  review complete. `.14.7.0` proves the current one-depth function-body registry boundary across five backend
-  sources/six runtimes, records inert-versus-implemented policy semantics, assigns Perl/Rust/Dart compile-context
-  loss to `.1`, and freezes the complete `.1-.10` plan without behavior. Commit:
-  `FUTURE-PARITY-BACKLOG.14.7.0 - audit general staged AST boundary`; corrective `.14.7.1` is next.
+  review complete. `.14.7.1` closes the audited compile-context defect across Perl/Rust/Dart/Julia/PUC Lua/LuaJIT
+  while preserving the one-depth registry and general `.2-.10` boundaries. Intended commit:
+  `FUTURE-PARITY-BACKLOG.14.7.1 - preserve staged compile diagnostic context`; neutral `.14.7.2` is next.

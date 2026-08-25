@@ -243,7 +243,16 @@ The `.14.7.0` audit confirms that this current registry is one-depth metadata di
 not the general queue: alternate policy strings are transported but not applied, and
 stitched results are not scanned for new jobs. General typed provenance, multiple
 registered families, policy application, recursive bounds, and public authoring remain
-separately task-owned. Compile-phase diagnostic context parity is repaired first.
+separately task-owned. Compile-phase diagnostic context parity is now repaired: a
+wrong-top failure retains the normalized job and resolved built-in identity on every
+current backend without changing the successful pipeline.
+
+For example, rejecting `top_rule = missing_top` for the current function-body job keeps
+`phase=compile`, the original `job_id` and `functions.0.body_source` path,
+`parser_spec_id=actionir-body.spec`, `resolved_spec_id=builtin:actionir-body.spec`,
+`payload_kind=function_body`, the exact source-span range, and `failure_policy=fail`.
+Backend punctuation may differ, but none of those values may degrade to an unknown
+placeholder.
 
 Prototype tests should prove AST shape, not only behavior. Before the function-body
 prototype changes runtime behavior, the seam audit must predict the returned

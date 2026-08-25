@@ -109,7 +109,7 @@ pub fn execute_parse_jobs(jobs: &[Value]) -> Result<Vec<Value>, String> {
     for (queue_index, job) in queue.iter().enumerate() {
         let resolved = resolve(job)?;
         let loaded = load(&resolved)?;
-        let compiled = compile(&loaded, &job.top_rule, None)?;
+        let compiled = compile(&loaded, job, None)?;
         let result = execute(&compiled, job)?;
         results.push(parse_result_record(
             queue_index,
@@ -283,7 +283,7 @@ fn execute_one_parse_job_with_events(
             return Err(err);
         }
     };
-    let compiled = match compile(&loaded, &job.top_rule, None) {
+    let compiled = match compile(&loaded, job, None) {
         Ok(compiled) => {
             trace.trace_decision(
                 "rust_runtime:staged_parser_registry:compile",
@@ -396,14 +396,14 @@ fn load(resolved: &ResolvedParser) -> Result<LoadedParser, String> {
 
 fn compile(
     loaded: &LoadedParser,
-    top_rule: &str,
+    job: &StagedParseJob,
     capability_set: Option<&[String]>,
 ) -> Result<CompiledParser, String> {
-    let placeholder = placeholder_job(&loaded.parser_spec_id, top_rule);
+    let top_rule = &job.top_rule;
     if loaded.resolved_spec_id != ACTIONIR_BODY_RESOLVED_SPEC_ID {
         return Err(dispatch_error(
             "compile",
-            &placeholder,
+            job,
             Some(&loaded.resolved_spec_id),
             format!("unsupported resolved spec id '{}'", loaded.resolved_spec_id),
         ));
@@ -411,7 +411,7 @@ fn compile(
     if top_rule != ACTIONIR_BODY_TOP_RULE {
         return Err(dispatch_error(
             "compile",
-            &placeholder,
+            job,
             Some(&loaded.resolved_spec_id),
             format!("unsupported top rule '{top_rule}'"),
         ));

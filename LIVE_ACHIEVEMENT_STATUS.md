@@ -2,24 +2,27 @@
 
 ## Current Activity
 
-- Behavior-free staged audit `.14.7.0` separates the current one-depth function-body registry from the general
-  authored/typed-provenance/multi-family/policy/recursive-queue program and freezes 37 exact follow-up owners.
-- It records one current defect: compile rejection preserves job context on Julia/shared Lua but substitutes
-  placeholders on Perl/Rust/Dart. Corrective `.14.7.1` is the next clean frontier.
-- Runtime, tests, fixtures, executable contracts, generated format, CI topology, capability 80/0/0, typed
-  12/2/170, progressive 9/9/116, and every outward surface remain unchanged.
+- Diagnostic prerequisite `.14.7.1` is focused-signoff-complete: wrong-top compile failures preserve the original
+  job context and resolved built-in identity on all five source backends/six runtimes.
+- Only compile diagnostic plumbing/formatting and exact regressions move; the one-depth function-body path,
+  policies, queue, generated format, capability 80/0/0, typed 12/2/170, progressive 9/9/116, and outward surfaces
+  remain unchanged.
+- Neutral general staged-AST contract `.14.7.2` is next after the atomic diagnostic commit.
 
 ## Latest Completed Slice
 
-- Staged audit `.14.7.0` proves the exact current boundary across all five source backends/six runtimes, corrects
-  stale pre-prototype decision prose with dated current notes, and dependency-splits `.14.7.1-.10` before behavior.
+- `.14.7.1` replaces Perl/Rust/Dart compile placeholders with the normalized job, adds the missing Julia/shared-Lua
+  payload field, and locks exact diagnostic parity without expanding general staged behavior.
 
 ## Next Action
 
-- From the clean `.14.7.0` commit, activate `.14.7.1` task-tree-first, add wrong-top compile-context RED assertions,
-  and repair only Perl/Rust/Dart while proving Julia/shared Lua unchanged.
+- Commit `.14.7.1` atomically, clear the brief, verify the exact clean handoff, then activate neutral contract
+  `.14.7.2` task-tree-first.
 
 ## Recent Completions
+
+- `2026-08-25` — `.14.7.1` closes wrong-top compile diagnostic parity across all six runtime routes while
+  preserving the narrow registry and every general/public boundary.
 
 - `2026-08-25` — `.14.7.0` audits one-depth function-body staged dispatch, assigns the three-backend compile-
   context defect, freezes 37 detailed implementation owners, and preserves all runtime/public/governance behavior.
@@ -66,9 +69,6 @@
 
 - `2026-08-24` — capacity `.1` canonically lands the eighth bounded semantic member and every exact index,
   lookup/update/build/check/route/consumer change without backend, generated-format, or outward behavior movement.
-
-- `2026-08-18` — capacity `.0` preserves every pressure ceiling and stable ID while freezing one bounded
-  `.14.6.5-.14.8` semantic member for canonical implementation and independent recomposition before Julia.
 
 ## History
 

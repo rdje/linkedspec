@@ -47,7 +47,7 @@ sub execute_parse_jobs {
  foreach my $job (@queue) {
   my $resolved = resolve($job, %opts);
   my $loaded = load($resolved, %opts);
-  my $compiled = compile($loaded, $job->{top_rule}, $opts{capability_set});
+  my $compiled = compile($loaded, $job->{top_rule}, $opts{capability_set}, $job);
   my $result = execute($compiled, $job->{text}, job => $job);
   push @results, _parse_result_record($queue_index, $job, $resolved, $loaded, $compiled, $result);
   ++$queue_index;
@@ -95,16 +95,17 @@ sub load {
 }
 
 sub compile {
- my ($loaded, $top_rule, $capability_set) = @_;
+ my ($loaded, $top_rule, $capability_set, $job) = @_;
  die "(LinkedSpec::StagedParserRegistry::compile) -E- expected load HASH\n"
   unless ref($loaded) eq 'HASH';
  $top_rule = ACTIONIR_BODY_TOP_RULE unless defined($top_rule) && length($top_rule);
- my $job = { parser_spec_id => $loaded->{parser_spec_id}, top_rule => $top_rule };
+ $job = { parser_spec_id => $loaded->{parser_spec_id}, top_rule => $top_rule }
+  unless ref($job) eq 'HASH';
  if (($loaded->{resolved_spec_id} // '') ne ACTIONIR_BODY_RESOLVED_SPEC_ID) {
-  _die_dispatch_error('compile', $job, "unsupported resolved spec id '$loaded->{resolved_spec_id}'");
+  _die_dispatch_error('compile', $job, "unsupported resolved spec id '$loaded->{resolved_spec_id}'", $loaded);
  }
  if ($top_rule ne ACTIONIR_BODY_TOP_RULE) {
-  _die_dispatch_error('compile', $job, "unsupported top rule '$top_rule'");
+  _die_dispatch_error('compile', $job, "unsupported top rule '$top_rule'", $loaded);
  }
 
  my $capabilities = _normalize_capability_set($capability_set);

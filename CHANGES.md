@@ -10,6 +10,20 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-25 — FUTURE-PARITY-BACKLOG.14.7.1 — preserve staged compile diagnostic context
+
+- Added exact wrong-top compile assertions across Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT for the original
+  job id/path/parser/top/payload/span/failure context plus the resolved built-in identity.
+- Passed the normalized job through Perl/Rust/Dart compile instead of synthesizing placeholders; retained
+  Julia/shared-Lua job propagation and added their missing `payload_kind` diagnostic field.
+- Preserved the one-depth `actionir-body.spec` / `action_block` success, resolution, execution, stitching, policy,
+  cache, generated-format, capability, rollout, and public/outward boundaries.
+- Backend proof passes Perl 1,031/1,031; Rust 1/1; Dart 6/6; Julia staged 39/39 within its complete suite; and
+  PUC Lua/LuaJIT 178/178 each. Semantic 6/20/128 plus six admissions and 5x2x3 CLI, typed 12/2/170,
+  progressive 9/9/116, generated/capability 80/0/0, and language 250/126 remain GREEN.
+- Synchronized ADR/current architecture, two Knowledge cards, roadmaps, Toolbox, sole-facing mdBook, task/index,
+  bounded histories, memory/live status, and focused verification. Canonical CI is not triggered.
+
 ## 2026-08-25 — FUTURE-PARITY-BACKLOG.14.7.0 — audit general staged AST boundary
 
 - Used descriptor/runtime/registry probes and exact five-backend source/test comparison to prove the current
