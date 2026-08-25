@@ -511,15 +511,21 @@ local function execute_generated(compiled, plan, input, source_identity, options
   end
   runtime_options._generated_families = families
   runtime_options._generated_source_identity = identity
+  local bounded_child_parse_authority = runtime_options.bounded_child_parse_authority
+  runtime_options.bounded_child_parse_authority = nil
   local operation
   if trace_config == nil then
     operation = function()
-      return interpreter.runtime_parse(interpreter.runtime_engine(compiled), input, runtime_options)
+      return interpreter.runtime_parse(interpreter.runtime_engine(compiled, {
+        bounded_child_parse_authority = bounded_child_parse_authority,
+      }), input, runtime_options)
     end
   else
     operation = function()
       return interpreter.runtime_parse_with_trace(
-        interpreter.runtime_engine(compiled),
+        interpreter.runtime_engine(compiled, {
+          bounded_child_parse_authority = bounded_child_parse_authority,
+        }),
         input,
         trace_config,
         runtime_options

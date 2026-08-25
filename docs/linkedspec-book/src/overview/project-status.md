@@ -27,9 +27,10 @@ boundary. Exact receipt-bound proof closes `.2`; `.3` moves the same 62-assertio
 and one exact canonical route while retaining the dormant 210-assertion authority proof. Only Julia advances, to
 rollout 5/9/106. Independent recomposition `.4` proves those committed owners unchanged, closes `.14.6.5`, and
 hands off shared Lua `.14.6.6`. Lua `.14.6.6.0` freezes one shared, Lua-5.1-compatible dormant consumer on both
-PUC Lua and LuaJIT: 85 assertions pass and one deliberate assertion fails because the generic call has not yet
-become one exclusive `progressive_dispatch_span` node. Private authority `.14.6.6.1` now passes 273/273 on each
-host while staying unexported, ActionIR-independent, and carrier-free; dormant carrier `.2` is next.
+PUC Lua and LuaJIT: its historical 85-pass/one-RED boundary records the former generic call. Private authority
+`.14.6.6.1` passes 273/273 on each host. Dormant carrier `.2` now lowers one exclusive
+`progressive_dispatch_span` node and passes 178/178 per ABI through native, normalized-JSON reconstructed,
+generated-plan, and independently loaded emitted-module routes; dual-ABI admission `.3` is next.
 
 This is consumer-aware work. The six live JSON projections and seven executable checkers now use stable decision
 authority ADR `0067`, and the chronology root contains no capability marker authority. Nine executable checkers
@@ -199,11 +200,8 @@ changing backend behavior. Julia `.14.6.5.0` freezes the exact generic-call/four
 `.14.6.5.1` supplies its private immutable authority, `.14.6.5.2` adds the dedicated node plus four dormant fresh-
 authority carriers, and `.14.6.5.3` admits the unchanged carrier proof ordinarily and canonically. `.14.6.5.4`
 then independently reruns carrier 62/62, authority 210/210, ordinary Julia, and all direct dependents unchanged;
-it closes the Julia parent without behavior and hands off shared Lua. Lua `.14.6.6.0` freezes the exact shared
-dual-ABI boundary: the separate staged registry rejects `expr-v1`, the assignment remains one generic
-`dispatch_span` call, and native, reconstructed, generated-plan, and independently loaded emitted routes preserve
-the same typed unsupported-helper result. Both hosts pass 85 assertions and fail only the intended missing-node
-assertion; the consumer remains absent from ordinary and canonical discovery.
+it closes the Julia parent without behavior and hands off shared Lua. Lua `.14.6.6.0` preserves the exact
+historical dual-ABI 85-pass/one-RED generic-call boundary and separate staged-registry rejection.
 
 Private authority `.14.6.6.1` adds one direct Lua-5.1-compatible module shared unchanged by both hosts. Opaque
 immutable entries accept already-compiled callbacks only; fresh invocations copy decoded sources into Lua's
@@ -214,13 +212,22 @@ retained requests expire after callback return or failure, and only finite, deep
 results cross back. Its dormant 273-assertion consumer covers every neutral row and all 26 diagnostic contexts on
 both ABIs plus nesting, expiry, input/result isolation, bounds, and UTF-8 truncation adversaries.
 
+Carrier `.14.6.6.2` now lowers only the reserved assignment to one exclusive logical node. Malformed and residual
+generic forms reject, compile-time closure forbids recognition-reachable dispatch effects, and live-token unwind
+preserves the primary progressive denial while restoring authority state. Native, normalized-JSON reconstructed,
+generated-plan, and independently loaded emitted-module routes start fresh opaque execution state and return the
+same detached value without moving the parent cursor. The exact dormant consumer passes 178/178 on both ABIs;
+serialized/generated data omit callbacks, registry entries, fingerprints, decoded input snapshots, cancellation,
+and mutable execution state. Ordinary/canonical discovery and rollout remain unchanged for admission `.3`.
+
 That recomposition also corrects stale current Julia-pending prose in the predecessor Perl, Rust, and Dart
 Knowledge cards. The executable neutral checker already governed runtime, contract, and outward paths exactly;
 Knowledge Map generation guarantees card/index freshness but does not infer semantic agreement across cards.
 The correction preserves dated historical evidence and records this retrieval-layer boundary explicitly.
 
 Behavior-free audit `.14.6.0` and ADR `0080` fix that boundary exactly. `parse_job(...)` remains unavailable and
-`dispatch_span(...)` is admitted only as a private Perl/Rust/Dart/Julia intrinsic, not a shared helper. Each backend's current staged registry accepts
+`dispatch_span(...)` is admitted as a private Perl/Rust/Dart/Julia intrinsic and implemented by dormant Lua
+carriers, not a shared helper. Each backend's current staged registry accepts
 only the built-in `actionir-body.spec` / `action_block` function-body adapter; a normal `.spec` path is rejected,
 and the legacy job span carries neither typed source authority nor cancellation/policy ceilings. Progressive work
 therefore starts with an immutable host-seeded entry for an already compiled parser, never an in-parse loader.
@@ -231,11 +238,11 @@ positions/spans and diagnostics rebase to the original source identity and globa
 isolated, capabilities intersect, ceilings only narrow, cancellation/budget cannot reset, and a repeated parser/
 top/source chain must strictly shrink its span. Correction `.14.6.0.1` repaired the typed transaction row; neutral
 governance passes 2 registry entries, 2 sources/8 views, 6 authority, 6 cancellation, 8 chain, 4 execution cases,
-one Lua guard/5 paths plus 9 Rust + 8 Dart + 9 Julia carrier paths and 10 outward guards, 26
+9 Rust + 8 Dart + 9 Julia + 9 dormant Lua carrier paths, zero backend guards, and 10 outward guards, 26
 diagnostics, rollout 5/9, and 106 mutations. The typed row remains pending; the rejected effect owns current node
-`PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded Lua production paths omit both tokens; and outward guards deny
-exposure. Lua private authority/core `.14.6.6.1` is current without carrier movement; dormant carriers `.2`,
-admission `.3`, recurrence `.7`, and public no-drift `.8` follow. Independent Lua recomposition `.4` closes the
+`PROGRESSIVE_DISPATCH_SPAN` and no call row; outward guards deny exposure. Lua private authority/core `.14.6.6.1`
+and dormant carriers `.2` are current; admission `.3`, recurrence `.7`, and public no-drift `.8` follow.
+Independent Lua recomposition `.4` closes the
 backend parent after admission.
 
 Rust `.14.6.3.0` historically froze the dedicated-node RED behind one explicit cfg. Rust `.14.6.3.1` supplies the independent private authority beneath that boundary: immutable precompiled

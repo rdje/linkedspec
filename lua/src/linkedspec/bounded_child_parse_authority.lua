@@ -491,6 +491,106 @@ function M.total_calls(invocation)
   return state_of(invocation, "ProgressiveInvocation").total_calls
 end
 
+function M.execution_seed(options)
+  options = options_table(options, "execution_seed")
+  exact_fields(options, {
+    registry = true,
+    invocation = true,
+    caller_capabilities = true,
+    required_capabilities = true,
+    caller_ceilings = true,
+    required_source_detail = true,
+    dispatch_cost = true,
+  }, "execution_seed")
+  state_of(options.registry, "ProgressiveRegistry")
+  local invocation_options = options_table(options.invocation, "execution_seed invocation")
+  M.start_invocation(options.registry, invocation_options)
+  if not is_integer(options.dispatch_cost) or options.dispatch_cost < 0 then
+    raise_configuration("progressive dispatch cost must be a nonnegative integer")
+  end
+  ceilings_state(options.caller_ceilings)
+  local required_source_detail = source_detail_value(options.required_source_detail)
+  local owned_invocation = {
+    sources = copy_sources(invocation_options.sources),
+    source_id = invocation_options.source_id,
+    cancellation_token = invocation_options.cancellation_token,
+    now = invocation_options.now,
+    deadline_tick = invocation_options.deadline_tick,
+    remaining_steps = invocation_options.remaining_steps,
+    max_depth = invocation_options.max_depth,
+    total_calls = invocation_options.total_calls,
+    max_calls = invocation_options.max_calls,
+    active_chain = copied_array(invocation_options.active_chain),
+  }
+  return new_token("ProgressiveExecutionSeed", {
+    registry = options.registry,
+    invocation = owned_invocation,
+    caller_capabilities = copy_string_list(
+      options.caller_capabilities,
+      "progressive caller capabilities",
+      false
+    ),
+    required_capabilities = copy_string_list(
+      options.required_capabilities,
+      "progressive required capabilities",
+      true
+    ),
+    caller_ceilings = options.caller_ceilings,
+    required_source_detail = required_source_detail,
+    dispatch_cost = options.dispatch_cost,
+  })
+end
+
+function M.is_execution_seed(value)
+  return M.node_type(value) == "ProgressiveExecutionSeed"
+end
+
+function M.start_execution(seed_value, input)
+  local seed = state_of(seed_value, "ProgressiveExecutionSeed")
+  if input ~= nil then
+    if type(input) ~= "string" then
+      raise_configuration("progressive execution input must be a string")
+    end
+    if seed.invocation.sources[seed.invocation.source_id] ~= input then
+      raise_configuration("progressive execution input does not match its decoded source")
+    end
+  end
+  return new_token("ProgressiveExecutionState", {
+    invocation = M.start_invocation(seed.registry, seed.invocation),
+    caller_capabilities = copied_array(seed.caller_capabilities),
+    required_capabilities = copied_array(seed.required_capabilities),
+    caller_ceilings = seed.caller_ceilings,
+    required_source_detail = seed.required_source_detail,
+    child_token = seed.invocation.cancellation_token,
+    dispatch_cost = seed.dispatch_cost,
+  })
+end
+
+function M.dispatch_execution(state_value, options)
+  local state = state_of(state_value, "ProgressiveExecutionState")
+  options = options_table(options, "dispatch_execution")
+  exact_fields(options, {
+    origin = true,
+    parser_id = true,
+    top_rule = true,
+    span = true,
+    transaction_active = true,
+  }, "dispatch_execution")
+  return M.dispatch(state.invocation, {
+    origin = options.origin,
+    parser_id = options.parser_id,
+    top_rule = options.top_rule,
+    span = options.span,
+    caller_capabilities = state.caller_capabilities,
+    required_capabilities = state.required_capabilities,
+    caller_ceilings = state.caller_ceilings,
+    required_source_detail = SOURCE_DETAIL_NAME[state.required_source_detail],
+    child_token = state.child_token,
+    cost = state.dispatch_cost,
+    transaction_active = options.transaction_active == true,
+  })
+end
+
 local function parse_span(value, origin)
   if type(value) ~= "table" then
     raise_dispatch("progressive_span_binding_required", {

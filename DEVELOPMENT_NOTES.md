@@ -10,6 +10,24 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-25 (`FUTURE-PARITY-BACKLOG.14.6.6.2` — Lua progressive carriers): exact clean activation is the
+  `6cbf8fdf` Lua-authority commit. The task tree owned syntax/ActionIR/interpreter/emitter and neutral-governance
+  movement before production edits.
+- Whole-statement lowering is deliberate: only `target = dispatch_span("literal-id", "LiteralTop", bare_span)`
+  becomes `progressive_dispatch_span`. This prevents a residual callable helper from becoming an ambient loader;
+  compile policy separately rejects any remaining generic spelling.
+- The static effect pass propagates dispatch through rule and user-function calls, then denies any
+  `recognize_once` target that reaches the non-rollbackable effect. Runtime checks live tokens defensively.
+- A progressive failure previously triggered recognition teardown's secondary `recognition_terminal_required`.
+  The private adapter now discards live tokens only while a typed progressive error is already propagating,
+  restoring the snapshot and preserving that primary diagnostic; ordinary unfinished-token behavior is unchanged.
+- The reusable opaque execution seed copies decoded sources, validates the input snapshot, and starts a fresh
+  invocation for every native or generated parse. The source emitter forwards only the live execution option;
+  normalized/generated artifacts never own callbacks, registries, fingerprints, cancellation, or mutable state.
+- The same Lua-5.1 source passes carrier 178/178 and authority 273/273 on PUC Lua and LuaJIT. Complete Lua stays
+  178/178 per ABI; admitted Perl/Dart/Julia and the cfg-enabled Rust direct consumer accept the 9-path dormant Lua
+  inventory. Rollout remains 5/9/106, generated format remains v2, and admission is exclusively `.14.6.6.3`.
+
 - 2026-08-25 (`FUTURE-PARITY-BACKLOG.14.6.6.1` — Lua progressive authority): exact clean activation is the
   committed dual-ABI RED `84178bd8`; this focused leaf owns one unexported module and dormant proof only.
 - `lua/src/linkedspec/bounded_child_parse_authority.lua` follows the existing Lua private-token pattern: weak-key

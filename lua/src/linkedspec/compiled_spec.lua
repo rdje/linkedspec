@@ -677,6 +677,123 @@ local function validate_recursive_observation_policy(compiled)
   end
 end
 
+local function progressive_dispatch_effects(value, function_names)
+  local effects = {
+    dispatches = false,
+    rule_calls = {},
+    function_calls = {},
+    recognition_attempts = {},
+  }
+
+  local function visit(node)
+    if type(node) ~= "table" then return end
+    local kind = node.kind
+    if kind == "progressive_dispatch_span" then
+      effects.dispatches = true
+    elseif kind == "recognize_once" then
+      if type(node.rule) == "string" then effects.recognition_attempts[node.rule] = true end
+    elseif kind == "call" then
+      if node.name == "dispatch_span" then
+        fail("progressive_span_binding_required", {
+          code = "progressive_span_binding_required",
+        })
+      elseif node.name == "call" and type(node.args) == "table" and #node.args == 1 then
+        local argument = node.args[1]
+        if type(argument) == "table" and argument.kind == "variable" and
+            type(argument.name) == "string" then
+          effects.rule_calls[argument.name] = true
+        end
+      elseif type(node.name) == "string" and function_names[node.name] then
+        effects.function_calls[node.name] = true
+      end
+    end
+    for _, child in pairs(node) do visit(child) end
+  end
+
+  visit(value)
+  return effects
+end
+
+local function progressive_dispatch_inherits(effects, rule_dispatches, function_dispatches)
+  for callee in pairs(effects.rule_calls) do
+    if rule_dispatches[callee] then return true end
+  end
+  for callee in pairs(effects.function_calls) do
+    if function_dispatches[callee] then return true end
+  end
+  return false
+end
+
+local function validate_progressive_dispatch_policy(compiled)
+  local function_names = {}
+  for _, entry in ipairs(compiled.function_registry.entries) do
+    function_names[entry.definition.name] = true
+  end
+
+  local rule_effects = {}
+  for _, label in ipairs(compiled.compiled_rule_order) do
+    local projected = json.array()
+    for index, payload in ipairs(action_payloads_for_recursive_observation(compiled.rules_by_label[label])) do
+      projected[index] = action_ast.to_json(payload.action_ast)
+    end
+    rule_effects[label] = progressive_dispatch_effects(projected, function_names)
+  end
+
+  local function_effects = {}
+  for _, entry in ipairs(compiled.function_registry.entries) do
+    local definition = entry.definition
+    function_effects[definition.name] = progressive_dispatch_effects(
+      action_ast.to_json(action_parser.parse_action_block(definition.body_source)),
+      function_names
+    )
+  end
+
+  local rule_dispatches = {}
+  local function_dispatches = {}
+  for owner, effects in pairs(rule_effects) do rule_dispatches[owner] = effects.dispatches end
+  for owner, effects in pairs(function_effects) do
+    function_dispatches[owner] = effects.dispatches
+  end
+
+  local changed = true
+  while changed do
+    changed = false
+    for owner, effects in pairs(rule_effects) do
+      if not rule_dispatches[owner] and
+          progressive_dispatch_inherits(effects, rule_dispatches, function_dispatches) then
+        rule_dispatches[owner] = true
+        changed = true
+      end
+    end
+    for owner, effects in pairs(function_effects) do
+      if not function_dispatches[owner] and
+          progressive_dispatch_inherits(effects, rule_dispatches, function_dispatches) then
+        function_dispatches[owner] = true
+        changed = true
+      end
+    end
+  end
+
+  for _, effect_map in ipairs({ rule_effects, function_effects }) do
+    for owner, effects in pairs(effect_map) do
+      for target in pairs(effects.recognition_attempts) do
+        if rule_dispatches[target] then
+          fail(
+            "recognition_effect_forbidden:parser_registry_or_staged_dispatch owner=" .. owner ..
+              " target=" .. target,
+            {
+              code = "recognition_effect_forbidden",
+              effect = "parser_registry_or_staged_dispatch",
+              owner = owner,
+              target = target,
+            }
+          )
+        end
+      end
+    end
+  end
+end
+
 local function authored_regex_count(rule)
   local count = 0
   for _, element in ipairs(rule.body_elements) do
@@ -811,6 +928,7 @@ function M.compile_spec(spec, options)
       M.validate_compiled_regex_slot_identities(compiled)
       validate_no_removed_aggregate_selectors(compiled)
       validate_recursive_observation_policy(compiled)
+      validate_progressive_dispatch_policy(compiled)
       return compiled
     end,
     function(compiled)
@@ -905,6 +1023,13 @@ function M.validate_no_removed_aggregate_selectors(compiled)
     fail("validate_no_removed_aggregate_selectors expects CompiledSpec")
   end
   validate_no_removed_aggregate_selectors(compiled)
+end
+
+function M.validate_progressive_dispatch_policy(compiled)
+  if M.node_type(compiled) ~= "CompiledSpec" then
+    fail("validate_progressive_dispatch_policy expects CompiledSpec")
+  end
+  validate_progressive_dispatch_policy(compiled)
 end
 
 local function dependency_ref_to_json(ref)

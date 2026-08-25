@@ -423,9 +423,9 @@ recurring/public-no-drift row remains pending for final program-wide closeout `F
 typed-source composition is 11 complete / 3 pending with 152 mutations. The transaction row is an authority
 projection of the separately complete 9/9 recognition program: it changes no syntax, runtime, or public API.
 
-Progressive span dispatch is admitted as private Perl, Rust, and Dart behavior; Julia's corresponding private
-carriers are executable but intentionally dormant. Its executable neutral authority remains the cross-backend
-source of truth. The
+Progressive span dispatch is admitted as private Perl, Rust, Dart, and Julia behavior. Lua now has the same
+private carrier behavior on PUC Lua and LuaJIT, but its shared consumer remains intentionally dormant until the
+separate dual-ABI admission leaf. The executable neutral authority remains the cross-backend source of truth. The
 reserved private expression is:
 
 ```text
@@ -437,10 +437,10 @@ child uses a bounded source view whose typed positions and diagnostics rebase to
 cursor/marks/transactions stay isolated; capability and policy ceilings only narrow; cancellation and remaining
 budget propagate; and repeated parser/top/source dispatch must strictly shrink the span. The existing staged
 function-body adapter does not satisfy this contract. The neutral checker passes 2 registry entries, 2 sources/8
-views, 6 authority, 6 cancellation, 8 chain, and 4 execution cases, one Lua absence guard/5 paths plus 9 Rust +
-8 Dart + 9 Julia carrier paths and 10 outward guards, 26 diagnostics, rollout 5/9, and 106 mutations. The
+views, 6 authority, 6 cancellation, 8 chain, and 4 execution cases, 9 Rust + 8 Dart + 9 Julia + 9 dormant Lua
+carrier paths, zero backend guards, and 10 outward guards, 26 diagnostics, rollout 5/9, and 106 mutations. The
 typed progressive row remains pending; the rejected dispatch effect owns current node
-`PROGRESSIVE_DISPATCH_SPAN` and no call row; guarded Lua paths omit the tokens; and outward guards
+`PROGRESSIVE_DISPATCH_SPAN` and no call row; outward guards
 deny premature exposure. Perl has private carrier integration
 behind host-supplied invocation options: the exact assignment lowers to one dedicated node and works identically
 through live, reconstructed, generated-plan, and independently loaded emitted routes, while generated artifacts
@@ -458,8 +458,8 @@ plan, and independently compiled emitted source delegate to one fresh opaque exe
 detached child payload. Generated data contains only target/id/top/span operands, never callbacks or authority.
 Recognition effect analysis rejects any attempted rule/function graph that reaches the node, and runtime checks
 live tokens defensively. The exact outer-cfg consumer is GREEN and canonically routed once under that cfg, while
-ordinary Cargo still executes zero tests. Dart and Julia are also admitted; Lua's exact historical RED and
-private authority are current, while its dedicated carriers and the typed/public rows remain pending.
+ordinary Cargo still executes zero tests. Dart and Julia are also admitted; Lua's exact historical RED, private
+authority, and dedicated dormant carriers are current, while Lua admission and the typed/public rows remain pending.
 
 Dart's historical pre-carrier boundary remains preserved by the same final-path fixture; `.14.6.4.2` turns it
 GREEN and `.14.6.4.3` admits it without changing behavior. The reserved assignment is now one exclusive
@@ -510,29 +510,36 @@ and one exact canonical route, with no dormant duplicate. Only Julia rollout adv
 210-assertion authority matrix remains dormant. Independent recomposition `.14.6.5.4` reruns those committed
 owners and all direct dependents unchanged, then closes the Julia parent.
 
-Lua `.14.6.6.0` freezes the next exact boundary without production behavior. One shared Lua-5.1-compatible
-dormant consumer runs unchanged on PUC Lua and LuaJIT. It proves the separate staged registry rejects `expr-v1`,
-the reserved assignment remains one generic `dispatch_span` call, and native, normalized-JSON reconstructed,
-generated-plan, and independently loaded emitted-module routes all return the same typed unsupported-helper
-failure. On each ABI, 85 of 86 assertions pass and only the deliberate exclusive-node assertion fails. The test
-is absent from ordinary and canonical discovery. `.14.6.6.1` now supplies the private authority beneath this RED.
+Lua `.14.6.6.0` preserves the historical boundary without production behavior. One shared Lua-5.1-compatible
+dormant consumer proved that the separate staged registry rejects `expr-v1`, while the then-generic assignment
+made 85 of 86 assertions pass on both ABIs. `.14.6.6.1` supplies the private authority beneath that history.
 
-Run the same intentional RED on both admitted hosts:
+Carrier `.14.6.6.2` replaces only the exact reserved assignment with one exclusive
+`progressive_dispatch_span` node. Malformed operands and residual generic calls reject; static rule/function
+closure forbids recognition attempts that reach dispatch, and a live-token defense preserves the primary
+progressive denial while restoring and invalidating the unfinished token. Every native and generated top-level
+run starts fresh opaque execution state over copied decoded sources. Native, normalized-JSON reconstructed,
+generated-plan, and independently loaded emitted-module routes return the same detached value without advancing
+the parent cursor. Serialized and emitted data contain no callback, registry entry, fingerprint, decoded input
+snapshot, cancellation token, or mutable authority. The same dormant consumer now passes 178/178 on each ABI;
+ordinary/canonical discovery and rollout remain unchanged for `.14.6.6.3`.
+
+Run the same dormant GREEN carrier proof on both hosts:
 
 ```bash
 bash tools/run_lua_project_data.sh puc lua/test_dormant/progressive_span_dispatch_contract_test.lua
 bash tools/run_lua_project_data.sh luajit lua/test_dormant/progressive_span_dispatch_contract_test.lua
 ```
 
-Both commands must fail only with `missing exclusive progressive_dispatch_span node`; a pass would be premature
-until carrier leaf `.14.6.6.2` owns the GREEN transition.
+Both commands pass 178 assertions and execute the same source unchanged on PUC Lua and LuaJIT.
 
-The authority is a separate direct module and remains outside ActionIR. It accepts immutable logical entries
+The authority is a separate direct module and remains outside the package facade. It accepts immutable logical entries
 containing already-compiled callbacks, starts fresh copied-source invocations, and creates callback-scoped bounded
 views through Lua's existing private typed-source core. Local scalar positions/spans/diagnostics rebase globally;
 capabilities/policies intersect; ceilings take minima; cancellation/deadline/steps and decreasing chain/depth/call
 limits remain shared. Views and retained nested requests expire after callback return or failure. Results must be
-finite, deeply detached, JSON-shaped, live-field-free, cycle-free, and within the effective node ceiling.
+finite, deeply detached, JSON-shaped, live-field-free, cycle-free, and within the effective node ceiling. Its
+opaque execution seed is the only carrier seam; generated data never serialize that seed.
 
 Run the same dormant authority matrix on both hosts:
 

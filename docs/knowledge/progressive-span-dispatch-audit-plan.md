@@ -17,7 +17,7 @@ answers:
   - "is the neutral progressive span dispatch contract executable"
   - "how does typed transaction safety compose with progressive dispatch"
 date: 2026-08-17
-status: executable neutral authority and private Perl/Rust/Dart/Julia admissions current; shared Lua dual-ABI RED/private authority current and dormant carriers next
+status: executable neutral authority and private Perl/Rust/Dart/Julia admissions current; shared Lua dormant carriers current and admission next
 tags: [progressive-parsing, source-location, span, registry, authority, cancellation, diagnostics, task-tree]
 evidence: "FUTURE-PARITY-BACKLOG.14.6.0 retrieves ADRs 0012-0016 and 0056, the typed/staged/loader authorities, and the five backend registries before probing. LinkedSpec::call_spec_handler_subst lowers both parse_job(...) and dispatch_span(...) to LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER. The Perl registry executes only actionir-body.spec/action_block through builtin:actionir-body.spec and rejects specs/json.spec at resolve; Rust, Dart, Julia, and Lua have the same narrow identity. Their job spans are legacy start/end/line shells rather than typed source-authority spans, and none carries cancellation or a policy ceiling. Native spec loaders resolve/read/compile filesystem inputs before execution and therefore are not safe in-parse registry authority. The typed checker is 10 complete / 4 pending / 126 while the independently closed recognition transaction contract is 9/9; git history proves owner .14.3 never promoted typed transaction_safety, so corrective prerequisite .14.6.0.1 owns that missed composition and stale-current governance before progressive behavior."
 evidence_update_2026_08_17_neutral: "Corrective .14.6.0.1 landed at 27f9c87f with typed transaction safety current at 11/3/152. FUTURE-PARITY-BACKLOG.14.6.1 selects value = dispatch_span(\"expr-v1\", \"Expr\", span) and adds linkedspec-progressive-span-dispatch-v1 plus its independent checker: 2 immutable registry entries, 2 sources/8 views, 6 authority, 6 cancellation, 8 chain, 4 execution cases, 5 backend guard groups/17 paths plus 10 outward guards, 26 diagnostics, rollout 1/9, and 86 mutations. Canonical registration is current while every backend and the typed progressive row remain pending; the recognition effect has no current node/call rows, guarded backend paths omit both future tokens, ten facade/schema/semantic/MCP/CLI/README paths deny premature exposure, and the Perl lowering probe retains the unsupported-helper sentinel."
@@ -38,6 +38,7 @@ evidence_update_2026_08_24_julia_admission: "FUTURE-PARITY-BACKLOG.14.6.5.3 move
 evidence_update_2026_08_25_julia_recomposition: "FUTURE-PARITY-BACKLOG.14.6.5.4 independently reruns Julia carrier 62/62, authority 210/210, ordinary Julia, unchanged Perl/Rust/Dart consumers, and every neutral/direct-dependent checker without production, test, fixture, executable-contract, generated-format, or CI-topology changes. It also finds and repairs stale current Julia-pending prose in the predecessor admission cards: the executable neutral checker governs runtime/contract/outward paths, while Knowledge Map enforcement proves derived-index freshness rather than semantic agreement across cards. Historical dated evidence remains unchanged. Julia parent .14.6.5 closes at 5/9/106; shared Lua .14.6.6 is next."
 evidence_update_2026_08_25_lua_red: "FUTURE-PARITY-BACKLOG.14.6.6.0 splits shared Lua into RED, private authority, dormant carriers, canonical dual-ABI admission, and independent recomposition leaves. One Lua-5.1-compatible dormant consumer executes 86 assertions on both PUC Lua and LuaJIT: 85 pass and only the combined missing-dedicated-node invariant fails. The staged registry rejects expr-v1 at resolve; the reserved assignment remains assign_scalar over one generic dispatch_span call; native, normalized-JSON reconstructed, generated-plan, and independently loaded emitted-module carriers converge on unsupported runtime helper without production, discovery, rollout, generated-format, typed, or outward movement. Complete ordinary Lua and direct dependents remain green. Synchronization also catches ROADMAP.md and ROADMAP_V2.md compact rows left at pre-admission 4/9/103; both current projections are repaired and the cross-projection enforcement gap is recorded without rewriting history."
 evidence_update_2026_08_25_lua_authority: "FUTURE-PARITY-BACKLOG.14.6.6.1 adds one private Lua-5.1-compatible bounded_child_parse_authority module shared unchanged by PUC Lua and LuaJIT. Module-private opaque state owns immutable already-compiled entries, fresh copied-source invocations, typed globally rebased callback views, intersected capabilities/policies and ceiling minima, identity-bearing cancellation/deadline/shared steps, decreasing-span/depth/call bounds, callback/request expiry, and deeply detached node-bounded results. The dormant consumer passes 273 assertions per ABI over every neutral row/all 26 diagnostic contexts plus adversaries. The separate final path remains 85-pass/one-RED; ActionIR, five carrier paths, generated format, discovery, rollout 5/9/106, typed recurrence, and outward surfaces do not move."
+evidence_update_2026_08_25_lua_carriers: "FUTURE-PARITY-BACKLOG.14.6.6.2 adds one exclusive Lua logical node, malformed/residual/static/live denials, reusable opaque execution seeds, and native/normalized-reconstructed/generated-plan/independently-loaded-emitted routes shared unchanged by PUC Lua and LuaJIT. Carrier 178/178 and authority 273/273 pass per ABI. Governance replaces the Lua absence group with 9 dormant Lua carrier paths and zero backend guards while rollout stays 5/9/106; generated v2, ordinary/canonical discovery, typed recurrence, facade, and outward surfaces do not move."
 reverify:
   - "perl -Iperl -MLinkedSpec -e 'print LinkedSpec::call_spec_handler_subst(\"Top\", q{return(parse_job(\"child.spec\", \"payload\"));})'"
   - "bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py"
@@ -54,9 +55,8 @@ Progressive dispatch is synchronous child-parser invocation while a parent parse
 post-AST work: collect parse jobs, order them, run later parsers, and stitch results. They share provenance and
 registry principles but not execution state or scheduling.
 
-Private Perl, Rust, Dart, and Julia progressive behavior is admitted. Lua's private authority is executable but
-its dedicated node and carriers remain pending. All
-four implemented backends recognize `dispatch_span(...)` as one
+Private Perl, Rust, Dart, and Julia progressive behavior is admitted. Lua's private authority, dedicated node,
+and four carriers are executable but dormant on both ABIs. All five backends recognize `dispatch_span(...)` as one
 dedicated intrinsic, while `parse_job(...)` and every other progressive path remain unsupported. The five backend
 staged registries still implement only one function-body
 adapter only: `actionir-body.spec` resolves to `builtin:actionir-body.spec`, compiles top rule `action_block`, and
@@ -136,9 +136,9 @@ source-text-safe.
 `.14.6.0.1` repaired the missed typed transaction-safety composition and stale-current guard. `.14.6.1` owns the
 executable neutral contract/checker; Perl `.2`, Rust `.3`, Dart `.4`, and Julia `.5` are independently admitted and
 recomposed at rollout 5/9/106. Julia's exact historical dormant RED `.0`, private authority/core `.1`, dormant
-carriers `.2`, canonical admission `.3`, and independent recomposition `.4` are complete. Shared Lua RED `.6.0`
-and private authority `.6.1` are complete; `.6.2` next owns the node/four dormant carriers before admission `.3`
-and recomposition `.4`. `.7` binds five source groups to six runtime routes and alone
+carriers `.2`, canonical admission `.3`, and independent recomposition `.4` are complete. Shared Lua RED `.6.0`,
+private authority `.6.1`, and dormant carriers `.6.2` are complete; admission `.3` and recomposition `.4` follow.
+`.7` binds five source groups to six runtime routes and alone
 promotes typed `progressive_span_dispatch`. `.8` closes public projection/no-drift without exporting a facade or
 consuming combined final row `.14.8`.
 

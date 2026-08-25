@@ -15,6 +15,7 @@ local M = {}
 local typed_source = {
   runtime = require("linkedspec.source_location_runtime"),
   recognition = require("linkedspec.recognition_transaction_runtime"),
+  progressive = require("linkedspec.bounded_child_parse_authority"),
 }
 
 local ERROR_MT = {
@@ -155,6 +156,10 @@ function M.runtime_engine(compiled, options)
   if options.semantic_observation_sink ~= nil then
     fail("semantic_observation_sink is an invocation-local runtime parse option")
   end
+  if options.bounded_child_parse_authority ~= nil and
+      not typed_source.progressive.is_execution_seed(options.bounded_child_parse_authority) then
+    fail("bounded_child_parse_authority must be a private progressive execution seed")
+  end
   return trace_support.run(
     options.trace,
     "lua_runtime:create_engine",
@@ -179,11 +184,13 @@ function M.runtime_engine(compiled, options)
         })
       end
       compiled_spec.validate_no_removed_aggregate_selectors(compiled)
+      compiled_spec.validate_progressive_dispatch_policy(compiled)
       return setmetatable({
         compiled_spec = compiled,
         max_iterations = max_iterations,
         spec_name = options.spec_name,
         spec_path = options.spec_path,
+        bounded_child_parse_authority = options.bounded_child_parse_authority,
         regex_cache = {},
         boundary_regex_cache = {},
         helper_regex_cache = {},
@@ -279,7 +286,8 @@ local function context(
     semantic_observation_sink,
     trace_emitter,
     generated_families,
-    generated_source_identity
+    generated_source_identity,
+    progressive_dispatch_state
   )
   local valid, position = json.validate_utf8(input)
   if not valid then
@@ -323,6 +331,7 @@ local function context(
     top_rule = top_rule,
     generated_families = generated_families,
     generated_source_identity = generated_source_identity,
+    progressive_dispatch_state = progressive_dispatch_state,
   }
 end
 
@@ -3063,6 +3072,27 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     end
     return result
   end
+  if kind == "progressive_dispatch_span" then
+    if ctx.progressive_dispatch_state == nil then
+      error(typed_source.progressive.missing_registry_exception({
+        origin = (ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule) .. ":dispatch_span",
+        parser_id = expr.parser_id,
+      }), 0)
+    end
+    local span_value = lookup_binding(ctx, expr.span)
+    span_value = copy_value(span_value)
+    local result = typed_source.progressive.dispatch_execution(
+      ctx.progressive_dispatch_state,
+      {
+        origin = (ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule) .. ":dispatch_span",
+        parser_id = expr.parser_id,
+        top_rule = expr.top_rule,
+        span = span_value,
+        transaction_active = typed_source.recognition.has_live_tokens(ctx),
+      }
+    )
+    return bind_scalar(ctx, expr.target, copy_value(result))
+  end
   if kind == "assign_scalar" then
     if expr.value.kind == "recognition_checkpoint" then
       local rule_label = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule
@@ -4693,6 +4723,11 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
       recognition_terminal_error = nil
     end
   end
+  if recognition_terminal_error ~= nil and
+      typed_source.progressive.is_dispatch_error(recognition_terminal_error) and
+      typed_source.recognition.has_live_tokens(ctx) then
+    typed_source.recognition.discard_live_tokens(ctx, label)
+  end
   local recognition_leave_ok, recognition_leave_error = pcall(
     typed_source.recognition.leave_invocation_with_outcome,
     ctx,
@@ -4827,6 +4862,13 @@ function M.runtime_parse(engine, input, options)
     )
   end
   local top = selection.rule.label
+  local progressive_dispatch_state = nil
+  if engine.bounded_child_parse_authority ~= nil then
+    progressive_dispatch_state = typed_source.progressive.start_execution(
+      engine.bounded_child_parse_authority,
+      input
+    )
+  end
   local ctx = context(
     engine,
     input,
@@ -4836,7 +4878,8 @@ function M.runtime_parse(engine, input, options)
     options.semantic_observation_sink,
     options.trace,
     options._generated_families,
-    options._generated_source_identity
+    options._generated_source_identity,
+    progressive_dispatch_state
   )
   -- Mirror Perl's public parser wrapper; direct rule handlers bypass this boundary.
   set_live_cursor(ctx, public_parser_start_byte(input))

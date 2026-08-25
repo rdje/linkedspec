@@ -486,19 +486,49 @@ CURRENT_BOUNDARY = {
             },
         ],
     },
-    "backend_guard_groups": [
-        {
-            "backend": "lua",
-            "paths": [
-                "lua/src/linkedspec/action_ast.lua",
-                "lua/src/linkedspec/action_call_names.lua",
-                "lua/src/linkedspec/action_contracts.lua",
-                "lua/src/linkedspec/action_parser.lua",
-                "lua/src/linkedspec/interpreter.lua",
-            ],
-            "forbidden_tokens": ["dispatch_span", "PROGRESSIVE_DISPATCH_SPAN"],
-        },
-    ],
+    "lua_dormant_carriers": {
+        "consumer_path": "lua/test_dormant/progressive_span_dispatch_contract_test.lua",
+        "canonical_discovery": "dormant_only",
+        "marker_rows": [
+            {
+                "path": "lua/src/linkedspec/action_ast.lua",
+                "tokens": ["progressive_dispatch_span"],
+            },
+            {
+                "path": "lua/src/linkedspec/action_parser.lua",
+                "tokens": ["dispatch_span", "progressive_parser_identity_literal_required"],
+            },
+            {
+                "path": "lua/src/linkedspec/action_contracts.lua",
+                "tokens": ["progressive_dispatch_span"],
+            },
+            {
+                "path": "lua/src/linkedspec/compiled_spec.lua",
+                "tokens": ["validate_progressive_dispatch_policy", "parser_registry_or_staged_dispatch"],
+            },
+            {
+                "path": "lua/src/linkedspec/bounded_child_parse_authority.lua",
+                "tokens": ["ProgressiveExecutionSeed", "ProgressiveExecutionState"],
+            },
+            {
+                "path": "lua/src/linkedspec/recognition_transaction_runtime.lua",
+                "tokens": ["has_live_tokens"],
+            },
+            {
+                "path": "lua/src/linkedspec/interpreter.lua",
+                "tokens": ["bounded_child_parse_authority", "progressive_dispatch_span"],
+            },
+            {
+                "path": "lua/src/linkedspec/source_emitter.lua",
+                "tokens": ["bounded_child_parse_authority", "execute_generated_parser_v2"],
+            },
+            {
+                "path": "lua/test_dormant/progressive_span_dispatch_contract_test.lua",
+                "tokens": ["four routes use fresh authority", "independently loaded emitted", "progressive_dispatch_span"],
+            },
+        ],
+    },
+    "backend_guard_groups": [],
     "outward_guard": {
         "paths": [
             "perl/LinkedSpec.pm",
@@ -723,6 +753,7 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
         "rust_carrier_paths": len(CURRENT_BOUNDARY["rust_carriers"]["marker_rows"]),
         "dart_carrier_paths": len(CURRENT_BOUNDARY["dart_carriers"]["marker_rows"]),
         "julia_carrier_paths": len(CURRENT_BOUNDARY["julia_carriers"]["marker_rows"]),
+        "lua_dormant_carrier_paths": len(CURRENT_BOUNDARY["lua_dormant_carriers"]["marker_rows"]),
         "backend_guard_groups": len(CURRENT_BOUNDARY["backend_guard_groups"]),
         "backend_guard_paths": sum(len(group["paths"]) for group in CURRENT_BOUNDARY["backend_guard_groups"]),
         "outward_guard_paths": len(CURRENT_BOUNDARY["outward_guard"]["paths"]),
@@ -843,6 +874,14 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
             for token in marker_row["tokens"]:
                 require(token in carrier, f"Julia carrier is missing {token}: {marker_row['path']}")
 
+        lua_carriers = CURRENT_BOUNDARY["lua_dormant_carriers"]
+        for marker_row in lua_carriers["marker_rows"]:
+            carrier_path = ROOT / marker_row["path"]
+            require(carrier_path.is_file(), f"Lua dormant carrier path is missing: {marker_row['path']}")
+            carrier = carrier_path.read_text(encoding="utf-8")
+            for token in marker_row["tokens"]:
+                require(token in carrier, f"Lua dormant carrier is missing {token}: {marker_row['path']}")
+
         for group in CURRENT_BOUNDARY["backend_guard_groups"]:
             for relative_path in group["paths"]:
                 guarded_path = ROOT / relative_path
@@ -933,6 +972,23 @@ def validate_contract(document: dict[str, Any], *, check_environment: bool = Tru
         require(
             ci.count(julia_carriers["invocation"]) == 1,
             "canonical Julia progressive admission invocation missing or duplicated",
+        )
+        require(
+            (ROOT / lua_carriers["consumer_path"]).is_file(),
+            "dormant Lua progressive consumer is missing",
+        )
+        require(
+            not (ROOT / "lua/test/progressive_span_dispatch_contract_test.lua").exists(),
+            "dormant Lua progressive consumer entered ordinary discovery",
+        )
+        lua_driver = (ROOT / "tools/run_lua_local.sh").read_text(encoding="utf-8")
+        require(
+            "progressive_span_dispatch_contract_test.lua" not in lua_driver,
+            "dormant Lua progressive consumer entered the ordinary Lua driver",
+        )
+        require(
+            lua_carriers["consumer_path"] not in ci,
+            "dormant Lua progressive consumer entered canonical CI",
         )
 
 
@@ -1047,8 +1103,8 @@ MUTATIONS: list[tuple[str, Callable[[dict[str, Any]], None]]] = [
     ("current_dart_invocation", set_value(["current_boundary", "dart_carriers", "invocation"], "dart test")),
     ("current_julia_marker", set_value(["current_boundary", "julia_carriers", "registration_marker"], "wrong")),
     ("current_julia_invocation", set_value(["current_boundary", "julia_carriers", "invocation"], "julia test")),
-    ("current_backend_guard_path", set_value(["current_boundary", "backend_guard_groups", 0, "paths", 0], "wrong.pm")),
-    ("current_backend_guard_token", set_value(["current_boundary", "backend_guard_groups", 0, "forbidden_tokens", 0], "parse_job")),
+    ("current_lua_consumer", set_value(["current_boundary", "lua_dormant_carriers", "consumer_path"], "lua/wrong.lua")),
+    ("current_lua_node_marker", set_value(["current_boundary", "lua_dormant_carriers", "marker_rows", 0, "tokens", 0], "WrongNode")),
     ("current_outward_guard_path", set_value(["current_boundary", "outward_guard", "paths", 0], "wrong.pm")),
     ("current_outward_guard_dispatch", set_value(["current_boundary", "outward_guard", "forbidden_tokens", 0], "parse_job")),
     ("current_outward_guard_rollout", set_value(["current_boundary", "outward_guard", "forbidden_tokens", 2], "staged_span_dispatch")),
@@ -1095,6 +1151,7 @@ def main() -> int:
         f"{len(document['current_boundary']['rust_carriers']['marker_rows'])} Rust + "
         f"{len(document['current_boundary']['dart_carriers']['marker_rows'])} Dart carrier paths; "
         f"{len(document['current_boundary']['julia_carriers']['marker_rows'])} Julia carrier paths; "
+        f"{len(document['current_boundary']['lua_dormant_carriers']['marker_rows'])} dormant Lua carrier paths; "
         f"{len(document['current_boundary']['backend_guard_groups'])} backend guards/"
         f"{sum(len(group['paths']) for group in document['current_boundary']['backend_guard_groups'])} paths; "
         f"{len(document['current_boundary']['outward_guard']['paths'])} outward guards; "

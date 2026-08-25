@@ -14,8 +14,9 @@
     "rust_carrier_paths": 9,
     "dart_carrier_paths": 8,
     "julia_carrier_paths": 9,
-    "backend_guard_groups": 1,
-    "backend_guard_paths": 5,
+    "lua_dormant_carrier_paths": 9,
+    "backend_guard_groups": 0,
+    "backend_guard_paths": 0,
     "outward_guard_paths": 10,
     "diagnostics": 26,
     "rollout_legs": 9,
@@ -1018,22 +1019,49 @@
         }
       ]
     },
-    "backend_guard_groups": [
-      {
-        "backend": "lua",
-        "paths": [
-          "lua/src/linkedspec/action_ast.lua",
-          "lua/src/linkedspec/action_call_names.lua",
-          "lua/src/linkedspec/action_contracts.lua",
-          "lua/src/linkedspec/action_parser.lua",
-          "lua/src/linkedspec/interpreter.lua"
-        ],
-        "forbidden_tokens": [
-          "dispatch_span",
-          "PROGRESSIVE_DISPATCH_SPAN"
-        ]
-      }
-    ],
+    "lua_dormant_carriers": {
+      "consumer_path": "lua/test_dormant/progressive_span_dispatch_contract_test.lua",
+      "canonical_discovery": "dormant_only",
+      "marker_rows": [
+        {
+          "path": "lua/src/linkedspec/action_ast.lua",
+          "tokens": ["progressive_dispatch_span"]
+        },
+        {
+          "path": "lua/src/linkedspec/action_parser.lua",
+          "tokens": ["dispatch_span", "progressive_parser_identity_literal_required"]
+        },
+        {
+          "path": "lua/src/linkedspec/action_contracts.lua",
+          "tokens": ["progressive_dispatch_span"]
+        },
+        {
+          "path": "lua/src/linkedspec/compiled_spec.lua",
+          "tokens": ["validate_progressive_dispatch_policy", "parser_registry_or_staged_dispatch"]
+        },
+        {
+          "path": "lua/src/linkedspec/bounded_child_parse_authority.lua",
+          "tokens": ["ProgressiveExecutionSeed", "ProgressiveExecutionState"]
+        },
+        {
+          "path": "lua/src/linkedspec/recognition_transaction_runtime.lua",
+          "tokens": ["has_live_tokens"]
+        },
+        {
+          "path": "lua/src/linkedspec/interpreter.lua",
+          "tokens": ["bounded_child_parse_authority", "progressive_dispatch_span"]
+        },
+        {
+          "path": "lua/src/linkedspec/source_emitter.lua",
+          "tokens": ["bounded_child_parse_authority", "execute_generated_parser_v2"]
+        },
+        {
+          "path": "lua/test_dormant/progressive_span_dispatch_contract_test.lua",
+          "tokens": ["four routes use fresh authority", "independently loaded emitted", "progressive_dispatch_span"]
+        }
+      ]
+    },
+    "backend_guard_groups": [],
     "outward_guard": {
       "paths": [
         "perl/LinkedSpec.pm",
@@ -1466,8 +1494,8 @@
     "current_dart_invocation",
     "current_julia_marker",
     "current_julia_invocation",
-    "current_backend_guard_path",
-    "current_backend_guard_token",
+    "current_lua_consumer",
+    "current_lua_node_marker",
     "current_outward_guard_path",
     "current_outward_guard_dispatch",
     "current_outward_guard_rollout",

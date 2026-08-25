@@ -6,8 +6,8 @@
 --   bash tools/run_lua_project_data.sh puc lua/test_dormant/progressive_span_dispatch_authority_test.lua
 --   bash tools/run_lua_project_data.sh luajit lua/test_dormant/progressive_span_dispatch_authority_test.lua
 --
--- The separate final-path consumer must remain 85-pass/one-RED until carrier
--- leaf `.14.6.6.2` adds its dedicated node and four execution routes.
+-- Carrier leaf `.14.6.6.2` adds the dedicated node and private interpreter
+-- seam while this authority proof remains independently runnable.
 
 local json = require("linkedspec.json")
 local linkedspec = require("linkedspec")
@@ -540,16 +540,23 @@ local ordinary_driver = read_all("tools/run_lua_local.sh")
 local canonical_driver = read_all("tools/run_ci_local.sh")
 check(not ordinary_driver:find("progressive_span_dispatch_authority_test", 1, true), "authority absent from ordinary discovery")
 check(not canonical_driver:find("progressive_span_dispatch_authority_test", 1, true), "authority absent from canonical discovery")
-for _, path in ipairs({
-  "lua/src/linkedspec/action_ast.lua",
-  "lua/src/linkedspec/action_call_names.lua",
-  "lua/src/linkedspec/action_contracts.lua",
-  "lua/src/linkedspec/action_parser.lua",
-  "lua/src/linkedspec/interpreter.lua",
+for _, row in ipairs({
+  { "lua/src/linkedspec/action_ast.lua", false, true },
+  { "lua/src/linkedspec/action_call_names.lua", false, false },
+  { "lua/src/linkedspec/action_contracts.lua", false, true },
+  { "lua/src/linkedspec/action_parser.lua", false, true },
+  { "lua/src/linkedspec/interpreter.lua", true, true },
 }) do
+  local path = row[1]
   local content = read_all(path)
-  check(not content:find("bounded_child_parse_authority", 1, true), path .. " has no authority carrier")
-  check(not content:find("progressive_dispatch_span", 1, true), path .. " has no dedicated node")
+  check(
+    (content:find("bounded_child_parse_authority", 1, true) ~= nil) == row[2],
+    path .. " authority carrier state"
+  )
+  check(
+    (content:find("progressive_dispatch_span", 1, true) ~= nil) == row[3],
+    path .. " dedicated node state"
+  )
 end
 
 if #failures > 0 then

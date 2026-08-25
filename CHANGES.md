@@ -10,6 +10,24 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-25 — FUTURE-PARITY-BACKLOG.14.6.6.2 — implement dormant Lua progressive carriers
+
+- Activated task-tree-first from exact clean Lua-authority commit `6cbf8fdf`; the reserved literal-id/literal-top/
+  bare-span assignment now lowers to one exclusive `progressive_dispatch_span` node on both Lua ABIs.
+- Malformed operands and residual generic calls reject before execution. Compile-time rule/function effect closure
+  rejects recognition-reachable dispatch, and live-token unwind restores recognition state without masking the
+  primary `progressive_transaction_forbidden` diagnostic.
+- `ProgressiveExecutionSeed` owns a copied decoded-source recipe and starts fresh execution state per parse.
+  Native, normalized-JSON reconstructed, generated-plan, and independently loaded emitted-module routes return
+  the same detached result at unchanged parent cursor on PUC Lua and LuaJIT.
+- The shared dormant carrier consumer is GREEN at 178/178 per ABI; the separate authority stays 273/273. Complete
+  ordinary Lua remains 178/178 per ABI, CLI 66/66 in both environments, corpus 105, and storage 19/3.
+- Neutral governance now records 9 dormant Lua carrier paths and zero backend guards at unchanged rollout
+  5/9/106. Perl 128/128, Dart 7/7, Julia 62/62, and the cfg-enabled Rust direct consumer agree.
+- Serialized/emitted artifacts omit callbacks, registry entries, fingerprints, decoded input snapshots,
+  cancellation, and mutable execution state. Generated-v2 format, ordinary/canonical discovery, rollout, typed
+  recurrence, package facade, README, and outward surfaces remain unchanged; dual-ABI admission `.3` is next.
+
 ## 2026-08-25 — FUTURE-PARITY-BACKLOG.14.6.6.1 — implement shared Lua progressive authority
 
 - Activated task-tree-first from exact clean Lua-RED commit `84178bd8`; added one direct Lua-5.1-compatible

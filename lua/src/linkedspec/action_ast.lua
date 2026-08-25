@@ -183,7 +183,8 @@ find_removed_aggregate_selector = function(value)
     return find_in_args(value.args)
   elseif kind == "recognition_checkpoint" or kind == "recognize_once" or
       kind == "observe_recognition" or
-      kind == "recognition_commit" or kind == "recognition_rollback" then
+      kind == "recognition_commit" or kind == "recognition_rollback" or
+      kind == "progressive_dispatch_span" then
     return nil
   elseif kind == "fluent_chain" then
     local selector = find_removed_aggregate_selector(value.receiver)

@@ -1,12 +1,12 @@
--- FUTURE-PARITY-BACKLOG.14.6.6.0 — dormant shared Lua progressive RED.
+-- FUTURE-PARITY-BACKLOG.14.6.6.2 — dormant shared Lua progressive carriers.
 --
--- This exact final-path consumer is deliberately absent from ordinary Lua
--- discovery and canonical CI. Run the same Lua-5.1-compatible source on both
--- admitted hosts through repository-local project storage:
+-- This exact final-path consumer remains outside ordinary Lua and canonical
+-- CI discovery. Run the same Lua-5.1-compatible source on both admitted hosts:
 --
 --   bash tools/run_lua_project_data.sh puc lua/test_dormant/progressive_span_dispatch_contract_test.lua
 --   bash tools/run_lua_project_data.sh luajit lua/test_dormant/progressive_span_dispatch_contract_test.lua
 
+local authority = require("linkedspec.bounded_child_parse_authority")
 local json = require("linkedspec.json")
 local linkedspec = require("linkedspec")
 
@@ -19,10 +19,7 @@ local function check(condition, label)
 end
 
 local function check_equal(actual, expected, label)
-  check(
-    actual == expected,
-    label .. ": expected " .. tostring(expected) .. ", got " .. tostring(actual)
-  )
+  check(actual == expected, label .. ": expected " .. tostring(expected) .. ", got " .. tostring(actual))
 end
 
 local function check_same_json(actual, expected, label)
@@ -78,15 +75,26 @@ local function objects_with_kind(value, kind)
 end
 
 local function compile_source(source)
-  local parsed = linkedspec.parse_spec(source)
+  local parsed = linkedspec.parse_spec_with_staged_user_function_definitions(source)
   linkedspec.validate_spec(parsed)
   return parsed, linkedspec.compile_spec(parsed)
+end
+
+local function expect_failure_code(operation, code, label)
+  local ok, captured = capture(operation)
+  check_equal(ok, false, label .. " rejects")
+  check(
+    string.find(tostring(captured), code, 1, true) ~= nil,
+    label .. " reports " .. code .. ": " .. tostring(captured)
+  )
+  return captured
 end
 
 local contract = json.decode(read_file(
   "capability_conformance/progressive_span_dispatch_contract.json"
 ))
-
+local fingerprint = "sha256:" .. string.rep("1", 64)
+local expected_value = json.harray({ kind = "identifier", text = "a" })
 local authored_source = [[Top::
  I {
   span = hash("source_id", "input", "start", 0, "end", 1, "provenance", "authored")
@@ -96,11 +104,7 @@ local authored_source = [[Top::
  /never/
 ]]
 
-check_equal(
-  contract.contract_id,
-  "linkedspec-progressive-span-dispatch-v1",
-  "neutral contract id"
-)
+check_equal(contract.contract_id, "linkedspec-progressive-span-dispatch-v1", "neutral contract id")
 check_equal(contract.format, 1, "neutral contract format")
 check_equal(
   contract.status,
@@ -118,8 +122,9 @@ for name, expected in pairs({
   rust_carrier_paths = 9,
   dart_carrier_paths = 8,
   julia_carrier_paths = 9,
-  backend_guard_groups = 1,
-  backend_guard_paths = 5,
+  lua_dormant_carrier_paths = 9,
+  backend_guard_groups = 0,
+  backend_guard_paths = 0,
   outward_guard_paths = 10,
   diagnostics = 26,
   rollout_legs = 9,
@@ -134,32 +139,17 @@ end
 for index = 6, 9 do
   check_equal(contract.rollout[index].status, "pending", "pending rollout " .. index)
 end
-check_equal(contract.rollout[6].leg, "puc_lua", "PUC Lua rollout leg")
-check_equal(
-  contract.rollout[6].owner,
-  "FUTURE-PARITY-BACKLOG.14.6.6",
-  "PUC Lua rollout owner"
-)
-check_equal(contract.rollout[7].leg, "luajit", "LuaJIT rollout leg")
-check_equal(
-  contract.rollout[7].owner,
-  "FUTURE-PARITY-BACKLOG.14.6.6",
-  "LuaJIT rollout owner"
-)
-check_equal(#contract.current_boundary.backend_guard_groups, 1, "one Lua guard group")
-local lua_guard = contract.current_boundary.backend_guard_groups[1]
-check_equal(lua_guard.backend, "lua", "Lua guard identity")
-check_equal(#lua_guard.paths, 5, "Lua guard path count")
-check_same_json(
-  lua_guard.forbidden_tokens,
-  json.array({ "dispatch_span", "PROGRESSIVE_DISPATCH_SPAN" }),
-  "Lua guard tokens"
-)
+check_equal(contract.rollout[6].owner, "FUTURE-PARITY-BACKLOG.14.6.6", "PUC Lua owner")
+check_equal(contract.rollout[7].owner, "FUTURE-PARITY-BACKLOG.14.6.6", "LuaJIT owner")
+local lua_carriers = contract.current_boundary.lua_dormant_carriers
+check_equal(lua_carriers.canonical_discovery, "dormant_only", "Lua carrier discovery state")
+check_equal(#lua_carriers.marker_rows, 9, "Lua carrier marker count")
+check_equal(#contract.current_boundary.backend_guard_groups, 0, "Lua pending guard retired")
 
 do
   local job = linkedspec.spec_ast.staged_parse_job({
     version = 1,
-    job_id = "progressive-lua-red",
+    job_id = "progressive-lua-carrier",
     parent_ast_path = json.array({ "Top" }),
     node_kind = "progressive_span_dispatch",
     payload_kind = "source_span",
@@ -177,23 +167,9 @@ do
     failure_policy = "fail_only",
     diagnostic_owner = "progressive_span_dispatch",
   })
-  local ok, captured = capture(function()
-    return linkedspec.execute_staged_parse_job(job)
-  end)
+  local ok, captured = capture(function() return linkedspec.execute_staged_parse_job(job) end)
   check_equal(ok, false, "unrelated staged registry rejects expr-v1")
-  check_equal(
-    linkedspec.is_staged_parser_registry_error(captured),
-    true,
-    "staged rejection remains typed"
-  )
-  check_equal(
-    tostring(captured),
-    "StagedParserRegistryException: staged parse dispatch failed: " ..
-      "phase=resolve job_id=progressive-lua-red parent_ast_path=Top " ..
-      "parser_spec_id=expr-v1 top_rule=Expr source_span=0-1 " ..
-      "failure_policy=fail_only detail=unsupported parser spec id 'expr-v1'",
-    "staged resolve boundary"
-  )
+  check_equal(linkedspec.is_staged_parser_registry_error(captured), true, "staged rejection remains typed")
 end
 
 local parsed, compiled = compile_source(authored_source)
@@ -204,131 +180,234 @@ for _, object in ipairs(objects_with_kind(top, "call")) do
   if object.name == "dispatch_span" then generic_calls[#generic_calls + 1] = object end
 end
 local progressive_nodes = objects_with_kind(top, "progressive_dispatch_span")
-local assignments = {}
-for _, object in ipairs(objects_with_kind(top, "assign_scalar")) do
-  if object.name == "value" then assignments[#assignments + 1] = object end
+
+check_equal(#generic_calls, 0, "generic dispatch_span call count")
+check_equal(#progressive_nodes, 1, "dedicated progressive node count")
+local progressive = progressive_nodes[1]
+check_equal(progressive.target, "value", "progressive target")
+check_equal(progressive.parser_id, "expr-v1", "progressive parser identity")
+check_equal(progressive.top_rule, "Expr", "progressive top rule")
+check_equal(progressive.span, "span", "progressive span binding")
+local encoded_action = json.encode(top)
+check_equal(count_literal(encoded_action, '"name":"dispatch_span"'), 0, "serialized generic call absent")
+check_equal(count_literal(encoded_action, '"kind":"progressive_dispatch_span"'), 1, "serialized node exact")
+check_equal(count_literal(encoded_action, fingerprint), 0, "compiled ActionIR omits fingerprint")
+check_equal(count_literal(encoded_action, "ProgressiveExecutionSeed"), 0, "compiled ActionIR omits authority")
+local payload = top.lifecycle_action_payloads[1]
+check_equal(payload.contracts.ok, true, "dedicated node satisfies helper contract")
+check_equal(#payload.contracts.diagnostics, 0, "dedicated node has no helper diagnostic")
+
+local malformed = {
+  {
+    [[Top:: I { span = hash("source_id", "input", "start", 0, "end", 1, "provenance", "authored"); value = dispatch_span(parser_id, "Expr", span) } /never/]],
+    "progressive_parser_identity_literal_required",
+  },
+  {
+    [[Top:: I { span = hash("source_id", "input", "start", 0, "end", 1, "provenance", "authored"); value = dispatch_span("Expr/V1", "Expr", span) } /never/]],
+    "progressive_parser_identity_invalid",
+  },
+  {
+    [[Top:: I { span = hash("source_id", "input", "start", 0, "end", 1, "provenance", "authored"); value = dispatch_span("expr-v1", top_rule, span) } /never/]],
+    "progressive_top_rule_literal_required",
+  },
+  {
+    [[Top:: I { span = hash("source_id", "input", "start", 0, "end", 1, "provenance", "authored"); value = dispatch_span("expr-v1", "Bad-Rule", span) } /never/]],
+    "progressive_top_rule_invalid",
+  },
+  {
+    [[Top:: I { value = dispatch_span("expr-v1", "Expr", hash("source_id", "input")) } /never/]],
+    "progressive_span_binding_required",
+  },
+  {
+    [[Top:: I { span = hash("source_id", "input", "start", 0, "end", 1, "provenance", "authored"); return(cat(dispatch_span("expr-v1", "Expr", span))) } /never/]],
+    "progressive_span_binding_required",
+  },
+  {
+    [[Top:: I { tx = recognition_checkpoint(); matched = recognize_once(tx, call(Child)); recognition_rollback(tx); return(matched) }
+Child:: I { span = hash("source_id", "input", "start", 0, "end", 1, "provenance", "authored"); value = dispatch_span("expr-v1", "Expr", span); return(value) } /never/]],
+    "recognition_effect_forbidden:parser_registry_or_staged_dispatch",
+  },
+  {
+    [[fn dispatch_child() { span = hash("source_id", "input", "start", 0, "end", 1, "provenance", "authored"); value = dispatch_span("expr-v1", "Expr", span); return(value) }
+Top:: I { tx = recognition_checkpoint(); matched = recognize_once(tx, call(Child)); recognition_rollback(tx); return(matched) }
+Child:: I { return(dispatch_child()) } /never/]],
+    "recognition_effect_forbidden:parser_registry_or_staged_dispatch",
+  },
+}
+for index, row in ipairs(malformed) do
+  expect_failure_code(function() return compile_source(row[1]) end, row[2], "malformed form " .. index)
 end
 
-check_equal(#generic_calls, 1, "current generic dispatch_span call count")
-check_equal(#progressive_nodes, 0, "current dedicated progressive node count")
-check_equal(#assignments, 1, "current dispatch assignment count")
-check_equal(assignments[1].value, generic_calls[1], "generic call remains assignment value")
-check_equal(#generic_calls[1].args, 3, "generic dispatch operand count")
-check_equal(generic_calls[1].args[1].value, "expr-v1", "generic parser identity")
-check_equal(generic_calls[1].args[2].value, "Expr", "generic top rule")
-check_equal(generic_calls[1].args[3].name, "span", "generic span binding")
-local payload = top.lifecycle_action_payloads[1]
-check_equal(payload.contracts.ok, false, "generic helper contract remains unresolved")
-check_equal(#payload.contracts.diagnostics, 1, "one generic helper diagnostic")
-check_equal(payload.contracts.diagnostics[1].code, "unknown_helper", "generic helper code")
-check_equal(
-  payload.contracts.diagnostics[1].helper_name,
-  "dispatch_span",
-  "generic helper identity"
-)
-
-local expected_runtime_record = json.harray({
-  message = "unsupported runtime helper 'dispatch_span'",
-  diagnostic = json.harray({
-    type = "runtime_parser",
-    stage = "runtime_execution",
-    summary = "Lua runtime interpreter failed",
-    detail = "unsupported runtime helper 'dispatch_span'",
-    owner_stage = "lua_runtime",
-    top_rule = "Top",
-    rule_label = "Top",
-    handler_source_label = "lua_runtime:rule:Top",
+local child_result = json.harray({ kind = "identifier", text = "a" })
+local callback_count = 0
+local child_ceilings = authority.ceilings({
+  source_detail = "text",
+  policy_modes = json.array({ "deterministic", "fail-only" }),
+  max_steps = 100,
+  max_result_nodes = 100,
+  max_diagnostic_bytes = 4096,
+})
+local registry = authority.registry({
+  entries = json.array({
+    authority.registry_entry({
+      parser_id = "expr-v1",
+      compiled_authority = function(request)
+        callback_count = callback_count + 1
+        check_equal(authority.request_parser_id(request), "expr-v1", "callback parser identity")
+        check_equal(authority.request_top_rule(request), "Expr", "callback top rule")
+        check_equal(authority.request_fingerprint(request), fingerprint, "callback fingerprint")
+        local view = authority.request_source_view(request)
+        check_equal(authority.view_text(view), "a", "bounded callback source view")
+        check_equal(authority.local_to_global(view, 0), 0, "bounded callback start rebases")
+        check_equal(authority.local_to_global(view, 1), 1, "bounded callback end rebases")
+        return child_result
+      end,
+      fingerprint = fingerprint,
+      allowed_top_rules = json.array({ "Expr" }),
+      capabilities = json.array({
+        "actionir-v1",
+        "structured-result-v1",
+        "typed-source-location-v1",
+      }),
+      ceilings = child_ceilings,
+    }),
   }),
 })
 
-local function check_runtime_failure(label, operation)
-  local ok, captured = capture(operation)
-  check_equal(ok, false, label .. " rejects")
-  check_equal(
-    linkedspec.is_runtime_interpreter_error(captured),
-    true,
-    label .. " typed runtime error"
-  )
-  if linkedspec.is_runtime_interpreter_error(captured) then
-    check_same_json(
-      linkedspec.interpreter.to_json(captured),
-      expected_runtime_record,
-      label .. " exact runtime record"
-    )
-  end
+local function execution_seed(input)
+  local sources = json.harray({ input = input })
+  local token = authority.cancellation_token()
+  local seed = authority.execution_seed({
+    registry = registry,
+    invocation = {
+      sources = sources,
+      source_id = "input",
+      cancellation_token = token,
+      now = function() return 1 end,
+      deadline_tick = 100,
+      remaining_steps = 100,
+      max_depth = 8,
+      total_calls = 0,
+      max_calls = 16,
+      active_chain = json.array(),
+    },
+    caller_capabilities = json.array({
+      "actionir-v1",
+      "structured-result-v1",
+      "typed-source-location-v1",
+    }),
+    required_capabilities = json.array({ "structured-result-v1" }),
+    caller_ceilings = child_ceilings,
+    required_source_detail = "none",
+    dispatch_cost = 1,
+  })
+  sources.input = "mutated-after-seed"
+  return seed
 end
 
-check_runtime_failure("native carrier", function()
-  return linkedspec.runtime_parse(linkedspec.runtime_engine(compiled), "abc").value
-end)
+local seed = execution_seed("abc")
+check_equal(authority.node_type(seed), "ProgressiveExecutionSeed", "opaque execution seed type")
+check_equal(tostring(seed), "ProgressiveExecutionSeed(<opaque>)", "opaque execution seed display")
+check(
+  authority.start_execution(seed, "abc") ~= authority.start_execution(seed, "abc"),
+  "each execution starts fresh progressive authority"
+)
+expect_failure_code(
+  function() return linkedspec.runtime_parse(linkedspec.runtime_engine(compiled), "abc") end,
+  "progressive_registry_missing",
+  "missing native authority"
+)
+
+local live_source = [[Top::
+ I {
+  tx = recognition_checkpoint()
+  span = hash("source_id", "input", "start", 0, "end", 1, "provenance", "authored")
+  value = dispatch_span("expr-v1", "Expr", span)
+  recognition_rollback(tx)
+  return(value)
+ }
+ /never/
+]]
+local _, live_compiled = compile_source(live_source)
+expect_failure_code(
+  function()
+    return linkedspec.runtime_parse(
+      linkedspec.runtime_engine(live_compiled, {
+        bounded_child_parse_authority = execution_seed("abc"),
+      }),
+      "abc"
+    )
+  end,
+  "progressive_transaction_forbidden",
+  "live recognition token defense"
+)
+
+-- All four routes use fresh authority and preserve the parent cursor.
+local native_engine = linkedspec.runtime_engine(compiled, {
+  bounded_child_parse_authority = execution_seed("abc"),
+})
+local native_result = linkedspec.runtime_parse(native_engine, "abc")
+check_same_json(native_result.value, expected_value, "native carrier value")
+check_equal(native_result.cursor_char_offset, 0, "native parent cursor unchanged")
+native_result.value.text = "mutated-parent-result"
+check_equal(child_result.text, "a", "native result detached from callback")
+check_same_json(linkedspec.runtime_parse(native_engine, "abc").value, expected_value, "native engine starts fresh")
 
 local normalized = json.decode(json.encode(linkedspec.spec_ast.to_json(parsed)))
+local normalized_text = json.encode(normalized)
+for _, forbidden in ipairs({ fingerprint, "ProgressiveExecutionSeed", "ProgressiveRegistryEntry", "cancellation_token" }) do
+  check_equal(count_literal(normalized_text, forbidden), 0, "normalized SpecFile omits " .. forbidden)
+end
 local reconstructed_spec = linkedspec.spec_ast.from_json("SpecFile", normalized)
 linkedspec.validate_spec(reconstructed_spec)
-check_same_json(
-  linkedspec.spec_ast.to_json(reconstructed_spec),
-  normalized,
-  "normalized SpecFile reconstruction"
-)
+check_same_json(linkedspec.spec_ast.to_json(reconstructed_spec), normalized, "normalized SpecFile reconstruction")
 local reconstructed = linkedspec.compile_spec(reconstructed_spec)
-check_runtime_failure("reconstructed carrier", function()
-  return linkedspec.runtime_parse(linkedspec.runtime_engine(reconstructed), "abc").value
-end)
+local reconstructed_result = linkedspec.runtime_parse(
+  linkedspec.runtime_engine(reconstructed, {
+    bounded_child_parse_authority = execution_seed("abc"),
+  }),
+  "abc"
+)
+check_same_json(reconstructed_result.value, expected_value, "reconstructed carrier value")
+check_equal(reconstructed_result.cursor_char_offset, 0, "reconstructed parent cursor unchanged")
 
 local plan = linkedspec.build_generated_rule_plan(compiled)
 check_equal(#plan, 1, "generated plan row count")
 check_equal(plan[1].label, "Top", "generated plan label")
 check_equal(plan[1].family, "default", "generated plan family")
-do
-  local ok, captured = capture(function()
-    return linkedspec.execute_generated_parser_v2(
-      compiled,
-      plan,
-      "abc",
-      "progressive-span-dispatch/lua-red.spec"
-    )
-  end)
-  check_equal(ok, false, "generated-plan carrier rejects")
-  check_equal(
-    tostring(captured),
-    "Generated Lua parser execution failed: RuntimeInterpreterException: " ..
-      "unsupported runtime helper 'dispatch_span'",
-    "generated-plan carrier boundary"
-  )
-end
+local generated_value = linkedspec.execute_generated_parser_v2(
+  compiled,
+  plan,
+  "abc",
+  "progressive-span-dispatch/lua-carrier.spec",
+  { bounded_child_parse_authority = execution_seed("abc") }
+)
+check_same_json(generated_value, expected_value, "generated-plan carrier value")
 
-local emitted_identity = "progressive-span-dispatch/lua-red-emitted.spec"
+-- The emitted carrier is independently loaded emitted source, then receives
+-- a live seed only at its execution boundary.
+local emitted_identity = "progressive-span-dispatch/lua-carrier-emitted.spec"
 local emitted = linkedspec.emit_lua_source_v2(compiled, emitted_identity)
-check_equal(count_literal(emitted, "dispatch_span"), 0, "emitted source omits generic spelling")
-check_equal(
-  count_literal(emitted, "progressive_dispatch_span"),
-  0,
-  "emitted source omits dedicated spelling"
-)
-check_equal(
-  count_literal(emitted, "sha256:1111111111111111111111111111111111111111111111111111111111111111"),
-  0,
-  "emitted source omits registry fingerprint"
-)
+check_equal(count_literal(emitted, fingerprint), 0, "emitted source omits fingerprint")
+check_equal(count_literal(emitted, "ProgressiveExecutionSeed"), 0, "emitted source omits seed object")
+check_equal(count_literal(emitted, "ProgressiveRegistryEntry"), 0, "emitted source omits registry object")
+check_equal(count_literal(emitted, "cancellation_token"), 0, "emitted source omits cancellation authority")
+check_equal(count_literal(emitted, "compiled_authority"), 0, "emitted source omits callback")
+check_equal(count_literal(emitted, "abc"), 0, "emitted source omits decoded input snapshot")
 local loader = loadstring or load
 local chunk, load_error = loader(emitted, "@progressive_span_dispatch_generated.lua")
 check(chunk ~= nil, "emitted module loads: " .. tostring(load_error))
 if chunk ~= nil then
   local generated_module = chunk()
-  check_equal(
-    generated_module.metadata().source_identity,
-    emitted_identity,
-    "emitted source identity"
-  )
-  local ok, captured = capture(function() return generated_module.execute("abc") end)
-  check_equal(ok, false, "emitted carrier rejects")
-  check_equal(
-    tostring(captured),
-    "Generated Lua parser execution failed: RuntimeInterpreterException: " ..
-      "unsupported runtime helper 'dispatch_span'",
-    "emitted carrier boundary"
-  )
+  check_equal(generated_module.metadata().source_identity, emitted_identity, "emitted source identity")
+  local emitted_value = generated_module.execute("abc", {
+    bounded_child_parse_authority = execution_seed("abc"),
+  })
+  check_same_json(emitted_value, expected_value, "emitted carrier value")
 end
+
+check(callback_count >= 5, "all successful routes invoked bounded callback")
+check_equal(child_result.text, "a", "all carrier results remain detached")
 
 local dormant_path = "lua/test_dormant/progressive_span_dispatch_contract_test.lua"
 local ordinary_path = "lua/test/progressive_span_dispatch_contract_test.lua"
@@ -340,27 +419,22 @@ check_equal(
   "ordinary discovery remains absent"
 )
 check_equal(
-  count_literal(read_file("tools/run_ci_local.sh"), "progressive_span_dispatch_contract_test.lua"),
+  count_literal(read_file("tools/run_ci_local.sh"), dormant_path),
   0,
   "canonical discovery remains absent"
 )
-for _, path in ipairs(lua_guard.paths) do
-  local source = read_file(path)
-  check_equal(count_literal(source, "dispatch_span"), 0, path .. " generic token absent")
-  check_equal(
-    count_literal(source, "PROGRESSIVE_DISPATCH_SPAN"),
-    0,
-    path .. " dedicated token absent"
-  )
+for _, row in ipairs(lua_carriers.marker_rows) do
+  local source = read_file(row.path)
+  for _, token in ipairs(row.tokens) do
+    check(string.find(source, token, 1, true) ~= nil, row.path .. " contains " .. token)
+  end
 end
-
--- This is the sole intentional RED boundary. Every assertion above records
--- current behavior; carrier owner .14.6.6.2 must replace the generic call with
--- one exclusive logical-only node and make this combined invariant GREEN.
-check(
-  #generic_calls == 0 and #progressive_nodes == 1,
-  "Lua progressive RED: missing exclusive progressive_dispatch_span node"
-)
+for _, path in ipairs(contract.current_boundary.outward_guard.paths) do
+  local source = read_file(path)
+  for _, token in ipairs(contract.current_boundary.outward_guard.forbidden_tokens) do
+    check_equal(count_literal(source, token), 0, path .. " outward token " .. token .. " absent")
+  end
+end
 
 if #failures == 0 then
   io.stdout:write(

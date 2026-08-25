@@ -246,6 +246,35 @@ function M.note_match(ctx, one)
   if frame ~= nil then frame.selected_match = one end
 end
 
+function M.has_live_tokens(ctx)
+  for _, frame in ipairs(ctx.recognition_frames) do
+    for _ in pairs(frame.tokens) do return true end
+  end
+  return false
+end
+
+function M.discard_live_tokens(ctx, rule_label)
+  local frame = active_frame(ctx, rule_label)
+  for slot, token in pairs(frame.tokens) do
+    transaction.set_frame_state(
+      ctx.recognition_authority,
+      frame.authority_frame,
+      frame_state(ctx, rule_label)
+    )
+    transaction.discard_token(
+      ctx.recognition_authority,
+      frame.authority_frame,
+      token.authority_token
+    )
+    apply_frame_state(
+      ctx,
+      rule_label,
+      transaction.frame_state(ctx.recognition_authority, frame.authority_frame)
+    )
+    frame.tokens[slot] = nil
+  end
+end
+
 function M.is_gap_error(value)
   return type(value) == "table" and getmetatable(value) == GAP_ERROR_MT
 end

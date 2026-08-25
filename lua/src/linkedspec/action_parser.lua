@@ -591,6 +591,48 @@ local function parser(root_source)
     local value = parse_expression(right, right_start)
     local name = left:match("^([A-Za-z_][A-Za-z0-9_]*)$")
     if name then
+      if value.kind == "call" and value.name == "dispatch_span" then
+        local function progressive_error(code)
+          error("LINKEDSPEC_PROGRESSIVE_SPAN_DISPATCH_ERROR:" .. code, 0)
+        end
+        if #value.args ~= 3 then progressive_error("progressive_span_binding_required") end
+        for _, argument in ipairs(value.args) do
+          if argument.argument_kind ~= "positional" then
+            progressive_error("progressive_span_binding_required")
+          end
+        end
+        local parser_operand = value.args[1].value
+        if parser_operand.kind ~= "string" then
+          progressive_error("progressive_parser_identity_literal_required")
+        end
+        if not parser_operand.value:match("^[a-z][a-z0-9]*[a-z0-9._:-]*$") or
+            parser_operand.value:match("[._:-][._:-]") or
+            parser_operand.value:match("[._:-]$") then
+          progressive_error("progressive_parser_identity_invalid")
+        end
+        local top_operand = value.args[2].value
+        if top_operand.kind ~= "string" then
+          progressive_error("progressive_top_rule_literal_required")
+        end
+        if not top_operand.value:match("^[A-Za-z_][A-Za-z0-9_]*$") then
+          progressive_error("progressive_top_rule_invalid")
+        end
+        local span_operand = value.args[3].value
+        if span_operand.kind ~= "variable" then
+          progressive_error("progressive_span_binding_required")
+        end
+        return action_ast.expr(
+          "progressive_dispatch_span",
+          text,
+          span(start_byte, start_byte + #text),
+          {
+            target = name,
+            parser_id = parser_operand.value,
+            top_rule = top_operand.value,
+            span = span_operand.name,
+          }
+        )
+      end
       return action_ast.expr("assign_scalar", text, span(start_byte, start_byte + #text), {
         name = name,
         value = value,

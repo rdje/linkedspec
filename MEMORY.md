@@ -1,13 +1,13 @@
 # MEMORY
 
-- activation_commit: `84178bd82f238338e6119fa3e9ad2b6d82170fae` — exact clean Lua-RED base for
-  task-tree-first focused `FUTURE-PARITY-BACKLOG.14.6.6.1`; brief cleared; no push.
-- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.6.1 - implement Lua progressive dispatch authority`;
-  one private shared module and dormant consumer pass 273/273 on both ABIs with no carrier/rollout movement.
-- active_work_unit: none after the intended `.14.6.6.1` commit; dormant Lua carrier `.14.6.6.2` is pending.
-- next_action: from the clean `.14.6.6.1` commit, retrieve and activate `FUTURE-PARITY-BACKLOG.14.6.6.2`
-  task-tree-first, then add only the dedicated node and four dormant dual-ABI carriers through fresh authority.
-- in_flight_uncommitted: none after the intended `.14.6.6.1` commit; no background job remains.
+- activation_commit: `6cbf8fdf9435dbadbf1d4c7ca4fbab89ba83811b` — exact clean Lua-authority base for
+  task-tree-first focused `FUTURE-PARITY-BACKLOG.14.6.6.2`; brief cleared; no push.
+- latest_completed_leaf: `FUTURE-PARITY-BACKLOG.14.6.6.2 - implement dormant Lua progressive carriers`;
+  one exclusive node and four fresh-authority routes pass 178/178 on both ABIs with rollout unchanged.
+- active_work_unit: none after the intended `.14.6.6.2` commit; canonical Lua admission `.14.6.6.3` is pending.
+- next_action: from the clean `.14.6.6.2` commit, retrieve and activate `FUTURE-PARITY-BACKLOG.14.6.6.3`
+  task-tree-first, preserve carrier behavior, and add only exact dual-ABI discovery/admission plus rollout.
+- in_flight_uncommitted: none after the intended `.14.6.6.2` commit; no background job remains.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
   sooner after a large/debug-heavy slice or context compaction.
@@ -33,17 +33,17 @@
   mandatory change-history segment `4992`, advancing finite collection/manifest controls to 21/20 while retaining
   every byte, root, segment, aggregate, owner, lifecycle, verifier, and storage control.
 - current_verification_contract: ADR `0073` makes focused proof the ordinary per-leaf default and canonical proof
-  mandatory at admission/milestone/public/infrastructure and final clean push boundaries; private Lua authority
-  `.14.6.6.1` remains unexported, unrouted, ActionIR-independent, and focused without a canonical trigger.
+  mandatory at admission/milestone/public/infrastructure and final clean push boundaries; dormant Lua carriers
+  `.14.6.6.2` remain unexported and unrouted, so this ordinary slice has no canonical trigger.
 - documentation_debt_owner: ADR `0066` composition-closes all stores; bounded live/history/task/Knowledge owners
   and their rollover/index gates remain current.
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
   separate, linear tokens, invocation-framed marks, cursor-only v1 progress, recurrence/public no-drift 9/9, and
   classifies private progressive dispatch fail-closed at 138 ActionIR rows / 250 calls / 58 mutations.
 - current_future_direction: neutral `.14.6.1` plus admitted Perl `.2`, Rust `.3`, Dart `.4`, and Julia `.5.0-.4`
-  remain rollout 5/9/106; Lua `.6.0` freezes one shared 85-pass/one-RED final path and `.6.1` supplies one private
-  273-assertion dual-ABI authority. Dormant carriers `.6.2`, admission `.3`, recomposition `.4`, recurrence `.7`,
+  remain rollout 5/9/106; Lua `.6.0` preserves the historical shared 85-pass/one-RED path, `.6.1` supplies one
+  273-assertion dual-ABI authority, and dormant `.6.2` makes four carriers GREEN at 178/178 per ABI. Admission `.3`, recomposition `.4`, recurrence `.7`,
   public `.8`, staged `.14.7`, and combined `.14.8` follow.
 - latest_bootstrap_read: 2026-08-25 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox
-  review complete; Lua `.14.6.6.1` implements one private shared registry/invocation/source-view authority at
-  273/273 per ABI, preserves the exact 85-pass/one-RED final path, and hands off dormant carriers `.2`.
+  review complete; Lua `.14.6.6.2` implements one exclusive node and four dormant fresh-authority routes at
+  178/178 per ABI, preserves authority 273/273 and rollout 5/9/106, and hands off admission `.3`.
