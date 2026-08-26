@@ -9,6 +9,21 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.5.2` — Dart staged current-depth authority): exact clean activation is
+  marker/provenance commit `16f9769a`; scope owns only private frozen resolution/cache, one complete marker depth,
+  result/failure policies, and the same consumer's `.3` recurrence RED.
+- `FrozenStagedRegistry` copies only completed candidate outcomes and logical entry metadata, then consumes an
+  exact one-for-one opaque callback map. Default top selection precedes canonical v2 identity. Cache keys cover
+  normalized identity/content/import/top/spec/helper/staged/effective-capability fields and store plans only.
+- The engine copies the complete AST, discovers current markers, resolves and validates all jobs/targets before
+  callbacks, and sorts typed paths/provenance/id with Unicode-scalar strings and numeric indices. Each callback
+  receives fresh cursor/mark/capture/variable/request aggregates; returned markers are deliberately not rescanned.
+- Results are finite/cycle-free/node-bounded plain data. All four stitch and three failure policies mutate only the
+  unpublished copy; `fail` exposes no partial sibling work, while continuing policies retain one detached
+  diagnostic. Runtime load/register are typed denials and no ambient discovery or compilation seam exists.
+- The exact dormant path is `+12 -1`, fatal analysis passes, 102 direct dependents pass, and ordinary Dart remains
+  416/416. Only `.3` recurrence, chain/resource limits, safe points, and original-source rebasing remain RED; v1,
+  marker/provenance/logical routes, governance, discovery, rollout, formats, public/outward truth do not move.
 - 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.5.1` — Dart staged marker/provenance): exact clean activation is dormant-
   boundary commit `93b035c3`; scope owns only the exclusive private node, literal/static closure, typed declaration
   provenance, four logical marker routes, and the same consumer's `.2` authority RED.

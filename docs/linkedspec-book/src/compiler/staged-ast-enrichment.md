@@ -406,13 +406,13 @@ This is private Rust backend admission, not public `parse_job(...)` authoring. O
 consumer, canonical CI requires and invokes it exactly once, and only Rust rollout is promoted. Dart, Julia, Lua,
 six-runtime recurrence, public authoring, independent recomposition, and combined no-drift retain their owners.
 
-## Current private, dormant Dart marker boundary
+## Current private, dormant Dart one-depth authority
 
-Dart `.14.7.5.0` established the no-production generic-call RED. `.14.7.5.1` now replaces only that exact
-assignment boundary while retaining the same excluded consumer,
+Dart `.14.7.5.0` established the no-production generic-call RED. `.14.7.5.1` replaced only that exact assignment
+boundary, and `.14.7.5.2` adds a separate private one-depth authority while retaining the same excluded consumer,
 `dart/test_dormant/staged_ast_enrichment_contract_test.dart`, which ordinary package-test discovery and canonical CI
-omit. Fatal analysis includes it successfully. An explicit focused run reports seven passing tests and one
-deliberate `.2` authority failure.
+omit. Fatal analysis includes it successfully. An explicit focused run reports twelve passing tests and one
+deliberate `.3` recursive-authority failure.
 
 The GREEN groups freeze all neutral inventories and the unchanged function-body-v1 adapter, including stable
 resolve/load/compile/execute/cache/stitch records, complete wrong-top context, and resolve-time denial of general
@@ -472,16 +472,68 @@ The detached logical marker contains only version/effect identities plus the `st
 normalized options, exact materialized text, typed provenance, and origin. It contains no regex, source authority,
 match object, parser, registry, callback, scheduler, cache, path, or host handle. Native, `SpecFile`-JSON
 reconstructed, generated-plan, and independently analyzed/executed emitted routes return equal marker data
-without changing generated format v2 or adding caller-frozen parser authority.
+without changing generated format v2. Those routes still preserve logical marker data only; `.2` does not attach
+host callbacks to a top-level production execution.
 
-The eighth test fails only with `LINKEDSPEC_STAGED_AST_ENRICHMENT_DART_RED`, naming missing pre-registered
-resolution, immutable cache, and result/failure policy authority. The neutral checker requires this exact dormant
-path, the eventual `dart/test/staged_ast_enrichment_contract_test.dart` path to remain absent, and both paths to
-have zero canonical references. Dart rollout stays pending. `.14.7.5.2-.4` separately retain authority/policies,
-recurrence/bounds/rebasing, and fresh carriers/admission.
+The private `FrozenStagedRegistry` accepts one caller-completed snapshot and a one-for-one map from opaque logical
+authority names to already-compiled Dart callbacks. It deeply owns aliases, declaring-relative candidates,
+ordered search-root/provider outcomes, digests, top rules, versions, capabilities, policy modes, and ceilings.
+Missing or extra callback bindings reject. `register(...)` and `load(...)` are typed denials, and the module has no
+filesystem, provider-query, import-enumeration, environment, network, loader, compiler, or registry-mutation path.
+
+Resolution is pure and ordered:
+
+1. a declaring-spec alias;
+2. a declaring-spec-relative candidate;
+3. the first ordered search-root group containing one candidate;
+4. the first ordered provider group containing one candidate.
+
+Missing identities, two candidates at one priority, and an alias/relative collision are hard diagnostics. Entry
+authority can only narrow the caller: effective capabilities and policy modes are intersections, source detail is
+the lower grant, and numeric ceilings are minima. An omitted top rule is selected from the frozen entry before the
+canonical `parse_job:v2:sha256:<digest>` identity is calculated.
+
+The invocation-local cache key covers the normalized resolved identity, content digest, import-graph digest,
+selected top, spec/helper/staged versions, and sorted effective capabilities. It stores only the immutable callback
+plan. The callback still runs on every job and every invocation; failed results, successful results, diagnostics,
+and partial AST work never enter the cache.
+
+`enrichStagedCurrentDepth(...)` first copies the complete parent AST. It discovers only currently visible markers,
+resolves every job, validates every stitch target, rejects duplicate ids, and sorts typed parent paths, typed
+provenance, and job ids before the first callback. String components use Unicode-scalar ordering; nonnegative
+indices are numeric, so index `2` precedes `10`. Each sibling callback receives fresh cursor, mark, capture,
+variable, and request objects.
+
+For a `sibling_field` marker, the private transformation is conceptually:
+
+```json
+{
+  "before": {"payload": "<STAGED_PARSE_JOB_MARKER>"},
+  "child_result": {"kind": "expr", "value": 3},
+  "after": {
+    "payload": "1+2",
+    "expression_ast": {"kind": "expr", "value": 3}
+  }
+}
+```
+
+`replace_marker`, `replace_field`, `sibling_field`, and `append_child` all require exact target shape. Results must
+be finite, acyclic, node-bounded plain data and may contain no parser, registry, source authority, transaction,
+callback, host, path, reference-cycle, or other live handle. `fail` publishes no composed AST. `keep_text` restores
+the exact declaration text and retains the diagnostic; `diagnostic_node` applies the selected result target with
+one detached diagnostic node and retains the same scheduler-sidecar diagnostic. All mutations occur on the
+unpublished copy, so a later sibling failure cannot expose an earlier sibling success.
+
+Returned markers intentionally remain inert. The thirteenth test fails only with
+`LINKEDSPEC_STAGED_AST_ENRICHMENT_DART_RED`, naming missing breadth-first recurrence, decreasing-chain/cycle and
+shared resource bounds, callback safe points, and original-source diagnostic rebasing. The neutral checker requires
+this exact dormant path, the eventual `dart/test/staged_ast_enrichment_contract_test.dart` path to remain absent,
+and both paths to have zero canonical references. Dart rollout stays pending. `.14.7.5.3` owns recursive bounded
+authority; `.4` owns fresh native/reconstructed/generated/emitted authority, admission, and rollout.
 
 The admitted Perl and Rust consumers each snapshot the complete neutral current projection before their backend-
-specific assertions. Marker/provenance does not change the neutral mutation count or Dart dormant lifecycle.
+specific assertions. Marker/provenance/current-depth authority does not change the neutral mutation count or Dart
+dormant lifecycle.
 
 Publishing this boundary crossed the bounded `CHANGES.md` rollover threshold. The repository archived one complete
 224-line record set as immutable segment `4990`; ADR `0091` advances only the finite change-history collection and

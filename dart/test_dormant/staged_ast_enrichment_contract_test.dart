@@ -18,6 +18,7 @@ import 'dart:io';
 
 import 'package:linkedspec_dart/linkedspec_dart.dart';
 import 'package:linkedspec_dart/src/runtime/source_location.dart';
+import 'package:linkedspec_dart/src/runtime/staged_ast_enrichment.dart';
 import 'package:linkedspec_dart/src/runtime/staged_parse_job.dart';
 import 'package:test/test.dart';
 
@@ -27,6 +28,7 @@ const _contractPath =
     '../capability_conformance/staged_ast_enrichment_contract.json';
 const _ciDriverPath = '../tools/run_ci_local.sh';
 const _contractId = 'linkedspec-staged-ast-enrichment-v1';
+const _markerKind = 'STAGED_PARSE_JOB_MARKER';
 const _sourceIdentity = 'staged-ast-enrichment/dart-red.spec';
 const _finalConsumerPath = 'test/staged_ast_enrichment_contract_test.dart';
 const _dormantConsumerPath =
@@ -625,7 +627,545 @@ Child::
     );
   });
 
-  test('RED advances exclusively to registry and result-policy authority', () {
+  test('frozen resolution authority and identities match neutral cases', () {
+    final snapshot = _cloneObject(contract['resolution_snapshot']);
+    final registry = FrozenStagedRegistry.fromSnapshot(
+      snapshot: snapshot,
+      compiledAuthorities: _compiledAuthorities(
+        snapshot,
+        (request, context) => StagedChildExecution.success(request['text']),
+      ),
+    );
+
+    for (final row in _list(contract['resolution_cases']).map(_object)) {
+      final resolved = row['resolved_spec_id'];
+      final diagnostic = row['diagnostic'];
+      if (diagnostic == null) {
+        expect(
+          registry.resolvePreRegistered(
+            declaringSpecId: row['declaring_spec_id']! as String,
+            parserSpecId: row['parser_spec_id']! as String,
+            jobId: 'job:${row['id']}',
+          ),
+          resolved,
+          reason: '${row['id']}',
+        );
+      } else {
+        expect(
+          () => registry.resolvePreRegistered(
+            declaringSpecId: row['declaring_spec_id']! as String,
+            parserSpecId: row['parser_spec_id']! as String,
+            jobId: 'job:${row['id']}',
+          ),
+          throwsA(_stagedCode(diagnostic as String)),
+          reason: '${row['id']}',
+        );
+      }
+    }
+
+    for (final row in _list(contract['job_id_cases']).map(_object)) {
+      expect(
+        stagedJobIdentity(<String, Object?>{
+          'declaring_spec_id': row['declaring_spec_id'],
+          'parent_ast_path': row['parent_ast_path'],
+          'node_kind': row['node_kind'],
+          'payload_kind': row['payload_kind'],
+          'parser_spec_id': row['parser_spec_id'],
+          'top_rule': row['top_rule'],
+          'provenance': row['provenance'],
+        }),
+        row['expected_job_id'],
+        reason: '${row['id']}',
+      );
+    }
+
+    String? baseCacheKey;
+    for (final row in _list(contract['cache_cases']).map(_object)) {
+      final key = stagedCacheIdentity(row['fields']);
+      baseCacheKey ??= key;
+      expect(key == baseCacheKey, row['same_as_base'], reason: '${row['id']}');
+    }
+
+    for (final row in _list(contract['authority_cases']).map(_object)) {
+      if (row['accepted'] == true) {
+        expect(
+          registry.evaluateAuthorityCase(
+            authorityCase: row,
+            jobId: 'job:${row['id']}',
+          ),
+          row['effective'],
+          reason: '${row['id']}',
+        );
+      } else {
+        expect(
+          () => registry.evaluateAuthorityCase(
+            authorityCase: row,
+            jobId: 'job:${row['id']}',
+          ),
+          throwsA(_stagedCode(row['diagnostic']! as String)),
+          reason: '${row['id']}',
+        );
+      }
+    }
+
+    _object(_list(snapshot['aliases']).first)['resolved_spec_id'] =
+        'registry:json-v1';
+    expect(
+      registry.resolvePreRegistered(
+        declaringSpecId: 'grammar/main.spec',
+        parserSpecId: 'expr',
+        jobId: 'job:frozen-after-seed-mutation',
+      ),
+      'registry:expr-v2',
+    );
+    expect(
+      () => registry.register('expr'),
+      throwsA(_stagedCode('staged_registry_mutation_forbidden')),
+    );
+    expect(
+      () => registry.load('expr'),
+      throwsA(_stagedCode('staged_implicit_load_forbidden')),
+    );
+  });
+
+  test('one complete depth is typed-ordered isolated and plan-cached', () {
+    for (final row in _list(contract['queue_cases']).map(_object)) {
+      expect(
+        stagedCurrentDepthOrder(row['jobs']),
+        row['expected_order'],
+        reason: '${row['id']}',
+      );
+    }
+    final invalidCache = _cloneObject(
+      _object(_list(contract['cache_cases']).first)['fields'],
+    )..remove('top_rule');
+    expect(
+      () => stagedCacheIdentity(invalidCache),
+      throwsA(_stagedCode('staged_cache_identity_invalid')),
+    );
+    final duplicateCapabilities = _cloneObject(
+      _object(_list(contract['cache_cases']).first)['fields'],
+    )..['backend_capabilities'] = <String>['duplicate', 'duplicate'];
+    expect(
+      () => stagedCacheIdentity(duplicateCapabilities),
+      throwsA(_stagedCode('staged_cache_identity_invalid')),
+    );
+
+    final observations = <_JsonObject>[];
+    final registry = _registry(contract, (request, context) {
+      observations.add(<String, Object?>{
+        'text': request['text'],
+        'cursor': context.cursor,
+        'marks': <String, Object?>{...context.marks},
+        'captures': <String, Object?>{...context.captures},
+        'variables': <String, Object?>{...context.variables},
+      });
+      context.cursor = 99;
+      context.marks['child'] = request['text'];
+      context.captures['capture'] = false;
+      context.variables['value'] = 0;
+      final text = request['text'];
+      request['text'] = 'callback-mutated-request';
+      return StagedChildExecution.success(<String, Object?>{
+        'kind': 'expr',
+        'text': text,
+      });
+    });
+    final nodes = List<Object?>.filled(11, null);
+    nodes[10] = _marker(text: 'ten', start: 10, end: 13);
+    nodes[2] = _marker(text: 'two', start: 2, end: 5);
+    final ast = <String, Object?>{'nodes': nodes};
+    final before = _cloneObject(ast);
+
+    final first = enrichStagedCurrentDepth(
+      registry: registry,
+      ast: ast,
+      options: _enrichmentOptions(),
+    );
+    expect(observations.map((row) => row['text']), <String>['two', 'ten']);
+    for (final row in observations) {
+      expect(row, <String, Object?>{
+        'text': row['text'],
+        'cursor': 0,
+        'marks': <String, Object?>{},
+        'captures': <String, Object?>{},
+        'variables': <String, Object?>{},
+      });
+    }
+    expect(_object(_list(_object(first.ast)['nodes'])[2]), <String, Object?>{
+      'kind': 'expr',
+      'text': 'two',
+    });
+    expect(_object(_list(_object(first.ast)['nodes'])[10]), <String, Object?>{
+      'kind': 'expr',
+      'text': 'ten',
+    });
+    expect(first.sidecars.map((row) => row['text']), <String>['two', 'ten']);
+    expect(first.cache.toJson(), <String, Object?>{
+      'snapshot_id': startsWith('registry-snapshot:sha256:'),
+      'entries': 1,
+      'hits': 1,
+      'misses': 1,
+    });
+    expect(ast, before);
+
+    final second = enrichStagedCurrentDepth(
+      registry: registry,
+      ast: ast,
+      options: _enrichmentOptions(),
+    );
+    expect(second.ast, first.ast);
+    expect(second.cache.entries, 1);
+    expect(second.cache.hits, 3);
+    expect(second.cache.misses, 1);
+    expect(observations, hasLength(4));
+
+    var nestedCalls = 0;
+    final inertRegistry = _registry(contract, (request, context) {
+      nestedCalls += 1;
+      return StagedChildExecution.success(
+        _marker(text: 'nested', start: 0, end: 6),
+      );
+    });
+    final inert = enrichStagedCurrentDepth(
+      registry: inertRegistry,
+      ast: <String, Object?>{
+        'payload': _marker(text: 'parent', start: 0, end: 6),
+      },
+      options: _enrichmentOptions(),
+    );
+    expect(nestedCalls, 1);
+    expect(_object(_object(inert.ast)['payload'])['kind'], _markerKind);
+
+    final defaultTop = enrichStagedCurrentDepth(
+      registry: _registry(
+        contract,
+        (request, context) =>
+            StagedChildExecution.success(<String, Object?>{'kind': 'document'}),
+      ),
+      ast: <String, Object?>{
+        'document': _marker(
+          text: 'abcdef',
+          end: 6,
+          nodeKind: 'document',
+          payloadKind: 'json',
+          parserSpecId: 'json.spec',
+          topRule: null,
+          requiredCapabilities: const <String>['typed-source-location-v1'],
+        ),
+      },
+      options: _enrichmentOptions(requiredSourceDetail: 'identity'),
+    );
+    expect(defaultTop.sidecars.single['top_rule'], 'Document');
+    final explicitTop = enrichStagedCurrentDepth(
+      registry: _registry(
+        contract,
+        (request, context) =>
+            StagedChildExecution.success(<String, Object?>{'kind': 'document'}),
+      ),
+      ast: <String, Object?>{
+        'document': _marker(
+          text: 'abcdef',
+          end: 6,
+          nodeKind: 'document',
+          payloadKind: 'json',
+          parserSpecId: 'json.spec',
+          topRule: 'Document',
+          requiredCapabilities: const <String>['typed-source-location-v1'],
+        ),
+      },
+      options: _enrichmentOptions(requiredSourceDetail: 'identity'),
+    );
+    expect(
+      defaultTop.sidecars.single['job_id'],
+      explicitTop.sidecars.single['job_id'],
+      reason: 'default top must be selected before deterministic identity',
+    );
+  });
+
+  test('all four result policies stitch detached plain results', () {
+    for (final row in _list(contract['stitch_cases']).map(_object)) {
+      final parent = _cloneObject(row['parent']);
+      final markerField = row['marker_field']! as String;
+      parent[markerField] = _marker(
+        text: row['text']! as String,
+        resultPolicy: row['result_policy']! as String,
+        into: row['into'] as String?,
+      );
+      final child = _copyPlainForTest(row['result']);
+      final registry = _registry(
+        contract,
+        (request, context) => StagedChildExecution.success(child),
+      );
+      final outcome = enrichStagedCurrentDepth(
+        registry: registry,
+        ast: parent,
+        options: _enrichmentOptions(),
+      );
+      expect(outcome.ast, row['expected_parent'], reason: '${row['id']}');
+      expect(outcome.sidecars.single['state'], 'succeeded');
+      expect(outcome.diagnostics, isEmpty);
+      if (child is Map<String, Object?>) {
+        child['mutated_after_return'] = true;
+        expect(
+          jsonEncode(outcome.ast),
+          isNot(contains('mutated_after_return')),
+          reason: '${row['id']} detachment',
+        );
+      }
+    }
+  });
+
+  test(
+    'all three failure policies retain diagnostics and publish atomically',
+    () {
+      for (final row in _list(contract['failure_cases']).map(_object)) {
+        final parent = _cloneObject(row['parent']);
+        final original = _cloneObject(parent);
+        final markerField = row['marker_field']! as String;
+        parent[markerField] = _marker(
+          text: row['text']! as String,
+          resultPolicy: row['result_policy']! as String,
+          into: row['into'] as String?,
+          failurePolicy: row['failure_policy']! as String,
+        );
+        final input = _cloneObject(parent);
+        final registry = _registry(
+          contract,
+          (request, context) => StagedChildExecution.failure(row['diagnostic']),
+        );
+        if (row['failure_policy'] == 'fail') {
+          expect(
+            () => enrichStagedCurrentDepth(
+              registry: registry,
+              ast: input,
+              options: _enrichmentOptions(),
+            ),
+            throwsA(_stagedCode('staged_child_failed')),
+            reason: '${row['id']}',
+          );
+          expect(
+            input,
+            parent,
+            reason: '${row['id']} input remains unpublished',
+          );
+          expect(original[markerField], isNot(equals(parent[markerField])));
+          continue;
+        }
+        final outcome = enrichStagedCurrentDepth(
+          registry: registry,
+          ast: input,
+          options: _enrichmentOptions(),
+        );
+        expect(outcome.diagnostics, hasLength(1));
+        expect(
+          _object(outcome.diagnostics.single['child_diagnostic']),
+          row['diagnostic'],
+        );
+        if (row['failure_policy'] == 'keep_text') {
+          expect(_object(outcome.ast)[markerField], row['text']);
+          expect(outcome.sidecars.single['state'], 'failed_keep_text');
+        } else {
+          final ast = _object(outcome.ast);
+          expect(ast[markerField], row['text']);
+          final node = _object(ast[row['into']]);
+          expect(node['kind'], 'staged_parse_diagnostic');
+          expect(node['diagnostic'], outcome.diagnostics.single);
+          expect(outcome.sidecars.single['state'], 'failed_diagnostic_node');
+        }
+      }
+
+      var calls = 0;
+      final registry = _registry(contract, (request, context) {
+        calls += 1;
+        return request['text'] == 'bad'
+            ? StagedChildExecution.failure(<String, Object?>{
+                'code': 'child_bad',
+              })
+            : StagedChildExecution.success(<String, Object?>{'kind': 'ok'});
+      });
+      final input = <String, Object?>{
+        'nodes': <Object?>[
+          _marker(text: 'good', start: 0, end: 4),
+          _marker(text: 'bad', start: 5, end: 8),
+        ],
+      };
+      final before = _cloneObject(input);
+      expect(
+        () => enrichStagedCurrentDepth(
+          registry: registry,
+          ast: input,
+          options: _enrichmentOptions(),
+        ),
+        throwsA(_stagedCode('staged_child_failed')),
+      );
+      expect(calls, 2);
+      expect(input, before, reason: 'partial first result must not publish');
+      expect(registry.cacheStats.entries, 1);
+      expect(registry.cacheStats.misses, 1);
+      expect(registry.cacheStats.hits, 1);
+
+      var failFirst = true;
+      var repeatedCalls = 0;
+      final repeatedRegistry = _registry(contract, (request, context) {
+        repeatedCalls += 1;
+        if (failFirst) {
+          failFirst = false;
+          return StagedChildExecution.failure(<String, Object?>{
+            'code': 'first_attempt_failed',
+          });
+        }
+        return StagedChildExecution.success(<String, Object?>{'kind': 'fresh'});
+      });
+      final repeatedInput = <String, Object?>{
+        'payload': _marker(text: 'repeat', end: 6),
+      };
+      expect(
+        () => enrichStagedCurrentDepth(
+          registry: repeatedRegistry,
+          ast: repeatedInput,
+          options: _enrichmentOptions(),
+        ),
+        throwsA(_stagedCode('staged_child_failed')),
+      );
+      final repeated = enrichStagedCurrentDepth(
+        registry: repeatedRegistry,
+        ast: repeatedInput,
+        options: _enrichmentOptions(),
+      );
+      expect(_object(repeated.ast)['payload'], <String, Object?>{
+        'kind': 'fresh',
+      });
+      expect(
+        repeatedCalls,
+        2,
+        reason: 'failed child result must not be cached',
+      );
+      expect(repeatedRegistry.cacheStats.entries, 1);
+      expect(repeatedRegistry.cacheStats.misses, 1);
+      expect(repeatedRegistry.cacheStats.hits, 1);
+    },
+  );
+
+  test('neutral detachment and stitch adversaries fail closed', () {
+    for (final row in _list(contract['detachment_cases']).map(_object)) {
+      final registry = _registry(
+        contract,
+        (request, context) => StagedChildExecution.success(row['value']),
+      );
+      final input = <String, Object?>{
+        'payload': _marker(text: 'x', start: 0, end: 1),
+      };
+      final options = _enrichmentOptions(
+        maxResultNodes: row['max_nodes']! as int,
+      );
+      if (row['accepted'] == true) {
+        final outcome = enrichStagedCurrentDepth(
+          registry: registry,
+          ast: input,
+          options: options,
+        );
+        expect(_object(outcome.ast)['payload'], row['value']);
+      } else {
+        expect(
+          () => enrichStagedCurrentDepth(
+            registry: registry,
+            ast: input,
+            options: options,
+          ),
+          throwsA(_stagedCode(row['diagnostic']! as String)),
+          reason: '${row['id']}',
+        );
+      }
+    }
+
+    final cycle = <String, Object?>{};
+    cycle['self'] = cycle;
+    final cyclicRegistry = _registry(
+      contract,
+      (request, context) => StagedChildExecution.success(cycle),
+    );
+    expect(
+      () => enrichStagedCurrentDepth(
+        registry: cyclicRegistry,
+        ast: <String, Object?>{'payload': _marker(text: 'x', start: 0, end: 1)},
+        options: _enrichmentOptions(),
+      ),
+      throwsA(_stagedCode('staged_result_not_detached')),
+    );
+
+    final adversaries = <(String, Object?, String)>[
+      (
+        'replace_field',
+        <String, Object?>{
+          'payload': _marker(resultPolicy: 'replace_field', into: 'missing'),
+        },
+        'staged_stitch_target_missing',
+      ),
+      (
+        'sibling_field',
+        <String, Object?>{
+          'payload': _marker(resultPolicy: 'sibling_field', into: 'ast'),
+          'ast': null,
+        },
+        'staged_stitch_target_collision',
+      ),
+      (
+        'append_child',
+        <String, Object?>{
+          'payload': _marker(resultPolicy: 'append_child', into: 'children'),
+          'children': <String, Object?>{},
+        },
+        'staged_append_target_invalid',
+      ),
+    ];
+    for (final (id, ast, code) in adversaries) {
+      var calls = 0;
+      final registry = _registry(contract, (request, context) {
+        calls += 1;
+        return StagedChildExecution.success(<String, Object?>{'kind': 'expr'});
+      });
+      expect(
+        () => enrichStagedCurrentDepth(
+          registry: registry,
+          ast: ast,
+          options: _enrichmentOptions(),
+        ),
+        throwsA(_stagedCode(code)),
+        reason: id,
+      );
+      expect(calls, 0, reason: '$id must reject during complete-depth prepare');
+    }
+
+    var completeDepthCalls = 0;
+    final completeDepthRegistry = _registry(contract, (request, context) {
+      completeDepthCalls += 1;
+      return StagedChildExecution.success(<String, Object?>{'kind': 'expr'});
+    });
+    expect(
+      () => enrichStagedCurrentDepth(
+        registry: completeDepthRegistry,
+        ast: <String, Object?>{
+          'a_valid': _marker(text: 'a', end: 1),
+          'z_invalid': _marker(
+            text: 'z',
+            end: 1,
+            resultPolicy: 'replace_field',
+            into: 'missing',
+          ),
+        },
+        options: _enrichmentOptions(),
+      ),
+      throwsA(_stagedCode('staged_stitch_target_missing')),
+    );
+    expect(
+      completeDepthCalls,
+      0,
+      reason: 'all jobs and targets must prepare before the first callback',
+    );
+  });
+
+  test('RED advances exclusively to recursive bounded authority', () {
     expect(File(_dormantConsumerPath).existsSync(), isTrue);
     expect(File(_finalConsumerPath).existsSync(), isFalse);
     final ci = File(_ciDriverPath).readAsStringSync();
@@ -642,9 +1182,10 @@ Child::
 
     fail(
       'LINKEDSPEC_STAGED_AST_ENRICHMENT_DART_RED: missing '
-      'authority=[pre_registered_resolution,immutable_cache,'
-      'result_failure_policies]; marker=[STAGED_PARSE_JOB_MARKER] and typed '
-      'provenance=[staged_parse_job_v2] are available',
+      'authority=[breadth_first_recursion,decreasing_chain_cycle_guards,'
+      'shared_resource_bounds,source_rebased_diagnostics]; '
+      'current_depth=[pre_registered_resolution,immutable_plan_cache,'
+      'result_failure_policies] is available',
     );
   });
 }
@@ -677,6 +1218,121 @@ StagedParseJob _v1Job({String topRule = actionIrBodyTopRule}) {
     diagnosticOwner: 'function_body',
   );
 }
+
+FrozenStagedRegistry _registry(
+  _JsonObject contract,
+  StagedCompiledAuthority callback,
+) {
+  final snapshot = _cloneObject(contract['resolution_snapshot']);
+  return FrozenStagedRegistry.fromSnapshot(
+    snapshot: snapshot,
+    compiledAuthorities: _compiledAuthorities(snapshot, callback),
+  );
+}
+
+Map<String, StagedCompiledAuthority> _compiledAuthorities(
+  _JsonObject snapshot,
+  StagedCompiledAuthority callback,
+) => <String, StagedCompiledAuthority>{
+  for (final row in _list(snapshot['entries']).map(_object))
+    row['compiled_authority']! as String: callback,
+};
+
+_JsonObject _enrichmentOptions({
+  int maxResultNodes = 128,
+  String requiredSourceDetail = 'span',
+}) => <String, Object?>{
+  'declaring_spec_id': 'grammar/main.spec',
+  'caller_capabilities': <String>[
+    'caller-only',
+    'staged-parse-job-v2',
+    'structured-result-v1',
+    'typed-source-location-v1',
+    'xml-v1',
+    'yaml-v1',
+  ],
+  'caller_policy_modes': <String>[
+    'append_child',
+    'diagnostic_node',
+    'fail',
+    'keep_text',
+    'replace_field',
+    'replace_marker',
+    'sibling_field',
+    'trace',
+  ],
+  'caller_ceilings': <String, Object?>{
+    'source_detail': 'text',
+    'max_steps': 1000,
+    'max_result_nodes': maxResultNodes,
+    'max_diagnostic_bytes': 4096,
+  },
+  'required_source_detail': requiredSourceDetail,
+  'required_versions': <String, Object?>{
+    'spec_language_version': 2,
+    'helper_contract_version': 'actionir-v3',
+    'staged_contract_version': 2,
+  },
+};
+
+_JsonObject _marker({
+  String text = 'abc',
+  int start = 0,
+  int? end,
+  String nodeKind = 'expression',
+  String payloadKind = 'embedded_expression',
+  String parserSpecId = 'expr',
+  String? topRule = 'Expr',
+  String resultPolicy = 'replace_marker',
+  String? into,
+  String failurePolicy = 'fail',
+  List<String> requiredCapabilities = const <String>[
+    'staged-parse-job-v2',
+    'typed-source-location-v1',
+  ],
+}) {
+  final sidecar = <String, Object?>{
+    'kind': 'staged_parse_job_v2',
+    'version': 2,
+    'state': 'declared',
+    'effect': 'staged_parse_job_declaration',
+    'node_kind': nodeKind,
+    'payload_kind': payloadKind,
+    'parser_spec_id': parserSpecId,
+    if (topRule != null) 'top_rule': topRule,
+    'result_policy': resultPolicy,
+    if (into != null) 'into': into,
+    'failure_policy': failurePolicy,
+    'required_capabilities': <String>[...requiredCapabilities],
+    'text': text,
+    'provenance': <String, Object?>{
+      'kind': 'direct_span',
+      'source_id': 'ascii',
+      'start': start,
+      'end': end ?? start + text.runes.length,
+      'provenance': 'capture',
+    },
+    'origin': 'contract:parse_job',
+  };
+  return <String, Object?>{
+    'kind': _markerKind,
+    'version': 2,
+    'sidecar_kind': 'staged_parse_job_v2',
+    'effect': 'staged_parse_job_declaration',
+    'staged_parse_job_v2': sidecar,
+  };
+}
+
+Matcher _stagedCode(String code) => isA<StagedAstEnrichmentException>().having(
+  (error) => error.code,
+  'code',
+  code,
+);
+
+_JsonObject _cloneObject(Object? value) =>
+    _object(jsonDecode(jsonEncode(value)));
+
+Object? _copyPlainForTest(Object? value) => jsonDecode(jsonEncode(value));
 
 _JsonObject _expectedMarker() => <String, Object?>{
   'kind': 'STAGED_PARSE_JOB_MARKER',

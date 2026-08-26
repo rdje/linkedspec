@@ -10,6 +10,23 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-26 — FUTURE-PARITY-BACKLOG.14.7.5.2 — add Dart staged current-depth authority
+
+- Added private `staged_ast_enrichment.dart`. `FrozenStagedRegistry` deeply owns caller-completed alias/relative/
+  ordered-root/provider outcomes and binds every logical authority name one-for-one to an already-compiled opaque
+  callback; runtime loading, compilation, provider query, filesystem access, and registry mutation are absent.
+- Added pure resolution, default-top-before-v2 job identity, exact eight-field normalized cache identity, and an
+  invocation-local plan-only cache. Entry versions/capabilities/policies/source detail/resource ceilings only
+  narrow caller authority; child results and failures always execute and never poison the cache.
+- Added complete current-depth preflight and typed path/provenance/job ordering, fresh sibling cursor/mark/capture/
+  variable contexts, finite acyclic node-bounded detachment, unpublished-copy atomicity, all four result policies,
+  all three failure policies, and exact target/live/cycle/overflow denials. Returned markers remain inert.
+- The same dormant consumer advances from `+7 -1` to `+12 -1`; only `.14.7.5.3` breadth-first recurrence,
+  decreasing-chain/cycle/shared-resource authority, safe points, and source-rebased diagnostics remain RED. Fatal
+  analysis, 102 direct dependents, and ordinary Dart 416/416 pass. V1, marker bytes/four logical routes, neutral 85
+  mutations, discovery/canonical topology, rollout, generated format, public/outward truth, and other backends do
+  not move.
+
 ## 2026-08-26 — FUTURE-PARITY-BACKLOG.14.7.5.1 — implement Dart staged marker provenance
 
 - Replaced only exact scalar assignment-form `parse_job(text_expr, literal_hash_options)` with a dedicated private

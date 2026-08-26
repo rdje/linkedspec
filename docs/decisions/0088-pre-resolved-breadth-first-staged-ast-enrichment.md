@@ -2,8 +2,8 @@
 
 - Date: 2026-08-25
 - Status: accepted architecture; executable neutral authority complete under `FUTURE-PARITY-BACKLOG.14.7.2`;
-  Perl and Rust private behavior/admission complete; Dart private marker/provenance complete under `.14.7.5.1`;
-  later authority, recurrence, and public authoring remain pending
+  Perl and Rust private behavior/admission complete; Dart private current-depth authority complete under
+  `.14.7.5.2`; later recurrence, carriers/admission, and public authoring remain pending
 - Tags: architecture, staged-parsing, parse-job, source-location, registry, queue, policies, diagnostics, portability
 
 ## Context
@@ -316,6 +316,24 @@ fails only at `.14.7.5.2`'s missing caller-frozen resolution/cache/result/failur
 registration, Dart rollout, function-body v1, recurrence, public/outward behavior, and neutral 85-mutation
 governance remain unchanged.
 
+Dart current-depth leaf `FUTURE-PARITY-BACKLOG.14.7.5.2` adds a separate private
+`staged_ast_enrichment.dart` authority without widening the function-body-v1 registry or attaching a production
+carrier. `FrozenStagedRegistry` deeply owns only caller-completed alias/declaring-relative/ordered-root/provider
+outcomes and logical entries bound to already-compiled opaque callbacks. Missing/extra callback bindings reject;
+runtime register/load operations are typed denials. Pure selection, top/version/capability/policy/source-detail
+narrowing, default-top-before-job-id construction, and exact eight-field immutable-plan cache identity now match
+the neutral contract. Child results and failures always execute and never enter the cache.
+
+`enrichStagedCurrentDepth` copies the parent AST, discovers only current markers, prepares every resolution and
+stitch target before the first callback, sorts by typed path/provenance/job id with Unicode-scalar strings and
+numeric indices, and gives each sibling fresh cursor/mark/capture/variable state. Finite acyclic node-bounded
+plain results stitch through all four result policies; `fail`, `keep_text`, and `diagnostic_node` operate on the
+unpublished copy and retain detached scheduler diagnostics. Returned markers stay inert. The excluded consumer
+now reports twelve GREEN groups and one `.14.7.5.3` RED naming breadth-first recurrence, exact chain/cycle guards,
+shared resource bounds, safe points, and original-source diagnostic rebasing. Fatal analysis, 102 direct
+dependents, and all 416 ordinary Dart tests pass. Ordinary/canonical discovery, Dart rollout, generated format,
+function-body v1, public/outward behavior, other backends, and neutral 85-mutation governance remain unchanged.
+
 ## Links
 
 - Owning task: `docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md`
@@ -328,4 +346,5 @@ governance remain unchanged.
   `docs/knowledge/rust-staged-ast-enrichment-dormant-red.md` and
   `docs/knowledge/rust-staged-ast-enrichment-current-depth-authority.md` plus
   `docs/knowledge/rust-staged-ast-enrichment-recursive-authority.md` and
-  `docs/knowledge/dart-staged-ast-enrichment-dormant-red.md`
+  `docs/knowledge/dart-staged-ast-enrichment-dormant-red.md` plus
+  `docs/knowledge/dart-staged-ast-enrichment-current-depth-authority.md`

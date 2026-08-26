@@ -2,28 +2,30 @@
 
 ## Current Activity
 
-- Dart staged `.14.7.5.1` privately claims only exact assignment-form `parse_job(...)` with one dedicated logical
-  marker, strict literal options, and a detached `staged_parse_job_v2` sidecar.
-- Live Dart regex instrumentation proves participating capture boundaries lazily, preserves the original match,
-  and converts only those UTF-16 boundaries through the existing Unicode-scalar source authority. Literal,
-  transformed, ambiguous/unprovable, reversed, out-of-range, empty-derived, and smuggled provenance fails closed.
-- Fatal analysis, 132 direct dependents, and ordinary Dart 416/416 are GREEN. The same dormant consumer is now
-  seven GREEN groups and one intentional RED naming only `.14.7.5.2` resolution/cache/result/failure authority.
-- Native, `SpecFile`-JSON reconstructed, generated-plan, and independently analyzed/executed emitted routes
-  preserve equal detached logical markers. Current function-body v1, neutral 85-mutation governance, discovery,
-  rollout, generated format, public/outward surfaces, and other backends do not move.
+- Dart staged `.14.7.5.2` adds one private caller-frozen registry containing only completed candidate outcomes and
+  already-compiled opaque callbacks. Pure selection has no loader/compiler/provider/filesystem authority.
+- Default top precedes deterministic v2 identity; the exact eight-field cache stores plans only. One complete
+  depth preflights every job/target, orders typed paths/provenance/id, and gives siblings fresh runtime state.
+- All four result plus three failure policies operate atomically on an unpublished AST copy after node-bounded
+  detachment. The same consumer is `+12 -1`; only `.3` recurrence/bounds/safe-point/rebasing authority is RED.
+- Fatal analysis, 102 direct dependents, and ordinary Dart 416/416 are GREEN. Marker/provenance/logical routes,
+  function-body v1, neutral 85 mutations, discovery, rollout, formats, public/outward truth, and other backends do
+  not move.
 
 ## Latest Completed Slice
 
-- `.14.7.5.1` implementation and focused behavior proof are complete from clean activation commit `93b035c3`;
+- `.14.7.5.2` implementation and focused behavior proof are complete from clean activation commit `16f9769a`;
   atomic commit and clean handoff remain.
 
 ## Next Action
 
-- Commit `.14.7.5.1`; from the clean handoff, activate Dart caller-frozen resolution/cache/result/failure leaf
-  `.14.7.5.2` task-tree-first.
+- Commit `.14.7.5.2`; from the clean handoff, activate Dart recursive bounded authority leaf `.14.7.5.3`
+  task-tree-first.
 
 ## Recent Completions
+
+- `2026-08-26` — `.14.7.5.2` adds Dart's caller-frozen pure resolver, selected-top identities, plan-only cache,
+  isolated current-depth execution, detached atomic stitching, and all policies; only `.3` recurrence remains RED.
 
 - `2026-08-26` — `.14.7.5.1` adds Dart's exclusive private staged declaration node, strict static closure, live-
   regex-proven typed provenance, and equal detached logical markers across four dormant routes; only `.2`
@@ -74,9 +76,6 @@
 
 - `2026-08-26` — `.14.7.3.1` adds Perl's private exclusive marker, opaque v2 declaration sidecar, strict literal
   options, and typed direct/ordered-derived provenance; 120 assertions pass and only `.2` authority remains RED.
-
-- `2026-08-25` — `.14.7.3.0` freezes Perl's exact 60-pass/one-RED marker boundary while preserving function-body
-  v1, production behavior, discovery, rollout, generated format, and all outward surfaces.
 
 ## History
 
