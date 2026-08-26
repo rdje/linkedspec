@@ -354,14 +354,16 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   occurs only after the parent result and returns the detached neutral record. No outer cfg, cfg-only export,
   check-cfg registration, or conditional dead-code allowance remains. Dart `.14.7.5.0` now freezes the next
   boundary without changing this Rust route.
-- **Dart general-staged dormant boundary:** `FUTURE-PARITY-BACKLOG.14.7.5.0` owns
+- **Dart general-staged dormant boundary:** `FUTURE-PARITY-BACKLOG.14.7.5.0-.1` own
   `dart/test_dormant/staged_ast_enrichment_contract_test.dart`. Run fatal analysis and then the exact opt-in test
-  from `dart/` through `bash ../tools/run_dart_project_data.sh`. Four tests must pass and the fifth must fail only
-  with `LINKEDSPEC_STAGED_AST_ENRICHMENT_DART_RED`. Inspect compiled JSON through `ActionCallExpr`, not source
-  spelling: current assignment-form `parse_job(...)` is one generic call, native/reconstructed execution reports
-  `unknown_helper`, and generated-plan/emitted routes preserve the same rejection. The final
+  from `dart/` through `bash ../tools/run_dart_project_data.sh`. Seven tests must pass and the eighth must fail only
+  with `.2`'s `LINKEDSPEC_STAGED_AST_ENRICHMENT_DART_RED` authority list. Inspect compiled JSON: exact assignment-
+  form `parse_job(...)` is one `ActionStagedParseJobExpr`, while residual generic calls reject. Inspect
+  `runtime/staged_parse_job.dart` for detached marker materialization and `runtime/matching.dart` for lazy zero-
+  width suffix instrumentation that proves capture boundaries before `SourceAuthority` converts them to Unicode-
+  scalar spans. Native/reconstructed/generated-plan/emitted routes preserve equal logical marker data. The final
   `dart/test/staged_ast_enrichment_contract_test.dart` path and both canonical references must remain absent until
-  `.14.7.5.4`; `.14.7.5.1` owns only the missing dedicated marker and typed provenance. Because every admitted
+  `.14.7.5.4`; `.14.7.5.2` next owns only caller-frozen resolution/cache/result/failure authority. Because every admitted
   consumer snapshots the full neutral current projection, rerun both Perl and Rust consumers whenever any later
   backend lifecycle or governed mutation count moves.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),

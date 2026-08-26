@@ -162,6 +162,129 @@ final class ActionProgressiveDispatchSpanExpr extends ActionExpr {
   };
 }
 
+/// One direct live-match projection in a staged parse-job text plan.
+final class ActionStagedParseJobDirectTextPlan {
+  const ActionStagedParseJobDirectTextPlan({required this.source, this.index});
+
+  final String source;
+  final int? index;
+
+  ActionJsonObject toJson() => {
+    'source': source,
+    if (index != null) 'index': index,
+  };
+}
+
+/// Closed source-provenance plan for one inert staged parse-job declaration.
+sealed class ActionStagedParseJobTextPlan {
+  const ActionStagedParseJobTextPlan();
+
+  ActionJsonObject toJson();
+}
+
+final class ActionStagedParseJobDirectSpanPlan
+    extends ActionStagedParseJobTextPlan {
+  const ActionStagedParseJobDirectSpanPlan({required this.source, this.index});
+
+  final String source;
+  final int? index;
+
+  @override
+  ActionJsonObject toJson() => {
+    'kind': 'direct_span',
+    'source': source,
+    if (index != null) 'index': index,
+  };
+}
+
+final class ActionStagedParseJobDerivedTextPlan
+    extends ActionStagedParseJobTextPlan {
+  ActionStagedParseJobDerivedTextPlan({
+    required List<ActionStagedParseJobDirectTextPlan> segments,
+  }) : segments = List<ActionStagedParseJobDirectTextPlan>.unmodifiable(
+         segments,
+       );
+
+  static const policy = 'concatenate_in_order';
+
+  final List<ActionStagedParseJobDirectTextPlan> segments;
+
+  @override
+  ActionJsonObject toJson() => {
+    'kind': 'derived_text',
+    'policy': policy,
+    'segments': [for (final segment in segments) segment.toJson()],
+  };
+}
+
+/// Normalized literal-only options retained by a staged declaration.
+final class ActionStagedParseJobOptions {
+  ActionStagedParseJobOptions({
+    required this.nodeKind,
+    required this.payloadKind,
+    required this.spec,
+    required this.resultPolicy,
+    required this.onError,
+    required List<String> requiredCapabilities,
+    this.top,
+    this.into,
+  }) : requiredCapabilities = List<String>.unmodifiable(requiredCapabilities);
+
+  final String nodeKind;
+  final String payloadKind;
+  final String spec;
+  final String? top;
+  final String resultPolicy;
+  final String? into;
+  final String onError;
+  final List<String> requiredCapabilities;
+
+  ActionJsonObject toJson() => {
+    'node_kind': nodeKind,
+    'payload_kind': payloadKind,
+    'spec': spec,
+    if (top != null) 'top': top,
+    'result_policy': resultPolicy,
+    if (into != null) 'into': into,
+    'on_error': onError,
+    'required_capabilities': requiredCapabilities,
+  };
+}
+
+/// Declares one inert general staged parse job with typed source provenance.
+///
+/// This node owns the complete scalar assignment. It is logical data only: no
+/// parser, registry, callback, path, scheduler, or other execution authority is
+/// retained by the node or the marker it constructs.
+final class ActionStagedParseJobExpr extends ActionExpr {
+  const ActionStagedParseJobExpr({
+    required super.source,
+    required super.sourceSpan,
+    required this.target,
+    required this.textPlan,
+    required this.options,
+  }) : super(kind: 'staged_parse_job_marker');
+
+  static const version = 2;
+  static const sidecarKind = 'staged_parse_job_v2';
+  static const effect = 'staged_parse_job_declaration';
+
+  final String target;
+  final ActionStagedParseJobTextPlan textPlan;
+  final ActionStagedParseJobOptions options;
+
+  @override
+  ActionJsonObject toJson() => {
+    ...baseJson(),
+    'target': target,
+    'version': version,
+    'sidecar_kind': sidecarKind,
+    'effect': effect,
+    'text_plan': textPlan.toJson(),
+    'options': options.toJson(),
+  };
+}
+
 /// Creates one rule-local opaque recognition-transaction token.
 final class ActionRecognitionCheckpointExpr extends ActionExpr {
   const ActionRecognitionCheckpointExpr({
@@ -1069,6 +1192,7 @@ RemovedAggregateSelector? findRemovedAggregateSelectorInExpr(ActionExpr expr) {
       return inArgs(args);
     case ActionRecognitionCheckpointExpr():
     case ActionProgressiveDispatchSpanExpr():
+    case ActionStagedParseJobExpr():
     case ActionRecognizeOnceExpr():
     case ActionRecognitionCommitExpr():
     case ActionRecognitionRollbackExpr():

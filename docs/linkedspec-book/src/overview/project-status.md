@@ -120,10 +120,11 @@ expiring callback safe points, and direct/ordered-derived original-source rebasi
 validated generated-plan, and independently compiled emitted routes each construct fresh registry/cache and
 recursive authority from a host-only seed, run only after the complete parent result, return equal detached
 records, and serialize no live authority. The temporary cfg/dead-code scaffolding is removed, the neutral oracle
-rejects 84 mutations, and only Rust rollout advances. Dart `.14.7.5.0` now freezes an excluded consumer at the
-generic `ActionCallExpr` / structured `unknown_helper` boundary: four pre-boundary tests pass and one exact
-dedicated-marker/provenance RED remains. Neutral governance reaches 85 mutations without production, discovery,
-rollout, format, or public movement; `.14.7.5.1` is next. Focused `.1` proof found two unrelated
+rejects 84 mutations, and only Rust rollout advances. Dart `.14.7.5.0` freezes an excluded generic-call boundary;
+`.14.7.5.1` now replaces only exact scalar assignment with one private inert marker, strict literal/static closure,
+and live-regex-proven direct/ordered-derived Unicode-scalar provenance. Seven dormant groups pass across four
+logical routes and only `.14.7.5.2` caller-frozen resolution/cache/result/failure authority remains RED. Neutral
+governance stays 85 mutations without discovery, rollout, format, or public movement. Focused `.1` proof found two unrelated
 pre-existing Rust validation/trace defects. `TRACE-OBSERVABILITY.5.1` now restores ordinary/traced progressive
 static-validation equality with an exact diagnostic regression. `.5.2` now restores exactly one existing child-
 dispatch/result event pair on normal and gap-aware interpreted/generated entry; trace controls pass 11/11 with

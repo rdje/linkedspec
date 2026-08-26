@@ -463,6 +463,7 @@ String emitDartSourceV2(CompiledSpec compiled, String sourceIdentity) {
     validateCompiledRegexSlotIdentities(compiled);
     validateNoRemovedAggregateSelectors(compiled);
     validateProgressiveSpanDispatchContract(compiled);
+    validateStagedParseJobContract(compiled);
   } on SpecValidationException catch (error) {
     throw _generatedRegexSlotIdentityInvalid(sourceIdentity, error);
   } on CompiledSpecException catch (error) {
@@ -637,6 +638,7 @@ Map<String, GeneratedRuleFamily> _validatedGeneratedRulePlanV2(
     validateCompiledRegexSlotIdentities(compiled);
     validateNoRemovedAggregateSelectors(compiled);
     validateProgressiveSpanDispatchContract(compiled);
+    validateStagedParseJobContract(compiled);
   } on SpecValidationException catch (error) {
     throw _generatedRegexSlotIdentityInvalid(sourceIdentity, error);
   } on CompiledSpecException catch (error) {

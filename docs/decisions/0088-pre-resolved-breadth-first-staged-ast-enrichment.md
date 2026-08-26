@@ -2,8 +2,8 @@
 
 - Date: 2026-08-25
 - Status: accepted architecture; executable neutral authority complete under `FUTURE-PARITY-BACKLOG.14.7.2`;
-  Perl and Rust private behavior/admission complete; Dart dormant RED complete under `.14.7.5.0`; later behavior,
-  recurrence, and public authoring remain pending
+  Perl and Rust private behavior/admission complete; Dart private marker/provenance complete under `.14.7.5.1`;
+  later authority, recurrence, and public authoring remain pending
 - Tags: architecture, staged-parsing, parse-job, source-location, registry, queue, policies, diagnostics, portability
 
 ## Context
@@ -290,6 +290,31 @@ generated-execution error boundary. The fifth and only failing test names the mi
 `STAGED_PARSE_JOB_MARKER`/`staged_parse_job_v2`. Ordinary Dart discovery, canonical CI, Dart rollout, generated
 format, public/outward behavior, other backends, and function-body v1 do not move. `.14.7.5.1` retains exclusive
 ownership of the private dedicated declaration node and typed direct/ordered-derived provenance.
+
+Dart marker/provenance leaf `FUTURE-PARITY-BACKLOG.14.7.5.1` replaces only that exact scalar-assignment boundary.
+`ActionStagedParseJobExpr` owns the complete target, version/effect identities, recursively flattened direct or
+ordered-derived text plan, and normalized literal options. Every non-assignment/residual, dynamic, unknown,
+duplicate, invalid identity/policy/target/capability, transformed/literal text, provenance-smuggling, and
+recognition-reachable form rejects before execution. The ordinary helper registry does not acquire `parse_job`.
+
+Dart's `RegExpMatch` supplies participating capture text but no capture start/end API. Guessing with `indexOf`
+would make identical captures such as `(a)(a)` falsely share authority. The private staged seam instead records
+only compact participating-group identity and the original regex option bits. On first staged capture access it
+inserts two zero-width, named suffix probes at the selected capture's structural start/end, re-runs the
+instrumented regex exactly at the original match start, and accepts the derived UTF-16 boundaries only if whole
+start, end, text, and live capture text are unchanged. Numeric-backreference and otherwise unprovable patterns fail
+closed. Probe work is lazy and therefore absent from ordinary matching. Accepted boundaries immediately pass
+through the existing `SourceAuthority` into Unicode-scalar direct spans; nonempty `cat(...)` plans retain an
+authored-order `concatenate_in_order` segment list.
+
+The resulting detached `STAGED_PARSE_JOB_MARKER` / `staged_parse_job_v2` declaration contains normalized logical
+options, exact materialized text, typed provenance, and origin only. It carries no regex, source authority, match,
+parser, registry, callback, scheduler, cache, path, or host handle. Native, `SpecFile`-JSON reconstructed,
+validated generated-plan, and independently analyzed/executed emitted routes preserve equal logical data without
+changing generated format v2 or adding execution authority. The same dormant consumer now passes seven groups and
+fails only at `.14.7.5.2`'s missing caller-frozen resolution/cache/result/failure authority. Ordinary/canonical
+registration, Dart rollout, function-body v1, recurrence, public/outward behavior, and neutral 85-mutation
+governance remain unchanged.
 
 ## Links
 

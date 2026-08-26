@@ -5,8 +5,9 @@
 > fully GREEN 143-check oracle;
 > Rust now has the same private complete authority, four fresh native/reconstructed/generated/emitted production
 > carriers, and exact ordinary/canonical admission;
-> Dart now has an excluded dormant contract with four GREEN pre-boundary tests and one dedicated-marker/provenance
-> RED at 85 neutral mutations; Julia and Lua remain absent, and the only publicly authored five-backend/six-runtime surface is still the
+> Dart now has the same private inert marker/provenance declaration boundary across four dormant logical routes;
+> seven groups are GREEN and only caller-frozen resolution/cache/result/failure authority remains RED at 85 neutral
+> mutations. Julia and Lua remain absent, and the only publicly authored five-backend/six-runtime surface is still the
 > narrow function-body v1 adapter described below.
 
 LinkedSpec's staged model lets one completed parse return bounded text islands for later parsers to refine. The
@@ -405,38 +406,82 @@ This is private Rust backend admission, not public `parse_job(...)` authoring. O
 consumer, canonical CI requires and invokes it exactly once, and only Rust rollout is promoted. Dart, Julia, Lua,
 six-runtime recurrence, public authoring, independent recomposition, and combined no-drift retain their owners.
 
-## Current dormant Dart boundary
+## Current private, dormant Dart marker boundary
 
-Dart `.14.7.5.0` adds no production behavior. Its exact consumer is
+Dart `.14.7.5.0` established the no-production generic-call RED. `.14.7.5.1` now replaces only that exact
+assignment boundary while retaining the same excluded consumer,
 `dart/test_dormant/staged_ast_enrichment_contract_test.dart`, which ordinary package-test discovery and canonical CI
-omit. Fatal analysis includes it successfully. An explicit focused run reports four passing tests and one
-deliberate failure.
+omit. Fatal analysis includes it successfully. An explicit focused run reports seven passing tests and one
+deliberate `.2` authority failure.
 
 The GREEN groups freeze all neutral inventories and the unchanged function-body-v1 adapter, including stable
 resolve/load/compile/execute/cache/stitch records, complete wrong-top context, and resolve-time denial of general
-`expr-v1`. They then inspect compiled JSON: exact assignment-form `parse_job(...)` is still one `assign_scalar`
-containing one generic `call` named `parse_job`, with no dedicated marker or sidecar. Native and `SpecFile`-JSON-
-reconstructed execution both report:
+`expr-v1`. Exact scalar assignment now lowers exclusively to one private typed node:
 
-```text
-unknown_helper name="parse_job" rule_label="Top"
+```json
+{
+  "kind": "staged_parse_job_marker",
+  "target": "job_marker",
+  "version": 2,
+  "sidecar_kind": "staged_parse_job_v2",
+  "effect": "staged_parse_job_declaration",
+  "text_plan": {"kind": "direct_span", "source": "match_group", "index": 0},
+  "options": {
+    "node_kind": "expression",
+    "payload_kind": "embedded_expression",
+    "spec": "expr-v1",
+    "top": "Expr",
+    "result_policy": "sibling_field",
+    "into": "expression_ast",
+    "on_error": "fail",
+    "required_capabilities": []
+  }
+}
 ```
 
-Validated generated-plan execution wraps that same diagnostic as `generated_execution_failed`. Independently
-emitted Dart source analyzes, loads, and executes successfully as a program while preserving the same generated-
-execution rejection. These are observation routes, not future carrier behavior.
+Only exact `target = parse_job(text_expr, hash(literal options...))` gets this node. Missing, dynamic, duplicate,
+unknown, invalid identity/policy/target/capability, non-assignment, residual generic, transformed/literal text, and
+recognition-reachable forms reject before execution. Recursively nested nonempty `cat(...)` plans flatten to
+authored-order direct segments. The callable helper registry is not widened.
 
-The fifth test fails only with `LINKEDSPEC_STAGED_AST_ENRICHMENT_DART_RED`, naming missing
-`STAGED_PARSE_JOB_MARKER` and `staged_parse_job_v2`. The neutral checker requires this exact dormant path, the
-eventual `dart/test/staged_ast_enrichment_contract_test.dart` path to remain absent, and both paths to have zero
-canonical references. Dart rollout stays pending. `.14.7.5.1` owns the dedicated declaration node and typed
-direct/ordered-derived provenance; `.2-.4` separately retain authority/policies, recurrence/bounds/rebasing, and
-fresh carriers/admission.
+Dart's live regex matches expose capture strings but not capture ranges. Using copied text plus `indexOf` would be
+unsound: `(a)(a)` has two equal strings but authoritative spans `[0,1)` and `[1,2)`. The private staged path records
+only compact participating-group identity and regex option bits. On first staged capture access it inserts named,
+zero-width suffix probes at the structural capture start/end, re-runs at the original match start, and accepts the
+UTF-16 boundaries only when whole start, end, text, and live capture text are unchanged. Numeric-backreference and
+otherwise unprovable patterns reject; ordinary matching does no probe work. Proven boundaries immediately enter
+the existing `SourceAuthority`, which returns Unicode-scalar direct spans. Ordered-derived text preserves each
+segment under `concatenate_in_order`.
+
+For input `Aé🙂B;C` and pattern `/(é🙂)(B);/`, `match_group(0)` produces:
+
+```json
+{
+  "text": "é🙂",
+  "provenance": {
+    "kind": "direct_span",
+    "source_id": "input",
+    "start": 1,
+    "end": 3,
+    "provenance": "match_group"
+  }
+}
+```
+
+The detached logical marker contains only version/effect identities plus the `staged_parse_job_v2` declaration:
+normalized options, exact materialized text, typed provenance, and origin. It contains no regex, source authority,
+match object, parser, registry, callback, scheduler, cache, path, or host handle. Native, `SpecFile`-JSON
+reconstructed, generated-plan, and independently analyzed/executed emitted routes return equal marker data
+without changing generated format v2 or adding caller-frozen parser authority.
+
+The eighth test fails only with `LINKEDSPEC_STAGED_AST_ENRICHMENT_DART_RED`, naming missing pre-registered
+resolution, immutable cache, and result/failure policy authority. The neutral checker requires this exact dormant
+path, the eventual `dart/test/staged_ast_enrichment_contract_test.dart` path to remain absent, and both paths to
+have zero canonical references. Dart rollout stays pending. `.14.7.5.2-.4` separately retain authority/policies,
+recurrence/bounds/rebasing, and fresh carriers/admission.
 
 The admitted Perl and Rust consumers each snapshot the complete neutral current projection before their backend-
-specific assertions. Dart's dormant transition therefore updates their aggregate status, mutation count, and Dart
-lifecycle expectation while leaving their runtime behavior unchanged. Focused proof remains Perl 143/143 and Rust
-1/1 across its fresh native, reconstructed, generated-plan, and emitted routes.
+specific assertions. Marker/provenance does not change the neutral mutation count or Dart dormant lifecycle.
 
 Publishing this boundary crossed the bounded `CHANGES.md` rollover threshold. The repository archived one complete
 224-line record set as immutable segment `4990`; ADR `0091` advances only the finite change-history collection and

@@ -17,6 +17,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:linkedspec_dart/linkedspec_dart.dart';
+import 'package:linkedspec_dart/src/runtime/source_location.dart';
+import 'package:linkedspec_dart/src/runtime/staged_parse_job.dart';
 import 'package:test/test.dart';
 
 typedef _JsonObject = Map<String, Object?>;
@@ -31,11 +33,7 @@ const _dormantConsumerPath =
     'test_dormant/staged_ast_enrichment_contract_test.dart';
 const _authoredSource = r'''
 Top::
- /([^;]+);/
- I {
-  job_marker = parse_job(entry_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "top", "Expr", "result_policy", "sibling_field", "into", "expression_ast", "on_error", "fail"))
-  return(job_marker)
- }
+ /([^;]+);/ -> Top { job_marker = parse_job(match_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "top", "Expr", "result_policy", "sibling_field", "into", "expression_ast", "on_error", "fail")); return(job_marker) }
 ''';
 
 void main() {
@@ -278,100 +276,90 @@ void main() {
     );
   });
 
-  test('current authored syntax remains exactly one generic helper call', () {
+  test('exclusive assignment lowers to one typed dedicated ActionIR node', () {
     final compiled = _compile(_authoredSource);
     final encoded = jsonEncode(compiled.toJson());
-    final assignments = _allMaps(compiled.toJson())
+    final declarations = _allMaps(compiled.toJson())
         .where(
           (node) =>
-              node['kind'] == 'assign_scalar' && node['name'] == 'job_marker',
+              node['kind'] == 'staged_parse_job_marker' &&
+              node['target'] == 'job_marker',
         )
         .toList(growable: false);
     final calls = _allMaps(compiled.toJson())
         .where((node) => node['kind'] == 'call' && node['name'] == 'parse_job')
         .toList(growable: false);
 
-    expect(assignments, hasLength(1));
-    expect(calls, hasLength(1));
-    expect(_list(calls.single['args']), hasLength(2));
-    expect(_occurrences(encoded, '"name":"parse_job"'), 1);
-    for (final missing in <String>[
-      'staged_parse_job_marker',
-      'STAGED_PARSE_JOB_MARKER',
-      'staged_parse_job_v2',
-    ]) {
-      expect(encoded, isNot(contains(missing)));
-    }
+    expect(declarations, hasLength(1));
+    expect(calls, isEmpty);
+    expect(declarations.single['version'], 2);
+    expect(declarations.single['sidecar_kind'], 'staged_parse_job_v2');
+    expect(declarations.single['effect'], 'staged_parse_job_declaration');
+    expect(declarations.single['text_plan'], <String, Object?>{
+      'kind': 'direct_span',
+      'source': 'match_group',
+      'index': 0,
+    });
+    expect(declarations.single['options'], <String, Object?>{
+      'node_kind': 'expression',
+      'payload_kind': 'embedded_expression',
+      'spec': 'expr-v1',
+      'top': 'Expr',
+      'result_policy': 'sibling_field',
+      'into': 'expression_ast',
+      'on_error': 'fail',
+      'required_capabilities': <String>[],
+    });
+    expect(_occurrences(encoded, '"name":"parse_job"'), 0);
+    expect(_occurrences(encoded, '"kind":"staged_parse_job_marker"'), 1);
   });
 
   test(
-    'native reconstructed and generated-plan routes reject generic call',
+    'native reconstructed and generated-plan routes preserve one marker',
     () {
       final parsed = parseSpecWithStagedUserFunctionDefinitions(
         _authoredSource,
       );
       final compiled = compileSpec(parsed);
-      _expectUnknownHelper(
-        () => LinkedSpecRuntimeEngine(compiled).parse('1+2;'),
-        'native',
+      expect(
+        LinkedSpecRuntimeEngine(compiled).parse('1+2;').value,
+        _expectedMarker(),
       );
 
       final reconstructed = SpecFile.fromJson(
         _object(jsonDecode(jsonEncode(parsed.toJson()))),
       );
       validateSpec(reconstructed);
-      _expectUnknownHelper(
-        () => LinkedSpecRuntimeEngine(compileSpec(reconstructed)).parse('1+2;'),
-        'normalized reconstructed',
+      expect(
+        LinkedSpecRuntimeEngine(compileSpec(reconstructed)).parse('1+2;').value,
+        _expectedMarker(),
       );
 
       expect(
-        () => executeGeneratedParserV2(
+        executeGeneratedParserV2(
           compiled,
           buildGeneratedRulePlan(compiled),
           '1+2;',
           _sourceIdentity,
         ),
-        throwsA(
-          isA<GeneratedSourceException>()
-              .having(
-                (error) => error.code,
-                'code',
-                GeneratedSourceCode.generatedExecutionFailed,
-              )
-              .having((error) => error.ruleLabel, 'rule label', 'Top')
-              .having(
-                (error) => error.detail,
-                'generic helper detail',
-                allOf(<Matcher>[
-                  contains('unknown_helper'),
-                  contains('name="parse_job"'),
-                  contains('rule_label="Top"'),
-                ]),
-              ),
-        ),
+        _expectedMarker(),
       );
     },
   );
 
   test(
-    'independently analyzed emitted source preserves current rejection',
+    'independently analyzed emitted source preserves the logical marker',
     () async {
       final emitted = emitDartSourceV2(
         _compile(_authoredSource),
         _sourceIdentity,
       );
-      for (final missing in <String>[
-        'staged_parse_job_marker',
-        'STAGED_PARSE_JOB_MARKER',
-        'staged_parse_job_v2',
-      ]) {
-        expect(emitted, isNot(contains(missing)));
-      }
+      expect(emitted, contains('executeGeneratedParserV2'));
+      expect(emitted, isNot(contains('STAGED_PARSE_JOB_MARKER')));
 
       final packageRoot = Directory.current.absolute;
       final scratch = Directory(
-        '${packageRoot.path}/.dart_tool/linkedspec-dart-staged-ast-red-'
+        '${packageRoot.path}/.dart_tool/linkedspec-dart-staged-ast-marker-'
         '$pid-${DateTime.now().microsecondsSinceEpoch}',
       )..createSync(recursive: true);
       try {
@@ -395,24 +383,249 @@ void main() {
         expect(
           run.exitCode,
           0,
-          reason: 'emitted staged-AST RED failed:\n${run.stderr}',
+          reason: 'emitted staged-AST marker failed:\n${run.stderr}',
         );
-        expect(
-          '${run.stdout}'.trim(),
-          allOf(<Matcher>[
-            contains('Generated Dart parser execution failed'),
-            contains('unknown_helper'),
-            contains('name="parse_job"'),
-            contains('rule_label="Top"'),
-          ]),
-        );
+        expect(_object(jsonDecode('${run.stdout}'.trim())), _expectedMarker());
       } finally {
         scratch.deleteSync(recursive: true);
       }
     },
   );
 
-  test('RED requires one dedicated marker with typed provenance', () {
+  test('neutral provenance accepts exact records and rejects smuggling', () {
+    final sources = <String, String>{
+      for (final row in _list(contract['sources']).map(_object))
+        row['source_id']! as String: row['text']! as String,
+    };
+    final authority = SourceAuthority(sources: sources);
+    for (final row in _list(contract['provenance_cases']).map(_object)) {
+      if (row['accepted'] == true) {
+        final result = validateAndMaterializeStagedProvenance(
+          authority: authority,
+          record: row['provenance'],
+          origin: 'contract:parse_job',
+        );
+        expect(
+          result['text'],
+          row['materialized_text'],
+          reason: '${row['id']}',
+        );
+        expect(result['provenance'], row['provenance'], reason: '${row['id']}');
+      } else {
+        expect(
+          () => validateAndMaterializeStagedProvenance(
+            authority: authority,
+            record: row['provenance'],
+            origin: 'contract:parse_job',
+          ),
+          throwsA(
+            isA<StagedParseJobDeclarationException>().having(
+              (error) => error.toJson()['code'],
+              '${row['id']} code',
+              row['diagnostic'],
+            ),
+          ),
+        );
+      }
+    }
+  });
+
+  test('runtime materializes Unicode direct and ordered-derived spans', () {
+    const directSource = r'''
+Top::
+ /(é🙂)(B);/ -> Top { job_marker = parse_job(match_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "top", "Expr", "result_policy", "sibling_field", "into", "expression_ast", "on_error", "fail")); return(job_marker) }
+''';
+    final direct = _object(
+      LinkedSpecRuntimeEngine(_compile(directSource)).parse('Aé🙂B;C').value,
+    );
+    final directSidecar = _object(direct['staged_parse_job_v2']);
+    expect(directSidecar['text'], 'é🙂');
+    expect(directSidecar['provenance'], <String, Object?>{
+      'kind': 'direct_span',
+      'source_id': 'input',
+      'start': 1,
+      'end': 3,
+      'provenance': 'match_group',
+    });
+
+    const derivedSource = r'''
+Top::
+ /(a)(a);/ -> Top { job_marker = parse_job(cat(match_group(0), match_group(1)), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "result_policy", "replace_marker", "on_error", "keep_text", "required_capabilities", array("typed-source-location-v1", "actionir-v1"))); return(job_marker) }
+''';
+    final derived = _object(
+      LinkedSpecRuntimeEngine(_compile(derivedSource)).parse('aa;').value,
+    );
+    final derivedSidecar = _object(derived['staged_parse_job_v2']);
+    expect(derivedSidecar['text'], 'aa');
+    expect(derivedSidecar['required_capabilities'], <String>[
+      'actionir-v1',
+      'typed-source-location-v1',
+    ]);
+    expect(derivedSidecar['provenance'], <String, Object?>{
+      'kind': 'derived_text',
+      'policy': 'concatenate_in_order',
+      'segments': <Object?>[
+        <String, Object?>{
+          'kind': 'direct_span',
+          'source_id': 'input',
+          'start': 0,
+          'end': 1,
+          'provenance': 'match_group',
+        },
+        <String, Object?>{
+          'kind': 'direct_span',
+          'source_id': 'input',
+          'start': 1,
+          'end': 2,
+          'provenance': 'match_group',
+        },
+      ],
+    });
+    expect(
+      _forbiddenKeyHits(derived),
+      isEmpty,
+      reason: 'logical marker must retain no live execution authority',
+    );
+  });
+
+  test('invalid annotations and recognition-reachable markers fail closed', () {
+    const validOptions =
+        'hash("node_kind", "expression", "payload_kind", '
+        '"embedded_expression", "spec", "expr-v1", "result_policy", '
+        '"replace_marker", "on_error", "fail")';
+    final invalidForms = <(String, String)>[
+      (
+        'parse_job(match_group(0), options)',
+        'staged_parse_job_options_required',
+      ),
+      (
+        'parse_job(match_group(0), hash("node_kind", "expression", '
+            '"payload_kind", "embedded_expression", "spec", "expr-v1", '
+            '"result_policy", "replace_marker", "on_error", "fail", '
+            '"loader", "ambient"))',
+        'staged_parse_job_option_unknown',
+      ),
+      (
+        'parse_job(match_group(0), hash("node_kind", "expression", '
+            '"node_kind", "expression", "payload_kind", '
+            '"embedded_expression", "spec", "expr-v1", '
+            '"result_policy", "replace_marker", "on_error", "fail"))',
+        'staged_parse_job_options_required',
+      ),
+      (
+        'parse_job(match_group(0), hash("node_kind", "expression", '
+            '"payload_kind", "embedded_expression", "spec", "expr-v1", '
+            '"result_policy", "replace_marker"))',
+        'staged_parse_job_options_required',
+      ),
+      (
+        'parse_job(match_group(0), hash("node_kind", node_kind, '
+            '"payload_kind", "embedded_expression", "spec", "expr-v1", '
+            '"result_policy", "replace_marker", "on_error", "fail"))',
+        'staged_parse_job_options_required',
+      ),
+      (
+        'parse_job(trim(match_group(0)), $validOptions)',
+        'staged_source_provenance_invalid',
+      ),
+      (
+        'parse_job("copied", $validOptions)',
+        'staged_source_provenance_invalid',
+      ),
+      (
+        'parse_job(match_group(index), $validOptions)',
+        'staged_source_provenance_invalid',
+      ),
+      (
+        'parse_job(match_group(0), hash("node_kind", "expression", '
+            '"payload_kind", "embedded_expression", "spec", "../expr", '
+            '"result_policy", "replace_marker", "on_error", "fail"))',
+        'staged_parser_identity_invalid',
+      ),
+      (
+        'parse_job(match_group(0), hash("node_kind", "expression", '
+            '"payload_kind", "embedded_expression", "spec", "expr-v1", '
+            '"top", "Expr/Bad", "result_policy", "replace_marker", '
+            '"on_error", "fail"))',
+        'staged_top_rule_invalid',
+      ),
+      (
+        'parse_job(match_group(0), hash("node_kind", "expression", '
+            '"payload_kind", "embedded_expression", "spec", "expr-v1", '
+            '"result_policy", "replace", "on_error", "fail"))',
+        'staged_result_policy_invalid',
+      ),
+      (
+        'parse_job(match_group(0), hash("node_kind", "expression", '
+            '"payload_kind", "embedded_expression", "spec", "expr-v1", '
+            '"result_policy", "replace_marker", "on_error", "retry"))',
+        'staged_failure_policy_invalid',
+      ),
+      (
+        'parse_job(match_group(0), hash("node_kind", "expression", '
+            '"payload_kind", "embedded_expression", "spec", "expr-v1", '
+            '"result_policy", "replace_marker", "into", "wrong", '
+            '"on_error", "fail"))',
+        'staged_result_target_invalid',
+      ),
+      (
+        'parse_job(match_group(0), hash("node_kind", "expression", '
+            '"payload_kind", "embedded_expression", "spec", "expr-v1", '
+            '"result_policy", "sibling_field", "on_error", "fail"))',
+        'staged_result_target_invalid',
+      ),
+      (
+        'parse_job(match_group(0), hash("node_kind", "expression", '
+            '"payload_kind", "embedded_expression", "spec", "expr-v1", '
+            '"result_policy", "replace_marker", "on_error", "fail", '
+            '"required_capabilities", array("actionir-v1", '
+            '"actionir-v1")))',
+        'staged_parse_job_options_required',
+      ),
+    ];
+    for (final (call, code) in invalidForms) {
+      final source =
+          'Top::\n /(x);/ -> Top { marker = $call; '
+          'return(marker) }\n';
+      expect(
+        () => _compile(source),
+        throwsA(predicate<Object>((error) => '$error'.contains(code))),
+        reason: call,
+      );
+    }
+    final residual =
+        'Top::\n /(x);/ -> Top { return('
+        'parse_job(match_group(0), $validOptions)) }\n';
+    expect(
+      () => _compile(residual),
+      throwsA(
+        predicate<Object>(
+          (error) => '$error'.contains('staged_parse_job_options_required'),
+        ),
+      ),
+    );
+
+    const transactionSource = r'''
+Top::
+ I { tx = recognition_checkpoint(); matched = recognize_once(tx, call(Child)); recognition_rollback(tx); return(matched) }
+ /never/
+Child::
+ I { marker = parse_job(entry_text(), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "result_policy", "replace_marker", "on_error", "fail")); return(marker) }
+ /never/
+''';
+    expect(
+      () => _compile(transactionSource),
+      throwsA(
+        predicate<Object>(
+          (error) => '$error'.contains(
+            'recognition_effect_forbidden:parser_registry_or_staged_dispatch',
+          ),
+        ),
+      ),
+    );
+  });
+
+  test('RED advances exclusively to registry and result-policy authority', () {
     expect(File(_dormantConsumerPath).existsSync(), isTrue);
     expect(File(_finalConsumerPath).existsSync(), isFalse);
     final ci = File(_ciDriverPath).readAsStringSync();
@@ -429,9 +642,9 @@ void main() {
 
     fail(
       'LINKEDSPEC_STAGED_AST_ENRICHMENT_DART_RED: missing '
-      'node=[STAGED_PARSE_JOB_MARKER]; typed provenance '
-      'sidecar=[staged_parse_job_v2] unavailable; generic parse_job helper '
-      'rejection is not an implementation',
+      'authority=[pre_registered_resolution,immutable_cache,'
+      'result_failure_policies]; marker=[STAGED_PARSE_JOB_MARKER] and typed '
+      'provenance=[staged_parse_job_v2] are available',
     );
   });
 }
@@ -465,33 +678,71 @@ StagedParseJob _v1Job({String topRule = actionIrBodyTopRule}) {
   );
 }
 
-void _expectUnknownHelper(Object? Function() execute, String route) {
-  expect(
-    execute,
-    throwsA(
-      isA<RuntimeInterpreterException>()
-          .having(
-            (error) => error.message,
-            '$route message',
-            'unknown_helper name="parse_job" rule_label="Top"',
-          )
-          .having(
-            (error) => error.diagnostic?.code,
-            '$route diagnostic code',
-            'unknown_helper',
-          )
-          .having(
-            (error) => error.diagnostic?.name,
-            '$route helper name',
-            'parse_job',
-          )
-          .having(
-            (error) => error.diagnostic?.ruleLabel,
-            '$route rule label',
-            'Top',
-          ),
-    ),
-  );
+_JsonObject _expectedMarker() => <String, Object?>{
+  'kind': 'STAGED_PARSE_JOB_MARKER',
+  'version': 2,
+  'sidecar_kind': 'staged_parse_job_v2',
+  'effect': 'staged_parse_job_declaration',
+  'staged_parse_job_v2': <String, Object?>{
+    'kind': 'staged_parse_job_v2',
+    'version': 2,
+    'state': 'declared',
+    'effect': 'staged_parse_job_declaration',
+    'node_kind': 'expression',
+    'payload_kind': 'embedded_expression',
+    'parser_spec_id': 'expr-v1',
+    'top_rule': 'Expr',
+    'result_policy': 'sibling_field',
+    'into': 'expression_ast',
+    'failure_policy': 'fail',
+    'required_capabilities': <String>[],
+    'text': '1+2',
+    'provenance': <String, Object?>{
+      'kind': 'direct_span',
+      'source_id': 'input',
+      'start': 0,
+      'end': 3,
+      'provenance': 'match_group',
+    },
+    'origin': 'Top:parse_job',
+  },
+};
+
+List<String> _forbiddenKeyHits(Object? value) {
+  const forbidden = <String>{
+    'path',
+    'spec_path',
+    'source_authority',
+    'match',
+    'match_object',
+    'parser',
+    'registry',
+    'compiled_authority',
+    'callback',
+    'host_handle',
+    'cancellation_token',
+    'deadline',
+    'mutable_queue',
+  };
+  final hits = <String>[];
+  void visit(Object? current) {
+    if (current is Map) {
+      for (final entry in current.entries) {
+        final key = '${entry.key}';
+        if (forbidden.contains(key)) {
+          hits.add(key);
+        }
+        visit(entry.value);
+      }
+    } else if (current is List) {
+      for (final item in current) {
+        visit(item);
+      }
+    }
+  }
+
+  visit(value);
+  return hits..sort();
 }
 
 CompiledSpec _compile(String source) =>
@@ -543,14 +794,11 @@ _JsonObject _object(Object? value) => (value! as Map).cast<String, Object?>();
 List<Object?> _list(Object? value) => (value! as List).cast<Object?>();
 
 const _emittedMain = r'''
+import 'dart:convert';
+
 import 'generated.dart' as generated;
 
 void main() {
-  try {
-    generated.execute('1+2;');
-    print('unexpected-success');
-  } on Object catch (error) {
-    print(error);
-  }
+  print(jsonEncode(generated.execute('1+2;')));
 }
 ''';

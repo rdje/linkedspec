@@ -765,11 +765,13 @@ exports, check-cfg registration, and conditional dead-code allowance are gone. `
 validation and gap-aware child-dispatch parity are restored, while the private authority stays dormant beside the
 one admitted contract route. `.5.4` historically aligned the Perl snapshot to 79 mutations plus Rust
 `dormant_red`; Rust admission now advances the neutral oracle to 84 mutations and promotes only Rust. Dart/Julia/Lua consumers remain
-pending under `.14.7.5-.7`. Dart `.14.7.5.0` now adds one exact `test_dormant/` consumer: neutral/v1 and all four
-generic-call observation routes are GREEN, execution preserves the structured `unknown_helper` rejection, and
-only the missing dedicated marker/typed provenance assertion is RED. Governance advances to 85 mutations while
+pending under `.14.7.5-.7`. Dart `.14.7.5.0` adds one exact `test_dormant/` consumer; `.14.7.5.1` now lowers only
+exact assignment-form `parse_job` to a private inert marker, proves live capture boundaries through lazy zero-width
+regex instrumentation, and materializes typed direct/ordered-derived Unicode-scalar provenance. Seven groups and
+all four logical routes are GREEN; only `.2` resolution/cache/result/failure authority is RED. Governance remains
+at 85 mutations while
 the final path, ordinary/canonical registration, Dart rollout, production, format, and public behavior remain
-unchanged; `.14.7.5.1` is next. Mandatory engineering-notes segment `4990` is finitely authorized at 18 files / 17
+unchanged; `.14.7.5.2` is next. Mandatory engineering-notes segment `4990` is finitely authorized at 18 files / 17
 manifest lines by ADR `0090`. Dart dormant closeout's mandatory change-history segment `4990` is finitely
 authorized at 23 files / 22 manifest lines by ADR `0091`; no other pressure ceiling changes.
 

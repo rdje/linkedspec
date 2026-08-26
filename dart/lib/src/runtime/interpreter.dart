@@ -15,6 +15,7 @@ import 'matching.dart';
 import 'recognition_transaction.dart';
 import 'semantic_observation.dart';
 import 'source_location.dart';
+import 'staged_parse_job.dart';
 import 'unicode_case_mapping.dart';
 
 final _leadingBlankLine = RegExp(r'[ \t]*\n');
@@ -1583,6 +1584,9 @@ final class LinkedSpecRuntimeEngine {
           if (statement.expr case ActionProgressiveDispatchSpanExpr(
             :final target,
           )) {
+            context.recordRuleLocalBinding(target);
+          }
+          if (statement.expr case ActionStagedParseJobExpr(:final target)) {
             context.recordRuleLocalBinding(target);
           }
           if (statement.expr case ActionAssignScalarExpr(
@@ -3438,6 +3442,23 @@ final class LinkedSpecRuntimeEngine {
           'recognition_checkpoint must be assigned to a rule-local token '
           "in rule '$ruleLabel'",
         );
+      case ActionStagedParseJobExpr(
+        :final target,
+        :final textPlan,
+        :final options,
+      ):
+        final marker = constructStagedParseJobMarker(
+          authority: context.sourceAuthority,
+          registers: context.registers,
+          origin: '$ruleLabel:parse_job',
+          textPlan: textPlan,
+          options: options,
+        );
+        final stored = _copyValue(marker);
+        context.variables[target] = stored;
+        context.arrays.remove(target);
+        context.hashes.remove(target);
+        return _copyValue(stored);
       case ActionProgressiveDispatchSpanExpr(
         :final target,
         :final parserId,

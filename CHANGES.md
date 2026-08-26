@@ -10,6 +10,23 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-26 — FUTURE-PARITY-BACKLOG.14.7.5.1 — implement Dart staged marker provenance
+
+- Replaced only exact scalar assignment-form `parse_job(text_expr, literal_hash_options)` with a dedicated private
+  ActionIR node. Required/optional options, identities, policies, targets, capabilities, assignment-only placement,
+  residual calls, and recognition-reachable effects now reject statically under the neutral diagnostic family.
+- Added an inert detached `STAGED_PARSE_JOB_MARKER` / `staged_parse_job_v2` declaration. Direct and recursively
+  flattened `cat(...)` plans materialize exact text from typed Unicode-scalar source provenance and serialize no
+  source authority, match, parser, registry, callback, scheduler, cache, path, or host handle.
+- Dart's text-only capture registers now retain only private group identity plus regex option bits. The staged path
+  lazily instruments the original regex with zero-width suffix probes, requires the exact original whole match,
+  verifies the resulting substring against the live capture register, then converts proven UTF-16 boundaries
+  through `SourceAuthority`; ordinary matching incurs no recovery search.
+- The unchanged dormant path now reports seven GREEN groups and one intentional `.2` authority RED. Fatal analysis,
+  132 direct dependents, ordinary Dart 416/416, neutral 85-mutation governance, and four logical routes pass.
+  Function-body v1, result/failure execution, recurrence, discovery/canonical topology, rollout, generated format,
+  public/outward surfaces, and other backends remain unchanged.
+
 ## 2026-08-26 — FUTURE-PARITY-BACKLOG.14.7.5.0 — freeze Dart staged-AST dormant RED
 
 - Added one exact `dart/test_dormant/` consumer and no production behavior. Fatal analysis passes; four tests lock

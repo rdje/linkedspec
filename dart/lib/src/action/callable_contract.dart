@@ -202,6 +202,7 @@ void _normalizeExpr(ActionExpr expr, UserFunctionRegistry registry) {
       _normalizeArgs(CallableSurface.helper, name, args, registry);
     case ActionRecognitionCheckpointExpr():
     case ActionProgressiveDispatchSpanExpr():
+    case ActionStagedParseJobExpr():
     case ActionRecognizeOnceExpr():
     case ActionRecognitionCommitExpr():
     case ActionRecognitionRollbackExpr():

@@ -884,6 +884,26 @@ final class _ActionParser {
     final value = _child(right.text, right.start).parseExpression();
     if (_isIdentifier(left.text)) {
       if (value case ActionCallExpr(
+        name: 'parse_job',
+        sourceMethod: 'parse_job',
+        :final args,
+      )) {
+        if (args.length != 2 ||
+            args[0] is! ActionPositionalArgument ||
+            args[1] is! ActionPositionalArgument) {
+          _stagedParseJobInvalid('staged_parse_job_options_required');
+        }
+        final textPlan = _parseStagedParseJobTextPlan(args[0].value);
+        final options = _parseStagedParseJobOptions(args[1].value);
+        return ActionStagedParseJobExpr(
+          source: text,
+          sourceSpan: _span(start, start + text.length),
+          target: left.text,
+          textPlan: textPlan,
+          options: options,
+        );
+      }
+      if (value case ActionCallExpr(
         name: 'dispatch_span',
         sourceMethod: 'dispatch_span',
         :final args,
@@ -1183,6 +1203,210 @@ final class _ActionParser {
     );
   }
 }
+
+Never _stagedParseJobInvalid(String code) =>
+    throw FormatException('LINKEDSPEC_STAGED_AST_ENRICHMENT_ERROR:$code');
+
+String? _stagedLiteralString(ActionExpr expr) {
+  return switch (expr) {
+    ActionStringLiteralExpr(:final value) => value,
+    _ => null,
+  };
+}
+
+ActionStagedParseJobOptions _parseStagedParseJobOptions(ActionExpr expr) {
+  if (expr is! ActionCallExpr ||
+      expr.name != 'hash' ||
+      expr.args.isEmpty ||
+      expr.args.length.isOdd) {
+    _stagedParseJobInvalid('staged_parse_job_options_required');
+  }
+  const allowed = <String>{
+    'node_kind',
+    'payload_kind',
+    'spec',
+    'top',
+    'result_policy',
+    'into',
+    'on_error',
+    'required_capabilities',
+  };
+  final values = <String, ActionExpr>{};
+  for (var index = 0; index < expr.args.length; index += 2) {
+    final keyArgument = expr.args[index];
+    final valueArgument = expr.args[index + 1];
+    final key = keyArgument is ActionPositionalArgument
+        ? _stagedLiteralString(keyArgument.value)
+        : null;
+    if (key == null) {
+      _stagedParseJobInvalid('staged_parse_job_options_required');
+    }
+    if (!allowed.contains(key)) {
+      _stagedParseJobInvalid('staged_parse_job_option_unknown');
+    }
+    if (valueArgument is! ActionPositionalArgument || values.containsKey(key)) {
+      _stagedParseJobInvalid('staged_parse_job_options_required');
+    }
+    values[key] = valueArgument.value;
+  }
+
+  String requiredString(String name) {
+    final value = values[name];
+    final literal = value == null ? null : _stagedLiteralString(value);
+    if (literal == null) {
+      _stagedParseJobInvalid('staged_parse_job_options_required');
+    }
+    return literal;
+  }
+
+  String? optionalString(String name) {
+    final value = values[name];
+    if (value == null) {
+      return null;
+    }
+    final literal = _stagedLiteralString(value);
+    if (literal == null) {
+      _stagedParseJobInvalid('staged_parse_job_options_required');
+    }
+    return literal;
+  }
+
+  final nodeKind = requiredString('node_kind');
+  final payloadKind = requiredString('payload_kind');
+  final spec = requiredString('spec');
+  final top = optionalString('top');
+  final resultPolicy = requiredString('result_policy');
+  final into = optionalString('into');
+  final onError = requiredString('on_error');
+  if (!_stagedIdentifierPattern.hasMatch(nodeKind) ||
+      !_stagedIdentifierPattern.hasMatch(payloadKind)) {
+    _stagedParseJobInvalid('staged_parse_job_options_required');
+  }
+  if (!_stagedParserIdentityPattern.hasMatch(spec)) {
+    _stagedParseJobInvalid('staged_parser_identity_invalid');
+  }
+  if (top != null && !_stagedFieldPattern.hasMatch(top)) {
+    _stagedParseJobInvalid('staged_top_rule_invalid');
+  }
+  if (!const <String>{
+    'replace_marker',
+    'replace_field',
+    'sibling_field',
+    'append_child',
+  }.contains(resultPolicy)) {
+    _stagedParseJobInvalid('staged_result_policy_invalid');
+  }
+  if (!const <String>{
+    'fail',
+    'keep_text',
+    'diagnostic_node',
+  }.contains(onError)) {
+    _stagedParseJobInvalid('staged_failure_policy_invalid');
+  }
+  final targetIsValid = into != null && _stagedFieldPattern.hasMatch(into);
+  if ((resultPolicy == 'replace_marker' && into != null) ||
+      (resultPolicy != 'replace_marker' && !targetIsValid)) {
+    _stagedParseJobInvalid('staged_result_target_invalid');
+  }
+
+  final requiredCapabilities = <String>[];
+  final capabilityExpr = values['required_capabilities'];
+  if (capabilityExpr != null) {
+    if (capabilityExpr is! ActionCallExpr || capabilityExpr.name != 'array') {
+      _stagedParseJobInvalid('staged_parse_job_options_required');
+    }
+    final seen = <String>{};
+    for (final argument in capabilityExpr.args) {
+      final capability = argument is ActionPositionalArgument
+          ? _stagedLiteralString(argument.value)
+          : null;
+      if (capability == null ||
+          !_stagedParserIdentityPattern.hasMatch(capability) ||
+          !seen.add(capability)) {
+        _stagedParseJobInvalid('staged_parse_job_options_required');
+      }
+    }
+    requiredCapabilities.addAll(seen.toList()..sort());
+  }
+
+  return ActionStagedParseJobOptions(
+    nodeKind: nodeKind,
+    payloadKind: payloadKind,
+    spec: spec,
+    top: top,
+    resultPolicy: resultPolicy,
+    into: into,
+    onError: onError,
+    requiredCapabilities: requiredCapabilities,
+  );
+}
+
+ActionStagedParseJobDirectTextPlan? _parseStagedDirectTextPlan(
+  ActionExpr expr,
+) {
+  if (expr is! ActionCallExpr) {
+    return null;
+  }
+  if (const <String>{'entry_text', 'match_text'}.contains(expr.name)) {
+    if (expr.args.isNotEmpty) {
+      _stagedParseJobInvalid('staged_source_provenance_invalid');
+    }
+    return ActionStagedParseJobDirectTextPlan(source: expr.name);
+  }
+  if (const <String>{'entry_group', 'match_group'}.contains(expr.name)) {
+    if (expr.args.length != 1 ||
+        expr.args.single is! ActionPositionalArgument) {
+      _stagedParseJobInvalid('staged_source_provenance_invalid');
+    }
+    final indexExpr = expr.args.single.value;
+    if (indexExpr is! ActionNumberLiteralExpr ||
+        !indexExpr.value.isFinite ||
+        indexExpr.value < 0 ||
+        indexExpr.value != indexExpr.value.truncateToDouble()) {
+      _stagedParseJobInvalid('staged_source_provenance_invalid');
+    }
+    return ActionStagedParseJobDirectTextPlan(
+      source: expr.name,
+      index: indexExpr.value.toInt(),
+    );
+  }
+  return null;
+}
+
+ActionStagedParseJobTextPlan _parseStagedParseJobTextPlan(ActionExpr expr) {
+  final direct = _parseStagedDirectTextPlan(expr);
+  if (direct != null) {
+    return ActionStagedParseJobDirectSpanPlan(
+      source: direct.source,
+      index: direct.index,
+    );
+  }
+  if (expr is! ActionCallExpr || expr.name != 'cat' || expr.args.isEmpty) {
+    _stagedParseJobInvalid('staged_source_provenance_invalid');
+  }
+  final segments = <ActionStagedParseJobDirectTextPlan>[];
+  for (final argument in expr.args) {
+    if (argument is! ActionPositionalArgument) {
+      _stagedParseJobInvalid('staged_source_provenance_invalid');
+    }
+    final nested = _parseStagedParseJobTextPlan(argument.value);
+    switch (nested) {
+      case ActionStagedParseJobDirectSpanPlan(:final source, :final index):
+        segments.add(
+          ActionStagedParseJobDirectTextPlan(source: source, index: index),
+        );
+      case ActionStagedParseJobDerivedTextPlan(segments: final nestedSegments):
+        segments.addAll(nestedSegments);
+    }
+  }
+  return ActionStagedParseJobDerivedTextPlan(segments: segments);
+}
+
+final _stagedIdentifierPattern = RegExp(r'^[a-z][a-z0-9_]*$');
+final _stagedParserIdentityPattern = RegExp(
+  r'^[a-z][a-z0-9]*(?:[._:-][a-z0-9]+)*$',
+);
+final _stagedFieldPattern = RegExp(r'^[A-Za-z_][A-Za-z0-9_]*$');
 
 final class _TextSpan {
   const _TextSpan({required this.text, required this.start, required this.end});

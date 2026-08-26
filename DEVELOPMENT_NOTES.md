@@ -9,6 +9,22 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.5.1` — Dart staged marker/provenance): exact clean activation is dormant-
+  boundary commit `93b035c3`; scope owns only the exclusive private node, literal/static closure, typed declaration
+  provenance, four logical marker routes, and the same consumer's `.2` authority RED.
+- `ActionStagedParseJobExpr` owns the complete assignment. The parser recursively flattens nonempty `cat(...)`
+  plans, normalizes sorted literal capabilities, and rejects dynamic/unknown/duplicate/invalid/residual forms.
+  Compiled and emitted boundaries re-run residual validation; recognition reachability classifies the node with the
+  existing `parser_registry_or_staged_dispatch` effect.
+- Dart exposes capture text but no capture ranges. `RuntimeRegexMatch` therefore keeps compact participating-group
+  identity and regex option bits only. On staged access, bounded zero-width suffix probes are inserted at the exact
+  capture boundaries, the regex is re-run at the original start, and whole start/end/text plus live capture text
+  must remain exact before UTF-16 boundaries enter `SourceAuthority`. No probe work occurs on ordinary matching.
+- The detached sidecar contains normalized declaration options, exact materialized text, typed direct or nonempty
+  ordered-derived Unicode-scalar provenance, and origin only. Seven dormant groups pass, including `(a)(a)` as
+  distinct `[0,1)` / `[1,2)` spans; the sole RED now names `.2` resolution/cache/result/failure authority.
+- Fatal analysis, 132 direct dependents, ordinary Dart 416/416, and neutral 85-mutation governance pass. V1,
+  recurrence, admission/rollout, format, public/outward behavior, canonical topology, and other backends do not move.
 - 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.5.0` — Dart staged dormant RED): exact clean activation is Rust
   carrier-admission commit `94d20bec`; behavior scope owns only the excluded consumer, Dart lifecycle mutation,
   current-v1 controls, four generic-carrier observations, and the first dedicated-marker/provenance RED.

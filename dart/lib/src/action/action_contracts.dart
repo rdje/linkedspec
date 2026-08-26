@@ -757,6 +757,7 @@ final class _ActionContractResolver {
         _visitArgs(args);
       case ActionRecognitionCheckpointExpr():
       case ActionProgressiveDispatchSpanExpr():
+      case ActionStagedParseJobExpr():
       case ActionRecognizeOnceExpr():
       case ActionRecognitionCommitExpr():
       case ActionRecognitionRollbackExpr():

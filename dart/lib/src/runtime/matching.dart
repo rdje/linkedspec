@@ -96,6 +96,7 @@ final class RuntimeRegexAlternation {
       input: input,
       alternativeIndex: alternative.index,
       pattern: alternative.pattern,
+      regex: alternative.regex,
       match: rawMatch,
     );
   }
@@ -112,6 +113,7 @@ final class RuntimeRegexAlternation {
         input: input,
         alternativeIndex: alternative.index,
         pattern: alternative.pattern,
+        regex: alternative.regex,
         match: rawMatch,
       );
       if (_isBetterSeekCandidate(candidate, best)) {
@@ -132,6 +134,7 @@ final class RuntimeRegexAlternation {
         input: input,
         alternativeIndex: alternative.index,
         pattern: alternative.pattern,
+        regex: alternative.regex,
         match: rawMatch as RegExpMatch,
       );
     }
@@ -158,7 +161,7 @@ final class RuntimeRegexAlternative {
 }
 
 final class RuntimeRegexMatch {
-  const RuntimeRegexMatch._({
+  RuntimeRegexMatch._({
     required this.input,
     required this.alternativeIndex,
     required this.pattern,
@@ -166,8 +169,11 @@ final class RuntimeRegexMatch {
     required this.codeUnitEnd,
     required this.groups,
     required this.captures,
+    required List<int> captureGroupIndices,
+    required int captureRegexOptions,
     required this.named,
-  });
+  }) : _captureGroupIndices = captureGroupIndices,
+       _captureRegexOptions = captureRegexOptions;
 
   factory RuntimeRegexMatch.reindexed(
     RuntimeRegexMatch match,
@@ -181,6 +187,8 @@ final class RuntimeRegexMatch {
       codeUnitEnd: match.codeUnitEnd,
       groups: match.groups,
       captures: match.captures,
+      captureGroupIndices: match._captureGroupIndices,
+      captureRegexOptions: match._captureRegexOptions,
       named: match.named,
     );
   }
@@ -189,10 +197,12 @@ final class RuntimeRegexMatch {
     required String input,
     required int alternativeIndex,
     required String pattern,
+    required RegExp regex,
     required RegExpMatch match,
   }) {
     final groups = <String>[];
     final captures = <String>[];
+    final captureGroupIndices = <int>[];
     for (var index = 0; index <= match.groupCount; index += 1) {
       final value = match.group(index);
       if (index == 0) {
@@ -201,6 +211,7 @@ final class RuntimeRegexMatch {
       }
       if (value != null) {
         captures.add(value);
+        captureGroupIndices.add(index);
       }
       groups.add(value ?? '');
     }
@@ -221,6 +232,8 @@ final class RuntimeRegexMatch {
       codeUnitEnd: match.end,
       groups: List.unmodifiable(groups),
       captures: List.unmodifiable(captures),
+      captureGroupIndices: List.unmodifiable(captureGroupIndices),
+      captureRegexOptions: _runtimeRegexOptions(regex),
       named: Map.unmodifiable(named),
     );
   }
@@ -232,6 +245,9 @@ final class RuntimeRegexMatch {
   final int codeUnitEnd;
   final List<String> groups;
   final List<String> captures;
+  final List<int> _captureGroupIndices;
+  final int _captureRegexOptions;
+  List<({int start, int end})?>? _stagedCaptureSpanCache;
   final Map<String, String> named;
 
   String get text => groups.firstOrNull ?? '';
@@ -275,6 +291,256 @@ final class RuntimeRegexMatch {
       'zero_width': isZeroWidth,
     };
   }
+}
+
+/// Returns one live-regex-proven participating-capture range for the private
+/// staged-provenance carrier, or `null` when bounded instrumentation cannot
+/// preserve and prove the original match.
+///
+/// This internal module function deliberately is not exported by the package
+/// umbrella. Existing match JSON and public capture helpers remain unchanged.
+({int start, int end})? stagedCaptureCodeUnitSpan(
+  RuntimeRegexMatch match,
+  int compactCaptureIndex,
+) {
+  if (compactCaptureIndex < 0 || compactCaptureIndex >= match.captures.length) {
+    return null;
+  }
+  final spans = match._stagedCaptureSpanCache ??= List.unmodifiable(
+    _recoverCaptureCodeUnitSpans(
+      pattern: match.pattern,
+      input: match.input,
+      matchStart: match.codeUnitStart,
+      matchEnd: match.codeUnitEnd,
+      matchText: match.text,
+      regexOptions: match._captureRegexOptions,
+      captureGroupIndices: match._captureGroupIndices,
+      captures: match.captures,
+    ),
+  );
+  return spans[compactCaptureIndex];
+}
+
+final class _CapturePatternGroup {
+  const _CapturePatternGroup({
+    required this.index,
+    required this.contentStart,
+    required this.close,
+  });
+
+  final int index;
+  final int contentStart;
+  final int close;
+}
+
+final class _OpenPatternGroup {
+  const _OpenPatternGroup({
+    required this.captureIndex,
+    required this.contentStart,
+  });
+
+  final int? captureIndex;
+  final int? contentStart;
+}
+
+List<({int start, int end})?> _recoverCaptureCodeUnitSpans({
+  required String pattern,
+  required String input,
+  required int matchStart,
+  required int matchEnd,
+  required String matchText,
+  required int regexOptions,
+  required List<int> captureGroupIndices,
+  required List<String> captures,
+}) {
+  final unavailable = List<({int start, int end})?>.filled(
+    captures.length,
+    null,
+  );
+  if (captures.isEmpty) {
+    return unavailable;
+  }
+  final groups = _parseCapturePatternGroups(pattern);
+  if (groups == null) {
+    return unavailable;
+  }
+  final byIndex = <int, _CapturePatternGroup>{
+    for (final group in groups) group.index: group,
+  };
+  final result = <({int start, int end})?>[];
+  for (var index = 0; index < captures.length; index += 1) {
+    final group = byIndex[captureGroupIndices[index]];
+    if (group == null) {
+      return unavailable;
+    }
+    final span = _instrumentedCaptureSpan(
+      pattern: pattern,
+      group: group,
+      input: input,
+      matchStart: matchStart,
+      matchEnd: matchEnd,
+      matchText: matchText,
+      regexOptions: regexOptions,
+    );
+    if (span == null ||
+        input.substring(span.start, span.end) != captures[index]) {
+      return unavailable;
+    }
+    result.add(span);
+  }
+  return result;
+}
+
+({int start, int end})? _instrumentedCaptureSpan({
+  required String pattern,
+  required _CapturePatternGroup group,
+  required String input,
+  required int matchStart,
+  required int matchEnd,
+  required String matchText,
+  required int regexOptions,
+}) {
+  var startName = 'lsStagedStart${group.index}';
+  var endName = 'lsStagedEnd${group.index}';
+  while (pattern.contains('?<$startName>') || pattern.contains('?<$endName>')) {
+    startName = '${startName}x';
+    endName = '${endName}x';
+  }
+  final startProbe = '(?=(?<$startName>[\\s\\S]*))';
+  final endProbe = '(?=(?<$endName>[\\s\\S]*))';
+  final instrumented =
+      '${pattern.substring(0, group.contentStart)}'
+      '$startProbe${pattern.substring(group.contentStart, group.close)}'
+      '$endProbe${pattern.substring(group.close)}';
+  try {
+    final instrumentedRegex = compileRuntimeRegex(
+      instrumented,
+      caseSensitive: regexOptions & 1 != 0,
+      multiLine: regexOptions & 2 != 0,
+      unicode: regexOptions & 4 != 0,
+      dotAll: regexOptions & 8 != 0,
+    );
+    final raw = instrumentedRegex.matchAsPrefix(input, matchStart);
+    if (raw is! RegExpMatch ||
+        raw.start != matchStart ||
+        raw.end != matchEnd ||
+        raw.group(0) != matchText) {
+      return null;
+    }
+    final startSuffix = raw.namedGroup(startName);
+    final endSuffix = raw.namedGroup(endName);
+    if (startSuffix == null || endSuffix == null) {
+      return null;
+    }
+    final start = input.length - startSuffix.length;
+    final end = input.length - endSuffix.length;
+    if (start < matchStart || end < start || end > matchEnd) {
+      return null;
+    }
+    return (start: start, end: end);
+  } on FormatException {
+    return null;
+  }
+}
+
+int _runtimeRegexOptions(RegExp regex) {
+  return (regex.isCaseSensitive ? 1 : 0) |
+      (regex.isMultiLine ? 2 : 0) |
+      (regex.isUnicode ? 4 : 0) |
+      (regex.isDotAll ? 8 : 0);
+}
+
+List<_CapturePatternGroup>? _parseCapturePatternGroups(String pattern) {
+  final completed = <_CapturePatternGroup>[];
+  final stack = <_OpenPatternGroup>[];
+  var captureIndex = 0;
+  var escaped = false;
+  var inClass = false;
+  for (var index = 0; index < pattern.length; index += 1) {
+    final char = pattern[index];
+    if (escaped) {
+      if (!inClass && RegExp(r'[1-9]').hasMatch(char)) {
+        return null;
+      }
+      escaped = false;
+      continue;
+    }
+    if (char == r'\') {
+      escaped = true;
+      continue;
+    }
+    if (char == '[' && !inClass) {
+      inClass = true;
+      continue;
+    }
+    if (char == ']' && inClass) {
+      inClass = false;
+      continue;
+    }
+    if (inClass) {
+      continue;
+    }
+    if (char == '(') {
+      final contentStart = _captureGroupContentStart(pattern, index);
+      final currentCaptureIndex = contentStart == null ? null : ++captureIndex;
+      stack.add(
+        _OpenPatternGroup(
+          captureIndex: currentCaptureIndex,
+          contentStart: contentStart,
+        ),
+      );
+      continue;
+    }
+    if (char != ')') {
+      continue;
+    }
+    if (stack.isEmpty) {
+      return null;
+    }
+    final open = stack.removeLast();
+    if (open.captureIndex != null) {
+      completed.add(
+        _CapturePatternGroup(
+          index: open.captureIndex!,
+          contentStart: open.contentStart!,
+          close: index,
+        ),
+      );
+    }
+  }
+  if (escaped || inClass || stack.isNotEmpty) {
+    return null;
+  }
+  completed.sort((left, right) => left.index.compareTo(right.index));
+  return completed;
+}
+
+int? _captureGroupContentStart(String pattern, int openIndex) {
+  if (openIndex + 1 >= pattern.length || pattern[openIndex + 1] != '?') {
+    return openIndex + 1;
+  }
+  if (openIndex + 2 >= pattern.length) {
+    return null;
+  }
+  final marker = pattern[openIndex + 2];
+  final named =
+      marker == '<' ||
+      (marker == 'P' &&
+          openIndex + 3 < pattern.length &&
+          pattern[openIndex + 3] == '<');
+  if (!named) {
+    return null;
+  }
+  final nameStart = marker == '<' ? openIndex + 3 : openIndex + 4;
+  if (nameStart >= pattern.length) {
+    return null;
+  }
+  final lookbehindMarker = pattern[nameStart];
+  if (marker == '<' && (lookbehindMarker == '=' || lookbehindMarker == '!')) {
+    return null;
+  }
+  final close = pattern.indexOf('>', nameStart);
+  return close < 0 ? null : close + 1;
 }
 
 RegExp? _compileStructuralRegex(

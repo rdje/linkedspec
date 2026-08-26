@@ -241,6 +241,7 @@ CompiledSpec compileSpec(
     validateCompiledRegexSlotIdentities(compiled);
     validateNoRemovedAggregateSelectors(compiled);
     validateProgressiveSpanDispatchContract(compiled);
+    validateStagedParseJobContract(compiled);
     _validateRecursiveObservationPolicy(compiled);
     if (traceScope != null) {
       trace?.exitScope(
@@ -527,9 +528,46 @@ void validateProgressiveSpanDispatchContract(CompiledSpec compiled) {
   }
 }
 
+/// Reject every generic `parse_job` spelling that escaped the exclusive scalar
+/// assignment parser. A staged declaration can only exist as its dedicated,
+/// typed ActionIR node.
+void validateStagedParseJobContract(CompiledSpec compiled) {
+  void validate(Object? value) {
+    if (value is List) {
+      for (final child in value) {
+        validate(child);
+      }
+      return;
+    }
+    if (value is! Map) {
+      return;
+    }
+    final object = value.cast<String, Object?>();
+    if (object['kind'] == 'call' && object['name'] == 'parse_job') {
+      throw const CompiledSpecException(
+        'LINKEDSPEC_STAGED_AST_ENRICHMENT_ERROR:'
+        'staged_parse_job_options_required',
+      );
+    }
+    for (final child in object.values) {
+      validate(child);
+    }
+  }
+
+  for (final label in compiled.compiledRuleOrder) {
+    final rule = compiled.rulesByLabel[label]!;
+    for (final payload in rule.actionPayloads) {
+      validate(payload.actionAst.toJson());
+    }
+  }
+  for (final function in compiled.functions) {
+    validate(parseActionBlock(function.bodySource).toJson());
+  }
+}
+
 final class _RecursiveObservationEffects {
   bool writesObservation = false;
-  bool usesProgressiveDispatch = false;
+  bool usesParserOrStagedDispatch = false;
   final Set<String> ruleCalls = <String>{};
   final Set<String> functionCalls = <String>{};
   final Set<String> recognitionAttempts = <String>{};
@@ -568,8 +606,9 @@ void _validateRecursiveObservationPolicy(CompiledSpec compiled) {
         if (rule is String) {
           effects.observedRules.add(rule);
         }
-      } else if (kind == 'progressive_dispatch_span') {
-        effects.usesProgressiveDispatch = true;
+      } else if (kind == 'progressive_dispatch_span' ||
+          kind == 'staged_parse_job_marker') {
+        effects.usesParserOrStagedDispatch = true;
       } else if (kind == 'recognize_once') {
         final rule = object['rule'];
         if (rule is String) {
@@ -617,8 +656,9 @@ void _validateRecursiveObservationPolicy(CompiledSpec compiled) {
     current
       ..writesObservation =
           current.writesObservation || discovered.writesObservation
-      ..usesProgressiveDispatch =
-          current.usesProgressiveDispatch || discovered.usesProgressiveDispatch
+      ..usesParserOrStagedDispatch =
+          current.usesParserOrStagedDispatch ||
+          discovered.usesParserOrStagedDispatch
       ..ruleCalls.addAll(discovered.ruleCalls)
       ..functionCalls.addAll(discovered.functionCalls)
       ..recognitionAttempts.addAll(discovered.recognitionAttempts)
@@ -649,11 +689,11 @@ void _validateRecursiveObservationPolicy(CompiledSpec compiled) {
   };
   final ruleDispatches = <String, bool>{
     for (final entry in ruleEffects.entries)
-      entry.key: entry.value.usesProgressiveDispatch,
+      entry.key: entry.value.usesParserOrStagedDispatch,
   };
   final functionDispatches = <String, bool>{
     for (final entry in functionEffects.entries)
-      entry.key: entry.value.usesProgressiveDispatch,
+      entry.key: entry.value.usesParserOrStagedDispatch,
   };
   var changed = true;
   while (changed) {

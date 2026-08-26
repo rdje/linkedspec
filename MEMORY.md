@@ -1,13 +1,11 @@
 # MEMORY
 
-- activation_commit: `94d20becf2c8a17438a2509538a9878ecd96c9b9` — exact clean Rust-carrier-admission base for
-  task-tree-first Dart staged `FUTURE-PARITY-BACKLOG.14.7.5.0`; brief cleared; no push.
-- latest_completed_leaf: intended `FUTURE-PARITY-BACKLOG.14.7.5.0 - freeze Dart staged-AST dormant RED`;
-  exact excluded consumer, current-v1 controls, four generic observation routes, and one marker/provenance RED are complete.
-- active_work_unit: none after the intended `.14.7.5.0` commit; production/rollout/format/public boundaries hold.
-- next_action: from the exact clean `.14.7.5.0` commit, activate Dart marker/provenance leaf
-  `FUTURE-PARITY-BACKLOG.14.7.5.1` task-tree-first.
-- in_flight_uncommitted: none after the intended `.14.7.5.0` commit; no background job remains.
+- activation_commit: `93b035c3f1417d81abbf2527ffe3280f66d33df8` — exact clean dormant-Dart base for task-tree-first `FUTURE-PARITY-BACKLOG.14.7.5.1`; brief cleared; no push.
+- latest_completed_leaf: intended `FUTURE-PARITY-BACKLOG.14.7.5.1 - implement Dart staged marker provenance`; exclusive private node/static closure, typed declaration provenance, and four detached logical routes are complete.
+- active_work_unit: none after the intended `.14.7.5.1` commit; authority/policy/recurrence/admission boundaries hold.
+- next_action: from the exact clean `.14.7.5.1` commit, activate Dart caller-frozen authority leaf
+  `FUTURE-PARITY-BACKLOG.14.7.5.2` task-tree-first.
+- in_flight_uncommitted: none after the intended `.14.7.5.1` commit; no background job remains.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -55,6 +53,8 @@
   depth ordering, detached atomic stitching, all four result/three failure policies, breadth-first recurrence, exact
   cycle/decrease guards, shared resources, safe points, typed source rebasing, and four fresh-authority carriers.
   Perl and Rust are privately admitted and their full neutral projections are current at 85 (143/143 and 1/1).
-  Dart `.14.7.5.0` freezes a dormant generic-call/unknown-helper boundary: fatal analysis and four tests pass, one
-  marker/provenance assertion is RED, and production/discovery/rollout/v1/v2/public/outward truth is unchanged. `.14.7.5.1` is next.
-- latest_bootstrap_read: 2026-08-26 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox are reviewed. `.14.7.5.0` freezes Dart dormant RED without production/rollout/format/public movement; ADR `0091` owns mandatory history segment `4990` and upgrades proof to canonical. Intended commit: `FUTURE-PARITY-BACKLOG.14.7.5.0 - freeze Dart staged-AST dormant RED`; `.14.7.5.1` is next.
+  Dart `.14.7.5.0` freezes the dormant generic-call boundary; `.14.7.5.1` adds the exclusive inert marker, strict
+  literal/static closure, live-regex-proven direct/ordered-derived provenance, and four equal logical routes. Seven
+  groups pass and only `.2` resolution/cache/result/failure authority is RED. Discovery/rollout/v1/v2/public/outward
+  truth remains unchanged.
+- latest_bootstrap_read: 2026-08-26 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, Toolbox, exact Dart runtime boundaries, and Perl/Rust precedents are reviewed. `.14.7.5.1` is focused-complete from clean `93b035c3`; intended commit: `FUTURE-PARITY-BACKLOG.14.7.5.1 - implement Dart staged marker provenance`; `.14.7.5.2` is next.
