@@ -62,10 +62,11 @@ caller-frozen resolution/cache/result/failure authority owned by `.14.7.4.2`; Ru
 Focused `.14.7.4.1` proof also exposed two pre-existing Rust defects against its exact clean base. Corrective
 `TRACE-OBSERVABILITY.5.1` now repairs the first: `compile_with_events` runs the already-current progressive static
 validator at the same point as ordinary compilation, so traced/untraced malformed-program diagnostics are exact
-equals and valid traced results remain unchanged. Gap-aware interpreted/generated child-entry trace routes still
-omit required `child_dispatch` lifecycle events and remain owned by `.5.2`; the stale private progressive-authority
-route assertion discovered during `.5.1` proof is separately owned by `.5.3`. Neither remaining defect is staged-
-enrichment behavior, and both corrective leaves precede `.14.7.4.2`.
+equals and valid traced results remain unchanged. `.5.2` now repairs the second by routing normal and gap-aware
+child entry through one traced local seam in both the interpreter and generated-plan executor. Each child emits one
+unchanged `child_dispatch` / result pair; trace controls pass 11/11 and gap/generated results remain exact. The
+stale private progressive-authority route assertion discovered during `.5.1` proof is separately owned by `.5.3`.
+It is not staged-enrichment behavior and remains the sole corrective prerequisite before `.14.7.4.2`.
 
 The same slice's mandatory complete-record rollover publishes immutable change-history segment `4991`. ADR `0089`
 advances only finite route controls from 21/20 to 22 files / 21 manifest lines; the measured collection remains
@@ -79,7 +80,7 @@ diagnostics: success, resolution, execution, stitching, policies, queue depth, f
 surfaces stay fixed. Executable neutral contract `.2` and the Perl behavioral parent `.3` are complete; backend parents `.4-.7`, recurrence `.8`,
 public authoring/closeout `.9`, and independent recomposition `.10` remain dependency-frozen behind it. Every
 later runtime rollout leg and public/outward surface therefore remains pending; Rust caller-frozen authority `.4.2`
-follows clean completion of `TRACE-OBSERVABILITY.5.2-.3` now that `.5.1` has restored traced progressive validation.
+follows clean completion of `TRACE-OBSERVABILITY.5.3` now that `.5.1-.2` have restored the trace behavior.
 
 ## Typed transaction safety now composes the complete recognition authority
 

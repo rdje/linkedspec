@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — engine observability / developer experience`
 - Created: `2026-06-19`
-- Last updated: `2026-08-26` (`.5.1` corrective traced-compiler validation is active; `.5.2` retains gap-aware child-dispatch trace repair)
+- Last updated: `2026-08-26` (`.5.2` gap-aware child-dispatch trace repair is signoff-complete; `.5.3` is next)
 - Owner: repo-local workflow
 
 ## Goal (user directive, 2026-06-19)
@@ -436,8 +436,54 @@ Coverage plan:
   consumer; `.5.3` owns the repair. Knowledge, rendered/inspected mdBook, bounded histories, memory, doctrines,
   formatting, whitespace, and exact scope guards pass. Commit subject is
   `TRACE-OBSERVABILITY.5.1 - align traced progressive validation`; no push.
-- ID: `TRACE-OBSERVABILITY.5.2` · Status: `pending`; Goal: Restore required `child_dispatch` lifecycle events on
+- ID: `TRACE-OBSERVABILITY.5.2` · Status: `done` (`focused-signoff-complete` 2026-08-26; task-tree-first from exact clean
+  `915cd1a7c9b3d11676e77dfde1c005ba0566334f`; no push); Goal: Restore required `child_dispatch` lifecycle events on
   interpreted and generated-plan gap-aware child-entry routes before `.5.3` closes corrective parent `.5`.
+  Acceptance: reproduce the existing interpreted and generated trace-control failures while their paired untraced
+  results remain correct; use trace/runtime owner probes to prove action-edge gap-aware child entry bypasses the
+  normal `execute_child_rule` dispatch-event seam through `execute_child_rule_with_entry_slot`; repair the shared
+  seam so both routes emit one balanced dispatch/result lifecycle with the same rule/slot/result vocabulary as
+  ordinary child dispatch; preserve gap/cursor/capture/result behavior, event ordering outside the missing pair,
+  default quietness, trace controls/sinks, generated format, public/outward surfaces, other backends, rollout, and
+  canonical topology; synchronize task, Knowledge, trace docs/book, live docs, memory, architecture, and roadmaps.
+  Verification tier: `focused` — bounded shared Rust runtime trace-event repair plus exact interpreted/generated
+  regressions; no admission, rollout, format, public, infrastructure, storage, finite-capacity, milestone, or
+  canonical-topology boundary moves.
+  Focused checks: exact two-test RED/GREEN; complete `trace_controls`; source-emitter trace dependent; core trace;
+  lossless-gap and staged/progressive direct dependents; recognition/progressive/staged governance; Knowledge,
+  rendered mdBook, bounded histories, memory, all nine doctrines, exact no-result/no-format/no-public/no-other-
+  backend diff, and `git diff --check`.
+  Canonical trigger: `none` — escalate only if the shared repair changes event schema, generated format, runtime
+  results, admission/rollout, public/outward behavior, or another designated boundary.
+  Checklist: [x] clean activation/task ownership [x] Knowledge/runtime/toolbox retrieval [x] exact two-route RED
+  [x] shared-seam root cause [x] balanced event repair [x] interpreted/generated GREEN [x] direct-dependent/no-
+  drift proof [x] durable synchronization [x] focused signoff [x] atomic commit/brief/clean handoff.
+  Acceptance Checklist:
+  - [x] **REPRODUCE / ISSUE** — exact interpreted and generated gap-aware tests fail only because the expected
+    `child_dispatch` event is absent; paired untraced values/cursors remain correct.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — `RuntimeContext` and generated-plan call-path probes prove both action-edge
+    routes enter `execute_child_rule_with_entry_slot`, which omits the normal dispatch/result event pair.
+  - [x] **FIX** — emit one balanced child-dispatch lifecycle at the shared gap-aware seam using the existing event
+    namespace/detail vocabulary; do not duplicate events on the normal child path.
+  - [x] **ADDRESSED (verified)** — both exact regressions and complete trace controls pass with unchanged paired
+    untraced results and expected event order.
+  - [x] **NO REGRESSION** — source-emitter/core trace, gap/staged/progressive dependents, governance, doctrines, and
+    exact no-format/no-public/no-other-backend guards pass.
+  - [x] **LOCKSTEP** — task, Knowledge, architecture/Toolbox, roadmaps, live docs, memory, and mdBook describe the
+    restored gap-aware events and retain `.5.3` as the next corrective leaf.
+  Activation evidence: exact clean `git status --short --untracked-files=all` at
+  `915cd1a7c9b3d11676e77dfde1c005ba0566334f`; zero-byte brief; no rendered book; no background job. The prior
+  staged-marker verification and current source inventory identify the two failing trace tests, but this leaf must
+  independently reproduce both at the clean activation commit before changing runtime code.
+  Completion evidence: clean pre-fix `trace_controls` is 9/11 with only the interpreted/generated tests failing on
+  absent `child_dispatch`; both already assert traced/untraced result equality first. Git proves native gap commit
+  `5c4e9d50` and generated gap commit `9e6ade98` added parallel entry-slot seams after trace commit `61289cc3`
+  without its event pair. Normal child wrappers now delegate to the entry-slot seam in each executor, and that one
+  local owner emits the unchanged dispatch/result lifecycle for `None` and typed gap slots. Complete trace controls
+  are 11/11, generated source is 6/6, exact Rust gap admission is 1/1, core trace is 7/7, and gap/recognition/
+  progressive/staged governance passes. Knowledge, rendered/inspected mdBook, bounded histories, memory, all nine
+  doctrines, formatting, whitespace, and exact no-result/no-format/no-public/no-other-backend guards pass. Commit
+  subject is `TRACE-OBSERVABILITY.5.2 - restore gap-aware child trace`; no push.
 - ID: `TRACE-OBSERVABILITY.5.3` · Status: `pending` (discovered by `.5.1` focused direct-dependent proof on
   2026-08-26); Goal: Repair the stale private progressive-authority route assertion left behind when
   `FUTURE-PARITY-BACKLOG.14.6.3.3` intentionally admitted the exact Rust contract consumer to canonical CI.
@@ -452,8 +498,7 @@ Coverage plan:
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `.5.2` | `pending` | Restore interpreted/generated gap-aware child-dispatch trace events from the clean `.5.1` landing. |
-| 2 | `.5.3` | `pending` | Align the stale private-authority route assertion with the admitted Rust contract consumer after `.5.2`. |
+| 1 | `.5.3` | `pending` | Align the stale private-authority route assertion with the admitted Rust contract consumer from the clean `.5.2` landing. |
 
 ## Decisions
 
@@ -529,11 +574,15 @@ Coverage plan:
   dispatch because `compile_with_events` omitted one existing validator call. Restore that call, not replacement
   semantics. The original full-parity claim stays reopened until `.5.2` restores gap-aware child-dispatch events;
   the unrelated stale private-authority admission snapshot is independently owned by `.5.3`.
+- `2026-08-26`: corrective `.5.2` preserves the established event schema and consolidates each executor's normal
+  child wrapper through its entry-slot seam. The seam emits one existing dispatch/result pair regardless of whether
+  a gap slot is absent or present; no normal-path duplication, new namespace, or runtime-result change is needed.
 
 ## Open Questions
 
-- Required backend parity: the original Perl/Rust proof closed at `.4.5`; Rust renewal waits for corrective `.5.2`.
-  Future variants must satisfy the mdBook checklist before claiming trace parity.
+- Required backend parity: the original Perl/Rust proof closed at `.4.5`; corrective `.5.1-.2` now restore later-
+  discovered validation and gap-aware event regressions, so Rust renewal is current. Future variants must satisfy
+  the mdBook checklist before claiming trace parity.
 - Auto-instrumentation (`Devel::*`/aspect style) remains not the preferred first path: generated template instrumentation
   and owner-level trace wrappers are more portable and reviewable.
 
@@ -566,6 +615,7 @@ Coverage plan:
 | `2026-07-04` | `.4.4` | `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test trace_controls`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-core trace`; `cargo fmt`; mdBook; Knowledge Map; memory/doctrine; whitespace; `bash tools/run_ci_local.sh` | PASS — Rust interpreted runtime and generated-plan runtime traces now emit rule/plan scopes, branch decisions, lifecycle events, helper dispatch, and mark/capture events while traced/untraced outputs remain equal. Diagnostic full Rust runtime `integration_test` still hits the known residual 9 failures and is not this leaf's acceptance gate. |
 | `2026-07-04` | `.4.5` | `perl bin/linkedspec --help`; `prove -v -Iperl t/trace_cli.t t/trace_generated_handler_branch.t t/trace_generated_nonrep_dispatch.t t/trace_generated_rep_dispatch.t t/trace_ruleir_planning.t t/trace_emit_context_bridge.t t/trace_actionir_pipeline.t t/trace_actionir_compact_lowerers.t t/trace_actionir_method_lowering.t`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-core trace`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test trace_controls`; `cargo fmt`; mdBook; Knowledge Map; memory/doctrine; whitespace; `bash tools/run_ci_local.sh` | PASS — Perl reference and Rust trace suites prove the documented external trace capability contract; full local CI passed with phase0 1021 green. Rust can claim trace parity for that contract, and future variants inherit the mdBook checklist. |
 | `2026-08-26` | `.5.1` | exact ordinary/traced RED then equality GREEN; valid quiet trace control; core trace 7/7; progressive ordinary 0/0 + cfg contract 1/1; private authority 3/4 root-cause probe; progressive/recognition/staged governance; fmt; Knowledge; rendered mdBook; histories; memory/doctrines; scope/whitespace | PASS — one existing validator call restores traced progressive static-validation equality without valid-result, event-schema, runtime, format, rollout, public, or other-backend movement. The separately stale private-authority route snapshot is owned by `.5.3`. |
+| `2026-08-26` | `.5.2` | exact complete trace target RED 9/11 then GREEN 11/11; source emitter 6/6; Rust gap admission 1/1; core trace 7/7; gap/recognition/progressive/staged governance; fmt; Knowledge; rendered mdBook; histories; memory/doctrines; scope/whitespace | PASS — normal and typed-gap child entry share one traced local seam per executor and emit one existing dispatch/result pair with unchanged results, event schema, format, rollout, public surface, and other backends. |
 
 ## Commit Log
 
@@ -592,6 +642,7 @@ Coverage plan:
 | `.4.4` | `61289cc3` (`TRACE-OBSERVABILITY.4.4 - add Rust runtime trace events`) | Rust interpreted runtime and generated-plan branch/lifecycle/mark-capture trace event wiring. |
 | `.4.5` | pending (`TRACE-OBSERVABILITY.4.5 - close trace parity proof`) | Cross-variant trace parity proof, Rust parity claim for the documented external capability contract, and future-variant checklist. |
 | `.5.1` | pending (`TRACE-OBSERVABILITY.5.1 - align traced progressive validation`) | Existing-validator repair plus exact ordinary/traced diagnostic-equality regression; `.5.2` remains the active corrective frontier. |
+| `.5.2` | pending (`TRACE-OBSERVABILITY.5.2 - restore gap-aware child trace`) | Interpreted/generated entry-slot seams now retain the existing child-dispatch lifecycle; `.5.3` is next. |
 
 ## Changelog
 
@@ -600,6 +651,8 @@ Coverage plan:
   (discoverability, coverage).
 - `2026-08-26`: Reopened corrective `.5`; `.5.1` restores traced progressive validation, `.5.2` owns gap-aware
   child-dispatch events, and `.5.3` owns the stale private-authority admission-route assertion.
+- `2026-08-26`: Closed `.5.2`; both Rust runtime executors emit exactly one existing child dispatch/result pair
+  for normal and gap-aware entry, trace controls are 11/11, and `.5.3` is the sole corrective frontier.
 - `2026-07-04`: Closed `.1` read-only coverage audit. Current trace is useful but not exhaustive: pipeline
   boundaries, parser/rule handler wrappers, selected decisions, dumps, and mark/capture events are traced; generated
   handler branch/control-flow decisions and most ActionIR owner branches are not. `.2` is now the PNT frontier.

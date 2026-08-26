@@ -10,6 +10,8 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-26 (`TRACE-OBSERVABILITY.5.2`): normal and typed-gap child entry now share one traced local seam per Rust executor, restoring exactly one existing dispatch/result pair; complete trace 11/11, generated 6/6, gap 1/1, and governance pass with unchanged results/schema/format.
+
 - 2026-08-26 (`TRACE-OBSERVABILITY.5.1` — traced progressive validation): clean activation is staged-marker
   commit `3d509616`; the exact RED proved `compile_with_events` alone omitted
   `validate_progressive_span_dispatch_contract` while retaining the other three current post-compile validators.

@@ -1,6 +1,6 @@
 ---
 id: rust-trace-runtime-branch-events
-title: TRACE-OBSERVABILITY.4.4 adds Rust interpreted and generated-plan runtime trace events
+title: Rust interpreted and generated-plan runtime traces include gap-aware child dispatch
 answers:
   - "does Rust emit runtime trace events"
   - "what did TRACE-OBSERVABILITY.4.4 add"
@@ -8,7 +8,10 @@ answers:
   - "does Rust trace generated-plan runtime branches"
   - "does Rust trace mark and capture helper operations"
   - "can Rust claim trace parity after TRACE-OBSERVABILITY.4.4"
-date: 2026-07-04
+  - "does Rust trace gap-aware action-edge child dispatch"
+  - "why was child_dispatch missing from Rust gap capture traces"
+  - "what did TRACE-OBSERVABILITY.5.2 repair"
+date: 2026-08-26
 status: current
 tags: [trace, observability, rust, parity, runtime, task-tree, mdbook]
 evidence: "rust/linkedspec-runtime/src/{engine.rs,runtime.rs}; rust/linkedspec-runtime/tests/trace_controls.rs; docs/linkedspec-book/src/public-api/trace-api.md; docs/tasks/TRACE-OBSERVABILITY.md .4.4"
@@ -29,6 +32,14 @@ match/no-match, acode/bcode dispatch, and AND-sequence slots. Lifecycle and mark
 the shared `rust_runtime:engine:*` namespaces because generated-plan execution reuses the same runtime block/helper
 owners.
 
-At `.4.4` closeout Rust still did not claim trace parity. `TRACE-OBSERVABILITY.4.5` has since closed the
-cross-variant parity proof and reusable future-variant checklist, so Rust can now claim parity for the documented
-external capability contract.
+At `.4.4` closeout Rust still did not claim trace parity. `TRACE-OBSERVABILITY.4.5` later closed the original
+cross-variant proof and reusable future-variant checklist.
+
+Corrective `.5.2` found a later regression introduced by Rust inter-match-gap support: interpreted and generated
+action edges carrying a typed gap entry slot used parallel `execute_child_rule_with_entry_slot` seams created
+after the original trace instrumentation. Those seams preserved accumulator and child-result semantics but omitted
+the existing `child_dispatch` / `child_dispatch_result` pair. `.5.2` makes the normal child wrapper delegate to the
+entry-slot seam in each executor and moves the unchanged event lifecycle into that single local owner. Both no-slot
+and gap-aware entry therefore emit exactly one pair under their existing `rust_runtime:engine:*` or
+`rust_runtime:generated_plan:*` namespace. Complete trace controls pass 11/11 with unchanged traced/untraced
+results; Rust can again claim parity for the documented external trace capability contract.

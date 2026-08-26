@@ -91,11 +91,10 @@ The complete 175-test, 61x2 CLI, and 105-corpus Dart gate passes.
 ## Rust variant trace status
 
 `TRACE-OBSERVABILITY.4.5` established the original Rust parity claim for the mdBook-documented external capability
-contract. Corrective verification has since reopened that claim: `.5.1` restores exact ordinary/traced progressive
-static-validation parity, while `.5.2` still owns missing `child_dispatch` lifecycle events on gap-aware child-entry
-routes. Rust therefore retains the documented controls and event model below but does not renew the complete
-parity claim until `.5.2` closes. The contract is behavioral: Rust does not reuse Perl package names or every
-Perl-internal event namespace.
+contract. Corrective `.5.1-.2` now restore the two later-discovered gaps: exact ordinary/traced progressive static-
+validation equality and balanced `child_dispatch` lifecycle events on gap-aware child-entry routes. Rust can again
+claim the complete documented trace capability. The contract is behavioral: Rust does not reuse Perl package
+names or every Perl-internal event namespace.
 Rust now has ordered trace levels, configuration, stdout/route/mirror sinks, reset/truncate behavior, event
 primitives, opt-in traced entrypoints beside the existing quiet entrypoints, and routed debug events for
 `parse_spec`, validation passes, `compile`, dependency-regex mapping, user-function definition parsing, full-spec
@@ -125,6 +124,18 @@ and compiled-regex-slot static validators as ordinary `compile(...)`, in the sam
 `dispatch_span(...)` call therefore returns the same
 `LINKEDSPEC_PROGRESSIVE_SPAN_DISPATCH_ERROR:progressive_span_binding_required` diagnostic whether tracing is on
 or off. This corrective guarantee is locked by `TRACE-OBSERVABILITY.5.1`.
+
+Gap-aware action edges retain the ordinary child lifecycle too. The interpreted route emits, for example:
+
+```text
+[MEDIUM][decision] rust_runtime:engine:child_dispatch taken=1 reason=label=Child entry_regex_idx=0 ...
+[MEDIUM][decision] rust_runtime:engine:child_dispatch_result taken=1 reason=label=Child value_kind=scalar
+```
+
+Generated-plan execution emits the same detail vocabulary under
+`rust_runtime:generated_plan:child_dispatch` and `child_dispatch_result`. A child call emits exactly one pair
+whether its entry carries an inter-match gap slot or not. The trace event never changes the gap, cursor, capture,
+accumulator, or child result; `TRACE-OBSERVABILITY.5.2` locks this with complete traced/untraced result equality.
 
 The Rust control surface is:
 

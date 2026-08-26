@@ -276,9 +276,9 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   assignment/mutation operator routing, mutation-slot values, and return-payload fallback choices.
 - **Compile/ActionIR coverage boundary:** the planned Perl reference compile/ActionIR owner namespaces are covered
   through MethodLowering. `TRACE-OBSERVABILITY.4.5` established the original Rust external trace-capability
-  parity proof; corrective `.5.1` restores ordinary/traced progressive static-validation equality, while `.5.2`
-  still owns the gap-aware runtime `child_dispatch` event defect. Do not renew the complete Rust parity claim until
-  `.5.2` closes. Future variants must expose the same documented controls, levels, event classes, sink behavior,
+  parity proof; corrective `.5.1` restores ordinary/traced progressive static-validation equality and `.5.2`
+  restores gap-aware runtime `child_dispatch` lifecycle events. The complete Rust parity claim is current again.
+  Future variants must expose the same documented controls, levels, event classes, sink behavior,
   default-quiet behavior, and validation identity before claiming trace parity.
 - **Rust trace controls/events:** `TRACE-OBSERVABILITY.4.2` added the Rust shared control layer:
   `linkedspec_core::trace::{TraceConfig, TraceLevel, TraceSinkMode, TraceEmitter}` plus the `DUMP_*` constants,
@@ -294,8 +294,10 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   `TRACE-OBSERVABILITY.4.5` closed the original parity proof. Corrective `.5.1` proves traced compilation runs the
   same progressive validator as ordinary compilation and returns the exact same malformed-program diagnostic;
   reverify with the focused `traced_compile_enforces_progressive_static_contract` test in
-  `rust/linkedspec-runtime/tests/trace_controls.rs`. Corrective `.5.2` remains required before the full parity claim
-  is current again. Future variants must pass the mdBook checklist before making the same claim.
+  `rust/linkedspec-runtime/tests/trace_controls.rs`. Corrective `.5.2` consolidates no-slot and gap-aware child entry
+  through one local traced seam in each executor, restoring exactly one `child_dispatch` / result pair under the
+  existing engine or generated-plan namespace; the complete target is 11/11. Future variants must pass the mdBook
+  checklist before making the same claim.
 - **Staged-registry boundary audit:** before changing general staged AST behavior, retrieve
   [[general-staged-ast-current-boundary]] and probe the registry rather than inferring policy semantics from its
   JSON fields. The five current registries execute only the one-depth

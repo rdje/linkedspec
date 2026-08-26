@@ -804,6 +804,16 @@ impl GeneratedPlanExecutor<'_> {
         entry_regex_idx: usize,
         ctx: &mut RuntimeContext,
     ) -> Result<RuntimeValue, String> {
+        self.execute_child_rule_with_entry_slot(label, entry_regex_idx, ctx, None)
+    }
+
+    fn execute_child_rule_with_entry_slot(
+        &self,
+        label: &str,
+        entry_regex_idx: usize,
+        ctx: &mut RuntimeContext,
+        entry_slot: Option<crate::recognition_transaction::GapEntrySlot>,
+    ) -> Result<RuntimeValue, String> {
         let accumulator_len = ctx.accumulator.len();
         ctx.trace_decision(
             "rust_runtime:generated_plan:child_dispatch",
@@ -814,7 +824,8 @@ impl GeneratedPlanExecutor<'_> {
             ),
             TraceLevel::MEDIUM,
         );
-        let child_result = self.execute_rule(label, entry_regex_idx, ctx);
+        let child_result =
+            self.execute_rule_with_entry_slot(label, entry_regex_idx, ctx, entry_slot);
         ctx.accumulator.truncate(accumulator_len);
         match &child_result {
             Ok(value) => {
@@ -837,20 +848,6 @@ impl GeneratedPlanExecutor<'_> {
                 );
             }
         }
-        child_result
-    }
-
-    fn execute_child_rule_with_entry_slot(
-        &self,
-        label: &str,
-        entry_regex_idx: usize,
-        ctx: &mut RuntimeContext,
-        entry_slot: Option<crate::recognition_transaction::GapEntrySlot>,
-    ) -> Result<RuntimeValue, String> {
-        let accumulator_len = ctx.accumulator.len();
-        let child_result =
-            self.execute_rule_with_entry_slot(label, entry_regex_idx, ctx, entry_slot);
-        ctx.accumulator.truncate(accumulator_len);
         child_result
     }
 
@@ -2623,6 +2620,16 @@ impl Engine {
         entry_regex_idx: usize,
         ctx: &mut RuntimeContext,
     ) -> Result<RuntimeValue, String> {
+        self.execute_child_rule_with_entry_slot(label, entry_regex_idx, ctx, None)
+    }
+
+    fn execute_child_rule_with_entry_slot(
+        &self,
+        label: &str,
+        entry_regex_idx: usize,
+        ctx: &mut RuntimeContext,
+        entry_slot: Option<crate::recognition_transaction::GapEntrySlot>,
+    ) -> Result<RuntimeValue, String> {
         let accumulator_len = ctx.accumulator.len();
         ctx.trace_decision(
             "rust_runtime:engine:child_dispatch",
@@ -2633,7 +2640,8 @@ impl Engine {
             ),
             TraceLevel::MEDIUM,
         );
-        let child_result = self.execute_rule(label, entry_regex_idx, ctx);
+        let child_result =
+            self.execute_rule_with_entry_slot(label, entry_regex_idx, ctx, entry_slot);
         ctx.accumulator.truncate(accumulator_len);
         match &child_result {
             Ok(value) => {
@@ -2656,20 +2664,6 @@ impl Engine {
                 );
             }
         }
-        child_result
-    }
-
-    fn execute_child_rule_with_entry_slot(
-        &self,
-        label: &str,
-        entry_regex_idx: usize,
-        ctx: &mut RuntimeContext,
-        entry_slot: Option<crate::recognition_transaction::GapEntrySlot>,
-    ) -> Result<RuntimeValue, String> {
-        let accumulator_len = ctx.accumulator.len();
-        let child_result =
-            self.execute_rule_with_entry_slot(label, entry_regex_idx, ctx, entry_slot);
-        ctx.accumulator.truncate(accumulator_len);
         child_result
     }
 

@@ -10,6 +10,19 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-26 — TRACE-OBSERVABILITY.5.2 — restore gap-aware child trace
+
+- Reproduced the complete Rust trace target at 9/11: only interpreted and generated gap-aware child-entry cases
+  lacked the existing `child_dispatch` marker, after each test had already proved traced/untraced result equality.
+- Root-caused the regression to parallel `execute_child_rule_with_entry_slot` seams added by later lossless-gap
+  work without the dispatch/result instrumentation that predated them.
+- Routed each executor's normal child wrapper through its entry-slot seam and moved the unchanged event pair into
+  that local owner. No-slot and typed-gap calls now emit exactly one existing lifecycle under their original engine
+  or generated-plan namespace; no runtime result, event schema, generated format, public surface, rollout, or other
+  backend changes.
+- Complete trace controls pass 11/11, source emitter 6/6, exact Rust gap admission 1/1, core trace 7/7, and gap/
+  recognition/progressive/staged governance. Full documented Rust trace parity is current again.
+
 ## 2026-08-26 — TRACE-OBSERVABILITY.5.1 — align traced progressive validation
 
 - Reproduced an exact traced-only compiler bypass: ordinary `compile(...)` rejected a residual dedicated

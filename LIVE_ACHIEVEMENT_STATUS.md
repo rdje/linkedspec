@@ -2,24 +2,27 @@
 
 ## Current Activity
 
-- `TRACE-OBSERVABILITY.5.1` restores the progressive static validator on Rust's traced compiler route. Exact
-  malformed-program rejection now matches ordinary compilation; valid traced/untraced results remain equal.
-- `.5.2` next owns missing gap-aware interpreted/generated child-dispatch lifecycle events. `.5.3` then owns the
-  stale private progressive-authority no-canonical-route assertion exposed by `.5.1` focused proof.
-- Staged Rust `.14.7.4.2` remains dependency-frozen until both remaining corrective leaves land cleanly.
+- `TRACE-OBSERVABILITY.5.2` restores exactly one existing child dispatch/result event pair on normal and gap-aware
+  interpreted/generated entry. Complete trace controls pass 11/11 with unchanged paired results.
+- Full documented Rust trace parity is current again. `.5.3` now solely owns the stale private progressive-
+  authority no-canonical-route assertion exposed by `.5.1` focused proof.
+- Staged Rust `.14.7.4.2` remains dependency-frozen until `.5.3` lands cleanly.
 
 ## Latest Completed Slice
 
-- `.5.1` adds the one missing existing validator call plus an exact traced/ordinary rejection regression. Core
-  trace proof, ordinary dormant discovery, the admitted four-route progressive contract, and governance pass;
-  no trace schema, valid result, runtime, format, rollout, public, or other-backend surface changes.
+- `.5.2` consolidates no-slot and typed-gap child entry through one traced local seam per Rust executor. Trace
+  11/11, generated source 6/6, gap admission 1/1, core trace 7/7, and governance pass without result/schema/format,
+  rollout, public, or other-backend movement.
 
 ## Next Action
 
-- Commit `.5.1`, clear the brief, verify the clean handoff, then activate `.5.2` and restore gap-aware interpreted/
-  generated child-dispatch trace events before `.5.3` repairs the stale authority proof.
+- Commit `.5.2`, clear the brief, verify the clean handoff, then activate `.5.3`, repair the stale private-authority
+  route assertion, close corrective parent `.5`, and resume staged Rust `.14.7.4.2`.
 
 ## Recent Completions
+
+- `2026-08-26` — `TRACE-OBSERVABILITY.5.2` restores one existing child dispatch/result pair for normal and gap-
+  aware interpreted/generated entry; trace controls pass 11/11 with unchanged results.
 
 - `2026-08-26` — `TRACE-OBSERVABILITY.5.1` restores exact ordinary/traced progressive static-validation equality
   with one existing-validator call and a diagnostic-equality regression; valid trace results remain unchanged.
@@ -65,9 +68,6 @@
 
 - `2026-08-25` — `.14.6.6.3` admits the same 178-assertion carrier exactly once per ABI in ordinary and canonical
   proof, advances only PUC Lua/LuaJIT to 7/9/112, and leaves the 273-assertion-per-ABI authority dormant.
-
-- `2026-08-25` — `.14.6.6.2` makes the dual-ABI final path GREEN at 178/178 through one exclusive node and four
-  fresh-authority carriers, retains authority 273/273 and rollout 5/9/106, and keeps the consumer dormant.
 
 ## History
 
