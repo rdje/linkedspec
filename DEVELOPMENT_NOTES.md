@@ -9,6 +9,7 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-26 (`TRACE-OBSERVABILITY.5.3`): the cfg private authority remains unrouted/4-of-4 while its proof requires the separately admitted contract input/command once; ordinary targets stay 0/0, and `.5.4` owns the stale staged-admission snapshot exposed before canonical closeout.
 
 - 2026-08-26 (`TRACE-OBSERVABILITY.5.2`): normal and typed-gap child entry now share one traced local seam per Rust executor, restoring exactly one existing dispatch/result pair; complete trace 11/11, generated 6/6, gap 1/1, and governance pass with unchanged results/schema/format.
 

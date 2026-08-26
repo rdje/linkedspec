@@ -298,6 +298,9 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   through one local traced seam in each executor, restoring exactly one `child_dispatch` / result pair under the
   existing engine or generated-plan namespace; the complete target is 11/11. Future variants must pass the mdBook
   checklist before making the same claim.
+- **Corrective proof closeout:** focused `TRACE-OBSERVABILITY.5.3` keeps the cfg private progressive-authority test
+  a 4/4 target absent from canonical CI while requiring the separate tracked/cfg admitted contract consumer once.
+  `.5.4` owns the stale staged-admission snapshot and the corrective tree's canonical closeout.
 - **Staged-registry boundary audit:** before changing general staged AST behavior, retrieve
   [[general-staged-ast-current-boundary]] and probe the registry rather than inferring policy semantics from its
   JSON fields. The five current registries execute only the one-depth

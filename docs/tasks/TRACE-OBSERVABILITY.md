@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap — engine observability / developer experience`
 - Created: `2026-06-19`
-- Last updated: `2026-08-26` (`.5.2` gap-aware child-dispatch trace repair is signoff-complete; `.5.3` is next)
+- Last updated: `2026-08-26` (`.5.3` repairs the stale authority proof; `.5.4` owns the canonical closeout blocker)
 - Owner: repo-local workflow
 
 ## Goal (user directive, 2026-06-19)
@@ -38,7 +38,7 @@ controls (Trace.pm ~236–261, gated by `$TRACE_INITIALIZED`): `LINKEDSPEC_TRACE
 NOT reliably work through the lazy-loaded `LinkedSpec` facade before first Trace load — use env vars,
 per-call trace options, or `configure_trace`.)
 
-**The two original gaps are closed; corrective parity repair `.5` is active:**
+**The two original gaps and corrective parity/proof repair `.5` are closed:**
 1. **Discoverability/CLI:** `TRACE-OBSERVABILITY.2` closed the first discoverability gap with
    `bin/linkedspec`, a command-line compile/run runner that exposes `--trace LEVEL`, `--trace-file`,
    `--trace-mode`, `--trace-reset`, and `--trace-emoji`, and with mdBook/TOOLBOX documentation.
@@ -384,8 +384,8 @@ Coverage plan:
     primitive coverage; Rust runtime trace controls tests; mdBook; Knowledge Map; memory/doctrine; whitespace;
     local CI.
   Commit: `pending` (`TRACE-OBSERVABILITY.4.5 - close trace parity proof`)
-- ID: `TRACE-OBSERVABILITY.5` · Status: `active` (2026-08-26; corrective children `.1-.3`); Goal: Repair three
-  pre-existing Rust trace/progressive proof defects exposed by focused verification without changing untraced
+- ID: `TRACE-OBSERVABILITY.5` · Status: `active` (2026-08-26; corrective children `.1-.3` complete; `.4` pending); Goal: Repair
+  the Rust trace/progressive proof defects exposed by focused and canonical verification without changing untraced
   behavior, trace controls, event schemas, or other backends; Depends on: closed `.4.5` parity proof and exact clean
   discovery commit `3d509616aad854b6ce2f5ddaebc423024e865f84`.
 - ID: `TRACE-OBSERVABILITY.5.1` · Status: `done` (`focused-signoff-complete` 2026-08-26; task-tree-first from exact clean
@@ -438,7 +438,7 @@ Coverage plan:
   `TRACE-OBSERVABILITY.5.1 - align traced progressive validation`; no push.
 - ID: `TRACE-OBSERVABILITY.5.2` · Status: `done` (`focused-signoff-complete` 2026-08-26; task-tree-first from exact clean
   `915cd1a7c9b3d11676e77dfde1c005ba0566334f`; no push); Goal: Restore required `child_dispatch` lifecycle events on
-  interpreted and generated-plan gap-aware child-entry routes before `.5.3` closes corrective parent `.5`.
+  interpreted and generated-plan gap-aware child-entry routes before later proof repair and parent closeout.
   Acceptance: reproduce the existing interpreted and generated trace-control failures while their paired untraced
   results remain correct; use trace/runtime owner probes to prove action-edge gap-aware child entry bypasses the
   normal `execute_child_rule` dispatch-event seam through `execute_child_rule_with_entry_slot`; repair the shared
@@ -484,21 +484,81 @@ Coverage plan:
   progressive/staged governance passes. Knowledge, rendered/inspected mdBook, bounded histories, memory, all nine
   doctrines, formatting, whitespace, and exact no-result/no-format/no-public/no-other-backend guards pass. Commit
   subject is `TRACE-OBSERVABILITY.5.2 - restore gap-aware child trace`; no push.
-- ID: `TRACE-OBSERVABILITY.5.3` · Status: `pending` (discovered by `.5.1` focused direct-dependent proof on
-  2026-08-26); Goal: Repair the stale private progressive-authority route assertion left behind when
+- ID: `TRACE-OBSERVABILITY.5.3` · Status: `done` (`focused-signoff-complete` 2026-08-26; task-tree-first from exact clean
+  `e9d28f69f6c0357eccf2237952eca1b5debdfcbe`; no push; discovered by `.5.1` focused direct-dependent proof);
+  Goal: Repair the stale private progressive-authority route assertion left behind when
   `FUTURE-PARITY-BACKLOG.14.6.3.3` intentionally admitted the exact Rust contract consumer to canonical CI.
   Evidence: the cfg-enabled authority test passes its three semantic tests but
   `private_authority_has_no_ordinary_or_canonical_route` rejects the now-required
   `--test progressive_span_dispatch_contract` route; `git show 5c4d4218` proves that admission added the exact
   tracked-file requirement and invocation without advancing the authority test's earlier snapshot. Preserve the
   private authority target's own dormant status while updating its distinction between the private authority and
-  admitted contract consumers. Activate only from a clean handoff after `.5.2`.
+  admitted contract consumers.
+  Acceptance: reproduce the cfg-enabled target at 3/4 with only the stale route-snapshot test failing; prove Git
+  admission commit `5c4d4218` intentionally added one exact tracked contract file and cfg-enabled canonical
+  consumer without routing the private authority target; update the proof to require the admitted contract route
+  exactly once while continuing to forbid the private authority route; retain the three private semantic tests,
+  ordinary dormant discovery, admitted contract execution, neutral topology, production/generated/public/outward
+  behavior, all backends, and every rollout value; synchronize task, Knowledge, trace/progressive docs/book, live
+  docs, memory, architecture, and both roadmaps. Parent/tree closeout is deferred to `.5.4`.
+  Verification tier: `focused` — this leaf changes one private topology assertion and no production, admission,
+  rollout, format, public, infrastructure, storage, finite-capacity, milestone, or canonical-topology boundary.
+  Focused checks: exact cfg authority RED 3/4 then GREEN 4/4; ordinary authority/contract 0/0 each; progressive/
+  recognition/staged/gap governance; exact route cardinality/history; Knowledge, rendered mdBook, bounded histories,
+  memory, all nine doctrines, no-production/no-format/no-public/no-other-backend diff, and `git diff --check`.
+  Canonical trigger: `none` — `.5.4` owns the separately exposed proof repair and parent/tree canonical closeout.
+  Checklist: [x] clean activation/task ownership [x] Knowledge/progressive/CI authority retrieval [x] exact 3/4 RED
+  [x] admission-history root cause [x] exact route-proof repair [x] dormant/admitted GREEN [x] no-drift proof
+  [x] durable synchronization [x] focused signoff [x] atomic commit/brief/clean handoff.
+  Acceptance Checklist:
+  - [x] **REPRODUCE / ISSUE** — cfg private authority is 3/4 and fails only because its pre-admission test forbids
+    the now-required admitted contract route.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — exact Git/source probes prove `5c4d4218` added the contract file/command once,
+    did not route the private authority target, and left the earlier assertion unchanged.
+  - [x] **FIX** — distinguish the two consumers: forbid `progressive_span_dispatch_authority`, require the tracked
+    `progressive_span_dispatch_contract.rs` and its cfg-enabled `--test progressive_span_dispatch_contract` route
+    exactly once, and retain neutral contract presence.
+  - [x] **ADDRESSED (verified)** — cfg authority 4/4, ordinary authority/contract 0/0 each, and exact route cardinality
+    are GREEN.
+  - [x] **NO REGRESSION** — progressive/recognition/staged/gap governance, doctrines, and scope guards pass without
+    production/generated/public/rollout/other-backend movement; the attempted canonical gate exposed `.5.4` only.
+  - [x] **LOCKSTEP** — task/root index, Knowledge, architecture/Toolbox, roadmaps, live docs, memory, and mdBook retain
+    corrective `.5` as active and route the separately stale staged-admission snapshot to `.5.4`.
+  Activation evidence: exact clean `git status --short --untracked-files=all` at
+  `e9d28f69f6c0357eccf2237952eca1b5debdfcbe`; zero-byte brief; no rendered book; no background job. `.5.1` recorded
+  the prior 3/4 failure and admission history, but this leaf must reproduce it independently at the clean activation
+  commit before changing the proof.
+  Completion evidence: exact pre-fix cfg execution is 3/4 with only the stale pre-admission route assertion failing;
+  Git proves `5c4d4218` added one tracked contract input and one cfg-enabled contract command without touching or
+  routing the authority test. The renamed proof continues to forbid the authority target and now requires each
+  admitted contract route marker exactly once. Cfg authority is 4/4; ordinary authority/contract discovery is 0/0
+  each; progressive, recognition, staged, and gap governance pass. Knowledge, rendered/inspected mdBook, bounded
+  histories, memory, all nine doctrines, formatting, whitespace, and exact scope guards pass. A staged canonical
+  attempt stopped at 141/143 in the separately stale Perl staged-admission snapshot: neutral truth is already 79
+  and the Rust consumer is already `dormant_red`, while that proof still expects 78 / `pending_absent`. `.5.4` owns
+  that repair and canonical closeout. Commit subject is `TRACE-OBSERVABILITY.5.3 - align progressive authority proof`;
+  no push.
+- ID: `TRACE-OBSERVABILITY.5.4` · Status: `pending` (task-tree-first ownership established 2026-08-26; activate only
+  after the exact clean `.5.3` landing); Goal: Align the Perl staged-AST admission consumer's immutable inventory
+  snapshot with the already-landed Rust staged marker state, then canonically close corrective `.5` and this tree.
+  Evidence: exact staged canonical execution of `t/staged_ast_enrichment_perl_contract.t` passes 141/143 and fails
+  only because it expects 78 neutral mutations instead of the current 79 and Rust `pending_absent` instead of the
+  current `dormant_red`; the already-committed `.14.7.4.1` Rust marker/provenance leaf owns those truth advances.
+  Acceptance: from clean `.5.3`, prove the exact Git origin and current inventory values; change only those two
+  stale expected values; retain all 143 Perl assertions, production behavior, rollout, registries, generated
+  formats, public/outward surfaces, and other backends; run focused staged governance plus exact staged receipt-bound
+  `bash tools/run_ci_local.sh`; synchronize task, Knowledge if a new durable fact is established, roadmaps,
+  architecture/Toolbox, mdBook, live docs, and memory; commit atomically and clear the brief. Declare its canonical
+  verification tier and trigger only on exact clean activation, after `.5.3` lands.
+  Checklist: [ ] exact clean activation [ ] Knowledge/history retrieval [ ] Git-origin proof [ ] 141/143 reproduce
+  [ ] two-value snapshot repair [ ] 143/143 focused GREEN [ ] staged governance/no-drift [ ] durable synchronization
+  [ ] exact staged canonical GREEN/receipt [ ] atomic commit/brief/clean handoff.
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `.5.3` | `pending` | Align the stale private-authority route assertion with the admitted Rust contract consumer from the clean `.5.2` landing. |
+| 1 | `.5.4` | `pending` | Repair the stale staged-admission snapshot and canonically close corrective `.5`; then resume staged Rust `.14.7.4.2`. |
 
 ## Decisions
 
@@ -577,12 +637,16 @@ Coverage plan:
 - `2026-08-26`: corrective `.5.2` preserves the established event schema and consolidates each executor's normal
   child wrapper through its entry-slot seam. The seam emits one existing dispatch/result pair regardless of whether
   a gap slot is absent or present; no normal-path duplication, new namespace, or runtime-result change is needed.
+- `2026-08-26`: corrective `.5.3` distinguishes the dormant private authority proof from the separately admitted
+  contract consumer. It requires the tracked input and cfg command once while continuing to forbid any authority
+  route. A canonical attempt then exposed a separately stale staged-admission snapshot, so `.5.3` lands focused and
+  `.5.4` owns the proof repair plus parent/tree closeout.
 
 ## Open Questions
 
-- Required backend parity: the original Perl/Rust proof closed at `.4.5`; corrective `.5.1-.2` now restore later-
-  discovered validation and gap-aware event regressions, so Rust renewal is current. Future variants must satisfy
-  the mdBook checklist before claiming trace parity.
+- Required backend parity: the original Perl/Rust proof closed at `.4.5`; corrective `.5.1-.2` restore later-
+  discovered validation and gap-aware event regressions, so Rust renewal is current. `.5.4` affects only staged
+  admission proof/closeout; future variants must satisfy the mdBook checklist before claiming trace parity.
 - Auto-instrumentation (`Devel::*`/aspect style) remains not the preferred first path: generated template instrumentation
   and owner-level trace wrappers are more portable and reviewable.
 
@@ -616,6 +680,7 @@ Coverage plan:
 | `2026-07-04` | `.4.5` | `perl bin/linkedspec --help`; `prove -v -Iperl t/trace_cli.t t/trace_generated_handler_branch.t t/trace_generated_nonrep_dispatch.t t/trace_generated_rep_dispatch.t t/trace_ruleir_planning.t t/trace_emit_context_bridge.t t/trace_actionir_pipeline.t t/trace_actionir_compact_lowerers.t t/trace_actionir_method_lowering.t`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-core trace`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test trace_controls`; `cargo fmt`; mdBook; Knowledge Map; memory/doctrine; whitespace; `bash tools/run_ci_local.sh` | PASS — Perl reference and Rust trace suites prove the documented external trace capability contract; full local CI passed with phase0 1021 green. Rust can claim trace parity for that contract, and future variants inherit the mdBook checklist. |
 | `2026-08-26` | `.5.1` | exact ordinary/traced RED then equality GREEN; valid quiet trace control; core trace 7/7; progressive ordinary 0/0 + cfg contract 1/1; private authority 3/4 root-cause probe; progressive/recognition/staged governance; fmt; Knowledge; rendered mdBook; histories; memory/doctrines; scope/whitespace | PASS — one existing validator call restores traced progressive static-validation equality without valid-result, event-schema, runtime, format, rollout, public, or other-backend movement. The separately stale private-authority route snapshot is owned by `.5.3`. |
 | `2026-08-26` | `.5.2` | exact complete trace target RED 9/11 then GREEN 11/11; source emitter 6/6; Rust gap admission 1/1; core trace 7/7; gap/recognition/progressive/staged governance; fmt; Knowledge; rendered mdBook; histories; memory/doctrines; scope/whitespace | PASS — normal and typed-gap child entry share one traced local seam per executor and emit one existing dispatch/result pair with unchanged results, event schema, format, rollout, public surface, and other backends. |
+| `2026-08-26` | `.5.3` | exact cfg authority RED 3/4 then GREEN 4/4; ordinary authority/contract 0/0 each; exact Git/route cardinality; progressive/recognition/staged/gap governance; fmt; Knowledge; rendered mdBook; histories; memory/doctrines; scope/whitespace | PASS focused — private authority remains unrouted and the admitted contract input/command remain exact. A later canonical attempt stopped at 141/143 on the separately stale staged-admission snapshot now owned by `.5.4`. |
 
 ## Commit Log
 
@@ -643,6 +708,8 @@ Coverage plan:
 | `.4.5` | pending (`TRACE-OBSERVABILITY.4.5 - close trace parity proof`) | Cross-variant trace parity proof, Rust parity claim for the documented external capability contract, and future-variant checklist. |
 | `.5.1` | pending (`TRACE-OBSERVABILITY.5.1 - align traced progressive validation`) | Existing-validator repair plus exact ordinary/traced diagnostic-equality regression; `.5.2` remains the active corrective frontier. |
 | `.5.2` | pending (`TRACE-OBSERVABILITY.5.2 - restore gap-aware child trace`) | Interpreted/generated entry-slot seams now retain the existing child-dispatch lifecycle; `.5.3` is next. |
+| `.5.3` | pending (`TRACE-OBSERVABILITY.5.3 - align progressive authority proof`) | Exact dormant-authority/admitted-contract topology proof; `.5.4` owns canonical closeout. |
+| `.5.4` | pending (`TRACE-OBSERVABILITY.5.4 - align staged admission proof`) | Two-value staged-admission snapshot repair and corrective parent/tree canonical closeout. |
 
 ## Changelog
 
@@ -653,6 +720,9 @@ Coverage plan:
   child-dispatch events, and `.5.3` owns the stale private-authority admission-route assertion.
 - `2026-08-26`: Closed `.5.2`; both Rust runtime executors emit exactly one existing child dispatch/result pair
   for normal and gap-aware entry, trace controls are 11/11, and `.5.3` is the sole corrective frontier.
+- `2026-08-26`: Closed focused `.5.3`; the private authority proof distinguishes its own dormancy from the exact
+  admitted contract route. Canonical verification exposed the separate `.5.4` staged-admission snapshot blocker,
+  which must close before staged Rust `.14.7.4.2` resumes.
 - `2026-07-04`: Closed `.1` read-only coverage audit. Current trace is useful but not exhaustive: pipeline
   boundaries, parser/rule handler wrappers, selected decisions, dumps, and mark/capture events are traced; generated
   handler branch/control-flow decisions and most ActionIR owner branches are not. `.2` is now the PNT frontier.

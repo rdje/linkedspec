@@ -800,9 +800,19 @@ fn registry_inputs_and_child_results_are_deeply_detached() {
 }
 
 #[test]
-fn private_authority_has_no_ordinary_or_canonical_route() {
+fn private_authority_stays_unrouted_while_contract_consumer_is_admitted() {
     assert!(!CI_DRIVER_SOURCE.contains("progressive_span_dispatch_authority"));
-    assert!(!CI_DRIVER_SOURCE.contains("--test progressive_span_dispatch_contract"));
-    assert!(!CI_DRIVER_SOURCE.contains("progressive_span_dispatch_contract.rs"));
+    assert_eq!(
+        CI_DRIVER_SOURCE
+            .matches("--test progressive_span_dispatch_contract")
+            .count(),
+        1
+    );
+    assert_eq!(
+        CI_DRIVER_SOURCE
+            .matches("rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs")
+            .count(),
+        1
+    );
     assert!(CONTRACT_SOURCE.contains("\"rust\""));
 }

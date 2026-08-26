@@ -2,24 +2,26 @@
 
 ## Current Activity
 
-- `TRACE-OBSERVABILITY.5.2` restores exactly one existing child dispatch/result event pair on normal and gap-aware
-  interpreted/generated entry. Complete trace controls pass 11/11 with unchanged paired results.
-- Full documented Rust trace parity is current again. `.5.3` now solely owns the stale private progressive-
-  authority no-canonical-route assertion exposed by `.5.1` focused proof.
-- Staged Rust `.14.7.4.2` remains dependency-frozen until `.5.3` lands cleanly.
+- Focused `TRACE-OBSERVABILITY.5.3` repairs the stale private progressive-authority route proof: authority stays
+  unrouted while the separate admitted contract input and cfg command are each required exactly once.
+- Cfg authority is 4/4 and ordinary authority/contract discovery is 0/0 each. Its canonical attempt exposed the
+  separate `.5.4` stale Perl staged-admission snapshot; full documented Rust trace parity remains current.
+- `.5.4` is the next clean-handoff frontier before staged Rust `.14.7.4.2` resumes.
 
 ## Latest Completed Slice
 
-- `.5.2` consolidates no-slot and typed-gap child entry through one traced local seam per Rust executor. Trace
-  11/11, generated source 6/6, gap admission 1/1, core trace 7/7, and governance pass without result/schema/format,
-  rollout, public, or other-backend movement.
+- `.5.3` distinguishes dormant private authority from its admitted contract peer, passes cfg authority 4/4, and
+  keeps both ordinary targets 0/0 under focused proof without production movement.
 
 ## Next Action
 
-- Commit `.5.2`, clear the brief, verify the clean handoff, then activate `.5.3`, repair the stale private-authority
-  route assertion, close corrective parent `.5`, and resume staged Rust `.14.7.4.2`.
+- Commit `.5.3`, clear the brief, verify the clean handoff, then activate `.5.4`, align the two stale staged-
+  admission expectations, and run the exact receipt-bound canonical gate.
 
 ## Recent Completions
+
+- `2026-08-26` — `TRACE-OBSERVABILITY.5.3` keeps private authority dormant while requiring the admitted contract
+  route once and passes focused 4/4; its canonical attempt exposes the separately owned `.5.4` proof blocker.
 
 - `2026-08-26` — `TRACE-OBSERVABILITY.5.2` restores one existing child dispatch/result pair for normal and gap-
   aware interpreted/generated entry; trace controls pass 11/11 with unchanged results.
@@ -65,9 +67,6 @@
 
 - `2026-08-25` — `.14.6.6.4` independently recomposes carrier 178/178 and authority 273/273 on both Lua ABIs,
   all admitted peers and governance unchanged, repairs bounded current projections, and closes `.14.6.6`.
-
-- `2026-08-25` — `.14.6.6.3` admits the same 178-assertion carrier exactly once per ABI in ordinary and canonical
-  proof, advances only PUC Lua/LuaJIT to 7/9/112, and leaves the 273-assertion-per-ABI authority dormant.
 
 ## History
 

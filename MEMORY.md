@@ -1,13 +1,13 @@
 # MEMORY
 
-- activation_commit: `915cd1a7c9b3d11676e77dfde1c005ba0566334f` — exact clean traced-validator base for
-  task-tree-first corrective `TRACE-OBSERVABILITY.5.2`; brief cleared; no push.
-- latest_completed_leaf: intended `TRACE-OBSERVABILITY.5.2 - restore gap-aware child trace`; complete trace
-  controls are 11/11 and normal/typed-gap child entry emits one existing dispatch/result pair per call.
-- active_work_unit: none after the intended `.5.2` commit; corrective parent `.5` remains active.
-- next_action: from the exact clean `.5.2` commit, activate `.5.3`, align the private-authority route assertion
-  with admitted contract topology, close corrective `.5`, then resume staged Rust `.14.7.4.2`.
-- in_flight_uncommitted: none after the intended `.5.2` commit; no background job remains.
+- activation_commit: `e9d28f69f6c0357eccf2237952eca1b5debdfcbe` — exact clean gap-trace base for
+  task-tree-first corrective `TRACE-OBSERVABILITY.5.3`; brief cleared; no push.
+- latest_completed_leaf: intended `TRACE-OBSERVABILITY.5.3 - align progressive authority proof`; private authority
+  remains unrouted/4-of-4 while the separate admitted contract input/command is required once.
+- active_work_unit: none after the intended `.5.3` commit; corrective `.5` remains active with `.5.4` pending.
+- next_action: from the exact clean `.5.3` commit, activate `TRACE-OBSERVABILITY.5.4`, repair only the stale staged-
+  admission snapshot, and canonically close `.5` before staged Rust `.14.7.4.2` resumes.
+- in_flight_uncommitted: none after the intended `.5.3` commit; no background job remains.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -55,5 +55,6 @@
   options, live-span direct/ordered-derived provenance, malformed/transaction closure, and four equal logical
   carrier observations. Only `.4.2` caller-frozen authority remains RED; Rust rollout remains pending. Focused
   proof exposed two pre-existing trace defects; `.5.1` fixes traced progressive validation and `.5.2` fixes gap-
-  aware child-dispatch events. `.5.3` owns the separately exposed stale authority-route assertion.
-- latest_bootstrap_read: 2026-08-26 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox are reviewed. `.5.2` preserves runtime results, event schema, generated format, rollout, public/outward surfaces, and all other backends while consolidating normal/typed-gap trace events. Intended commit: `TRACE-OBSERVABILITY.5.2 - restore gap-aware child trace`; `.5.3` is next from clean handoff.
+  aware child-dispatch events. `.5.3` repairs the separately exposed stale authority-route assertion; `.5.4` owns
+  the stale staged-admission snapshot and corrective closeout.
+- latest_bootstrap_read: 2026-08-26 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox are reviewed. `.5.3` changes only proof topology: private authority remains dormant, admitted contract remains exact, and production/generated/format/rollout/public/other-backend behavior is fixed. Intended commit: `TRACE-OBSERVABILITY.5.3 - align progressive authority proof`; `.5.4` is next from clean handoff.

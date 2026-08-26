@@ -10,6 +10,18 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-26 — TRACE-OBSERVABILITY.5.3 — align progressive authority proof
+
+- Reproduced the cfg-enabled private Rust progressive-authority target at 3/4: all semantic authority tests passed,
+  and only its pre-admission assertion incorrectly rejected the later admitted contract command.
+- Proved admission commit `5c4d4218` added one tracked contract input and one cfg-enabled contract invocation while
+  leaving the separate private-authority target unrouted and its earlier assertion unchanged.
+- Renamed and corrected the topology proof: it continues to forbid any private-authority route and now requires
+  the separate tracked contract input and canonical command exactly once. No production, generated, runtime,
+  format, rollout, public/outward, or other-backend surface changed.
+- Cfg authority passes 4/4; ordinary authority and contract discovery remain 0/0 each. Focused proof passes; a
+  later canonical attempt exposed a separately stale staged-admission snapshot now owned by `.5.4` for closeout.
+
 ## 2026-08-26 — TRACE-OBSERVABILITY.5.2 — restore gap-aware child trace
 
 - Reproduced the complete Rust trace target at 9/11: only interpreted and generated gap-aware child-entry cases

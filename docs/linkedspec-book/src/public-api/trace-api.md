@@ -136,6 +136,9 @@ Generated-plan execution emits the same detail vocabulary under
 `rust_runtime:generated_plan:child_dispatch` and `child_dispatch_result`. A child call emits exactly one pair
 whether its entry carries an inter-match gap slot or not. The trace event never changes the gap, cursor, capture,
 accumulator, or child result; `TRACE-OBSERVABILITY.5.2` locks this with complete traced/untraced result equality.
+Focused corrective `.5.3` changes no trace behavior: it only repairs the dormant progressive-authority test's
+topology assertion after the separate contract consumer was admitted. `.5.4` owns a stale staged-admission proof
+snapshot and the later canonical trace-tree closeout; it does not alter the trace contract.
 
 The Rust control surface is:
 
