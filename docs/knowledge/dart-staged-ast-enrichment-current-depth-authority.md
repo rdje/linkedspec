@@ -17,9 +17,10 @@ answers:
   - "does Dart recursively execute returned staged markers"
   - "what does FUTURE-PARITY-BACKLOG 14.7.5.2 implement"
 date: 2026-08-26
-status: current private one-depth authority; recursive bounds and source rebasing remain dormant RED for FUTURE-PARITY-BACKLOG.14.7.5.3
+status: current compatible one-depth API; superseded by private recursive authority under FUTURE-PARITY-BACKLOG.14.7.5.3
 tags: [dart, staged-parsing, parse-job, registry, cache, result-policy, failure-policy, detachment, private]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.5.2 adds private staged_ast_enrichment.dart and extends the same excluded consumer. FrozenStagedRegistry accepts only caller-completed candidate outcomes plus already-compiled opaque callbacks; resolution is pure alias/declaring-relative/ordered-root/provider selection with exact authority narrowing and no ambient loading. Default top precedes the canonical v2 job id. The invocation-local cache stores immutable callback plans only under the neutral eight-field identity. One complete depth prepares every job and stitch target before callbacks, orders typed paths/provenance/job ids, gives siblings fresh cursor/mark/capture/variable state, detaches and node-bounds results, and atomically applies all four result plus three failure policies. The consumer is +12/-1 and only .14.7.5.3 recurrence/bounds/source-rebased diagnostics remain RED. Fatal analysis, 102 direct dependents, and all 416 ordinary Dart tests pass while discovery, canonical references, rollout, formats, v1, public, and outward truth remain unchanged."
+evidence_update_2026_08_27_recursive_authority: "FUTURE-PARITY-BACKLOG.14.7.5.3 preserves enrichStagedCurrentDepth and adds the separate enrichStagedRecursively entrypoint over the same frozen registry/cache. It also corrects cross-plan target reservation so current-depth conflicts reject before callbacks. The dormant consumer is +18/-1 and only .4 carrier/admission/rollout authority remains RED."
 root_cause: "FUTURE-PARITY-BACKLOG.14.7.5.1 intentionally stopped after inert declaration construction. Dart had no private general-v2 frozen snapshot, pure selector, selected-top-before-id function, immutable-plan cache, complete-depth preflight/order seam, fresh sibling context, or policy stitcher. The existing staged_parser_registry.dart is the deliberately narrow function-body-v1 adapter and cannot safely be widened into this authority."
 last_verified: 2026-08-26
 reverify:
@@ -57,13 +58,15 @@ policies and three failure policies mutate only the unpublished copy, so a
 `fail` outcome cannot expose earlier sibling work. Continuing failures retain
 the same detached diagnostic in scheduler sidecars.
 
-Returned markers remain inert: this API never rescans them. Breadth-first
-recurrence, decreasing-chain/cycle checks, shared cancellation/deadline/work/
-call/depth/result/diagnostic authority, callback safe points, and typed
-original-source diagnostic rebasing belong exclusively to `.14.7.5.3`. Fresh
-native/reconstructed/generated/emitted authority and admission remain `.4`.
+Returned markers remain inert in this compatibility API. The separate
+`enrichStagedRecursively(...)` API now owns breadth-first recurrence,
+decreasing-chain/cycle checks, shared cancellation/deadline/work/call/depth/
+result/diagnostic authority, callback safe points, and typed original-source
+diagnostic rebasing. Fresh native/reconstructed/generated/emitted authority
+and admission remain `.4`.
 
 Related: [[dart-staged-ast-enrichment-marker-provenance]],
 [[general-staged-ast-enrichment-neutral-contract]],
 [[general-staged-ast-current-boundary]],
-[[dart-progressive-span-dispatch-authority]], and ADR `0088`.
+[[dart-progressive-span-dispatch-authority]],
+[[dart-staged-ast-enrichment-recursive-authority]], and ADR `0088`.

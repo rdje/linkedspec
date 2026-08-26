@@ -2,8 +2,8 @@
 
 - Date: 2026-08-25
 - Status: accepted architecture; executable neutral authority complete under `FUTURE-PARITY-BACKLOG.14.7.2`;
-  Perl and Rust private behavior/admission complete; Dart private current-depth authority complete under
-  `.14.7.5.2`; later recurrence, carriers/admission, and public authoring remain pending
+  Perl and Rust private behavior/admission complete; Dart private recursive authority complete under
+  `.14.7.5.3`; later carriers/admission and public authoring remain pending
 - Tags: architecture, staged-parsing, parse-job, source-location, registry, queue, policies, diagnostics, portability
 
 ## Context
@@ -334,6 +334,26 @@ shared resource bounds, safe points, and original-source diagnostic rebasing. Fa
 dependents, and all 416 ordinary Dart tests pass. Ordinary/canonical discovery, Dart rollout, generated format,
 function-body v1, public/outward behavior, other backends, and neutral 85-mutation governance remain unchanged.
 
+Dart recursive leaf `FUTURE-PARITY-BACKLOG.14.7.5.3` preserves the one-depth API and adds private
+`enrichStagedRecursively`. Each complete depth prepares and typed-sorts before callbacks; only successfully
+stitched returned markers enter the next depth. Active tuples bind normalized parser, selected top, exact UTF-8
+payload digest, and full provenance. Exact repeats are cycles, while repeated parser/top lineage requires strict
+segment containment and smaller total Unicode-scalar extent. Cancellation identity/probe, caller clock/deadline,
+steps, calls, depth, cumulative result nodes, and diagnostic bytes spend monotonically across all depths.
+Ephemeral callback contexts expose safe points and direct/ordered-derived original-source projection, expire after
+settlement, retain `concatenate_in_order` across segment boundaries, and truncate only through the governed
+diagnostic sentinel.
+
+Review also exposed one latent complete-depth preflight gap in `.2`: every target was individually validated
+against the unchanged initial AST, so two replace jobs could claim one slot or one result target could overwrite a
+different queued marker before its later callback-time rejection. The shared depth validator now reserves all
+targets, rejects duplicate non-append and mixed append/replace claims plus queued-marker overlap before callback
+one, and still permits deterministic multiple appends to one list. The excluded consumer is now eighteen GREEN
+groups plus one `.14.7.5.4` RED for fresh top-level carriers, production seam, ordinary/canonical admission, and
+Dart rollout. Fatal analysis, 102 direct dependents, and all 416 ordinary Dart tests pass. Function-body v1,
+generated format, neutral lifecycle/mutations, public/outward behavior, canonical topology, and other backends do
+not move.
+
 ## Links
 
 - Owning task: `docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md`
@@ -347,4 +367,5 @@ function-body v1, public/outward behavior, other backends, and neutral 85-mutati
   `docs/knowledge/rust-staged-ast-enrichment-current-depth-authority.md` plus
   `docs/knowledge/rust-staged-ast-enrichment-recursive-authority.md` and
   `docs/knowledge/dart-staged-ast-enrichment-dormant-red.md` plus
-  `docs/knowledge/dart-staged-ast-enrichment-current-depth-authority.md`
+  `docs/knowledge/dart-staged-ast-enrichment-current-depth-authority.md` plus
+  `docs/knowledge/dart-staged-ast-enrichment-recursive-authority.md`

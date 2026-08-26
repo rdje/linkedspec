@@ -9,6 +9,21 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-27 (`FUTURE-PARITY-BACKLOG.14.7.5.3` — Dart staged recursive authority): exact clean activation is
+  current-depth commit `7355445c`; scope owns only private recurrence, lineage/shared bounds, callback lifetime,
+  source projection, the review-discovered complete-depth target conflict, and the same consumer's `.4` RED.
+- `enrichStagedRecursively` carries one frozen registry/cache and invocation state across complete breadth-first
+  depths. Active frames use resolved parser/top plus SHA-256 of exact UTF-8 payload and full provenance; exact
+  repeats and non-contained/non-smaller same-parser/top lineage reject during next-depth preflight.
+- Dispatch entry and callback `safePoint` share cancellation identity/probe, caller clock/absolute deadline,
+  steps, calls, depth, cumulative result nodes, and diagnostic bytes. Context authority and direct/ordered-derived
+  rebase methods expire on callback return or throw; derived cross-segment spans remain `concatenate_in_order`.
+- Root-cause review showed `.2` validated each target only against the unchanged initial AST. One shared depth
+  validator now reserves result slots and queued-marker structure before callbacks, rejects destructive/duplicate
+  claims, and explicitly preserves same-list multiple append semantics.
+- The exact dormant path is `+18 -1`, fatal analysis passes, 102 direct dependents pass, and ordinary Dart remains
+  416/416. Only `.4` fresh carriers/production/admission/rollout remain RED; v1, logical marker routes, governance,
+  discovery, formats, public/outward truth, and other backends do not move.
 - 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.5.2` — Dart staged current-depth authority): exact clean activation is
   marker/provenance commit `16f9769a`; scope owns only private frozen resolution/cache, one complete marker depth,
   result/failure policies, and the same consumer's `.3` recurrence RED.

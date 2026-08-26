@@ -1,8 +1,11 @@
-/// Private caller-frozen authority for one staged-AST marker depth.
+/// Private caller-frozen authority for bounded staged-AST enrichment.
 ///
 /// The trusted host supplies a completed immutable resolution snapshot and
 /// already-compiled callbacks. Dispatch performs no loading, compilation,
-/// provider query, filesystem access, registry mutation, or recursive rescan.
+/// provider query, filesystem access, or registry mutation. One-depth
+/// execution remains available; recursive execution settles complete
+/// breadth-first depths under one caller-owned cancellation, deadline, and
+/// resource authority.
 library;
 
 import 'dart:collection';
@@ -83,10 +86,156 @@ typedef StagedCompiledAuthority =
 
 /// Fresh mutable parser state supplied to exactly one sibling callback.
 final class StagedRuntimeContext {
+  StagedRuntimeContext();
+
+  StagedRuntimeContext._recursive(this._runtimeAuthority);
+
   int cursor = 0;
   final Map<String, Object?> marks = <String, Object?>{};
   final Map<String, Object?> captures = <String, Object?>{};
   final Map<String, Object?> variables = <String, Object?>{};
+  _StagedRuntimeAuthorityView? _runtimeAuthority;
+
+  /// Observes cancellation/deadline and spends shared plus job-local work.
+  int safePoint(int cost) => _runtimeSafePoint(_authority(), cost);
+
+  /// Returns the stricter remaining invocation/job work budget.
+  int get remainingSteps {
+    final authority = _authority();
+    return math.min(
+      authority.invocation.remainingSteps,
+      authority.jobRemainingSteps,
+    );
+  }
+
+  /// Returns the exact caller cancellation identity shared by every depth.
+  Object get cancellationToken => _authority().recursive.cancellationToken;
+
+  /// Returns the absolute caller deadline shared by every depth.
+  int get deadline => _authority().recursive.deadline;
+
+  /// Projects a child-local scalar boundary to original source identity.
+  Map<String, Object?> rebasePosition(int offset) =>
+      _rebasePosition(_authority().provenance, offset);
+
+  /// Projects a child-local half-open span through typed provenance.
+  Map<String, Object?> rebaseSpan(Object? span) =>
+      _rebaseSpan(_authority().provenance, span);
+
+  /// Recursively projects portable child diagnostic positions and spans.
+  Map<String, Object?> rebaseDiagnostic(Object? diagnostic) =>
+      _rebaseDiagnostic(_authority().provenance, diagnostic);
+
+  _StagedRuntimeAuthorityView _authority() {
+    final authority = _runtimeAuthority;
+    if (authority == null) {
+      throw StagedAstEnrichmentException.snapshot(
+        'recursive_execution_context',
+      );
+    }
+    if (!authority.liveness.active) {
+      throw StagedAstEnrichmentException.snapshot(
+        'expired_recursive_execution_context',
+      );
+    }
+    return authority;
+  }
+}
+
+/// Immutable caller callbacks and initial ceilings for one recursive run.
+final class StagedRecursiveAuthority {
+  factory StagedRecursiveAuthority({
+    required Object cancellationToken,
+    required bool Function(Object cancellationToken) cancelled,
+    required int Function() clock,
+    required int deadline,
+    required int remainingSteps,
+    required int requiredSteps,
+    required int maxDepth,
+    required int maxCalls,
+    int totalCalls = 0,
+  }) {
+    if (deadline < 0 ||
+        remainingSteps < 0 ||
+        requiredSteps < 0 ||
+        maxDepth <= 0 ||
+        maxCalls <= 0 ||
+        totalCalls < 0) {
+      throw StagedAstEnrichmentException.snapshot('recursive_authority');
+    }
+    return StagedRecursiveAuthority._(
+      cancellationToken: cancellationToken,
+      cancelled: cancelled,
+      clock: clock,
+      deadline: deadline,
+      remainingSteps: remainingSteps,
+      requiredSteps: requiredSteps,
+      maxDepth: maxDepth,
+      maxCalls: maxCalls,
+      totalCalls: totalCalls,
+    );
+  }
+
+  const StagedRecursiveAuthority._({
+    required this.cancellationToken,
+    required this.cancelled,
+    required this.clock,
+    required this.deadline,
+    required this.remainingSteps,
+    required this.requiredSteps,
+    required this.maxDepth,
+    required this.maxCalls,
+    required this.totalCalls,
+  });
+
+  final Object cancellationToken;
+  final bool Function(Object cancellationToken) cancelled;
+  final int Function() clock;
+  final int deadline;
+  final int remainingSteps;
+  final int requiredSteps;
+  final int maxDepth;
+  final int maxCalls;
+  final int totalCalls;
+}
+
+final class _StagedInvocationState {
+  _StagedInvocationState({
+    required this.remainingSteps,
+    required this.totalCalls,
+    required this.remainingResultNodes,
+    required this.remainingDiagnosticBytes,
+  });
+
+  int remainingSteps;
+  int totalCalls;
+  int remainingResultNodes;
+  int remainingDiagnosticBytes;
+}
+
+final class _StagedContextLiveness {
+  bool active = true;
+}
+
+final class _StagedRuntimeAuthorityView {
+  _StagedRuntimeAuthorityView({
+    required this.recursive,
+    required this.invocation,
+    required this.jobRemainingSteps,
+    required this.provenance,
+    required this.stageChain,
+    required this.jobId,
+    required this.resolvedSpecId,
+  });
+
+  final StagedRecursiveAuthority recursive;
+  final _StagedInvocationState invocation;
+  int jobRemainingSteps;
+  final Map<String, Object?> provenance;
+  final List<Object?> stageChain;
+  final String jobId;
+  final String resolvedSpecId;
+  final _StagedContextLiveness liveness = _StagedContextLiveness();
 }
 
 final class _DirectCandidate {
@@ -730,6 +879,27 @@ final class _DiscoveredMarker {
   final Map<String, Object?> marker;
 }
 
+final class _StageFrame {
+  const _StageFrame({
+    required this.tuple,
+    required this.resolvedSpecId,
+    required this.topRule,
+    required this.provenance,
+  });
+
+  final List<Object?> tuple;
+  final String resolvedSpecId;
+  final String topRule;
+  final Map<String, Object?> provenance;
+}
+
+final class _QueuedMarker {
+  const _QueuedMarker({required this.discovered, required this.activeFrames});
+
+  final _DiscoveredMarker discovered;
+  final List<_StageFrame> activeFrames;
+}
+
 final class _PreparedPlan {
   _PreparedPlan({
     required this.path,
@@ -740,6 +910,9 @@ final class _PreparedPlan {
     required this.cacheKey,
     required this.effective,
     required this.provenanceOrder,
+    required this.activeTuple,
+    required this.activeFrames,
+    required this.preflightDiagnostic,
   });
 
   final List<Object?> path;
@@ -750,6 +923,9 @@ final class _PreparedPlan {
   final String cacheKey;
   final Map<String, Object?> effective;
   final List<Object> provenanceOrder;
+  final List<Object?> activeTuple;
+  final List<_StageFrame> activeFrames;
+  final Map<String, Object?>? preflightDiagnostic;
 }
 
 /// One detached current-depth enrichment result.
@@ -776,6 +952,55 @@ final class StagedEnrichmentOutcome {
   };
 }
 
+/// Cumulative resources remaining after one recursive invocation.
+final class StagedRecursiveResources {
+  const StagedRecursiveResources({
+    required this.remainingSteps,
+    required this.totalCalls,
+    required this.remainingResultNodes,
+    required this.remainingDiagnosticBytes,
+  });
+
+  final int remainingSteps;
+  final int totalCalls;
+  final int remainingResultNodes;
+  final int remainingDiagnosticBytes;
+
+  Map<String, Object?> toJson() => <String, Object?>{
+    'remaining_steps': remainingSteps,
+    'total_calls': totalCalls,
+    'remaining_result_nodes': remainingResultNodes,
+    'remaining_diagnostic_bytes': remainingDiagnosticBytes,
+  };
+}
+
+/// One detached breadth-first recursive enrichment result.
+final class StagedRecursiveOutcome {
+  const StagedRecursiveOutcome({
+    required this.ast,
+    required this.sidecars,
+    required this.diagnostics,
+    required this.cache,
+    required this.resources,
+  });
+
+  final Object? ast;
+  final List<Map<String, Object?>> sidecars;
+  final List<Map<String, Object?>> diagnostics;
+  final StagedCacheStats cache;
+  final StagedRecursiveResources resources;
+
+  Map<String, Object?> toJson() => <String, Object?>{
+    'ast': _copyPlain(ast),
+    'sidecars': <Object?>[for (final sidecar in sidecars) _copyRecord(sidecar)],
+    'diagnostics': <Object?>[
+      for (final diagnostic in diagnostics) _copyRecord(diagnostic),
+    ],
+    'cache': cache.toJson(),
+    'resources': resources.toJson(),
+  };
+}
+
 /// Executes exactly one complete marker depth through caller-frozen authority.
 StagedEnrichmentOutcome enrichStagedCurrentDepth({
   required FrozenStagedRegistry registry,
@@ -791,20 +1016,7 @@ StagedEnrichmentOutcome enrichStagedCurrentDepth({
       _preparePlan(registry, marker, parsedOptions),
   ]..sort(_comparePlans);
 
-  final seenJobIds = <String, List<Object?>>{};
-  for (final plan in plans) {
-    final jobId = plan.sidecar['job_id']! as String;
-    final earlier = seenJobIds[jobId];
-    if (earlier != null) {
-      throw StagedAstEnrichmentException._(
-        'staged_duplicate_job_id',
-        'prepare',
-        <String, Object?>{'job_id': jobId, 'parent_ast_path': plan.path},
-      );
-    }
-    seenJobIds[jobId] = plan.path;
-    _validateStitchTarget(working, plan);
-  }
+  _validatePreparedDepth(working, plans);
 
   final diagnostics = <Map<String, Object?>>[];
   for (final plan in plans) {
@@ -863,6 +1075,136 @@ StagedEnrichmentOutcome enrichStagedCurrentDepth({
     ]),
     cache: registry.cacheStats,
   );
+}
+
+/// Executes every newly returned marker breadth-first under shared authority.
+StagedRecursiveOutcome enrichStagedRecursively({
+  required FrozenStagedRegistry registry,
+  required Object? ast,
+  required Object? options,
+  required StagedRecursiveAuthority authority,
+}) {
+  final parsedOptions = _EnrichmentOptions.parse(options);
+  final invocation = _StagedInvocationState(
+    remainingSteps: math.min(
+      authority.remainingSteps,
+      parsedOptions.callerCeilings.maxSteps,
+    ),
+    totalCalls: authority.totalCalls,
+    remainingResultNodes: parsedOptions.callerCeilings.maxResultNodes,
+    remainingDiagnosticBytes: parsedOptions.callerCeilings.maxDiagnosticBytes,
+  );
+  var working = _copyAst(ast);
+  final discovered = <_DiscoveredMarker>[];
+  _discoverMarkers(working, <Object?>[], discovered);
+  var queue = <_QueuedMarker>[
+    for (final marker in discovered)
+      _QueuedMarker(discovered: marker, activeFrames: const <_StageFrame>[]),
+  ];
+  final sidecars = <Map<String, Object?>>[];
+  final diagnostics = <Map<String, Object?>>[];
+  var depth = 1;
+
+  while (queue.isNotEmpty) {
+    final plans = <_PreparedPlan>[
+      for (final queued in queue)
+        _preparePlan(
+          registry,
+          queued.discovered,
+          parsedOptions,
+          stageDepth: depth,
+          activeFrames: queued.activeFrames,
+        ),
+    ]..sort(_comparePlans);
+    _validatePreparedDepth(working, plans);
+    for (final plan in plans) {
+      final diagnostic = plan.preflightDiagnostic;
+      if (diagnostic != null && plan.sidecar['failure_policy'] == 'fail') {
+        throw _exceptionFromDiagnostic(
+          _boundedDiagnostic(invocation, plan, diagnostic),
+        );
+      }
+    }
+
+    final settled = _executeRecursiveDepth(
+      registry,
+      working,
+      plans,
+      authority,
+      invocation,
+    );
+    working = settled.ast;
+    sidecars.addAll(<Map<String, Object?>>[
+      for (final plan in plans) _copyRecord(plan.sidecar),
+    ]);
+    diagnostics.addAll(settled.diagnostics);
+    queue = settled.nextDepth;
+    depth += 1;
+  }
+
+  return StagedRecursiveOutcome(
+    ast: _copyPlain(working),
+    sidecars: List<Map<String, Object?>>.unmodifiable(<Map<String, Object?>>[
+      for (final sidecar in sidecars) _copyRecord(sidecar),
+    ]),
+    diagnostics: List<Map<String, Object?>>.unmodifiable(<Map<String, Object?>>[
+      for (final diagnostic in diagnostics) _copyRecord(diagnostic),
+    ]),
+    cache: registry.cacheStats,
+    resources: StagedRecursiveResources(
+      remainingSteps: invocation.remainingSteps,
+      totalCalls: invocation.totalCalls,
+      remainingResultNodes: invocation.remainingResultNodes,
+      remainingDiagnosticBytes: invocation.remainingDiagnosticBytes,
+    ),
+  );
+}
+
+/// Evaluates one executable neutral lineage/resource case.
+Map<String, Object?> evaluateStagedChainCase(Object? chainCase) {
+  final object = _snapshotObject(chainCase, 'chain_case');
+  final cancelled = object['cancelled'];
+  final sameParserTop = object['same_parser_top_lineage'];
+  if (cancelled is! bool || sameParserTop is! bool) {
+    throw StagedAstEnrichmentException.snapshot('chain_case');
+  }
+  final now = _nonnegativeSnapshotInt(object, 'now');
+  final deadline = _nonnegativeSnapshotInt(object, 'deadline');
+  final remainingSteps = _nonnegativeSnapshotInt(object, 'remaining_steps');
+  final requiredSteps = _nonnegativeSnapshotInt(object, 'required_steps');
+  final depth = _positiveSnapshotInt(object, 'depth');
+  final maxDepth = _positiveSnapshotInt(object, 'max_depth');
+  final calls = _positiveSnapshotInt(object, 'calls');
+  final maxCalls = _positiveSnapshotInt(object, 'max_calls');
+  final activeTuple = _snapshotList(object['active_tuple'], 'active_tuple');
+  final candidateTuple = _snapshotList(
+    object['candidate_tuple'],
+    'candidate_tuple',
+  );
+  String? diagnostic;
+  if (cancelled) {
+    diagnostic = 'staged_cancelled';
+  } else if (now > deadline) {
+    diagnostic = 'staged_deadline_exceeded';
+  } else if (remainingSteps < requiredSteps) {
+    diagnostic = 'staged_budget_exhausted';
+  } else if (depth > maxDepth) {
+    diagnostic = 'staged_depth_exceeded';
+  } else if (calls > maxCalls) {
+    diagnostic = 'staged_call_limit_exceeded';
+  } else if (_deepEqual(activeTuple, candidateTuple)) {
+    diagnostic = 'staged_cycle';
+  } else if (sameParserTop &&
+      !_strictlyDecreases(
+        object['active_provenance'],
+        object['candidate_provenance'],
+      )) {
+    diagnostic = 'staged_chain_non_decreasing';
+  }
+  return <String, Object?>{
+    'accepted': diagnostic == null,
+    'diagnostic': diagnostic,
+  };
 }
 
 /// Constructs the deterministic neutral v2 job identity.
@@ -980,8 +1322,10 @@ List<String> stagedCurrentDepthOrder(Object? jobs) {
 _PreparedPlan _preparePlan(
   FrozenStagedRegistry registry,
   _DiscoveredMarker discovered,
-  _EnrichmentOptions options,
-) {
+  _EnrichmentOptions options, {
+  int stageDepth = 1,
+  List<_StageFrame> activeFrames = const <_StageFrame>[],
+}) {
   final sidecar = _markerSidecar(discovered.marker);
   final parserSpecId = _requiredSidecarString(sidecar, 'parser_spec_id');
   final provisionalTop = sidecar['top_rule'] is String
@@ -1039,6 +1383,15 @@ _PreparedPlan _preparePlan(
     'staged_contract_version': entry.versions.stagedContractVersion,
     'backend_capabilities': effective['capabilities'],
   });
+  final text = _requiredSidecarString(sidecar, 'text');
+  final payloadDigest = _payloadDigest(text);
+  final provenance = _snapshotObject(sidecar['provenance'], 'provenance');
+  final activeTuple = <Object?>[
+    resolvedSpecId,
+    topRule,
+    payloadDigest,
+    _copyRecord(provenance),
+  ];
   final prepared = _copyRecord(sidecar)
     ..addAll(<String, Object?>{
       'state': 'prepared',
@@ -1048,8 +1401,11 @@ _PreparedPlan _preparePlan(
       'top_rule': topRule,
       'job_id': jobId,
       'cache_key': cacheKey,
-      'stage_depth': 1,
-      'stage_chain': <Object?>[],
+      'stage_depth': stageDepth,
+      'stage_chain': <Object?>[
+        for (final frame in activeFrames) _copyPlain(frame.tuple),
+      ],
+      'payload_digest': payloadDigest,
       'effective': _copyRecord(effective),
     });
   return _PreparedPlan(
@@ -1061,6 +1417,13 @@ _PreparedPlan _preparePlan(
     cacheKey: cacheKey,
     effective: effective,
     provenanceOrder: _provenanceOrder(prepared['provenance']),
+    activeTuple: List<Object?>.unmodifiable(activeTuple),
+    activeFrames: List<_StageFrame>.unmodifiable(activeFrames),
+    preflightDiagnostic: _staticChainDiagnostic(
+      prepared,
+      activeTuple,
+      activeFrames,
+    ),
   );
 }
 
@@ -1082,6 +1445,441 @@ Map<String, Object?> _childRequest(_PreparedPlan plan) {
     'failure_policy': sidecar['failure_policy'],
     'effective': sidecar['effective'],
   });
+}
+
+final class _RecursiveDepthOutcome {
+  const _RecursiveDepthOutcome({
+    required this.ast,
+    required this.nextDepth,
+    required this.diagnostics,
+  });
+
+  final Object? ast;
+  final List<_QueuedMarker> nextDepth;
+  final List<Map<String, Object?>> diagnostics;
+}
+
+void _validatePreparedDepth(Object? ast, List<_PreparedPlan> plans) {
+  final seenJobIds = <String, List<Object?>>{};
+  for (final plan in plans) {
+    final jobId = plan.sidecar['job_id']! as String;
+    if (seenJobIds.containsKey(jobId)) {
+      throw StagedAstEnrichmentException._(
+        'staged_duplicate_job_id',
+        'prepare',
+        <String, Object?>{'job_id': jobId, 'parent_ast_path': plan.path},
+      );
+    }
+    seenJobIds[jobId] = plan.path;
+    _validateStitchTarget(ast, plan);
+  }
+
+  final targetClaims = <({List<Object?> path, bool append})>[];
+  for (final plan in plans) {
+    final policy = plan.sidecar['result_policy'];
+    if (policy == 'replace_marker') {
+      continue;
+    }
+    final into = plan.sidecar['into']! as String;
+    final targetPath = <Object?>[...plan.path.take(plan.path.length - 1), into];
+    final append = policy == 'append_child';
+    if (!append) {
+      for (final queued in plans) {
+        if (identical(plan, queued) ||
+            !_pathIsPrefix(targetPath, queued.path)) {
+          continue;
+        }
+        throw _stitchError(
+          plan,
+          'staged_stitch_target_collision',
+          <String, Object?>{'into': into},
+        );
+      }
+    }
+    for (final prior in targetClaims) {
+      final samePath = _deepEqual(targetPath, prior.path);
+      final incompatible =
+          (samePath && !(append && prior.append)) ||
+          (!append && _pathIsPrefix(targetPath, prior.path)) ||
+          (!prior.append && _pathIsPrefix(prior.path, targetPath));
+      if (incompatible) {
+        throw _stitchError(
+          plan,
+          'staged_stitch_target_collision',
+          <String, Object?>{'into': into},
+        );
+      }
+    }
+    targetClaims.add((path: targetPath, append: append));
+  }
+}
+
+bool _pathIsPrefix(List<Object?> prefix, List<Object?> path) {
+  if (prefix.length > path.length) {
+    return false;
+  }
+  for (var index = 0; index < prefix.length; index += 1) {
+    if (prefix[index] != path[index]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+_RecursiveDepthOutcome _executeRecursiveDepth(
+  FrozenStagedRegistry registry,
+  Object? initial,
+  List<_PreparedPlan> plans,
+  StagedRecursiveAuthority authority,
+  _StagedInvocationState invocation,
+) {
+  var working = initial;
+  final nextDepth = <_QueuedMarker>[];
+  final diagnostics = <Map<String, Object?>>[];
+
+  for (final plan in plans) {
+    _validateStitchTarget(working, plan);
+    Map<String, Object?>? diagnostic = plan.preflightDiagnostic == null
+        ? null
+        : _copyRecord(plan.preflightDiagnostic!);
+    ({Object? value, int nodes})? detached;
+
+    if (diagnostic == null) {
+      final admission = _dispatchResourceCheck(
+        authority,
+        invocation,
+        plan,
+        spend: true,
+      );
+      diagnostic = admission.diagnostic;
+      if (diagnostic == null) {
+        final cached = registry._cachedPlan(plan);
+        if (cached.resolvedSpecId != plan.resolvedSpecId ||
+            cached.topRule != plan.topRule ||
+            !_sameStringLists(
+              cached.effectiveCapabilities,
+              _stringList(plan.effective['capabilities'], 'capabilities'),
+            )) {
+          throw StagedAstEnrichmentException.snapshot('plan_cache');
+        }
+        final context = _recursiveRuntimeContext(
+          authority,
+          invocation,
+          plan,
+          admission.jobRemainingSteps!,
+        );
+        StagedChildExecution? execution;
+        Object? thrown;
+        try {
+          execution = cached.compiledAuthority(
+            _recursiveChildRequest(plan, authority, context),
+            context,
+          );
+        } on Object catch (error) {
+          thrown = error;
+        } finally {
+          _expireRuntimeContext(context);
+        }
+
+        if (thrown != null) {
+          final child = thrown is StagedAstEnrichmentException
+              ? thrown.toJson()
+              : <String, Object?>{'code': 'staged_child_exception'};
+          diagnostic = _portableCallbackDiagnostic(plan, child);
+        } else if (!execution!.succeeded) {
+          diagnostic = _portableCallbackDiagnostic(plan, execution.value);
+        } else {
+          diagnostic = _dispatchResourceCheck(
+            authority,
+            invocation,
+            plan,
+            spend: false,
+          ).diagnostic;
+          if (diagnostic == null) {
+            final maximum = math.min(
+              plan.effective['max_result_nodes']! as int,
+              invocation.remainingResultNodes,
+            );
+            try {
+              detached = _detachPlain(
+                execution.value,
+                maximum: maximum,
+                allowMarkers: true,
+              );
+            } on _DetachFailure catch (failure) {
+              diagnostic = failure.reason == 'node_limit'
+                  ? <String, Object?>{
+                      'code': 'staged_result_node_limit_exceeded',
+                      'phase': 'execute',
+                      'stage_chain': _copyPlain(plan.sidecar['stage_chain']),
+                      'job_id': plan.sidecar['job_id'],
+                      'nodes': failure.nodes,
+                      'maximum': maximum,
+                    }
+                  : <String, Object?>{
+                      'code': 'staged_result_not_detached',
+                      'phase': 'execute',
+                      'stage_chain': _copyPlain(plan.sidecar['stage_chain']),
+                      'job_id': plan.sidecar['job_id'],
+                      'field': failure.reason,
+                    };
+            }
+          }
+        }
+      }
+    }
+
+    if (diagnostic != null) {
+      working = _settleFailure(
+        working,
+        plan,
+        _boundedDiagnostic(invocation, plan, diagnostic),
+        diagnostics,
+      );
+      continue;
+    }
+
+    final result = detached!;
+    invocation.remainingResultNodes = math.max(
+      0,
+      invocation.remainingResultNodes - result.nodes,
+    );
+    final basePath = _resultBasePath(working, plan);
+    final frames = <_StageFrame>[
+      ...plan.activeFrames,
+      _StageFrame(
+        tuple: List<Object?>.unmodifiable(
+          _copyPlain(plan.activeTuple)! as List,
+        ),
+        resolvedSpecId: plan.resolvedSpecId,
+        topRule: plan.topRule,
+        provenance: _copyRecord(
+          _snapshotObject(plan.sidecar['provenance'], 'provenance'),
+        ),
+      ),
+    ];
+    _collectQueuedMarkers(result.value, basePath, frames, nextDepth);
+    working = _stitchValue(working, plan, result.value);
+    plan.sidecar['state'] = 'succeeded';
+  }
+
+  return _RecursiveDepthOutcome(
+    ast: working,
+    nextDepth: nextDepth,
+    diagnostics: diagnostics,
+  );
+}
+
+({Map<String, Object?>? diagnostic, int? jobRemainingSteps})
+_dispatchResourceCheck(
+  StagedRecursiveAuthority authority,
+  _StagedInvocationState invocation,
+  _PreparedPlan plan, {
+  required bool spend,
+}) {
+  final base = <String, Object?>{
+    'phase': 'execute',
+    'stage_chain': _copyPlain(plan.sidecar['stage_chain']),
+    'job_id': plan.sidecar['job_id'],
+  };
+  late final bool cancelled;
+  try {
+    cancelled = authority.cancelled(authority.cancellationToken);
+  } on Object {
+    throw StagedAstEnrichmentException.snapshot('cancelled_callback');
+  }
+  if (cancelled) {
+    return (
+      diagnostic: <String, Object?>{
+        'code': 'staged_cancelled',
+        ...base,
+        'resolved_spec_id': plan.resolvedSpecId,
+      },
+      jobRemainingSteps: null,
+    );
+  }
+  late final int now;
+  try {
+    now = authority.clock();
+  } on Object {
+    throw StagedAstEnrichmentException.snapshot('clock_callback');
+  }
+  if (now < 0) {
+    throw StagedAstEnrichmentException.snapshot('clock_callback');
+  }
+  if (now > authority.deadline) {
+    return (
+      diagnostic: <String, Object?>{
+        'code': 'staged_deadline_exceeded',
+        ...base,
+        'deadline': authority.deadline,
+      },
+      jobRemainingSteps: null,
+    );
+  }
+  if (!spend) {
+    return (diagnostic: null, jobRemainingSteps: null);
+  }
+
+  final effectiveRemaining = math.min(
+    invocation.remainingSteps,
+    plan.effective['max_steps']! as int,
+  );
+  if (effectiveRemaining < authority.requiredSteps) {
+    return (
+      diagnostic: <String, Object?>{
+        'code': 'staged_budget_exhausted',
+        ...base,
+        'remaining': effectiveRemaining,
+      },
+      jobRemainingSteps: null,
+    );
+  }
+  final depth = plan.sidecar['stage_depth']! as int;
+  if (depth > authority.maxDepth) {
+    return (
+      diagnostic: <String, Object?>{
+        'code': 'staged_depth_exceeded',
+        ...base,
+        'depth': depth,
+        'maximum': authority.maxDepth,
+      },
+      jobRemainingSteps: null,
+    );
+  }
+  final candidateCalls = invocation.totalCalls + 1;
+  if (candidateCalls > authority.maxCalls) {
+    return (
+      diagnostic: <String, Object?>{
+        'code': 'staged_call_limit_exceeded',
+        ...base,
+        'calls': candidateCalls,
+        'maximum': authority.maxCalls,
+      },
+      jobRemainingSteps: null,
+    );
+  }
+  invocation.remainingSteps -= authority.requiredSteps;
+  invocation.totalCalls = candidateCalls;
+  return (
+    diagnostic: null,
+    jobRemainingSteps: effectiveRemaining - authority.requiredSteps,
+  );
+}
+
+StagedRuntimeContext _recursiveRuntimeContext(
+  StagedRecursiveAuthority authority,
+  _StagedInvocationState invocation,
+  _PreparedPlan plan,
+  int jobRemainingSteps,
+) => StagedRuntimeContext._recursive(
+  _StagedRuntimeAuthorityView(
+    recursive: authority,
+    invocation: invocation,
+    jobRemainingSteps: jobRemainingSteps,
+    provenance: _copyRecord(
+      _snapshotObject(plan.sidecar['provenance'], 'provenance'),
+    ),
+    stageChain: List<Object?>.unmodifiable(
+      _copyPlain(plan.sidecar['stage_chain'])! as List,
+    ),
+    jobId: plan.sidecar['job_id']! as String,
+    resolvedSpecId: plan.resolvedSpecId,
+  ),
+);
+
+Map<String, Object?> _recursiveChildRequest(
+  _PreparedPlan plan,
+  StagedRecursiveAuthority authority,
+  StagedRuntimeContext context,
+) {
+  final request = _childRequest(plan);
+  request['stage_chain'] = <Object?>[
+    ..._snapshotList(request['stage_chain'], 'stage_chain'),
+    _copyPlain(plan.activeTuple),
+  ];
+  request['cancellation_token'] = authority.cancellationToken;
+  request['deadline'] = authority.deadline;
+  request['remaining_steps'] = context.remainingSteps;
+  return request;
+}
+
+void _expireRuntimeContext(StagedRuntimeContext context) {
+  final authority = context._runtimeAuthority;
+  if (authority != null) {
+    authority.liveness.active = false;
+  }
+}
+
+int _runtimeSafePoint(_StagedRuntimeAuthorityView authority, int cost) {
+  if (!authority.liveness.active) {
+    throw StagedAstEnrichmentException.snapshot(
+      'expired_recursive_execution_context',
+    );
+  }
+  if (cost < 0) {
+    throw StagedAstEnrichmentException.snapshot('safe_point_cost');
+  }
+  late final bool cancelled;
+  try {
+    cancelled = authority.recursive.cancelled(
+      authority.recursive.cancellationToken,
+    );
+  } on Object {
+    throw StagedAstEnrichmentException.snapshot('cancelled_callback');
+  }
+  if (cancelled) {
+    throw StagedAstEnrichmentException._(
+      'staged_cancelled',
+      'execute',
+      <String, Object?>{
+        'stage_chain': _copyPlain(authority.stageChain),
+        'job_id': authority.jobId,
+        'resolved_spec_id': authority.resolvedSpecId,
+      },
+    );
+  }
+  late final int now;
+  try {
+    now = authority.recursive.clock();
+  } on Object {
+    throw StagedAstEnrichmentException.snapshot('clock_callback');
+  }
+  if (now < 0) {
+    throw StagedAstEnrichmentException.snapshot('clock_callback');
+  }
+  if (now > authority.recursive.deadline) {
+    throw StagedAstEnrichmentException._(
+      'staged_deadline_exceeded',
+      'execute',
+      <String, Object?>{
+        'stage_chain': _copyPlain(authority.stageChain),
+        'job_id': authority.jobId,
+        'deadline': authority.recursive.deadline,
+      },
+    );
+  }
+  final effective = math.min(
+    authority.invocation.remainingSteps,
+    authority.jobRemainingSteps,
+  );
+  if (effective < cost) {
+    throw StagedAstEnrichmentException._(
+      'staged_budget_exhausted',
+      'execute',
+      <String, Object?>{
+        'stage_chain': _copyPlain(authority.stageChain),
+        'job_id': authority.jobId,
+        'remaining': effective,
+      },
+    );
+  }
+  authority.invocation.remainingSteps -= cost;
+  authority.jobRemainingSteps -= cost;
+  return math.min(
+    authority.invocation.remainingSteps,
+    authority.jobRemainingSteps,
+  );
 }
 
 Object? _settleFailure(
@@ -1123,6 +1921,29 @@ Map<String, Object?> _childFailureDiagnostic(
   Object? child,
 ) {
   final portable = _portableChildDiagnostic(child);
+  return _childFailureFromPortable(sidecar, portable);
+}
+
+Map<String, Object?> _portableCallbackDiagnostic(
+  _PreparedPlan plan,
+  Object? child,
+) {
+  final portable = _portableChildDiagnostic(
+    child,
+    provenance: plan.sidecar['provenance'],
+    rebase: true,
+  );
+  if (portable['phase'] == 'execute' &&
+      portable['job_id'] == plan.sidecar['job_id']) {
+    return portable;
+  }
+  return _childFailureFromPortable(plan.sidecar, portable);
+}
+
+Map<String, Object?> _childFailureFromPortable(
+  Map<String, Object?> sidecar,
+  Map<String, Object?> portable,
+) {
   return <String, Object?>{
     'code': 'staged_child_failed',
     'phase': 'execute',
@@ -1142,11 +1963,28 @@ Map<String, Object?> _childFailureDiagnostic(
   };
 }
 
-Map<String, Object?> _portableChildDiagnostic(Object? value) {
+Map<String, Object?> _portableChildDiagnostic(
+  Object? value, {
+  Object? provenance,
+  bool rebase = false,
+}) {
   try {
     final detached = _detachPlain(value, maximum: 256, allowMarkers: false);
     if (detached.value is Map<String, Object?>) {
-      return _copyRecord(detached.value! as Map<String, Object?>);
+      final portable = _copyRecord(detached.value! as Map<String, Object?>);
+      if (!rebase) {
+        return portable;
+      }
+      try {
+        return _rebaseDiagnostic(provenance, portable);
+      } on StagedAstEnrichmentException {
+        return <String, Object?>{
+          'code': portable['code'] is String
+              ? portable['code']
+              : 'staged_child_exception',
+          'source_projection': 'invalid_local_range',
+        };
+      }
     }
   } on _DetachFailure {
     // Normalize all live, cyclic, or oversized child diagnostics below.
@@ -1193,6 +2031,353 @@ final class _DetachFailure implements Exception {
 
   final int nodes;
   final String reason;
+}
+
+Map<String, Object?> _boundedDiagnostic(
+  _StagedInvocationState invocation,
+  _PreparedPlan plan,
+  Map<String, Object?> diagnostic,
+) {
+  final maximum = math.min(
+    plan.effective['max_diagnostic_bytes']! as int,
+    invocation.remainingDiagnosticBytes,
+  );
+  var owned = _copyRecord(diagnostic);
+  var bytes = utf8.encode(jsonEncode(_canonicalValue(owned))).length;
+  if (bytes > maximum) {
+    owned = <String, Object?>{
+      'code': 'staged_diagnostic_truncated',
+      'phase': 'execute',
+      'stage_chain': _copyPlain(plan.sidecar['stage_chain']),
+      'job_id': plan.sidecar['job_id'],
+      'maximum_bytes': maximum,
+    };
+    bytes = utf8.encode(jsonEncode(_canonicalValue(owned))).length;
+  }
+  invocation.remainingDiagnosticBytes = math.max(
+    0,
+    invocation.remainingDiagnosticBytes - bytes,
+  );
+  return owned;
+}
+
+StagedAstEnrichmentException _exceptionFromDiagnostic(
+  Map<String, Object?> diagnostic,
+) {
+  final code = diagnostic['code'];
+  final phase = diagnostic['phase'];
+  if (code is! String || phase is! String) {
+    return StagedAstEnrichmentException.snapshot('diagnostic');
+  }
+  return StagedAstEnrichmentException._(code, phase, <String, Object?>{
+    for (final entry in diagnostic.entries)
+      if (entry.key != 'code' && entry.key != 'phase') entry.key: entry.value,
+  });
+}
+
+void _collectQueuedMarkers(
+  Object? value,
+  List<Object?> path,
+  List<_StageFrame> activeFrames,
+  List<_QueuedMarker> found,
+) {
+  if (_isMarker(value)) {
+    found.add(
+      _QueuedMarker(
+        discovered: _DiscoveredMarker(
+          path: List<Object?>.unmodifiable(path),
+          marker: _copyRecord((value! as Map).cast<String, Object?>()),
+        ),
+        activeFrames: List<_StageFrame>.unmodifiable(activeFrames),
+      ),
+    );
+    return;
+  }
+  if (value is Map<String, Object?>) {
+    for (final entry in value.entries) {
+      _collectQueuedMarkers(
+        entry.value,
+        <Object?>[...path, entry.key],
+        activeFrames,
+        found,
+      );
+    }
+  } else if (value is List) {
+    for (var index = 0; index < value.length; index += 1) {
+      _collectQueuedMarkers(
+        value[index],
+        <Object?>[...path, index],
+        activeFrames,
+        found,
+      );
+    }
+  }
+}
+
+List<Object?> _resultBasePath(Object? ast, _PreparedPlan plan) {
+  if (plan.sidecar['result_policy'] == 'replace_marker') {
+    return <Object?>[...plan.path];
+  }
+  final into = plan.sidecar['into'];
+  if (into is! String || into.isEmpty) {
+    throw _stitchError(plan, 'staged_stitch_target_missing', <String, Object?>{
+      'into': into ?? '<missing>',
+    });
+  }
+  final base = <Object?>[...plan.path.take(plan.path.length - 1), into];
+  if (plan.sidecar['result_policy'] == 'append_child') {
+    final parent = _parentAt(ast, plan.path);
+    final children = parent is Map<String, Object?> ? parent[into] : null;
+    if (children is! List) {
+      throw _stitchError(
+        plan,
+        'staged_append_target_invalid',
+        <String, Object?>{'into': into},
+      );
+    }
+    base.add(children.length);
+  }
+  return base;
+}
+
+Map<String, Object?>? _staticChainDiagnostic(
+  Map<String, Object?> sidecar,
+  List<Object?> activeTuple,
+  List<_StageFrame> activeFrames,
+) {
+  for (final active in activeFrames) {
+    if (_deepEqual(active.tuple, activeTuple)) {
+      return <String, Object?>{
+        'code': 'staged_cycle',
+        'phase': 'execute',
+        'stage_chain': _copyPlain(sidecar['stage_chain']),
+        'job_id': sidecar['job_id'],
+        'active_tuple': _copyPlain(active.tuple),
+      };
+    }
+  }
+  for (final active in activeFrames) {
+    if (active.resolvedSpecId == sidecar['resolved_spec_id'] &&
+        active.topRule == sidecar['top_rule'] &&
+        !_strictlyDecreases(active.provenance, sidecar['provenance'])) {
+      return <String, Object?>{
+        'code': 'staged_chain_non_decreasing',
+        'phase': 'execute',
+        'stage_chain': _copyPlain(sidecar['stage_chain']),
+        'job_id': sidecar['job_id'],
+        'provenance': _copyPlain(sidecar['provenance']),
+        'active_provenance': _copyRecord(active.provenance),
+      };
+    }
+  }
+  return null;
+}
+
+final class _SourceSegment {
+  const _SourceSegment({
+    required this.sourceId,
+    required this.start,
+    required this.end,
+    required this.provenance,
+  });
+
+  final String sourceId;
+  final int start;
+  final int end;
+  final String provenance;
+}
+
+List<_SourceSegment> _provenanceSegments(Object? value) {
+  final provenance = _snapshotObject(value, 'provenance');
+  final List<Object?> rows;
+  if (provenance['kind'] == 'direct_span') {
+    rows = <Object?>[provenance];
+  } else if (provenance['kind'] == 'derived_text' &&
+      provenance['policy'] == 'concatenate_in_order') {
+    rows = _snapshotList(provenance['segments'], 'provenance_segments');
+    if (rows.isEmpty) {
+      throw StagedAstEnrichmentException.snapshot('provenance_segments');
+    }
+  } else {
+    throw StagedAstEnrichmentException.snapshot('provenance');
+  }
+  return <_SourceSegment>[for (final value in rows) _parseSourceSegment(value)];
+}
+
+_SourceSegment _parseSourceSegment(Object? value) {
+  final segment = _snapshotObject(value, 'provenance_segment');
+  final sourceId = segment['source_id'];
+  final start = segment['start'];
+  final end = segment['end'];
+  final provenance = segment['provenance'];
+  if (segment['kind'] != 'direct_span' ||
+      sourceId is! String ||
+      sourceId.isEmpty ||
+      start is! int ||
+      start < 0 ||
+      end is! int ||
+      end < start ||
+      provenance is! String ||
+      provenance.isEmpty) {
+    throw StagedAstEnrichmentException.snapshot('provenance_segment');
+  }
+  return _SourceSegment(
+    sourceId: sourceId,
+    start: start,
+    end: end,
+    provenance: provenance,
+  );
+}
+
+bool _strictlyDecreases(Object? parentValue, Object? childValue) {
+  final parent = _provenanceSegments(parentValue);
+  final child = _provenanceSegments(childValue);
+  final parentExtent = parent.fold<int>(
+    0,
+    (total, segment) => total + segment.end - segment.start,
+  );
+  final childExtent = child.fold<int>(
+    0,
+    (total, segment) => total + segment.end - segment.start,
+  );
+  return childExtent < parentExtent &&
+      child.every(
+        (candidate) => parent.any(
+          (active) =>
+              active.sourceId == candidate.sourceId &&
+              active.start <= candidate.start &&
+              candidate.end <= active.end,
+        ),
+      );
+}
+
+Map<String, Object?> _rebasePosition(Object? provenance, int offset) {
+  final segments = _provenanceSegments(provenance);
+  final total = segments.fold<int>(
+    0,
+    (length, segment) => length + segment.end - segment.start,
+  );
+  if (offset < 0 || offset > total) {
+    throw StagedAstEnrichmentException.snapshot(
+      'local_source_offset_out_of_bounds',
+    );
+  }
+  if (segments.length == 1) {
+    return <String, Object?>{
+      'source_id': segments.single.sourceId,
+      'offset': segments.single.start + offset,
+    };
+  }
+  var cursor = 0;
+  for (final segment in segments) {
+    final length = segment.end - segment.start;
+    if (offset < cursor + length) {
+      return <String, Object?>{
+        'source_id': segment.sourceId,
+        'offset': segment.start + offset - cursor,
+      };
+    }
+    cursor += length;
+  }
+  final last = segments.last;
+  return <String, Object?>{'source_id': last.sourceId, 'offset': last.end};
+}
+
+Map<String, Object?> _rebaseSpan(Object? provenance, Object? value) {
+  final span = _snapshotObject(value, 'local_source_span');
+  final start = _nonnegativeSnapshotInt(span, 'start');
+  final end = _nonnegativeSnapshotInt(span, 'end');
+  if (start > end) {
+    throw StagedAstEnrichmentException.snapshot('local_source_span_reversed');
+  }
+  final segments = _provenanceSegments(provenance);
+  final total = segments.fold<int>(
+    0,
+    (length, segment) => length + segment.end - segment.start,
+  );
+  if (end > total) {
+    throw StagedAstEnrichmentException.snapshot(
+      'local_source_span_out_of_bounds',
+    );
+  }
+  if (start == end) {
+    final position = _rebasePosition(provenance, start);
+    return <String, Object?>{
+      'kind': 'direct_span',
+      'source_id': position['source_id'],
+      'start': position['offset'],
+      'end': position['offset'],
+      'provenance': 'staged_child_diagnostic',
+    };
+  }
+  final rebased = <Map<String, Object?>>[];
+  var cursor = 0;
+  for (final segment in segments) {
+    final length = segment.end - segment.start;
+    final localEnd = cursor + length;
+    final overlapStart = math.max(start, cursor);
+    final overlapEnd = math.min(end, localEnd);
+    if (overlapStart < overlapEnd) {
+      rebased.add(<String, Object?>{
+        'kind': 'direct_span',
+        'source_id': segment.sourceId,
+        'start': segment.start + overlapStart - cursor,
+        'end': segment.start + overlapEnd - cursor,
+        'provenance': segment.provenance,
+      });
+    }
+    cursor = localEnd;
+  }
+  if (rebased.length == 1) {
+    return rebased.single;
+  }
+  return <String, Object?>{
+    'kind': 'derived_text',
+    'policy': 'concatenate_in_order',
+    'segments': rebased,
+  };
+}
+
+Map<String, Object?> _rebaseDiagnostic(Object? provenance, Object? value) {
+  final diagnostic = _snapshotObject(value, 'child_diagnostic');
+  if ((diagnostic.containsKey('source_id') &&
+          diagnostic.containsKey('offset')) ||
+      diagnostic['kind'] == 'direct_span' ||
+      diagnostic['kind'] == 'derived_text') {
+    return _copyRecord(diagnostic);
+  }
+  final rebased = <String, Object?>{};
+  for (final entry in diagnostic.entries) {
+    final key = entry.key;
+    final field = entry.value;
+    if (key == 'span' &&
+        field is Map &&
+        !field.containsKey('kind') &&
+        field.containsKey('start') &&
+        field.containsKey('end')) {
+      rebased[key] = _rebaseSpan(provenance, field);
+    } else if (key == 'position' &&
+        field is Map &&
+        !field.containsKey('source_id') &&
+        field['offset'] is int) {
+      rebased[key] = _rebasePosition(provenance, field['offset']! as int);
+    } else if ((key == 'offset' || key.endsWith('_offset')) && field is int) {
+      rebased[key] = _rebasePosition(provenance, field);
+    } else if (field is Map) {
+      rebased[key] = _rebaseDiagnostic(provenance, field);
+    } else if (field is List) {
+      rebased[key] = <Object?>[
+        for (final child in field)
+          if (child is Map)
+            _rebaseDiagnostic(provenance, child)
+          else
+            _copyPlain(child),
+      ];
+    } else {
+      rebased[key] = _copyPlain(field);
+    }
+  }
+  return rebased;
 }
 
 ({Object? value, int nodes}) _detachPlain(
@@ -1622,6 +2807,14 @@ int _positiveSnapshotInt(Map<String, Object?> object, String field) {
   return value;
 }
 
+int _nonnegativeSnapshotInt(Map<String, Object?> object, String field) {
+  final value = object[field];
+  if (value is! int || value < 0) {
+    throw StagedAstEnrichmentException.snapshot(field);
+  }
+  return value;
+}
+
 Set<String> _snapshotStringSet(Object? value, String component) {
   try {
     return _stringSet(value, component);
@@ -1850,6 +3043,8 @@ bool _isAsciiDigit(int rune) => rune >= 0x30 && rune <= 0x39;
 
 String _digest(Object? value) =>
     'sha256:${sha256Hex(utf8.encode(jsonEncode(_canonicalValue(value))))}';
+
+String _payloadDigest(String text) => 'sha256:${sha256Hex(utf8.encode(text))}';
 
 Object? _canonicalValue(Object? value) {
   final active = HashSet<Object>.identity();

@@ -1163,9 +1163,531 @@ Child::
       0,
       reason: 'all jobs and targets must prepare before the first callback',
     );
+
+    final crossPlanConflicts = <(String, _JsonObject)>[
+      (
+        'duplicate non-append target',
+        <String, Object?>{
+          'a': _marker(resultPolicy: 'replace_field', into: 'slot'),
+          'b': _marker(resultPolicy: 'replace_field', into: 'slot'),
+          'slot': null,
+        },
+      ),
+      (
+        'target overwrites another queued marker',
+        <String, Object?>{
+          'a': _marker(resultPolicy: 'replace_field', into: 'z'),
+          'z': _marker(),
+        },
+      ),
+      (
+        'replace and append claim the same target',
+        <String, Object?>{
+          'a': _marker(resultPolicy: 'replace_field', into: 'children'),
+          'b': _marker(resultPolicy: 'append_child', into: 'children'),
+          'children': <Object?>[],
+        },
+      ),
+    ];
+    for (final (id, conflictingAst) in crossPlanConflicts) {
+      var calls = 0;
+      final registry = _registry(contract, (request, context) {
+        calls += 1;
+        return StagedChildExecution.success(<String, Object?>{'kind': 'expr'});
+      });
+      expect(
+        () => enrichStagedCurrentDepth(
+          registry: registry,
+          ast: conflictingAst,
+          options: _enrichmentOptions(),
+        ),
+        throwsA(_stagedCode('staged_stitch_target_collision')),
+        reason: id,
+      );
+      expect(calls, 0, reason: '$id must fail in complete-depth preflight');
+    }
+
+    final appendRegistry = _registry(
+      contract,
+      (request, context) => StagedChildExecution.success(<String, Object?>{
+        'kind': request['text'],
+      }),
+    );
+    final appended = enrichStagedCurrentDepth(
+      registry: appendRegistry,
+      ast: <String, Object?>{
+        'a': _marker(
+          text: 'first',
+          end: 5,
+          resultPolicy: 'append_child',
+          into: 'children',
+        ),
+        'b': _marker(
+          text: 'second',
+          start: 6,
+          end: 12,
+          resultPolicy: 'append_child',
+          into: 'children',
+        ),
+        'children': <Object?>[],
+      },
+      options: _enrichmentOptions(),
+    );
+    expect(_object(appended.ast)['children'], <Object?>[
+      <String, Object?>{'kind': 'first'},
+      <String, Object?>{'kind': 'second'},
+    ]);
   });
 
-  test('RED advances exclusively to recursive bounded authority', () {
+  test('all ten neutral recursive chain cases use the exact predicates', () {
+    for (final row in _list(contract['chain_cases']).map(_object)) {
+      expect(evaluateStagedChainCase(row), <String, Object?>{
+        'accepted': row['accepted'],
+        'diagnostic': row['diagnostic'],
+      }, reason: '${row['id']}');
+    }
+  });
+
+  test('recursive execution is breadth-first with shared cache and state', () {
+    final token = Object();
+    final cancellationIdentities = <bool>[];
+    final observations = <_JsonObject>[];
+    final retainedContexts = <StagedRuntimeContext>[];
+    final registry = _registry(contract, (request, context) {
+      retainedContexts.add(context);
+      final before = context.remainingSteps;
+      final after = context.safePoint(1);
+      final text = request['text']! as String;
+      observations.add(<String, Object?>{
+        'text': text,
+        'depth': request['stage_depth'],
+        'chain_length': _list(request['stage_chain']).length,
+        'remaining_before': before,
+        'remaining_after': after,
+        'token_identity': identical(context.cancellationToken, token),
+        'deadline': context.deadline,
+      });
+      if (text == 'root-a') {
+        return StagedChildExecution.success(<String, Object?>{
+          'kind': 'branch',
+          'nested': _marker(text: 'suba', start: 1, end: 5),
+        });
+      }
+      if (text == 'root-b') {
+        return StagedChildExecution.success(<String, Object?>{
+          'kind': 'branch',
+          'nested': _marker(text: 'subb', start: 11, end: 15),
+        });
+      }
+      return StagedChildExecution.success(<String, Object?>{
+        'kind': 'leaf',
+        'text': text,
+      });
+    });
+    final outcome = enrichStagedRecursively(
+      registry: registry,
+      ast: <String, Object?>{
+        'nodes': <Object?>[
+          _marker(text: 'root-a', start: 0, end: 6),
+          _marker(text: 'root-b', start: 10, end: 16),
+        ],
+      },
+      options: _enrichmentOptions(),
+      authority: _recursiveAuthority(
+        cancellationToken: token,
+        cancelled: (candidate) {
+          cancellationIdentities.add(identical(candidate, token));
+          return false;
+        },
+        deadline: 50,
+        remainingSteps: 20,
+      ),
+    );
+
+    expect(observations.map((row) => row['text']), <String>[
+      'root-a',
+      'root-b',
+      'suba',
+      'subb',
+    ]);
+    expect(observations.map((row) => row['depth']), <int>[1, 1, 2, 2]);
+    expect(observations.map((row) => row['chain_length']), <int>[1, 1, 2, 2]);
+    expect(observations.map((row) => row['remaining_before']), <int>[
+      19,
+      17,
+      15,
+      13,
+    ]);
+    expect(observations.map((row) => row['remaining_after']), <int>[
+      18,
+      16,
+      14,
+      12,
+    ]);
+    expect(observations.every((row) => row['token_identity'] == true), isTrue);
+    expect(observations.every((row) => row['deadline'] == 50), isTrue);
+    expect(cancellationIdentities.every((value) => value), isTrue);
+    expect(outcome.sidecars.map((row) => row['stage_depth']), <int>[
+      1,
+      1,
+      2,
+      2,
+    ]);
+    expect(outcome.cache.entries, 1);
+    expect(outcome.cache.hits, 3);
+    expect(outcome.cache.misses, 1);
+    expect(outcome.resources.remainingSteps, 12);
+    expect(outcome.resources.totalCalls, 4);
+    final nodes = _list(_object(outcome.ast)['nodes']);
+    expect(_object(_object(nodes[0])['nested']), <String, Object?>{
+      'kind': 'leaf',
+      'text': 'suba',
+    });
+    expect(_object(_object(nodes[1])['nested']), <String, Object?>{
+      'kind': 'leaf',
+      'text': 'subb',
+    });
+    for (final context in retainedContexts) {
+      expect(
+        () => context.safePoint(0),
+        throwsA(_stagedCode('staged_registry_snapshot_invalid')),
+      );
+      expect(
+        () => context.rebasePosition(0),
+        throwsA(_stagedCode('staged_registry_snapshot_invalid')),
+      );
+    }
+  });
+
+  test(
+    'cycle non-decrease depth and call guards reject before child reuse',
+    () {
+      var cycleCalls = 0;
+      final cycleRegistry = _registry(contract, (request, context) {
+        cycleCalls += 1;
+        return StagedChildExecution.success(<String, Object?>{
+          'nested': _marker(text: 'same', start: 0, end: 4),
+        });
+      });
+      expect(
+        () => enrichStagedRecursively(
+          registry: cycleRegistry,
+          ast: <String, Object?>{
+            'payload': _marker(text: 'same', start: 0, end: 4),
+          },
+          options: _enrichmentOptions(),
+          authority: _recursiveAuthority(),
+        ),
+        throwsA(_stagedCode('staged_cycle')),
+      );
+      expect(
+        cycleCalls,
+        1,
+        reason: 'cycle must reject in next-depth preflight',
+      );
+
+      var nonDecreaseCalls = 0;
+      final nonDecreaseRegistry = _registry(contract, (request, context) {
+        nonDecreaseCalls += 1;
+        return StagedChildExecution.success(<String, Object?>{
+          'nested': _marker(text: 'next', start: 0, end: 4),
+        });
+      });
+      expect(
+        () => enrichStagedRecursively(
+          registry: nonDecreaseRegistry,
+          ast: <String, Object?>{
+            'payload': _marker(text: 'same', start: 0, end: 4),
+          },
+          options: _enrichmentOptions(),
+          authority: _recursiveAuthority(),
+        ),
+        throwsA(_stagedCode('staged_chain_non_decreasing')),
+      );
+      expect(nonDecreaseCalls, 1);
+
+      for (final (code, authority) in <(String, StagedRecursiveAuthority)>[
+        ('staged_depth_exceeded', _recursiveAuthority(maxDepth: 1)),
+        ('staged_call_limit_exceeded', _recursiveAuthority(maxCalls: 1)),
+      ]) {
+        var calls = 0;
+        final registry = _registry(contract, (request, context) {
+          calls += 1;
+          return StagedChildExecution.success(<String, Object?>{
+            'nested': _marker(text: 'sub', start: 1, end: 4),
+          });
+        });
+        expect(
+          () => enrichStagedRecursively(
+            registry: registry,
+            ast: <String, Object?>{
+              'payload': _marker(text: 'root', start: 0, end: 4),
+            },
+            options: _enrichmentOptions(),
+            authority: authority,
+          ),
+          throwsA(_stagedCode(code)),
+          reason: code,
+        );
+        expect(calls, 1, reason: '$code must reject before second callback');
+      }
+    },
+  );
+
+  test(
+    'entry and callback safe points share cancellation deadline and steps',
+    () {
+      for (final (code, authority) in <(String, StagedRecursiveAuthority)>[
+        ('staged_cancelled', _recursiveAuthority(cancelled: (_) => true)),
+        (
+          'staged_deadline_exceeded',
+          _recursiveAuthority(clock: () => 11, deadline: 10),
+        ),
+        ('staged_budget_exhausted', _recursiveAuthority(remainingSteps: 0)),
+      ]) {
+        var calls = 0;
+        final registry = _registry(contract, (request, context) {
+          calls += 1;
+          return StagedChildExecution.success(<String, Object?>{
+            'kind': 'leaf',
+          });
+        });
+        expect(
+          () => enrichStagedRecursively(
+            registry: registry,
+            ast: <String, Object?>{'payload': _marker(text: 'x', end: 1)},
+            options: _enrichmentOptions(),
+            authority: authority,
+          ),
+          throwsA(_stagedCode(code)),
+          reason: code,
+        );
+        expect(calls, 0, reason: '$code must reject at dispatch entry');
+      }
+
+      var cancelled = false;
+      final safePointRegistry = _registry(contract, (request, context) {
+        cancelled = true;
+        context.safePoint(0);
+        return StagedChildExecution.success(<String, Object?>{'kind': 'never'});
+      });
+      expect(
+        () => enrichStagedRecursively(
+          registry: safePointRegistry,
+          ast: <String, Object?>{'payload': _marker(text: 'x', end: 1)},
+          options: _enrichmentOptions(),
+          authority: _recursiveAuthority(cancelled: (_) => cancelled),
+        ),
+        throwsA(_stagedCode('staged_cancelled')),
+      );
+
+      final budgetRegistry = _registry(contract, (request, context) {
+        context.safePoint(2);
+        return StagedChildExecution.success(<String, Object?>{'kind': 'never'});
+      });
+      expect(
+        () => enrichStagedRecursively(
+          registry: budgetRegistry,
+          ast: <String, Object?>{'payload': _marker(text: 'x', end: 1)},
+          options: _enrichmentOptions(maxSteps: 2),
+          authority: _recursiveAuthority(remainingSteps: 2),
+        ),
+        throwsA(_stagedCode('staged_budget_exhausted')),
+      );
+
+      var clockCalls = 0;
+      final postCallbackRegistry = _registry(
+        contract,
+        (request, context) =>
+            StagedChildExecution.success(<String, Object?>{'kind': 'never'}),
+      );
+      expect(
+        () => enrichStagedRecursively(
+          registry: postCallbackRegistry,
+          ast: <String, Object?>{'payload': _marker(text: 'x', end: 1)},
+          options: _enrichmentOptions(),
+          authority: _recursiveAuthority(
+            clock: () => clockCalls++ == 0 ? 0 : 11,
+            deadline: 10,
+          ),
+        ),
+        throwsA(_stagedCode('staged_deadline_exceeded')),
+        reason: 'the post-callback safe point shares the absolute deadline',
+      );
+    },
+  );
+
+  test('result nodes and diagnostic bytes spend monotonically', () {
+    var resultCalls = 0;
+    final resultRegistry = _registry(contract, (request, context) {
+      resultCalls += 1;
+      return StagedChildExecution.success(<String, Object?>{'kind': 'leaf'});
+    });
+    expect(
+      () => enrichStagedRecursively(
+        registry: resultRegistry,
+        ast: <String, Object?>{
+          'nodes': <Object?>[
+            _marker(text: 'a', end: 1),
+            _marker(text: 'b', start: 1, end: 2),
+          ],
+        },
+        options: _enrichmentOptions(maxResultNodes: 3),
+        authority: _recursiveAuthority(),
+      ),
+      throwsA(_stagedCode('staged_result_node_limit_exceeded')),
+    );
+    expect(resultCalls, 2);
+
+    final diagnosticRegistry = _registry(
+      contract,
+      (request, context) => StagedChildExecution.failure(<String, Object?>{
+        'code': 'large_child_failure',
+        'detail': 'x' * 1024,
+      }),
+    );
+    final truncated = enrichStagedRecursively(
+      registry: diagnosticRegistry,
+      ast: <String, Object?>{
+        'payload': _marker(text: 'x', end: 1, failurePolicy: 'keep_text'),
+      },
+      options: _enrichmentOptions(maxDiagnosticBytes: 64),
+      authority: _recursiveAuthority(),
+    );
+    expect(truncated.diagnostics.single['code'], 'staged_diagnostic_truncated');
+    expect(truncated.diagnostics.single['maximum_bytes'], 64);
+    expect(truncated.resources.remainingDiagnosticBytes, 0);
+    expect(_object(truncated.ast)['payload'], 'x');
+  });
+
+  test('direct and derived child diagnostics rebase to original sources', () {
+    final directRegistry = _registry(contract, (request, context) {
+      expect(context.rebasePosition(1), <String, Object?>{
+        'source_id': 'ascii',
+        'offset': 3,
+      });
+      expect(
+        context.rebaseSpan(<String, Object?>{'start': 1, 'end': 3}),
+        <String, Object?>{
+          'kind': 'direct_span',
+          'source_id': 'ascii',
+          'start': 3,
+          'end': 5,
+          'provenance': 'capture',
+        },
+      );
+      return StagedChildExecution.failure(<String, Object?>{
+        'code': 'direct_local_failure',
+        'offset': 1,
+        'span': <String, Object?>{'start': 0, 'end': 2},
+        'nested': <String, Object?>{
+          'position': <String, Object?>{'offset': 4},
+        },
+      });
+    });
+    final direct = enrichStagedRecursively(
+      registry: directRegistry,
+      ast: <String, Object?>{
+        'payload': _marker(
+          text: 'abcd',
+          start: 2,
+          end: 6,
+          failurePolicy: 'keep_text',
+        ),
+      },
+      options: _enrichmentOptions(),
+      authority: _recursiveAuthority(),
+    );
+    final directChild = _object(direct.diagnostics.single['child_diagnostic']);
+    expect(directChild['offset'], <String, Object?>{
+      'source_id': 'ascii',
+      'offset': 3,
+    });
+    expect(directChild['span'], <String, Object?>{
+      'kind': 'direct_span',
+      'source_id': 'ascii',
+      'start': 2,
+      'end': 4,
+      'provenance': 'capture',
+    });
+    expect(
+      _object(_object(directChild['nested'])['position']),
+      <String, Object?>{'source_id': 'ascii', 'offset': 6},
+    );
+
+    final derivedProvenance = <String, Object?>{
+      'kind': 'derived_text',
+      'policy': 'concatenate_in_order',
+      'segments': <Object?>[
+        <String, Object?>{
+          'kind': 'direct_span',
+          'source_id': 'ascii',
+          'start': 0,
+          'end': 2,
+          'provenance': 'capture',
+        },
+        <String, Object?>{
+          'kind': 'direct_span',
+          'source_id': 'unicode',
+          'start': 1,
+          'end': 3,
+          'provenance': 'capture',
+        },
+      ],
+    };
+    final derivedRegistry = _registry(contract, (request, context) {
+      expect(context.rebasePosition(2), <String, Object?>{
+        'source_id': 'unicode',
+        'offset': 1,
+      });
+      return StagedChildExecution.failure(<String, Object?>{
+        'code': 'derived_local_failure',
+        'offset': 2,
+        'span': <String, Object?>{'start': 1, 'end': 3},
+      });
+    });
+    final derived = enrichStagedRecursively(
+      registry: derivedRegistry,
+      ast: <String, Object?>{
+        'payload': _marker(
+          text: 'abcd',
+          failurePolicy: 'keep_text',
+          provenance: derivedProvenance,
+        ),
+      },
+      options: _enrichmentOptions(),
+      authority: _recursiveAuthority(),
+    );
+    final derivedChild = _object(
+      derived.diagnostics.single['child_diagnostic'],
+    );
+    expect(derivedChild['offset'], <String, Object?>{
+      'source_id': 'unicode',
+      'offset': 1,
+    });
+    expect(derivedChild['span'], <String, Object?>{
+      'kind': 'derived_text',
+      'policy': 'concatenate_in_order',
+      'segments': <Object?>[
+        <String, Object?>{
+          'kind': 'direct_span',
+          'source_id': 'ascii',
+          'start': 1,
+          'end': 2,
+          'provenance': 'capture',
+        },
+        <String, Object?>{
+          'kind': 'direct_span',
+          'source_id': 'unicode',
+          'start': 1,
+          'end': 2,
+          'provenance': 'capture',
+        },
+      ],
+    });
+  });
+
+  test('RED advances exclusively to fresh carriers and Dart admission', () {
     expect(File(_dormantConsumerPath).existsSync(), isTrue);
     expect(File(_finalConsumerPath).existsSync(), isFalse);
     final ci = File(_ciDriverPath).readAsStringSync();
@@ -1182,10 +1704,10 @@ Child::
 
     fail(
       'LINKEDSPEC_STAGED_AST_ENRICHMENT_DART_RED: missing '
-      'authority=[breadth_first_recursion,decreasing_chain_cycle_guards,'
-      'shared_resource_bounds,source_rebased_diagnostics]; '
-      'current_depth=[pre_registered_resolution,immutable_plan_cache,'
-      'result_failure_policies] is available',
+      'authority=[fresh_native_reconstructed_generated_emitted_authority,'
+      'production_seam,ordinary_canonical_admission,dart_rollout]; '
+      'recursive=[breadth_first_recursion,decreasing_chain_cycle_guards,'
+      'shared_resource_bounds,source_rebased_diagnostics] is available',
     );
   });
 }
@@ -1230,6 +1752,28 @@ FrozenStagedRegistry _registry(
   );
 }
 
+StagedRecursiveAuthority _recursiveAuthority({
+  Object? cancellationToken,
+  bool Function(Object cancellationToken)? cancelled,
+  int Function()? clock,
+  int deadline = 100,
+  int remainingSteps = 100,
+  int requiredSteps = 1,
+  int maxDepth = 8,
+  int maxCalls = 32,
+  int totalCalls = 0,
+}) => StagedRecursiveAuthority(
+  cancellationToken: cancellationToken ?? Object(),
+  cancelled: cancelled ?? (_) => false,
+  clock: clock ?? () => 0,
+  deadline: deadline,
+  remainingSteps: remainingSteps,
+  requiredSteps: requiredSteps,
+  maxDepth: maxDepth,
+  maxCalls: maxCalls,
+  totalCalls: totalCalls,
+);
+
 Map<String, StagedCompiledAuthority> _compiledAuthorities(
   _JsonObject snapshot,
   StagedCompiledAuthority callback,
@@ -1239,7 +1783,9 @@ Map<String, StagedCompiledAuthority> _compiledAuthorities(
 };
 
 _JsonObject _enrichmentOptions({
+  int maxSteps = 1000,
   int maxResultNodes = 128,
+  int maxDiagnosticBytes = 4096,
   String requiredSourceDetail = 'span',
 }) => <String, Object?>{
   'declaring_spec_id': 'grammar/main.spec',
@@ -1263,9 +1809,9 @@ _JsonObject _enrichmentOptions({
   ],
   'caller_ceilings': <String, Object?>{
     'source_detail': 'text',
-    'max_steps': 1000,
+    'max_steps': maxSteps,
     'max_result_nodes': maxResultNodes,
-    'max_diagnostic_bytes': 4096,
+    'max_diagnostic_bytes': maxDiagnosticBytes,
   },
   'required_source_detail': requiredSourceDetail,
   'required_versions': <String, Object?>{
@@ -1286,6 +1832,7 @@ _JsonObject _marker({
   String resultPolicy = 'replace_marker',
   String? into,
   String failurePolicy = 'fail',
+  _JsonObject? provenance,
   List<String> requiredCapabilities = const <String>[
     'staged-parse-job-v2',
     'typed-source-location-v1',
@@ -1305,13 +1852,15 @@ _JsonObject _marker({
     'failure_policy': failurePolicy,
     'required_capabilities': <String>[...requiredCapabilities],
     'text': text,
-    'provenance': <String, Object?>{
-      'kind': 'direct_span',
-      'source_id': 'ascii',
-      'start': start,
-      'end': end ?? start + text.runes.length,
-      'provenance': 'capture',
-    },
+    'provenance':
+        provenance ??
+        <String, Object?>{
+          'kind': 'direct_span',
+          'source_id': 'ascii',
+          'start': start,
+          'end': end ?? start + text.runes.length,
+          'provenance': 'capture',
+        },
     'origin': 'contract:parse_job',
   };
   return <String, Object?>{

@@ -354,18 +354,21 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   occurs only after the parent result and returns the detached neutral record. No outer cfg, cfg-only export,
   check-cfg registration, or conditional dead-code allowance remains. Dart `.14.7.5.0` now freezes the next
   boundary without changing this Rust route.
-- **Dart general-staged dormant boundary:** `FUTURE-PARITY-BACKLOG.14.7.5.0-.2` own
+- **Dart general-staged dormant boundary:** `FUTURE-PARITY-BACKLOG.14.7.5.0-.3` own
   `dart/test_dormant/staged_ast_enrichment_contract_test.dart`. Run fatal analysis and then the exact opt-in test
-  from `dart/` through `bash ../tools/run_dart_project_data.sh`. Twelve tests must pass and the thirteenth must fail
-  only with `.3`'s `LINKEDSPEC_STAGED_AST_ENRICHMENT_DART_RED` recursion/bounds/rebasing list. Inspect compiled JSON: exact assignment-
+  from `dart/` through `bash ../tools/run_dart_project_data.sh`. Eighteen tests must pass and the nineteenth must
+  fail only with `.4`'s `LINKEDSPEC_STAGED_AST_ENRICHMENT_DART_RED` fresh-carrier/production/admission/rollout
+  list. Inspect compiled JSON: exact assignment-
   form `parse_job(...)` is one `ActionStagedParseJobExpr`, while residual generic calls reject. Inspect
   `runtime/staged_parse_job.dart` for detached marker materialization and `runtime/matching.dart` for lazy zero-
   width suffix instrumentation that proves capture boundaries before `SourceAuthority` converts them to Unicode-
   scalar spans. Inspect `runtime/staged_ast_enrichment.dart` for `FrozenStagedRegistry`, canonical job/cache
-  identities, complete-depth preflight/order, fresh sibling contexts, detachment, and atomic policy stitching.
+  identities, complete-depth target reservation/order, fresh sibling contexts, detachment, atomic policy stitching,
+  `enrichStagedRecursively`, `StagedRecursiveAuthority`, strict lineage, shared resources, expiring `safePoint`,
+  and direct/ordered-derived source rebasing.
   Native/reconstructed/generated-plan/emitted routes still preserve logical marker data only. The final
   `dart/test/staged_ast_enrichment_contract_test.dart` path and both canonical references must remain absent until
-  `.14.7.5.4`; `.14.7.5.3` next owns only recursive scheduling, shared bounds/safe points, and source rebasing. Because every admitted
+  `.14.7.5.4`; that leaf next owns only fresh carrier authority, the production seam, admission, and rollout. Because every admitted
   consumer snapshots the full neutral current projection, rerun both Perl and Rust consumers whenever any later
   backend lifecycle or governed mutation count moves.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),

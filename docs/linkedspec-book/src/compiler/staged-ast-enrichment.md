@@ -406,13 +406,14 @@ This is private Rust backend admission, not public `parse_job(...)` authoring. O
 consumer, canonical CI requires and invokes it exactly once, and only Rust rollout is promoted. Dart, Julia, Lua,
 six-runtime recurrence, public authoring, independent recomposition, and combined no-drift retain their owners.
 
-## Current private, dormant Dart one-depth authority
+## Current private, dormant Dart recursive authority
 
 Dart `.14.7.5.0` established the no-production generic-call RED. `.14.7.5.1` replaced only that exact assignment
-boundary, and `.14.7.5.2` adds a separate private one-depth authority while retaining the same excluded consumer,
+boundary, `.14.7.5.2` added a separate private one-depth authority, and `.14.7.5.3` adds bounded breadth-first
+recurrence while retaining the same excluded consumer,
 `dart/test_dormant/staged_ast_enrichment_contract_test.dart`, which ordinary package-test discovery and canonical CI
-omit. Fatal analysis includes it successfully. An explicit focused run reports twelve passing tests and one
-deliberate `.3` recursive-authority failure.
+omit. Fatal analysis includes it successfully. An explicit focused run reports eighteen passing tests and one
+deliberate `.4` carrier/admission failure.
 
 The GREEN groups freeze all neutral inventories and the unchanged function-body-v1 adapter, including stable
 resolve/load/compile/execute/cache/stitch records, complete wrong-top context, and resolve-time denial of general
@@ -524,12 +525,69 @@ the exact declaration text and retains the diagnostic; `diagnostic_node` applies
 one detached diagnostic node and retains the same scheduler-sidecar diagnostic. All mutations occur on the
 unpublished copy, so a later sibling failure cannot expose an earlier sibling success.
 
-Returned markers intentionally remain inert. The thirteenth test fails only with
-`LINKEDSPEC_STAGED_AST_ENRICHMENT_DART_RED`, naming missing breadth-first recurrence, decreasing-chain/cycle and
-shared resource bounds, callback safe points, and original-source diagnostic rebasing. The neutral checker requires
-this exact dormant path, the eventual `dart/test/staged_ast_enrichment_contract_test.dart` path to remain absent,
-and both paths to have zero canonical references. Dart rollout stays pending. `.14.7.5.3` owns recursive bounded
-authority; `.4` owns fresh native/reconstructed/generated/emitted authority, admission, and rollout.
+`enrichStagedCurrentDepth(...)` remains available and deliberately leaves returned markers inert.
+`enrichStagedRecursively(...)` uses the same frozen registry and plan cache but collects markers only from a
+successfully detached result. It finishes every sibling at depth N before preparing depth N+1. For example, if
+two root markers `A` and `B` return `A.child` and `B.child`, execution is:
+
+```text
+depth 1: A, B
+depth 2: A.child, B.child
+```
+
+It is never `A, A.child, B`. Each depth independently applies typed path, provenance, and job-id ordering.
+
+Every recursive job carries a detached active tuple:
+
+```json
+[
+  "registry:expr-v2",
+  "Expr",
+  "sha256:<digest-of-exact-UTF-8-payload>",
+  {"kind": "direct_span", "source_id": "input", "start": 2, "end": 8, "provenance": "capture"}
+]
+```
+
+An exact tuple repeat is `staged_cycle`. Reusing the same resolved parser/top with different payload bytes is still
+rejected unless every child provenance segment is contained by an active segment and total Unicode-scalar extent
+is strictly smaller. Direct and `concatenate_in_order` derived payloads use the same rule.
+
+One `StagedRecursiveAuthority` owns cancellation identity/probe, the caller clock and absolute deadline, shared
+remaining steps, total calls, maximum depth/calls, cumulative result nodes, and diagnostic bytes. None resets at a
+new depth. Dispatch entry charges the required cost. During an opaque callback, `StagedRuntimeContext.safePoint(n)`
+checks the same cancellation/deadline and spends the same invocation budget. `remainingSteps`,
+`cancellationToken`, `deadline`, `rebasePosition(...)`, `rebaseSpan(...)`, and `rebaseDiagnostic(...)` are valid
+only during that callback; a retained context rejects after return or throw.
+
+Source projection preserves the marker's original provenance. A child-local span `[1,3)` over derived text made
+from `ascii:[0,2)` followed by `unicode:[1,3)` becomes:
+
+```json
+{
+  "kind": "derived_text",
+  "policy": "concatenate_in_order",
+  "segments": [
+    {"kind": "direct_span", "source_id": "ascii", "start": 1, "end": 2, "provenance": "capture"},
+    {"kind": "direct_span", "source_id": "unicode", "start": 1, "end": 2, "provenance": "capture"}
+  ]
+}
+```
+
+Dart does not invent one contiguous span across those sources. Retained diagnostics recursively project local
+positions and spans before the shared UTF-8 diagnostic ceiling is charged; overflow becomes the exact portable
+`staged_diagnostic_truncated` sentinel.
+
+Complete-depth preflight now also reserves cross-plan result targets. Multiple ordered `append_child` jobs may
+share one list. Two replace/sibling jobs may not claim one slot; append and replacement may not claim one slot;
+and a replacement target may not overwrite or contain another queued marker. These conflicts are
+`staged_stitch_target_collision` before callback one. This closes a latent one-depth defect found during `.3`
+review, where individually valid targets could otherwise conflict only after callback work began.
+
+The nineteenth test fails only with `LINKEDSPEC_STAGED_AST_ENRICHMENT_DART_RED`, naming missing fresh native,
+reconstructed, generated-plan, and emitted authority, the production seam, ordinary/canonical admission, and Dart
+rollout. The neutral checker requires this exact dormant path, the eventual
+`dart/test/staged_ast_enrichment_contract_test.dart` path to remain absent, and both paths to have zero canonical
+references. `.14.7.5.4` owns that final private-backend admission boundary.
 
 The admitted Perl and Rust consumers each snapshot the complete neutral current projection before their backend-
 specific assertions. Marker/provenance/current-depth authority does not change the neutral mutation count or Dart

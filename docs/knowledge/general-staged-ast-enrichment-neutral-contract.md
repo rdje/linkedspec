@@ -17,7 +17,7 @@ answers:
   - "which staged AST backend consumers are planned"
   - "is general parse_job authoring public"
 date: 2026-08-25
-status: executable neutral with private Perl and Rust admissions complete; Dart current-depth authority dormant; Julia, Lua, recurrence admission, and public authoring pending
+status: executable neutral with private Perl and Rust admissions complete; Dart recursive authority dormant; Julia, Lua, recurrence admission, and public authoring pending
 tags: [staged-parsing, parse-job, source-location, registry, queue, policies, diagnostics, portability]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.2 adds capability_conformance/staged_ast_enrichment_contract.json plus tools/check_staged_ast_enrichment_contract.py and ADR 0088. The independent oracle executes 4 immutable registry entries; 2 sources; 8 provenance, 3 deterministic-id, 8 resolution, 6 authority, 10 cache, 4 breadth-first queue, 3 sibling-isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; five planned backend consumers over six routes; four carrier requirements; ten outward guards; nine rollout legs; 35 exact owners; and 72 reason-checked corruptions. FUTURE-PARITY-BACKLOG.14.7.3.1-.3 advance only the dormant Perl consumer through declaration/provenance, current-depth policies, breadth-first recurrence, bounded authority, and source-rebased diagnostics. It now has 141 GREEN top-level checks/one carrier-admission RED; four later consumers remain absent, only neutral rollout is complete, and outward surfaces remain absent."
 evidence_update_2026_08_26_perl_admission: "FUTURE-PARITY-BACKLOG.14.7.3.4 advances the executable boundary to neutral+Perl complete with 78 reason-checked mutations. The 143-check Perl consumer proves four fresh-authority carriers and exact ordinary/canonical admission; later consumers and outward surfaces remain absent."
@@ -29,6 +29,7 @@ evidence_update_2026_08_26_rust_admission: "FUTURE-PARITY-BACKLOG.14.7.4.4 adds 
 evidence_update_2026_08_26_dart_dormant_red: "FUTURE-PARITY-BACKLOG.14.7.5.0 advances only Dart's backend-consumer lifecycle to dormant_red and the checker to 85 mutations. Fatal analysis and four pre-boundary tests pass: neutral/current-v1 controls stay exact, authored syntax remains one generic ActionCallExpr, and native/reconstructed/generated-plan/independently executed emitted routes preserve the structured unknown_helper rejection. The fifth and only RED names missing STAGED_PARSE_JOB_MARKER/staged_parse_job_v2. The final path, ordinary/canonical registration, Dart rollout, production, format, public, and outward truth remain unchanged."
 evidence_update_2026_08_26_dart_marker_provenance: "FUTURE-PARITY-BACKLOG.14.7.5.1 adds the private Dart declaration carrier without changing neutral lifecycle or mutation count: exact assignment-only lowering, normalized literal options, live-regex-proven Unicode-scalar direct/ordered-derived provenance, detached authority-free marker data, malformed/residual/transaction denial, and four equal logical routes. Seven groups pass and only .14.7.5.2 authority remains RED; final-path/canonical references, rollout, v1/v2 formats, public, and outward truth remain unchanged."
 evidence_update_2026_08_26_dart_current_depth_authority: "FUTURE-PARITY-BACKLOG.14.7.5.2 adds Dart's separate private caller-frozen general-v2 registry, pure resolution, selected-top-before-id identity, immutable-plan cache, complete current-depth preflight/order/isolation, detached atomic stitching, and all four result/three failure policies. The same dormant consumer is +12/-1 and only .14.7.5.3 recurrence/bounds/rebasing remains RED; neutral lifecycle/mutations, discovery, rollout, formats, public, and outward truth do not move."
+evidence_update_2026_08_27_dart_recursive_authority: "FUTURE-PARITY-BACKLOG.14.7.5.3 completes private Dart breadth-first recurrence, exact-text/full-provenance cycle and strict-decrease guards, monotone cancellation/deadline/step/call/depth/result/diagnostic authority, expiring callback safe points, and direct/ordered-derived source rebasing. Complete-depth target reservation also closes a review-discovered preflight conflict before callback one. The same dormant consumer is +18/-1 and only .14.7.5.4 carriers/production seam/admission/rollout remain RED; lifecycle, 85 mutations, discovery, formats, public, and outward truth do not move."
 reverify:
   - "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py"
   - "rg -n 'staged-AST enrichment|STAGED_PARSE_JOB_MARKER|staged_parse_job_v2|neutral_perl_and_rust_complete' docs/decisions/0088-pre-resolved-breadth-first-staged-ast-enrichment.md capability_conformance/staged_ast_enrichment_contract.json tools/check_staged_ast_enrichment_contract.py"
@@ -73,11 +74,9 @@ backends, recurrence, and public closeout retain their exact owners. Rust now ad
 through a host-only fresh-invocation seed across native, reconstructed, generated-plan, and independently compiled
 emitted routes. Each run starts an empty cache and fresh recursive authority after the parent AST; ordinary and
 canonical discovery run one GREEN consumer, and Rust rollout is complete. Dart now has one deliberately excluded
-dormant consumer: its current generic call reaches only a structured unknown-helper rejection, and `.14.7.5.1`
-owns the missing dedicated marker plus typed provenance. Dart now also has one
-private current-depth resolver/cache/policy engine; returned markers remain
-inert until `.14.7.5.3` adds bounded breadth-first recurrence and source
-rebasing.
+dormant consumer whose private marker, typed provenance, frozen resolver/cache/policy engine, breadth-first
+recurrence, strict lineage, shared resources, expiring safe points, and typed source rebasing are complete through
+`.14.7.5.3`. Fresh production carriers, admission, and Dart rollout remain `.14.7.5.4`.
 
 Related: [[general-staged-ast-current-boundary]], [[perl-staged-ast-enrichment-current-depth-authority]], [[perl-staged-ast-enrichment-recursive-authority]], [[staged-parse-job-annotation-contract]],
 [[staged-parser-registry-dispatch-contract]], [[typed-source-location-cursor-algebra-direction]], and
@@ -86,4 +85,5 @@ Related: [[general-staged-ast-current-boundary]], [[perl-staged-ast-enrichment-c
 [[rust-staged-ast-enrichment-current-depth-authority]], and
 [[rust-staged-ast-enrichment-recursive-authority]], and
 [[dart-staged-ast-enrichment-dormant-red]], and
-[[dart-staged-ast-enrichment-current-depth-authority]].
+[[dart-staged-ast-enrichment-current-depth-authority]], and
+[[dart-staged-ast-enrichment-recursive-authority]].

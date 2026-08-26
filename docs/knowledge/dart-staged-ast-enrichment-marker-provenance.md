@@ -12,10 +12,11 @@ answers:
   - "does the Dart staged marker retain source regex or parser authority"
   - "what does FUTURE-PARITY-BACKLOG 14.7.5.1 implement"
 date: 2026-08-26
-status: current private declaration carrier; caller-frozen current-depth authority is complete and recurrence remains dormant RED for FUTURE-PARITY-BACKLOG.14.7.5.3
+status: current private declaration carrier; caller-frozen recursive authority is complete and fresh carriers/admission remain dormant RED for FUTURE-PARITY-BACKLOG.14.7.5.4
 tags: [dart, staged-parsing, parse-job, source-provenance, regex, private, backend-parity]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.5.1 adds ActionStagedParseJobExpr, strict parser/compiler/emitter closure, recognition-effect closure, staged_parse_job.dart, and private lazy capture-boundary instrumentation in matching.dart. The dormant consumer proves the eight neutral provenance rows; complete literal-option/malformed/residual/transaction closure; Unicode direct capture; distinct ordered spans for (a)(a); detached authority-free sidecars; and equal native, SpecFile-JSON reconstructed, generated-plan, and independently analyzed/executed emitted logical markers. Seven groups pass and only .14.7.5.2 resolution/cache/result/failure authority is RED. Fatal analysis, 132 direct dependents, and ordinary Dart 416/416 pass while the final consumer and canonical references remain absent."
 evidence_update_2026_08_26_current_depth_authority: "FUTURE-PARITY-BACKLOG.14.7.5.2 consumes this inert declaration only after the complete parent AST through a separate private frozen registry/cache/policy engine. The same dormant consumer is +12/-1 and only .3 recursive bounded authority remains RED; marker bytes, provenance, four logical routes, v1, formats, discovery, rollout, and outward truth remain unchanged."
+evidence_update_2026_08_27_recursive_authority: "FUTURE-PARITY-BACKLOG.14.7.5.3 recursively consumes newly stitched declarations only at the next complete breadth-first depth under strict lineage/shared resources and typed source rebasing. The same consumer is +18/-1 and only .4 carriers/admission/rollout remain RED; declaration bytes and four logical routes remain unchanged."
 root_cause: "Dart RegExpMatch exposes whole-match start/end plus group text, but no participating-capture start/end. Inferring with indexOf is unsound because identical captures such as (a)(a) would both select the first occurrence. Storing copied authored text as provenance would also violate ADR 0056. The staged-only seam therefore needs a live-regex proof of boundaries before using SourceAuthority."
 last_verified: 2026-08-26
 reverify:
@@ -54,12 +55,13 @@ parser, registry, callback, scheduler, cache, path, or host handle.
 
 Native, normalized reconstructed, generated-plan, and independently loaded
 emitted routes preserve this same logical marker without changing generated
-format v2. `.2` now implements only private one-depth resolution, plan caching,
-and result/failure stitching. Recurrence, fresh host authority, admission, and
-rollout remain `.3-.4`.
+format v2. `.2-.3` now implement private resolution, plan caching, policy
+stitching, breadth-first recurrence, shared bounds, safe points, and source
+rebasing. Fresh host authority, admission, and rollout remain `.4`.
 
 Related: [[dart-staged-ast-enrichment-dormant-red]],
 [[dart-progressive-span-dispatch-authority]],
 [[typed-source-location-cursor-algebra-direction]],
 [[general-staged-ast-enrichment-neutral-contract]],
-[[dart-staged-ast-enrichment-current-depth-authority]], and ADRs `0056`, `0088`.
+[[dart-staged-ast-enrichment-current-depth-authority]],
+[[dart-staged-ast-enrichment-recursive-authority]], and ADRs `0056`, `0088`.

@@ -2,27 +2,29 @@
 
 ## Current Activity
 
-- Dart staged `.14.7.5.2` adds one private caller-frozen registry containing only completed candidate outcomes and
-  already-compiled opaque callbacks. Pure selection has no loader/compiler/provider/filesystem authority.
-- Default top precedes deterministic v2 identity; the exact eight-field cache stores plans only. One complete
-  depth preflights every job/target, orders typed paths/provenance/id, and gives siblings fresh runtime state.
-- All four result plus three failure policies operate atomically on an unpublished AST copy after node-bounded
-  detachment. The same consumer is `+12 -1`; only `.3` recurrence/bounds/safe-point/rebasing authority is RED.
-- Fatal analysis, 102 direct dependents, and ordinary Dart 416/416 are GREEN. Marker/provenance/logical routes,
-  function-body v1, neutral 85 mutations, discovery, rollout, formats, public/outward truth, and other backends do
-  not move.
+- Dart staged `.14.7.5.3` preserves one-depth compatibility and adds private breadth-first recursive scheduling
+  over the same caller-frozen registry and invocation-local plan cache.
+- Exact tuple cycles and non-decreasing provenance lineage reject. Cancellation/deadline/steps/calls/depth/result/
+  diagnostic authority stays shared; callback safe points and direct/ordered-derived source projection expire.
+- Complete-depth target reservation fixes a latent `.2` gap: conflicting replace/append claims and queued-marker
+  overwrite now reject before callback one, while deterministic multiple appends remain valid.
+- The dormant consumer is `+18 -1`; only `.4` fresh carriers, production integration, admission, and Dart rollout
+  remain RED. Fatal analysis, 102 direct dependents, and ordinary Dart 416/416 are GREEN; neutral 85 mutations,
+  v1, logical routes, discovery, formats, public/outward truth, and other backends do not move.
 
 ## Latest Completed Slice
 
-- `.14.7.5.2` implementation and focused behavior proof are complete from clean activation commit `16f9769a`;
+- `.14.7.5.3` implementation and focused behavior proof are complete from clean activation commit `7355445c`;
   atomic commit and clean handoff remain.
 
 ## Next Action
 
-- Commit `.14.7.5.2`; from the clean handoff, activate Dart recursive bounded authority leaf `.14.7.5.3`
-  task-tree-first.
+- Commit `.14.7.5.3`; from the clean handoff, activate Dart carrier/admission leaf `.14.7.5.4` task-tree-first.
 
 ## Recent Completions
+
+- `2026-08-27` — `.14.7.5.3` adds Dart breadth-first recursion, strict lineage, shared resources, expiring safe
+  points, typed rebasing, and complete-depth target reservation; only `.4` carrier/admission authority remains RED.
 
 - `2026-08-26` — `.14.7.5.2` adds Dart's caller-frozen pure resolver, selected-top identities, plan-only cache,
   isolated current-depth execution, detached atomic stitching, and all policies; only `.3` recurrence remains RED.
@@ -73,9 +75,6 @@
 
 - `2026-08-26` — `.14.7.3.2` adds Perl's private caller-frozen resolution/cache and all current-depth result/
   failure policies; 133 top-level checks pass and only `.3` recursive authority remains RED.
-
-- `2026-08-26` — `.14.7.3.1` adds Perl's private exclusive marker, opaque v2 declaration sidecar, strict literal
-  options, and typed direct/ordered-derived provenance; 120 assertions pass and only `.2` authority remains RED.
 
 ## History
 

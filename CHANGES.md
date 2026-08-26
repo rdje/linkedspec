@@ -10,6 +10,22 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-27 — FUTURE-PARITY-BACKLOG.14.7.5.3 — add Dart staged recursive authority
+
+- Preserved `enrichStagedCurrentDepth` and added private `enrichStagedRecursively` over the same caller-frozen
+  registry/cache. Returned markers queue only after their producing depth settles; every next depth is completely
+  resolved, authority-checked, target-validated, and typed path/provenance/job sorted before callbacks.
+- Added exact resolved-parser/top/payload-digest/full-provenance lineage, exact-cycle and strict-containment/decrease
+  guards, non-resetting cancellation/deadline/step/call/depth/result/diagnostic resources, expiring callback safe
+  points, and direct/ordered-derived original-source position/span/diagnostic projection.
+- Corrected a latent complete-depth preflight defect found during review: duplicate non-append targets, mixed
+  append/replace targets, and replacement targets containing another queued marker now reject before callback one;
+  multiple deterministic appends to one list remain valid.
+- The same dormant consumer advances from `+12 -1` to `+18 -1`; only `.14.7.5.4` fresh carriers, production seam,
+  ordinary/canonical admission, and Dart rollout remain RED. Fatal analysis, 102 direct dependents, and all 416
+  ordinary Dart tests pass. V1, marker bytes/four logical routes, neutral 85 mutations, discovery, formats,
+  public/outward truth, and other backends do not move.
+
 ## 2026-08-26 — FUTURE-PARITY-BACKLOG.14.7.5.2 — add Dart staged current-depth authority
 
 - Added private `staged_ast_enrichment.dart`. `FrozenStagedRegistry` deeply owns caller-completed alias/relative/

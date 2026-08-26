@@ -15,7 +15,7 @@ answers:
   - "what did FUTURE-PARITY-BACKLOG.14.7.0 audit"
   - "what must happen before general staged AST enrichment"
 date: 2026-08-25
-status: current runtime audit; private Perl and Rust admission complete; Dart current-depth authority dormant under .14.7.5.2
+status: current runtime audit; private Perl and Rust admission complete; Dart recursive authority dormant under .14.7.5.3
 tags: [staged-parsing, parse-job, diagnostics, registry, policies, recursive-queue, source-location, backend-parity]
 evidence: "Toolbox-first source/runtime proof establishes the shipped boundary: five source backends/six runtimes implement only actionir-body.spec/action_block, one-depth ordering, fixed cache identity, and function-specific replace_field/body_ast/fail. FUTURE-PARITY-BACKLOG.14.7.1 repairs wrong-top diagnostic parity. FUTURE-PARITY-BACKLOG.14.7.2 adds the separate executable neutral v2 authority. Perl .14.7.3.1-.3 now add a dormant private marker/provenance carrier, caller-frozen pure resolution/cache, all policies/detachment, breadth-first recurrence, chain/resource bounds, and source-rebased diagnostics. They add no reconstructed/generated/emitted carriers, admission, rollout, or public authoring. Those remain .14.7.3.4-.10-owned."
 evidence_update_2026_08_26_perl_admission: "FUTURE-PARITY-BACKLOG.14.7.3.4 adds four fresh-authority Perl routes, exact phase-0/canonical admission, and Perl-only rollout promotion. Public authoring, generated format, later backends, recurrence, and outward surfaces remain unchanged or pending."
@@ -27,6 +27,7 @@ evidence_update_2026_08_26_rust_admission: "FUTURE-PARITY-BACKLOG.14.7.4.4 const
 evidence_update_2026_08_26_dart_dormant_red: "FUTURE-PARITY-BACKLOG.14.7.5.0 freezes Dart's exact next boundary without production changes. Assignment-form parse_job remains ActionAssignScalarExpr(ActionCallExpr), native and reconstructed execution diagnose unknown_helper, generated-plan and independently analyzed/executed emitted routes preserve that rejection, function-body v1 stays GREEN, and only the final dedicated-marker/typed-provenance assertion fails. Ordinary/canonical discovery and Dart rollout remain unchanged; .14.7.5.1 is next."
 evidence_update_2026_08_26_dart_marker_provenance: "FUTURE-PARITY-BACKLOG.14.7.5.1 replaces only exact assignment-form parse_job with ActionStagedParseJobExpr, strict literal/static and recognition-effect closure, detached staged_parse_job_v2 data, and typed direct/ordered-derived Unicode-scalar provenance proven from live regex matches. Seven dormant groups and four logical routes agree; only .14.7.5.2 caller-frozen resolution/cache/result/failure authority remains RED. Function-body v1, neutral 85 mutations, discovery, rollout, generated format, public, and outward truth do not move."
 evidence_update_2026_08_26_dart_current_depth_authority: "FUTURE-PARITY-BACKLOG.14.7.5.2 adds a separate private Dart general-v2 FrozenStagedRegistry and one-depth enrichStagedCurrentDepth path without widening staged_parser_registry.dart. Pure caller-frozen selection, exact identities, plan-only caching, typed current-depth order, fresh sibling state, detached atomic stitching, and all policies pass. Only .14.7.5.3 recurrence/bounds/rebasing is RED; discovery, rollout, formats, v1, public, and outward truth do not move."
+evidence_update_2026_08_27_dart_recursive_authority: "FUTURE-PARITY-BACKLOG.14.7.5.3 adds private enrichStagedRecursively breadth-first queues, strict chain/cycle checks, shared cancellation/deadline/resource authority, expiring safe points, and direct/ordered-derived source rebasing without widening the v1 adapter. Complete-depth target reservation closes a latent pre-callback conflict. Only .14.7.5.4 carriers/admission/rollout remain RED; discovery, formats, public, and outward truth do not move."
 root_cause: "The first prototype deliberately separated a generic-looking registry record from a narrow trusted function-body integration. Compile helpers in Perl, Rust, and Dart were shaped around loaded parser identity plus top rule, so they synthesized a placeholder diagnostic record; Julia and Lua were implemented later with the complete job parameter but their formatter omitted payload_kind. Success-path and resolve-phase tests covered real context, but no cross-backend compile-phase assertion locked the ADR 0015 fields. Leaf .14.7.1 passes the normalized job through the three compile boundaries, adds payload_kind to the two later formatters, and locks all five source routes/six runtimes without expanding staged behavior."
 last_verified: 2026-08-26
 reverify:
@@ -86,12 +87,14 @@ locations rebase through direct or ordered-derived provenance. One host-only see
 registry/cache/recursive authority for each top-level execution, and enrichment runs only after the complete parent
 AST through native, reconstructed, generated-plan, and independently compiled emitted routes. The ordinary GREEN
 consumer is registered exactly once in canonical CI; generated format and public authoring remain unchanged.
-Dart `.14.7.5.0` now freezes the corresponding pre-implementation boundary in `test_dormant/`. The current
-function-body-v1 path stays GREEN, a general `expr-v1` job is denied at resolve, and exact assignment-form
-`parse_job(...)` remains one generic `ActionCallExpr`. Native and reconstructed routes diagnose `unknown_helper`;
-generated-plan and independently loaded emitted routes wrap the same rejection. Four pre-boundary tests pass and
-one final assertion names the missing dedicated marker and typed provenance. No production, discovery, rollout,
-format, public, or outward surface moves; `.14.7.5.1` owns that missing carrier.
+Dart `.14.7.5.0-.3` now advance the same excluded `test_dormant/` consumer through its complete private authority.
+The function-body-v1 adapter stays GREEN while exact assignment-form `parse_job(...)` becomes one inert typed
+marker. A separate frozen resolver/cache/policy engine settles complete depths breadth-first, rejects exact cycles
+and non-decreasing lineage, spends shared cancellation/deadline/step/call/depth/result/diagnostic authority,
+expires callback safe points, and rebases direct/ordered-derived child diagnostics. Complete-depth target claims
+are reserved before callbacks, including cross-plan conflicts. Eighteen groups pass and only `.14.7.5.4` fresh
+carriers, production integration, admission, and Dart rollout remain RED; format, public, and outward surfaces do
+not move.
 
 The dependency plan then separates neutral contract, each backend, exact five-source/six-runtime recurrence,
 public `parse_job(...)` authoring, and independent recomposition. General staged dispatch reuses the typed source
@@ -110,5 +113,7 @@ Related: [[function-body-staged-registry-dispatch]], [[staged-parser-registry-di
 [[rust-staged-ast-enrichment-marker-provenance]], [[rust-staged-ast-enrichment-current-depth-authority]],
 [[rust-staged-ast-enrichment-recursive-authority]], [[rust-staged-ast-enrichment-carriers-admission]],
 [[dart-staged-ast-enrichment-dormant-red]],
+[[dart-staged-ast-enrichment-current-depth-authority]],
+[[dart-staged-ast-enrichment-recursive-authority]],
 [[progressive-span-dispatch-audit-plan]], and ADRs `0012`,
 `0014`, `0015`, `0016`, `0056`, and `0088`.

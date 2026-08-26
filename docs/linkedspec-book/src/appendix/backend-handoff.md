@@ -765,14 +765,15 @@ exports, check-cfg registration, and conditional dead-code allowance are gone. `
 validation and gap-aware child-dispatch parity are restored, while the private authority stays dormant beside the
 one admitted contract route. `.5.4` historically aligned the Perl snapshot to 79 mutations plus Rust
 `dormant_red`; Rust admission now advances the neutral oracle to 84 mutations and promotes only Rust. Dart/Julia/Lua consumers remain
-pending under `.14.7.5-.7`. Dart `.14.7.5.0-.2` now freeze one exact `test_dormant/` consumer, lower exact
+pending under `.14.7.5-.7`. Dart `.14.7.5.0-.3` now freeze one exact `test_dormant/` consumer, lower exact
 assignment-form `parse_job` to a live-proven private marker, and add a separate caller-frozen pure resolver/cache/
-current-depth policy engine. It selects default top before identity, caches plans only, prepares the full depth,
-isolates sibling state, detaches results, and atomically implements all four result plus three failure policies.
-Twelve groups and all four logical marker routes are GREEN; only `.3` recurrence/bounds/rebasing authority is RED.
-Governance remains at 85 mutations while
-the final path, ordinary/canonical registration, Dart rollout, production, format, and public behavior remain
-unchanged; `.14.7.5.3` is next. Mandatory engineering-notes segment `4990` is finitely authorized at 18 files / 17
+recursive policy engine. It selects default top before identity, caches plans only, prepares complete depths,
+reserves cross-plan targets, isolates sibling state, detaches results, implements all policies, queues returned
+markers breadth-first, enforces strict lineage/shared resources, expires safe points, and rebases direct/derived
+source locations. Eighteen groups and all four logical marker routes are GREEN; only `.4` fresh carriers,
+production integration, admission, and rollout are RED. Governance remains at 85 mutations while the final path,
+ordinary/canonical registration, Dart rollout, format, and public behavior remain unchanged; `.14.7.5.4` is next.
+Mandatory engineering-notes segment `4990` is finitely authorized at 18 files / 17
 manifest lines by ADR `0090`. Dart dormant closeout's mandatory change-history segment `4990` is finitely
 authorized at 23 files / 22 manifest lines by ADR `0091`; no other pressure ceiling changes.
 
