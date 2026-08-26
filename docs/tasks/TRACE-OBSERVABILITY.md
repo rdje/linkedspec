@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `TRACE-OBSERVABILITY`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Overall roadmap — engine observability / developer experience`
 - Created: `2026-06-19`
-- Last updated: `2026-08-26` (`.5.3` repairs the stale authority proof; `.5.4` owns the canonical closeout blocker)
+- Last updated: `2026-08-26` (`.5.4` aligns staged admission proof and canonically closes corrective `.5`)
 - Owner: repo-local workflow
 
 ## Goal (user directive, 2026-06-19)
@@ -384,7 +384,7 @@ Coverage plan:
     primitive coverage; Rust runtime trace controls tests; mdBook; Knowledge Map; memory/doctrine; whitespace;
     local CI.
   Commit: `pending` (`TRACE-OBSERVABILITY.4.5 - close trace parity proof`)
-- ID: `TRACE-OBSERVABILITY.5` · Status: `active` (2026-08-26; corrective children `.1-.3` complete; `.4` pending); Goal: Repair
+- ID: `TRACE-OBSERVABILITY.5` · Status: `done` (2026-08-26; corrective children `.1-.4` complete); Goal: Repair
   the Rust trace/progressive proof defects exposed by focused and canonical verification without changing untraced
   behavior, trace controls, event schemas, or other backends; Depends on: closed `.4.5` parity proof and exact clean
   discovery commit `3d509616aad854b6ce2f5ddaebc423024e865f84`.
@@ -538,27 +538,45 @@ Coverage plan:
   and the Rust consumer is already `dormant_red`, while that proof still expects 78 / `pending_absent`. `.5.4` owns
   that repair and canonical closeout. Commit subject is `TRACE-OBSERVABILITY.5.3 - align progressive authority proof`;
   no push.
-- ID: `TRACE-OBSERVABILITY.5.4` · Status: `pending` (task-tree-first ownership established 2026-08-26; activate only
-  after the exact clean `.5.3` landing); Goal: Align the Perl staged-AST admission consumer's immutable inventory
+- ID: `TRACE-OBSERVABILITY.5.4` · Status: `done` (`canonical-signoff-complete` 2026-08-26; task-tree-first from exact clean
+  `0411758f061a444d8d5f64cc7c5d3e5816937c35`; no push); Goal: Align the Perl staged-AST admission consumer's immutable inventory
   snapshot with the already-landed Rust staged marker state, then canonically close corrective `.5` and this tree.
   Evidence: exact staged canonical execution of `t/staged_ast_enrichment_perl_contract.t` passes 141/143 and fails
   only because it expects 78 neutral mutations instead of the current 79 and Rust `pending_absent` instead of the
-  current `dormant_red`; the already-committed `.14.7.4.1` Rust marker/provenance leaf owns those truth advances.
+  current `dormant_red`; Git proves `.14.7.4.0` commit `e37a8b77` owns both neutral truth advances.
   Acceptance: from clean `.5.3`, prove the exact Git origin and current inventory values; change only those two
   stale expected values; retain all 143 Perl assertions, production behavior, rollout, registries, generated
   formats, public/outward surfaces, and other backends; run focused staged governance plus exact staged receipt-bound
   `bash tools/run_ci_local.sh`; synchronize task, Knowledge if a new durable fact is established, roadmaps,
-  architecture/Toolbox, mdBook, live docs, and memory; commit atomically and clear the brief. Declare its canonical
-  verification tier and trigger only on exact clean activation, after `.5.3` lands.
-  Checklist: [ ] exact clean activation [ ] Knowledge/history retrieval [ ] Git-origin proof [ ] 141/143 reproduce
-  [ ] two-value snapshot repair [ ] 143/143 focused GREEN [ ] staged governance/no-drift [ ] durable synchronization
-  [ ] exact staged canonical GREEN/receipt [ ] atomic commit/brief/clean handoff.
+  architecture/Toolbox, mdBook, live docs, and memory; perform any mechanically required bounded-history rotation
+  and finite-capacity authorization; commit atomically and clear the brief.
+  Verification tier: `canonical` — this leaf repairs a canonical admission proof and performs parent/tree closeout.
+  Focused checks: exact Git-origin diff; 141/143 RED then 143/143 GREEN; neutral staged governance; live-status
+  sixteen-row rotation; engineering-notes rollover segment `4990`; exact eighteen-file/seventeen-manifest-line
+  measurement plus ADR `0090` route authorization; Knowledge, mdBook, histories, memory, doctrines, scope, whitespace.
+  Canonical trigger: `admission proof + parent/tree closeout` — exact staged candidate must pass canonical local CI.
+  Checklist: [x] exact clean activation [x] Knowledge retrieval [x] Git-origin proof [x] 141/143 reproduce
+  [x] two-value snapshot repair [x] 143/143 focused GREEN [x] staged governance/no-drift [x] bounded-history controls
+  [x] durable synchronization
+  [x] exact staged canonical GREEN/receipt [x] atomic commit/brief/clean handoff.
+  Activation evidence: exact clean `git status --short --untracked-files=all` at
+  `0411758f061a444d8d5f64cc7c5d3e5816937c35`; zero-byte brief; no rendered book; no background job. Knowledge Map
+  routes the staged carrier/admission fact to `docs/knowledge/perl-staged-ast-enrichment-carriers-admission.md`.
+  Completion evidence: Git `-S` and exact `e37a8b77` diff prove Rust dormant-RED `.14.7.4.0` advanced neutral
+  mutations 78→79 and Rust consumer `pending_absent`→`dormant_red` without updating the already-admitted Perl
+  snapshot. The two expected values now match that immutable neutral truth; exact Perl execution is 143/143 and
+  staged governance reports 79 mutations, five consumers/six routes, 37 diagnostics, nine rollout legs, and 35
+  owners. Knowledge, rendered/inspected mdBook, bounded histories, memory, all nine doctrines, exact no-production/
+  no-registry/no-format/no-rollout/no-public/no-other-backend guards, whitespace, mandatory engineering-notes
+  rollover segment `4990`, and the staged receipt-bound canonical local gate pass. Commit subject is
+  `TRACE-OBSERVABILITY.5.4 - align staged admission proof`; no push.
+  Corrective parent `.5` and this tree close; staged Rust `.14.7.4.2` resumes from the clean handoff.
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `.5.4` | `pending` | Repair the stale staged-admission snapshot and canonically close corrective `.5`; then resume staged Rust `.14.7.4.2`. |
+| — | _(empty)_ | `done` | Corrective `.5.1-.4` are complete; resume staged Rust `.14.7.4.2` after the clean `.5.4` landing. |
 
 ## Decisions
 
@@ -641,12 +659,15 @@ Coverage plan:
   contract consumer. It requires the tracked input and cfg command once while continuing to forbid any authority
   route. A canonical attempt then exposed a separately stale staged-admission snapshot, so `.5.3` lands focused and
   `.5.4` owns the proof repair plus parent/tree closeout.
+- `2026-08-26`: corrective `.5.4` changes only the already-admitted Perl consumer's frozen neutral snapshot. Git
+  assigns 79 mutations and Rust `dormant_red` to `.14.7.4.0` commit `e37a8b77`; 143/143 plus canonical proof close
+  the corrective parent/tree without staged runtime or rollout movement.
 
 ## Open Questions
 
 - Required backend parity: the original Perl/Rust proof closed at `.4.5`; corrective `.5.1-.2` restore later-
-  discovered validation and gap-aware event regressions, so Rust renewal is current. `.5.4` affects only staged
-  admission proof/closeout; future variants must satisfy the mdBook checklist before claiming trace parity.
+  discovered validation and gap-aware event regressions, and `.5.3-.4` repair proof drift only. Rust renewal and
+  corrective closeout are current; future variants must satisfy the mdBook checklist before claiming trace parity.
 - Auto-instrumentation (`Devel::*`/aspect style) remains not the preferred first path: generated template instrumentation
   and owner-level trace wrappers are more portable and reviewable.
 
@@ -681,6 +702,7 @@ Coverage plan:
 | `2026-08-26` | `.5.1` | exact ordinary/traced RED then equality GREEN; valid quiet trace control; core trace 7/7; progressive ordinary 0/0 + cfg contract 1/1; private authority 3/4 root-cause probe; progressive/recognition/staged governance; fmt; Knowledge; rendered mdBook; histories; memory/doctrines; scope/whitespace | PASS — one existing validator call restores traced progressive static-validation equality without valid-result, event-schema, runtime, format, rollout, public, or other-backend movement. The separately stale private-authority route snapshot is owned by `.5.3`. |
 | `2026-08-26` | `.5.2` | exact complete trace target RED 9/11 then GREEN 11/11; source emitter 6/6; Rust gap admission 1/1; core trace 7/7; gap/recognition/progressive/staged governance; fmt; Knowledge; rendered mdBook; histories; memory/doctrines; scope/whitespace | PASS — normal and typed-gap child entry share one traced local seam per executor and emit one existing dispatch/result pair with unchanged results, event schema, format, rollout, public surface, and other backends. |
 | `2026-08-26` | `.5.3` | exact cfg authority RED 3/4 then GREEN 4/4; ordinary authority/contract 0/0 each; exact Git/route cardinality; progressive/recognition/staged/gap governance; fmt; Knowledge; rendered mdBook; histories; memory/doctrines; scope/whitespace | PASS focused — private authority remains unrouted and the admitted contract input/command remain exact. A later canonical attempt stopped at 141/143 on the separately stale staged-admission snapshot now owned by `.5.4`. |
+| `2026-08-26` | `.5.4` | exact 141/143 RED then 143/143 GREEN; Git-origin proof; neutral staged governance 79 mutations/five consumers/six routes; Knowledge; rendered mdBook; histories; memory/doctrines; exact no-drift; staged receipt-bound `bash tools/run_ci_local.sh` | PASS canonical — two immutable Perl expectations now reflect Rust dormant-RED truth from `e37a8b77`; corrective `.5`/tree close without production, registry, format, rollout, public, or other-backend movement. |
 
 ## Commit Log
 
@@ -723,6 +745,8 @@ Coverage plan:
 - `2026-08-26`: Closed focused `.5.3`; the private authority proof distinguishes its own dormancy from the exact
   admitted contract route. Canonical verification exposed the separate `.5.4` staged-admission snapshot blocker,
   which must close before staged Rust `.14.7.4.2` resumes.
+- `2026-08-26`: Closed `.5.4`, corrective `.5`, and this tree; the admitted Perl proof now freezes 79 mutations and
+  Rust `dormant_red`, passes 143/143 plus canonical signoff, and returns the clean frontier to staged Rust `.14.7.4.2`.
 - `2026-07-04`: Closed `.1` read-only coverage audit. Current trace is useful but not exhaustive: pipeline
   boundaries, parser/rule handler wrappers, selected decisions, dumps, and mark/capture events are traced; generated
   handler branch/control-flow decisions and most ActionIR owner branches are not. `.2` is now the PNT frontier.

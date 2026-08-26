@@ -2,23 +2,26 @@
 
 ## Current Activity
 
-- Focused `TRACE-OBSERVABILITY.5.3` repairs the stale private progressive-authority route proof: authority stays
-  unrouted while the separate admitted contract input and cfg command are each required exactly once.
-- Cfg authority is 4/4 and ordinary authority/contract discovery is 0/0 each. Its canonical attempt exposed the
-  separate `.5.4` stale Perl staged-admission snapshot; full documented Rust trace parity remains current.
-- `.5.4` is the next clean-handoff frontier before staged Rust `.14.7.4.2` resumes.
+- `TRACE-OBSERVABILITY.5.4` aligns the admitted Perl staged-AST proof with neutral Rust dormant-RED truth: 79
+  mutations and Rust `dormant_red`, both introduced by `.14.7.4.0` commit `e37a8b77`.
+- The exact Perl consumer is 143/143 and staged governance is green without production, registry, format, rollout,
+  public, or other-backend movement. Corrective `.5.1-.4` and the trace tree are canonically complete.
+- Staged Rust `.14.7.4.2` is the next clean-handoff frontier.
 
 ## Latest Completed Slice
 
-- `.5.3` distinguishes dormant private authority from its admitted contract peer, passes cfg authority 4/4, and
-  keeps both ordinary targets 0/0 under focused proof without production movement.
+- `.5.4` repairs only two stale Perl expectations, passes 143/143 plus canonical proof, and closes corrective `.5`
+  without staged runtime or rollout movement.
 
 ## Next Action
 
-- Commit `.5.3`, clear the brief, verify the clean handoff, then activate `.5.4`, align the two stale staged-
-  admission expectations, and run the exact receipt-bound canonical gate.
+- Commit `.5.4`, clear the brief, verify the clean handoff, then activate staged Rust `.14.7.4.2` and implement only
+  its caller-frozen resolution/cache/result/failure authority slice.
 
 ## Recent Completions
+
+- `2026-08-26` — `TRACE-OBSERVABILITY.5.4` aligns 79 mutations and Rust `dormant_red`, passes 143/143 plus
+  canonical proof, and closes corrective `.5` without runtime or rollout movement.
 
 - `2026-08-26` — `TRACE-OBSERVABILITY.5.3` keeps private authority dormant while requiring the admitted contract
   route once and passes focused 4/4; its canonical attempt exposes the separately owned `.5.4` proof blocker.
@@ -64,9 +67,6 @@
 
 - `2026-08-25` — `.14.6.7` binds neutral plus six private runtime routes and four support ledgers, advances only
   typed `progressive_span_dispatch` to 12/2/170, and keeps behavioral governance at 7/9/112.
-
-- `2026-08-25` — `.14.6.6.4` independently recomposes carrier 178/178 and authority 273/273 on both Lua ABIs,
-  all admitted peers and governance unchanged, repairs bounded current projections, and closes `.14.6.6`.
 
 ## History
 

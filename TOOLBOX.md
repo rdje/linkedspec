@@ -300,7 +300,9 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   checklist before making the same claim.
 - **Corrective proof closeout:** focused `TRACE-OBSERVABILITY.5.3` keeps the cfg private progressive-authority test
   a 4/4 target absent from canonical CI while requiring the separate tracked/cfg admitted contract consumer once.
-  `.5.4` owns the stale staged-admission snapshot and the corrective tree's canonical closeout.
+  `.5.4` aligns the admitted Perl snapshot with 79 mutations and Rust `dormant_red`; 143/143 plus canonical proof
+  close the corrective tree without production, rollout, registry, format, or public movement. Mandatory notes
+  segment `4990` and ADR `0090` retain exact bounded-history pressure controls at 18 files / 17 manifest lines.
 - **Staged-registry boundary audit:** before changing general staged AST behavior, retrieve
   [[general-staged-ast-current-boundary]] and probe the registry rather than inferring policy semantics from its
   JSON fields. The five current registries execute only the one-depth

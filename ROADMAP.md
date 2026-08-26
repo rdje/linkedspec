@@ -44,15 +44,17 @@ progressive public no-drift `.14.6.8` now binds that driver and closes at 9/9/11
 mandatory engineering-notes rollover publishes segment `4991`;
 ADR `0087` advances only finite engineering-notes collection/manifest capacity to 17/16.
 
-Corrective trace work remains active under `TRACE-OBSERVABILITY.5`. `.5.1`
+Corrective trace work is complete under `TRACE-OBSERVABILITY.5`. `.5.1`
 restores the ordinary progressive static validator on the traced compiler route and locks exact malformed-program
 diagnostic equality without changing valid results, trace schemas, formats, rollout, or public surfaces. `.5.2`
 now restores exactly one existing `child_dispatch` / result pair for both ordinary and gap-aware interpreted/
 generated child entry; complete trace controls are 11/11 and full trace parity is current again. Focused `.5.1` proof also
 found that the private progressive-authority test retained a pre-admission no-canonical-route assertion after the
 Rust contract was intentionally admitted; `.5.3` now distinguishes dormant authority from the one tracked/cfg
-contract route under focused proof. Its canonical attempt exposed a separately stale staged-admission snapshot;
-`.5.4` owns that two-value proof repair and canonical closeout before `FUTURE-PARITY-BACKLOG.14.7.4.2` resumes.
+contract route under focused proof. `.5.4` aligns the admitted Perl snapshot with Rust dormant-RED truth from
+`e37a8b77` (79 mutations and `dormant_red`), passes 143/143 plus canonical closeout, and returns the clean frontier
+to `FUTURE-PARITY-BACKLOG.14.7.4.2`. Its mandatory engineering-notes rollover publishes immutable segment `4990`;
+ADR `0090` advances only finite collection/manifest capacity to 18 files / 17 lines.
 
 Expressive `.spec` self-containment and an optional EBNF-like authoring profile are an accepted long-horizon
 direction under ADR `0064` and `SPEC-LANGUAGE-SELF-CONTAINMENT`. Self-containment means portable closure for

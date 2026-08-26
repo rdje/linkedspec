@@ -383,15 +383,15 @@ is_deeply(
   diagnostics => 37,
   rollout_legs => 9,
   ownership_rows => 35,
-  mutations => 78,
+  mutations => 79,
  },
  'freezes every neutral inventory count',
 );
 is(scalar(@{$contract->{diagnostics}}), 37, 'freezes all thirty-seven diagnostic contracts');
 is_deeply(
  [map { $_->{status} } @{$contract->{backend_consumers}}],
- ['complete', ('pending_absent') x 4],
- 'promotes only the exact Perl consumer to complete',
+ ['complete', 'dormant_red', ('pending_absent') x 3],
+ 'promotes only Perl to complete while Rust remains a dormant RED',
 );
 is_deeply(
  $contract->{backend_consumers}[0],

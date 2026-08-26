@@ -120,8 +120,9 @@ static-validation equality with an exact diagnostic regression. `.5.2` now resto
 dispatch/result event pair on normal and gap-aware interpreted/generated entry; trace controls pass 11/11 with
 unchanged results and Rust trace parity is current again. `.5.3` owns the stale private progressive-authority route
 assertion found by `.5.1`; it now keeps the authority target dormant while requiring the separate admitted contract
-input/command once. `.5.4` owns the stale staged-admission snapshot and canonical closeout before staged `.2`
-resumes after clean handoff.
+input/command once. `.5.4` aligns the admitted Perl staged snapshot to 79 mutations plus Rust `dormant_red`, passes
+143/143 and canonical closeout, and returns the clean frontier to staged `.2`. Mandatory engineering-notes segment
+`4990` is finitely authorized at 18 files / 17 manifest lines by ADR `0090`.
 
 Rust's exact four-test consumer now runs under ordinary Cargo discovery and as a required canonical-CI leg. It
 proves the immutable value core and projection boundary across native, reconstructed, and generated-plan execution;

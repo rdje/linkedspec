@@ -1,13 +1,13 @@
 # MEMORY
 
-- activation_commit: `e9d28f69f6c0357eccf2237952eca1b5debdfcbe` — exact clean gap-trace base for
-  task-tree-first corrective `TRACE-OBSERVABILITY.5.3`; brief cleared; no push.
-- latest_completed_leaf: intended `TRACE-OBSERVABILITY.5.3 - align progressive authority proof`; private authority
-  remains unrouted/4-of-4 while the separate admitted contract input/command is required once.
-- active_work_unit: none after the intended `.5.3` commit; corrective `.5` remains active with `.5.4` pending.
-- next_action: from the exact clean `.5.3` commit, activate `TRACE-OBSERVABILITY.5.4`, repair only the stale staged-
-  admission snapshot, and canonically close `.5` before staged Rust `.14.7.4.2` resumes.
-- in_flight_uncommitted: none after the intended `.5.3` commit; no background job remains.
+- activation_commit: `0411758f061a444d8d5f64cc7c5d3e5816937c35` — exact clean `.5.3` base for task-tree-first
+  corrective `TRACE-OBSERVABILITY.5.4`; brief cleared; no push.
+- latest_completed_leaf: intended `TRACE-OBSERVABILITY.5.4 - align staged admission proof`; Perl proof matches 79
+  mutations/Rust `dormant_red`, passes 143/143 plus canonical signoff, and closes corrective `.5`.
+- active_work_unit: none after the intended `.5.4` commit; corrective `.5` and the trace tree are done.
+- next_action: from the exact clean `.5.4` commit, activate staged Rust `FUTURE-PARITY-BACKLOG.14.7.4.2` and
+  implement only caller-frozen resolution/cache/result/failure authority.
+- in_flight_uncommitted: none after the intended `.5.4` commit; no background job remains.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -55,6 +55,6 @@
   options, live-span direct/ordered-derived provenance, malformed/transaction closure, and four equal logical
   carrier observations. Only `.4.2` caller-frozen authority remains RED; Rust rollout remains pending. Focused
   proof exposed two pre-existing trace defects; `.5.1` fixes traced progressive validation and `.5.2` fixes gap-
-  aware child-dispatch events. `.5.3` repairs the separately exposed stale authority-route assertion; `.5.4` owns
-  the stale staged-admission snapshot and corrective closeout.
-- latest_bootstrap_read: 2026-08-26 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox are reviewed. `.5.3` changes only proof topology: private authority remains dormant, admitted contract remains exact, and production/generated/format/rollout/public/other-backend behavior is fixed. Intended commit: `TRACE-OBSERVABILITY.5.3 - align progressive authority proof`; `.5.4` is next from clean handoff.
+  aware child-dispatch events. `.5.3` repairs the stale authority route; `.5.4` aligns the admitted Perl snapshot to
+  Rust dormant-RED truth and closes the corrective tree.
+- latest_bootstrap_read: 2026-08-26 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox are reviewed. `.5.4` changes only two Perl proof expectations to current neutral truth from `e37a8b77`; production/registry/format/rollout/public/other-backend behavior is fixed. Intended commit: `TRACE-OBSERVABILITY.5.4 - align staged admission proof`; staged Rust `.14.7.4.2` is next from clean handoff.

@@ -756,10 +756,12 @@ Generated-source v2, function-body v1, public inventory, and outward surfaces re
 discovery runs zero tests, while opt-in execution preserves current v1 and proves an exclusive inert marker,
 strict literal options, exact text, typed direct/ordered-derived provenance, malformed/smuggling/transaction
 denials, and four equal logical carrier observations. It is absent from canonical CI, contains no live execution
-authority, and Rust rollout remains pending. `TRACE-OBSERVABILITY.5.1-.3` are now focused-complete: traced progressive
+authority, and Rust rollout remains pending. `TRACE-OBSERVABILITY.5.1-.4` are now complete: traced progressive
 validation and gap-aware child-dispatch parity are restored, while the private authority stays dormant beside the
-one admitted contract route. `.5.4` owns the stale staged-admission snapshot and canonical closeout before
-`.14.7.4.2` resumes. Dart/Julia/Lua consumers remain absent under `.14.7.5-.7`.
+one admitted contract route. `.5.4` aligns the Perl snapshot to 79 mutations plus Rust `dormant_red`, passes
+143/143 and canonical closeout, and returns the clean frontier to `.14.7.4.2`. Dart/Julia/Lua consumers remain
+absent under `.14.7.5-.7`. Mandatory engineering-notes segment `4990` is finitely authorized at 18 files / 17
+manifest lines by ADR `0090`; no other pressure ceiling changes.
 
 Progressive dispatch is a separate synchronous path under `FUTURE-PARITY-BACKLOG.14.6`. Audit `.14.6.0` proves
 that none of these registries can invoke a normal loaded spec while a parser is active. The portable design uses

@@ -68,8 +68,13 @@ unchanged `child_dispatch` / result pair; trace controls pass 11/11 and gap/gene
 stale private progressive-authority route assertion discovered during `.5.1` proof is separately owned by `.5.3`.
 `.5.3` now repairs that proof by continuing to forbid the authority target while requiring the separately admitted
 contract input and cfg command exactly once. Cfg authority is 4/4 and ordinary discovery remains 0/0 for both
-targets. Its canonical attempt exposed a stale Perl staged-admission snapshot already advanced by Rust `.14.7.4.1`;
-`.5.4` owns that proof repair and canonical closeout before `.14.7.4.2` resumes.
+targets. `.5.4` aligns the stale Perl staged-admission snapshot with the 79-mutation / Rust-`dormant_red` truth
+introduced by `.14.7.4.0` commit `e37a8b77`; 143/143 plus canonical proof close corrective `.5`. `.14.7.4.2`
+resumes from the clean handoff.
+
+This closeout's mandatory engineering-notes rollover publishes immutable segment `4990`. ADR `0090` advances
+only finite route controls from 17/16 to 18 files / 17 manifest lines; the measured collection remains
+23,799/27,000 lines and 2,540,090/3,145,728 bytes, and every other bounded-history control remains unchanged.
 
 The same slice's mandatory complete-record rollover publishes immutable change-history segment `4991`. ADR `0089`
 advances only finite route controls from 21/20 to 22 files / 21 manifest lines; the measured collection remains
@@ -82,8 +87,8 @@ id/path/parser/top/payload/span/failure context plus resolved built-in identity.
 diagnostics: success, resolution, execution, stitching, policies, queue depth, formats, capabilities, and outward
 surfaces stay fixed. Executable neutral contract `.2` and the Perl behavioral parent `.3` are complete; backend parents `.4-.7`, recurrence `.8`,
 public authoring/closeout `.9`, and independent recomposition `.10` remain dependency-frozen behind it. Every
-later runtime rollout leg and public/outward surface therefore remains pending; corrective
-`TRACE-OBSERVABILITY.5.4` is the next clean frontier before Rust caller-frozen authority `.4.2` resumes.
+later runtime rollout leg and public/outward surface therefore remains pending; Rust caller-frozen authority `.4.2`
+is the next clean frontier now that corrective `TRACE-OBSERVABILITY.5.1-.4` are complete.
 
 ## Typed transaction safety now composes the complete recognition authority
 

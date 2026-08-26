@@ -10,6 +10,20 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-26 — TRACE-OBSERVABILITY.5.4 — align staged admission proof
+
+- Reproduced the exact admitted Perl staged-AST consumer at 141/143: only its frozen neutral mutation count and
+  backend-consumer lifecycle list lagged current contract truth.
+- Proved Rust dormant-RED commit `e37a8b77` advanced mutations 78→79 and Rust `pending_absent`→`dormant_red` while
+  leaving the already-admitted Perl consumer snapshot unchanged.
+- Updated exactly those two expected values. Perl passes 143/143; neutral staged governance reports 79 mutations,
+  five consumers/six routes, 37 diagnostics, nine rollout legs, and 35 owners.
+- No production, registry, generated format, rollout, public/outward, or other-backend behavior changes. Exact
+  receipt-bound canonical proof closes corrective `.5` and the trace tree.
+- The mandatory engineering-notes pressure rollover archives exact prior records as immutable segment `4990`;
+  ADR `0090` advances only finite collection/manifest capacity to 18 files / 17 lines, and the current shard is
+  242/512 lines.
+
 ## 2026-08-26 — TRACE-OBSERVABILITY.5.3 — align progressive authority proof
 
 - Reproduced the cfg-enabled private Rust progressive-authority target at 3/4: all semantic authority tests passed,
