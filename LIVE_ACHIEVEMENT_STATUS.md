@@ -2,26 +2,27 @@
 
 ## Current Activity
 
-- Rust `.14.7.4.1` implements the private dormant staged declaration marker and typed provenance without execution
-  authority, route admission, rollout, format, or public movement.
-- Ordinary discovery remains zero tests. The opt-in path proves strict annotation/options/denial behavior, exact
-  direct/ordered-derived provenance, and equal native/reconstructed/generated/emitted logical markers before only
-  `.14.7.4.2` caller-frozen authority remains RED.
-- Focused proof found two pre-existing Rust validation/trace defects. The clean post-commit pivot must task-tree-own
-  and repair them before staged `.14.7.4.2`; neutral governance remains 79 mutations.
+- `TRACE-OBSERVABILITY.5.1` restores the progressive static validator on Rust's traced compiler route. Exact
+  malformed-program rejection now matches ordinary compilation; valid traced/untraced results remain equal.
+- `.5.2` next owns missing gap-aware interpreted/generated child-dispatch lifecycle events. `.5.3` then owns the
+  stale private progressive-authority no-canonical-route assertion exposed by `.5.1` focused proof.
+- Staged Rust `.14.7.4.2` remains dependency-frozen until both remaining corrective leaves land cleanly.
 
 ## Latest Completed Slice
 
-- `.14.7.4.1` adds one exclusive static `Expr::StagedParseJobMarker`, strict literal options, exact materialized
-  text, typed live-span direct/ordered-derived provenance, inert detached `staged_parse_job_v2`, and four equal
-  logical carrier observations. Canonical CI has zero references and Rust rollout remains pending.
+- `.5.1` adds the one missing existing validator call plus an exact traced/ordinary rejection regression. Core
+  trace proof, ordinary dormant discovery, the admitted four-route progressive contract, and governance pass;
+  no trace schema, valid result, runtime, format, rollout, public, or other-backend surface changes.
 
 ## Next Action
 
-- Complete focused signoff, commit `.14.7.4.1`, clear the brief, verify the clean handoff, then activate dedicated
-  defect leaves for traced progressive validation and gap-aware child-dispatch trace events before `.14.7.4.2`.
+- Commit `.5.1`, clear the brief, verify the clean handoff, then activate `.5.2` and restore gap-aware interpreted/
+  generated child-dispatch trace events before `.5.3` repairs the stale authority proof.
 
 ## Recent Completions
+
+- `2026-08-26` — `TRACE-OBSERVABILITY.5.1` restores exact ordinary/traced progressive static-validation equality
+  with one existing-validator call and a diagnostic-equality regression; valid trace results remain unchanged.
 
 - `2026-08-26` — `.14.7.4.1` adds Rust's inert detached marker, strict static annotation contract, live-span typed
   provenance, and four equal dormant logical carriers; only `.2` authority remains RED.
@@ -67,9 +68,6 @@
 
 - `2026-08-25` — `.14.6.6.2` makes the dual-ABI final path GREEN at 178/178 through one exclusive node and four
   fresh-authority carriers, retains authority 273/273 and rollout 5/9/106, and keeps the consumer dormant.
-
-- `2026-08-25` — `.14.6.6.1` adds one private shared Lua authority with 273/273 assertions per ABI while the
-  separate final path remains 85-pass/one-RED and all carrier, format, discovery, and rollout surfaces stay fixed.
 
 ## History
 

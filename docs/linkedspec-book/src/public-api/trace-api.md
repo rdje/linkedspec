@@ -90,10 +90,12 @@ The complete 175-test, 61x2 CLI, and 105-corpus Dart gate passes.
 
 ## Rust variant trace status
 
-As of `TRACE-OBSERVABILITY.4.5`, the Rust variant claims trace parity for the mdBook-documented external capability
-contract. This claim is behavioral: Rust does not reuse Perl package names or every Perl-internal event namespace,
-but it exposes equivalent documented levels, controls, sinks, event classes, default-quiet behavior, and regression
-proof.
+`TRACE-OBSERVABILITY.4.5` established the original Rust parity claim for the mdBook-documented external capability
+contract. Corrective verification has since reopened that claim: `.5.1` restores exact ordinary/traced progressive
+static-validation parity, while `.5.2` still owns missing `child_dispatch` lifecycle events on gap-aware child-entry
+routes. Rust therefore retains the documented controls and event model below but does not renew the complete
+parity claim until `.5.2` closes. The contract is behavioral: Rust does not reuse Perl package names or every
+Perl-internal event namespace.
 Rust now has ordered trace levels, configuration, stdout/route/mirror sinks, reset/truncate behavior, event
 primitives, opt-in traced entrypoints beside the existing quiet entrypoints, and routed debug events for
 `parse_spec`, validation passes, `compile`, dependency-regex mapping, user-function definition parsing, full-spec
@@ -116,6 +118,13 @@ The required Rust mapping is:
 - existing untraced APIs remain default-quiet and output-compatible; explicit traced entrypoints validate trace
   setup, route sinks, emit compile/spec-parser/staged-dispatch/runtime events, and preserve parse/compile/runtime
   results.
+
+Traced compilation is not a validation bypass. `compile_with_trace(...)` and
+`compile_with_trace_emitter(...)` run the same recursive-observation, progressive span-dispatch, staged-parse-job,
+and compiled-regex-slot static validators as ordinary `compile(...)`, in the same order. A residual dedicated
+`dispatch_span(...)` call therefore returns the same
+`LINKEDSPEC_PROGRESSIVE_SPAN_DISPATCH_ERROR:progressive_span_binding_required` diagnostic whether tracing is on
+or off. This corrective guarantee is locked by `TRACE-OBSERVABILITY.5.1`.
 
 The Rust control surface is:
 

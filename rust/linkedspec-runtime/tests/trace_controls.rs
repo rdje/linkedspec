@@ -64,6 +64,29 @@ fn core_traced_entrypoints_match_untraced_outputs_when_quiet() {
 }
 
 #[test]
+fn traced_compile_enforces_progressive_static_contract() {
+    let source = r#"
+Top::
+ I { span = hash("source_id", "input", "start", 0, "end", 1, "provenance", "authored"); return(cat(dispatch_span("expr-v1", "Expr", span))) }
+ /never/
+"#;
+    let spec = parse_spec(source).expect("parse residual progressive call");
+    let ordinary = compile(&spec)
+        .expect_err("ordinary compile must reject residual dispatch_span")
+        .to_string();
+    let traced = compile_with_trace(&spec, TraceConfig::default())
+        .expect_err("traced compile must reject residual dispatch_span")
+        .to_string();
+
+    assert_eq!(traced, ordinary);
+    assert!(
+        traced.contains(
+            "LINKEDSPEC_PROGRESSIVE_SPAN_DISPATCH_ERROR:progressive_span_binding_required"
+        )
+    );
+}
+
+#[test]
 fn engine_traced_entrypoint_matches_untraced_output_when_quiet() {
     let compiled = compile_valid_spec();
     let engine = Engine::new(compiled);

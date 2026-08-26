@@ -115,7 +115,9 @@ through the narrow registry, and lowers exact assignment-form `parse_job` to one
 literal options, exact text, and typed direct/ordered-derived Unicode-scalar provenance. Native, reconstructed,
 generated-plan, and independently compiled emitted logical routes agree. Canonical CI has zero references, Rust
 rollout stays pending, and only `.14.7.4.2` caller-frozen authority remains RED. Focused proof found two unrelated
-pre-existing Rust validation/trace defects; dedicated clean-pivot task ownership precedes `.2`.
+pre-existing Rust validation/trace defects. `TRACE-OBSERVABILITY.5.1` now restores ordinary/traced progressive
+static-validation equality with an exact diagnostic regression. `.5.2` still owns gap-aware child-dispatch trace
+events, and `.5.3` owns the stale private progressive-authority route assertion found by `.5.1`; both precede `.2`.
 
 Rust's exact four-test consumer now runs under ordinary Cargo discovery and as a required canonical-CI leg. It
 proves the immutable value core and projection boundary across native, reconstructed, and generated-plan execution;

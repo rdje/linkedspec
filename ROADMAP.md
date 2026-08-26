@@ -44,6 +44,14 @@ progressive public no-drift `.14.6.8` now binds that driver and closes at 9/9/11
 mandatory engineering-notes rollover publishes segment `4991`;
 ADR `0087` advances only finite engineering-notes collection/manifest capacity to 17/16.
 
+Corrective trace work is active under `TRACE-OBSERVABILITY.5` before staged Rust authority resumes. `.5.1`
+restores the ordinary progressive static validator on the traced compiler route and locks exact malformed-program
+diagnostic equality without changing valid results, trace schemas, formats, rollout, or public surfaces. `.5.2`
+still owns missing gap-aware interpreted/generated `child_dispatch` lifecycle events. Focused `.5.1` proof also
+found that the private progressive-authority test retained a pre-admission no-canonical-route assertion after the
+Rust contract was intentionally admitted; `.5.3` owns that stale proof. Complete and commit `.5.2-.3` cleanly,
+then resume `FUTURE-PARITY-BACKLOG.14.7.4.2`.
+
 Expressive `.spec` self-containment and an optional EBNF-like authoring profile are an accepted long-horizon
 direction under ADR `0064` and `SPEC-LANGUAGE-SELF-CONTAINMENT`. Self-containment means portable closure for
 grammar, recursion, cursor/capture/state, callable/control, transformation, and result objectives—not ambient

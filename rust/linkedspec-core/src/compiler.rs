@@ -227,6 +227,7 @@ fn compile_with_events(spec: &SpecFile, trace: &mut TraceEmitter) -> Result<Comp
     )?;
     dependency_result?;
     validate_recursive_observation_contract(&compiled)?;
+    validate_progressive_span_dispatch_contract(&compiled)?;
     validate_staged_parse_job_contract(&compiled)?;
     validate_compiled_regex_slot_identities(&compiled)?;
 

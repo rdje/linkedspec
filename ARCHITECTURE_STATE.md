@@ -59,10 +59,13 @@ logical marker and `staged_parse_job_v2` sidecar containing no parser, registry,
 scheduler, cache, path, cancellation, budget, queue, or host authority. The sole final RED now names missing
 caller-frozen resolution/cache/result/failure authority owned by `.14.7.4.2`; Rust rollout remains pending.
 
-Focused `.14.7.4.1` proof also exposes two pre-existing Rust defects against its exact clean base: the traced
-compiler route omits the already-current progressive static validator, and gap-aware interpreted/generated child-
-entry trace routes omit required `child_dispatch` lifecycle events. They are not staged-enrichment behavior and
-remain unchanged in this slice; dedicated clean-pivot task-tree leaves must own their repair before `.14.7.4.2`.
+Focused `.14.7.4.1` proof also exposed two pre-existing Rust defects against its exact clean base. Corrective
+`TRACE-OBSERVABILITY.5.1` now repairs the first: `compile_with_events` runs the already-current progressive static
+validator at the same point as ordinary compilation, so traced/untraced malformed-program diagnostics are exact
+equals and valid traced results remain unchanged. Gap-aware interpreted/generated child-entry trace routes still
+omit required `child_dispatch` lifecycle events and remain owned by `.5.2`; the stale private progressive-authority
+route assertion discovered during `.5.1` proof is separately owned by `.5.3`. Neither remaining defect is staged-
+enrichment behavior, and both corrective leaves precede `.14.7.4.2`.
 
 The same slice's mandatory complete-record rollover publishes immutable change-history segment `4991`. ADR `0089`
 advances only finite route controls from 21/20 to 22 files / 21 manifest lines; the measured collection remains
@@ -76,7 +79,7 @@ diagnostics: success, resolution, execution, stitching, policies, queue depth, f
 surfaces stay fixed. Executable neutral contract `.2` and the Perl behavioral parent `.3` are complete; backend parents `.4-.7`, recurrence `.8`,
 public authoring/closeout `.9`, and independent recomposition `.10` remain dependency-frozen behind it. Every
 later runtime rollout leg and public/outward surface therefore remains pending; Rust caller-frozen authority `.4.2`
-follows clean-pivot ownership and repair of the two pre-existing validation/trace defects found by `.4.1` proof.
+follows clean completion of `TRACE-OBSERVABILITY.5.2-.3` now that `.5.1` has restored traced progressive validation.
 
 ## Typed transaction safety now composes the complete recognition authority
 

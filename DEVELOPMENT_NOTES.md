@@ -10,6 +10,16 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-26 (`TRACE-OBSERVABILITY.5.1` — traced progressive validation): clean activation is staged-marker
+  commit `3d509616`; the exact RED proved `compile_with_events` alone omitted
+  `validate_progressive_span_dispatch_contract` while retaining the other three current post-compile validators.
+- One existing-call insertion restores ordinary/traced rejection equality; valid trace results, event namespaces,
+  runtime/generated paths, formats, rollout, public surfaces, and other backends remain unchanged. The new focused
+  regression, core trace controls, dormant/admitted progressive routes, and three governance checkers pass.
+- The cfg private-authority direct dependent is 3/4 because its 2026-08-17 pre-admission route assertion was not
+  updated when commit `5c4d4218` intentionally registered the contract consumer. `.5.3` owns that exact stale proof;
+  `.5.2` first owns the independently known gap-aware child-dispatch trace defect.
+
 - 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.4.1` — Rust staged marker/provenance): exact clean activation is Rust
   dormant-RED commit `e37a8b77`; this focused leaf owns only exclusive static annotation lowering, inert marker
   materialization, typed direct/ordered-derived provenance, and the same consumer's next authority RED.

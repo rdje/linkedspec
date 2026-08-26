@@ -1,13 +1,16 @@
 ---
 id: rust-trace-compile-spec-parser-events
-title: TRACE-OBSERVABILITY.4.3 adds Rust compile/spec-parser/staged-dispatch trace events
+title: Rust traced compilation emits events and enforces the ordinary static validators
 answers:
   - "does Rust currently emit compile trace events"
   - "what did TRACE-OBSERVABILITY.4.3 add"
   - "which Rust trace events existed before runtime branch parity"
   - "does Rust staged parser dispatch trace phases"
   - "can Rust claim trace parity after TRACE-OBSERVABILITY.4.3"
-date: 2026-07-04
+  - "does Rust traced compilation enforce progressive span dispatch validation"
+  - "why did compile_with_trace accept residual dispatch_span calls"
+  - "what did TRACE-OBSERVABILITY.5.1 repair"
+date: 2026-08-26
 status: current
 tags: [trace, observability, rust, parity, staged-parsing, task-tree, mdbook]
 evidence: "rust/linkedspec-core/src/{parser.rs,validation.rs,compiler.rs}; rust/linkedspec-runtime/src/{spec_parser.rs,staged_parser_registry.rs}; rust/linkedspec-runtime/tests/trace_controls.rs; docs/linkedspec-book/src/public-api/trace-api.md"
@@ -23,6 +26,14 @@ user-function-definition parser execution, function projection, stripped-rule pa
 `body_parse_job` dispatch path. The staged parser registry traced entrypoints now report normalize, stable queue
 sort, resolve, load, compile, and execute decisions for each job.
 
-This did not complete Rust trace parity by itself. `.4.4` has since added runtime interpreter/generated-plan branch
-events, rule entry/exit, and mark/capture operations, and `.4.5` has since closed the cross-variant parity proof.
-Rust can now claim parity for the documented external capability contract.
+This did not complete Rust trace parity by itself. `.4.4` later added runtime interpreter/generated-plan branch
+events, rule entry/exit, and mark/capture operations, and `.4.5` closed the original cross-variant parity proof.
+
+Corrective audit `.5.1` then found that `compiler::compile_with_events` called the recursive-observation,
+staged-parse, and compiled-regex validators but omitted the already-current
+`validate_progressive_span_dispatch_contract` call made by ordinary `compile`. Therefore a malformed residual
+`dispatch_span(...)` could be accepted only when compilation tracing was enabled. `.5.1` restores the missing
+call at the same point in the validator sequence and adds an exact ordinary/traced diagnostic-equality regression.
+Valid traced/untraced compile results remain equal, and the admitted progressive four-route contract remains
+GREEN. The separate gap-aware runtime `child_dispatch` event defect is owned by `.5.2`; Rust must not renew the
+full trace-parity claim until that corrective leaf closes.

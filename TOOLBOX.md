@@ -275,9 +275,11 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   selection, AST-vs-string fallback/bypass choices, unsupported helper exits, receiver-chain transitions,
   assignment/mutation operator routing, mutation-slot values, and return-payload fallback choices.
 - **Compile/ActionIR coverage boundary:** the planned Perl reference compile/ActionIR owner namespaces are covered
-  through MethodLowering. Rust also satisfies the mdBook-documented external trace capability contract as of
-  `TRACE-OBSERVABILITY.4.5`. Future variants must expose the same documented controls, levels, event classes,
-  sink behavior, and default-quiet behavior before claiming trace parity.
+  through MethodLowering. `TRACE-OBSERVABILITY.4.5` established the original Rust external trace-capability
+  parity proof; corrective `.5.1` restores ordinary/traced progressive static-validation equality, while `.5.2`
+  still owns the gap-aware runtime `child_dispatch` event defect. Do not renew the complete Rust parity claim until
+  `.5.2` closes. Future variants must expose the same documented controls, levels, event classes, sink behavior,
+  default-quiet behavior, and validation identity before claiming trace parity.
 - **Rust trace controls/events:** `TRACE-OBSERVABILITY.4.2` added the Rust shared control layer:
   `linkedspec_core::trace::{TraceConfig, TraceLevel, TraceSinkMode, TraceEmitter}` plus the `DUMP_*` constants,
   environment-derived config, stdout/route/mirror sinks, routed-file reset, and event primitives. Runtime re-exports
@@ -289,8 +291,11 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   `rust_runtime:engine:*` for interpreted rule entry/exit, recursion cutoffs, regex match/no-match, acode/bcode
   dispatch, lifecycle blocks, statement controls, helper `call(child)`, and mark/capture helper operations, plus
   `rust_runtime:generated_plan:*` for generated family-plan dispatch and generated direct acode/bcode execution.
-  `TRACE-OBSERVABILITY.4.5` closes the parity proof: Rust can claim parity for the documented external capability
-  contract, while future variants must pass the mdBook checklist before making the same claim.
+  `TRACE-OBSERVABILITY.4.5` closed the original parity proof. Corrective `.5.1` proves traced compilation runs the
+  same progressive validator as ordinary compilation and returns the exact same malformed-program diagnostic;
+  reverify with the focused `traced_compile_enforces_progressive_static_contract` test in
+  `rust/linkedspec-runtime/tests/trace_controls.rs`. Corrective `.5.2` remains required before the full parity claim
+  is current again. Future variants must pass the mdBook checklist before making the same claim.
 - **Staged-registry boundary audit:** before changing general staged AST behavior, retrieve
   [[general-staged-ast-current-boundary]] and probe the registry rather than inferring policy semantics from its
   JSON fields. The five current registries execute only the one-depth

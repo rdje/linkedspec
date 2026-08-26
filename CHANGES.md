@@ -10,6 +10,19 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-26 — TRACE-OBSERVABILITY.5.1 — align traced progressive validation
+
+- Reproduced an exact traced-only compiler bypass: ordinary `compile(...)` rejected a residual dedicated
+  `dispatch_span(...)`, while `compile_with_trace(...)` accepted the same malformed compiled program.
+- Restored the existing `validate_progressive_span_dispatch_contract` call in `compile_with_events` at the same
+  point in the validator sequence as ordinary compilation. No new validation semantics, trace events, runtime
+  behavior, generated format, public surface, rollout, or other backend changed.
+- Added an exact regression proving ordinary/traced diagnostic equality and retained the existing valid
+  traced/untraced result equality. Core trace tests, ordinary dormant discovery, the cfg-enabled admitted
+  progressive four-route contract, and progressive/recognition/staged governance pass.
+- Focused direct-dependent proof exposed one separate stale private-authority route assertion left by the later
+  Rust contract admission. Git history proves the cause; `TRACE-OBSERVABILITY.5.3` now owns its repair after `.5.2`.
+
 ## 2026-08-26 — FUTURE-PARITY-BACKLOG.14.7.4.1 — add Rust staged annotation provenance
 
 - Added `Expr::StagedParseJobMarker` as the exclusive lowering for exact scalar-assignment

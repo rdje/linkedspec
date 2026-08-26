@@ -1,13 +1,13 @@
 # MEMORY
 
-- activation_commit: `e37a8b776bf65ece91f7c9861033afb41259adea` — exact clean Rust dormant-RED base for
-  task-tree-first private marker/provenance `FUTURE-PARITY-BACKLOG.14.7.4.1`; brief cleared; no push.
-- latest_completed_leaf: intended `FUTURE-PARITY-BACKLOG.14.7.4.1 - add Rust staged annotation provenance`;
-  ordinary discovery is zero tests and the opt-in final path has one exact `.14.7.4.2` authority RED.
-- active_work_unit: none after the intended `.14.7.4.1` commit; Rust execution authority and rollout remain pending.
-- next_action: from the exact clean `.14.7.4.1` commit, create dedicated task-tree leaves for the pre-existing
-  traced-progressive-validator and gap-aware-child-dispatch trace defects, fix/commit each, then resume `.14.7.4.2`.
-- in_flight_uncommitted: none after the intended `.14.7.4.1` commit; no background job remains.
+- activation_commit: `3d509616aad854b6ce2f5ddaebc423024e865f84` — exact clean staged-marker base for
+  task-tree-first corrective `TRACE-OBSERVABILITY.5.1`; brief cleared; no push.
+- latest_completed_leaf: intended `TRACE-OBSERVABILITY.5.1 - align traced progressive validation`; ordinary and
+  traced malformed-program diagnostics are exact equals and valid traced/untraced results remain equal.
+- active_work_unit: none after the intended `.5.1` commit; corrective parent `.5` remains active.
+- next_action: from the exact clean `.5.1` commit, activate `.5.2` and restore gap-aware interpreted/generated
+  `child_dispatch` lifecycle events; then commit `.5.3` stale authority-proof repair before staged `.14.7.4.2`.
+- in_flight_uncommitted: none after the intended `.5.1` commit; no background job remains.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -54,6 +54,6 @@
   unchanged. Rust `.14.7.4.0-.1` freeze zero ordinary tests and add only an inert detached marker, strict literal
   options, live-span direct/ordered-derived provenance, malformed/transaction closure, and four equal logical
   carrier observations. Only `.4.2` caller-frozen authority remains RED; Rust rollout remains pending. Focused
-  proof exposed two pre-existing Rust validation/trace defects requiring dedicated clean-pivot ownership first.
-- latest_bootstrap_read: 2026-08-26 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox are reviewed. `.14.7.4.1` preserves current v1, generated v2, discovery, rollout, public/outward surfaces, and all
-  execution authority while adding only private marker/provenance. Intended commit: `FUTURE-PARITY-BACKLOG.14.7.4.1 - add Rust staged annotation provenance`; clean-pivot defect ownership is next before `.14.7.4.2`.
+  proof exposed two pre-existing trace defects; `.5.1` now fixes traced progressive validation, while `.5.2` owns
+  gap-aware child-dispatch events and `.5.3` owns the separately exposed stale authority-route assertion.
+- latest_bootstrap_read: 2026-08-26 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox are reviewed. `.5.1` preserves valid results, trace schemas, runtime/generated behavior, formats, rollout, public/outward surfaces, and all other backends while restoring one existing validator call. Intended commit: `TRACE-OBSERVABILITY.5.1 - align traced progressive validation`; `.5.2` is next from clean handoff.

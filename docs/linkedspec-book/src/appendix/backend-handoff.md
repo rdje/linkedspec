@@ -757,8 +757,8 @@ discovery runs zero tests, while opt-in execution preserves current v1 and prove
 strict literal options, exact text, typed direct/ordered-derived provenance, malformed/smuggling/transaction
 denials, and four equal logical carrier observations. It is absent from canonical CI, contains no live execution
 authority, and Rust rollout remains pending. `.14.7.4.2` owns caller-frozen authority after clean-pivot task-tree
-repair of two pre-existing Rust validation/trace defects; Dart/Julia/Lua consumers remain absent under
-`.14.7.5-.7`.
+completion of `TRACE-OBSERVABILITY.5.2-.3`; `.5.1` has already restored exact ordinary/traced progressive static-
+validation equality. Dart/Julia/Lua consumers remain absent under `.14.7.5-.7`.
 
 Progressive dispatch is a separate synchronous path under `FUTURE-PARITY-BACKLOG.14.6`. Audit `.14.6.0` proves
 that none of these registries can invoke a normal loaded spec while a parser is active. The portable design uses
