@@ -1,7 +1,7 @@
 #![allow(unexpected_cfgs)]
 #![cfg(linkedspec_staged_ast_enrichment_red)]
 
-//! FUTURE-PARITY-BACKLOG.14.7.4.2 — dormant Rust staged-AST current-depth contract.
+//! FUTURE-PARITY-BACKLOG.14.7.4.3 — dormant Rust staged-AST recursive contract.
 //!
 //! Ordinary Cargo discovery compiles this target with zero active tests. Before admission, run
 //! the exact final-path RED with:
@@ -10,8 +10,8 @@
 //!
 //! This consumer freezes the neutral inventory, current function-body v1 compatibility, and all
 //! four final Rust observation surfaces without changing production behavior or canonical CI. Its
-//! sole intentional failure is recursive queue/resource/rebasing authority owned by `.14.7.4.3`;
-//! marker/provenance and caller-frozen current-depth authority are complete in this slice.
+//! sole intentional failure is fresh production carriers/admission owned by `.14.7.4.4`; marker,
+//! current-depth, recursive queue, resource, and source-rebasing authority are complete here.
 
 use linkedspec_core::compiler::compile;
 use linkedspec_core::expr::Expr;
@@ -25,15 +25,16 @@ use linkedspec_runtime::source_location::SourceAuthority;
 use linkedspec_runtime::spec_parser::parse_spec_with_user_functions;
 use linkedspec_runtime::staged_parser_registry::{execute_parse_job, execute_parse_jobs};
 use linkedspec_runtime::{
-    CompiledStagedAuthority, FrozenStagedRegistry, StagedRuntimeContext, enrich_current_depth,
-    staged_cache_identity, staged_current_depth_order, staged_job_identity,
-    validate_and_materialize_provenance,
+    CompiledStagedAuthority, FrozenStagedRegistry, StagedRecursiveAuthority, StagedRuntimeContext,
+    enrich_current_depth, enrich_recursively, evaluate_staged_chain_case, staged_cache_identity,
+    staged_current_depth_order, staged_job_identity, validate_and_materialize_provenance,
 };
 use serde_json::{Value, json};
 use std::collections::BTreeMap;
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::process::Command;
+use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
 use std::time::{SystemTime, UNIX_EPOCH};
 
@@ -188,6 +189,24 @@ fn staged_marker(
     })
 }
 
+fn recursive_config(
+    token: &str,
+    deadline: u64,
+    remaining_steps: u64,
+    required_steps: u64,
+    max_depth: u64,
+    max_calls: u64,
+) -> Value {
+    json!({
+        "cancellation_token": token,
+        "deadline": deadline,
+        "remaining_steps": remaining_steps,
+        "required_steps": required_steps,
+        "max_depth": max_depth,
+        "max_calls": max_calls,
+    })
+}
+
 fn prove_current_depth_authority(neutral: &Value) {
     let inert =
         CompiledStagedAuthority::new(|_request: &Value, _context: &mut StagedRuntimeContext| {
@@ -299,10 +318,11 @@ fn prove_current_depth_authority(neutral: &Value) {
         );
     }
     assert_eq!(
-        staged_current_depth_order(&neutral["queue_cases"][3]["jobs"])
-            .expect_err("mixed depths remain recursive-scheduler RED")
-            .as_record()["snapshot_component"],
-        "mixed_stage_depth_requires_recursive_scheduler"
+        json!(
+            staged_current_depth_order(&neutral["queue_cases"][3]["jobs"])
+                .expect("mixed depths sort breadth-first")
+        ),
+        neutral["queue_cases"][3]["expected_order"]
     );
 
     for case in neutral["stitch_cases"].as_array().expect("stitch cases") {
@@ -735,6 +755,486 @@ fn prove_current_depth_authority(neutral: &Value) {
     );
 }
 
+fn prove_recursive_authority(neutral: &Value) {
+    for case in neutral["chain_cases"].as_array().expect("chain cases") {
+        let actual = evaluate_staged_chain_case(case).expect("evaluate neutral chain case");
+        assert_eq!(actual["accepted"], case["accepted"], "{}", case["id"]);
+        assert_eq!(actual["diagnostic"], case["diagnostic"], "{}", case["id"]);
+    }
+
+    let observed = Arc::new(Mutex::new(Vec::new()));
+    let cancelled_tokens = Arc::new(Mutex::new(Vec::new()));
+    let retained_context = Arc::new(Mutex::new(None::<StagedRuntimeContext>));
+    let authority = {
+        let observed = Arc::clone(&observed);
+        let retained_context = Arc::clone(&retained_context);
+        CompiledStagedAuthority::new(move |request: &Value, context: &mut StagedRuntimeContext| {
+            observed.lock().expect("recursive observations").push(json!({
+                "depth": request["stage_depth"],
+                "text": request["text"],
+                "stage_chain_length": request["stage_chain"].as_array().expect("request chain").len(),
+                "context": context.as_record(),
+                "token": context.cancellation_token().expect("callback token"),
+                "deadline": context.deadline().expect("callback deadline"),
+                "remaining_before": context.remaining_steps().expect("callback budget"),
+            }));
+            if retained_context.lock().expect("retained context").is_none() {
+                *retained_context.lock().expect("retained context") = Some(context.clone());
+            }
+            context.safe_point(1).map_err(|error| error.as_record())?;
+            context.set_cursor(request["stage_depth"].as_u64().expect("stage depth"));
+            context
+                .marks_mut()
+                .insert("child".to_owned(), request["text"].clone());
+            Ok(match request["text"].as_str().expect("request text") {
+                "abcdef" => json!({
+                    "kind": "branch",
+                    "child": staged_marker("bc", 1, "replace_marker", None, "fail"),
+                }),
+                "ghijkl" => json!({
+                    "kind": "branch",
+                    "child": staged_marker("hi", 7, "replace_marker", None, "fail"),
+                }),
+                text => json!({"kind": "leaf", "text": text}),
+            })
+        })
+    };
+    let registry = frozen_registry(neutral, authority);
+    let recursive_authority = {
+        let cancelled_tokens = Arc::clone(&cancelled_tokens);
+        StagedRecursiveAuthority::new(
+            &recursive_config("cancel:shared", 100, 20, 1, 4, 10),
+            move |token| {
+                cancelled_tokens
+                    .lock()
+                    .expect("cancel-token observations")
+                    .push(token.clone());
+                false
+            },
+            || 1,
+        )
+        .expect("recursive invocation authority")
+    };
+    let input = json!({
+        "nodes": [
+            {"payload": staged_marker("abcdef", 0, "replace_marker", None, "fail")},
+            {"payload": staged_marker("ghijkl", 6, "replace_marker", None, "fail")},
+        ],
+    });
+    let outcome = enrich_recursively(
+        &registry,
+        &input,
+        &enrichment_options(),
+        &recursive_authority,
+    )
+    .expect("breadth-first recursive enrichment");
+    assert_eq!(
+        *observed.lock().expect("recursive observations"),
+        [
+            json!({"depth": 1, "text": "abcdef", "stage_chain_length": 1, "context": {"cursor": 0, "marks": {}, "captures": {}, "variables": {}}, "token": "cancel:shared", "deadline": 100, "remaining_before": 19}),
+            json!({"depth": 1, "text": "ghijkl", "stage_chain_length": 1, "context": {"cursor": 0, "marks": {}, "captures": {}, "variables": {}}, "token": "cancel:shared", "deadline": 100, "remaining_before": 17}),
+            json!({"depth": 2, "text": "bc", "stage_chain_length": 2, "context": {"cursor": 0, "marks": {}, "captures": {}, "variables": {}}, "token": "cancel:shared", "deadline": 100, "remaining_before": 15}),
+            json!({"depth": 2, "text": "hi", "stage_chain_length": 2, "context": {"cursor": 0, "marks": {}, "captures": {}, "variables": {}}, "token": "cancel:shared", "deadline": 100, "remaining_before": 13}),
+        ]
+    );
+    assert!(
+        cancelled_tokens
+            .lock()
+            .expect("cancel-token observations")
+            .iter()
+            .all(|token| token == "cancel:shared")
+    );
+    assert_eq!(
+        outcome
+            .sidecars
+            .iter()
+            .map(|row| row["stage_depth"].as_u64().expect("sidecar depth"))
+            .collect::<Vec<_>>(),
+        [1, 1, 2, 2]
+    );
+    assert_eq!(
+        outcome
+            .sidecars
+            .iter()
+            .map(|row| row["stage_chain"].as_array().expect("sidecar chain").len())
+            .collect::<Vec<_>>(),
+        [0, 0, 1, 1]
+    );
+    assert_eq!(outcome.ast["nodes"][0]["payload"]["child"]["kind"], "leaf");
+    assert_eq!(outcome.ast["nodes"][1]["payload"]["child"]["text"], "hi");
+    assert_eq!(outcome.resources.remaining_steps, 12);
+    assert_eq!(outcome.resources.total_calls, 4);
+    assert_eq!(outcome.resources.remaining_result_nodes, 116);
+    assert_eq!(outcome.cache.entries, 1);
+    assert_eq!(outcome.cache.misses, 1);
+    assert_eq!(outcome.cache.hits, 3);
+    assert!(outcome.diagnostics.is_empty());
+    assert!(
+        retained_context
+            .lock()
+            .expect("retained context")
+            .as_ref()
+            .expect("callback retained a context clone")
+            .safe_point(0)
+            .is_err(),
+        "callback resource context must expire after return"
+    );
+
+    let cycle_calls = Arc::new(AtomicUsize::new(0));
+    let cycle_marker = staged_marker("abcdef", 0, "replace_marker", None, "fail");
+    let cycle_registry = {
+        let cycle_calls = Arc::clone(&cycle_calls);
+        let cycle_marker = cycle_marker.clone();
+        frozen_registry(
+            neutral,
+            CompiledStagedAuthority::new(move |_request, _context| {
+                cycle_calls.fetch_add(1, Ordering::SeqCst);
+                Ok(cycle_marker.clone())
+            }),
+        )
+    };
+    let open_authority = StagedRecursiveAuthority::new(
+        &recursive_config("cancel:cycle", 100, 20, 1, 4, 10),
+        |_| false,
+        || 1,
+    )
+    .expect("cycle authority");
+    assert_eq!(
+        enrich_recursively(
+            &cycle_registry,
+            &json!({"payload": cycle_marker}),
+            &enrichment_options(),
+            &open_authority,
+        )
+        .expect_err("exact active tuple must cycle")
+        .as_record()["code"],
+        "staged_cycle"
+    );
+    assert_eq!(cycle_calls.load(Ordering::SeqCst), 1);
+
+    let nondecreasing_registry = frozen_registry(
+        neutral,
+        CompiledStagedAuthority::new(|_request, _context| {
+            Ok(staged_marker("uvwxyz", 0, "replace_marker", None, "fail"))
+        }),
+    );
+    assert_eq!(
+        enrich_recursively(
+            &nondecreasing_registry,
+            &json!({"payload": staged_marker("abcdef", 0, "replace_marker", None, "fail")}),
+            &enrichment_options(),
+            &open_authority,
+        )
+        .expect_err("same parser/top extent must decrease")
+        .as_record()["code"],
+        "staged_chain_non_decreasing"
+    );
+
+    let nested_marker = staged_marker("bc", 1, "replace_marker", None, "fail");
+    for (name, authority, expected) in [
+        (
+            "depth",
+            StagedRecursiveAuthority::new(
+                &recursive_config("cancel:depth", 100, 20, 1, 1, 10),
+                |_| false,
+                || 1,
+            )
+            .expect("depth authority"),
+            "staged_depth_exceeded",
+        ),
+        (
+            "calls",
+            StagedRecursiveAuthority::new(
+                &recursive_config("cancel:calls", 100, 20, 1, 4, 1),
+                |_| false,
+                || 1,
+            )
+            .expect("call authority"),
+            "staged_call_limit_exceeded",
+        ),
+    ] {
+        let marker = nested_marker.clone();
+        let registry = frozen_registry(
+            neutral,
+            CompiledStagedAuthority::new(move |_request, _context| Ok(marker.clone())),
+        );
+        let error = enrich_recursively(
+            &registry,
+            &json!({"payload": staged_marker("abcdef", 0, "replace_marker", None, "fail")}),
+            &enrichment_options(),
+            &authority,
+        )
+        .expect_err("recursive limit must reject");
+        assert_eq!(error.as_record()["code"], expected, "{name} limit");
+    }
+
+    let no_call_registry = frozen_registry(
+        neutral,
+        CompiledStagedAuthority::new(|_request, _context| Ok(json!(null))),
+    );
+    for (authority, expected) in [
+        (
+            StagedRecursiveAuthority::new(
+                &recursive_config("cancel:budget", 100, 0, 1, 4, 10),
+                |_| false,
+                || 1,
+            )
+            .expect("budget authority"),
+            "staged_budget_exhausted",
+        ),
+        (
+            StagedRecursiveAuthority::new(
+                &recursive_config("cancel:cancelled", 100, 20, 1, 4, 10),
+                |_| true,
+                || 1,
+            )
+            .expect("cancelled authority"),
+            "staged_cancelled",
+        ),
+        (
+            StagedRecursiveAuthority::new(
+                &recursive_config("cancel:deadline", 10, 20, 1, 4, 10),
+                |_| false,
+                || 11,
+            )
+            .expect("deadline authority"),
+            "staged_deadline_exceeded",
+        ),
+    ] {
+        assert_eq!(
+            enrich_recursively(
+                &no_call_registry,
+                &json!({"payload": staged_marker("x", 0, "replace_marker", None, "fail")}),
+                &enrichment_options(),
+                &authority,
+            )
+            .expect_err("dispatch resource denial")
+            .as_record()["code"],
+            expected
+        );
+    }
+
+    let node_calls = Arc::new(AtomicUsize::new(0));
+    let node_registry = {
+        let node_calls = Arc::clone(&node_calls);
+        frozen_registry(
+            neutral,
+            CompiledStagedAuthority::new(move |_request, _context| {
+                node_calls.fetch_add(1, Ordering::SeqCst);
+                Ok(json!({"kind": "leaf", "value": 1}))
+            }),
+        )
+    };
+    let mut node_options = enrichment_options();
+    node_options["caller_ceilings"]["max_result_nodes"] = json!(5);
+    assert_eq!(
+        enrich_recursively(
+            &node_registry,
+            &json!({
+                "nodes": [
+                    {"payload": staged_marker("a", 0, "replace_marker", None, "fail")},
+                    {"payload": staged_marker("b", 1, "replace_marker", None, "fail")},
+                ],
+            }),
+            &node_options,
+            &open_authority,
+        )
+        .expect_err("result-node budget is cumulative")
+        .as_record()["code"],
+        "staged_result_node_limit_exceeded"
+    );
+    assert_eq!(node_calls.load(Ordering::SeqCst), 2);
+
+    let direct_registry = frozen_registry(
+        neutral,
+        CompiledStagedAuthority::new(|_request, context| {
+            assert_eq!(
+                context.rebase_position(1).expect("direct position"),
+                json!({"source_id": "ascii", "offset": 2})
+            );
+            assert_eq!(
+                context
+                    .rebase_span(&json!({"start": 1, "end": 3}))
+                    .expect("direct span"),
+                json!({"kind": "direct_span", "source_id": "ascii", "start": 2, "end": 4, "provenance": "capture"})
+            );
+            Err(json!({
+                "code": "child_parse_error",
+                "position": {"offset": 1},
+                "span": {"start": 1, "end": 3},
+                "end_offset": 3,
+            }))
+        }),
+    );
+    let direct = enrich_recursively(
+        &direct_registry,
+        &json!({"payload": staged_marker("abcd", 1, "replace_marker", None, "keep_text")}),
+        &enrichment_options(),
+        &open_authority,
+    )
+    .expect("direct diagnostic rebasing continues");
+    assert_eq!(
+        direct.diagnostics[0]["child_diagnostic"]["position"],
+        json!({"source_id": "ascii", "offset": 2})
+    );
+    assert_eq!(
+        direct.diagnostics[0]["child_diagnostic"]["span"],
+        json!({"kind": "direct_span", "source_id": "ascii", "start": 2, "end": 4, "provenance": "capture"})
+    );
+    assert_eq!(
+        direct.diagnostics[0]["child_diagnostic"]["end_offset"],
+        json!({"source_id": "ascii", "offset": 4})
+    );
+
+    let derived_registry = frozen_registry(
+        neutral,
+        CompiledStagedAuthority::new(|_request, context| {
+            assert_eq!(
+                context.rebase_position(2).expect("derived position"),
+                json!({"source_id": "unicode", "offset": 1})
+            );
+            let span = context
+                .rebase_span(&json!({"start": 1, "end": 3}))
+                .expect("derived span");
+            assert_eq!(span["kind"], "derived_text");
+            assert_eq!(span["policy"], "concatenate_in_order");
+            assert_eq!(
+                span["segments"].as_array().expect("derived segments").len(),
+                2
+            );
+            assert_eq!(
+                context
+                    .rebase_diagnostic(&json!({"code": "child", "span": {"start": 1, "end": 3}}))
+                    .expect("derived diagnostic")["span"],
+                span
+            );
+            Err(json!({"code": "child_parse_error", "span": {"start": 1, "end": 3}}))
+        }),
+    );
+    let mut derived_marker = staged_marker("abcd", 0, "replace_marker", None, "keep_text");
+    derived_marker["staged_parse_job_v2"]["provenance"] = json!({
+        "kind": "derived_text",
+        "policy": "concatenate_in_order",
+        "segments": [
+            {"kind": "direct_span", "source_id": "ascii", "start": 0, "end": 2, "provenance": "capture"},
+            {"kind": "direct_span", "source_id": "unicode", "start": 1, "end": 3, "provenance": "capture"},
+        ],
+    });
+    let derived = enrich_recursively(
+        &derived_registry,
+        &json!({"payload": derived_marker}),
+        &enrichment_options(),
+        &open_authority,
+    )
+    .expect("derived diagnostic rebasing continues");
+    assert_eq!(
+        derived.diagnostics[0]["child_diagnostic"]["span"]["policy"],
+        "concatenate_in_order"
+    );
+    assert_eq!(
+        derived.diagnostics[0]["child_diagnostic"]["span"]["segments"]
+            .as_array()
+            .expect("rebased child segments")
+            .len(),
+        2
+    );
+
+    let mut diagnostic_options = enrichment_options();
+    diagnostic_options["caller_ceilings"]["max_diagnostic_bytes"] = json!(64);
+    let diagnostic_registry = frozen_registry(
+        neutral,
+        CompiledStagedAuthority::new(|_request, _context| {
+            Err(json!({"code": "child_parse_error", "detail": "x".repeat(1024)}))
+        }),
+    );
+    let truncated = enrich_recursively(
+        &diagnostic_registry,
+        &json!({"payload": staged_marker("bad", 0, "replace_marker", None, "keep_text")}),
+        &diagnostic_options,
+        &open_authority,
+    )
+    .expect("oversized keep-text diagnostic is bounded");
+    assert_eq!(
+        truncated.diagnostics[0]["code"],
+        "staged_diagnostic_truncated"
+    );
+    assert_eq!(truncated.resources.remaining_diagnostic_bytes, 0);
+
+    let cancel_checks = Arc::new(AtomicUsize::new(0));
+    let safe_cancel_authority = {
+        let cancel_checks = Arc::clone(&cancel_checks);
+        StagedRecursiveAuthority::new(
+            &recursive_config("cancel:safe-point", 100, 20, 1, 4, 10),
+            move |_| cancel_checks.fetch_add(1, Ordering::SeqCst) >= 1,
+            || 1,
+        )
+        .expect("safe-point cancellation authority")
+    };
+    let safe_registry = frozen_registry(
+        neutral,
+        CompiledStagedAuthority::new(|_request, context| {
+            Err(context
+                .safe_point(0)
+                .expect_err("safe point observes cancellation")
+                .as_record())
+        }),
+    );
+    assert_eq!(
+        enrich_recursively(
+            &safe_registry,
+            &json!({"payload": staged_marker("x", 0, "replace_marker", None, "fail")}),
+            &enrichment_options(),
+            &safe_cancel_authority,
+        )
+        .expect_err("callback safe-point cancellation")
+        .as_record()["code"],
+        "staged_cancelled"
+    );
+
+    let clock_checks = Arc::new(AtomicUsize::new(0));
+    let safe_deadline_authority = {
+        let clock_checks = Arc::clone(&clock_checks);
+        StagedRecursiveAuthority::new(
+            &recursive_config("cancel:safe-deadline", 10, 20, 1, 4, 10),
+            |_| false,
+            move || {
+                if clock_checks.fetch_add(1, Ordering::SeqCst) == 0 {
+                    1
+                } else {
+                    11
+                }
+            },
+        )
+        .expect("safe-point deadline authority")
+    };
+    assert_eq!(
+        enrich_recursively(
+            &safe_registry,
+            &json!({"payload": staged_marker("x", 0, "replace_marker", None, "fail")}),
+            &enrichment_options(),
+            &safe_deadline_authority,
+        )
+        .expect_err("callback safe-point deadline")
+        .as_record()["code"],
+        "staged_deadline_exceeded"
+    );
+
+    let narrowed_authority = StagedRecursiveAuthority::new(
+        &recursive_config("cancel:narrowed", 100, 500, 0, 4, 10),
+        |_| false,
+        || 1,
+    )
+    .expect("caller-narrowed authority");
+    let narrowed = enrich_recursively(
+        &no_call_registry,
+        &json!({"payload": staged_marker("x", 0, "replace_marker", None, "fail")}),
+        &enrichment_options(),
+        &narrowed_authority,
+    )
+    .expect("caller max-steps ceiling narrows invocation");
+    assert_eq!(narrowed.resources.remaining_steps, 200);
+}
+
 struct EmittedProject {
     root: PathBuf,
 }
@@ -763,7 +1263,7 @@ impl Drop for EmittedProject {
 }
 
 #[test]
-fn final_path_reaches_only_the_missing_recursive_authority() {
+fn final_path_reaches_only_the_missing_carrier_admission() {
     let neutral = contract();
     assert_eq!(neutral["contract_id"], CONTRACT_ID);
     assert_eq!(neutral["format"], 1);
@@ -1445,6 +1945,7 @@ Child::
     assert_eq!(emitted_value, expected);
 
     prove_current_depth_authority(&neutral);
+    prove_recursive_authority(&neutral);
 
     assert!(
         !CI_DRIVER_SOURCE.contains("staged_ast_enrichment_contract.rs"),
@@ -1453,6 +1954,6 @@ Child::
 
     assert!(
         false,
-        "LINKEDSPEC_STAGED_AST_ENRICHMENT_RED: marker/provenance and caller-frozen current-depth authority complete; missing breadth-first recurrence, decreasing-chain/cycle/resource guards, and original-source diagnostic rebasing owned by FUTURE-PARITY-BACKLOG.14.7.4.3"
+        "LINKEDSPEC_STAGED_AST_ENRICHMENT_RED: marker/provenance, current-depth authority, breadth-first recurrence, decreasing-chain/cycle/resource guards, and original-source diagnostic rebasing complete; missing fresh native/reconstructed/generated/emitted authority carriers, production seam/dead-code allowance removal, ordinary/canonical admission, and Rust rollout owned by FUTURE-PARITY-BACKLOG.14.7.4.4"
     );
 }

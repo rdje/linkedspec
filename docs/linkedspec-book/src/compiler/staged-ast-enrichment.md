@@ -3,9 +3,9 @@
 > Status: executable backend-neutral design. General `parse_job(...)` authoring is not yet public. Perl now has a
 > privately admitted marker, caller-frozen recursive authority, and four fresh-authority carriers with a
 > fully GREEN 143-check oracle;
-> Rust has one private dormant marker/provenance plus current-depth authority implementation whose current-v1,
-> logical-carrier, resolution/cache, isolation, and policy observations pass before one exact recurrence/bounds/
-> rebasing RED, but no Rust carrier admission or rollout;
+> Rust has one private dormant marker/provenance plus recursive authority implementation whose current-v1,
+> logical-carrier, resolution/cache, isolation, policy, breadth-first, chain/resource, and rebasing observations
+> pass before one exact carrier/admission RED, but no Rust production carrier admission or rollout;
 > the current shipped five-backend/six-runtime implementation still supports only the narrow function-body v1
 > adapter described below.
 
@@ -298,7 +298,7 @@ host handle.
 Perl is privately admitted, but the language ledger still classifies `parse_job` as non-public until the separately
 owned `.14.7.9` closeout. Function-body v1 and generated-source v2 remain unchanged.
 
-Rust `.14.7.4.0-.2` freeze the next backend boundary and implement its private declaration plus current-depth
+Rust `.14.7.4.0-.3` freeze the next backend boundary and implement its private declaration plus recursive
 authority. Ordinary
 Cargo discovery sees the exact consumer but activates zero tests; canonical CI does not mention it. With its
 dedicated cfg enabled, current function-body v1 still proves deterministic queue order, built-in resolution/load/
@@ -353,9 +353,37 @@ gets fresh cursor, marks, captures, and variables. Detached node-bounded plain r
 `diagnostic_node`. Missing, colliding, wrong-kind, stale-marker, and live-result cases fail with portable staged
 diagnostics. A newly returned marker remains inert and is not rescanned.
 
-The final assertion therefore advances to `.14.7.4.3`'s missing breadth-first recurrence, decreasing-chain/cycle/
-shared-resource authority, and original-source diagnostic rebasing. Rust rollout remains pending through admission
-leaf `.4`.
+The separate `enrich_recursively` entrypoint rescans only successful stitched results. It validates a complete
+next depth before executing any callback, then orders work by depth, typed parent path, typed provenance, and job
+id. A callback cannot cause its returned marker to run ahead of any sibling from the producing depth. All depths
+share the same immutable registry and plan cache, while every callback still receives fresh parser-local state.
+
+Each active chain row is the exact tuple:
+
+```text
+[resolved_parser_id, selected_top_rule, sha256(exact_utf8_text), full_typed_provenance]
+```
+
+An exact repeat is `staged_cycle`. Reusing the same parser/top pair with different text or provenance is allowed
+only when every direct or ordered-derived child segment is contained within active provenance and the child has a
+smaller total Unicode-scalar extent. Otherwise the scheduler reports `staged_chain_non_decreasing` before the
+callback can run.
+
+One `StagedRecursiveAuthority` supplies identity-bearing cancellation, a cancellation callback, caller clock and
+absolute deadline, remaining work, and maximum depth/calls. Result-node and diagnostic-byte ceilings come from the
+already narrowed invocation options. None of these counters reset at a new depth. A callback can call
+`safe_point(cost)` to spend both its job ceiling and the invocation budget, inspect the shared token/deadline, or
+rebase a child-local position, span, or diagnostic. Its context expires as soon as the callback settles.
+
+Direct positions and spans map back to their original source identity. A derived span crossing source segments
+remains `derived_text` with `concatenate_in_order`; the scheduler never invents a false contiguous source span.
+Portable diagnostics use the same projection and cumulative UTF-8 byte budget. An oversized diagnostic becomes
+the exact `staged_diagnostic_truncated` sentinel.
+
+The final assertion therefore advances to `.14.7.4.4`'s missing fresh native/reconstructed/generated/emitted
+top-level authority carriers, first production caller and dead-code-allowance removal, ordinary/canonical
+admission, and Rust rollout. The private module remains cfg-conditionally allowed as dead code only until that
+production seam exists.
 
 Publishing this boundary crossed the bounded `CHANGES.md` rollover threshold. The repository archived one complete
 218-line record set as immutable segment `4991`; ADR `0089` advances only the finite change-history collection and

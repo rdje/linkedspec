@@ -752,15 +752,17 @@ top-level invocation and runs it only after the complete parent parse. Native, n
 emitted routes return equal detached output while serialized carrier data contains no live authority. The
 final-path oracle is 143/143 and appears once in phase-0 and once in canonical CI; only Perl rollout is promoted.
 Generated-source v2, function-body v1, public inventory, and outward surfaces remain unchanged. Rust
-`.14.7.4.0-.2` now supply one exact dormant outer-cfg consumer plus its private declaration and current-depth
+`.14.7.4.0-.3` now supply one exact dormant outer-cfg consumer plus its private declaration and recursive
 authority: ordinary discovery runs zero tests, while opt-in execution preserves current v1 and proves an exclusive
 inert marker, strict literal options, exact text, typed direct/ordered-derived provenance, caller-frozen pure
 resolution/cache, deterministic sibling-isolated execution, detached atomic stitching, every result/failure
-policy, and adversarial denials. It is absent from canonical CI; carrier authority and Rust rollout remain pending,
-and only `.14.7.4.3` recurrence/bounds/rebasing is RED. `TRACE-OBSERVABILITY.5.1-.4` are complete: traced progressive
+policy, breadth-first next-depth scheduling, exact cycle/decrease guards, shared cancellation/resources, callback
+safe points/expiry, direct/ordered-derived source rebasing, and adversarial denials. Its exact test path is absent
+from canonical CI; fresh carrier authority, the production seam, admission, and Rust rollout remain pending under
+`.14.7.4.4`. `TRACE-OBSERVABILITY.5.1-.4` are complete: traced progressive
 validation and gap-aware child-dispatch parity are restored, while the private authority stays dormant beside the
 one admitted contract route. `.5.4` aligns the Perl snapshot to 79 mutations plus Rust `dormant_red`, passes
-143/143 and canonical closeout; Rust has since advanced through `.14.7.4.2` to the `.3` frontier. Dart/Julia/Lua consumers remain
+143/143 and canonical closeout; Rust has since advanced through `.14.7.4.3` to the `.4` frontier. Dart/Julia/Lua consumers remain
 absent under `.14.7.5-.7`. Mandatory engineering-notes segment `4990` is finitely authorized at 18 files / 17
 manifest lines by ADR `0090`; no other pressure ceiling changes.
 

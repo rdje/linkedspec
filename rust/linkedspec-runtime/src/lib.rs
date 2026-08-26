@@ -43,8 +43,10 @@ mod staged_parse_job_test_exports {
     #[cfg(linkedspec_staged_ast_enrichment_red)]
     pub use crate::staged_ast_enrichment::{
         CompiledStagedAuthority, FrozenStagedRegistry, StagedAstEnrichmentError, StagedCacheStats,
-        StagedEnrichmentOutcome, StagedRuntimeContext, enrich_current_depth, staged_cache_identity,
-        staged_current_depth_order, staged_job_identity,
+        StagedEnrichmentOutcome, StagedRecursiveAuthority, StagedRecursiveOutcome,
+        StagedRecursiveResources, StagedRuntimeContext, enrich_current_depth, enrich_recursively,
+        evaluate_staged_chain_case, staged_cache_identity, staged_current_depth_order,
+        staged_job_identity,
     };
     #[cfg(linkedspec_staged_ast_enrichment_red)]
     pub use crate::staged_parse_job::validate_and_materialize_provenance;

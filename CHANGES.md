@@ -10,6 +10,19 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-26 — FUTURE-PARITY-BACKLOG.14.7.4.3 — add Rust staged recursive authority
+
+- Added a private breadth-first recursive entrypoint over the existing caller-frozen registry. Every complete depth
+  resolves and validates before callbacks; successful returned markers enter only the next typed-sorted depth.
+- Added exact parser/top/exact-UTF-8-digest/full-provenance cycle identity, strict same-parser/top provenance
+  containment and scalar-extent decrease, and one invocation-wide cancellation/deadline/step/call/depth/result-
+  node/diagnostic-byte authority with expiring callback safe points.
+- Added direct and ordered-derived child position/span/diagnostic rebasing. Cross-segment ranges retain
+  `concatenate_in_order`; oversized portable diagnostics become the governed truncation sentinel.
+- Kept ordinary discovery at zero tests, the exact Rust test path absent from canonical CI, neutral governance at
+  79 mutations with Rust `dormant_red`, and v1/v2 formats, carriers, rollout, public/outward behavior unchanged.
+  The sole RED now names `.14.7.4.4` carriers, production seam, admission, and rollout.
+
 ## 2026-08-26 — FUTURE-PARITY-BACKLOG.14.7.4.2 — add Rust staged current-depth authority
 
 - Added one private Rust general-v2 authority over caller-frozen resolution outcomes and already-compiled opaque

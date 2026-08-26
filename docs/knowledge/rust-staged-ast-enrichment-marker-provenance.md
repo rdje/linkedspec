@@ -12,10 +12,11 @@ answers:
   - "does Rust parse_job resolve or execute a parser yet"
   - "what does FUTURE-PARITY-BACKLOG 14.7.4.1 implement"
 date: 2026-08-26
-status: current private dormant declaration carrier; caller-frozen current-depth authority is complete and recurrence remains FUTURE-PARITY-BACKLOG.14.7.4.3-owned
+status: current private dormant declaration carrier; caller-frozen recursive authority is complete and fresh carriers/admission remain FUTURE-PARITY-BACKLOG.14.7.4.4-owned
 tags: [rust, staged-parsing, parse-job, source-provenance, private, backend-parity]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.4.1 adds Expr::StagedParseJobMarker, strict compile validation, compact live capture spans, and rust/linkedspec-runtime/src/staged_parse_job.rs. The cfg-enabled final-path consumer proves exact assignment-only lowering, literal option normalization, eight neutral provenance cases, malformed/dynamic/copied/smuggled denials, recognition transaction rejection, exact serialization, detached marker data, and equal native/reconstructed/generated-plan/independently compiled emitted logical routes before failing only at .14.7.4.2 caller-frozen authority. Ordinary discovery is 0 tests, canonical CI has 0 references, neutral governance stays 79 mutations, current function-body v1 and generated format v2 stay unchanged, and Rust rollout remains pending."
 evidence_update_2026_08_26_current_depth_authority: "FUTURE-PARITY-BACKLOG.14.7.4.2 consumes the inert marker through a private caller-frozen registry, pure resolver, selected-top-before-job-id identity, plan-only run-local cache, isolated deterministic current-depth execution, detached atomic stitching, and all four result/three failure policies. The same consumer reaches only .14.7.4.3 recurrence/bounds/rebasing RED; marker construction, v1, dormancy, rollout, format, and outward truth remain unchanged."
+evidence_update_2026_08_26_recursive_authority: "FUTURE-PARITY-BACKLOG.14.7.4.3 recursively consumes only successfully stitched markers under exact cycle/decrease, shared-resource, safe-point, and source-rebasing authority. The same consumer reaches only .14.7.4.4 carriers/production/admission/rollout RED; marker construction and all earlier boundaries remain unchanged."
 root_cause: "The dormant .14.7.4.0 boundary showed an ordinary Expr::Call preserved through compiled serialization and all logical carriers, then interpreted by the unknown-helper fallback as null. It also showed that serialized copied text could not establish source authority. Rust match state had live matched text but did not retain the compact participating capture byte ranges needed to construct typed group provenance."
 reverify:
   - "RUSTFLAGS='--cfg linkedspec_staged_ast_enrichment_red' bash tools/run_cargo_local.sh test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract"
@@ -49,10 +50,11 @@ closed under the staged-enrichment diagnostic family.
 Native, normalized reconstructed, generated-plan, and independently compiled emitted execution preserve the same
 logical node and produce equal detached markers without changing generated format v2. The consumer remains behind
 `linkedspec_staged_ast_enrichment_red`, absent from ordinary and canonical discovery. `.14.7.4.2` now owns and
-completes the caller-frozen registry/cache plus result/failure policies; `.3` owns recurrence/bounds/rebasing and
-`.4` owns fresh carrier authority, admission, and Rust rollout.
+completes the caller-frozen registry/cache plus result/failure policies; `.3` completes recurrence/bounds/rebasing;
+and `.4` owns fresh carrier authority, production attachment, admission, and Rust rollout.
 
 Related: [[rust-staged-ast-enrichment-dormant-red]], [[general-staged-ast-current-boundary]],
 [[general-staged-ast-enrichment-neutral-contract]], [[rust-staged-ast-enrichment-current-depth-authority]],
+[[rust-staged-ast-enrichment-recursive-authority]],
 [[typed-source-location-cursor-algebra-direction]], and ADR
 `0088`.

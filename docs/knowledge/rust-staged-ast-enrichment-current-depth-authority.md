@@ -13,9 +13,10 @@ answers:
   - "why does the Rust staged AST module allow dead_code"
   - "when is the Rust staged AST dead_code allowance removed"
 date: 2026-08-26
-status: current private dormant one-depth authority; recursive bounds and rebasing remain FUTURE-PARITY-BACKLOG.14.7.4.3-owned
+status: current private dormant current-depth authority; recursive extension is complete under FUTURE-PARITY-BACKLOG.14.7.4.3
 tags: [rust, staged-parsing, parse-job, registry, cache, policies, private, dormant]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.4.2 adds private rust/linkedspec-runtime/src/staged_ast_enrichment.rs and extends the same outer-cfg consumer. FrozenStagedRegistry accepts only caller-completed candidate outcomes and already-compiled opaque callbacks; pure dispatch performs alias, declaring-relative, ordered-root, and ordered-provider selection plus authority narrowing without loading or ambient access. The exact v2 identity selects the default top first; the run-local cache stores only immutable compiled plans under the neutral eight-field identity. One complete current depth is prepared and target-validated before execution, ordered by typed path/provenance/job id, isolated with fresh sibling contexts, and stitched atomically through all four result and three failure policies after detached node-bounded validation. The final RED now names only .14.7.4.3 recurrence, bounds, and diagnostic rebasing. Ordinary discovery remains zero tests, canonical CI has zero references, function-body v1/generated v2/Rust rollout/public surfaces remain unchanged, and neutral governance stays at 79 mutations."
+evidence_update_2026_08_26_recursive_authority: "FUTURE-PARITY-BACKLOG.14.7.4.3 preserves this API and adds a separate enrich_recursively entrypoint with complete breadth-first depths, exact-text/full-provenance chains, shared resources, expiring callback safe points, and direct/ordered-derived original-source rebasing. The sole RED advances to .14.7.4.4 carriers/admission/rollout/production seam; see rust-staged-ast-enrichment-recursive-authority."
 root_cause: "The marker/provenance leaf deliberately produced only inert logical data. Rust had no general-v2 frozen registry, pure resolver, selected-top-before-id function, plan-only cache, current-depth ordering/isolation seam, or portable result/failure stitcher. The existing staged_parser_registry.rs is a separate narrow function-body-v1 adapter and cannot safely be widened into that authority."
 reverify:
   - "RUSTFLAGS='--cfg linkedspec_staged_ast_enrichment_red' bash tools/run_cargo_local.sh test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract"
@@ -43,9 +44,11 @@ variable context. Results must be detached node-bounded plain JSON. `replace_mar
 `sibling_field`, and `append_child`, plus `fail`, `keep_text`, and `diagnostic_node`, operate on an unpublished AST
 copy so a fail path cannot publish partial work. Newly returned markers remain inert and are not rescanned.
 
-Breadth-first recurrence, decreasing-chain/cycle/depth/call/cancellation/resource authority, callback safe points,
-and original-source diagnostic rebasing remain deliberately absent under `.14.7.4.3`. Native/reconstructed/
-generated/emitted fresh top-level authority, ordinary/canonical admission, and Rust rollout remain `.14.7.4.4`.
+`FUTURE-PARITY-BACKLOG.14.7.4.3` preserves this one-depth entrypoint and adds a separate recursive entrypoint with
+breadth-first recurrence, decreasing-chain/cycle/depth/call/cancellation/resource authority, callback safe points,
+and original-source diagnostic rebasing. Its exact mechanism is recorded in
+[[rust-staged-ast-enrichment-recursive-authority]]. Native/reconstructed/generated/emitted fresh top-level
+authority, ordinary/canonical admission, and Rust rollout remain `.14.7.4.4`.
 
 The module is private and has no production caller until `.14.7.4.4`; only the cfg-enabled dormant consumer uses
 it today. Rust therefore diagnoses its items as dead in an ordinary build. `lib.rs` applies `allow(dead_code)` only
@@ -53,4 +56,5 @@ when `linkedspec_staged_ast_enrichment_red` is absent, and the runtime manifest 
 checking. `.14.7.4.4` must remove the allowance when it attaches the first production carrier.
 
 Related: [[rust-staged-ast-enrichment-marker-provenance]], [[rust-staged-ast-enrichment-dormant-red]],
-[[general-staged-ast-enrichment-neutral-contract]], [[general-staged-ast-current-boundary]], and ADR `0088`.
+[[rust-staged-ast-enrichment-recursive-authority]], [[general-staged-ast-enrichment-neutral-contract]],
+[[general-staged-ast-current-boundary]], and ADR `0088`.

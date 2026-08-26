@@ -330,7 +330,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   `bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py` to prove neutral+Perl
   lifecycle, Rust's dormant consumer plus three absent later consumers, 79 mutations, and exact single Perl
   phase-0/canonical admission. Public authoring remains `.14.7.9`.
-- **Rust general-staged private current-depth boundary:** `FUTURE-PARITY-BACKLOG.14.7.4.0-.2` freeze
+- **Rust general-staged private recursive boundary:** `FUTURE-PARITY-BACKLOG.14.7.4.0-.3` freeze
   `rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs` behind outer cfg
   `linkedspec_staged_ast_enrichment_red`. Run ordinary discovery with
   `bash tools/run_cargo_local.sh test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test
@@ -339,16 +339,20 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract`. All neutral,
   function-body-v1, diagnostic, registry-denial, native, reconstructed, generated-plan, and independently compiled
   emitted observations must complete before one final `LINKEDSPEC_STAGED_AST_ENRICHMENT_RED` panic names missing
-  breadth-first recurrence, bounds, and original-source diagnostic rebasing. Inspect `Expr::StagedParseJobMarker` for exclusive
+  fresh native/reconstructed/generated/emitted authority carriers, the production seam, admission, and rollout.
+  Inspect `Expr::StagedParseJobMarker` for exclusive
   literal lowering and `rust/linkedspec-runtime/src/staged_parse_job.rs` for exact text plus typed direct/ordered-
   derived provenance. The marker is inert and detached: it owns no parser, registry, source snapshot, callback,
   scheduler, cache, path, or host authority. Canonical CI must contain zero references and Rust rollout remains
   pending. Probe `rust/linkedspec-runtime/src/staged_ast_enrichment.rs` through `FrozenStagedRegistry`,
-  `staged_job_identity`, `staged_cache_identity`, `staged_current_depth_order`, and `enrich_current_depth`: the
+  `staged_job_identity`, `staged_cache_identity`, `staged_current_depth_order`, `enrich_current_depth`, and
+  `enrich_recursively`: the
   snapshot must already contain candidate outcomes and compiled callbacks; the resolver may not load or query.
   Exact cfg proof covers the neutral resolution/authority/cache/current-depth/result/failure cases, atomicity,
-  sibling isolation, detachment, and denials. `.14.7.4.3` next owns recurrence, decreasing-chain/cycle/shared-
-  resource authority, safe points, and original-source diagnostic rebasing; `.4` owns carriers/admission/rollout.
+  sibling isolation, detachment, breadth-first next-depth scheduling, exact cycle/strict-decrease chains, shared
+  cancellation/deadline/step/call/depth/result/diagnostic limits, expiring callback safe points, direct/ordered-
+  derived rebasing, and adversarial denials. `.14.7.4.4` next owns fresh top-level carriers, the first production
+  caller and dead-code-allowance removal, ordinary/canonical admission, and Rust rollout.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.

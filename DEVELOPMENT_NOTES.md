@@ -9,6 +9,18 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.4.3` — Rust staged recursive authority): exact clean activation is
+  current-depth commit `e2e752f5`; this focused leaf owns only dormant recurrence, bounds, safe points, rebasing,
+  and the same consumer's `.4` carrier/admission RED.
+- `enrich_recursively` validates a complete depth before executing it, sorts depth/path/provenance/job id, and
+  discovers only successfully stitched markers for the next depth while retaining one immutable registry/cache.
+- Active lineage uses normalized parser, selected top, exact UTF-8 payload SHA-256, and full typed provenance.
+  Exact repeats are cycles; same-parser/top recurrence requires segment containment and smaller scalar extent.
+- Cancellation identity/callback, caller clock/deadline, steps, calls, depth, result nodes, and diagnostic bytes
+  spend monotonically across the invocation. Callback contexts expose safe points/rebasing and expire at settlement.
+- Direct projections remain direct; ordered-derived cross-segment spans retain `concatenate_in_order`. Focused cfg,
+  ordinary zero-test, runtime 197/197, recognition 12/12, trace 11/11, typed 4/4, and all ledgers pass. `.4` retains
+  fresh carriers, first production caller/dead-code allowance removal, admission, rollout, and parent closure.
 - 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.4.2` — Rust staged current-depth authority): exact clean activation is
   corrective-closeout commit `17177e40`; the focused leaf owns only private caller-frozen resolution/cache,
   current-depth execution/isolation, result/failure stitching, and the same consumer's `.3` RED.

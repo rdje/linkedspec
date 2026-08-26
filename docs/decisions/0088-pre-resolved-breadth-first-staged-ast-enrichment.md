@@ -250,6 +250,19 @@ unrescanned. The unchanged dormant consumer now reaches only `.14.7.4.3` breadth
 chain/cycle/shared-resource authority, and original-source diagnostic rebasing. Ordinary/canonical discovery,
 Rust rollout, generated-source v2, function-body v1, public/outward behavior, and other backends do not move.
 
+Rust recursive leaf `FUTURE-PARITY-BACKLOG.14.7.4.3` preserves the one-depth API and adds private
+`enrich_recursively`. Each complete depth resolves and validates before callbacks, sorts depth/path/provenance/job
+order, and queues only successfully stitched returned markers for the next depth. Active tuples bind normalized
+parser, selected top, exact UTF-8 payload digest, and full provenance; exact repeats are cycles, while repeated
+parser/top lineage requires strict segment containment and a smaller total Unicode-scalar extent. Cancellation
+identity/callback, caller clock/deadline, steps, calls, depth, result nodes, and diagnostic bytes spend monotonically
+across all depths. Ephemeral callback contexts expose safe points and direct/ordered-derived original-source
+rebasing, expire after settlement, preserve `concatenate_in_order` across derived segments, and truncate only
+through the governed diagnostic-byte sentinel. The unchanged dormant consumer now reaches only `.14.7.4.4` fresh
+top-level carriers, production seam, dead-code-allowance removal, admission, and Rust rollout. Function-body v1,
+generated-source v2, neutral lifecycle/mutations, public/outward behavior, canonical topology, and other backends
+do not move.
+
 ## Links
 
 - Owning task: `docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md`
@@ -260,4 +273,5 @@ Rust rollout, generated-source v2, function-body v1, public/outward behavior, an
 - Knowledge: `docs/knowledge/general-staged-ast-enrichment-neutral-contract.md` and
   `docs/knowledge/perl-staged-ast-enrichment-recursive-authority.md` plus
   `docs/knowledge/rust-staged-ast-enrichment-dormant-red.md` and
-  `docs/knowledge/rust-staged-ast-enrichment-current-depth-authority.md`
+  `docs/knowledge/rust-staged-ast-enrichment-current-depth-authority.md` plus
+  `docs/knowledge/rust-staged-ast-enrichment-recursive-authority.md`

@@ -1,13 +1,13 @@
 # MEMORY
 
-- activation_commit: `17177e40f223cba3b36f3a061cab0dab3ec4d520` — exact clean corrective-closeout base for
-  task-tree-first Rust staged `FUTURE-PARITY-BACKLOG.14.7.4.2`; brief cleared; no push.
-- latest_completed_leaf: intended `FUTURE-PARITY-BACKLOG.14.7.4.2 - add Rust staged current-depth authority`;
-  private pure resolution/cache, isolated one-depth execution, and all result/failure policies are complete.
-- active_work_unit: none after the intended `.14.7.4.2` commit; ordinary/canonical dormancy and pending rollout hold.
-- next_action: from the exact clean `.14.7.4.2` commit, activate `FUTURE-PARITY-BACKLOG.14.7.4.3` and implement
-  only recursive scheduling, decreasing-chain/cycle/resource bounds, and original-source diagnostic rebasing.
-- in_flight_uncommitted: none after the intended `.14.7.4.2` commit; no background job remains.
+- activation_commit: `e2e752f5cda17f81584168512d5ad6f0aaef5859` — exact clean current-depth-authority base for
+  task-tree-first Rust staged `FUTURE-PARITY-BACKLOG.14.7.4.3`; brief cleared; no push.
+- latest_completed_leaf: intended `FUTURE-PARITY-BACKLOG.14.7.4.3 - add Rust staged recursive authority`;
+  private breadth-first recurrence, shared bounds, safe points, and original-source rebasing are complete.
+- active_work_unit: none after the intended `.14.7.4.3` commit; ordinary/canonical dormancy and pending rollout hold.
+- next_action: from the exact clean `.14.7.4.3` commit, activate `FUTURE-PARITY-BACKLOG.14.7.4.4` and implement
+  only fresh top-level carriers, the production seam/dead-code allowance removal, admission, and Rust rollout.
+- in_flight_uncommitted: none after the intended `.14.7.4.3` commit; no background job remains.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -51,8 +51,9 @@
   9 rollout legs, 35 owners, and 79 mutations after Rust dormant marker/provenance. Perl `.14.7.3.1-.4` now provide the private marker/provenance,
   caller-frozen resolution/cache/policies, breadth-first recurrence, strict chains/shared resources, and source
   rebasing plus four fresh-authority carriers at 143/143. Only Perl is admitted; format/public/outward behavior is
-  unchanged. Rust `.14.7.4.0-.2` retain zero ordinary tests and add an inert detached marker, strict literal
+  unchanged. Rust `.14.7.4.0-.3` retain zero ordinary tests and add an inert detached marker, strict literal
   options, live-span direct/ordered-derived provenance, pure caller-frozen resolution/cache, isolated complete-
-  depth ordering, detached atomic stitching, and all four result/three failure policies. Only `.4.3` recurrence,
-  bounds, and rebasing remain RED; Rust rollout remains pending. Corrective `.5.1-.4` are closed.
-- latest_bootstrap_read: 2026-08-26 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox are reviewed. `.14.7.4.2` adds only private dormant current-depth authority from clean `17177e40`; v1/v2 formats, carrier/admission/rollout/public/other-backend behavior stay fixed. Intended commit: `FUTURE-PARITY-BACKLOG.14.7.4.2 - add Rust staged current-depth authority`; `.14.7.4.3` is next from clean handoff.
+  depth ordering, detached atomic stitching, all four result/three failure policies, breadth-first recurrence, exact
+  cycle/decrease guards, shared resources, safe points, and typed source rebasing. Only `.4.4` fresh carriers,
+  production seam, admission, and rollout remain RED. Corrective `.5.1-.4` are closed.
+- latest_bootstrap_read: 2026-08-26 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox are reviewed. `.14.7.4.3` adds only private dormant recursive authority from clean `e2e752f5`; v1/v2 formats, carrier/admission/rollout/public/other-backend behavior stay fixed. Intended commit: `FUTURE-PARITY-BACKLOG.14.7.4.3 - add Rust staged recursive authority`; `.14.7.4.4` is next from clean handoff.
