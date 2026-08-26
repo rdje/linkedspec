@@ -17,8 +17,8 @@ resolution, immutable pre-registered parser/cache authority, breadth-first recur
 failure policies, strict decreasing/cycle/depth/call/cancellation/resource bounds, detached results, diagnostics,
 carrier obligations, dormant routes, rollout, exact ownership, and the unchanged function-body-v1 adapter. The
 checker passes 4 registry entries, 8 provenance, 8 resolution/6 authority, 10 cache, 4 queue/3 isolation,
-4 result plus 3 failure policies, 10 chain, 5 detachment, 37 diagnostics, 9 rollout legs, 35 owners, and 79
-reason-checked mutations after Rust dormant marker/provenance implementation. It reuses ADR `0056`'s source algebra and progressive authority narrowing without
+4 result plus 3 failure policies, 10 chain, 5 detachment, 37 diagnostics, 9 rollout legs, 35 owners, and 84
+reason-checked mutations after Rust carrier admission. It reuses ADR `0056`'s source algebra and progressive authority narrowing without
 reusing `dispatch_span` syntax or elevating an authored parser id into filesystem authority.
 
 Perl leaves `FUTURE-PARITY-BACKLOG.14.7.3.1-.4` now implement and privately admit that same final path. `.1` makes exact assignment-form `parse_job(text_expr, literal_options)` one exclusive
@@ -46,9 +46,9 @@ authority. The final-path consumer is fully GREEN at 143 top-level checks, appea
 once in canonical CI, and promotes only Perl. Rust/Dart/Julia/Lua, recurrence, public authoring, language inventory,
 outward surfaces, generated format v2, and function-body v1 remain unchanged or pending.
 
-Rust leaves `FUTURE-PARITY-BACKLOG.14.7.4.0-.3` now freeze the next backend boundary and complete private dormant
-recursive authority. One exact outer-cfg consumer runs zero tests under ordinary Cargo discovery and has no
-canonical-CI reference. Its opt-in final path keeps the neutral inventory and current function-body-v1 queue/
+Rust leaves `FUTURE-PARITY-BACKLOG.14.7.4.0-.4` now implement and privately admit the next complete backend path.
+One exact consumer runs in ordinary Cargo discovery and in canonical CI. Its final path keeps the neutral inventory
+and current function-body-v1 queue/
 resolve/load/compile/execute/cache/stitch plus wrong-top context GREEN, while the v1 registry denies `expr-v1` at
 resolve. Exact scalar-assignment `parse_job(text_expr, hash(literal options))` lowers exclusively to
 `Expr::StagedParseJobMarker`; malformed, dynamic, residual-generic, transformed/copied-text, provenance-smuggling,
@@ -67,8 +67,13 @@ callbacks, schedules returned markers only at the next depth, and carries exact 
 provenance lineage. Exact repeats and non-decreasing same-parser/top lineage reject. One cancellation identity,
 clock/deadline, remaining steps, calls, depth, result nodes, and diagnostic-byte authority spend across every
 depth; expiring callback contexts provide safe points and direct/ordered-derived source projection without false
-contiguous spans. Native/reconstructed/generated/emitted fresh authority is still absent. The sole RED now names
-`.14.7.4.4` carriers, production seam/dead-code allowance removal, admission, and Rust rollout.
+contiguous spans. A private host-only seed attaches the authority after the complete parent result on native,
+reconstructed, validated generated-plan, and independently compiled emitted routes. Every top-level execution
+constructs a fresh frozen registry/cache and recursive authority; equal detached records, zero-hit/one-miss
+run-local caches, distinct callback/cancellation/clock identities, cross-result mutation isolation, and emitted
+logical-source authority absence are executable proof. The first production caller removes the temporary outer
+cfg, cfg-only exports, manifest check-cfg registration, and conditional dead-code allowance. Rust alone is
+promoted; generated format v2, function-body v1, public/outward behavior, and later backends remain unchanged.
 
 Focused `.14.7.4.1` proof also exposed two pre-existing Rust defects against its exact clean base. Corrective
 `TRACE-OBSERVABILITY.5.1` now repairs the first: `compile_with_events` runs the already-current progressive static
@@ -79,10 +84,10 @@ unchanged `child_dispatch` / result pair; trace controls pass 11/11 and gap/gene
 stale private progressive-authority route assertion discovered during `.5.1` proof is separately owned by `.5.3`.
 `.5.3` now repairs that proof by continuing to forbid the authority target while requiring the separately admitted
 contract input and cfg command exactly once. Cfg authority is 4/4 and ordinary discovery remains 0/0 for both
-targets. `.5.4` aligns the stale Perl staged-admission snapshot with the 79-mutation / Rust-`dormant_red` truth
+targets. `.5.4` historically aligned the stale Perl staged-admission snapshot with the 79-mutation / Rust-`dormant_red` truth
 introduced by `.14.7.4.0` commit `e37a8b77`; 143/143 plus canonical proof close corrective `.5`. `.14.7.4.2`
-then completes current-depth authority from that clean handoff, and `.14.7.4.3` completes recursive authority.
-Carrier/admission `.14.7.4.4` is next.
+then completes current-depth authority from that clean handoff, `.14.7.4.3` completes recursive authority, and
+`.14.7.4.4` admits four fresh carriers at 84 neutral mutations. Dart `.14.7.5.0` is next.
 
 This closeout's mandatory engineering-notes rollover publishes immutable segment `4990`. ADR `0090` advances
 only finite route controls from 17/16 to 18 files / 17 manifest lines; the measured collection remains
@@ -99,9 +104,8 @@ id/path/parser/top/payload/span/failure context plus resolved built-in identity.
 diagnostics: success, resolution, execution, stitching, policies, queue depth, formats, capabilities, and outward
 surfaces stay fixed. Executable neutral contract `.2` and the Perl behavioral parent `.3` are complete; backend parents `.4-.7`, recurrence `.8`,
 public authoring/closeout `.9`, and independent recomposition `.10` remain dependency-frozen behind it. Every
-later runtime rollout leg and public/outward surface therefore remains pending; Rust carrier/admission `.4.4`
-is the next clean frontier now that current-depth `.4.2`, recursive authority `.4.3`, and corrective
-`TRACE-OBSERVABILITY.5.1-.4` are complete.
+later runtime rollout leg and public/outward surface therefore remains pending except the now-admitted Rust
+carrier path `.4.4`; Dart dormant-boundary `.5.0` is the next clean frontier.
 
 ## Typed transaction safety now composes the complete recognition authority
 

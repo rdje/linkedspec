@@ -327,32 +327,31 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   fresh scheduler/cache from invocation options and enrich only after the parent AST returns. The oracle proves
   native, normalized-descriptor, validated generated-plan, and independently loaded emitted equality plus distinct
   callbacks/cancellation/clocks and serialized-authority absence. Then run
-  `bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py` to prove neutral+Perl
-  lifecycle, Rust's dormant consumer plus three absent later consumers, 79 mutations, and exact single Perl
-  phase-0/canonical admission. Public authoring remains `.14.7.9`.
-- **Rust general-staged private recursive boundary:** `FUTURE-PARITY-BACKLOG.14.7.4.0-.3` freeze
-  `rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs` behind outer cfg
-  `linkedspec_staged_ast_enrichment_red`. Run ordinary discovery with
+  `bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py` to prove neutral+Perl+Rust
+  lifecycle, three absent later consumers, 84 mutations, and exact single Perl/Rust ordinary+canonical admission.
+  Public authoring remains `.14.7.9`.
+- **Rust general-staged admitted private boundary:** `FUTURE-PARITY-BACKLOG.14.7.4.0-.4` owns
+  `rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs` as an ordinary and canonical consumer. Run it with
   `bash tools/run_cargo_local.sh test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test
-  staged_ast_enrichment_contract`; it must report zero tests. Run the exact opt-in RED with
-  `RUSTFLAGS='--cfg linkedspec_staged_ast_enrichment_red' bash tools/run_cargo_local.sh test --offline
-  --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract`. All neutral,
+  staged_ast_enrichment_contract`; its one top-level test covers all neutral,
   function-body-v1, diagnostic, registry-denial, native, reconstructed, generated-plan, and independently compiled
-  emitted observations must complete before one final `LINKEDSPEC_STAGED_AST_ENRICHMENT_RED` panic names missing
-  fresh native/reconstructed/generated/emitted authority carriers, the production seam, admission, and rollout.
+  emitted observations, including four fresh-authority production executions.
   Inspect `Expr::StagedParseJobMarker` for exclusive
   literal lowering and `rust/linkedspec-runtime/src/staged_parse_job.rs` for exact text plus typed direct/ordered-
   derived provenance. The marker is inert and detached: it owns no parser, registry, source snapshot, callback,
-  scheduler, cache, path, or host authority. Canonical CI must contain zero references and Rust rollout remains
-  pending. Probe `rust/linkedspec-runtime/src/staged_ast_enrichment.rs` through `FrozenStagedRegistry`,
+  scheduler, cache, path, or host authority. Canonical CI requires the exact test path once and Rust rollout is
+  complete. Probe `rust/linkedspec-runtime/src/staged_ast_enrichment.rs` through `StagedAstEnrichmentSeed`,
+  `FrozenStagedRegistry`,
   `staged_job_identity`, `staged_cache_identity`, `staged_current_depth_order`, `enrich_current_depth`, and
   `enrich_recursively`: the
   snapshot must already contain candidate outcomes and compiled callbacks; the resolver may not load or query.
   Exact cfg proof covers the neutral resolution/authority/cache/current-depth/result/failure cases, atomicity,
   sibling isolation, detachment, breadth-first next-depth scheduling, exact cycle/strict-decrease chains, shared
   cancellation/deadline/step/call/depth/result/diagnostic limits, expiring callback safe points, direct/ordered-
-  derived rebasing, and adversarial denials. `.14.7.4.4` next owns fresh top-level carriers, the first production
-  caller and dead-code-allowance removal, ordinary/canonical admission, and Rust rollout.
+  derived rebasing, and adversarial denials. `StagedAstEnrichmentSeed::start` constructs a fresh registry/cache and
+  recursive authority for every top-level native, reconstructed, generated-plan, or emitted execution; completion
+  occurs only after the parent result and returns the detached neutral record. No outer cfg, cfg-only export,
+  check-cfg registration, or conditional dead-code allowance remains. Dart `.14.7.5.0` is next.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.

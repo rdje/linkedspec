@@ -752,17 +752,19 @@ top-level invocation and runs it only after the complete parent parse. Native, n
 emitted routes return equal detached output while serialized carrier data contains no live authority. The
 final-path oracle is 143/143 and appears once in phase-0 and once in canonical CI; only Perl rollout is promoted.
 Generated-source v2, function-body v1, public inventory, and outward surfaces remain unchanged. Rust
-`.14.7.4.0-.3` now supply one exact dormant outer-cfg consumer plus its private declaration and recursive
-authority: ordinary discovery runs zero tests, while opt-in execution preserves current v1 and proves an exclusive
+`.14.7.4.0-.4` now supply and privately admit the corresponding complete path. The ordinary and canonical
+consumer preserves current v1 and proves an exclusive
 inert marker, strict literal options, exact text, typed direct/ordered-derived provenance, caller-frozen pure
 resolution/cache, deterministic sibling-isolated execution, detached atomic stitching, every result/failure
 policy, breadth-first next-depth scheduling, exact cycle/decrease guards, shared cancellation/resources, callback
-safe points/expiry, direct/ordered-derived source rebasing, and adversarial denials. Its exact test path is absent
-from canonical CI; fresh carrier authority, the production seam, admission, and Rust rollout remain pending under
-`.14.7.4.4`. `TRACE-OBSERVABILITY.5.1-.4` are complete: traced progressive
+safe points/expiry, direct/ordered-derived source rebasing, and adversarial denials. Native, reconstructed,
+validated generated-plan, and independently compiled emitted execution each start from the same host-only seed but
+build a fresh registry/cache and recursive authority after the complete parent result. The four results are equal
+and detached; emitted logical source serializes none of the live authority. The temporary outer cfg, cfg-only
+exports, check-cfg registration, and conditional dead-code allowance are gone. `TRACE-OBSERVABILITY.5.1-.4` are complete: traced progressive
 validation and gap-aware child-dispatch parity are restored, while the private authority stays dormant beside the
-one admitted contract route. `.5.4` aligns the Perl snapshot to 79 mutations plus Rust `dormant_red`, passes
-143/143 and canonical closeout; Rust has since advanced through `.14.7.4.3` to the `.4` frontier. Dart/Julia/Lua consumers remain
+one admitted contract route. `.5.4` historically aligned the Perl snapshot to 79 mutations plus Rust
+`dormant_red`; Rust admission now advances the neutral oracle to 84 mutations and promotes only Rust. Dart/Julia/Lua consumers remain
 absent under `.14.7.5-.7`. Mandatory engineering-notes segment `4990` is finitely authorized at 18 files / 17
 manifest lines by ADR `0090`; no other pressure ceiling changes.
 

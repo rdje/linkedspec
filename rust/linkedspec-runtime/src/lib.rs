@@ -29,32 +29,24 @@ pub mod source_emitter;
 pub mod source_location;
 pub mod spec_loader;
 pub mod spec_parser;
-// FUTURE-PARITY-BACKLOG.14.7.4.4 removes this ordinary-build allowance when it
-// attaches the first production carrier; the cfg-enabled dormant consumer uses
-// every exported test seam in the meantime.
-#[cfg_attr(not(linkedspec_staged_ast_enrichment_red), allow(dead_code))]
 mod staged_ast_enrichment;
 mod staged_parse_job;
 pub mod staged_parser_registry;
 pub mod unicode_case_mapping;
 
-#[allow(unexpected_cfgs)]
-mod staged_parse_job_test_exports {
-    #[cfg(linkedspec_staged_ast_enrichment_red)]
+mod staged_ast_enrichment_private_exports {
     pub use crate::staged_ast_enrichment::{
-        CompiledStagedAuthority, FrozenStagedRegistry, StagedAstEnrichmentError, StagedCacheStats,
-        StagedEnrichmentOutcome, StagedRecursiveAuthority, StagedRecursiveOutcome,
-        StagedRecursiveResources, StagedRuntimeContext, enrich_current_depth, enrich_recursively,
-        evaluate_staged_chain_case, staged_cache_identity, staged_current_depth_order,
-        staged_job_identity,
+        CompiledStagedAuthority, FrozenStagedRegistry, StagedAstEnrichmentError,
+        StagedAstEnrichmentSeed, StagedCacheStats, StagedEnrichmentOutcome,
+        StagedRecursiveAuthority, StagedRecursiveOutcome, StagedRecursiveResources,
+        StagedRuntimeContext, enrich_current_depth, enrich_recursively, evaluate_staged_chain_case,
+        staged_cache_identity, staged_current_depth_order, staged_job_identity,
     };
-    #[cfg(linkedspec_staged_ast_enrichment_red)]
     pub use crate::staged_parse_job::validate_and_materialize_provenance;
 }
 
 #[doc(hidden)]
-#[allow(unused_imports)]
-pub use staged_parse_job_test_exports::*;
+pub use staged_ast_enrichment_private_exports::*;
 
 pub use diagnostic::{RuntimeDiagnostic, RuntimeExecutionError};
 pub use diagnostic_output::{

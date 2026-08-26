@@ -814,6 +814,117 @@ impl FrozenStagedRegistry {
     }
 }
 
+/// Opaque host-only recipe for one fresh staged-enrichment invocation.
+///
+/// The recipe is deliberately absent from compiled specifications and generated
+/// plans. Each start rebuilds the frozen registry and its empty plan cache, then
+/// binds a new recursive authority with fresh resource counters.
+#[derive(Clone)]
+pub struct StagedAstEnrichmentSeed {
+    state: Arc<StagedAstEnrichmentSeedState>,
+}
+
+struct StagedAstEnrichmentSeedState {
+    snapshot: Value,
+    compiled: BTreeMap<String, CompiledStagedAuthority>,
+    enrichment_options: Value,
+    recursive_config: Value,
+    cancelled: Arc<CancelledCallback>,
+    clock: Arc<ClockCallback>,
+}
+
+impl StagedAstEnrichmentSeed {
+    /// Bind caller-prepared logical data and opaque callbacks without placing
+    /// either authority or invocation state in a serializable artifact.
+    pub fn new<C, K>(
+        snapshot: Value,
+        compiled: BTreeMap<String, CompiledStagedAuthority>,
+        enrichment_options: Value,
+        recursive_config: Value,
+        cancelled: C,
+        clock: K,
+    ) -> Self
+    where
+        C: Fn(&Value) -> bool + Send + Sync + std::panic::RefUnwindSafe + 'static,
+        K: Fn() -> u64 + Send + Sync + std::panic::RefUnwindSafe + 'static,
+    {
+        Self {
+            state: Arc::new(StagedAstEnrichmentSeedState {
+                snapshot,
+                compiled,
+                enrichment_options,
+                recursive_config,
+                cancelled: Arc::new(cancelled),
+                clock: Arc::new(clock),
+            }),
+        }
+    }
+
+    pub(crate) fn start(&self) -> Result<StagedAstEnrichmentInvocation, StagedAstEnrichmentError> {
+        let registry =
+            FrozenStagedRegistry::from_value(&self.state.snapshot, self.state.compiled.clone())?;
+        let cancelled = Arc::clone(&self.state.cancelled);
+        let clock = Arc::clone(&self.state.clock);
+        let authority = StagedRecursiveAuthority::new(
+            &self.state.recursive_config,
+            move |token| cancelled(token),
+            move || clock(),
+        )?;
+        Ok(StagedAstEnrichmentInvocation {
+            registry,
+            enrichment_options: self.state.enrichment_options.clone(),
+            authority,
+        })
+    }
+}
+
+impl fmt::Debug for StagedAstEnrichmentSeed {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        formatter.write_str("StagedAstEnrichmentSeed(<opaque>)")
+    }
+}
+
+impl PartialEq for StagedAstEnrichmentSeed {
+    fn eq(&self, other: &Self) -> bool {
+        Arc::ptr_eq(&self.state, &other.state)
+    }
+}
+
+impl Eq for StagedAstEnrichmentSeed {}
+
+/// One execution-local registry, cache, and recursive authority.
+pub(crate) struct StagedAstEnrichmentInvocation {
+    registry: FrozenStagedRegistry,
+    enrichment_options: Value,
+    authority: StagedRecursiveAuthority,
+}
+
+impl StagedAstEnrichmentInvocation {
+    pub(crate) fn complete(
+        &self,
+        ast: &Value,
+        transaction_active: bool,
+    ) -> Result<Value, StagedAstEnrichmentError> {
+        if transaction_active {
+            return Err(StagedAstEnrichmentError::new(
+                "staged_transaction_forbidden",
+                "execute",
+                [
+                    ("origin", json!("post_ast")),
+                    ("effect", json!("parser_registry_or_staged_dispatch")),
+                ],
+            ));
+        }
+        enrich_recursively(
+            &self.registry,
+            ast,
+            &self.enrichment_options,
+            &self.authority,
+        )
+        .map(|outcome| outcome.as_record())
+    }
+}
+
 #[derive(Debug, Clone)]
 struct Versions {
     spec_language_version: u64,
@@ -988,6 +1099,19 @@ pub struct StagedRecursiveOutcome {
     pub cache: StagedCacheStats,
     /// Monotonically spent invocation-wide resource counters.
     pub resources: StagedRecursiveResources,
+}
+
+impl StagedRecursiveOutcome {
+    /// Return the detached neutral top-level result shape.
+    pub fn as_record(&self) -> Value {
+        json!({
+            "ast": self.ast,
+            "sidecars": self.sidecars,
+            "diagnostics": self.diagnostics,
+            "cache": self.cache.as_record(),
+            "resources": self.resources.as_record(),
+        })
+    }
 }
 
 /// Execute one complete marker depth through one frozen registry.

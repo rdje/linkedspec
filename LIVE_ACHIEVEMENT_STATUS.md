@@ -2,23 +2,29 @@
 
 ## Current Activity
 
-- Rust staged `.14.7.4.3` adds private breadth-first recurrence, exact cycle/decrease guards, shared resources,
-  callback safe points, and original-source rebasing behind the unchanged outer-cfg dormant consumer.
-- Complete depths, exact-text/full-provenance lineage, cancellation/deadline/step/call/depth/result/diagnostic
-  limits, context expiry, and direct/ordered-derived projection are implemented without carrier or rollout movement.
-- Its sole final RED now names `.14.7.4.4` fresh carriers, production seam, admission, and Rust rollout.
+- Rust staged `.14.7.4.4` attaches the complete private authority to native, reconstructed, validated generated-
+  plan, and independently compiled emitted top-level execution.
+- A host-only seed constructs a fresh frozen registry/cache and recursive authority per run after the complete
+  parent result. Equal detached output, independent zero-hit/one-miss caches, distinct callbacks/cancellation/
+  clocks, cross-result isolation, and serialized-authority absence are executable proof.
+- The exact ordinary/canonical consumer is GREEN, temporary cfg/dead-code scaffolding is removed, neutral
+  governance advances to 84 mutations, and only Rust rollout moves.
 
 ## Latest Completed Slice
 
-- `.14.7.4.3` completes Rust's private recursive staged authority while retaining ordinary zero-test and exact-
-  test-path canonical absence, unchanged function-body v1/generated v2, and pending Rust rollout.
+- `.14.7.4.4` implementation and focused proof are complete from clean base `de6f5a65`; canonical receipt and
+  atomic commit are the remaining closeout steps.
 
 ## Next Action
 
-- Complete focused signoff and commit `.14.7.4.3`; from the clean handoff, activate `.14.7.4.4` and add only fresh
-  native/reconstructed/generated/emitted authority carriers, the production seam, admission, and Rust rollout.
+- Complete exact canonical signoff and commit `.14.7.4.4`; from the clean handoff, activate Dart dormant-boundary
+  leaf `.14.7.5.0` task-tree-first.
 
 ## Recent Completions
+
+- `2026-08-26` — `.14.7.4.4` proves four fresh Rust production carriers, admits the exact consumer once in
+  ordinary/canonical topology, removes dormant cfg/dead-code scaffolding, promotes only Rust at 84 mutations, and
+  closes backend parent `.14.7.4` without public, format, or later-backend movement.
 
 - `2026-08-26` — `.14.7.4.3` adds Rust breadth-first recursive scheduling, exact cycle/strict-decrease lineage,
   shared cancellation/resources, expiring safe points, and typed source rebasing; only `.4` carrier/admission RED
@@ -66,9 +72,6 @@
 
 - `2026-08-25` — `.14.7.1` closes wrong-top compile diagnostic parity across all six runtime routes while
   preserving the narrow registry and every general/public boundary.
-
-- `2026-08-25` — `.14.7.0` audits one-depth function-body staged dispatch, assigns the three-backend compile-
-  context defect, freezes 37 detailed implementation owners, and preserves all runtime/public/governance behavior.
 
 ## History
 

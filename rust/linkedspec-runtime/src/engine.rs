@@ -283,6 +283,7 @@ pub struct ExecutionOptions {
     semantic_observation_sink: Option<RuntimeSemanticObservationSink>,
     bounded_child_parse_authority:
         Option<crate::bounded_child_parse_authority::ProgressiveExecutionSeed>,
+    staged_ast_enrichment: Option<crate::staged_ast_enrichment::StagedAstEnrichmentSeed>,
 }
 
 impl ExecutionOptions {
@@ -327,6 +328,22 @@ impl ExecutionOptions {
         &self,
     ) -> Option<&crate::bounded_child_parse_authority::ProgressiveExecutionSeed> {
         self.bounded_child_parse_authority.as_ref()
+    }
+
+    /// Install one opaque host recipe for private post-AST enrichment.
+    #[doc(hidden)]
+    pub fn with_staged_ast_enrichment(
+        mut self,
+        seed: crate::staged_ast_enrichment::StagedAstEnrichmentSeed,
+    ) -> Self {
+        self.staged_ast_enrichment = Some(seed);
+        self
+    }
+
+    pub(crate) fn staged_ast_enrichment(
+        &self,
+    ) -> Option<&crate::staged_ast_enrichment::StagedAstEnrichmentSeed> {
+        self.staged_ast_enrichment.as_ref()
     }
 }
 
@@ -2434,6 +2451,11 @@ impl Engine {
         ctx: &mut RuntimeContext,
         options: &ExecutionOptions,
     ) -> Result<Value, String> {
+        let staged = options
+            .staged_ast_enrichment()
+            .map(crate::staged_ast_enrichment::StagedAstEnrichmentSeed::start)
+            .transpose()
+            .map_err(|error| error.to_string())?;
         ctx.install_semantic_observation_sink(options.semantic_observation_sink());
         ctx.install_bounded_child_parse_authority(options.bounded_child_parse_authority())?;
         self.validate_compiled_slot_identities(ctx)?;
@@ -2451,7 +2473,7 @@ impl Engine {
         if ctx.semantic_observation_enabled() {
             ctx.emit_rule_result(&label, byte_to_char_offset(&ctx.input, ctx.pos));
         }
-        Ok(value.to_json())
+        self.complete_staged_ast_enrichment(ctx, staged.as_ref(), value.to_json())
     }
 
     fn execute_generated_with_plan_context(
@@ -2461,6 +2483,11 @@ impl Engine {
         source_identity: Option<&str>,
         options: &ExecutionOptions,
     ) -> Result<Value, String> {
+        let staged = options
+            .staged_ast_enrichment()
+            .map(crate::staged_ast_enrichment::StagedAstEnrichmentSeed::start)
+            .transpose()
+            .map_err(|error| error.to_string())?;
         ctx.install_semantic_observation_sink(options.semantic_observation_sink());
         ctx.install_bounded_child_parse_authority(options.bounded_child_parse_authority())?;
         self.validate_compiled_slot_identities(ctx)?;
@@ -2484,7 +2511,11 @@ impl Engine {
         if ctx.semantic_observation_enabled() {
             ctx.emit_rule_result(&label, byte_to_char_offset(&ctx.input, ctx.pos));
         }
-        Ok(RuntimeValue::Array(ctx.accumulator.clone()).to_json())
+        self.complete_staged_ast_enrichment(
+            ctx,
+            staged.as_ref(),
+            RuntimeValue::Array(ctx.accumulator.clone()).to_json(),
+        )
     }
 
     fn execute_generated_value_with_plan_context(
@@ -2494,6 +2525,11 @@ impl Engine {
         source_identity: Option<&str>,
         options: &ExecutionOptions,
     ) -> Result<Value, String> {
+        let staged = options
+            .staged_ast_enrichment()
+            .map(crate::staged_ast_enrichment::StagedAstEnrichmentSeed::start)
+            .transpose()
+            .map_err(|error| error.to_string())?;
         ctx.install_semantic_observation_sink(options.semantic_observation_sink());
         ctx.install_bounded_child_parse_authority(options.bounded_child_parse_authority())?;
         self.validate_compiled_slot_identities(ctx)?;
@@ -2517,7 +2553,29 @@ impl Engine {
         if ctx.semantic_observation_enabled() {
             ctx.emit_rule_result(&label, byte_to_char_offset(&ctx.input, ctx.pos));
         }
-        Ok(value.to_json())
+        self.complete_staged_ast_enrichment(ctx, staged.as_ref(), value.to_json())
+    }
+
+    fn complete_staged_ast_enrichment(
+        &self,
+        ctx: &mut RuntimeContext,
+        invocation: Option<&crate::staged_ast_enrichment::StagedAstEnrichmentInvocation>,
+        ast: Value,
+    ) -> Result<Value, String> {
+        let Some(invocation) = invocation else {
+            return Ok(ast);
+        };
+        invocation
+            .complete(&ast, ctx.recognition_transaction_active())
+            .map_err(|error| {
+                let top_rule = ctx.diagnostic_top_rule().map(str::to_owned);
+                ctx.capture_diagnostic_failure(
+                    "staged_ast_enrichment",
+                    "Rust staged-AST enrichment failed",
+                    top_rule.as_deref(),
+                );
+                error.to_string()
+            })
     }
 
     /// Execute a specific rule by label, entering at the given regex index

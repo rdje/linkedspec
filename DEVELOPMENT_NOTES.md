@@ -9,6 +9,18 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Search archived notes: `perl tools/read_document_history.pl --surface engineering_notes --grep '<literal>'`
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
+- 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.4.4` — Rust staged carrier admission): exact clean activation is
+  recursive-authority commit `de6f5a65`; the canonical leaf owns only fresh production carriers, dormancy removal,
+  exact admission, Rust rollout, and backend-parent closure.
+- `StagedAstEnrichmentSeed` retains caller-prepared logical authority privately and creates a new
+  `FrozenStagedRegistry`/plan cache plus `StagedRecursiveAuthority` for every top-level run. Completion receives the
+  full parent value and remains inside the existing diagnostic-returning execution boundary.
+- Native, reconstructed, generated-plan, and independently compiled emitted routes execute twice through one seed.
+  Equal detached records, one miss/zero hits on every run, distinct callbacks/cancellation/clocks, mutation
+  isolation, and logical-source authority-absence prove fresh rather than reused state.
+- The ordinary consumer is GREEN, canonical CI requires its exact path once, neutral governance rejects 84
+  mutations, and the outer cfg/cfg-only exports/check-cfg/dead-code allowance are removed. Function-body v1,
+  generated-source v2, public/outward surfaces, and later backends are unchanged; Dart `.14.7.5.0` is next.
 - 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.4.3` — Rust staged recursive authority): exact clean activation is
   current-depth commit `e2e752f5`; this focused leaf owns only dormant recurrence, bounds, safe points, rebasing,
   and the same consumer's `.4` carrier/admission RED.

@@ -10,6 +10,17 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-26 — FUTURE-PARITY-BACKLOG.14.7.4.4 — admit Rust staged enrichment carriers
+
+- Added one host-only invocation seed that constructs a fresh immutable registry/cache and recursive authority per
+  top-level execution, then enriches only after the complete parent result.
+- Attached the seed to native, reconstructed, validated generated-plan, and independently compiled emitted routes.
+  Their detached records agree while callbacks, cancellation, clocks, caches, and result mutation remain isolated;
+  logical generated/emitted data contains no live authority.
+- Removed the obsolete outer test cfg, cfg-only exports, manifest check-cfg registration, and conditional dead-code
+  allowance. The exact consumer is required once in ordinary/canonical topology, neutral governance is 84
+  mutations, only Rust rollout advances, and public/generated-format/later-backend behavior remains unchanged.
+
 ## 2026-08-26 — FUTURE-PARITY-BACKLOG.14.7.4.3 — add Rust staged recursive authority
 
 - Added a private breadth-first recursive entrypoint over the existing caller-frozen registry. Every complete depth

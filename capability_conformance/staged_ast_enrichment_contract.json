@@ -2,7 +2,7 @@
   "format": 1,
   "contract_id": "linkedspec-staged-ast-enrichment-v1",
   "task_owner": "FUTURE-PARITY-BACKLOG.14.7.2",
-  "status": "neutral_and_perl_complete_later_backends_pending",
+  "status": "neutral_perl_and_rust_complete_later_backends_pending",
   "expected_counts": {
     "registry_entries": 4,
     "sources": 2,
@@ -24,7 +24,7 @@
     "diagnostics": 37,
     "rollout_legs": 9,
     "ownership_rows": 35,
-    "mutations": 79
+    "mutations": 84
   },
   "authored_surface": {
     "example": "job_marker = parse_job(text_expr, hash(\"node_kind\", \"expression\", \"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", \"top\", \"Expr\", \"result_policy\", \"sibling_field\", \"into\", \"expression_ast\", \"on_error\", \"fail\"))",
@@ -45,7 +45,7 @@
       "into",
       "required_capabilities"
     ],
-    "availability": "neutral executable authority only; Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, recurring, and public authoring remain pending under FUTURE-PARITY-BACKLOG.14.7.3-.10"
+    "availability": "neutral executable authority with private Perl and Rust carriers complete; Dart, Julia, PUC Lua, LuaJIT, recurring, and public authoring remain pending under FUTURE-PARITY-BACKLOG.14.7.5-.10"
   },
   "policy": {
     "authority": "the caller freezes aliases, declaring-spec-relative candidates, ordered search-root candidates, ordered provider candidates, resolves every statically declared selector, and freezes immutable already-compiled registry entries before authored execution",
@@ -789,7 +789,7 @@
   ],
   "backend_consumers": [
     {"backend": "perl", "owner": "FUTURE-PARITY-BACKLOG.14.7.3.0", "path": "t/staged_ast_enrichment_perl_contract.t", "status": "complete"},
-    {"backend": "rust", "owner": "FUTURE-PARITY-BACKLOG.14.7.4.0", "path": "rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs", "status": "dormant_red"},
+    {"backend": "rust", "owner": "FUTURE-PARITY-BACKLOG.14.7.4.0", "path": "rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs", "status": "complete"},
     {"backend": "dart", "owner": "FUTURE-PARITY-BACKLOG.14.7.5.0", "path": "dart/test/staged_ast_enrichment_contract_test.dart", "status": "pending_absent"},
     {"backend": "julia", "owner": "FUTURE-PARITY-BACKLOG.14.7.6.0", "path": "julia/test/staged_ast_enrichment_contract_test.jl", "status": "pending_absent"},
     {"backend": "lua", "owner": "FUTURE-PARITY-BACKLOG.14.7.7.0", "path": "lua/test/staged_ast_enrichment_contract_test.lua", "status": "pending_absent"}
@@ -865,7 +865,7 @@
   "rollout": [
     {"order": 1, "leg": "neutral", "owner": "FUTURE-PARITY-BACKLOG.14.7.2", "status": "complete", "paths": ["capability_conformance/staged_ast_enrichment_contract.json", "tools/check_staged_ast_enrichment_contract.py"]},
     {"order": 2, "leg": "perl", "owner": "FUTURE-PARITY-BACKLOG.14.7.3", "status": "complete", "paths": ["t/staged_ast_enrichment_perl_contract.t"]},
-    {"order": 3, "leg": "rust", "owner": "FUTURE-PARITY-BACKLOG.14.7.4", "status": "pending", "paths": ["rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs"]},
+    {"order": 3, "leg": "rust", "owner": "FUTURE-PARITY-BACKLOG.14.7.4", "status": "complete", "paths": ["rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs"]},
     {"order": 4, "leg": "dart", "owner": "FUTURE-PARITY-BACKLOG.14.7.5", "status": "pending", "paths": ["dart/test/staged_ast_enrichment_contract_test.dart"]},
     {"order": 5, "leg": "julia", "owner": "FUTURE-PARITY-BACKLOG.14.7.6", "status": "pending", "paths": ["julia/test/staged_ast_enrichment_contract_test.jl"]},
     {"order": 6, "leg": "puc_lua", "owner": "FUTURE-PARITY-BACKLOG.14.7.7", "status": "pending", "paths": ["lua/test/staged_ast_enrichment_contract_test.lua"]},
@@ -886,6 +886,12 @@
       "syntax_invocation": "perl -c -Iperl t/staged_ast_enrichment_perl_contract.t",
       "registration_marker": "running exact Perl staged-AST enrichment admission consumer",
       "invocation": "PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract.t"
+    },
+    "rust_admission": {
+      "consumer_path": "rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs",
+      "ordinary_invocation": "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract",
+      "registration_marker": "running exact Rust staged-AST enrichment admission consumer",
+      "invocation": "cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract"
     },
     "storage_policy": "all Python cache, temporary, and process data stays under repository-derived project storage",
     "tracked_required": true
@@ -996,6 +1002,7 @@
     "diagnostic_context",
     "rollout_neutral",
     "rollout_backend",
+    "rollout_rust",
     "rollout_public",
     "canonical_contract",
     "canonical_checker",
@@ -1006,6 +1013,10 @@
     "perl_admission_syntax",
     "perl_admission_marker",
     "perl_admission_invocation",
+    "rust_admission_consumer",
+    "rust_admission_ordinary",
+    "rust_admission_marker",
+    "rust_admission_invocation",
     "ownership"
   ]
 }

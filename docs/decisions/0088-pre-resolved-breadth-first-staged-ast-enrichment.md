@@ -263,6 +263,20 @@ top-level carriers, production seam, dead-code-allowance removal, admission, and
 generated-source v2, neutral lifecycle/mutations, public/outward behavior, canonical topology, and other backends
 do not move.
 
+Rust carrier/admission leaf `FUTURE-PARITY-BACKLOG.14.7.4.4` adds opaque host-only
+`StagedAstEnrichmentSeed` to `ExecutionOptions`. Every top-level options-bearing native or generated execution
+rebuilds `FrozenStagedRegistry` with an empty plan cache and binds a new `StagedRecursiveAuthority` before parent
+execution; only after the complete parent value returns does the engine check live transaction state and call the
+committed recursive scheduler inside the existing runtime-error boundary. Native, JSON-reconstructed, validated
+generated-plan, and independently compiled emitted-source routes each run twice through one seed and return equal
+detached AST/sidecar/diagnostic/cache/resource records with one miss/zero hits per run, fresh callback/
+cancellation/clock observations, and no cross-result mutation. Compiled JSON, plans, and emitted source retain no
+callback, parser, registry/source authority, cancellation/deadline/budget state, mutable queue/cache, path, or host
+handle. The outer cfg, cfg-only exports, manifest check-cfg, and conditional dead-code allowance are removed after
+the first production caller. The exact consumer is GREEN under ordinary Cargo and registered once in canonical
+CI. Only Rust backend/rollout truth advances; the checker rejects 84 mutations. Function-body v1, generated-source
+v2, public/outward surfaces, later backends, recurrence, and combined no-drift remain unchanged or pending.
+
 ## Links
 
 - Owning task: `docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md`

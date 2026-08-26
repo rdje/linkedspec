@@ -3,11 +3,10 @@
 > Status: executable backend-neutral design. General `parse_job(...)` authoring is not yet public. Perl now has a
 > privately admitted marker, caller-frozen recursive authority, and four fresh-authority carriers with a
 > fully GREEN 143-check oracle;
-> Rust has one private dormant marker/provenance plus recursive authority implementation whose current-v1,
-> logical-carrier, resolution/cache, isolation, policy, breadth-first, chain/resource, and rebasing observations
-> pass before one exact carrier/admission RED, but no Rust production carrier admission or rollout;
-> the current shipped five-backend/six-runtime implementation still supports only the narrow function-body v1
-> adapter described below.
+> Rust now has the same private complete authority, four fresh native/reconstructed/generated/emitted production
+> carriers, and exact ordinary/canonical admission at 84 neutral mutations;
+> Dart, Julia, and Lua remain absent, and the only publicly authored five-backend/six-runtime surface is still the
+> narrow function-body v1 adapter described below.
 
 LinkedSpec's staged model lets one completed parse return bounded text islands for later parsers to refine. The
 neutral general contract is now executable and mutation-checked before any backend implements it. Its artifact
@@ -380,10 +379,29 @@ remains `derived_text` with `concatenate_in_order`; the scheduler never invents 
 Portable diagnostics use the same projection and cumulative UTF-8 byte budget. An oversized diagnostic becomes
 the exact `staged_diagnostic_truncated` sentinel.
 
-The final assertion therefore advances to `.14.7.4.4`'s missing fresh native/reconstructed/generated/emitted
-top-level authority carriers, first production caller and dead-code-allowance removal, ordinary/canonical
-admission, and Rust rollout. The private module remains cfg-conditionally allowed as dead code only until that
-production seam exists.
+Rust now binds this authority through an opaque host-only `StagedAstEnrichmentSeed` carried in
+`ExecutionOptions`. The seed is a recipe, not mutable invocation state. Every top-level call reconstructs a new
+`FrozenStagedRegistry` and empty plan cache, then binds a new `StagedRecursiveAuthority`. The parent parse runs to
+completion first; only then does the engine verify that no recognition transaction remains active and invoke
+`enrich_recursively` inside the normal native or generated runtime-error boundary. Calls without a seed retain
+their previous return shape and behavior.
+
+The same options-bearing seam serves native execution, serialized/JSON-reconstructed execution, validated
+generated-plan execution, and independently compiled generated-source-v2 `execute_with_options`. Compiled JSON,
+generated plans, and emitted source contain only the inert logical marker. They never serialize callbacks,
+compiled child parsers, registry/source authority, cancellation identity or callbacks, clocks, deadlines,
+budgets, mutable queues/caches, filesystem paths, or host handles.
+
+The admitted consumer executes every route twice through one seed. Each execution reports one cache entry, zero
+hits, and one miss, proving that cache state is fresh rather than retained by the seed. Callback, cancellation,
+and clock counters prove a new recursive invocation on every call. All four routes return equal detached
+AST/sidecar/diagnostic/cache/resource records, and mutating one returned result cannot change another. The former
+outer cfg, custom manifest check-cfg, cfg-only exports, and conditional `dead_code` allowance are gone because the
+production engine is now the real caller.
+
+This is private Rust backend admission, not public `parse_job(...)` authoring. Ordinary Cargo discovers the GREEN
+consumer, canonical CI requires and invokes it exactly once, and only Rust rollout is promoted. Dart, Julia, Lua,
+six-runtime recurrence, public authoring, independent recomposition, and combined no-drift retain their owners.
 
 Publishing this boundary crossed the bounded `CHANGES.md` rollover threshold. The repository archived one complete
 218-line record set as immutable segment `4991`; ADR `0089` advances only the finite change-history collection and
@@ -398,5 +416,6 @@ bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract
 
 The checker currently reports 4 registry entries; 8 provenance, 8 resolution, 6 authority, 10 cache, 4 queue,
 3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; 5 backend
-consumers/6 routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 owners; and 79 reason-checked
-mutations. The neutral checker is always registered in canonical local CI; the dormant Rust consumer is not.
+consumers/6 routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 owners; and 84 reason-checked
+mutations. The neutral checker, Perl consumer, and Rust consumer are registered in canonical local CI; later
+backend consumers remain absent.

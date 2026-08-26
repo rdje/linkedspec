@@ -497,6 +497,10 @@ impl RuntimeContext {
         Ok(())
     }
 
+    pub(crate) fn recognition_transaction_active(&self) -> bool {
+        self.recognition_transactions.has_active_transaction()
+    }
+
     pub(crate) fn dispatch_bounded_child_parse(
         &mut self,
         target: &str,

@@ -1,17 +1,8 @@
-#![allow(unexpected_cfgs)]
-#![cfg(linkedspec_staged_ast_enrichment_red)]
-
-//! FUTURE-PARITY-BACKLOG.14.7.4.3 — dormant Rust staged-AST recursive contract.
+//! FUTURE-PARITY-BACKLOG.14.7.4.4 — admitted Rust staged-AST enrichment contract.
 //!
-//! Ordinary Cargo discovery compiles this target with zero active tests. Before admission, run
-//! the exact final-path RED with:
-//!
-//! `RUSTFLAGS='--cfg linkedspec_staged_ast_enrichment_red' bash tools/run_cargo_local.sh test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract`.
-//!
-//! This consumer freezes the neutral inventory, current function-body v1 compatibility, and all
-//! four final Rust observation surfaces without changing production behavior or canonical CI. Its
-//! sole intentional failure is fresh production carriers/admission owned by `.14.7.4.4`; marker,
-//! current-depth, recursive queue, resource, and source-rebasing authority are complete here.
+//! The consumer freezes the neutral inventory, function-body v1 compatibility, private marker and
+//! recursive authority, and four fresh-authority production carriers. Ordinary Cargo and canonical
+//! CI each discover this exact target once.
 
 use linkedspec_core::compiler::compile;
 use linkedspec_core::expr::Expr;
@@ -20,14 +11,16 @@ use linkedspec_core::validation::validate;
 use linkedspec_runtime::engine::{Engine, ExecutionOptions};
 use linkedspec_runtime::source_emitter::{
     GENERATED_SOURCE_CONTRACT, GeneratedPlanRow, emit_rust_source_v2, execute_generated_parser_v2,
+    execute_generated_parser_v2_with_options,
 };
 use linkedspec_runtime::source_location::SourceAuthority;
 use linkedspec_runtime::spec_parser::parse_spec_with_user_functions;
 use linkedspec_runtime::staged_parser_registry::{execute_parse_job, execute_parse_jobs};
 use linkedspec_runtime::{
-    CompiledStagedAuthority, FrozenStagedRegistry, StagedRecursiveAuthority, StagedRuntimeContext,
-    enrich_current_depth, enrich_recursively, evaluate_staged_chain_case, staged_cache_identity,
-    staged_current_depth_order, staged_job_identity, validate_and_materialize_provenance,
+    CompiledStagedAuthority, FrozenStagedRegistry, StagedAstEnrichmentSeed,
+    StagedRecursiveAuthority, StagedRuntimeContext, enrich_current_depth, enrich_recursively,
+    evaluate_staged_chain_case, staged_cache_identity, staged_current_depth_order,
+    staged_job_identity, validate_and_materialize_provenance,
 };
 use serde_json::{Value, json};
 use std::collections::BTreeMap;
@@ -54,10 +47,87 @@ const AUTHORED_SOURCE: &str = r#"Top::
   return(job_marker)
  }
 "#;
+const CARRIER_SOURCE: &str = r#"Top::
+ /([^;]+);/ -> Top {
+  job_marker = parse_job(entry_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr", "top", "Expr", "result_policy", "sibling_field", "into", "expression_ast", "on_error", "fail"))
+  return(hash("payload", job_marker))
+ }
+"#;
 const PLAN: &[GeneratedPlanRow] = &[GeneratedPlanRow {
     label: "Top",
     family: "default",
 }];
+const EMITTED_CARRIER_SETUP: &str = r#"
+use linkedspec_runtime::{CompiledStagedAuthority, StagedAstEnrichmentSeed};
+use linkedspec_runtime::engine::ExecutionOptions;
+use serde_json::{Value, json};
+use std::collections::BTreeMap;
+use std::sync::Arc;
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+fn execution_options(
+    neutral: &Value,
+    calls: &Arc<AtomicUsize>,
+    cancellation_checks: &Arc<AtomicUsize>,
+    clock_checks: &Arc<AtomicUsize>,
+) -> ExecutionOptions {
+    let calls_for_callback = Arc::clone(calls);
+    let authority = CompiledStagedAuthority::new(move |request, _context| {
+        calls_for_callback.fetch_add(1, Ordering::SeqCst);
+        Ok(json!({"kind": "expression", "text": request["text"]}))
+    });
+    let compiled = neutral["resolution_snapshot"]["entries"]
+        .as_array().expect("registry entries").iter().map(|entry| (
+            entry["compiled_authority"].as_str().expect("authority identity").to_owned(),
+            authority.clone(),
+        )).collect::<BTreeMap<_, _>>();
+    let cancellation_checks = Arc::clone(cancellation_checks);
+    let clock_checks = Arc::clone(clock_checks);
+    let seed = StagedAstEnrichmentSeed::new(
+        neutral["resolution_snapshot"].clone(),
+        compiled,
+        json!({
+            "declaring_spec_id": "grammar/main.spec",
+            "caller_capabilities": ["staged-parse-job-v2", "structured-result-v1", "typed-source-location-v1", "xml-v1", "yaml-v1"],
+            "caller_policy_modes": ["append_child", "diagnostic_node", "fail", "keep_text", "replace_field", "replace_marker", "sibling_field", "trace"],
+            "caller_ceilings": {"source_detail": "text", "max_steps": 200, "max_result_nodes": 128, "max_diagnostic_bytes": 8192},
+            "required_source_detail": "identity",
+            "required_versions": {"spec_language_version": 2, "helper_contract_version": "actionir-v3", "staged_contract_version": 2}
+        }),
+        json!({"cancellation_token": "emitted", "deadline": 100, "remaining_steps": 20, "required_steps": 1, "max_depth": 4, "max_calls": 10}),
+        move |token| {
+            cancellation_checks.fetch_add(1, Ordering::SeqCst);
+            assert_eq!(token, &json!("emitted"));
+            false
+        },
+        move || {
+            clock_checks.fetch_add(1, Ordering::SeqCst);
+            1
+        },
+    );
+    ExecutionOptions::new().with_staged_ast_enrichment(seed)
+}
+
+fn main() {
+    let neutral: Value = serde_json::from_str(include_str!("../contract.json"))
+        .expect("staged neutral contract");
+    let calls = Arc::new(AtomicUsize::new(0));
+    let cancellation_checks = Arc::new(AtomicUsize::new(0));
+    let clock_checks = Arc::new(AtomicUsize::new(0));
+    let options = execution_options(&neutral, &calls, &cancellation_checks, &clock_checks);
+    let first = generated::execute_with_options("1+2;", &options)
+        .expect("first emitted staged enrichment");
+    let second = generated::execute_with_options("1+2;", &options)
+        .expect("second emitted staged enrichment");
+    println!("{}", json!({
+        "first": first,
+        "second": second,
+        "calls": calls.load(Ordering::SeqCst),
+        "cancellation_checks": cancellation_checks.load(Ordering::SeqCst),
+        "clock_checks": clock_checks.load(Ordering::SeqCst),
+    }));
+}
+"#;
 
 fn contract() -> Value {
     serde_json::from_str(CONTRACT_SOURCE).expect("staged-AST enrichment contract JSON")
@@ -78,10 +148,64 @@ fn ids(value: &Value, field: &str) -> Vec<String> {
 }
 
 fn compile_source() -> CompiledSpec {
-    let parsed = parse_spec_with_user_functions(AUTHORED_SOURCE)
-        .expect("parse exact staged-AST enrichment fixture");
+    compile_fixture(AUTHORED_SOURCE)
+}
+
+fn compile_fixture(source: &str) -> CompiledSpec {
+    let parsed =
+        parse_spec_with_user_functions(source).expect("parse exact staged-AST enrichment fixture");
     validate(&parsed).expect("validate exact staged-AST enrichment fixture");
     compile(&parsed).expect("compile exact staged-AST enrichment fixture")
+}
+
+fn staged_execution_options(
+    neutral: &Value,
+    identity: &str,
+    calls: &Arc<AtomicUsize>,
+    cancellation_checks: &Arc<AtomicUsize>,
+    clock_checks: &Arc<AtomicUsize>,
+) -> ExecutionOptions {
+    let calls_for_callback = Arc::clone(calls);
+    let authority = CompiledStagedAuthority::new(move |request, _context| {
+        calls_for_callback.fetch_add(1, Ordering::SeqCst);
+        Ok(json!({
+            "kind": "expression",
+            "text": request["text"],
+        }))
+    });
+    let compiled = neutral["resolution_snapshot"]["entries"]
+        .as_array()
+        .expect("frozen registry entries")
+        .iter()
+        .map(|entry| {
+            (
+                entry["compiled_authority"]
+                    .as_str()
+                    .expect("opaque authority identity")
+                    .to_owned(),
+                authority.clone(),
+            )
+        })
+        .collect::<BTreeMap<_, _>>();
+    let cancellation_checks = Arc::clone(cancellation_checks);
+    let clock_checks = Arc::clone(clock_checks);
+    let expected_identity = identity.to_owned();
+    let seed = StagedAstEnrichmentSeed::new(
+        neutral["resolution_snapshot"].clone(),
+        compiled,
+        enrichment_options(),
+        recursive_config(identity, 100, 20, 1, 4, 10),
+        move |token| {
+            cancellation_checks.fetch_add(1, Ordering::SeqCst);
+            assert_eq!(token, &json!(expected_identity));
+            false
+        },
+        move || {
+            clock_checks.fetch_add(1, Ordering::SeqCst);
+            1
+        },
+    );
+    ExecutionOptions::new().with_staged_ast_enrichment(seed)
 }
 
 fn try_compile_source(source: &str) -> Result<CompiledSpec, String> {
@@ -205,6 +329,38 @@ fn recursive_config(
         "max_depth": max_depth,
         "max_calls": max_calls,
     })
+}
+
+fn assert_fresh_execution_pair(
+    route: &str,
+    first: &Value,
+    second: &Value,
+    calls: usize,
+    cancellation_checks: usize,
+    clock_checks: usize,
+) {
+    assert_eq!(
+        first, second,
+        "{route} top-level results must detach equally"
+    );
+    for result in [first, second] {
+        assert_eq!(result["cache"]["entries"], 1, "{route} cache entries");
+        assert_eq!(result["cache"]["hits"], 0, "{route} fresh cache hits");
+        assert_eq!(result["cache"]["misses"], 1, "{route} fresh cache misses");
+        assert_eq!(result["diagnostics"], json!([]), "{route} diagnostics");
+        assert_eq!(result["sidecars"].as_array().map(Vec::len), Some(1));
+        assert_eq!(result["ast"]["expression_ast"]["kind"], "expression");
+        assert_eq!(result["ast"]["expression_ast"]["text"], "1+2");
+    }
+    assert_eq!(calls, 2, "{route} must invoke one fresh callback per run");
+    assert!(
+        cancellation_checks >= 2,
+        "{route} must observe cancellation through each fresh authority"
+    );
+    assert!(
+        clock_checks >= 2,
+        "{route} must observe the caller clock through each fresh authority"
+    );
 }
 
 fn prove_current_depth_authority(neutral: &Value) {
@@ -1263,13 +1419,13 @@ impl Drop for EmittedProject {
 }
 
 #[test]
-fn final_path_reaches_only_the_missing_carrier_admission() {
+fn final_path_admits_fresh_production_carriers() {
     let neutral = contract();
     assert_eq!(neutral["contract_id"], CONTRACT_ID);
     assert_eq!(neutral["format"], 1);
     assert_eq!(
         neutral["status"],
-        "neutral_and_perl_complete_later_backends_pending"
+        "neutral_perl_and_rust_complete_later_backends_pending"
     );
     assert_eq!(
         neutral["expected_counts"],
@@ -1294,7 +1450,7 @@ fn final_path_reaches_only_the_missing_carrier_admission() {
             "diagnostics": 37,
             "rollout_legs": 9,
             "ownership_rows": 35,
-            "mutations": 79,
+            "mutations": 84,
         })
     );
     assert_eq!(
@@ -1472,7 +1628,7 @@ fn final_path_reaches_only_the_missing_carrier_admission() {
             .collect::<Vec<_>>(),
         [
             "complete",
-            "dormant_red",
+            "complete",
             "pending_absent",
             "pending_absent",
             "pending_absent",
@@ -1486,7 +1642,7 @@ fn final_path_reaches_only_the_missing_carrier_admission() {
             .map(|row| row["status"].as_str().expect("rollout status"))
             .collect::<Vec<_>>(),
         [
-            "complete", "complete", "pending", "pending", "pending", "pending", "pending",
+            "complete", "complete", "complete", "pending", "pending", "pending", "pending",
             "pending", "pending",
         ]
     );
@@ -1944,16 +2100,173 @@ Child::
     let emitted_value: Value = serde_json::from_slice(&child.stdout).expect("emitted marker JSON");
     assert_eq!(emitted_value, expected);
 
+    let carrier_compiled = compile_fixture(CARRIER_SOURCE);
+    let carrier_encoded =
+        serde_json::to_string(&carrier_compiled).expect("serialize staged carrier fixture");
+    let mut carrier_results = Vec::new();
+
+    let native_calls = Arc::new(AtomicUsize::new(0));
+    let native_cancellation_checks = Arc::new(AtomicUsize::new(0));
+    let native_clock_checks = Arc::new(AtomicUsize::new(0));
+    let native_options = staged_execution_options(
+        &neutral,
+        "native",
+        &native_calls,
+        &native_cancellation_checks,
+        &native_clock_checks,
+    );
+    let native_engine = Engine::new(carrier_compiled.clone());
+    let native_first = native_engine
+        .execute_value("1+2;", &native_options)
+        .expect("first native staged enrichment");
+    let native_second = native_engine
+        .execute_value("1+2;", &native_options)
+        .expect("second native staged enrichment");
+    assert_fresh_execution_pair(
+        "native",
+        &native_first,
+        &native_second,
+        native_calls.load(Ordering::SeqCst),
+        native_cancellation_checks.load(Ordering::SeqCst),
+        native_clock_checks.load(Ordering::SeqCst),
+    );
+    carrier_results.push(native_first);
+
+    let reconstructed_calls = Arc::new(AtomicUsize::new(0));
+    let reconstructed_cancellation_checks = Arc::new(AtomicUsize::new(0));
+    let reconstructed_clock_checks = Arc::new(AtomicUsize::new(0));
+    let reconstructed_options = staged_execution_options(
+        &neutral,
+        "reconstructed",
+        &reconstructed_calls,
+        &reconstructed_cancellation_checks,
+        &reconstructed_clock_checks,
+    );
+    let reconstructed: CompiledSpec =
+        serde_json::from_str(&carrier_encoded).expect("reconstruct staged carrier fixture");
+    let reconstructed_engine = Engine::new(reconstructed);
+    let reconstructed_first = reconstructed_engine
+        .execute_value("1+2;", &reconstructed_options)
+        .expect("first reconstructed staged enrichment");
+    let reconstructed_second = reconstructed_engine
+        .execute_value("1+2;", &reconstructed_options)
+        .expect("second reconstructed staged enrichment");
+    assert_fresh_execution_pair(
+        "reconstructed",
+        &reconstructed_first,
+        &reconstructed_second,
+        reconstructed_calls.load(Ordering::SeqCst),
+        reconstructed_cancellation_checks.load(Ordering::SeqCst),
+        reconstructed_clock_checks.load(Ordering::SeqCst),
+    );
+    carrier_results.push(reconstructed_first);
+
+    let generated_calls = Arc::new(AtomicUsize::new(0));
+    let generated_cancellation_checks = Arc::new(AtomicUsize::new(0));
+    let generated_clock_checks = Arc::new(AtomicUsize::new(0));
+    let generated_options = staged_execution_options(
+        &neutral,
+        "generated",
+        &generated_calls,
+        &generated_cancellation_checks,
+        &generated_clock_checks,
+    );
+    let generated_first = execute_generated_parser_v2_with_options(
+        &carrier_encoded,
+        PLAN,
+        "1+2;",
+        GENERATED_IDENTITY,
+        GENERATED_SOURCE_CONTRACT,
+        &generated_options,
+    )
+    .expect("first generated-plan staged enrichment");
+    let generated_second = execute_generated_parser_v2_with_options(
+        &carrier_encoded,
+        PLAN,
+        "1+2;",
+        GENERATED_IDENTITY,
+        GENERATED_SOURCE_CONTRACT,
+        &generated_options,
+    )
+    .expect("second generated-plan staged enrichment");
+    assert_fresh_execution_pair(
+        "generated-plan",
+        &generated_first,
+        &generated_second,
+        generated_calls.load(Ordering::SeqCst),
+        generated_cancellation_checks.load(Ordering::SeqCst),
+        generated_clock_checks.load(Ordering::SeqCst),
+    );
+    carrier_results.push(generated_first);
+
+    let carrier_emitted = emit_rust_source_v2(&carrier_compiled, GENERATED_IDENTITY)
+        .expect("emit staged carrier fixture source");
+    for forbidden in [
+        "CompiledStagedAuthority",
+        "StagedAstEnrichmentSeed",
+        "FrozenStagedRegistry",
+        "cancellation_token",
+        "mutable_queue",
+        "host_handle",
+    ] {
+        assert!(
+            !carrier_emitted.contains(forbidden),
+            "emitted logical carrier leaked {forbidden}"
+        );
+    }
+    fs::write(project.root.join("contract.json"), CONTRACT_SOURCE)
+        .expect("write emitted staged neutral contract");
+    fs::write(
+        project.root.join("src/main.rs"),
+        [
+            format!("mod generated {{\n{carrier_emitted}\n}}\n"),
+            EMITTED_CARRIER_SETUP.to_owned(),
+        ]
+        .concat(),
+    )
+    .expect("write emitted staged carrier main");
+    let child = Command::new("cargo")
+        .arg("run")
+        .arg("--offline")
+        .arg("--quiet")
+        .env(
+            "CARGO_TARGET_DIR",
+            Path::new(env!("CARGO_MANIFEST_DIR")).join("../target"),
+        )
+        .current_dir(&project.root)
+        .output()
+        .expect("run independently compiled staged carrier fixture");
+    assert!(
+        child.status.success(),
+        "emitted staged carrier fixture failed:\n{}",
+        String::from_utf8_lossy(&child.stderr)
+    );
+    let emitted_run: Value =
+        serde_json::from_slice(&child.stdout).expect("emitted staged carrier JSON");
+    assert_fresh_execution_pair(
+        "independently compiled emitted",
+        &emitted_run["first"],
+        &emitted_run["second"],
+        emitted_run["calls"].as_u64().expect("emitted calls") as usize,
+        emitted_run["cancellation_checks"]
+            .as_u64()
+            .expect("emitted cancellation checks") as usize,
+        emitted_run["clock_checks"]
+            .as_u64()
+            .expect("emitted clock checks") as usize,
+    );
+    carrier_results.push(emitted_run["first"].clone());
+    assert!(carrier_results.windows(2).all(|pair| pair[0] == pair[1]));
+
+    let detached = carrier_results[0].clone();
+    carrier_results[1]["ast"]["expression_ast"]["text"] = json!("mutated");
+    assert_eq!(detached["ast"]["expression_ast"]["text"], "1+2");
+
     prove_current_depth_authority(&neutral);
     prove_recursive_authority(&neutral);
 
     assert!(
-        !CI_DRIVER_SOURCE.contains("staged_ast_enrichment_contract.rs"),
-        "the dormant Rust consumer must remain absent from canonical CI"
-    );
-
-    assert!(
-        false,
-        "LINKEDSPEC_STAGED_AST_ENRICHMENT_RED: marker/provenance, current-depth authority, breadth-first recurrence, decreasing-chain/cycle/resource guards, and original-source diagnostic rebasing complete; missing fresh native/reconstructed/generated/emitted authority carriers, production seam/dead-code allowance removal, ordinary/canonical admission, and Rust rollout owned by FUTURE-PARITY-BACKLOG.14.7.4.4"
+        CI_DRIVER_SOURCE.contains("staged_ast_enrichment_contract.rs"),
+        "the admitted Rust consumer must be present in canonical CI"
     );
 }

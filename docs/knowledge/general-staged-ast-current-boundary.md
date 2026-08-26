@@ -15,7 +15,7 @@ answers:
   - "what did FUTURE-PARITY-BACKLOG.14.7.0 audit"
   - "what must happen before general staged AST enrichment"
 date: 2026-08-25
-status: current runtime audit; neutral and private Perl admission complete; Rust dormant recursive authority complete through .14.7.4.3; carriers through public implementation remain .14.7.4.4-.10
+status: current runtime audit; private Perl and Rust admission complete; Dart through public implementation remain .14.7.5-.10
 tags: [staged-parsing, parse-job, diagnostics, registry, policies, recursive-queue, source-location, backend-parity]
 evidence: "Toolbox-first source/runtime proof establishes the shipped boundary: five source backends/six runtimes implement only actionir-body.spec/action_block, one-depth ordering, fixed cache identity, and function-specific replace_field/body_ast/fail. FUTURE-PARITY-BACKLOG.14.7.1 repairs wrong-top diagnostic parity. FUTURE-PARITY-BACKLOG.14.7.2 adds the separate executable neutral v2 authority. Perl .14.7.3.1-.3 now add a dormant private marker/provenance carrier, caller-frozen pure resolution/cache, all policies/detachment, breadth-first recurrence, chain/resource bounds, and source-rebased diagnostics. They add no reconstructed/generated/emitted carriers, admission, rollout, or public authoring. Those remain .14.7.3.4-.10-owned."
 evidence_update_2026_08_26_perl_admission: "FUTURE-PARITY-BACKLOG.14.7.3.4 adds four fresh-authority Perl routes, exact phase-0/canonical admission, and Perl-only rollout promotion. Public authoring, generated format, later backends, recurrence, and outward surfaces remain unchanged or pending."
@@ -23,11 +23,14 @@ evidence_update_2026_08_26_rust_dormant_red: "FUTURE-PARITY-BACKLOG.14.7.4.0 pro
 evidence_update_2026_08_26_rust_marker_provenance: "FUTURE-PARITY-BACKLOG.14.7.4.1 makes the exact assignment form one exclusive Expr::StagedParseJobMarker with strict literal options and an inert detached staged_parse_job_v2 record. Live entry/match/capture spans materialize exact text and typed Unicode-scalar direct or ordered-derived provenance. Four logical routes agree; malformed, smuggled, residual, and transaction-reachable forms reject. Discovery, canonical topology, v1, format, rollout, public, and outward surfaces remain unchanged; only .14.7.4.2 authority is RED."
 evidence_update_2026_08_26_rust_current_depth_authority: "FUTURE-PARITY-BACKLOG.14.7.4.2 adds a separate private general-v2 frozen registry and plan cache without widening the narrow v1 adapter. Pure pre-registered resolution, exact identities, isolated current-depth order, detached atomic stitching, every result/failure policy, and adversarial denials pass; only .14.7.4.3 recurrence/bounds/rebasing remains RED. Discovery, rollout, formats, public, and outward surfaces do not move."
 evidence_update_2026_08_26_rust_recursive_authority: "FUTURE-PARITY-BACKLOG.14.7.4.3 adds breadth-first complete-depth recurrence, exact cycle/strict-decrease lineage, invocation-wide cancellation/deadline/step/call/depth/result/diagnostic bounds, callback safe points/expiry, and typed original-source rebasing without widening v1. Only .14.7.4.4 fresh carriers, production seam, admission, rollout, and parent closure remain RED."
+evidence_update_2026_08_26_rust_admission: "FUTURE-PARITY-BACKLOG.14.7.4.4 constructs fresh registry/cache/recursive authority per top-level execution, runs it post-parent AST across native/reconstructed/generated/emitted routes, removes dormant cfg/dead-code scaffolding, and admits the ordinary consumer exactly once canonically. Rust is complete; Dart .14.7.5.0 is next."
 root_cause: "The first prototype deliberately separated a generic-looking registry record from a narrow trusted function-body integration. Compile helpers in Perl, Rust, and Dart were shaped around loaded parser identity plus top rule, so they synthesized a placeholder diagnostic record; Julia and Lua were implemented later with the complete job parameter but their formatter omitted payload_kind. Success-path and resolve-phase tests covered real context, but no cross-backend compile-phase assertion locked the ADR 0015 fields. Leaf .14.7.1 passes the normalized job through the three compile boundaries, adds payload_kind to the two later formatters, and locks all five source routes/six runtimes without expanding staged behavior."
-last_verified: 2026-08-25
+last_verified: 2026-08-26
 reverify:
   - "rg -n 'execute_parse_jobs|executeParseJobs|compile|_compile|result_policy|failure_policy|unsupported top rule|payload_kind' perl/LinkedSpec/StagedParserRegistry.pm rust/linkedspec-runtime/src/staged_parser_registry.rs dart/lib/src/parser/staged_parser_registry.dart julia/src/parser/StagedParserRegistry.jl lua/src/linkedspec/staged_parser_registry.lua"
   - "rg -n 'body_parse_job.*result_policy|body_parse_job.*failure_policy|result_policy must|failure_policy must' perl rust dart julia lua --glob '!**/generated*'"
+  - "bash tools/run_cargo_local.sh test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract"
+  - "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py"
   - "perl tools/read_task_tree.pl --tree FUTURE-PARITY-BACKLOG --id FUTURE-PARITY-BACKLOG.14.7"
 ---
 
@@ -69,16 +72,17 @@ direct/ordered-derived provenance, caller-frozen pure resolution, exact job/cach
 execution, all result/failure policies, detachment, exact-text/full-provenance chains, shared resource bounds,
 diagnostic rebasing, malformed/smuggling rejection, and transaction closure exist. Native/reconstructed/generated/
 emitted routes receive fresh host-only authority, and the consumer is admitted once in ordinary/canonical
-discovery. This remains private Perl behavior, not public authoring. Rust `.14.7.4.0-.3` now freeze its equivalent
-dormant boundary, add private declaration behavior, complete one current marker depth, and add recursive authority:
+discovery. This remains private Perl behavior, not public authoring. Rust `.14.7.4.0-.4` now implement and admit its
+equivalent private boundary, declaration behavior, current-depth scheduler, recursive authority, and carriers:
 current v1 remains
 GREEN; the exact authored form becomes one inert detached marker with strict literals plus typed direct/ordered-
 derived provenance; pure caller-frozen resolution/cache, isolated ordering, and every stitch/failure policy pass.
 Complete depths run breadth-first; exact cycles and non-decreasing lineage reject; cancellation, deadlines, steps,
 calls, depth, result nodes, and diagnostic bytes spend once across all depths; callback contexts expire; child
-locations rebase through direct or ordered-derived provenance. The sole opt-in RED names only `.14.7.4.4` fresh
-carriers, production seam, admission, and rollout. Ordinary Rust discovery stays at zero tests and canonical CI
-stays unchanged.
+locations rebase through direct or ordered-derived provenance. One host-only seed now constructs a fresh
+registry/cache/recursive authority for each top-level execution, and enrichment runs only after the complete parent
+AST through native, reconstructed, generated-plan, and independently compiled emitted routes. The ordinary GREEN
+consumer is registered exactly once in canonical CI; generated format and public authoring remain unchanged.
 
 The dependency plan then separates neutral contract, each backend, exact five-source/six-runtime recurrence,
 public `parse_job(...)` authoring, and independent recomposition. General staged dispatch reuses the typed source
@@ -95,6 +99,6 @@ Related: [[function-body-staged-registry-dispatch]], [[staged-parser-registry-di
 [[staged-parse-job-annotation-contract]], [[general-staged-ast-enrichment-neutral-contract]],
 [[perl-staged-ast-enrichment-current-depth-authority]], [[perl-staged-ast-enrichment-recursive-authority]],
 [[rust-staged-ast-enrichment-marker-provenance]], [[rust-staged-ast-enrichment-current-depth-authority]],
-[[rust-staged-ast-enrichment-recursive-authority]],
+[[rust-staged-ast-enrichment-recursive-authority]], [[rust-staged-ast-enrichment-carriers-admission]],
 [[progressive-span-dispatch-audit-plan]], and ADRs `0012`,
 `0014`, `0015`, `0016`, `0056`, and `0088`.

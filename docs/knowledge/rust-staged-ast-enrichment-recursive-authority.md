@@ -17,12 +17,12 @@ answers:
   - "why does the Rust staged AST module still allow dead_code"
   - "what is FUTURE-PARITY-BACKLOG 14.7.4.3"
 date: 2026-08-26
-status: current private dormant recursive authority; fresh carriers, production call seam, admission, and rollout remain FUTURE-PARITY-BACKLOG.14.7.4.4-owned
-tags: [rust, staged-parsing, recursive-queue, breadth-first, cancellation, budgets, diagnostics, source-location, private, dormant]
+status: current private recursive authority, admitted through FUTURE-PARITY-BACKLOG.14.7.4.4 carriers
+tags: [rust, staged-parsing, recursive-queue, breadth-first, cancellation, budgets, diagnostics, source-location, private, admission]
 evidence: "FUTURE-PARITY-BACKLOG.14.7.4.3 extends private rust/linkedspec-runtime/src/staged_ast_enrichment.rs with enrich_recursively. Each complete depth is resolved, authority-checked, stitch-validated, and typed-sorted before callbacks; successful returned markers enter only the next depth. Callback requests receive fresh parser state and detached prior-chain tuples containing normalized parser, selected top, SHA-256 of exact UTF-8 payload text, and full typed provenance. Exact repeats are staged_cycle; same-parser/top recurrence requires strict segment containment and smaller total Unicode-scalar extent. One caller cancellation identity/callback, clock/deadline, remaining steps, total calls, maximum depth/calls, cumulative result nodes, and diagnostic bytes spend monotonically without reset. Expiring callback contexts provide safe_point plus direct/ordered-derived position, span, and diagnostic rebasing; cross-segment spans retain concatenate_in_order. The cfg consumer proves all ten neutral chain rows and adversarial queue/resource/rebasing cases before only the .14.7.4.4 carrier/admission sentinel. Ordinary discovery remains zero tests, canonical CI has no test-path reference, neutral governance remains 79 mutations with Rust dormant_red, and function-body v1/generated v2/public/outward truth does not move."
+evidence_update_2026_08_26_carrier_admission: "FUTURE-PARITY-BACKLOG.14.7.4.4 supplies the fresh top-level seed/runtime seam and admits this unchanged recursive authority. Ordinary and canonical discovery now run the same GREEN consumer; Rust rollout is complete at 84 neutral mutations, and the temporary cfg/dead-code scaffolding is gone."
 root_cause: "The current-depth authority deliberately stopped after one complete marker depth and left returned markers inert. Rust therefore lacked invocation-wide queue lineage, monotone cross-depth resources, callback liveness/safe points, and typed child-local projection even though the neutral contract and Perl mechanism already fixed those semantics."
 reverify:
-  - "RUSTFLAGS='--cfg linkedspec_staged_ast_enrichment_red' bash tools/run_cargo_local.sh test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract"
   - "bash tools/run_cargo_local.sh test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract"
   - "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py"
   - "rg -n 'enrich_recursively|StagedRecursiveAuthority|safe_point|staged_cycle|staged_chain_non_decreasing|staged_diagnostic_truncated' rust/linkedspec-runtime/src/staged_ast_enrichment.rs rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs"
@@ -49,9 +49,8 @@ Direct spans remain direct. A derived range that crosses source segments remains
 `concatenate_in_order`; Rust never invents a false contiguous source span. Oversized portable diagnostics become
 the exact `staged_diagnostic_truncated` sentinel, and all retained scheduler records are detached.
 
-This authority is still private and dormant. `.14.7.4.4` owns fresh native/reconstructed/generated/emitted
-top-level authority, the first production caller, removal of the cfg-conditional dead-code allowance, ordinary and
-canonical admission, Rust rollout promotion, and parent closure.
+This authority remains private but is now live through `.14.7.4.4`'s fresh native/reconstructed/generated/emitted
+top-level seam. See [[rust-staged-ast-enrichment-carriers-admission]] for carrier and admission evidence.
 
 Related: [[rust-staged-ast-enrichment-current-depth-authority]],
 [[rust-staged-ast-enrichment-marker-provenance]], [[general-staged-ast-enrichment-neutral-contract]],

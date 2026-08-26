@@ -99,7 +99,7 @@ families, recursive scheduling, alternate policies, and public closeout remain p
 makes wrong-top compile diagnostics preserve the same original job context and resolved identity on all five
 source backends/six runtimes. Neutral `.14.7.2` now adds the executable general authority at 4 registry entries,
 8 provenance, 8 resolution/6 authority, 10 cache, 4 queue/3 isolation, all result/failure policies, 10 chain,
-5 detachment, 37 diagnostic, 35-owner, and 79-mutation proof after Rust dormant-consumer activation. Perl leaves `.14.7.3.1-.4`
+5 detachment, 37 diagnostic, 35-owner, and 84-mutation proof after Rust carrier admission. Perl leaves `.14.7.3.1-.4`
 advance the same oracle to 143/143. They prove one exclusive marker,
 opaque detached v2 sidecar, typed provenance, caller-frozen pure resolution/cache, default-top-before-job-id,
 breadth-first complete-depth execution, all four result plus three failure policies, decreasing chains, shared
@@ -108,24 +108,26 @@ The private top-level seam proves equal native, normalized-descriptor, generated
 emitted results from fresh host-only authority with no live state serialized. The consumer is registered exactly
 once in ordinary phase-0 and canonical CI, and only Perl rollout is complete. Generated format, function-body v1,
 public `parse_job(...)`, and outward behavior remain unchanged. Mandatory
-history segment `4991` remains finitely authorized by ADR `0089` at 22 files / 21 manifest records. Fresh
-Rust `.14.7.4.0-.3` now freeze one exact outer-cfg consumer and add private declaration plus recursive
-authority. Ordinary Cargo discovery runs zero tests. The opt-in path keeps current function-body v1 GREEN, denies
+history segment `4991` remains finitely authorized by ADR `0089` at 22 files / 21 manifest records. Rust
+`.14.7.4.0-.4` now implement and privately admit the corresponding complete backend path. The ordinary and
+canonical consumer keeps current function-body v1 GREEN, denies
 general `expr-v1` through the narrow registry, and lowers exact assignment-form `parse_job` to one inert detached
 marker with strict literal options, exact text, and typed direct/ordered-derived Unicode-scalar provenance. A
 separate caller-frozen already-compiled registry performs pure resolution, selected-top-before-job-id identity,
 plan-only run-local caching, isolated deterministic current-depth execution, detached atomic stitching, all
 result/failure policies, breadth-first recurrence, exact cycle/strict-decrease lineage, shared bounded resources,
-expiring callback safe points, and direct/ordered-derived original-source rebasing. Canonical CI has no exact test-
-path reference, Rust rollout stays pending, and only `.14.7.4.4` fresh carriers/production seam/admission remains
-RED. Focused `.1` proof found two unrelated
+expiring callback safe points, and direct/ordered-derived original-source rebasing. Native, reconstructed,
+validated generated-plan, and independently compiled emitted routes each construct fresh registry/cache and
+recursive authority from a host-only seed, run only after the complete parent result, return equal detached
+records, and serialize no live authority. The temporary cfg/dead-code scaffolding is removed, the neutral oracle
+rejects 84 mutations, and only Rust rollout advances. Dart `.14.7.5.0` is next. Focused `.1` proof found two unrelated
 pre-existing Rust validation/trace defects. `TRACE-OBSERVABILITY.5.1` now restores ordinary/traced progressive
 static-validation equality with an exact diagnostic regression. `.5.2` now restores exactly one existing child-
 dispatch/result event pair on normal and gap-aware interpreted/generated entry; trace controls pass 11/11 with
 unchanged results and Rust trace parity is current again. `.5.3` owns the stale private progressive-authority route
 assertion found by `.5.1`; it now keeps the authority target dormant while requiring the separate admitted contract
-input/command once. `.5.4` aligns the admitted Perl staged snapshot to 79 mutations plus Rust `dormant_red`, passes
-143/143 and canonical closeout, and returns the clean frontier to staged `.2`. Mandatory engineering-notes segment
+input/command once. `.5.4` historically aligned the admitted Perl staged snapshot to 79 mutations plus Rust
+`dormant_red`; `.14.7.4.4` supersedes that lifecycle snapshot with Rust admission and 84 mutations. Mandatory engineering-notes segment
 `4990` is finitely authorized at 18 files / 17 manifest lines by ADR `0090`.
 
 Rust's exact four-test consumer now runs under ordinary Cargo discovery and as a required canonical-CI leg. It

@@ -1,13 +1,13 @@
 # MEMORY
 
-- activation_commit: `e2e752f5cda17f81584168512d5ad6f0aaef5859` — exact clean current-depth-authority base for
-  task-tree-first Rust staged `FUTURE-PARITY-BACKLOG.14.7.4.3`; brief cleared; no push.
-- latest_completed_leaf: intended `FUTURE-PARITY-BACKLOG.14.7.4.3 - add Rust staged recursive authority`;
-  private breadth-first recurrence, shared bounds, safe points, and original-source rebasing are complete.
-- active_work_unit: none after the intended `.14.7.4.3` commit; ordinary/canonical dormancy and pending rollout hold.
-- next_action: from the exact clean `.14.7.4.3` commit, activate `FUTURE-PARITY-BACKLOG.14.7.4.4` and implement
-  only fresh top-level carriers, the production seam/dead-code allowance removal, admission, and Rust rollout.
-- in_flight_uncommitted: none after the intended `.14.7.4.3` commit; no background job remains.
+- activation_commit: `de6f5a6545ae8aeb66243b2596277793611b39fe` — exact clean recursive-authority base for
+  task-tree-first Rust staged `FUTURE-PARITY-BACKLOG.14.7.4.4`; brief cleared; no push.
+- latest_completed_leaf: intended `FUTURE-PARITY-BACKLOG.14.7.4.4 - admit Rust staged enrichment carriers`;
+  four fresh production routes, exact admission, Rust rollout, and backend-parent closure are complete.
+- active_work_unit: none after the intended `.14.7.4.4` commit; public/format/later-backend boundaries hold.
+- next_action: from the exact clean `.14.7.4.4` commit, activate Dart dormant-boundary leaf
+  `FUTURE-PARITY-BACKLOG.14.7.5.0` task-tree-first.
+- in_flight_uncommitted: none after the intended `.14.7.4.4` commit; no background job remains.
 - blockers: none.
 - session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
@@ -34,8 +34,8 @@
   history segment `4991`, advancing that separate route from 21/20 to 22 files / 21 manifest lines while retaining
   every byte, root, segment, aggregate, owner, lifecycle, verifier, storage, and all other pressure controls.
 - current_verification_contract: ADR `0073` makes focused proof the ordinary per-leaf default and canonical proof
-  mandatory at admission/milestone/public/infrastructure and final clean push boundaries; staged Perl admission
-  `.14.7.3.4` changes canonical topology and lands only with exact staged receipt-bound proof.
+  mandatory at admission/milestone/public/infrastructure and final clean push boundaries; staged Perl `.14.7.3.4`
+  and Rust `.14.7.4.4` admissions each land only with exact staged receipt-bound proof.
 - documentation_debt_owner: ADR `0066` composition-closes all stores; bounded live/history/task/Knowledge owners
   and their rollover/index gates remain current.
 - current_transaction_contract: exact checkpoint/recognize-once/commit/rollback syntax keeps match and payload
@@ -48,12 +48,11 @@
   parents `.3-.7`, recurrence `.8`, public authored closeout `.9`, and recomposition `.10` are frozen in order.
   Diagnostic `.14.7.1` is complete; neutral `.14.7.2` freezes 4 registry entries, 8 provenance, 8 resolution/6
   authority, 10 cache, 4 queue/3 isolation, 4 result/3 failure policies, 10 chain, 5 detachment, 37 diagnostics,
-  9 rollout legs, 35 owners, and 79 mutations after Rust dormant marker/provenance. Perl `.14.7.3.1-.4` now provide the private marker/provenance,
+  9 rollout legs, 35 owners, and 84 mutations after Rust admission. Perl `.14.7.3.1-.4` provide the private marker/provenance,
   caller-frozen resolution/cache/policies, breadth-first recurrence, strict chains/shared resources, and source
-  rebasing plus four fresh-authority carriers at 143/143. Only Perl is admitted; format/public/outward behavior is
-  unchanged. Rust `.14.7.4.0-.3` retain zero ordinary tests and add an inert detached marker, strict literal
+  rebasing plus four fresh-authority carriers at 143/143. Rust `.14.7.4.0-.4` add an inert detached marker, strict literal
   options, live-span direct/ordered-derived provenance, pure caller-frozen resolution/cache, isolated complete-
   depth ordering, detached atomic stitching, all four result/three failure policies, breadth-first recurrence, exact
-  cycle/decrease guards, shared resources, safe points, and typed source rebasing. Only `.4.4` fresh carriers,
-  production seam, admission, and rollout remain RED. Corrective `.5.1-.4` are closed.
-- latest_bootstrap_read: 2026-08-26 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox are reviewed. `.14.7.4.3` adds only private dormant recursive authority from clean `e2e752f5`; v1/v2 formats, carrier/admission/rollout/public/other-backend behavior stay fixed. Intended commit: `FUTURE-PARITY-BACKLOG.14.7.4.3 - add Rust staged recursive authority`; `.14.7.4.4` is next from clean handoff.
+  cycle/decrease guards, shared resources, safe points, typed source rebasing, and four fresh-authority carriers.
+  Perl and Rust are privately admitted; v1/v2/public/outward truth is unchanged; Dart `.14.7.5.0` is next.
+- latest_bootstrap_read: 2026-08-26 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox are reviewed. `.14.7.4.4` admits fresh Rust native/reconstructed/generated/emitted carriers from clean `de6f5a65` without v1/v2/public/later-backend movement. Intended commit: `FUTURE-PARITY-BACKLOG.14.7.4.4 - admit Rust staged enrichment carriers`; Dart `.14.7.5.0` is next.
