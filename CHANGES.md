@@ -10,6 +10,24 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-26 — FUTURE-PARITY-BACKLOG.14.7.4.1 — add Rust staged annotation provenance
+
+- Added `Expr::StagedParseJobMarker` as the exclusive lowering for exact scalar-assignment
+  `parse_job(text_expr, hash(literal options))`; strict static validation rejects malformed, dynamic, duplicate,
+  unknown, invalid-identity/policy/target, residual-generic, and recognition-reachable declaration forms.
+- Retained live entry/match/capture byte spans only long enough to materialize exact text and construct same-source
+  Unicode-scalar direct or nonempty ordered-derived provenance. Literal copied/transformed text, dynamic groups,
+  copied-text smuggling, reversed/out-of-range/source-mismatched spans, and empty derived provenance fail closed.
+- Added one inert detached `STAGED_PARSE_JOB_MARKER` with logical `staged_parse_job_v2` data and no parser,
+  registry, source snapshot, callback, scheduler, cache, path, cancellation, budget, queue, or host authority.
+  Native, normalized-reconstructed, generated-plan, and independently compiled emitted logical routes agree.
+- Kept current function-body v1, generated format v2, ordinary/canonical discovery, Rust rollout, capability,
+  public/outward surfaces, and every other backend unchanged. The dormant consumer now reaches only the exact
+  `.14.7.4.2` caller-frozen resolution/cache/result/failure authority RED.
+- Focused proof passed core 197/197, typed source 4/4, recognition transaction 12/12, current-v1/staged trace,
+  neutral staged 79 mutations, and all dependent governance. It also exposed two pre-existing Rust compiler/trace
+  defects; dedicated clean-pivot task-tree ownership and repair precede `.14.7.4.2`.
+
 ## 2026-08-26 — FUTURE-PARITY-BACKLOG.14.7.4.0 — freeze Rust staged-AST dormant RED
 
 - Added exactly one repository-routed Rust consumer behind outer cfg

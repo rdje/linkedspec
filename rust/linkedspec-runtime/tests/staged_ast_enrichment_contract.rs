@@ -1,7 +1,7 @@
 #![allow(unexpected_cfgs)]
 #![cfg(linkedspec_staged_ast_enrichment_red)]
 
-//! FUTURE-PARITY-BACKLOG.14.7.4.0 — dormant Rust staged-AST enrichment contract.
+//! FUTURE-PARITY-BACKLOG.14.7.4.1 — dormant Rust staged-AST marker/provenance contract.
 //!
 //! Ordinary Cargo discovery compiles this target with zero active tests. Before admission, run
 //! the exact final-path RED with:
@@ -10,8 +10,8 @@
 //!
 //! This consumer freezes the neutral inventory, current function-body v1 compatibility, and all
 //! four final Rust observation surfaces without changing production behavior or canonical CI. Its
-//! sole intentional failure is the missing dedicated `STAGED_PARSE_JOB_MARKER` with typed v2
-//! provenance; a generic `parse_job(...)` helper call is not an implementation.
+//! sole intentional failure is the caller-frozen resolution/cache/result/failure authority owned
+//! by `.14.7.4.2`; the dedicated marker and typed v2 provenance are complete in this slice.
 
 use linkedspec_core::compiler::compile;
 use linkedspec_core::expr::Expr;
@@ -21,9 +21,12 @@ use linkedspec_runtime::engine::{Engine, ExecutionOptions};
 use linkedspec_runtime::source_emitter::{
     GENERATED_SOURCE_CONTRACT, GeneratedPlanRow, emit_rust_source_v2, execute_generated_parser_v2,
 };
+use linkedspec_runtime::source_location::SourceAuthority;
 use linkedspec_runtime::spec_parser::parse_spec_with_user_functions;
 use linkedspec_runtime::staged_parser_registry::{execute_parse_job, execute_parse_jobs};
+use linkedspec_runtime::validate_and_materialize_provenance;
 use serde_json::{Value, json};
+use std::collections::BTreeMap;
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::process::Command;
@@ -40,8 +43,7 @@ const CI_DRIVER_SOURCE: &str = include_str!(concat!(
 const CONTRACT_ID: &str = "linkedspec-staged-ast-enrichment-v1";
 const GENERATED_IDENTITY: &str = "staged-ast-enrichment/rust-red.spec";
 const AUTHORED_SOURCE: &str = r#"Top::
- /([^;]+);/
- I {
+ /([^;]+);/ -> Top {
   job_marker = parse_job(entry_group(0), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "top", "Expr", "result_policy", "sibling_field", "into", "expression_ast", "on_error", "fail"))
   return(job_marker)
  }
@@ -76,6 +78,12 @@ fn compile_source() -> CompiledSpec {
     compile(&parsed).expect("compile exact staged-AST enrichment fixture")
 }
 
+fn try_compile_source(source: &str) -> Result<CompiledSpec, String> {
+    let parsed = parse_spec_with_user_functions(source).map_err(|error| error.to_string())?;
+    validate(&parsed).map_err(|error| error.to_string())?;
+    compile(&parsed).map_err(|error| error.to_string())
+}
+
 fn occurrences(haystack: &str, needle: &str) -> usize {
     haystack.match_indices(needle).count()
 }
@@ -108,7 +116,7 @@ impl Drop for EmittedProject {
 }
 
 #[test]
-fn final_path_reaches_only_the_missing_dedicated_staged_parse_marker() {
+fn final_path_reaches_only_the_missing_caller_frozen_authority() {
     let neutral = contract();
     assert_eq!(neutral["contract_id"], CONTRACT_ID);
     assert_eq!(neutral["format"], 1);
@@ -454,38 +462,237 @@ fn final_path_reaches_only_the_missing_dedicated_staged_parse_marker() {
         "{general_error}"
     );
 
+    let sources = neutral["sources"]
+        .as_array()
+        .expect("neutral sources")
+        .iter()
+        .map(|row| {
+            (
+                row["source_id"].as_str().expect("source id").to_owned(),
+                row["text"].as_str().expect("source text").to_owned(),
+            )
+        })
+        .collect::<BTreeMap<_, _>>();
+    let source_authority = SourceAuthority::new(&sources);
+    for case in neutral["provenance_cases"]
+        .as_array()
+        .expect("provenance cases")
+    {
+        let result = validate_and_materialize_provenance(
+            &source_authority,
+            &case["provenance"],
+            "contract:parse_job",
+        );
+        if case["accepted"].as_bool().expect("accepted flag") {
+            let result = result.unwrap_or_else(|error| panic!("{}: {error}", case["id"]));
+            assert_eq!(result["text"], case["materialized_text"], "{}", case["id"]);
+            assert_eq!(result["provenance"], case["provenance"], "{}", case["id"]);
+        } else {
+            let error = result.expect_err("invalid provenance must reject");
+            assert_eq!(
+                error.as_record()["code"],
+                case["diagnostic"],
+                "{}",
+                case["id"]
+            );
+            assert_eq!(error.as_record()["phase"], "declare", "{}", case["id"]);
+        }
+    }
+
+    let valid_options = r#"hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "result_policy", "replace_marker", "on_error", "fail")"#;
+    let invalid_forms = [
+        (
+            "dynamic options",
+            "job_marker = parse_job(match_group(0), options)".to_owned(),
+            "staged_parse_job_options_required",
+        ),
+        (
+            "unknown option",
+            format!("job_marker = parse_job(match_group(0), hash(\"node_kind\", \"expression\", \"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", \"result_policy\", \"replace_marker\", \"on_error\", \"fail\", \"loader\", \"ambient\"))"),
+            "staged_parse_job_option_unknown",
+        ),
+        (
+            "duplicate option",
+            format!("job_marker = parse_job(match_group(0), hash(\"node_kind\", \"expression\", \"node_kind\", \"expression\", \"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", \"result_policy\", \"replace_marker\", \"on_error\", \"fail\"))"),
+            "staged_parse_job_options_required",
+        ),
+        (
+            "missing required option",
+            "job_marker = parse_job(match_group(0), hash(\"node_kind\", \"expression\", \"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", \"result_policy\", \"replace_marker\"))".to_owned(),
+            "staged_parse_job_options_required",
+        ),
+        (
+            "dynamic node kind",
+            "job_marker = parse_job(match_group(0), hash(\"node_kind\", node_kind, \"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", \"result_policy\", \"replace_marker\", \"on_error\", \"fail\"))".to_owned(),
+            "staged_parse_job_options_required",
+        ),
+        (
+            "path-like parser identity",
+            "job_marker = parse_job(match_group(0), hash(\"node_kind\", \"expression\", \"payload_kind\", \"embedded_expression\", \"spec\", \"../expr\", \"result_policy\", \"replace_marker\", \"on_error\", \"fail\"))".to_owned(),
+            "staged_parser_identity_invalid",
+        ),
+        (
+            "invalid top rule",
+            "job_marker = parse_job(match_group(0), hash(\"node_kind\", \"expression\", \"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", \"top\", \"Expr/Bad\", \"result_policy\", \"replace_marker\", \"on_error\", \"fail\"))".to_owned(),
+            "staged_top_rule_invalid",
+        ),
+        (
+            "invalid result policy",
+            "job_marker = parse_job(match_group(0), hash(\"node_kind\", \"expression\", \"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", \"result_policy\", \"replace\", \"on_error\", \"fail\"))".to_owned(),
+            "staged_result_policy_invalid",
+        ),
+        (
+            "invalid failure policy",
+            "job_marker = parse_job(match_group(0), hash(\"node_kind\", \"expression\", \"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", \"result_policy\", \"replace_marker\", \"on_error\", \"retry\"))".to_owned(),
+            "staged_failure_policy_invalid",
+        ),
+        (
+            "replace marker with target",
+            "job_marker = parse_job(match_group(0), hash(\"node_kind\", \"expression\", \"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", \"result_policy\", \"replace_marker\", \"into\", \"wrong\", \"on_error\", \"fail\"))".to_owned(),
+            "staged_result_target_invalid",
+        ),
+        (
+            "sibling without target",
+            "job_marker = parse_job(match_group(0), hash(\"node_kind\", \"expression\", \"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", \"result_policy\", \"sibling_field\", \"on_error\", \"fail\"))".to_owned(),
+            "staged_result_target_invalid",
+        ),
+        (
+            "transformed copied text",
+            format!("job_marker = parse_job(trim(match_group(0)), {valid_options})"),
+            "staged_source_provenance_invalid",
+        ),
+        (
+            "literal copied text",
+            format!("job_marker = parse_job(\"copied\", {valid_options})"),
+            "staged_source_provenance_invalid",
+        ),
+        (
+            "dynamic capture index",
+            format!("job_marker = parse_job(match_group(index), {valid_options})"),
+            "staged_source_provenance_invalid",
+        ),
+        (
+            "duplicate required capability",
+            "job_marker = parse_job(match_group(0), hash(\"node_kind\", \"expression\", \"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", \"result_policy\", \"replace_marker\", \"on_error\", \"fail\", \"required_capabilities\", array(\"actionir-v1\", \"actionir-v1\")))".to_owned(),
+            "staged_parse_job_options_required",
+        ),
+    ];
+    for (name, statement, code) in invalid_forms {
+        let source = format!("Top::\n /(x);/ -> Top {{ {statement}; return(job_marker) }}\n");
+        let error = try_compile_source(&source).expect_err("invalid parse-job form must reject");
+        assert!(error.contains(code), "{name}: expected {code}, got {error}");
+    }
+    let residual =
+        format!("Top::\n /(x);/ -> Top {{ return(parse_job(match_group(0), {valid_options})) }}\n");
+    let residual_error =
+        try_compile_source(&residual).expect_err("residual generic parse_job must reject");
+    assert!(
+        residual_error.contains("staged_parse_job_options_required"),
+        "{residual_error}"
+    );
+
+    let transaction_source = r#"Top::
+ I { tx = recognition_checkpoint(); matched = recognize_once(tx, call(Child)); recognition_rollback(tx); return(matched) }
+ /never/
+Child::
+ I { marker = parse_job(entry_text(), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "result_policy", "replace_marker", "on_error", "fail")); return(marker) }
+ /never/
+"#;
+    let transaction_error = try_compile_source(transaction_source)
+        .expect_err("recognition-reachable staged declaration must reject");
+    assert!(
+        transaction_error
+            .contains("recognition_effect_forbidden:parser_registry_or_staged_dispatch"),
+        "{transaction_error}"
+    );
+
     let compiled = compile_source();
     let top = compiled.find("Top").expect("compiled Top rule");
-    let preamble = top.preamble.as_ref().expect("staged-AST preamble");
-    let Expr::AssignScalar { name, value } = &preamble.statements[0].expr else {
-        panic!("parse_job must currently remain one generic scalar assignment");
+    let declaration = top.acode_dispatch[0]
+        .code
+        .as_ref()
+        .expect("staged-AST action code");
+    let Expr::StagedParseJobMarker {
+        target,
+        version,
+        sidecar_kind,
+        effect,
+        text_plan,
+        options,
+    } = &declaration.statements[0].expr
+    else {
+        panic!("parse_job assignment must compile to one dedicated expression");
     };
-    assert_eq!(name, "job_marker");
-    let Expr::Call { name, args } = value.as_ref() else {
-        panic!("parse_job must currently remain one generic helper call");
-    };
-    assert_eq!(name, "parse_job");
-    assert_eq!(args.len(), 2);
+    assert_eq!(target, "job_marker");
+    assert_eq!(*version, 2);
+    assert_eq!(sidecar_kind, "staged_parse_job_v2");
+    assert_eq!(effect, "staged_parse_job_declaration");
+    assert_eq!(
+        serde_json::to_value(text_plan).expect("serialize text plan"),
+        json!({"kind": "direct_span", "source": "entry_group", "index": 0})
+    );
+    assert_eq!(
+        serde_json::to_value(options).expect("serialize options"),
+        json!({
+            "node_kind": "expression",
+            "payload_kind": "embedded_expression",
+            "spec": "expr-v1",
+            "top": "Expr",
+            "result_policy": "sibling_field",
+            "into": "expression_ast",
+            "on_error": "fail",
+            "required_capabilities": [],
+        })
+    );
 
     let encoded = serde_json::to_string(&compiled).expect("serialize staged-AST fixture");
-    assert_eq!(occurrences(&encoded, r#""name":"parse_job""#), 1);
-    assert!(!encoded.contains("staged_parse_job_marker"));
-    assert!(!encoded.contains("STAGED_PARSE_JOB_MARKER"));
-    assert!(!encoded.contains("staged_parse_job_v2"));
-
+    assert_eq!(occurrences(&encoded, r#""name":"parse_job""#), 0);
     assert_eq!(
-        Engine::new(compiled.clone())
-            .execute_value("1+2;", &ExecutionOptions::new())
-            .expect("native generic-fallback execution"),
-        Value::Null
+        occurrences(&encoded, r#""kind":"staged_parse_job_marker""#),
+        1
     );
+    assert_eq!(occurrences(&encoded, "staged_parse_job_v2"), 1);
+
+    let expected = json!({
+        "kind": "STAGED_PARSE_JOB_MARKER",
+        "version": 2,
+        "sidecar_kind": "staged_parse_job_v2",
+        "effect": "staged_parse_job_declaration",
+        "staged_parse_job_v2": {
+            "kind": "staged_parse_job_v2",
+            "version": 2,
+            "state": "declared",
+            "effect": "staged_parse_job_declaration",
+            "node_kind": "expression",
+            "payload_kind": "embedded_expression",
+            "parser_spec_id": "expr-v1",
+            "top_rule": "Expr",
+            "result_policy": "sibling_field",
+            "into": "expression_ast",
+            "failure_policy": "fail",
+            "required_capabilities": [],
+            "text": "1+2",
+            "provenance": {
+                "kind": "direct_span",
+                "source_id": "input",
+                "start": 0,
+                "end": 3,
+                "provenance": "entry_group",
+            },
+            "origin": "Top:parse_job",
+        },
+    });
+    let native = Engine::new(compiled.clone())
+        .execute_value("1+2;", &ExecutionOptions::new())
+        .expect("native staged marker execution");
+    assert_eq!(native, expected);
     let reconstructed: CompiledSpec =
         serde_json::from_str(&encoded).expect("reconstruct staged-AST fixture");
     assert_eq!(
         Engine::new(reconstructed)
             .execute_value("1+2;", &ExecutionOptions::new())
-            .expect("reconstructed generic-fallback execution"),
-        Value::Null
+            .expect("reconstructed staged marker execution"),
+        expected
     );
     assert_eq!(
         execute_generated_parser_v2(
@@ -495,16 +702,66 @@ fn final_path_reaches_only_the_missing_dedicated_staged_parse_marker() {
             GENERATED_IDENTITY,
             GENERATED_SOURCE_CONTRACT,
         )
-        .expect("generated-plan generic-fallback execution"),
-        Value::Null
+        .expect("generated-plan staged marker execution"),
+        expected
     );
+
+    let derived_source = r#"Top::
+ /(a)(a);/ -> Top { job_marker = parse_job(cat(match_group(0), match_group(1)), hash("node_kind", "expression", "payload_kind", "embedded_expression", "spec", "expr-v1", "result_policy", "replace_marker", "on_error", "keep_text", "required_capabilities", array("typed-source-location-v1", "actionir-v1"))); return(job_marker) }
+"#;
+    let derived = Engine::new(try_compile_source(derived_source).expect("compile derived fixture"))
+        .execute_value("aa;", &ExecutionOptions::new())
+        .expect("execute derived fixture");
+    assert_eq!(derived["staged_parse_job_v2"]["text"], "aa");
+    assert_eq!(
+        derived["staged_parse_job_v2"]["provenance"],
+        json!({
+            "kind": "derived_text",
+            "policy": "concatenate_in_order",
+            "segments": [
+                {"kind": "direct_span", "source_id": "input", "start": 0, "end": 1, "provenance": "match_group"},
+                {"kind": "direct_span", "source_id": "input", "start": 1, "end": 2, "provenance": "match_group"},
+            ],
+        })
+    );
+    assert_eq!(
+        derived["staged_parse_job_v2"]["required_capabilities"],
+        json!(["actionir-v1", "typed-source-location-v1"])
+    );
+    let detached = derived.clone();
+    let mut mutated = derived;
+    mutated["staged_parse_job_v2"]["provenance"]["segments"][0]["start"] = json!(99);
+    assert_eq!(
+        detached["staged_parse_job_v2"]["provenance"]["segments"][0]["start"],
+        0
+    );
+    let serialized_outputs = serde_json::to_string(&expected).expect("serialize expected marker");
+    for forbidden in [
+        "path",
+        "source_authority",
+        "match_object",
+        "registry",
+        "compiled_authority",
+        "callback",
+        "host_handle",
+        "cancellation_token",
+        "deadline",
+        "mutable_queue",
+    ] {
+        assert!(
+            !serialized_outputs.contains(&format!(r#""{forbidden}""#)),
+            "marker leaked forbidden key {forbidden}"
+        );
+    }
 
     let emitted =
         emit_rust_source_v2(&compiled, GENERATED_IDENTITY).expect("emit staged-AST fixture source");
-    assert_eq!(occurrences(&emitted, r#"\"name\":\"parse_job\""#), 1);
-    assert!(!emitted.contains("staged_parse_job_marker"));
-    assert!(!emitted.contains("STAGED_PARSE_JOB_MARKER"));
-    assert!(!emitted.contains("staged_parse_job_v2"));
+    assert_eq!(occurrences(&emitted, r#"\"name\":\"parse_job\""#), 0);
+    assert_eq!(
+        occurrences(&emitted, r#"\"kind\":\"staged_parse_job_marker\""#),
+        1
+    );
+    assert_eq!(occurrences(&emitted, "staged_parse_job_v2"), 1);
     let project = EmittedProject::new();
     fs::write(
         project.root.join("Cargo.toml"),
@@ -517,7 +774,7 @@ fn final_path_reaches_only_the_missing_dedicated_staged_parse_marker() {
     fs::write(
         project.root.join("src/main.rs"),
         format!(
-            "mod generated {{\n{emitted}\n}}\nfn main() {{ let value = generated::execute(\"1+2;\").expect(\"generated staged-AST RED\"); println!(\"{{}}\", value); }}\n"
+            "mod generated {{\n{emitted}\n}}\nfn main() {{ let value = generated::execute(\"1+2;\").expect(\"generated staged-AST marker\"); println!(\"{{}}\", value); }}\n"
         ),
     )
     .expect("write emitted staged-AST main");
@@ -537,12 +794,8 @@ fn final_path_reaches_only_the_missing_dedicated_staged_parse_marker() {
         "emitted staged-AST fixture failed:\n{}",
         String::from_utf8_lossy(&child.stderr)
     );
-    assert_eq!(
-        String::from_utf8(child.stdout)
-            .expect("UTF-8 emitted stdout")
-            .trim(),
-        "null"
-    );
+    let emitted_value: Value = serde_json::from_slice(&child.stdout).expect("emitted marker JSON");
+    assert_eq!(emitted_value, expected);
 
     assert!(
         !CI_DRIVER_SOURCE.contains("staged_ast_enrichment_contract.rs"),
@@ -550,7 +803,7 @@ fn final_path_reaches_only_the_missing_dedicated_staged_parse_marker() {
     );
 
     assert!(
-        encoded.contains(r#""kind":"staged_parse_job_marker""#),
-        "LINKEDSPEC_STAGED_AST_ENRICHMENT_RED: missing node=[STAGED_PARSE_JOB_MARKER]; typed provenance sidecar=[staged_parse_job_v2] unavailable; generic parse_job helper fallback is not an implementation"
+        false,
+        "LINKEDSPEC_STAGED_AST_ENRICHMENT_RED: marker=[STAGED_PARSE_JOB_MARKER] and sidecar=[staged_parse_job_v2] complete; missing caller-frozen resolution/cache/result/failure authority owned by FUTURE-PARITY-BACKLOG.14.7.4.2"
     );
 }

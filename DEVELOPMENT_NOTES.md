@@ -10,6 +10,28 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.4.1` — Rust staged marker/provenance): exact clean activation is Rust
+  dormant-RED commit `e37a8b77`; this focused leaf owns only exclusive static annotation lowering, inert marker
+  materialization, typed direct/ordered-derived provenance, and the same consumer's next authority RED.
+- `Expr::StagedParseJobMarker` stores typed `StagedParseJobTextPlan` plus normalized options. Compiler validation
+  rejects every residual generic `parse_job` and the staged declaration effect whenever it is reachable from an
+  uncommitted recognition transaction. The staged diagnostic family is fail-closed action-code syntax.
+- Runtime match state now retains compact participating capture byte spans alongside capture text. Engine entry/
+  local match snapshots save and restore those spans across native and generated execution so direct group plans
+  never infer provenance from serialized or copied text.
+- `staged_parse_job.rs` validates live byte ranges, converts them to Unicode-scalar typed source spans, flattens
+  nested nonempty `cat(...)` plans in order, materializes exact text, and constructs detached marker data. Its
+  denied-key inventory fences source/parser/registry/callback/scheduler/cache/path/host authority and copied-text
+  provenance smuggling.
+- The same outer-cfg consumer proves direct entry/match text, entry/match groups, four derived combinations,
+  strict options, malformed/residual/transaction denials, exact compiled serde, detachment, forbidden-key absence,
+  and equal native/reconstructed/generated/emitted logical markers. Only `.14.7.4.2` authority remains RED;
+  ordinary discovery is 0 tests and canonical CI has 0 references.
+- Focused verification found two exact pre-existing defects against activation commit `e37a8b77`: traced compile
+  omits the already-current progressive static validator, and gap-aware interpreted/generated child-entry trace
+  routes omit required `child_dispatch` lifecycle events. This slice does not alter either path; task-tree-first
+  clean-pivot repair is mandatory before staged `.14.7.4.2` resumes.
+
 - 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.4.0` — Rust staged dormant boundary): exact clean activation is Perl-
   admission commit `fc3e3652`; this focused leaf owns only the outer-cfg final-path consumer, Rust lifecycle
   governance, the current-v1 control, and one missing-marker/provenance RED.

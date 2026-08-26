@@ -59,6 +59,7 @@ pub fn compile(spec: &SpecFile) -> Result<CompiledSpec> {
     build_dependency_regex_map(&mut compiled)?;
     validate_recursive_observation_contract(&compiled)?;
     validate_progressive_span_dispatch_contract(&compiled)?;
+    validate_staged_parse_job_contract(&compiled)?;
     validate_compiled_regex_slot_identities(&compiled)?;
     Ok(compiled)
 }
@@ -226,6 +227,7 @@ fn compile_with_events(spec: &SpecFile, trace: &mut TraceEmitter) -> Result<Comp
     )?;
     dependency_result?;
     validate_recursive_observation_contract(&compiled)?;
+    validate_staged_parse_job_contract(&compiled)?;
     validate_compiled_regex_slot_identities(&compiled)?;
 
     Ok(compiled)
@@ -294,6 +296,7 @@ fn visit_expr(
         }
         Expr::RecognitionCheckpoint
         | Expr::ProgressiveDispatchSpan { .. }
+        | Expr::StagedParseJobMarker { .. }
         | Expr::RecognizeOnce { .. }
         | Expr::ObserveRecognition { .. }
         | Expr::RecognitionCommit { .. }
@@ -313,6 +316,28 @@ fn validate_progressive_span_dispatch_contract(spec: &CompiledSpec) -> Result<()
         if matches!(expr, Expr::Call { name, .. } if name == "dispatch_span") {
             return Err(LinkedSpecError::Compile(
                 "LINKEDSPEC_PROGRESSIVE_SPAN_DISPATCH_ERROR:progressive_span_binding_required"
+                    .to_owned(),
+            ));
+        }
+        Ok(())
+    };
+    for rule in &spec.rules {
+        for block in rule_blocks(rule) {
+            visit_block(block, &mut validate)?;
+        }
+    }
+    for function in &spec.functions {
+        visit_block(&function.body, &mut validate)?;
+    }
+    Ok(())
+}
+
+/// Reject every generic parse-job spelling that escaped the exclusive assignment parser.
+fn validate_staged_parse_job_contract(spec: &CompiledSpec) -> Result<()> {
+    let mut validate = |expr: &Expr| {
+        if matches!(expr, Expr::Call { name, .. } if name == "parse_job") {
+            return Err(LinkedSpecError::Compile(
+                "LINKEDSPEC_STAGED_AST_ENRICHMENT_ERROR:staged_parse_job_options_required"
                     .to_owned(),
             ));
         }
@@ -444,6 +469,9 @@ fn validate_recursive_observation_contract(spec: &CompiledSpec) -> Result<()> {
                         current.observes = true;
                     }
                     Expr::ProgressiveDispatchSpan { .. } => {
+                        current.progressive_dispatch = true;
+                    }
+                    Expr::StagedParseJobMarker { .. } => {
                         current.progressive_dispatch = true;
                     }
                     Expr::RecognizeOnce { rule: callee, .. } => {
@@ -670,6 +698,7 @@ fn is_fail_closed_actionir_error(error: &str) -> bool {
         || error.contains("LINKEDSPEC_SOURCE_LOCATION_ERROR:")
         || error.contains("LINKEDSPEC_RECOGNITION_TRANSACTION_ERROR:")
         || error.contains("LINKEDSPEC_PROGRESSIVE_SPAN_DISPATCH_ERROR:")
+        || error.contains("LINKEDSPEC_STAGED_AST_ENRICHMENT_ERROR:")
 }
 
 fn compile_rule(rule: &Rule, source_id: &str) -> Result<CompiledRule> {

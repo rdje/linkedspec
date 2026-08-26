@@ -1,16 +1,15 @@
 # MEMORY
 
-- activation_commit: `fc3e3652efa73a2f47e8fdcc8d597eae0f40e73b` — exact clean Perl-admission base for
-  task-tree-first Rust dormant RED `FUTURE-PARITY-BACKLOG.14.7.4.0`; brief cleared; no push.
-- latest_completed_leaf: intended `FUTURE-PARITY-BACKLOG.14.7.4.0 - freeze Rust staged-AST dormant RED`;
-  ordinary discovery is zero tests and the opt-in final path has one exact missing-marker/provenance RED.
-- active_work_unit: none after the intended `.14.7.4.0` commit; Rust production and rollout remain pending.
-- next_action: from the exact clean `.14.7.4.0` commit, activate Rust private marker/provenance
-  `FUTURE-PARITY-BACKLOG.14.7.4.1` task-tree-first without moving resolution, recurrence, rollout, or public behavior.
-- in_flight_uncommitted: none after the intended `.14.7.4.0` commit; no background job remains.
+- activation_commit: `e37a8b776bf65ece91f7c9861033afb41259adea` — exact clean Rust dormant-RED base for
+  task-tree-first private marker/provenance `FUTURE-PARITY-BACKLOG.14.7.4.1`; brief cleared; no push.
+- latest_completed_leaf: intended `FUTURE-PARITY-BACKLOG.14.7.4.1 - add Rust staged annotation provenance`;
+  ordinary discovery is zero tests and the opt-in final path has one exact `.14.7.4.2` authority RED.
+- active_work_unit: none after the intended `.14.7.4.1` commit; Rust execution authority and rollout remain pending.
+- next_action: from the exact clean `.14.7.4.1` commit, create dedicated task-tree leaves for the pre-existing
+  traced-progressive-validator and gap-aware-child-dispatch trace defects, fix/commit each, then resume `.14.7.4.2`.
+- in_flight_uncommitted: none after the intended `.14.7.4.1` commit; no background job remains.
 - blockers: none.
-- session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or
-  sooner after a large/debug-heavy slice or context compaction.
+- session_refresh_cadence: recommend `/clear` only at a committed clean handoff, after at most three commits or sooner after a large/debug-heavy slice or context compaction.
 - historical_handoff_guard: repeated-action next owner `FUTURE-PARITY-BACKLOG.10.1` remains required until
   `FUTURE-PARITY-BACKLOG.22` moves that immutable closeout fact out of bounded current memory.
 - current_typed_source: neutral/public structure, all six internal runtimes, transaction safety, recursive
@@ -49,12 +48,12 @@
   parents `.3-.7`, recurrence `.8`, public authored closeout `.9`, and recomposition `.10` are frozen in order.
   Diagnostic `.14.7.1` is complete; neutral `.14.7.2` freezes 4 registry entries, 8 provenance, 8 resolution/6
   authority, 10 cache, 4 queue/3 isolation, 4 result/3 failure policies, 10 chain, 5 detachment, 37 diagnostics,
-  9 rollout legs, 35 owners, and 79 mutations after Rust dormant activation. Perl `.14.7.3.1-.4` now provide the private marker/provenance,
+  9 rollout legs, 35 owners, and 79 mutations after Rust dormant marker/provenance. Perl `.14.7.3.1-.4` now provide the private marker/provenance,
   caller-frozen resolution/cache/policies, breadth-first recurrence, strict chains/shared resources, and source
   rebasing plus four fresh-authority carriers at 143/143. Only Perl is admitted; format/public/outward behavior is
-  unchanged. Rust `.14.7.4.0` freezes zero ordinary tests plus one final missing-marker/typed-provenance RED after
-  all v1 and generic-carrier observations; Rust rollout remains pending and `.4.1` is next.
-- latest_bootstrap_read: 2026-08-26 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox are
-  reviewed. `.14.7.4.0` preserves Rust production, rollout, v1/v2 formats, and public/outward surfaces while
-  freezing only the dormant consumer. Intended commit: `FUTURE-PARITY-BACKLOG.14.7.4.0 - freeze Rust staged-AST
-  dormant RED`; Rust `.14.7.4.1` is next.
+  unchanged. Rust `.14.7.4.0-.1` freeze zero ordinary tests and add only an inert detached marker, strict literal
+  options, live-span direct/ordered-derived provenance, malformed/transaction closure, and four equal logical
+  carrier observations. Only `.4.2` caller-frozen authority remains RED; Rust rollout remains pending. Focused
+  proof exposed two pre-existing Rust validation/trace defects requiring dedicated clean-pivot ownership first.
+- latest_bootstrap_read: 2026-08-26 — roadmap, codebase, mdBook, continuity, task, Knowledge, ADR, and Toolbox are reviewed. `.14.7.4.1` preserves current v1, generated v2, discovery, rollout, public/outward surfaces, and all
+  execution authority while adding only private marker/provenance. Intended commit: `FUTURE-PARITY-BACKLOG.14.7.4.1 - add Rust staged annotation provenance`; clean-pivot defect ownership is next before `.14.7.4.2`.

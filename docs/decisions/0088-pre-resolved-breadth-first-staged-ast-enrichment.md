@@ -226,6 +226,18 @@ final assertion fails, naming the missing `STAGED_PARSE_JOB_MARKER` and typed `s
 The checker now rejects 79 mutations, Rust rollout remains pending, and `.14.7.4.1` retains marker/provenance
 ownership.
 
+Rust marker/provenance leaf `FUTURE-PARITY-BACKLOG.14.7.4.1` implements that private declaration boundary without
+admission. Exact scalar assignment to `parse_job(text_expr, hash(literal options))` becomes one exclusive logical
+marker; malformed, dynamic, residual, recognition-reachable, transformed/copied-text, and provenance-smuggling
+forms reject statically. Live entry/match/capture spans produce exact text plus typed same-source direct or
+nonempty ordered-derived Unicode-scalar provenance. Native, normalized-reconstructed, generated-plan, and
+independently compiled emitted routes preserve the same detached `STAGED_PARSE_JOB_MARKER` and
+`staged_parse_job_v2` record without serialized parser, registry, source, callback, scheduler, cache, path, or host
+authority. Ordinary discovery and canonical references remain zero, neutral governance remains 79 mutations, and
+the final RED advances only to `.14.7.4.2`'s caller-frozen resolution/cache/result/failure authority. Focused proof
+also found two pre-existing Rust compiler-trace defects outside this ADR's behavior; separate clean-pivot task-tree
+leaves must own them before staged authority work resumes.
+
 ## Links
 
 - Owning task: `docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md`

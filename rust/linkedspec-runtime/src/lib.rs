@@ -29,8 +29,19 @@ pub mod source_emitter;
 pub mod source_location;
 pub mod spec_loader;
 pub mod spec_parser;
+mod staged_parse_job;
 pub mod staged_parser_registry;
 pub mod unicode_case_mapping;
+
+#[allow(unexpected_cfgs)]
+mod staged_parse_job_test_exports {
+    #[cfg(linkedspec_staged_ast_enrichment_red)]
+    pub use crate::staged_parse_job::validate_and_materialize_provenance;
+}
+
+#[doc(hidden)]
+#[allow(unused_imports)]
+pub use staged_parse_job_test_exports::*;
 
 pub use diagnostic::{RuntimeDiagnostic, RuntimeExecutionError};
 pub use diagnostic_output::{

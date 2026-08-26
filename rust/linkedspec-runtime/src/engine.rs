@@ -354,9 +354,11 @@ pub struct Engine {
 /// it restores it — making nested dispatch transparent to the parent.
 struct SavedMatchState {
     entry_groups: Vec<String>,
+    entry_group_spans: Vec<(usize, usize)>,
     entry_named: std::collections::HashMap<String, String>,
     entry_match_present: bool,
     match_groups: Vec<String>,
+    match_group_spans: Vec<(usize, usize)>,
     match_named: std::collections::HashMap<String, String>,
     match_present: bool,
     entry_start_byte: usize,
@@ -409,9 +411,11 @@ impl SavedMatchState {
     /// Restore the saved caller match state onto the context (invocation exit).
     fn restore(self, ctx: &mut RuntimeContext) {
         ctx.entry_groups = self.entry_groups;
+        ctx.entry_group_spans = self.entry_group_spans;
         ctx.entry_named = self.entry_named;
         ctx.entry_match_present = self.entry_match_present;
         ctx.match_groups = self.match_groups;
+        ctx.match_group_spans = self.match_group_spans;
         ctx.match_named = self.match_named;
         ctx.match_present = self.match_present;
         ctx.entry_start_byte = self.entry_start_byte;
@@ -778,12 +782,14 @@ impl GeneratedPlanExecutor<'_> {
             );
         }
         ctx.match_groups = matched.captures.clone();
+        ctx.match_group_spans = matched.capture_spans.clone();
         ctx.match_named = matched.named.clone();
         ctx.match_start_byte = matched.start;
         ctx.match_end_byte = matched.end;
         ctx.match_present = true;
         if entry_was_empty {
             ctx.entry_groups = matched.captures.clone();
+            ctx.entry_group_spans = matched.capture_spans.clone();
             ctx.entry_named = matched.named.clone();
             ctx.entry_start_byte = matched.start;
             ctx.entry_end_byte = matched.end;
@@ -952,9 +958,11 @@ impl GeneratedPlanExecutor<'_> {
         let caller_return = ctx.take_return_value();
         let saved_match = SavedMatchState {
             entry_groups: std::mem::take(&mut ctx.entry_groups),
+            entry_group_spans: std::mem::take(&mut ctx.entry_group_spans),
             entry_named: std::mem::take(&mut ctx.entry_named),
             entry_match_present: ctx.entry_match_present,
             match_groups: std::mem::take(&mut ctx.match_groups),
+            match_group_spans: std::mem::take(&mut ctx.match_group_spans),
             match_named: std::mem::take(&mut ctx.match_named),
             match_present: ctx.match_present,
             entry_start_byte: ctx.entry_start_byte,
@@ -964,6 +972,7 @@ impl GeneratedPlanExecutor<'_> {
             capture_start: ctx.capture_start,
         };
         ctx.entry_groups = saved_match.match_groups.clone();
+        ctx.entry_group_spans = saved_match.match_group_spans.clone();
         ctx.entry_named = saved_match.match_named.clone();
         ctx.entry_match_present = saved_match.match_present;
         ctx.entry_start_byte = saved_match.match_start_byte;
@@ -1395,9 +1404,11 @@ impl GeneratedPlanExecutor<'_> {
         let caller_return = ctx.take_return_value();
         let saved_match = SavedMatchState {
             entry_groups: std::mem::take(&mut ctx.entry_groups),
+            entry_group_spans: std::mem::take(&mut ctx.entry_group_spans),
             entry_named: std::mem::take(&mut ctx.entry_named),
             entry_match_present: ctx.entry_match_present,
             match_groups: std::mem::take(&mut ctx.match_groups),
+            match_group_spans: std::mem::take(&mut ctx.match_group_spans),
             match_named: std::mem::take(&mut ctx.match_named),
             match_present: ctx.match_present,
             entry_start_byte: ctx.entry_start_byte,
@@ -1407,6 +1418,7 @@ impl GeneratedPlanExecutor<'_> {
             capture_start: ctx.capture_start,
         };
         ctx.entry_groups = saved_match.match_groups.clone();
+        ctx.entry_group_spans = saved_match.match_group_spans.clone();
         ctx.entry_named = saved_match.match_named.clone();
         ctx.entry_match_present = saved_match.match_present;
         ctx.entry_start_byte = saved_match.match_start_byte;
@@ -2795,12 +2807,14 @@ impl Engine {
             );
         }
         ctx.match_groups = matched.captures.clone();
+        ctx.match_group_spans = matched.capture_spans.clone();
         ctx.match_named = matched.named.clone();
         ctx.match_start_byte = matched.start;
         ctx.match_end_byte = matched.end;
         ctx.match_present = true;
         if entry_was_empty {
             ctx.entry_groups = matched.captures.clone();
+            ctx.entry_group_spans = matched.capture_spans.clone();
             ctx.entry_named = matched.named.clone();
             ctx.entry_start_byte = matched.start;
             ctx.entry_end_byte = matched.end;
@@ -2883,9 +2897,11 @@ impl Engine {
         // mutates the parent's entry/local match.
         let saved_match = SavedMatchState {
             entry_groups: std::mem::take(&mut ctx.entry_groups),
+            entry_group_spans: std::mem::take(&mut ctx.entry_group_spans),
             entry_named: std::mem::take(&mut ctx.entry_named),
             entry_match_present: ctx.entry_match_present,
             match_groups: std::mem::take(&mut ctx.match_groups),
+            match_group_spans: std::mem::take(&mut ctx.match_group_spans),
             match_named: std::mem::take(&mut ctx.match_named),
             match_present: ctx.match_present,
             entry_start_byte: ctx.entry_start_byte,
@@ -2899,6 +2915,7 @@ impl Engine {
         // and is seeded from the rule's own first match below (mirroring the
         // framework passing the top rule's own match as `$info`).
         ctx.entry_groups = saved_match.match_groups.clone();
+        ctx.entry_group_spans = saved_match.match_group_spans.clone();
         ctx.entry_named = saved_match.match_named.clone();
         ctx.entry_match_present = saved_match.match_present;
         ctx.entry_start_byte = saved_match.match_start_byte;
@@ -3492,6 +3509,7 @@ impl Engine {
             }
             Expr::RecognitionCheckpoint
             | Expr::ProgressiveDispatchSpan { .. }
+            | Expr::StagedParseJobMarker { .. }
             | Expr::RecognitionCommit { .. }
             | Expr::RecognitionRollback { .. } => false,
             Expr::AssignScalar { value, .. } => Self::expr_calls_rule(value, rule_label),
@@ -3564,6 +3582,7 @@ impl Engine {
             Expr::Call { args, .. } => args.iter().any(Self::arg_reads_retv),
             Expr::RecognitionCheckpoint
             | Expr::ProgressiveDispatchSpan { .. }
+            | Expr::StagedParseJobMarker { .. }
             | Expr::RecognizeOnce { .. }
             | Expr::ObserveRecognition { .. }
             | Expr::RecognitionCommit { .. }
@@ -4938,6 +4957,17 @@ impl Engine {
                 top_rule,
                 span,
             } => ctx.dispatch_bounded_child_parse(target, parser_id, top_rule, span, rule_label),
+            Expr::StagedParseJobMarker {
+                target,
+                text_plan,
+                options,
+                ..
+            } => {
+                let marker =
+                    ctx.construct_staged_parse_job_marker(rule_label, text_plan, options)?;
+                ctx.set_scalar(target, marker.clone());
+                Ok(marker)
+            }
             Expr::RecognitionCheckpoint => Err(format!(
                 "recognition_checkpoint must be assigned to a rule-local token in rule '{rule_label}'"
             )),

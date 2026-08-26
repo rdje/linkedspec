@@ -2,25 +2,29 @@
 
 ## Current Activity
 
-- Rust `.14.7.4.0` freezes one outer-cfg staged-AST consumer without production behavior or route admission.
-- Ordinary discovery runs zero tests. The opt-in path preserves neutral inventory and function-body v1, observes
-  generic `parse_job` through native/reconstructed/generated/emitted routes, and fails only on the missing
-  dedicated marker plus typed-v2 provenance.
-- Neutral and Perl rollout remain complete; Rust rollout, later backends, recurrence, public authoring, and outward
-  surfaces remain pending. Neutral governance is 79 mutations.
+- Rust `.14.7.4.1` implements the private dormant staged declaration marker and typed provenance without execution
+  authority, route admission, rollout, format, or public movement.
+- Ordinary discovery remains zero tests. The opt-in path proves strict annotation/options/denial behavior, exact
+  direct/ordered-derived provenance, and equal native/reconstructed/generated/emitted logical markers before only
+  `.14.7.4.2` caller-frozen authority remains RED.
+- Focused proof found two pre-existing Rust validation/trace defects. The clean post-commit pivot must task-tree-own
+  and repair them before staged `.14.7.4.2`; neutral governance remains 79 mutations.
 
 ## Latest Completed Slice
 
-- `.14.7.4.0` adds the exact dormant Rust consumer and advances only its lifecycle to `dormant_red`. Every
-  pre-boundary assertion passes before one final `STAGED_PARSE_JOB_MARKER` / `staged_parse_job_v2` RED; canonical
-  CI has zero references, Rust rollout stays pending, and no production/generated/public surface moves.
+- `.14.7.4.1` adds one exclusive static `Expr::StagedParseJobMarker`, strict literal options, exact materialized
+  text, typed live-span direct/ordered-derived provenance, inert detached `staged_parse_job_v2`, and four equal
+  logical carrier observations. Canonical CI has zero references and Rust rollout remains pending.
 
 ## Next Action
 
-- Complete focused signoff, commit `.14.7.4.0`, clear the brief, verify the clean handoff, then activate Rust
-  private marker/provenance `.14.7.4.1` task-tree-first.
+- Complete focused signoff, commit `.14.7.4.1`, clear the brief, verify the clean handoff, then activate dedicated
+  defect leaves for traced progressive validation and gap-aware child-dispatch trace events before `.14.7.4.2`.
 
 ## Recent Completions
+
+- `2026-08-26` — `.14.7.4.1` adds Rust's inert detached marker, strict static annotation contract, live-span typed
+  provenance, and four equal dormant logical carriers; only `.2` authority remains RED.
 
 - `2026-08-26` — `.14.7.4.0` freezes Rust's zero-ordinary-test/one-opt-in-RED boundary across current v1 and four
   generic carrier observations; only dormant lifecycle governance moves, to 79 mutations.
@@ -66,9 +70,6 @@
 
 - `2026-08-25` — `.14.6.6.1` adds one private shared Lua authority with 273/273 assertions per ABI while the
   separate final path remains 85-pass/one-RED and all carrier, format, discovery, and rollout surfaces stay fixed.
-
-- `2026-08-25` — `.14.6.6.0` freezes one shared Lua 85-pass/one-RED consumer on PUC Lua and LuaJIT, keeps all
-  four carriers dormant, repairs stale compact roadmap projections, and splits `.1-.4` without behavior movement.
 
 ## History
 

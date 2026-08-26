@@ -155,7 +155,8 @@ pub mod regex_engine {
             let alt_idx = branch.saturating_sub(1);
 
             let info = self.alt_infos.get(alt_idx)?;
-            let (groups, captures) = extract_groups(combined, remaining, info, info.group_offset);
+            let (groups, captures, capture_spans) =
+                extract_groups(combined, remaining, info, info.group_offset, pos);
             let named = extract_named(combined, remaining, info, info.group_offset);
 
             Some(MatchResult {
@@ -164,6 +165,7 @@ pub mod regex_engine {
                 end: pos + m.end,
                 groups,
                 captures,
+                capture_spans,
                 named,
             })
         }
@@ -189,7 +191,8 @@ pub mod regex_engine {
             let alt_idx = branch.saturating_sub(1);
 
             let info = self.alt_infos.get(alt_idx)?;
-            let (groups, captures) = extract_groups(combined, remaining, info, info.group_offset);
+            let (groups, captures, capture_spans) =
+                extract_groups(combined, remaining, info, info.group_offset, pos);
             let named = extract_named(combined, remaining, info, info.group_offset);
 
             Some(MatchResult {
@@ -198,6 +201,7 @@ pub mod regex_engine {
                 end: pos + m.end,
                 groups,
                 captures,
+                capture_spans,
                 named,
             })
         }
@@ -241,7 +245,7 @@ pub mod regex_engine {
             } else {
                 regex.find_first(remaining)?
             };
-            let (groups, captures) = extract_groups(regex, remaining, info, 1);
+            let (groups, captures, capture_spans) = extract_groups(regex, remaining, info, 1, pos);
             let named = extract_named(regex, remaining, info, 1);
             Some(MatchResult {
                 index: slot_index,
@@ -249,6 +253,7 @@ pub mod regex_engine {
                 end: pos + matched.end,
                 groups,
                 captures,
+                capture_spans,
                 named,
             })
         }
@@ -434,9 +439,11 @@ pub mod regex_engine {
         haystack: &str,
         info: &AltInfo,
         group_offset: usize,
-    ) -> (Vec<String>, Vec<String>) {
+        absolute_base: usize,
+    ) -> (Vec<String>, Vec<String>, Vec<(usize, usize)>) {
         let mut groups = Vec::with_capacity(1 + info.group_count);
         let mut captures = Vec::with_capacity(info.group_count);
+        let mut capture_spans = Vec::with_capacity(info.group_count);
         if let Some(caps) = regex.captures(haystack) {
             // Group 0: full match
             groups.push(
@@ -449,6 +456,7 @@ pub mod regex_engine {
                 let global_idx = group_offset + local_idx;
                 if let Some(m) = caps.get(global_idx) {
                     captures.push(m.as_str().to_string());
+                    capture_spans.push((absolute_base + m.start(), absolute_base + m.end()));
                 }
                 groups.push(
                     caps.get(global_idx)
@@ -457,7 +465,7 @@ pub mod regex_engine {
                 );
             }
         }
-        (groups, captures)
+        (groups, captures, capture_spans)
     }
 
     /// Extract named capture groups belonging to the winning alternative.
@@ -501,6 +509,8 @@ pub mod regex_engine {
         /// optional groups are omitted, while participating empty-string captures
         /// remain present.
         pub captures: Vec<String>,
+        /// Byte ranges corresponding one-for-one with participating captures.
+        pub(crate) capture_spans: Vec<(usize, usize)>,
         /// Named capture groups (e.g. `(?P<name>...)` → `"name" => "value"`).
         pub named: HashMap<String, String>,
     }

@@ -121,6 +121,62 @@ pub struct HashLiteralEntry {
     pub value: Expr,
 }
 
+/// One direct authored source projection accepted by a staged parse-job declaration.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct StagedParseJobDirectTextPlan {
+    /// Exact live match/capture projection selected by the annotation.
+    pub source: String,
+    /// Zero-based compact participating-capture index, when the projection is a group.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub index: Option<usize>,
+}
+
+/// The closed source-provenance plan retained by a staged parse-job declaration.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(tag = "kind")]
+pub enum StagedParseJobTextPlan {
+    /// One direct half-open span from a live entry/local match or capture.
+    #[serde(rename = "direct_span")]
+    DirectSpan {
+        /// Exact live match/capture projection selected by the annotation.
+        source: String,
+        /// Zero-based compact participating-capture index, when applicable.
+        #[serde(skip_serializing_if = "Option::is_none")]
+        index: Option<usize>,
+    },
+    /// A nonempty sequence of direct spans materialized in authored order.
+    #[serde(rename = "derived_text")]
+    DerivedText {
+        /// Closed materialization policy; currently `concatenate_in_order`.
+        policy: String,
+        /// Flattened authored-order direct segments.
+        segments: Vec<StagedParseJobDirectTextPlan>,
+    },
+}
+
+/// Normalized literal-only options retained by a staged parse-job declaration.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct StagedParseJobOptions {
+    /// Logical AST node category expected from the staged parser.
+    pub node_kind: String,
+    /// Logical payload category attached by the later stitch policy.
+    pub payload_kind: String,
+    /// Pre-registered parser specification identity.
+    pub spec: String,
+    /// Optional explicit top-rule identity.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub top: Option<String>,
+    /// Caller-frozen result stitching policy.
+    pub result_policy: String,
+    /// Destination field required by non-marker-replacement policies.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub into: Option<String>,
+    /// Caller-frozen staged failure policy.
+    pub on_error: String,
+    /// Deterministically sorted capabilities required by the staged parser.
+    pub required_capabilities: Vec<String>,
+}
+
 /// An expression — the core of the lifecycle code language.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "kind")]
@@ -135,6 +191,22 @@ pub enum Expr {
         parser_id: String,
         top_rule: String,
         span: String,
+    },
+    /// Declare one inert general staged-parse job with typed source provenance.
+    #[serde(rename = "staged_parse_job_marker")]
+    StagedParseJobMarker {
+        /// Rule-local scalar receiving the detached inert marker.
+        target: String,
+        /// Logical marker contract version.
+        version: u32,
+        /// Detached sidecar record kind.
+        sidecar_kind: String,
+        /// Static transaction-effect identity.
+        effect: String,
+        /// Closed live-source projection plan.
+        text_plan: StagedParseJobTextPlan,
+        /// Normalized literal-only declaration options.
+        options: StagedParseJobOptions,
     },
     /// Create one rule-local recognition transaction token.
     #[serde(rename = "recognition_checkpoint")]
@@ -316,6 +388,7 @@ impl Expr {
             }
             Expr::RecognitionCheckpoint
             | Expr::ProgressiveDispatchSpan { .. }
+            | Expr::StagedParseJobMarker { .. }
             | Expr::RecognizeOnce { .. }
             | Expr::ObserveRecognition { .. }
             | Expr::RecognitionCommit { .. }
@@ -382,6 +455,7 @@ impl Expr {
         match self {
             Expr::RecognitionCheckpoint
             | Expr::ProgressiveDispatchSpan { .. }
+            | Expr::StagedParseJobMarker { .. }
             | Expr::RecognizeOnce { .. }
             | Expr::ObserveRecognition { .. }
             | Expr::RecognitionCommit { .. }
@@ -472,6 +546,12 @@ impl std::fmt::Display for Expr {
                 f,
                 "{target} = dispatch_span({parser_id:?}, {top_rule:?}, {span})"
             ),
+            Expr::StagedParseJobMarker {
+                target,
+                text_plan,
+                options,
+                ..
+            } => write!(f, "{target} = parse_job({text_plan:?}, {options:?})"),
             Expr::RecognizeOnce { token, rule } => {
                 write!(f, "recognize_once({token}, call({rule}))")
             }
@@ -762,6 +842,225 @@ fn valid_progressive_top_rule(value: &str) -> bool {
         .next()
         .is_some_and(|byte| byte.is_ascii_alphabetic() || byte == b'_')
         && bytes.all(|byte| byte.is_ascii_alphanumeric() || byte == b'_')
+}
+
+const STAGED_PARSE_JOB_ERROR_PREFIX: &str = "LINKEDSPEC_STAGED_AST_ENRICHMENT_ERROR:";
+
+fn staged_parse_job_error(code: &str) -> String {
+    format!("{STAGED_PARSE_JOB_ERROR_PREFIX}{code}")
+}
+
+fn valid_staged_identifier(value: &str) -> bool {
+    value.as_bytes().first().is_some_and(u8::is_ascii_lowercase)
+        && value
+            .bytes()
+            .all(|byte| byte.is_ascii_lowercase() || byte.is_ascii_digit() || byte == b'_')
+}
+
+fn valid_staged_field(value: &str) -> bool {
+    valid_progressive_top_rule(value)
+}
+
+fn positional_expr(argument: &Arg) -> Option<&Expr> {
+    match argument {
+        Arg::Positional(value) => Some(value),
+        Arg::Keyword { .. } => None,
+    }
+}
+
+fn literal_string(expression: &Expr) -> Option<&str> {
+    match expression {
+        Expr::StringLiteral { value } => Some(value),
+        _ => None,
+    }
+}
+
+fn parse_staged_parse_job_options(expression: &Expr) -> Result<StagedParseJobOptions, String> {
+    let Expr::Call { name, args } = expression else {
+        return Err(staged_parse_job_error("staged_parse_job_options_required"));
+    };
+    if name != "hash" || args.is_empty() || args.len() % 2 != 0 {
+        return Err(staged_parse_job_error("staged_parse_job_options_required"));
+    }
+
+    let allowed = [
+        "node_kind",
+        "payload_kind",
+        "spec",
+        "top",
+        "result_policy",
+        "into",
+        "on_error",
+        "required_capabilities",
+    ];
+    let mut values = std::collections::BTreeMap::new();
+    for pair in args.chunks_exact(2) {
+        let Some(key) = positional_expr(&pair[0]).and_then(literal_string) else {
+            return Err(staged_parse_job_error("staged_parse_job_options_required"));
+        };
+        if !allowed.contains(&key) {
+            return Err(staged_parse_job_error("staged_parse_job_option_unknown"));
+        }
+        let Some(value) = positional_expr(&pair[1]) else {
+            return Err(staged_parse_job_error("staged_parse_job_options_required"));
+        };
+        if values.insert(key, value).is_some() {
+            return Err(staged_parse_job_error("staged_parse_job_options_required"));
+        }
+    }
+
+    let required_string = |name: &str| -> Result<String, String> {
+        values
+            .get(name)
+            .and_then(|value| literal_string(value))
+            .map(str::to_owned)
+            .ok_or_else(|| staged_parse_job_error("staged_parse_job_options_required"))
+    };
+    let node_kind = required_string("node_kind")?;
+    let payload_kind = required_string("payload_kind")?;
+    let spec = required_string("spec")?;
+    let result_policy = required_string("result_policy")?;
+    let on_error = required_string("on_error")?;
+    let top = values
+        .get("top")
+        .map(|value| {
+            literal_string(value)
+                .map(str::to_owned)
+                .ok_or_else(|| staged_parse_job_error("staged_parse_job_options_required"))
+        })
+        .transpose()?;
+    let into = values
+        .get("into")
+        .map(|value| {
+            literal_string(value)
+                .map(str::to_owned)
+                .ok_or_else(|| staged_parse_job_error("staged_parse_job_options_required"))
+        })
+        .transpose()?;
+
+    if !valid_staged_identifier(&node_kind) || !valid_staged_identifier(&payload_kind) {
+        return Err(staged_parse_job_error("staged_parse_job_options_required"));
+    }
+    if !valid_progressive_parser_id(&spec) {
+        return Err(staged_parse_job_error("staged_parser_identity_invalid"));
+    }
+    if top
+        .as_deref()
+        .is_some_and(|value| !valid_staged_field(value))
+    {
+        return Err(staged_parse_job_error("staged_top_rule_invalid"));
+    }
+    if !matches!(
+        result_policy.as_str(),
+        "replace_marker" | "replace_field" | "sibling_field" | "append_child"
+    ) {
+        return Err(staged_parse_job_error("staged_result_policy_invalid"));
+    }
+    if !matches!(on_error.as_str(), "fail" | "keep_text" | "diagnostic_node") {
+        return Err(staged_parse_job_error("staged_failure_policy_invalid"));
+    }
+    let target_is_valid = into.as_deref().is_some_and(valid_staged_field);
+    if (result_policy == "replace_marker" && into.is_some())
+        || (result_policy != "replace_marker" && !target_is_valid)
+    {
+        return Err(staged_parse_job_error("staged_result_target_invalid"));
+    }
+
+    let mut required_capabilities = Vec::new();
+    if let Some(expression) = values.get("required_capabilities") {
+        let Expr::Call { name, args } = expression else {
+            return Err(staged_parse_job_error("staged_parse_job_options_required"));
+        };
+        if name != "array" {
+            return Err(staged_parse_job_error("staged_parse_job_options_required"));
+        }
+        let mut seen = std::collections::BTreeSet::new();
+        for argument in args {
+            let Some(value) = positional_expr(argument).and_then(literal_string) else {
+                return Err(staged_parse_job_error("staged_parse_job_options_required"));
+            };
+            if !valid_progressive_parser_id(value) || !seen.insert(value.to_owned()) {
+                return Err(staged_parse_job_error("staged_parse_job_options_required"));
+            }
+        }
+        required_capabilities.extend(seen);
+    }
+
+    Ok(StagedParseJobOptions {
+        node_kind,
+        payload_kind,
+        spec,
+        top,
+        result_policy,
+        into,
+        on_error,
+        required_capabilities,
+    })
+}
+
+fn parse_staged_direct_text_plan(
+    expression: &Expr,
+) -> Result<Option<StagedParseJobDirectTextPlan>, String> {
+    let Expr::Call { name, args } = expression else {
+        return Ok(None);
+    };
+    if matches!(name.as_str(), "entry_text" | "match_text") {
+        if !args.is_empty() {
+            return Err(staged_parse_job_error("staged_source_provenance_invalid"));
+        }
+        return Ok(Some(StagedParseJobDirectTextPlan {
+            source: name.clone(),
+            index: None,
+        }));
+    }
+    if matches!(name.as_str(), "entry_group" | "match_group") {
+        let Some(Expr::NumberLiteral { value }) = args.first().and_then(positional_expr) else {
+            return Err(staged_parse_job_error("staged_source_provenance_invalid"));
+        };
+        if args.len() != 1 || !value.is_finite() || *value < 0.0 || value.fract() != 0.0 {
+            return Err(staged_parse_job_error("staged_source_provenance_invalid"));
+        }
+        let index = usize::try_from(*value as u128)
+            .map_err(|_| staged_parse_job_error("staged_source_provenance_invalid"))?;
+        return Ok(Some(StagedParseJobDirectTextPlan {
+            source: name.clone(),
+            index: Some(index),
+        }));
+    }
+    Ok(None)
+}
+
+fn parse_staged_parse_job_text_plan(expression: &Expr) -> Result<StagedParseJobTextPlan, String> {
+    if let Some(direct) = parse_staged_direct_text_plan(expression)? {
+        return Ok(StagedParseJobTextPlan::DirectSpan {
+            source: direct.source,
+            index: direct.index,
+        });
+    }
+    let Expr::Call { name, args } = expression else {
+        return Err(staged_parse_job_error("staged_source_provenance_invalid"));
+    };
+    if name != "cat" || args.is_empty() {
+        return Err(staged_parse_job_error("staged_source_provenance_invalid"));
+    }
+    let mut segments = Vec::new();
+    for argument in args {
+        let Some(value) = positional_expr(argument) else {
+            return Err(staged_parse_job_error("staged_source_provenance_invalid"));
+        };
+        match parse_staged_parse_job_text_plan(value)? {
+            StagedParseJobTextPlan::DirectSpan { source, index } => {
+                segments.push(StagedParseJobDirectTextPlan { source, index });
+            }
+            StagedParseJobTextPlan::DerivedText {
+                segments: nested, ..
+            } => segments.extend(nested),
+        }
+    }
+    Ok(StagedParseJobTextPlan::DerivedText {
+        policy: "concatenate_in_order".to_owned(),
+        segments,
+    })
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -1513,6 +1812,27 @@ impl<'a> Parser<'a> {
                 parser_id,
                 top_rule,
                 span,
+            }));
+        }
+        if let Expr::Call { name: helper, args } = &value
+            && helper == "parse_job"
+        {
+            if args.len() != 2 {
+                return Err(staged_parse_job_error("staged_parse_job_options_required"));
+            }
+            let options = positional_expr(&args[1])
+                .ok_or_else(|| staged_parse_job_error("staged_parse_job_options_required"))
+                .and_then(parse_staged_parse_job_options)?;
+            let text_plan = positional_expr(&args[0])
+                .ok_or_else(|| staged_parse_job_error("staged_source_provenance_invalid"))
+                .and_then(parse_staged_parse_job_text_plan)?;
+            return Ok(Some(Expr::StagedParseJobMarker {
+                target: name,
+                version: 2,
+                sidecar_kind: "staged_parse_job_v2".to_owned(),
+                effect: "staged_parse_job_declaration".to_owned(),
+                text_plan,
+                options,
             }));
         }
         Ok(Some(Expr::AssignScalar {

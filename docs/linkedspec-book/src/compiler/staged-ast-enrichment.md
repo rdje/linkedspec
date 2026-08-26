@@ -3,8 +3,9 @@
 > Status: executable backend-neutral design. General `parse_job(...)` authoring is not yet public. Perl now has a
 > privately admitted marker, caller-frozen recursive authority, and four fresh-authority carriers with a
 > fully GREEN 143-check oracle;
-> Rust has one dormant outer-cfg consumer whose current-v1 and four generic-carrier observations pass before one
-> exact missing-marker/typed-provenance RED, but no Rust staged-v2 production behavior or rollout;
+> Rust has one private dormant marker/provenance implementation whose current-v1 and four logical-carrier
+> observations pass before one exact missing caller-frozen-authority RED, but no Rust staged-v2 execution authority
+> or rollout;
 > the current shipped five-backend/six-runtime implementation still supports only the narrow function-body v1
 > adapter described below.
 
@@ -297,18 +298,43 @@ host handle.
 Perl is privately admitted, but the language ledger still classifies `parse_job` as non-public until the separately
 owned `.14.7.9` closeout. Function-body v1 and generated-source v2 remain unchanged.
 
-Rust `.14.7.4.0` freezes the next backend boundary without implementing it. Ordinary Cargo discovery sees the
-exact consumer but activates zero tests; canonical CI does not mention it. With its dedicated cfg enabled, current
-function-body v1 still proves deterministic queue order, built-in resolution/load/compile/execute/cache, exact
-`replace_field` / `body_ast` / `fail`, and complete wrong-top context. A general `expr-v1` job is rejected during
-v1 resolution.
+Rust `.14.7.4.0-.1` freeze the next backend boundary and implement only its private declaration carrier. Ordinary
+Cargo discovery sees the exact consumer but activates zero tests; canonical CI does not mention it. With its
+dedicated cfg enabled, current function-body v1 still proves deterministic queue order, built-in resolution/load/
+compile/execute/cache, exact `replace_field` / `body_ast` / `fail`, and complete wrong-top context. A general
+`expr-v1` job remains rejected during v1 resolution.
 
-The future authored fixture currently compiles as an ordinary scalar assignment containing one generic
-`parse_job` call. Native execution, normalized JSON reconstruction, generated-plan execution, and independently
-compiled emitted source preserve that same generic form and return `null`; this is the engine's unknown-helper
-fallback, not staged parsing. Only the final assertion fails, naming missing `STAGED_PARSE_JOB_MARKER` and typed
-`staged_parse_job_v2` provenance. `.14.7.4.1` owns the private dedicated marker and direct/ordered-derived
-provenance; Rust rollout remains pending through admission leaf `.4`.
+The exact future annotation spelling is scalar assignment with a literal option hash. In Rust, that form now
+compiles exclusively to `Expr::StagedParseJobMarker`:
+
+```text
+child = parse_job(
+  cat(entry_group(1), match_group(1)),
+  hash(
+    node_kind, "expression",
+    payload_kind, "text",
+    spec, "expr-v1",
+    top, "expression",
+    result_policy, "replace_marker",
+    on_error, "fail"
+  )
+)
+```
+
+`entry_text`, `entry_group(N)`, `match_text`, and `match_group(N)` are direct live-span plans; nested nonempty
+`cat(...)` plans flatten into ordered derived segments. The runtime materializes exact text from the live entry or
+match and converts byte ranges immediately to half-open Unicode-scalar source spans. Literal copied text,
+transformations, dynamic group indices, duplicate/unknown/dynamic options, copied-text provenance fields,
+reversed/out-of-range/source-mismatched spans, empty derived provenance, residual generic calls, and transaction-
+reachable declarations fail closed.
+
+Native execution, normalized JSON reconstruction, generated-plan execution, and independently compiled emitted
+source preserve the same logical node and produce equal detached `STAGED_PARSE_JOB_MARKER` values with one
+`staged_parse_job_v2` record. That record contains exact text, normalized logical options, origin, and typed
+provenance—but no parser, registry, callback, source snapshot, scheduler, cache, path, cancellation, budget, queue,
+or host authority. It declares intent only. The final assertion therefore advances to missing caller-frozen
+resolution/cache/result/failure authority owned by `.14.7.4.2`; Rust rollout remains pending through admission
+leaf `.4`.
 
 Publishing this boundary crossed the bounded `CHANGES.md` rollover threshold. The repository archived one complete
 218-line record set as immutable segment `4991`; ADR `0089` advances only the finite change-history collection and

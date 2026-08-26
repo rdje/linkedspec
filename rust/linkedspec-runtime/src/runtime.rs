@@ -231,12 +231,16 @@ pub struct RuntimeContext {
     pub accumulator: Vec<RuntimeValue>,
     /// Entry capture groups (group 0 = first participating capture).
     pub entry_groups: Vec<String>,
+    /// Byte ranges corresponding one-for-one with participating entry captures.
+    pub(crate) entry_group_spans: Vec<(usize, usize)>,
     /// Named entry match groups.
     pub entry_named: std::collections::HashMap<String, String>,
     /// Whether an entry match exists, distinct from a present zero-width match.
     pub entry_match_present: bool,
     /// Local capture groups (group 0 = first participating capture).
     pub match_groups: Vec<String>,
+    /// Byte ranges corresponding one-for-one with participating local captures.
+    pub(crate) match_group_spans: Vec<(usize, usize)>,
     /// Named local match groups.
     pub match_named: std::collections::HashMap<String, String>,
     /// Whether a local match exists, distinct from a present zero-width match.
@@ -424,9 +428,11 @@ impl RuntimeContext {
             descriptor_scalar_bare_reads: std::collections::HashSet::new(),
             accumulator: Vec::new(),
             entry_groups: Vec::new(),
+            entry_group_spans: Vec::new(),
             entry_named: std::collections::HashMap::new(),
             entry_match_present: false,
             match_groups: Vec::new(),
+            match_group_spans: Vec::new(),
             match_named: std::collections::HashMap::new(),
             match_present: false,
             entry_start_byte: 0,
@@ -452,6 +458,32 @@ impl RuntimeContext {
             diagnostic_top_rule: None,
             diagnostic_failure: None,
         }
+    }
+
+    pub(crate) fn construct_staged_parse_job_marker(
+        &self,
+        rule_label: &str,
+        text_plan: &linkedspec_core::expr::StagedParseJobTextPlan,
+        options: &linkedspec_core::expr::StagedParseJobOptions,
+    ) -> Result<RuntimeValue, String> {
+        let view = crate::staged_parse_job::RuntimeSourceView {
+            authority: self.source_authority.0.as_ref(),
+            source_id: INPUT_SOURCE_ID,
+            entry_match: self
+                .entry_match_present
+                .then_some((self.entry_start_byte, self.entry_end_byte)),
+            entry_groups: &self.entry_group_spans,
+            local_match: self
+                .match_present
+                .then_some((self.match_start_byte, self.match_end_byte)),
+            local_groups: &self.match_group_spans,
+        };
+        crate::staged_parse_job::construct_marker(
+            &view,
+            &format!("{rule_label}:parse_job"),
+            text_plan,
+            options,
+        )
     }
 
     pub(crate) fn install_bounded_child_parse_authority(

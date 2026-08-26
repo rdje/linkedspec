@@ -752,10 +752,13 @@ top-level invocation and runs it only after the complete parent parse. Native, n
 emitted routes return equal detached output while serialized carrier data contains no live authority. The
 final-path oracle is 143/143 and appears once in phase-0 and once in canonical CI; only Perl rollout is promoted.
 Generated-source v2, function-body v1, public inventory, and outward surfaces remain unchanged. Rust
-`.14.7.4.0` now supplies one exact dormant outer-cfg consumer: ordinary discovery runs zero tests, while opt-in
-execution preserves current v1 and four generic `parse_job` carrier observations before one final missing
-`STAGED_PARSE_JOB_MARKER` / `staged_parse_job_v2` RED. It is absent from canonical CI and Rust rollout remains
-pending. Rust marker/provenance `.14.7.4.1` is next; Dart/Julia/Lua consumers remain absent under `.14.7.5-.7`.
+`.14.7.4.0-.1` now supply one exact dormant outer-cfg consumer plus its private declaration carrier: ordinary
+discovery runs zero tests, while opt-in execution preserves current v1 and proves an exclusive inert marker,
+strict literal options, exact text, typed direct/ordered-derived provenance, malformed/smuggling/transaction
+denials, and four equal logical carrier observations. It is absent from canonical CI, contains no live execution
+authority, and Rust rollout remains pending. `.14.7.4.2` owns caller-frozen authority after clean-pivot task-tree
+repair of two pre-existing Rust validation/trace defects; Dart/Julia/Lua consumers remain absent under
+`.14.7.5-.7`.
 
 Progressive dispatch is a separate synchronous path under `FUTURE-PARITY-BACKLOG.14.6`. Audit `.14.6.0` proves
 that none of these registries can invoke a normal loaded spec while a parser is active. The portable design uses

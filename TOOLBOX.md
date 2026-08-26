@@ -318,7 +318,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   `bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py` to prove neutral+Perl
   lifecycle, Rust's dormant consumer plus three absent later consumers, 79 mutations, and exact single Perl
   phase-0/canonical admission. Public authoring remains `.14.7.9`.
-- **Rust general-staged dormant boundary:** `FUTURE-PARITY-BACKLOG.14.7.4.0` freezes
+- **Rust general-staged private marker/provenance boundary:** `FUTURE-PARITY-BACKLOG.14.7.4.0-.1` freeze
   `rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs` behind outer cfg
   `linkedspec_staged_ast_enrichment_red`. Run ordinary discovery with
   `bash tools/run_cargo_local.sh test --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test
@@ -327,9 +327,12 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
   --manifest-path rust/Cargo.toml -p linkedspec-runtime --test staged_ast_enrichment_contract`. All neutral,
   function-body-v1, diagnostic, registry-denial, native, reconstructed, generated-plan, and independently compiled
   emitted observations must complete before one final `LINKEDSPEC_STAGED_AST_ENRICHMENT_RED` panic names missing
-  `STAGED_PARSE_JOB_MARKER` and `staged_parse_job_v2`. The current generic call returns null; it is not an
-  implementation. Canonical CI must contain zero references and Rust rollout remains pending. `.14.7.4.1` next
-  owns the private marker and typed provenance.
+  caller-frozen resolution/cache/result/failure authority. Inspect `Expr::StagedParseJobMarker` for exclusive
+  literal lowering and `rust/linkedspec-runtime/src/staged_parse_job.rs` for exact text plus typed direct/ordered-
+  derived provenance. The marker is inert and detached: it owns no parser, registry, source snapshot, callback,
+  scheduler, cache, path, or host authority. Canonical CI must contain zero references and Rust rollout remains
+  pending. `.14.7.4.2` next owns private authority only after separate task-tree repair of the pre-existing traced-
+  compiler progressive-validator omission and gap-aware child-dispatch trace-event omissions found by `.1` proof.
 - **Env knobs:** `LINKEDSPEC_TRACE_LEVEL` (level; `LINKEDSPEC_DUMP_VERBOSITY` is the fallback),
   `LINKEDSPEC_TRACE_FILE` (route to a file), `LINKEDSPEC_TRACE_MIRROR_STDOUT`, `LINKEDSPEC_TRACE_EMOJI`,
   `LINKEDSPEC_TRACE_RESET_FILE`.

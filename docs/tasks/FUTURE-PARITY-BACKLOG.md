@@ -6,8 +6,8 @@
 - Status: `active`
 - Roadmap lane: `Overall roadmap - future parity backlog`
 - Created: `2026-07-09`
-- Last updated: `2026-08-26` (progressive `.14.6`, staged neutral `.14.7.0-.2`, and complete Perl `.14.7.3.0-.4`
-  are closed through the intended canonical Perl-admission commit; Rust dormant RED `.14.7.4.0` is next)
+- Last updated: `2026-08-26` (progressive `.14.6`, staged neutral `.14.7.0-.2`, complete Perl `.14.7.3.0-.4`,
+  and Rust dormant marker/provenance `.14.7.4.0-.1` are closed; clean-pivot defect ownership precedes `.14.7.4.2`)
 - Owner: repo-local workflow
 
 ## Goal
@@ -119,8 +119,11 @@ and exact canonical routes without production, format, typed, or outward movemen
 `.7`, and public no-drift `.8` are committed. Staged `.14.7.0-.2` are committed through neutral executable
 authority at `ab8802c9`; Perl dormant-boundary `.14.7.3.0` and private dedicated annotation/typed-provenance
 `.14.7.3.1-.4` close private recursive authority, four fresh-authority carriers, and exact Perl admission at
-143/143 plus 78 mutations; Rust dormant RED `.14.7.4.0` is the next clean task-tree-first frontier, while combined
-program-wide `.14.8` remains a separate owner. Mandatory segment `4992` is finitely authorized by ADR `0086` at
+143/143 plus 78 mutations. Rust `.14.7.4.0-.1` now freeze the dormant boundary and implement one private inert
+marker with strict literals plus typed direct/ordered-derived provenance across four logical carrier routes; the
+only remaining consumer RED is `.14.7.4.2` caller-frozen authority. Two pre-existing Rust validation/trace defects
+found by focused proof require dedicated clean-pivot task ownership before `.2`; combined program-wide `.14.8`
+remains a separate owner. Mandatory segment `4992` is finitely authorized by ADR `0086` at
 21 change-history files / 20 manifest lines and makes `.14.6.5.2` a canonical boundary.
 
 **Historical frontier (2026-07-29):** Lua Unicode prerequisite `.10.7.1` and opaque source/outcome parent

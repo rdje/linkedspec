@@ -320,6 +320,7 @@ fn normalize_expr(
         }
         Expr::RecognitionCheckpoint
         | Expr::ProgressiveDispatchSpan { .. }
+        | Expr::StagedParseJobMarker { .. }
         | Expr::RecognizeOnce { .. }
         | Expr::ObserveRecognition { .. }
         | Expr::RecognitionCommit { .. }

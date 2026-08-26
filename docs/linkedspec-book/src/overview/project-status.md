@@ -109,12 +109,13 @@ emitted results from fresh host-only authority with no live state serialized. Th
 once in ordinary phase-0 and canonical CI, and only Perl rollout is complete. Generated format, function-body v1,
 public `parse_job(...)`, and outward behavior remain unchanged. Mandatory
 history segment `4991` remains finitely authorized by ADR `0089` at 22 files / 21 manifest records. Fresh
-Rust `.14.7.4.0` now freezes one exact outer-cfg consumer without production behavior. Ordinary Cargo discovery
-runs zero tests. The opt-in path keeps current function-body v1 GREEN, denies general `expr-v1` through the narrow
-registry, preserves one generic `parse_job` call and null result across native, reconstructed, generated-plan, and
-independently compiled emitted-source observations, then fails only on absent `STAGED_PARSE_JOB_MARKER` plus typed
-`staged_parse_job_v2` provenance. Canonical CI has zero references and Rust rollout stays pending. Rust private
-marker/provenance `.14.7.4.1` is next.
+Rust `.14.7.4.0-.1` now freeze one exact outer-cfg consumer and add only private declaration behavior. Ordinary
+Cargo discovery runs zero tests. The opt-in path keeps current function-body v1 GREEN, denies general `expr-v1`
+through the narrow registry, and lowers exact assignment-form `parse_job` to one inert detached marker with strict
+literal options, exact text, and typed direct/ordered-derived Unicode-scalar provenance. Native, reconstructed,
+generated-plan, and independently compiled emitted logical routes agree. Canonical CI has zero references, Rust
+rollout stays pending, and only `.14.7.4.2` caller-frozen authority remains RED. Focused proof found two unrelated
+pre-existing Rust validation/trace defects; dedicated clean-pivot task ownership precedes `.2`.
 
 Rust's exact four-test consumer now runs under ordinary Cargo discovery and as a required canonical-CI leg. It
 proves the immutable value core and projection boundary across native, reconstructed, and generated-plan execution;
