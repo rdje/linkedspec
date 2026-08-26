@@ -24,7 +24,7 @@
     "diagnostics": 37,
     "rollout_legs": 9,
     "ownership_rows": 35,
-    "mutations": 78
+    "mutations": 79
   },
   "authored_surface": {
     "example": "job_marker = parse_job(text_expr, hash(\"node_kind\", \"expression\", \"payload_kind\", \"embedded_expression\", \"spec\", \"expr-v1\", \"top\", \"Expr\", \"result_policy\", \"sibling_field\", \"into\", \"expression_ast\", \"on_error\", \"fail\"))",
@@ -789,7 +789,7 @@
   ],
   "backend_consumers": [
     {"backend": "perl", "owner": "FUTURE-PARITY-BACKLOG.14.7.3.0", "path": "t/staged_ast_enrichment_perl_contract.t", "status": "complete"},
-    {"backend": "rust", "owner": "FUTURE-PARITY-BACKLOG.14.7.4.0", "path": "rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs", "status": "pending_absent"},
+    {"backend": "rust", "owner": "FUTURE-PARITY-BACKLOG.14.7.4.0", "path": "rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs", "status": "dormant_red"},
     {"backend": "dart", "owner": "FUTURE-PARITY-BACKLOG.14.7.5.0", "path": "dart/test/staged_ast_enrichment_contract_test.dart", "status": "pending_absent"},
     {"backend": "julia", "owner": "FUTURE-PARITY-BACKLOG.14.7.6.0", "path": "julia/test/staged_ast_enrichment_contract_test.jl", "status": "pending_absent"},
     {"backend": "lua", "owner": "FUTURE-PARITY-BACKLOG.14.7.7.0", "path": "lua/test/staged_ast_enrichment_contract_test.lua", "status": "pending_absent"}
@@ -988,6 +988,7 @@
     "carrier_kind",
     "consumer_path",
     "consumer_status",
+    "rust_consumer_status",
     "runtime_route",
     "outward_path",
     "outward_token",

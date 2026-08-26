@@ -127,13 +127,14 @@ cancellation/deadline/budget state, mutable queues, or host handles.
 4 registry entries; 2 sources; 8 provenance, 3 deterministic-id, 8 resolution, 6 authority, 10 cache, 4 queue,
 3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; 5 future backend
 consumers over 6 runtime routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 exact owners; and
-78 reason-checked mutations after Perl admission.
+79 reason-checked mutations after Rust dormant-consumer activation.
 
 Neutral and Perl rollout are complete. Rust, Dart, Julia, PUC Lua, LuaJIT, six-runtime recurrence, and public
 authoring/no-drift remain pending under `.14.7.4-.9`; `.14.7.10` owns independent recomposition. The checker is an
 always-on canonical-CI input. It guards ten facades/schema/semantic/MCP/CLI/README paths against premature public
-exposure, requires the Perl consumer exactly once in ordinary and canonical discovery, and keeps all four later
-backend consumer files absent until their RED owners activate.
+exposure, requires the Perl consumer exactly once in ordinary and canonical discovery, requires the dormant Rust
+consumer at its predeclared path with zero canonical references, and keeps Dart/Julia/Lua consumers absent until
+their RED owners activate.
 
 ## Consequences
 
@@ -216,6 +217,15 @@ Ordinary phase-0 and canonical CI each register the exact consumer once. Only th
 the checker now rejects 78 mutations. Function-body v1, generated-source v2, language/public/outward surfaces,
 later backends, recurrence, and combined `.14.8` remain unchanged or pending.
 
+Rust dormant-boundary leaf `FUTURE-PARITY-BACKLOG.14.7.4.0` adds one exact outer-cfg consumer and no production
+source. Ordinary Cargo discovery runs zero tests. The opt-in test preserves the complete neutral inventory,
+function-body-v1 queue/resolve/load/compile/execute/cache/stitch behavior and wrong-top context, proves the v1
+registry denies general `expr-v1` authority, and observes one generic `parse_job` call returning null through
+native, normalized-reconstructed, generated-plan, and independently compiled emitted-source routes. Only its
+final assertion fails, naming the missing `STAGED_PARSE_JOB_MARKER` and typed `staged_parse_job_v2` provenance.
+The checker now rejects 79 mutations, Rust rollout remains pending, and `.14.7.4.1` retains marker/provenance
+ownership.
+
 ## Links
 
 - Owning task: `docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md`
@@ -224,4 +234,5 @@ later backends, recurrence, and combined `.14.8` remain unchanged or pending.
 - Neutral artifact/checker: `capability_conformance/staged_ast_enrichment_contract.json`,
   `tools/check_staged_ast_enrichment_contract.py`
 - Knowledge: `docs/knowledge/general-staged-ast-enrichment-neutral-contract.md` and
-  `docs/knowledge/perl-staged-ast-enrichment-recursive-authority.md`
+  `docs/knowledge/perl-staged-ast-enrichment-recursive-authority.md` plus
+  `docs/knowledge/rust-staged-ast-enrichment-dormant-red.md`

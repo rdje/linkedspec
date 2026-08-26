@@ -138,7 +138,7 @@ BACKEND_CONSUMERS = [
         "backend": "rust",
         "owner": "FUTURE-PARITY-BACKLOG.14.7.4.0",
         "path": "rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs",
-        "status": "pending_absent",
+        "status": "dormant_red",
     },
     {
         "backend": "dart",
@@ -737,6 +737,16 @@ def validate_environment(contract: dict[str, Any]) -> None:
         consumer_path = ROOT / row["path"]
         if row["status"] == "pending_absent":
             require(not consumer_path.exists(), f"pending backend consumer unexpectedly exists: {row['path']}")
+        elif row["status"] == "dormant_red":
+            require(row["backend"] == "rust", "only the Rust staged consumer is currently dormant RED")
+            require(
+                consumer_path.is_file() and not consumer_path.is_symlink(),
+                f"dormant backend consumer is missing or symbolic: {row['path']}",
+            )
+            require(
+                row["path"] not in ci_text,
+                "the dormant Rust staged consumer must remain absent from canonical CI",
+            )
         elif row["status"] == "complete":
             require(row["backend"] == "perl", "only the Perl staged consumer is currently complete")
             require(
@@ -1006,6 +1016,7 @@ def mutation_inventory() -> list[Mutation]:
         ("carrier_kind", set_value(["carrier_requirements", 0, "carrier"], "host_only"), "carrier requirement inventory mismatch"),
         ("consumer_path", set_value(["backend_consumers", 0, "path"], "/tmp/test.t"), "backend consumer inventory mismatch"),
         ("consumer_status", set_value(["backend_consumers", 0, "status"], "dormant_red"), "backend consumer inventory mismatch"),
+        ("rust_consumer_status", set_value(["backend_consumers", 1, "status"], "pending_absent"), "backend consumer inventory mismatch"),
         ("runtime_route", set_value(["runtime_routes", 5, "runtime"], "lua"), "runtime route inventory mismatch"),
         ("outward_path", set_value(["outward_guard", "paths", 0], "README2.md"), "outward guard mismatch"),
         ("outward_token", set_value(["outward_guard", "forbidden_tokens"], []), "outward guard mismatch"),

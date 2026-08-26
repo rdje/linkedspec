@@ -2,24 +2,28 @@
 
 ## Current Activity
 
-- Perl `.14.7.3.1-.4` implement and privately admit staged-AST enrichment through four fresh-authority carriers.
-- Native, normalized-descriptor, generated-plan, and independently loaded emitted routes produce equal detached
-  results from fresh scheduler/cache, callback, cancellation, and clock authority after the complete parent AST.
-- The final-path oracle is 143/143 and is registered once in phase-0 and once in canonical CI. Only neutral and
-  Perl rollout are complete; later backends, recurrence, public authoring, and outward surfaces remain pending.
+- Rust `.14.7.4.0` freezes one outer-cfg staged-AST consumer without production behavior or route admission.
+- Ordinary discovery runs zero tests. The opt-in path preserves neutral inventory and function-body v1, observes
+  generic `parse_job` through native/reconstructed/generated/emitted routes, and fails only on the missing
+  dedicated marker plus typed-v2 provenance.
+- Neutral and Perl rollout remain complete; Rust rollout, later backends, recurrence, public authoring, and outward
+  surfaces remain pending. Neutral governance is 79 mutations.
 
 ## Latest Completed Slice
 
-- `.14.7.3.4` adds the host-only top-level invocation seam, proves four fresh-authority carrier routes and
-  serialized-authority absence, promotes only Perl, and closes the Perl behavioral parent at 143/143 plus 78
-  neutral mutations while preserving function-body v1, generated-v2 format, and every public/outward boundary.
+- `.14.7.4.0` adds the exact dormant Rust consumer and advances only its lifecycle to `dormant_red`. Every
+  pre-boundary assertion passes before one final `STAGED_PARSE_JOB_MARKER` / `staged_parse_job_v2` RED; canonical
+  CI has zero references, Rust rollout stays pending, and no production/generated/public surface moves.
 
 ## Next Action
 
-- Complete focused synchronization, stage the exact candidate, run receipt-bound canonical CI, commit `.14.7.3.4`,
-  clear the brief, verify the clean handoff, then activate Rust dormant RED `.14.7.4.0` task-tree-first.
+- Complete focused signoff, commit `.14.7.4.0`, clear the brief, verify the clean handoff, then activate Rust
+  private marker/provenance `.14.7.4.1` task-tree-first.
 
 ## Recent Completions
+
+- `2026-08-26` — `.14.7.4.0` freezes Rust's zero-ordinary-test/one-opt-in-RED boundary across current v1 and four
+  generic carrier observations; only dormant lifecycle governance moves, to 79 mutations.
 
 - `2026-08-26` — `.14.7.3.4` proves four fresh Perl carrier routes, admits the 143-check consumer exactly once in
   ordinary/canonical topology, promotes only Perl, and closes `.14.7.3` without public or format movement.
@@ -65,9 +69,6 @@
 
 - `2026-08-25` — `.14.6.6.0` freezes one shared Lua 85-pass/one-RED consumer on PUC Lua and LuaJIT, keeps all
   four carriers dormant, repairs stale compact roadmap projections, and splits `.1-.4` without behavior movement.
-
-- `2026-08-25` — `.14.6.5.4` independently recomposes Julia carrier 62/62, authority 210/210, ordinary and direct
-  dependents unchanged at 5/9/106, repairs bounded Knowledge projections, and closes `.14.6.5` without behavior.
 
 ## History
 

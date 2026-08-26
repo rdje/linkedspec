@@ -350,11 +350,12 @@ bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract
 ```
 
 The independent checker executes 4 registry entries, 8 provenance, 8 resolution/6 authority, 10 cache,
-4 queue/3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases. It locks five dormant
-backend consumers over six runtime routes, 37 diagnostics, 9 rollout legs, and 35 exact owners, then rejects
-72 reason-checked mutations. This neutral contract is current design authority only: all rollout legs remain
-pending, no dormant consumer contains the future implementation tokens, and no parser/compiler/runtime,
-generated format, capability, facade/schema/semantic/MCP/CLI/README, or public behavior has moved.
+4 queue/3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases. It locks five backend
+consumers over six runtime routes, 37 diagnostics, 9 rollout legs, and 35 exact owners, then rejects 79
+reason-checked mutations. Neutral and Perl rollout are complete: Perl's admitted consumer is registered exactly
+once in ordinary/canonical proof, Rust's exact outer-cfg consumer is dormant with zero canonical references, and
+Dart/Julia/Lua consumers remain absent. Rust rollout and all later legs remain pending; generated format,
+capability, facade/schema/semantic/MCP/CLI/README, and public behavior have not moved.
 
 `inter_match_gap_capture_contract.json` is the neutral authority for named regex slots and lossless
 prefix/interstitial/tail context. Inter-match gap public admission is current with four shared calls and unchanged outward facade, descriptor, semantic, MCP, CLI, and README surfaces. Julia `.5.1-.5.5` and shared Lua `.6.1-.6.5` implement and admit their exact nine-role paths without widening those guarded surfaces.

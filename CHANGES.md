@@ -10,6 +10,22 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-08-26 — FUTURE-PARITY-BACKLOG.14.7.4.0 — freeze Rust staged-AST dormant RED
+
+- Added exactly one repository-routed Rust consumer behind outer cfg
+  `linkedspec_staged_ast_enrichment_red`; ordinary Cargo discovery compiles the target with zero active tests and
+  canonical CI contains no reference to it.
+- Froze the complete neutral inventory plus current function-body-v1 queue order, built-in resolution/load/
+  compile/execute/cache records, `replace_field` / `body_ast` / `fail` behavior, and wrong-top diagnostic context.
+- Proved the current v1 registry rejects general `expr-v1` authority at resolve. Authored `parse_job(...)` remains
+  one generic `Expr::Call`, and native, normalized-reconstructed, generated-plan, and independently compiled
+  emitted-source routes preserve that generic form and return null.
+- Locked one exact final RED naming absent `STAGED_PARSE_JOB_MARKER` and typed `staged_parse_job_v2` provenance;
+  every preceding assertion passes. No Rust production source, existing test, generated format, rollout,
+  capability, public/outward path, or other backend changes.
+- Advanced only Rust's consumer lifecycle from `pending_absent` to `dormant_red` and the independent checker from
+  78 to 79 reason-checked mutations. Rust rollout remains pending and `.14.7.4.1` owns marker/provenance.
+
 ## 2026-08-26 — FUTURE-PARITY-BACKLOG.14.7.3.4 — admit Perl staged-AST enrichment
 
 - Added private `LinkedSpec::StagedASTEnrichmentRuntime` and attached it to live and generated-v2 top-level

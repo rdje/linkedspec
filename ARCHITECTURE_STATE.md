@@ -17,8 +17,8 @@ resolution, immutable pre-registered parser/cache authority, breadth-first recur
 failure policies, strict decreasing/cycle/depth/call/cancellation/resource bounds, detached results, diagnostics,
 carrier obligations, dormant routes, rollout, exact ownership, and the unchanged function-body-v1 adapter. The
 checker passes 4 registry entries, 8 provenance, 8 resolution/6 authority, 10 cache, 4 queue/3 isolation,
-4 result plus 3 failure policies, 10 chain, 5 detachment, 37 diagnostics, 9 rollout legs, 35 owners, and 78
-reason-checked mutations after Perl admission. It reuses ADR `0056`'s source algebra and progressive authority narrowing without
+4 result plus 3 failure policies, 10 chain, 5 detachment, 37 diagnostics, 9 rollout legs, 35 owners, and 79
+reason-checked mutations after Rust dormant-consumer activation. It reuses ADR `0056`'s source algebra and progressive authority narrowing without
 reusing `dispatch_span` syntax or elevating an authored parser id into filesystem authority.
 
 Perl leaves `FUTURE-PARITY-BACKLOG.14.7.3.1-.4` now implement and privately admit that same final path. `.1` makes exact assignment-form `parse_job(text_expr, literal_options)` one exclusive
@@ -46,6 +46,15 @@ authority. The final-path consumer is fully GREEN at 143 top-level checks, appea
 once in canonical CI, and promotes only Perl. Rust/Dart/Julia/Lua, recurrence, public authoring, language inventory,
 outward surfaces, generated format v2, and function-body v1 remain unchanged or pending.
 
+Rust leaf `FUTURE-PARITY-BACKLOG.14.7.4.0` now freezes the next backend boundary without production behavior.
+One exact outer-cfg consumer runs zero tests under ordinary Cargo discovery and has no canonical-CI reference.
+Its opt-in final path keeps the neutral inventory and current function-body-v1 queue/resolve/load/compile/execute/
+cache/stitch plus wrong-top context GREEN, while the v1 registry denies `expr-v1` at resolve. Authored
+`parse_job(...)` remains one generic `Expr::Call`; native, normalized-reconstructed, generated-plan, and
+independently compiled emitted routes preserve that generic form and return null. The sole final RED names missing
+`STAGED_PARSE_JOB_MARKER` plus typed `staged_parse_job_v2` provenance. Rust rollout stays pending and `.14.7.4.1`
+owns the private marker/provenance implementation.
+
 The same slice's mandatory complete-record rollover publishes immutable change-history segment `4991`. ADR `0089`
 advances only finite route controls from 21/20 to 22 files / 21 manifest lines; the measured collection remains
 46,587/55,000 lines and 3,328,651/4,194,304 bytes, and every other bounded-history control remains unchanged.
@@ -57,7 +66,7 @@ id/path/parser/top/payload/span/failure context plus resolved built-in identity.
 diagnostics: success, resolution, execution, stitching, policies, queue depth, formats, capabilities, and outward
 surfaces stay fixed. Executable neutral contract `.2` and the Perl behavioral parent `.3` are complete; backend parents `.4-.7`, recurrence `.8`,
 public authoring/closeout `.9`, and independent recomposition `.10` remain dependency-frozen behind it. Every
-later runtime rollout leg and public/outward surface therefore remains pending; Rust dormant RED `.4.0` is next.
+later runtime rollout leg and public/outward surface therefore remains pending; Rust marker/provenance `.4.1` is next.
 
 ## Typed transaction safety now composes the complete recognition authority
 

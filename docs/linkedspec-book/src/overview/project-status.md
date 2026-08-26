@@ -99,7 +99,7 @@ families, recursive scheduling, alternate policies, and public closeout remain p
 makes wrong-top compile diagnostics preserve the same original job context and resolved identity on all five
 source backends/six runtimes. Neutral `.14.7.2` now adds the executable general authority at 4 registry entries,
 8 provenance, 8 resolution/6 authority, 10 cache, 4 queue/3 isolation, all result/failure policies, 10 chain,
-5 detachment, 37 diagnostic, 35-owner, and 78-mutation proof after Perl admission. Perl leaves `.14.7.3.1-.4`
+5 detachment, 37 diagnostic, 35-owner, and 79-mutation proof after Rust dormant-consumer activation. Perl leaves `.14.7.3.1-.4`
 advance the same oracle to 143/143. They prove one exclusive marker,
 opaque detached v2 sidecar, typed provenance, caller-frozen pure resolution/cache, default-top-before-job-id,
 breadth-first complete-depth execution, all four result plus three failure policies, decreasing chains, shared
@@ -109,7 +109,12 @@ emitted results from fresh host-only authority with no live state serialized. Th
 once in ordinary phase-0 and canonical CI, and only Perl rollout is complete. Generated format, function-body v1,
 public `parse_job(...)`, and outward behavior remain unchanged. Mandatory
 history segment `4991` remains finitely authorized by ADR `0089` at 22 files / 21 manifest records. Fresh
-Rust dormant RED `.14.7.4.0` is next.
+Rust `.14.7.4.0` now freezes one exact outer-cfg consumer without production behavior. Ordinary Cargo discovery
+runs zero tests. The opt-in path keeps current function-body v1 GREEN, denies general `expr-v1` through the narrow
+registry, preserves one generic `parse_job` call and null result across native, reconstructed, generated-plan, and
+independently compiled emitted-source observations, then fails only on absent `STAGED_PARSE_JOB_MARKER` plus typed
+`staged_parse_job_v2` provenance. Canonical CI has zero references and Rust rollout stays pending. Rust private
+marker/provenance `.14.7.4.1` is next.
 
 Rust's exact four-test consumer now runs under ordinary Cargo discovery and as a required canonical-CI leg. It
 proves the immutable value core and projection boundary across native, reconstructed, and generated-plan execution;

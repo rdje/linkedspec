@@ -3,6 +3,8 @@
 > Status: executable backend-neutral design. General `parse_job(...)` authoring is not yet public. Perl now has a
 > privately admitted marker, caller-frozen recursive authority, and four fresh-authority carriers with a
 > fully GREEN 143-check oracle;
+> Rust has one dormant outer-cfg consumer whose current-v1 and four generic-carrier observations pass before one
+> exact missing-marker/typed-provenance RED, but no Rust staged-v2 production behavior or rollout;
 > the current shipped five-backend/six-runtime implementation still supports only the narrow function-body v1
 > adapter described below.
 
@@ -295,6 +297,19 @@ host handle.
 Perl is privately admitted, but the language ledger still classifies `parse_job` as non-public until the separately
 owned `.14.7.9` closeout. Function-body v1 and generated-source v2 remain unchanged.
 
+Rust `.14.7.4.0` freezes the next backend boundary without implementing it. Ordinary Cargo discovery sees the
+exact consumer but activates zero tests; canonical CI does not mention it. With its dedicated cfg enabled, current
+function-body v1 still proves deterministic queue order, built-in resolution/load/compile/execute/cache, exact
+`replace_field` / `body_ast` / `fail`, and complete wrong-top context. A general `expr-v1` job is rejected during
+v1 resolution.
+
+The future authored fixture currently compiles as an ordinary scalar assignment containing one generic
+`parse_job` call. Native execution, normalized JSON reconstruction, generated-plan execution, and independently
+compiled emitted source preserve that same generic form and return `null`; this is the engine's unknown-helper
+fallback, not staged parsing. Only the final assertion fails, naming missing `STAGED_PARSE_JOB_MARKER` and typed
+`staged_parse_job_v2` provenance. `.14.7.4.1` owns the private dedicated marker and direct/ordered-derived
+provenance; Rust rollout remains pending through admission leaf `.4`.
+
 Publishing this boundary crossed the bounded `CHANGES.md` rollover threshold. The repository archived one complete
 218-line record set as immutable segment `4991`; ADR `0089` advances only the finite change-history collection and
 manifest controls to 22 files / 21 records. No byte, per-file, aggregate, route, storage, or product boundary was
@@ -308,5 +323,5 @@ bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract
 
 The checker currently reports 4 registry entries; 8 provenance, 8 resolution, 6 authority, 10 cache, 4 queue,
 3 isolation, 4 result-policy, 3 failure-policy, 10 chain, and 5 detachment cases; 37 diagnostics; 5 backend
-consumers/6 routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 owners; and 78 reason-checked
-mutations. It is always registered in canonical local CI.
+consumers/6 routes; 4 carrier requirements; 10 outward guards; 9 rollout legs; 35 owners; and 79 reason-checked
+mutations. The neutral checker is always registered in canonical local CI; the dormant Rust consumer is not.

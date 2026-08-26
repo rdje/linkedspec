@@ -15,10 +15,11 @@ answers:
   - "what did FUTURE-PARITY-BACKLOG.14.7.0 audit"
   - "what must happen before general staged AST enrichment"
 date: 2026-08-25
-status: current runtime audit; neutral and private Perl admission complete through .14.7.3.4; later backends through public implementation remain .14.7.4-.10
+status: current runtime audit; neutral and private Perl admission complete through .14.7.3.4; Rust dormant RED frozen at .14.7.4.0; backend behavior through public implementation remains .14.7.4.1-.10
 tags: [staged-parsing, parse-job, diagnostics, registry, policies, recursive-queue, source-location, backend-parity]
 evidence: "Toolbox-first source/runtime proof establishes the shipped boundary: five source backends/six runtimes implement only actionir-body.spec/action_block, one-depth ordering, fixed cache identity, and function-specific replace_field/body_ast/fail. FUTURE-PARITY-BACKLOG.14.7.1 repairs wrong-top diagnostic parity. FUTURE-PARITY-BACKLOG.14.7.2 adds the separate executable neutral v2 authority. Perl .14.7.3.1-.3 now add a dormant private marker/provenance carrier, caller-frozen pure resolution/cache, all policies/detachment, breadth-first recurrence, chain/resource bounds, and source-rebased diagnostics. They add no reconstructed/generated/emitted carriers, admission, rollout, or public authoring. Those remain .14.7.3.4-.10-owned."
 evidence_update_2026_08_26_perl_admission: "FUTURE-PARITY-BACKLOG.14.7.3.4 adds four fresh-authority Perl routes, exact phase-0/canonical admission, and Perl-only rollout promotion. Public authoring, generated format, later backends, recurrence, and outward surfaces remain unchanged or pending."
+evidence_update_2026_08_26_rust_dormant_red: "FUTURE-PARITY-BACKLOG.14.7.4.0 proves Rust's function-body v1 compatibility and the exact general-v2 boundary through one outer-cfg consumer. Authored parse_job remains generic Expr::Call, all four generic observation routes return null, expr-v1 is denied at v1 resolve, and only the final missing STAGED_PARSE_JOB_MARKER/staged_parse_job_v2 assertion fails. No Rust production, discovery, rollout, generated format, or outward surface moves."
 root_cause: "The first prototype deliberately separated a generic-looking registry record from a narrow trusted function-body integration. Compile helpers in Perl, Rust, and Dart were shaped around loaded parser identity plus top rule, so they synthesized a placeholder diagnostic record; Julia and Lua were implemented later with the complete job parameter but their formatter omitted payload_kind. Success-path and resolve-phase tests covered real context, but no cross-backend compile-phase assertion locked the ADR 0015 fields. Leaf .14.7.1 passes the normalized job through the three compile boundaries, adds payload_kind to the two later formatters, and locks all five source routes/six runtimes without expanding staged behavior."
 last_verified: 2026-08-25
 reverify:
@@ -65,7 +66,10 @@ direct/ordered-derived provenance, caller-frozen pure resolution, exact job/cach
 execution, all result/failure policies, detachment, exact-text/full-provenance chains, shared resource bounds,
 diagnostic rebasing, malformed/smuggling rejection, and transaction closure exist. Native/reconstructed/generated/
 emitted routes receive fresh host-only authority, and the consumer is admitted once in ordinary/canonical
-discovery. This remains private Perl behavior, not public authoring.
+discovery. This remains private Perl behavior, not public authoring. Rust `.14.7.4.0` now freezes its equivalent
+boundary without production code: current v1 remains GREEN, the authored general form stays one generic call and
+returns null across native/reconstructed/generated/emitted observation, and the sole opt-in RED names the missing
+dedicated marker and typed sidecar. Ordinary Rust discovery stays at zero tests and canonical CI stays unchanged.
 
 The dependency plan then separates neutral contract, each backend, exact five-source/six-runtime recurrence,
 public `parse_job(...)` authoring, and independent recomposition. General staged dispatch reuses the typed source

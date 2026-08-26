@@ -10,6 +10,24 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+- 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.4.0` — Rust staged dormant boundary): exact clean activation is Perl-
+  admission commit `fc3e3652`; this focused leaf owns only the outer-cfg final-path consumer, Rust lifecycle
+  governance, the current-v1 control, and one missing-marker/provenance RED.
+- `parse_spec_with_user_functions` and the normal expression compiler retain assignment-form `parse_job(...)` as
+  `Expr::AssignScalar` containing generic `Expr::Call`. Serialized compiled state contains exactly one
+  `name=parse_job` and no dedicated marker/sidecar. The engine's generic unknown-helper default returns `Undef`,
+  observed as JSON null; the narrow staged registry separately denies `expr-v1` at resolve.
+- The same logical compiled fixture is observed through native execution, JSON reconstruction, generated-plan
+  execution, and independently compiled emitted source. All preserve the generic call and null result. The final
+  assertion alone fails with `LINKEDSPEC_STAGED_AST_ENRICHMENT_RED`, missing `STAGED_PARSE_JOB_MARKER`, and absent
+  typed `staged_parse_job_v2` provenance.
+- Current function-body v1 remains exact for two-job ordering, four phases, built-in provider/cache, ActionIR body,
+  function-specific policies, and full wrong-top context. Ordinary discovery is 0 tests; cfg-enabled execution is
+  0 pass / 1 expected RED after all prior assertions; canonical CI has zero references.
+- The neutral checker now requires Rust `dormant_red`, three later absent consumer paths, unchanged Rust rollout,
+  and one added lifecycle mutation for 79 total. No production, generated-format, discovery, capability, public,
+  outward, or other-backend surface moves; `.14.7.4.1` owns marker/provenance.
+
 - 2026-08-26 (`FUTURE-PARITY-BACKLOG.14.7.3.4` — Perl staged carrier admission): exact clean activation is
   recursive-authority commit `adcae405`; this canonical leaf owns only four fresh Perl carriers, exact discovery,
   Perl rollout promotion, and behavioral-parent closure.
